@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { ArrowLeftRight, Download } from "lucide-react";
+import { ArrowLeftRight } from "lucide-react";
 
 import { HeroShell, KpiGrid, KpiTile } from "@/features/redesign";
 
@@ -37,18 +37,11 @@ export function AreaProfilePageClient({ profile }: Props) {
                         </p>
                         <div className="mt-5 flex flex-wrap gap-2">
                             <Link
-                                href={`/compare/population?areas=${profile.areaCode}`}
+                                href={`/category/population/compare?areas=${profile.areaCode}`}
                                 className="inline-flex items-center gap-1.5 rounded-md bg-white px-3 py-2 text-sm font-bold text-slate-900 shadow-sm transition-colors hover:bg-white/90"
                             >
                                 <ArrowLeftRight className="h-4 w-4" />
                                 他県と比較
-                            </Link>
-                            <Link
-                                href={`/ranking?area=${profile.areaCode}`}
-                                className="inline-flex items-center gap-1.5 rounded-md border border-white/30 bg-transparent px-3 py-2 text-sm text-white transition-colors hover:bg-white/10"
-                            >
-                                <Download className="h-4 w-4" />
-                                全データ CSV
                             </Link>
                         </div>
                     </div>

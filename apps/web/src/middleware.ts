@@ -331,6 +331,22 @@ export default function middleware(req: NextRequest) {
     return NextResponse.redirect(new URL("/", req.url), { status: 301 });
   }
 
+  // /compare (廃止 2026-05-28) → /category/{key}/compare に統合
+  // 旧 /compare/[categoryKey] と新 /category/[categoryKey]/compare は同じ categoryKey 名前空間。
+  // canonical 競合解消とサイト構造の対称化が目的。クエリ ?areas=A,B は保持。
+  // /compare 単体 (categoryKey なし) は旧実装と同じく population をデフォルトに使用。
+  {
+    const compareMatch = pathname.match(/^\/compare(?:\/([^/]+))?\/?$/);
+    if (compareMatch) {
+      const categoryKey = compareMatch[1] ?? "population";
+      const search = req.nextUrl.search;
+      return NextResponse.redirect(
+        new URL(`/category/${categoryKey}/compare${search}`, req.url),
+        { status: 301 },
+      );
+    }
+  }
+
   // /blog?q=... → /search?type=blog&...
   if (pathname === "/blog") {
     const sp = req.nextUrl.searchParams;

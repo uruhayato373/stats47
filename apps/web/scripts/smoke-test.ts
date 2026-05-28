@@ -75,8 +75,8 @@ const testCases: SmokeTestCase[] = [
     expectedTexts: ["人口"],
   },
   {
-    name: "地域間比較",
-    path: "/compare?areas=13000,27000",
+    name: "地域間比較 (旧 /compare は 301、新パス /category/{key}/compare)",
+    path: "/category/population/compare?areas=13000,27000",
     expectedStatus: 200,
     expectedTexts: ["比較"],
   },
