@@ -9,6 +9,48 @@ updated: 2026-05-27
 
 施策ベースで append-only。新しい施策は最新を上に追加。判定が変わったら section 末尾に追記。
 
+## [BLOG-WAVE-2026-05-28-manual] GSC 駆動 上位 4 記事 手動 brushup
+
+- **status**: pending
+- **wave_id**: `2026-05-28-manual`
+- **tier**: 1
+- **target_metric**: blog-ctr
+- **owner**: claude
+- **deployed_at**: 2026-05-28
+- **due**: 2026-06-25 (4 週後 effect 計測)
+- **predecessor_wave**: `2026-05-25-auto` (manufacturing-aichi-dominance は同 wave で生成された記事を本 wave で再 brushup)
+- **selection**: `select-brushup-candidates.mjs` (GSC W21 × chart-audit × structure-audit 統合) の上位 4 件
+
+### 改修対象 (4 記事、全て quality-gate pass)
+
+| slug | imp | 改修前 CTR | 主な改修 |
+|---|---|---|---|
+| manufacturing-aichi-dominance | 858 | 0.58% | description を NG事実羅列→curiosity gap、callout 3 + 内部リンク 4 + データ出典 |
+| manufacturing-shipment-prefecture-ranking | 159 | 0% | source-link 末尾集約解消 (図直下へ) + 関連記事/データ出典 |
+| agriculture-hokkaido-dominance | 103 | 0% | callout + データ出典 section |
+| sewerage-water-supply-gap | 138 | 1.5% | データ出典 heading 化 + callout + 本文補強 (上下水道の普及時期差) |
+
+### 想定効果
+
+- 合計 expectedLift: **+105 clicks/期** (select-brushup-candidates の expectedLift 合算: 71+19+11+4)
+- 根拠: GSC 実測 imp × position 別 industry-avg CTR 改善 (curiosity gap で CTR 引き上げ)
+- 観測: 4 週後 (2026-06-25 頃) GSC で実測。実測 CTR が想定の 70% 以上なら effect/full
+
+### 検証コマンド (4 週後)
+
+```bash
+# 4 記事の CTR before/after を GSC snapshot で比較
+for s in manufacturing-aichi-dominance manufacturing-shipment-prefecture-ranking agriculture-hokkaido-dominance sewerage-water-supply-gap; do
+  grep "/blog/$s," .claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W2*/pages.csv
+done
+```
+
+### 未対応 (Phase 8 backlog)
+
+- **chart dark mode**: 4 記事とも SVG が dark mode 未対応。generate-article-charts が data 命名不一致で再生成不可 → SVG CSS 注入ツールが別途必要 (`docs/50_Issues/feature-backlog.md` Phase 8)
+- **factual checker 単位バグ**: 「兆円」本文を per-employee「万円」data と比較し VALUE_MISMATCH 誤検知 (値は正しい)
+- **記事重複**: manufacturing-aichi-dominance と manufacturing-shipment-prefecture-ranking がほぼ同トピック (要 dedup 検討)
+
 ## [BLOG-WAVE-2026-05-25-auto] curiosity gap auto-brushup 54 記事 (legacy: BLOG-CTR-06)
 
 - **status**: pending
