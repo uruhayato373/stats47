@@ -87,6 +87,27 @@ function loadHistory() {
   return JSON.parse(fs.readFileSync(historyPath, "utf8"));
 }
 const history = loadHistory();
+
+// チャート品質監査 (audit-chart-quality.mjs の出力) を読み込む。
+// 各 candidate に chartIssues を付与し、brushup agent が「ついでにチャート再生成」
+// すべき記事を判断できるようにする。GSC スコアは歪めず、同点時の tiebreaker にのみ使う。
+const chartAuditPath = path.join(PROJECT_ROOT, ".claude/state/blog/chart-audit.json");
+const chartAudit = new Map();
+if (fs.existsSync(chartAuditPath)) {
+  try {
+    const audit = JSON.parse(fs.readFileSync(chartAuditPath, "utf8"));
+    for (const a of audit.articles || []) {
+      chartAudit.set(a.slug, {
+        darkModeMissing: a.darkModeMissing || 0,
+        themeColorInline: a.themeColorInline || 0,
+        errors: a.errors || 0,
+      });
+    }
+  } catch {
+    // 監査ファイルが壊れていても candidate 選定は続行
+  }
+}
+
 const recentlyBrushed = new Set();
 const nowMs = Date.now();
 const dedupCutoff = nowMs - DEDUP_DAYS * 24 * 60 * 60 * 1000;
@@ -116,11 +137,19 @@ for (let i = 1; i < lines.length; i++) {
   // 改善余地スコア
   const gap = Math.max(0, industryAvgCtr(position) - ctr);
   const expectedLift = Math.round(impressions * gap * 4.3); // 月 clicks 換算 (×4.3 週)
-  candidates.push({ slug, impressions, clicks, ctr, position, expectedLift });
+  const chartIssues = chartAudit.get(slug) ?? { darkModeMissing: 0, themeColorInline: 0, errors: 0 };
+  candidates.push({ slug, impressions, clicks, ctr, position, expectedLift, chartIssues });
 }
 
-// expectedLift で降順 sort、上位 COUNT 件
-candidates.sort((a, b) => b.expectedLift - a.expectedLift);
+// 主ソートは expectedLift (CTR 改善余地、実証済の指標)。
+// 同点時のみ chart 品質問題が多い記事を優先 (brushup でチャート再生成も同時に解消できるため)。
+function chartIssueScore(c) {
+  return c.chartIssues.errors * 10 + c.chartIssues.darkModeMissing * 2 + c.chartIssues.themeColorInline;
+}
+candidates.sort((a, b) => {
+  if (b.expectedLift !== a.expectedLift) return b.expectedLift - a.expectedLift;
+  return chartIssueScore(b) - chartIssueScore(a);
+});
 const selected = candidates.slice(0, COUNT);
 
 for (const c of selected) {

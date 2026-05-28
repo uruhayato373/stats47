@@ -33,6 +33,8 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
+import { lintSvgContent, extractInlineSvgs } from "../lib/svg-lint.mjs";
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const PROJECT_ROOT = path.resolve(__dirname, "..", "..", "..");
@@ -154,79 +156,8 @@ function genStubSvg(chartType, name) {
 </svg>`;
 }
 
-// ---------- SVG lint (構造 ERROR + 品質 WARN) ----------
-//
-// theme 依存色 = ダークモードで追従させるべき背景・文字・グリッド色。
-// これらが inline fill/stroke で直書きされていると <img> 埋め込み時に dark mode で
-// 追従しない（svg-builder の svg-* class + @media prefers-color-scheme で対応すべき）。
-// データ色（棒・ドット・地方ブロックの vivid 色）は light/dark 両対応なので対象外。
-const THEME_DEPENDENT_COLORS = [
-  // 背景
-  "#ffffff", "#fff", "#fafafa", "#f9fafb", "#f8fafc",
-  // 暗いテキスト
-  "#333", "#222", "#111827", "#1f2937", "#374151",
-  // 中間テキスト
-  "#6b7280", "#888", "#999", "#aaa", "#bbb",
-  // グリッド
-  "#e5e7eb", "#ebebeb", "#ccc",
-];
-
-function escapeRegExp(s) {
-  return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-}
-
-/**
- * SVG 文字列を lint する。
- * @returns {{ errors: string[], warnings: string[] }}
- *   errors: 描画が壊れる致命的問題（CI を fail させる）
- *   warnings: 機能はするが品質基準を満たさない（dark mode 非対応・パレット逸脱）
- */
-function lintSvgContent(content) {
-  const errors = [];
-  const warnings = [];
-  const c = content.trim();
-  // 先頭の HTML コメント (svg-builder/本 CLI が付与する <!-- data-source... --> provenance) を
-  // 除いた本体で開始タグを判定する。
-  const body = c.replace(/^(?:<!--[\s\S]*?-->\s*)+/, "");
-
-  // --- 構造 (ERROR) ---
-  if (!body.startsWith("<svg") && !body.startsWith("<?xml")) {
-    errors.push("does not start with <svg or <?xml");
-  }
-  if (!c.endsWith("</svg>")) {
-    errors.push("does not end with </svg>");
-  }
-  if (!/viewBox\s*=/.test(c)) {
-    errors.push("missing viewBox attribute");
-  }
-  if (!/\bwidth\s*=/.test(c) || !/\bheight\s*=/.test(c)) {
-    errors.push("missing width or height attribute");
-  }
-
-  // --- dark mode 対応 (WARN) ---
-  // svg-builder 生成 SVG は @media (prefers-color-scheme:dark) を含む。
-  // 含まない = 旧式 or 手書きで dark mode 非対応。
-  if (!/prefers-color-scheme\s*:\s*dark/.test(c)) {
-    warnings.push(
-      "dark mode 非対応: @media (prefers-color-scheme:dark) の <style> がない。" +
-        " svg-builder 経由で再生成すると dark 対応になる",
-    );
-  }
-
-  // --- theme 依存色の inline 直書き (WARN) ---
-  const foundColors = THEME_DEPENDENT_COLORS.filter((col) => {
-    const re = new RegExp(`(?:fill|stroke)\\s*=\\s*"${escapeRegExp(col)}"`, "i");
-    return re.test(c);
-  });
-  if (foundColors.length > 0) {
-    warnings.push(
-      `theme 依存色を inline 指定: ${foundColors.join(", ")} —` +
-        ` svg-* class (svg-bg/svg-title/svg-axis/svg-tick/svg-grid) に置換すると dark mode 追従`,
-    );
-  }
-
-  return { errors, warnings };
-}
+// ---------- SVG lint (共有ライブラリ) ----------
+// lint ロジックは .claude/scripts/lib/svg-lint.mjs に集約 (audit-chart-quality.mjs と共有)。
 
 /** ファイルパスから SVG を読んで lint する */
 function validateSvg(svgPath) {
@@ -235,12 +166,10 @@ function validateSvg(svgPath) {
   return lintSvgContent(content);
 }
 
-/** article.md から インライン <svg>...</svg> ブロックを抽出する */
-function extractInlineSvgs(mdPath) {
+/** article.md からインライン <svg> を抽出する (ファイルパス版) */
+function extractInlineSvgsFromFile(mdPath) {
   if (!fs.existsSync(mdPath)) return [];
-  const md = fs.readFileSync(mdPath, "utf8");
-  const matches = md.match(/<svg[\s\S]*?<\/svg>/g);
-  return matches ?? [];
+  return extractInlineSvgs(fs.readFileSync(mdPath, "utf8"));
 }
 
 // ---------- placeholder 置換 ----------
@@ -339,7 +268,7 @@ if (VALIDATE) {
   }
 
   // 2. article.md インライン <svg> (手書き — 品質バラつきの主因)
-  const inlineSvgs = extractInlineSvgs(ARTICLE_MD);
+  const inlineSvgs = extractInlineSvgsFromFile(ARTICLE_MD);
   log(`[info] article.md inline <svg>: ${inlineSvgs.length} block(s)`);
   inlineSvgs.forEach((svg, i) => {
     report(`article.md inline-svg #${i + 1}`, lintSvgContent(svg));
