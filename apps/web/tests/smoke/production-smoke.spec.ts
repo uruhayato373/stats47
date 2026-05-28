@@ -49,8 +49,10 @@ test.describe("本番スモークテスト", () => {
     await expect(heading).toBeVisible({ timeout: 10_000 });
   });
 
-  test("ランキング一覧が表示される", async ({ page }) => {
-    await page.goto("/ranking", { waitUntil: "domcontentloaded" });
+  test("/ranking 一覧は廃止 (2026-05-28) → / に 301 リダイレクト", async ({ page }) => {
+    const response = await page.goto("/ranking", { waitUntil: "domcontentloaded" });
+    // Playwright が 301 後の遷移先 (/) を最終 response として返す
+    expect(response?.url()).toMatch(/\/$/);
     const heading = page.getByRole("heading", { level: 1 });
     await expect(heading).toBeVisible({ timeout: 10_000 });
   });

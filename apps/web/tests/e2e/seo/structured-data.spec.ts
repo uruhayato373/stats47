@@ -39,8 +39,8 @@ test.describe("構造化データ（JSON-LD）", () => {
   });
 
   test("ランキング詳細に Dataset と BreadcrumbList が含まれる", async ({ page }) => {
-    // 一覧から最初のリンクを取得して遷移
-    await page.goto("/ranking", { waitUntil: "domcontentloaded" });
+    // /ranking 一覧は廃止 (2026-05-28)。ホームの FeaturedRankings から詳細リンクを取得して遷移
+    await page.goto("/", { waitUntil: "domcontentloaded" });
     const firstLink = page.locator("a[href^='/ranking/']").first();
     await expect(firstLink).toBeVisible({ timeout: 10000 });
     const href = await firstLink.getAttribute("href");

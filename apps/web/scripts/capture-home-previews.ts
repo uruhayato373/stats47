@@ -50,31 +50,6 @@ interface CaptureTarget {
 
 const TARGETS: CaptureTarget[] = [
   {
-    key: "ranking",
-    pathOnSite: "/ranking",
-    recordVideo: true,
-    videoAction: async (page) => {
-      await page.waitForTimeout(1500);
-      // ランキング表をゆっくりスクロール
-      await page.evaluate(async () => {
-        const start = window.scrollY;
-        const target = start + 600;
-        const duration = 1500;
-        const startTime = performance.now();
-        return new Promise<void>((resolve) => {
-          const step = (t: number) => {
-            const elapsed = t - startTime;
-            const progress = Math.min(elapsed / duration, 1);
-            window.scrollTo(0, start + (target - start) * progress);
-            if (progress < 1) requestAnimationFrame(step);
-            else resolve();
-          };
-          requestAnimationFrame(step);
-        });
-      });
-    },
-  },
-  {
     key: "themes",
     pathOnSite: "/themes",
     recordVideo: true,

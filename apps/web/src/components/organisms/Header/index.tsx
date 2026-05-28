@@ -41,7 +41,7 @@ type NavigationItem = {
 const NAVIGATION_ITEMS: NavigationItem[] = [
   {
     type: "ranking",
-    href: "/ranking",
+    href: "/themes",
     label: "ランキング",
     icon: TrendingUp,
   },

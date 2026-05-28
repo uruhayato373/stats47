@@ -292,12 +292,6 @@ export default async function RankingKeyPage({
                 <Link href="/">ホーム</Link>
               </BreadcrumbLink>
             </BreadcrumbItem>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem>
-              <BreadcrumbLink asChild>
-                <Link href="/ranking">ランキング</Link>
-              </BreadcrumbLink>
-            </BreadcrumbItem>
             {breadcrumbCategory && (
               <>
                 <BreadcrumbSeparator />

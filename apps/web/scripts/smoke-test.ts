@@ -64,10 +64,9 @@ const testCases: SmokeTestCase[] = [
     expectedStatus: 410,
   },
   {
-    name: "ランキング一覧",
+    name: "ランキング一覧（廃止 2026-05-28 → / に 301）",
     path: "/ranking",
-    expectedStatus: 200,
-    expectedTexts: ["ランキング"],
+    expectedStatus: 301,
   },
   {
     name: "ランキング詳細（総人口）",

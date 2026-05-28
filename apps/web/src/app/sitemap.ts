@@ -72,7 +72,6 @@ export async function generateSitemaps(): Promise<{ id: number }[]> {
 
 const STATIC_PAGES: MetadataRoute.Sitemap = [
   { url: BASE_URL, changeFrequency: "daily", priority: 1.0 },
-  { url: `${BASE_URL}/ranking`, changeFrequency: "daily", priority: 0.9 },
   { url: `${BASE_URL}/areas`, changeFrequency: "weekly", priority: 0.8 },
   { url: `${BASE_URL}/themes`, changeFrequency: "weekly", priority: 0.8 },
   {

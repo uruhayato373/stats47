@@ -325,9 +325,10 @@ export default function middleware(req: NextRequest) {
     }
   }
 
-  // /ranking?subcategory=... → /ranking
-  if (pathname === "/ranking" && req.nextUrl.searchParams.has("subcategory")) {
-    return NextResponse.redirect(new URL("/ranking", req.url), { status: 301 });
+  // /ranking (一覧ページ廃止、トップに統合 2026-05-28) → /
+  // 詳細ページ /ranking/{key} は checkContentTypePolicy で処理されるため影響なし
+  if (pathname === "/ranking") {
+    return NextResponse.redirect(new URL("/", req.url), { status: 301 });
   }
 
   // /blog?q=... → /search?type=blog&...
