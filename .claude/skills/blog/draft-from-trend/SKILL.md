@@ -111,11 +111,12 @@ node .claude/scripts/lib/article-factual-check.mjs \
 
 ## 参照スキル
 
+- **記事品質の正典: `.claude/rules/blog-quality-standards.md`** (curiosity gap タイトル / callout / 内部リンク / source-link 配置の単一ソース)
 - `.claude/skills/blog/discover-trends/SKILL.md`
 - `.claude/skills/blog/plan-blog-trends/SKILL.md`
 - `.claude/skills/blog/fetch-article-data/SKILL.md`
 - `.claude/skills/blog/generate-article-charts/SKILL.md`
-- `.claude/skills/blog/md-syntax/SKILL.md`
+- `.claude/skills/blog/md-syntax/SKILL.md` (markdown 記法の機械的詳細)
 - `.claude/skills/blog/proofread-article/SKILL.md`
 
 ## 完了条件

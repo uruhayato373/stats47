@@ -217,8 +217,10 @@ bold lint: ✅ exit 0
 
 ## 参照
 
+- **記事品質の正典: `.claude/rules/blog-quality-standards.md`** (curiosity gap / callout / 内部リンク / source-link 配置の単一ソース)
 - 優先度キュー: `docs/20_ブログ記事企画/brushup-queue.md` (`--target priority` で生成)
 - 品質確認: `/blog-review --mode proofread` で最終チェック
+- 構造 lint: `node .claude/scripts/blog/quality-gate.mjs <slug>` (callout/内部リンク/H2/source-link 配置/factual)
 - 自動 batch: `/auto-brushup-batch` (複数記事の一括 brushup)
 - nlm ヘルプ: `nlm cross --help`
 

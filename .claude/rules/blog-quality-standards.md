@@ -2,6 +2,13 @@
 
 stats47.jp の `/blog/{slug}` 記事を新規作成または brushup する際の必須基準。BLOG-CTR-03/04 (2026-05-23) の実測ベースで確立。
 
+> **本ファイルが記事品質ルールの正典 (単一ソース)**。curiosity gap タイトル / callout / 内部リンク / source-link 配置の基準はここに集約する。関連ファイルは役割分担:
+> - `.claude/skills/blog/md-syntax/SKILL.md` — markdown **記法** (タグ形式・配置の機械的詳細)。品質ルール本体は本ファイルを参照
+> - `.claude/skills/blog/blog-review/SKILL.md` — review 時の**チェック項目**。基準は本ファイルを参照
+> - 決定的検査: `node .claude/scripts/blog/quality-gate.mjs <slug>` (単一記事) / `audit-article-structure.mjs` / `audit-chart-quality.mjs` (全記事バッチ)
+>
+> ルールを変更する場合は**まず本ファイルを更新**し、他は参照のみに保つこと (drift 防止)。
+
 ## なぜこのルールがあるか
 
 2026-05-23 のブログ品質診断で判明:

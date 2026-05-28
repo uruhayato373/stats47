@@ -182,6 +182,7 @@ $ARGUMENTS — [--mode <expert|proofread>] <記事パスまたは slug>
 - **ランキングチャートに対応する `<source-link>` があるか** (ランキング → リンク対応チェック)
 - **`<source-link>` が末尾に集約されていないか** (インライン分散チェック)
   - 各 `<source-link>` は、 そのランキングデータを言及・分析しているセクションの末尾に配置すべき
+  - 配置の正典: `.claude/rules/blog-quality-standards.md`「source-link の配置」。決定的検査: `node .claude/scripts/blog/audit-article-structure.mjs` (`/ranking/` の末尾集約 2 個以上を検出)
 - **リンク先の DB 存在確認**: `<source-link>` や `### 関連記事` のリンク先がローカル DB に存在するか確認
   - 存在しないキーが見つかった場合の **類似キー検索** (必須):
     1. リンクテキストからキーワードを抽出
