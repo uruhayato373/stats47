@@ -3,18 +3,21 @@ type: session-handoff
 date: 2026-05-28
 status: pending-deploy
 branch: claude/compassionate-knuth-cp2GU
-tags: [url-restructure, blog-quality, deploy-pending]
+tags: [url-restructure, blog-quality, svg-darkmode, chart-audit, deploy-pending]
 ---
 
-# セッションハンドオフ 2026-05-28｜URL 構造整理 + ブログ品質改善
+# セッションハンドオフ 2026-05-28｜URL 構造整理 + ブログ品質改善 + チャート品質基盤
 
 別 PC で `git pull` した agent がこの続きを把握するための引き継ぎ。
-**結論: コードは全て commit + push 済。残るは「ブログ記事の R2 公開デプロイ」のみ (ローカル環境必須)。**
+**結論: コードは全て commit + push 済。残るはローカル環境必須の 2 つ — (1) ブログ記事の R2 公開デプロイ、(2) 本番 SVG のチャート品質監査・再生成。**
 
 ## ブランチと commit
 
 - ブランチ: `claude/compassionate-knuth-cp2GU` (origin に push 済)
 - 関連 commit (新しい順):
+  - `65f8f6b` feat(blog-charts): チャート品質の監査スキル + brushup 連携 (a+b 閉ループ)
+  - `5548e92` feat(blog-charts): --validate に dark mode / パレット品質チェックを追加
+  - `a53bba1` feat(svg-builder): 全チャート種に dark mode 対応を追加
   - `b62c738` content(blog): 残り 3 原稿を補強し全 5 記事を公開状態に
   - `4129a45` content(blog): 3 記事の curiosity gap 強化と内部リンク補強
   - `c474283` docs: URL 構造設計と 3 タクソノミー役割分担を明文化 (Phase 4)
@@ -56,6 +59,25 @@ Plan: `~/.claude/plans/ok-validated-stroustrup.md`
 
 全 6 原稿とも `published: true` / `publishedAt` 設定済。
 
+### 作業 3: チャート品質基盤 (svg-builder dark mode + 監査スキル) — コード push 済 / **本番 SVG 監査・再生成は未実施**
+
+ブログのチャート品質を「コードで一律統一」する基盤を整備 (エージェント増設ではなく lint + 決定的描画で統一する方針)。
+
+**設計判断の経緯** (議論結果):
+- チャート描画は決定的問題 → `svg-builder` (コード) が正解。種類ごとの agent 分割は分散を増やすため不採用 (CLAUDE.md 原則 5)
+- 品質バラつきの主因は brushup が**インライン SVG を手書き**していること → dark mode 非対応 + 13% 数値捏造の原因
+- 公開済記事の元データ `data/*.json` は publish 後削除され R2 に残らない → **決定的な一括再生成は不可**。検出 (スキル) と再生成 (brushup の data 再取得) を分離
+
+**実装済**:
+
+| commit | 内容 |
+|---|---|
+| `a53bba1` | `svg-builder` 全 5 チャート種 (scatter/line/bar/stacked/choropleth) に dark mode 対応。`shared/theme.ts` の `svgThemeStyle()` が `@media (prefers-color-scheme:dark)` 付き `<style>` を出力。theme 依存色を svg-* class 化、データ色は維持。テスト 5 件 + vitest workspace 登録 |
+| `5548e92` | `/generate-article-charts --validate` に dark mode/パレット品質チェック追加。data/*.svg + article.md インライン SVG 両方を検査。ERROR (構造) のみ CI fail、WARN (dark mode/theme 色) は可視化のみ |
+| `65f8f6b` | 監査スキル `/audit-chart-quality` 新規 + brushup 連携。lint を `lib/svg-lint.mjs` に共有化。`select-brushup-candidates.mjs` が `chart-audit.json` を読み chartIssues を付与 (GSC 主軸 + 同点 tiebreaker) |
+
+**dark mode の技術的制約 (既知)**: 外部 SVG は `<img>` 描画でサンドボックス化され `.dark` クラス (手動トグル) を参照不可。`prefers-color-scheme` で **OS レベル dark に追従**する方式 (大多数のユーザーをカバー)。完全追従にはインライン SVG 化が必要だが markdown 肥大化とのトレードオフで非採用。
+
 ## 残作業 (PENDING) — ★ ローカル環境 (R2 認証あり) で実施
 
 リモートコンテナでは R2 push 不可 (認証情報・`.local/r2`・ローカル D1 なし) のため未実施。
@@ -91,6 +113,29 @@ git pull origin claude/compassionate-knuth-cp2GU
 - **上書き vs 新規**: manufacturing-aichi / assembly / estat-7 は既存 R2 記事の上書き、残り 3 件は新規
 - **publish-article は draft を `.local/r2/blog/<slug>/` にコピー後 `docs/21_ブログ記事原稿/<slug>` を削除する** 仕様 (skill step 6)。削除して良いか確認プロンプトが出る
 
+### 手順 (作業 3: 本番チャートの監査・再生成)
+
+```bash
+# 1. R2 から全ブログを pull
+npx tsx packages/r2-storage/src/scripts/sync-download.ts --prefix blog
+
+# 2. 全 SVG を監査 → 優先度レポート + .claude/state/blog/chart-audit.json
+/audit-chart-quality
+#   または: node .claude/scripts/blog/audit-chart-quality.mjs
+
+# 3. 以降の /auto-brushup-batch が chart-audit.json を読み、
+#    dark mode 非対応の記事を (GSC 改善余地と合わせて) 優先選定。
+#    brushup 時に data 再取得 + svg-builder でチャート再生成 → dark mode + 捏造を同時解消
+/auto-brushup-batch --count 5
+
+# 4. 再生成後の品質を確認
+node .claude/scripts/blog/generate-article-charts.mjs --slug <slug> --validate
+```
+
+注意:
+- **一括自動再生成はしない** (元 data/*.json が R2 に残らないため決定的不可)。brushup サイクルで data を再取得しながら段階的に解消するのが設計
+- dark mode は UX ポリッシュで緊急度は低い。アクセスアップが優先なら作業 3 は後回しで可
+
 ## デプロイ後の検証 (両作業共通)
 
 - URL: `curl -I https://stats47.jp/ranking` → 301 / `/compare/population` → 301 `/category/population/compare`
@@ -102,11 +147,12 @@ git pull origin claude/compassionate-knuth-cp2GU
 
 GSC 分析で特定済 (W21 snapshot ベース):
 
-1. **scatter chart の汎用実装**: `.claude/scripts/blog/generate-article-charts.mjs` に `*-scatter.json → scatter` を追加 (今回 sunshine はインライン SVG で代替。汎用化すれば他の相関系記事に展開可)
+1. ~~**scatter chart の汎用実装**~~ → **完了** (`a53bba1`): svg-builder の `generateScatterSvg` は実装済かつ dark mode 対応。今後の相関記事は svg-builder 経由で生成すること (sunshine のインライン SVG も将来 svg-builder に載せ替え推奨)
 2. **data schema 統一** (Phase B): `migrate-data-schema.mjs` 実装 → factual-check の value detector (Phase C) 解禁
 3. **curiosity gap CI 検知**: `.claude/scripts/blog/check-quality.mjs` 実装 (タイトルに `なぜ|意外|唯一|真因|vs|逆転|?|倍|→` 含有チェック)
-4. **SVG dark mode 一括対応**: 既存 SVG の `fill="#333"` 固定を `currentColor`/CSS var に
+4. ~~**SVG dark mode 一括対応**~~ → **基盤完了** (`a53bba1`/`5548e92`/`65f8f6b`): svg-builder dark mode 対応 + 監査スキル + brushup 連携まで実装済。残るは本番 SVG の監査・再生成 (上記「残作業 作業 3」、ローカル実行)
 5. **改善ログ記録**: 効果確定後 `docs/05_改善ログ/gsc.md` に BLOG-WAVE-2026-W22 section 追加 (manufacturing-aichi 想定 +49 clicks/月)
+6. **sunshine のインライン SVG を svg-builder 化**: 現状手書き (dark mode 非対応)。`*-scatter.json` を作り svg-builder の scatter で再生成すると dark mode 対応になる (監査スキルが既に検出済)
 
 ## 参照
 
@@ -115,3 +161,7 @@ GSC 分析で特定済 (W21 snapshot ベース):
 - data schema / wave 命名: `.claude/rules/blog-data-schema.md`
 - GSC 改善ログ: `docs/05_改善ログ/gsc.md`
 - 公開 skill: `.claude/skills/blog/publish-article/SKILL.md`
+- チャート監査 skill: `.claude/skills/blog/audit-chart-quality/SKILL.md`
+- SVG lint 共有ライブラリ: `.claude/scripts/lib/svg-lint.mjs`
+- チャート描画 (dark mode 対応): `packages/svg-builder/src/shared/theme.ts` + `charts/*.ts`
+- チャート設計判断 (SVG vs React, agent vs code): 本セッション内で議論 (静的 SVG 既定 / svg-builder 単一描画経路 / 種類別 agent は不採用)
