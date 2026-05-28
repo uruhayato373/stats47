@@ -29,8 +29,9 @@ export {
   readRankingItemsByTagFromR2,
   readTagsForItemFromR2,
 } from "./read-ranking-items-snapshot";
+export type { GroupRankingItem } from "./read-ranking-items-snapshot";
 
 // Phase 7 (2026-05-28) で削除した D1 用 export 一覧:
 // - countRankingItemsByAreaType / getRankingItemStats / listActiveRankingKeys
 // - listFeaturedRankingItems (置換: readFeaturedRankingItemsFromR2)
-// - findRankingItemsByGroupKey + type GroupRankingItem (置換: readRankingItemsByGroupKeyFromR2)
+// - findRankingItemsByGroupKey (関数のみ削除、型 GroupRankingItem は read-ranking-items-snapshot に inline 移動して維持)
