@@ -116,6 +116,42 @@ stats47.jp の `/blog/{slug}` 記事を新規作成または brushup する際�
 - `/blog/{related-slug}` (関連記事)
 - `/category/{key}` (カテゴリ一覧)
 
+### source-link の配置 (★必須・末尾集約禁止)
+
+`<source-link href="/ranking/...">` (関連ランキングへの誘導) は **記事末尾にまとめない**。
+**対応する図・データを扱う H2 セクション内 (SVG 図の直下等) にインライン配置**する。
+
+理由: 末尾集約は (1) 読者がその図を見た瞬間の「もっと詳しく」という意図を取りこぼし回遊性を下げる、(2) どのリンクがどのデータに対応するか文脈が失われる。
+
+| 配置 | リンク種別 | 可否 |
+|---|---|---|
+| 対応セクション内 (図の直下) | `/ranking/{key}` | ✅ 必須 |
+| 記事末尾にまとめて 2 個以上 | `/ranking/{key}` | ❌ 禁止 (アンチパターン) |
+| 末尾の関連セクション | `/category/{key}` `/themes/{key}` (ナビ目的) | ✅ 可 |
+| 末尾の `### 関連記事` | `/blog/{slug}` | ✅ 可 |
+
+**良い例**:
+```markdown
+## 製造品出荷額ランキング
+
+![出荷額 上位10・下位10](data/manufacturing-ranking.svg)
+
+愛知が58兆円で...（解説）
+
+<source-link href="/ranking/manufacturing-shipment-amount">製造品出荷額ランキングをもっと見る</source-link>
+```
+
+**悪い例** (末尾集約):
+```markdown
+## まとめ
+...
+<source-link href="/ranking/a">A ランキング</source-link>
+<source-link href="/ranking/b">B ランキング</source-link>
+<source-link href="/ranking/c">C ランキング</source-link>   ← 全部末尾。各図の直下に分散すべき
+```
+
+検査 (決定的 lint): `node .claude/scripts/blog/audit-article-structure.mjs` で `/ranking/` source-link の末尾集約 (2 個以上) を検出。`quality-gate.mjs` にも統合済 (WARN)。どの図に再配置するかは brushup 時に agent が意味判断。
+
 ## brushup の判断基準
 
 GSC スナップショットで以下に該当する記事は brushup 候補:
@@ -157,15 +193,25 @@ BLOG-CTR-03 / 04 で 10 記事を curiosity gap 改修:
 
 ## 違反検知
 
-新規ブログ記事 / brushup で本基準に違反していないか CI で検知する案 (Phase 1 で実装検討):
+新規ブログ記事 / brushup で本基準に違反していないか機械的に検知する (量産時の品質ボトムライン担保)。
+
+**実装済の決定的チェック**:
 
 ```bash
-# タイトルに curiosity gap 要素が含まれているかチェック
-node .claude/scripts/blog/check-quality.mjs --slug <slug>
+# 単一記事の総合ゲート (callout≥2 / 内部リンク≥3 / H2≥4 / charCount / source-link 配置 / factual)
+node .claude/scripts/blog/quality-gate.mjs <slug>
+
+# 全記事の source-link 末尾集約を一括監査 → structure-audit.json
+node .claude/scripts/blog/audit-article-structure.mjs
+
+# 全記事のチャート SVG 品質 (dark mode 等) を一括監査 → chart-audit.json
+node .claude/scripts/blog/audit-chart-quality.mjs
 ```
 
-検出パターン (要素のいずれかを含むか):
-- `なぜ`, `意外`, `唯一`, `真因`, `vs`, `逆転`, `?`
+両 audit の結果は `select-brushup-candidates.mjs` が読み込み、違反記事を brushup 候補で優先する (GSC 改善余地を主軸に、同点時に品質問題を加味)。
+
+**title curiosity gap の検出パターン** (要素のいずれかを含むか): `なぜ`, `意外`, `唯一`, `真因`, `vs`, `逆転`, `?`, `倍`, `→`
+(`quality-gate.mjs` の NG_PATTERNS で「N位だけで終わる」等のアンチパターンも検出)
 
 ## 関連ドキュメント
 

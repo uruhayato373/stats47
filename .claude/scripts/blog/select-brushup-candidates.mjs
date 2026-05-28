@@ -108,6 +108,21 @@ if (fs.existsSync(chartAuditPath)) {
   }
 }
 
+// 記事構造監査 (audit-article-structure.mjs の出力) を読み込む。
+// source-link 末尾集約の違反を candidate に付与し、brushup 時に再配置させる。
+const structureAuditPath = path.join(PROJECT_ROOT, ".claude/state/blog/structure-audit.json");
+const structureAudit = new Map();
+if (fs.existsSync(structureAuditPath)) {
+  try {
+    const audit = JSON.parse(fs.readFileSync(structureAuditPath, "utf8"));
+    for (const a of audit.articles || []) {
+      structureAudit.set(a.slug, { tailRankingLinks: a.tailRankingLinks || 0 });
+    }
+  } catch {
+    // 監査ファイルが壊れていても candidate 選定は続行
+  }
+}
+
 const recentlyBrushed = new Set();
 const nowMs = Date.now();
 const dedupCutoff = nowMs - DEDUP_DAYS * 24 * 60 * 60 * 1000;
@@ -138,17 +153,21 @@ for (let i = 1; i < lines.length; i++) {
   const gap = Math.max(0, industryAvgCtr(position) - ctr);
   const expectedLift = Math.round(impressions * gap * 4.3); // 月 clicks 換算 (×4.3 週)
   const chartIssues = chartAudit.get(slug) ?? { darkModeMissing: 0, themeColorInline: 0, errors: 0 };
-  candidates.push({ slug, impressions, clicks, ctr, position, expectedLift, chartIssues });
+  const structureIssues = structureAudit.get(slug) ?? { tailRankingLinks: 0 };
+  candidates.push({ slug, impressions, clicks, ctr, position, expectedLift, chartIssues, structureIssues });
 }
 
 // 主ソートは expectedLift (CTR 改善余地、実証済の指標)。
-// 同点時のみ chart 品質問題が多い記事を優先 (brushup でチャート再生成も同時に解消できるため)。
-function chartIssueScore(c) {
-  return c.chartIssues.errors * 10 + c.chartIssues.darkModeMissing * 2 + c.chartIssues.themeColorInline;
+// 同点時のみ品質問題 (chart 品質 + 構造) が多い記事を優先
+// (brushup でチャート再生成・source-link 再配置も同時に解消できるため)。
+function qualityIssueScore(c) {
+  const chart = c.chartIssues.errors * 10 + c.chartIssues.darkModeMissing * 2 + c.chartIssues.themeColorInline;
+  const structure = c.structureIssues.tailRankingLinks; // 末尾集約数
+  return chart + structure;
 }
 candidates.sort((a, b) => {
   if (b.expectedLift !== a.expectedLift) return b.expectedLift - a.expectedLift;
-  return chartIssueScore(b) - chartIssueScore(a);
+  return qualityIssueScore(b) - qualityIssueScore(a);
 });
 const selected = candidates.slice(0, COUNT);
 
