@@ -3,3 +3,4 @@ export * from "./color";
 export * from "./layout";
 export * from "./regression";
 export * from "./stats-schema";
+export * from "./theme";

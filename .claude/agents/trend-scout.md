@@ -17,8 +17,8 @@ description: ブログ・SNS 向けトレンド発見専任。 GSC / NotebookLM 
 
 | スキル | 用途 |
 |---|---|
-| `/discover-trends` | GSC + 外部ソースからのトレンド発見 |
-| `/notebooklm-research` | NotebookLM での社外資料リサーチ |
+| `/discover-trends` | GSC + 外部ソースからのトレンド発見（`--whitepaper` で**企画段階**に白書の切り口を統合 → 3 軸ヒット。`--deep` でデータ未整備の白書強アングル候補を e-Stat 補完ループで救済、`data-ingester` に取り込み委譲） |
+| `/notebooklm-research` | NotebookLM での社外資料リサーチ（**公開済記事**の深掘り補強。discover-trends と同じ `notebooklm-cross-query.mjs` を共用） |
 | `/trends-snapshots` | トレンドスナップショットの参照 / 更新 |
 
 ## 担当外

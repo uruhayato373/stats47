@@ -46,10 +46,10 @@ export function AreaRelatedRankingsCard({
               </CardTitle>
             </div>
             <Link
-              href="/ranking"
+              href="/themes"
               className="inline-flex items-center gap-1 text-xs font-semibold text-primary hover:underline"
             >
-              ランキング一覧
+              テーマ一覧
               <ArrowRight className="h-3 w-3" />
             </Link>
           </CardHeader>
@@ -87,10 +87,10 @@ export function AreaRelatedRankingsCard({
               </CardTitle>
             </div>
             <Link
-              href="/ranking"
+              href="/themes"
               className="inline-flex items-center gap-1 text-xs font-semibold text-primary hover:underline"
             >
-              ランキング一覧
+              テーマ一覧
               <ArrowRight className="h-3 w-3" />
             </Link>
           </CardHeader>

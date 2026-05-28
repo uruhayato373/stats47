@@ -19,6 +19,7 @@
 
 import { niceScale, formatTick } from "../shared/axis";
 import { FONT_FAMILY, PALETTES, PaletteName, colorByIndex } from "../shared/color";
+import { svgThemeStyle } from "../shared/theme";
 
 export interface BarItem {
   /** 表示ラベル（例: "1位 徳島"） */
@@ -117,15 +118,15 @@ export function generateBarChartSvg(items: BarItem[], options: BarChartOptions):
   if (showAxis) {
     // xMin の縦線（ゼロ軸）
     gridLines.push(
-      `  <line x1="${LABEL_X}" y1="${firstY}" x2="${LABEL_X}" y2="${barsBottom}" stroke="#ccc" stroke-width="1"/>`,
+      `  <line x1="${LABEL_X}" y1="${firstY}" x2="${LABEL_X}" y2="${barsBottom}" class="svg-grid" stroke-width="1"/>`,
     );
     // scaleMax までの目盛り
     for (let v = step; v <= scaleMax + step * 0.01; v += step) {
       const dataVal = xMin + v;
       const x = (LABEL_X + toBarWidth(dataVal)).toFixed(0);
       gridLines.push(
-        `  <line x1="${x}" y1="${firstY}" x2="${x}" y2="${barsBottom}" stroke="#ebebeb" stroke-width="1" stroke-dasharray="4,3"/>`,
-        `  <text x="${x}" y="${(barsBottom + 13).toFixed(0)}" text-anchor="middle" font-size="10" fill="#bbb">${formatTick(dataVal, 1)}</text>`,
+        `  <line x1="${x}" y1="${firstY}" x2="${x}" y2="${barsBottom}" class="svg-grid" stroke-width="1" stroke-dasharray="4,3"/>`,
+        `  <text x="${x}" y="${(barsBottom + 13).toFixed(0)}" text-anchor="middle" font-size="10" class="svg-tick">${formatTick(dataVal, 1)}</text>`,
       );
     }
   }
@@ -138,8 +139,8 @@ export function generateBarChartSvg(items: BarItem[], options: BarChartOptions):
     if (d.isSeparator) {
       const midY = y + SEPARATOR_H / 2;
       return [
-        `  <line x1="${LABEL_X}" y1="${midY}" x2="${LABEL_X + BAR_AREA_W}" y2="${midY}" stroke="#d1d5db" stroke-width="1" stroke-dasharray="4 3"/>`,
-        `  <text x="${LABEL_X + BAR_AREA_W / 2}" y="${midY + 4}" text-anchor="middle" font-size="9" fill="#9ca3af">…中略…</text>`,
+        `  <line x1="${LABEL_X}" y1="${midY}" x2="${LABEL_X + BAR_AREA_W}" y2="${midY}" class="svg-grid" stroke-width="1" stroke-dasharray="4 3"/>`,
+        `  <text x="${LABEL_X + BAR_AREA_W / 2}" y="${midY + 4}" text-anchor="middle" font-size="9" class="svg-tick">…中略…</text>`,
       ].join("\n");
     }
 
@@ -151,20 +152,21 @@ export function generateBarChartSvg(items: BarItem[], options: BarChartOptions):
     const valStr = formatTick(d.value, 1);
     return [
       `  <rect x="${LABEL_X}" y="${y}" width="${w}" height="${BAR_H}" fill="${fill}" rx="2"/>`,
-      `  <text x="${LABEL_X - 5}" y="${midY}" text-anchor="end" font-size="12" fill="#444">${d.label}</text>`,
-      `  <text x="${valX}" y="${midY}" font-size="12" fill="#666" font-weight="bold">${valStr}</text>`,
+      `  <text x="${LABEL_X - 5}" y="${midY}" text-anchor="end" font-size="12" class="svg-axis">${d.label}</text>`,
+      `  <text x="${valX}" y="${midY}" font-size="12" class="svg-tick" font-weight="bold">${valStr}</text>`,
     ].join("\n");
   });
 
   const titleText = subtitle
-    ? `${title}<tspan font-size="10" font-weight="normal" fill="#888">　${subtitle}</tspan>`
+    ? `${title}<tspan font-size="10" font-weight="normal" class="svg-tick">　${subtitle}</tspan>`
     : title;
   const displayH = Math.round((DISPLAY_W / W) * totalH);
 
   return `<svg width="${DISPLAY_W}" height="${displayH}" viewBox="0 0 ${W} ${totalH}" xmlns="http://www.w3.org/2000/svg" font-family="${FONT_FAMILY}" role="img" aria-label="${ariaLabel}">
-  <rect width="${W}" height="${totalH}" fill="#fafafa" rx="6"/>
-  <text x="${W / 2}" y="22" text-anchor="middle" font-size="14" font-weight="bold" fill="#333">${titleText}</text>
-${gridLines.join("\n")}${showAxis ? `\n  <!-- 軸ラベル -->\n  <text x="${W / 2}" y="${totalH - 4}" text-anchor="middle" font-size="10" fill="#aaa">${unit}</text>` : ""}
+${svgThemeStyle()}
+  <rect width="${W}" height="${totalH}" class="svg-bg" rx="6"/>
+  <text x="${W / 2}" y="22" text-anchor="middle" font-size="14" font-weight="bold" class="svg-title">${titleText}</text>
+${gridLines.join("\n")}${showAxis ? `\n  <!-- 軸ラベル -->\n  <text x="${W / 2}" y="${totalH - 4}" text-anchor="middle" font-size="10" class="svg-tick">${unit}</text>` : ""}
 ${rows.join("\n")}
 </svg>`;
 }

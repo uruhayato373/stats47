@@ -18,8 +18,6 @@ import { AdSenseAd, COMPARE_PAGE_SIDEBAR } from "@/lib/google-adsense";
 import { generateOGMetadata } from "@/lib/metadata/og-generator";
 
 
-
-
 /** areas パラメータを検証・パースする（5桁数字のカンマ区切り、最大2件） */
 function parseAreaCodes(areas: string | undefined): string[] {
     if (!areas) return ["13000", "27000"];
@@ -38,6 +36,9 @@ interface PageProps {
 
 /**
  * メタデータの生成
+ *
+ * 2026-05-28: /compare/[categoryKey] から /category/[categoryKey]/compare へ移行。
+ * canonical を新パスに更新。
  */
 export async function generateMetadata({
     params,
@@ -51,7 +52,7 @@ export async function generateMetadata({
     const category = categories.find((c) => c.categoryKey === categoryKey);
     if (!category) return {};
 
-    const canonical = `/compare/${categoryKey}`;
+    const canonical = `/category/${categoryKey}/compare`;
 
     if (areaCodes.length === 0) {
         const title = "地域間比較 | stats47";
@@ -84,6 +85,13 @@ export async function generateMetadata({
 
 /**
  * 地域間比較ページ（カテゴリ別）
+ *
+ * 2026-05-28: /compare/[categoryKey] から /category/[categoryKey]/compare へ移行。
+ * URL 構造整理 Phase 2: /compare サブパス全廃 → /category 配下に統合。
+ * canonical 競合解消・サイト構造の対称化が目的。
+ *
+ * R2 データ source: `app/page-components/area-category/{categoryKey}.json`
+ * (旧 /compare と同じデータ。キー名整理は将来 issue)
  */
 export default async function CompareCategoryPage({ params, searchParams }: PageProps) {
     const { categoryKey } = await params;

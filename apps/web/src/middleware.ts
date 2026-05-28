@@ -325,9 +325,26 @@ export default function middleware(req: NextRequest) {
     }
   }
 
-  // /ranking?subcategory=... → /ranking
-  if (pathname === "/ranking" && req.nextUrl.searchParams.has("subcategory")) {
-    return NextResponse.redirect(new URL("/ranking", req.url), { status: 301 });
+  // /ranking (一覧ページ廃止、トップに統合 2026-05-28) → /
+  // 詳細ページ /ranking/{key} は checkContentTypePolicy で処理されるため影響なし
+  if (pathname === "/ranking") {
+    return NextResponse.redirect(new URL("/", req.url), { status: 301 });
+  }
+
+  // /compare (廃止 2026-05-28) → /category/{key}/compare に統合
+  // 旧 /compare/[categoryKey] と新 /category/[categoryKey]/compare は同じ categoryKey 名前空間。
+  // canonical 競合解消とサイト構造の対称化が目的。クエリ ?areas=A,B は保持。
+  // /compare 単体 (categoryKey なし) は旧実装と同じく population をデフォルトに使用。
+  {
+    const compareMatch = pathname.match(/^\/compare(?:\/([^/]+))?\/?$/);
+    if (compareMatch) {
+      const categoryKey = compareMatch[1] ?? "population";
+      const search = req.nextUrl.search;
+      return NextResponse.redirect(
+        new URL(`/category/${categoryKey}/compare${search}`, req.url),
+        { status: 301 },
+      );
+    }
   }
 
   // /blog?q=... → /search?type=blog&...

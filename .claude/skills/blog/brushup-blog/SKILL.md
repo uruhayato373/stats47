@@ -184,7 +184,7 @@ nlm cross query --notebooks "<ノートブック名>" \
 |---|---|---|
 | エキスパート視点追加 | 各 H2 の散文導入 or 考察セクション | 白書引用・政策背景・専門的解説を 2-3 文追加 |
 | 最新データ更新 | データ説明部分 | D1 から取得した最新年度値に差し替え |
-| CTA 強化 | 記事末尾 | 関連ランキングページへの `<site-link>` を追加 |
+| 関連ランキング誘導 | **対応する図・データを扱う H2 セクション内** (SVG 図の直下等) | そのセクションが言及するランキングへ `<source-link href="/ranking/...">` を**インライン配置**。**記事末尾に集約しない** (回遊性・文脈性を損なう)。ナビ目的の `/category/` `/themes/` への `<source-link>` は末尾の関連セクションで可。検査: `node .claude/scripts/blog/audit-article-structure.mjs` |
 
 Edit ツールで最小限の変更を適用する。
 
@@ -217,8 +217,10 @@ bold lint: ✅ exit 0
 
 ## 参照
 
+- **記事品質の正典: `.claude/rules/blog-quality-standards.md`** (curiosity gap / callout / 内部リンク / source-link 配置の単一ソース)
 - 優先度キュー: `docs/20_ブログ記事企画/brushup-queue.md` (`--target priority` で生成)
 - 品質確認: `/blog-review --mode proofread` で最終チェック
+- 構造 lint: `node .claude/scripts/blog/quality-gate.mjs <slug>` (callout/内部リンク/H2/source-link 配置/factual)
 - 自動 batch: `/auto-brushup-batch` (複数記事の一括 brushup)
 - nlm ヘルプ: `nlm cross --help`
 

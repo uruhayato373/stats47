@@ -113,7 +113,7 @@ export async function FeaturedRankings({ limit = 6, showHeader = true }: Feature
         {showHeader && (
           <div className="flex items-center justify-between mb-8">
             <h2 className="text-lg font-bold">注目のランキング</h2>
-            <Link href="/ranking" className="text-sm text-primary hover:underline font-medium" aria-label="注目のランキングをもっと見る">
+            <Link href="/themes" className="text-sm text-primary hover:underline font-medium" aria-label="テーマからランキングを探す">
               もっと見る &rarr;
             </Link>
           </div>

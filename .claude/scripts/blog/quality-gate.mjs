@@ -25,6 +25,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { checkArticleFactual } from "../lib/article-factual-check.mjs";
+import { lintSourceLinkPlacement } from "../lib/article-structure-lint.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -160,6 +161,13 @@ if (checks.charts === 0) {
 if (checks.callouts < 3) {
   warnings.push(`callouts < 3 (actual: ${checks.callouts}) — 推奨は 3-4 個`);
 }
+
+// source-link 配置チェック (2026-05-28 追加、article-structure-lint.mjs に切り出し)
+// /ranking/ リンクの末尾集約を検出。WARN 扱い (回遊性の問題だが描画は壊れない)。
+const sourceLinkLint = lintSourceLinkPlacement(content);
+checks.rankingSourceLinks = sourceLinkLint.stats.rankingSourceLinks;
+checks.tailRankingLinks = sourceLinkLint.stats.tailRankingLinks;
+warnings.push(...sourceLinkLint.warnings);
 
 // Factual cross-check (2026-05-25 追加、article-factual-check.mjs に切り出し済)
 const factual = checkArticleFactual(content, dataDir);

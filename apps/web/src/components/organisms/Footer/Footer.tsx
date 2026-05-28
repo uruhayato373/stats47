@@ -16,7 +16,6 @@ import { FooterSocialLinks } from "./FooterSocialLinks";
 
 const NAV_LINKS = [
   { href: "/", label: "ホーム" },
-  { href: "/ranking", label: "ランキング" },
   { href: "/areas", label: "都道府県別" },
   { href: "/themes", label: "テーマ" },
   { href: "/category/population", label: "カテゴリ" },

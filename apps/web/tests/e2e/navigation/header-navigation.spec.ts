@@ -12,21 +12,20 @@ test.describe("ヘッダーナビゲーション", () => {
     await page.goto("/");
   });
 
-  test("ランキングリンクをクリックして遷移する", async ({ page }) => {
+  test("ランキングリンクをクリックして遷移する（/ranking 廃止後は /themes へ）", async ({ page }) => {
     // ランキングリンクを取得
     const rankingLink = page.getByRole("link", { name: /ランキング/i });
-    
-    // href属性が正しいことを確認
-    await expect(rankingLink).toHaveAttribute("href", "/ranking");
-    
+
+    // /ranking 一覧ページは 2026-05-28 に廃止。Header の「ランキング」ナビは /themes を指す。
+    await expect(rankingLink).toHaveAttribute("href", "/themes");
+
     // リンクをクリック
     await rankingLink.click();
-    
-    // URLが/rankingに遷移したことを確認
-    await expect(page).toHaveURL(/\/ranking/);
-    
-    // ランキングページの主要要素が表示されていることを確認
-    // ページタイトルや主要な見出しが表示されていることを確認
+
+    // URL が /themes に遷移したことを確認
+    await expect(page).toHaveURL(/\/themes/);
+
+    // ページの主要要素が表示されていることを確認
     await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
   });
 
@@ -59,9 +58,9 @@ test.describe("ヘッダーナビゲーション", () => {
   });
 
   test("ロゴリンクをクリックしてホームに戻る", async ({ page }) => {
-    // まずランキングページに移動
-    await page.goto("/ranking");
-    
+    // まずテーマページに移動 (旧 /ranking 一覧は 2026-05-28 に廃止)
+    await page.goto("/themes");
+
     // ロゴリンクを取得（「統計で見る都道府県」テキストを含むリンク）
     const logoLink = page.getByRole("link", { name: /統計で見る都道府県/i });
     

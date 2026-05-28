@@ -49,8 +49,10 @@ test.describe("本番スモークテスト", () => {
     await expect(heading).toBeVisible({ timeout: 10_000 });
   });
 
-  test("ランキング一覧が表示される", async ({ page }) => {
-    await page.goto("/ranking", { waitUntil: "domcontentloaded" });
+  test("/ranking 一覧は廃止 (2026-05-28) → / に 301 リダイレクト", async ({ page }) => {
+    const response = await page.goto("/ranking", { waitUntil: "domcontentloaded" });
+    // Playwright が 301 後の遷移先 (/) を最終 response として返す
+    expect(response?.url()).toMatch(/\/$/);
     const heading = page.getByRole("heading", { level: 1 });
     await expect(heading).toBeVisible({ timeout: 10_000 });
   });
@@ -63,8 +65,8 @@ test.describe("本番スモークテスト", () => {
     await expect(table).toBeVisible({ timeout: 15_000 });
   });
 
-  test("地域間比較ページが表示される", async ({ page }) => {
-    await page.goto("/compare?areas=13000,27000", {
+  test("地域間比較ページが表示される（新パス: /category/{key}/compare、2026-05-28〜）", async ({ page }) => {
+    await page.goto("/category/population/compare?areas=13000,27000", {
       waitUntil: "domcontentloaded",
     });
     const heading = page.getByRole("heading", { level: 1 });

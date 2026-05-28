@@ -27,9 +27,9 @@ const NAV_ITEMS: NavItem[] = [
     },
     {
         label: "ランキング",
-        href: "/ranking",
+        href: "/themes",
         icon: TrendingUp,
-        activePattern: /^\/ranking/,
+        activePattern: /^\/(ranking|themes)/,
     },
     {
         label: "検索",

@@ -82,7 +82,13 @@ function extractValue(item) {
   return null;
 }
 
-function walkAndIndex(node, idx, source, currentLabel) {
+function extractUnit(item) {
+  if (typeof item.unit === "string") return item.unit;
+  if (typeof item.unitName === "string") return item.unitName;
+  return null;
+}
+
+function walkAndIndex(node, idx, source, currentLabel, currentUnit) {
   if (Array.isArray(node)) {
     if (node.length > 0 && isPrefEntry(node[0])) {
       for (const item of node) {
@@ -93,29 +99,35 @@ function walkAndIndex(node, idx, source, currentLabel) {
         idx[pref].push({
           rank: extractRank(item),
           value: extractValue(item),
+          unit: extractUnit(item) || currentUnit || null,
           label: currentLabel,
           source,
         });
       }
     } else {
-      node.forEach((child) => walkAndIndex(child, idx, source, currentLabel));
+      node.forEach((child) => walkAndIndex(child, idx, source, currentLabel, currentUnit));
     }
   } else if (node && typeof node === "object") {
     for (const [key, val] of Object.entries(node)) {
       let nextLabel = currentLabel;
+      let nextUnit = currentUnit;
       if (val && typeof val === "object" && !Array.isArray(val)) {
         if (typeof val.label === "string") nextLabel = val.label;
         else if (typeof val.rankingKey === "string") nextLabel = val.rankingKey;
         else if (typeof val.categoryName === "string") nextLabel = val.categoryName;
         else if (typeof val.category_code === "string") nextLabel = val.category_code;
         else nextLabel = key;
+        // wrapper オブジェクトに unit があれば配下に継承 (nested schema: {label, unit, data:[...]})
+        if (typeof val.unit === "string") nextUnit = val.unit;
       } else if (Array.isArray(val) && val.length > 0 && isPrefEntry(val[0])) {
         // currentLabel が「rankings/data」等の汎用 key なら上書き、そうでなければ保持
         if (!currentLabel || currentLabel === "rankings" || currentLabel === "data") {
           nextLabel = key;
         }
       }
-      walkAndIndex(val, idx, source, nextLabel);
+      // 同階層に unit フィールドがあれば次階層へ継承 (data 配列と並ぶケース)
+      if (typeof node.unit === "string") nextUnit = node.unit;
+      walkAndIndex(val, idx, source, nextLabel, nextUnit);
     }
   }
 }
@@ -133,7 +145,7 @@ export function buildGroundTruth(dataDir) {
     if (!file.endsWith(".json")) continue;
     try {
       const json = JSON.parse(fs.readFileSync(path.join(dataDir, file), "utf8"));
-      walkAndIndex(json, idx, file, "");
+      walkAndIndex(json, idx, file, "", null);
     } catch {
       // skip malformed JSON
     }
@@ -319,6 +331,131 @@ export function checkInverseRankClaims(content, gt) {
 }
 
 // ============================================================================
+// Value claim cross-check (Phase C, 2026-05-28)
+// ============================================================================
+//
+// 本文の「<都道府県> ... <数値><単位>」claim を data の value と突合する。
+// rank と違い value は単位スケール (兆/億/万) のずれで誤判定しやすいため、
+// 以下を徹底して **誤検出を避ける (WARN のみ・blocker にしない)**:
+//   1. claim と data の単位を共通スケールに正規化してから比較
+//   2. 単位の「次元」(円/人/%/MWh 等) が一致する value とのみ比較。不一致は skip
+//   3. ±5% 以内で一致する value があれば OK。無く、かつ最近傍と 3 倍以上乖離する
+//      場合のみ「gross mismatch (要確認)」を WARN (例: 東京 発電量 42M→実 5.7M)
+//   4. 単位の無い裸の数値・年号・rank (位) は対象外
+
+const JA_SCALE = { 兆: 1e12, 億: 1e8, 万: 1e4, 千: 1e3, 百万: 1e6 };
+
+/** "3,822" / "5.9" / "58" → number。失敗時 null */
+function parseNumeric(s) {
+  const n = parseFloat(String(s).replace(/,/g, ""));
+  return Number.isFinite(n) ? n : null;
+}
+
+/** ja スケール接頭/接尾 (兆/億/万/千/百万) を倍率に。無ければ 1 */
+function jaScaleMultiplier(token) {
+  if (!token) return 1;
+  for (const [k, v] of Object.entries(JA_SCALE)) {
+    if (token.includes(k)) return v;
+  }
+  return 1;
+}
+
+/**
+ * 単位の「次元トークン」を抽出 (円 / 人 / % / MWh / ha / 時間 / kg / 件 / 床 / 戸 等)。
+ * スケール接頭辞 (兆億万千百) を除いた実体部分。
+ */
+function unitDimension(unit) {
+  if (typeof unit !== "string") return null;
+  const stripped = unit.replace(/[兆億万千百]/g, "").trim();
+  const m = stripped.match(/(%|％|円|人|世帯|戸|床|件|台|校|時間|ha|㎡|平方|kg|kw|wh|mwh|kwh|度|℃|cm|mm|社|店)/i);
+  return m ? m[1].toLowerCase() : (stripped || null);
+}
+
+/** data fact の value を base スケールに正規化 (value × unit のスケール倍率) */
+function factBaseValue(fact) {
+  if (typeof fact.value !== "number") return null;
+  return fact.value * jaScaleMultiplier(fact.unit || "");
+}
+
+/**
+ * 本文の value claim を抽出し、data ground truth と突合 (WARN のみ)。
+ * @returns {string[]} warnings
+ */
+export function checkValueClaims(content, gt) {
+  const warnings = [];
+  if (Object.keys(gt).length === 0) return warnings;
+  const body = content.replace(/^---[\s\S]*?\n---\n/, "");
+  const prefPattern = PREF_NAMES.join("|");
+
+  // {pref}(都府県)?{≤20 文字, 句点なし}{数値}{スケール?}{単位実体}
+  // 単位実体は明示的なもののみ (裸の数値・位・年を除外)
+  // 単位実体: エネルギー単位 (MWh 等) を bare 単位より先に置き leftmost で取りこぼさない
+  const claimRe = new RegExp(
+    `(${prefPattern})(?:都|府|県)?[^、。\\n]{0,20}?` +
+      `([\\d,]+(?:\\.\\d+)?)\\s*(百万|兆|億|万|千)?\\s*(MWh|kWh|GWh|kW|MW|Wh|円|人|世帯|戸|床|件|台|校|時間|ha|㎡|kg|%|％|社|店)`,
+    "gi",
+  );
+
+  const seen = new Set();
+  let m;
+  while ((m = claimRe.exec(body)) !== null) {
+    const pref = m[1];
+    const numRaw = m[2];
+    const scaleTok = m[3] || "";
+    const unitTail = m[4];
+    const num = parseNumeric(numRaw);
+    if (num === null) continue;
+
+    // 年号らしき値 (1900-2100 で単位が無いケースは上で弾く) はここでは単位付きなので通す
+    const claimBase = num * jaScaleMultiplier(scaleTok);
+    const claimDim = unitDimension(scaleTok + unitTail);
+    if (!claimDim) continue;
+
+    const key = `${pref}:${numRaw}:${scaleTok}${unitTail}`;
+    if (seen.has(key)) continue;
+    seen.add(key);
+
+    const facts = (gt[pref] || []).filter((f) => typeof f.value === "number");
+    // 次元が一致する value のみ比較対象 (単位が取れない fact は除外)
+    const comparable = facts.filter((f) => {
+      const dim = unitDimension(f.unit || "");
+      return dim && dim === claimDim;
+    });
+    if (comparable.length === 0) continue; // 安全側: 比較できないなら skip
+
+    const matched = comparable.some((f) => {
+      const base = factBaseValue(f);
+      if (base === null || base === 0) return base === claimBase;
+      const ratio = claimBase / base;
+      return ratio >= 0.95 && ratio <= 1.05; // ±5%
+    });
+    if (matched) continue;
+
+    // 最近傍との乖離が 3 倍以上なら gross mismatch として WARN
+    let grossest = null;
+    for (const f of comparable) {
+      const base = factBaseValue(f);
+      if (base === null || base === 0) continue;
+      const r = claimBase > base ? claimBase / base : base / claimBase;
+      if (r >= 3 && (grossest === null || r > grossest.r)) {
+        grossest = { r, f };
+      }
+    }
+    if (grossest) {
+      const dataList = comparable
+        .slice(0, 2)
+        .map((f) => `${f.label || "?"}=${f.value}${f.unit || ""}`)
+        .join(" / ");
+      warnings.push(
+        `VALUE_MISMATCH (要確認): 本文「${pref}...${numRaw}${scaleTok}${unitTail}」` +
+          ` が data と ${grossest.r.toFixed(1)}倍 乖離 → data: ${dataList}`,
+      );
+    }
+  }
+  return warnings;
+}
+
+// ============================================================================
 // 高レベル API
 // ============================================================================
 
@@ -386,6 +523,9 @@ export function checkArticleFactual(articleContent, dataDir) {
 
   // SVG provenance check (warning only — 目視確認を促す)
   warnings.push(...checkInlineSvgProvenance(articleContent));
+
+  // Value claim cross-check (Phase C, 2026-05-28) — WARN のみ (単位ずれ誤検出を避けるため blocker にしない)
+  warnings.push(...checkValueClaims(articleContent, groundTruth));
 
   return { blockers, warnings, groundTruthPrefCount, isPerCapitaArticle: perCapita };
 }

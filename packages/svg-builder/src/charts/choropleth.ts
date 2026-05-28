@@ -17,6 +17,7 @@
 
 import { FONT_FAMILY } from "../shared/color";
 import { formatTick } from "../shared/axis";
+import { svgThemeStyle } from "../shared/theme";
 
 export interface ChoroplethItem {
   /** 都道府県コード "01"〜"47"（"01000" 形式も可） */
@@ -243,9 +244,9 @@ export function generateChoroplethSvg(
 
   // タイトル（バーチャートと同スタイル：14px bold #333 + subtitle は tspan でインライン）
   const titleText = subtitle
-    ? `${title}<tspan font-size="10" font-weight="normal" fill="#888">　${subtitle}</tspan>`
+    ? `${title}<tspan font-size="10" font-weight="normal" class="svg-tick">　${subtitle}</tspan>`
     : title;
-  const titleLine = `  <text x="${W / 2}" y="22" text-anchor="middle" font-size="14" font-weight="bold" fill="#333">${titleText}</text>`;
+  const titleLine = `  <text x="${W / 2}" y="22" text-anchor="middle" font-size="14" font-weight="bold" class="svg-title">${titleText}</text>`;
 
   // 凡例（グラデーションバー + 最小・中間・最大ラベル）
   const loStr = formatValue(lo);
@@ -266,17 +267,18 @@ export function generateChoroplethSvg(
     `      <feDropShadow dx="0" dy="0" stdDeviation="1.3" flood-color="#000000" flood-opacity="0.6"/>`,
     `    </filter>`,
     `  </defs>`,
-    `  <text x="${BAR_X - 4}" y="${BAR_Y + 8}" font-size="8" fill="#6b7280" text-anchor="end">${legendLabels[0]}</text>`,
+    `  <text x="${BAR_X - 4}" y="${BAR_Y + 8}" font-size="8" class="svg-tick" text-anchor="end">${legendLabels[0]}</text>`,
     `  <rect x="${BAR_X}" y="${BAR_Y}" width="${BAR_W}" height="${BAR_H}" rx="2" fill="url(#choropleth-lg)"/>`,
-    `  <text x="${BAR_RIGHT + 4}" y="${BAR_Y + 8}" font-size="8" fill="#6b7280">${legendLabels[1]}</text>`,
-    `  <text x="${BAR_X}" y="${BAR_Y + 22}" font-size="7.5" fill="#9ca3af">${loStr}${unit}</text>`,
-    `  <text x="${BAR_X + Math.round(BAR_W / 2)}" y="${BAR_Y + 22}" font-size="7.5" fill="#9ca3af" text-anchor="middle">${midStr}${unit}</text>`,
-    `  <text x="${BAR_RIGHT}" y="${BAR_Y + 22}" font-size="7.5" fill="#9ca3af" text-anchor="end">${hiStr}${unit}</text>`,
+    `  <text x="${BAR_RIGHT + 4}" y="${BAR_Y + 8}" font-size="8" class="svg-tick">${legendLabels[1]}</text>`,
+    `  <text x="${BAR_X}" y="${BAR_Y + 22}" font-size="7.5" class="svg-tick">${loStr}${unit}</text>`,
+    `  <text x="${BAR_X + Math.round(BAR_W / 2)}" y="${BAR_Y + 22}" font-size="7.5" class="svg-tick" text-anchor="middle">${midStr}${unit}</text>`,
+    `  <text x="${BAR_RIGHT}" y="${BAR_Y + 22}" font-size="7.5" class="svg-tick" text-anchor="end">${hiStr}${unit}</text>`,
   ];
 
   return `<svg width="${W}" height="${TOTAL_H}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${TOTAL_H}" role="img" aria-label="${ariaLabel}">
   <title>${title}</title>${subtitle ? `\n  <desc>${subtitle}</desc>` : ""}
-  <rect width="${W}" height="${TOTAL_H}" fill="#f9fafb"/>
+${svgThemeStyle()}
+  <rect width="${W}" height="${TOTAL_H}" class="svg-plot"/>
 ${titleLine}
 ${tiles.filter(Boolean).join("\n")}
 ${legend.join("\n")}
