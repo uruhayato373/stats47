@@ -3,7 +3,7 @@ type: session-handoff
 date: 2026-05-28
 status: pending-deploy
 branch: claude/compassionate-knuth-cp2GU
-tags: [url-restructure, blog-quality, svg-darkmode, chart-audit, deploy-pending]
+tags: [url-restructure, blog-quality, svg-darkmode, chart-audit, source-link-placement, deploy-pending]
 ---
 
 # セッションハンドオフ 2026-05-28｜URL 構造整理 + ブログ品質改善 + チャート品質基盤
@@ -15,6 +15,8 @@ tags: [url-restructure, blog-quality, svg-darkmode, chart-audit, deploy-pending]
 
 - ブランチ: `claude/compassionate-knuth-cp2GU` (origin に push 済)
 - 関連 commit (新しい順):
+  - `87c2c0d` feat(blog-quality): source-link 末尾集約を検出する構造 lint + ルール正規化
+  - `cde96a0` docs(handoff): チャート品質基盤を追記
   - `65f8f6b` feat(blog-charts): チャート品質の監査スキル + brushup 連携 (a+b 閉ループ)
   - `5548e92` feat(blog-charts): --validate に dark mode / パレット品質チェックを追加
   - `a53bba1` feat(svg-builder): 全チャート種に dark mode 対応を追加
@@ -78,6 +80,21 @@ Plan: `~/.claude/plans/ok-validated-stroustrup.md`
 
 **dark mode の技術的制約 (既知)**: 外部 SVG は `<img>` 描画でサンドボックス化され `.dark` クラス (手動トグル) を参照不可。`prefers-color-scheme` で **OS レベル dark に追従**する方式 (大多数のユーザーをカバー)。完全追従にはインライン SVG 化が必要だが markdown 肥大化とのトレードオフで非採用。
 
+### 作業 4: 記事構造 lint (source-link 配置) — コード push 済 / **本番記事の検出・修正は未実施**
+
+関連ランキング `<source-link href="/ranking/...">` が**記事末尾に集約**され、対応する図の直下に無い問題 (例: `small-business-dominance-map` は 6 個全て末尾)。
+
+**原因** (調査結果): ルールは存在したが (1) `blog-review`/`md-syntax` に散在し正規 `blog-quality-standards.md` に未記載、(2) `brushup-blog` が「末尾 CTA」、`blog-review` が「インライン分散」で**矛盾**、(3) 強制 lint 無しで agent 判断に依存 → drift。dark mode と同型の「ルールはあるが強制されず drift」パターン。
+
+**実装済** (`87c2c0d`):
+- ルール正規化: `blog-quality-standards.md` に「source-link の配置」を正規ルール化 (`/ranking/` は対応セクション内インライン必須、末尾 2 個以上集約は禁止、`/category//themes/` ナビは末尾可)。`brushup-blog` の矛盾を解消
+- `lib/article-structure-lint.mjs`: `lintSourceLinkPlacement()` が `/ranking/` source-link の末尾集約 (まとめ/関連見出し以降に 2 個以上) を WARN 検出。`/category//themes/` は対象外
+- `quality-gate.mjs` に統合 (単一記事ゲート、WARN)
+- `audit-article-structure.mjs`: 全記事バッチ監査 → `structure-audit.json`
+- `select-brushup-candidates.mjs`: structureIssues を candidate に付与 (GSC 主軸 + 同点 tiebreaker)
+
+**判断 vs コード分離**: 末尾集約の検出 = lint (決定的) / どの図にどのリンクを再配置 = agent (brushup 時の意味判断)。
+
 ## 残作業 (PENDING) — ★ ローカル環境 (R2 認証あり) で実施
 
 リモートコンテナでは R2 push 不可 (認証情報・`.local/r2`・ローカル D1 なし) のため未実施。
@@ -136,6 +153,28 @@ node .claude/scripts/blog/generate-article-charts.mjs --slug <slug> --validate
 - **一括自動再生成はしない** (元 data/*.json が R2 に残らないため決定的不可)。brushup サイクルで data を再取得しながら段階的に解消するのが設計
 - dark mode は UX ポリッシュで緊急度は低い。アクセスアップが優先なら作業 3 は後回しで可
 
+### 手順 (作業 4: source-link 末尾集約の検出・再配置)
+
+```bash
+# 1. R2 から全ブログを pull (作業 3 と共通、未実施なら)
+npx tsx packages/r2-storage/src/scripts/sync-download.ts --prefix blog
+
+# 2. 末尾集約の違反を全記事で検出 → structure-audit.json
+node .claude/scripts/blog/audit-article-structure.mjs
+
+# 3. /auto-brushup-batch が structure-audit.json を読み違反記事を優先。
+#    agent が brushup 時に /ranking/ source-link を対応する図の直下へ再配置
+/auto-brushup-batch --count 5
+
+# 4. 再配置後の確認 (単一記事)
+node .claude/scripts/blog/quality-gate.mjs <slug>   # tailRankingLinks が 0-1 になっているか
+```
+
+注意:
+- 既知の違反記事: `small-business-dominance-map` (末尾6/インライン0/図6)。本番 pull 後に全件判明
+- 再配置は意味判断 (どの図にどのリンク) なので agent が実施。lint は検出のみ
+- `/category/` `/themes/` のナビ source-link は末尾配置でも違反にならない (検査対象外)
+
 ## デプロイ後の検証 (両作業共通)
 
 - URL: `curl -I https://stats47.jp/ranking` → 301 / `/compare/population` → 301 `/category/population/compare`
@@ -163,5 +202,7 @@ GSC 分析で特定済 (W21 snapshot ベース):
 - 公開 skill: `.claude/skills/blog/publish-article/SKILL.md`
 - チャート監査 skill: `.claude/skills/blog/audit-chart-quality/SKILL.md`
 - SVG lint 共有ライブラリ: `.claude/scripts/lib/svg-lint.mjs`
+- 記事構造 lint (source-link 配置): `.claude/scripts/lib/article-structure-lint.mjs` + `.claude/scripts/blog/audit-article-structure.mjs`
+- 単一記事ゲート: `.claude/scripts/blog/quality-gate.mjs` (callout/内部リンク/H2/source-link 配置/factual を統合)
 - チャート描画 (dark mode 対応): `packages/svg-builder/src/shared/theme.ts` + `charts/*.ts`
 - チャート設計判断 (SVG vs React, agent vs code): 本セッション内で議論 (静的 SVG 既定 / svg-builder 単一描画経路 / 種類別 agent は不採用)
