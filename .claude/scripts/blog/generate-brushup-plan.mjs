@@ -1,5 +1,10 @@
 #!/usr/bin/env node
 /**
+ * @deprecated 2026-05-29: cron 自律 brushup を廃止し /brushup-blog --target batch
+ *   (ユーザー指示時のみ実行) に統合したため、30 日 plan / auto-brushup-plan.json は
+ *   どの skill からも参照されない。候補選定は select-brushup-candidates.mjs を直接使う。
+ *   このスクリプトは履歴のため残置 (新規呼び出し禁止)。
+ *
  * 全 blog 記事を採点し、30 日 (or 任意期間) の brushup plan を生成する。
  *
  * Output:

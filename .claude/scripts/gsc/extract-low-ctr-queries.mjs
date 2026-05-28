@@ -189,7 +189,7 @@ function main() {
     }
     lines.push("");
     lines.push("### 改善提案");
-    lines.push("- 上位 3 クエリは `/brushup-blog-article <slug>` で seoTitle/description 改訂を検討");
+    lines.push("- 上位 3 クエリは `/brushup-blog --target article <slug>` で seoTitle/description 改訂を検討");
     lines.push("- position 5-10 帯は CTR 倍増効果が大きい (industry avg 比 3-7x の改善余地)");
     lines.push("- 業界平均値の出典: Backlinko 2023 (https://backlinko.com/google-ctr-stats)");
   }

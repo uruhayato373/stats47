@@ -5,7 +5,7 @@
  *
  * 2026-05-25 の auto-brushup 検証で発覚した数値捏造 (例: 沖縄 財政力指数 41位→実 35位、
  * 奈良 消費支出 35位→実 13位、東京 発電量 42M MWh→実 5.7M MWh) を機械検出するため
- * quality-gate.mjs に実装したロジックを、skill 横断 (auto-brushup-batch / publish-article /
+ * quality-gate.mjs に実装したロジックを、skill 横断 (brushup-blog / publish-article /
  * draft-from-trend 等) で共有可能な library として切り出し。
  *
  * Usage:
@@ -19,7 +19,7 @@
  *   const issues = checkRankClaims(content, gt);
  *
  * 関連:
- *   - SKILL.md: .claude/skills/blog/auto-brushup-batch/SKILL.md §2-2.5
+ *   - SKILL.md: .claude/skills/blog/brushup-blog/SKILL.md (共通 Step A ground-truth 確認)
  *   - failure ledger: .claude/skills/blog/SHARED-failure-cases.md
  *   - 利用箇所: .claude/scripts/blog/quality-gate.mjs
  */

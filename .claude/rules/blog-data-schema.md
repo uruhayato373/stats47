@@ -41,13 +41,13 @@ Blog の brushup 施策は **wave 単位** で記録・追跡する。wave は�
 YYYY-MM-DD-<method>[-<batch>]
 ```
 
-- `method`: `manual` (人手), `auto` (auto-brushup-batch), `mixed` (両方)
+- `method`: `manual` (人手), `auto` (一括リライト = `/brushup-blog --target batch`), `mixed` (両方)
 - `batch`: 同一日に複数 wave を実行した場合の連番 (optional)
 
 例:
 
 - `2026-05-23-manual` — 2026-05-23 に手動で 10 記事 (BLOG-WAVE-2026-05-23-manual section)
-- `2026-05-25-auto` — 2026-05-25 に auto-brushup-batch で 54 記事 (BLOG-WAVE-2026-05-25-auto section)
+- `2026-05-25-auto` — 2026-05-25 に一括リライト (当時の自動 batch スキル、現 `/brushup-blog --target batch`) で 54 記事 (BLOG-WAVE-2026-05-25-auto section)
 - `2026-06-15-auto-1` / `2026-06-15-auto-2` — 同日 2 波の場合
 
 ### Wave に紐づくデータ
@@ -76,8 +76,7 @@ YYYY-MM-DD-<method>[-<batch>]
 
 | Skill | 役割 | 関連 script |
 |---|---|---|
-| `/auto-brushup-batch` | 自動 brushup の主軸 | `.claude/scripts/blog/{select-brushup-candidates,quality-gate,generate-brushup-plan}.mjs` |
-| `/brushup-blog-article` | 手動 brushup (1 記事単位) | `.claude/scripts/blog/lint-article.cjs` |
+| `/brushup-blog` | リライトの唯一エンジン。`--target priority` (キュー) / `--target article` (1 記事、CTR-reframe 既定。エキスパート視点追加は対話実行のみ NotebookLM) / `--target batch` (ユーザー指示時の一括、cron なし) | `.claude/scripts/blog/{select-brushup-candidates,quality-gate}.mjs`, `lint-article.cjs` |
 | `/publish-article` | draft → publish (factual gate あり) | `.claude/scripts/lib/article-factual-check.mjs` |
 | `/draft-from-trend` | trend → 新規 draft 生成 | `.claude/scripts/blog/{fetch-article-data,generate-article-charts}.mjs` |
 | `/publish-bulk-articles` | 複数記事の bulk publish | factual gate 共有 |
@@ -105,7 +104,7 @@ YYYY-MM-DD-<method>[-<batch>]
 
 | State | 内容 | 書き込み箇所 |
 |---|---|---|
-| `.claude/state/blog/auto-brushup-history.json` | wave_id 駆動 source of truth (Phase D で effect 計測の入力) | `/auto-brushup-batch` 実行時 |
+| `.claude/state/blog/auto-brushup-history.json` | wave_id 駆動 source of truth (Phase D で effect 計測の入力) | `/brushup-blog --target batch` 実行時 |
 | `.claude/state/blog/auto-brushup-skipped.log` | dedup でスキップした slug ログ | 同上 |
 | `.claude/state/blog/SHARED-failure-cases.md` | F-001〜N の failure ledger | factual FAIL 検出時 |
 

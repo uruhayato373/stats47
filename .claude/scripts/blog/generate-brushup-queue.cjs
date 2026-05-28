@@ -137,9 +137,9 @@ ${tableRows}
 
 \`\`\`bash
 # 上位記事から順に補強
-/brushup-blog-article ${top20[0]?.slug ?? ""}
-/brushup-blog-article ${top20[1]?.slug ?? ""}
-/brushup-blog-article ${top20[2]?.slug ?? ""}
+/brushup-blog --target article ${top20[0]?.slug ?? ""}
+/brushup-blog --target article ${top20[1]?.slug ?? ""}
+/brushup-blog --target article ${top20[2]?.slug ?? ""}
 \`\`\`
 
 ## 注記
