@@ -9,8 +9,8 @@ tags:
   - claude-code
   - e-stat
   - productivity
-publishedAt: null
-published: false
+publishedAt: 2026-05-28
+published: true
 ---
 
 「47 都道府県の統計データを毎日自動更新する」と聞いて、何人体制をイメージするでしょうか。

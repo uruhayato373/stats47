@@ -10,8 +10,8 @@ tags:
   - 再生可能エネルギー
   - 住宅
   - 戸建て
-publishedAt: null
-published: false
+publishedAt: 2026-05-28
+published: true
 ---
 
 「日が照る県ほど、屋根に太陽光パネルが載っているはずだ」──太陽光発電は太陽の光で発電する以上、これはごく自然な予想に思えます。年間日照時間が日本一の高知県では、さぞパネルだらけだろう、と。
@@ -32,11 +32,57 @@ published: false
 
 **住宅太陽光普及率の上位**は、佐賀（10.8%）・長野（9.8%）・山梨（9.2%）・宮崎（9.1%）・熊本（9.0%）。九州・中部の県が並びます。
 
-両者を見比べると、重なる県もあれば大きくずれる県もあります。象徴的なのが先に挙げた高知県です。日照は全国1位なのに普及率は29位。逆に長野県は日照が33位と中位以下にもかかわらず、普及率は2位の9.8%に達しています。
+両者を見比べると、重なる県もあれば大きくずれる県もあります。象徴的なのが先に挙げた[高知県](/areas/39000)です。日照は全国1位なのに普及率は29位。逆に[長野県](/areas/20000)は日照が33位と中位以下にもかかわらず、普及率は2位の9.8%に達しています。
 
-日照8位の神奈川県は普及率40位（3.0%）、日照16位の大阪府は普及率43位（2.6%）。日が比較的よく照る都市部の県が、普及率では軒並み下位に沈んでいます。「日照が普及率を決めている」とは、とても言えない並びです。
+日照8位の神奈川県は普及40位（3.0%）、日照16位の大阪府は普及43位（2.6%）。日が比較的よく照る都市部の県が、普及率では軒並み下位に沈んでいます。「日照が普及率を決めている」とは、とても言えない並びです。
 
-<!-- chart: 散布図は別途 -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 430" style="max-width:600px;width:100%;font-family:sans-serif">
+  <title>日照ランクと太陽光普及ランクの対比（主要5県）</title>
+  <rect width="600" height="430" fill="#f8fafc" rx="8"/>
+  <text x="300" y="26" text-anchor="middle" font-size="13" font-weight="bold" fill="#1e293b">日照ランク vs 太陽光普及ランクの「ねじれ」</text>
+  <text x="300" y="44" text-anchor="middle" font-size="11" fill="#64748b">線が交差するほど「日照と普及が一致しない」ことを示す</text>
+  <!-- 軸ラベル -->
+  <text x="150" y="66" text-anchor="middle" font-size="11" font-weight="bold" fill="#334155">日照ランク</text>
+  <text x="450" y="66" text-anchor="middle" font-size="11" font-weight="bold" fill="#334155">普及ランク</text>
+  <text x="150" y="404" text-anchor="middle" font-size="10" fill="#94a3b8">1位(上)〜47位(下)</text>
+  <text x="450" y="404" text-anchor="middle" font-size="10" fill="#94a3b8">1位(上)〜47位(下)</text>
+  <!-- 縦軸線 -->
+  <line x1="150" y1="78" x2="150" y2="388" stroke="#cbd5e1" stroke-width="1.5"/>
+  <line x1="450" y1="78" x2="450" y2="388" stroke="#cbd5e1" stroke-width="1.5"/>
+  <!-- 高知: 日照1位→普及29位 (下降=日照高いのに普及低い) -->
+  <line x1="150" y1="78" x2="450" y2="272" stroke="#ef4444" stroke-width="2"/>
+  <circle cx="150" cy="78" r="4" fill="#ef4444"/>
+  <circle cx="450" cy="272" r="4" fill="#ef4444"/>
+  <text x="142" y="82" text-anchor="end" font-size="11" fill="#b91c1c" font-weight="bold">高知 1位</text>
+  <text x="458" y="276" font-size="11" fill="#b91c1c">29位 (5.9%)</text>
+  <!-- 神奈川: 日照8位→普及40位 -->
+  <line x1="150" y1="127" x2="450" y2="349" stroke="#f87171" stroke-width="1.5"/>
+  <circle cx="150" cy="127" r="3.5" fill="#f87171"/>
+  <circle cx="450" cy="349" r="3.5" fill="#f87171"/>
+  <text x="142" y="131" text-anchor="end" font-size="10" fill="#dc2626">神奈川 8位</text>
+  <text x="458" y="353" font-size="10" fill="#dc2626">40位 (3.0%)</text>
+  <!-- 大阪: 日照16位→普及43位 -->
+  <line x1="150" y1="180" x2="450" y2="370" stroke="#fca5a5" stroke-width="1.5"/>
+  <circle cx="150" cy="180" r="3.5" fill="#fca5a5"/>
+  <circle cx="450" cy="370" r="3.5" fill="#fca5a5"/>
+  <text x="142" y="184" text-anchor="end" font-size="10" fill="#dc2626">大阪 16位</text>
+  <text x="458" y="374" font-size="10" fill="#dc2626">43位 (2.6%)</text>
+  <!-- 佐賀: 日照20位→普及1位 (上昇=日照中位なのに普及トップ) -->
+  <line x1="150" y1="206" x2="450" y2="78" stroke="#3b82f6" stroke-width="2"/>
+  <circle cx="150" cy="206" r="4" fill="#3b82f6"/>
+  <circle cx="450" cy="78" r="4" fill="#3b82f6"/>
+  <text x="142" y="210" text-anchor="end" font-size="11" fill="#1d4ed8">佐賀 20位</text>
+  <text x="458" y="82" font-size="11" fill="#1d4ed8" font-weight="bold">1位 (10.8%)</text>
+  <!-- 長野: 日照33位→普及2位 -->
+  <line x1="150" y1="297" x2="450" y2="85" stroke="#2563eb" stroke-width="1.5"/>
+  <circle cx="150" cy="297" r="3.5" fill="#2563eb"/>
+  <circle cx="450" cy="85" r="3.5" fill="#2563eb"/>
+  <text x="142" y="301" text-anchor="end" font-size="10" fill="#1d4ed8">長野 33位</text>
+  <text x="458" y="89" font-size="10" fill="#1d4ed8">2位 (9.8%)</text>
+  <text x="300" y="422" text-anchor="middle" font-size="10" fill="#94a3b8">出典: 気象庁(日照2024)・総務省 住宅土地統計調査(2023) ／ スピアマン順位相関 r=0.421</text>
+</svg>
+
+赤い線（高知・神奈川・大阪）は「日照は上位なのに普及は下位」へ急降下、青い線（佐賀・長野）は「日照は中位以下なのに普及は上位」へ急上昇。線が交差しまくる=ランキングが一致しないことが一目で分かります。
 
 
 ## 都市部が軒並み低い──集合住宅という構造
@@ -96,3 +142,20 @@ published: false
 それでも、日照ランキングと普及率ランキングの不一致、そして相関係数0.421という数字は、私たちの素朴な予想を見直させてくれます。太陽光パネルが載るかどうかを最初に決めているのは、空から降る光の量ではなく、地上にある屋根の形なのです。
 
 <data-source url="https://www.stat.go.jp/data/jyutaku/" label="総務省 住宅・土地統計調査"></data-source>
+
+
+## 関連ランキング・カテゴリ
+
+<source-link href="/ranking/annual-sunshine-duration">年間日照時間ランキングをもっと見る</source-link>
+
+<source-link href="/category/energy">エネルギーカテゴリの他のランキングを見る</source-link>
+
+<source-link href="/themes/living-housing">暮らし・住宅テーマで住宅ストックの構造を見る</source-link>
+
+
+### 関連記事
+
+- [最も猛暑日が多い県は沖縄ではなく京都](/blog/temperature-extremes-map)
+- [住める土地は大阪70% vs 高知16%](/blog/habitable-area-land-use)
+- [高知の人口・経済プロフィール](/areas/39000)
+- [佐賀の人口・経済プロフィール](/areas/41000)
