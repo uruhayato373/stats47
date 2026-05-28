@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * ブログ記事 brushup 後の自動品質ゲート (auto-brushup-batch 用)。
+ * ブログ記事 brushup 後の自動品質ゲート (/brushup-blog --target article / batch 用)。
  *
  * 機械的にチェック可能な品質基準 (callout / 内部リンク / NG word / factual cross-check 等)
  * を全て script で検証する。1 つでも失敗したら exit 1 (skip 推奨)。

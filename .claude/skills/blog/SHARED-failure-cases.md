@@ -3,8 +3,7 @@
 ブログ記事 (新規作成 / brushup / publish) で過去に発生した失敗パターンを集約。新規 failure mode を見つけたら必ず append する。
 
 このドキュメントは以下の skill / agent から参照される:
-- `auto-brushup-batch`
-- `brushup-blog`
+- `brushup-blog` (`--target article` / `--target batch`)
 - `draft-from-trend`
 - `publish-article`
 - `publish-bulk-articles`
@@ -28,7 +27,7 @@
 **検出機構**: `quality-gate.mjs` NG_PATTERNS で `/\d+,?\d*\s*倍格差/` と `/\d{2,}\s*倍差(?!\s*の|を|は|が|が|・|、)/` をブロック。
 
 **遮断ルール (skill 側)**:
-- `auto-brushup-batch/SKILL.md` §1 「NG パターン回避は絶対」
+- `brushup-blog/SKILL.md` C-2 「5 案 framing 採点で 30 点未満は skip」
 - title / description に「X倍格差」「X倍差 単独」「驚愕の」「衝撃の」「ヤバい」「最大級」を含めない
 - 5 案 framing 採点で 30 点未満なら skip
 
@@ -36,7 +35,7 @@
 
 ## F-002: 数値捏造 / rank 不整合 (memory drift)
 
-**検出日**: 2026-05-25 (auto-brushup-batch 62 件検証)
+**検出日**: 2026-05-25 (一括リライト 62 件検証)
 
 **症状**: AI agent (sonnet) が 5 案 framing 思考の過程で memory から数値を引き、data と不整合な値を本文・SVG に注入。62 件中 8 件 (13%) が真の factual error、17 件 (27%) が WARN 級の軽微ズレ。
 
@@ -64,7 +63,7 @@
 
 **遮断ルール (skill 側)**:
 - `article-writer.md` 絶対遵守: 「data → 書く、の順序を厳守」「数値は data から copy-paste、memory から引かない」
-- `auto-brushup-batch/SKILL.md` §5: 同上
+- `brushup-blog/SKILL.md` 絶対遵守 (全 focus 共通): 同上
 - `publish-article/SKILL.md` §5.5: publish 前に factual cross-check 必須通過
 - `draft-from-trend/SKILL.md` Step 6: 雛形生成後に factual cross-check 必須通過
 

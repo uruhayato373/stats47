@@ -14,7 +14,7 @@ description: 1 つの metric を受け取って統計記事 1 本を完成させ
 - 原稿執筆 (固定 6 セクション構成)
 - `.local/r2/app/blog/<slug>/article.md` への書き出し
 - D1 INSERT SQL の文字列を呼び元に返す
-- 自動 brushup batch (`/auto-brushup-batch`) — GSC 中位記事の rewrite を担当 (publish は blog-editor 経由)
+- 一括リライト (`/brushup-blog --target batch`) — GSC 中位記事の rewrite を担当 (ユーザー指示時のみ、publish は blog-editor 経由)
 
 ## 担当しないこと (他スキルが対応)
 

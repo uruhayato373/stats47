@@ -147,7 +147,7 @@ scan は `node .claude/scripts/lib/scan-pending-improvements.mjs` を使用 (JSO
 | 自動化 | 構成 | ゲート |
 |---|---|---|
 | **トレンド記事半自動公開** | Claude Routine `stats47-daily-trend-pipeline` (新規): discover → plan → draft → PR 起票 | 人手 PR レビュー 1 回 (~15 min) |
-| CTR 半自動改善 | 月次で position 5-15 帯 × CTR < 業界平均 のクエリを抽出 → `/brushup-blog-article` で seoTitle 改訂案 PR 化 | 人手レビュー 1 回 |
+| CTR 半自動改善 | 月次で position 5-15 帯 × CTR < 業界平均 のクエリを抽出 → `/brushup-blog --target article` で seoTitle 改訂案 PR 化 | 人手レビュー 1 回 |
 | CWV 自動 alert → 修正提案 | `psi-audit-daily.yml` で閾値違反検知 → 該当 component の git blame → `/performance-improvement` で改修案 PR 起票 | 人手レビュー 1 回 |
 
 ## 4. トレンド記事「半自動化」フロー (Phase 3 で実装)

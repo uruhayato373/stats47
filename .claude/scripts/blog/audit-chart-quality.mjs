@@ -167,7 +167,7 @@ if (top.length === 0) {
     );
   }
   log(
-    `\n再生成は brushup サイクル (/auto-brushup-batch) で data 再取得しながら行う。` +
+    `\n再生成は brushup サイクル (/brushup-blog --target batch) で data 再取得しながら行う。` +
       ` select-brushup-candidates.mjs が本監査の chartQuality を加味する。`,
   );
 }

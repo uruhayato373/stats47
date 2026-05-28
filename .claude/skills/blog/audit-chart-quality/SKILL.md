@@ -11,7 +11,7 @@ primary_agent: chart-author
 ## 役割と非役割
 
 - **やること**: 検出 (lint) のみ。どの記事のチャートを直すべきかを優先度付きで定量化
-- **やらないこと**: 再生成。既存公開記事の元データ (`data/*.json`) は publish 後に削除されるため、決定的な一括再生成は不可。再生成は **brushup サイクル** (`/auto-brushup-batch`、data 再取得を伴う) に委ねる
+- **やらないこと**: 再生成。既存公開記事の元データ (`data/*.json`) は publish 後に削除されるため、決定的な一括再生成は不可。再生成は **brushup サイクル** (`/brushup-blog --target batch`、data 再取得を伴う) に委ねる
 
 設計根拠: CLAUDE.md 原則 5「決定的な判定はコードで処理」。lint は `.claude/scripts/lib/svg-lint.mjs` を `/generate-article-charts` と共有。
 
@@ -58,7 +58,7 @@ exit code: 構造 ERROR がある記事が 1 件でもあれば 3、なければ
 読み込み、各 candidate に `chartIssues` を付与する。GSC の改善余地スコア (expectedLift) を
 主ソートに保ちつつ、**同点時はチャート問題が多い記事を優先**する。
 
-→ `/auto-brushup-batch` が該当記事を rewrite する際、data を再取得して svg-builder で
+→ `/brushup-blog --target batch` が該当記事を rewrite する際、data を再取得して svg-builder で
 チャートを再生成することで dark mode 非対応・数値捏造を同時に解消する。
 
 ## 監査 → 修正 の流れ (全体像)
@@ -68,7 +68,7 @@ exit code: 構造 ERROR がある記事が 1 件でもあれば 3、なければ
         ↓
 select-brushup-candidates   → chartIssues を candidate に付与       [既存スクリプト拡張]
         ↓
-/auto-brushup-batch         → data 再取得 + svg-builder で再生成     [既存スキル]
+/brushup-blog --target batch → data 再取得 + svg-builder で再生成    [既存スキル]
         ↓
 /generate-article-charts --validate → 再生成後の品質を最終確認        [既存スキル]
 ```
@@ -79,5 +79,5 @@ select-brushup-candidates   → chartIssues を candidate に付与       [既�
 - 監査スクリプト: `.claude/scripts/blog/audit-chart-quality.mjs`
 - 描画 (決定的): `packages/svg-builder/`
 - 単一記事検証: `/generate-article-charts --validate`
-- 再生成サイクル: `/auto-brushup-batch`
+- 再生成サイクル: `/brushup-blog --target batch`
 - 候補選定: `.claude/scripts/blog/select-brushup-candidates.mjs`
