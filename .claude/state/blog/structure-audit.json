@@ -1,0 +1,213 @@
+{
+  "generatedAt": "2026-05-28T11:28:24.509Z",
+  "base": ".local/r2/app/blog",
+  "articlesScanned": 190,
+  "articlesWithRankingLinks": 127,
+  "articlesViolating": 34,
+  "articles": [
+    {
+      "slug": "job-salary-39-comparison",
+      "tailRankingLinks": 8,
+      "inlineRankingLinks": 0,
+      "figures": 0
+    },
+    {
+      "slug": "livable-prefecture-composite-ranking",
+      "tailRankingLinks": 8,
+      "inlineRankingLinks": 8,
+      "figures": 2
+    },
+    {
+      "slug": "small-business-dominance-map",
+      "tailRankingLinks": 6,
+      "inlineRankingLinks": 0,
+      "figures": 6
+    },
+    {
+      "slug": "expenditure-structure-comparison",
+      "tailRankingLinks": 5,
+      "inlineRankingLinks": 0,
+      "figures": 3
+    },
+    {
+      "slug": "firefighting-capacity-gap",
+      "tailRankingLinks": 5,
+      "inlineRankingLinks": 0,
+      "figures": 6
+    },
+    {
+      "slug": "future-population-tokyo-paradox",
+      "tailRankingLinks": 5,
+      "inlineRankingLinks": 0,
+      "figures": 6
+    },
+    {
+      "slug": "housing-cost-livability-trend",
+      "tailRankingLinks": 5,
+      "inlineRankingLinks": 3,
+      "figures": 2
+    },
+    {
+      "slug": "local-tax-revenue-gap",
+      "tailRankingLinks": 5,
+      "inlineRankingLinks": 0,
+      "figures": 4
+    },
+    {
+      "slug": "occupation-income-gap-pilot-vs-careworker",
+      "tailRankingLinks": 5,
+      "inlineRankingLinks": 0,
+      "figures": 1
+    },
+    {
+      "slug": "truck-driver-2024-crisis",
+      "tailRankingLinks": 5,
+      "inlineRankingLinks": 1,
+      "figures": 2
+    },
+    {
+      "slug": "convenience-store-density-map",
+      "tailRankingLinks": 4,
+      "inlineRankingLinks": 0,
+      "figures": 4
+    },
+    {
+      "slug": "education-cost-per-child",
+      "tailRankingLinks": 4,
+      "inlineRankingLinks": 0,
+      "figures": 4
+    },
+    {
+      "slug": "fertility-rate-prefecture-gap",
+      "tailRankingLinks": 4,
+      "inlineRankingLinks": 2,
+      "figures": 2
+    },
+    {
+      "slug": "fiscal-self-reliance-gap",
+      "tailRankingLinks": 4,
+      "inlineRankingLinks": 0,
+      "figures": 4
+    },
+    {
+      "slug": "food-consumption-prefecture-battle",
+      "tailRankingLinks": 4,
+      "inlineRankingLinks": 0,
+      "figures": 3
+    },
+    {
+      "slug": "household-solo-vs-dualincome",
+      "tailRankingLinks": 4,
+      "inlineRankingLinks": 0,
+      "figures": 4
+    },
+    {
+      "slug": "household-spending-prefecture-gap",
+      "tailRankingLinks": 4,
+      "inlineRankingLinks": 0,
+      "figures": 4
+    },
+    {
+      "slug": "local-government-debt-burden",
+      "tailRankingLinks": 4,
+      "inlineRankingLinks": 0,
+      "figures": 4
+    },
+    {
+      "slug": "marriage-divorce-okinawa",
+      "tailRankingLinks": 4,
+      "inlineRankingLinks": 2,
+      "figures": 2
+    },
+    {
+      "slug": "pollution-complaints-regional-map",
+      "tailRankingLinks": 4,
+      "inlineRankingLinks": 0,
+      "figures": 4
+    },
+    {
+      "slug": "suicide-rate-aging-nexus",
+      "tailRankingLinks": 4,
+      "inlineRankingLinks": 0,
+      "figures": 5
+    },
+    {
+      "slug": "unemployment-tertiary-industry-link",
+      "tailRankingLinks": 4,
+      "inlineRankingLinks": 0,
+      "figures": 1
+    },
+    {
+      "slug": "workplace-accident-regional-map",
+      "tailRankingLinks": 4,
+      "inlineRankingLinks": 0,
+      "figures": 6
+    },
+    {
+      "slug": "childcare-friendly-prefecture-ranking",
+      "tailRankingLinks": 3,
+      "inlineRankingLinks": 0,
+      "figures": 5
+    },
+    {
+      "slug": "dual-income-childcare-dilemma",
+      "tailRankingLinks": 3,
+      "inlineRankingLinks": 0,
+      "figures": 0
+    },
+    {
+      "slug": "fertility-fiscal-nexus",
+      "tailRankingLinks": 3,
+      "inlineRankingLinks": 1,
+      "figures": 1
+    },
+    {
+      "slug": "ict-digital-divide-composite-analysis",
+      "tailRankingLinks": 3,
+      "inlineRankingLinks": 4,
+      "figures": 1
+    },
+    {
+      "slug": "recycling-rate-gap",
+      "tailRankingLinks": 3,
+      "inlineRankingLinks": 2,
+      "figures": 2
+    },
+    {
+      "slug": "crime-rate-regional-gap",
+      "tailRankingLinks": 2,
+      "inlineRankingLinks": 0,
+      "figures": 7
+    },
+    {
+      "slug": "engel-coefficient-prefecture-ranking",
+      "tailRankingLinks": 2,
+      "inlineRankingLinks": 0,
+      "figures": 3
+    },
+    {
+      "slug": "manufacturing-shipment-prefecture-ranking",
+      "tailRankingLinks": 2,
+      "inlineRankingLinks": 1,
+      "figures": 3
+    },
+    {
+      "slug": "noodle-consumption-prefecture-character",
+      "tailRankingLinks": 2,
+      "inlineRankingLinks": 3,
+      "figures": 5
+    },
+    {
+      "slug": "traffic-accident-deaths-regional-risk",
+      "tailRankingLinks": 2,
+      "inlineRankingLinks": 1,
+      "figures": 8
+    },
+    {
+      "slug": "university-advancement-capacity",
+      "tailRankingLinks": 2,
+      "inlineRankingLinks": 2,
+      "figures": 4
+    }
+  ]
+}

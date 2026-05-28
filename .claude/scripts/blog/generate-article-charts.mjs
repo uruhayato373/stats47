@@ -48,13 +48,16 @@ const getArg = (flag) => {
 const SLUG = getArg("--slug");
 const DRY_RUN = args.includes("--dry-run");
 const VALIDATE = args.includes("--validate");
+// --base: 記事ルート (slug の親)。デフォルトは docs draft。公開済記事の chart 再生成は
+//          `--base .local/r2/app/blog` で R2 data を直接対象にできる (Phase 7 で追加)。
+const BASE = getArg("--base") || "docs/21_ブログ記事原稿";
 
 if (!SLUG) {
-  console.error("Usage: --slug <slug> [--dry-run|--validate]");
+  console.error("Usage: --slug <slug> [--base <dir>] [--dry-run|--validate]");
   process.exit(1);
 }
 
-const ARTICLE_DIR = path.join(PROJECT_ROOT, "docs/21_ブログ記事原稿", SLUG);
+const ARTICLE_DIR = path.join(PROJECT_ROOT, BASE, SLUG);
 const DATA_DIR = path.join(ARTICLE_DIR, "data");
 const ARTICLE_MD = path.join(ARTICLE_DIR, "article.md");
 

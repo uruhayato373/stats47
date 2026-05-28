@@ -11,6 +11,21 @@ status: pending
 
 ---
 
+## [pending] Phase 8: 既存記事チャートの dark mode 一括対応ツール
+
+- **tier**: 3
+- **status**: pending
+- **created**: 2026-05-28
+- **trigger**: 2026-05-28 ブログ品質監査で公開記事のチャート SVG 多数が dark mode 未対応と判明
+- **概要**: `audit-chart-quality.mjs` が多数の公開記事で `darkModeMissing` / `themeColorInline` を検出。
+  しかし `generate-article-charts.mjs` は (a) data ファイル命名が `*-prefecture-rankings.json` 等の
+  パターンに一致する記事しか再生成できず、(b) これら公開記事の data は `fetched-*.json` 等の別命名 +
+  scatter は未実装、のため再生成不能。既存 SVG に dark-mode CSS を後付け注入する専用ツールが必要
+- **対象**: `.local/r2/app/blog/<slug>/data/*.svg` (公開記事の chart)
+- **着手判断**: dark mode は CTR 主因でない (blog-quality-standards.md) ため優先度低。chart 品質を
+  一斉に底上げしたいタイミングで
+- **関連**: `.claude/scripts/blog/generate-article-charts.mjs` (2026-05-28 に `--base` 追加済、ただし命名問題は未解決)
+
 ## [pending] Phase 7: recompute-correlations 実装
 
 - **tier**: 3
