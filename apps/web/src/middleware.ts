@@ -363,6 +363,14 @@ export default function middleware(req: NextRequest) {
       { status: 301 },
     );
   }
+  // /station-passengers・/station-passengers/[prefCode] (廃止 2026-05-28) → /themes/railway に統合
+  // 駅別乗降客数の県別バブルマップは鉄道テーマに集約。API (/api/station-passengers/*) も廃止。
+  if (/^\/station-passengers(?:\/.*)?$/.test(pathname)) {
+    return NextResponse.redirect(
+      new URL(`/themes/railway${req.nextUrl.search}`, req.url),
+      { status: 301 },
+    );
+  }
 
   // /blog?q=... → /search?type=blog&...
   if (pathname === "/blog") {
