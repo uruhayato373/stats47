@@ -11,6 +11,7 @@ import {
 
 import { resolveAffiliateBanners } from "@/features/ads/server";
 import { ThemeMigrationFlowSection } from "@/features/migration-flow";
+import { ThemeHighwayTimelineSection } from "@/features/highway-history";
 import {
   HeroShell,
   KpiGrid,
@@ -133,6 +134,12 @@ export async function ThemePageLayout({ theme, data }: Props) {
       {theme.themeKey === "population-dynamics" && (
         <div className="mt-8">
           <ThemeMigrationFlowSection />
+        </div>
+      )}
+
+      {theme.themeKey === "roads" && (
+        <div className="mt-8">
+          <ThemeHighwayTimelineSection />
         </div>
       )}
 
