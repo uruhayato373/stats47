@@ -12,6 +12,7 @@ import {
 import { resolveAffiliateBanners } from "@/features/ads/server";
 import { ThemeMigrationFlowSection } from "@/features/migration-flow";
 import { ThemeHighwayTimelineSection } from "@/features/highway-history";
+import { ThemeStationPassengersSection } from "@/features/station-passengers";
 import {
   HeroShell,
   KpiGrid,
@@ -140,6 +141,12 @@ export async function ThemePageLayout({ theme, data }: Props) {
       {theme.themeKey === "roads" && (
         <div className="mt-8">
           <ThemeHighwayTimelineSection />
+        </div>
+      )}
+
+      {theme.themeKey === "railway" && (
+        <div className="mt-8">
+          <ThemeStationPassengersSection />
         </div>
       )}
 
