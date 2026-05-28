@@ -16,6 +16,7 @@ export default defineWorkspace([
   "packages/database/vitest.config.ts",
   "packages/estat-api/vitest.config.ts",
   "packages/gis/vitest.config.ts",
+  "packages/svg-builder/vitest.config.ts",
   "packages/utils/vitest.config.ts",
   "packages/visualization/vitest.config.ts",
 
