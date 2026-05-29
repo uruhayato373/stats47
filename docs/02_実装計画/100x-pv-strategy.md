@@ -181,15 +181,15 @@ Phase 0 完了 (effect/full) は以下すべてを満たすこと:
 
 ### Phase 1 着手前に決めること (Phase 0 内で)
 
-1. ~~**市区町村ページの品質テンプレート**~~ ✅ 2026-05-23 完了 → [`cities-revival-plan.md`](./cities-revival-plan.md) §2.3
-2. ~~**sitemap 戦略**~~ ✅ 2026-05-23 完了 → [`cities-revival-plan.md`](./cities-revival-plan.md) §2.2 (S1=80, S2=500, S3=2,701 の段階導入)
-3. ~~**指標拡張ロードマップ**~~ ✅ 2026-05-23 完了 → [`metrics-expansion-roadmap.md`](./metrics-expansion-roadmap.md) (1,994 → 5,000 を 4 Stage × 750 で実施)
+1. ~~**市区町村ページの品質テンプレート**~~ ✅ 2026-05-23 完了 → [`phase-1-plan.md`](./phase-1-plan.md) §2.3
+2. ~~**sitemap 戦略**~~ ✅ 2026-05-23 完了 → [`phase-1-plan.md`](./phase-1-plan.md) §2.2 (S1=80, S2=500, S3=2,701 の段階導入)
+3. ~~**指標拡張ロードマップ**~~ ✅ 2026-05-23 完了 → [`phase-1-plan.md`](./phase-1-plan.md) (1,994 → 5,000 を 4 Stage × 750 で実施)
 
 ### Phase 2 着手前に決めること (Phase 1 内で)
 
-1. ~~**「公務員 × AI × 統計」コンテンツ戦略の具体テーマ 30 本**~~ ✅ 2026-05-24 完了 → [`phase-2-authority-content-plan.md`](./phase-2-authority-content-plan.md) (Series A-D で 30 本企画 + Stage 2-S1〜2-S4)
-2. ~~**note 収益化フロー** (note ↔ stats47 ファネル定量化)~~ ✅ 2026-05-24 完了 → [`phase-2-note-monetization-plan.md`](./phase-2-note-monetization-plan.md) (Funnel A/B 設計 + UTM 規約)
-3. ~~**被リンク獲得施策** (どこに何のリンクを置くか)~~ ✅ 2026-05-24 完了 → [`phase-2-backlink-strategy.md`](./phase-2-backlink-strategy.md) (linkable asset 6 本 + メディア配布 + HARO)
+1. ~~**「公務員 × AI × 統計」コンテンツ戦略の具体テーマ 30 本**~~ ✅ 2026-05-24 完了 → [`phase-2-plan.md`](./phase-2-plan.md) (Series A-D で 30 本企画 + Stage 2-S1〜2-S4)
+2. ~~**note 収益化フロー** (note ↔ stats47 ファネル定量化)~~ ✅ 2026-05-24 完了 → [`phase-2-plan.md`](./phase-2-plan.md) (Funnel A/B 設計 + UTM 規約)
+3. ~~**被リンク獲得施策** (どこに何のリンクを置くか)~~ ✅ 2026-05-24 完了 → [`phase-2-plan.md`](./phase-2-plan.md) (linkable asset 6 本 + メディア配布 + HARO)
 
 ---
 

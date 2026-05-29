@@ -1,11 +1,13 @@
 import "server-only";
 
 import { logger } from "@stats47/logger/server";
-import { fetchFromR2AsJson } from "@stats47/r2-storage/server";
+import { fetchFromR2AsJson, listFromR2 } from "@stats47/r2-storage/server";
 import type { AreaType } from "@stats47/types";
 import { err, ok, type Result } from "@stats47/types";
 
+import { KNOWN_RANKING_KEYS } from "../../config/known-ranking-keys";
 import type { RankingItem } from "../../types/ranking-item";
+import type { RankingItemWithTags } from "../../types/ranking-item-with-tags";
 import {
   categoryItemsKeyPath,
   homeFeaturedKeyPath,
@@ -132,6 +134,71 @@ export async function readRankingItemByKeyFromR2(
     logger.error({ error, rankingKey }, "readRankingItemByKeyFromR2: failed");
     return err(error instanceof Error ? error : new Error(String(error)));
   }
+}
+
+/**
+ * 全 ranking-item を R2 の per-key item.json (`app/ranking/<key>/item.json`) から走査して返す。
+ * 完全DBレス (docs/01_技術設計/19): D1 `metrics` を読む `listRankingItemsWithTags` の代替。
+ * item.json の `.item` は tags まで含む完全な RankingItemWithTags なのでそのまま使える。
+ * 旧来の list 系 R2 リーダはモノリス `app/ranking-items/all.json` を読むが、これは廃止予定 (現在欠落)
+ * のため、per-key ファイル群を直接イテレートする。
+ *
+ * 注: build スクリプトで使う場合、`listFromR2`/`fetchFromR2AsJson` はローカル FS (`.local/r2`) を
+ * 使うため NODE_ENV=development で実行すること (S3 トークン廃止のため scripts 経路は cloud 不可)。
+ */
+export async function listRankingItemsWithTagsFromR2(options?: {
+  areaType?: AreaType;
+  isActive?: boolean;
+}): Promise<Result<RankingItemWithTags[], Error>> {
+  try {
+    const itemKeys = await enumerateRankingItemKeys(options?.areaType);
+
+    const items: RankingItemWithTags[] = [];
+    for (const key of itemKeys) {
+      const snapshot = await fetchFromR2AsJson<{ item: RankingItemWithTags }>(
+        key,
+      );
+      const item = snapshot?.item;
+      if (!item) continue;
+      if (options?.areaType && item.areaType !== options.areaType) continue;
+      if (options?.isActive != null && item.isActive !== options.isActive) {
+        continue;
+      }
+      items.push({ ...item, tags: item.tags ?? [] });
+    }
+    return ok(items);
+  } catch (error) {
+    logger.error({ error }, "listRankingItemsWithTagsFromR2: failed");
+    return err(error instanceof Error ? error : new Error(String(error)));
+  }
+}
+
+/**
+ * `app/ranking/<key>/item.json` キーを列挙する。
+ *  1. R2 list (SSD ローカル FS / S3 認証がある環境)
+ *  2. 不可なら committed `KNOWN_RANKING_KEYS` から列挙 (公開URL専用の SSD/認証なし環境)
+ *
+ * KNOWN_RANKING_KEYS は prefecture & active の SSOT。list 不可環境では
+ * prefecture 以外を列挙できないため、その場合は明示的にエラーにする (silent な欠落を防ぐ)。
+ */
+async function enumerateRankingItemKeys(areaType?: AreaType): Promise<string[]> {
+  try {
+    const allKeys = await listFromR2("app/ranking/");
+    const itemKeys = allKeys.filter((k) =>
+      /^app\/ranking\/[^/]+\/item\.json$/.test(k),
+    );
+    if (itemKeys.length > 0) return itemKeys;
+  } catch {
+    // R2 list 不可 (公開URL専用環境) → git 列挙フォールバックへ
+  }
+
+  if (areaType && areaType !== "prefecture") {
+    throw new Error(
+      `R2 list 不可環境では areaType=${areaType} の ranking item を列挙できません ` +
+        `(KNOWN_RANKING_KEYS は prefecture のみ。SSD 接続 or S3 認証が必要)`,
+    );
+  }
+  return [...KNOWN_RANKING_KEYS].map((key) => `app/ranking/${key}/item.json`);
 }
 
 export async function readRankingItemByKeyAndAreaTypeFromR2(

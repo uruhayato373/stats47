@@ -14,7 +14,7 @@ tags: [theme-charts, planning]
 
 ## 親計画
 
-- `docs/02_実装計画/theme-dashboard-d1-migration.md` — D1+R2 統一移行のマスタープラン (Phase 1A 完了)
+- `docs/02_実装計画/theme-dashboard-plan.md` — D1+R2 統一移行のマスタープラン (Phase 1A 完了)
 
 ## 進捗表
 
@@ -117,7 +117,7 @@ tags: [theme-charts]
 
 ## 関連
 
-- 親計画: `docs/02_実装計画/theme-dashboard-d1-migration.md`
+- 親計画: `docs/02_実装計画/theme-dashboard-plan.md`
 - D1 スキーマ: `packages/database/src/schema/themes.ts`
 - 既存 TS source: `packages/types/src/indicator-sets/*.ts`
 - ブログ品質基準 (curiosity gap): `.claude/rules/blog-quality-standards.md`

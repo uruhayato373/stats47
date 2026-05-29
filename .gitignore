@@ -51,6 +51,8 @@ pnpm-lock.yaml
 
 # env files (can opt-in for committing if needed)
 .env*
+# ただしローカル開発用の公開デフォルトはコミットする (秘匿値は含めない)
+!apps/web/.env.development
 
 # Google service account keys
 stats47-*.json

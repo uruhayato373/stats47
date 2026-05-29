@@ -14,6 +14,7 @@ export { listRankingItemsWithTags } from "./list-ranking-items-with-tags";
 export { updateRankingItem } from "./update-ranking-item";
 export { upsertRankingItem } from "./upsert-ranking-item";
 export {
+  listRankingItemsWithTagsFromR2,
   readActiveKeysForSitemapFromR2,
   readActiveRankingKeysFromR2,
   readFeaturedRankingItemsFromR2,

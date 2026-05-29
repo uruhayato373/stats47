@@ -1,25 +1,28 @@
 /**
- * ports + stats(entity_type=port) を R2 snapshot 化する (Phase 6, PR-6)。
+ * ports + 港湾統計 を R2 snapshot 化する (完全DBレス: docs/01_技術設計/19_完全DBレス設計.md)。
+ *
+ * 入力 (D1 廃止):
+ *   - port master = git TS `packages/area/src/data/ports.json` (PortMetaRow[], administrator 込み)
+ *   - 港湾観測値  = R2 app/stats/<port-metric>/ports.json (readStatsValues, listMetricKeysByEntity("port"))
  *
  * Outputs:
- *   - snapshots/ports/all.json (全 port メタ)
- *   - snapshots/port-statistics/years.json (年一覧)
- *   - snapshots/port-statistics/by-year/<year>.json (各年の統計)
- *   - snapshots/port-statistics/by-port/<portCode>.json (各港の時系列)
+ *   - app/ports/all.json (全 port メタ)
+ *   - app/port-statistics/years.json (年一覧, 降順)
+ *   - app/port-statistics/by-year/<year>.json (各年の統計)
+ *   - app/port-statistics/by-port/<portCode>.json (各港の時系列)
  *
  * Usage:
- *   npx tsx -r ./packages/ranking/src/scripts/setup-cli.js \
- *     apps/web/scripts/export-port-statistics-snapshot.ts
+ *   - SSD 接続: NODE_ENV=development NODE_OPTIONS='--conditions react-server' npx tsx apps/web/scripts/export-port-statistics-snapshot.ts
+ *   - SSD 非接続: R2_PUBLIC_FETCH_URL=https://storage.stats47.jp NODE_OPTIONS='--conditions react-server' npx tsx ...
  */
 
 import dotenv from "dotenv";
-import { drizzle } from "drizzle-orm/better-sqlite3";
 import fs from "fs";
-import BetterSqlite3 from "better-sqlite3";
+import path from "path";
 
-import { LOCAL_DB_PATHS } from "../../../packages/database/src/config/local-db-paths";
-import * as schema from "../../../packages/database/src/schema";
+import { listMetricKeysByEntity } from "@stats47/data-configs";
 import { saveToR2 } from "@stats47/r2-storage/server";
+import { readStatsValues } from "@stats47/stats-r2/readers";
 
 import {
   PORTS_SNAPSHOT_KEY,
@@ -35,124 +38,88 @@ import {
 } from "../src/features/port-statistics/lib/snapshot-types";
 
 dotenv.config({ path: ".env.local" });
+dotenv.config({ path: ".env" });
 
-function resolveDatabasePath(): string {
-  if (process.env.LOCAL_DB_PATH && fs.existsSync(process.env.LOCAL_DB_PATH)) {
-    return process.env.LOCAL_DB_PATH;
-  }
-  const standardPath = LOCAL_DB_PATHS.STATIC.getPath();
-  if (fs.existsSync(standardPath)) return standardPath;
-  throw new Error(`ローカル D1 SQLite が見つかりません: ${standardPath}`);
-}
-
-const PARALLELISM = 1;
-
-async function writeWithRetry(
-  fn: () => Promise<unknown>,
-  retries = 5,
-  baseDelayMs = 500,
-): Promise<unknown> {
-  let lastError: unknown;
-  for (let attempt = 0; attempt < retries; attempt++) {
-    try {
-      return await fn();
-    } catch (err) {
-      lastError = err;
-      const msg = err instanceof Error ? err.message : String(err);
-      const isRateLimit = msg.includes("429") || msg.includes("rate");
-      if (!isRateLimit) throw err;
-      const delay = baseDelayMs * Math.pow(2, attempt);
-      await new Promise((r) => setTimeout(r, delay));
-    }
-  }
-  throw lastError;
-}
-
-async function writeInBatches<T>(
-  items: T[],
-  fn: (item: T) => Promise<unknown>,
-  parallelism = PARALLELISM,
-): Promise<void> {
-  for (let i = 0; i < items.length; i += parallelism) {
-    const batch = items.slice(i, i + parallelism);
-    await Promise.all(batch.map((item) => writeWithRetry(() => fn(item))));
-    // R2 REST API rate limit 配慮: 並列 export と競合する場合は重要
-    await new Promise((r) => setTimeout(r, 250));
-  }
-}
-
-async function main() {
-  const dbPath = resolveDatabasePath();
-  console.log(`📁 DB: ${dbPath}`);
-
-  const sqlite = new BetterSqlite3(dbPath, { readonly: true });
-  const db = drizzle(sqlite, { schema });
-
-  const generatedAt = new Date().toISOString();
-
-  // 1. ports/all.json
-  const portRows = await db.select().from(schema.ports);
-  const portsMeta: PortMetaRow[] = portRows.map((p) => ({
+/** git TS port master (administrator 含む完全マスタ) を読む。 */
+function loadPortMaster(): PortMetaRow[] {
+  const masterPath = path.resolve(
+    __dirname,
+    "../../../packages/area/src/data/ports.json",
+  );
+  const raw = JSON.parse(fs.readFileSync(masterPath, "utf-8")) as PortMetaRow[];
+  return raw.map((p) => ({
     portCode: p.portCode,
     portName: p.portName,
     prefectureCode: p.prefectureCode,
     prefectureName: p.prefectureName,
-    latitude: p.latitude,
-    longitude: p.longitude,
+    latitude: p.latitude ?? null,
+    longitude: p.longitude ?? null,
     portGrade: p.portGrade ?? null,
     administrator: p.administrator ?? null,
   }));
+}
+
+// snapshot 互換の旧 metric_key へ: "port-ships-total" を "ships_total" に変換する
+function toSnapshotMetricKey(metricKey: string): string {
+  return metricKey.replace(/^port-/, "").split("-").join("_");
+}
+
+async function main() {
+  const generatedAt = new Date().toISOString();
+
+  // 1. ports/all.json (git TS master)
+  const portsMeta = loadPortMaster();
   const portsSnapshot: PortsSnapshot = { generatedAt, ports: portsMeta };
   await saveToR2(PORTS_SNAPSHOT_KEY, JSON.stringify(portsSnapshot), {
     contentType: "application/json; charset=utf-8",
   });
-  console.log(`✅ ports: ${portsMeta.length} 件`);
+  const withAdmin = portsMeta.filter((p) => p.administrator).length;
+  console.log(`ports: ${portsMeta.length} (administrator ${withAdmin})`);
 
-  // 2. stats_port を読み込み (schema split 後: stats → stats_port)
-  // metricKey 形式 'port-ships-total' → port_statistics の旧 metric_key 'ships_total' に逆変換
-  const observationRows = await db
-    .select({
-      portCode: schema.statsPort.areaCode,
-      year: schema.statsPort.yearCode,
-      indicatorKey: schema.statsPort.metricKey,
-      value: schema.statsPort.value,
-      unit: schema.statsPort.unit,
-    })
-    .from(schema.statsPort);
+  // 2. 港湾観測値を R2 から読み込み (metric ごと)
+  const portMetricKeys = listMetricKeysByEntity("port");
+  const allStats: Array<{
+    portCode: string;
+    year: string;
+    metricKey: string;
+    value: number;
+    unit: string;
+  }> = [];
 
-  // R2 snapshot は旧 metric_key 形式 (snake_case) を維持する → 後方互換
-  const allStats = observationRows
-    .filter((r) => r.value !== null)
-    .map((r) => ({
-      portCode: r.portCode,
-      year: r.year,
-      metricKey: r.indicatorKey.replace(/^port-/, "").replace(/-/g, "_"),
-      value: Number(r.value),
-      unit: r.unit ?? "",
-    }));
+  let metricsRead = 0;
+  for (const key of portMetricKeys) {
+    const payload = await readStatsValues(key, "port");
+    if (!payload || payload.rows.length === 0) continue;
+    metricsRead++;
+    const snapshotMetricKey = toSnapshotMetricKey(key);
+    for (const r of payload.rows) {
+      if (r.value == null) continue;
+      allStats.push({
+        portCode: r.areaCode,
+        year: r.yearCode,
+        metricKey: snapshotMetricKey,
+        value: Number(r.value),
+        unit: r.unit ?? "",
+      });
+    }
+  }
+  console.log(`✅ port stats: ${metricsRead}/${portMetricKeys.length} metrics, ${allStats.length} obs`);
 
   const byYear = new Map<string, PortStatRow[]>();
-  const byPort = new Map<string, Array<{ year: string; metricKey: string; value: number; unit: string }>>();
+  const byPort = new Map<
+    string,
+    Array<{ year: string; metricKey: string; value: number; unit: string }>
+  >();
   const yearSet = new Set<string>();
 
   for (const s of allStats) {
     yearSet.add(s.year);
     const yearArr = byYear.get(s.year) ?? [];
-    yearArr.push({
-      portCode: s.portCode,
-      metricKey: s.metricKey,
-      value: s.value,
-      unit: s.unit,
-    });
+    yearArr.push({ portCode: s.portCode, metricKey: s.metricKey, value: s.value, unit: s.unit });
     byYear.set(s.year, yearArr);
 
     const portArr = byPort.get(s.portCode) ?? [];
-    portArr.push({
-      year: s.year,
-      metricKey: s.metricKey,
-      value: s.value,
-      unit: s.unit,
-    });
+    portArr.push({ year: s.year, metricKey: s.metricKey, value: s.value, unit: s.unit });
     byPort.set(s.portCode, portArr);
   }
 
@@ -161,32 +128,35 @@ async function main() {
   await saveToR2(PORT_STATS_YEARS_KEY, JSON.stringify(yearsSnapshot), {
     contentType: "application/json; charset=utf-8",
   });
-  console.log(`✅ years.json: ${years.length} 件`);
+  console.log(`✅ years.json: ${years.length} 件 (${years[years.length - 1]}〜${years[0]})`);
 
-  // 3. by-year
+  // 3. by-year (saveToR2 はローカル FS への同期書込なので throttle 不要)
   const yearEntries = [...byYear.entries()];
-  await writeInBatches(yearEntries, async ([year, rows]) => {
-    const snapshot: PortStatsByYearSnapshot = { generatedAt, year, rows };
-    await saveToR2(portStatsByYearKey(year), JSON.stringify(snapshot), {
-      contentType: "application/json; charset=utf-8",
-    });
-  });
+  await Promise.all(
+    yearEntries.map(([year, rows]) => {
+      const snapshot: PortStatsByYearSnapshot = { generatedAt, year, rows };
+      return saveToR2(portStatsByYearKey(year), JSON.stringify(snapshot), {
+        contentType: "application/json; charset=utf-8",
+      });
+    }),
+  );
   console.log(`✅ by-year: ${yearEntries.length} files`);
 
   // 4. by-port
   const portEntries = [...byPort.entries()];
-  await writeInBatches(portEntries, async ([portCode, rows]) => {
-    const snapshot: PortStatsByPortSnapshot = { generatedAt, portCode, rows };
-    await saveToR2(portStatsByPortKey(portCode), JSON.stringify(snapshot), {
-      contentType: "application/json; charset=utf-8",
-    });
-  });
+  await Promise.all(
+    portEntries.map(([portCode, rows]) => {
+      const snapshot: PortStatsByPortSnapshot = { generatedAt, portCode, rows };
+      return saveToR2(portStatsByPortKey(portCode), JSON.stringify(snapshot), {
+        contentType: "application/json; charset=utf-8",
+      });
+    }),
+  );
   console.log(`✅ by-port: ${portEntries.length} files`);
 
   console.log(
     `📊 合計: ports=${portsMeta.length} stats=${allStats.length} year-files=${yearEntries.length} port-files=${portEntries.length}`,
   );
-  sqlite.close();
 }
 
 main().catch((err) => {

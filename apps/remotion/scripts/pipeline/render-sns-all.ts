@@ -26,7 +26,6 @@ import {
   renderStill,
   selectComposition,
 } from "@remotion/renderer";
-import Database from "better-sqlite3";
 import fs from "fs/promises";
 import path from "path";
 
@@ -36,8 +35,9 @@ import path from "path";
 
 const MONOREPO_ROOT = path.resolve(__dirname, "..", "..", "..", "..");
 const SNS_ROOT = path.join(MONOREPO_ROOT, ".local", "r2", "sns", "ranking");
-// ローカルビルド DB (SQLite): packages/database/.data/
-const D1_DIR = path.join(MONOREPO_ROOT, "packages", "database", ".data");
+// 完全DBレス (docs/01_技術設計/19): visualization は D1 metrics ではなく
+// R2 ranking item.json (.item.visualization) を SSOT として読む。
+const RANKING_ROOT = path.join(MONOREPO_ROOT, ".local", "r2", "app", "ranking");
 const BROWSER_RESTART_INTERVAL = 50;
 
 // ---------------------------------------------------------
@@ -51,7 +51,7 @@ const keyIdx = args.indexOf("--key");
 const targetKey = keyIdx !== -1 ? args[keyIdx + 1] : undefined;
 
 // ---------------------------------------------------------
-// D1 アクセス（visualization_config 読み込み）
+// visualization 読み込み（R2 ranking item.json の .item.visualization）
 // ---------------------------------------------------------
 
 interface VizConfig {
@@ -60,60 +60,40 @@ interface VizConfig {
   divergingMidpointValue?: number;
 }
 
-async function findD1Database(): Promise<string> {
-  const files = await fs.readdir(D1_DIR);
-  const sqliteFiles = files.filter((f) => f.endsWith(".sqlite"));
-
-  for (const file of sqliteFiles) {
-    const dbPath = path.join(D1_DIR, file);
-    try {
-      const db = new Database(dbPath, { readonly: true });
-      const result = db
-        .prepare(
-          "SELECT name FROM sqlite_master WHERE type='table' AND name='metrics'"
-        )
-        .get();
-      db.close();
-      if (result) return dbPath;
-    } catch {
-      continue;
-    }
+/**
+ * R2 ranking item.json (`.item.visualization`) からカラースキーム設定を読む。
+ * D1 metrics.visualization_config_json と同じ 3 フィールドを抽出する。
+ * item.json が無い / visualization が無い / colorScheme 未設定なら undefined
+ * （= 呼び出し側はデフォルトカラースキームにフォールバック）。
+ */
+async function loadVizConfig(rankingKey: string): Promise<VizConfig | undefined> {
+  const itemPath = path.join(RANKING_ROOT, rankingKey, "item.json");
+  let raw: string;
+  try {
+    raw = await fs.readFile(itemPath, "utf8");
+  } catch {
+    return undefined;
   }
-
-  throw new Error("metrics テーブルを含む D1 SQLite が見つかりません");
-}
-
-function loadVizConfigMap(dbPath: string): Map<string, VizConfig> {
-  const db = new Database(dbPath, { readonly: true });
-  const rows = db
-    .prepare(
-      `SELECT key AS ranking_key, visualization_config_json AS visualization_config
-       FROM metrics
-       WHERE visualization_config_json IS NOT NULL`
-    )
-    .all() as Array<{ ranking_key: string; visualization_config: string }>;
-  db.close();
-
-  const map = new Map<string, VizConfig>();
-  for (const row of rows) {
-    try {
-      const vc = JSON.parse(row.visualization_config) as {
-        colorScheme?: string;
-        colorSchemeType?: string;
-        divergingMidpointValue?: number;
+  try {
+    const parsed = JSON.parse(raw) as {
+      item?: {
+        visualization?: {
+          colorScheme?: string;
+          colorSchemeType?: string;
+          divergingMidpointValue?: number;
+        };
       };
-      if (vc.colorScheme) {
-        map.set(row.ranking_key, {
-          colorScheme: vc.colorScheme,
-          colorSchemeType: vc.colorSchemeType as VizConfig["colorSchemeType"],
-          divergingMidpointValue: vc.divergingMidpointValue,
-        });
-      }
-    } catch {
-      // skip invalid JSON
-    }
+    };
+    const vc = parsed.item?.visualization;
+    if (!vc?.colorScheme) return undefined;
+    return {
+      colorScheme: vc.colorScheme,
+      colorSchemeType: vc.colorSchemeType as VizConfig["colorSchemeType"],
+      divergingMidpointValue: vc.divergingMidpointValue,
+    };
+  } catch {
+    return undefined;
   }
-  return map;
 }
 
 // ---------------------------------------------------------
@@ -165,8 +145,7 @@ interface SnsProps {
 }
 
 async function loadProps(
-  rankingDir: string,
-  vizConfigMap: Map<string, VizConfig>
+  rankingDir: string
 ): Promise<{ light: SnsProps; ig: SnsProps; yt: SnsProps; tt: SnsProps } | null> {
   try {
     const dataJson = JSON.parse(
@@ -213,9 +192,9 @@ async function loadProps(
     const hookText = caption.hookText || "";
     const displayTitle = caption.displayTitle || undefined;
 
-    // DB の visualization_config からカラースキームを取得
+    // R2 ranking item.json の visualization からカラースキームを取得
     const rankingKey = path.basename(rankingDir);
-    const vizConfig = vizConfigMap.get(rankingKey);
+    const vizConfig = await loadVizConfig(rankingKey);
     const colorScheme = vizConfig?.colorScheme;
     const colorSchemeType = vizConfig?.colorSchemeType;
     const divergingMidpointValue = vizConfig?.divergingMidpointValue;
@@ -486,16 +465,8 @@ async function main() {
 
   console.log(`📂 対象: ${dirs.length} ランキング\n`);
 
-  // DB から visualization_config を読み込み
-  let vizConfigMap = new Map<string, VizConfig>();
-  try {
-    console.log("🔍 Finding local D1 database...");
-    const dbPath = await findD1Database();
-    vizConfigMap = loadVizConfigMap(dbPath);
-    console.log(`📁 D1: ${path.basename(dbPath)} (${vizConfigMap.size} configs loaded)\n`);
-  } catch (err) {
-    console.log(`⚠️  D1 読み込みスキップ（デフォルトカラースキームを使用）: ${err instanceof Error ? err.message : err}\n`);
-  }
+  // visualization は各 ranking の item.json (.item.visualization) から
+  // loadProps 内で都度読み込む（完全DBレス）。
 
   // バンドル
   console.log("📦 Bundling Remotion project...");
@@ -528,7 +499,7 @@ async function main() {
 
       console.log(`\n[${i + 1}/${dirs.length}] 🎨 ${key}`);
 
-      const props = await loadProps(rankingDir, vizConfigMap);
+      const props = await loadProps(rankingDir);
       if (!props) {
         console.log("   ⏭️  data.json が見つからないためスキップ");
         totalSkip++;

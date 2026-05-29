@@ -1,76 +1,58 @@
 /**
- * 検索インデックス生成スクリプト
+ * 検索インデックス生成スクリプト (完全DBレス: docs/01_技術設計/19_完全DBレス設計.md)
  *
- * D1 の metrics / articles と categories から
- * MiniSearch 用の search-index.json と
- * フィルタ用の search-index-meta.json を生成する。
+ * 3 つの SSOT を統合して MiniSearch 用の search-index.json と
+ * フィルタ用の search-index-meta.json を生成する:
+ *   - ranking docs : R2 ranking item.json (listRankingItemsWithTagsFromR2) + git TS の description
+ *   - blog docs    : R2 app/blog/all.json (BlogSnapshot, export-blog-snapshot の出力)
+ *   - categories   : git TS categories マスタ (@stats47/data-configs)
  *
- * 使用方法: npx tsx scripts/generate-search-index.ts
+ * 旧 D1 (metrics LEFT JOIN categories / articles) 依存を撤廃。
+ *
+ * 使用方法: NODE_ENV=development NODE_OPTIONS='--conditions react-server' \
+ *             npx tsx scripts/generate-search-index.ts
+ *   ※ 実行前に export-blog-snapshot.ts を走らせて app/blog/all.json を最新化すること
  */
 
 import dotenv from "dotenv";
-import { and, asc, eq } from "drizzle-orm";
-import { drizzle } from "drizzle-orm/d1";
 import fs from "fs";
 import MiniSearch from "minisearch";
 import path from "path";
-import { createDatabaseClient } from "../../../packages/database/src/client";
-import { LOCAL_DB_PATHS } from "../../../packages/database/src/config/local-db-paths";
-import * as schema from "../../../packages/database/src/schema";
+
+import { getCategoryName, getMetricConfig, listCategories } from "@stats47/data-configs";
+import { fetchFromR2AsJson } from "@stats47/r2-storage/server";
+import { listRankingItemsWithTagsFromR2 } from "@stats47/ranking/server";
+
+import {
+  BLOG_SNAPSHOT_KEY,
+  type BlogSnapshot,
+} from "../src/features/blog/types/snapshot";
 import { tokenize } from "../src/features/search/lib/tokenize";
 import type { ContentType, SearchDocument } from "../src/features/search/types/search.types";
 
 dotenv.config({ path: ".env.local" });
 dotenv.config({ path: ".env" });
 
-function resolveDatabasePath(): string | null {
-  if (process.env.LOCAL_DB_PATH) {
-    return process.env.LOCAL_DB_PATH;
-  }
-  const standardPath = LOCAL_DB_PATHS.STATIC.getPath();
-  if (fs.existsSync(standardPath)) {
-    console.log(`📁 標準データベースパスを使用: ${standardPath}`);
-    return standardPath;
-  }
-  const wranglerBaseDir = path.join(
-    process.cwd(),
-    ".wrangler/state/v3/d1/miniflare-D1DatabaseObject"
-  );
-  if (fs.existsSync(wranglerBaseDir)) {
-    const files = fs
-      .readdirSync(wranglerBaseDir)
-      .filter((file) => file.endsWith(".sqlite"))
-      .map((file) => {
-        const filePath = path.join(wranglerBaseDir, file);
-        return { path: filePath, mtime: fs.statSync(filePath).mtimeMs };
-      })
-      .sort((a, b) => b.mtime - a.mtime);
-    if (files.length > 0) {
-      console.log(`📁 Wranglerデータベースパスを使用: ${files[0].path}`);
-      return files[0].path;
-    }
-  }
-  return null;
-}
+const STORE_FIELDS = [
+  "id",
+  "title",
+  "description",
+  "type",
+  "url",
+  "category",
+  "categoryKey",
+  "tags",
+  "subtitle",
+  "demographicAttr",
+  "normalizationBasis",
+  "latestYear",
+  "publishedAt",
+  "updatedAt",
+];
 
 const miniSearch = new MiniSearch<SearchDocument>({
   fields: ["title", "description"],
-  storeFields: [
-    "id",
-    "title",
-    "description",
-    "type",
-    "url",
-    "category",
-    "categoryKey",
-    "tags",
-    "subtitle",
-    "demographicAttr",
-    "normalizationBasis",
-    "latestYear",
-    "publishedAt",
-    "updatedAt",
-  ],
+  storeFields: STORE_FIELDS,
   tokenize,
   searchOptions: {
     boost: { title: 3 },
@@ -79,105 +61,43 @@ const miniSearch = new MiniSearch<SearchDocument>({
   },
 });
 
-interface CategoryMeta {
+interface CategoryMetaOut {
   categoryKey: string;
   categoryName: string;
 }
 
-function writeEmptyIndex() {
-  const indexPath = path.join(process.cwd(), "public", "search-index.json");
-  const metaPath = path.join(process.cwd(), "public", "search-index-meta.json");
-
-  // 既存のインデックスがあればそのまま保持（CI環境ではDB不在のため）
-  if (fs.existsSync(indexPath) && fs.existsSync(metaPath)) {
-    console.log(`ℹ️  DBが見つかりませんが、既存の search-index.json を保持します: ${indexPath}`);
-    return;
-  }
-
-  const emptyIndex = new MiniSearch<SearchDocument>({
-    fields: ["title", "description"],
-    storeFields: ["id", "title", "description", "type", "url", "category", "categoryKey", "tags", "subtitle", "demographicAttr", "normalizationBasis", "latestYear", "publishedAt", "updatedAt"],
-    tokenize,
-  });
-  fs.writeFileSync(indexPath, JSON.stringify(emptyIndex.toJSON()), "utf-8");
-  console.log(`⚠️  DBが見つからないため空の search-index.json を生成: ${indexPath}`);
-
-  fs.writeFileSync(metaPath, JSON.stringify({ categories: [], blogTags: [], blogYears: [] }), "utf-8");
-  console.log(`⚠️  空の search-index-meta.json を生成: ${metaPath}`);
-}
-
 async function main() {
-  const dbPath = resolveDatabasePath();
-  if (!dbPath) {
-    writeEmptyIndex();
-    return;
-  }
-
-  const client = createDatabaseClient({
-    localDbPath: dbPath,
-    useLocalAdapter: true,
-  });
-  const db = drizzle(client, { schema });
-
   const documents: SearchDocument[] = [];
 
-  // 1. ランキング項目（metrics LEFT JOIN categories）
+  // 1. ランキング項目（R2 item.json メタ + git TS の description）
   try {
-    const rankingRows = await db
-      .select({
-        rankingKey: schema.metrics.key,
-        areaType: schema.metrics.areaType,
-        title: schema.metrics.title,
-        subtitle: schema.metrics.subtitle,
-        rankingDescription: schema.metrics.description,
-        demographicAttr: schema.metrics.demographicAttr,
-        normalizationBasis: schema.metrics.normalizationBasis,
-        availableYears: schema.metrics.availableYearsJson,
-        categoryKey: schema.metrics.categoryKey,
-        categoryName: schema.categories.categoryName,
-      })
-      .from(schema.metrics)
-      .leftJoin(
-        schema.categories,
-        eq(schema.metrics.categoryKey, schema.categories.categoryKey)
-      )
-      .where(
-        and(
-          eq(schema.metrics.isActive, true),
-          eq(schema.metrics.areaType, "prefecture")
-        )
-      )
-      .orderBy(asc(schema.metrics.key));
+    const result = await listRankingItemsWithTagsFromR2({
+      areaType: "prefecture",
+      isActive: true,
+    });
+    if (!result.success) throw result.error;
+    const items = [...result.data];
+    items.sort((a, b) => a.rankingKey.localeCompare(b.rankingKey));
 
-    for (const row of rankingRows) {
-      let latestYear: string | undefined;
-      try {
-        const years = row.availableYears
-          ? (JSON.parse(row.availableYears as string) as { yearCode: string; yearName: string }[])
-          : [];
-        if (years.length > 0) {
-          const sorted = [...years].sort((a, b) => b.yearCode.localeCompare(a.yearCode));
-          latestYear = sorted[0].yearName;
-        }
-      } catch {
-        // JSON parse 失敗時は無視
-      }
+    for (const item of items) {
+      // description は MiniSearch の検索対象 field。subtitle + git TS の description を結合する
+      // (item.json は plain description を持たないため git TS registry から補完)。
+      const tsDescription = getMetricConfig(item.rankingKey)?.description;
+      const description =
+        [item.subtitle, tsDescription].filter(Boolean).join(" ") || item.title;
 
-      const description = [row.subtitle, row.rankingDescription]
-        .filter(Boolean)
-        .join(" ");
       documents.push({
-        id: `ranking_${row.rankingKey}_${row.areaType}`,
-        title: row.title,
-        description: description || row.title,
+        id: `ranking_${item.rankingKey}_${item.areaType}`,
+        title: item.title,
+        description,
         type: "ranking" as ContentType,
-        url: `/ranking/${row.rankingKey}`,
-        category: row.categoryName ?? undefined,
-        categoryKey: row.categoryKey ?? undefined,
-        subtitle: row.subtitle ?? undefined,
-        demographicAttr: row.demographicAttr ?? undefined,
-        normalizationBasis: row.normalizationBasis ?? undefined,
-        latestYear,
+        url: `/ranking/${item.rankingKey}`,
+        category: (item.categoryKey ? getCategoryName(item.categoryKey) : null) ?? undefined,
+        categoryKey: item.categoryKey ?? undefined,
+        subtitle: item.subtitle ?? undefined,
+        demographicAttr: item.demographicAttr ?? undefined,
+        normalizationBasis: item.normalizationBasis ?? undefined,
+        latestYear: item.latestYear?.yearName,
       });
     }
     console.log(`ランキング: ${documents.length}件`);
@@ -187,36 +107,27 @@ async function main() {
 
   const rankingCount = documents.length;
 
-  // 2. ブログ記事（articles）
+  // 2. ブログ記事（R2 app/blog/all.json）
   try {
-    const articleRows = await db
-      .select({
-        slug: schema.articles.slug,
-        title: schema.articles.title,
-        description: schema.articles.description,
-        tags: schema.articles.tags,
-        publishedAt: schema.articles.publishedAt,
-        updatedAt: schema.articles.updatedAt,
-      })
-      .from(schema.articles)
-      .where(eq(schema.articles.published, true));
+    const snapshot = await fetchFromR2AsJson<BlogSnapshot>(BLOG_SNAPSHOT_KEY);
+    const articles = (snapshot?.articles ?? []).filter((a) => a.published === true);
 
-    for (const row of articleRows) {
-      const tags = JSON.parse(row.tags ?? "[]") as string[];
+    for (const a of articles) {
+      const tags = a.tags.map((t) => t.tagKey);
       const tagsStr = tags.join(", ");
-      const description = [row.description, tagsStr].filter(Boolean).join(" ");
+      const description = [a.description, tagsStr].filter(Boolean).join(" ");
       const category = tags[0] || "ブログ";
 
       documents.push({
-        id: `blog_${row.slug}`,
-        title: row.title,
-        description: description || row.title,
+        id: `blog_${a.slug}`,
+        title: a.title,
+        description: description || a.title,
         type: "blog" as ContentType,
-        url: `/blog/${row.slug}`,
+        url: `/blog/${a.slug}`,
         category,
         tags: tags.length > 0 ? tags : undefined,
-        publishedAt: row.publishedAt ? new Date(row.publishedAt).toISOString() : undefined,
-        updatedAt: row.updatedAt ? new Date(row.updatedAt).toISOString() : undefined,
+        publishedAt: a.publishedAt ? new Date(a.publishedAt).toISOString() : undefined,
+        updatedAt: a.updatedAt ? new Date(a.updatedAt).toISOString() : undefined,
       });
     }
     console.log(`ブログ: ${documents.length - rankingCount}件`);
@@ -224,57 +135,54 @@ async function main() {
     console.warn("ブログ記事の取得に失敗:", error);
   }
 
-  const blogCount = documents.length - rankingCount;
+  const indexPath = path.join(process.cwd(), "public", "search-index.json");
+  const metaPath = path.join(process.cwd(), "public", "search-index-meta.json");
+
+  // R2 データ源が読めない環境 (CI で R2 不在 / SSD 非接続 等) では documents が 0 件になる。
+  // この場合に空インデックスで上書きすると本番検索が壊れるため、既存の committed
+  // search-index.json を保持して early return する (旧 D1 版の writeEmptyIndex と同じ安全策)。
+  // search-index.json はローカルで再生成して commit する運用 (prebuild の CI 実行は no-op)。
+  if (documents.length === 0 && fs.existsSync(indexPath) && fs.existsSync(metaPath)) {
+    console.log(
+      "ℹ️  ドキュメント 0 件 (R2 データ源不在)。既存の search-index.json / meta を保持します",
+    );
+    return;
+  }
 
   // MiniSearch に追加
   miniSearch.addAll(documents);
 
   const indexJson = JSON.stringify(miniSearch.toJSON());
-  const indexPath = path.join(process.cwd(), "public", "search-index.json");
   fs.writeFileSync(indexPath, indexJson, "utf-8");
   console.log(`✅ search-index.json を出力: ${indexPath} (${documents.length}件)`);
 
-  // 4. フィルタ用メタ（categories）
-  const categoriesMeta: CategoryMeta[] = [];
-  try {
-    const categoriesRows = await db
-      .select()
-      .from(schema.categories)
-      .orderBy(asc(schema.categories.displayOrder));
+  // 3. フィルタ用メタ（categories = git TS / blogTags・blogYears = blog docs から集計）
+  const categoriesMeta: CategoryMetaOut[] = listCategories().map((c) => ({
+    categoryKey: c.categoryKey,
+    categoryName: c.categoryName,
+  }));
 
-    for (const c of categoriesRows) {
-      categoriesMeta.push({
-        categoryKey: c.categoryKey,
-        categoryName: c.categoryName,
-      });
-    }
-
-    // blogTags: タグ名 + 件数（件数降順）
-    const tagCountMap = new Map<string, number>();
-    const yearSet = new Set<string>();
-    for (const doc of documents) {
-      if (doc.type !== "blog") continue;
-      if (doc.tags) {
-        for (const tag of doc.tags) {
-          tagCountMap.set(tag, (tagCountMap.get(tag) ?? 0) + 1);
-        }
-      }
-      if (doc.publishedAt) {
-        yearSet.add(doc.publishedAt.slice(0, 4));
+  const tagCountMap = new Map<string, number>();
+  const yearSet = new Set<string>();
+  for (const doc of documents) {
+    if (doc.type !== "blog") continue;
+    if (doc.tags) {
+      for (const tag of doc.tags) {
+        tagCountMap.set(tag, (tagCountMap.get(tag) ?? 0) + 1);
       }
     }
-    const blogTags = [...tagCountMap.entries()]
-      .map(([tag, count]) => ({ tag, count }))
-      .sort((a, b) => b.count - a.count);
-    const blogYears = [...yearSet].sort().reverse();
-
-    const meta = { categories: categoriesMeta, blogTags, blogYears };
-    const metaPath = path.join(process.cwd(), "public", "search-index-meta.json");
-    fs.writeFileSync(metaPath, JSON.stringify(meta, null, 2), "utf-8");
-    console.log(`✅ search-index-meta.json を出力: ${metaPath}`);
-  } catch (error) {
-    console.warn("カテゴリメタの取得に失敗:", error);
+    if (doc.publishedAt) {
+      yearSet.add(doc.publishedAt.slice(0, 4));
+    }
   }
+  const blogTags = [...tagCountMap.entries()]
+    .map(([tag, count]) => ({ tag, count }))
+    .sort((a, b) => b.count - a.count);
+  const blogYears = [...yearSet].sort().reverse();
+
+  const meta = { categories: categoriesMeta, blogTags, blogYears };
+  fs.writeFileSync(metaPath, JSON.stringify(meta, null, 2), "utf-8");
+  console.log(`✅ search-index-meta.json を出力: ${metaPath}`);
 }
 
 main().catch((error) => {

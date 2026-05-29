@@ -38,12 +38,36 @@ async function fetchFromS3(key: string): Promise<Buffer | null> {
 }
 
 /**
+ * 公開 R2 URL (例: https://storage.stats47.jp) からオブジェクトを取得する。
+ * 認証も SSD ローカルミラーも不要な build / スクリプト環境向けの最終 read tier。
+ * @returns 見つかれば Buffer、404 なら null（その他のエラーは throw）。
+ */
+function getPublicR2Base(): string | null {
+  const base = process.env.R2_PUBLIC_FETCH_URL ?? process.env.NEXT_PUBLIC_R2_PUBLIC_URL;
+  return base ? base.replace(/\/+$/, "") : null;
+}
+
+async function fetchFromPublicUrl(base: string, key: string): Promise<Buffer | null> {
+  const url = `${base}/${key.replace(/^\/+/, "")}`;
+  const res = await fetch(url);
+  if (res.status === 404) return null;
+  if (!res.ok) {
+    throw new Error(`公開 R2 URL 取得に失敗 (HTTP ${res.status}): ${url}`);
+  }
+  return Buffer.from(await res.arrayBuffer());
+}
+
+/**
  * オブジェクトを R2 から取得（Buffer形式）
  *
  * 優先順位:
  *   1. ローカルFS (.local/r2/) — seeded / 手動配置ファイル（API 呼び出し不要）
  *   2. Cloudflare Workers R2バインディング
  *   3. S3 API（スクリプト環境）
+ *   4. 公開 R2 URL（R2_PUBLIC_FETCH_URL / NEXT_PUBLIC_R2_PUBLIC_URL。認証・SSD 不要の最終手段）
+ *
+ * CF Workers ランタイムは 2 (binding) で必ず先に返るため 4 には到達しない（挙動不変）。
+ * 4 は binding も S3 認証も無い build / スクリプト環境でのみ発火する。
  */
 export async function fetchFromR2(
   key: string,
@@ -51,6 +75,15 @@ export async function fetchFromR2(
 ): Promise<Buffer | null> {
   const localData = fetchFromLocalFs(key);
   if (localData !== null) return localData;
+
+  // build / スクリプト環境の明示 opt-in: R2_PUBLIC_FETCH_URL が設定されていれば
+  // binding/S3 を試さず公開 URL に直行する。Node スクリプトでは getCloudflareContext()
+  // が必ず失敗しノイズ + 遅延になるため、その試行ごと回避する。
+  // CF Workers は本変数を設定しない (wrangler.toml の vars に入れない) ため挙動不変。
+  const forcedPublicBase = process.env.R2_PUBLIC_FETCH_URL?.replace(/\/+$/, "");
+  if (forcedPublicBase) {
+    return await fetchFromPublicUrl(forcedPublicBase, key);
+  }
 
   const env = detectEnvironment();
 
@@ -75,7 +108,13 @@ export async function fetchFromR2(
     }
   }
 
-  const errorMessage = "R2クライアントを取得できませんでした。環境変数 R2_ACCESS_KEY_ID, R2_SECRET_ACCESS_KEY, R2_S3_ENDPOINT が設定されているか確認してください。";
+  // 最終 tier: 公開 R2 URL（認証も SSD ローカルミラーも無い build 環境向け）
+  const publicBase = getPublicR2Base();
+  if (publicBase) {
+    return await fetchFromPublicUrl(publicBase, key);
+  }
+
+  const errorMessage = "R2クライアントを取得できませんでした。環境変数 R2_ACCESS_KEY_ID, R2_SECRET_ACCESS_KEY, R2_S3_ENDPOINT または R2_PUBLIC_FETCH_URL / NEXT_PUBLIC_R2_PUBLIC_URL が設定されているか確認してください。";
   logger.error({ key, ...env }, errorMessage);
   throw new Error(errorMessage);
 }

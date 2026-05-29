@@ -6,8 +6,11 @@
 #   - D1 (.local/d1) は Mac 内蔵に常駐 (cloud に無い唯一コピー)。SSD 接続有無に関わらず動く。
 #   - R2 (.local/r2) は容量大 (19G) のため SSD 据え置き。
 #     - SSD 接続時: .local/r2 → SSD への symlink (ローカル高速読み書き)
-#     - SSD 非接続時 (読み取り): symlink が dangle → fetchFromR2 が cloud S3 に自動フォールバック
-#     - SSD 非接続時 (書き込み): symlink dangle だと書込失敗 → 本スクリプトで Mac 内蔵の実 dir に切替
+#     - SSD 非接続時 (読み取り): symlink が dangle → fetchFromR2 が S3 → 公開 R2 URL
+#       (R2_PUBLIC_FETCH_URL / NEXT_PUBLIC_R2_PUBLIC_URL = storage.stats47.jp) に自動フォールバック。
+#       S3 鍵失効後も公開 URL で読める (build スクリプトは R2_PUBLIC_FETCH_URL 設定で binding 試行を回避)
+#     - SSD 非接続時 (書き込み): symlink dangle だと書込失敗 → 本スクリプトで Mac 内蔵の実 dir に切替。
+#       cloud 反映は diff-push-r2 (S3) か push-r2-wrangler.ts (wrangler CLI, S3鍵不要)
 #
 # 使い方:
 #   scripts/dev/local-r2-mode.sh status   # 現在のモード表示

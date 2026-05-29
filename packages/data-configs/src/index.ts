@@ -6,3 +6,9 @@ export {
   listMetricKeysByEntity,
   type MetricMeta,
 } from "./metric-meta";
+export {
+  CATEGORIES,
+  getCategoryName,
+  listCategories,
+  type CategoryMeta,
+} from "./categories";
