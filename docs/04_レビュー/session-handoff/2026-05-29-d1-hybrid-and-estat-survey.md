@@ -10,8 +10,10 @@ tags: [architecture, d1-hybrid, r2, cloud-first, estat-survey, handoff]
 
 別 PC / 別セッションで `git pull` した agent がこの続きを把握するための引き継ぎ。
 
-**結論: 設計は「リモート D1 ハイブリッド」で決定。クラウド完結分の準備ツールは実装・検証済。
-残るは Mac/Cloudflare 認証が必要な D1 立ち上げのみ（runbook 化済）。e-Stat 量産は方針決定待ち。**
+**結論: (1) リモート D1 ハイブリッド設計を採用・準備完了。(2) page-data-batch を本番投入可能形に完成
+（観測値の量産がクラウド完結）。(3) Tier1 ADD-city 18件に city 対応追加・検証済。(4)「2009100000 問題」
+（e-Stat year フルコード）をプロジェクト全体で根治（SSOT正規化＋lint＋CI＋pre-commit）。
+全コミット develop マージ済。残るは Mac/Cloudflare 認証が必要な D1 立ち上げと prod R2 push のみ。**
 
 ## 1. リモート D1 ハイブリッド（採用・準備完了）
 
@@ -42,9 +44,34 @@ wrangler d1 execute stats47 --remote --file=packages/database/seed/d1-seed.sql
 SSDS 全 59 テーブル 7,065 指標と既存 metrics 2,209 件を突き合わせ、**未 metric 化候補 4,232 件**を洗い出し。
 
 - 成果物: `docs/02_実装計画/estat-ranking-candidates/`（README / candidates-all.csv / launch-batch-120.csv）
-- 最優先 Tier 1 = **ADD city（141 件）**: 既存都道府県ランキングの市区町村版（需要実証済・データ存在 spot-check 済）
-- **次フェーズ（metrics/*.ts 生成）は未着手**。「リストを見て方針決定してから」の指示に従い保留。
-  決定が要る点: ① 着手 Tier（Tier1 / launch batch 120）② 産業細分の取捨（総数のみ / 細分も全部）
+- 「ADD city 141件」は差分法の過大計上で、実際は **123件が既に city 対応済・真に pref-only なのは 18件**だった。
+- **Tier1 18件は city 対応を追加済**（§3 参照）。残りの量産（NEW pref 等）は方針決定待ち。
+  決定が要る点: ① 着手 Tier ② 産業細分の取捨（総数のみ / 細分も全部）
+
+## 3. page-data-batch 完成 + Tier1 ADD-city 18件（実装・検証済）
+
+- **page-data-batch を本番投入可能形に完成**（従来は bare 出力で push すると本番が壊れた）:
+  city 取り込み（`shapeForCity` + pref表→city表[廃置分合]解決）/ areaName(マスタjoin) / rank(年ごと値降順) /
+  unit / yearName / 年フィルタ / readAppId は process.env 優先（cloud 互換）。
+  → 観測値量産が `metrics/*.ts → page-data-batch → diff-push-r2` でクラウド完結。
+- **検証**: abandoned-cultivated-land-area で PREF が本番 values.json と完全一致（47/47）、CITY join 漏れゼロ。
+- **Tier1 18件**（事業所数 業種別 13 + 小売/飲食系 5）の entities に "city" 追加。全 18 件 city 生成・PREF 無回帰を検証。
+- ⚠️ **rollout 注意**: entities に city を追加済のため、**main マージ前**に各 metric の cities.json を
+  生成+push すること（`page-data-batch --metric <key>` → `diff-push-r2 --prefix app/stats`）。未 push で deploy すると city view 404。
+- ⚠️ ランキング**ページ**完全公開には item/ai-content/page-cards snapshot（`/sync-snapshots`＝DB）が別途必要 → D1 立ち上げ後。
+
+## 4. 「2009100000 問題」（e-Stat year フルコード）の根治
+
+e-Stat `@time` は 10桁フルコード（`2009100000`）。これを 4桁年に正規化せず config.years/R2 yearCode に
+保存していたため、年フィルタ 0件・年セレクタ崩れが**複数回再発**。発生源〜防御まで一気通貫で封鎖:
+
+- **発生源**: `export-from-d1.ts`（config 生成元）が生 year_code を years 化 → `to4DigitYear` で正規化
+- **SSOT**: フルコードだった config **60件を 4桁に一括移行**
+- **lint**: `validate-metric-years.ts` 新設 + `npm run validate:years --workspace=@stats47/data-configs`
+- **自動化**: pre-commit（`pre-commit-checks.sh §6.5`）+ PR CI（`pr-quality-check.yml`「📅 Metric Years Gate」）
+- **防御**: `page-data-batch` の `inYearRange` も 4桁正規化
+- **規約/agent/skill**: `.claude/rules/estat-api.md`「年の正規化」/ `data-ingester` / `inspect-estat-meta` / `expand-indicators`
+- 新 metric は 4桁年が機械的に強制される（lint/CI が落とす）。time→年は `extractYearCode` を使う。
 
 ## 重要な前提（別 PC で誤解しないために）
 
@@ -54,5 +81,13 @@ SSDS 全 59 テーブル 7,065 指標と既存 metrics 2,209 件を突き合わ�
 
 ## ブランチと commit
 
-- ブランチ: `claude/eager-lovelace-3nxO8`（origin に push 済）
-- 主要 commit は `git log --oneline` で確認（e-Stat 調査 / D1 ハイブリッド準備 / 本整理）
+- ブランチ: `claude/eager-lovelace-3nxO8`（origin push 済 + **develop にマージ済**）。マージ後は削除可。
+- 全成果は **origin/develop に反映済み**。`git log --oneline origin/develop` で確認可。
+- 主要トピック: e-Stat 調査 / D1 ハイブリッド設計・seed準備 / page-data-batch 完成 / Tier1 18件 / year 根治。
+
+## 残タスク（次セッション、要 Mac/Cloudflare 認証 or 承認）
+
+1. **Mac**: `dump-tables-to-seed.ts`（Authored系 dump=Phase0凍結）→ `wrangler d1 create` → migration → seed 投入（runbook: `packages/database/seed/README.md`）
+2. **prod R2 push**（要承認）: Tier1 18件の cities.json を `diff-push-r2` で公開（main マージ前）
+3. **deploy**: develop → main の PR（CI green 確認 → Cloudflare Pages）
+4. **量産継続**: e-Stat 候補から metric 追加（着手 Tier / 産業細分の方針決定後）

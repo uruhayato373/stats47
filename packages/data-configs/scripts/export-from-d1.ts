@@ -168,6 +168,17 @@ function detectEntityKinds(db: Database.Database, key: string): EntityKind[] {
   return kinds.length > 0 ? kinds : ["prefecture"]; // safe fallback
 }
 
+/**
+ * year_code を 4 桁年に正規化 (e-Stat フルタイムコード 2009100000 → 2009)。
+ * これを怠ると config.years にフルコードが混入し「2009100000 問題」が再発する。
+ * 規約: .claude/rules/estat-api.md「年の正規化」。正準: extractYearCode (estat-api)。
+ */
+function to4DigitYear(yearCode: string): number {
+  const n = Number(yearCode);
+  if (!Number.isFinite(n)) return NaN;
+  return n > 9999 ? Number(String(Math.trunc(n)).slice(0, 4)) : n;
+}
+
 /** detect available years from stats_* tables */
 function detectYearSpec(db: Database.Database, key: string, kinds: EntityKind[]): YearSpec {
   const yearsSet = new Set<number>();
@@ -176,7 +187,7 @@ function detectYearSpec(db: Database.Database, key: string, kinds: EntityKind[])
       .prepare(`SELECT DISTINCT year_code FROM stats_prefecture WHERE metric_key = ?`)
       .all(key) as Array<{ year_code: string }>;
     for (const r of rows) {
-      const y = Number(r.year_code);
+      const y = to4DigitYear(r.year_code);
       if (Number.isFinite(y)) yearsSet.add(y);
     }
   }
@@ -185,7 +196,7 @@ function detectYearSpec(db: Database.Database, key: string, kinds: EntityKind[])
       .prepare(`SELECT DISTINCT year_code FROM stats_city WHERE metric_key = ?`)
       .all(key) as Array<{ year_code: string }>;
     for (const r of rows) {
-      const y = Number(r.year_code);
+      const y = to4DigitYear(r.year_code);
       if (Number.isFinite(y)) yearsSet.add(y);
     }
   }
@@ -194,7 +205,7 @@ function detectYearSpec(db: Database.Database, key: string, kinds: EntityKind[])
       .prepare(`SELECT DISTINCT year_code FROM stats_port WHERE metric_key = ?`)
       .all(key) as Array<{ year_code: string }>;
     for (const r of rows) {
-      const y = Number(r.year_code);
+      const y = to4DigitYear(r.year_code);
       if (Number.isFinite(y)) yearsSet.add(y);
     }
   }
