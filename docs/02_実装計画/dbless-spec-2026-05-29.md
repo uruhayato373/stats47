@@ -214,3 +214,25 @@ A (死蔵除去) ──▶ C (Derived エフェメラル化) ──▶ D (観測
   現行 `known-tag-keys.ts` (327件) は stale だが 410 ゲートとしては動作するため当面据置 (クラッシュはしない)。
 - `sync-metrics-cache` の扱いは Phase C と entangled (exporter が D1 metrics を読む間は維持)。即削除は不可。
 - `data-refresh.yml` db:pull/push は全 Derived エフェメラル化 (Phase C) 後。
+
+### Phase C の進捗 (2026-05-29、SSD 接続後)
+
+調査で 13 exporter は均一でなく **3 グループ**と判明 (多くは「使い捨て計算」不要で master の参照先付替えで済む):
+1. **既に R2 から stats 読み** (remotion 3本): 残る D1 依存は prefecture 名称引きのみ。
+2. **既存 master テーブル読み**: master(prefectures)/ges(ports)/blog(articles)/page-cards(pageComponents)/search-index(metrics+articles+categories) → git TS/R2 master へ repoint。
+3. **真の Derived / 破損**: area-profile(area_profiles)/ export-port-statistics(**DROP済 stats_port 読みで破損**)/ ranking-values・normalization(純関数=DB読みなし)。
+
+- ✅ **remotion exporter 群 D1 一掃: 完了** (commit 後続)。`load-prefectures.ts` を git TS master
+  (packages/area prefectures.json) 読みに変更 (D1 と code/name/順序 47件完全一致を検証)。
+  station-passengers / population-yoy-47 / migration-flow から openD1 除去、`master.ts`(prefectures.json を
+  D1 から再生成する exporter)+ `d1-client.ts` 削除、`_shared/paths.ts` に REMOTION_PUBLIC 移設。
+  **検証**: orchestrator --feature all で migration-flow 48 / population-yoy 1 ファイル生成、
+  `git diff apps/remotion/public = 0` (出力バイト同一=挙動保全)。station-passengers は R2 に
+  `station-passengers-annual-total/values.json` 未投入で skip (既存データ欠損、コードは正常動作)。
+- ⚠️ **新発見**: `apps/remotion/scripts/pipeline/render-sns-all.ts` に別の `better-sqlite3` 直 import あり
+  (data exporter ではなく render pipeline)。別スコープとして Phase C 残作業に追加。
+- ⚠️ remotion tsconfig は `include:["src"]` のみで **scripts/ は tsc 対象外**。scripts 検証は tsx 実行で行う。
+- **Phase C 残**: area-profile/city-profile snapshot (area_profiles テーブル←本来 Derived、深い)、
+  export-port-statistics (DROP済 stats_port 読みで破損→R2 port stats へ)、calculate-ranking-values/
+  compute-normalization (純関数の確認のみ)、apps/web scripts (blog/page-cards/search-index/port-stats)、
+  ges generate-port-projects、render-sns-all (better-sqlite3)。
