@@ -17,9 +17,9 @@ export const dentalGuidancePersons: MetricConfig = {
   ],
   "years": {
     "years": [
-      2021100000,
-      2022100000,
-      2023100000,
+      2021,
+      2022,
+      2023,
     ],
   },
   "yearFormat": "fiscal",

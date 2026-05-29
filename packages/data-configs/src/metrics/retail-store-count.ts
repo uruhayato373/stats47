@@ -19,11 +19,11 @@ export const retailStoreCount: MetricConfig = {
   "years": {
     "years": [
       2021,
-      2009100000,
-      2011100000,
-      2014100000,
-      2016100000,
-      2021100000,
+      2009,
+      2011,
+      2014,
+      2016,
+      2021,
     ],
   },
   "yearFormat": "fiscal",

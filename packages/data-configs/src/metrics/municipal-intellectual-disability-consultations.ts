@@ -17,11 +17,11 @@ export const municipalIntellectualDisabilityConsultations: MetricConfig = {
   ],
   "years": {
     "years": [
-      2003100000,
-      2004100000,
-      2005100000,
-      2006100000,
-      2007100000,
+      2003,
+      2004,
+      2005,
+      2006,
+      2007,
     ],
   },
   "yearFormat": "fiscal",
