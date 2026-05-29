@@ -91,3 +91,28 @@ e-Stat `@time` は 10桁フルコード（`2009100000`）。これを 4桁年に
 2. **prod R2 push**（要承認）: Tier1 18件の cities.json を `diff-push-r2` で公開（main マージ前）
 3. **deploy**: develop → main の PR（CI green 確認 → Cloudflare Pages）
 4. **量産継続**: e-Stat 候補から metric 追加（着手 Tier / 産業細分の方針決定後）
+
+---
+
+## 🔁 2026-05-29 後続決定（別セッション `claude/intelligent-turing-CeSpb`）— 設計を「ハイブリッド」に確定
+
+> **このセッションの「リモート D1 ハイブリッド」は破棄されていない。** owner 判断で
+> **「データの“形”で SSOT を使い分けるハイブリッド」**に発展・統合された。正典は
+> **`docs/01_技術設計/18_データ層ハイブリッド設計.md`**（17 はそこへ superseded、§5 の D1 セットアップ手順は有効）。
+
+確定した判定（pull した agent はこれに従う）:
+
+- **設定（低volume・人手・型/review: テーマのチャート定義等）= git TS が SSOT** → seed/export で D1・R2 反映。
+- **関係・運用（横断クエリ・参照整合性・CRUD: page_components / theme_metrics / sns_posts / affiliate_ads / categories/themes）= リモート D1 が SSOT** → exporter で R2。
+- **配信 = R2 JSON（app は R2 のみ読む、不変）**。**集計（area_profiles/相関）= D1 で JOIN → R2**（or エフェメラル）。
+- **リモート D1 の作り直し・CRUD・seed・export・集計は【ローカル(Mac)】で実施**（account_id/wrangler 認証が要る）。
+  **クラウド agent は git TS と R2(S3直接) のみで作業**し、D1 作業はローカルに委譲（詰まったら R2 直接 fallback）。
+
+この決定で更新済:
+- 新正典 `18_データ層ハイブリッド設計.md`、`17` を superseded、`CLAUDE.md` /
+  `.claude/rules/{data-sqlite-ssot,data-storage,branch-workflow,local-environment}.md` / SessionStart hook を整合。
+- page_components 標準フロー: `theme-page-component-additions.ts`(git TS) →
+  `seed-theme-page-components.ts`(D1, ローカル) → `export-page-components-snapshot.ts`(R2)。
+  クラウド fallback = `sync-theme-additions-to-r2.ts`（R2 直接・冪等。次回ローカル seed/export で D1 と一致）。
+
+→ 上記「残タスク 1（D1 立ち上げ）」は**引き続き有効**（ローカルで実施）。設計は 18 を唯一の正典とすること。

@@ -26,18 +26,19 @@ PR は **develop → main の 1 段階のみ**。feature/* → develop は直 me
 - `/deploy` スキルで実行
 - フロー: feature/* で作業 → ローカルで develop に merge → `git push origin develop` → `gh pr create --base main --head develop` → CI green → マージ → main 自動デプロイ → 必要なら `/purge-cdn`
 
-## データ反映フロー（DB レス設計が正典 → `docs/01_技術設計/18_DBレスデータ設計.md`）
+## データ反映フロー（ハイブリッド設計が正典 → `docs/01_技術設計/18_データ層ハイブリッド設計.md`）
 
-**永続 DB は持たない。** 本番は R2 スナップショット配信のみ。データは真実源で3分類して反映する:
+**本番は R2 スナップショット配信のみ。** オーサリング SSOT は形で使い分けて反映する:
 
 ```
-Authored (page_components 等)  : git TS 定義 ──冪等スクリプト──▶ R2 JSON ──▶ 本番配信
+Authored/設定 (チャート定義等)  : git TS 定義 ──seed──▶ リモートD1 ──export──▶ R2 ──▶ 本番配信
+Authored/関係・運用 (page_components 等) : リモートD1 ──exporter──▶ R2 ──▶ 本番配信
 Reference (metrics/articles)   : git TS / article.md ──再生成──▶ R2 snapshot
-Derived (area_profiles/相関)    : R2 観測値 ──エフェメラル計算──▶ R2 snapshot
+Derived (area_profiles/相関)    : リモートD1 で JOIN（or R2観測値をエフェメラル計算）──▶ R2 snapshot
 ```
 
-- Authored の直接反映の雛形: `apps/web/scripts/sync-theme-additions-to-r2.ts`（S3 で read-modify-write、冪等）
-- 従来の `/sync-snapshots`（exporter 群）は移行期は併存可。入力は順次 DB select → R2/TS read へ繋ぎ替える（Phase ③）
+- **リモート D1 の CRUD/seed/export/集計はローカル(Mac)で実施**（認証・インスタンスが要る）。クラウド agent は git TS と R2 直接で作業
+- クラウドで急ぎ反映する fallback の雛形: `apps/web/scripts/sync-theme-additions-to-r2.ts`（S3 で read-modify-write、冪等）。次回ローカルで seed/export を流せば D1 と一致
 - ranking-values（~30K files）の更新は `SKIP_VALUES=1` で他のみ更新し、必要な場合のみフル実行
 - ロールバックは R2 の旧 snapshot ファイルへの上書き push で対応
-- **`db:pull`/`db:push` の SQLite 持ち回りは段階廃止中**（新規実装では使わない）
+- 移行期は `db:pull`/`db:push` 併存可だが**手調整データを書くのはローカル1箇所に固定**（上書き消失防止）

@@ -20,8 +20,8 @@ packages/
 
 ## ストレージ
 
-- **データ層は DB レス設計が正典** → `docs/01_技術設計/18_DBレスデータ設計.md`。永続 DB を持たず、本番は R2 snapshot のみ読む。Authored=R2 JSON / Reference=再生成 / Derived=エフェメラル計算。
-- **ローカルビルド DB (SQLite)**: `packages/database/.data/stats47.sqlite`（移行期に旧 batch が参照する使い捨てキャッシュ。**段階廃止中**）。git 管理外。移行期に旧 exporter が要求する場合のみ `npm run db:pull --workspace=packages/r2-storage` で取得（R2 に無ければ DB 不在で正常）。**新規スクリプトは DB を使わず R2/TS を直接読む。**
+- **データ層は「形で使い分けるハイブリッド」が正典** → `docs/01_技術設計/18_データ層ハイブリッド設計.md`。本番は R2 snapshot のみ読む。設定(低volume・人手)=git TS / 関係・運用=リモート D1 / 配信=R2 / Derived=D1 JOIN or エフェメラル→R2。**リモート D1 の作業はローカル(Mac)、クラウド agent は git TS と R2 直接。**
+- **ローカルビルド DB (SQLite)**: `packages/database/.data/stats47.sqlite`（移行期に旧 batch が参照する使い捨てキャッシュ）。git 管理外。旧 exporter が要求する場合のみ `npm run db:pull --workspace=packages/r2-storage` で取得（R2 に無ければ DB 不在で正常）。リモート D1 立ち上げ(Phase③)後はそちらへ寄せる。
   - これは **Cloudflare D1 サービスではない**。本番は R2 snapshot のみ読み、DB を一切 query しない。
 - **dev server の miniflare**: `next.config.ts` の `initOpenNextCloudflareForDev({ persist: { path: "../../.local/d1" } })` は **R2 dev binding cache** (`.local/d1/r2/stats47/blobs/`) のために残置。`[[d1_databases]]` binding (STATS47_STATIC_DB) は app が read しないため vestigial（miniflare が `.local/d1/.../miniflare-D1DatabaseObject/*.sqlite` を作るが、batch は参照しない）。**`apps/web/.wrangler/state/` は使わない。**
 - **ローカル R2**: `.local/r2/` 配下にシードデータ・ランキングデータ・ブログ記事を配置。
