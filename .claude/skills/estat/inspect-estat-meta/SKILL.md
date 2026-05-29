@@ -66,6 +66,8 @@ node scripts/temp-inspect-meta.mjs <statsDataId>
 2. 出力を分析し、以下を特定:
    - **cat01 コード**: 取得したいカテゴリ（例: `J250502`）
    - **time 形式**: 年コードの形式（`2024000000` or `2024100000` 等）
+     - ⚠️ **metric config の `years` / R2 yearCode には 4 桁年 (`2024`) で入れる**。フルタイムコード
+       (`2024100000`) を転記しない（「2009100000 問題」再発防止。規約: `.claude/rules/estat-api.md`「年の正規化」）
    - **area レベル**: 都道府県は `lvArea=2` / 5桁 `XX000` 形式
    - **tab / cat02〜**: 複数ディメンションがある場合のフィルタ値
 
