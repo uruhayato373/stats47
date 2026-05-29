@@ -14,13 +14,14 @@ import {
   TableRow,
 } from "@stats47/components/atoms/ui/table";
 
+import { fetchPrefDetail } from "../actions";
+
 import type {
   DepopulationMedicalPrefDetail,
   DepopulationMedicalSummary,
 } from "../lib/types";
 import type { TopoJSONTopology } from "@stats47/types";
 
-import { fetchPrefDetail } from "../actions/fetch-pref-detail";
 
 
 

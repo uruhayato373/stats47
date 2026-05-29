@@ -22,7 +22,6 @@ import { prefetchThemeKpiData } from "@/features/stat-charts/services/prefetch-t
 import { AdSenseAd, THEMES_CONTENT } from "@/lib/google-adsense";
 
 import { THEME_SECTION_REGISTRY } from "../config/theme-section-registry";
-
 import {
   generateThemeBreadcrumbStructuredData,
   generateThemePageStructuredData,

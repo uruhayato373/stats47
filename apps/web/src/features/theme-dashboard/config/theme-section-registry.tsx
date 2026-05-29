@@ -1,10 +1,11 @@
+import type { ComponentType } from "react";
+
 import { ThemeDepopulationMedicalSection } from "@/features/depopulation-medical";
 import { ThemeHighwayTimelineSection } from "@/features/highway-history";
 import { ThemeMigrationFlowSection } from "@/features/migration-flow";
 import { ThemeStationPassengersSection } from "@/features/station-passengers";
 import { ThemeSunshineMapSection } from "@/features/sunshine-map";
 
-import type { ComponentType } from "react";
 
 /**
  * テーマダッシュボードに埋め込む GIS マップ section の registry。

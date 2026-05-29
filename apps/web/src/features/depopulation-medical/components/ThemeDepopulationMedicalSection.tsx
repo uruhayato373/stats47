@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import {
   fetchDepopulationMedicalBase,
   type DepopulationMedicalBase,
-} from "../actions/fetch-base";
+} from "../actions";
 
 import { DepopulationMedicalMapClient } from "./DepopulationMedicalMapClient";
 

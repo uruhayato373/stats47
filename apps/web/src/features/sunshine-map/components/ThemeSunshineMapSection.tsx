@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 
-import { fetchSunshineMapMeta } from "../actions/fetch-meta";
+import { fetchSunshineMapMeta } from "../actions";
 
 import { SunshineMapClient } from "./SunshineMapClient";
 
