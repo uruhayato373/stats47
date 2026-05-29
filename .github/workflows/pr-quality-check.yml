@@ -64,6 +64,14 @@ jobs:
           echo "✅ apps/web/src に D1 間接的 import なし"
         continue-on-error: false
 
+      - name: 📅 Metric Years Gate
+        run: |
+          # metric config の years がフルタイムコード (2009100000) でなく 4桁年であることを担保。
+          # 「2009100000 問題」(年フィルタ 0件・年セレクタ崩れ) の再発防止。
+          # 規約: .claude/rules/estat-api.md「年の正規化」
+          npm run validate:years --workspace=@stats47/data-configs
+        continue-on-error: false
+
       - name: 📐 Type Check
         run: npm run type-check
         env:
