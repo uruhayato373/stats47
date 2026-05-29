@@ -1,0 +1,91 @@
+<!-- data-source: telework-rate-prefecture-rankings.json | generated: 2026-05-29T22:26:57.791Z -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 480" width="680" height="480" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" role="img" aria-label="テレワーク実施率 上位10・下位10">
+  <rect width="680" height="480" fill="#fafafa" rx="8"/>
+  <text x="340" y="24" text-anchor="middle" font-size="16" font-weight="bold" fill="#222">テレワーク実施率 上位10・下位10</text>
+  <text x="340" y="42" text-anchor="middle" font-size="11" fill="#666">2022年 就業構造基本調査</text>
+  <text x="227.5" y="54" text-anchor="middle" font-size="12" font-weight="bold" fill="#1565c0">上位 10</text>
+  <text x="542.5" y="54" text-anchor="middle" font-size="12" font-weight="bold" fill="#c62828">下位 10</text>
+  
+      <text x="84" y="82" text-anchor="end" font-size="11" fill="#333">東京都</text>
+      <rect x="90" y="63" width="195" height="30" fill="#1565c0" rx="2"/>
+      <text x="289" y="82" font-size="10" fill="#333">39.8％</text>
+    
+      <text x="84" y="118" text-anchor="end" font-size="11" fill="#333">神奈川県</text>
+      <rect x="90" y="99" width="146.98492462311557" height="30" fill="#1976d2" rx="2"/>
+      <text x="240.98492462311557" y="118" font-size="10" fill="#333">30％</text>
+    
+      <text x="84" y="154" text-anchor="end" font-size="11" fill="#333">千葉県</text>
+      <rect x="90" y="135" width="117.09798994974874" height="30" fill="#1e88e5" rx="2"/>
+      <text x="211.09798994974875" y="154" font-size="10" fill="#333">23.9％</text>
+    
+      <text x="84" y="190" text-anchor="end" font-size="11" fill="#333">埼玉県</text>
+      <rect x="90" y="171" width="106.31909547738692" height="30" fill="#2196f3" rx="2"/>
+      <text x="200.31909547738692" y="190" font-size="10" fill="#333">21.7％</text>
+    
+      <text x="84" y="226" text-anchor="end" font-size="11" fill="#333">大阪府</text>
+      <rect x="90" y="207" width="96.52010050251256" height="30" fill="#42a5f5" rx="2"/>
+      <text x="190.52010050251255" y="226" font-size="10" fill="#333">19.7％</text>
+    
+      <text x="84" y="262" text-anchor="end" font-size="11" fill="#333">愛知県</text>
+      <rect x="90" y="243" width="88.68090452261308" height="30" fill="#64b5f6" rx="2"/>
+      <text x="182.68090452261308" y="262" font-size="10" fill="#333">18.1％</text>
+    
+      <text x="84" y="298" text-anchor="end" font-size="11" fill="#333">兵庫県</text>
+      <rect x="90" y="279" width="86.7211055276382" height="30" fill="#90caf9" rx="2"/>
+      <text x="180.7211055276382" y="298" font-size="10" fill="#333">17.7％</text>
+    
+      <text x="84" y="334" text-anchor="end" font-size="11" fill="#333">京都府</text>
+      <rect x="90" y="315" width="85.74120603015076" height="30" fill="#1565c0" rx="2"/>
+      <text x="179.74120603015075" y="334" font-size="10" fill="#333">17.5％</text>
+    
+      <text x="84" y="370" text-anchor="end" font-size="11" fill="#333">奈良県</text>
+      <rect x="90" y="351" width="77.41206030150755" height="30" fill="#1976d2" rx="2"/>
+      <text x="171.41206030150755" y="370" font-size="10" fill="#333">15.8％</text>
+    
+      <text x="84" y="406" text-anchor="end" font-size="11" fill="#333">福岡県</text>
+      <rect x="90" y="387" width="75.94221105527639" height="30" fill="#1e88e5" rx="2"/>
+      <text x="169.9422110552764" y="406" font-size="10" fill="#333">15.5％</text>
+    
+  
+      <text x="399" y="82" text-anchor="end" font-size="11" fill="#333">秋田県</text>
+      <rect x="405" y="63" width="31.356783919597994" height="30" fill="#c62828" rx="2"/>
+      <text x="440.356783919598" y="82" font-size="10" fill="#333">6.4％</text>
+    
+      <text x="399" y="118" text-anchor="end" font-size="11" fill="#333">島根県</text>
+      <rect x="405" y="99" width="34.78643216080402" height="30" fill="#d32f2f" rx="2"/>
+      <text x="443.786432160804" y="118" font-size="10" fill="#333">7.1％</text>
+    
+      <text x="399" y="154" text-anchor="end" font-size="11" fill="#333">青森県</text>
+      <rect x="405" y="135" width="35.27638190954774" height="30" fill="#e53935" rx="2"/>
+      <text x="444.27638190954775" y="154" font-size="10" fill="#333">7.2％</text>
+    
+      <text x="399" y="190" text-anchor="end" font-size="11" fill="#333">鹿児島県</text>
+      <rect x="405" y="171" width="37.23618090452261" height="30" fill="#ef5350" rx="2"/>
+      <text x="446.2361809045226" y="190" font-size="10" fill="#333">7.6％</text>
+    
+      <text x="399" y="226" text-anchor="end" font-size="11" fill="#333">高知県</text>
+      <rect x="405" y="207" width="37.23618090452261" height="30" fill="#e57373" rx="2"/>
+      <text x="446.2361809045226" y="226" font-size="10" fill="#333">7.6％</text>
+    
+      <text x="399" y="262" text-anchor="end" font-size="11" fill="#333">和歌山県</text>
+      <rect x="405" y="243" width="37.72613065326633" height="30" fill="#ef9a9a" rx="2"/>
+      <text x="446.72613065326635" y="262" font-size="10" fill="#333">7.7％</text>
+    
+      <text x="399" y="298" text-anchor="end" font-size="11" fill="#333">鳥取県</text>
+      <rect x="405" y="279" width="38.21608040201005" height="30" fill="#c62828" rx="2"/>
+      <text x="447.21608040201005" y="298" font-size="10" fill="#333">7.8％</text>
+    
+      <text x="399" y="334" text-anchor="end" font-size="11" fill="#333">山形県</text>
+      <rect x="405" y="315" width="38.706030150753776" height="30" fill="#d32f2f" rx="2"/>
+      <text x="447.7060301507538" y="334" font-size="10" fill="#333">7.9％</text>
+    
+      <text x="399" y="370" text-anchor="end" font-size="11" fill="#333">大分県</text>
+      <rect x="405" y="351" width="39.19597989949749" height="30" fill="#e53935" rx="2"/>
+      <text x="448.1959798994975" y="370" font-size="10" fill="#333">8％</text>
+    
+      <text x="399" y="406" text-anchor="end" font-size="11" fill="#333">岩手県</text>
+      <rect x="405" y="387" width="39.19597989949749" height="30" fill="#ef5350" rx="2"/>
+      <text x="448.1959798994975" y="406" font-size="10" fill="#333">8％</text>
+    
+  <text x="340" y="462" text-anchor="middle" font-size="10" fill="#888">凡例: 青系=上位 / 赤系=下位</text>
+</svg>

@@ -1,0 +1,117 @@
+name: 📝 Publish Blog Article (docs/21 draft → R2)
+
+# 完全DBレス / cloud-first のブログ公開パイプライン。
+# docs/21_ブログ記事原稿/<slug> のドラフトを R2 cloud (app/blog/<slug>) に publish し、
+# blog snapshot (all.json) を再生成 + push する。ローカル R2 creds 不要 (GitHub Secrets 使用)。
+#
+# 使い方:
+#   gh workflow run publish-blog.yml -f slug=<slug>                      # dry-run (既定: push しない)
+#   gh workflow run publish-blog.yml -f slug=<slug> -f dry_run=false     # 本番公開
+#   gh workflow run publish-blog.yml -f slug=<slug> -f published_at=2026-05-30 -f dry_run=false
+#
+# 安全性:
+#   - factual gate (ci-factual-gate.mjs) を通過しないと publish しない (AI記事の数値捏造防止)
+#   - export-blog-snapshot は union 方式 (配信中 all.json ∪ ローカル) で既存記事を消さない
+#   - diff-push-r2 --prefix app/blog は staged ファイルのみ push (削除ロジック無し)
+
+on:
+  workflow_dispatch:
+    inputs:
+      slug:
+        description: "docs/21_ブログ記事原稿/<slug> の slug"
+        required: true
+      published_at:
+        description: "publishedAt (YYYY-MM-DD、空なら本日 UTC)"
+        required: false
+        default: ""
+      dry_run:
+        description: "true: push せず検証のみ / false: 本番公開"
+        required: false
+        default: "true"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: publish-blog
+  cancel-in-progress: false
+
+env:
+  # R2 cloud read+write (CLOUDFLARE_* secrets から導出)
+  R2_S3_ENDPOINT: https://${{ secrets.CLOUDFLARE_ACCOUNT_ID }}.r2.cloudflarestorage.com
+  R2_ACCESS_KEY_ID: ${{ secrets.CLOUDFLARE_R2_ACCESS_KEY_ID }}
+  R2_SECRET_ACCESS_KEY: ${{ secrets.CLOUDFLARE_R2_SECRET_ACCESS_KEY }}
+  CLOUDFLARE_R2_BUCKET_NAME: stats47
+  R2_PUBLIC_FETCH_URL: https://storage.stats47.jp
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: 🧰 Checkout develop
+        uses: actions/checkout@v4
+        with:
+          ref: develop
+          fetch-depth: 1
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: ✅ Validate draft exists
+        run: |
+          SLUG="${{ github.event.inputs.slug }}"
+          test -f "docs/21_ブログ記事原稿/$SLUG/article.md" \
+            || { echo "❌ ドラフトが無い: docs/21_ブログ記事原稿/$SLUG/article.md"; exit 1; }
+          # 既に公開済みなら二重公開しない (R2 に既存)
+          echo "draft OK: $SLUG"
+
+      - name: 🔎 Factual gate (数値捏造・rank 不整合の検出)
+        run: node .claude/scripts/blog/ci-factual-gate.mjs "${{ github.event.inputs.slug }}"
+
+      - name: 🗓 Stage draft → app/blog + set publishedAt
+        run: |
+          SLUG="${{ github.event.inputs.slug }}"
+          PD="${{ github.event.inputs.published_at }}"
+          [ -z "$PD" ] && PD="$(date -u +%Y-%m-%d)"
+          mkdir -p ".local/r2/app/blog/$SLUG"
+          cp -R "docs/21_ブログ記事原稿/$SLUG/." ".local/r2/app/blog/$SLUG/"
+          # 公開フォルダ側の publishedAt を設定 (git のドラフトは触らない)
+          perl -i -pe "s/^publishedAt:.*/publishedAt: $PD/" ".local/r2/app/blog/$SLUG/article.md"
+          echo "publishedAt=$PD set for $SLUG"
+          grep -m1 '^publishedAt:' ".local/r2/app/blog/$SLUG/article.md"
+
+      - name: 🧮 Regenerate blog snapshot (all.json, union 方式で既存保持)
+        run: NODE_OPTIONS='--conditions react-server' npx tsx apps/web/scripts/export-blog-snapshot.ts
+
+      - name: 📤 Push to R2 cloud (app/blog prefix のみ)
+        run: |
+          if [ "${{ github.event.inputs.dry_run }}" = "false" ]; then
+            echo "本番 push: app/blog prefix"
+            npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix app/blog
+          else
+            echo "dry-run: push せず差分のみ表示"
+            npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix app/blog --dry-run
+          fi
+
+      - name: ✅ Verify live (本番公開時のみ)
+        if: ${{ github.event.inputs.dry_run == 'false' }}
+        run: |
+          SLUG="${{ github.event.inputs.slug }}"
+          sleep 5
+          code=$(curl -s -o /dev/null -w "%{http_code}" -A "Mozilla/5.0 (compatible; Googlebot/2.1)" "https://stats47.jp/blog/$SLUG")
+          echo "live: https://stats47.jp/blog/$SLUG → HTTP $code"
+          [ "$code" = "200" ] || echo "⚠️ まだ 200 でない (ISR/cache 反映待ちの可能性)。数分後に再確認を"
+
+      - name: 📝 Summary
+        run: |
+          echo "### Publish Blog: ${{ github.event.inputs.slug }}" >> $GITHUB_STEP_SUMMARY
+          echo "- dry_run: ${{ github.event.inputs.dry_run }}" >> $GITHUB_STEP_SUMMARY
+          echo "- factual gate: passed" >> $GITHUB_STEP_SUMMARY
+          echo "- 公開後: docs/21 のドラフトを削除すること (lifecycle / check-published-drafts.cjs が検出)" >> $GITHUB_STEP_SUMMARY
