@@ -15,11 +15,11 @@ tags: [実装計画, phase-1]
 <!-- 元ファイル: cities-revival-plan.md -->
 
 
-# 市区町村ページ復活戦略 (100x Phase 1 主軸)
+## 市区町村ページ復活戦略 (100x Phase 1 主軸)
 
 > P0-CITIES-DIAG の成果物。100倍 PV 戦略 Phase 1 (W29 〜 W44) の中核投資判断材料。
 
-## Executive Summary
+### Executive Summary
 
 - **資産**: 2,701 市区町村 × 162 metrics = 186 万行の統計データが D1 にある
 - **現状**: 25,785 URL が公開済みだが GSC indexed **21 / 25,785 (0.08%)**、impressions 33、clicks 0
@@ -28,9 +28,9 @@ tags: [実装計画, phase-1]
 
 ---
 
-## 1. 現状診断 (2026-W21 実測)
+### 1. 現状診断 (2026-W21 実測)
 
-### 1.1 D1 のデータ状況
+#### 1.1 D1 のデータ状況
 
 | テーブル | 行数 | 内容 |
 |---|---|---|
@@ -39,14 +39,14 @@ tags: [実装計画, phase-1]
 | city × metric カバレッジ | 2,701 × 162 = ~437,562 | 1 市につき平均 692 行 (複数年度含む) |
 | `area_profiles` (city rows) | **0** | 県のみ 18,460 行、city profile 未生成 |
 
-### 1.2 既存ページ実装
+#### 1.2 既存ページ実装
 
 | ファイル | 機能 | 問題点 |
 |---|---|---|
 | `apps/web/src/app/areas/[areaCode]/cities/[cityCode]/page.tsx` | 市町村 top | h1 + サブタイトル + カテゴリナビのみ。**統計データ表示 0**。`generateStaticParams() returns []` |
 | `apps/web/src/app/areas/[areaCode]/cities/[cityCode]/[categoryKey]/page.tsx` | 市町村×カテゴリ | AreaDashboardSection でチャート表示。**こちらは内容あり** |
 
-### 1.3 R2 の状況
+#### 1.3 R2 の状況
 
 | キー | 状態 |
 |---|---|
@@ -54,7 +54,7 @@ tags: [実装計画, phase-1]
 | `app/areas/{prefCode}/cities/{cityCode}/profile.json` | ❌ 不存在 (本提案で生成) |
 | `app/areas/{prefCode}/cities/{cityCode}/{categoryKey}/*.json` | ✅ 部分的に存在 (city-category subpage 用) |
 
-### 1.4 GSC 状況 (2026-W21 snapshot)
+#### 1.4 GSC 状況 (2026-W21 snapshot)
 
 - 市区町村 URL: GSC に出ているのは **21 件**、impressions 33、clicks 0
 - 平均 impressions/URL = 1.5/週
@@ -64,15 +64,15 @@ tags: [実装計画, phase-1]
 
 ---
 
-## 2. 復活戦略
+### 2. 復活戦略
 
-### 2.1 基本方針
+#### 2.1 基本方針
 
 > **「データ表示 + SSG 化 + sitemap 段階追加」の 3 本柱で、Top 500 都市を 4 週間で indexed 化する**
 
 3 つの柱を同時並行で進めるのではなく、**1 → 2 → 3 を順次** 実行。1 で結果が出るまで 2 は本格着手しない (リスク管理: 低品質ページの大量公開で site-wide ranking を下げないため)。
 
-### 2.2 段階導入計画 (Phase 1 内)
+#### 2.2 段階導入計画 (Phase 1 内)
 
 | Stage | 期間 | 対象都市 | sitemap | 検証指標 | GO/NO-GO |
 |---|---|---|---|---|---|
@@ -82,7 +82,7 @@ tags: [実装計画, phase-1]
 
 S1 で indexed 率 60% 達成失敗の場合: 品質テンプレを再設計、S2 は遅延。
 
-### 2.3 品質テンプレート (各 city page の必須要素)
+#### 2.3 品質テンプレート (各 city page の必須要素)
 
 city profile ページ (`/areas/{prefCode}/cities/{cityCode}`) に以下を順に配置:
 
@@ -117,7 +117,7 @@ city profile ページ (`/areas/{prefCode}/cities/{cityCode}`) に以下を順�
 - 内部リンク ≥ 10 (parent / siblings / categories / rankings)
 - structured data: `BreadcrumbList`, `Place`, `Dataset`
 
-### 2.4 R2 キーパス設計
+#### 2.4 R2 キーパス設計
 
 | データ | R2 キー | 生成ソース |
 |---|---|---|
@@ -125,7 +125,7 @@ city profile ページ (`/areas/{prefCode}/cities/{cityCode}`) に以下を順�
 | city ↔ city 比較データ (類似都市) | `app/areas/{prefCode}/cities/{cityCode}/similar.json` | 同県内 + 人口近似で算出 |
 | 既存 (city-category) | `app/areas/{prefCode}/cities/{cityCode}/{categoryKey}/...` | 既存維持 |
 
-### 2.5 batch service 設計
+#### 2.5 batch service 設計
 
 既存の `packages/area-profile/src/services/run-batch-area-profile.ts` を拡張:
 
@@ -142,7 +142,7 @@ city profile ページ (`/areas/{prefCode}/cities/{cityCode}`) に以下を順�
 
 実行コマンド: `npm run batch:city --workspace=@stats47/area-profile`
 
-### 2.6 R2 export 設計
+#### 2.6 R2 export 設計
 
 既存の `packages/area-profile/src/exporters/area-profile-snapshot.ts` を拡張:
 
@@ -153,7 +153,7 @@ city profile ページ (`/areas/{prefCode}/cities/{cityCode}`) に以下を順�
 // - 既存 prefecture export とは別の export 関数として呼び分け
 ```
 
-### 2.7 page.tsx 改修
+#### 2.7 page.tsx 改修
 
 `apps/web/src/app/areas/[areaCode]/cities/[cityCode]/page.tsx`:
 
@@ -175,7 +175,7 @@ const profile = await readCityProfileFromR2(prefCode, cityCode);
 //    既存 AreaProfilePageClient を再利用 (componentが prefecture/city 両対応)
 ```
 
-### 2.8 sitemap.ts 改修
+#### 2.8 sitemap.ts 改修
 
 `apps/web/src/app/sitemap.ts`:
 
@@ -195,7 +195,7 @@ function getCitiesToInclude(): string[] {
 }
 ```
 
-### 2.9 内部リンク強化
+#### 2.9 内部リンク強化
 
 - **parent 都道府県ページ**: `/areas/{prefCode}` に「主要都市の統計」セクション追加 (5-10 都市へリンク)
 - **city-level ranking ページ**: `/ranking/{cityRankingKey}` (例: cpi-regional-difference-index-food-51cities100) のテーブルから city pages へリンク (今日の RankingDataTable 変更で既に対応済)
@@ -203,15 +203,15 @@ function getCitiesToInclude(): string[] {
 
 ---
 
-## 3. 想定効果 (Phase 1 ×4 の主要寄与)
+### 3. 想定効果 (Phase 1 ×4 の主要寄与)
 
-### 3.1 ベース仮説
+#### 3.1 ベース仮説
 
 - **[仮説]** Stage S3 (全 2,701 都市) 完了で indexed 1,200-1,500 件 (60% 達成)
 - **[仮説]** 1 indexed URL あたり月 5-10 PV (city × statistic ニッチクエリ流入)
 - → **月 +6,000 〜 +15,000 PV** 追加
 
-### 3.2 Phase 1 全体への寄与
+#### 3.2 Phase 1 全体への寄与
 
 | 寄与源 | 月 PV 追加 |
 |---|---|
@@ -222,7 +222,7 @@ function getCitiesToInclude(): string[] {
 
 Phase 1 目標 38K → 150K (+112K) の **10-25% をこの施策で確保**。
 
-### 3.3 根拠データ
+#### 3.3 根拠データ
 
 - /blog インデックス率 78% を上限と仮定 → 2,701 × 0.6 = 1,620 程度が現実的上限
 - 「東京都 渋谷区 統計」「札幌市 人口」など city + 統計クエリは検索ボリュームが堅実
@@ -230,7 +230,7 @@ Phase 1 目標 38K → 150K (+112K) の **10-25% をこの施策で確保**。
 
 ---
 
-## 4. リスクと対処
+### 4. リスクと対処
 
 | リスク | 影響 | 対処 |
 |---|---|---|
@@ -243,7 +243,7 @@ Phase 1 目標 38K → 150K (+112K) の **10-25% をこの施策で確保**。
 
 ---
 
-## 5. 完了判定基準 (Phase 1 全体での Cities revival)
+### 5. 完了判定基準 (Phase 1 全体での Cities revival)
 
 - [ ] Stage S1 完了: 80 都市が SSG 化 + sitemap 追加 + 4 週後 indexed ≥ 50
 - [ ] Stage S2 完了: 500 都市が SSG 化 + 8 週後 indexed ≥ 250
@@ -253,7 +253,7 @@ Phase 1 目標 38K → 150K (+112K) の **10-25% をこの施策で確保**。
 
 ---
 
-## 6. 実装ロードマップ (Phase 1 W29 〜 W44)
+### 6. 実装ロードマップ (Phase 1 W29 〜 W44)
 
 | Week | 作業 | 成果物 |
 |---|---|---|
@@ -269,7 +269,7 @@ Phase 1 目標 38K → 150K (+112K) の **10-25% をこの施策で確保**。
 
 ---
 
-## 7. 関連 TODO の更新
+### 7. 関連 TODO の更新
 
 本設計書完成により、以下の改善ログ TODO を更新:
 
@@ -278,7 +278,7 @@ Phase 1 目標 38K → 150K (+112K) の **10-25% をこの施策で確保**。
 
 ---
 
-## 8. 補足: 今日の area-profile rank=0 修正との整合性
+### 8. 補足: 今日の area-profile rank=0 修正との整合性
 
 - 2026-05-23 デプロイした area-profile 修正 (`extract-strengths-and-weaknesses` の rank>=1 フィルタ) は **prefecture / city 両対応**
 - city profile batch を実装する際、同じ extract 関数を使うため、rank=0 排除は自動的に適用される
@@ -286,7 +286,7 @@ Phase 1 目標 38K → 150K (+112K) の **10-25% をこの施策で確保**。
 
 ---
 
-## 関連ドキュメント
+### 関連ドキュメント
 
 - 親計画: `docs/02_実装計画/100x-pv-strategy.md` Phase 1
 - 既存 prefecture profile 実装: `packages/area-profile/`
@@ -300,13 +300,13 @@ Phase 1 目標 38K → 150K (+112K) の **10-25% をこの施策で確保**。
 <!-- 元ファイル: metrics-expansion-roadmap.md -->
 
 
-# 指標拡張ロードマップ (Phase 1 着手前準備)
+## 指標拡張ロードマップ (Phase 1 着手前準備)
 
 > 100x Phase 1 (W29-W44) 着手前の必須準備事項。`100x-pv-strategy.md` §「Phase 1 着手前に決めること」の第 3 項目。
 >
 > 1,994 → 5,000 metrics (+3,006) を分野別に分解し、e-Stat 未登録の主要調査リストを作る。
 
-## Context
+### Context
 
 2026-W21 時点の現状:
 
@@ -344,7 +344,7 @@ total active metrics: 1,994
 
 ---
 
-## 目標分布 (1,994 → 5,000)
+### 目標分布 (1,994 → 5,000)
 
 カテゴリ別の expansion target:
 
@@ -371,7 +371,7 @@ total active metrics: 1,994
 
 ---
 
-## Phase 1 内の Stage 分け (W29-W44, 16 週間)
+### Phase 1 内の Stage 分け (W29-W44, 16 週間)
 
 各 Stage で 750 metrics 追加、4 Stage で 3,000 達成。
 
@@ -392,9 +392,9 @@ total active metrics: 1,994
 
 ---
 
-## 主要 e-Stat 調査リスト (未登録 / 部分登録)
+### 主要 e-Stat 調査リスト (未登録 / 部分登録)
 
-### 高優先 (Phase 1 S1 で着手)
+#### 高優先 (Phase 1 S1 で着手)
 
 | 調査ID/URL | 調査名 | 想定 metrics 数 | 担当カテゴリ |
 |---|---|---|---|
@@ -413,7 +413,7 @@ total active metrics: 1,994
 | 00601020 | 観光統計 (インバウンド国別) | 80 | tourism |
 | 00601100 | 宿泊旅行統計調査 (詳細) | 60 | tourism |
 
-### 中優先 (S2-S3)
+#### 中優先 (S2-S3)
 
 | 調査ID/URL | 調査名 | 想定 metrics 数 | 担当カテゴリ |
 |---|---|---|---|
@@ -427,7 +427,7 @@ total active metrics: 1,994
 | 00200524 | 国民生活基礎調査 (詳細) | 60 | population |
 | 00500502 | 住宅・土地統計調査 (詳細) | 80 | construction |
 
-### 低優先 (S4)
+#### 低優先 (S4)
 
 | 調査ID/URL | 調査名 | 想定 metrics 数 | 担当カテゴリ |
 |---|---|---|---|
@@ -439,9 +439,9 @@ total active metrics: 1,994
 
 ---
 
-## 実装フロー (各 Stage 共通)
+### 実装フロー (各 Stage 共通)
 
-### 1. e-Stat 調査 ID の特定
+#### 1. e-Stat 調査 ID の特定
 
 ```bash
 # 既存スキル使用
@@ -449,11 +449,11 @@ total active metrics: 1,994
 /inspect-estat-meta <stats_data_id>
 ```
 
-### 2. metrics 候補リスト作成
+#### 2. metrics 候補リスト作成
 
 `docs/02_実装計画/stages/S1-candidates.md` 等に Stage 別の候補リスト (調査 ID, metric_key 候補名, 期待単位, ranking direction) を文書化。
 
-### 3. metrics 登録 (Phase 6/7 後の新フロー)
+#### 3. metrics 登録 (Phase 6/7 後の新フロー)
 
 ```bash
 # 1 metric ずつ
@@ -466,7 +466,7 @@ npm run build:registry --workspace=packages/data-configs
 
 batch 登録: TS-config を Stage 単位 (例 S1 で 30 ファイル) 一括追加 + 上記 (2)(3) 1 回。
 
-### 4. ranking values 取得 + R2 反映
+#### 4. ranking values 取得 + R2 反映
 
 ```bash
 /page-data-batch                       # 全 metrics の R2 観測値投入 (TS-config registry walk)
@@ -474,7 +474,7 @@ batch 登録: TS-config を Stage 単位 (例 S1 で 30 ファイル) 一括追�
 /sync-snapshots                        # 派生 snapshot 全更新
 ```
 
-### 5. 効果計測 (Stage 完了 4 週後)
+#### 5. 効果計測 (Stage 完了 4 週後)
 
 ```bash
 # 追加 metrics の GSC impressions/clicks 変化を抽出
@@ -483,7 +483,7 @@ node .claude/scripts/gsc/measure-new-metrics-impact.mjs --stage S1 --week-before
 
 ---
 
-## 想定効果 (Phase 1 全体の倍率 ×4 への寄与)
+### 想定効果 (Phase 1 全体の倍率 ×4 への寄与)
 
 Phase 1 の主軸 3 本柱のうち、本施策の寄与:
 
@@ -505,7 +505,7 @@ Phase 1 全体目標 38K → 150K (+112K) のうち **50-100% を本施策で確
 
 ---
 
-## リスクと対処
+### リスクと対処
 
 | リスク | 影響 | 対処 |
 |---|---|---|
@@ -517,7 +517,7 @@ Phase 1 全体目標 38K → 150K (+112K) のうち **50-100% を本施策で確
 
 ---
 
-## 完了判定基準 (Phase 1 終了時)
+### 完了判定基準 (Phase 1 終了時)
 
 - [ ] 全 17 カテゴリで目標 metrics 数を達成
 - [ ] 合計 metrics 5,000 超え
@@ -527,7 +527,7 @@ Phase 1 全体目標 38K → 150K (+112K) のうち **50-100% を本施策で確
 
 ---
 
-## Phase 0 で実施する準備 (本ドキュメント以外に必要なもの)
+### Phase 0 で実施する準備 (本ドキュメント以外に必要なもの)
 
 1. **inspect-estat-meta スキルの拡張**: 「未登録の主要調査リスト」を出力する機能追加
 2. **batch-register-metrics スクリプト**: 1 stage = 1 コマンドで一括登録
@@ -537,7 +537,7 @@ Phase 1 全体目標 38K → 150K (+112K) のうち **50-100% を本施策で確
 
 ---
 
-## 関連ドキュメント
+### 関連ドキュメント
 
 - 親計画: `docs/02_実装計画/100x-pv-strategy.md` Phase 1
 - 兄弟計画: `docs/02_実装計画/cities-revival-plan.md` (Phase 1 のもう 1 つの主軸)
@@ -552,11 +552,11 @@ Phase 1 全体目標 38K → 150K (+112K) のうち **50-100% を本施策で確
 <!-- 元ファイル: migration-flow-sns-automation.md -->
 
 
-# Migration-flow SNS 自動化 (A+B+C 3 階層)
+## Migration-flow SNS 自動化 (A+B+C 3 階層)
 
 47 都道府県 migration-flow 動画を Instagram + X に継続投稿するための自動化設計。
 
-## 3 階層の役割
+### 3 階層の役割
 
 | Tier | 周期 | 内容 | 投稿件数/回 | algo 影響 |
 |---|---|---|---|---|
@@ -566,13 +566,13 @@ Phase 1 全体目標 38K → 150K (+112K) のうち **50-100% を本施策で確
 
 合計: **年間 ~150 件** = 月 12-15 件 = X/IG 両方とも安全な投稿頻度。
 
-## A. 年次 Full Refresh
+### A. 年次 Full Refresh
 
-### Trigger
+#### Trigger
 - `cron: "0 2 20 1 *"` → 毎年 1/20 11:00 JST
 - e-Stat の住基台帳人口移動報告は毎年 1月後半公開、発表後 1 週間程度で反映
 
-### Pipeline
+#### Pipeline
 1. e-Stat API から最新年データ取得 (`scripts/fetch-migration-flow.ts` 拡張)
 2. `pref-net-2025.ts` を新年度版に上書き
 3. Remotion で portrait (IG) + landscape (X) を 47 県分 render
@@ -582,16 +582,16 @@ Phase 1 全体目標 38K → 150K (+112K) のうち **50-100% を本施策で確
 7. X: 47 件 1-2 日で投稿
 8. D1 `sns_posts` + publish log 自動更新
 
-### 冪等性
+#### 冪等性
 - 投稿ログで既投稿 slug 自動スキップ
 - 同年内に複数回 fire しても無害 (年 1 回でも data 同じ)
 
-## B. 月次 ハイライト (TOP 5 変動県)
+### B. 月次 ハイライト (TOP 5 変動県)
 
-### Trigger
+#### Trigger
 - `cron: "0 3 1 * *"` → 毎月 1日 12:00 JST
 
-### コンテンツ案
+#### コンテンツ案
 1. **「先月の純移動 TOP 5 / BOTTOM 5」carousel**
    - 月次データの場合: e-Stat の月次値を使用
    - 月次データなしの場合: 年累計の変化率を使用
@@ -600,33 +600,33 @@ Phase 1 全体目標 38K → 150K (+112K) のうち **50-100% を本施策で確
 3. **「東京一極集中、〇〇月の度合いは?」**
    - 東京の inflow を時系列で
 
-### Pipeline (skeleton)
+#### Pipeline (skeleton)
 1. データ取得 + ハイライト判定 (script: `pick-monthly-highlight.ts`)
 2. Remotion で highlight composition render
 3. caption 生成 (テンプレ + データ差し込み)
 4. IG / X 投稿
 
-## C. 週次 深掘り (1県/週)
+### C. 週次 深掘り (1県/週)
 
-### Trigger
+#### Trigger
 - `cron: "0 3 * * 1"` → 毎週月曜 12:00 JST
 
-### ローテーション
+#### ローテーション
 - 52 週 × 1 県 / 週で **年間 47 県を全カバー (+ 余分の 5 週)**
 - カバー順序: 当週 W番号 % 47 で順番に
 - 既投稿週は skip、未カバーを優先
 
-### コンテンツ
+#### コンテンツ
 - 1 県の migration-flow 動画 (既存 mf-portrait/{NN}.mp4 流用)
 - caption は「今週の県: 〇〇県」フォーマット
 - 既存 portrait 動画を使う or 新規 cut
 
-### Pipeline
+#### Pipeline
 1. 今週カバーする県を決定 (週次ローテーション state)
 2. caption 生成
 3. IG + X 投稿
 
-## 既存資産
+### 既存資産
 
 | 資産 | 用途 |
 |---|---|
@@ -638,7 +638,7 @@ Phase 1 全体目標 38K → 150K (+112K) のうち **50-100% を本施策で確
 | `post-instagram.ts` | IG 投稿 (Graph API) |
 | `instagram-mf-day2.yml` | 1-shot cron パターン |
 
-## Phase
+### Phase
 
 | Phase | 内容 | 状態 |
 |---|---|---|
@@ -648,7 +648,7 @@ Phase 1 全体目標 38K → 150K (+112K) のうち **50-100% を本施策で確
 | Phase 4 | C の週次ローテーション state + 投稿 | TODO |
 | Phase 5 | 効果計測 (engagement rate / follower growth) | TODO |
 
-## 関連
+### 関連
 
 - 既存投稿実績: `.claude/state/metrics/sns/instagram-publish-log.csv`
 - 競合分析: `project_competitor_riskmap_jp.md` (1-2件/日 がベスト pace)

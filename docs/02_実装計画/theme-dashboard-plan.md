@@ -15,14 +15,14 @@ tags: [実装計画, theme-dashboard]
 <!-- 元ファイル: theme-dashboard-d1-migration.md -->
 
 
-# テーマダッシュボードの D1 + R2 統一移行
+## テーマダッシュボードの D1 + R2 統一移行
 
 `/themes/[themeKey]` の構成 (どの metric を どのチャートで見せるか) を、**TS ハードコード → D1 + R2 snapshot** に統一する。
 
 旧: `packages/types/src/indicator-sets/*.ts` (17 テーマ × ~10 metrics の TS 定義)
 新: D1 `themes` / `theme_metrics` テーブル → R2 `app/themes/[key]/config.json` → web app fetch
 
-## なぜやるのか
+### なぜやるのか
 
 現状は **「定義は D1 / 公開は R2」** という統一原則が 2 箇所で崩れていた:
 
@@ -36,7 +36,7 @@ tags: [実装計画, theme-dashboard]
 - ランディングダッシュボード (`page_components`) と運用が揃う
 - ライン/pie 用データも snapshot 化すれば、テーマページ全体が R2 fetch だけで描画可能 (CF Pages のエッジと相性良)
 
-## フェーズ分割
+### フェーズ分割
 
 | Phase | 内容 | 状態 |
 |---|---|---|
@@ -51,7 +51,7 @@ tags: [実装計画, theme-dashboard]
 
 ---
 
-## Phase 1A で追加・変更したもの
+### Phase 1A で追加・変更したもの
 
 | ファイル | 変更内容 |
 |---|---|
@@ -63,7 +63,7 @@ tags: [実装計画, theme-dashboard]
 | `apps/web/scripts/export-themes-snapshot.ts` | 新規。D1 → R2 `app/themes/[key]/config.json` exporter |
 | `.claude/skills/db/sync-snapshots/run.sh` | `themes` タスクを TASKS 配列に追加 |
 
-## Phase 3a (個別チャート表示) で追加・変更したもの
+### Phase 3a (個別チャート表示) で追加・変更したもの
 
 ユーザー要求: 「コロプレス地図で選択中の指標について、line/pie などの個別都道府県チャートを表示」を実装。
 
@@ -74,7 +74,7 @@ tags: [実装計画, theme-dashboard]
 | `apps/web/src/features/theme-dashboard/components/MetricFocusCharts.tsx` | 新規 Client Component。**選択中の metric + 選択都道府県** に対して (A) 時系列 line、(B) 上下位 5 県 bar を描画。pie/breakdown は Phase 3b で追加予定 |
 | `apps/web/src/features/theme-dashboard/components/ThemeDashboardTabbed.tsx` | `MetricFocusCharts` をマップ直下 (desktop) / stats タブ内 (mobile) に挿入。タブ切替・都道府県クリックで自動再描画 |
 
-### 動作
+#### 動作
 
 1. ユーザーがテーマページの **タブで metric を選択** → `selectedTabKey` が変わる
 2. `MetricFocusCharts` が `selectedTabKey + selectedPrefectureCode` の変化を `useEffect` で検知
@@ -82,14 +82,14 @@ tags: [実装計画, theme-dashboard]
 4. `LineChartClient` で時系列ラインを描画 + 上下位 5 県の bar を `currentValues` から派生
 5. **地図で都道府県クリック** → `selectedPrefectureCode` 変化 → 同じく自動再フェッチ → 「全国」から「東京の推移」に切り替わる
 
-### 既知の制限 (Phase 3b/3c で対応)
+#### 既知の制限 (Phase 3b/3c で対応)
 
 - **計算型 metric** (`calculation.isCalculated`) はラインチャート空。`fetchRankingValuesFromSource` ベースの timeseries fetch が必要
 - **pie/breakdown** は未実装 (cdCat-aware な e-Stat フェッチが必要)
 - **データソースは e-Stat 直叩き**: prefecture values が R2 snapshot 化されるまで (Phase 2)、ビルド時に e-Stat が落ちると line chart も空になる
 - `theme_metrics.chart_type` は全行 'choropleth' のまま (Phase 3c で line/pie 行を追加)
 
-## スキーマ概要
+### スキーマ概要
 
 ```sql
 -- themes: テーマ自体のメタ
@@ -122,7 +122,7 @@ theme_metrics (
 
 **ポイント**: 同じ metric を同一テーマで「choropleth + line」のように複数チャートで使えるよう、`chart_type` を PK に含めた。Phase 3 で line / pie 行を足すときに既存 choropleth 行を壊さない。
 
-## R2 出力形式
+### R2 出力形式
 
 `app/themes/[themeKey]/config.json`:
 
@@ -154,11 +154,11 @@ URL `/themes/[themeKey]` に対応するので `.claude/rules/r2-storage-design.
 
 ---
 
-## 🛠️ ローカル Mac で実行すべきこと (ハンドオフ)
+### 🛠️ ローカル Mac で実行すべきこと (ハンドオフ)
 
 このセッション (Claude Code on the web) では `.local/d1/` を触れないので、以下はローカルで実行する必要がある。
 
-### 0. ブランチ取得
+#### 0. ブランチ取得
 
 ```bash
 cd ~/Documents/cw/stats47   # ローカルのプロジェクト
@@ -167,7 +167,7 @@ git switch claude/brave-galileo-PVSaL
 git pull
 ```
 
-### 1. Migration を D1 に適用
+#### 1. Migration を D1 に適用
 
 ```bash
 # wrangler 経由で 0052_themes_and_theme_metrics.sql を local D1 に流す
@@ -187,7 +187,7 @@ console.log(db.prepare(\"SELECT name FROM sqlite_master WHERE type='table' AND n
 
 期待: `[{name: 'themes'}, {name: 'theme_metrics'}]`
 
-### 2. TS → D1 seed (17 + 6 = 23 テーマ投入)
+#### 2. TS → D1 seed (17 + 6 = 23 テーマ投入)
 
 ```bash
 # dry-run でまず確認
@@ -215,7 +215,7 @@ SELECT theme_key, panel_label, COUNT(*) FROM theme_metrics
 -- → '住宅' 3, '世帯' 4, '人口・婚姻' 6 等
 ```
 
-### 3. R2 snapshot に push
+#### 3. R2 snapshot に push
 
 ```bash
 # themes のみ先に export して確認
@@ -230,7 +230,7 @@ ls .local/r2/app/themes/
 cat .local/r2/app/themes/living-housing/config.json | jq .panels
 ```
 
-### 4. (Phase 1A はここまで) — Phase 1C 着手前の確認
+#### 4. (Phase 1A はここまで) — Phase 1C 着手前の確認
 
 この時点では **web app はまだ TS 経由で動作している** (loader は変えていない)。
 従って `npm run dev` でテーマページを開いても今まで通り表示されるはず。
@@ -239,34 +239,34 @@ cat .local/r2/app/themes/living-housing/config.json | jq .panels
 
 ---
 
-## ロールバック
+### ロールバック
 
 - **schema 巻き戻し**: `DROP TABLE theme_metrics; DROP TABLE themes;` を別 migration で
 - **R2 巻き戻し**: `app/themes/` 配下を r2 delete (web app は読んでいないので影響なし)
 - **TS は触っていない** ので、もし問題があっても web app の挙動は変わらない (これが Phase 1A を最初に分けた理由)
 
-## 次のフェーズ
+### 次のフェーズ
 
-### Phase 1C: loader 書き換え (次セッション)
+#### Phase 1C: loader 書き換え (次セッション)
 
 - `apps/web/src/features/theme-dashboard/lib/load-theme-data.ts` を改修
 - `ThemeConfig` の生成元を TS (`indicator-sets/*.ts`) から R2 (`app/themes/[key]/config.json`) に
 - `apps/web/src/app/themes/[themeSlug]/page.tsx` の `generateStaticParams` も R2 から (D1 themes を export した何らかの index を経由)
 - TS 経由のフォールバックは残さず、一気に置換 (CLAUDE.md branch-workflow より「feature flag 不要」方針)
 
-### Phase 2: prefecture values の R2 snapshot 化
+#### Phase 2: prefecture values の R2 snapshot 化
 
 - `packages/ranking/src/exporters/ranking-values-snapshot.ts` を prefecture 対応 (今は city のみ)
 - `load-theme-data.ts` の `fetchIndicatorValues` (e-Stat 直叩き経路) を削除
 - ビルド時の e-Stat 依存をゼロに
 
-### Phase 3: line / pie 用データと exporter
+#### Phase 3: line / pie 用データと exporter
 
 - ライン用: 全国時系列 (年度 × 値) または 47都道府県時系列を `app/themes/[key]/timeseries.json` に
 - pie 用: 内訳 (e-Stat cdCat 単位の分解) を `app/themes/[key]/breakdown.json` に
 - `theme_metrics.chart_type='line'/'pie'` の行を seed (テーマごとの指標選定はここで詰める)
 
-### Phase 4: TS `indicator-sets/*.ts` 削除
+#### Phase 4: TS `indicator-sets/*.ts` 削除
 
 - D1 が source of truth として安定稼働 (~2 週間) を確認してから
 - 型 `IndicatorSet` 自体は `packages/types` に残し、データのみ削除
@@ -274,7 +274,7 @@ cat .local/r2/app/themes/living-housing/config.json | jq .panels
 
 ---
 
-## 関連
+### 関連
 
 - 元方針議論: 本ファイル作成セッション (2026-05-26)
 - D1 vs R2 振り分け原則: `.claude/rules/data-storage.md`
@@ -288,12 +288,12 @@ cat .local/r2/app/themes/living-housing/config.json | jq .panels
 <!-- 元ファイル: theme-dashboard-charts-proposal-2026-05-29.md -->
 
 
-# テーマダッシュボード データ・チャート提案（全21テーマ）
+## テーマダッシュボード データ・チャート提案（全21テーマ）
 
 `/themes/<key>` のフル幅ダッシュボード（`ThemeMetricsDashboard`）で表示する **KPI カード** と
 **チャート** の提案。2026-05-29 のダッシュボード化に合わせて整理。
 
-## 前提（今回の設計変更）
+### 前提（今回の設計変更）
 
 - **KPI カードは自動生成**: `tabIndicators`（role≠context の指標）を `indicatorDataMap` から導出。
   県選択時は値・全国順位・全国平均比、未選択時は全国平均。→ **KPI は page_components 不要**。
@@ -304,7 +304,7 @@ cat .local/r2/app/themes/living-housing/config.json | jq .panels
   の `source`（statsDataId / cdCat01）を転記する（手入力の推測値は禁止）。
 - データ取得は `fetchEstatData`（県別）/ 全国は47県平均。`/areas/[code]` と同じ runtime 経路で描画。
 
-## チャートタイプ選択の決定木
+### チャートタイプ選択の決定木
 
 | データの性質 | 推奨タイプ |
 |---|---|
@@ -317,7 +317,7 @@ cat .local/r2/app/themes/living-housing/config.json | jq .panels
 
 ---
 
-## 実装ステータス凡例
+### 実装ステータス凡例
 
 - ✅ **実装済（今回）** — 2026-05-29 に R2 反映 + seed スクリプト追加
 - 🟢 **充足** — 既存チャートで十分（変更不要）
@@ -326,7 +326,7 @@ cat .local/r2/app/themes/living-housing/config.json | jq .panels
 
 ---
 
-## 1. 充足している / 拡充候補のテーマ（既存チャートあり）
+### 1. 充足している / 拡充候補のテーマ（既存チャートあり）
 
 | テーマ | 既存チャート | 評価 | 追加提案（将来） |
 |---|---|---|---|
@@ -351,11 +351,11 @@ cat .local/r2/app/themes/living-housing/config.json | jq .panels
 
 ---
 
-## 2. 今回実装したテーマ（✅）
+### 2. 今回実装したテーマ（✅）
 
 R2（`app/page-components/theme/<key>.json`）へ反映済 + `apps/web/scripts/theme-page-component-additions.ts` に定義。
 
-### living-housing（暮らし・住まい）＋3
+#### living-housing（暮らし・住まい）＋3
 
 | componentKey | type | 指標 | statsDataId/cat |
 |---|---|---|---|
@@ -365,7 +365,7 @@ R2（`app/page-components/theme/<key>.json`）へ反映済 + `apps/web/scripts/t
 
 （既存: 空き家率と持ち家率の推移 / 未婚率と高齢夫婦世帯率の推移 + 考察 markdown ×3）
 
-### ports（港湾）🔴→✅ 新規
+#### ports（港湾）🔴→✅ 新規
 
 | componentKey | type | 指標 | statsDataId/cat |
 |---|---|---|---|
@@ -373,7 +373,7 @@ R2（`app/page-components/theme/<key>.json`）へ反映済 + `apps/web/scripts/t
 | ports-container-trend | line | コンテナ取扱個数 | 0003130688 / 100 |
 | ports-passengers-trend | line | 港湾旅客数 | 0003130737 / 100 |
 
-### railway（鉄道）🔴→✅ 新規
+#### railway（鉄道）🔴→✅ 新規
 
 | componentKey | type | 指標 | statsDataId/cat |
 |---|---|---|---|
@@ -382,7 +382,7 @@ R2（`app/page-components/theme/<key>.json`）へ反映済 + `apps/web/scripts/t
 
 （railway-passengers / railway-station-count は外部ソース（kind=external）のため line-chart 不可 → KPI カードのみ）
 
-### roads（道路）🔴→✅ 新規
+#### roads（道路）🔴→✅ 新規
 
 | componentKey | type | 指標 | statsDataId/cat |
 |---|---|---|---|
@@ -394,9 +394,9 @@ R2（`app/page-components/theme/<key>.json`）へ反映済 + `apps/web/scripts/t
 
 ---
 
-## 3. 要対応（未実装・🔴）
+### 3. 要対応（未実装・🔴）
 
-### local-finance-city（市区町村の財政）
+#### local-finance-city（市区町村の財政）
 
 - 指標が **市区町村粒度**（fiscal-strength-index / current-balance-ratio-city 等）。
   `ThemeDbChartRenderer` は prefCode（都道府県/全国）でフェッチするため、そのままでは
@@ -407,7 +407,7 @@ R2（`app/page-components/theme/<key>.json`）へ反映済 + `apps/web/scripts/t
 
 ---
 
-## 反映フロー（再現手順）
+### 反映フロー（再現手順）
 
 ```bash
 # ① Mac（ローカルビルド DB がある環境）= SSOT 反映
@@ -425,7 +425,7 @@ npx tsx apps/web/scripts/sync-theme-additions-to-r2.ts
 > 次に Mac から `export-page-components-snapshot` を実行した際に上書きで消える）。
 > 両者は同一定義（`theme-page-component-additions.ts`）から生成され drift しない。
 
-## 検証
+### 検証
 
 - 反映直後は R2 を S3 で直接確認済（living-housing=8 / ports=3 / railway=2 / roads=3）。
 - 本番サイトは ISR / R2 reader の in-memory cache のため反映に時間差あり。必要なら
