@@ -82,10 +82,17 @@ jobs:
           [ -z "$PD" ] && PD="$(date -u +%Y-%m-%d)"
           mkdir -p ".local/r2/app/blog/$SLUG"
           cp -R "docs/21_ブログ記事原稿/$SLUG/." ".local/r2/app/blog/$SLUG/"
-          # 公開フォルダ側の publishedAt を設定 (git のドラフトは触らない)
-          perl -i -pe "s/^publishedAt:.*/publishedAt: $PD/" ".local/r2/app/blog/$SLUG/article.md"
-          echo "publishedAt=$PD set for $SLUG"
-          grep -m1 '^publishedAt:' ".local/r2/app/blog/$SLUG/article.md"
+          # 公開フォルダ側の publishedAt + published を設定 (git のドラフトは触らない)
+          A=".local/r2/app/blog/$SLUG/article.md"
+          perl -i -pe "s/^publishedAt:.*/publishedAt: $PD/" "$A"
+          # 下書きの published: false を true に上書き。published 行が無ければ publishedAt 直後に追加。
+          if grep -q '^published:' "$A"; then
+            perl -i -pe "s/^published:.*/published: true/" "$A"
+          else
+            perl -i -pe "s/^(publishedAt:.*)/\$1\npublished: true/" "$A"
+          fi
+          echo "publishedAt=$PD / published=true set for $SLUG"
+          grep -m1 '^publishedAt:' "$A"; grep -m1 '^published:' "$A"
 
       # CI の export-blog-snapshot は cloud(S3) を list するため、新記事を index(all.json) に
       # 含めるには「先に記事本体を cloud へ push」してから all.json を再生成する必要がある。
