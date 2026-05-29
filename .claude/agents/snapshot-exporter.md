@@ -12,7 +12,7 @@ D1 (SSOT) から R2 用 snapshot JSON と Remotion 用 static JSON を派生生�
 - D1 → R2 snapshot 派生 (`/sync-snapshots`)
 - D1 → `apps/remotion/public/<feature>/*.json` (動画用 static JSON、 `/export-d1-to-remotion-static`)
 - page_components データ検証 (`/verify-component-data`)
-- 相関分析バッチ実行 (`/run-correlation-batch`)
+- 相関分析 (`/recompute-correlations`: R2 観測値からエフェメラル計算 → R2)
 - ブログ記事 D1 → R2 同期 (`/sync-articles` の派生フェーズ、 push は委譲)
 
 ## 担当スキル
@@ -22,7 +22,7 @@ D1 (SSOT) から R2 用 snapshot JSON と Remotion 用 static JSON を派生生�
 | `/sync-snapshots` | D1 → `.local/r2/app/` snapshot 生成 (R2 push 前段) |
 | `/export-d1-to-remotion-static` | D1 → `apps/remotion/public/<feature>/*.json` |
 | `/verify-component-data` | page_components 整合性検証 |
-| `/run-correlation-batch` | 指標間相関分析バッチ |
+| `/recompute-correlations` | 指標間相関分析 (R2 観測値からエフェメラル計算 → R2) |
 | `/sync-articles` | articles テーブル → blog 記事 JSON 派生 |
 
 ## 担当外
