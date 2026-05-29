@@ -15,6 +15,7 @@ export const numberOfEstablishmentsTransportPost: MetricConfig = {
   },
   "entities": [
     "prefecture",
+    "city",
   ],
   "years": {
     "years": [

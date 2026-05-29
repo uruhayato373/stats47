@@ -43,7 +43,9 @@ stats47 (Next.js App Router on Cloudflare Pages) の URL 体系・301 マッピ�
 /ports, /fishing-ports                  港湾・漁港
 /station-passengers, /station-passengers/[prefCode]   駅乗降客
 
-/gis-cross, /gis-cross/*                GIS 掛け合わせ
+                                         ※ /gis-cross/* は 2026-05-29 廃止 → /themes に統合 (301)
+                                         　 (migration-flow→population-dynamics / depopulation-medical→healthcare /
+                                         　  sunshine-map→climate(新設) / hub→/themes。地図は各テーマ内 section に集約)
 /maps/highway-timeline, /maps/highway-timeline/[year]
 
 /api/*, /tiles/*, /sitemap.xml          インフラ (noindex)
@@ -64,6 +66,10 @@ middleware.ts (`apps/web/src/middleware.ts`) の `tryLegacyRedirect` 関数と e
 | `/area-profile/{prefCode}` | `/areas/{prefCode}` | 301 | 既存 |
 | `/dashboard/{prefCode}` | `/areas/{prefCode}` | 301 | 既存 |
 | `/areas/{prefCode}/administrativefinancial` | `/themes/local-finance?pref={prefCode}` | 301 | 既存 |
+| `/gis-cross/migration-flow` | `/themes/population-dynamics` (クエリ保持) | 301 | 2026-05-29 |
+| `/gis-cross/depopulation-medical` | `/themes/healthcare` (クエリ保持) | 301 | 2026-05-29 |
+| `/gis-cross/sunshine-map` | `/themes/climate` (クエリ保持) | 301 | 2026-05-29 |
+| `/gis-cross` (hub) ほか `/gis-cross/*` | `/themes` (クエリ保持) | 301 | 2026-05-29 |
 | `/areas/{areaCode}?category={key}` | `/areas/{areaCode}/{key}` | 301 | 既存 |
 | `/ranking/prefecture/{slug}` | `/ranking/{slug}` (known なら) / 410 (unknown) | 301/410 | 既存 |
 | `/tag/{en-slug}` | `/tag/{ja-key}` | 301 | 既存 |

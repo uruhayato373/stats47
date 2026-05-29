@@ -1,0 +1,79 @@
+name: 🔄 Instagram token refresh (weekly)
+
+# IGAA 長期トークン（約60日失効）を ig_refresh_token で延長し、
+# GitHub Secret INSTAGRAM_ACCESS_TOKEN を自動更新する。
+# これにより IG 投稿/計測の全 workflow（post-instagram-scheduled / sns-metrics-weekly /
+# migration-flow-* / sns-port-bubble-daily / instagram-mf-day2）のトークン寿命を一元管理する。
+#
+# 前提: secrets.GH_SECRETS_PAT に「Secrets: Read and write」権限の fine-grained PAT
+#       （または classic PAT の repo scope）を登録しておくこと。
+#       default GITHUB_TOKEN は Actions secrets を書き換えられないため必須。
+
+on:
+  schedule:
+    - cron: "0 18 * * 2" # JST 水 03:00 (UTC 火 18:00)。週次で都度 +60 日に延長
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: instagram-token-refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: 🧰 Checkout
+        uses: actions/checkout@v4
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: 🚦 Verify GH_SECRETS_PAT is present
+        env:
+          GH_SECRETS_PAT: ${{ secrets.GH_SECRETS_PAT }}
+        run: |
+          if [ -z "$GH_SECRETS_PAT" ]; then
+            echo "::error::secrets.GH_SECRETS_PAT 未設定。Secrets:Read&Write 権限の PAT を登録してください。"
+            exit 1
+          fi
+          echo "✓ GH_SECRETS_PAT present"
+
+      - name: 🔄 Refresh IGAA token
+        id: refresh
+        env:
+          INSTAGRAM_ACCESS_TOKEN: ${{ secrets.INSTAGRAM_ACCESS_TOKEN }}
+          IG_TOKEN_OUT: /tmp/ig-new-token.txt
+        run: node .claude/scripts/instagram/refresh-token-ci.cjs
+
+      - name: 🔐 Update GitHub Secret
+        env:
+          GH_TOKEN: ${{ secrets.GH_SECRETS_PAT }}
+        run: |
+          NEW="$(cat /tmp/ig-new-token.txt)"
+          echo "::add-mask::$NEW"
+          if [ -z "$NEW" ]; then
+            echo "::error::新トークンが空。secret 更新を中止。"
+            exit 1
+          fi
+          gh secret set INSTAGRAM_ACCESS_TOKEN --body "$NEW"
+          echo "✅ Secret INSTAGRAM_ACCESS_TOKEN を更新しました"
+
+      - name: 🧹 Cleanup token file
+        if: always()
+        run: rm -f /tmp/ig-new-token.txt
+
+      - name: 📄 Step summary
+        if: always()
+        run: |
+          {
+            echo "# Instagram token refresh"
+            echo ""
+            echo "- expires_at: ${{ steps.refresh.outputs.expires_at || 'N/A (失敗)' }}"
+            echo "- expires_in_days: ${{ steps.refresh.outputs.expires_in_days || 'N/A' }}"
+          } >> "$GITHUB_STEP_SUMMARY"

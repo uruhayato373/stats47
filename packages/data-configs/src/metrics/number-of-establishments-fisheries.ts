@@ -15,6 +15,7 @@ export const numberOfEstablishmentsFisheries: MetricConfig = {
   },
   "entities": [
     "prefecture",
+    "city",
   ],
   "years": {
     "years": [

@@ -379,6 +379,36 @@ export default function middleware(req: NextRequest) {
       { status: 301 },
     );
   }
+  // /gis-cross・/gis-cross/* (廃止 2026-05-29) → /themes に統合
+  //  - migration-flow → /themes/population-dynamics (人口移動フローを人口動態テーマに埋め込み)
+  //  - depopulation-medical → /themes/healthcare (過疎×医療マップを医療テーマに埋め込み)
+  //  - sunshine-map → /themes/climate (気候テーマ新設、日照地図を埋め込み)
+  //  - hub → /themes
+  // 具体 path を先に判定し、最後にハブをフォールバック。クエリは保持。
+  if (/^\/gis-cross\/migration-flow(?:\/.*)?$/.test(pathname)) {
+    return NextResponse.redirect(
+      new URL(`/themes/population-dynamics${req.nextUrl.search}`, req.url),
+      { status: 301 },
+    );
+  }
+  if (/^\/gis-cross\/depopulation-medical(?:\/.*)?$/.test(pathname)) {
+    return NextResponse.redirect(
+      new URL(`/themes/healthcare${req.nextUrl.search}`, req.url),
+      { status: 301 },
+    );
+  }
+  if (/^\/gis-cross\/sunshine-map(?:\/.*)?$/.test(pathname)) {
+    return NextResponse.redirect(
+      new URL(`/themes/climate${req.nextUrl.search}`, req.url),
+      { status: 301 },
+    );
+  }
+  if (/^\/gis-cross(?:\/.*)?$/.test(pathname)) {
+    return NextResponse.redirect(
+      new URL(`/themes${req.nextUrl.search}`, req.url),
+      { status: 301 },
+    );
+  }
 
   // /blog?q=... → /search?type=blog&...
   if (pathname === "/blog") {

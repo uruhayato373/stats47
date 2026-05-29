@@ -25,16 +25,14 @@
 - **Agent prompt 冒頭に Output Format を必ず指定** → `.claude/rules/agent-output-contract.md`
 - **一時ファイルは `/tmp/`**: プロジェクトルートに作らない (pre-commit が `tmp_*` 等を自動削除)
 - **計画・レビュー・改善ログは `docs/` 配下**: 週次計画・レビュー・批判的レビュー・pre-mortem・改善ログ・コンテンツバックログはすべて `docs/03_週次運用/` `docs/04_レビュー/` `docs/05_改善ログ/` `docs/50_Issues/` 等に置く。Issues は (a) `enhancement`/`bug` ラベルの PR で close される機能改修、(b) `auto-generated` ラベルの日次アラート (PSI/Cloudflare) のみ → `.claude/rules/docs-vs-issues.md`
-- **「ローカルビルド DB (SQLite)」という用語**: 本プロジェクトの SQLite は **Cloudflare D1 サービスではない** (本番 D1 binding は Phase 8 / リモート D1 は 2026-04-29 に解約済み)。SSOT (TS-config=git / article.md=R2 / 観測値=e-Stat・R2) から再生成可能な **ローカルのビルド時派生キャッシュ + 集計エンジン**。docs/skill で「ローカル D1」と書かれていても実体はこれを指す → `.claude/rules/data-sqlite-ssot.md`
-- **DB 変更はローカルビルド DB (SQLite) 直接 → `/sync-snapshots`**: 本番反映は R2 経由のみ (リモート D1 解約済み)
+- **完全 DB レスが正典** → `docs/01_技術設計/19_完全DBレス設計.md`（doc 18 ハイブリッドは 2026-05-29 同日に superseded）。永続/常駐 D1 を SSOT に持たない。SSOT は **git TS** と **R2** の二つだけ。本番アプリは R2 snapshot のみ読む:
+  - **Authored / 設定** (低volume・人手・型/review: テーマのチャート定義等) → **git TS が SSOT** → 生成スクリプトで R2 反映
+  - **Authored / 運用** (page_components / theme_metrics / sns_posts / affiliate_ads / categories/themes) → **git TS 定義が SSOT** → 生成スクリプトで R2 JSON（横断整合性はビルド時に検証）。手編集 JSON を SSOT にしない
+  - **Reference** (metrics=TS / articles=article.md / estat_catalog=e-Stat API / prefectures=JSON) → **再生成**
+  - **Derived** (area_profiles / correlations) → **エフェメラル計算**（使い捨て `:memory:` SQLite / DuckDB が R2 を読む）→ R2。永続しない
+- **永続/リモート D1 は廃止**。S3 creds さえあれば集計もクラウドで完結する（旧「集計はローカル限定」制約は消滅）。git TS → R2 反映の雛形: `apps/web/scripts/sync-theme-additions-to-r2.ts`
+- **観測値・派生を永続 DB に入れない** (R2 のまま。Phase 6 肥大=解約の再発防止)。schema 定義 (`packages/database/src/schema/*.ts`) と integration テスト基盤は「型ソース / テスト用」として残置可（配信 R2 に影響しない）。移行スペック: `docs/02_実装計画/dbless-migration-plan-2026-05-29.md`
 - **browser-use は終了時に必ず daemon 停止 + Chrome タブクローズ** → `.claude/rules/browser-use-cleanup.md`
-- **ローカルビルド DB (SQLite) パス固定** (`better-sqlite3` が空ファイルを自動生成するため、これ以外で開かない。miniflare 非依存の素の SQLite ファイル):
-  ```
-  packages/database/.data/stats47.sqlite
-  ```
-  - 取得: `npm run db:pull --workspace=packages/r2-storage` (R2 `database/stats47.sqlite` から)、空 schema 作成: `npm run db:migrate:local --workspace=packages/database`
-  - 反映: `npm run db:push --workspace=packages/r2-storage` (soft lock + 世代バックアップ付き)
-  - クラウド/CI からのデータ追加も上記 pull/push で可能 (git 管理外、R2 が持ち回りの真実源)
 
 ## 作業の節目で記録する
 
@@ -72,7 +70,7 @@ CLAUDE.md 内に詳細を複製しない。状況に応じて参照する。
 | `r2-storage-design.md` | snapshot 追加・変更 |
 | `estat-api.md` | e-Stat API 利用スキル |
 | `branch-workflow.md` | PR・デプロイ作業・DB データ反映 |
-| `data-storage.md` | スキル設計時 (D1 vs `.claude/` vs `docs/` 判定) |
+| `data-storage.md` | スキル設計時 (git TS / R2 vs `.claude/` vs `docs/` 判定。正典は `docs/01_技術設計/19_完全DBレス設計.md`) |
 | `docs-vs-issues.md` | docs/ と GitHub Issues の使い分け (新規スキル・新規記録時必読) |
 | `skill-code-placement.md` | スクリプト新規作成 |
 | `local-environment.md` | 環境セットアップ・モノレポ構成・頻用コマンド |
@@ -91,6 +89,7 @@ CLAUDE.md 内に詳細を複製しない。状況に応じて参照する。
 | area プロフィール チャート構成設計 (17 テーマ) | `docs/02_実装計画/area-charts-planning/README.md` |
 | 改善ログ INDEX (TODO 真実源、scan tool 使い方) | `docs/05_改善ログ/INDEX.md` ★施策追加時必読 |
 | システム構成・技術スタック | `docs/01_技術設計/` |
+| **データ層アーキテクチャ (完全DBレス・正典)** ★データ保存先判定時必読 | `docs/01_技術設計/19_完全DBレス設計.md` (doc 18 ハイブリッドは superseded) |
 | DDD ドメイン分類 | `docs/01_技術設計/04_DDDドメイン分類.md` |
 | エラーハンドリング規約 | `docs/01_技術設計/05_エラーハンドリング規約.md` |
 | 自動化インベントリ ★追加・削除時は必ず更新 | `docs/01_技術設計/10_自動化インベントリ.md` |

@@ -26,7 +26,8 @@ X の**直近3日以内**のバズツイートを全テーマ並列検索し、s
 | パラメータ | 必須 | デフォルト | 説明 |
 |---|---|---|---|
 | **テーマ** | - | 全テーマ並列検索 | 明示的にテーマを絞りたい時のみ指定（通常は省略） |
-| **--post** | - | false | 指定すると候補選択後に browser-use で引用RT投稿まで実行 |
+| **--post** | - | false | 指定すると候補選択後に `publish-x --quote-url` で引用RT投稿まで実行 |
+| **--with-media** | - | false | 指定時のみ、マッチした県の動画 (station-passengers / migration-flow) を引用RTに添付。デフォルトはテキストのみ |
 
 ## テーマカタログ
 
@@ -182,25 +183,23 @@ sqlite3 .local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065b
 sqlite3 ... "SELECT content_key FROM sns_posts WHERE post_type='quote_rt' AND posted_at > datetime('now','-7 days')"
 ```
 
-### Phase 4: データマッチング
+#### 4d. 動画アセット照合（`--with-media` 指定時のみ）
 
-#### 4a. ローカル DB（ranking_items）で検索
+`--with-media` が指定された場合、ツイートの話題が **station-passengers（駅乗降客数）** または **migration-flow（人口移動）** に合致するか判定し、合致した県の **既存レンダ済み動画** を引用RTに添付する。レンダリングは不要（ストック消化）。
 
-ツイート内容のキーワードから、関連する ranking_items を D1 で検索:
+| 話題キーワード | アセット種別 | 動画パス (X / landscape) | 遷移先 URL |
+|---|---|---|---|
+| 駅, 鉄道, 通勤, 満員電車, 乗降, 路線 | station-passengers | `.local/r2/sns/station-passengers/landscape/<NN>.mp4` | `https://stats47.jp/ranking/<station-passengers の ranking_key>` |
+| 引っ越し, 転入, 転出, 転出超過, 移住, 上京, 人口流出 | migration-flow | `.local/r2/sns/migration-flow/<romaji>/x/stills/reel.mp4`（無ければ `migration-flow/landscape/<NN>.mp4`） | `https://stats47.jp/gis-cross/migration-flow?pref=<NN>` |
 
-```bash
-sqlite3 .local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite \
-  "SELECT ranking_key, ranking_name, category_key FROM indicators
-   WHERE area_type='prefecture' AND is_active=1
-   AND (ranking_name LIKE '%出生%' OR ranking_name LIKE '%少子%' OR ranking_name LIKE '%人口%')
-   ORDER BY ranking_name LIMIT 20"
-```
+- `<NN>` = 県コード（01=北海道 … 13=東京 … 23=愛知 … 47=沖縄）、`<romaji>` = 県ローマ字（`tokyo`, `aichi` 等）。対応表は `reference/keyword-mapping.md` の「動画アセット対応」を参照
+- **県の選び方**: ツイートが特定県に言及していればその県。汎用的（県名なし）なら話題インパクトの大きい県（駅→東京13、移動→転出超過の話題県）を選ぶ
+- 上記いずれにも合致しない場合は `--with-media` でも添付せず **テキストのみ** にフォールバック（無理に添付しない）
+- migration-flow の遷移先 URL は `/ranking/` ではなく **`/gis-cross/migration-flow?pref=<NN>`** である点に注意
 
-キーワードはツイート内容に応じて動的に変更する。
+### Phase 4 補足: e-Stat フォールバック（DB に指標が無い場合）
 
-#### 4b. e-Stat API で追加データを検索（DB にない場合）
-
-DB にピッタリの指標がない場合、e-Stat API で直接データを探す。特に以下の統計は都道府県別×詳細分類のデータが豊富:
+DB にピッタリの ranking_items が無いときのみ実行。e-Stat API で直接データを探す。特に以下の統計は都道府県別×詳細分類のデータが豊富:
 
 | 統計 | statsDataId 例 | 内容 |
 |---|---|---|
@@ -238,63 +237,47 @@ e-Stat で良いデータが見つかった場合は TS-config (`packages/data-c
 - 1〜2行で簡潔に（200文字以内）
 - 「ちなみに」「データで見ると」等の補足スタンス
 - 具体的な数値（1位/47位）を含める
-- **stats47 URL を毎回含める**（`https://stats47.jp/ranking/<ranking_key>`）。UTM パラメータは不要
+- **stats47 URL を毎回含める**（`https://stats47.jp/ranking/<ranking_key>`、migration-flow は `https://stats47.jp/gis-cross/migration-flow?pref=<NN>`）。UTM パラメータは不要
 - ハッシュタグは不要
-- **画像は添付しない**（テキストのみ。宣伝臭を避け、元ツイートの文脈に自然に乗る）
+- **添付は opt-in**: デフォルトはテキストのみ（宣伝臭を避け元ツイの文脈に自然に乗る）。`--with-media` 指定かつ station-passengers / migration-flow に合致した時のみ、Phase 4d で選んだ県の動画を 1 本添付する
 
 ### Phase 6: 投稿（--post 指定時のみ）
 
 ユーザーが候補を選択し `--post` が指定されている場合のみ実行。
-**Playwright（永続プロファイル）で投稿する。** `/publish-x` と同じ方式。
+**投稿は `/publish-x` に委譲する**（このスキルは投稿コードを持たない＝投稿機構の単一ソースは publish-x）。引用RTテキストは引用元 URL を含めず caption ファイルに書く。URL の末尾付与・引用カード生成・動画エンコード待ち・fail-safe・DB INSERT (`post_type='quote_rt'`) はすべて publish-x 側が行う。
 
-#### 6a. Playwright で compose ダイアログを開く
+#### 6a. caption ファイルを書き出す
 
-引用元 URL をテキスト末尾に含めることで X が自動的に引用カードを生成する。
+引用RTテキスト（200文字以内、stats47 URL を含む）を `/tmp/` に書き出す。**引用元ツイート URL は含めない**（publish-x が `--quote-url` で末尾付与する）。
 
-```typescript
-import { chromium } from "playwright";
-const PROFILE_DIR = ".local/playwright-x-profile";
-
-const context = await chromium.launchPersistentContext(PROFILE_DIR, {
-  headless: false, viewport: { width: 1280, height: 900 },
-  locale: "ja-JP", timezoneId: "Asia/Tokyo",
-  args: ["--disable-blink-features=AutomationControlled"],
-});
-const page = context.pages()[0] || await context.newPage();
-await page.goto("https://x.com/compose/post", { waitUntil: "domcontentloaded" });
-await page.waitForTimeout(3000);
+```bash
+cat > /tmp/quote-rt-caption.txt <<'EOF'
+ちなみに都道府県別の合計特殊出生率で見ると、1位は沖縄県(1.70)、47位は東京都(1.04)。地域差はかなり大きいです。
+https://stats47.jp/ranking/total-fertility-rate
+EOF
 ```
 
-#### 6b. テキスト入力（引用RTテキスト + stats47 URL + 引用元URL）
+#### 6b. publish-x に委譲して投稿
 
-画像は添付しない（テキストのみで元ツイートの文脈に自然に乗る）。
+```bash
+# テキストのみ（デフォルト） — 即時投稿
+npx tsx .claude/skills/sns/publish-x/publish-x.ts <content_key> \
+  --quote-url "https://x.com/xxx/status/123456" \
+  --caption /tmp/quote-rt-caption.txt \
+  --domain ranking
 
-```typescript
-// 引用テキスト + stats47 URL + 引用元 URL（X が自動で引用カードに変換）
-const fullText = `${quoteText}\nhttps://stats47.jp/ranking/${rankingKey}\n\n${tweetUrl}`;
-const textbox = page.getByRole("textbox").first();
-await textbox.click();
-await page.evaluate(async (text) => {
-  const item = new ClipboardItem({ "text/plain": new Blob([text], { type: "text/plain" }) });
-  await navigator.clipboard.write([item]);
-}, fullText);
-await page.keyboard.press("Meta+v");
-await page.waitForTimeout(2000);
+# --with-media 指定かつ Phase 4d で県動画が選ばれた場合は --media を追加
+npx tsx .claude/skills/sns/publish-x/publish-x.ts <content_key> \
+  --quote-url "https://x.com/xxx/status/123456" \
+  --caption /tmp/quote-rt-caption.txt \
+  --media .local/r2/sns/migration-flow/aichi/x/stills/reel.mp4 \
+  --domain gis-cross
 ```
 
-#### 6d. 即時投稿
-
-```typescript
-const postBtn = page.getByTestId("tweetButton").first();
-await postBtn.click({ force: true });
-```
-
-#### 6e. DB 投稿記録
-
-```sql
-INSERT INTO sns_posts (platform, post_type, domain, content_key, caption, quote_url, has_link, status, posted_at)
-VALUES ('x', 'quote_rt', 'ranking', '<content_key>', '<caption先頭100文字>', '<引用元URL>', 1, 'posted', datetime('now', 'localtime'));
-```
+- `<content_key>` はマッチした ranking_key（または migration-flow の場合は県スラッグ等の識別子）。`--domain` は遷移先に合わせる（ranking / gis-cross）
+- 日時を渡さなければ即時投稿（引用RT は鮮度ファースト）。予約したい場合は `<content_key>` の直後に `YYYY-MM-DDTHH:MM` を渡す
+- **初回 / セレクタ更新後は `--dry-run` を先に通すこと**（publish-x の fail-safe 規約。誤即時投稿事故の再発防止）
+- DB への `post_type='quote_rt'` INSERT は publish-x が成功時に自動実行する（このスキルでは SQL を書かない）
 
 ## 運用ルール
 
@@ -307,6 +290,7 @@ VALUES ('x', 'quote_rt', 'ranking', '<content_key>', '<caption先頭100文字>',
 | 多様性 | 直近2件の category_key は避ける（ソフト制約） |
 | 比率 | 引用RT 3 : オリジナル投稿 7 |
 | URL | 3回に1回程度 stats47.jp リンクを含める |
+| 添付 | デフォルトはテキストのみ。`--with-media` かつ station-passengers / migration-flow 合致時のみ県動画を 1 本添付（opt-in） |
 | スタンス | データで補足・検証する立場。議論に加担しない |
 
 ## 避けるべきパターン

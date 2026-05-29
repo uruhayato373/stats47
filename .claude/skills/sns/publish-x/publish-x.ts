@@ -32,6 +32,9 @@ const DB_PATH = path.join(
 );
 
 let IS_DRY_RUN = false;
+// 投稿先アカウントの取り違え防止ガード。設定時、ログイン中の @handle がこれと一致するまで
+// 投稿しない（一致するまで最大5分待機、タイムアウトで中止）。@ は付けても付けなくても可。
+let EXPECT_ACCOUNT: string | null = null;
 
 // 失敗時に screenshot を保存（後で人間が検証可能）
 async function saveScreenshot(
@@ -62,6 +65,10 @@ interface PostConfig {
   scheduledDate: Date | null; // null = 即時投稿
   /** DB (sns_posts) 更新をスキップ。任意動画 (rankingKey 紐付け無し) で使用 */
   skipDb?: boolean;
+  /** 投稿種別。quote_rt は引用RT (sns_posts へ INSERT)、original は予約/即時投稿 (UPDATE) */
+  postType: "original" | "quote_rt";
+  /** 引用元ツイート URL。設定時は caption 末尾に付与し X が引用カードを自動生成する */
+  quoteUrl?: string;
 }
 
 // ─── 引数パース ────────────────────────────────────
@@ -72,6 +79,7 @@ function parseArgs(): { posts: PostConfig[]; immediate: boolean } {
   let customMedia: string | null = null;
   let customCaption: string | null = null;
   let skipDb = false;
+  let quoteUrl: string | null = null;
   const pairs: { key: string; date: string | null }[] = [];
 
   let i = 0;
@@ -87,6 +95,10 @@ function parseArgs(): { posts: PostConfig[]; immediate: boolean } {
       customMedia = args[++i];
     } else if (args[i] === "--caption") {
       customCaption = args[++i];
+    } else if (args[i] === "--quote-url") {
+      quoteUrl = args[++i];
+    } else if (args[i] === "--expect-account") {
+      EXPECT_ACCOUNT = args[++i].replace(/^@/, "");
     } else if (args[i] === "--skip-db") {
       skipDb = true;
     } else {
@@ -103,9 +115,45 @@ function parseArgs(): { posts: PostConfig[]; immediate: boolean } {
     console.error(
       "使い方:\n" +
         "  rankingKey ベース: npx tsx publish-x.ts <rankingKey> <YYYY-MM-DDTHH:MM> [...] [--domain ranking]\n" +
-        "  任意動画:         npx tsx publish-x.ts <content-key> <YYYY-MM-DDTHH:MM> --media <path> --caption <path> [--skip-db]"
+        "  任意動画:         npx tsx publish-x.ts <content-key> <YYYY-MM-DDTHH:MM> --media <path> --caption <path> [--skip-db]\n" +
+        "  引用RT:           npx tsx publish-x.ts <content-key> [<YYYY-MM-DDTHH:MM>] --quote-url <tweetUrl> --caption <path> [--media <path>] [--domain ranking|gis-cross]"
     );
     process.exit(1);
+  }
+
+  // 引用RTモード: --quote-url を起点に判定。--caption 必須・--media は opt-in (任意添付)
+  if (quoteUrl !== null) {
+    if (!customCaption) {
+      console.error("--quote-url モードでは --caption <path> が必須です");
+      process.exit(1);
+    }
+    if (pairs.length !== 1) {
+      console.error("--quote-url モードでは <content-key> [<date>] を 1 件のみ指定してください");
+      process.exit(1);
+    }
+    if (!fs.existsSync(customCaption)) {
+      console.error(`キャプションファイルが見つかりません: ${customCaption}`);
+      process.exit(1);
+    }
+    if (customMedia && !fs.existsSync(customMedia)) {
+      console.error(`動画ファイルが見つかりません: ${customMedia}`);
+      process.exit(1);
+    }
+    const { key, date } = pairs[0];
+    const imagePaths = customMedia ? [customMedia] : [];
+    const isVideo = customMedia ? customMedia.toLowerCase().endsWith(".mp4") : false;
+    const post: PostConfig = {
+      contentKey: key,
+      domain,
+      captionPath: customCaption,
+      imagePaths,
+      isVideo,
+      scheduledDate: date ? new Date(date + "+09:00") : null,
+      skipDb,
+      postType: "quote_rt",
+      quoteUrl,
+    };
+    return { posts: [post], immediate };
   }
 
   // 任意動画モード: --media と --caption を 1 つの投稿として扱う
@@ -137,6 +185,7 @@ function parseArgs(): { posts: PostConfig[]; immediate: boolean } {
       isVideo,
       scheduledDate: date ? new Date(date + "+09:00") : null,
       skipDb,
+      postType: "original",
     };
     return { posts: [post], immediate };
   }
@@ -179,6 +228,7 @@ function parseArgs(): { posts: PostConfig[]; immediate: boolean } {
       imagePaths,
       isVideo,
       scheduledDate: date ? new Date(date + "+09:00") : null,
+      postType: "original" as const,
     };
   });
 
@@ -186,23 +236,85 @@ function parseArgs(): { posts: PostConfig[]; immediate: boolean } {
 }
 
 // ─── ログイン確認 ──────────────────────────────────
+// ログアウト時の X は /login ではなく x.com/ (ランディング) にリダイレクトするため、
+// URL 判定では誤検知する。ログイン中だけ現れる UI 要素の有無で判定する。
+async function isLoggedIn(page: Page): Promise<boolean> {
+  // ログイン操作中はページ遷移が頻発し evaluate の実行コンテキストが壊れることがある。
+  // その場合は false を返してポーリングを継続させる（例外で中断させない）。
+  return page
+    .evaluate(
+      () =>
+        !!(
+          document.querySelector('[data-testid="SideNav_AccountSwitcher_Button"]') ||
+          document.querySelector('[data-testid="SideNav_NewTweet_Button"]') ||
+          document.querySelector('[data-testid="AppTabBar_Home_Link"]')
+        )
+    )
+    .catch(() => false);
+}
+
+// ログイン中の @handle を profile link href (/username) から取得（最も確実）。
+async function currentHandle(page: Page): Promise<string> {
+  return page
+    .evaluate(() => {
+      const el = document.querySelector('[data-testid="AppTabBar_Profile_Link"]');
+      const href = el ? el.getAttribute("href") || "" : "";
+      return href.replace(/^\//, "");
+    })
+    .catch(() => "");
+}
+
+// ログイン確認 + アカウント取り違え防止。
+// EXPECT_ACCOUNT 設定時は、その @handle になるまで投稿しない（切替/再ログインを待つ）。
 async function ensureLogin(page: Page): Promise<void> {
   console.log("X.com にアクセスしています...");
   await page.goto("https://x.com/home", { waitUntil: "domcontentloaded" });
   await page.waitForTimeout(3000);
-
-  const url = page.url();
-  if (url.includes("/login") || url.includes("/i/flow/login")) {
-    console.log(
-      "\n⚠️  X.com にログインが必要です。ブラウザでログインしてください。"
-    );
-    console.log("   ログイン完了後、自動的に続行します...\n");
-    await page.waitForURL("**/home", { timeout: 300_000 });
-    console.log("✅ ログイン完了！");
-    await page.waitForTimeout(2000);
-  } else {
-    console.log("✅ ログイン済み");
+  if (EXPECT_ACCOUNT) {
+    console.log(`🔒 期待アカウント: @${EXPECT_ACCOUNT}（一致するまで投稿しません）`);
   }
+
+  const ok = async (): Promise<boolean> => {
+    if (!(await isLoggedIn(page))) return false;
+    const handle = await currentHandle(page);
+    if (!EXPECT_ACCOUNT) {
+      console.log(`✅ ログイン済み${handle ? ` (@${handle})` : ""}`);
+      return true;
+    }
+    if (handle.toLowerCase() === EXPECT_ACCOUNT.toLowerCase()) {
+      console.log(`✅ ログイン済み (@${handle}) — 期待アカウント一致`);
+      return true;
+    }
+    return false;
+  };
+
+  if (await ok()) {
+    await page.waitForTimeout(1000);
+    return;
+  }
+
+  // 未ログイン or 別アカウント → 切替/ログインを待つ
+  const start = Date.now();
+  let lastMsg = "";
+  while (Date.now() - start < 300_000) {
+    const logged = await isLoggedIn(page);
+    const handle = logged ? await currentHandle(page) : "";
+    const msg = logged
+      ? `⚠️  現在 @${handle || "?"} にログイン中。ブラウザで @${EXPECT_ACCOUNT} に切り替え（またはログインし直し）てください…`
+      : `⚠️  X 未ログインです。ブラウザで @${EXPECT_ACCOUNT ?? "投稿先アカウント"} にログインしてください…`;
+    if (msg !== lastMsg) {
+      console.log(`\n${msg}（最大5分待機）\n`);
+      lastMsg = msg;
+    }
+    await page.waitForTimeout(2500);
+    if (await ok()) {
+      await page.waitForTimeout(1500);
+      return;
+    }
+  }
+  throw new Error(
+    `ログイン待ちタイムアウト（5分）。${EXPECT_ACCOUNT ? `@${EXPECT_ACCOUNT} にログインしてから` : "ログインしてから"}再実行してください。`
+  );
 }
 
 // ─── 予約投稿 ──────────────────────────────────────
@@ -212,9 +324,14 @@ async function publishPost(
   index: number,
   total: number
 ): Promise<boolean> {
-  const caption = fs.readFileSync(post.captionPath, "utf-8").trim();
+  let caption = fs.readFileSync(post.captionPath, "utf-8").trim();
+  if (post.quoteUrl) {
+    // 引用元ツイート URL を末尾に付与 → X が引用カードを自動生成する。
+    // メディア (--media) も併せて添付されている場合は、引用カード上部に動画が並ぶ。
+    caption = `${caption}\n\n${post.quoteUrl}`;
+  }
 
-  console.log(`\n━━━ 投稿 ${index + 1}/${total}: ${post.contentKey} ━━━`);
+  console.log(`\n━━━ 投稿 ${index + 1}/${total}: ${post.contentKey}${post.postType === "quote_rt" ? " (引用RT)" : ""} ━━━`);
   if (post.scheduledDate) {
     console.log(
       `予約日時: ${post.scheduledDate.toLocaleString("ja-JP", { timeZone: "Asia/Tokyo" })}`
@@ -236,8 +353,11 @@ async function publishPost(
 
   // ── メディアアップロード（テキストより先に実行 — リンクカード展開前に添付）──
   if (post.imagePaths.length > 0) {
-    // compose ダイアログは #layers 内。file input を正確に取得
-    const fileInput = page.locator('input[data-testid="fileInput"]').first();
+    // file input: testid 優先、見つからなければ素の input[type=file] にフォールバック
+    // (X UI で testid が変わるケースの保険)
+    const fileInput = page
+      .locator('input[data-testid="fileInput"], input[type="file"]')
+      .first();
     await fileInput.setInputFiles(post.imagePaths);
     console.log(
       `📷 ${post.isVideo ? "動画" : `画像 ${post.imagePaths.length} 枚`}をアップロード中...`,
@@ -577,14 +697,26 @@ function updateDb(
     ? formatJstDate(post.scheduledDate)
     : formatJstDate(new Date());
 
-  const caption = fs
-    .readFileSync(post.captionPath, "utf-8")
-    .trim()
-    .replace(/'/g, "''");
+  const rawCaption = fs.readFileSync(post.captionPath, "utf-8").trim();
+  const caption = rawCaption.replace(/'/g, "''");
+  // 抜粋は raw を先に切ってから escape する (escape 済み文字列を substring すると '' が割れる)
+  const captionExcerpt = rawCaption.substring(0, 100).replace(/'/g, "''");
 
   // better-sqlite3 は使わず sqlite3 CLI で実行（依存を増やさない）
   const { execSync } = require("child_process");
-  const sql = `
+
+  // 引用RT: 事前行が無いため UPDATE ではなく INSERT で新規記録する
+  const sql =
+    post.postType === "quote_rt"
+      ? `
+    INSERT INTO sns_posts
+      (platform, post_type, domain, content_key, caption, quote_url, media_path, has_link, status, posted_at)
+    VALUES
+      ('x', 'quote_rt', '${post.domain}', '${post.contentKey}',
+       '${captionExcerpt}', '${(post.quoteUrl ?? "").replace(/'/g, "''")}',
+       '${(post.imagePaths[0] ?? "").replace(/'/g, "''")}', 1, '${status}', '${postedAt}');
+  `
+      : `
     UPDATE sns_posts
     SET status = '${status}', posted_at = '${postedAt}'
     WHERE platform = 'x'
@@ -605,7 +737,9 @@ function updateDb(
     execSync(`sqlite3 "${DB_PATH}" "${sql.replace(/"/g, '\\"')}"`, {
       cwd: PROJECT_ROOT,
     });
-    console.log(`📝 DB 更新: ${post.contentKey} → ${status}`);
+    console.log(
+      `📝 DB ${post.postType === "quote_rt" ? "INSERT" : "更新"}: ${post.contentKey} → ${status}`
+    );
   } catch (e) {
     console.error(`DB 更新失敗: ${post.contentKey}`, e);
   }

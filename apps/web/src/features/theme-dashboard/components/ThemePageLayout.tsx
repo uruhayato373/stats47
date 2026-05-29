@@ -10,8 +10,6 @@ import {
 } from "@stats47/components/atoms/ui/breadcrumb";
 
 import { resolveAffiliateBanners } from "@/features/ads/server";
-import { ThemeHighwayTimelineSection } from "@/features/highway-history";
-import { ThemeMigrationFlowSection } from "@/features/migration-flow";
 import {
   HeroShell,
   KpiGrid,
@@ -20,10 +18,10 @@ import {
 } from "@/features/redesign";
 import { loadPageComponents } from "@/features/stat-charts/server";
 import { prefetchThemeKpiData } from "@/features/stat-charts/services/prefetch-theme-kpi";
-import { ThemeStationPassengersSection } from "@/features/station-passengers";
 
 import { AdSenseAd, THEMES_CONTENT } from "@/lib/google-adsense";
 
+import { THEME_SECTION_REGISTRY } from "../config/theme-section-registry";
 import {
   generateThemeBreadcrumbStructuredData,
   generateThemePageStructuredData,
@@ -132,23 +130,15 @@ export async function ThemePageLayout({ theme, data }: Props) {
         kpiDataByArea={kpiDataByArea}
       />
 
-      {theme.themeKey === "population-dynamics" && (
-        <div className="mt-8">
-          <ThemeMigrationFlowSection />
-        </div>
-      )}
-
-      {theme.themeKey === "roads" && (
-        <div className="mt-8">
-          <ThemeHighwayTimelineSection />
-        </div>
-      )}
-
-      {theme.themeKey === "railway" && (
-        <div className="mt-8">
-          <ThemeStationPassengersSection />
-        </div>
-      )}
+      {theme.embeddedSections?.map((sectionKey) => {
+        const Section = THEME_SECTION_REGISTRY[sectionKey];
+        if (!Section) return null;
+        return (
+          <div key={sectionKey} className="mt-8">
+            <Section />
+          </div>
+        );
+      })}
 
       {/* 広告: ダッシュボード読了後・関連記事の前 */}
       <div className="mt-8">

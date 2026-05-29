@@ -230,6 +230,24 @@ else
   echo -e "${GREEN}✅ ブログ記事の変更なし${NC}"
 fi
 
+# 6.5 metric config の year 正規化チェック (2026-05-29 追加 / .claude/rules/estat-api.md「年の正規化」)
+echo -e "${GREEN}📅 metric years 正規化チェック...${NC}"
+STAGED_METRICS=$(git diff --cached --name-only --diff-filter=ACM | grep -E "^packages/data-configs/src/metrics/.+\.ts$" | grep -v "index.ts" || true)
+
+if [ -n "$STAGED_METRICS" ]; then
+  if (cd "$PROJECT_ROOT" && npx tsx packages/data-configs/scripts/validate-metric-years.ts > /tmp/validate-years.log 2>&1); then
+    echo -e "${GREEN}✅ years 正規化チェック成功 (4桁年)${NC}"
+  else
+    echo -e "${RED}❌ years にフルタイムコード/不正年が混入しています。${NC}"
+    grep -E "^  |混入" /tmp/validate-years.log | head -10 || true
+    echo -e "${YELLOW}💡 config.years は 4桁年 (例 2009)。フルコード (2009100000) 禁止。${NC}"
+    echo -e "${YELLOW}💡 規約: .claude/rules/estat-api.md / 確認: npm run validate:years --workspace=@stats47/data-configs${NC}"
+    ERROR_COUNT=$((ERROR_COUNT + 1))
+  fi
+else
+  echo -e "${GREEN}✅ metric config の変更なし${NC}"
+fi
+
 # 7. テストカバレッジチェック（オプション - 変更されたファイルに関連するテストのみ）
 echo -e "${GREEN}🧪 テストカバレッジチェック（オプション）...${NC}"
 STAGED_TS_FILES=$(git diff --cached --name-only --diff-filter=ACM | grep -E '\.(ts|tsx)$' | grep -v '\.test\.' | grep -v '\.stories\.' || true)

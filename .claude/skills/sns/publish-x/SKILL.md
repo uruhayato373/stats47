@@ -43,8 +43,12 @@ X の UI は頻繁に変わるため、セレクタが壊れていると **予�
 |---|---|---|---|
 | **contentKey** | 必須 | - | ランキングキー（複数指定可） |
 | **date** | 必須 | - | 予約日時 JST（`2026-04-15T08:00` 形式） |
-| **--domain** | - | `ranking` | `ranking` / `compare` / `correlation` |
+| **--domain** | - | `ranking` | `ranking` / `compare` / `correlation` / `gis-cross` |
 | **--immediate** | - | - | 予約ではなく即時投稿 |
+| **--media** | - | - | 任意動画/画像パス（`--caption` 必須）。`.local/r2/sns/<domain>/<key>` の自動解決を使わず直接指定 |
+| **--caption** | - | - | 任意キャプションファイルパス（`--media` または `--quote-url` と併用） |
+| **--quote-url** | - | - | **引用RTモード**。引用元ツイート URL を caption 末尾に付与し X が引用カードを生成。`--media` は opt-in（無指定ならテキストのみ）。成功時 `post_type='quote_rt'` で sns_posts へ INSERT |
+| **--skip-db** | - | - | DB 更新をスキップ（rankingKey 紐付けの無い任意動画用） |
 
 **複数投稿の例:**
 ```bash
@@ -53,6 +57,21 @@ npx tsx .claude/skills/sns/publish-x/publish-x.ts \
   divorces-per-total-population 2026-04-14T08:00 \
   disposable-income-worker-households 2026-04-16T08:00
 ```
+
+**引用RTの例（`/find-quote-rt --post` から委譲される）:**
+```bash
+# テキストのみ（即時）
+npx tsx .claude/skills/sns/publish-x/publish-x.ts total-fertility-rate \
+  --quote-url "https://x.com/xxx/status/123456" \
+  --caption /tmp/quote-rt-caption.txt --domain ranking
+
+# 県動画を opt-in 添付（migration-flow → gis-cross 遷移）
+npx tsx .claude/skills/sns/publish-x/publish-x.ts migration-flow-aichi \
+  --quote-url "https://x.com/xxx/status/123456" \
+  --caption /tmp/quote-rt-caption.txt \
+  --media .local/r2/sns/migration-flow/aichi/x/stills/reel.mp4 --domain gis-cross
+```
+引用RTでも初回 / セレクタ更新後は `--dry-run` を先に通すこと（誤即時投稿の fail-safe は引用RT経路にも適用される）。
 
 ## 前提条件
 

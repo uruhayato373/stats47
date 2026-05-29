@@ -225,4 +225,4 @@ node .claude/scripts/blog/audit-chart-quality.mjs
 - 親方針: `docs/02_実装計画/100x-pv-strategy.md` Phase 0 (CTR 改修)
 - 実測判定ルール: `.claude/rules/evidence-based-judgment.md`
 - 改善ログ: `docs/05_改善ログ/gsc.md` BLOG-CTR-03 / BLOG-CTR-04
-- 既存スキル: `.claude/skills/blog/brushup-blog-article/SKILL.md` (拡張候補)
+- 既存スキル: `.claude/skills/blog/brushup-blog/SKILL.md`
