@@ -2,7 +2,7 @@ import "server-only";
 
 import { unwrap } from "@stats47/types";
 
-import { findCategoryByKey } from "../repositories";
+import { readCategoryByKeyFromR2 } from "../repositories";
 import type { Category } from "../types";
 
 /**
@@ -14,6 +14,6 @@ import type { Category } from "../types";
 export async function getCategoryData(
   key: string
 ): Promise<Category | undefined> {
-  const category = unwrap(await findCategoryByKey(key));
+  const category = unwrap(await readCategoryByKeyFromR2(key));
   return category ?? undefined;
 }
