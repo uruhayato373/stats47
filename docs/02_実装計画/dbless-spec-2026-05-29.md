@@ -240,7 +240,7 @@ remotion 群が唯一クリーンに移行できた理由 = **git TS master (pre
 | 項目 | 実調査の結論 | 前提 / 必要作業 |
 |---|---|---|
 | `calculate-ranking-values.ts` / `compute-normalization.ts` | **純関数ではない**。`listRankingValues`(stats D1=DROP済) / `findRankingItemByKey` に依存 | ranking value 計算チェーン全体 (list-ranking-values → R2 reader 化) の再設計。最も絡む |
-| `apps/ges/scripts/generate-port-projects.ts` | D1 `ports`(port_code/name/grade/lat/lng) を読む。**R2/git TS に ports master が無い** (`app/ports/all.json` 不在、`app/ports/timeseries` のみ) | 先に **ports master を git TS 化** (D1 699件 → ports.json、prefectures.json と同様の静的 Reference) |
+| ~~`apps/ges/scripts/generate-port-projects.ts`~~ | ✅ **完了** (2026-05-29)。ports master を git TS 化 (`apps/ges/scripts/data/ports.json`, D1 699件) → fetchPorts を JSON 読み+JS filter/sort に。D1 旧SQL とデフォルト grade 22港が完全一致、tsx 実行 exit 0 で検証 | 済 |
 | `apps/web/scripts/export-ranking-page-cards-snapshot.ts` | `page_components` を読む | **Phase E と重複** (page_components は運用6エンティティ)。E の git TS 化で一括対応 |
 | `apps/web/scripts/export-blog-snapshot.ts` | D1 `articles` を読む。articles は Reference (SSOT=article.md) | R2 blog `article.md` frontmatter から D1 articles と同形を再構成 (190記事パース) |
 | `apps/web/scripts/generate-search-index.ts` | D1 metrics+articles+categories | metrics→git TS registry / articles→R2 / categories→git TS の 3 源統合 |
