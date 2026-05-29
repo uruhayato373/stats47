@@ -143,10 +143,11 @@ function isCityCode5(code: string): boolean {
  *
  * metric は pref 表 (00000101xx / 00000102xx) のみを source に持つため、city データは
  * 同一 cdCat01 で対応する city 表から取得する。マッピング (2026-05-29 実測で確定):
- *   - pref 基礎データ      00000101CC → city 基礎データ(オリジナル)   00000201CC
- *     (legacy cities.json の areaCount=1917 が 0000020103 と完全一致。adj 0000020203 は 1913 で不一致)
- *   - pref 社会生活統計指標 00000102CC → city 社会生活統計指標(廃置分合) 00000203CC
- *     (city 指標表は廃置分合処理済のみ存在。#A05307 0000010201→0000020301 で値一致を確認)
+ *   - pref 基礎データ      00000101CC → city 基礎データ(廃置分合処理済)   00000202CC
+ *   - pref 社会生活統計指標 00000102CC → city 社会生活統計指標(廃置分合処理済) 00000203CC
+ *     (いずれも廃置分合処理済を採用。area マスタ cities.json=1913 件と件数一致し areaName join が
+ *      完全になるため。オリジナル(00000201CC,1917件)は master に無い 4 件が join 漏れになる。
+ *      値は同一: C3109 0000020203→札幌519, #A05307 0000010201→0000020301 で確認済)
  *   - CC=12(家計)/13(生活時間) は city 表が存在しない → null
  */
 function prefToCityStatsDataId(prefId: string): string | null {
@@ -156,78 +157,150 @@ function prefToCityStatsDataId(prefId: string): string | null {
   const catStr = m[2]; // "01".."13"
   const cat = Number(catStr);
   if (cat < 1 || cat > 11) return null; // 12,13 は city 表なし
-  return series === "1" ? `0000020${"1"}${catStr}` : `0000020${"3"}${catStr}`;
+  return series === "1" ? `0000020${"2"}${catStr}` : `0000020${"3"}${catStr}`;
 }
 
-/** 取得 raw values → StatsValues 構造 (prefecture) */
-function shapeForPrefecture(metricKey: string, values: EstatValue[]) {
-  const rows = values
-    .filter((v) => isPrefCode5(v["@area"]))
-    .map((v) => ({
-      areaCode: v["@area"],
-      areaName: "",
-      yearCode: v["@time"].slice(0, 4),
-      yearName: v["@time"].slice(0, 4) + "年",
-      value: parseEstatValue(v.$),
-      unit: "",
-      rank: null as number | null,
-    }))
+// ---- area マスタ (areaName 付与用) -------------------------------------
+interface AreaMasters {
+  pref: Map<string, string>; // prefCode(5桁) → prefName
+  city: Map<string, string>; // cityCode(5桁) → cityName
+}
+let _masters: AreaMasters | null = null;
+function loadAreaMasters(): AreaMasters {
+  if (_masters) return _masters;
+  const prefRaw = JSON.parse(
+    readFileSync(resolve(REPO_ROOT, "packages/area/src/data/prefectures.json"), "utf8"),
+  ) as Array<{ prefCode: string; prefName: string }>;
+  const cityRaw = JSON.parse(
+    readFileSync(resolve(REPO_ROOT, "packages/area/src/data/cities.json"), "utf8"),
+  ) as Array<{ cityCode: string; cityName: string }>;
+  _masters = {
+    pref: new Map(prefRaw.map((p) => [p.prefCode, p.prefName])),
+    city: new Map(cityRaw.map((c) => [c.cityCode, c.cityName])),
+  };
+  return _masters;
+}
+
+/** config.yearFormat に応じた yearName ("YYYY年度" / "YYYY年") */
+function yearNameOf(yearCode: string, config: MetricConfig): string {
+  return config.yearFormat === "fiscal" ? `${yearCode}年度` : `${yearCode}年`;
+}
+
+/**
+ * config.years の範囲内か判定 (e-Stat 規約: cdTimeFrom/To を使わずメモリ内でフィルタ)。
+ * years 未指定なら全年通す。
+ */
+function inYearRange(yearCode: string, config: MetricConfig): boolean {
+  const y = Number(yearCode);
+  if (!Number.isFinite(y)) return false;
+  const spec = config.years;
+  if (spec === "all" || spec == null) return true;
+  if ("years" in spec) return spec.years.includes(y);
+  // { from, to }
+  return y >= spec.from && y <= spec.to;
+}
+
+interface ShapedRow {
+  areaCode: string;
+  areaName: string;
+  yearCode: string;
+  yearName: string;
+  value: number | null;
+  unit: string;
+  rank: number | null;
+  prefectureCode?: string;
+}
+
+/** 年ごとに value 降順で rank を付与 (1=最大値)。null は rank null。同値は同順位 (競争順位)。 */
+function assignRanks(rows: ShapedRow[]): void {
+  const byYear = new Map<string, ShapedRow[]>();
+  for (const r of rows) {
+    if (!byYear.has(r.yearCode)) byYear.set(r.yearCode, []);
+    byYear.get(r.yearCode)!.push(r);
+  }
+  for (const group of byYear.values()) {
+    const ranked = group
+      .filter((r) => r.value != null)
+      .sort((a, b) => (b.value as number) - (a.value as number));
+    let prevValue: number | null = null;
+    let prevRank = 0;
+    ranked.forEach((r, i) => {
+      if (prevValue !== null && r.value === prevValue) {
+        r.rank = prevRank; // 同値は同順位
+      } else {
+        r.rank = i + 1;
+        prevRank = i + 1;
+        prevValue = r.value;
+      }
+    });
+  }
+}
+
+/** meta を組み立てる共通処理 */
+function buildMeta(rows: ShapedRow[]) {
+  const years = Array.from(new Set(rows.map((r) => r.yearCode))).sort();
+  const areas = new Set(rows.map((r) => r.areaCode));
+  return {
+    rowCount: rows.length,
+    yearRange: (years.length > 0 ? [years[0], years[years.length - 1]] : null) as
+      | [string, string]
+      | null,
+    areaCount: areas.size,
+    generatedAt: new Date().toISOString(),
+  };
+}
+
+/** 取得 raw values → StatsValues 構造 (prefecture)。areaName/unit/yearName/rank を付与し本番投入可能形に。 */
+function shapeForPrefecture(config: MetricConfig, values: EstatValue[]) {
+  const masters = loadAreaMasters();
+  const rows: ShapedRow[] = values
+    .filter((v) => isPrefCode5(v["@area"]) && inYearRange(v["@time"].slice(0, 4), config))
+    .map((v) => {
+      const yearCode = v["@time"].slice(0, 4);
+      return {
+        areaCode: v["@area"],
+        areaName: masters.pref.get(v["@area"]) ?? "",
+        yearCode,
+        yearName: yearNameOf(yearCode, config),
+        value: parseEstatValue(v.$),
+        unit: config.unit,
+        rank: null as number | null,
+      };
+    })
     .sort((a, b) =>
       a.yearCode === b.yearCode
         ? a.areaCode.localeCompare(b.areaCode)
         : a.yearCode.localeCompare(b.yearCode),
     );
-
-  const years = Array.from(new Set(rows.map((r) => r.yearCode))).sort();
-  const areas = new Set(rows.map((r) => r.areaCode));
-
-  return {
-    metricKey,
-    entityKind: "prefecture" as const,
-    rows,
-    meta: {
-      rowCount: rows.length,
-      yearRange: years.length > 0 ? [years[0], years[years.length - 1]] : null,
-      areaCount: areas.size,
-      generatedAt: new Date().toISOString(),
-    },
-  };
+  assignRanks(rows);
+  return { metricKey: config.key, entityKind: "prefecture" as const, rows, meta: buildMeta(rows) };
 }
 
-/** 取得 raw values → StatsValues 構造 (city)。pref と同じく bare 出力 (areaName/unit/rank は下流で付与)。 */
-function shapeForCity(metricKey: string, values: EstatValue[]) {
-  const rows = values
-    .filter((v) => isCityCode5(v["@area"]))
-    .map((v) => ({
-      areaCode: v["@area"],
-      areaName: "",
-      yearCode: v["@time"].slice(0, 4),
-      yearName: v["@time"].slice(0, 4) + "年",
-      value: parseEstatValue(v.$),
-      unit: "",
-      rank: null as number | null,
-      prefectureCode: v["@area"].slice(0, 2),
-    }))
+/** 取得 raw values → StatsValues 構造 (city)。areaName(市区町村マスタ join)/unit/yearName/rank を付与。 */
+function shapeForCity(config: MetricConfig, values: EstatValue[]) {
+  const masters = loadAreaMasters();
+  const rows: ShapedRow[] = values
+    .filter((v) => isCityCode5(v["@area"]) && inYearRange(v["@time"].slice(0, 4), config))
+    .map((v) => {
+      const yearCode = v["@time"].slice(0, 4);
+      return {
+        areaCode: v["@area"],
+        areaName: masters.city.get(v["@area"]) ?? "",
+        yearCode,
+        yearName: yearNameOf(yearCode, config),
+        value: parseEstatValue(v.$),
+        unit: config.unit,
+        rank: null as number | null,
+        prefectureCode: v["@area"].slice(0, 2),
+      };
+    })
     .sort((a, b) =>
       a.yearCode === b.yearCode
         ? a.areaCode.localeCompare(b.areaCode)
         : a.yearCode.localeCompare(b.yearCode),
     );
-
-  const years = Array.from(new Set(rows.map((r) => r.yearCode))).sort();
-  const areas = new Set(rows.map((r) => r.areaCode));
-
-  return {
-    metricKey,
-    entityKind: "city" as const,
-    rows,
-    meta: {
-      rowCount: rows.length,
-      yearRange: years.length > 0 ? [years[0], years[years.length - 1]] : null,
-      areaCount: areas.size,
-      generatedAt: new Date().toISOString(),
-    },
-  };
+  assignRanks(rows);
+  return { metricKey: config.key, entityKind: "city" as const, rows, meta: buildMeta(rows) };
 }
 
 interface ProcessResult {
@@ -264,7 +337,7 @@ async function processOne(
 
     if (wantPref) {
       const values = await fetchEstatData(appId, src);
-      const payload = shapeForPrefecture(config.key, values);
+      const payload = shapeForPrefecture(config, values);
       if (!dryRun) {
         const outPath = resolve(R2_LOCAL, `app/stats/${config.key}/values.json`);
         mkdirSync(dirname(outPath), { recursive: true });
@@ -280,7 +353,7 @@ async function processOne(
         notes.push("city=skip(no-city-table)");
       } else {
         const values = await fetchEstatData(appId, { ...src, statsDataId: cityStatsDataId });
-        const payload = shapeForCity(config.key, values);
+        const payload = shapeForCity(config, values);
         if (!dryRun) {
           const outPath = resolve(R2_LOCAL, `app/stats/${config.key}/cities.json`);
           mkdirSync(dirname(outPath), { recursive: true });
