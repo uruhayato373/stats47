@@ -10,9 +10,8 @@ import {
 } from "@stats47/components/atoms/ui/breadcrumb";
 
 import { resolveAffiliateBanners } from "@/features/ads/server";
-import { ThemeMigrationFlowSection } from "@/features/migration-flow";
 import { ThemeHighwayTimelineSection } from "@/features/highway-history";
-import { ThemeStationPassengersSection } from "@/features/station-passengers";
+import { ThemeMigrationFlowSection } from "@/features/migration-flow";
 import {
   HeroShell,
   KpiGrid,
@@ -21,6 +20,7 @@ import {
 } from "@/features/redesign";
 import { loadPageComponents } from "@/features/stat-charts/server";
 import { prefetchThemeKpiData } from "@/features/stat-charts/services/prefetch-theme-kpi";
+import { ThemeStationPassengersSection } from "@/features/station-passengers";
 
 import { AdSenseAd, THEMES_CONTENT } from "@/lib/google-adsense";
 
