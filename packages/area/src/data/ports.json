@@ -1,0 +1,6992 @@
+[
+  {
+    "portCode": "01001",
+    "portName": "稚内",
+    "prefectureCode": "01",
+    "prefectureName": "北海道",
+    "latitude": 45.4145545,
+    "longitude": 141.70684776,
+    "portGrade": "重要港湾",
+    "administrator": "稚内市"
+  },
+  {
+    "portCode": "01002",
+    "portName": "紋別",
+    "prefectureCode": "01",
+    "prefectureName": "北海道",
+    "latitude": 44.36057609,
+    "longitude": 143.36854474,
+    "portGrade": "重要港湾",
+    "administrator": "紋別市"
+  },
+  {
+    "portCode": "01003",
+    "portName": "網走",
+    "prefectureCode": "01",
+    "prefectureName": "北海道",
+    "latitude": 44.02871738,
+    "longitude": 144.28610498,
+    "portGrade": "重要港湾",
+    "administrator": "網走市"
+  },
+  {
+    "portCode": "01004",
+    "portName": "根室",
+    "prefectureCode": "01",
+    "prefectureName": "北海道",
+    "latitude": 43.34518677,
+    "longitude": 145.57535033,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "01005",
+    "portName": "釧路",
+    "prefectureCode": "01",
+    "prefectureName": "北海道",
+    "latitude": 42.98454628,
+    "longitude": 144.32335695,
+    "portGrade": "重要港湾",
+    "administrator": "釧路市"
+  },
+  {
+    "portCode": "01006",
+    "portName": "十勝",
+    "prefectureCode": "01",
+    "prefectureName": "北海道",
+    "latitude": 42.29555556,
+    "longitude": 143.33444444,
+    "portGrade": "重要港湾",
+    "administrator": "広尾町"
+  },
+  {
+    "portCode": "01007",
+    "portName": "苫小牧",
+    "prefectureCode": "01",
+    "prefectureName": "北海道",
+    "latitude": 42.59666667,
+    "longitude": 141.72194444,
+    "portGrade": "国際拠点港湾",
+    "administrator": "苫小牧港管理組合"
+  },
+  {
+    "portCode": "01008",
+    "portName": "白老",
+    "prefectureCode": "01",
+    "prefectureName": "北海道",
+    "latitude": 42.51796738,
+    "longitude": 141.32019743,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "01009",
+    "portName": "室蘭",
+    "prefectureCode": "01",
+    "prefectureName": "北海道",
+    "latitude": 42.34796276,
+    "longitude": 140.95976548,
+    "portGrade": "国際拠点港湾",
+    "administrator": "室蘭市"
+  },
+  {
+    "portCode": "01010",
+    "portName": "函館",
+    "prefectureCode": "01",
+    "prefectureName": "北海道",
+    "latitude": 41.79083333,
+    "longitude": 140.69388889,
+    "portGrade": "重要港湾",
+    "administrator": "函館市"
+  },
+  {
+    "portCode": "01011",
+    "portName": "小樽",
+    "prefectureCode": "01",
+    "prefectureName": "北海道",
+    "latitude": 43.20027778,
+    "longitude": 141.01861111,
+    "portGrade": "重要港湾",
+    "administrator": "小樽市"
+  },
+  {
+    "portCode": "01012",
+    "portName": "石狩湾新",
+    "prefectureCode": "01",
+    "prefectureName": "北海道",
+    "latitude": 43.21111111,
+    "longitude": 141.26972222,
+    "portGrade": "重要港湾",
+    "administrator": "石狩湾新港管理組合"
+  },
+  {
+    "portCode": "01013",
+    "portName": "留萌",
+    "prefectureCode": "01",
+    "prefectureName": "北海道",
+    "latitude": 43.96444444,
+    "longitude": 141.62888889,
+    "portGrade": "重要港湾",
+    "administrator": "留萌市"
+  },
+  {
+    "portCode": "01014",
+    "portName": "宗谷",
+    "prefectureCode": "01",
+    "prefectureName": "北海道",
+    "latitude": 42.9930543,
+    "longitude": 140.50956614,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "01015",
+    "portName": "枝幸",
+    "prefectureCode": "01",
+    "prefectureName": "北海道",
+    "latitude": 42.16519533,
+    "longitude": 142.76020322,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "01016",
+    "portName": "霧多布",
+    "prefectureCode": "01",
+    "prefectureName": "北海道",
+    "latitude": 42.01668266,
+    "longitude": 143.1423086,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "01017",
+    "portName": "えりも",
+    "prefectureCode": "01",
+    "prefectureName": "北海道",
+    "latitude": 43.34518677,
+    "longitude": 145.57535033,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "01018",
+    "portName": "浦河",
+    "prefectureCode": "01",
+    "prefectureName": "北海道",
+    "latitude": 42.16519533,
+    "longitude": 142.76020322,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "01019",
+    "portName": "森",
+    "prefectureCode": "01",
+    "prefectureName": "北海道",
+    "latitude": 44.3746534,
+    "longitude": 141.69650481,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "01020",
+    "portName": "椴法華",
+    "prefectureCode": "01",
+    "prefectureName": "北海道",
+    "latitude": 44.44735954,
+    "longitude": 141.42433711,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "01021",
+    "portName": "松前",
+    "prefectureCode": "01",
+    "prefectureName": "北海道",
+    "latitude": 44.43996388,
+    "longitude": 141.33446741,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "01022",
+    "portName": "江差",
+    "prefectureCode": "01",
+    "prefectureName": "北海道",
+    "latitude": 43.86133828,
+    "longitude": 141.52701704,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "01023",
+    "portName": "瀬棚",
+    "prefectureCode": "01",
+    "prefectureName": "北海道",
+    "latitude": 44.88272706,
+    "longitude": 141.72979352,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "01024",
+    "portName": "岩内",
+    "prefectureCode": "01",
+    "prefectureName": "北海道",
+    "latitude": 45.23881221,
+    "longitude": 141.23504297,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "01025",
+    "portName": "余市",
+    "prefectureCode": "01",
+    "prefectureName": "北海道",
+    "latitude": 43.21055556,
+    "longitude": 140.78111111,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "01026",
+    "portName": "増毛",
+    "prefectureCode": "01",
+    "prefectureName": "北海道",
+    "latitude": 44.93611111,
+    "longitude": 142.59305556,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "01027",
+    "portName": "羽幌",
+    "prefectureCode": "01",
+    "prefectureName": "北海道",
+    "latitude": 44.3746534,
+    "longitude": 141.69650481,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "01028",
+    "portName": "天塩",
+    "prefectureCode": "01",
+    "prefectureName": "北海道",
+    "latitude": 45.30104561,
+    "longitude": 141.04959259,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "01029",
+    "portName": "香深",
+    "prefectureCode": "01",
+    "prefectureName": "北海道",
+    "latitude": 45.19263147,
+    "longitude": 141.13396723,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "01030",
+    "portName": "鴛泊",
+    "prefectureCode": "01",
+    "prefectureName": "北海道",
+    "latitude": 44.02871738,
+    "longitude": 144.28610498,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "01031",
+    "portName": "沓形",
+    "prefectureCode": "01",
+    "prefectureName": "北海道",
+    "latitude": 45.19263147,
+    "longitude": 141.13396723,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "01033",
+    "portName": "焼尻",
+    "prefectureCode": "01",
+    "prefectureName": "北海道",
+    "latitude": 43.0870489,
+    "longitude": 145.12608879,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "01034",
+    "portName": "天売",
+    "prefectureCode": "01",
+    "prefectureName": "北海道",
+    "latitude": 45.5231335,
+    "longitude": 141.9457115,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "01035",
+    "portName": "奥尻",
+    "prefectureCode": "01",
+    "prefectureName": "北海道",
+    "latitude": 42.29555556,
+    "longitude": 143.33444444,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "02001",
+    "portName": "青森",
+    "prefectureCode": "02",
+    "prefectureName": "青森県",
+    "latitude": 40.86011953,
+    "longitude": 140.77853782,
+    "portGrade": "重要港湾",
+    "administrator": "青森県"
+  },
+  {
+    "portCode": "02002",
+    "portName": "大湊",
+    "prefectureCode": "02",
+    "prefectureName": "青森県",
+    "latitude": 40.56128971,
+    "longitude": 141.52018705,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "02003",
+    "portName": "尻屋岬",
+    "prefectureCode": "02",
+    "prefectureName": "青森県",
+    "latitude": 41.41252363,
+    "longitude": 141.43731333,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "02004",
+    "portName": "むつ小川原",
+    "prefectureCode": "02",
+    "prefectureName": "青森県",
+    "latitude": 40.95668792,
+    "longitude": 141.4159767,
+    "portGrade": "重要港湾",
+    "administrator": "青森県"
+  },
+  {
+    "portCode": "02005",
+    "portName": "八戸",
+    "prefectureCode": "02",
+    "prefectureName": "青森県",
+    "latitude": 40.56128971,
+    "longitude": 141.52018705,
+    "portGrade": "重要港湾",
+    "administrator": "青森県"
+  },
+  {
+    "portCode": "02006",
+    "portName": "深浦",
+    "prefectureCode": "02",
+    "prefectureName": "青森県",
+    "latitude": 40.87945511,
+    "longitude": 141.1189641,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "02007",
+    "portName": "七里長浜",
+    "prefectureCode": "02",
+    "prefectureName": "青森県",
+    "latitude": 40.9433434,
+    "longitude": 140.99194389,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "02008",
+    "portName": "野辺地",
+    "prefectureCode": "02",
+    "prefectureName": "青森県",
+    "latitude": 40.65486604,
+    "longitude": 139.92424187,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "02009",
+    "portName": "川内",
+    "prefectureCode": "02",
+    "prefectureName": "青森県",
+    "latitude": 41.41252363,
+    "longitude": 141.43731333,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "02010",
+    "portName": "大間",
+    "prefectureCode": "02",
+    "prefectureName": "青森県",
+    "latitude": 41.52958128,
+    "longitude": 140.89867645,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "02011",
+    "portName": "子ノ口",
+    "prefectureCode": "02",
+    "prefectureName": "青森県",
+    "latitude": 40.46511408,
+    "longitude": 140.9374675,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "02012",
+    "portName": "休屋",
+    "prefectureCode": "02",
+    "prefectureName": "青森県",
+    "latitude": 40.95668792,
+    "longitude": 141.4159767,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "03001",
+    "portName": "久慈",
+    "prefectureCode": "03",
+    "prefectureName": "岩手県",
+    "latitude": 40.20010296,
+    "longitude": 141.82446611,
+    "portGrade": "重要港湾",
+    "administrator": "岩手県"
+  },
+  {
+    "portCode": "03002",
+    "portName": "宮古",
+    "prefectureCode": "03",
+    "prefectureName": "岩手県",
+    "latitude": 39.62793702,
+    "longitude": 141.9761549,
+    "portGrade": "重要港湾",
+    "administrator": "岩手県"
+  },
+  {
+    "portCode": "03003",
+    "portName": "釜石",
+    "prefectureCode": "03",
+    "prefectureName": "岩手県",
+    "latitude": 39.25779671,
+    "longitude": 141.92066353,
+    "portGrade": "重要港湾",
+    "administrator": "岩手県"
+  },
+  {
+    "portCode": "03004",
+    "portName": "大船渡",
+    "prefectureCode": "03",
+    "prefectureName": "岩手県",
+    "latitude": 39.01910089,
+    "longitude": 141.73320508,
+    "portGrade": "重要港湾",
+    "administrator": "岩手県"
+  },
+  {
+    "portCode": "03005",
+    "portName": "八木",
+    "prefectureCode": "03",
+    "prefectureName": "岩手県",
+    "latitude": 40.34872011,
+    "longitude": 141.76552805,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "03006",
+    "portName": "小本",
+    "prefectureCode": "03",
+    "prefectureName": "岩手県",
+    "latitude": 40.20010296,
+    "longitude": 141.82446611,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "04001",
+    "portName": "気仙沼",
+    "prefectureCode": "04",
+    "prefectureName": "宮城県",
+    "latitude": 38.32253852,
+    "longitude": 141.09087231,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "04002",
+    "portName": "石巻",
+    "prefectureCode": "04",
+    "prefectureName": "宮城県",
+    "latitude": 38.419722,
+    "longitude": 141.303611,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "04003",
+    "portName": "仙台塩釜",
+    "prefectureCode": "04",
+    "prefectureName": "宮城県",
+    "latitude": 38.32253852,
+    "longitude": 141.09087231,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "04004",
+    "portName": "雄勝",
+    "prefectureCode": "04",
+    "prefectureName": "宮城県",
+    "latitude": 38.37360925,
+    "longitude": 141.44743312,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "04005",
+    "portName": "女川",
+    "prefectureCode": "04",
+    "prefectureName": "宮城県",
+    "latitude": 38.42172794,
+    "longitude": 141.48265451,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "04006",
+    "portName": "荻浜",
+    "prefectureCode": "04",
+    "prefectureName": "宮城県",
+    "latitude": 38.42172794,
+    "longitude": 141.48265451,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "04007",
+    "portName": "松島",
+    "prefectureCode": "04",
+    "prefectureName": "宮城県",
+    "latitude": 38.29334336,
+    "longitude": 141.54975955,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "04008",
+    "portName": "金華山",
+    "prefectureCode": "04",
+    "prefectureName": "宮城県",
+    "latitude": 38.88594982,
+    "longitude": 141.59641873,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "05001",
+    "portName": "能代",
+    "prefectureCode": "05",
+    "prefectureName": "秋田県",
+    "latitude": 40.21057847,
+    "longitude": 139.98386999,
+    "portGrade": "重要港湾",
+    "administrator": "秋田県"
+  },
+  {
+    "portCode": "05002",
+    "portName": "船川",
+    "prefectureCode": "05",
+    "prefectureName": "秋田県",
+    "latitude": 39.87207477,
+    "longitude": 139.86767654,
+    "portGrade": "重要港湾",
+    "administrator": "(独)石油天然ガス・金属鉱物資源機構"
+  },
+  {
+    "portCode": "05003",
+    "portName": "秋田",
+    "prefectureCode": "05",
+    "prefectureName": "秋田県",
+    "latitude": 39.7622777,
+    "longitude": 140.02690365,
+    "portGrade": "重要港湾",
+    "administrator": "秋田県"
+  },
+  {
+    "portCode": "05004",
+    "portName": "戸賀",
+    "prefectureCode": "05",
+    "prefectureName": "秋田県",
+    "latitude": 39.38929108,
+    "longitude": 140.01174524,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "05005",
+    "portName": "本荘",
+    "prefectureCode": "05",
+    "prefectureName": "秋田県",
+    "latitude": 39.95574567,
+    "longitude": 139.70379221,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "06001",
+    "portName": "酒田",
+    "prefectureCode": "06",
+    "prefectureName": "山形県",
+    "latitude": 38.93565108,
+    "longitude": 139.8046782,
+    "portGrade": "重要港湾",
+    "administrator": "山形県"
+  },
+  {
+    "portCode": "06002",
+    "portName": "加茂",
+    "prefectureCode": "06",
+    "prefectureName": "山形県",
+    "latitude": 38.56074308,
+    "longitude": 139.54421244,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "06003",
+    "portName": "鼠ヶ関",
+    "prefectureCode": "06",
+    "prefectureName": "山形県",
+    "latitude": 38.76747576,
+    "longitude": 139.73052073,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "07001",
+    "portName": "相馬",
+    "prefectureCode": "07",
+    "prefectureName": "福島県",
+    "latitude": 37.85804819,
+    "longitude": 140.96546177,
+    "portGrade": "重要港湾",
+    "administrator": "福島県"
+  },
+  {
+    "portCode": "07002",
+    "portName": "小名浜",
+    "prefectureCode": "07",
+    "prefectureName": "福島県",
+    "latitude": 36.92066586,
+    "longitude": 140.89054745,
+    "portGrade": "重要港湾",
+    "administrator": "福島県"
+  },
+  {
+    "portCode": "07003",
+    "portName": "久ノ浜",
+    "prefectureCode": "07",
+    "prefectureName": "福島県",
+    "latitude": 37.1489819,
+    "longitude": 141.00689011,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "07004",
+    "portName": "江名",
+    "prefectureCode": "07",
+    "prefectureName": "福島県",
+    "latitude": 36.96518831,
+    "longitude": 140.96418212,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "07005",
+    "portName": "中之作",
+    "prefectureCode": "07",
+    "prefectureName": "福島県",
+    "latitude": 36.95737522,
+    "longitude": 140.95322162,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "07006",
+    "portName": "翁島",
+    "prefectureCode": "07",
+    "prefectureName": "福島県",
+    "latitude": 37.52142382,
+    "longitude": 140.04778841,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "07007",
+    "portName": "湖南",
+    "prefectureCode": "07",
+    "prefectureName": "福島県",
+    "latitude": 37.41457368,
+    "longitude": 140.11818872,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "08001",
+    "portName": "茨城",
+    "prefectureCode": "08",
+    "prefectureName": "茨城県",
+    "latitude": 36.41722131,
+    "longitude": 140.62972233,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "08005",
+    "portName": "鹿島",
+    "prefectureCode": "08",
+    "prefectureName": "茨城県",
+    "latitude": 35.94682024,
+    "longitude": 140.71466943,
+    "portGrade": "重要港湾",
+    "administrator": "茨城県"
+  },
+  {
+    "portCode": "08006",
+    "portName": "川尻",
+    "prefectureCode": "08",
+    "prefectureName": "茨城県",
+    "latitude": 36.54336228,
+    "longitude": 140.64764679,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "08007",
+    "portName": "河原子",
+    "prefectureCode": "08",
+    "prefectureName": "茨城県",
+    "latitude": 36.54336228,
+    "longitude": 140.64764679,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "08008",
+    "portName": "土浦",
+    "prefectureCode": "08",
+    "prefectureName": "茨城県",
+    "latitude": 36.07987478,
+    "longitude": 140.21992262,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "12001",
+    "portName": "館山",
+    "prefectureCode": "12",
+    "prefectureName": "千葉県",
+    "latitude": 34.99770982,
+    "longitude": 139.84156564,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "12002",
+    "portName": "木更津",
+    "prefectureCode": "12",
+    "prefectureName": "千葉県",
+    "latitude": 35.3850851,
+    "longitude": 139.82813847,
+    "portGrade": "重要港湾",
+    "administrator": "千葉県"
+  },
+  {
+    "portCode": "12003",
+    "portName": "千葉",
+    "prefectureCode": "12",
+    "prefectureName": "千葉県",
+    "latitude": 35.57306633,
+    "longitude": 140.003552,
+    "portGrade": "国際拠点港湾",
+    "administrator": "千葉県"
+  },
+  {
+    "portCode": "12004",
+    "portName": "名洗",
+    "prefectureCode": "12",
+    "prefectureName": "千葉県",
+    "latitude": 35.12939937,
+    "longitude": 140.25276333,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "12005",
+    "portName": "興津",
+    "prefectureCode": "12",
+    "prefectureName": "千葉県",
+    "latitude": 35.70235853,
+    "longitude": 140.83316809,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "12006",
+    "portName": "浜金谷",
+    "prefectureCode": "12",
+    "prefectureName": "千葉県",
+    "latitude": 35.17197755,
+    "longitude": 139.81207766,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "13001",
+    "portName": "東京",
+    "prefectureCode": "13",
+    "prefectureName": "東京都",
+    "latitude": 35.573865,
+    "longitude": 139.804918,
+    "portGrade": "国際戦略港湾",
+    "administrator": "東京都"
+  },
+  {
+    "portCode": "13002",
+    "portName": "岡田",
+    "prefectureCode": "13",
+    "prefectureName": "東京都",
+    "latitude": 34.75156542,
+    "longitude": 139.34779448,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "13003",
+    "portName": "波浮",
+    "prefectureCode": "13",
+    "prefectureName": "東京都",
+    "latitude": 34.79266028,
+    "longitude": 139.387321,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "13004",
+    "portName": "元町",
+    "prefectureCode": "13",
+    "prefectureName": "東京都",
+    "latitude": 34.68294157,
+    "longitude": 139.44240248,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "13005",
+    "portName": "利島",
+    "prefectureCode": "13",
+    "prefectureName": "東京都",
+    "latitude": 34.37451687,
+    "longitude": 139.24624664,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "13006",
+    "portName": "新島",
+    "prefectureCode": "13",
+    "prefectureName": "東京都",
+    "latitude": 34.2061658,
+    "longitude": 139.12748399,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "13007",
+    "portName": "式根島",
+    "prefectureCode": "13",
+    "prefectureName": "東京都",
+    "latitude": 34.12292643,
+    "longitude": 139.51397033,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "13008",
+    "portName": "神津島",
+    "prefectureCode": "13",
+    "prefectureName": "東京都",
+    "latitude": 33.09568503,
+    "longitude": 139.7688381,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "13009",
+    "portName": "三池",
+    "prefectureCode": "13",
+    "prefectureName": "東京都",
+    "latitude": 33.12383121,
+    "longitude": 139.81888155,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "13010",
+    "portName": "御蔵島",
+    "prefectureCode": "13",
+    "prefectureName": "東京都",
+    "latitude": 34.53514878,
+    "longitude": 139.28151968,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "13011",
+    "portName": "神湊",
+    "prefectureCode": "13",
+    "prefectureName": "東京都",
+    "latitude": 33.89805453,
+    "longitude": 139.58855323,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "13012",
+    "portName": "八重根",
+    "prefectureCode": "13",
+    "prefectureName": "東京都",
+    "latitude": 34.08301589,
+    "longitude": 139.56329989,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "13013",
+    "portName": "青ヶ島",
+    "prefectureCode": "13",
+    "prefectureName": "東京都",
+    "latitude": 32.44587579,
+    "longitude": 139.75945858,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "13014",
+    "portName": "二見",
+    "prefectureCode": "13",
+    "prefectureName": "東京都",
+    "latitude": 34.31707109,
+    "longitude": 139.22184982,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "13015",
+    "portName": "沖",
+    "prefectureCode": "13",
+    "prefectureName": "東京都",
+    "latitude": 27.08298888,
+    "longitude": 142.19534974,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "13016",
+    "portName": "野伏",
+    "prefectureCode": "13",
+    "prefectureName": "東京都",
+    "latitude": null,
+    "longitude": null,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "14001",
+    "portName": "川崎",
+    "prefectureCode": "14",
+    "prefectureName": "神奈川県",
+    "latitude": 35.487096,
+    "longitude": 139.774266,
+    "portGrade": "国際戦略港湾",
+    "administrator": "川崎市"
+  },
+  {
+    "portCode": "14002",
+    "portName": "横浜",
+    "prefectureCode": "14",
+    "prefectureName": "神奈川県",
+    "latitude": 35.415905,
+    "longitude": 139.693456,
+    "portGrade": "国際戦略港湾",
+    "administrator": "横浜市"
+  },
+  {
+    "portCode": "14003",
+    "portName": "横須賀",
+    "prefectureCode": "14",
+    "prefectureName": "神奈川県",
+    "latitude": 35.2864336,
+    "longitude": 139.70444421,
+    "portGrade": "重要港湾",
+    "administrator": "横須賀市"
+  },
+  {
+    "portCode": "14004",
+    "portName": "葉山",
+    "prefectureCode": "14",
+    "prefectureName": "神奈川県",
+    "latitude": 35.30527524,
+    "longitude": 139.32041346,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "14005",
+    "portName": "湘南",
+    "prefectureCode": "14",
+    "prefectureName": "神奈川県",
+    "latitude": 35.1494796,
+    "longitude": 139.15005769,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "14006",
+    "portName": "大磯",
+    "prefectureCode": "14",
+    "prefectureName": "神奈川県",
+    "latitude": 35.30009917,
+    "longitude": 139.48754188,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "14007",
+    "portName": "真鶴",
+    "prefectureCode": "14",
+    "prefectureName": "神奈川県",
+    "latitude": 35.28275755,
+    "longitude": 139.56588068,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "15001",
+    "portName": "新潟",
+    "prefectureCode": "15",
+    "prefectureName": "新潟県",
+    "latitude": 37.99014077,
+    "longitude": 139.15276133,
+    "portGrade": "国際拠点港湾",
+    "administrator": "新潟県"
+  },
+  {
+    "portCode": "15002",
+    "portName": "柏崎",
+    "prefectureCode": "15",
+    "prefectureName": "新潟県",
+    "latitude": 37.37273406,
+    "longitude": 138.52985572,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "15003",
+    "portName": "直江津",
+    "prefectureCode": "15",
+    "prefectureName": "新潟県",
+    "latitude": 37.20230668,
+    "longitude": 138.2541037,
+    "portGrade": "重要港湾",
+    "administrator": "新潟県"
+  },
+  {
+    "portCode": "15004",
+    "portName": "姫川",
+    "prefectureCode": "15",
+    "prefectureName": "新潟県",
+    "latitude": 37.04802352,
+    "longitude": 137.84594407,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "15005",
+    "portName": "両津",
+    "prefectureCode": "15",
+    "prefectureName": "新潟県",
+    "latitude": 38.08933987,
+    "longitude": 138.45761982,
+    "portGrade": "重要港湾",
+    "administrator": "新潟県"
+  },
+  {
+    "portCode": "15006",
+    "portName": "小木",
+    "prefectureCode": "15",
+    "prefectureName": "新潟県",
+    "latitude": 37.81489842,
+    "longitude": 138.29094789,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "15007",
+    "portName": "岩船",
+    "prefectureCode": "15",
+    "prefectureName": "新潟県",
+    "latitude": 38.19964127,
+    "longitude": 139.42347533,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "15008",
+    "portName": "寺泊",
+    "prefectureCode": "15",
+    "prefectureName": "新潟県",
+    "latitude": 37.97115008,
+    "longitude": 138.2670296,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "15009",
+    "portName": "赤泊",
+    "prefectureCode": "15",
+    "prefectureName": "新潟県",
+    "latitude": 37.8677078,
+    "longitude": 138.41171255,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "15010",
+    "portName": "二見",
+    "prefectureCode": "15",
+    "prefectureName": "新潟県",
+    "latitude": 37.04802352,
+    "longitude": 137.84594407,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "16001",
+    "portName": "伏木富山",
+    "prefectureCode": "16",
+    "prefectureName": "富山県",
+    "latitude": 36.78893777,
+    "longitude": 137.14144492,
+    "portGrade": "国際拠点港湾",
+    "administrator": "富山県"
+  },
+  {
+    "portCode": "16002",
+    "portName": "魚津",
+    "prefectureCode": "16",
+    "prefectureName": "富山県",
+    "latitude": 36.81280952,
+    "longitude": 137.39004619,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "17001",
+    "portName": "七尾",
+    "prefectureCode": "17",
+    "prefectureName": "石川県",
+    "latitude": 37.09103044,
+    "longitude": 136.99120967,
+    "portGrade": "重要港湾",
+    "administrator": "石川県"
+  },
+  {
+    "portCode": "17002",
+    "portName": "金沢",
+    "prefectureCode": "17",
+    "prefectureName": "石川県",
+    "latitude": 36.61432138,
+    "longitude": 136.58348279,
+    "portGrade": "重要港湾",
+    "administrator": "石川県"
+  },
+  {
+    "portCode": "17003",
+    "portName": "和倉",
+    "prefectureCode": "17",
+    "prefectureName": "石川県",
+    "latitude": 37.2190323,
+    "longitude": 136.9182856,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "17004",
+    "portName": "穴水",
+    "prefectureCode": "17",
+    "prefectureName": "石川県",
+    "latitude": 37.2969015,
+    "longitude": 137.15363154,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "17005",
+    "portName": "宇出津",
+    "prefectureCode": "17",
+    "prefectureName": "石川県",
+    "latitude": 37.29572643,
+    "longitude": 137.23590381,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "17006",
+    "portName": "小木",
+    "prefectureCode": "17",
+    "prefectureName": "石川県",
+    "latitude": 37.43397965,
+    "longitude": 137.26562229,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "17007",
+    "portName": "飯田",
+    "prefectureCode": "17",
+    "prefectureName": "石川県",
+    "latitude": 37.40425424,
+    "longitude": 136.91369583,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "17008",
+    "portName": "輪島",
+    "prefectureCode": "17",
+    "prefectureName": "石川県",
+    "latitude": 37.0847564,
+    "longitude": 136.72248708,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "17009",
+    "portName": "福浦",
+    "prefectureCode": "17",
+    "prefectureName": "石川県",
+    "latitude": 36.9198657,
+    "longitude": 136.75396347,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "17010",
+    "portName": "滝",
+    "prefectureCode": "17",
+    "prefectureName": "石川県",
+    "latitude": 36.30067617,
+    "longitude": 136.24373611,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "17011",
+    "portName": "塩屋",
+    "prefectureCode": "17",
+    "prefectureName": "石川県",
+    "latitude": 37.09263499,
+    "longitude": 136.91549805,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "18001",
+    "portName": "福井",
+    "prefectureCode": "18",
+    "prefectureName": "福井県",
+    "latitude": 36.19702322,
+    "longitude": 136.10561286,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "18002",
+    "portName": "敦賀",
+    "prefectureCode": "18",
+    "prefectureName": "福井県",
+    "latitude": 35.68990979,
+    "longitude": 136.05849752,
+    "portGrade": "重要港湾",
+    "administrator": "福井県"
+  },
+  {
+    "portCode": "18003",
+    "portName": "内浦",
+    "prefectureCode": "18",
+    "prefectureName": "福井県",
+    "latitude": 35.53229295,
+    "longitude": 135.49835194,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "18004",
+    "portName": "鷹巣",
+    "prefectureCode": "18",
+    "prefectureName": "福井県",
+    "latitude": 36.13056588,
+    "longitude": 136.05390438,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "18005",
+    "portName": "和田",
+    "prefectureCode": "18",
+    "prefectureName": "福井県",
+    "latitude": 36.19702322,
+    "longitude": 136.10561286,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "22001",
+    "portName": "沼津",
+    "prefectureCode": "22",
+    "prefectureName": "静岡県",
+    "latitude": 35.07779367,
+    "longitude": 138.85217759,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "22002",
+    "portName": "田子の浦",
+    "prefectureCode": "22",
+    "prefectureName": "静岡県",
+    "latitude": 35.13989188,
+    "longitude": 138.69435564,
+    "portGrade": "重要港湾",
+    "administrator": "静岡県"
+  },
+  {
+    "portCode": "22003",
+    "portName": "清水",
+    "prefectureCode": "22",
+    "prefectureName": "静岡県",
+    "latitude": 35.02519562,
+    "longitude": 138.51083029,
+    "portGrade": "国際拠点港湾",
+    "administrator": "静岡県"
+  },
+  {
+    "portCode": "22004",
+    "portName": "大井川",
+    "prefectureCode": "22",
+    "prefectureName": "静岡県",
+    "latitude": 34.78045535,
+    "longitude": 138.30495666,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "22005",
+    "portName": "御前崎",
+    "prefectureCode": "22",
+    "prefectureName": "静岡県",
+    "latitude": 34.63687739,
+    "longitude": 138.22400579,
+    "portGrade": "重要港湾",
+    "administrator": "静岡県"
+  },
+  {
+    "portCode": "22006",
+    "portName": "熱海",
+    "prefectureCode": "22",
+    "prefectureName": "静岡県",
+    "latitude": 34.75870863,
+    "longitude": 138.76862422,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "22007",
+    "portName": "伊東",
+    "prefectureCode": "22",
+    "prefectureName": "静岡県",
+    "latitude": 34.97303294,
+    "longitude": 139.12778253,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "22008",
+    "portName": "下田",
+    "prefectureCode": "22",
+    "prefectureName": "静岡県",
+    "latitude": 35.08166723,
+    "longitude": 139.0824024,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "22009",
+    "portName": "手石",
+    "prefectureCode": "22",
+    "prefectureName": "静岡県",
+    "latitude": 34.66710332,
+    "longitude": 138.9537072,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "22010",
+    "portName": "松崎",
+    "prefectureCode": "22",
+    "prefectureName": "静岡県",
+    "latitude": 34.67442604,
+    "longitude": 137.60449441,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "22011",
+    "portName": "宇久須",
+    "prefectureCode": "22",
+    "prefectureName": "静岡県",
+    "latitude": 34.850627,
+    "longitude": 138.76974082,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "22012",
+    "portName": "土肥",
+    "prefectureCode": "22",
+    "prefectureName": "静岡県",
+    "latitude": 34.850627,
+    "longitude": 138.76974082,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "22013",
+    "portName": "相良",
+    "prefectureCode": "22",
+    "prefectureName": "静岡県",
+    "latitude": 34.63139625,
+    "longitude": 138.89417821,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "22014",
+    "portName": "浜名",
+    "prefectureCode": "22",
+    "prefectureName": "静岡県",
+    "latitude": 34.72835561,
+    "longitude": 138.23187444,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "23001",
+    "portName": "三河",
+    "prefectureCode": "23",
+    "prefectureName": "愛知県",
+    "latitude": 34.76333213,
+    "longitude": 137.25778682,
+    "portGrade": "重要港湾",
+    "administrator": "愛知県"
+  },
+  {
+    "portCode": "23002",
+    "portName": "衣浦",
+    "prefectureCode": "23",
+    "prefectureName": "愛知県",
+    "latitude": 34.83978651,
+    "longitude": 136.94575108,
+    "portGrade": "重要港湾",
+    "administrator": "愛知県"
+  },
+  {
+    "portCode": "23003",
+    "portName": "名古屋",
+    "prefectureCode": "23",
+    "prefectureName": "愛知県",
+    "latitude": 35.01587302,
+    "longitude": 136.83587235,
+    "portGrade": "国際拠点港湾",
+    "administrator": "名古屋港管理組合"
+  },
+  {
+    "portCode": "23004",
+    "portName": "常滑",
+    "prefectureCode": "23",
+    "prefectureName": "愛知県",
+    "latitude": 34.87166209,
+    "longitude": 136.83155877,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "23005",
+    "portName": "福江",
+    "prefectureCode": "23",
+    "prefectureName": "愛知県",
+    "latitude": 34.87166209,
+    "longitude": 136.83155877,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "23006",
+    "portName": "泉",
+    "prefectureCode": "23",
+    "prefectureName": "愛知県",
+    "latitude": 34.78069373,
+    "longitude": 137.07560046,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "23007",
+    "portName": "倉舞",
+    "prefectureCode": "23",
+    "prefectureName": "愛知県",
+    "latitude": 34.58759119,
+    "longitude": 137.01153589,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "23008",
+    "portName": "東幡豆",
+    "prefectureCode": "23",
+    "prefectureName": "愛知県",
+    "latitude": 34.64954683,
+    "longitude": 137.10819191,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "23010",
+    "portName": "河和",
+    "prefectureCode": "23",
+    "prefectureName": "愛知県",
+    "latitude": 34.73340403,
+    "longitude": 136.86711432,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "23011",
+    "portName": "師崎",
+    "prefectureCode": "23",
+    "prefectureName": "愛知県",
+    "latitude": 34.65597428,
+    "longitude": 137.1593967,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "23012",
+    "portName": "内海",
+    "prefectureCode": "23",
+    "prefectureName": "愛知県",
+    "latitude": 34.76377423,
+    "longitude": 136.83697453,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "23013",
+    "portName": "冨具崎",
+    "prefectureCode": "23",
+    "prefectureName": "愛知県",
+    "latitude": 34.66915841,
+    "longitude": 137.19258981,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "23014",
+    "portName": "常滑",
+    "prefectureCode": "23",
+    "prefectureName": "愛知県",
+    "latitude": 34.7776346,
+    "longitude": 137.14684746,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "24001",
+    "portName": "四日市",
+    "prefectureCode": "24",
+    "prefectureName": "三重県",
+    "latitude": 34.95287356,
+    "longitude": 136.6866338,
+    "portGrade": "国際拠点港湾",
+    "administrator": "四日市港管理組合"
+  },
+  {
+    "portCode": "24002",
+    "portName": "津松阪",
+    "prefectureCode": "24",
+    "prefectureName": "三重県",
+    "latitude": 34.67424834,
+    "longitude": 136.5637143,
+    "portGrade": "重要港湾",
+    "administrator": "三重県"
+  },
+  {
+    "portCode": "24003",
+    "portName": "吉津",
+    "prefectureCode": "24",
+    "prefectureName": "三重県",
+    "latitude": 34.26415495,
+    "longitude": 136.51400573,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "24004",
+    "portName": "鳥羽",
+    "prefectureCode": "24",
+    "prefectureName": "三重県",
+    "latitude": 34.85234289,
+    "longitude": 136.61657685,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "24005",
+    "portName": "尾鷲",
+    "prefectureCode": "24",
+    "prefectureName": "三重県",
+    "latitude": 34.07451769,
+    "longitude": 136.22364322,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "24006",
+    "portName": "鵜殿",
+    "prefectureCode": "24",
+    "prefectureName": "三重県",
+    "latitude": 33.73224323,
+    "longitude": 136.02181089,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "24007",
+    "portName": "千代崎",
+    "prefectureCode": "24",
+    "prefectureName": "三重県",
+    "latitude": 34.85234289,
+    "longitude": 136.61657685,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "24008",
+    "portName": "白子",
+    "prefectureCode": "24",
+    "prefectureName": "三重県",
+    "latitude": 34.52251635,
+    "longitude": 136.76322622,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "24009",
+    "portName": "宇治山田",
+    "prefectureCode": "24",
+    "prefectureName": "三重県",
+    "latitude": 34.33707588,
+    "longitude": 136.69922036,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "24010",
+    "portName": "的矢",
+    "prefectureCode": "24",
+    "prefectureName": "三重県",
+    "latitude": 34.26415495,
+    "longitude": 136.51400573,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "24011",
+    "portName": "賢島",
+    "prefectureCode": "24",
+    "prefectureName": "三重県",
+    "latitude": 34.48973092,
+    "longitude": 136.84722189,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "24012",
+    "portName": "浜島",
+    "prefectureCode": "24",
+    "prefectureName": "三重県",
+    "latitude": 34.37537544,
+    "longitude": 136.88702806,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "24013",
+    "portName": "長島",
+    "prefectureCode": "24",
+    "prefectureName": "三重県",
+    "latitude": 34.29501545,
+    "longitude": 136.76542878,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "24014",
+    "portName": "引本",
+    "prefectureCode": "24",
+    "prefectureName": "三重県",
+    "latitude": 34.19377778,
+    "longitude": 136.34552885,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "24015",
+    "portName": "三木里",
+    "prefectureCode": "24",
+    "prefectureName": "三重県",
+    "latitude": 34.10820683,
+    "longitude": 136.25095884,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "24016",
+    "portName": "賀田",
+    "prefectureCode": "24",
+    "prefectureName": "三重県",
+    "latitude": 33.88769186,
+    "longitude": 136.11827656,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "24017",
+    "portName": "二木島",
+    "prefectureCode": "24",
+    "prefectureName": "三重県",
+    "latitude": 33.93754638,
+    "longitude": 136.19186997,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "24018",
+    "portName": "木本",
+    "prefectureCode": "24",
+    "prefectureName": "三重県",
+    "latitude": 33.73224323,
+    "longitude": 136.02181089,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "25001",
+    "portName": "長浜",
+    "prefectureCode": "25",
+    "prefectureName": "滋賀県",
+    "latitude": 35.01330279,
+    "longitude": 135.86754577,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "25002",
+    "portName": "彦根",
+    "prefectureCode": "25",
+    "prefectureName": "滋賀県",
+    "latitude": 35.28448184,
+    "longitude": 136.24522117,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "25003",
+    "portName": "大津",
+    "prefectureCode": "25",
+    "prefectureName": "滋賀県",
+    "latitude": 35.37246811,
+    "longitude": 136.26446145,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "25004",
+    "portName": "竹生島",
+    "prefectureCode": "25",
+    "prefectureName": "滋賀県",
+    "latitude": 35.41947635,
+    "longitude": 136.14352497,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "26001",
+    "portName": "舞鶴",
+    "prefectureCode": "26",
+    "prefectureName": "京都府",
+    "latitude": 35.49455258,
+    "longitude": 135.35905905,
+    "portGrade": "重要港湾",
+    "administrator": "京都府"
+  },
+  {
+    "portCode": "26002",
+    "portName": "宮津",
+    "prefectureCode": "26",
+    "prefectureName": "京都府",
+    "latitude": 35.56659005,
+    "longitude": 135.20020928,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "26003",
+    "portName": "久美浜",
+    "prefectureCode": "26",
+    "prefectureName": "京都府",
+    "latitude": 35.56659005,
+    "longitude": 135.20020928,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "27001",
+    "portName": "泉州",
+    "prefectureCode": "27",
+    "prefectureName": "大阪府",
+    "latitude": 34.42981737,
+    "longitude": 135.25633662,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "27002",
+    "portName": "深日",
+    "prefectureCode": "27",
+    "prefectureName": "大阪府",
+    "latitude": 34.56871234,
+    "longitude": 135.37464493,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "27003",
+    "portName": "泉佐野",
+    "prefectureCode": "27",
+    "prefectureName": "大阪府",
+    "latitude": 34.48421486,
+    "longitude": 135.3566375,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "27004",
+    "portName": "阪南",
+    "prefectureCode": "27",
+    "prefectureName": "大阪府",
+    "latitude": 34.48421486,
+    "longitude": 135.3566375,
+    "portGrade": "重要港湾",
+    "administrator": "大阪府"
+  },
+  {
+    "portCode": "27005",
+    "portName": "堺泉北",
+    "prefectureCode": "27",
+    "prefectureName": "大阪府",
+    "latitude": 34.56871234,
+    "longitude": 135.37464493,
+    "portGrade": "国際拠点港湾",
+    "administrator": "大阪府"
+  },
+  {
+    "portCode": "27006",
+    "portName": "大阪",
+    "prefectureCode": "27",
+    "prefectureName": "大阪府",
+    "latitude": 34.632228,
+    "longitude": 135.387863,
+    "portGrade": "国際戦略港湾",
+    "administrator": "大阪市"
+  },
+  {
+    "portCode": "27007",
+    "portName": "尾崎",
+    "prefectureCode": "27",
+    "prefectureName": "大阪府",
+    "latitude": 34.36892241,
+    "longitude": 135.23992228,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "28001",
+    "portName": "尼崎西宮芦屋",
+    "prefectureCode": "28",
+    "prefectureName": "兵庫県",
+    "latitude": 34.68339109,
+    "longitude": 135.34658575,
+    "portGrade": "重要港湾",
+    "administrator": "兵庫県"
+  },
+  {
+    "portCode": "28002",
+    "portName": "神戸",
+    "prefectureCode": "28",
+    "prefectureName": "兵庫県",
+    "latitude": 34.67284,
+    "longitude": 135.242605,
+    "portGrade": "国際戦略港湾",
+    "administrator": "神戸市"
+  },
+  {
+    "portCode": "28003",
+    "portName": "明石",
+    "prefectureCode": "28",
+    "prefectureName": "兵庫県",
+    "latitude": 34.63972153,
+    "longitude": 134.99014767,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "28004",
+    "portName": "東播磨",
+    "prefectureCode": "28",
+    "prefectureName": "兵庫県",
+    "latitude": 34.7049187,
+    "longitude": 134.81643612,
+    "portGrade": "重要港湾",
+    "administrator": "兵庫県"
+  },
+  {
+    "portCode": "28005",
+    "portName": "姫路",
+    "prefectureCode": "28",
+    "prefectureName": "兵庫県",
+    "latitude": 34.75332431,
+    "longitude": 134.65328539,
+    "portGrade": "国際拠点港湾",
+    "administrator": "兵庫県"
+  },
+  {
+    "portCode": "28006",
+    "portName": "赤穂",
+    "prefectureCode": "28",
+    "prefectureName": "兵庫県",
+    "latitude": 34.72578813,
+    "longitude": 134.38691329,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "28007",
+    "portName": "相生",
+    "prefectureCode": "28",
+    "prefectureName": "兵庫県",
+    "latitude": 34.77643446,
+    "longitude": 134.46501742,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "28008",
+    "portName": "津居山",
+    "prefectureCode": "28",
+    "prefectureName": "兵庫県",
+    "latitude": 34.43861284,
+    "longitude": 134.92338369,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "28009",
+    "portName": "竹野",
+    "prefectureCode": "28",
+    "prefectureName": "兵庫県",
+    "latitude": 34.34740362,
+    "longitude": 134.90563604,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "28010",
+    "portName": "柴山",
+    "prefectureCode": "28",
+    "prefectureName": "兵庫県",
+    "latitude": 35.64860825,
+    "longitude": 134.83664472,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "28011",
+    "portName": "江井ケ島",
+    "prefectureCode": "28",
+    "prefectureName": "兵庫県",
+    "latitude": 35.65775507,
+    "longitude": 134.66607698,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "28012",
+    "portName": "相生",
+    "prefectureCode": "28",
+    "prefectureName": "兵庫県",
+    "latitude": 34.67527494,
+    "longitude": 134.9095934,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "28013",
+    "portName": "坂越",
+    "prefectureCode": "28",
+    "prefectureName": "兵庫県",
+    "latitude": 34.77643446,
+    "longitude": 134.46501742,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "28014",
+    "portName": "古池",
+    "prefectureCode": "28",
+    "prefectureName": "兵庫県",
+    "latitude": 34.72578813,
+    "longitude": 134.38691329,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "28015",
+    "portName": "岩屋",
+    "prefectureCode": "28",
+    "prefectureName": "兵庫県",
+    "latitude": 34.28860321,
+    "longitude": 134.95563721,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "28016",
+    "portName": "淡路交流の翼",
+    "prefectureCode": "28",
+    "prefectureName": "兵庫県",
+    "latitude": 34.20750226,
+    "longitude": 134.72541938,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "28017",
+    "portName": "浦",
+    "prefectureCode": "28",
+    "prefectureName": "兵庫県",
+    "latitude": 34.2463478,
+    "longitude": 134.71422089,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "28018",
+    "portName": "洲本",
+    "prefectureCode": "28",
+    "prefectureName": "兵庫県",
+    "latitude": 34.41722382,
+    "longitude": 134.77990652,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "28019",
+    "portName": "古茂江",
+    "prefectureCode": "28",
+    "prefectureName": "兵庫県",
+    "latitude": 34.33468537,
+    "longitude": 134.72489025,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "28020",
+    "portName": "由良",
+    "prefectureCode": "28",
+    "prefectureName": "兵庫県",
+    "latitude": 34.47466383,
+    "longitude": 134.84153215,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "28022",
+    "portName": "福良",
+    "prefectureCode": "28",
+    "prefectureName": "兵庫県",
+    "latitude": 35.66440914,
+    "longitude": 134.75751659,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "28023",
+    "portName": "湊",
+    "prefectureCode": "28",
+    "prefectureName": "兵庫県",
+    "latitude": 34.68219094,
+    "longitude": 134.53719659,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "28024",
+    "portName": "都志",
+    "prefectureCode": "28",
+    "prefectureName": "兵庫県",
+    "latitude": 34.75858232,
+    "longitude": 134.43697084,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "28025",
+    "portName": "江井",
+    "prefectureCode": "28",
+    "prefectureName": "兵庫県",
+    "latitude": 34.54096326,
+    "longitude": 134.99759434,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "28026",
+    "portName": "郡家",
+    "prefectureCode": "28",
+    "prefectureName": "兵庫県",
+    "latitude": 34.3276422,
+    "longitude": 134.69448627,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "28027",
+    "portName": "室津",
+    "prefectureCode": "28",
+    "prefectureName": "兵庫県",
+    "latitude": 34.46741001,
+    "longitude": 134.82811372,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "28028",
+    "portName": "家島",
+    "prefectureCode": "28",
+    "prefectureName": "兵庫県",
+    "latitude": 34.72476835,
+    "longitude": 134.32716902,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "30001",
+    "portName": "新宮",
+    "prefectureCode": "30",
+    "prefectureName": "和歌山県",
+    "latitude": 33.67025605,
+    "longitude": 135.98252529,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "30002",
+    "portName": "文里",
+    "prefectureCode": "30",
+    "prefectureName": "和歌山県",
+    "latitude": 33.7166323,
+    "longitude": 135.37720829,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "30003",
+    "portName": "日高",
+    "prefectureCode": "30",
+    "prefectureName": "和歌山県",
+    "latitude": 33.86356214,
+    "longitude": 135.14709853,
+    "portGrade": "重要港湾",
+    "administrator": "和歌山県"
+  },
+  {
+    "portCode": "30004",
+    "portName": "和歌山下津",
+    "prefectureCode": "30",
+    "prefectureName": "和歌山県",
+    "latitude": 34.19189456,
+    "longitude": 135.11162594,
+    "portGrade": "国際拠点港湾",
+    "administrator": "和歌山県"
+  },
+  {
+    "portCode": "30005",
+    "portName": "宇久井",
+    "prefectureCode": "30",
+    "prefectureName": "和歌山県",
+    "latitude": 33.94845164,
+    "longitude": 135.08394841,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "30006",
+    "portName": "勝浦",
+    "prefectureCode": "30",
+    "prefectureName": "和歌山県",
+    "latitude": 34.28051694,
+    "longitude": 135.06956422,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "30007",
+    "portName": "浦神",
+    "prefectureCode": "30",
+    "prefectureName": "和歌山県",
+    "latitude": 34.03213734,
+    "longitude": 135.16664939,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "30008",
+    "portName": "古座",
+    "prefectureCode": "30",
+    "prefectureName": "和歌山県",
+    "latitude": 33.56093559,
+    "longitude": 135.90298091,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "30009",
+    "portName": "袋",
+    "prefectureCode": "30",
+    "prefectureName": "和歌山県",
+    "latitude": 33.65408342,
+    "longitude": 135.97510612,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "30010",
+    "portName": "日置",
+    "prefectureCode": "30",
+    "prefectureName": "和歌山県",
+    "latitude": 33.47752374,
+    "longitude": 135.77180253,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "30011",
+    "portName": "由良",
+    "prefectureCode": "30",
+    "prefectureName": "和歌山県",
+    "latitude": 33.56068964,
+    "longitude": 135.44356902,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "30012",
+    "portName": "湯浅広",
+    "prefectureCode": "30",
+    "prefectureName": "和歌山県",
+    "latitude": 33.51275172,
+    "longitude": 135.82556688,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "30013",
+    "portName": "加太",
+    "prefectureCode": "30",
+    "prefectureName": "和歌山県",
+    "latitude": 33.86356214,
+    "longitude": 135.14709853,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "30014",
+    "portName": "大島",
+    "prefectureCode": "30",
+    "prefectureName": "和歌山県",
+    "latitude": 33.46920032,
+    "longitude": 135.79928393,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "31001",
+    "portName": "鳥取",
+    "prefectureCode": "31",
+    "prefectureName": "鳥取県",
+    "latitude": 35.54003437,
+    "longitude": 134.18465815,
+    "portGrade": "重要港湾",
+    "administrator": "鳥取県"
+  },
+  {
+    "portCode": "31002",
+    "portName": "田後",
+    "prefectureCode": "31",
+    "prefectureName": "鳥取県",
+    "latitude": 35.51295608,
+    "longitude": 133.65926625,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "31003",
+    "portName": "赤碕",
+    "prefectureCode": "31",
+    "prefectureName": "鳥取県",
+    "latitude": 35.51295608,
+    "longitude": 133.65926625,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "31004",
+    "portName": "米子",
+    "prefectureCode": "31",
+    "prefectureName": "鳥取県",
+    "latitude": 35.59547171,
+    "longitude": 134.31900532,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "31005",
+    "portName": "境",
+    "prefectureCode": "31",
+    "prefectureName": "鳥取県",
+    "latitude": 35.53636026,
+    "longitude": 133.26715366,
+    "portGrade": "重要港湾",
+    "administrator": "境港管理組合"
+  },
+  {
+    "portCode": "32001",
+    "portName": "浜田",
+    "prefectureCode": "32",
+    "prefectureName": "島根県",
+    "latitude": 34.88732905,
+    "longitude": 132.04187187,
+    "portGrade": "重要港湾",
+    "administrator": "島根県"
+  },
+  {
+    "portCode": "32002",
+    "portName": "三隅",
+    "prefectureCode": "32",
+    "prefectureName": "島根県",
+    "latitude": 34.80072976,
+    "longitude": 131.93591588,
+    "portGrade": "重要港湾",
+    "administrator": "島根県"
+  },
+  {
+    "portCode": "32003",
+    "portName": "西郷",
+    "prefectureCode": "32",
+    "prefectureName": "島根県",
+    "latitude": 36.21002104,
+    "longitude": 133.34259812,
+    "portGrade": "重要港湾",
+    "administrator": "島根県"
+  },
+  {
+    "portCode": "32004",
+    "portName": "安来",
+    "prefectureCode": "32",
+    "prefectureName": "島根県",
+    "latitude": 34.69846769,
+    "longitude": 131.81646212,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "32005",
+    "portName": "松江",
+    "prefectureCode": "32",
+    "prefectureName": "島根県",
+    "latitude": 35.23308243,
+    "longitude": 132.49776823,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "32008",
+    "portName": "軽尾",
+    "prefectureCode": "32",
+    "prefectureName": "島根県",
+    "latitude": 35.02302414,
+    "longitude": 132.21675319,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "32010",
+    "portName": "法田",
+    "prefectureCode": "32",
+    "prefectureName": "島根県",
+    "latitude": 35.27770279,
+    "longitude": 132.58478555,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "32011",
+    "portName": "七類",
+    "prefectureCode": "32",
+    "prefectureName": "島根県",
+    "latitude": 36.0727952,
+    "longitude": 133.12095612,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "32014",
+    "portName": "菅浦",
+    "prefectureCode": "32",
+    "prefectureName": "島根県",
+    "latitude": 35.2823862,
+    "longitude": 132.61434463,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "32017",
+    "portName": "秋鹿北",
+    "prefectureCode": "32",
+    "prefectureName": "島根県",
+    "latitude": 36.28048133,
+    "longitude": 133.3647316,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "32018",
+    "portName": "河下",
+    "prefectureCode": "32",
+    "prefectureName": "島根県",
+    "latitude": 35.25484672,
+    "longitude": 132.53534049,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "32019",
+    "portName": "田儀",
+    "prefectureCode": "32",
+    "prefectureName": "島根県",
+    "latitude": 35.26082315,
+    "longitude": 132.55077771,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "32020",
+    "portName": "久手",
+    "prefectureCode": "32",
+    "prefectureName": "島根県",
+    "latitude": 35.26987603,
+    "longitude": 132.56996193,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "32021",
+    "portName": "宅野",
+    "prefectureCode": "32",
+    "prefectureName": "島根県",
+    "latitude": 35.20576308,
+    "longitude": 132.45390113,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "32023",
+    "portName": "温泉津",
+    "prefectureCode": "32",
+    "prefectureName": "島根県",
+    "latitude": 34.92658461,
+    "longitude": 132.08456804,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "32024",
+    "portName": "江津",
+    "prefectureCode": "32",
+    "prefectureName": "島根県",
+    "latitude": 35.02302414,
+    "longitude": 132.21675319,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "32025",
+    "portName": "益田",
+    "prefectureCode": "32",
+    "prefectureName": "島根県",
+    "latitude": 36.2319276,
+    "longitude": 133.37831814,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "32026",
+    "portName": "重栖",
+    "prefectureCode": "32",
+    "prefectureName": "島根県",
+    "latitude": 36.33801129,
+    "longitude": 133.27249675,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "32027",
+    "portName": "宇賀",
+    "prefectureCode": "32",
+    "prefectureName": "島根県",
+    "latitude": 36.32943265,
+    "longitude": 133.30108516,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "32028",
+    "portName": "倉の谷",
+    "prefectureCode": "32",
+    "prefectureName": "島根県",
+    "latitude": 35.40920807,
+    "longitude": 132.65656588,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "32029",
+    "portName": "物井",
+    "prefectureCode": "32",
+    "prefectureName": "島根県",
+    "latitude": 35.41780646,
+    "longitude": 132.63481399,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "32030",
+    "portName": "別府",
+    "prefectureCode": "32",
+    "prefectureName": "島根県",
+    "latitude": 35.4136502,
+    "longitude": 132.64597168,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "32031",
+    "portName": "波止",
+    "prefectureCode": "32",
+    "prefectureName": "島根県",
+    "latitude": 36.07053055,
+    "longitude": 133.01532024,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "32032",
+    "portName": "美田",
+    "prefectureCode": "32",
+    "prefectureName": "島根県",
+    "latitude": 36.08659162,
+    "longitude": 133.00284951,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "32033",
+    "portName": "国賀",
+    "prefectureCode": "32",
+    "prefectureName": "島根県",
+    "latitude": 36.09370771,
+    "longitude": 132.96601854,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "32034",
+    "portName": "諏訪",
+    "prefectureCode": "32",
+    "prefectureName": "島根県",
+    "latitude": 34.82199719,
+    "longitude": 131.97545748,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "32035",
+    "portName": "保々見",
+    "prefectureCode": "32",
+    "prefectureName": "島根県",
+    "latitude": 36.08440788,
+    "longitude": 133.12410986,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "32036",
+    "portName": "知々井",
+    "prefectureCode": "32",
+    "prefectureName": "島根県",
+    "latitude": 36.0727952,
+    "longitude": 133.12095612,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "32037",
+    "portName": "御波",
+    "prefectureCode": "32",
+    "prefectureName": "島根県",
+    "latitude": 35.16718019,
+    "longitude": 132.40182979,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "32038",
+    "portName": "堤",
+    "prefectureCode": "32",
+    "prefectureName": "島根県",
+    "latitude": 35.12701688,
+    "longitude": 132.38276081,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "32039",
+    "portName": "須賀",
+    "prefectureCode": "32",
+    "prefectureName": "島根県",
+    "latitude": 35.13930871,
+    "longitude": 132.38838372,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "32040",
+    "portName": "日之津",
+    "prefectureCode": "32",
+    "prefectureName": "島根県",
+    "latitude": 36.07053055,
+    "longitude": 133.01532024,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "32041",
+    "portName": "海士",
+    "prefectureCode": "32",
+    "prefectureName": "島根県",
+    "latitude": 36.11891422,
+    "longitude": 133.07830904,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "32043",
+    "portName": "来居",
+    "prefectureCode": "32",
+    "prefectureName": "島根県",
+    "latitude": 36.02805388,
+    "longitude": 133.04089958,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "32044",
+    "portName": "姫の浦",
+    "prefectureCode": "32",
+    "prefectureName": "島根県",
+    "latitude": 36.11048082,
+    "longitude": 133.05522611,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "32045",
+    "portName": "江島",
+    "prefectureCode": "32",
+    "prefectureName": "島根県",
+    "latitude": 36.11217087,
+    "longitude": 133.066605,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "32047",
+    "portName": "波入",
+    "prefectureCode": "32",
+    "prefectureName": "島根県",
+    "latitude": 35.48613,
+    "longitude": 133.17842115,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "33001",
+    "portName": "東備",
+    "prefectureCode": "33",
+    "prefectureName": "岡山県",
+    "latitude": 34.71580729,
+    "longitude": 134.26996064,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "33002",
+    "portName": "岡山",
+    "prefectureCode": "33",
+    "prefectureName": "岡山県",
+    "latitude": 34.60153138,
+    "longitude": 133.99896626,
+    "portGrade": "重要港湾",
+    "administrator": "岡山県"
+  },
+  {
+    "portCode": "33003",
+    "portName": "宇野",
+    "prefectureCode": "33",
+    "prefectureName": "岡山県",
+    "latitude": 34.48426522,
+    "longitude": 133.950314,
+    "portGrade": "重要港湾",
+    "administrator": "岡山県"
+  },
+  {
+    "portCode": "33004",
+    "portName": "水島",
+    "prefectureCode": "33",
+    "prefectureName": "岡山県",
+    "latitude": 34.47140325,
+    "longitude": 133.69603222,
+    "portGrade": "国際拠点港湾",
+    "administrator": "岡山県"
+  },
+  {
+    "portCode": "33005",
+    "portName": "笠岡",
+    "prefectureCode": "33",
+    "prefectureName": "岡山県",
+    "latitude": 34.44778708,
+    "longitude": 133.52765256,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "33006",
+    "portName": "布浜",
+    "prefectureCode": "33",
+    "prefectureName": "岡山県",
+    "latitude": 34.7114701,
+    "longitude": 134.23663256,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "33007",
+    "portName": "玉津",
+    "prefectureCode": "33",
+    "prefectureName": "岡山県",
+    "latitude": 34.61078329,
+    "longitude": 134.1605946,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "33008",
+    "portName": "牛窓",
+    "prefectureCode": "33",
+    "prefectureName": "岡山県",
+    "latitude": 34.61078329,
+    "longitude": 134.1605946,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "33009",
+    "portName": "山田",
+    "prefectureCode": "33",
+    "prefectureName": "岡山県",
+    "latitude": 34.5416806,
+    "longitude": 134.00617525,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "33010",
+    "portName": "児島",
+    "prefectureCode": "33",
+    "prefectureName": "岡山県",
+    "latitude": 34.5416806,
+    "longitude": 134.00617525,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "33011",
+    "portName": "鴻島",
+    "prefectureCode": "33",
+    "prefectureName": "岡山県",
+    "latitude": 34.38295362,
+    "longitude": 133.55221473,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "33012",
+    "portName": "黄島",
+    "prefectureCode": "33",
+    "prefectureName": "岡山県",
+    "latitude": 34.43742041,
+    "longitude": 133.79197446,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "33013",
+    "portName": "犬島",
+    "prefectureCode": "33",
+    "prefectureName": "岡山県",
+    "latitude": 34.44778708,
+    "longitude": 133.52765256,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "33015",
+    "portName": "豊浦",
+    "prefectureCode": "33",
+    "prefectureName": "岡山県",
+    "latitude": 34.46601868,
+    "longitude": 133.83298289,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "33016",
+    "portName": "北木島",
+    "prefectureCode": "33",
+    "prefectureName": "岡山県",
+    "latitude": 34.73400291,
+    "longitude": 134.29519194,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "33017",
+    "portName": "大浦",
+    "prefectureCode": "33",
+    "prefectureName": "岡山県",
+    "latitude": 34.34602212,
+    "longitude": 133.50758439,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "33018",
+    "portName": "大飛島",
+    "prefectureCode": "33",
+    "prefectureName": "岡山県",
+    "latitude": 34.70347173,
+    "longitude": 134.26472818,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "33019",
+    "portName": "小飛島",
+    "prefectureCode": "33",
+    "prefectureName": "岡山県",
+    "latitude": 34.7187922,
+    "longitude": 134.19917315,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "33020",
+    "portName": "前浦",
+    "prefectureCode": "33",
+    "prefectureName": "岡山県",
+    "latitude": 34.7114701,
+    "longitude": 134.23663256,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "34001",
+    "portName": "福山",
+    "prefectureCode": "34",
+    "prefectureName": "広島県",
+    "latitude": 34.39642298,
+    "longitude": 133.42069282,
+    "portGrade": "重要港湾",
+    "administrator": "広島県"
+  },
+  {
+    "portCode": "34002",
+    "portName": "尾道糸崎",
+    "prefectureCode": "34",
+    "prefectureName": "広島県",
+    "latitude": 34.39849009,
+    "longitude": 133.18607315,
+    "portGrade": "重要港湾",
+    "administrator": "広島県"
+  },
+  {
+    "portCode": "34003",
+    "portName": "竹原",
+    "prefectureCode": "34",
+    "prefectureName": "広島県",
+    "latitude": 34.32374963,
+    "longitude": 132.91189973,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "34004",
+    "portName": "呉",
+    "prefectureCode": "34",
+    "prefectureName": "広島県",
+    "latitude": 34.2360258,
+    "longitude": 132.53787932,
+    "portGrade": "重要港湾",
+    "administrator": "呉市"
+  },
+  {
+    "portCode": "34005",
+    "portName": "広島",
+    "prefectureCode": "34",
+    "prefectureName": "広島県",
+    "latitude": 34.33642353,
+    "longitude": 132.41827903,
+    "portGrade": "国際拠点港湾",
+    "administrator": "広島県"
+  },
+  {
+    "portCode": "34006",
+    "portName": "大竹",
+    "prefectureCode": "34",
+    "prefectureName": "広島県",
+    "latitude": 34.23437496,
+    "longitude": 132.23873393,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "34007",
+    "portName": "鹿川",
+    "prefectureCode": "34",
+    "prefectureName": "広島県",
+    "latitude": 34.1824745,
+    "longitude": 132.44120942,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "34008",
+    "portName": "安芸津",
+    "prefectureCode": "34",
+    "prefectureName": "広島県",
+    "latitude": 34.31047077,
+    "longitude": 132.81684263,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "34009",
+    "portName": "吉悪",
+    "prefectureCode": "34",
+    "prefectureName": "広島県",
+    "latitude": 34.20976519,
+    "longitude": 132.68234799,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "34010",
+    "portName": "忠海",
+    "prefectureCode": "34",
+    "prefectureName": "広島県",
+    "latitude": 34.25981139,
+    "longitude": 132.87949262,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "34011",
+    "portName": "安芸津",
+    "prefectureCode": "34",
+    "prefectureName": "広島県",
+    "latitude": 34.33424868,
+    "longitude": 132.99498211,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "34012",
+    "portName": "川尻",
+    "prefectureCode": "34",
+    "prefectureName": "広島県",
+    "latitude": 34.32374963,
+    "longitude": 132.91189973,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "34013",
+    "portName": "吉悪",
+    "prefectureCode": "34",
+    "prefectureName": "広島県",
+    "latitude": 34.23225688,
+    "longitude": 132.91959078,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "34014",
+    "portName": "福田",
+    "prefectureCode": "34",
+    "prefectureName": "広島県",
+    "latitude": 34.28015019,
+    "longitude": 132.91124093,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "34015",
+    "portName": "横田",
+    "prefectureCode": "34",
+    "prefectureName": "広島県",
+    "latitude": 34.19443009,
+    "longitude": 132.841255,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "34016",
+    "portName": "重井",
+    "prefectureCode": "34",
+    "prefectureName": "広島県",
+    "latitude": 34.31047077,
+    "longitude": 132.81684263,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "34017",
+    "portName": "土生",
+    "prefectureCode": "34",
+    "prefectureName": "広島県",
+    "latitude": 34.20559694,
+    "longitude": 132.71771592,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "34018",
+    "portName": "佐木",
+    "prefectureCode": "34",
+    "prefectureName": "広島県",
+    "latitude": 34.22747562,
+    "longitude": 132.69358773,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "34019",
+    "portName": "瀬戸田",
+    "prefectureCode": "34",
+    "prefectureName": "広島県",
+    "latitude": 34.13647175,
+    "longitude": 132.49540143,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "34020",
+    "portName": "生口",
+    "prefectureCode": "34",
+    "prefectureName": "広島県",
+    "latitude": 34.17314992,
+    "longitude": 132.48129059,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "34021",
+    "portName": "鮴崎",
+    "prefectureCode": "34",
+    "prefectureName": "広島県",
+    "latitude": 34.1824745,
+    "longitude": 132.44120942,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "34022",
+    "portName": "木江",
+    "prefectureCode": "34",
+    "prefectureName": "広島県",
+    "latitude": 34.23225688,
+    "longitude": 132.91959078,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "34023",
+    "portName": "大西",
+    "prefectureCode": "34",
+    "prefectureName": "広島県",
+    "latitude": 34.30679899,
+    "longitude": 132.32349415,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "34024",
+    "portName": "御手洗",
+    "prefectureCode": "34",
+    "prefectureName": "広島県",
+    "latitude": 34.23437496,
+    "longitude": 132.23873393,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "34025",
+    "portName": "蒲刈",
+    "prefectureCode": "34",
+    "prefectureName": "広島県",
+    "latitude": 34.38010376,
+    "longitude": 133.30932642,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "34026",
+    "portName": "奥の内",
+    "prefectureCode": "34",
+    "prefectureName": "広島県",
+    "latitude": 34.35086799,
+    "longitude": 133.12487595,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "34027",
+    "portName": "袋の内",
+    "prefectureCode": "34",
+    "prefectureName": "広島県",
+    "latitude": 34.22906502,
+    "longitude": 132.44233758,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "34028",
+    "portName": "大迫",
+    "prefectureCode": "34",
+    "prefectureName": "広島県",
+    "latitude": 34.26652193,
+    "longitude": 132.50268912,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "34029",
+    "portName": "釣士田",
+    "prefectureCode": "34",
+    "prefectureName": "広島県",
+    "latitude": 34.27525683,
+    "longitude": 133.12470321,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "34030",
+    "portName": "大須",
+    "prefectureCode": "34",
+    "prefectureName": "広島県",
+    "latitude": 34.26067061,
+    "longitude": 132.40587812,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "34031",
+    "portName": "小用（江田島市）",
+    "prefectureCode": "34",
+    "prefectureName": "広島県",
+    "latitude": 34.23416469,
+    "longitude": 132.47621946,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "34033",
+    "portName": "三高",
+    "prefectureCode": "34",
+    "prefectureName": "広島県",
+    "latitude": 34.24630211,
+    "longitude": 132.44844899,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "34034",
+    "portName": "中田",
+    "prefectureCode": "34",
+    "prefectureName": "広島県",
+    "latitude": 34.3740106,
+    "longitude": 133.34619874,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "34035",
+    "portName": "内海",
+    "prefectureCode": "34",
+    "prefectureName": "広島県",
+    "latitude": 34.20942096,
+    "longitude": 132.47096119,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "34036",
+    "portName": "鷲部矢之浦",
+    "prefectureCode": "34",
+    "prefectureName": "広島県",
+    "latitude": 34.11231184,
+    "longitude": 132.57330829,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "34037",
+    "portName": "厳島",
+    "prefectureCode": "34",
+    "prefectureName": "広島県",
+    "latitude": 34.11316459,
+    "longitude": 132.54329691,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "35001",
+    "portName": "下関",
+    "prefectureCode": "35",
+    "prefectureName": "山口県",
+    "latitude": 33.97474154,
+    "longitude": 130.97514254,
+    "portGrade": "国際拠点港湾",
+    "administrator": "下関市"
+  },
+  {
+    "portCode": "35002",
+    "portName": "小野田",
+    "prefectureCode": "35",
+    "prefectureName": "山口県",
+    "latitude": 33.949864,
+    "longitude": 131.1452404,
+    "portGrade": "重要港湾",
+    "administrator": "山口県"
+  },
+  {
+    "portCode": "35003",
+    "portName": "宇部",
+    "prefectureCode": "35",
+    "prefectureName": "山口県",
+    "latitude": 33.91412052,
+    "longitude": 131.22711062,
+    "portGrade": "重要港湾",
+    "administrator": "山口県"
+  },
+  {
+    "portCode": "35004",
+    "portName": "三田尻中関",
+    "prefectureCode": "35",
+    "prefectureName": "山口県",
+    "latitude": 33.98652605,
+    "longitude": 131.54678605,
+    "portGrade": "重要港湾",
+    "administrator": "山口県"
+  },
+  {
+    "portCode": "35005",
+    "portName": "徳山下松",
+    "prefectureCode": "35",
+    "prefectureName": "山口県",
+    "latitude": 34.00394962,
+    "longitude": 131.77998593,
+    "portGrade": "国際拠点港湾",
+    "administrator": "山口県"
+  },
+  {
+    "portCode": "35006",
+    "portName": "平生",
+    "prefectureCode": "35",
+    "prefectureName": "山口県",
+    "latitude": 33.90582776,
+    "longitude": 132.04807312,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "35007",
+    "portName": "柳井",
+    "prefectureCode": "35",
+    "prefectureName": "山口県",
+    "latitude": 33.94820165,
+    "longitude": 132.13265479,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "35008",
+    "portName": "岩国",
+    "prefectureCode": "35",
+    "prefectureName": "山口県",
+    "latitude": 34.12483458,
+    "longitude": 132.26321536,
+    "portGrade": "重要港湾",
+    "administrator": "山口県"
+  },
+  {
+    "portCode": "35009",
+    "portName": "萩",
+    "prefectureCode": "35",
+    "prefectureName": "山口県",
+    "latitude": 33.93699233,
+    "longitude": 132.18438803,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "35010",
+    "portName": "油谷",
+    "prefectureCode": "35",
+    "prefectureName": "山口県",
+    "latitude": 33.83857718,
+    "longitude": 132.1169064,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "35011",
+    "portName": "特牛",
+    "prefectureCode": "35",
+    "prefectureName": "山口県",
+    "latitude": 34.00198128,
+    "longitude": 131.14555548,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "35012",
+    "portName": "青江",
+    "prefectureCode": "35",
+    "prefectureName": "山口県",
+    "latitude": 34.31744147,
+    "longitude": 130.89402621,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "35013",
+    "portName": "室津",
+    "prefectureCode": "35",
+    "prefectureName": "山口県",
+    "latitude": 34.43587758,
+    "longitude": 131.40148895,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "35014",
+    "portName": "由宇",
+    "prefectureCode": "35",
+    "prefectureName": "山口県",
+    "latitude": 34.35107103,
+    "longitude": 130.86229581,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "35015",
+    "portName": "角島",
+    "prefectureCode": "35",
+    "prefectureName": "山口県",
+    "latitude": 34.38041003,
+    "longitude": 130.97259171,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "35016",
+    "portName": "柱島",
+    "prefectureCode": "35",
+    "prefectureName": "山口県",
+    "latitude": 34.04609141,
+    "longitude": 132.22349903,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "35017",
+    "portName": "久賀",
+    "prefectureCode": "35",
+    "prefectureName": "山口県",
+    "latitude": 33.95996107,
+    "longitude": 132.1768548,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "35018",
+    "portName": "白木",
+    "prefectureCode": "35",
+    "prefectureName": "山口県",
+    "latitude": 33.94646289,
+    "longitude": 132.44701019,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "35019",
+    "portName": "伊保田",
+    "prefectureCode": "35",
+    "prefectureName": "山口県",
+    "latitude": 34.01100275,
+    "longitude": 131.3908527,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "35020",
+    "portName": "安下庄",
+    "prefectureCode": "35",
+    "prefectureName": "山口県",
+    "latitude": 33.90582776,
+    "longitude": 132.04807312,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "35021",
+    "portName": "小松",
+    "prefectureCode": "35",
+    "prefectureName": "山口県",
+    "latitude": 33.98005911,
+    "longitude": 131.35434459,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "36001",
+    "portName": "撫養",
+    "prefectureCode": "36",
+    "prefectureName": "徳島県",
+    "latitude": 34.0281863,
+    "longitude": 134.6069068,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "36002",
+    "portName": "今切",
+    "prefectureCode": "36",
+    "prefectureName": "徳島県",
+    "latitude": 33.86250646,
+    "longitude": 134.66892602,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "36003",
+    "portName": "徳島小松島",
+    "prefectureCode": "36",
+    "prefectureName": "徳島県",
+    "latitude": 34.0281863,
+    "longitude": 134.6069068,
+    "portGrade": "重要港湾",
+    "administrator": "徳島県"
+  },
+  {
+    "portCode": "36004",
+    "portName": "富岡",
+    "prefectureCode": "36",
+    "prefectureName": "徳島県",
+    "latitude": 33.9220753,
+    "longitude": 134.71134056,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "36005",
+    "portName": "橘",
+    "prefectureCode": "36",
+    "prefectureName": "徳島県",
+    "latitude": 33.86250646,
+    "longitude": 134.66892602,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "36006",
+    "portName": "粟津",
+    "prefectureCode": "36",
+    "prefectureName": "徳島県",
+    "latitude": 33.9220753,
+    "longitude": 134.71134056,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "36007",
+    "portName": "中島",
+    "prefectureCode": "36",
+    "prefectureName": "徳島県",
+    "latitude": 33.7301906,
+    "longitude": 134.55115927,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "36008",
+    "portName": "日和佐",
+    "prefectureCode": "36",
+    "prefectureName": "徳島県",
+    "latitude": 33.63132957,
+    "longitude": 134.37976121,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "36009",
+    "portName": "浅川",
+    "prefectureCode": "36",
+    "prefectureName": "徳島県",
+    "latitude": 33.58399514,
+    "longitude": 134.36115979,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "36010",
+    "portName": "那佐",
+    "prefectureCode": "36",
+    "prefectureName": "徳島県",
+    "latitude": 33.94902799,
+    "longitude": 134.70071259,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "36011",
+    "portName": "亀浦",
+    "prefectureCode": "36",
+    "prefectureName": "徳島県",
+    "latitude": 34.23407235,
+    "longitude": 134.62600282,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "37001",
+    "portName": "詫間",
+    "prefectureCode": "37",
+    "prefectureName": "香川県",
+    "latitude": 34.24616003,
+    "longitude": 133.6648157,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "37002",
+    "portName": "多度津",
+    "prefectureCode": "37",
+    "prefectureName": "香川県",
+    "latitude": 34.27718621,
+    "longitude": 133.74152695,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "37003",
+    "portName": "丸亀",
+    "prefectureCode": "37",
+    "prefectureName": "香川県",
+    "latitude": 34.3011082,
+    "longitude": 133.77532947,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "37004",
+    "portName": "坂出",
+    "prefectureCode": "37",
+    "prefectureName": "香川県",
+    "latitude": 34.34943899,
+    "longitude": 133.86260904,
+    "portGrade": "重要港湾",
+    "administrator": "坂出市"
+  },
+  {
+    "portCode": "37005",
+    "portName": "高松",
+    "prefectureCode": "37",
+    "prefectureName": "香川県",
+    "latitude": 34.36603793,
+    "longitude": 134.03540142,
+    "portGrade": "重要港湾",
+    "administrator": "香川県"
+  },
+  {
+    "portCode": "37006",
+    "portName": "風戸",
+    "prefectureCode": "37",
+    "prefectureName": "香川県",
+    "latitude": 34.47958582,
+    "longitude": 133.97425389,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "37007",
+    "portName": "豊浜",
+    "prefectureCode": "37",
+    "prefectureName": "香川県",
+    "latitude": 34.46961619,
+    "longitude": 133.99262837,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "37008",
+    "portName": "観音寺",
+    "prefectureCode": "37",
+    "prefectureName": "香川県",
+    "latitude": 34.32001617,
+    "longitude": 133.8088094,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "37010",
+    "portName": "仁尾",
+    "prefectureCode": "37",
+    "prefectureName": "香川県",
+    "latitude": 34.27718621,
+    "longitude": 133.74152695,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "37013",
+    "portName": "木沢",
+    "prefectureCode": "37",
+    "prefectureName": "香川県",
+    "latitude": 34.07950392,
+    "longitude": 133.6337463,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "37014",
+    "portName": "石場",
+    "prefectureCode": "37",
+    "prefectureName": "香川県",
+    "latitude": 34.47565339,
+    "longitude": 134.22674621,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "37015",
+    "portName": "立石",
+    "prefectureCode": "37",
+    "prefectureName": "香川県",
+    "latitude": 34.25382816,
+    "longitude": 134.37000858,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "37016",
+    "portName": "久通",
+    "prefectureCode": "37",
+    "prefectureName": "香川県",
+    "latitude": 34.49961498,
+    "longitude": 134.16206942,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "37017",
+    "portName": "庵治",
+    "prefectureCode": "37",
+    "prefectureName": "香川県",
+    "latitude": 34.45370187,
+    "longitude": 134.31906868,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "37018",
+    "portName": "牟礼",
+    "prefectureCode": "37",
+    "prefectureName": "香川県",
+    "latitude": 34.3421965,
+    "longitude": 134.15729316,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "37019",
+    "portName": "志度",
+    "prefectureCode": "37",
+    "prefectureName": "香川県",
+    "latitude": 34.54894384,
+    "longitude": 134.2844119,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "37020",
+    "portName": "津田",
+    "prefectureCode": "37",
+    "prefectureName": "香川県",
+    "latitude": 34.46842613,
+    "longitude": 134.29707113,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "37021",
+    "portName": "三本松",
+    "prefectureCode": "37",
+    "prefectureName": "香川県",
+    "latitude": 34.12584972,
+    "longitude": 133.62905001,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "37023",
+    "portName": "馬越",
+    "prefectureCode": "37",
+    "prefectureName": "香川県",
+    "latitude": 34.49099178,
+    "longitude": 134.05887566,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "37024",
+    "portName": "北浦",
+    "prefectureCode": "37",
+    "prefectureName": "香川県",
+    "latitude": 34.47958582,
+    "longitude": 133.97425389,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "37025",
+    "portName": "大部",
+    "prefectureCode": "37",
+    "prefectureName": "香川県",
+    "latitude": 34.49803172,
+    "longitude": 133.97435185,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "37026",
+    "portName": "坂手",
+    "prefectureCode": "37",
+    "prefectureName": "香川県",
+    "latitude": 34.45582959,
+    "longitude": 133.9728337,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "37027",
+    "portName": "内海",
+    "prefectureCode": "37",
+    "prefectureName": "香川県",
+    "latitude": 34.37535013,
+    "longitude": 133.6896381,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "37028",
+    "portName": "三都",
+    "prefectureCode": "37",
+    "prefectureName": "香川県",
+    "latitude": 34.40188776,
+    "longitude": 133.67460681,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "37029",
+    "portName": "室生北",
+    "prefectureCode": "37",
+    "prefectureName": "香川県",
+    "latitude": 34.3578211,
+    "longitude": 134.16036232,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "37030",
+    "portName": "池田",
+    "prefectureCode": "37",
+    "prefectureName": "香川県",
+    "latitude": 34.40715672,
+    "longitude": 134.10410334,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "37031",
+    "portName": "土庄東",
+    "prefectureCode": "37",
+    "prefectureName": "香川県",
+    "latitude": 34.15725181,
+    "longitude": 133.64308573,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "37032",
+    "portName": "土庄",
+    "prefectureCode": "37",
+    "prefectureName": "香川県",
+    "latitude": 34.38873576,
+    "longitude": 134.05077829,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "37033",
+    "portName": "小豊島",
+    "prefectureCode": "37",
+    "prefectureName": "香川県",
+    "latitude": 34.42366018,
+    "longitude": 134.05291879,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "37034",
+    "portName": "家浦",
+    "prefectureCode": "37",
+    "prefectureName": "香川県",
+    "latitude": 34.36198249,
+    "longitude": 134.11648214,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "37035",
+    "portName": "大島",
+    "prefectureCode": "37",
+    "prefectureName": "香川県",
+    "latitude": 34.36662172,
+    "longitude": 134.11261616,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "37036",
+    "portName": "男木",
+    "prefectureCode": "37",
+    "prefectureName": "香川県",
+    "latitude": 34.38273974,
+    "longitude": 134.0960643,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "37037",
+    "portName": "女木",
+    "prefectureCode": "37",
+    "prefectureName": "香川県",
+    "latitude": 34.26769911,
+    "longitude": 133.63836815,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "37038",
+    "portName": "屏風",
+    "prefectureCode": "37",
+    "prefectureName": "香川県",
+    "latitude": 34.26759216,
+    "longitude": 133.6762149,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "37039",
+    "portName": "直島",
+    "prefectureCode": "37",
+    "prefectureName": "香川県",
+    "latitude": 34.23927282,
+    "longitude": 133.62021675,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "37040",
+    "portName": "宮浦",
+    "prefectureCode": "37",
+    "prefectureName": "香川県",
+    "latitude": 34.26124799,
+    "longitude": 133.59192453,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "37041",
+    "portName": "与島",
+    "prefectureCode": "37",
+    "prefectureName": "香川県",
+    "latitude": 34.27043401,
+    "longitude": 133.62027301,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "37042",
+    "portName": "大浦",
+    "prefectureCode": "37",
+    "prefectureName": "香川県",
+    "latitude": 34.27852957,
+    "longitude": 133.63075853,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "37043",
+    "portName": "新在家",
+    "prefectureCode": "37",
+    "prefectureName": "香川県",
+    "latitude": 34.36099356,
+    "longitude": 134.12089647,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "37044",
+    "portName": "本島",
+    "prefectureCode": "37",
+    "prefectureName": "香川県",
+    "latitude": 34.32801502,
+    "longitude": 134.26375298,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "37045",
+    "portName": "生ノ浜",
+    "prefectureCode": "37",
+    "prefectureName": "香川県",
+    "latitude": 34.37657894,
+    "longitude": 133.75743976,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "37046",
+    "portName": "尻浜",
+    "prefectureCode": "37",
+    "prefectureName": "香川県",
+    "latitude": 34.39029003,
+    "longitude": 133.82592909,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "37047",
+    "portName": "里浦",
+    "prefectureCode": "37",
+    "prefectureName": "香川県",
+    "latitude": 34.36446647,
+    "longitude": 133.78171304,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "37048",
+    "portName": "小浦",
+    "prefectureCode": "37",
+    "prefectureName": "香川県",
+    "latitude": 34.38199059,
+    "longitude": 133.91979536,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "37049",
+    "portName": "江の浦",
+    "prefectureCode": "37",
+    "prefectureName": "香川県",
+    "latitude": 34.36023559,
+    "longitude": 133.72006554,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "37050",
+    "portName": "青木",
+    "prefectureCode": "37",
+    "prefectureName": "香川県",
+    "latitude": 34.39348021,
+    "longitude": 133.76114518,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "37051",
+    "portName": "手島",
+    "prefectureCode": "37",
+    "prefectureName": "香川県",
+    "latitude": 34.3796628,
+    "longitude": 133.77933989,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "37052",
+    "portName": "高見",
+    "prefectureCode": "37",
+    "prefectureName": "香川県",
+    "latitude": 34.43031632,
+    "longitude": 134.2290845,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "37053",
+    "portName": "粟島",
+    "prefectureCode": "37",
+    "prefectureName": "香川県",
+    "latitude": 34.46834071,
+    "longitude": 134.23247734,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "37054",
+    "portName": "佐柳",
+    "prefectureCode": "37",
+    "prefectureName": "香川県",
+    "latitude": 34.45274128,
+    "longitude": 134.23745067,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "38001",
+    "portName": "宇和島",
+    "prefectureCode": "38",
+    "prefectureName": "愛媛県",
+    "latitude": 33.22919365,
+    "longitude": 132.54804989,
+    "portGrade": "重要港湾",
+    "administrator": "愛媛県"
+  },
+  {
+    "portCode": "38002",
+    "portName": "八幡浜",
+    "prefectureCode": "38",
+    "prefectureName": "愛媛県",
+    "latitude": 33.22919365,
+    "longitude": 132.54804989,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "38003",
+    "portName": "長浜",
+    "prefectureCode": "38",
+    "prefectureName": "愛媛県",
+    "latitude": 33.62493078,
+    "longitude": 132.49103275,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "38004",
+    "portName": "伊予",
+    "prefectureCode": "38",
+    "prefectureName": "愛媛県",
+    "latitude": 34.07000258,
+    "longitude": 133.01844246,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "38005",
+    "portName": "松山",
+    "prefectureCode": "38",
+    "prefectureName": "愛媛県",
+    "latitude": 33.86331666,
+    "longitude": 132.69885618,
+    "portGrade": "重要港湾",
+    "administrator": "愛媛県"
+  },
+  {
+    "portCode": "38006",
+    "portName": "今治",
+    "prefectureCode": "38",
+    "prefectureName": "愛媛県",
+    "latitude": 34.07000258,
+    "longitude": 133.01844246,
+    "portGrade": "重要港湾",
+    "administrator": "今治市"
+  },
+  {
+    "portCode": "38007",
+    "portName": "東予",
+    "prefectureCode": "38",
+    "prefectureName": "愛媛県",
+    "latitude": 33.97309913,
+    "longitude": 133.14337699,
+    "portGrade": "重要港湾",
+    "administrator": "愛媛県"
+  },
+  {
+    "portCode": "38008",
+    "portName": "新居浜",
+    "prefectureCode": "38",
+    "prefectureName": "愛媛県",
+    "latitude": 33.99437855,
+    "longitude": 133.30986573,
+    "portGrade": "重要港湾",
+    "administrator": "新居浜港務局"
+  },
+  {
+    "portCode": "38009",
+    "portName": "三島川之江",
+    "prefectureCode": "38",
+    "prefectureName": "愛媛県",
+    "latitude": 34.00657591,
+    "longitude": 133.54177755,
+    "portGrade": "重要港湾",
+    "administrator": "愛媛県"
+  },
+  {
+    "portCode": "38010",
+    "portName": "御荘",
+    "prefectureCode": "38",
+    "prefectureName": "愛媛県",
+    "latitude": 34.20462192,
+    "longitude": 133.12665395,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "38011",
+    "portName": "岩松",
+    "prefectureCode": "38",
+    "prefectureName": "愛媛県",
+    "latitude": 34.037491,
+    "longitude": 132.83624479,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "38012",
+    "portName": "吉田",
+    "prefectureCode": "38",
+    "prefectureName": "愛媛県",
+    "latitude": 33.97615808,
+    "longitude": 132.76856368,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "38013",
+    "portName": "玉津",
+    "prefectureCode": "38",
+    "prefectureName": "愛媛県",
+    "latitude": 33.97116324,
+    "longitude": 132.64538601,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "38014",
+    "portName": "三瓶",
+    "prefectureCode": "38",
+    "prefectureName": "愛媛県",
+    "latitude": 33.78554639,
+    "longitude": 132.69203045,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "38016",
+    "portName": "川之石",
+    "prefectureCode": "38",
+    "prefectureName": "愛媛県",
+    "latitude": 33.62493078,
+    "longitude": 132.49103275,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "38017",
+    "portName": "伊方",
+    "prefectureCode": "38",
+    "prefectureName": "愛媛県",
+    "latitude": 33.31153257,
+    "longitude": 132.52283713,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "38018",
+    "portName": "三崎",
+    "prefectureCode": "38",
+    "prefectureName": "愛媛県",
+    "latitude": 33.126689,
+    "longitude": 132.498484,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "38019",
+    "portName": "長浜",
+    "prefectureCode": "38",
+    "prefectureName": "愛媛県",
+    "latitude": 32.96788511,
+    "longitude": 132.54053783,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "38020",
+    "portName": "松前",
+    "prefectureCode": "38",
+    "prefectureName": "愛媛県",
+    "latitude": 34.25833783,
+    "longitude": 133.19716884,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "38022",
+    "portName": "北条",
+    "prefectureCode": "38",
+    "prefectureName": "愛媛県",
+    "latitude": 33.47186966,
+    "longitude": 132.39257347,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "38023",
+    "portName": "菊間",
+    "prefectureCode": "38",
+    "prefectureName": "愛媛県",
+    "latitude": 34.12340573,
+    "longitude": 132.9550441,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "38024",
+    "portName": "森上",
+    "prefectureCode": "38",
+    "prefectureName": "愛媛県",
+    "latitude": 33.38384469,
+    "longitude": 132.10943788,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "38025",
+    "portName": "波方",
+    "prefectureCode": "38",
+    "prefectureName": "愛媛県",
+    "latitude": 34.25028192,
+    "longitude": 132.98623208,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "38026",
+    "portName": "波止浜",
+    "prefectureCode": "38",
+    "prefectureName": "愛媛県",
+    "latitude": 34.15909044,
+    "longitude": 133.03379189,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "38027",
+    "portName": "寒川",
+    "prefectureCode": "38",
+    "prefectureName": "愛媛県",
+    "latitude": 34.26005999,
+    "longitude": 132.99120598,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "38028",
+    "portName": "弓削",
+    "prefectureCode": "38",
+    "prefectureName": "愛媛県",
+    "latitude": 34.26704922,
+    "longitude": 133.04626703,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "38029",
+    "portName": "立石",
+    "prefectureCode": "38",
+    "prefectureName": "愛媛県",
+    "latitude": 34.27814424,
+    "longitude": 133.17755876,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "38030",
+    "portName": "生名",
+    "prefectureCode": "38",
+    "prefectureName": "愛媛県",
+    "latitude": 34.26706793,
+    "longitude": 133.1864841,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "38031",
+    "portName": "四坂",
+    "prefectureCode": "38",
+    "prefectureName": "愛媛県",
+    "latitude": 34.1800592,
+    "longitude": 132.88405417,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "38032",
+    "portName": "小漕",
+    "prefectureCode": "38",
+    "prefectureName": "愛媛県",
+    "latitude": 34.27930397,
+    "longitude": 133.14433018,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "38033",
+    "portName": "長江",
+    "prefectureCode": "38",
+    "prefectureName": "愛媛県",
+    "latitude": 34.19017078,
+    "longitude": 132.9198582,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "38035",
+    "portName": "北浦",
+    "prefectureCode": "38",
+    "prefectureName": "愛媛県",
+    "latitude": 34.19529274,
+    "longitude": 133.04188798,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "38037",
+    "portName": "伯方",
+    "prefectureCode": "38",
+    "prefectureName": "愛媛県",
+    "latitude": 34.23222933,
+    "longitude": 133.07861594,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "38038",
+    "portName": "有津",
+    "prefectureCode": "38",
+    "prefectureName": "愛媛県",
+    "latitude": 34.21999642,
+    "longitude": 133.11502761,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "38039",
+    "portName": "枝越",
+    "prefectureCode": "38",
+    "prefectureName": "愛媛県",
+    "latitude": 34.20351366,
+    "longitude": 133.07173094,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "38040",
+    "portName": "熊口",
+    "prefectureCode": "38",
+    "prefectureName": "愛媛県",
+    "latitude": 34.21832267,
+    "longitude": 133.06365283,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "38041",
+    "portName": "早川",
+    "prefectureCode": "38",
+    "prefectureName": "愛媛県",
+    "latitude": 34.20117832,
+    "longitude": 133.09717197,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "38042",
+    "portName": "吉海",
+    "prefectureCode": "38",
+    "prefectureName": "愛媛県",
+    "latitude": 34.23687264,
+    "longitude": 133.10114692,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "38045",
+    "portName": "上浦",
+    "prefectureCode": "38",
+    "prefectureName": "愛媛県",
+    "latitude": 34.27212127,
+    "longitude": 133.15932022,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "38046",
+    "portName": "宮浦",
+    "prefectureCode": "38",
+    "prefectureName": "愛媛県",
+    "latitude": 34.26706793,
+    "longitude": 133.1864841,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "38047",
+    "portName": "大下",
+    "prefectureCode": "38",
+    "prefectureName": "愛媛県",
+    "latitude": 34.27814424,
+    "longitude": 133.17755876,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "38048",
+    "portName": "岡村",
+    "prefectureCode": "38",
+    "prefectureName": "愛媛県",
+    "latitude": 34.12773082,
+    "longitude": 132.93384025,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "38050",
+    "portName": "中島",
+    "prefectureCode": "38",
+    "prefectureName": "愛媛県",
+    "latitude": 33.47677775,
+    "longitude": 132.35899243,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "38051",
+    "portName": "西中",
+    "prefectureCode": "38",
+    "prefectureName": "愛媛県",
+    "latitude": 33.46126998,
+    "longitude": 132.25679412,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "39001",
+    "portName": "高知",
+    "prefectureCode": "39",
+    "prefectureName": "高知県",
+    "latitude": 33.51338994,
+    "longitude": 133.56060957,
+    "portGrade": "重要港湾",
+    "administrator": "高知県"
+  },
+  {
+    "portCode": "39002",
+    "portName": "須崎",
+    "prefectureCode": "39",
+    "prefectureName": "高知県",
+    "latitude": 33.38318194,
+    "longitude": 133.28575173,
+    "portGrade": "重要港湾",
+    "administrator": "高知県"
+  },
+  {
+    "portCode": "39003",
+    "portName": "宿毛湾",
+    "prefectureCode": "39",
+    "prefectureName": "高知県",
+    "latitude": 32.90004108,
+    "longitude": 132.69275513,
+    "portGrade": "重要港湾",
+    "administrator": "高知県"
+  },
+  {
+    "portCode": "39004",
+    "portName": "甲浦",
+    "prefectureCode": "39",
+    "prefectureName": "高知県",
+    "latitude": 33.38578697,
+    "longitude": 134.21685495,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "39005",
+    "portName": "佐喜浜",
+    "prefectureCode": "39",
+    "prefectureName": "高知県",
+    "latitude": 33.28648583,
+    "longitude": 134.13965724,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "39006",
+    "portName": "室津",
+    "prefectureCode": "39",
+    "prefectureName": "高知県",
+    "latitude": 33.41411998,
+    "longitude": 134.01056265,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "39007",
+    "portName": "奈半利",
+    "prefectureCode": "39",
+    "prefectureName": "高知県",
+    "latitude": 33.52895707,
+    "longitude": 133.75091685,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "39008",
+    "portName": "手結",
+    "prefectureCode": "39",
+    "prefectureName": "高知県",
+    "latitude": 33.32745472,
+    "longitude": 133.24147381,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "39009",
+    "portName": "久礼",
+    "prefectureCode": "39",
+    "prefectureName": "高知県",
+    "latitude": 33.28208775,
+    "longitude": 133.24904472,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "39010",
+    "portName": "上ノ加江",
+    "prefectureCode": "39",
+    "prefectureName": "高知県",
+    "latitude": 33.07035694,
+    "longitude": 133.11748381,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "39011",
+    "portName": "佐賀",
+    "prefectureCode": "39",
+    "prefectureName": "高知県",
+    "latitude": 33.03453545,
+    "longitude": 133.05948787,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "39012",
+    "portName": "上川口",
+    "prefectureCode": "39",
+    "prefectureName": "高知県",
+    "latitude": 32.94603338,
+    "longitude": 133.00253738,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "39013",
+    "portName": "下田",
+    "prefectureCode": "39",
+    "prefectureName": "高知県",
+    "latitude": 32.85720586,
+    "longitude": 132.95780427,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "39014",
+    "portName": "下ノ加江",
+    "prefectureCode": "39",
+    "prefectureName": "高知県",
+    "latitude": 32.80198473,
+    "longitude": 132.96584217,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "39015",
+    "portName": "以布利",
+    "prefectureCode": "39",
+    "prefectureName": "高知県",
+    "latitude": 32.770293,
+    "longitude": 132.955973,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "39016",
+    "portName": "清水",
+    "prefectureCode": "39",
+    "prefectureName": "高知県",
+    "latitude": 32.778368,
+    "longitude": 132.88309134,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "39017",
+    "portName": "あしずり",
+    "prefectureCode": "39",
+    "prefectureName": "高知県",
+    "latitude": 32.77416213,
+    "longitude": 132.8396758,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "39018",
+    "portName": "三崎",
+    "prefectureCode": "39",
+    "prefectureName": "高知県",
+    "latitude": 32.778368,
+    "longitude": 132.88309134,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "39019",
+    "portName": "下川口",
+    "prefectureCode": "39",
+    "prefectureName": "高知県",
+    "latitude": 32.77416213,
+    "longitude": 132.8396758,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "40001",
+    "portName": "博多",
+    "prefectureCode": "40",
+    "prefectureName": "福岡県",
+    "latitude": 33.62686124,
+    "longitude": 130.36071296,
+    "portGrade": "国際拠点港湾",
+    "administrator": "福岡市"
+  },
+  {
+    "portCode": "40002",
+    "portName": "北九州",
+    "prefectureCode": "40",
+    "prefectureName": "福岡県",
+    "latitude": 33.9152654,
+    "longitude": 130.87444066,
+    "portGrade": "国際拠点港湾",
+    "administrator": "北九州市"
+  },
+  {
+    "portCode": "40003",
+    "portName": "苅田",
+    "prefectureCode": "40",
+    "prefectureName": "福岡県",
+    "latitude": 33.80198573,
+    "longitude": 131.0304324,
+    "portGrade": "重要港湾",
+    "administrator": "福岡県"
+  },
+  {
+    "portCode": "40004",
+    "portName": "三池",
+    "prefectureCode": "40",
+    "prefectureName": "福岡県",
+    "latitude": 33.0057551,
+    "longitude": 130.38737988,
+    "portGrade": "重要港湾",
+    "administrator": "福岡県"
+  },
+  {
+    "portCode": "40005",
+    "portName": "宇島",
+    "prefectureCode": "40",
+    "prefectureName": "福岡県",
+    "latitude": 33.6384786,
+    "longitude": 131.12283517,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "40006",
+    "portName": "宇島",
+    "prefectureCode": "40",
+    "prefectureName": "福岡県",
+    "latitude": 33.6384786,
+    "longitude": 131.12283517,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "40007",
+    "portName": "大牟田",
+    "prefectureCode": "40",
+    "prefectureName": "福岡県",
+    "latitude": 33.03769228,
+    "longitude": 130.40936196,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "40008",
+    "portName": "若津",
+    "prefectureCode": "40",
+    "prefectureName": "福岡県",
+    "latitude": 33.03769228,
+    "longitude": 130.40936196,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "40009",
+    "portName": "大島",
+    "prefectureCode": "40",
+    "prefectureName": "福岡県",
+    "latitude": 33.0057551,
+    "longitude": 130.38737988,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "41001",
+    "portName": "伊万里",
+    "prefectureCode": "41",
+    "prefectureName": "佐賀県",
+    "latitude": 33.32097119,
+    "longitude": 129.82636603,
+    "portGrade": "重要港湾",
+    "administrator": "佐賀県"
+  },
+  {
+    "portCode": "41002",
+    "portName": "唐津",
+    "prefectureCode": "41",
+    "prefectureName": "佐賀県",
+    "latitude": 33.47050476,
+    "longitude": 129.97229777,
+    "portGrade": "重要港湾",
+    "administrator": "佐賀県"
+  },
+  {
+    "portCode": "41003",
+    "portName": "諸富",
+    "prefectureCode": "41",
+    "prefectureName": "佐賀県",
+    "latitude": 33.17511899,
+    "longitude": 130.23322798,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "41004",
+    "portName": "鹿島",
+    "prefectureCode": "41",
+    "prefectureName": "佐賀県",
+    "latitude": 32.98909287,
+    "longitude": 130.20905499,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "41005",
+    "portName": "大浦",
+    "prefectureCode": "41",
+    "prefectureName": "佐賀県",
+    "latitude": 33.213305,
+    "longitude": 130.359339,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "41006",
+    "portName": "星賀",
+    "prefectureCode": "41",
+    "prefectureName": "佐賀県",
+    "latitude": 33.54301779,
+    "longitude": 129.88401576,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "41007",
+    "portName": "仮屋",
+    "prefectureCode": "41",
+    "prefectureName": "佐賀県",
+    "latitude": 33.44687178,
+    "longitude": 129.78771683,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "41008",
+    "portName": "呼子",
+    "prefectureCode": "41",
+    "prefectureName": "佐賀県",
+    "latitude": 33.0817549,
+    "longitude": 130.14485718,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "42001",
+    "portName": "島原",
+    "prefectureCode": "42",
+    "prefectureName": "長崎県",
+    "latitude": 32.7976589,
+    "longitude": 130.3789781,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "42002",
+    "portName": "長崎",
+    "prefectureCode": "42",
+    "prefectureName": "長崎県",
+    "latitude": 32.71355457,
+    "longitude": 129.8177634,
+    "portGrade": "重要港湾",
+    "administrator": "長崎県"
+  },
+  {
+    "portCode": "42003",
+    "portName": "佐世保",
+    "prefectureCode": "42",
+    "prefectureName": "長崎県",
+    "latitude": 33.12308428,
+    "longitude": 129.72160217,
+    "portGrade": "重要港湾",
+    "administrator": "佐世保市"
+  },
+  {
+    "portCode": "42004",
+    "portName": "松浦",
+    "prefectureCode": "42",
+    "prefectureName": "長崎県",
+    "latitude": 33.357149,
+    "longitude": 129.68041812,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "42005",
+    "portName": "厳原",
+    "prefectureCode": "42",
+    "prefectureName": "長崎県",
+    "latitude": 34.19187852,
+    "longitude": 129.29375908,
+    "portGrade": "重要港湾",
+    "administrator": "長崎県"
+  },
+  {
+    "portCode": "42006",
+    "portName": "郷ノ浦",
+    "prefectureCode": "42",
+    "prefectureName": "長崎県",
+    "latitude": 33.74268713,
+    "longitude": 129.67273157,
+    "portGrade": "重要港湾",
+    "administrator": "長崎県"
+  },
+  {
+    "portCode": "42007",
+    "portName": "青方",
+    "prefectureCode": "42",
+    "prefectureName": "長崎県",
+    "latitude": 34.65050241,
+    "longitude": 129.48398358,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "42008",
+    "portName": "福江",
+    "prefectureCode": "42",
+    "prefectureName": "長崎県",
+    "latitude": 32.6973982,
+    "longitude": 128.85480177,
+    "portGrade": "重要港湾",
+    "administrator": "長崎県"
+  },
+  {
+    "portCode": "42009",
+    "portName": "松島",
+    "prefectureCode": "42",
+    "prefectureName": "長崎県",
+    "latitude": 32.94132344,
+    "longitude": 129.61828638,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "42010",
+    "portName": "肥前大島",
+    "prefectureCode": "42",
+    "prefectureName": "長崎県",
+    "latitude": 33.03266151,
+    "longitude": 129.62592082,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "42011",
+    "portName": "小長井",
+    "prefectureCode": "42",
+    "prefectureName": "長崎県",
+    "latitude": 33.20516271,
+    "longitude": 129.59036626,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "42013",
+    "portName": "多比良",
+    "prefectureCode": "42",
+    "prefectureName": "長崎県",
+    "latitude": 32.92533047,
+    "longitude": 129.64636287,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "42014",
+    "portName": "堂崎",
+    "prefectureCode": "42",
+    "prefectureName": "長崎県",
+    "latitude": 32.57854569,
+    "longitude": 129.78733687,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "42015",
+    "portName": "須川",
+    "prefectureCode": "42",
+    "prefectureName": "長崎県",
+    "latitude": 33.30073896,
+    "longitude": 129.58912402,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "42016",
+    "portName": "口ノ津",
+    "prefectureCode": "42",
+    "prefectureName": "長崎県",
+    "latitude": 32.70169056,
+    "longitude": 129.78334684,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "42017",
+    "portName": "小浜",
+    "prefectureCode": "42",
+    "prefectureName": "長崎県",
+    "latitude": 32.64965905,
+    "longitude": 130.28915588,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "42018",
+    "portName": "茂木",
+    "prefectureCode": "42",
+    "prefectureName": "長崎県",
+    "latitude": 33.00933818,
+    "longitude": 129.78414259,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "42019",
+    "portName": "脇岬",
+    "prefectureCode": "42",
+    "prefectureName": "長崎県",
+    "latitude": 32.60588574,
+    "longitude": 130.19870837,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "42020",
+    "portName": "神ノ浦",
+    "prefectureCode": "42",
+    "prefectureName": "長崎県",
+    "latitude": 33.03266151,
+    "longitude": 129.62592082,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "42021",
+    "portName": "瀬戸",
+    "prefectureCode": "42",
+    "prefectureName": "長崎県",
+    "latitude": 32.64609315,
+    "longitude": 129.7614439,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "42022",
+    "portName": "七ツ釜",
+    "prefectureCode": "42",
+    "prefectureName": "長崎県",
+    "latitude": 32.92616311,
+    "longitude": 130.20185464,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "42023",
+    "portName": "太田和",
+    "prefectureCode": "42",
+    "prefectureName": "長崎県",
+    "latitude": 32.62093116,
+    "longitude": 128.7723456,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "42024",
+    "portName": "面高",
+    "prefectureCode": "42",
+    "prefectureName": "長崎県",
+    "latitude": 33.86058365,
+    "longitude": 129.69120131,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "42025",
+    "portName": "瀬川",
+    "prefectureCode": "42",
+    "prefectureName": "長崎県",
+    "latitude": 33.37082067,
+    "longitude": 129.56018777,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "42026",
+    "portName": "小口",
+    "prefectureCode": "42",
+    "prefectureName": "長崎県",
+    "latitude": 33.73835749,
+    "longitude": 129.75921717,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "42027",
+    "portName": "時津",
+    "prefectureCode": "42",
+    "prefectureName": "長崎県",
+    "latitude": 32.8761075,
+    "longitude": 130.24493001,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "42028",
+    "portName": "長与",
+    "prefectureCode": "42",
+    "prefectureName": "長崎県",
+    "latitude": 34.23549068,
+    "longitude": 129.18685295,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "42029",
+    "portName": "久山",
+    "prefectureCode": "42",
+    "prefectureName": "長崎県",
+    "latitude": 32.91865973,
+    "longitude": 129.9304115,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "42030",
+    "portName": "大村",
+    "prefectureCode": "42",
+    "prefectureName": "長崎県",
+    "latitude": 32.75400485,
+    "longitude": 128.77426666,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "42031",
+    "portName": "彼杵",
+    "prefectureCode": "42",
+    "prefectureName": "長崎県",
+    "latitude": 32.89081258,
+    "longitude": 129.02804368,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "42032",
+    "portName": "川棚",
+    "prefectureCode": "42",
+    "prefectureName": "長崎県",
+    "latitude": 33.05744078,
+    "longitude": 129.86405418,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "42033",
+    "portName": "佐々",
+    "prefectureCode": "42",
+    "prefectureName": "長崎県",
+    "latitude": 32.88788511,
+    "longitude": 129.60475588,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "42034",
+    "portName": "臼ノ浦",
+    "prefectureCode": "42",
+    "prefectureName": "長崎県",
+    "latitude": 33.2057829,
+    "longitude": 129.64179138,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "42035",
+    "portName": "江迎",
+    "prefectureCode": "42",
+    "prefectureName": "長崎県",
+    "latitude": 33.32387257,
+    "longitude": 129.5290108,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "42036",
+    "portName": "田平",
+    "prefectureCode": "42",
+    "prefectureName": "長崎県",
+    "latitude": 33.35556626,
+    "longitude": 129.72424043,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "42037",
+    "portName": "調川",
+    "prefectureCode": "42",
+    "prefectureName": "長崎県",
+    "latitude": 33.03660021,
+    "longitude": 129.90723534,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "42038",
+    "portName": "佐須奈",
+    "prefectureCode": "42",
+    "prefectureName": "長崎県",
+    "latitude": 32.991639,
+    "longitude": 129.027799,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "42039",
+    "portName": "比田勝",
+    "prefectureCode": "42",
+    "prefectureName": "長崎県",
+    "latitude": 34.52071571,
+    "longitude": 129.31159241,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "42040",
+    "portName": "峰",
+    "prefectureCode": "42",
+    "prefectureName": "長崎県",
+    "latitude": 32.94132344,
+    "longitude": 129.61828638,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "42041",
+    "portName": "仁位",
+    "prefectureCode": "42",
+    "prefectureName": "長崎県",
+    "latitude": 32.84504746,
+    "longitude": 129.8480969,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "42042",
+    "portName": "鹿見",
+    "prefectureCode": "42",
+    "prefectureName": "長崎県",
+    "latitude": 33.05744078,
+    "longitude": 129.86405418,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "42043",
+    "portName": "仁田",
+    "prefectureCode": "42",
+    "prefectureName": "長崎県",
+    "latitude": 32.64309806,
+    "longitude": 128.63703192,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "42044",
+    "portName": "竹敷",
+    "prefectureCode": "42",
+    "prefectureName": "長崎県",
+    "latitude": 32.87852467,
+    "longitude": 130.31022667,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "42045",
+    "portName": "勝本",
+    "prefectureCode": "42",
+    "prefectureName": "長崎県",
+    "latitude": 33.04355668,
+    "longitude": 129.6575531,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "42046",
+    "portName": "印通寺",
+    "prefectureCode": "42",
+    "prefectureName": "長崎県",
+    "latitude": 34.38355607,
+    "longitude": 129.30989097,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "42047",
+    "portName": "大島",
+    "prefectureCode": "42",
+    "prefectureName": "長崎県",
+    "latitude": 34.29286826,
+    "longitude": 129.30872296,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "42048",
+    "portName": "平戸",
+    "prefectureCode": "42",
+    "prefectureName": "長崎県",
+    "latitude": 33.37082067,
+    "longitude": 129.56018777,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "42049",
+    "portName": "川内",
+    "prefectureCode": "42",
+    "prefectureName": "長崎県",
+    "latitude": 33.05319889,
+    "longitude": 129.7329912,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "42050",
+    "portName": "福島",
+    "prefectureCode": "42",
+    "prefectureName": "長崎県",
+    "latitude": 34.5312407,
+    "longitude": 129.32867273,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "42051",
+    "portName": "有川",
+    "prefectureCode": "42",
+    "prefectureName": "長崎県",
+    "latitude": 32.82327818,
+    "longitude": 128.93768321,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "42052",
+    "portName": "郷ノ首",
+    "prefectureCode": "42",
+    "prefectureName": "長崎県",
+    "latitude": 33.35666939,
+    "longitude": 129.82549785,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "42053",
+    "portName": "榎津",
+    "prefectureCode": "42",
+    "prefectureName": "長崎県",
+    "latitude": 33.47137406,
+    "longitude": 129.53459692,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "42054",
+    "portName": "肥前大島",
+    "prefectureCode": "42",
+    "prefectureName": "長崎県",
+    "latitude": 32.73874815,
+    "longitude": 130.2025126,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "42055",
+    "portName": "崎戸",
+    "prefectureCode": "42",
+    "prefectureName": "長崎県",
+    "latitude": 34.64375296,
+    "longitude": 129.38541501,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "42056",
+    "portName": "若松",
+    "prefectureCode": "42",
+    "prefectureName": "長崎県",
+    "latitude": 32.89081258,
+    "longitude": 129.02804368,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "42057",
+    "portName": "相の浦",
+    "prefectureCode": "42",
+    "prefectureName": "長崎県",
+    "latitude": 32.73256915,
+    "longitude": 129.94597691,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "42058",
+    "portName": "岐宿",
+    "prefectureCode": "42",
+    "prefectureName": "長崎県",
+    "latitude": 33.07830907,
+    "longitude": 129.79059468,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "42059",
+    "portName": "富江",
+    "prefectureCode": "42",
+    "prefectureName": "長崎県",
+    "latitude": 32.84045438,
+    "longitude": 130.00170465,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "42060",
+    "portName": "玉ノ浦",
+    "prefectureCode": "42",
+    "prefectureName": "長崎県",
+    "latitude": 33.357149,
+    "longitude": 129.68041812,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "42061",
+    "portName": "伊王島",
+    "prefectureCode": "42",
+    "prefectureName": "長崎県",
+    "latitude": 32.60546756,
+    "longitude": 129.77809867,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "42062",
+    "portName": "高島",
+    "prefectureCode": "42",
+    "prefectureName": "長崎県",
+    "latitude": 32.91698452,
+    "longitude": 129.80440594,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "43001",
+    "portName": "水俣",
+    "prefectureCode": "43",
+    "prefectureName": "熊本県",
+    "latitude": 32.19803403,
+    "longitude": 130.37126988,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "43002",
+    "portName": "八代",
+    "prefectureCode": "43",
+    "prefectureName": "熊本県",
+    "latitude": 32.53740369,
+    "longitude": 130.53725272,
+    "portGrade": "重要港湾",
+    "administrator": "熊本県"
+  },
+  {
+    "portCode": "43003",
+    "portName": "三角",
+    "prefectureCode": "43",
+    "prefectureName": "熊本県",
+    "latitude": 32.60120279,
+    "longitude": 130.46164978,
+    "portGrade": "重要港湾",
+    "administrator": "熊本県"
+  },
+  {
+    "portCode": "43004",
+    "portName": "熊本",
+    "prefectureCode": "43",
+    "prefectureName": "熊本県",
+    "latitude": 32.76045731,
+    "longitude": 130.57072327,
+    "portGrade": "重要港湾",
+    "administrator": "熊本県"
+  },
+  {
+    "portCode": "43005",
+    "portName": "佐敷",
+    "prefectureCode": "43",
+    "prefectureName": "熊本県",
+    "latitude": 32.41912701,
+    "longitude": 130.21418713,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "43006",
+    "portName": "田浦",
+    "prefectureCode": "43",
+    "prefectureName": "熊本県",
+    "latitude": 32.92399872,
+    "longitude": 130.43903896,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "43008",
+    "portName": "鏡",
+    "prefectureCode": "43",
+    "prefectureName": "熊本県",
+    "latitude": 32.43582934,
+    "longitude": 130.41494358,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "43009",
+    "portName": "百貫",
+    "prefectureCode": "43",
+    "prefectureName": "熊本県",
+    "latitude": 32.54836624,
+    "longitude": 130.19044445,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "43010",
+    "portName": "河内",
+    "prefectureCode": "43",
+    "prefectureName": "熊本県",
+    "latitude": 32.46050415,
+    "longitude": 130.20618813,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "43011",
+    "portName": "長洲",
+    "prefectureCode": "43",
+    "prefectureName": "熊本県",
+    "latitude": 32.79950392,
+    "longitude": 130.59460571,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "43016",
+    "portName": "鬼池",
+    "prefectureCode": "43",
+    "prefectureName": "熊本県",
+    "latitude": 32.52151769,
+    "longitude": 130.07140287,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "43017",
+    "portName": "本渡",
+    "prefectureCode": "43",
+    "prefectureName": "熊本県",
+    "latitude": 32.47119959,
+    "longitude": 130.03577097,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "43019",
+    "portName": "大門",
+    "prefectureCode": "43",
+    "prefectureName": "熊本県",
+    "latitude": 32.41912701,
+    "longitude": 130.21418713,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "43021",
+    "portName": "牛深",
+    "prefectureCode": "43",
+    "prefectureName": "熊本県",
+    "latitude": 32.19427304,
+    "longitude": 130.03468849,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "43025",
+    "portName": "高浜",
+    "prefectureCode": "43",
+    "prefectureName": "熊本県",
+    "latitude": 32.37922759,
+    "longitude": 129.9905866,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "43027",
+    "portName": "富岡",
+    "prefectureCode": "43",
+    "prefectureName": "熊本県",
+    "latitude": 32.52272285,
+    "longitude": 130.03830411,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "43028",
+    "portName": "大浦",
+    "prefectureCode": "43",
+    "prefectureName": "熊本県",
+    "latitude": 32.52475408,
+    "longitude": 130.37513622,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "43030",
+    "portName": "合津",
+    "prefectureCode": "43",
+    "prefectureName": "熊本県",
+    "latitude": 32.51995552,
+    "longitude": 130.42569498,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "43033",
+    "portName": "姫戸",
+    "prefectureCode": "43",
+    "prefectureName": "熊本県",
+    "latitude": 32.43582934,
+    "longitude": 130.41494358,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "43045",
+    "portName": "天草",
+    "prefectureCode": "43",
+    "prefectureName": "熊本県",
+    "latitude": 32.51927481,
+    "longitude": 130.32080367,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "43046",
+    "portName": "上天草",
+    "prefectureCode": "43",
+    "prefectureName": "熊本県",
+    "latitude": 32.39473845,
+    "longitude": 130.40553024,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "44001",
+    "portName": "中津",
+    "prefectureCode": "44",
+    "prefectureName": "大分県",
+    "latitude": 33.62691605,
+    "longitude": 131.23548473,
+    "portGrade": "重要港湾",
+    "administrator": "大分県"
+  },
+  {
+    "portCode": "44002",
+    "portName": "別府",
+    "prefectureCode": "44",
+    "prefectureName": "大分県",
+    "latitude": 33.30770444,
+    "longitude": 131.50736408,
+    "portGrade": "重要港湾",
+    "administrator": "大分県"
+  },
+  {
+    "portCode": "44003",
+    "portName": "大分",
+    "prefectureCode": "44",
+    "prefectureName": "大分県",
+    "latitude": 33.27375195,
+    "longitude": 131.71303229,
+    "portGrade": "重要港湾",
+    "administrator": "大分県"
+  },
+  {
+    "portCode": "44004",
+    "portName": "佐賀関",
+    "prefectureCode": "44",
+    "prefectureName": "大分県",
+    "latitude": 33.25243175,
+    "longitude": 131.86828167,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "44005",
+    "portName": "津久見",
+    "prefectureCode": "44",
+    "prefectureName": "大分県",
+    "latitude": 33.08808136,
+    "longitude": 131.87234302,
+    "portGrade": "重要港湾",
+    "administrator": "大分県"
+  },
+  {
+    "portCode": "44006",
+    "portName": "佐伯",
+    "prefectureCode": "44",
+    "prefectureName": "大分県",
+    "latitude": 32.97788459,
+    "longitude": 131.9147295,
+    "portGrade": "重要港湾",
+    "administrator": "大分県"
+  },
+  {
+    "portCode": "44007",
+    "portName": "高田",
+    "prefectureCode": "44",
+    "prefectureName": "大分県",
+    "latitude": 33.56600318,
+    "longitude": 131.73844175,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "44008",
+    "portName": "臼野",
+    "prefectureCode": "44",
+    "prefectureName": "大分県",
+    "latitude": 33.36388521,
+    "longitude": 131.53209089,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "44012",
+    "portName": "国東",
+    "prefectureCode": "44",
+    "prefectureName": "大分県",
+    "latitude": 33.56600318,
+    "longitude": 131.73844175,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "44014",
+    "portName": "守江",
+    "prefectureCode": "44",
+    "prefectureName": "大分県",
+    "latitude": 33.40973458,
+    "longitude": 131.64847751,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "44015",
+    "portName": "日出",
+    "prefectureCode": "44",
+    "prefectureName": "大分県",
+    "latitude": 33.36388521,
+    "longitude": 131.53209089,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "44016",
+    "portName": "臼杵",
+    "prefectureCode": "44",
+    "prefectureName": "大分県",
+    "latitude": 32.789,
+    "longitude": 131.87659404,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "44017",
+    "portName": "浦代",
+    "prefectureCode": "44",
+    "prefectureName": "大分県",
+    "latitude": 32.91908022,
+    "longitude": 131.98279495,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "44018",
+    "portName": "丸市尾",
+    "prefectureCode": "44",
+    "prefectureName": "大分県",
+    "latitude": 32.789,
+    "longitude": 131.87659404,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "44019",
+    "portName": "姫島",
+    "prefectureCode": "44",
+    "prefectureName": "大分県",
+    "latitude": 33.64682396,
+    "longitude": 131.49266592,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "45001",
+    "portName": "延岡新",
+    "prefectureCode": "45",
+    "prefectureName": "宮崎県",
+    "latitude": 32.44744127,
+    "longitude": 131.67167805,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "45002",
+    "portName": "細島",
+    "prefectureCode": "45",
+    "prefectureName": "宮崎県",
+    "latitude": 32.44744127,
+    "longitude": 131.67167805,
+    "portGrade": "重要港湾",
+    "administrator": "宮崎県"
+  },
+  {
+    "portCode": "45003",
+    "portName": "宮崎",
+    "prefectureCode": "45",
+    "prefectureName": "宮崎県",
+    "latitude": 31.91075758,
+    "longitude": 131.4762479,
+    "portGrade": "重要港湾",
+    "administrator": "宮崎県"
+  },
+  {
+    "portCode": "45004",
+    "portName": "油津",
+    "prefectureCode": "45",
+    "prefectureName": "宮崎県",
+    "latitude": 31.56834018,
+    "longitude": 131.40374093,
+    "portGrade": "重要港湾",
+    "administrator": "宮崎県"
+  },
+  {
+    "portCode": "45005",
+    "portName": "古江",
+    "prefectureCode": "45",
+    "prefectureName": "宮崎県",
+    "latitude": 31.51007168,
+    "longitude": 131.37850827,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "45006",
+    "portName": "熊野江",
+    "prefectureCode": "45",
+    "prefectureName": "宮崎県",
+    "latitude": 32.58407271,
+    "longitude": 131.71469608,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "45007",
+    "portName": "延岡",
+    "prefectureCode": "45",
+    "prefectureName": "宮崎県",
+    "latitude": 32.33156952,
+    "longitude": 131.61925531,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "45008",
+    "portName": "美々津",
+    "prefectureCode": "45",
+    "prefectureName": "宮崎県",
+    "latitude": 32.33156952,
+    "longitude": 131.61925531,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "45009",
+    "portName": "内海",
+    "prefectureCode": "45",
+    "prefectureName": "宮崎県",
+    "latitude": 32.69123962,
+    "longitude": 131.82166908,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "45010",
+    "portName": "外浦",
+    "prefectureCode": "45",
+    "prefectureName": "宮崎県",
+    "latitude": 32.66736226,
+    "longitude": 131.77933825,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "45011",
+    "portName": "福島",
+    "prefectureCode": "45",
+    "prefectureName": "宮崎県",
+    "latitude": 31.44124804,
+    "longitude": 131.20476686,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "45012",
+    "portName": "大島",
+    "prefectureCode": "45",
+    "prefectureName": "宮崎県",
+    "latitude": 31.53273148,
+    "longitude": 131.40276649,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "46001",
+    "portName": "志布志",
+    "prefectureCode": "46",
+    "prefectureName": "鹿児島県",
+    "latitude": 31.45808596,
+    "longitude": 131.10209723,
+    "portGrade": "重要港湾",
+    "administrator": "鹿児島県"
+  },
+  {
+    "portCode": "46002",
+    "portName": "加治木",
+    "prefectureCode": "46",
+    "prefectureName": "鹿児島県",
+    "latitude": 31.72739495,
+    "longitude": 130.66509582,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "46003",
+    "portName": "鹿児島",
+    "prefectureCode": "46",
+    "prefectureName": "鹿児島県",
+    "latitude": 31.52659788,
+    "longitude": 130.5539534,
+    "portGrade": "重要港湾",
+    "administrator": "鹿児島県"
+  },
+  {
+    "portCode": "46004",
+    "portName": "喜入",
+    "prefectureCode": "46",
+    "prefectureName": "鹿児島県",
+    "latitude": 31.39491507,
+    "longitude": 130.54163762,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "46005",
+    "portName": "川内",
+    "prefectureCode": "46",
+    "prefectureName": "鹿児島県",
+    "latitude": 31.85992033,
+    "longitude": 130.18833443,
+    "portGrade": "重要港湾",
+    "administrator": "鹿児島県"
+  },
+  {
+    "portCode": "46006",
+    "portName": "米之津",
+    "prefectureCode": "46",
+    "prefectureName": "鹿児島県",
+    "latitude": 32.13115312,
+    "longitude": 130.34171061,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "46007",
+    "portName": "西之表",
+    "prefectureCode": "46",
+    "prefectureName": "鹿児島県",
+    "latitude": 30.73462903,
+    "longitude": 130.98404079,
+    "portGrade": "重要港湾",
+    "administrator": "鹿児島県"
+  },
+  {
+    "portCode": "46008",
+    "portName": "宮之浦（屋久島町）",
+    "prefectureCode": "46",
+    "prefectureName": "鹿児島県",
+    "latitude": 30.428981,
+    "longitude": 130.576551,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "46009",
+    "portName": "名瀬",
+    "prefectureCode": "46",
+    "prefectureName": "鹿児島県",
+    "latitude": 28.40055564,
+    "longitude": 129.50218152,
+    "portGrade": "重要港湾",
+    "administrator": "鹿児島県"
+  },
+  {
+    "portCode": "46010",
+    "portName": "波見",
+    "prefectureCode": "46",
+    "prefectureName": "鹿児島県",
+    "latitude": 30.42898059,
+    "longitude": 130.57655113,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "46011",
+    "portName": "根占",
+    "prefectureCode": "46",
+    "prefectureName": "鹿児島県",
+    "latitude": 31.85992033,
+    "longitude": 130.18833443,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "46012",
+    "portName": "大根占",
+    "prefectureCode": "46",
+    "prefectureName": "鹿児島県",
+    "latitude": 31.4478073,
+    "longitude": 130.28864549,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "46013",
+    "portName": "鹿屋",
+    "prefectureCode": "46",
+    "prefectureName": "鹿児島県",
+    "latitude": 31.23478806,
+    "longitude": 130.65318873,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "46014",
+    "portName": "垂水",
+    "prefectureCode": "46",
+    "prefectureName": "鹿児島県",
+    "latitude": 31.28036889,
+    "longitude": 130.62286728,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "46015",
+    "portName": "桜島（鹿児島県管理）",
+    "prefectureCode": "46",
+    "prefectureName": "鹿児島県",
+    "latitude": 31.72739495,
+    "longitude": 130.66509582,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "46016",
+    "portName": "浮津",
+    "prefectureCode": "46",
+    "prefectureName": "鹿児島県",
+    "latitude": 31.71590572,
+    "longitude": 130.72667164,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "46017",
+    "portName": "福山",
+    "prefectureCode": "46",
+    "prefectureName": "鹿児島県",
+    "latitude": 31.67870567,
+    "longitude": 130.81078535,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "46018",
+    "portName": "隼人",
+    "prefectureCode": "46",
+    "prefectureName": "鹿児島県",
+    "latitude": 31.50011852,
+    "longitude": 130.69045922,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "46019",
+    "portName": "指宿",
+    "prefectureCode": "46",
+    "prefectureName": "鹿児島県",
+    "latitude": 31.59414067,
+    "longitude": 130.59753591,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "46020",
+    "portName": "串木野新",
+    "prefectureCode": "46",
+    "prefectureName": "鹿児島県",
+    "latitude": 31.40538291,
+    "longitude": 130.76490486,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "46021",
+    "portName": "黒之浜",
+    "prefectureCode": "46",
+    "prefectureName": "鹿児島県",
+    "latitude": 31.35019,
+    "longitude": 130.792848,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "46022",
+    "portName": "獅子島",
+    "prefectureCode": "46",
+    "prefectureName": "鹿児島県",
+    "latitude": 31.2554765,
+    "longitude": 130.78773178,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "46023",
+    "portName": "片側",
+    "prefectureCode": "46",
+    "prefectureName": "鹿児島県",
+    "latitude": 31.21821008,
+    "longitude": 130.75972238,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "46031",
+    "portName": "浦底",
+    "prefectureCode": "46",
+    "prefectureName": "鹿児島県",
+    "latitude": 27.81126208,
+    "longitude": 128.88902257,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "46032",
+    "portName": "長島",
+    "prefectureCode": "46",
+    "prefectureName": "鹿児島県",
+    "latitude": 28.32869403,
+    "longitude": 129.93482899,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "46033",
+    "portName": "里",
+    "prefectureCode": "46",
+    "prefectureName": "鹿児島県",
+    "latitude": 27.74068646,
+    "longitude": 129.02376902,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "46034",
+    "portName": "長浜",
+    "prefectureCode": "46",
+    "prefectureName": "鹿児島県",
+    "latitude": 27.3977289,
+    "longitude": 128.66304782,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "46035",
+    "portName": "大里",
+    "prefectureCode": "46",
+    "prefectureName": "鹿児島県",
+    "latitude": 27.04837319,
+    "longitude": 128.39446784,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "46036",
+    "portName": "片泊",
+    "prefectureCode": "46",
+    "prefectureName": "鹿児島県",
+    "latitude": 29.8395691,
+    "longitude": 129.84858222,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "46038",
+    "portName": "田之脇",
+    "prefectureCode": "46",
+    "prefectureName": "鹿児島県",
+    "latitude": 30.77775902,
+    "longitude": 130.27890575,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "46041",
+    "portName": "大塩屋",
+    "prefectureCode": "46",
+    "prefectureName": "鹿児島県",
+    "latitude": 30.56225032,
+    "longitude": 131.02979823,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "46043",
+    "portName": "広田",
+    "prefectureCode": "46",
+    "prefectureName": "鹿児島県",
+    "latitude": 32.12042242,
+    "longitude": 130.20192268,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "46044",
+    "portName": "門倉",
+    "prefectureCode": "46",
+    "prefectureName": "鹿児島県",
+    "latitude": 32.12507495,
+    "longitude": 130.2151483,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "46045",
+    "portName": "島間",
+    "prefectureCode": "46",
+    "prefectureName": "鹿児島県",
+    "latitude": 30.46795118,
+    "longitude": 130.86477517,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "46047",
+    "portName": "浜津脇",
+    "prefectureCode": "46",
+    "prefectureName": "鹿児島県",
+    "latitude": 32.29400985,
+    "longitude": 130.23182912,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "46050",
+    "portName": "竹島",
+    "prefectureCode": "46",
+    "prefectureName": "鹿児島県",
+    "latitude": 30.81759577,
+    "longitude": 130.41936468,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "46051",
+    "portName": "硫黄島",
+    "prefectureCode": "46",
+    "prefectureName": "鹿児島県",
+    "latitude": 30.77775902,
+    "longitude": 130.27890575,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "46052",
+    "portName": "宮之浦（長島町）",
+    "prefectureCode": "46",
+    "prefectureName": "鹿児島県",
+    "latitude": 30.42898059,
+    "longitude": 130.57655113,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "46053",
+    "portName": "安房",
+    "prefectureCode": "46",
+    "prefectureName": "鹿児島県",
+    "latitude": 30.31478872,
+    "longitude": 130.66368637,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "46054",
+    "portName": "中之島",
+    "prefectureCode": "46",
+    "prefectureName": "鹿児島県",
+    "latitude": 29.8395691,
+    "longitude": 129.84858222,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "46055",
+    "portName": "南之浜",
+    "prefectureCode": "46",
+    "prefectureName": "鹿児島県",
+    "latitude": 29.67931358,
+    "longitude": 129.53267383,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "46056",
+    "portName": "切石",
+    "prefectureCode": "46",
+    "prefectureName": "鹿児島県",
+    "latitude": 29.61116452,
+    "longitude": 129.71255193,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "46058",
+    "portName": "やすら浜",
+    "prefectureCode": "46",
+    "prefectureName": "鹿児島県",
+    "latitude": 29.45584968,
+    "longitude": 129.59396944,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "46059",
+    "portName": "小宝島",
+    "prefectureCode": "46",
+    "prefectureName": "鹿児島県",
+    "latitude": 29.21937004,
+    "longitude": 129.32214496,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "46060",
+    "portName": "宝島",
+    "prefectureCode": "46",
+    "prefectureName": "鹿児島県",
+    "latitude": 31.86235499,
+    "longitude": 129.8411549,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "46061",
+    "portName": "山間",
+    "prefectureCode": "46",
+    "prefectureName": "鹿児島県",
+    "latitude": 31.81902682,
+    "longitude": 129.8699498,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "46062",
+    "portName": "古仁屋",
+    "prefectureCode": "46",
+    "prefectureName": "鹿児島県",
+    "latitude": 31.41024974,
+    "longitude": 130.19593929,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "46063",
+    "portName": "篠川",
+    "prefectureCode": "46",
+    "prefectureName": "鹿児島県",
+    "latitude": 31.25280658,
+    "longitude": 130.39175057,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "46064",
+    "portName": "湯湾",
+    "prefectureCode": "46",
+    "prefectureName": "鹿児島県",
+    "latitude": 31.25245804,
+    "longitude": 130.3686687,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "46066",
+    "portName": "大和",
+    "prefectureCode": "46",
+    "prefectureName": "鹿児島県",
+    "latitude": 31.25163795,
+    "longitude": 130.38379187,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "46067",
+    "portName": "竜郷",
+    "prefectureCode": "46",
+    "prefectureName": "鹿児島県",
+    "latitude": 31.34624699,
+    "longitude": 130.20652017,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "46068",
+    "portName": "赤木名",
+    "prefectureCode": "46",
+    "prefectureName": "鹿児島県",
+    "latitude": 31.30419875,
+    "longitude": 130.58600001,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "46069",
+    "portName": "湾",
+    "prefectureCode": "46",
+    "prefectureName": "鹿児島県",
+    "latitude": 31.26836695,
+    "longitude": 130.6679212,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "46070",
+    "portName": "加計呂麻",
+    "prefectureCode": "46",
+    "prefectureName": "鹿児島県",
+    "latitude": 28.13263596,
+    "longitude": 129.25186906,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "46071",
+    "portName": "与路",
+    "prefectureCode": "46",
+    "prefectureName": "鹿児島県",
+    "latitude": 30.81759577,
+    "longitude": 130.41936468,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "46072",
+    "portName": "請島",
+    "prefectureCode": "46",
+    "prefectureName": "鹿児島県",
+    "latitude": 30.82829551,
+    "longitude": 129.90705905,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "46073",
+    "portName": "亀徳",
+    "prefectureCode": "46",
+    "prefectureName": "鹿児島県",
+    "latitude": 30.84353282,
+    "longitude": 129.95018694,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "46074",
+    "portName": "平土野",
+    "prefectureCode": "46",
+    "prefectureName": "鹿児島県",
+    "latitude": 29.68863054,
+    "longitude": 129.52529431,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "46075",
+    "portName": "伊延",
+    "prefectureCode": "46",
+    "prefectureName": "鹿児島県",
+    "latitude": 29.61040872,
+    "longitude": 129.6965425,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "46076",
+    "portName": "和泊",
+    "prefectureCode": "46",
+    "prefectureName": "鹿児島県",
+    "latitude": 29.45584968,
+    "longitude": 129.59396944,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "46077",
+    "portName": "住吉",
+    "prefectureCode": "46",
+    "prefectureName": "鹿児島県",
+    "latitude": 29.67931358,
+    "longitude": 129.53267383,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "46078",
+    "portName": "与論",
+    "prefectureCode": "46",
+    "prefectureName": "鹿児島県",
+    "latitude": 27.04837319,
+    "longitude": 128.39446784,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "47001",
+    "portName": "金武湾",
+    "prefectureCode": "47",
+    "prefectureName": "沖縄県",
+    "latitude": 26.40487348,
+    "longitude": 127.91787551,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "47002",
+    "portName": "中城湾",
+    "prefectureCode": "47",
+    "prefectureName": "沖縄県",
+    "latitude": 26.237361,
+    "longitude": 127.86470698,
+    "portGrade": "重要港湾",
+    "administrator": "沖縄県"
+  },
+  {
+    "portCode": "47003",
+    "portName": "那覇",
+    "prefectureCode": "47",
+    "prefectureName": "沖縄県",
+    "latitude": 26.24925348,
+    "longitude": 127.66172923,
+    "portGrade": "重要港湾",
+    "administrator": "那覇港管理組合"
+  },
+  {
+    "portCode": "47004",
+    "portName": "本部",
+    "prefectureCode": "47",
+    "prefectureName": "沖縄県",
+    "latitude": 26.62479761,
+    "longitude": 127.88481108,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "47005",
+    "portName": "運天",
+    "prefectureCode": "47",
+    "prefectureName": "沖縄県",
+    "latitude": 26.69072194,
+    "longitude": 128.01018281,
+    "portGrade": "重要港湾",
+    "administrator": "沖縄県"
+  },
+  {
+    "portCode": "47006",
+    "portName": "平良",
+    "prefectureCode": "47",
+    "prefectureName": "沖縄県",
+    "latitude": 24.82247627,
+    "longitude": 125.27556572,
+    "portGrade": "重要港湾",
+    "administrator": "宮古島市"
+  },
+  {
+    "portCode": "47007",
+    "portName": "石垣",
+    "prefectureCode": "47",
+    "prefectureName": "沖縄県",
+    "latitude": 24.34076133,
+    "longitude": 124.13415332,
+    "portGrade": "重要港湾",
+    "administrator": "石垣市"
+  },
+  {
+    "portCode": "47009",
+    "portName": "前泊",
+    "prefectureCode": "47",
+    "prefectureName": "沖縄県",
+    "latitude": 27.03350141,
+    "longitude": 127.9679274,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "47010",
+    "portName": "野甫",
+    "prefectureCode": "47",
+    "prefectureName": "沖縄県",
+    "latitude": 26.99255121,
+    "longitude": 127.92775459,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "47011",
+    "portName": "内花",
+    "prefectureCode": "47",
+    "prefectureName": "沖縄県",
+    "latitude": 26.62479761,
+    "longitude": 127.88481108,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "47012",
+    "portName": "仲田",
+    "prefectureCode": "47",
+    "prefectureName": "沖縄県",
+    "latitude": 26.154085,
+    "longitude": 127.88408307,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "47013",
+    "portName": "伊江",
+    "prefectureCode": "47",
+    "prefectureName": "沖縄県",
+    "latitude": 27.03350141,
+    "longitude": 127.9679274,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "47014",
+    "portName": "水納（本部町）",
+    "prefectureCode": "47",
+    "prefectureName": "沖縄県",
+    "latitude": 26.99255121,
+    "longitude": 127.92775459,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "47015",
+    "portName": "粟国",
+    "prefectureCode": "47",
+    "prefectureName": "沖縄県",
+    "latitude": 26.925624,
+    "longitude": 127.95302098,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "47016",
+    "portName": "兼城",
+    "prefectureCode": "47",
+    "prefectureName": "沖縄県",
+    "latitude": 26.33262905,
+    "longitude": 126.7560219,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "47017",
+    "portName": "座間味",
+    "prefectureCode": "47",
+    "prefectureName": "沖縄県",
+    "latitude": 25.95338328,
+    "longitude": 131.28248064,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "47018",
+    "portName": "渡嘉敷",
+    "prefectureCode": "47",
+    "prefectureName": "沖縄県",
+    "latitude": 26.19846668,
+    "longitude": 127.3732256,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "47019",
+    "portName": "徳仁",
+    "prefectureCode": "47",
+    "prefectureName": "沖縄県",
+    "latitude": 26.154085,
+    "longitude": 127.88408307,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "47020",
+    "portName": "北大東",
+    "prefectureCode": "47",
+    "prefectureName": "沖縄県",
+    "latitude": 25.841313,
+    "longitude": 131.21554188,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "47021",
+    "portName": "南大東",
+    "prefectureCode": "47",
+    "prefectureName": "沖縄県",
+    "latitude": 25.841313,
+    "longitude": 131.21554188,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "47022",
+    "portName": "長山",
+    "prefectureCode": "47",
+    "prefectureName": "沖縄県",
+    "latitude": 26.57674308,
+    "longitude": 127.23386469,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "47024",
+    "portName": "多良間",
+    "prefectureCode": "47",
+    "prefectureName": "沖縄県",
+    "latitude": 26.19846668,
+    "longitude": 127.3732256,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "47025",
+    "portName": "船浦",
+    "prefectureCode": "47",
+    "prefectureName": "沖縄県",
+    "latitude": 26.2177783,
+    "longitude": 127.32108175,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "47026",
+    "portName": "仲間",
+    "prefectureCode": "47",
+    "prefectureName": "沖縄県",
+    "latitude": 26.2241969,
+    "longitude": 127.30052251,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "47027",
+    "portName": "白浜",
+    "prefectureCode": "47",
+    "prefectureName": "沖縄県",
+    "latitude": 24.79585782,
+    "longitude": 125.20173266,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "47028",
+    "portName": "祖納",
+    "prefectureCode": "47",
+    "prefectureName": "沖縄県",
+    "latitude": 24.729152,
+    "longitude": 125.259954,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "47029",
+    "portName": "小浜",
+    "prefectureCode": "47",
+    "prefectureName": "沖縄県",
+    "latitude": 24.74557952,
+    "longitude": 124.69565813,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "47030",
+    "portName": "竹富東",
+    "prefectureCode": "47",
+    "prefectureName": "沖縄県",
+    "latitude": 24.64237174,
+    "longitude": 124.72761313,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "47031",
+    "portName": "黒島",
+    "prefectureCode": "47",
+    "prefectureName": "沖縄県",
+    "latitude": 24.25522716,
+    "longitude": 123.99757237,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "47032",
+    "portName": "上地",
+    "prefectureCode": "47",
+    "prefectureName": "沖縄県",
+    "latitude": 24.33846688,
+    "longitude": 124.09495204,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "47033",
+    "portName": "鳩間",
+    "prefectureCode": "47",
+    "prefectureName": "沖縄県",
+    "latitude": 24.34874993,
+    "longitude": 123.99411404,
+    "portGrade": null,
+    "administrator": null
+  },
+  {
+    "portCode": "47034",
+    "portName": "船浮",
+    "prefectureCode": "47",
+    "prefectureName": "沖縄県",
+    "latitude": 24.25522716,
+    "longitude": 123.99757237,
+    "portGrade": null,
+    "administrator": null
+  }
+]
