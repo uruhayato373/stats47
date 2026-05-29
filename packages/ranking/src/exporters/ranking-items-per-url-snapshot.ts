@@ -4,7 +4,7 @@ import { logger } from "@stats47/logger/server";
 import { saveToR2 } from "@stats47/r2-storage/server";
 
 import { listRankingItemsWithTagsFromR2 } from "../repositories/ranking-item";
-import type { CategoryRankingItem } from "../repositories/ranking-item/find-ranking-items-by-category";
+import type { CategoryRankingItem } from "../types/ranking-item";
 import type { RankingItem } from "../types/ranking-item";
 import {
   categoryItemsKeyPath,

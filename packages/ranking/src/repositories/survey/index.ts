@@ -1,5 +1,5 @@
-export { findSurveyById } from "./find-survey-by-id";
-export { listSurveys } from "./list-surveys";
+// 完全DBレス (Phase F): D1 sources を引く findSurveyById / listSurveys は削除。
+// survey は R2 snapshot リーダ (read-surveys-snapshot) のみを使う。
 export {
   readSurveyByIdFromR2,
   readSurveysFromR2,

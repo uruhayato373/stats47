@@ -1,18 +1,6 @@
-export { deleteAllRankingItems } from "./delete-all-ranking-items";
-export { deleteRankingItem } from "./delete-ranking-item";
-export { findRankingItem } from "./find-ranking-item";
-export { findRankingItemByKey } from "./find-ranking-item-by-key";
-export { findRankingItemByKeyAndAreaType } from "./find-ranking-item-by-key-and-area-type";
-export { type CategoryRankingItem, findRankingItemsByCategory } from "./find-ranking-items-by-category";
-export { findRankingItemsBySurvey } from "./find-ranking-items-by-survey";
-export { findRankingItemsByTag } from "./find-ranking-items-by-tag";
-export { listActiveKeysForSitemap } from "./list-active-keys-for-sitemap";
-export { listRankingItems } from "./list-ranking-items";
-export { type RankingItemLite, listRankingItemsLite } from "./list-ranking-items-lite";
-export { listRankingItemsByAreaType } from "./list-ranking-items-by-area-type";
-export { listRankingItemsWithTags } from "./list-ranking-items-with-tags";
-export { updateRankingItem } from "./update-ranking-item";
-export { upsertRankingItem } from "./upsert-ranking-item";
+// 完全DBレス (Phase F): D1 metrics を引く ranking-item repository は全削除。
+// runtime / 生成器は R2 item.json リーダ (read-ranking-items-snapshot) のみを使う。
+// CategoryRankingItem 型は types/ranking-item へ relocate 済。
 export {
   listRankingItemsWithTagsFromR2,
   readActiveKeysForSitemapFromR2,
@@ -31,8 +19,3 @@ export {
   readTagsForItemFromR2,
 } from "./read-ranking-items-snapshot";
 export type { GroupRankingItem } from "./read-ranking-items-snapshot";
-
-// Phase 7 (2026-05-28) で削除した D1 用 export 一覧:
-// - countRankingItemsByAreaType / getRankingItemStats / listActiveRankingKeys
-// - listFeaturedRankingItems (置換: readFeaturedRankingItemsFromR2)
-// - findRankingItemsByGroupKey (関数のみ削除、型 GroupRankingItem は read-ranking-items-snapshot に inline 移動して維持)

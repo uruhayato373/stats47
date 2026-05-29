@@ -5,7 +5,7 @@ vi.mock("@stats47/logger/server", () => ({
   logger: { info: vi.fn(), warn: vi.fn(), error: vi.fn(), debug: vi.fn() },
 }));
 vi.mock("../../repositories/ranking-item", () => ({
-  findRankingItemByKey: vi.fn(),
+  readRankingItemByKeyFromR2: vi.fn(),
 }));
 vi.mock("../../repositories/ranking-value", () => ({
   listRankingValues: vi.fn(),
@@ -17,7 +17,7 @@ vi.mock("../fetch-ranking-values-on-demand", () => ({
 import type { RankingItem, RankingValue } from "../../types";
 import { computeNormalization } from "../compute-normalization";
 
-import { findRankingItemByKey } from "../../repositories/ranking-item";
+import { readRankingItemByKeyFromR2 } from "../../repositories/ranking-item";
 import { listRankingValues } from "../../repositories/ranking-value";
 
 const makeValue = (areaCode: string, value: number): RankingValue => ({
@@ -66,7 +66,7 @@ const baseItem: RankingItem = {
 describe("computeNormalization", () => {
   beforeEach(() => {
     vi.clearAllMocks();
-    vi.mocked(findRankingItemByKey).mockResolvedValue({
+    vi.mocked(readRankingItemByKeyFromR2).mockResolvedValue({
       success: false,
       error: new Error("not found"),
     } as any);
@@ -188,7 +188,7 @@ describe("computeNormalization", () => {
           return { success: true, data: [] }; // 2020年のデータはない
         }
       );
-      vi.mocked(findRankingItemByKey).mockResolvedValue({
+      vi.mocked(readRankingItemByKeyFromR2).mockResolvedValue({
         success: true,
         data: { rankingKey: "total-population", latestYear: { yearCode: "2019" } },
       } as any);

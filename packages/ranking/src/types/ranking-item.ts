@@ -284,6 +284,24 @@ export interface RankingItem {
 }
 
 /**
+ * カテゴリ/調査ページ等の一覧表示用に絞った ranking item の軽量ビュー。
+ * (旧 find-ranking-items-by-category.ts から完全DBレス Phase F で types へ relocate)
+ */
+export interface CategoryRankingItem {
+  rankingKey: string;
+  title: string;
+  subtitle: string | null;
+  unit: string;
+  latestYear: unknown;
+  availableYears: unknown;
+  description: string | null;
+  demographicAttr: string | null;
+  normalizationBasis: string | null;
+  groupKey: string | null;
+  isFeatured: boolean;
+}
+
+/**
  * 地域タイプ別のランキング項目カウント
  * @see getRankingItemStatsForAllAreaTypes
  */

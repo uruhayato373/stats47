@@ -3,14 +3,14 @@ import type { RankingItem, RankingValue } from "../../types";
 import { calculateRankingValues } from "../calculate-ranking-values";
 
 vi.mock("../../repositories/ranking-item", () => ({
-  findRankingItemByKey: vi.fn(),
+  readRankingItemByKeyFromR2: vi.fn(),
 }));
 
 vi.mock("../../repositories/ranking-value", () => ({
   listRankingValues: vi.fn(),
 }));
 
-import { findRankingItemByKey } from "../../repositories/ranking-item";
+import { readRankingItemByKeyFromR2 } from "../../repositories/ranking-item";
 import { listRankingValues } from "../../repositories/ranking-value";
 
 describe("calculateRankingValues", () => {
@@ -48,7 +48,7 @@ describe("calculateRankingValues", () => {
 
   beforeEach(() => {
     vi.clearAllMocks();
-    vi.mocked(findRankingItemByKey).mockResolvedValue({ success: true, data: { rankingKey: "found" } } as any);
+    vi.mocked(readRankingItemByKeyFromR2).mockResolvedValue({ success: true, data: { rankingKey: "found" } } as any);
   });
 
   describe("ratio calculation", () => {
