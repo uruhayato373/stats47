@@ -224,7 +224,7 @@ node .claude/scripts/notebooklm-cross-query.mjs --json \
    ```
    - 該当 `statsDataId` が見つからない → **その候補は離脱**（「白書アングルあり / データ未整備」として Phase 5 で ★☆☆ のまま記録、将来の e-Stat 追加待ち）
 
-   **(b) データ取得**: 見つかった `statsDataId` を `/fetch-estat-data` で取得し、必要なら TS-config 追加 → `/sync-metrics-cache --apply` → `/page-data-batch --metric <key>`（`.claude/rules/data-d1-ssot.md` の取り込みフロー準拠）。
+   **(b) データ取得**: 見つかった `statsDataId` を `/fetch-estat-data` で取得し、必要なら TS-config 追加 → `/sync-metrics-cache --apply` → `/page-data-batch --metric <key>`（`.claude/rules/data-sqlite-ssot.md` の取り込みフロー準拠）。
 
    **(c) 白書に再照会**: 取得データの実際の上位/下位県を文脈に入れて白書へ再質問し、切り口を**実データで検証・精緻化**する:
    ```bash

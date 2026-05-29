@@ -35,7 +35,7 @@ D1 (SSOT) から R2 用 snapshot JSON と Remotion 用 static JSON を派生生�
 ## 必読 rules
 
 - `.claude/rules/r2-storage-design.md` — R2 キーパス対応表 (URL → app/...)
-- `.claude/rules/data-d1-ssot.md` — D1 SSOT 原則
+- `.claude/rules/data-sqlite-ssot.md` — D1 SSOT 原則
 - `.claude/rules/nextjs-ssg-preservation.md` — SSG 維持のため snapshot 構造変更時の影響範囲
 
 ## 触る state / files

@@ -23,7 +23,9 @@
   },
   "scripts": {
     "type-check": "tsc --noEmit",
-    "purge-cache": "tsx src/scripts/purge-cache.ts"
+    "purge-cache": "tsx src/scripts/purge-cache.ts",
+    "db:pull": "tsx src/scripts/db-r2-sync.ts pull",
+    "db:push": "tsx src/scripts/db-r2-sync.ts push"
   },
   "dependencies": {
     "@stats47/logger": "*",

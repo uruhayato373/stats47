@@ -1,0 +1,95 @@
+name: 🔄 Data Refresh (e-Stat → R2)
+
+# クラウド/CI からデータ追加するための workflow。
+# ローカルビルド DB (SQLite) を R2 経由で pull → e-Stat fetch → snapshot 再生成 →
+# R2 反映 → ビルド DB を push し戻す。
+#
+# 設計: ~/.claude/plans/floating-roaming-squid.md / .claude/rules/data-sqlite-ssot.md
+#
+# ⚠️ 初回は必ず workflow_dispatch + dry_run=true で動作確認してから本実行すること。
+#    schedule (cron) は手動実行で round-trip が確認できるまで有効化しない (下記コメント参照)。
+
+on:
+  workflow_dispatch:
+    inputs:
+      metric:
+        description: "更新する metric key (空なら全 metric)"
+        required: false
+        default: ""
+      since:
+        description: "差分取得の起点 (YYYY-MM-DD、空なら全期間)"
+        required: false
+        default: ""
+      dry_run:
+        description: "true: fetch のみで R2/DB に書き込まない"
+        required: false
+        default: "true"
+  # 動作確認後に有効化する (例: 毎月 5日 03:00 UTC = 12:00 JST):
+  # schedule:
+  #   - cron: "0 3 5 * *"
+
+permissions:
+  contents: read
+
+concurrency:
+  # workflow_dispatch と将来の cron の衝突を吸収。db:push 内の soft lock と二重防御。
+  group: data-refresh
+  cancel-in-progress: false
+
+env:
+  # db-r2-sync.ts / diff-push-r2.ts が要求する R2 S3 認証 (CLOUDFLARE_* secrets から導出)
+  R2_S3_ENDPOINT: https://${{ secrets.CLOUDFLARE_ACCOUNT_ID }}.r2.cloudflarestorage.com
+  R2_ACCESS_KEY_ID: ${{ secrets.CLOUDFLARE_R2_ACCESS_KEY_ID }}
+  R2_SECRET_ACCESS_KEY: ${{ secrets.CLOUDFLARE_R2_SECRET_ACCESS_KEY }}
+  CLOUDFLARE_R2_BUCKET_NAME: stats47
+  NEXT_PUBLIC_ESTAT_APP_ID: ${{ secrets.NEXT_PUBLIC_ESTAT_APP_ID }}
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - name: 🧰 Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 1
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      # ローカルビルド DB を R2 から取得 (snapshot exporter が読むために必須)。
+      # 初回 (R2 に database/stats47.sqlite が無い) は失敗するので、
+      # 一度ローカルで db:migrate:local + db:push して seed しておくこと。
+      - name: ⬇️ Pull local build DB (SQLite) from R2
+        run: npm run db:pull --workspace=packages/r2-storage
+
+      # e-Stat → R2 (app/stats)。観測値は R2 直行、metrics cache は build DB に反映。
+      - name: 📊 page-data-batch (e-Stat fetch)
+        run: |
+          ARGS=""
+          [ -n "${{ inputs.metric }}" ] && ARGS="$ARGS --metric ${{ inputs.metric }}"
+          [ -n "${{ inputs.since }}" ] && ARGS="$ARGS --since ${{ inputs.since }}"
+          [ "${{ inputs.dry_run }}" = "true" ] && ARGS="$ARGS --dry-run"
+          echo "page-data-batch.ts $ARGS"
+          npx tsx packages/data-configs/scripts/page-data-batch.ts $ARGS
+
+      - name: ☁️ Push observations to R2 (app/stats)
+        if: inputs.dry_run != 'true'
+        run: npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix app/stats
+
+      # build DB → 派生 snapshot (master / ranking-values 等) 再生成 + R2 push
+      - name: 🗂️ Regenerate derived snapshots
+        if: inputs.dry_run != 'true'
+        run: bash .claude/skills/db/sync-snapshots/run.sh
+
+      # 変異した build DB (metrics cache 等) を R2 に書き戻す (soft lock + 世代 backup)
+      - name: ⬆️ Push local build DB (SQLite) back to R2
+        if: inputs.dry_run != 'true'
+        run: npm run db:push --workspace=packages/r2-storage

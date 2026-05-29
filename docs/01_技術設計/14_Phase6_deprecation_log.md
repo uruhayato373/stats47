@@ -47,7 +47,7 @@ Phase 1-6 で D1 (15GB) を R2 へ全面移行し、Phase 6.7 で legacy 資産�
 - D1 への書き込み skill 許可リスト: `/sync-metrics-cache` / `/sync-articles` / `/populate-component-data` / `/register-affiliate-banner` / area-profile・theme batch
 - 上記以外で D1 `metrics` / 派生テーブルへ直接 INSERT する skill は新規追加 NG (PR レビューで reject)
 
-詳細: `.claude/rules/data-d1-ssot.md`
+詳細: `.claude/rules/data-sqlite-ssot.md`
 
 ## Phase 7 未対応 (本ログ作成時点)
 
@@ -89,6 +89,6 @@ Phase 1-6 で D1 (15GB) を R2 へ全面移行し、Phase 6.7 で legacy 資産�
 
 - Phase 6 親 plan: `~/.claude/plans/synthetic-zooming-yeti.md`
 - Phase 6.7 plan: `~/.claude/plans/drifting-cuddling-blossom.md`
-- データ管理アーキテクチャ: `.claude/rules/data-d1-ssot.md`
+- データ管理アーキテクチャ: `.claude/rules/data-sqlite-ssot.md`
 - R2 namespace 設計: `.claude/rules/r2-storage-design.md`
 - 動画データ SSOT: `docs/01_技術設計/13_動画データSSOT.md`

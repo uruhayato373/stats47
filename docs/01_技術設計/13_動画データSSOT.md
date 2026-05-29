@@ -111,7 +111,7 @@ R2 (app/stats/<metric>/*.json) [値 SSOT]
 
 ## 関連
 
-- 親方針: `.claude/rules/data-d1-ssot.md`
+- 親方針: `.claude/rules/data-sqlite-ssot.md`
 - 派生先と運用ルール: `.claude/rules/data-storage.md`
 - R2 キーパス設計: `.claude/rules/r2-storage-design.md`
 - DDD ドメイン分類: `docs/01_技術設計/04_DDDドメイン分類.md`

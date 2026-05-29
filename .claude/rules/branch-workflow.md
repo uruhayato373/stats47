@@ -28,10 +28,10 @@ PR は **develop → main の 1 段階のみ**。feature/* → develop は直 me
 
 ## DB データ反映フロー
 
-**リモート D1 は 2026-04-29 に解約済み（D1 残数 = 0）。** 本番は R2 スナップショット配信のみ。
+**リモート D1 は 2026-04-29 に解約済み（D1 残数 = 0）。** 本番は R2 スナップショット配信のみ。ローカル側はもはや Cloudflare D1 ではなく **ローカルビルド DB (SQLite)** = 再生成可能なビルドキャッシュ + 集計エンジン（用語: `.claude/rules/data-sqlite-ssot.md`）。
 
 ```
-ローカル D1（source of truth）──/sync-snapshots──▶ R2 snapshot──▶ 本番配信
+ローカルビルド DB (SQLite)（snapshot 生成の入力）──/sync-snapshots──▶ R2 snapshot──▶ 本番配信
 ```
 
 - データ変更後は `/sync-snapshots` で R2 スナップショットを再生成・push する

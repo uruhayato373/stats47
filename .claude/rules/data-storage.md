@@ -4,9 +4,11 @@
 
 判定軸: (a) 誰が読むか (app / agent / 人間)、(b) 何のために (CRUD / 振り返り / 計測ログ)。
 
-## D1（Cloudflare D1 SQLite）に置くもの — 「メタ + 運用エンティティ」
+## ローカルビルド DB (SQLite) に置くもの — 「メタ + 運用エンティティ」
 
-Phase 6 (2026-05-27) で **観測値 (stats_*) と相関結果 (correlations) は R2 へ全面移行済**。D1 は ~336MB に縮小、メタ + 運用エンティティ + マスタのみが残る。詳細: [`data-d1-ssot.md`](./data-d1-ssot.md)
+> **注**: 以前「D1」と呼んでいた層。Cloudflare D1 サービスではなく、SSOT から再生成可能なローカル SQLite ビルドキャッシュ + 集計エンジン (本番は R2 のみ読む)。用語: [`data-sqlite-ssot.md`](./data-sqlite-ssot.md)
+
+Phase 6 (2026-05-27) で **観測値 (stats_*) と相関結果 (correlations) は R2 へ全面移行済**。ローカルビルド DB は ~336MB に縮小、メタ + 運用エンティティ + マスタのみが残る。詳細: [`data-sqlite-ssot.md`](./data-sqlite-ssot.md)
 
 ### メタ (cache from TS-config)
 - `metrics` — 指標メタ。**SSOT は `packages/data-configs/src/metrics/<key>.ts`**。`/sync-metrics-cache` で同期
@@ -43,7 +45,7 @@ Phase 6 (2026-05-27) で **観測値 (stats_*) と相関結果 (correlations) �
 
 派生 JSON は git tracked でも commit して良い (履歴で差分追跡)。ただし **D1 が真実源** で、JSON を手で編集すると乖離が起きる。
 
-詳細: [`data-d1-ssot.md`](./data-d1-ssot.md)
+詳細: [`data-sqlite-ssot.md`](./data-sqlite-ssot.md)
 
 ## `docs/` に置くもの — 「人間が読み返す文書」
 
