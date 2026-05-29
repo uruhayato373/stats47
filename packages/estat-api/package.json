@@ -24,11 +24,9 @@
   },
   "dependencies": {
     "@stats47/area": "*",
-    "@stats47/database": "*",
     "@stats47/logger": "*",
     "@stats47/r2-storage": "*",
-    "@stats47/types": "*",
-    "drizzle-orm": "^0.45.1"
+    "@stats47/types": "*"
   },
   "devDependencies": {
 
