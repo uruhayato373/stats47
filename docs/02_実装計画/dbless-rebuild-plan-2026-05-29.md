@@ -20,11 +20,11 @@ tags: [architecture, dbless, migration, plan, rebuild]
 | 基盤2 categories git TS (`packages/data-configs/src/categories.ts`) | ✅ 完了 | 17件 配信中と key/name/順序一致・tsc PASS |
 | 基盤1 `listRankingItemsWithTagsFromR2` (`packages/ranking/.../read-ranking-items-snapshot.ts`) | ✅ 完了 | per-key item.json 走査・1992件(known-keys一致)・tsc PASS。**build時は NODE_ENV=development** |
 | 2.1 calculate-ranking-values | ✅ D1 query 除去 | `findRankingItemByKey`→`readRankingItemByKeyFromR2`。recompute突合は exporter 配線後 |
-| 2.5 export-port-statistics (S) | ⬜ | `ports.json`(済) + R2 by-year。`all.json`/`years.json`(欠落)を生成 |
-| 2.3 export-blog (S) | ⬜ | article.md frontmatter → `app/blog/all.json`(欠落復旧) |
-| 2.6 render-sns-all (S) | ⬜ | item.json `.item.visualization` 読み、better-sqlite3 削除 |
+| 2.3 export-blog (S) | ✅ 完了 (commit 2011ff3e) | frontmatter 直読み。196/196 slug が seed と一致、published 118 (seed117+sewerage公開化の正当差分)。欠落していた `app/blog/all.json` 復旧 |
+| 2.6 render-sns-all (S) | ✅ 完了 | item.json `.item.visualization` から viz 読み、better-sqlite3 削除。66 SNS dir 全 colorScheme 解決・tsc 0 err (既存23 errは無関係) |
+| 2.5 export-port-statistics (S) | 🔶 ブロック中 | 本番 /ports は cloud all.json で正常稼働 (200, grades 描画) → 非緊急。ges ports.json は **administrator 欠落=不完全マスタ**。正しい修正は cloud all.json を1度読んで完全 port マスタ (administrator 含む) を git TS 化 + exporter 再配線。R2 読取り (SSD ミラーに all.json 無 / S3失効) 復旧が前提 |
 | 2.2 area-profile (M) | ⬜ | run-batch を `listRankingItemsWithTagsFromR2` に + exporter を直接 R2 書きへ |
-| 2.4 generate-search-index (M) | ⬜ | 基盤2 + `listAllMetrics` + 2.3 の all.json。依存: 2.3 後 |
+| 2.4 generate-search-index (M) | ⬜ | 基盤2 + `listAllMetrics` + 2.3 の all.json。依存: 2.3 後 (✅) なので着手可 |
 
 **先行 Phase C 完了済 (別 commit)**: remotion exporter 群 (load-prefectures git TS化, master/d1-client 削除), ges port-projects (ports.json git TS化)。
 **未着手の大物**: Phase E = page_components の R2 運用基盤 (本プラン scope 外)。
