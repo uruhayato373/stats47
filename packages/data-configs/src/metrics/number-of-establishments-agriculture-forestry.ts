@@ -15,6 +15,7 @@ export const numberOfEstablishmentsAgricultureForestry: MetricConfig = {
   },
   "entities": [
     "prefecture",
+    "city",
   ],
   "years": {
     "years": [

@@ -15,6 +15,7 @@ export const numberOfEstablishmentsFinanceInsurance: MetricConfig = {
   },
   "entities": [
     "prefecture",
+    "city",
   ],
   "years": {
     "years": [
