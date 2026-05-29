@@ -16,17 +16,8 @@ export type {
 
 export { extractStrengthsAndWeaknesses } from "./utils";
 
-export {
-  deleteAllAreaProfileRankings,
-  getAreaProfileByCode,
-  getAreaProfileCount,
-  listAreaProfileRankings,
-  listAreaProfileSummaries,
-  replaceAreaProfileRankings,
-} from "./repositories";
-
-export { runBatchAreaProfile } from "./services";
-export type { BatchCallbacks } from "./services";
-
+// 完全DBレス (Phase F): D1 area_profiles の repository / run-batch service は削除済。
+// runtime は R2 profile.json (readAreaProfileFromR2) のみ、生成は exportAreaProfileSnapshot (R2直接計算)。
 export { readAreaProfileFromR2 } from "./repositories/read-area-profile-snapshot";
 export { exportAreaProfileSnapshot } from "./exporters/area-profile-snapshot";
+export { exportCityProfileSnapshot } from "./exporters/city-profile-snapshot";

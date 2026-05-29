@@ -1,6 +1,3 @@
-export { deleteAllAreaProfileRankings } from "./delete-all-area-profile-rankings";
-export { getAreaProfileByCode } from "./get-area-profile";
-export { getAreaProfileCount } from "./get-area-profile-count";
-export { listAreaProfileRankings } from "./list-area-profile-rankings";
-export { listAreaProfileSummaries } from "./list-area-profile-summaries";
-export { replaceAreaProfileRankings } from "./replace-area-profile-rankings";
+// 完全DBレス (Phase F): D1 area_profiles の repository は全削除。
+// R2 リーダ readAreaProfileFromR2 は server.ts から直接 export している。
+export {};
