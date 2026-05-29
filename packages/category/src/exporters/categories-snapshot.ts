@@ -1,11 +1,10 @@
 import "server-only";
 
-import { categories, getDrizzle } from "@stats47/database/server";
+import { listCategories } from "@stats47/data-configs";
 import { logger } from "@stats47/logger/server";
 import { saveToR2 } from "@stats47/r2-storage/server";
-import { asc } from "drizzle-orm";
 
-import { convertCategoryFromDB } from "../repositories/convert-category-from-db";
+import type { Category } from "../types/category";
 import {
   CATEGORIES_SNAPSHOT_KEY,
   type CategoriesSnapshot,
@@ -18,21 +17,26 @@ export interface ExportCategoriesSnapshotResult {
   durationMs: number;
 }
 
-export async function exportCategoriesSnapshot(
-  db?: ReturnType<typeof getDrizzle>,
-): Promise<ExportCategoriesSnapshotResult> {
+/**
+ * categories snapshot を R2 に書き出す (完全DBレス: docs/01_技術設計/19)。
+ *
+ * SSOT は D1 `categories` テーブルではなく git TS マスタ
+ * (`@stats47/data-configs` の `listCategories()` = CATEGORIES, 17件 displayOrder 順, icon 込み)。
+ */
+export async function exportCategoriesSnapshot(): Promise<ExportCategoriesSnapshotResult> {
   const startedAt = Date.now();
-  const drizzleDb = db ?? getDrizzle();
 
-  const rows = await drizzleDb
-    .select()
-    .from(categories)
-    .orderBy(asc(categories.displayOrder));
+  const categories: Category[] = listCategories().map((c) => ({
+    categoryKey: c.categoryKey,
+    categoryName: c.categoryName,
+    icon: c.icon || undefined,
+    displayOrder: c.displayOrder,
+  }));
 
   const snapshot: CategoriesSnapshot = {
     generatedAt: new Date().toISOString(),
-    count: rows.length,
-    categories: rows.map(convertCategoryFromDB),
+    count: categories.length,
+    categories,
   };
 
   const body = JSON.stringify(snapshot);
@@ -42,18 +46,13 @@ export async function exportCategoriesSnapshot(
 
   const durationMs = Date.now() - startedAt;
   logger.info(
-    {
-      key: result.key,
-      count: rows.length,
-      sizeBytes: result.size,
-      durationMs,
-    },
-    "categories snapshot を R2 に保存しました",
+    { key: result.key, count: categories.length, sizeBytes: result.size, durationMs },
+    "categories snapshot (完全DBレス) を R2 に保存しました",
   );
 
   return {
     key: result.key,
-    count: rows.length,
+    count: categories.length,
     sizeBytes: result.size,
     durationMs,
   };
