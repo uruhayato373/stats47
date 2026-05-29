@@ -37,7 +37,7 @@ Phase 6 (2026-05-27) の D1 → R2 移行後、本 agent は D1 stats_* テー�
 
 ## 必読 rules
 
-- `.claude/rules/data-d1-ssot.md` — TS-config = SSOT / R2 = 値の SSOT / D1 = cache
+- `.claude/rules/data-sqlite-ssot.md` — TS-config = SSOT / R2 = 値の SSOT / D1 = cache
 - `.claude/rules/estat-api.md` — 全年度取得 + メモリフィルタ、5 桁地域コード
 - `.claude/rules/r2-storage-design.md` — `app/stats/` namespace 設計
 - `.claude/rules/branch-workflow.md` — DB 変更後フロー (R2 経由本番反映)

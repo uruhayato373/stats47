@@ -2,15 +2,22 @@
 
 stats47 の data layer は **3 つの役割分担** で構成される。それぞれの真実源 (SSOT) と用途が異なる。
 
+> ## 用語: 「ローカルビルド DB (SQLite)」≠ Cloudflare D1
+>
+> 本ドキュメント (および各 skill / agent) で歴史的に **「D1」** と呼んでいるものは、現在は **Cloudflare D1 サービスではない**:
+> - 本番 D1 binding は Phase 8 で削除済み。リモート D1 は 2026-04-29 に解約済み (残数 0)。本番 Web app は **R2 snapshot のみ**読む (D1 を一切 query しない)。
+> - 残っているのは **ローカルの SQLite ファイル 1 個** = 「ローカルビルド DB」。SSOT (TS-config / R2 / e-Stat) から **再生成可能なビルド時派生キャッシュ**であり、同時に `area_profiles` / `theme_metrics` / correlations / `estat_catalog` 検索の **集計・計算エンジン**でもある。
+> - 以降の表で **「D1」列は「ローカルビルド DB (SQLite)」を指す** と読み替えること。
+
 ## 役割分担
 
 | Layer | 配置 | 内容 | 真実源? |
 |---|---|---|---|
 | **TS-config** | `packages/data-configs/src/metrics/<key>.ts` | metric メタ (title / source / entities / years 等) | **✅ SSOT** |
 | **R2** | `app/stats/<metric>/<entity>.json` | 観測値 (47 県 / 市区町村 / 港 / pair) | **✅ 値の SSOT** |
-| **D1** | `metrics`, `prefectures`, `cities`, `articles`, `area_profiles` 等 | クエリ高速化 cache + 運用エンティティ | ❌ 派生 (cache) |
+| **ローカルビルド DB (SQLite)** | `metrics`, `prefectures`, `cities`, `articles`, `area_profiles` 等 | クエリ高速化 cache + 運用エンティティ + 集計エンジン | ❌ 派生 (cache) |
 
-D1 は **「観測値のストレージ」ではなく「メタ + 運用エンティティの index」** である。観測値そのものは R2 にあり、D1 にはない。
+ローカルビルド DB は **「観測値のストレージ」ではなく「メタ + 運用エンティティの index」** である。観測値そのものは R2 にあり、ローカルビルド DB にはない。
 
 ## なぜこの設計か
 

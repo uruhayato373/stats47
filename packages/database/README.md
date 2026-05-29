@@ -1,6 +1,8 @@
 # @stats47/database
 
-Drizzle ORM と Cloudflare D1 を使用した共通データベースパッケージ。
+Drizzle ORM + SQLite (better-sqlite3) を使用した共通データベースパッケージ。
+
+> **用語**: ここで扱う DB は **ローカルビルド DB (SQLite)** であり、現在は Cloudflare D1 サービスではない（本番 D1 binding は Phase 8 / リモート D1 は 2026-04-29 解約済み、本番 Web app は R2 snapshot のみ読む）。SSOT (Drizzle スキーマ / TS-config / R2) から再生成可能なビルド時派生キャッシュ + 集計エンジン。詳細: `.claude/rules/data-sqlite-ssot.md`。本 README 内に残る「リモート D1」「`wrangler d1 execute`」「`/pull-remote-d1`」等の記述は解約前の歴史的手順（無効）。
 
 ---
 
@@ -165,7 +167,7 @@ packages/database/
 >
 > 旧 D1 テーブル `stats_prefecture` / `stats_city` / `stats_port` / `stats_migration_flow` / `correlations` は **全 DROP 済** (Phase 7, 2026-05-28 で schema ファイルも削除)。観測値の SSOT は R2 (`app/stats/<metric>/{values,cities,ports,migration-flow-<year>}.json`)、metric メタの SSOT は TS-config (`packages/data-configs/src/metrics/<key>.ts`)、D1 `metrics` テーブルは TS-config の cache。
 >
-> 詳細: `.claude/rules/data-d1-ssot.md` / `.claude/rules/r2-storage-design.md` / `docs/01_技術設計/14_Phase6_deprecation_log.md`
+> 詳細: `.claude/rules/data-sqlite-ssot.md` / `.claude/rules/r2-storage-design.md` / `docs/01_技術設計/14_Phase6_deprecation_log.md`
 
 旧 3 層モデル (Phase 5 以前): `sources` → `metrics` → `stats_*`。1 観測 = 1 行の正規形を維持。
 
