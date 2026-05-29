@@ -201,7 +201,16 @@ A (死蔵除去) ──▶ C (Derived エフェメラル化) ──▶ D (観測
   - → known-keys 再生成・Phase C の diff 検証・Phase E の検証は **R2 アクセス復旧まで実行不能**。復旧手段: (a) SSD 接続、または (b) Cloudflare で R2 S3 API トークン再発行 → `.env.local` 更新。
 - **意味判断**: 旧クエリの `is_active=1` フィルタは registry に対応フィールドが無い。DBレスでは「R2 観測値の実在」を唯一の基準にする想定 (is_active は廃止)。
 
-### Phase D の残り (このセッションでは未着手)
-- `generate-known-ranking-keys.ts` の R2-existence 版への書換 + 再生成 (上記、R2 アクセス要)。
+### Phase D の進捗 (2026-05-29、SSD 接続後)
+- ✅ **known-ranking-keys: 完了**。SSD 接続で R2 アクセス回復 → `generate-known-ranking-keys.ts` を DBレス版
+  (R2 `app/ranking/<key>/item.json` の areaType=prefecture & isActive、generateStaticParams と同源)に書換・再生成。
+  **1969 → 1992 件** (+24: stale で 410 されていた有効ページ復活 / -1: per-taxpayer-taxable-income は
+  areaType=city に変更済で prefecture ルート不可)。tsc PASS。commit 済。
+- ⚠️ **known-tag-keys: 保留 (taxonomy 設計判断が必要)**。`generate-known-tag-keys.ts` も破損
+  (`SELECT tag_key FROM tags` だが `tags`/`taggings` テーブルは D1 に存在しない)。known-ranking-keys と違い
+  **R2 にタグ snapshot が無く**(`app/tag*` なし)、旧 D1 `tags` マスタ (327件) の DBレス上の置き場が未定。
+  article.md frontmatter の `tags:` は空の記事もあり単純なユニオン源にならない。
+  → タグマスタを git TS taxonomy にするか article+ranking 由来の derived にするかの**設計決定が前提**。
+  現行 `known-tag-keys.ts` (327件) は stale だが 410 ゲートとしては動作するため当面据置 (クラッシュはしない)。
 - `sync-metrics-cache` の扱いは Phase C と entangled (exporter が D1 metrics を読む間は維持)。即削除は不可。
 - `data-refresh.yml` db:pull/push は全 Derived エフェメラル化 (Phase C) 後。
