@@ -11,6 +11,24 @@ tags: [architecture, dbless, migration, plan, rebuild]
 
 # 完全DBレス 残スクリプト再構築プラン
 
+## ★ 実装進捗 (2026-05-29 セッション、随時更新) — 再開時はここを最初に読む
+
+すべて develop に commit + push 済。残りは §2/§3 の通り基盤を使う消費者改修。
+
+| ステップ | 状態 | commit/メモ |
+|---|---|---|
+| 基盤2 categories git TS (`packages/data-configs/src/categories.ts`) | ✅ 完了 | 17件 配信中と key/name/順序一致・tsc PASS |
+| 基盤1 `listRankingItemsWithTagsFromR2` (`packages/ranking/.../read-ranking-items-snapshot.ts`) | ✅ 完了 | per-key item.json 走査・1992件(known-keys一致)・tsc PASS。**build時は NODE_ENV=development** |
+| 2.1 calculate-ranking-values | ✅ D1 query 除去 | `findRankingItemByKey`→`readRankingItemByKeyFromR2`。recompute突合は exporter 配線後 |
+| 2.5 export-port-statistics (S) | ⬜ | `ports.json`(済) + R2 by-year。`all.json`/`years.json`(欠落)を生成 |
+| 2.3 export-blog (S) | ⬜ | article.md frontmatter → `app/blog/all.json`(欠落復旧) |
+| 2.6 render-sns-all (S) | ⬜ | item.json `.item.visualization` 読み、better-sqlite3 削除 |
+| 2.2 area-profile (M) | ⬜ | run-batch を `listRankingItemsWithTagsFromR2` に + exporter を直接 R2 書きへ |
+| 2.4 generate-search-index (M) | ⬜ | 基盤2 + `listAllMetrics` + 2.3 の all.json。依存: 2.3 後 |
+
+**先行 Phase C 完了済 (別 commit)**: remotion exporter 群 (load-prefectures git TS化, master/d1-client 削除), ges port-projects (ports.json git TS化)。
+**未着手の大物**: Phase E = page_components の R2 運用基盤 (本プラン scope 外)。
+
 ## 0. 結論サマリ
 
 調査6本のうち**4本が D1 破損**（calculate-ranking-values / export-blog-snapshot / export-port-statistics-snapshot / render-sns-all）、2本（generate-search-index は D1 依存だが論理は健全、area-profile は破損）。**最大の発見: 値の読み取り経路はすでに DBレス化済み**——`packages/ranking/.../list-ranking-values.ts` 等はすべて `readStatsValues`（`@stats47/stats-r2`）経由で R2 `app/stats/<metric>/values.json` を読む（調査JSONの「listRankingValues は D1」記述は誤り）。残る D1 依存は「**ranking-item メタの取得**（`findRankingItemByKey` / `listRankingItemsWithTags` = `getDrizzle()`）」「**blog/port メタの取得**」「**search-index の metrics/categories 取得**」「**SNS visualization 取得**」の4種に集約される。共通基盤1つ（**R2 item.json を SSOT とする ranking-item リーダ**）を作れば calculate-ranking-values と area-profile の2本がまとめて片付く。総effort: **基盤 S + 6本（S×4, M×2）= 実質 1.5〜2日**。エフェメラル `:memory:` SQLite は**どの6本にも不要**——全て pure JS（R2 JSON 読み + 既存 pure util）で完結する。
