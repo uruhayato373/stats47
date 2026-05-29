@@ -1,5 +1,7 @@
 import { logger } from "@stats47/logger/server";
-import { findRankingItemByKey } from "../repositories/ranking-item";
+// 完全DBレス (docs/01_技術設計/19): ranking-item メタは D1 metrics ではなく
+// R2 per-key item.json から読む。findRankingItemByKey(D1) → readRankingItemByKeyFromR2(R2)。
+import { readRankingItemByKeyFromR2 } from "../repositories/ranking-item";
 import { listRankingValues } from "../repositories/ranking-value";
 import type { AreaType } from "@stats47/types";
 import type { RankingItem, RankingValue } from "../types";
@@ -181,8 +183,8 @@ async function getValues(
         return result.data;
     }
 
-    // 2. DB にない場合、計算型アイテムなら再帰的に計算する
-    const itemResult = await findRankingItemByKey(key);
+    // 2. 値が無い場合、計算型アイテムなら再帰的に計算する (メタは R2 item.json から)
+    const itemResult = await readRankingItemByKeyFromR2(key);
     if (!itemResult.success || !itemResult.data) {
         return [];
     }
