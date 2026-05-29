@@ -1,12 +1,11 @@
 import "server-only";
 
-import { type affiliateAds } from "@stats47/database/schema";
 import { logger } from "@stats47/logger/server";
 import { fetchFromR2AsJson } from "@stats47/r2-storage/server";
 
-import type { AffiliateLocationCode } from "../types";
+import type { AffiliateAd, AffiliateLocationCode } from "../types";
 
-export type AffiliateAdRow = typeof affiliateAds.$inferSelect;
+export type AffiliateAdRow = AffiliateAd;
 
 export const AFFILIATE_ADS_SNAPSHOT_KEY = "app/affiliate-ads/all.json";
 

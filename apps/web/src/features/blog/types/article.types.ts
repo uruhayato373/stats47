@@ -1,5 +1,25 @@
-import { type ArticleRow } from "@stats47/database/schema";
 import { type AffiliateProduct, type ArticleFrontmatter } from "@stats47/types";
+
+/**
+ * 記事行の型。完全DBレス Phase F で D1 `articles` schema ($inferSelect) から relocate。
+ * SSOT は article.md frontmatter (export-blog-snapshot が all.json を生成)。
+ */
+export interface ArticleRow {
+  slug: string;
+  title: string;
+  seoTitle: string | null;
+  description: string | null;
+  filePath: string;
+  format: string | null;
+  hasCharts: boolean | null;
+  published: boolean | null;
+  publishedAt: string | null;
+  ogImageType: string | null;
+  proofreadAt: string | null;
+  tags: string;
+  createdAt: string | null;
+  updatedAt: string | null;
+}
 
 export interface Article extends ArticleRow {
   frontmatter: ArticleFrontmatter;
