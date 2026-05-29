@@ -17,7 +17,6 @@
     }
   },
   "scripts": {
-    "batch": "tsx -r ../ranking/src/scripts/setup-cli.js src/scripts/run-batch.ts",
     "export:snapshot": "NODE_OPTIONS='--conditions react-server' R2_PUBLIC_FETCH_URL=https://storage.stats47.jp tsx src/scripts/export-snapshot.ts",
     "export:city": "NODE_OPTIONS='--conditions react-server' R2_PUBLIC_FETCH_URL=https://storage.stats47.jp tsx src/scripts/export-city-snapshot.ts",
     "test": "vitest",
@@ -27,13 +26,11 @@
   },
   "dependencies": {
     "@stats47/data-configs": "*",
-    "@stats47/database": "*",
     "@stats47/logger": "*",
     "@stats47/r2-storage": "*",
     "@stats47/ranking": "*",
     "@stats47/stats-r2": "*",
     "@stats47/types": "*",
-    "drizzle-orm": "^0.45.1",
     "server-only": "^0.0.1"
   },
   "devDependencies": {

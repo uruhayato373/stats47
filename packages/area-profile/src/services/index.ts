@@ -1,2 +1,3 @@
-export { runBatchAreaProfile } from "./run-batch-area-profile";
-export type { BatchCallbacks } from "./run-batch-area-profile";
+// 完全DBレス (Phase F): D1 書込の run-batch-area-profile service は削除。
+// profile 生成は exporters/{area-profile,city-profile}-snapshot (R2 直接計算) が担う。
+export {};

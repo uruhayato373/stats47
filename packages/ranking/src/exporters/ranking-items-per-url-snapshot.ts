@@ -1,12 +1,10 @@
 import "server-only";
 
-import { getDrizzle, metrics } from "@stats47/database/server";
 import { logger } from "@stats47/logger/server";
 import { saveToR2 } from "@stats47/r2-storage/server";
 
-import { parseRankingItemDB } from "../repositories/schemas/ranking-items.schemas";
-import { metricAsRankingItemSelection } from "../repositories/shared/metric-as-ranking-item-selection";
-import type { CategoryRankingItem } from "../repositories/ranking-item/find-ranking-items-by-category";
+import { listRankingItemsWithTagsFromR2 } from "../repositories/ranking-item";
+import type { CategoryRankingItem } from "../types/ranking-item";
 import type { RankingItem } from "../types/ranking-item";
 import {
   categoryItemsKeyPath,
@@ -30,7 +28,16 @@ export interface ExportRankingItemsPerUrlResult {
 }
 
 /**
- * metrics テーブルを 1 回クエリし、URL 単位の小さい JSON を R2 に生成・保存する。
+ * URL 単位の小さい JSON を R2 に生成・保存する (完全DBレス: docs/01_技術設計/19)。
+ *
+ * SSOT は D1 `metrics` テーブルではなく R2 の per-key `app/ranking/<key>/item.json`
+ * (listRankingItemsWithTagsFromR2)。item.json から全 RankingItem を読み、URL 単位の
+ * 派生 snapshot (home/category/survey) を再グループ化して書き出す。
+ * ※ enumeration に R2 list が要るため SSD 接続 or S3 認証下で実行すること
+ *   (公開URL専用環境では基盤1 fallback が prefecture のみになり city/port を取りこぼす)。
+ * ※ config→item.json の field refresh / 新規 metric の item.json 生成は follow-up
+ *   (item.json は現状 git TS config から生成済みの値を保持しており、本 exporter は
+ *    その正本を再グループ化する。新規 metric は別途 item.json 生成フローが要る)。
  *
  * 生成ファイル:
  *   home/featured.json
@@ -38,41 +45,15 @@ export interface ExportRankingItemsPerUrlResult {
  *   ranking/{rankingKey}/item.json
  *   survey/{surveyId}/items.json
  */
-export async function exportRankingItemsPerUrl(
-  options: {
-    db?: ReturnType<typeof getDrizzle>;
-  } = {},
-): Promise<ExportRankingItemsPerUrlResult> {
+export async function exportRankingItemsPerUrl(): Promise<ExportRankingItemsPerUrlResult> {
   const startedAt = Date.now();
-  const drizzleDb = options.db ?? getDrizzle();
 
-  // 1. 全 metrics を 1 回クエリ
-  const rows = await drizzleDb
-    .select({ ...metricAsRankingItemSelection, tags: metrics.tags })
-    .from(metrics);
-
-  const items: RankingItem[] = [];
-  for (const row of rows) {
-    try {
-      const parsed = parseRankingItemDB({
-        ...row,
-        data_source_id: "estat",
-      });
-      const tagKeys = JSON.parse(row.tags ?? "[]") as string[];
-      if (tagKeys.length > 0) {
-        parsed.tags = tagKeys.map((tagKey) => ({ tagKey }));
-      }
-      items.push(parsed);
-    } catch (error) {
-      logger.warn(
-        {
-          rankingKey: row.ranking_key,
-          error: error instanceof Error ? error.message : String(error),
-        },
-        "exportRankingItemsPerUrl: parseRankingItemDB が失敗。スキップ",
-      );
-    }
+  // 1. 全 ranking item を R2 item.json から取得 (D1 不使用)
+  const itemsResult = await listRankingItemsWithTagsFromR2();
+  if (!itemsResult.success) {
+    throw itemsResult.error ?? new Error("listRankingItemsWithTagsFromR2 failed");
   }
+  const items: RankingItem[] = itemsResult.data;
 
   // 2. categoryKey の列挙 (categoryKey + additionalCategories の union)
   const categoryKeySet = new Set<string>();

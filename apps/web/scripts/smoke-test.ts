@@ -103,8 +103,12 @@ async function runTest(
   const start = Date.now();
 
   try {
+    // リダイレクト期待 (3xx) の test case は follow すると最終ページ (200) に
+    // 着地して status を観測できないため manual にする。それ以外は follow。
+    const expectsRedirect =
+      testCase.expectedStatus >= 300 && testCase.expectedStatus < 400;
     const response = await fetch(url, {
-      redirect: "follow",
+      redirect: expectsRedirect ? "manual" : "follow",
       headers: { "User-Agent": "stats47-smoke-test/1.0" },
     });
     const durationMs = Date.now() - start;

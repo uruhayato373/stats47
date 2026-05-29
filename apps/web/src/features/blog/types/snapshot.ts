@@ -1,4 +1,4 @@
-import { type ArticleRow } from "@stats47/database/schema";
+import { type ArticleRow } from "./article.types";
 
 export const BLOG_SNAPSHOT_KEY = "app/blog/all.json";
 

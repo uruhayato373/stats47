@@ -1,8 +1,5 @@
 import "server-only";
 
-export * from "./create-category";
-export * from "./delete-category";
-export * from "./find-category-by-key";
-export * from "./list-categories";
+// 完全DBレス (Phase F): D1 categories を引く create/delete/find/list/update repo は削除。
+// runtime は R2 categories snapshot リーダ (read-categories-snapshot) を使う。
 export * from "./read-categories-snapshot";
-export * from "./update-category";

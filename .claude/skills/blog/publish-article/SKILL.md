@@ -120,11 +120,16 @@ node .claude/scripts/lib/article-factual-check.mjs \
 
 ### 6. 下書きフォルダを削除する
 
-公開が完了したため、下書きフォルダは不要になる。ユーザーに確認してから削除する:
+公開が完了したため、下書きフォルダは不要になる（docs/21 は「公開したら消す」ephemeral な下書き staging。記事の正典 SSOT は R2 app/blog）。ユーザーに確認してから削除する:
 
 ```bash
 rm -rf "docs/21_ブログ記事原稿/<slug>"
+
+# 取り残し検証 (公開済みなのに下書きが残っていれば exit 1)。/deploy Step 2 でも自動実行される。
+node .claude/scripts/lib/check-published-drafts.cjs
 ```
+
+> ⚠️ このステップを飛ばすと、公開済みの古い下書きが docs/21 に残り R2(live) と drift して退行リスクになる（2026-05-30 に 6 件の取り残しを検出・削除した事故由来）。`check-published-drafts.cjs` が再発を機械検出する。
 
 ### 7. 完了メッセージ
 

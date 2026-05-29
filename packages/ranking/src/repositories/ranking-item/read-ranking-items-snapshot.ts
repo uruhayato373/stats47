@@ -16,7 +16,7 @@ import {
   surveyItemsKeyPath,
   type RankingItemsSnapshot,
 } from "../../types/snapshot";
-import type { CategoryRankingItem } from "./find-ranking-items-by-category";
+import type { CategoryRankingItem } from "../../types/ranking-item";
 import type { RankingConfigResponse } from "../../types/ranking-config-response";
 
 // Phase 7 (2026-05-28): find-ranking-items-by-group-key.ts 削除に伴い、

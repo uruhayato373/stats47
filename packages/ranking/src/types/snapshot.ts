@@ -1,7 +1,29 @@
-import type { Source } from "@stats47/database/server";
-
 import type { RankingItem } from "./ranking-item";
 import type { RankingValue } from "./ranking-value";
+
+/**
+ * データ出所 (survey 等)。完全DBレス Phase F で D1 `sources` schema 型から relocate。
+ * surveys snapshot (app/survey/all.json) の各要素。
+ */
+export interface Source {
+  id: string;
+  sourceKind: string;
+  externalId: string | null;
+  parentSourceId: string | null;
+  name: string;
+  organization: string | null;
+  url: string | null;
+  description: string | null;
+  attributionText: string | null;
+  license: string | null;
+  licenseUrl: string | null;
+  baseUrl: string | null;
+  linkTemplate: string | null;
+  displayOrder: number | null;
+  isActive: boolean | null;
+  createdAt: string | null;
+  updatedAt: string | null;
+}
 
 export const RANKING_ITEMS_SNAPSHOT_KEY = "app/ranking-items/all.json";
 export const SURVEYS_SNAPSHOT_KEY = "app/survey/all.json";

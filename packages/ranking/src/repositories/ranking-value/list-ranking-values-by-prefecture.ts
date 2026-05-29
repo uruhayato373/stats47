@@ -1,6 +1,5 @@
 import "server-only";
 
-import { getDrizzle } from "@stats47/database/server";
 import { logger } from "@stats47/logger/server";
 import { readStatsValues } from "@stats47/stats-r2";
 import { err, ok, type Result } from "@stats47/types";
@@ -15,7 +14,6 @@ export async function listRankingValuesByPrefecture(
   rankingKey: string,
   yearCode: string,
   prefCode: string,
-  _db?: ReturnType<typeof getDrizzle>,
 ): Promise<Result<RankingValue[], Error>> {
   try {
     const payload = await readStatsValues(rankingKey, "city");

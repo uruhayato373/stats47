@@ -61,6 +61,9 @@ cd apps/web && npx eslint src/ --ext .ts,.tsx && cd ../..
 
 # 3. ユニットテスト
 cd apps/web && npx vitest run && cd ../..
+
+# 4. 再発防止ガード (.claude/scripts/lib/check-*.cjs — 検出時 exit 1 で停止)
+node .claude/scripts/lib/check-published-drafts.cjs   # 公開済み記事の下書きが docs/21 に残っていないか
 ```
 
 全パスしたら Step 2.5 へ進む。

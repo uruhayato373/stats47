@@ -1,6 +1,3 @@
-export { getTagsForItem } from "./get-tags-for-item";
-export { syncRankingTags } from "./sync-ranking-tags";
-
-// Phase 7 (2026-05-28) で削除した D1 用 export 一覧:
-// - findFirstKeyByTag (置換: readFirstKeyByTagFromR2)
-// - getItemsByTag (置換: read-ranking-items-snapshot 系)
+// 完全DBレス (Phase F): D1 を引く getTagsForItem / syncRankingTags は削除。
+// tag は read-ranking-items-snapshot の R2 リーダ (readTagsForItemFromR2 等) を使う。
+export {};

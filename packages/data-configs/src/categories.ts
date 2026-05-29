@@ -12,34 +12,38 @@
 export interface CategoryMeta {
   categoryKey: string;
   categoryName: string;
+  /** lucide-react アイコン名 (UI / categories snapshot 用)。 */
+  icon: string;
   /** 表示順 (配列の index と一致)。 */
   displayOrder: number;
 }
 
-const CATEGORY_NAMES: ReadonlyArray<readonly [string, string]> = [
-  ["landweather", "国土・気象"],
-  ["population", "人口・世帯"],
-  ["laborwage", "労働・賃金"],
-  ["agriculture", "農林水産業"],
-  ["miningindustry", "鉱工業"],
-  ["commercial", "商業・サービス業"],
-  ["economy", "企業・家計・経済"],
-  ["construction", "住宅・土地・建設"],
-  ["energy", "エネルギー・水"],
-  ["tourism", "運輸・観光"],
-  ["educationsports", "教育・文化・スポーツ"],
-  ["administrativefinancial", "行財政"],
-  ["safetyenvironment", "司法・安全・環境"],
-  ["socialsecurity", "社会保障・衛生"],
-  ["international", "国際"],
-  ["infrastructure", "社会基盤施設"],
-  ["ict", "情報通信・科学技術"],
+/** [categoryKey, categoryName, lucide icon] — 配列順 = displayOrder (配信中と一致)。 */
+const CATEGORY_DEFS: ReadonlyArray<readonly [string, string, string]> = [
+  ["landweather", "国土・気象", "MapPin"],
+  ["population", "人口・世帯", "Users"],
+  ["laborwage", "労働・賃金", "TrendingUp"],
+  ["agriculture", "農林水産業", "Sprout"],
+  ["miningindustry", "鉱工業", "Factory"],
+  ["commercial", "商業・サービス業", "Store"],
+  ["economy", "企業・家計・経済", "PieChart"],
+  ["construction", "住宅・土地・建設", "Home"],
+  ["energy", "エネルギー・水", "Droplets"],
+  ["tourism", "運輸・観光", "Plane"],
+  ["educationsports", "教育・文化・スポーツ", "GraduationCap"],
+  ["administrativefinancial", "行財政", "Building2"],
+  ["safetyenvironment", "司法・安全・環境", "ShieldCheck"],
+  ["socialsecurity", "社会保障・衛生", "Hospital"],
+  ["international", "国際", "Globe"],
+  ["infrastructure", "社会基盤施設", "Construction"],
+  ["ict", "情報通信・科学技術", "Wifi"],
 ];
 
-export const CATEGORIES: readonly CategoryMeta[] = CATEGORY_NAMES.map(
-  ([categoryKey, categoryName], displayOrder) => ({
+export const CATEGORIES: readonly CategoryMeta[] = CATEGORY_DEFS.map(
+  ([categoryKey, categoryName, icon], displayOrder) => ({
     categoryKey,
     categoryName,
+    icon,
     displayOrder,
   }),
 );

@@ -3,8 +3,13 @@
  *
  * 記事メタの SSOT は R2 `app/blog/<slug>/article.{md,mdx}` の YAML frontmatter。
  * D1 articles テーブルは廃止したため、frontmatter を直接読んで `app/blog/all.json` を生成する。
- * frontmatter → 列 のルールは packages/database/scripts/extract-articles-seed-from-r2.ts と一致させる
- * (published = fm.published ? true : false / ogImageType = typeof fm.ogImage==="string" ? "static" : null)。
+ *
+ * published 判定 (重要): 古い記事は frontmatter に `published` を持たず publishedAt のみでライブな
+ * ため、frontmatter だけからは published を完全復元できない (旧 D1 が sticky 状態を保持していた)。
+ * よって旧 sync-articles-from-r2 と同じ **sticky 方式**: frontmatter の `published` boolean が
+ * 最優先、無ければ配信中 all.json の状態を保持、初回生成時のみ publishedAt の有無で推定。
+ * 全記事集合も「配信中 all.json ∪ ローカル」の和でローカルミラー欠落分を取りこぼさない。
+ * title/seoTitle/description/tags 等は常に現行 frontmatter で refresh (brushup 反映)。
  *
  * 使用方法:
  *   - SSD 接続: NODE_ENV=development NODE_OPTIONS='--conditions react-server' npx tsx scripts/export-blog-snapshot.ts
@@ -19,6 +24,7 @@ import path from "path";
 import yaml from "js-yaml";
 
 import {
+  fetchFromR2AsJson,
   fetchFromR2AsString,
   listFromR2,
   saveToR2,
@@ -122,28 +128,63 @@ async function collectSlugInfo(): Promise<Map<string, SlugInfo>> {
   return collectSlugInfoFromSeed();
 }
 
+function hasValidPublishedAt(v: unknown): boolean {
+  if (v instanceof Date) return true;
+  return !!v && /^\d{4}-\d{2}-\d{2}/.test(String(v));
+}
+
 async function main() {
+  // 配信中の all.json = published 状態の真実源 (旧 D1 articles の sticky 状態のブリッジ)。
+  // 古い記事は frontmatter に `published` を持たず publishedAt のみでライブなので、
+  // frontmatter だけからは published を完全復元できない。旧 sync-articles-from-r2 と同じく
+  // 「frontmatter の published 明示が最優先、無ければ配信中の状態を保持」する sticky 方式にする。
+  //
+  // 運用注意: prior は「配信中 (cloud) の all.json」が真。SSD 接続時は fetchFromR2 がローカルを
+  // 先に読むため、ローカル all.json が古いと sticky 源がずれる。再生成前にローカル all.json を
+  // cloud と同期するか (例: scripts/dev で cp)、R2_PUBLIC_FETCH_URL 経由で cloud を読ませること。
+  const prior = await fetchFromR2AsJson<BlogSnapshot>(BLOG_SNAPSHOT_KEY);
+  const priorBySlug = new Map<string, SnapshotArticle>(
+    (prior?.articles ?? []).map((a) => [a.slug, a]),
+  );
+
   const slugInfo = await collectSlugInfo();
 
-  const slugs = [...slugInfo.entries()]
-    .filter(([, v]) => v.ext !== null)
-    .map(([slug]) => slug)
-    .sort();
-  console.log(`📄 article.{md,mdx} を持つ記事: ${slugs.length} 件`);
+  // 全 slug = 配信中 all.json ∪ ローカル (article.md を持つもの)。
+  // 配信側にしか無い記事 (ローカルミラー欠落分) も拾う。
+  const allSlugs = new Set<string>([
+    ...priorBySlug.keys(),
+    ...[...slugInfo.entries()].filter(([, v]) => v.ext !== null).map(([s]) => s),
+  ]);
+  const slugs = [...allSlugs].sort();
+  console.log(`📄 対象記事: ${slugs.length} 件 (配信 ${priorBySlug.size} ∪ ローカル ${slugInfo.size})`);
 
   const articles: SnapshotArticle[] = [];
   for (const slug of slugs) {
-    const info = slugInfo.get(slug)!;
-    const ext = info.ext!;
+    const info = slugInfo.get(slug);
+    const prev = priorBySlug.get(slug);
+    const ext: "md" | "mdx" =
+      info?.ext ?? (prev?.format === "mdx" ? "mdx" : "md");
     const content = await fetchFromR2AsString(`${BLOG_PREFIX}${slug}/article.${ext}`);
     if (content === null) {
-      console.warn(`⚠️  本文を読めませんでした: ${slug}`);
+      // 本文を取得できない場合は配信中エントリをそのまま保持 (記事を消さない)
+      if (prev) {
+        articles.push(prev);
+      } else {
+        console.warn(`⚠️  本文を読めず配信エントリも無いためスキップ: ${slug}`);
+      }
       continue;
     }
     const fm = parseFrontmatter(content);
     const tags = (Array.isArray(fm.tags) ? (fm.tags as string[]) : []).map(
       (tagKey) => ({ tagKey: String(tagKey) }),
     );
+    // sticky: frontmatter の boolean が最優先 → 配信状態 → (初回生成時のみ) publishedAt 推定
+    const published =
+      typeof fm.published === "boolean"
+        ? fm.published
+        : prev
+          ? prev.published
+          : hasValidPublishedAt(fm.publishedAt);
     articles.push({
       slug,
       title: fm.title ?? slug,
@@ -151,13 +192,13 @@ async function main() {
       description: fm.description ?? null,
       filePath: `blog/${slug}/article.${ext}`,
       format: ext,
-      hasCharts: info.hasCharts,
-      published: fm.published === true,
+      hasCharts: info?.hasCharts ?? prev?.hasCharts ?? false,
+      published,
       publishedAt: normalizeDate(fm.publishedAt),
-      ogImageType: typeof fm.ogImage === "string" ? "static" : null,
-      proofreadAt: null,
-      createdAt: null,
-      updatedAt: normalizeDate(fm.updatedAt),
+      ogImageType: typeof fm.ogImage === "string" ? "static" : prev?.ogImageType ?? null,
+      proofreadAt: prev?.proofreadAt ?? null,
+      createdAt: prev?.createdAt ?? null,
+      updatedAt: normalizeDate(fm.updatedAt) ?? prev?.updatedAt ?? null,
       tags,
     });
   }
