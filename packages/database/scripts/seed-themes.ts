@@ -35,8 +35,8 @@ function findSqliteFile(): string {
   if (!fs.existsSync(fixed)) {
     throw new Error(
       `ローカルビルド DB (SQLite) が見つかりません: ${fixed}\n` +
-        `先に \`npm run db:migrate:local --workspace=packages/database\` (空 schema 作成) ` +
-        `または \`npm run db:pull --workspace=packages/database\` (R2 から取得) を実行してください。`,
+        `先に \`npm run db:pull --workspace=packages/r2-storage\` (R2 から取得) ` +
+        `または \`npm run db:migrate:local --workspace=packages/database\` (空 schema 作成) を実行してください。`,
     );
   }
   return fixed;
