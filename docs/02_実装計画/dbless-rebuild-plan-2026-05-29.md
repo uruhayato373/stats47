@@ -23,8 +23,8 @@ tags: [architecture, dbless, migration, plan, rebuild]
 | 2.3 export-blog (S) | ✅ 完了 (commit 2011ff3e) | frontmatter 直読み。196/196 slug が seed と一致、published 118 (seed117+sewerage公開化の正当差分)。欠落していた `app/blog/all.json` 復旧 |
 | 2.6 render-sns-all (S) | ✅ 完了 | item.json `.item.visualization` から viz 読み、better-sqlite3 削除。66 SNS dir 全 colorScheme 解決・tsc 0 err (既存23 errは無関係) |
 | 2.5 export-port-statistics (S) | 🔶 ブロック中 | 本番 /ports は cloud all.json で正常稼働 (200, grades 描画) → 非緊急。ges ports.json は **administrator 欠落=不完全マスタ**。正しい修正は cloud all.json を1度読んで完全 port マスタ (administrator 含む) を git TS 化 + exporter 再配線。R2 読取り (SSD ミラーに all.json 無 / S3失効) 復旧が前提 |
-| 2.2 area-profile (M) | ⬜ | run-batch を `listRankingItemsWithTagsFromR2` に + exporter を直接 R2 書きへ |
-| 2.4 generate-search-index (M) | ⬜ | 基盤2 + `listAllMetrics` + 2.3 の all.json。依存: 2.3 後 (✅) なので着手可 |
+| 2.4 generate-search-index (M) | ✅ 完了 | ranking=基盤1 (item.json, demo/norm 保全) + description は git TS getMetricConfig 補完 / blog=2.3 all.json / categories=基盤2。**現行 production は ranking 0件の壊れた index だったのを 1992件に復旧**。demo 221・norm 113 が破壊前 baseline と完全一致。検索動作確認済 (人口109/中絶 ranking+blog/商業 demo表示)。npm script に react-server 条件 + 0件時の既存保持ガード追加。※orphan categoryKey "port"(9)/"labor"(1) は D1 でも NULL の pre-existing データ品質問題 (別件) |
+| 2.2 area-profile (M) | ⬜ | run-batch を `listRankingItemsWithTagsFromR2` に + exporter を直接 R2 書きへ。**残る最後の消費者** |
 
 **先行 Phase C 完了済 (別 commit)**: remotion exporter 群 (load-prefectures git TS化, master/d1-client 削除), ges port-projects (ports.json git TS化)。
 **未着手の大物**: Phase E = page_components の R2 運用基盤 (本プラン scope 外)。
