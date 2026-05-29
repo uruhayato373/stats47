@@ -9,6 +9,38 @@ updated: 2026-05-27
 
 施策ベースで append-only。新しい施策は最新を上に追加。判定が変わったら section 末尾に追記。
 
+## [BLOG-WAVE-2026-05-29-auto] GSC 改善余地上位 4 記事 auto-brushup (cloud session)
+
+- **status**: pending
+- **wave_id**: `2026-05-29-auto`
+- **tier**: 1
+- **target_metric**: blog-ctr
+- **owner**: claude
+- **deployed_at**: 2026-05-29
+- **due**: 2026-06-26 (4 週後 effect 計測)
+- **history_source**: `.claude/state/blog/auto-brushup-history.json` (wave_id="2026-05-29-auto", 4 entries)
+- **環境注記**: cloud session (フル DB 不在)。tags は taggings テーブル管理のため all.json は全再生成せず、本番 all.json をベースに 4 記事の title/seoTitle/description のみ外科パッチ (tagMeta 131 件保持)。本文は R2 `app/blog/<slug>/article.md` を直接 push。
+
+### 改修内容 (4 記事、全て quality-gate exit 0)
+
+| slug | impressions | ctr_before | position | framing 採点 | 採用 framing |
+|---|---|---|---|---|---|
+| manufacturing-aichi-dominance | 858 | 0.58% | 8.69 | 37/40 | 総額王者・愛知 vs 効率王者・大分の逆転 |
+| manufacturing-shipment-prefecture-ranking | 159 | 0% | 8.05 | 35/40 | 総額と効率で覇者が入れ替わる二系統構造 |
+| agriculture-hokkaido-dominance | 103 | 0% | 9.33 | 35/40 | 農業王国の土地効率は下から3番目の逆説 |
+| sewerage-water-supply-gap | 138 | 1.45% | 9.86 | 36/40 | 下水道22%でも水洗化77.5%で逆転 |
+
+- 各記事 5 案 framing → 4 軸採点 (practical/structural/data_grounding/non_sensational) で best 選択、NG パターン (X倍格差 sensationalism 等) は採点で reject
+- `manufacturing-shipment-prefecture-ranking` で実データ誤りも修正: 静岡 17兆→19.8兆、愛知/静岡 3.4倍→2.9倍、欠落していた大阪 (3位) を top5 に追加、「上位5県すべて太平洋ベルト」の歪曲を削除
+- source-link 末尾集約違反 (shipment: tailRankingLinks=2) を H2 内分散で解消
+
+### 想定効果
+
+- 合計 expectedLift: **+105 clicks/週** (industry-avg CTR by position 計算ベース、select-brushup-candidates.mjs 算出)
+- 主軸は manufacturing-aichi-dominance (858 imp / expectedLift 71)
+- **検証コマンド**: 4 週後 (2026-06-26 頃) に `node .claude/scripts/blog/select-brushup-candidates.mjs` 起点の GSC snapshot で 4 slug の CTR を実測
+- **判定基準**: 実測 CTR が想定の 80% 以上で effect/full、未達なら未達理由の仮説 + 次検証を記載 (参照: `.claude/rules/evidence-based-judgment.md`)
+
 ## [BLOG-WAVE-2026-05-28-manual] GSC 駆動 上位 4 記事 手動 brushup
 
 - **status**: pending

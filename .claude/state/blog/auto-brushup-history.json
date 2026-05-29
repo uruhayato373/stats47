@@ -567,6 +567,42 @@
       "impressions": 10,
       "ctr_before": 0,
       "wave_id": "2026-05-25-auto"
+    },
+    {
+      "date": "2026-05-29",
+      "wave_id": "2026-05-29-auto",
+      "slug": "manufacturing-aichi-dominance",
+      "framing": "総額王者・愛知 vs 効率王者・大分の逆転 (curiosity gap, auto)",
+      "expectedLift": 71,
+      "impressions": 858,
+      "ctr_before": 0.0058
+    },
+    {
+      "date": "2026-05-29",
+      "wave_id": "2026-05-29-auto",
+      "slug": "manufacturing-shipment-prefecture-ranking",
+      "framing": "総額と効率で覇者が入れ替わる二系統構造 (curiosity gap, auto)",
+      "expectedLift": 19,
+      "impressions": 159,
+      "ctr_before": 0
+    },
+    {
+      "date": "2026-05-29",
+      "wave_id": "2026-05-29-auto",
+      "slug": "agriculture-hokkaido-dominance",
+      "framing": "農業王国の土地効率は下から3番目の逆説 (curiosity gap, auto)",
+      "expectedLift": 11,
+      "impressions": 103,
+      "ctr_before": 0
+    },
+    {
+      "date": "2026-05-29",
+      "wave_id": "2026-05-29-auto",
+      "slug": "sewerage-water-supply-gap",
+      "framing": "下水道22%でも水洗化77.5%で逆転 (curiosity gap, auto)",
+      "expectedLift": 4,
+      "impressions": 138,
+      "ctr_before": 0.0145
     }
   ]
 }
