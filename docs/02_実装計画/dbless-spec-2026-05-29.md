@@ -195,7 +195,10 @@ A (死蔵除去) ──▶ C (Derived エフェメラル化) ──▶ D (観測
 - 現行スクリプトは `SELECT ... FROM stats_prefecture` を実行するが、**`stats_prefecture` は Phase 6 で DROP 済**(local D1 の全テーブル確認で stats_* は存在しない)。つまりこのスクリプトは**今実行するとエラー**。コミット済 `apps/web/src/config/known-ranking-keys.ts` (1969 件) は 2026-05-22 の stale な生成物。
 - **件数の乖離**: registry で `prefecture` を宣言する metric = **2169 件**、現行 known-keys = **1969 件**。差 200 = 「宣言あり・観測値未投入」。
 - **DBレス版の正しい実装**: `listMetricKeysByEntity('prefecture')` ∩ `R2 app/stats/<key>/values.json` 実在、で観測値ありに絞る。単純な registry walk(2169件)に置換すると観測値なし 200 URL が 410 されず**空ページ/ソフト404 の SEO リスク**。
-- **ブロッカー**: 検証に R2 stats データが要る。**SSD 未接続**(local `.local/r2/app/stats` = 0 件)。ただし**ルート `.env.local` に cloud R2(S3) 鍵あり** → cloud 経由で `app/stats/` prefix を list すれば観測値ありキー集合を取得可能。
+- **ブロッカー (重要・2026-05-29 実機確認)**: 検証に R2 stats データが要るが **R2 読み取りの両経路が断たれている**:
+  - ローカル: **SSD 未接続**(`.local/r2` symlink が dangling、`app/stats` = 0 件)。
+  - cloud: **S3 API が 401 Unauthorized**(`.env.local` の `R2_ACCESS_KEY_ID`(32桁)/`R2_SECRET_ACCESS_KEY`(64桁) は形式正常・endpoint も正常だが**トークン失効/無効**)。
+  - → known-keys 再生成・Phase C の diff 検証・Phase E の検証は **R2 アクセス復旧まで実行不能**。復旧手段: (a) SSD 接続、または (b) Cloudflare で R2 S3 API トークン再発行 → `.env.local` 更新。
 - **意味判断**: 旧クエリの `is_active=1` フィルタは registry に対応フィールドが無い。DBレスでは「R2 観測値の実在」を唯一の基準にする想定 (is_active は廃止)。
 
 ### Phase D の残り (このセッションでは未着手)
