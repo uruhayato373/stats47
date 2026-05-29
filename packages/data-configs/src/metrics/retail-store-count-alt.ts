@@ -14,6 +14,7 @@ export const retailStoreCountAlt: MetricConfig = {
   },
   "entities": [
     "prefecture",
+    "city",
   ],
   "years": {
     "years": [

@@ -195,9 +195,11 @@ function inYearRange(yearCode: string, config: MetricConfig): boolean {
   if (!Number.isFinite(y)) return false;
   const spec = config.years;
   if (spec === "all" || spec == null) return true;
-  if ("years" in spec) return spec.years.includes(y);
+  // config.years が稀にフルタイムコード (例 2009100000) を含むため 4 桁年に正規化して比較
+  const to4 = (n: number): number => (n > 9999 ? Number(String(n).slice(0, 4)) : n);
+  if ("years" in spec) return spec.years.map(to4).includes(y);
   // { from, to }
-  return y >= spec.from && y <= spec.to;
+  return y >= to4(spec.from) && y <= to4(spec.to);
 }
 
 interface ShapedRow {

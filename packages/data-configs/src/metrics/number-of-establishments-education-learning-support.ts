@@ -15,6 +15,7 @@ export const numberOfEstablishmentsEducationLearningSupport: MetricConfig = {
   },
   "entities": [
     "prefecture",
+    "city",
   ],
   "years": {
     "years": [
