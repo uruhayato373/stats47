@@ -25,6 +25,11 @@
       "types": "./src/utils/index.ts",
       "import": "./src/utils/index.ts",
       "require": "./src/utils/index.ts"
+    },
+    "./config": {
+      "types": "./src/config/index.ts",
+      "import": "./src/config/index.ts",
+      "require": "./src/config/index.ts"
     }
   },
   "scripts": {

@@ -6,12 +6,16 @@
  * frontmatter → 列 のルールは packages/database/scripts/extract-articles-seed-from-r2.ts と一致させる
  * (published = fm.published ? true : false / ogImageType = typeof fm.ogImage==="string" ? "static" : null)。
  *
- * 使用方法: NODE_ENV=development npx tsx scripts/export-blog-snapshot.ts
- *   - dev (NODE_ENV=development): .local/r2 のローカル FS を読み書き
- *   - cloud: R2 S3 API (R2_S3_ENDPOINT 等が必要)
+ * 使用方法:
+ *   - SSD 接続: NODE_ENV=development NODE_OPTIONS='--conditions react-server' npx tsx scripts/export-blog-snapshot.ts
+ *       → .local/r2 のローカル FS を list/read、slug は list から列挙
+ *   - SSD 非接続: R2_PUBLIC_FETCH_URL=https://storage.stats47.jp NODE_OPTIONS='--conditions react-server' npx tsx ...
+ *       → 公開 URL から read。list 不可なので slug は committed seed (packages/database/seed/articles.json) から列挙
  */
 
 import dotenv from "dotenv";
+import fs from "fs";
+import path from "path";
 import yaml from "js-yaml";
 
 import {
@@ -65,22 +69,61 @@ interface SlugInfo {
   hasCharts: boolean;
 }
 
-async function main() {
-  // app/blog/ 配下の全キーを 1 度走査して slug ごとに index 化
-  const keys = await listFromR2(BLOG_PREFIX);
-  const slugInfo = new Map<string, SlugInfo>();
-  for (const key of keys) {
-    const rest = key.slice(BLOG_PREFIX.length); // <slug>/...
-    const slash = rest.indexOf("/");
-    if (slash < 0) continue;
-    const slug = rest.slice(0, slash);
-    const file = rest.slice(slash + 1);
-    const info = slugInfo.get(slug) ?? { ext: null, hasCharts: false };
-    if (file === "article.mdx") info.ext = "mdx";
-    else if (file === "article.md" && info.ext !== "mdx") info.ext = "md";
-    if (file.startsWith("data/") && file.endsWith(".json")) info.hasCharts = true;
-    slugInfo.set(slug, info);
+/** committed seed (frontmatter から再構成済) の最小形 */
+interface ArticleSeedRow {
+  slug: string;
+  format?: string;
+  has_charts?: number | boolean;
+}
+
+/**
+ * slug → {ext, hasCharts} を列挙する。
+ *  1. R2 list (SSD ローカル FS / S3) — data/*.json まで見て hasCharts を実測
+ *  2. 不可なら committed seed (packages/database/seed/articles.json) から列挙
+ *     (公開URL専用環境。format/has_charts は seed 値を採用)
+ */
+function collectSlugInfoFromSeed(): Map<string, SlugInfo> {
+  const seedPath = path.resolve(
+    __dirname,
+    "../../../packages/database/seed/articles.json",
+  );
+  const seed = JSON.parse(fs.readFileSync(seedPath, "utf8")) as ArticleSeedRow[];
+  const map = new Map<string, SlugInfo>();
+  for (const row of seed) {
+    const ext = row.format === "mdx" ? "mdx" : "md";
+    map.set(row.slug, { ext, hasCharts: !!row.has_charts });
   }
+  return map;
+}
+
+async function collectSlugInfo(): Promise<Map<string, SlugInfo>> {
+  try {
+    const keys = await listFromR2(BLOG_PREFIX);
+    if (keys.length > 0) {
+      const slugInfo = new Map<string, SlugInfo>();
+      for (const key of keys) {
+        const rest = key.slice(BLOG_PREFIX.length); // <slug>/...
+        const slash = rest.indexOf("/");
+        if (slash < 0) continue;
+        const slug = rest.slice(0, slash);
+        const file = rest.slice(slash + 1);
+        const info = slugInfo.get(slug) ?? { ext: null, hasCharts: false };
+        if (file === "article.mdx") info.ext = "mdx";
+        else if (file === "article.md" && info.ext !== "mdx") info.ext = "md";
+        if (file.startsWith("data/") && file.endsWith(".json")) info.hasCharts = true;
+        slugInfo.set(slug, info);
+      }
+      return slugInfo;
+    }
+  } catch {
+    // R2 list 不可 (公開URL専用環境) → seed 列挙へ
+  }
+  console.log("ℹ️  R2 list 不可。committed seed (articles.json) から slug を列挙します");
+  return collectSlugInfoFromSeed();
+}
+
+async function main() {
+  const slugInfo = await collectSlugInfo();
 
   const slugs = [...slugInfo.entries()]
     .filter(([, v]) => v.ext !== null)

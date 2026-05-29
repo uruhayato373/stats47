@@ -5,6 +5,7 @@ import { fetchFromR2AsJson, listFromR2 } from "@stats47/r2-storage/server";
 import type { AreaType } from "@stats47/types";
 import { err, ok, type Result } from "@stats47/types";
 
+import { KNOWN_RANKING_KEYS } from "../../config/known-ranking-keys";
 import type { RankingItem } from "../../types/ranking-item";
 import type { RankingItemWithTags } from "../../types/ranking-item-with-tags";
 import {
@@ -150,10 +151,7 @@ export async function listRankingItemsWithTagsFromR2(options?: {
   isActive?: boolean;
 }): Promise<Result<RankingItemWithTags[], Error>> {
   try {
-    const allKeys = await listFromR2("app/ranking/");
-    const itemKeys = allKeys.filter((k) =>
-      /^app\/ranking\/[^/]+\/item\.json$/.test(k),
-    );
+    const itemKeys = await enumerateRankingItemKeys(options?.areaType);
 
     const items: RankingItemWithTags[] = [];
     for (const key of itemKeys) {
@@ -173,6 +171,34 @@ export async function listRankingItemsWithTagsFromR2(options?: {
     logger.error({ error }, "listRankingItemsWithTagsFromR2: failed");
     return err(error instanceof Error ? error : new Error(String(error)));
   }
+}
+
+/**
+ * `app/ranking/<key>/item.json` キーを列挙する。
+ *  1. R2 list (SSD ローカル FS / S3 認証がある環境)
+ *  2. 不可なら committed `KNOWN_RANKING_KEYS` から列挙 (公開URL専用の SSD/認証なし環境)
+ *
+ * KNOWN_RANKING_KEYS は prefecture & active の SSOT。list 不可環境では
+ * prefecture 以外を列挙できないため、その場合は明示的にエラーにする (silent な欠落を防ぐ)。
+ */
+async function enumerateRankingItemKeys(areaType?: AreaType): Promise<string[]> {
+  try {
+    const allKeys = await listFromR2("app/ranking/");
+    const itemKeys = allKeys.filter((k) =>
+      /^app\/ranking\/[^/]+\/item\.json$/.test(k),
+    );
+    if (itemKeys.length > 0) return itemKeys;
+  } catch {
+    // R2 list 不可 (公開URL専用環境) → git 列挙フォールバックへ
+  }
+
+  if (areaType && areaType !== "prefecture") {
+    throw new Error(
+      `R2 list 不可環境では areaType=${areaType} の ranking item を列挙できません ` +
+        `(KNOWN_RANKING_KEYS は prefecture のみ。SSD 接続 or S3 認証が必要)`,
+    );
+  }
+  return [...KNOWN_RANKING_KEYS].map((key) => `app/ranking/${key}/item.json`);
 }
 
 export async function readRankingItemByKeyAndAreaTypeFromR2(

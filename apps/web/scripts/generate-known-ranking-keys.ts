@@ -22,7 +22,12 @@ import fs from "node:fs";
 import path from "node:path";
 
 const RANKING_DIR = path.resolve(__dirname, "../../../.local/r2/app/ranking");
-const OUT_PATH = path.resolve(__dirname, "../src/config/known-ranking-keys.ts");
+// 完全DBレスの key SSOT は packages/ranking に移設済 (basic-1 の git 列挙フォールバックと共有)。
+// apps/web 側は @stats47/ranking/config への re-export。
+const OUT_PATH = path.resolve(
+  __dirname,
+  "../../../packages/ranking/src/config/known-ranking-keys.ts",
+);
 
 if (!fs.existsSync(RANKING_DIR)) {
   console.error(`[generate-known-ranking-keys] R2 ranking snapshot not found at ${RANKING_DIR}`);
@@ -62,16 +67,18 @@ keys.sort();
 const today = new Date().toISOString().slice(0, 10);
 
 const header = `/**
- * 有効な ranking キー一覧（prefecture, isActive）
+ * 有効な ranking キー一覧（prefecture, isActive）— 完全DBレスの key SSOT
  *
  * **このファイルは自動生成されます。手動編集しないこと。**
  *
- * middleware.ts の Fix 6 が参照する（/ranking/{未知key} → 410 Gone）。CI ビルド環境では
- * R2 binding が使えないため、静的ファイルとして git commit する。page.tsx は触らない。
+ * 用途:
+ *  - middleware (url-policy) の 410 判定（apps/web は \`@stats47/ranking/config\` 経由で re-export）
+ *  - 基盤1 \`listRankingItemsWithTagsFromR2\` の git 列挙フォールバック
+ *    （SSD/S3 が無い公開URL専用環境では R2 を list できないため、本リストから item.json を列挙）
  *
  * 真実源: R2 \`app/ranking/<key>/item.json\` (areaType=prefecture & isActive)。
- * 更新方法: SSD 接続のうえ
- *           \`cd apps/web && npx tsx scripts/generate-known-ranking-keys.ts\`
+ * 更新方法: \`cd apps/web && npx tsx scripts/generate-known-ranking-keys.ts\`
+ *           （R2 list が要るため SSD 接続 or S3 認証が必要。公開URLは list 不可）
  * 更新タイミング: ranking item 追加/有効化後。必ず git commit してからデプロイ。
  *
  * 最終生成日: ${today}
