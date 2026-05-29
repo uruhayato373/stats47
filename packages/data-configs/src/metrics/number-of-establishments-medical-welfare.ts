@@ -15,6 +15,7 @@ export const numberOfEstablishmentsMedicalWelfare: MetricConfig = {
   },
   "entities": [
     "prefecture",
+    "city",
   ],
   "years": {
     "years": [

@@ -1,6 +1,29 @@
 # @stats47/database
 
-Drizzle ORM と Cloudflare D1 を使用した共通データベースパッケージ。
+Drizzle ORM + SQLite (better-sqlite3) を使用した共通データベースパッケージ。
+
+> **用語**: ここで扱う DB は **ローカルビルド DB (SQLite)** であり、現在は Cloudflare D1 サービスではない（本番 D1 binding は Phase 8 / リモート D1 は 2026-04-29 解約済み、本番 Web app は R2 snapshot のみ読む）。SSOT (Drizzle スキーマ / TS-config / R2) から再生成可能なビルド時派生キャッシュ + 集計エンジン。詳細: `.claude/rules/data-sqlite-ssot.md`。本 README 内に残る「リモート D1」「`wrangler d1 execute`」「`/pull-remote-d1`」等の記述は解約前の歴史的手順（無効）。
+
+## 🚀 新規 clone / 別 PC でのセットアップ（最初に必須）
+
+ローカルビルド DB (`packages/database/.data/stats47.sqlite`) は **git 管理外**。clone 直後は存在しないので、batch / dev 前に **R2 から取得**する：
+
+```bash
+# R2 に持ち回りの SQLite (database/stats47.sqlite) がある場合 → これだけで OK
+npm run db:pull --workspace=packages/r2-storage
+
+# まだ R2 に無い / 空 schema だけ欲しい場合
+npm run db:migrate:local --workspace=packages/database
+```
+
+- 取得した DB で作業 → 変更したら **`npm run db:push --workspace=packages/r2-storage`** で R2 に書き戻す（soft lock + 世代バックアップ付き。これで別 PC / CI と共有される）
+- **初回 seed（R2 に一度も push していない最初の1回）だけは、実データを持つ環境（旧 miniflare DB が残る Mac）から push する**必要がある。他環境の migrate では空 schema しか作れない:
+  ```bash
+  mkdir -p packages/database/.data
+  cp .local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c*.sqlite packages/database/.data/stats47.sqlite
+  npm run db:push --workspace=packages/r2-storage
+  ```
+- 要 env: `R2_S3_ENDPOINT` / `R2_ACCESS_KEY_ID` / `R2_SECRET_ACCESS_KEY`（`.env.local` か環境変数）。詳細: `.claude/rules/data-sqlite-ssot.md`
 
 ---
 
@@ -165,7 +188,7 @@ packages/database/
 >
 > 旧 D1 テーブル `stats_prefecture` / `stats_city` / `stats_port` / `stats_migration_flow` / `correlations` は **全 DROP 済** (Phase 7, 2026-05-28 で schema ファイルも削除)。観測値の SSOT は R2 (`app/stats/<metric>/{values,cities,ports,migration-flow-<year>}.json`)、metric メタの SSOT は TS-config (`packages/data-configs/src/metrics/<key>.ts`)、D1 `metrics` テーブルは TS-config の cache。
 >
-> 詳細: `.claude/rules/data-d1-ssot.md` / `.claude/rules/r2-storage-design.md` / `docs/01_技術設計/14_Phase6_deprecation_log.md`
+> 詳細: `.claude/rules/data-sqlite-ssot.md` / `.claude/rules/r2-storage-design.md` / `docs/01_技術設計/14_Phase6_deprecation_log.md`
 
 旧 3 層モデル (Phase 5 以前): `sources` → `metrics` → `stats_*`。1 観測 = 1 行の正規形を維持。
 
@@ -255,9 +278,16 @@ npx tsc --noEmit
 cat drizzle/meta/*_snapshot.json | grep prevId
 ```
 
-### ローカル D1 が空 / テーブルが存在しない
+### ローカルビルド DB (SQLite) が空 / テーブルが存在しない
 
-`/pull-remote-d1` スキルでリモート D1 からローカルにデータを反映する。
+clone 直後やテーブル欠損時は **R2 から pull**（または空 schema を migrate）する:
+
+```bash
+npm run db:pull --workspace=packages/r2-storage        # R2 database/stats47.sqlite を取得
+npm run db:migrate:local --workspace=packages/database # 空 schema だけ作る場合
+```
+
+（旧記述の `/pull-remote-d1`（リモート D1）は解約済みで無効。冒頭「🚀 新規 clone」節を参照。）
 
 ### スキーマと DB の不整合
 

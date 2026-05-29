@@ -15,6 +15,7 @@ export const numberOfEstablishmentsInformationCommunication: MetricConfig = {
   },
   "entities": [
     "prefecture",
+    "city",
   ],
   "years": {
     "years": [

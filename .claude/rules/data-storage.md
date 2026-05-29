@@ -1,12 +1,19 @@
 # 記録先の統一原則 (D1 vs `.claude/` vs `docs/`)
 
+> **⚠️ 2026-05-29 更新: データ層は「形で使い分けるハイブリッド」が正典 → [`docs/01_技術設計/18_データ層ハイブリッド設計.md`](../../docs/01_技術設計/18_データ層ハイブリッド設計.md)。**
+> 以下「ローカルビルド DB (SQLite) に置くもの」は、現在は形で読み替える: **設定(低volume・人手)=git TS** /
+> **関係・運用(横断クエリ・CRUD)=リモート D1** / 配信=R2。`.claude/` と `docs/` の使い分け（本ファイルの主眼）は不変。
+> アプリが読むデータの判定は「→ 永続 DB」ではなく「→ 形で git TS / D1 を選び、配信は R2 / Derived は計算→R2」。
+
 データの性質で保存先を厳格に分ける。**スキル実装・エージェントは以下の分類に従うこと**。
 
 判定軸: (a) 誰が読むか (app / agent / 人間)、(b) 何のために (CRUD / 振り返り / 計測ログ)。
 
-## D1（Cloudflare D1 SQLite）に置くもの — 「メタ + 運用エンティティ」
+## ローカルビルド DB (SQLite) に置くもの — 「メタ + 運用エンティティ」
 
-Phase 6 (2026-05-27) で **観測値 (stats_*) と相関結果 (correlations) は R2 へ全面移行済**。D1 は ~336MB に縮小、メタ + 運用エンティティ + マスタのみが残る。詳細: [`data-d1-ssot.md`](./data-d1-ssot.md)
+> **注**: 以前「D1」と呼んでいた層。Cloudflare D1 サービスではなく、SSOT から再生成可能なローカル SQLite ビルドキャッシュ + 集計エンジン (本番は R2 のみ読む)。用語: [`data-sqlite-ssot.md`](./data-sqlite-ssot.md)
+
+Phase 6 (2026-05-27) で **観測値 (stats_*) と相関結果 (correlations) は R2 へ全面移行済**。ローカルビルド DB は ~336MB に縮小、メタ + 運用エンティティ + マスタのみが残る。詳細: [`data-sqlite-ssot.md`](./data-sqlite-ssot.md)
 
 ### メタ (cache from TS-config)
 - `metrics` — 指標メタ。**SSOT は `packages/data-configs/src/metrics/<key>.ts`**。`/sync-metrics-cache` で同期
@@ -43,7 +50,7 @@ Phase 6 (2026-05-27) で **観測値 (stats_*) と相関結果 (correlations) �
 
 派生 JSON は git tracked でも commit して良い (履歴で差分追跡)。ただし **D1 が真実源** で、JSON を手で編集すると乖離が起きる。
 
-詳細: [`data-d1-ssot.md`](./data-d1-ssot.md)
+詳細: [`data-sqlite-ssot.md`](./data-sqlite-ssot.md)
 
 ## `docs/` に置くもの — 「人間が読み返す文書」
 
@@ -91,13 +98,16 @@ Phase 6 (2026-05-27) で **観測値 (stats_*) と相関結果 (correlations) �
 
 ```
 スキルが生成するデータの本質は？
-  ├─ アプリが CRUD するエンティティ           → D1
+  ├─ アプリが読む Authored エンティティ
+  │    ├─ 設定(低volume・人手・型/review)      → git TS が SSOT → seed/export で D1・R2
+  │    └─ 関係・運用(横断クエリ・CRUD)         → リモート D1 が SSOT → exporter で R2
+  │      （詳細・判定は 18_データ層ハイブリッド設計.md）
   ├─ 人間が読み返す計画・レビュー・改善ログ    → docs/
   ├─ エージェントが参照する詳細ログ・state    → .claude/
   └─ PR/Issue 連携が本質                     → GitHub Issues (enhancement/bug)
 ```
 
-迷う場合は **docs/ または .claude/ を優先**。D1 は本当に必要な時だけ追加する。
+迷う場合は **docs/ または .claude/ を優先**。アプリが読む配信データは常に **R2 JSON**（上流 SSOT は形で git TS / D1）。
 
 ## 2 層構造（improvement 系）
 

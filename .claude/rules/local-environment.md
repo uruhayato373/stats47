@@ -20,9 +20,11 @@ packages/
 
 ## ストレージ
 
-- **ローカル D1/R2 は `.local/` 配下。** `wrangler.toml` の `persist_to = "../../.local/d1"` と `next.config.ts` の `initOpenNextCloudflareForDev({ persist: { path: "../../.local/d1" } })` で、dev server と各スクリプトが同じデータを参照する。**`apps/web/.wrangler/state/` は使わない。**
-- **ローカル D1**: `.local/d1/v3/d1/miniflare-D1DatabaseObject/<hash>.sqlite`（wrangler/miniflare が自動生成する長いハッシュ名）。**`.local/d1/*.sqlite`（ルート直下）は 0 バイトのダミーファイルなので参照しないこと。**
-- **ローカル R2**: `.local/r2/` 配下にシードデータ・ランキングデータ・ブログ記事を配置。miniflare R2 バインディングのキャッシュ（next dev 用、e-Stat API レスポンス等）は `.local/d1/r2/stats47/blobs/` 配下に保存される
+- **データ層は「形で使い分けるハイブリッド」が正典** → `docs/01_技術設計/18_データ層ハイブリッド設計.md`。本番は R2 snapshot のみ読む。設定(低volume・人手)=git TS / 関係・運用=リモート D1 / 配信=R2 / Derived=D1 JOIN or エフェメラル→R2。**リモート D1 の作業はローカル(Mac)、クラウド agent は git TS と R2 直接。**
+- **ローカルビルド DB (SQLite)**: `packages/database/.data/stats47.sqlite`（移行期に旧 batch が参照する使い捨てキャッシュ）。git 管理外。旧 exporter が要求する場合のみ `npm run db:pull --workspace=packages/r2-storage` で取得（R2 に無ければ DB 不在で正常）。リモート D1 立ち上げ(Phase③)後はそちらへ寄せる。
+  - これは **Cloudflare D1 サービスではない**。本番は R2 snapshot のみ読み、DB を一切 query しない。
+- **dev server の miniflare**: `next.config.ts` の `initOpenNextCloudflareForDev({ persist: { path: "../../.local/d1" } })` は **R2 dev binding cache** (`.local/d1/r2/stats47/blobs/`) のために残置。`[[d1_databases]]` binding (STATS47_STATIC_DB) は app が read しないため vestigial（miniflare が `.local/d1/.../miniflare-D1DatabaseObject/*.sqlite` を作るが、batch は参照しない）。**`apps/web/.wrangler/state/` は使わない。**
+- **ローカル R2**: `.local/r2/` 配下にシードデータ・ランキングデータ・ブログ記事を配置。
 
 ## dual-mode 構成 (2026-05-28〜): D1 = Mac 内蔵 / R2 = SSD or cloud
 
@@ -62,13 +64,15 @@ scripts/dev/local-r2-mode.sh cloud    # SSD 非接続で書込したい時: Mac 
 - **SSD 上の `d1/` は 2026-05-28 移行時点のバックアップ**。以降は Mac 内蔵 `.local/d1` が authoritative。Mac 内蔵 D1 を更新したら、必要に応じて SSD にも `cp -R` でバックアップ同期する (単一障害点回避)
 - SSD 非接続の cloud モードで生成した snapshot は **必ず `/push-r2`** で cloud 反映する (ローカルにしか無い状態を残さない)
 
-## D1 パス固定値
+## ローカルビルド DB (SQLite) パス固定値
 
-`better-sqlite3` は存在しないパスで `new Database()` すると**空ファイルを自動作成する**。下記以外で D1 を開かないこと。
+`better-sqlite3` は存在しないパスで `new Database()` すると**空ファイルを自動作成する**。下記以外で開かないこと。中央定義は `packages/database/src/config/local-db-paths.ts` の `LOCAL_DB_PATHS.STATIC.getPath()`（全 batch がこれ経由 or 同一パスを解決）。
 
 ```
-.local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite
+packages/database/.data/stats47.sqlite
 ```
+
+（旧 miniflare ハッシュパス `.local/d1/v3/d1/miniflare-D1DatabaseObject/<hash>.sqlite` は廃止。dev server の miniflare が同名ファイルを作る場合があるが batch は参照しない。）
 
 ## ネットワーク
 

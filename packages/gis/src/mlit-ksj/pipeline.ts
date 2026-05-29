@@ -35,7 +35,7 @@ import { buildMlitKsjLocalPath, buildMlitKsjR2Path } from "./r2-path";
 // CLAUDE.md で固定されたローカル D1 パス。better-sqlite3 で他の path を開くと
 // 空ファイルが自動生成されるため絶対に変えない。register-ksj-rankings.ts と同じ値。
 const LOCAL_D1_PATH =
-  ".local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite";
+  "packages/database/.data/stats47.sqlite";
 
 const ATTRIBUTION = "国土交通省国土数値情報ダウンロードサイト";
 

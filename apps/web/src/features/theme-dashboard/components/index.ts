@@ -3,6 +3,6 @@ export type { AgeCompositionSeries, AgeCompositionData } from "./AgeCompositionC
 export { ThemeDashboardClient } from "./ThemeDashboardClient";
 export { ThemePageLayout } from "./ThemePageLayout";
 export { ThemeDashboardTabbed } from "./ThemeDashboardTabbed";
-export { PrefectureStatsPanel } from "./PrefectureStatsPanel";
+export { ThemeMetricsDashboard } from "./ThemeMetricsDashboard";
 export { ThemeDbChartRenderer } from "./ThemeDbChartRenderer";
 export { ThemeLeafletMap } from "./ThemeLeafletMap";

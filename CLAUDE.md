@@ -25,12 +25,14 @@
 - **Agent prompt 冒頭に Output Format を必ず指定** → `.claude/rules/agent-output-contract.md`
 - **一時ファイルは `/tmp/`**: プロジェクトルートに作らない (pre-commit が `tmp_*` 等を自動削除)
 - **計画・レビュー・改善ログは `docs/` 配下**: 週次計画・レビュー・批判的レビュー・pre-mortem・改善ログ・コンテンツバックログはすべて `docs/03_週次運用/` `docs/04_レビュー/` `docs/05_改善ログ/` `docs/50_Issues/` 等に置く。Issues は (a) `enhancement`/`bug` ラベルの PR で close される機能改修、(b) `auto-generated` ラベルの日次アラート (PSI/Cloudflare) のみ → `.claude/rules/docs-vs-issues.md`
-- **DB 変更はローカル D1 直接 → `/sync-snapshots`**: 本番反映は R2 経由のみ (リモート D1 解約済み)
+- **データ層は「形で使い分けるハイブリッド」が正典** → `docs/01_技術設計/18_データ層ハイブリッド設計.md`。本番アプリは R2 snapshot のみ読む。オーサリング SSOT はデータの形で選ぶ:
+  - **Authored / 設定** (低volume・人手・型/review が効く: テーマのチャート定義等) → **git TS が SSOT** → seed/export で D1・R2 反映
+  - **Authored / 関係・運用** (横断クエリ・参照整合性・CRUD: page_components / theme_metrics / sns_posts / affiliate_ads / categories/themes) → **リモート D1 が SSOT** → exporter で R2
+  - **Reference** (metrics=TS / articles=article.md / estat_catalog=e-Stat API / prefectures=JSON) → **再生成**
+  - **Derived** (area_profiles / correlations) → **D1 で JOIN → R2**（or エフェメラル計算）。永続しない
+- **リモート D1 のセットアップ・CRUD・集計はローカル(Mac)で行う** (account_id/wrangler 認証/インスタンス再作成が要る)。**クラウド agent は git TS と R2(S3直接) のみで作業**し、D1 作業はローカルに委譲する (詰まったら R2 直接 fallback。雛形: `apps/web/scripts/sync-theme-additions-to-r2.ts`)
+- **観測値・派生を永続 DB に入れない** (R2 のまま。Phase 6 肥大=解約の再発防止)。移行期は `db:pull`/`db:push` 併存可だが手調整データを書くのはローカル1箇所に固定 → 18 の移行フェーズ/作業分担表参照
 - **browser-use は終了時に必ず daemon 停止 + Chrome タブクローズ** → `.claude/rules/browser-use-cleanup.md`
-- **ローカル D1 パス固定** (`better-sqlite3` が空ファイルを自動生成するため、これ以外で開かない):
-  ```
-  .local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite
-  ```
 
 ## 作業の節目で記録する
 
@@ -68,7 +70,7 @@ CLAUDE.md 内に詳細を複製しない。状況に応じて参照する。
 | `r2-storage-design.md` | snapshot 追加・変更 |
 | `estat-api.md` | e-Stat API 利用スキル |
 | `branch-workflow.md` | PR・デプロイ作業・DB データ反映 |
-| `data-storage.md` | スキル設計時 (D1 vs `.claude/` vs `docs/` 判定) |
+| `data-storage.md` | スキル設計時 (git TS / D1 / R2 vs `.claude/` vs `docs/` 判定。正典は `docs/01_技術設計/18_データ層ハイブリッド設計.md`) |
 | `docs-vs-issues.md` | docs/ と GitHub Issues の使い分け (新規スキル・新規記録時必読) |
 | `skill-code-placement.md` | スクリプト新規作成 |
 | `local-environment.md` | 環境セットアップ・モノレポ構成・頻用コマンド |
@@ -87,6 +89,7 @@ CLAUDE.md 内に詳細を複製しない。状況に応じて参照する。
 | area プロフィール チャート構成設計 (17 テーマ) | `docs/02_実装計画/area-charts-planning/README.md` |
 | 改善ログ INDEX (TODO 真実源、scan tool 使い方) | `docs/05_改善ログ/INDEX.md` ★施策追加時必読 |
 | システム構成・技術スタック | `docs/01_技術設計/` |
+| **データ層アーキテクチャ (ハイブリッド設計・正典)** ★データ保存先判定時必読 | `docs/01_技術設計/18_データ層ハイブリッド設計.md` |
 | DDD ドメイン分類 | `docs/01_技術設計/04_DDDドメイン分類.md` |
 | エラーハンドリング規約 | `docs/01_技術設計/05_エラーハンドリング規約.md` |
 | 自動化インベントリ ★追加・削除時は必ず更新 | `docs/01_技術設計/10_自動化インベントリ.md` |

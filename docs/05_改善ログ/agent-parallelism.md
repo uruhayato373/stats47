@@ -56,13 +56,13 @@ tags: [agent, phase-5, parallel-verification]
 
 ## [AGENT-L3-CONSOLIDATE-01] L3-1 Cluster 2/3/4/5/6 KEEP-SKIP 判定
 
-L3-1 統合は Cluster 1 (blog-review, 既存 commit `649dd0c4` 経由) + Cluster 7 (brushup-blog, commit `8a9c5bc3`) で完結。残り Cluster 2/3/4/5/6 はすべて KEEP-SKIP 判定が妥当 (Phase 6.7 で 5 は消滅、6 は data-d1-ssot 中核で KEEP-SKIP 確定済)。Cluster 2/3/4 を本セッションで再評価:
+L3-1 統合は Cluster 1 (blog-review, 既存 commit `649dd0c4` 経由) + Cluster 7 (brushup-blog, commit `8a9c5bc3`) で完結。残り Cluster 2/3/4/5/6 はすべて KEEP-SKIP 判定が妥当 (Phase 6.7 で 5 は消滅、6 は data-sqlite-ssot 中核で KEEP-SKIP 確定済)。Cluster 2/3/4 を本セッションで再評価:
 
 - **Cluster 2 (chart-generation)**: `generate-article-charts` (498L blog) と `generate-note-charts` (140L note) を `--target blog|note` で統合する案を検証。データソース (`data/` vs `_data/` or D1) / 出力形式 (SVG 埋め込み vs SVG+PNG ファイル) / SVG 規約 (詳細 vs 外部参照) / 同梱スクリプト (note のみ scatter.js / cover-template.js / svg-to-png.js) すべて異なるため、`--target` 1 引数では吸収不能。8 通り (`--target` × `--source` × `--output`) の分岐が必要となり、保守性が現状の責務分離より低下。 **KEEP-SKIP**。
 - **Cluster 3 (SNS post-captions)**: `post-sns-captions` (127L) が既に domain dispatch 役 (`ranking|compare|correlation` で分岐) を担当。`post-bar-chart-race-captions` (168L) と `post-compare-captions` (257L) は specialized で、独自データ構造 (config.json vs data.json) とテンプレート (versus / question) を持つ。`--domain` 統合は形式的で行数削減効果が小さく、合計 552L → 600L+ 巨大化を招く。dispatch 役 + specialized 役の現状責務分離が綺麗。 **KEEP-SKIP**。
 - **Cluster 4 (plan-blog-*)**: 4 つの企画 skill (trends 175L / articles 265L / affiliate 225L / from-gsc 135L、合計 800L) は **データソースが完全に異なる** (discover-trends / e-Stat+DB / AFFILIATE_LINKS+DB / GSC snapshots)。統合すると Phase 1 (データ取得) が 4 分岐 (450L)、Phase 2-3 (企画生成) のみ共通化可で削減効果 -150L (-19%) のみ。1 skill が 650L+ に肥大化し、シンプルさが損なわれる。primary_agent は既に 4 件すべて `blog-planner` で責務統一済。 **KEEP-SKIP**。
 - **Cluster 5 (db-populate)**: Phase 6.7 cleanup で対象 skill (populate-all-rankings / populate-city-rankings / populate-component-data) のうち 2 つが削除済。残った populate-component-data は単独で完結しているため統合対象が消滅。 **既に消滅**。
-- **Cluster 6 (db-sync)**: sync-snapshots (orchestration) / sync-articles (transaction) / export-d1-to-remotion-static (export) は本質的に異なるパラダイム。data-d1-ssot.md 中核機構で統合すると保守性低下。 **KEEP-SKIP 確定済** (task ledger #13)。
+- **Cluster 6 (db-sync)**: sync-snapshots (orchestration) / sync-articles (transaction) / export-d1-to-remotion-static (export) は本質的に異なるパラダイム。data-sqlite-ssot.md 中核機構で統合すると保守性低下。 **KEEP-SKIP 確定済** (task ledger #13)。
 
 判定根拠: CLAUDE.md 行動原則「2. シンプル最優先」「3. 外科的変更」に基づき、形式的な skill 数削減よりも責務分離の維持を優先。L3-1 統合は Cluster 1/7 で必要十分。
 

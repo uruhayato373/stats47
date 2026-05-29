@@ -1,6 +1,20 @@
 # データ管理アーキテクチャ (Phase 6 後)
 
+> **⚠️ 2026-05-29 更新: 正典は [`docs/01_技術設計/18_データ層ハイブリッド設計.md`](../../docs/01_技術設計/18_データ層ハイブリッド設計.md) に移行した。**
+> stats47 は **「形で使い分けるハイブリッド」**に決定。本番アプリは R2 snapshot のみ読む。
+> オーサリング SSOT は形で選ぶ — **設定(低volume・人手)=git TS** / **関係・運用(横断クエリ)=リモート D1** /
+> **配信=R2** / **集計(area_profiles/相関)=D1 JOIN→R2(or エフェメラル)**。リモート D1 のセットアップ/CRUD は**ローカル(Mac)**で行う。
+> 本ファイルの「ローカルビルド DB を SSOT 派生 cache とする」記述は移行期の参考。
+> **新規実装は 18 の判定に従うこと。** 食い違う場合は 18 が優先。
+
 stats47 の data layer は **3 つの役割分担** で構成される。それぞれの真実源 (SSOT) と用途が異なる。
+
+> ## 用語: 「ローカルビルド DB (SQLite)」≠ Cloudflare D1
+>
+> 本ドキュメント (および各 skill / agent) で歴史的に **「D1」** と呼んでいるものは、現在は **Cloudflare D1 サービスではない**:
+> - 本番 D1 binding は Phase 8 で削除済み。リモート D1 は 2026-04-29 に解約済み (残数 0)。本番 Web app は **R2 snapshot のみ**読む (D1 を一切 query しない)。
+> - 残っているのは **ローカルの SQLite ファイル 1 個** = 「ローカルビルド DB」。SSOT (TS-config / R2 / e-Stat) から **再生成可能なビルド時派生キャッシュ**であり、同時に `area_profiles` / `theme_metrics` / correlations / `estat_catalog` 検索の **集計・計算エンジン**でもある。
+> - 以降の表で **「D1」列は「ローカルビルド DB (SQLite)」を指す** と読み替えること。
 
 ## 役割分担
 
@@ -8,9 +22,9 @@ stats47 の data layer は **3 つの役割分担** で構成される。それ�
 |---|---|---|---|
 | **TS-config** | `packages/data-configs/src/metrics/<key>.ts` | metric メタ (title / source / entities / years 等) | **✅ SSOT** |
 | **R2** | `app/stats/<metric>/<entity>.json` | 観測値 (47 県 / 市区町村 / 港 / pair) | **✅ 値の SSOT** |
-| **D1** | `metrics`, `prefectures`, `cities`, `articles`, `area_profiles` 等 | クエリ高速化 cache + 運用エンティティ | ❌ 派生 (cache) |
+| **ローカルビルド DB (SQLite)** | `metrics`, `prefectures`, `cities`, `articles`, `area_profiles` 等 | クエリ高速化 cache + 運用エンティティ + 集計エンジン | ❌ 派生 (cache) |
 
-D1 は **「観測値のストレージ」ではなく「メタ + 運用エンティティの index」** である。観測値そのものは R2 にあり、D1 にはない。
+ローカルビルド DB は **「観測値のストレージ」ではなく「メタ + 運用エンティティの index」** である。観測値そのものは R2 にあり、ローカルビルド DB にはない。
 
 ## なぜこの設計か
 

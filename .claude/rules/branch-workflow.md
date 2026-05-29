@@ -26,14 +26,19 @@ PR は **develop → main の 1 段階のみ**。feature/* → develop は直 me
 - `/deploy` スキルで実行
 - フロー: feature/* で作業 → ローカルで develop に merge → `git push origin develop` → `gh pr create --base main --head develop` → CI green → マージ → main 自動デプロイ → 必要なら `/purge-cdn`
 
-## DB データ反映フロー
+## データ反映フロー（ハイブリッド設計が正典 → `docs/01_技術設計/18_データ層ハイブリッド設計.md`）
 
-**リモート D1 は 2026-04-29 に解約済み（D1 残数 = 0）。** 本番は R2 スナップショット配信のみ。
+**本番は R2 スナップショット配信のみ。** オーサリング SSOT は形で使い分けて反映する:
 
 ```
-ローカル D1（source of truth）──/sync-snapshots──▶ R2 snapshot──▶ 本番配信
+Authored/設定 (チャート定義等)  : git TS 定義 ──seed──▶ リモートD1 ──export──▶ R2 ──▶ 本番配信
+Authored/関係・運用 (page_components 等) : リモートD1 ──exporter──▶ R2 ──▶ 本番配信
+Reference (metrics/articles)   : git TS / article.md ──再生成──▶ R2 snapshot
+Derived (area_profiles/相関)    : リモートD1 で JOIN（or R2観測値をエフェメラル計算）──▶ R2 snapshot
 ```
 
-- データ変更後は `/sync-snapshots` で R2 スナップショットを再生成・push する
-- ranking-values（~30K files）の更新は時間がかかるため `SKIP_VALUES=1` で他のみ更新し、必要な場合のみフル実行
+- **リモート D1 の CRUD/seed/export/集計はローカル(Mac)で実施**（認証・インスタンスが要る）。クラウド agent は git TS と R2 直接で作業
+- クラウドで急ぎ反映する fallback の雛形: `apps/web/scripts/sync-theme-additions-to-r2.ts`（S3 で read-modify-write、冪等）。次回ローカルで seed/export を流せば D1 と一致
+- ranking-values（~30K files）の更新は `SKIP_VALUES=1` で他のみ更新し、必要な場合のみフル実行
 - ロールバックは R2 の旧 snapshot ファイルへの上書き push で対応
+- 移行期は `db:pull`/`db:push` 併存可だが**手調整データを書くのはローカル1箇所に固定**（上書き消失防止）

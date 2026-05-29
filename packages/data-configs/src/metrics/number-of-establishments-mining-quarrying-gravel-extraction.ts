@@ -15,6 +15,7 @@ export const numberOfEstablishmentsMiningQuarryingGravelExtraction: MetricConfig
   },
   "entities": [
     "prefecture",
+    "city",
   ],
   "years": {
     "years": [
