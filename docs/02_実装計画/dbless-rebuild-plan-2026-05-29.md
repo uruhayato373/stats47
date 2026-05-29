@@ -13,11 +13,16 @@ tags: [architecture, dbless, migration, plan, rebuild]
 
 ## ★ 実装進捗 (2026-05-29 セッション、随時更新) — 再開時はここを最初に読む
 
-すべて develop に commit + push 済。**基盤 + 消費者 5/6 が DB レス完了** (2.1/2.3/2.6/2.4/2.2-pref)。
-残りデファー 3件は全て **R2 読取り (SSD に欠落ファイル or S3 トークン) の復旧が共通ゲート**:
-- 2.5 port (administrator 含む完全マスタを cloud all.json から git TS 化する必要、本番稼働中)
-- 2.2b city (削除済 run-batch-city の rankPref compute 再構築 + baseline 検証不能、本番稼働中)
-- 2.1 recompute 突合 (calculate-ranking-values の D1 query は除去済、exporter 配線後に値突合)
+すべて develop に commit + push 済。**全消費者 + 基盤 が DB レス完了** (2.1/2.2-pref/2.2b/2.3/2.4/2.5/2.6 + 基盤1/2)。
+**さらに SSD 非依存化を完遂** (別プラン `quiet-forging-flurry.md` 柱1-3): 公開 R2 URL `storage.stats47.jp`
+を突破口に、ビルド/再生成を **SSD・S3認証なし**で実行可能に。残デファーは無し (Phase E のみ別 scope)。
+
+- 柱1: r2-storage に公開URL fetch tier (commit c738f4fc)
+- 柱2: list 依存を git 列挙フォールバックに置換 (known-ranking-keys を packages/ranking へ移設, 7a3fd844)
+- 2.2b city: 削除済 run-batch-city を R2 から再構築。6 spot city が cloud baseline と完全一致 (141e656c)
+- 2.5 port: git TS master (administrator 込み) + R2 stats。years/by-port/by-year が baseline 完全一致 (f02e358a)
+- 2.1 recompute: 計算可能な全計算型 ranking で rank 完全一致を検証 (b2324f2e)
+- 柱3: wrangler push helper + SSD非依存 deploy 経路 (5ca45fed)
 
 | ステップ | 状態 | commit/メモ |
 |---|---|---|
@@ -26,10 +31,10 @@ tags: [architecture, dbless, migration, plan, rebuild]
 | 2.1 calculate-ranking-values | ✅ D1 query 除去 | `findRankingItemByKey`→`readRankingItemByKeyFromR2`。recompute突合は exporter 配線後 |
 | 2.3 export-blog (S) | ✅ 完了 (commit 2011ff3e) | frontmatter 直読み。196/196 slug が seed と一致、published 118 (seed117+sewerage公開化の正当差分)。欠落していた `app/blog/all.json` 復旧 |
 | 2.6 render-sns-all (S) | ✅ 完了 | item.json `.item.visualization` から viz 読み、better-sqlite3 削除。66 SNS dir 全 colorScheme 解決・tsc 0 err (既存23 errは無関係) |
-| 2.5 export-port-statistics (S) | 🔶 ブロック中 | 本番 /ports は cloud all.json で正常稼働 (200, grades 描画) → 非緊急。ges ports.json は **administrator 欠落=不完全マスタ**。正しい修正は cloud all.json を1度読んで完全 port マスタ (administrator 含む) を git TS 化 + exporter 再配線。R2 読取り (SSD ミラーに all.json 無 / S3失効) 復旧が前提 |
+| 2.5 export-port-statistics (S) | ✅ 完了 (f02e358a) | port master を git TS 化 (`packages/area/src/data/ports.json`, 699件 administrator 込み, cloud all.json 由来) + port stats を R2 `app/stats/port-*/ports.json` から読む。D1 撤廃。**years.json (2010-2023) / by-port 01001 稚内 175行 / by-year 2023 2900行 が cloud baseline と完全一致**。throttle 撤廃で高速化。ヘッダコメントの `port-*/` が `*/` で早期コメント終了する bug も解消 (esbuild で検出, scripts は tsconfig 外) |
 | 2.4 generate-search-index (M) | ✅ 完了 | ranking=基盤1 (item.json, demo/norm 保全) + description は git TS getMetricConfig 補完 / blog=2.3 all.json / categories=基盤2。**現行 production は ranking 0件の壊れた index だったのを 1992件に復旧**。demo 221・norm 113 が破壊前 baseline と完全一致。検索動作確認済 (人口109/中絶 ranking+blog/商業 demo表示)。npm script に react-server 条件 + 0件時の既存保持ガード追加。※orphan categoryKey "port"(9)/"labor"(1) は D1 でも NULL の pre-existing データ品質問題 (別件) |
 | 2.2 area-profile 都道府県 (M) | ✅ 完了 | exporter を「D1 areaProfiles 読み」→「R2 から compute(基盤1+listRankingValues+buildAreaProfileRows)→profile.json 直接書き」に再配線。中間 D1 完全バイパス。**47000 沖縄が 2026-05-23 baseline と byte-for-byte 完全一致** (S162/W524 差分0) + 5県自己検証パス。run-batch(D1書込)は superseded→Phase F 削除 |
-| 2.2b area-profile 市区町村 (M+) | 🔶 デファー | **単純な exporter 書換ではない**: city の `rankPref`(県内順位)を計算していた `run-batch-city.ts` サービスが既に削除済 (npm `batch:city` は missing file 参照で壊れている)。city-profile-snapshot.ts は stale な D1 areaProfiles(city) を読むだけ。DB レス化には「削除された compute サービスの再構築」(R2 city values を県ごとに group→県内 rank 付与→buildCityProfileRows) が必要。かつ city baseline のバックアップが無く S3 失効で cloud から pull 不可 = 完全一致検証が不能。推測でロジック再現するとデータ品質リスク (原則9/12) のため R2 読取り復旧 + 元 run-batch-city ロジックの git 履歴確認後に着手。既存 1399 city profile.json は旧 D1 状態の配信物で本番は稼働中 (非緊急)。rankPref 関連: `packages/stats-r2/src/scripts/export-stats-to-r2.ts` |
+| 2.2b area-profile 市区町村 (M+) | ✅ 完了 (141e656c) | 削除済 `run-batch-city.ts` を R2 から再構築。city metric=`listMetricKeysByEntity("city")` / 観測値=R2 `app/stats/<m>/cities.json` (readStatsValues, prefectureCode 込み) / **rankPref=prefectureCode で group→全国 rank 昇順で県内連番** (削除済サービスを代替) / buildCityProfileRows (不変)。**6 spot city (札幌7/千代田4/大阪6/那覇3/横浜7/金沢9) が cloud baseline と完全一致**。壊れていた npm batch:city を export:city に置換 |
 
 **先行 Phase C 完了済 (別 commit)**: remotion exporter 群 (load-prefectures git TS化, master/d1-client 削除), ges port-projects (ports.json git TS化)。
 **未着手の大物**: Phase E = page_components の R2 運用基盤 (本プラン scope 外)。
