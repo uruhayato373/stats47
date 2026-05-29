@@ -6,7 +6,6 @@ import {
   ThemeCorrelationScatter,
   deriveAutoScatterPairs,
 } from "./ThemeCorrelationScatter";
-import { ThemeRadarChart } from "./ThemeRadarChart";
 
 import type { ThemeConfig, ThemeIndicatorData } from "../types";
 
@@ -22,11 +21,12 @@ interface Props {
  * 単一指標の choropleth + 個別ランキングが /ranking/{key} で見られる中、
  * テーマページ独自の価値として **複数指標を組み合わせた分析** を提供:
  *
- *   1. レーダーチャート: 選択県 × テーマ内全指標の percentile プロフィール
- *   2. 相関散布図: 2 指標ペアの 47 県分布
- *   3. (Phase 3b) 構成比 pie: 内訳データ (歳入の地方税 vs 交付税 等)
+ *   1. 相関散布図: 2 指標ペアの 47 県分布
+ *   2. (Phase 3b) 構成比 pie: 内訳データ (歳入の地方税 vs 交付税 等)
  *
  * これらは「1 指標 × 47 県」では作れないため、テーマページの独自性になる。
+ * （テーマ全体プロフィールのレーダーチャートは ThemeMetricsDashboard の
+ *   KPI カード + 時系列チャートに置き換えたため削除済み。）
  */
 export function ThemeCombinationAnalysis({
   themeConfig,
@@ -41,11 +41,6 @@ export function ThemeCombinationAnalysis({
 
   return (
     <section className="space-y-3">
-      <ThemeRadarChart
-        rankingKeys={themeConfig.rankingKeys}
-        indicatorDataMap={indicatorDataMap}
-        selectedPrefectureCode={selectedPrefectureCode}
-      />
       <ThemeCorrelationScatter
         pairs={scatterPairs}
         indicatorDataMap={indicatorDataMap}
