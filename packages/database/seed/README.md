@@ -30,14 +30,14 @@
 
 ```bash
 # (a) articles: クラウド/任意環境で R2 から再構成
-npx tsx packages/database/scripts/extract-articles-seed-from-r2.ts
+npm run seed:extract-articles --workspace=packages/database
 
 # (b) Authored 系: Mac (実データを持つ環境) でダンプ
-#     ※ Phase 0 凍結バックアップも兼ねる。--all で全テーブル凍結も可
-npx tsx packages/database/scripts/dump-tables-to-seed.ts
+#     ※ Phase 0 凍結バックアップも兼ねる。-- --all で全テーブル凍結も可
+npm run seed:dump-tables --workspace=packages/database
 
 # (c) seed → D1 投入 SQL に変換
-npx tsx packages/database/scripts/seed-to-d1-sql.ts
+npm run seed:to-d1-sql --workspace=packages/database
 ```
 
 ### Step 2 — D1 インスタンスを作成（解約済みのため再プロビジョニング）
