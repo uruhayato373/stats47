@@ -179,3 +179,26 @@ A (死蔵除去) ──▶ C (Derived エフェメラル化) ──▶ D (観測
 - GES ports SSOT — `generate-port-projects.ts` の ports 座標真実源が MLIT KSJ API か D1 table か(`packages/gis/src/mlit-ksj` 確認要)。
 - schema `.ts` + migration(54 件)の最終要否 — §7 の schema 残置決定に従う(残置なら migration も KEEP)。
 - 正典18改訂(Phase B)— オーナー判断。これが E 全体のゲート。
+
+---
+
+## 5. セッション実行追記 (2026-05-29、実機検証)
+
+実行時に判明した、spec 生成時点では未検出の事実。次セッションはこれを前提にすること。
+
+### 実行済 (feature/dbless-migration)
+- **Phase B**: doc19 を新正典化、doc18 を superseded、CLAUDE.md §4 更新 (commit `9306daac`)。
+- **Phase A**: `run-correlation-batch` skill 削除 + `snapshot-exporter.md` 参照を `/recompute-correlations` に置換。
+- **Phase D (partial)**: `packages/ranking/src/repositories/metric/`(find-metric-by-key-and-area-type + index)をディレクトリごと削除。外部参照0・型チェック PASS。
+
+### ⚠️ 新発見: `generate-known-ranking-keys.ts` は既に壊れている
+- 現行スクリプトは `SELECT ... FROM stats_prefecture` を実行するが、**`stats_prefecture` は Phase 6 で DROP 済**(local D1 の全テーブル確認で stats_* は存在しない)。つまりこのスクリプトは**今実行するとエラー**。コミット済 `apps/web/src/config/known-ranking-keys.ts` (1969 件) は 2026-05-22 の stale な生成物。
+- **件数の乖離**: registry で `prefecture` を宣言する metric = **2169 件**、現行 known-keys = **1969 件**。差 200 = 「宣言あり・観測値未投入」。
+- **DBレス版の正しい実装**: `listMetricKeysByEntity('prefecture')` ∩ `R2 app/stats/<key>/values.json` 実在、で観測値ありに絞る。単純な registry walk(2169件)に置換すると観測値なし 200 URL が 410 されず**空ページ/ソフト404 の SEO リスク**。
+- **ブロッカー**: 検証に R2 stats データが要る。**SSD 未接続**(local `.local/r2/app/stats` = 0 件)。ただし**ルート `.env.local` に cloud R2(S3) 鍵あり** → cloud 経由で `app/stats/` prefix を list すれば観測値ありキー集合を取得可能。
+- **意味判断**: 旧クエリの `is_active=1` フィルタは registry に対応フィールドが無い。DBレスでは「R2 観測値の実在」を唯一の基準にする想定 (is_active は廃止)。
+
+### Phase D の残り (このセッションでは未着手)
+- `generate-known-ranking-keys.ts` の R2-existence 版への書換 + 再生成 (上記、R2 アクセス要)。
+- `sync-metrics-cache` の扱いは Phase C と entangled (exporter が D1 metrics を読む間は維持)。即削除は不可。
+- `data-refresh.yml` db:pull/push は全 Derived エフェメラル化 (Phase C) 後。
