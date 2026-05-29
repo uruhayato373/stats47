@@ -1,5 +1,6 @@
 /**
- * D1 → apps/remotion/public/<feature>/*.json を生成するエントリポイント。
+ * R2 (観測値) + git TS (prefecture master) → apps/remotion/public/<feature>/*.json を
+ * 生成するエントリポイント。完全DBレス (docs/01_技術設計/19): D1 は読まない。
  *
  * 使い方:
  *   tsx apps/remotion/scripts/export-d1-to-remotion-static.ts --feature migration-flow
@@ -7,17 +8,18 @@
  *   tsx apps/remotion/scripts/export-d1-to-remotion-static.ts --dry-run
  *
  * 詳細: .claude/skills/db/export-d1-to-remotion-static/SKILL.md
+ *
+ * 注: prefecture master (packages/area/src/data/prefectures.json) は git TS の SSOT。
+ * 以前は master feature が D1 から再生成していたが Phase C で廃止 (静的 Reference 化)。
  */
 import { exportMigrationFlow } from "./exporters/migration-flow.js";
 import { exportPopulationYoy47 } from "./exporters/population-yoy-47.js";
 import { exportStationPassengers } from "./exporters/station-passengers.js";
-import { exportMaster } from "./exporters/master.js";
 
 type FeatureName =
   | "migration-flow"
   | "population-yoy-47"
   | "station-passengers"
-  | "master"
   | "all";
 
 interface Args {
@@ -49,7 +51,6 @@ const FEATURES: Record<
   "migration-flow": (year) => exportMigrationFlow(year),
   "population-yoy-47": () => exportPopulationYoy47(),
   "station-passengers": () => exportStationPassengers(),
-  master: () => Promise.resolve(exportMaster()),
 };
 
 async function main(): Promise<void> {
