@@ -2,9 +2,12 @@
 /**
  * SessionStart hook: ローカルビルド DB (SQLite) の存在チェック。
  *
- * 別 PC / 新規 clone / クラウドセッションでは packages/database/.data/stats47.sqlite
- * (git 管理外) が存在しないため、batch / dev が空ファイルを掴んで失敗する。
- * その前に「pull / seed が必要」と気づけるよう、SessionStart 時に stdout へ警告を出す。
+ * 2026-05-29: データ層は DB レス設計が正典 (docs/01_技術設計/18_DBレスデータ設計.md)。
+ * 永続 DB を前提にしないため、DB 不在は基本「正常」。本番アプリは R2 snapshot のみ読み、
+ * Authored データは R2 JSON が SSOT、Derived はエフェメラル計算で再生成できる。
+ *
+ * ただし移行期 (Phase ③④ 未完) は旧 batch (sync-snapshots の一部 exporter 等) が
+ * まだ SQLite を要求しうる。その場合の最小案内のみ出す (db:pull 持ち回りは段階廃止中)。
  *
  * stdout は Claude のコンテキストに注入される (公式仕様)。ブロックはしない。
  * 配置: .claude/hooks/check-local-db.js / 登録: .claude/settings.json の hooks.SessionStart
@@ -24,29 +27,24 @@ try {
 }
 
 if (exists) {
-  // 正常時は無言 (コンテキストを汚さない)
+  // DB がある場合も無言 (コンテキストを汚さない)
   process.exit(0);
 }
 
 const msg = [
-  "⚠️ ローカルビルド DB (SQLite) が見つかりません: packages/database/.data/stats47.sqlite",
+  "ℹ️ ローカルビルド DB (SQLite) はありません — DB レス設計では通常これが正常です。",
+  "   正典: docs/01_技術設計/18_DBレスデータ設計.md",
   "",
-  "このファイルは git 管理外で、別 PC / 新規 clone / クラウドでは存在しません。",
-  "batch (sync-articles / page-data-batch / sync-snapshots 等) や dev の前に取得が必要です:",
+  "  - 本番アプリは R2 snapshot のみ読む (DB 不要)。",
+  "  - Authored データ (page_components 等) は R2 JSON が SSOT。",
+  "    定義は git の TS、反映は冪等スクリプト (例: apps/web/scripts/sync-theme-additions-to-r2.ts)。",
+  "  - Reference (metrics/articles) は再生成、Derived (area_profiles/相関) はエフェメラル計算 → R2。",
   "",
-  "  # R2 に持ち回りの DB がある場合 (通常はこれ)",
-  "  npm run db:pull --workspace=packages/r2-storage",
-  "",
-  "  # 空 schema だけ欲しい場合",
-  "  npm run db:migrate:local --workspace=packages/database",
-  "",
-  "初回 seed (R2 にまだ一度も push していない最初の1回) だけは、実データを持つ環境",
-  "(旧 miniflare DB が残る Mac) から push する必要があります:",
-  "  cp .local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c*.sqlite packages/database/.data/stats47.sqlite",
-  "  npm run db:push --workspace=packages/r2-storage",
-  "",
-  "要 env: R2_S3_ENDPOINT / R2_ACCESS_KEY_ID / R2_SECRET_ACCESS_KEY (.env.local)。",
-  "詳細: packages/database/README.md の「🚀 新規 clone / 別 PC でのセットアップ」節。",
+  "  ※ 移行期 (Phase ③④ 未完): 旧 batch の一部 exporter (sync-snapshots 等) は",
+  "    まだ SQLite を要求する場合があります。その時だけ R2 から取得:",
+  "      npm run db:pull --workspace=packages/r2-storage   # R2 に DB がある場合",
+  "    （db:pull の持ち回りは段階廃止中。新規実装では DB レス経路で書くこと）",
+  "    要 env: R2_S3_ENDPOINT / R2_ACCESS_KEY_ID / R2_SECRET_ACCESS_KEY",
 ].join("\n");
 
 process.stdout.write(msg + "\n");

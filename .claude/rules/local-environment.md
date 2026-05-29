@@ -20,8 +20,9 @@ packages/
 
 ## ストレージ
 
-- **ローカルビルド DB (SQLite)**: `packages/database/.data/stats47.sqlite`（miniflare 非依存の素の SQLite ファイル。全 batch スクリプトと drizzle がこれを参照）。git 管理外。取得は `npm run db:pull --workspace=packages/r2-storage`（R2 `database/stats47.sqlite` から）、空 schema 作成は `npm run db:migrate:local --workspace=packages/database`、反映は `npm run db:push --workspace=packages/r2-storage`。
-  - これは **Cloudflare D1 サービスではない**（用語: `.claude/rules/data-sqlite-ssot.md`）。本番は R2 snapshot のみ読み、D1 を一切 query しない。
+- **データ層は DB レス設計が正典** → `docs/01_技術設計/18_DBレスデータ設計.md`。永続 DB を持たず、本番は R2 snapshot のみ読む。Authored=R2 JSON / Reference=再生成 / Derived=エフェメラル計算。
+- **ローカルビルド DB (SQLite)**: `packages/database/.data/stats47.sqlite`（移行期に旧 batch が参照する使い捨てキャッシュ。**段階廃止中**）。git 管理外。移行期に旧 exporter が要求する場合のみ `npm run db:pull --workspace=packages/r2-storage` で取得（R2 に無ければ DB 不在で正常）。**新規スクリプトは DB を使わず R2/TS を直接読む。**
+  - これは **Cloudflare D1 サービスではない**。本番は R2 snapshot のみ読み、DB を一切 query しない。
 - **dev server の miniflare**: `next.config.ts` の `initOpenNextCloudflareForDev({ persist: { path: "../../.local/d1" } })` は **R2 dev binding cache** (`.local/d1/r2/stats47/blobs/`) のために残置。`[[d1_databases]]` binding (STATS47_STATIC_DB) は app が read しないため vestigial（miniflare が `.local/d1/.../miniflare-D1DatabaseObject/*.sqlite` を作るが、batch は参照しない）。**`apps/web/.wrangler/state/` は使わない。**
 - **ローカル R2**: `.local/r2/` 配下にシードデータ・ランキングデータ・ブログ記事を配置。
 

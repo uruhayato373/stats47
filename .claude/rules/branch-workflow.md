@@ -26,14 +26,18 @@ PR は **develop → main の 1 段階のみ**。feature/* → develop は直 me
 - `/deploy` スキルで実行
 - フロー: feature/* で作業 → ローカルで develop に merge → `git push origin develop` → `gh pr create --base main --head develop` → CI green → マージ → main 自動デプロイ → 必要なら `/purge-cdn`
 
-## DB データ反映フロー
+## データ反映フロー（DB レス設計が正典 → `docs/01_技術設計/18_DBレスデータ設計.md`）
 
-**リモート D1 は 2026-04-29 に解約済み（D1 残数 = 0）。** 本番は R2 スナップショット配信のみ。ローカル側はもはや Cloudflare D1 ではなく **ローカルビルド DB (SQLite)** = 再生成可能なビルドキャッシュ + 集計エンジン（用語: `.claude/rules/data-sqlite-ssot.md`）。
+**永続 DB は持たない。** 本番は R2 スナップショット配信のみ。データは真実源で3分類して反映する:
 
 ```
-ローカルビルド DB (SQLite)（snapshot 生成の入力）──/sync-snapshots──▶ R2 snapshot──▶ 本番配信
+Authored (page_components 等)  : git TS 定義 ──冪等スクリプト──▶ R2 JSON ──▶ 本番配信
+Reference (metrics/articles)   : git TS / article.md ──再生成──▶ R2 snapshot
+Derived (area_profiles/相関)    : R2 観測値 ──エフェメラル計算──▶ R2 snapshot
 ```
 
-- データ変更後は `/sync-snapshots` で R2 スナップショットを再生成・push する
-- ranking-values（~30K files）の更新は時間がかかるため `SKIP_VALUES=1` で他のみ更新し、必要な場合のみフル実行
+- Authored の直接反映の雛形: `apps/web/scripts/sync-theme-additions-to-r2.ts`（S3 で read-modify-write、冪等）
+- 従来の `/sync-snapshots`（exporter 群）は移行期は併存可。入力は順次 DB select → R2/TS read へ繋ぎ替える（Phase ③）
+- ranking-values（~30K files）の更新は `SKIP_VALUES=1` で他のみ更新し、必要な場合のみフル実行
 - ロールバックは R2 の旧 snapshot ファイルへの上書き push で対応
+- **`db:pull`/`db:push` の SQLite 持ち回りは段階廃止中**（新規実装では使わない）
