@@ -1,11 +1,12 @@
 import "server-only";
 
 import { logger } from "@stats47/logger/server";
-import { fetchFromR2AsJson } from "@stats47/r2-storage/server";
+import { fetchFromR2AsJson, listFromR2 } from "@stats47/r2-storage/server";
 import type { AreaType } from "@stats47/types";
 import { err, ok, type Result } from "@stats47/types";
 
 import type { RankingItem } from "../../types/ranking-item";
+import type { RankingItemWithTags } from "../../types/ranking-item-with-tags";
 import {
   categoryItemsKeyPath,
   homeFeaturedKeyPath,
@@ -130,6 +131,46 @@ export async function readRankingItemByKeyFromR2(
     return ok(snapshot.item);
   } catch (error) {
     logger.error({ error, rankingKey }, "readRankingItemByKeyFromR2: failed");
+    return err(error instanceof Error ? error : new Error(String(error)));
+  }
+}
+
+/**
+ * 全 ranking-item を R2 の per-key item.json (`app/ranking/<key>/item.json`) から走査して返す。
+ * 完全DBレス (docs/01_技術設計/19): D1 `metrics` を読む `listRankingItemsWithTags` の代替。
+ * item.json の `.item` は tags まで含む完全な RankingItemWithTags なのでそのまま使える。
+ * 旧来の list 系 R2 リーダはモノリス `app/ranking-items/all.json` を読むが、これは廃止予定 (現在欠落)
+ * のため、per-key ファイル群を直接イテレートする。
+ *
+ * 注: build スクリプトで使う場合、`listFromR2`/`fetchFromR2AsJson` はローカル FS (`.local/r2`) を
+ * 使うため NODE_ENV=development で実行すること (S3 トークン廃止のため scripts 経路は cloud 不可)。
+ */
+export async function listRankingItemsWithTagsFromR2(options?: {
+  areaType?: AreaType;
+  isActive?: boolean;
+}): Promise<Result<RankingItemWithTags[], Error>> {
+  try {
+    const allKeys = await listFromR2("app/ranking/");
+    const itemKeys = allKeys.filter((k) =>
+      /^app\/ranking\/[^/]+\/item\.json$/.test(k),
+    );
+
+    const items: RankingItemWithTags[] = [];
+    for (const key of itemKeys) {
+      const snapshot = await fetchFromR2AsJson<{ item: RankingItemWithTags }>(
+        key,
+      );
+      const item = snapshot?.item;
+      if (!item) continue;
+      if (options?.areaType && item.areaType !== options.areaType) continue;
+      if (options?.isActive != null && item.isActive !== options.isActive) {
+        continue;
+      }
+      items.push({ ...item, tags: item.tags ?? [] });
+    }
+    return ok(items);
+  } catch (error) {
+    logger.error({ error }, "listRankingItemsWithTagsFromR2: failed");
     return err(error instanceof Error ? error : new Error(String(error)));
   }
 }
