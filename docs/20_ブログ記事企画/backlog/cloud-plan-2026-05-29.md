@@ -3,12 +3,28 @@ type: blog-plan
 date: 2026-05-29
 updated: 2026-05-29
 count: 30
+published: 5
 axes: [gsc, affiliate, trend]
-status: draft
-note: トピック dedup 済
+status: in-progress
+note: トピック dedup 済 / GSC需要起点 上位 5 本を公開済 (2026-05-29)
 ---
 
 # クラウド環境ブログ企画 30 本 (2026-05-29)
+
+> **公開実績 (2026-05-29)**: GSC 需要起点の上位 5 本を執筆・本番 R2 公開済み。
+> data は `.claude/scripts/blog/build-article-data-from-r2.mjs` で R2 `app/stats` から生成、
+> article-writer が data ground-truth で執筆、quality-gate 全 exit 0。残り 25 本は未着手。
+>
+> | slug | 公開タイトル | metric |
+> |---|---|---|
+> | inpatient-rate-aging-burden | 入院受療率はなぜ西日本で高い？高知が東京の2.7倍 | inpatient-rate-per-100k |
+> | public-phone-prefecture-vanishing | 公衆電話はなぜ消えきらない？東京1万台・北海道は意外な順位 | public-phone-count |
+> | middle-school-height-east-west-puzzle | 中2男子の身長はなぜ東北が高い？秋田163.6cm | average-height-middle-school-second-grade-male |
+> | general-bed-utilization-pressure-map | 病床利用率はなぜ西日本で高い？佐賀82.4%・福島66.4% | bed-utilization-rate |
+> | natto-consumption-east-west-divide | 納豆を食べる県・食べない県の境界 福島7830円vs和歌山2627円 | natto-consumption-expenditure |
+>
+> 注: 公衆電話の企画仮説「北海道だけ突出」は実データ(東京#1・北海道#6)と矛盾したため reframe 済。
+> OGP 画像は未生成 (後日 Remotion render)。tags は frontmatter 由来で all.json に直接反映 (sync の list-tags 取りこぼしを回避)。
 
 環境制約により DB query 不可。指標は `packages/data-configs/src/metrics/*.ts` (実在 key を検証済)、
 需要は GSC 2026-W21 queries.csv、トレンドははてブ hotentry RSS、affiliate は `plan-blog-affiliate` の
