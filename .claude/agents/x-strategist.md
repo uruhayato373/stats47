@@ -51,20 +51,23 @@ X の最大の武器は **即時性**。ニュースやトレンドに stats47 �
 
 ### 2. 引用 RT でリーチ拡大
 
-バズツイートに stats47 のデータ画像を添えた引用 RT で、既存のインプレッションに相乗りする。
+バズツイートに stats47 データの補足コメントを添えた引用 RT で、既存のインプレッションに相乗りする。
 
 | ステップ | 内容 |
 |---|---|
-| 候補検索 | `/find-quote-rt` でバズツイート（いいね 1,000 以上）を検索 |
-| データ照合 | ツイート内容と stats47 ランキングをマッチング |
-| 引用 RT 作成 | データ画像 + 1-2 行の補足コメントで引用 RT |
+| 候補検索 | `/find-quote-rt` で**直近3日以内**のバズツイート（`min_faves:300`）を鮮度×エンゲージで検索 |
+| データ照合 | ツイート内容と ranking_items / station-passengers / migration-flow をマッチング |
+| 引用 RT 作成 | **デフォルトはテキストのみ**（補足コメント + stats47 URL）。`--with-media` 指定かつ station-passengers / migration-flow 合致時のみ県動画を 1 本 opt-in 添付 |
+| 投稿 | `/find-quote-rt --post` → 内部で `/publish-x --quote-url` に委譲（投稿機構の単一ソース） |
+
+**添付ポリシー（重要）**: 引用 RT は宣伝臭を避けるため**テキストのみがデフォルト**。視覚的に強い station-passengers（駅乗降客数）/ migration-flow（人口移動）の動画ストックに合致した時だけ opt-in で添付する。毎回画像/動画を貼らない。
 
 **効果的な引用 RT パターン**:
 - 「実はデータで見ると...」系（意外性の提示）
 - 「都道府県別だとこうなります」系（網羅データの提示）
 - 「1位は〇〇県で△△」系（具体数値の提示）
 
-**注意**: 炎上系・政治系ツイートへの引用 RT は避ける。中立的なデータ提供に徹する。
+**注意**: 炎上系・政治系ツイートへの引用 RT は避ける。中立的なデータ提供に徹する。古いツイート（72時間超）には乗らない（鮮度ファースト）。
 
 ### 3. 投稿タイミング最適化
 
@@ -159,7 +162,7 @@ X のエンゲージメントはタイムラインの流速に依存する。フ
 |---|---|
 | 通常投稿 | x-strategist（テーマ選定）→ sns-producer（data.json + キャプション）→ sns-renderer（画像生成）→ browser-publisher（`/publish-x`） |
 | トレンド連動投稿 | x-strategist（トレンド検知 + データマッチング）→ `/post-x`（キャプション）→ `/publish-x`（即時投稿） |
-| 引用 RT | `/find-quote-rt`（候補検索）→ x-strategist（候補選定）→ browser-publisher（引用 RT 投稿） |
+| 引用 RT | `/find-quote-rt`（候補検索 + 照合）→ x-strategist（候補選定）→ `/publish-x --quote-url`（引用 RT 投稿、opt-in 動画添付）→ sns-metrics-sync（記録は publish-x が INSERT、後日 metrics） |
 | 一括生成 | `/generate-all-sns`（X 部分）→ x-strategist（配信計画）→ `/publish-x`（予約投稿） |
 | パフォーマンス分析 | `/update-sns-metrics` → `/fetch-x-data` → x-strategist（分析・方針更新） |
 | ストック消化 | x-strategist（ストック棚卸し + 優先度付け）→ `/publish-x`（予約投稿）→ `/mark-sns-posted`（投稿済み記録） |

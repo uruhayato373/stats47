@@ -104,6 +104,40 @@
 | 餃子 | gyoza-consumption-expenditure | ★★★ |
 | コンビニ | convenience-store-sales | ★★☆ |
 
+## 動画アセット対応（`--with-media` 時の添付素材）
+
+`/find-quote-rt --with-media` で引用RTに動画を添付する場合の、話題キーワード → レンダ済み動画パスの対応。レンダリングは不要（既存ストックの消化）。合致しなければテキストのみにフォールバックする。
+
+| アセット種別 | 話題キーワード | X 用動画パス | 遷移先 URL |
+|---|---|---|---|
+| station-passengers（駅乗降客数） | 駅, 鉄道, 通勤, 満員電車, 乗降, 路線, ラッシュ | `.local/r2/sns/station-passengers/landscape/<NN>.mp4`（東京は `pref-tokyo/x/stills/video.mp4` も可） | `https://stats47.jp/ranking/<station-passengers の ranking_key>` |
+| migration-flow（人口移動） | 引っ越し, 転入, 転出, 転出超過, 転入超過, 移住, 上京, 人口流出, 流入 | `.local/r2/sns/migration-flow/<romaji>/x/stills/reel.mp4`（無ければ `landscape/<NN>.mp4`） | `https://stats47.jp/gis-cross/migration-flow?pref=<NN>` |
+
+- **県の選び方**: ツイートが特定県に言及していればその県。県名が無い汎用ツイートなら話題インパクトの大きい県（駅 → 東京 `13`、人口移動 → 転出超過で話題の県）を選ぶ
+- **migration-flow の遷移先は `/ranking/` ではなく `/gis-cross/migration-flow?pref=<NN>`**（`?pref=` は県コード）
+- 添付はデフォルト OFF（テキストのみ）。`--with-media` 指定時のみ、上記合致時に **動画 1 本** を添付
+
+### 都道府県コード ↔ ローマ字（`<NN>` / `<romaji>`）
+
+| NN | romaji | 県 | NN | romaji | 県 | NN | romaji | 県 |
+|----|--------|----|----|--------|----|----|--------|----|
+| 01 | hokkaido | 北海道 | 17 | ishikawa | 石川 | 33 | okayama | 岡山 |
+| 02 | aomori | 青森 | 18 | fukui | 福井 | 34 | hiroshima | 広島 |
+| 03 | iwate | 岩手 | 19 | yamanashi | 山梨 | 35 | yamaguchi | 山口 |
+| 04 | miyagi | 宮城 | 20 | nagano | 長野 | 36 | tokushima | 徳島 |
+| 05 | akita | 秋田 | 21 | gifu | 岐阜 | 37 | kagawa | 香川 |
+| 06 | yamagata | 山形 | 22 | shizuoka | 静岡 | 38 | ehime | 愛媛 |
+| 07 | fukushima | 福島 | 23 | aichi | 愛知 | 39 | kochi | 高知 |
+| 08 | ibaraki | 茨城 | 24 | mie | 三重 | 40 | fukuoka | 福岡 |
+| 09 | tochigi | 栃木 | 25 | shiga | 滋賀 | 41 | saga | 佐賀 |
+| 10 | gunma | 群馬 | 26 | kyoto | 京都 | 42 | nagasaki | 長崎 |
+| 11 | saitama | 埼玉 | 27 | osaka | 大阪 | 43 | kumamoto | 熊本 |
+| 12 | chiba | 千葉 | 28 | hyogo | 兵庫 | 44 | oita | 大分 |
+| 13 | tokyo | 東京 | 29 | nara | 奈良 | 45 | miyazaki | 宮崎 |
+| 14 | kanagawa | 神奈川 | 30 | wakayama | 和歌山 | 46 | kagoshima | 鹿児島 |
+| 15 | niigata | 新潟 | 31 | tottori | 鳥取 | 47 | okinawa | 沖縄 |
+| 16 | toyama | 富山 | 32 | shimane | 島根 | | | |
+
 ## 引用RTテキストのテンプレート
 
 ```
