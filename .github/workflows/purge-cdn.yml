@@ -1,0 +1,65 @@
+name: 🧹 Purge CDN Cache
+
+# R2 カスタムドメイン (storage.stats47.jp) の Cloudflare CDN キャッシュをパージする。
+# ローカル .env.local の CLOUDFLARE_ZONE_ID 依存を廃した代替 (cloud / 新規 checkout から実行可能)。
+#
+# 使い方:
+#   gh workflow run purge-cdn.yml                        # 全パージ (purge_everything)
+#   gh workflow run purge-cdn.yml -f prefix=app/ranking  # prefix 配下のみ
+#
+# 元スクリプト: packages/r2-storage/src/scripts/purge-cache.ts
+
+on:
+  workflow_dispatch:
+    inputs:
+      prefix:
+        description: "パージ対象の R2 prefix (空なら purge_everything)"
+        required: false
+        default: ""
+
+permissions:
+  contents: read
+
+concurrency:
+  group: purge-cdn
+  cancel-in-progress: false
+
+env:
+  # 全パージに必要
+  CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+  CLOUDFLARE_ZONE_ID: ${{ secrets.CLOUDFLARE_ZONE_ID }}
+  # prefix 指定時は対象 R2 ファイル列挙のため S3 認証も必要 (CLOUDFLARE_* secrets から導出)
+  R2_S3_ENDPOINT: https://${{ secrets.CLOUDFLARE_ACCOUNT_ID }}.r2.cloudflarestorage.com
+  R2_ACCESS_KEY_ID: ${{ secrets.CLOUDFLARE_R2_ACCESS_KEY_ID }}
+  R2_SECRET_ACCESS_KEY: ${{ secrets.CLOUDFLARE_R2_SECRET_ACCESS_KEY }}
+  CLOUDFLARE_R2_BUCKET_NAME: stats47
+
+jobs:
+  purge:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: 🧰 Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 1
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 🧹 Purge CDN cache
+        run: |
+          if [ -n "${{ github.event.inputs.prefix }}" ]; then
+            echo "Purging prefix: ${{ github.event.inputs.prefix }}"
+            npx tsx packages/r2-storage/src/scripts/purge-cache.ts --prefix "${{ github.event.inputs.prefix }}"
+          else
+            echo "Purging everything (storage.stats47.jp)"
+            npx tsx packages/r2-storage/src/scripts/purge-cache.ts
+          fi

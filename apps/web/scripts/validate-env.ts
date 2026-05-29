@@ -16,6 +16,7 @@ import { config } from "dotenv";
 import { validateRequiredEnvVars } from "../src/lib/env-validation";
 
 const MONOREPO_ROOT = resolve(__dirname, "..", "..", "..");
+const APP_DIR = resolve(__dirname, "..");
 
 /**
  * CI環境かどうかを判定
@@ -28,9 +29,14 @@ function isCIEnvironment(): boolean {
   );
 }
 
-// .env.localファイルを読み込む（CI環境ではスキップ）
+// 環境変数のロード（dotenv は no-override = 先に load した値が優先）。
+// 1. ローカル秘匿（最優先）。CI/本番では存在しない / Secrets・wrangler.toml が供給するためスキップ。
+// 2. コミット済み公開デフォルト（apps/web/.env.development）。`.env.local` が無い cloud/新規 checkout でも
+//    必須 env（NEXT_PUBLIC_BASE_URL / NEXT_PUBLIC_ESTAT_APP_ID）が揃い、このゲートが通る。
+//    Next.js も dev 時に同ファイルを自動ロードするため app 本体と一致する。
 if (!isCIEnvironment()) {
   config({ path: resolve(MONOREPO_ROOT, ".env.local") });
+  config({ path: resolve(APP_DIR, ".env.development") });
 }
 
 /**
