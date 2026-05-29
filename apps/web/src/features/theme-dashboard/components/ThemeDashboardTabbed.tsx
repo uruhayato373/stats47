@@ -22,11 +22,10 @@ import { fetchIndicatorForYearAction } from "../actions";
 
 import { MetricFocusCharts } from "./MetricFocusCharts";
 import { PopulationScatterSection } from "./PopulationScatterSection";
-import { PrefectureStatsPanel } from "./PrefectureStatsPanel";
 import { ScrollableTabsList } from "./ScrollableTabsList";
 import { ThemeCombinationAnalysis } from "./ThemeCombinationAnalysis";
 import { ThemeLeafletMap } from "./ThemeLeafletMap";
-import { ThemePrefectureSummary } from "./ThemePrefectureSummary";
+import { ThemeMetricsDashboard } from "./ThemeMetricsDashboard";
 import { ThemeYoyCharts } from "./ThemeYoyCharts";
 
 import type { ThemeDashboardClientProps } from "../types";
@@ -44,7 +43,6 @@ export function ThemeDashboardTabbed({
   indicatorDataMap,
   topology,
   pageCharts,
-  kpiDataByArea,
 }: ThemeDashboardClientProps) {
   const tabIndicators = themeConfig.tabIndicators;
   const isBelowLg = useBreakpoint("belowLg");
@@ -179,7 +177,7 @@ export function ThemeDashboardTabbed({
     />
   );
 
-  // 組み合わせ分析 (radar + scatter) — テーマページ独自価値の中核
+  // 組み合わせ分析 (scatter) — テーマページ独自価値
   const combinationAnalysisSection = (
     <ThemeCombinationAnalysis
       themeConfig={themeConfig}
@@ -188,11 +186,12 @@ export function ThemeDashboardTabbed({
     />
   );
 
-  // 1 県深掘りサマリ (KPI + 順位) — 県選択時のみ描画
-  const prefectureSummarySection = (
-    <ThemePrefectureSummary
+  // フル幅ダッシュボード (KPI カード + 時系列チャート + 考察) — areas スタイル
+  const metricsDashboardSection = (
+    <ThemeMetricsDashboard
       themeConfig={themeConfig}
       indicatorDataMap={indicatorDataMap}
+      pageCharts={pageCharts}
       selectedPrefectureCode={selectedPrefectureCode}
     />
   );
@@ -209,20 +208,12 @@ export function ThemeDashboardTabbed({
           mapSection={mapSection}
           statsSection={
             <div className="space-y-3">
-              {/* 県選択時: 1 県深掘り KPI サマリを最上部 (areas スタイル) */}
-              {prefectureSummarySection}
+              {/* フル幅ダッシュボード (KPI カード + 時系列チャート + 考察) */}
+              {metricsDashboardSection}
               {/* 県選択時: 選択指標のトレンドを常時可視 */}
               {selectedPrefectureCode && metricFocusSection}
-              {/* テーマ独自の組み合わせ分析 (radar + scatter) */}
+              {/* テーマ独自の組み合わせ分析 (scatter) */}
               {combinationAnalysisSection}
-              {/* 既存 KPI カード群 (panelTabs 由来) */}
-              <PrefectureStatsPanel
-                selectedPrefectureCode={selectedPrefectureCode}
-                selectedIndicatorKey={selectedTabKey}
-                themeConfig={themeConfig}
-                pageCharts={pageCharts}
-                kpiDataByArea={kpiDataByArea}
-              />
               {/* 県未選択時の単独詳細は折りたたみで */}
               {!selectedPrefectureCode && (
                 <details className="rounded-md border border-border bg-card">
@@ -287,19 +278,14 @@ export function ThemeDashboardTabbed({
           />
         </div>
 
-        {/* 右カラム: (県選択時) 県サマリ → 組み合わせ分析 → KPI カード */}
+        {/* 右カラム: 組み合わせ分析 (scatter) */}
         <div className="space-y-3">
-          {prefectureSummarySection}
           {combinationAnalysisSection}
-          <PrefectureStatsPanel
-            selectedPrefectureCode={selectedPrefectureCode}
-            selectedIndicatorKey={selectedTabKey}
-            themeConfig={themeConfig}
-            pageCharts={pageCharts}
-            kpiDataByArea={kpiDataByArea}
-          />
         </div>
       </div>
+
+      {/* フル幅ダッシュボード (KPI カード + 時系列チャート + 考察) */}
+      {metricsDashboardSection}
 
       <ThemeYoyCharts themeKey={themeConfig.themeKey} />
 
