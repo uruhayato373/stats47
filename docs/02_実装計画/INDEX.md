@@ -12,6 +12,8 @@ tags: [実装計画]
 
 > 三大ロードマップ: `01_実装ロードマップ.md`（Sprint 単位）/ `100x-pv-strategy.md`（24ヶ月 PV）/ `seo-todo-unify-phase-1-3.md`（SEO×TODO 統一）。
 > 個別施策の TODO 真実源は `docs/05_改善ログ/`、未着手 backlog は `docs/50_Issues/`。
+>
+> **2026-05-29 集約**: 散在していた個別計画をテーマ別に 4 ファイルへ統合した（`phase-1-plan` / `phase-2-plan` / `theme-dashboard-plan` / `gis-content-plan`。各ファイル冒頭の `<!-- 元ファイル: -->` で出自を保持）。
 
 ## 🟢 Active（進行中）
 
@@ -21,34 +23,28 @@ tags: [実装計画]
 | `100x-pv-strategy.md` | 24ヶ月 PV 100x 戦略（Phase 0 active、Phase 1-4 は future） |
 | `seo-todo-unify-phase-1-3.md` | SEO 向上 × TODO 一元化（Phase 3 一部残） |
 | `d-redesign-master-plan.md` | D リデザイン マスタープラン |
+| `theme-dashboard-plan.md` | テーマダッシュボード（移行手順 + チャート提案を統合。`theme-charts-planning/` の親計画） |
+| `gis-content-plan.md` | GIS 統計コンテンツ戦略 + 掛け合わせ候補カタログ（統合） |
 | `dbless-migration-plan-2026-05-29.md` | 完全DBレス移行 計画（正典: `docs/01_技術設計/19_完全DBレス設計.md`） |
 | `dbless-spec-2026-05-29.md` | 完全DBレス 実行スペック |
 | `dbless-rebuild-plan-2026-05-29.md` | 完全DBレス リビルド進捗 |
-| `theme-dashboard-d1-migration.md` | テーマダッシュボード（`theme-charts-planning/` の親計画、Phase 1C/2/3/4 残） |
-| `theme-dashboard-charts-proposal-2026-05-29.md` | テーマチャート提案（一部実装、backlog 残） |
-| `gis-statistics-content-strategy.md` | GIS 統計コンテンツ戦略（Phase 1/3/4 残） |
 
 ## 🔵 Future — Phase 1（W29-W44）
 
 | ファイル | 内容 |
 |---|---|
-| `cities-revival-plan.md` | 市区町村ページ復活 |
-| `metrics-expansion-roadmap.md` | 指標拡張ロードマップ |
-| `migration-flow-sns-automation.md` | 人口移動 SNS 自動化（Phase 2-5 TODO） |
+| `phase-1-plan.md` | 市区町村復活 / 指標拡張 / 人口移動 SNS 自動化 を統合 |
 
 ## 🟣 Future — Phase 2（W45 以降）
 
 | ファイル | 内容 |
 |---|---|
-| `phase-2-authority-content-plan.md` | 権威性コンテンツ計画 |
-| `phase-2-note-monetization-plan.md` | note マネタイズ計画 |
-| `phase-2-backlink-strategy.md` | 被リンク戦略 |
+| `phase-2-plan.md` | 権威性コンテンツ / note マネタイズ / 被リンク戦略 を統合 |
 
 ## 📚 Reference / Catalog
 
 | パス | 内容 |
 |---|---|
-| `gis-cross-candidate-catalog.md` | GIS 掛け合わせ候補 + データ可否ゲート |
 | `whitepaper-chart-inventory/` | 11 白書チャート逆引き inventory |
 | `estat-ranking-candidates/` | e-Stat ランキング候補（4,332 未 metric 化） |
 

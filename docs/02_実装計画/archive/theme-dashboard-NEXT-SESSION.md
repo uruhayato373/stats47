@@ -4,7 +4,7 @@ date: 2026-05-26
 status: active
 branch: claude/brave-galileo-PVSaL
 related:
-  - theme-dashboard-d1-migration.md
+  - theme-dashboard-plan.md
   - theme-charts-planning/README.md
 tags: [handoff, theme-dashboard, next-session]
 ---
@@ -12,7 +12,7 @@ tags: [handoff, theme-dashboard, next-session]
 # テーマダッシュボード改修 — 次セッションへのハンドオフ
 
 > ブランチ `claude/brave-galileo-PVSaL` を pull した後、次に何をやるかが分かるための短いドキュメント。
-> 詳細設計は `theme-dashboard-d1-migration.md` / `theme-charts-planning/` を参照。
+> 詳細設計は `theme-dashboard-plan.md` / `theme-charts-planning/` を参照。
 
 ## 30 秒サマリ
 
@@ -188,7 +188,7 @@ D1 が 2 週間程度安定稼働してから。
 
 | 目的 | ファイル |
 |---|---|
-| マスタープラン | `docs/02_実装計画/theme-dashboard-d1-migration.md` |
+| マスタープラン | `docs/02_実装計画/theme-dashboard-plan.md` |
 | **このハンドオフ** | `docs/02_実装計画/theme-dashboard-NEXT-SESSION.md` |
 | 17 テーマ Planning INDEX | `docs/02_実装計画/theme-charts-planning/README.md` |
 | Phase 3a 実装 (Server Action) | `apps/web/src/features/theme-dashboard/actions/fetch-metric-timeseries.ts` |
@@ -280,7 +280,7 @@ Phase 3a/3a'/3a'' の動作確認は完了済 / 未完を共有する。
 
 ## 関連
 
-- 親計画: `docs/02_実装計画/theme-dashboard-d1-migration.md`
+- 親計画: `docs/02_実装計画/theme-dashboard-plan.md`
 - 17 テーマ Planning: `docs/02_実装計画/theme-charts-planning/`
 - ブランチ運用規約: `.claude/rules/branch-workflow.md`
 - D1 / R2 振り分け原則: `.claude/rules/data-storage.md`

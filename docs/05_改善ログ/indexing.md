@@ -28,12 +28,12 @@ Coverage Drilldown / sitemap / Indexing API のインデックスカバレッジ
 - **deployed_at**: 2026-05-23
 - **due**: 2026-07-13
 - **related_plan**: `docs/02_実装計画/100x-pv-strategy.md` Phase 0
-- **deliverable**: `docs/02_実装計画/cities-revival-plan.md`
+- **deliverable**: `docs/02_実装計画/phase-1-plan.md`
 - **verification_command**: `node .claude/scripts/gsc/url-inspection-daily.cjs --pattern '/areas/.+/cities/'`
 
 ### 完了 (2026-05-23)
 
-設計書 `docs/02_実装計画/cities-revival-plan.md` を完成。Phase 1 (W29-W44) 着手の前提条件すべて文書化:
+設計書 `docs/02_実装計画/phase-1-plan.md` を完成。Phase 1 (W29-W44) 着手の前提条件すべて文書化:
 
 - 現状診断: cities テーブル 2,701 行 + stats_city 186 万行のデータは揃っているが、city page は空のプレースホルダー (h1 + ナビのみ、`generateStaticParams() returns []`)
 - 復活戦略 3 本柱: データ表示 + SSG 化 + sitemap 段階追加 (S1=80 都市 → S2=500 → S3=2,701 を 4-12 週で観測)
@@ -67,7 +67,7 @@ Coverage Drilldown / sitemap / Indexing API のインデックスカバレッジ
 ### 検証
 
 - **検証期日**: 2026-07-13 (Phase 0 完了週)
-- **期日後の判定**: 設計書 (品質テンプレ + sitemap 戦略) が `docs/02_実装計画/cities-revival-plan.md` として完成 → Phase 1 投資 GO/NO-GO 判定
+- **期日後の判定**: 設計書 (品質テンプレ + sitemap 戦略) が `docs/02_実装計画/phase-1-plan.md` として完成 → Phase 1 投資 GO/NO-GO 判定
 
 ### NOT this Phase
 

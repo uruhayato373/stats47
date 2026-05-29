@@ -7,7 +7,7 @@ created: 2026-05-20
 updated: 2026-05-20
 status: backlog
 tags: [content-plan, correlation, gis-cross]
-parent: docs/02_実装計画/gis-cross-candidate-catalog.md
+parent: docs/02_実装計画/gis-content-plan.md
 ---
 
 # 掛け合わせ相関記事 ブログ企画 (型B)

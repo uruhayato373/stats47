@@ -187,4 +187,4 @@ theme description (D1 themes.description) 推奨書き換え:
 - 見本: [`living-housing.md`](./living-housing.md)
 - D1 schema: `packages/database/src/schema/themes.ts`
 - 既存 TS source: `packages/types/src/indicator-sets/safety.ts`
-- 親計画: `docs/02_実装計画/theme-dashboard-d1-migration.md`
+- 親計画: `docs/02_実装計画/theme-dashboard-plan.md`
