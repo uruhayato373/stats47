@@ -1,0 +1,336 @@
+{
+  "title": "警察官数(人口千人当たり)",
+  "subtitle": "2024年度・上位10/下位10",
+  "unit": "人",
+  "data": [
+    {
+      "pref": "東京",
+      "areaName": "東京都",
+      "rank": 1,
+      "value": 3.08,
+      "unit": "人"
+    },
+    {
+      "pref": "京",
+      "areaName": "京都府",
+      "rank": 2,
+      "value": 2.62,
+      "unit": "人"
+    },
+    {
+      "pref": "和歌山",
+      "areaName": "和歌山県",
+      "rank": 3,
+      "value": 2.48,
+      "unit": "人"
+    },
+    {
+      "pref": "高知",
+      "areaName": "高知県",
+      "rank": 4,
+      "value": 2.47,
+      "unit": "人"
+    },
+    {
+      "pref": "長崎",
+      "areaName": "長崎県",
+      "rank": 4,
+      "value": 2.47,
+      "unit": "人"
+    },
+    {
+      "pref": "山口",
+      "areaName": "山口県",
+      "rank": 6,
+      "value": 2.46,
+      "unit": "人"
+    },
+    {
+      "pref": "大阪",
+      "areaName": "大阪府",
+      "rank": 7,
+      "value": 2.44,
+      "unit": "人"
+    },
+    {
+      "pref": "福井",
+      "areaName": "福井県",
+      "rank": 8,
+      "value": 2.37,
+      "unit": "人"
+    },
+    {
+      "pref": "島根",
+      "areaName": "島根県",
+      "rank": 9,
+      "value": 2.33,
+      "unit": "人"
+    },
+    {
+      "pref": "鳥取",
+      "areaName": "鳥取県",
+      "rank": 10,
+      "value": 2.29,
+      "unit": "人"
+    },
+    {
+      "pref": "徳島",
+      "areaName": "徳島県",
+      "rank": 11,
+      "value": 2.27,
+      "unit": "人"
+    },
+    {
+      "pref": "秋田",
+      "areaName": "秋田県",
+      "rank": 12,
+      "value": 2.22,
+      "unit": "人"
+    },
+    {
+      "pref": "兵庫",
+      "areaName": "兵庫県",
+      "rank": 13,
+      "value": 2.21,
+      "unit": "人"
+    },
+    {
+      "pref": "福岡",
+      "areaName": "福岡県",
+      "rank": 14,
+      "value": 2.2,
+      "unit": "人"
+    },
+    {
+      "pref": "佐賀",
+      "areaName": "佐賀県",
+      "rank": 15,
+      "value": 2.18,
+      "unit": "人"
+    },
+    {
+      "pref": "山梨",
+      "areaName": "山梨県",
+      "rank": 16,
+      "value": 2.13,
+      "unit": "人"
+    },
+    {
+      "pref": "北海道",
+      "areaName": "北海道",
+      "rank": 17,
+      "value": 2.07,
+      "unit": "人"
+    },
+    {
+      "pref": "香川",
+      "areaName": "香川県",
+      "rank": 18,
+      "value": 2.01,
+      "unit": "人"
+    },
+    {
+      "pref": "新潟",
+      "areaName": "新潟県",
+      "rank": 19,
+      "value": 2,
+      "unit": "人"
+    },
+    {
+      "pref": "沖縄",
+      "areaName": "沖縄県",
+      "rank": 20,
+      "value": 1.99,
+      "unit": "人"
+    },
+    {
+      "pref": "青森",
+      "areaName": "青森県",
+      "rank": 21,
+      "value": 1.98,
+      "unit": "人"
+    },
+    {
+      "pref": "山形",
+      "areaName": "山形県",
+      "rank": 22,
+      "value": 1.97,
+      "unit": "人"
+    },
+    {
+      "pref": "福島",
+      "areaName": "福島県",
+      "rank": 22,
+      "value": 1.97,
+      "unit": "人"
+    },
+    {
+      "pref": "富山",
+      "areaName": "富山県",
+      "rank": 24,
+      "value": 1.95,
+      "unit": "人"
+    },
+    {
+      "pref": "岡山",
+      "areaName": "岡山県",
+      "rank": 24,
+      "value": 1.95,
+      "unit": "人"
+    },
+    {
+      "pref": "宮崎",
+      "areaName": "宮崎県",
+      "rank": 24,
+      "value": 1.95,
+      "unit": "人"
+    },
+    {
+      "pref": "鹿児島",
+      "areaName": "鹿児島県",
+      "rank": 24,
+      "value": 1.95,
+      "unit": "人"
+    },
+    {
+      "pref": "奈良",
+      "areaName": "奈良県",
+      "rank": 28,
+      "value": 1.94,
+      "unit": "人"
+    },
+    {
+      "pref": "愛媛",
+      "areaName": "愛媛県",
+      "rank": 29,
+      "value": 1.93,
+      "unit": "人"
+    },
+    {
+      "pref": "大分",
+      "areaName": "大分県",
+      "rank": 29,
+      "value": 1.93,
+      "unit": "人"
+    },
+    {
+      "pref": "広島",
+      "areaName": "広島県",
+      "rank": 31,
+      "value": 1.92,
+      "unit": "人"
+    },
+    {
+      "pref": "岐阜",
+      "areaName": "岐阜県",
+      "rank": 32,
+      "value": 1.86,
+      "unit": "人"
+    },
+    {
+      "pref": "岩手",
+      "areaName": "岩手県",
+      "rank": 33,
+      "value": 1.84,
+      "unit": "人"
+    },
+    {
+      "pref": "栃木",
+      "areaName": "栃木県",
+      "rank": 33,
+      "value": 1.84,
+      "unit": "人"
+    },
+    {
+      "pref": "熊本",
+      "areaName": "熊本県",
+      "rank": 33,
+      "value": 1.84,
+      "unit": "人"
+    },
+    {
+      "pref": "群馬",
+      "areaName": "群馬県",
+      "rank": 36,
+      "value": 1.83,
+      "unit": "人"
+    },
+    {
+      "pref": "石川",
+      "areaName": "石川県",
+      "rank": 36,
+      "value": 1.83,
+      "unit": "人"
+    },
+    {
+      "pref": "愛知",
+      "areaName": "愛知県",
+      "rank": 38,
+      "value": 1.81,
+      "unit": "人"
+    },
+    {
+      "pref": "三重",
+      "areaName": "三重県",
+      "rank": 39,
+      "value": 1.8,
+      "unit": "人"
+    },
+    {
+      "pref": "静岡",
+      "areaName": "静岡県",
+      "rank": 40,
+      "value": 1.78,
+      "unit": "人"
+    },
+    {
+      "pref": "千葉",
+      "areaName": "千葉県",
+      "rank": 41,
+      "value": 1.77,
+      "unit": "人"
+    },
+    {
+      "pref": "長野",
+      "areaName": "長野県",
+      "rank": 41,
+      "value": 1.77,
+      "unit": "人"
+    },
+    {
+      "pref": "茨城",
+      "areaName": "茨城県",
+      "rank": 43,
+      "value": 1.75,
+      "unit": "人"
+    },
+    {
+      "pref": "神奈川",
+      "areaName": "神奈川県",
+      "rank": 44,
+      "value": 1.7,
+      "unit": "人"
+    },
+    {
+      "pref": "宮城",
+      "areaName": "宮城県",
+      "rank": 45,
+      "value": 1.69,
+      "unit": "人"
+    },
+    {
+      "pref": "滋賀",
+      "areaName": "滋賀県",
+      "rank": 46,
+      "value": 1.68,
+      "unit": "人"
+    },
+    {
+      "pref": "埼玉",
+      "areaName": "埼玉県",
+      "rank": 47,
+      "value": 1.6,
+      "unit": "人"
+    }
+  ]
+}

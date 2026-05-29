@@ -1,0 +1,91 @@
+<!-- data-source: crime-rate-prefecture-rankings.json | generated: 2026-05-29T23:38:45.129Z -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 480" width="680" height="480" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" role="img" aria-label="刑法犯認知件数(人口千人当たり)">
+  <rect width="680" height="480" fill="#fafafa" rx="8"/>
+  <text x="340" y="24" text-anchor="middle" font-size="16" font-weight="bold" fill="#222">刑法犯認知件数(人口千人当たり)</text>
+  <text x="340" y="42" text-anchor="middle" font-size="11" fill="#666">2023年・上位10/下位10</text>
+  <text x="227.5" y="54" text-anchor="middle" font-size="12" font-weight="bold" fill="#1565c0">上位 10</text>
+  <text x="542.5" y="54" text-anchor="middle" font-size="12" font-weight="bold" fill="#c62828">下位 10</text>
+  
+      <text x="84" y="82" text-anchor="end" font-size="11" fill="#333">大阪</text>
+      <rect x="90" y="63" width="195" height="30" fill="#1565c0" rx="2"/>
+      <text x="289" y="82" font-size="10" fill="#333">9.15件</text>
+    
+      <text x="84" y="118" text-anchor="end" font-size="11" fill="#333">群馬</text>
+      <rect x="90" y="99" width="149.39344262295083" height="30" fill="#1976d2" rx="2"/>
+      <text x="243.39344262295083" y="118" font-size="10" fill="#333">7.01件</text>
+    
+      <text x="84" y="154" text-anchor="end" font-size="11" fill="#333">茨城</text>
+      <rect x="90" y="135" width="149.18032786885246" height="30" fill="#1e88e5" rx="2"/>
+      <text x="243.18032786885246" y="154" font-size="10" fill="#333">7件</text>
+    
+      <text x="84" y="190" text-anchor="end" font-size="11" fill="#333">兵庫</text>
+      <rect x="90" y="171" width="147.9016393442623" height="30" fill="#2196f3" rx="2"/>
+      <text x="241.9016393442623" y="190" font-size="10" fill="#333">6.94件</text>
+    
+      <text x="84" y="226" text-anchor="end" font-size="11" fill="#333">埼玉</text>
+      <rect x="90" y="207" width="144.27868852459017" height="30" fill="#42a5f5" rx="2"/>
+      <text x="238.27868852459017" y="226" font-size="10" fill="#333">6.77件</text>
+    
+      <text x="84" y="262" text-anchor="end" font-size="11" fill="#333">福岡</text>
+      <rect x="90" y="243" width="138.95081967213113" height="30" fill="#64b5f6" rx="2"/>
+      <text x="232.95081967213113" y="262" font-size="10" fill="#333">6.52件</text>
+    
+      <text x="84" y="298" text-anchor="end" font-size="11" fill="#333">東京</text>
+      <rect x="90" y="279" width="134.9016393442623" height="30" fill="#90caf9" rx="2"/>
+      <text x="228.9016393442623" y="298" font-size="10" fill="#333">6.33件</text>
+    
+      <text x="84" y="334" text-anchor="end" font-size="11" fill="#333">栃木</text>
+      <rect x="90" y="315" width="134.04918032786884" height="30" fill="#1565c0" rx="2"/>
+      <text x="228.04918032786884" y="334" font-size="10" fill="#333">6.29件</text>
+    
+      <text x="84" y="370" text-anchor="end" font-size="11" fill="#333">愛知</text>
+      <rect x="90" y="351" width="133.40983606557378" height="30" fill="#1976d2" rx="2"/>
+      <text x="227.40983606557378" y="370" font-size="10" fill="#333">6.26件</text>
+    
+      <text x="84" y="406" text-anchor="end" font-size="11" fill="#333">香川</text>
+      <rect x="90" y="387" width="132.5573770491803" height="30" fill="#1e88e5" rx="2"/>
+      <text x="226.5573770491803" y="406" font-size="10" fill="#333">6.22件</text>
+    
+  
+      <text x="399" y="82" text-anchor="end" font-size="11" fill="#333">岩手</text>
+      <rect x="405" y="63" width="52.42622950819672" height="30" fill="#c62828" rx="2"/>
+      <text x="461.42622950819674" y="82" font-size="10" fill="#333">2.46件</text>
+    
+      <text x="399" y="118" text-anchor="end" font-size="11" fill="#333">秋田</text>
+      <rect x="405" y="99" width="56.049180327868854" height="30" fill="#d32f2f" rx="2"/>
+      <text x="465.04918032786884" y="118" font-size="10" fill="#333">2.63件</text>
+    
+      <text x="399" y="154" text-anchor="end" font-size="11" fill="#333">大分</text>
+      <rect x="405" y="135" width="58.18032786885246" height="30" fill="#e53935" rx="2"/>
+      <text x="467.1803278688525" y="154" font-size="10" fill="#333">2.73件</text>
+    
+      <text x="399" y="190" text-anchor="end" font-size="11" fill="#333">山形</text>
+      <rect x="405" y="171" width="61.803278688524586" height="30" fill="#ef5350" rx="2"/>
+      <text x="470.8032786885246" y="190" font-size="10" fill="#333">2.9件</text>
+    
+      <text x="399" y="226" text-anchor="end" font-size="11" fill="#333">長崎</text>
+      <rect x="405" y="207" width="63.721311475409834" height="30" fill="#e57373" rx="2"/>
+      <text x="472.72131147540983" y="226" font-size="10" fill="#333">2.99件</text>
+    
+      <text x="399" y="262" text-anchor="end" font-size="11" fill="#333">島根</text>
+      <rect x="405" y="243" width="64.14754098360655" height="30" fill="#ef9a9a" rx="2"/>
+      <text x="473.1475409836065" y="262" font-size="10" fill="#333">3.01件</text>
+    
+      <text x="399" y="298" text-anchor="end" font-size="11" fill="#333">山口</text>
+      <rect x="405" y="279" width="68.62295081967213" height="30" fill="#c62828" rx="2"/>
+      <text x="477.62295081967216" y="298" font-size="10" fill="#333">3.22件</text>
+    
+      <text x="399" y="334" text-anchor="end" font-size="11" fill="#333">熊本</text>
+      <rect x="405" y="315" width="76.93442622950819" height="30" fill="#d32f2f" rx="2"/>
+      <text x="485.9344262295082" y="334" font-size="10" fill="#333">3.61件</text>
+    
+      <text x="399" y="370" text-anchor="end" font-size="11" fill="#333">福井</text>
+      <rect x="405" y="351" width="81.40983606557376" height="30" fill="#e53935" rx="2"/>
+      <text x="490.40983606557376" y="370" font-size="10" fill="#333">3.82件</text>
+    
+      <text x="399" y="406" text-anchor="end" font-size="11" fill="#333">徳島</text>
+      <rect x="405" y="387" width="82.04918032786884" height="30" fill="#ef5350" rx="2"/>
+      <text x="491.04918032786884" y="406" font-size="10" fill="#333">3.85件</text>
+    
+  <text x="340" y="462" text-anchor="middle" font-size="10" fill="#888">凡例: 青系=上位 / 赤系=下位</text>
+</svg>
