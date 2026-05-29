@@ -1,57 +1,78 @@
 /**
- * known-ranking-keys.ts の生成スクリプト
+ * known-ranking-keys.ts の生成スクリプト (完全DBレス版 / 2026-05-29)
  *
- * ローカル D1 から `SELECT DISTINCT key FROM metrics WHERE is_active = 1 AND area_type = 'prefecture'`
- * を実行し、apps/web/src/config/known-ranking-keys.ts に静的 Set として書き出す。
+ * 完全DBレス (docs/01_技術設計/19_完全DBレス設計.md) に伴い、D1 を読まず R2 の
+ * ranking item snapshot (`app/ranking/<key>/item.json`) を真実源にする。
+ * 旧版は Phase 6 で DROP 済の `stats_prefecture` を引いており既に壊れていた。
  *
- * middleware.ts の Fix 6 が参照する（/ranking/{未知key} → 410 Gone）。
- * CI ビルド環境は D1 binding が無いため、ファイルとして git commit する設計。
+ * known key = R2 に item.json が存在し、`areaType === "prefecture"` かつ `isActive` な ranking。
+ * これは ranking ページの `generateStaticParams` (readActiveRankingKeysFromR2) /
+ * `cachedFindRankingItem` → notFound と同一の有効性判定であり、middleware Fix 6 の
+ * 410 ゲートを SSG と完全一致させる。
  *
- * page.tsx は触らない（SSG は従来どおり try/catch + 空配列で CI ビルドを通す）。
+ * ローカル R2 ミラー (`.local/r2`、dual-mode で外付け SSD) を直接読む。生成物は git commit
+ * する設計 (CI ビルド環境は R2 binding が無いため)。
  *
- * 使い方: `cd apps/web && npx tsx scripts/generate-known-ranking-keys.ts`
- * 更新タイミング: /register-ranking 実行後、または /generate-known-ranking-keys スキル経由
+ * 使い方: SSD 接続 (`scripts/dev/local-r2-mode.sh ssd`) のうえ
+ *   `cd apps/web && npx tsx scripts/generate-known-ranking-keys.ts`
+ * 更新タイミング: ranking item を追加/有効化した後。必ず git commit してからデプロイ。
  */
 
-import Database from "better-sqlite3";
 import fs from "node:fs";
 import path from "node:path";
 
-const D1_PATH = path.resolve(
-  __dirname,
-  "../../../packages/database/.data/stats47.sqlite"
-);
+const RANKING_DIR = path.resolve(__dirname, "../../../.local/r2/app/ranking");
 const OUT_PATH = path.resolve(__dirname, "../src/config/known-ranking-keys.ts");
 
-if (!fs.existsSync(D1_PATH)) {
-  console.error(`[generate-known-ranking-keys] D1 not found at ${D1_PATH}`);
-  console.error("ローカル D1 を作成するには `/pull-remote-d1` を実行してください。");
+if (!fs.existsSync(RANKING_DIR)) {
+  console.error(`[generate-known-ranking-keys] R2 ranking snapshot not found at ${RANKING_DIR}`);
+  console.error("ローカル R2 を有効化してください: `scripts/dev/local-r2-mode.sh ssd` (SSD 接続)。");
   process.exit(1);
 }
 
-const db = new Database(D1_PATH, { readonly: true });
-const rows = db
-  .prepare(
-    "SELECT DISTINCT m.key AS ranking_key FROM metrics m WHERE m.is_active = 1 AND EXISTS (SELECT 1 FROM stats_prefecture sp WHERE sp.metric_key = m.key) ORDER BY m.key"
-  )
-  .all() as { ranking_key: string }[];
-db.close();
+interface RankingItem {
+  rankingKey?: string;
+  areaType?: string;
+  isActive?: boolean;
+}
 
-const keys = rows.map((r) => r.ranking_key);
+const keys: string[] = [];
+for (const entry of fs.readdirSync(RANKING_DIR, { withFileTypes: true })) {
+  if (!entry.isDirectory()) continue;
+  const itemPath = path.join(RANKING_DIR, entry.name, "item.json");
+  if (!fs.existsSync(itemPath)) continue;
+
+  let parsed: { item?: RankingItem } & RankingItem;
+  try {
+    parsed = JSON.parse(fs.readFileSync(itemPath, "utf-8"));
+  } catch {
+    console.warn(`[generate-known-ranking-keys] skip unparsable ${itemPath}`);
+    continue;
+  }
+
+  // item.json は { generatedAt, item: {...} } 形式。後方互換で直書きも許容。
+  const item = parsed.item ?? parsed;
+  if (item.areaType === "prefecture" && item.isActive) {
+    keys.push(item.rankingKey ?? entry.name);
+  }
+}
+
+keys.sort();
 
 const today = new Date().toISOString().slice(0, 10);
 
 const header = `/**
- * 有効な ranking キー一覧（prefecture, is_active = 1）
+ * 有効な ranking キー一覧（prefecture, isActive）
  *
  * **このファイルは自動生成されます。手動編集しないこと。**
  *
- * middleware.ts の Fix 6 が参照する。CI ビルド環境では D1 binding が使えないため、
- * 静的ファイルとして git commit する。page.tsx は触らない（SSG は従来どおり）。
+ * middleware.ts の Fix 6 が参照する（/ranking/{未知key} → 410 Gone）。CI ビルド環境では
+ * R2 binding が使えないため、静的ファイルとして git commit する。page.tsx は触らない。
  *
- * 更新方法: \`/generate-known-ranking-keys\` スキル or
+ * 真実源: R2 \`app/ranking/<key>/item.json\` (areaType=prefecture & isActive)。
+ * 更新方法: SSD 接続のうえ
  *           \`cd apps/web && npx tsx scripts/generate-known-ranking-keys.ts\`
- * 更新タイミング: /register-ranking 実行後。必ず git commit してからデプロイ。
+ * 更新タイミング: ranking item 追加/有効化後。必ず git commit してからデプロイ。
  *
  * 最終生成日: ${today}
  * 件数: ${keys.length}

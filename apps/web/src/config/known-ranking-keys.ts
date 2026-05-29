@@ -1,17 +1,18 @@
 /**
- * 有効な ranking キー一覧（prefecture, is_active = 1）
+ * 有効な ranking キー一覧（prefecture, isActive）
  *
  * **このファイルは自動生成されます。手動編集しないこと。**
  *
- * middleware.ts の Fix 6 が参照する。CI ビルド環境では D1 binding が使えないため、
- * 静的ファイルとして git commit する。page.tsx は触らない（SSG は従来どおり）。
+ * middleware.ts の Fix 6 が参照する（/ranking/{未知key} → 410 Gone）。CI ビルド環境では
+ * R2 binding が使えないため、静的ファイルとして git commit する。page.tsx は触らない。
  *
- * 更新方法: `/generate-known-ranking-keys` スキル or
+ * 真実源: R2 `app/ranking/<key>/item.json` (areaType=prefecture & isActive)。
+ * 更新方法: SSD 接続のうえ
  *           `cd apps/web && npx tsx scripts/generate-known-ranking-keys.ts`
- * 更新タイミング: /register-ranking 実行後。必ず git commit してからデプロイ。
+ * 更新タイミング: ranking item 追加/有効化後。必ず git commit してからデプロイ。
  *
- * 最終生成日: 2026-05-22
- * 件数: 1969
+ * 最終生成日: 2026-05-29
+ * 件数: 1992
  */
 export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "abandoned-cultivated-land-area",
@@ -313,6 +314,7 @@ export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "crab-consumption-expenditure",
   "crab-consumption-quantity",
   "craft-materials-consumption-expenditure",
+  "crime-rate-per-1k",
   "criminal-arrest-rate",
   "criminal-recognition-count",
   "criminal-recognition-count-of-prostitution-crime-rate",
@@ -453,6 +455,7 @@ export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "elderly-general-worker-old-population-ratio-pre2019",
   "elderly-household-detail",
   "elderly-on-public-assistance-per-1000-65plus",
+  "elderly-population-ratio",
   "elderly-welfare-expenditure-ratio-pref-finance",
   "elderly-workers-ratio",
   "electrician-annual-income",
@@ -588,6 +591,7 @@ export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "food-expenditure-ratio-multi-person-households",
   "food-retail-store-count-per-1000",
   "food-sanitation-inspection",
+  "foreign-population-per-100k",
   "foreign-resident-count",
   "foreign-resident-count-china",
   "foreign-resident-count-china-per-100k",
@@ -653,6 +657,7 @@ export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "general-hospital-count",
   "general-hospital-count-per-100k",
   "general-hospital-count-per-100km2",
+  "general-hospital-per-100k",
   "general-households",
   "general-revenue-ratio-pref-finance",
   "geothermal-power-plant-count",
@@ -784,6 +789,7 @@ export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "housing-charges-consumption-expenditure",
   "housing-expenditure-ratio-multi-person-households",
   "housing-expenses-prefecture",
+  "housing-floor-area",
   "housing-land-liabilities-ratio-multi-person-households",
   "housing-site-value-per-3-3m2",
   "husband-childcare-rate",
@@ -794,6 +800,8 @@ export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "independent-revenue-prefecture",
   "industrial-and-semi-industrial-area-ratio",
   "industrial-exclusive-area-ratio",
+  "industrial-land-price",
+  "industrial-land-price-change-rate",
   "industrial-water-usage",
   "infant-clothes-consumption-expenditure",
   "infant-clothes-consumption-quantity",
@@ -953,6 +961,9 @@ export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "manufacturing-establishment-site-area",
   "manufacturing-establishments",
   "manufacturing-industry-added-value",
+  "manufacturing-net-value-added-private",
+  "manufacturing-sales-private",
+  "manufacturing-shipment",
   "manufacturing-shipment-amount",
   "manufacturing-shipment-amount-per-employee",
   "manufacturing-shipment-amount-per-establishment",
@@ -1300,7 +1311,7 @@ export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "per-child-public-elementary-school-expenditure-pref-municipal",
   "per-student-public-high-school-expenditure-pref-municipal",
   "per-student-public-junior-high-school-expenditure-pref-municipal",
-  "per-taxpayer-taxable-income",
+  "per-taxpayer-income",
   "perinatal-mortality-rate-per-1000-births",
   "perm-consumption-expenditure",
   "perm-consumption-quantity",
@@ -1358,20 +1369,30 @@ export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "police-officer-count",
   "police-officer-count-per-population",
   "pollution-complaints-received-per-100k",
+  "population-density-habitable",
   "population-density-per-km2-total-area",
   "population-growth-rate",
   "pork-consumption-expenditure",
   "pork-consumption-quantity",
+  "port-cargo-coastal-in",
+  "port-cargo-coastal-out",
   "port-cargo-export",
   "port-cargo-import",
   "port-cargo-total",
   "port-container-count",
+  "port-container-tonnage",
   "port-count",
   "port-entry-vessel-count",
   "port-inbound-ships",
+  "port-passengers-boarding",
+  "port-passengers-landing",
   "port-passengers-total",
   "port-ships-tonnage",
+  "port-ships-total",
   "port-vehicle-ferry",
+  "port-vehicle-ferry-car",
+  "port-vehicle-ferry-total",
+  "port-vehicle-ferry-truck",
   "post-office-count",
   "post-office-count-per-100km2",
   "postage-consumption-expenditure",
@@ -1516,6 +1537,7 @@ export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "retail-store-count",
   "retail-store-count-alt",
   "retail-store-count-per-1000",
+  "retail-stores-per",
   "retirement-allowance-admin-prefecture",
   "rice-cracker-consumption-expenditure",
   "rice-cultivated-area",
@@ -1774,6 +1796,7 @@ export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "toothpaste-consumption-expenditure",
   "total-administrative-investment",
   "total-area-excluding-northern-territories-and-takeshima",
+  "total-area-prefecture-ratio",
   "total-assessed-land-area",
   "total-assessed-land-area-ratio",
   "total-assessed-land-area-ratio-field",
@@ -1805,6 +1828,7 @@ export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "traffic-accident-deaths-per-100k",
   "traffic-accident-injuries",
   "traffic-accident-injuries-per-100k",
+  "traffic-accident-per-100k",
   "traffic-safety-special-grant-prefecture",
   "train-commuter-pass-consumption-expenditure",
   "train-fare-consumption-expenditure",
