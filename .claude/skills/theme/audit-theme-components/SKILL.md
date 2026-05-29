@@ -4,6 +4,7 @@ description: テーマダッシュボードの現状監査を実行する（コ�
 disable-model-invocation: true
 argument-hint: "<theme-key> | --all"
 allowed-tools: Read, Grep, Glob, Bash
+primary_agent: theme-component-builder
 ---
 
 テーマダッシュボードの page_components を監査し、設計原則との整合性を確認する。

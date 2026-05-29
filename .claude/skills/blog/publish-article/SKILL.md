@@ -2,6 +2,7 @@
 name: publish-article
 description: 下書き記事を公開フォルダへコピーし publishedAt を設定する。Use when user says "記事公開", "publish", "公開する". /sync-articles で DB 反映.
 disable-model-invocation: true
+primary_agent: blog-editor
 ---
 
 下書き記事（`docs/21_ブログ記事原稿/<slug>/`）を公開フォルダ（`.local/r2/blog/<slug>/`）にコピーし、公開用フロントマターを整える。
@@ -140,3 +141,9 @@ rm -rf "docs/21_ブログ記事原稿/<slug>"
   3. /push-r2        →  リモート R2 へアップロード
   4. /sync-snapshots →  blog スナップショット更新・本番反映
 ```
+
+## 関連
+
+- **記事品質の正典: `.claude/rules/blog-quality-standards.md`** (curiosity gap / callout / 内部リンク / source-link 配置の単一ソース)
+- publish 前ゲート: `node .claude/scripts/blog/quality-gate.mjs <slug>` (callout/内部リンク/H2/source-link 配置/factual を一括検査)
+- factual cross-check: `.claude/scripts/lib/article-factual-check.mjs` (本 SKILL step 5.5 で実行)

@@ -4,6 +4,8 @@ description: 指定ランキングキーの全 SNS コンテンツ（data.json �
 disable-model-invocation: true
 argument-hint: <rankingKey> [--skip-render] [--skip-captions]
 user-invocable: true
+primary_agent: instagram-strategist
+co_agents: [x-strategist]
 ---
 
 指定したランキングキーの全 SNS コンテンツを一括生成する統合スキル。

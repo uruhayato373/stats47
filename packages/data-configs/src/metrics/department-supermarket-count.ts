@@ -1,0 +1,71 @@
+import type { MetricConfig } from "../types";
+
+export const departmentSupermarketCount: MetricConfig = {
+  "key": "department-supermarket-count",
+  "title": "百貨店、総合スーパー数",
+  "unit": "店",
+  "category": "commercial",
+  "source": {
+    "kind": "estat",
+    "statsDataId": "0000010108",
+    "cdCat01": "H6133",
+    "displayName": "社会・人口統計体系",
+    "url": "https://www.stat.go.jp/data/ssds/index.htm",
+  },
+  "entities": [
+    "prefecture",
+    "city",
+  ],
+  "years": {
+    "years": [
+      2021,
+      2009100000,
+      2011100000,
+      2014100000,
+      2016100000,
+      2021100000,
+    ],
+  },
+  "yearFormat": "fiscal",
+  "visualization": {
+    "colorScheme": "interpolateBlues",
+    "colorSchemeType": "sequential",
+    "minValueType": "data-min",
+  },
+  "display": {
+    "conversionFactor": 1,
+    "decimalPlaces": 2,
+  },
+  "calculation": {
+    "isCalculated": false,
+    "normalizationOptions": [
+      {
+        "type": "per_population",
+        "label": "人口10万人あたり",
+        "unit": "店/10万人",
+        "scaleFactor": 100000,
+        "decimalPlaces": 1,
+      },
+      {
+        "type": "per_area",
+        "label": "面積100km²あたり",
+        "unit": "店/100km²",
+        "scaleFactor": 100,
+        "decimalPlaces": 2,
+      },
+      {
+        "type": "per_household",
+        "label": "1世帯あたり",
+        "unit": "店/世帯",
+        "scaleFactor": 1,
+        "decimalPlaces": 4,
+      },
+    ],
+  },
+  "groupKey": "department-supermarket-count",
+  "seoTitle": "百貨店、総合スーパー数ランキング都道府県【2021100000年】｜1位東京都（117店）",
+  "seoDescription": "2021100000年の百貨店、総合スーパー数の都道府県別ランキング。1位東京都（117店）、最下位高知県（3店）で39.0倍の格差。地図やグラフで47都道府県を比較。",
+  "isActive": true,
+  "isFeatured": false,
+  "featuredOrder": 0,
+};

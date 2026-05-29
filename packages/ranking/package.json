@@ -39,6 +39,7 @@
     "@stats47/database": "*",
     "@stats47/logger": "*",
     "@stats47/r2-storage": "*",
+    "@stats47/stats-r2": "*",
     "@stats47/types": "*",
     "@stats47/utils": "*",
     "@stats47/visualization": "*",

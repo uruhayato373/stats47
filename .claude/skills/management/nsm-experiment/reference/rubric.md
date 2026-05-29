@@ -111,7 +111,7 @@
 - impact: 2 (中規模、月 30 impressions 予想)
 - effort: 1 (半日: e-Stat 調査 + register + AI 生成 + デプロイ)
 - learning: 3 (新規ランキング登録フローの検証になる)
-- certainty: 2 (既存の `/register-ranking` パターン踏襲)
+- certainty: 2 (既存の TS-config + `/page-data-batch` パターン踏襲)
 - **加重合計 = 2*0.4 + 1*0.3 + 3*0.2 + 2*0.1 = 0.8 + 0.3 + 0.6 + 0.2 = 1.9** → 候補
 
 **例 3**: 単一ページの微修正

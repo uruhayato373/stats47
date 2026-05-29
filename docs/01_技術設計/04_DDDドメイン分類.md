@@ -32,6 +32,7 @@ stats47 のドメインを DDD の観点から分類する。
 | Search | `search` | 統計データの検索・フィルタリング |
 | Ads | `ads` | アフィリエイト広告の配信管理 |
 | AIContent | `ai-content` | AI による記事・コンテンツ生成 |
+| MigrationFlow | `migration-flow` (`apps/remotion/`) | ペア観測 (pref ↔ pref) の集計・動画演出。`stats_migration_flow` テーブルが backing store。詳細: `docs/01_技術設計/13_動画データSSOT.md` |
 
 ## 汎用ドメイン (Generic Domain)
 

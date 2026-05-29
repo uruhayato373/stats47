@@ -11,6 +11,50 @@ status: pending
 
 ---
 
+## [pending] Phase 8: 既存記事チャートの dark mode 一括対応ツール
+
+- **tier**: 3
+- **status**: pending
+- **created**: 2026-05-28
+- **trigger**: 2026-05-28 ブログ品質監査で公開記事のチャート SVG 多数が dark mode 未対応と判明
+- **概要**: `audit-chart-quality.mjs` が多数の公開記事で `darkModeMissing` / `themeColorInline` を検出。
+  しかし `generate-article-charts.mjs` は (a) data ファイル命名が `*-prefecture-rankings.json` 等の
+  パターンに一致する記事しか再生成できず、(b) これら公開記事の data は `fetched-*.json` 等の別命名 +
+  scatter は未実装、のため再生成不能。既存 SVG に dark-mode CSS を後付け注入する専用ツールが必要
+- **対象**: `.local/r2/app/blog/<slug>/data/*.svg` (公開記事の chart)
+- **着手判断**: dark mode は CTR 主因でない (blog-quality-standards.md) ため優先度低。chart 品質を
+  一斉に底上げしたいタイミングで
+- **関連**: `.claude/scripts/blog/generate-article-charts.mjs` (2026-05-28 に `--base` 追加済、ただし命名問題は未解決)
+
+## [pending] Phase 7: recompute-correlations 実装
+
+- **tier**: 3
+- **status**: pending
+- **created**: 2026-05-28
+- **trigger**: Phase 6 (D1 → R2 移行) 完遂、最終整理 PR にて未実装と確定
+- **概要**: `.claude/skills/db/recompute-correlations/SKILL.md` の方針 (R2 stats → D1 temp → Pearson r → R2 snapshot → temp DROP) を `packages/correlation/src/scripts/recompute.ts` として実装
+- **入力**: `app/stats/<metric>/values.json` (全 2,207 metric × 47 県)
+- **出力**: `app/correlation/top-pairs.json`, `app/correlation/by-ranking-key/<key>.json`
+- **着手判断**: 既存の相関 snapshot で運用継続可能なため、新規 metric 追加が増えて相関が陳腐化したタイミング
+- **関連**: Phase 6.7 schema cleanup (packages/correlation の reader が `correlations` schema を import している、Phase 7 でまとめて refactor)
+
+## [pending] Phase 7: stats_* schema + correlations schema 削除 + reader refactor
+
+- **tier**: 3
+- **status**: pending
+- **created**: 2026-05-28
+- **trigger**: Phase 6.7 で発覚: packages/ranking + packages/correlation + packages/area-profile の 12 ファイルがまだ `statsPrefecture` / `correlations` を import している
+- **概要**:
+  - `packages/database/src/schema/{stats-prefecture,stats-city,stats-port,stats-migration-flow,stats,correlations}.ts` 6 ファイル削除
+  - schema index.ts の DEPRECATED export 行削除
+  - 上記 12 reader を R2 fetch に切替 (参照: `packages/ranking/src/repositories/ranking-value/list-ranking-values.ts`)
+  - `packages/database/scripts/{ingest-migration-flow,populate-port-statistics}.ts` + `packages/ranking/src/scripts/seed-city-ranking-items.ts` 削除
+- **着手判断**: 現状 D1 にテーブルは無く、production が壊れた reader を呼ぶか確認。壊れている場合は緊急で対応
+- **検証**: `npx tsc --noEmit -p apps/web/tsconfig.json` + 全 tsc clean
+- **関連**: `~/.claude/plans/drifting-cuddling-blossom.md` の "C (DEFERRED)" セクション
+
+---
+
 ## [done] #129 [T2-AI-CONTENT-01] regional_analysis を UI に配線（または insights へ統合）
 
 - **tier**: 2

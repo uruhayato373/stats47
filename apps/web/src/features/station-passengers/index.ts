@@ -1,4 +1,5 @@
 export { StationPassengersPlayer } from "./components/StationPassengersPlayer";
+export { ThemeStationPassengersSection } from "./components/ThemeStationPassengersSection";
 export {
   loadStationPassengersBundle,
   type StationPassengersBundle,

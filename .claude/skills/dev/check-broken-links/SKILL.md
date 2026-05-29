@@ -1,6 +1,7 @@
 ---
 name: check-broken-links
 description: サイトマップの全URLをチェックし404・リンク切れを検出する。Use when user says "リンクチェック", "404チェック", "check-broken-links", or after deploy.
+primary_agent: performance-auditor
 ---
 
 本番サイト（または `--local` でローカル環境）のサイトマップに含まれる全 URL のステータスコードを検証し、404 やサーバーエラーを検出する。

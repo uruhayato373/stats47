@@ -1,6 +1,7 @@
 ---
 name: recover-youtube-shadowban
 description: YouTube チャンネルのシャドウバン疑いに対する回復パイプラインを実行する。Use when user says "シャドウバン対応", "YouTube回復", "投稿停止", or after `/diagnose-youtube-shadowban` returns likely-shadowban. 診断→疑い動画 private 化→予約投稿キャンセル→2週間 pause→日次監視→復帰テストの 7 フェーズ。
+primary_agent: youtube-strategist
 ---
 
 `/diagnose-youtube-shadowban` の結果を受け、疑い動画の非公開化、予約投稿のキャンセル、2 週間の投稿停止、日次監視、復帰テストまでを実行する。

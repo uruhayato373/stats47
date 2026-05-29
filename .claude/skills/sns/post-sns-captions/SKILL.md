@@ -2,6 +2,8 @@
 name: post-sns-captions
 description: 全 SNS（X/YouTube）のキャプションを一括生成しローカルに保存する。Use when user says "キャプション一括生成", "全SNSキャプション". 各プラットフォーム別スキルに委譲.
 disable-model-invocation: true
+primary_agent: sns-metrics-sync
+co_agents: [instagram-strategist, x-strategist]
 ---
 
 全 SNS（X / YouTube）の投稿用キャプションを一括生成してローカルに保存する。

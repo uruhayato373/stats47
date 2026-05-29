@@ -4,6 +4,7 @@ description: テーマ用チャートを設計する（既存コンポーネン�
 disable-model-invocation: true
 argument-hint: "<theme-key>"
 allowed-tools: Read, Grep, Glob, Bash, WebSearch, WebFetch, Agent
+primary_agent: theme-component-builder
 ---
 
 テーマダッシュボードに追加するチャートを設計する。既存コンポーネントの再利用を最優先し、不足分のみ新規設計する。

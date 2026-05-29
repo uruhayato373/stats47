@@ -1,6 +1,8 @@
 ---
 name: fetch-ga4-data
 description: Google Analytics 4 Data API からアクセスデータを取得する。Use when user says "GA4データ", "PV確認", "アクセス分析", "GA4 snapshot". PV・流入経路・デバイス別レポート対応。snapshot モードで週次 CSV を .claude/skills/analytics/ga4-improvement/reference/snapshots/ に全件保存.
+primary_agent: ga4-analyst
+co_agents: [seo-auditor]
 ---
 
 Google Analytics 4 (GA4) Data API からサイトのアクセスデータを取得する。

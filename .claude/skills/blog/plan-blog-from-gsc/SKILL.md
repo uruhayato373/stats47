@@ -2,6 +2,8 @@
 name: plan-blog-from-gsc
 description: GSC snapshot から順位 11-30 の中位クエリを抽出して 30-40 件のブログ記事企画ドラフトを生成。Use when user says "GSC企画", "GSC起点ブログ", "中位クエリ記事化".
 argument-hint: [週数] [本数]
+primary_agent: blog-planner
+co_agents: [article-writer, blog-editor]
 ---
 
 GSC snapshot N 週分 (デフォルト 5 週) を集計し、**順位 11-30 / 表示 ≥ 10 のクエリ** を抽出。テーマクラスター化・既存 metric 突合・既存 articles 突合を行い、`docs/20_ブログ記事企画/backlog/gsc-driven-YYYY-MM-DD.md` として企画ドラフトを保存する。

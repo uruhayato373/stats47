@@ -31,7 +31,7 @@ tags: [gis, content-plan, gis-cross, catalog]
 | **C** | 統計 × GIS | 統計 choropleth に GIS 点/面を重ねる | `/gis-cross` 地図ページ | (候補段階) |
 
 - 型 A/C は GIS データ品質に強く依存 → 実現性ゲート必須。視覚的独自性は高い
-- 型 B は stats47 の `correlations` テーブル (再計算後 約 1,887 メトリクス) を mining すれば
+- 型 B は stats47 の R2 correlation snapshot (`app/correlation/{top-pairs.json, by-ranking-key/<key>.json}`、Phase 6 で D1 `correlations` テーブルから移行済、約 1,887 メトリクス) を mining すれば
   GIS 作業ゼロで量産できる。最も低コスト・高スループット
 
 ## データ実現性ゲート (着手前に必須)
@@ -47,7 +47,7 @@ tags: [gis, content-plan, gis-cross, catalog]
 
 ### 統計メトリクス (型 B / C)
 
-- [ ] **stats47 に実在** — `metrics` テーブルに key があり、`stats_prefecture` に 47 県データがある
+- [ ] **stats47 に実在** — `metrics` テーブル (D1 cache) に key があり、R2 `app/stats/<key>/values.json` に 47 県データがある (Phase 6 で stats_prefecture → R2 移行済)
 - [ ] **指標の意味が明確** — 「率」「数」「容量」など単位と分母を取り違えない
 - [ ] **(相関の場合) 自明でない** — 同一指標の言い換えや補数関係 (trivial-pairs) でない
 

@@ -9,10 +9,8 @@ import * as schema from "../src/schema";
 const isDryRun = process.argv.includes("--dry-run");
 
 function findSqliteFile(): string | null {
-  const dir = path.resolve(
-    __dirname,
-    "../../../.local/d1/v3/d1/miniflare-D1DatabaseObject"
-  );
+  // ローカルビルド DB (SQLite): packages/database/.data/
+  const dir = path.resolve(__dirname, "../.data");
   if (!fs.existsSync(dir)) return null;
   const files = fs
     .readdirSync(dir)

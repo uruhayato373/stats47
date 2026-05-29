@@ -1,6 +1,7 @@
 ---
 name: fetch-instagram-data
 description: Instagram Graph API v21 から自アカウント (stats47jp) のプロフィール・投稿・インサイトを取得する。Use when user says "Instagramデータ", "Instagram分析", "IG確認". リーチ・エンゲージメント・投稿別パフォーマンス対応。
+primary_agent: instagram-strategist
 ---
 
 Instagram Graph API v21（Instagram Login 新フロー）から `stats47jp` の media・insights・プロフィールを取得する。browser-use スクレイピングではなく**純 API 実装**。

@@ -2,6 +2,8 @@
 name: publish-bulk-articles
 description: 複数のブログ記事を一括 publish。article.md frontmatter 読み取り → D1 INSERT → R2 sync → HTTP 検証 → 404 リトライまで自動。Use when user says "記事一括公開", "publish bulk", "まとめて公開".
 argument-hint: <slug1> <slug2> ... [--no-sync]
+primary_agent: article-writer
+co_agents: [blog-editor]
 ---
 
 `.local/r2/app/blog/<slug>/article.md` が用意済みの記事を **複数まとめて publish** する。

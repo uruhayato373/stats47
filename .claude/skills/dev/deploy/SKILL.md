@@ -2,6 +2,7 @@
 name: deploy
 description: develop ブランチを main へ PR + CI で反映してデプロイする。Use when user says "デプロイ", "deploy", "本番反映". テスト・型チェック・ビルド + ローカル D1/R2 sync 漏れ検知付き.
 disable-model-invocation: true
+primary_agent: devops-runner
 ---
 
 変更を develop → main (PR + CI 経由) へ反映して本番デプロイする。

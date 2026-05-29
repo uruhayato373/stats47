@@ -2,6 +2,7 @@
 name: generate-compare
 description: D1 から 2 地域比較の data.json を生成しローカル R2 に保存する。Use when user says "比較データ生成", "compare 生成", "2地域比較". テーマプリセット対応.
 disable-model-invocation: true
+primary_agent: sns-renderer
 ---
 
 D1 から 2 地域の比較データを取得し、`.local/r2/sns/compare/<areaA>-vs-<areaB>/` に data.json を保存する。
@@ -37,42 +38,40 @@ D1 から 2 地域の比較データを取得し、`.local/r2/sns/compare/<areaA
 
 ## 手順
 
-### Step 1: 地域名を取得
+Phase 6 (2026-05-27) で観測値ストアを R2 に移行済。データ取得は R2 `app/stats/<rankingKey>/values.json` から行う。
 
-ローカル D1 から地域名を取得する:
+### Step 1: 地域名を取得 (D1 prefectures master)
 
 ```sql
-SELECT area_name FROM observations
-WHERE area_code = '<areaCode>' AND area_type = 'prefecture'
-LIMIT 1;
+SELECT code AS area_code, name AS area_name
+FROM prefectures
+WHERE code = '<areaCode>';
 ```
 
-### Step 2: 各指標のデータを取得
+### Step 2: 各指標のデータを取得 (R2 から JS で)
 
-各 rankingKey について、両地域の最新年度データと順位を取得する:
+各 rankingKey について、R2 から payload を読んで最新年度データを抽出する:
 
-```sql
--- 最新年度のデータを取得
-SELECT area_code, area_name, value, year_code, year_name,
-       category_name, unit
-FROM observations
-WHERE category_code = '<rankingKey>'
-  AND area_type = 'prefecture'
-  AND area_code <> '00000'
-  AND year_code = (
-    SELECT MAX(year_code) FROM observations
-    WHERE category_code = '<rankingKey>'
-      AND area_type = 'prefecture'
-      AND area_code <> '00000'
-  )
-ORDER BY value DESC;
+```javascript
+const fs = require('fs');
+const path = '.local/r2/app/stats/<rankingKey>/values.json';
+const payload = JSON.parse(fs.readFileSync(path, 'utf-8'));
+
+// 47 県のみ (全国・地域コード除外)
+const prefRows = payload.rows.filter(r => /^\d{2}000$/.test(r.areaCode) && Number(r.areaCode.slice(0,2)) <= 47 && r.value != null);
+
+// 最新年度抽出
+const latestYear = [...new Set(prefRows.map(r => r.yearCode))].sort((a, b) => b.localeCompare(a))[0];
+const latestRows = prefRows.filter(r => r.yearCode === latestYear).sort((a, b) => Number(b.value) - Number(a.value));
+
+// title/unit は D1 metrics から別途取得 (上記 Step 1 と同じパターン)
 ```
 
 取得した全都道府県データから:
 - `valueA` / `valueB` = 対象地域の値
 - `rankA` / `rankB` = 値の降順での順位（1〜47）
-- `indicator` = ranking_items.title ?? category_name
-- `unit` = ranking_items.unit ?? ranking_data.unit
+- `indicator` = metrics.title (D1 cache, TS-config 由来)
+- `unit` = metrics.unit (D1 cache, TS-config 由来)
 
 ### Step 3: data.json を生成・保存
 

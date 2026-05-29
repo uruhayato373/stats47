@@ -108,7 +108,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
 const DISCOVERY_CARDS = [
   {
-    href: "/ranking",
+    href: "/themes",
     icon: TrendingUp,
     title: "1,800以上のランキング",
     description: "年収・人口・消費量から教育・医療・環境まで。地図やテーブルで比較できます。",
@@ -173,7 +173,7 @@ export default async function HomePage() {
                 </p>
                 <div className="mt-5 flex flex-wrap gap-2">
                   <Button asChild className="bg-white font-bold text-slate-900 hover:bg-white/90">
-                    <Link href="/ranking">
+                    <Link href="/themes">
                       <BarChart3 className="mr-1.5 h-4 w-4" />
                       ランキングを見る
                     </Link>
@@ -377,7 +377,7 @@ export default async function HomePage() {
             </div>
             <div className="flex flex-wrap items-center gap-2">
               <Button asChild>
-                <Link href="/ranking">CSV を見る</Link>
+                <Link href="/themes">CSV を見る</Link>
               </Button>
               <button
                 type="button"
@@ -405,16 +405,8 @@ export default async function HomePage() {
         <div className="mx-auto max-w-[1400px]">
           <NextUpGrid
             title="このサイトの主要ページ"
-            moreHref="/ranking"
+            moreHref="/themes"
             items={[
-              {
-                href: "/ranking",
-                title: "全ランキング一覧",
-                description: "1,800 以上の指標から探す",
-                badge: "RANKING",
-                previewImageUrl: `${HOME_PREVIEWS_BASE}/ranking.avif`,
-                previewVideoUrl: `${HOME_PREVIEWS_BASE}/ranking.webm`,
-              },
               {
                 href: "/themes",
                 title: "テーマダッシュボード",

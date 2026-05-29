@@ -1,6 +1,7 @@
 ---
 name: diagnose-youtube-shadowban
 description: YouTube チャンネルのシャドウバン疑いを事実ベースで診断し、docs/15_実験ログ/youtube/ に診断記録を出力する。Use when user says "シャドウバン確認", "YouTube診断", "動画再生されない", or detects views-drop. 新規投稿の 48h 再生数・トラフィックソース・登録者増減から判定し、疑い動画リストを Markdown で記録する。
+primary_agent: youtube-strategist
 ---
 
 YouTube チャンネル `UCdRiwDSX1aUd0dSd7Cs08Kg`（stats47jp）のシャドウバン疑いを事実ベースで診断し、回復アクションの起点となる診断レポートを `docs/15_実験ログ/youtube/recovery-{YYYY-MM-DD}.md` に出力する。

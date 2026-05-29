@@ -151,7 +151,7 @@ X のエンゲージメントはタイムラインの流速に依存する。フ
 - Remotion レンダリングの実行（sns-renderer に委譲）
 - Instagram / TikTok / YouTube のコンテンツ制作・投稿
 - ブログ記事・note 記事の制作
-- data.json の生成（sns-producer / data-pipeline に委譲）
+- data.json の生成（sns-producer / data-ingester に委譲）
 
 ## 連携パターン
 

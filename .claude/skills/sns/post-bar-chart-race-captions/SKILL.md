@@ -2,6 +2,8 @@
 name: post-bar-chart-race-captions
 description: Bar Chart Race 動画の全 SNS キャプションを一括生成しローカルに保存する。Use when user says "BCRキャプション", "バーチャートレースキャプション". config.json と data.json から生成.
 disable-model-invocation: true
+primary_agent: sns-metrics-sync
+co_agents: [youtube-strategist]
 ---
 
 Bar Chart Race 動画の全 SNS キャプションを一括生成してローカルに保存する。

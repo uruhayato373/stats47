@@ -1,0 +1,63 @@
+import type { MetricConfig } from "../types";
+
+export const monthlyAverageActualWorkingHoursMale: MetricConfig = {
+  "key": "monthly-average-actual-working-hours-male",
+  "title": "月間平均実労働時間数",
+  "unit": "時間",
+  "category": "laborwage",
+  "source": {
+    "kind": "estat",
+    "statsDataId": "0000010206",
+    "cdCat01": "#F0610103",
+    "displayName": "社会・人口統計体系",
+    "url": "https://www.stat.go.jp/data/ssds/index.htm",
+  },
+  "entities": [
+    "prefecture",
+  ],
+  "years": {
+    "from": 2024,
+    "to": 2024,
+  },
+  "yearFormat": "fiscal",
+  "visualization": {
+    "colorScheme": "interpolateBlues",
+    "colorSchemeType": "sequential",
+    "minValueType": "data-min",
+  },
+  "display": {
+    "conversionFactor": 1,
+    "decimalPlaces": 0,
+  },
+  "calculation": {
+    "isCalculated": false,
+    "normalizationOptions": [
+      {
+        "type": "per_population",
+        "label": "人口10万人あたり",
+        "unit": "時間/10万人",
+        "scaleFactor": 100000,
+        "decimalPlaces": 2,
+      },
+      {
+        "type": "per_area",
+        "label": "面積100km²あたり",
+        "unit": "時間/100km²",
+        "scaleFactor": 100,
+        "decimalPlaces": 2,
+      },
+      {
+        "type": "per_household",
+        "label": "1世帯あたり",
+        "unit": "時間/世帯",
+        "scaleFactor": 1,
+        "decimalPlaces": 4,
+      },
+    ],
+  },
+  "seoTitle": "月間平均実労働時間数ランキング都道府県【2024年】｜1位群馬県（180時間）",
+  "seoDescription": "2024年の月間平均実労働時間数の都道府県別ランキング。1位群馬県（180時間）、最下位東京都（170時間）で1.1倍の格差。地図やグラフで47都道府県を比較。",
+  "isActive": true,
+  "isFeatured": false,
+  "featuredOrder": 0,
+};

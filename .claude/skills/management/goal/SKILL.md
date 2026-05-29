@@ -6,6 +6,7 @@ description: >
   define(定義) → cycle(サイクル実行) → status(進捗確認) → close(完了 or 撤退) の流れで、サイクルごとに人間確認を挟みつつ goal 達成まで運用する。
   記録は docs/04_レビュー/goals/<slug>-YYYY-MM-DD.md に 1 goal 1 ファイルで append-only。
   Use when user asks to [/goal, 課題達成, 目標達成, サイクル運用, やり切る, 終了条件まで反復, PSI 改善のループ管理, goal 進捗].
+primary_agent: strategy-advisor
 ---
 
 **実行環境**: Node.js / macOS / Cloudflare 環境。既存 improvement 系スキルが整備済であることが前提。

@@ -1,20 +1,23 @@
 import "server-only";
 
-import { getDrizzle, statsPrefecture } from "@stats47/database/server";
+import { getDrizzle } from "@stats47/database/server";
+import { readStatsValues } from "@stats47/stats-r2";
 import { err, ok, type Result } from "@stats47/types";
 import type { AreaType } from "@stats47/types";
-import { eq, sql } from "drizzle-orm";
 
+/**
+ * 「サイト全体で最も新しい年」を返す。
+ * Phase 6 以降は D1 stats_* に SQL MAX をかける代わりに、
+ * 主要 metric (japanese-population) の R2 payload の meta.yearRange[1] を参照する。
+ */
 export async function findLatestYear(
-  areaType: AreaType,
-  db?: ReturnType<typeof getDrizzle>
+  _areaType: AreaType,
+  _db?: ReturnType<typeof getDrizzle>,
 ): Promise<Result<string | null, Error>> {
   try {
-    const drizzleDb = db ?? getDrizzle();
-    const result = await drizzleDb
-      .select({ maxYear: sql<string>`MAX(${statsPrefecture.yearCode})` })
-      .from(statsPrefecture)
-    return ok(result[0]?.maxYear || null);
+    const payload = await readStatsValues("japanese-population", "prefecture");
+    if (!payload?.meta.yearRange) return ok(null);
+    return ok(payload.meta.yearRange[1]);
   } catch (error) {
     return err(error instanceof Error ? error : new Error(String(error)));
   }

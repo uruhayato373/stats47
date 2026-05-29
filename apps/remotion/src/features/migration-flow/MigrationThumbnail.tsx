@@ -12,7 +12,11 @@ import type { Feature, FeatureCollection } from "geojson";
 import type { GeometryCollection, Topology } from "topojson-specification";
 import { FONT } from "@stats47/migration-flow";
 
-import { PREF_MIGRATION_2025 } from "./pref-net-2025";
+interface PrefMigration {
+  code: string;
+  name: string;
+  net: number;
+}
 
 const W = 1280;
 const H = 720;
@@ -56,9 +60,13 @@ export const MigrationThumbnail: React.FC = () => {
 
   useEffect(() => {
     let cancelled = false;
-    fetch(staticFile("prefecture.topojson"))
-      .then((r) => r.json())
-      .then((topo: Topology) => {
+    Promise.all([
+      fetch(staticFile("prefecture.topojson")).then((r) => r.json()),
+      fetch(staticFile("migration-flow/pref-net-2025.json")).then(
+        (r) => r.json() as Promise<{ entries: PrefMigration[] }>,
+      ),
+    ])
+      .then(([topo, netData]: [Topology, { entries: PrefMigration[] }]) => {
         if (cancelled) return;
         const geo = feature(
           topo,
@@ -73,7 +81,7 @@ export const MigrationThumbnail: React.FC = () => {
         );
         const pathGen = geoPath(proj);
         const netByCode = new Map(
-          PREF_MIGRATION_2025.map((p) => [p.code, p.net]),
+          netData.entries.map((p) => [p.code, p.net] as const),
         );
         const scale = scaleDiverging(divergingColor)
           .domain([-7000, 0, 7000])

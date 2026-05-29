@@ -30,7 +30,7 @@
 ## 担当外
 
 - コードレビュー（code-reviewer）
-- DB 操作（db-manager）
+- DB 操作（db-schema-manager / data-ingester / snapshot-exporter / r2-publisher）
 - コンテンツ制作（content-orchestrator 配下）
 - アナリティクス（seo-auditor）
 

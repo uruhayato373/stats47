@@ -29,6 +29,7 @@
 import { FONT_FAMILY } from "../shared/color";
 import { niceTicks, linearScale, formatTick } from "../shared/axis";
 import { makePlotArea, px } from "../shared/layout";
+import { svgThemeStyle } from "../shared/theme";
 import {
   StatsSchema,
   DimensionKey,
@@ -127,8 +128,8 @@ function generateVertical(
   const yGridLines = yTicks.map((v) => {
     const y = px(toSvgY(v));
     return [
-      `  <line x1="${px(plot.left)}" y1="${y}" x2="${px(plot.right)}" y2="${y}" stroke="#e5e7eb" stroke-width="1"/>`,
-      `  <text x="${(plot.left - 5).toFixed(1)}" y="${(toSvgY(v) + 3.5).toFixed(1)}" text-anchor="end" font-size="8.5" fill="#6b7280">${formatTick(v)}</text>`,
+      `  <line x1="${px(plot.left)}" y1="${y}" x2="${px(plot.right)}" y2="${y}" class="svg-grid" stroke-width="1"/>`,
+      `  <text x="${(plot.left - 5).toFixed(1)}" y="${(toSvgY(v) + 3.5).toFixed(1)}" text-anchor="end" font-size="8.5" class="svg-tick">${formatTick(v)}</text>`,
     ].join("\n");
   });
 
@@ -146,7 +147,7 @@ function generateVertical(
   xItems.forEach((x, xi) => {
     const cx = plot.left + groupW * xi + groupW / 2;
     xLabels.push(
-      `  <text x="${cx.toFixed(1)}" y="${(plot.bottom + 14).toFixed(1)}" text-anchor="middle" font-size="9" fill="#6b7280">${x.name}</text>`,
+      `  <text x="${cx.toFixed(1)}" y="${(plot.bottom + 14).toFixed(1)}" text-anchor="middle" font-size="9" class="svg-tick">${x.name}</text>`,
     );
 
     const rawVals = getValues(x.code);
@@ -203,18 +204,18 @@ function generateVertical(
     const color = STACKED_COLORS[si % STACKED_COLORS.length];
     return [
       `  <rect x="${lx.toFixed(1)}" y="${ly.toFixed(1)}" width="12" height="10" fill="${color}" fill-opacity="0.85" rx="2"/>`,
-      `  <text x="${(lx + 16).toFixed(1)}" y="${(ly + 8.5).toFixed(1)}" font-size="9" fill="#374151">${s.name}</text>`,
+      `  <text x="${(lx + 16).toFixed(1)}" y="${(ly + 8.5).toFixed(1)}" font-size="9" class="svg-axis">${s.name}</text>`,
     ].join("\n");
   });
 
   const unitLabel = unit
-    ? `  <text x="${px(plot.left)}" y="${(plot.top - 6).toFixed(1)}" font-size="8.5" fill="#9ca3af">(${unit})</text>`
+    ? `  <text x="${px(plot.left)}" y="${(plot.top - 6).toFixed(1)}" font-size="8.5" class="svg-tick">(${unit})</text>`
     : "";
 
   const titleLines = [
-    `  <text x="${W / 2}" y="22" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#111827">${title}</text>`,
+    `  <text x="${W / 2}" y="22" text-anchor="middle" font-size="12.5" font-weight="bold" class="svg-title">${title}</text>`,
     subtitle
-      ? `  <text x="${W / 2}" y="37" text-anchor="middle" font-size="9" fill="#6b7280">${subtitle}</text>`
+      ? `  <text x="${W / 2}" y="37" text-anchor="middle" font-size="9" class="svg-tick">${subtitle}</text>`
       : "",
   ]
     .filter(Boolean)
@@ -223,10 +224,11 @@ function generateVertical(
   return `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" font-family="${FONT_FAMILY}" role="img" aria-label="${ariaLabel}">
   <title>${title}</title>
   ${subtitle ? `<desc>${subtitle}</desc>` : ""}
-  <rect width="${W}" height="${H}" fill="#ffffff"/>
+${svgThemeStyle()}
+  <rect width="${W}" height="${H}" class="svg-bg"/>
 ${titleLines}
 ${unitLabel}
-  <rect x="${px(plot.left)}" y="${px(plot.top)}" width="${px(plot.width)}" height="${px(plot.height)}" fill="#f9fafb" stroke="#d1d5db" stroke-width="1"/>
+  <rect x="${px(plot.left)}" y="${px(plot.top)}" width="${px(plot.width)}" height="${px(plot.height)}" class="svg-plot svg-plot-border" stroke-width="1"/>
 ${yGridLines.join("\n")}
 ${zeroLine}
 ${bars.join("\n")}
@@ -281,7 +283,7 @@ function generateHorizontal(
 
     const barTop = MARGIN_TOP + xi * (BAR_H + BAR_GAP);
     rowLabels.push(
-      `  <text x="${(plotLeft - 6).toFixed(1)}" y="${(barTop + BAR_H / 2 + 4).toFixed(1)}" text-anchor="end" font-size="9.5" fill="#374151">${x.name}</text>`,
+      `  <text x="${(plotLeft - 6).toFixed(1)}" y="${(barTop + BAR_H / 2 + 4).toFixed(1)}" text-anchor="end" font-size="9.5" class="svg-axis">${x.name}</text>`,
     );
 
     let xCursor = plotLeft;
@@ -311,8 +313,8 @@ function generateHorizontal(
     const x = plotLeft + (v / 100) * plotWidth;
     const yBottom = MARGIN_TOP + xItems.length * (BAR_H + BAR_GAP) - BAR_GAP;
     return [
-      `  <line x1="${x.toFixed(1)}" y1="${MARGIN_TOP}" x2="${x.toFixed(1)}" y2="${yBottom}" stroke="#e5e7eb" stroke-width="1"/>`,
-      `  <text x="${x.toFixed(1)}" y="${(yBottom + 12).toFixed(1)}" text-anchor="middle" font-size="8" fill="#9ca3af">${v}%</text>`,
+      `  <line x1="${x.toFixed(1)}" y1="${MARGIN_TOP}" x2="${x.toFixed(1)}" y2="${yBottom}" class="svg-grid" stroke-width="1"/>`,
+      `  <text x="${x.toFixed(1)}" y="${(yBottom + 12).toFixed(1)}" text-anchor="middle" font-size="8" class="svg-tick">${v}%</text>`,
     ].join("\n");
   });
 
@@ -323,18 +325,18 @@ function generateHorizontal(
     const color = STACKED_COLORS[si % STACKED_COLORS.length];
     return [
       `  <rect x="${lx.toFixed(1)}" y="${legendY.toFixed(1)}" width="12" height="10" fill="${color}" fill-opacity="0.85" rx="2"/>`,
-      `  <text x="${(lx + 16).toFixed(1)}" y="${(legendY + 8.5).toFixed(1)}" font-size="9" fill="#374151">${s.name}</text>`,
+      `  <text x="${(lx + 16).toFixed(1)}" y="${(legendY + 8.5).toFixed(1)}" font-size="9" class="svg-axis">${s.name}</text>`,
     ].join("\n");
   });
 
   const unitNote = unit
-    ? `  <text x="${(plotRight).toFixed(1)}" y="${(MARGIN_TOP - 6).toFixed(1)}" text-anchor="end" font-size="8.5" fill="#9ca3af">(${unit})</text>`
+    ? `  <text x="${(plotRight).toFixed(1)}" y="${(MARGIN_TOP - 6).toFixed(1)}" text-anchor="end" font-size="8.5" class="svg-tick">(${unit})</text>`
     : "";
 
   const titleLines = [
-    `  <text x="${W / 2}" y="22" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#111827">${title}</text>`,
+    `  <text x="${W / 2}" y="22" text-anchor="middle" font-size="12.5" font-weight="bold" class="svg-title">${title}</text>`,
     subtitle
-      ? `  <text x="${W / 2}" y="37" text-anchor="middle" font-size="9" fill="#6b7280">${subtitle}</text>`
+      ? `  <text x="${W / 2}" y="37" text-anchor="middle" font-size="9" class="svg-tick">${subtitle}</text>`
       : "",
   ]
     .filter(Boolean)
@@ -343,7 +345,8 @@ function generateHorizontal(
   return `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" font-family="${FONT_FAMILY}" role="img" aria-label="${ariaLabel}">
   <title>${title}</title>
   ${subtitle ? `<desc>${subtitle}</desc>` : ""}
-  <rect width="${W}" height="${H}" fill="#ffffff"/>
+${svgThemeStyle()}
+  <rect width="${W}" height="${H}" class="svg-bg"/>
 ${titleLines}
 ${unitNote}
 ${rowLabels.join("\n")}

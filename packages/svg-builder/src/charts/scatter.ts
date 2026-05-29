@@ -9,6 +9,7 @@ import { niceTicks, paddedRange, linearScale, formatTick } from "../shared/axis"
 import { FONT_FAMILY, SCATTER_COLORS } from "../shared/color";
 import { makePlotArea, px } from "../shared/layout";
 import { linearRegression } from "../shared/regression";
+import { svgThemeStyle } from "../shared/theme";
 
 export interface ScatterPoint {
   name: string;
@@ -80,7 +81,7 @@ function renderBottomLegend(blocks: RegionBlock[], svgWidth: number, legendY: nu
     const cx = x + 4;
     const lines = [
       `  <circle cx="${px(cx)}" cy="${px(legendY)}" r="4" fill="${block.color}" fill-opacity="0.75"/>`,
-      `  <text x="${px(cx + 8)}" y="${px(legendY + 3)}" font-size="8" fill="#6b7280">${block.label}</text>`,
+      `  <text x="${px(cx + 8)}" y="${px(legendY + 3)}" font-size="8" class="svg-tick">${block.label}</text>`,
     ];
     x += itemWidths[i];
     return lines.join("\n");
@@ -128,16 +129,16 @@ export function generateScatterSvg(points: ScatterPoint[], options: ScatterOptio
   const xGridLines = xTicks.map((v) => {
     const x = px(toSvgX(v));
     return [
-      `  <line x1="${x}" y1="${plot.top}" x2="${x}" y2="${plot.bottom}" stroke="#e5e7eb" stroke-width="1"/>`,
-      `  <text x="${x}" y="${plot.bottom + 14}" text-anchor="middle" font-size="8.5" fill="#6b7280">${formatTick(v)}</text>`,
+      `  <line x1="${x}" y1="${plot.top}" x2="${x}" y2="${plot.bottom}" class="svg-grid" stroke-width="1"/>`,
+      `  <text x="${x}" y="${plot.bottom + 14}" text-anchor="middle" font-size="8.5" class="svg-tick">${formatTick(v)}</text>`,
     ].join("\n");
   });
 
   const yGridLines = yTicks.map((v) => {
     const y = px(toSvgY(v));
     return [
-      `  <line x1="${plot.left}" y1="${y}" x2="${plot.right}" y2="${y}" stroke="#e5e7eb" stroke-width="1"/>`,
-      `  <text x="${plot.left - 4}" y="${(parseFloat(y) + 3).toFixed(1)}" text-anchor="end" font-size="8.5" fill="#6b7280">${formatTick(v)}</text>`,
+      `  <line x1="${plot.left}" y1="${y}" x2="${plot.right}" y2="${y}" class="svg-grid" stroke-width="1"/>`,
+      `  <text x="${plot.left - 4}" y="${(parseFloat(y) + 3).toFixed(1)}" text-anchor="end" font-size="8.5" class="svg-tick">${formatTick(v)}</text>`,
     ].join("\n");
   });
 
@@ -162,7 +163,7 @@ export function generateScatterSvg(points: ScatterPoint[], options: ScatterOptio
   });
 
   const titleLines = [
-    `  <text x="${W / 2}" y="22" text-anchor="middle" font-size="14" font-weight="bold" fill="#333">${title}</text>`,
+    `  <text x="${W / 2}" y="22" text-anchor="middle" font-size="14" font-weight="bold" class="svg-title">${title}</text>`,
   ];
 
   // 凡例（下部中央）
@@ -173,16 +174,17 @@ export function generateScatterSvg(points: ScatterPoint[], options: ScatterOptio
   return `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" font-family="${FONT_FAMILY}" role="img" aria-label="${ariaLabel}">
   <title>${title}</title>
   ${subtitle ? `<desc>${subtitle}</desc>` : ""}
-  <rect width="${W}" height="${H}" fill="#ffffff"/>
+${svgThemeStyle()}
+  <rect width="${W}" height="${H}" class="svg-bg"/>
 ${titleLines.join("\n")}
   <!-- プロットエリア -->
-  <rect x="${plot.left}" y="${plot.top}" width="${plot.width}" height="${plot.height}" fill="#f9fafb" stroke="#d1d5db" stroke-width="1"/>
+  <rect x="${plot.left}" y="${plot.top}" width="${plot.width}" height="${plot.height}" class="svg-plot svg-plot-border" stroke-width="1"/>
   <!-- グリッド -->
 ${xGridLines.join("\n")}
 ${yGridLines.join("\n")}
   <!-- 軸ラベル -->
-  <text x="${(plot.left + plot.right) / 2}" y="${plot.bottom + 42}" text-anchor="middle" font-size="10" fill="#374151">${xLabel}</text>
-  <text x="14" y="${(plot.top + plot.bottom) / 2}" text-anchor="middle" font-size="10" fill="#374151" transform="rotate(-90,14,${(plot.top + plot.bottom) / 2})">${yLabel}</text>
+  <text x="${(plot.left + plot.right) / 2}" y="${plot.bottom + 42}" text-anchor="middle" font-size="10" class="svg-axis">${xLabel}</text>
+  <text x="14" y="${(plot.top + plot.bottom) / 2}" text-anchor="middle" font-size="10" class="svg-axis" transform="rotate(-90,14,${(plot.top + plot.bottom) / 2})">${yLabel}</text>
   <!-- 回帰直線 -->
 ${regLine}
   <!-- ドット -->

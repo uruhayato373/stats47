@@ -3,6 +3,7 @@ name: publish-note
 description: browser-use CLI で note.com エディタを自動操作し記事を下書き保存または予約投稿する。Use when user says "note投稿", "note公開", "note予約投稿". テキスト・アイキャッチ・タグを自動設定.
 disable-model-invocation: true
 argument-hint: "<slug> <M/D> <HH:MM> [, <slug2> <M/D> <HH:MM> ...]"
+primary_agent: note-manager
 ---
 
 browser-use CLI（Chrome プロファイル経由）で note.com エディタを自動操作し、記事を下書き保存または予約投稿する。**確認プロンプトなし**で全ステップを自動実行する。

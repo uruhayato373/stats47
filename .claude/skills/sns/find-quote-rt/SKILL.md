@@ -3,6 +3,7 @@ name: find-quote-rt
 description: X の直近3日以内のバズツイートを全テーマ並列検索し、鮮度×エンゲージメントで最上位候補を提示する。Use when user says "引用RT", "バズツイート検索", "quote RT". 元スレッドが活発なうちに引用RTで到達を最大化.
 disable-model-invocation: true
 argument-hint: "[テーマ] [--post]"
+primary_agent: x-strategist
 ---
 
 X の**直近3日以内**のバズツイートを全テーマ並列検索し、stats47 データとマッチングしてスコア上位の引用RT候補を提示する。投稿は手動確認後のセミオート運用。
@@ -211,7 +212,7 @@ DB にピッタリの指標がない場合、e-Stat API で直接データを探
 curl -s "https://api.e-stat.go.jp/rest/3.0/app/json/getStatsList?appId=$ESTAT_KEY&searchWord=職種+賃金&limit=5"
 ```
 
-e-Stat で良いデータが見つかった場合は `/register-ranking` でランキングアイテムに登録することを提案する。
+e-Stat で良いデータが見つかった場合は TS-config (`packages/data-configs/src/metrics/<key>.ts`) を追加 + `/sync-metrics-cache --apply` + `/page-data-batch --metric <key>` で登録することを提案する。
 
 ### Phase 5: 候補リスト提示
 

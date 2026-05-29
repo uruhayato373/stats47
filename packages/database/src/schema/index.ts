@@ -1,14 +1,13 @@
 // 3 層モデル
 export * from "./sources";
 export * from "./metrics"; // 旧 indicators (2026-05-04 リネーム)
-// stats は area 種別ごとに分割 (2026-05-05)
-export * from "./stats-prefecture";
-export * from "./stats-city";
-export * from "./stats-port";
+// Phase 6 (2026-05-27): stats_* / correlations は D1 から R2 へ全面移行
+// (`app/stats/<metric>/values.json` 等)。実テーブルは DROP 済。
+// Phase 7 (2026-05-28): schema 6 ファイル (stats-*, stats, correlations) を削除し、
+// 依存 reader 12 ファイルを R2 化または削除した。本ファイルからの再 export も停止。
 
-// 派生 (3 層から計算で生成、R2 snapshot で公開)
+// 派生 (D1 内に残る集計テーブル)
 export * from "./area_profiles";
-export * from "./correlations";
 
 // マスタ
 export * from "./prefectures";
@@ -62,3 +61,5 @@ export * from "./gis_datasets";
 // - taggings → articles.tags / metrics.tags (JSON列に直接格納, PR #215, 2026-05-05)
 // - page_component_assignments → page_components に統合 (page_type/page_key/sort_order を統合, PR #216, 2026-05-05)
 // - metric_texts → metrics に統合 (year_code/faq/regional_analysis/insights を metrics に移動, PR #217, 2026-05-05)
+// - stats_prefecture / stats_city / stats_port / stats_migration_flow / correlations / stats schema 削除
+//   (Phase 7, 2026-05-28) 観測値ストアは R2 (`app/stats/<metric>/*.json`)、相関は R2 snapshot (`app/correlation/*.json`)

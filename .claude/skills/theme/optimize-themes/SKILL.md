@@ -4,6 +4,7 @@ description: テーマダッシュボードを継続最適化する（GSC/GA4 + 
 disable-model-invocation: true
 argument-hint: "[theme-key] | --all"
 allowed-tools: Read, Grep, Glob, Bash, WebSearch, WebFetch, Agent
+primary_agent: theme-component-builder
 ---
 
 テーマダッシュボードをアクセスデータ・競合調査・トレンド調査・e-Stat データ調査の4軸で分析し、優先度付き改善アクションを出力する。
@@ -156,7 +157,7 @@ const existing = db.prepare(\`
 
 → `/design-theme-charts {theme-key}` で設計
 
-#### 3. 🟢 低優先: 未登録指標（要 data-pipeline）
+#### 3. 🟢 低優先: 未登録指標（要 data-ingester）
 | 指標 | 理由 |
 |------|------|
 | 開業率 | RESAS にあるが e-Stat 基本テーブルにない |

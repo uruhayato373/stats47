@@ -2,6 +2,7 @@
 name: post-compare-captions
 description: 2地域比較動画の全 SNS キャプションを一括生成しローカルに保存する。Use when user says "比較キャプション", "compare キャプション". versus/question テンプレート対応.
 disable-model-invocation: true
+primary_agent: sns-metrics-sync
 ---
 
 2地域比較（Compare）動画の全 SNS キャプションを一括生成してローカルに保存する。

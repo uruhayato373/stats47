@@ -18,6 +18,7 @@
 import { FONT_FAMILY } from "../shared/color";
 import { niceTicks, linearScale, formatTick } from "../shared/axis";
 import { makePlotArea, px } from "../shared/layout";
+import { svgThemeStyle } from "../shared/theme";
 import {
   StatsSchema,
   DimensionKey,
@@ -106,8 +107,8 @@ export function generateLineSvg(data: StatsSchema[], options: LineChartOptions):
   const yGridLines = yTicks.map((v) => {
     const y = px(toSvgY(v));
     return [
-      `  <line x1="${px(plot.left)}" y1="${y}" x2="${px(plot.right)}" y2="${y}" stroke="#e5e7eb" stroke-width="1"/>`,
-      `  <text x="${(plot.left - 5).toFixed(1)}" y="${(toSvgY(v) + 3.5).toFixed(1)}" text-anchor="end" font-size="8.5" fill="#6b7280">${formatTick(v)}</text>`,
+      `  <line x1="${px(plot.left)}" y1="${y}" x2="${px(plot.right)}" y2="${y}" class="svg-grid" stroke-width="1"/>`,
+      `  <text x="${(plot.left - 5).toFixed(1)}" y="${(toSvgY(v) + 3.5).toFixed(1)}" text-anchor="end" font-size="8.5" class="svg-tick">${formatTick(v)}</text>`,
     ].join("\n");
   });
 
@@ -117,8 +118,8 @@ export function generateLineSvg(data: StatsSchema[], options: LineChartOptions):
     const x = toSvgX(i).toFixed(1);
     const y = (plot.bottom + 14).toFixed(1);
     return rotateTick
-      ? `  <text x="${x}" y="${y}" font-size="8.5" fill="#6b7280" text-anchor="end" transform="rotate(-35,${x},${y})">${item.name}</text>`
-      : `  <text x="${x}" y="${y}" font-size="8.5" fill="#6b7280" text-anchor="middle">${item.name}</text>`;
+      ? `  <text x="${x}" y="${y}" font-size="8.5" class="svg-tick" text-anchor="end" transform="rotate(-35,${x},${y})">${item.name}</text>`
+      : `  <text x="${x}" y="${y}" font-size="8.5" class="svg-tick" text-anchor="middle">${item.name}</text>`;
   });
 
   // ゼロライン（Y 軸が負を含む場合）
@@ -163,7 +164,7 @@ export function generateLineSvg(data: StatsSchema[], options: LineChartOptions):
           const lx = startX + si * itemWidth;
           return [
             `  <rect x="${lx.toFixed(1)}" y="${(ly - 3).toFixed(1)}" width="12" height="3" fill="${color}" rx="1.5"/>`,
-            `  <text x="${(lx + 16).toFixed(1)}" y="${ly.toFixed(1)}" font-size="9" fill="#374151">${s.name}</text>`,
+            `  <text x="${(lx + 16).toFixed(1)}" y="${ly.toFixed(1)}" font-size="9" class="svg-axis">${s.name}</text>`,
           ].join("\n");
         })
         .join("\n");
@@ -175,7 +176,7 @@ export function generateLineSvg(data: StatsSchema[], options: LineChartOptions):
           const lx = (plot.right + 12).toFixed(1);
           return [
             `  <rect x="${lx}" y="${(plot.top + si * 22).toFixed(1)}" width="12" height="3" fill="${color}" rx="1.5"/>`,
-            `  <text x="${(plot.right + 27).toFixed(1)}" y="${(plot.top + si * 22 + 4).toFixed(1)}" font-size="9" fill="#374151">${s.name}</text>`,
+            `  <text x="${(plot.right + 27).toFixed(1)}" y="${(plot.top + si * 22 + 4).toFixed(1)}" font-size="9" class="svg-axis">${s.name}</text>`,
           ].join("\n");
         })
         .join("\n");
@@ -183,19 +184,19 @@ export function generateLineSvg(data: StatsSchema[], options: LineChartOptions):
   })();
 
   const unitLabel = unit
-    ? `  <text x="${px(plot.left)}" y="${(plot.top - 6).toFixed(1)}" font-size="8.5" fill="#9ca3af">(${unit})</text>`
+    ? `  <text x="${px(plot.left)}" y="${(plot.top - 6).toFixed(1)}" font-size="8.5" class="svg-tick">(${unit})</text>`
     : "";
   const xAxisLabel = xLabel
-    ? `  <text x="${((plot.left + plot.right) / 2).toFixed(1)}" y="${(H - 4).toFixed(1)}" text-anchor="middle" font-size="10" fill="#374151">${xLabel}</text>`
+    ? `  <text x="${((plot.left + plot.right) / 2).toFixed(1)}" y="${(H - 4).toFixed(1)}" text-anchor="middle" font-size="10" class="svg-axis">${xLabel}</text>`
     : "";
   const yAxisLabel = yLabel
-    ? `  <text x="13" y="${((plot.top + plot.bottom) / 2).toFixed(1)}" text-anchor="middle" font-size="10" fill="#374151" transform="rotate(-90,13,${((plot.top + plot.bottom) / 2).toFixed(1)})">${yLabel}</text>`
+    ? `  <text x="13" y="${((plot.top + plot.bottom) / 2).toFixed(1)}" text-anchor="middle" font-size="10" class="svg-axis" transform="rotate(-90,13,${((plot.top + plot.bottom) / 2).toFixed(1)})">${yLabel}</text>`
     : "";
 
   const titleLines = [
-    `  <text x="${W / 2}" y="22" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#111827">${title}</text>`,
+    `  <text x="${W / 2}" y="22" text-anchor="middle" font-size="12.5" font-weight="bold" class="svg-title">${title}</text>`,
     subtitle
-      ? `  <text x="${W / 2}" y="37" text-anchor="middle" font-size="9" fill="#6b7280">${subtitle}</text>`
+      ? `  <text x="${W / 2}" y="37" text-anchor="middle" font-size="9" class="svg-tick">${subtitle}</text>`
       : "",
   ]
     .filter(Boolean)
@@ -204,11 +205,12 @@ export function generateLineSvg(data: StatsSchema[], options: LineChartOptions):
   return `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" font-family="${FONT_FAMILY}" role="img" aria-label="${ariaLabel}">
   <title>${title}</title>
   ${subtitle ? `<desc>${subtitle}</desc>` : ""}
-  <rect width="${W}" height="${H}" fill="#ffffff"/>
+${svgThemeStyle()}
+  <rect width="${W}" height="${H}" class="svg-bg"/>
 ${titleLines}
 ${unitLabel}
   <!-- プロットエリア -->
-  <rect x="${px(plot.left)}" y="${px(plot.top)}" width="${px(plot.width)}" height="${px(plot.height)}" fill="#f9fafb" stroke="#d1d5db" stroke-width="1"/>
+  <rect x="${px(plot.left)}" y="${px(plot.top)}" width="${px(plot.width)}" height="${px(plot.height)}" class="svg-plot svg-plot-border" stroke-width="1"/>
   <!-- Y グリッド -->
 ${yGridLines.join("\n")}
 ${zeroLine}

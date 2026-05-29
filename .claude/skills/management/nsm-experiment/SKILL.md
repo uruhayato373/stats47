@@ -7,6 +7,7 @@ description: >
   .claude/state/experiments.json を状態保存先に使い、playbook + rubric で意思決定を支援する。
   Use when user asks to [NSM 実験, 仮説検証, /nsm-experiment, 実験提案, 効果測定,
   PDCA サイクル, 作業継続, 残作業確認, pending 作業, GSC インデックスリクエスト].
+primary_agent: strategy-advisor
 ---
 
 **実行環境**: macOS / Windows 両対応。GA4 + GSC の計測基盤（`metrics-reader.mjs` で構築済み）が前提。

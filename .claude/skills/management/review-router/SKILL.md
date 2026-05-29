@@ -2,6 +2,7 @@
 name: review-router
 description: 「レビューして」と言われたとき、対象・文脈・日付から適切なレビュースキルを自動選択して実行する。レビュー系スキルのルーティングガイド。
 user-invocable: false
+primary_agent: strategy-advisor
 ---
 
 「レビューして」「チェックして」「確認して」等のレビュー依頼を受けたとき、文脈から最適なレビュースキルを判断し実行する。
@@ -12,9 +13,9 @@ user-invocable: false
 
 | 文脈・対象 | 実行スキル | 例 |
 |---|---|---|
-| ブログ記事のファイルパス | `/expert-review` | 「この記事をレビューして」 |
+| ブログ記事のファイルパス | `/blog-review --mode expert` | 「この記事をレビューして」 |
 | ブログ記事の企画・アイデア | `/panel-review` | 「この企画をレビューして」 |
-| 記事を公開前にチェック | `/proofread-article` | 「公開前チェックして」 |
+| 記事を公開前にチェック | `/blog-review --mode proofread` | 「公開前チェックして」 |
 | 設計書・計画書・ロードマップ | `/critical-review` | 「この計画をレビューして」 |
 | Web ページの URL | `/ui-panel-review` | 「このページのUIをレビューして」 |
 | UIの整合性・一貫性 | `/review-feature --scope ui-consistency` | 「UIの整合性をレビューして」「画面がバラバラ」 |
@@ -43,7 +44,7 @@ user-invocable: false
 ### 3. 複合的な依頼の場合
 
 「記事を書いたのでレビューして公開して」のような複合依頼:
-1. まず `/proofread-article` で公開前チェック
+1. まず `/blog-review --mode proofread` で公開前チェック
 2. 問題なければ `/publish-article` を提案
 
 「今週の計画を立ててレビューして」:
@@ -80,9 +81,9 @@ user-invocable: false
 
 | スキル | 対象 | トリガー | 出力先 |
 |---|---|---|---|
-| `/expert-review` | ブログ記事（データ正確性） | 記事パス指定 | `docs/04_レビュー/expert-review/{slug}.md` |
+| `/blog-review --mode expert` | ブログ記事（データ正確性） | 記事パス指定 | `docs/04_レビュー/expert-review/{slug}.md` |
 | `/panel-review` | ブログ記事企画 | 企画・アイデア | stdout |
-| `/proofread-article` | 記事公開前チェック | 公開前 | stdout |
+| `/blog-review --mode proofread` | 記事公開前チェック | 公開前 | stdout |
 | `/critical-review` | 設計書・計画書 | ドキュメントパス指定 | `docs/04_レビュー/critical-review/YYYY-MM-DD-{topic}.md` |
 | `/ui-panel-review` | Web ページ UI/UX | URL 指定 | stdout |
 | `/review-feature --scope app <route\|all>` | App Router 層の品質 | ルート指定 or all | `docs/04_レビュー/dev-review/app-YYYY-MM-DD.md` |

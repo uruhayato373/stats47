@@ -1,6 +1,8 @@
 ---
 name: fetch-gsc-data
 description: Google Search Console API から検索パフォーマンスデータを取得する。Use when user says "GSCデータ", "検索パフォーマンス", "検索クエリ分析", "GSC snapshot". クエリ・ページ・デバイス・国別レポート対応。snapshot モードで週次 CSV を .claude/skills/analytics/gsc-improvement/reference/snapshots/ に全件保存.
+primary_agent: gsc-analyst
+co_agents: [theme-designer, seo-auditor]
 ---
 
 Google Search Console API からサイトの検索パフォーマンスデータを取得する。

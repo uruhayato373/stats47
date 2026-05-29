@@ -1,12 +1,37 @@
 ---
 name: run-correlation-batch
-description: 相関分析バッチを実行し R2 スナップショットに書き出す（ローカルに残さない）。Use when user says "相関分析", "run-correlation-batch", "相関バッチ". ドライラン・件数制限対応.
+description: ⚠️ DEPRECATED (Phase 7 で実装削除)。相関再計算は /recompute-correlations (Phase 8 実装予定) を参照。Use when user says "相関分析", "run-correlation-batch".
 argument-hint: [--dry-run] [--limit N]
 disable-model-invocation: true
+primary_agent: snapshot-exporter
 ---
+
+> ⚠️ **DEPRECATED (2026-05-28, Phase 7)**
+>
+> 本 skill が依存していた実装 (`packages/correlation/src/services/run-batch-correlation.ts`、
+> `exporters/correlation-snapshot.ts`、`per-key-snapshot.ts`、`repositories/upsert-correlation.ts` 等) は
+> Phase 6 で `correlations` D1 テーブルを DROP したのに伴い、Phase 7 (2026-05-28) で削除済み。
+>
+> **相関再計算の後継**: `/recompute-correlations` (R2 stats → D1 temp → Pearson r → R2 snapshot → temp DROP)。
+> ただし現状は SKILL.md のみで実装は Phase 8 待ち ([feature-backlog.md](../../../../docs/50_Issues/feature-backlog.md))。
+> 既存の相関 snapshot (`app/correlation/{top-pairs,stats}.json`, `by-ranking-key/<key>.json`) は
+> Phase 6 移行前の D1 から派生したものを継続配信中。
+>
+> 以下の旧手順は歴史的記録。実行不可。
 
 相関分析バッチを実行し、結果を R2 スナップショット（`snapshots/correlation/`）に書き出す。
 ローカル D1 の容量を節約するため、バッチ完了後にローカルの `correlations` テーブルを DROP + VACUUM する。
+
+## ⚠ Freeze ガード (必須、最初に実行)
+
+```bash
+if [ -f .claude/state/phase6-freeze.json ]; then
+  jq -r .abortMessage .claude/state/phase6-freeze.json >&2
+  exit 1
+fi
+```
+
+Phase 6 進行中は本 skill 使用禁止。代替: Phase 6.6 完了後、`/recompute-correlations` (R2 → temp → 計算 → R2 snapshot → DROP の新 skill) を使用予定。
 
 ## 前提
 

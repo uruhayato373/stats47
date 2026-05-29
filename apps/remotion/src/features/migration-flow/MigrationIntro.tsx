@@ -15,7 +15,11 @@ import type {
   PopulationRecord,
 } from "../population-choropleth/types";
 import { computeDivergingPathsWithScale } from "../../shared/utils/choropleth-diverging";
-import { PREF_MIGRATION_2025 } from "./pref-net-2025";
+interface PrefMigration {
+  code: string;
+  name: string;
+  net: number;
+}
 
 const FRAME_W = 1920;
 const MAP_W = 960;
@@ -59,14 +63,18 @@ export const MigrationIntro: React.FC<{ theme?: ThemeName }> = ({
 
   useEffect(() => {
     let cancelled = false;
-    fetch(staticFile("prefecture.topojson"))
-      .then((r) => r.json())
-      .then((topo) => {
+    Promise.all([
+      fetch(staticFile("prefecture.topojson")).then((r) => r.json()),
+      fetch(staticFile("migration-flow/pref-net-2025.json")).then(
+        (r) => r.json() as Promise<{ entries: PrefMigration[] }>,
+      ),
+    ])
+      .then(([topo, netData]) => {
         if (cancelled) return;
         const scale = scaleDiverging(divergingColor)
           .domain([-NET_DOMAIN, 0, NET_DOMAIN])
           .clamp(true);
-        const data: PopulationRecord[] = PREF_MIGRATION_2025.map((p) => ({
+        const data: PopulationRecord[] = netData.entries.map((p) => ({
           areaCode: p.code,
           areaName: p.name,
           pop2025: 0,

@@ -4,6 +4,8 @@ description: Lighthouse CLI でパフォーマンス測定しDB蓄積する。Us
 disable-model-invocation: true
 argument-hint: "[--url PATH] [--type TYPE] [--strategy mobile|desktop|both] [--dry-run]"
 allowed-tools: Read, Bash, Grep
+primary_agent: performance-auditor
+co_agents: [seo-auditor]
 ---
 
 Lighthouse CLI をローカル実行して stats47.jp の各ページのパフォーマンスを測定し、`.claude/skills/analytics/performance-improvement/snapshots/YYYY-MM-DD/metrics.csv` に蓄積する。閾値は同ディレクトリの `budgets.json` を参照。API キー不要・レート制限なし。測定結果はマークダウンテーブルで出力する。

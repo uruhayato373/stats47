@@ -22,13 +22,15 @@ done
 TSX="npx tsx -r ./packages/ranking/src/scripts/setup-cli.js"
 
 # (label, script_path) のペアで定義
+# remotion-static は Remotion 用 public/<feature>/*.json を D1 から再生成 (R2 push 対象外、ローカル file のみ更新)
+#
+# Phase 6 (2026-05-27): stats_* テーブル DROP に伴い、ranking-values / ranking-normalized-values /
+# ranking-download / correlation の各 export task は廃止。観測値は app/stats/<metric>/*.json として
+# /page-data-batch (Phase 6.4) で R2 に直接書込まれる。
 declare -a TASKS=(
+  "remotion-static|apps/remotion/scripts/export-d1-to-remotion-static.ts --feature all"
   "master|packages/ranking/src/scripts/export-master-snapshots.ts"
   "ai-content|packages/ai-content/src/scripts/export-snapshot.ts"
-  "correlation|packages/correlation/src/scripts/export-snapshot.ts"
-  "ranking-values|packages/ranking/src/scripts/export-ranking-values-snapshots.ts"
-  "ranking-normalized-values|packages/ranking/src/scripts/export-ranking-normalized-values-snapshots.ts"
-  "ranking-download|packages/ranking/src/scripts/export-ranking-download-snapshots.ts"
   "area-profile|packages/area-profile/src/scripts/export-snapshot.ts"
   "city-profile|packages/area-profile/src/scripts/export-city-snapshot.ts"
   "blog|apps/web/scripts/export-blog-snapshot.ts"

@@ -2,6 +2,7 @@
 name: edit-note-draft
 description: note 記事の原稿をチェックし修正理由付きで改善案を出力する。Use when user says "note編集", "原稿チェック", "note校正". stats47.jp 誘導設計の検証も含む.
 disable-model-invocation: true
+primary_agent: note-manager
 ---
 
 note 記事（B/C/D シリーズ）の原稿をチェックし、修正理由付きで改善案を出力する。

@@ -1,5 +1,7 @@
 # SEO Auditor Agent
 
+> **[移行ステータス]** 本 agent は `gsc-analyst` (GSC + indexing API) + `ga4-analyst` (GA4) + `performance-auditor` (PSI / Lighthouse / Cloudflare cost / SEO 監査) + `adsense-analyst` (AdSense / アフィリエイト) に 4 分割中。 移行期間中は本 agent を orchestrator として利用可能だが、 新規作業は分割先の細粒度 agent を推奨。 効果判定 / 改善ログ status 更新は `improvement-triage` 経由で行う。 詳細: `.claude/agents/README.md` 移行ステータス表。
+
 サイト SEO とパフォーマンス監査を担当する分析エージェント。GSC/GA4 データに基づくサイト構造・インデックス・Core Web Vitals の監視と改善に特化する。
 
 ## 担当範囲
@@ -27,7 +29,7 @@
 ## 担当外
 
 - ブログ記事の編集・作成（blog-editor に委譲）
-- ランキングデータの登録（data-pipeline）
+- ランキングデータの登録（data-ingester）
 - コンテンツ制作（content-orchestrator 配下）
 - デプロイ（devops-runner）
 - コードレビュー（code-reviewer）
@@ -157,7 +159,7 @@ GSC インデックス問題の継続改善は本エージェントが主担当�
 ### 週次オペレーション（月曜）
 
 1. ユーザー作業: GSC → `sc-domain:stats47.jp` → インデックス作成 → ページ → エクスポート → zip を `~/Downloads/` で解凍（`stats47.jp-Coverage-YYYY-MM-DD/` が生成される）
-2. `/weekly-review` 実行（Phase 1 Agent C から自動チェーン）:
+2. weekly-review 実行（strategy-advisor 主管、Phase 1 Agent C から自動チェーン）:
    - `/fetch-gsc-data last28d query snapshot <YYYY-Www>` が Downloads 取り込み → API 全件取得 → snapshots 保存を一気に実行
    - `/gsc-improvement observe` が Observation Log に新行追記 + アラート判定
 

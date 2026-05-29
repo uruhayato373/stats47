@@ -7,7 +7,14 @@
  * Usage:
  *   node .claude/scripts/blog/generate-article-charts.mjs --slug <slug>            # 生成 + placeholder 置換
  *   node .claude/scripts/blog/generate-article-charts.mjs --slug <slug> --dry-run  # JSON syntax 検証のみ
- *   node .claude/scripts/blog/generate-article-charts.mjs --slug <slug> --validate # 生成済 SVG syntax 検証のみ (CI 用)
+ *   node .claude/scripts/blog/generate-article-charts.mjs --slug <slug> --validate # SVG 品質検証 (CI 用)
+ *
+ * --validate の検査内容:
+ *   data/*.svg と article.md インライン <svg> の両方を対象に、
+ *   - ERROR (CI fail): 構造不正 (viewBox/width/height/閉じタグ欠落)
+ *   - WARN  (可視化のみ): dark mode 非対応 (@media prefers-color-scheme:dark 欠落) /
+ *     theme 依存色の inline 直書き (svg-* class にすべき)
+ *   → 品質統一の決定的ゲート。判断は不要 (コードで一律検査)。
  *
  * チャート種別 (ファイル名パターン):
  *   *-prefecture-rankings.json → bar chart (上位 10 + 下位 10)   [実装済み]
@@ -26,6 +33,8 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
+import { lintSvgContent, extractInlineSvgs } from "../lib/svg-lint.mjs";
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const PROJECT_ROOT = path.resolve(__dirname, "..", "..", "..");
@@ -39,13 +48,16 @@ const getArg = (flag) => {
 const SLUG = getArg("--slug");
 const DRY_RUN = args.includes("--dry-run");
 const VALIDATE = args.includes("--validate");
+// --base: 記事ルート (slug の親)。デフォルトは docs draft。公開済記事の chart 再生成は
+//          `--base .local/r2/app/blog` で R2 data を直接対象にできる (Phase 7 で追加)。
+const BASE = getArg("--base") || "docs/21_ブログ記事原稿";
 
 if (!SLUG) {
-  console.error("Usage: --slug <slug> [--dry-run|--validate]");
+  console.error("Usage: --slug <slug> [--base <dir>] [--dry-run|--validate]");
   process.exit(1);
 }
 
-const ARTICLE_DIR = path.join(PROJECT_ROOT, "docs/21_ブログ記事原稿", SLUG);
+const ARTICLE_DIR = path.join(PROJECT_ROOT, BASE, SLUG);
 const DATA_DIR = path.join(ARTICLE_DIR, "data");
 const ARTICLE_MD = path.join(ARTICLE_DIR, "article.md");
 
@@ -54,9 +66,13 @@ if (!fs.existsSync(ARTICLE_DIR)) {
   process.exit(1);
 }
 if (!fs.existsSync(DATA_DIR)) {
-  console.warn(`[warn] Data dir not found: ${DATA_DIR}`);
-  console.warn(`[warn] Nothing to process. Exiting 0 (no data dir is a no-op).`);
-  process.exit(0);
+  // --validate は data/ が無くても article.md のインライン SVG を検査するため継続。
+  // それ以外（生成・dry-run）は data/ が無ければ no-op。
+  if (!VALIDATE) {
+    console.warn(`[warn] Data dir not found: ${DATA_DIR}`);
+    console.warn(`[warn] Nothing to process. Exiting 0 (no data dir is a no-op).`);
+    process.exit(0);
+  }
 }
 
 // ---------- helpers ----------
@@ -143,23 +159,20 @@ function genStubSvg(chartType, name) {
 </svg>`;
 }
 
-// ---------- SVG syntax 検証 ----------
+// ---------- SVG lint (共有ライブラリ) ----------
+// lint ロジックは .claude/scripts/lib/svg-lint.mjs に集約 (audit-chart-quality.mjs と共有)。
+
+/** ファイルパスから SVG を読んで lint する */
 function validateSvg(svgPath) {
-  if (!fs.existsSync(svgPath)) return { ok: false, reason: "file not found" };
-  const content = fs.readFileSync(svgPath, "utf8").trim();
-  if (!content.startsWith("<svg") && !content.startsWith("<?xml")) {
-    return { ok: false, reason: "does not start with <svg or <?xml" };
-  }
-  if (!content.endsWith("</svg>")) {
-    return { ok: false, reason: "does not end with </svg>" };
-  }
-  if (!/viewBox\s*=/.test(content)) {
-    return { ok: false, reason: "missing viewBox attribute" };
-  }
-  if (!/width\s*=/.test(content) || !/height\s*=/.test(content)) {
-    return { ok: false, reason: "missing width or height attribute" };
-  }
-  return { ok: true };
+  if (!fs.existsSync(svgPath)) return { errors: ["file not found"], warnings: [] };
+  const content = fs.readFileSync(svgPath, "utf8");
+  return lintSvgContent(content);
+}
+
+/** article.md からインライン <svg> を抽出する (ファイルパス版) */
+function extractInlineSvgsFromFile(mdPath) {
+  if (!fs.existsSync(mdPath)) return [];
+  return extractInlineSvgs(fs.readFileSync(mdPath, "utf8"));
 }
 
 // ---------- placeholder 置換 ----------
@@ -184,10 +197,10 @@ function replacePlaceholders(chartNames) {
 }
 
 // ---------- main ----------
-const jsonFiles = fs
-  .readdirSync(DATA_DIR)
-  .filter((f) => f.endsWith(".json"))
-  .sort();
+// validate 時は data/ 不在を許容（article.md インライン SVG 検査のため）。
+const jsonFiles = fs.existsSync(DATA_DIR)
+  ? fs.readdirSync(DATA_DIR).filter((f) => f.endsWith(".json")).sort()
+  : [];
 
 if (jsonFiles.length === 0) {
   warn(`No JSON files found in ${DATA_DIR}`);
@@ -225,32 +238,65 @@ if (DRY_RUN) {
   process.exit(0);
 }
 
-// --validate: check existing SVG files
+// --validate: 構造 (ERROR) + dark mode/パレット (WARN) を data/*.svg と
+// article.md インライン SVG の両方で検査する。
 if (VALIDATE) {
-  const svgFiles = fs.readdirSync(DATA_DIR).filter((f) => f.endsWith(".svg"));
-  log(`[info] Found ${svgFiles.length} SVG file(s) to validate`);
-  let svgOk = 0;
-  let svgNg = 0;
-  if (svgFiles.length === 0) {
-    warn("no SVG files to validate (data/*.svg not generated yet)");
+  let errorCount = 0;
+  let warnCount = 0;
+  let targetCount = 0;
+
+  const report = (label, { errors, warnings }) => {
+    targetCount++;
+    if (errors.length === 0 && warnings.length === 0) {
+      log(`  [ok  ] ${label}`);
+      return;
+    }
+    for (const e of errors) {
+      errorCount++;
+      err(`  [err ] ${label}  ${e}`);
+    }
+    for (const w of warnings) {
+      warnCount++;
+      warn(`  [warn] ${label}  ${w}`);
+    }
+  };
+
+  // 1. data/*.svg (生成物)
+  const svgFiles = fs.existsSync(DATA_DIR)
+    ? fs.readdirSync(DATA_DIR).filter((f) => f.endsWith(".svg"))
+    : [];
+  log(`[info] data/*.svg: ${svgFiles.length} file(s)`);
+  for (const f of svgFiles) {
+    report(`data/${f}`, validateSvg(path.join(DATA_DIR, f)));
+  }
+
+  // 2. article.md インライン <svg> (手書き — 品質バラつきの主因)
+  const inlineSvgs = extractInlineSvgsFromFile(ARTICLE_MD);
+  log(`[info] article.md inline <svg>: ${inlineSvgs.length} block(s)`);
+  inlineSvgs.forEach((svg, i) => {
+    report(`article.md inline-svg #${i + 1}`, lintSvgContent(svg));
+  });
+
+  if (targetCount === 0) {
+    warn("検査対象の SVG なし (data/*.svg もインライン SVG も無い)");
     log(`[done] validate: 0 svg, JSON ok=${jsonOkCount}`);
     process.exit(0);
   }
-  for (const f of svgFiles) {
-    const result = validateSvg(path.join(DATA_DIR, f));
-    if (result.ok) {
-      svgOk++;
-      log(`  [ok ] ${f}`);
-    } else {
-      svgNg++;
-      err(`  [ng ] ${f}  ${result.reason}`);
-    }
+
+  log(
+    `[done] validate: ${targetCount} target(s), errors=${errorCount}, warnings=${warnCount}`,
+  );
+  if (warnCount > 0) {
+    warn(
+      "WARN は描画は壊れないが品質基準未達 (dark mode 非対応 / theme 色 inline)。" +
+        " svg-builder 経由で再生成すると解消する。",
+    );
   }
-  if (svgNg > 0) {
-    err(`SVG validation failed: ${svgNg} file(s) invalid`);
+  // ERROR のみ CI を fail させる (WARN は可視化のみ、既存資産を壊さない)
+  if (errorCount > 0) {
+    err(`SVG validation failed: ${errorCount} error(s)`);
     process.exit(3);
   }
-  log(`[done] validate: ${svgOk} SVG file(s) valid`);
   process.exit(0);
 }
 

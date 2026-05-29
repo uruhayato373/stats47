@@ -30,14 +30,13 @@ import { themes, themeMetrics } from "../src/schema/themes";
 const isDryRun = process.argv.includes("--dry-run");
 
 function findSqliteFile(): string {
-  const fixed = path.resolve(
-    __dirname,
-    "../../../.local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite",
-  );
+  // ローカルビルド DB (SQLite): packages/database/.data/stats47.sqlite
+  const fixed = path.resolve(__dirname, "../.data/stats47.sqlite");
   if (!fs.existsSync(fixed)) {
     throw new Error(
-      `ローカル D1 が見つかりません: ${fixed}\n` +
-        `先に \`npm run dev\` 等で wrangler が D1 ファイルを生成してから実行してください。`,
+      `ローカルビルド DB (SQLite) が見つかりません: ${fixed}\n` +
+        `先に \`npm run db:pull --workspace=packages/r2-storage\` (R2 から取得) ` +
+        `または \`npm run db:migrate:local --workspace=packages/database\` (空 schema 作成) を実行してください。`,
     );
   }
   return fixed;

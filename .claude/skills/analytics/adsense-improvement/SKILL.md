@@ -1,6 +1,7 @@
 ---
 name: adsense-improvement
 description: Google AdSense の広告収益・RPM・CTR・ビューアビリティを docs/05_改善ログ/adsense.md で追跡し、週次 snapshot と施策の効果判定を記録する。Use when user says "AdSense改善", "広告収益改善", "RPM改善", "AdSense記録".
+primary_agent: adsense-analyst
 ---
 
 AdSense の週次メトリクス（Earnings / Page RPM / CTR / Impressions / Active View）を **`docs/05_改善ログ/adsense.md` で時系列追跡**し、打った施策と効果を記録するスキル。

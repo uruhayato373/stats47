@@ -2,6 +2,7 @@
 name: generate-bar-chart-race
 description: D1 から Bar Chart Race 用 config.json と data.json を生成しローカル R2 に保存する。Use when user says "バーチャートレース生成", "bar chart race 作成". 全年度データを取得してフレーム化.
 disable-model-invocation: true
+primary_agent: youtube-strategist
 ---
 
 D1 から Bar Chart Race 用の全年度データを取得し、`.local/r2/sns/bar-chart-race/<rankingKey>/` に config.json と data.json を保存する。
@@ -34,37 +35,44 @@ D1 から Bar Chart Race 用の全年度データを取得し、`.local/r2/sns/b
 sqlite3 .local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite
 ```
 
-#### 1a: メタデータ取得
+Phase 6 (2026-05-27) で観測値ストアを R2 に移行済。データ取得は R2 `app/stats/<rankingKey>/values.json` から行う。
+
+#### 1a: メタデータ取得 (D1 metrics cache)
 
 ```sql
-SELECT category_name, unit
-FROM observations
-WHERE category_code = '<rankingKey>'
-  AND area_type = 'prefecture'
+SELECT title AS category_name, unit
+FROM metrics
+WHERE key = '<rankingKey>'
 LIMIT 1;
 ```
 
-#### 1b: 年度一覧確認
+#### 1b: R2 観測値ファイル確認
 
-```sql
-SELECT DISTINCT year_code, year_name
-FROM observations
-WHERE category_code = '<rankingKey>'
-  AND area_type = 'prefecture'
-  AND area_code <> '00000'
-ORDER BY year_code;
+```bash
+ls .local/r2/app/stats/<rankingKey>/values.json
+# なければ /page-data-batch --metric <rankingKey> で投入
 ```
 
-#### 1c: 全年度・全都道府県データ取得
+#### 1c: 全年度・全都道府県データ取得 (R2 から JS で)
 
-```sql
-SELECT year_code, year_name, area_name, CAST(value AS INTEGER) as value
-FROM observations
-WHERE category_code = '<rankingKey>'
-  AND area_type = 'prefecture'
-  AND area_code <> '00000'
-ORDER BY year_code, value DESC;
+```javascript
+const fs = require('fs');
+const payload = JSON.parse(fs.readFileSync('.local/r2/app/stats/<rankingKey>/values.json', 'utf-8'));
+
+// 47 都道府県 (全国・地域コードは除外)
+const filtered = payload.rows.filter(r => /^\d{2}000$/.test(r.areaCode) && Number(r.areaCode.slice(0,2)) <= 47);
+
+// 年度別グループ + 値降順
+const byYear = {};
+for (const r of filtered) {
+  if (r.value == null) continue;
+  if (!byYear[r.yearCode]) byYear[r.yearCode] = [];
+  byYear[r.yearCode].push({ yearCode: r.yearCode, yearName: r.yearName, areaName: r.areaName, value: Math.round(Number(r.value)) });
+}
+for (const y of Object.keys(byYear)) byYear[y].sort((a, b) => b.value - a.value);
 ```
+
+DISTINCT year_code: `Object.keys(byYear).sort()`
 
 ### Step 2: config.json を生成・更新
 

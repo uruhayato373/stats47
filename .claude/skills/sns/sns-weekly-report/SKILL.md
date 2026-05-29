@@ -2,6 +2,7 @@
 name: sns-weekly-report
 description: `.claude/skills/analytics/sns-metrics-improvement/snapshots` の週次 CSV スナップショットから SNS パフォーマンスレポートを Markdown で生成する。Use when user says "SNSレポート", "週次レポート", "SNS分析". プラットフォーム横断で集計.
 disable-model-invocation: true
+primary_agent: sns-metrics-sync
 ---
 
 `.claude/skills/analytics/sns-metrics-improvement/snapshots/YYYY-MM-DD/metrics.csv`（`/update-sns-metrics` が蓄積）を集計し、週次レポートを Markdown で生成する。

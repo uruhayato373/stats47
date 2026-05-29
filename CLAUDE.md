@@ -25,12 +25,16 @@
 - **Agent prompt 冒頭に Output Format を必ず指定** → `.claude/rules/agent-output-contract.md`
 - **一時ファイルは `/tmp/`**: プロジェクトルートに作らない (pre-commit が `tmp_*` 等を自動削除)
 - **計画・レビュー・改善ログは `docs/` 配下**: 週次計画・レビュー・批判的レビュー・pre-mortem・改善ログ・コンテンツバックログはすべて `docs/03_週次運用/` `docs/04_レビュー/` `docs/05_改善ログ/` `docs/50_Issues/` 等に置く。Issues は (a) `enhancement`/`bug` ラベルの PR で close される機能改修、(b) `auto-generated` ラベルの日次アラート (PSI/Cloudflare) のみ → `.claude/rules/docs-vs-issues.md`
-- **DB 変更はローカル D1 直接 → `/sync-snapshots`**: 本番反映は R2 経由のみ (リモート D1 解約済み)
+- **「ローカルビルド DB (SQLite)」という用語**: 本プロジェクトの SQLite は **Cloudflare D1 サービスではない** (本番 D1 binding は Phase 8 / リモート D1 は 2026-04-29 に解約済み)。SSOT (TS-config=git / article.md=R2 / 観測値=e-Stat・R2) から再生成可能な **ローカルのビルド時派生キャッシュ + 集計エンジン**。docs/skill で「ローカル D1」と書かれていても実体はこれを指す → `.claude/rules/data-sqlite-ssot.md`
+- **DB 変更はローカルビルド DB (SQLite) 直接 → `/sync-snapshots`**: 本番反映は R2 経由のみ (リモート D1 解約済み)
 - **browser-use は終了時に必ず daemon 停止 + Chrome タブクローズ** → `.claude/rules/browser-use-cleanup.md`
-- **ローカル D1 パス固定** (`better-sqlite3` が空ファイルを自動生成するため、これ以外で開かない):
+- **ローカルビルド DB (SQLite) パス固定** (`better-sqlite3` が空ファイルを自動生成するため、これ以外で開かない。miniflare 非依存の素の SQLite ファイル):
   ```
-  .local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite
+  packages/database/.data/stats47.sqlite
   ```
+  - 取得: `npm run db:pull --workspace=packages/r2-storage` (R2 `database/stats47.sqlite` から)、空 schema 作成: `npm run db:migrate:local --workspace=packages/database`
+  - 反映: `npm run db:push --workspace=packages/r2-storage` (soft lock + 世代バックアップ付き)
+  - クラウド/CI からのデータ追加も上記 pull/push で可能 (git 管理外、R2 が持ち回りの真実源)
 
 ## 作業の節目で記録する
 
@@ -90,6 +94,8 @@ CLAUDE.md 内に詳細を複製しない。状況に応じて参照する。
 | DDD ドメイン分類 | `docs/01_技術設計/04_DDDドメイン分類.md` |
 | エラーハンドリング規約 | `docs/01_技術設計/05_エラーハンドリング規約.md` |
 | 自動化インベントリ ★追加・削除時は必ず更新 | `docs/01_技術設計/10_自動化インベントリ.md` |
+| URL 構造・301 マッピング・canonical 戦略 ★新規ページ作成時必読 | `docs/01_技術設計/15_URL構造.md` |
+| 3 タクソノミー (category/theme/tag) 役割分担 ★分類軸追加時必読 | `docs/01_技術設計/16_タクソノミー役割分担.md` |
 | 国土数値情報 GIS データ | `docs/01_技術設計/08_国土数値情報GISデータ.md` |
 | 国土交通データプラットフォーム | `docs/01_技術設計/09_国土交通データプラットフォーム.md` |
 | Pre-commit フック | `.husky/README.md` |

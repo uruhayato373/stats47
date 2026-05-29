@@ -78,6 +78,6 @@ R2 スナップショットの更新は `/sync-snapshots` で行う。
 | reference/ 分離 | `/generate-note-charts` | design-system.md, chart-patterns.md |
 | examples/ 同梱 | `/generate-note-charts` | 完成 SVG を保存 |
 | ワークフローチェーン | `/write-note-section` | validate → investigate → design → write → edit |
-| Phase 構成 | `/register-ranking` | 5 Phase（事前確認→登録→投入→検証→後処理）|
+| Phase 構成 | `/page-data-batch` | 4 Phase（事前確認→TS-config 追加→sync-metrics-cache→R2 投入→検証）|
 | サブエージェント委譲 | `/weekly-plan` | 並列サブエージェントで収集→分析→レビュー |
 | svg-builder 連携 | `/generate-article-charts` | パッケージ API リファレンス付き |

@@ -4,6 +4,7 @@ description: 設計済みチャートの DB 投入 — 既存コンポーネン�
 argument-hint: "<theme-key>"
 disable-model-invocation: true
 allowed-tools: Read, Bash
+primary_agent: theme-component-builder
 ---
 
 `/design-theme-charts` で設計したチャートを DB に投入する。

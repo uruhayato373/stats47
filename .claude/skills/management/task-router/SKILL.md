@@ -22,14 +22,15 @@ user-invocable: false
 | キャプション生成 | `/post-sns-captions` | 「キャプション作って」 |
 | 動画をレンダリング | `/render-sns-stills` | 「動画レンダリングして」 |
 
-### データ系 → data-pipeline / db-manager
+### データ系 → data-ingester / snapshot-exporter / r2-publisher
 
 | キーワード・文脈 | スキル | 例 |
 |---|---|---|
-| ランキングを登録したい | `/register-ranking` | 「出生率のランキング登録して」 |
+| ランキングを登録したい | TS-config 追加 + `/sync-metrics-cache` + `/page-data-batch` | 「出生率のランキング登録して」 |
 | e-Stat からデータ取得 | `/search-estat` → `/fetch-estat-data` | 「e-Statで犯罪データ探して」 |
+| メトリクスデータ更新 | `/page-data-batch` | 「データ更新して」 |
 | スナップショット更新・本番反映 | `/sync-snapshots` | 「データ反映して」「スナップショット更新して」 |
-| 相関分析を実行 | `/run-correlation-batch` | 「相関分析やり直して」 |
+| 相関分析を実行 | `/recompute-correlations` (Phase 7 未実装) | 「相関分析やり直して」 |
 | R2 にアップロード | `/push-r2` | 「R2にpushして」 |
 | AI コンテンツ生成 | `/generate-ai-content` | 「AIコンテンツ作って」 |
 
@@ -70,8 +71,8 @@ user-invocable: false
 1つの指示に複数のスキルが必要な場合、依存関係を解析して順序付けする。
 
 例: 「新しいランキングを登録してSNS投稿まで全部やって」
-1. data-pipeline: `/register-ranking`
-2. db-manager: `/sync-snapshots`
+1. data-ingester: TS-config 追加 + `/sync-metrics-cache --apply` + `/page-data-batch --metric <key>`
+2. snapshot-exporter + r2-publisher: `/sync-snapshots`
 3. sns-producer: `/generate-all-sns`
 4. sns-renderer: `/render-sns-stills`
 5. sns-producer: `/publish-youtube-normal`

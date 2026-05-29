@@ -1,6 +1,7 @@
 ---
 name: indexing-api-submit
 description: Google Indexing API に URL_DELETED / URL_UPDATED を能動送信して GSC の再クロールを加速する。Use when user says "Indexing API", "再クロール要請", "410 URL 削除通知", "GSC index 削除". 410 化済み URL を URL_DELETED で一括通知、新規公開 URL を URL_UPDATED で通知。
+primary_agent: gsc-analyst
 ---
 
 Google Indexing API に URL 状態変更通知を能動送信するスキル。410 Gone 化した URL を `URL_DELETED` で通知すれば、Google の再クロール（通常 1-2 週間）を数日に短縮できる。

@@ -2,6 +2,7 @@
 name: pre-mortem
 description: プロジェクトの Pre-Mortem（事前検死）を実施。1年後に完全に頓挫した想定で、具体的な失敗シナリオと対策書を現在のデータから生成する。
 disable-model-invocation: true
+primary_agent: strategy-advisor
 ---
 
 プロジェクトの **Pre-Mortem（事前検死）** を実施する。
@@ -26,14 +27,18 @@ disable-model-invocation: true
 
 ```bash
 DB=".local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite"
+# 現行 schema (Phase 5/6/7 後): indicators→metrics, ai_content→metrics 統合,
+# 観測値(observations)/correlations は D1 から R2 へ移行済 (下記は別途 R2 から)
 sqlite3 "$DB" "
-  SELECT 'ranking_items' as tbl, COUNT(*) as cnt FROM indicators WHERE area_type='prefecture'
-  UNION ALL SELECT 'ranking_data', COUNT(*) FROM observations
-  UNION ALL SELECT 'ranking_ai_content', COUNT(*) FROM ai_content
+  SELECT 'metrics' as tbl, COUNT(*) as cnt FROM metrics
+  UNION ALL SELECT 'metrics_active', COUNT(*) FROM metrics WHERE is_active=1
   UNION ALL SELECT 'articles', COUNT(*) FROM articles
+  UNION ALL SELECT 'area_profiles', COUNT(*) FROM area_profiles
   UNION ALL SELECT 'sns_posts', COUNT(*) FROM sns_posts
-  UNION ALL SELECT 'correlation_analysis', COUNT(*) FROM correlations
 "
+# 観測値・相関は R2 (Phase 6 移行)。件数は snapshot から:
+ls .local/r2/app/stats/ 2>/dev/null | wc -l          # 観測値を持つ metric 数
+jq '.total' .local/r2/app/correlation/stats.json 2>/dev/null  # 相関ペア総数
 ```
 
 #### コンテンツ資産

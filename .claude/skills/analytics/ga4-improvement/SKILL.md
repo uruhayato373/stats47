@@ -1,6 +1,7 @@
 ---
 name: ga4-improvement
 description: Google Analytics 4 のアクセス指標（Users / Sessions / Engagement / Bounce / Key Events）を docs/05_改善ログ/ga4.md で追跡し、週次 snapshot と施策の効果判定を記録する。Use when user says "GA4改善", "PV改善", "流入改善", "GA4記録".
+primary_agent: ga4-analyst
 ---
 
 GA4 の週次メトリクス（Active Users / Sessions / Engagement / Bounce Rate / Key Events）を **`docs/05_改善ログ/ga4.md` で時系列追跡**し、打った施策と効果を記録するスキル。

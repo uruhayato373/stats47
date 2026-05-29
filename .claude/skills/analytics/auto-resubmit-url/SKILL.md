@@ -1,6 +1,7 @@
 ---
 name: auto-resubmit-url
 description: GSC URL Inspection 結果から未 INDEXED な URL を抽出し、Indexing API で URL_UPDATED 通知を自動再送信。quota 200/day 管理 + 7 日以内重複防止。Use when user says "Indexing API 再送信", "auto-resubmit", "URL 再クロール促進".
+primary_agent: gsc-analyst
 ---
 
 GSC Coverage Drilldown CSV から未 INDEXED な URL を抽出し、Google Indexing API (`URL_UPDATED`) で再クロール要請を自動送信する。quota 200/day と 7 日以内重複防止の運用ガードを内蔵。Phase 2 (観測短サイクル化) における Drilldown 未登録削減の補助手段。

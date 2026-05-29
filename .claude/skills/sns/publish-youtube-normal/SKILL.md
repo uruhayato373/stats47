@@ -3,6 +3,7 @@ name: publish-youtube-normal
 description: YouTube 通常動画（ScrollGes）の制作からアップロード・DB 記録までを一貫実行する。Use when user says "YouTube動画投稿", "YouTube通常動画". レンダリング → アップロード → DB 記録.
 disable-model-invocation: true
 argument-hint: <rankingKey> [--schedule <ISO8601>]
+primary_agent: youtube-strategist
 ---
 
 YouTube 通常動画（16:9 ScrollGes テンプレート）の制作からアップロード・DB 記録・ローカル削除までを一貫実行する。
@@ -60,7 +61,8 @@ node .claude/scripts/lib/check-youtube-duplicate.cjs --title "<新規動画タ�
 
 ## 前提
 
-- ローカル D1 に `stats_prefecture` (`metric_key` 別 47 都道府県データ) と `metrics` (`key`, `title`, `unit`, `subtitle`, `normalization_basis` 等) が存在すること
+- ローカル D1 に `metrics` (`key`, `title`, `unit`, `subtitle`, `normalization_basis` 等) が存在 + R2 (`.local/r2/app/stats/<key>/values.json`) に観測値が投入済であること
+  (Phase 6 で観測値ストアは R2 移行済。R2 未投入なら `/page-data-batch --metric <key>` で投入)
 - OAuth 認証済み（`.env.local` に `GOOGLE_OAUTH_*` 3つ）
 - `.claude/scripts/youtube/upload.js` が存在すること
 - GES 背景動画が `apps/remotion/public/backgrounds/ges/landscape/` にあること
@@ -69,35 +71,46 @@ node .claude/scripts/lib/check-youtube-duplicate.cjs --title "<新規動画タ�
 
 ### Phase 1: データ生成
 
-DB から rankingKey の最新年データを取得し、`data.json` + `ranking_items.json` を生成する。
+D1 から metric メタ (title/unit 等)、R2 から rankingKey の最新年観測値を取得し、`data.json` + `ranking_items.json` を生成する。
 
-スキーマ参照: `metrics` (旧 `indicators`) + `stats_prefecture` (旧 `observations`)。`stats_prefecture.metric_key` で結合する (DDD migration 後の名称、2026-04 〜)。
+データソース (Phase 6/7 後):
+- メタ: D1 `metrics` テーブル (TS-config (`packages/data-configs/src/metrics/<key>.ts`) の cache)
+- 観測値: R2 `.local/r2/app/stats/<key>/values.json` (47 県 × 全年、Phase 6 で `stats_prefecture` から移行)
 
 ```bash
 node -e "
 const Database = require('better-sqlite3');
 const fs = require('fs');
+const path = require('path');
 const DB_PATH = '.local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite';
 const KEY = '<rankingKey>';
 const BASE = '.local/r2/sns/ranking/' + KEY;
+const STATS_PATH = '.local/r2/app/stats/' + KEY + '/values.json';
 
 fs.mkdirSync(BASE + '/youtube/stills', { recursive: true });
 
 const db = new Database(DB_PATH, { readonly: true });
 const item = db.prepare('SELECT key, title, subtitle, unit, normalization_basis FROM metrics WHERE key = ?').get(KEY);
 if (!item) { console.error('metric not found: ' + KEY); process.exit(1); }
-const years = db.prepare('SELECT DISTINCT year_code FROM stats_prefecture WHERE metric_key = ? ORDER BY year_code DESC').all(KEY);
-if (!years.length) { console.error('no data for metric: ' + KEY); process.exit(1); }
-const latestYear = years[0].year_code;
-const rows = db.prepare('SELECT area_code, area_name, CAST(value AS REAL) as value, year_name FROM stats_prefecture WHERE metric_key = ? AND year_code = ? ORDER BY CAST(value AS REAL) DESC').all(KEY, latestYear);
-const yearName = rows[0].year_name || latestYear + '年度';
+db.close();
 
-const ranked = rows.map((r, i) => ({ rank: i + 1, areaCode: r.area_code, areaName: r.area_name, value: parseFloat(r.value.toFixed(2)) }));
+if (!fs.existsSync(STATS_PATH)) { console.error('R2 stats not found: ' + STATS_PATH + ' (run /page-data-batch --metric ' + KEY + ')'); process.exit(1); }
+const payload = JSON.parse(fs.readFileSync(STATS_PATH, 'utf-8'));
+if (!payload.rows || payload.rows.length === 0) { console.error('no data for metric: ' + KEY); process.exit(1); }
+
+// latest year 抽出
+const allYears = [...new Set(payload.rows.map(r => r.yearCode))].sort((a, b) => b.localeCompare(a));
+const latestYear = allYears[0];
+const latestRows = payload.rows
+  .filter(r => r.yearCode === latestYear && r.value != null)
+  .sort((a, b) => Number(b.value) - Number(a.value));
+const yearName = latestRows[0].yearName || latestYear + '年度';
+
+const ranked = latestRows.map((r, i) => ({ rank: i + 1, areaCode: r.areaCode, areaName: r.areaName, value: parseFloat(Number(r.value).toFixed(2)) }));
 
 fs.writeFileSync(BASE + '/data.json', JSON.stringify({ categoryCode: KEY, categoryName: item.title, yearCode: latestYear, yearName, unit: item.unit, data: ranked }, null, 2));
 fs.writeFileSync(BASE + '/ranking_items.json', JSON.stringify({ title: item.title, subtitle: item.subtitle || undefined, unit: item.unit, normalizationBasis: item.normalization_basis || undefined }, null, 2));
 console.log('Generated: ' + ranked.length + ' entries, year=' + latestYear);
-db.close();
 "
 ```
 

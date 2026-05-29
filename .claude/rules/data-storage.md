@@ -4,15 +4,48 @@
 
 判定軸: (a) 誰が読むか (app / agent / 人間)、(b) 何のために (CRUD / 振り返り / 計測ログ)。
 
-## D1（Cloudflare D1 SQLite）に置くもの — 「運用データ」
+## ローカルビルド DB (SQLite) に置くもの — 「メタ + 運用エンティティ」
 
-**判定軸**: `apps/web` / 投稿スキルが CRUD する、ドメインモデルの主要エンティティ。
+> **注**: 以前「D1」と呼んでいた層。Cloudflare D1 サービスではなく、SSOT から再生成可能なローカル SQLite ビルドキャッシュ + 集計エンジン (本番は R2 のみ読む)。用語: [`data-sqlite-ssot.md`](./data-sqlite-ssot.md)
 
-- `articles`, `indicators`, `observations`, `ai_content`, `page_components` — コンテンツ実体
-- `categories`, `subcategories`, `area_profiles` — マスタ
-- `sns_posts` — SNS 投稿本体（最新メトリクスの cache カラムも含む。時系列履歴はファイル側）
-- `correlations` — 相関分析バッチ結果
-- その他、ランキング・テーマダッシュボード・検索が依存するテーブル
+Phase 6 (2026-05-27) で **観測値 (stats_*) と相関結果 (correlations) は R2 へ全面移行済**。ローカルビルド DB は ~336MB に縮小、メタ + 運用エンティティ + マスタのみが残る。詳細: [`data-sqlite-ssot.md`](./data-sqlite-ssot.md)
+
+### メタ (cache from TS-config)
+- `metrics` — 指標メタ。**SSOT は `packages/data-configs/src/metrics/<key>.ts`**。`/sync-metrics-cache` で同期
+- `sources` — データ出所
+- `estat_metainfo` / `estat_catalog` — e-Stat カタログ
+
+### マスタ (静的)
+- `prefectures` (47), `cities` (2,701) — エリアマスタ
+- `categories` (17), `themes` (24), `surveys`, `ports` (699), `fishing_ports` (2,896), `gis_datasets` (127)
+
+### 集計 / 派生 (D1 内で計算)
+- `area_profiles` (23,366) — 県別 strength/weakness
+- `theme_metrics` (284) — テーマ ↔ 指標マッピング
+- `page_components` (411) — チャート config
+
+### コンテンツ・運用
+- `articles` (196) — Web コンテンツ
+- `affiliate_ads` (24), `sns_posts` (549) — 運用系
+
+### Phase 6 で R2 へ移行したもの (D1 にはもう無い)
+
+- 観測値 → `app/stats/<metric>/values.json` (都道府県) / `cities.json` / `ports.json` / `migration-flow-<year>.json`
+- 相関分析結果 → `app/correlation/top-pairs.json` (R2 snapshot 配信、計算時のみ D1 temp 使用)
+
+## D1 からの派生 (生成物) — 「再生成可能な snapshot」
+
+**判定軸**: D1 を入力に exporter スクリプトで作られる、再生成可能な JSON / SVG / 動画素材。手で編集してはならない。
+
+| 派生先 | 用途 | 派生スキル |
+|---|---|---|
+| `.local/r2/app/<route>/<file>.json` → Cloudflare R2 | Web app SSR / SSG が fetch | `/sync-snapshots` + `/push-r2` |
+| `apps/remotion/public/<feature>/*.json` | Remotion build 時に `staticFile()` で読み込み | `/export-d1-to-remotion-static` |
+| `packages/area/src/data/{prefectures,cities}.json` | npm パッケージ静的 export | `/export-d1-to-remotion-static --feature master` |
+
+派生 JSON は git tracked でも commit して良い (履歴で差分追跡)。ただし **D1 が真実源** で、JSON を手で編集すると乖離が起きる。
+
+詳細: [`data-sqlite-ssot.md`](./data-sqlite-ssot.md)
 
 ## `docs/` に置くもの — 「人間が読み返す文書」
 

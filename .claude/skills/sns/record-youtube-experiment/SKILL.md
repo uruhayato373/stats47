@@ -2,6 +2,7 @@
 name: record-youtube-experiment
 description: YouTube 実験の仮説・結果・学びを docs/15_実験ログ/youtube/ に Markdown ファイルで記録する。Use when user says "実験記録", "YouTube実験", "結果を記録", "学びを記録". 実験の新規作成・初動/FINAL 結果追記・横断分析.
 argument-hint: "<new|update EXP-XXX|analyze>"
+primary_agent: youtube-strategist
 ---
 
 YouTube Shorts のフォーマット・テーマ・タイトルの A/B テストを **1 実験 1 Markdown ファイル**（`docs/15_実験ログ/youtube/EXP-NNN.md`）で構造化して管理する。

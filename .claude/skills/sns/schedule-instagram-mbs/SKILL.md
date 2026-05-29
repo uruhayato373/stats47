@@ -3,6 +3,7 @@ name: schedule-instagram-mbs
 description: Meta Business Suite UI 経由で Instagram に予約投稿する（API 予約非対応の代替）。Use when user says "Instagram予約投稿", "IG予約". Playwright + 永続プロファイルで自動化。**初回 or 1 週間以上空いた場合は --dry-run 必須**.
 disable-model-invocation: true
 argument-hint: "<rankingKey> <YYYY-MM-DDTHH:MM> [<rankingKey> <date> ...] [--domain ranking|bar-chart-race] [--type image|reels] [--dry-run]"
+primary_agent: instagram-strategist
 ---
 
 Playwright（永続プロファイル）で Meta Business Suite (https://business.facebook.com) を自動操作し、Instagram の予約投稿を設定する。

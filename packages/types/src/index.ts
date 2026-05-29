@@ -96,4 +96,7 @@ export {
   LOCAL_FINANCE_SET,
   LOCAL_FINANCE_CITY_SET,
   FISHERY_MARINE_SET,
+  PORTS_SET,
+  RAILWAY_SET,
+  ROADS_SET,
 } from "./indicator-sets/registry";

@@ -1,7 +1,7 @@
 ---
 type: improvement-log-index
 created: 2026-05-18
-updated: 2026-05-18
+updated: 2026-05-27
 ---
 
 # 改善ログ INDEX
@@ -22,6 +22,8 @@ stats47 の **全 SEO / 性能 / コスト / コンテンツ施策の TODO 真�
 | [content.md](./content.md) | ブログ / note / YouTube 公開・更新 | CONTENT-NOTE-01 (note A-laborwage 5 本) |
 | [indexing.md](./indexing.md) | Coverage Drilldown / sitemap / Indexing API | INDEXING-AUTO-01 (Indexing API 自動再送信)、INDEXING-DRILLDOWN-01 |
 | [ai-content.md](./ai-content.md) | ranking_key の ai_content リライト (NotebookLM 補強、CTR 改善目的) | AICONTENT-001 (wheat-flour-consumption-quantity 初回リライト) |
+| [sns.md](./sns.md) | SNS 投稿パイプライン / メトリクス計測 / funnel | SNS-PIPELINE-01 (sns_posts 同期ズレ調査) |
+| [agent-parallelism.md](./agent-parallelism.md) | Agent 並行運用検証 (Phase 5 file boundary) | AGENT-PARA-01 (gsc+triage 並列)、AGENT-PARA-02 (article-writer+data-ingester 並列) |
 
 ## どこに何を書くか
 

@@ -2,6 +2,7 @@
 name: post-x
 description: X (Twitter) 投稿用テキストを生成しローカルに保存する。Use when user says "X投稿", "ツイート作成". ランキングデータからキャプション自動生成.
 disable-model-invocation: true
+primary_agent: x-strategist
 ---
 
 X (Twitter) 投稿用コンテンツ（テキスト + 画像）を生成してローカル R2 に保存する。

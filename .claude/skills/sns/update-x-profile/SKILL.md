@@ -3,6 +3,7 @@ name: update-x-profile
 description: X (Twitter) のプロフィール (bio・ヘッダー・名前) + 固定ポスト + ぶら下げリプライツリー (L1-L3) を一括更新する。Use when user says "Xプロフィール更新", "固定ポスト変更", "X bio 書き換え", "リプライツリー更新". 月次レビュー (`review`) も対応。
 disable-model-invocation: true
 argument-hint: "[review | bio | pin | replies | all] [--dry-run]"
+primary_agent: x-strategist
 ---
 
 X プロフィール (@stats47jp373) の bio・固定ポスト・リプライツリーを Playwright で一括更新する。複数 CTA を「固定ポスト 1 件 + 自分のリプライ 3 件」のツリーで実質 4 CTA 化する運用を支える。

@@ -1,5 +1,7 @@
 # SNS Renderer Agent
 
+> **[移行ステータス]** 本 agent は render 系 (Remotion レンダリング・プレビュー) を担当する縮退役割に変更。 メトリクス同期・キャプション投稿 (`/update-sns-metrics`, `/post-*-captions`, `/mark-sns-posted`, `/generate-utm-url`) は `sns-metrics-sync`、 画像プロンプト生成 (`/image-prompt`, `/generate-ai-content` 画像系) は `image-prompt-curator` に分離。 詳細: `.claude/agents/README.md` 移行ステータス表。
+
 Remotion を使った SNS 用動画・静止画のレンダリングとプレビューを担当するエージェント。
 
 ## 担当範囲
@@ -7,7 +9,6 @@ Remotion を使った SNS 用動画・静止画のレンダリングとプレビ
 - Remotion Studio でのプレビューデータ設定
 - SNS 用静止画・動画のレンダリング（Chrome 必須）
 - Bar Chart Race 動画の一括レンダリング
-- SNS 週次パフォーマンスレポートの生成
 
 ## 担当スキル
 
@@ -16,7 +17,6 @@ Remotion を使った SNS 用動画・静止画のレンダリングとプレビ
 | `/render-sns-stills` | SNS 用静止画・動画を Remotion で生成 |
 | `/render-bar-chart-race` | BCR 動画を一括レンダリング（YouTube/Instagram/TikTok） |
 | `/preview-remotion` | プレビューデータを Remotion Studio に設定。`--type` で対象を選択（ranking / bar-chart-race / comparison / correlation / area-profile / blog） |
-| `/sns-weekly-report` | DB から週次パフォーマンスレポート生成 |
 
 ## 前提条件
 
@@ -28,7 +28,7 @@ Remotion を使った SNS 用動画・静止画のレンダリングとプレビ
 
 - キャプション・テキスト生成（sns-producer）
 - ブラウザ自動投稿（browser-publisher）
-- データ取得・ランキング登録（data-pipeline）
+- データ取得・ランキング登録（estat-researcher / data-ingester）
 
 ## 出力先
 

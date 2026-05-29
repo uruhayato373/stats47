@@ -77,7 +77,7 @@ export function RegionSelector({ selectedAreaCodes, categoryKey, startTransition
     const validCodes = codes.filter(Boolean);
     const query = validCodes.length > 0 ? `?areas=${validCodes.join(",")}` : "";
     startTransition(() => {
-      router.push(`/compare/${categoryKey}${query}`);
+      router.push(`/category/${categoryKey}/compare${query}`);
     });
   };
 

@@ -52,7 +52,7 @@ export function RegionComparisonClient({
   const handleCategoryChange = (key: string) => {
     const params = new URLSearchParams(searchParams.toString());
     startTransition(() => {
-      router.push(`/compare/${key}?${params.toString()}`);
+      router.push(`/category/${key}/compare?${params.toString()}`);
     });
   };
 

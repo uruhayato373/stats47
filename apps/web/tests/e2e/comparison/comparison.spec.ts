@@ -3,11 +3,12 @@ import { expect, test } from "@playwright/test";
 /**
  * 地域間比較ページのE2Eテスト
  *
- * /compare ページの地域選択・カテゴリ切替・比較テーブル表示をテストします。
+ * /category/[categoryKey]/compare ページの地域選択・カテゴリ切替・比較テーブル表示をテストします。
+ * 2026-05-28 に /compare → /category/{key}/compare へ統合 (Phase 2)。
  */
 test.describe("地域間比較ページ", () => {
-  test("デフォルトの比較対象で表示される", async ({ page }) => {
-    await page.goto("/compare", { waitUntil: "domcontentloaded" });
+  test("デフォルトの比較対象で表示される (旧 /compare は /category に 301)", async ({ page }) => {
+    await page.goto("/category/population/compare", { waitUntil: "domcontentloaded" });
 
     // h1 見出しが表示される
     await expect(page.getByRole("heading", { level: 1 })).toBeVisible({ timeout: 10000 });
@@ -20,7 +21,7 @@ test.describe("地域間比較ページ", () => {
   });
 
   test("URLパラメータで指定した地域が比較される", async ({ page }) => {
-    await page.goto("/compare?areas=01000,08000", { waitUntil: "domcontentloaded" });
+    await page.goto("/category/population/compare?areas=01000,08000", { waitUntil: "domcontentloaded" });
 
     // ページが表示される
     await expect(page.getByRole("heading", { level: 1 })).toBeVisible({ timeout: 10000 });
@@ -34,7 +35,7 @@ test.describe("地域間比較ページ", () => {
   });
 
   test("VS バッジが表示される", async ({ page }) => {
-    await page.goto("/compare?areas=13000,27000", { waitUntil: "domcontentloaded" });
+    await page.goto("/category/population/compare?areas=13000,27000", { waitUntil: "domcontentloaded" });
 
     // 「VS」テキストが表示される
     const vsBadge = page.getByText(/VS/i);
@@ -42,7 +43,7 @@ test.describe("地域間比較ページ", () => {
   });
 
   test("カテゴリタブで表示を切り替えられる", async ({ page }) => {
-    await page.goto("/compare?areas=13000,27000", { waitUntil: "domcontentloaded" });
+    await page.goto("/category/population/compare?areas=13000,27000", { waitUntil: "domcontentloaded" });
 
     // カテゴリタブのボタンが表示される（2件以上）
     const categoryButtons = page.locator("button").filter({ hasText: /人口|労働|経済|住宅|教育|産業|家計|健康/i });
@@ -63,7 +64,7 @@ test.describe("地域間比較ページ", () => {
   });
 
   test("比較テーブルが正しく表示される", async ({ page }) => {
-    await page.goto("/compare?areas=13000,27000", { waitUntil: "domcontentloaded" });
+    await page.goto("/category/population/compare?areas=13000,27000", { waitUntil: "domcontentloaded" });
 
     // テーブルが表示される
     const table = page.locator("table").first();
@@ -82,7 +83,7 @@ test.describe("地域間比較ページ", () => {
 
   test("2地域未満のとき案内メッセージが表示される", async ({ page }) => {
     // areas パラメータなしでアクセス（エリアコードが0件のケース）
-    await page.goto("/compare?areas=", { waitUntil: "domcontentloaded" });
+    await page.goto("/category/population/compare?areas=", { waitUntil: "domcontentloaded" });
 
     // ComparisonEmpty またはデフォルトの東京/大阪が表示されるケースを許容
     const heading = page.getByRole("heading", { level: 1 });

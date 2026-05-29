@@ -1,6 +1,7 @@
 ---
 name: md-syntax
 description: ブログ記事で使えるマークダウン記法一覧を表示する。Use when user says "記法一覧", "マークダウン記法", "md記法", "書き方". コールアウト・チャート埋め込み等の独自記法を含む.
+primary_agent: blog-editor
 ---
 
 ブログ記事（`.md` / `.mdx`）で使用できるマークダウン記法の一覧を示す。
@@ -175,6 +176,9 @@ MDX 不要。HTML カスタムタグとして `react-markdown` の `components` 
 ### サイト内リンク（カード型）
 
 ランキングページ・相関ページへの誘導リンク。横幅いっぱいのカード形式で右矢印付き。
+
+> **配置の正典は `.claude/rules/blog-quality-standards.md`「source-link の配置」**。
+> 本ファイルは記法 (タグ形式) を示すのみ。`/ranking/` への `<source-link>` は**対応する図・データを扱うセクション内 (SVG 図の直下) にインライン配置**し、記事末尾に 2 個以上集約しないこと (検査: `node .claude/scripts/blog/audit-article-structure.mjs`)。
 
 ```html
 <source-link href="/ranking/unmarried-ratio-male-30-34">47都道府県の未婚率ランキングをもっと見る</source-link>

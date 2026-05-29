@@ -2,11 +2,25 @@
 name: investigate-note-data
 description: note 記事（B/C/D シリーズ）のデータ調査・分析を行う。Use when user says "noteデータ調査", "データ分析", "相関分析". 相関・地域パターン・チャート候補を定量化.
 disable-model-invocation: true
+primary_agent: note-manager
 ---
 
 note 記事（B/C/D シリーズ）のデータ調査・分析。相関分析・地域パターン・強み弱みを定量化し、チャート候補を決定する。
 
 > **A シリーズ（ランキング記事・量産型）はこの4ステップワークフローの対象外です。** A シリーズは自動生成スキルで処理するため、validate → investigate → design → write → edit の手順は不要です。
+
+> ⚠️ **Phase 6/7 (2026-05-28) で D1 schema 大改修**
+> 旧 `indicators` / `observations` / `correlations` テーブルは廃止または DROP 済:
+> - `indicators` → `metrics` (テーブル名のみリネーム、key カラムは同名)
+> - `observations` → R2 `app/stats/<metric>/values.json` (Phase 6 で R2 移行)
+> - `correlations` → R2 `app/correlation/{top-pairs.json, stats.json, by-ranking-key/<key>.json}` (snapshot 配信)
+>
+> 本 SKILL.md 内の SQL クエリの多くは旧 schema 前提のため、**実行時は下記の置換** を行うこと:
+> - `FROM indicators` → `FROM metrics` (カラム ranking_key → key)
+> - `FROM observations WHERE category_code = ?` → `fs.readFileSync('.local/r2/app/stats/<key>/values.json')` をパースして filter
+> - `FROM correlations` → `.local/r2/app/correlation/by-ranking-key/<key>.json` を fetch
+>
+> Phase 8 で本 SKILL.md を R2 fetch ベースに全面 refactor 予定 ([feature-backlog.md](../../../../docs/50_Issues/feature-backlog.md))。
 
 ## 用途
 

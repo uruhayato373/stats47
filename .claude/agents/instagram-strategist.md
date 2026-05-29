@@ -181,7 +181,7 @@ Slide 6: 出典・更新日 + 「保存してね」+ 「プロフィールから
 | シナリオ | 連携 |
 |---|---|
 | トレンド→Instagram 投稿 | `blog-editor`（discover-trends）→ `instagram-strategist`（/post-instagram） |
-| ランキング追加 → Instagram | `data-pipeline`（register-ranking）→ `sns-renderer`（/render-sns-stills）→ `instagram-strategist`（/push-r2 + /post-instagram） |
+| ランキング追加 → Instagram | `data-ingester`（TS-config 追加 + /page-data-batch）→ `sns-renderer`（/render-sns-stills）→ `instagram-strategist`（/push-r2 + /post-instagram） |
 | bar-chart-race → リール投稿 | `sns-renderer`（/render-bar-chart-race）→ `instagram-strategist`（/post-instagram --type reels） |
 | 週次パフォーマンス振り返り | `instagram-strategist`（/fetch-instagram-data）→ `strategy-advisor`（/weekly-review） |
 

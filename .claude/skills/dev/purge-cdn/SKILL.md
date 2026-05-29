@@ -3,6 +3,7 @@ name: purge-cdn
 description: Cloudflare CDN のキャッシュを API で即時パージする。Use when user says "Purge", "キャッシュパージ", "purge-cdn". middleware / sitemap / robots / metadata 系のデプロイ後に実行すると古い応答がエッジから消える.
 disable-model-invocation: true
 argument-hint: [--everything] [--r2-prefix <prefix>] [--r2-files <key1> <key2> ...]
+primary_agent: performance-auditor
 ---
 
 Cloudflare Cache Purge API を叩いて stats47.jp / storage.stats47.jp の CDN キャッシュを即時削除する。

@@ -2,6 +2,8 @@
 name: mark-sns-posted
 description: 投稿済み SNS コンテンツの DB ステータスを posted に更新しメディアファイルを削除する。Use when user says "投稿済みにする", "mark posted", "SNS投稿完了". テキスト/JSON はリモート R2 に保持.
 disable-model-invocation: true
+primary_agent: sns-metrics-sync
+co_agents: [instagram-strategist, x-strategist]
 ---
 
 投稿済み SNS コンテンツを DB に記録し、メディアファイルを削除する。テキスト/JSON はリモート R2 に保持する。

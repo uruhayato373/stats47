@@ -1,6 +1,7 @@
 ---
 name: triage-improvement-log
 description: 改善ログ全 metric を Tier × 期日マトリクスで可視化 + 自動アクション提案 + CSV エクスポート (scan-pending-improvements.mjs の高度ラッパー)。Use when user says "改善ログ triage", "施策の優先順位", "triage-improvement-log".
+primary_agent: improvement-triage
 ---
 
 # triage-improvement-log

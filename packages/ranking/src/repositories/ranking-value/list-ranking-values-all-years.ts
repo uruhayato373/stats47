@@ -1,54 +1,40 @@
 import "server-only";
 
-import { getDrizzle, statsPrefecture } from "@stats47/database/server";
+import { getDrizzle } from "@stats47/database/server";
 import { logger } from "@stats47/logger/server";
+import { readStatsValues } from "@stats47/stats-r2";
 import { err, ok, type Result } from "@stats47/types";
 import type { AreaType } from "@stats47/types";
-import { and, eq, ne } from "drizzle-orm";
 import type { RankingValue } from "../../types";
 
 /**
- * 全年分の RankingValue を一括取得する（Bar Chart Race 用）
- *
- * 全国値（areaCode "00000"）は除外する。
+ * 全年分の RankingValue を R2 から一括取得 (Bar Chart Race 用)。
+ * 全国値 (areaCode "00000") は除外。
+ * Phase 6 以降: D1 stats_* ではなく `app/stats/<metric>/values.json` から読む。
  */
 export async function listRankingValuesAllYears(
   rankingKey: string,
   areaType: AreaType,
-  db?: ReturnType<typeof getDrizzle>
+  _db?: ReturnType<typeof getDrizzle>,
 ): Promise<Result<RankingValue[], Error>> {
   try {
-    const drizzleDb = db ?? getDrizzle();
-    const result = await drizzleDb
-      .select({
-        areaCode: statsPrefecture.areaCode,
-        areaName: statsPrefecture.areaName,
-        yearCode: statsPrefecture.yearCode,
-        yearName: statsPrefecture.yearName,
-        metricKey: statsPrefecture.metricKey,
-        value: statsPrefecture.value,
-        unit: statsPrefecture.unit,
-        rank: statsPrefecture.rank,
-      })
-      .from(statsPrefecture)
-      .where(
-        and(
-          eq(statsPrefecture.metricKey, rankingKey),
-          ne(statsPrefecture.areaCode, "00000")
-        )
-      );
+    if (areaType === "national") return ok([]);
+    const payload = await readStatsValues(rankingKey, areaType);
+    if (!payload) return ok([]);
 
-    const values: RankingValue[] = result.map((row) => ({
-      areaType,
-      areaCode: row.areaCode,
-      areaName: row.areaName,
-      yearCode: String(row.yearCode),
-      yearName: row.yearName,
-      metricKey: row.metricKey,
-      value: row.value !== null ? Number(row.value) : 0,
-      unit: row.unit,
-      rank: row.rank != null ? Number(row.rank) : 0,
-    }));
+    const values: RankingValue[] = payload.rows
+      .filter((r) => r.areaCode !== "00000")
+      .map((row) => ({
+        areaType,
+        areaCode: row.areaCode,
+        areaName: row.areaName,
+        yearCode: String(row.yearCode),
+        yearName: row.yearName,
+        metricKey: rankingKey,
+        value: row.value !== null ? Number(row.value) : 0,
+        unit: row.unit ?? "",
+        rank: row.rank != null ? Number(row.rank) : 0,
+      }));
 
     return ok(values);
   } catch (error) {

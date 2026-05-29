@@ -2,6 +2,7 @@
 name: post-note-ranking
 description: note ランキング記事（A シリーズ）を DB から自動生成する。Use when user says "noteランキング記事", "A シリーズ生成", "note量産". テキスト + 画像を一括出力する量産型.
 disable-model-invocation: true
+primary_agent: note-manager
 ---
 
 note ランキング記事（A シリーズ）を DB から自動生成する。テキスト + 画像を一括で出力する量産型スキル。
@@ -42,34 +43,42 @@ docs/31_note記事原稿/a-<rankingKey>/
 
 ### Phase 1: データ取得
 
-1. ランキングメタデータを取得:
+Phase 6 (2026-05-27) で観測値ストアを R2 に移行済。メタは D1 metrics、観測値は R2 から取得する。
+
+1. ランキングメタデータを取得 (D1 `metrics` cache):
 
 ```bash
 cd /Users/minamidaisuke/stats47 && node -e "
 const Database = require('better-sqlite3');
 const db = new Database('.local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite');
-const item = db.prepare(\"SELECT ranking_key, title, unit, category_key, demographic_attr, normalization_basis FROM indicators WHERE ranking_key = '<RANKING_KEY>' AND is_active = 1\").get();
+const item = db.prepare(\"SELECT key AS ranking_key, title, unit, category_key, demographic_attr, normalization_basis FROM metrics WHERE key = '<RANKING_KEY>' AND is_active = 1\").get();
 console.log(JSON.stringify(item, null, 2));
 db.close();
 "
 ```
 
-2. ランキングデータを取得し、偏差値・全国平均を算出:
+2. ランキングデータを R2 から取得し、偏差値・全国平均を算出:
 
 ```bash
 cd /Users/minamidaisuke/stats47 && node -e "
-const Database = require('better-sqlite3');
-const db = new Database('.local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite');
-const rows = db.prepare(\"SELECT area_code, area_name, year, value FROM observations WHERE ranking_key = '<RANKING_KEY>' AND year = <YEAR> ORDER BY value DESC\").all();
+const fs = require('fs');
+const KEY = '<RANKING_KEY>';
+const YEAR = '<YEAR>';
+const path = '.local/r2/app/stats/' + KEY + '/values.json';
+if (!fs.existsSync(path)) { console.error('R2 missing, run: /page-data-batch --metric ' + KEY); process.exit(1); }
+const payload = JSON.parse(fs.readFileSync(path, 'utf-8'));
+const rows = payload.rows
+  .filter(r => String(r.yearCode) === String(YEAR) && r.value != null)
+  .sort((a, b) => Number(b.value) - Number(a.value));
 
 // 偏差値・統計量を算出
-const values = rows.map(r => r.value);
+const values = rows.map(r => Number(r.value));
 const mean = values.reduce((a, b) => a + b, 0) / values.length;
 const stddev = Math.sqrt(values.reduce((sum, v) => sum + (v - mean) ** 2, 0) / values.length);
 const result = rows.map((r, i) => ({
   rank: i + 1,
-  ...r,
-  deviation: Math.round((((r.value - mean) / stddev) * 10 + 50) * 10) / 10,
+  area_code: r.areaCode, area_name: r.areaName, year: r.yearCode, value: Number(r.value),
+  deviation: Math.round((((Number(r.value) - mean) / stddev) * 10 + 50) * 10) / 10,
 }));
 console.log('=== 統計量 ===');
 console.log('全国平均:', Math.round(mean * 100) / 100);
@@ -78,19 +87,21 @@ console.log('1位/47位 倍率:', Math.round((result[0].value / result[result.le
 console.log('');
 console.log('=== 全データ（順位・偏差値付き） ===');
 console.log(JSON.stringify(result, null, 2));
-db.close();
 "
 ```
 
 3. 関連するブログ記事・ランキングを検索:
 
 ```bash
-# 同カテゴリのランキング（ranking_data にデータがあるもののみ）
+# 同カテゴリのランキング (D1 metrics + R2 stats 存在チェック)
 cd /Users/minamidaisuke/stats47 && node -e "
 const Database = require('better-sqlite3');
+const fs = require('fs');
 const db = new Database('.local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite');
-const rows = db.prepare(\"SELECT ri.ranking_key, ri.title FROM indicators ri WHERE ri.category_key = '<CATEGORY_KEY>' AND ri.is_active = 1 AND ri.ranking_key != '<RANKING_KEY>' AND EXISTS (SELECT 1 FROM observations rd WHERE rd.category_code = ri.ranking_key) LIMIT 10\").all();
-console.log(JSON.stringify(rows, null, 2));
+const items = db.prepare(\"SELECT key AS ranking_key, title FROM metrics WHERE category_key = '<CATEGORY_KEY>' AND is_active = 1 AND key != '<RANKING_KEY>' LIMIT 30\").all();
+// R2 観測値がある metric のみ返す
+const filtered = items.filter(i => fs.existsSync('.local/r2/app/stats/' + i.ranking_key + '/values.json')).slice(0, 10);
+console.log(JSON.stringify(filtered, null, 2));
 db.close();
 "
 
@@ -366,8 +377,17 @@ const fs = require('fs');
 const db = new Database('.local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite');
 
 const rankingKey = '<RANKING_KEY>';
-const item = db.prepare('SELECT title, unit, category_key, demographic_attr, normalization_basis FROM indicators WHERE ranking_key = ? AND is_active = 1').get(rankingKey);
-const rows = db.prepare('SELECT area_code, area_name, year, value FROM observations WHERE ranking_key = ? AND year = <YEAR> ORDER BY value DESC').all(rankingKey);
+const YEAR = '<YEAR>';
+const item = db.prepare('SELECT title, unit, category_key, demographic_attr, normalization_basis FROM metrics WHERE key = ? AND is_active = 1').get(rankingKey);
+
+// 観測値は R2 から (Phase 6 で D1 stats_* DROP)
+const statsPath = '.local/r2/app/stats/' + rankingKey + '/values.json';
+if (!fs.existsSync(statsPath)) { console.error('R2 missing: ' + statsPath); process.exit(1); }
+const payload = JSON.parse(fs.readFileSync(statsPath, 'utf-8'));
+const rows = payload.rows
+  .filter(r => String(r.yearCode) === String(YEAR) && r.value != null)
+  .sort((a, b) => Number(b.value) - Number(a.value))
+  .map(r => ({ area_code: r.areaCode, area_name: r.areaName, year: r.yearCode, value: Number(r.value) }));
 
 const dir = '.local/r2/sns/ranking/' + rankingKey;
 fs.mkdirSync(dir + '/instagram', { recursive: true });

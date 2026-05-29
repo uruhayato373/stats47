@@ -64,10 +64,9 @@ const testCases: SmokeTestCase[] = [
     expectedStatus: 410,
   },
   {
-    name: "ランキング一覧",
+    name: "ランキング一覧（廃止 2026-05-28 → / に 301）",
     path: "/ranking",
-    expectedStatus: 200,
-    expectedTexts: ["ランキング"],
+    expectedStatus: 301,
   },
   {
     name: "ランキング詳細（総人口）",
@@ -76,8 +75,8 @@ const testCases: SmokeTestCase[] = [
     expectedTexts: ["人口"],
   },
   {
-    name: "地域間比較",
-    path: "/compare?areas=13000,27000",
+    name: "地域間比較 (旧 /compare は 301、新パス /category/{key}/compare)",
+    path: "/category/population/compare?areas=13000,27000",
     expectedStatus: 200,
     expectedTexts: ["比較"],
   },

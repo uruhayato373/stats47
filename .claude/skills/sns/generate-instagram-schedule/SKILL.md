@@ -2,6 +2,7 @@
 name: generate-instagram-schedule
 description: Instagram スケジュール JSON を D1 + ig-posted-log.jsonl を参照して重複なし自動生成する。Use when user says "IGスケジュール生成", "次のスケジュール", "generate-instagram-schedule".
 disable-model-invocation: true
+primary_agent: instagram-strategist
 ---
 
 Instagram 投稿スケジュール JSON を自動生成する。

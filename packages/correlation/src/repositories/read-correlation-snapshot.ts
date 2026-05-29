@@ -8,8 +8,8 @@ import {
   CORRELATION_TOP_PAIRS_KEY,
   type CorrelationStatsSnapshot,
   type CorrelationTopPairsSnapshot,
+  type TopCorrelation,
 } from "../types/snapshot";
-import type { TopCorrelation } from "./list-top-correlations";
 
 // snapshot を最後に更新してから何日経つと「古い」と扱うか。
 // バッチが手動運用なので 1 ヶ月以上の停滞があれば調査トリガにする。

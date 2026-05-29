@@ -2,6 +2,8 @@
 name: knowledge
 description: 過去の失敗と学びを参照・追記する。バグ解決時や設計判断の教訓記録に使用. DB・デプロイ・API連携の作業開始時に関連エントリを確認する背景知識.
 user-invocable: false
+primary_agent: knowledge-curator
+co_agents: [strategy-advisor]
 ---
 
 過去の失敗と学びを参照・追記する。
@@ -122,7 +124,7 @@ user-invocable: false
 2. `available_years` は `[{"yearCode":"2023","yearName":"2023年度"},...]` 形式で保存
 3. `ranking_data.area_code` は都道府県なら `"01000"`〜`"47000"` の5桁で保存（2桁禁止）
 4. 独自 populate スクリプト作成時は `populate-port-rankings.ts` をリファレンスとし、上記フォーマットに準拠する
-5. 修正済み: `populate-occupation-income.ts`, `populate-port-rankings.ts`, `/register-ranking` SKILL.md
+5. 修正済み: `populate-occupation-income.ts`, `populate-port-rankings.ts` (歴史的記録: 旧 `/register-ranking` SKILL.md も併せて修正していたが、Phase 6.7 で skill 自体を削除し `/page-data-batch` + `/sync-metrics-cache` + TS-config に置換)
 
 ---
 
@@ -511,14 +513,15 @@ export async function GET() {
 **原因**: `backfill-stats-prefecture.cjs` の実装が **DELETE all + INSERT** 方式だったため。e-Stat SSDS (`statsDataId=0000010201`) は 2022 年までしか公開していないが、D1 の元データは別ソース (おそらく厚労省人口動態の月次集計を直接取り込み or 別 statsDataId) から来た 2023/2024 を含んでいた。DELETE+INSERT で他ソース由来の年度を巻き添えに消した。
 
 **対策**:
-1. **新規バックフィルは UPSERT 方式** で書く (`INSERT ON CONFLICT(metric_key, area_code, year_code) DO UPDATE`)
+1. **新規バックフィルは UPSERT 方式** で書く (歴史的記録: Phase 6 以前は D1 stats_prefecture へ `INSERT ON CONFLICT(metric_key, area_code, year_code) DO UPDATE`)
    - 他ソース由来の年度を保全できる
-   - `.claude/scripts/estat/restore-from-r2-cache.cjs` が UPSERT 実例
+   - Phase 6/7 以降は R2 (`app/stats/<metric>/values.json`) が観測値 SSOT のため、UPSERT は `/page-data-batch` 内で実施 (merge ロジック)
 2. **DELETE が必要な場合は、対象 metric の年度別データソースを事前確認**
-   - `SELECT DISTINCT year_code, source_id FROM stats_prefecture WHERE metric_key = ?`
+   - Phase 5 以前: `SELECT DISTINCT year_code, source_id FROM stats_prefecture WHERE metric_key = ?`
+   - Phase 6/7 以降: R2 `app/stats/<metric>/values.json` を fetch → rows から DISTINCT yearCode を抽出
    - source_id がバラバラなら DELETE は危険
-3. **リカバリ手順**: R2 cache (`.local/r2/app/ranking/<key>/values.json`) には削除前のデータが残っている (再エクスポート前なら)。`restore-from-r2-cache.cjs <metric_key>` で UPSERT 復元可能
-4. **year_code 形式の正規化忘れに注意**: e-Stat は YYYYMM00 形式 ("1975100000")、R2 cache は YYYY 形式 ("1975")。混在すると重複行を作る。restore 後に `UPDATE ... SET year_code = SUBSTR(year_code, 1, 4) WHERE LENGTH(year_code) > 4` で正規化
+3. **リカバリ手順**: R2 (`app/stats/<metric>/values.json` または旧 `app/ranking/<key>/values.json`) には観測値が残っている。新規 ingestion は `/page-data-batch --metric <key>` で再投入
+4. **year_code 形式の正規化忘れに注意**: e-Stat は YYYYMM00 形式 ("1975100000")、R2 stats は YYYY 形式 ("1975")。混在すると重複行を作る。`/page-data-batch` 内で `SUBSTR(year_code, 1, 4)` 正規化する
 
 **関連**:
 - `.claude/scripts/estat/backfill-stats-prefecture.cjs` (要 UPSERT 化リファクタ)

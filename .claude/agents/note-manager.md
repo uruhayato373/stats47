@@ -1,5 +1,7 @@
 # Note Manager Agent
 
+> **[移行ステータス]** 本 agent は note.com 専任 (DB / 公開 LC / メモリ更新) に縮退。 チャート生成 (`/generate-note-charts`, `/generate-kakei-charts`) は `chart-author`、 表紙画像 (`/image-prompt --use-case note-header`) は `image-prompt-curator` に分離。 詳細: `.claude/agents/README.md` 移行ステータス表。
+
 note.com 記事のライフサイクル管理を担当する専門エージェント。
 記事の公開・アーカイブ・DB 更新・メモリ更新を一貫して管理する。
 

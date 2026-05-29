@@ -14,5 +14,18 @@
     "allow": [
       "Bash(jobs -l)"
     ]
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup|resume|clear",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$CLAUDE_PROJECT_DIR\"/.claude/hooks/check-local-db.js"
+          }
+        ]
+      }
+    ]
   }
 }

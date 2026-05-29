@@ -94,7 +94,7 @@
 
 **アクション**:
 1. `/search-estat` で e-Stat 側の統計 ID を特定
-2. `/register-ranking` でランキングを登録（ranking_items + ranking_data 投入）
+2. TS-config (`packages/data-configs/src/metrics/<key>.ts`) 追加 + `/sync-metrics-cache --apply` + `/page-data-batch --metric <key>` で R2 投入
 3. `/generate-ai-content` で AI 解説生成
 4. `/sync-snapshots` で R2 スナップショット更新
 5. デプロイ → 21-28 日待機（インデックスから評価まで）

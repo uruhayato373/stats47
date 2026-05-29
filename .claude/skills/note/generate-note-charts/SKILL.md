@@ -2,6 +2,8 @@
 name: generate-note-charts
 description: note 記事用 SVG チャートを生成し PNG に変換する。Use when user says "noteチャート生成", "note画像生成". 散布図・カバー画像・横棒グラフ等に対応. 記事本文完成後に実行.
 disable-model-invocation: true
+primary_agent: chart-author
+co_agents: [note-manager]
 ---
 
 note 記事用のチャートを SVG で生成し、PNG に変換して記事に埋め込む。
@@ -40,14 +42,17 @@ docs/31_note記事原稿/<slug>/images/
 
 ### Phase 2: データ取得
 
-**まず `_data/chart-data.json` を確認。** 存在すれば DB 再クエリ不要。
+**まず `_data/chart-data.json` を確認。** 存在すれば再 fetch 不要。
 
-存在しない場合、ローカル D1 から取得:
+存在しない場合、R2 (`app/stats/<metric>/values.json`) から取得 (Phase 6 で D1 観測値テーブル削除済):
 
 ```js
-const Database = require('better-sqlite3');
-const db = new Database('.local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite');
-const rows = db.prepare("SELECT area_code, area_name, value, rank FROM observations WHERE category_code = ? AND year_code = ? ORDER BY rank").all(key, year);
+const fs = require('fs');
+const payload = JSON.parse(fs.readFileSync(`.local/r2/app/stats/${key}/values.json`, 'utf-8'));
+const rows = payload.rows
+  .filter(r => r.yearCode === year && r.value != null)
+  .sort((a, b) => Number(b.value) - Number(a.value))
+  .map((r, i) => ({ areaCode: r.areaCode, areaName: r.areaName, value: Number(r.value), rank: i + 1 }));
 ```
 
 ### Phase 3: SVG 生成

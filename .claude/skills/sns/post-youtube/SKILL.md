@@ -2,6 +2,7 @@
 name: post-youtube
 description: YouTube Shorts 投稿用タイトル・説明を生成しローカルに保存する。Use when user says "YouTube投稿", "YouTube Shorts作成". ランキングデータからキャプション自動生成.
 disable-model-invocation: true
+primary_agent: youtube-strategist
 ---
 
 YouTube Shorts 投稿用コンテンツ（タイトル・説明）を生成してローカル R2 に保存する。

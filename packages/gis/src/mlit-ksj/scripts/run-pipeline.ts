@@ -17,7 +17,7 @@ import { runKsjPipeline } from "../pipeline";
 import type { KsjPipelineResult } from "../types";
 
 const LOCAL_D1_PATH =
-  ".local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite";
+  "packages/database/.data/stats47.sqlite";
 
 interface DatasetMeta {
   data_id: string;

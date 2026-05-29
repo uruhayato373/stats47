@@ -1,0 +1,63 @@
+import type { MetricConfig } from "../types";
+
+export const japanHealthInsuranceSocietyVisitRateDependentsPer1000: MetricConfig = {
+  "key": "japan-health-insurance-society-visit-rate-dependents-per-1000",
+  "title": "全国保険協会管掌健康保険受診率",
+  "unit": "‐",
+  "category": "socialsecurity",
+  "source": {
+    "kind": "estat",
+    "statsDataId": "0000010209",
+    "cdCat01": "#I1520302",
+    "displayName": "社会・人口統計体系",
+    "url": "https://www.stat.go.jp/data/ssds/index.htm",
+  },
+  "entities": [
+    "prefecture",
+  ],
+  "years": {
+    "years": [
+      1985,
+      1986,
+      1987,
+      1988,
+      1989,
+      1990,
+      1991,
+      1992,
+      1993,
+      1994,
+      1995,
+      1996,
+      1997,
+      1998,
+      1999,
+      2000,
+      2001,
+      2002,
+      2003,
+      2004,
+      2005,
+      2006,
+      2023,
+    ],
+  },
+  "yearFormat": "fiscal",
+  "visualization": {
+    "colorScheme": "interpolateBlues",
+    "colorSchemeType": "sequential",
+    "minValueType": "data-min",
+  },
+  "display": {
+    "conversionFactor": 1,
+    "decimalPlaces": 2,
+  },
+  "calculation": {
+    "isCalculated": false,
+  },
+  "seoTitle": "全国保険協会管掌健康保険受診率ランキング都道府県【2023年】｜1位香川県（10,146.81‐）",
+  "seoDescription": "2023年の全国保険協会管掌健康保険受診率の都道府県別ランキング。1位香川県（10,146.81‐）、最下位沖縄県（7,578.91‐）で1.3倍の格差。地図やグラフで47都道府県を比較。",
+  "isActive": true,
+  "isFeatured": false,
+  "featuredOrder": 0,
+};

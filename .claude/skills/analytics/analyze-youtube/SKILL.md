@@ -2,6 +2,7 @@
 name: analyze-youtube
 description: YouTube 動画の内容を詳細分析する（字幕テキスト・メタデータ・視覚）。Use when user says "YouTube動画分析", "Shorts分析", "動画の内容を見て", "この動画を分析", "YouTubeを見て". 字幕テキスト・サムネイル・再生数を統合レポート.
 argument-hint: "<URL or videoId>"
+primary_agent: youtube-strategist
 ---
 
 YouTube 動画（Shorts / 通常動画）のコンテンツ内容を詳細分析する。

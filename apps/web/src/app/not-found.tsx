@@ -1,14 +1,14 @@
 import Link from 'next/link';
 
 import { Button } from "@stats47/components";
-import { BarChart3, Home, MapPin, Search } from "lucide-react";
+import { LayoutDashboard, Home, MapPin, Search } from "lucide-react";
 
 import { NotFoundTracker } from "@/lib/analytics/components/NotFoundTracker";
 
 /** 404 ページに表示する主要動線 */
 const NOT_FOUND_LINKS = [
   { href: "/", icon: Home, label: "トップページ" },
-  { href: "/ranking", icon: BarChart3, label: "ランキング一覧" },
+  { href: "/themes", icon: LayoutDashboard, label: "テーマから探す" },
   { href: "/areas", icon: MapPin, label: "都道府県から探す" },
   { href: "/search", icon: Search, label: "キーワード検索" },
 ];

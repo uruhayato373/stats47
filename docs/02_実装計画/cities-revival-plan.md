@@ -32,7 +32,7 @@ related_files:
 | テーブル | 行数 | 内容 |
 |---|---|---|
 | `cities` | 2,701 | 市区町村マスタ (code, name, prefecture_code) |
-| `stats_city` | 1,866,054 | 市区町村別統計 (metric_key, area_code, value, rank, year_code) |
+| ~~`stats_city`~~ → R2 `app/stats/<metric>/cities.json` | 1,866,054 (DROP 済) | 市区町村別統計。Phase 6 (2026-05-27) で D1 から R2 移行済 |
 | city × metric カバレッジ | 2,701 × 162 = ~437,562 | 1 市につき平均 692 行 (複数年度含む) |
 | `area_profiles` (city rows) | **0** | 県のみ 18,460 行、city profile 未生成 |
 
@@ -118,7 +118,7 @@ city profile ページ (`/areas/{prefCode}/cities/{cityCode}`) に以下を順�
 
 | データ | R2 キー | 生成ソース |
 |---|---|---|
-| city profile (strengths/weaknesses) | `app/areas/{prefCode}/cities/{cityCode}/profile.json` | D1 `stats_city` から batch 生成 |
+| city profile (strengths/weaknesses) | `app/areas/{prefCode}/cities/{cityCode}/profile.json` | R2 `app/stats/<metric>/cities.json` から batch 生成 (Phase 8 で実装予定、現状 run-batch-city-profile.ts は Phase 7 で削除済) |
 | city ↔ city 比較データ (類似都市) | `app/areas/{prefCode}/cities/{cityCode}/similar.json` | 同県内 + 人口近似で算出 |
 | 既存 (city-category) | `app/areas/{prefCode}/cities/{cityCode}/{categoryKey}/...` | 既存維持 |
 
@@ -128,8 +128,10 @@ city profile ページ (`/areas/{prefCode}/cities/{cityCode}`) に以下を順�
 
 ```typescript
 // 新規: packages/area-profile/src/services/run-batch-city-profile.ts
+// (注: Phase 7 (2026-05-28) で初版 service + scripts/run-batch-city.ts を削除済。
+//  Phase 8 で R2 fetch 版として再実装予定)
 // - cities テーブルから 2,701 cityCode を取得
-// - 各 city について stats_city から data を集めて
+// - 各 city について R2 `app/stats/<metric>/cities.json` から data を集めて
 //   extractStrengthsAndWeaknesses を実行 (rank>=1 フィルタ済)
 // - area_profiles テーブルに area_type='city' として INSERT
 // - 既存 prefecture batch と並走可能 (UNIQUE INDEX で衝突なし)

@@ -31,7 +31,7 @@ const OUTPUT_BASE_DIR = path.join(PROJECT_ROOT, ".local", "r2", "ges", "ports");
 
 const DB_PATH = path.join(
   PROJECT_ROOT,
-  ".local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite"
+  "packages/database/.data/stats47.sqlite"
 );
 
 // テンプレート基準座標（神戸港 — 港湾用テンプレートがない場合は既存の兵庫県テンプレートを使用）

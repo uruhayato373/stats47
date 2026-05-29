@@ -20,6 +20,7 @@ published: true
 
 筆者は元県庁職員 (20 年) で、e-Stat を業務で日常的に使ってきました。試行錯誤で覚えた **7 つの実務テクニック** を整理します。これだけで「半日 → 10 分」になります。
 
+> [!NOTE]
 > 本記事は **誰でも e-Stat の Web UI で実行できる** テクニックに絞っています。さらに本格的にデータ加工をしたい方向けには、末尾で Claude Code を使った効率化記事 (note) も紹介します。
 
 ## なぜ e-Stat は「使えない」と言われるのか
@@ -132,10 +133,8 @@ URL: https://api.e-stat.go.jp/rest/3.0/app/json/getStatsData?appId=[APP_ID]&stat
 
 Power Query で「Web から」を選択し上記 URL を貼ると、JSON が表形式に変換されます。**毎月の更新作業が自動化** されます。
 
-### 注意
-
-- 1 日 10 万件のリクエスト制限あり (個人利用では十分)
-- API キーは **Excel ファイルに直接書かない** (共有時の漏洩防止)、 Power Query のパラメータ参照経由で
+> [!WARNING]
+> **API キー (appId) を Excel/スプレッドシートやスクリプトに直接書かない。** ファイル共有・GitHub push 時に漏洩する事故が多発します。Power Query のパラメータ参照、環境変数、または `.env` (gitignore 対象) 経由で読み込むこと。なお e-Stat API は 1 日 10 万件のリクエスト制限がありますが、個人利用では十分です。
 
 ---
 
@@ -203,5 +202,20 @@ Power Query で「Web から」を選択し上記 URL を貼ると、JSON が表
 | T7 関連データセット | 同テーマで多粒度確保 |
 
 7 つを身につけると、e-Stat は「使えないツール」から「業務効率化の強力なインフラ」に変わります。
+
+なお、本サイト stats47 はここで紹介した e-Stat データを 2,150 のランキングに整理して毎日更新しています。「自分で取得する前に、まず可視化済みのデータを見たい」場合はカテゴリ・テーマから探せます。
+
+
+## 関連カテゴリ・テーマ
+
+<source-link href="/category/administrativefinancial">行財政カテゴリの他のランキングを見る</source-link>
+
+<source-link href="/themes/local-finance">地方財政テーマで自治体経営の指標を一覧する</source-link>
+
+
+### 関連記事
+
+- [公務員が ChatGPT で議会答弁を 10 倍早く書く 5 ステップ](/blog/assembly-answer-chatgpt-5steps)
+- [公務員 1 人で毎日 2,150 ランキング更新｜Claude Code × e-Stat 自動化](/blog/koumuin-claude-code-estat-automation)
 
 最初は T1〜T3 だけでも体感が変わるはずです。慣れてきたら T5 (API) で完全自動化に進んでください。
