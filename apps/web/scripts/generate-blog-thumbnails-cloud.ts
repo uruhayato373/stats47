@@ -31,14 +31,8 @@ import { mkdirSync, mkdtempSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 
-import {
-  buildElement,
-  deriveOgpFromFrontmatter,
-  loadFonts,
-  parseFrontmatter,
-  renderToPng,
-  renderToWebP,
-} from "./lib/blog-thumbnail-render";
+// render lib (satori / sharp / react) は生成時のみ動的 import する。
+// --audit モード (CI ゲート) は fetch だけで完結させ native binding に依存させない。
 
 const PUBLIC_URL = process.env.R2_PUBLIC_FETCH_URL ?? "https://storage.stats47.jp";
 const BUCKET = process.env.CLOUDFLARE_R2_BUCKET_NAME ?? "stats47";
@@ -91,12 +85,11 @@ async function cloudThumbnailOk(slug: string): Promise<boolean> {
   }
 }
 
-/** article.md を公開 URL から取得し ogp {title, subtitle} を導出。 */
-async function fetchOgpData(slug: string) {
+/** article.md を公開 URL から取得 (frontmatter パースは呼び出し側で行う)。 */
+async function fetchArticleMarkdown(slug: string): Promise<string | null> {
   const res = await fetch(`${PUBLIC_URL}/app/blog/${slug}/article.md`);
   if (!res.ok) return null;
-  const md = await res.text();
-  return deriveOgpFromFrontmatter(parseFrontmatter(md));
+  return res.text();
 }
 
 function putToR2(key: string, filePath: string, contentType: string): void {
@@ -148,6 +141,16 @@ async function main() {
     return;
   }
 
+  // 生成パスに入ってから render lib (satori/sharp) を読み込む
+  const {
+    buildElement,
+    deriveOgpFromFrontmatter,
+    loadFonts,
+    parseFrontmatter,
+    renderToPng,
+    renderToWebP,
+  } = await import("./lib/blog-thumbnail-render");
+
   console.log("\nフォント読み込み中...");
   const fonts = loadFonts(PROJECT_ROOT);
 
@@ -156,7 +159,8 @@ async function main() {
   let pushed = 0;
 
   for (const slug of targets) {
-    const ogp = await fetchOgpData(slug);
+    const md = await fetchArticleMarkdown(slug);
+    const ogp = md ? deriveOgpFromFrontmatter(parseFrontmatter(md)) : null;
     if (!ogp) {
       console.log(`  [skip] ${slug}: article.md / frontmatter title 取得不可`);
       continue;
