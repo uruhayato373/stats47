@@ -15,6 +15,7 @@ export const numberOfEstablishmentsWholesaleRetail: MetricConfig = {
   },
   "entities": [
     "prefecture",
+    "city",
   ],
   "years": {
     "years": [

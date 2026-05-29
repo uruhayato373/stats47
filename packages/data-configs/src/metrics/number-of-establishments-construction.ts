@@ -15,6 +15,7 @@ export const numberOfEstablishmentsConstruction: MetricConfig = {
   },
   "entities": [
     "prefecture",
+    "city",
   ],
   "years": {
     "years": [

@@ -14,6 +14,7 @@ export const largeRetailStoreCountPer100kAlt: MetricConfig = {
   },
   "entities": [
     "prefecture",
+    "city",
   ],
   "years": {
     "from": 2021,

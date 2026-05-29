@@ -15,6 +15,7 @@ export const numberOfEstablishmentsRealEstateLeasing: MetricConfig = {
   },
   "entities": [
     "prefecture",
+    "city",
   ],
   "years": {
     "years": [

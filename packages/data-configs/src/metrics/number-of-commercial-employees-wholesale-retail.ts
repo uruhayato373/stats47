@@ -14,6 +14,7 @@ export const numberOfCommercialEmployeesWholesaleRetail: MetricConfig = {
   },
   "entities": [
     "prefecture",
+    "city",
   ],
   "years": {
     "from": 2021,
