@@ -13,7 +13,6 @@
  */
 import * as fs from "fs";
 import * as path from "path";
-import Database from "better-sqlite3";
 
 interface Port {
   port_code: string;
@@ -24,15 +23,30 @@ interface Port {
   longitude: number;
 }
 
+interface PortRow {
+  port_code: string;
+  port_name: string;
+  prefecture_name: string;
+  port_grade: string | null;
+  latitude: number | null;
+  longitude: number | null;
+}
+
+// SQL の ORDER BY CASE port_grade … と同等の優先度 (未該当は 4)。
+const GRADE_PRIORITY: Record<string, number> = {
+  国際戦略港湾: 1,
+  国際拠点港湾: 2,
+  重要港湾: 3,
+};
+
 const APP_ROOT = path.join(__dirname, "..");
 const PROJECT_ROOT = path.join(APP_ROOT, "..", "..");
 const TEMPLATES_DIR = path.join(APP_ROOT, "templates");
 const OUTPUT_BASE_DIR = path.join(PROJECT_ROOT, ".local", "r2", "ges", "ports");
 
-const DB_PATH = path.join(
-  PROJECT_ROOT,
-  "packages/database/.data/stats47.sqlite"
-);
+// 完全DBレス (docs/01_技術設計/19_完全DBレス設計.md): ports master は git TS の静的
+// Reference。D1 ではなく同梱 JSON (D1 ports テーブル 699 件と同一・port_code 順) を読む。
+const PORTS_JSON = path.join(__dirname, "data", "ports.json");
 
 // テンプレート基準座標（神戸港 — 港湾用テンプレートがない場合は既存の兵庫県テンプレートを使用）
 const TEMPLATE_LAT = 34.691269;
@@ -127,42 +141,33 @@ function parseArgs(): {
 }
 
 function fetchPorts(grades: string[], portCode?: string, limit?: number): Port[] {
-  const db = new Database(DB_PATH, { readonly: true });
+  const all = JSON.parse(fs.readFileSync(PORTS_JSON, "utf8")) as PortRow[];
+  const hasCoords = (p: PortRow): boolean =>
+    p.latitude != null && p.longitude != null;
 
-  let sql: string;
-  let params: unknown[];
-
+  // port_code 指定時は単一港 (lat/lng 必須)。
   if (portCode) {
-    sql = `
-      SELECT port_code, port_name, prefecture_name, port_grade, latitude, longitude
-      FROM ports
-      WHERE port_code = ? AND latitude IS NOT NULL AND longitude IS NOT NULL
-    `;
-    params = [portCode];
-  } else {
-    const placeholders = grades.map(() => "?").join(", ");
-    sql = `
-      SELECT port_code, port_name, prefecture_name, port_grade, latitude, longitude
-      FROM ports
-      WHERE port_grade IN (${placeholders})
-        AND latitude IS NOT NULL
-        AND longitude IS NOT NULL
-      ORDER BY
-        CASE port_grade
-          WHEN '国際戦略港湾' THEN 1
-          WHEN '\u56FD\u969B\u62E0\u70B9\u6E2F\u6E7E' THEN 2
-          WHEN '重要港湾' THEN 3
-          ELSE 4
-        END,
-        port_code
-      ${limit ? `LIMIT ${limit}` : ""}
-    `;
-    params = grades;
+    return all.filter(
+      (p) => p.port_code === portCode && hasCoords(p),
+    ) as Port[];
   }
 
-  const rows = db.prepare(sql).all(...params) as Port[];
-  db.close();
-  return rows;
+  // grade 指定: port_grade IN (grades) かつ lat/lng 非 null。
+  const gradeSet = new Set(grades);
+  const filtered = all.filter(
+    (p) => p.port_grade != null && gradeSet.has(p.port_grade) && hasCoords(p),
+  );
+
+  // ORDER BY grade 優先度, port_code (SQLite BINARY 照合 = バイト順)。
+  filtered.sort((a, b) => {
+    const pa = GRADE_PRIORITY[a.port_grade ?? ""] ?? 4;
+    const pb = GRADE_PRIORITY[b.port_grade ?? ""] ?? 4;
+    if (pa !== pb) return pa - pb;
+    return a.port_code < b.port_code ? -1 : a.port_code > b.port_code ? 1 : 0;
+  });
+
+  const limited = limit ? filtered.slice(0, limit) : filtered;
+  return limited as Port[];
 }
 
 async function generatePortProjects(): Promise<void> {
