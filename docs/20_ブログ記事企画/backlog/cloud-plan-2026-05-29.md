@@ -25,6 +25,9 @@ note: トピック dedup 済 / GSC需要起点 上位 5 本を公開済 (2026-05
 >
 > 注: 公衆電話の企画仮説「北海道だけ突出」は実データ(東京#1・北海道#6)と矛盾したため reframe 済。
 > OGP 画像は未生成 (後日 Remotion render)。tags は frontmatter 由来で all.json に直接反映 (sync の list-tags 取りこぼしを回避)。
+>
+> **公開後 fix (2026-05-29)**: public-phone-prefecture-vanishing は執筆時 frontmatter に `published: true` 漏れ → all.json published:false → 本番で not-found。frontmatter / DB / all.json を published:true に修正し再 push。ISR incremental cache は Cloudflare edge purge では消えないため、本 PR の main マージ (再デプロイ) で ISR cache をリセットして解消する。
+> 教訓: 新規記事 frontmatter には `published: true` 必須 (article-writer の必須チェック項目に追加すべき)。
 
 環境制約により DB query 不可。指標は `packages/data-configs/src/metrics/*.ts` (実在 key を検証済)、
 需要は GSC 2026-W21 queries.csv、トレンドははてブ hotentry RSS、affiliate は `plan-blog-affiliate` の
