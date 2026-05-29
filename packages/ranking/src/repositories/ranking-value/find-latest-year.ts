@@ -1,6 +1,5 @@
 import "server-only";
 
-import { getDrizzle } from "@stats47/database/server";
 import { readStatsValues } from "@stats47/stats-r2";
 import { err, ok, type Result } from "@stats47/types";
 import type { AreaType } from "@stats47/types";
@@ -12,7 +11,6 @@ import type { AreaType } from "@stats47/types";
  */
 export async function findLatestYear(
   _areaType: AreaType,
-  _db?: ReturnType<typeof getDrizzle>,
 ): Promise<Result<string | null, Error>> {
   try {
     const payload = await readStatsValues("japanese-population", "prefecture");
