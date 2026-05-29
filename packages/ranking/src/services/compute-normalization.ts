@@ -1,6 +1,6 @@
 import { logger } from "@stats47/logger/server";
 import type { AreaType } from "@stats47/types";
-import { findRankingItemByKey } from "../repositories/ranking-item";
+import { readRankingItemByKeyFromR2 } from "../repositories/ranking-item";
 import { listRankingValues } from "../repositories/ranking-value";
 import type { RankingItem, RankingValue } from "../types";
 
@@ -93,7 +93,7 @@ async function getDenominatorValues(
   }
 
   // 2. 分母アイテム情報を取得
-  const itemResult = await findRankingItemByKey(key);
+  const itemResult = await readRankingItemByKeyFromR2(key);
   if (!itemResult.success || !itemResult.data) {
     return [];
   }

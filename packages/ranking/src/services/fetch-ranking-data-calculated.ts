@@ -6,7 +6,7 @@ import {
     computeCalculatedValues,
     rankByValue,
 } from "../index";
-import { findRankingItemByKey } from "../repositories/ranking-item";
+import { readRankingItemByKeyFromR2 } from "../repositories/ranking-item";
 import { listRankingValues } from "../repositories/ranking-value";
 import type { SyncRankingResult } from "../types";
 
@@ -64,8 +64,8 @@ async function fetchCalculatedRankingDataInner(
 
   // 分子と分母のメタデータを取得して、共通の年度を特定 (D1から取得)
   const [numItemResult, denItemResult] = await Promise.all([
-    findRankingItemByKey(calculation.numeratorKey),
-    findRankingItemByKey(calculation.denominatorKey),
+    readRankingItemByKeyFromR2(calculation.numeratorKey),
+    readRankingItemByKeyFromR2(calculation.denominatorKey),
   ]);
   const numItem = numItemResult.success ? numItemResult.data : null;
   const denItem = denItemResult.success ? denItemResult.data : null;
