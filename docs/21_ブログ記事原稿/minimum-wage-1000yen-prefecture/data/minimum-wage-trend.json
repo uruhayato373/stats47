@@ -1,0 +1,112 @@
+{
+  "title": "最低賃金の推移（全国加重平均・東京・秋田）",
+  "unit": "円",
+  "source": "e-Stat 社会・人口統計体系 0000010106 F6501",
+  "series": [
+    {
+      "year": 2010,
+      "national": 730,
+      "tokyo": 821,
+      "akita": 645,
+      "gap": 176
+    },
+    {
+      "year": 2011,
+      "national": 737,
+      "tokyo": 837,
+      "akita": 647,
+      "gap": 190
+    },
+    {
+      "year": 2012,
+      "national": 749,
+      "tokyo": 850,
+      "akita": 654,
+      "gap": 196
+    },
+    {
+      "year": 2013,
+      "national": 764,
+      "tokyo": 869,
+      "akita": 665,
+      "gap": 204
+    },
+    {
+      "year": 2014,
+      "national": 780,
+      "tokyo": 888,
+      "akita": 679,
+      "gap": 209
+    },
+    {
+      "year": 2015,
+      "national": 798,
+      "tokyo": 907,
+      "akita": 695,
+      "gap": 212
+    },
+    {
+      "year": 2016,
+      "national": 823,
+      "tokyo": 932,
+      "akita": 716,
+      "gap": 216
+    },
+    {
+      "year": 2017,
+      "national": 848,
+      "tokyo": 958,
+      "akita": 738,
+      "gap": 220
+    },
+    {
+      "year": 2018,
+      "national": 874,
+      "tokyo": 985,
+      "akita": 762,
+      "gap": 223
+    },
+    {
+      "year": 2019,
+      "national": 901,
+      "tokyo": 1013,
+      "akita": 790,
+      "gap": 223
+    },
+    {
+      "year": 2020,
+      "national": 902,
+      "tokyo": 1013,
+      "akita": 792,
+      "gap": 221
+    },
+    {
+      "year": 2021,
+      "national": 930,
+      "tokyo": 1041,
+      "akita": 822,
+      "gap": 219
+    },
+    {
+      "year": 2022,
+      "national": 961,
+      "tokyo": 1072,
+      "akita": 853,
+      "gap": 219
+    },
+    {
+      "year": 2023,
+      "national": 1004,
+      "tokyo": 1113,
+      "akita": 897,
+      "gap": 216
+    },
+    {
+      "year": 2024,
+      "national": 1055,
+      "tokyo": 1163,
+      "akita": 951,
+      "gap": 212
+    }
+  ]
+}
