@@ -36,14 +36,8 @@ import path from "path";
 
 const MONOREPO_ROOT = path.resolve(__dirname, "..", "..", "..", "..");
 const SNS_ROOT = path.join(MONOREPO_ROOT, ".local", "r2", "sns", "ranking");
-const D1_DIR = path.join(
-  MONOREPO_ROOT,
-  ".local",
-  "d1",
-  "v3",
-  "d1",
-  "miniflare-D1DatabaseObject"
-);
+// ローカルビルド DB (SQLite): packages/database/.data/
+const D1_DIR = path.join(MONOREPO_ROOT, "packages", "database", ".data");
 const BROWSER_RESTART_INTERVAL = 50;
 
 // ---------------------------------------------------------

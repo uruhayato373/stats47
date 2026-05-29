@@ -136,6 +136,9 @@ apps/remotion/out/
 # Local development data
 .local/
 
+# ローカルビルド DB (SQLite) — R2 database/stats47.sqlite から db:pull で取得 (git 管理外)
+packages/database/.data/
+
 
 
 # ルートの一時ファイル

@@ -6,10 +6,8 @@ import Database from "better-sqlite3";
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = resolve(__dirname, "../../../../..");
 
-export const D1_PATH = resolve(
-  REPO_ROOT,
-  ".local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite",
-);
+// ローカルビルド DB (SQLite): packages/database/.data/stats47.sqlite
+export const D1_PATH = resolve(REPO_ROOT, "packages/database/.data/stats47.sqlite");
 
 export const REMOTION_PUBLIC = resolve(REPO_ROOT, "apps/remotion/public");
 

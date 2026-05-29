@@ -50,7 +50,8 @@
     "test:unit": "vitest run --config vitest.config.ts",
     "test:integration": "vitest run --config vitest.config.integration.ts",
     "articles:sync-from-r2": "tsx scripts/sync-articles-from-r2.ts",
-    "seed:themes": "tsx scripts/seed-themes.ts"
+    "seed:themes": "tsx scripts/seed-themes.ts",
+    "db:migrate:local": "tsx scripts/migrate-local.ts"
   },
   "dependencies": {
     "@cloudflare/workers-types": "^4.20250830.0",

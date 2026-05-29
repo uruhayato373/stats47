@@ -28,10 +28,13 @@
 - **「ローカルビルド DB (SQLite)」という用語**: 本プロジェクトの SQLite は **Cloudflare D1 サービスではない** (本番 D1 binding は Phase 8 / リモート D1 は 2026-04-29 に解約済み)。SSOT (TS-config=git / article.md=R2 / 観測値=e-Stat・R2) から再生成可能な **ローカルのビルド時派生キャッシュ + 集計エンジン**。docs/skill で「ローカル D1」と書かれていても実体はこれを指す → `.claude/rules/data-sqlite-ssot.md`
 - **DB 変更はローカルビルド DB (SQLite) 直接 → `/sync-snapshots`**: 本番反映は R2 経由のみ (リモート D1 解約済み)
 - **browser-use は終了時に必ず daemon 停止 + Chrome タブクローズ** → `.claude/rules/browser-use-cleanup.md`
-- **ローカルビルド DB (SQLite) パス固定** (`better-sqlite3` が空ファイルを自動生成するため、これ以外で開かない):
+- **ローカルビルド DB (SQLite) パス固定** (`better-sqlite3` が空ファイルを自動生成するため、これ以外で開かない。miniflare 非依存の素の SQLite ファイル):
   ```
-  .local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite
+  packages/database/.data/stats47.sqlite
   ```
+  - 取得: `npm run db:pull --workspace=packages/r2-storage` (R2 `database/stats47.sqlite` から)、空 schema 作成: `npm run db:migrate:local --workspace=packages/database`
+  - 反映: `npm run db:push --workspace=packages/r2-storage` (soft lock + 世代バックアップ付き)
+  - クラウド/CI からのデータ追加も上記 pull/push で可能 (git 管理外、R2 が持ち回りの真実源)
 
 ## 作業の節目で記録する
 
