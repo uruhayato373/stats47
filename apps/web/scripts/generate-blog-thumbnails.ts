@@ -16,12 +16,14 @@
  *       .local/r2/app/blog/{slug}/ogp/ogp.png
  */
 
-import { existsSync, mkdirSync, readdirSync, readFileSync } from "node:fs";
+import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 
 import {
   buildElement,
+  deriveOgpFromFrontmatter,
   loadFonts,
+  parseFrontmatter,
   renderToPng,
   renderToWebP,
   type OgpData,
@@ -34,7 +36,8 @@ async function main() {
   const slugFilter = slugIdx !== -1 ? args[slugIdx + 1] : null;
 
   const projectRoot = join(import.meta.dirname ?? __dirname, "../../..");
-  const blogDir = join(projectRoot, ".local/r2/app/blog");
+  // 既定は .local/r2 (CI の publish-blog では通常ディレクトリ)。テスト/別経路用に BLOG_DIR で上書き可。
+  const blogDir = process.env.BLOG_DIR ?? join(projectRoot, ".local/r2/app/blog");
 
   console.log("フォントを読み込み中...");
   const fonts = loadFonts(projectRoot);
@@ -56,7 +59,21 @@ async function main() {
     const ogpDir = join(dir, "ogp");
     const ogpPng = join(ogpDir, "ogp.png");
 
-    if (!existsSync(ogpJson)) {
+    // ogp.json があればそれを使う。無ければ article.md の frontmatter から導出
+    // (公開フローで ogp.json 未作成の記事も thumbnail を生成できるようにする)。
+    let ogpData: OgpData | null = null;
+    if (existsSync(ogpJson)) {
+      const { title, subtitle } = JSON.parse(readFileSync(ogpJson, "utf-8")) as OgpData;
+      ogpData = { title, subtitle: subtitle ?? null };
+    } else {
+      const articlePath = join(dir, "article.md");
+      if (existsSync(articlePath)) {
+        ogpData = deriveOgpFromFrontmatter(
+          parseFrontmatter(readFileSync(articlePath, "utf-8")),
+        );
+      }
+    }
+    if (!ogpData) {
       skipped++;
       continue;
     }
@@ -66,10 +83,18 @@ async function main() {
       continue;
     }
 
-    const { title, subtitle } = JSON.parse(
-      readFileSync(ogpJson, "utf-8"),
-    ) as OgpData;
-    const data: OgpData = { title, subtitle: subtitle ?? null, date: "", category: "BLOG" };
+    // 導出した場合は ogp.json も書き出して push 対象に含める
+    if (!existsSync(ogpJson)) {
+      mkdirSync(ogpDir, { recursive: true });
+      writeFileSync(ogpJson, JSON.stringify(ogpData, null, 2) + "\n", "utf-8");
+    }
+
+    const data: OgpData = {
+      title: ogpData.title,
+      subtitle: ogpData.subtitle ?? null,
+      date: "",
+      category: "BLOG",
+    };
 
     process.stdout.write(`  ${slug} ... `);
 

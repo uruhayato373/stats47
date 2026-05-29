@@ -94,6 +94,14 @@ jobs:
           echo "publishedAt=$PD / published=true set for $SLUG"
           grep -m1 '^publishedAt:' "$A"; grep -m1 '^published:' "$A"
 
+      - name: 🖼️ Generate blog thumbnails (staged → 記事と一緒に push)
+        run: |
+          # ogp.json が無くても article.md frontmatter から title/subtitle を導出して
+          # thumbnail-{light,dark}.webp + ogp/ogp.png + ogp.json を .local/r2/app/blog/<slug>/ に生成。
+          # 後続の diff-push-r2 --prefix app/blog/<slug> が記事と一緒に cloud へ push する。
+          # これにより公開記事が必ず thumbnail を持ち、PR の Blog Thumbnail Gate が落ちなくなる。
+          npx tsx apps/web/scripts/generate-blog-thumbnails.ts --slug "${{ github.event.inputs.slug }}"
+
       # CI の export-blog-snapshot は cloud(S3) を list するため、新記事を index(all.json) に
       # 含めるには「先に記事本体を cloud へ push」してから all.json を再生成する必要がある。
       - name: 📤 Push article files to R2 (記事本体を先に cloud へ)
