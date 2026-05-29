@@ -38,6 +38,20 @@ tags: [architecture, db-less, sqlite, r2, cloud-first, estat-survey, handoff]
 - 方針: 全テーブルを **Authored(→git) / Reference(→再生成) / Derived(→R2計算)** に仕分け、
   集計時だけ :memory: SQLite を一時生成 → 破棄。Phase 0〜4 の移行計画あり。
 
+### 3. リモート D1 ハイブリッド — 準備一式を実装（クラウド完結分は完了）
+設計の採用案として「本文=git/R2・運用メタ=D1・観測値=R2」のハイブリッドを選定。
+クラウド/Mac/認証なしで作れる準備を実装し、パイプラインを in-session 検証した。
+
+- **重要な発見**: `articles` は `article.md` frontmatter から全列再構成可能＝**Derived**（D1 の SSOT 不要、R2 が真実源）。
+  真に Authored なのは sns_posts / page_components / affiliate_ads / theme_metrics / categories / themes。
+- 実装したツール（`packages/database/scripts/`）:
+  - `extract-articles-seed-from-r2.ts` — R2 → `seed/articles.json`（**クラウド可**、196 件生成・検証済）
+  - `dump-tables-to-seed.ts` — Authored 系を Mac SQLite → `seed/<table>.json`（**Mac 必須**、Phase 0 凍結兼用）
+  - `seed-to-d1-sql.ts` — seed → `seed/d1-seed.sql`（D1 投入 SQL、再生成可能なので gitignore）
+- runbook: `packages/database/seed/README.md`（D1 再作成〜seed 投入の全手順）
+- **検証済（クラウド）**: 抽出 196 件 → SQL 生成 → in-memory SQLite ロード（196 行・published=117・tags 有効 JSON）
+- **残（要 Mac/Cloudflare 認証）**: Authored 系ダンプ・`wrangler d1 create`・migration 適用・seed 投入（runbook 参照）
+
 ## ブランチと commit
 
 - ブランチ: `claude/eager-lovelace-3nxO8`（origin に push 済、develop と同期）
