@@ -232,7 +232,21 @@ A (死蔵除去) ──▶ C (Derived エフェメラル化) ──▶ D (観測
 - ⚠️ **新発見**: `apps/remotion/scripts/pipeline/render-sns-all.ts` に別の `better-sqlite3` 直 import あり
   (data exporter ではなく render pipeline)。別スコープとして Phase C 残作業に追加。
 - ⚠️ remotion tsconfig は `include:["src"]` のみで **scripts/ は tsc 対象外**。scripts 検証は tsx 実行で行う。
-- **Phase C 残**: area-profile/city-profile snapshot (area_profiles テーブル←本来 Derived、深い)、
-  export-port-statistics (DROP済 stats_port 読みで破損→R2 port stats へ)、calculate-ranking-values/
-  compute-normalization (純関数の確認のみ)、apps/web scripts (blog/page-cards/search-index/port-stats)、
-  ges generate-port-projects、render-sns-all (better-sqlite3)。
+### Phase C 残作業の精査 (2026-05-29、各候補を実調査 → クリーンな単独変換は無し)
+
+remotion 群が唯一クリーンに移行できた理由 = **git TS master (prefectures.json) が既存**だったため。
+残り 7 項目はいずれも「前提作業」が要る (= 即変換できない)。次セッションはこの前提を満たしてから着手:
+
+| 項目 | 実調査の結論 | 前提 / 必要作業 |
+|---|---|---|
+| `calculate-ranking-values.ts` / `compute-normalization.ts` | **純関数ではない**。`listRankingValues`(stats D1=DROP済) / `findRankingItemByKey` に依存 | ranking value 計算チェーン全体 (list-ranking-values → R2 reader 化) の再設計。最も絡む |
+| `apps/ges/scripts/generate-port-projects.ts` | D1 `ports`(port_code/name/grade/lat/lng) を読む。**R2/git TS に ports master が無い** (`app/ports/all.json` 不在、`app/ports/timeseries` のみ) | 先に **ports master を git TS 化** (D1 699件 → ports.json、prefectures.json と同様の静的 Reference) |
+| `apps/web/scripts/export-ranking-page-cards-snapshot.ts` | `page_components` を読む | **Phase E と重複** (page_components は運用6エンティティ)。E の git TS 化で一括対応 |
+| `apps/web/scripts/export-blog-snapshot.ts` | D1 `articles` を読む。articles は Reference (SSOT=article.md) | R2 blog `article.md` frontmatter から D1 articles と同形を再構成 (190記事パース) |
+| `apps/web/scripts/generate-search-index.ts` | D1 metrics+articles+categories | metrics→git TS registry / articles→R2 / categories→git TS の 3 源統合 |
+| `apps/web/scripts/export-port-statistics-snapshot.ts` | **破損** (DROP済 `stats_port` 読み)。かつ package.json 未記載=不活性 | R2 port 観測値の置き場確定後に R2 reader 化 (または削除判断) |
+| `apps/remotion/scripts/pipeline/render-sns-all.ts` | better-sqlite3 直 import (render pipeline) | 読む対象の特定 → 対応する git TS/R2 源へ |
+| area-profile / city-profile snapshot | `area_profiles` テーブル (本来 Derived) を読む。area_profiles 自体の compute (run-batch-area-profile) は stats JOIN=DROP済で別途破損の可能性 | Derived の 2 段 (compute→snapshot) をエフェメラル化。深い |
+
+**結論**: 残 Phase C は「git TS master 新設 (ports 等)」「Derived 計算チェーン再設計 (ranking-values/area-profile)」
+「Phase E (page_components)」の前提作業に分解される。クリーンに着手できる最小単位は **ports master の git TS 化 → ges 変換**。
