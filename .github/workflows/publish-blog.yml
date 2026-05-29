@@ -87,16 +87,29 @@ jobs:
           echo "publishedAt=$PD set for $SLUG"
           grep -m1 '^publishedAt:' ".local/r2/app/blog/$SLUG/article.md"
 
-      - name: 🧮 Regenerate blog snapshot (all.json, union 方式で既存保持)
+      # CI の export-blog-snapshot は cloud(S3) を list するため、新記事を index(all.json) に
+      # 含めるには「先に記事本体を cloud へ push」してから all.json を再生成する必要がある。
+      - name: 📤 Push article files to R2 (記事本体を先に cloud へ)
+        run: |
+          SLUG="${{ github.event.inputs.slug }}"
+          if [ "${{ github.event.inputs.dry_run }}" = "false" ]; then
+            echo "本番: 記事ファイルを cloud へ push (app/blog/$SLUG)"
+            npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix "app/blog/$SLUG"
+          else
+            echo "dry-run: 記事 push スキップ (差分のみ)"
+            npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix "app/blog/$SLUG" --dry-run
+          fi
+
+      - name: 🧮 Regenerate blog snapshot (cloud 記事集合 + 新記事 → all.json, union 方式)
         run: NODE_OPTIONS='--conditions react-server' npx tsx apps/web/scripts/export-blog-snapshot.ts
 
-      - name: 📤 Push to R2 cloud (app/blog prefix のみ)
+      - name: 📤 Push all.json index to R2 (再生成した index を cloud へ)
         run: |
           if [ "${{ github.event.inputs.dry_run }}" = "false" ]; then
-            echo "本番 push: app/blog prefix"
+            echo "本番: index (all.json) を push"
             npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix app/blog
           else
-            echo "dry-run: push せず差分のみ表示"
+            echo "dry-run: index push スキップ (差分のみ)"
             npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix app/blog --dry-run
           fi
 
