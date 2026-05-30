@@ -30,7 +30,7 @@
   - **Authored / 運用** (page_components / theme_metrics / sns_posts / affiliate_ads / categories/themes) → **git TS 定義が SSOT** → 生成スクリプトで R2 JSON（横断整合性はビルド時に検証）。手編集 JSON を SSOT にしない
   - **Reference** (metrics=TS / articles=article.md / estat_catalog=e-Stat API / prefectures=JSON) → **再生成**
   - **Derived** (area_profiles / correlations) → **エフェメラル計算**（使い捨て `:memory:` SQLite / DuckDB が R2 を読む）→ R2。永続しない
-- **永続/リモート D1 は廃止**。S3 creds さえあれば集計もクラウドで完結する（旧「集計はローカル限定」制約は消滅）。git TS → R2 反映の雛形: `apps/web/scripts/sync-theme-additions-to-r2.ts`
+- **永続/リモート D1 は廃止**。S3 creds さえあれば集計もクラウドで完結する（旧「集計はローカル限定」制約は消滅）。git TS → R2 反映の実装例: `apps/web/scripts/export-page-components-snapshot.ts`（page_components git TS SSOT `data/page-components/` → R2、Phase E 実装済）
 - **観測値・派生を永続 DB に入れない** (R2 のまま。Phase 6 肥大=解約の再発防止)。schema 定義 (`packages/database/src/schema/*.ts`) と integration テスト基盤は「型ソース / テスト用」として残置可（配信 R2 に影響しない）。移行スペック: `docs/02_実装計画/dbless-migration.md`
 - **browser-use は終了時に必ず daemon 停止 + Chrome タブクローズ** → `.claude/rules/browser-use-cleanup.md`
 

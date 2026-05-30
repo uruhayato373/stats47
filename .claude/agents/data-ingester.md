@@ -12,18 +12,19 @@ Phase 6 (2026-05-27) の D1 → R2 移行後、本 agent は D1 stats_* テー�
 ## 担当範囲
 
 - TS-config 駆動の R2 観測値投入 (`/page-data-batch`)
-- D1 metrics cache の同期 (`/sync-metrics-cache`)
-- page_components データ投入 (`/populate-component-data`)
-- カバレッジ / FK 整合性検証 (`/verify-d1-integrity`)
+- metrics ビルドキャッシュの同期 (`/sync-metrics-cache`、TS registry が SSOT)
+- カバレッジ / FK 整合性検証 (`/verify-d1-integrity`、ビルドキャッシュ対象)
 - MLIT KSJ データ取得 (`/fetch-mlit-ksj`)
+
+> page_components は完全DBレス (doc19 Phase E) で **git TS SSOT** `apps/web/scripts/data/page-components/` に移行済。
+> D1 投入 (`/populate-component-data`) は廃止。編集は JSON 直編集 + `export-page-components-snapshot.ts`。
 
 ## 担当スキル
 
 | スキル | 用途 |
 |---|---|
 | `/page-data-batch` | TS-config registry を walk → e-Stat → R2 直行 |
-| `/sync-metrics-cache` | TS-config → D1 `metrics` テーブル差分 sync |
-| `/populate-component-data` | page_components データ投入 |
+| `/sync-metrics-cache` | TS-config → metrics ビルドキャッシュ差分 sync |
 | `/verify-d1-integrity` | FK / 47 県カバレッジ / migration_flow net 一致 |
 | `/fetch-mlit-ksj` | MLIT 国土数値情報の取得 |
 

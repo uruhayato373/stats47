@@ -39,7 +39,7 @@ const msg = [
   "  - 本番アプリは R2 snapshot のみ読む (DB を一切 query しない)。",
   "  - SSOT は git TS (設定・定義・運用エンティティ) と R2 (観測値・配信) の二つだけ。",
   "    永続/リモート D1 は廃止済み。クラウド/ローカルとも git TS 編集 + R2 直接反映で作業する。",
-  "    設定の R2 反映は冪等スクリプト (例: apps/web/scripts/sync-theme-additions-to-r2.ts)。",
+  "    設定の R2 反映は git TS → R2 generator (例: apps/web/scripts/export-page-components-snapshot.ts)。",
   "  - Derived (area_profiles / correlations) はエフェメラル計算 → R2。",
   "    使い捨て :memory: SQLite / DuckDB が R2 観測値を読んで集計し R2 へ書き出す (永続しない)。",
   "",
