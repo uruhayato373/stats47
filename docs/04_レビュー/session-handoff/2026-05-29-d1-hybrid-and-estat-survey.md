@@ -1,12 +1,18 @@
 ---
 type: session-handoff
 date: 2026-05-29
-status: adopted
+status: superseded
+superseded_by: docs/01_技術設計/19_完全DBレス設計.md
 branch: claude/eager-lovelace-3nxO8
 tags: [architecture, d1-hybrid, r2, cloud-first, estat-survey, handoff]
 ---
 
 # セッションハンドオフ 2026-05-29｜リモート D1 ハイブリッド採用 + e-Stat 候補洗い出し
+
+> **⚠️ 「リモート D1 ハイブリッド採用」は同日 (2026-05-29) にオーナー判断で却下され、
+> [`19_完全DBレス設計.md`](../../01_技術設計/19_完全DBレス設計.md)（完全DBレス）に変更された。**
+> 本ハンドオフの「リモート D1 立ち上げ」前提は無効。SSOT は git TS + R2 のみ、永続/リモート D1 は廃止。
+> e-Stat 候補洗い出し・「2009100000 問題」根治・page-data-batch 完成などデータ面の成果は有効。
 
 別 PC / 別セッションで `git pull` した agent がこの続きを把握するための引き継ぎ。
 

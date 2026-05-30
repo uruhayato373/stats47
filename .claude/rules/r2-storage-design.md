@@ -48,7 +48,7 @@
 
 ## 動画関連の特殊ルール
 
-Remotion build 時に必要な統計データ JSON は **`apps/remotion/public/<feature>/`** に置く (R2 ではなく git tracked)。理由: Remotion の Webpack bundle が `staticFile()` で読み込むため。これらは D1 を SSOT として `/export-d1-to-remotion-static` で再生成される派生物。
+Remotion build 時に必要な統計データ JSON は **`apps/remotion/public/<feature>/`** に置く (R2 ではなく git tracked)。理由: Remotion の Webpack bundle が `staticFile()` で読み込むため。これらは **git TS / R2 を入力に再生成される派生物**（完全DBレス: 永続 D1 は SSOT ではない）。
 
 動画 master / SNS 用 47 分割は R2 に保存:
 - `video/<slug>/master.mp4` — YouTube アップロード後の master + メタ (description / thumbnail)
@@ -131,6 +131,6 @@ const flow    = await readMigrationFlow("population-migration-inter-prefecture",
 
 - `packages/r2-storage/src/scripts/README.md` — R2 操作全般
 - `.claude/skills/db/sync-snapshots/SKILL.md` — スナップショット一括更新スキル
-- `.claude/agents/data-ingester.md` — TS-config → R2 投入 / D1 metrics cache 管理
-- `.claude/agents/snapshot-exporter.md` — D1 → R2 snapshot 生成
+- `.claude/agents/data-ingester.md` — TS-config / e-Stat → R2 投入
+- `.claude/agents/snapshot-exporter.md` — git TS / R2 観測値 → R2 snapshot 生成 (エフェメラル計算)
 - `.claude/agents/r2-publisher.md` — R2 push / pull / du 専任

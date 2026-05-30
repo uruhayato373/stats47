@@ -179,12 +179,12 @@ awk -F',' 'NR>1 && $1 ~ /\/blog\// && $3 >= 200 && ($4+0) < 0.02 && ($4+0) > 0 {
 
 ## デプロイフロー (記録)
 
-1. `.local/r2/app/blog/{slug}/article.md` の frontmatter (title, seoTitle, description) を編集
+1. `.local/r2/app/blog/{slug}/article.md` の frontmatter (title, seoTitle, description) を編集 ★article.md が SSOT
 2. 必要なら本文も編集 ([!NOTE] callout 追加、内部リンク強化)
-3. `npm run articles:sync-from-r2 --workspace=packages/database` で D1 articles テーブル更新
-4. `bash .claude/skills/db/sync-snapshots/run.sh --only blog` で R2 push
-5. 改善ログ `docs/05_改善ログ/gsc.md` に BLOG-CTR-NN として記録
-6. feature ブランチで commit → develop merge → PR develop → main → CI green → merge → Cloudflare Pages 自動 deploy
+3. `bash .claude/skills/db/sync-snapshots/run.sh --only blog` で R2 push
+   （`export-blog-snapshot.ts` が article.md frontmatter を直接読んで `app/blog/all.json` を生成 = 完全DBレス。D1 articles テーブルは廃止済）
+4. 改善ログ `docs/05_改善ログ/gsc.md` に BLOG-CTR-NN として記録
+5. feature ブランチで commit → develop merge → PR develop → main → CI green → merge → Cloudflare Pages 自動 deploy
 
 ## 実証データ (2026-05-23 ベース)
 
