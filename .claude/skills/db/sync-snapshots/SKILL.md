@@ -33,13 +33,12 @@ URL → R2 パス対応は `.claude/rules/r2-storage-design.md` を参照。
 | Snapshot | スクリプト | R2 キーパス | サイズ目安 |
 |---|---|---|---|
 | master (per-URL + surveys + categories) | `packages/ranking/src/scripts/export-master-snapshots.ts` | `app/home/featured.json` / `app/category/{key}/items.json` / `app/ranking/{key}/item.json` / `app/survey/{id}/items.json` / `app/survey/all.json` | ~13MB |
-| ai-content | `packages/ai-content/src/scripts/export-snapshot.ts` | `app/ranking/{key}/ai-content.json` | ~11MB (2,151 files) |
-| correlation by-key | `packages/correlation/src/scripts/export-snapshot.ts` | `app/correlation/by-ranking-key/{key}.json` | ~5MB (1,830 files) |
-| ranking-values | `packages/ranking/src/scripts/export-ranking-values-snapshots.ts` | `app/ranking/{key}/values.json` | ~30MB (2,151 files) |
+| remotion-static | `apps/remotion/scripts/export-d1-to-remotion-static.ts --feature all` | `apps/remotion/public/<feature>/*.json` (R2 push 対象外) | — |
 | area-profile | `packages/area-profile/src/scripts/export-snapshot.ts` | `app/areas/{areaCode}/profile.json` | ~4MB (47 files) |
-| blog | `apps/web/scripts/export-blog-snapshot.ts` | `app/blog/all.json` | ~150KB |
-| page-components | `apps/web/scripts/export-page-components-snapshot.ts` | `app/page-components/all.json` | ~150KB |
-| affiliate-ads | `apps/web/scripts/export-affiliate-ads-snapshot.ts` | `app/affiliate-ads/all.json` | ~15KB |
+| city-profile | `packages/area-profile/src/scripts/export-city-snapshot.ts` | `app/areas/{cityCode}/profile.json` | — |
+| blog | `apps/web/scripts/export-blog-snapshot.ts` (article.md) | `app/blog/all.json` | ~150KB |
+| page-components | `apps/web/scripts/export-page-components-snapshot.ts` (git TS `data/page-components/`) | `app/page-components/{pageType}/{key}.json` (per-page, 98 files) | ~150KB |
+| affiliate-ads | `apps/web/scripts/export-affiliate-ads-snapshot.ts` (git TS `affiliate-ads-data.ts`) | `app/affiliate-ads/all.json` | ~15KB |
 | ranking-page-cards | `apps/web/scripts/export-ranking-page-cards-snapshot.ts` | `app/ranking/{key}/page-cards.json` | ~16KB |
 | fishing-ports | `apps/web/scripts/export-fishing-ports-snapshot.ts` | `app/fishing-ports/all.json` | ~620KB |
 | ports + port-statistics | `apps/web/scripts/export-port-statistics-snapshot.ts` | `app/ports/...` | ~50MB (715 files) |

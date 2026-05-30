@@ -26,19 +26,21 @@ PR は **develop → main の 1 段階のみ**。feature/* → develop は直 me
 - `/deploy` スキルで実行
 - フロー: feature/* で作業 → ローカルで develop に merge → `git push origin develop` → `gh pr create --base main --head develop` → CI green → マージ → main 自動デプロイ → 必要なら `/purge-cdn`
 
-## データ反映フロー（ハイブリッド設計が正典 → `docs/01_技術設計/18_データ層ハイブリッド設計.md`）
+## データ反映フロー（完全DBレスが正典 → `docs/01_技術設計/19_完全DBレス設計.md`）
 
-**本番は R2 スナップショット配信のみ。** オーサリング SSOT は形で使い分けて反映する:
+**本番は R2 スナップショット配信のみ。** SSOT は git TS と R2 の二つだけ。永続/リモート D1 は廃止。
+オーサリング SSOT を生成スクリプトで R2 に直接反映する（D1 を経由しない）:
 
 ```
-Authored/設定 (チャート定義等)  : git TS 定義 ──seed──▶ リモートD1 ──export──▶ R2 ──▶ 本番配信
-Authored/関係・運用 (page_components 等) : リモートD1 ──exporter──▶ R2 ──▶ 本番配信
-Reference (metrics/articles)   : git TS / article.md ──再生成──▶ R2 snapshot
-Derived (area_profiles/相関)    : リモートD1 で JOIN（or R2観測値をエフェメラル計算）──▶ R2 snapshot
+Authored/設定 (チャート定義等)        : git TS 定義 ──生成スクリプト──▶ R2 ──▶ 本番配信
+Authored/関係・運用 (page_components 等) : git TS 定義 ──生成スクリプト──▶ R2 ──▶ 本番配信 (横断整合はビルド時に検証)
+Reference (metrics/articles)          : git TS / article.md ──再生成──▶ R2 snapshot
+Derived (area_profiles/相関)          : R2 観測値をエフェメラル計算 (:memory:/DuckDB) ──▶ R2 snapshot
 ```
 
-- **リモート D1 の CRUD/seed/export/集計はローカル(Mac)で実施**（認証・インスタンスが要る）。クラウド agent は git TS と R2 直接で作業
-- クラウドで急ぎ反映する fallback の雛形: `apps/web/scripts/sync-theme-additions-to-r2.ts`（S3 で read-modify-write、冪等）。次回ローカルで seed/export を流せば D1 と一致
+- **クラウド/ローカルとも git TS 編集 + R2 直接反映で作業**（永続 D1 認証は不要 = クラウド完結）
+- 設定の R2 反映の実装例: `apps/web/scripts/export-page-components-snapshot.ts`（git TS `data/page-components/` → R2、Phase E 実装済）
+- R2 読みは公開 URL 経由で SSD/認証なしに可能: `R2_PUBLIC_FETCH_URL=https://storage.stats47.jp`
 - ranking-values（~30K files）の更新は `SKIP_VALUES=1` で他のみ更新し、必要な場合のみフル実行
 - ロールバックは R2 の旧 snapshot ファイルへの上書き push で対応
-- 移行期は `db:pull`/`db:push` 併存可だが**手調整データを書くのはローカル1箇所に固定**（上書き消失防止）
+- 旧 `db:pull`/`db:push` / リモート D1 seed/export は廃止 (legacy)。手編集 JSON を SSOT にしない（git TS → 生成）

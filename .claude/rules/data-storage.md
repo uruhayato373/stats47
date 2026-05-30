@@ -1,54 +1,54 @@
-# 記録先の統一原則 (D1 vs `.claude/` vs `docs/`)
+# 記録先の統一原則 (git TS + R2 vs `.claude/` vs `docs/`)
 
-> **⚠️ 2026-05-29 更新: データ層は「形で使い分けるハイブリッド」が正典 → [`docs/01_技術設計/18_データ層ハイブリッド設計.md`](../../docs/01_技術設計/18_データ層ハイブリッド設計.md)。**
-> 以下「ローカルビルド DB (SQLite) に置くもの」は、現在は形で読み替える: **設定(低volume・人手)=git TS** /
-> **関係・運用(横断クエリ・CRUD)=リモート D1** / 配信=R2。`.claude/` と `docs/` の使い分け（本ファイルの主眼）は不変。
-> アプリが読むデータの判定は「→ 永続 DB」ではなく「→ 形で git TS / D1 を選び、配信は R2 / Derived は計算→R2」。
+> **⚠️ 2026-05-29 更新: データ層は「完全DBレス」が正典 → [`docs/01_技術設計/19_完全DBレス設計.md`](../../docs/01_技術設計/19_完全DBレス設計.md)。**
+> 永続/リモート D1 を SSOT に持たない。アプリが読むデータの SSOT は形で選ぶ: **設定/運用エンティティ=git TS** /
+> **観測値=R2** / **配信=R2 snapshot** / **Derived(集計)=エフェメラル計算 → R2**。
+> `.claude/` と `docs/` の使い分け（本ファイルの主眼）は不変。
 
 データの性質で保存先を厳格に分ける。**スキル実装・エージェントは以下の分類に従うこと**。
 
 判定軸: (a) 誰が読むか (app / agent / 人間)、(b) 何のために (CRUD / 振り返り / 計測ログ)。
 
-## ローカルビルド DB (SQLite) に置くもの — 「メタ + 運用エンティティ」
+## アプリが読むデータ (git TS が SSOT → R2 配信) — 「設定 + 運用エンティティ」
 
-> **注**: 以前「D1」と呼んでいた層。Cloudflare D1 サービスではなく、SSOT から再生成可能なローカル SQLite ビルドキャッシュ + 集計エンジン (本番は R2 のみ読む)。用語: [`data-sqlite-ssot.md`](./data-sqlite-ssot.md)
+> **注**: 旧 docs / skill が「D1」「ローカルビルド DB」と呼んでいた層は **SSOT ではない**。
+> Cloudflare D1 サービスではなく、再生成可能な使い捨てビルドキャッシュ / エフェメラル集計エンジン。
+> SSOT は git TS と R2 のみ。用語と決定表: [`data-sqlite-ssot.md`](./data-sqlite-ssot.md) / 正典: doc 19。
 
-Phase 6 (2026-05-27) で **観測値 (stats_*) と相関結果 (correlations) は R2 へ全面移行済**。ローカルビルド DB は ~336MB に縮小、メタ + 運用エンティティ + マスタのみが残る。詳細: [`data-sqlite-ssot.md`](./data-sqlite-ssot.md)
+Phase 6 (2026-05-27) で観測値・相関結果を R2 へ移行、Phase F (2026-05-30) で運用エンティティの SSOT も
+git TS 化し永続 D1 を全廃した。アプリが読む各データの真実源:
 
-### メタ (cache from TS-config)
-- `metrics` — 指標メタ。**SSOT は `packages/data-configs/src/metrics/<key>.ts`**。`/sync-metrics-cache` で同期
-- `sources` — データ出所
-- `estat_metainfo` / `estat_catalog` — e-Stat カタログ
+### Authored / 設定 (git TS が SSOT → 生成スクリプトで R2)
+- metric メタ — **SSOT は `packages/data-configs/src/metrics/<key>.ts`**
+- テーマのチャート定義など各種カタログ定義 — git TS → R2 反映 (冪等スクリプト)
 
-### マスタ (静的)
-- `prefectures` (47), `cities` (2,701) — エリアマスタ
-- `categories` (17), `themes` (24), `surveys`, `ports` (699), `fishing_ports` (2,896), `gis_datasets` (127)
+### Authored / 運用 (git TS 定義が SSOT → 生成スクリプトで R2 JSON)
+- `page_components` / `theme_metrics` / `categories` / `themes` / `surveys`
+- `affiliate_ads` / `sns_posts`
+- 横断整合性 (参照整合・キー重複・孤立参照) は **生成スクリプト内でビルド時に検証**する
 
-### 集計 / 派生 (D1 内で計算)
-- `area_profiles` (23,366) — 県別 strength/weakness
-- `theme_metrics` (284) — テーマ ↔ 指標マッピング
-- `page_components` (411) — チャート config
+### Reference (外部に真実源 → 再生成)
+- `articles` (article.md) / `estat_catalog` (e-Stat API) / `prefectures`・`cities` (JSON) / `ports`・`fishing_ports`・`gis_datasets`
 
-### コンテンツ・運用
-- `articles` (196) — Web コンテンツ
-- `affiliate_ads` (24), `sns_posts` (549) — 運用系
+### Derived (エフェメラル計算 → R2、永続しない)
+- `area_profiles` (県別 strength/weakness) / correlations
+- 使い捨て `:memory:` SQLite / DuckDB が R2 観測値を読んで集計 → R2 へ書き出す
 
-### Phase 6 で R2 へ移行したもの (D1 にはもう無い)
-
+### R2 (観測値の SSOT + 配信 snapshot)
 - 観測値 → `app/stats/<metric>/values.json` (都道府県) / `cities.json` / `ports.json` / `migration-flow-<year>.json`
-- 相関分析結果 → `app/correlation/top-pairs.json` (R2 snapshot 配信、計算時のみ D1 temp 使用)
+- 相関 → `app/correlation/top-pairs.json` (エフェメラル計算で生成)
 
-## D1 からの派生 (生成物) — 「再生成可能な snapshot」
+## 配信 snapshot (再生成可能) — 手編集禁止
 
-**判定軸**: D1 を入力に exporter スクリプトで作られる、再生成可能な JSON / SVG / 動画素材。手で編集してはならない。
+**判定軸**: git TS / R2 観測値を入力に生成スクリプトで作られる、再生成可能な JSON / SVG / 動画素材。手で編集してはならない。
 
-| 派生先 | 用途 | 派生スキル |
+| 派生先 | 用途 | 生成 |
 |---|---|---|
 | `.local/r2/app/<route>/<file>.json` → Cloudflare R2 | Web app SSR / SSG が fetch | `/sync-snapshots` + `/push-r2` |
-| `apps/remotion/public/<feature>/*.json` | Remotion build 時に `staticFile()` で読み込み | `/export-d1-to-remotion-static` |
-| `packages/area/src/data/{prefectures,cities}.json` | npm パッケージ静的 export | `/export-d1-to-remotion-static --feature master` |
+| `apps/remotion/public/<feature>/*.json` | Remotion build 時に `staticFile()` で読み込み | git TS / R2 → static export |
+| `packages/area/src/data/{prefectures,cities}.json` | npm パッケージ静的 export | master export |
 
-派生 JSON は git tracked でも commit して良い (履歴で差分追跡)。ただし **D1 が真実源** で、JSON を手で編集すると乖離が起きる。
+派生 JSON は git tracked でも commit して良い (履歴で差分追跡)。ただし **真実源は git TS / R2** で、生成物を手で編集すると乖離が起きる。
 
 詳細: [`data-sqlite-ssot.md`](./data-sqlite-ssot.md)
 
@@ -98,16 +98,15 @@ Phase 6 (2026-05-27) で **観測値 (stats_*) と相関結果 (correlations) �
 
 ```
 スキルが生成するデータの本質は？
-  ├─ アプリが読む Authored エンティティ
-  │    ├─ 設定(低volume・人手・型/review)      → git TS が SSOT → seed/export で D1・R2
-  │    └─ 関係・運用(横断クエリ・CRUD)         → リモート D1 が SSOT → exporter で R2
-  │      （詳細・判定は 18_データ層ハイブリッド設計.md）
-  ├─ 人間が読み返す計画・レビュー・改善ログ    → docs/
-  ├─ エージェントが参照する詳細ログ・state    → .claude/
-  └─ PR/Issue 連携が本質                     → GitHub Issues (enhancement/bug)
+  ├─ アプリが読む Authored エンティティ (設定 / 運用)  → git TS が SSOT → 生成スクリプトで R2 JSON
+  │      （詳細・判定は 19_完全DBレス設計.md §3 / data-sqlite-ssot.md）
+  ├─ 観測値から計算できる集計 (Derived)              → エフェメラル計算 → R2 (永続しない)
+  ├─ 人間が読み返す計画・レビュー・改善ログ          → docs/
+  ├─ エージェントが参照する詳細ログ・state          → .claude/
+  └─ PR/Issue 連携が本質                            → GitHub Issues (enhancement/bug)
 ```
 
-迷う場合は **docs/ または .claude/ を優先**。アプリが読む配信データは常に **R2 JSON**（上流 SSOT は形で git TS / D1）。
+迷う場合は **docs/ または .claude/ を優先**。アプリが読む配信データは常に **R2 JSON**（上流 SSOT は git TS、永続 DB は持たない）。
 
 ## 2 層構造（improvement 系）
 

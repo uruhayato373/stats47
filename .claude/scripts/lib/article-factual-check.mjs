@@ -48,6 +48,12 @@ export const RANK_CONTEXT_SKIP = /(?:もの)?(?:乖離|差(?:が|を|に|は|の
 // 一人当たり (per capita) は derived ranking で data に直接含まれない → skip
 export const PER_CAPITA_SKIP = /(?:一人当たり|1人当たり|1人あたり|人口当たり|人口あたり|per\s*capita|人口比)/i;
 
+// 派生値 (差額・比・当たり・平均・合計・換算 等) は data の「絶対 value」と一致しないため
+// value WARN (gross mismatch) の対象から除外する。誤検出 (例:「差額176円」「受け持つ住民数325人」
+// 「1人当たり…」が VALUE_MISMATCH 扱いになる) を防ぐ。WARN のみなので過剰 skip でも害は小さい。
+export const DERIVED_VALUE_SKIP =
+  /(?:差額|の差|との差|差は|差が|差を|差で|格差|当たり|あたり|受け持|受持|につき|平均|中央値|合計|総額|総計|累計|比率|比は|比が|割合|シェア|構成比|換算|÷|割っ|割る|上回|下回|倍)/;
+
 // ============================================================================
 // Ground truth builder (data/*.json から rank/value 索引を build)
 // ============================================================================
@@ -342,6 +348,8 @@ export function checkInverseRankClaims(content, gt) {
 //   3. ±5% 以内で一致する value があれば OK。無く、かつ最近傍と 3 倍以上乖離する
 //      場合のみ「gross mismatch (要確認)」を WARN (例: 東京 発電量 42M→実 5.7M)
 //   4. 単位の無い裸の数値・年号・rank (位) は対象外
+//   5. 派生値 (差額/比/当たり/平均/合計/換算 = DERIVED_VALUE_SKIP, PER_CAPITA_SKIP) は
+//      data の絶対 value と一致しないため対象外 (誤検出防止、2026-05-30 追加)
 
 const JA_SCALE = { 兆: 1e12, 億: 1e8, 万: 1e4, 千: 1e3, 百万: 1e6 };
 
@@ -405,6 +413,16 @@ export function checkValueClaims(content, gt) {
     const unitTail = m[4];
     const num = parseNumeric(numRaw);
     if (num === null) continue;
+
+    // 派生値 (差額/比/当たり/平均/換算 等) は data の絶対 value と一致しない → WARN 対象外。
+    // claim 周辺 (matched span + 直前 24 字 + 直後 16 字) に derived/per-capita マーカーがあれば skip。
+    const valLead = body.slice(Math.max(0, m.index - 24), m.index);
+    const valTrail = body.slice(m.index + m[0].length, m.index + m[0].length + 16);
+    if (
+      PER_CAPITA_SKIP.test(m[0]) || PER_CAPITA_SKIP.test(valLead) ||
+      DERIVED_VALUE_SKIP.test(m[0]) || DERIVED_VALUE_SKIP.test(valLead) ||
+      DERIVED_VALUE_SKIP.test(valTrail)
+    ) continue;
 
     // 年号らしき値 (1900-2100 で単位が無いケースは上で弾く) はここでは単位付きなので通す
     const claimBase = num * jaScaleMultiplier(scaleTok);

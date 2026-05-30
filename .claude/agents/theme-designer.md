@@ -19,19 +19,19 @@ DB の ranking_items に閉じない。e-Stat API に存在する全指標が候
 - **Phase 2**: e-Stat API の未登録指標を探索（`/search-estat` + `/inspect-estat-meta`）
 - **Phase 3**: 他の政府データソース（国土数値情報、Japan Dashboard 等）も考慮
 
-### 2. コンポーネント定義は page_components テーブルが唯一の定義元（Single Source of Truth）
+### 2. コンポーネント定義は page_components の git TS JSON が唯一の SSOT（完全DBレス doc19 Phase E）
 
-**IndicatorSet にチャート定義を含めてはならない。** 全ダッシュボードコンポーネント（KPI・チャート・属性マトリクス等）は `page_components` テーブルに格納し、`page_component_assignments` でページに割り当てる。
+**IndicatorSet にチャート定義を含めてはならない。** 全ダッシュボードコンポーネント（KPI・チャート・属性マトリクス等）は
+**git TS** `apps/web/scripts/data/page-components/<pageType>/<pageKey>.json`（配列）に格納する。永続/リモート D1 への INSERT は廃止。
 
-- `IndicatorSet.charts` は廃止済み（型から削除）
-- `IndicatorSet.panelTabs[].charts` も廃止済み
-- `comparison_components` は廃止済み（`page_components` に統合完了）
-- テーマページ・エリアページ・比較ページが全て `loadPageComponents()` でコンポーネントを取得する
+- `IndicatorSet.charts` / `IndicatorSet.panelTabs[].charts` は廃止済み（型から削除）
+- `comparison_components` / `page_component_assignments` は廃止済み（`page_components` に統合、PR #216）
+- テーマページ・エリアページ・比較ページが全て `loadPageComponents()`（R2 fetch）でコンポーネントを取得する
 
 **新しいコンポーネントを追加するワークフロー:**
-1. `page_components` に INSERT（componentKey, componentType, title, componentProps）
-2. `page_component_assignments` に INSERT（pageType, pageKey, componentKey, section, sortOrder）
-3. コード変更不要
+1. `data/page-components/<pageType>/<pageKey>.json` の配列に要素を追加（componentKey, componentType, title, componentProps, section, sortOrder 等）
+2. `export-page-components-snapshot.ts` で R2 再生成 → `verify-page-components-snapshot.ts` で cloud 一致検証 → `/push-r2`
+3. コード変更不要（`/insert-theme-components` skill が手順を提供）
 
 ### 3. ストーリードリブン
 

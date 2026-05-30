@@ -15,14 +15,10 @@
 
 const fs = require("node:fs");
 const path = require("node:path");
-const Database = require("better-sqlite3");
+const store = require("./sns-posts-store.cjs");
 
 const PROJECT_ROOT = path.resolve(__dirname, "..", "..", "..");
 const PAUSE_FILE = path.join(PROJECT_ROOT, ".claude/state/youtube-pause.json");
-const D1_PATH = path.join(
-  PROJECT_ROOT,
-  ".local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite",
-);
 const WEEKLY_LIMIT = 3;
 
 function fail(msg) {
@@ -68,28 +64,20 @@ function weekRangeJST() {
 }
 
 function checkBudget() {
-  if (!fs.existsSync(D1_PATH)) {
-    console.warn(`[check-youtube-post-budget] D1 not found, skipping budget check: ${D1_PATH}`);
-    return;
-  }
-  const db = new Database(D1_PATH, { readonly: true, fileMustExist: true });
-  try {
-    const { startUTC, endUTC } = weekRangeJST();
-    const row = db
-      .prepare(
-        `SELECT COUNT(*) AS n FROM sns_posts
-         WHERE platform = 'youtube'
-           AND status IN ('posted', 'scheduled')
-           AND COALESCE(posted_at, scheduled_at) >= ?
-           AND COALESCE(posted_at, scheduled_at) < ?`,
-      )
-      .get(startUTC, endUTC);
-    const count = row?.n ?? 0;
-    if (count >= WEEKLY_LIMIT) {
-      fail(`今週の YouTube 投稿数が上限 ${WEEKLY_LIMIT} 本に達しています (現在 ${count} 本、週 ${startUTC.slice(0, 10)}〜)`);
-    }
-  } finally {
-    db.close();
+  const { startUTC, endUTC } = weekRangeJST();
+  // 旧 SQL の COALESCE(posted_at, scheduled_at) を JS で等価再現。
+  // posted_at が非 null ならそれ、null/未設定なら scheduled_at を採用。
+  // どちらも null/未設定なら範囲比較は成立せず (SQLite の NULL 比較 = 除外) カウント対象外。
+  const count = store.query((p) => {
+    if (p.platform !== "youtube") return false;
+    if (p.status !== "posted" && p.status !== "scheduled") return false;
+    const effective = p.posted_at ?? p.scheduled_at ?? null;
+    if (effective == null) return false;
+    // ISO 文字列の辞書順比較は SQLite TEXT 比較と等価
+    return effective >= startUTC && effective < endUTC;
+  }).length;
+  if (count >= WEEKLY_LIMIT) {
+    fail(`今週の YouTube 投稿数が上限 ${WEEKLY_LIMIT} 本に達しています (現在 ${count} 本、週 ${startUTC.slice(0, 10)}〜)`);
   }
 }
 

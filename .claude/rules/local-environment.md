@@ -8,7 +8,7 @@ apps/
   remotion/  Remotion — 動画・SNS 投稿画像生成（YouTube/Instagram/X/note）
   ges/       Google Earth Studio — 47都道府県旋回動画の生成・自動化
 packages/
-  database/        Drizzle ORM + Cloudflare D1 スキーマ・シード
+  database/        Drizzle schema (型ソース) + テスト基盤 + 使い捨てビルドキャッシュ操作 (永続 D1 なし)
   types/           共通型定義
   visualization/   D3.js チャートコンポーネント
   components/      shadcn/ui ベース共通 UI
@@ -20,49 +20,39 @@ packages/
 
 ## ストレージ
 
-- **データ層は「形で使い分けるハイブリッド」が正典** → `docs/01_技術設計/18_データ層ハイブリッド設計.md`。本番は R2 snapshot のみ読む。設定(低volume・人手)=git TS / 関係・運用=リモート D1 / 配信=R2 / Derived=D1 JOIN or エフェメラル→R2。**リモート D1 の作業はローカル(Mac)、クラウド agent は git TS と R2 直接。**
-- **ローカルビルド DB (SQLite)**: `packages/database/.data/stats47.sqlite`（移行期に旧 batch が参照する使い捨てキャッシュ）。git 管理外。旧 exporter が要求する場合のみ `npm run db:pull --workspace=packages/r2-storage` で取得（R2 に無ければ DB 不在で正常）。リモート D1 立ち上げ(Phase③)後はそちらへ寄せる。
+- **データ層は「完全DBレス」が正典** → `docs/01_技術設計/19_完全DBレス設計.md`。本番は R2 snapshot のみ読む。SSOT は **git TS (設定・運用エンティティ) と R2 (観測値・配信) の二つだけ**。Derived (area_profiles / correlations) は **エフェメラル計算 → R2**。**永続/リモート D1 は廃止。クラウド/ローカルとも git TS 編集 + R2 直接反映で作業する (D1 認証は不要)。**
+- **ローカルビルド DB (SQLite)**: `packages/database/.data/stats47.sqlite`（旧 batch / エフェメラル集計が建てる**使い捨てビルドキャッシュ**。SSOT ではない）。git 管理外。**不在でも git TS 編集 / R2 直接反映 / エフェメラル集計は可能 = 基本「正常」**。R2 を読みたいだけなら下記「公開 URL 経由」で SSD/DB なしに取得できる。
   - これは **Cloudflare D1 サービスではない**。本番は R2 snapshot のみ読み、DB を一切 query しない。
 - **dev server の miniflare**: `next.config.ts` の `initOpenNextCloudflareForDev({ persist: { path: "../../.local/d1" } })` は **R2 dev binding cache** (`.local/d1/r2/stats47/blobs/`) のために残置。`[[d1_databases]]` binding (STATS47_STATIC_DB) は app が read しないため vestigial（miniflare が `.local/d1/.../miniflare-D1DatabaseObject/*.sqlite` を作るが、batch は参照しない）。**`apps/web/.wrangler/state/` は使わない。**
-- **ローカル R2**: `.local/r2/` 配下にシードデータ・ランキングデータ・ブログ記事を配置。
+- **R2 読み取り (SSD/認証なし・標準)**: ビルド/集計スクリプトは **公開 URL 経由**で R2 を読める →
+  `R2_PUBLIC_FETCH_URL=https://storage.stats47.jp`（GET のみ・list 不可）+ `NODE_OPTIONS='--conditions react-server'`。
+  これが SSD 非依存の標準経路 (下記 dual-mode は legacy)。
+- **ローカル R2 (任意)**: SSD 接続時は `.local/r2/` 配下のローカル FS tier も使える（高速）。
 
-## dual-mode 構成 (2026-05-28〜): D1 = Mac 内蔵 / R2 = SSD or cloud
+## R2 読み取り経路 (SSD 非依存化済 / dual-mode は legacy)
 
-容量の都合で `.local` 配下を **D1 (Mac 内蔵) と R2 (外付け SSD)** に分離している。狙いは「SSD 接続有無に関わらず開発できる」こと。
+**2026-05-30 SSD 非依存化完了。** R2 読み取りは **公開 URL 経由が標準**で、SSD も S3 認証も要らない。
+以下の SSD dual-mode (`.local/r2` symlink ↔ SSD) は **legacy / 任意**であり、SSD が物理接続されているときだけ
+高速なローカル FS tier として使える。SSD は触らないのが既定。
+
+`fetchFromR2` のフォールバック (`packages/r2-storage/.../fetch.ts`):
 
 ```
-.local/                 (実ディレクトリ、Mac 内蔵)
-├── d1/                 ← 実体 Mac 内蔵 (447M)。D1 SQLite + miniflare R2 binding cache。
-│                          cloud に無い唯一コピーなので常駐。SSD 非接続でも D1 は動く
-├── r2 ──────────────→  /Volumes/SSD/stats47-local/r2 への symlink (19G、観測値/snapshot mirror)
-├── r2-manifest ─────→  SSD symlink
-├── r2-pre-migration ─→ SSD symlink (旧バックアップ)
-└── playwright-*-profile → SSD symlink (SNS ブラウザ自動化 profile)
+1. ローカル FS (.local/r2)        ← SSD 接続時のみ有効・任意
+2. Workers R2 binding              ← CF Workers ランタイム
+3. S3 API (R2_*  認証)             ← ローカルで直接叩く場合 (トークン要)
+4. 公開 URL (R2_PUBLIC_FETCH_URL)  ← ★標準・SSD/認証なし (https://storage.stats47.jp、GET のみ)
 ```
 
-### モード別挙動
+- **標準 (SSD 非接続)**: `R2_PUBLIC_FETCH_URL=https://storage.stats47.jp NODE_OPTIONS='--conditions react-server'`
+  でビルド/集計スクリプトを実行。`R2_PUBLIC_FETCH_URL` 設定時は binding 試行を skip して公開 URL を使う。
+- **SSD 接続時 (任意)**: `NODE_ENV=development NODE_OPTIONS='--conditions react-server'` でローカル FS tier。
+- Worker ランタイムは `R2_PUBLIC_FETCH_URL` 未設定 + binding 段優先で不変 (公開 URL tier は影響しない)。
+- **コード/docs/tsc/git 作業は SSD 不要**。
 
-| 状態 | D1 | R2 読み取り | R2 書き込み |
-|---|---|---|---|
-| **SSD 接続** | Mac 内蔵 (高速) | `.local/r2` symlink 経由でローカル (高速) | symlink 経由で SSD に stage → `/push-r2` |
-| **SSD 非接続 (読み中心)** | Mac 内蔵 (高速) | symlink が dangle → `fetchFromR2` が **cloud S3 に自動フォールバック** | — |
-| **SSD 非接続 (書込が必要)** | Mac 内蔵 | cloud S3 fallback | `scripts/dev/local-r2-mode.sh cloud` で Mac 内蔵 stage dir に切替 → `/push-r2` |
-
-- `fetchFromR2` の 3 段フォールバック (ローカル FS → Workers binding → S3 API) により、R2 読みは SSD 非接続でも cloud から自動取得される (S3 認証は `.env.local`)
-- **コード/docs/tsc/git 作業は SSD 不要** (D1 が Mac 内蔵にあるため SSR/クエリも動く)
-
-### R2 モード切替
-
-```bash
-scripts/dev/local-r2-mode.sh status   # 現在のモード
-scripts/dev/local-r2-mode.sh ssd      # SSD 接続時: symlink モード (デフォルト)
-scripts/dev/local-r2-mode.sh cloud    # SSD 非接続で書込したい時: Mac 内蔵 stage
-```
-
-### 注意点
-
-- **SSD 上の `d1/` は 2026-05-28 移行時点のバックアップ**。以降は Mac 内蔵 `.local/d1` が authoritative。Mac 内蔵 D1 を更新したら、必要に応じて SSD にも `cp -R` でバックアップ同期する (単一障害点回避)
-- SSD 非接続の cloud モードで生成した snapshot は **必ず `/push-r2`** で cloud 反映する (ローカルにしか無い状態を残さない)
+> ⚠️ 旧 `scripts/dev/local-r2-mode.sh`(SSD/cloud symlink モード切替) と `db:pull`/リモート D1 前提は legacy。
+> 新規作業では公開 URL tier を使うこと。SSD 上の `.local/r2*` / playwright-*-profile symlink は SNS 自動化等で
+> まだ参照されうるため残置 (削除は別 scope)。
 
 ## ローカルビルド DB (SQLite) パス固定値
 
@@ -84,7 +74,7 @@ packages/database/.data/stats47.sqlite
 # 型チェック（ワークスペース別）
 npx tsc --noEmit -p apps/web/tsconfig.json
 cd apps/remotion && npx tsc --noEmit
-
-# D1 バックアップ（リモート D1 → R2）
-npm run backup:d1 --workspace=packages/database -- --env production
 ```
+
+> 旧 `npm run backup:d1 --env production`（リモート D1 → R2 バックアップ）は **リモート D1 廃止により不要**。
+> 完全DBレスでは観測値・配信は R2 が SSOT、設定/運用は git TS が SSOT で履歴は git に残る。

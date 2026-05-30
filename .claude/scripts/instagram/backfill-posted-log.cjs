@@ -2,7 +2,7 @@
 /**
  * ig-posted-log.jsonl の初回バックフィル
  *
- * D1 sns_posts から instagram の投稿済みレコードを読み出し、
+ * 共有ストア (sns_posts) から instagram の投稿済みレコードを読み出し、
  * .claude/state/ig-posted-log.jsonl に追記する。
  * 既存エントリと content_key+domain の重複チェックをして冪等に動作する。
  *
@@ -11,32 +11,16 @@
 
 const fs = require("node:fs");
 const path = require("node:path");
-const Database = require("better-sqlite3");
+const store = require("../lib/sns-posts-store.cjs");
 
 const ROOT = path.resolve(__dirname, "..", "..", "..");
-const D1_PATH = path.join(
-  ROOT,
-  ".local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite"
-);
 const LOG_PATH = path.join(ROOT, ".claude/state/ig-posted-log.jsonl");
 
-if (!fs.existsSync(D1_PATH)) {
-  console.error("❌ D1 not found:", D1_PATH);
-  process.exit(1);
-}
-
-const db = new Database(D1_PATH, { readonly: true });
-
-const rows = db
-  .prepare(
-    `SELECT posted_at, domain, content_key, post_url
-     FROM sns_posts
-     WHERE platform = 'instagram' AND status = 'posted'
-     ORDER BY posted_at ASC`
-  )
-  .all();
-
-db.close();
+// 旧 SELECT posted_at, domain, content_key, post_url FROM sns_posts
+//     WHERE platform='instagram' AND status='posted' ORDER BY posted_at ASC
+const rows = store
+  .query((p) => p.platform === "instagram" && p.status === "posted")
+  .sort((a, b) => String(a.posted_at || "").localeCompare(String(b.posted_at || "")));
 
 // 既存ログを読み込んで重複チェック
 const existingKeys = new Set();

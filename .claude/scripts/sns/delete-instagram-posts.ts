@@ -8,18 +8,14 @@
  *   npx tsx .claude/scripts/sns/delete-instagram-posts.ts --domain migration-flow            # 実削除
  *   npx tsx .claude/scripts/sns/delete-instagram-posts.ts --domain migration-flow --dry-run  # URL 列挙のみ
  *
- * 対象: D1 sns_posts で domain=$DOMAIN AND platform='instagram' AND status='posted' の post_url
+ * 対象: sns_posts ストアで domain=$DOMAIN AND platform='instagram' AND status='posted' の post_url
  */
 import * as path from "path";
-import Database from "better-sqlite3";
 import { chromium, type Page } from "playwright";
+import store from "../lib/sns-posts-store.cjs";
 
 const PROJECT_ROOT = path.resolve(__dirname, "../../..");
 const PROFILE_DIR = path.join(PROJECT_ROOT, ".local/playwright-ig-profile");
-const DB_PATH = path.join(
-  PROJECT_ROOT,
-  ".local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite",
-);
 
 const args = process.argv.slice(2);
 const DRY = args.includes("--dry-run");
@@ -106,23 +102,25 @@ async function deletePost(page: Page, t: Target): Promise<boolean> {
 }
 
 async function main() {
-  const db = new Database(DB_PATH);
-  const targets: Target[] = db
-    .prepare(
-      `SELECT id, content_key as contentKey, post_url as postUrl
-       FROM sns_posts
-       WHERE domain=? AND platform='instagram' AND status='posted'
-       ORDER BY posted_at`,
+  const targets: Target[] = store
+    .query(
+      (p: Record<string, unknown>) =>
+        p.domain === domain && p.platform === "instagram" && p.status === "posted",
     )
-    .all(domain) as Target[];
+    .sort((a: Record<string, unknown>, b: Record<string, unknown>) =>
+      String(a.posted_at ?? "").localeCompare(String(b.posted_at ?? "")),
+    )
+    .map((p: Record<string, unknown>) => ({
+      id: p.id as number,
+      contentKey: p.content_key as string,
+      postUrl: p.post_url as string,
+    }));
   console.log(`対象: ${targets.length} 件 (domain=${domain})`);
   if (targets.length === 0) {
-    db.close();
     return;
   }
   if (DRY) {
     for (const t of targets) console.log(`  ${t.contentKey} ${t.postUrl}`);
-    db.close();
     return;
   }
 
@@ -159,7 +157,7 @@ async function main() {
     try {
       const ok = await deletePost(page, t);
       if (ok) {
-        db.prepare(`UPDATE sns_posts SET status='deleted' WHERE id=?`).run(t.id);
+        store.updateById(t.id, { status: "deleted" });
         console.log(`✅ 削除完了: ${t.contentKey}`);
         deleted += 1;
       } else {
@@ -176,7 +174,6 @@ async function main() {
   console.log(`削除: ${deleted} / ${targets.length}`);
   console.log(`失敗: ${failed}`);
   await ctx.close();
-  db.close();
 }
 
 main().catch((err) => {

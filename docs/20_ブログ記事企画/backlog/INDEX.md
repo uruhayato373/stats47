@@ -34,6 +34,7 @@ updated: 2026-05-17
 | ファイル | 件数 | 用途 |
 |---|---:|---|
 | [affiliate-furusato.md](./affiliate-furusato.md) | （既存） | ふるさと納税アフィ |
+| [construction-shikou-kanri-tenshoku.md](./construction-shikou-kanri-tenshoku.md) | 9 | 土木施工管理技士×建設転職アフィ（競合分析付き） |
 | [affiliate-ai-tools-koumuin.md](./affiliate-ai-tools-koumuin.md) | 1 | 公務員×AI ツール |
 | [affiliate-iju-shien.md](./affiliate-iju-shien.md) | 1 | 移住支援金 |
 | [affiliate-fp-investment-pref.md](./affiliate-fp-investment-pref.md) | 1 | FP×投資 |

@@ -72,6 +72,20 @@ jobs:
           npm run validate:years --workspace=@stats47/data-configs
         continue-on-error: false
 
+      - name: 🖼️ Blog Thumbnail Gate
+        run: |
+          # 公開R2 (storage.stats47.jp) で全ブログ記事の thumbnail-light.webp が
+          # 200 画像配信されているか監査。欠落があれば fail し、デプロイ前に検出する。
+          # 背景: ogp.json 未作成の記事は thumbnail が生成されず R2 404 になり、
+          #   Post-Deploy Smoke Test (デプロイ後) が落ちる。それを前倒しで検出する。
+          # 修正はコード変更不要 — 以下を実行して thumbnail を生成+cloud push してから再実行:
+          #   npx tsx apps/web/scripts/generate-blog-thumbnails-cloud.ts --apply
+          if ! npx tsx apps/web/scripts/generate-blog-thumbnails-cloud.ts --audit; then
+            echo "::error::ブログ thumbnail が欠落しています。generate-blog-thumbnails-cloud.ts --apply で生成+push してから再実行してください。"
+            exit 1
+          fi
+        continue-on-error: false
+
       - name: 📐 Type Check
         run: npm run type-check
         env:

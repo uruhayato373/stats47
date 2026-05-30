@@ -32,7 +32,7 @@ stats47 のドメインを DDD の観点から分類する。
 | Search | `search` | 統計データの検索・フィルタリング |
 | Ads | `ads` | アフィリエイト広告の配信管理 |
 | AIContent | `ai-content` | AI による記事・コンテンツ生成 |
-| MigrationFlow | `migration-flow` (`apps/remotion/`) | ペア観測 (pref ↔ pref) の集計・動画演出。`stats_migration_flow` テーブルが backing store。詳細: `docs/01_技術設計/13_動画データSSOT.md` |
+| MigrationFlow | `migration-flow` (`apps/remotion/`) | ペア観測 (pref ↔ pref) の集計・動画演出。**R2 `app/stats/<metric>/migration-flow-<year>.json` が backing store** (Phase 6 で R2 移行、永続 D1 なし)。詳細: `docs/01_技術設計/13_動画データSSOT.md` |
 
 ## 汎用ドメイン (Generic Domain)
 
@@ -41,7 +41,7 @@ stats47 のドメインを DDD の観点から分類する。
 | ドメイン | 場所 | 責務 |
 |---|---|---|
 | Blog | `apps/web/src/features/blog` | MDX 記事の管理・表示 |
-| Database | `packages/database` | D1/SQLite スキーマ・クエリ |
+| Database | `packages/database` | Drizzle schema (型ソース) + テスト基盤 + 使い捨てビルドキャッシュ操作 (永続 D1 なし) |
 | R2Storage | `packages/r2-storage` | Cloudflare R2 オブジェクトストレージ |
 | Visualization | `packages/visualization` | D3 チャート・地図コンポーネント |
 

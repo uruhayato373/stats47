@@ -1,92 +1,47 @@
 /**
- * ranking page cards を R2 snapshot 化する。
+ * ranking page cards を git TS SSOT から R2 snapshot 化する (完全DBレス → docs/01_技術設計/19_完全DBレス設計.md)。
  *
- * 旧: ranking-page-cards/all.json (全件一括)
- * 新: ranking-page-cards/{rankingKey}.json × rankingKey 数
+ * SSOT は `apps/web/scripts/data/page-components/ranking-page-cards/<rankingKey>.json`
+ * (git tracked、cloud R2 から reverse-extract)。永続 D1 は読まない。verbatim 書き戻しで配信 byte 一致。
+ * 配信先は app/ranking/<rankingKey>/page-cards.json (rankingPageCardsKeyPath)。
  *
  * Usage:
  *   npx tsx -r ./packages/ranking/src/scripts/setup-cli.js \
  *     apps/web/scripts/export-ranking-page-cards-snapshot.ts
  */
 
-import dotenv from "dotenv";
-import { drizzle } from "drizzle-orm/better-sqlite3";
-import { and, asc, eq } from "drizzle-orm";
-import fs from "fs";
-import BetterSqlite3 from "better-sqlite3";
+import { readdirSync, readFileSync } from "node:fs";
+import { resolve } from "node:path";
 
-import { LOCAL_DB_PATHS } from "../../../packages/database/src/config/local-db-paths";
-import * as schema from "../../../packages/database/src/schema";
+import dotenv from "dotenv";
+
 import { saveToR2 } from "@stats47/r2-storage/server";
 
-import {
-  rankingPageCardsKeyPath,
-  type RankingPageCard,
-} from "../src/features/ranking/components/RankingPageCards/snapshot-reader";
+import { rankingPageCardsKeyPath } from "../src/features/ranking/components/RankingPageCards/snapshot-reader";
 
 dotenv.config({ path: ".env.local" });
 
-function resolveDatabasePath(): string {
-  if (process.env.LOCAL_DB_PATH && fs.existsSync(process.env.LOCAL_DB_PATH)) {
-    return process.env.LOCAL_DB_PATH;
-  }
-  const standardPath = LOCAL_DB_PATHS.STATIC.getPath();
-  if (fs.existsSync(standardPath)) return standardPath;
-  throw new Error(`ローカル D1 SQLite が見つかりません: ${standardPath}`);
-}
+const DATA_DIR = resolve(__dirname, "data/page-components/ranking-page-cards");
+const CONCURRENCY = 16;
 
 async function main() {
-  const dbPath = resolveDatabasePath();
-  console.log(`📁 DB: ${dbPath}`);
-
-  const sqlite = new BetterSqlite3(dbPath, { readonly: true });
-  const db = drizzle(sqlite, { schema });
-
-  const rows = await db
-    .select({
-      id:            schema.pageComponents.componentKey,
-      rankingKey:    schema.pageComponents.pageKey,
-      componentType: schema.pageComponents.componentType,
-      title:         schema.pageComponents.title,
-      componentProps: schema.pageComponents.componentProps,
-      displayOrder:  schema.pageComponents.sortOrder,
-      isActive:      schema.pageComponents.isActive,
-      createdAt:     schema.pageComponents.createdAt,
-      updatedAt:     schema.pageComponents.updatedAt,
-    })
-    .from(schema.pageComponents)
-    .where(and(
-      eq(schema.pageComponents.pageType, "ranking"),
-      eq(schema.pageComponents.isActive, true),
-    ))
-    .orderBy(asc(schema.pageComponents.pageKey), asc(schema.pageComponents.sortOrder));
-
-  const byKey = new Map<string, RankingPageCard[]>();
-  for (const row of rows) {
-    let cards = byKey.get(row.rankingKey);
-    if (!cards) { cards = []; byKey.set(row.rankingKey, cards); }
-    cards.push({
-      id: row.id,
-      rankingKey: row.rankingKey,
-      componentType: row.componentType,
-      title: row.title,
-      componentProps: row.componentProps,
-      displayOrder: row.displayOrder ?? 0,
-      isActive: row.isActive ?? true,
-      createdAt: row.createdAt ?? null,
-      updatedAt: row.updatedAt ?? null,
-    });
+  let files_list: string[];
+  try {
+    files_list = readdirSync(DATA_DIR).filter((f) => f.endsWith(".json"));
+  } catch {
+    files_list = [];
   }
 
-  const CONCURRENCY = 16;
-  const entries = [...byKey.entries()];
-  let files = 0;
+  const entries = files_list.map((file) => ({
+    rankingKey: file.replace(/\.json$/, ""),
+    body: readFileSync(resolve(DATA_DIR, file), "utf8"),
+  }));
 
+  let files = 0;
   for (let i = 0; i < entries.length; i += CONCURRENCY) {
     const batch = entries.slice(i, i + CONCURRENCY);
     await Promise.all(
-      batch.map(async ([rankingKey, cards]) => {
-        const body = JSON.stringify(cards);
+      batch.map(async ({ rankingKey, body }) => {
         await saveToR2(rankingPageCardsKeyPath(rankingKey), body, {
           contentType: "application/json; charset=utf-8",
         });
@@ -95,8 +50,7 @@ async function main() {
     );
   }
 
-  console.log(`✅ ranking-page-cards: files=${files} cards=${rows.length}`);
-  sqlite.close();
+  console.log(`✅ ranking-page-cards: files=${files} (git TS SSOT, DBレス)`);
 }
 
 main().catch((err) => {

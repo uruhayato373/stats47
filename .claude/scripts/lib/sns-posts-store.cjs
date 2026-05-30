@@ -1,0 +1,105 @@
+/**
+ * SNS 投稿台帳ストア (完全DBレス doc19 Phase E)。
+ *
+ * sns_posts は「書込専用の運用ログ」(投稿のたびに append、指標を後から UPDATE) であり、
+ * authored config と性質が違うため git TS ではなく **エージェント用 state** として
+ * `.claude/state/sns/posts.json` に置く (doc19 §3 / data-storage.md の `.claude/` カテゴリ)。
+ * 永続/リモート D1・ローカル SQLite は使わない。
+ *
+ * 全 SNS 自動化スクリプト (publish-x / post-instagram / generate-schedule / delete-* /
+ * weekly-report / metrics 等) はこのストア経由で読み書きする。直接 SQLite を開かない。
+ *
+ * レコードは snake_case (旧 sns_posts カラム名と同一): id / platform / post_type / domain /
+ * content_key / caption / post_url / quote_url / media_path / thumbnail_path / has_link /
+ * utm_url / status / scheduled_at / posted_at / impressions / likes / reposts / replies /
+ * bookmarks / metrics_updated_at / deleted_at / template / metric_keys / created_at / updated_at
+ */
+
+const fs = require("node:fs");
+const path = require("node:path");
+
+const STORE_PATH = path.resolve(__dirname, "../../state/sns/posts.json");
+
+function maxId(posts) {
+  return posts.reduce((m, p) => Math.max(m, p.id || 0), 0);
+}
+
+function read() {
+  try {
+    const data = JSON.parse(fs.readFileSync(STORE_PATH, "utf8"));
+    if (!Array.isArray(data.posts)) data.posts = [];
+    if (!data._meta) data._meta = {};
+    return data;
+  } catch (e) {
+    if (e && e.code === "ENOENT") return { _meta: { nextId: 1 }, posts: [] };
+    throw e;
+  }
+}
+
+function write(data) {
+  data._meta = data._meta || {};
+  data._meta.count = data.posts.length;
+  data._meta.nextId = Math.max(data._meta.nextId || 1, maxId(data.posts) + 1);
+  fs.mkdirSync(path.dirname(STORE_PATH), { recursive: true });
+  const tmp = `${STORE_PATH}.tmp`;
+  fs.writeFileSync(tmp, `${JSON.stringify(data, null, 2)}\n`);
+  fs.renameSync(tmp, STORE_PATH); // 原子的置換 (read-modify-write の取りこぼし防止)
+}
+
+/** 全レコード (配列)。呼び出し側で JS フィルタする。 */
+function loadAll() {
+  return read().posts;
+}
+
+/** predicate でフィルタした配列を返す。 */
+function query(predicate) {
+  return read().posts.filter(predicate);
+}
+
+/** id で 1 件取得 (無ければ null)。 */
+function getById(id) {
+  return read().posts.find((p) => p.id === id) ?? null;
+}
+
+/**
+ * 新規レコードを追加し、採番した id 付きで返す (旧 INSERT INTO sns_posts 相当)。
+ * created_at / updated_at が未指定なら現在時刻 (UTC ISO) を補完する。
+ */
+function insert(record) {
+  const data = read();
+  const id = data._meta.nextId || maxId(data.posts) + 1;
+  const now = new Date().toISOString();
+  const row = {
+    id,
+    status: "draft",
+    created_at: now,
+    updated_at: now,
+    ...record,
+  };
+  data.posts.push(row);
+  data._meta.nextId = id + 1;
+  write(data);
+  return row;
+}
+
+/**
+ * id で 1 件更新 (旧 UPDATE sns_posts SET ... WHERE id=? 相当)。patch をマージし
+ * updated_at を補完。更新後レコードを返す (無ければ null)。
+ */
+function updateById(id, patch) {
+  const data = read();
+  const row = data.posts.find((p) => p.id === id);
+  if (!row) return null;
+  Object.assign(row, patch, { updated_at: patch.updated_at ?? new Date().toISOString() });
+  write(data);
+  return row;
+}
+
+module.exports = {
+  STORE_PATH,
+  loadAll,
+  query,
+  getById,
+  insert,
+  updateById,
+};

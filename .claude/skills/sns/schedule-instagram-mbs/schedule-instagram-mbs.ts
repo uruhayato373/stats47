@@ -20,16 +20,12 @@
 import { chromium, type BrowserContext, type Page } from "playwright";
 import * as path from "path";
 import * as fs from "fs";
-import Database from "better-sqlite3";
+import store from "../../../scripts/lib/sns-posts-store.cjs";
 
 const PROJECT_ROOT = path.resolve(__dirname, "../../../..");
 const PROFILE_DIR = path.join(PROJECT_ROOT, ".local/playwright-meta-profile");
 const DEBUG_DIR = path.join(PROJECT_ROOT, ".local/playwright-meta-debug");
 const LOCAL_R2_ROOT = path.join(PROJECT_ROOT, ".local/r2");
-const DB_PATH = path.join(
-  PROJECT_ROOT,
-  ".local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite",
-);
 
 const MBS_HOME = "https://business.facebook.com/latest/home";
 const MBS_COMPOSER = "https://business.facebook.com/latest/composer";
@@ -329,21 +325,20 @@ async function schedulePost(
 // ----------------------------------------------------------------------------
 
 function updateDb(spec: PostSpec): void {
-  if (!fs.existsSync(DB_PATH)) {
-    console.log(`⚠ DB not found: ${DB_PATH}`);
-    return;
+  // 旧 UPDATE sns_posts SET status='scheduled', scheduled_at=?, updated_at=CURRENT_TIMESTAMP
+  //     WHERE platform='instagram' AND content_key=? AND domain=? AND status='draft'
+  // → 共有ストアで WHERE を JS フィルタし、各 id を updateById で更新 (等価)。
+  const matches = store.query(
+    (p: { platform?: string; content_key?: string; domain?: string; status?: string }) =>
+      p.platform === "instagram" &&
+      p.content_key === spec.contentKey &&
+      p.domain === spec.domain &&
+      p.status === "draft",
+  );
+  for (const row of matches) {
+    store.updateById(row.id, { status: "scheduled", scheduled_at: spec.scheduledAt });
   }
-  const db = new Database(DB_PATH);
-  try {
-    db.prepare(
-      `UPDATE sns_posts
-       SET status = 'scheduled', scheduled_at = ?, updated_at = CURRENT_TIMESTAMP
-       WHERE platform = 'instagram' AND content_key = ? AND domain = ? AND status = 'draft'`,
-    ).run(spec.scheduledAt, spec.contentKey, spec.domain);
-    console.log(`📝 DB 更新: ${spec.contentKey} → scheduled`);
-  } finally {
-    db.close();
-  }
+  console.log(`📝 DB 更新: ${spec.contentKey} → scheduled`);
 }
 
 // ----------------------------------------------------------------------------

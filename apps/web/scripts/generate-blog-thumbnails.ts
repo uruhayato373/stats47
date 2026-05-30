@@ -1,6 +1,10 @@
 #!/usr/bin/env tsx
 /**
- * ブログ記事サムネイル・OGP PNG 一括生成 (Satori + sharp)
+ * ブログ記事サムネイル・OGP PNG 一括生成 (Satori + sharp) — ローカル FS (.local/r2) 版
+ *
+ * ⚠️ 本スクリプトは .local/r2 (SSD symlink) を読み書きする旧経路。
+ *    SSD 非依存で cloud R2 へ直接 push したい場合は
+ *    `generate-blog-thumbnails-cloud.ts` を使う (完全DBレス / SSD非依存の正経路)。
  *
  * Usage:
  *   npx tsx apps/web/scripts/generate-blog-thumbnails.ts
@@ -12,291 +16,18 @@
  *       .local/r2/app/blog/{slug}/ogp/ogp.png
  */
 
-import { existsSync, mkdirSync, readdirSync, readFileSync } from "node:fs";
+import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
-import { createElement } from "react";
 
-import satori from "satori";
-import sharp from "sharp";
-
-import { BRAND } from "../src/features/ogp/brand";
-
-interface OgpData {
-  title: string;
-  subtitle?: string | null;
-  date?: string;
-  category?: string;
-}
-
-type SatoriFont = {
-  name: string;
-  data: ArrayBuffer;
-  weight: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900;
-  style: "normal" | "italic";
-};
-
-function loadFonts(projectRoot: string): SatoriFont[] {
-  const base = join(
-    projectRoot,
-    "node_modules/@expo-google-fonts/noto-sans-jp",
-  );
-  return [
-    {
-      name: "Noto Sans JP",
-      data: readFileSync(join(base, "400Regular/NotoSansJP_400Regular.ttf"))
-        .buffer as ArrayBuffer,
-      weight: 400,
-      style: "normal",
-    },
-    {
-      name: "Noto Sans JP",
-      data: readFileSync(join(base, "700Bold/NotoSansJP_700Bold.ttf"))
-        .buffer as ArrayBuffer,
-      weight: 700,
-      style: "normal",
-    },
-    {
-      name: "Noto Sans JP",
-      data: readFileSync(join(base, "900Black/NotoSansJP_900Black.ttf"))
-        .buffer as ArrayBuffer,
-      weight: 900,
-      style: "normal",
-    },
-  ];
-}
-
-function buildElement(data: OgpData, dark: boolean) {
-  const category = data.category ?? "BLOG";
-  const date = data.date ?? "";
-
-  const bg = dark ? "#0F172A" : "#FFFFFF";
-  const panel = dark ? "#1E293B" : BRAND.paper;
-  const titleColor = dark ? "#FFFFFF" : BRAND.ink;
-  const mutedColor = dark ? "#94A3B8" : BRAND.muted;
-  const lineColor = dark ? "#334155" : BRAND.line;
-
-  const FONT_JP = '"Noto Sans JP", sans-serif';
-  const FONT_MONO = '"JetBrains Mono", monospace';
-
-  const stripePattern = dark
-    ? `repeating-linear-gradient(135deg, ${panel} 0 20px, ${bg} 20px 40px)`
-    : `repeating-linear-gradient(135deg, ${panel} 0 20px, #fff 20px 40px)`;
-
-  return createElement(
-    "div",
-    {
-      style: {
-        width: 1200,
-        height: 630,
-        position: "relative",
-        background: bg,
-        display: "flex",
-        fontFamily: FONT_JP,
-        overflow: "hidden",
-      },
-    },
-    // left stripe
-    createElement("div", {
-      style: {
-        position: "absolute",
-        left: 0,
-        top: 0,
-        width: 285,
-        height: 630,
-        background: stripePattern,
-      },
-    }),
-    // right stripe
-    createElement("div", {
-      style: {
-        position: "absolute",
-        right: 0,
-        top: 0,
-        width: 285,
-        height: 630,
-        background: stripePattern,
-      },
-    }),
-    // center panel (light only - shadow not supported in Satori)
-    !dark
-      ? createElement("div", {
-          style: {
-            position: "absolute",
-            left: 285,
-            top: 0,
-            width: 630,
-            height: 630,
-            background: "#fff",
-            boxShadow: "0 0 40px rgba(15,23,42,0.08)",
-          },
-        })
-      : null,
-    // content
-    createElement(
-      "div",
-      {
-        style: {
-          position: "absolute",
-          left: 285,
-          top: 0,
-          width: 630,
-          height: 630,
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-between",
-          padding: "48px 36px",
-        },
-      },
-      // header: category badge + date
-      createElement(
-        "div",
-        { style: { display: "flex", alignItems: "center", gap: 10 } },
-        createElement(
-          "div",
-          {
-            style: {
-              padding: "3px 10px",
-              background: BRAND.primary,
-              color: "#fff",
-              fontFamily: FONT_MONO,
-              fontSize: 10,
-              fontWeight: 800,
-              letterSpacing: 3,
-            },
-          },
-          category,
-        ),
-        createElement(
-          "div",
-          {
-            style: {
-              fontFamily: FONT_MONO,
-              fontSize: 11,
-              color: mutedColor,
-              letterSpacing: 2,
-            },
-          },
-          date,
-        ),
-      ),
-      // body: title + accent line + subtitle
-      createElement(
-        "div",
-        { style: { display: "flex", flexDirection: "column" } },
-        createElement(
-          "div",
-          {
-            style: {
-              fontFamily: FONT_JP,
-              fontWeight: 900,
-              fontSize: 46,
-              color: titleColor,
-              lineHeight: 1.25,
-              letterSpacing: -1,
-            },
-          },
-          data.title,
-        ),
-        createElement("div", {
-          style: {
-            width: 60,
-            height: 3,
-            background: BRAND.vermilion,
-            marginTop: 20,
-            marginBottom: 16,
-          },
-        }),
-        data.subtitle
-          ? createElement(
-              "div",
-              {
-                style: {
-                  fontFamily: FONT_JP,
-                  fontSize: 18,
-                  color: mutedColor,
-                  fontWeight: 500,
-                },
-              },
-              data.subtitle,
-            )
-          : null,
-      ),
-      // footer: logo + domain
-      createElement(
-        "div",
-        {
-          style: {
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            paddingTop: 12,
-            borderTop: `1px solid ${lineColor}`,
-          },
-        },
-        createElement(
-          "div",
-          { style: { display: "flex", alignItems: "center", gap: 4 } },
-          createElement(
-            "span",
-            {
-              style: {
-                fontWeight: 900,
-                fontSize: 16,
-                color: titleColor,
-                fontFamily: FONT_JP,
-              },
-            },
-            "stats",
-          ),
-          createElement(
-            "span",
-            {
-              style: {
-                fontWeight: 900,
-                fontSize: 16,
-                color: "#fff",
-                background: BRAND.primary,
-                padding: "2px 6px",
-                fontFamily: FONT_JP,
-              },
-            },
-            "47",
-          ),
-        ),
-        createElement(
-          "div",
-          {
-            style: {
-              fontFamily: FONT_MONO,
-              fontSize: 10,
-              color: mutedColor,
-              letterSpacing: 2,
-            },
-          },
-          "stats47.jp/blog",
-        ),
-      ),
-    ),
-  );
-}
-
-async function renderToWebP(
-  element: ReturnType<typeof createElement>,
-  fonts: SatoriFont[],
-  outputPath: string,
-) {
-  const svg = await satori(element, { width: 1200, height: 630, fonts });
-  await sharp(Buffer.from(svg)).webp({ quality: 90 }).toFile(outputPath);
-}
-
-async function renderToPng(
-  element: ReturnType<typeof createElement>,
-  fonts: SatoriFont[],
-  outputPath: string,
-) {
-  const svg = await satori(element, { width: 1200, height: 630, fonts });
-  await sharp(Buffer.from(svg)).png().toFile(outputPath);
-}
+import {
+  buildElement,
+  deriveOgpFromFrontmatter,
+  loadFonts,
+  parseFrontmatter,
+  renderToPng,
+  renderToWebP,
+  type OgpData,
+} from "./lib/blog-thumbnail-render";
 
 async function main() {
   const args = process.argv.slice(2);
@@ -305,7 +36,8 @@ async function main() {
   const slugFilter = slugIdx !== -1 ? args[slugIdx + 1] : null;
 
   const projectRoot = join(import.meta.dirname ?? __dirname, "../../..");
-  const blogDir = join(projectRoot, ".local/r2/app/blog");
+  // 既定は .local/r2 (CI の publish-blog では通常ディレクトリ)。テスト/別経路用に BLOG_DIR で上書き可。
+  const blogDir = process.env.BLOG_DIR ?? join(projectRoot, ".local/r2/app/blog");
 
   console.log("フォントを読み込み中...");
   const fonts = loadFonts(projectRoot);
@@ -327,7 +59,21 @@ async function main() {
     const ogpDir = join(dir, "ogp");
     const ogpPng = join(ogpDir, "ogp.png");
 
-    if (!existsSync(ogpJson)) {
+    // ogp.json があればそれを使う。無ければ article.md の frontmatter から導出
+    // (公開フローで ogp.json 未作成の記事も thumbnail を生成できるようにする)。
+    let ogpData: OgpData | null = null;
+    if (existsSync(ogpJson)) {
+      const { title, subtitle } = JSON.parse(readFileSync(ogpJson, "utf-8")) as OgpData;
+      ogpData = { title, subtitle: subtitle ?? null };
+    } else {
+      const articlePath = join(dir, "article.md");
+      if (existsSync(articlePath)) {
+        ogpData = deriveOgpFromFrontmatter(
+          parseFrontmatter(readFileSync(articlePath, "utf-8")),
+        );
+      }
+    }
+    if (!ogpData) {
       skipped++;
       continue;
     }
@@ -337,10 +83,18 @@ async function main() {
       continue;
     }
 
-    const { title, subtitle } = JSON.parse(
-      readFileSync(ogpJson, "utf-8"),
-    ) as OgpData;
-    const data: OgpData = { title, subtitle: subtitle ?? null, date: "", category: "BLOG" };
+    // 導出した場合は ogp.json も書き出して push 対象に含める
+    if (!existsSync(ogpJson)) {
+      mkdirSync(ogpDir, { recursive: true });
+      writeFileSync(ogpJson, JSON.stringify(ogpData, null, 2) + "\n", "utf-8");
+    }
+
+    const data: OgpData = {
+      title: ogpData.title,
+      subtitle: ogpData.subtitle ?? null,
+      date: "",
+      category: "BLOG",
+    };
 
     process.stdout.write(`  ${slug} ... `);
 
