@@ -42,7 +42,6 @@ export async function AreaChartSection({ areaCode, areaName }: Props) {
           <CardContent className="space-y-4">
             {sectionCharts.map((chart) => (
               <div key={chart.componentKey}>
-                <h3 className="text-sm font-medium mb-2">{chart.title}</h3>
                 <DashboardComponentRenderer
                   component={{
                     id: chart.componentKey,
