@@ -2,7 +2,7 @@
 /**
  * Instagram スケジュール自動生成
  *
- * D1 sns_posts + ig-posted-log.jsonl から投稿済みキーを収集し、
+ * sns_posts ストア + ig-posted-log.jsonl から投稿済みキーを収集し、
  * 未投稿かつアセット準備済みのキーを候補として次スケジュールを生成する。
  *
  * 実行例:
@@ -22,12 +22,9 @@
 
 const fs = require("node:fs");
 const path = require("node:path");
+const store = require("../lib/sns-posts-store.cjs");
 
 const ROOT = path.resolve(__dirname, "..", "..", "..");
-const D1_PATH = path.join(
-  ROOT,
-  ".local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite"
-);
 const LOG_PATH = path.join(ROOT, ".claude/state/ig-posted-log.jsonl");
 const SNS_RANKING = path.join(ROOT, ".local/r2/sns/ranking");
 const SNS_BCR = path.join(ROOT, ".local/r2/sns/bar-chart-race");
@@ -62,18 +59,15 @@ const toDate = get("--to") || defaultTo.toISOString().slice(0, 10);
 function loadPostedSet() {
   const posted = new Set(); // "domain::content_key"
 
-  // 1. D1 from local sqlite (optional — skip if not available)
+  // 1. sns_posts ストア (.claude/state/sns/posts.json)
   try {
-    const Database = require("better-sqlite3");
-    const db = new Database(D1_PATH, { readonly: true });
-    const rows = db.prepare(
-      `SELECT domain, content_key FROM sns_posts WHERE platform='instagram' AND status='posted'`
-    ).all();
-    db.close();
+    const rows = store
+      .query((p) => p.platform === "instagram" && p.status === "posted")
+      .map((p) => ({ domain: p.domain, content_key: p.content_key }));
     for (const r of rows) posted.add(`${r.domain}::${r.content_key}`);
-    console.log(`[D1] ${rows.length} 件の投稿済みレコードを取得`);
+    console.log(`[store] ${rows.length} 件の投稿済みレコードを取得`);
   } catch (e) {
-    console.warn(`[D1] スキップ (${e.message.slice(0, 60)})`);
+    console.warn(`[store] スキップ (${e.message.slice(0, 60)})`);
   }
 
   // 2. ig-posted-log.jsonl

@@ -21,15 +21,13 @@
 import { chromium, type BrowserContext, type Page } from "playwright";
 import * as path from "path";
 import * as fs from "fs";
+// 完全DBレス (doc19 Phase E): sns_posts は共有ストア (.claude/state/sns/posts.json) 経由で読み書きする。
+import store from "../../../scripts/lib/sns-posts-store.cjs";
 
 // ─── 設定 ──────────────────────────────────────────
 const PROJECT_ROOT = path.resolve(__dirname, "../../../..");
 const PROFILE_DIR = path.join(PROJECT_ROOT, ".local/playwright-x-profile");
 const DEBUG_DIR = path.join(PROJECT_ROOT, ".local/playwright-x-debug");
-const DB_PATH = path.join(
-  PROJECT_ROOT,
-  ".local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite"
-);
 
 let IS_DRY_RUN = false;
 // 投稿先アカウントの取り違え防止ガード。設定時、ログイン中の @handle がこれと一致するまで
@@ -697,49 +695,58 @@ function updateDb(
     ? formatJstDate(post.scheduledDate)
     : formatJstDate(new Date());
 
-  const rawCaption = fs.readFileSync(post.captionPath, "utf-8").trim();
-  const caption = rawCaption.replace(/'/g, "''");
-  // 抜粋は raw を先に切ってから escape する (escape 済み文字列を substring すると '' が割れる)
-  const captionExcerpt = rawCaption.substring(0, 100).replace(/'/g, "''");
+  // 共有ストア経由のため SQL 文字列ではなく素の JS 値で扱う（'' エスケープ不要）。
+  const caption = fs.readFileSync(post.captionPath, "utf-8").trim();
+  const captionExcerpt = caption.substring(0, 100);
 
-  // better-sqlite3 は使わず sqlite3 CLI で実行（依存を増やさない）
-  const { execSync } = require("child_process");
-
-  // 引用RT: 事前行が無いため UPDATE ではなく INSERT で新規記録する
-  const sql =
-    post.postType === "quote_rt"
-      ? `
-    INSERT INTO sns_posts
-      (platform, post_type, domain, content_key, caption, quote_url, media_path, has_link, status, posted_at)
-    VALUES
-      ('x', 'quote_rt', '${post.domain}', '${post.contentKey}',
-       '${captionExcerpt}', '${(post.quoteUrl ?? "").replace(/'/g, "''")}',
-       '${(post.imagePaths[0] ?? "").replace(/'/g, "''")}', 1, '${status}', '${postedAt}');
-  `
-      : `
-    UPDATE sns_posts
-    SET status = '${status}', posted_at = '${postedAt}'
-    WHERE platform = 'x'
-      AND content_key = '${post.contentKey}'
-      AND domain = '${post.domain}'
-      AND post_type = 'original'
-      AND status IN ('draft', 'scheduled');
-
-    UPDATE sns_posts
-    SET caption = '${caption}'
-    WHERE platform = 'x'
-      AND content_key = '${post.contentKey}'
-      AND domain = '${post.domain}'
-      AND post_type = 'original'
-      AND (caption IS NULL OR caption = '');
-  `;
   try {
-    execSync(`sqlite3 "${DB_PATH}" "${sql.replace(/"/g, '\\"')}"`, {
-      cwd: PROJECT_ROOT,
-    });
-    console.log(
-      `📝 DB ${post.postType === "quote_rt" ? "INSERT" : "更新"}: ${post.contentKey} → ${status}`
-    );
+    if (post.postType === "quote_rt") {
+      // 引用RT: 事前行が無いため新規 INSERT で記録する（旧 INSERT INTO sns_posts 相当）。
+      store.insert({
+        platform: "x",
+        post_type: "quote_rt",
+        domain: post.domain,
+        content_key: post.contentKey,
+        caption: captionExcerpt,
+        quote_url: post.quoteUrl ?? "",
+        media_path: post.imagePaths[0] ?? "",
+        has_link: 1,
+        status,
+        posted_at: postedAt,
+      });
+      console.log(`📝 DB INSERT: ${post.contentKey} → ${status}`);
+    } else {
+      // 旧: 2 本の複数行 UPDATE (WHERE が id 以外)。loadAll でフィルタ → 各 id を updateById。
+      const allPosts = store.loadAll();
+
+      // UPDATE 1: status / posted_at（draft|scheduled の original 行）
+      const toMarkPosted = allPosts.filter(
+        (p) =>
+          p.platform === "x" &&
+          p.content_key === post.contentKey &&
+          p.domain === post.domain &&
+          p.post_type === "original" &&
+          (p.status === "draft" || p.status === "scheduled")
+      );
+      for (const p of toMarkPosted) {
+        store.updateById(p.id, { status, posted_at: postedAt });
+      }
+
+      // UPDATE 2: caption（caption が空/未設定の original 行。status 条件なし）
+      const toFillCaption = allPosts.filter(
+        (p) =>
+          p.platform === "x" &&
+          p.content_key === post.contentKey &&
+          p.domain === post.domain &&
+          p.post_type === "original" &&
+          (p.caption === null || p.caption === undefined || p.caption === "")
+      );
+      for (const p of toFillCaption) {
+        store.updateById(p.id, { caption });
+      }
+
+      console.log(`📝 DB 更新: ${post.contentKey} → ${status}`);
+    }
   } catch (e) {
     console.error(`DB 更新失敗: ${post.contentKey}`, e);
   }

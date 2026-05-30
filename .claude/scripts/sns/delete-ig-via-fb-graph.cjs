@@ -16,7 +16,7 @@
  */
 
 const path = require("path");
-const Database = require("better-sqlite3");
+const store = require("../lib/sns-posts-store.cjs");
 require("dotenv").config({ path: path.join(__dirname, "../../../.env.local") });
 
 const TOKEN = process.env.META_PAGE_ACCESS_TOKEN;
@@ -29,10 +29,6 @@ if (!TOKEN || !IG_USER_ID) {
   process.exit(1);
 }
 
-const DB_PATH = path.join(
-  __dirname,
-  "../../../.local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite",
-);
 const GRAPH = "https://graph.facebook.com/v21.0";
 const args = process.argv.slice(2);
 const DRY = args.includes("--dry-run");
@@ -76,17 +72,28 @@ async function main() {
   }
   console.log(`✅ Token OK (page: ${me.name || me.id})`);
 
-  const db = new Database(DB_PATH);
-  const targets = db
-    .prepare(
-      `SELECT id, content_key, post_url FROM sns_posts
-       WHERE domain=? AND platform='instagram' AND status='posted'
-       ORDER BY posted_at`,
+  // SELECT id, content_key, post_url FROM sns_posts
+  //   WHERE domain=? AND platform='instagram' AND status='posted'
+  //   ORDER BY posted_at
+  const targets = store
+    .query(
+      (p) =>
+        p.domain === domain &&
+        p.platform === "instagram" &&
+        p.status === "posted",
     )
-    .all(domain);
+    .sort((a, b) => {
+      // SQLite ORDER BY posted_at ASC: NULL を先頭、文字列は昇順
+      const av = a.posted_at ?? null;
+      const bv = b.posted_at ?? null;
+      if (av === null && bv === null) return 0;
+      if (av === null) return -1;
+      if (bv === null) return 1;
+      return av < bv ? -1 : av > bv ? 1 : 0;
+    })
+    .map((p) => ({ id: p.id, content_key: p.content_key, post_url: p.post_url }));
   console.log(`削除対象: ${targets.length} 件 (domain=${domain})`);
   if (targets.length === 0) {
-    db.close();
     return;
   }
 
@@ -115,7 +122,8 @@ async function main() {
     }
     try {
       const res = await deleteMedia(mediaId);
-      db.prepare(`UPDATE sns_posts SET status='deleted' WHERE id=?`).run(t.id);
+      // UPDATE sns_posts SET status='deleted' WHERE id=?
+      store.updateById(t.id, { status: "deleted" });
       console.log(
         `✅ 削除: ${t.content_key} (${mediaId}) ${res.success ? "" : JSON.stringify(res)}`,
       );
@@ -131,7 +139,6 @@ async function main() {
   console.log(`削除${DRY ? " (dry-run)" : ""}: ${deleted}`);
   console.log(`IG に存在せず: ${notFound}`);
   console.log(`失敗: ${failed}`);
-  db.close();
 }
 
 main().catch((err) => {

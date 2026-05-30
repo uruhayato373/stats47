@@ -20,18 +20,14 @@
  */
 import * as path from "path";
 import * as fs from "fs";
-import Database from "better-sqlite3";
 import * as dotenv from "dotenv";
+import store from "../../../scripts/lib/sns-posts-store.cjs";
 
 const PROJECT_ROOT = path.resolve(__dirname, "../../../..");
 dotenv.config({ path: path.join(PROJECT_ROOT, ".env.local") });
 
 const LOCAL_R2_ROOT = path.join(PROJECT_ROOT, ".local/r2");
 const PUBLIC_R2_BASE = "https://storage.stats47.jp";
-const DB_PATH = path.join(
-  PROJECT_ROOT,
-  ".local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite"
-);
 const PUBLISH_LOG = path.join(
   PROJECT_ROOT,
   ".claude/state/metrics/sns/instagram-publish-log.csv"
@@ -270,41 +266,46 @@ function recordPublish(spec: PostSpec, mediaId: string, permalink: string): void
   );
   console.log(`  📝 log: ${PUBLISH_LOG}`);
 
-  // D1 sns_posts へ記録
-  if (!fs.existsSync(DB_PATH)) {
-    console.warn(`  ⚠️ D1 not found, skipping DB write: ${DB_PATH}`);
-    return;
-  }
-  const db = new Database(DB_PATH);
+  // sns_posts ストアへ記録 (完全DBレス: .claude/state/sns/posts.json 経由)
   try {
     const postType = spec.type === "reels" ? "reel" : spec.type === "carousel" ? "carousel" : "original";
 
     // 既存の draft/scheduled 行があれば status=posted に UPDATE、なければ INSERT
-    const existing = db
-      .prepare(
-        `SELECT id FROM sns_posts
-         WHERE platform = 'instagram' AND domain = ? AND content_key = ? AND post_type = ?
-           AND status IN ('draft', 'scheduled')
-         LIMIT 1`
-      )
-      .get(spec.domain, spec.key, postType) as { id: number } | undefined;
+    const existing = store.query(
+      (p) =>
+        p.platform === "instagram" &&
+        p.domain === spec.domain &&
+        p.content_key === spec.key &&
+        p.post_type === postType &&
+        (p.status === "draft" || p.status === "scheduled")
+    )[0] as { id: number } | undefined; // LIMIT 1 相当 (先頭一致)
 
     if (existing) {
-      db.prepare(
-        `UPDATE sns_posts SET status='posted', post_url=?, posted_at=?, caption=?, updated_at=? WHERE id=?`
-      ).run(permalink, postedAt, spec.caption, postedAt, existing.id);
-      console.log(`  💾 D1 sns_posts UPDATE (id=${existing.id})`);
+      store.updateById(existing.id, {
+        status: "posted",
+        post_url: permalink,
+        posted_at: postedAt,
+        caption: spec.caption,
+        updated_at: postedAt,
+      });
+      console.log(`  💾 sns_posts UPDATE (id=${existing.id})`);
     } else {
-      db.prepare(
-        `INSERT INTO sns_posts (platform, post_type, domain, content_key, caption, post_url, posted_at, status, created_at, updated_at)
-         VALUES ('instagram', ?, ?, ?, ?, ?, ?, 'posted', ?, ?)`
-      ).run(postType, spec.domain, spec.key, spec.caption, permalink, postedAt, postedAt, postedAt);
-      console.log(`  💾 D1 sns_posts INSERT`);
+      store.insert({
+        platform: "instagram",
+        post_type: postType,
+        domain: spec.domain,
+        content_key: spec.key,
+        caption: spec.caption,
+        post_url: permalink,
+        posted_at: postedAt,
+        status: "posted",
+        created_at: postedAt,
+        updated_at: postedAt,
+      });
+      console.log(`  💾 sns_posts INSERT`);
     }
   } catch (e) {
-    console.warn(`  ⚠️ D1 write error: ${(e as Error).message}`);
-  } finally {
-    db.close();
+    console.warn(`  ⚠️ sns_posts write error: ${(e as Error).message}`);
   }
 }
 
