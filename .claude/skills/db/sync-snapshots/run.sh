@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
-# sync-snapshots: ローカル D1 から全 R2 snapshot を順次 export する
-# Phase 0-6 で R2 化した 13 種類の snapshot を 1 コマンドで更新
+# sync-snapshots: git TS / R2 観測値から R2 snapshot を順次 export する (完全DBレス doc19)
+# 各 export は git TS (data/page-components, affiliate-ads-data 等) / article.md / R2 観測値を入力に
+# .local/r2/app/ へ snapshot を生成し、末尾で diff-push-r2 が R2 に push する。永続 D1 は読まない。
 
 set -e
 
@@ -30,7 +31,6 @@ TSX="npx tsx -r ./packages/ranking/src/scripts/setup-cli.js"
 declare -a TASKS=(
   "remotion-static|apps/remotion/scripts/export-d1-to-remotion-static.ts --feature all"
   "master|packages/ranking/src/scripts/export-master-snapshots.ts"
-  "ai-content|packages/ai-content/src/scripts/export-snapshot.ts"
   "area-profile|packages/area-profile/src/scripts/export-snapshot.ts"
   "city-profile|packages/area-profile/src/scripts/export-city-snapshot.ts"
   "blog|apps/web/scripts/export-blog-snapshot.ts"

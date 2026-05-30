@@ -20,7 +20,7 @@ tags: [実装計画, theme-dashboard]
 |---|---|---|---|
 | テーマ一覧・メタ | `apps/web/src/features/theme-dashboard/config/all-themes.ts`（`ALL_THEMES`） | ビルド時直読 | `generateStaticParams` / `loadThemeData` |
 | テーマ別 指標セット | `packages/types/src/indicator-sets/*.ts` | ビルド時直読 | `to-theme-config.ts` → `ThemeConfig` |
-| チャート構成 | `apps/web/scripts/theme-page-component-additions.ts`（page_components, `pageType="theme"`） | R2 `app/page-components/theme/<key>.json` | `ThemeDbChartRenderer` |
+| チャート構成 | `apps/web/scripts/data/page-components/theme/<key>.json`（page_components git TS SSOT, Phase E 実装済） | R2 `app/page-components/theme/<key>.json` | `ThemeDbChartRenderer` |
 | 指標値 | e-Stat（page_components の `estatParams`）/ ranking R2 snapshot | runtime fetch | KPI カード・各チャート |
 
 - **ルーティング**: 1 個の動的 `app/themes/[themeSlug]/page.tsx`（2026-05-28 移行、旧 17 静的ページを集約）。`local-finance` は県/市区町村切替 UI のため static 例外（Next.js は static > dynamic 優先で解決）。
@@ -75,21 +75,24 @@ tags: [実装計画, theme-dashboard]
 | railway | railway-passenger-trend / railway-freight-trend | line | 鉄道輸送人員 / JR貨物発送量（外部ソース系は KPI カードのみ） |
 | roads | roads-length-trend / roads-density-trend / roads-traffic-trend | line | 道路実延長・高速 / 道路密度 / 平均交通量（＋ `ThemeHighwayTimelineSection`） |
 
-## 反映フロー（DBレス）
+## 反映フロー（DBレス・Phase E 実装済）
 
-git TS 定義（`theme-page-component-additions.ts` / `indicator-sets/*.ts`）を編集 → R2 反映:
+チャート構成は git TS JSON `apps/web/scripts/data/page-components/theme/<key>.json` を直接編集 → R2 反映:
 
 ```bash
-# cloud / SSD非依存（推奨）: git TS → R2 直接（冪等）
-npx tsx apps/web/scripts/sync-theme-additions-to-r2.ts
-
-# Mac（ローカルビルド DB 経由・移行期）: SSOT を DB にも取り込む場合
-npx tsx -r ./packages/ranking/src/scripts/setup-cli.js apps/web/scripts/seed-theme-page-components.ts
+# git TS (data/page-components/) → R2 直接生成（DBレス、永続 D1 不要）
 npx tsx -r ./packages/ranking/src/scripts/setup-cli.js apps/web/scripts/export-page-components-snapshot.ts
+
+# 検証: 生成物が cloud 配信と byte 一致か（新規追加分は push 前なので差分が出るのは正常）
+R2_PUBLIC_FETCH_URL=https://storage.stats47.jp \
+  npx tsx apps/web/scripts/verify-page-components-snapshot.ts
+
+# 本番反映
+/push-r2   # または push-r2-wrangler.ts
 ```
 
 → 反映後は ISR / R2 reader cache のため時間差あり。即時反映は `gh workflow run purge-cdn.yml`（または `/purge-cdn`）。
-両スクリプトは同一定義（`theme-page-component-additions.ts`）から生成され drift しない。
+SSOT は単一（`data/page-components/`）なので drift しない。指標セット定義は `indicator-sets/*.ts`。
 
 ## 今後やるべきこと
 
@@ -98,7 +101,7 @@ npx tsx -r ./packages/ranking/src/scripts/setup-cli.js apps/web/scripts/export-p
 | 🔴 local-finance-city | 市区町村粒度の財政チャート。`ThemeDbChartRenderer` は prefCode フェッチのため、市区町村セレクタ付き専用セクション（`themes/local-finance/cities` 準拠）の設計が必要 | 中 |
 | 🟡 拡充テーマ | 上表 🟡 の line chart 追加（labor-wages / manufacturing / tourism / education-culture / real-income / labor-mobility） | 低 |
 | pie/breakdown | `MetricFocusCharts` に cdCat-aware な内訳 pie / 構成比を追加（現状は line + bar のみ） | 低 |
-| **D1 テーマ遺物の削除** | `packages/database/scripts/seed-themes.ts` / `drizzle/0052_themes_and_theme_metrics.sql` / `apps/web/scripts/export-themes-snapshot.ts` / `themes`・`theme_metrics` schema は loader 未切替で **dead**（現行は git TS。DBレスで不要）。コード掃除候補 | DBレス仕上げ時 |
+| **D1 テーマ遺物の削除** | `export-themes-snapshot.ts` + `theme-page-component-additions.ts` + `seed-*-page-components.ts` は **Phase E (2026-05-30) で削除済**。残: `packages/database/scripts/seed-themes.ts` / `drizzle/0052_themes_and_theme_metrics.sql` / `themes`・`theme_metrics` schema（型ソース/テスト用に残置、配信無影響） | 完了 / schema 残置 |
 
 ## 関連
 
