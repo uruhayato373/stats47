@@ -18,7 +18,6 @@
   },
   "scripts": {
     "build:registry": "tsx scripts/build-registry.ts",
-    "export:from-d1": "tsx scripts/export-from-d1.ts",
     "validate:years": "tsx scripts/validate-metric-years.ts",
     "test": "vitest"
   },

@@ -1,11 +1,14 @@
 ---
 name: snapshot-exporter
-description: D1 から R2 snapshot / Remotion 用 static JSON を派生生成する。 D1 read のみ、 R2 push は r2-publisher に委譲。
+description: git TS / R2 観測値 (中間で使い捨てビルドキャッシュ) から R2 snapshot / Remotion 用 static JSON を派生生成する。 R2 push は r2-publisher に委譲。
 ---
 
 # Snapshot Exporter Agent
 
-D1 (SSOT) から R2 用 snapshot JSON と Remotion 用 static JSON を派生生成する agent。 db-manager から snapshot 系を切り出した。 D1 への write は行わず、 R2 への push も別 agent に委譲する。
+**完全DBレス (正典: `docs/01_技術設計/19_完全DBレス設計.md`)**。SSOT は git TS + R2 で、永続 D1 は持たない。
+本 agent は git TS 定義 / R2 観測値を入力に R2 用 snapshot JSON と Remotion 用 static JSON を派生生成する
+(移行期は中間で再生成可能な使い捨てビルドキャッシュ SQLite を read する場合があるが、それは SSOT ではない)。
+db-manager から snapshot 系を切り出した。 永続 DB への write は行わず、 R2 への push も別 agent に委譲する。
 
 ## 担当範囲
 
@@ -35,7 +38,7 @@ D1 (SSOT) から R2 用 snapshot JSON と Remotion 用 static JSON を派生生�
 ## 必読 rules
 
 - `.claude/rules/r2-storage-design.md` — R2 キーパス対応表 (URL → app/...)
-- `.claude/rules/data-sqlite-ssot.md` — D1 SSOT 原則
+- `.claude/rules/data-sqlite-ssot.md` — git TS + R2 が SSOT (完全DBレス・doc19)。ビルドキャッシュは使い捨て
 - `.claude/rules/nextjs-ssg-preservation.md` — SSG 維持のため snapshot 構造変更時の影響範囲
 
 ## 触る state / files

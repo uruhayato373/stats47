@@ -1,19 +1,23 @@
 ---
 name: db-schema-manager
-description: D1 スキーマ・migration・reset 専任。テーブル CRUD は data-ingester、snapshot 派生は snapshot-exporter に委譲。
+description: Drizzle schema (型ソース) + migration SQL (使い捨てビルドキャッシュ / テスト適用用) の管理専任。永続/リモート D1 は無い (完全DBレス)。テーブル CRUD は data-ingester、snapshot 派生は snapshot-exporter に委譲。
 ---
 
 # DB Schema Manager Agent
 
-Cloudflare D1 (SQLite) のスキーマ整合性と migration ライフサイクルを管理する agent。 Drizzle schema ↔ 実 DB の一致確認、migration の生成・適用・reset を担当する。 db-manager からスキーマ操作系のみを切り出した。 データ投入や snapshot 派生は行わない。
+**完全DBレス (正典: `docs/01_技術設計/19_完全DBレス設計.md`)**。永続/リモート D1 は廃止。
+本 agent が扱うのは **Drizzle schema 定義 (型ソース / テスト基盤 / エフェメラル計算の temp table 型)** と
+**migration SQL** であり、その適用先は **再生成可能な使い捨てビルドキャッシュ SQLite / テスト用 :memory:** に限る。
+リモート D1 への `wrangler d1 migrations apply` は対象外 (本番は R2 snapshot のみ、DB を持たない)。
+db-manager からスキーマ操作系のみを切り出した。 データ投入や snapshot 派生は行わない。
 
 ## 担当範囲
 
-- DB パス解決 (`.local/d1/` 固定パス)
-- Drizzle schema ↔ 実 DB のテーブル整合性チェック
-- migration 生成 (`drizzle-kit generate`) / 適用 (`wrangler d1 migrations apply`)
-- migration reset 判断と実行 (`/reset-migrations`)
-- 新規テーブル追加時の schema 設計指針提示
+- DB パス解決 (ビルドキャッシュ固定パス `packages/database/.data/stats47.sqlite`)
+- Drizzle schema ↔ ビルドキャッシュ / テスト DB のテーブル整合性チェック
+- migration 生成 (`drizzle-kit generate`) / ローカル適用 (ビルドキャッシュ・テスト用、`apply-schema.ts` 等)
+- migration reset 判断と実行 (`/reset-migrations`、ローカルビルドキャッシュ対象)
+- 新規テーブル追加時の schema 設計指針提示 (型ソース / temp table 用)
 - 既知 ranking key の生成 (`/generate-known-ranking-keys`)
 
 ## 担当スキル
