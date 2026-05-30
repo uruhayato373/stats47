@@ -13,9 +13,10 @@ import { metrics } from "./metrics";
 /**
  * themes — テーマダッシュボード (/themes/[themeKey]) の構成定義
  *
- * Source of truth は D1。R2 snapshot (`app/themes/[key]/config.json`) に export して
- * web app から fetch する。旧 `packages/types/src/indicator-sets/*.ts` を D1 に移行
- * (PR #TBD, 2026-05-26)。
+ * ⚠️ 完全DBレス (doc 19): **SSOT は git TS `packages/types/src/indicator-sets/*.ts`**。
+ * web app は `ALL_THEMES` (indicator-sets → toThemeConfig) を直読し、R2/DB を fetch しない。
+ * この schema 定義と R2 `app/themes/[key]/config.json` は vestigial (どの live reader も使わない)。
+ * schema は型ソース / テスト用に残置 (永続 D1 なし)。
  *
  * - theme_key: 'living-housing', 'aging-society' 等 (URL の [themeKey] と一致)
  * - usage: 'theme' | 'compare' | 'both' (compare は SNS 比較用)
