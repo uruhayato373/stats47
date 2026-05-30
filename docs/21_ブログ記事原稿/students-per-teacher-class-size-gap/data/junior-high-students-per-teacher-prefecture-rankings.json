@@ -1,0 +1,147 @@
+{
+  "title": "中学校 教員1人当たり生徒数",
+  "subtitle": "2024年度・上位10/下位10",
+  "unit": "人",
+  "data": [
+    {
+      "pref": "東京都",
+      "areaName": "東京都",
+      "rank": 1,
+      "value": 15.22,
+      "unit": "人"
+    },
+    {
+      "pref": "神奈川県",
+      "areaName": "神奈川県",
+      "rank": 2,
+      "value": 14.86,
+      "unit": "人"
+    },
+    {
+      "pref": "埼玉県",
+      "areaName": "埼玉県",
+      "rank": 3,
+      "value": 14.41,
+      "unit": "人"
+    },
+    {
+      "pref": "愛知県",
+      "areaName": "愛知県",
+      "rank": 4,
+      "value": 14.38,
+      "unit": "人"
+    },
+    {
+      "pref": "千葉県",
+      "areaName": "千葉県",
+      "rank": 5,
+      "value": 14.08,
+      "unit": "人"
+    },
+    {
+      "pref": "静岡県",
+      "areaName": "静岡県",
+      "rank": 6,
+      "value": 13.61,
+      "unit": "人"
+    },
+    {
+      "pref": "兵庫県",
+      "areaName": "兵庫県",
+      "rank": 7,
+      "value": 13.42,
+      "unit": "人"
+    },
+    {
+      "pref": "福岡県",
+      "areaName": "福岡県",
+      "rank": 8,
+      "value": 13.35,
+      "unit": "人"
+    },
+    {
+      "pref": "広島県",
+      "areaName": "広島県",
+      "rank": 9,
+      "value": 13.13,
+      "unit": "人"
+    },
+    {
+      "pref": "石川県",
+      "areaName": "石川県",
+      "rank": 10,
+      "value": 13.11,
+      "unit": "人"
+    },
+    {
+      "pref": "鹿児島県",
+      "areaName": "鹿児島県",
+      "rank": 38,
+      "value": 10.62,
+      "unit": "人"
+    },
+    {
+      "pref": "鳥取県",
+      "areaName": "鳥取県",
+      "rank": 39,
+      "value": 10.53,
+      "unit": "人"
+    },
+    {
+      "pref": "岩手県",
+      "areaName": "岩手県",
+      "rank": 40,
+      "value": 10.4,
+      "unit": "人"
+    },
+    {
+      "pref": "北海道",
+      "areaName": "北海道",
+      "rank": 41,
+      "value": 10.39,
+      "unit": "人"
+    },
+    {
+      "pref": "徳島県",
+      "areaName": "徳島県",
+      "rank": 42,
+      "value": 10.15,
+      "unit": "人"
+    },
+    {
+      "pref": "秋田県",
+      "areaName": "秋田県",
+      "rank": 43,
+      "value": 9.89,
+      "unit": "人"
+    },
+    {
+      "pref": "和歌山県",
+      "areaName": "和歌山県",
+      "rank": 44,
+      "value": 9.83,
+      "unit": "人"
+    },
+    {
+      "pref": "青森県",
+      "areaName": "青森県",
+      "rank": 45,
+      "value": 9.6,
+      "unit": "人"
+    },
+    {
+      "pref": "島根県",
+      "areaName": "島根県",
+      "rank": 46,
+      "value": 9.24,
+      "unit": "人"
+    },
+    {
+      "pref": "高知県",
+      "areaName": "高知県",
+      "rank": 47,
+      "value": 8.5,
+      "unit": "人"
+    }
+  ]
+}
