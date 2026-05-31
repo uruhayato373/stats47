@@ -1,0 +1,79 @@
+[
+  {
+    "areaName": "島根県",
+    "rank": 1,
+    "value": 62.04,
+    "label": "都道府県知事選挙投票率",
+    "unit": "%"
+  },
+  {
+    "areaName": "福井県",
+    "rank": 2,
+    "value": 58.35,
+    "label": "都道府県知事選挙投票率",
+    "unit": "%"
+  },
+  {
+    "areaName": "北海道",
+    "rank": 3,
+    "value": 58.34,
+    "label": "都道府県知事選挙投票率",
+    "unit": "%"
+  },
+  {
+    "areaName": "鳥取県",
+    "rank": 4,
+    "value": 53.09,
+    "label": "都道府県知事選挙投票率",
+    "unit": "%"
+  },
+  {
+    "areaName": "大阪府",
+    "rank": 5,
+    "value": 49.49,
+    "label": "都道府県知事選挙投票率",
+    "unit": "%"
+  },
+  {
+    "areaName": "奈良県",
+    "rank": 6,
+    "value": 48.49,
+    "label": "都道府県知事選挙投票率",
+    "unit": "%"
+  },
+  {
+    "areaName": "徳島県",
+    "rank": 7,
+    "value": 48.34,
+    "label": "都道府県知事選挙投票率",
+    "unit": "%"
+  },
+  {
+    "areaName": "大分県",
+    "rank": 8,
+    "value": 47.41,
+    "label": "都道府県知事選挙投票率",
+    "unit": "%"
+  },
+  {
+    "areaName": "三重県",
+    "rank": 9,
+    "value": 46.68,
+    "label": "都道府県知事選挙投票率",
+    "unit": "%"
+  },
+  {
+    "areaName": "福岡県",
+    "rank": 10,
+    "value": 42.72,
+    "label": "都道府県知事選挙投票率",
+    "unit": "%"
+  },
+  {
+    "areaName": "神奈川県",
+    "rank": 11,
+    "value": 40.28,
+    "label": "都道府県知事選挙投票率",
+    "unit": "%"
+  }
+]

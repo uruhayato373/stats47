@@ -1,0 +1,331 @@
+[
+  {
+    "areaName": "茨城県",
+    "rank": 1,
+    "value": 3367,
+    "label": "もち消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "新潟県",
+    "rank": 2,
+    "value": 2983,
+    "label": "もち消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "富山県",
+    "rank": 3,
+    "value": 2837,
+    "label": "もち消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "石川県",
+    "rank": 4,
+    "value": 2737,
+    "label": "もち消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "山形県",
+    "rank": 5,
+    "value": 2628,
+    "label": "もち消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "滋賀県",
+    "rank": 6,
+    "value": 2507,
+    "label": "もち消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "長野県",
+    "rank": 7,
+    "value": 2491,
+    "label": "もち消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "北海道",
+    "rank": 8,
+    "value": 2482,
+    "label": "もち消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "栃木県",
+    "rank": 9,
+    "value": 2414,
+    "label": "もち消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "東京都",
+    "rank": 10,
+    "value": 2405,
+    "label": "もち消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "千葉県",
+    "rank": 11,
+    "value": 2396,
+    "label": "もち消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "福井県",
+    "rank": 12,
+    "value": 2367,
+    "label": "もち消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "山梨県",
+    "rank": 13,
+    "value": 2290,
+    "label": "もち消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "宮城県",
+    "rank": 14,
+    "value": 2262,
+    "label": "もち消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "岐阜県",
+    "rank": 15,
+    "value": 2196,
+    "label": "もち消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "兵庫県",
+    "rank": 16,
+    "value": 2188,
+    "label": "もち消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "奈良県",
+    "rank": 17,
+    "value": 2071,
+    "label": "もち消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "三重県",
+    "rank": 18,
+    "value": 2054,
+    "label": "もち消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "埼玉県",
+    "rank": 19,
+    "value": 2031,
+    "label": "もち消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "大阪府",
+    "rank": 20,
+    "value": 2017,
+    "label": "もち消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "福島県",
+    "rank": 21,
+    "value": 2013,
+    "label": "もち消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "徳島県",
+    "rank": 22,
+    "value": 2012,
+    "label": "もち消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "鹿児島県",
+    "rank": 23,
+    "value": 2000,
+    "label": "もち消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "群馬県",
+    "rank": 24,
+    "value": 1989,
+    "label": "もち消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "神奈川県",
+    "rank": 25,
+    "value": 1938,
+    "label": "もち消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "静岡県",
+    "rank": 26,
+    "value": 1878,
+    "label": "もち消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "福岡県",
+    "rank": 27,
+    "value": 1875,
+    "label": "もち消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "岩手県",
+    "rank": 28,
+    "value": 1848,
+    "label": "もち消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "鳥取県",
+    "rank": 29,
+    "value": 1847,
+    "label": "もち消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "愛知県",
+    "rank": 30,
+    "value": 1805,
+    "label": "もち消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "広島県",
+    "rank": 31,
+    "value": 1785,
+    "label": "もち消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "熊本県",
+    "rank": 32,
+    "value": 1747,
+    "label": "もち消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "島根県",
+    "rank": 33,
+    "value": 1708,
+    "label": "もち消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "香川県",
+    "rank": 34,
+    "value": 1707,
+    "label": "もち消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "秋田県",
+    "rank": 35,
+    "value": 1670,
+    "label": "もち消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "京都府",
+    "rank": 36,
+    "value": 1645,
+    "label": "もち消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "佐賀県",
+    "rank": 36,
+    "value": 1645,
+    "label": "もち消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "愛媛県",
+    "rank": 38,
+    "value": 1460,
+    "label": "もち消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "和歌山県",
+    "rank": 39,
+    "value": 1447,
+    "label": "もち消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "岡山県",
+    "rank": 40,
+    "value": 1426,
+    "label": "もち消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "宮崎県",
+    "rank": 41,
+    "value": 1289,
+    "label": "もち消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "山口県",
+    "rank": 42,
+    "value": 1281,
+    "label": "もち消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "青森県",
+    "rank": 43,
+    "value": 1248,
+    "label": "もち消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "沖縄県",
+    "rank": 44,
+    "value": 1216,
+    "label": "もち消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "高知県",
+    "rank": 45,
+    "value": 1193,
+    "label": "もち消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "大分県",
+    "rank": 46,
+    "value": 1186,
+    "label": "もち消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "長崎県",
+    "rank": 47,
+    "value": 1121,
+    "label": "もち消費量",
+    "unit": "g"
+  }
+]

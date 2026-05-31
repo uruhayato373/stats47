@@ -1,0 +1,72 @@
+[
+  {
+    "areaName": "東京都",
+    "rank": 1,
+    "value": 586,
+    "label": "タクシー運転者の平均年収",
+    "unit": "万円"
+  },
+  {
+    "areaName": "大阪府",
+    "rank": 2,
+    "value": 487,
+    "label": "タクシー運転者の平均年収",
+    "unit": "万円"
+  },
+  {
+    "areaName": "神奈川県",
+    "rank": 3,
+    "value": 425,
+    "label": "タクシー運転者の平均年収",
+    "unit": "万円"
+  },
+  {
+    "areaName": "岡山県",
+    "rank": 4,
+    "value": 424.6,
+    "label": "タクシー運転者の平均年収",
+    "unit": "万円"
+  },
+  {
+    "areaName": "埼玉県",
+    "rank": 5,
+    "value": 388.8,
+    "label": "タクシー運転者の平均年収",
+    "unit": "万円"
+  },
+  {
+    "areaName": "千葉県",
+    "rank": 6,
+    "value": 380,
+    "label": "タクシー運転者の平均年収",
+    "unit": "万円"
+  },
+  {
+    "areaName": "北海道",
+    "rank": 7,
+    "value": 366.4,
+    "label": "タクシー運転者の平均年収",
+    "unit": "万円"
+  },
+  {
+    "areaName": "岐阜県",
+    "rank": 8,
+    "value": 365.4,
+    "label": "タクシー運転者の平均年収",
+    "unit": "万円"
+  },
+  {
+    "areaName": "福岡県",
+    "rank": 9,
+    "value": 359.1,
+    "label": "タクシー運転者の平均年収",
+    "unit": "万円"
+  },
+  {
+    "areaName": "愛知県",
+    "rank": 10,
+    "value": 358.8,
+    "label": "タクシー運転者の平均年収",
+    "unit": "万円"
+  }
+]
