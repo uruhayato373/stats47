@@ -1,0 +1,76 @@
+name: 🗂️ Sync Snapshots → R2
+
+# git TS (data/page-components, affiliate-ads 等) / article.md / R2 観測値を入力に
+# 配信 snapshot を再生成し R2 (app/) に push する手動 workflow。完全DBレス (doc19)。
+#
+# R2 書き込みはこの CI / クラウド専用 (ローカルからの push は _assert-ci-write ガードで停止)。
+# ローカルは公開 URL 経由の読み取り専用。
+#
+# 使い方: Actions タブ → この workflow → Run workflow。
+#   only=<task>   で 1 task だけ再生成 (例: page-components / blog / master)。空なら全 task。
+#   dry_run=true  で生成のみ (R2 push しない) — 初回や確認時に推奨。
+
+on:
+  workflow_dispatch:
+    inputs:
+      only:
+        description: "対象 task (空=全 task)。例: page-components / blog / master / area-profile / port-statistics / station-passengers"
+        required: false
+        default: ""
+      dry_run:
+        description: "true: 生成のみ (R2 push しない)"
+        required: false
+        default: "false"
+
+permissions:
+  contents: read
+
+concurrency:
+  # data-refresh.yml の push と衝突しないよう直列化 (R2 push の二重実行防止)
+  group: r2-write
+  cancel-in-progress: false
+
+env:
+  # diff-push-r2.ts が要求する R2 S3 認証 (CLOUDFLARE_* secrets から導出)
+  R2_S3_ENDPOINT: https://${{ secrets.CLOUDFLARE_ACCOUNT_ID }}.r2.cloudflarestorage.com
+  R2_ACCESS_KEY_ID: ${{ secrets.CLOUDFLARE_R2_ACCESS_KEY_ID }}
+  R2_SECRET_ACCESS_KEY: ${{ secrets.CLOUDFLARE_R2_SECRET_ACCESS_KEY }}
+  CLOUDFLARE_R2_BUCKET_NAME: stats47
+  # exporter の R2 観測値読み取りは公開 URL 経由 (認証不要・SSD 非依存)
+  R2_PUBLIC_FETCH_URL: https://storage.stats47.jp
+  NEXT_PUBLIC_ESTAT_APP_ID: ${{ secrets.NEXT_PUBLIC_ESTAT_APP_ID }}
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: 🧰 Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 1
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      # 一部 exporter が読むビルド DB (SQLite) を R2 から取得 (read-only)。
+      # DBレス移行で不要になった exporter のみ対象なら失敗しても続行できるよう best-effort。
+      - name: ⬇️ Pull build DB (best-effort)
+        continue-on-error: true
+        run: npm run db:pull --workspace=packages/r2-storage
+
+      # snapshot 再生成 → R2 push。CI では CI=true が立つため run.sh の push が実行される。
+      - name: 🗂️ Regenerate snapshots + push to R2
+        run: |
+          ARGS=""
+          [ -n "${{ inputs.only }}" ] && ARGS="$ARGS --only ${{ inputs.only }}"
+          [ "${{ inputs.dry_run }}" = "true" ] && ARGS="$ARGS --dry-run"
+          echo "sync-snapshots/run.sh $ARGS"
+          bash .claude/skills/db/sync-snapshots/run.sh $ARGS

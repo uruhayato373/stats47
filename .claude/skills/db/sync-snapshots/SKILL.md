@@ -44,9 +44,28 @@ URL → R2 パス対応は `.claude/rules/r2-storage-design.md` を参照。
 | ports + port-statistics | `apps/web/scripts/export-port-statistics-snapshot.ts` | `app/ports/...` | ~50MB (715 files) |
 | station-passengers | `apps/web/scripts/export-station-passengers-snapshot.ts` | `app/station-passengers/{NN}/{stations,lines}.json` ・ `app/station-passengers/index.json` | ~10MB (95 files) |
 
-## 使い方
+## R2 push は CI / クラウド専用 (★重要)
 
-### 通常実行 (全 snapshot を順次更新)
+**R2 書き込みはローカルから行わない。** 本 run.sh をローカルで実行すると snapshot は
+`.local/r2` に生成されるが、末尾の R2 push は自動でスキップされる (`CI` 外 + `ALLOW_LOCAL_R2_WRITE`
+未設定のため。`diff-push-r2.ts` 側も `_assert-ci-write` ガードで停止する)。R2 反映は **GitHub Actions
+で実行**する:
+
+```bash
+# CI で snapshot 再生成 + R2 push (推奨)。only で 1 task に絞れる
+gh workflow run sync-snapshots.yml -f only=page-components          # 1 task
+gh workflow run sync-snapshots.yml                                  # 全 task
+gh workflow run sync-snapshots.yml -f dry_run=true                  # 生成のみ (確認)
+gh run watch                                                        # 進捗確認
+```
+
+ローカルは公開 URL 経由の **読み取り専用** (`R2_PUBLIC_FETCH_URL=https://storage.stats47.jp`)。
+どうしてもローカルから push する場合のみ `ALLOW_LOCAL_R2_WRITE=1` を付与 (非推奨)。
+方針: `.claude/rules/local-environment.md` / `.claude/rules/r2-storage-design.md`。
+
+## 使い方 (ローカル = 生成のみ / push は CI)
+
+### 通常実行 (全 snapshot を順次生成。push は CI 環境でのみ自動実行)
 
 ```bash
 bash .claude/skills/db/sync-snapshots/run.sh
