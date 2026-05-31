@@ -1,0 +1,80 @@
+{
+  "date": "2026-05-30",
+  "fetched_at": "2026-05-31T17:50:55.446Z",
+  "account_tag": "cc10e4d021f2b259238dc98dfeebe907",
+  "d1": {
+    "readQueries": 0,
+    "writeQueries": 0,
+    "rowsRead": 0,
+    "rowsWritten": 0,
+    "databases": []
+  },
+  "workers": {
+    "totalRequests": 26472,
+    "totalErrors": 108,
+    "totalSubrequests": 8391,
+    "byScript": {
+      "stats47": {
+        "requests": 26472,
+        "errors": 108,
+        "subrequests": 8391,
+        "cpu_p50_us": 97560,
+        "cpu_p99_us": 2633032,
+        "wall_p50_us": 665763,
+        "wall_p99_us": 9849090
+      }
+    }
+  },
+  "r2_operations": {
+    "classA": 317,
+    "classB": 249126,
+    "otherOps": 0,
+    "totalEgressBytes": 109493758594,
+    "byBucket": {
+      "unknown": {
+        "classA": 2,
+        "classB": 0,
+        "other": 0,
+        "egressBytes": 0
+      },
+      "stats47": {
+        "classA": 315,
+        "classB": 247555,
+        "other": 0,
+        "egressBytes": 109474055933
+      },
+      "doboku-note": {
+        "classA": 0,
+        "classB": 1571,
+        "other": 0,
+        "egressBytes": 19702661
+      }
+    }
+  },
+  "r2_storage": {
+    "totalBytes": 11404902608,
+    "totalObjects": 31876,
+    "byBucket": {
+      "stats47": {
+        "bytes": 10742397668,
+        "objects": 25362,
+        "uploads": 0
+      },
+      "doboku-note": {
+        "bytes": 662504940,
+        "objects": 6514,
+        "uploads": 0
+      },
+      "kakkom": {
+        "bytes": 0,
+        "objects": 0,
+        "uploads": 0
+      },
+      "stats47-cache": {
+        "bytes": 0,
+        "objects": 0,
+        "uploads": 0
+      }
+    }
+  }
+}
