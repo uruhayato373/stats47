@@ -182,24 +182,6 @@ async function getSurveyPages(): Promise<MetadataRoute.Sitemap> {
   ];
 }
 
-// city-category の page_key 一覧（page_components テーブルの city-category 行に対応）
-const CITY_CATEGORY_KEYS = [
-  "administrativefinancial",
-  "agriculture",
-  "commercial",
-  "construction",
-  "economy",
-  "educationsports",
-  "international",
-  "laborwage",
-  "landweather",
-  "miningindustry",
-  "population",
-  "safetyenvironment",
-  "socialsecurity",
-  "tourism",
-] as const;
-
 function getCityPages(): MetadataRoute.Sitemap {
   // level="3" の政令市区は prefCode が市コード（例: "01100"）のため /areas/{pref}/cities/{city} の
   // ルート構造と合わず middleware 410 になる。level="2" のみを対象とする。
@@ -215,7 +197,10 @@ function getCityPages(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.5,
     });
-    for (const cat of CITY_CATEGORY_KEYS) {
+    // index 対象 (population/economy) の city-category のみ sitemap に出力し、
+    // ページ側の robots 判定 (UrlPolicy.cityCategory.isIndexableCategory) と完全一致させる。
+    // 旧 14 キーのハードコードはページの index 方針と乖離していた (drift 解消)。
+    for (const cat of UrlPolicy.cityCategory.indexableCategories) {
       entries.push({
         url: `${cityUrl}/${cat}`,
         lastModified: SITEMAP_BASELINE,
