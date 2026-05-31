@@ -19,7 +19,9 @@ export { DashboardGridLayout } from "./components/DashboardGridLayout";
 export { type PageComponent } from "./services/load-page-components";
 export {
   readPageComponentsFromR2 as loadPageComponents,
+  readCityCategoryKeysFromR2,
   PAGE_COMPONENTS_SNAPSHOT_KEY,
+  CITY_CATEGORY_KEYS_SNAPSHOT_KEY,
   type PageComponentsSnapshot,
 } from "./services/page-components-snapshot";
 
