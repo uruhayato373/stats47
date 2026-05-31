@@ -31,6 +31,7 @@ TSX="npx tsx -r ./packages/ranking/src/scripts/setup-cli.js"
 declare -a TASKS=(
   "remotion-static|apps/remotion/scripts/export-d1-to-remotion-static.ts --feature all"
   "master|packages/ranking/src/scripts/export-master-snapshots.ts"
+  "ranking-download|packages/ranking/src/scripts/export-ranking-download-snapshots.ts"
   "area-profile|packages/area-profile/src/scripts/export-snapshot.ts"
   "city-profile|packages/area-profile/src/scripts/export-city-snapshot.ts"
   "blog|apps/web/scripts/export-blog-snapshot.ts"
