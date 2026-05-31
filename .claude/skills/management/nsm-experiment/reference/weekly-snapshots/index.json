@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-05-30T02:39:57.319Z",
+  "generated_at": "2026-05-31T11:32:33.493Z",
   "weeks": [
     {
       "week_id": "2026-W16",
@@ -30,7 +30,7 @@
     {
       "week_id": "2026-W22",
       "path": ".claude/skills/management/nsm-experiment/reference/weekly-snapshots/2026-W22.json",
-      "generated_at": "2026-05-30T02:39:57.312Z"
+      "generated_at": "2026-05-31T11:32:33.485Z"
     }
   ]
 }
