@@ -14,9 +14,9 @@
 import { readdirSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
 
+import { saveToR2 } from "@stats47/r2-storage/server";
 import dotenv from "dotenv";
 
-import { saveToR2 } from "@stats47/r2-storage/server";
 
 import {
   CITY_CATEGORY_KEYS_SNAPSHOT_KEY,

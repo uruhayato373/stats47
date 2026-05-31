@@ -1,6 +1,7 @@
+import { cache } from "react";
+
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { cache } from "react";
 
 import { lookupArea } from "@stats47/area";
 import {
