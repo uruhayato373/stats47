@@ -12,6 +12,10 @@ expect.extend(matchers);
 // runs a cleanup after each test case (e.g. clearing jsdom)
 afterEach(() => {
   cleanup();
+  // vi.stubGlobal / vi.stubEnv をテスト間・ファイル間で持ち越さない (順序依存の flake 防止)。
+  // 例: rakuten-api.test の vi.stubGlobal("fetch", ...) が後続テストに漏れていた。
+  vi.unstubAllGlobals();
+  vi.unstubAllEnvs();
 });
 
 // React.act の polyfill

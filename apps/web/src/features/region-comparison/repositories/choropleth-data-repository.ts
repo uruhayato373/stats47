@@ -1,7 +1,6 @@
-import type { ChoroplethMapData, PrefChoroplethData } from "../components/MunicipalityChoroplethSection";
+import { fetchFromR2AsJson } from "@stats47/r2-storage/server";
 
-const R2_PUBLIC_URL =
-  process.env.NEXT_PUBLIC_R2_PUBLIC_URL || "https://storage.stats47.jp";
+import type { ChoroplethMapData, PrefChoroplethData } from "../components/MunicipalityChoroplethSection";
 
 /** エリアコード (e.g. "13000") → 2桁都道府県コード (e.g. "13") */
 export function areaCodeToPrefCode(areaCode: string): string {
@@ -22,16 +21,14 @@ export const PREF_CODE_TO_ROMAJI: Record<string, string> = {
   "46":"kagoshima","47":"okinawa",
 };
 
+// 共通の R2 reader を使う (dev=ローカル FS / Workers binding / S3 / 公開 URL の
+// フォールバックを一元化)。手書きの dev FS 分岐 + 公開 URL fetch を置き換え。
+// 呼び出し側 (loadPrefData) は throw を外側 try/catch で null に畳むため、
+// 不在時は throw する従来契約を維持する。
 async function readJson(key: string): Promise<unknown> {
-  if (process.env.NODE_ENV === "development") {
-    const fs = await import("fs");
-    const path = await import("path");
-    const filePath = path.resolve(process.cwd(), `../../.local/r2/${key}`);
-    return JSON.parse(fs.readFileSync(filePath, "utf-8"));
-  }
-  const res = await fetch(`${R2_PUBLIC_URL}/${key}`);
-  if (!res.ok) throw new Error(`Failed to fetch ${key}: ${res.status}`);
-  return res.json();
+  const data = await fetchFromR2AsJson<unknown>(key);
+  if (data == null) throw new Error(`Failed to fetch ${key}`);
+  return data;
 }
 
 /**
