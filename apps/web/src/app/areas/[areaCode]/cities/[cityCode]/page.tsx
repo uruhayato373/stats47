@@ -1,3 +1,5 @@
+import { cache } from "react";
+
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
@@ -22,10 +24,7 @@ import { AreaBannerAd } from "@/features/ads/server";
 import { CategoryNavGrid, CitiesNavCard } from "@/features/area-profile";
 import { PHASE_1_SSG_CITIES } from "@/features/area-profile/constants/stage-1-cities";
 import { listCategories } from "@/features/category/server";
-import {
-    PAGE_COMPONENTS_SNAPSHOT_KEY,
-    type PageComponentsSnapshot,
-} from "@/features/stat-charts/server";
+import { readCityCategoryKeysFromR2 } from "@/features/stat-charts/server";
 
 import { AdSenseAd, CONTENT_FOOTER } from "@/lib/google-adsense";
 
@@ -62,15 +61,21 @@ interface CityProfileData {
     }>;
 }
 
-async function readCityProfile(areaCode: string, cityCode: string): Promise<CityProfileData | null> {
-    try {
-        return await fetchFromR2AsJson<CityProfileData>(
-            `app/areas/${areaCode}/cities/${cityCode}/profile.json`
-        );
-    } catch {
-        return null;
+// React cache() でリクエスト単位にメモ化する。
+// generateMetadata と CityPage body の両方から呼ばれるため、
+// 包まないと同一 profile.json を 1 リクエストで 2 回 fetch してしまう
+// (fetchFromR2AsJson はリクエストキャッシュを持たない)。
+const readCityProfile = cache(
+    async (areaCode: string, cityCode: string): Promise<CityProfileData | null> => {
+        try {
+            return await fetchFromR2AsJson<CityProfileData>(
+                `app/areas/${areaCode}/cities/${cityCode}/profile.json`
+            );
+        } catch {
+            return null;
+        }
     }
-}
+);
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
     const { areaCode, cityCode } = await params;
@@ -142,23 +147,14 @@ export default async function CityPage({ params }: PageProps) {
     const allCategories = isOk(categoriesResult) ? categoriesResult.data : [];
     const validStrengths = profile?.strengths.filter((s) => s.rank >= 1 && s.rank <= 5) ?? [];
 
-    // page_component_assignments から city-category のカテゴリを取得 (R2 snapshot 経由)
+    // city-category 定義済みカテゴリの小さな index を取得 (旧 all.json モノリス全読みを回避, #6)。
+    // 不在時は全カテゴリ表示にフォールバック。
     let filteredCategories = allCategories;
-    try {
-        const snapshot = await fetchFromR2AsJson<PageComponentsSnapshot>(
-            PAGE_COMPONENTS_SNAPSHOT_KEY,
-        );
-        if (snapshot) {
-            const categoriesWithData = new Set<string>();
-            for (const key of Object.keys(snapshot.byPage)) {
-                const [pageType, pageKey] = key.split("|");
-                if (pageType === "city-category" && pageKey) {
-                    categoriesWithData.add(pageKey);
-                }
-            }
-            filteredCategories = allCategories.filter((c) => categoriesWithData.has(c.categoryKey));
-        }
-    } catch { /* snapshot 不在時は全カテゴリ表示 */ }
+    const cityCategoryKeys = await readCityCategoryKeysFromR2();
+    if (cityCategoryKeys.length > 0) {
+        const categoriesWithData = new Set(cityCategoryKeys);
+        filteredCategories = allCategories.filter((c) => categoriesWithData.has(c.categoryKey));
+    }
 
     const cityBasePath = `/areas/${areaCode}/cities/${cityCode}`;
 

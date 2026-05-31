@@ -29,6 +29,8 @@ import {
   ListObjectsV2Command,
 } from "@aws-sdk/client-s3";
 
+import { assertR2WriteAllowed } from "./_assert-ci-write";
+
 config({ path: path.resolve(__dirname, "..", "..", "..", "..", ".env.local") });
 
 const PROJECT_ROOT = path.resolve(__dirname, "..", "..", "..", "..");
@@ -210,6 +212,8 @@ async function main(): Promise<void> {
     console.error("usage: db-r2-sync.ts <pull|push>");
     process.exit(1);
   }
+  // push は R2 書き込み = CI/クラウド専用。pull (R2→ローカル読取) はガード対象外。
+  if (cmd === "push") assertR2WriteAllowed({ op: "db:push (build DB → R2)" });
   const s3 = createS3();
   if (cmd === "pull") await pull(s3);
   else await push(s3);

@@ -11,6 +11,16 @@
 - reader 関数に module-level メモリキャッシュを持たせない。各リクエストが対応する小さい JSON を直接 fetch する
 - `compare/` は `category/` と同じデータを使う。R2 ファイルは `app/category/[key]/items.json` に統一し reader 側で両方から参照する
 
+## R2 書き込み (push / 削除) は CI / クラウド専用 ★
+
+- **読み取り**はローカル可 (公開 URL `https://storage.stats47.jp`、認証不要)。**書き込み**はローカル禁止。
+- push / 削除系スクリプトは `packages/r2-storage/src/scripts/_assert-ci-write.ts` のガードで CI 外では停止する
+  (`CI`/`GITHUB_ACTIONS` 未設定 かつ `ALLOW_LOCAL_R2_WRITE` 未設定時)。対象:
+  `diff-push-r2.ts` / `push-r2-wrangler.ts` / `db-r2-sync.ts push` / `delete-r2-prefix.ts` / `r2-cleanup-orphans.ts`。
+- R2 反映は GitHub Actions で行う: `sync-snapshots.yml` (snapshot 再生成+push) / `publish-blog.yml` / `data-refresh.yml`。
+- 新規に R2 書き込みスクリプトを追加する場合は **先頭で `assertR2WriteAllowed()` を呼ぶ**こと。
+- 詳細: `.claude/rules/local-environment.md` の「R2 書き込みは CI / クラウド専用」。
+
 ## URL → R2 キーパス 対応表
 
 | URL パターン | R2 キー | データ内容 |

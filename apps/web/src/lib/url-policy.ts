@@ -53,6 +53,17 @@ export const UrlPolicy = {
       INDEXABLE_AREA_CATEGORIES_SET.has(cat),
     isValidPrefCode,
   },
+  /**
+   * city-category (/areas/{pref}/cities/{city}/{category})。
+   * 県カテゴリと同じ allowlist (population/economy) のみ index 対象とし、
+   * それ以外は noindex,follow とする (薄いページの大量 index を避ける、2026-06-01 決定)。
+   * sitemap も indexableCategories のみ出力し、ページの robots 判定と完全一致させる。
+   */
+  cityCategory: {
+    indexableCategories: INDEXABLE_AREA_CATEGORIES,
+    isIndexableCategory: (cat: string): boolean =>
+      INDEXABLE_AREA_CATEGORIES_SET.has(cat),
+  },
   ranking: {
     isKnown: (key: string): boolean => KNOWN_RANKING_KEYS.has(key),
     isGone: (key: string): boolean => GONE_RANKING_KEYS.has(key),

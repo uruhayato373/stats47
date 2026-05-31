@@ -86,7 +86,7 @@ export async function FeaturedRankings({ limit = 6, showHeader = true }: Feature
           latestYear,
           unit: displayInfo.unit,
           topAreaName: top?.areaName,
-          topValue: top ? top.value.toLocaleString("ja-JP") : undefined,
+          topValue: top && top.value !== null ? top.value.toLocaleString("ja-JP") : undefined,
           demographicAttr: displayInfo.demographicAttr || undefined,
           normalizationBasis: displayInfo.normalizationBasis || undefined,
           tileMapSvg,

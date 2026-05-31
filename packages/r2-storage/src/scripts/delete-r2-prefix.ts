@@ -3,10 +3,14 @@ import path from "path";
 import { createInterface } from "readline";
 import { deleteMultipleFromR2, listFromR2 } from "../lib/index";
 
+import { assertR2WriteAllowed } from "./_assert-ci-write";
+
 // 環境変数をロード（モノレポルートの .env.local）
 config({ path: path.resolve(__dirname, "..", "..", "..", "..", ".env.local") });
 
 async function main() {
+  // R2 からの削除 = 書き込み系。ローカル誤実行を防ぐ (CI/クラウド専用)。
+  assertR2WriteAllowed({ op: "delete-r2-prefix (R2 削除)" });
   const args = process.argv.slice(2);
   const prefix = args[0];
 

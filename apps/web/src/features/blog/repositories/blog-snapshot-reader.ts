@@ -33,10 +33,11 @@ async function loadSnapshot(): Promise<BlogSnapshot> {
   if (!snapshot) {
     logger.warn(
       { key: BLOG_SNAPSHOT_KEY },
-      "blog snapshot が R2 に存在しません。空配列を返します",
+      "blog snapshot が R2 に存在しません。空配列を返します (キャッシュしない)",
     );
-    cached = { generatedAt: new Date(0).toISOString(), articles: [], tagMeta: [] };
-    return cached;
+    // 一時的な miss / 再 push 直後の取りこぼしを恒久キャッシュしない。
+    // warm isolate が空配列を返し続けるのを防ぐため、次リクエストで再取得を試みる。
+    return { generatedAt: new Date(0).toISOString(), articles: [], tagMeta: [] };
   }
   warnIfStale(snapshot.generatedAt);
   cached = snapshot;

@@ -14,11 +14,14 @@
 import { readdirSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
 
+import { saveToR2 } from "@stats47/r2-storage/server";
 import dotenv from "dotenv";
 
-import { saveToR2 } from "@stats47/r2-storage/server";
 
-import { pageComponentsKeyPath } from "../src/features/stat-charts/services/page-components-snapshot";
+import {
+  CITY_CATEGORY_KEYS_SNAPSHOT_KEY,
+  pageComponentsKeyPath,
+} from "../src/features/stat-charts/services/page-components-snapshot";
 
 dotenv.config({ path: ".env.local" });
 
@@ -68,7 +71,21 @@ async function main() {
     );
   }
 
-  console.log(`✅ page-components: files=${files} (git TS SSOT, DBレス)`);
+  // cities ページ用の小さな index: city-category 定義済みの categoryKey 一覧。
+  // これにより cities ページは all.json モノリス全読み込みを回避できる (#6)。
+  const cityCategoryKeys = entries
+    .filter((e) => e.pageType === "city-category")
+    .map((e) => e.pageKey)
+    .sort();
+  await saveToR2(
+    CITY_CATEGORY_KEYS_SNAPSHOT_KEY,
+    JSON.stringify(cityCategoryKeys),
+    { contentType: "application/json; charset=utf-8" },
+  );
+
+  console.log(
+    `✅ page-components: files=${files} + city-category-keys index (${cityCategoryKeys.length} keys) (git TS SSOT, DBレス)`,
+  );
 }
 
 main().catch((err) => {
