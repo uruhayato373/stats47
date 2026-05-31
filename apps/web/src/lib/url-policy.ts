@@ -23,6 +23,7 @@ import { INDEXABLE_RANKING_KEYS } from "@/config/indexable-ranking-keys";
 import { KNOWN_RANKING_KEYS } from "@/config/known-ranking-keys";
 import { KNOWN_TAG_KEYS } from "@/config/known-tag-keys";
 import { KNOWN_THEME_SLUGS } from "@/config/known-theme-slugs";
+import { SITEMAP_RANKING_KEYS } from "@/config/sitemap-ranking-keys";
 
 /**
  * インデックス対象のエリア×カテゴリ。
@@ -69,12 +70,26 @@ export const UrlPolicy = {
     isGone: (key: string): boolean => GONE_RANKING_KEYS.has(key),
     isIndexable: (key: string): boolean => INDEXABLE_RANKING_KEYS.has(key),
     /**
-     * sitemap 出力対象判定: 削除済みでなく、かつ known（200 を返す）ranking すべて。
-     * INDEXABLE_RANKING_KEYS（Impressions ≥ 1）に絞ると 1,584 件がサイトマップから消えて
-     * 大量インデックス削除が起きたため KNOWN_RANKING_KEYS に戻す（2026-05-05 修正）。
+     * sitemap 出力対象判定 (2026-05-31 改訂):
+     *   削除済みでなく、known（200 を返す）かつ SITEMAP_RANKING_KEYS に含まれるキー。
+     *
+     * SITEMAP_RANKING_KEYS は「複数週 GSC impressions の和集合 + 既存 INDEXABLE」で、
+     * 過去に検索表示された実績がある（= indexed 済みの可能性が高い）キーを保守的に拾う。
+     * 一度も impressions を得ていない長期 crawled-not-indexed の長尾だけを sitemap から外し、
+     * クロール予算を温存して「未登録」滞留を減らす。
+     *
+     * 2026-05-05 の失敗（単一週 Impressions≥1 = 338 件に絞り 1,584 件が消えてインデックス
+     * 大量削除）を回避するため、(a) 単一週でなく全週和集合、(b) 既存 INDEXABLE を内包、
+     * (c) 生成セットが空なら KNOWN 全件にフォールバック、の三重の安全弁を持つ。
+     * 再生成: node .claude/scripts/gsc/build-sitemap-ranking-keys.cjs
      */
-    shouldIncludeInSitemap: (key: string): boolean =>
-      !GONE_RANKING_KEYS.has(key) && KNOWN_RANKING_KEYS.has(key),
+    shouldIncludeInSitemap: (key: string): boolean => {
+      if (GONE_RANKING_KEYS.has(key)) return false;
+      if (!KNOWN_RANKING_KEYS.has(key)) return false;
+      // 安全弁: 生成失敗等で空なら現行挙動 (KNOWN 全件) にフォールバック
+      if (SITEMAP_RANKING_KEYS.size === 0) return true;
+      return SITEMAP_RANKING_KEYS.has(key);
+    },
   },
   tag: {
     isKnown: (key: string): boolean => KNOWN_TAG_KEYS.has(key),

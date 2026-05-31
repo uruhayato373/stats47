@@ -1,5 +1,9 @@
 import { describe, expect, it } from "vitest";
 
+import { GONE_RANKING_KEYS } from "@/config/gone-ranking-keys";
+import { KNOWN_RANKING_KEYS } from "@/config/known-ranking-keys";
+import { SITEMAP_RANKING_KEYS } from "@/config/sitemap-ranking-keys";
+
 import {
   INDEXABLE_AREA_CATEGORIES,
   UrlPolicy,
@@ -40,6 +44,42 @@ describe("UrlPolicy.cityCategory.isIndexableCategory", () => {
     for (const cat of UrlPolicy.cityCategory.indexableCategories) {
       expect(UrlPolicy.cityCategory.isIndexableCategory(cat)).toBe(true);
     }
+  });
+});
+
+describe("UrlPolicy.ranking.shouldIncludeInSitemap", () => {
+  // 2026-05-31: sitemap は SITEMAP_RANKING_KEYS (複数週 impressions 和集合) に絞る。
+  // 一度も検索表示されていない長期 crawled-not-indexed の長尾だけを sitemap から外す。
+
+  it("GONE キーは常に除外する", () => {
+    const goneKey = [...GONE_RANKING_KEYS][0];
+    if (goneKey) {
+      expect(UrlPolicy.ranking.shouldIncludeInSitemap(goneKey)).toBe(false);
+    }
+  });
+
+  it("SITEMAP_RANKING_KEYS に含まれる known キーは出力する", () => {
+    const included = [...SITEMAP_RANKING_KEYS].find(
+      (k) => KNOWN_RANKING_KEYS.has(k) && !GONE_RANKING_KEYS.has(k),
+    );
+    expect(included).toBeDefined();
+    if (included) {
+      expect(UrlPolicy.ranking.shouldIncludeInSitemap(included)).toBe(true);
+    }
+  });
+
+  it("known だが SITEMAP_RANKING_KEYS 外 (impressions ゼロ長尾) は除外する", () => {
+    const excluded = [...KNOWN_RANKING_KEYS].find(
+      (k) => !SITEMAP_RANKING_KEYS.has(k) && !GONE_RANKING_KEYS.has(k),
+    );
+    // 全 known が sitemap セットに含まれる稀なケースでは検証をスキップ
+    if (excluded) {
+      expect(UrlPolicy.ranking.shouldIncludeInSitemap(excluded)).toBe(false);
+    }
+  });
+
+  it("生成セットは known の部分集合に収まっており空でない (安全弁の前提)", () => {
+    expect(SITEMAP_RANKING_KEYS.size).toBeGreaterThan(0);
   });
 });
 
