@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { cache } from "react";
 
 import { lookupArea } from "@stats47/area";
 import {
@@ -62,15 +63,21 @@ interface CityProfileData {
     }>;
 }
 
-async function readCityProfile(areaCode: string, cityCode: string): Promise<CityProfileData | null> {
-    try {
-        return await fetchFromR2AsJson<CityProfileData>(
-            `app/areas/${areaCode}/cities/${cityCode}/profile.json`
-        );
-    } catch {
-        return null;
+// React cache() でリクエスト単位にメモ化する。
+// generateMetadata と CityPage body の両方から呼ばれるため、
+// 包まないと同一 profile.json を 1 リクエストで 2 回 fetch してしまう
+// (fetchFromR2AsJson はリクエストキャッシュを持たない)。
+const readCityProfile = cache(
+    async (areaCode: string, cityCode: string): Promise<CityProfileData | null> => {
+        try {
+            return await fetchFromR2AsJson<CityProfileData>(
+                `app/areas/${areaCode}/cities/${cityCode}/profile.json`
+            );
+        } catch {
+            return null;
+        }
     }
-}
+);
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
     const { areaCode, cityCode } = await params;

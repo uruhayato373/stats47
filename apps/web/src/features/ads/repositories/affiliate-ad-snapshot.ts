@@ -37,10 +37,10 @@ async function loadSnapshot(): Promise<AffiliateAdsSnapshot> {
   if (!snapshot) {
     logger.warn(
       { key: AFFILIATE_ADS_SNAPSHOT_KEY },
-      "affiliate-ads snapshot が R2 に存在しません。空配列を返します",
+      "affiliate-ads snapshot が R2 に存在しません。空配列を返します (キャッシュしない)",
     );
-    cached = { generatedAt: new Date(0).toISOString(), ads: [] };
-    return cached;
+    // 一時的な miss を恒久キャッシュしない (次リクエストで再取得を試みる)。
+    return { generatedAt: new Date(0).toISOString(), ads: [] };
   }
   warnIfStale(snapshot.generatedAt);
   cached = snapshot;
