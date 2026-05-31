@@ -54,6 +54,24 @@ packages/
 > 新規作業では公開 URL tier を使うこと。SSD 上の `.local/r2*` / playwright-*-profile symlink は SNS 自動化等で
 > まだ参照されうるため残置 (削除は別 scope)。
 
+## R2 書き込み (push / 削除) は CI / クラウド専用 ★
+
+**読み取りはローカル可 (公開 URL)、書き込みはローカル禁止。** R2 反映はレビュー済みの git 状態から
+GitHub Actions が行う。ローカルからの誤 push / 誤削除を防ぐため、push 系スクリプト
+(`diff-push-r2.ts` / `push-r2-wrangler.ts` / `db:push` / `delete-r2-prefix.ts` / `r2-cleanup-orphans.ts`)
+は `packages/r2-storage/src/scripts/_assert-ci-write.ts` のガードで **CI 外では停止**する
+(`CI` / `GITHUB_ACTIONS` 未設定 かつ `ALLOW_LOCAL_R2_WRITE` 未設定時)。
+
+| 目的 | 実行方法 (CI) |
+|---|---|
+| 配信 snapshot 再生成 + R2 push | `gh workflow run sync-snapshots.yml [-f only=<task>] [-f dry_run=true]` |
+| blog 公開 | `publish-blog.yml` |
+| e-Stat → R2 観測値更新 | `data-refresh.yml` |
+
+- ローカルで `sync-snapshots/run.sh` を実行すると snapshot は `.local/r2` に生成され、push は自動スキップ。
+- どうしてもローカルから push する場合のみ `ALLOW_LOCAL_R2_WRITE=1` を付与 (非推奨、S3 認証 or `wrangler login` 要)。
+- CI シークレット: `CLOUDFLARE_R2_ACCESS_KEY_ID` / `CLOUDFLARE_R2_SECRET_ACCESS_KEY` / `CLOUDFLARE_ACCOUNT_ID` は設定済。
+
 ## ローカルビルド DB (SQLite) パス固定値
 
 `better-sqlite3` は存在しないパスで `new Database()` すると**空ファイルを自動作成する**。下記以外で開かないこと。中央定義は `packages/database/src/config/local-db-paths.ts` の `LOCAL_DB_PATHS.STATIC.getPath()`（全 batch がこれ経由 or 同一パスを解決）。

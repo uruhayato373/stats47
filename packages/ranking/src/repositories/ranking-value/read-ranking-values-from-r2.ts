@@ -38,7 +38,8 @@ async function loadRankingValuesForKey(
 
   if (!snapshot) {
     logger.warn({ rankingKey, areaType, path }, "ranking-values snapshot が R2 に存在しません");
-    keyCache.set(cacheKey, null);
+    // 不在を恒久キャッシュしない。push 直後 / 一時的 miss で warm isolate が
+    // 空のままになるのを防ぐため、次アクセスで再取得を試みる。
     return null;
   }
 

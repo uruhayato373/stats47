@@ -199,7 +199,7 @@ export default async function CategoryPage({ params }: PageProps) {
       latestYear,
       unit: item.unit,
       topAreaName: top?.areaName,
-      topValue: top ? top.value.toLocaleString("ja-JP") : undefined,
+      topValue: top && top.value !== null ? top.value.toLocaleString("ja-JP") : undefined,
       tileMapSvg,
     };
   });

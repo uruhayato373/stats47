@@ -6,26 +6,45 @@ primary_agent: r2-publisher
 co_agents: [instagram-strategist]
 ---
 
-`.local/r2/` のローカルファイルをリモート R2 へ push する。
+R2 への push (書き込み) を実行する。**R2 書き込みは CI / クラウド専用** で、ローカルからは原則行わない。
 
-## 概要
+## ★ R2 書き込みは CI / クラウド専用
 
-`.local/r2/` 配下のファイルを Cloudflare R2 バケット `stats47` にアップロードする。
-全体または特定プレフィックスを指定して同期できる。
+完全DBレス運用では SSOT は git TS と R2。R2 反映 (push) は **レビュー済みの git 状態から CI が行う**。
+ローカルからの誤 push を防ぐため、push 系スクリプト (`diff-push-r2.ts` / `push-r2-wrangler.ts` /
+`db:push` / `delete-r2-prefix.ts` / `r2-cleanup-orphans.ts`) は `_assert-ci-write` ガードで
+**CI 外では停止**する (`CI` / `GITHUB_ACTIONS` 未設定かつ `ALLOW_LOCAL_R2_WRITE` 未設定時)。
 
-## 手順
+ローカルの R2 **読み取り**は公開 URL 経由で認証不要 (`R2_PUBLIC_FETCH_URL=https://storage.stats47.jp`)。
 
-1. ユーザーにアップロード対象を確認（全体 or 特定プレフィックス: blog, ranking, area, categories, csv）
-2. Cloudflare REST API 経由のアップロードを試行:
-   - 全体: `npm run r2:upload`（リポジトリルートで実行）
-   - プレフィックス指定: `npx tsx packages/r2-storage/src/scripts/sync-upload.ts --prefix <prefix>`
-   - dry-run で事前確認も可: `npx tsx packages/r2-storage/src/scripts/sync-upload.ts --dry-run`
-   - S3 credentials（R2_ACCESS_KEY_ID/R2_SECRET_ACCESS_KEY）は不要。`CLOUDFLARE_API_TOKEN` のみ使用
-3. 成功したら結果を報告して終了（CDN キャッシュパージは不要）
-4. 失敗した場合（プロキシ環境での HTTP 407/503 等）:
-   - `diff-push-r2.ts` で wrangler CLI フォールバックを使用
-   - コマンド形式: `npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix <prefix>`
-   - マニフェストベースで差分のみ push するため大量ファイルにも対応
+## 手順 (GitHub Actions で実行)
+
+1. push する対象を判断する:
+   - 配信 snapshot 全般 (page-components / blog / master / area / port 等) → `sync-snapshots.yml`
+   - blog 公開 → `publish-blog.yml`
+   - e-Stat → R2 観測値の更新 → `data-refresh.yml`
+2. workflow を起動する:
+   ```bash
+   gh workflow run sync-snapshots.yml -f only=<task>     # 1 task (例: page-components)
+   gh workflow run sync-snapshots.yml                    # 全 task
+   gh workflow run sync-snapshots.yml -f dry_run=true    # 生成のみ (確認)
+   gh run watch                                          # 進捗 / 結果確認
+   ```
+   （`gh auth login` 済みなら `! gh workflow run …` でこのセッションから直接起動できる）
+3. 完了したら run の結果を報告して終了（CDN キャッシュは ISR/TTL で更新。必要時のみ `/purge-cdn`）。
+
+## ローカルから push したい場合 (非推奨)
+
+緊急時のみ。`gh` / CI が使えない状況に限る:
+
+```bash
+# 事前に R2 S3 認証 (R2_S3_ENDPOINT / R2_ACCESS_KEY_ID / R2_SECRET_ACCESS_KEY) が必要
+ALLOW_LOCAL_R2_WRITE=1 npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix <prefix>
+# S3 鍵なしで wrangler 経由 (要 `wrangler login`):
+ALLOW_LOCAL_R2_WRITE=1 npx tsx packages/r2-storage/src/scripts/push-r2-wrangler.ts app/<prefix> --apply
+```
+
+ガードを外さない限り上記は `⛔ … ローカルから実行できません` で停止する。
 
 ## R2 キーのマッピング
 

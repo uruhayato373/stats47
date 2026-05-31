@@ -10,6 +10,8 @@ import {
   DeleteObjectsCommand,
 } from "@aws-sdk/client-s3";
 
+import { assertR2WriteAllowed } from "./_assert-ci-write";
+
 config({ path: path.resolve(__dirname, "../../../..", ".env.local") });
 
 const BUCKET = process.env.CLOUDFLARE_R2_BUCKET_NAME || "stats47";
@@ -78,6 +80,8 @@ async function deleteKeys(keys: string[]): Promise<void> {
 }
 
 async function main() {
+  // R2 orphan 削除 = 書き込み系。ローカル誤実行を防ぐ (CI/クラウド専用)。dry-run は許可。
+  assertR2WriteAllowed({ op: "r2-cleanup-orphans (R2 削除)", dryRun: DRY_RUN });
   if (!process.env.R2_S3_ENDPOINT || !process.env.R2_ACCESS_KEY_ID) {
     console.error("エラー: R2_S3_ENDPOINT, R2_ACCESS_KEY_ID, R2_SECRET_ACCESS_KEY が未設定");
     process.exit(1);

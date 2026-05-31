@@ -23,6 +23,8 @@ import path from "node:path";
 
 import { findLocalR2Root } from "../lib/utils/find-local-r2-root";
 
+import { assertR2WriteAllowed } from "./_assert-ci-write";
+
 const BUCKET = process.env.CLOUDFLARE_R2_BUCKET_NAME || "stats47";
 
 function listFilesRecursive(root: string, rel = ""): string[] {
@@ -42,6 +44,7 @@ function listFilesRecursive(root: string, rel = ""): string[] {
 function main(): void {
   const args = process.argv.slice(2);
   const apply = args.includes("--apply");
+  assertR2WriteAllowed({ op: "push-r2-wrangler (R2 push)", dryRun: !apply });
   const prefix = args.find((a) => !a.startsWith("--"));
   if (!prefix) {
     console.error("usage: push-r2-wrangler.ts <prefix> [--apply]  (例: app/ports)");

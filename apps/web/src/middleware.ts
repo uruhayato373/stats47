@@ -3,6 +3,7 @@ import { type NextRequest, NextResponse } from "next/server";
 import { UrlPolicy } from "@/lib/url-policy";
 
 import { BLOG_SLUG_REDIRECTS } from "@/config/blog-redirects";
+import { LEGACY_CATEGORY_KEYS_SET } from "@/config/legacy-category-keys";
 import { REDIRECT_TAG_KEYS } from "@/config/redirect-tag-keys";
 
 /**
@@ -26,28 +27,11 @@ function gone(): Response {
 }
 
 /**
- * 旧URL構造のカテゴリキー一覧。
- * /{cat}/{sub}/dashboard|ranking/{x} などのレガシーパス判定に使用。
+ * 旧URL構造のカテゴリキー一覧 (/{cat}/{sub}/dashboard|ranking/{x} などのレガシーパス判定)。
+ * SSOT は `@/config/legacy-category-keys` に集約し、data-configs CATEGORIES との一致は
+ * legacy-category-keys.test.ts で担保する (ハードコードの silent drift 防止)。
  */
-const OLD_CATEGORY_KEYS = new Set([
-  "administrativefinancial",
-  "agriculture",
-  "commercial",
-  "construction",
-  "economy",
-  "educationsports",
-  "energy",
-  "ict",
-  "infrastructure",
-  "international",
-  "laborwage",
-  "landweather",
-  "miningindustry",
-  "population",
-  "safetyenvironment",
-  "socialsecurity",
-  "tourism",
-]);
+const OLD_CATEGORY_KEYS = LEGACY_CATEGORY_KEYS_SET;
 
 /**
  * `isValidPrefCode` は UrlPolicy から再 export（既存テスト互換のため）。

@@ -31,6 +31,7 @@ TSX="npx tsx -r ./packages/ranking/src/scripts/setup-cli.js"
 declare -a TASKS=(
   "remotion-static|apps/remotion/scripts/export-d1-to-remotion-static.ts --feature all"
   "master|packages/ranking/src/scripts/export-master-snapshots.ts"
+  "ranking-download|packages/ranking/src/scripts/export-ranking-download-snapshots.ts"
   "area-profile|packages/area-profile/src/scripts/export-snapshot.ts"
   "city-profile|packages/area-profile/src/scripts/export-city-snapshot.ts"
   "blog|apps/web/scripts/export-blog-snapshot.ts"
@@ -83,13 +84,22 @@ if [ ${#FAILED[@]} -ne 0 ]; then
 fi
 
 if [ "$DRY_RUN" = "0" ]; then
-  echo ""
-  echo "════ R2 push ════"
-  if npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts; then
-    echo "✅ 全 snapshot を R2 に push 完了"
+  # R2 書き込みは CI / クラウド専用。ローカル実行では生成のみ行い push はスキップする
+  # (snapshot は .local/r2 に出力済)。緊急時のみ ALLOW_LOCAL_R2_WRITE=1 で上書き可能。
+  if [ "$CI" = "true" ] || [ "$GITHUB_ACTIONS" = "true" ] || [ "$ALLOW_LOCAL_R2_WRITE" = "1" ]; then
+    echo ""
+    echo "════ R2 push ════"
+    if npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts; then
+      echo "✅ 全 snapshot を R2 に push 完了"
+    else
+      echo "❌ R2 push 失敗"
+      exit 1
+    fi
   else
-    echo "❌ R2 push 失敗"
-    exit 1
+    echo ""
+    echo "ℹ️  ローカル実行のため R2 push をスキップ (snapshot は .local/r2 に生成済)。"
+    echo "    R2 反映は GitHub Actions 'Sync Snapshots → R2' (sync-snapshots.yml) を実行してください。"
+    echo "    どうしてもローカルから push する場合のみ: ALLOW_LOCAL_R2_WRITE=1 bash .claude/skills/db/sync-snapshots/run.sh"
   fi
 else
   echo "✅ 全 snapshot export 完了（dry-run のため R2 push はスキップ）"

@@ -44,8 +44,10 @@ const HOME_PREVIEWS_BASE =
  */
 
 export async function generateMetadata(): Promise<Metadata> {
+  // robots.ts / sitemap.ts と同じ本番ドメインをフォールバックにする
+  // (旧 "stats47.example.com" は誤った canonical/OG 絶対 URL を出していた)。
   const baseUrl =
-    process.env.NEXT_PUBLIC_BASE_URL || "https://stats47.example.com";
+    process.env.NEXT_PUBLIC_BASE_URL || "https://stats47.jp";
 
   const title = "統計で見る都道府県 | 47都道府県ランキング・データ比較";
   const description =

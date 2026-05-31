@@ -51,11 +51,9 @@ describe("validateRequiredEnvVars", () => {
     delete process.env.NEXT_PUBLIC_BASE_URL;
     delete process.env.NEXT_PUBLIC_ESTAT_APP_ID;
 
-    try {
-      validateRequiredEnvVars();
-    } catch (e) {
-      expect((e as Error).message).toContain("GitHub");
-    }
+    // toThrow(substring) で「throw すること」と「メッセージ内容」を同時に検証する
+    // (try/catch + catch 内 expect だと throw しないとき素通り＝偽陽性になるため)。
+    expect(() => validateRequiredEnvVars()).toThrow("GitHub");
   });
 
   it("非 CI 環境でのエラーメッセージに .env.local の案内を含む", () => {
@@ -64,11 +62,7 @@ describe("validateRequiredEnvVars", () => {
     delete process.env.NEXT_PUBLIC_BASE_URL;
     delete process.env.NEXT_PUBLIC_ESTAT_APP_ID;
 
-    try {
-      validateRequiredEnvVars();
-    } catch (e) {
-      expect((e as Error).message).toContain(".env.local");
-    }
+    expect(() => validateRequiredEnvVars()).toThrow(".env.local");
   });
 
   it("AdSense 有効時に CLIENT_ID が未設定ならエラーに含む", () => {

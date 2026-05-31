@@ -15,6 +15,8 @@ import * as fs from "fs";
 import * as path from "path";
 import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
 
+import { assertR2WriteAllowed } from "./_assert-ci-write";
+
 config({ path: path.resolve(__dirname, "..", "..", "..", "..", ".env.local") });
 
 const BUCKET = process.env.CLOUDFLARE_R2_BUCKET_NAME || "stats47";
@@ -91,6 +93,7 @@ function collectLocalFiles(
 async function main(): Promise<void> {
   const args = process.argv.slice(2);
   const dryRun = args.includes("--dry-run");
+  assertR2WriteAllowed({ op: "diff-push-r2 (R2 push)", dryRun });
   const prefixIdx = args.indexOf("--prefix");
   const prefix = prefixIdx !== -1 ? args[prefixIdx + 1]?.trim() ?? "" : "";
 

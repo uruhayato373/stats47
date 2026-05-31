@@ -19,6 +19,7 @@ import { AreaDashboardSection } from "@/features/area-profile/server";
 import { listCategories } from "@/features/category/server";
 
 import { AdSenseAd, CONTENT_FOOTER } from "@/lib/google-adsense";
+import { UrlPolicy } from "@/lib/url-policy";
 
 import type { Metadata } from "next";
 
@@ -55,11 +56,17 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     const title = `${city.areaName}の${category.categoryName}データ`;
     const description = `${city.areaName}（${prefName}）の${category.categoryName}に関する統計データをチャートで可視化。`;
 
+    // 県カテゴリと同じ allowlist (population/economy) のみ index。他は noindex,follow。
+    // sitemap (UrlPolicy.cityCategory.indexableCategories) と完全一致させる。
+    const robots = UrlPolicy.cityCategory.isIndexableCategory(categoryKey)
+        ? "index, follow"
+        : "noindex, follow";
+
     return {
         title,
         description,
         alternates: { canonical: `/areas/${areaCode}/cities/${cityCode}/${categoryKey}` },
-        robots: "index, follow",
+        robots,
         openGraph: { title, description, type: "website" },
         twitter: { card: "summary", title, description },
     };

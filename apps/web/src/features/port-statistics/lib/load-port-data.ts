@@ -45,7 +45,9 @@ let cachedYears: string[] | null = null;
 async function loadPorts(): Promise<PortMetaRow[]> {
   if (cachedPorts) return cachedPorts;
   const snapshot = await fetchFromR2AsJson<PortsSnapshot>(PORTS_SNAPSHOT_KEY);
-  cachedPorts = snapshot?.ports ?? [];
+  // 一時的な miss (snapshot=null) は恒久キャッシュしない。次リクエストで再取得を試みる。
+  if (!snapshot) return [];
+  cachedPorts = snapshot.ports ?? [];
   return cachedPorts;
 }
 
@@ -54,7 +56,9 @@ async function loadYears(): Promise<string[]> {
   const snapshot = await fetchFromR2AsJson<PortStatsYearsSnapshot>(
     PORT_STATS_YEARS_KEY,
   );
-  cachedYears = snapshot?.years ?? [];
+  // 一時的な miss は恒久キャッシュしない (次リクエストで再取得)。
+  if (!snapshot) return [];
+  cachedYears = snapshot.years ?? [];
   return cachedYears;
 }
 
