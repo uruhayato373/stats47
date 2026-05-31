@@ -60,19 +60,32 @@ jobs:
           fi
           echo "metric=$METRIC" >> "$GITHUB_OUTPUT"
 
-      - name: Stage caption to .local/r2
+      - name: Stage assets to .local/r2 (caption + reel)
         if: steps.pick.outputs.skip != 'true'
         run: |
           METRIC="${{ steps.pick.outputs.metric }}"
+          DST_DIR=".local/r2/sns/port/${METRIC}/instagram"
+          mkdir -p "$DST_DIR"
+
+          # caption: git 管理テンプレから stage
           CAPTION_SRC=".claude/state/sns-port-bubble-captions/${METRIC}-instagram.txt"
-          CAPTION_DST=".local/r2/sns/port/${METRIC}/instagram/caption.txt"
           if [ ! -f "$CAPTION_SRC" ]; then
             echo "ERROR: caption not found: $CAPTION_SRC"
             exit 1
           fi
-          mkdir -p "$(dirname "$CAPTION_DST")"
-          cp "$CAPTION_SRC" "$CAPTION_DST"
-          echo "Staged caption: $CAPTION_DST"
+          cp "$CAPTION_SRC" "$DST_DIR/caption.txt"
+          echo "Staged caption: $DST_DIR/caption.txt"
+
+          # reel.mp4: CI には .local/r2 ミラーが無いため公開 R2 URL から fetch (SSD 非依存)
+          R2_BASE="${R2_PUBLIC_FETCH_URL:-https://storage.stats47.jp}"
+          REEL_URL="${R2_BASE}/sns/port/${METRIC}/instagram/reel.mp4"
+          echo "Fetching reel: $REEL_URL"
+          if ! curl -fsSL "$REEL_URL" -o "$DST_DIR/reel.mp4"; then
+            echo "ERROR: reel.mp4 を公開 R2 から取得できません: $REEL_URL"
+            exit 1
+          fi
+          REEL_SIZE=$(stat -c%s "$DST_DIR/reel.mp4" 2>/dev/null || stat -f%z "$DST_DIR/reel.mp4")
+          echo "Staged reel: $DST_DIR/reel.mp4 (${REEL_SIZE} bytes)"
 
       - name: Post to Instagram (Reels)
         if: steps.pick.outputs.skip != 'true'
