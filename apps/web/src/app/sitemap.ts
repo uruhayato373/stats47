@@ -9,7 +9,6 @@
  * SEGMENTS の順序を変えると URL（数字 id）が変わるため、追加時は末尾に追記すること。
  */
 
-import { fetchCities } from "@stats47/area";
 import { readCategoriesFromR2 } from "@stats47/category/server";
 import {
   readActiveKeysForSitemapFromR2,
@@ -17,6 +16,7 @@ import {
 } from "@stats47/ranking/server";
 import { isOk } from "@stats47/types";
 
+import { PHASE_1_SSG_CITIES } from "@/features/area-profile/constants/stage-1-cities";
 import {
   listLatestArticles,
   listAllTagsWithCount,
@@ -183,14 +183,21 @@ async function getSurveyPages(): Promise<MetadataRoute.Sitemap> {
 }
 
 function getCityPages(): MetadataRoute.Sitemap {
-  // level="3" の政令市区は prefCode が市コード（例: "01100"）のため /areas/{pref}/cities/{city} の
-  // ルート構造と合わず middleware 410 になる。level="2" のみを対象とする。
+  // 2026-05-31 改訂: sitemap は実コンテンツ (profile.json) + SSG を持つ PHASE_1_SSG_CITIES
+  // (≈360 市) のみ出力する。
+  //
+  // 旧実装は level="2" の全 1,719 市を出力していたが、実コンテンツがあるのは
+  // PHASE_1_SSG_CITIES のみで、残り ~1,360 市は薄いプレースホルダーが Google にクロール
+  // され「クロール済み - インデックス未登録」が大量発生していた (city indexed 率 ≈0.6%)。
+  // sitemap とコンテンツ実体を一致させ、薄いページの提出を止めてクロール予算を温存する。
+  // 既に index されている少数ページは noindex 化していないため deindex は起きない (提出を止めるだけ)。
+  // Stage 2/3 拡張時は PHASE_1_SSG_CITIES に追記する (stage-1-cities.ts)。
+  //
   // lastmod は SITEMAP_BASELINE (city profile 復活 deploy 日) を採用し、
-  // Googlebot に「city pages 全体に更新あり、再クロール推奨」を伝える。
-  const cities = fetchCities().filter((c) => c.level === "2");
+  // Googlebot に「city pages に更新あり、再クロール推奨」を伝える。
   const entries: MetadataRoute.Sitemap = [];
-  for (const city of cities) {
-    const cityUrl = `${BASE_URL}/areas/${city.prefCode}/cities/${city.cityCode}`;
+  for (const { areaCode, cityCode } of PHASE_1_SSG_CITIES) {
+    const cityUrl = `${BASE_URL}/areas/${areaCode}/cities/${cityCode}`;
     entries.push({
       url: cityUrl,
       lastModified: SITEMAP_BASELINE,
