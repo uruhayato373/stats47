@@ -62,7 +62,7 @@ const THEME_SETS = [
  * (depopulation-medical を healthcare / aging-society の両方で使用)。
  */
 const EMBEDDED_SECTIONS: Record<string, string[]> = {
-  "population-dynamics": ["migration-flow"],
+  "population-dynamics": ["migration-flow", "commute-flow"],
   roads: ["highway"],
   railway: ["station-passengers"],
   healthcare: ["depopulation-medical"],
