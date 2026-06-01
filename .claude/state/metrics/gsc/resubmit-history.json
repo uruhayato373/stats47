@@ -8584,5 +8584,713 @@
     "url": "https://stats47.jp/ranking/dental-guidance-persons-per-1000",
     "status": "success",
     "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:02.231Z",
+    "url": "https://stats47.jp/ranking/toll-road-fee-consumption-expenditure",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:02.519Z",
+    "url": "https://stats47.jp/ranking/total-administrative-investment",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:02.814Z",
+    "url": "https://stats47.jp/ranking/total-area-excluding-northern-territories-and-takeshima",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:03.094Z",
+    "url": "https://stats47.jp/ranking/total-assessed-land-area",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:03.397Z",
+    "url": "https://stats47.jp/ranking/total-assessed-land-area-ratio",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:03.655Z",
+    "url": "https://stats47.jp/ranking/total-assessed-land-area-ratio-field",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:04.030Z",
+    "url": "https://stats47.jp/ranking/total-assessed-land-area-ratio-paddy",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:04.300Z",
+    "url": "https://stats47.jp/ranking/total-assessed-land-area-ratio-residential",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:04.622Z",
+    "url": "https://stats47.jp/ranking/total-expenditure-prefecture",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:04.886Z",
+    "url": "https://stats47.jp/ranking/total-farm-household-income",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:05.167Z",
+    "url": "https://stats47.jp/ranking/total-general-project-investment",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:05.440Z",
+    "url": "https://stats47.jp/ranking/total-inpatients",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:05.714Z",
+    "url": "https://stats47.jp/ranking/total-outpatients",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:05.978Z",
+    "url": "https://stats47.jp/ranking/total-overnight-guests",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:06.240Z",
+    "url": "https://stats47.jp/ranking/total-population",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:06.518Z",
+    "url": "https://stats47.jp/ranking/total-production-in-the-prefecture",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:06.777Z",
+    "url": "https://stats47.jp/ranking/total-public-enterprise-investment",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:07.038Z",
+    "url": "https://stats47.jp/ranking/total-revenue-prefecture",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:07.313Z",
+    "url": "https://stats47.jp/ranking/traffic-accident-casualties-per-100-accidents",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:07.591Z",
+    "url": "https://stats47.jp/ranking/traffic-accident-casualties-per-population",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:07.852Z",
+    "url": "https://stats47.jp/ranking/traffic-accident-count-per-1000-km",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:08.109Z",
+    "url": "https://stats47.jp/ranking/traffic-accident-count-per-population",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:08.374Z",
+    "url": "https://stats47.jp/ranking/traffic-accident-death-by-age",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:08.637Z",
+    "url": "https://stats47.jp/ranking/traffic-accident-deaths-per-100-accidents",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:08.904Z",
+    "url": "https://stats47.jp/ranking/traffic-accident-deaths-per-100k",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:09.176Z",
+    "url": "https://stats47.jp/ranking/traffic-accident-injuries",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:09.435Z",
+    "url": "https://stats47.jp/ranking/traffic-accident-injuries-per-100k",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:09.698Z",
+    "url": "https://stats47.jp/ranking/train-student-pass-consumption-expenditure",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:09.959Z",
+    "url": "https://stats47.jp/ranking/training-gym-public",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:10.221Z",
+    "url": "https://stats47.jp/ranking/transport-communication-expenditure-ratio-multi-person-households",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:10.481Z",
+    "url": "https://stats47.jp/ranking/travel-bag-consumption-quantity",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:10.737Z",
+    "url": "https://stats47.jp/ranking/travel-leisure-annual-participation-rate-15plus",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:10.997Z",
+    "url": "https://stats47.jp/ranking/travel-participation-rate-day-trip",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:11.257Z",
+    "url": "https://stats47.jp/ranking/travel-participation-rate-domestic",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:11.522Z",
+    "url": "https://stats47.jp/ranking/travel-participation-rate-domestic-tourism",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:11.787Z",
+    "url": "https://stats47.jp/ranking/travel-participation-rate-overnight",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:12.047Z",
+    "url": "https://stats47.jp/ranking/treatment-rate-asthma-inpatient",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:12.307Z",
+    "url": "https://stats47.jp/ranking/treatment-rate-circulatory-inpatient",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:12.570Z",
+    "url": "https://stats47.jp/ranking/treatment-rate-hypertension-inpatient",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:12.826Z",
+    "url": "https://stats47.jp/ranking/truck-driver-annual-income",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:13.092Z",
+    "url": "https://stats47.jp/ranking/truck-operators",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:13.369Z",
+    "url": "https://stats47.jp/ranking/tsuyu-tare-consumption-expenditure",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:13.629Z",
+    "url": "https://stats47.jp/ranking/turnover-rate",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:13.895Z",
+    "url": "https://stats47.jp/ranking/unemployment-measures-expenses-prefecture",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:14.154Z",
+    "url": "https://stats47.jp/ranking/unemployment-measures-project-expenses-prefecture",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:14.410Z",
+    "url": "https://stats47.jp/ranking/unemployment-rate",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:14.672Z",
+    "url": "https://stats47.jp/ranking/university-capacity-index",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:14.932Z",
+    "url": "https://stats47.jp/ranking/university-count-per-100k",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:15.191Z",
+    "url": "https://stats47.jp/ranking/university-new-graduates-unemployment-rate",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:15.454Z",
+    "url": "https://stats47.jp/ranking/university-professor-annual-income",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:15.717Z",
+    "url": "https://stats47.jp/ranking/unmarried-ratio-female-25-29",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:15.984Z",
+    "url": "https://stats47.jp/ranking/unmarried-ratio-female-35-39",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:16.241Z",
+    "url": "https://stats47.jp/ranking/unmarried-ratio-female-40-44",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:16.498Z",
+    "url": "https://stats47.jp/ranking/unmarried-ratio-male-25-29",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:16.762Z",
+    "url": "https://stats47.jp/ranking/unmarried-ratio-male-30-34",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:17.018Z",
+    "url": "https://stats47.jp/ranking/unmarried-ratio-male-35-39",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:17.279Z",
+    "url": "https://stats47.jp/ranking/unmarried-ratio-male-40-44",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:17.546Z",
+    "url": "https://stats47.jp/ranking/urban-park-area-per-person",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:17.807Z",
+    "url": "https://stats47.jp/ranking/urban-park-count-per-100km2",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:18.068Z",
+    "url": "https://stats47.jp/ranking/urban-parks",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:18.334Z",
+    "url": "https://stats47.jp/ranking/urban-parks-area",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:18.592Z",
+    "url": "https://stats47.jp/ranking/urban-planning-expenses-prefecture",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:18.864Z",
+    "url": "https://stats47.jp/ranking/urbanization-control-area-ratio",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:19.121Z",
+    "url": "https://stats47.jp/ranking/usage-fees-prefecture",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:19.381Z",
+    "url": "https://stats47.jp/ranking/utilities-expenditure-ratio-multi-person-households",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:19.638Z",
+    "url": "https://stats47.jp/ranking/vacant-housing-ratio",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:19.897Z",
+    "url": "https://stats47.jp/ranking/vaccination-recipients-disease",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:20.157Z",
+    "url": "https://stats47.jp/ranking/vegetable-cultivation-area",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:20.422Z",
+    "url": "https://stats47.jp/ranking/vehicle-kilometers-traveled",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:20.678Z",
+    "url": "https://stats47.jp/ranking/video-recorder-consumption-expenditure",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:20.940Z",
+    "url": "https://stats47.jp/ranking/violent-crime-per-100k",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:21.202Z",
+    "url": "https://stats47.jp/ranking/vocational-school-consumption-expenditure",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:21.463Z",
+    "url": "https://stats47.jp/ranking/vocational-training-expenses-prefecture",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:21.723Z",
+    "url": "https://stats47.jp/ranking/volunteer-activity-annual-participation-rate-10plus",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:21.987Z",
+    "url": "https://stats47.jp/ranking/volunteer-activity-annual-participation-rate-15plus",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:22.252Z",
+    "url": "https://stats47.jp/ranking/voter-list-registrants",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:22.625Z",
+    "url": "https://stats47.jp/ranking/voter-turnout-city-assembly",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:22.889Z",
+    "url": "https://stats47.jp/ranking/voter-turnout-council-district",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:23.215Z",
+    "url": "https://stats47.jp/ranking/voter-turnout-governor",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:23.546Z",
+    "url": "https://stats47.jp/ranking/voter-turnout-house-single",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:23.803Z",
+    "url": "https://stats47.jp/ranking/voter-turnout-mayor",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:24.133Z",
+    "url": "https://stats47.jp/ranking/voter-turnout-pref-assembly",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:24.400Z",
+    "url": "https://stats47.jp/ranking/washing-machine-consumption-expenditure",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:24.732Z",
+    "url": "https://stats47.jp/ranking/washing-machine-consumption-quantity",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:25.060Z",
+    "url": "https://stats47.jp/ranking/waste-recycling-rate",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:25.387Z",
+    "url": "https://stats47.jp/ranking/water-pollution-control-law-facility-count",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:25.718Z",
+    "url": "https://stats47.jp/ranking/water-supply-annual-volume",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:26.053Z",
+    "url": "https://stats47.jp/ranking/water-supply-capacity",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:26.386Z",
+    "url": "https://stats47.jp/ranking/wedding-expense-consumption-expenditure",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:26.716Z",
+    "url": "https://stats47.jp/ranking/welfare-commissioner-consultations-per-person",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:27.043Z",
+    "url": "https://stats47.jp/ranking/welfare-commissioner-count-per-100k",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:27.378Z",
+    "url": "https://stats47.jp/ranking/welfare-expenditure",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:27.704Z",
+    "url": "https://stats47.jp/ranking/welfare-expenditure-ratio-pref-finance",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:28.038Z",
+    "url": "https://stats47.jp/ranking/welfare-expenses-prefecture",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:28.368Z",
+    "url": "https://stats47.jp/ranking/welfare-facility-staff-per-1000-on-assistance",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:28.697Z",
+    "url": "https://stats47.jp/ranking/welfare-office-intellectual-disability-consultations",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:29.028Z",
+    "url": "https://stats47.jp/ranking/welfare-office-intellectual-disability-consultations-per-100k",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:29.358Z",
+    "url": "https://stats47.jp/ranking/welfare-office-public-assistance-applications-per-1000-households",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:29.687Z",
+    "url": "https://stats47.jp/ranking/whitebait-consumption-expenditure",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:30.017Z",
+    "url": "https://stats47.jp/ranking/whitebait-consumption-quantity",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:30.352Z",
+    "url": "https://stats47.jp/ranking/widowed-ratio-female-60plus",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:30.685Z",
+    "url": "https://stats47.jp/ranking/womens-coat-consumption-expenditure",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:31.010Z",
+    "url": "https://stats47.jp/ranking/womens-jacket-consumption-expenditure",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:31.337Z",
+    "url": "https://stats47.jp/ranking/womens-jacket-consumption-quantity",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:31.663Z",
+    "url": "https://stats47.jp/ranking/womens-pants-consumption-expenditure",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:31.989Z",
+    "url": "https://stats47.jp/ranking/womens-pants-consumption-quantity",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:32.316Z",
+    "url": "https://stats47.jp/ranking/womens-shoes-consumption-quantity",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:32.644Z",
+    "url": "https://stats47.jp/ranking/womens-sleepwear-consumption-expenditure",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:32.974Z",
+    "url": "https://stats47.jp/ranking/womens-socks-consumption-expenditure",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:33.304Z",
+    "url": "https://stats47.jp/ranking/womens-socks-consumption-quantity",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:33.634Z",
+    "url": "https://stats47.jp/ranking/womens-stockings-consumption-expenditure",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:33.936Z",
+    "url": "https://stats47.jp/ranking/woodland-area",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:34.263Z",
+    "url": "https://stats47.jp/ranking/work-accident-severity",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:34.526Z",
+    "url": "https://stats47.jp/ranking/workers-compensation-insurance-benefits-rate",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:34.793Z",
+    "url": "https://stats47.jp/ranking/young-population-index",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:35.055Z",
+    "url": "https://stats47.jp/ranking/youth-class-lecture-count-per-million",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:35.319Z",
+    "url": "https://stats47.jp/ranking/youth-education-facility-count-per-million",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
+  },
+  {
+    "timestamp": "2026-06-01T19:07:35.603Z",
+    "url": "https://stats47.jp/ranking/zoo-count",
+    "status": "success",
+    "coverageState": "ranking-unindexed"
   }
 ]
