@@ -1,16 +1,20 @@
 import { NextRequest, NextResponse } from "next/server";
 
-import { fetchFromR2 } from "@stats47/r2-storage/server";
-import { rankingDownloadKeyPath } from "@stats47/ranking/types";
+import {
+  buildAllBasesCsv,
+  buildSingleSeriesCsv,
+  getRankingDownloadSeries,
+} from "@stats47/ranking/server";
 
 /**
  * ランキングデータ ダウンロード API
  *
  * GET /api/ranking/[rankingKey]/download?format=csv&basis=original&encoding=utf8
  *
- * R2 に事前生成済みの CSV / JSON ファイルをそのまま stream する。
- * クライアント側で CSV を組み立てる必要がないため、Workers CPU 消費なし。
- * Cloudflare CDN cache でファイル単位にキャッシュ。
+ * R2 観測値からオンザフライで CSV / JSON を生成して stream する (完全DBレス・事前 bake なし)。
+ * 全 metric を事前生成すると 1GB 超 / 2 万ファイル超の R2 肥大化になるため、都度生成に統一
+ * (Phase 6 で削除した事前 bake exporter を復活させない方針、2026-06-01)。
+ * Cloudflare CDN は `Cache-Control: s-maxage` で結果をエッジキャッシュする。
  *
  * パラメータは全て whitelist 検証で path injection を防ぐ。
  *
@@ -89,16 +93,42 @@ export async function GET(
   }
 
   // JSON は utf8 のみ
-  const safeEncoding: Encoding = formatParam === "json" ? "utf8" : encodingParam;
+  let safeEncoding: Encoding = formatParam === "json" ? "utf8" : encodingParam;
 
-  const path = rankingDownloadKeyPath(rankingKey, basisParam, formatParam, safeEncoding);
-  const buffer = await fetchFromR2(path);
-
-  if (!buffer) {
+  // R2 観測値からオンザフライで系列を取得 (47都道府県 × 全年)。
+  const series = await getRankingDownloadSeries(rankingKey, "prefecture", basisParam);
+  if (series.length === 0) {
     return NextResponse.json(
-      { error: "File not found. Run sync-snapshots to generate." },
+      { error: "No data for this ranking/basis." },
       { status: 404 },
     );
+  }
+
+  // 本文生成
+  let bodyText: string;
+  if (formatParam === "json") {
+    bodyText =
+      basisParam === "all-bases"
+        ? JSON.stringify(Object.fromEntries(series.map((s) => [s.basisKey, s.values])))
+        : JSON.stringify(series[0].values);
+  } else if (basisParam === "all-bases") {
+    bodyText = buildAllBasesCsv(series);
+  } else {
+    bodyText = buildSingleSeriesCsv(series[0].values);
+  }
+
+  // 出力 body: UTF-8 / JSON は string をそのまま渡す (BodyInit)。
+  // SJIS のみ iconv-lite で byte 列に encode。Workers で動かない等の失敗時は UTF-8 文字列に
+  // graceful fallback する (500 を出さない)。動的 import でバンドル時の巻き込みも避ける。
+  let responseBody: string | Uint8Array<ArrayBuffer> = bodyText;
+  if (formatParam === "csv" && safeEncoding === "sjis") {
+    try {
+      const iconv = (await import("iconv-lite")).default;
+      responseBody = new Uint8Array(iconv.encode(bodyText, "Shift_JIS"));
+    } catch {
+      responseBody = bodyText; // fallback: UTF-8 文字列
+      safeEncoding = "utf8"; // Content-Type / filename を UTF-8 に合わせる
+    }
   }
 
   const contentType = formatParam === "csv"
@@ -109,11 +139,12 @@ export async function GET(
 
   const filename = buildFilename(rankingKey, basisParam, formatParam, safeEncoding);
 
-  return new NextResponse(new Uint8Array(buffer), {
+  return new NextResponse(responseBody, {
     status: 200,
     headers: {
       "Content-Type": contentType,
       "Content-Disposition": buildContentDisposition(filename),
+      // オンザフライ生成だが結果は決定的なので CDN に長めにキャッシュさせる
       "Cache-Control": "public, max-age=86400, s-maxage=2592000",
     },
   });

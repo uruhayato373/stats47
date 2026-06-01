@@ -33,7 +33,6 @@ URL → R2 パス対応は `.claude/rules/r2-storage-design.md` を参照。
 | Snapshot | スクリプト | R2 キーパス | サイズ目安 |
 |---|---|---|---|
 | master (per-URL + surveys + categories) | `packages/ranking/src/scripts/export-master-snapshots.ts` | `app/home/featured.json` / `app/category/{key}/items.json` / `app/ranking/{key}/item.json` / `app/survey/{id}/items.json` / `app/survey/all.json` | ~13MB |
-| ranking-download | `packages/ranking/src/scripts/export-ranking-download-snapshots.ts` | `app/ranking/{key}/downloads/values*.{csv,sjis.csv,json}` (basis 別 + all-bases) | — |
 | remotion-static | `apps/remotion/scripts/export-d1-to-remotion-static.ts --feature all` | `apps/remotion/public/<feature>/*.json` (R2 push 対象外) | — |
 | area-profile | `packages/area-profile/src/scripts/export-snapshot.ts` | `app/areas/{areaCode}/profile.json` | ~4MB (47 files) |
 | city-profile | `packages/area-profile/src/scripts/export-city-snapshot.ts` | `app/areas/{cityCode}/profile.json` | — |
