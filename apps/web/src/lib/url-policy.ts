@@ -26,15 +26,45 @@ import { KNOWN_THEME_SLUGS } from "@/config/known-theme-slugs";
 import { SITEMAP_RANKING_KEYS } from "@/config/sitemap-ranking-keys";
 
 /**
- * インデックス対象のエリア×カテゴリ。
+ * インデックス対象のエリア×カテゴリ（都道府県レベル）。
  * middleware（200 で返す）と sitemap（出力する）で完全一致させる。
+ *
+ * 2026-06-02 全17カテゴリに拡張:
+ *   page_components が全カテゴリ設定済み（各9〜21コンポーネント）のため
+ *   thin content 懸念なし。47×17=799 URL を sitemap/indexing 対象に追加。
+ *   city-category は municipality×category で規模が大きいため population/economy 維持。
  */
-export const INDEXABLE_AREA_CATEGORIES = ["population", "economy"] as const;
+export const INDEXABLE_AREA_CATEGORIES = [
+  "population",
+  "economy",
+  "laborwage",
+  "construction",
+  "landweather",
+  "socialsecurity",
+  "energy",
+  "tourism",
+  "administrativefinancial",
+  "agriculture",
+  "commercial",
+  "educationsports",
+  "ict",
+  "infrastructure",
+  "international",
+  "miningindustry",
+  "safetyenvironment",
+] as const;
 export type IndexableAreaCategory = (typeof INDEXABLE_AREA_CATEGORIES)[number];
 
 const INDEXABLE_AREA_CATEGORIES_SET = new Set<string>(
   INDEXABLE_AREA_CATEGORIES,
 );
+
+/**
+ * city-category (/areas/{pref}/cities/{city}/{cat}) のインデックス対象。
+ * municipality × category は規模が大きいため population/economy に限定維持（2026-06-01 決定）。
+ */
+export const INDEXABLE_CITY_CATEGORIES = ["population", "economy"] as const;
+const INDEXABLE_CITY_CATEGORIES_SET = new Set<string>(INDEXABLE_CITY_CATEGORIES);
 
 /**
  * 都道府県コード（01000〜47000）の妥当性判定。
@@ -56,14 +86,13 @@ export const UrlPolicy = {
   },
   /**
    * city-category (/areas/{pref}/cities/{city}/{category})。
-   * 県カテゴリと同じ allowlist (population/economy) のみ index 対象とし、
-   * それ以外は noindex,follow とする (薄いページの大量 index を避ける、2026-06-01 決定)。
+   * municipality×category は規模が大きいため population/economy に限定（2026-06-01 決定）。
    * sitemap も indexableCategories のみ出力し、ページの robots 判定と完全一致させる。
    */
   cityCategory: {
-    indexableCategories: INDEXABLE_AREA_CATEGORIES,
+    indexableCategories: INDEXABLE_CITY_CATEGORIES,
     isIndexableCategory: (cat: string): boolean =>
-      INDEXABLE_AREA_CATEGORIES_SET.has(cat),
+      INDEXABLE_CITY_CATEGORIES_SET.has(cat),
   },
   ranking: {
     isKnown: (key: string): boolean => KNOWN_RANKING_KEYS.has(key),

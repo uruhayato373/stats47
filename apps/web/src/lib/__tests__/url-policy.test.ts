@@ -21,13 +21,14 @@ describe("INDEXABLE_AREA_CATEGORIES", () => {
 });
 
 describe("UrlPolicy.area.isIndexableCategory", () => {
-  it("population / economy は indexable", () => {
-    expect(UrlPolicy.area.isIndexableCategory("population")).toBe(true);
-    expect(UrlPolicy.area.isIndexableCategory("economy")).toBe(true);
+  it("全17カテゴリが indexable", () => {
+    for (const cat of INDEXABLE_AREA_CATEGORIES) {
+      expect(UrlPolicy.area.isIndexableCategory(cat)).toBe(true);
+    }
   });
-  it("それ以外は非 indexable", () => {
-    expect(UrlPolicy.area.isIndexableCategory("tourism")).toBe(false);
+  it("存在しないカテゴリは非 indexable", () => {
     expect(UrlPolicy.area.isIndexableCategory("unknown")).toBe(false);
+    expect(UrlPolicy.area.isIndexableCategory("")).toBe(false);
   });
 });
 
