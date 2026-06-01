@@ -69,6 +69,11 @@ export async function AffiliateAdSlot({
             className={`shrink-0 ${theme?.icon ?? "text-muted-foreground/70"}`}
           />
         </TrackedAffiliateLink>
+        {ad.trackingPixelUrl && (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img src={ad.trackingPixelUrl} width={1} height={1} alt=""
+            className="absolute opacity-0 pointer-events-none" />
+        )}
       </div>
     );
   }
