@@ -10,7 +10,8 @@ import {
   SelectValue,
 } from "@stats47/components/atoms/ui/select";
 
-import { PREFECTURES } from "@/features/migration-flow";
+// barrel ではなく leaf から import（barrel は server-only な ThemeMigrationFlowSection を含むため）
+import { PREFECTURES } from "@/features/migration-flow/lib/prefectures";
 
 import { CommuteSankey } from "./CommuteSankey";
 
