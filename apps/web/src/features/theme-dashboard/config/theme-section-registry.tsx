@@ -1,6 +1,7 @@
 import type { ComponentType } from "react";
 
 import { ThemeDepopulationMedicalSection } from "@/features/depopulation-medical";
+import { ThemeFinanceFlowSection } from "@/features/finance-flow";
 import { ThemeHighwayTimelineSection } from "@/features/highway-history";
 import { ThemeMigrationFlowSection } from "@/features/migration-flow";
 import { ThemeStationPassengersSection } from "@/features/station-passengers";
@@ -19,6 +20,7 @@ import { ThemeSunshineMapSection } from "@/features/sunshine-map";
  */
 export const THEME_SECTION_REGISTRY: Record<string, ComponentType> = {
   "migration-flow": ThemeMigrationFlowSection,
+  "finance-flow": ThemeFinanceFlowSection,
   highway: ThemeHighwayTimelineSection,
   "station-passengers": ThemeStationPassengersSection,
   "depopulation-medical": ThemeDepopulationMedicalSection,

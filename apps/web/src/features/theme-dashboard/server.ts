@@ -40,7 +40,11 @@ export const FOREIGN_RESIDENTS_THEME = toThemeConfig(FOREIGN_RESIDENTS_SET);
 export const OCCUPATION_SALARY_THEME = toThemeConfig(OCCUPATION_SALARY_SET);
 export const REAL_INCOME_THEME = toThemeConfig(REAL_INCOME_SET);
 export const LABOR_MOBILITY_THEME = toThemeConfig(LABOR_MOBILITY_SET);
-export const LOCAL_FINANCE_THEME = toThemeConfig(LOCAL_FINANCE_SET);
+export const LOCAL_FINANCE_THEME = {
+  ...toThemeConfig(LOCAL_FINANCE_SET),
+  // 財政フロー Sankey を着地ビューとして埋め込む (THEME_SECTION_REGISTRY["finance-flow"])
+  embeddedSections: ["finance-flow"],
+};
 export const LOCAL_FINANCE_CITY_THEME = toThemeConfig(LOCAL_FINANCE_CITY_SET);
 export const FISHERY_MARINE_THEME = toThemeConfig(FISHERY_MARINE_SET);
 
