@@ -19,6 +19,70 @@ Coverage Drilldown / sitemap / Indexing API のインデックスカバレッジ
 - ページ単位の SEO 改修 (CTR・タイトル) → `gsc.md` の BLOG-CTR-* 系
 - robots.txt / OGP 等のクロール経路 → `gsc.md`
 
+## [INDEXING-SITEMAP-02] sitemap を「コンテンツ実体のある URL」に一致させ未登録を削減
+
+- **status**: pending
+- **tier**: 1
+- **target_metric**: gsc-index-coverage / sitemap-size
+- **owner**: claude
+- **deployed_at**: 2026-05-31 (実装 / branch `claude/gsc-unregistered-bulk-E1cJj`、未デプロイ)
+- **due**: 2026-06-28 (4 週後 GSC 実測)
+- **related_branch**: `claude/gsc-unregistered-bulk-E1cJj`
+- **verification_command**: `node .claude/scripts/gsc/url-inspection-daily.cjs --limit 1500`
+
+### 背景 (現状診断 2026-05-31)
+
+GSC「未登録」(クロール済み/検出 − インデックス未登録) の大量発生を調査。W21 coverage-drilldown + W22 pages.csv + コードベースの突き合わせで、**未登録の本質は「sitemap 提出数 ≫ コンテンツ実体のある URL 数」のドリフト**と判明:
+
+| カテゴリ | 未登録 (W21) | sitemap 提出 | 実コンテンツ/imp実績 | indexed率 |
+|---|---:|---:|---:|---:|
+| `/ranking/{key}` | 1,132 | ~1,900 (KNOWN 全件) | imp実績 826 (W22) | ~42% |
+| `/areas/{pref}/cities/{city}` | 1,399 | 1,719 (level-2 全件) | SSG+profile 360 | ~0.6% |
+
+- 市区町村: `sitemap.ts getCityPages()` が level-2 全 1,719 市を提出していたが、実コンテンツ (profile.json + SSG) を持つのは `PHASE_1_SSG_CITIES` = 360 市のみ。残り ~1,360 市の薄いページが「クロール済み - インデックス未登録」を量産。さらに `SITEMAP_BASELINE` で薄いまま再クロールを促進し逆効果だった。
+- ランキング: `shouldIncludeInSitemap` が KNOWN 全件 (~1,900) を提出。imp 実績 826 以外の ~1,074 が未登録に滞留。2026-05-05 に「単一週 imp≥1=338 に絞ったらインデックス大量削除」が起きて全件提出に戻した経緯あり (板挟み)。
+
+### 施策 (2 本)
+
+**P1: 市区町村 sitemap をコンテンツ実体 360 市に一致** (`apps/web/src/app/sitemap.ts`)
+- `getCityPages()` を `fetchCities().filter(level==="2")` (1,719) → `PHASE_1_SSG_CITIES` (360) 基準に変更
+- 提出を 1,719 → 360 (含カテゴリ ~5,157 → 1,080) に削減。薄いページの提出を止めクロール予算を温存
+- 既に indexed の少数ページは noindex 化していないため deindex は起きない (提出を止めるだけ)
+
+**P2: ランキング sitemap を複数週 impressions 和集合に絞る** (削除事故を回避)
+- 新規生成スクリプト `.claude/scripts/gsc/build-sitemap-ranking-keys.cjs` → `apps/web/src/config/sitemap-ranking-keys.ts` (`SITEMAP_RANKING_KEYS`)
+- W16-W22 の 7 週和集合 = **948 キー** (既存 INDEXABLE 338 は全て内包 = 取りこぼし 0)。`shouldIncludeInSitemap` を `!GONE && KNOWN && SITEMAP_RANKING_KEYS` に変更
+- 三重の安全弁: (a) 単一週でなく全週和集合、(b) 既存 INDEXABLE を内包、(c) セットが空なら KNOWN 全件にフォールバック
+- 2026-05-05 の失敗 (338 に絞り 1,584 削除) との差: 948 は「過去に検索表示実績 = indexed 済」を保守的に拾い、外すのは 7 週連続 imp ゼロの長尾 (= 既に未登録の集合 ≈ 1,074) のみ
+
+### 想定効果
+
+**[仮説]** sitemap 提出 URL を ranking 1,900→948・cities 1,719→360 に削減することで、Google が薄い未登録ページに費やすクロール予算を温存し、(a) 既存 826 ranking + 360 cities の再クロール頻度向上、(b) 未登録 (クロール済み-未登録) の段階的減少。
+
+**根拠**: 外す ranking ~952 キーは W21 未登録 1,132 とほぼ相補 (1,900-826≈1,074)。外す cities ~1,360 は indexed 率 0.6% で実トラフィック寄与ほぼゼロ。提出停止であり noindex ではないため indexed 済みページの deindex リスクは低い。定量予測は P4 (GSC 実測再取得) でベースライン確定後に精緻化。
+
+### 検証
+
+- **検証コマンド**:
+  - `node .claude/scripts/gsc/url-inspection-daily.cjs --limit 1500` で coverageState 別件数を週次集計
+  - `node .claude/scripts/gsc/build-sitemap-ranking-keys.cjs` で sitemap キー再生成 (週次データ更新後)
+- **検証期日**: 2026-06-28 (デプロイ 4 週後)
+- **期日後の判定**:
+  - 未登録 (ranking+cities) が W21 比 -50% 以上 かつ ranking indexed 数が 826 から減っていない → effect/full
+  - -20%〜-50% → effect/partial
+  - 横ばい or indexed 数が減少 → effect/none/adverse、次の検証: sitemap 提出停止だけでは不足 → 薄い city/ranking ページへの `noindex,follow` 付与 (page.tsx の robots を条件分岐) に切替
+
+### NOT this施策 (後続候補)
+
+- 薄い 1,360 city ページへの条件付き `noindex,follow` 付与 (現状 page.tsx:111 は無条件 index,follow)
+- ランキングテンプレートのコンテンツ強化 (固有分析文・内部リンク) で未登録の長尾を indexed 化
+- P4: デプロイ前の W22 最新 coverage-drilldown 再取得 (現状 W21 止まり)
+
+### 関連
+
+- agent 用詳細ログ: `.claude/skills/analytics/gsc-improvement/reference/improvement-log.md`
+- 連携: [INDEXING-DRILLDOWN-01] (drilldown 週次観測) / [INDEXING-AUTO-01] (Indexing API 自動再送信) / [P0-CITIES-DIAG] (Phase 1 復活設計)
+
 ## [P0-CITIES-DIAG] 市区町村ページの Phase 1 復活戦略設計
 
 - **status**: effect/full
