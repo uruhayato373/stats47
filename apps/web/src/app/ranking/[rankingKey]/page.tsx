@@ -54,7 +54,7 @@ import {
 import { isOk } from "@stats47/types";
 import { getInitialMapTileUrls } from "@stats47/visualization/leaflet/constants";
 
-import { resolveAffiliateBanners } from "@/features/ads/server";
+import { AffiliateAdSlot, resolveAffiliateBanners } from "@/features/ads/server";
 import { findCategoryByKey } from "@/features/category/server";
 import {
   generateRankingBreadcrumbStructuredData,
@@ -329,6 +329,7 @@ export default async function RankingKeyPage({
             <RankingItemsSidebar rankingKey={rankingKey} areaType={areaType} categoryKey={rankingItem.categoryKey} />
             <AdSenseAd format={RANKING_SIDEBAR_TOP.format} slotId={RANKING_SIDEBAR_TOP.slotId} />
             <RelatedArticlesCard rankingKey={rankingKey} areaType={areaType} />
+            <AffiliateAdSlot categoryKey={rankingItem.categoryKey ?? ""} position="sidebar" />
             <SurveyCard surveys={allSurveys.map((s: { id: string; name: string }) => ({ id: s.id, name: s.name }))} currentSurveyId={rankingItem.surveyId ?? undefined} />
             <PortStatisticsMapCard rankingKey={rankingKey} groupKey={rankingItem.groupKey} />
           </Suspense>

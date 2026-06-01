@@ -49,6 +49,7 @@ describe("resolveAffiliateAd", () => {
     expect(result).toEqual({
       title: "テスト広告",
       href: "https://example.com/ad",
+      trackingPixelUrl: null,
     });
   });
 });
