@@ -9,6 +9,92 @@ updated: 2026-05-16
 
 施策ベースで append-only。新しい施策は最新を上に追加。判定が変わったら section 末尾に追記。
 
+## [CWV-RANKING-LCP-01] ranking mobile LCP — map tile preload を lg 以上に限定
+
+- **status**: pending
+- **tier**: 1
+- **target_metric**: psi-lcp
+- **owner**: claude
+- **deployed_at**: 2026-06-02 (PR #400)
+- **due**: 2026-07-01 (4週後 PSI 検証)
+
+### 施策
+
+`/ranking/[rankingKey]` モバイル LCP 9,079ms の主因 = EXP-003 で追加した map tile preload が mobile でも実行されていた（モバイルは table がデフォルト表示で地図非表示なのに `fetchPriority="high"` の tile 4枚が帯域を専有）。preload link に `media="(min-width: 1024px)"` を追加し desktop 限定化。
+
+### 想定効果 [根拠: tile 競合の排除]
+
+- Mobile LCP: 9,079ms → ~4,000ms（tile fetch を可視コンテンツから分離）
+- Desktop: 変化なし（media query 対象外）
+- 対象: ranking 1,992 ページ
+
+### 検証コマンド (PSI quota リセット後)
+
+```bash
+curl "https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=https://stats47.jp/ranking/total-population&strategy=mobile&category=performance" \
+  | python3 -c "import sys,json; d=json.load(sys.stdin); print(d['lighthouseResult']['audits']['largest-contentful-paint']['displayValue'])"
+```
+
+期日 (2026-07-01) に LCP < 5,000ms なら effect/partial、< 3,500ms なら effect/full。
+
+## [CWV-THEMES-CLS-01] themes Sankey placeholder の高さ予約を実SVG比率に修正
+
+- **status**: pending
+- **tier**: 1
+- **target_metric**: psi-cls
+- **owner**: claude
+- **deployed_at**: 2026-06-02 (PR #407)
+- **due**: 2026-07-01 (4週後 PSI 検証)
+
+### 施策
+
+`/themes/population-dynamics` CLS 0.514 / `/themes/local-economy` 0.530 の主因 = Migration/Commute/Finance Sankey のローディング placeholder が `aspect-[3/2]`(1.5) だが、HubSankey 実描画は `viewBox 1000×730`(≈1.37)。データ fetch 完了で SVG が placeholder より高くなり下方シフト。3つの placeholder を `aspect-[100/73]`（実SVG比率）に統一。
+
+### 想定効果 [根拠: placeholder/描画の高さ一致]
+
+- /themes/* の Sankey 由来 CLS を排除（population-dynamics は migration+commute の2図でシフト倍加していた）
+- 2026-06-01 PSI batch 実測では既に 0.514 → 0.236 に低下、本修正で更に < 0.1 を狙う
+
+### 検証コマンド
+
+```bash
+# 日次 PSI batch JSON から CLS を確認
+python3 -c "import json,glob,os; f=sorted(glob.glob('.claude/state/metrics/psi/psi-batch-*.json'),key=os.path.getmtime)[-1]; d=json.load(open(f)); print([r['lab_data']['CLS'] for r in d['results'] if 'population-dynamics' in r['url'] and r['strategy']=='mobile'])"
+```
+
+## [CWV-THEMES-LCP-02] themes LCP 8.3s — 真因は TBT 5.1s (JS メインスレッドブロック) ★未着手
+
+- **status**: pending (調査完了・実装保留)
+- **tier**: 2
+- **target_metric**: psi-lcp
+- **owner**: claude
+- **investigated_at**: 2026-06-02
+- **due**: 未定（theme files の並行編集が落ち着いてから）
+
+### 実測 (2026-06-01 PSI batch, mobile)
+
+```
+LCP要素: <p class="mt-2 ... text-white/85"> (ヒーロー説明テキスト, SSR済み HTML)
+LCP: 8,338ms / FCP: 5,701ms / TBT: 5,111ms / Performance: 15
+elementRenderDelay: 3,041ms
+```
+
+### 真因 [根拠: PSI batch lab_data + lcp_element breakdown]
+
+LCP 要素はヒーローの **SSR 済みテキスト**。つまり HTML 削減・preload では改善しない（メモリ `feedback_lcp_optimization` の EXP-002/003 で実証済の罠）。真因は **TBT 5,111ms = 重い JS バンドルがメインスレッドを5秒ブロック**し、ヒーローの paint が 8.3s まで遅延すること。`ThemeDashboardTabbed` (use client) が Leaflet / D3 / 全チャート component を静的 import し初期チャンクが肥大している。
+
+### 提案施策（未実装）
+
+- `ThemeDashboardTabbed` の重い chart / scatter / map wrapper を `dynamic()` 化し初期 JS を削減
+- DeferredTabs で非表示タブの component を静的 import から動的 import に変更（mountedTabs と整合）
+
+### なぜ保留か
+
+- theme-dashboard 系ファイルは別セッションが並行編集中（shared working copy）でコンフリクトリスク高
+- code-splitting は広範な変更で、bundle profile なしの推測実装は禁止（evidence-based-judgment）
+- 実装時は `next build` の First Load JS 差分で効果を事前検証すること
+
+
 ## [CWV-CANDIDATE-01] PSI 違反 URL → 修正候補 component 提案スクリプト (Phase 3 sprint)
 
 - **status**: in-progress
