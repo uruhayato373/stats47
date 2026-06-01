@@ -251,7 +251,33 @@ export function generateRankingPageStructuredData({
         unitText: unit,
       },
     }),
+    // Google Dataset Search はデータカタログへの所属を強いシグナルとして扱う。
+    // 一次配信元 (e-Stat 政府統計総合窓口) を DataCatalog として明示する。
+    includedInDataCatalog: {
+      "@type": "DataCatalog",
+      name: "e-Stat 政府統計の総合窓口",
+      url: "https://www.e-stat.go.jp/",
+    },
+    // 無償アクセス可能 (Dataset Search 推奨プロパティ)
+    isAccessibleForFree: true,
+    // 正規 URL を identifier に据え、Dataset Search の重複排除を助ける
+    identifier: url,
+    // distribution: 機械可読な CSV / JSON を優先列挙する。Google Dataset Search は
+    // DataDownload (CSV/JSON 等) を HTML ページより重視する。既存のオンザフライ生成 API
+    // (/api/ranking/[key]/download) を contentUrl に指定。baseUrl + rankingKey から直接組む。
     distribution: [
+      {
+        "@type": "DataDownload",
+        name: `${itemName} (CSV)`,
+        encodingFormat: "text/csv",
+        contentUrl: `${baseUrl}/api/ranking/${rankingItem.rankingKey}/download?format=csv`,
+      },
+      {
+        "@type": "DataDownload",
+        name: `${itemName} (JSON)`,
+        encodingFormat: "application/json",
+        contentUrl: `${baseUrl}/api/ranking/${rankingItem.rankingKey}/download?format=json`,
+      },
       {
         "@type": "DataDownload",
         encodingFormat: "text/html",
