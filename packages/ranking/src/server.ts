@@ -9,6 +9,7 @@ export * from "./repositories/schemas/ranking-items.schemas";
 export * from "./services/compute-normalization";
 export * from "./services/fetch-ranking-data";
 export * from "./services/fetch-ranking-values-on-demand";
+export * from "./services/get-ranking-download-series";
 // sync-ranking-export (D1 updateRankingItem 書込) は完全DBレス Phase F で削除。
 export * from "./types";
 export type { RankingItemWithTags } from "./types/ranking-item-with-tags";
