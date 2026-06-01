@@ -256,10 +256,13 @@ export default async function RankingKeyPage({
   //     この Server Component 内でレンダリングし ReactNode として注入する。
   //   - RankingKeyPageClient 内の Client Component（RankingHighlights 等）は
   //     Client Component 同士なので直接 import して使用している。
-  // LCP 対策（#101 EXP-003）:
-  // ランキング詳細ページの LCP 要素は Leaflet map の中心 tile。
-  // Leaflet JS 実行後に tile URL が判明すると resourceLoadDelay が 4.3s と支配的なため、
-  // 初期ビュー (日本中心・zoom 5) の 4 タイルを SSR で preload して LCP を短縮する。
+  // LCP 対策（#101 EXP-003 → EXP-006 改良）:
+  // デスクトップ: LCP 要素 = Leaflet map 中心 tile。
+  //   Leaflet JS 実行後に tile URL が判明すると resourceLoadDelay が 4.3s と支配的なため
+  //   初期ビュー (日本中心・zoom 5) の 4 タイルを SSR で preload → LCP 短縮。
+  // モバイル: デフォルトタブは table（地図は非表示）のため tile preload が逆効果。
+  //   fetchPriority="high" の tile が帯域を専有し、可視コンテンツ(table 行/見出し)の
+  //   ロードを遅延させ LCP 9s を引き起こす。media query でデスクトップ限定にする。
   const initialTileUrls = getInitialMapTileUrls({ theme: "light_all", retina: true });
 
   return (
@@ -273,6 +276,7 @@ export default async function RankingKeyPage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbStructuredData) }}
       />
+      {/* map tile preload: lg(1024px)以上のみ。モバイルは table がデフォルト表示のため不要 */}
       {initialTileUrls.map((url, idx) => (
         <link
           key={url}
@@ -280,6 +284,7 @@ export default async function RankingKeyPage({
           as="image"
           href={url}
           fetchPriority={idx === 0 ? "high" : "auto"}
+          media="(min-width: 1024px)"
         />
       ))}
 
