@@ -67,7 +67,7 @@ async function fetchStatsData(appId: string): Promise<{
   const params = new URLSearchParams({
     appId,
     statsDataId: STATS_DATA_ID,
-    limit: "200000",
+    limit: "100000", // e-Stat getStatsData の上限
   });
   const url = `https://api.e-stat.go.jp/rest/3.0/app/json/getStatsData?${params}`;
   const res = await fetch(url);
