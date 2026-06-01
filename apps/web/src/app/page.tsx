@@ -49,7 +49,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const baseUrl =
     process.env.NEXT_PUBLIC_BASE_URL || "https://stats47.jp";
 
-  const title = "統計で見る都道府県 | 47都道府県ランキング・データ比較";
+  const title = { absolute: "統計で見る都道府県 | 47都道府県ランキング・データ比較" };
   const description =
     "あなたの県は何位？年収・人口・消費量から教育・医療まで、1,800以上の統計で47都道府県をランキング。地図やグラフで地域の特徴をわかりやすく可視化します。";
 
