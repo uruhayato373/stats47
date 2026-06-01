@@ -120,8 +120,8 @@ year 系 util を 1 パッケージ（types か utils）に集約、インライ
 - per-file ボイラープレートが多い（source.kind / category / unit / entities の繰り返し）。
 - metric の shape が不揃い（`calculation`/`visualization`/`display` を持つものと持たないもの）→ runtime undefined リスク。
 - SEO/UI メタ(`seoTitle` 等)が config に同居し ~40% の肥大。
-- **`validate:years` は CI(`pr-quality-check.yml:72`)で実行されている**（※監査エージェントの「CI 未組込」は誤り。
-  ただし **pre-commit(.husky) には未組込**なのでローカル早期検知は効かない）。
+- **`validate:years` は CI(`pr-quality-check.yml:72`)+ pre-commit(`pre-commit-checks.sh` §6.5)の両方で実行済**
+  （※監査エージェントの「CI 未組込」も、初版レビューの「pre-commit 未組込」も誤り。本体検証で訂正。**追加対応不要**）。
 
 **推奨（DBレス正典は壊さず、git TS のまま最適化）**:
 (1) `createMetric({...})` factory/builder で共通既定値を集約しボイラープレート削減、
@@ -167,7 +167,7 @@ DB 依存除去（要 import 確認）。低リスクなので最初の quick wi
 
 1. **T6 クリーンアップ**: knip の unused file/export/dep 削除、legacy D1 script 削除、apps/web の DB 依存除去。
 2. **T2 prefecture コピー削除**: 純粋コピーの `prefectures.ts`(station-passengers/migration-flow) を `@stats47/area` import に置換。
-3. **T4-(4)**: `validate:years` を pre-commit に追加。
+3. ~~**T4-(4)**: `validate:years` を pre-commit に追加~~ → **既に CI + pre-commit 両方で実行済（対応不要）**。
 
 ### フェーズ 2: 構造リファクタ（中リスク・基盤改善）
 
@@ -190,12 +190,44 @@ DB 依存除去（要 import 確認）。低リスクなので最初の quick wi
 | prefecture コピーがバイト一致 | `ls -la .../prefectures.ts` | station-passengers/migration-flow とも 1922B ✅ |
 | apps/web に DB 依存残存 | `apps/web/package.json` | `@stats47/database`/`better-sqlite3` 確認 ✅ |
 | registry.ts 規模 | `wc -l registry.ts` / metric file count | 4439 行 / 2209 file ✅ |
-| validate:years の CI 組込 | `grep -rn validate:years .github/` | **CI 済(`pr-quality-check.yml:72`)・pre-commit 未** → 監査の「CI 未組込」を訂正 |
+| validate:years の組込 | `grep -rn validate:years .github/ .husky/ apps/web/scripts/` | **CI(`pr-quality-check.yml:72`) + pre-commit(`pre-commit-checks.sh` §6.5) 両方で実行済** → 監査/初版の「未組込」を訂正 |
 
 > 未検証で agent 報告に依存する項目（UI 重複の各 file、knip の個別カウント、build-time D1 query 等）は
 > 着手時に該当 PR 内で再確認すること。
 
 ## 次アクション
 
-- 本レビューを基に `docs/50_Issues/feature-backlog.md` / `automation-backlog.md` へ T1〜T6 の着手項目を起票。
+- 本レビューを基に `docs/50_Issues/feature-backlog.md` / `automation-backlog.md` へ未着手項目を起票。
 - フェーズ 1（quick wins）は本ブランチ系列で順次着手可能。フェーズ 2/3 は影響範囲が広いので個別 PR + `next build` の SSG 区分確認（`nextjs-ssg-preservation.md`）を伴う。
+
+---
+
+## 実施状況（2026-06-01 セッション）
+
+branch `claude/codebase-review-optimization-wyVMV` で着手分を実装・検証・commit 済。
+
+### ✅ 完了（型チェック + 既存テストで検証済）
+
+| 施策 | 内容 | 検証 |
+|---|---|---|
+| **T2 (prefecture SSOT)** | `@stats47/area` に `to2DigitPrefCode`/`to5DigitPrefCode`/`PREFECTURE_LIST_2DIGIT` を新設。station-passengers/migration-flow のバイト一致コピー(各47件)を SSOT への re-export shim に置換。ranking 内 ad-hoc slice を canonical util に統一 | apps/web tsc clean / filter-to-prefectures.test (6) green |
+| **T1 (reader factory)** | `@stats47/r2-storage/server` に `createSnapshotReader<TSnapshot,TData>` を新設。**禁止されていた module-level cache を 6 reader から撤去**（categories/surveys/blog/affiliate-ads/fishing-ports/port-statistics）。fishing-ports の「miss を恒久キャッシュ」潜在バグも解消 | apps/web tsc clean / blog・affiliate reader test green |
+| **T4-(4)** | 対応不要と判明（validate:years は CI + pre-commit 両方で実行済） | grep 検証済 |
+
+### 🔬 実装中に判明した evidence-based 訂正（監査エージェントの誤りを本体検証で修正）
+
+1. **`validate:years` は CI + pre-commit 両方で実行済** → 監査の「CI 未組込」も初版の「pre-commit 未組込」も誤り。**追加対応不要**。
+2. **`SourceConfig` は重複ではない** → `data-configs` 版は取り込み元の discriminated union (`kind: estat|mlit|...`)、`ranking` 版は表示用 provenance (collection/survey/statsDataId)。**別概念の名前衝突**であり「マージ」は誤り（混同を招く）。対応するなら *リネーム*（例 ranking 版 → `SourceProvenance`）だが影響範囲が広く要判断。
+3. **T6 の未使用 dep は false positive** → `better-sqlite3` は `apps/web/scripts/{export-fishing-ports,sync-known-keys,generate-known-tag-keys}.ts` が使用、`@stats47/database` は `test.setup.tsx` が使用。**削除すると build script / テストが壊れる**。knip の「unused」は runtime のみの観点で、scripts/tests を取りこぼしている。
+
+### ⏸️ 意図的に deferred（理由付き）
+
+| 施策 | deferred 理由 |
+|---|---|
+| **T6 legacy D1 script 削除** | `seed-to-d1-sql.ts` 等は `packages/database/seed/README.md` で**現行ワークフローとして文書化**されており、削除はその記述と矛盾する。DBレス正典との整合を確認した上で *README ごと* 別 PR で扱うべき（hard-to-reverse） |
+| **T6 unused file/export 削除 (~114/263)** | knip の false positive 率が高い（上記 dep の例）。Next.js の規約 entrypoint（opengraph-image/sitemap/route）や dynamic import を取りこぼす恐れ。1 件ずつ参照確認が必要で、一括削除は不可 |
+| **T3 型の `@stats47/types` 一次源化** | data-configs↔types の依存方向の再設計を伴い影響範囲が広い。cycle 回避の設計判断が必要 → 専用 PR |
+| **T5 UI 共通化 (GenericSankey 等)** | 4 Sankey / 3 ranking table は同型に見えるが差分の実測が未了。共通化は差分吸収の API 設計が必要 → 専用 PR。raw HTML 要素の components 置換は個別に着手可 |
+| **T4 metric factory (2209 file)** | git TS が SSOT である正典を壊さずに行う必要があり、2209 file の機械置換は専用の codemod + 段階検証が必須。factory 雛形の導入から段階的に |
+
+> deferred 分はいずれも「単独 PR で `next build` の SSG 区分確認を伴う」べき規模。本セッションでは**低リスクで検証可能な T1/T2 を確実に完了**させ、残りは誤った一括変更で壊さないために据え置いた（行動原則 3 外科的変更 / 12 失敗を隠さない）。
