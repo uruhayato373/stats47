@@ -22,15 +22,11 @@ interface PageProps {
   params: Promise<{ areaCode: string; themeSlug: string }>;
 }
 
-export function generateStaticParams() {
-  const prefectures = fetchPrefectures();
-  return TYPE_A_THEMES.flatMap((theme) =>
-    prefectures.map((pref) => ({
-      areaCode: pref.prefCode,
-      themeSlug: theme.themeKey,
-    }))
-  );
-}
+// 836ページ (47×18) をビルド時に全プリレンダリングすると CI が R2 大量アクセスで
+// タイムアウトするため ISR (オンデマンド生成+キャッシュ) を採用。
+// 初回アクセス時に SSR → Cloudflare エッジキャッシュに保存。
+export const dynamic = "force-dynamic";
+export const revalidate = 86400;
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { areaCode, themeSlug } = await params;
