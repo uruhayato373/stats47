@@ -34,6 +34,28 @@ git status
 - 未コミットの変更がある場合 → ユーザーに確認して中止
 - 現在のブランチ名を `$CURRENT_BRANCH` として記憶する
 
+#### develop 乖離 / 共有作業コピーの git race チェック（★必須）
+
+複数セッションが同一作業コピー/.git を共有していると `develop` が origin と乖離していることがある（2026-06-01 実際に発生: 並行セッションが develop に blog をコミットし `git pull --ff-only` が失敗）。Step 3 で乖離した develop に merge すると、未検証の他作業を巻き込んでデプロイしてしまう。push 前に確認する:
+
+```bash
+git fetch origin develop main
+git rev-list --left-right --count origin/develop...develop   # 乖離 (ahead behind) を確認
+git status -s | grep -v "^??" | head             # 自分以外の tracked 変更が無いか
+```
+
+- **develop が origin と乖離** している / **並行セッションが develop に commit 中**（想定外の untracked/commit がある）場合は、**Step 3 の develop merge を行わず**、feature ブランチを **`origin/main` に rebase して `feature → main` の PR を直接作る**（`pr-quality-check.yml` は main 宛 PR で発火するため CI は走る）。これにより乖離 develop に触れずに自分の変更だけをクリーンにデプロイできる:
+
+  ```bash
+  git fetch origin main
+  git rebase --onto origin/main <feature の分岐元 SHA> $CURRENT_BRANCH
+  git push -u origin $CURRENT_BRANCH
+  gh pr create --base main --head $CURRENT_BRANCH --title "…" --body "…"
+  ```
+
+  この場合デプロイ後に `develop` が `main` より遅れるので、別途 `main → develop` を取り込んで同期する（並行セッションが落ち着いてから）。
+- develop が origin とクリーン（乖離なし・自分のみ）なら通常どおり Step 3 へ進む。
+
 ### Step 1.5: feature ブランチ化（develop/main にいる場合）
 
 `$CURRENT_BRANCH` が `develop` or `main` の場合、未 push コミットがあるなら **feature ブランチへ移動**する。ブランチ名はユーザーに確認するか `feature/<日時>-<短い要約>` 形式で提案。
@@ -168,8 +190,8 @@ git push origin --delete $CURRENT_BRANCH 2>/dev/null || true  # リモート削�
 - `apps/web/src/middleware.ts` のルール追加・変更（特に 410 / 301 / noindex 分岐）
 - `apps/web/src/app/**/page.tsx` の `generateMetadata` で `robots` / `canonical` を変更
 - `apps/web/src/app/robots.ts` / `sitemap.ts` / `manifest.ts` の変更
-- `apps/web/src/config/gone-*.ts` / `known-*.ts` への追加・削除
-- `apps/web/src/lib/indexable-area-categories.ts` の変更
+- `apps/web/src/config/gone-*.ts` / `known-*.ts` / `legacy-category-keys.ts` への追加・削除
+- `apps/web/src/lib/url-policy.ts` の変更（indexable 判定の SSOT。area / cityCategory / ranking 等）
 
 **理由**: 本番の HTML 200 応答は `Cache-Control: s-maxage=86400` で Cloudflare エッジに最大 24 時間キャッシュされる。middleware ルール変更を即時反映するには Purge が必要。
 

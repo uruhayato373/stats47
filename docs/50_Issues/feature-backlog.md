@@ -586,16 +586,13 @@ noindex のため SEO 流入は無いが、ブックマーク・直接アクセ�
 - プロトタイプ: `.claude/design-system/redesign/project/compare-option-d.jsx` / `search-option-d.jsx` を参照
 - 工数: 各 2-3 時間
 
-#### C. CSV ダウンロード R2 事前生成の運用反映
+#### C. ~~CSV ダウンロード R2 事前生成の運用反映~~ → 廃止 (2026-06-01, PR #391)
 
-PR #352 で実装した「事前生成ファイル」を本番に反映:
-
-```bash
-bash .claude/skills/db/sync-snapshots/run.sh --only ranking-download
-```
-
-初回生成は ~2,151 metrics × 最大 8 ファイル ≈ 17K files で 15-30 分かかる。
-その後通常の `/sync-snapshots` フルランで差分更新される。
+**事前生成 (bake) は不採用に確定。** 全 ~2,169 metrics × 最大 8 ファイル ≈ 23K files / 1GB 超 /
+CI 45 分 timeout となり、これは Phase 6 が download exporter を削除した理由 (R2 肥大化) そのものだった。
+代わりに route `/api/ranking/[key]/download` で **オンザフライ生成** (R2 観測値 → `getRankingDownloadSeries`
+→ build CSV、SJIS は iconv-lite 動的 import) に変更。運用タスク不要。詳細: memory
+`project_ranking_download_onthefly` / `feedback_check_why_removed_before_reviving`。
 
 #### D. 環境変数の本番設定
 

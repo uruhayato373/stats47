@@ -403,8 +403,9 @@ W21 セッションで Phase 1 (横幅最大化 + 共通プリミティブ + 右
 
 ### 運用タスク
 
-- `bash .claude/skills/db/sync-snapshots/run.sh --only ranking-download`
-  → CSV/JSON 事前生成ファイルを R2 に push (初回 15-30 分)
+- ~~`run.sh --only ranking-download` で CSV/JSON 事前生成~~ → **廃止 (2026-06-01)**。
+  download は route `/api/ranking/[key]/download` で**オンザフライ生成**に変更（事前 bake は全 metric で
+  1GB 超 / 23K files / timeout のため不採用）。運用タスク不要。詳細: memory `project_ranking_download_onthefly`。
 
 ---
 
