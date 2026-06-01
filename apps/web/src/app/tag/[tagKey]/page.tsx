@@ -52,7 +52,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     const articles = await listArticleSummariesByTagKey(tagKey, 2);
     const indexable = articles.length >= 2;
 
-    const title = `「${tag}」の記事一覧 | ブログ | stats47`;
+    const title = `「${tag}」タグの記事一覧`;
     const description = `「${tag}」タグが付いた都道府県統計ブログの記事一覧。`;
 
     return {
