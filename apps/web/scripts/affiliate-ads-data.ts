@@ -786,4 +786,204 @@ export const AFFILIATE_ADS: AffiliateAd[] = [
     "createdAt": "2026-03-26 09:01:57",
     "updatedAt": "2026-06-01 00:00:00"
   },
+  // ── STRATEGY CAREER 320×100バナー — 全8カテゴリ blog-bottom (priority 80) ────
+  // エンジニア転職（年収1000万以上・リモート・残業30h以下）
+  {
+    "id": "af_strategy_career_economy_001",
+    "title": "STRATEGY CAREER｜エンジニア転職",
+    "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B5LK5+5YC2K2+5P1E+5ZEMP",
+    "areaCode": null, "categoryKey": "economy", "locationCode": "blog-bottom",
+    "isActive": true, "priority": 80, "startDate": null, "endDate": null, "targetCategories": null,
+    "adType": "banner",
+    "imageUrl": "https://www29.a8.net/svt/bgt?aid=260601701360&wid=001&eno=01&mid=s00000026573001005000&mc=1",
+    "trackingPixelUrl": "https://www10.a8.net/0.gif?a8mat=4B5LK5+5YC2K2+5P1E+5ZEMP",
+    "width": 320, "height": 100,
+    "createdAt": "2026-06-01 00:00:00", "updatedAt": "2026-06-01 00:00:00"
+  },
+  {
+    "id": "af_strategy_career_labor_001",
+    "title": "STRATEGY CAREER｜エンジニア転職",
+    "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B5LK5+5YC2K2+5P1E+5ZEMP",
+    "areaCode": null, "categoryKey": "laborwage", "locationCode": "blog-bottom",
+    "isActive": true, "priority": 80, "startDate": null, "endDate": null, "targetCategories": null,
+    "adType": "banner",
+    "imageUrl": "https://www29.a8.net/svt/bgt?aid=260601701360&wid=001&eno=01&mid=s00000026573001005000&mc=1",
+    "trackingPixelUrl": "https://www10.a8.net/0.gif?a8mat=4B5LK5+5YC2K2+5P1E+5ZEMP",
+    "width": 320, "height": 100,
+    "createdAt": "2026-06-01 00:00:00", "updatedAt": "2026-06-01 00:00:00"
+  },
+  {
+    "id": "af_strategy_career_population_001",
+    "title": "STRATEGY CAREER｜エンジニア転職",
+    "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B5LK5+5YC2K2+5P1E+5ZEMP",
+    "areaCode": null, "categoryKey": "population", "locationCode": "blog-bottom",
+    "isActive": true, "priority": 80, "startDate": null, "endDate": null, "targetCategories": null,
+    "adType": "banner",
+    "imageUrl": "https://www29.a8.net/svt/bgt?aid=260601701360&wid=001&eno=01&mid=s00000026573001005000&mc=1",
+    "trackingPixelUrl": "https://www10.a8.net/0.gif?a8mat=4B5LK5+5YC2K2+5P1E+5ZEMP",
+    "width": 320, "height": 100,
+    "createdAt": "2026-06-01 00:00:00", "updatedAt": "2026-06-01 00:00:00"
+  },
+  {
+    "id": "af_strategy_career_tourism_001",
+    "title": "STRATEGY CAREER｜エンジニア転職",
+    "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B5LK5+5YC2K2+5P1E+5ZEMP",
+    "areaCode": null, "categoryKey": "tourism", "locationCode": "blog-bottom",
+    "isActive": true, "priority": 80, "startDate": null, "endDate": null, "targetCategories": null,
+    "adType": "banner",
+    "imageUrl": "https://www29.a8.net/svt/bgt?aid=260601701360&wid=001&eno=01&mid=s00000026573001005000&mc=1",
+    "trackingPixelUrl": "https://www10.a8.net/0.gif?a8mat=4B5LK5+5YC2K2+5P1E+5ZEMP",
+    "width": 320, "height": 100,
+    "createdAt": "2026-06-01 00:00:00", "updatedAt": "2026-06-01 00:00:00"
+  },
+  {
+    "id": "af_strategy_career_housing_001",
+    "title": "STRATEGY CAREER｜エンジニア転職",
+    "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B5LK5+5YC2K2+5P1E+5ZEMP",
+    "areaCode": null, "categoryKey": "construction", "locationCode": "blog-bottom",
+    "isActive": true, "priority": 80, "startDate": null, "endDate": null, "targetCategories": null,
+    "adType": "banner",
+    "imageUrl": "https://www29.a8.net/svt/bgt?aid=260601701360&wid=001&eno=01&mid=s00000026573001005000&mc=1",
+    "trackingPixelUrl": "https://www10.a8.net/0.gif?a8mat=4B5LK5+5YC2K2+5P1E+5ZEMP",
+    "width": 320, "height": 100,
+    "createdAt": "2026-06-01 00:00:00", "updatedAt": "2026-06-01 00:00:00"
+  },
+  {
+    "id": "af_strategy_career_health_001",
+    "title": "STRATEGY CAREER｜エンジニア転職",
+    "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B5LK5+5YC2K2+5P1E+5ZEMP",
+    "areaCode": null, "categoryKey": "socialsecurity", "locationCode": "blog-bottom",
+    "isActive": true, "priority": 80, "startDate": null, "endDate": null, "targetCategories": null,
+    "adType": "banner",
+    "imageUrl": "https://www29.a8.net/svt/bgt?aid=260601701360&wid=001&eno=01&mid=s00000026573001005000&mc=1",
+    "trackingPixelUrl": "https://www10.a8.net/0.gif?a8mat=4B5LK5+5YC2K2+5P1E+5ZEMP",
+    "width": 320, "height": 100,
+    "createdAt": "2026-06-01 00:00:00", "updatedAt": "2026-06-01 00:00:00"
+  },
+  {
+    "id": "af_strategy_career_energy_001",
+    "title": "STRATEGY CAREER｜エンジニア転職",
+    "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B5LK5+5YC2K2+5P1E+5ZEMP",
+    "areaCode": null, "categoryKey": "energy", "locationCode": "blog-bottom",
+    "isActive": true, "priority": 80, "startDate": null, "endDate": null, "targetCategories": null,
+    "adType": "banner",
+    "imageUrl": "https://www29.a8.net/svt/bgt?aid=260601701360&wid=001&eno=01&mid=s00000026573001005000&mc=1",
+    "trackingPixelUrl": "https://www10.a8.net/0.gif?a8mat=4B5LK5+5YC2K2+5P1E+5ZEMP",
+    "width": 320, "height": 100,
+    "createdAt": "2026-06-01 00:00:00", "updatedAt": "2026-06-01 00:00:00"
+  },
+  {
+    "id": "af_strategy_career_furusato_001",
+    "title": "STRATEGY CAREER｜エンジニア転職",
+    "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B5LK5+5YC2K2+5P1E+5ZEMP",
+    "areaCode": null, "categoryKey": "administrativefinancial", "locationCode": "blog-bottom",
+    "isActive": true, "priority": 80, "startDate": null, "endDate": null, "targetCategories": null,
+    "adType": "banner",
+    "imageUrl": "https://www29.a8.net/svt/bgt?aid=260601701360&wid=001&eno=01&mid=s00000026573001005000&mc=1",
+    "trackingPixelUrl": "https://www10.a8.net/0.gif?a8mat=4B5LK5+5YC2K2+5P1E+5ZEMP",
+    "width": 320, "height": 100,
+    "createdAt": "2026-06-01 00:00:00", "updatedAt": "2026-06-01 00:00:00"
+  },
+  // ── STRATEGY CAREER テキストリンク — 全カテゴリキー sidebar-bottom (priority 100) ─
+  // ランキングページサイドバー AffiliateAdSlot で表示。
+  // categoryKey は CATEGORY_AFFILIATE_MAP のキーと完全一致させる（9キー）。
+  {
+    "id": "af_strategy_career_text_economy",
+    "title": "自分らしく働けるエンジニア転職を目指すなら【strategy career】",
+    "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B5LK5+5YC2K2+5P1E+5YJRM",
+    "areaCode": null, "categoryKey": "economy", "locationCode": "sidebar-bottom",
+    "isActive": true, "priority": 100, "startDate": null, "endDate": null, "targetCategories": null,
+    "adType": "text", "imageUrl": null,
+    "trackingPixelUrl": "https://www13.a8.net/0.gif?a8mat=4B5LK5+5YC2K2+5P1E+5YJRM",
+    "width": null, "height": null,
+    "createdAt": "2026-06-01 00:00:00", "updatedAt": "2026-06-01 00:00:00"
+  },
+  {
+    "id": "af_strategy_career_text_laborwage",
+    "title": "自分らしく働けるエンジニア転職を目指すなら【strategy career】",
+    "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B5LK5+5YC2K2+5P1E+5YJRM",
+    "areaCode": null, "categoryKey": "laborwage", "locationCode": "sidebar-bottom",
+    "isActive": true, "priority": 100, "startDate": null, "endDate": null, "targetCategories": null,
+    "adType": "text", "imageUrl": null,
+    "trackingPixelUrl": "https://www13.a8.net/0.gif?a8mat=4B5LK5+5YC2K2+5P1E+5YJRM",
+    "width": null, "height": null,
+    "createdAt": "2026-06-01 00:00:00", "updatedAt": "2026-06-01 00:00:00"
+  },
+  {
+    "id": "af_strategy_career_text_population",
+    "title": "自分らしく働けるエンジニア転職を目指すなら【strategy career】",
+    "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B5LK5+5YC2K2+5P1E+5YJRM",
+    "areaCode": null, "categoryKey": "population", "locationCode": "sidebar-bottom",
+    "isActive": true, "priority": 100, "startDate": null, "endDate": null, "targetCategories": null,
+    "adType": "text", "imageUrl": null,
+    "trackingPixelUrl": "https://www13.a8.net/0.gif?a8mat=4B5LK5+5YC2K2+5P1E+5YJRM",
+    "width": null, "height": null,
+    "createdAt": "2026-06-01 00:00:00", "updatedAt": "2026-06-01 00:00:00"
+  },
+  {
+    "id": "af_strategy_career_text_tourism",
+    "title": "自分らしく働けるエンジニア転職を目指すなら【strategy career】",
+    "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B5LK5+5YC2K2+5P1E+5YJRM",
+    "areaCode": null, "categoryKey": "tourism", "locationCode": "sidebar-bottom",
+    "isActive": true, "priority": 100, "startDate": null, "endDate": null, "targetCategories": null,
+    "adType": "text", "imageUrl": null,
+    "trackingPixelUrl": "https://www13.a8.net/0.gif?a8mat=4B5LK5+5YC2K2+5P1E+5YJRM",
+    "width": null, "height": null,
+    "createdAt": "2026-06-01 00:00:00", "updatedAt": "2026-06-01 00:00:00"
+  },
+  {
+    "id": "af_strategy_career_text_construction",
+    "title": "自分らしく働けるエンジニア転職を目指すなら【strategy career】",
+    "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B5LK5+5YC2K2+5P1E+5YJRM",
+    "areaCode": null, "categoryKey": "construction", "locationCode": "sidebar-bottom",
+    "isActive": true, "priority": 100, "startDate": null, "endDate": null, "targetCategories": null,
+    "adType": "text", "imageUrl": null,
+    "trackingPixelUrl": "https://www13.a8.net/0.gif?a8mat=4B5LK5+5YC2K2+5P1E+5YJRM",
+    "width": null, "height": null,
+    "createdAt": "2026-06-01 00:00:00", "updatedAt": "2026-06-01 00:00:00"
+  },
+  {
+    "id": "af_strategy_career_text_socialsecurity",
+    "title": "自分らしく働けるエンジニア転職を目指すなら【strategy career】",
+    "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B5LK5+5YC2K2+5P1E+5YJRM",
+    "areaCode": null, "categoryKey": "socialsecurity", "locationCode": "sidebar-bottom",
+    "isActive": true, "priority": 100, "startDate": null, "endDate": null, "targetCategories": null,
+    "adType": "text", "imageUrl": null,
+    "trackingPixelUrl": "https://www13.a8.net/0.gif?a8mat=4B5LK5+5YC2K2+5P1E+5YJRM",
+    "width": null, "height": null,
+    "createdAt": "2026-06-01 00:00:00", "updatedAt": "2026-06-01 00:00:00"
+  },
+  {
+    "id": "af_strategy_career_text_energy",
+    "title": "自分らしく働けるエンジニア転職を目指すなら【strategy career】",
+    "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B5LK5+5YC2K2+5P1E+5YJRM",
+    "areaCode": null, "categoryKey": "energy", "locationCode": "sidebar-bottom",
+    "isActive": true, "priority": 100, "startDate": null, "endDate": null, "targetCategories": null,
+    "adType": "text", "imageUrl": null,
+    "trackingPixelUrl": "https://www13.a8.net/0.gif?a8mat=4B5LK5+5YC2K2+5P1E+5YJRM",
+    "width": null, "height": null,
+    "createdAt": "2026-06-01 00:00:00", "updatedAt": "2026-06-01 00:00:00"
+  },
+  {
+    "id": "af_strategy_career_text_administrativefinancial",
+    "title": "自分らしく働けるエンジニア転職を目指すなら【strategy career】",
+    "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B5LK5+5YC2K2+5P1E+5YJRM",
+    "areaCode": null, "categoryKey": "administrativefinancial", "locationCode": "sidebar-bottom",
+    "isActive": true, "priority": 100, "startDate": null, "endDate": null, "targetCategories": null,
+    "adType": "text", "imageUrl": null,
+    "trackingPixelUrl": "https://www13.a8.net/0.gif?a8mat=4B5LK5+5YC2K2+5P1E+5YJRM",
+    "width": null, "height": null,
+    "createdAt": "2026-06-01 00:00:00", "updatedAt": "2026-06-01 00:00:00"
+  },
+  {
+    "id": "af_strategy_career_text_landweather",
+    "title": "自分らしく働けるエンジニア転職を目指すなら【strategy career】",
+    "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B5LK5+5YC2K2+5P1E+5YJRM",
+    "areaCode": null, "categoryKey": "landweather", "locationCode": "sidebar-bottom",
+    "isActive": true, "priority": 100, "startDate": null, "endDate": null, "targetCategories": null,
+    "adType": "text", "imageUrl": null,
+    "trackingPixelUrl": "https://www13.a8.net/0.gif?a8mat=4B5LK5+5YC2K2+5P1E+5YJRM",
+    "width": null, "height": null,
+    "createdAt": "2026-06-01 00:00:00", "updatedAt": "2026-06-01 00:00:00"
+  },
 ];

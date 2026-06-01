@@ -13,6 +13,7 @@ import type { AffiliateLocationCode } from "../types";
 export interface ResolvedAffiliateAd {
   title: string;
   href: string;
+  trackingPixelUrl?: string | null;
 }
 
 export interface ResolvedAffiliateBanner {
@@ -38,6 +39,7 @@ export async function resolveAffiliateAd(
   return {
     title: dbAd.title,
     href: dbAd.htmlContent,
+    trackingPixelUrl: dbAd.trackingPixelUrl,
   };
 }
 
