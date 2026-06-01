@@ -1,0 +1,59 @@
+name: 🚇 Commute-flow Ingest (e-Stat → JSON)
+
+# 国勢調査「従業地・通学地集計」(statsDataId 0003454526) から通勤 O-D を取得し、
+# 47 県分の per-prefecture JSON (apps/web/public/commute-flow/{NN}.json) を生成する。
+#
+# e-Stat APP_ID は CI 専任 (secrets.NEXT_PUBLIC_ESTAT_APP_ID) のため取り込みは CI で行う。
+# 次元コードは未検証 → まず dry_run=true で CLASS_INF の自動検出ログを確認してから本実行する。
+# 生成 JSON は artifact で持ち帰り、Web feature と同じ PR でコミットする (git 直 push しない)。
+
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "true: 次元検出ログのみ (JSON 出力しない)"
+        required: false
+        default: "true"
+
+permissions:
+  contents: read
+
+env:
+  NEXT_PUBLIC_ESTAT_APP_ID: ${{ secrets.NEXT_PUBLIC_ESTAT_APP_ID }}
+
+jobs:
+  ingest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: 🧰 Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 📥 Ingest commute O-D
+        run: |
+          if [ "${{ inputs.dry_run }}" = "true" ]; then
+            npx tsx packages/data-configs/scripts/ingest-commute-flow.ts --dry-run
+          else
+            npx tsx packages/data-configs/scripts/ingest-commute-flow.ts
+            echo "--- 生成数 ---"
+            ls apps/web/public/commute-flow/*.json | wc -l
+          fi
+
+      - name: ⬆️ Upload commute-flow JSON
+        if: inputs.dry_run != 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: commute-flow-json
+          path: apps/web/public/commute-flow/*.json
+          if-no-files-found: error
