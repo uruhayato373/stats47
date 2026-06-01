@@ -1,7 +1,10 @@
 import "server-only";
 
 import { logger } from "@stats47/logger/server";
-import { fetchFromR2AsJson } from "@stats47/r2-storage/server";
+import {
+  createSnapshotReader,
+  fetchFromR2AsJson,
+} from "@stats47/r2-storage/server";
 
 import {
   PORTS_SNAPSHOT_KEY,
@@ -39,28 +42,20 @@ export interface PortWithStats {
   latestYear: string;
 }
 
-let cachedPorts: PortMetaRow[] | null = null;
-let cachedYears: string[] | null = null;
+// module-level キャッシュは持たない (r2-storage-design.md)。毎回 R2 を直接 fetch する。
+const loadPorts = createSnapshotReader<PortsSnapshot, PortMetaRow[]>({
+  key: PORTS_SNAPSHOT_KEY,
+  label: "ports",
+  select: (snapshot) => snapshot.ports ?? [],
+  fallback: [],
+});
 
-async function loadPorts(): Promise<PortMetaRow[]> {
-  if (cachedPorts) return cachedPorts;
-  const snapshot = await fetchFromR2AsJson<PortsSnapshot>(PORTS_SNAPSHOT_KEY);
-  // 一時的な miss (snapshot=null) は恒久キャッシュしない。次リクエストで再取得を試みる。
-  if (!snapshot) return [];
-  cachedPorts = snapshot.ports ?? [];
-  return cachedPorts;
-}
-
-async function loadYears(): Promise<string[]> {
-  if (cachedYears) return cachedYears;
-  const snapshot = await fetchFromR2AsJson<PortStatsYearsSnapshot>(
-    PORT_STATS_YEARS_KEY,
-  );
-  // 一時的な miss は恒久キャッシュしない (次リクエストで再取得)。
-  if (!snapshot) return [];
-  cachedYears = snapshot.years ?? [];
-  return cachedYears;
-}
+const loadYears = createSnapshotReader<PortStatsYearsSnapshot, string[]>({
+  key: PORT_STATS_YEARS_KEY,
+  label: "port-stats-years",
+  select: (snapshot) => snapshot.years ?? [],
+  fallback: [],
+});
 
 function buildPortWithStats(
   port: PortMetaRow,

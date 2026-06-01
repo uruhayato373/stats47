@@ -2,7 +2,7 @@ import "server-only";
 
 import type { Source } from "../../types/snapshot";
 import { logger } from "@stats47/logger/server";
-import { fetchFromR2AsJson } from "@stats47/r2-storage/server";
+import { createSnapshotReader } from "@stats47/r2-storage/server";
 import { err, ok, type Result } from "@stats47/types";
 
 import {
@@ -10,37 +10,12 @@ import {
   type SurveysSnapshot,
 } from "../../types/snapshot";
 
-const STALE_AFTER_DAYS = 30;
-
-let cached: { fetchedAt: number; surveys: Source[] } | null = null;
-
-function warnIfStale(generatedAt: string): void {
-  const ageDays = (Date.now() - new Date(generatedAt).getTime()) / (1000 * 60 * 60 * 24);
-  if (ageDays > STALE_AFTER_DAYS) {
-    logger.warn(
-      { generatedAt, ageDays: Math.round(ageDays) },
-      `surveys snapshot が ${STALE_AFTER_DAYS} 日以上古い`,
-    );
-  }
-}
-
-async function loadAll(): Promise<Source[]> {
-  if (cached) return cached.surveys;
-  const snapshot = await fetchFromR2AsJson<SurveysSnapshot>(
-    SURVEYS_SNAPSHOT_KEY,
-  );
-  if (!snapshot) {
-    logger.warn(
-      { key: SURVEYS_SNAPSHOT_KEY },
-      "surveys snapshot が R2 に存在しません",
-    );
-    cached = { fetchedAt: Date.now(), surveys: [] };
-    return [];
-  }
-  warnIfStale(snapshot.generatedAt);
-  cached = { fetchedAt: Date.now(), surveys: snapshot.surveys };
-  return snapshot.surveys;
-}
+const loadAll = createSnapshotReader<SurveysSnapshot, Source[]>({
+  key: SURVEYS_SNAPSHOT_KEY,
+  label: "surveys",
+  select: (snapshot) => snapshot.surveys,
+  fallback: [],
+});
 
 export async function readSurveysFromR2(): Promise<Result<Source[], Error>> {
   try {
