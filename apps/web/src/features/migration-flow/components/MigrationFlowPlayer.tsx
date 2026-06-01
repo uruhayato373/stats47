@@ -24,13 +24,17 @@ interface Props {
   initialPrefCode?: string;
   /** 都道府県セレクタを表示するか（エリアページ埋め込み時は false） */
   showSelector?: boolean;
+  /** controlled 焦点県（指定時は内部 state より優先。親が焦点県を持つ場合に使う） */
+  prefCode?: string;
 }
 
 export function MigrationFlowPlayer({
   initialPrefCode = "28",
   showSelector = true,
+  prefCode: controlledPref,
 }: Props) {
-  const [prefCode, setPrefCode] = useState(initialPrefCode);
+  const [internalPref, setPrefCode] = useState(initialPrefCode);
+  const prefCode = controlledPref ?? internalPref;
   /** 読み込み結果。どの prefCode のものかを保持し loading/errored を派生させる */
   const [result, setResult] = useState<
     | { prefCode: string; bundle: MigrationFlowBundle }
