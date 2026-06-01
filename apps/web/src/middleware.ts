@@ -266,6 +266,22 @@ function checkAreasPolicy(pathname: string, req: NextRequest): Response | null {
     );
   }
 
+  // /areas/{prefCode}/{themeSlug} — Type A テーマページは通過させる (410 対象外)
+  const TYPE_A_THEME_SLUGS = new Set([
+    "population-dynamics", "aging-society", "living-housing", "local-economy",
+    "labor-wages", "manufacturing", "healthcare", "safety", "education-culture",
+    "tourism", "consumer-prices", "foreign-residents", "occupation-salary",
+    "real-income", "labor-mobility", "local-finance", "fishery-marine", "climate",
+  ]);
+  if (
+    seg.length === 3 &&
+    /^\d{5}$/.test(seg[1]) &&
+    UrlPolicy.area.isValidPrefCode(seg[1]) &&
+    TYPE_A_THEME_SLUGS.has(seg[2])
+  ) {
+    return null; // Next.js に委譲
+  }
+
   // /areas/{prefCode}/{non-indexable-category} → 410（カテゴリマップにもない場合）
   if (
     seg.length >= 3 &&

@@ -45,21 +45,20 @@ const testCases: SmokeTestCase[] = [
     expectedTexts: ["北海道"],
   },
   {
-    name: "都道府県ダッシュボード（北海道・人口）",
+    // 旧カテゴリ URL → テーマ URL に 301 リダイレクト (2026-06-02)
+    name: "都道府県テーマ（北海道・人口動態、旧 /population → 301）",
     path: "/areas/01000/population",
+    expectedStatus: 301,
+  },
+  {
+    name: "都道府県テーマ（北海道・人口動態）",
+    path: "/areas/01000/population-dynamics",
     expectedStatus: 200,
     expectedTexts: ["北海道"],
   },
   {
-    name: "都道府県ダッシュボード（北海道・経済）",
-    path: "/areas/01000/economy",
-    expectedStatus: 200,
-    expectedTexts: ["北海道"],
-  },
-  {
-    // Phase 9 (2026-04-26): non-indexable category は middleware で 410 化される
-    // INDEXABLE_AREA_CATEGORIES = ["population", "economy"] 以外は意図的に 410
-    name: "都道府県ダッシュボード（北海道・気象）— 410 期待",
+    // non-indexable かつ テーママップ外は 410
+    name: "都道府県カテゴリ（北海道・気象、テーマなし）— 410 期待",
     path: "/areas/01000/landweather",
     expectedStatus: 410,
   },
