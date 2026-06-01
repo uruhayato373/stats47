@@ -36,6 +36,8 @@ import type { ThemeConfig } from "../types";
 interface Props {
   theme: ThemeConfig;
   data: ThemePageData;
+  /** エリアページ経由時の都道府県コード（5桁）と名称 */
+  areaContext?: { areaCode: string; areaName: string };
 }
 
 /**
@@ -44,7 +46,7 @@ interface Props {
  * Breadcrumb + ヘッダー + ThemeDashboardClient を配置。
  * chart_definitions から DB 管理チャートを取得してクライアントに渡す。
  */
-export async function ThemePageLayout({ theme, data }: Props) {
+export async function ThemePageLayout({ theme, data, areaContext }: Props) {
   const pageCharts = await loadPageComponents("theme", theme.themeKey);
   const kpiDataByArea = await prefetchThemeKpiData(pageCharts);
   const breadcrumbData = generateThemeBreadcrumbStructuredData(theme);
@@ -72,11 +74,42 @@ export async function ThemePageLayout({ theme, data }: Props) {
             </BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbSeparator />
-          <BreadcrumbItem>
-            <BreadcrumbPage>{theme.title}</BreadcrumbPage>
-          </BreadcrumbItem>
+          {areaContext ? (
+            <>
+              <BreadcrumbItem>
+                <BreadcrumbLink asChild>
+                  <Link href="/areas">都道府県一覧</Link>
+                </BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem>
+                <BreadcrumbLink asChild>
+                  <Link href={`/areas/${areaContext.areaCode}`}>{areaContext.areaName}</Link>
+                </BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem>
+                <BreadcrumbPage>{theme.title}</BreadcrumbPage>
+              </BreadcrumbItem>
+            </>
+          ) : (
+            <BreadcrumbItem>
+              <BreadcrumbPage>{theme.title}</BreadcrumbPage>
+            </BreadcrumbItem>
+          )}
         </BreadcrumbList>
       </Breadcrumb>
+
+      {/* エリアページ経由時の視点バナー */}
+      {areaContext && (
+        <div className="mb-4 flex items-center gap-2 rounded-md border border-primary/30 bg-primary/5 px-4 py-2 text-sm">
+          <span className="font-medium text-primary">{areaContext.areaName}の視点</span>
+          <span className="text-muted-foreground">— 全国チャートで{areaContext.areaName}をハイライト表示しています</span>
+          <Link href={`/areas/${areaContext.areaCode}`} className="ml-auto text-xs text-primary hover:underline">
+            {areaContext.areaName}プロフィールへ →
+          </Link>
+        </div>
+      )}
 
       {/* Hero (D 暗色) — マスタープラン § 5.3 準拠 */}
       <HeroShell variant="dark" className="mb-6">
@@ -128,6 +161,7 @@ export async function ThemePageLayout({ theme, data }: Props) {
         topology={data.topology}
         pageCharts={pageCharts}
         kpiDataByArea={kpiDataByArea}
+        highlightAreaCode={areaContext?.areaCode}
       />
 
       {theme.embeddedSections?.map((sectionKey) => {

@@ -209,7 +209,7 @@ function checkContentTypePolicy(pathname: string): Response | null {
 // Section 3: /areas/* の判定（無効 prefCode / cities / 非 indexable category）
 // ============================================================================
 
-function checkAreasPolicy(pathname: string): Response | null {
+function checkAreasPolicy(pathname: string, req: NextRequest): Response | null {
   const seg = pathname.split("/").filter(Boolean);
   if (seg[0] !== "areas") return null;
 
@@ -233,8 +233,40 @@ function checkAreasPolicy(pathname: string): Response | null {
     return gone();
   }
 
-  // /areas/{prefCode}/{non-indexable-category} → 410
-  // INDEXABLE_AREA_CATEGORIES = [population, economy] のみ通す
+  // /areas/{prefCode}/{categoryKey} → /areas/{prefCode}/{themeSlug} (301)
+  // 旧カテゴリ別ページを対応するテーマページへリダイレクト
+  const CATEGORY_TO_THEME: Record<string, string> = {
+    population: "population-dynamics",
+    laborwage: "labor-wages",
+    economy: "local-economy",
+    agriculture: "local-economy",
+    miningindustry: "manufacturing",
+    construction: "living-housing",
+    commercial: "local-economy",
+    tourism: "tourism",
+    socialsecurity: "healthcare",
+    educationsports: "education-culture",
+    safetyenvironment: "safety",
+    landweather: "climate",
+    international: "foreign-residents",
+    administrativefinancial: "local-finance",
+  };
+  if (
+    seg.length === 3 &&
+    /^\d{5}$/.test(seg[1]) &&
+    UrlPolicy.area.isValidPrefCode(seg[1]) &&
+    seg[2] !== "cities" &&
+    !/^\d{5}$/.test(seg[2]) &&
+    Object.prototype.hasOwnProperty.call(CATEGORY_TO_THEME, seg[2])
+  ) {
+    const themeSlug = CATEGORY_TO_THEME[seg[2]];
+    return NextResponse.redirect(
+      new URL(`/areas/${seg[1]}/${themeSlug}`, req.url),
+      { status: 301 }
+    );
+  }
+
+  // /areas/{prefCode}/{non-indexable-category} → 410（カテゴリマップにもない場合）
   if (
     seg.length >= 3 &&
     /^\d{5}$/.test(seg[1]) &&
@@ -280,7 +312,7 @@ export default function middleware(req: NextRequest) {
   if (legacyResponse) return legacyResponse;
 
   // --- Section 3: /areas/* の判定 ---
-  const areasResponse = checkAreasPolicy(pathname);
+  const areasResponse = checkAreasPolicy(pathname, req);
   if (areasResponse) return areasResponse;
 
   // --- 既存ルートへの query → path 正規化 301 ---

@@ -1,1 +1,371 @@
-[{"componentKey":"cmp-edu-school","componentType":"line-chart","title":"学校数の比較","componentProps":{"estatParams":[{"statsDataId":"0000010205","cdCat01":"#E0110101"},{"statsDataId":"0000010205","cdCat01":"#E0110102"},{"statsDataId":"0000010205","cdCat01":"#E0110103"},{"statsDataId":"0000010205","cdCat01":"#E0110104"}],"labels":["小学校","中学校","高等学校","幼稚園"],"chartType":"stacked-bar","yAxisConfig":{"mode":"sync"}},"sourceName":null,"sourceLink":null,"rankingLink":null,"gridColumnSpan":6,"gridColumnSpanTablet":null,"gridColumnSpanSm":null,"dataSource":"estat","section":"学校数","sortOrder":1},{"componentKey":"kpi-edu-university","componentType":"kpi-card","title":"大学進学率","componentProps":{"estatParams":{"statsDataId":"0000010205","cdCat01":"#E09402"}},"sourceName":null,"sourceLink":null,"rankingLink":null,"gridColumnSpan":12,"gridColumnSpanTablet":null,"gridColumnSpanSm":null,"dataSource":"ranking","section":null,"sortOrder":1},{"componentKey":"cmp-edu-degree","componentType":"composition-chart","title":"最終学歴構成比","componentProps":{"statsDataId":"0000010205","segments":[{"code":"#E09501","label":"小学・中学卒","color":"#94a3b8"},{"code":"#E09502","label":"高校・旧中卒","color":"#3b82f6"},{"code":"#E09503","label":"短大・高専卒","color":"#10b981"},{"code":"#E09504","label":"大学・大学院卒","color":"#f59e0b"}]},"sourceName":null,"sourceLink":null,"rankingLink":null,"gridColumnSpan":6,"gridColumnSpanTablet":null,"gridColumnSpanSm":null,"dataSource":"estat","section":"最終学歴","sortOrder":2},{"componentKey":"kpi-edu-graduate","componentType":"kpi-card","title":"最終学歴が大学・大学院卒の割合","componentProps":{"estatParams":{"statsDataId":"0000010205","cdCat01":"#E09504"}},"sourceName":null,"sourceLink":null,"rankingLink":null,"gridColumnSpan":12,"gridColumnSpanTablet":null,"gridColumnSpanSm":null,"dataSource":"ranking","section":null,"sortOrder":2},{"componentKey":"cmp-edu-culture","componentType":"line-chart","title":"図書館数の推移","componentProps":{"estatParams":{"statsDataId":"0000010207","cdCat01":"#G01104"},"yAxisConfig":{"mode":"sync"}},"sourceName":null,"sourceLink":null,"rankingLink":null,"gridColumnSpan":6,"gridColumnSpanTablet":null,"gridColumnSpanSm":null,"dataSource":"estat","section":"文化施設","sortOrder":3},{"componentKey":"kpi-edu-library","componentType":"kpi-card","title":"図書館数（人口100万人当たり）","componentProps":{"estatParams":{"statsDataId":"0000010207","cdCat01":"#G01104"}},"sourceName":null,"sourceLink":null,"rankingLink":null,"gridColumnSpan":12,"gridColumnSpanTablet":null,"gridColumnSpanSm":null,"dataSource":"ranking","section":null,"sortOrder":3},{"componentKey":"cmp-edu-height","componentType":"line-chart","title":"平均身長の推移（中学2年）","componentProps":{"estatParams":[{"statsDataId":"0000010209","cdCat01":"#I0210103"},{"statsDataId":"0000010209","cdCat01":"#I0210104"}],"labels":["男子","女子"],"yAxisConfig":{"mode":"sync"}},"sourceName":null,"sourceLink":null,"rankingLink":"/ranking/average-height-middle-school-second-grade-male","gridColumnSpan":6,"gridColumnSpanTablet":null,"gridColumnSpanSm":null,"dataSource":"estat","section":null,"sortOrder":4},{"componentKey":"kpi-edu-sports","componentType":"kpi-card","title":"スポーツの年間行動者率（10歳以上）","componentProps":{"estatParams":{"statsDataId":"0000010207","cdCat01":"#G042111"}},"sourceName":null,"sourceLink":null,"rankingLink":null,"gridColumnSpan":12,"gridColumnSpanTablet":null,"gridColumnSpanSm":null,"dataSource":"ranking","section":null,"sortOrder":4},{"componentKey":"cmp-edu-weight","componentType":"line-chart","title":"平均体重の推移（中学2年）","componentProps":{"estatParams":[{"statsDataId":"0000010209","cdCat01":"#I0210203"},{"statsDataId":"0000010209","cdCat01":"#I0210204"}],"labels":["男子","女子"],"yAxisConfig":{"mode":"sync"}},"sourceName":null,"sourceLink":null,"rankingLink":"/ranking/average-weight-middle-school-second-grade-male","gridColumnSpan":6,"gridColumnSpanTablet":null,"gridColumnSpanSm":null,"dataSource":"estat","section":null,"sortOrder":5},{"componentKey":"cmp-edu-height-matrix","componentType":"attribute-matrix","title":"平均身長（学年×性別）","componentProps":{"statsDataId":"0000010209","rows":[{"label":"男子","codes":["#I0210101","#I0210103","#I0210105"]},{"label":"女子","codes":["#I0210102","#I0210104","#I0210106"]}],"columns":["小学5年","中学2年","高校2年"],"unit":"cm"},"sourceName":null,"sourceLink":null,"rankingLink":"/ranking/average-height-middle-school-second-grade-male","gridColumnSpan":6,"gridColumnSpanTablet":null,"gridColumnSpanSm":null,"dataSource":"estat","section":null,"sortOrder":6},{"componentKey":"cmp-edu-weight-matrix","componentType":"attribute-matrix","title":"平均体重（学年×性別）","componentProps":{"statsDataId":"0000010209","rows":[{"label":"男子","codes":["#I0210201","#I0210203","#I0210205"]},{"label":"女子","codes":["#I0210202","#I0210204","#I0210206"]}],"columns":["小学5年","中学2年","高校2年"],"unit":"kg"},"sourceName":null,"sourceLink":null,"rankingLink":"/ranking/average-weight-middle-school-second-grade-male","gridColumnSpan":6,"gridColumnSpanTablet":null,"gridColumnSpanSm":null,"dataSource":"estat","section":null,"sortOrder":7},{"componentKey":"cmp-edu-leisure","componentType":"line-chart","title":"余暇活動の行動者率","componentProps":{"estatParams":[{"statsDataId":"0000010207","cdCat01":"#G042111"},{"statsDataId":"0000010207","cdCat01":"#G04101"},{"statsDataId":"0000010207","cdCat01":"#G043061"}],"labels":["スポーツ","ボランティア","旅行・行楽"]},"sourceName":null,"sourceLink":null,"rankingLink":null,"gridColumnSpan":6,"gridColumnSpanTablet":null,"gridColumnSpanSm":null,"dataSource":"estat","section":null,"sortOrder":8},{"componentKey":"city-kpi-edu-kindergarten","componentType":"kpi-card","title":"幼稚園数","componentProps":{"estatParams":{"statsDataId":"0000020205","cdCat01":"E1101"},"yAxisConfig":{"mode":"auto"}},"sourceName":null,"sourceLink":null,"rankingLink":null,"gridColumnSpan":3,"gridColumnSpanTablet":6,"gridColumnSpanSm":null,"dataSource":"estat","section":null,"sortOrder":10},{"componentKey":"city-kpi-edu-elementary","componentType":"kpi-card","title":"小学校数","componentProps":{"estatParams":{"statsDataId":"0000020205","cdCat01":"E2101"},"yAxisConfig":{"mode":"auto"}},"sourceName":null,"sourceLink":null,"rankingLink":null,"gridColumnSpan":3,"gridColumnSpanTablet":6,"gridColumnSpanSm":null,"dataSource":"estat","section":null,"sortOrder":11},{"componentKey":"city-edu-schools","componentType":"line-chart","title":"学校数の推移","componentProps":{"estatParams":[{"statsDataId":"0000020205","cdCat01":"E1101"},{"statsDataId":"0000020205","cdCat01":"E2101"},{"statsDataId":"0000020205","cdCat01":"E3101"}],"labels":["幼稚園","小学校","高等学校"],"yAxisConfig":{"mode":"auto"}},"sourceName":null,"sourceLink":null,"rankingLink":null,"gridColumnSpan":6,"gridColumnSpanTablet":12,"gridColumnSpanSm":null,"dataSource":"estat","section":null,"sortOrder":20}]
+[
+  {
+    "componentKey": "cmp-edu-school",
+    "componentType": "line-chart",
+    "title": "学校数の比較",
+    "componentProps": {
+      "estatParams": [
+        {
+          "statsDataId": "0000010205",
+          "cdCat01": "#E0110101"
+        },
+        {
+          "statsDataId": "0000010205",
+          "cdCat01": "#E0110102"
+        },
+        {
+          "statsDataId": "0000010205",
+          "cdCat01": "#E0110103"
+        },
+        {
+          "statsDataId": "0000010205",
+          "cdCat01": "#E0110104"
+        }
+      ],
+      "labels": [
+        "小学校",
+        "中学校",
+        "高等学校",
+        "幼稚園"
+      ],
+      "chartType": "stacked-bar",
+      "yAxisConfig": {
+        "mode": "sync"
+      }
+    },
+    "sourceName": null,
+    "sourceLink": null,
+    "rankingLink": null,
+    "gridColumnSpan": 6,
+    "gridColumnSpanTablet": null,
+    "gridColumnSpanSm": null,
+    "dataSource": "estat",
+    "section": "学校数",
+    "sortOrder": 1
+  },
+  {
+    "componentKey": "kpi-edu-university",
+    "componentType": "kpi-card",
+    "title": "大学進学率",
+    "componentProps": {
+      "estatParams": {
+        "statsDataId": "0000010205",
+        "cdCat01": "#E09402"
+      }
+    },
+    "sourceName": null,
+    "sourceLink": null,
+    "rankingLink": null,
+    "gridColumnSpan": 12,
+    "gridColumnSpanTablet": null,
+    "gridColumnSpanSm": null,
+    "dataSource": "ranking",
+    "section": null,
+    "sortOrder": 1
+  },
+  {
+    "componentKey": "cmp-edu-degree",
+    "componentType": "composition-chart",
+    "title": "最終学歴構成比",
+    "componentProps": {
+      "statsDataId": "0000010205",
+      "segments": [
+        {
+          "code": "#E09501",
+          "label": "小学・中学卒",
+          "color": "#94a3b8"
+        },
+        {
+          "code": "#E09502",
+          "label": "高校・旧中卒",
+          "color": "#3b82f6"
+        },
+        {
+          "code": "#E09503",
+          "label": "短大・高専卒",
+          "color": "#10b981"
+        },
+        {
+          "code": "#E09504",
+          "label": "大学・大学院卒",
+          "color": "#f59e0b"
+        }
+      ]
+    },
+    "sourceName": null,
+    "sourceLink": null,
+    "rankingLink": null,
+    "gridColumnSpan": 6,
+    "gridColumnSpanTablet": null,
+    "gridColumnSpanSm": null,
+    "dataSource": "estat",
+    "section": "最終学歴",
+    "sortOrder": 2
+  },
+  {
+    "componentKey": "kpi-edu-graduate",
+    "componentType": "kpi-card",
+    "title": "最終学歴が大学・大学院卒の割合",
+    "componentProps": {
+      "estatParams": {
+        "statsDataId": "0000010205",
+        "cdCat01": "#E09504"
+      }
+    },
+    "sourceName": null,
+    "sourceLink": null,
+    "rankingLink": null,
+    "gridColumnSpan": 12,
+    "gridColumnSpanTablet": null,
+    "gridColumnSpanSm": null,
+    "dataSource": "ranking",
+    "section": null,
+    "sortOrder": 2
+  },
+  {
+    "componentKey": "cmp-edu-culture",
+    "componentType": "line-chart",
+    "title": "図書館数の推移",
+    "componentProps": {
+      "estatParams": {
+        "statsDataId": "0000010207",
+        "cdCat01": "#G01104"
+      },
+      "yAxisConfig": {
+        "mode": "sync"
+      }
+    },
+    "sourceName": null,
+    "sourceLink": null,
+    "rankingLink": null,
+    "gridColumnSpan": 6,
+    "gridColumnSpanTablet": null,
+    "gridColumnSpanSm": null,
+    "dataSource": "estat",
+    "section": "文化施設",
+    "sortOrder": 3
+  },
+  {
+    "componentKey": "kpi-edu-library",
+    "componentType": "kpi-card",
+    "title": "図書館数（人口100万人当たり）",
+    "componentProps": {
+      "estatParams": {
+        "statsDataId": "0000010207",
+        "cdCat01": "#G01104"
+      }
+    },
+    "sourceName": null,
+    "sourceLink": null,
+    "rankingLink": null,
+    "gridColumnSpan": 12,
+    "gridColumnSpanTablet": null,
+    "gridColumnSpanSm": null,
+    "dataSource": "ranking",
+    "section": null,
+    "sortOrder": 3
+  },
+  {
+    "componentKey": "cmp-edu-height",
+    "componentType": "line-chart",
+    "title": "平均身長の推移（中学2年）",
+    "componentProps": {
+      "estatParams": [
+        {
+          "statsDataId": "0000010209",
+          "cdCat01": "#I0210103"
+        },
+        {
+          "statsDataId": "0000010209",
+          "cdCat01": "#I0210104"
+        }
+      ],
+      "labels": [
+        "男子",
+        "女子"
+      ],
+      "yAxisConfig": {
+        "mode": "sync"
+      }
+    },
+    "sourceName": null,
+    "sourceLink": null,
+    "rankingLink": "/ranking/average-height-middle-school-second-grade-male",
+    "gridColumnSpan": 6,
+    "gridColumnSpanTablet": null,
+    "gridColumnSpanSm": null,
+    "dataSource": "estat",
+    "section": null,
+    "sortOrder": 4
+  },
+  {
+    "componentKey": "kpi-edu-sports",
+    "componentType": "kpi-card",
+    "title": "スポーツの年間行動者率（10歳以上）",
+    "componentProps": {
+      "estatParams": {
+        "statsDataId": "0000010207",
+        "cdCat01": "#G042111"
+      }
+    },
+    "sourceName": null,
+    "sourceLink": null,
+    "rankingLink": null,
+    "gridColumnSpan": 12,
+    "gridColumnSpanTablet": null,
+    "gridColumnSpanSm": null,
+    "dataSource": "ranking",
+    "section": null,
+    "sortOrder": 4
+  },
+  {
+    "componentKey": "cmp-edu-weight",
+    "componentType": "line-chart",
+    "title": "平均体重の推移（中学2年）",
+    "componentProps": {
+      "estatParams": [
+        {
+          "statsDataId": "0000010209",
+          "cdCat01": "#I0210203"
+        },
+        {
+          "statsDataId": "0000010209",
+          "cdCat01": "#I0210204"
+        }
+      ],
+      "labels": [
+        "男子",
+        "女子"
+      ],
+      "yAxisConfig": {
+        "mode": "sync"
+      }
+    },
+    "sourceName": null,
+    "sourceLink": null,
+    "rankingLink": "/ranking/average-weight-middle-school-second-grade-male",
+    "gridColumnSpan": 6,
+    "gridColumnSpanTablet": null,
+    "gridColumnSpanSm": null,
+    "dataSource": "estat",
+    "section": null,
+    "sortOrder": 5
+  },
+  {
+    "componentKey": "cmp-edu-height-matrix",
+    "componentType": "attribute-matrix",
+    "title": "平均身長（学年×性別）",
+    "componentProps": {
+      "statsDataId": "0000010209",
+      "rows": [
+        {
+          "label": "男子",
+          "codes": [
+            "#I0210101",
+            "#I0210103",
+            "#I0210105"
+          ]
+        },
+        {
+          "label": "女子",
+          "codes": [
+            "#I0210102",
+            "#I0210104",
+            "#I0210106"
+          ]
+        }
+      ],
+      "columns": [
+        "小学5年",
+        "中学2年",
+        "高校2年"
+      ],
+      "unit": "cm"
+    },
+    "sourceName": null,
+    "sourceLink": null,
+    "rankingLink": "/ranking/average-height-middle-school-second-grade-male",
+    "gridColumnSpan": 6,
+    "gridColumnSpanTablet": null,
+    "gridColumnSpanSm": null,
+    "dataSource": "estat",
+    "section": null,
+    "sortOrder": 6
+  },
+  {
+    "componentKey": "cmp-edu-weight-matrix",
+    "componentType": "attribute-matrix",
+    "title": "平均体重（学年×性別）",
+    "componentProps": {
+      "statsDataId": "0000010209",
+      "rows": [
+        {
+          "label": "男子",
+          "codes": [
+            "#I0210201",
+            "#I0210203",
+            "#I0210205"
+          ]
+        },
+        {
+          "label": "女子",
+          "codes": [
+            "#I0210202",
+            "#I0210204",
+            "#I0210206"
+          ]
+        }
+      ],
+      "columns": [
+        "小学5年",
+        "中学2年",
+        "高校2年"
+      ],
+      "unit": "kg"
+    },
+    "sourceName": null,
+    "sourceLink": null,
+    "rankingLink": "/ranking/average-weight-middle-school-second-grade-male",
+    "gridColumnSpan": 6,
+    "gridColumnSpanTablet": null,
+    "gridColumnSpanSm": null,
+    "dataSource": "estat",
+    "section": null,
+    "sortOrder": 7
+  },
+  {
+    "componentKey": "cmp-edu-leisure",
+    "componentType": "line-chart",
+    "title": "余暇活動の行動者率",
+    "componentProps": {
+      "estatParams": [
+        {
+          "statsDataId": "0000010207",
+          "cdCat01": "#G042111"
+        },
+        {
+          "statsDataId": "0000010207",
+          "cdCat01": "#G04101"
+        },
+        {
+          "statsDataId": "0000010207",
+          "cdCat01": "#G043061"
+        }
+      ],
+      "labels": [
+        "スポーツ",
+        "ボランティア",
+        "旅行・行楽"
+      ]
+    },
+    "sourceName": null,
+    "sourceLink": null,
+    "rankingLink": null,
+    "gridColumnSpan": 6,
+    "gridColumnSpanTablet": null,
+    "gridColumnSpanSm": null,
+    "dataSource": "estat",
+    "section": null,
+    "sortOrder": 8
+  }
+]

@@ -1,1 +1,210 @@
-[{"componentKey":"cmp-safety-crime","componentType":"composition-chart","title":"刑法犯罪種別構成比","componentProps":{"statsDataId":"0000010211","segments":[{"code":"#K06401","label":"凶悪犯","color":"#ef4444"},{"code":"#K06402","label":"粗暴犯","color":"#f97316"},{"code":"#K06403","label":"窃盗犯","color":"#3b82f6"},{"code":"#K06405","label":"風俗犯","color":"#8b5cf6"}]},"sourceName":null,"sourceLink":null,"rankingLink":null,"gridColumnSpan":6,"gridColumnSpanTablet":null,"gridColumnSpanSm":null,"dataSource":"estat","section":"犯罪構成","sortOrder":1},{"componentKey":"kpi-safety-traffic","componentType":"kpi-card","title":"交通事故発生件数（人口10万人当たり）","componentProps":{"estatParams":{"statsDataId":"0000010211","cdCat01":"#K04101"}},"sourceName":null,"sourceLink":null,"rankingLink":null,"gridColumnSpan":12,"gridColumnSpanTablet":null,"gridColumnSpanSm":null,"dataSource":"ranking","section":null,"sortOrder":1},{"componentKey":"cmp-safety-crime-trend","componentType":"mixed-chart","title":"刑法犯認知件数と検挙率の推移","componentProps":{"columnParams":[{"statsDataId":"0000010211","cdCat01":"#K06101"}],"lineParams":[{"statsDataId":"0000010211","cdCat01":"#K06201"}],"columnLabels":["認知件数"],"lineLabels":["検挙率"],"leftUnit":"件/千人","rightUnit":"%","columnColors":["#f59e0b"],"lineColors":["#22c55e"]},"sourceName":null,"sourceLink":null,"rankingLink":null,"gridColumnSpan":6,"gridColumnSpanTablet":null,"gridColumnSpanSm":null,"dataSource":"estat","section":"犯罪動向","sortOrder":2},{"componentKey":"kpi-safety-crime","componentType":"kpi-card","title":"刑法犯認知件数（人口千人当たり）","componentProps":{"estatParams":{"statsDataId":"0000010211","cdCat01":"#K06101"}},"sourceName":null,"sourceLink":null,"rankingLink":null,"gridColumnSpan":12,"gridColumnSpanTablet":null,"gridColumnSpanSm":null,"dataSource":"ranking","section":null,"sortOrder":2},{"componentKey":"cmp-safety-traffic","componentType":"line-chart","title":"交通事故死傷者の推移","componentProps":{"estatParams":[{"statsDataId":"0000010211","cdCat01":"#K04202"},{"statsDataId":"0000010211","cdCat01":"#K04107"}],"labels":["死者数","負傷者数"],"yAxisConfig":{"mode":"sync"},"seriesColors":["#ef4444","#f59e0b"]},"sourceName":null,"sourceLink":null,"rankingLink":null,"gridColumnSpan":6,"gridColumnSpanTablet":null,"gridColumnSpanSm":null,"dataSource":"estat","section":"交通安全","sortOrder":3},{"componentKey":"kpi-safety-fire","componentType":"kpi-card","title":"火災出火件数（人口10万人当たり）","componentProps":{"estatParams":{"statsDataId":"0000010211","cdCat01":"#K02101"}},"sourceName":null,"sourceLink":null,"rankingLink":null,"gridColumnSpan":12,"gridColumnSpanTablet":null,"gridColumnSpanSm":null,"dataSource":"ranking","section":null,"sortOrder":3},{"componentKey":"cmp-safety-car-insurance","componentType":"line-chart","title":"自動車保険普及率の推移","componentProps":{"estatParams":[{"statsDataId":"0000010211","cdCat01":"#K10502"},{"statsDataId":"0000010211","cdCat01":"#K10503"}],"labels":["対人","対物"]},"sourceName":null,"sourceLink":null,"rankingLink":null,"gridColumnSpan":6,"gridColumnSpanTablet":null,"gridColumnSpanSm":null,"dataSource":"estat","section":null,"sortOrder":5},{"componentKey":"city-kpi-safety-accidents","componentType":"kpi-card","title":"交通事故発生件数（10万人当たり）","componentProps":{"estatParams":{"statsDataId":"0000020311","cdCat01":"#K04101"},"yAxisConfig":{"mode":"auto"}},"sourceName":null,"sourceLink":null,"rankingLink":null,"gridColumnSpan":3,"gridColumnSpanTablet":6,"gridColumnSpanSm":null,"dataSource":"estat","section":null,"sortOrder":10},{"componentKey":"city-safety-accidents-trend","componentType":"line-chart","title":"交通事故発生件数の推移","componentProps":{"estatParams":{"statsDataId":"0000020211","cdCat01":"K3101"},"yAxisConfig":{"mode":"auto"}},"sourceName":null,"sourceLink":null,"rankingLink":null,"gridColumnSpan":6,"gridColumnSpanTablet":6,"gridColumnSpanSm":null,"dataSource":"estat","section":null,"sortOrder":20}]
+[
+  {
+    "componentKey": "cmp-safety-crime",
+    "componentType": "composition-chart",
+    "title": "刑法犯罪種別構成比",
+    "componentProps": {
+      "statsDataId": "0000010211",
+      "segments": [
+        {
+          "code": "#K06401",
+          "label": "凶悪犯",
+          "color": "#ef4444"
+        },
+        {
+          "code": "#K06402",
+          "label": "粗暴犯",
+          "color": "#f97316"
+        },
+        {
+          "code": "#K06403",
+          "label": "窃盗犯",
+          "color": "#3b82f6"
+        },
+        {
+          "code": "#K06405",
+          "label": "風俗犯",
+          "color": "#8b5cf6"
+        }
+      ]
+    },
+    "sourceName": null,
+    "sourceLink": null,
+    "rankingLink": null,
+    "gridColumnSpan": 6,
+    "gridColumnSpanTablet": null,
+    "gridColumnSpanSm": null,
+    "dataSource": "estat",
+    "section": "犯罪構成",
+    "sortOrder": 1
+  },
+  {
+    "componentKey": "kpi-safety-traffic",
+    "componentType": "kpi-card",
+    "title": "交通事故発生件数（人口10万人当たり）",
+    "componentProps": {
+      "estatParams": {
+        "statsDataId": "0000010211",
+        "cdCat01": "#K04101"
+      }
+    },
+    "sourceName": null,
+    "sourceLink": null,
+    "rankingLink": null,
+    "gridColumnSpan": 12,
+    "gridColumnSpanTablet": null,
+    "gridColumnSpanSm": null,
+    "dataSource": "ranking",
+    "section": null,
+    "sortOrder": 1
+  },
+  {
+    "componentKey": "cmp-safety-crime-trend",
+    "componentType": "mixed-chart",
+    "title": "刑法犯認知件数と検挙率の推移",
+    "componentProps": {
+      "columnParams": [
+        {
+          "statsDataId": "0000010211",
+          "cdCat01": "#K06101"
+        }
+      ],
+      "lineParams": [
+        {
+          "statsDataId": "0000010211",
+          "cdCat01": "#K06201"
+        }
+      ],
+      "columnLabels": [
+        "認知件数"
+      ],
+      "lineLabels": [
+        "検挙率"
+      ],
+      "leftUnit": "件/千人",
+      "rightUnit": "%",
+      "columnColors": [
+        "#f59e0b"
+      ],
+      "lineColors": [
+        "#22c55e"
+      ]
+    },
+    "sourceName": null,
+    "sourceLink": null,
+    "rankingLink": null,
+    "gridColumnSpan": 6,
+    "gridColumnSpanTablet": null,
+    "gridColumnSpanSm": null,
+    "dataSource": "estat",
+    "section": "犯罪動向",
+    "sortOrder": 2
+  },
+  {
+    "componentKey": "kpi-safety-crime",
+    "componentType": "kpi-card",
+    "title": "刑法犯認知件数（人口千人当たり）",
+    "componentProps": {
+      "estatParams": {
+        "statsDataId": "0000010211",
+        "cdCat01": "#K06101"
+      }
+    },
+    "sourceName": null,
+    "sourceLink": null,
+    "rankingLink": null,
+    "gridColumnSpan": 12,
+    "gridColumnSpanTablet": null,
+    "gridColumnSpanSm": null,
+    "dataSource": "ranking",
+    "section": null,
+    "sortOrder": 2
+  },
+  {
+    "componentKey": "cmp-safety-traffic",
+    "componentType": "line-chart",
+    "title": "交通事故死傷者の推移",
+    "componentProps": {
+      "estatParams": [
+        {
+          "statsDataId": "0000010211",
+          "cdCat01": "#K04202"
+        },
+        {
+          "statsDataId": "0000010211",
+          "cdCat01": "#K04107"
+        }
+      ],
+      "labels": [
+        "死者数",
+        "負傷者数"
+      ],
+      "yAxisConfig": {
+        "mode": "sync"
+      },
+      "seriesColors": [
+        "#ef4444",
+        "#f59e0b"
+      ]
+    },
+    "sourceName": null,
+    "sourceLink": null,
+    "rankingLink": null,
+    "gridColumnSpan": 6,
+    "gridColumnSpanTablet": null,
+    "gridColumnSpanSm": null,
+    "dataSource": "estat",
+    "section": "交通安全",
+    "sortOrder": 3
+  },
+  {
+    "componentKey": "kpi-safety-fire",
+    "componentType": "kpi-card",
+    "title": "火災出火件数（人口10万人当たり）",
+    "componentProps": {
+      "estatParams": {
+        "statsDataId": "0000010211",
+        "cdCat01": "#K02101"
+      }
+    },
+    "sourceName": null,
+    "sourceLink": null,
+    "rankingLink": null,
+    "gridColumnSpan": 12,
+    "gridColumnSpanTablet": null,
+    "gridColumnSpanSm": null,
+    "dataSource": "ranking",
+    "section": null,
+    "sortOrder": 3
+  },
+  {
+    "componentKey": "cmp-safety-car-insurance",
+    "componentType": "line-chart",
+    "title": "自動車保険普及率の推移",
+    "componentProps": {
+      "estatParams": [
+        {
+          "statsDataId": "0000010211",
+          "cdCat01": "#K10502"
+        },
+        {
+          "statsDataId": "0000010211",
+          "cdCat01": "#K10503"
+        }
+      ],
+      "labels": [
+        "対人",
+        "対物"
+      ]
+    },
+    "sourceName": null,
+    "sourceLink": null,
+    "rankingLink": null,
+    "gridColumnSpan": 6,
+    "gridColumnSpanTablet": null,
+    "gridColumnSpanSm": null,
+    "dataSource": "estat",
+    "section": null,
+    "sortOrder": 5
+  }
+]

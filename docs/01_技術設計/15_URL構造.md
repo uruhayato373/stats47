@@ -28,7 +28,8 @@ stats47 (Next.js App Router on Cloudflare Pages) の URL 体系・301 マッピ�
 
 /areas                                  47 都道府県一覧
 /areas/[areaCode]                       県プロフィール
-/areas/[areaCode]/[categoryKey]         県 × カテゴリ (population / economy のみ indexable)
+/areas/[areaCode]/[themeSlug]           県 × テーマ (Type A テーマのみ、47×18=836 件)
+                                         ※ 旧 /areas/[code]/[categoryKey] は 301 → /areas/[code]/[themeSlug]
 /areas/[areaCode]/cities/[cityCode]     市区町村プロフィール
 /areas/[areaCode]/cities/[cityCode]/[categoryKey]
 
@@ -71,6 +72,7 @@ middleware.ts (`apps/web/src/middleware.ts`) の `tryLegacyRedirect` 関数と e
 | `/gis-cross/sunshine-map` | `/themes/climate` (クエリ保持) | 301 | 2026-05-29 |
 | `/gis-cross` (hub) ほか `/gis-cross/*` | `/themes` (クエリ保持) | 301 | 2026-05-29 |
 | `/areas/{areaCode}?category={key}` | `/areas/{areaCode}/{key}` | 301 | 既存 |
+| `/areas/{code}/{categoryKey}` | `/areas/{code}/{themeSlug}` (マッピング表あり) | 301 | 2026-06-02 |
 | `/ranking/prefecture/{slug}` | `/ranking/{slug}` (known なら) / 410 (unknown) | 301/410 | 既存 |
 | `/tag/{en-slug}` | `/tag/{ja-key}` | 301 | 既存 |
 | `/blog/{old-slug}` | `/blog/{new-slug}` | 301 | 既存 |

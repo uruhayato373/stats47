@@ -43,6 +43,7 @@ export function ThemeDashboardTabbed({
   indicatorDataMap,
   topology,
   pageCharts,
+  highlightAreaCode,
 }: ThemeDashboardClientProps) {
   const tabIndicators = themeConfig.tabIndicators;
   const isBelowLg = useBreakpoint("belowLg");
@@ -235,7 +236,7 @@ export function ThemeDashboardTabbed({
           }
         />
 
-        <ThemeYoyCharts themeKey={themeConfig.themeKey} />
+        <ThemeYoyCharts themeKey={themeConfig.themeKey} highlightAreaCode={highlightAreaCode} />
 
         {themeConfig.themeKey === "population-dynamics" && (
           <PopulationScatterSection

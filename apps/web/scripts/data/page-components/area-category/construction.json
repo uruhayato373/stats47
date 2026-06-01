@@ -1,1 +1,215 @@
-[{"componentKey":"cmp-const-area","componentType":"line-chart","title":"持ち家 vs 借家の居住面積","componentProps":{"estatParams":[{"statsDataId":"0000010208","cdCat01":"#H0210301"},{"statsDataId":"0000010208","cdCat01":"#H0210302"}],"labels":["持ち家延べ面積","借家延べ面積"],"yAxisConfig":{"mode":"sync"}},"sourceName":null,"sourceLink":null,"rankingLink":null,"gridColumnSpan":6,"gridColumnSpanTablet":null,"gridColumnSpanSm":null,"dataSource":"estat","section":"居住水準","sortOrder":1},{"componentKey":"kpi-construction-vacancy","componentType":"kpi-card","title":"空き家比率","componentProps":{"estatParams":{"statsDataId":"0000010208","cdCat01":"#H01405"}},"sourceName":null,"sourceLink":null,"rankingLink":null,"gridColumnSpan":12,"gridColumnSpanTablet":null,"gridColumnSpanSm":null,"dataSource":"ranking","section":null,"sortOrder":1},{"componentKey":"cmp-const-rent","componentType":"line-chart","title":"公営 vs 民営の家賃","componentProps":{"estatParams":[{"statsDataId":"0000010208","cdCat01":"#H04101"},{"statsDataId":"0000010208","cdCat01":"#H04102"}],"labels":["公営賃貸住宅","民営賃貸住宅"],"yAxisConfig":{"mode":"sync"}},"sourceName":null,"sourceLink":null,"rankingLink":null,"gridColumnSpan":6,"gridColumnSpanTablet":null,"gridColumnSpanSm":null,"dataSource":"estat","section":"家賃","sortOrder":2},{"componentKey":"kpi-construction-ownership","componentType":"kpi-card","title":"持ち家比率","componentProps":{"estatParams":{"statsDataId":"0000010208","cdCat01":"#H01301"}},"sourceName":null,"sourceLink":null,"rankingLink":null,"gridColumnSpan":12,"gridColumnSpanTablet":null,"gridColumnSpanSm":null,"dataSource":"ranking","section":null,"sortOrder":2},{"componentKey":"cmp-const-start","componentType":"line-chart","title":"着工建築物数の推移","componentProps":{"estatParams":{"statsDataId":"0000010103","cdCat01":"C3301"},"yAxisConfig":{"mode":"sync"}},"sourceName":null,"sourceLink":null,"rankingLink":null,"gridColumnSpan":6,"gridColumnSpanTablet":null,"gridColumnSpanSm":null,"dataSource":"estat","section":"建設動向","sortOrder":3},{"componentKey":"kpi-construction-rent","componentType":"kpi-card","title":"民営賃貸住宅の家賃（3.3m²当たり）","componentProps":{"estatParams":{"statsDataId":"0000010208","cdCat01":"#H04102"}},"sourceName":null,"sourceLink":null,"rankingLink":null,"gridColumnSpan":12,"gridColumnSpanTablet":null,"gridColumnSpanSm":null,"dataSource":"ranking","section":null,"sortOrder":3},{"componentKey":"cmp-const-own-vacant","componentType":"line-chart","title":"持ち家比率と空き家比率の推移","componentProps":{"estatParams":[{"statsDataId":"0000010208","cdCat01":"#H01301"},{"statsDataId":"0000010208","cdCat01":"#H01405"}],"labels":["持ち家比率","空き家比率"]},"sourceName":null,"sourceLink":null,"rankingLink":null,"gridColumnSpan":6,"gridColumnSpanTablet":null,"gridColumnSpanSm":null,"dataSource":"estat","section":null,"sortOrder":4},{"componentKey":"cmp-const-housing-donut","componentType":"composition-chart","title":"住宅の種別構成比","componentProps":{"statsDataId":"0000010208","segments":[{"code":"#H01401","label":"一戸建","color":"#22c55e"},{"code":"#H01402","label":"長屋建","color":"#f59e0b"},{"code":"#H01403","label":"共同住宅","color":"#3b82f6"}]},"sourceName":null,"sourceLink":null,"rankingLink":null,"gridColumnSpan":6,"gridColumnSpanTablet":null,"gridColumnSpanSm":null,"dataSource":"estat","section":null,"sortOrder":5},{"componentKey":"city-kpi-housing-ownership","componentType":"kpi-card","title":"持ち家比率","componentProps":{"estatParams":{"statsDataId":"0000020308","cdCat01":"#H01301"},"yAxisConfig":{"mode":"auto"}},"sourceName":null,"sourceLink":null,"rankingLink":null,"gridColumnSpan":3,"gridColumnSpanTablet":6,"gridColumnSpanSm":null,"dataSource":"estat","section":null,"sortOrder":10},{"componentKey":"city-kpi-housing-vacancy","componentType":"kpi-card","title":"空き家比率","componentProps":{"estatParams":{"statsDataId":"0000020308","cdCat01":"#H01405"},"yAxisConfig":{"mode":"auto"}},"sourceName":null,"sourceLink":null,"rankingLink":null,"gridColumnSpan":3,"gridColumnSpanTablet":6,"gridColumnSpanSm":null,"dataSource":"estat","section":null,"sortOrder":11},{"componentKey":"city-kpi-housing-area","componentType":"kpi-card","title":"1住宅当たり延べ面積","componentProps":{"estatParams":{"statsDataId":"0000020308","cdCat01":"#H02103"},"unit":"m²","yAxisConfig":{"mode":"auto"}},"sourceName":null,"sourceLink":null,"rankingLink":null,"gridColumnSpan":3,"gridColumnSpanTablet":6,"gridColumnSpanSm":null,"dataSource":"estat","section":null,"sortOrder":12},{"componentKey":"city-kpi-housing-retail","componentType":"kpi-card","title":"小売店数（千人当たり）","componentProps":{"estatParams":{"statsDataId":"0000020308","cdCat01":"#H06127"},"yAxisConfig":{"mode":"auto"}},"sourceName":null,"sourceLink":null,"rankingLink":null,"gridColumnSpan":3,"gridColumnSpanTablet":6,"gridColumnSpanSm":null,"dataSource":"estat","section":null,"sortOrder":13}]
+[
+  {
+    "componentKey": "cmp-const-area",
+    "componentType": "line-chart",
+    "title": "持ち家 vs 借家の居住面積",
+    "componentProps": {
+      "estatParams": [
+        {
+          "statsDataId": "0000010208",
+          "cdCat01": "#H0210301"
+        },
+        {
+          "statsDataId": "0000010208",
+          "cdCat01": "#H0210302"
+        }
+      ],
+      "labels": [
+        "持ち家延べ面積",
+        "借家延べ面積"
+      ],
+      "yAxisConfig": {
+        "mode": "sync"
+      }
+    },
+    "sourceName": null,
+    "sourceLink": null,
+    "rankingLink": null,
+    "gridColumnSpan": 6,
+    "gridColumnSpanTablet": null,
+    "gridColumnSpanSm": null,
+    "dataSource": "estat",
+    "section": "居住水準",
+    "sortOrder": 1
+  },
+  {
+    "componentKey": "kpi-construction-vacancy",
+    "componentType": "kpi-card",
+    "title": "空き家比率",
+    "componentProps": {
+      "estatParams": {
+        "statsDataId": "0000010208",
+        "cdCat01": "#H01405"
+      }
+    },
+    "sourceName": null,
+    "sourceLink": null,
+    "rankingLink": null,
+    "gridColumnSpan": 12,
+    "gridColumnSpanTablet": null,
+    "gridColumnSpanSm": null,
+    "dataSource": "ranking",
+    "section": null,
+    "sortOrder": 1
+  },
+  {
+    "componentKey": "cmp-const-rent",
+    "componentType": "line-chart",
+    "title": "公営 vs 民営の家賃",
+    "componentProps": {
+      "estatParams": [
+        {
+          "statsDataId": "0000010208",
+          "cdCat01": "#H04101"
+        },
+        {
+          "statsDataId": "0000010208",
+          "cdCat01": "#H04102"
+        }
+      ],
+      "labels": [
+        "公営賃貸住宅",
+        "民営賃貸住宅"
+      ],
+      "yAxisConfig": {
+        "mode": "sync"
+      }
+    },
+    "sourceName": null,
+    "sourceLink": null,
+    "rankingLink": null,
+    "gridColumnSpan": 6,
+    "gridColumnSpanTablet": null,
+    "gridColumnSpanSm": null,
+    "dataSource": "estat",
+    "section": "家賃",
+    "sortOrder": 2
+  },
+  {
+    "componentKey": "kpi-construction-ownership",
+    "componentType": "kpi-card",
+    "title": "持ち家比率",
+    "componentProps": {
+      "estatParams": {
+        "statsDataId": "0000010208",
+        "cdCat01": "#H01301"
+      }
+    },
+    "sourceName": null,
+    "sourceLink": null,
+    "rankingLink": null,
+    "gridColumnSpan": 12,
+    "gridColumnSpanTablet": null,
+    "gridColumnSpanSm": null,
+    "dataSource": "ranking",
+    "section": null,
+    "sortOrder": 2
+  },
+  {
+    "componentKey": "cmp-const-start",
+    "componentType": "line-chart",
+    "title": "着工建築物数の推移",
+    "componentProps": {
+      "estatParams": {
+        "statsDataId": "0000010103",
+        "cdCat01": "C3301"
+      },
+      "yAxisConfig": {
+        "mode": "sync"
+      }
+    },
+    "sourceName": null,
+    "sourceLink": null,
+    "rankingLink": null,
+    "gridColumnSpan": 6,
+    "gridColumnSpanTablet": null,
+    "gridColumnSpanSm": null,
+    "dataSource": "estat",
+    "section": "建設動向",
+    "sortOrder": 3
+  },
+  {
+    "componentKey": "kpi-construction-rent",
+    "componentType": "kpi-card",
+    "title": "民営賃貸住宅の家賃（3.3m²当たり）",
+    "componentProps": {
+      "estatParams": {
+        "statsDataId": "0000010208",
+        "cdCat01": "#H04102"
+      }
+    },
+    "sourceName": null,
+    "sourceLink": null,
+    "rankingLink": null,
+    "gridColumnSpan": 12,
+    "gridColumnSpanTablet": null,
+    "gridColumnSpanSm": null,
+    "dataSource": "ranking",
+    "section": null,
+    "sortOrder": 3
+  },
+  {
+    "componentKey": "cmp-const-own-vacant",
+    "componentType": "line-chart",
+    "title": "持ち家比率と空き家比率の推移",
+    "componentProps": {
+      "estatParams": [
+        {
+          "statsDataId": "0000010208",
+          "cdCat01": "#H01301"
+        },
+        {
+          "statsDataId": "0000010208",
+          "cdCat01": "#H01405"
+        }
+      ],
+      "labels": [
+        "持ち家比率",
+        "空き家比率"
+      ]
+    },
+    "sourceName": null,
+    "sourceLink": null,
+    "rankingLink": null,
+    "gridColumnSpan": 6,
+    "gridColumnSpanTablet": null,
+    "gridColumnSpanSm": null,
+    "dataSource": "estat",
+    "section": null,
+    "sortOrder": 4
+  },
+  {
+    "componentKey": "cmp-const-housing-donut",
+    "componentType": "composition-chart",
+    "title": "住宅の種別構成比",
+    "componentProps": {
+      "statsDataId": "0000010208",
+      "segments": [
+        {
+          "code": "#H01401",
+          "label": "一戸建",
+          "color": "#22c55e"
+        },
+        {
+          "code": "#H01402",
+          "label": "長屋建",
+          "color": "#f59e0b"
+        },
+        {
+          "code": "#H01403",
+          "label": "共同住宅",
+          "color": "#3b82f6"
+        }
+      ]
+    },
+    "sourceName": null,
+    "sourceLink": null,
+    "rankingLink": null,
+    "gridColumnSpan": 6,
+    "gridColumnSpanTablet": null,
+    "gridColumnSpanSm": null,
+    "dataSource": "estat",
+    "section": null,
+    "sortOrder": 5
+  }
+]
