@@ -82,14 +82,14 @@ export function MigrationSankey({ code, initialData }: Props) {
 
   if (errored === code) {
     return (
-      <div className="flex aspect-[3/2] w-full items-center justify-center rounded-md border bg-slate-50 text-sm text-slate-500 dark:bg-slate-900">
+      <div className="flex aspect-[100/73] w-full items-center justify-center rounded-md border bg-slate-50 text-sm text-slate-500 dark:bg-slate-900">
         データを読み込めませんでした。
       </div>
     );
   }
   if (!view) {
     return (
-      <div className="flex aspect-[3/2] w-full items-center justify-center rounded-md border bg-slate-50 text-sm text-slate-500 dark:bg-slate-900">
+      <div className="flex aspect-[100/73] w-full items-center justify-center rounded-md border bg-slate-50 text-sm text-slate-500 dark:bg-slate-900">
         読み込み中…
       </div>
     );
