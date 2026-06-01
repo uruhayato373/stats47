@@ -250,6 +250,10 @@ function checkAreasPolicy(pathname: string, req: NextRequest): Response | null {
     landweather: "climate",
     international: "foreign-residents",
     administrativefinancial: "local-finance",
+    // テーマ未対応カテゴリ → エリアプロフィールへ
+    energy: "",
+    ict: "",
+    infrastructure: "",
   };
   if (
     seg.length === 3 &&
@@ -260,10 +264,9 @@ function checkAreasPolicy(pathname: string, req: NextRequest): Response | null {
     Object.prototype.hasOwnProperty.call(CATEGORY_TO_THEME, seg[2])
   ) {
     const themeSlug = CATEGORY_TO_THEME[seg[2]];
-    return NextResponse.redirect(
-      new URL(`/areas/${seg[1]}/${themeSlug}`, req.url),
-      { status: 301 }
-    );
+    // テーマスラグ空文字 = 対応テーマなし → エリアプロフィールへ
+    const dest = themeSlug ? `/areas/${seg[1]}/${themeSlug}` : `/areas/${seg[1]}`;
+    return NextResponse.redirect(new URL(dest, req.url), { status: 301 });
   }
 
   // /areas/{prefCode}/{themeSlug} — Type A テーマページは通過させる (410 対象外)
