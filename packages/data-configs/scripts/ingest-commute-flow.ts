@@ -16,7 +16,8 @@ import { resolve } from "node:path";
 
 const STATS_DATA_ID = "0003454526";
 const REPO_ROOT = resolve(__dirname, "../../..");
-const OUT_DIR = resolve(REPO_ROOT, "apps/web/public/commute-flow");
+// R2 SSOT: ローカル R2 FS tier に出力 → diff-push-r2 --prefix app/commute-flow で R2 反映
+const OUT_DIR = resolve(REPO_ROOT, ".local/r2/app/commute-flow");
 const DRY_RUN = process.argv.includes("--dry-run");
 
 interface ClassItem {

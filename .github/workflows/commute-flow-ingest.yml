@@ -1,17 +1,16 @@
-name: 🚇 Commute-flow Ingest (e-Stat → JSON)
+name: 🚇 Commute-flow Ingest (e-Stat → R2)
 
 # 国勢調査「従業地・通学地集計」(statsDataId 0003454526) から通勤 O-D を取得し、
-# 47 県分の per-prefecture JSON (apps/web/public/commute-flow/{NN}.json) を生成する。
+# 47 県分の per-prefecture JSON を R2 (app/commute-flow/{NN}.json) に反映する。
 #
-# e-Stat APP_ID は CI 専任 (secrets.NEXT_PUBLIC_ESTAT_APP_ID) のため取り込みは CI で行う。
-# 次元コードは未検証 → まず dry_run=true で CLASS_INF の自動検出ログを確認してから本実行する。
-# 生成 JSON は artifact で持ち帰り、Web feature と同じ PR でコミットする (git 直 push しない)。
+# e-Stat APP_ID は CI 専任 (secrets.NEXT_PUBLIC_ESTAT_APP_ID)。次元コードは名称から自動検出。
+# 国勢調査は5年に1回 → 低頻度。まず dry_run=true で検出ログを確認してから本実行する。
 
 on:
   workflow_dispatch:
     inputs:
       dry_run:
-        description: "true: 次元検出ログのみ (JSON 出力しない)"
+        description: "true: 次元検出ログのみ (R2 反映しない)"
         required: false
         default: "true"
 
@@ -20,6 +19,12 @@ permissions:
 
 env:
   NEXT_PUBLIC_ESTAT_APP_ID: ${{ secrets.NEXT_PUBLIC_ESTAT_APP_ID }}
+  R2_PUBLIC_FETCH_URL: https://storage.stats47.jp
+  NODE_OPTIONS: "--conditions react-server"
+  R2_S3_ENDPOINT: https://${{ secrets.CLOUDFLARE_ACCOUNT_ID }}.r2.cloudflarestorage.com
+  R2_ACCESS_KEY_ID: ${{ secrets.CLOUDFLARE_R2_ACCESS_KEY_ID }}
+  R2_SECRET_ACCESS_KEY: ${{ secrets.CLOUDFLARE_R2_SECRET_ACCESS_KEY }}
+  CLOUDFLARE_R2_BUCKET_NAME: stats47
 
 jobs:
   ingest:
@@ -47,13 +52,10 @@ jobs:
           else
             npx tsx packages/data-configs/scripts/ingest-commute-flow.ts
             echo "--- 生成数 ---"
-            ls apps/web/public/commute-flow/*.json | wc -l
+            ls .local/r2/app/commute-flow/*.json | wc -l
           fi
 
-      - name: ⬆️ Upload commute-flow JSON
+      - name: ☁️ Push to R2 (app/commute-flow)
         if: inputs.dry_run != 'true'
-        uses: actions/upload-artifact@v4
-        with:
-          name: commute-flow-json
-          path: apps/web/public/commute-flow/*.json
-          if-no-files-found: error
+        run: |
+          npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix app/commute-flow
