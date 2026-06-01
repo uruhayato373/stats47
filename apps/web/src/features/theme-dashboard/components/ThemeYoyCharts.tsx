@@ -105,7 +105,13 @@ const THEME_YOY_CHARTS: Record<string, YoyChartConfig[]> = {
   ],
 };
 
-export function ThemeYoyCharts({ themeKey }: { themeKey: string }) {
+export function ThemeYoyCharts({
+  themeKey,
+  highlightAreaCode,
+}: {
+  themeKey: string;
+  highlightAreaCode?: string;
+}) {
   const charts = THEME_YOY_CHARTS[themeKey];
   if (!charts || charts.length === 0) return null;
   return (
@@ -117,6 +123,7 @@ export function ThemeYoyCharts({ themeKey }: { themeKey: string }) {
           title={c.title}
           subtitle={c.subtitle}
           colorClamp={c.colorClamp}
+          highlightAreaCode={highlightAreaCode ? highlightAreaCode.slice(0, 2) : undefined}
         />
       ))}
     </div>

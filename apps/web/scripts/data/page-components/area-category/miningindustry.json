@@ -1,1 +1,426 @@
-[{"componentKey":"cmp-mining-output","componentType":"line-chart","title":"製造品出荷額等の推移","componentProps":{"estatParams":{"statsDataId":"0000010103","cdCat01":"C3401"},"yAxisConfig":{"mode":"sync"}},"sourceName":null,"sourceLink":null,"rankingLink":null,"gridColumnSpan":6,"gridColumnSpanTablet":null,"gridColumnSpanSm":null,"dataSource":"estat","section":"製造業推移","sortOrder":1},{"componentKey":"kpi-mining-shipment","componentType":"kpi-card","title":"製造品出荷額等","componentProps":{"estatParams":{"statsDataId":"0000010103","cdCat01":"C3401"}},"sourceName":null,"sourceLink":null,"rankingLink":null,"gridColumnSpan":12,"gridColumnSpanTablet":null,"gridColumnSpanSm":null,"dataSource":"ranking","section":null,"sortOrder":1},{"componentKey":"cmp-mining-factory-worker","componentType":"mixed-chart","title":"製造業 事業所数と従業者数の推移","componentProps":{"columnParams":[{"statsDataId":"0000010103","cdCat01":"C3403"}],"lineParams":[{"statsDataId":"0000010103","cdCat01":"C3404"}],"columnLabels":["事業所数"],"lineLabels":["従業者数"],"leftUnit":"事業所","rightUnit":"人"},"sourceName":null,"sourceLink":null,"rankingLink":null,"gridColumnSpan":6,"gridColumnSpanTablet":null,"gridColumnSpanSm":null,"dataSource":"estat","section":null,"sortOrder":2},{"componentKey":"kpi-mining-workers","componentType":"kpi-card","title":"製造業従業者数","componentProps":{"estatParams":{"statsDataId":"0000010103","cdCat01":"C3404"}},"sourceName":null,"sourceLink":null,"rankingLink":null,"gridColumnSpan":12,"gridColumnSpanTablet":null,"gridColumnSpanSm":null,"dataSource":"ranking","section":null,"sortOrder":2},{"componentKey":"cmp-mining-added-value","componentType":"line-chart","title":"製造業付加価値額の推移","componentProps":{"estatParams":{"statsDataId":"0000010103","cdCat01":"C3402"}},"sourceName":null,"sourceLink":null,"rankingLink":null,"gridColumnSpan":6,"gridColumnSpanTablet":null,"gridColumnSpanSm":null,"dataSource":"estat","section":null,"sortOrder":3},{"componentKey":"kpi-mining-valueadded","componentType":"kpi-card","title":"製造業付加価値額","componentProps":{"estatParams":{"statsDataId":"0000010103","cdCat01":"C3402"}},"sourceName":null,"sourceLink":null,"rankingLink":null,"gridColumnSpan":12,"gridColumnSpanTablet":null,"gridColumnSpanSm":null,"dataSource":"ranking","section":null,"sortOrder":3},{"componentKey":"cmp-mining-water","componentType":"stacked-area","title":"工業用水量の推移","componentProps":{"estatParams":[{"statsDataId":"0000010103","cdCat01":"C340601"},{"statsDataId":"0000010103","cdCat01":"C340602"}],"labels":["淡水","海水"],"unit":"m³/日"},"sourceName":null,"sourceLink":null,"rankingLink":null,"gridColumnSpan":6,"gridColumnSpanTablet":null,"gridColumnSpanSm":null,"dataSource":"estat","section":null,"sortOrder":4},{"componentKey":"cmp-mining-gdp","componentType":"line-chart","title":"県内総生産額（製造業）の推移","componentProps":{"estatParams":{"statsDataId":"0000010103","cdCat01":"C112206"},"yAxisConfig":{"mode":"sync"}},"sourceName":null,"sourceLink":null,"rankingLink":null,"gridColumnSpan":6,"gridColumnSpanTablet":null,"gridColumnSpanSm":null,"dataSource":"estat","section":null,"sortOrder":5},{"componentKey":"kpi-mining-gdp","componentType":"kpi-card","title":"県内総生産額（製造業）","componentProps":{"estatParams":{"statsDataId":"0000010103","cdCat01":"C112206"}},"sourceName":null,"sourceLink":null,"rankingLink":null,"gridColumnSpan":12,"gridColumnSpanTablet":null,"gridColumnSpanSm":null,"dataSource":"ranking","section":"経済指標","sortOrder":5},{"componentKey":"cmp-mining-sales","componentType":"line-chart","title":"売上金額（民営）（製造業）の推移","componentProps":{"estatParams":{"statsDataId":"0000010103","cdCat01":"C610107"},"yAxisConfig":{"mode":"sync"}},"sourceName":null,"sourceLink":null,"rankingLink":null,"gridColumnSpan":6,"gridColumnSpanTablet":null,"gridColumnSpanSm":null,"dataSource":"estat","section":null,"sortOrder":6},{"componentKey":"cmp-mining-net-value","componentType":"line-chart","title":"純付加価値額（民営）（製造業）の推移","componentProps":{"estatParams":{"statsDataId":"0000010103","cdCat01":"C620107"},"yAxisConfig":{"mode":"sync"}},"sourceName":null,"sourceLink":null,"rankingLink":null,"gridColumnSpan":6,"gridColumnSpanTablet":null,"gridColumnSpanSm":null,"dataSource":"estat","section":null,"sortOrder":6},{"componentKey":"cmp-mining-site-area","componentType":"line-chart","title":"製造業事業所敷地面積の推移","componentProps":{"estatParams":{"statsDataId":"0000010103","cdCat01":"C3405"},"yAxisConfig":{"mode":"sync"}},"sourceName":null,"sourceLink":null,"rankingLink":null,"gridColumnSpan":6,"gridColumnSpanTablet":null,"gridColumnSpanSm":null,"dataSource":"estat","section":null,"sortOrder":7},{"componentKey":"kpi-mining-emp-per-est","componentType":"kpi-card","title":"第2次産業従業者数（1事業所当たり）","componentProps":{"estatParams":{"statsDataId":"0000010203","cdCat01":"#C03305"}},"sourceName":null,"sourceLink":null,"rankingLink":null,"gridColumnSpan":12,"gridColumnSpanTablet":null,"gridColumnSpanSm":null,"dataSource":"ranking","section":"事業所・地価","sortOrder":7},{"componentKey":"cmp-mining-land-price","componentType":"line-chart","title":"工業地標準価格の推移","componentProps":{"estatParams":{"statsDataId":"0000010103","cdCat01":"C5405"},"yAxisConfig":{"mode":"sync"}},"sourceName":null,"sourceLink":null,"rankingLink":null,"gridColumnSpan":6,"gridColumnSpanTablet":null,"gridColumnSpanSm":null,"dataSource":"estat","section":null,"sortOrder":8},{"componentKey":"cmp-mining-land-price-change","componentType":"line-chart","title":"工業地標準価格変動率の推移","componentProps":{"estatParams":{"statsDataId":"0000010103","cdCat01":"C5505"},"yAxisConfig":{"mode":"sync"}},"sourceName":null,"sourceLink":null,"rankingLink":null,"gridColumnSpan":6,"gridColumnSpanTablet":null,"gridColumnSpanSm":null,"dataSource":"estat","section":null,"sortOrder":8},{"componentKey":"kpi-mining-land-price","componentType":"kpi-card","title":"標準価格（工業地）","componentProps":{"estatParams":{"statsDataId":"0000010103","cdCat01":"C5405"}},"sourceName":null,"sourceLink":null,"rankingLink":null,"gridColumnSpan":12,"gridColumnSpanTablet":null,"gridColumnSpanSm":null,"dataSource":"estat","section":null,"sortOrder":8},{"componentKey":"cmp-mining-industry-mix","componentType":"composition-chart","title":"業種別製造品出荷額構成比","componentProps":{"statsDataId":"0003448099","segments":[{"code":"09","label":"食料品","color":"#10b981"},{"code":"16","label":"化学工業","color":"#8b5cf6"},{"code":"22","label":"鉄鋼業","color":"#64748b"},{"code":"26","label":"生産用機械","color":"#f59e0b"},{"code":"28","label":"電子部品","color":"#3b82f6"},{"code":"29","label":"電気機械","color":"#ec4899"},{"code":"31","label":"輸送用機械","color":"#ef4444"}],"totalCode":"00","unit":"百万円"},"sourceName":null,"sourceLink":null,"rankingLink":null,"gridColumnSpan":12,"gridColumnSpanTablet":12,"gridColumnSpanSm":null,"dataSource":"estat","section":"業種別構成","sortOrder":9},{"componentKey":"city-kpi-mfg-shipment","componentType":"kpi-card","title":"製造品出荷額等","componentProps":{"estatParams":{"statsDataId":"0000020203","cdCat01":"C3401"},"unit":"百万円","yAxisConfig":{"mode":"auto"}},"sourceName":null,"sourceLink":null,"rankingLink":null,"gridColumnSpan":3,"gridColumnSpanTablet":6,"gridColumnSpanSm":null,"dataSource":"estat","section":null,"sortOrder":10},{"componentKey":"city-kpi-mfg-establishments","componentType":"kpi-card","title":"製造業事業所数","componentProps":{"estatParams":{"statsDataId":"0000020203","cdCat01":"C3403"},"yAxisConfig":{"mode":"auto"}},"sourceName":null,"sourceLink":null,"rankingLink":null,"gridColumnSpan":3,"gridColumnSpanTablet":6,"gridColumnSpanSm":null,"dataSource":"estat","section":null,"sortOrder":11},{"componentKey":"city-mfg-trend","componentType":"line-chart","title":"製造品出荷額等・従業者数の推移","componentProps":{"estatParams":[{"statsDataId":"0000020203","cdCat01":"C3401"},{"statsDataId":"0000020203","cdCat01":"C3404"}],"labels":["製造品出荷額等(百万円)","製造業従業者数(人)"],"yAxisConfig":{"mode":"auto"}},"sourceName":null,"sourceLink":null,"rankingLink":null,"gridColumnSpan":6,"gridColumnSpanTablet":12,"gridColumnSpanSm":null,"dataSource":"estat","section":null,"sortOrder":20}]
+[
+  {
+    "componentKey": "cmp-mining-output",
+    "componentType": "line-chart",
+    "title": "製造品出荷額等の推移",
+    "componentProps": {
+      "estatParams": {
+        "statsDataId": "0000010103",
+        "cdCat01": "C3401"
+      },
+      "yAxisConfig": {
+        "mode": "sync"
+      }
+    },
+    "sourceName": null,
+    "sourceLink": null,
+    "rankingLink": null,
+    "gridColumnSpan": 6,
+    "gridColumnSpanTablet": null,
+    "gridColumnSpanSm": null,
+    "dataSource": "estat",
+    "section": "製造業推移",
+    "sortOrder": 1
+  },
+  {
+    "componentKey": "kpi-mining-shipment",
+    "componentType": "kpi-card",
+    "title": "製造品出荷額等",
+    "componentProps": {
+      "estatParams": {
+        "statsDataId": "0000010103",
+        "cdCat01": "C3401"
+      }
+    },
+    "sourceName": null,
+    "sourceLink": null,
+    "rankingLink": null,
+    "gridColumnSpan": 12,
+    "gridColumnSpanTablet": null,
+    "gridColumnSpanSm": null,
+    "dataSource": "ranking",
+    "section": null,
+    "sortOrder": 1
+  },
+  {
+    "componentKey": "cmp-mining-factory-worker",
+    "componentType": "mixed-chart",
+    "title": "製造業 事業所数と従業者数の推移",
+    "componentProps": {
+      "columnParams": [
+        {
+          "statsDataId": "0000010103",
+          "cdCat01": "C3403"
+        }
+      ],
+      "lineParams": [
+        {
+          "statsDataId": "0000010103",
+          "cdCat01": "C3404"
+        }
+      ],
+      "columnLabels": [
+        "事業所数"
+      ],
+      "lineLabels": [
+        "従業者数"
+      ],
+      "leftUnit": "事業所",
+      "rightUnit": "人"
+    },
+    "sourceName": null,
+    "sourceLink": null,
+    "rankingLink": null,
+    "gridColumnSpan": 6,
+    "gridColumnSpanTablet": null,
+    "gridColumnSpanSm": null,
+    "dataSource": "estat",
+    "section": null,
+    "sortOrder": 2
+  },
+  {
+    "componentKey": "kpi-mining-workers",
+    "componentType": "kpi-card",
+    "title": "製造業従業者数",
+    "componentProps": {
+      "estatParams": {
+        "statsDataId": "0000010103",
+        "cdCat01": "C3404"
+      }
+    },
+    "sourceName": null,
+    "sourceLink": null,
+    "rankingLink": null,
+    "gridColumnSpan": 12,
+    "gridColumnSpanTablet": null,
+    "gridColumnSpanSm": null,
+    "dataSource": "ranking",
+    "section": null,
+    "sortOrder": 2
+  },
+  {
+    "componentKey": "cmp-mining-added-value",
+    "componentType": "line-chart",
+    "title": "製造業付加価値額の推移",
+    "componentProps": {
+      "estatParams": {
+        "statsDataId": "0000010103",
+        "cdCat01": "C3402"
+      }
+    },
+    "sourceName": null,
+    "sourceLink": null,
+    "rankingLink": null,
+    "gridColumnSpan": 6,
+    "gridColumnSpanTablet": null,
+    "gridColumnSpanSm": null,
+    "dataSource": "estat",
+    "section": null,
+    "sortOrder": 3
+  },
+  {
+    "componentKey": "kpi-mining-valueadded",
+    "componentType": "kpi-card",
+    "title": "製造業付加価値額",
+    "componentProps": {
+      "estatParams": {
+        "statsDataId": "0000010103",
+        "cdCat01": "C3402"
+      }
+    },
+    "sourceName": null,
+    "sourceLink": null,
+    "rankingLink": null,
+    "gridColumnSpan": 12,
+    "gridColumnSpanTablet": null,
+    "gridColumnSpanSm": null,
+    "dataSource": "ranking",
+    "section": null,
+    "sortOrder": 3
+  },
+  {
+    "componentKey": "cmp-mining-water",
+    "componentType": "stacked-area",
+    "title": "工業用水量の推移",
+    "componentProps": {
+      "estatParams": [
+        {
+          "statsDataId": "0000010103",
+          "cdCat01": "C340601"
+        },
+        {
+          "statsDataId": "0000010103",
+          "cdCat01": "C340602"
+        }
+      ],
+      "labels": [
+        "淡水",
+        "海水"
+      ],
+      "unit": "m³/日"
+    },
+    "sourceName": null,
+    "sourceLink": null,
+    "rankingLink": null,
+    "gridColumnSpan": 6,
+    "gridColumnSpanTablet": null,
+    "gridColumnSpanSm": null,
+    "dataSource": "estat",
+    "section": null,
+    "sortOrder": 4
+  },
+  {
+    "componentKey": "cmp-mining-gdp",
+    "componentType": "line-chart",
+    "title": "県内総生産額（製造業）の推移",
+    "componentProps": {
+      "estatParams": {
+        "statsDataId": "0000010103",
+        "cdCat01": "C112206"
+      },
+      "yAxisConfig": {
+        "mode": "sync"
+      }
+    },
+    "sourceName": null,
+    "sourceLink": null,
+    "rankingLink": null,
+    "gridColumnSpan": 6,
+    "gridColumnSpanTablet": null,
+    "gridColumnSpanSm": null,
+    "dataSource": "estat",
+    "section": null,
+    "sortOrder": 5
+  },
+  {
+    "componentKey": "kpi-mining-gdp",
+    "componentType": "kpi-card",
+    "title": "県内総生産額（製造業）",
+    "componentProps": {
+      "estatParams": {
+        "statsDataId": "0000010103",
+        "cdCat01": "C112206"
+      }
+    },
+    "sourceName": null,
+    "sourceLink": null,
+    "rankingLink": null,
+    "gridColumnSpan": 12,
+    "gridColumnSpanTablet": null,
+    "gridColumnSpanSm": null,
+    "dataSource": "ranking",
+    "section": "経済指標",
+    "sortOrder": 5
+  },
+  {
+    "componentKey": "cmp-mining-sales",
+    "componentType": "line-chart",
+    "title": "売上金額（民営）（製造業）の推移",
+    "componentProps": {
+      "estatParams": {
+        "statsDataId": "0000010103",
+        "cdCat01": "C610107"
+      },
+      "yAxisConfig": {
+        "mode": "sync"
+      }
+    },
+    "sourceName": null,
+    "sourceLink": null,
+    "rankingLink": null,
+    "gridColumnSpan": 6,
+    "gridColumnSpanTablet": null,
+    "gridColumnSpanSm": null,
+    "dataSource": "estat",
+    "section": null,
+    "sortOrder": 6
+  },
+  {
+    "componentKey": "cmp-mining-net-value",
+    "componentType": "line-chart",
+    "title": "純付加価値額（民営）（製造業）の推移",
+    "componentProps": {
+      "estatParams": {
+        "statsDataId": "0000010103",
+        "cdCat01": "C620107"
+      },
+      "yAxisConfig": {
+        "mode": "sync"
+      }
+    },
+    "sourceName": null,
+    "sourceLink": null,
+    "rankingLink": null,
+    "gridColumnSpan": 6,
+    "gridColumnSpanTablet": null,
+    "gridColumnSpanSm": null,
+    "dataSource": "estat",
+    "section": null,
+    "sortOrder": 6
+  },
+  {
+    "componentKey": "cmp-mining-site-area",
+    "componentType": "line-chart",
+    "title": "製造業事業所敷地面積の推移",
+    "componentProps": {
+      "estatParams": {
+        "statsDataId": "0000010103",
+        "cdCat01": "C3405"
+      },
+      "yAxisConfig": {
+        "mode": "sync"
+      }
+    },
+    "sourceName": null,
+    "sourceLink": null,
+    "rankingLink": null,
+    "gridColumnSpan": 6,
+    "gridColumnSpanTablet": null,
+    "gridColumnSpanSm": null,
+    "dataSource": "estat",
+    "section": null,
+    "sortOrder": 7
+  },
+  {
+    "componentKey": "kpi-mining-emp-per-est",
+    "componentType": "kpi-card",
+    "title": "第2次産業従業者数（1事業所当たり）",
+    "componentProps": {
+      "estatParams": {
+        "statsDataId": "0000010203",
+        "cdCat01": "#C03305"
+      }
+    },
+    "sourceName": null,
+    "sourceLink": null,
+    "rankingLink": null,
+    "gridColumnSpan": 12,
+    "gridColumnSpanTablet": null,
+    "gridColumnSpanSm": null,
+    "dataSource": "ranking",
+    "section": "事業所・地価",
+    "sortOrder": 7
+  },
+  {
+    "componentKey": "cmp-mining-land-price",
+    "componentType": "line-chart",
+    "title": "工業地標準価格の推移",
+    "componentProps": {
+      "estatParams": {
+        "statsDataId": "0000010103",
+        "cdCat01": "C5405"
+      },
+      "yAxisConfig": {
+        "mode": "sync"
+      }
+    },
+    "sourceName": null,
+    "sourceLink": null,
+    "rankingLink": null,
+    "gridColumnSpan": 6,
+    "gridColumnSpanTablet": null,
+    "gridColumnSpanSm": null,
+    "dataSource": "estat",
+    "section": null,
+    "sortOrder": 8
+  },
+  {
+    "componentKey": "cmp-mining-land-price-change",
+    "componentType": "line-chart",
+    "title": "工業地標準価格変動率の推移",
+    "componentProps": {
+      "estatParams": {
+        "statsDataId": "0000010103",
+        "cdCat01": "C5505"
+      },
+      "yAxisConfig": {
+        "mode": "sync"
+      }
+    },
+    "sourceName": null,
+    "sourceLink": null,
+    "rankingLink": null,
+    "gridColumnSpan": 6,
+    "gridColumnSpanTablet": null,
+    "gridColumnSpanSm": null,
+    "dataSource": "estat",
+    "section": null,
+    "sortOrder": 8
+  },
+  {
+    "componentKey": "kpi-mining-land-price",
+    "componentType": "kpi-card",
+    "title": "標準価格（工業地）",
+    "componentProps": {
+      "estatParams": {
+        "statsDataId": "0000010103",
+        "cdCat01": "C5405"
+      }
+    },
+    "sourceName": null,
+    "sourceLink": null,
+    "rankingLink": null,
+    "gridColumnSpan": 12,
+    "gridColumnSpanTablet": null,
+    "gridColumnSpanSm": null,
+    "dataSource": "estat",
+    "section": null,
+    "sortOrder": 8
+  },
+  {
+    "componentKey": "cmp-mining-industry-mix",
+    "componentType": "composition-chart",
+    "title": "業種別製造品出荷額構成比",
+    "componentProps": {
+      "statsDataId": "0003448099",
+      "segments": [
+        {
+          "code": "09",
+          "label": "食料品",
+          "color": "#10b981"
+        },
+        {
+          "code": "16",
+          "label": "化学工業",
+          "color": "#8b5cf6"
+        },
+        {
+          "code": "22",
+          "label": "鉄鋼業",
+          "color": "#64748b"
+        },
+        {
+          "code": "26",
+          "label": "生産用機械",
+          "color": "#f59e0b"
+        },
+        {
+          "code": "28",
+          "label": "電子部品",
+          "color": "#3b82f6"
+        },
+        {
+          "code": "29",
+          "label": "電気機械",
+          "color": "#ec4899"
+        },
+        {
+          "code": "31",
+          "label": "輸送用機械",
+          "color": "#ef4444"
+        }
+      ],
+      "totalCode": "00",
+      "unit": "百万円"
+    },
+    "sourceName": null,
+    "sourceLink": null,
+    "rankingLink": null,
+    "gridColumnSpan": 12,
+    "gridColumnSpanTablet": 12,
+    "gridColumnSpanSm": null,
+    "dataSource": "estat",
+    "section": "業種別構成",
+    "sortOrder": 9
+  }
+]

@@ -66,7 +66,6 @@ import {
   AiInsightCard,
   AiMarkdownContent,
   RankingFaqSection,
-  RankingPrefectureCommentarySection,
   CorrelationSectionSkeleton,
   RankingPageCardsSkeleton,
   SurveyCard,
@@ -394,18 +393,6 @@ export default async function RankingKeyPage({
         faqSection={
           aiContent?.faq
             ? <RankingFaqSection faqJson={aiContent.faq} rankingName={getRankingTitle(rankingItem)} />
-            : null
-        }
-        // AI生成コンテンツ: 都道府県別解説 (47県、SEO 長尾)
-        prefectureCommentarySection={
-          aiContent?.prefectureCommentary
-            ? (
-              <RankingPrefectureCommentarySection
-                commentaryJson={aiContent.prefectureCommentary}
-                rankingName={getRankingTitle(rankingItem)}
-                unit={rankingItem.unit ?? ""}
-              />
-            )
             : null
         }
       />

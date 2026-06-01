@@ -39,6 +39,12 @@ const PREFECTURE_CODES = Array.from(
   (_, i) => String(i + 1).padStart(2, "0") + "000",
 );
 
+/** Type A テーマ（都道府県単位で集計できるもの）— ports/railway/roads/local-finance-city は除外 */
+const TYPE_B_THEMES = new Set(["ports", "railway", "roads", "local-finance-city"]);
+const TYPE_A_THEME_SLUGS = ALL_THEMES
+  .filter((t) => !TYPE_B_THEMES.has(t.themeKey))
+  .map((t) => t.themeKey);
+
 // ----------------------------------------------------------------------------
 // Sitemap Index 定義
 // ----------------------------------------------------------------------------
@@ -90,10 +96,10 @@ const AREA_PAGES: MetadataRoute.Sitemap = [
     changeFrequency: "weekly" as const,
     priority: 0.8,
   })),
-  // UrlPolicy.area.indexableCategories と middleware を完全一致（economy orphan page 解消）
+  // /areas/[code]/[themeSlug] — Type A テーマ（都道府県単位）× 47 県
   ...PREFECTURE_CODES.flatMap((code) =>
-    UrlPolicy.area.indexableCategories.map((cat) => ({
-      url: `${BASE_URL}/areas/${code}/${cat}`,
+    TYPE_A_THEME_SLUGS.map((slug) => ({
+      url: `${BASE_URL}/areas/${code}/${slug}`,
       changeFrequency: "weekly" as const,
       priority: 0.7,
     })),

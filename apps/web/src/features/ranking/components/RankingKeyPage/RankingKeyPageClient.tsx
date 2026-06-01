@@ -79,8 +79,6 @@ interface RankingKeyPageClientProps {
     nativeAffiliateSection?: ReactNode;
     /** 同カテゴリ関連ランキング grid (内部リンク密度↑、GSC indexation 改善) */
     relatedRankingsSection?: ReactNode;
-    /** 47 都道府県別の解説セクション (SEO 長尾) */
-    prefectureCommentarySection?: ReactNode;
     /** 都道府県コード（市区町村ランキング時のフィルタ用） */
     parentAreaCode?: string;
     /** 右サイドバーに表示するコンテンツ（Server Component を注入） */
@@ -109,7 +107,6 @@ export function RankingKeyPageClient({
     faqSection,
     nativeAffiliateSection,
     relatedRankingsSection,
-    prefectureCommentarySection,
     parentAreaCode,
     sidebarSection,
     cityRankingItem,
@@ -525,9 +522,6 @@ export function RankingKeyPageClient({
 
                     {/* 地域別の傾向（折りたたみ） */}
                     {regionalAnalysisSection}
-
-                    {/* 都道府県別の解説（折りたたみ、47県、SEO 長尾） */}
-                    {prefectureCommentarySection}
 
                     {/* 相関分析セクション */}
                     {correlationSection}

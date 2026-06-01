@@ -10,17 +10,40 @@ interface Props {
     basePath?: string;
 }
 
-export function CategoryNavGrid({ categories, areaCode, basePath }: Props) {
+/** カテゴリキー → テーマスラグのマッピング（Type A テーマのみ） */
+const CATEGORY_TO_THEME: Record<string, string> = {
+  population: "population-dynamics",
+  laborwage: "labor-wages",
+  economy: "local-economy",
+  agriculture: "local-economy",
+  miningindustry: "manufacturing",
+  construction: "living-housing",
+  commercial: "local-economy",
+  tourism: "tourism",
+  socialsecurity: "healthcare",
+  educationsports: "education-culture",
+  safetyenvironment: "safety",
+  landweather: "climate",
+  international: "foreign-residents",
+  administrativefinancial: "local-finance",
+  // infrastructure / energy / ict はテーマなし → エリアプロフィール
+};
+
+export function CategoryNavGrid({ categories, areaCode }: Props) {
     return (
         <section>
-            <h2 className="text-2xl font-bold text-foreground mb-4">カテゴリ別データ</h2>
+            <h2 className="text-2xl font-bold text-foreground mb-4">テーマ別データ</h2>
             <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3">
                 {categories.map((cat) => {
+                    const themeSlug = CATEGORY_TO_THEME[cat.categoryKey];
+                    const href = themeSlug
+                        ? `/areas/${areaCode}/${themeSlug}`
+                        : `/areas/${areaCode}`;
                     const color = getCategoryColor(cat.categoryKey);
                     return (
                         <Link
                             key={cat.categoryKey}
-                            href={`${basePath ?? `/areas/${areaCode}`}/${cat.categoryKey}`}
+                            href={href}
                             className="group flex items-center gap-3 p-3 rounded-lg border border-border hover:border-primary/50 hover:bg-accent/50 transition-all"
                         >
                             <div className={`p-2 rounded-lg ${color.bg} ${color.text} ${color.hoverBg} ${color.hoverText} transition-colors shrink-0`}>

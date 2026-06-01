@@ -16,7 +16,8 @@ description: テーマダッシュボードの page_components 設計・監査�
 
 - テーマダッシュボードの現状監査（既存 components vs IndicatorSet のギャップ分析）
 - componentKey / componentType / componentProps の設計
-- `data/page-components/theme/<key>.json`（+ 共有時 area-category）への要素追加（git TS 編集）
+- `data/page-components/theme/<key>.json` への要素追加（git TS 編集）
+- **注意**: `area-category/` は都道府県専用データのみ。`city-*` componentKey は `city-category/` のみに置く（混在禁止）
 - generator 再生成 + cloud 一致検証の支援
 
 ## 設計原則

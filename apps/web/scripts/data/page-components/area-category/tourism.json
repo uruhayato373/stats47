@@ -1,1 +1,299 @@
-[{"componentKey":"cmp-tour-transport","componentType":"line-chart","title":"輸送機関別旅客数","componentProps":{"estatParams":[{"statsDataId":"0000010103","cdCat01":"C3704"},{"statsDataId":"0000010103","cdCat01":"C3705"},{"statsDataId":"0000010103","cdCat01":"C3706"},{"statsDataId":"0000010103","cdCat01":"C3707"}],"labels":["JR","民鉄","航空","旅客船"],"yAxisConfig":{"mode":"sync"}},"sourceName":null,"sourceLink":null,"rankingLink":null,"gridColumnSpan":6,"gridColumnSpanTablet":null,"gridColumnSpanSm":null,"dataSource":"estat","section":"輸送機関","sortOrder":1},{"componentKey":"kpi-tourism-hotels","componentType":"kpi-card","title":"ホテル営業施設数","componentProps":{"estatParams":{"statsDataId":"0000010103","cdCat01":"C3803"}},"sourceName":null,"sourceLink":null,"rankingLink":null,"gridColumnSpan":12,"gridColumnSpanTablet":null,"gridColumnSpanSm":null,"dataSource":"ranking","section":null,"sortOrder":1},{"componentKey":"cmp-tour-hotel","componentType":"line-chart","title":"ホテル客室数の推移","componentProps":{"estatParams":{"statsDataId":"0000010103","cdCat01":"C3804"},"yAxisConfig":{"mode":"sync"}},"sourceName":null,"sourceLink":null,"rankingLink":null,"gridColumnSpan":6,"gridColumnSpanTablet":null,"gridColumnSpanSm":null,"dataSource":"estat","section":"宿泊","sortOrder":2},{"componentKey":"kpi-tourism-ryokan","componentType":"kpi-card","title":"旅館営業施設数（ホテルを含む）","componentProps":{"estatParams":{"statsDataId":"0000010103","cdCat01":"C3801"}},"sourceName":null,"sourceLink":null,"rankingLink":null,"gridColumnSpan":12,"gridColumnSpanTablet":null,"gridColumnSpanSm":null,"dataSource":"ranking","section":null,"sortOrder":2},{"componentKey":"cmp-tourism-occupancy","componentType":"line-chart","title":"客室稼働率の推移","componentProps":{"estatParams":{"statsDataId":"0000010207","cdCat01":"#G04308"}},"sourceName":null,"sourceLink":null,"rankingLink":null,"gridColumnSpan":6,"gridColumnSpanTablet":null,"gridColumnSpanSm":null,"dataSource":"estat","section":null,"sortOrder":3},{"componentKey":"kpi-tourism-aviation","componentType":"kpi-card","title":"航空輸送人員","componentProps":{"estatParams":{"statsDataId":"0000010103","cdCat01":"C3706"}},"sourceName":null,"sourceLink":null,"rankingLink":null,"gridColumnSpan":12,"gridColumnSpanTablet":null,"gridColumnSpanSm":null,"dataSource":"ranking","section":null,"sortOrder":3},{"componentKey":"cmp-tourism-facilities","componentType":"line-chart","title":"宿泊施設の種別比較","componentProps":{"estatParams":[{"statsDataId":"0000010103","cdCat01":"C3803"},{"statsDataId":"0000010103","cdCat01":"C3801"},{"statsDataId":"0000010103","cdCat01":"C3805"}],"labels":["ホテル","旅館","簡易宿所"]},"sourceName":null,"sourceLink":null,"rankingLink":null,"gridColumnSpan":6,"gridColumnSpanTablet":null,"gridColumnSpanSm":null,"dataSource":"estat","section":null,"sortOrder":4},{"componentKey":"kpi-tourism-overnight","componentType":"kpi-card","title":"延べ宿泊者数","componentProps":{"estatParams":{"statsDataId":"0000010107","cdCat01":"G7101"}},"sourceName":"社会・人口統計体系","sourceLink":null,"rankingLink":null,"gridColumnSpan":6,"gridColumnSpanTablet":null,"gridColumnSpanSm":null,"dataSource":"ranking","section":null,"sortOrder":5},{"componentKey":"cmp-tourism-overnight-trend","componentType":"line-chart","title":"延べ宿泊者数の推移","componentProps":{"estatParams":[{"statsDataId":"0000010107","cdCat01":"G7101"},{"statsDataId":"0000010107","cdCat01":"G7102"}],"labels":["延べ宿泊者数","外国人延べ宿泊者数"],"yAxisConfig":{"mode":"auto"}},"sourceName":"社会・人口統計体系","sourceLink":null,"rankingLink":null,"gridColumnSpan":6,"gridColumnSpanTablet":null,"gridColumnSpanSm":null,"dataSource":"ranking","section":null,"sortOrder":6},{"componentKey":"kpi-tourism-jr-passengers","componentType":"kpi-card","title":"JR輸送人員","componentProps":{"estatParams":{"statsDataId":"0000010103","cdCat01":"C3704"}},"sourceName":"社会・人口統計体系","sourceLink":null,"rankingLink":null,"gridColumnSpan":6,"gridColumnSpanTablet":null,"gridColumnSpanSm":null,"dataSource":"ranking","section":null,"sortOrder":7},{"componentKey":"cmp-tourism-travel-rate","componentType":"line-chart","title":"旅行・行楽の年間行動者率の推移","componentProps":{"estatParams":{"statsDataId":"0000010207","cdCat01":"#G043061"}},"sourceName":"社会・人口統計体系","sourceLink":null,"rankingLink":null,"gridColumnSpan":6,"gridColumnSpanTablet":null,"gridColumnSpanSm":null,"dataSource":"ranking","section":null,"sortOrder":8},{"componentKey":"cmp-tourism-simple-lodging","componentType":"line-chart","title":"簡易宿所営業施設数の推移","componentProps":{"estatParams":{"statsDataId":"0000010103","cdCat01":"C3805"},"yAxisConfig":{"mode":"auto"}},"sourceName":"社会・人口統計体系","sourceLink":null,"rankingLink":null,"gridColumnSpan":6,"gridColumnSpanTablet":null,"gridColumnSpanSm":null,"dataSource":"ranking","section":null,"sortOrder":9},{"componentKey":"city-kpi-culture-kominkan","componentType":"kpi-card","title":"公民館数","componentProps":{"estatParams":{"statsDataId":"0000020207","cdCat01":"G1201"},"yAxisConfig":{"mode":"auto"}},"sourceName":null,"sourceLink":null,"rankingLink":null,"gridColumnSpan":3,"gridColumnSpanTablet":6,"gridColumnSpanSm":null,"dataSource":"estat","section":null,"sortOrder":10}]
+[
+  {
+    "componentKey": "cmp-tour-transport",
+    "componentType": "line-chart",
+    "title": "輸送機関別旅客数",
+    "componentProps": {
+      "estatParams": [
+        {
+          "statsDataId": "0000010103",
+          "cdCat01": "C3704"
+        },
+        {
+          "statsDataId": "0000010103",
+          "cdCat01": "C3705"
+        },
+        {
+          "statsDataId": "0000010103",
+          "cdCat01": "C3706"
+        },
+        {
+          "statsDataId": "0000010103",
+          "cdCat01": "C3707"
+        }
+      ],
+      "labels": [
+        "JR",
+        "民鉄",
+        "航空",
+        "旅客船"
+      ],
+      "yAxisConfig": {
+        "mode": "sync"
+      }
+    },
+    "sourceName": null,
+    "sourceLink": null,
+    "rankingLink": null,
+    "gridColumnSpan": 6,
+    "gridColumnSpanTablet": null,
+    "gridColumnSpanSm": null,
+    "dataSource": "estat",
+    "section": "輸送機関",
+    "sortOrder": 1
+  },
+  {
+    "componentKey": "kpi-tourism-hotels",
+    "componentType": "kpi-card",
+    "title": "ホテル営業施設数",
+    "componentProps": {
+      "estatParams": {
+        "statsDataId": "0000010103",
+        "cdCat01": "C3803"
+      }
+    },
+    "sourceName": null,
+    "sourceLink": null,
+    "rankingLink": null,
+    "gridColumnSpan": 12,
+    "gridColumnSpanTablet": null,
+    "gridColumnSpanSm": null,
+    "dataSource": "ranking",
+    "section": null,
+    "sortOrder": 1
+  },
+  {
+    "componentKey": "cmp-tour-hotel",
+    "componentType": "line-chart",
+    "title": "ホテル客室数の推移",
+    "componentProps": {
+      "estatParams": {
+        "statsDataId": "0000010103",
+        "cdCat01": "C3804"
+      },
+      "yAxisConfig": {
+        "mode": "sync"
+      }
+    },
+    "sourceName": null,
+    "sourceLink": null,
+    "rankingLink": null,
+    "gridColumnSpan": 6,
+    "gridColumnSpanTablet": null,
+    "gridColumnSpanSm": null,
+    "dataSource": "estat",
+    "section": "宿泊",
+    "sortOrder": 2
+  },
+  {
+    "componentKey": "kpi-tourism-ryokan",
+    "componentType": "kpi-card",
+    "title": "旅館営業施設数（ホテルを含む）",
+    "componentProps": {
+      "estatParams": {
+        "statsDataId": "0000010103",
+        "cdCat01": "C3801"
+      }
+    },
+    "sourceName": null,
+    "sourceLink": null,
+    "rankingLink": null,
+    "gridColumnSpan": 12,
+    "gridColumnSpanTablet": null,
+    "gridColumnSpanSm": null,
+    "dataSource": "ranking",
+    "section": null,
+    "sortOrder": 2
+  },
+  {
+    "componentKey": "cmp-tourism-occupancy",
+    "componentType": "line-chart",
+    "title": "客室稼働率の推移",
+    "componentProps": {
+      "estatParams": {
+        "statsDataId": "0000010207",
+        "cdCat01": "#G04308"
+      }
+    },
+    "sourceName": null,
+    "sourceLink": null,
+    "rankingLink": null,
+    "gridColumnSpan": 6,
+    "gridColumnSpanTablet": null,
+    "gridColumnSpanSm": null,
+    "dataSource": "estat",
+    "section": null,
+    "sortOrder": 3
+  },
+  {
+    "componentKey": "kpi-tourism-aviation",
+    "componentType": "kpi-card",
+    "title": "航空輸送人員",
+    "componentProps": {
+      "estatParams": {
+        "statsDataId": "0000010103",
+        "cdCat01": "C3706"
+      }
+    },
+    "sourceName": null,
+    "sourceLink": null,
+    "rankingLink": null,
+    "gridColumnSpan": 12,
+    "gridColumnSpanTablet": null,
+    "gridColumnSpanSm": null,
+    "dataSource": "ranking",
+    "section": null,
+    "sortOrder": 3
+  },
+  {
+    "componentKey": "cmp-tourism-facilities",
+    "componentType": "line-chart",
+    "title": "宿泊施設の種別比較",
+    "componentProps": {
+      "estatParams": [
+        {
+          "statsDataId": "0000010103",
+          "cdCat01": "C3803"
+        },
+        {
+          "statsDataId": "0000010103",
+          "cdCat01": "C3801"
+        },
+        {
+          "statsDataId": "0000010103",
+          "cdCat01": "C3805"
+        }
+      ],
+      "labels": [
+        "ホテル",
+        "旅館",
+        "簡易宿所"
+      ]
+    },
+    "sourceName": null,
+    "sourceLink": null,
+    "rankingLink": null,
+    "gridColumnSpan": 6,
+    "gridColumnSpanTablet": null,
+    "gridColumnSpanSm": null,
+    "dataSource": "estat",
+    "section": null,
+    "sortOrder": 4
+  },
+  {
+    "componentKey": "kpi-tourism-overnight",
+    "componentType": "kpi-card",
+    "title": "延べ宿泊者数",
+    "componentProps": {
+      "estatParams": {
+        "statsDataId": "0000010107",
+        "cdCat01": "G7101"
+      }
+    },
+    "sourceName": "社会・人口統計体系",
+    "sourceLink": null,
+    "rankingLink": null,
+    "gridColumnSpan": 6,
+    "gridColumnSpanTablet": null,
+    "gridColumnSpanSm": null,
+    "dataSource": "ranking",
+    "section": null,
+    "sortOrder": 5
+  },
+  {
+    "componentKey": "cmp-tourism-overnight-trend",
+    "componentType": "line-chart",
+    "title": "延べ宿泊者数の推移",
+    "componentProps": {
+      "estatParams": [
+        {
+          "statsDataId": "0000010107",
+          "cdCat01": "G7101"
+        },
+        {
+          "statsDataId": "0000010107",
+          "cdCat01": "G7102"
+        }
+      ],
+      "labels": [
+        "延べ宿泊者数",
+        "外国人延べ宿泊者数"
+      ],
+      "yAxisConfig": {
+        "mode": "auto"
+      }
+    },
+    "sourceName": "社会・人口統計体系",
+    "sourceLink": null,
+    "rankingLink": null,
+    "gridColumnSpan": 6,
+    "gridColumnSpanTablet": null,
+    "gridColumnSpanSm": null,
+    "dataSource": "ranking",
+    "section": null,
+    "sortOrder": 6
+  },
+  {
+    "componentKey": "kpi-tourism-jr-passengers",
+    "componentType": "kpi-card",
+    "title": "JR輸送人員",
+    "componentProps": {
+      "estatParams": {
+        "statsDataId": "0000010103",
+        "cdCat01": "C3704"
+      }
+    },
+    "sourceName": "社会・人口統計体系",
+    "sourceLink": null,
+    "rankingLink": null,
+    "gridColumnSpan": 6,
+    "gridColumnSpanTablet": null,
+    "gridColumnSpanSm": null,
+    "dataSource": "ranking",
+    "section": null,
+    "sortOrder": 7
+  },
+  {
+    "componentKey": "cmp-tourism-travel-rate",
+    "componentType": "line-chart",
+    "title": "旅行・行楽の年間行動者率の推移",
+    "componentProps": {
+      "estatParams": {
+        "statsDataId": "0000010207",
+        "cdCat01": "#G043061"
+      }
+    },
+    "sourceName": "社会・人口統計体系",
+    "sourceLink": null,
+    "rankingLink": null,
+    "gridColumnSpan": 6,
+    "gridColumnSpanTablet": null,
+    "gridColumnSpanSm": null,
+    "dataSource": "ranking",
+    "section": null,
+    "sortOrder": 8
+  },
+  {
+    "componentKey": "cmp-tourism-simple-lodging",
+    "componentType": "line-chart",
+    "title": "簡易宿所営業施設数の推移",
+    "componentProps": {
+      "estatParams": {
+        "statsDataId": "0000010103",
+        "cdCat01": "C3805"
+      },
+      "yAxisConfig": {
+        "mode": "auto"
+      }
+    },
+    "sourceName": "社会・人口統計体系",
+    "sourceLink": null,
+    "rankingLink": null,
+    "gridColumnSpan": 6,
+    "gridColumnSpanTablet": null,
+    "gridColumnSpanSm": null,
+    "dataSource": "ranking",
+    "section": null,
+    "sortOrder": 9
+  }
+]
