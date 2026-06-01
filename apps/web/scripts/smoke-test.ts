@@ -57,9 +57,15 @@ const testCases: SmokeTestCase[] = [
     expectedTexts: ["北海道"],
   },
   {
-    // non-indexable かつ テーママップ外は 410
-    name: "都道府県カテゴリ（北海道・気象、テーマなし）— 410 期待",
+    // landweather → climate テーマへ 301 リダイレクト (2026-06-02)
+    name: "都道府県カテゴリ（北海道・気象）→ climate テーマへ 301",
     path: "/areas/01000/landweather",
+    expectedStatus: 301,
+  },
+  {
+    // テーママップ外かつ非 indexable は 410
+    name: "都道府県カテゴリ（北海道・エネルギー）— 410 期待",
+    path: "/areas/01000/energy",
     expectedStatus: 410,
   },
   {
