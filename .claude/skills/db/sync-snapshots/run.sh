@@ -40,6 +40,8 @@ declare -a TASKS=(
   "fishing-ports|apps/web/scripts/export-fishing-ports-snapshot.ts"
   "port-statistics|apps/web/scripts/export-port-statistics-snapshot.ts"
   "station-passengers|apps/web/scripts/export-station-passengers-snapshot.ts"
+  "migration-flow|apps/web/scripts/export-migration-flow-r2.ts"
+  "finance-flow|apps/web/scripts/generate-finance-flow.ts"
 )
 
 run_task() {

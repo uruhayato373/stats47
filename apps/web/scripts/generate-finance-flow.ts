@@ -13,7 +13,8 @@ import { resolve } from "node:path";
 
 import { readStatsValues } from "@stats47/stats-r2/readers";
 
-const OUT_DIR = resolve(__dirname, "../public/finance-flow");
+// R2 SSOT: ローカル R2 FS tier に出力 → diff-push-r2 --prefix app/finance-flow で R2 反映
+const OUT_DIR = resolve(__dirname, "../../../.local/r2/app/finance-flow");
 
 /** 歳入の財源 (金額メトリクス) */
 const REVENUE: ReadonlyArray<{ metric: string; name: string }> = [
