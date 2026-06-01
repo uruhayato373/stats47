@@ -8,6 +8,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import { fetchPrefectures, REGIONS } from "@stats47/area";
 import {
   readRankingValuesFromR2,
   readTopRankingValuesBatchFromR2,
@@ -206,6 +207,10 @@ export default async function CategoryPage({ params }: PageProps) {
 
   const r2Url = process.env.NEXT_PUBLIC_R2_PUBLIC_URL || "https://storage.stats47.jp";
 
+  // 都道府県プロフィール (/areas/[code]) への内部リンク用 (静的・同期読み取り。SSG-safe)
+  const prefectures = fetchPrefectures();
+  const prefMap = new Map(prefectures.map((p) => [p.prefCode, p]));
+
   if (rankingItems.length === 0) {
     notFound();
   }
@@ -309,6 +314,45 @@ export default async function CategoryPage({ params }: PageProps) {
               />
             </section>
           )}
+
+          {/* 47都道府県から探す (category→area 内部リンク。回遊性 / クロール深度の改善) */}
+          <section className="mb-8" aria-labelledby="category-area-links">
+            <SectionEyebrow number={nativeBanners.length > 0 ? "4." : "3."}>
+              <span id="category-area-links">47都道府県から探す</span>
+            </SectionEyebrow>
+            <p className="mb-4 text-sm text-muted-foreground">
+              {category.categoryName}を含む各都道府県の統計プロファイルを見る
+            </p>
+            <div className="space-y-4">
+              {REGIONS.map((region) => {
+                const regionPrefs = region.prefectures
+                  .map((code) => prefMap.get(code))
+                  .filter((p): p is NonNullable<typeof p> => p != null);
+                const headingId = `category-region-${region.regionCode}`;
+                return (
+                  <section key={region.regionCode} aria-labelledby={headingId}>
+                    <h3
+                      id={headingId}
+                      className="mb-1 text-sm font-semibold text-muted-foreground"
+                    >
+                      {region.regionName}
+                    </h3>
+                    <div className="flex flex-wrap gap-x-3 gap-y-1">
+                      {regionPrefs.map((pref) => (
+                        <Link
+                          key={pref.prefCode}
+                          href={`/areas/${pref.prefCode}`}
+                          className="text-sm text-foreground transition-colors hover:text-primary"
+                        >
+                          {pref.prefName}
+                        </Link>
+                      ))}
+                    </div>
+                  </section>
+                );
+              })}
+            </div>
+          </section>
         </main>
 
         {/* 右サイドバー（lg+、360px、independent scroll で全 widget 到達可能） */}
