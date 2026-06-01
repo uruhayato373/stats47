@@ -12,9 +12,10 @@ import {
 
 import { PREFECTURES } from "@/features/migration-flow";
 
+import { FinanceSankey } from "./FinanceSankey";
+
 import type { FinanceFlowData } from "../lib/types";
 
-import { FinanceSankey } from "./FinanceSankey";
 
 interface Props {
   /** SSG 時にサーバーが R2 から読んだ既定県データ */

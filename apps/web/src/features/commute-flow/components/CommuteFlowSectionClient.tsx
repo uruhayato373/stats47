@@ -12,9 +12,10 @@ import {
 
 import { PREFECTURES } from "@/features/migration-flow";
 
+import { CommuteSankey } from "./CommuteSankey";
+
 import type { CommuteFlowData } from "../lib/types";
 
-import { CommuteSankey } from "./CommuteSankey";
 
 interface Props {
   /** SSG 時にサーバーが R2 から読んだ既定県データ */

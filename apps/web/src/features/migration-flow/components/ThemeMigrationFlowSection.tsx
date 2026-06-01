@@ -1,7 +1,9 @@
 import { fetchFromR2AsJson } from "@stats47/r2-storage/server";
-import type { MigrationFlowData } from "@stats47/migration-flow";
 
 import { MigrationFlowSectionClient } from "./MigrationFlowSectionClient";
+
+import type { MigrationFlowData } from "@stats47/migration-flow";
+
 
 /**
  * 人口移動フロー セクション（async server）。

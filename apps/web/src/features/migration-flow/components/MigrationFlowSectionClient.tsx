@@ -11,11 +11,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@stats47/components/atoms/ui/select";
-import type { MigrationFlowData } from "@stats47/migration-flow";
+
 
 import { PREFECTURES } from "../lib/prefectures";
 
 import { MigrationSankey } from "./MigrationSankey";
+
+import type { MigrationFlowData } from "@stats47/migration-flow";
 
 const MigrationFlowPlayer = dynamic(
   () => import("./MigrationFlowPlayer").then((m) => m.MigrationFlowPlayer),

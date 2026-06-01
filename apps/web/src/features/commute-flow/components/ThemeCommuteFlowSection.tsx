@@ -1,8 +1,9 @@
 import { fetchFromR2AsJson } from "@stats47/r2-storage/server";
 
+import { CommuteFlowSectionClient } from "./CommuteFlowSectionClient";
+
 import type { CommuteFlowData } from "../lib/types";
 
-import { CommuteFlowSectionClient } from "./CommuteFlowSectionClient";
 
 /**
  * 通勤フロー セクション（async server）。

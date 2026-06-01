@@ -1,8 +1,9 @@
 import { fetchFromR2AsJson } from "@stats47/r2-storage/server";
 
+import { FinanceFlowSectionClient } from "./FinanceFlowSectionClient";
+
 import type { FinanceFlowData } from "../lib/types";
 
-import { FinanceFlowSectionClient } from "./FinanceFlowSectionClient";
 
 /**
  * 財政フロー セクション（async server）。
