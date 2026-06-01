@@ -16,7 +16,7 @@ import type { Metadata } from "next";
 
 
 export function generateMetadata(): Metadata {
-  const title = "テーマダッシュボード一覧 - 統計で見る都道府県";
+  const title = "テーマダッシュボード一覧";
   const description =
     "少子高齢化・労働・医療・観光・物価・外国人など、テーマ別に都道府県の統計データをダッシュボードで比較分析";
   return {
