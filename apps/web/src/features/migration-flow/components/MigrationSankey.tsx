@@ -31,17 +31,20 @@ const fmt = (n: number) => n.toLocaleString("ja-JP");
 interface Props {
   /** 焦点県の 2 桁コード */
   code: string;
+  /** SSG 時にサーバーが R2 から読んだ既定県データ（あれば初回 fetch を省略） */
+  initialData?: MigrationFlowData;
 }
 
-export function MigrationSankey({ code }: Props) {
-  const [data, setData] = useState<{ code: string; data: MigrationFlowData } | null>(
-    null,
+export function MigrationSankey({ code, initialData }: Props) {
+  const [data, setData] = useState<{ code: string; data: MigrationFlowData } | null>(() =>
+    initialData && initialData.focusCode === code ? { code, data: initialData } : null,
   );
   const [errored, setErrored] = useState<string | null>(null);
 
   useEffect(() => {
+    if (data?.code === code) return; // 既に保持（initialData or 取得済）
     let cancelled = false;
-    fetch(`/migration-flow/${code}.json`)
+    fetch(`/api/flow/migration/${code}`)
       .then((r) => {
         if (!r.ok) throw new Error(String(r.status));
         return r.json() as Promise<MigrationFlowData>;
@@ -58,7 +61,7 @@ export function MigrationSankey({ code }: Props) {
     return () => {
       cancelled = true;
     };
-  }, [code]);
+  }, [code, data]);
 
   const ready = data?.code === code;
   const view = useMemo(() => {

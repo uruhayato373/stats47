@@ -26,15 +26,20 @@ const fmt = (n: number) => n.toLocaleString("ja-JP");
 interface Props {
   /** 焦点県の 2 桁コード */
   code: string;
+  /** SSG 時にサーバーが R2 から読んだ既定県データ（あれば初回 fetch を省略） */
+  initialData?: CommuteFlowData;
 }
 
-export function CommuteSankey({ code }: Props) {
-  const [data, setData] = useState<{ code: string; data: CommuteFlowData } | null>(null);
+export function CommuteSankey({ code, initialData }: Props) {
+  const [data, setData] = useState<{ code: string; data: CommuteFlowData } | null>(() =>
+    initialData && initialData.focusCode === code ? { code, data: initialData } : null,
+  );
   const [errored, setErrored] = useState<string | null>(null);
 
   useEffect(() => {
+    if (data?.code === code) return; // 既に保持（initialData or 取得済）
     let cancelled = false;
-    fetch(`/commute-flow/${code}.json`)
+    fetch(`/api/flow/commute/${code}`)
       .then((r) => {
         if (!r.ok) throw new Error(String(r.status));
         return r.json() as Promise<CommuteFlowData>;
@@ -51,7 +56,7 @@ export function CommuteSankey({ code }: Props) {
     return () => {
       cancelled = true;
     };
-  }, [code]);
+  }, [code, data]);
 
   const ready = data?.code === code;
   const view = useMemo(() => {

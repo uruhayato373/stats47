@@ -32,10 +32,10 @@ export async function loadMigrationFlowBundle(
   const [topology, cityTopology, data, municipalities] = await Promise.all([
     prefectureTopologyPromise,
     fetch(`/api/mf-topo/${code}`).then((r) => r.json() as Promise<Topology>),
-    fetch(`/migration-flow/${code}.json`).then(
+    fetch(`/api/flow/migration/${code}`).then(
       (r) => r.json() as Promise<MigrationFlowData>,
     ),
-    fetch(`/migration-flow/municipalities/${code}.json`).then(
+    fetch(`/api/flow/migration-muni/${code}`).then(
       (r) => r.json() as Promise<MunicipalityData>,
     ),
   ]);
