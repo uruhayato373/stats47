@@ -626,6 +626,12 @@ Cloudflare Pages env vars に以下を追加 (現状は未設定で内部 fallba
   - **T3-残** (tier 2): `MetricConfig`/`YearSpec` 等の `@stats47/types` 一次源化（data-configs↔types の依存方向再設計・cycle 回避）。
   - **T4-残** (tier 3): `createMetric()` への **2209 file の段階移行（codemod）** → registry.ts(4439 行) のカテゴリ別分割 or glob 遅延ロード → SEO/UI メタ分離。基盤は導入済なので新規 metric から順次 createMetric 利用。
   - **T5-残** (tier 3): GenericSankey による JSX 全抽象化（視覚回帰リスクのため要 Playwright 目視）。
-  - **T6-残** (tier 3): ⚠️ **前提作業あり** — knip が Next.js app router の entry 未設定のため `unused files` が信頼不能（live な feature/lib/`config/test.setup.tsx`/テスト済 util を多数 false-positive 列挙）。`knip.config.ts` に Next.js entry（`app/**/{page,layout,route,...}.tsx`, `sitemap/robots/manifest/opengraph-image`）を設定して**シグナルを信頼可能にしてから** bulk 削除する。それまでは手動参照確認できた leaf のみ削除可。`.claude/scripts`・`remotion/scripts` は `node` 動的起動で常に false-positive。
+  - **T6-残** (tier 3): ⚠️ **「単純な dead-code 削除」ではないと判明（2026-06-02 深掘り）**。
+    - `knip.config.ts` の Next.js entry を拡充済（sitemap/robots/manifest/opengraph-image/global-error/middleware/test.setup）。これで `config/test.setup.tsx` 等の明白な false-positive は解消。
+    - しかし残る flagged の多くは **`/ports`・`/fishing-ports` ルートの半端な廃止**に起因。両ルートは 2026-05-28 (`709a704`) に `/themes` へ統合・middleware で 301 済 → **feature の UI（components/page）は orphan**。
+    - **だが** `port-statistics`/`fishing-ports` の `lib`/型は **R2 export パイプラインがまだ使用**（`apps/web/scripts/export-fishing-ports-snapshot.ts` が `FishingPortData` を import、`sync-snapshots/run.sh` に残存）。→ **UI dead + データ層 live の混在**。blind 削除は export を壊す。
+    - 正しい対処は「UI を消し、export が要る型だけ残す/移設」する**整理 PR**であり、`/themes` のデータフロー把握 + オーナー判断（旧 `app/ports`・`app/fishing-ports` snapshot を残すか）が前提。
+    - また `r2-storage-design.md` の URL 表が `/ports`・`/fishing-ports` を live として記載しており **stale**（要更新）。
+    - 結論: bulk 削除は不可。verified leaf（CountUp/ScrollReveal/MobileNavigation）のみ削除済。残りは半廃止の untangle が本質。
 - **着手判断**: いずれも単独 PR + `next build` の SSG 区分確認を伴う規模。
 - **関連**: `docs/04_レビュー/critical-review/2026-06-01-codebase-optimization.md` (§実施状況 / deferred 理由)
