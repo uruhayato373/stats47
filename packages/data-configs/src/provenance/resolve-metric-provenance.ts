@@ -24,7 +24,8 @@ type SsdsEntry = { kind: string; originalSurveys: ProvenanceSurvey[] };
 const SSDS_PROVENANCE = ssdsProvenanceJson as Record<string, SsdsEntry>;
 
 const SSDS_DISPLAY_NAME = "社会・人口統計体系";
-const KAKEI_SURVEY: ProvenanceSurvey = { id: "household-survey", name: "家計調査" };
+// kind:"kakei-chousa" は家計調査（品目別）= survey マスタの "kakei-chousa" バケット
+const KAKEI_SURVEY: ProvenanceSurvey = { id: "kakei-chousa", name: "家計調査（品目別）" };
 
 function dedupe(surveys: ProvenanceSurvey[]): ProvenanceSurvey[] {
   const seen = new Map<string, ProvenanceSurvey>();
@@ -65,17 +66,16 @@ function resolveCalculated(
 }
 
 /**
- * metric の原典調査を解決する。解決できない場合は空配列を返す
- * (auto-slug で偽の survey を作らず、未解決を可視化する方針)。
+ * SourceConfig 単体から原典調査を解決する。metric 全体を持たない呼び出し元
+ * (exporter が RankingItem.sourceConfig から解決する等) はこちらを使う。
  *
- * @param registry calculated metric の分子/分母を辿るために必要 (任意)
+ * @param registry calculated source の分子/分母を辿るために必要 (任意)
  */
-export function resolveMetricProvenance(
-  metric: MetricConfig,
+export function resolveSourceProvenance(
+  source: SourceConfig,
   registry?: MetricRegistry,
   depth = 0,
 ): ProvenanceSurvey[] {
-  const source = metric.source;
   switch (source.kind) {
     case "kakei-chousa":
       return [KAKEI_SURVEY];
@@ -91,4 +91,18 @@ export function resolveMetricProvenance(
     default:
       return [];
   }
+}
+
+/**
+ * metric の原典調査を解決する。解決できない場合は空配列を返す
+ * (auto-slug で偽の survey を作らず、未解決を可視化する方針)。
+ *
+ * @param registry calculated metric の分子/分母を辿るために必要 (任意)
+ */
+export function resolveMetricProvenance(
+  metric: MetricConfig,
+  registry?: MetricRegistry,
+  depth = 0,
+): ProvenanceSurvey[] {
+  return resolveSourceProvenance(metric.source, registry, depth);
 }

@@ -18,8 +18,8 @@ function metric(source: MetricConfig["source"]): MetricConfig {
 const ids = (m: MetricConfig) => resolveMetricProvenance(m).map((s) => s.id).sort();
 
 describe("resolveMetricProvenance", () => {
-  it("家計調査 (kakei-chousa) は household-survey へ", () => {
-    expect(ids(metric({ kind: "kakei-chousa" }))).toEqual(["household-survey"]);
+  it("家計調査（品目別, kakei-chousa kind）は kakei-chousa survey へ", () => {
+    expect(ids(metric({ kind: "kakei-chousa" }))).toEqual(["kakei-chousa"]);
   });
 
   it("一次統計 estat は displayName で survey へ", () => {

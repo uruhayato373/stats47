@@ -132,17 +132,36 @@ kind別: estat 95.2% / kakei-chousa 100% / mlit 100% / external 44.1%。
 > 検証: 動作実績のある詳細ページと同一の import・戻り型を使う外科的置換。R2 書き込みを伴わない
 > 純粋なリード経路の最適化のため、本番デプロイで挙動は不変 (件数表示は同じ、fetch 回数のみ激減)。
 
-### Phase 5 — exporter 焼き込み + UI 表示 + 再分配 (要 CI)
+### Phase 5 — SSDS バケット再分配 + originalSurveys 焼き込み (コード完成 / CI 適用待ち) ✅🔶
 
-> ⚠️ R2 書き込みは CI 専用 (`.claude/rules/r2-storage-design.md`)。exporter 出力はローカルで検証
-> できないため、CI (`sync-snapshots.yml`) での dry-run 確認とセットで実施する。blast radius 大。
+> ⚠️ R2 書き込みは CI 専用 (`.claude/rules/r2-storage-design.md`)。実 snapshot への反映は
+> `sync-snapshots.yml` (master タスク) の実行で適用される。ロジックはローカルで unit テスト済。
 
-- exporter (`ranking-items-per-url-snapshot.ts`) で `resolveMetricProvenance` を呼び、snapshot に
-  `originalSurveys[]` を焼き込む。ranking package → data-configs 依存を追加。
-- ranking item の旧 `survey_id` (D1 由来の非正規化値) を同マッピング由来へ統一 (drift 解消)。
-- `ssds` バケット 200 件を originalSurveys ベースで本来の調査へ再分配。
+**ドリフト実測 (再分配の根拠)**: `scripts/ssds/report-survey-bucket-drift.ts` (R2 公開 URL から読取):
+- SSDS 由来 item: **62.9% (564/897) がミスバケット** (例: 事業所数 C2101 が census バケットに誤入、
+  labor-force-survey バケットの 65/65 が実は SSDS item)。
+- 非SSDS item: resolver 一致率 **95.5%** → baked surveyId は一次統計で正しい。
+- → **再分配は SSDS 由来 item に限定**するのが安全と確定。
+
+成果:
+- `packages/data-configs`: `resolveSourceProvenance(source)` を切り出し index から export。
+  `@stats47/data-configs` を root tsconfig paths に追加 (欠落していた)。
+- `packages/ranking/src/exporters/survey-bucketing.ts` — 純粋関数 `surveyBucketsForItem(item)`:
+  SSDS item は sourceConfig.cdCat01 → 原典 survey へ再分配 (複数原典は複数バケット)、非SSDS は baked 維持。
+  解決不能・合成 id (`ssds-src:`/`src:` = master 不在) は **baked にフォールバック** (孤児バケット/regression 防止)。
+- `survey-bucketing.test.ts` — 7 ケース (tsx で全 pass 確認)。
+- exporter (`ranking-items-per-url-snapshot.ts`) を 1-pass の `itemsBySurvey` Map に書換え、
+  survey items.json に `originalSurveys[]` を焼き込み。
+
+検証: `cd packages/ranking` で純粋関数を tsx 実行 (C2101→establishment-enterprise-census 是正等を確認)。
+R2 反映後に `/survey` バケットが原典ベースへ是正される。
+
+### Phase 6 — UI 出典表示 + 整合性自動チェック (残)
+
+- 時系列 (theme-dashboard) / 円グラフ (CompositionChart) の snapshot に originalSurveys を載せ、
+  「出典: ◯◯調査」表示を追加。
 - all.json ↔ items.json 整合性チェック (現状 41 survey 中 4 件が items.json 404) を生成器に追加。
-- 時系列 (theme-dashboard) / 円グラフ (CompositionChart) に「出典: ◯◯調査」表示。
+- ranking item.json 自体の baked `survey_id` も同マッピング由来へ統一 (現状は survey バケットのみ是正)。
 
 ### Phase 4 — survey ページの是正 + 再分配
 
