@@ -157,7 +157,7 @@ export default async function HomePage() {
   return (
     <div className="w-full" suppressHydrationWarning>
       {/* ① Hero (暗色 — ブランドのエントリー) */}
-      <section className="px-4 pt-4 pb-2">
+      <section className="px-4 sm:px-6 pt-4 pb-2">
         <div className="mx-auto max-w-[1700px]">
           <HeroShell variant="dark">
             <div className="grid grid-cols-1 gap-8 p-8 lg:grid-cols-[1fr,360px] lg:items-center lg:p-10">
@@ -211,7 +211,7 @@ export default async function HomePage() {
       <FeaturedRankings limit={8} />
 
       {/* ③ 3 切り口の discovery (検索意図に最短接続) */}
-      <section className="px-4 py-8">
+      <section className="px-4 sm:px-6 py-8">
         <div className="mx-auto max-w-[1700px]">
           <h2 className="mb-4 text-lg font-bold">データを探す</h2>
           <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
@@ -219,7 +219,7 @@ export default async function HomePage() {
               const Icon = card.icon;
               return (
                 <Link
-                  key={card.href}
+                  key={card.title}
                   href={card.href}
                   className="group flex items-start gap-3 rounded-xl border border-border bg-card p-4 shadow-sm transition-all hover:border-primary/40 hover:shadow-md"
                 >
@@ -243,7 +243,7 @@ export default async function HomePage() {
 
       {/* ④ 統計ブログ */}
       {latestArticles.length > 0 && (
-        <section className="px-4 py-8">
+        <section className="px-4 sm:px-6 py-8">
           <div className="mx-auto max-w-[1700px]">
             <div className="mb-4 flex items-center justify-between">
               <h2 className="text-lg font-bold">統計ブログ</h2>
@@ -289,7 +289,7 @@ export default async function HomePage() {
       )}
 
       {/* ⑤ ふるさと納税 4 県ネイティブ枠 (マスタープラン § 5.3) */}
-      <section className="px-4 py-8">
+      <section className="px-4 sm:px-6 py-8">
         <div className="mx-auto max-w-[1700px]">
           <div
             className="overflow-hidden rounded-2xl border border-amber-200 shadow-sm"
@@ -360,7 +360,7 @@ export default async function HomePage() {
       </section>
 
       {/* ⑥ データパック CTA (マスタープラン § 3.3) */}
-      <section className="px-4 py-8">
+      <section className="px-4 sm:px-6 py-8">
         <div className="mx-auto max-w-[1700px]">
           <div
             className="flex flex-col items-start gap-4 rounded-2xl border border-primary/20 p-6 shadow-sm sm:flex-row sm:items-center"
@@ -403,7 +403,7 @@ export default async function HomePage() {
       </section>
 
       {/* ⑦ 次に読む (回遊リンク強化) */}
-      <section className="px-4 pb-8">
+      <section className="px-4 sm:px-6 pb-8">
         <div className="mx-auto max-w-[1700px]">
           <NextUpGrid
             title="このサイトの主要ページ"
@@ -452,7 +452,7 @@ export default async function HomePage() {
       </section>
 
       {/* ⑧ AdSense (footer) */}
-      <div className="my-6 flex justify-center px-4">
+      <div className="my-6 flex justify-center px-4 sm:px-6">
         <AdSenseAd
           format={RANKING_PAGE_FOOTER.format}
           slotId={RANKING_PAGE_FOOTER.slotId}
