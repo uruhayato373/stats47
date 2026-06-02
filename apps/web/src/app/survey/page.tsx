@@ -8,8 +8,7 @@ import Link from "next/link";
 
 
 import {
-  readActiveRankingKeysFromR2,
-  readRankingItemFromR2,
+  readRankingItemsBySurveyFromR2,
   readSurveysFromR2,
 } from "@stats47/ranking/server";
 import { isOk } from "@stats47/types";
@@ -37,21 +36,16 @@ export default async function SurveyIndexPage() {
   const surveysResult = await readSurveysFromR2();
   const surveys = isOk(surveysResult) ? surveysResult.data : [];
 
-  // 各調査のランキング件数を ranking_items snapshot から集計（D1 read 不要）
-  const countMap = new Map<string, number>();
-  const keysResult = await readActiveRankingKeysFromR2("prefecture");
-  if (isOk(keysResult)) {
-    for (const { rankingKey, areaType } of keysResult.data) {
-      const itemResult = await readRankingItemFromR2(
-        rankingKey,
-        areaType as "prefecture" | "city" | "national",
-      );
-      if (!isOk(itemResult) || !itemResult.data) continue;
-      const sid = itemResult.data.surveyId;
-      if (!sid) continue;
-      countMap.set(sid, (countMap.get(sid) ?? 0) + 1);
-    }
-  }
+  // 各調査の件数は per-survey items.json (app/survey/{id}/items.json) の length から取得する。
+  // 旧実装は全 ranking item を 1 件ずつ fetch して surveyId を数える N+1 だった (数千 fetch)。
+  // survey 単位の snapshot が既に存在するため、調査数 (~40) ぶんの並列 fetch で済む。
+  const counts = await Promise.all(
+    surveys.map(async (s) => {
+      const result = await readRankingItemsBySurveyFromR2(s.id);
+      return [s.id, isOk(result) ? result.data.length : 0] as const;
+    }),
+  );
+  const countMap = new Map<string, number>(counts);
 
   // ssds は件数が多いが実質「分類不明」なので末尾に移動
   const sortedSurveys = surveys.filter((s) => {

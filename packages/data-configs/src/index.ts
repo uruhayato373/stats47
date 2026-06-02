@@ -13,3 +13,8 @@ export {
   listCategories,
   type CategoryMeta,
 } from "./categories";
+export {
+  resolveMetricProvenance,
+  resolveSourceProvenance,
+  type ProvenanceSurvey,
+} from "./provenance/resolve-metric-provenance";
