@@ -106,7 +106,10 @@ function main() {
     const s = r.subtitle.trim();
     if (looksLikeNote(s)) {
       warns.push(`[subtitle-note] ${r.file}: 注釈は subtitle でなく note へ 「${s.slice(0, 40)}」`);
-    } else if (r.title && (s === r.title || r.title.includes(s) || s.includes(r.title))) {
+    } else if (r.title && (s === r.title || r.title.includes(s))) {
+      // 真の冗長 = subtitle が title と同一/部分集合。
+      // subtitle が title を包含する (s.includes(title)) ケースは「定義の追加情報」なので
+      // 冗長ではない (例: title「乳用牛飼養頭数」/ subtitle「乳用牛(めす)の飼養頭数合計」)。
       warns.push(`[subtitle-redundant] ${r.file}: subtitle が title と冗長 「${s.slice(0, 30)}」`);
     }
   }
