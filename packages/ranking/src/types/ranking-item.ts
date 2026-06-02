@@ -158,10 +158,13 @@ export interface CalculationConfig {
 }
 
 /**
- * データソース設定
- * DBカラム: source_config (JSON)
+ * データソースの出典・系列メタ（表示用 provenance）。
+ * DBカラム: source_config (JSON) / RankingItem.sourceConfig に格納。
+ *
+ * 注: 取り込み設定の `SourceConfig`（`@stats47/data-configs` の discriminated union
+ * `{ kind: "estat" | ... }`）とは**別概念**。名前衝突を避けるため本型は SourceProvenance とする。
  */
-export interface SourceConfig {
+export interface SourceProvenance {
   /** e-Stat 固有: データベース・系列名 (例: "社会・人口統計体系") */
   collection?: {
     name: string;
@@ -255,7 +258,7 @@ export interface RankingItem {
   /** データソースID */
   dataSourceId: string;
   /** データ取得設定 (e-Statパラメータ等) */
-  sourceConfig?: SourceConfig | null;
+  sourceConfig?: SourceProvenance | null;
   /** 出典情報（名前とURL） */
   source?: { name: string; url: string };
 

@@ -8,7 +8,7 @@ import {
   useState,
 } from "react";
 
-import { Button } from "@stats47/components";
+import { Button, Slider } from "@stats47/components";
 import { geoMercator, geoPath } from "d3-geo";
 import { scaleDiverging } from "d3-scale";
 import { interpolateRdBu } from "d3-scale-chromatic";
@@ -299,12 +299,12 @@ export function MetricYoyChoroplethSection({
         >
           {isPlaying ? "⏸ 一時停止" : "▶ 再生"}
         </Button>
-        <input
-          type="range"
+        <Slider
           min={0}
           max={timeseries.frames.length - 1}
-          value={frameIndex}
-          onChange={(e) => handleScrubber(Number(e.target.value))}
+          step={1}
+          value={[frameIndex]}
+          onValueChange={(v) => handleScrubber(v[0])}
           className="flex-1"
           aria-label="年スクラバー"
         />

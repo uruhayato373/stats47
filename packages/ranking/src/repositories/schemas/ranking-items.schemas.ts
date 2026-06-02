@@ -13,7 +13,7 @@ import "server-only";
 import { logger } from "@stats47/logger/server";
 import type { AreaType } from "@stats47/types";
 import { z } from "zod";
-import type { RankingItem, SourceConfig } from "../../types";
+import type { RankingItem, SourceProvenance } from "../../types";
 
 // 文字列としての "null" を null に変換するプレプロセス関数
 const normalizeNull = (val: unknown) => (val === "null" ? null : val);
@@ -67,7 +67,7 @@ const CalculationConfigSchema = z.object({
   normalizationOptions: z.array(NormalizationOptionSchema).nullable().optional().transform(v => v ?? undefined),
 });
 
-const SourceConfigSchema = z.object({
+const SourceProvenanceSchema = z.object({
   collection: z.object({
     name: z.string(),
     url: z.string().optional(),
@@ -124,7 +124,7 @@ export const RankingItemDBSchema = z.object({
 
   survey_id: z.string().nullable().optional().transform(v => v ?? undefined),
   data_source_id: z.string().default('estat'),
-  source_config: parseJsonColumn(SourceConfigSchema).transform(v => v as SourceConfig | undefined),
+  source_config: parseJsonColumn(SourceProvenanceSchema).transform(v => v as SourceProvenance | undefined),
   value_display_config: parseJsonColumn(ValueDisplayConfigSchema),
   visualization_config: parseJsonColumn(VisualizationConfigSchema),
   calculation_config: parseJsonColumn(CalculationConfigSchema),

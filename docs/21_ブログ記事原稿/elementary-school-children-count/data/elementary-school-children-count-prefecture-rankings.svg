@@ -1,0 +1,91 @@
+<!-- data-source: elementary-school-children-count-prefecture-rankings.json | generated: 2026-06-02T05:22:34.366Z -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 480" width="680" height="480" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" role="img" aria-label="小学校児童数 都道府県ランキング（2024年度）">
+  <rect width="680" height="480" fill="#fafafa" rx="8"/>
+  <text x="340" y="24" text-anchor="middle" font-size="16" font-weight="bold" fill="#222">小学校児童数 都道府県ランキング（2024年度）</text>
+  
+  <text x="227.5" y="54" text-anchor="middle" font-size="12" font-weight="bold" fill="#1565c0">上位 10</text>
+  <text x="542.5" y="54" text-anchor="middle" font-size="12" font-weight="bold" fill="#c62828">下位 10</text>
+  
+      <text x="84" y="82" text-anchor="end" font-size="11" fill="#333">東京都</text>
+      <rect x="90" y="63" width="195" height="30" fill="#1565c0" rx="2"/>
+      <text x="289" y="82" font-size="10" fill="#333">620624人</text>
+    
+      <text x="84" y="118" text-anchor="end" font-size="11" fill="#333">神奈川県</text>
+      <rect x="90" y="99" width="136.1516151486246" height="30" fill="#1976d2" rx="2"/>
+      <text x="230.1516151486246" y="118" font-size="10" fill="#333">433328人</text>
+    
+      <text x="84" y="154" text-anchor="end" font-size="11" fill="#333">大阪府</text>
+      <rect x="90" y="135" width="126.9380172213772" height="30" fill="#1e88e5" rx="2"/>
+      <text x="220.9380172213772" y="154" font-size="10" fill="#333">404004人</text>
+    
+      <text x="84" y="190" text-anchor="end" font-size="11" fill="#333">愛知県</text>
+      <rect x="90" y="171" width="122.29665626852973" height="30" fill="#2196f3" rx="2"/>
+      <text x="216.29665626852972" y="190" font-size="10" fill="#333">389232人</text>
+    
+      <text x="84" y="226" text-anchor="end" font-size="11" fill="#333">埼玉県</text>
+      <rect x="90" y="207" width="110.36837118770787" height="30" fill="#42a5f5" rx="2"/>
+      <text x="204.36837118770785" y="226" font-size="10" fill="#333">351268人</text>
+    
+      <text x="84" y="262" text-anchor="end" font-size="11" fill="#333">千葉県</text>
+      <rect x="90" y="243" width="92.90859683157596" height="30" fill="#64b5f6" rx="2"/>
+      <text x="186.90859683157595" y="262" font-size="10" fill="#333">295699人</text>
+    
+      <text x="84" y="298" text-anchor="end" font-size="11" fill="#333">福岡県</text>
+      <rect x="90" y="279" width="85.35208918765629" height="30" fill="#90caf9" rx="2"/>
+      <text x="179.3520891876563" y="298" font-size="10" fill="#333">271649人</text>
+    
+      <text x="84" y="334" text-anchor="end" font-size="11" fill="#333">兵庫県</text>
+      <rect x="90" y="315" width="83.20201925803708" height="30" fill="#1565c0" rx="2"/>
+      <text x="177.20201925803707" y="334" font-size="10" fill="#333">264806人</text>
+    
+      <text x="84" y="370" text-anchor="end" font-size="11" fill="#333">北海道</text>
+      <rect x="90" y="351" width="67.89482843074067" height="30" fill="#1976d2" rx="2"/>
+      <text x="161.8948284307407" y="370" font-size="10" fill="#333">216088人</text>
+    
+      <text x="84" y="406" text-anchor="end" font-size="11" fill="#333">静岡県</text>
+      <rect x="90" y="387" width="53.671627265461865" height="30" fill="#1e88e5" rx="2"/>
+      <text x="147.67162726546186" y="406" font-size="10" fill="#333">170820人</text>
+    
+  
+      <text x="399" y="82" text-anchor="end" font-size="11" fill="#333">鳥取県</text>
+      <rect x="405" y="63" width="8.364001392147257" height="30" fill="#c62828" rx="2"/>
+      <text x="417.36400139214726" y="82" font-size="10" fill="#333">26620人</text>
+    
+      <text x="399" y="118" text-anchor="end" font-size="11" fill="#333">高知県</text>
+      <rect x="405" y="99" width="9.311314096780015" height="30" fill="#d32f2f" rx="2"/>
+      <text x="418.31131409678" y="118" font-size="10" fill="#333">29635人</text>
+    
+      <text x="399" y="154" text-anchor="end" font-size="11" fill="#333">島根県</text>
+      <rect x="405" y="135" width="9.98684388615329" height="30" fill="#e53935" rx="2"/>
+      <text x="418.9868438861533" y="154" font-size="10" fill="#333">31785人</text>
+    
+      <text x="399" y="190" text-anchor="end" font-size="11" fill="#333">徳島県</text>
+      <rect x="405" y="171" width="10.165623630410684" height="30" fill="#ef5350" rx="2"/>
+      <text x="419.16562363041066" y="190" font-size="10" fill="#333">32354人</text>
+    
+      <text x="399" y="226" text-anchor="end" font-size="11" fill="#333">秋田県</text>
+      <rect x="405" y="207" width="11.033443759828817" height="30" fill="#e57373" rx="2"/>
+      <text x="420.0334437598288" y="226" font-size="10" fill="#333">35116人</text>
+    
+      <text x="399" y="262" text-anchor="end" font-size="11" fill="#333">福井県</text>
+      <rect x="405" y="243" width="11.548417399262677" height="30" fill="#ef9a9a" rx="2"/>
+      <text x="420.5484173992627" y="262" font-size="10" fill="#333">36755人</text>
+    
+      <text x="399" y="298" text-anchor="end" font-size="11" fill="#333">山梨県</text>
+      <rect x="405" y="279" width="11.554387197401326" height="30" fill="#c62828" rx="2"/>
+      <text x="420.5543871974013" y="298" font-size="10" fill="#333">36774人</text>
+    
+      <text x="399" y="334" text-anchor="end" font-size="11" fill="#333">和歌山県</text>
+      <rect x="405" y="315" width="12.92021417154348" height="30" fill="#d32f2f" rx="2"/>
+      <text x="421.9202141715435" y="334" font-size="10" fill="#333">41121人</text>
+    
+      <text x="399" y="370" text-anchor="end" font-size="11" fill="#333">佐賀県</text>
+      <rect x="405" y="351" width="13.208335481708733" height="30" fill="#e53935" rx="2"/>
+      <text x="422.20833548170873" y="370" font-size="10" fill="#333">42038人</text>
+    
+      <text x="399" y="406" text-anchor="end" font-size="11" fill="#333">富山県</text>
+      <rect x="405" y="387" width="14.200578772332362" height="30" fill="#ef5350" rx="2"/>
+      <text x="423.20057877233234" y="406" font-size="10" fill="#333">45196人</text>
+    
+  <text x="340" y="462" text-anchor="middle" font-size="10" fill="#888">凡例: 青系=上位 / 赤系=下位</text>
+</svg>

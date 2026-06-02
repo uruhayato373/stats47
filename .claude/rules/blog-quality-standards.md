@@ -206,7 +206,8 @@ BLOG-CTR-03 / 04 で 10 記事を curiosity gap 改修:
 
 ```bash
 # 単一記事の総合ゲート (callout≥2 / 内部リンク≥3 / H2≥4 / charCount / source-link 配置 / factual)
-node .claude/scripts/blog/quality-gate.mjs <slug>
+# 引数は <slug> (=.local/r2/app/blog/<slug>/article.md を解決) または article.md への直接パス
+node .claude/scripts/blog/quality-gate.mjs <slug | path/to/article.md>
 
 # 全記事の source-link 末尾集約を一括監査 → structure-audit.json
 node .claude/scripts/blog/audit-article-structure.mjs
@@ -214,6 +215,17 @@ node .claude/scripts/blog/audit-article-structure.mjs
 # 全記事のチャート SVG 品質 (dark mode 等) を一括監査 → chart-audit.json
 node .claude/scripts/blog/audit-chart-quality.mjs
 ```
+
+### enforce される箇所 (2026-06-02〜 / 公開前ブロック)
+
+`quality-gate.mjs` は手動実行だけでなく **2 つの関門で自動 enforce** される (factual gate のみで薄い記事が素通りした再発防止)。
+
+| 関門 | 対象 | 挙動 |
+|---|---|---|
+| **pre-commit** (`apps/web/scripts/pre-commit-checks.sh` §6.1) | staged の `docs/21_ブログ記事原稿/*/article.md` で **`published: true`** のもの | blocker があれば commit 中止。`published: false` の作業中ドラフトは対象外 |
+| **publish-blog.yml** (CI→R2) | publish 対象 slug | ステージ後・push 前に実行。blocker があれば R2 公開をブロック (権威ゲート) |
+
+> 作業中ドラフトを commit したいだけなら frontmatter を `published: false` にする。公開 (`published: true`) する記事は必ず gate を通す。
 
 両 audit の結果は `select-brushup-candidates.mjs` が読み込み、違反記事を brushup 候補で優先する (GSC 改善余地を主軸に、同点時に品質問題を加味)。
 
