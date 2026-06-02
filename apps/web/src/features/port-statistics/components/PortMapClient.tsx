@@ -4,6 +4,7 @@ import { useState, useMemo, useCallback, useTransition } from "react";
 
 import dynamic from "next/dynamic";
 
+import { Button } from "@stats47/components/atoms/ui/button";
 import {
   Card,
   CardContent,
@@ -356,13 +357,14 @@ function PortDetail({
             />
           </tbody>
         </table>
-        <button
+        <Button
           type="button"
-          className="mt-4 text-sm text-primary underline"
+          variant="link"
           onClick={onDeselect}
+          className="mt-4 h-auto p-0 text-sm"
         >
           選択解除
-        </button>
+        </Button>
       </CardContent>
     </Card>
   );

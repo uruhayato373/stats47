@@ -1,7 +1,7 @@
 import "server-only";
 
 import { logger } from "@stats47/logger/server";
-import { fetchFromR2AsJson } from "@stats47/r2-storage/server";
+import { createSnapshotReader } from "@stats47/r2-storage/server";
 
 import type { AffiliateAd, AffiliateLocationCode } from "../types";
 
@@ -9,43 +9,19 @@ export type AffiliateAdRow = AffiliateAd;
 
 export const AFFILIATE_ADS_SNAPSHOT_KEY = "app/affiliate-ads/all.json";
 
-const STALE_AFTER_DAYS = 30;
-
 export interface AffiliateAdsSnapshot {
   generatedAt: string;
   ads: AffiliateAdRow[];
 }
 
-let cached: AffiliateAdsSnapshot | null = null;
-
-function warnIfStale(generatedAt: string): void {
-  const ageDays =
-    (Date.now() - new Date(generatedAt).getTime()) / (1000 * 60 * 60 * 24);
-  if (ageDays > STALE_AFTER_DAYS) {
-    logger.warn(
-      { generatedAt, ageDays: Math.round(ageDays) },
-      `affiliate-ads snapshot が ${STALE_AFTER_DAYS} 日以上古い`,
-    );
-  }
-}
-
-async function loadSnapshot(): Promise<AffiliateAdsSnapshot> {
-  if (cached) return cached;
-  const snapshot = await fetchFromR2AsJson<AffiliateAdsSnapshot>(
-    AFFILIATE_ADS_SNAPSHOT_KEY,
-  );
-  if (!snapshot) {
-    logger.warn(
-      { key: AFFILIATE_ADS_SNAPSHOT_KEY },
-      "affiliate-ads snapshot が R2 に存在しません。空配列を返します (キャッシュしない)",
-    );
-    // 一時的な miss を恒久キャッシュしない (次リクエストで再取得を試みる)。
-    return { generatedAt: new Date(0).toISOString(), ads: [] };
-  }
-  warnIfStale(snapshot.generatedAt);
-  cached = snapshot;
-  return snapshot;
-}
+// module-level キャッシュは持たない (r2-storage-design.md)。
+// 一時的な miss を恒久キャッシュしないため毎回 R2 を直接 fetch する。
+const loadSnapshot = createSnapshotReader<AffiliateAdsSnapshot, AffiliateAdsSnapshot>({
+  key: AFFILIATE_ADS_SNAPSHOT_KEY,
+  label: "affiliate-ads",
+  select: (snapshot) => snapshot,
+  fallback: { generatedAt: new Date(0).toISOString(), ads: [] },
+});
 
 function isActive(ad: AffiliateAdRow): boolean {
   if (!ad.isActive) return false;

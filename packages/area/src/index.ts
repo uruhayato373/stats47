@@ -24,7 +24,10 @@ export {
 // ユーティリティ
 export {
     extractPrefectureCode,
-    lookupArea
+    lookupArea,
+    to2DigitPrefCode,
+    to5DigitPrefCode,
+    PREFECTURE_LIST_2DIGIT
 } from "./utils";
 
 // リポジトリ（防御的コピーを返す）

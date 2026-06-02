@@ -6,6 +6,10 @@ export { deleteFromR2, deleteMultipleFromR2, deletePrefixFromR2 } from "./operat
 export { fetchFromR2, fetchFromR2AsJson, fetchFromR2AsString } from "./operations/fetch";
 export { listFromR2, listFromR2WithSize } from "./operations/list";
 export { saveToR2 } from "./operations/save";
+export {
+  createSnapshotReader,
+  type SnapshotReaderOptions,
+} from "./operations/snapshot-reader";
 
 // utils
 export { formatBytes } from "./utils/format-bytes";

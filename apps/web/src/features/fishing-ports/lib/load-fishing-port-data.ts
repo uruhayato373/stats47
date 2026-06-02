@@ -1,7 +1,7 @@
 import "server-only";
 
 import { logger } from "@stats47/logger/server";
-import { fetchFromR2AsJson } from "@stats47/r2-storage/server";
+import { createSnapshotReader } from "@stats47/r2-storage/server";
 
 export interface FishingPortData {
   portCode: string;
@@ -22,34 +22,14 @@ export interface FishingPortsSnapshot {
   ports: FishingPortData[];
 }
 
-const STALE_AFTER_DAYS = 90;
-
-let cached: FishingPortsSnapshot | null = null;
-
-function warnIfStale(generatedAt: string): void {
-  const ageDays =
-    (Date.now() - new Date(generatedAt).getTime()) / (1000 * 60 * 60 * 24);
-  if (ageDays > STALE_AFTER_DAYS) {
-    logger.warn(
-      { generatedAt, ageDays: Math.round(ageDays) },
-      `fishing-ports snapshot が ${STALE_AFTER_DAYS} 日以上古い`,
-    );
-  }
-}
-
-async function loadSnapshot(): Promise<FishingPortsSnapshot> {
-  if (cached) return cached;
-  const snapshot = await fetchFromR2AsJson<FishingPortsSnapshot>(
-    FISHING_PORTS_SNAPSHOT_KEY,
-  );
-  if (!snapshot) {
-    cached = { generatedAt: new Date(0).toISOString(), ports: [] };
-    return cached;
-  }
-  warnIfStale(snapshot.generatedAt);
-  cached = snapshot;
-  return snapshot;
-}
+// module-level キャッシュは持たない (r2-storage-design.md)。毎回 R2 を直接 fetch する。
+const loadSnapshot = createSnapshotReader<FishingPortsSnapshot, FishingPortsSnapshot>({
+  key: FISHING_PORTS_SNAPSHOT_KEY,
+  label: "fishing-ports",
+  select: (snapshot) => snapshot,
+  fallback: { generatedAt: new Date(0).toISOString(), ports: [] },
+  staleAfterDays: 90,
+});
 
 export async function loadFishingPortData(): Promise<{
   ports: FishingPortData[];

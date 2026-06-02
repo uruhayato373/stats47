@@ -8,6 +8,7 @@ import {
   useState,
 } from "react";
 
+import { Button } from "@stats47/components";
 import { geoMercator, geoPath } from "d3-geo";
 import { scaleDiverging } from "d3-scale";
 import { interpolateRdBu } from "d3-scale-chromatic";
@@ -288,14 +289,16 @@ export function MetricYoyChoroplethSection({
       </div>
 
       <div className="flex items-center gap-3">
-        <button
+        <Button
           type="button"
+          variant="outline"
+          size="sm"
           onClick={togglePlay}
-          className="rounded-md border border-border bg-background px-3 py-1 text-xs font-medium hover:bg-accent"
+          className="text-xs font-medium"
           aria-label={isPlaying ? "一時停止" : "再生"}
         >
           {isPlaying ? "⏸ 一時停止" : "▶ 再生"}
-        </button>
+        </Button>
         <input
           type="range"
           min={0}
