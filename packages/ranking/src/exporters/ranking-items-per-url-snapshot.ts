@@ -13,6 +13,7 @@ import {
   surveyItemsKeyPath,
 } from "../types/snapshot";
 import {
+  resolveItemAttribution,
   resolveItemOriginalSurveys,
   surveyBucketsForItem,
 } from "./survey-bucketing";
@@ -168,12 +169,12 @@ export async function exportRankingItemsPerUrl(): Promise<ExportRankingItemsPerU
   for (const [rankingKey, keyItems] of byRankingKey) {
     // Use the first item as the canonical item for the file
     const item = keyItems[0];
-    // 原典調査 (SSDS は cdCat01 から解決した本来の調査群、非SSDS は空)。
-    // ranking 詳細ページが「出典: ◯◯調査」表示に使う (SSDS の baked surveyId は誤りが多い)。
-    const originalSurveys = resolveItemOriginalSurveys(item).map((s) => s.id);
+    // 出典表記 (2 階層: 編成統計 + 原典調査)。ranking 詳細ページが統一表示に使う。
+    // SSDS の baked surveyId は誤りが多いため param から解決した attribution を焼き込む。
+    const attribution = resolveItemAttribution(item);
     const body = JSON.stringify({
       generatedAt,
-      item: { ...item, originalSurveys },
+      item: { ...item, attribution },
     });
     uploads.push(
       saveToR2(rankingItemKeyPath(rankingKey), body, {

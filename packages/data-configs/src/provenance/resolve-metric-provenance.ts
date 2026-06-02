@@ -19,6 +19,23 @@ import ssdsProvenanceJson from "../ssds/ssds-provenance.generated.json";
 
 export type ProvenanceSurvey = { id: string; name: string };
 
+/**
+ * 出典表記の統一型 (2 階層プロビナンス)。ranking / テーマの全コンポーネントが同じ型で保持・表示する。
+ *   - compilation: 編成統計 (二次統計の取得元)。SSDS のときのみ非 null。実際に API で引いた値の出所。
+ *   - originalSurveys: 原典調査。SSDS は複数 (集計元)、非SSDS は取得した調査そのもの 1 件。
+ * 表示は「出典: {compilation}（原典: {originalSurveys}）」/ compilation=null なら「出典: {originalSurveys}」。
+ */
+export type SourceAttribution = {
+  compilation: { name: string; url?: string } | null;
+  originalSurveys: ProvenanceSurvey[];
+};
+
+/** SSDS の編成統計メタ (社会・人口統計体系)。 */
+const SSDS_COMPILATION = {
+  name: "社会・人口統計体系",
+  url: "https://www.stat.go.jp/data/ssds/index.htm",
+} as const;
+
 type SsdsEntry = { kind: string; originalSurveys: ProvenanceSurvey[] };
 const SSDS_PROVENANCE = ssdsProvenanceJson as Record<string, SsdsEntry>;
 
@@ -119,3 +136,19 @@ export function resolveMetricProvenance(
 ): ProvenanceSurvey[] {
   return resolveSourceProvenance(metric.source, registry, depth);
 }
+
+/**
+ * e-Stat param から出典表記 (2 階層) を解決する。ranking / テーマが共有する統一入口。
+ *   - SSDS テーブル → compilation=社会・人口統計体系 + originalSurveys(cdCat01 から、複数可)
+ *   - 一次統計       → compilation=null + originalSurveys=[その調査]
+ */
+export function resolveAttribution(
+  statsDataId: string | undefined,
+  cdCat01: string | undefined,
+): SourceAttribution {
+  return {
+    compilation: isSsdsStatsDataId(statsDataId) ? { ...SSDS_COMPILATION } : null,
+    originalSurveys: resolveProvenanceByParams(statsDataId, cdCat01),
+  };
+}
+
