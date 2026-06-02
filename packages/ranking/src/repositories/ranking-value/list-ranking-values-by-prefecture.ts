@@ -1,5 +1,6 @@
 import "server-only";
 
+import { to2DigitPrefCode } from "@stats47/area";
 import { logger } from "@stats47/logger/server";
 import { readStatsValues } from "@stats47/stats-r2";
 import { err, ok, type Result } from "@stats47/types";
@@ -18,7 +19,7 @@ export async function listRankingValuesByPrefecture(
   try {
     const payload = await readStatsValues(rankingKey, "city");
     if (!payload) return ok([]);
-    const prefPrefix = prefCode.slice(0, 2);
+    const prefPrefix = to2DigitPrefCode(prefCode);
 
     const values: RankingValue[] = payload.rows
       .filter(

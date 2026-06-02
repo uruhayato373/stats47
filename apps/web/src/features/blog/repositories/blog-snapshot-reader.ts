@@ -1,7 +1,6 @@
 import "server-only";
 
-import { logger } from "@stats47/logger/server";
-import { fetchFromR2AsJson } from "@stats47/r2-storage/server";
+import { createSnapshotReader } from "@stats47/r2-storage/server";
 
 import {
   BLOG_SNAPSHOT_KEY,
@@ -12,37 +11,14 @@ import {
 
 import type { Article, ArticleFrontmatter } from "../types/article.types";
 
-const STALE_AFTER_DAYS = 30;
-
-let cached: BlogSnapshot | null = null;
-
-function warnIfStale(generatedAt: string): void {
-  const ageDays =
-    (Date.now() - new Date(generatedAt).getTime()) / (1000 * 60 * 60 * 24);
-  if (ageDays > STALE_AFTER_DAYS) {
-    logger.warn(
-      { generatedAt, ageDays: Math.round(ageDays) },
-      `blog snapshot が ${STALE_AFTER_DAYS} 日以上古い`,
-    );
-  }
-}
-
-async function loadSnapshot(): Promise<BlogSnapshot> {
-  if (cached) return cached;
-  const snapshot = await fetchFromR2AsJson<BlogSnapshot>(BLOG_SNAPSHOT_KEY);
-  if (!snapshot) {
-    logger.warn(
-      { key: BLOG_SNAPSHOT_KEY },
-      "blog snapshot が R2 に存在しません。空配列を返します (キャッシュしない)",
-    );
-    // 一時的な miss / 再 push 直後の取りこぼしを恒久キャッシュしない。
-    // warm isolate が空配列を返し続けるのを防ぐため、次リクエストで再取得を試みる。
-    return { generatedAt: new Date(0).toISOString(), articles: [], tagMeta: [] };
-  }
-  warnIfStale(snapshot.generatedAt);
-  cached = snapshot;
-  return snapshot;
-}
+// module-level キャッシュは持たない (r2-storage-design.md)。
+// re-push 直後の取りこぼしや warm isolate の stale 保持を防ぐため毎回 R2 を直接 fetch する。
+const loadSnapshot = createSnapshotReader<BlogSnapshot, BlogSnapshot>({
+  key: BLOG_SNAPSHOT_KEY,
+  label: "blog",
+  select: (snapshot) => snapshot,
+  fallback: { generatedAt: new Date(0).toISOString(), articles: [], tagMeta: [] },
+});
 
 function toArticle(row: SnapshotArticle): Article {
   const frontmatter: ArticleFrontmatter = {

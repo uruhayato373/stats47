@@ -1,6 +1,7 @@
 import "server-only";
 
 export {
+    createSnapshotReader,
     deleteFromR2,
     deleteMultipleFromR2,
     deletePrefixFromR2,
@@ -10,5 +11,6 @@ export {
     getR2Client,
     listFromR2,
     listFromR2WithSize,
-    saveToR2
+    saveToR2,
+    type SnapshotReaderOptions
 } from "./lib";
