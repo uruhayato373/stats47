@@ -101,8 +101,42 @@ function countInternalLinks(text) {
 }
 
 function countSvgCharts(text) {
-  const matches = text.match(/<svg\s+[^>]*xmlns/g);
-  return matches ? matches.length : 0;
+  // チャートは ![alt](data/foo.svg) の画像参照で埋め込まれる (インライン <svg> は稀)。
+  // 両方を数える (旧実装は画像参照を取りこぼし全記事 0 と誤検出していた)。
+  const inline = (text.match(/<svg\s+[^>]*xmlns/g) || []).length;
+  const imgRef = (text.match(/!\[[^\]]*\]\([^)]*\.svg\)/g) || []).length;
+  return inline + imgRef;
+}
+
+// ランキング表 (「順位」/rank 列を持つ表) を検出し、上下非対称かを判定する。
+// 標準は「上位5+下位5 の SVG チャート」。表だけ・上下非対称表・truncated 表は不可。
+// 5 vs 10 の本数差は gate では判定しない (良記事=top10+bottom10 を誤爆しないため。本数は
+// blog-quality-standards.md の基準 + blog-critic の意味判断に委ねる)。
+function detectRankingTables(text) {
+  const tables = [];
+  let cur = null;
+  for (const ln of text.split("\n")) {
+    if (/^\s*\|.*\|\s*$/.test(ln)) (cur ??= []).push(ln);
+    else if (cur) {
+      tables.push(cur);
+      cur = null;
+    }
+  }
+  if (cur) tables.push(cur);
+  return tables
+    .filter((rows) => /順位|rank/i.test(rows[0] || ""))
+    .map((rows) => {
+      const ranks = [];
+      for (const r of rows.slice(2)) {
+        const m = r.match(/^\s*\|\s*(\d{1,2})\s*\|/);
+        if (m) ranks.push(Number(m[1]));
+      }
+      const topRun = ranks.filter((r) => r <= 12).length;
+      const bottomRun = ranks.filter((r) => r >= 36).length;
+      const noMiddle = !ranks.some((r) => r > 12 && r < 36);
+      const asymmetric = topRun >= 3 && bottomRun >= 1 && topRun !== bottomRun && noMiddle && ranks.length < 47;
+      return { topRun, bottomRun, asymmetric };
+    });
 }
 
 // charCount は「読者が読む地の文 (prose)」のみを数える。
@@ -207,6 +241,22 @@ checks.rankingSourceLinks = sourceLinkLint.stats.rankingSourceLinks;
 checks.tailRankingLinks = sourceLinkLint.stats.tailRankingLinks;
 warnings.push(...sourceLinkLint.warnings);
 
+// ランキング表現の一貫性 (2026-06-02 追加): 標準は「上位5+下位5 の SVG チャート」。
+// 表だけ (チャート0) / 上下非対称表 / truncated 表は不可。本数 (5 vs 10) は基準 + critic 判断。
+const rankingTbls = detectRankingTables(content);
+checks.rankingTables = rankingTbls.length;
+if (rankingTbls.length > 0 && checks.charts === 0) {
+  blockers.push(
+    "ランキング表ありチャート0 — ランキングは上位5+下位5 の SVG チャートで可視化すること (表だけは不可)",
+  );
+}
+const asym = rankingTbls.find((t) => t.asymmetric);
+if (asym) {
+  blockers.push(
+    `上下非対称ランキング表 (top${asym.topRun}/bottom${asym.bottomRun}) — 上位N+下位N を対称にするか SVG 化`,
+  );
+}
+
 // Factual cross-check (2026-05-25 追加、article-factual-check.mjs に切り出し済)
 const factual = checkArticleFactual(content, dataDir);
 checks.groundTruthPrefCount = factual.groundTruthPrefCount;
@@ -223,7 +273,13 @@ warnings.push(...factual.warnings);
 // (冗長・図表重複・読者価値・curiosity gap の真正性) は blog-critic (expert/panel
 // review) が別コンテキストで判断する。published:true の記事は blog-critic が書いた
 // review.md (verdict: PASS) を必須とし、自己採点での公開を構造的に不可能にする。
-const isPublished = /^published:\s*true\s*$/m.test(content);
+// 公開判定: 新記事は `published: true`、旧記事は `publishedAt: <実日付>` のみ (published 行なし)。
+// どちらも「公開」とみなし critic ゲートの対象にする (旧スタイルの素通りを防ぐ)。
+// ドラフトは publishedAt: 未定 / published: false で除外される。
+const explicitFalse = /^published:\s*false\s*$/m.test(content);
+const isPublished =
+  !explicitFalse &&
+  (/^published:\s*true\s*$/m.test(content) || /^publishedAt:\s*\d{4}-\d{2}-\d{2}\s*$/m.test(content));
 const reviewPath = path.join(path.dirname(articlePath), "review.md");
 let hasCriticPass = false;
 if (fs.existsSync(reviewPath)) {

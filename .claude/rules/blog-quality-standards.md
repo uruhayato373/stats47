@@ -15,7 +15,7 @@ stats47.jp の `/blog/{slug}` 記事を新規作成または brushup する際�
 
 | 層 | 担い手 | 役割 | 捕まえる / 捕まえない |
 |---|---|---|---|
-| ① 機械的フロア | `quality-gate.mjs` | 公開前の床 (決定的) | 捕: callout数/内部リンク/NG word/factual rank/truncated 表/source-link 配置/prose 文字数の床。**不可: 読者価値の有無** |
+| ① 機械的フロア | `quality-gate.mjs` | 公開前の床 (決定的) | 捕: callout数/内部リンク/NG word/factual rank/truncated 表/**ランキング表チャート0**/**上下非対称表**/source-link 配置/prose 文字数の床。**不可: 読者価値の有無** |
 | ② 意味レビュー | **`blog-critic` agent (別コンテキスト)** | 読者価値の判断 | 捕: 冗長・図表重複・論理の質・curiosity gap の真正性・CTA過多・「この要素は何を足すか」 |
 | ③ アウトカム | gsc-analyst / 改善ログ | 最終評価 | GSC CTR/順位・GA4 滞在・CV (遅行・最も真実) |
 
@@ -196,6 +196,16 @@ date: YYYY-MM-DD
 
 検査 (決定的 lint): `node .claude/scripts/blog/audit-article-structure.mjs` で `/ranking/` source-link の末尾集約 (2 個以上) を検出。`quality-gate.mjs` にも統合済 (WARN)。どの図に再配置するかは brushup 時に agent が意味判断。
 
+### ランキング可視化の標準 (★2026-06-02 確定: 上位5+下位5 SVG)
+
+ランキング系の記事は **数値を表で羅列せず、SVG チャートで可視化する**のが標準。
+
+- ✅ **標準: 上位5+下位5 の SVG チャート** — ランキングの主役は「上位5件 + 下位5件」を 1 枚の SVG (横棒等) にする。モバイル可読性が高く、上下の対比が一目で伝わる。中位は本文の `<source-link href="/ranking/{key}">` でランキング詳細へ誘導する。
+  - 既存の良記事は「上位10+下位10」を使っているものも多い (許容)。**5 でも 10 でもよいが上下は対称**にする。本数の最終判断は本文の情報量と blog-critic に委ねる (gate は本数を判定しない)。
+- ❌ **禁止: 表だけ (チャート0) のランキング** — 「順位」列の表しかない記事は不可。必ず SVG を置く (82 記事が該当・2026-06-02 棚卸し)。
+- ❌ **禁止: 上下非対称表** — 「上位10 + 下位3」のように上下件数が食い違う表 (51 記事が該当)。対称にするか SVG 化する。
+- 検査 (決定的): `quality-gate.mjs` が (1) 「順位」列を持つ表があるのに SVG チャート0、(2) 上下非対称表、を **blocker** で検出する。本数 (5 vs 10) は判定しない。
+
 ### 図と表 (★truncated 表の禁止)
 
 ランキング図 (SVG) の直後に表を置く場合、表は **「全件掲載」か「省略」の二択**。
@@ -264,7 +274,14 @@ node .claude/scripts/blog/audit-article-structure.mjs
 
 # 全記事のチャート SVG 品質 (dark mode 等) を一括監査 → chart-audit.json
 node .claude/scripts/blog/audit-chart-quality.mjs
+
+# ★公開済み全記事を R2 公開 URL から取得し決定的チェックを一括適用 (cloud 可・週次棚卸し)
+#   → /tmp/published-blog-audit.json + docs/04_レビュー/blog-quality/<date>-published-inventory.md
+node .claude/scripts/blog/audit-published-blog.mjs
 ```
+
+公開記事の品質棚卸し (最新): `docs/04_レビュー/blog-quality/2026-06-02-published-inventory.md`。
+週次是正ループ (GSC 優先で blocker 記事を /brushup-blog → critic PASS) は同ファイル参照。
 
 ### enforce される箇所 (2026-06-02〜 / 公開前ブロック)
 
