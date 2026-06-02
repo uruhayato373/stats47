@@ -4,6 +4,8 @@ import { fetchPrefectures } from "@stats47/area";
 import { unwrap } from "@stats47/types";
 import { type Metadata } from "next";
 
+import { PageShell } from "@/components/layout";
+
 import { listCategories } from "@/features/category/server";
 import {
     CompareGridLayout,
@@ -133,7 +135,7 @@ export default async function CompareCategoryPage({ params, searchParams }: Page
     const currentCategory = categories.find((c) => c.categoryKey === categoryKey);
 
     return (
-        <div className="container mx-auto px-4 py-4">
+        <PageShell>
             {/* Hero (軽量): 比較対象 + カテゴリ名 (noindex のため軽量に) */}
             <header className="mb-5">
                 <p className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
@@ -176,6 +178,6 @@ export default async function CompareCategoryPage({ params, searchParams }: Page
                 slotId={COMPARE_PAGE_SIDEBAR.slotId}
                 className="mt-6"
             />
-        </div>
+        </PageShell>
     );
 }

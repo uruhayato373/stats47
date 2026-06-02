@@ -136,7 +136,7 @@ export function RankingHeroCard({
 
   return (
     <div
-      className="grid grid-cols-1 items-stretch gap-6 rounded-xl border border-border p-5 shadow-sm lg:grid-cols-2"
+      className="grid grid-cols-1 items-stretch gap-6 rounded-none border border-border p-5 shadow-sm lg:grid-cols-2"
       style={{
         background: "linear-gradient(160deg, #f5f8ff 0%, #ffffff 60%)",
       }}

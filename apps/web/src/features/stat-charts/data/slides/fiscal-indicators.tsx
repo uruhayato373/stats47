@@ -15,21 +15,21 @@ export const fiscalIndicatorsSlides: SlideData[] = [
     subtitle: "地方公共団体の財政の健全化に関する法律",
     content: (
       <div className="space-y-6">
-        <div className="bg-blue-50 p-6 rounded-2xl border border-blue-100 shadow-sm">
+        <div className="bg-blue-50 p-6 rounded-none border border-blue-100 shadow-sm">
           <p className="text-blue-800 leading-relaxed text-lg font-medium">
             「隠れた借金」を可視化し、早期に財政悪化を食い止めるための法律です。
           </p>
         </div>
         <div className="grid grid-cols-3 gap-4 text-center">
-          <div className="p-4 bg-white rounded-xl border shadow-sm">
+          <div className="p-4 bg-white rounded-none border shadow-sm">
             <div className="text-blue-600 font-bold text-xl mb-1">可視化</div>
             <p className="text-xs text-muted-foreground">連結ベースの指標導入</p>
           </div>
-          <div className="p-4 bg-white rounded-xl border shadow-sm">
+          <div className="p-4 bg-white rounded-none border shadow-sm">
             <div className="text-blue-600 font-bold text-xl mb-1">早期発見</div>
             <p className="text-xs text-muted-foreground">健全化基準の設定</p>
           </div>
-          <div className="p-4 bg-white rounded-xl border shadow-sm">
+          <div className="p-4 bg-white rounded-none border shadow-sm">
             <div className="text-blue-600 font-bold text-xl mb-1">徹底公開</div>
             <p className="text-xs text-muted-foreground">住民への情報開示義務</p>
           </div>
@@ -51,7 +51,7 @@ export const fiscalIndicatorsSlides: SlideData[] = [
           { label: "実質公債費比率", icon: <Landmark className="h-5 w-5" />, desc: "借金の返済負担", color: "text-blue-500" },
           { label: "将来負担比率", icon: <BarChart3 className="h-5 w-5" />, desc: "将来払う負債", color: "text-purple-500" },
         ].map((item) => (
-          <div key={item.label} className="flex items-center gap-4 p-4 bg-muted rounded-xl border border-border">
+          <div key={item.label} className="flex items-center gap-4 p-4 bg-muted rounded-none border border-border">
             <div className={`${item.color} p-2 bg-white rounded-lg shadow-sm`}>{item.icon}</div>
             <div>
               <div className="font-bold text-sm">{item.label}</div>
@@ -70,7 +70,7 @@ export const fiscalIndicatorsSlides: SlideData[] = [
     subtitle: "基準値を超えた場合の自治体の状態",
     content: (
       <div className="space-y-4">
-        <div className="relative p-5 bg-amber-50 border-2 border-amber-200 rounded-2xl flex gap-4">
+        <div className="relative p-5 bg-amber-50 border-2 border-amber-200 rounded-none flex gap-4">
           <div className="shrink-0 flex items-center justify-center w-12 h-12 bg-amber-400 text-white rounded-full font-black italic shadow-sm">
             !
           </div>
@@ -83,7 +83,7 @@ export const fiscalIndicatorsSlides: SlideData[] = [
             </p>
           </div>
         </div>
-        <div className="relative p-5 bg-red-50 border-2 border-red-200 rounded-2xl flex gap-4">
+        <div className="relative p-5 bg-red-50 border-2 border-red-200 rounded-none flex gap-4">
           <div className="shrink-0 flex items-center justify-center w-12 h-12 bg-red-500 text-white rounded-full font-black italic shadow-sm">
             !!
           </div>
@@ -107,7 +107,7 @@ export const fiscalIndicatorsSlides: SlideData[] = [
     subtitle: "水道・病院などの「事業」を守る指標",
     content: (
       <div className="flex flex-col items-center justify-center h-full space-y-4">
-        <div className="w-full bg-cyan-600 text-white p-6 rounded-2xl shadow-xl text-center relative overflow-hidden">
+        <div className="w-full bg-cyan-600 text-white p-6 rounded-none shadow-xl text-center relative overflow-hidden">
           <div className="absolute top-0 right-0 p-2 opacity-20">
             <BarChart3 size={80} />
           </div>

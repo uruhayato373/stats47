@@ -10,20 +10,20 @@ export function RankingKeyPageSkeleton() {
                 </div>
 
                 {/* Highlights */}
-                <Skeleton className="h-48 w-full mb-8 rounded-xl" />
+                <Skeleton className="h-48 w-full mb-8 rounded-none" />
 
                 {/* Map Chart */}
                 <div className="mb-8">
-                    <Skeleton className="h-[500px] w-full rounded-xl" />
+                    <Skeleton className="h-[500px] w-full rounded-none" />
                 </div>
 
                 {/* Column Chart */}
                 <div className="mb-8">
-                    <Skeleton className="h-[400px] w-full rounded-xl" />
+                    <Skeleton className="h-[400px] w-full rounded-none" />
                 </div>
 
                 {/* Data Table */}
-                <Skeleton className="h-[600px] w-full rounded-xl" />
+                <Skeleton className="h-[600px] w-full rounded-none" />
             </main>
         </div>
     );

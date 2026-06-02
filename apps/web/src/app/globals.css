@@ -41,7 +41,7 @@
     --input: 214.3 31.8% 91.4%;
     --ring: 226 70% 55%; /* Indigo-600 */
     
-    --radius: 0.75rem; /* rounded-xl */
+    --radius: 0px; /* フラットデザイン: 角丸なし (rounded-sm/md/lg はすべて 0) */
 
     /* Header height */
     --header-height: 64px;
@@ -133,9 +133,12 @@
   }
   
   body {
-    font-family: var(--font-inter), var(--font-noto-sans-jp), -apple-system,
-      BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Yu Gothic", "Meiryo",
-      sans-serif;
+    /* Zenn / 記事準拠の system フォントスタック (游ゴシック / Hiragino 軸、Web フォント非依存) */
+    font-family: -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+      "Hiragino Sans", "Yu Gothic UI", "Yu Gothic", YuGothic, Meiryo, "Segoe UI",
+      "Helvetica Neue", Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
     background-color: hsl(var(--background));
     color: hsl(var(--foreground));
     transition: background-color 0.3s ease, color 0.3s ease;

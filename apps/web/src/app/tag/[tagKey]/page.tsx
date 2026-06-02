@@ -116,7 +116,7 @@ export default async function TagArticlesPage({ params }: PageProps) {
             <div className="container mx-auto px-4 py-4">
                 {/* Hero (D 暗色) — マスタープラン § 5.3 準拠 */}
                 <HeroShell variant="dark" className="mb-6">
-                    <div className="grid grid-cols-1 gap-6 p-6 md:grid-cols-[1fr,320px] md:p-8">
+                    <div className="grid grid-cols-1 gap-6 p-6 md:grid-cols-[1fr,360px] md:p-8">
                         <div className="min-w-0">
                             <p className="inline-flex items-center gap-1.5 rounded-full bg-white/15 px-2.5 py-0.5 text-[10.5px] font-bold uppercase tracking-widest text-white">
                                 タグ
@@ -149,7 +149,7 @@ export default async function TagArticlesPage({ params }: PageProps) {
                 {articles.length === 0 ? (
                     notFound()
                 ) : (
-                    <div className="mt-6 xl:grid xl:grid-cols-[minmax(0,1fr)_360px] xl:gap-5 xl:items-start">
+                    <div className="mt-6 xl:grid xl:grid-cols-[minmax(0,1fr)_360px] xl:gap-8 xl:items-start">
                         <main className="min-w-0">
                             <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
                                 {articles.map((article) => (

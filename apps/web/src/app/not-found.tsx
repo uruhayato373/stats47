@@ -35,7 +35,7 @@ export default function NotFound() {
             <Link
               key={link.href}
               href={link.href}
-              className="group flex flex-col items-center gap-1.5 rounded-xl border border-border bg-card px-3 py-4 transition-colors hover:border-primary/40 hover:bg-accent/30"
+              className="group flex flex-col items-center gap-1.5 rounded-none border border-border bg-card px-3 py-4 transition-colors hover:border-primary/40 hover:bg-accent/30"
             >
               <Icon className="h-5 w-5 text-muted-foreground group-hover:text-primary" />
               <span className="text-xs font-semibold text-foreground">

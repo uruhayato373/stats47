@@ -2,6 +2,8 @@ import Link from "next/link";
 
 import { fetchPrefectures, REGIONS } from "@stats47/area";
 
+import { PageShell } from "@/components/layout";
+
 import { AreaSelectorMap } from "@/features/area-profile";
 
 import { AdSenseAd, RANKING_PAGE_FOOTER } from "@/lib/google-adsense";
@@ -41,7 +43,7 @@ export default function AreasPage() {
     };
 
     return (
-        <div className="container mx-auto px-4 py-4 text-foreground">
+        <PageShell>
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
@@ -51,14 +53,14 @@ export default function AreasPage() {
                 地図をクリックして都道府県の特徴を見る
             </p>
 
-            <div className="flex flex-col lg:flex-row lg:gap-8">
+            <div className="grid gap-8 lg:grid-cols-[minmax(0,480px)_1fr] lg:items-start">
               {/* 左: タイルグリッドマップ */}
-              <div className="lg:w-1/2">
+              <div>
                 <AreaSelectorMap />
               </div>
 
-              {/* 右: 地方ブロック別リンク */}
-              <div className="mt-6 lg:mt-0 lg:w-1/2 space-y-4">
+              {/* 右: 地方ブロック別リンク (残り幅を 2 カラムで活用) */}
+              <div className="mt-6 grid gap-x-6 gap-y-5 sm:grid-cols-2 lg:mt-0">
                 {REGIONS.map((region) => {
                     const regionPrefs = region.prefectures
                         .map((code) => prefMap.get(code))
@@ -99,6 +101,6 @@ export default function AreasPage() {
                 slotId={RANKING_PAGE_FOOTER.slotId}
               />
             </div>
-        </div>
+        </PageShell>
     );
 }
