@@ -1,0 +1,91 @@
+<!-- data-source: natto-consumption-expenditure-prefecture-rankings.json | generated: 2026-06-02T05:17:42.141Z -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 480" width="680" height="480" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" role="img" aria-label="納豆消費支出額 都道府県ランキング（2024年）">
+  <rect width="680" height="480" fill="#fafafa" rx="8"/>
+  <text x="340" y="24" text-anchor="middle" font-size="16" font-weight="bold" fill="#222">納豆消費支出額 都道府県ランキング（2024年）</text>
+  
+  <text x="227.5" y="54" text-anchor="middle" font-size="12" font-weight="bold" fill="#1565c0">上位 10</text>
+  <text x="542.5" y="54" text-anchor="middle" font-size="12" font-weight="bold" fill="#c62828">下位 10</text>
+  
+      <text x="84" y="82" text-anchor="end" font-size="11" fill="#333">福島県</text>
+      <rect x="90" y="63" width="195" height="30" fill="#1565c0" rx="2"/>
+      <text x="289" y="82" font-size="10" fill="#333">7830円</text>
+    
+      <text x="84" y="118" text-anchor="end" font-size="11" fill="#333">秋田県</text>
+      <rect x="90" y="99" width="179.28544061302682" height="30" fill="#1976d2" rx="2"/>
+      <text x="273.2854406130268" y="118" font-size="10" fill="#333">7199円</text>
+    
+      <text x="84" y="154" text-anchor="end" font-size="11" fill="#333">青森県</text>
+      <rect x="90" y="135" width="173.93103448275863" height="30" fill="#1e88e5" rx="2"/>
+      <text x="267.9310344827586" y="154" font-size="10" fill="#333">6984円</text>
+    
+      <text x="84" y="190" text-anchor="end" font-size="11" fill="#333">岩手県</text>
+      <rect x="90" y="171" width="168.57662835249042" height="30" fill="#2196f3" rx="2"/>
+      <text x="262.5766283524904" y="190" font-size="10" fill="#333">6769円</text>
+    
+      <text x="84" y="226" text-anchor="end" font-size="11" fill="#333">茨城県</text>
+      <rect x="90" y="207" width="165.04022988505747" height="30" fill="#42a5f5" rx="2"/>
+      <text x="259.04022988505744" y="226" font-size="10" fill="#333">6627円</text>
+    
+      <text x="84" y="262" text-anchor="end" font-size="11" fill="#333">長野県</text>
+      <rect x="90" y="243" width="163.96934865900383" height="30" fill="#64b5f6" rx="2"/>
+      <text x="257.9693486590038" y="262" font-size="10" fill="#333">6584円</text>
+    
+      <text x="84" y="298" text-anchor="end" font-size="11" fill="#333">山形県</text>
+      <rect x="90" y="279" width="162.17624521072796" height="30" fill="#90caf9" rx="2"/>
+      <text x="256.176245210728" y="298" font-size="10" fill="#333">6512円</text>
+    
+      <text x="84" y="334" text-anchor="end" font-size="11" fill="#333">宮城県</text>
+      <rect x="90" y="315" width="153.06130268199234" height="30" fill="#1565c0" rx="2"/>
+      <text x="247.06130268199234" y="334" font-size="10" fill="#333">6146円</text>
+    
+      <text x="84" y="370" text-anchor="end" font-size="11" fill="#333">富山県</text>
+      <rect x="90" y="351" width="152.71264367816093" height="30" fill="#1976d2" rx="2"/>
+      <text x="246.71264367816093" y="370" font-size="10" fill="#333">6132円</text>
+    
+      <text x="84" y="406" text-anchor="end" font-size="11" fill="#333">栃木県</text>
+      <rect x="90" y="387" width="152.1647509578544" height="30" fill="#1e88e5" rx="2"/>
+      <text x="246.1647509578544" y="406" font-size="10" fill="#333">6110円</text>
+    
+  
+      <text x="399" y="82" text-anchor="end" font-size="11" fill="#333">和歌山県</text>
+      <rect x="405" y="63" width="65.42337164750958" height="30" fill="#c62828" rx="2"/>
+      <text x="474.4233716475096" y="82" font-size="10" fill="#333">2627円</text>
+    
+      <text x="399" y="118" text-anchor="end" font-size="11" fill="#333">香川県</text>
+      <rect x="405" y="99" width="76.05747126436782" height="30" fill="#d32f2f" rx="2"/>
+      <text x="485.0574712643678" y="118" font-size="10" fill="#333">3054円</text>
+    
+      <text x="399" y="154" text-anchor="end" font-size="11" fill="#333">徳島県</text>
+      <rect x="405" y="135" width="78.87164750957855" height="30" fill="#e53935" rx="2"/>
+      <text x="487.87164750957857" y="154" font-size="10" fill="#333">3167円</text>
+    
+      <text x="399" y="190" text-anchor="end" font-size="11" fill="#333">大阪府</text>
+      <rect x="405" y="171" width="79.89272030651341" height="30" fill="#ef5350" rx="2"/>
+      <text x="488.8927203065134" y="190" font-size="10" fill="#333">3208円</text>
+    
+      <text x="399" y="226" text-anchor="end" font-size="11" fill="#333">高知県</text>
+      <rect x="405" y="207" width="84.17624521072797" height="30" fill="#e57373" rx="2"/>
+      <text x="493.176245210728" y="226" font-size="10" fill="#333">3380円</text>
+    
+      <text x="399" y="262" text-anchor="end" font-size="11" fill="#333">兵庫県</text>
+      <rect x="405" y="243" width="89.72988505747126" height="30" fill="#ef9a9a" rx="2"/>
+      <text x="498.7298850574713" y="262" font-size="10" fill="#333">3603円</text>
+    
+      <text x="399" y="298" text-anchor="end" font-size="11" fill="#333">鳥取県</text>
+      <rect x="405" y="279" width="91.39846743295018" height="30" fill="#c62828" rx="2"/>
+      <text x="500.39846743295016" y="298" font-size="10" fill="#333">3670円</text>
+    
+      <text x="399" y="334" text-anchor="end" font-size="11" fill="#333">山口県</text>
+      <rect x="405" y="315" width="94.03831417624521" height="30" fill="#d32f2f" rx="2"/>
+      <text x="503.0383141762452" y="334" font-size="10" fill="#333">3776円</text>
+    
+      <text x="399" y="370" text-anchor="end" font-size="11" fill="#333">広島県</text>
+      <rect x="405" y="351" width="96.08045977011494" height="30" fill="#e53935" rx="2"/>
+      <text x="505.08045977011494" y="370" font-size="10" fill="#333">3858円</text>
+    
+      <text x="399" y="406" text-anchor="end" font-size="11" fill="#333">京都府</text>
+      <rect x="405" y="387" width="97.30076628352491" height="30" fill="#ef5350" rx="2"/>
+      <text x="506.3007662835249" y="406" font-size="10" fill="#333">3907円</text>
+    
+  <text x="340" y="462" text-anchor="middle" font-size="10" fill="#888">凡例: 青系=上位 / 赤系=下位</text>
+</svg>
