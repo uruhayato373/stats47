@@ -83,12 +83,41 @@ for k in <rankingKey...>; do curl -s -o /dev/null -w "%{http_code} $k\n" \
 npm run validate:years --workspace=@stats47/data-configs
 ```
 
-### 次アクション (順序)
+### 🚧 ブロッカー (2026-06-02 着手中に発見) — R0: config→item.json field-refresh が不在
 
-1. R4 (year lint バグ) — 低コスト・即修正
-2. R1 候補 top8 の seoTitle 問い化 (git TS 編集 → CI で R2 反映)
-3. R2 (retail 等 ai-content 再生成) + R3 (FAQ prompt PAA 化)
-4. B1 (blog 既存波の effect 計測) — 06-20/06-26 期日に合わせる
+**ranking ページが実際に描画する seoTitle/description は R2 `app/ranking/<key>/item.json` の値**で、
+git TS config (`packages/data-configs/src/metrics/<key>.ts`) の編集は**現状 item.json に伝播しない**。
+
+- 旧 monolith exporter (D1 metrics → item.json) は **Phase F (2026-05-30) で削除済**
+- 現行 `exportRankingItemsPerUrl` (`packages/ranking/src/exporters/ranking-items-per-url-snapshot.ts`) は
+  **既存 R2 item.json を読んで再グループ化するだけ** (コメント L38-40 が "config→item.json の field refresh は follow-up" と明記)
+- `sync-metrics-cache.ts` は config → SQLite cache (seo_title 含む) までで、cache→item.json の書き戻しが無い
+- **実証**: R2 item.json は今も汚染タイトルを保持 (curl 確認)
+  ```
+  app/ranking/disaster-damage-amount/item.json → seoTitle "…【2023100000年】…" (R4 未反映)
+  app/ranking/wheat-flour-consumption-quantity/item.json → 旧 "三重3,072g vs…" (R1 未反映)
+  ```
+
+→ **影響**: R4 の 57 件 (汚染タイトルが現在 SERP に表示中) と R1 の編集は、**この refresh フローを作って CI で R2 push するまで本番に届かない**。
+
+#### R0 (前提作業): config→item.json seo フィールド refresh exporter
+
+| 項目 | 内容 |
+|---|---|
+| やること | metrics registry (or SQLite cache) の seo_title/seo_description/title 等を読み、各 `app/ranking/<key>/item.json` の対応フィールドを patch して saveToR2 |
+| 配置案 | `packages/ranking/src/exporters/` に新規 (per-url exporter の follow-up として既にコメントで予告済) |
+| 実行 | CI (`sync-snapshots.yml` 等)。R2 write はローカル禁止 (`_assert-ci-write.ts`) |
+| 検証 | push 後 `curl https://storage.stats47.jp/app/ranking/<key>/item.json` で seoTitle が config 値と一致 |
+| status | **未着手 (要オーナー判断: 新規 exporter を作るか、既存の想定フローがあるか)** |
+
+### 次アクション (順序) — R0 ブロッカー反映後に更新
+
+1. ✅ **R4 (config 修正 + lint 拡張)** — 57 件 seoTitle/desc の time-code 除去 + validator 拡張 (commit 済)。**ただし本番反映は R0 待ち**
+2. ✅ **R1 試作 (wheat-flour 2件)** — seoTitle 問い化 (commit 済)。**本番反映は R0 待ち**
+3. 🚧 **R0 (config→item.json refresh exporter)** — R1/R4 を本番に届ける前提。オーナー判断待ち
+4. R1 候補 top8 残り の seoTitle 問い化 (R0 確立後)
+5. R2 (retail 等 ai-content 再生成) + R3 (FAQ prompt PAA 化)
+6. B1 (blog 既存波の effect 計測) — 06-20/06-26 期日に合わせる
 
 ## [BLOG-WAVE-2026-05-29-auto] GSC 改善余地上位 4 記事 auto-brushup (cloud session)
 
