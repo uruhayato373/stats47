@@ -1,13 +1,18 @@
 import Link from "next/link";
 
-import { ThemePageLayout, loadThemeData, LOCAL_FINANCE_THEME } from "@/features/theme-dashboard/server";
+import { LOCAL_FINANCE_THEME } from "@/features/theme-dashboard/server";
+
+import { LocalFinanceDashboard } from "@/features/local-finance-dashboard/components/LocalFinanceDashboard";
+import { loadFinanceTrends } from "@/features/local-finance-dashboard/lib/load-finance-trends";
 
 import { generateOGMetadata } from "@/lib/metadata/og-generator";
 
+import type { FinanceFlowData } from "@/features/finance-flow/lib/types";
 import type { Metadata } from "next";
 
-
 const theme = LOCAL_FINANCE_THEME;
+
+const R2_BASE = "https://storage.stats47.jp";
 
 export function generateMetadata(): Metadata {
   const title = `${theme.title}`;
@@ -20,18 +25,26 @@ export function generateMetadata(): Metadata {
   };
 }
 
-export default async function LocalFinanceThemePage() {
-  const data = await loadThemeData(theme);
-  if (!data) {
-    return (
-      <div className="container mx-auto px-4 py-6">
-        <p className="text-muted-foreground">データの取得に失敗しました。</p>
-      </div>
-    );
+/** 既定県 (13 東京) の財政フローを SSR で R2 から読む */
+async function loadInitialFinanceFlow(): Promise<FinanceFlowData | undefined> {
+  try {
+    const res = await fetch(`${R2_BASE}/app/finance-flow/13.json`, { next: { revalidate: 86400 } });
+    if (res.ok) return (await res.json()) as FinanceFlowData;
+  } catch {
+    // client 側 /api/flow フォールバックに任せる
   }
+  return undefined;
+}
+
+export default async function LocalFinanceThemePage() {
+  const [trends, initialFinanceFlow] = await Promise.all([
+    loadFinanceTrends(),
+    loadInitialFinanceFlow(),
+  ]);
+
   return (
     <div>
-      {/* 市区町村版へのナビゲーション */}
+      {/* 都道府県 / 市区町村 切替 */}
       <div className="container mx-auto px-4 pt-4">
         <nav
           aria-label="表示単位切替"
@@ -48,7 +61,7 @@ export default async function LocalFinanceThemePage() {
           </Link>
         </nav>
       </div>
-      <ThemePageLayout theme={theme} data={data} />
+      <LocalFinanceDashboard trends={trends} initialFinanceFlow={initialFinanceFlow} />
     </div>
   );
 }
