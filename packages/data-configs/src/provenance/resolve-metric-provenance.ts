@@ -1,21 +1,20 @@
 /**
  * metric → 原典調査 (originalSurveys[]) 解決ユーティリティ。【ビルド時 / exporter 用】
  *
- * すべての可視化 (ranking / 時系列 / 円グラフ) は metric を源とするため、出典は metric から
- * 解決するのが正。`metric.source.kind` で分岐:
- *
- *   - kakei-chousa : 家計調査 (household-survey)
- *   - estat (SSDS) : cdCat01 → ssds-provenance.generated.json[code].originalSurveys
- *   - estat (一次)  : displayName → DISPLAYNAME_TO_SURVEY
- *   - calculated   : 分子/分母 metric を再帰解決して union
- *   - mlit/external: displayName ベース (個別)
+ * 出典解決は **e-Stat param の単一ルール** (Phase 8):
+ *   resolveProvenanceByParams(statsDataId, cdCat01):
+ *     - statsDataId ∈ SSDS テーブル → cdCat01 で ssds-provenance を引く (二次統計、複数原典あり)
+ *     - それ以外               → statsDataId で survey を引く (一次統計)
+ * これで SSDS / 非SSDS / 時系列 / 円グラフ / ranking がすべて同じ param ルールで解決できる
+ * (旧 displayName ヒューリスティックを廃止。displayName は statsDataId→survey 表の建設時入力のみ)。
+ * kakei-chousa kind は単一調査 (kakei-chousa)、mlit/external は displayName ベース。
  *
  * 注: ssds-provenance.generated.json (~450KB) を import するため、これはアプリ runtime ではなく
  * ビルド/exporter で使う。最終的に snapshot に originalSurveys を焼き込み、アプリは snapshot を読む。
  */
 
 import type { MetricConfig, MetricRegistry, SourceConfig } from "../types";
-import { DISPLAYNAME_TO_SURVEY } from "../ssds/displayname-to-survey";
+import estatProvenanceJson from "../ssds/estat-provenance.generated.json";
 import ssdsProvenanceJson from "../ssds/ssds-provenance.generated.json";
 
 export type ProvenanceSurvey = { id: string; name: string };
@@ -23,7 +22,12 @@ export type ProvenanceSurvey = { id: string; name: string };
 type SsdsEntry = { kind: string; originalSurveys: ProvenanceSurvey[] };
 const SSDS_PROVENANCE = ssdsProvenanceJson as Record<string, SsdsEntry>;
 
-const SSDS_DISPLAY_NAME = "社会・人口統計体系";
+const ESTAT_PROVENANCE = estatProvenanceJson as {
+  ssdsTableIds: string[];
+  statsDataIdToSurvey: Record<string, ProvenanceSurvey>;
+};
+const SSDS_TABLE_IDS = new Set(ESTAT_PROVENANCE.ssdsTableIds);
+
 // kind:"kakei-chousa" は家計調査（品目別）= survey マスタの "kakei-chousa" バケット
 const KAKEI_SURVEY: ProvenanceSurvey = { id: "kakei-chousa", name: "家計調査（品目別）" };
 
@@ -33,17 +37,26 @@ function dedupe(surveys: ProvenanceSurvey[]): ProvenanceSurvey[] {
   return [...seen.values()];
 }
 
-function resolveEstat(source: Extract<SourceConfig, { kind: "estat" }>): ProvenanceSurvey[] {
-  // SSDS (二次統計): cdCat01 で原典を引く。
-  // 市区町村版など displayName に接尾語が付く変種 (例「社会・人口統計体系（市区町村データ…）」) も拾う。
-  if (source.displayName?.startsWith(SSDS_DISPLAY_NAME) && source.cdCat01) {
-    return SSDS_PROVENANCE[source.cdCat01]?.originalSurveys ?? [];
+/** statsDataId が SSDS (社会・人口統計体系) のテーブルか。SSDS は cdCat01 で原典を引く。 */
+export function isSsdsStatsDataId(statsDataId: string | undefined): boolean {
+  return !!statsDataId && SSDS_TABLE_IDS.has(statsDataId);
+}
+
+/**
+ * e-Stat param から原典調査を解決する単一ルール。ranking / 時系列 / 円グラフが共有する。
+ *   - statsDataId が SSDS テーブル → cdCat01 で原典 (複数可)
+ *   - それ以外                    → statsDataId で survey (1 件)
+ */
+export function resolveProvenanceByParams(
+  statsDataId: string | undefined,
+  cdCat01: string | undefined,
+): ProvenanceSurvey[] {
+  if (!statsDataId) return [];
+  if (SSDS_TABLE_IDS.has(statsDataId)) {
+    return cdCat01 ? (SSDS_PROVENANCE[cdCat01]?.originalSurveys ?? []) : [];
   }
-  // 一次統計: displayName を survey id へ
-  const name = source.displayName;
-  if (!name) return [];
-  const id = DISPLAYNAME_TO_SURVEY[name];
-  return id ? [{ id, name }] : [];
+  const survey = ESTAT_PROVENANCE.statsDataIdToSurvey[statsDataId];
+  return survey ? [survey] : [];
 }
 
 function resolveCalculated(
@@ -80,7 +93,7 @@ export function resolveSourceProvenance(
     case "kakei-chousa":
       return [KAKEI_SURVEY];
     case "estat":
-      return dedupe(resolveEstat(source));
+      return dedupe(resolveProvenanceByParams(source.statsDataId, source.cdCat01));
     case "calculated":
       return dedupe(resolveCalculated(source, registry, depth));
     case "mlit":
