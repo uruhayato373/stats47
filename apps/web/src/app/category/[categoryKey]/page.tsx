@@ -27,6 +27,7 @@ import {
   FeaturedRankingCard,
   CategoryRankingTable,
   SurveyCard,
+  isCaveatNote,
   type CategoryRankingListItem,
 } from "@/features/ranking";
 import {
@@ -181,10 +182,13 @@ export default async function CategoryPage({ params }: PageProps) {
   // テーブル用データ
   const allItems: CategoryRankingListItem[] = rankingItems.map((item) => {
     const latestYear = parseLatestYear(item.latestYear);
+    // 一覧表のタイトル: 定義的 subtitle は同名指標の区別に有用なので括弧付きで残すが、
+    // データ注釈 (※系) はタイトルに連結しない (名称が肥大化し読みにくくなるため)。
+    const showSubtitle = item.subtitle && !isCaveatNote(item.subtitle);
     return {
       rankingKey: item.rankingKey,
       areaType: "prefecture",
-      title: item.subtitle ? `${item.title} (${item.subtitle})` : item.title,
+      title: showSubtitle ? `${item.title}（${item.subtitle}）` : item.title,
       subtitle: item.subtitle,
       latestYear,
       unit: item.unit,
@@ -235,7 +239,10 @@ export default async function CategoryPage({ params }: PageProps) {
     }
     return {
       rankingKey: item.rankingKey,
-      title: item.subtitle ? `${item.title} (${item.subtitle})` : item.title,
+      title:
+        item.subtitle && !isCaveatNote(item.subtitle)
+          ? `${item.title}（${item.subtitle}）`
+          : item.title,
       latestYear,
       unit: item.unit,
       topAreaName: top?.areaName,

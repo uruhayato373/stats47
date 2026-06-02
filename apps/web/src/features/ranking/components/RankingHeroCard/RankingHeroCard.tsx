@@ -151,12 +151,12 @@ export function RankingHeroCard({
           )}
           <h1 className="mt-0.5 text-2xl font-bold text-slate-900">
             {title}
-            {titleDetail && (
-              <span className="font-normal text-muted-foreground">
-                （{titleDetail}）
-              </span>
-            )}
           </h1>
+          {titleDetail && (
+            <p className="mt-1 text-sm text-muted-foreground leading-relaxed">
+              {titleDetail}
+            </p>
+          )}
           {(sourceName || yearName || updatedAt) && (
             <p className="mt-1.5 text-xs text-muted-foreground">
               {[
