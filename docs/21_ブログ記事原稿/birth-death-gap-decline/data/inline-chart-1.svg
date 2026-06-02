@@ -1,0 +1,22 @@
+<svg viewBox="0 0 600 260" xmlns="http://www.w3.org/2000/svg" aria-label="都道府県別自然増減率（2023）">
+  <rect x="0" y="0" width="600" height="260" fill="#f8fafc"/>
+  <text x="300" y="28" text-anchor="middle" font-size="14" font-weight="bold" fill="#1e293b">自然増減率（人口千人当たり、2023年）</text>
+  <text x="300" y="48" text-anchor="middle" font-size="12" fill="#ef4444">★ 全47都道府県で自然減（自然増はゼロ）</text>
+  <!-- 秋田（最悪） -->
+  <rect x="300" y="65" width="220" height="28" fill="#dc2626" rx="3"/>
+  <text x="292" y="84" text-anchor="end" font-size="12" fill="#1e293b">最多自然減: 秋田県</text>
+  <text x="526" y="84" font-size="12" fill="#1e293b">▲15.6（千人当たり）</text>
+  <!-- 東京（都市型） -->
+  <rect x="300" y="102" width="52" height="28" fill="#f59e0b" rx="3"/>
+  <text x="292" y="121" text-anchor="end" font-size="12" fill="#1e293b">東京</text>
+  <text x="358" y="121" font-size="12" fill="#1e293b">▲1.4（婚姻率高いが出生率最下位）</text>
+  <!-- 沖縄（最近転落） -->
+  <rect x="300" y="139" width="65" height="28" fill="#f97316" rx="3"/>
+  <text x="292" y="158" text-anchor="end" font-size="12" fill="#1e293b">沖縄</text>
+  <text x="371" y="158" font-size="12" fill="#1e293b">▲1.7（2023年に初めて自然減）</text>
+  <!-- 全国平均 -->
+  <rect x="300" y="176" width="108" height="28" fill="#ef4444" rx="3"/>
+  <text x="292" y="195" text-anchor="end" font-size="12" fill="#1e293b">全国平均</text>
+  <text x="414" y="195" font-size="12" fill="#1e293b">▲3.4（2024年）</text>
+  <text x="300" y="248" text-anchor="middle" font-size="10" fill="#64748b">出典: e-Stat 社会・人口統計体系</text>
+</svg>
