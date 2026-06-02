@@ -11,11 +11,16 @@ import {
 } from "@stats47/components/atoms/ui/select";
 
 import { useFlowData } from "@/components/charts/useFlowData";
+
 import { FinanceSankey } from "@/features/finance-flow/components/FinanceSankey";
+import type { FinanceFlowData } from "@/features/finance-flow/lib/types";
 import { PREFECTURES } from "@/features/migration-flow/lib/prefectures";
 
-import type { FinanceTrendData, TrendPoint, FinanceMetricMeta } from "../lib/load-finance-trends";
-import type { FinanceFlowData } from "@/features/finance-flow/lib/types";
+import type {
+  FinanceTrendData,
+  TrendPoint,
+  FinanceMetricMeta,
+} from "../lib/load-finance-trends";
 
 interface Props {
   trends: FinanceTrendData;
