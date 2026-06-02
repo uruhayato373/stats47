@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img" aria-label="病床利用率 上位10県 2024">
+  <style>
+    .bar { fill: #2563eb; }
+    .lbl { fill: currentColor; font-size: 13px; font-family: sans-serif; }
+    .val { fill: currentColor; font-size: 12px; font-family: sans-serif; }
+    .axis { stroke: currentColor; opacity: 0.3; }
+  </style>
+  <text class="lbl" x="8" y="20" style="font-size:14px;font-weight:bold;">病床利用率 上位10県(％・2024)</text>
+  <g transform="translate(80,36)">
+    <line class="axis" x1="0" y1="0" x2="0" y2="300" />
+    <g transform="translate(0,0)"><text class="lbl" x="-72" y="14">佐賀県</text><rect class="bar" x="0" y="4" width="412" height="16" /><text class="val" x="418" y="17">82.4</text></g>
+    <g transform="translate(0,28)"><text class="lbl" x="-72" y="14">福岡県</text><rect class="bar" x="0" y="4" width="403" height="16" /><text class="val" x="409" y="17">80.6</text></g>
+    <g transform="translate(0,56)"><text class="lbl" x="-72" y="14">山口県</text><rect class="bar" x="0" y="4" width="402" height="16" /><text class="val" x="408" y="17">80.5</text></g>
+    <g transform="translate(0,84)"><text class="lbl" x="-72" y="14">富山県</text><rect class="bar" x="0" y="4" width="401" height="16" /><text class="val" x="407" y="17">80.2</text></g>
+    <g transform="translate(0,112)"><text class="lbl" x="-72" y="14">神奈川県</text><rect class="bar" x="0" y="4" width="400" height="16" /><text class="val" x="406" y="17">79.9</text></g>
+    <g transform="translate(0,140)"><text class="lbl" x="-72" y="14">広島県</text><rect class="bar" x="0" y="4" width="399" height="16" /><text class="val" x="405" y="17">79.8</text></g>
+    <g transform="translate(0,168)"><text class="lbl" x="-72" y="14">熊本県</text><rect class="bar" x="0" y="4" width="399" height="16" /><text class="val" x="405" y="17">79.7</text></g>
+    <g transform="translate(0,196)"><text class="lbl" x="-72" y="14">沖縄県</text><rect class="bar" x="0" y="4" width="399" height="16" /><text class="val" x="405" y="17">79.7</text></g>
+    <g transform="translate(0,224)"><text class="lbl" x="-72" y="14">大分県</text><rect class="bar" x="0" y="4" width="397" height="16" /><text class="val" x="403" y="17">79.4</text></g>
+    <g transform="translate(0,252)"><text class="lbl" x="-72" y="14">群馬県</text><rect class="bar" x="0" y="4" width="396" height="16" /><text class="val" x="402" y="17">79.1</text></g>
+  </g>
+</svg>

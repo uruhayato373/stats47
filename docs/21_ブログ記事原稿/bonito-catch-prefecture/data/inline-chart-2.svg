@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 260" width="680" height="260">
+  <rect width="680" height="260" fill="#f8fafc"/>
+  <text x="340" y="24" text-anchor="middle" font-size="14" font-weight="bold" fill="#1e293b">焼津港（静岡）vs 気仙沼港（宮城）の棲み分け</text>
+  <!-- 焼津 -->
+  <rect x="40" y="50" width="260" height="160" rx="8" fill="#eff6ff" stroke="#3b82f6" stroke-width="2"/>
+  <text x="170" y="76" text-anchor="middle" font-size="14" font-weight="bold" fill="#1e293b">焼津港（静岡）</text>
+  <text x="170" y="100" text-anchor="middle" font-size="12" fill="#334155">遠洋カツオ漁の拠点</text>
+  <text x="170" y="120" text-anchor="middle" font-size="12" fill="#334155">冷凍カツオ・まき網漁</text>
+  <text x="170" y="140" text-anchor="middle" font-size="12" fill="#334155">統計漁獲量: 81,295t</text>
+  <text x="170" y="160" text-anchor="middle" font-size="12" fill="#334155">全国シェア: 34%</text>
+  <text x="170" y="185" text-anchor="middle" font-size="11" fill="#64748b">八丈島沖・遠州灘まで遠征</text>
+  <!-- 気仙沼 -->
+  <rect x="380" y="50" width="260" height="160" rx="8" fill="#f0fdf4" stroke="#22c55e" stroke-width="2"/>
+  <text x="510" y="76" text-anchor="middle" font-size="14" font-weight="bold" fill="#1e293b">気仙沼港（宮城）</text>
+  <text x="510" y="100" text-anchor="middle" font-size="12" fill="#334155">生鮮カツオ水揚げの拠点</text>
+  <text x="510" y="120" text-anchor="middle" font-size="12" fill="#334155">近海一本釣り</text>
+  <text x="510" y="140" text-anchor="middle" font-size="12" fill="#334155">統計漁獲量: 19,828t（4位）</text>
+  <text x="510" y="160" text-anchor="middle" font-size="12" fill="#334155">生鮮水揚げ: 20年以上連続1位</text>
+  <text x="510" y="185" text-anchor="middle" font-size="11" fill="#64748b">黒潮×親潮の交差点に近接</text>
+  <!-- center -->
+  <text x="340" y="138" text-anchor="middle" font-size="20" fill="#94a3b8">vs</text>
+</svg>

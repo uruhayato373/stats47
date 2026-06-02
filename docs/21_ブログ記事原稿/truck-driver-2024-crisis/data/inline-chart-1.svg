@@ -1,0 +1,17 @@
+<svg viewBox="0 0 600 300" xmlns="http://www.w3.org/2000/svg" aria-label="運輸3職種の地域年収格差比較">
+  <rect x="0" y="0" width="600" height="300" fill="#f8fafc"/>
+  <text x="300" y="28" text-anchor="middle" font-size="14" font-weight="bold" fill="#1e293b">運輸3職種の地域年収格差（最高÷最低）</text>
+  <!-- タクシー -->
+  <rect x="80" y="55" width="350" height="44" fill="#3b82f6" rx="4"/>
+  <text x="440" y="83" font-size="13" fill="#1e293b">2.54倍（東京586万 ÷ 石川231万）</text>
+  <text x="72" y="83" text-anchor="end" font-size="13" fill="#1e293b">タクシー</text>
+  <!-- バス -->
+  <rect x="80" y="115" width="277" height="44" fill="#10b981" rx="4"/>
+  <text x="366" y="143" font-size="13" fill="#1e293b">2.02倍（東京571万 ÷ 大分283万）</text>
+  <text x="72" y="143" text-anchor="end" font-size="13" fill="#1e293b">バス</text>
+  <!-- トラック -->
+  <rect x="80" y="175" width="167" height="44" fill="#f59e0b" rx="4"/>
+  <text x="256" y="203" font-size="13" fill="#1e293b">1.71倍（東京593万 ÷ 長崎347万）</text>
+  <text x="72" y="203" text-anchor="end" font-size="13" fill="#1e293b">トラック</text>
+  <text x="300" y="268" text-anchor="middle" font-size="11" fill="#64748b">出典: 厚生労働省「賃金構造基本統計調査」2023年</text>
+</svg>
