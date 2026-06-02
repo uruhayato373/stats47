@@ -31,14 +31,25 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const PROJECT_ROOT = path.resolve(__dirname, "..", "..", "..");
 
-const slug = process.argv[2];
-if (!slug) {
-  console.error("usage: node quality-gate.mjs <slug>");
+const arg = process.argv[2];
+if (!arg) {
+  console.error("usage: node quality-gate.mjs <slug | path/to/article.md>");
   process.exit(1);
 }
 
-const articlePath = path.join(PROJECT_ROOT, ".local/r2/app/blog", slug, "article.md");
-const dataDir = path.join(PROJECT_ROOT, ".local/r2/app/blog", slug, "data");
+// arg が .md ファイルパス (docs/21 ドラフト等) ならそのまま検査する。
+// それ以外は slug とみなし .local/r2/app/blog/<slug>/ を解決する (CI publish パイプライン用)。
+const looksLikePath = arg.endsWith(".md") || arg.includes("/");
+let articlePath;
+let dataDir;
+if (looksLikePath) {
+  articlePath = path.resolve(arg);
+  dataDir = path.join(path.dirname(articlePath), "data");
+} else {
+  articlePath = path.join(PROJECT_ROOT, ".local/r2/app/blog", arg, "article.md");
+  dataDir = path.join(PROJECT_ROOT, ".local/r2/app/blog", arg, "data");
+}
+const slug = looksLikePath ? path.basename(path.dirname(articlePath)) : arg;
 if (!fs.existsSync(articlePath)) {
   console.error(`[error] article not found: ${articlePath}`);
   process.exit(2);

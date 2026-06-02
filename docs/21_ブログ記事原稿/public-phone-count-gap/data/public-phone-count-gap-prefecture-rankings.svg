@@ -1,0 +1,91 @@
+<!-- data-source: public-phone-count-gap-prefecture-rankings.json | generated: 2026-06-02T05:18:07.075Z -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 480" width="680" height="480" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" role="img" aria-label="公衆電話設置台数 都道府県ランキング（2024年度）">
+  <rect width="680" height="480" fill="#fafafa" rx="8"/>
+  <text x="340" y="24" text-anchor="middle" font-size="16" font-weight="bold" fill="#222">公衆電話設置台数 都道府県ランキング（2024年度）</text>
+  
+  <text x="227.5" y="54" text-anchor="middle" font-size="12" font-weight="bold" fill="#1565c0">上位 10</text>
+  <text x="542.5" y="54" text-anchor="middle" font-size="12" font-weight="bold" fill="#c62828">下位 10</text>
+  
+      <text x="84" y="82" text-anchor="end" font-size="11" fill="#333">東京都</text>
+      <rect x="90" y="63" width="195" height="30" fill="#1565c0" rx="2"/>
+      <text x="289" y="82" font-size="10" fill="#333">10717個</text>
+    
+      <text x="84" y="118" text-anchor="end" font-size="11" fill="#333">大阪府</text>
+      <rect x="90" y="99" width="105.66063263973126" height="30" fill="#1976d2" rx="2"/>
+      <text x="199.66063263973126" y="118" font-size="10" fill="#333">5807個</text>
+    
+      <text x="84" y="154" text-anchor="end" font-size="11" fill="#333">神奈川県</text>
+      <rect x="90" y="135" width="95.76234020714752" height="30" fill="#1e88e5" rx="2"/>
+      <text x="189.76234020714753" y="154" font-size="10" fill="#333">5263個</text>
+    
+      <text x="84" y="190" text-anchor="end" font-size="11" fill="#333">愛知県</text>
+      <rect x="90" y="171" width="93.0148362414855" height="30" fill="#2196f3" rx="2"/>
+      <text x="187.0148362414855" y="190" font-size="10" fill="#333">5112個</text>
+    
+      <text x="84" y="226" text-anchor="end" font-size="11" fill="#333">千葉県</text>
+      <rect x="90" y="207" width="85.75487543155734" height="30" fill="#42a5f5" rx="2"/>
+      <text x="179.75487543155734" y="226" font-size="10" fill="#333">4713個</text>
+    
+      <text x="84" y="262" text-anchor="end" font-size="11" fill="#333">北海道</text>
+      <rect x="90" y="243" width="75.58365214145749" height="30" fill="#64b5f6" rx="2"/>
+      <text x="169.5836521414575" y="262" font-size="10" fill="#333">4154個</text>
+    
+      <text x="84" y="298" text-anchor="end" font-size="11" fill="#333">福岡県</text>
+      <rect x="90" y="279" width="64.53905010730615" height="30" fill="#90caf9" rx="2"/>
+      <text x="158.53905010730614" y="298" font-size="10" fill="#333">3547個</text>
+    
+      <text x="84" y="334" text-anchor="end" font-size="11" fill="#333">埼玉県</text>
+      <rect x="90" y="315" width="62.42838480918168" height="30" fill="#1565c0" rx="2"/>
+      <text x="156.4283848091817" y="334" font-size="10" fill="#333">3431個</text>
+    
+      <text x="84" y="370" text-anchor="end" font-size="11" fill="#333">兵庫県</text>
+      <rect x="90" y="351" width="62.42838480918168" height="30" fill="#1976d2" rx="2"/>
+      <text x="156.4283848091817" y="370" font-size="10" fill="#333">3431個</text>
+    
+      <text x="84" y="406" text-anchor="end" font-size="11" fill="#333">広島県</text>
+      <rect x="90" y="387" width="47.23523374078567" height="30" fill="#1e88e5" rx="2"/>
+      <text x="141.23523374078567" y="406" font-size="10" fill="#333">2596個</text>
+    
+  
+      <text x="399" y="82" text-anchor="end" font-size="11" fill="#333">徳島県</text>
+      <rect x="405" y="63" width="9.26145376504619" height="30" fill="#c62828" rx="2"/>
+      <text x="418.2614537650462" y="82" font-size="10" fill="#333">509個</text>
+    
+      <text x="399" y="118" text-anchor="end" font-size="11" fill="#333">佐賀県</text>
+      <rect x="405" y="99" width="10.844452738639545" height="30" fill="#d32f2f" rx="2"/>
+      <text x="419.8444527386395" y="118" font-size="10" fill="#333">596個</text>
+    
+      <text x="399" y="154" text-anchor="end" font-size="11" fill="#333">鳥取県</text>
+      <rect x="405" y="135" width="10.971820472147057" height="30" fill="#e53935" rx="2"/>
+      <text x="419.97182047214704" y="154" font-size="10" fill="#333">603個</text>
+    
+      <text x="399" y="190" text-anchor="end" font-size="11" fill="#333">香川県</text>
+      <rect x="405" y="171" width="12.391060931230754" height="30" fill="#ef5350" rx="2"/>
+      <text x="421.39106093123075" y="190" font-size="10" fill="#333">681個</text>
+    
+      <text x="399" y="226" text-anchor="end" font-size="11" fill="#333">福井県</text>
+      <rect x="405" y="207" width="12.59121022674256" height="30" fill="#e57373" rx="2"/>
+      <text x="421.59121022674253" y="226" font-size="10" fill="#333">692個</text>
+    
+      <text x="399" y="262" text-anchor="end" font-size="11" fill="#333">富山県</text>
+      <rect x="405" y="243" width="12.936922646262946" height="30" fill="#ef9a9a" rx="2"/>
+      <text x="421.93692264626293" y="262" font-size="10" fill="#333">711個</text>
+    
+      <text x="399" y="298" text-anchor="end" font-size="11" fill="#333">島根県</text>
+      <rect x="405" y="279" width="15.447886535411028" height="30" fill="#c62828" rx="2"/>
+      <text x="424.44788653541104" y="298" font-size="10" fill="#333">849個</text>
+    
+      <text x="399" y="334" text-anchor="end" font-size="11" fill="#333">大分県</text>
+      <rect x="405" y="315" width="15.57525426891854" height="30" fill="#d32f2f" rx="2"/>
+      <text x="424.5752542689185" y="334" font-size="10" fill="#333">856個</text>
+    
+      <text x="399" y="370" text-anchor="end" font-size="11" fill="#333">石川県</text>
+      <rect x="405" y="351" width="15.957357469441074" height="30" fill="#e53935" rx="2"/>
+      <text x="424.9573574694411" y="370" font-size="10" fill="#333">877個</text>
+    
+      <text x="399" y="406" text-anchor="end" font-size="11" fill="#333">秋田県</text>
+      <rect x="405" y="387" width="16.139311374451808" height="30" fill="#ef5350" rx="2"/>
+      <text x="425.13931137445184" y="406" font-size="10" fill="#333">887個</text>
+    
+  <text x="340" y="462" text-anchor="middle" font-size="10" fill="#888">凡例: 青系=上位 / 赤系=下位</text>
+</svg>

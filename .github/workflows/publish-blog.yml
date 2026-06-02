@@ -94,6 +94,12 @@ jobs:
           echo "publishedAt=$PD / published=true set for $SLUG"
           grep -m1 '^publishedAt:' "$A"; grep -m1 '^published:' "$A"
 
+      # 構造品質ゲート (2026-06-02 追加): factual gate は数値捏造のみ検出するため、
+      # 薄い記事 (charCount<3000 / internalLinks<3 / H2<4 / データ出典欠落 / NG word) が
+      # 素通りしていた (GSC高インプレ10記事の再発防止)。push 前に R2 公開をブロックする。
+      - name: 🧱 Quality gate (構造・薄さ — 公開ブロック)
+        run: node .claude/scripts/blog/quality-gate.mjs "${{ github.event.inputs.slug }}"
+
       - name: 🖼️ Generate blog thumbnails (staged → 記事と一緒に push)
         run: |
           # ogp.json が無くても article.md frontmatter から title/subtitle を導出して

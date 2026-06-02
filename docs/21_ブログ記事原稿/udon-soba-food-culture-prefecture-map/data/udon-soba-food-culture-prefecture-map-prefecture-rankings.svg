@@ -1,0 +1,91 @@
+<!-- data-source: udon-soba-food-culture-prefecture-map-prefecture-rankings.json | generated: 2026-06-02T05:21:24.796Z -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 480" width="680" height="480" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" role="img" aria-label="生うどん・そば消費量 都道府県ランキング（2024年）">
+  <rect width="680" height="480" fill="#fafafa" rx="8"/>
+  <text x="340" y="24" text-anchor="middle" font-size="16" font-weight="bold" fill="#222">生うどん・そば消費量 都道府県ランキング（2024年）</text>
+  
+  <text x="227.5" y="54" text-anchor="middle" font-size="12" font-weight="bold" fill="#1565c0">上位 10</text>
+  <text x="542.5" y="54" text-anchor="middle" font-size="12" font-weight="bold" fill="#c62828">下位 10</text>
+  
+      <text x="84" y="82" text-anchor="end" font-size="11" fill="#333">香川県</text>
+      <rect x="90" y="63" width="195" height="30" fill="#1565c0" rx="2"/>
+      <text x="289" y="82" font-size="10" fill="#333">16788g</text>
+    
+      <text x="84" y="118" text-anchor="end" font-size="11" fill="#333">滋賀県</text>
+      <rect x="90" y="99" width="148.99124374553253" height="30" fill="#1976d2" rx="2"/>
+      <text x="242.99124374553253" y="118" font-size="10" fill="#333">12827g</text>
+    
+      <text x="84" y="154" text-anchor="end" font-size="11" fill="#333">兵庫県</text>
+      <rect x="90" y="135" width="146.52877055039312" height="30" fill="#1e88e5" rx="2"/>
+      <text x="240.52877055039312" y="154" font-size="10" fill="#333">12615g</text>
+    
+      <text x="84" y="190" text-anchor="end" font-size="11" fill="#333">長野県</text>
+      <rect x="90" y="171" width="141.85936383130806" height="30" fill="#2196f3" rx="2"/>
+      <text x="235.85936383130806" y="190" font-size="10" fill="#333">12213g</text>
+    
+      <text x="84" y="226" text-anchor="end" font-size="11" fill="#333">島根県</text>
+      <rect x="90" y="207" width="139.5711222301644" height="30" fill="#42a5f5" rx="2"/>
+      <text x="233.5711222301644" y="226" font-size="10" fill="#333">12016g</text>
+    
+      <text x="84" y="262" text-anchor="end" font-size="11" fill="#333">高知県</text>
+      <rect x="90" y="243" width="136.69049320943532" height="30" fill="#64b5f6" rx="2"/>
+      <text x="230.69049320943532" y="262" font-size="10" fill="#333">11768g</text>
+    
+      <text x="84" y="298" text-anchor="end" font-size="11" fill="#333">岡山県</text>
+      <rect x="90" y="279" width="136.46979985704073" height="30" fill="#90caf9" rx="2"/>
+      <text x="230.46979985704073" y="298" font-size="10" fill="#333">11749g</text>
+    
+      <text x="84" y="334" text-anchor="end" font-size="11" fill="#333">徳島県</text>
+      <rect x="90" y="315" width="134.83202287348107" height="30" fill="#1565c0" rx="2"/>
+      <text x="228.83202287348107" y="334" font-size="10" fill="#333">11608g</text>
+    
+      <text x="84" y="370" text-anchor="end" font-size="11" fill="#333">群馬県</text>
+      <rect x="90" y="351" width="134.41386704789136" height="30" fill="#1976d2" rx="2"/>
+      <text x="228.41386704789136" y="370" font-size="10" fill="#333">11572g</text>
+    
+      <text x="84" y="406" text-anchor="end" font-size="11" fill="#333">奈良県</text>
+      <rect x="90" y="387" width="133.91440314510365" height="30" fill="#1e88e5" rx="2"/>
+      <text x="227.91440314510365" y="406" font-size="10" fill="#333">11529g</text>
+    
+  
+      <text x="399" y="82" text-anchor="end" font-size="11" fill="#333">沖縄県</text>
+      <rect x="405" y="63" width="50.852394567548245" height="30" fill="#c62828" rx="2"/>
+      <text x="459.85239456754823" y="82" font-size="10" fill="#333">4378g</text>
+    
+      <text x="399" y="118" text-anchor="end" font-size="11" fill="#333">熊本県</text>
+      <rect x="405" y="99" width="77.10328806290208" height="30" fill="#d32f2f" rx="2"/>
+      <text x="486.1032880629021" y="118" font-size="10" fill="#333">6638g</text>
+    
+      <text x="399" y="154" text-anchor="end" font-size="11" fill="#333">福岡県</text>
+      <rect x="405" y="135" width="77.66082916368835" height="30" fill="#e53935" rx="2"/>
+      <text x="486.66082916368833" y="154" font-size="10" fill="#333">6686g</text>
+    
+      <text x="399" y="190" text-anchor="end" font-size="11" fill="#333">長崎県</text>
+      <rect x="405" y="171" width="80.07684060042888" height="30" fill="#ef5350" rx="2"/>
+      <text x="489.0768406004289" y="190" font-size="10" fill="#333">6894g</text>
+    
+      <text x="399" y="226" text-anchor="end" font-size="11" fill="#333">神奈川県</text>
+      <rect x="405" y="207" width="84.36293781272337" height="30" fill="#e57373" rx="2"/>
+      <text x="493.3629378127234" y="226" font-size="10" fill="#333">7263g</text>
+    
+      <text x="399" y="262" text-anchor="end" font-size="11" fill="#333">秋田県</text>
+      <rect x="405" y="243" width="89.97319513938527" height="30" fill="#ef9a9a" rx="2"/>
+      <text x="498.97319513938527" y="262" font-size="10" fill="#333">7746g</text>
+    
+      <text x="399" y="298" text-anchor="end" font-size="11" fill="#333">東京都</text>
+      <rect x="405" y="279" width="90.35650464617584" height="30" fill="#c62828" rx="2"/>
+      <text x="499.35650464617584" y="298" font-size="10" fill="#333">7779g</text>
+    
+      <text x="399" y="334" text-anchor="end" font-size="11" fill="#333">佐賀県</text>
+      <rect x="405" y="315" width="90.94889206576126" height="30" fill="#d32f2f" rx="2"/>
+      <text x="499.94889206576124" y="334" font-size="10" fill="#333">7830g</text>
+    
+      <text x="399" y="370" text-anchor="end" font-size="11" fill="#333">茨城県</text>
+      <rect x="405" y="351" width="93.75982844889207" height="30" fill="#e53935" rx="2"/>
+      <text x="502.75982844889205" y="370" font-size="10" fill="#333">8072g</text>
+    
+      <text x="399" y="406" text-anchor="end" font-size="11" fill="#333">北海道</text>
+      <rect x="405" y="387" width="94.99106504646176" height="30" fill="#ef5350" rx="2"/>
+      <text x="503.99106504646176" y="406" font-size="10" fill="#333">8178g</text>
+    
+  <text x="340" y="462" text-anchor="middle" font-size="10" fill="#888">凡例: 青系=上位 / 赤系=下位</text>
+</svg>

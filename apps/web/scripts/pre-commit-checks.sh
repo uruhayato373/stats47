@@ -226,6 +226,48 @@ if [ -n "$STAGED_ARTICLES" ]; then
   else
     echo -e "${GREEN}✅ factual cross-check 全件 pass${NC}"
   fi
+
+  # 6.1 構造品質ゲート (2026-06-02 追加)
+  # published: true のドラフトだけを対象に quality-gate.mjs を適用する。
+  # 薄い記事 (charCount<3000 / internalLinks<3 / H2<4 / データ出典欠落 / NG word 等) を
+  # public 公開前にコミット段階で止める。published: false の作業中ドラフトは対象外。
+  # 経緯: GSC高インプレ10記事を published: true の薄い状態で投入した再発防止 (factual gate のみで素通りした)。
+  echo -e "${GREEN}🧱 ブログ記事 構造品質ゲート (published のみ)...${NC}"
+  QUALITY_FAILED=0
+  QUALITY_CHECKED=0
+  while IFS= read -r article; do
+    if [ -z "$article" ]; then continue; fi
+    # frontmatter が published: true のものだけゲートをかける
+    if ! grep -qE "^published:[[:space:]]*true[[:space:]]*$" "$PROJECT_ROOT/$article" 2>/dev/null; then
+      echo -e "${YELLOW}  ⏭️  $article: published: true ではない (作業中ドラフト扱い)、構造ゲート skip${NC}"
+      continue
+    fi
+    QUALITY_CHECKED=$((QUALITY_CHECKED + 1))
+    if ! node "$PROJECT_ROOT/.claude/scripts/blog/quality-gate.mjs" \
+         "$PROJECT_ROOT/$article" > /tmp/quality-gate.json 2>&1; then
+      QUALITY_FAILED=$((QUALITY_FAILED + 1))
+      echo -e "${RED}  ❌ $article: 構造品質ゲート FAIL${NC}"
+      cat /tmp/quality-gate.json | node -e "
+        let d=''; process.stdin.on('data',c=>d+=c).on('end',()=>{
+          try { const j=JSON.parse(d); (j.blockers||[]).forEach(b=>console.error('     ' + b)); }
+          catch(e) { console.error('     (gate 実行エラー — /tmp/quality-gate.json 参照)'); }
+        });
+      " 2>&1 || true
+    else
+      echo -e "${GREEN}  ✅ $article${NC}"
+    fi
+  done <<< "$STAGED_ARTICLES"
+
+  if [ "$QUALITY_FAILED" -gt 0 ]; then
+    echo -e "${RED}❌ ブログ記事 $QUALITY_FAILED 件が構造品質ゲート未達 (published: true)。コミット中止。${NC}"
+    echo -e "${YELLOW}💡 基準: .claude/rules/blog-quality-standards.md / 確認: node .claude/scripts/blog/quality-gate.mjs <article.md>${NC}"
+    echo -e "${YELLOW}💡 公開前提でなければ frontmatter を published: false に戻して再コミット${NC}"
+    ERROR_COUNT=$((ERROR_COUNT + 1))
+  elif [ "$QUALITY_CHECKED" -gt 0 ]; then
+    echo -e "${GREEN}✅ 構造品質ゲート 全件 pass ($QUALITY_CHECKED 件)${NC}"
+  else
+    echo -e "${GREEN}✅ published: true のブログ記事なし、構造ゲート対象外${NC}"
+  fi
 else
   echo -e "${GREEN}✅ ブログ記事の変更なし${NC}"
 fi
