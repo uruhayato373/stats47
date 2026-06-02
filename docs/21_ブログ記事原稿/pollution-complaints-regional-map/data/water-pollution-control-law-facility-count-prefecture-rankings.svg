@@ -1,0 +1,65 @@
+<!-- data-source: water-pollution-control-law-facility-count-prefecture-rankings.json | generated: 2026-06-02T21:29:30.010Z -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 300" width="680" height="300" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" role="img" aria-label="水質汚濁防止法上の特定事業場数 都道府県ランキング（2023年）">
+  <style>
+    .svg-bg{fill:#fafafa}
+    .svg-title{fill:#222}
+    .svg-subtitle{fill:#666}
+    .svg-label{fill:#333}
+    .svg-legend{fill:#888}
+    @media (prefers-color-scheme:dark){
+      .svg-bg{fill:#1f2937}
+      .svg-title{fill:#f9fafb}
+      .svg-subtitle{fill:#9ca3af}
+      .svg-label{fill:#e5e7eb}
+      .svg-legend{fill:#9ca3af}
+    }
+  </style>
+  <rect width="680" height="300" class="svg-bg" rx="8"/>
+  <text x="340" y="24" text-anchor="middle" font-size="16" font-weight="bold" class="svg-title">水質汚濁防止法上の特定事業場数 都道府県ランキング（2023年）</text>
+  
+  <text x="227.5" y="54" text-anchor="middle" font-size="12" font-weight="bold" fill="#1565c0">上位 5</text>
+  <text x="542.5" y="54" text-anchor="middle" font-size="12" font-weight="bold" fill="#c62828">下位 5</text>
+  
+      <text x="84" y="82" text-anchor="end" font-size="11" class="svg-label">長野県</text>
+      <rect x="90" y="63" width="195" height="30" fill="#1565c0" rx="2"/>
+      <text x="289" y="82" font-size="10" class="svg-label">12414件</text>
+    
+      <text x="84" y="118" text-anchor="end" font-size="11" class="svg-label">愛知県</text>
+      <rect x="90" y="99" width="168.2334461092315" height="30" fill="#1976d2" rx="2"/>
+      <text x="262.2334461092315" y="118" font-size="10" class="svg-label">10710件</text>
+    
+      <text x="84" y="154" text-anchor="end" font-size="11" class="svg-label">静岡県</text>
+      <rect x="90" y="135" width="165.6259062348961" height="30" fill="#1e88e5" rx="2"/>
+      <text x="259.6259062348961" y="154" font-size="10" class="svg-label">10544件</text>
+    
+      <text x="84" y="190" text-anchor="end" font-size="11" class="svg-label">千葉県</text>
+      <rect x="90" y="171" width="158.40019333011116" height="30" fill="#2196f3" rx="2"/>
+      <text x="252.40019333011116" y="190" font-size="10" class="svg-label">10084件</text>
+    
+      <text x="84" y="226" text-anchor="end" font-size="11" class="svg-label">兵庫県</text>
+      <rect x="90" y="207" width="141.796761720638" height="30" fill="#42a5f5" rx="2"/>
+      <text x="235.796761720638" y="226" font-size="10" class="svg-label">9027件</text>
+    
+  
+      <text x="399" y="82" text-anchor="end" font-size="11" class="svg-label">沖縄県</text>
+      <rect x="405" y="63" width="29.751087481875302" height="30" fill="#c62828" rx="2"/>
+      <text x="438.7510874818753" y="82" font-size="10" class="svg-label">1894件</text>
+    
+      <text x="399" y="118" text-anchor="end" font-size="11" class="svg-label">鳥取県</text>
+      <rect x="405" y="99" width="35.97148380860319" height="30" fill="#d32f2f" rx="2"/>
+      <text x="444.9714838086032" y="118" font-size="10" class="svg-label">2290件</text>
+    
+      <text x="399" y="154" text-anchor="end" font-size="11" class="svg-label">福井県</text>
+      <rect x="405" y="135" width="38.64185596906718" height="30" fill="#e53935" rx="2"/>
+      <text x="447.6418559690672" y="154" font-size="10" class="svg-label">2460件</text>
+    
+      <text x="399" y="190" text-anchor="end" font-size="11" class="svg-label">高知県</text>
+      <rect x="405" y="171" width="42.380376993716766" height="30" fill="#ef5350" rx="2"/>
+      <text x="451.38037699371677" y="190" font-size="10" class="svg-label">2698件</text>
+    
+      <text x="399" y="226" text-anchor="end" font-size="11" class="svg-label">佐賀県</text>
+      <rect x="405" y="207" width="43.08724021266312" height="30" fill="#e57373" rx="2"/>
+      <text x="452.0872402126631" y="226" font-size="10" class="svg-label">2743件</text>
+    
+  <text x="340" y="282" text-anchor="middle" font-size="10" class="svg-legend">凡例: 青系=上位 / 赤系=下位</text>
+</svg>
