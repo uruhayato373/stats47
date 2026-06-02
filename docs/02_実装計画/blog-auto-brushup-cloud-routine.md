@@ -19,7 +19,7 @@ GSC 高インプレ記事を「候補選定 → データ接地 → AI リライ
 |---|---|---|---|
 | AI リライト → PR | **Claude Routine** (Anthropic remote) | LLM 推論 / Edit / script 実行 / `gh pr create` / develop push | R2 書き込み / workflow dispatch (403) |
 | PR auto-merge | GitHub Actions | ネイティブ権限で merge | — |
-| **develop push → R2 公開** | **GitHub Actions** (`blog-publish-on-push.yml`) | R2 secrets 保持 (dispatch 不要 = 403 回避) | LLM 実行 |
+| **develop → R2 公開** | **GitHub Actions** (`blog-auto-publish.yml`) | R2 secrets 保持 (dispatch 不要 = 403 回避) | LLM 実行 |
 | 効果計測 | GitHub Actions or Routine | GSC snapshot 突合 | — |
 
 > リポジトリの確立済み方針: AI ステップは **Claude Routine** で実装する (`ANTHROPIC_API_KEY` 方式は
@@ -41,8 +41,8 @@ GSC 高インプレ記事を「候補選定 → データ接地 → AI リライ
         ▼ (PR が全ゲート green)
 [GitHub Actions: PR auto-merge]  ← green なら squash merge (label brushup-auto 限定)
         │
-        ▼ (develop に published:true 記事が入る = push)
-[GitHub Actions: blog-publish-on-push.yml]  ← ★403 回避の公開ブリッジ
+        ▼ (develop に published:true 記事が入る)
+[GitHub Actions: blog-auto-publish.yml]  ← ★403 回避の公開ブリッジ
   factual + quality ゲート再検証 → stage → thumbnail → diff-push (app/blog/<slug>) → all.json 再生成 → push
         │
         ▼
@@ -60,15 +60,15 @@ GSC 高インプレ記事を「候補選定 → データ接地 → AI リライ
 | ⑤ ゲート | `.claude/scripts/blog/quality-gate.mjs` (+factual) | ✅ 既存・CI enforce 済 (2026-06-02) |
 | ⑥ PR | Routine が `gh pr create` | ✅ trend pipeline と同型 |
 | ⑦ auto-merge | (要新規 or GitHub 標準 auto-merge) | ⏳ 未実装 |
-| ⑧ 公開ブリッジ | `.github/workflows/blog-publish-on-push.yml` | ✅ **新規実装 (既定 disabled)** |
+| ⑧ 公開ブリッジ | `.github/workflows/blog-auto-publish.yml` | ✅ **新規実装 (現 workflow_dispatch のみ)** |
 | ⑨ 計測 | `.claude/scripts/blog/measure-gsc-impact.mjs` | ✅ 既存・要 SKILL 化 (blog-data-schema Phase D) |
 
 ## 安全設計 (自動公開の肝)
 
 1. **多重ゲート (ブロッキング)**: factual(数値捏造) + quality(構造/薄さ/rank 突合)。PR の CI と公開ブリッジの**両方**で再検証。捏造数値・薄い記事は R2 に到達不能。
 2. **データ接地の徹底**: `data/*.json` を R2 観測値から決定的生成。これが唯一の数値ソース。LLM が digest 外の順位/値を書けば factual で落ちる。
-3. **キルスイッチ**: 公開ブリッジは `vars.BLOG_AUTO_PUBLISH_ENABLED == 'true'` のときだけ起動。Routine は `RemoteTrigger({enabled:false})`。
-4. **量の上限**: Routine 週 ≤3 本、公開ブリッジ 1 push ≤5 本 (`MAX_PUBLISH`)。爆発半径を限定。
+3. **キルスイッチ / 段階解禁**: 公開ブリッジは現 `workflow_dispatch` のみ (自動起動しない)。検証後に `on: push` を後続コミットで追加し、その**マージ自体が解禁の意思表示** (git 履歴に残る)。緊急停止は GitHub Actions UI の "Disable workflow" (リポジトリ変数ガードは over-engineering のため不採用)。Routine は `RemoteTrigger({enabled:false})`。
+4. **量の上限**: Routine 週 ≤3 本、公開ブリッジ 1 実行 ≤5 本 (`MAX_PUBLISH`)。爆発半径を限定。
 5. **クールダウン**: 同一 slug は効果計測まで N 週間 再改修しない (`auto-brushup-history.json`)。チャーン防止。
 6. **NotebookLM 禁止**: headless 非対応の `エキスパート視点追加` focus は強制 `CTR-reframe` (brushup-blog SKILL の既存ガード)。
 7. **ロールバック**: R2 の旧 `article.md` / `all.json` を上書き push で復旧。
@@ -78,14 +78,14 @@ GSC 高インプレ記事を「候補選定 → データ接地 → AI リライ
 
 | Phase | スコープ | 状態 |
 |---|---|---|
-| 1: 人間ゲート | Routine が PR 作成で停止 → 人が merge → 公開ブリッジ | 公開ブリッジ実装済。Routine 未登録 |
-| **2: 半自律 (採用)** | Phase1 + green で auto-merge + 公開ブリッジ自動 | 公開ブリッジ✅ / auto-merge⏳ / Routine⏳ |
+| 1: 人間ゲート | Routine が PR 作成で停止 → 人が merge → 公開ブリッジを手動 dispatch | 公開ブリッジ実装済 (dispatch のみ)。Routine 未登録 |
+| **2: 半自律 (採用)** | Phase1 + green で auto-merge + 公開ブリッジに `on: push` 追加で自動化 | 公開ブリッジ✅(dispatch) / push trigger⏳ / auto-merge⏳ / Routine⏳ |
 | 3: 完全自律 | レビューなし公開 + 自動計測ループ | 効果計測の SKILL 化後 |
 
 ## 稼働に必要な残作業 (この環境では実行/検証不可な分)
 
-- [ ] **`vars.BLOG_AUTO_PUBLISH_ENABLED = true`** をリポジトリ変数に設定 (キルスイッチ解除)
-- [ ] `blog-publish-on-push.yml` の **初回検証**: develop に published 記事を 1 本 push し、Actions ログで factual/quality ゲート → diff-push → all.json 再生成が通るか確認 (本環境では CI ランタイム不在のため未検証)
+- [ ] `blog-auto-publish.yml` の **初回検証 (手動 dispatch)**: `gh workflow run blog-auto-publish.yml -f slugs=<検証 slug>` で実行し、Actions ログで factual/quality ゲート → diff-push → all.json 再生成が通るか確認 (本環境では CI ランタイム不在のため未検証)
+- [ ] 検証 OK 後、**`on: push: branches:[develop]` を後続コミットで追加** (この時点で develop マージ → 自動公開が成立)
 - [ ] **Claude Routine 登録** (`/schedule` 経由): `stats47 weekly blog brushup` — cron 週次、model sonnet、purpose=「① select-brushup-candidates → ② fetch-ranking-data-r2 → ③ brushup-blog --target article → ⑤ quality-gate → ⑥ gh pr create --label brushup-auto」、月上限・GATE。trend pipeline (`trig_01RaPLqZrP4i7wAnCzQjifWJ`) の notes を雛形にする
 - [ ] **auto-merge**: `brushup-auto` ラベル PR を全 check green で squash merge する仕組み (GitHub 標準 auto-merge を Routine が `gh pr merge --auto --squash` で有効化、or 専用 workflow)。権限確認要
 - [ ] `measure-gsc-impact.mjs` の SKILL 化 (`/measure-blog-impact`, blog-data-schema Phase D)

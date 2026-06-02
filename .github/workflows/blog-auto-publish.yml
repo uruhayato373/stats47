@@ -1,26 +1,31 @@
-name: 📤 Blog Auto-Publish on Push (develop → R2)
+name: 📤 Blog Auto-Publish (develop → R2)
 
 # Phase 2 半自律ブログ運用の「公開ブリッジ」。
-# Claude Routine (AI リライト) が develop に push した published:true 記事を、
-# push 起点で自動的に R2 へ公開する。これにより:
-#   - dispatch 403 (外部連携トークンの workflow 実行不可) を回避 (ネイティブ CI として実行)
-#   - 「develop に入った記事 = stats47.jp に反映」を成立させる (R2 snapshot 更新)
+# Claude Routine (AI リライト) が develop に入れた published:true 記事を R2 へ公開する。
+# dispatch 403 (外部連携トークンの workflow 実行不可) を回避し、R2 secrets を持つ
+# ネイティブ CI として publish-blog のロジックを実行する。
+#
+# === 段階導入 (docs/02_実装計画/blog-auto-brushup-cloud-routine.md) ===
+#   現在 = Phase 1: workflow_dispatch のみ (手動起動)。実 CI でステップが通るか検証する段階。
+#   次   = Phase 2: 検証 OK 後、後続コミットで `on: push: branches:[develop]` を追加する。
+#          その「マージ」自体が自動公開の解禁の意思表示 (git 履歴に残る)。
+#   緊急停止: GitHub Actions UI の "Disable workflow" (リポジトリ変数によるガードは廃止)。
 #
 # 安全装置:
-#   - 既定で無効。リポジトリ変数 vars.BLOG_AUTO_PUBLISH_ENABLED == 'true' のときだけ動く (キルスイッチ)
 #   - published:true の docs/21 記事だけが対象 (作業中ドラフト published:false は無視)
 #   - publish 前に ci-factual-gate (数値捏造) + quality-gate (構造・薄さ) を再検証し、
 #     落ちた slug はスキップ (R2 に到達させない)
-#   - 1 回の push で公開する上限を MAX_PUBLISH 件にクランプ (爆発半径の限定)
+#   - 1 回の実行で公開する上限を MAX_PUBLISH 件にクランプ (爆発半径の限定)
 #
-# 設計詳細: docs/02_実装計画/blog-auto-brushup-cloud-routine.md
 # 手動公開 (1 slug 指定) は従来どおり publish-blog.yml を使う。
 
 on:
-  push:
-    branches: [develop]
-    paths:
-      - "docs/21_ブログ記事原稿/**/article.md"
+  workflow_dispatch:
+    inputs:
+      slugs:
+        description: "公開する slug (空白/カンマ区切り)。空なら develop 最新コミットの差分から検出"
+        required: false
+        type: string
 
 permissions:
   contents: read
@@ -39,8 +44,6 @@ env:
 
 jobs:
   auto-publish:
-    # キルスイッチ: リポジトリ変数で明示的に有効化するまで起動しない
-    if: ${{ vars.BLOG_AUTO_PUBLISH_ENABLED == 'true' }}
     runs-on: ubuntu-latest
     timeout-minutes: 40
     steps:
@@ -48,7 +51,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: develop
-          fetch-depth: 2 # before..after の diff を取るため
+          fetch-depth: 2 # 差分検出フォールバック (HEAD~1..HEAD) のため
 
       - name: 🟢 Setup Node.js
         uses: actions/setup-node@v4
@@ -59,31 +62,39 @@ jobs:
       - name: 📦 Install dependencies
         run: npm ci
 
-      - name: 🔍 Detect changed published drafts
+      - name: 🔍 Resolve target published drafts
         id: detect
         run: |
-          BEFORE="${{ github.event.before }}"
-          AFTER="${{ github.sha }}"
-          # before が 0000... (初回) の場合は HEAD~1 にフォールバック
-          if ! git cat-file -e "$BEFORE^{commit}" 2>/dev/null; then BEFORE="$AFTER~1"; fi
-          CHANGED=$(git diff --name-only --diff-filter=ACM "$BEFORE" "$AFTER" \
-            | grep -E '^docs/21_ブログ記事原稿/[^/]+/article\.md$' || true)
+          INPUT_SLUGS="${{ inputs.slugs }}"
+          if [ -n "$INPUT_SLUGS" ]; then
+            # 明示指定: そのまま採用 (存在 + published:true は次ステップのゲートで担保)
+            CANDIDATES=$(echo "$INPUT_SLUGS" | tr ', ' '\n\n' | sed '/^$/d')
+          else
+            # フォールバック: develop 最新コミットで変更された article.md を検出
+            CHANGED=$(git diff --name-only --diff-filter=ACM "HEAD~1" "HEAD" \
+              | grep -E '^docs/21_ブログ記事原稿/[^/]+/article\.md$' || true)
+            CANDIDATES=""
+            for f in $CHANGED; do CANDIDATES="$CANDIDATES $(basename "$(dirname "$f")")"; done
+          fi
+          # published:true のものだけ残す
           SLUGS=""
           COUNT=0
-          for f in $CHANGED; do
-            # published:true のものだけ対象
-            if grep -qE '^published:[[:space:]]*true[[:space:]]*$' "$f"; then
-              slug=$(basename "$(dirname "$f")")
-              SLUGS="$SLUGS $slug"
-              COUNT=$((COUNT + 1))
+          for slug in $CANDIDATES; do
+            f="docs/21_ブログ記事原稿/$slug/article.md"
+            if [ -f "$f" ] && grep -qE '^published:[[:space:]]*true[[:space:]]*$' "$f"; then
+              SLUGS="$SLUGS $slug"; COUNT=$((COUNT + 1))
+            else
+              echo "skip (not found / published!=true): $slug"
             fi
           done
           SLUGS=$(echo $SLUGS | xargs -n1 2>/dev/null | head -n "${MAX_PUBLISH}" | xargs || true)
           echo "slugs=$SLUGS" >> "$GITHUB_OUTPUT"
-          echo "検出: ${COUNT} 件 (上限 ${MAX_PUBLISH} に丸め) → $SLUGS"
-          echo "### Auto-publish 対象" >> "$GITHUB_STEP_SUMMARY"
-          echo "- 検出 published 記事: ${COUNT} 件" >> "$GITHUB_STEP_SUMMARY"
-          echo "- 公開対象 (上限 ${MAX_PUBLISH}): ${SLUGS:-なし}" >> "$GITHUB_STEP_SUMMARY"
+          echo "検出: ${COUNT} 件 (上限 ${MAX_PUBLISH} に丸め) → ${SLUGS:-なし}"
+          {
+            echo "### Auto-publish 対象"
+            echo "- published 記事: ${COUNT} 件"
+            echo "- 公開対象 (上限 ${MAX_PUBLISH}): ${SLUGS:-なし}"
+          } >> "$GITHUB_STEP_SUMMARY"
 
       - name: 🚪 Gate + Stage + Publish each slug
         if: ${{ steps.detect.outputs.slugs != '' }}
@@ -130,4 +141,3 @@ jobs:
         run: |
           echo "- ✅ 公開: ${PUBLISHED:-なし}" >> "$GITHUB_STEP_SUMMARY"
           echo "- ⏭️ ゲート未達でスキップ: ${SKIPPED:-なし}" >> "$GITHUB_STEP_SUMMARY"
-          echo "- 公開後: docs/21 のドラフトは check-published-drafts.cjs が lifecycle 検出" >> "$GITHUB_STEP_SUMMARY"
