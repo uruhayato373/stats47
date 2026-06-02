@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 360" role="img" aria-label="年間日照時間 TOP10・BOTTOM5 (2024年・時間)">
+  <rect width="100%" height="100%" fill="#f8fafc" rx="6"/>
+  <!-- TOP10 -->
+  <text x="108" y="28" text-anchor="end" font-size="13" fill="#475569">1. 高知県</text>
+  <rect x="118" y="12" width="480" height="22" fill="#1d4ed8" rx="2"/>
+  <text x="604" y="28" font-size="12" fill="#334155">2,309h</text>
+  <text x="108" y="56" text-anchor="end" font-size="13" fill="#475569">2. 群馬県</text>
+  <rect x="118" y="40" width="474" height="22" fill="#3b82f6" rx="2"/>
+  <text x="598" y="56" font-size="12" fill="#334155">2,283h</text>
+  <text x="108" y="84" text-anchor="end" font-size="13" fill="#475569">3. 埼玉県</text>
+  <rect x="118" y="68" width="472" height="22" fill="#3b82f6" rx="2"/>
+  <text x="596" y="84" font-size="12" fill="#334155">2,275h</text>
+  <text x="108" y="112" text-anchor="end" font-size="13" fill="#475569">4. 静岡県</text>
+  <rect x="118" y="96" width="460" height="22" fill="#3b82f6" rx="2"/>
+  <text x="584" y="112" font-size="12" fill="#334155">2,218h</text>
+  <text x="108" y="140" text-anchor="end" font-size="13" fill="#475569">5. 愛知県</text>
+  <rect x="118" y="124" width="450" height="22" fill="#3b82f6" rx="2"/>
+  <text x="574" y="140" font-size="12" fill="#334155">2,165h</text>
+  <!-- separator -->
+  <line x1="118" y1="158" x2="620" y2="158" stroke="#cbd5e1" stroke-dasharray="4"/>
+  <text x="370" y="172" text-anchor="middle" font-size="11" fill="#94a3b8">…</text>
+  <!-- BOTTOM5 -->
+  <text x="108" y="198" text-anchor="end" font-size="13" fill="#475569">43. 沖縄県</text>
+  <rect x="118" y="182" width="366" height="22" fill="#f97316" rx="2"/>
+  <text x="490" y="198" font-size="12" fill="#334155">1,758h</text>
+  <text x="108" y="226" text-anchor="end" font-size="13" fill="#475569">44. 秋田県</text>
+  <rect x="118" y="210" width="360" height="22" fill="#ef4444" rx="2"/>
+  <text x="484" y="226" font-size="12" fill="#334155">1,733h</text>
+  <text x="108" y="254" text-anchor="end" font-size="13" fill="#475569">45. 富山県</text>
+  <rect x="118" y="238" width="352" height="22" fill="#ef4444" rx="2"/>
+  <text x="476" y="254" font-size="12" fill="#334155">1,694h</text>
+  <text x="108" y="282" text-anchor="end" font-size="13" fill="#475569">46. 新潟県</text>
+  <rect x="118" y="266" width="344" height="22" fill="#ef4444" rx="2"/>
+  <text x="468" y="282" font-size="12" fill="#334155">1,656h</text>
+  <text x="108" y="310" text-anchor="end" font-size="13" fill="#475569">47. 山形県</text>
+  <rect x="118" y="294" width="338" height="22" fill="#b91c1c" rx="2"/>
+  <text x="462" y="310" font-size="12" fill="#334155">1,626h</text>
+  <text x="370" y="345" text-anchor="middle" font-size="11" fill="#64748b">年間日照時間（2024年・時間）</text>
+</svg>

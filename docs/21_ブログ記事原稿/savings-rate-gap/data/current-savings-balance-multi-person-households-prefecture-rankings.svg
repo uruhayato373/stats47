@@ -1,0 +1,65 @@
+<!-- data-source: current-savings-balance-multi-person-households-prefecture-rankings.json | generated: 2026-06-02T21:26:20.284Z -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 300" width="680" height="300" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" role="img" aria-label="貯蓄現在高 都道府県ランキング（2014年）">
+  <style>
+    .svg-bg{fill:#fafafa}
+    .svg-title{fill:#222}
+    .svg-subtitle{fill:#666}
+    .svg-label{fill:#333}
+    .svg-legend{fill:#888}
+    @media (prefers-color-scheme:dark){
+      .svg-bg{fill:#1f2937}
+      .svg-title{fill:#f9fafb}
+      .svg-subtitle{fill:#9ca3af}
+      .svg-label{fill:#e5e7eb}
+      .svg-legend{fill:#9ca3af}
+    }
+  </style>
+  <rect width="680" height="300" class="svg-bg" rx="8"/>
+  <text x="340" y="24" text-anchor="middle" font-size="16" font-weight="bold" class="svg-title">貯蓄現在高 都道府県ランキング（2014年）</text>
+  
+  <text x="227.5" y="54" text-anchor="middle" font-size="12" font-weight="bold" fill="#1565c0">上位 5</text>
+  <text x="542.5" y="54" text-anchor="middle" font-size="12" font-weight="bold" fill="#c62828">下位 5</text>
+  
+      <text x="84" y="82" text-anchor="end" font-size="11" class="svg-label">東京都</text>
+      <rect x="90" y="63" width="195" height="30" fill="#1565c0" rx="2"/>
+      <text x="289" y="82" font-size="10" class="svg-label">19669千円</text>
+    
+      <text x="84" y="118" text-anchor="end" font-size="11" class="svg-label">神奈川県</text>
+      <rect x="90" y="99" width="188.7144745538665" height="30" fill="#1976d2" rx="2"/>
+      <text x="282.71447455386647" y="118" font-size="10" class="svg-label">19035千円</text>
+    
+      <text x="84" y="154" text-anchor="end" font-size="11" class="svg-label">福井県</text>
+      <rect x="90" y="135" width="184.0251156642432" height="30" fill="#1e88e5" rx="2"/>
+      <text x="278.02511566424323" y="154" font-size="10" class="svg-label">18562千円</text>
+    
+      <text x="84" y="190" text-anchor="end" font-size="11" class="svg-label">愛知県</text>
+      <rect x="90" y="171" width="183.916060806345" height="30" fill="#2196f3" rx="2"/>
+      <text x="277.916060806345" y="190" font-size="10" class="svg-label">18551千円</text>
+    
+      <text x="84" y="226" text-anchor="end" font-size="11" class="svg-label">香川県</text>
+      <rect x="90" y="207" width="180.58493060145406" height="30" fill="#42a5f5" rx="2"/>
+      <text x="274.58493060145406" y="226" font-size="10" class="svg-label">18215千円</text>
+    
+  
+      <text x="399" y="82" text-anchor="end" font-size="11" class="svg-label">沖縄県</text>
+      <rect x="405" y="63" width="56.976206212822206" height="30" fill="#c62828" rx="2"/>
+      <text x="465.9762062128222" y="82" font-size="10" class="svg-label">5747千円</text>
+    
+      <text x="399" y="118" text-anchor="end" font-size="11" class="svg-label">青森県</text>
+      <rect x="405" y="99" width="85.49900859220092" height="30" fill="#d32f2f" rx="2"/>
+      <text x="494.49900859220094" y="118" font-size="10" class="svg-label">8624千円</text>
+    
+      <text x="399" y="154" text-anchor="end" font-size="11" class="svg-label">鹿児島県</text>
+      <rect x="405" y="135" width="93.955717118308" height="30" fill="#e53935" rx="2"/>
+      <text x="502.95571711830803" y="154" font-size="10" class="svg-label">9477千円</text>
+    
+      <text x="399" y="190" text-anchor="end" font-size="11" class="svg-label">宮崎県</text>
+      <rect x="405" y="171" width="100.48909451421017" height="30" fill="#ef5350" rx="2"/>
+      <text x="509.48909451421014" y="190" font-size="10" class="svg-label">10136千円</text>
+    
+      <text x="399" y="226" text-anchor="end" font-size="11" class="svg-label">長崎県</text>
+      <rect x="405" y="207" width="100.8559153998678" height="30" fill="#e57373" rx="2"/>
+      <text x="509.8559153998678" y="226" font-size="10" class="svg-label">10173千円</text>
+    
+  <text x="340" y="282" text-anchor="middle" font-size="10" class="svg-legend">凡例: 青系=上位 / 赤系=下位</text>
+</svg>
