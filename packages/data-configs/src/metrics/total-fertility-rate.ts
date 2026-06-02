@@ -72,8 +72,8 @@ export const totalFertilityRate: MetricConfig = {
   "calculation": {
     "isCalculated": false,
   },
-  "seoTitle": "合計特殊出生率1位は沖縄1.60、東京0.99の最下位｜47都道府県2023最新",
-  "seoDescription": "2023年の合計特殊出生率は1位沖縄(1.60)、最下位東京(0.99)で1.6倍差。47都道府県を地図とグラフで比較する最新ランキング。",
+  "seoTitle": "合計特殊出生率ランキング都道府県【2023】なぜ沖縄1.60が1位で東京0.99が最下位?",
+  "seoDescription": "なぜ沖縄の出生率は全国一なのか?──2023年は1位沖縄(1.60)、最下位東京(0.99)で1.6倍差。47都道府県を地図とグラフで比較する最新ランキング。",
   "isActive": true,
   "isFeatured": false,
   "featuredOrder": 0,

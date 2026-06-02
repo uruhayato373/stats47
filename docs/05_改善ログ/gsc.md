@@ -115,12 +115,15 @@ git TS config (`packages/data-configs/src/metrics/<key>.ts`) の編集は**現�
 ### 次アクション (順序) — R0 ブロッカー反映後に更新
 
 1. ✅ **R4 (config 修正 + lint 拡張)** — 57 件 seoTitle/desc の time-code 除去 + validator 拡張 (commit 済)
-2. ✅ **R1 試作 (wheat-flour 2件)** — seoTitle 問い化 (commit 済)
+2. ✅ **R1 (top8 完了)** — wheat-flour 2 + retail/potato/total-fertility-rate/residential-building/school-teacher/squid の計 8 件を問い化 (commit 済)。R0 dry-run で 8/8 patched 確認
 3. ✅ **R0 (config→item.json refresh exporter)** — 実装 + CI 配線 + dry-run 検証済 (commit 済)
-4. ⏭ **sync-snapshots.yml を CI 実行** — R0 で R1/R4 を本番反映 → curl で検証 (次の手番)
-5. R1 候補 top8 残り の seoTitle 問い化
-6. R2 (retail 等 ai-content 再生成) + R3 (FAQ prompt PAA 化)
-7. B1 (blog 既存波の effect 計測) — 06-20/06-26 期日に合わせる
+4. ⏭ **develop merge → PR(main) → CI → sync-snapshots.yml 実行** — R0 で R1/R4 を本番反映 → curl で検証 (進行中)
+5. R2 (retail 等 ai-content 再生成) + R3 (FAQ prompt PAA 化)
+6. B1 (blog 既存波の effect 計測) — 06-20/06-26 期日に合わせる
+
+### ⚠️ 派生で発見したデータ品質懸念 (要 follow-up)
+
+- `school-teacher-annual-income`: 最下位 愛媛 315.7 万円 / 1位 愛知 885.9 万円 = 2.8 倍。**公立教員給与で 2.8 倍格差・年収 315 万は実態と乖離の疑い** (公務員給与は全国でほぼ均一)。R1 では sensational な「2.8倍」を seoTitle/desc から外して amplify を回避したが、**元データの検証が別途必要** (e-Stat 取得時の単位/集計ミスの可能性)。検証コマンド: `curl …/app/ranking/school-teacher-annual-income/values.json` で 47 県分布を確認。
 
 ## [BLOG-WAVE-2026-05-29-auto] GSC 改善余地上位 4 記事 auto-brushup (cloud session)
 
