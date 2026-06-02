@@ -214,15 +214,25 @@ export default async function BlogPostPage({ params }: PageProps) {
             </div>
 
             {/* メインコンテンツ
-                - xl+: 3 カラム (左 TOC 220 + 本文 auto + 右広告 400)
+                - xl+: 3 カラム (左 300 + 本文 auto + 右 300、左右対称で 300x250 バナーを両サイドに配置)
                 - xl 未満: 1 カラム
                 container は max-w-[1700px] で 1920px+ 画面の余白を最小化 */}
             <div className="mx-auto max-w-[1700px] px-4 py-6">
-                <div className="xl:grid xl:grid-cols-[220px_minmax(0,1fr)_400px] xl:gap-5 xl:items-start">
+                <div className="xl:grid xl:grid-cols-[300px_minmax(0,1fr)_300px] xl:gap-5 xl:items-start">
 
-                    {/* 左カラム (xl+): TOC + 上部 AdSense (sticky) */}
+                    {/* 左カラム (xl+): TOC + 高単価アフィリエイトバナー + 上部 AdSense (sticky) */}
                     <aside className="hidden xl:flex xl:flex-col xl:gap-3 xl:sticky xl:top-20 xl:max-h-[calc(100vh-5.5rem)] xl:overflow-y-auto xl:pr-1">
                         <ArticleTableOfContents content={article.content} compact />
+                        {/* A8.net バナー広告: STRATEGY CAREER (高単価・目次の下) */}
+                        <BannerAd
+                            href="https://px.a8.net/svt/ejp?a8mat=4B5LK5+5YC2K2+5P1E+5YZ75"
+                            imageUrl="https://www26.a8.net/svt/bgt?aid=260601701360&wid=001&eno=01&mid=s00000026573001003000&mc=1"
+                            trackingPixelUrl="https://www10.a8.net/0.gif?a8mat=4B5LK5+5YC2K2+5P1E+5YZ75"
+                            width={300}
+                            height={250}
+                            label="A8 sidebar banner (left, strategy career)"
+                            position="sidebar"
+                        />
                         <Card>
                             <CardHeader className="pb-2">
                                 <CardTitle className="text-sm font-medium text-muted-foreground">広告</CardTitle>
