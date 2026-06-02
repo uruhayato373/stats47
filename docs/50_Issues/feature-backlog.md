@@ -617,18 +617,15 @@ Cloudflare Pages env vars に以下を追加 (現状は未設定で内部 fallba
 - **trigger**: `docs/04_レビュー/critical-review/2026-06-01-codebase-optimization.md` の 6 軸監査。
   PR #414 で T1(reader factory)/T2(prefecture SSOT)/T5-a(raw 要素)/T5-b(Sankey)/T6-verified を実施。
   以下は影響範囲が広い or 設計判断/視覚検証を要するため deferred。
-- **残タスク**:
-  - **T3 型 SSOT 再設計** (tier 2): `MetricConfig`/`YearSpec`/`SourceConfig` を `@stats47/types` 一次源化。
-    data-configs ↔ types の依存方向の再設計 (cycle 回避) が必要。
-    ※ `SourceConfig` は data-configs(ingestion union) と ranking(display provenance) で**別概念の名前衝突**。
-    マージ不可。対応するなら ranking 版を `SourceProvenance` 等にリネーム (影響範囲確認の上)。
-  - **T4 data-configs スケール** (tier 3): metric factory (`createMetric()`) 導入でボイラープレート削減 →
-    registry.ts(4439 行/2209 import) のカテゴリ別分割 or glob 遅延ロード → discriminated union 厳密化 →
-    SEO/UI メタ分離。2209 file の codemod + 段階検証が必須。
-  - **T5-残** (tier 3): GenericSankey による JSX 全抽象化 (視覚回帰リスクで PR #414 では hook 抽出のみ実施)。
-    raw `<input type=range>` は components に Slider 追加後に置換。
-  - **T6-残** (tier 3): knip の unused file(~114)/export(263) を**1 件ずつ参照確認しながら**削除。
-    一括削除は false positive (例: `better-sqlite3`/`@stats47/database` は scripts/test が使用) で危険。
-    legacy D1 seed script の削除は `packages/database/seed/README.md` の記述と整合確認が必要。
-- **着手判断**: いずれも単独 PR + `next build` の SSG 区分確認を伴う規模。スケール律速が顕在化した時点で。
+- **2026-06-02 追加着手分 (commit 履歴参照)**:
+  - ✅ **T3**: ranking の `SourceConfig` → `SourceProvenance` 改名（名前衝突解消、2 file、serialized 列不変）完了。
+  - ✅ **T5-残(Slider)**: MetricYoy の `<input type=range>` を既存 `Slider` に置換完了（Slider は既に components に存在）。
+  - ✅ **T4 基盤**: `createMetric()` ファクトリ導入 + PoC 1 件移行（出力が元リテラルと byte 一致）。codemod 不要・段階移行可。
+  - ✅ **T6 verified slice**: `CountUp`/`ScrollReveal`/`MobileNavigation` 削除（参照ゼロ個別確認）。
+- **残タスク（引き続き deferred）**:
+  - **T3-残** (tier 2): `MetricConfig`/`YearSpec` 等の `@stats47/types` 一次源化（data-configs↔types の依存方向再設計・cycle 回避）。
+  - **T4-残** (tier 3): `createMetric()` への **2209 file の段階移行（codemod）** → registry.ts(4439 行) のカテゴリ別分割 or glob 遅延ロード → SEO/UI メタ分離。基盤は導入済なので新規 metric から順次 createMetric 利用。
+  - **T5-残** (tier 3): GenericSankey による JSX 全抽象化（視覚回帰リスクのため要 Playwright 目視）。
+  - **T6-残** (tier 3): ⚠️ **前提作業あり** — knip が Next.js app router の entry 未設定のため `unused files` が信頼不能（live な feature/lib/`config/test.setup.tsx`/テスト済 util を多数 false-positive 列挙）。`knip.config.ts` に Next.js entry（`app/**/{page,layout,route,...}.tsx`, `sitemap/robots/manifest/opengraph-image`）を設定して**シグナルを信頼可能にしてから** bulk 削除する。それまでは手動参照確認できた leaf のみ削除可。`.claude/scripts`・`remotion/scripts` は `node` 動的起動で常に false-positive。
+- **着手判断**: いずれも単独 PR + `next build` の SSG 区分確認を伴う規模。
 - **関連**: `docs/04_レビュー/critical-review/2026-06-01-codebase-optimization.md` (§実施状況 / deferred 理由)

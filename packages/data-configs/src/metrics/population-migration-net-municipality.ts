@@ -1,4 +1,4 @@
-import type { MetricConfig } from "../types";
+import { createMetric } from "../create-metric";
 
 /**
  * 市区町村別 純移動 (転入 - 転出)。
@@ -8,8 +8,11 @@ import type { MetricConfig } from "../types";
  *   - 住基移動報告 市区町村別表 の statsDataId を /search-estat で特定
  *   - 確定後 `/page-data-batch --metric population-migration-net-municipality` で R2 投入
  *   - 現状: `apps/remotion/public/migration-flow/municipalities/{NN}.json` の 2026-05-25 snapshot を継続使用
+ *
+ * createMetric ファクトリ採用の PoC (T4)。display/calculation/isFeatured/featuredOrder は
+ * ファクトリ既定値 (conversionFactor:1, decimalPlaces:0 / isCalculated:false / false / 0) に委譲。
  */
-export const populationMigrationNetMunicipality: MetricConfig = {
+export const populationMigrationNetMunicipality = createMetric({
   key: "population-migration-net-municipality",
   title: "市区町村別純移動 (転入−転出)",
   subtitle: "住民基本台帳人口移動報告",
@@ -31,14 +34,5 @@ export const populationMigrationNetMunicipality: MetricConfig = {
     colorSchemeType: "diverging",
     divergingMidpoint: "zero",
   },
-  display: {
-    conversionFactor: 1,
-    decimalPlaces: 0,
-  },
-  calculation: {
-    isCalculated: false,
-  },
   isActive: false,
-  isFeatured: false,
-  featuredOrder: 0,
-};
+});
