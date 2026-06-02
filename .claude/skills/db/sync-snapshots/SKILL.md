@@ -33,6 +33,7 @@ URL → R2 パス対応は `.claude/rules/r2-storage-design.md` を参照。
 | Snapshot | スクリプト | R2 キーパス | サイズ目安 |
 |---|---|---|---|
 | master (per-URL + surveys + categories) | `packages/ranking/src/scripts/export-master-snapshots.ts` | `app/home/featured.json` / `app/category/{key}/items.json` / `app/ranking/{key}/item.json` / `app/survey/{id}/items.json` / `app/survey/all.json` | ~13MB |
+| item-seo-refresh (master の直後) | `packages/ranking/src/scripts/refresh-item-seo.ts --apply` | `app/ranking/{key}/item.json` の seoTitle/seoDescription を git TS config から patch (Q-DESIGN R0)。master が materialize した item.json を上書き | — |
 | remotion-static | `apps/remotion/scripts/export-d1-to-remotion-static.ts --feature all` | `apps/remotion/public/<feature>/*.json` (R2 push 対象外) | — |
 | area-profile | `packages/area-profile/src/scripts/export-snapshot.ts` | `app/areas/{areaCode}/profile.json` | ~4MB (47 files) |
 | city-profile | `packages/area-profile/src/scripts/export-city-snapshot.ts` | `app/areas/{cityCode}/profile.json` | — |

@@ -123,6 +123,7 @@ area ページの本質は **県固有のストーリーと、深掘り先への
 
 ## 関連
 
+- `docs/01_技術設計/20_ページタイプ×ファネル役割マップ.md` — 本ドキュメントのデータ軸責務に「ファネル役割 (集客面/回遊面) と評価 KPI」を重ねたマップ
 - `.claude/design-system/page-components.md` — page_components の実装ガイド (本ドキュメントの判定基準を補完)
 - `.claude/scripts/audit/page-components-audit.cjs` — pageType 別配置の棚卸しスクリプト
 - `docs/04_レビュー/area-theme-audit/` — 棚卸し結果ログ

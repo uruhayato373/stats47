@@ -2,12 +2,128 @@
 type: improvement-log
 metric: gsc
 created: 2026-05-16
-updated: 2026-05-27
+updated: 2026-06-02
 ---
 
 # GSC 改善ログ
 
 施策ベースで append-only。新しい施策は最新を上に追加。判定が変わったら section 末尾に追記。
+
+## [Q-DESIGN-01] ranking/blog 問い設計の集客施策 (戦略 doc20 起点)
+
+- **status**: pending
+- **tier**: 1
+- **target_metric**: gsc-ctr / gsc-clicks
+- **owner**: claude
+- **created**: 2026-06-02
+- **due**: 2026-06-30 (R1-R3 デプロイ + 初回計測)
+- **戦略根拠**: `docs/01_技術設計/20_ページタイプ×ファネル役割マップ.md` — 集客面 = ranking/blog に問い設計を寄せる
+- **GSC 出典**: `.claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W22/`
+
+### 着手前に判明した実態 (方針を分岐させた根拠)
+
+| 観察 | データ | 含意 |
+|---|---|---|
+| ranking 上位 impr が低 CTR・好位置 | `wheat-flour-consumption-quantity` 1,059 impr / CTR 0.57% / 順位 6.4、`-expenditure` 976 / 0.82% / 7.5 | **未着手の集客レバー。位置は良いのにタイトルで取り逃し** |
+| 現行 seoTitle が数値羅列・NG パターン | quantity = 「三重3,072g vs 山梨1,284g 小麦粉消費量2.4倍差」、expenditure = 「…最下位山梨県で2.2倍格差」 | `blog-quality-standards` の NG (X倍格差/数値羅列)。検索語「うどん消費量ランキング」(244 impr) と語彙不一致 |
+| ai-content 欠落ページ | `retail-establishments-by-prefecture` ai-content.json = **HTTP 404** (254 impr / CTR 0.39%) | FAQ/insights 不在 = PAA リッチリザルト取り逃し |
+| 疑問形 PAA は勝ち筋だが取りこぼし | `一般病床の病床利用率が最も高い都道府県は？` CTR **8.3%** / 順位 3.55 ⇔ `療養病床の病床利用率が最も低い都道府県は？` CTR **0%** / 順位 9.1 | FAQ question を実測 PAA 文言に寄せれば snippet 獲得余地 |
+| **blog 上位候補は既に brushup 済み** | temperature-extremes-map(2,754 impr/1.3%)・child-height-regional-gap(2,061/0.78%)・habitable-area-land-use(606/0.66%)・park-green-space-gap(360/0.56%) は auto-brushup-history に各 2 hit | **再 brushup は predecessor/successor 純粋効果分離を壊す。タイトルは最適化済でも CTR 低 = ボトルネックは位置 (順位 8-12) の可能性** |
+
+→ **結論: 集客の greenfield レバーは ranking 側。blog は「再 brushup」でなく「既存波の効果計測が先」。**
+
+### R (ranking) サブ施策 — 新規レバー
+
+| ID | 施策 | 対象 | SSOT / 実装 |
+|---|---|---|---|
+| **R1** | seoTitle を問い設計化 (疑問形/curiosity gap + 実測クエリ語彙) | 高 impr×低 CTR ranking top20 (下記候補表) | `packages/data-configs/src/metrics/<key>.ts` の `seoTitle` 編集 → R2 反映 |
+| **R2** | ai-content 欠落ページの再生成 (FAQ+insights 復活) | `retail-establishments-by-prefecture` 等 404 ページ | `/generate-ai-content` → `/push-r2 --prefix app/ranking` (CI) |
+| **R3** | FAQ question を実測 PAA 文言に最適化 (「最も高い/低い都道府県は？」型を必ず1問) | FAQ 生成 prompt 全体 | `packages/ai-content/src/services/prompts/ranking-content-prompt.ts` |
+| **R4** | seoTitle の full time-code 混入バグ修正 (`【2023100000年】`) | `disaster-damage-amount.ts` ほか | `npm run validate:years` で検出 → 4 桁修正 |
+
+#### R1 候補 (2026-W22, impr≥80 & CTR<2%, impr 降順)
+
+| rankingKey | impr | CTR | 順位 | 主な検索語 (queries.csv) |
+|---|---:|---:|---:|---|
+| wheat-flour-consumption-quantity | 1,059 | 0.57% | 6.4 | うどん消費量ランキング / 小麦粉消費量 都道府県 |
+| wheat-flour-consumption-expenditure | 976 | 0.82% | 7.5 | 小麦粉消費量 ランキング |
+| retail-establishments-by-prefecture | 254 | 0.39% | 8.5 | (R2 で ai-content 復活も併せて) |
+| potato-consumption-quantity | 206 | 1.94% | 6.2 | じゃがいも消費量 |
+| total-fertility-rate | 188 | 1.06% | 12.0 | 合計特殊出生率 (※順位改善も要) |
+| residential-building-construction-cost | 184 | 0% | 9.7 | — |
+| school-teacher-annual-income | 171 | 1.17% | 7.7 | 教員 年収 |
+| squid-consumption-quantity | 164 | 1.83% | 7.7 | いか消費量 |
+
+> R1 タイトル例 (quantity): 「三重3,072g vs 山梨1,284g…」→ **「小麦粉消費量ランキング都道府県｜うどん大国は本当に香川? 1位三重・最下位山梨【2024】」** 型。
+> 先頭に検索語「小麦粉消費量ランキング」、curiosity gap (うどん大国の意外性) を併載。`blog-quality-standards.md` のタイトル基準を ranking にも適用。
+
+### B (blog) サブ施策 — 計測駆動 (再 brushup 禁止)
+
+| ID | 施策 | 根拠 |
+|---|---|---|
+| **B1** | 既存 brushup 波 (2026-05-25-auto / 05-28 / 05-29) の **effect 計測を先行** | 上位 blog 候補は全て brushup 済。再施策の前に eff果を確定しないと純粋効果分離不能 (`blog-data-schema.md`) |
+| **B2** | 計測後、CTR が想定 80% 未満かつ順位 8-12 の記事は **タイトルでなく順位レバー** (内部リンク・深掘り・freshness) を検討 | タイトル最適化済で CTR 低 = ボトルネックは位置という仮説 |
+| **B3** | 未 brushup の高 impr×低 CTR 記事のみ `/brushup-blog --target article` | 重複計上回避。`auto-brushup-history.json` で dedup 確認後 |
+
+### 想定効果 (実証ベース・過大評価しない)
+
+- **[根拠ある参照値]** 疑問形 PAA で好位置のページは CTR 8.3% を実測 (`一般病床の病床利用率が最も高い都道府県は？`)。ranking 好位置ページの CTR 上限の参照値とする。
+- **[仮説]** R1 で wheat-flour 2 ページ (計 2,035 impr) の CTR を 0.7% → 3% に引上げ → 約 +47 clicks/週。**検証期日 2026-06-30**、未達なら順位/intent 不一致を疑い queries.csv で着地クエリ再確認。
+- 数値はあくまで仮説。effect/* ラベルは計測 (下記コマンド) 後に付与する。
+
+### 検証コマンド
+
+```bash
+# 着地クエリ確認 (タイトルが intent と合っているか)
+/fetch-gsc-data last28d query snapshot 2026-Www   # 対象 rankingKey の流入クエリを確認
+# ai-content 欠落の網羅監査 (R2 公開 URL)
+for k in <rankingKey...>; do curl -s -o /dev/null -w "%{http_code} $k\n" \
+  https://storage.stats47.jp/app/ranking/$k/ai-content.json; done
+# seoTitle year lint
+npm run validate:years --workspace=@stats47/data-configs
+```
+
+### 🚧 ブロッカー (2026-06-02 着手中に発見) — R0: config→item.json field-refresh が不在
+
+**ranking ページが実際に描画する seoTitle/description は R2 `app/ranking/<key>/item.json` の値**で、
+git TS config (`packages/data-configs/src/metrics/<key>.ts`) の編集は**現状 item.json に伝播しない**。
+
+- 旧 monolith exporter (D1 metrics → item.json) は **Phase F (2026-05-30) で削除済**
+- 現行 `exportRankingItemsPerUrl` (`packages/ranking/src/exporters/ranking-items-per-url-snapshot.ts`) は
+  **既存 R2 item.json を読んで再グループ化するだけ** (コメント L38-40 が "config→item.json の field refresh は follow-up" と明記)
+- `sync-metrics-cache.ts` は config → SQLite cache (seo_title 含む) までで、cache→item.json の書き戻しが無い
+- **実証**: R2 item.json は今も汚染タイトルを保持 (curl 確認)
+  ```
+  app/ranking/disaster-damage-amount/item.json → seoTitle "…【2023100000年】…" (R4 未反映)
+  app/ranking/wheat-flour-consumption-quantity/item.json → 旧 "三重3,072g vs…" (R1 未反映)
+  ```
+
+→ **影響**: R4 の 57 件 (汚染タイトルが現在 SERP に表示中) と R1 の編集は、**この refresh フローを作って CI で R2 push するまで本番に届かない**。
+
+#### R0 (前提作業): config→item.json seo フィールド refresh exporter — ✅ 実装済 (2026-06-02)
+
+| 項目 | 内容 |
+|---|---|
+| やること | `listAllMetrics()` の seoTitle/seoDescription を読み、各 `app/ranking/<key>/item.json` を patch (config 優先・未定義は既存温存)。他フィールドは verbatim 保持 |
+| 実装 | `packages/ranking/src/exporters/ranking-item-seo-refresh.ts` (`refreshRankingItemSeoFields`) + CLI `packages/ranking/src/scripts/refresh-item-seo.ts` (dry-run 既定 / `--apply` / `--only`) |
+| CI 配線 | `sync-snapshots` run.sh の TASKS に `item-seo-refresh` を **master の直後**に追加 (`--apply`)。master が .local/r2 に materialize → R0 が 59 件上書き → diff-push-r2 で反映 |
+| 既存フロー調査 | populate/register スキルは不在。per-url exporter・export-master・listRankingItemsWithTagsFromR2 は全て R2 item.json の閉ループで config を読まないことを確認 → 新規 exporter が必要と確定 |
+| dry-run 検証 | 全 2,209 metric で **patched=59 (R4の57+R1の2) / unchanged=2,146 / missing=4**。意図した範囲のみ検出を確認 (公開URL読取・無書込) |
+| 本番反映 | `sync-snapshots.yml` を CI 実行 → diff-push 後 `curl …/app/ranking/<key>/item.json` で seoTitle が config 値と一致するか検証 (**未実行 = 次の手番**) |
+| status | **実装済・CI 未実行**。merge 後に sync-snapshots を回せば R1/R4 が本番反映される |
+
+### 次アクション (順序) — R0 ブロッカー反映後に更新
+
+1. ✅ **R4 (config 修正 + lint 拡張)** — 57 件 seoTitle/desc の time-code 除去 + validator 拡張 (commit 済)
+2. ✅ **R1 (top8 完了)** — wheat-flour 2 + retail/potato/total-fertility-rate/residential-building/school-teacher/squid の計 8 件を問い化 (commit 済)。R0 dry-run で 8/8 patched 確認
+3. ✅ **R0 (config→item.json refresh exporter)** — 実装 + CI 配線 + dry-run 検証済 (commit 済)
+4. ⏭ **develop merge → PR(main) → CI → sync-snapshots.yml 実行** — R0 で R1/R4 を本番反映 → curl で検証 (進行中)
+5. R2 (retail 等 ai-content 再生成) + R3 (FAQ prompt PAA 化)
+6. B1 (blog 既存波の effect 計測) — 06-20/06-26 期日に合わせる
+
+### ⚠️ 派生で発見したデータ品質懸念 (要 follow-up)
+
+- `school-teacher-annual-income`: 最下位 愛媛 315.7 万円 / 1位 愛知 885.9 万円 = 2.8 倍。**公立教員給与で 2.8 倍格差・年収 315 万は実態と乖離の疑い** (公務員給与は全国でほぼ均一)。R1 では sensational な「2.8倍」を seoTitle/desc から外して amplify を回避したが、**元データの検証が別途必要** (e-Stat 取得時の単位/集計ミスの可能性)。検証コマンド: `curl …/app/ranking/school-teacher-annual-income/values.json` で 47 県分布を確認。
 
 ## [BLOG-WAVE-2026-05-29-auto] GSC 改善余地上位 4 記事 auto-brushup (cloud session)
 
