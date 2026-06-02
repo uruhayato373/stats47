@@ -4,7 +4,7 @@ export const sexProductionAgePopulationRatio: MetricConfig = {
   "key": "sex-production-age-population-ratio",
   "title": "人口性比",
   "subtitle": "生産年齢人口",
-  "unit": "‐",
+  "unit": "（女=100）",
   "category": "population",
   "source": {
     "kind": "estat",

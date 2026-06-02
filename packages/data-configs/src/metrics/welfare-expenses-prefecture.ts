@@ -4,7 +4,7 @@ export const welfareExpensesPrefecture: MetricConfig = {
   "key": "welfare-expenses-prefecture",
   "title": "民生費",
   "subtitle": "都道府県財政",
-  "unit": "",
+  "unit": "千円",
   "category": "administrativefinancial",
   "source": {
     "kind": "estat",

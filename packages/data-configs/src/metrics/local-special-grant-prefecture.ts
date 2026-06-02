@@ -4,7 +4,7 @@ export const localSpecialGrantPrefecture: MetricConfig = {
   "key": "local-special-grant-prefecture",
   "title": "地方特例交付金",
   "subtitle": "都道府県財政",
-  "unit": "",
+  "unit": "千円",
   "category": "administrativefinancial",
   "source": {
     "kind": "estat",

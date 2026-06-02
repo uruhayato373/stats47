@@ -4,7 +4,7 @@ export const specialSupportSchoolExpensesPrefecture: MetricConfig = {
   "key": "special-support-school-expenses-prefecture",
   "title": "特別支援学校費",
   "subtitle": "都道府県財政",
-  "unit": "",
+  "unit": "千円",
   "category": "educationsports",
   "source": {
     "kind": "estat",

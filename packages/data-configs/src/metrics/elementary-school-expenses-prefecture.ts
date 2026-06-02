@@ -4,7 +4,7 @@ export const elementarySchoolExpensesPrefecture: MetricConfig = {
   "key": "elementary-school-expenses-prefecture",
   "title": "小学校費",
   "subtitle": "都道府県財政",
-  "unit": "",
+  "unit": "千円",
   "category": "educationsports",
   "source": {
     "kind": "estat",

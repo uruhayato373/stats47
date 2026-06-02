@@ -4,7 +4,7 @@ export const complainantCount: MetricConfig = {
   "key": "complainant-count",
   "title": "有訴者率",
   "subtitle": "総数",
-  "unit": "‐",
+  "unit": "人口千対",
   "category": "socialsecurity",
   "source": {
     "kind": "estat",

@@ -4,7 +4,7 @@ export const consumerPriceDifferenceIndexTransportCommunication: MetricConfig = 
   "key": "consumer-price-difference-index-transport-communication",
   "title": "消費者物価地域差指数",
   "subtitle": "交通・通信",
-  "unit": "‐",
+  "unit": "（全国=100）",
   "category": "economy",
   "source": {
     "kind": "estat",

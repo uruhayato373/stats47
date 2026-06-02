@@ -4,7 +4,7 @@ export const consumerPriceDifferenceIndexHealthcare: MetricConfig = {
   "key": "consumer-price-difference-index-healthcare",
   "title": "消費者物価地域差指数",
   "subtitle": "保健医療",
-  "unit": "‐",
+  "unit": "（全国=100）",
   "category": "economy",
   "source": {
     "kind": "estat",

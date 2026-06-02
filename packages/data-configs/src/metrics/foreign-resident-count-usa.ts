@@ -4,7 +4,7 @@ export const foreignResidentCountUsa: MetricConfig = {
   "key": "foreign-resident-count-usa",
   "title": "外国人人口",
   "subtitle": "米国籍",
-  "unit": "",
+  "unit": "人",
   "category": "population",
   "source": {
     "kind": "estat",

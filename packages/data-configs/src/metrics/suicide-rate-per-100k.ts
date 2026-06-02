@@ -3,7 +3,7 @@ import type { MetricConfig } from "../types";
 export const suicideRatePer100k: MetricConfig = {
   "key": "suicide-rate-per-100k",
   "title": "自殺率",
-  "unit": "‐",
+  "unit": "人口10万対",
   "category": "safetyenvironment",
   "source": {
     "kind": "estat",

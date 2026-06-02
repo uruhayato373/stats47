@@ -4,7 +4,7 @@ export const complainantRatePer1000: MetricConfig = {
   "key": "complainant-rate-per-1000",
   "title": "有訴者率",
   "subtitle": "人口1000人当たり",
-  "unit": "‐",
+  "unit": "人口千対",
   "category": "socialsecurity",
   "source": {
     "kind": "estat",

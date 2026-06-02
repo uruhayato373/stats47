@@ -4,7 +4,7 @@ export const generalProjectInvestmentWelfare: MetricConfig = {
   "key": "general-project-investment-welfare",
   "title": "一般事業投資額",
   "subtitle": "厚生福祉",
-  "unit": "",
+  "unit": "千円",
   "category": "administrativefinancial",
   "source": {
     "kind": "estat",

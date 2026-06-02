@@ -4,7 +4,7 @@ export const healthPhysicalEducationExpensesPrefecture: MetricConfig = {
   "key": "health-physical-education-expenses-prefecture",
   "title": "保健体育費",
   "subtitle": "都道府県財政",
-  "unit": "",
+  "unit": "千円",
   "category": "educationsports",
   "source": {
     "kind": "estat",

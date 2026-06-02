@@ -4,7 +4,7 @@ export const urbanParksArea: MetricConfig = {
   "key": "urban-parks-area",
   "title": "都市公園面積",
   "subtitle": "総面積",
-  "unit": "",
+  "unit": "ｈａ",
   "category": "landweather",
   "source": {
     "kind": "estat",

@@ -4,7 +4,7 @@ export const generalFundsPrefecture: MetricConfig = {
   "key": "general-funds-prefecture",
   "title": "一般財源",
   "subtitle": "都道府県財政",
-  "unit": "",
+  "unit": "千円",
   "category": "administrativefinancial",
   "source": {
     "kind": "estat",

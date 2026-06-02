@@ -3,7 +3,7 @@ import type { MetricConfig } from "../types";
 export const crudeDeathRate: MetricConfig = {
   "key": "crude-death-rate",
   "title": "粗死亡率",
-  "unit": "‐",
+  "unit": "人口千対",
   "category": "population",
   "source": {
     "kind": "estat",

@@ -4,7 +4,7 @@ export const consumerPriceDifferenceIndexOverall: MetricConfig = {
   "key": "consumer-price-difference-index-overall",
   "title": "消費者物価地域差指数",
   "subtitle": "総合",
-  "unit": "‐",
+  "unit": "（全国=100）",
   "category": "economy",
   "source": {
     "kind": "estat",

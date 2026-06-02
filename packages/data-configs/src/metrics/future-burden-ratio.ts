@@ -4,7 +4,7 @@ export const futureBurdenRatio: MetricConfig = {
   "key": "future-burden-ratio",
   "title": "将来負担比率",
   "subtitle": "都道府県財政",
-  "unit": "",
+  "unit": "％",
   "category": "administrativefinancial",
   "source": {
     "kind": "estat",

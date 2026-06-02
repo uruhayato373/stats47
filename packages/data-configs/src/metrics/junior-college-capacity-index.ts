@@ -3,7 +3,7 @@ import type { MetricConfig } from "../types";
 export const juniorCollegeCapacityIndex: MetricConfig = {
   "key": "junior-college-capacity-index",
   "title": "短期大学収容力指数",
-  "unit": "‐",
+  "unit": "指数",
   "category": "educationsports",
   "source": {
     "kind": "estat",

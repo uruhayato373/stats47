@@ -4,7 +4,7 @@ export const ordinaryConstructionExpensesPrefecture: MetricConfig = {
   "key": "ordinary-construction-expenses-prefecture",
   "title": "普通建設事業費",
   "subtitle": "都道府県財政",
-  "unit": "",
+  "unit": "千円",
   "category": "construction",
   "source": {
     "kind": "estat",

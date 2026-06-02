@@ -4,7 +4,7 @@ export const trafficSafetySpecialGrantPrefecture: MetricConfig = {
   "key": "traffic-safety-special-grant-prefecture",
   "title": "交通安全対策特別交付金",
   "subtitle": "都道府県財政",
-  "unit": "",
+  "unit": "千円",
   "category": "safetyenvironment",
   "source": {
     "kind": "estat",

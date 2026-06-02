@@ -4,7 +4,7 @@ export const policeExpensesPrefecture: MetricConfig = {
   "key": "police-expenses-prefecture",
   "title": "警察費",
   "subtitle": "都道府県財政",
-  "unit": "",
+  "unit": "千円",
   "category": "safetyenvironment",
   "source": {
     "kind": "estat",

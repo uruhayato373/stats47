@@ -4,7 +4,7 @@ export const standardFiscalDemandMunicipality: MetricConfig = {
   "key": "standard-fiscal-demand-municipality",
   "title": "基準財政需要額",
   "subtitle": "市町村財政",
-  "unit": "",
+  "unit": "千円",
   "category": "administrativefinancial",
   "source": {
     "kind": "estat",

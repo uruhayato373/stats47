@@ -4,7 +4,7 @@ export const foreignResidentCountKorea: MetricConfig = {
   "key": "foreign-resident-count-korea",
   "title": "外国人人口",
   "subtitle": "韓国・朝鮮籍",
-  "unit": "",
+  "unit": "人",
   "category": "population",
   "source": {
     "kind": "estat",

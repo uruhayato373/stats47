@@ -4,7 +4,7 @@ export const sexOldPopulationRatio: MetricConfig = {
   "key": "sex-old-population-ratio",
   "title": "人口性比",
   "subtitle": "老年人口",
-  "unit": "‐",
+  "unit": "（女=100）",
   "category": "population",
   "source": {
     "kind": "estat",

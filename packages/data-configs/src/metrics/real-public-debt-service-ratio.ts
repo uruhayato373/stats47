@@ -4,7 +4,7 @@ export const realPublicDebtServiceRatio: MetricConfig = {
   "key": "real-public-debt-service-ratio",
   "title": "実質公債費比率",
   "subtitle": "都道府県財政",
-  "unit": "",
+  "unit": "％",
   "category": "administrativefinancial",
   "source": {
     "kind": "estat",

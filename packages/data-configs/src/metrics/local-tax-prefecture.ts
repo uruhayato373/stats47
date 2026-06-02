@@ -4,7 +4,7 @@ export const localTaxPrefecture: MetricConfig = {
   "key": "local-tax-prefecture",
   "title": "地方税",
   "subtitle": "都道府県財政",
-  "unit": "",
+  "unit": "千円",
   "category": "administrativefinancial",
   "source": {
     "kind": "estat",

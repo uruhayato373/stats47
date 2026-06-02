@@ -4,7 +4,7 @@ export const generalProjectInvestmentEnvironmentalSanitation: MetricConfig = {
   "key": "general-project-investment-environmental-sanitation",
   "title": "一般事業投資額",
   "subtitle": "環境衛生",
-  "unit": "",
+  "unit": "千円",
   "category": "administrativefinancial",
   "source": {
     "kind": "estat",

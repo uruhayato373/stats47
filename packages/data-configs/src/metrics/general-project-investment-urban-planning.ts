@@ -4,7 +4,7 @@ export const generalProjectInvestmentUrbanPlanning: MetricConfig = {
   "key": "general-project-investment-urban-planning",
   "title": "一般事業投資額",
   "subtitle": "都市計画",
-  "unit": "",
+  "unit": "千円",
   "category": "administrativefinancial",
   "source": {
     "kind": "estat",

@@ -4,7 +4,7 @@ export const generalProjectInvestmentErosionFloodControl: MetricConfig = {
   "key": "general-project-investment-erosion-flood-control",
   "title": "一般事業投資額",
   "subtitle": "治山治水",
-  "unit": "",
+  "unit": "千円",
   "category": "administrativefinancial",
   "source": {
     "kind": "estat",

@@ -4,7 +4,7 @@ export const urbanParks: MetricConfig = {
   "key": "urban-parks",
   "title": "都市公園数",
   "subtitle": "総数",
-  "unit": "",
+  "unit": "箇所",
   "category": "infrastructure",
   "source": {
     "kind": "estat",

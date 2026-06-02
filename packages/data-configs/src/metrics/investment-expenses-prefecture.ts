@@ -4,7 +4,7 @@ export const investmentExpensesPrefecture: MetricConfig = {
   "key": "investment-expenses-prefecture",
   "title": "投資的経費",
   "subtitle": "都道府県財政",
-  "unit": "",
+  "unit": "千円",
   "category": "administrativefinancial",
   "source": {
     "kind": "estat",

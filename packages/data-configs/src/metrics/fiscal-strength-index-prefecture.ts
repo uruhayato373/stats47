@@ -4,7 +4,7 @@ export const fiscalStrengthIndexPrefecture: MetricConfig = {
   "key": "fiscal-strength-index-prefecture",
   "title": "財政力指数",
   "subtitle": "都道府県財政",
-  "unit": "‐",
+  "unit": "指数",
   "category": "administrativefinancial",
   "source": {
     "kind": "estat",

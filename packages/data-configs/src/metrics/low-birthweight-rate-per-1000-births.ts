@@ -3,7 +3,7 @@ import type { MetricConfig } from "../types";
 export const lowBirthweightRatePer1000Births: MetricConfig = {
   "key": "low-birthweight-rate-per-1000-births",
   "title": "2,500g未満の出生率",
-  "unit": "‐",
+  "unit": "出生千対",
   "category": "population",
   "source": {
     "kind": "estat",

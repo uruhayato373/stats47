@@ -4,7 +4,7 @@ export const occupationalAccidentFrequencyRate: MetricConfig = {
   "key": "occupational-accident-frequency-rate",
   "title": "労働災害度数率",
   "subtitle": "100万延べ実労働時間あたりの労働災害死傷者数",
-  "unit": "",
+  "unit": "（件/百万時間）",
   "category": "laborwage",
   "source": {
     "kind": "estat",

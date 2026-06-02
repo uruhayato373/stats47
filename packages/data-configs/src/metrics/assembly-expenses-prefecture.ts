@@ -4,7 +4,7 @@ export const assemblyExpensesPrefecture: MetricConfig = {
   "key": "assembly-expenses-prefecture",
   "title": "議会費",
   "subtitle": "都道府県財政",
-  "unit": "",
+  "unit": "千円",
   "category": "administrativefinancial",
   "source": {
     "kind": "estat",

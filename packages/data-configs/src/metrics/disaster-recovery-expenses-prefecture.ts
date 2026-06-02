@@ -4,7 +4,7 @@ export const disasterRecoveryExpensesPrefecture: MetricConfig = {
   "key": "disaster-recovery-expenses-prefecture",
   "title": "災害復旧費",
   "subtitle": "都道府県財政",
-  "unit": "",
+  "unit": "千円",
   "category": "safetyenvironment",
   "source": {
     "kind": "estat",

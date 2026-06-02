@@ -4,7 +4,7 @@ export const mentalHealthExpensesPrefecture: MetricConfig = {
   "key": "mental-health-expenses-prefecture",
   "title": "精神衛生費",
   "subtitle": "都道府県財政",
-  "unit": "",
+  "unit": "千円",
   "category": "administrativefinancial",
   "source": {
     "kind": "estat",

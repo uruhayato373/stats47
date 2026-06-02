@@ -4,7 +4,7 @@ export const roadBridgeExpensesPrefecture: MetricConfig = {
   "key": "road-bridge-expenses-prefecture",
   "title": "道路橋りょう費",
   "subtitle": "都道府県財政",
-  "unit": "",
+  "unit": "千円",
   "category": "infrastructure",
   "source": {
     "kind": "estat",

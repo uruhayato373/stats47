@@ -4,7 +4,7 @@ export const ageAdjustedDeathRateMaleS60Per1000: MetricConfig = {
   "key": "age-adjusted-death-rate-male-s60-per-1000",
   "title": "年齢調整死亡率",
   "subtitle": "男性（S60年基準）",
-  "unit": "‐",
+  "unit": "人口千対",
   "category": "population",
   "source": {
     "kind": "estat",

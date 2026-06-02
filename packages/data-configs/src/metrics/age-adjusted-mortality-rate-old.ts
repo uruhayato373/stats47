@@ -4,7 +4,7 @@ export const ageAdjustedMortalityRateOld: MetricConfig = {
   "key": "age-adjusted-mortality-rate-old",
   "title": "年齢別死亡率",
   "subtitle": "老年人口の死亡率",
-  "unit": "‐",
+  "unit": "人口千対",
   "category": "population",
   "source": {
     "kind": "estat",

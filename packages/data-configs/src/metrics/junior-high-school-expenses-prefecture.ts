@@ -4,7 +4,7 @@ export const juniorHighSchoolExpensesPrefecture: MetricConfig = {
   "key": "junior-high-school-expenses-prefecture",
   "title": "中学校費",
   "subtitle": "都道府県財政",
-  "unit": "",
+  "unit": "千円",
   "category": "educationsports",
   "source": {
     "kind": "estat",

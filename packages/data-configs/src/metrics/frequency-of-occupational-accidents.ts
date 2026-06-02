@@ -3,7 +3,7 @@ import type { MetricConfig } from "../types";
 export const frequencyOfOccupationalAccidents: MetricConfig = {
   "key": "frequency-of-occupational-accidents",
   "title": "労働災害発生の頻度",
-  "unit": "‐",
+  "unit": "（件/百万時間）",
   "category": "safetyenvironment",
   "source": {
     "kind": "estat",
