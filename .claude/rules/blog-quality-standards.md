@@ -9,6 +9,43 @@ stats47.jp の `/blog/{slug}` 記事を新規作成または brushup する際�
 >
 > ルールを変更する場合は**まず本ファイルを更新**し、他は参照のみに保つこと (drift 防止)。
 
+## 品質の3層モデルと critic 必須 (★最重要・2026-06-02)
+
+ブログ品質は**1つの指標やスクリプトで測れない**。忠実度とコストの異なる3層で担保する。**文字数や決定的 gate を「品質」と取り違えない**こと(取り違えた結果、図と重複する truncated 表で字数を稼ぐ事故が起きた)。
+
+| 層 | 担い手 | 役割 | 捕まえる / 捕まえない |
+|---|---|---|---|
+| ① 機械的フロア | `quality-gate.mjs` | 公開前の床 (決定的) | 捕: callout数/内部リンク/NG word/factual rank/truncated 表/source-link 配置/prose 文字数の床。**不可: 読者価値の有無** |
+| ② 意味レビュー | **`blog-critic` agent (別コンテキスト)** | 読者価値の判断 | 捕: 冗長・図表重複・論理の質・curiosity gap の真正性・CTA過多・「この要素は何を足すか」 |
+| ③ アウトカム | gsc-analyst / 改善ログ | 最終評価 | GSC CTR/順位・GA4 滞在・CV (遅行・最も真実) |
+
+**鉄則**:
+- **文字数 (prose) は「薄すぎ」を弾く床であって品質ではない。**表・markup・リンクでは稼げない (gate が prose のみ計測)。字数を満たしたいなら読者価値のある分析を書く。
+- **書いた本人が自分の記事を採点して公開してはならない。**必ず `blog-critic`(別 agent・別コンテキスト) の意味レビューを通す。執筆 (article-writer) と監査 (blog-critic) は分離する。
+- 機械 gate を pass しても「品質 OK」ではない。②③ を経て初めて品質が担保される。
+
+### critic レビュー成果物 `review.md` (公開の必須条件)
+
+`published: true` の記事は `docs/21_ブログ記事原稿/<slug>/review.md` (blog-critic が生成) が無いと **`quality-gate.mjs` が blocker で公開を止める**。format:
+
+```markdown
+---
+slug: <slug>
+reviewer: blog-critic
+mode: expert | panel
+verdict: PASS | REVISE
+date: YYYY-MM-DD
+---
+## 評価サマリ
+<読者価値の総括>
+## 指摘
+- [blocker|major|minor] <具体的指摘と修正案>
+## 判定理由
+<PASS/REVISE の根拠>
+```
+
+`verdict: PASS`(実体200字以上) で初めて公開可。REVISE の指摘は article-writer 側が修正してから PASS に更新する。これにより「自己採点での公開」を構造的に不可能にする。
+
 ## なぜこのルールがあるか
 
 2026-05-23 のブログ品質診断で判明:

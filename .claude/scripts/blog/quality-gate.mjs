@@ -1,9 +1,15 @@
 #!/usr/bin/env node
 /**
- * ブログ記事 brushup 後の自動品質ゲート (/brushup-blog --target article / batch 用)。
+ * ブログ記事の【公開前・機械的フロアチェック】(品質判定ではない)。
  *
- * 機械的にチェック可能な品質基準 (callout / 内部リンク / NG word / factual cross-check 等)
- * を全て script で検証する。1 つでも失敗したら exit 1 (skip 推奨)。
+ * ★ これは「品質を測る」ものではなく「機械的に検出できる欠陥 (床) を弾く」ものである。
+ *   - 捕まえる: callout/内部リンク/NG word/factual rank 不一致/truncated 表/source-link 配置/
+ *     prose 文字数の床/critic レビュー未通過 など【決定的に判定できる事項】。
+ *   - 捕まえられない: 読者価値・冗長性・論理の質・curiosity gap の真正性などの【意味的品質】。
+ *     これらは blog-critic (expert/panel review) が別コンテキストで判断する (review.md)。
+ *   文字数 (prose) は「薄すぎ」を弾く床であって品質指標ではない。表/markup では稼げない。
+ *
+ * 1 つでも blocker があれば exit 1。
  *
  * Factual cross-check は `.claude/scripts/lib/article-factual-check.mjs` に切り出し済み。
  * 他 skill (publish-article / draft-from-trend 等) からも同 library が利用可能。
@@ -204,6 +210,32 @@ checks.groundTruthPrefCount = factual.groundTruthPrefCount;
 checks.isPerCapitaArticle = factual.isPerCapitaArticle;
 blockers.push(...factual.blockers);
 warnings.push(...factual.warnings);
+
+// ============================================================================
+// critic レビュー必須 (公開記事は「別 agent の意味レビュー」を経ること) ★再発防止
+// ============================================================================
+// 2026-06-02: 「書いた本人が自己採点して機械 gate だけ通す → 意味的に無価値な要素
+// (例: 図と重複する truncated 表) が公開される」という事故の再発防止。
+// このゲートはあくまで【機械的フロアチェック】であり品質判定ではない。意味的品質
+// (冗長・図表重複・読者価値・curiosity gap の真正性) は blog-critic (expert/panel
+// review) が別コンテキストで判断する。published:true の記事は blog-critic が書いた
+// review.md (verdict: PASS) を必須とし、自己採点での公開を構造的に不可能にする。
+const isPublished = /^published:\s*true\s*$/m.test(content);
+const reviewPath = path.join(path.dirname(articlePath), "review.md");
+let hasCriticPass = false;
+if (fs.existsSync(reviewPath)) {
+  const rv = fs.readFileSync(reviewPath, "utf8");
+  // verdict: PASS かつ実体のある review (短いダミーを弾く)
+  hasCriticPass = /^verdict:\s*PASS\b/im.test(rv) && rv.replace(/\s+/g, "").length > 200;
+}
+checks.published = isPublished;
+checks.criticReviewed = hasCriticPass;
+if (isPublished && !hasCriticPass) {
+  blockers.push(
+    "critic レビュー未通過: 公開記事は blog-critic の review.md (verdict: PASS, 実体200字以上) が必須。" +
+      "自分が書いた記事を自分で採点して公開してはならない (別 agent の意味レビューを通すこと)",
+  );
+}
 
 const result = {
   slug,
