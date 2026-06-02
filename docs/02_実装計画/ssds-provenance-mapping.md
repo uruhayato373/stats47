@@ -88,12 +88,18 @@ metric の出典を 2 階層で持つ:
 
 検証: `cd packages/data-configs && npx tsx scripts/ssds/build-ssds-provenance.ts` → 98.1% 解決を再現。
 
-### Phase 2 — survey マスタ拡張 + 辞書カバレッジ向上
+### Phase 2 — survey マスタ拡張 + 辞書カバレッジ向上 (完了) ✅
 
-- `PROPOSED_NEW_SURVEYS` の 14 件 (社会福祉施設等調査・地方財政の決算状況調・経済センサス 等) を
-  `packages/ranking/src/data/surveys.json` に正式追加。
-- auto-slug (280 metric) の原典名を辞書へ昇格。未解決 22 件を個別 override。
-- 目標: 辞書ヒット率 74% → 95%+。
+成果:
+- `PROPOSED_NEW_SURVEYS` を 14 → 40 件に拡張 (高頻度 auto-slug を昇格: 道路統計年報・行政投資実績・
+  漁業養殖業生産・日本の将来推計人口・日本銀行統計 等)。`scripts/ssds/sync-survey-master.ts` で
+  `surveys.json` へ冪等同期 (41 → 81 件)。
+- `CDCAT01_SOURCE_OVERRIDE` で Excel に資料源が無い 22 件 (財政比率 D22xx・銀行預金 C360xxx・
+  健康寿命 I160x・人口割合 #A03506 等) を原典へ手当て。
+- **結果: SSDS metric 原典解決 98.1% → 100% (1167/1167)、辞書ヒット率 74.1% → 90.4%。**
+  未解決 0、auto-slug fallback 9.6% (112 件、低頻度テールで段階的に昇格可)。
+
+検証: `cd packages/data-configs && npx tsx scripts/ssds/build-ssds-provenance.ts` → 100% を再現。
 
 ### Phase 3 — metric への出典付与 (時系列・円グラフへ波及)
 

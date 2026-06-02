@@ -1,19 +1,17 @@
 /**
  * SSDS の「資料源」(原典統計名) → survey id の正規化辞書。
  *
- * `cdcat01-sources.generated.json` が持つ生の原典名 (179 種) を、
+ * `cdcat01-sources.generated.json` が持つ生の原典名を、
  * `packages/ranking/src/data/surveys.json` の survey id に正規化する。
  *
  * 方針:
  *   - 既存の survey マスタに対応する原典は、その id にマップする (KNOWN_SOURCE_TO_SURVEY)。
- *   - マスタに無い原典 (地方財政統計年報・社会福祉施設等調査 等) は survey マスタへの
- *     追加候補。ここでは id を宣言しておき、survey マスタ拡張 (Phase 2) で実体を足す。
- *   - 辞書に無い原典名は、生成器 (build-ssds-provenance) が決定的に slug 化して
- *     auto survey id (`ssds-src:<slug>`) を割り当てる。これにより「未マッピングでも
- *     全 metric が必ず原典を 1 つ以上持つ」状態を保証する (formal な survey マスタ化は後追い)。
- *
- * head (高頻度) を優先的に既存 id へ寄せ、ロングテールは段階的にここへ追記して
- * カバレッジを上げていく。
+ *   - マスタに無いが頻度の高い原典は PROPOSED_NEW_SURVEYS で id を宣言し、
+ *     `sync-survey-master.ts` で surveys.json へ実体を追加する。
+ *   - cdCat01 が Excel に資料源を持たない (財政比率・銀行預金・健康寿命 等の派生項目) ものは
+ *     CDCAT01_SOURCE_OVERRIDE で原典名を手当てする。
+ *   - 辞書にも override にも無い原典名は、生成器が決定的に slug 化して `ssds-src:<原典名>` を
+ *     割り当てる (未マッピングでも全 metric が必ず原典を 1 つ以上持つことを保証)。
  *
  * 出典 Excel: https://www.stat.go.jp/data/ssds/2.html (アクセス日 2026-06-02)
  */
@@ -49,28 +47,94 @@ export const KNOWN_SOURCE_TO_SURVEY: Record<string, string> = {
   商業統計表: "commercial-statistics",
   労働災害動向調査報告: "workplace-accident-survey",
   地域別最低賃金の全国一覧: "minimum-wage",
+  市町村税課税状況等の調: "local-tax",
 };
 
 /**
- * survey マスタ未登録だが頻度が高く、Phase 2 で正式追加すべき原典。
- * 生成器はこの id をそのまま使う (auto-slug より優先)。
- * name は survey マスタ追加時の表示名。
+ * survey マスタ未登録で Phase 2 で正式追加する原典。
+ * 生成器はこの id を auto-slug より優先して使う。
+ * `sync-survey-master.ts` がこの定義を surveys.json に同期する。
  */
-export const PROPOSED_NEW_SURVEYS: Record<string, { id: string; name: string }> = {
-  社会福祉施設等調査: { id: "social-welfare-facility-survey", name: "社会福祉施設等調査" },
-  都道府県決算状況調: { id: "prefectural-settlement-survey", name: "都道府県決算状況調" },
-  市町村別決算状況調: { id: "municipal-settlement-survey", name: "市町村別決算状況調" },
-  "経済センサス-活動調査": { id: "economic-census-activity", name: "経済センサス-活動調査" },
-  "経済センサス-基礎調査": { id: "economic-census-basic", name: "経済センサス-基礎調査" },
-  全国都道府県市区町村別面積調: { id: "area-survey", name: "全国都道府県市区町村別面積調" },
-  "介護サービス施設・事業所調査": { id: "care-service-facility-survey", name: "介護サービス施設・事業所調査" },
-  被保護者調査: { id: "public-assistance-survey", name: "被保護者調査" },
-  消費者物価指数年報: { id: "cpi-annual", name: "消費者物価指数年報" },
-  "小売物価統計調査（構造編）": { id: "retail-price-survey", name: "小売物価統計調査（構造編）" },
-  学校保健統計調査報告書: { id: "school-health-survey", name: "学校保健統計調査報告書" },
-  福祉行政報告例: { id: "welfare-admin-report", name: "福祉行政報告例" },
-  事業所・企業統計調査報告: { id: "establishment-enterprise-census", name: "事業所・企業統計調査報告" },
-  農林業センサス: { id: "agriculture-forestry-census", name: "農林業センサス" },
+export const PROPOSED_NEW_SURVEYS: Record<
+  string,
+  { id: string; name: string; organization?: string }
+> = {
+  // --- Phase 1 で宣言済 ---
+  社会福祉施設等調査: { id: "social-welfare-facility-survey", name: "社会福祉施設等調査", organization: "厚生労働省" },
+  都道府県決算状況調: { id: "prefectural-settlement-survey", name: "都道府県決算状況調", organization: "総務省" },
+  市町村別決算状況調: { id: "municipal-settlement-survey", name: "市町村別決算状況調", organization: "総務省" },
+  "経済センサス-活動調査": { id: "economic-census-activity", name: "経済センサス-活動調査", organization: "総務省・経済産業省" },
+  "経済センサス-基礎調査": { id: "economic-census-basic", name: "経済センサス-基礎調査", organization: "総務省" },
+  全国都道府県市区町村別面積調: { id: "area-survey", name: "全国都道府県市区町村別面積調", organization: "国土地理院" },
+  "介護サービス施設・事業所調査": { id: "care-service-facility-survey", name: "介護サービス施設・事業所調査", organization: "厚生労働省" },
+  被保護者調査: { id: "public-assistance-survey", name: "被保護者調査", organization: "厚生労働省" },
+  消費者物価指数年報: { id: "cpi-annual", name: "消費者物価指数年報", organization: "総務省統計局" },
+  "小売物価統計調査（構造編）": { id: "retail-price-survey", name: "小売物価統計調査（構造編）", organization: "総務省統計局" },
+  学校保健統計調査報告書: { id: "school-health-survey", name: "学校保健統計調査報告書", organization: "文部科学省" },
+  福祉行政報告例: { id: "welfare-admin-report", name: "福祉行政報告例", organization: "厚生労働省" },
+  事業所・企業統計調査報告: { id: "establishment-enterprise-census", name: "事業所・企業統計調査報告", organization: "総務省" },
+  農林業センサス: { id: "agriculture-forestry-census", name: "農林業センサス", organization: "農林水産省" },
+
+  // --- Phase 2 で auto-slug から昇格 (高頻度) ---
+  "道路施設現況調査（道路統計年報）": { id: "road-statistics", name: "道路統計年報", organization: "国土交通省" },
+  行政投資実績: { id: "administrative-investment-report", name: "行政投資実績", organization: "総務省" },
+  "漁業・養殖業生産統計年報": { id: "fishery-aquaculture-production", name: "漁業・養殖業生産統計年報", organization: "農林水産省" },
+  労働市場年報: { id: "labor-market-annual", name: "労働市場年報", organization: "厚生労働省" },
+  過去の気象データ: { id: "weather-statistics", name: "気象統計", organization: "気象庁" },
+  住宅着工統計: { id: "housing-starts-statistics", name: "住宅着工統計", organization: "国土交通省" },
+  一般職業紹介状況: { id: "job-placement-statistics", name: "一般職業紹介状況", organization: "厚生労働省" },
+  都市計画現況調査: { id: "city-planning-survey", name: "都市計画現況調査", organization: "国土交通省" },
+  一般廃棄物処理事業実態調査: { id: "waste-management-survey", name: "一般廃棄物処理事業実態調査", organization: "環境省" },
+  在留外国人統計: { id: "foreign-residents-statistics", name: "在留外国人統計", organization: "法務省" },
+  日本の将来推計人口: { id: "population-projection", name: "日本の将来推計人口", organization: "国立社会保障・人口問題研究所" },
+  地方公共団体定員管理調査: { id: "local-gov-staffing-survey", name: "地方公共団体定員管理調査", organization: "総務省" },
+  損害保険料率算出機構統計集: { id: "insurance-rate-org-statistics", name: "損害保険料率算出機構統計集", organization: "損害保険料率算出機構" },
+  都道府県地価調査: { id: "prefectural-land-price-survey", name: "都道府県地価調査", organization: "国土交通省" },
+  水道統計: { id: "waterworks-statistics", name: "水道統計", organization: "厚生労働省" },
+  農業経営統計調査報告: { id: "agriculture-management-survey", name: "農業経営統計調査報告", organization: "農林水産省" },
+  "都市公園データベース・都市公園等整備現況調査": { id: "urban-park-survey", name: "都市公園等整備現況調査", organization: "国土交通省" },
+  下水道統計: { id: "sewerage-statistics", name: "下水道統計", organization: "日本下水道協会" },
+  地方教育費調査報告書: { id: "local-education-expense-survey", name: "地方教育費調査報告書", organization: "文部科学省" },
+  火災年報: { id: "fire-annual-report", name: "火災年報", organization: "消防庁" },
+  建設工事施工統計調査報告: { id: "construction-work-statistics", name: "建設工事施工統計調査報告", organization: "国土交通省" },
+  旅客地域流動調査: { id: "passenger-regional-flow-survey", name: "旅客地域流動調査", organization: "国土交通省" },
+  自然公園の面積: { id: "natural-park-area", name: "自然公園の面積", organization: "環境省" },
+
+  // --- override 解決に必要な原典 ---
+  日本銀行統計: { id: "boj-statistics", name: "日本銀行統計", organization: "日本銀行" },
+  国民生活基礎調査: { id: "comprehensive-living-conditions-survey", name: "国民生活基礎調査", organization: "厚生労働省" },
+  日本郵政統計: { id: "japan-post-statistics", name: "日本郵政統計", organization: "日本郵政" },
+};
+
+/**
+ * cdCat01 が Excel に資料源を持たない派生項目への原典手当て。
+ * 値は原典名 (KNOWN / PROPOSED で解決される名称)。Phase 2 で 22 件の未解決を解消。
+ */
+export const CDCAT01_SOURCE_OVERRIDE: Record<string, string[]> = {
+  // 地方財政状況調査 (= 地方財政統計年報) 由来の財政指標
+  D2201: ["地方財政統計年報"], // 財政力指数
+  D2202: ["地方財政統計年報"], // 実質収支比率
+  D2203: ["地方財政統計年報"], // 経常収支比率
+  D2211: ["地方財政統計年報"], // 実質公債費比率
+  "#D02213": ["地方財政統計年報"], // 標準財政規模
+  "#D02214": ["地方財政統計年報"], // 実質赤字比率
+  "#D02215": ["地方財政統計年報"], // 連結実質赤字比率
+  D2212: ["地方財政統計年報"], // 将来負担比率
+  // 銀行・郵便貯金 (日本銀行統計 / 日本郵政)
+  C360111: ["日本銀行統計"], // 国内銀行預金残高
+  C360211: ["日本銀行統計"], // 個人預金
+  C360311: ["日本銀行統計"], // 銀行貸出残高
+  C360120: ["日本郵政統計"], // 郵便貯金残高
+  "#H06309": ["日本郵政統計"], // 郵便物取扱数
+  H7501: ["日本郵政統計"], // 郵便局数
+  // 人口・住宅・教育・福祉・健康
+  "#A03506": ["国勢調査報告"], // 65歳以上人口割合
+  "#H02103": ["住宅・土地統計調査報告"], // 1住宅当たり延べ面積
+  "#E0910101": ["学校基本調査報告書"], // 幼稚園就園率
+  "#E0910102": ["社会福祉施設等調査"], // 保育所利用率
+  "#J02206": ["社会福祉施設等調査"], // 介護老人福祉施設
+  I1601: ["国民生活基礎調査"], // 健康寿命(男)
+  I1602: ["国民生活基礎調査"], // 健康寿命(女)
 };
 
 /** 原典名 → survey id を解決 (KNOWN > PROPOSED > null=auto-slug)。 */

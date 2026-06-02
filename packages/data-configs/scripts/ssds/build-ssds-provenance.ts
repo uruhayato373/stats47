@@ -21,9 +21,9 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 import {
+  CDCAT01_SOURCE_OVERRIDE,
   KNOWN_SOURCE_TO_SURVEY,
   PROPOSED_NEW_SURVEYS,
-  resolveSurveyId,
 } from "../../src/ssds/source-name-to-survey";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -59,10 +59,19 @@ function main(): void {
   );
 
   // 1) cdCat01 → 原典 survey[] の最終マップ
+  //    Excel に資料源が無い派生項目は CDCAT01_SOURCE_OVERRIDE で補完する。
   const provenance: Record<string, ProvenanceEntry> = {};
-  for (const [code, entry] of Object.entries(raw)) {
-    const surveys = dedupeSurveys(entry.sources.map(resolveSurvey));
-    provenance[code] = { kind: entry.kind, originalSurveys: surveys };
+  const codes = new Set([
+    ...Object.keys(raw),
+    ...Object.keys(CDCAT01_SOURCE_OVERRIDE),
+  ]);
+  for (const code of codes) {
+    const entry = raw[code];
+    const override = CDCAT01_SOURCE_OVERRIDE[code];
+    const sourceNames =
+      override ?? entry?.sources ?? [];
+    const surveys = dedupeSurveys(sourceNames.map(resolveSurvey));
+    provenance[code] = { kind: entry?.kind ?? "indicator", originalSurveys: surveys };
   }
   writeFileSync(
     join(SSDS_DIR, "ssds-provenance.generated.json"),
