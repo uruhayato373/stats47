@@ -1,0 +1,130 @@
+"use client";
+
+import { useCallback, useEffect, useState } from "react";
+
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+
+import { cn } from "@stats47/components";
+import { Separator } from "@stats47/components/atoms/ui/separator";
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetTitle,
+} from "@stats47/components/atoms/ui/sheet";
+import {
+  ArrowLeftRight,
+  BookOpen,
+  Home,
+  LayoutDashboard,
+  MapPin,
+  Search,
+  TrendingUp,
+} from "lucide-react";
+
+import type { Category } from "@/features/category";
+
+import { useBreakpoint } from "@/hooks/useBreakpoint";
+
+import { useSidebarStore } from "@/store/sidebar-store";
+
+import { CategoryAccordion } from "@/components/organisms/Sidebar/CategoryAccordion";
+
+interface MobileNavDrawerClientProps {
+  categories: Category[];
+}
+
+const NAV_LINKS = [
+  { href: "/", label: "ホーム", icon: Home, color: "bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-400" },
+  { href: "/themes", label: "ランキング", icon: TrendingUp, color: "bg-teal-100 text-teal-600 dark:bg-teal-950 dark:text-teal-400" },
+  { href: "/blog", label: "ブログ", icon: BookOpen, color: "bg-pink-100 text-pink-600 dark:bg-pink-950 dark:text-pink-400" },
+  { href: "/areas", label: "地域の特徴", icon: MapPin, color: "bg-green-100 text-green-600 dark:bg-green-950 dark:text-green-400" },
+  { href: "/category/population/compare", label: "地域間比較", icon: ArrowLeftRight, color: "bg-blue-100 text-blue-600 dark:bg-blue-950 dark:text-blue-400" },
+  { href: "/search", label: "検索", icon: Search, color: "bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-400" },
+] as const;
+
+/**
+ * モバイル専用ナビゲーションドロワー（Sheet）
+ *
+ * PC 常設サイドバー廃止に伴い、モバイル（lg 未満）のナビ手段として残す。
+ * `useSidebarStore.isOpen` で開閉。PC では何も描画しない。
+ *
+ * 設計仕様: docs/01_技術設計/21_統一レイアウト設計.md
+ */
+export function MobileNavDrawerClient({ categories }: MobileNavDrawerClientProps) {
+  const isOpen = useSidebarStore((s) => s.isOpen);
+  const open = useSidebarStore((s) => s.open);
+  const close = useSidebarStore((s) => s.close);
+  const isMobile = useBreakpoint("belowLg");
+  const pathname = usePathname();
+
+  const handleOpenChange = useCallback(
+    (next: boolean) => {
+      if (next) { open(); } else { close(); }
+    },
+    [open, close],
+  );
+
+  // ルート変更時に閉じる
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+  useEffect(() => {
+    if (mounted) { close(); }
+    // pathname 変化時のみ閉じる
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pathname]);
+
+  // PC では描画しない（Sheet 自体を出さない）
+  if (!isMobile) {
+    return null;
+  }
+
+  return (
+    <Sheet open={isOpen} onOpenChange={handleOpenChange}>
+      <SheetContent side="left" className="w-72 border-r p-0">
+        <SheetTitle className="sr-only">メニュー</SheetTitle>
+        <SheetDescription className="sr-only">
+          ナビゲーションメニュー
+        </SheetDescription>
+        <div className="flex h-full w-full flex-col bg-sidebar">
+          <div className="min-h-0 flex-1 overflow-y-auto p-3">
+            {/* 主要ナビ */}
+            <nav className="space-y-0.5">
+              {NAV_LINKS.map(({ href, label, icon: Icon, color }) => {
+                const isActive =
+                  href === "/" ? pathname === "/" : pathname?.startsWith(href);
+                return (
+                  <Link
+                    key={href}
+                    href={href}
+                    prefetch={false}
+                    className={cn(
+                      "flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-foreground/80 transition-colors hover:bg-accent/60",
+                      isActive && "bg-accent text-accent-foreground",
+                    )}
+                  >
+                    <span className={cn("flex h-7 w-7 items-center justify-center rounded-md", color)}>
+                      <Icon size={16} />
+                    </span>
+                    {label}
+                  </Link>
+                );
+              })}
+            </nav>
+
+            <Separator className="my-3" />
+
+            {/* カテゴリ */}
+            <h2 className="mb-1 px-3 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+              統計カテゴリー
+            </h2>
+            <CategoryAccordion categories={categories} />
+          </div>
+        </div>
+      </SheetContent>
+    </Sheet>
+  );
+}

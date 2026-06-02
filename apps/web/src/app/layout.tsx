@@ -33,7 +33,7 @@ import "./globals.css";
 
 import { Footer } from "@/components/organisms/Footer/Footer";
 import Header from "@/components/organisms/Header";
-import { Sidebar, SidebarSkeleton } from "@/components/organisms/Sidebar";
+import { MobileNavDrawer } from "@/components/organisms/MobileNavDrawer";
 
 import { A8LinkManager } from "@/lib/a8net/A8LinkManager";
 import { CookieConsentBanner } from "@/lib/analytics/components/CookieConsentBanner";
@@ -144,23 +144,20 @@ export default function RootLayout({
         {/* テーマプロバイダー（ダークモード対応） */}
         <ThemeProvider>
           {/* メインレイアウトコンテナ */}
-          <div className="relative flex flex-col" suppressHydrationWarning>
-            {/* ヘッダー（全ページ共通） */}
+          <div className="relative flex min-h-screen flex-col" suppressHydrationWarning>
+            {/* ヘッダー（全ページ共通・カテゴリメガメニュー内蔵） */}
             <Header />
-            {/* コンテンツエリア（サイドバー + メインコンテンツ） */}
-            <div className="flex flex-1">
-              {/* サイドバーナビゲーション */}
-              <Suspense fallback={<SidebarSkeleton />}>
-                <Sidebar />
-              </Suspense>
-              {/* メインコンテンツエリア（各ページのコンテンツがここに表示される） */}
-              <main className="flex-1 min-w-0">
-                {children}
-              </main>
-            </div>
+            {/* メインコンテンツエリア（各ページが PageShell で幅を制御） */}
+            <main className="min-w-0 flex-1">
+              {children}
+            </main>
             {/* フッター（全ページ共通） */}
             <Footer />
           </div>
+          {/* モバイル専用ナビゲーションドロワー（PC では描画しない） */}
+          <Suspense fallback={null}>
+            <MobileNavDrawer />
+          </Suspense>
           {/* トースト通知（成功、エラー、警告などの通知を表示） */}
           <Toaster position="top-right" richColors />
           {/* Cookie 同意バナー */}
