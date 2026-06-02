@@ -124,3 +124,4 @@ category: economy
 - [総務省 家計調査](https://www.stat.go.jp/data/kakei/) — 二人以上の世帯・全国平均・年額（2019年・2024年）
 
 本記事の対象データ: [関連カテゴリ](/category/economy)・[鳥取県](/areas/31000)・[京都府](/areas/26000)
+

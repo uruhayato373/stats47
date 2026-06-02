@@ -93,3 +93,4 @@ publishedAt: 2026-03-06
 <source-link href="/ranking/final-disposal-site-remaining-capacity">最終処分場残余容量ランキング</source-link>
 
 本記事の対象データ: [関連カテゴリ](/category/energy)
+

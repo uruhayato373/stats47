@@ -101,3 +101,4 @@ publishedAt: "2026-03-27"
 - 厚生労働省 衛生行政報告例: https://www.mhlw.go.jp/toukei/list/36-19.html
 
 本記事の対象データ: [関連カテゴリ](/category/socialsecurity)
+

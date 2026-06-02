@@ -89,3 +89,4 @@ publishedAt: 2026-03-06
 ## データ出典
 
 - [e-Stat 家計調査（2024年度）](https://www.e-stat.go.jp/dbview?sid=0000010212) ── 交通・通信費割合、携帯電話契約数
+

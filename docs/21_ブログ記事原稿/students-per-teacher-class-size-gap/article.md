@@ -88,3 +88,4 @@ ogImage: /blog/students-per-teacher-class-size-gap/og.png
 本記事のデータはe-Stat（政府統計の総合窓口）を基に作成しています。
 
 本記事の対象データ: [関連カテゴリ](/category/educationsports)
+

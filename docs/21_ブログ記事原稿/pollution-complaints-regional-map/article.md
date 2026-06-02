@@ -107,3 +107,4 @@ published: true
 <source-link href="/ranking/general-dust-emission-facility-count">一般粉じん発生施設数ランキングをもっと見る</source-link>
 
 <source-link href="/ranking/water-pollution-control-law-facility-count">水質汚濁防止法特定事業場数ランキングをもっと見る</source-link>
+
