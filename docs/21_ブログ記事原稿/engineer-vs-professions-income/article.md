@@ -57,15 +57,9 @@ published: true
 
 <source-link href="/ranking/system-consultant-annual-income">システムコンサルタントの年収ランキングと比べてみる</source-link>
 
-### 関連記事・次に読むデータ
-
-- [ソフトウェアエンジニアの都道府県別年収ランキング](/ranking/software-engineer-annual-income) — 開発職の地域格差
-- [システムコンサルタントの年収ランキング](/ranking/system-consultant-annual-income) — 上流IT職の年収
-- [医師の平均年収ランキング](/ranking/doctor-annual-income) — 最上位職種の年収水準
-- [大学教授の平均年収ランキング](/ranking/university-professor-annual-income) — 研究職の年収
-- [労働・賃金カテゴリの統計一覧](/category/laborwage) — 職業・賃金の関連ランキング
-
 ## データ出典
 
 - 厚生労働省「賃金構造基本統計調査」（e-Stat 統計データ、2023年）
 - 各職種の平均年収は、きまって支給する現金給与額×12＋年間賞与から算出した全国平均の推計値（企業規模10人以上）
+
+本記事の対象データ: [関連カテゴリ](/category/laborwage)・[沖縄県](/areas/47000)・[石川県](/areas/17000)

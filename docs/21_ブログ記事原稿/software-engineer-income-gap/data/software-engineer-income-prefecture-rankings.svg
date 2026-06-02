@@ -1,68 +1,65 @@
-<!-- data-source: software-engineer-income-prefecture-rankings.json | generated: 2026-06-02T13:17:55.015Z -->
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 480" width="680" height="480" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" role="img" aria-label="ソフトウェア作成者の平均年収 都道府県ランキング（2023年）">
-  <rect width="680" height="480" fill="#fafafa" rx="8"/>
-  <text x="340" y="24" text-anchor="middle" font-size="16" font-weight="bold" fill="#222">ソフトウェア作成者の平均年収 都道府県ランキング（2023年）</text>
-  <text x="227.5" y="54" text-anchor="middle" font-size="12" font-weight="bold" fill="#1565c0">上位 10</text>
-  <text x="542.5" y="54" text-anchor="middle" font-size="12" font-weight="bold" fill="#c62828">下位 10</text>
-      <text x="84" y="82" text-anchor="end" font-size="11" fill="#333">京都府</text>
+<!-- data-source: software-engineer-income-prefecture-rankings.json | generated: 2026-06-02T21:29:08.193Z -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 300" width="680" height="300" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" role="img" aria-label="ソフトウェア作成者の平均年収 都道府県ランキング（2023年）">
+  <style>
+    .svg-bg{fill:#fafafa}
+    .svg-title{fill:#222}
+    .svg-subtitle{fill:#666}
+    .svg-label{fill:#333}
+    .svg-legend{fill:#888}
+    @media (prefers-color-scheme:dark){
+      .svg-bg{fill:#1f2937}
+      .svg-title{fill:#f9fafb}
+      .svg-subtitle{fill:#9ca3af}
+      .svg-label{fill:#e5e7eb}
+      .svg-legend{fill:#9ca3af}
+    }
+  </style>
+  <rect width="680" height="300" class="svg-bg" rx="8"/>
+  <text x="340" y="24" text-anchor="middle" font-size="16" font-weight="bold" class="svg-title">ソフトウェア作成者の平均年収 都道府県ランキング（2023年）</text>
+  
+  <text x="227.5" y="54" text-anchor="middle" font-size="12" font-weight="bold" fill="#1565c0">上位 5</text>
+  <text x="542.5" y="54" text-anchor="middle" font-size="12" font-weight="bold" fill="#c62828">下位 5</text>
+  
+      <text x="84" y="82" text-anchor="end" font-size="11" class="svg-label">京都府</text>
       <rect x="90" y="63" width="195" height="30" fill="#1565c0" rx="2"/>
-      <text x="289" y="82" font-size="10" fill="#333">608.4万円</text>
-      <text x="84" y="118" text-anchor="end" font-size="11" fill="#333">愛知県</text>
+      <text x="289" y="82" font-size="10" class="svg-label">608.4万円</text>
+    
+      <text x="84" y="118" text-anchor="end" font-size="11" class="svg-label">愛知県</text>
       <rect x="90" y="99" width="191.18589743589743" height="30" fill="#1976d2" rx="2"/>
-      <text x="285.18589743589746" y="118" font-size="10" fill="#333">596.5万円</text>
-      <text x="84" y="154" text-anchor="end" font-size="11" fill="#333">栃木県</text>
+      <text x="285.18589743589746" y="118" font-size="10" class="svg-label">596.5万円</text>
+    
+      <text x="84" y="154" text-anchor="end" font-size="11" class="svg-label">栃木県</text>
       <rect x="90" y="135" width="188.0448717948718" height="30" fill="#1e88e5" rx="2"/>
-      <text x="282.0448717948718" y="154" font-size="10" fill="#333">586.7万円</text>
-      <text x="84" y="190" text-anchor="end" font-size="11" fill="#333">大阪府</text>
+      <text x="282.0448717948718" y="154" font-size="10" class="svg-label">586.7万円</text>
+    
+      <text x="84" y="190" text-anchor="end" font-size="11" class="svg-label">大阪府</text>
       <rect x="90" y="171" width="187.3397435897436" height="30" fill="#2196f3" rx="2"/>
-      <text x="281.3397435897436" y="190" font-size="10" fill="#333">584.5万円</text>
-      <text x="84" y="226" text-anchor="end" font-size="11" fill="#333">岐阜県</text>
+      <text x="281.3397435897436" y="190" font-size="10" class="svg-label">584.5万円</text>
+    
+      <text x="84" y="226" text-anchor="end" font-size="11" class="svg-label">岐阜県</text>
       <rect x="90" y="207" width="185.8653846153846" height="30" fill="#42a5f5" rx="2"/>
-      <text x="279.86538461538464" y="226" font-size="10" fill="#333">579.9万円</text>
-      <text x="84" y="262" text-anchor="end" font-size="11" fill="#333">東京都</text>
-      <rect x="90" y="243" width="183.2371794871795" height="30" fill="#64b5f6" rx="2"/>
-      <text x="277.2371794871795" y="262" font-size="10" fill="#333">571.7万円</text>
-      <text x="84" y="298" text-anchor="end" font-size="11" fill="#333">埼玉県</text>
-      <rect x="90" y="279" width="182.3397435897436" height="30" fill="#90caf9" rx="2"/>
-      <text x="276.3397435897436" y="298" font-size="10" fill="#333">568.9万円</text>
-      <text x="84" y="334" text-anchor="end" font-size="11" fill="#333">千葉県</text>
-      <rect x="90" y="315" width="181.95512820512823" height="30" fill="#1565c0" rx="2"/>
-      <text x="275.95512820512823" y="334" font-size="10" fill="#333">567.7万円</text>
-      <text x="84" y="370" text-anchor="end" font-size="11" fill="#333">愛媛県</text>
-      <rect x="90" y="351" width="180.35256410256412" height="30" fill="#1976d2" rx="2"/>
-      <text x="274.3525641025641" y="370" font-size="10" fill="#333">562.7万円</text>
-      <text x="84" y="406" text-anchor="end" font-size="11" fill="#333">兵庫県</text>
-      <rect x="90" y="387" width="178.81410256410257" height="30" fill="#1e88e5" rx="2"/>
-      <text x="272.81410256410254" y="406" font-size="10" fill="#333">557.9万円</text>
-      <text x="399" y="82" text-anchor="end" font-size="11" fill="#333">沖縄県</text>
-      <rect x="405" y="63" width="85.36895674300254" height="30" fill="#c62828" rx="2"/>
-      <text x="494.3689567430025" y="82" font-size="10" fill="#333">402.6万円</text>
-      <text x="399" y="118" text-anchor="end" font-size="11" fill="#333">奈良県</text>
-      <rect x="405" y="99" width="86.45038167938931" height="30" fill="#d32f2f" rx="2"/>
-      <text x="495.4503816793893" y="118" font-size="10" fill="#333">407.7万円</text>
-      <text x="399" y="154" text-anchor="end" font-size="11" fill="#333">宮崎県</text>
-      <rect x="405" y="135" width="89.48261238337574" height="30" fill="#e53935" rx="2"/>
-      <text x="498.48261238337574" y="154" font-size="10" fill="#333">422万円</text>
-      <text x="399" y="190" text-anchor="end" font-size="11" fill="#333">青森県</text>
-      <rect x="405" y="171" width="91.66666666666666" height="30" fill="#ef5350" rx="2"/>
-      <text x="500.66666666666663" y="190" font-size="10" fill="#333">432.3万円</text>
-      <text x="399" y="226" text-anchor="end" font-size="11" fill="#333">島根県</text>
-      <rect x="405" y="207" width="92.15436810856659" height="30" fill="#e57373" rx="2"/>
-      <text x="501.1543681085666" y="226" font-size="10" fill="#333">434.6万円</text>
-      <text x="399" y="262" text-anchor="end" font-size="11" fill="#333">山形県</text>
-      <rect x="405" y="243" width="93.19338422391857" height="30" fill="#ef9a9a" rx="2"/>
-      <text x="502.19338422391854" y="262" font-size="10" fill="#333">439.5万円</text>
-      <text x="399" y="298" text-anchor="end" font-size="11" fill="#333">富山県</text>
-      <rect x="405" y="279" width="95.41984732824427" height="30" fill="#c62828" rx="2"/>
-      <text x="504.41984732824426" y="298" font-size="10" fill="#333">450万円</text>
-      <text x="399" y="334" text-anchor="end" font-size="11" fill="#333">新潟県</text>
-      <rect x="405" y="315" width="96.92536047497879" height="30" fill="#d32f2f" rx="2"/>
-      <text x="505.9253604749788" y="334" font-size="10" fill="#333">457.1万円</text>
-      <text x="399" y="370" text-anchor="end" font-size="11" fill="#333">茨城県</text>
-      <rect x="405" y="351" width="99.19423240033926" height="30" fill="#e53935" rx="2"/>
-      <text x="508.1942324003393" y="370" font-size="10" fill="#333">467.8万円</text>
-      <text x="399" y="406" text-anchor="end" font-size="11" fill="#333">高知県</text>
-      <rect x="405" y="387" width="100" height="30" fill="#ef5350" rx="2"/>
-      <text x="509" y="406" font-size="10" fill="#333">471.6万円</text>
-  <text x="340" y="462" text-anchor="middle" font-size="10" fill="#888">凡例: 青系=上位 / 赤系=下位（厚生労働省「賃金構造基本統計調査」 e-Stat）</text>
+      <text x="279.86538461538464" y="226" font-size="10" class="svg-label">579.9万円</text>
+    
+  
+      <text x="399" y="82" text-anchor="end" font-size="11" class="svg-label">沖縄県</text>
+      <rect x="405" y="63" width="129.03846153846155" height="30" fill="#c62828" rx="2"/>
+      <text x="538.0384615384615" y="82" font-size="10" class="svg-label">402.6万円</text>
+    
+      <text x="399" y="118" text-anchor="end" font-size="11" class="svg-label">奈良県</text>
+      <rect x="405" y="99" width="130.67307692307693" height="30" fill="#d32f2f" rx="2"/>
+      <text x="539.6730769230769" y="118" font-size="10" class="svg-label">407.7万円</text>
+    
+      <text x="399" y="154" text-anchor="end" font-size="11" class="svg-label">宮崎県</text>
+      <rect x="405" y="135" width="135.25641025641028" height="30" fill="#e53935" rx="2"/>
+      <text x="544.2564102564103" y="154" font-size="10" class="svg-label">422万円</text>
+    
+      <text x="399" y="190" text-anchor="end" font-size="11" class="svg-label">青森県</text>
+      <rect x="405" y="171" width="138.55769230769232" height="30" fill="#ef5350" rx="2"/>
+      <text x="547.5576923076924" y="190" font-size="10" class="svg-label">432.3万円</text>
+    
+      <text x="399" y="226" text-anchor="end" font-size="11" class="svg-label">島根県</text>
+      <rect x="405" y="207" width="139.2948717948718" height="30" fill="#e57373" rx="2"/>
+      <text x="548.2948717948718" y="226" font-size="10" class="svg-label">434.6万円</text>
+    
+  <text x="340" y="282" text-anchor="middle" font-size="10" class="svg-legend">凡例: 青系=上位 / 赤系=下位</text>
 </svg>

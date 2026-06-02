@@ -1,0 +1,65 @@
+<!-- data-source: gross-prefectural-product-information-communication-h27-prefecture-rankings.json | generated: 2026-06-02T21:28:28.363Z -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 300" width="680" height="300" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" role="img" aria-label="県内総生産額 都道府県ランキング（2020年）">
+  <style>
+    .svg-bg{fill:#fafafa}
+    .svg-title{fill:#222}
+    .svg-subtitle{fill:#666}
+    .svg-label{fill:#333}
+    .svg-legend{fill:#888}
+    @media (prefers-color-scheme:dark){
+      .svg-bg{fill:#1f2937}
+      .svg-title{fill:#f9fafb}
+      .svg-subtitle{fill:#9ca3af}
+      .svg-label{fill:#e5e7eb}
+      .svg-legend{fill:#9ca3af}
+    }
+  </style>
+  <rect width="680" height="300" class="svg-bg" rx="8"/>
+  <text x="340" y="24" text-anchor="middle" font-size="16" font-weight="bold" class="svg-title">県内総生産額 都道府県ランキング（2020年）</text>
+  
+  <text x="227.5" y="54" text-anchor="middle" font-size="12" font-weight="bold" fill="#1565c0">上位 5</text>
+  <text x="542.5" y="54" text-anchor="middle" font-size="12" font-weight="bold" fill="#c62828">下位 5</text>
+  
+      <text x="84" y="82" text-anchor="end" font-size="11" class="svg-label">東京都</text>
+      <rect x="90" y="63" width="195" height="30" fill="#1565c0" rx="2"/>
+      <text x="289" y="82" font-size="10" class="svg-label">12773707百万円</text>
+    
+      <text x="84" y="118" text-anchor="end" font-size="11" class="svg-label">大阪府</text>
+      <rect x="90" y="99" width="33.21921193276157" height="30" fill="#1976d2" rx="2"/>
+      <text x="127.21921193276157" y="118" font-size="10" class="svg-label">2176064百万円</text>
+    
+      <text x="84" y="154" text-anchor="end" font-size="11" class="svg-label">神奈川県</text>
+      <rect x="90" y="135" width="30.59549040853998" height="30" fill="#1e88e5" rx="2"/>
+      <text x="124.59549040853997" y="154" font-size="10" class="svg-label">2004194百万円</text>
+    
+      <text x="84" y="190" text-anchor="end" font-size="11" class="svg-label">愛知県</text>
+      <rect x="90" y="171" width="19.781764213004102" height="30" fill="#2196f3" rx="2"/>
+      <text x="113.7817642130041" y="190" font-size="10" class="svg-label">1295828百万円</text>
+    
+      <text x="84" y="226" text-anchor="end" font-size="11" class="svg-label">福岡県</text>
+      <rect x="90" y="207" width="15.63928544783437" height="30" fill="#42a5f5" rx="2"/>
+      <text x="109.63928544783437" y="226" font-size="10" class="svg-label">1024470百万円</text>
+    
+  
+      <text x="399" y="82" text-anchor="end" font-size="11" class="svg-label">鳥取県</text>
+      <rect x="405" y="63" width="1" height="30" fill="#c62828" rx="2"/>
+      <text x="410" y="82" font-size="10" class="svg-label">58156百万円</text>
+    
+      <text x="399" y="118" text-anchor="end" font-size="11" class="svg-label">高知県</text>
+      <rect x="405" y="99" width="1.114978604096681" height="30" fill="#d32f2f" rx="2"/>
+      <text x="410.1149786040967" y="118" font-size="10" class="svg-label">73038百万円</text>
+    
+      <text x="399" y="154" text-anchor="end" font-size="11" class="svg-label">徳島県</text>
+      <rect x="405" y="135" width="1.141327259189521" height="30" fill="#e53935" rx="2"/>
+      <text x="410.1413272591895" y="154" font-size="10" class="svg-label">74764百万円</text>
+    
+      <text x="399" y="190" text-anchor="end" font-size="11" class="svg-label">佐賀県</text>
+      <rect x="405" y="171" width="1.1471282377151755" height="30" fill="#ef5350" rx="2"/>
+      <text x="410.14712823771515" y="190" font-size="10" class="svg-label">75144百万円</text>
+    
+      <text x="399" y="226" text-anchor="end" font-size="11" class="svg-label">秋田県</text>
+      <rect x="405" y="207" width="1.2255483079422442" height="30" fill="#e57373" rx="2"/>
+      <text x="410.22554830794223" y="226" font-size="10" class="svg-label">80281百万円</text>
+    
+  <text x="340" y="282" text-anchor="middle" font-size="10" class="svg-legend">凡例: 青系=上位 / 赤系=下位</text>
+</svg>

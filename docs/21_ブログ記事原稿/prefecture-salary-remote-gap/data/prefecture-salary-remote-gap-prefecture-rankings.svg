@@ -1,68 +1,65 @@
-<!-- data-source: prefecture-salary-remote-gap-prefecture-rankings.json | generated: 2026-06-02T13:29:33.989Z -->
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 480" width="680" height="480" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" role="img" aria-label="平均給与月額（全職種）都道府県ランキング（2024年）">
-  <rect width="680" height="480" fill="#fafafa" rx="8"/>
-  <text x="340" y="24" text-anchor="middle" font-size="16" font-weight="bold" fill="#222">平均給与月額（全職種）都道府県ランキング（2024年）</text>
-  <text x="227.5" y="54" text-anchor="middle" font-size="12" font-weight="bold" fill="#1565c0">上位 10</text>
-  <text x="542.5" y="54" text-anchor="middle" font-size="12" font-weight="bold" fill="#c62828">下位 10</text>
-      <text x="84" y="82" text-anchor="end" font-size="11" fill="#333">東京都</text>
-      <rect x="90" y="63" width="195.0" height="30" fill="#1565c0" rx="2"/>
-      <text x="289.0" y="82" font-size="10" fill="#333">47.1万円</text>
-      <text x="84" y="118" text-anchor="end" font-size="11" fill="#333">大阪府</text>
-      <rect x="90" y="99" width="185.2" height="30" fill="#1976d2" rx="2"/>
-      <text x="279.2" y="118" font-size="10" fill="#333">44.7万円</text>
-      <text x="84" y="154" text-anchor="end" font-size="11" fill="#333">神奈川県</text>
-      <rect x="90" y="135" width="185.1" height="30" fill="#1e88e5" rx="2"/>
-      <text x="279.1" y="154" font-size="10" fill="#333">44.7万円</text>
-      <text x="84" y="190" text-anchor="end" font-size="11" fill="#333">愛知県</text>
-      <rect x="90" y="171" width="182.0" height="30" fill="#2196f3" rx="2"/>
-      <text x="276.0" y="190" font-size="10" fill="#333">43.9万円</text>
-      <text x="84" y="226" text-anchor="end" font-size="11" fill="#333">静岡県</text>
-      <rect x="90" y="207" width="181.7" height="30" fill="#42a5f5" rx="2"/>
-      <text x="275.7" y="226" font-size="10" fill="#333">43.9万円</text>
-      <text x="84" y="262" text-anchor="end" font-size="11" fill="#333">兵庫県</text>
-      <rect x="90" y="243" width="180.7" height="30" fill="#64b5f6" rx="2"/>
-      <text x="274.7" y="262" font-size="10" fill="#333">43.6万円</text>
-      <text x="84" y="298" text-anchor="end" font-size="11" fill="#333">千葉県</text>
-      <rect x="90" y="279" width="179.8" height="30" fill="#90caf9" rx="2"/>
-      <text x="273.8" y="298" font-size="10" fill="#333">43.4万円</text>
-      <text x="84" y="334" text-anchor="end" font-size="11" fill="#333">新潟県</text>
-      <rect x="90" y="315" width="178.6" height="30" fill="#1565c0" rx="2"/>
-      <text x="272.6" y="334" font-size="10" fill="#333">43.1万円</text>
-      <text x="84" y="370" text-anchor="end" font-size="11" fill="#333">岩手県</text>
-      <rect x="90" y="351" width="177.9" height="30" fill="#1976d2" rx="2"/>
-      <text x="271.9" y="370" font-size="10" fill="#333">42.9万円</text>
-      <text x="84" y="406" text-anchor="end" font-size="11" fill="#333">埼玉県</text>
-      <rect x="90" y="387" width="177.4" height="30" fill="#1e88e5" rx="2"/>
-      <text x="271.4" y="406" font-size="10" fill="#333">42.8万円</text>
-      <text x="399" y="82" text-anchor="end" font-size="11" fill="#333">佐賀県</text>
-      <rect x="405" y="63" width="97.0" height="30" fill="#c62828" rx="2"/>
-      <text x="506.0" y="82" font-size="10" fill="#333">39.5万円</text>
-      <text x="399" y="118" text-anchor="end" font-size="11" fill="#333">長野県</text>
-      <rect x="405" y="99" width="97.8" height="30" fill="#d32f2f" rx="2"/>
-      <text x="506.8" y="118" font-size="10" fill="#333">39.8万円</text>
-      <text x="399" y="154" text-anchor="end" font-size="11" fill="#333">高知県</text>
-      <rect x="405" y="135" width="98.7" height="30" fill="#e53935" rx="2"/>
-      <text x="507.7" y="154" font-size="10" fill="#333">40.2万円</text>
-      <text x="399" y="190" text-anchor="end" font-size="11" fill="#333">山口県</text>
-      <rect x="405" y="171" width="98.8" height="30" fill="#ef5350" rx="2"/>
-      <text x="507.8" y="190" font-size="10" fill="#333">40.2万円</text>
-      <text x="399" y="226" text-anchor="end" font-size="11" fill="#333">秋田県</text>
-      <rect x="405" y="207" width="99.3" height="30" fill="#e57373" rx="2"/>
-      <text x="508.3" y="226" font-size="10" fill="#333">40.4万円</text>
-      <text x="399" y="262" text-anchor="end" font-size="11" fill="#333">福井県</text>
-      <rect x="405" y="243" width="99.3" height="30" fill="#ef9a9a" rx="2"/>
-      <text x="508.3" y="262" font-size="10" fill="#333">40.4万円</text>
-      <text x="399" y="298" text-anchor="end" font-size="11" fill="#333">奈良県</text>
-      <rect x="405" y="279" width="99.4" height="30" fill="#c62828" rx="2"/>
-      <text x="508.4" y="298" font-size="10" fill="#333">40.4万円</text>
-      <text x="399" y="334" text-anchor="end" font-size="11" fill="#333">宮崎県</text>
-      <rect x="405" y="315" width="99.6" height="30" fill="#d32f2f" rx="2"/>
-      <text x="508.6" y="334" font-size="10" fill="#333">40.5万円</text>
-      <text x="399" y="370" text-anchor="end" font-size="11" fill="#333">熊本県</text>
-      <rect x="405" y="351" width="99.9" height="30" fill="#e53935" rx="2"/>
-      <text x="508.9" y="370" font-size="10" fill="#333">40.6万円</text>
-      <text x="399" y="406" text-anchor="end" font-size="11" fill="#333">富山県</text>
-      <rect x="405" y="387" width="100.0" height="30" fill="#ef5350" rx="2"/>
-      <text x="509.0" y="406" font-size="10" fill="#333">40.7万円</text>
-  <text x="340" y="462" text-anchor="middle" font-size="10" fill="#888">凡例: 青系=上位 / 赤系=下位（厚生労働省「賃金構造基本統計調査」 e-Stat）</text>
+<!-- data-source: prefecture-salary-remote-gap-prefecture-rankings.json | generated: 2026-06-02T21:28:32.023Z -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 300" width="680" height="300" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" role="img" aria-label="全職種 平均給与月額 都道府県ランキング（2024年）">
+  <style>
+    .svg-bg{fill:#fafafa}
+    .svg-title{fill:#222}
+    .svg-subtitle{fill:#666}
+    .svg-label{fill:#333}
+    .svg-legend{fill:#888}
+    @media (prefers-color-scheme:dark){
+      .svg-bg{fill:#1f2937}
+      .svg-title{fill:#f9fafb}
+      .svg-subtitle{fill:#9ca3af}
+      .svg-label{fill:#e5e7eb}
+      .svg-legend{fill:#9ca3af}
+    }
+  </style>
+  <rect width="680" height="300" class="svg-bg" rx="8"/>
+  <text x="340" y="24" text-anchor="middle" font-size="16" font-weight="bold" class="svg-title">全職種 平均給与月額 都道府県ランキング（2024年）</text>
+  
+  <text x="227.5" y="54" text-anchor="middle" font-size="12" font-weight="bold" fill="#1565c0">上位 5</text>
+  <text x="542.5" y="54" text-anchor="middle" font-size="12" font-weight="bold" fill="#c62828">下位 5</text>
+  
+      <text x="84" y="82" text-anchor="end" font-size="11" class="svg-label">東京都</text>
+      <rect x="90" y="63" width="195" height="30" fill="#1565c0" rx="2"/>
+      <text x="289" y="82" font-size="10" class="svg-label">470775円</text>
+    
+      <text x="84" y="118" text-anchor="end" font-size="11" class="svg-label">大阪府</text>
+      <rect x="90" y="99" width="185.2403696033137" height="30" fill="#1976d2" rx="2"/>
+      <text x="279.2403696033137" y="118" font-size="10" class="svg-label">447213円</text>
+    
+      <text x="84" y="154" text-anchor="end" font-size="11" class="svg-label">神奈川県</text>
+      <rect x="90" y="135" width="185.0635016727736" height="30" fill="#1e88e5" rx="2"/>
+      <text x="279.0635016727736" y="154" font-size="10" class="svg-label">446786円</text>
+    
+      <text x="84" y="190" text-anchor="end" font-size="11" class="svg-label">愛知県</text>
+      <rect x="90" y="171" width="182.00621315915248" height="30" fill="#2196f3" rx="2"/>
+      <text x="276.0062131591525" y="190" font-size="10" class="svg-label">439405円</text>
+    
+      <text x="84" y="226" text-anchor="end" font-size="11" class="svg-label">静岡県</text>
+      <rect x="90" y="207" width="181.68644256810578" height="30" fill="#42a5f5" rx="2"/>
+      <text x="275.6864425681058" y="226" font-size="10" class="svg-label">438633円</text>
+    
+  
+      <text x="399" y="82" text-anchor="end" font-size="11" class="svg-label">佐賀県</text>
+      <rect x="405" y="63" width="163.5394615262068" height="30" fill="#c62828" rx="2"/>
+      <text x="572.5394615262068" y="82" font-size="10" class="svg-label">394822円</text>
+    
+      <text x="399" y="118" text-anchor="end" font-size="11" class="svg-label">長野県</text>
+      <rect x="405" y="99" width="164.7236896606659" height="30" fill="#d32f2f" rx="2"/>
+      <text x="573.723689660666" y="118" font-size="10" class="svg-label">397681円</text>
+    
+      <text x="399" y="154" text-anchor="end" font-size="11" class="svg-label">高知県</text>
+      <rect x="405" y="135" width="166.37638999522065" height="30" fill="#e53935" rx="2"/>
+      <text x="575.3763899952206" y="154" font-size="10" class="svg-label">401671円</text>
+    
+      <text x="399" y="190" text-anchor="end" font-size="11" class="svg-label">山口県</text>
+      <rect x="405" y="171" width="166.41491158196592" height="30" fill="#ef5350" rx="2"/>
+      <text x="575.414911581966" y="190" font-size="10" class="svg-label">401764円</text>
+    
+      <text x="399" y="226" text-anchor="end" font-size="11" class="svg-label">秋田県</text>
+      <rect x="405" y="207" width="167.32037597578463" height="30" fill="#e57373" rx="2"/>
+      <text x="576.3203759757846" y="226" font-size="10" class="svg-label">403950円</text>
+    
+  <text x="340" y="282" text-anchor="middle" font-size="10" class="svg-legend">凡例: 青系=上位 / 赤系=下位</text>
 </svg>
