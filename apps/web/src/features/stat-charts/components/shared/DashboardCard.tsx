@@ -9,12 +9,13 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@stats47/components/atoms/ui/accordion";
-import type { SourceAttribution as SourceAttributionData } from "@stats47/data-configs";
 import { Loader2 } from "lucide-react";
 
 import { SourceAttribution } from "@/components/molecules/SourceAttribution";
 
 import { parseTitle } from "../../utils/parseTitle";
+
+import type { SourceAttribution as SourceAttributionData } from "@stats47/data-configs";
 
 export interface DashboardCardProps {
   title: string;
