@@ -1,13 +1,14 @@
 import Link from "next/link";
 
+import type { FinanceFlowData } from "@/features/finance-flow";
+import {
+  LocalFinanceDashboard,
+  loadFinanceTrends,
+} from "@/features/local-finance-dashboard";
 import { LOCAL_FINANCE_THEME } from "@/features/theme-dashboard/server";
-
-import { LocalFinanceDashboard } from "@/features/local-finance-dashboard/components/LocalFinanceDashboard";
-import { loadFinanceTrends } from "@/features/local-finance-dashboard/lib/load-finance-trends";
 
 import { generateOGMetadata } from "@/lib/metadata/og-generator";
 
-import type { FinanceFlowData } from "@/features/finance-flow/lib/types";
 import type { Metadata } from "next";
 
 const theme = LOCAL_FINANCE_THEME;
