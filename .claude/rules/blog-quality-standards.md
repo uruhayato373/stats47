@@ -170,6 +170,8 @@ stats47.jp の `/blog/{slug}` 記事を新規作成または brushup する際�
 
 検査 (決定的): `quality-gate.mjs` の NG_PATTERN が `| … |` 等の省略行を含む表を **blocker** で検出する。
 
+> **文字数判定は prose (地の文) ベース (2026-06-02〜)**: `quality-gate.mjs` の charCount は frontmatter / 表 / 画像参照 / `<source-link>` 等タグ / リンクURL / 見出し・引用記号 / コードを除いた**地の文のみ**を数え、**2800 字以上**を要求する。表・markup・リンクでは字数を稼げないため、「中身のない要素で量を満たす」水増しは通らない。文字数を満たしたいときは読者価値のある分析・解説を書くこと。
+
 ## brushup の判断基準
 
 GSC スナップショットで以下に該当する記事は brushup 候補:

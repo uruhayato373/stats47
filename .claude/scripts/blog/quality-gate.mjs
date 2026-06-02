@@ -99,9 +99,24 @@ function countSvgCharts(text) {
   return matches ? matches.length : 0;
 }
 
+// charCount は「読者が読む地の文 (prose)」のみを数える。
+// 表・画像参照・タグ (source-link 等)・リンクURL・見出し/引用記号・コード等の markup は
+// 読者価値を伴わない水増し要因なので除外する (2026-06-02: 表で字数を稼ぐ gaming を封じる)。
 function getCharCount(text) {
-  const body = text.replace(/^---[\s\S]*?\n---\n/, "");
-  return body.length;
+  let t = text.replace(/^---[\s\S]*?\n---\n/, ""); // frontmatter
+  t = t.replace(/```[\s\S]*?```/g, ""); // code fence
+  t = t.replace(/!\[[^\]]*\]\([^)]*\)/g, ""); // 画像参照
+  t = t.replace(/<[^>]+>[\s\S]*?<\/[^>]+>/g, ""); // ペアHTML/カスタムタグ (source-link/affiliate-banner 等)
+  t = t.replace(/<[^>]+>/g, ""); // 単独タグ
+  t = t
+    .split("\n")
+    .filter((l) => !/^\s*\|/.test(l)) // 表行
+    .join("\n");
+  t = t.replace(/\[([^\]]+)\]\([^)]*\)/g, "$1"); // [text](url) → text
+  t = t.replace(/^[ \t]*#{1,6}\s+/gm, ""); // 見出し記号
+  t = t.replace(/^[ \t]*>\s?/gm, ""); // 引用/callout 記号
+  t = t.replace(/[*_`~]/g, ""); // 強調記号
+  return t.replace(/\s+/g, "").length; // 空白除いた地の文字数
 }
 
 function getH2Count(text) {
@@ -159,8 +174,8 @@ if (!checks.hasDescription) {
 if (!checks.hasDataSource) {
   blockers.push("「データ出典」section 欠落");
 }
-if (checks.charCount < 3000) {
-  blockers.push(`charCount < 3000 (actual: ${checks.charCount}) — 内容が薄い`);
+if (checks.charCount < 2800) {
+  blockers.push(`prose charCount < 2800 (actual: ${checks.charCount}) — 地の文が薄い (表/markup は除外して計測)`);
 }
 if (checks.charCount > 25000) {
   warnings.push(`charCount > 25000 (actual: ${checks.charCount}) — 長すぎる可能性`);
