@@ -9,7 +9,10 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@stats47/components/atoms/ui/accordion";
+import type { SourceAttribution as SourceAttributionData } from "@stats47/data-configs";
 import { Loader2 } from "lucide-react";
+
+import { SourceAttribution } from "@/components/molecules/SourceAttribution";
 
 import { parseTitle } from "../../utils/parseTitle";
 
@@ -22,6 +25,11 @@ export interface DashboardCardProps {
   source?: string;
   sourceLink?: string | null;
   sourceDetail?: string;
+  /**
+   * 出典表記 (2 階層: 編成統計 + 原典調査) の統一型。指定時は source/sourceLink より優先し
+   * <SourceAttribution> で表示する。ranking と同じ部品・同じ型で出典を統一するための入口。
+   */
+  attribution?: SourceAttributionData | null;
   /** 注釈テキスト（出典とは別にカード下部に表示） */
   annotation?: string;
   /** 関連ランキングへのリンク一覧 */
@@ -42,6 +50,7 @@ export const DashboardCard: React.FC<DashboardCardProps> = ({
   source,
   sourceLink,
   sourceDetail,
+  attribution,
   annotation,
   rankingLinks,
   loading,
@@ -97,7 +106,12 @@ export const DashboardCard: React.FC<DashboardCardProps> = ({
           children
         )}
 
-        {source && (
+        {attribution ? (
+          <p className="text-xs text-muted-foreground mt-2 text-right">
+            <SourceAttribution attribution={attribution} />
+            {sourceDetail ? ` (${sourceDetail})` : ""}
+          </p>
+        ) : source ? (
           <p className="text-xs text-muted-foreground mt-2 text-right">
             出典:{" "}
             {sourceLink ? (
@@ -109,7 +123,7 @@ export const DashboardCard: React.FC<DashboardCardProps> = ({
             )}
             {sourceDetail ? ` (${sourceDetail})` : ""}
           </p>
-        )}
+        ) : null}
         {annotation && (
           <p className="text-xs text-muted-foreground mt-1 text-right">{annotation}</p>
         )}

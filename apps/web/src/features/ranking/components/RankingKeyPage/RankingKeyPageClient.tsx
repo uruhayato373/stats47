@@ -28,6 +28,7 @@ import { isOk, type TopoJSONTopology } from "@stats47/types";
 import { Map as MapIcon, Table as TableIcon } from "lucide-react";
 
 import { ShareButtons } from "@/components/molecules/ShareButtons";
+import { SourceAttribution } from "@/components/molecules/SourceAttribution";
 
 
 import type { AreaType } from "@/features/area";
@@ -268,8 +269,12 @@ export function RankingKeyPageClient({
     }, [rankingValues, displayInfo.title]);
 
     // カードタイトル・サブタイトル・出典を構築
+    // attribution (2 階層: 編成統計 + 原典調査) が焼き込まれていれば統一表示。
+    // 未再生成の item.json には無いため、その場合は従来の sourceConfig.source / surveyId 表示にフォールバック。
     const sourceObj = (rankingItem?.sourceConfig as Record<string, unknown>)?.source as { name?: string; url?: string } | undefined;
-    const cardFooter = (sourceObj?.name || surveyName) ? (
+    const cardFooter = rankingItem?.attribution ? (
+        <SourceAttribution attribution={rankingItem.attribution} />
+    ) : (sourceObj?.name || surveyName) ? (
         <span>
             {sourceObj?.name && (
                 <>出典: {sourceObj.url

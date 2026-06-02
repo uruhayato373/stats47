@@ -15,11 +15,21 @@
 
 import {
   isSsdsStatsDataId,
+  resolveAttribution,
   resolveProvenanceByParams,
   type ProvenanceSurvey,
+  type SourceAttribution,
 } from "@stats47/data-configs";
 
 import type { RankingItem } from "../types/ranking-item";
+
+/** item の sourceConfig (statsDataId/cdCat01) から出典表記 (2 階層) を解決する。 */
+export function resolveItemAttribution(item: RankingItem): SourceAttribution {
+  return resolveAttribution(
+    item.sourceConfig?.statsDataId,
+    item.sourceConfig?.cdCat01,
+  );
+}
 
 /** item が SSDS (二次統計) 由来か = statsDataId が SSDS テーブル (param 統一ルールと整合)。 */
 export function isSsdsItem(item: RankingItem): boolean {

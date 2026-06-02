@@ -2,6 +2,7 @@
  * ランキング項目の型定義
  * 2026-01 設計見直しにより構造を階層化
  */
+import type { SourceAttribution } from "@stats47/data-configs";
 import type { AreaType } from "@stats47/types";
 import type {
     ColorSchemeType,
@@ -261,6 +262,11 @@ export interface RankingItem {
   sourceConfig?: SourceProvenance | null;
   /** 出典情報（名前とURL） */
   source?: { name: string; url: string };
+  /**
+   * 出典表記 (2 階層プロビナンス、exporter が焼き込む統一型)。
+   * SSDS は compilation=社会・人口統計体系 + originalSurveys=原典調査群。非SSDS は compilation=null。
+   */
+  attribution?: SourceAttribution | null;
 
   // === SEO ===
   /** SEO 用タイトル（meta title のオーバーライド、未設定時は title を使用） */

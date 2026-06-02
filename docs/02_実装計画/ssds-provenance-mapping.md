@@ -187,17 +187,31 @@ resolveProvenanceByParams(statsDataId, cdCat01):
 
 検証: resolver 8 ケース + bucketing 7 ケースを tsx で全 pass、型チェッククリーン、整合性 (master coverage) OK。
 
-### Phase 7 — UI 出典表示 (残: アプリ実行検証が前提)
+### Phase 7 — UI 出典表示 + データ保有/型の統一 (完了、CI で build 検証) ✅
 
-> データ (survey items.json / ranking item.json の originalSurveys) は Phase 5-6 で整備済。
-> 残るのは描画。ranking 詳細は高トラフィック SSG ページ (`.claude/rules/nextjs-ssg-preservation.md`)
-> のため、ローカル `next build` で SSG 維持を確認できる環境で実施する。
+出典は「データ取得元 (SSDS=編成統計) と原典調査の両方」を誠実に併記する。型・表示部品を
+ranking とテーマで**完全統一**した。
 
-- ranking 詳細 (`RankingKeyPageClient.tsx:281` の「調査: 」行) を originalSurveys ベースへ。
-  touch points: (1) `RankingItem` 型/schema に `originalSurveys?`、(2) `readRankingItemFromR2` で通す、
-  (3) server page で id→name 解決、(4) client で複数調査をリンク表示。
-- 時系列 (theme-dashboard) / 円グラフ (CompositionChart) に「出典: ◯◯調査」表示
-  (config が既に statsDataId/cdCat01/sourceName を持つため、SSDS のとき真の原典に差し替え)。
+統一型・入口 (`@stats47/data-configs`):
+- `type SourceAttribution = { compilation: {name,url}|null; originalSurveys: {id,name}[] }`
+- `resolveAttribution(statsDataId, cdCat01)` — SSDS→compilation=社会・人口統計体系+原典群 / 一次→compilation=null+その調査。
+
+表示部品 (統一):
+- `apps/web/src/components/molecules/SourceAttribution.tsx` — 「出典: {編成統計}（原典: {調査…}）」/
+  compilation=null なら「出典: {調査}」。各調査は `/survey/{id}` へリンク。純粋表示 (SSG 非破壊)。
+
+配線:
+- `RankingItem.attribution?` を追加、exporter が item.json に焼き込み。ranking 詳細
+  (`RankingKeyPageClient`) は attribution があれば統一部品で表示 (無ければ従来表示にフォールバック)。
+- `DashboardCard` に `attribution` prop を追加 (テーマ全チャートの出典チョークポイント)。
+  `CompositionChart` が statsDataId から `resolveAttribution` して渡す (解決不能なら従来 sourceName)。
+
+検証: data-configs 型チェッククリーン + `resolveAttribution` を tsx で確認
+(SSDS+C2101→「社会・人口統計体系（原典: 事業所・企業統計調査）」等)。ranking/apps/web の
+型チェック・SSG build は CI (`pr-quality-check`) の Type Check / Build Check で検証する。
+
+> 残: テーマの時系列 (ThemeYoyCharts 等) も同じく `attribution` を DashboardCard へ渡す横展開
+> (チョークポイントは統一済のため各 chart で resolveAttribution を呼ぶだけ)。
 
 ### Phase 4 — survey ページの是正 + 再分配
 
