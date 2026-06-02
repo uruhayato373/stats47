@@ -6,21 +6,24 @@ import { rankingItemKeyPath } from "../types/snapshot";
 import type { RankingItem } from "../types/ranking-item";
 
 /**
- * config → item.json の category フィールド refresh exporter
+ * config → item.json の表示メタ (title / subtitle / note / category) refresh exporter
  *
- * 背景: カテゴリページ (`/category/[key]`) は R2 `app/category/<key>/items.json`
- * を読み、これは `exportRankingItemsPerUrl` (master) が item.json の `categoryKey`
- * で再グループ化して生成する。しかし item.json の categoryKey は登録時の値が残る
- * だけで、git TS config (`packages/data-configs/src/metrics/<key>.ts`) の `category`
- * 編集は伝播しない (per-url exporter は item.json を再グループ化するのみ。同ファイル
- * 冒頭コメントが "config→item.json の field refresh は follow-up" と予告)。
+ * 背景: ランキング詳細・カテゴリページが描画する title / subtitle / annotation /
+ * categoryKey は R2 `app/ranking/<key>/item.json` の値だが、git TS config
+ * (`packages/data-configs/src/metrics/<key>.ts`) の編集はこれに伝播しない
+ * (per-url exporter "master" は item.json を再グループ化するのみ)。
  *
- * 本 exporter がその follow-up の category 版 (`ranking-item-seo-refresh` の姉妹)。
- * **git TS config が SSOT** なので、config の `category` / `additionalCategories` を
- * item.json に反映する。これにより誤分類の修正 (config 編集) がカテゴリページに効く。
+ * 本 exporter が follow-up (`ranking-item-seo-refresh` の姉妹)。**git TS config が
+ * SSOT** なので以下を item.json に反映する:
+ *   - `title`       → item.title       (正準名。年・※を除去した clean な値)
+ *   - `subtitle`    → item.subtitle    (定義補足。未定義なら消す)
+ *   - `note`        → item.annotation  (データ注釈。UI のキャプション)
+ *   - `category`    → item.categoryKey (誤分類修正をカテゴリページに反映)
+ *   - `additionalCategories` → item.additionalCategories
+ * seoTitle/seoDescription は `ranking-item-seo-refresh` が別途担う。
  *
  * ★実行順: 本 refresh は **master (exportRankingItemsPerUrl) の前**に走らせること。
- *   master が更新後の categoryKey で category items.json を再グループ化するため。
+ *   master が更新後の categoryKey/title で category items.json を再グループ化するため。
  *
  * 完全DBレス (docs/01_技術設計/19): D1 不使用。読みは公開 URL 経由可、
  * 書き (saveToR2) は CI 専用ガード (`_assert-ci-write.ts`) の下でのみ通る。
@@ -32,10 +35,10 @@ interface RankingItemSnapshot {
   item: RankingItem;
 }
 
-export interface RefreshRankingItemCategoryResult {
+export interface RefreshRankingItemMetadataResult {
   /** registry の metric 総数 */
   scanned: number;
-  /** categoryKey / additionalCategories を更新した item.json 数 */
+  /** title/subtitle/note/category のいずれかを更新した item.json 数 */
   patched: number;
   /** item.json が R2 に存在しなかった metric 数 */
   missing: number;
@@ -64,26 +67,26 @@ function normalizeAdditional(
 }
 
 /** 2 つの additionalCategories が等価か (順序込み)。 */
-function additionalEqual(
-  a: string[] | null,
-  b: string[] | null,
-): boolean {
+function additionalEqual(a: string[] | null, b: string[] | null): boolean {
   if (a === null || b === null) return a === b;
   if (a.length !== b.length) return false;
   return a.every((v, i) => v === b[i]);
 }
 
-export async function refreshRankingItemCategory(
+/** 文字列の正規化 (undefined/空 → null)。 */
+function strOrNull(v: string | null | undefined): string | null {
+  return v != null && v !== "" ? v : null;
+}
+
+export async function refreshRankingItemMetadata(
   options: RefreshOptions = {},
-): Promise<RefreshRankingItemCategoryResult> {
+): Promise<RefreshRankingItemMetadataResult> {
   const dryRun = options.dryRun ?? true;
   const concurrency = options.concurrency ?? 16;
   const onlySet = options.only ? new Set(options.only) : null;
   const startedAt = Date.now();
 
-  const metrics = listAllMetrics().filter(
-    (m) => !onlySet || onlySet.has(m.key),
-  );
+  const metrics = listAllMetrics().filter((m) => !onlySet || onlySet.has(m.key));
 
   let patched = 0;
   let missing = 0;
@@ -103,17 +106,29 @@ export async function refreshRankingItemCategory(
         }
 
         const item = snapshot.item;
-        // category は必須フィールドなので常に config を SSOT として上書きする。
+
+        // title / category は必須 → 常に config を SSOT として上書き。
+        const nextTitle = metric.title;
         const nextCategoryKey = metric.category;
-        // additionalCategories は config に定義があればそれを、無ければ既存を温存。
+        // subtitle は config 定義を SSOT (未定義 → 消す)。
+        const nextSubtitle = strOrNull(metric.subtitle);
+        // note → annotation。config に無ければ既存 annotation を温存。
+        const nextAnnotation = strOrNull(metric.note) ?? strOrNull(item.annotation);
+        // additionalCategories は config 定義があれば優先、無ければ既存温存。
         const nextAdditional = metric.additionalCategories
           ? normalizeAdditional(metric.additionalCategories)
           : normalizeAdditional(item.additionalCategories);
 
-        const currentAdditional = normalizeAdditional(item.additionalCategories);
+        const curSubtitle = strOrNull(item.subtitle);
+        const curAnnotation = strOrNull(item.annotation);
+        const curAdditional = normalizeAdditional(item.additionalCategories);
+
         if (
+          nextTitle === item.title &&
+          nextSubtitle === curSubtitle &&
+          nextAnnotation === curAnnotation &&
           nextCategoryKey === item.categoryKey &&
-          additionalEqual(nextAdditional, currentAdditional)
+          additionalEqual(nextAdditional, curAdditional)
         ) {
           unchanged++;
           return;
@@ -127,6 +142,9 @@ export async function refreshRankingItemCategory(
           generatedAt: snapshot.generatedAt ?? new Date().toISOString(),
           item: {
             ...item,
+            title: nextTitle,
+            subtitle: nextSubtitle ?? undefined,
+            annotation: nextAnnotation ?? undefined,
             categoryKey: nextCategoryKey,
             additionalCategories: nextAdditional,
           },

@@ -363,8 +363,14 @@ export function RankingKeyPageClient({
 
     // subtitle を「定義補足」と「データ注釈(※)」に振り分ける。
     // 定義 → h1 直下の控えめ行 (HeroCard titleDetail) / 注釈 → チャート直下キャプション。
-    const { subtitle: definitionalSubtitle, note: dataNote } =
+    const { subtitle: definitionalSubtitle, note: subtitleNote } =
         classifyRankingSubtitle(displayInfo.subtitle);
+    // データ注釈の正規ソースは config.note → item.annotation (Phase 4 metadata refresh)。
+    // annotation があれば優先し、未移行 metric は subtitle ヒューリスティックを fallback。
+    const configNote = rankingItem.annotation?.trim()
+        ? rankingItem.annotation.trim()
+        : null;
+    const dataNote = configNote ?? subtitleNote;
 
     return (
         <div className="container mx-auto px-4 py-4">
