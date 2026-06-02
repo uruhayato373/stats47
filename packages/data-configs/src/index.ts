@@ -13,3 +13,12 @@ export {
   listCategories,
   type CategoryMeta,
 } from "./categories";
+export {
+  resolveMetricProvenance,
+  resolveSourceProvenance,
+  resolveProvenanceByParams,
+  resolveAttribution,
+  isSsdsStatsDataId,
+  type ProvenanceSurvey,
+  type SourceAttribution,
+} from "./provenance/resolve-metric-provenance";

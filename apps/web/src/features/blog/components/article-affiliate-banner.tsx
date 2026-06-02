@@ -17,7 +17,7 @@ export async function ArticleAffiliateBanner({ tagKeys }: ArticleAffiliateBanner
 
   return (
     <div className="mt-6">
-      <div className="rounded-xl border border-border bg-card p-4">
+      <div className="rounded-none border border-border bg-card p-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 justify-items-center">
           {banners.map((banner, i) => (
             <div key={i} className={`flex justify-center ${i > 0 ? "hidden md:flex" : ""}`}>

@@ -28,7 +28,7 @@ export async function FurusatoNozeiCard({ areaCode }: FurusatoNozeiCardProps) {
   // API 結果がある場合: 動的カード
   if (items.length > 0) {
     return (
-      <div className="rounded-xl border border-red-100 bg-red-50/50 p-4">
+      <div className="rounded-none border border-red-100 bg-red-50/50 p-4">
         <div className="mb-3 flex items-center justify-between">
           <span className="text-xs font-medium text-muted-foreground/70">PR</span>
           <TrackedAffiliateLink
@@ -97,7 +97,7 @@ export async function FurusatoNozeiCard({ areaCode }: FurusatoNozeiCardProps) {
 
   // フォールバック: 従来の固定リンク
   return (
-    <div className="rounded-xl border border-red-100 bg-red-50/50 p-4">
+    <div className="rounded-none border border-red-100 bg-red-50/50 p-4">
       <div className="mb-2 flex items-center justify-between">
         <span className="text-xs font-medium text-muted-foreground/70">PR</span>
       </div>

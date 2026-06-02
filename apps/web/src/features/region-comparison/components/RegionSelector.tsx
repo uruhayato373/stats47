@@ -85,7 +85,7 @@ export function RegionSelector({ selectedAreaCodes, categoryKey, startTransition
   const handleSelectB = (code: string) => updateUrl([codeA, code]);
 
   return (
-    <div className="rounded-xl border bg-card px-4 py-3 shadow-sm">
+    <div className="rounded-none border bg-card px-4 py-3 shadow-sm">
       <div className="grid grid-cols-1 items-center gap-3 sm:grid-cols-[1fr_auto_1fr]">
         {/* 地域A */}
         <PrefectureSelect

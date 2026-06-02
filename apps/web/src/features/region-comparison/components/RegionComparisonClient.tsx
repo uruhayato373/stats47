@@ -93,7 +93,7 @@ export function RegionComparisonClient({
       ) : (
         <div className="space-y-6 relative">
           {isPending && (
-            <div className="absolute inset-0 z-10 bg-background/60 flex items-center justify-center backdrop-blur-[1px] rounded-xl">
+            <div className="absolute inset-0 z-10 bg-background/60 flex items-center justify-center backdrop-blur-[1px] rounded-none">
               <Loader2 className="h-8 w-8 animate-spin text-muted-foreground/70" />
             </div>
           )}

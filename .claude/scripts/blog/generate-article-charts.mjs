@@ -17,7 +17,7 @@
  *   → 品質統一の決定的ゲート。判断は不要 (コードで一律検査)。
  *
  * チャート種別 (ファイル名パターン):
- *   *-prefecture-rankings.json → bar chart (上位 10 + 下位 10)   [実装済み]
+ *   *-prefecture-rankings.json → bar chart (上位 5 + 下位 5)   [実装済み]
  *   *-tile-grid.json           → tile-grid-map                   [TODO]
  *   *-timeseries.json          → line chart                      [TODO]
  *   *-scatter.json             → scatter chart                   [TODO]
@@ -48,6 +48,7 @@ const getArg = (flag) => {
 const SLUG = getArg("--slug");
 const DRY_RUN = args.includes("--dry-run");
 const VALIDATE = args.includes("--validate");
+const EXTRACT_INLINE = args.includes("--extract-inline");
 // --base: 記事ルート (slug の親)。デフォルトは docs draft。公開済記事の chart 再生成は
 //          `--base .local/r2/app/blog` で R2 data を直接対象にできる (Phase 7 で追加)。
 const BASE = getArg("--base") || "docs/21_ブログ記事原稿";
@@ -101,18 +102,19 @@ function genBarChartSvg(data, meta = {}) {
   const subtitle = meta.subtitle || data.subtitle || "";
   const unit = meta.unit || data.unit || "";
 
-  // sort desc, take top 10 + bottom 10
+  // 標準: 上位5 + 下位5 (2026-06-02 確定。上下対称・モバイル可読性優先)
+  const N = 5;
   const sorted = [...items].sort((a, b) => (b.value ?? 0) - (a.value ?? 0));
-  const top10 = sorted.slice(0, 10);
-  const bottom10 = sorted.slice(-10).reverse();
+  const topRows = sorted.slice(0, N);
+  const bottomRows = sorted.slice(-N).reverse();
 
   const W = 680;
-  const H = 480;
   const padTop = 60;
   const padBottom = 60;
+  const rowH = 36;
+  const H = padTop + padBottom + N * rowH;
   const padLeft = 90;
   const colW = (W - padLeft - 40) / 2; // 2 columns (top/bottom)
-  const rowH = (H - padTop - padBottom) / 10;
   const maxValue = Math.max(...items.map((d) => d.value ?? 0), 1);
 
   const blueScale = ["#1565c0", "#1976d2", "#1e88e5", "#2196f3", "#42a5f5", "#64b5f6", "#90caf9"];
@@ -125,26 +127,45 @@ function genBarChartSvg(data, meta = {}) {
     const pref = item.pref || item.label || "";
     const value = item.value ?? 0;
     return `
-      <text x="${xOffset - 6}" y="${y + rowH / 2 + 4}" text-anchor="end" font-size="11" fill="#333">${pref}</text>
+      <text x="${xOffset - 6}" y="${y + rowH / 2 + 4}" text-anchor="end" font-size="11" class="svg-label">${pref}</text>
       <rect x="${xOffset}" y="${y + 3}" width="${Math.max(barLen, 1)}" height="${rowH - 6}" fill="${color}" rx="2"/>
-      <text x="${xOffset + Math.max(barLen, 1) + 4}" y="${y + rowH / 2 + 4}" font-size="10" fill="#333">${value}${unit}</text>
+      <text x="${xOffset + Math.max(barLen, 1) + 4}" y="${y + rowH / 2 + 4}" font-size="10" class="svg-label">${value}${unit}</text>
     `;
   };
 
-  const topCol = top10.map((it, i) => drawRow(it, i, padLeft, blueScale)).join("");
-  const bottomCol = bottom10
+  const topCol = topRows.map((it, i) => drawRow(it, i, padLeft, blueScale)).join("");
+  const bottomCol = bottomRows
     .map((it, i) => drawRow(it, i, padLeft + colW + 40, redScale))
     .join("");
 
+  // dark mode 対応 (svg-lint WARN 回避): 背景・文字・凡例は svg-* class にし、
+  // @media (prefers-color-scheme:dark) で色を反転。データ色 (青/赤の棒・列見出し) は
+  // vivid で light/dark 両対応なので inline のまま (THEME_DEPENDENT_COLORS 対象外)。
+  const style = `<style>
+    .svg-bg{fill:#fafafa}
+    .svg-title{fill:#222}
+    .svg-subtitle{fill:#666}
+    .svg-label{fill:#333}
+    .svg-legend{fill:#888}
+    @media (prefers-color-scheme:dark){
+      .svg-bg{fill:#1f2937}
+      .svg-title{fill:#f9fafb}
+      .svg-subtitle{fill:#9ca3af}
+      .svg-label{fill:#e5e7eb}
+      .svg-legend{fill:#9ca3af}
+    }
+  </style>`;
+
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" role="img" aria-label="${title}">
-  <rect width="${W}" height="${H}" fill="#fafafa" rx="8"/>
-  <text x="${W / 2}" y="24" text-anchor="middle" font-size="16" font-weight="bold" fill="#222">${title}</text>
-  ${subtitle ? `<text x="${W / 2}" y="42" text-anchor="middle" font-size="11" fill="#666">${subtitle}</text>` : ""}
-  <text x="${padLeft + colW / 2}" y="${padTop - 6}" text-anchor="middle" font-size="12" font-weight="bold" fill="#1565c0">上位 10</text>
-  <text x="${padLeft + colW + 40 + colW / 2}" y="${padTop - 6}" text-anchor="middle" font-size="12" font-weight="bold" fill="#c62828">下位 10</text>
+  ${style}
+  <rect width="${W}" height="${H}" class="svg-bg" rx="8"/>
+  <text x="${W / 2}" y="24" text-anchor="middle" font-size="16" font-weight="bold" class="svg-title">${title}</text>
+  ${subtitle ? `<text x="${W / 2}" y="42" text-anchor="middle" font-size="11" class="svg-subtitle">${subtitle}</text>` : ""}
+  <text x="${padLeft + colW / 2}" y="${padTop - 6}" text-anchor="middle" font-size="12" font-weight="bold" fill="#1565c0">上位 5</text>
+  <text x="${padLeft + colW + 40 + colW / 2}" y="${padTop - 6}" text-anchor="middle" font-size="12" font-weight="bold" fill="#c62828">下位 5</text>
   ${topCol}
   ${bottomCol}
-  <text x="${W / 2}" y="${H - 18}" text-anchor="middle" font-size="10" fill="#888">凡例: 青系=上位 / 赤系=下位</text>
+  <text x="${W / 2}" y="${H - 18}" text-anchor="middle" font-size="10" class="svg-legend">凡例: 青系=上位 / 赤系=下位</text>
 </svg>`;
   return svg;
 }
@@ -184,16 +205,60 @@ function replacePlaceholders(chartNames) {
   let md = fs.readFileSync(ARTICLE_MD, "utf8");
   let replaced = 0;
   for (const name of chartNames) {
-    const placeholder = new RegExp(`<!--\\s*chart:${name}\\s*-->`, "g");
-    if (placeholder.test(md)) {
-      md = md.replace(placeholder, `![チャート](data/${name}.svg)`);
+    // 形式1: コメント `<!-- chart:NAME -->`
+    const comment = new RegExp(`<!--\\s*chart:${name}\\s*-->`, "g");
+    if (comment.test(md)) {
+      md = md.replace(comment, `![チャート](data/${name}.svg)`);
       replaced++;
     }
+    // 形式2: タグ `<chart-placeholder ... data="NAME" ... />` (実記事 54 本がこの形式)
+    // caption 属性があれば alt に流用する。
+    const tag = new RegExp(`<chart-placeholder[^>]*\\bdata="${name}"[^>]*/?>(?:\\s*</chart-placeholder>)?`, "g");
+    if (tag.test(md)) {
+      md = md.replace(tag, (m) => {
+        const cap = m.match(/caption="([^"]*)"/);
+        return `![${cap ? cap[1] : "チャート"}](data/${name}.svg)`;
+      });
+      replaced++;
+    }
+  }
+  // フォールバック: placeholder の data 属性が生成チャート名と一致しないケース
+  // (著者命名 "…-top10" ≠ ranking key "…-prefecture-rankings"。pilot で 54 本中多数が該当)。
+  // ランキングチャートが 1 つだけなら、残った <chart-placeholder> をそれで置換する。
+  const rankingCharts = chartNames.filter((n) => n.endsWith("-prefecture-rankings"));
+  if (rankingCharts.length === 1 && /<chart-placeholder/.test(md)) {
+    const name = rankingCharts[0];
+    md = md.replace(/<chart-placeholder[^>]*\/?>(?:\s*<\/chart-placeholder>)?/g, (m) => {
+      const cap = m.match(/caption="([^"]*)"/);
+      replaced++;
+      return `![${cap ? cap[1] : "チャート"}](data/${name}.svg)`;
+    });
   }
   if (replaced > 0) {
     fs.writeFileSync(ARTICLE_MD, md, "utf8");
   }
   return replaced;
+}
+
+// ---------- インライン <svg> のファイル抽出 ----------
+// 生成器が未対応のチャート種別 (scatter/timeseries 等) の inline <svg> を data/*.svg に
+// 切り出し、![](data/…) 参照へ置換する。pilot (fertility 散布図) で実証。--extract-inline で起動。
+function extractInlineSvgsToFiles() {
+  if (!fs.existsSync(ARTICLE_MD)) return 0;
+  let md = fs.readFileSync(ARTICLE_MD, "utf8");
+  const blocks = md.match(/<svg[\s\S]*?<\/svg>/g) || [];
+  if (!blocks.length) return 0;
+  if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true });
+  let n = 0;
+  for (const block of blocks) {
+    n++;
+    const name = `inline-chart-${n}`;
+    const aria = block.match(/aria-label="([^"]*)"/);
+    fs.writeFileSync(path.join(DATA_DIR, `${name}.svg`), block, "utf8");
+    md = md.replace(block, `![${aria ? aria[1] : "チャート"}](data/${name}.svg)`);
+  }
+  fs.writeFileSync(ARTICLE_MD, md, "utf8");
+  return n;
 }
 
 // ---------- main ----------
@@ -206,7 +271,15 @@ if (jsonFiles.length === 0) {
   warn(`No JSON files found in ${DATA_DIR}`);
 }
 
-log(`[info] slug=${SLUG} mode=${VALIDATE ? "validate" : DRY_RUN ? "dry-run" : "generate"}`);
+log(`[info] slug=${SLUG} mode=${EXTRACT_INLINE ? "extract-inline" : VALIDATE ? "validate" : DRY_RUN ? "dry-run" : "generate"}`);
+
+// --extract-inline: インライン <svg> をファイル化して終了 (JSON 不要)
+if (EXTRACT_INLINE) {
+  const n = extractInlineSvgsToFiles();
+  log(`[done] extract-inline: ${n} inline <svg> → data/inline-chart-*.svg`);
+  process.exit(0);
+}
+
 log(`[info] Found ${jsonFiles.length} JSON file(s) in data/`);
 
 // Phase 1: JSON syntax check (always)

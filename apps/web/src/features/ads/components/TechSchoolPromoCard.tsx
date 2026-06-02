@@ -23,7 +23,7 @@ export function TechSchoolPromoCard({ variant = "sidebar" }: TechSchoolPromoCard
 
   if (variant === "inline") {
     return (
-      <div className="my-6 rounded-xl border-l-4 border-l-purple-500 bg-gradient-to-r from-purple-50 via-blue-50 to-white p-4 shadow-sm">
+      <div className="my-6 rounded-none border-l-4 border-l-purple-500 bg-gradient-to-r from-purple-50 via-blue-50 to-white p-4 shadow-sm">
         <div className="mb-1 flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider text-purple-700">
           <Sparkles className="h-3 w-3" />
           AI スクール / 副業 PR
@@ -50,7 +50,7 @@ export function TechSchoolPromoCard({ variant = "sidebar" }: TechSchoolPromoCard
   }
 
   return (
-    <div className="rounded-xl bg-gradient-to-br from-purple-600 via-purple-500 to-blue-600 p-4 text-white shadow-md">
+    <div className="rounded-none bg-gradient-to-br from-purple-600 via-purple-500 to-blue-600 p-4 text-white shadow-md">
       <div className="mb-1 flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider text-white/80">
         <Sparkles className="h-3 w-3" />
         PR

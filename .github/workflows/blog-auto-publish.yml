@@ -26,6 +26,16 @@ on:
         description: "公開する slug (空白/カンマ区切り)。空なら develop 最新コミットの差分から検出"
         required: false
         type: string
+  # Phase 2 (2026-06-02): develop に article.md が push されたら自動公開。
+  # 外部連携トークンは workflow_dispatch を起動できない (actions:write なし → 403) ため、
+  # push を公開トリガーにして「クラウド / web 実行環境でも publish が git push だけで完結」させる。
+  # published:true の判定・factual/quality ゲート・MAX_PUBLISH クランプは下流ステップで担保。
+  push:
+    branches: [develop]
+    paths:
+      - "docs/21_ブログ記事原稿/**/article.md"
+      # この workflow 自身の変更でも発火させ、未公開記事の backfill (reconcile) を回せるようにする。
+      - ".github/workflows/blog-auto-publish.yml"
 
 permissions:
   contents: read
@@ -40,7 +50,10 @@ env:
   R2_SECRET_ACCESS_KEY: ${{ secrets.CLOUDFLARE_R2_SECRET_ACCESS_KEY }}
   CLOUDFLARE_R2_BUCKET_NAME: stats47
   R2_PUBLIC_FETCH_URL: https://storage.stats47.jp
-  MAX_PUBLISH: "5"
+  MAX_PUBLISH: "10"
+  # 公開後の CDN ピンポイントパージ用 (purge-cache.ts --urls)
+  CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+  CLOUDFLARE_ZONE_ID: ${{ secrets.CLOUDFLARE_ZONE_ID }}
 
 jobs:
   auto-publish:
@@ -70,11 +83,31 @@ jobs:
             # 明示指定: そのまま採用 (存在 + published:true は次ステップのゲートで担保)
             CANDIDATES=$(echo "$INPUT_SLUGS" | tr ', ' '\n\n' | sed '/^$/d')
           else
-            # フォールバック: develop 最新コミットで変更された article.md を検出
-            CHANGED=$(git diff --name-only --diff-filter=ACM "HEAD~1" "HEAD" \
+            # フォールバック: develop 最新コミットで変更された article.md を検出。
+            # ★ core.quotepath=false で日本語パスをエスケープせず出力 (既定 true だと
+            #    "docs/21_\343\203..." とエスケープされ grep に一致せず 0 件になる既知バグ)。
+            CHANGED=$(git -c core.quotepath=false diff --name-only --diff-filter=ACM "HEAD~1" "HEAD" \
               | grep -E '^docs/21_ブログ記事原稿/[^/]+/article\.md$' || true)
             CANDIDATES=""
             for f in $CHANGED; do CANDIDATES="$CANDIDATES $(basename "$(dirname "$f")")"; done
+            # reconcile: 変更検出が空なら、published:true なのに配信 all.json に未掲載の記事を backfill。
+            # (workflow 自身の変更で発火したケースや、過去の取りこぼしを self-heal する)
+            if [ -z "$(echo $CANDIDATES | xargs)" ]; then
+              echo "変更検出 0 → 未公開 backfill (reconcile) モード"
+              curl -fsS "${R2_PUBLIC_FETCH_URL}/app/blog/all.json" -o /tmp/live-all.json 2>/dev/null || echo '{"articles":[]}' > /tmp/live-all.json
+              CANDIDATES=$(node -e '
+                const fs=require("fs");
+                let live=new Set();
+                try{ live=new Set((JSON.parse(fs.readFileSync("/tmp/live-all.json","utf8")).articles||[]).map(a=>a.slug)); }catch(e){}
+                const root="docs/21_ブログ記事原稿";
+                for(const d of fs.readdirSync(root)){
+                  const f=`${root}/${d}/article.md`;
+                  if(!fs.existsSync(f)) continue;
+                  const t=fs.readFileSync(f,"utf8");
+                  if(/^published:\s*true\s*$/m.test(t) && !live.has(d)) console.log(d);
+                }
+              ')
+            fi
           fi
           # published:true のものだけ残す
           SLUGS=""
@@ -135,6 +168,20 @@ jobs:
         run: |
           NODE_OPTIONS='--conditions react-server' npx tsx apps/web/scripts/export-blog-snapshot.ts
           npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix app/blog
+
+      - name: 🧹 Purge CDN (公開記事URL + 一覧/ホーム/sitemap のみ)
+        if: ${{ steps.detect.outputs.slugs != '' }}
+        run: |
+          # 公開された記事だけをピンポイントパージ (全ゾーンパージは避ける)。
+          URLS=""
+          for SLUG in $PUBLISHED; do URLS="$URLS https://stats47.jp/blog/$SLUG"; done
+          if [ -z "$(echo $URLS | xargs)" ]; then
+            echo "公開0件のため purge skip"; exit 0
+          fi
+          # 記事追加で内容が変わる索引系もパージ
+          URLS="$URLS https://stats47.jp/blog https://stats47.jp/ https://stats47.jp/sitemap.xml"
+          echo "purge: $URLS"
+          npx tsx packages/r2-storage/src/scripts/purge-cache.ts --urls $URLS
 
       - name: 📝 Summary
         if: always()

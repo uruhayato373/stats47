@@ -1,0 +1,65 @@
+<!-- data-source: crude-birth-rate-prefecture-rankings.json | generated: 2026-06-02T19:31:12.349Z -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 300" width="680" height="300" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" role="img" aria-label="粗出生率 都道府県ランキング（2023年）">
+  <style>
+    .svg-bg{fill:#fafafa}
+    .svg-title{fill:#222}
+    .svg-subtitle{fill:#666}
+    .svg-label{fill:#333}
+    .svg-legend{fill:#888}
+    @media (prefers-color-scheme:dark){
+      .svg-bg{fill:#1f2937}
+      .svg-title{fill:#f9fafb}
+      .svg-subtitle{fill:#9ca3af}
+      .svg-label{fill:#e5e7eb}
+      .svg-legend{fill:#9ca3af}
+    }
+  </style>
+  <rect width="680" height="300" class="svg-bg" rx="8"/>
+  <text x="340" y="24" text-anchor="middle" font-size="16" font-weight="bold" class="svg-title">粗出生率 都道府県ランキング（2023年）</text>
+  
+  <text x="227.5" y="54" text-anchor="middle" font-size="12" font-weight="bold" fill="#1565c0">上位 5</text>
+  <text x="542.5" y="54" text-anchor="middle" font-size="12" font-weight="bold" fill="#c62828">下位 5</text>
+  
+      <text x="84" y="82" text-anchor="end" font-size="11" class="svg-label">沖縄県</text>
+      <rect x="90" y="63" width="195" height="30" fill="#1565c0" rx="2"/>
+      <text x="289" y="82" font-size="10" class="svg-label">8.55‐</text>
+    
+      <text x="84" y="118" text-anchor="end" font-size="11" class="svg-label">福岡県</text>
+      <rect x="90" y="99" width="151.66666666666666" height="30" fill="#1976d2" rx="2"/>
+      <text x="245.66666666666666" y="118" font-size="10" class="svg-label">6.65‐</text>
+    
+      <text x="84" y="154" text-anchor="end" font-size="11" class="svg-label">滋賀県</text>
+      <rect x="90" y="135" width="149.8421052631579" height="30" fill="#1e88e5" rx="2"/>
+      <text x="243.8421052631579" y="154" font-size="10" class="svg-label">6.57‐</text>
+    
+      <text x="84" y="190" text-anchor="end" font-size="11" class="svg-label">熊本県</text>
+      <rect x="90" y="171" width="149.38596491228068" height="30" fill="#2196f3" rx="2"/>
+      <text x="243.38596491228068" y="190" font-size="10" class="svg-label">6.55‐</text>
+    
+      <text x="84" y="226" text-anchor="end" font-size="11" class="svg-label">愛知県</text>
+      <rect x="90" y="207" width="147.56140350877192" height="30" fill="#42a5f5" rx="2"/>
+      <text x="241.56140350877192" y="226" font-size="10" class="svg-label">6.47‐</text>
+    
+  
+      <text x="399" y="82" text-anchor="end" font-size="11" class="svg-label">秋田県</text>
+      <rect x="405" y="63" width="90.0877192982456" height="30" fill="#c62828" rx="2"/>
+      <text x="499.0877192982456" y="82" font-size="10" class="svg-label">3.95‐</text>
+    
+      <text x="399" y="118" text-anchor="end" font-size="11" class="svg-label">岩手県</text>
+      <rect x="405" y="99" width="106.50877192982455" height="30" fill="#d32f2f" rx="2"/>
+      <text x="515.5087719298245" y="118" font-size="10" class="svg-label">4.67‐</text>
+    
+      <text x="399" y="154" text-anchor="end" font-size="11" class="svg-label">北海道</text>
+      <rect x="405" y="135" width="109.47368421052632" height="30" fill="#e53935" rx="2"/>
+      <text x="518.4736842105264" y="154" font-size="10" class="svg-label">4.8‐</text>
+    
+      <text x="399" y="190" text-anchor="end" font-size="11" class="svg-label">青森県</text>
+      <rect x="405" y="171" width="109.7017543859649" height="30" fill="#ef5350" rx="2"/>
+      <text x="518.7017543859649" y="190" font-size="10" class="svg-label">4.81‐</text>
+    
+      <text x="399" y="226" text-anchor="end" font-size="11" class="svg-label">山形県</text>
+      <rect x="405" y="207" width="114.49122807017542" height="30" fill="#e57373" rx="2"/>
+      <text x="523.4912280701755" y="226" font-size="10" class="svg-label">5.02‐</text>
+    
+  <text x="340" y="282" text-anchor="middle" font-size="10" class="svg-legend">凡例: 青系=上位 / 赤系=下位</text>
+</svg>

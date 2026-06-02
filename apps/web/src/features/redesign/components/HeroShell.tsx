@@ -23,7 +23,7 @@ export function HeroShell({
     return (
       <div
         className={
-          "relative overflow-hidden rounded-2xl text-white shadow-sm " + className
+          "relative overflow-hidden rounded-none text-white shadow-sm " + className
         }
         style={{
           background:
@@ -46,7 +46,7 @@ export function HeroShell({
   return (
     <div
       className={
-        "relative overflow-hidden rounded-2xl border border-border shadow-sm " +
+        "relative overflow-hidden rounded-none border border-border shadow-sm " +
         className
       }
       style={{

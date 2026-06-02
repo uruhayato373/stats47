@@ -17,6 +17,11 @@ $ARGUMENTS — 公開する記事のスラッグ（ディレクトリ名）
 ## 前提
 
 - 事前に `/proofread-article` で校正チェックを済ませておくこと
+- **★ blog-critic の意味レビューを通していること**: `published:true` 記事は
+  `docs/21_ブログ記事原稿/<slug>/review.md` (別 agent `blog-critic` 生成、`verdict: PASS`・実体200字以上) が必須。
+  無い / REVISE のままだと `quality-gate.mjs` が blocker で公開を止める (自己採点公開の構造的防止)。
+  書いた本人が採点せず、別コンテキストの blog-critic に review してもらうこと。
+- 公開前に `node .claude/scripts/blog/quality-gate.mjs <slug>` が exit 0 (critic PASS 含む) であること
 - 作業ブランチが正しいか確認しておくこと
 
 ## 手順

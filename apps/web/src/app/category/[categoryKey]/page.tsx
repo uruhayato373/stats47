@@ -20,7 +20,6 @@ import { generateMiniTileSvg } from "@stats47/visualization/server";
 
 import { ThemeAwareImage } from "@/components/atoms/ThemeAwareImage";
 
-import { TechSchoolPromoCard } from "@/features/ads";
 import { resolveAffiliateBanners } from "@/features/ads/server";
 import { listLatestArticles } from "@/features/blog/server";
 import { findCategoryByKey } from "@/features/category/server";
@@ -219,7 +218,7 @@ export default async function CategoryPage({ params }: PageProps) {
     <div className="container mx-auto px-4 py-4 text-foreground">
       {/* Hero (D 暗色) — マスタープラン § 5.3 準拠 */}
       <HeroShell variant="dark" className="mb-6">
-        <div className="grid grid-cols-1 gap-6 p-6 md:grid-cols-[1fr,420px] md:p-8">
+        <div className="grid grid-cols-1 gap-6 p-6 md:grid-cols-[1fr,360px] md:p-8">
           <div className="min-w-0">
             <p className="inline-flex rounded-full bg-white/15 px-2.5 py-0.5 text-[10.5px] font-bold uppercase tracking-widest text-white">
               カテゴリ
@@ -262,7 +261,7 @@ export default async function CategoryPage({ params }: PageProps) {
         </div>
       </HeroShell>
 
-      <div className="lg:grid lg:grid-cols-[minmax(0,1fr)_360px] lg:gap-5 lg:items-start">
+      <div className="lg:grid lg:grid-cols-[minmax(0,1fr)_360px] lg:gap-8 lg:items-start">
         {/* メインコンテンツ */}
         <main className="min-w-0">
           {/* 注目ランキング */}
@@ -357,8 +356,6 @@ export default async function CategoryPage({ params }: PageProps) {
 
         {/* 右サイドバー（lg+、360px、independent scroll で全 widget 到達可能） */}
         <aside className="hidden lg:flex lg:flex-col lg:gap-4 lg:sticky lg:top-20 lg:max-h-[calc(100vh-5.5rem)] lg:overflow-y-auto lg:pr-1">
-          {/* Claude Code 副業講座 (収益化 / 上部 above-fold) */}
-          <TechSchoolPromoCard />
 
           <div className="flex flex-col gap-4">
             {/* 新着記事 */}

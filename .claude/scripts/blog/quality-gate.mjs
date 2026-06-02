@@ -1,9 +1,15 @@
 #!/usr/bin/env node
 /**
- * ブログ記事 brushup 後の自動品質ゲート (/brushup-blog --target article / batch 用)。
+ * ブログ記事の【公開前・機械的フロアチェック】(品質判定ではない)。
  *
- * 機械的にチェック可能な品質基準 (callout / 内部リンク / NG word / factual cross-check 等)
- * を全て script で検証する。1 つでも失敗したら exit 1 (skip 推奨)。
+ * ★ これは「品質を測る」ものではなく「機械的に検出できる欠陥 (床) を弾く」ものである。
+ *   - 捕まえる: callout/内部リンク/NG word/factual rank 不一致/truncated 表/source-link 配置/
+ *     prose 文字数の床/critic レビュー未通過 など【決定的に判定できる事項】。
+ *   - 捕まえられない: 読者価値・冗長性・論理の質・curiosity gap の真正性などの【意味的品質】。
+ *     これらは blog-critic (expert/panel review) が別コンテキストで判断する (review.md)。
+ *   文字数 (prose) は「薄すぎ」を弾く床であって品質指標ではない。表/markup では稼げない。
+ *
+ * 1 つでも blocker があれば exit 1。
  *
  * Factual cross-check は `.claude/scripts/lib/article-factual-check.mjs` に切り出し済み。
  * 他 skill (publish-article / draft-from-trend 等) からも同 library が利用可能。
@@ -75,6 +81,9 @@ const NG_PATTERNS = [
   { pattern: /最大の.*ヤミ/, name: "最大のヤミ (扇情的)" },
   // 単なる事実羅列タイトル化のパターン
   { pattern: /^title:\s*"[^"]*\d+位[^"]*"/m, name: "title 「N位」だけで終わる (curiosity gap 不足)" },
+  // ランキング図の直後に置く truncated 表 (…/⋯/... で省略した部分複製) は読者価値ゼロ → 禁止 (2026-06-02)。
+  // 表は「全件掲載」か「省略」の二択。図と重複する中途半端な抜粋表を作らない。
+  { pattern: /^\s*\|\s*(…|⋯|\.\.\.)\s*\|/m, name: "truncated 表 (…省略の部分複製表)。表は全件 or 省略にする" },
 ];
 
 // ============================================================================
@@ -92,13 +101,62 @@ function countInternalLinks(text) {
 }
 
 function countSvgCharts(text) {
-  const matches = text.match(/<svg\s+[^>]*xmlns/g);
-  return matches ? matches.length : 0;
+  // チャートは ![alt](data/foo.svg) の画像参照で埋め込まれる (インライン <svg> は稀)。
+  // 両方を数える (旧実装は画像参照を取りこぼし全記事 0 と誤検出していた)。
+  const inline = (text.match(/<svg\s+[^>]*xmlns/g) || []).length;
+  const imgRef = (text.match(/!\[[^\]]*\]\([^)]*\.svg\)/g) || []).length;
+  return inline + imgRef;
 }
 
+// ランキング表 (「順位」/rank 列を持つ表) を検出し、上下非対称かを判定する。
+// 標準は「上位5+下位5 の SVG チャート」。表だけ・上下非対称表・truncated 表は不可。
+// 5 vs 10 の本数差は gate では判定しない (良記事=top10+bottom10 を誤爆しないため。本数は
+// blog-quality-standards.md の基準 + blog-critic の意味判断に委ねる)。
+function detectRankingTables(text) {
+  const tables = [];
+  let cur = null;
+  for (const ln of text.split("\n")) {
+    if (/^\s*\|.*\|\s*$/.test(ln)) (cur ??= []).push(ln);
+    else if (cur) {
+      tables.push(cur);
+      cur = null;
+    }
+  }
+  if (cur) tables.push(cur);
+  return tables
+    .filter((rows) => /順位|rank/i.test(rows[0] || ""))
+    .map((rows) => {
+      const ranks = [];
+      for (const r of rows.slice(2)) {
+        const m = r.match(/^\s*\|\s*(\d{1,2})\s*\|/);
+        if (m) ranks.push(Number(m[1]));
+      }
+      const topRun = ranks.filter((r) => r <= 12).length;
+      const bottomRun = ranks.filter((r) => r >= 36).length;
+      const noMiddle = !ranks.some((r) => r > 12 && r < 36);
+      const asymmetric = topRun >= 3 && bottomRun >= 1 && topRun !== bottomRun && noMiddle && ranks.length < 47;
+      return { topRun, bottomRun, asymmetric };
+    });
+}
+
+// charCount は「読者が読む地の文 (prose)」のみを数える。
+// 表・画像参照・タグ (source-link 等)・リンクURL・見出し/引用記号・コード等の markup は
+// 読者価値を伴わない水増し要因なので除外する (2026-06-02: 表で字数を稼ぐ gaming を封じる)。
 function getCharCount(text) {
-  const body = text.replace(/^---[\s\S]*?\n---\n/, "");
-  return body.length;
+  let t = text.replace(/^---[\s\S]*?\n---\n/, ""); // frontmatter
+  t = t.replace(/```[\s\S]*?```/g, ""); // code fence
+  t = t.replace(/!\[[^\]]*\]\([^)]*\)/g, ""); // 画像参照
+  t = t.replace(/<[^>]+>[\s\S]*?<\/[^>]+>/g, ""); // ペアHTML/カスタムタグ (source-link/affiliate-banner 等)
+  t = t.replace(/<[^>]+>/g, ""); // 単独タグ
+  t = t
+    .split("\n")
+    .filter((l) => !/^\s*\|/.test(l)) // 表行
+    .join("\n");
+  t = t.replace(/\[([^\]]+)\]\([^)]*\)/g, "$1"); // [text](url) → text
+  t = t.replace(/^[ \t]*#{1,6}\s+/gm, ""); // 見出し記号
+  t = t.replace(/^[ \t]*>\s?/gm, ""); // 引用/callout 記号
+  t = t.replace(/[*_`~]/g, ""); // 強調記号
+  return t.replace(/\s+/g, "").length; // 空白除いた地の文字数
 }
 
 function getH2Count(text) {
@@ -156,8 +214,11 @@ if (!checks.hasDescription) {
 if (!checks.hasDataSource) {
   blockers.push("「データ出典」section 欠落");
 }
-if (checks.charCount < 3000) {
-  blockers.push(`charCount < 3000 (actual: ${checks.charCount}) — 内容が薄い`);
+if (checks.charCount < 1600) {
+  blockers.push(`prose charCount < 1600 (actual: ${checks.charCount}) — スタブ (極端に薄い) の床。品質の量的判断は blog-critic に委ねる`);
+}
+if (checks.charCount < 2400) {
+  warnings.push(`prose charCount < 2400 (actual: ${checks.charCount}) — やや短い (critic の意味判断で可否を決める)`);
 }
 if (checks.charCount > 25000) {
   warnings.push(`charCount > 25000 (actual: ${checks.charCount}) — 長すぎる可能性`);
@@ -180,12 +241,77 @@ checks.rankingSourceLinks = sourceLinkLint.stats.rankingSourceLinks;
 checks.tailRankingLinks = sourceLinkLint.stats.tailRankingLinks;
 warnings.push(...sourceLinkLint.warnings);
 
+// ランキング表現の一貫性 (2026-06-02 追加): 標準は「上位5+下位5 の SVG チャート」。
+// 表だけ (チャート0) / 上下非対称表 / truncated 表は不可。本数 (5 vs 10) は基準 + critic 判断。
+const rankingTbls = detectRankingTables(content);
+checks.rankingTables = rankingTbls.length;
+if (rankingTbls.length > 0 && checks.charts === 0) {
+  blockers.push(
+    "ランキング表ありチャート0 — ランキングは上位5+下位5 の SVG チャートで可視化すること (表だけは不可)",
+  );
+}
+const asym = rankingTbls.find((t) => t.asymmetric);
+if (asym) {
+  blockers.push(
+    `上下非対称ランキング表 (top${asym.topRun}/bottom${asym.bottomRun}) — 上位N+下位N を対称にするか SVG 化`,
+  );
+}
+
+// 表現の正典統一 (2026-06-02 追加): chart-placeholder 未描画 / インライン svg / 記事内関連セクション禁止。
+// チャートは「生成画像 ![](data/*.svg)」に統一。関連ランキング/関連記事はページ側コンポーネントが正典。
+checks.chartPlaceholder = /<chart-placeholder/.test(content);
+checks.inlineSvg = /<svg[\s>]/.test(content);
+checks.inArticleRelated = /^#{2,3}\s*関連(ランキング|記事)/m.test(content);
+if (checks.chartPlaceholder) {
+  blockers.push("chart-placeholder (未描画) — 生成画像 SVG ![](data/*.svg) に置換すること");
+}
+if (checks.inlineSvg) {
+  blockers.push("インライン <svg> — チャートは生成画像 ![](data/*.svg) に統一 (インライン svg 禁止)");
+}
+if (checks.inArticleRelated) {
+  blockers.push(
+    "記事内『関連ランキング/関連記事』セクション — ページ側コンポーネント (RelatedRankingsSection / BlogRelatedArticlesSection) が正典。記事 markdown からは削除",
+  );
+}
+
 // Factual cross-check (2026-05-25 追加、article-factual-check.mjs に切り出し済)
 const factual = checkArticleFactual(content, dataDir);
 checks.groundTruthPrefCount = factual.groundTruthPrefCount;
 checks.isPerCapitaArticle = factual.isPerCapitaArticle;
 blockers.push(...factual.blockers);
 warnings.push(...factual.warnings);
+
+// ============================================================================
+// critic レビュー必須 (公開記事は「別 agent の意味レビュー」を経ること) ★再発防止
+// ============================================================================
+// 2026-06-02: 「書いた本人が自己採点して機械 gate だけ通す → 意味的に無価値な要素
+// (例: 図と重複する truncated 表) が公開される」という事故の再発防止。
+// このゲートはあくまで【機械的フロアチェック】であり品質判定ではない。意味的品質
+// (冗長・図表重複・読者価値・curiosity gap の真正性) は blog-critic (expert/panel
+// review) が別コンテキストで判断する。published:true の記事は blog-critic が書いた
+// review.md (verdict: PASS) を必須とし、自己採点での公開を構造的に不可能にする。
+// 公開判定: 新記事は `published: true`、旧記事は `publishedAt: <実日付>` のみ (published 行なし)。
+// どちらも「公開」とみなし critic ゲートの対象にする (旧スタイルの素通りを防ぐ)。
+// ドラフトは publishedAt: 未定 / published: false で除外される。
+const explicitFalse = /^published:\s*false\s*$/m.test(content);
+const isPublished =
+  !explicitFalse &&
+  (/^published:\s*true\s*$/m.test(content) || /^publishedAt:\s*\d{4}-\d{2}-\d{2}\s*$/m.test(content));
+const reviewPath = path.join(path.dirname(articlePath), "review.md");
+let hasCriticPass = false;
+if (fs.existsSync(reviewPath)) {
+  const rv = fs.readFileSync(reviewPath, "utf8");
+  // verdict: PASS かつ実体のある review (短いダミーを弾く)
+  hasCriticPass = /^verdict:\s*PASS\b/im.test(rv) && rv.replace(/\s+/g, "").length > 200;
+}
+checks.published = isPublished;
+checks.criticReviewed = hasCriticPass;
+if (isPublished && !hasCriticPass) {
+  blockers.push(
+    "critic レビュー未通過: 公開記事は blog-critic の review.md (verdict: PASS, 実体200字以上) が必須。" +
+      "自分が書いた記事を自分で採点して公開してはならない (別 agent の意味レビューを通すこと)",
+  );
+}
 
 const result = {
   slug,

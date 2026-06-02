@@ -8,6 +8,16 @@ feature/* ──(直 merge)──▶ develop ──(PR + CI)──▶ main（デ
 
 PR は **develop → main の 1 段階のみ**。feature/* → develop は直 merge で可 (個人開発、self-review 前提)。
 
+## 実行環境による差分 (web / クラウド) ★
+
+`gh` CLI と GitHub Actions の起動可否が環境で異なる。混同すると「dispatch できるはず」と誤認する (2026-06-02 発生)。
+
+- **ローカル**: `gh` あり・任意ブランチ push 可・`gh workflow run` で dispatch 可。
+- **Claude Code on the web / クラウド**: `gh` 無し・push 先制限あり・**連携トークンに `actions:write` が無く workflow dispatch 不可 (403)**。PR 操作は GitHub MCP ツールで行う。**R2 公開 (記事・広告) は workflow_dispatch ではなく push トリガーに委ねる** (`blog-auto-publish.yml` / `publish-affiliate-ads.yml` は develop への該当ファイル push で自動発火)。
+- 詳細・判定表・データ公開経路は `.claude/skills/dev/deploy/SKILL.md` の「実行環境の判定」「データ公開」を参照。
+
+> **データ公開は develop 経由**: `blog-auto-publish.yml` / `publish-affiliate-ads.yml` / `publish-blog.yml` は **develop を checkout** する。feature を main へ直接 squash しただけだと記事/広告が develop に乗らず公開されない。記事を含むデプロイは必ず develop を経由させる (feature → develop で公開発火 → develop → main の PR でコードデプロイ)。
+
 ## ルール
 
 - **feature/***: 機能ブランチ。develop から分岐し、ローカルで `git merge --no-ff feature/<name>` で develop に取り込む。マージ後は削除。PR は不要 (作っても良い、ただし CI は走らない)

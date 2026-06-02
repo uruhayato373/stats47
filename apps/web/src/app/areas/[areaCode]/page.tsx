@@ -12,8 +12,6 @@ import {
 } from "@stats47/components/atoms/ui/breadcrumb";
 import { isOk } from "@stats47/types";
 
-import { SetSidebarSection } from "@/components/molecules/SetSidebarSection";
-
 import { FurusatoNozeiCard, SidebarPromoBanner } from "@/features/ads";
 import { AreaBannerAd } from "@/features/ads/server";
 import {
@@ -134,17 +132,9 @@ export default async function AreaProfilePage({ params }: PageProps) {
             {/* ヘッダー + ヒーロー */}
             <AreaProfilePageClient profile={profile} />
 
-            {/* 左サイドバーに強み・弱みを注入 (サイドバー開いたとき用) */}
-            <SetSidebarSection>
-                <AreaProfileSidebar
-                    strengths={profile.strengths}
-                    weaknesses={profile.weaknesses}
-                />
-            </SetSidebarSection>
-
             {/* 2 カラムレイアウト (xl+ で右サイドバー、xl 未満は main のみ) */}
             <div className="container mx-auto px-4 py-10">
-                <div className="xl:grid xl:grid-cols-[minmax(0,1fr)_360px] xl:gap-5 xl:items-start">
+                <div className="xl:grid xl:grid-cols-[minmax(0,1fr)_360px] xl:gap-8 xl:items-start">
                     <main className="min-w-0 space-y-10">
                     {/* DB管理チャート */}
                     <AreaChartSection
@@ -179,17 +169,29 @@ export default async function AreaProfilePage({ params }: PageProps) {
                         slotId={RANKING_SIDEBAR_TOP.slotId}
                     />
 
-                    {/* アフィリエイト (xl 未満では main 内に表示) */}
+                    {/* アフィリエイト + 県の強み弱み (xl 未満では main 内に表示) */}
                     <div className="xl:hidden space-y-6">
+                        <AreaProfileSidebar
+                            strengths={profile.strengths}
+                            weaknesses={profile.weaknesses}
+                        />
                         <SidebarPromoBanner />
                         <AreaBannerAd />
                         <FurusatoNozeiCard areaCode={areaCode} />
                     </div>
                 </main>
 
-                    {/* 右サイドバー (xl+) — その県のふるさと納税 + Claude Code 講座 + 関連 AdSense */}
+                    {/* 右サイドバー (xl+) — 県の強み弱み + ふるさと納税 + Claude Code 講座 + 関連 AdSense */}
                     <aside className="hidden xl:block">
-                        <RightRailWidgets furusatoAreaCode={areaCode} />
+                        <RightRailWidgets
+                            furusatoAreaCode={areaCode}
+                            topWidgets={
+                                <AreaProfileSidebar
+                                    strengths={profile.strengths}
+                                    weaknesses={profile.weaknesses}
+                                />
+                            }
+                        />
                     </aside>
                 </div>
             </div>

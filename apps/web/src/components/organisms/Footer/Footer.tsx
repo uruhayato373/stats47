@@ -42,7 +42,7 @@ export async function Footer() {
       className="w-full border-t border-border bg-muted/30 pt-8 pb-[calc(1rem+var(--safe-area-bottom))]"
       suppressHydrationWarning
     >
-      <div className="mx-auto max-w-7xl px-4 sm:px-6">
+      <div className="mx-auto max-w-[1700px] px-4 sm:px-6">
         {/* メインリンクグリッド */}
         <div className="grid grid-cols-2 gap-6 sm:grid-cols-4 lg:grid-cols-5">
           {/* コンテンツ */}

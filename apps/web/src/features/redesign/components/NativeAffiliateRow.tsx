@@ -40,7 +40,7 @@ export function NativeAffiliateRow({
   if (banners.length === 0) return null;
 
   return (
-    <div className="rounded-xl border border-border bg-card shadow-sm">
+    <div className="rounded-none border border-border bg-card shadow-sm">
       <div className="flex items-center justify-between gap-4 border-b border-border bg-muted/30 px-4 py-3">
         <div className="flex min-w-0 items-center gap-2">
           <Sparkles className="h-4 w-4 shrink-0 text-accent-foreground/70" />

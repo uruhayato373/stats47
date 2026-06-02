@@ -79,7 +79,7 @@ export default function ThemesPage() {
         </div>
       </HeroShell>
 
-      <div className="xl:grid xl:grid-cols-[minmax(0,1fr)_360px] xl:gap-5 xl:items-start">
+      <div className="xl:grid xl:grid-cols-[minmax(0,1fr)_360px] xl:gap-8 xl:items-start">
         <main className="min-w-0">
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {ALL_THEMES.map((theme) => (

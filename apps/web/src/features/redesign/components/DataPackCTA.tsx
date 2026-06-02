@@ -31,7 +31,7 @@ export function DataPackCTA({
   showExcel = true,
 }: DataPackCTAProps) {
   return (
-    <div className="flex flex-col items-start gap-3 rounded-xl border border-primary/20 bg-primary/5 p-4 shadow-sm sm:flex-row sm:items-center">
+    <div className="flex flex-col items-start gap-3 rounded-none border border-primary/20 bg-primary/5 p-4 shadow-sm sm:flex-row sm:items-center">
       <div className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-primary text-primary-foreground">
         <Download className="h-5 w-5" />
       </div>

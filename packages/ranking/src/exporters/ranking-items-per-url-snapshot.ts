@@ -12,10 +12,17 @@ import {
   rankingItemKeyPath,
   surveyItemsKeyPath,
 } from "../types/snapshot";
+import {
+  resolveItemAttribution,
+  resolveItemOriginalSurveys,
+  surveyBucketsForItem,
+} from "./survey-bucketing";
 
 /** CategoryRankingItem に areaType を追加したローカル型 */
 interface CategoryRankingItemWithAreaType extends CategoryRankingItem {
   areaType: string;
+  /** 出典 (原典調査) survey id 群。survey バケット由来でのみ付与。 */
+  originalSurveys?: string[];
 }
 
 export interface ExportRankingItemsPerUrlResult {
@@ -68,11 +75,19 @@ export async function exportRankingItemsPerUrl(): Promise<ExportRankingItemsPerU
     }
   }
 
-  // 3. surveyId の列挙
-  const surveyIdSet = new Set<string>();
+  // 3. survey バケットの構築。SSDS 由来 item は cdCat01 から原典 survey を解決して再分配し
+  //    (62.9% が誤分類だった旧 baked surveyId を是正)、非SSDS は baked surveyId を維持する。
+  //    1 pass で surveyId → 該当 active item[] を組む (バケット loop で再 filter しない)。
+  const itemsBySurvey = new Map<string, RankingItem[]>();
   for (const item of items) {
-    if (item.surveyId) surveyIdSet.add(item.surveyId);
+    if (!item.isActive) continue;
+    for (const surveyId of surveyBucketsForItem(item)) {
+      const arr = itemsBySurvey.get(surveyId);
+      if (arr) arr.push(item);
+      else itemsBySurvey.set(surveyId, [item]);
+    }
   }
+  const surveyIdSet = new Set(itemsBySurvey.keys());
 
   const generatedAt = new Date().toISOString();
   const uploads: Promise<{ key: string; size: number }>[] = [];
@@ -154,9 +169,12 @@ export async function exportRankingItemsPerUrl(): Promise<ExportRankingItemsPerU
   for (const [rankingKey, keyItems] of byRankingKey) {
     // Use the first item as the canonical item for the file
     const item = keyItems[0];
+    // 出典表記 (2 階層: 編成統計 + 原典調査)。ranking 詳細ページが統一表示に使う。
+    // SSDS の baked surveyId は誤りが多いため param から解決した attribution を焼き込む。
+    const attribution = resolveItemAttribution(item);
     const body = JSON.stringify({
       generatedAt,
-      item,
+      item: { ...item, attribution },
     });
     uploads.push(
       saveToR2(rankingItemKeyPath(rankingKey), body, {
@@ -167,8 +185,8 @@ export async function exportRankingItemsPerUrl(): Promise<ExportRankingItemsPerU
 
   // ── survey/{surveyId}/items.json ─────────────────────────────────────────────
   for (const surveyId of surveyIdSet) {
-    const matched = items
-      .filter((it) => it.isActive && it.surveyId === surveyId)
+    const matched = (itemsBySurvey.get(surveyId) ?? [])
+      .slice()
       .sort((a, b) => {
         const fa = a.featuredOrder ?? 0;
         const fb = b.featuredOrder ?? 0;
@@ -189,6 +207,8 @@ export async function exportRankingItemsPerUrl(): Promise<ExportRankingItemsPerU
       normalizationBasis: r.normalizationBasis ?? null,
       groupKey: r.groupKey ?? null,
       isFeatured: r.isFeatured ?? false,
+      // 出典 (原典調査)。UI が「出典: ◯◯調査」表示に使う。SSDS は複数原典あり。
+      originalSurveys: resolveItemOriginalSurveys(r).map((s) => s.id),
     }));
 
     const body = JSON.stringify({

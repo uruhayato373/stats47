@@ -17,6 +17,39 @@ feature/* ──(直 merge)──▶ develop ──(PR + CI)──▶ main（デ
 - **develop**: 統合ブランチ。feature/* からの直 merge を受け、`git push origin develop` で remote 反映
 - **main**: 本番デプロイブランチ。**develop → main の PR 経由でのみ更新**。CI green → マージ → Cloudflare Pages 自動デプロイ
 
+## 実行環境の判定（★最初に必ず確認）
+
+本 skill の `gh` コマンド例は **ローカル Mac 環境**前提。**Claude Code on the web / クラウド実行環境**では前提が違うので最初に判定する。
+
+| 能力 | ローカル | web / クラウド実行 |
+|---|---|---|
+| `gh` CLI | あり | **無い** |
+| `git push` 先 | 任意ブランチ | セッション指定ブランチに制限されることがある |
+| GitHub Actions 起動 (`gh workflow run` / dispatch) | 可 | **不可** (連携トークンに `actions:write` 無し → 403) |
+| R2 直接書き込み | 不可 (CI 専用) | 不可 (同左) |
+
+**判定**: `command -v gh` が無い / remote 環境 ⇒ **web モード**。
+
+**web モードの手順差分**:
+- PR 作成・マージ・CI 確認は **GitHub MCP ツール** (`mcp__github__create_pull_request` / `merge_pull_request` / `pull_request_read`) を使う (`gh` の代替)。
+- **workflow の dispatch は不可** (403)。記事・広告の R2 公開は下記「データ公開」のとおり **push トリガー**に委ねる（develop への push が公開を発火）。`gh workflow run` を案内するだけで終わらせない。
+- branch push が制限される場合は可能な範囲で実行し、不可なら明示してユーザーに依頼する。
+
+## データ公開（コードデプロイとは別物・★見落とし注意）
+
+`deploy-workers.yml` (main push) が反映するのは **コードのみ**。**R2 に載るデータ (ブログ記事・affiliate 広告等) は別経路**で、コードデプロイだけでは反映されない。
+
+| 対象 | 反映経路 | 起動 |
+|---|---|---|
+| 新規/更新ブログ記事 (`docs/21_ブログ記事原稿/<slug>/article.md`, `published:true`) | `blog-auto-publish.yml`（**develop checkout**・factual/quality ゲート後 R2 push・MAX_PUBLISH 件） | **develop への article.md push で自動発火** (Phase 2) / 手動は `publish-blog.yml` dispatch |
+| affiliate 広告 (`apps/web/scripts/affiliate-ads-data.ts`) | `publish-affiliate-ads.yml`（develop checkout → `run.sh --only affiliate-ads`） | **develop への affiliate-ads-data.ts push で自動発火** / 手動は `sync-snapshots.yml -f only=affiliate-ads` |
+| page_components 等その他 snapshot | `sync-snapshots.yml` | dispatch (`-f only=<task>`) |
+| 固定バナー画像 (コード直書きの `SidebarPromoBanner` 等) | コードデプロイのみで反映 (R2 不要) | main マージで自動 |
+
+**従って「記事を含むデプロイ」では**: feature → develop へ merge した時点で push トリガーが記事/広告を R2 公開し、develop → main の PR マージで Cloudflare がコードをデプロイする、の **2 経路が両方必要**。記事を追加したのにコードしかデプロイしないと「本番に記事が出ない」事故になる（2026-06-02 発生）。
+
+> **CDN パージは公開 workflow に内蔵済 (2026-06-02)**: `blog-auto-publish.yml` は公開記事URL + `/blog` + ホーム + sitemap を**ピンポイントパージ**、`publish-affiliate-ads.yml` は**全ゾーンパージ**（バナーは全ページ埋め込みのため）。`purge-cache.ts --urls <絶対URL...>` で任意ページHTMLをパージ可能。手動パージは `/purge-cdn`。middleware/sitemap/robots/metadata 等コード由来の変更後は引き続き Step 8 で `/purge-cdn` を判定する。
+
 ## 前提
 
 - 変更がすべてコミット済みであること

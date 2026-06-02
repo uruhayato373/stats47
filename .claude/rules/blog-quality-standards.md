@@ -9,6 +9,43 @@ stats47.jp の `/blog/{slug}` 記事を新規作成または brushup する際�
 >
 > ルールを変更する場合は**まず本ファイルを更新**し、他は参照のみに保つこと (drift 防止)。
 
+## 品質の3層モデルと critic 必須 (★最重要・2026-06-02)
+
+ブログ品質は**1つの指標やスクリプトで測れない**。忠実度とコストの異なる3層で担保する。**文字数や決定的 gate を「品質」と取り違えない**こと(取り違えた結果、図と重複する truncated 表で字数を稼ぐ事故が起きた)。
+
+| 層 | 担い手 | 役割 | 捕まえる / 捕まえない |
+|---|---|---|---|
+| ① 機械的フロア | `quality-gate.mjs` | 公開前の床 (決定的) | 捕: callout数/内部リンク/NG word/factual rank/truncated 表/**ランキング表チャート0**/**上下非対称表**/source-link 配置/prose 文字数の床。**不可: 読者価値の有無** |
+| ② 意味レビュー | **`blog-critic` agent (別コンテキスト)** | 読者価値の判断 | 捕: 冗長・図表重複・論理の質・curiosity gap の真正性・CTA過多・「この要素は何を足すか」 |
+| ③ アウトカム | gsc-analyst / 改善ログ | 最終評価 | GSC CTR/順位・GA4 滞在・CV (遅行・最も真実) |
+
+**鉄則**:
+- **文字数 (prose) は「薄すぎ」を弾く床であって品質ではない。**表・markup・リンクでは稼げない (gate が prose のみ計測)。字数を満たしたいなら読者価値のある分析を書く。
+- **書いた本人が自分の記事を採点して公開してはならない。**必ず `blog-critic`(別 agent・別コンテキスト) の意味レビューを通す。執筆 (article-writer) と監査 (blog-critic) は分離する。
+- 機械 gate を pass しても「品質 OK」ではない。②③ を経て初めて品質が担保される。
+
+### critic レビュー成果物 `review.md` (公開の必須条件)
+
+`published: true` の記事は `docs/21_ブログ記事原稿/<slug>/review.md` (blog-critic が生成) が無いと **`quality-gate.mjs` が blocker で公開を止める**。format:
+
+```markdown
+---
+slug: <slug>
+reviewer: blog-critic
+mode: expert | panel
+verdict: PASS | REVISE
+date: YYYY-MM-DD
+---
+## 評価サマリ
+<読者価値の総括>
+## 指摘
+- [blocker|major|minor] <具体的指摘と修正案>
+## 判定理由
+<PASS/REVISE の根拠>
+```
+
+`verdict: PASS`(実体200字以上) で初めて公開可。REVISE の指摘は article-writer 側が修正してから PASS に更新する。これにより「自己採点での公開」を構造的に不可能にする。
+
 ## なぜこのルールがあるか
 
 2026-05-23 のブログ品質診断で判明:
@@ -159,6 +196,46 @@ stats47.jp の `/blog/{slug}` 記事を新規作成または brushup する際�
 
 検査 (決定的 lint): `node .claude/scripts/blog/audit-article-structure.mjs` で `/ranking/` source-link の末尾集約 (2 個以上) を検出。`quality-gate.mjs` にも統合済 (WARN)。どの図に再配置するかは brushup 時に agent が意味判断。
 
+### ランキング可視化の標準 (★2026-06-02 確定: 上位5+下位5 SVG)
+
+ランキング系の記事は **数値を表で羅列せず、SVG チャートで可視化する**のが標準。
+
+- ✅ **標準: 上位5+下位5 の SVG チャート** — ランキングの主役は「上位5件 + 下位5件」を 1 枚の SVG (横棒等) にする。モバイル可読性が高く、上下の対比が一目で伝わる。中位は本文の `<source-link href="/ranking/{key}">` でランキング詳細へ誘導する。
+  - 既存の良記事は「上位10+下位10」を使っているものも多い (許容)。**5 でも 10 でもよいが上下は対称**にする。本数の最終判断は本文の情報量と blog-critic に委ねる (gate は本数を判定しない)。
+- ❌ **禁止: 表だけ (チャート0) のランキング** — 「順位」列の表しかない記事は不可。必ず SVG を置く (82 記事が該当・2026-06-02 棚卸し)。
+- ❌ **禁止: 上下非対称表** — 「上位10 + 下位3」のように上下件数が食い違う表 (51 記事が該当)。対称にするか SVG 化する。
+- 検査 (決定的): `quality-gate.mjs` が (1) 「順位」列を持つ表があるのに SVG チャート0、(2) 上下非対称表、を **blocker** で検出する。本数 (5 vs 10) は判定しない。
+
+### 記事 markdown の正典テンプレート (★2026-06-02 確定: コンポーネント二重・未描画を排除)
+
+`article.md` に書いてよいもの・書いてはいけないものを固定する。ページ側 (`apps/web/src/app/blog/[slug]/page.tsx`) が描画する要素を記事 markdown に重複して書かない (二重・不一致の温床)。
+
+| 要素 | 正典 | 記事 markdown では |
+|---|---|---|
+| ランキングチャート | **生成画像 `![alt](data/<name>.svg)`** (上位5+下位5) | ✅ これだけ。`<chart-placeholder>` (未描画) と インライン `<svg>` は **禁止** |
+| 関連ランキング | ページ側 `RelatedRankingsSection` (tag 駆動) | ❌ 記事内 `## 関連ランキング` を書かない。本文中は各図直下の `<source-link>` で個別誘導 |
+| 関連記事 | ページ側 `BlogRelatedArticlesSection` (tag 駆動) | ❌ 記事内 `## 関連記事` / `### 関連記事` を書かない |
+| AI スクール広告 | (コードから除去済・2026-06-02) | 記事に書かない |
+| 関連データ DL | (コードから除去済・2026-06-02) | 記事に書かない |
+| 出典 | `## データ出典` テキスト または `<data-source>` タグ | ✅ どちらか (本文末) |
+| ランキング詳細への誘導 | `<source-link href="/ranking/{key}">` | ✅ **各図の直下にインライン**配置 (末尾集約禁止) |
+| AdSense 枠 | `<ad-slot></ad-slot>` (任意・未配置なら自動注入) | ✅ 任意 |
+
+**決定的検査 (`quality-gate.mjs` が blocker)**: `<chart-placeholder>` 残存 / インライン `<svg>` / 記事内 `関連(ランキング\|記事)` 見出し。これらは公開前に弾かれる。バッチ是正の対象でもある (2026-06-02 棚卸し: 記事内関連229・インラインsvg76・chart-placeholder54)。
+
+### 図と表 (★truncated 表の禁止)
+
+ランキング図 (SVG) の直後に表を置く場合、表は **「全件掲載」か「省略」の二択**。
+
+- ❌ **禁止: truncated 表** — 「上位数件 + `…` + 下位数件」のように `…`/`⋯` で省略した部分複製表。すぐ上のチャート (上位10+下位10) の**劣化した部分集合**にすぎず、読者価値ゼロ。`charCount` ゲートを満たすための水増しに陥りやすい典型的アンチパターン (2026-06-02 検出)。
+- ✅ **OK: 全件表** — 全エンティティ (47 都道府県等) を載せる。中位を含むためチャートを補完し、SEO テキスト・Ctrl+F 価値がある。
+- ✅ **OK: 表を置かない** — チャート + 該当ランキングへの `<source-link>` で十分 (全件はリンク先で見られる)。
+- 表は「図にない情報」を足すときだけ置く (中位/分布/差分など)。図と同じ上下数件をなぞるだけの表は作らない。
+
+検査 (決定的): `quality-gate.mjs` の NG_PATTERN が `| … |` 等の省略行を含む表を **blocker** で検出する。
+
+> **文字数判定は prose (地の文) ベース・かつ「床」のみ (2026-06-02〜)**: `quality-gate.mjs` の charCount は frontmatter / 表 / 画像参照 / `<source-link>` 等タグ / リンクURL / 見出し・引用記号 / コードを除いた**地の文のみ**を数える。ただし**文字数は品質指標ではなく、スタブ (極端に薄い) を弾く床**として **1600 字未満を blocker / 2400 字未満を warning** とするだけ。**量的な十分さ・密度・非反復は blog-critic の意味レビューが判断する**。過去に「2800 字を満たすための反復水増し」が critic に water-padding と判定された反省から、長さの縛りを critic に一本化した。表・markup・リンクでは字数を稼げない。
+
 ## brushup の判断基準
 
 GSC スナップショットで以下に該当する記事は brushup 候補:
@@ -214,7 +291,14 @@ node .claude/scripts/blog/audit-article-structure.mjs
 
 # 全記事のチャート SVG 品質 (dark mode 等) を一括監査 → chart-audit.json
 node .claude/scripts/blog/audit-chart-quality.mjs
+
+# ★公開済み全記事を R2 公開 URL から取得し決定的チェックを一括適用 (cloud 可・週次棚卸し)
+#   → /tmp/published-blog-audit.json + docs/04_レビュー/blog-quality/<date>-published-inventory.md
+node .claude/scripts/blog/audit-published-blog.mjs
 ```
+
+公開記事の品質棚卸し (最新): `docs/04_レビュー/blog-quality/2026-06-02-published-inventory.md`。
+週次是正ループ (GSC 優先で blocker 記事を /brushup-blog → critic PASS) は同ファイル参照。
 
 ### enforce される箇所 (2026-06-02〜 / 公開前ブロック)
 

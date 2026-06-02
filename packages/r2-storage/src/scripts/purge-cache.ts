@@ -5,8 +5,9 @@
  *
  * Usage:
  *   npx tsx packages/r2-storage/src/scripts/purge-cache.ts                     # 全キャッシュパージ
- *   npx tsx packages/r2-storage/src/scripts/purge-cache.ts --prefix ranking    # ranking/* のみパージ
- *   npx tsx packages/r2-storage/src/scripts/purge-cache.ts --files key1 key2   # 特定ファイルのみパージ
+ *   npx tsx packages/r2-storage/src/scripts/purge-cache.ts --prefix ranking    # storage.stats47.jp/ranking/* のみ
+ *   npx tsx packages/r2-storage/src/scripts/purge-cache.ts --files key1 key2   # 特定 R2 キーのみ
+ *   npx tsx packages/r2-storage/src/scripts/purge-cache.ts --urls https://stats47.jp/blog/foo ...  # 任意の絶対URL (ページHTML)
  */
 
 import { config } from "dotenv";
@@ -118,8 +119,19 @@ async function main() {
   const args = process.argv.slice(2);
   const prefixIdx = args.indexOf("--prefix");
   const filesIdx = args.indexOf("--files");
+  const urlsIdx = args.indexOf("--urls");
 
-  if (filesIdx !== -1) {
+  if (urlsIdx !== -1) {
+    // 任意の絶対 URL をパージ (stats47.jp のページ HTML 等)
+    const urls = args.slice(urlsIdx + 1).filter((u) => /^https?:\/\//.test(u));
+    if (urls.length === 0) {
+      console.error("--urls requires at least one absolute URL (http/https)");
+      process.exit(1);
+    }
+    console.log(`🔄 Purging CDN cache for ${urls.length} URLs...`);
+    await purgeByUrls(urls);
+    console.log(`✅ Cache purge complete`);
+  } else if (filesIdx !== -1) {
     // 特定ファイルのパージ
     const keys = args.slice(filesIdx + 1);
     if (keys.length === 0) {

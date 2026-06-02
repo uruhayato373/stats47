@@ -143,14 +143,19 @@ node .claude/scripts/lib/article-factual-check.mjs \
    - 全体差 (1位 / 最下位 / 倍率を提示)
    - 「発見」の予告 (この記事で読者が得る示唆を 1 行)
 
-2. **H2: TOP10 と最下位** (markdown table + chart-placeholder)
-   - markdown table で 1-10 位 + ... + 最下位 3-5 件
-   - `<chart-placeholder type="bar" data="<slug>-top10" caption="..." />`
+2. **H2: 上位5と下位5** (chart + 解説)
+   - 上位/下位は **生成画像 `![alt](data/<name>.svg)`** で可視化する (上位5+下位5)。
+     `node .claude/scripts/blog/generate-article-charts.mjs --slug <slug>` で data/*.json から生成。
+     ★**`<chart-placeholder>` と インライン `<svg>` は禁止** (未描画/混在の温床。`quality-gate.mjs` が blocker。
+     正典 = `.claude/rules/blog-quality-standards.md`「記事 markdown の正典テンプレート」)
+   - ★**表を置く場合は「全件 (全47件等)」か「置かない」の二択。** 図と重複する
+     「上位数件 + … + 下位数件」の **truncated 表 / 上下非対称表は禁止** (blocker)
+   - 全件はランキングページにあるため、表を置かず `<source-link href="/ranking/<key>">` で誘導するのが既定
    - 直後に上位の地域パターン解説 (1-2 段落)
 
-3. **H2: 最下位グループ** (table + 解説)
-   - markdown table で最下位 5 件
+3. **H2: 最下位グループ** (解説)
    - 「なぜ下位か」の構造解説 (大都市・島嶼・人口減少地域など、データに即して)
+   - ここでも図と重複する truncated 表は作らない
 
 4. **H2: 発見セクション** (1-2 つ)
    - 男女差・地域クラスター・上下位の重なり・他指標との対比など、データから読める示唆
@@ -159,9 +164,10 @@ node .claude/scripts/lib/article-factual-check.mjs \
 5. **H2: まとめ** (箇条書き 5 項目)
    - 1位・最下位・倍率・地域パターン・特筆点
 
-6. **データ出典** + **関連ランキング** (内部リンク 3-5 件)
-   - データ出典: 出典機関名 + 集計年 + e-Stat 経由整備の旨
-   - 関連ランキング: `https://stats47.jp/ranking/<key>` の内部リンクを 3-5 件
+6. **データ出典** (出典機関名 + 集計年 + e-Stat 経由整備の旨)
+   - ★**記事内に「関連ランキング」「関連記事」セクションを書かない** (見出しごと不可)。
+     関連はページ側 `RelatedRankingsSection` / `BlogRelatedArticlesSection` が tag 駆動で描画する正典 (二重表示防止・`quality-gate.mjs` が blocker)。
+   - ランキング詳細への誘導は各図直下の `<source-link href="/ranking/<key>">` (本文インライン) で行う
 
 ### Phase 4: フロントマター生成
 
@@ -206,16 +212,22 @@ data ファイルを使った場合は `docs/21_ブログ記事原稿/<slug>/dat
 完全DBレスのため **D1 INSERT SQL は不要** (articles テーブルは廃止、article.md frontmatter が SSOT)。
 
 1. factual gate を通す (上記「Factual cross-check を必ず通す」)。pass するまで data を再 Read して修正
-2. 呼び元に「ドラフト完成: `docs/21_ブログ記事原稿/<slug>/`」と返す (最終行に `DRAFT: <path>`)
-3. **公開は CI で行う (本 agent はやらない)**: `gh workflow run publish-blog.yml -f slug=<slug> -f dry_run=false`
-4. 公開確認後、`docs/21` のドラフトは削除する (lifecycle、`check-published-drafts.cjs` が残骸を検出)
+2. **意味レビューを別 agent に依頼する (★必須・自己採点禁止)**: `blog-critic` を Agent tool で起動し、
+   読者価値の観点 (冗長・図表重複・truncated 表・CTA過多・curiosity gap の真正性) で review してもらう。
+   blog-critic が `docs/21_ブログ記事原稿/<slug>/review.md` (`verdict: PASS`) を出すまで、指摘を修正して反復する。
+   **自分 (article-writer) が書いた記事を自分で採点して公開してはならない。**
+3. 呼び元に「ドラフト完成 (critic PASS 済): `docs/21_ブログ記事原稿/<slug>/`」と返す (最終行に `DRAFT: <path>`)
+4. **公開は CI / develop push で行う (本 agent はやらない)**。`quality-gate.mjs` は `published:true` かつ
+   `review.md` (verdict: PASS) が無いと公開を blocker で止める (自己採点公開を構造的に防止)。
+5. 公開確認後、`docs/21` のドラフトは削除する (lifecycle、`check-published-drafts.cjs` が残骸を検出)
 
 ## 品質チェックリスト (自己検証)
 
 - [ ] タイトル 17 全角以内
 - [ ] 「○○ランキング」「○○格差」テンプレを使っていない
 - [ ] seo_title に「1位X・最下位Y・N倍差」が含まれる
-- [ ] markdown table の数値が values.json と一致
+- [ ] (表を置く場合のみ) 全件表である / 図と重複する truncated 表 (… 省略) でない。数値は values.json と一致
+- [ ] 公開前に blog-critic の意味レビュー (`review.md` verdict: PASS) を通す予定 (自分が書いた記事を自分で採点して公開しない)
 - [ ] 関連ランキングの URL が `https://stats47.jp/ranking/<実在 key>` 形式
 - [ ] 仮説には `[仮説]` 表記 + 検証必要の明記
 - [ ] 既存記事と slug が重複していない (`/usr/bin/curl -s https://storage.stats47.jp/app/blog/all.json` で確認)

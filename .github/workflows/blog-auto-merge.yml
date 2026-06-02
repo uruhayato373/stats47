@@ -1,0 +1,87 @@
+name: 🔀 Blog Auto-Merge (brushup-auto → develop)
+
+# Claude Routine (blog-auto-brushup) が作る `brushup-auto` ラベル PR を、全 check green で
+# squash merge する。merge 後に develop へ article.md が入ると blog-auto-publish.yml が R2 公開する。
+#
+# 安全装置:
+#   - ラベル `brushup-auto` かつ base=develop の PR のみ対象 (それ以外は no-op)
+#   - 全 check run が success (pending/failure があれば merge しない)
+#   - Routine 側で quality-gate + factual + blog-critic PASS 済 + 公開ブリッジでも再ゲート (多重防御)
+#   - 緊急停止: GitHub Actions UI の "Disable workflow"
+#
+# 関連: docs/02_実装計画/blog-auto-brushup-cloud-routine.md (⑦ auto-merge)
+
+on:
+  pull_request:
+    types: [labeled, opened, reopened, synchronize]
+  check_suite:
+    types: [completed]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: blog-auto-merge-${{ github.event.pull_request.number || github.event.check_suite.id }}
+  cancel-in-progress: false
+
+jobs:
+  auto-merge:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Resolve & merge eligible PRs
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const LABEL = "brushup-auto";
+            const BASE = "develop";
+
+            // 対象 PR 番号を集める (pull_request イベント or check_suite に紐づく PR)
+            let prNumbers = [];
+            if (context.eventName === "pull_request") {
+              prNumbers = [context.payload.pull_request.number];
+            } else if (context.eventName === "check_suite") {
+              prNumbers = (context.payload.check_suite.pull_requests || []).map((p) => p.number);
+            }
+            if (prNumbers.length === 0) {
+              core.info("対象 PR なし");
+              return;
+            }
+
+            for (const number of prNumbers) {
+              const { data: pr } = await github.rest.pulls.get({
+                ...context.repo,
+                pull_number: number,
+              });
+
+              if (pr.state !== "open") { core.info(`#${number}: open でない → skip`); continue; }
+              if (pr.base.ref !== BASE) { core.info(`#${number}: base=${pr.base.ref}≠${BASE} → skip`); continue; }
+              const labels = pr.labels.map((l) => l.name);
+              if (!labels.includes(LABEL)) { core.info(`#${number}: ラベル ${LABEL} なし → skip`); continue; }
+
+              // 全 check run が success か (pending/failure があれば待つ/見送る)
+              const { data: checks } = await github.rest.checks.listForRef({
+                ...context.repo,
+                ref: pr.head.sha,
+                per_page: 100,
+              });
+              const runs = checks.check_runs || [];
+              const pending = runs.filter((r) => r.status !== "completed");
+              const failed = runs.filter(
+                (r) => r.status === "completed" && !["success", "neutral", "skipped"].includes(r.conclusion)
+              );
+              if (pending.length > 0) { core.info(`#${number}: check 進行中 (${pending.length}) → 後続イベントで再評価`); continue; }
+              if (failed.length > 0) { core.info(`#${number}: check 失敗 (${failed.map((r)=>r.name).join(",")}) → merge しない`); continue; }
+
+              if (!pr.mergeable_state || ["dirty", "blocked", "behind"].includes(pr.mergeable_state)) {
+                core.info(`#${number}: mergeable_state=${pr.mergeable_state} → skip`);
+                continue;
+              }
+
+              await github.rest.pulls.merge({
+                ...context.repo,
+                pull_number: number,
+                merge_method: "squash",
+              });
+              core.info(`#${number}: ✅ squash merged`);
+            }

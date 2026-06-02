@@ -1,39 +1,16 @@
 /**
  * フォント設定
  *
- * Next.jsのnext/font/googleを使用したフォント設定を提供します。
+ * 本文・見出しは OS 標準の system フォントスタック (游ゴシック / Hiragino 軸) を
+ * globals.css の body font-family で指定する (Web フォント非依存・高速・Zenn 準拠)。
+ * ここではコード表示用の等幅フォントのみ next/font で読み込む。
  */
 
-import { Geist_Mono, Inter, Noto_Sans_JP } from "next/font/google";
-
-/**
- * Interフォント設定
- * 英語テキスト用のメインフォント
- */
-export const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-  display: "swap",
-  preload: true,
-  adjustFontFallback: true,
-});
-
-/**
- * Noto Sans JPフォント設定
- * 日本語テキスト用のフォント（400, 500, 600, 700のウェイト）
- */
-export const notoSansJP = Noto_Sans_JP({
-  weight: ["400", "700"],
-  subsets: ["latin"],
-  variable: "--font-noto-sans-jp",
-  display: "swap",
-  preload: false,
-  adjustFontFallback: true,
-});
+import { Geist_Mono } from "next/font/google";
 
 /**
  * Geist Monoフォント設定
- * コード表示用の等幅フォント
+ * コード表示用の等幅フォント (--font-geist-mono)
  */
 export const geistMono = Geist_Mono({
   subsets: ["latin"],

@@ -1,3 +1,4 @@
+import { resolveAttribution } from "@stats47/data-configs";
 import { logger } from "@stats47/logger";
 
 import { toCompositionChartData } from "../../../adapters/toCompositionChartData";
@@ -25,6 +26,16 @@ export const CompositionChartDashboard = async ({
   const { title, area, rankingLink, sourceName, sourceLink, annotation, rankingLinks, componentKey } = common;
   const { segments, description, defaultTab } = config;
   const areaCode = area.areaCode;
+
+  // 出典表記の統一: statsDataId から 2 階層 attribution を解決 (ranking と同じ部品/型)。
+  // composition は segment ごとに cdCat01 が異なるため cdCat01 は渡さない
+  // (非SSDS → その調査 / SSDS → 編成統計のみ)。解決できなければ従来 sourceName にフォールバック。
+  const statsDataIdForSource =
+    config.statsDataId ?? config.multipleStatsSources?.[0]?.statsDataId;
+  const attribution = resolveAttribution(statsDataIdForSource, undefined);
+  const hasAttribution =
+    !!attribution.compilation || attribution.originalSurveys.length > 0;
+  const cardAttribution = hasAttribution ? attribution : undefined;
 
   if (!segments?.length || (!config.statsDataId && !config.multipleStatsSources?.length)) {
     return (
@@ -137,6 +148,7 @@ export const CompositionChartDashboard = async ({
           description={description}
           source={sourceName ?? undefined}
           sourceLink={sourceLink}
+          attribution={cardAttribution}
           annotation={annotation}
           rankingLinks={rankingLinks}
           loading={false}
@@ -155,6 +167,7 @@ export const CompositionChartDashboard = async ({
         description={description}
         source={sourceName ?? undefined}
         sourceLink={sourceLink}
+        attribution={cardAttribution}
         annotation={annotation}
         rankingLinks={rankingLinks}
         loading={false}
