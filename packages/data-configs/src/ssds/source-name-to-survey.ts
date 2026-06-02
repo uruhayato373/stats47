@@ -104,6 +104,10 @@ export const PROPOSED_NEW_SURVEYS: Record<
   日本銀行統計: { id: "boj-statistics", name: "日本銀行統計", organization: "日本銀行" },
   国民生活基礎調査: { id: "comprehensive-living-conditions-survey", name: "国民生活基礎調査", organization: "厚生労働省" },
   日本郵政統計: { id: "japan-post-statistics", name: "日本郵政統計", organization: "日本郵政" },
+
+  // --- 非SSDS 一次統計 (displayname-to-survey.ts と対) ---
+  水害統計調査: { id: "flood-statistics", name: "水害統計調査", organization: "国土交通省" },
+  建設工事受注動態統計調査: { id: "construction-orders-statistics", name: "建設工事受注動態統計調査", organization: "国土交通省" },
 };
 
 /**

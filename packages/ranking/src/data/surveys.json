@@ -1537,5 +1537,43 @@
     "isActive": true,
     "createdAt": "2026-06-02 00:00:00",
     "updatedAt": "2026-06-02 00:00:00"
+  },
+  {
+    "id": "flood-statistics",
+    "sourceKind": "survey",
+    "externalId": null,
+    "parentSourceId": "estat",
+    "name": "水害統計調査",
+    "organization": "国土交通省",
+    "url": null,
+    "description": null,
+    "attributionText": null,
+    "license": null,
+    "licenseUrl": null,
+    "baseUrl": null,
+    "linkTemplate": null,
+    "displayOrder": 0,
+    "isActive": true,
+    "createdAt": "2026-06-02 00:00:00",
+    "updatedAt": "2026-06-02 00:00:00"
+  },
+  {
+    "id": "construction-orders-statistics",
+    "sourceKind": "survey",
+    "externalId": null,
+    "parentSourceId": "estat",
+    "name": "建設工事受注動態統計調査",
+    "organization": "国土交通省",
+    "url": null,
+    "description": null,
+    "attributionText": null,
+    "license": null,
+    "licenseUrl": null,
+    "baseUrl": null,
+    "linkTemplate": null,
+    "displayOrder": 0,
+    "isActive": true,
+    "createdAt": "2026-06-02 00:00:00",
+    "updatedAt": "2026-06-02 00:00:00"
   }
 ]

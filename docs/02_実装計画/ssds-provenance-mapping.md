@@ -101,12 +101,34 @@ metric の出典を 2 階層で持つ:
 
 検証: `cd packages/data-configs && npx tsx scripts/ssds/build-ssds-provenance.ts` → 100% を再現。
 
-### Phase 3 — metric への出典付与 (時系列・円グラフへ波及)
+### Phase 3 — metric → originalSurveys 解決ユーティリティ (完了) ✅
 
-- `metric.source` から `originalSurveys[]` を解決するユーティリティを `packages/data-configs` に追加
-  (statsDataId/cdCat01/calculated を分岐)。
+成果 (`packages/data-configs/`):
+- `src/provenance/resolve-metric-provenance.ts` — `resolveMetricProvenance(metric, registry?)`。
+  `source.kind` で分岐: kakei-chousa / estat(SSDS=cdCat01→ssds-provenance) / estat(一次=displayName) /
+  calculated(分子分母を再帰 union) / mlit・external。**ビルド時/exporter 用** (ssds-provenance JSON を import)。
+- `src/ssds/displayname-to-survey.ts` — 非SSDS estat の displayName → survey id 正規化。
+  SSDS は市区町村版など displayName 変種 (`社会・人口統計体系（市区町村…）`) も `startsWith` で拾う。
+- `src/provenance/resolve-metric-provenance.test.ts` — 意図検証 (vitest、7 ケース)。
+- `scripts/ssds/report-metric-provenance-coverage.ts` — 全 metric カバレッジ報告。
+
+**結果 (全 2,209 metric): 原典解決 95.1% (2,100)。**
+kind別: estat 95.2% / kakei-chousa 100% / mlit 100% / external 44.1%。
+未解決 ~109 は displayName が調査名でなく指標ラベルになっている tail と displayName 無し external
+(= metric config 側の出典ラベル品質問題。偽 survey を作らず空配列で可視化)。
+
+検証: `cd packages/data-configs && npx tsx scripts/ssds/report-metric-provenance-coverage.ts`。
+
+> 注: 時系列/円グラフへの「出典: ◯◯調査」UI 表示は、snapshot に originalSurveys を焼き込む
+> exporter 変更が前提のため **Phase 4 に統合** (UI が読むデータが無いと半端配線になるため)。
+
+### Phase 4 — exporter 焼き込み + UI 表示 + survey ページ是正
+
+- exporter (`ranking-items-per-url-snapshot.ts` 等) で `resolveMetricProvenance` を呼び、snapshot に
+  `originalSurveys[]` を焼き込む。ranking item の旧 `survey_id` も同マッピング由来へ統一 (drift 解消)。
 - 時系列 (theme-dashboard) / 円グラフ (CompositionChart) に「出典: ◯◯調査」表示を追加。
-- ranking item の焼き込み `survey_id` も同マッピング由来へ統一 (drift 解消)。
+- `/survey` 一覧の N+1 列挙 (`page.tsx:40-54`) を per-survey items.json ベースへ。
+- `ssds` バケット 200 件を originalSurveys ベースで本来の調査へ再分配。all.json↔items.json 整合性チェック。
 
 ### Phase 4 — survey ページの是正 + 再分配
 
