@@ -1,0 +1,65 @@
+<!-- data-source: household-spending-before-after-inflation-prefecture-rankings.json | generated: 2026-06-02T21:30:36.808Z -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 300" width="680" height="300" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" role="img" aria-label="消費支出 都道府県ランキング（2024年）">
+  <style>
+    .svg-bg{fill:#fafafa}
+    .svg-title{fill:#222}
+    .svg-subtitle{fill:#666}
+    .svg-label{fill:#333}
+    .svg-legend{fill:#888}
+    @media (prefers-color-scheme:dark){
+      .svg-bg{fill:#1f2937}
+      .svg-title{fill:#f9fafb}
+      .svg-subtitle{fill:#9ca3af}
+      .svg-label{fill:#e5e7eb}
+      .svg-legend{fill:#9ca3af}
+    }
+  </style>
+  <rect width="680" height="300" class="svg-bg" rx="8"/>
+  <text x="340" y="24" text-anchor="middle" font-size="16" font-weight="bold" class="svg-title">消費支出 都道府県ランキング（2024年）</text>
+  
+  <text x="227.5" y="54" text-anchor="middle" font-size="12" font-weight="bold" fill="#1565c0">上位 5</text>
+  <text x="542.5" y="54" text-anchor="middle" font-size="12" font-weight="bold" fill="#c62828">下位 5</text>
+  
+      <text x="84" y="82" text-anchor="end" font-size="11" class="svg-label">埼玉県</text>
+      <rect x="90" y="63" width="195" height="30" fill="#1565c0" rx="2"/>
+      <text x="289" y="82" font-size="10" class="svg-label">357.9千円</text>
+    
+      <text x="84" y="118" text-anchor="end" font-size="11" class="svg-label">東京都</text>
+      <rect x="90" y="99" width="191.24056999161778" height="30" fill="#1976d2" rx="2"/>
+      <text x="285.2405699916178" y="118" font-size="10" class="svg-label">351千円</text>
+    
+      <text x="84" y="154" text-anchor="end" font-size="11" class="svg-label">千葉県</text>
+      <rect x="90" y="135" width="183.558256496228" height="30" fill="#1e88e5" rx="2"/>
+      <text x="277.558256496228" y="154" font-size="10" class="svg-label">336.9千円</text>
+    
+      <text x="84" y="190" text-anchor="end" font-size="11" class="svg-label">富山県</text>
+      <rect x="90" y="171" width="180.94300083822299" height="30" fill="#2196f3" rx="2"/>
+      <text x="274.943000838223" y="190" font-size="10" class="svg-label">332.1千円</text>
+    
+      <text x="84" y="226" text-anchor="end" font-size="11" class="svg-label">神奈川県</text>
+      <rect x="90" y="207" width="180.12573344509642" height="30" fill="#42a5f5" rx="2"/>
+      <text x="274.12573344509644" y="226" font-size="10" class="svg-label">330.6千円</text>
+    
+  
+      <text x="399" y="82" text-anchor="end" font-size="11" class="svg-label">沖縄県</text>
+      <rect x="405" y="63" width="139.64375523889356" height="30" fill="#c62828" rx="2"/>
+      <text x="548.6437552388936" y="82" font-size="10" class="svg-label">256.3千円</text>
+    
+      <text x="399" y="118" text-anchor="end" font-size="11" class="svg-label">愛媛県</text>
+      <rect x="405" y="99" width="139.80720871751888" height="30" fill="#d32f2f" rx="2"/>
+      <text x="548.8072087175188" y="118" font-size="10" class="svg-label">256.6千円</text>
+    
+      <text x="399" y="154" text-anchor="end" font-size="11" class="svg-label">青森県</text>
+      <rect x="405" y="135" width="142.15004191114838" height="30" fill="#e53935" rx="2"/>
+      <text x="551.1500419111484" y="154" font-size="10" class="svg-label">260.9千円</text>
+    
+      <text x="399" y="190" text-anchor="end" font-size="11" class="svg-label">和歌山県</text>
+      <rect x="405" y="171" width="144.7652975691534" height="30" fill="#ef5350" rx="2"/>
+      <text x="553.7652975691534" y="190" font-size="10" class="svg-label">265.7千円</text>
+    
+      <text x="399" y="226" text-anchor="end" font-size="11" class="svg-label">宮崎県</text>
+      <rect x="405" y="207" width="146.89019279128252" height="30" fill="#e57373" rx="2"/>
+      <text x="555.8901927912825" y="226" font-size="10" class="svg-label">269.6千円</text>
+    
+  <text x="340" y="282" text-anchor="middle" font-size="10" class="svg-legend">凡例: 青系=上位 / 赤系=下位</text>
+</svg>
