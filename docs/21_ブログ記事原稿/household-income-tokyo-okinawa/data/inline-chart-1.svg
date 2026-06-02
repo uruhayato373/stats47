@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 300" role="img" aria-label="勤労者世帯の実収入ランキング上位10・下位5（2024年）">
+  <rect width="100%" height="100%" fill="#f8fafc" rx="6"/>
+  <text x="10" y="20" font-size="13" font-weight="bold" fill="#1e293b">勤労者世帯 実収入ランキング（2024年）</text>
+  <text x="114" y="48" text-anchor="end" font-size="12" fill="#475569">1. 東京都</text>
+  <rect x="124" y="32" width="480" height="20" fill="#1d4ed8" rx="2"/>
+  <text x="610" y="48" font-size="11" fill="#334155">794千円</text>
+  <text x="114" y="74" text-anchor="end" font-size="12" fill="#475569">2. 埼玉県</text>
+  <rect x="124" y="58" width="461.8" height="20" fill="#3b82f6" rx="2"/>
+  <text x="592" y="74" font-size="11" fill="#334155">765千円</text>
+  <text x="114" y="100" text-anchor="end" font-size="12" fill="#475569">3. 千葉県</text>
+  <rect x="124" y="84" width="453" height="20" fill="#3b82f6" rx="2"/>
+  <text x="583" y="100" font-size="11" fill="#334155">750千円</text>
+  <text x="114" y="126" text-anchor="end" font-size="12" fill="#475569">4. 奈良県</text>
+  <rect x="124" y="110" width="446.6" height="20" fill="#3b82f6" rx="2"/>
+  <text x="576" y="126" font-size="11" fill="#334155">739千円</text>
+  <text x="114" y="152" text-anchor="end" font-size="12" fill="#475569">5. 神奈川県</text>
+  <rect x="124" y="136" width="416.4" height="20" fill="#3b82f6" rx="2"/>
+  <text x="546" y="152" font-size="11" fill="#334155">691千円</text>
+  <!-- Osaka annotation -->
+  <text x="114" y="196" text-anchor="end" font-size="12" fill="#f97316">37. 大阪府</text>
+  <rect x="124" y="180" width="351.2" height="20" fill="#fdba74" rx="2"/>
+  <text x="481" y="196" font-size="11" fill="#334155">582千円</text>
+  <!-- Okinawa -->
+  <text x="114" y="252" text-anchor="end" font-size="12" fill="#475569">47. 沖縄県</text>
+  <rect x="124" y="236" width="298.2" height="20" fill="#fca5a5" rx="2"/>
+  <text x="428" y="252" font-size="11" fill="#334155">494千円</text>
+  <text x="360" y="292" text-anchor="middle" font-size="11" fill="#64748b">出典：総務省「家計調査」（2024年）</text>
+</svg>
