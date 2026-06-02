@@ -1088,4 +1088,116 @@ export const AFFILIATE_ADS: AffiliateAd[] = [
     "width": null, "height": null,
     "createdAt": "2026-06-02 00:00:00", "updatedAt": "2026-06-02 00:00:00"
   },
+  // ── AI就労支援 300×250バナー — 全8カテゴリ blog-bottom (priority 85) + area-sidebar (priority 95) ─
+  // AI を活用した就労支援サービス（転職・キャリア系）。広く全ページに露出させる。
+  // blog/ranking/category/tag/theme は categoryKey マッチで上位N件 (location 無関係)。
+  // area ページは locationCode=area-sidebar の banner を別枠で上位2件表示するため別エントリ。
+  {
+    "id": "af_ai_jobsupport_economy_001",
+    "title": "AI就労支援",
+    "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B5LK5+6PQ0DU+47GS+HVNAP",
+    "areaCode": null, "categoryKey": "economy", "locationCode": "blog-bottom",
+    "isActive": true, "priority": 85, "startDate": null, "endDate": null, "targetCategories": null,
+    "adType": "banner",
+    "imageUrl": "https://www22.a8.net/svt/bgt?aid=260601701406&wid=001&eno=01&mid=s00000019630003003000&mc=1",
+    "trackingPixelUrl": "https://www12.a8.net/0.gif?a8mat=4B5LK5+6PQ0DU+47GS+HVNAP",
+    "width": 300, "height": 250,
+    "createdAt": "2026-06-02 00:00:00", "updatedAt": "2026-06-02 00:00:00"
+  },
+  {
+    "id": "af_ai_jobsupport_labor_001",
+    "title": "AI就労支援",
+    "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B5LK5+6PQ0DU+47GS+HVNAP",
+    "areaCode": null, "categoryKey": "laborwage", "locationCode": "blog-bottom",
+    "isActive": true, "priority": 85, "startDate": null, "endDate": null, "targetCategories": null,
+    "adType": "banner",
+    "imageUrl": "https://www22.a8.net/svt/bgt?aid=260601701406&wid=001&eno=01&mid=s00000019630003003000&mc=1",
+    "trackingPixelUrl": "https://www12.a8.net/0.gif?a8mat=4B5LK5+6PQ0DU+47GS+HVNAP",
+    "width": 300, "height": 250,
+    "createdAt": "2026-06-02 00:00:00", "updatedAt": "2026-06-02 00:00:00"
+  },
+  {
+    "id": "af_ai_jobsupport_population_001",
+    "title": "AI就労支援",
+    "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B5LK5+6PQ0DU+47GS+HVNAP",
+    "areaCode": null, "categoryKey": "population", "locationCode": "blog-bottom",
+    "isActive": true, "priority": 85, "startDate": null, "endDate": null, "targetCategories": null,
+    "adType": "banner",
+    "imageUrl": "https://www22.a8.net/svt/bgt?aid=260601701406&wid=001&eno=01&mid=s00000019630003003000&mc=1",
+    "trackingPixelUrl": "https://www12.a8.net/0.gif?a8mat=4B5LK5+6PQ0DU+47GS+HVNAP",
+    "width": 300, "height": 250,
+    "createdAt": "2026-06-02 00:00:00", "updatedAt": "2026-06-02 00:00:00"
+  },
+  {
+    "id": "af_ai_jobsupport_tourism_001",
+    "title": "AI就労支援",
+    "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B5LK5+6PQ0DU+47GS+HVNAP",
+    "areaCode": null, "categoryKey": "tourism", "locationCode": "blog-bottom",
+    "isActive": true, "priority": 85, "startDate": null, "endDate": null, "targetCategories": null,
+    "adType": "banner",
+    "imageUrl": "https://www22.a8.net/svt/bgt?aid=260601701406&wid=001&eno=01&mid=s00000019630003003000&mc=1",
+    "trackingPixelUrl": "https://www12.a8.net/0.gif?a8mat=4B5LK5+6PQ0DU+47GS+HVNAP",
+    "width": 300, "height": 250,
+    "createdAt": "2026-06-02 00:00:00", "updatedAt": "2026-06-02 00:00:00"
+  },
+  {
+    "id": "af_ai_jobsupport_construction_001",
+    "title": "AI就労支援",
+    "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B5LK5+6PQ0DU+47GS+HVNAP",
+    "areaCode": null, "categoryKey": "construction", "locationCode": "blog-bottom",
+    "isActive": true, "priority": 85, "startDate": null, "endDate": null, "targetCategories": null,
+    "adType": "banner",
+    "imageUrl": "https://www22.a8.net/svt/bgt?aid=260601701406&wid=001&eno=01&mid=s00000019630003003000&mc=1",
+    "trackingPixelUrl": "https://www12.a8.net/0.gif?a8mat=4B5LK5+6PQ0DU+47GS+HVNAP",
+    "width": 300, "height": 250,
+    "createdAt": "2026-06-02 00:00:00", "updatedAt": "2026-06-02 00:00:00"
+  },
+  {
+    "id": "af_ai_jobsupport_health_001",
+    "title": "AI就労支援",
+    "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B5LK5+6PQ0DU+47GS+HVNAP",
+    "areaCode": null, "categoryKey": "socialsecurity", "locationCode": "blog-bottom",
+    "isActive": true, "priority": 85, "startDate": null, "endDate": null, "targetCategories": null,
+    "adType": "banner",
+    "imageUrl": "https://www22.a8.net/svt/bgt?aid=260601701406&wid=001&eno=01&mid=s00000019630003003000&mc=1",
+    "trackingPixelUrl": "https://www12.a8.net/0.gif?a8mat=4B5LK5+6PQ0DU+47GS+HVNAP",
+    "width": 300, "height": 250,
+    "createdAt": "2026-06-02 00:00:00", "updatedAt": "2026-06-02 00:00:00"
+  },
+  {
+    "id": "af_ai_jobsupport_energy_001",
+    "title": "AI就労支援",
+    "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B5LK5+6PQ0DU+47GS+HVNAP",
+    "areaCode": null, "categoryKey": "energy", "locationCode": "blog-bottom",
+    "isActive": true, "priority": 85, "startDate": null, "endDate": null, "targetCategories": null,
+    "adType": "banner",
+    "imageUrl": "https://www22.a8.net/svt/bgt?aid=260601701406&wid=001&eno=01&mid=s00000019630003003000&mc=1",
+    "trackingPixelUrl": "https://www12.a8.net/0.gif?a8mat=4B5LK5+6PQ0DU+47GS+HVNAP",
+    "width": 300, "height": 250,
+    "createdAt": "2026-06-02 00:00:00", "updatedAt": "2026-06-02 00:00:00"
+  },
+  {
+    "id": "af_ai_jobsupport_furusato_001",
+    "title": "AI就労支援",
+    "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B5LK5+6PQ0DU+47GS+HVNAP",
+    "areaCode": null, "categoryKey": "administrativefinancial", "locationCode": "blog-bottom",
+    "isActive": true, "priority": 85, "startDate": null, "endDate": null, "targetCategories": null,
+    "adType": "banner",
+    "imageUrl": "https://www22.a8.net/svt/bgt?aid=260601701406&wid=001&eno=01&mid=s00000019630003003000&mc=1",
+    "trackingPixelUrl": "https://www12.a8.net/0.gif?a8mat=4B5LK5+6PQ0DU+47GS+HVNAP",
+    "width": 300, "height": 250,
+    "createdAt": "2026-06-02 00:00:00", "updatedAt": "2026-06-02 00:00:00"
+  },
+  {
+    "id": "af_ai_jobsupport_area_001",
+    "title": "AI就労支援",
+    "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B5LK5+6PQ0DU+47GS+HVNAP",
+    "areaCode": null, "categoryKey": "laborwage", "locationCode": "area-sidebar",
+    "isActive": true, "priority": 95, "startDate": null, "endDate": null, "targetCategories": null,
+    "adType": "banner",
+    "imageUrl": "https://www22.a8.net/svt/bgt?aid=260601701406&wid=001&eno=01&mid=s00000019630003003000&mc=1",
+    "trackingPixelUrl": "https://www12.a8.net/0.gif?a8mat=4B5LK5+6PQ0DU+47GS+HVNAP",
+    "width": 300, "height": 250,
+    "createdAt": "2026-06-02 00:00:00", "updatedAt": "2026-06-02 00:00:00"
+  },
 ];
