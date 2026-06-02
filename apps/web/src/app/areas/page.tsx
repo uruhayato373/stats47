@@ -53,14 +53,14 @@ export default function AreasPage() {
                 地図をクリックして都道府県の特徴を見る
             </p>
 
-            <div className="flex flex-col lg:flex-row lg:gap-8">
+            <div className="grid gap-8 lg:grid-cols-[minmax(0,480px)_1fr] lg:items-start">
               {/* 左: タイルグリッドマップ */}
-              <div className="lg:w-1/2">
+              <div>
                 <AreaSelectorMap />
               </div>
 
-              {/* 右: 地方ブロック別リンク */}
-              <div className="mt-6 lg:mt-0 lg:w-1/2 space-y-4">
+              {/* 右: 地方ブロック別リンク (残り幅を 2 カラムで活用) */}
+              <div className="mt-6 grid gap-x-6 gap-y-5 sm:grid-cols-2 lg:mt-0">
                 {REGIONS.map((region) => {
                     const regionPrefs = region.prefectures
                         .map((code) => prefMap.get(code))
