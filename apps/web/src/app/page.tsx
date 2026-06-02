@@ -158,7 +158,7 @@ export default async function HomePage() {
     <div className="w-full" suppressHydrationWarning>
       {/* ① Hero (暗色 — ブランドのエントリー) */}
       <section className="px-4 pt-4 pb-2">
-        <div className="mx-auto max-w-[1400px]">
+        <div className="mx-auto max-w-[1700px]">
           <HeroShell variant="dark">
             <div className="grid grid-cols-1 gap-8 p-8 lg:grid-cols-[1fr,360px] lg:items-center lg:p-10">
               <div className="min-w-0">
@@ -212,7 +212,7 @@ export default async function HomePage() {
 
       {/* ③ 3 切り口の discovery (検索意図に最短接続) */}
       <section className="px-4 py-8">
-        <div className="mx-auto max-w-[1400px]">
+        <div className="mx-auto max-w-[1700px]">
           <h2 className="mb-4 text-lg font-bold">データを探す</h2>
           <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
             {DISCOVERY_CARDS.map((card) => {
@@ -244,7 +244,7 @@ export default async function HomePage() {
       {/* ④ 統計ブログ */}
       {latestArticles.length > 0 && (
         <section className="px-4 py-8">
-          <div className="mx-auto max-w-[1400px]">
+          <div className="mx-auto max-w-[1700px]">
             <div className="mb-4 flex items-center justify-between">
               <h2 className="text-lg font-bold">統計ブログ</h2>
               <Link
@@ -290,7 +290,7 @@ export default async function HomePage() {
 
       {/* ⑤ ふるさと納税 4 県ネイティブ枠 (マスタープラン § 5.3) */}
       <section className="px-4 py-8">
-        <div className="mx-auto max-w-[1400px]">
+        <div className="mx-auto max-w-[1700px]">
           <div
             className="overflow-hidden rounded-2xl border border-amber-200 shadow-sm"
             style={{
@@ -361,7 +361,7 @@ export default async function HomePage() {
 
       {/* ⑥ データパック CTA (マスタープラン § 3.3) */}
       <section className="px-4 py-8">
-        <div className="mx-auto max-w-[1400px]">
+        <div className="mx-auto max-w-[1700px]">
           <div
             className="flex flex-col items-start gap-4 rounded-2xl border border-primary/20 p-6 shadow-sm sm:flex-row sm:items-center"
             style={{
@@ -404,7 +404,7 @@ export default async function HomePage() {
 
       {/* ⑦ 次に読む (回遊リンク強化) */}
       <section className="px-4 pb-8">
-        <div className="mx-auto max-w-[1400px]">
+        <div className="mx-auto max-w-[1700px]">
           <NextUpGrid
             title="このサイトの主要ページ"
             moreHref="/themes"

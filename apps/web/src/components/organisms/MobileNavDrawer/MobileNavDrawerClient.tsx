@@ -17,19 +17,18 @@ import {
   ArrowLeftRight,
   BookOpen,
   Home,
-  LayoutDashboard,
   MapPin,
   Search,
   TrendingUp,
 } from "lucide-react";
+
+import { CategoryAccordion } from "@/components/organisms/Sidebar/CategoryAccordion";
 
 import type { Category } from "@/features/category";
 
 import { useBreakpoint } from "@/hooks/useBreakpoint";
 
 import { useSidebarStore } from "@/store/sidebar-store";
-
-import { CategoryAccordion } from "@/components/organisms/Sidebar/CategoryAccordion";
 
 interface MobileNavDrawerClientProps {
   categories: Category[];

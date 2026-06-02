@@ -2,6 +2,8 @@ import Link from "next/link";
 
 import { fetchPrefectures, REGIONS } from "@stats47/area";
 
+import { PageShell } from "@/components/layout";
+
 import { AreaSelectorMap } from "@/features/area-profile";
 
 import { AdSenseAd, RANKING_PAGE_FOOTER } from "@/lib/google-adsense";
@@ -41,7 +43,7 @@ export default function AreasPage() {
     };
 
     return (
-        <div className="container mx-auto px-4 py-4 text-foreground">
+        <PageShell>
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
@@ -99,6 +101,6 @@ export default function AreasPage() {
                 slotId={RANKING_PAGE_FOOTER.slotId}
               />
             </div>
-        </div>
+        </PageShell>
     );
 }

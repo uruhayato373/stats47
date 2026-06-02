@@ -12,6 +12,8 @@ import {
   CardTitle,
 } from "@stats47/components/atoms/ui/card";
 
+import { PageShell } from "@/components/layout";
+
 import { generateOGMetadata } from "@/lib/metadata/og-generator";
 
 import type { Metadata } from "next";
@@ -36,7 +38,7 @@ export const metadata: Metadata = {
  */
 export default function TermsPage() {
   return (
-    <div className="container mx-auto px-4 py-8 max-w-4xl">
+    <PageShell variant="reading">
       <div className="mb-8">
         <h1 className="text-lg font-bold mb-4">利用規約</h1>
         <p className="text-muted-foreground leading-relaxed">
@@ -314,6 +316,6 @@ export default function TermsPage() {
           </CardContent>
         </Card>
       </div>
-    </div>
+    </PageShell>
   );
 }

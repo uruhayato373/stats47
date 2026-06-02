@@ -160,7 +160,7 @@ export default async function SurveyPage({ params }: PageProps) {
     <div className="container mx-auto px-4 py-4 text-foreground">
       {/* Hero (D 暗色) — マスタープラン § 5.3 準拠 */}
       <HeroShell variant="dark" className="mb-6">
-        <div className="grid grid-cols-1 gap-6 p-6 md:grid-cols-[1fr,420px] md:p-8">
+        <div className="grid grid-cols-1 gap-6 p-6 md:grid-cols-[1fr,360px] md:p-8">
           <div className="min-w-0">
             <p className="inline-flex items-center gap-1.5 rounded-full bg-white/15 px-2.5 py-0.5 text-[10.5px] font-bold uppercase tracking-widest text-white">
               📊 政府統計

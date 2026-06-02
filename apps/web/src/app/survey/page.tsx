@@ -14,6 +14,8 @@ import {
 } from "@stats47/ranking/server";
 import { isOk } from "@stats47/types";
 
+import { PageShell } from "@/components/layout";
+
 import { AdSenseAd, CONTENT_FOOTER } from "@/lib/google-adsense";
 import { generateOGMetadata } from "@/lib/metadata/og-generator";
 
@@ -60,7 +62,7 @@ export default async function SurveyIndexPage() {
   });
 
   return (
-    <div className="container mx-auto px-4 py-6 text-foreground">
+    <PageShell>
       <div className="mb-6">
         <h1 className="text-lg font-bold">調査別ランキング一覧</h1>
         <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
@@ -103,6 +105,6 @@ export default async function SurveyIndexPage() {
       <div className="mt-8">
         <AdSenseAd format={CONTENT_FOOTER.format} slotId={CONTENT_FOOTER.slotId} />
       </div>
-    </div>
+    </PageShell>
   );
 }

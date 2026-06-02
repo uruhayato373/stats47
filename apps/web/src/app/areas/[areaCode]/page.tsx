@@ -144,7 +144,7 @@ export default async function AreaProfilePage({ params }: PageProps) {
 
             {/* 2 カラムレイアウト (xl+ で右サイドバー、xl 未満は main のみ) */}
             <div className="container mx-auto px-4 py-10">
-                <div className="xl:grid xl:grid-cols-[minmax(0,1fr)_360px] xl:gap-5 xl:items-start">
+                <div className="xl:grid xl:grid-cols-[minmax(0,1fr)_360px] xl:gap-8 xl:items-start">
                     <main className="min-w-0 space-y-10">
                     {/* DB管理チャート */}
                     <AreaChartSection
