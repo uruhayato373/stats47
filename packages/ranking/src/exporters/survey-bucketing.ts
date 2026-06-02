@@ -14,48 +14,28 @@
  */
 
 import {
-  resolveSourceProvenance,
+  isSsdsStatsDataId,
+  resolveProvenanceByParams,
   type ProvenanceSurvey,
-  type SourceConfig,
 } from "@stats47/data-configs";
 
 import type { RankingItem } from "../types/ranking-item";
 
-const SSDS_NAME = "社会・人口統計体系";
-
-/** sourceConfig から「系列/データベース名」を頑健に取り出す (collection / source / survey いずれか)。 */
-function collectionName(item: RankingItem): string | undefined {
-  const sc = item.sourceConfig as
-    | {
-        collection?: { name?: string };
-        source?: { name?: string };
-        survey?: { name?: string };
-      }
-    | null
-    | undefined;
-  return sc?.collection?.name ?? sc?.source?.name ?? sc?.survey?.name;
-}
-
-/** item が SSDS (二次統計) 由来か。 */
+/** item が SSDS (二次統計) 由来か = statsDataId が SSDS テーブル (param 統一ルールと整合)。 */
 export function isSsdsItem(item: RankingItem): boolean {
-  return collectionName(item)?.startsWith(SSDS_NAME) ?? false;
+  return isSsdsStatsDataId(item.sourceConfig?.statsDataId);
 }
 
 /**
- * SSDS item の原典 survey を sourceConfig.cdCat01 から解決する。
- * 非SSDS / cdCat01 無し / 解決不能なら空配列。
+ * SSDS item の原典 survey を sourceConfig (statsDataId/cdCat01) から解決する。
+ * 非SSDS / 解決不能なら空配列。param 単一ルール (resolveProvenanceByParams) を共有。
  */
 export function resolveItemOriginalSurveys(item: RankingItem): ProvenanceSurvey[] {
   if (!isSsdsItem(item)) return [];
-  const cdCat01 = item.sourceConfig?.cdCat01;
-  if (!cdCat01) return [];
-  const source: SourceConfig = {
-    kind: "estat",
-    statsDataId: item.sourceConfig?.statsDataId ?? "",
-    cdCat01,
-    displayName: SSDS_NAME,
-  };
-  return resolveSourceProvenance(source);
+  return resolveProvenanceByParams(
+    item.sourceConfig?.statsDataId,
+    item.sourceConfig?.cdCat01,
+  );
 }
 
 /**

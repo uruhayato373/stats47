@@ -7,6 +7,10 @@ import {
   surveyBucketsForItem,
 } from "./survey-bucketing";
 
+// 0000010103 = SSDS 都道府県テーブル / 0003445758 = 非SSDS (賃金構造基本統計調査)
+const SSDS_TABLE = "0000010103";
+const NON_SSDS = "0003445758";
+
 function item(partial: Partial<RankingItem>): RankingItem {
   return {
     rankingKey: "test",
@@ -21,26 +25,22 @@ function item(partial: Partial<RankingItem>): RankingItem {
   } as RankingItem;
 }
 
-describe("survey-bucketing", () => {
+describe("survey-bucketing (param 統一)", () => {
   it("非SSDS item は baked surveyId をそのまま使う", () => {
     const it1 = item({
-      surveyId: "kakei-chousa",
-      sourceConfig: { source: { name: "家計調査" } } as never,
+      surveyId: "wage-structure-survey",
+      sourceConfig: { statsDataId: NON_SSDS } as never,
     });
     expect(isSsdsItem(it1)).toBe(false);
-    expect(surveyBucketsForItem(it1)).toEqual(["kakei-chousa"]);
+    expect(surveyBucketsForItem(it1)).toEqual(["wage-structure-survey"]);
     expect(resolveItemOriginalSurveys(it1)).toEqual([]);
   });
 
-  it("SSDS item は cdCat01 から原典へ再分配される (誤った baked surveyId を是正)", () => {
-    // C2101 事業所数 が census(国勢調査) バケットに誤って入っている → 事業所企業統計へ
+  it("SSDS item は statsDataId+cdCat01 から原典へ再分配 (誤った baked surveyId を是正)", () => {
+    // C2101 事業所数 が census(国勢調査) バケットに誤入 → 事業所企業統計へ
     const it1 = item({
       surveyId: "census",
-      sourceConfig: {
-        statsDataId: "0000010103",
-        cdCat01: "C2101",
-        source: { name: "社会・人口統計体系" },
-      } as never,
+      sourceConfig: { statsDataId: SSDS_TABLE, cdCat01: "C2101" } as never,
     });
     expect(isSsdsItem(it1)).toBe(true);
     expect(surveyBucketsForItem(it1)).toEqual(["establishment-enterprise-census"]);
@@ -51,21 +51,15 @@ describe("survey-bucketing", () => {
     // A1101 総人口 → census + population-estimates
     const it1 = item({
       surveyId: "ssds",
-      sourceConfig: {
-        cdCat01: "A1101",
-        collection: { name: "社会・人口統計体系" },
-      } as never,
+      sourceConfig: { statsDataId: SSDS_TABLE, cdCat01: "A1101" } as never,
     });
-    expect(surveyBucketsForItem(it1).sort()).toEqual([
-      "census",
-      "population-estimates",
-    ]);
+    expect(surveyBucketsForItem(it1).sort()).toEqual(["census", "population-estimates"]);
   });
 
   it("SSDS だが cdCat01 が無い → baked surveyId にフォールバック (無regression)", () => {
     const it1 = item({
       surveyId: "ssds",
-      sourceConfig: { source: { name: "社会・人口統計体系" } } as never,
+      sourceConfig: { statsDataId: SSDS_TABLE } as never,
     });
     expect(surveyBucketsForItem(it1)).toEqual(["ssds"]);
   });
@@ -73,10 +67,7 @@ describe("survey-bucketing", () => {
   it("SSDS だが原典解決不能 → baked surveyId にフォールバック", () => {
     const it1 = item({
       surveyId: "ssds",
-      sourceConfig: {
-        cdCat01: "ZZZ9999",
-        source: { name: "社会・人口統計体系" },
-      } as never,
+      sourceConfig: { statsDataId: SSDS_TABLE, cdCat01: "ZZZ9999" } as never,
     });
     expect(surveyBucketsForItem(it1)).toEqual(["ssds"]);
   });
@@ -85,10 +76,7 @@ describe("survey-bucketing", () => {
     // K5112 災害被害額 → ssds-src:消防白書 (auto-slug、surveys.json に無い)
     const it1 = item({
       surveyId: "ssds",
-      sourceConfig: {
-        cdCat01: "K5112",
-        source: { name: "社会・人口統計体系" },
-      } as never,
+      sourceConfig: { statsDataId: SSDS_TABLE, cdCat01: "K5112" } as never,
     });
     expect(surveyBucketsForItem(it1)).toEqual(["ssds"]);
   });

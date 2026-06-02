@@ -165,6 +165,28 @@ R2 反映後に `/survey` バケットが原典ベースへ是正される。
 - exporter: `ranking/{key}/item.json` に `originalSurveys[]` を焼き込み (SSDS は cdCat01 から解決した
   本来の調査群、非SSDS は空)。ranking 詳細ページの「出典: ◯◯調査」表示の前提データを整備。
 
+### Phase 8 — e-Stat param 単一ルールへ統一 (完了) ✅
+
+旧 resolver は kind/displayName 分岐 (SSDS=cdCat01 / 非SSDS=displayName / kakei=特例) だった。
+出典は全可視化 (ranking/時系列/円グラフ) が共有する **e-Stat param** で決まるため、単一ルールに統一:
+
+```
+resolveProvenanceByParams(statsDataId, cdCat01):
+  statsDataId ∈ SSDS テーブル → cdCat01 で ssds-provenance (二次統計・複数原典)
+  それ以外                    → statsDataId で survey (一次統計・1件)
+```
+
+成果:
+- `scripts/ssds/build-estat-provenance.ts` → `src/ssds/estat-provenance.generated.json`
+  (SSDS テーブル 35 id + statsDataId→survey 44 件、1:1 競合なし、SSDS 重複除外)。
+- `resolveProvenanceByParams` / `isSsdsStatsDataId` を新設・export。`resolveSourceProvenance` の
+  estat 分岐を param 解決へ。**runtime の displayName 依存を撤廃** (displayName は表の建設時入力のみ)。
+- `survey-bucketing.ts` の SSDS 判定も `isSsdsStatsDataId` に統一 (収集名ヒューリスティック廃止)。
+- 効果: 全 metric 解決 **95.1% → 95.7%** (同一 statsDataId の正ラベル兄弟が指標ラベル metric を救済)。
+  時系列/円グラフは config が statsDataId/cdCat01 を持つため、同じ関数で出典解決可能になった。
+
+検証: resolver 8 ケース + bucketing 7 ケースを tsx で全 pass、型チェッククリーン、整合性 (master coverage) OK。
+
 ### Phase 7 — UI 出典表示 (残: アプリ実行検証が前提)
 
 > データ (survey items.json / ranking item.json の originalSurveys) は Phase 5-6 で整備済。

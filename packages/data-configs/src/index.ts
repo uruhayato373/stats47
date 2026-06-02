@@ -16,5 +16,7 @@ export {
 export {
   resolveMetricProvenance,
   resolveSourceProvenance,
+  resolveProvenanceByParams,
+  isSsdsStatsDataId,
   type ProvenanceSurvey,
 } from "./provenance/resolve-metric-provenance";
