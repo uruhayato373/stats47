@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
-
 import { HubSankey } from "@/components/charts/HubSankey";
+import { SankeyFallback } from "@/components/charts/SankeyFallback";
+import { useFlowData } from "@/components/charts/useFlowData";
 
 import type { FinanceFlowData } from "../lib/types";
 
@@ -26,64 +26,24 @@ interface Props {
 }
 
 export function FinanceSankey({ code, initialData }: Props) {
-  const [data, setData] = useState<{ code: string; data: FinanceFlowData } | null>(() =>
-    initialData && initialData.focusCode === code ? { code, data: initialData } : null,
-  );
-  const [errored, setErrored] = useState<string | null>(null);
+  const { data, errored } = useFlowData<FinanceFlowData>("finance", code, initialData);
 
-  useEffect(() => {
-    if (data?.code === code) return; // 既に保持（initialData or 取得済）
-    let cancelled = false;
-    fetch(`/api/flow/finance/${code}`)
-      .then((r) => {
-        if (!r.ok) throw new Error(String(r.status));
-        return r.json() as Promise<FinanceFlowData>;
-      })
-      .then((d) => {
-        if (!cancelled) {
-          setData({ code, data: d });
-          setErrored(null);
-        }
-      })
-      .catch(() => {
-        if (!cancelled) setErrored(code);
-      });
-    return () => {
-      cancelled = true;
-    };
-  }, [code, data]);
+  if (errored) return <SankeyFallback message="データを読み込めませんでした。" />;
+  if (!data) return <SankeyFallback message="読み込み中…" />;
 
-  const ready = data?.code === code;
-
-  if (errored === code) {
-    return (
-      <div className="flex aspect-[100/73] w-full items-center justify-center rounded-md border bg-slate-50 text-sm text-slate-500 dark:bg-slate-900">
-        データを読み込めませんでした。
-      </div>
-    );
-  }
-  if (!ready || !data) {
-    return (
-      <div className="flex aspect-[100/73] w-full items-center justify-center rounded-md border bg-slate-50 text-sm text-slate-500 dark:bg-slate-900">
-        読み込み中…
-      </div>
-    );
-  }
-
-  const d = data.data;
   return (
     <HubSankey
-      title={`${d.focusName} 財政フロー（${d.year}年度）`}
+      title={`${data.focusName} 財政フロー（${data.year}年度）`}
       subtitle="左: 歳入の財源 → 中央: 一般会計 → 右: 目的別歳出（幅=金額）"
       centerLabel="一般会計"
-      centerSub={`歳入 ${yen(d.totals.revenue)} / 歳出 ${yen(d.totals.expenditure)}`}
+      centerSub={`歳入 ${yen(data.totals.revenue)} / 歳出 ${yen(data.totals.expenditure)}`}
       centerSubColor="#64748b"
-      leftNodes={d.revenue}
-      rightNodes={d.expenditure}
+      leftNodes={data.revenue}
+      rightNodes={data.expenditure}
       leftColor={REV_COLOR}
       rightColor={EXP_COLOR}
       formatValue={yen}
-      footer={`出典: 地方財政状況調査（${d.year}年度）`}
+      footer={`出典: 地方財政状況調査（${data.year}年度）`}
       labelGutter={182}
     />
   );
