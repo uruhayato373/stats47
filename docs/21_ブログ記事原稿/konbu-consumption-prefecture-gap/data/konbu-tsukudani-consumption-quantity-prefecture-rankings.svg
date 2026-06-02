@@ -1,0 +1,65 @@
+<!-- data-source: konbu-tsukudani-consumption-quantity-prefecture-rankings.json | generated: 2026-06-02T21:24:26.621Z -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 300" width="680" height="300" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" role="img" aria-label="こんぶつくだ煮消費量 都道府県ランキング（2024年）">
+  <style>
+    .svg-bg{fill:#fafafa}
+    .svg-title{fill:#222}
+    .svg-subtitle{fill:#666}
+    .svg-label{fill:#333}
+    .svg-legend{fill:#888}
+    @media (prefers-color-scheme:dark){
+      .svg-bg{fill:#1f2937}
+      .svg-title{fill:#f9fafb}
+      .svg-subtitle{fill:#9ca3af}
+      .svg-label{fill:#e5e7eb}
+      .svg-legend{fill:#9ca3af}
+    }
+  </style>
+  <rect width="680" height="300" class="svg-bg" rx="8"/>
+  <text x="340" y="24" text-anchor="middle" font-size="16" font-weight="bold" class="svg-title">こんぶつくだ煮消費量 都道府県ランキング（2024年）</text>
+  
+  <text x="227.5" y="54" text-anchor="middle" font-size="12" font-weight="bold" fill="#1565c0">上位 5</text>
+  <text x="542.5" y="54" text-anchor="middle" font-size="12" font-weight="bold" fill="#c62828">下位 5</text>
+  
+      <text x="84" y="82" text-anchor="end" font-size="11" class="svg-label">福井県</text>
+      <rect x="90" y="63" width="195" height="30" fill="#1565c0" rx="2"/>
+      <text x="289" y="82" font-size="10" class="svg-label">769g</text>
+    
+      <text x="84" y="118" text-anchor="end" font-size="11" class="svg-label">和歌山県</text>
+      <rect x="90" y="99" width="179.27828348504553" height="30" fill="#1976d2" rx="2"/>
+      <text x="273.27828348504556" y="118" font-size="10" class="svg-label">707g</text>
+    
+      <text x="84" y="154" text-anchor="end" font-size="11" class="svg-label">富山県</text>
+      <rect x="90" y="135" width="178.51755526657996" height="30" fill="#1e88e5" rx="2"/>
+      <text x="272.51755526657996" y="154" font-size="10" class="svg-label">704g</text>
+    
+      <text x="84" y="190" text-anchor="end" font-size="11" class="svg-label">長野県</text>
+      <rect x="90" y="171" width="165.07802340702213" height="30" fill="#2196f3" rx="2"/>
+      <text x="259.0780234070221" y="190" font-size="10" class="svg-label">651g</text>
+    
+      <text x="84" y="226" text-anchor="end" font-size="11" class="svg-label">福島県</text>
+      <rect x="90" y="207" width="160.00650195058518" height="30" fill="#42a5f5" rx="2"/>
+      <text x="254.00650195058518" y="226" font-size="10" class="svg-label">631g</text>
+    
+  
+      <text x="399" y="82" text-anchor="end" font-size="11" class="svg-label">沖縄県</text>
+      <rect x="405" y="63" width="45.39011703511053" height="30" fill="#c62828" rx="2"/>
+      <text x="454.3901170351105" y="82" font-size="10" class="svg-label">179g</text>
+    
+      <text x="399" y="118" text-anchor="end" font-size="11" class="svg-label">愛媛県</text>
+      <rect x="405" y="99" width="71.00130039011702" height="30" fill="#d32f2f" rx="2"/>
+      <text x="480.001300390117" y="118" font-size="10" class="svg-label">280g</text>
+    
+      <text x="399" y="154" text-anchor="end" font-size="11" class="svg-label">広島県</text>
+      <rect x="405" y="135" width="83.17295188556568" height="30" fill="#e53935" rx="2"/>
+      <text x="492.1729518855657" y="154" font-size="10" class="svg-label">328g</text>
+    
+      <text x="399" y="190" text-anchor="end" font-size="11" class="svg-label">福岡県</text>
+      <rect x="405" y="171" width="83.68010403120935" height="30" fill="#ef5350" rx="2"/>
+      <text x="492.68010403120934" y="190" font-size="10" class="svg-label">330g</text>
+    
+      <text x="399" y="226" text-anchor="end" font-size="11" class="svg-label">千葉県</text>
+      <rect x="405" y="207" width="87.23016905071522" height="30" fill="#e57373" rx="2"/>
+      <text x="496.23016905071523" y="226" font-size="10" class="svg-label">344g</text>
+    
+  <text x="340" y="282" text-anchor="middle" font-size="10" class="svg-legend">凡例: 青系=上位 / 赤系=下位</text>
+</svg>
