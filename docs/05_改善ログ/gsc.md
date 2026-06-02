@@ -100,24 +100,27 @@ git TS config (`packages/data-configs/src/metrics/<key>.ts`) の編集は**現�
 
 → **影響**: R4 の 57 件 (汚染タイトルが現在 SERP に表示中) と R1 の編集は、**この refresh フローを作って CI で R2 push するまで本番に届かない**。
 
-#### R0 (前提作業): config→item.json seo フィールド refresh exporter
+#### R0 (前提作業): config→item.json seo フィールド refresh exporter — ✅ 実装済 (2026-06-02)
 
 | 項目 | 内容 |
 |---|---|
-| やること | metrics registry (or SQLite cache) の seo_title/seo_description/title 等を読み、各 `app/ranking/<key>/item.json` の対応フィールドを patch して saveToR2 |
-| 配置案 | `packages/ranking/src/exporters/` に新規 (per-url exporter の follow-up として既にコメントで予告済) |
-| 実行 | CI (`sync-snapshots.yml` 等)。R2 write はローカル禁止 (`_assert-ci-write.ts`) |
-| 検証 | push 後 `curl https://storage.stats47.jp/app/ranking/<key>/item.json` で seoTitle が config 値と一致 |
-| status | **未着手 (要オーナー判断: 新規 exporter を作るか、既存の想定フローがあるか)** |
+| やること | `listAllMetrics()` の seoTitle/seoDescription を読み、各 `app/ranking/<key>/item.json` を patch (config 優先・未定義は既存温存)。他フィールドは verbatim 保持 |
+| 実装 | `packages/ranking/src/exporters/ranking-item-seo-refresh.ts` (`refreshRankingItemSeoFields`) + CLI `packages/ranking/src/scripts/refresh-item-seo.ts` (dry-run 既定 / `--apply` / `--only`) |
+| CI 配線 | `sync-snapshots` run.sh の TASKS に `item-seo-refresh` を **master の直後**に追加 (`--apply`)。master が .local/r2 に materialize → R0 が 59 件上書き → diff-push-r2 で反映 |
+| 既存フロー調査 | populate/register スキルは不在。per-url exporter・export-master・listRankingItemsWithTagsFromR2 は全て R2 item.json の閉ループで config を読まないことを確認 → 新規 exporter が必要と確定 |
+| dry-run 検証 | 全 2,209 metric で **patched=59 (R4の57+R1の2) / unchanged=2,146 / missing=4**。意図した範囲のみ検出を確認 (公開URL読取・無書込) |
+| 本番反映 | `sync-snapshots.yml` を CI 実行 → diff-push 後 `curl …/app/ranking/<key>/item.json` で seoTitle が config 値と一致するか検証 (**未実行 = 次の手番**) |
+| status | **実装済・CI 未実行**。merge 後に sync-snapshots を回せば R1/R4 が本番反映される |
 
 ### 次アクション (順序) — R0 ブロッカー反映後に更新
 
-1. ✅ **R4 (config 修正 + lint 拡張)** — 57 件 seoTitle/desc の time-code 除去 + validator 拡張 (commit 済)。**ただし本番反映は R0 待ち**
-2. ✅ **R1 試作 (wheat-flour 2件)** — seoTitle 問い化 (commit 済)。**本番反映は R0 待ち**
-3. 🚧 **R0 (config→item.json refresh exporter)** — R1/R4 を本番に届ける前提。オーナー判断待ち
-4. R1 候補 top8 残り の seoTitle 問い化 (R0 確立後)
-5. R2 (retail 等 ai-content 再生成) + R3 (FAQ prompt PAA 化)
-6. B1 (blog 既存波の effect 計測) — 06-20/06-26 期日に合わせる
+1. ✅ **R4 (config 修正 + lint 拡張)** — 57 件 seoTitle/desc の time-code 除去 + validator 拡張 (commit 済)
+2. ✅ **R1 試作 (wheat-flour 2件)** — seoTitle 問い化 (commit 済)
+3. ✅ **R0 (config→item.json refresh exporter)** — 実装 + CI 配線 + dry-run 検証済 (commit 済)
+4. ⏭ **sync-snapshots.yml を CI 実行** — R0 で R1/R4 を本番反映 → curl で検証 (次の手番)
+5. R1 候補 top8 残り の seoTitle 問い化
+6. R2 (retail 等 ai-content 再生成) + R3 (FAQ prompt PAA 化)
+7. B1 (blog 既存波の effect 計測) — 06-20/06-26 期日に合わせる
 
 ## [BLOG-WAVE-2026-05-29-auto] GSC 改善余地上位 4 記事 auto-brushup (cloud session)
 
