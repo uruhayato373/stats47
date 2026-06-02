@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 300" role="img" aria-labelledby="natto-bottom-title" font-family="sans-serif">
+  <title id="natto-bottom-title">納豆消費支出額 下位6県（2024年・円）</title>
+  <style>
+    .barlabel2 { fill: currentColor; font-size: 13px; }
+    .barvalue2 { fill: currentColor; font-size: 12px; }
+    .west { fill: #dc2626; }
+  </style>
+  <text x="16" y="24" font-size="15" font-weight="bold" fill="currentColor">納豆消費支出額 下位6県（2024年・円）</text>
+  <g transform="translate(0,40)">
+    <g transform="translate(0,0)"><text class="barlabel2" x="16" y="14">兵庫</text><rect class="west" x="80" y="3" width="230" height="16"/><text class="barvalue2" x="316" y="16">3603</text></g>
+    <g transform="translate(0,22)"><text class="barlabel2" x="16" y="14">高知</text><rect class="west" x="80" y="3" width="216" height="16"/><text class="barvalue2" x="302" y="16">3380</text></g>
+    <g transform="translate(0,44)"><text class="barlabel2" x="16" y="14">大阪</text><rect class="west" x="80" y="3" width="205" height="16"/><text class="barvalue2" x="291" y="16">3208</text></g>
+    <g transform="translate(0,66)"><text class="barlabel2" x="16" y="14">徳島</text><rect class="west" x="80" y="3" width="202" height="16"/><text class="barvalue2" x="288" y="16">3167</text></g>
+    <g transform="translate(0,88)"><text class="barlabel2" x="16" y="14">香川</text><rect class="west" x="80" y="3" width="195" height="16"/><text class="barvalue2" x="281" y="16">3054</text></g>
+    <g transform="translate(0,110)"><text class="barlabel2" x="16" y="14">和歌山</text><rect class="west" x="80" y="3" width="168" height="16"/><text class="barvalue2" x="254" y="16">2627</text></g>
+  </g>
+  <text x="16" y="200" font-size="11" fill="currentColor">赤：西日本（近畿・四国）。最下位6県はすべて西日本</text>
+</svg>

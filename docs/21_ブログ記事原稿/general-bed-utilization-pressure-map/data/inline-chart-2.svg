@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 220" role="img" aria-label="病床利用率 下位5県 2024">
+  <style>
+    .bar2 { fill: #dc2626; }
+    .lbl { fill: currentColor; font-size: 13px; font-family: sans-serif; }
+    .val { fill: currentColor; font-size: 12px; font-family: sans-serif; }
+    .axis { stroke: currentColor; opacity: 0.3; }
+  </style>
+  <text class="lbl" x="8" y="20" style="font-size:14px;font-weight:bold;">病床利用率 下位5県(％・2024)</text>
+  <g transform="translate(80,36)">
+    <line class="axis" x1="0" y1="0" x2="0" y2="150" />
+    <g transform="translate(0,0)"><text class="lbl" x="-72" y="14">愛媛県</text><rect class="bar2" x="0" y="4" width="360" height="16" /><text class="val" x="366" y="17">72.0</text></g>
+    <g transform="translate(0,28)"><text class="lbl" x="-72" y="14">岩手県</text><rect class="bar2" x="0" y="4" width="360" height="16" /><text class="val" x="366" y="17">71.9</text></g>
+    <g transform="translate(0,56)"><text class="lbl" x="-72" y="14">茨城県</text><rect class="bar2" x="0" y="4" width="359" height="16" /><text class="val" x="365" y="17">71.8</text></g>
+    <g transform="translate(0,84)"><text class="lbl" x="-72" y="14">岐阜県</text><rect class="bar2" x="0" y="4" width="357" height="16" /><text class="val" x="363" y="17">71.4</text></g>
+    <g transform="translate(0,112)"><text class="lbl" x="-72" y="14">福島県</text><rect class="bar2" x="0" y="4" width="332" height="16" /><text class="val" x="338" y="17">66.4</text></g>
+  </g>
+</svg>

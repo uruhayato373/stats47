@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 460" role="img" aria-labelledby="natto-top-title" font-family="sans-serif">
+  <title id="natto-top-title">納豆消費支出額 上位10県（2024年・円）</title>
+  <style>
+    .barlabel { fill: currentColor; font-size: 13px; }
+    .barvalue { fill: currentColor; font-size: 12px; }
+    .east { fill: #2563eb; }
+  </style>
+  <text x="16" y="24" font-size="15" font-weight="bold" fill="currentColor">納豆消費支出額 上位10県（2024年・円）</text>
+  <g transform="translate(0,40)">
+    <g transform="translate(0,0)"><text class="barlabel" x="16" y="14">福島</text><rect class="east" x="80" y="3" width="500" height="16"/><text class="barvalue" x="586" y="16">7830</text></g>
+    <g transform="translate(0,22)"><text class="barlabel" x="16" y="14">秋田</text><rect class="east" x="80" y="3" width="460" height="16"/><text class="barvalue" x="546" y="16">7199</text></g>
+    <g transform="translate(0,44)"><text class="barlabel" x="16" y="14">青森</text><rect class="east" x="80" y="3" width="446" height="16"/><text class="barvalue" x="532" y="16">6984</text></g>
+    <g transform="translate(0,66)"><text class="barlabel" x="16" y="14">岩手</text><rect class="east" x="80" y="3" width="432" height="16"/><text class="barvalue" x="518" y="16">6769</text></g>
+    <g transform="translate(0,88)"><text class="barlabel" x="16" y="14">茨城</text><rect class="east" x="80" y="3" width="423" height="16"/><text class="barvalue" x="509" y="16">6627</text></g>
+    <g transform="translate(0,110)"><text class="barlabel" x="16" y="14">長野</text><rect class="east" x="80" y="3" width="421" height="16"/><text class="barvalue" x="507" y="16">6584</text></g>
+    <g transform="translate(0,132)"><text class="barlabel" x="16" y="14">山形</text><rect class="east" x="80" y="3" width="416" height="16"/><text class="barvalue" x="502" y="16">6512</text></g>
+    <g transform="translate(0,154)"><text class="barlabel" x="16" y="14">宮城</text><rect class="east" x="80" y="3" width="393" height="16"/><text class="barvalue" x="479" y="16">6146</text></g>
+    <g transform="translate(0,176)"><text class="barlabel" x="16" y="14">富山</text><rect class="east" x="80" y="3" width="392" height="16"/><text class="barvalue" x="478" y="16">6132</text></g>
+    <g transform="translate(0,198)"><text class="barlabel" x="16" y="14">栃木</text><rect class="east" x="80" y="3" width="390" height="16"/><text class="barvalue" x="476" y="16">6110</text></g>
+  </g>
+  <text x="16" y="300" font-size="11" fill="currentColor">青：東日本（東北・北関東・甲信越）。上位10県のうち9県が東日本</text>
+</svg>

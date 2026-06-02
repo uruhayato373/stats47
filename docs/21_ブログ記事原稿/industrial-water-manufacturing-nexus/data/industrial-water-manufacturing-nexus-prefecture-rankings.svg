@@ -1,0 +1,65 @@
+<!-- data-source: industrial-water-manufacturing-nexus-prefecture-rankings.json | generated: 2026-06-02T21:30:34.348Z -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 300" width="680" height="300" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" role="img" aria-label="工業用水量 都道府県ランキング（2015年）">
+  <style>
+    .svg-bg{fill:#fafafa}
+    .svg-title{fill:#222}
+    .svg-subtitle{fill:#666}
+    .svg-label{fill:#333}
+    .svg-legend{fill:#888}
+    @media (prefers-color-scheme:dark){
+      .svg-bg{fill:#1f2937}
+      .svg-title{fill:#f9fafb}
+      .svg-subtitle{fill:#9ca3af}
+      .svg-label{fill:#e5e7eb}
+      .svg-legend{fill:#9ca3af}
+    }
+  </style>
+  <rect width="680" height="300" class="svg-bg" rx="8"/>
+  <text x="340" y="24" text-anchor="middle" font-size="16" font-weight="bold" class="svg-title">工業用水量 都道府県ランキング（2015年）</text>
+  
+  <text x="227.5" y="54" text-anchor="middle" font-size="12" font-weight="bold" fill="#1565c0">上位 5</text>
+  <text x="542.5" y="54" text-anchor="middle" font-size="12" font-weight="bold" fill="#c62828">下位 5</text>
+  
+      <text x="84" y="82" text-anchor="end" font-size="11" class="svg-label">千葉県</text>
+      <rect x="90" y="63" width="195" height="30" fill="#1565c0" rx="2"/>
+      <text x="289" y="82" font-size="10" class="svg-label">16122494ｍ3／日</text>
+    
+      <text x="84" y="118" text-anchor="end" font-size="11" class="svg-label">山口県</text>
+      <rect x="90" y="99" width="189.8438461195892" height="30" fill="#1976d2" rx="2"/>
+      <text x="283.8438461195892" y="118" font-size="10" class="svg-label">15696186ｍ3／日</text>
+    
+      <text x="84" y="154" text-anchor="end" font-size="11" class="svg-label">愛知県</text>
+      <rect x="90" y="135" width="175.82902248250178" height="30" fill="#1e88e5" rx="2"/>
+      <text x="269.8290224825018" y="154" font-size="10" class="svg-label">14537448ｍ3／日</text>
+    
+      <text x="84" y="190" text-anchor="end" font-size="11" class="svg-label">兵庫県</text>
+      <rect x="90" y="171" width="166.09497203100216" height="30" fill="#2196f3" rx="2"/>
+      <text x="260.09497203100216" y="190" font-size="10" class="svg-label">13732642ｍ3／日</text>
+    
+      <text x="84" y="226" text-anchor="end" font-size="11" class="svg-label">岡山県</text>
+      <rect x="90" y="207" width="113.31431539065855" height="30" fill="#42a5f5" rx="2"/>
+      <text x="207.31431539065855" y="226" font-size="10" class="svg-label">9368766ｍ3／日</text>
+    
+  
+      <text x="399" y="82" text-anchor="end" font-size="11" class="svg-label">奈良県</text>
+      <rect x="405" y="63" width="1" height="30" fill="#c62828" rx="2"/>
+      <text x="410" y="82" font-size="10" class="svg-label">48921ｍ3／日</text>
+    
+      <text x="399" y="118" text-anchor="end" font-size="11" class="svg-label">山梨県</text>
+      <rect x="405" y="99" width="1.3367528621812481" height="30" fill="#d32f2f" rx="2"/>
+      <text x="410.33675286218124" y="118" font-size="10" class="svg-label">110522ｍ3／日</text>
+    
+      <text x="399" y="154" text-anchor="end" font-size="11" class="svg-label">鳥取県</text>
+      <rect x="405" y="135" width="1.9350151409577203" height="30" fill="#e53935" rx="2"/>
+      <text x="410.9350151409577" y="154" font-size="10" class="svg-label">159986ｍ3／日</text>
+    
+      <text x="399" y="190" text-anchor="end" font-size="11" class="svg-label">長崎県</text>
+      <rect x="405" y="171" width="2.049638536072645" height="30" fill="#ef5350" rx="2"/>
+      <text x="411.0496385360726" y="190" font-size="10" class="svg-label">169463ｍ3／日</text>
+    
+      <text x="399" y="226" text-anchor="end" font-size="11" class="svg-label">高知県</text>
+      <rect x="405" y="207" width="2.3085178384932257" height="30" fill="#e57373" rx="2"/>
+      <text x="411.30851783849323" y="226" font-size="10" class="svg-label">190867ｍ3／日</text>
+    
+  <text x="340" y="282" text-anchor="middle" font-size="10" class="svg-legend">凡例: 青系=上位 / 赤系=下位</text>
+</svg>
