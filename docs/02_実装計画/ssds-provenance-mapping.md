@@ -156,12 +156,26 @@ kind別: estat 95.2% / kakei-chousa 100% / mlit 100% / external 44.1%。
 検証: `cd packages/ranking` で純粋関数を tsx 実行 (C2101→establishment-enterprise-census 是正等を確認)。
 R2 反映後に `/survey` バケットが原典ベースへ是正される。
 
-### Phase 6 — UI 出典表示 + 整合性自動チェック (残)
+### Phase 6 — 整合性チェック + item.json への出典焼き込み (完了) ✅
 
-- 時系列 (theme-dashboard) / 円グラフ (CompositionChart) の snapshot に originalSurveys を載せ、
-  「出典: ◯◯調査」表示を追加。
-- all.json ↔ items.json 整合性チェック (現状 41 survey 中 4 件が items.json 404) を生成器に追加。
-- ranking item.json 自体の baked `survey_id` も同マッピング由来へ統一 (現状は survey バケットのみ是正)。
+成果:
+- `scripts/ssds/validate-survey-master-coverage.ts` — 全 metric を解決して得られる非合成 survey id が
+  すべて surveys.json に存在するかを検証 (孤児バケット = /survey 404 の防止)。CI lint 向け、欠落で exit 1。
+  **実測: 解決済み survey 参照 2,545 / master 83 件、欠落 0 (整合 OK)。**
+- exporter: `ranking/{key}/item.json` に `originalSurveys[]` を焼き込み (SSDS は cdCat01 から解決した
+  本来の調査群、非SSDS は空)。ranking 詳細ページの「出典: ◯◯調査」表示の前提データを整備。
+
+### Phase 7 — UI 出典表示 (残: アプリ実行検証が前提)
+
+> データ (survey items.json / ranking item.json の originalSurveys) は Phase 5-6 で整備済。
+> 残るのは描画。ranking 詳細は高トラフィック SSG ページ (`.claude/rules/nextjs-ssg-preservation.md`)
+> のため、ローカル `next build` で SSG 維持を確認できる環境で実施する。
+
+- ranking 詳細 (`RankingKeyPageClient.tsx:281` の「調査: 」行) を originalSurveys ベースへ。
+  touch points: (1) `RankingItem` 型/schema に `originalSurveys?`、(2) `readRankingItemFromR2` で通す、
+  (3) server page で id→name 解決、(4) client で複数調査をリンク表示。
+- 時系列 (theme-dashboard) / 円グラフ (CompositionChart) に「出典: ◯◯調査」表示
+  (config が既に statsDataId/cdCat01/sourceName を持つため、SSDS のとき真の原典に差し替え)。
 
 ### Phase 4 — survey ページの是正 + 再分配
 
