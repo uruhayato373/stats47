@@ -25,6 +25,14 @@ const MAX_YEAR = 2100;
 interface Violation {
   file: string;
   bad: number[];
+  /** seoTitle/seoDescription 等の表示テキストに混入した 10 桁タイムコード (例 "2023100000年") */
+  textCodes?: string[];
+}
+
+/** 表示テキスト (seoTitle/seoDescription 等) に「10 桁タイムコード + 年」が混入していないか検出する。 */
+function findTextTimeCodes(text: string): string[] {
+  const matches = text.match(/[0-9]{4}[0-9]{6}年/g) ?? [];
+  return [...new Set(matches)];
 }
 
 function main() {
@@ -35,12 +43,22 @@ function main() {
 
   for (const f of files) {
     const text = readFileSync(join(METRICS_DIR, f), "utf8");
-    // "years": { ... } ブロックだけを対象 (statsDataId 等を誤検出しない)
+    // 1) "years": { ... } ブロック (statsDataId 等を誤検出しない)
     const m = text.match(/"years":\s*\{([^}]*)\}/s);
-    if (!m) continue;
-    const nums = (m[1].match(/\d+/g) ?? []).map(Number);
-    const bad = nums.filter((n) => n < MIN_YEAR || n > MAX_YEAR);
-    if (bad.length > 0) violations.push({ file: f.replace(".ts", ""), bad });
+    const bad = m
+      ? (m[1].match(/\d+/g) ?? [])
+          .map(Number)
+          .filter((n) => n < MIN_YEAR || n > MAX_YEAR)
+      : [];
+    // 2) seoTitle/seoDescription 等の表示テキストへのタイムコード混入 (SERP に "【2023100000年】" が出る)
+    const textCodes = findTextTimeCodes(text);
+    if (bad.length > 0 || textCodes.length > 0) {
+      violations.push({
+        file: f.replace(".ts", ""),
+        bad,
+        ...(textCodes.length > 0 && { textCodes }),
+      });
+    }
   }
 
   if (violations.length === 0) {
@@ -51,10 +69,16 @@ function main() {
   console.error(
     `❌ metric years 検証: ${violations.length} 件にフルタイムコード/不正年が混入\n` +
       "   config.years は 4 桁年 (例 2009) を使うこと。フルコード (2009100000) は禁止。\n" +
+      "   seoTitle/seoDescription にも「2023100000年」等のタイムコードを残さない (4 桁年に)。\n" +
       "   修正: 各 year を先頭 4 桁に。規約: .claude/rules/estat-api.md\n",
   );
   for (const v of violations.slice(0, 50)) {
-    console.error(`  ${v.file}: ${v.bad.slice(0, 6).join(", ")}${v.bad.length > 6 ? " …" : ""}`);
+    const parts: string[] = [];
+    if (v.bad.length > 0)
+      parts.push(`years=[${v.bad.slice(0, 6).join(", ")}${v.bad.length > 6 ? " …" : ""}]`);
+    if (v.textCodes && v.textCodes.length > 0)
+      parts.push(`text=[${v.textCodes.slice(0, 4).join(", ")}${v.textCodes.length > 4 ? " …" : ""}]`);
+    console.error(`  ${v.file}: ${parts.join(" ")}`);
   }
   if (violations.length > 50) console.error(`  … 他 ${violations.length - 50} 件`);
   process.exit(1);

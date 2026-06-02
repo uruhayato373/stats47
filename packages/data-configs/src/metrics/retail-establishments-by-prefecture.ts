@@ -30,6 +30,8 @@ export const retailEstablishmentsByPrefecture: MetricConfig = {
     "conversionFactor": 1,
     "decimalPlaces": 1,
   },
+  "seoTitle": "小売業事業所数ランキング都道府県【2021】1位東京 vs 最下位鳥取で18.6倍の商業格差",
+  "seoDescription": "全国の小売業はどこに集まる?──1位東京(87,895事業所)、2位大阪(55,351)、3位愛知(46,535)、最下位鳥取(4,733)で18.6倍の格差。経済センサス2021を地図とグラフで47都道府県比較。",
   "isActive": true,
   "isFeatured": false,
   "featuredOrder": 0,

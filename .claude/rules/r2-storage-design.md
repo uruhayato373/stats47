@@ -36,9 +36,9 @@
 | `/survey` | `app/survey/all.json` | 調査一覧 |
 | `/survey/[surveyKey]` | `app/survey/[key]/items.json` | 調査別 RankingItem 一覧 |
 | `/blog/[slug]` | `app/blog/[slug]/thumbnail-light.webp` 等 | ブログ資産 |
-| `/fishing-ports` | `app/fishing-ports/all.json` | 漁港データ |
-| `/ports` | `app/ports/all.json` | 港湾メタデータ |
-| `/ports/[portCode]` | `app/port-statistics/by-port/[code].json` | 港湾別統計 |
+| `/fishing-ports` (廃止) | `app/fishing-ports/all.json` | 漁港データ。**2026-05-28 にルート廃止 → `/themes/fishery-marine` へ 301 統合**（middleware）。R2 key は export 継続中で `/themes` が参照しうる。旧 feature UI (`apps/web/src/features/fishing-ports`) は orphan |
+| `/ports` (廃止) | `app/ports/all.json` | 港湾メタデータ。**2026-05-28 にルート廃止 → `/themes/ports` へ 301 統合**（middleware）。R2 key は export 継続中。旧 feature UI (`apps/web/src/features/port-statistics`) は orphan |
+| `/ports/[portCode]` (廃止) | `app/port-statistics/by-port/[code].json` | 港湾別統計。`/ports` 廃止に伴い同様に旧ルート。port 統計は `/themes/ports` 側で扱う |
 | `/gis-cross/depopulation-medical` | `app/gis-cross/depopulation-medical/{summary.json,pref/[NN].json}` | 過疎×医療 掛け合わせ (サマリ + 県別詳細) |
 | `/gis-cross/sunshine-map` | `app/gis-cross/sunshine-map/{raster.png,meta.json}` | 日照地図ラスター + メタ |
 | 内部計算データ（URL なし） | `app/correlation/by-ranking-key/[key].json` | 相関データ（例外） |

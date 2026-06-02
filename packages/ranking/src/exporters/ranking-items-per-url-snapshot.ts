@@ -35,9 +35,11 @@ export interface ExportRankingItemsPerUrlResult {
  * 派生 snapshot (home/category/survey) を再グループ化して書き出す。
  * ※ enumeration に R2 list が要るため SSD 接続 or S3 認証下で実行すること
  *   (公開URL専用環境では基盤1 fallback が prefecture のみになり city/port を取りこぼす)。
- * ※ config→item.json の field refresh / 新規 metric の item.json 生成は follow-up
- *   (item.json は現状 git TS config から生成済みの値を保持しており、本 exporter は
- *    その正本を再グループ化する。新規 metric は別途 item.json 生成フローが要る)。
+ * ※ 本 exporter は item.json を再グループ化するのみ (seo フィールドは patch しない)。
+ *   config (git TS) → item.json の seoTitle/seoDescription 反映は
+ *   `refreshRankingItemSeoFields` (ranking-item-seo-refresh.ts, Q-DESIGN R0) が担う。
+ *   sync-snapshots では master (本 exporter) → item-seo-refresh の順で実行する。
+ *   新規 metric の item.json 初期生成は別途フローが要る (未整備)。
  *
  * 生成ファイル:
  *   home/featured.json
