@@ -2,18 +2,25 @@
 
 > melta-ui CLAUDE.md のクイックリファレンスを stats47 向けに記載。
 > stats47 固有の例外は【stats47】で注記。
+>
+> **2026-06 更新（フラットデザイン / 正典: `docs/01_技術設計/21_統一レイアウト設計.md`）**:
+> - **角丸はサイト全体で 0**（`--radius:0`）。下記 `rounded-lg`/`rounded-md` 等は**すべて 0 に解決**される。
+>   手動の `rounded-xl`/`rounded-2xl` は禁止。**円形のみ `rounded-full`**（アイコン背景・ピル・アバター）。
+> - **本文フォントは system スタック**（游ゴシック/Hiragino、Web フォント非依存）。
+> - **横幅は `PageShell`（`@/components/layout`）経由**で統一（1700px / 右レール 360px）。
 
 ---
 
 ## レイアウト
 
 ```
-ページ全体         : bg-gray-50 min-h-screen
-ページコンテンツ   : max-w-7xl mx-auto px-8 py-12
-サイドバー＋メイン : flex h-screen（ボーダー分離、gap不要）
-セクション間隔     : mt-10 〜 mt-14
-仕切り線           : border-t border-slate-200
+ページ全体         : bg-background min-h-screen
+ページコンテンツ   : <PageShell>...</PageShell>（@/components/layout、1700px・px-4 sm:px-6・py-8）
+2/3カラム          : <PageShell rightRail={...} leftRail={...}>（右360px / 左TOC280px）
+セクション間隔     : space-y-8 〜 space-y-10
+仕切り線           : border-t border-border
 ```
+（PC 常設左サイドバーは 2026-06 廃止。ナビはヘッダー＋モバイルドロワー）
 
 ## テキスト
 
@@ -28,7 +35,7 @@
 ## コンポーネント
 
 ```
-カード             : bg-white rounded-xl border border-slate-200 p-6 shadow-sm
+カード             : bg-card border border-border p-6 shadow-sm（角丸なし=フラット）
                     【stats47: @stats47/components の Card を優先使用】
 カード hover       : hover:shadow-md（shadow-lg 禁止）
 カードグリッド     : grid grid-cols-2 md:grid-cols-3 gap-6
@@ -40,7 +47,7 @@ CTAボタン（S）     : h-8 px-3 text-[0.875rem] font-medium rounded-lg
 セレクト           : appearance-none + カスタムSVGシェブロン（ネイティブ矢印禁止）
 バッジ             : bg-slate-100 text-slate-700 px-3 py-1 rounded-full text-xs font-medium
 Alert（全種）      : flex items-start gap-3 p-4 border rounded-lg（border-l-4 禁止）
-テーブル外枠       : bg-white rounded-xl border border-slate-200 overflow-hidden
+テーブル外枠       : bg-card border border-border overflow-hidden（角丸なし=フラット）
 テーブルヘッダ     : <th scope="col"> text-left py-3 px-4 text-xs font-medium text-slate-500
 テーブルデータ行   : hover:bg-gray-50 transition-colors
 ディバイダー       : border-t border-slate-200（<hr> or role="separator"）
@@ -49,12 +56,15 @@ Alert（全種）      : flex items-start gap-3 p-4 border rounded-lg（border-l
 ## ナビゲーション
 
 ```
-サイドバー（標準）  : w-64 bg-white border-r border-slate-200
-サイドバー nav      : <nav aria-label="メインナビゲーション"> 必須
-ナビ（Active）      : text-primary-500 bg-primary-50 rounded-lg + aria-current="page"
-ナビ（Default）     : text-body hover:bg-gray-50 rounded-lg transition-colors
-パンくずリスト      : text-sm + text-slate-500 / 現在ページ text-slate-900 font-medium
+ヘッダー           : glass sticky top-0 h-16（ロゴ + ナビ + カテゴリメガメニュー + 検索 + テーマ切替）
+カテゴリ（PC）      : ヘッダーのドロップダウン（メガメニュー、2列グリッド）
+モバイルナビ        : MobileNavDrawer（Sheet, side=left, w-72）= ハンバーガーで開く
+ナビ nav           : <nav aria-label="メインナビゲーション"> 必須
+ナビ（Active）      : text-foreground bg-accent + aria-current="page"
+ナビ（Default）     : text-muted-foreground hover:bg-accent/60 transition-colors
+パンくずリスト      : text-sm + text-muted-foreground / 現在ページ text-foreground font-medium
 ```
+（PC 常設左サイドバーは 2026-06 廃止）
 
 ## シャドウ（4段階のみ）
 
