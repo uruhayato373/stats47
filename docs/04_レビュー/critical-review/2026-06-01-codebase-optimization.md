@@ -213,6 +213,9 @@ branch `claude/codebase-review-optimization-wyVMV` で着手分を実装・検�
 | **T2 (prefecture SSOT)** | `@stats47/area` に `to2DigitPrefCode`/`to5DigitPrefCode`/`PREFECTURE_LIST_2DIGIT` を新設。station-passengers/migration-flow のバイト一致コピー(各47件)を SSOT への re-export shim に置換。ranking 内 ad-hoc slice を canonical util に統一 | apps/web tsc clean / filter-to-prefectures.test (6) green |
 | **T1 (reader factory)** | `@stats47/r2-storage/server` に `createSnapshotReader<TSnapshot,TData>` を新設。**禁止されていた module-level cache を 6 reader から撤去**（categories/surveys/blog/affiliate-ads/fishing-ports/port-statistics）。fishing-ports の「miss を恒久キャッシュ」潜在バグも解消 | apps/web tsc clean / blog・affiliate reader test green |
 | **T4-(4)** | 対応不要と判明（validate:years は CI + pre-commit 両方で実行済） | grep 検証済 |
+| **T5-a (raw 要素置換)** | StatsTableClient `<select>`→Radix Select / MetricYoy 再生ボタン→Button / PortMapClient 選択解除→Button。`<input type=range>`(Slider 不在) と PortDetail compact `<table>`(data grid 用で視覚回帰) は意図的に据え置き | apps/web tsc clean / web 341 tests green |
+| **T6 (verified dead-code)** | 未使用 `Blog{Bar,Line,Scatter,Choropleth}*Client.tsx` 4 件削除（参照ゼロを個別確認）。**一括削除はせず verified slice のみ** | repo-wide 参照ゼロ / tsc clean |
+| **T5-b (Sankey 共通化)** | Commute/Finance/Migration の byte 一致 fetch+fallback+集約を `useFlowData`/`SankeyFallback`/`topNWithOther` に抽出。HubSankey render call 不変＝視覚同一。GenericSankey 全 JSX 抽象化は回帰リスクで見送り | apps/web tsc clean / web 341 + packages 1602 tests green |
 
 ### 🔬 実装中に判明した evidence-based 訂正（監査エージェントの誤りを本体検証で修正）
 
