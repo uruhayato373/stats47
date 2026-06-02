@@ -73,6 +73,39 @@ function parseLatestYear(latestYear: unknown): string {
   return "2024";
 }
 
+/** 年・調査名の括弧や空白差を無視してタイトルを正規化（重複の代表選びに使う） */
+function normalizeTitleForDedup(title: string): string {
+  return title
+    .replace(/[（(][^）)]*[）)]/g, "")
+    .replace(/\s+/g, "")
+    .trim();
+}
+
+/**
+ * isFeatured 指定が無いカテゴリでも「入口」を用意するための代表ランキング抽出。
+ * 同義タイトル（年・調査名違い）を畳み、データ年が新しい順に上位 limit 件を返す。
+ */
+function pickRepresentativeRankings<
+  T extends { rankingKey: string; title: string; latestYear?: unknown },
+>(items: readonly T[], limit: number): T[] {
+  const byTitle = new Map<string, T>();
+  for (const item of items) {
+    const key = normalizeTitleForDedup(item.title);
+    const existing = byTitle.get(key);
+    if (
+      !existing ||
+      parseLatestYear(item.latestYear) > parseLatestYear(existing.latestYear)
+    ) {
+      byTitle.set(key, item);
+    }
+  }
+  return [...byTitle.values()]
+    .sort((a, b) =>
+      parseLatestYear(b.latestYear).localeCompare(parseLatestYear(a.latestYear)),
+    )
+    .slice(0, limit);
+}
+
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { categoryKey } = await params;
 
@@ -163,12 +196,19 @@ export default async function CategoryPage({ params }: PageProps) {
 
   // 注目ランキング（タイルマップSVG付き、rankingKey で重複排除）
   const seenKeys = new Set<string>();
-  const featuredRaw = rankingItems.filter((item) => {
+  const featuredReal = rankingItems.filter((item) => {
     if (!item.isFeatured) return false;
     if (seenKeys.has(item.rankingKey)) return false;
     seenKeys.add(item.rankingKey);
     return true;
   });
+
+  // isFeatured 指定が 0 件のカテゴリ (例: commercial) でも先頭に「入口」を出す。
+  // 代表ランキング (同義タイトルを畳んでデータ年が新しい順) を fallback として使う。
+  const usingFallbackFeatured = featuredReal.length === 0;
+  const featuredRaw = usingFallbackFeatured
+    ? pickRepresentativeRankings(rankingItems, 6)
+    : featuredReal;
 
   // 1位データ + 全47件データを並列取得
   const batchItems = featuredRaw.map((item) => ({
@@ -239,8 +279,8 @@ export default async function CategoryPage({ params }: PageProps) {
                 variant="dark"
               />
               <KpiTile
-                label="注目"
-                value={String(featuredCount)}
+                label={usingFallbackFeatured ? "主要" : "注目"}
+                value={String(usingFallbackFeatured ? featuredRaw.length : featuredCount)}
                 unit="件"
                 variant="dark"
               />
@@ -267,7 +307,9 @@ export default async function CategoryPage({ params }: PageProps) {
           {/* 注目ランキング */}
           {featuredItems.length > 0 && (
             <section className="mb-8">
-              <SectionEyebrow number="1.">注目のランキング</SectionEyebrow>
+              <SectionEyebrow number="1.">
+                {usingFallbackFeatured ? "主要なランキング" : "注目のランキング"}
+              </SectionEyebrow>
               <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
                 {featuredItems.map((item) => (
                   <FeaturedRankingCard
