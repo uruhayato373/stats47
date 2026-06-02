@@ -253,6 +253,17 @@ quality-gate は内部で `article-factual-check.mjs` を呼び、rank/値の da
 > REVISE 指摘を反映してから PASS を得る。文字数の量的十分性も critic が判断する (高い文字数床で水増しを誘発しない)。
 > 詳細: `.claude/rules/blog-quality-standards.md`「品質の3層モデルと critic 必須」。
 
+#### 共通 Step B2: 表現の正典化 (全 brushup で必ず適用・2026-06-02)
+
+リライト時、記事 markdown を `.claude/rules/blog-quality-standards.md`「記事 markdown の正典テンプレート」に揃える。
+以下は **quality-gate が blocker 化**しているので必ず是正する (棚卸し: `audit-published-blog.mjs`):
+
+1. **チャート**: `<chart-placeholder ... data="X"/>` と インライン `<svg>` を **生成画像 `![](data/X.svg)`** に統一。
+   - data/*.json があれば `node .claude/scripts/blog/generate-article-charts.mjs --slug <slug>` で **上位5+下位5** SVG を生成し placeholder を自動置換。data が無ければ `fetch-article-data.mjs` で ranking から取得してから生成。
+2. **記事内『関連ランキング/関連記事』セクション削除**: ページ側 (`RelatedRankingsSection`/`BlogRelatedArticlesSection`) が正典。`## 関連ランキング` `### 関連記事` 見出しごと markdown から除去 (二重表示の解消)。
+3. **source-link を各図直下にインライン配置**: 末尾集約をやめ、対応する図の直下へ分散。
+4. **truncated 表 / 上下非対称表の除去**: 全件表 or SVG 化 (上下対称)。
+
 ```
 === /brushup-blog --target article: <slug> 完了 ===
 focus: <CTR-reframe | エキスパート視点追加 | 最新データ更新 | CTA強化>

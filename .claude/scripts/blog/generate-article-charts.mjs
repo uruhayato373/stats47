@@ -17,7 +17,7 @@
  *   → 品質統一の決定的ゲート。判断は不要 (コードで一律検査)。
  *
  * チャート種別 (ファイル名パターン):
- *   *-prefecture-rankings.json → bar chart (上位 10 + 下位 10)   [実装済み]
+ *   *-prefecture-rankings.json → bar chart (上位 5 + 下位 5)   [実装済み]
  *   *-tile-grid.json           → tile-grid-map                   [TODO]
  *   *-timeseries.json          → line chart                      [TODO]
  *   *-scatter.json             → scatter chart                   [TODO]
@@ -101,18 +101,19 @@ function genBarChartSvg(data, meta = {}) {
   const subtitle = meta.subtitle || data.subtitle || "";
   const unit = meta.unit || data.unit || "";
 
-  // sort desc, take top 10 + bottom 10
+  // 標準: 上位5 + 下位5 (2026-06-02 確定。上下対称・モバイル可読性優先)
+  const N = 5;
   const sorted = [...items].sort((a, b) => (b.value ?? 0) - (a.value ?? 0));
-  const top10 = sorted.slice(0, 10);
-  const bottom10 = sorted.slice(-10).reverse();
+  const topRows = sorted.slice(0, N);
+  const bottomRows = sorted.slice(-N).reverse();
 
   const W = 680;
-  const H = 480;
   const padTop = 60;
   const padBottom = 60;
+  const rowH = 36;
+  const H = padTop + padBottom + N * rowH;
   const padLeft = 90;
   const colW = (W - padLeft - 40) / 2; // 2 columns (top/bottom)
-  const rowH = (H - padTop - padBottom) / 10;
   const maxValue = Math.max(...items.map((d) => d.value ?? 0), 1);
 
   const blueScale = ["#1565c0", "#1976d2", "#1e88e5", "#2196f3", "#42a5f5", "#64b5f6", "#90caf9"];
@@ -131,8 +132,8 @@ function genBarChartSvg(data, meta = {}) {
     `;
   };
 
-  const topCol = top10.map((it, i) => drawRow(it, i, padLeft, blueScale)).join("");
-  const bottomCol = bottom10
+  const topCol = topRows.map((it, i) => drawRow(it, i, padLeft, blueScale)).join("");
+  const bottomCol = bottomRows
     .map((it, i) => drawRow(it, i, padLeft + colW + 40, redScale))
     .join("");
 
@@ -140,8 +141,8 @@ function genBarChartSvg(data, meta = {}) {
   <rect width="${W}" height="${H}" fill="#fafafa" rx="8"/>
   <text x="${W / 2}" y="24" text-anchor="middle" font-size="16" font-weight="bold" fill="#222">${title}</text>
   ${subtitle ? `<text x="${W / 2}" y="42" text-anchor="middle" font-size="11" fill="#666">${subtitle}</text>` : ""}
-  <text x="${padLeft + colW / 2}" y="${padTop - 6}" text-anchor="middle" font-size="12" font-weight="bold" fill="#1565c0">上位 10</text>
-  <text x="${padLeft + colW + 40 + colW / 2}" y="${padTop - 6}" text-anchor="middle" font-size="12" font-weight="bold" fill="#c62828">下位 10</text>
+  <text x="${padLeft + colW / 2}" y="${padTop - 6}" text-anchor="middle" font-size="12" font-weight="bold" fill="#1565c0">上位 5</text>
+  <text x="${padLeft + colW + 40 + colW / 2}" y="${padTop - 6}" text-anchor="middle" font-size="12" font-weight="bold" fill="#c62828">下位 5</text>
   ${topCol}
   ${bottomCol}
   <text x="${W / 2}" y="${H - 18}" text-anchor="middle" font-size="10" fill="#888">凡例: 青系=上位 / 赤系=下位</text>
@@ -184,9 +185,20 @@ function replacePlaceholders(chartNames) {
   let md = fs.readFileSync(ARTICLE_MD, "utf8");
   let replaced = 0;
   for (const name of chartNames) {
-    const placeholder = new RegExp(`<!--\\s*chart:${name}\\s*-->`, "g");
-    if (placeholder.test(md)) {
-      md = md.replace(placeholder, `![チャート](data/${name}.svg)`);
+    // 形式1: コメント `<!-- chart:NAME -->`
+    const comment = new RegExp(`<!--\\s*chart:${name}\\s*-->`, "g");
+    if (comment.test(md)) {
+      md = md.replace(comment, `![チャート](data/${name}.svg)`);
+      replaced++;
+    }
+    // 形式2: タグ `<chart-placeholder ... data="NAME" ... />` (実記事 54 本がこの形式)
+    // caption 属性があれば alt に流用する。
+    const tag = new RegExp(`<chart-placeholder[^>]*\\bdata="${name}"[^>]*/?>(?:\\s*</chart-placeholder>)?`, "g");
+    if (tag.test(md)) {
+      md = md.replace(tag, (m) => {
+        const cap = m.match(/caption="([^"]*)"/);
+        return `![${cap ? cap[1] : "チャート"}](data/${name}.svg)`;
+      });
       replaced++;
     }
   }

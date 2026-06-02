@@ -20,7 +20,6 @@ import { generateMiniTileSvg } from "@stats47/visualization/server";
 
 import { ThemeAwareImage } from "@/components/atoms/ThemeAwareImage";
 
-import { TechSchoolPromoCard } from "@/features/ads";
 import { resolveAffiliateBanners } from "@/features/ads/server";
 import { listLatestArticles } from "@/features/blog/server";
 import { findCategoryByKey } from "@/features/category/server";
@@ -357,8 +356,6 @@ export default async function CategoryPage({ params }: PageProps) {
 
         {/* 右サイドバー（lg+、360px、independent scroll で全 widget 到達可能） */}
         <aside className="hidden lg:flex lg:flex-col lg:gap-4 lg:sticky lg:top-20 lg:max-h-[calc(100vh-5.5rem)] lg:overflow-y-auto lg:pr-1">
-          {/* Claude Code 副業講座 (収益化 / 上部 above-fold) */}
-          <TechSchoolPromoCard />
 
           <div className="flex flex-col gap-4">
             {/* 新着記事 */}

@@ -257,6 +257,23 @@ if (asym) {
   );
 }
 
+// 表現の正典統一 (2026-06-02 追加): chart-placeholder 未描画 / インライン svg / 記事内関連セクション禁止。
+// チャートは「生成画像 ![](data/*.svg)」に統一。関連ランキング/関連記事はページ側コンポーネントが正典。
+checks.chartPlaceholder = /<chart-placeholder/.test(content);
+checks.inlineSvg = /<svg[\s>]/.test(content);
+checks.inArticleRelated = /^#{2,3}\s*関連(ランキング|記事)/m.test(content);
+if (checks.chartPlaceholder) {
+  blockers.push("chart-placeholder (未描画) — 生成画像 SVG ![](data/*.svg) に置換すること");
+}
+if (checks.inlineSvg) {
+  blockers.push("インライン <svg> — チャートは生成画像 ![](data/*.svg) に統一 (インライン svg 禁止)");
+}
+if (checks.inArticleRelated) {
+  blockers.push(
+    "記事内『関連ランキング/関連記事』セクション — ページ側コンポーネント (RelatedRankingsSection / BlogRelatedArticlesSection) が正典。記事 markdown からは削除",
+  );
+}
+
 // Factual cross-check (2026-05-25 追加、article-factual-check.mjs に切り出し済)
 const factual = checkArticleFactual(content, dataDir);
 checks.groundTruthPrefCount = factual.groundTruthPrefCount;

@@ -143,11 +143,13 @@ node .claude/scripts/lib/article-factual-check.mjs \
    - 全体差 (1位 / 最下位 / 倍率を提示)
    - 「発見」の予告 (この記事で読者が得る示唆を 1 行)
 
-2. **H2: TOP10 と最下位** (chart + 解説)
-   - 上位/下位はチャート (`<chart-placeholder type="bar" .../>` / SVG) で可視化する
+2. **H2: 上位5と下位5** (chart + 解説)
+   - 上位/下位は **生成画像 `![alt](data/<name>.svg)`** で可視化する (上位5+下位5)。
+     `node .claude/scripts/blog/generate-article-charts.mjs --slug <slug>` で data/*.json から生成。
+     ★**`<chart-placeholder>` と インライン `<svg>` は禁止** (未描画/混在の温床。`quality-gate.mjs` が blocker。
+     正典 = `.claude/rules/blog-quality-standards.md`「記事 markdown の正典テンプレート」)
    - ★**表を置く場合は「全件 (全47件等)」か「置かない」の二択。** 図と重複する
-     「上位数件 + … + 下位数件」の **truncated 表は禁止** (図の劣化した部分複製で読者価値ゼロ。
-     `quality-gate.mjs` が blocker 検出 → `.claude/rules/blog-quality-standards.md`「品質の3層モデル」「図と表」)
+     「上位数件 + … + 下位数件」の **truncated 表 / 上下非対称表は禁止** (blocker)
    - 全件はランキングページにあるため、表を置かず `<source-link href="/ranking/<key>">` で誘導するのが既定
    - 直後に上位の地域パターン解説 (1-2 段落)
 
@@ -162,9 +164,10 @@ node .claude/scripts/lib/article-factual-check.mjs \
 5. **H2: まとめ** (箇条書き 5 項目)
    - 1位・最下位・倍率・地域パターン・特筆点
 
-6. **データ出典** + **関連ランキング** (内部リンク 3-5 件)
-   - データ出典: 出典機関名 + 集計年 + e-Stat 経由整備の旨
-   - 関連ランキング: `https://stats47.jp/ranking/<key>` の内部リンクを 3-5 件
+6. **データ出典** (出典機関名 + 集計年 + e-Stat 経由整備の旨)
+   - ★**記事内に「関連ランキング」「関連記事」セクションを書かない** (見出しごと不可)。
+     関連はページ側 `RelatedRankingsSection` / `BlogRelatedArticlesSection` が tag 駆動で描画する正典 (二重表示防止・`quality-gate.mjs` が blocker)。
+   - ランキング詳細への誘導は各図直下の `<source-link href="/ranking/<key>">` (本文インライン) で行う
 
 ### Phase 4: フロントマター生成
 

@@ -20,6 +20,7 @@ description: ブログ記事の expert / panel review 専任。記事は read-on
 - **curiosity gap の真正性**: タイトルの煽りが本文の中身と一致しているか (釣りでないか)
 - **CTA / アフィリエイト過多**: 導線が読者体験を損なっていないか
 - **論理・示唆の質**: データから意味のある発見を導けているか (ランキング羅列で終わっていないか)
+- **表現テンプレート準拠** (`.claude/rules/blog-quality-standards.md`「記事 markdown の正典テンプレート」): チャートは生成画像 `![](data/*.svg)` (上位5+下位5) か / `<chart-placeholder>`・インライン `<svg>` が残っていないか / 記事内に「関連ランキング・関連記事」セクションを書いていないか (ページ側が正典) / source-link が各図直下にあるか。いずれも `quality-gate.mjs` が機械検出するが、critic は「図が中身を伝えているか」まで見る
 - factual / 内部リンク密度 / callout 配置
 
 ## 担当範囲

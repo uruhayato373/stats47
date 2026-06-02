@@ -17,14 +17,12 @@ import {
     FurusatoNozeiCard,
     FurusatoNozeiPopularCard,
     SidebarPromoBanner,
-    TechSchoolPromoCard,
     pickPrefCodeForSlug,
 } from "@/features/ads";
 import { BlogSidebarTextAds, resolveAffiliateBannersByCategory } from "@/features/ads/server";
 import { TagBadge, ArticleRelatedBooks, ArticleRenderer, ArticleTableOfContents, extractPrefecturesFromArticle, generateBlogMetadata, type Article } from "@/features/blog";
 import {
     ArticleAffiliateBanner,
-    ArticleDataDownloadSection,
     RelatedRankingsSection,
     listLatestArticles,
     listArticlesByTagKey,
@@ -268,18 +266,12 @@ export default async function BlogPostPage({ params }: PageProps) {
                                 {/* 記事本文 */}
                                 <ArticleRenderer article={article} slug={slug} relatedArticleTitles={relatedArticleTitles} affiliateBannersByCategory={affiliateBannersByCategory} />
 
-                                {/* インラインネイティブ広告: Claude Code 副業講座 (本文と SNS share の間) */}
-                                <TechSchoolPromoCard variant="inline" />
-
                                 {/* SNSシェアボタン */}
                                 <div className="mt-8 pt-6 border-t flex justify-center">
                                     <ShareButtons title={article.title} url={`/blog/${slug}`} variant="prominent" />
                                 </div>
                             </CardContent>
                         </Card>
-
-                        {/* DataPack CSV CTA (マスタープラン § 5.3 「関連 CSV」) */}
-                        <ArticleDataDownloadSection tagKeys={tagKeys} />
 
                         {/* バナー広告（タグキーベース・ランダム表示） */}
                         <ArticleAffiliateBanner tagKeys={tagKeys} />

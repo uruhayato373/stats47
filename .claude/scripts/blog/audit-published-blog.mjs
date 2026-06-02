@@ -132,6 +132,17 @@ function auditArticle(meta, body) {
       break;
     }
   }
+  // 表現の正典統一 (2026-06-02): chart-placeholder / インライン svg / 記事内関連セクション禁止
+  if (/<chart-placeholder/.test(body)) {
+    flags.push(["blocker", "chart-placeholder (未描画) — 生成画像 SVG に置換"]);
+  }
+  if (/<svg[\s>]/.test(body)) {
+    flags.push(["blocker", "インライン <svg> — 生成画像 ![](data/*.svg) に統一"]);
+  }
+  if (/^#{2,3}\s*関連(ランキング|記事)/m.test(body)) {
+    flags.push(["blocker", "記事内関連セクション — ページ側コンポーネントが正典 (記事から削除)"]);
+  }
+
   // /ranking source-link の末尾集約 (2 個以上が末尾 1/4 に固まる)
   const slMatches = [...body.matchAll(/<source-link\s+href="(\/ranking\/[^"]+)"/gi)];
   if (slMatches.length >= 2) {
