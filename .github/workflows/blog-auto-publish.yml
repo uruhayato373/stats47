@@ -51,6 +51,9 @@ env:
   CLOUDFLARE_R2_BUCKET_NAME: stats47
   R2_PUBLIC_FETCH_URL: https://storage.stats47.jp
   MAX_PUBLISH: "10"
+  # 公開後の CDN ピンポイントパージ用 (purge-cache.ts --urls)
+  CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+  CLOUDFLARE_ZONE_ID: ${{ secrets.CLOUDFLARE_ZONE_ID }}
 
 jobs:
   auto-publish:
@@ -165,6 +168,20 @@ jobs:
         run: |
           NODE_OPTIONS='--conditions react-server' npx tsx apps/web/scripts/export-blog-snapshot.ts
           npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix app/blog
+
+      - name: 🧹 Purge CDN (公開記事URL + 一覧/ホーム/sitemap のみ)
+        if: ${{ steps.detect.outputs.slugs != '' }}
+        run: |
+          # 公開された記事だけをピンポイントパージ (全ゾーンパージは避ける)。
+          URLS=""
+          for SLUG in $PUBLISHED; do URLS="$URLS https://stats47.jp/blog/$SLUG"; done
+          if [ -z "$(echo $URLS | xargs)" ]; then
+            echo "公開0件のため purge skip"; exit 0
+          fi
+          # 記事追加で内容が変わる索引系もパージ
+          URLS="$URLS https://stats47.jp/blog https://stats47.jp/ https://stats47.jp/sitemap.xml"
+          echo "purge: $URLS"
+          npx tsx packages/r2-storage/src/scripts/purge-cache.ts --urls $URLS
 
       - name: 📝 Summary
         if: always()

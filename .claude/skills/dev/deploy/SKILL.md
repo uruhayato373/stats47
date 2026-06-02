@@ -48,6 +48,8 @@ feature/* ──(直 merge)──▶ develop ──(PR + CI)──▶ main（デ
 
 **従って「記事を含むデプロイ」では**: feature → develop へ merge した時点で push トリガーが記事/広告を R2 公開し、develop → main の PR マージで Cloudflare がコードをデプロイする、の **2 経路が両方必要**。記事を追加したのにコードしかデプロイしないと「本番に記事が出ない」事故になる（2026-06-02 発生）。
 
+> **CDN パージは公開 workflow に内蔵済 (2026-06-02)**: `blog-auto-publish.yml` は公開記事URL + `/blog` + ホーム + sitemap を**ピンポイントパージ**、`publish-affiliate-ads.yml` は**全ゾーンパージ**（バナーは全ページ埋め込みのため）。`purge-cache.ts --urls <絶対URL...>` で任意ページHTMLをパージ可能。手動パージは `/purge-cdn`。middleware/sitemap/robots/metadata 等コード由来の変更後は引き続き Step 8 で `/purge-cdn` を判定する。
+
 ## 前提
 
 - 変更がすべてコミット済みであること
