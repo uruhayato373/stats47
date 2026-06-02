@@ -1,18 +1,13 @@
-import { ExternalLink } from "lucide-react";
-
 import {
   RANKING_PAGE_FOOTER,
   RANKING_PAGE_TABLE_SIDE,
 } from "@/lib/google-adsense";
 
-import {
-  AFFILIATE_THEME,
-  CATEGORY_AFFILIATE_MAP,
-} from "../constants/affiliate-category";
-import { resolveAffiliateAd } from "../services";
+import { CATEGORY_AFFILIATE_MAP } from "../constants/affiliate-category";
+import { resolveAffiliateTextAds } from "../services";
 
 import { AdSenseAdWrapper } from "./AdSenseAdWrapper";
-import { TrackedAffiliateLink } from "./tracked-affiliate-link";
+import { AffiliateTextAdList } from "./AffiliateTextAdList";
 
 import type { AffiliateLocationCode } from "../types";
 
@@ -29,7 +24,7 @@ function mapPositionToLocation(position: "sidebar" | "footer"): AffiliateLocatio
  * アフィリエイト広告スロット。
  *
  * 優先順位:
- * 1. DB / 定数からアフィリエイト広告を解決
+ * 1. テキスト広告 (最大 2 件) を解決して並べて表示
  * 2. なければ AdSense にフォールバック
  */
 export async function AffiliateAdSlot({
@@ -37,44 +32,13 @@ export async function AffiliateAdSlot({
   position = "sidebar",
 }: AffiliateAdSlotProps) {
   const locationCode = mapPositionToLocation(position);
-  const ad = await resolveAffiliateAd(categoryKey, locationCode);
+  const ads = await resolveAffiliateTextAds(categoryKey, locationCode, 2);
 
-  // アフィリエイト広告があればそれを表示
-  if (ad) {
-    const affiliateCategory = CATEGORY_AFFILIATE_MAP[categoryKey];
-    const theme = affiliateCategory ? AFFILIATE_THEME[affiliateCategory] : null;
-
+  // アフィリエイトテキスト広告があればそれを表示
+  if (ads.length > 0) {
+    const affiliateCategory = CATEGORY_AFFILIATE_MAP[categoryKey] ?? null;
     return (
-      <div
-        className={`rounded-xl border ${theme?.border ?? "border-border"} ${theme?.bg ?? "bg-muted/50"} p-4`}
-      >
-        <div className="mb-2 flex items-center justify-between">
-          <span className="text-xs font-medium text-muted-foreground/70">PR</span>
-        </div>
-        <TrackedAffiliateLink
-          href={ad.href}
-          category={affiliateCategory ?? "other"}
-          label={ad.title}
-          position={position}
-          className="flex items-center justify-between gap-3 rounded-lg bg-white px-4 py-3 shadow-sm transition-shadow hover:shadow-md"
-        >
-          <div>
-            <p className="text-sm font-bold text-foreground">
-              {theme?.emoji ? `${theme.emoji} ` : ""}
-              {ad.title}
-            </p>
-          </div>
-          <ExternalLink
-            size={16}
-            className={`shrink-0 ${theme?.icon ?? "text-muted-foreground/70"}`}
-          />
-        </TrackedAffiliateLink>
-        {ad.trackingPixelUrl && (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img src={ad.trackingPixelUrl} width={1} height={1} alt=""
-            className="absolute opacity-0 pointer-events-none" />
-        )}
-      </div>
+      <AffiliateTextAdList ads={ads} affiliateCategory={affiliateCategory} position={position} />
     );
   }
 

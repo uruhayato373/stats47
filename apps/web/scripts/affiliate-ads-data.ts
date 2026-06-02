@@ -986,4 +986,106 @@ export const AFFILIATE_ADS: AffiliateAd[] = [
     "width": null, "height": null,
     "createdAt": "2026-06-01 00:00:00", "updatedAt": "2026-06-01 00:00:00"
   },
+  // ── 就職エージェントneo (text / sidebar-bottom / 全カテゴリ) ───────────────────
+  // strategy_career と並べてランキング/ブログのサイドバーに 2 件表示する。
+  // priority 90: strategy_career (100) の次に表示される。
+  {
+    "id": "af_shukatsu_neo_text_economy",
+    "title": "最短1日で内定獲得可能！就職エージェントneo",
+    "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B5LK5+5YXI5U+3Y6M+BWVTE",
+    "areaCode": null, "categoryKey": "economy", "locationCode": "sidebar-bottom",
+    "isActive": true, "priority": 90, "startDate": null, "endDate": null, "targetCategories": null,
+    "adType": "text", "imageUrl": null,
+    "trackingPixelUrl": "https://www17.a8.net/0.gif?a8mat=4B5LK5+5YXI5U+3Y6M+BWVTE",
+    "width": null, "height": null,
+    "createdAt": "2026-06-02 00:00:00", "updatedAt": "2026-06-02 00:00:00"
+  },
+  {
+    "id": "af_shukatsu_neo_text_laborwage",
+    "title": "最短1日で内定獲得可能！就職エージェントneo",
+    "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B5LK5+5YXI5U+3Y6M+BWVTE",
+    "areaCode": null, "categoryKey": "laborwage", "locationCode": "sidebar-bottom",
+    "isActive": true, "priority": 90, "startDate": null, "endDate": null, "targetCategories": null,
+    "adType": "text", "imageUrl": null,
+    "trackingPixelUrl": "https://www17.a8.net/0.gif?a8mat=4B5LK5+5YXI5U+3Y6M+BWVTE",
+    "width": null, "height": null,
+    "createdAt": "2026-06-02 00:00:00", "updatedAt": "2026-06-02 00:00:00"
+  },
+  {
+    "id": "af_shukatsu_neo_text_population",
+    "title": "最短1日で内定獲得可能！就職エージェントneo",
+    "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B5LK5+5YXI5U+3Y6M+BWVTE",
+    "areaCode": null, "categoryKey": "population", "locationCode": "sidebar-bottom",
+    "isActive": true, "priority": 90, "startDate": null, "endDate": null, "targetCategories": null,
+    "adType": "text", "imageUrl": null,
+    "trackingPixelUrl": "https://www17.a8.net/0.gif?a8mat=4B5LK5+5YXI5U+3Y6M+BWVTE",
+    "width": null, "height": null,
+    "createdAt": "2026-06-02 00:00:00", "updatedAt": "2026-06-02 00:00:00"
+  },
+  {
+    "id": "af_shukatsu_neo_text_tourism",
+    "title": "最短1日で内定獲得可能！就職エージェントneo",
+    "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B5LK5+5YXI5U+3Y6M+BWVTE",
+    "areaCode": null, "categoryKey": "tourism", "locationCode": "sidebar-bottom",
+    "isActive": true, "priority": 90, "startDate": null, "endDate": null, "targetCategories": null,
+    "adType": "text", "imageUrl": null,
+    "trackingPixelUrl": "https://www17.a8.net/0.gif?a8mat=4B5LK5+5YXI5U+3Y6M+BWVTE",
+    "width": null, "height": null,
+    "createdAt": "2026-06-02 00:00:00", "updatedAt": "2026-06-02 00:00:00"
+  },
+  {
+    "id": "af_shukatsu_neo_text_construction",
+    "title": "最短1日で内定獲得可能！就職エージェントneo",
+    "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B5LK5+5YXI5U+3Y6M+BWVTE",
+    "areaCode": null, "categoryKey": "construction", "locationCode": "sidebar-bottom",
+    "isActive": true, "priority": 90, "startDate": null, "endDate": null, "targetCategories": null,
+    "adType": "text", "imageUrl": null,
+    "trackingPixelUrl": "https://www17.a8.net/0.gif?a8mat=4B5LK5+5YXI5U+3Y6M+BWVTE",
+    "width": null, "height": null,
+    "createdAt": "2026-06-02 00:00:00", "updatedAt": "2026-06-02 00:00:00"
+  },
+  {
+    "id": "af_shukatsu_neo_text_socialsecurity",
+    "title": "最短1日で内定獲得可能！就職エージェントneo",
+    "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B5LK5+5YXI5U+3Y6M+BWVTE",
+    "areaCode": null, "categoryKey": "socialsecurity", "locationCode": "sidebar-bottom",
+    "isActive": true, "priority": 90, "startDate": null, "endDate": null, "targetCategories": null,
+    "adType": "text", "imageUrl": null,
+    "trackingPixelUrl": "https://www17.a8.net/0.gif?a8mat=4B5LK5+5YXI5U+3Y6M+BWVTE",
+    "width": null, "height": null,
+    "createdAt": "2026-06-02 00:00:00", "updatedAt": "2026-06-02 00:00:00"
+  },
+  {
+    "id": "af_shukatsu_neo_text_energy",
+    "title": "最短1日で内定獲得可能！就職エージェントneo",
+    "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B5LK5+5YXI5U+3Y6M+BWVTE",
+    "areaCode": null, "categoryKey": "energy", "locationCode": "sidebar-bottom",
+    "isActive": true, "priority": 90, "startDate": null, "endDate": null, "targetCategories": null,
+    "adType": "text", "imageUrl": null,
+    "trackingPixelUrl": "https://www17.a8.net/0.gif?a8mat=4B5LK5+5YXI5U+3Y6M+BWVTE",
+    "width": null, "height": null,
+    "createdAt": "2026-06-02 00:00:00", "updatedAt": "2026-06-02 00:00:00"
+  },
+  {
+    "id": "af_shukatsu_neo_text_administrativefinancial",
+    "title": "最短1日で内定獲得可能！就職エージェントneo",
+    "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B5LK5+5YXI5U+3Y6M+BWVTE",
+    "areaCode": null, "categoryKey": "administrativefinancial", "locationCode": "sidebar-bottom",
+    "isActive": true, "priority": 90, "startDate": null, "endDate": null, "targetCategories": null,
+    "adType": "text", "imageUrl": null,
+    "trackingPixelUrl": "https://www17.a8.net/0.gif?a8mat=4B5LK5+5YXI5U+3Y6M+BWVTE",
+    "width": null, "height": null,
+    "createdAt": "2026-06-02 00:00:00", "updatedAt": "2026-06-02 00:00:00"
+  },
+  {
+    "id": "af_shukatsu_neo_text_landweather",
+    "title": "最短1日で内定獲得可能！就職エージェントneo",
+    "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B5LK5+5YXI5U+3Y6M+BWVTE",
+    "areaCode": null, "categoryKey": "landweather", "locationCode": "sidebar-bottom",
+    "isActive": true, "priority": 90, "startDate": null, "endDate": null, "targetCategories": null,
+    "adType": "text", "imageUrl": null,
+    "trackingPixelUrl": "https://www17.a8.net/0.gif?a8mat=4B5LK5+5YXI5U+3Y6M+BWVTE",
+    "width": null, "height": null,
+    "createdAt": "2026-06-02 00:00:00", "updatedAt": "2026-06-02 00:00:00"
+  },
 ];

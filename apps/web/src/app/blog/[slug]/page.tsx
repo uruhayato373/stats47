@@ -20,7 +20,7 @@ import {
     TechSchoolPromoCard,
     pickPrefCodeForSlug,
 } from "@/features/ads";
-import { resolveAffiliateBannersByCategory } from "@/features/ads/server";
+import { BlogSidebarTextAds, resolveAffiliateBannersByCategory } from "@/features/ads/server";
 import { TagBadge, ArticleRelatedBooks, ArticleRenderer, ArticleTableOfContents, extractPrefecturesFromArticle, generateBlogMetadata, type Article } from "@/features/blog";
 import {
     ArticleAffiliateBanner,
@@ -310,6 +310,9 @@ export default async function BlogPostPage({ params }: PageProps) {
                                     <AdSenseAd format={RANKING_PAGE_SIDEBAR.format} slotId={RANKING_PAGE_SIDEBAR.slotId} showLabel={false} />
                                 </CardContent>
                             </Card>
+
+                            {/* テキストリンク広告 (strategy career / 就職エージェントneo) */}
+                            <BlogSidebarTextAds tagKeys={tagKeys} />
                         </div>
                     </main>
 
@@ -355,6 +358,9 @@ export default async function BlogPostPage({ params }: PageProps) {
                                 <AdSenseAd format={RANKING_PAGE_SIDEBAR.format} slotId={RANKING_PAGE_SIDEBAR.slotId} showLabel={false} />
                             </CardContent>
                         </Card>
+
+                        {/* テキストリンク広告 (strategy career / 就職エージェントneo) — 右サイドバー下部 */}
+                        <BlogSidebarTextAds tagKeys={tagKeys} />
                     </aside>
 
                 </div>
