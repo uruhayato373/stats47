@@ -26,6 +26,14 @@ on:
         description: "公開する slug (空白/カンマ区切り)。空なら develop 最新コミットの差分から検出"
         required: false
         type: string
+  # Phase 2 (2026-06-02): develop に article.md が push されたら自動公開。
+  # 外部連携トークンは workflow_dispatch を起動できない (actions:write なし → 403) ため、
+  # push を公開トリガーにして「クラウド / web 実行環境でも publish が git push だけで完結」させる。
+  # published:true の判定・factual/quality ゲート・MAX_PUBLISH クランプは下流ステップで担保。
+  push:
+    branches: [develop]
+    paths:
+      - "docs/21_ブログ記事原稿/**/article.md"
 
 permissions:
   contents: read
@@ -40,7 +48,7 @@ env:
   R2_SECRET_ACCESS_KEY: ${{ secrets.CLOUDFLARE_R2_SECRET_ACCESS_KEY }}
   CLOUDFLARE_R2_BUCKET_NAME: stats47
   R2_PUBLIC_FETCH_URL: https://storage.stats47.jp
-  MAX_PUBLISH: "5"
+  MAX_PUBLISH: "10"
 
 jobs:
   auto-publish:

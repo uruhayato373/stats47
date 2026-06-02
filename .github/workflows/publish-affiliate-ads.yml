@@ -1,0 +1,58 @@
+name: 💴 Publish Affiliate Ads → R2
+
+# affiliate_ads の git TS SSOT (apps/web/scripts/affiliate-ads-data.ts) を
+# R2 snapshot (app/affiliate-ads/all.json) に反映する push 駆動 workflow。
+#
+# 背景 (2026-06-02): 外部連携トークン (Claude GitHub App) は actions:write を持たず
+# workflow_dispatch を起動できない (403)。affiliate-ads-data.ts の変更を push イベントで
+# 検知して publish することで、クラウド / web 実行環境でも git push だけで広告反映が完結する。
+#
+# 仕組み: sync-snapshots の実績ある run.sh を `--only affiliate-ads` で再利用 (export → R2 push)。
+# R2 書き込みは CI 専用 (run.sh 内 _assert-ci-write ガードは CI=true で通過)。
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [develop]
+    paths:
+      - "apps/web/scripts/affiliate-ads-data.ts"
+      # この workflow ファイル自身の追加・変更でも発火させ、導入時に一度反映する。
+      - ".github/workflows/publish-affiliate-ads.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  # sync-snapshots / data-refresh の R2 push と直列化 (二重書き込み防止)
+  group: r2-write
+  cancel-in-progress: false
+
+env:
+  R2_S3_ENDPOINT: https://${{ secrets.CLOUDFLARE_ACCOUNT_ID }}.r2.cloudflarestorage.com
+  R2_ACCESS_KEY_ID: ${{ secrets.CLOUDFLARE_R2_ACCESS_KEY_ID }}
+  R2_SECRET_ACCESS_KEY: ${{ secrets.CLOUDFLARE_R2_SECRET_ACCESS_KEY }}
+  CLOUDFLARE_R2_BUCKET_NAME: stats47
+  R2_PUBLIC_FETCH_URL: https://storage.stats47.jp
+
+jobs:
+  publish-affiliate-ads:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: 🧰 Checkout develop
+        uses: actions/checkout@v4
+        with:
+          ref: develop
+          fetch-depth: 1
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 💴 Export affiliate-ads snapshot + push to R2
+        run: bash .claude/skills/db/sync-snapshots/run.sh --only affiliate-ads

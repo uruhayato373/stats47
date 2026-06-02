@@ -11,7 +11,7 @@ tags:
   - 年収
   - 高所得
   - エンジニア
-publishedAt: (未定)
+publishedAt: 2026-06-02
 updatedAt: 2026-06-02
 published: true
 ---

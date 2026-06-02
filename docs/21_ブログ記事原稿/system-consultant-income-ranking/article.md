@@ -11,7 +11,7 @@ tags:
   - IT
   - エンジニア
   - 年収
-publishedAt: (未定)
+publishedAt: 2026-06-02
 updatedAt: 2026-06-02
 published: true
 ---

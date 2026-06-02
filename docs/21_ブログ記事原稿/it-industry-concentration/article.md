@@ -11,7 +11,7 @@ tags:
   - 情報通信
   - 産業構造
   - 地域格差
-publishedAt: (未定)
+publishedAt: 2026-06-02
 updatedAt: 2026-06-02
 published: true
 ---
