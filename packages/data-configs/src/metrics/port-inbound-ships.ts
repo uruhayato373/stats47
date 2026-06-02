@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const portInboundShips: MetricConfig = {
   "key": "port-inbound-ships",
   "title": "入港船舶隻数（港湾統計）",
+  "subtitle": "港湾統計調査",
   "description": "港湾調査（港湾統計年報）による都道府県別の入港船舶隻数。甲種・乙種港湾の合計。内陸7県（栃木・群馬・埼玉・山梨・長野・岐阜・奈良）はデータなし。",
   "unit": "隻",
   "category": "infrastructure",

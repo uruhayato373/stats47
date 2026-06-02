@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const totalAreaPrefectureRatio: MetricConfig = {
   "key": "total-area-prefecture-ratio",
   "title": "総面積（都道府県面積に占める割合）",
+  "subtitle": "都道府県比率",
   "unit": "％",
   "category": "landweather",
   "source": {

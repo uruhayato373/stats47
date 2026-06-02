@@ -3,7 +3,7 @@ import type { MetricConfig } from "../types";
 export const futureBurdenRatioCity: MetricConfig = {
   "key": "future-burden-ratio-city",
   "title": "将来負担比率（市町村財政）",
-  "subtitle": "市町村財政",
+  "subtitle": "市町村分",
   "unit": "％",
   "category": "administrativefinancial",
   "source": {

@@ -3,7 +3,7 @@ import type { MetricConfig } from "../types";
 export const employmentInsuranceReceiptRate: MetricConfig = {
   "key": "employment-insurance-receipt-rate",
   "title": "雇用保険受給率",
-  "subtitle": "受給率",
+  "subtitle": "受給実績",
   "unit": "％",
   "category": "socialsecurity",
   "source": {

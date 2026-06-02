@@ -3,7 +3,7 @@ import type { MetricConfig } from "../types";
 export const treatmentRateDiabetesInpatient: MetricConfig = {
   "key": "treatment-rate-diabetes-inpatient",
   "title": "糖尿病の受療率（入院）",
-  "subtitle": "入院",
+  "subtitle": "入院患者の受療率",
   "description": "厚生労働省「患者調査」（2023年）の傷病分類別受療率（人口10万対）。糖尿病の受療率（入院）のデータ。",
   "unit": "人（人口10万対）",
   "category": "socialsecurity",

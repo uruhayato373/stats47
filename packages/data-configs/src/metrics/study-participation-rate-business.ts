@@ -3,7 +3,7 @@ import type { MetricConfig } from "../types";
 export const studyParticipationRateBusiness: MetricConfig = {
   "key": "study-participation-rate-business",
   "title": "商業実務・ビジネス関係の行動者率",
-  "subtitle": "商業実務",
+  "subtitle": "商業実務関係",
   "unit": "％",
   "category": "educationsports",
   "source": {

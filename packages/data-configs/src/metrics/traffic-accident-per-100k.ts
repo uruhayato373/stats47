@@ -3,7 +3,7 @@ import type { MetricConfig } from "../types";
 export const trafficAccidentPer100k: MetricConfig = {
   "key": "traffic-accident-per-100k",
   "title": "交通事故発生件数（人口10万人当たり）",
-  "subtitle": "人口10万人当たり",
+  "subtitle": "10万人当たり換算",
   "unit": "件",
   "category": "safetyenvironment",
   "source": {

@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const portShipsTotal: MetricConfig = {
   "key": "port-ships-total",
   "title": "入港船舶隻数（合計）",
+  "subtitle": "全種別合計",
   "unit": "隻",
   "category": "tourism",
   "source": {

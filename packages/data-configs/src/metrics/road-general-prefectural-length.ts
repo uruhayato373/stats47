@@ -3,7 +3,7 @@ import type { MetricConfig } from "../types";
 export const roadGeneralPrefecturalLength: MetricConfig = {
   "key": "road-general-prefectural-length",
   "title": "道路実延長（一般都道府県道）",
-  "subtitle": "一般都道府県道",
+  "subtitle": "一般都道府県道のみ",
   "unit": "km",
   "category": "infrastructure",
   "source": {

@@ -3,7 +3,7 @@ import type { MetricConfig } from "../types";
 export const portVehicleFerryTruck: MetricConfig = {
   "key": "port-vehicle-ferry-truck",
   "title": "フェリー輸送車両（トラック）",
-  "subtitle": "トラック",
+  "subtitle": "トラックのみ",
   "unit": "台",
   "category": "tourism",
   "source": {
