@@ -14,6 +14,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@stats47/components/at
 import { ShareButtons } from "@/components/molecules/ShareButtons";
 
 import {
+    BannerAd,
     FurusatoNozeiCard,
     FurusatoNozeiPopularCard,
     TechSchoolPromoCard,
@@ -314,8 +315,16 @@ export default async function BlogPostPage({ params }: PageProps) {
 
                     {/* 右カラム (xl+): 関連 widget + 広告 (independent scroll) */}
                     <aside className="hidden xl:flex xl:flex-col xl:gap-3 xl:sticky xl:top-20 xl:max-h-[calc(100vh-5.5rem)] xl:overflow-y-auto xl:pr-1">
-                        {/* Claude Code 副業講座 (above-fold 最上部) */}
-                        <TechSchoolPromoCard />
+                        {/* A8.net バナー広告 (above-fold 最上部) */}
+                        <BannerAd
+                            href="https://px.a8.net/svt/ejp?a8mat=4B3RUY+AG9Z3M+5VRC+5YZ75"
+                            imageUrl="https://www24.a8.net/svt/bgt?aid=260516554632&wid=001&eno=01&mid=s00000027444001003000&mc=1"
+                            trackingPixelUrl="https://www19.a8.net/0.gif?a8mat=4B3RUY+AG9Z3M+5VRC+5YZ75"
+                            width={300}
+                            height={250}
+                            label="A8 sidebar banner (top)"
+                            position="sidebar"
+                        />
 
                         {/* 関連書籍 */}
                         <Card>
