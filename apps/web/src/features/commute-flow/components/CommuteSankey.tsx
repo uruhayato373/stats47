@@ -1,8 +1,8 @@
 "use client";
 
 import { HubSankey } from "@/components/charts/HubSankey";
-import { SankeyFallback } from "@/components/charts/SankeyFallback";
 import { topNWithOther } from "@/components/charts/sankey-helpers";
+import { SankeyFallback } from "@/components/charts/SankeyFallback";
 import { useFlowData } from "@/components/charts/useFlowData";
 
 import type { CommuteFlowData } from "../lib/types";
