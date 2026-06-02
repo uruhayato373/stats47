@@ -3,6 +3,11 @@
 import React, { useState } from "react";
 
 import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
   Table,
   TableBody,
   TableCell,
@@ -55,17 +60,18 @@ export const StatsTableClient: React.FC<StatsTableClientProps> = ({
     >
       {years.length > 1 && (
         <div className="flex justify-end mb-2">
-          <select
-            value={selectedYearCode}
-            onChange={(e) => setSelectedYearCode(e.target.value)}
-            className="text-sm border border-border rounded-md px-2 py-1 bg-background text-foreground"
-          >
-            {years.map((y) => (
-              <option key={y.yearCode} value={y.yearCode}>
-                {y.yearName}
-              </option>
-            ))}
-          </select>
+          <Select value={selectedYearCode} onValueChange={setSelectedYearCode}>
+            <SelectTrigger className="h-8 w-[140px] text-sm">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              {years.map((y) => (
+                <SelectItem key={y.yearCode} value={y.yearCode}>
+                  {y.yearName}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
         </div>
       )}
       <Table>
