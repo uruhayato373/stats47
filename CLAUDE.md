@@ -69,6 +69,7 @@ CLAUDE.md 内に詳細を複製しない。状況に応じて参照する。
 | `ui-components.md` | UI 実装 (shadcn / melta-ui / ブレイクポイント / page_components) |
 | `r2-storage-design.md` | snapshot 追加・変更 |
 | `estat-api.md` | e-Stat API 利用スキル |
+| `metric-config-standards.md` | metric config 作成・編集 (category 17 軸 / title・subtitle・note・description の役割 / validate:config) |
 | `branch-workflow.md` | PR・デプロイ作業・DB データ反映 |
 | `data-storage.md` | スキル設計時 (git TS / R2 vs `.claude/` vs `docs/` 判定。正典は `docs/01_技術設計/19_完全DBレス設計.md`) |
 | `docs-vs-issues.md` | docs/ と GitHub Issues の使い分け (新規スキル・新規記録時必読) |
