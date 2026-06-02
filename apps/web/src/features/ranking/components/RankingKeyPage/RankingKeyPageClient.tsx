@@ -566,7 +566,7 @@ export function RankingKeyPageClient({
 
                 {/* 右サイドバー: CSS で lg 以上のみ表示 (JS 判定廃止 → CLS 防止) */}
                 {sidebarSection && (
-                    <aside className="hidden lg:block lg:w-64 lg:shrink-0 lg:sticky lg:top-20">
+                    <aside className="hidden lg:block lg:w-[300px] lg:shrink-0 lg:sticky lg:top-20">
                         <div className="flex flex-col gap-4">
                             {sidebarSection}
                             <AdSenseAd

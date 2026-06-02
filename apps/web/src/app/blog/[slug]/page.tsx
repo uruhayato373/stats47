@@ -14,9 +14,9 @@ import { Card, CardContent, CardHeader, CardTitle } from "@stats47/components/at
 import { ShareButtons } from "@/components/molecules/ShareButtons";
 
 import {
-    BannerAd,
     FurusatoNozeiCard,
     FurusatoNozeiPopularCard,
+    SidebarPromoBanner,
     TechSchoolPromoCard,
     pickPrefCodeForSlug,
 } from "@/features/ads";
@@ -224,15 +224,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                     <aside className="hidden xl:flex xl:flex-col xl:gap-3 xl:sticky xl:top-20 xl:max-h-[calc(100vh-5.5rem)] xl:overflow-y-auto xl:pr-1">
                         <ArticleTableOfContents content={article.content} compact />
                         {/* A8.net バナー広告: STRATEGY CAREER (高単価・目次の下) */}
-                        <BannerAd
-                            href="https://px.a8.net/svt/ejp?a8mat=4B5LK5+5YC2K2+5P1E+5YZ75"
-                            imageUrl="https://www26.a8.net/svt/bgt?aid=260601701360&wid=001&eno=01&mid=s00000026573001003000&mc=1"
-                            trackingPixelUrl="https://www10.a8.net/0.gif?a8mat=4B5LK5+5YC2K2+5P1E+5YZ75"
-                            width={300}
-                            height={250}
-                            label="A8 sidebar banner (left, strategy career)"
-                            position="sidebar"
-                        />
+                        <SidebarPromoBanner index={0} position="sidebar-left" />
                         <Card>
                             <CardHeader className="pb-2">
                                 <CardTitle className="text-sm font-medium text-muted-foreground">広告</CardTitle>
@@ -329,15 +321,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                     {/* 右カラム (xl+): 関連 widget + 広告 (independent scroll) */}
                     <aside className="hidden xl:flex xl:flex-col xl:gap-3 xl:sticky xl:top-20 xl:max-h-[calc(100vh-5.5rem)] xl:overflow-y-auto xl:pr-1">
                         {/* A8.net バナー広告 (above-fold 最上部) */}
-                        <BannerAd
-                            href="https://px.a8.net/svt/ejp?a8mat=4B3RUY+AG9Z3M+5VRC+5YZ75"
-                            imageUrl="https://www24.a8.net/svt/bgt?aid=260516554632&wid=001&eno=01&mid=s00000027444001003000&mc=1"
-                            trackingPixelUrl="https://www19.a8.net/0.gif?a8mat=4B3RUY+AG9Z3M+5VRC+5YZ75"
-                            width={300}
-                            height={250}
-                            label="A8 sidebar banner (top)"
-                            position="sidebar"
-                        />
+                        <SidebarPromoBanner index={1} position="sidebar-right" />
 
                         {/* 関連書籍 */}
                         <Card>

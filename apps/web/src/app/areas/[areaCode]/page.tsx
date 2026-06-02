@@ -14,7 +14,7 @@ import { isOk } from "@stats47/types";
 
 import { SetSidebarSection } from "@/components/molecules/SetSidebarSection";
 
-import { FurusatoNozeiCard } from "@/features/ads";
+import { FurusatoNozeiCard, SidebarPromoBanner } from "@/features/ads";
 import { AreaBannerAd } from "@/features/ads/server";
 import {
     AreaProfilePageClient,
@@ -181,6 +181,7 @@ export default async function AreaProfilePage({ params }: PageProps) {
 
                     {/* アフィリエイト (xl 未満では main 内に表示) */}
                     <div className="xl:hidden space-y-6">
+                        <SidebarPromoBanner />
                         <AreaBannerAd />
                         <FurusatoNozeiCard areaCode={areaCode} />
                     </div>
