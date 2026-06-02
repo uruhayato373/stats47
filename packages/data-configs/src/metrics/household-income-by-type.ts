@@ -2,7 +2,7 @@ import type { MetricConfig } from "../types";
 
 export const householdIncomeByType: MetricConfig = {
   "key": "household-income-by-type",
-  "title": "年間収入階級別主世帯数（総数, 2018年）",
+  "title": "年間収入階級別主世帯数（総数）",
   "unit": "世帯",
   "category": "population",
   "source": {

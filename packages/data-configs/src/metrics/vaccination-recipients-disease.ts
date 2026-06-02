@@ -2,7 +2,7 @@ import type { MetricConfig } from "../types";
 
 export const vaccinationRecipientsDisease: MetricConfig = {
   "key": "vaccination-recipients-disease",
-  "title": "ＨＰＶワクチン定期予防接種者数（都道府県別・2020年度）",
+  "title": "ＨＰＶワクチン定期予防接種者数（都道府県別）",
   "unit": "人",
   "category": "socialsecurity",
   "source": {

@@ -2,7 +2,7 @@ import type { MetricConfig } from "../types";
 
 export const patientReceivingRateByAge: MetricConfig = {
   "key": "patient-receiving-rate-by-age",
-  "title": "受療率（性年齢別総数・入院総数）（2023年患者調査）",
+  "title": "受療率（性年齢別総数・入院総数）（患者調査）",
   "subtitle": "性年齢別集計",
   "unit": "人口10万対",
   "category": "socialsecurity",

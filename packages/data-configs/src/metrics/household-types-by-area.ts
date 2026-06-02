@@ -2,7 +2,7 @@ import type { MetricConfig } from "../types";
 
 export const householdTypesByArea: MetricConfig = {
   "key": "household-types-by-area",
-  "title": "家族類型別普通世帯数（総数, 2018年）",
+  "title": "家族類型別普通世帯数（総数）",
   "unit": "世帯",
   "category": "population",
   "source": {

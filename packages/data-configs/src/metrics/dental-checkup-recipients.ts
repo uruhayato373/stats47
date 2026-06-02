@@ -2,7 +2,7 @@ import type { MetricConfig } from "../types";
 
 export const dentalCheckupRecipients: MetricConfig = {
   "key": "dental-checkup-recipients",
-  "title": "歯科健診・保健指導受診延人員（都道府県別・2020年度）",
+  "title": "歯科健診・保健指導受診延人員（都道府県別）",
   "unit": "人",
   "category": "socialsecurity",
   "source": {
