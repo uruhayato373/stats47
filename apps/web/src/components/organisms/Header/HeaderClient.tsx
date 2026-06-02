@@ -26,10 +26,6 @@ import {
   type LucideIcon,
 } from "lucide-react";
 
-import type { Category } from "@/features/category";
-
-import { getIcon } from "@/lib/icons";
-
 import { useTheme } from "@/hooks/useTheme";
 
 import { useSidebarStore } from "@/store/sidebar-store";
@@ -57,19 +53,25 @@ const NAV_ITEMS: NavItem[] = [
   },
 ];
 
+/** メガメニューに出す curated テーマの最小ナビ情報。 */
+interface ThemeNavItem {
+  themeKey: string;
+  title: string;
+}
+
 interface HeaderClientProps {
-  categories: Category[];
+  themes: ThemeNavItem[];
 }
 
 /**
  * アプリケーションヘッダー（Client）
  *
- * PC: ロゴ + ナビ（ランキング / ブログ + カテゴリ メガメニュー）+ 検索 + テーマ切替。
+ * PC: ロゴ + ナビ（ランキング / ブログ + テーマ メガメニュー）+ 検索 + テーマ切替。
  * モバイル（lg 未満）: メニューボタンでドロワー（MobileNavDrawer）を開く。
  *
  * 設計仕様: docs/01_技術設計/21_統一レイアウト設計.md
  */
-export function HeaderClient({ categories }: HeaderClientProps) {
+export function HeaderClient({ themes }: HeaderClientProps) {
   const { toggleTheme } = useTheme();
   const toggleDrawer = useSidebarStore((s) => s.toggle);
   const router = useRouter();
@@ -86,7 +88,7 @@ export function HeaderClient({ categories }: HeaderClientProps) {
     [searchQuery, router],
   );
 
-  const categoryActive = pathname.startsWith("/category");
+  const themesActive = pathname.startsWith("/themes");
 
   return (
     <header className="h-16 glass sticky top-0 z-[200]" suppressHydrationWarning>
@@ -135,21 +137,21 @@ export function HeaderClient({ categories }: HeaderClientProps) {
             );
           })}
 
-          {/* カテゴリ メガメニュー */}
-          {categories.length > 0 && (
+          {/* テーマ メガメニュー (curated ダッシュボード。category は内部利用に降格) */}
+          {themes.length > 0 && (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <button
                   className={cn(
                     "flex items-center gap-1.5 rounded-md px-3 py-2 text-sm font-medium transition-colors outline-none",
-                    categoryActive
+                    themesActive
                       ? "bg-accent text-foreground"
                       : "text-muted-foreground hover:bg-accent/60 hover:text-foreground",
                   )}
-                  aria-label="カテゴリ一覧"
+                  aria-label="テーマ一覧"
                 >
                   <LayoutDashboard className="h-4 w-4" />
-                  カテゴリ
+                  テーマ
                   <ChevronDown className="h-3.5 w-3.5 opacity-70" />
                 </button>
               </DropdownMenuTrigger>
@@ -159,30 +161,32 @@ export function HeaderClient({ categories }: HeaderClientProps) {
                 className="w-[min(92vw,560px)] p-3"
               >
                 <div className="grid grid-cols-2 gap-1">
-                  {categories.map((category) => {
-                    const Icon = getIcon(category.icon ?? "");
+                  {themes.map((theme) => {
                     const isActive = pathname.startsWith(
-                      `/category/${category.categoryKey}`,
+                      `/themes/${theme.themeKey}`,
                     );
                     return (
                       <Link
-                        key={category.categoryKey}
-                        href={`/category/${category.categoryKey}`}
+                        key={theme.themeKey}
+                        href={`/themes/${theme.themeKey}`}
                         className={cn(
-                          "flex items-center gap-2 rounded-md px-2.5 py-2 text-sm transition-colors",
+                          "rounded-md px-2.5 py-2 text-sm transition-colors",
                           isActive
                             ? "bg-accent text-accent-foreground"
                             : "text-foreground/80 hover:bg-accent/60 hover:text-foreground",
                         )}
                       >
-                        <span className="flex h-7 w-7 items-center justify-center rounded-md bg-slate-100 text-slate-500 dark:bg-slate-800 dark:text-slate-400">
-                          <Icon className="h-[15px] w-[15px]" />
-                        </span>
-                        <span className="truncate">{category.categoryName}</span>
+                        <span className="truncate">{theme.title}</span>
                       </Link>
                     );
                   })}
                 </div>
+                <Link
+                  href="/themes"
+                  className="mt-2 block rounded-md px-2.5 py-2 text-sm font-medium text-primary hover:bg-accent/60"
+                >
+                  すべてのテーマを見る →
+                </Link>
               </DropdownMenuContent>
             </DropdownMenu>
           )}

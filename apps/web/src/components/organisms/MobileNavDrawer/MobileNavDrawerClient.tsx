@@ -22,16 +22,18 @@ import {
   TrendingUp,
 } from "lucide-react";
 
-import { CategoryAccordion } from "@/components/organisms/Sidebar/CategoryAccordion";
-
-import type { Category } from "@/features/category";
-
 import { useBreakpoint } from "@/hooks/useBreakpoint";
 
 import { useSidebarStore } from "@/store/sidebar-store";
 
+/** ドロワーに出す curated テーマの最小ナビ情報。 */
+interface ThemeNavItem {
+  themeKey: string;
+  title: string;
+}
+
 interface MobileNavDrawerClientProps {
-  categories: Category[];
+  themes: ThemeNavItem[];
 }
 
 const NAV_LINKS = [
@@ -51,7 +53,7 @@ const NAV_LINKS = [
  *
  * 設計仕様: docs/01_技術設計/21_統一レイアウト設計.md
  */
-export function MobileNavDrawerClient({ categories }: MobileNavDrawerClientProps) {
+export function MobileNavDrawerClient({ themes }: MobileNavDrawerClientProps) {
   const isOpen = useSidebarStore((s) => s.isOpen);
   const open = useSidebarStore((s) => s.open);
   const close = useSidebarStore((s) => s.close);
@@ -116,11 +118,36 @@ export function MobileNavDrawerClient({ categories }: MobileNavDrawerClientProps
 
             <Separator className="my-3" />
 
-            {/* カテゴリ */}
+            {/* テーマ (curated ダッシュボード。category は内部利用に降格) */}
             <h2 className="mb-1 px-3 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-              統計カテゴリー
+              テーマ
             </h2>
-            <CategoryAccordion categories={categories} />
+            <nav className="flex flex-col">
+              {themes.map((theme) => {
+                const href = `/themes/${theme.themeKey}`;
+                const isActive = pathname?.startsWith(href) ?? false;
+                return (
+                  <Link
+                    key={theme.themeKey}
+                    href={href}
+                    prefetch={false}
+                    className={cn(
+                      "rounded-lg px-3 py-2 text-sm font-medium text-foreground/80 transition-colors hover:bg-accent/60",
+                      isActive && "bg-accent text-accent-foreground",
+                    )}
+                  >
+                    {theme.title}
+                  </Link>
+                );
+              })}
+              <Link
+                href="/themes"
+                prefetch={false}
+                className="mt-1 rounded-lg px-3 py-2 text-sm font-medium text-primary hover:bg-accent/60"
+              >
+                すべてのテーマを見る →
+              </Link>
+            </nav>
           </div>
         </div>
       </SheetContent>
