@@ -23,7 +23,7 @@ export async function FurusatoNozeiPopularCard() {
     : "https://www.rakuten.co.jp/category/furusato/";
 
   return (
-    <div className="rounded-xl border border-red-100 bg-red-50/50 p-4">
+    <div className="rounded-none border border-red-100 bg-red-50/50 p-4">
       <div className="mb-3 flex items-center justify-between">
         <span className="text-xs font-medium text-muted-foreground/70">PR</span>
         <TrackedAffiliateLink

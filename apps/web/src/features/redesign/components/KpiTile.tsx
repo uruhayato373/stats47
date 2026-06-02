@@ -28,7 +28,7 @@ export function KpiTile({
 }: KpiTileProps) {
   if (variant === "dark") {
     return (
-      <div className="rounded-xl border border-white/15 bg-white/10 p-3.5">
+      <div className="rounded-none border border-white/15 bg-white/10 p-3.5">
         <p className="text-[10.5px] font-semibold uppercase tracking-normal text-white/65">
           {label}
         </p>
@@ -46,7 +46,7 @@ export function KpiTile({
   }
 
   return (
-    <div className="rounded-xl border border-border bg-card p-3.5 shadow-sm">
+    <div className="rounded-none border border-border bg-card p-3.5 shadow-sm">
       <p className="text-[10.5px] font-semibold uppercase tracking-normal text-muted-foreground">
         {label}
       </p>

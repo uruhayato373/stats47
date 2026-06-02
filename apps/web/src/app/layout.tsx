@@ -5,7 +5,7 @@
  * すべてのページで共通のレイアウト要素（ヘッダー、サイドバー、プロバイダーなど）を提供します。
  *
  * 主な機能:
- * - フォント設定（Inter、Noto Sans JP、Geist Mono）
+ * - フォント設定（本文は system スタック=游ゴシック/Hiragino、コードのみ Geist Mono）
  * - メタデータ設定（SEO、OGP、Twitter Cards）
  * - テーマプロバイダー（ダークモード対応）
  * - セッションプロバイダー（NextAuth）
@@ -40,7 +40,7 @@ import { CookieConsentBanner } from "@/lib/analytics/components/CookieConsentBan
 import { PageViewTracker } from "@/lib/analytics/components/PageViewTracker";
 import { GoogleAnalytics } from "@/lib/analytics/GoogleAnalytics";
 import { getRequiredBaseUrl } from "@/lib/env";
-import { geistMono, inter, notoSansJP } from "@/lib/fonts";
+import { geistMono } from "@/lib/fonts";
 import { AdSenseScript } from "@/lib/google-adsense";
 import { generateRootMetadata } from "@/lib/metadata/root-metadata";
 import { nextTopLoaderConfig } from "@/lib/next-top-loader/config";
@@ -88,7 +88,7 @@ export default function RootLayout({
   return (
     <html
       lang="ja"
-      className={`${inter.variable} ${notoSansJP.variable} ${geistMono.variable}`}
+      className={geistMono.variable}
       suppressHydrationWarning
     >
       <head>

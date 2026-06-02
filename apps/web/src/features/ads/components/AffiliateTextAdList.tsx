@@ -39,7 +39,7 @@ export function AffiliateTextAdList({
           position={position}
         >
           <div
-            className={`relative rounded-xl border ${theme?.border ?? "border-border"} ${theme?.bg ?? "bg-muted/50"} p-4`}
+            className={`relative rounded-none border ${theme?.border ?? "border-border"} ${theme?.bg ?? "bg-muted/50"} p-4`}
           >
             <div className="mb-2 flex items-center justify-between">
               <span className="text-xs font-medium text-muted-foreground/70">PR</span>

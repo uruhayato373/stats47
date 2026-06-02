@@ -221,7 +221,7 @@ export default async function HomePage() {
                 <Link
                   key={card.title}
                   href={card.href}
-                  className="group flex items-start gap-3 rounded-xl border border-border bg-card p-4 shadow-sm transition-all hover:border-primary/40 hover:shadow-md"
+                  className="group flex items-start gap-3 rounded-none border border-border bg-card p-4 shadow-sm transition-all hover:border-primary/40 hover:shadow-md"
                 >
                   <div className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
                     <Icon className="h-5 w-5" />
@@ -262,7 +262,7 @@ export default async function HomePage() {
                   <Link
                     key={article.slug}
                     href={`/blog/${article.slug}`}
-                    className="group block overflow-hidden rounded-xl border border-border bg-card transition-shadow hover:shadow-md"
+                    className="group block overflow-hidden rounded-none border border-border bg-card transition-shadow hover:shadow-md"
                   >
                     <div className="relative aspect-square w-full overflow-hidden bg-muted">
                       <ThemeAwareImage
@@ -292,7 +292,7 @@ export default async function HomePage() {
       <section className="px-4 sm:px-6 py-8">
         <div className="mx-auto max-w-[1700px]">
           <div
-            className="overflow-hidden rounded-2xl border border-amber-200 shadow-sm"
+            className="overflow-hidden rounded-none border border-amber-200 shadow-sm"
             style={{
               background: "linear-gradient(135deg, #fef3c7, #ffffff)",
             }}
@@ -330,7 +330,7 @@ export default async function HomePage() {
                     category="furusato"
                     label={`${pick.prefName}のふるさと納税`}
                     position="home-furusato-row"
-                    className="group flex flex-col gap-2 rounded-xl border border-border bg-card p-3 transition-shadow hover:shadow-md"
+                    className="group flex flex-col gap-2 rounded-none border border-border bg-card p-3 transition-shadow hover:shadow-md"
                   >
                     <div
                       aria-hidden
@@ -363,12 +363,12 @@ export default async function HomePage() {
       <section className="px-4 sm:px-6 py-8">
         <div className="mx-auto max-w-[1700px]">
           <div
-            className="flex flex-col items-start gap-4 rounded-2xl border border-primary/20 p-6 shadow-sm sm:flex-row sm:items-center"
+            className="flex flex-col items-start gap-4 rounded-none border border-primary/20 p-6 shadow-sm sm:flex-row sm:items-center"
             style={{
               background: "linear-gradient(135deg, var(--primary-50, rgba(239,246,255,1)), #ffffff)",
             }}
           >
-            <div className="inline-flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-primary text-primary-foreground">
+            <div className="inline-flex h-14 w-14 shrink-0 items-center justify-center rounded-none bg-primary text-primary-foreground">
               <Download className="h-7 w-7" />
             </div>
             <div className="min-w-0 flex-1">
