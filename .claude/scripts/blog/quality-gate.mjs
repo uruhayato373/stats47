@@ -180,8 +180,11 @@ if (!checks.hasDescription) {
 if (!checks.hasDataSource) {
   blockers.push("「データ出典」section 欠落");
 }
-if (checks.charCount < 2800) {
-  blockers.push(`prose charCount < 2800 (actual: ${checks.charCount}) — 地の文が薄い (表/markup は除外して計測)`);
+if (checks.charCount < 1600) {
+  blockers.push(`prose charCount < 1600 (actual: ${checks.charCount}) — スタブ (極端に薄い) の床。品質の量的判断は blog-critic に委ねる`);
+}
+if (checks.charCount < 2400) {
+  warnings.push(`prose charCount < 2400 (actual: ${checks.charCount}) — やや短い (critic の意味判断で可否を決める)`);
 }
 if (checks.charCount > 25000) {
   warnings.push(`charCount > 25000 (actual: ${checks.charCount}) — 長すぎる可能性`);
