@@ -1,0 +1,133 @@
+name: 📤 Blog Auto-Publish on Push (develop → R2)
+
+# Phase 2 半自律ブログ運用の「公開ブリッジ」。
+# Claude Routine (AI リライト) が develop に push した published:true 記事を、
+# push 起点で自動的に R2 へ公開する。これにより:
+#   - dispatch 403 (外部連携トークンの workflow 実行不可) を回避 (ネイティブ CI として実行)
+#   - 「develop に入った記事 = stats47.jp に反映」を成立させる (R2 snapshot 更新)
+#
+# 安全装置:
+#   - 既定で無効。リポジトリ変数 vars.BLOG_AUTO_PUBLISH_ENABLED == 'true' のときだけ動く (キルスイッチ)
+#   - published:true の docs/21 記事だけが対象 (作業中ドラフト published:false は無視)
+#   - publish 前に ci-factual-gate (数値捏造) + quality-gate (構造・薄さ) を再検証し、
+#     落ちた slug はスキップ (R2 に到達させない)
+#   - 1 回の push で公開する上限を MAX_PUBLISH 件にクランプ (爆発半径の限定)
+#
+# 設計詳細: docs/02_実装計画/blog-auto-brushup-cloud-routine.md
+# 手動公開 (1 slug 指定) は従来どおり publish-blog.yml を使う。
+
+on:
+  push:
+    branches: [develop]
+    paths:
+      - "docs/21_ブログ記事原稿/**/article.md"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: publish-blog # publish-blog.yml と同一 group で R2 書き込みを直列化
+  cancel-in-progress: false
+
+env:
+  R2_S3_ENDPOINT: https://${{ secrets.CLOUDFLARE_ACCOUNT_ID }}.r2.cloudflarestorage.com
+  R2_ACCESS_KEY_ID: ${{ secrets.CLOUDFLARE_R2_ACCESS_KEY_ID }}
+  R2_SECRET_ACCESS_KEY: ${{ secrets.CLOUDFLARE_R2_SECRET_ACCESS_KEY }}
+  CLOUDFLARE_R2_BUCKET_NAME: stats47
+  R2_PUBLIC_FETCH_URL: https://storage.stats47.jp
+  MAX_PUBLISH: "5"
+
+jobs:
+  auto-publish:
+    # キルスイッチ: リポジトリ変数で明示的に有効化するまで起動しない
+    if: ${{ vars.BLOG_AUTO_PUBLISH_ENABLED == 'true' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - name: 🧰 Checkout develop
+        uses: actions/checkout@v4
+        with:
+          ref: develop
+          fetch-depth: 2 # before..after の diff を取るため
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 🔍 Detect changed published drafts
+        id: detect
+        run: |
+          BEFORE="${{ github.event.before }}"
+          AFTER="${{ github.sha }}"
+          # before が 0000... (初回) の場合は HEAD~1 にフォールバック
+          if ! git cat-file -e "$BEFORE^{commit}" 2>/dev/null; then BEFORE="$AFTER~1"; fi
+          CHANGED=$(git diff --name-only --diff-filter=ACM "$BEFORE" "$AFTER" \
+            | grep -E '^docs/21_ブログ記事原稿/[^/]+/article\.md$' || true)
+          SLUGS=""
+          COUNT=0
+          for f in $CHANGED; do
+            # published:true のものだけ対象
+            if grep -qE '^published:[[:space:]]*true[[:space:]]*$' "$f"; then
+              slug=$(basename "$(dirname "$f")")
+              SLUGS="$SLUGS $slug"
+              COUNT=$((COUNT + 1))
+            fi
+          done
+          SLUGS=$(echo $SLUGS | xargs -n1 2>/dev/null | head -n "${MAX_PUBLISH}" | xargs || true)
+          echo "slugs=$SLUGS" >> "$GITHUB_OUTPUT"
+          echo "検出: ${COUNT} 件 (上限 ${MAX_PUBLISH} に丸め) → $SLUGS"
+          echo "### Auto-publish 対象" >> "$GITHUB_STEP_SUMMARY"
+          echo "- 検出 published 記事: ${COUNT} 件" >> "$GITHUB_STEP_SUMMARY"
+          echo "- 公開対象 (上限 ${MAX_PUBLISH}): ${SLUGS:-なし}" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: 🚪 Gate + Stage + Publish each slug
+        if: ${{ steps.detect.outputs.slugs != '' }}
+        run: |
+          set -e
+          PUBLISHED=""
+          SKIPPED=""
+          for SLUG in ${{ steps.detect.outputs.slugs }}; do
+            echo "::group::publish $SLUG"
+            DRAFT="docs/21_ブログ記事原稿/$SLUG/article.md"
+            # --- ゲート (公開前ブロック) ---
+            if ! node .claude/scripts/blog/ci-factual-gate.mjs "$SLUG"; then
+              echo "❌ $SLUG: factual gate fail → skip"; SKIPPED="$SKIPPED $SLUG"; echo "::endgroup::"; continue
+            fi
+            if ! node .claude/scripts/blog/quality-gate.mjs "$DRAFT"; then
+              echo "❌ $SLUG: quality gate fail → skip"; SKIPPED="$SKIPPED $SLUG"; echo "::endgroup::"; continue
+            fi
+            # --- ステージ (publishedAt 補完) ---
+            mkdir -p ".local/r2/app/blog/$SLUG"
+            cp -R "docs/21_ブログ記事原稿/$SLUG/." ".local/r2/app/blog/$SLUG/"
+            A=".local/r2/app/blog/$SLUG/article.md"
+            if grep -qE '^publishedAt:\s*\(未定\)' "$A" || ! grep -qE '^publishedAt:\s*[0-9]' "$A"; then
+              perl -i -pe "s/^publishedAt:.*/publishedAt: $(date -u +%Y-%m-%d)/" "$A"
+            fi
+            # --- thumbnail 生成 ---
+            npx tsx apps/web/scripts/generate-blog-thumbnails.ts --slug "$SLUG" || true
+            # --- 記事本体を R2 へ push ---
+            npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix "app/blog/$SLUG"
+            PUBLISHED="$PUBLISHED $SLUG"
+            echo "✅ $SLUG published"
+            echo "::endgroup::"
+          done
+          echo "PUBLISHED=$PUBLISHED" >> "$GITHUB_ENV"
+          echo "SKIPPED=$SKIPPED" >> "$GITHUB_ENV"
+
+      - name: 🧮 Regenerate blog index (all.json) + push
+        if: ${{ steps.detect.outputs.slugs != '' }}
+        run: |
+          NODE_OPTIONS='--conditions react-server' npx tsx apps/web/scripts/export-blog-snapshot.ts
+          npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix app/blog
+
+      - name: 📝 Summary
+        if: always()
+        run: |
+          echo "- ✅ 公開: ${PUBLISHED:-なし}" >> "$GITHUB_STEP_SUMMARY"
+          echo "- ⏭️ ゲート未達でスキップ: ${SKIPPED:-なし}" >> "$GITHUB_STEP_SUMMARY"
+          echo "- 公開後: docs/21 のドラフトは check-published-drafts.cjs が lifecycle 検出" >> "$GITHUB_STEP_SUMMARY"
