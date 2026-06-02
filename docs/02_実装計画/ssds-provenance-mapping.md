@@ -122,13 +122,27 @@ kind別: estat 95.2% / kakei-chousa 100% / mlit 100% / external 44.1%。
 > 注: 時系列/円グラフへの「出典: ◯◯調査」UI 表示は、snapshot に originalSurveys を焼き込む
 > exporter 変更が前提のため **Phase 4 に統合** (UI が読むデータが無いと半端配線になるため)。
 
-### Phase 4 — exporter 焼き込み + UI 表示 + survey ページ是正
+### Phase 4 — `/survey` 一覧の N+1 撲滅 (完了) ✅
 
-- exporter (`ranking-items-per-url-snapshot.ts` 等) で `resolveMetricProvenance` を呼び、snapshot に
-  `originalSurveys[]` を焼き込む。ranking item の旧 `survey_id` も同マッピング由来へ統一 (drift 解消)。
-- 時系列 (theme-dashboard) / 円グラフ (CompositionChart) に「出典: ◯◯調査」表示を追加。
-- `/survey` 一覧の N+1 列挙 (`page.tsx:40-54`) を per-survey items.json ベースへ。
-- `ssds` バケット 200 件を originalSurveys ベースで本来の調査へ再分配。all.json↔items.json 整合性チェック。
+- `apps/web/src/app/survey/page.tsx` の件数集計を是正。旧実装は全 ranking item を 1 件ずつ
+  `readRankingItemFromR2` する N+1 (数千 fetch) だった。per-survey の `app/survey/{id}/items.json`
+  が既に存在するため、調査数 (~40) ぶんの `readRankingItemsBySurveyFromR2` 並列 fetch + `.length`
+  集計に置換。詳細ページ (`[surveyKey]/page.tsx`) は元から効率的だったため変更なし。
+
+> 検証: 動作実績のある詳細ページと同一の import・戻り型を使う外科的置換。R2 書き込みを伴わない
+> 純粋なリード経路の最適化のため、本番デプロイで挙動は不変 (件数表示は同じ、fetch 回数のみ激減)。
+
+### Phase 5 — exporter 焼き込み + UI 表示 + 再分配 (要 CI)
+
+> ⚠️ R2 書き込みは CI 専用 (`.claude/rules/r2-storage-design.md`)。exporter 出力はローカルで検証
+> できないため、CI (`sync-snapshots.yml`) での dry-run 確認とセットで実施する。blast radius 大。
+
+- exporter (`ranking-items-per-url-snapshot.ts`) で `resolveMetricProvenance` を呼び、snapshot に
+  `originalSurveys[]` を焼き込む。ranking package → data-configs 依存を追加。
+- ranking item の旧 `survey_id` (D1 由来の非正規化値) を同マッピング由来へ統一 (drift 解消)。
+- `ssds` バケット 200 件を originalSurveys ベースで本来の調査へ再分配。
+- all.json ↔ items.json 整合性チェック (現状 41 survey 中 4 件が items.json 404) を生成器に追加。
+- 時系列 (theme-dashboard) / 円グラフ (CompositionChart) に「出典: ◯◯調査」表示。
 
 ### Phase 4 — survey ページの是正 + 再分配
 
