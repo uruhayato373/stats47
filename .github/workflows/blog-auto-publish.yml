@@ -34,6 +34,8 @@ on:
     branches: [develop]
     paths:
       - "docs/21_ブログ記事原稿/**/article.md"
+      # この workflow 自身の変更でも発火させ、未公開記事の backfill (reconcile) を回せるようにする。
+      - ".github/workflows/blog-auto-publish.yml"
 
 permissions:
   contents: read
@@ -78,11 +80,31 @@ jobs:
             # 明示指定: そのまま採用 (存在 + published:true は次ステップのゲートで担保)
             CANDIDATES=$(echo "$INPUT_SLUGS" | tr ', ' '\n\n' | sed '/^$/d')
           else
-            # フォールバック: develop 最新コミットで変更された article.md を検出
-            CHANGED=$(git diff --name-only --diff-filter=ACM "HEAD~1" "HEAD" \
+            # フォールバック: develop 最新コミットで変更された article.md を検出。
+            # ★ core.quotepath=false で日本語パスをエスケープせず出力 (既定 true だと
+            #    "docs/21_\343\203..." とエスケープされ grep に一致せず 0 件になる既知バグ)。
+            CHANGED=$(git -c core.quotepath=false diff --name-only --diff-filter=ACM "HEAD~1" "HEAD" \
               | grep -E '^docs/21_ブログ記事原稿/[^/]+/article\.md$' || true)
             CANDIDATES=""
             for f in $CHANGED; do CANDIDATES="$CANDIDATES $(basename "$(dirname "$f")")"; done
+            # reconcile: 変更検出が空なら、published:true なのに配信 all.json に未掲載の記事を backfill。
+            # (workflow 自身の変更で発火したケースや、過去の取りこぼしを self-heal する)
+            if [ -z "$(echo $CANDIDATES | xargs)" ]; then
+              echo "変更検出 0 → 未公開 backfill (reconcile) モード"
+              curl -fsS "${R2_PUBLIC_FETCH_URL}/app/blog/all.json" -o /tmp/live-all.json 2>/dev/null || echo '{"articles":[]}' > /tmp/live-all.json
+              CANDIDATES=$(node -e '
+                const fs=require("fs");
+                let live=new Set();
+                try{ live=new Set((JSON.parse(fs.readFileSync("/tmp/live-all.json","utf8")).articles||[]).map(a=>a.slug)); }catch(e){}
+                const root="docs/21_ブログ記事原稿";
+                for(const d of fs.readdirSync(root)){
+                  const f=`${root}/${d}/article.md`;
+                  if(!fs.existsSync(f)) continue;
+                  const t=fs.readFileSync(f,"utf8");
+                  if(/^published:\s*true\s*$/m.test(t) && !live.has(d)) console.log(d);
+                }
+              ')
+            fi
           fi
           # published:true のものだけ残す
           SLUGS=""
