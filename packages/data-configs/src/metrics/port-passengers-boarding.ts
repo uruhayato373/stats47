@@ -4,7 +4,7 @@ export const portPassengersBoarding: MetricConfig = {
   "key": "port-passengers-boarding",
   "title": "旅客数（乗込）",
   "unit": "人",
-  "category": "port",
+  "category": "tourism",
   "source": {
     "kind": "external",
     "fetcherKey": "mlit_dpf",

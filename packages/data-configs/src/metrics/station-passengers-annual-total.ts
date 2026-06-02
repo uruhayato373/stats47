@@ -16,7 +16,7 @@ export const stationPassengersAnnualTotal: MetricConfig = {
   description:
     "都道府県内の鉄道駅における年間乗降客数の合計。Remotion StationPassengersReel で使用。",
   unit: "人",
-  category: "transport",
+  category: "tourism",
   source: {
     kind: "mlit",
     resourceId: "TODO-STATION-PASSENGERS",

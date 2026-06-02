@@ -4,7 +4,7 @@ export const portCargoCoastalIn: MetricConfig = {
   "key": "port-cargo-coastal-in",
   "title": "移入貨物トン数",
   "unit": "トン",
-  "category": "port",
+  "category": "tourism",
   "source": {
     "kind": "external",
     "fetcherKey": "mlit_dpf",

@@ -1,5 +1,6 @@
 import type {
   CalculationOptions,
+  CategoryKey,
   DisplayConfig,
   EntityKind,
   MetricConfig,
@@ -17,11 +18,12 @@ export interface CreateMetricInput {
   key: string;
   title: string;
   unit: string;
-  category: string;
+  category: CategoryKey;
   source: SourceConfig;
   years: YearSpec;
   subtitle?: string;
   description?: string;
+  note?: string;
   yearFormat?: MetricConfig["yearFormat"];
   /** 既定 `["prefecture"]` */
   entities?: EntityKind[];

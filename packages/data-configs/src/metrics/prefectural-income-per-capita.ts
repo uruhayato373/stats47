@@ -4,7 +4,7 @@ export const prefecturalIncomePerCapita: MetricConfig = {
   "key": "prefectural-income-per-capita",
   "title": "1人当たり県民所得",
   "unit": "千円",
-  "category": "local-economy",
+  "category": "economy",
   "source": {
     "kind": "external",
     "fetcherKey": "unknown",
