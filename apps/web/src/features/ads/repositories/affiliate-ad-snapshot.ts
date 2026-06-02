@@ -65,6 +65,51 @@ export async function readActiveAdByCategoryFromR2(
   return matched[0] ?? null;
 }
 
+/**
+ * categoryKey + locationCode のテキスト広告を priority 降順で複数取得する。
+ * サイドバーに複数のテキストリンクを並べて表示する用途。
+ */
+export async function readActiveTextAdsByCategoryFromR2(
+  categoryKey: string,
+  locationCode: AffiliateLocationCode = "sidebar-bottom",
+  limit = 2,
+): Promise<AffiliateAdRow[]> {
+  const active = await getActive();
+  return active
+    .filter(
+      (a) =>
+        a.categoryKey === categoryKey &&
+        a.locationCode === locationCode &&
+        a.adType === "text",
+    )
+    .sort(compareByPriorityDesc)
+    .slice(0, limit);
+}
+
+/**
+ * 複数 categoryKey をまたいでテキスト広告を取得する (tagKey ベースのブログ用)。
+ * 同一広告が複数 categoryKey に登録されているため、呼び出し側で title 等により dedupe する。
+ */
+export async function readActiveTextAdsByCategoryKeysFromR2(
+  categoryKeys: string[],
+  locationCode: AffiliateLocationCode = "sidebar-bottom",
+  limit = 20,
+): Promise<AffiliateAdRow[]> {
+  if (categoryKeys.length === 0) return [];
+  const active = await getActive();
+  const set = new Set(categoryKeys);
+  return active
+    .filter(
+      (a) =>
+        a.categoryKey != null &&
+        set.has(a.categoryKey) &&
+        a.locationCode === locationCode &&
+        a.adType === "text",
+    )
+    .sort(compareByPriorityDesc)
+    .slice(0, limit);
+}
+
 export async function readActiveBannersByCategoryFromR2(
   categoryKey: string,
   limit = 2,

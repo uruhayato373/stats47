@@ -57,6 +57,11 @@ export const TAG_AFFILIATE_MAP: Record<string, AffiliateCategory> = {
   "public-finance": "furusato", "furusato-nozei": "furusato",
   "tax-revenue": "furusato", "local-government-finance": "furusato",
   "government-expenditure": "furusato",
+  // 日本語 tagKey (記事 frontmatter は日本語タグをそのまま tagKey にするため)
+  "賃金": "labor", "労働": "labor", "年収": "labor", "雇用": "labor",
+  "労働時間": "labor", "残業": "labor", "働き方": "labor", "テレワーク": "labor",
+  "エンジニア": "labor", "IT": "labor", "転職": "labor", "情報通信": "labor",
+  "所得": "economy", "経済": "economy", "収入": "economy", "家計": "economy",
 };
 
 /** カテゴリ別テーマカラー（Tailwind クラス: border / bg / icon） */

@@ -1,0 +1,41 @@
+<!-- data-source: software-engineer-income-national-trend.json | generated: 2026-06-02T13:17:55.016Z -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 360" width="680" height="360" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" role="img" aria-label="ソフトウェア作成者の平均年収 全国平均の推移">
+  <rect width="680" height="360" fill="#fafafa" rx="8"/>
+  <text x="340" y="26" text-anchor="middle" font-size="16" font-weight="bold" fill="#222">ソフトウェア作成者の平均年収 全国平均の推移</text>
+  <line x1="56" y1="320" x2="656" y2="320" stroke="#e0e0e0" stroke-width="1"/>
+  <text x="48" y="324" text-anchor="end" font-size="10" fill="#888">350</text>
+  <line x1="56" y1="252" x2="656" y2="252" stroke="#e0e0e0" stroke-width="1"/>
+  <text x="48" y="256" text-anchor="end" font-size="10" fill="#888">400</text>
+  <line x1="56" y1="184" x2="656" y2="184" stroke="#e0e0e0" stroke-width="1"/>
+  <text x="48" y="188" text-anchor="end" font-size="10" fill="#888">450</text>
+  <line x1="56" y1="116" x2="656" y2="116" stroke="#e0e0e0" stroke-width="1"/>
+  <text x="48" y="120" text-anchor="end" font-size="10" fill="#888">500</text>
+  <line x1="56" y1="48" x2="656" y2="48" stroke="#e0e0e0" stroke-width="1"/>
+  <text x="48" y="52" text-anchor="end" font-size="10" fill="#888">550</text>
+  <text x="56" y="338" text-anchor="middle" font-size="10" fill="#888">2010</text>
+  <text x="148.30769230769232" y="338" text-anchor="middle" font-size="10" fill="#888">2012</text>
+  <text x="240.6153846153846" y="338" text-anchor="middle" font-size="10" fill="#888">2014</text>
+  <text x="332.92307692307696" y="338" text-anchor="middle" font-size="10" fill="#888">2016</text>
+  <text x="425.2307692307692" y="338" text-anchor="middle" font-size="10" fill="#888">2018</text>
+  <text x="517.5384615384615" y="338" text-anchor="middle" font-size="10" fill="#888">2020</text>
+  <text x="609.8461538461539" y="338" text-anchor="middle" font-size="10" fill="#888">2022</text>
+  <text x="656" y="338" text-anchor="middle" font-size="10" fill="#888">2023</text>
+  <path d="M56.0,279.1 L102.2,268.6 L148.3,271.9 L194.5,268.7 L240.6,268.2 L286.8,259.8 L332.9,252.7 L379.1,269.5 L425.2,266.6 L471.4,244.9 L517.5,155.6 L563.7,149.3 L609.8,140.8 L656.0,105.3" fill="none" stroke="#1565c0" stroke-width="2.5"/>
+  <circle cx="56.0" cy="279.1" r="3" fill="#1565c0"/>
+  <circle cx="102.2" cy="268.6" r="3" fill="#1565c0"/>
+  <circle cx="148.3" cy="271.9" r="3" fill="#1565c0"/>
+  <circle cx="194.5" cy="268.7" r="3" fill="#1565c0"/>
+  <circle cx="240.6" cy="268.2" r="3" fill="#1565c0"/>
+  <circle cx="286.8" cy="259.8" r="3" fill="#1565c0"/>
+  <circle cx="332.9" cy="252.7" r="3" fill="#1565c0"/>
+  <circle cx="379.1" cy="269.5" r="3" fill="#1565c0"/>
+  <circle cx="425.2" cy="266.6" r="3" fill="#1565c0"/>
+  <circle cx="471.4" cy="244.9" r="3" fill="#1565c0"/>
+  <circle cx="517.5" cy="155.6" r="3" fill="#1565c0"/>
+  <circle cx="563.7" cy="149.3" r="3" fill="#1565c0"/>
+  <circle cx="609.8" cy="140.8" r="3" fill="#1565c0"/>
+  <circle cx="656.0" cy="105.3" r="3" fill="#1565c0"/>
+  <text x="56.0" y="271.06399999999996" text-anchor="start" font-size="10" font-weight="bold" fill="#1565c0">380.1万円</text>
+  <text x="656.0" y="97.25600000000003" text-anchor="end" font-size="10" font-weight="bold" fill="#1565c0">507.9万円</text>
+  <text x="340" y="354" text-anchor="middle" font-size="10" fill="#888">厚生労働省「賃金構造基本統計調査」 e-Stat</text>
+</svg>

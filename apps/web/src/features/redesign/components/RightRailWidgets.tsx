@@ -7,7 +7,7 @@ import {
   CardTitle,
 } from "@stats47/components/atoms/ui/card";
 
-import { FurusatoNozeiCard, TechSchoolPromoCard } from "@/features/ads";
+import { FurusatoNozeiCard, SidebarPromoBanner, TechSchoolPromoCard } from "@/features/ads";
 
 import { AdSenseAd, RANKING_PAGE_SIDEBAR, RANKING_SIDEBAR_TOP } from "@/lib/google-adsense";
 
@@ -26,6 +26,10 @@ interface RightRailWidgetsProps {
   showTopAd?: boolean;
   /** Claude Code 講座カードを表示するか (default: true) */
   showTechSchool?: boolean;
+  /** 高単価アフィリエイトバナーを表示するか (default: true) */
+  showPromoBanner?: boolean;
+  /** 表示する SIDEBAR_PROMO_BANNERS の index (default: 0 = STRATEGY CAREER) */
+  promoBannerIndex?: number;
   /** 独立スクロール (xl で `max-h+overflow-auto`) を有効にするか (default: true) */
   stickyScroll?: boolean;
 }
@@ -35,12 +39,13 @@ interface RightRailWidgetsProps {
  *
  * 配置順 (above-fold 優先):
  *   1. Claude Code 副業講座 (gradient、最高 CTR 期待)
- *   2. topWidgets (関連ランキング・関連記事など)
- *   3. AdSense Rectangle (上部)
- *   4. midWidgets
- *   5. ふるさと納税 (furusatoAreaCode 指定時)
- *   6. bottomWidgets
- *   7. AdSense Rectangle (下部)
+ *   2. 高単価アフィリエイトバナー (SidebarPromoBanner)
+ *   3. topWidgets (関連ランキング・関連記事など)
+ *   4. AdSense Rectangle (上部)
+ *   5. midWidgets
+ *   6. ふるさと納税 (furusatoAreaCode 指定時)
+ *   7. bottomWidgets
+ *   8. AdSense Rectangle (下部)
  *
  * デフォルトで `xl:max-h-[calc(100vh-5.5rem)] xl:overflow-y-auto` により
  * viewport 内で独立スクロール (記事本文を読みつつ全 widget に到達可能)。
@@ -53,6 +58,8 @@ export async function RightRailWidgets({
   showBottomAd = true,
   showTopAd = true,
   showTechSchool = true,
+  showPromoBanner = true,
+  promoBannerIndex = 0,
   stickyScroll = true,
 }: RightRailWidgetsProps) {
   const scrollClass = stickyScroll
@@ -62,6 +69,8 @@ export async function RightRailWidgets({
   return (
     <div className={`flex flex-col gap-3 ${scrollClass}`}>
       {showTechSchool && <TechSchoolPromoCard />}
+
+      {showPromoBanner && <SidebarPromoBanner index={promoBannerIndex} />}
 
       {topWidgets}
 

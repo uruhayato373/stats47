@@ -1,0 +1,385 @@
+{
+  "title": "平均給与月額（全職種）都道府県ランキング（2024年）",
+  "label": "平均給与月額（全職種）都道府県ランキング（2024年）",
+  "unit": "万円",
+  "year": "2024",
+  "source": "厚生労働省「賃金構造基本統計調査」 e-Stat",
+  "data": [
+    {
+      "rank": 1,
+      "areaName": "東京都",
+      "pref": "東京都",
+      "value": 47.0775,
+      "areaCode": "13000",
+      "display": "47.1万円"
+    },
+    {
+      "rank": 2,
+      "areaName": "大阪府",
+      "pref": "大阪府",
+      "value": 44.7213,
+      "areaCode": "27000",
+      "display": "44.7万円"
+    },
+    {
+      "rank": 3,
+      "areaName": "神奈川県",
+      "pref": "神奈川県",
+      "value": 44.6786,
+      "areaCode": "14000",
+      "display": "44.7万円"
+    },
+    {
+      "rank": 4,
+      "areaName": "愛知県",
+      "pref": "愛知県",
+      "value": 43.9405,
+      "areaCode": "23000",
+      "display": "43.9万円"
+    },
+    {
+      "rank": 5,
+      "areaName": "静岡県",
+      "pref": "静岡県",
+      "value": 43.8633,
+      "areaCode": "22000",
+      "display": "43.9万円"
+    },
+    {
+      "rank": 6,
+      "areaName": "兵庫県",
+      "pref": "兵庫県",
+      "value": 43.6336,
+      "areaCode": "28000",
+      "display": "43.6万円"
+    },
+    {
+      "rank": 7,
+      "areaName": "千葉県",
+      "pref": "千葉県",
+      "value": 43.419200000000004,
+      "areaCode": "12000",
+      "display": "43.4万円"
+    },
+    {
+      "rank": 8,
+      "areaName": "新潟県",
+      "pref": "新潟県",
+      "value": 43.1146,
+      "areaCode": "15000",
+      "display": "43.1万円"
+    },
+    {
+      "rank": 9,
+      "areaName": "岩手県",
+      "pref": "岩手県",
+      "value": 42.946600000000004,
+      "areaCode": "03000",
+      "display": "42.9万円"
+    },
+    {
+      "rank": 10,
+      "areaName": "埼玉県",
+      "pref": "埼玉県",
+      "value": 42.819500000000005,
+      "areaCode": "11000",
+      "display": "42.8万円"
+    },
+    {
+      "rank": 11,
+      "areaName": "滋賀県",
+      "pref": "滋賀県",
+      "value": 42.732600000000005,
+      "areaCode": "25000",
+      "display": "42.7万円"
+    },
+    {
+      "rank": 12,
+      "areaName": "徳島県",
+      "pref": "徳島県",
+      "value": 42.6081,
+      "areaCode": "36000",
+      "display": "42.6万円"
+    },
+    {
+      "rank": 13,
+      "areaName": "宮城県",
+      "pref": "宮城県",
+      "value": 42.3986,
+      "areaCode": "04000",
+      "display": "42.4万円"
+    },
+    {
+      "rank": 14,
+      "areaName": "三重県",
+      "pref": "三重県",
+      "value": 42.2796,
+      "areaCode": "24000",
+      "display": "42.3万円"
+    },
+    {
+      "rank": 15,
+      "areaName": "京都府",
+      "pref": "京都府",
+      "value": 42.246100000000006,
+      "areaCode": "26000",
+      "display": "42.2万円"
+    },
+    {
+      "rank": 16,
+      "areaName": "香川県",
+      "pref": "香川県",
+      "value": 42.2017,
+      "areaCode": "37000",
+      "display": "42.2万円"
+    },
+    {
+      "rank": 17,
+      "areaName": "福島県",
+      "pref": "福島県",
+      "value": 42.0308,
+      "areaCode": "07000",
+      "display": "42.0万円"
+    },
+    {
+      "rank": 18,
+      "areaName": "茨城県",
+      "pref": "茨城県",
+      "value": 41.964200000000005,
+      "areaCode": "08000",
+      "display": "42.0万円"
+    },
+    {
+      "rank": 19,
+      "areaName": "山形県",
+      "pref": "山形県",
+      "value": 41.9406,
+      "areaCode": "06000",
+      "display": "41.9万円"
+    },
+    {
+      "rank": 20,
+      "areaName": "広島県",
+      "pref": "広島県",
+      "value": 41.9058,
+      "areaCode": "34000",
+      "display": "41.9万円"
+    },
+    {
+      "rank": 21,
+      "areaName": "北海道",
+      "pref": "北海道",
+      "value": 41.8868,
+      "areaCode": "01000",
+      "display": "41.9万円"
+    },
+    {
+      "rank": 22,
+      "areaName": "岡山県",
+      "pref": "岡山県",
+      "value": 41.8738,
+      "areaCode": "33000",
+      "display": "41.9万円"
+    },
+    {
+      "rank": 23,
+      "areaName": "沖縄県",
+      "pref": "沖縄県",
+      "value": 41.8337,
+      "areaCode": "47000",
+      "display": "41.8万円"
+    },
+    {
+      "rank": 24,
+      "areaName": "鹿児島県",
+      "pref": "鹿児島県",
+      "value": 41.736000000000004,
+      "areaCode": "46000",
+      "display": "41.7万円"
+    },
+    {
+      "rank": 25,
+      "areaName": "福岡県",
+      "pref": "福岡県",
+      "value": 41.68,
+      "areaCode": "40000",
+      "display": "41.7万円"
+    },
+    {
+      "rank": 26,
+      "areaName": "愛媛県",
+      "pref": "愛媛県",
+      "value": 41.6744,
+      "areaCode": "38000",
+      "display": "41.7万円"
+    },
+    {
+      "rank": 27,
+      "areaName": "山梨県",
+      "pref": "山梨県",
+      "value": 41.5726,
+      "areaCode": "19000",
+      "display": "41.6万円"
+    },
+    {
+      "rank": 28,
+      "areaName": "和歌山県",
+      "pref": "和歌山県",
+      "value": 41.4376,
+      "areaCode": "30000",
+      "display": "41.4万円"
+    },
+    {
+      "rank": 29,
+      "areaName": "石川県",
+      "pref": "石川県",
+      "value": 41.2562,
+      "areaCode": "17000",
+      "display": "41.3万円"
+    },
+    {
+      "rank": 30,
+      "areaName": "群馬県",
+      "pref": "群馬県",
+      "value": 41.128,
+      "areaCode": "10000",
+      "display": "41.1万円"
+    },
+    {
+      "rank": 31,
+      "areaName": "島根県",
+      "pref": "島根県",
+      "value": 41.1054,
+      "areaCode": "32000",
+      "display": "41.1万円"
+    },
+    {
+      "rank": 32,
+      "areaName": "大分県",
+      "pref": "大分県",
+      "value": 41.071000000000005,
+      "areaCode": "44000",
+      "display": "41.1万円"
+    },
+    {
+      "rank": 33,
+      "areaName": "長崎県",
+      "pref": "長崎県",
+      "value": 40.942800000000005,
+      "areaCode": "42000",
+      "display": "40.9万円"
+    },
+    {
+      "rank": 34,
+      "areaName": "青森県",
+      "pref": "青森県",
+      "value": 40.8939,
+      "areaCode": "02000",
+      "display": "40.9万円"
+    },
+    {
+      "rank": 35,
+      "areaName": "鳥取県",
+      "pref": "鳥取県",
+      "value": 40.8736,
+      "areaCode": "31000",
+      "display": "40.9万円"
+    },
+    {
+      "rank": 36,
+      "areaName": "岐阜県",
+      "pref": "岐阜県",
+      "value": 40.737300000000005,
+      "areaCode": "21000",
+      "display": "40.7万円"
+    },
+    {
+      "rank": 37,
+      "areaName": "栃木県",
+      "pref": "栃木県",
+      "value": 40.6956,
+      "areaCode": "09000",
+      "display": "40.7万円"
+    },
+    {
+      "rank": 38,
+      "areaName": "富山県",
+      "pref": "富山県",
+      "value": 40.682700000000004,
+      "areaCode": "16000",
+      "display": "40.7万円"
+    },
+    {
+      "rank": 39,
+      "areaName": "熊本県",
+      "pref": "熊本県",
+      "value": 40.6248,
+      "areaCode": "43000",
+      "display": "40.6万円"
+    },
+    {
+      "rank": 40,
+      "areaName": "宮崎県",
+      "pref": "宮崎県",
+      "value": 40.516000000000005,
+      "areaCode": "45000",
+      "display": "40.5万円"
+    },
+    {
+      "rank": 41,
+      "areaName": "奈良県",
+      "pref": "奈良県",
+      "value": 40.4437,
+      "areaCode": "29000",
+      "display": "40.4万円"
+    },
+    {
+      "rank": 42,
+      "areaName": "福井県",
+      "pref": "福井県",
+      "value": 40.4151,
+      "areaCode": "18000",
+      "display": "40.4万円"
+    },
+    {
+      "rank": 43,
+      "areaName": "秋田県",
+      "pref": "秋田県",
+      "value": 40.395,
+      "areaCode": "05000",
+      "display": "40.4万円"
+    },
+    {
+      "rank": 44,
+      "areaName": "山口県",
+      "pref": "山口県",
+      "value": 40.1764,
+      "areaCode": "35000",
+      "display": "40.2万円"
+    },
+    {
+      "rank": 45,
+      "areaName": "高知県",
+      "pref": "高知県",
+      "value": 40.167100000000005,
+      "areaCode": "39000",
+      "display": "40.2万円"
+    },
+    {
+      "rank": 46,
+      "areaName": "長野県",
+      "pref": "長野県",
+      "value": 39.768100000000004,
+      "areaCode": "20000",
+      "display": "39.8万円"
+    },
+    {
+      "rank": 47,
+      "areaName": "佐賀県",
+      "pref": "佐賀県",
+      "value": 39.4822,
+      "areaCode": "41000",
+      "display": "39.5万円"
+    }
+  ]
+}

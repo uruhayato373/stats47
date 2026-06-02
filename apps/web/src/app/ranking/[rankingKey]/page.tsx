@@ -54,6 +54,7 @@ import {
 import { isOk } from "@stats47/types";
 import { getInitialMapTileUrls } from "@stats47/visualization/leaflet/constants";
 
+import { SidebarPromoBanner } from "@/features/ads";
 import { AffiliateAdSlot, resolveAffiliateBanners } from "@/features/ads/server";
 import { findCategoryByKey } from "@/features/category/server";
 import {
@@ -331,6 +332,7 @@ export default async function RankingKeyPage({
         sidebarSection={
           <Suspense fallback={<div className="space-y-4 animate-pulse"><div className="h-64 bg-muted rounded-lg" /><div className="h-32 bg-muted rounded-lg" /></div>}>
             <RankingItemsSidebar rankingKey={rankingKey} areaType={areaType} categoryKey={rankingItem.categoryKey} />
+            <SidebarPromoBanner />
             <AdSenseAd format={RANKING_SIDEBAR_TOP.format} slotId={RANKING_SIDEBAR_TOP.slotId} />
             <RelatedArticlesCard rankingKey={rankingKey} areaType={areaType} />
             <AffiliateAdSlot categoryKey={rankingItem.categoryKey ?? ""} position="sidebar" />

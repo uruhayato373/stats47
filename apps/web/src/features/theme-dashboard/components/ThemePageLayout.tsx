@@ -9,6 +9,7 @@ import {
   BreadcrumbSeparator,
 } from "@stats47/components/atoms/ui/breadcrumb";
 
+import { SidebarPromoBanner } from "@/features/ads";
 import { resolveAffiliateBanners } from "@/features/ads/server";
 import {
   HeroShell,
@@ -177,6 +178,11 @@ export async function ThemePageLayout({ theme, data, areaContext }: Props) {
       {/* 広告: ダッシュボード読了後・関連記事の前 */}
       <div className="mt-8">
         <AdSenseAd format={THEMES_CONTENT.format} slotId={THEMES_CONTENT.slotId} />
+      </div>
+
+      {/* 高単価アフィリエイトバナー (AdSense と並行) */}
+      <div className="mt-8 flex justify-center">
+        <SidebarPromoBanner index={0} position="theme-banner" />
       </div>
 
       {/* ネイティブアフィリエイト枠 (D Phase 3) */}

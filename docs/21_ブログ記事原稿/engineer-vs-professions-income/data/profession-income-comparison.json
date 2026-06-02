@@ -1,0 +1,127 @@
+{
+  "title": "主要職種の平均年収比較（2023年）",
+  "source": "厚生労働省「賃金構造基本統計調査」 e-Stat",
+  "unit": "万円",
+  "data": [
+    {
+      "key": "doctor",
+      "name": "医師",
+      "avg": 1442.8,
+      "latest": "2023"
+    },
+    {
+      "key": "university-professor",
+      "name": "大学教授",
+      "avg": 977.8,
+      "latest": "2023"
+    },
+    {
+      "key": "associate-professor",
+      "name": "大学准教授",
+      "avg": 811.7,
+      "latest": "2023"
+    },
+    {
+      "key": "researcher",
+      "name": "研究者",
+      "avg": 670.2,
+      "latest": "2023"
+    },
+    {
+      "key": "high-school-teacher",
+      "name": "高校教員",
+      "avg": 614.9,
+      "latest": "2023"
+    },
+    {
+      "key": "system-consultant",
+      "name": "システムコンサルタント",
+      "avg": 612,
+      "latest": "2023"
+    },
+    {
+      "key": "pharmacist",
+      "name": "薬剤師",
+      "avg": 578,
+      "latest": "2023"
+    },
+    {
+      "key": "midwife",
+      "name": "助産師",
+      "avg": 563.2,
+      "latest": "2023"
+    },
+    {
+      "key": "architect",
+      "name": "建築技術者",
+      "avg": 559.3,
+      "latest": "2023"
+    },
+    {
+      "key": "electrician",
+      "name": "電気工",
+      "avg": 539.5,
+      "latest": "2023"
+    },
+    {
+      "key": "software-engineer",
+      "name": "ソフトウェア作成者",
+      "avg": 507.9,
+      "latest": "2023"
+    },
+    {
+      "key": "nurse",
+      "name": "看護師",
+      "avg": 499.3,
+      "latest": "2023"
+    },
+    {
+      "key": "truck-driver",
+      "name": "トラック運転手",
+      "avg": 467.8,
+      "latest": "2023"
+    },
+    {
+      "key": "auto-mechanic",
+      "name": "自動車整備士",
+      "avg": 460.7,
+      "latest": "2023"
+    },
+    {
+      "key": "carpenter",
+      "name": "大工",
+      "avg": 431.7,
+      "latest": "2023"
+    },
+    {
+      "key": "designer",
+      "name": "デザイナー",
+      "avg": 395.2,
+      "latest": "2023"
+    },
+    {
+      "key": "care-worker",
+      "name": "介護職員",
+      "avg": 360.3,
+      "latest": "2023"
+    },
+    {
+      "key": "security-guard",
+      "name": "警備員",
+      "avg": 353.9,
+      "latest": "2023"
+    },
+    {
+      "key": "cook",
+      "name": "調理士",
+      "avg": 339.6,
+      "latest": "2023"
+    },
+    {
+      "key": "sales-clerk",
+      "name": "販売店員",
+      "avg": 337.8,
+      "latest": "2023"
+    }
+  ]
+}

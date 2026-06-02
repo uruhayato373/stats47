@@ -6,6 +6,8 @@ import {
 import {
   readActiveAdByCategoryFromR2 as findActiveAdByCategory,
   readActiveBannersByCategoryKeysFromR2 as findActiveBannersByCategoryKeys,
+  readActiveTextAdsByCategoryFromR2 as findActiveTextAdsByCategory,
+  readActiveTextAdsByCategoryKeysFromR2 as findActiveTextAdsByCategoryKeys,
 } from "../repositories/affiliate-ad-snapshot";
 
 import type { AffiliateLocationCode } from "../types";
@@ -41,6 +43,64 @@ export async function resolveAffiliateAd(
     href: dbAd.htmlContent,
     trackingPixelUrl: dbAd.trackingPixelUrl,
   };
+}
+
+/**
+ * categoryKey に対応するテキスト広告を複数解決する (priority 降順、最大 limit 件)。
+ * サイドバーに複数のテキストリンクを並べて表示する用途。
+ */
+export async function resolveAffiliateTextAds(
+  categoryKey: string,
+  locationCode: AffiliateLocationCode = "sidebar-bottom",
+  limit = 2
+): Promise<ResolvedAffiliateAd[]> {
+  const ads = await findActiveTextAdsByCategory(categoryKey, locationCode, limit);
+  return ads.map((ad) => ({
+    title: ad.title,
+    href: ad.htmlContent,
+    trackingPixelUrl: ad.trackingPixelUrl,
+  }));
+}
+
+/**
+ * tagKey 配列からテキスト広告を複数解決する (ブログ記事サイドバー用)。
+ * tagKey → AffiliateCategory → categoryKey(s) を収集し、title で dedupe して priority 降順で返す。
+ * 該当タグが無い記事でも表示できるよう、マッチ無し時は economy にフォールバックする。
+ */
+export async function resolveAffiliateTextAdsByTagKeys(
+  tagKeys: string[],
+  locationCode: AffiliateLocationCode = "sidebar-bottom",
+  limit = 2
+): Promise<ResolvedAffiliateAd[]> {
+  const triedCategories = new Set<AffiliateCategory>();
+  const allCategoryKeys: string[] = [];
+
+  for (const tagKey of tagKeys) {
+    const affiliateCategory = TAG_AFFILIATE_MAP[tagKey];
+    if (!affiliateCategory || triedCategories.has(affiliateCategory)) continue;
+    triedCategories.add(affiliateCategory);
+
+    const categoryKeys = Object.entries(CATEGORY_AFFILIATE_MAP)
+      .filter(([, cat]) => cat === affiliateCategory)
+      .map(([key]) => key);
+    allCategoryKeys.push(...categoryKeys);
+  }
+
+  // タグ未マッチの記事でもテキスト広告を出すための fallback
+  if (allCategoryKeys.length === 0) allCategoryKeys.push("economy");
+
+  const ads = await findActiveTextAdsByCategoryKeys(allCategoryKeys, locationCode);
+
+  // 同一広告が複数 categoryKey に登録されているため title で dedupe
+  const seen = new Set<string>();
+  const unique: ResolvedAffiliateAd[] = [];
+  for (const ad of ads) {
+    if (seen.has(ad.title)) continue;
+    seen.add(ad.title);
+    unique.push({ title: ad.title, href: ad.htmlContent, trackingPixelUrl: ad.trackingPixelUrl });
+    if (unique.length >= limit) break;
+  }
+  return unique;
 }
 
 /**
