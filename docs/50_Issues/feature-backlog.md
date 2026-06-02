@@ -622,11 +622,11 @@ Cloudflare Pages env vars に以下を追加 (現状は未設定で内部 fallba
   - ✅ **T5-残(Slider)**: MetricYoy の `<input type=range>` を既存 `Slider` に置換完了（Slider は既に components に存在）。
   - ✅ **T4 基盤**: `createMetric()` ファクトリ導入 + PoC 1 件移行（出力が元リテラルと byte 一致）。codemod 不要・段階移行可。
   - ✅ **T6 verified slice**: `CountUp`/`ScrollReveal`/`MobileNavigation` 削除（参照ゼロ個別確認）。
-- **残タスク（引き続き deferred）**:
-  - **T3-残** (tier 2): `MetricConfig`/`YearSpec` 等の `@stats47/types` 一次源化（data-configs↔types の依存方向再設計・cycle 回避）。
-  - **T4-残** (tier 3): `createMetric()` への **2209 file の段階移行（codemod）** → registry.ts(4439 行) のカテゴリ別分割 or glob 遅延ロード → SEO/UI メタ分離。基盤は導入済なので新規 metric から順次 createMetric 利用。
-  - **T5-残** (tier 3): GenericSankey による JSX 全抽象化（視覚回帰リスクのため要 Playwright 目視）。
-  - **T6-残** (tier 3): ⚠️ **「単純な dead-code 削除」ではないと判明（2026-06-02 深掘り）**。
+- **残タスク（引き続き deferred）— ★ROI 判断（2026-06-02 深掘り後）付き**:
+  - **T4-残** (tier 3) — **推奨: やらない（基盤導入で実質完了扱い）**。`createMetric()` は導入済で**いつでも利用可**。残りの「2209 file 一括 codemod」は**挙動ゼロ変化なのに巨大 diff** を生むだけで、レビュー性・git 履歴を悪化させ利得は僅少。設計上の正解は**段階移行（新規 metric から createMetric を使う）**。registry 分割/SEO メタ分離は別途スケール律速が出たら検討。
+  - **T3-残** (tier 2) — **低優先（任意）**。実害だった `SourceConfig` 名前衝突は修正済。`MetricConfig`/`YearSpec` の `@stats47/types` 一次源化は data-configs↔types の依存方向再設計（cycle 回避）を伴い、広範な import 改修の割に効果は控えめ。
+  - **T5-残** (tier 3) — **低優先（任意）**。重複の実体だった fetch/fallback は `useFlowData`/`SankeyFallback`/`topNWithOther` に hook 化済。残る GenericSankey の JSX 全抽象化は利得わずか + 視覚回帰リスク（要 Playwright 目視）。
+  - **T6-残** (tier 3) — **要オーナー判断（untangle PR）**。下記の半廃止整理。「単純 dead-code 削除」ではない。
     - `knip.config.ts` の Next.js entry を拡充済（sitemap/robots/manifest/opengraph-image/global-error/middleware/test.setup）。これで `config/test.setup.tsx` 等の明白な false-positive は解消。
     - しかし残る flagged の多くは **`/ports`・`/fishing-ports` ルートの半端な廃止**に起因。両ルートは 2026-05-28 (`709a704`) に `/themes` へ統合・middleware で 301 済 → **feature の UI（components/page）は orphan**。
     - **だが** `port-statistics`/`fishing-ports` の `lib`/型は **R2 export パイプラインがまだ使用**（`apps/web/scripts/export-fishing-ports-snapshot.ts` が `FishingPortData` を import、`sync-snapshots/run.sh` に残存）。→ **UI dead + データ層 live の混在**。blind 削除は export を壊す。
