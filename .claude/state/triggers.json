@@ -61,6 +61,24 @@
         "詳細確認: https://claude.ai/code/routines/trig_01J26XQsDbdBM3ggTQ8gcBta",
         "ローカル開発用に .claude/scripts/psi/generate-cwv-pr.mjs (ANTHROPIC_API_KEY 必要) は残存 — 通常使用は Routine 経由"
       ]
+    },
+    {
+      "id": "PENDING-MANUAL-REGISTRATION",
+      "name": "stats47 daily blog conformance",
+      "cron": "0 16 * * *",
+      "cron_note": "16:00 UTC = 翌 01:00 JST",
+      "purpose": "ブログ表現正典化 catch-up: audit blocker 上位 ≤8 記事/日 を fetch→generate-charts→正典化→blog-critic(必須)→quality-gate→PR(brushup-auto)。約31日で残~245件を一巡後、週次 GSC-CTR brushup に切替",
+      "repo": "https://github.com/uruhayato373/stats47",
+      "model": "claude-sonnet-4-6",
+      "enabled": false,
+      "anthropic_registration_status": "pending-manual",
+      "notes": [
+        "2026-06-02: 仕様確定。★connector セッション (Claude Code on the web) には RemoteTrigger/`/schedule` ツールが無く自動登録不可。人手で routines UI (https://claude.ai/code/routines) に登録する",
+        "prompt 全文と登録仕様: docs/02_実装計画/blog-auto-brushup-cloud-routine.md 「ルーティンプロンプト」「トリガー登録仕様」",
+        "依存: select-conformance-candidates.mjs (GSC非依存) / generate-article-charts.mjs (強化済) / blog-auto-merge.yml / blog-auto-publish.yml (on:push 有効)",
+        "雛形: trend pipeline trig_01RaPLqZrP4i7wAnCzQjifWJ の notes",
+        "一巡後は select-brushup-candidates(GSC) ベース週次へ戻す"
+      ]
     }
   ]
 }

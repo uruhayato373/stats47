@@ -53,15 +53,17 @@ GSC 高インプレ記事を「候補選定 → データ接地 → AI リライ
 
 | 工程 | 実装 | 状態 |
 |---|---|---|
-| ① 候補選定 | `.claude/scripts/blog/select-brushup-candidates.mjs` | ✅ 既存・DBレスで動作確認済 (2026-06-02) |
-| ② データ接地 | `.claude/scripts/blog/fetch-ranking-data-r2.mjs` | ✅ **新規実装・テスト済** (旧 D1 依存 `fetch-article-data.mjs` の置換) |
-| ③ AI リライト | `/brushup-blog --target article <slug> --focus CTR-reframe` | ✅ 既存スキル |
-| ④ チャート | `.claude/scripts/blog/generate-article-charts.mjs` | ✅ 既存 |
-| ⑤ ゲート | `.claude/scripts/blog/quality-gate.mjs` (+factual) | ✅ 既存・CI enforce 済 (2026-06-02) |
-| ⑥ PR | Routine が `gh pr create` | ✅ trend pipeline と同型 |
-| ⑦ auto-merge | (要新規 or GitHub 標準 auto-merge) | ⏳ 未実装 |
-| ⑧ 公開ブリッジ | `.github/workflows/blog-auto-publish.yml` | ✅ **新規実装 (現 workflow_dispatch のみ)** |
-| ⑨ 計測 | `.claude/scripts/blog/measure-gsc-impact.mjs` | ✅ 既存・要 SKILL 化 (blog-data-schema Phase D) |
+| ① 候補選定 (GSC) | `.claude/scripts/blog/select-brushup-candidates.mjs` | ✅ 既存 (CTR 改善余地ベース・GSC 必須) |
+| ①' 候補選定 (catch-up) | `.claude/scripts/blog/select-conformance-candidates.mjs` | ✅ **新規 (2026-06-02)・GSC 非依存・audit blocker ベース** |
+| ② データ接地 | `.claude/scripts/blog/fetch-ranking-data-r2.mjs` | ✅ 新規実装・テスト済 (旧 D1 依存の置換) |
+| ③ AI リライト | `/brushup-blog --target article <slug>` + 表現正典化 | ✅ 既存スキル (Step B2 に正典化追加済) |
+| ④ チャート | `.claude/scripts/blog/generate-article-charts.mjs` | ✅ **2026-06-02 強化: 上位5+下位5 / placeholder タグ+名前不一致フォールバック / dark mode / --extract-inline** |
+| ⑤ critic (必須) | `blog-critic` agent → `review.md` (verdict PASS) | ✅ **agent あり・pilot で REVISE→PASS ループ実証** |
+| ⑥ ゲート | `.claude/scripts/blog/quality-gate.mjs` (+factual) | ✅ 既存・CI enforce 済 + review.md PASS 必須 (2026-06-02) |
+| ⑦ PR | Routine が PR 作成 (`mcp__github__` or `gh`) `--label brushup-auto` | ✅ trend pipeline と同型 |
+| ⑧ auto-merge | `.github/workflows/blog-auto-merge.yml` | ✅ **新規 (2026-06-02)・brushup-auto green で squash merge** |
+| ⑨ 公開ブリッジ | `.github/workflows/blog-auto-publish.yml` | ✅ **`on: push: [develop]` 有効化済 (2026-06-02・pilot 2 記事で実証)** |
+| ⑩ 計測 | `.claude/scripts/blog/measure-gsc-impact.mjs` | ✅ 既存・要 SKILL 化 (blog-data-schema Phase D) |
 
 ## 安全設計 (自動公開の肝)
 
@@ -82,13 +84,70 @@ GSC 高インプレ記事を「候補選定 → データ接地 → AI リライ
 | **2: 半自律 (採用)** | Phase1 + green で auto-merge + 公開ブリッジに `on: push` 追加で自動化 | 公開ブリッジ✅(dispatch) / push trigger⏳ / auto-merge⏳ / Routine⏳ |
 | 3: 完全自律 | レビューなし公開 + 自動計測ループ | 効果計測の SKILL 化後 |
 
-## 稼働に必要な残作業 (この環境では実行/検証不可な分)
+## 稼働に必要な残作業 (現在地: 2026-06-02)
 
-- [ ] `blog-auto-publish.yml` の **初回検証 (手動 dispatch)**: `gh workflow run blog-auto-publish.yml -f slugs=<検証 slug>` で実行し、Actions ログで factual/quality ゲート → diff-push → all.json 再生成が通るか確認 (本環境では CI ランタイム不在のため未検証)
-- [ ] 検証 OK 後、**`on: push: branches:[develop]` を後続コミットで追加** (この時点で develop マージ → 自動公開が成立)
-- [ ] **Claude Routine 登録** (`/schedule` 経由): `stats47 weekly blog brushup` — cron 週次、model sonnet、purpose=「① select-brushup-candidates → ② fetch-ranking-data-r2 → ③ brushup-blog --target article → ⑤ quality-gate → ⑥ gh pr create --label brushup-auto」、月上限・GATE。trend pipeline (`trig_01RaPLqZrP4i7wAnCzQjifWJ`) の notes を雛形にする
-- [ ] **auto-merge**: `brushup-auto` ラベル PR を全 check green で squash merge する仕組み (GitHub 標準 auto-merge を Routine が `gh pr merge --auto --squash` で有効化、or 専用 workflow)。権限確認要
+- [x] `blog-auto-publish.yml` を **`on: push: [develop]` で稼働**化 (pilot 2 記事 yakiniku/fertility が実際に自動公開され、ログ green を確認)
+- [x] **auto-merge workflow** 作成 (`.github/workflows/blog-auto-merge.yml`・brushup-auto green で squash merge)
+- [x] **catch-up 候補選定** (`select-conformance-candidates.mjs`・GSC 非依存) + 生成器強化 + critic ループ実証
+- [ ] **Claude Routine 登録** — ★**connector セッション (Claude Code on the web) には RemoteTrigger / `/schedule` ツールが無く登録不可**。下記「トリガー登録仕様」を **Claude Code web の routines UI** (`https://claude.ai/code/routines`) に貼って登録する (人手 1 回)。雛形: trend pipeline `trig_01RaPLqZrP4i7wAnCzQjifWJ`
 - [ ] `measure-gsc-impact.mjs` の SKILL 化 (`/measure-blog-impact`, blog-data-schema Phase D)
+
+## ルーティンプロンプト (確定・登録時に purpose/prompt へ貼る)
+
+> 1 実行で最大 8 記事を「表現正典化」して develop に PR。critic 必須。R2 書き込みはしない (公開は CI)。
+
+```
+OUTPUT FORMAT: 最後に 1 テーブルのみ。列: slug | verdict(PASS/REVISE/skip) | PR?。各セル ≤10 語。前置き散文なし。
+
+あなたは stats47 ブログ「表現正典化 catch-up ルーティン」。今回 ≤8 記事を正典化し develop に PR を作る。
+
+手順 (各 slug):
+0. develop を pull。作業ブランチ claude/blog-conformance-$(date +%Y%m%d) を切る。
+1. 候補選定(決定的):
+   node .claude/scripts/blog/audit-published-blog.mjs --json /tmp/published-blog-audit.json
+   node .claude/scripts/blog/select-conformance-candidates.mjs --count 8 --cooldown 21
+2. 作業コピー: mkdir -p docs/21_ブログ記事原稿/<slug>; R2 から本文取得
+   curl -s https://storage.stats47.jp/app/blog/<slug>/article.md -o docs/21_ブログ記事原稿/<slug>/article.md
+3. データ接地(決定的・捏造防止の土台):
+   R2_PUBLIC_FETCH_URL=https://storage.stats47.jp node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug <slug>
+4. チャート(決定的): node .claude/scripts/blog/generate-article-charts.mjs --slug <slug>
+   インライン svg があれば: node .claude/scripts/blog/generate-article-charts.mjs --slug <slug> --extract-inline
+5. 表現正典化(LLM編集・正典 = .claude/rules/blog-quality-standards.md「記事 markdown の正典テンプレート」):
+   - <chart-placeholder>/インライン svg → ![](data/*.svg)
+   - 記事内『関連ランキング/関連記事』見出しを削除 (ページ側 RelatedRankingsSection 等が正典)
+   - source-link を各図直下にインライン配置 (末尾集約しない)
+   - truncated 表/上下非対称表を撤去 (全件 or SVG・上下対称)
+   - callout ≥2 / 内部リンク ≥3 (不足なら本文に /areas/<code> /category/<key> を curl で実在確認の上 追記)
+   - prose が薄ければ読者価値ある分析を加筆 (反復水増し禁止)。数値は data/*.json の digest のみ (捏造厳禁)
+6. critic(必須・別 agent): Agent(subagent_type=blog-critic) を起動し review.md を生成。
+   verdict REVISE なら指摘を修正して再 review。BLOCK が消えるまで最大 3 周。PASS が得られない slug は skip。
+7. gate(決定的): node .claude/scripts/blog/quality-gate.mjs docs/21_ブログ記事原稿/<slug>/article.md
+   exit≠0 なら revert して skip (PR に含めない)。
+8. frontmatter に published: true があるか確認 (無ければ追加)。
+9. 全 slug 完了後: .claude/state/blog/auto-brushup-history.json に {date, wave_id:"$(date +%Y-%m-%d)-auto", slug} を追記し commit。
+   ラベル brushup-auto を用意 (未作成なら: gh label create brushup-auto --color FFA500 --description "ブログ表現正典化 自動リライト PR" || true)。
+   PR 作成 (gh pr create または mcp__github__create_pull_request, base=develop) + ラベル brushup-auto 付与。
+   → blog-auto-merge が green で squash merge → blog-auto-publish が R2 公開。
+
+制約: ≤8 記事/実行。critic PASS なき記事は PR に入れない。R2 直接書き込み禁止。NotebookLM 不可 (headless)。
+```
+
+## トリガー登録仕様 (routines UI に貼る・人手 1 回)
+
+| 項目 | 値 |
+|---|---|
+| name | `stats47 daily blog conformance` |
+| cron | `0 16 * * *` (16:00 UTC = 翌 01:00 JST。低トラフィック帯) |
+| model | `claude-sonnet-4-6` (大量編集向き・コスト効率) |
+| repo | `https://github.com/uruhayato373/stats47` |
+| environment | trend pipeline と同一 (`env_01DyBoX8qdC86ZEdncmFwqx6` を雛形に新規可) |
+| persist_session | false (毎回新規) |
+| purpose / prompt | 上記「ルーティンプロンプト」 |
+| 上限 | ≤8 記事/実行 (プロンプト内) + `blog-auto-publish` の `MAX_PUBLISH=10` |
+| 想定消化 | 残 ~245 件 (blocker あり) ÷ 8/日 ≈ **約 31 日**で一巡。以後は週次の GSC-CTR brushup に切替 |
+| 停止 | routines UI で disable、または `RemoteTrigger({action:'update', body:{enabled:false}})` |
+
+> catch-up 一巡後は `select-brushup-candidates`(GSC) ベースの週次に戻す (チャーン防止・効果計測ループへ)。
 
 ## 関連
 
