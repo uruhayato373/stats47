@@ -244,7 +244,14 @@ node .claude/scripts/blog/quality-gate.mjs <slug>
 # exit 0 → 確定 / exit 1 → blocker を修正して再実行 (batch では revert + skip)
 ```
 
-quality-gate は内部で `article-factual-check.mjs` を呼び、rank/値の data 突合・callout/内部リンク/H2/charCount・NG ワードを一括検証する。
+quality-gate は内部で `article-factual-check.mjs` を呼び、rank/値の data 突合・callout/内部リンク/H2・**prose 文字数の床 (1600)**・NG ワード・**truncated 表**を一括検証する。
+
+> **★公開記事は blog-critic レビュー (review.md verdict: PASS) が必須**: `published:true` の記事は
+> `docs/21_ブログ記事原稿/<slug>/review.md` (別 agent `blog-critic` が `/blog-review --mode expert` で生成、
+> verdict: PASS) が無いと quality-gate が blocker で止める。**リライトした本人が自己採点しない** ——
+> 必ず別コンテキストの blog-critic に意味レビュー (冗長・図表重複・水増し・CTA過多・読者価値) を依頼し、
+> REVISE 指摘を反映してから PASS を得る。文字数の量的十分性も critic が判断する (高い文字数床で水増しを誘発しない)。
+> 詳細: `.claude/rules/blog-quality-standards.md`「品質の3層モデルと critic 必須」。
 
 ```
 === /brushup-blog --target article: <slug> 完了 ===
