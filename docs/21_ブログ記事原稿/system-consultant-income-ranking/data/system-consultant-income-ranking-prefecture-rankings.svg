@@ -1,0 +1,68 @@
+<!-- data-source: system-consultant-income-ranking-prefecture-rankings.json | generated: 2026-06-02T13:29:33.981Z -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 480" width="680" height="480" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" role="img" aria-label="システムコンサルタントの平均年収 都道府県ランキング（2023年）">
+  <rect width="680" height="480" fill="#fafafa" rx="8"/>
+  <text x="340" y="24" text-anchor="middle" font-size="16" font-weight="bold" fill="#222">システムコンサルタントの平均年収 都道府県ランキング（2023年）</text>
+  <text x="227.5" y="54" text-anchor="middle" font-size="12" font-weight="bold" fill="#1565c0">上位 10</text>
+  <text x="542.5" y="54" text-anchor="middle" font-size="12" font-weight="bold" fill="#c62828">下位 10</text>
+      <text x="84" y="82" text-anchor="end" font-size="11" fill="#333">秋田県</text>
+      <rect x="90" y="63" width="195.0" height="30" fill="#1565c0" rx="2"/>
+      <text x="289.0" y="82" font-size="10" fill="#333">952.5万円</text>
+      <text x="84" y="118" text-anchor="end" font-size="11" fill="#333">奈良県</text>
+      <rect x="90" y="99" width="181.2" height="30" fill="#1976d2" rx="2"/>
+      <text x="275.2" y="118" font-size="10" fill="#333">884.9万円</text>
+      <text x="84" y="154" text-anchor="end" font-size="11" fill="#333">千葉県</text>
+      <rect x="90" y="135" width="166.4" height="30" fill="#1e88e5" rx="2"/>
+      <text x="260.4" y="154" font-size="10" fill="#333">812.6万円</text>
+      <text x="84" y="190" text-anchor="end" font-size="11" fill="#333">神奈川県</text>
+      <rect x="90" y="171" width="161.9" height="30" fill="#2196f3" rx="2"/>
+      <text x="255.9" y="190" font-size="10" fill="#333">790.7万円</text>
+      <text x="84" y="226" text-anchor="end" font-size="11" fill="#333">広島県</text>
+      <rect x="90" y="207" width="161.0" height="30" fill="#42a5f5" rx="2"/>
+      <text x="255.0" y="226" font-size="10" fill="#333">786.4万円</text>
+      <text x="84" y="262" text-anchor="end" font-size="11" fill="#333">長野県</text>
+      <rect x="90" y="243" width="160.4" height="30" fill="#64b5f6" rx="2"/>
+      <text x="254.4" y="262" font-size="10" fill="#333">783.4万円</text>
+      <text x="84" y="298" text-anchor="end" font-size="11" fill="#333">栃木県</text>
+      <rect x="90" y="279" width="155.3" height="30" fill="#90caf9" rx="2"/>
+      <text x="249.3" y="298" font-size="10" fill="#333">758.5万円</text>
+      <text x="84" y="334" text-anchor="end" font-size="11" fill="#333">静岡県</text>
+      <rect x="90" y="315" width="152.2" height="30" fill="#1565c0" rx="2"/>
+      <text x="246.2" y="334" font-size="10" fill="#333">743.4万円</text>
+      <text x="84" y="370" text-anchor="end" font-size="11" fill="#333">鹿児島県</text>
+      <rect x="90" y="351" width="150.8" height="30" fill="#1976d2" rx="2"/>
+      <text x="244.8" y="370" font-size="10" fill="#333">736.6万円</text>
+      <text x="84" y="406" text-anchor="end" font-size="11" fill="#333">兵庫県</text>
+      <rect x="90" y="387" width="148.9" height="30" fill="#1e88e5" rx="2"/>
+      <text x="242.9" y="406" font-size="10" fill="#333">727.4万円</text>
+      <text x="399" y="82" text-anchor="end" font-size="11" fill="#333">沖縄県</text>
+      <rect x="405" y="63" width="73.0" height="30" fill="#c62828" rx="2"/>
+      <text x="482.0" y="82" font-size="10" fill="#333">359.1万円</text>
+      <text x="399" y="118" text-anchor="end" font-size="11" fill="#333">山形県</text>
+      <rect x="405" y="99" width="85.1" height="30" fill="#d32f2f" rx="2"/>
+      <text x="494.1" y="118" font-size="10" fill="#333">418.2万円</text>
+      <text x="399" y="154" text-anchor="end" font-size="11" fill="#333">佐賀県</text>
+      <rect x="405" y="135" width="88.3" height="30" fill="#e53935" rx="2"/>
+      <text x="497.3" y="154" font-size="10" fill="#333">434.2万円</text>
+      <text x="399" y="190" text-anchor="end" font-size="11" fill="#333">青森県</text>
+      <rect x="405" y="171" width="92.3" height="30" fill="#ef5350" rx="2"/>
+      <text x="501.3" y="190" font-size="10" fill="#333">454.0万円</text>
+      <text x="399" y="226" text-anchor="end" font-size="11" fill="#333">大分県</text>
+      <rect x="405" y="207" width="95.9" height="30" fill="#e57373" rx="2"/>
+      <text x="504.9" y="226" font-size="10" fill="#333">471.3万円</text>
+      <text x="399" y="262" text-anchor="end" font-size="11" fill="#333">石川県</text>
+      <rect x="405" y="243" width="96.5" height="30" fill="#ef9a9a" rx="2"/>
+      <text x="505.5" y="262" font-size="10" fill="#333">474.5万円</text>
+      <text x="399" y="298" text-anchor="end" font-size="11" fill="#333">北海道</text>
+      <rect x="405" y="279" width="98.0" height="30" fill="#c62828" rx="2"/>
+      <text x="507.0" y="298" font-size="10" fill="#333">482.0万円</text>
+      <text x="399" y="334" text-anchor="end" font-size="11" fill="#333">福岡県</text>
+      <rect x="405" y="315" width="98.3" height="30" fill="#d32f2f" rx="2"/>
+      <text x="507.3" y="334" font-size="10" fill="#333">483.3万円</text>
+      <text x="399" y="370" text-anchor="end" font-size="11" fill="#333">徳島県</text>
+      <rect x="405" y="351" width="98.6" height="30" fill="#e53935" rx="2"/>
+      <text x="507.6" y="370" font-size="10" fill="#333">485.0万円</text>
+      <text x="399" y="406" text-anchor="end" font-size="11" fill="#333">山口県</text>
+      <rect x="405" y="387" width="100.0" height="30" fill="#ef5350" rx="2"/>
+      <text x="509.0" y="406" font-size="10" fill="#333">491.7万円</text>
+  <text x="340" y="462" text-anchor="middle" font-size="10" fill="#888">凡例: 青系=上位 / 赤系=下位（厚生労働省「賃金構造基本統計調査」 e-Stat）</text>
+</svg>

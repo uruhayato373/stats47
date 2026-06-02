@@ -1,0 +1,68 @@
+<!-- data-source: long-commute-telework-potential-prefecture-rankings.json | generated: 2026-06-02T13:29:33.998Z -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 480" width="680" height="480" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" role="img" aria-label="通勤90分以上の雇用者世帯の割合 都道府県ランキング（2018年）">
+  <rect width="680" height="480" fill="#fafafa" rx="8"/>
+  <text x="340" y="24" text-anchor="middle" font-size="16" font-weight="bold" fill="#222">通勤90分以上の雇用者世帯の割合 都道府県ランキング（2018年）</text>
+  <text x="227.5" y="54" text-anchor="middle" font-size="12" font-weight="bold" fill="#1565c0">上位 10</text>
+  <text x="542.5" y="54" text-anchor="middle" font-size="12" font-weight="bold" fill="#c62828">下位 10</text>
+      <text x="84" y="82" text-anchor="end" font-size="11" fill="#333">埼玉県</text>
+      <rect x="90" y="63" width="195.0" height="30" fill="#1565c0" rx="2"/>
+      <text x="289.0" y="82" font-size="10" fill="#333">38.0％</text>
+      <text x="84" y="118" text-anchor="end" font-size="11" fill="#333">神奈川県</text>
+      <rect x="90" y="99" width="189.4" height="30" fill="#1976d2" rx="2"/>
+      <text x="283.4" y="118" font-size="10" fill="#333">36.9％</text>
+      <text x="84" y="154" text-anchor="end" font-size="11" fill="#333">千葉県</text>
+      <rect x="90" y="135" width="187.3" height="30" fill="#1e88e5" rx="2"/>
+      <text x="281.3" y="154" font-size="10" fill="#333">36.5％</text>
+      <text x="84" y="190" text-anchor="end" font-size="11" fill="#333">茨城県</text>
+      <rect x="90" y="171" width="132.4" height="30" fill="#2196f3" rx="2"/>
+      <text x="226.4" y="190" font-size="10" fill="#333">25.8％</text>
+      <text x="84" y="226" text-anchor="end" font-size="11" fill="#333">奈良県</text>
+      <rect x="90" y="207" width="131.4" height="30" fill="#42a5f5" rx="2"/>
+      <text x="225.4" y="226" font-size="10" fill="#333">25.6％</text>
+      <text x="84" y="262" text-anchor="end" font-size="11" fill="#333">兵庫県</text>
+      <rect x="90" y="243" width="102.6" height="30" fill="#64b5f6" rx="2"/>
+      <text x="196.6" y="262" font-size="10" fill="#333">20.0％</text>
+      <text x="84" y="298" text-anchor="end" font-size="11" fill="#333">滋賀県</text>
+      <rect x="90" y="279" width="101.1" height="30" fill="#90caf9" rx="2"/>
+      <text x="195.1" y="298" font-size="10" fill="#333">19.7％</text>
+      <text x="84" y="334" text-anchor="end" font-size="11" fill="#333">栃木県</text>
+      <rect x="90" y="315" width="85.2" height="30" fill="#1565c0" rx="2"/>
+      <text x="179.2" y="334" font-size="10" fill="#333">16.6％</text>
+      <text x="84" y="370" text-anchor="end" font-size="11" fill="#333">東京都</text>
+      <rect x="90" y="351" width="83.1" height="30" fill="#1976d2" rx="2"/>
+      <text x="177.1" y="370" font-size="10" fill="#333">16.2％</text>
+      <text x="84" y="406" text-anchor="end" font-size="11" fill="#333">和歌山県</text>
+      <rect x="90" y="387" width="81.1" height="30" fill="#1e88e5" rx="2"/>
+      <text x="175.1" y="406" font-size="10" fill="#333">15.8％</text>
+      <text x="399" y="82" text-anchor="end" font-size="11" fill="#333">鳥取県</text>
+      <rect x="405" y="63" width="68.3" height="30" fill="#c62828" rx="2"/>
+      <text x="477.3" y="82" font-size="10" fill="#333">2.8％</text>
+      <text x="399" y="118" text-anchor="end" font-size="11" fill="#333">沖縄県</text>
+      <rect x="405" y="99" width="70.7" height="30" fill="#d32f2f" rx="2"/>
+      <text x="479.7" y="118" font-size="10" fill="#333">2.9％</text>
+      <text x="399" y="154" text-anchor="end" font-size="11" fill="#333">島根県</text>
+      <rect x="405" y="135" width="73.2" height="30" fill="#e53935" rx="2"/>
+      <text x="482.2" y="154" font-size="10" fill="#333">3.0％</text>
+      <text x="399" y="190" text-anchor="end" font-size="11" fill="#333">富山県</text>
+      <rect x="405" y="171" width="87.8" height="30" fill="#ef5350" rx="2"/>
+      <text x="496.8" y="190" font-size="10" fill="#333">3.6％</text>
+      <text x="399" y="226" text-anchor="end" font-size="11" fill="#333">高知県</text>
+      <rect x="405" y="207" width="92.7" height="30" fill="#e57373" rx="2"/>
+      <text x="501.7" y="226" font-size="10" fill="#333">3.8％</text>
+      <text x="399" y="262" text-anchor="end" font-size="11" fill="#333">愛媛県</text>
+      <rect x="405" y="243" width="92.7" height="30" fill="#ef9a9a" rx="2"/>
+      <text x="501.7" y="262" font-size="10" fill="#333">3.8％</text>
+      <text x="399" y="298" text-anchor="end" font-size="11" fill="#333">香川県</text>
+      <rect x="405" y="279" width="92.7" height="30" fill="#c62828" rx="2"/>
+      <text x="501.7" y="298" font-size="10" fill="#333">3.8％</text>
+      <text x="399" y="334" text-anchor="end" font-size="11" fill="#333">福井県</text>
+      <rect x="405" y="315" width="95.1" height="30" fill="#d32f2f" rx="2"/>
+      <text x="504.1" y="334" font-size="10" fill="#333">3.9％</text>
+      <text x="399" y="370" text-anchor="end" font-size="11" fill="#333">新潟県</text>
+      <rect x="405" y="351" width="100.0" height="30" fill="#e53935" rx="2"/>
+      <text x="509.0" y="370" font-size="10" fill="#333">4.1％</text>
+      <text x="399" y="406" text-anchor="end" font-size="11" fill="#333">北海道</text>
+      <rect x="405" y="387" width="100.0" height="30" fill="#ef5350" rx="2"/>
+      <text x="509.0" y="406" font-size="10" fill="#333">4.1％</text>
+  <text x="340" y="462" text-anchor="middle" font-size="10" fill="#888">凡例: 青系=上位 / 赤系=下位（総務省「住宅・土地統計調査」 e-Stat）</text>
+</svg>
