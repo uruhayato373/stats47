@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const grossPrefecturalProductHealthSocialH27: MetricConfig = {
   "key": "gross-prefectural-product-health-social-h27",
   "title": "県内総生産額",
+  "subtitle": "保健衛生・社会事業",
   "unit": "百万円",
   "category": "economy",
   "source": {

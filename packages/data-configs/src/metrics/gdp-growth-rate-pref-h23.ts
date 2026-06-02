@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const gdpGrowthRatePrefH23: MetricConfig = {
   "key": "gdp-growth-rate-pref-h23",
   "title": "県内総生産額対前年増加率",
+  "subtitle": "H23年基準",
   "unit": "％",
   "category": "economy",
   "source": {

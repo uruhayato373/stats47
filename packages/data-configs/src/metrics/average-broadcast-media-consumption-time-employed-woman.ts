@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const averageBroadcastMediaConsumptionTimeEmployedWoman: MetricConfig = {
   "key": "average-broadcast-media-consumption-time-employed-woman",
   "title": "テレビ・ラジオ・新聞・雑誌の平均時間",
+  "subtitle": "女性・有業者",
   "unit": "分",
   "category": "ict",
   "source": {

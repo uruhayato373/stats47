@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const kindergartenEducationDiffusionRate: MetricConfig = {
   "key": "kindergarten-education-diffusion-rate",
   "title": "教育普及度",
+  "subtitle": "幼稚園",
   "unit": "％",
   "category": "educationsports",
   "source": {

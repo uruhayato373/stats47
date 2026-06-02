@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const municipalIntellectualDisabilityConsultations: MetricConfig = {
   "key": "municipal-intellectual-disability-consultations",
   "title": "市町村における知的障害者相談実人員",
+  "subtitle": "総数",
   "unit": "人",
   "category": "socialsecurity",
   "source": {

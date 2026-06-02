@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const residentForeignerKorea: MetricConfig = {
   "key": "resident-foreigner-korea",
   "title": "在留外国人数（韓国）",
+  "subtitle": "韓国・朝鮮",
   "unit": "人",
   "category": "international",
   "source": {

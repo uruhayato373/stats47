@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const selfServiceStoreCount: MetricConfig = {
   "key": "self-service-store-count",
   "title": "セルフサービス事業所数",
+  "subtitle": "総数",
   "unit": "所",
   "category": "commercial",
   "source": {

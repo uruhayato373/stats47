@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const barberBeautySalonCount: MetricConfig = {
   "key": "barber-beauty-salon-count",
   "title": "理容・美容所数",
+  "subtitle": "総数",
   "unit": "所",
   "category": "commercial",
   "source": {

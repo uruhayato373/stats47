@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const averageAgeOfFirstMarriageHusband: MetricConfig = {
   "key": "average-age-of-first-marriage-husband",
   "title": "平均初婚年齢（夫）",
+  "subtitle": "夫",
   "unit": "歳",
   "category": "population",
   "source": {

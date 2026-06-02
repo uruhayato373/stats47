@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const stillbirthsAfter22Weeks: MetricConfig = {
   "key": "stillbirths-after-22-weeks",
   "title": "死産数",
+  "subtitle": "妊娠22週以後",
   "unit": "胎",
   "category": "socialsecurity",
   "source": {

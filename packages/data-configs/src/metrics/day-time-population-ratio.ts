@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const dayTimePopulationRatio: MetricConfig = {
   "key": "day-time-population-ratio",
   "title": "昼夜間人口比率",
+  "subtitle": "社会・人口統計体系",
   "unit": "％",
   "category": "population",
   "source": {

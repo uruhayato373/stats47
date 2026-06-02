@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const inpatientRateByBedtype: MetricConfig = {
   "key": "inpatient-rate-by-bedtype",
   "title": "入院受療率（病床総数）（2020年患者調査）",
+  "subtitle": "病床別",
   "unit": "人口10万対",
   "category": "socialsecurity",
   "source": {

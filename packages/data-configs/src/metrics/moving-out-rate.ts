@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const movingOutRate: MetricConfig = {
   "key": "moving-out-rate",
   "title": "転出率",
+  "subtitle": "外国人移動者",
   "unit": "％",
   "category": "population",
   "source": {

@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const complainantRatePer1000: MetricConfig = {
   "key": "complainant-rate-per-1000",
   "title": "有訴者率",
+  "subtitle": "人口1000人当たり",
   "unit": "‐",
   "category": "socialsecurity",
   "source": {

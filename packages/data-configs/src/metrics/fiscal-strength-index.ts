@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const fiscalStrengthIndex: MetricConfig = {
   "key": "fiscal-strength-index",
   "title": "財政力指数",
+  "subtitle": "市町村財政",
   "unit": "‐",
   "category": "administrativefinancial",
   "source": {

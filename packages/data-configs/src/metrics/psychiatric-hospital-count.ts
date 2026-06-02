@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const psychiatricHospitalCount: MetricConfig = {
   "key": "psychiatric-hospital-count",
   "title": "精神科病院数",
+  "subtitle": "総数",
   "unit": "施設",
   "category": "socialsecurity",
   "source": {

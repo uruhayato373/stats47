@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const juvenileCriminalArrestPerson: MetricConfig = {
   "key": "juvenile-criminal-arrest-person",
   "title": "少年刑法犯検挙人員",
+  "subtitle": "総数",
   "unit": "人",
   "category": "safetyenvironment",
   "source": {

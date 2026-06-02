@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const taxpayerCountEqual: MetricConfig = {
   "key": "taxpayer-count-equal",
   "title": "納税義務者数",
+  "subtitle": "均等割",
   "unit": "人",
   "category": "administrativefinancial",
   "source": {

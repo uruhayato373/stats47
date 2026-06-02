@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const retailStoreCount: MetricConfig = {
   "key": "retail-store-count",
   "title": "小売店数",
+  "subtitle": "総数",
   "unit": "店",
   "category": "commercial",
   "source": {

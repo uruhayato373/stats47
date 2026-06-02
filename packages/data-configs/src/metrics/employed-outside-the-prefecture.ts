@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const employedOutsideThePrefecture: MetricConfig = {
   "key": "employed-outside-the-prefecture",
   "title": "県外就職者比率",
+  "subtitle": "〜2020年",
   "unit": "％",
   "category": "laborwage",
   "source": {

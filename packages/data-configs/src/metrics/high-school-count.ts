@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const highSchoolCount: MetricConfig = {
   "key": "high-school-count",
   "title": "高等学校数",
+  "subtitle": "総数",
   "unit": "校",
   "category": "educationsports",
   "source": {

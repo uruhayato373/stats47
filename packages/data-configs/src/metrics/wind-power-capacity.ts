@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const windPowerCapacity: MetricConfig = {
   "key": "wind-power-capacity",
   "title": "風力発電導入量（設備容量）",
+  "subtitle": "発電容量",
   "unit": "kW",
   "category": "energy",
   "source": {

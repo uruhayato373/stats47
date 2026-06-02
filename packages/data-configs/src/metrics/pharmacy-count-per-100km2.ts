@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const pharmacyCountPer100km2: MetricConfig = {
   "key": "pharmacy-count-per-100km2",
   "title": "薬局数",
+  "subtitle": "面積100km²当たり",
   "unit": "所",
   "category": "socialsecurity",
   "source": {

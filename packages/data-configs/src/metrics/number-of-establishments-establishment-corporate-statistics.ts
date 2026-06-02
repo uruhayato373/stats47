@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const numberOfEstablishmentsEstablishmentCorporateStatistics: MetricConfig = {
   "key": "number-of-establishments-establishment-corporate-statistics",
   "title": "事業所数",
+  "subtitle": "事業所・企業統計調査",
   "unit": "所",
   "category": "commercial",
   "source": {

@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const ageAdjustedDeathRateFemaleH27Per1000: MetricConfig = {
   "key": "age-adjusted-death-rate-female-h27-per-1000",
   "title": "年齢調整死亡率",
+  "subtitle": "女性（H27年基準）",
   "unit": "‐",
   "category": "population",
   "source": {

@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const sexRatioTotal: MetricConfig = {
   "key": "sex-ratio-total",
   "title": "人口性比",
+  "subtitle": "総人口",
   "unit": "‐",
   "category": "population",
   "source": {

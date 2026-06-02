@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const pharmacyCountByPrefecture: MetricConfig = {
   "key": "pharmacy-count-by-prefecture",
   "title": "薬局数（都道府県別・総数）",
+  "subtitle": "総数",
   "unit": "施設",
   "category": "socialsecurity",
   "source": {

@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const totalPopulationFemale: MetricConfig = {
   "key": "total-population-female",
   "title": "総人口",
+  "subtitle": "女性",
   "unit": "万人",
   "category": "population",
   "source": {

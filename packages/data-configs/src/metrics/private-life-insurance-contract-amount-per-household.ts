@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const privateLifeInsuranceContractAmountPerHousehold: MetricConfig = {
   "key": "private-life-insurance-contract-amount-per-household",
   "title": "民間生命保険保険金額",
+  "subtitle": "1世帯当たり",
   "unit": "万円",
   "category": "economy",
   "source": {

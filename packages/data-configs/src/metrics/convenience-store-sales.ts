@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const convenienceStoreSales: MetricConfig = {
   "key": "convenience-store-sales",
   "title": "コンビニエンスストア販売額",
+  "subtitle": "年間販売額",
   "unit": "百万円",
   "category": "commercial",
   "source": {

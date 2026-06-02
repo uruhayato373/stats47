@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const dentalCheckupPersons: MetricConfig = {
   "key": "dental-checkup-persons",
   "title": "歯科健診受診延人員",
+  "subtitle": "総数",
   "unit": "人",
   "category": "socialsecurity",
   "source": {

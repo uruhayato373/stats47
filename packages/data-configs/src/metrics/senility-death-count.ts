@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const senilityDeathCount: MetricConfig = {
   "key": "senility-death-count",
   "title": "老衰による死亡者数",
+  "subtitle": "総数",
   "unit": "人",
   "category": "population",
   "source": {

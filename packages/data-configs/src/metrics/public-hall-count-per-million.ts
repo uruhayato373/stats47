@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const publicHallCountPerMillion: MetricConfig = {
   "key": "public-hall-count-per-million",
   "title": "公民館数",
+  "subtitle": "人口100万人当たり",
   "unit": "館",
   "category": "educationsports",
   "source": {

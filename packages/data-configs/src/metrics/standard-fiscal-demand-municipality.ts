@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const standardFiscalDemandMunicipality: MetricConfig = {
   "key": "standard-fiscal-demand-municipality",
   "title": "基準財政需要額",
+  "subtitle": "市町村財政",
   "unit": "",
   "category": "administrativefinancial",
   "source": {

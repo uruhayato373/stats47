@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const postOfficeCountPer100km2: MetricConfig = {
   "key": "post-office-count-per-100km2",
   "title": "郵便局数",
+  "subtitle": "面積100km²当たり",
   "unit": "局",
   "category": "ict",
   "source": {

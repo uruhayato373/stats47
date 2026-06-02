@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const patientReceivingRateByDisease: MetricConfig = {
   "key": "patient-receiving-rate-by-disease",
   "title": "受療率（総数・入院総数）（2023年患者調査）",
+  "subtitle": "傷病別",
   "unit": "人口10万対",
   "category": "socialsecurity",
   "source": {

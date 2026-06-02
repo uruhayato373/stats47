@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const totalProductionInThePrefecture: MetricConfig = {
   "key": "total-production-in-the-prefecture",
   "title": "県内総生産額",
+  "subtitle": "総額",
   "unit": "百万円",
   "category": "economy",
   "source": {

@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const elderlyGeneralWorkerOldPopulationRatio: MetricConfig = {
   "key": "elderly-general-worker-old-population-ratio",
   "title": "高齢一般労働者割合",
+  "subtitle": "現行",
   "unit": "％",
   "category": "laborwage",
   "source": {

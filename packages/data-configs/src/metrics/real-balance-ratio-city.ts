@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const realBalanceRatioCity: MetricConfig = {
   "key": "real-balance-ratio-city",
   "title": "実質収支比率（市町村財政）",
+  "subtitle": "市町村財政",
   "unit": "％",
   "category": "administrativefinancial",
   "source": {

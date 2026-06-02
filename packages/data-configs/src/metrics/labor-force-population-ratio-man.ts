@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const laborForcePopulationRatioMan: MetricConfig = {
   "key": "labor-force-population-ratio-man",
   "title": "労働力人口比率",
+  "subtitle": "男性",
   "unit": "％",
   "category": "population",
   "source": {

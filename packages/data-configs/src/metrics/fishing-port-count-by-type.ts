@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const fishingPortCountByType: MetricConfig = {
   "key": "fishing-port-count-by-type",
   "title": "漁港数（漁港種類計）",
+  "subtitle": "種類別",
   "note": "内陸県は調査対象外（0で表示）",
   "unit": "港",
   "category": "agriculture",

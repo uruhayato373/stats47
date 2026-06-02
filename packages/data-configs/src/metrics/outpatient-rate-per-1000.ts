@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const outpatientRatePer1000: MetricConfig = {
   "key": "outpatient-rate-per-1000",
   "title": "通院者率",
+  "subtitle": "国民生活基礎調査",
   "unit": "‐",
   "category": "socialsecurity",
   "source": {

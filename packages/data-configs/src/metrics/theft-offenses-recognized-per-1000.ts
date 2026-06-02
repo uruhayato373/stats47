@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const theftOffensesRecognizedPer1000: MetricConfig = {
   "key": "theft-offenses-recognized-per-1000",
   "title": "窃盗犯認知件数",
+  "subtitle": "人口1000人当たり",
   "unit": "件",
   "category": "safetyenvironment",
   "source": {

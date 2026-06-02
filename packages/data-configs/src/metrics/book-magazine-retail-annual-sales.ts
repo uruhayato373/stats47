@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const bookMagazineRetailAnnualSales: MetricConfig = {
   "key": "book-magazine-retail-annual-sales",
   "title": "書籍・雑誌小売業年間商品販売額",
+  "subtitle": "総額",
   "unit": "円",
   "category": "commercial",
   "source": {

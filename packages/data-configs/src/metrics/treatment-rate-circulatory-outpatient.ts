@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const treatmentRateCirculatoryOutpatient: MetricConfig = {
   "key": "treatment-rate-circulatory-outpatient",
   "title": "循環器系の疾患の受療率（外来）",
+  "subtitle": "外来",
   "description": "厚生労働省「患者調査」（2023年）の傷病分類別受療率（人口10万対）。循環器系の疾患の受療率（外来）のデータ。",
   "unit": "人（人口10万対）",
   "category": "socialsecurity",

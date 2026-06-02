@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const windPowerTurbineCount: MetricConfig = {
   "key": "wind-power-turbine-count",
   "title": "風力発電導入量（設置基数）",
+  "subtitle": "風車台数",
   "unit": "基",
   "category": "energy",
   "source": {

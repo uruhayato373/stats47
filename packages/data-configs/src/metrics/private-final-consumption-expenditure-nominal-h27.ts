@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const privateFinalConsumptionExpenditureNominalH27: MetricConfig = {
   "key": "private-final-consumption-expenditure-nominal-h27",
   "title": "民間最終消費支出",
+  "subtitle": "名目（H27年基準）",
   "unit": "百万円",
   "category": "economy",
   "source": {

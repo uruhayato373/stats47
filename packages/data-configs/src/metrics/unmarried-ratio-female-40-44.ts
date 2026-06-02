@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const unmarriedRatioFemale4044: MetricConfig = {
   "key": "unmarried-ratio-female-40-44",
   "title": "未婚者割合",
+  "subtitle": "女性 40〜44歳",
   "unit": "％",
   "category": "population",
   "source": {

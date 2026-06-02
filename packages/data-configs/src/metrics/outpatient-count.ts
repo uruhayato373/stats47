@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const outpatientCount: MetricConfig = {
   "key": "outpatient-count",
   "title": "通院者率",
+  "subtitle": "社会・人口統計体系",
   "unit": "‐",
   "category": "socialsecurity",
   "source": {

@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const urbanParks: MetricConfig = {
   "key": "urban-parks",
   "title": "都市公園数",
+  "subtitle": "総数",
   "unit": "",
   "category": "infrastructure",
   "source": {

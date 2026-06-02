@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const cultivatedArea: MetricConfig = {
   "key": "cultivated-area",
   "title": "耕地面積",
+  "subtitle": "総面積",
   "unit": "ｈａ",
   "category": "agriculture",
   "source": {

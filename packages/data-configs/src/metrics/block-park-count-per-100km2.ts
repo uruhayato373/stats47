@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const blockParkCountPer100km2: MetricConfig = {
   "key": "block-park-count-per-100km2",
   "title": "街区公園数",
+  "subtitle": "面積100km²当たり",
   "unit": "所",
   "category": "infrastructure",
   "source": {

@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const childConsultationCenterCasesPer1000: MetricConfig = {
   "key": "child-consultation-center-cases-per-1000",
   "title": "児童相談所受付件数",
+  "subtitle": "人口1000人当たり",
   "unit": "件",
   "category": "educationsports",
   "source": {

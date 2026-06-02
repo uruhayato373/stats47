@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const accidentalDeathsPer100k: MetricConfig = {
   "key": "accidental-deaths-per-100k",
   "title": "不慮の事故による死亡者数",
+  "subtitle": "人口10万人当たり",
   "unit": "人",
   "category": "population",
   "source": {

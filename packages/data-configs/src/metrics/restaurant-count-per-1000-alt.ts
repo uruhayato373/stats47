@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const restaurantCountPer1000Alt: MetricConfig = {
   "key": "restaurant-count-per-1000-alt",
   "title": "飲食店数",
+  "subtitle": "1000人当たり（更新）",
   "unit": "店",
   "category": "commercial",
   "source": {

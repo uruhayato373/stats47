@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const treatmentRateOsteoporosisInpatient: MetricConfig = {
   "key": "treatment-rate-osteoporosis-inpatient",
   "title": "骨の密度及び構造の障害（骨粗しょう症）の受療率（入院）",
+  "subtitle": "入院",
   "description": "厚生労働省「患者調査」（2023年）の傷病分類別受療率（人口10万対）。骨の密度及び構造の障害（骨粗しょう症）の受療率（入院）のデータ。",
   "unit": "人（人口10万対）",
   "category": "socialsecurity",

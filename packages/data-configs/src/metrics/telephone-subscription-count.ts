@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const telephoneSubscriptionCount: MetricConfig = {
   "key": "telephone-subscription-count",
   "title": "電話加入数",
+  "subtitle": "総数",
   "unit": "加入",
   "category": "ict",
   "source": {

@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const treatmentRateMentalDisorderOutpatient: MetricConfig = {
   "key": "treatment-rate-mental-disorder-outpatient",
   "title": "精神及び行動の障害の受療率（外来）",
+  "subtitle": "外来",
   "description": "厚生労働省「患者調査」（2023年）の傷病分類別受療率（人口10万対）。精神及び行動の障害の受療率（外来）のデータ。",
   "unit": "人（人口10万対）",
   "category": "socialsecurity",

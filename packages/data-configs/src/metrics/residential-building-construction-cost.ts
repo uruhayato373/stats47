@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const residentialBuildingConstructionCost: MetricConfig = {
   "key": "residential-building-construction-cost",
   "title": "着工居住用建築物工事費予定額",
+  "subtitle": "総額",
   "unit": "万円",
   "category": "construction",
   "source": {

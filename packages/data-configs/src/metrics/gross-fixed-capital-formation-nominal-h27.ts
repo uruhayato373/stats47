@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const grossFixedCapitalFormationNominalH27: MetricConfig = {
   "key": "gross-fixed-capital-formation-nominal-h27",
   "title": "総固定資本形成",
+  "subtitle": "名目（H27年基準）",
   "unit": "百万円",
   "category": "economy",
   "source": {
