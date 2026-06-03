@@ -10,8 +10,6 @@ import {
   SelectValue,
 } from "@stats47/components/atoms/ui/select";
 
-import { useFlowData } from "@/components/charts/useFlowData";
-
 import { FinanceSankey } from "@/features/finance-flow/components/FinanceSankey";
 import type { FinanceFlowData } from "@/features/finance-flow/lib/types";
 import { PREFECTURES } from "@/features/migration-flow/lib/prefectures";
@@ -87,7 +85,9 @@ export function LocalFinanceDashboard({ cards, initialFinanceFlow }: Props) {
   // 都道府県変更時に市区町村データを取得
   useEffect(() => {
     let cancelled = false;
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setCityData(null);
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setCityName(PREF_ALL);
     fetch(`/finance-cards/cities/${prefCode}.json`)
       .then((r) => (r.ok ? (r.json() as Promise<CityData>) : null))
@@ -108,8 +108,6 @@ export function LocalFinanceDashboard({ cards, initialFinanceFlow }: Props) {
     url.searchParams.set("pref", code);
     window.history.replaceState(null, "", url);
   };
-
-  const { data: flow } = useFlowData<FinanceFlowData>("finance", prefCode, initialFinanceFlow);
 
   const { years, averages, latestYear } = cards;
   const prefCard = cards.cards[prefCode];
