@@ -51,10 +51,12 @@
 
 | レベル | 対象 | 挙動 |
 |---|---|---|
-| **error** (CI/pre-commit をブロック) | 無効 category キー | exit 1 |
-| **warn** (表示のみ) | title 年混入 / subtitle が注釈(※) / subtitle が title と冗長 / unit 空・「‐」/ 重複 title に区別子なし | exit 0 (Phase 3 是正後に error 昇格) |
+| **error** (CI/pre-commit をブロック) | 無効 category キー / title 年混入 (`title-year`) / title 注釈(※)混入 (`title-note`) / subtitle が注釈(※) (`subtitle-note`) / subtitle が title と冗長 (`subtitle-redundant`) / unit 空・「‐」(`unit`) / 重複 title に区別子なし (`dup-title`) | exit 1 |
+| **warn** (表示のみ) | 現在は該当チェックなし (将来の段階的 cleanup 用に tier を温存) | exit 0 |
 
-`--strict` で warn も exit 1。
+> **2026-06 昇格済**: 旧 warn だった 5 系統 (title-year/title-note・subtitle-note/redundant・unit・dup-title) は Phase 3 のデータ是正で warn=0 を達成 → **error に昇格**。量産時の再混入を CI/pre-commit でブロックする。新規 cleanup を warn から始めたい場合のみ warn tier を再利用する。
+
+`--strict` で warn も exit 1 (現在 warn は 0 件のため実質 no-op、将来用)。
 
 ## 量産時の必須手順 (agent / skill)
 
