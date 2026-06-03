@@ -60,7 +60,7 @@ export const cpiChangeRateClothing: MetricConfig = {
     "isCalculated": false,
   },
   "seoTitle": "消費者物価指数対前年変化率（被服及び履物）",
-  "isActive": false,
+  "isActive": true,
   "isFeatured": false,
   "featuredOrder": 0,
 };

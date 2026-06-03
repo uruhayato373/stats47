@@ -68,7 +68,7 @@ export const publicAssistanceExpensesPrefecture: MetricConfig = {
     "isCalculated": false,
   },
   "groupKey": "public-assistance-expenses-prefecture",
-  "isActive": false,
+  "isActive": true,
   "isFeatured": false,
   "featuredOrder": 0,
 };

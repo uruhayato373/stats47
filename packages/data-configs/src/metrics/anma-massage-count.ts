@@ -35,7 +35,7 @@ export const anmaMassageCount: MetricConfig = {
   "calculation": {
     "isCalculated": false,
   },
-  "isActive": false,
+  "isActive": true,
   "isFeatured": false,
   "featuredOrder": 0,
 };

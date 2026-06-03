@@ -32,7 +32,7 @@ export const femalePartTimeHourlyWagePre2019: MetricConfig = {
   "calculation": {
     "isCalculated": false,
   },
-  "isActive": false,
+  "isActive": true,
   "isFeatured": false,
   "featuredOrder": 0,
 };

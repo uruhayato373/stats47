@@ -74,7 +74,7 @@ export const socialEducationExpensesPrefecture: MetricConfig = {
     "isCalculated": false,
   },
   "groupKey": "social-education-expenses-prefecture",
-  "isActive": false,
+  "isActive": true,
   "isFeatured": false,
   "featuredOrder": 0,
 };

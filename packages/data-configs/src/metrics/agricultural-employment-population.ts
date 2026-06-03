@@ -33,7 +33,7 @@ export const agriculturalEmploymentPopulation: MetricConfig = {
     "isCalculated": false,
   },
   "seoTitle": "農業就業人口（販売農家）",
-  "isActive": false,
+  "isActive": true,
   "isFeatured": false,
   "featuredOrder": 0,
 };

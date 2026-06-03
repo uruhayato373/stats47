@@ -35,7 +35,7 @@ export const totalAreaIncludingNorthernTerritoriesAndTakeshima: MetricConfig = {
     "isCalculated": false,
   },
   "seoTitle": "総面積（北方地域及び竹島を含む）",
-  "isActive": false,
+  "isActive": true,
   "isFeatured": false,
   "featuredOrder": 0,
 };

@@ -37,7 +37,7 @@ export const consumerPriceDifferenceIndexCultureRecreation: MetricConfig = {
     "isCalculated": false,
   },
   "seoTitle": "消費者物価地域差指数（教養娯楽）",
-  "isActive": false,
+  "isActive": true,
   "isFeatured": false,
   "featuredOrder": 0,
 };

@@ -34,7 +34,7 @@ export const numberOfCommercialEmployeesWholesaleRetail: MetricConfig = {
     "isCalculated": false,
   },
   "seoTitle": "商業従業者数（卸売業＋小売業）",
-  "isActive": false,
+  "isActive": true,
   "isFeatured": false,
   "featuredOrder": 0,
 };

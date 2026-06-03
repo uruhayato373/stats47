@@ -33,7 +33,7 @@ export const ratioOfTotalPopulation: MetricConfig = {
     "isCalculated": false,
   },
   "seoTitle": "全国総人口に占める人口割合（A1101/A1101(全国)）",
-  "isActive": false,
+  "isActive": true,
   "isFeatured": false,
   "featuredOrder": 0,
 };

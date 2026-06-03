@@ -37,7 +37,7 @@ export const consumerPriceDifferenceIndexHealthcare: MetricConfig = {
     "isCalculated": false,
   },
   "seoTitle": "消費者物価地域差指数（保健医療）",
-  "isActive": false,
+  "isActive": true,
   "isFeatured": false,
   "featuredOrder": 0,
 };

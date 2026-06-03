@@ -34,7 +34,7 @@ export const childWelfareExpensesPrefecture: MetricConfig = {
     "isCalculated": false,
   },
   "groupKey": "child-welfare-expenses-prefecture",
-  "isActive": false,
+  "isActive": true,
   "isFeatured": false,
   "featuredOrder": 0,
 };

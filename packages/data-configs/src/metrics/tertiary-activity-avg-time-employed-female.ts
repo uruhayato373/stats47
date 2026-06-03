@@ -44,7 +44,7 @@ export const tertiaryActivityAvgTimeEmployedFemale: MetricConfig = {
     "isCalculated": false,
   },
   "seoTitle": "3次活動の平均時間（有業者・女）",
-  "isActive": false,
+  "isActive": true,
   "isFeatured": false,
   "featuredOrder": 0,
 };

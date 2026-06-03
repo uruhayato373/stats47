@@ -40,7 +40,7 @@ export const mediaAvgTimeUnemployedFemale: MetricConfig = {
     "isCalculated": false,
   },
   "seoTitle": "テレビ・ラジオ・新聞・雑誌の平均時間（無業者・女）",
-  "isActive": false,
+  "isActive": true,
   "isFeatured": false,
   "featuredOrder": 0,
 };
