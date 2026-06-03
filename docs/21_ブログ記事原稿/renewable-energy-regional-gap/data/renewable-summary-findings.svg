@@ -1,0 +1,29 @@
+<svg width="960" height="478" viewBox="0 0 960 478" xmlns="http://www.w3.org/2000/svg" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" role="img" aria-label="この記事でわかったこと">
+<rect width="960" height="478" fill="#f9fafb"/>
+<text x="480" y="48" text-anchor="middle" font-size="26" font-weight="bold" fill="#1f2937">この記事でわかったこと</text>
+<rect x="50" y="78" width="860" height="80" fill="#ffffff" rx="8"/>
+<circle cx="94" cy="118" r="20" fill="#dc2626"/>
+<text x="94" y="125" text-anchor="middle" font-size="16" font-weight="bold" fill="#fff">1</text>
+<text x="130" y="110" font-size="18" font-weight="bold" fill="#1f2937">太陽光発電住宅は愛知県20.8万戸が1位</text>
+<text x="130" y="136" font-size="16" fill="#4b5563">日照時間に加え、住宅数の多さと戸建て比率の高さが普及を後押し</text>
+<rect x="50" y="158" width="860" height="80" fill="#f9fafb" rx="8"/>
+<circle cx="94" cy="198" r="20" fill="#ea580c"/>
+<text x="94" y="205" text-anchor="middle" font-size="16" font-weight="bold" fill="#fff">2</text>
+<text x="130" y="190" font-size="18" font-weight="bold" fill="#1f2937">風力発電は青森・秋田・北海道の3道県に集中</text>
+<text x="130" y="216" font-size="16" fill="#4b5563">上位3道県で全国設備容量の約4割。風況の良い日本海側・太平洋沿岸に偏在</text>
+<rect x="50" y="238" width="860" height="80" fill="#ffffff" rx="8"/>
+<circle cx="94" cy="278" r="20" fill="#0284c7"/>
+<text x="94" y="285" text-anchor="middle" font-size="16" font-weight="bold" fill="#fff">3</text>
+<text x="130" y="270" font-size="18" font-weight="bold" fill="#1f2937">「太陽光型」と「風力型」で再エネ戦略は二極化</text>
+<text x="130" y="296" font-size="16" fill="#4b5563">温暖な太平洋側は太陽光、寒冷な日本海側・北部は風力という地理的棲み分け</text>
+<rect x="50" y="318" width="860" height="80" fill="#f9fafb" rx="8"/>
+<circle cx="94" cy="358" r="20" fill="#7c3aed"/>
+<text x="94" y="365" text-anchor="middle" font-size="16" font-weight="bold" fill="#fff">4</text>
+<text x="130" y="350" font-size="18" font-weight="bold" fill="#1f2937">太陽熱温水機器は「忘れられた再エネ」</text>
+<text x="130" y="376" font-size="16" fill="#4b5563">太陽光発電の1/2〜1/3の普及数だが、愛知・福岡など一部の県では根強い利用</text>
+<rect x="50" y="398" width="860" height="80" fill="#ffffff" rx="8"/>
+<circle cx="94" cy="438" r="20" fill="#059669"/>
+<text x="94" y="445" text-anchor="middle" font-size="16" font-weight="bold" fill="#fff">5</text>
+<text x="130" y="430" font-size="18" font-weight="bold" fill="#1f2937">再エネ普及は「適地適策」で進む</text>
+<text x="130" y="456" font-size="16" fill="#4b5563">全国一律の目標ではなく、各県の地理・気候条件に合わせた組み合わせが有効</text>
+</svg>

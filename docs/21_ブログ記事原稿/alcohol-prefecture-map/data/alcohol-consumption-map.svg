@@ -1,0 +1,391 @@
+<svg width="600" height="690" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 690" role="img" aria-label="成人1人あたりアルコール飲料消費量 都道府県マップ">
+  <title>成人1人あたりアルコール飲料消費量 都道府県マップ</title>
+  <rect width="600" height="690" fill="#f9fafb"/>
+  <text x="300" y="19" text-anchor="middle" font-size="11.5" font-weight="700" fill="#111827">成人1人あたりアルコール飲料消費量（2018年度）</text>
+  <text x="300" y="34" text-anchor="middle" font-size="9" fill="#6b7280">単位：L</text>
+  <g aria-label="北海道 85.4L">
+    <title>北海道：85.4L</title>
+    <rect x="491" y="45" width="74" height="74" rx="3" fill="#a63db8" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#ffffff" text-anchor="middle">
+      <tspan x="528" y="80" font-size="7" font-weight="700">北海道</tspan>
+      <tspan x="528" y="93" font-size="7">85.4</tspan>
+    </text>
+  </g>
+  <g aria-label="青森 84.6L">
+    <title>青森県：84.6L</title>
+    <rect x="491" y="159.5" width="74" height="36" rx="3" fill="#a840ba" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#ffffff" text-anchor="middle">
+      <tspan x="528" y="175.5" font-size="7" font-weight="700">青森</tspan>
+      <tspan x="528" y="188.5" font-size="7">84.6</tspan>
+    </text>
+  </g>
+  <g aria-label="岩手 87.7L">
+    <title>岩手県：87.7L</title>
+    <rect x="529" y="197.5" width="36" height="36" rx="3" fill="#a234b5" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#ffffff" text-anchor="middle">
+      <tspan x="547" y="213.5" font-size="7" font-weight="700">岩手</tspan>
+      <tspan x="547" y="226.5" font-size="7">87.7</tspan>
+    </text>
+  </g>
+  <g aria-label="宮城 81.2L">
+    <title>宮城県：81.2L</title>
+    <rect x="529" y="236" width="36" height="36" rx="3" fill="#ae4ebe" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#ffffff" text-anchor="middle">
+      <tspan x="547" y="252" font-size="7" font-weight="700">宮城</tspan>
+      <tspan x="547" y="265" font-size="7">81.2</tspan>
+    </text>
+  </g>
+  <g aria-label="秋田 92.8L">
+    <title>秋田県：92.8L</title>
+    <rect x="491" y="197.5" width="36" height="36" rx="3" fill="#9625ad" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#ffffff" text-anchor="middle">
+      <tspan x="509" y="213.5" font-size="7" font-weight="700">秋田</tspan>
+      <tspan x="509" y="226.5" font-size="7">92.8</tspan>
+    </text>
+  </g>
+  <g aria-label="山形 79.1L">
+    <title>山形県：79.1L</title>
+    <rect x="491" y="236" width="36" height="36" rx="3" fill="#b256c1" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#ffffff" text-anchor="middle">
+      <tspan x="509" y="252" font-size="7" font-weight="700">山形</tspan>
+      <tspan x="509" y="265" font-size="7">79.1</tspan>
+    </text>
+  </g>
+  <g aria-label="福島 78.8L">
+    <title>福島県：78.8L</title>
+    <rect x="491" y="274" width="74" height="36" rx="3" fill="#b257c2" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#ffffff" text-anchor="middle">
+      <tspan x="528" y="290" font-size="7" font-weight="700">福島</tspan>
+      <tspan x="528" y="303" font-size="7">78.8</tspan>
+    </text>
+  </g>
+  <g aria-label="茨城 67.3L">
+    <title>茨城県：67.3L</title>
+    <rect x="529" y="312.5" width="36" height="36" rx="3" fill="#cc8ed6" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="547" y="328.5" font-size="7" font-weight="700">茨城</tspan>
+      <tspan x="547" y="341.5" font-size="7">67.3</tspan>
+    </text>
+  </g>
+  <g aria-label="栃木 69.2L">
+    <title>栃木県：69.2L</title>
+    <rect x="491" y="312.5" width="36" height="36" rx="3" fill="#c784d2" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="509" y="328.5" font-size="7" font-weight="700">栃木</tspan>
+      <tspan x="509" y="341.5" font-size="7">69.2</tspan>
+    </text>
+  </g>
+  <g aria-label="群馬 68.6L">
+    <title>群馬県：68.6L</title>
+    <rect x="453" y="312.5" width="36" height="36" rx="3" fill="#c887d4" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="471" y="328.5" font-size="7" font-weight="700">群馬</tspan>
+      <tspan x="471" y="341.5" font-size="7">68.6</tspan>
+    </text>
+  </g>
+  <g aria-label="埼玉 65.1L">
+    <title>埼玉県：65.1L</title>
+    <rect x="491" y="350.5" width="36" height="36" rx="3" fill="#d199da" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="509" y="366.5" font-size="7" font-weight="700">埼玉</tspan>
+      <tspan x="509" y="379.5" font-size="7">65.1</tspan>
+    </text>
+  </g>
+  <g aria-label="千葉 67.8L">
+    <title>千葉県：67.8L</title>
+    <rect x="529" y="350.5" width="36" height="74" rx="3" fill="#ca8bd5" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="547" y="385.5" font-size="7" font-weight="700">千葉</tspan>
+      <tspan x="547" y="398.5" font-size="7">67.8</tspan>
+    </text>
+  </g>
+  <g aria-label="東京 107.8L">
+    <title>東京都：107.8L</title>
+    <rect x="491" y="388.5" width="36" height="36" rx="3" fill="#4a148c" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#ffffff" text-anchor="middle">
+      <tspan x="509" y="404.5" font-size="7" font-weight="700">東京</tspan>
+      <tspan x="509" y="417.5" font-size="7">107.8</tspan>
+    </text>
+  </g>
+  <g aria-label="神奈川 70.7L">
+    <title>神奈川県：70.7L</title>
+    <rect x="491" y="427" width="36" height="36" rx="3" fill="#c37cd0" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="509" y="443" font-size="7" font-weight="700">神奈川</tspan>
+      <tspan x="509" y="456" font-size="7">70.7</tspan>
+    </text>
+  </g>
+  <g aria-label="新潟 90L">
+    <title>新潟県：90L</title>
+    <rect x="415" y="274" width="74" height="36" rx="3" fill="#9e2cb2" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#ffffff" text-anchor="middle">
+      <tspan x="452" y="290" font-size="7" font-weight="700">新潟</tspan>
+      <tspan x="452" y="303" font-size="7">90</tspan>
+    </text>
+  </g>
+  <g aria-label="富山 84.6L">
+    <title>富山県：84.6L</title>
+    <rect x="376" y="274" width="36" height="36" rx="3" fill="#a840ba" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#ffffff" text-anchor="middle">
+      <tspan x="394" y="290" font-size="7" font-weight="700">富山</tspan>
+      <tspan x="394" y="303" font-size="7">84.6</tspan>
+    </text>
+  </g>
+  <g aria-label="石川 79L">
+    <title>石川県：79L</title>
+    <rect x="338" y="274" width="36" height="36" rx="3" fill="#b257c2" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#ffffff" text-anchor="middle">
+      <tspan x="356" y="290" font-size="7" font-weight="700">石川</tspan>
+      <tspan x="356" y="303" font-size="7">79</tspan>
+    </text>
+  </g>
+  <g aria-label="福井 73.1L">
+    <title>福井県：73.1L</title>
+    <rect x="338" y="312.5" width="36" height="36" rx="3" fill="#be70cb" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#ffffff" text-anchor="middle">
+      <tspan x="356" y="328.5" font-size="7" font-weight="700">福井</tspan>
+      <tspan x="356" y="341.5" font-size="7">73.1</tspan>
+    </text>
+  </g>
+  <g aria-label="山梨 74.3L">
+    <title>山梨県：74.3L</title>
+    <rect x="453" y="350.5" width="36" height="36" rx="3" fill="#bb6ac9" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#ffffff" text-anchor="middle">
+      <tspan x="471" y="366.5" font-size="7" font-weight="700">山梨</tspan>
+      <tspan x="471" y="379.5" font-size="7">74.3</tspan>
+    </text>
+  </g>
+  <g aria-label="長野 76.5L">
+    <title>長野県：76.5L</title>
+    <rect x="415" y="312.5" width="36" height="74" rx="3" fill="#b760c5" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#ffffff" text-anchor="middle">
+      <tspan x="433" y="347.5" font-size="7" font-weight="700">長野</tspan>
+      <tspan x="433" y="360.5" font-size="7">76.5</tspan>
+    </text>
+  </g>
+  <g aria-label="岐阜 60.9L">
+    <title>岐阜県：60.9L</title>
+    <rect x="376" y="312.5" width="36" height="74" rx="3" fill="#daafe2" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="394" y="347.5" font-size="7" font-weight="700">岐阜</tspan>
+      <tspan x="394" y="360.5" font-size="7">60.9</tspan>
+    </text>
+  </g>
+  <g aria-label="静岡 66.9L">
+    <title>静岡県：66.9L</title>
+    <rect x="415" y="388.5" width="74" height="36" rx="3" fill="#cd90d7" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="452" y="404.5" font-size="7" font-weight="700">静岡</tspan>
+      <tspan x="452" y="417.5" font-size="7">66.9</tspan>
+    </text>
+  </g>
+  <g aria-label="愛知 69.6L">
+    <title>愛知県：69.6L</title>
+    <rect x="376" y="388.5" width="36" height="36" rx="3" fill="#c682d2" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="394" y="404.5" font-size="7" font-weight="700">愛知</tspan>
+      <tspan x="394" y="417.5" font-size="7">69.6</tspan>
+    </text>
+  </g>
+  <g aria-label="三重 66.2L">
+    <title>三重県：66.2L</title>
+    <rect x="338" y="388.5" width="36" height="74" rx="3" fill="#ce94d8" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="356" y="423.5" font-size="7" font-weight="700">三重</tspan>
+      <tspan x="356" y="436.5" font-size="7">66.2</tspan>
+    </text>
+  </g>
+  <g aria-label="滋賀 58L">
+    <title>滋賀県：58L</title>
+    <rect x="338" y="350.5" width="36" height="36" rx="3" fill="#e1bee7" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="356" y="366.5" font-size="7" font-weight="700">滋賀</tspan>
+      <tspan x="356" y="379.5" font-size="7">58</tspan>
+    </text>
+  </g>
+  <g aria-label="京都 82.8L">
+    <title>京都府：82.8L</title>
+    <rect x="262" y="350.5" width="74" height="36" rx="3" fill="#ab47bc" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#ffffff" text-anchor="middle">
+      <tspan x="299" y="366.5" font-size="7" font-weight="700">京都</tspan>
+      <tspan x="299" y="379.5" font-size="7">82.8</tspan>
+    </text>
+  </g>
+  <g aria-label="大阪 92.4L">
+    <title>大阪府：92.4L</title>
+    <rect x="262" y="388.5" width="36" height="36" rx="3" fill="#9726ae" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#ffffff" text-anchor="middle">
+      <tspan x="280" y="404.5" font-size="7" font-weight="700">大阪</tspan>
+      <tspan x="280" y="417.5" font-size="7">92.4</tspan>
+    </text>
+  </g>
+  <g aria-label="兵庫 75.1L">
+    <title>兵庫県：75.1L</title>
+    <rect x="224" y="350.5" width="36" height="74" rx="3" fill="#b966c7" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#ffffff" text-anchor="middle">
+      <tspan x="242" y="385.5" font-size="7" font-weight="700">兵庫</tspan>
+      <tspan x="242" y="398.5" font-size="7">75.1</tspan>
+    </text>
+  </g>
+  <g aria-label="奈良 64.3L">
+    <title>奈良県：64.3L</title>
+    <rect x="300" y="388.5" width="36" height="36" rx="3" fill="#d39ddc" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="318" y="404.5" font-size="7" font-weight="700">奈良</tspan>
+      <tspan x="318" y="417.5" font-size="7">64.3</tspan>
+    </text>
+  </g>
+  <g aria-label="和歌山 76.3L">
+    <title>和歌山県：76.3L</title>
+    <rect x="262" y="427" width="74" height="36" rx="3" fill="#b761c6" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#ffffff" text-anchor="middle">
+      <tspan x="299" y="443" font-size="7" font-weight="700">和歌山</tspan>
+      <tspan x="299" y="456" font-size="7">76.3</tspan>
+    </text>
+  </g>
+  <g aria-label="鳥取 83.9L">
+    <title>鳥取県：83.9L</title>
+    <rect x="185" y="350.5" width="36" height="36" rx="3" fill="#a943bb" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#ffffff" text-anchor="middle">
+      <tspan x="203" y="366.5" font-size="7" font-weight="700">鳥取</tspan>
+      <tspan x="203" y="379.5" font-size="7">83.9</tspan>
+    </text>
+  </g>
+  <g aria-label="島根 77.2L">
+    <title>島根県：77.2L</title>
+    <rect x="147" y="350.5" width="36" height="36" rx="3" fill="#b55ec4" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#ffffff" text-anchor="middle">
+      <tspan x="165" y="366.5" font-size="7" font-weight="700">島根</tspan>
+      <tspan x="165" y="379.5" font-size="7">77.2</tspan>
+    </text>
+  </g>
+  <g aria-label="岡山 65.5L">
+    <title>岡山県：65.5L</title>
+    <rect x="185" y="388.5" width="36" height="36" rx="3" fill="#d097d9" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="203" y="404.5" font-size="7" font-weight="700">岡山</tspan>
+      <tspan x="203" y="417.5" font-size="7">65.5</tspan>
+    </text>
+  </g>
+  <g aria-label="広島 80.8L">
+    <title>広島県：80.8L</title>
+    <rect x="147" y="388.5" width="36" height="36" rx="3" fill="#af4fbf" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#ffffff" text-anchor="middle">
+      <tspan x="165" y="404.5" font-size="7" font-weight="700">広島</tspan>
+      <tspan x="165" y="417.5" font-size="7">80.8</tspan>
+    </text>
+  </g>
+  <g aria-label="山口 73.3L">
+    <title>山口県：73.3L</title>
+    <rect x="109" y="350.5" width="36" height="74" rx="3" fill="#bd6fcb" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#ffffff" text-anchor="middle">
+      <tspan x="127" y="385.5" font-size="7" font-weight="700">山口</tspan>
+      <tspan x="127" y="398.5" font-size="7">73.3</tspan>
+    </text>
+  </g>
+  <g aria-label="徳島 72.9L">
+    <title>徳島県：72.9L</title>
+    <rect x="185" y="503" width="36" height="36" rx="3" fill="#be71cb" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#ffffff" text-anchor="middle">
+      <tspan x="203" y="519" font-size="7" font-weight="700">徳島</tspan>
+      <tspan x="203" y="532" font-size="7">72.9</tspan>
+    </text>
+  </g>
+  <g aria-label="香川 70.8L">
+    <title>香川県：70.8L</title>
+    <rect x="185" y="465" width="36" height="36" rx="3" fill="#c37ccf" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="203" y="481" font-size="7" font-weight="700">香川</tspan>
+      <tspan x="203" y="494" font-size="7">70.8</tspan>
+    </text>
+  </g>
+  <g aria-label="愛媛 74.5L">
+    <title>愛媛県：74.5L</title>
+    <rect x="147" y="465" width="36" height="36" rx="3" fill="#ba69c8" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#ffffff" text-anchor="middle">
+      <tspan x="165" y="481" font-size="7" font-weight="700">愛媛</tspan>
+      <tspan x="165" y="494" font-size="7">74.5</tspan>
+    </text>
+  </g>
+  <g aria-label="高知 94.2L">
+    <title>高知県：94.2L</title>
+    <rect x="147" y="503" width="36" height="36" rx="3" fill="#9024ab" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#ffffff" text-anchor="middle">
+      <tspan x="165" y="519" font-size="7" font-weight="700">高知</tspan>
+      <tspan x="165" y="532" font-size="7">94.2</tspan>
+    </text>
+  </g>
+  <g aria-label="福岡 78.1L">
+    <title>福岡県：78.1L</title>
+    <rect x="71" y="427" width="36" height="36" rx="3" fill="#b45ac3" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#ffffff" text-anchor="middle">
+      <tspan x="89" y="443" font-size="7" font-weight="700">福岡</tspan>
+      <tspan x="89" y="456" font-size="7">78.1</tspan>
+    </text>
+  </g>
+  <g aria-label="佐賀 74.3L">
+    <title>佐賀県：74.3L</title>
+    <rect x="33" y="427" width="36" height="36" rx="3" fill="#bb6ac9" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#ffffff" text-anchor="middle">
+      <tspan x="51" y="443" font-size="7" font-weight="700">佐賀</tspan>
+      <tspan x="51" y="456" font-size="7">74.3</tspan>
+    </text>
+  </g>
+  <g aria-label="長崎 74.6L">
+    <title>長崎県：74.6L</title>
+    <rect x="33" y="465" width="36" height="36" rx="3" fill="#ba68c8" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#ffffff" text-anchor="middle">
+      <tspan x="51" y="481" font-size="7" font-weight="700">長崎</tspan>
+      <tspan x="51" y="494" font-size="7">74.6</tspan>
+    </text>
+  </g>
+  <g aria-label="熊本 76.8L">
+    <title>熊本県：76.8L</title>
+    <rect x="33" y="503" width="36" height="36" rx="3" fill="#b65fc5" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#ffffff" text-anchor="middle">
+      <tspan x="51" y="519" font-size="7" font-weight="700">熊本</tspan>
+      <tspan x="51" y="532" font-size="7">76.8</tspan>
+    </text>
+  </g>
+  <g aria-label="大分 78.2L">
+    <title>大分県：78.2L</title>
+    <rect x="71" y="465" width="36" height="36" rx="3" fill="#b35ac3" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#ffffff" text-anchor="middle">
+      <tspan x="89" y="481" font-size="7" font-weight="700">大分</tspan>
+      <tspan x="89" y="494" font-size="7">78.2</tspan>
+    </text>
+  </g>
+  <g aria-label="宮崎 95.2L">
+    <title>宮崎県：95.2L</title>
+    <rect x="71" y="503" width="36" height="36" rx="3" fill="#8c23a9" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#ffffff" text-anchor="middle">
+      <tspan x="89" y="519" font-size="7" font-weight="700">宮崎</tspan>
+      <tspan x="89" y="532" font-size="7">95.2</tspan>
+    </text>
+  </g>
+  <g aria-label="鹿児島 83.3L">
+    <title>鹿児島県：83.3L</title>
+    <rect x="33" y="541.5" width="74" height="36" rx="3" fill="#aa45bb" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#ffffff" text-anchor="middle">
+      <tspan x="70" y="557.5" font-size="7" font-weight="700">鹿児島</tspan>
+      <tspan x="70" y="570.5" font-size="7">83.3</tspan>
+    </text>
+  </g>
+  <g aria-label="沖縄 106.5L">
+    <title>沖縄県：106.5L</title>
+    <rect x="33" y="617.5" width="36" height="36" rx="3" fill="#52168f" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#ffffff" text-anchor="middle">
+      <tspan x="51" y="633.5" font-size="7" font-weight="700">沖縄</tspan>
+      <tspan x="51" y="646.5" font-size="7">106.5</tspan>
+    </text>
+  </g>
+  <rect x="200" y="660" width="28.571428571428573" height="10" fill="#e1bee7"/>
+  <rect x="228.57142857142858" y="660" width="28.571428571428573" height="10" fill="#ce93d8"/>
+  <rect x="257.14285714285717" y="660" width="28.571428571428573" height="10" fill="#ba68c8"/>
+  <rect x="285.7142857142857" y="660" width="28.571428571428573" height="10" fill="#ab47bc"/>
+  <rect x="314.2857142857143" y="660" width="28.571428571428573" height="10" fill="#9c27b0"/>
+  <rect x="342.8571428571429" y="660" width="28.571428571428573" height="10" fill="#7b1fa2"/>
+  <rect x="371.42857142857144" y="660" width="28.571428571428573" height="10" fill="#4a148c"/>
+  <text x="200" y="682" font-size="8" fill="#6b7280" text-anchor="middle">58L</text>
+  <text x="400" y="682" font-size="8" fill="#6b7280" text-anchor="middle">107.8L</text>
+</svg>

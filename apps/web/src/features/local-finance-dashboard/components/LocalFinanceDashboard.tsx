@@ -10,6 +10,9 @@ import {
   SelectValue,
 } from "@stats47/components/atoms/ui/select";
 
+import { HubSankey } from "@/components/charts/HubSankey";
+import { SankeyFallback } from "@/components/charts/SankeyFallback";
+
 import { FinanceSankey } from "@/features/finance-flow/components/FinanceSankey";
 import type { FinanceFlowData } from "@/features/finance-flow/lib/types";
 import { PREFECTURES } from "@/features/migration-flow/lib/prefectures";
@@ -29,8 +32,24 @@ interface Props {
   initialFinanceFlow?: FinanceFlowData;
 }
 
-/** 市区町村 JSON: cityName -> { years } */
-type CityData = Record<string, { years: Record<string, YearRecord> }>;
+interface FlowNode {
+  name: string;
+  value: number;
+}
+interface CityFlow {
+  revenue: FlowNode[];
+  expenditure: FlowNode[];
+  totals: { revenue: number; expenditure: number };
+}
+interface CityRecord {
+  type?: string;
+  years: Record<string, YearRecord>;
+  flow?: CityFlow;
+}
+/** 市区町村 JSON: cityName -> CityRecord */
+type CityData = Record<string, CityRecord>;
+/** 類似団体平均: 類型 -> 年 -> 指標 */
+type SimilarAverages = Record<string, Record<string, YearRecord>>;
 
 const VALID_CODES = new Set(PREFECTURES.map((p) => p.code));
 const OKU = 1 / 100000; // 千円 → 億円
@@ -73,6 +92,7 @@ export function LocalFinanceDashboard({ cards, initialFinanceFlow }: Props) {
   const [prefCode, setPrefCode] = useState(initialFinanceFlow?.focusCode ?? "13");
   const [cityName, setCityName] = useState<string>(PREF_ALL);
   const [cityData, setCityData] = useState<CityData | null>(null);
+  const [similarAvg, setSimilarAvg] = useState<SimilarAverages | null>(null);
 
   useEffect(() => {
     const param = new URLSearchParams(window.location.search).get("pref");
@@ -80,6 +100,10 @@ export function LocalFinanceDashboard({ cards, initialFinanceFlow }: Props) {
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setPrefCode(param);
     }
+    fetch("/finance-cards/similar-averages.json")
+      .then((r) => (r.ok ? (r.json() as Promise<SimilarAverages>) : null))
+      .then((d) => setSimilarAvg(d))
+      .catch(() => setSimilarAvg(null));
   }, []);
 
   // 都道府県変更時に市区町村データを取得
@@ -142,12 +166,20 @@ export function LocalFinanceDashboard({ cards, initialFinanceFlow }: Props) {
     return out;
   }, [cityData, years]);
 
+  const cityType = isCity ? cityData?.[cityName]?.type : undefined;
+  const cityFlow = isCity ? cityData?.[cityName]?.flow : undefined;
+  const simForType = cityType ? similarAvg?.[cityType] : undefined;
+
   const recordFor = (year: number): YearRecord | undefined =>
     isCity ? cityData?.[cityName]?.years[String(year)] : prefCard?.years[String(year)];
-  const avgFor = (year: number): YearRecord | undefined => (isCity ? cityAverages?.[year] : averages[year]);
+  const avgFor = (year: number): YearRecord | undefined => {
+    if (!isCity) return averages[year];
+    if (simForType?.[String(year)]) return simForType[String(year)];
+    return cityAverages?.[year];
+  };
 
   const latest = recordFor(latestYear);
-  const avgLabel = isCity ? "県内市区町村平均" : "全国平均";
+  const avgLabel = !isCity ? "全国平均" : simForType ? "類似団体平均" : "県内市区町村平均";
   const avgLegend = (
     <span className="flex items-center gap-1">
       <span className="inline-block h-px w-3 border-t border-dashed border-slate-400" />
@@ -275,20 +307,43 @@ export function LocalFinanceDashboard({ cards, initialFinanceFlow }: Props) {
         </div>
         <p className="mt-2 text-xs text-muted-foreground">
           ※ 実線=選択団体、破線={avgLabel}。
-          {isCity ? "（類似団体平均は別ソースのため県内平均で代替）" : "（都道府県には類似団体区分が無いため全国平均）"}
+          {isCity
+            ? simForType
+              ? `（${cityType} の全国平均で比較）`
+              : "（類型不明のため県内平均で比較）"
+            : "（都道府県には類似団体区分が無いため全国平均）"}
         </p>
       </section>
 
-      {/* Page 2: 歳入歳出の構成比 (都道府県 Sankey) */}
+      {/* Page 2: 歳入歳出の構成比 (市区町村は団体別 Sankey、県全体は都道府県 Sankey) */}
       <section>
-        <h2 className="mb-3 text-lg font-bold text-slate-900">
-          歳入歳出の構成比{isCity && <span className="ml-2 text-xs font-normal text-muted-foreground">（{prefName}全体）</span>}
-        </h2>
+        <h2 className="mb-3 text-lg font-bold text-slate-900">歳入歳出の構成比</h2>
         <p className="mb-3 text-sm text-muted-foreground">
           歳入の財源（地方税・地方交付税・国庫支出金・地方債など）が一般会計を通じて
           目的別歳出（民生費・教育費・土木費など）へ流れる様子をフロー図で表します。
         </p>
-        <FinanceSankey code={prefCode} initialData={initialFinanceFlow} />
+        {isCity ? (
+          cityFlow ? (
+            <HubSankey
+              title={`${cityName} 財政フロー（${latestYear}年度）`}
+              subtitle="左: 歳入の財源 → 中央: 一般会計 → 右: 目的別歳出（幅=金額）"
+              centerLabel="一般会計"
+              centerSub={`歳入 ${oku(cityFlow.totals.revenue)} / 歳出 ${oku(cityFlow.totals.expenditure)}`}
+              centerSubColor="#64748b"
+              leftNodes={cityFlow.revenue}
+              rightNodes={cityFlow.expenditure}
+              leftColor="#0ea5e9"
+              rightColor="#f59e0b"
+              formatValue={oku}
+              footer={`出典: 地方財政状況調査 決算カード（${latestYear}年度）`}
+              labelGutter={182}
+            />
+          ) : (
+            <SankeyFallback message="この団体のフローデータがありません。" />
+          )
+        ) : (
+          <FinanceSankey code={prefCode} initialData={initialFinanceFlow} />
+        )}
       </section>
     </div>
   );

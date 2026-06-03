@@ -1,0 +1,88 @@
+<svg width="780" height="596" viewBox="0 0 680 520" xmlns="http://www.w3.org/2000/svg" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" role="img" aria-label="施設タイプ別 延べ宿泊者数（上位15都道府県）">
+<title>施設タイプ別 延べ宿泊者数（上位15都道府県）</title>
+<rect width="680" height="520" fill="#fafafa" rx="8"/>
+<text x="340" y="28" text-anchor="middle" font-size="16" font-weight="bold" fill="#333">施設タイプ別 延べ宿泊者数（上位15都道府県）</text>
+<rect x="70" y="55" width="12" height="12" rx="2" fill="#42a5f5"/>
+<text x="85" y="65" font-size="9" fill="#6b7280">ビジネスホテル</text>
+<rect x="156" y="55" width="12" height="12" rx="2" fill="#66bb6a"/>
+<text x="171" y="65" font-size="9" fill="#6b7280">シティホテル</text>
+<rect x="233" y="55" width="12" height="12" rx="2" fill="#ffa726"/>
+<text x="248" y="65" font-size="9" fill="#6b7280">リゾートホテル</text>
+<rect x="319" y="55" width="12" height="12" rx="2" fill="#ef5350"/>
+<text x="334" y="65" font-size="9" fill="#6b7280">旅館</text>
+<text x="65" y="89.27083333333333" text-anchor="end" font-size="10" fill="#374151">東京</text>
+<rect x="70.0" y="73.4375" width="360.2" height="23.666666666666668" fill="#42a5f5" opacity="0.85"/>
+<rect x="430.2" y="73.4375" width="212.3" height="23.666666666666668" fill="#66bb6a" opacity="0.85"/>
+<rect x="642.5" y="73.4375" width="4.5" height="23.666666666666668" fill="#ffa726" opacity="0.85"/>
+<rect x="647.0" y="73.4375" width="3.0" height="23.666666666666668" fill="#ef5350" opacity="0.85"/>
+<text x="65" y="116.375" text-anchor="end" font-size="10" fill="#374151">大阪</text>
+<rect x="70.0" y="100.54166666666667" width="181.9" height="23.666666666666668" fill="#42a5f5" opacity="0.85"/>
+<rect x="251.9" y="100.54166666666667" width="97.3" height="23.666666666666668" fill="#66bb6a" opacity="0.85"/>
+<rect x="349.1" y="100.54166666666667" width="26.3" height="23.666666666666668" fill="#ffa726" opacity="0.85"/>
+<rect x="375.4" y="100.54166666666667" width="2.1" height="23.666666666666668" fill="#ef5350" opacity="0.85"/>
+<text x="65" y="143.47916666666669" text-anchor="end" font-size="10" fill="#374151">北海道</text>
+<rect x="70.0" y="127.64583333333334" width="114.2" height="23.666666666666668" fill="#42a5f5" opacity="0.85"/>
+<rect x="184.2" y="127.64583333333334" width="58.5" height="23.666666666666668" fill="#66bb6a" opacity="0.85"/>
+<rect x="242.8" y="127.64583333333334" width="30.3" height="23.666666666666668" fill="#ffa726" opacity="0.85"/>
+<rect x="273.1" y="127.64583333333334" width="34.6" height="23.666666666666668" fill="#ef5350" opacity="0.85"/>
+<text x="65" y="170.58333333333334" text-anchor="end" font-size="10" fill="#374151">京都</text>
+<rect x="70.0" y="154.75" width="85.0" height="23.666666666666668" fill="#42a5f5" opacity="0.85"/>
+<rect x="155.0" y="154.75" width="52.3" height="23.666666666666668" fill="#66bb6a" opacity="0.85"/>
+<rect x="207.3" y="154.75" width="7.0" height="23.666666666666668" fill="#ffa726" opacity="0.85"/>
+<rect x="214.4" y="154.75" width="16.2" height="23.666666666666668" fill="#ef5350" opacity="0.85"/>
+<text x="65" y="197.68750000000003" text-anchor="end" font-size="10" fill="#374151">千葉</text>
+<rect x="70.0" y="181.85416666666669" width="59.1" height="23.666666666666668" fill="#42a5f5" opacity="0.85"/>
+<rect x="129.1" y="181.85416666666669" width="20.0" height="23.666666666666668" fill="#66bb6a" opacity="0.85"/>
+<rect x="149.1" y="181.85416666666669" width="79.5" height="23.666666666666668" fill="#ffa726" opacity="0.85"/>
+<rect x="228.6" y="181.85416666666669" width="10.7" height="23.666666666666668" fill="#ef5350" opacity="0.85"/>
+<text x="65" y="224.79166666666669" text-anchor="end" font-size="10" fill="#374151">沖縄</text>
+<rect x="70.0" y="208.95833333333334" width="45.5" height="23.666666666666668" fill="#42a5f5" opacity="0.85"/>
+<rect x="115.5" y="208.95833333333334" width="22.7" height="23.666666666666668" fill="#66bb6a" opacity="0.85"/>
+<rect x="138.2" y="208.95833333333334" width="72.7" height="23.666666666666668" fill="#ffa726" opacity="0.85"/>
+<rect x="210.9" y="208.95833333333334" width="0.5" height="23.666666666666668" fill="#ef5350" opacity="0.85"/>
+<text x="65" y="251.89583333333334" text-anchor="end" font-size="10" fill="#374151">神奈川</text>
+<rect x="70.0" y="236.0625" width="67.4" height="23.666666666666668" fill="#42a5f5" opacity="0.85"/>
+<rect x="137.4" y="236.0625" width="31.6" height="23.666666666666668" fill="#66bb6a" opacity="0.85"/>
+<rect x="169.0" y="236.0625" width="21.3" height="23.666666666666668" fill="#ffa726" opacity="0.85"/>
+<rect x="190.3" y="236.0625" width="13.7" height="23.666666666666668" fill="#ef5350" opacity="0.85"/>
+<text x="65" y="279" text-anchor="end" font-size="10" fill="#374151">福岡</text>
+<rect x="70.0" y="263.1666666666667" width="104.6" height="23.666666666666668" fill="#42a5f5" opacity="0.85"/>
+<rect x="174.6" y="263.1666666666667" width="21.5" height="23.666666666666668" fill="#66bb6a" opacity="0.85"/>
+<rect x="196.1" y="263.1666666666667" width="4.0" height="23.666666666666668" fill="#ffa726" opacity="0.85"/>
+<rect x="200.1" y="263.1666666666667" width="3.4" height="23.666666666666668" fill="#ef5350" opacity="0.85"/>
+<text x="65" y="306.1041666666667" text-anchor="end" font-size="10" fill="#374151">愛知</text>
+<rect x="70.0" y="290.27083333333337" width="88.0" height="23.666666666666668" fill="#42a5f5" opacity="0.85"/>
+<rect x="158.0" y="290.27083333333337" width="21.3" height="23.666666666666668" fill="#66bb6a" opacity="0.85"/>
+<rect x="179.3" y="290.27083333333337" width="7.2" height="23.666666666666668" fill="#ffa726" opacity="0.85"/>
+<rect x="186.4" y="290.27083333333337" width="4.9" height="23.666666666666668" fill="#ef5350" opacity="0.85"/>
+<text x="65" y="333.2083333333333" text-anchor="end" font-size="10" fill="#374151">静岡</text>
+<rect x="70.0" y="317.375" width="48.3" height="23.666666666666668" fill="#42a5f5" opacity="0.85"/>
+<rect x="118.3" y="317.375" width="8.0" height="23.666666666666668" fill="#66bb6a" opacity="0.85"/>
+<rect x="126.3" y="317.375" width="33.2" height="23.666666666666668" fill="#ffa726" opacity="0.85"/>
+<rect x="159.5" y="317.375" width="26.9" height="23.666666666666668" fill="#ef5350" opacity="0.85"/>
+<text x="65" y="360.3125" text-anchor="end" font-size="10" fill="#374151">長野</text>
+<rect x="70.0" y="344.4791666666667" width="32.6" height="23.666666666666668" fill="#42a5f5" opacity="0.85"/>
+<rect x="102.6" y="344.4791666666667" width="5.3" height="23.666666666666668" fill="#66bb6a" opacity="0.85"/>
+<rect x="107.8" y="344.4791666666667" width="23.1" height="23.666666666666668" fill="#ffa726" opacity="0.85"/>
+<rect x="130.9" y="344.4791666666667" width="24.0" height="23.666666666666668" fill="#ef5350" opacity="0.85"/>
+<text x="65" y="387.4166666666667" text-anchor="end" font-size="10" fill="#374151">兵庫</text>
+<rect x="70.0" y="371.58333333333337" width="37.2" height="23.666666666666668" fill="#42a5f5" opacity="0.85"/>
+<rect x="107.2" y="371.58333333333337" width="20.4" height="23.666666666666668" fill="#66bb6a" opacity="0.85"/>
+<rect x="127.5" y="371.58333333333337" width="13.5" height="23.666666666666668" fill="#ffa726" opacity="0.85"/>
+<rect x="141.0" y="371.58333333333337" width="15.7" height="23.666666666666668" fill="#ef5350" opacity="0.85"/>
+<text x="65" y="414.5208333333333" text-anchor="end" font-size="10" fill="#374151">広島</text>
+<rect x="70.0" y="398.6875" width="44.0" height="23.666666666666668" fill="#42a5f5" opacity="0.85"/>
+<rect x="114.0" y="398.6875" width="11.8" height="23.666666666666668" fill="#66bb6a" opacity="0.85"/>
+<rect x="125.9" y="398.6875" width="4.8" height="23.666666666666668" fill="#ffa726" opacity="0.85"/>
+<rect x="130.7" y="398.6875" width="5.2" height="23.666666666666668" fill="#ef5350" opacity="0.85"/>
+<text x="65" y="441.625" text-anchor="end" font-size="10" fill="#374151">石川</text>
+<rect x="70.0" y="425.7916666666667" width="44.9" height="23.666666666666668" fill="#42a5f5" opacity="0.85"/>
+<rect x="114.9" y="425.7916666666667" width="10.2" height="23.666666666666668" fill="#66bb6a" opacity="0.85"/>
+<rect x="125.1" y="425.7916666666667" width="0.8" height="23.666666666666668" fill="#ffa726" opacity="0.85"/>
+<rect x="125.9" y="425.7916666666667" width="10.2" height="23.666666666666668" fill="#ef5350" opacity="0.85"/>
+<text x="65" y="468.7291666666667" text-anchor="end" font-size="10" fill="#374151">栃木</text>
+<rect x="70.0" y="452.89583333333337" width="23.1" height="23.666666666666668" fill="#42a5f5" opacity="0.85"/>
+<rect x="93.1" y="452.89583333333337" width="2.0" height="23.666666666666668" fill="#66bb6a" opacity="0.85"/>
+<rect x="95.2" y="452.89583333333337" width="15.5" height="23.666666666666668" fill="#ffa726" opacity="0.85"/>
+<rect x="110.7" y="452.89583333333337" width="20.1" height="23.666666666666668" fill="#ef5350" opacity="0.85"/>
+</svg>

@@ -1,0 +1,100 @@
+<svg width="700" height="700" viewBox="0 0 560 560" xmlns="http://www.w3.org/2000/svg" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" role="img" aria-label="スポーツ施設数（人口比）vs スポーツ行動者率">
+<title>スポーツ施設数（人口比）vs スポーツ行動者率</title>
+<rect width="560" height="560" fill="#fafafa" rx="8"/>
+<text x="280" y="28" text-anchor="middle" font-size="16" font-weight="bold" fill="#333">スポーツ施設数（人口比）vs スポーツ行動者率</text>
+<rect x="70" y="60" width="460" height="445" fill="#f9fafb" stroke="#d1d5db"/>
+<line x1="70" y1="505" x2="530" y2="505" stroke="#e5e7eb" stroke-width="0.5"/>
+<text x="65" y="508" text-anchor="end" font-size="9" fill="#6b7280">50%</text>
+<line x1="70" y1="415.99999999999994" x2="530" y2="415.99999999999994" stroke="#e5e7eb" stroke-width="0.5"/>
+<text x="65" y="418.99999999999994" text-anchor="end" font-size="9" fill="#6b7280">56%</text>
+<line x1="70" y1="327" x2="530" y2="327" stroke="#e5e7eb" stroke-width="0.5"/>
+<text x="65" y="330" text-anchor="end" font-size="9" fill="#6b7280">61%</text>
+<line x1="70" y1="238.0000000000001" x2="530" y2="238.0000000000001" stroke="#e5e7eb" stroke-width="0.5"/>
+<text x="65" y="241.0000000000001" text-anchor="end" font-size="9" fill="#6b7280">66%</text>
+<line x1="70" y1="148.99999999999994" x2="530" y2="148.99999999999994" stroke="#e5e7eb" stroke-width="0.5"/>
+<text x="65" y="151.99999999999994" text-anchor="end" font-size="9" fill="#6b7280">71%</text>
+<line x1="70" y1="60" x2="530" y2="60" stroke="#e5e7eb" stroke-width="0.5"/>
+<text x="65" y="63" text-anchor="end" font-size="9" fill="#6b7280">76%</text>
+<line x1="70" y1="60" x2="70" y2="505" stroke="#e5e7eb" stroke-width="0.5"/>
+<text x="70" y="519" text-anchor="middle" font-size="9" fill="#6b7280">7</text>
+<line x1="162" y1="60" x2="162" y2="505" stroke="#e5e7eb" stroke-width="0.5"/>
+<text x="162" y="519" text-anchor="middle" font-size="9" fill="#6b7280">26</text>
+<line x1="254" y1="60" x2="254" y2="505" stroke="#e5e7eb" stroke-width="0.5"/>
+<text x="254" y="519" text-anchor="middle" font-size="9" fill="#6b7280">45</text>
+<line x1="346.00000000000006" y1="60" x2="346.00000000000006" y2="505" stroke="#e5e7eb" stroke-width="0.5"/>
+<text x="346.00000000000006" y="519" text-anchor="middle" font-size="9" fill="#6b7280">64</text>
+<line x1="438" y1="60" x2="438" y2="505" stroke="#e5e7eb" stroke-width="0.5"/>
+<text x="438" y="519" text-anchor="middle" font-size="9" fill="#6b7280">83</text>
+<line x1="530" y1="60" x2="530" y2="505" stroke="#e5e7eb" stroke-width="0.5"/>
+<text x="530" y="519" text-anchor="middle" font-size="9" fill="#6b7280">102</text>
+<line x1="285.40035934076843" y1="60" x2="285.40035934076843" y2="505" stroke="#9ca3af" stroke-dasharray="4,3" opacity="0.6"/>
+<line x1="70" y1="276.9978415522479" x2="530" y2="276.9978415522479" stroke="#9ca3af" stroke-dasharray="4,3" opacity="0.6"/>
+<circle cx="498.2758620689655" cy="388.6807266009852" r="4.5" fill="#42a5f5" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>秋田: 人口10万人あたり施設数=96, スポーツ行動者率（%）=57%</title></circle>
+<text x="504.2758620689655" y="383.6807266009852" font-size="8" fill="#374151">秋田</text>
+<circle cx="487.04402224476814" cy="318.4644396551723" r="4.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>鳥取: 人口10万人あたり施設数=93, スポーツ行動者率（%）=61%</title></circle>
+<text x="493.04402224476814" y="313.4644396551723" font-size="8" fill="#374151">鳥取</text>
+<circle cx="481.1376237165265" cy="270.5118534482758" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>長野: 人口10万人あたり施設数=92, スポーツ行動者率（%）=64%</title></circle>
+<text x="487.1376237165265" y="265.5118534482758" font-size="8" fill="#374151">長野</text>
+<circle cx="430.88482312378176" cy="315.0392549261084" r="4.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>島根: 人口10万人あたり施設数=82, スポーツ行動者率（%）=61%</title></circle>
+<circle cx="402.32109253638345" cy="354.42887931034477" r="4.5" fill="#42a5f5" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>岩手: 人口10万人あたり施設数=76, スポーツ行動者率（%）=59%</title></circle>
+<circle cx="395.64008436509374" cy="301.3385160098522" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>山梨: 人口10万人あたり施設数=74, スポーツ行動者率（%）=62%</title></circle>
+<circle cx="393.60673405209246" cy="301.3385160098522" r="4.5" fill="#42a5f5" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>北海道: 人口10万人あたり施設数=74, スポーツ行動者率（%）=62%</title></circle>
+<circle cx="387.9424010373033" cy="347.5785098522167" r="4.5" fill="#42a5f5" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>福島: 人口10万人あたり施設数=73, スポーツ行動者率（%）=60%</title></circle>
+<circle cx="360.92788973600125" cy="356.14147167487687" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>新潟: 人口10万人あたり施設数=67, スポーツ行動者率（%）=59%</title></circle>
+<circle cx="354.29529466740195" cy="279.074815270936" r="4.5" fill="#ab47bc" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>鹿児島: 人口10万人あたり施設数=66, スポーツ行動者率（%）=64%</title></circle>
+<circle cx="352.84290158668676" cy="344.1533251231526" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>富山: 人口10万人あたり施設数=66, スポーツ行動者率（%）=60%</title></circle>
+<circle cx="351.6809871221147" cy="376.69258004926115" r="4.5" fill="#ab47bc" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>長崎: 人口10万人あたり施設数=65, スポーツ行動者率（%）=58%</title></circle>
+<text x="357.6809871221147" y="371.69258004926115" font-size="8" fill="#374151">長崎</text>
+<circle cx="351.4873347113526" cy="313.32666256157637" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>福井: 人口10万人あたり施設数=65, スポーツ行動者率（%）=62%</title></circle>
+<circle cx="351.0032036844476" cy="280.78740763546796" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>石川: 人口10万人あたり施設数=65, スポーツ行動者率（%）=63%</title></circle>
+<circle cx="346.4523720315401" cy="239.68519088669956" r="4.5" fill="#ab47bc" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>宮崎: 人口10万人あたり施設数=64, スポーツ行動者率（%）=66%</title></circle>
+<circle cx="346.01665410732556" cy="366.417025862069" r="4.5" fill="#42a5f5" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>山形: 人口10万人あたり施設数=64, スポーツ行動者率（%）=58%</title></circle>
+<circle cx="337.39912182841556" cy="291.06296182266016" r="4.5" fill="#ab47bc" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>佐賀: 人口10万人あたり施設数=62, スポーツ行動者率（%）=63%</title></circle>
+<circle cx="336.4792728772959" cy="219.13408251231533" r="4.5" fill="#66bb6a" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>群馬: 人口10万人あたり施設数=62, スポーツ行動者率（%）=67%</title></circle>
+<circle cx="325.3926723611702" cy="474.31034482758616" r="4.5" fill="#42a5f5" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>青森: 人口10万人あたり施設数=60, スポーツ行動者率（%）=52%</title></circle>
+<text x="331.3926723611702" y="469.31034482758616" font-size="8" fill="#374151">青森</text>
+<circle cx="316.9203793903317" cy="349.2911022167488" r="4.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>高知: 人口10万人あたり施設数=58, スポーツ行動者率（%）=59%</title></circle>
+<circle cx="309.3679353706128" cy="268.79926108374394" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>岐阜: 人口10万人あたり施設数=57, スポーツ行動者率（%）=64%</title></circle>
+<circle cx="305.5917133607534" cy="284.212592364532" r="4.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>山口: 人口10万人あたり施設数=56, スポーツ行動者率（%）=63%</title></circle>
+<circle cx="294.5051128446276" cy="225.9844519704435" r="4.5" fill="#ab47bc" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>熊本: 人口10万人あたり施設数=53, スポーツ行動者率（%）=67%</title></circle>
+<circle cx="289.61538947288653" cy="285.92518472906403" r="4.5" fill="#ab47bc" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>大分: 人口10万人あたり施設数=52, スポーツ行動者率（%）=63%</title></circle>
+<circle cx="285.98440677109863" cy="308.18888546798036" r="4.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>香川: 人口10万人あたり施設数=52, スポーツ行動者率（%）=62%</title></circle>
+<circle cx="282.3534240693107" cy="270.5118534482758" r="4.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>愛媛: 人口10万人あたり施設数=51, スポーツ行動者率（%）=64%</title></circle>
+<circle cx="280.99785719397653" cy="323.6022167487685" r="4.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>徳島: 人口10万人あたり施設数=51, スポーツ行動者率（%）=61%</title></circle>
+<circle cx="278.9160937782848" cy="342.44073275862075" r="4.5" fill="#ffa726" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>和歌山: 人口10万人あたり施設数=50, スポーツ行動者率（%）=60%</title></circle>
+<circle cx="274.84939315228235" cy="294.4881465517241" r="4.5" fill="#66bb6a" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>栃木: 人口10万人あたり施設数=49, スポーツ行動者率（%）=63%</title></circle>
+<circle cx="245.17216120300245" cy="256.81111453201976" r="4.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>岡山: 人口10万人あたり施設数=43, スポーツ行動者率（%）=65%</title></circle>
+<circle cx="235.53795376759186" cy="239.68519088669956" r="4.5" fill="#66bb6a" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>茨城: 人口10万人あたり施設数=41, スポーツ行動者率（%）=66%</title></circle>
+<circle cx="224.98389738106164" cy="215.7088977832512" r="4.5" fill="#ffa726" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>滋賀: 人口10万人あたり施設数=39, スポーツ行動者率（%）=67%</title></circle>
+<circle cx="221.0624360631307" cy="248.24815270935966" r="4.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>広島: 人口10万人あたり施設数=38, スポーツ行動者率（%）=65%</title></circle>
+<circle cx="219.94893470124904" cy="256.81111453201976" r="4.5" fill="#ffa726" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>奈良: 人口10万人あたり施設数=38, スポーツ行動者率（%）=65%</title></circle>
+<circle cx="217.47986646403328" cy="263.66148399014764" r="4.5" fill="#42a5f5" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>宮城: 人口10万人あたり施設数=38, スポーツ行動者率（%）=64%</title></circle>
+<circle cx="212.2996644761492" cy="265.3740763546799" r="4.5" fill="#ffa726" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>三重: 人口10万人あたり施設数=36, スポーツ行動者率（%）=64%</title></circle>
+<circle cx="209.63694382817138" cy="231.12222906403946" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>静岡: 人口10万人あたり施設数=36, スポーツ行動者率（%）=66%</title></circle>
+<circle cx="179.03986292777188" cy="239.68519088669956" r="4.5" fill="#ab47bc" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>沖縄: 人口10万人あたり施設数=30, スポーツ行動者率（%）=66%</title></circle>
+<circle cx="158.31905497623546" cy="219.13408251231533" r="4.5" fill="#ffa726" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>京都: 人口10万人あたり施設数=25, スポーツ行動者率（%）=67%</title></circle>
+<circle cx="157.83492394933043" cy="219.13408251231533" r="4.5" fill="#ab47bc" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>福岡: 人口10万人あたり施設数=25, スポーツ行動者率（%）=67%</title></circle>
+<circle cx="152.70313506413683" cy="212.2837130541871" r="4.5" fill="#66bb6a" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>千葉: 人口10万人あたり施設数=24, スポーツ行動者率（%）=67%</title></circle>
+<circle cx="151.88011231839823" cy="179.74445812807892" r="4.5" fill="#66bb6a" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>埼玉: 人口10万人あたり施設数=24, スポーツ行動者率（%）=69%</title></circle>
+<text x="157.88011231839823" y="174.74445812807892" font-size="8" fill="#374151">埼玉</text>
+<circle cx="148.3459558219913" cy="188.30741995073896" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>愛知: 人口10万人あたり施設数=23, スポーツ行動者率（%）=69%</title></circle>
+<circle cx="137.16252910048456" cy="229.4096366995073" r="4.5" fill="#ffa726" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>兵庫: 人口10万人あたり施設数=21, スポーツ行動者率（%）=66%</title></circle>
+<circle cx="118.91078938616396" cy="136.92964901477836" r="4.5" fill="#66bb6a" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>神奈川: 人口10万人あたり施設数=17, スポーツ行動者率（%）=72%</title></circle>
+<text x="124.91078938616396" y="131.92964901477836" font-size="8" fill="#374151">神奈川</text>
+<circle cx="111.84247639335015" cy="90.68965517241378" r="4.5" fill="#66bb6a" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>東京: 人口10万人あたり施設数=16, スポーツ行動者率（%）=75%</title></circle>
+<text x="117.84247639335015" y="85.68965517241378" font-size="8" fill="#374151">東京</text>
+<circle cx="101.72413793103449" cy="234.54741379310354" r="4.5" fill="#ffa726" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>大阪: 人口10万人あたり施設数=14, スポーツ行動者率（%）=66%</title></circle>
+<text x="107.72413793103449" y="229.54741379310354" font-size="8" fill="#374151">大阪</text>
+<circle cx="70" cy="58" r="4" fill="#42a5f5" fill-opacity="0.75"/>
+<text x="77" y="61" font-size="7" fill="#6b7280">北海道・東北</text>
+<circle cx="129" cy="58" r="4" fill="#66bb6a" fill-opacity="0.75"/>
+<text x="136" y="61" font-size="7" fill="#6b7280">関東</text>
+<circle cx="160" cy="58" r="4" fill="#fdd835" fill-opacity="0.75"/>
+<text x="167" y="61" font-size="7" fill="#6b7280">中部</text>
+<circle cx="191" cy="58" r="4" fill="#ffa726" fill-opacity="0.75"/>
+<text x="198" y="61" font-size="7" fill="#6b7280">近畿</text>
+<circle cx="222" cy="58" r="4" fill="#ef5350" fill-opacity="0.75"/>
+<text x="229" y="61" font-size="7" fill="#6b7280">中国・四国</text>
+<circle cx="274" cy="58" r="4" fill="#ab47bc" fill-opacity="0.75"/>
+<text x="281" y="61" font-size="7" fill="#6b7280">九州・沖縄</text>
+</svg>

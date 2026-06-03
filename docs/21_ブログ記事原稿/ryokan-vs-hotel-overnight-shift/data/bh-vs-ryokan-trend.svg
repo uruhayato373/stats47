@@ -1,0 +1,37 @@
+<svg width="780" height="483" viewBox="0 0 680 421" xmlns="http://www.w3.org/2000/svg" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" role="img" aria-label="ビジネスホテル vs 旅館 延べ宿泊者数の推移（全国）">
+<title>ビジネスホテル vs 旅館 延べ宿泊者数の推移（全国）</title>
+<rect width="680" height="421" fill="#fafafa" rx="8"/>
+<text x="340" y="28" text-anchor="middle" font-size="16" font-weight="bold" fill="#333">ビジネスホテル vs 旅館 延べ宿泊者数の推移（全国）</text>
+<rect x="65" y="60" width="590" height="290" fill="#f9fafb" stroke="#d1d5db"/>
+<line x1="65" y1="350" x2="655" y2="350" stroke="#e5e7eb" stroke-width="0.5"/>
+<text x="60" y="353" text-anchor="end" font-size="9" fill="#6b7280">0.1億</text>
+<line x1="65" y1="292" x2="655" y2="292" stroke="#e5e7eb" stroke-width="0.5"/>
+<text x="60" y="295" text-anchor="end" font-size="9" fill="#6b7280">0.7億</text>
+<line x1="65" y1="234" x2="655" y2="234" stroke="#e5e7eb" stroke-width="0.5"/>
+<text x="60" y="237" text-anchor="end" font-size="9" fill="#6b7280">1.2億</text>
+<line x1="65" y1="176" x2="655" y2="176" stroke="#e5e7eb" stroke-width="0.5"/>
+<text x="60" y="179" text-anchor="end" font-size="9" fill="#6b7280">1.8億</text>
+<line x1="65" y1="118" x2="655" y2="118" stroke="#e5e7eb" stroke-width="0.5"/>
+<text x="60" y="121" text-anchor="end" font-size="9" fill="#6b7280">2.4億</text>
+<line x1="65" y1="60" x2="655" y2="60" stroke="#e5e7eb" stroke-width="0.5"/>
+<text x="60" y="63" text-anchor="end" font-size="9" fill="#6b7280">2.9億</text>
+<text x="65" y="366" text-anchor="middle" font-size="9" fill="#6b7280">2009</text>
+<text x="143.66666666666669" y="366" text-anchor="middle" font-size="9" fill="#6b7280">2011</text>
+<text x="222.33333333333334" y="366" text-anchor="middle" font-size="9" fill="#6b7280">2013</text>
+<text x="301" y="366" text-anchor="middle" font-size="9" fill="#6b7280">2015</text>
+<text x="379.6666666666667" y="366" text-anchor="middle" font-size="9" fill="#6b7280">2017</text>
+<text x="458.3333333333333" y="366" text-anchor="middle" font-size="9" fill="#6b7280">2019</text>
+<text x="537" y="366" text-anchor="middle" font-size="9" fill="#6b7280">2021</text>
+<text x="615.6666666666666" y="366" text-anchor="middle" font-size="9" fill="#6b7280">2023</text>
+<text x="655" y="366" text-anchor="middle" font-size="9" fill="#6b7280">2024</text>
+<polyline points="65.0,254.4 104.3,228.5 143.7,226.1 183.0,215.8 222.3,204.1 261.7,193.6 301.0,180.2 340.3,178.9 379.7,167.1 419.0,154.1 458.3,117.4 497.7,221.3 537.0,219.5 576.3,166.8 615.7,100.6 655.0,84.2" fill="none" stroke="#42a5f5" stroke-width="2.5" stroke-linejoin="round"/>
+<circle cx="65" cy="254.36614335570647" r="3.5" fill="#fff" stroke="#42a5f5" stroke-width="2"/>
+<circle cx="655" cy="84.16666666666669" r="3.5" fill="#fff" stroke="#42a5f5" stroke-width="2"/>
+<polyline points="65.0,281.4 104.3,278.2 143.7,283.1 183.0,283.4 222.3,281.2 261.7,281.4 301.0,279.3 340.3,281.3 379.7,282.9 419.0,283.9 458.3,286.4 497.7,319.2 537.0,325.8 576.3,308.7 615.7,299.6 655.0,298.8" fill="none" stroke="#ef5350" stroke-width="2.5" stroke-linejoin="round"/>
+<circle cx="65" cy="281.3984536452619" r="3.5" fill="#fff" stroke="#ef5350" stroke-width="2"/>
+<circle cx="655" cy="298.779309437337" r="3.5" fill="#fff" stroke="#ef5350" stroke-width="2"/>
+<line x1="247" y1="395" x2="267" y2="395" stroke="#42a5f5" stroke-width="2.5"/>
+<text x="271" y="398" font-size="9" fill="#6b7280">ビジネスホテル</text>
+<line x1="365" y1="395" x2="385" y2="395" stroke="#ef5350" stroke-width="2.5"/>
+<text x="389" y="398" font-size="9" fill="#6b7280">旅館</text>
+</svg>

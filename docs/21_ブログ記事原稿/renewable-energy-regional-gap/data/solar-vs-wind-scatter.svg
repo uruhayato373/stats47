@@ -1,0 +1,85 @@
+<svg width="700" height="560" viewBox="0 0 560 560" xmlns="http://www.w3.org/2000/svg" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" role="img" aria-label="太陽光発電住宅数 vs 風力発電設備容量">
+<title>太陽光発電住宅数 vs 風力発電設備容量</title>
+<rect width="560" height="560" fill="#fafafa" rx="8"/>
+<text x="280" y="28" text-anchor="middle" font-size="14" font-weight="bold" fill="#333">太陽光発電住宅数 vs 風力発電設備容量</text>
+<rect x="70" y="60" width="600" height="450" fill="#f9fafb" stroke="#d1d5db"/>
+<line x1="70" y1="60" x2="670" y2="60" stroke="#e5e7eb" stroke-width="0.5"/>
+<text x="64" y="63" text-anchor="end" font-size="8" fill="#6b7280">438千kW</text>
+<line x1="70" y1="172.5" x2="670" y2="172.5" stroke="#e5e7eb" stroke-width="0.5"/>
+<text x="64" y="175.5" text-anchor="end" font-size="8" fill="#6b7280">329千kW</text>
+<line x1="70" y1="285" x2="670" y2="285" stroke="#e5e7eb" stroke-width="0.5"/>
+<text x="64" y="288" text-anchor="end" font-size="8" fill="#6b7280">219千kW</text>
+<line x1="70" y1="397.5" x2="670" y2="397.5" stroke="#e5e7eb" stroke-width="0.5"/>
+<text x="64" y="400.5" text-anchor="end" font-size="8" fill="#6b7280">110千kW</text>
+<line x1="70" y1="510" x2="670" y2="510" stroke="#e5e7eb" stroke-width="0.5"/>
+<text x="64" y="513" text-anchor="end" font-size="8" fill="#6b7280">0千kW</text>
+<line x1="70" y1="60" x2="70" y2="510" stroke="#e5e7eb" stroke-width="0.5"/>
+<text x="70" y="524" text-anchor="middle" font-size="8" fill="#6b7280">8千</text>
+<line x1="220" y1="60" x2="220" y2="510" stroke="#e5e7eb" stroke-width="0.5"/>
+<text x="220" y="524" text-anchor="middle" font-size="8" fill="#6b7280">60千</text>
+<line x1="370" y1="60" x2="370" y2="510" stroke="#e5e7eb" stroke-width="0.5"/>
+<text x="370" y="524" text-anchor="middle" font-size="8" fill="#6b7280">113千</text>
+<line x1="520" y1="60" x2="520" y2="510" stroke="#e5e7eb" stroke-width="0.5"/>
+<text x="520" y="524" text-anchor="middle" font-size="8" fill="#6b7280">166千</text>
+<line x1="670" y1="60" x2="670" y2="510" stroke="#e5e7eb" stroke-width="0.5"/>
+<text x="670" y="524" text-anchor="middle" font-size="8" fill="#6b7280">219千</text>
+<line x1="211.7419995495897" y1="60" x2="211.7419995495897" y2="510" stroke="#9ca3af" stroke-dasharray="4,3" opacity="0.6"/>
+<line x1="70" y1="433.48949010838936" x2="670" y2="433.48949010838936" stroke="#9ca3af" stroke-dasharray="4,3" opacity="0.6"/>
+<circle cx="640.4" cy="443.6" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>愛知：太陽光発電住宅数=208千 風力発電設備容量=65千kW</title></circle>
+<text x="647.4" y="438.6" font-size="8" fill="#374151">愛知</text>
+<circle cx="475.0" cy="510.0" r="4.5" fill="#66bb6a" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>埼玉：太陽光発電住宅数=150千 風力発電設備容量=0千kW</title></circle>
+<text x="482.0" y="505.0" font-size="8" fill="#374151">埼玉</text>
+<circle cx="417.9" cy="347.5" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>静岡：太陽光発電住宅数=130千 風力発電設備容量=158千kW</title></circle>
+<text x="424.9" y="342.5" font-size="8" fill="#374151">静岡</text>
+<circle cx="415.1" cy="505.1" r="4.5" fill="#66bb6a" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>東京：太陽光発電住宅数=129千 風力発電設備容量=5千kW</title></circle>
+<circle cx="409.1" cy="505.1" r="4.5" fill="#66bb6a" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>神奈川：太陽光発電住宅数=127千 風力発電設備容量=5千kW</title></circle>
+<circle cx="397.2" cy="438.2" r="4.5" fill="#66bb6a" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>千葉：太陽光発電住宅数=123千 風力発電設備容量=70千kW</title></circle>
+<circle cx="374.4" cy="453.2" r="4.5" fill="#ffa726" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>兵庫：太陽光発電住宅数=115千 風力発電設備容量=55千kW</title></circle>
+<circle cx="373.3" cy="476.4" r="4.5" fill="#ab47bc" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>福岡：太陽光発電住宅数=114千 風力発電設備容量=33千kW</title></circle>
+<circle cx="354.5" cy="510.0" r="4.5" fill="#ffa726" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>大阪：太陽光発電住宅数=108千 風力発電設備容量=0千kW</title></circle>
+<circle cx="290.3" cy="395.5" r="4.5" fill="#66bb6a" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>茨城：太陽光発電住宅数=85千 風力発電設備容量=112千kW</title></circle>
+<text x="297.3" y="390.5" font-size="8" fill="#374151">茨城</text>
+<circle cx="277.3" cy="510.0" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>長野：太陽光発電住宅数=81千 風力発電設備容量=0千kW</title></circle>
+<circle cx="262.5" cy="510.0" r="4.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>広島：太陽光発電住宅数=75千 風力発電設備容量=0千kW</title></circle>
+<circle cx="247.1" cy="509.7" r="4.5" fill="#66bb6a" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>群馬：太陽光発電住宅数=70千 風力発電設備容量=0千kW</title></circle>
+<circle cx="245.7" cy="509.1" r="4.5" fill="#66bb6a" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>栃木：太陽光発電住宅数=69千 風力発電設備容量=1千kW</title></circle>
+<circle cx="236.9" cy="500.6" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>岐阜：太陽光発電住宅数=66千 風力発電設備容量=9千kW</title></circle>
+<circle cx="232.6" cy="480.3" r="4.5" fill="#ab47bc" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>熊本：太陽光発電住宅数=65千 風力発電設備容量=29千kW</title></circle>
+<circle cx="231.8" cy="510.0" r="4.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>岡山：太陽光発電住宅数=65千 風力発電設備容量=0千kW</title></circle>
+<circle cx="213.3" cy="502.3" r="4.5" fill="#42a5f5" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>宮城：太陽光発電住宅数=58千 風力発電設備容量=7千kW</title></circle>
+<circle cx="205.7" cy="324.9" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>三重：太陽光発電住宅数=55千 風力発電設備容量=180千kW</title></circle>
+<circle cx="200.0" cy="321.5" r="4.5" fill="#42a5f5" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>福島：太陽光発電住宅数=53千 風力発電設備容量=184千kW</title></circle>
+<circle cx="198.3" cy="240.0" r="4.5" fill="#ab47bc" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>鹿児島：太陽光発電住宅数=53千 風力発電設備容量=263千kW</title></circle>
+<text x="205.3" y="235.0" font-size="8" fill="#374151">鹿児島</text>
+<circle cx="182.1" cy="508.5" r="4.5" fill="#ffa726" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>滋賀：太陽光発電住宅数=47千 風力発電設備容量=2千kW</title></circle>
+<circle cx="180.1" cy="393.5" r="4.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>山口：太陽光発電住宅数=46千 風力発電設備容量=113千kW</title></circle>
+<circle cx="172.4" cy="141.7" r="4.5" fill="#42a5f5" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>北海道：太陽光発電住宅数=44千 風力発電設備容量=359千kW</title></circle>
+<text x="179.4" y="136.7" font-size="8" fill="#374151">北海道</text>
+<circle cx="168.4" cy="493.6" r="4.5" fill="#ab47bc" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>宮崎：太陽光発電住宅数=42千 風力発電設備容量=16千kW</title></circle>
+<circle cx="167.3" cy="507.7" r="4.5" fill="#ffa726" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>京都：太陽光発電住宅数=42千 風力発電設備容量=2千kW</title></circle>
+<circle cx="156.2" cy="411.2" r="4.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>愛媛：太陽光発電住宅数=38千 風力発電設備容量=96千kW</title></circle>
+<circle cx="150.8" cy="498.2" r="4.5" fill="#ab47bc" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>大分：太陽光発電住宅数=36千 風力発電設備容量=11千kW</title></circle>
+<circle cx="150.2" cy="397.2" r="4.5" fill="#ab47bc" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>長崎：太陽光発電住宅数=36千 風力発電設備容量=110千kW</title></circle>
+<circle cx="144.6" cy="509.9" r="4.5" fill="#ffa726" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>奈良：太陽光発電住宅数=34千 風力発電設備容量=0千kW</title></circle>
+<circle cx="144.6" cy="462.1" r="4.5" fill="#ab47bc" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>佐賀：太陽光発電住宅数=34千 風力発電設備容量=47千kW</title></circle>
+<circle cx="136.6" cy="510.0" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>山梨：太陽光発電住宅数=31千 風力発電設備容量=0千kW</title></circle>
+<circle cx="134.9" cy="415.2" r="4.5" fill="#42a5f5" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>岩手：太陽光発電住宅数=30千 風力発電設備容量=92千kW</title></circle>
+<circle cx="130.9" cy="510.0" r="4.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>香川：太陽光発電住宅数=29千 風力発電設備容量=0千kW</title></circle>
+<text x="137.9" y="505.0" font-size="8" fill="#374151">香川</text>
+<circle cx="122.7" cy="412.5" r="4.5" fill="#ffa726" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>和歌山：太陽光発電住宅数=26千 風力発電設備容量=95千kW</title></circle>
+<circle cx="104.2" cy="490.0" r="4.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>徳島：太陽光発電住宅数=20千 風力発電設備容量=20千kW</title></circle>
+<circle cx="103.9" cy="482.6" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>新潟：太陽光発電住宅数=20千 風力発電設備容量=27千kW</title></circle>
+<circle cx="100.8" cy="483.7" r="4.5" fill="#ab47bc" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>沖縄：太陽光発電住宅数=18千 風力発電設備容量=26千kW</title></circle>
+<circle cx="99.9" cy="439.3" r="4.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>高知：太陽光発電住宅数=18千 風力発電設備容量=69千kW</title></circle>
+<circle cx="96.3" cy="447.1" r="4.5" fill="#42a5f5" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>山形：太陽光発電住宅数=17千 風力発電設備容量=61千kW</title></circle>
+<circle cx="96.0" cy="327.1" r="4.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>島根：太陽光発電住宅数=17千 風力発電設備容量=178千kW</title></circle>
+<circle cx="92.8" cy="506.6" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>富山：太陽光発電住宅数=16千 風力発電設備容量=3千kW</title></circle>
+<circle cx="91.1" cy="382.2" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>石川：太陽光発電住宅数=15千 風力発電設備容量=125千kW</title></circle>
+<circle cx="88.0" cy="81.4" r="4.5" fill="#42a5f5" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>青森：太陽光発電住宅数=14千 風力発電設備容量=417千kW</title></circle>
+<text x="95.0" y="76.4" font-size="8" fill="#374151">青森</text>
+<circle cx="84.9" cy="481.3" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>福井：太陽光発電住宅数=13千 風力発電設備容量=28千kW</title></circle>
+<circle cx="81.2" cy="449.3" r="4.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>鳥取：太陽光発電住宅数=12千 風力発電設備容量=59千kW</title></circle>
+<text x="88.2" y="444.3" font-size="8" fill="#374151">鳥取</text>
+<circle cx="72.4" cy="129.2" r="4.5" fill="#42a5f5" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>秋田：太陽光発電住宅数=8千 風力発電設備容量=371千kW</title></circle>
+<text x="79.4" y="124.2" font-size="8" fill="#374151">秋田</text>
+</svg>
