@@ -4,7 +4,7 @@ export const consumerPriceDifferenceIndexEducation: MetricConfig = {
   "key": "consumer-price-difference-index-education",
   "title": "消費者物価地域差指数",
   "subtitle": "教育",
-  "unit": "‐",
+  "unit": "（全国=100）",
   "category": "economy",
   "source": {
     "kind": "estat",

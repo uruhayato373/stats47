@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const buildingFireCount: MetricConfig = {
   "key": "building-fire-count",
   "title": "建物火災出火件数",
+  "subtitle": "総数",
   "unit": "件",
   "category": "safetyenvironment",
   "source": {

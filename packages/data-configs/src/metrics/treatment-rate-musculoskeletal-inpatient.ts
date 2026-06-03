@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const treatmentRateMusculoskeletalInpatient: MetricConfig = {
   "key": "treatment-rate-musculoskeletal-inpatient",
   "title": "筋骨格系及び結合組織の疾患の受療率（入院）",
+  "subtitle": "入院患者の受療率",
   "description": "厚生労働省「患者調査」（2023年）の傷病分類別受療率（人口10万対）。筋骨格系及び結合組織の疾患の受療率（入院）のデータ。",
   "unit": "人（人口10万対）",
   "category": "socialsecurity",

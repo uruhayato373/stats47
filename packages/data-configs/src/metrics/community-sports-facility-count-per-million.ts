@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const communitySportsFacilityCountPerMillion: MetricConfig = {
   "key": "community-sports-facility-count-per-million",
   "title": "社会体育施設数",
+  "subtitle": "人口100万人当たり",
   "unit": "施設",
   "category": "educationsports",
   "source": {

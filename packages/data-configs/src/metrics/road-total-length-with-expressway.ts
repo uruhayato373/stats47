@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const roadTotalLengthWithExpressway: MetricConfig = {
   "key": "road-total-length-with-expressway",
   "title": "道路実延長（高速道路を含む）",
+  "subtitle": "合計（高速道路を含む）",
   "unit": "km",
   "category": "infrastructure",
   "source": {

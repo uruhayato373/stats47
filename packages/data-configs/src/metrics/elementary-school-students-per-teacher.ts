@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const elementarySchoolStudentsPerTeacher: MetricConfig = {
   "key": "elementary-school-students-per-teacher",
   "title": "小学校児童数",
+  "subtitle": "教員1人当たり",
   "unit": "人",
   "category": "educationsports",
   "source": {

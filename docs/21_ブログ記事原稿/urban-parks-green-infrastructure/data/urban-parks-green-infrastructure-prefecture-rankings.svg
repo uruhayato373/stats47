@@ -1,0 +1,65 @@
+<!-- data-source: urban-parks-green-infrastructure-prefecture-rankings.json | generated: 2026-06-02T21:23:55.115Z -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 300" width="680" height="300" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" role="img" aria-label="都市公園面積 都道府県ランキング（2023年）">
+  <style>
+    .svg-bg{fill:#fafafa}
+    .svg-title{fill:#222}
+    .svg-subtitle{fill:#666}
+    .svg-label{fill:#333}
+    .svg-legend{fill:#888}
+    @media (prefers-color-scheme:dark){
+      .svg-bg{fill:#1f2937}
+      .svg-title{fill:#f9fafb}
+      .svg-subtitle{fill:#9ca3af}
+      .svg-label{fill:#e5e7eb}
+      .svg-legend{fill:#9ca3af}
+    }
+  </style>
+  <rect width="680" height="300" class="svg-bg" rx="8"/>
+  <text x="340" y="24" text-anchor="middle" font-size="16" font-weight="bold" class="svg-title">都市公園面積 都道府県ランキング（2023年）</text>
+  
+  <text x="227.5" y="54" text-anchor="middle" font-size="12" font-weight="bold" fill="#1565c0">上位 5</text>
+  <text x="542.5" y="54" text-anchor="middle" font-size="12" font-weight="bold" fill="#c62828">下位 5</text>
+  
+      <text x="84" y="82" text-anchor="end" font-size="11" class="svg-label">北海道</text>
+      <rect x="90" y="63" width="195" height="30" fill="#1565c0" rx="2"/>
+      <text x="289" y="82" font-size="10" class="svg-label">27.84ｍ2</text>
+    
+      <text x="84" y="118" text-anchor="end" font-size="11" class="svg-label">山形県</text>
+      <rect x="90" y="99" width="138.33512931034483" height="30" fill="#1976d2" rx="2"/>
+      <text x="232.33512931034483" y="118" font-size="10" class="svg-label">19.75ｍ2</text>
+    
+      <text x="84" y="154" text-anchor="end" font-size="11" class="svg-label">宮城県</text>
+      <rect x="90" y="135" width="131.26077586206895" height="30" fill="#1e88e5" rx="2"/>
+      <text x="225.26077586206895" y="154" font-size="10" class="svg-label">18.74ｍ2</text>
+    
+      <text x="84" y="190" text-anchor="end" font-size="11" class="svg-label">秋田県</text>
+      <rect x="90" y="171" width="129.4396551724138" height="30" fill="#2196f3" rx="2"/>
+      <text x="223.4396551724138" y="190" font-size="10" class="svg-label">18.48ｍ2</text>
+    
+      <text x="84" y="226" text-anchor="end" font-size="11" class="svg-label">宮崎県</text>
+      <rect x="90" y="207" width="127.26831896551727" height="30" fill="#42a5f5" rx="2"/>
+      <text x="221.26831896551727" y="226" font-size="10" class="svg-label">18.17ｍ2</text>
+    
+  
+      <text x="399" y="82" text-anchor="end" font-size="11" class="svg-label">東京都</text>
+      <rect x="405" y="63" width="30.398706896551722" height="30" fill="#c62828" rx="2"/>
+      <text x="439.39870689655174" y="82" font-size="10" class="svg-label">4.34ｍ2</text>
+    
+      <text x="399" y="118" text-anchor="end" font-size="11" class="svg-label">大阪府</text>
+      <rect x="405" y="99" width="40.55495689655172" height="30" fill="#d32f2f" rx="2"/>
+      <text x="449.55495689655174" y="118" font-size="10" class="svg-label">5.79ｍ2</text>
+    
+      <text x="399" y="154" text-anchor="end" font-size="11" class="svg-label">神奈川県</text>
+      <rect x="405" y="135" width="40.765086206896555" height="30" fill="#e53935" rx="2"/>
+      <text x="449.76508620689657" y="154" font-size="10" class="svg-label">5.82ｍ2</text>
+    
+      <text x="399" y="190" text-anchor="end" font-size="11" class="svg-label">千葉県</text>
+      <rect x="405" y="171" width="49.17025862068965" height="30" fill="#ef5350" rx="2"/>
+      <text x="458.17025862068965" y="190" font-size="10" class="svg-label">7.02ｍ2</text>
+    
+      <text x="399" y="226" text-anchor="end" font-size="11" class="svg-label">埼玉県</text>
+      <rect x="405" y="207" width="50.71120689655173" height="30" fill="#e57373" rx="2"/>
+      <text x="459.71120689655174" y="226" font-size="10" class="svg-label">7.24ｍ2</text>
+    
+  <text x="340" y="282" text-anchor="middle" font-size="10" class="svg-legend">凡例: 青系=上位 / 赤系=下位</text>
+</svg>

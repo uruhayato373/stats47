@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const fishingPortCount: MetricConfig = {
   "key": "fishing-port-count",
   "title": "漁港数",
+  "subtitle": "総数（水産庁）",
   "unit": "港",
   "category": "agriculture",
   "source": {

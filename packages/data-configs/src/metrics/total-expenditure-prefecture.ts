@@ -4,7 +4,7 @@ export const totalExpenditurePrefecture: MetricConfig = {
   "key": "total-expenditure-prefecture",
   "title": "歳出決算総額",
   "subtitle": "都道府県財政",
-  "unit": "",
+  "unit": "千円",
   "category": "administrativefinancial",
   "source": {
     "kind": "estat",

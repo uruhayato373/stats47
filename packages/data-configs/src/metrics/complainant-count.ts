@@ -3,7 +3,8 @@ import type { MetricConfig } from "../types";
 export const complainantCount: MetricConfig = {
   "key": "complainant-count",
   "title": "有訴者率",
-  "unit": "‐",
+  "subtitle": "総数",
+  "unit": "人口千対",
   "category": "socialsecurity",
   "source": {
     "kind": "estat",

@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const tertiaryIndustryEmployeesPerEstablishmentCensus: MetricConfig = {
   "key": "tertiary-industry-employees-per-establishment-census",
   "title": "第3次産業従業者数",
+  "subtitle": "経済センサス",
   "unit": "人",
   "category": "laborwage",
   "source": {

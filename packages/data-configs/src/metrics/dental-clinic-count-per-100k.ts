@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const dentalClinicCountPer100k: MetricConfig = {
   "key": "dental-clinic-count-per-100k",
   "title": "歯科診療所数",
+  "subtitle": "人口10万人当たり",
   "unit": "施設",
   "category": "socialsecurity",
   "source": {

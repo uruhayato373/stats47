@@ -4,7 +4,7 @@ export const sharedBurdenFeesPrefecture: MetricConfig = {
   "key": "shared-burden-fees-prefecture",
   "title": "分担金及び負担金",
   "subtitle": "都道府県財政",
-  "unit": "",
+  "unit": "千円",
   "category": "administrativefinancial",
   "source": {
     "kind": "estat",

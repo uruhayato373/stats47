@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const depositBalance: MetricConfig = {
   "key": "deposit-balance",
   "title": "預貯金残高",
+  "subtitle": "総額",
   "unit": "億円",
   "category": "economy",
   "source": {

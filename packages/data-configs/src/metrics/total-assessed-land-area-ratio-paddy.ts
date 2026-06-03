@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const totalAssessedLandAreaRatioPaddy: MetricConfig = {
   "key": "total-assessed-land-area-ratio-paddy",
   "title": "評価総地積割合",
+  "subtitle": "田",
   "unit": "％",
   "category": "administrativefinancial",
   "source": {

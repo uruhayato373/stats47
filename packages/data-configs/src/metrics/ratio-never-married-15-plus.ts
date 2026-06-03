@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const ratioNeverMarried15Plus: MetricConfig = {
   "key": "ratio-never-married-15-plus",
   "title": "未婚者割合",
+  "subtitle": "15歳以上総数",
   "unit": "％",
   "category": "population",
   "source": {

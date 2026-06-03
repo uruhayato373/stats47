@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const cultivatedLandAreaPerHousehold: MetricConfig = {
   "key": "cultivated-land-area-per-household",
   "title": "耕地面積",
+  "subtitle": "農家1戸当たり",
   "unit": "ｍ2",
   "category": "agriculture",
   "source": {

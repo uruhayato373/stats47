@@ -1,0 +1,65 @@
+<!-- data-source: instant-noodles-consumption-prefecture-gap-prefecture-rankings.json | generated: 2026-06-02T21:21:27.958Z -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 300" width="680" height="300" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" role="img" aria-label="即席麺消費量 都道府県ランキング（2024年）">
+  <style>
+    .svg-bg{fill:#fafafa}
+    .svg-title{fill:#222}
+    .svg-subtitle{fill:#666}
+    .svg-label{fill:#333}
+    .svg-legend{fill:#888}
+    @media (prefers-color-scheme:dark){
+      .svg-bg{fill:#1f2937}
+      .svg-title{fill:#f9fafb}
+      .svg-subtitle{fill:#9ca3af}
+      .svg-label{fill:#e5e7eb}
+      .svg-legend{fill:#9ca3af}
+    }
+  </style>
+  <rect width="680" height="300" class="svg-bg" rx="8"/>
+  <text x="340" y="24" text-anchor="middle" font-size="16" font-weight="bold" class="svg-title">即席麺消費量 都道府県ランキング（2024年）</text>
+  
+  <text x="227.5" y="54" text-anchor="middle" font-size="12" font-weight="bold" fill="#1565c0">上位 5</text>
+  <text x="542.5" y="54" text-anchor="middle" font-size="12" font-weight="bold" fill="#c62828">下位 5</text>
+  
+      <text x="84" y="82" text-anchor="end" font-size="11" class="svg-label">熊本県</text>
+      <rect x="90" y="63" width="195" height="30" fill="#1565c0" rx="2"/>
+      <text x="289" y="82" font-size="10" class="svg-label">4147g</text>
+    
+      <text x="84" y="118" text-anchor="end" font-size="11" class="svg-label">鳥取県</text>
+      <rect x="90" y="99" width="192.36677115987462" height="30" fill="#1976d2" rx="2"/>
+      <text x="286.3667711598746" y="118" font-size="10" class="svg-label">4091g</text>
+    
+      <text x="84" y="154" text-anchor="end" font-size="11" class="svg-label">佐賀県</text>
+      <rect x="90" y="135" width="177.6959247648903" height="30" fill="#1e88e5" rx="2"/>
+      <text x="271.69592476489026" y="154" font-size="10" class="svg-label">3779g</text>
+    
+      <text x="84" y="190" text-anchor="end" font-size="11" class="svg-label">宮崎県</text>
+      <rect x="90" y="171" width="173.41692789968653" height="30" fill="#2196f3" rx="2"/>
+      <text x="267.4169278996865" y="190" font-size="10" class="svg-label">3688g</text>
+    
+      <text x="84" y="226" text-anchor="end" font-size="11" class="svg-label">京都府</text>
+      <rect x="90" y="207" width="164.05956112852664" height="30" fill="#42a5f5" rx="2"/>
+      <text x="258.05956112852664" y="226" font-size="10" class="svg-label">3489g</text>
+    
+  
+      <text x="399" y="82" text-anchor="end" font-size="11" class="svg-label">長野県</text>
+      <rect x="405" y="63" width="82.33542319749216" height="30" fill="#c62828" rx="2"/>
+      <text x="491.33542319749216" y="82" font-size="10" class="svg-label">1751g</text>
+    
+      <text x="399" y="118" text-anchor="end" font-size="11" class="svg-label">山梨県</text>
+      <rect x="405" y="99" width="85.10971786833856" height="30" fill="#d32f2f" rx="2"/>
+      <text x="494.1097178683386" y="118" font-size="10" class="svg-label">1810g</text>
+    
+      <text x="399" y="154" text-anchor="end" font-size="11" class="svg-label">茨城県</text>
+      <rect x="405" y="135" width="91.41065830721003" height="30" fill="#e53935" rx="2"/>
+      <text x="500.41065830721004" y="154" font-size="10" class="svg-label">1944g</text>
+    
+      <text x="399" y="190" text-anchor="end" font-size="11" class="svg-label">栃木県</text>
+      <rect x="405" y="171" width="96.91222570532915" height="30" fill="#ef5350" rx="2"/>
+      <text x="505.91222570532915" y="190" font-size="10" class="svg-label">2061g</text>
+    
+      <text x="399" y="226" text-anchor="end" font-size="11" class="svg-label">沖縄県</text>
+      <rect x="405" y="207" width="99.68652037617555" height="30" fill="#e57373" rx="2"/>
+      <text x="508.68652037617557" y="226" font-size="10" class="svg-label">2120g</text>
+    
+  <text x="340" y="282" text-anchor="middle" font-size="10" class="svg-legend">凡例: 青系=上位 / 赤系=下位</text>
+</svg>

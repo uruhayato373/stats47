@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const policeOfficerCount: MetricConfig = {
   "key": "police-officer-count",
   "title": "警察官数",
+  "subtitle": "総数",
   "unit": "人",
   "category": "safetyenvironment",
   "source": {

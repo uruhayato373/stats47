@@ -3,7 +3,8 @@ import type { MetricConfig } from "../types";
 export const sexYoungPopulationRatio: MetricConfig = {
   "key": "sex-young-population-ratio",
   "title": "人口性比",
-  "unit": "‐",
+  "subtitle": "年少人口",
+  "unit": "（女=100）",
   "category": "population",
   "source": {
     "kind": "estat",

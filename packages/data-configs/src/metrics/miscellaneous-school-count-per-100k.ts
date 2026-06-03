@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const miscellaneousSchoolCountPer100k: MetricConfig = {
   "key": "miscellaneous-school-count-per-100k",
   "title": "各種学校数",
+  "subtitle": "人口10万人当たり",
   "unit": "校",
   "category": "educationsports",
   "source": {

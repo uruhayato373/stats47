@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const monthlyAverageActualWorkingHoursMalePre2019: MetricConfig = {
   "key": "monthly-average-actual-working-hours-male-pre2019",
   "title": "月間平均実労働時間数",
+  "subtitle": "男性（〜2018年）",
   "unit": "時間",
   "category": "laborwage",
   "source": {

@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const drugEnforcementArrestCountPerPopulation: MetricConfig = {
   "key": "drug-enforcement-arrest-count-per-population",
   "title": "覚醒剤取締検挙件数",
+  "subtitle": "人口当たり",
   "unit": "件",
   "category": "safetyenvironment",
   "source": {

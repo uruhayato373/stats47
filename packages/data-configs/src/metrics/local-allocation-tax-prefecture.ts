@@ -4,7 +4,7 @@ export const localAllocationTaxPrefecture: MetricConfig = {
   "key": "local-allocation-tax-prefecture",
   "title": "地方交付税",
   "subtitle": "都道府県財政",
-  "unit": "",
+  "unit": "千円",
   "category": "administrativefinancial",
   "source": {
     "kind": "estat",

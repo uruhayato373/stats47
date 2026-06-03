@@ -2,8 +2,8 @@ import type { MetricConfig } from "../types";
 
 export const fisheryHouseholdSexAge: MetricConfig = {
   "key": "fishery-household-sex-age",
-  "title": "漁業世帯員数（性別計・年齢計, 2018年）",
-  "subtitle": "※ 内陸 8 県 (栃木/群馬/埼玉/山梨/長野/岐阜/滋賀/奈良) は調査対象外 (value=0 で表示)",
+  "title": "漁業世帯員数（性別計・年齢計）",
+  "note": "内陸県は調査対象外（0で表示）",
   "unit": "人",
   "category": "agriculture",
   "source": {
@@ -11,7 +11,7 @@ export const fisheryHouseholdSexAge: MetricConfig = {
     "statsDataId": "0003262280",
     "cdCat01": "11",
     "cdCat02": "11",
-    "displayName": "漁業世帯員数（性別計・年齢計, 2018年）",
+    "displayName": "漁業世帯員数（性別計・年齢計）",
     "url": "https://www.e-stat.go.jp/dbview?sid=0003262280",
   },
   "entities": [

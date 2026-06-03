@@ -4,7 +4,7 @@ export const consumerPriceDifferenceIndexUtilities: MetricConfig = {
   "key": "consumer-price-difference-index-utilities",
   "title": "消費者物価地域差指数",
   "subtitle": "光熱・水道",
-  "unit": "‐",
+  "unit": "（全国=100）",
   "category": "economy",
   "source": {
     "kind": "estat",

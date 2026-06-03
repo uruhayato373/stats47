@@ -19,6 +19,7 @@ import { resolveAffiliateBanners } from "@/features/ads/server";
 import {
   FeaturedRankingCard,
   CategoryRankingTable,
+  isCaveatNote,
   type CategoryRankingListItem,
 } from "@/features/ranking";
 import {
@@ -119,7 +120,10 @@ export default async function SurveyPage({ params }: PageProps) {
     return {
       rankingKey: item.rankingKey,
       areaType: "prefecture",
-      title: item.subtitle ? `${item.title} (${item.subtitle})` : item.title,
+      title:
+        item.subtitle && !isCaveatNote(item.subtitle)
+          ? `${item.title}（${item.subtitle}）`
+          : item.title,
       subtitle: item.subtitle,
       latestYear,
       unit: item.unit,
@@ -141,9 +145,10 @@ export default async function SurveyPage({ params }: PageProps) {
       const latestYear = parseLatestYear(item.latestYear);
       return {
         rankingKey: item.rankingKey,
-        title: item.subtitle
-          ? `${item.title} (${item.subtitle})`
-          : item.title,
+        title:
+          item.subtitle && !isCaveatNote(item.subtitle)
+            ? `${item.title}（${item.subtitle}）`
+            : item.title,
         latestYear,
         unit: item.unit,
         demographicAttr: item.demographicAttr,

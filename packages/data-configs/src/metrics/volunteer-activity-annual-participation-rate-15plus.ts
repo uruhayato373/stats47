@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const volunteerActivityAnnualParticipationRate15plus: MetricConfig = {
   "key": "volunteer-activity-annual-participation-rate-15plus",
   "title": "ボランティア活動の年間行動者率",
+  "subtitle": "15歳以上",
   "description": "過去1年間に該当の活動をしたことのある人の割合",
   "unit": "％",
   "category": "educationsports",

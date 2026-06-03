@@ -2,7 +2,7 @@ import type { MetricConfig } from "../types";
 
 export const maternalChildHealthGuidance: MetricConfig = {
   "key": "maternal-child-health-guidance",
-  "title": "妊産婦・乳幼児保健指導延人員（都道府県別・2020年度）",
+  "title": "妊産婦・乳幼児保健指導延人員（都道府県別）",
   "unit": "人",
   "category": "socialsecurity",
   "source": {

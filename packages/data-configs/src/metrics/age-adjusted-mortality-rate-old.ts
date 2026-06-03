@@ -3,7 +3,8 @@ import type { MetricConfig } from "../types";
 export const ageAdjustedMortalityRateOld: MetricConfig = {
   "key": "age-adjusted-mortality-rate-old",
   "title": "年齢別死亡率",
-  "unit": "‐",
+  "subtitle": "老年人口の死亡率",
+  "unit": "人口千対",
   "category": "population",
   "source": {
     "kind": "estat",

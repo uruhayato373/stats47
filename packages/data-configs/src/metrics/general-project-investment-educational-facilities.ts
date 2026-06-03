@@ -4,7 +4,7 @@ export const generalProjectInvestmentEducationalFacilities: MetricConfig = {
   "key": "general-project-investment-educational-facilities",
   "title": "一般事業投資額",
   "subtitle": "文教施設",
-  "unit": "",
+  "unit": "千円",
   "category": "administrativefinancial",
   "source": {
     "kind": "estat",

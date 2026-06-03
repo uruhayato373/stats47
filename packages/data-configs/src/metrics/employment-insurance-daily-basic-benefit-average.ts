@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const employmentInsuranceDailyBasicBenefitAverage: MetricConfig = {
   "key": "employment-insurance-daily-basic-benefit-average",
   "title": "雇用保険（日雇）基本手当平均支給額",
+  "subtitle": "日次平均",
   "unit": "千円",
   "category": "socialsecurity",
   "source": {

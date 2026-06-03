@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const specialLawCriminalArrestCount: MetricConfig = {
   "key": "special-law-criminal-arrest-count",
   "title": "特別法犯検挙件数",
+  "subtitle": "総数",
   "unit": "件",
   "category": "safetyenvironment",
   "source": {

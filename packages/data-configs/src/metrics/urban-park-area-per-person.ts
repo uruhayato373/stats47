@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const urbanParkAreaPerPerson: MetricConfig = {
   "key": "urban-park-area-per-person",
   "title": "都市公園面積",
+  "subtitle": "1人当たり",
   "unit": "ｍ2",
   "category": "landweather",
   "source": {

@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const healthyLifeExpectancyFemale: MetricConfig = {
   "key": "healthy-life-expectancy-female",
   "title": "健康寿命（女性）",
+  "subtitle": "女性の健康寿命",
   "unit": "年",
   "category": "socialsecurity",
   "source": {

@@ -3,8 +3,9 @@ import type { MetricConfig } from "../types";
 export const portPassengersLanding: MetricConfig = {
   "key": "port-passengers-landing",
   "title": "旅客数（上陸）",
+  "subtitle": "上陸旅客",
   "unit": "人",
-  "category": "port",
+  "category": "tourism",
   "source": {
     "kind": "external",
     "fetcherKey": "mlit_dpf",

@@ -3,7 +3,7 @@ import type { MetricConfig } from "../types";
 export const nationalHealthInsuranceVisitRatePer1000: MetricConfig = {
   "key": "national-health-insurance-visit-rate-per-1000",
   "title": "国民健康保険受診率",
-  "unit": "‐",
+  "unit": "被保険者千対",
   "category": "socialsecurity",
   "source": {
     "kind": "estat",

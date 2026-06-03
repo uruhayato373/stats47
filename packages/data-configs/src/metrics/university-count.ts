@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const universityCount: MetricConfig = {
   "key": "university-count",
   "title": "大学数",
+  "subtitle": "総数",
   "unit": "校",
   "category": "educationsports",
   "source": {

@@ -2,7 +2,7 @@ import type { MetricConfig } from "../types";
 
 export const hospitalStaffByOccupation: MetricConfig = {
   "key": "hospital-staff-by-occupation",
-  "title": "保健所常勤職員数（総数）（2020年度地域保健事業報告）",
+  "title": "保健所常勤職員数（総数）（地域保健事業報告）",
   "unit": "人",
   "category": "socialsecurity",
   "source": {

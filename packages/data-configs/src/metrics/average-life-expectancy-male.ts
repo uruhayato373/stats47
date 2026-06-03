@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const averageLifeExpectancyMale: MetricConfig = {
   "key": "average-life-expectancy-male",
   "title": "平均余命",
+  "subtitle": "男性",
   "unit": "年",
   "category": "socialsecurity",
   "source": {

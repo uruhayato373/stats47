@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const fireDamageCasualtiesPerAccident: MetricConfig = {
   "key": "fire-damage-casualties-per-accident",
   "title": "火災死傷者数",
+  "subtitle": "事故当たり",
   "unit": "人",
   "category": "safetyenvironment",
   "source": {

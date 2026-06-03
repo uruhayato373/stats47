@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const elementarySchoolChildren1Per: MetricConfig = {
   "key": "elementary-school-children-1-per",
   "title": "小学校児童数",
+  "subtitle": "人口当たり",
   "unit": "人",
   "category": "educationsports",
   "source": {

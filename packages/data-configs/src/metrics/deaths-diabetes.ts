@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const deathsDiabetes: MetricConfig = {
   "key": "deaths-diabetes",
   "title": "糖尿病による死亡者数",
+  "subtitle": "総数",
   "unit": "人",
   "category": "population",
   "source": {

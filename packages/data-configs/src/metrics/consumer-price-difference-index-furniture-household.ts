@@ -4,7 +4,7 @@ export const consumerPriceDifferenceIndexFurnitureHousehold: MetricConfig = {
   "key": "consumer-price-difference-index-furniture-household",
   "title": "消費者物価地域差指数",
   "subtitle": "家具・家事用品",
-  "unit": "‐",
+  "unit": "（全国=100）",
   "category": "economy",
   "source": {
     "kind": "estat",

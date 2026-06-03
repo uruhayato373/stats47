@@ -3,7 +3,7 @@ import type { MetricConfig } from "../types";
 export const laspeyresIndexPrefecture: MetricConfig = {
   "key": "laspeyres-index-prefecture",
   "title": "ラスパイレス指数",
-  "unit": "",
+  "unit": "指数",
   "category": "administrativefinancial",
   "source": {
     "kind": "external",

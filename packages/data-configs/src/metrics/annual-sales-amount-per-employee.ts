@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const annualSalesAmountPerEmployee: MetricConfig = {
   "key": "annual-sales-amount-per-employee",
   "title": "商業年間商品販売額",
+  "subtitle": "従業員当たり",
   "unit": "万円",
   "category": "commercial",
   "source": {

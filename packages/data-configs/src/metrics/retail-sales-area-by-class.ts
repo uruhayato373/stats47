@@ -2,7 +2,7 @@ import type { MetricConfig } from "../types";
 
 export const retailSalesAreaByClass: MetricConfig = {
   "key": "retail-sales-area-by-class",
-  "title": "小売業売場面積（経済センサス活動調査2021・小売計）",
+  "title": "小売業売場面積（経済センサス活動調査・小売計）",
   "unit": "m2",
   "category": "commercial",
   "source": {

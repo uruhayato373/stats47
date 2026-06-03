@@ -4,7 +4,7 @@ export const generalProjectInvestmentAgricultureForestryFisheries: MetricConfig 
   "key": "general-project-investment-agriculture-forestry-fisheries",
   "title": "一般事業投資額",
   "subtitle": "農林水産",
-  "unit": "",
+  "unit": "千円",
   "category": "administrativefinancial",
   "source": {
     "kind": "estat",

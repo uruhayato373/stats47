@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const numberOfEstablishmentsEconomicCensusBasicSurvey: MetricConfig = {
   "key": "number-of-establishments-economic-census-basic-survey",
   "title": "事業所数",
+  "subtitle": "経済センサス基礎調査",
   "unit": "事業所",
   "category": "commercial",
   "source": {

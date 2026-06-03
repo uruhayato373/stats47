@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const moversOut: MetricConfig = {
   "key": "movers-out",
   "title": "転出者数",
+  "subtitle": "外国人移動者",
   "unit": "人",
   "category": "population",
   "source": {

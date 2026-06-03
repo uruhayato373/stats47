@@ -3,7 +3,6 @@ import type { MetricConfig } from "../types";
 export const portPassengersTotal: MetricConfig = {
   "key": "port-passengers-total",
   "title": "港湾旅客数（港湾統計）",
-  "subtitle": "港湾統計",
   "description": "港湾調査（港湾統計年報）による都道府県別の船舶乗降人員数。内陸7県はデータなし。",
   "unit": "人",
   "category": "infrastructure",

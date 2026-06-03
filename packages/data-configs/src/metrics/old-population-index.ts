@@ -3,7 +3,7 @@ import type { MetricConfig } from "../types";
 export const oldPopulationIndex: MetricConfig = {
   "key": "old-population-index",
   "title": "老年人口指数",
-  "unit": "‐",
+  "unit": "指数",
   "category": "population",
   "source": {
     "kind": "estat",

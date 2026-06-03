@@ -3,7 +3,8 @@ import type { MetricConfig } from "../types";
 export const japanHealthInsuranceSocietyVisitRateInsuredPer1000: MetricConfig = {
   "key": "japan-health-insurance-society-visit-rate-insured-per-1000",
   "title": "全国保険協会管掌健康保険受診率",
-  "unit": "‐",
+  "subtitle": "被保険者1000人当たり",
+  "unit": "被保険者千対",
   "category": "socialsecurity",
   "source": {
     "kind": "estat",

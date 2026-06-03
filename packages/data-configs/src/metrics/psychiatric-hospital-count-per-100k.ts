@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const psychiatricHospitalCountPer100k: MetricConfig = {
   "key": "psychiatric-hospital-count-per-100k",
   "title": "精神科病院数",
+  "subtitle": "人口10万人当たり",
   "unit": "施設",
   "category": "socialsecurity",
   "source": {

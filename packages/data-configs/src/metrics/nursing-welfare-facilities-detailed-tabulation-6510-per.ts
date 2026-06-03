@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const nursingWelfareFacilitiesDetailedTabulation6510Per: MetricConfig = {
   "key": "nursing-welfare-facilities-detailed-tabulation-6510-per",
   "title": "介護老人福祉施設（詳細票）",
+  "subtitle": "詳細集計",
   "unit": "所",
   "category": "population",
   "source": {

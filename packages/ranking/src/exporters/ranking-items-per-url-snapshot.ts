@@ -30,6 +30,13 @@ export interface ExportRankingItemsPerUrlResult {
   categories: { count: number; files: number };
   items: { count: number; files: number };
   surveys: { count: number; files: number };
+  /**
+   * items.json を生成した survey id 群 (= `app/survey/{id}/items.json` が存在する survey)。
+   * surveys snapshot (app/survey/all.json) をこの集合に絞り込むことで、関連ランキングが
+   * 0 件の orphan survey を一覧・サイドバー・generateStaticParams から排除する
+   * (詳細ページが notFound() になるリンクを出さない)。
+   */
+  surveyIds: string[];
   totalSizeBytes: number;
   durationMs: number;
 }
@@ -254,6 +261,7 @@ export async function exportRankingItemsPerUrl(): Promise<ExportRankingItemsPerU
     categories: { count: categoriesCount, files: categoriesFiles },
     items: { count: items.length, files: itemsFiles },
     surveys: { count: surveysCount, files: surveysFiles },
+    surveyIds: [...surveyIdSet],
     totalSizeBytes,
     durationMs,
   };

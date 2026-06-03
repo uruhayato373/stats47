@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const averageWeightHighSchoolSecondGradeMale: MetricConfig = {
   "key": "average-weight-high-school-second-grade-male",
   "title": "平均体重",
+  "subtitle": "高校2年・男子",
   "unit": "kg",
   "category": "educationsports",
   "source": {

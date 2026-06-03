@@ -3,8 +3,9 @@ import type { MetricConfig } from "../types";
 export const portVehicleFerryCar: MetricConfig = {
   "key": "port-vehicle-ferry-car",
   "title": "フェリー輸送車両（乗用車）",
+  "subtitle": "乗用車のみ",
   "unit": "台",
-  "category": "port",
+  "category": "tourism",
   "source": {
     "kind": "external",
     "fetcherKey": "mlit_dpf",

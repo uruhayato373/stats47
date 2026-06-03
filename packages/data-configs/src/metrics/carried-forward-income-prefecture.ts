@@ -4,7 +4,7 @@ export const carriedForwardIncomePrefecture: MetricConfig = {
   "key": "carried-forward-income-prefecture",
   "title": "繰越金",
   "subtitle": "都道府県財政",
-  "unit": "",
+  "unit": "千円",
   "category": "administrativefinancial",
   "source": {
     "kind": "estat",

@@ -1,21 +1,20 @@
 /**
  * モバイルナビゲーションドロワー（Server Component）
  *
- * カテゴリを取得し、MobileNavDrawerClient に渡す。
+ * curated テーマ一覧 (ALL_THEMES) を MobileNavDrawerClient に渡す。
+ * category は内部 backbone に降格し、主要ナビ (ドロワー) には出さない
+ * (役割分担: docs/01_技術設計/16_タクソノミー役割分担.md)。
  * PC では client 側が `return null` するため描画コストはほぼゼロ。
  * `cookies()` / `headers()` は呼ばない（SSG 維持）。
  *
  * 設計仕様: docs/01_技術設計/21_統一レイアウト設計.md
  */
-import { isOk } from "@stats47/types";
-
-import { listCategories } from "@/features/category/server";
+import { ALL_THEMES } from "@/features/theme-dashboard/server";
 
 import { MobileNavDrawerClient } from "./MobileNavDrawerClient";
 
-export async function MobileNavDrawer() {
-  const result = await listCategories().catch(() => null);
-  const categories = result && isOk(result) ? result.data : [];
+export function MobileNavDrawer() {
+  const themes = ALL_THEMES.map((t) => ({ themeKey: t.themeKey, title: t.title }));
 
-  return <MobileNavDrawerClient categories={categories} />;
+  return <MobileNavDrawerClient themes={themes} />;
 }

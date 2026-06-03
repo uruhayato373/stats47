@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const swimmingPoolPublic: MetricConfig = {
   "key": "swimming-pool-public",
   "title": "水泳プール数（公共）",
+  "subtitle": "屋内・屋外合計",
   "unit": "施設",
   "category": "educationsports",
   "source": {

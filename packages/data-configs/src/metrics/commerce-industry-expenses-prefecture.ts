@@ -4,7 +4,7 @@ export const commerceIndustryExpensesPrefecture: MetricConfig = {
   "key": "commerce-industry-expenses-prefecture",
   "title": "商工費",
   "subtitle": "都道府県財政",
-  "unit": "",
+  "unit": "千円",
   "category": "administrativefinancial",
   "source": {
     "kind": "estat",

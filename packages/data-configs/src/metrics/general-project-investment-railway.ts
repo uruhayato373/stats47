@@ -4,7 +4,7 @@ export const generalProjectInvestmentRailway: MetricConfig = {
   "key": "general-project-investment-railway",
   "title": "一般事業投資額",
   "subtitle": "鉄道",
-  "unit": "",
+  "unit": "千円",
   "category": "tourism",
   "source": {
     "kind": "estat",

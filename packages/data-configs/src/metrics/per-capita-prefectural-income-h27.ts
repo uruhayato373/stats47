@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const perCapitaPrefecturalIncomeH27: MetricConfig = {
   "key": "per-capita-prefectural-income-h27",
   "title": "1人当たり県民所得",
+  "subtitle": "H27年基準",
   "unit": "千円",
   "category": "economy",
   "source": {

@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const juniorHighSchoolCountPer100km2Habitable: MetricConfig = {
   "key": "junior-high-school-count-per-100km2-habitable",
   "title": "中学校数",
+  "subtitle": "可住地100km²当たり",
   "unit": "校",
   "category": "educationsports",
   "source": {

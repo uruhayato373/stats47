@@ -1,7 +1,7 @@
 export { LocalFinanceDashboard } from "./components/LocalFinanceDashboard";
-export { loadFinanceTrends } from "./lib/load-finance-trends";
+export { loadFinanceCards } from "./lib/load-finance-cards";
 export type {
-  FinanceTrendData,
-  FinanceMetricMeta,
-  TrendPoint,
-} from "./lib/load-finance-trends";
+  FinanceCardsData,
+  PrefCard,
+  YearRecord,
+} from "./lib/load-finance-cards";

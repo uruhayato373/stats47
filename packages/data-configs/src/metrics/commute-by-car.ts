@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const commuteByCar: MetricConfig = {
   "key": "commute-by-car",
   "title": "自宅外通勤・通学者数（自家用車）",
+  "subtitle": "自家用車通勤・通学",
   "unit": "人",
   "category": "tourism",
   "source": {

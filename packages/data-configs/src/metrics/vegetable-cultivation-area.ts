@@ -2,7 +2,7 @@ import type { MetricConfig } from "../types";
 
 export const vegetableCultivationArea: MetricConfig = {
   "key": "vegetable-cultivation-area",
-  "title": "野菜作付面積 都道府県別合計（だいこん, 2019年）",
+  "title": "野菜作付面積 都道府県別合計（だいこん）",
   "unit": "ha",
   "category": "agriculture",
   "source": {

@@ -41,6 +41,7 @@ import {
     AreaTypeToggle,
     RankingHeroCard,
     DataUsageCard,
+    classifyRankingSubtitle,
 } from "@/features/ranking";
 
 import { trackRankingView, trackYearChange, trackAreaTypeChange } from "@/lib/analytics/events";
@@ -360,13 +361,24 @@ export function RankingKeyPageClient({
         rankingItem.latestYear?.yearName ??
         null;
 
+    // subtitle を「定義補足」と「データ注釈(※)」に振り分ける。
+    // 定義 → h1 直下の控えめ行 (HeroCard titleDetail) / 注釈 → チャート直下キャプション。
+    const { subtitle: definitionalSubtitle, note: subtitleNote } =
+        classifyRankingSubtitle(displayInfo.subtitle);
+    // データ注釈の正規ソースは config.note → item.annotation (Phase 4 metadata refresh)。
+    // annotation があれば優先し、未移行 metric は subtitle ヒューリスティックを fallback。
+    const configNote = rankingItem.annotation?.trim()
+        ? rankingItem.annotation.trim()
+        : null;
+    const dataNote = configNote ?? subtitleNote;
+
     return (
         <div className="container mx-auto px-4 py-4">
             {/* ヒーローカード（Option D）: タイトル + 単位ピル + メタ操作 + 暗色スタット */}
             <RankingHeroCard
                 categoryName={categoryName}
                 title={displayInfo.title}
-                titleDetail={[displayInfo.subtitle, displayInfo.demographicAttr]
+                titleDetail={[definitionalSubtitle, displayInfo.demographicAttr]
                     .filter(Boolean)
                     .join("・") || null}
                 sourceName={sourceObj?.name ?? null}
@@ -497,6 +509,14 @@ export function RankingKeyPageClient({
                                 cardFooter={cardFooter}
                             />
                         </div>
+                    )}
+
+                    {/* データ注釈 (※系): チャート直下に控えめ表示。
+                        0 値の意味など読み違い防止の注記をタイトルではなくここに置く。 */}
+                    {dataNote && (
+                        <p className="text-xs text-muted-foreground leading-relaxed">
+                            {dataNote}
+                        </p>
                     )}
 
                     {/* データダウンロード訴求カード「このデータを使う」

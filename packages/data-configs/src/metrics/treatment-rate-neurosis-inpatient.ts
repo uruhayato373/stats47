@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const treatmentRateNeurosisInpatient: MetricConfig = {
   "key": "treatment-rate-neurosis-inpatient",
   "title": "神経症性障害・ストレス関連障害の受療率（入院）",
+  "subtitle": "入院患者の受療率",
   "description": "厚生労働省「患者調査」（2023年）の傷病分類別受療率（人口10万対）。神経症性障害・ストレス関連障害の受療率（入院）のデータ。",
   "unit": "人（人口10万対）",
   "category": "socialsecurity",

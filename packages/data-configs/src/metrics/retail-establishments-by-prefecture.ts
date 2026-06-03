@@ -2,7 +2,7 @@ import type { MetricConfig } from "../types";
 
 export const retailEstablishmentsByPrefecture: MetricConfig = {
   "key": "retail-establishments-by-prefecture",
-  "title": "小売業事業所数（経済センサス活動調査2021）",
+  "title": "小売業事業所数（経済センサス活動調査）",
   "unit": "事業所",
   "category": "commercial",
   "source": {

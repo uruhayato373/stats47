@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const regularCashSalaryFemale: MetricConfig = {
   "key": "regular-cash-salary-female",
   "title": "きまって支給する現金給与月額",
+  "subtitle": "女性",
   "unit": "千円",
   "category": "laborwage",
   "source": {

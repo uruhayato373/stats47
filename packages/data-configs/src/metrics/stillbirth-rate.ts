@@ -3,7 +3,7 @@ import type { MetricConfig } from "../types";
 export const stillbirthRate: MetricConfig = {
   "key": "stillbirth-rate",
   "title": "死産率",
-  "unit": "‐",
+  "unit": "出産千対",
   "category": "socialsecurity",
   "source": {
     "kind": "estat",

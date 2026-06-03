@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const voterTurnoutCouncilDistrict: MetricConfig = {
   "key": "voter-turnout-council-district",
   "title": "参議院議員選挙投票率（選挙区）",
+  "subtitle": "選挙区制",
   "unit": "％",
   "category": "administrativefinancial",
   "source": {

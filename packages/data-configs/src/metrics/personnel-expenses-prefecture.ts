@@ -4,7 +4,7 @@ export const personnelExpensesPrefecture: MetricConfig = {
   "key": "personnel-expenses-prefecture",
   "title": "人件費",
   "subtitle": "都道府県財政",
-  "unit": "",
+  "unit": "千円",
   "category": "administrativefinancial",
   "source": {
     "kind": "estat",

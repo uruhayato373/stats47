@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const deathsLifestyleDiseasesPer100k: MetricConfig = {
   "key": "deaths-lifestyle-diseases-per-100k",
   "title": "生活習慣病による死亡者数",
+  "subtitle": "人口10万人当たり",
   "unit": "人",
   "category": "population",
   "source": {

@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const convenienceStoreSalesMonthly: MetricConfig = {
   "key": "convenience-store-sales-monthly",
   "title": "コンビニエンスストア販売額（都道府県別・年計）",
+  "subtitle": "月次",
   "unit": "百万円",
   "category": "commercial",
   "source": {

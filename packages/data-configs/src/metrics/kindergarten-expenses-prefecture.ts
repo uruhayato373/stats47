@@ -4,7 +4,7 @@ export const kindergartenExpensesPrefecture: MetricConfig = {
   "key": "kindergarten-expenses-prefecture",
   "title": "幼稚園費",
   "subtitle": "都道府県財政",
-  "unit": "",
+  "unit": "千円",
   "category": "educationsports",
   "source": {
     "kind": "estat",

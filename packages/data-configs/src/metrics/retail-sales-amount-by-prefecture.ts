@@ -2,7 +2,7 @@ import type { MetricConfig } from "../types";
 
 export const retailSalesAmountByPrefecture: MetricConfig = {
   "key": "retail-sales-amount-by-prefecture",
-  "title": "小売業年間商品販売額（経済センサス活動調査2021）",
+  "title": "小売業年間商品販売額（経済センサス活動調査）",
   "unit": "百万円",
   "category": "commercial",
   "source": {

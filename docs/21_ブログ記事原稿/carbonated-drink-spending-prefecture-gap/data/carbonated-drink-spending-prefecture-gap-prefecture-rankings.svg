@@ -1,0 +1,65 @@
+<!-- data-source: carbonated-drink-spending-prefecture-gap-prefecture-rankings.json | generated: 2026-06-02T21:21:06.909Z -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 300" width="680" height="300" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" role="img" aria-label="炭酸飲料消費支出額 都道府県ランキング（2024年）">
+  <style>
+    .svg-bg{fill:#fafafa}
+    .svg-title{fill:#222}
+    .svg-subtitle{fill:#666}
+    .svg-label{fill:#333}
+    .svg-legend{fill:#888}
+    @media (prefers-color-scheme:dark){
+      .svg-bg{fill:#1f2937}
+      .svg-title{fill:#f9fafb}
+      .svg-subtitle{fill:#9ca3af}
+      .svg-label{fill:#e5e7eb}
+      .svg-legend{fill:#9ca3af}
+    }
+  </style>
+  <rect width="680" height="300" class="svg-bg" rx="8"/>
+  <text x="340" y="24" text-anchor="middle" font-size="16" font-weight="bold" class="svg-title">炭酸飲料消費支出額 都道府県ランキング（2024年）</text>
+  
+  <text x="227.5" y="54" text-anchor="middle" font-size="12" font-weight="bold" fill="#1565c0">上位 5</text>
+  <text x="542.5" y="54" text-anchor="middle" font-size="12" font-weight="bold" fill="#c62828">下位 5</text>
+  
+      <text x="84" y="82" text-anchor="end" font-size="11" class="svg-label">福島県</text>
+      <rect x="90" y="63" width="195" height="30" fill="#1565c0" rx="2"/>
+      <text x="289" y="82" font-size="10" class="svg-label">10689円</text>
+    
+      <text x="84" y="118" text-anchor="end" font-size="11" class="svg-label">青森県</text>
+      <rect x="90" y="99" width="192.7743474600056" height="30" fill="#1976d2" rx="2"/>
+      <text x="286.77434746000563" y="118" font-size="10" class="svg-label">10567円</text>
+    
+      <text x="84" y="154" text-anchor="end" font-size="11" class="svg-label">岩手県</text>
+      <rect x="90" y="135" width="184.8933483019927" height="30" fill="#1e88e5" rx="2"/>
+      <text x="278.89334830199266" y="154" font-size="10" class="svg-label">10135円</text>
+    
+      <text x="84" y="190" text-anchor="end" font-size="11" class="svg-label">北海道</text>
+      <rect x="90" y="171" width="171.50294695481335" height="30" fill="#2196f3" rx="2"/>
+      <text x="265.50294695481335" y="190" font-size="10" class="svg-label">9401円</text>
+    
+      <text x="84" y="226" text-anchor="end" font-size="11" class="svg-label">宮城県</text>
+      <rect x="90" y="207" width="170.04350266629245" height="30" fill="#42a5f5" rx="2"/>
+      <text x="264.04350266629245" y="226" font-size="10" class="svg-label">9321円</text>
+    
+  
+      <text x="399" y="82" text-anchor="end" font-size="11" class="svg-label">三重県</text>
+      <rect x="405" y="63" width="85.72410889699691" height="30" fill="#c62828" rx="2"/>
+      <text x="494.7241088969969" y="82" font-size="10" class="svg-label">4699円</text>
+    
+      <text x="399" y="118" text-anchor="end" font-size="11" class="svg-label">福岡県</text>
+      <rect x="405" y="99" width="105.00701655907943" height="30" fill="#d32f2f" rx="2"/>
+      <text x="514.0070165590794" y="118" font-size="10" class="svg-label">5756円</text>
+    
+      <text x="399" y="154" text-anchor="end" font-size="11" class="svg-label">兵庫県</text>
+      <rect x="405" y="135" width="111.10019646365423" height="30" fill="#e53935" rx="2"/>
+      <text x="520.1001964636542" y="154" font-size="10" class="svg-label">6090円</text>
+    
+      <text x="399" y="190" text-anchor="end" font-size="11" class="svg-label">愛媛県</text>
+      <rect x="405" y="171" width="112.26775189447095" height="30" fill="#ef5350" rx="2"/>
+      <text x="521.267751894471" y="190" font-size="10" class="svg-label">6154円</text>
+    
+      <text x="399" y="226" text-anchor="end" font-size="11" class="svg-label">長崎県</text>
+      <rect x="405" y="207" width="113.5994948077463" height="30" fill="#e57373" rx="2"/>
+      <text x="522.5994948077463" y="226" font-size="10" class="svg-label">6227円</text>
+    
+  <text x="340" y="282" text-anchor="middle" font-size="10" class="svg-legend">凡例: 青系=上位 / 赤系=下位</text>
+</svg>

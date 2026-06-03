@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const realPublicDebtServiceRatioCity: MetricConfig = {
   "key": "real-public-debt-service-ratio-city",
   "title": "実質公債費比率（市町村財政）",
+  "subtitle": "市町村分",
   "unit": "％",
   "category": "administrativefinancial",
   "source": {

@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const pharmaceuticalSalesCount: MetricConfig = {
   "key": "pharmaceutical-sales-count",
   "title": "医薬品販売業数",
+  "subtitle": "総数",
   "unit": "所",
   "category": "socialsecurity",
   "source": {

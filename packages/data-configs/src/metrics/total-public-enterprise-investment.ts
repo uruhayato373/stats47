@@ -3,7 +3,7 @@ import type { MetricConfig } from "../types";
 export const totalPublicEnterpriseInvestment: MetricConfig = {
   "key": "total-public-enterprise-investment",
   "title": "公営企業総投資額",
-  "unit": "",
+  "unit": "千円",
   "category": "administrativefinancial",
   "source": {
     "kind": "estat",

@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const departmentStores10Per: MetricConfig = {
   "key": "department-stores-10-per",
   "title": "百貨店数",
+  "subtitle": "市区町村・人口10万当たり",
   "unit": "店",
   "category": "laborwage",
   "source": {

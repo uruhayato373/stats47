@@ -22,17 +22,21 @@ import { exportSurveysSnapshot } from "../exporters/surveys-snapshot";
 async function main() {
   console.log("master snapshots を R2 に書き出します…");
 
-  const [itemsPerUrl, surveys, categories] = await Promise.all([
+  // surveys snapshot (app/survey/all.json) は、items exporter が
+  // app/survey/{id}/items.json を生成した survey だけに絞る (関連ランキング 0 件の
+  // orphan survey を一覧・サイドバー・generateStaticParams から排除)。そのため
+  // items を先に実行し、その surveyIds を surveys snapshot に渡す。categories は独立。
+  const [itemsPerUrl, categories] = await Promise.all([
     exportRankingItemsPerUrl(),
-    exportSurveysSnapshot(),
     exportCategoriesSnapshot(),
   ]);
+  const surveys = await exportSurveysSnapshot(itemsPerUrl.surveyIds);
 
   console.log(
     `✅ ranking_items_per_url: home=${itemsPerUrl.home.count} / categories=${itemsPerUrl.categories.files} files / items=${itemsPerUrl.items.files} files / surveys=${itemsPerUrl.surveys.files} files / ${itemsPerUrl.totalSizeBytes} bytes / ${itemsPerUrl.durationMs}ms`,
   );
   console.log(
-    `✅ surveys: ${surveys.count} 件 / ${surveys.sizeBytes} bytes / ${surveys.durationMs}ms`,
+    `✅ surveys: ${surveys.count} 件 (関連ランキングあり / items 生成 ${itemsPerUrl.surveyIds.length} 調査に絞り込み) / ${surveys.sizeBytes} bytes / ${surveys.durationMs}ms`,
   );
   console.log(
     `✅ categories: ${categories.count} 件 / ${categories.sizeBytes} bytes / ${categories.durationMs}ms`,

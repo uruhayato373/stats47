@@ -4,7 +4,7 @@ export const publicBondExpensesNaturePrefecture: MetricConfig = {
   "key": "public-bond-expenses-nature-prefecture",
   "title": "公債費",
   "subtitle": "性質別歳出内訳 都道府県財政",
-  "unit": "",
+  "unit": "千円",
   "category": "administrativefinancial",
   "source": {
     "kind": "estat",

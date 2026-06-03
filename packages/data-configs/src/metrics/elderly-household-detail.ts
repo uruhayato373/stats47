@@ -2,7 +2,7 @@ import type { MetricConfig } from "../types";
 
 export const elderlyHouseholdDetail: MetricConfig = {
   "key": "elderly-household-detail",
-  "title": "65歳以上世帯員のいる主世帯数（家族類型総数, 2018年）",
+  "title": "65歳以上世帯員のいる主世帯数（家族類型総数）",
   "unit": "世帯",
   "category": "population",
   "source": {

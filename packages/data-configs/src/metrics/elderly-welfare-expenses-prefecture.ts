@@ -4,7 +4,7 @@ export const elderlyWelfareExpensesPrefecture: MetricConfig = {
   "key": "elderly-welfare-expenses-prefecture",
   "title": "老人福祉費",
   "subtitle": "都道府県財政",
-  "unit": "",
+  "unit": "千円",
   "category": "socialsecurity",
   "source": {
     "kind": "estat",

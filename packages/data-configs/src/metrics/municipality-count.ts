@@ -3,7 +3,7 @@ import type { MetricConfig } from "../types";
 export const municipalityCount: MetricConfig = {
   "key": "municipality-count",
   "title": "市町村数",
-  "unit": "‐",
+  "unit": "市町村",
   "category": "administrativefinancial",
   "source": {
     "kind": "estat",

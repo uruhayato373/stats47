@@ -4,7 +4,7 @@ export const vocationalTrainingExpensesPrefecture: MetricConfig = {
   "key": "vocational-training-expenses-prefecture",
   "title": "職業訓練費",
   "subtitle": "都道府県財政",
-  "unit": "",
+  "unit": "千円",
   "category": "administrativefinancial",
   "source": {
     "kind": "estat",

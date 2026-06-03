@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const generalHospitalCount: MetricConfig = {
   "key": "general-hospital-count",
   "title": "一般病院数",
+  "subtitle": "総数",
   "unit": "施設",
   "category": "socialsecurity",
   "source": {

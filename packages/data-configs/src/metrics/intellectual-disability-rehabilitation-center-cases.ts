@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const intellectualDisabilityRehabilitationCenterCases: MetricConfig = {
   "key": "intellectual-disability-rehabilitation-center-cases",
   "title": "知的障害者更生相談所取扱実人員",
+  "subtitle": "総数",
   "unit": "人",
   "category": "socialsecurity",
   "source": {

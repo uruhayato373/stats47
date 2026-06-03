@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const privateAutoInsurancePenetrationRateVehicle: MetricConfig = {
   "key": "private-auto-insurance-penetration-rate-vehicle",
   "title": "任意自動車保険普及率",
+  "subtitle": "車両",
   "unit": "％",
   "category": "economy",
   "source": {

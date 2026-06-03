@@ -286,6 +286,17 @@ if [ -n "$STAGED_METRICS" ]; then
     echo -e "${YELLOW}💡 規約: .claude/rules/estat-api.md / 確認: npm run validate:years --workspace=@stats47/data-configs${NC}"
     ERROR_COUNT=$((ERROR_COUNT + 1))
   fi
+
+  # metric config の構造規約チェック (category 無効キー等。.claude/rules/metric-config-standards.md)
+  if (cd "$PROJECT_ROOT" && npx tsx packages/data-configs/scripts/validate-metric-config.ts > /tmp/validate-config.log 2>&1); then
+    echo -e "${GREEN}✅ metric-config 構造チェック成功${NC}"
+    grep -E "warn 内訳" /tmp/validate-config.log || true
+  else
+    echo -e "${RED}❌ metric config に無効な category 等の error があります。${NC}"
+    grep -E "^   |❌" /tmp/validate-config.log | head -10 || true
+    echo -e "${YELLOW}💡 規約: .claude/rules/metric-config-standards.md / 確認: npm run validate:config --workspace=@stats47/data-configs${NC}"
+    ERROR_COUNT=$((ERROR_COUNT + 1))
+  fi
 else
   echo -e "${GREEN}✅ metric config の変更なし${NC}"
 fi

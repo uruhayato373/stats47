@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const liverDiseaseDeathCount: MetricConfig = {
   "key": "liver-disease-death-count",
   "title": "肝疾患による死亡者数",
+  "subtitle": "総数",
   "unit": "人",
   "category": "population",
   "source": {

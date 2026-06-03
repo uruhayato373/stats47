@@ -40,6 +40,7 @@ Phase 6 (2026-05-27) の D1 → R2 移行後、本 agent は D1 stats_* テー�
 
 - `.claude/rules/data-sqlite-ssot.md` — TS-config = SSOT / R2 = 値の SSOT / D1 = cache
 - `.claude/rules/estat-api.md` — 全年度取得 + メモリフィルタ、5 桁地域コード
+- `.claude/rules/metric-config-standards.md` — MetricConfig フィールド役割 / category 17 軸 / 量産後 validate:config
 - `.claude/rules/r2-storage-design.md` — `app/stats/` namespace 設計
 - `.claude/rules/branch-workflow.md` — DB 変更後フロー (R2 経由本番反映)
 - `.claude/rules/local-environment.md` — ローカル D1 パス固定値
@@ -66,6 +67,13 @@ Phase 6 (2026-05-27) の D1 → R2 移行後、本 agent は D1 stats_* テー�
   入り、年フィルタ 0 件・年セレクタ表示崩れが複数回発生。**量産・編集後は必ず
   `npm run validate:years --workspace=@stats47/data-configs` を実行**し 4 桁年を担保すること。
   time→年は `extractYearCode` を使う。規約: `.claude/rules/estat-api.md`「年の正規化」
+- **無効 category / タイトル汚染 (再発防止済)**: `port`/`uncategorized`/`labor`/`local-economy`/`transport`
+  のような 17 軸外の category キーが `category: string` 型で素通りしていた。また subtitle に定義補足と
+  データ注釈(※)が混在し UI がタイトルに焼き込んでいた。**`MetricConfig.category` は `CategoryKey` union
+  で型強制**(無効キーはコンパイルエラー)。**量産・編集後は必ず
+  `npm run validate:config --workspace=@stats47/data-configs` も実行**すること。
+  規約: `.claude/rules/metric-config-standards.md` (フィールド役割: title=名前のみ / subtitle=区別子 /
+  note=注釈 / description=定義。年・※を title に焼かない)
 - **2026-05-27 marriages/divorces 2023-2024 喪失事故**: DELETE+INSERT で他ソース年度を一掃。UPSERT 必須化で再発防止 (詳細: auto memory `project_estat_backfill_lessons.md`)
 - **note_articles テーブル消失 (2026-03)**: schema delete + migration reset の合わせ技で消失。本 agent は schema 操作不可、 `db-schema-manager` 経由で行うこと
 

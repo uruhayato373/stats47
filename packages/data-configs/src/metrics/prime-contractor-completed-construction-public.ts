@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const primeContractorCompletedConstructionPublic: MetricConfig = {
   "key": "prime-contractor-completed-construction-public",
   "title": "元請完成工事高",
+  "subtitle": "公共工事",
   "unit": "百万円",
   "category": "construction",
   "source": {

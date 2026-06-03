@@ -4,7 +4,7 @@ export const unemploymentMeasuresExpensesPrefecture: MetricConfig = {
   "key": "unemployment-measures-expenses-prefecture",
   "title": "失業対策費",
   "subtitle": "都道府県財政",
-  "unit": "",
+  "unit": "千円",
   "category": "laborwage",
   "source": {
     "kind": "estat",

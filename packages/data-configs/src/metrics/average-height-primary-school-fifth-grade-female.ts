@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const averageHeightPrimarySchoolFifthGradeFemale: MetricConfig = {
   "key": "average-height-primary-school-fifth-grade-female",
   "title": "平均身長",
+  "subtitle": "小学5年・女子",
   "unit": "cm",
   "category": "educationsports",
   "source": {

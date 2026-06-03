@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const disasterDamageAmount: MetricConfig = {
   "key": "disaster-damage-amount",
   "title": "災害被害額",
+  "subtitle": "総額",
   "unit": "円",
   "category": "safetyenvironment",
   "source": {

@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const femalePartTimeHourlyWage: MetricConfig = {
   "key": "female-part-time-hourly-wage",
   "title": "女性パートタイムの給与",
+  "subtitle": "現行",
   "unit": "円",
   "category": "laborwage",
   "source": {

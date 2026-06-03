@@ -4,7 +4,7 @@ export const cpiRegionalDifferenceIndexFood51cities100: MetricConfig = {
   "key": "cpi-regional-difference-index-food-51cities100",
   "title": "消費者物価地域差指数",
   "subtitle": "食料",
-  "unit": "‐",
+  "unit": "（51都市=100）",
   "category": "economy",
   "source": {
     "kind": "estat",

@@ -3,7 +3,7 @@ import type { MetricConfig } from "../types";
 export const maternalMortalityRatePer100kBirths: MetricConfig = {
   "key": "maternal-mortality-rate-per-100k-births",
   "title": "妊娠等による死亡率",
-  "unit": "‐",
+  "unit": "出産10万対",
   "category": "population",
   "source": {
     "kind": "estat",

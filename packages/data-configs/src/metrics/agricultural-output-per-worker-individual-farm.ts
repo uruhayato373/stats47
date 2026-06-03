@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const agriculturalOutputPerWorkerIndividualFarm: MetricConfig = {
   "key": "agricultural-output-per-worker-individual-farm",
   "title": "就業者1人当たり農業産出額",
+  "subtitle": "個人農業経営体",
   "unit": "万円",
   "category": "agriculture",
   "source": {
