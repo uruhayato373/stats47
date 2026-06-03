@@ -1,0 +1,387 @@
+<svg width="600" height="680" viewBox="0 0 600 680" xmlns="http://www.w3.org/2000/svg" font-family="'Noto Sans JP',sans-serif" role="img" aria-label="電子部品・デバイス出荷額（都道府県別）">
+<text x="300" y="28" text-anchor="middle" font-size="16" font-weight="bold" fill="#333">電子部品・デバイス出荷額（都道府県別）</text>
+<g aria-label="北海道 20万">
+  <title>北海道：196,905百万円</title>
+  <rect x="491" y="55" width="74" height="74" rx="3" fill="#135cb7" stroke="#ffffff" stroke-width="1"/>
+  <text fill="#ffffff" text-anchor="middle">
+    <tspan x="528" y="90" font-size="7" font-weight="700">北海道</tspan>
+    <tspan x="528" y="103" font-size="7">20万</tspan>
+  </text>
+</g>
+<g aria-label="青森 23万">
+  <title>青森県：233,488百万円</title>
+  <rect x="491" y="169" width="74" height="36" rx="3" fill="#125bb5" stroke="#ffffff" stroke-width="1"/>
+  <text fill="#ffffff" text-anchor="middle">
+    <tspan x="528" y="185" font-size="8" font-weight="700">青森</tspan>
+    <tspan x="528" y="198" font-size="7">23万</tspan>
+  </text>
+</g>
+<g aria-label="岩手 16万">
+  <title>岩手県：157,295百万円</title>
+  <rect x="529" y="207" width="36" height="36" rx="3" fill="#135fba" stroke="#ffffff" stroke-width="1"/>
+  <text fill="#ffffff" text-anchor="middle">
+    <tspan x="547" y="223" font-size="8" font-weight="700">岩手</tspan>
+    <tspan x="547" y="236" font-size="7">16万</tspan>
+  </text>
+</g>
+<g aria-label="秋田 33万">
+  <title>秋田県：325,143百万円</title>
+  <rect x="491" y="207" width="36" height="36" rx="3" fill="#1157b2" stroke="#ffffff" stroke-width="1"/>
+  <text fill="#ffffff" text-anchor="middle">
+    <tspan x="509" y="223" font-size="8" font-weight="700">秋田</tspan>
+    <tspan x="509" y="236" font-size="7">33万</tspan>
+  </text>
+</g>
+<g aria-label="宮城 39万">
+  <title>宮城県：394,605百万円</title>
+  <rect x="529" y="245" width="36" height="36" rx="3" fill="#1155b0" stroke="#ffffff" stroke-width="1"/>
+  <text fill="#ffffff" text-anchor="middle">
+    <tspan x="547" y="261" font-size="8" font-weight="700">宮城</tspan>
+    <tspan x="547" y="274" font-size="7">39万</tspan>
+  </text>
+</g>
+<g aria-label="山形 49万">
+  <title>山形県：488,742百万円</title>
+  <rect x="491" y="245" width="36" height="36" rx="3" fill="#1053ad" stroke="#ffffff" stroke-width="1"/>
+  <text fill="#ffffff" text-anchor="middle">
+    <tspan x="509" y="261" font-size="8" font-weight="700">山形</tspan>
+    <tspan x="509" y="274" font-size="7">49万</tspan>
+  </text>
+</g>
+<g aria-label="福島 42万">
+  <title>福島県：420,405百万円</title>
+  <rect x="491" y="283" width="74" height="36" rx="3" fill="#1154af" stroke="#ffffff" stroke-width="1"/>
+  <text fill="#ffffff" text-anchor="middle">
+    <tspan x="528" y="299" font-size="8" font-weight="700">福島</tspan>
+    <tspan x="528" y="312" font-size="7">42万</tspan>
+  </text>
+</g>
+<g aria-label="新潟 27万">
+  <title>新潟県：265,544百万円</title>
+  <rect x="415" y="283" width="74" height="36" rx="3" fill="#1259b4" stroke="#ffffff" stroke-width="1"/>
+  <text fill="#ffffff" text-anchor="middle">
+    <tspan x="452" y="299" font-size="8" font-weight="700">新潟</tspan>
+    <tspan x="452" y="312" font-size="7">27万</tspan>
+  </text>
+</g>
+<g aria-label="富山 32万">
+  <title>富山県：316,717百万円</title>
+  <rect x="377" y="283" width="36" height="36" rx="3" fill="#1157b2" stroke="#ffffff" stroke-width="1"/>
+  <text fill="#ffffff" text-anchor="middle">
+    <tspan x="395" y="299" font-size="8" font-weight="700">富山</tspan>
+    <tspan x="395" y="312" font-size="7">32万</tspan>
+  </text>
+</g>
+<g aria-label="石川 37万">
+  <title>石川県：366,193百万円</title>
+  <rect x="339" y="283" width="36" height="36" rx="3" fill="#1156b0" stroke="#ffffff" stroke-width="1"/>
+  <text fill="#ffffff" text-anchor="middle">
+    <tspan x="357" y="299" font-size="8" font-weight="700">石川</tspan>
+    <tspan x="357" y="312" font-size="7">37万</tspan>
+  </text>
+</g>
+<g aria-label="福井 34万">
+  <title>福井県：335,784百万円</title>
+  <rect x="339" y="321" width="36" height="36" rx="3" fill="#1157b1" stroke="#ffffff" stroke-width="1"/>
+  <text fill="#ffffff" text-anchor="middle">
+    <tspan x="357" y="337" font-size="8" font-weight="700">福井</tspan>
+    <tspan x="357" y="350" font-size="7">34万</tspan>
+  </text>
+</g>
+<g aria-label="岐阜 14万">
+  <title>岐阜県：144,830百万円</title>
+  <rect x="377" y="321" width="36" height="74" rx="3" fill="#1460bb" stroke="#ffffff" stroke-width="1"/>
+  <text fill="#ffffff" text-anchor="middle">
+    <tspan x="395" y="356" font-size="8" font-weight="700">岐阜</tspan>
+    <tspan x="395" y="369" font-size="7">14万</tspan>
+  </text>
+</g>
+<g aria-label="長野 61万">
+  <title>長野県：610,192百万円</title>
+  <rect x="415" y="321" width="36" height="74" rx="3" fill="#1050ab" stroke="#ffffff" stroke-width="1"/>
+  <text fill="#ffffff" text-anchor="middle">
+    <tspan x="433" y="356" font-size="8" font-weight="700">長野</tspan>
+    <tspan x="433" y="369" font-size="7">61万</tspan>
+  </text>
+</g>
+<g aria-label="群馬 17万">
+  <title>群馬県：173,613百万円</title>
+  <rect x="453" y="321" width="36" height="36" rx="3" fill="#135eb9" stroke="#ffffff" stroke-width="1"/>
+  <text fill="#ffffff" text-anchor="middle">
+    <tspan x="471" y="337" font-size="8" font-weight="700">群馬</tspan>
+    <tspan x="471" y="350" font-size="7">17万</tspan>
+  </text>
+</g>
+<g aria-label="栃木 20万">
+  <title>栃木県：198,023百万円</title>
+  <rect x="491" y="321" width="36" height="36" rx="3" fill="#135cb7" stroke="#ffffff" stroke-width="1"/>
+  <text fill="#ffffff" text-anchor="middle">
+    <tspan x="509" y="337" font-size="8" font-weight="700">栃木</tspan>
+    <tspan x="509" y="350" font-size="7">20万</tspan>
+  </text>
+</g>
+<g aria-label="茨城 32万">
+  <title>茨城県：317,741百万円</title>
+  <rect x="529" y="321" width="36" height="36" rx="3" fill="#1157b2" stroke="#ffffff" stroke-width="1"/>
+  <text fill="#ffffff" text-anchor="middle">
+    <tspan x="547" y="337" font-size="8" font-weight="700">茨城</tspan>
+    <tspan x="547" y="350" font-size="7">32万</tspan>
+  </text>
+</g>
+<g aria-label="山梨 20万">
+  <title>山梨県：202,171百万円</title>
+  <rect x="453" y="359" width="36" height="36" rx="3" fill="#135cb7" stroke="#ffffff" stroke-width="1"/>
+  <text fill="#ffffff" text-anchor="middle">
+    <tspan x="471" y="375" font-size="8" font-weight="700">山梨</tspan>
+    <tspan x="471" y="388" font-size="7">20万</tspan>
+  </text>
+</g>
+<g aria-label="埼玉 29万">
+  <title>埼玉県：287,059百万円</title>
+  <rect x="491" y="359" width="36" height="36" rx="3" fill="#1258b3" stroke="#ffffff" stroke-width="1"/>
+  <text fill="#ffffff" text-anchor="middle">
+    <tspan x="509" y="375" font-size="8" font-weight="700">埼玉</tspan>
+    <tspan x="509" y="388" font-size="7">29万</tspan>
+  </text>
+</g>
+<g aria-label="千葉 17万">
+  <title>千葉県：168,711百万円</title>
+  <rect x="529" y="359" width="36" height="74" rx="3" fill="#135eb9" stroke="#ffffff" stroke-width="1"/>
+  <text fill="#ffffff" text-anchor="middle">
+    <tspan x="547" y="394" font-size="8" font-weight="700">千葉</tspan>
+    <tspan x="547" y="407" font-size="7">17万</tspan>
+  </text>
+</g>
+<g aria-label="東京 31万">
+  <title>東京都：308,266百万円</title>
+  <rect x="491" y="397" width="36" height="36" rx="3" fill="#1158b2" stroke="#ffffff" stroke-width="1"/>
+  <text fill="#ffffff" text-anchor="middle">
+    <tspan x="509" y="413" font-size="8" font-weight="700">東京</tspan>
+    <tspan x="509" y="426" font-size="7">31万</tspan>
+  </text>
+</g>
+<g aria-label="神奈川 30万">
+  <title>神奈川県：298,120百万円</title>
+  <rect x="491" y="435" width="36" height="36" rx="3" fill="#1258b3" stroke="#ffffff" stroke-width="1"/>
+  <text fill="#ffffff" text-anchor="middle">
+    <tspan x="509" y="451" font-size="7" font-weight="700">神奈川</tspan>
+    <tspan x="509" y="464" font-size="7">30万</tspan>
+  </text>
+</g>
+<g aria-label="静岡 29万">
+  <title>静岡県：287,843百万円</title>
+  <rect x="415" y="397" width="74" height="36" rx="3" fill="#1258b3" stroke="#ffffff" stroke-width="1"/>
+  <text fill="#ffffff" text-anchor="middle">
+    <tspan x="452" y="413" font-size="8" font-weight="700">静岡</tspan>
+    <tspan x="452" y="426" font-size="7">29万</tspan>
+  </text>
+</g>
+<g aria-label="愛知 32万">
+  <title>愛知県：323,256百万円</title>
+  <rect x="377" y="397" width="36" height="36" rx="3" fill="#1157b2" stroke="#ffffff" stroke-width="1"/>
+  <text fill="#ffffff" text-anchor="middle">
+    <tspan x="395" y="413" font-size="8" font-weight="700">愛知</tspan>
+    <tspan x="395" y="426" font-size="7">32万</tspan>
+  </text>
+</g>
+<g aria-label="滋賀 35万">
+  <title>滋賀県：354,904百万円</title>
+  <rect x="339" y="359" width="36" height="36" rx="3" fill="#1156b1" stroke="#ffffff" stroke-width="1"/>
+  <text fill="#ffffff" text-anchor="middle">
+    <tspan x="357" y="375" font-size="8" font-weight="700">滋賀</tspan>
+    <tspan x="357" y="388" font-size="7">35万</tspan>
+  </text>
+</g>
+<g aria-label="三重 1.5M">
+  <title>三重県：1,483,843百万円</title>
+  <rect x="339" y="397" width="36" height="74" rx="3" fill="#0d47a1" stroke="#ffffff" stroke-width="1"/>
+  <text fill="#ffffff" text-anchor="middle">
+    <tspan x="357" y="432" font-size="8" font-weight="700">三重</tspan>
+    <tspan x="357" y="445" font-size="7">1.5M</tspan>
+  </text>
+</g>
+<g aria-label="京都 38万">
+  <title>京都府：380,042百万円</title>
+  <rect x="263" y="359" width="74" height="36" rx="3" fill="#1155b0" stroke="#ffffff" stroke-width="1"/>
+  <text fill="#ffffff" text-anchor="middle">
+    <tspan x="300" y="375" font-size="8" font-weight="700">京都</tspan>
+    <tspan x="300" y="388" font-size="7">38万</tspan>
+  </text>
+</g>
+<g aria-label="兵庫 28万">
+  <title>兵庫県：279,034百万円</title>
+  <rect x="225" y="359" width="36" height="74" rx="3" fill="#1259b3" stroke="#ffffff" stroke-width="1"/>
+  <text fill="#ffffff" text-anchor="middle">
+    <tspan x="243" y="394" font-size="8" font-weight="700">兵庫</tspan>
+    <tspan x="243" y="407" font-size="7">28万</tspan>
+  </text>
+</g>
+<g aria-label="大阪 36万">
+  <title>大阪府：364,747百万円</title>
+  <rect x="263" y="397" width="36" height="36" rx="3" fill="#1156b0" stroke="#ffffff" stroke-width="1"/>
+  <text fill="#ffffff" text-anchor="middle">
+    <tspan x="281" y="413" font-size="8" font-weight="700">大阪</tspan>
+    <tspan x="281" y="426" font-size="7">36万</tspan>
+  </text>
+</g>
+<g aria-label="奈良 3,135">
+  <title>奈良県：3,135百万円</title>
+  <rect x="301" y="397" width="36" height="36" rx="3" fill="#e3f2fd" stroke="#ffffff" stroke-width="1"/>
+  <text fill="#374151" text-anchor="middle">
+    <tspan x="319" y="413" font-size="8" font-weight="700">奈良</tspan>
+    <tspan x="319" y="426" font-size="7">3,135</tspan>
+  </text>
+</g>
+<g aria-label="和歌山 2万">
+  <title>和歌山県：15,537百万円</title>
+  <rect x="263" y="435" width="74" height="36" rx="3" fill="#3491e4" stroke="#ffffff" stroke-width="1"/>
+  <text fill="#ffffff" text-anchor="middle">
+    <tspan x="300" y="451" font-size="7" font-weight="700">和歌山</tspan>
+    <tspan x="300" y="464" font-size="7">2万</tspan>
+  </text>
+</g>
+<g aria-label="鳥取 12万">
+  <title>鳥取県：118,788百万円</title>
+  <rect x="187" y="359" width="36" height="36" rx="3" fill="#1462bd" stroke="#ffffff" stroke-width="1"/>
+  <text fill="#ffffff" text-anchor="middle">
+    <tspan x="205" y="375" font-size="8" font-weight="700">鳥取</tspan>
+    <tspan x="205" y="388" font-size="7">12万</tspan>
+  </text>
+</g>
+<g aria-label="岡山 25万">
+  <title>岡山県：250,809百万円</title>
+  <rect x="187" y="397" width="36" height="36" rx="3" fill="#125ab5" stroke="#ffffff" stroke-width="1"/>
+  <text fill="#ffffff" text-anchor="middle">
+    <tspan x="205" y="413" font-size="8" font-weight="700">岡山</tspan>
+    <tspan x="205" y="426" font-size="7">25万</tspan>
+  </text>
+</g>
+<g aria-label="島根 24万">
+  <title>島根県：243,886百万円</title>
+  <rect x="149" y="359" width="36" height="36" rx="3" fill="#125ab5" stroke="#ffffff" stroke-width="1"/>
+  <text fill="#ffffff" text-anchor="middle">
+    <tspan x="167" y="375" font-size="8" font-weight="700">島根</tspan>
+    <tspan x="167" y="388" font-size="7">24万</tspan>
+  </text>
+</g>
+<g aria-label="広島 36万">
+  <title>広島県：356,217百万円</title>
+  <rect x="149" y="397" width="36" height="36" rx="3" fill="#1156b1" stroke="#ffffff" stroke-width="1"/>
+  <text fill="#ffffff" text-anchor="middle">
+    <tspan x="167" y="413" font-size="8" font-weight="700">広島</tspan>
+    <tspan x="167" y="426" font-size="7">36万</tspan>
+  </text>
+</g>
+<g aria-label="山口 6万">
+  <title>山口県：63,591百万円</title>
+  <rect x="111" y="359" width="36" height="74" rx="3" fill="#1b6dc7" stroke="#ffffff" stroke-width="1"/>
+  <text fill="#ffffff" text-anchor="middle">
+    <tspan x="129" y="394" font-size="8" font-weight="700">山口</tspan>
+    <tspan x="129" y="407" font-size="7">6万</tspan>
+  </text>
+</g>
+<g aria-label="愛媛 3万">
+  <title>愛媛県：27,845百万円</title>
+  <rect x="149" y="473" width="36" height="36" rx="3" fill="#2981d7" stroke="#ffffff" stroke-width="1"/>
+  <text fill="#ffffff" text-anchor="middle">
+    <tspan x="167" y="489" font-size="8" font-weight="700">愛媛</tspan>
+    <tspan x="167" y="502" font-size="7">3万</tspan>
+  </text>
+</g>
+<g aria-label="香川 4万">
+  <title>香川県：44,600百万円</title>
+  <rect x="187" y="473" width="36" height="36" rx="3" fill="#2176ce" stroke="#ffffff" stroke-width="1"/>
+  <text fill="#ffffff" text-anchor="middle">
+    <tspan x="205" y="489" font-size="8" font-weight="700">香川</tspan>
+    <tspan x="205" y="502" font-size="7">4万</tspan>
+  </text>
+</g>
+<g aria-label="高知 -">
+  <title>高知県：-百万円</title>
+  <rect x="149" y="511" width="36" height="36" rx="3" fill="#e0e0e0" stroke="#ffffff" stroke-width="1"/>
+  <text fill="#374151" text-anchor="middle">
+    <tspan x="167" y="527" font-size="8" font-weight="700">高知</tspan>
+    <tspan x="167" y="540" font-size="7">-</tspan>
+  </text>
+</g>
+<g aria-label="徳島 30万">
+  <title>徳島県：296,055百万円</title>
+  <rect x="187" y="511" width="36" height="36" rx="3" fill="#1258b3" stroke="#ffffff" stroke-width="1"/>
+  <text fill="#ffffff" text-anchor="middle">
+    <tspan x="205" y="527" font-size="8" font-weight="700">徳島</tspan>
+    <tspan x="205" y="540" font-size="7">30万</tspan>
+  </text>
+</g>
+<g aria-label="福岡 19万">
+  <title>福岡県：191,816百万円</title>
+  <rect x="73" y="435" width="36" height="36" rx="3" fill="#135db7" stroke="#ffffff" stroke-width="1"/>
+  <text fill="#ffffff" text-anchor="middle">
+    <tspan x="91" y="451" font-size="8" font-weight="700">福岡</tspan>
+    <tspan x="91" y="464" font-size="7">19万</tspan>
+  </text>
+</g>
+<g aria-label="佐賀 19万">
+  <title>佐賀県：187,317百万円</title>
+  <rect x="35" y="435" width="36" height="36" rx="3" fill="#135db8" stroke="#ffffff" stroke-width="1"/>
+  <text fill="#ffffff" text-anchor="middle">
+    <tspan x="53" y="451" font-size="8" font-weight="700">佐賀</tspan>
+    <tspan x="53" y="464" font-size="7">19万</tspan>
+  </text>
+</g>
+<g aria-label="大分 26万">
+  <title>大分県：264,827百万円</title>
+  <rect x="73" y="473" width="36" height="36" rx="3" fill="#1259b4" stroke="#ffffff" stroke-width="1"/>
+  <text fill="#ffffff" text-anchor="middle">
+    <tspan x="91" y="489" font-size="8" font-weight="700">大分</tspan>
+    <tspan x="91" y="502" font-size="7">26万</tspan>
+  </text>
+</g>
+<g aria-label="長崎 29万">
+  <title>長崎県：290,637百万円</title>
+  <rect x="35" y="473" width="36" height="36" rx="3" fill="#1258b3" stroke="#ffffff" stroke-width="1"/>
+  <text fill="#ffffff" text-anchor="middle">
+    <tspan x="53" y="489" font-size="8" font-weight="700">長崎</tspan>
+    <tspan x="53" y="502" font-size="7">29万</tspan>
+  </text>
+</g>
+<g aria-label="宮崎 17万">
+  <title>宮崎県：165,638百万円</title>
+  <rect x="73" y="511" width="36" height="36" rx="3" fill="#135eb9" stroke="#ffffff" stroke-width="1"/>
+  <text fill="#ffffff" text-anchor="middle">
+    <tspan x="91" y="527" font-size="8" font-weight="700">宮崎</tspan>
+    <tspan x="91" y="540" font-size="7">17万</tspan>
+  </text>
+</g>
+<g aria-label="熊本 32万">
+  <title>熊本県：317,335百万円</title>
+  <rect x="35" y="511" width="36" height="36" rx="3" fill="#1157b2" stroke="#ffffff" stroke-width="1"/>
+  <text fill="#ffffff" text-anchor="middle">
+    <tspan x="53" y="527" font-size="8" font-weight="700">熊本</tspan>
+    <tspan x="53" y="540" font-size="7">32万</tspan>
+  </text>
+</g>
+<g aria-label="鹿児島 22万">
+  <title>鹿児島県：218,980百万円</title>
+  <rect x="35" y="549" width="74" height="36" rx="3" fill="#125bb6" stroke="#ffffff" stroke-width="1"/>
+  <text fill="#ffffff" text-anchor="middle">
+    <tspan x="72" y="565" font-size="7" font-weight="700">鹿児島</tspan>
+    <tspan x="72" y="578" font-size="7">22万</tspan>
+  </text>
+</g>
+<g aria-label="沖縄 -">
+  <title>沖縄県：-百万円</title>
+  <rect x="35" y="625" width="36" height="36" rx="3" fill="#e0e0e0" stroke="#ffffff" stroke-width="1"/>
+  <text fill="#374151" text-anchor="middle">
+    <tspan x="53" y="641" font-size="8" font-weight="700">沖縄</tspan>
+    <tspan x="53" y="654" font-size="7">-</tspan>
+  </text>
+</g>
+<text x="35" y="640" font-size="9" fill="#6b7280">少</text>
+<rect x="55" y="630" width="25" height="12" fill="#e3f2fd"/>
+<rect x="80" y="630" width="25" height="12" fill="#bbdefb"/>
+<rect x="105" y="630" width="25" height="12" fill="#90caf9"/>
+<rect x="130" y="630" width="25" height="12" fill="#42a5f5"/>
+<rect x="155" y="630" width="25" height="12" fill="#1565c0"/>
+<rect x="180" y="630" width="25" height="12" fill="#0d47a1"/>
+<text x="210" y="640" font-size="9" fill="#6b7280">多</text>
+</svg>

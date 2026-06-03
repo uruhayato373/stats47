@@ -1,0 +1,213 @@
+<svg width="700" height="700" viewBox="0 0 700 700" xmlns="http://www.w3.org/2000/svg" font-family="'Noto Sans JP',sans-serif" role="img" aria-label="従業者1人当たり出荷額 × 付加価値額">
+  <title>従業者1人当たり出荷額 × 付加価値額</title>
+  <rect width="700" height="700" fill="#ffffff"/>
+  <text x="350" y="22" text-anchor="middle" font-size="13" font-weight="bold" fill="#111827">従業者1人当たり出荷額 × 付加価値額</text>
+  <text x="350" y="38" text-anchor="middle" font-size="9" fill="#6b7280">横軸: 1人当たり出荷額 / 縦軸: 付加価値額</text>
+  <rect x="80" y="55" width="590" height="595" fill="#f9fafb" stroke="#d1d5db" stroke-width="1"/>
+  <line x1="80" y1="55" x2="80" y2="650" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="80" y="666" text-anchor="middle" font-size="9" fill="#6b7280">2千</text>
+  <line x1="164.28571428571428" y1="55" x2="164.28571428571428" y2="650" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="164.28571428571428" y="666" text-anchor="middle" font-size="9" fill="#6b7280">3千</text>
+  <line x1="248.57142857142856" y1="55" x2="248.57142857142856" y2="650" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="248.57142857142856" y="666" text-anchor="middle" font-size="9" fill="#6b7280">4千</text>
+  <line x1="332.85714285714283" y1="55" x2="332.85714285714283" y2="650" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="332.85714285714283" y="666" text-anchor="middle" font-size="9" fill="#6b7280">5千</text>
+  <line x1="417.1428571428571" y1="55" x2="417.1428571428571" y2="650" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="417.1428571428571" y="666" text-anchor="middle" font-size="9" fill="#6b7280">6千</text>
+  <line x1="501.42857142857144" y1="55" x2="501.42857142857144" y2="650" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="501.42857142857144" y="666" text-anchor="middle" font-size="9" fill="#6b7280">7千</text>
+  <line x1="585.7142857142857" y1="55" x2="585.7142857142857" y2="650" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="585.7142857142857" y="666" text-anchor="middle" font-size="9" fill="#6b7280">8千</text>
+  <line x1="670" y1="55" x2="670" y2="650" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="670" y="666" text-anchor="middle" font-size="9" fill="#6b7280">9千</text>
+  <line x1="80" y1="650" x2="670" y2="650" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="74" y="653.5" text-anchor="end" font-size="9" fill="#6b7280">0</text>
+  <line x1="80" y1="580" x2="670" y2="580" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="74" y="583.5" text-anchor="end" font-size="9" fill="#6b7280">2</text>
+  <line x1="80" y1="510" x2="670" y2="510" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="74" y="513.5" text-anchor="end" font-size="9" fill="#6b7280">4</text>
+  <line x1="80" y1="440" x2="670" y2="440" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="74" y="443.5" text-anchor="end" font-size="9" fill="#6b7280">6</text>
+  <line x1="80" y1="370" x2="670" y2="370" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="74" y="373.5" text-anchor="end" font-size="9" fill="#6b7280">8</text>
+  <line x1="80" y1="300" x2="670" y2="300" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="74" y="303.5" text-anchor="end" font-size="9" fill="#6b7280">10</text>
+  <line x1="80" y1="230" x2="670" y2="230" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="74" y="233.5" text-anchor="end" font-size="9" fill="#6b7280">12</text>
+  <line x1="80" y1="160" x2="670" y2="160" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="74" y="163.5" text-anchor="end" font-size="9" fill="#6b7280">14</text>
+  <line x1="80" y1="90" x2="670" y2="90" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="74" y="93.5" text-anchor="end" font-size="9" fill="#6b7280">16</text>
+  <line x1="276.10290881458957" y1="55" x2="276.10290881458957" y2="650" stroke="#9ca3af" stroke-dasharray="4,3" opacity="0.6"/>
+  <line x1="80" y1="567.4123654255319" x2="670" y2="567.4123654255319" stroke="#9ca3af" stroke-dasharray="4,3" opacity="0.6"/>
+  <text x="279.10290881458957" y="67" font-size="7" fill="#9ca3af">全国平均</text>
+  <circle cx="628.3" cy="604.4" r="5" fill="#ab47bc" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>大分：出荷額8505万円 付加価値1.3兆円</title>
+  </circle>
+  <text x="606.3" y="596.4" font-size="8" fill="#374151" font-weight="500">大分</text>
+  <circle cx="567.8" cy="571.3" r="5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>山口：出荷額7787万円 付加価値2.2兆円</title>
+  </circle>
+  <text x="541.8" y="575.3" font-size="8" fill="#374151" font-weight="500">山口</text>
+  <circle cx="554.1" cy="549.7" r="5" fill="#66bb6a" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>千葉：出荷額7625万円 付加価値2.9兆円</title>
+  </circle>
+  <text x="562.1" y="557.7" font-size="8" fill="#374151" font-weight="500">千葉</text>
+  <circle cx="471.1" cy="615.1" r="5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>愛媛：出荷額6640万円 付加価値1.0兆円</title>
+  </circle>
+  <text x="479.1" y="623.1" font-size="8" fill="#374151" font-weight="500">愛媛</text>
+  <circle cx="456.3" cy="582.7" r="5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>岡山：出荷額6465万円 付加価値1.9兆円</title>
+  </circle>
+  <text x="464.3" y="576.7" font-size="8" fill="#374151" font-weight="500">岡山</text>
+  <circle cx="432.9" cy="81.0" r="5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>愛知：出荷額6187万円 付加価値16.3兆円</title>
+  </circle>
+  <text x="402.9" y="73.0" font-size="8" fill="#374151" font-weight="500">愛知</text>
+  <circle cx="406.0" cy="614.6" r="3.5" fill="#ffa726" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>和歌山：出荷額5868万円 付加価値1.0兆円</title>
+  </circle>
+  <circle cx="400.3" cy="530.6" r="5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>三重：出荷額5800万円 付加価値3.4兆円</title>
+  </circle>
+  <text x="408.3" y="526.6" font-size="8" fill="#374151" font-weight="500">三重</text>
+  <circle cx="366.1" cy="491.5" r="5" fill="#66bb6a" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>茨城：出荷額5394万円 付加価値4.5兆円</title>
+  </circle>
+  <text x="374.1" y="487.5" font-size="8" fill="#374151" font-weight="500">茨城</text>
+  <circle cx="360.3" cy="548.9" r="5" fill="#ffa726" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>滋賀：出荷額5325万円 付加価値2.9兆円</title>
+  </circle>
+  <text x="368.3" y="544.9" font-size="8" fill="#374151" font-weight="500">滋賀</text>
+  <circle cx="342.6" cy="451.3" r="5" fill="#ffa726" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>兵庫：出荷額5116万円 付加価値5.7兆円</title>
+  </circle>
+  <text x="350.6" y="455.3" font-size="8" fill="#374151" font-weight="500">兵庫</text>
+  <circle cx="339.9" cy="474.0" r="5" fill="#66bb6a" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>神奈川：出荷額5084万円 付加価値5.0兆円</title>
+  </circle>
+  <text x="347.9" y="470.0" font-size="8" fill="#374151" font-weight="500">神奈川</text>
+  <circle cx="334.6" cy="546.4" r="3.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>広島：出荷額5021万円 付加価値3.0兆円</title>
+  </circle>
+  <circle cx="310.5" cy="548.0" r="3.5" fill="#66bb6a" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>栃木：出荷額4735万円 付加価値2.9兆円</title>
+  </circle>
+  <circle cx="309.1" cy="603.7" r="3.5" fill="#42a5f5" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>宮城：出荷額4718万円 付加価値1.3兆円</title>
+  </circle>
+  <circle cx="308.2" cy="424.6" r="5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>静岡：出荷額4707万円 付加価値6.4兆円</title>
+  </circle>
+  <text x="316.2" y="420.6" font-size="8" fill="#374151" font-weight="500">静岡</text>
+  <circle cx="299.3" cy="613.4" r="3.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>徳島：出荷額4602万円 付加価値1.0兆円</title>
+  </circle>
+  <circle cx="293.2" cy="434.3" r="5" fill="#ffa726" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>大阪：出荷額4530万円 付加価値6.2兆円</title>
+  </circle>
+  <text x="301.2" y="442.3" font-size="8" fill="#374151" font-weight="500">大阪</text>
+  <circle cx="291.6" cy="548.0" r="3.5" fill="#ab47bc" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>福岡：出荷額4511万円 付加価値2.9兆円</title>
+  </circle>
+  <circle cx="280.1" cy="532.0" r="3.5" fill="#66bb6a" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>群馬：出荷額4374万円 付加価値3.4兆円</title>
+  </circle>
+  <circle cx="271.5" cy="563.7" r="3.5" fill="#ffa726" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>京都：出荷額4272万円 付加価値2.5兆円</title>
+  </circle>
+  <circle cx="270.1" cy="622.2" r="3.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>香川：出荷額4256万円 付加価値0.8兆円</title>
+  </circle>
+  <circle cx="250.7" cy="588.9" r="3.5" fill="#42a5f5" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>北海道：出荷額4025万円 付加価値1.7兆円</title>
+  </circle>
+  <circle cx="242.9" cy="614.8" r="3.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>山梨：出荷額3933万円 付加価値1.0兆円</title>
+  </circle>
+  <circle cx="231.6" cy="464.2" r="3.5" fill="#66bb6a" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>埼玉：出荷額3799万円 付加価値5.3兆円</title>
+  </circle>
+  <circle cx="225.5" cy="605.9" r="3.5" fill="#ab47bc" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>熊本：出荷額3726万円 付加価値1.3兆円</title>
+  </circle>
+  <circle cx="220.9" cy="621.5" r="3.5" fill="#ab47bc" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>佐賀：出荷額3671万円 付加価値0.8兆円</title>
+  </circle>
+  <circle cx="217.5" cy="618.3" r="3.5" fill="#42a5f5" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>岩手：出荷額3631万円 付加価値0.9兆円</title>
+  </circle>
+  <circle cx="210.4" cy="583.4" r="3.5" fill="#42a5f5" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>福島：出荷額3547万円 付加価値1.9兆円</title>
+  </circle>
+  <circle cx="206.7" cy="565.9" r="3.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>長野：出荷額3503万円 付加価値2.4兆円</title>
+  </circle>
+  <circle cx="200.8" cy="618.8" r="3.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>福井：出荷額3433万円 付加価値0.9兆円</title>
+  </circle>
+  <circle cx="193.9" cy="628.0" r="3.5" fill="#ab47bc" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>宮崎：出荷額3351万円 付加価値0.6兆円</title>
+  </circle>
+  <circle cx="191.9" cy="624.5" r="3.5" fill="#ab47bc" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>鹿児島：出荷額3327万円 付加価値0.7兆円</title>
+  </circle>
+  <circle cx="191.3" cy="600.4" r="3.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>富山：出荷額3320万円 付加価値1.4兆円</title>
+  </circle>
+  <circle cx="188.8" cy="625.9" r="3.5" fill="#ffa726" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>奈良：出荷額3291万円 付加価値0.7兆円</title>
+  </circle>
+  <circle cx="188.5" cy="634.0" r="3.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>島根：出荷額3287万円 付加価値0.5兆円</title>
+  </circle>
+  <circle cx="183.4" cy="633.2" r="3.5" fill="#42a5f5" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>青森：出荷額3226万円 付加価値0.5兆円</title>
+  </circle>
+  <circle cx="182.0" cy="574.2" r="3.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>岐阜：出荷額3211万円 付加価値2.2兆円</title>
+  </circle>
+  <circle cx="181.2" cy="603.0" r="3.5" fill="#42a5f5" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>山形：出荷額3201万円 付加価値1.3兆円</title>
+  </circle>
+  <circle cx="175.9" cy="610.8" r="3.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>石川：出荷額3137万円 付加価値1.1兆円</title>
+  </circle>
+  <circle cx="171.6" cy="540.3" r="5" fill="#66bb6a" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>東京：出荷額3086万円 付加価値3.1兆円</title>
+  </circle>
+  <text x="149.6" y="550.3" font-size="8" fill="#374151" font-weight="500">東京</text>
+  <circle cx="164.9" cy="581.9" r="3.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>新潟：出荷額3007万円 付加価値1.9兆円</title>
+  </circle>
+  <circle cx="156.8" cy="624.1" r="3.5" fill="#ab47bc" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>長崎：出荷額2911万円 付加価値0.7兆円</title>
+  </circle>
+  <circle cx="152.4" cy="640.8" r="3.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>鳥取：出荷額2859万円 付加価値0.3兆円</title>
+  </circle>
+  <circle cx="139.2" cy="642.5" r="3.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>高知：出荷額2703万円 付加価値0.2兆円</title>
+  </circle>
+  <circle cx="130.5" cy="628.0" r="5" fill="#42a5f5" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>秋田：出荷額2599万円 付加価値0.6兆円</title>
+  </circle>
+  <text x="138.5" y="624.0" font-size="8" fill="#374151" font-weight="500">秋田</text>
+  <circle cx="84.0" cy="643.9" r="5" fill="#ab47bc" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>沖縄：出荷額2047万円 付加価値0.2兆円</title>
+  </circle>
+  <text x="92.0" y="639.9" font-size="8" fill="#374151" font-weight="500">沖縄</text>
+  <circle cx="90" cy="677" r="4" fill="#42a5f5" opacity="0.8"/>
+  <text x="98" y="680" font-size="8" fill="#6b7280">北海道・東北</text>
+  <circle cx="285" cy="677" r="4" fill="#66bb6a" opacity="0.8"/>
+  <text x="293" y="680" font-size="8" fill="#6b7280">関東</text>
+  <circle cx="480" cy="677" r="4" fill="#fdd835" opacity="0.8"/>
+  <text x="488" y="680" font-size="8" fill="#6b7280">中部</text>
+  <circle cx="90" cy="693" r="4" fill="#ffa726" opacity="0.8"/>
+  <text x="98" y="696" font-size="8" fill="#6b7280">近畿</text>
+  <circle cx="285" cy="693" r="4" fill="#ef5350" opacity="0.8"/>
+  <text x="293" y="696" font-size="8" fill="#6b7280">中国・四国</text>
+  <circle cx="480" cy="693" r="4" fill="#ab47bc" opacity="0.8"/>
+  <text x="488" y="696" font-size="8" fill="#6b7280">九州・沖縄</text>
+</svg>
