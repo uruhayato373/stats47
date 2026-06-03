@@ -1,0 +1,202 @@
+<svg width="560" height="600" viewBox="0 0 560 600" xmlns="http://www.w3.org/2000/svg" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" role="img" aria-label="財政力指数と自主財源の割合の関係">
+  <title>財政力指数と自主財源の割合の関係</title>
+  <rect width="560" height="600" fill="#fafafa" rx="8"/>
+  <text x="280" y="28" text-anchor="middle" font-size="16" font-weight="bold" fill="#333">財政力指数と自主財源の割合</text>
+  <rect x="70" y="55" width="460" height="460" fill="#f9fafb" stroke="#d1d5db"/>
+  <line x1="70" y1="55" x2="70" y2="515" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="70" y="531" text-anchor="middle" font-size="9" fill="#6b7280">0.2</text>
+  <line x1="172.22222222222223" y1="55" x2="172.22222222222223" y2="515" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="172.22222222222223" y="531" text-anchor="middle" font-size="9" fill="#6b7280">0.4</text>
+  <line x1="274.44444444444446" y1="55" x2="274.44444444444446" y2="515" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="274.44444444444446" y="531" text-anchor="middle" font-size="9" fill="#6b7280">0.6</text>
+  <line x1="376.66666666666663" y1="55" x2="376.66666666666663" y2="515" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="376.66666666666663" y="531" text-anchor="middle" font-size="9" fill="#6b7280">0.8</text>
+  <line x1="478.88888888888886" y1="55" x2="478.88888888888886" y2="515" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="478.88888888888886" y="531" text-anchor="middle" font-size="9" fill="#6b7280">1.0</text>
+  <line x1="70" y1="515" x2="530" y2="515" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="62" y="518" text-anchor="end" font-size="9" fill="#6b7280">20</text>
+  <line x1="70" y1="453.6666666666667" x2="530" y2="453.6666666666667" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="62" y="456.6666666666667" text-anchor="end" font-size="9" fill="#6b7280">30</text>
+  <line x1="70" y1="392.3333333333333" x2="530" y2="392.3333333333333" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="62" y="395.3333333333333" text-anchor="end" font-size="9" fill="#6b7280">40</text>
+  <line x1="70" y1="331" x2="530" y2="331" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="62" y="334" text-anchor="end" font-size="9" fill="#6b7280">50</text>
+  <line x1="70" y1="269.66666666666663" x2="530" y2="269.66666666666663" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="62" y="272.66666666666663" text-anchor="end" font-size="9" fill="#6b7280">60</text>
+  <line x1="70" y1="208.33333333333337" x2="530" y2="208.33333333333337" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="62" y="211.33333333333337" text-anchor="end" font-size="9" fill="#6b7280">70</text>
+  <line x1="70" y1="147" x2="530" y2="147" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="62" y="150" text-anchor="end" font-size="9" fill="#6b7280">80</text>
+  <line x1="70" y1="85.66666666666669" x2="530" y2="85.66666666666669" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="62" y="88.66666666666669" text-anchor="end" font-size="9" fill="#6b7280">90</text>
+  <text x="280" y="570" text-anchor="middle" font-size="11" fill="#555">財政力指数</text>
+  <text x="14" y="285" text-anchor="middle" font-size="11" fill="#555" transform="rotate(-90,14,285)">自主財源の割合（%）</text>
+  <line x1="220.15193853427897" y1="55" x2="220.15193853427897" y2="515" stroke="#9ca3af" stroke-dasharray="4,3" opacity="0.6"/>
+  <line x1="70" y1="350.63971631205663" x2="530" y2="350.63971631205663" stroke="#9ca3af" stroke-dasharray="4,3" opacity="0.6"/>
+  <circle cx="511.58466666666664" cy="91.18666666666672" r="4.5" fill="#66bb6a" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>東京都：財政力指数1.06 自主財源89.1%</title>
+  </circle>
+  <text x="505.58466666666664" y="85.18666666666672" font-size="8" fill="#374151" text-anchor="end">東京都</text>
+  <circle cx="411.10022222222216" cy="252.49333333333334" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>愛知県：財政力指数0.87 自主財源62.8%</title>
+  </circle>
+  <text x="417.10022222222216" y="248.49333333333334" font-size="8" fill="#374151" text-anchor="start">愛知県</text>
+  <circle cx="399.66666666666663" cy="245.13333333333333" r="4.5" fill="#66bb6a" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>神奈川県：財政力指数0.84 自主財源64%</title>
+  </circle>
+  <text x="349.66666666666663" y="239.13333333333333" font-size="8" fill="#374151" text-anchor="end">神奈川県</text>
+  <circle cx="348.5555555555555" cy="266.6" r="4.5" fill="#66bb6a" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>千葉県：財政力指数0.74 自主財源60.5%</title>
+  </circle>
+  <text x="354.5555555555555" y="276.6" font-size="8" fill="#374151" text-anchor="start">千葉県</text>
+  <circle cx="346.9557777777778" cy="248.81333333333333" r="4.5" fill="#ffa726" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>大阪府：財政力指数0.74 自主財源63.4%</title>
+  </circle>
+  <text x="352.9557777777778" y="242.81333333333333" font-size="8" fill="#374151" text-anchor="start">大阪府</text>
+  <circle cx="345.40199999999993" cy="303.4" r="4.5" fill="#66bb6a" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>埼玉県：財政力指数0.74 自主財源54.5%</title>
+  </circle>
+  <text x="351.40199999999993" y="299.4" font-size="8" fill="#374151" text-anchor="start">埼玉県</text>
+  <circle cx="313.61088888888884" cy="331.61333333333334" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>静岡県：財政力指数0.68 自主財源49.9%</title>
+  </circle>
+  <text x="319.61088888888884" y="327.61333333333334" font-size="8" fill="#374151" text-anchor="start">静岡県</text>
+  <circle cx="285.30555555555554" cy="316.28" r="4.5" fill="#66bb6a" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>茨城県：財政力指数0.62 自主財源52.4%</title>
+  </circle>
+  <circle cx="284.80466666666666" cy="289.29333333333335" r="4.5" fill="#ab47bc" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>福岡県：財政力指数0.62 自主財源56.8%</title>
+  </circle>
+  <text x="290.80466666666666" y="285.29333333333335" font-size="8" fill="#374151" text-anchor="start">福岡県</text>
+  <circle cx="280.6646666666666" cy="269.0533333333333" r="4.5" fill="#ffa726" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>兵庫県：財政力指数0.61 自主財源60.1%</title>
+  </circle>
+  <circle cx="279.5708888888888" cy="299.72" r="4.5" fill="#66bb6a" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>栃木県：財政力指数0.61 自主財源55.1%</title>
+  </circle>
+  <circle cx="273.91288888888886" cy="299.72" r="4.5" fill="#66bb6a" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>群馬県：財政力指数0.60 自主財源55.1%</title>
+  </circle>
+  <circle cx="269.74733333333324" cy="297.26666666666665" r="4.5" fill="#42a5f5" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>宮城県：財政力指数0.59 自主財源55.5%</title>
+  </circle>
+  <circle cx="265.4233333333333" cy="331.61333333333334" r="4.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>広島県：財政力指数0.58 自主財源49.9%</title>
+  </circle>
+  <circle cx="257.03599999999994" cy="356.14666666666665" r="4.5" fill="#ffa726" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>三重県：財政力指数0.57 自主財源45.9%</title>
+  </circle>
+  <circle cx="254.44466666666662" cy="325.48" r="4.5" fill="#ffa726" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>京都府：財政力指数0.56 自主財源50.9%</title>
+  </circle>
+  <circle cx="240.51177777777775" cy="364.12" r="4.5" fill="#ffa726" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>滋賀県：財政力指数0.53 自主財源44.6%</title>
+  </circle>
+  <circle cx="237.118" cy="378.84" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>岐阜県：財政力指数0.53 自主財源42.2%</title>
+  </circle>
+  <circle cx="230.19755555555554" cy="357.9866666666667" r="4.5" fill="#42a5f5" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>福島県：財政力指数0.51 自主財源45.6%</title>
+  </circle>
+  <circle cx="227.43755555555552" cy="338.9733333333333" r="4.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>岡山県：財政力指数0.51 自主財源48.7%</title>
+  </circle>
+  <circle cx="224.88199999999995" cy="340.2" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>長野県：財政力指数0.50 自主財源48.5%</title>
+  </circle>
+  <circle cx="215.6411111111111" cy="367.18666666666667" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>石川県：財政力指数0.48 自主財源44.1%</title>
+  </circle>
+  <circle cx="199.54622222222218" cy="331.61333333333334" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>富山県：財政力指数0.45 自主財源49.9%</title>
+  </circle>
+  <circle cx="198.47799999999998" cy="350.0133333333333" r="4.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>香川県：財政力指数0.45 自主財源46.9%</title>
+  </circle>
+  <circle cx="198.42688888888887" cy="357.37333333333333" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>新潟県：財政力指数0.45 自主財源45.7%</title>
+  </circle>
+  <circle cx="194.82355555555554" cy="377.61333333333334" r="4.5" fill="#42a5f5" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>北海道：財政力指数0.44 自主財源42.4%</title>
+  </circle>
+  <text x="200.82355555555554" y="373.61333333333334" font-size="8" fill="#374151" text-anchor="start">北海道</text>
+  <circle cx="187.03422222222218" cy="348.1733333333333" r="4.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>山口県：財政力指数0.43 自主財源47.2%</title>
+  </circle>
+  <circle cx="183.4513333333333" cy="359.21333333333337" r="4.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>愛媛県：財政力指数0.42 自主財源45.4%</title>
+  </circle>
+  <circle cx="177.0931111111111" cy="423.61333333333334" r="4.5" fill="#ffa726" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>奈良県：財政力指数0.41 自主財源34.9%</title>
+  </circle>
+  <circle cx="172.764" cy="394.78666666666663" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>福井県：財政力指数0.40 自主財源39.6%</title>
+  </circle>
+  <circle cx="170.7042222222222" cy="388.03999999999996" r="4.5" fill="#ab47bc" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>熊本県：財政力指数0.40 自主財源40.7%</title>
+  </circle>
+  <circle cx="158.63177777777776" cy="361.05333333333334" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>山梨県：財政力指数0.37 自主財源45.1%</title>
+  </circle>
+  <circle cx="157.584" cy="383.1333333333333" r="4.5" fill="#ab47bc" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>大分県：財政力指数0.37 自主財源41.5%</title>
+  </circle>
+  <circle cx="151.59377777777775" cy="375.7733333333333" r="4.5" fill="#42a5f5" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>山形県：財政力指数0.36 自主財源42.7%</title>
+  </circle>
+  <circle cx="151.58355555555553" cy="415.0266666666667" r="4.5" fill="#ab47bc" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>沖縄県：財政力指数0.36 自主財源36.3%</title>
+  </circle>
+  <text x="157.58355555555553" y="411.0266666666667" font-size="8" fill="#374151" text-anchor="start">沖縄県</text>
+  <circle cx="148.54755555555553" cy="347.56000000000006" r="4.5" fill="#42a5f5" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>岩手県：財政力指数0.35 自主財源47.3%</title>
+  </circle>
+  <circle cx="142.58288888888887" cy="391.1066666666667" r="4.5" fill="#42a5f5" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>青森県：財政力指数0.34 自主財源40.2%</title>
+  </circle>
+  <circle cx="142.02066666666667" cy="393.56" r="4.5" fill="#ab47bc" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>佐賀県：財政力指数0.34 自主財源39.8%</title>
+  </circle>
+  <circle cx="141.98488888888886" cy="394.1733333333333" r="4.5" fill="#ab47bc" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>宮崎県：財政力指数0.34 自主財源39.7%</title>
+  </circle>
+  <circle cx="140.88088888888888" cy="428.52" r="4.5" fill="#ab47bc" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>鹿児島県：財政力指数0.34 自主財源34.1%</title>
+  </circle>
+  <circle cx="137.78866666666664" cy="432.2" r="4.5" fill="#ab47bc" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>長崎県：財政力指数0.33 自主財源33.5%</title>
+  </circle>
+  <circle cx="130.17822222222222" cy="413.8" r="4.5" fill="#ffa726" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>和歌山県：財政力指数0.32 自主財源36.5%</title>
+  </circle>
+  <circle cx="127.24444444444444" cy="371.48" r="4.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>徳島県：財政力指数0.31 自主財源43.4%</title>
+  </circle>
+  <circle cx="125.91555555555554" cy="418.09333333333336" r="4.5" fill="#42a5f5" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>秋田県：財政力指数0.31 自主財源35.8%</title>
+  </circle>
+  <circle cx="105.99755555555555" cy="464.0933333333333" r="4.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>鳥取県：財政力指数0.27 自主財源28.3%</title>
+  </circle>
+  <text x="111.99755555555555" y="460.0933333333333" font-size="8" fill="#374151" text-anchor="start">鳥取県</text>
+  <circle cx="101.24933333333331" cy="480.04" r="4.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>高知県：財政力指数0.26 自主財源25.7%</title>
+  </circle>
+  <text x="107.24933333333331" y="488.04" font-size="8" fill="#374151" text-anchor="start">高知県</text>
+  <circle cx="97.46199999999999" cy="408.8933333333333" r="4.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>島根県：財政力指数0.25 自主財源37.3%</title>
+  </circle>
+  <text x="103.46199999999999" y="416.8933333333333" font-size="8" fill="#374151" text-anchor="start">島根県</text>
+  <circle cx="86" cy="65" r="5" fill="#42a5f5" opacity="0.8"/>
+  <text x="96" y="69" font-size="8" fill="#555">北海道・東北</text>
+  <circle cx="86" cy="81" r="5" fill="#66bb6a" opacity="0.8"/>
+  <text x="96" y="85" font-size="8" fill="#555">関東</text>
+  <circle cx="86" cy="97" r="5" fill="#fdd835" opacity="0.8"/>
+  <text x="96" y="101" font-size="8" fill="#555">中部</text>
+  <circle cx="86" cy="113" r="5" fill="#ffa726" opacity="0.8"/>
+  <text x="96" y="117" font-size="8" fill="#555">近畿</text>
+  <circle cx="86" cy="129" r="5" fill="#ef5350" opacity="0.8"/>
+  <text x="96" y="133" font-size="8" fill="#555">中国・四国</text>
+  <circle cx="86" cy="145" r="5" fill="#ab47bc" opacity="0.8"/>
+  <text x="96" y="149" font-size="8" fill="#555">九州・沖縄</text>
+</svg>

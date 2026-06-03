@@ -1,0 +1,50 @@
+<svg width="780" height="400" viewBox="0 0 680 400" xmlns="http://www.w3.org/2000/svg" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" role="img" aria-label="延べ宿泊者数 全国推移（2009〜2024）">
+  <title>延べ宿泊者数 全国推移（2009〜2024）</title>
+  <rect width="680" height="400" fill="#fafafa" rx="8"/>
+  <text x="340" y="28" text-anchor="middle" font-size="16" font-weight="bold" fill="#333">延べ宿泊者数 全国推移</text>
+  <rect x="60" y="60" width="590" height="290" fill="#f9fafb" stroke="#d1d5db"/>
+  <line x1="60" y1="350" x2="650" y2="350" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="52" y="354" text-anchor="end" font-size="9" fill="#6b7280">0</text>
+  <line x1="60" y1="301.6666666666667" x2="650" y2="301.6666666666667" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="52" y="305.6666666666667" text-anchor="end" font-size="9" fill="#6b7280">1</text>
+  <line x1="60" y1="253.33333333333334" x2="650" y2="253.33333333333334" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="52" y="257.33333333333337" text-anchor="end" font-size="9" fill="#6b7280">2</text>
+  <line x1="60" y1="205" x2="650" y2="205" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="52" y="209" text-anchor="end" font-size="9" fill="#6b7280">3</text>
+  <line x1="60" y1="156.66666666666669" x2="650" y2="156.66666666666669" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="52" y="160.66666666666669" text-anchor="end" font-size="9" fill="#6b7280">4</text>
+  <line x1="60" y1="108.33333333333331" x2="650" y2="108.33333333333331" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="52" y="112.33333333333331" text-anchor="end" font-size="9" fill="#6b7280">5</text>
+  <line x1="60" y1="60" x2="650" y2="60" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="52" y="64" text-anchor="end" font-size="9" fill="#6b7280">6</text>
+  <text x="52" y="50" text-anchor="end" font-size="9" fill="#6b7280">億人泊</text>
+  <text x="60" y="368" text-anchor="middle" font-size="9" fill="#6b7280">2009</text>
+  <text x="99.33333333333334" y="368" text-anchor="middle" font-size="9" fill="#6b7280">2010</text>
+  <text x="138.66666666666669" y="368" text-anchor="middle" font-size="9" fill="#6b7280">2011</text>
+  <text x="178" y="368" text-anchor="middle" font-size="9" fill="#6b7280">2012</text>
+  <text x="217.33333333333334" y="368" text-anchor="middle" font-size="9" fill="#6b7280">2013</text>
+  <text x="256.66666666666663" y="368" text-anchor="middle" font-size="9" fill="#6b7280">2014</text>
+  <text x="296" y="368" text-anchor="middle" font-size="9" fill="#6b7280">2015</text>
+  <text x="335.3333333333333" y="368" text-anchor="middle" font-size="9" fill="#6b7280">2016</text>
+  <text x="374.6666666666667" y="368" text-anchor="middle" font-size="9" fill="#6b7280">2017</text>
+  <text x="414" y="368" text-anchor="middle" font-size="9" fill="#6b7280">2018</text>
+  <text x="453.3333333333333" y="368" text-anchor="middle" font-size="9" fill="#6b7280">2019</text>
+  <text x="492.66666666666663" y="368" text-anchor="middle" font-size="9" fill="#6b7280">2020</text>
+  <text x="532" y="368" text-anchor="middle" font-size="9" fill="#6b7280">2021</text>
+  <text x="571.3333333333334" y="368" text-anchor="middle" font-size="9" fill="#6b7280">2022</text>
+  <text x="610.6666666666666" y="368" text-anchor="middle" font-size="9" fill="#6b7280">2023</text>
+  <text x="650" y="368" text-anchor="middle" font-size="9" fill="#6b7280">2024</text>
+  <line x1="60" y1="60" x2="60" y2="350" stroke="#999"/>
+  <line x1="60" y1="350" x2="650" y2="350" stroke="#999"/>
+  <polyline points="60,204.36976233333334 99.33333333333334,181.40206683333335 138.66666666666669,185.98621766666668 178,176.02648183333332 217.33333333333334,165.2643546666667 256.66666666666663,158.52948650000002 296,147.46787633333332 335.3333333333333,148.62635866666665 374.6666666666667,141.18920233333336 414,131.29245933333334 453.3333333333333,107.85972949999999 492.66666666666663,221.12923933333332 532,224.87622299999998 571.3333333333334,167.70088633333336 610.6666666666666,108.3795835 650,88.4810691666667" fill="none" stroke="#1565c0" stroke-width="2.5" stroke-linejoin="round"/>
+  <circle cx="60" cy="204.36976233333334" r="3.5" fill="#fff" stroke="#1565c0" stroke-width="2"/>
+  <circle cx="138.66666666666669" cy="185.98621766666668" r="3.5" fill="#fff" stroke="#1565c0" stroke-width="2"/>
+  <circle cx="453.3333333333333" cy="107.85972949999999" r="3.5" fill="#fff" stroke="#1565c0" stroke-width="2"/>
+  <circle cx="492.66666666666663" cy="221.12923933333332" r="3.5" fill="#fff" stroke="#1565c0" stroke-width="2"/>
+  <circle cx="650" cy="88.4810691666667" r="3.5" fill="#fff" stroke="#1565c0" stroke-width="2"/>
+  <text x="138.66666666666669" y="175.98621766666668" text-anchor="middle" font-size="8" fill="#666">東日本大震災</text>
+  <text x="453.3333333333333" y="97.85972949999999" text-anchor="middle" font-size="9" font-weight="bold" fill="#1565c0">5.0億泊</text>
+  <text x="492.66666666666663" y="241.12923933333332" text-anchor="middle" font-size="8" fill="#666">コロナ禍</text>
+  <text x="645" y="76.4810691666667" text-anchor="end" font-size="9" font-weight="bold" fill="#1565c0">5.4億泊</text>
+  <text x="645" y="87.4810691666667" text-anchor="end" font-size="8" fill="#e65100">過去最多</text>
+</svg>

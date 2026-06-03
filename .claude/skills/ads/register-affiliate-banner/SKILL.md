@@ -93,31 +93,41 @@ article.md に `<affiliate-banner>` タグを記述:
    - `TAG_AFFILIATE_MAP` にタグマッピングを追加
    - `AFFILIATE_THEME` にテーマカラーを追加
 
-### Phase 3: バナー登録
+### Phase 3: バナー登録 ★SSOT = `apps/web/scripts/affiliate-ads-data.ts`（完全DBレス）
 
-4. `apps/web/src/features/ads/constants/affiliate-category.ts` の `AFFILIATE_BANNERS` にバナーを追加:
+> **2026-06 更新**: 広告の SSOT は **git TS `apps/web/scripts/affiliate-ads-data.ts` の `AFFILIATE_ADS: AffiliateAd[]`**。
+> `export-affiliate-ads-snapshot.ts` が R2 `app/affiliate-ads/all.json` を生成し、`resolve-affiliate-ad.ts` が配信時に解決する。
+> （旧 `affiliate-category.ts` の `AFFILIATE_BANNERS` 定数は使わない。残置していても編集対象ではない。）
+
+4. `apps/web/scripts/affiliate-ads-data.ts` の `AFFILIATE_ADS` 配列にエントリを追加:
 
 ```typescript
-export const AFFILIATE_BANNERS: Partial<Record<AffiliateCategory, AffiliateBannerConfig[]>> = {
-  // 既存カテゴリに追加する場合は配列に push
-  economy: [
-    { /* 既存バナー */ },
-    {
-      src: "バナー画像URL",
-      href: "クリックURL",
-      tracking: "計測ピクセルURL",
-      width: 300,
-      height: 250,
-    },
-  ],
-};
+{
+  "id": "af_<service>_<categoryKey>_001",  // 一意。同一広告を複数枠に出すなら枠ごとに別 id
+  "title": "サービス名",                    // banner は内部ラベル / text は表示文言
+  "htmlContent": "https://px.a8.net/svt/ejp?a8mat=...",   // クリックURL
+  "areaCode": null,
+  "categoryKey": "economy",   // ★ CATEGORY_AFFILIATE_MAP のキーと一致 (laborwage/economy/population/...)
+  "locationCode": "blog-bottom", // blog-bottom / sidebar-bottom / area-sidebar / sidebar-sticky
+  "isActive": true,
+  "priority": 80,             // 大きいほど優先 (blog等は上位N件、area-sidebarは上位2件のゼロサム)
+  "startDate": null, "endDate": null, "targetCategories": null,
+  "adType": "banner",         // "banner" or "text"
+  "imageUrl": "https://www22.a8.net/svt/bgt?aid=...",      // banner のみ
+  "trackingPixelUrl": "https://www12.a8.net/0.gif?a8mat=...",
+  "width": 300, "height": 250,
+  "createdAt": "YYYY-MM-DD 00:00:00", "updatedAt": "YYYY-MM-DD 00:00:00"
+}
 ```
 
-5. 必要に応じて `TAG_AFFILIATE_MAP` にタグを追加（記事のタグ一覧は以下で確認）:
+- **全カテゴリ横断で出す**場合は categoryKey を変えて 8〜9 件複製（既存 STRATEGY CAREER / AI Agent Camp / 合宿免許 が手本）。
+- **配置と解決の対応**（`resolve-affiliate-ad.ts` / `affiliate-ad-snapshot.ts`）:
+  - blog / ranking / category / tag / theme = `categoryKey + adType` で priority 上位 N件（**locationCode 非依存**）
+  - area ページ = `locationCode="area-sidebar"` の banner を上位2件
+  - ランキングサイドバーのテキスト = `locationCode="sidebar-bottom"` の `adType:"text"`
+- categoryKey の対応: `apps/web/src/features/ads/constants/affiliate-category.ts` の `CATEGORY_AFFILIATE_MAP`。
 
-```bash
-cat .local/r2/blog/*/article.md | grep -E "^  - " | sed "s/^  - //" | sort | uniq -c | sort -rn
-```
+5. 反映（R2 公開）は **develop への push で `publish-affiliate-ads.yml` が自動発火**（workflow_dispatch ではない）。ローカルからの R2 push は不可。
 
 ### Phase 4: 手動配置（オプション）
 
@@ -136,10 +146,13 @@ cat .local/r2/blog/*/article.md | grep -E "^  - " | sed "s/^  - //" | sort | uni
 
 | ファイル | 役割 |
 |---|---|
-| `apps/web/src/features/ads/constants/affiliate-category.ts` | カテゴリ定義・タグマッピング・バナー設定 |
-| `apps/web/src/features/blog/components/article-affiliate-banner.tsx` | 記事末尾のバナー表示コンポーネント |
-| `apps/web/src/features/blog/components/md-content.tsx` | 記事内 `<affiliate-banner>` のレンダリング |
-| `apps/web/src/app/blog/[slug]/page.tsx` | ブログ記事ページ（バナーコンポーネント配置） |
+| `apps/web/scripts/affiliate-ads-data.ts` | **★広告 SSOT** (`AFFILIATE_ADS: AffiliateAd[]`、git TS) |
+| `apps/web/scripts/export-affiliate-ads-snapshot.ts` | SSOT → R2 `app/affiliate-ads/all.json` 生成 |
+| `apps/web/src/features/ads/services/resolve-affiliate-ad.ts` | 配信時の解決 (categoryKey/location/priority) |
+| `apps/web/src/features/ads/repositories/affiliate-ad-snapshot.ts` | R2 snapshot reader (location/adType フィルタ) |
+| `apps/web/src/features/ads/constants/affiliate-category.ts` | `CATEGORY_AFFILIATE_MAP`・`TAG_AFFILIATE_MAP`（旧 `AFFILIATE_BANNERS` は不使用） |
+| `.github/workflows/publish-affiliate-ads.yml` | develop push で R2 反映 |
+| `apps/web/src/features/blog/components/md-content.tsx` | 記事内 `<affiliate-banner>` の手動レンダリング |
 
 ## バナーサイズの推奨
 
