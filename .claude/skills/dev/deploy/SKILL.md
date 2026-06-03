@@ -216,6 +216,24 @@ git push origin --delete $CURRENT_BRANCH 2>/dev/null || true  # リモート削�
 - PR URL とマージ時刻
 - Cloudflare デプロイ完了確認 (`gh run list --branch main --workflow "Deploy to Cloudflare Workers" --limit 1`)
 
+### Step 7.5: 本番 URL の実応答確認（★ranking 活性化 / URL 構造 / metric isActive 変更時は必須）
+
+**「deploy success」は「本番に意図どおり反映された」を意味しない。** 本番アプリはコードだけでなく R2 snapshot や派生リスト（`KNOWN_RANKING_KEYS` / `all.json` 等）と整合して初めて意図どおり応答する。以下を含むデプロイは、main マージ + Cloudflare deploy success の後に **本番 URL の HTTP status を Googlebot UA で実測**し、意図（200 / 301 / 410）と一致するか確認する。
+
+対象変更:
+- ranking metric の `isActive` 変更 / `GONE_RANKING_KEYS`・`KNOWN_RANKING_KEYS` 等の編集
+- middleware の 301 / 410 ルール / URL 構造変更
+
+```bash
+# 期待 status を意図と照合（公開したはずなら 200、消したはずなら 410）
+curl -s -o /dev/null -w "%{http_code}\n" \
+  -A "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)" \
+  "https://stats47.jp/<path>"
+# CDN キャッシュ疑いは ?cb=$(date +%s) を付けてオリジン Worker の応答を直接確認
+```
+
+不一致なら未完（例: ranking を `isActive:true` にしても `KNOWN_RANKING_KEYS` / R2 `all.json` 未反映だと middleware の `isGone || !isKnown` で 410 のまま）。ranking 公開の多段依存は memory `project_ranking_publish_pipeline_gap` / `docs/50_Issues/feature-backlog.md`「122 metric (完全データ) の本番公開」参照。
+
 ### Step 8: Cloudflare Purge 自動実行の判定
 
 以下のいずれかに該当する変更が含まれる場合、**`/purge-cdn` を Claude が自動実行**する（ダッシュボード操作不要）。
@@ -229,6 +247,8 @@ git push origin --delete $CURRENT_BRANCH 2>/dev/null || true  # リモート削�
 **理由**: 本番の HTML 200 応答は `Cache-Control: s-maxage=86400` で Cloudflare エッジに最大 24 時間キャッシュされる。middleware ルール変更を即時反映するには Purge が必要。
 
 実行: `/purge-cdn` スキル。影響範囲を 1 行で宣言してから実行。
+
+> **purge は CI 専任 (ローカル token 無し)**: `.env.local` の Cloudflare purge token は CI 専任化で削除済。ローカルからは `gh workflow run purge-cdn.yml` (input 無し=全パージ / `-f prefix=app/ranking`=R2 prefix) で dispatch する。`purge-cdn.yml` に特定ページ URL の `--urls` input は無いため、ページ HTML をピンポイント purge したい場合も全パージになる。**410 応答は `s-maxage=604800` で最大 7 日**エッジキャッシュされるので、`GONE_RANKING_KEYS` 等の gone リスト変更後は purge 必須 (purge しないと旧 410 が残る)。
 
 sitemap / middleware と無関係 (blog 記事追加のみ、バグ修正のみ等) の場合は Step 8 全体をスキップ。
 
