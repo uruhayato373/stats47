@@ -205,6 +205,16 @@ export interface MetricConfig {
   additionalCategories?: string[];
   /** group_key — テーマダッシュボードでの集約用 */
   groupKey?: string;
+  /**
+   * 調査 ID (surveys master への参照)。RankingItem.surveyId の SSOT。
+   * statsDataId から決定的に導出できない editorial データのため config が保持する。
+   */
+  surveyId?: string;
+  /**
+   * 関連タグの tagKey 配列 (例: ["population", "aging"])。RankingItem.tags の SSOT。
+   * 手動付与の editorial データ。builder で { tagKey } 形に写像する。
+   */
+  tags?: string[];
   /** SEO */
   seoTitle?: string;
   seoDescription?: string;
