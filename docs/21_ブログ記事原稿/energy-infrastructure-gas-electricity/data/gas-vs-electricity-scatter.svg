@@ -1,0 +1,87 @@
+<svg width="700" height="700" viewBox="0 0 560 560" xmlns="http://www.w3.org/2000/svg" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" role="img" aria-label="都市ガス世帯比率 vs 電力需要量">
+<title>都市ガス世帯比率 vs 電力需要量</title>
+<rect width="560" height="560" fill="#fafafa" rx="8"/>
+<text x="280" y="28" text-anchor="middle" font-size="16" font-weight="bold" fill="#333">都市ガス世帯比率 vs 電力需要量</text>
+<rect x="65" y="65" width="465" height="440" fill="#f9fafb" stroke="#d1d5db"/>
+<line x1="65" y1="65" x2="65" y2="505" stroke="#e5e7eb" stroke-width="0.5"/>
+<text x="65" y="519" text-anchor="middle" font-size="8" fill="#6b7280">23.4</text>
+<line x1="158" y1="65" x2="158" y2="505" stroke="#e5e7eb" stroke-width="0.5"/>
+<text x="158" y="519" text-anchor="middle" font-size="8" fill="#6b7280">40.1</text>
+<line x1="251" y1="65" x2="251" y2="505" stroke="#e5e7eb" stroke-width="0.5"/>
+<text x="251" y="519" text-anchor="middle" font-size="8" fill="#6b7280">56.7</text>
+<line x1="343.99999999999994" y1="65" x2="343.99999999999994" y2="505" stroke="#e5e7eb" stroke-width="0.5"/>
+<text x="343.99999999999994" y="519" text-anchor="middle" font-size="8" fill="#6b7280">73.4</text>
+<line x1="437" y1="65" x2="437" y2="505" stroke="#e5e7eb" stroke-width="0.5"/>
+<text x="437" y="519" text-anchor="middle" font-size="8" fill="#6b7280">90.0</text>
+<line x1="530" y1="65" x2="530" y2="505" stroke="#e5e7eb" stroke-width="0.5"/>
+<text x="530" y="519" text-anchor="middle" font-size="8" fill="#6b7280">106.7</text>
+<line x1="65" y1="505" x2="530" y2="505" stroke="#e5e7eb" stroke-width="0.5"/>
+<text x="60" y="508" text-anchor="end" font-size="8" fill="#6b7280">3416535.0</text>
+<line x1="65" y1="417" x2="530" y2="417" stroke="#e5e7eb" stroke-width="0.5"/>
+<text x="60" y="420" text-anchor="end" font-size="8" fill="#6b7280">17837598.6</text>
+<line x1="65" y1="329" x2="530" y2="329" stroke="#e5e7eb" stroke-width="0.5"/>
+<text x="60" y="332" text-anchor="end" font-size="8" fill="#6b7280">32258662.2</text>
+<line x1="65" y1="241" x2="530" y2="241" stroke="#e5e7eb" stroke-width="0.5"/>
+<text x="60" y="244" text-anchor="end" font-size="8" fill="#6b7280">46679725.8</text>
+<line x1="65" y1="153.00000000000006" x2="530" y2="153.00000000000006" stroke="#e5e7eb" stroke-width="0.5"/>
+<text x="60" y="156.00000000000006" text-anchor="end" font-size="8" fill="#6b7280">61100789.4</text>
+<line x1="65" y1="65" x2="530" y2="65" stroke="#e5e7eb" stroke-width="0.5"/>
+<text x="60" y="68" text-anchor="end" font-size="8" fill="#6b7280">75521853.0</text>
+<line x1="237.12280656943616" y1="65" x2="237.12280656943616" y2="505" stroke="#9ca3af" stroke-dasharray="4,3" opacity="0.6"/>
+<line x1="65" y1="420.76234758587964" x2="530" y2="420.76234758587964" stroke="#9ca3af" stroke-dasharray="4,3" opacity="0.6"/>
+<circle cx="530" cy="200.59502060583105" r="4.5" fill="#ffa726" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>大阪府：都市ガス世帯比率=106.7 電力需要量=53301121</title></circle>
+<text x="536" y="194.59502060583105" font-size="8" fill="#374151">大阪</text>
+<circle cx="509.34573829531803" cy="65" r="4.5" fill="#66bb6a" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>東京都：都市ガス世帯比率=103 電力需要量=75521853</title></circle>
+<text x="515.345738295318" y="59" font-size="8" fill="#374151">東京</text>
+<circle cx="496.5066026410564" cy="244.12088204090577" r="4.5" fill="#66bb6a" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>神奈川県：都市ガス世帯比率=100.7 電力需要量=46168289</title></circle>
+<text x="502.5066026410564" y="238.12088204090577" font-size="8" fill="#374151">神奈川</text>
+<circle cx="453.52340936374543" cy="303.20770002012887" r="4.5" fill="#66bb6a" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>埼玉県：都市ガス世帯比率=93 電力需要量=36485394</title></circle>
+<text x="459.52340936374543" y="297.20770002012887" font-size="8" fill="#374151">埼玉</text>
+<circle cx="452.40696278511405" cy="315.12590832759383" r="4.5" fill="#66bb6a" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>千葉県：都市ガス世帯比率=92.8 電力需要量=34532289</title></circle>
+<text x="458.40696278511405" y="309.12590832759383" font-size="8" fill="#374151">千葉</text>
+<circle cx="450.7322929171668" cy="183.39643284008542" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>愛知県：都市ガス世帯比率=92.5 電力需要量=56119552</title></circle>
+<text x="456.7322929171668" y="177.39643284008542" font-size="8" fill="#374151">愛知</text>
+<circle cx="439.5678271308522" cy="300.42016692860295" r="4.5" fill="#ffa726" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>兵庫県：都市ガス世帯比率=90.5 電力需要量=36942203</title></circle>
+<text x="445.5678271308522" y="294.42016692860295" font-size="8" fill="#374151">兵庫</text>
+<circle cx="432.3109243697479" cy="485.4972759429478" r="4.5" fill="#ffa726" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>奈良県：都市ガス世帯比率=89.2 電力需要量=6612558</title></circle>
+<text x="438.3109243697479" y="479.4972759429478" font-size="8" fill="#374151">奈良</text>
+<circle cx="421.70468187274906" cy="431.9349797472636" r="4.5" fill="#ffa726" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>京都府：都市ガス世帯比率=87.3 電力需要量=15390118</title></circle>
+<circle cx="394.3517406962785" cy="430.4334577652095" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>新潟県：都市ガス世帯比率=82.4 電力需要量=15636181</title></circle>
+<circle cx="332.9471788715486" cy="358.6104640714573" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>静岡県：都市ガス世帯比率=71.4 電力需要量=27406226</title></circle>
+<circle cx="311.73469387755097" cy="355.3219232733985" r="4.5" fill="#42a5f5" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>北海道：都市ガス世帯比率=67.6 電力需要量=27945138</title></circle>
+<circle cx="305.03601440576233" cy="441.43465409860613" r="4.5" fill="#42a5f5" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>宮城県：都市ガス世帯比率=66.4 電力需要量=13833352</title></circle>
+<circle cx="283.265306122449" cy="409.65205742522346" r="4.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>広島県：都市ガス世帯比率=62.5 電力需要量=19041748</title></circle>
+<circle cx="282.1488595438175" cy="342.288430792303" r="4.5" fill="#ab47bc" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>福岡県：都市ガス世帯比率=62.3 電力需要量=30081011</title></circle>
+<circle cx="267.07683073229293" cy="449.5852390526868" r="4.5" fill="#ffa726" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>滋賀県：都市ガス世帯比率=59.6 電力需要量=12497669</title></circle>
+<circle cx="244.74789915966386" cy="461.26536450473736" r="4.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>山口県：都市ガス世帯比率=55.6 電力需要量=10583580</title></circle>
+<circle cx="228.00120048019207" cy="434.3235031568684" r="4.5" fill="#66bb6a" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>群馬県：都市ガス世帯比率=52.6 電力需要量=14998697</title></circle>
+<circle cx="226.8847539015606" cy="408.12513204643244" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>三重県：都市ガス世帯比率=52.4 電力需要量=19291974</title></circle>
+<circle cx="225.21008403361344" cy="434.08484669605093" r="4.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>岡山県：都市ガス世帯比率=52.1 電力需要量=15037807</title></circle>
+<circle cx="223.53541416566623" cy="477.76920018576163" r="4.5" fill="#ab47bc" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>長崎県：都市ガス世帯比率=51.8 電力需要量=7879002</title></circle>
+<circle cx="221.30252100840335" cy="437.01553094877136" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>岐阜県：都市ガス世帯比率=51.4 電力需要量=14557539</title></circle>
+<circle cx="185.57623049219688" cy="437.56696101111436" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>長野県：都市ガス世帯比率=45 電力需要量=14467173</title></circle>
+<circle cx="178.87755102040813" cy="466.8575107039955" r="4.5" fill="#ab47bc" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>鹿児島県：都市ガス世帯比率=43.8 電力需要量=9667163</title></circle>
+<circle cx="178.31932773109244" cy="432.1507041963257" r="4.5" fill="#66bb6a" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>栃木県：都市ガス世帯比率=43.7 電力需要量=15354766</title></circle>
+<circle cx="174.41176470588235" cy="472.02839865431287" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>石川県：都市ガス世帯比率=43 電力需要量=8819780</title></circle>
+<circle cx="170.50420168067222" cy="385.7125016770608" r="4.5" fill="#66bb6a" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>茨城県：都市ガス世帯比率=42.3 電力需要量=22964860</title></circle>
+<circle cx="166.03841536614647" cy="463.294157998166" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>富山県：都市ガス世帯比率=41.5 電力需要量=10251110</title></circle>
+<circle cx="162.6890756302521" cy="475.8303406969234" r="4.5" fill="#ab47bc" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>大分県：都市ガス世帯比率=40.9 電力需要量=8196734</title></circle>
+<circle cx="162.13085234093637" cy="505" r="4.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>鳥取県：都市ガス世帯比率=40.8 電力需要量=3416535</title></circle>
+<circle cx="161.01440576230493" cy="490.94010167183507" r="4.5" fill="#ffa726" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>和歌山県：都市ガス世帯比率=40.6 電力需要量=5720611</title></circle>
+<circle cx="157.66506602641056" cy="482.83792535246846" r="4.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>香川県：都市ガス世帯比率=40 電力需要量=7048361</title></circle>
+<circle cx="154.87394957983193" cy="484.082411092064" r="4.5" fill="#42a5f5" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>秋田県：都市ガス世帯比率=39.5 電力需要量=6844420</title></circle>
+<circle cx="150.9663865546218" cy="456.8820306707475" r="4.5" fill="#ab47bc" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>熊本県：都市ガス世帯比率=38.8 電力需要量=11301902</title></circle>
+<circle cx="144.8259303721489" cy="436.5625535414739" r="4.5" fill="#42a5f5" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>福島県：都市ガス世帯比率=37.7 電力需要量=14631771</title></circle>
+<circle cx="139.2436974789916" cy="478.70614189649643" r="4.5" fill="#42a5f5" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>青森県：都市ガス世帯比率=36.7 電力需要量=7725460</title></circle>
+<circle cx="135.89435774309726" cy="485.5104566628497" r="4.5" fill="#ab47bc" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>宮崎県：都市ガス世帯比率=36.1 電力需要量=6610398</title></circle>
+<circle cx="134.77791116446576" cy="486.76113612036215" r="4.5" fill="#ab47bc" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>佐賀県：都市ガス世帯比率=35.9 電力需要量=6405442</title></circle>
+<circle cx="129.75390156062423" cy="478.74047279009295" r="4.5" fill="#ab47bc" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>沖縄県：都市ガス世帯比率=35 電力需要量=7719834</title></circle>
+<circle cx="113.56542617046819" cy="476.39332219573595" r="4.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>愛媛県：都市ガス世帯比率=32.1 電力需要量=8104475</title></circle>
+<circle cx="107.98319327731093" cy="469.95595012839414" r="4.5" fill="#42a5f5" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>岩手県：都市ガス世帯比率=31.1 電力需要量=9159404</title></circle>
+<circle cx="102.40096038415368" cy="478.62827191192747" r="4.5" fill="#42a5f5" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>山形県：都市ガス世帯比率=30.1 電力需要量=7738221</title></circle>
+<circle cx="102.40096038415368" cy="502.9414949671257" r="4.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>高知県：都市ガス世帯比率=30.1 電力需要量=3753874</title></circle>
+<circle cx="81.74669867947179" cy="496.2991138878273" r="4.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>島根県：都市ガス世帯比率=26.4 電力需要量=4842399</title></circle>
+<circle cx="80.07202881152462" cy="482.28200408186257" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>福井県：都市ガス世帯比率=26.1 電力需要量=7139463</title></circle>
+<circle cx="71.69867947178874" cy="490.91010943187297" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>山梨県：都市ガス世帯比率=24.6 電力需要量=5725526</title></circle>
+<circle cx="65" cy="489.74809472444184" r="4.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>徳島県：都市ガス世帯比率=23.4 電力需要量=5915952</title></circle>
+</svg>

@@ -1,0 +1,24 @@
+<svg width="960" height="398" viewBox="0 0 960 398" xmlns="http://www.w3.org/2000/svg" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" role="img" aria-label="この記事でわかったこと">
+<rect width="960" height="398" fill="#f9fafb"/>
+<text x="480" y="48" text-anchor="middle" font-size="26" font-weight="bold" fill="#1f2937">この記事でわかったこと</text>
+<rect x="50" y="78" width="860" height="80" fill="#ffffff" rx="8"/>
+<circle cx="94" cy="118" r="20" fill="#dc2626"/>
+<text x="94" y="125" text-anchor="middle" font-size="16" font-weight="bold" fill="#fff">1</text>
+<text x="130" y="110" font-size="18" font-weight="bold" fill="#1f2937">都市ガス到達率は大都市圏と地方で4倍以上の差</text>
+<text x="130" y="136" font-size="16" fill="#4b5563">大阪府106.7%に対し徳島県23.4%。地方はLPガス・灯油に依存</text>
+<rect x="50" y="158" width="860" height="80" fill="#f9fafb" rx="8"/>
+<circle cx="94" cy="198" r="20" fill="#ea580c"/>
+<text x="94" y="205" text-anchor="middle" font-size="16" font-weight="bold" fill="#fff">2</text>
+<text x="130" y="190" font-size="18" font-weight="bold" fill="#1f2937">「発電県」と「消費県」は一致しない</text>
+<text x="130" y="216" font-size="16" fill="#4b5563">発電上位は原発・火力の立地県。消費上位は東京・大阪・愛知などの大都市圏</text>
+<rect x="50" y="238" width="860" height="80" fill="#ffffff" rx="8"/>
+<circle cx="94" cy="278" r="20" fill="#0284c7"/>
+<text x="94" y="285" text-anchor="middle" font-size="16" font-weight="bold" fill="#fff">3</text>
+<text x="130" y="270" font-size="18" font-weight="bold" fill="#1f2937">ガソリン販売量は2004年をピークに減少傾向</text>
+<text x="130" y="296" font-size="16" fill="#4b5563">2004年の約6,000万KLから2023年は約4,500万KLに。EV普及・人口減が影響</text>
+<rect x="50" y="318" width="860" height="80" fill="#f9fafb" rx="8"/>
+<circle cx="94" cy="358" r="20" fill="#7c3aed"/>
+<text x="94" y="365" text-anchor="middle" font-size="16" font-weight="bold" fill="#fff">4</text>
+<text x="130" y="350" font-size="18" font-weight="bold" fill="#1f2937">脱炭素政策は地域のエネルギー構造に応じた設計が必要</text>
+<text x="130" y="376" font-size="16" fill="#4b5563">都市ガス普及率・自動車依存度・気候条件が異なり、一律の施策では格差が拡大するリスク</text>
+</svg>

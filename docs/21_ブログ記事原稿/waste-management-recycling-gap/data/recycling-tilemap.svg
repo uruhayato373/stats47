@@ -1,0 +1,204 @@
+<svg width="600" height="680" viewBox="0 0 600 680" xmlns="http://www.w3.org/2000/svg" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" role="img" aria-label="ごみリサイクル率（都道府県別）">
+<title>ごみリサイクル率（都道府県別）</title>
+<rect width="600" height="680" fill="#fafafa"/>
+<text x="300" y="28" text-anchor="middle" font-size="16" font-weight="bold" fill="#333">ごみリサイクル率（都道府県別）</text>
+<g aria-label="北海道 22.8%"><title>北海道：22.8%</title><rect x="491" y="55" width="74" height="74" rx="3" fill="#5caf60" stroke="#ffffff" stroke-width="1"/><text font-family="'Noto Sans JP',sans-serif" fill="#ffffff" text-anchor="middle"><tspan x="528" y="90" font-size="9" font-weight="700">北海道</tspan><tspan x="528" y="103" font-size="7">22.8</tspan></text></g>
+<g aria-label="青森 12.6%"><title>青森：12.6%</title><rect x="491" y="169" width="74" height="36" rx="3" fill="#e1f2e2" stroke="#ffffff" stroke-width="1"/><text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle"><tspan x="528" y="185" font-size="9" font-weight="700">青森</tspan><tspan x="528" y="198" font-size="7">12.6</tspan></text></g>
+<g aria-label="岩手 16.4%"><title>岩手：16.4%</title><rect x="529" y="207" width="36" height="36" rx="3" fill="#bde1be" stroke="#ffffff" stroke-width="1"/><text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle"><tspan x="547" y="223" font-size="8" font-weight="700">岩手</tspan><tspan x="547" y="236" font-size="7">16.4</tspan></text></g>
+<g aria-label="秋田 13.6%"><title>秋田：13.6%</title><rect x="491" y="207" width="36" height="36" rx="3" fill="#d8eed9" stroke="#ffffff" stroke-width="1"/><text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle"><tspan x="509" y="223" font-size="8" font-weight="700">秋田</tspan><tspan x="509" y="236" font-size="7">13.6</tspan></text></g>
+<g aria-label="宮城 15.3%"><title>宮城：15.3%</title><rect x="529" y="245" width="36" height="36" rx="3" fill="#c8e6c9" stroke="#ffffff" stroke-width="1"/><text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle"><tspan x="547" y="261" font-size="8" font-weight="700">宮城</tspan><tspan x="547" y="274" font-size="7">15.3</tspan></text></g>
+<g aria-label="山形 13.4%"><title>山形：13.4%</title><rect x="491" y="245" width="36" height="36" rx="3" fill="#daeedb" stroke="#ffffff" stroke-width="1"/><text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle"><tspan x="509" y="261" font-size="8" font-weight="700">山形</tspan><tspan x="509" y="274" font-size="7">13.4</tspan></text></g>
+<g aria-label="福島 13.2%"><title>福島：13.2%</title><rect x="491" y="283" width="74" height="36" rx="3" fill="#dcefdd" stroke="#ffffff" stroke-width="1"/><text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle"><tspan x="528" y="299" font-size="9" font-weight="700">福島</tspan><tspan x="528" y="312" font-size="7">13.2</tspan></text></g>
+<g aria-label="新潟 18.7%"><title>新潟：18.7%</title><rect x="415" y="283" width="74" height="36" rx="3" fill="#a5d6a7" stroke="#ffffff" stroke-width="1"/><text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle"><tspan x="452" y="299" font-size="9" font-weight="700">新潟</tspan><tspan x="452" y="312" font-size="7">18.7</tspan></text></g>
+<g aria-label="富山 21.4%"><title>富山：21.4%</title><rect x="377" y="283" width="36" height="36" rx="3" fill="#74c178" stroke="#ffffff" stroke-width="1"/><text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle"><tspan x="395" y="299" font-size="8" font-weight="700">富山</tspan><tspan x="395" y="312" font-size="7">21.4</tspan></text></g>
+<g aria-label="石川 12.9%"><title>石川：12.9%</title><rect x="339" y="283" width="36" height="36" rx="3" fill="#dff1e0" stroke="#ffffff" stroke-width="1"/><text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle"><tspan x="357" y="299" font-size="8" font-weight="700">石川</tspan><tspan x="357" y="312" font-size="7">12.9</tspan></text></g>
+<g aria-label="福井 12.7%"><title>福井：12.7%</title><rect x="339" y="321" width="36" height="36" rx="3" fill="#e1f1e2" stroke="#ffffff" stroke-width="1"/><text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle"><tspan x="357" y="337" font-size="8" font-weight="700">福井</tspan><tspan x="357" y="350" font-size="7">12.7</tspan></text></g>
+<g aria-label="岐阜 17.1%"><title>岐阜：17.1%</title><rect x="377" y="321" width="36" height="74" rx="3" fill="#b6deb7" stroke="#ffffff" stroke-width="1"/><text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle"><tspan x="395" y="356" font-size="8" font-weight="700">岐阜</tspan><tspan x="395" y="369" font-size="7">17.1</tspan></text></g>
+<g aria-label="長野 22.0%"><title>長野：22.0%</title><rect x="415" y="321" width="36" height="74" rx="3" fill="#69bc6d" stroke="#ffffff" stroke-width="1"/><text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle"><tspan x="433" y="356" font-size="8" font-weight="700">長野</tspan><tspan x="433" y="369" font-size="7">22.0</tspan></text></g>
+<g aria-label="群馬 13.8%"><title>群馬：13.8%</title><rect x="453" y="321" width="36" height="36" rx="3" fill="#d6edd7" stroke="#ffffff" stroke-width="1"/><text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle"><tspan x="471" y="337" font-size="8" font-weight="700">群馬</tspan><tspan x="471" y="350" font-size="7">13.8</tspan></text></g>
+<g aria-label="栃木 15.0%"><title>栃木：15.0%</title><rect x="491" y="321" width="36" height="36" rx="3" fill="#cbe7cc" stroke="#ffffff" stroke-width="1"/><text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle"><tspan x="509" y="337" font-size="8" font-weight="700">栃木</tspan><tspan x="509" y="350" font-size="7">15.0</tspan></text></g>
+<g aria-label="茨城 20.0%"><title>茨城：20.0%</title><rect x="529" y="321" width="36" height="36" rx="3" fill="#8ecc91" stroke="#ffffff" stroke-width="1"/><text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle"><tspan x="547" y="337" font-size="8" font-weight="700">茨城</tspan><tspan x="547" y="350" font-size="7">20.0</tspan></text></g>
+<g aria-label="山梨 15.6%"><title>山梨：15.6%</title><rect x="453" y="359" width="36" height="36" rx="3" fill="#c5e5c6" stroke="#ffffff" stroke-width="1"/><text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle"><tspan x="471" y="375" font-size="8" font-weight="700">山梨</tspan><tspan x="471" y="388" font-size="7">15.6</tspan></text></g>
+<g aria-label="埼玉 24.3%"><title>埼玉：24.3%</title><rect x="491" y="359" width="36" height="36" rx="3" fill="#439447" stroke="#ffffff" stroke-width="1"/><text font-family="'Noto Sans JP',sans-serif" fill="#ffffff" text-anchor="middle"><tspan x="509" y="375" font-size="8" font-weight="700">埼玉</tspan><tspan x="509" y="388" font-size="7">24.3</tspan></text></g>
+<g aria-label="千葉 22.6%"><title>千葉：22.6%</title><rect x="529" y="359" width="36" height="74" rx="3" fill="#5fb363" stroke="#ffffff" stroke-width="1"/><text font-family="'Noto Sans JP',sans-serif" fill="#ffffff" text-anchor="middle"><tspan x="547" y="394" font-size="8" font-weight="700">千葉</tspan><tspan x="547" y="407" font-size="7">22.6</tspan></text></g>
+<g aria-label="東京 24.9%"><title>東京：24.9%</title><rect x="491" y="397" width="36" height="36" rx="3" fill="#39893d" stroke="#ffffff" stroke-width="1"/><text font-family="'Noto Sans JP',sans-serif" fill="#ffffff" text-anchor="middle"><tspan x="509" y="413" font-size="8" font-weight="700">東京</tspan><tspan x="509" y="426" font-size="7">24.9</tspan></text></g>
+<g aria-label="神奈川 24.2%"><title>神奈川：24.2%</title><rect x="491" y="435" width="36" height="36" rx="3" fill="#459649" stroke="#ffffff" stroke-width="1"/><text font-family="'Noto Sans JP',sans-serif" fill="#ffffff" text-anchor="middle"><tspan x="509" y="451" font-size="8" font-weight="700">神奈川</tspan><tspan x="509" y="464" font-size="7">24.2</tspan></text></g>
+<g aria-label="静岡 17.9%"><title>静岡：17.9%</title><rect x="415" y="397" width="74" height="36" rx="3" fill="#aedaaf" stroke="#ffffff" stroke-width="1"/><text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle"><tspan x="452" y="413" font-size="9" font-weight="700">静岡</tspan><tspan x="452" y="426" font-size="7">17.9</tspan></text></g>
+<g aria-label="愛知 22.0%"><title>愛知：22.0%</title><rect x="377" y="397" width="36" height="36" rx="3" fill="#69bc6d" stroke="#ffffff" stroke-width="1"/><text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle"><tspan x="395" y="413" font-size="8" font-weight="700">愛知</tspan><tspan x="395" y="426" font-size="7">22.0</tspan></text></g>
+<g aria-label="滋賀 15.7%"><title>滋賀：15.7%</title><rect x="339" y="359" width="36" height="36" rx="3" fill="#c4e4c5" stroke="#ffffff" stroke-width="1"/><text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle"><tspan x="357" y="375" font-size="8" font-weight="700">滋賀</tspan><tspan x="357" y="388" font-size="7">15.7</tspan></text></g>
+<g aria-label="三重 19.5%"><title>三重：19.5%</title><rect x="339" y="397" width="36" height="74" rx="3" fill="#97d099" stroke="#ffffff" stroke-width="1"/><text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle"><tspan x="357" y="432" font-size="8" font-weight="700">三重</tspan><tspan x="357" y="445" font-size="7">19.5</tspan></text></g>
+<g aria-label="京都 14.6%"><title>京都：14.6%</title><rect x="263" y="359" width="74" height="36" rx="3" fill="#cfe9d0" stroke="#ffffff" stroke-width="1"/><text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle"><tspan x="300" y="375" font-size="9" font-weight="700">京都</tspan><tspan x="300" y="388" font-size="7">14.6</tspan></text></g>
+<g aria-label="兵庫 15.2%"><title>兵庫：15.2%</title><rect x="225" y="359" width="36" height="74" rx="3" fill="#c9e7ca" stroke="#ffffff" stroke-width="1"/><text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle"><tspan x="243" y="394" font-size="8" font-weight="700">兵庫</tspan><tspan x="243" y="407" font-size="7">15.2</tspan></text></g>
+<g aria-label="大阪 12.6%"><title>大阪：12.6%</title><rect x="263" y="397" width="36" height="36" rx="3" fill="#e1f2e2" stroke="#ffffff" stroke-width="1"/><text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle"><tspan x="281" y="413" font-size="8" font-weight="700">大阪</tspan><tspan x="281" y="426" font-size="7">12.6</tspan></text></g>
+<g aria-label="奈良 15.7%"><title>奈良：15.7%</title><rect x="301" y="397" width="36" height="36" rx="3" fill="#c4e4c5" stroke="#ffffff" stroke-width="1"/><text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle"><tspan x="319" y="413" font-size="8" font-weight="700">奈良</tspan><tspan x="319" y="426" font-size="7">15.7</tspan></text></g>
+<g aria-label="和歌山 11.9%"><title>和歌山：11.9%</title><rect x="263" y="435" width="74" height="36" rx="3" fill="#e8f5e9" stroke="#ffffff" stroke-width="1"/><text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle"><tspan x="300" y="451" font-size="9" font-weight="700">和歌山</tspan><tspan x="300" y="464" font-size="7">11.9</tspan></text></g>
+<g aria-label="鳥取 28.2%"><title>鳥取：28.2%</title><rect x="187" y="359" width="36" height="36" rx="3" fill="#1f6524" stroke="#ffffff" stroke-width="1"/><text font-family="'Noto Sans JP',sans-serif" fill="#ffffff" text-anchor="middle"><tspan x="205" y="375" font-size="8" font-weight="700">鳥取</tspan><tspan x="205" y="388" font-size="7">28.2</tspan></text></g>
+<g aria-label="岡山 29.0%"><title>岡山：29.0%</title><rect x="187" y="397" width="36" height="36" rx="3" fill="#1b5e20" stroke="#ffffff" stroke-width="1"/><text font-family="'Noto Sans JP',sans-serif" fill="#ffffff" text-anchor="middle"><tspan x="205" y="413" font-size="8" font-weight="700">岡山</tspan><tspan x="205" y="426" font-size="7">29.0</tspan></text></g>
+<g aria-label="島根 19.9%"><title>島根：19.9%</title><rect x="149" y="359" width="36" height="36" rx="3" fill="#90cd92" stroke="#ffffff" stroke-width="1"/><text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle"><tspan x="167" y="375" font-size="8" font-weight="700">島根</tspan><tspan x="167" y="388" font-size="7">19.9</tspan></text></g>
+<g aria-label="広島 20.6%"><title>広島：20.6%</title><rect x="149" y="397" width="36" height="36" rx="3" fill="#83c786" stroke="#ffffff" stroke-width="1"/><text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle"><tspan x="167" y="413" font-size="8" font-weight="700">広島</tspan><tspan x="167" y="426" font-size="7">20.6</tspan></text></g>
+<g aria-label="山口 21.6%"><title>山口：21.6%</title><rect x="111" y="359" width="36" height="74" rx="3" fill="#70bf74" stroke="#ffffff" stroke-width="1"/><text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle"><tspan x="129" y="394" font-size="8" font-weight="700">山口</tspan><tspan x="129" y="407" font-size="7">21.6</tspan></text></g>
+<g aria-label="愛媛 15.8%"><title>愛媛：15.8%</title><rect x="149" y="473" width="36" height="36" rx="3" fill="#c3e4c4" stroke="#ffffff" stroke-width="1"/><text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle"><tspan x="167" y="489" font-size="8" font-weight="700">愛媛</tspan><tspan x="167" y="502" font-size="7">15.8</tspan></text></g>
+<g aria-label="香川 18.8%"><title>香川：18.8%</title><rect x="187" y="473" width="36" height="36" rx="3" fill="#a4d6a6" stroke="#ffffff" stroke-width="1"/><text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle"><tspan x="205" y="489" font-size="8" font-weight="700">香川</tspan><tspan x="205" y="502" font-size="7">18.8</tspan></text></g>
+<g aria-label="高知 19.6%"><title>高知：19.6%</title><rect x="149" y="511" width="36" height="36" rx="3" fill="#95cf98" stroke="#ffffff" stroke-width="1"/><text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle"><tspan x="167" y="527" font-size="8" font-weight="700">高知</tspan><tspan x="167" y="540" font-size="7">19.6</tspan></text></g>
+<g aria-label="徳島 15.8%"><title>徳島：15.8%</title><rect x="187" y="511" width="36" height="36" rx="3" fill="#c3e4c4" stroke="#ffffff" stroke-width="1"/><text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle"><tspan x="205" y="527" font-size="8" font-weight="700">徳島</tspan><tspan x="205" y="540" font-size="7">15.8</tspan></text></g>
+<g aria-label="福岡 21.4%"><title>福岡：21.4%</title><rect x="73" y="435" width="36" height="36" rx="3" fill="#74c178" stroke="#ffffff" stroke-width="1"/><text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle"><tspan x="91" y="451" font-size="8" font-weight="700">福岡</tspan><tspan x="91" y="464" font-size="7">21.4</tspan></text></g>
+<g aria-label="佐賀 20.0%"><title>佐賀：20.0%</title><rect x="35" y="435" width="36" height="36" rx="3" fill="#8ecc91" stroke="#ffffff" stroke-width="1"/><text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle"><tspan x="53" y="451" font-size="8" font-weight="700">佐賀</tspan><tspan x="53" y="464" font-size="7">20.0</tspan></text></g>
+<g aria-label="大分 18.1%"><title>大分：18.1%</title><rect x="73" y="473" width="36" height="36" rx="3" fill="#acd9ad" stroke="#ffffff" stroke-width="1"/><text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle"><tspan x="91" y="489" font-size="8" font-weight="700">大分</tspan><tspan x="91" y="502" font-size="7">18.1</tspan></text></g>
+<g aria-label="長崎 15.8%"><title>長崎：15.8%</title><rect x="35" y="473" width="36" height="36" rx="3" fill="#c3e4c4" stroke="#ffffff" stroke-width="1"/><text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle"><tspan x="53" y="489" font-size="8" font-weight="700">長崎</tspan><tspan x="53" y="502" font-size="7">15.8</tspan></text></g>
+<g aria-label="宮崎 16.6%"><title>宮崎：16.6%</title><rect x="73" y="511" width="36" height="36" rx="3" fill="#bbe0bc" stroke="#ffffff" stroke-width="1"/><text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle"><tspan x="91" y="527" font-size="8" font-weight="700">宮崎</tspan><tspan x="91" y="540" font-size="7">16.6</tspan></text></g>
+<g aria-label="熊本 19.8%"><title>熊本：19.8%</title><rect x="35" y="511" width="36" height="36" rx="3" fill="#91ce94" stroke="#ffffff" stroke-width="1"/><text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle"><tspan x="53" y="527" font-size="8" font-weight="700">熊本</tspan><tspan x="53" y="540" font-size="7">19.8</tspan></text></g>
+<g aria-label="鹿児島 15.6%"><title>鹿児島：15.6%</title><rect x="35" y="549" width="74" height="36" rx="3" fill="#c5e5c6" stroke="#ffffff" stroke-width="1"/><text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle"><tspan x="72" y="565" font-size="9" font-weight="700">鹿児島</tspan><tspan x="72" y="578" font-size="7">15.6</tspan></text></g>
+<g aria-label="沖縄 14.9%"><title>沖縄：14.9%</title><rect x="35" y="625" width="36" height="36" rx="3" fill="#cce8cd" stroke="#ffffff" stroke-width="1"/><text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle"><tspan x="53" y="641" font-size="8" font-weight="700">沖縄</tspan><tspan x="53" y="654" font-size="7">14.9</tspan></text></g>
+<rect x="420" y="640" width="1.5" height="12" fill="#e8f5e9"/>
+<rect x="421" y="640" width="1.5" height="12" fill="#e7f5e8"/>
+<rect x="422" y="640" width="1.5" height="12" fill="#e6f4e7"/>
+<rect x="423" y="640" width="1.5" height="12" fill="#e5f4e6"/>
+<rect x="424" y="640" width="1.5" height="12" fill="#e4f3e5"/>
+<rect x="425" y="640" width="1.5" height="12" fill="#e3f3e4"/>
+<rect x="426" y="640" width="1.5" height="12" fill="#e2f2e3"/>
+<rect x="427" y="640" width="1.5" height="12" fill="#e1f2e2"/>
+<rect x="428" y="640" width="1.5" height="12" fill="#dff1e0"/>
+<rect x="429" y="640" width="1.5" height="12" fill="#def1df"/>
+<rect x="430" y="640" width="1.5" height="12" fill="#ddf0de"/>
+<rect x="431" y="640" width="1.5" height="12" fill="#dcf0dd"/>
+<rect x="432" y="640" width="1.5" height="12" fill="#dbefdc"/>
+<rect x="433" y="640" width="1.5" height="12" fill="#daefdb"/>
+<rect x="434" y="640" width="1.5" height="12" fill="#d9eeda"/>
+<rect x="435" y="640" width="1.5" height="12" fill="#d8eed9"/>
+<rect x="436" y="640" width="1.5" height="12" fill="#d7edd8"/>
+<rect x="437" y="640" width="1.5" height="12" fill="#d6edd7"/>
+<rect x="438" y="640" width="1.5" height="12" fill="#d5ecd6"/>
+<rect x="439" y="640" width="1.5" height="12" fill="#d4ecd5"/>
+<rect x="440" y="640" width="1.5" height="12" fill="#d3ebd4"/>
+<rect x="441" y="640" width="1.5" height="12" fill="#d2ebd3"/>
+<rect x="442" y="640" width="1.5" height="12" fill="#d1ead2"/>
+<rect x="443" y="640" width="1.5" height="12" fill="#cfead0"/>
+<rect x="444" y="640" width="1.5" height="12" fill="#cee9cf"/>
+<rect x="445" y="640" width="1.5" height="12" fill="#cde9ce"/>
+<rect x="446" y="640" width="1.5" height="12" fill="#cce8cd"/>
+<rect x="447" y="640" width="1.5" height="12" fill="#cbe8cc"/>
+<rect x="448" y="640" width="1.5" height="12" fill="#cae7cb"/>
+<rect x="449" y="640" width="1.5" height="12" fill="#c9e7ca"/>
+<rect x="450" y="640" width="1.5" height="12" fill="#c8e6c9"/>
+<rect x="451" y="640" width="1.5" height="12" fill="#c7e5c8"/>
+<rect x="452" y="640" width="1.5" height="12" fill="#c6e5c7"/>
+<rect x="453" y="640" width="1.5" height="12" fill="#c5e4c6"/>
+<rect x="454" y="640" width="1.5" height="12" fill="#c3e4c4"/>
+<rect x="455" y="640" width="1.5" height="12" fill="#c2e3c3"/>
+<rect x="456" y="640" width="1.5" height="12" fill="#c1e3c2"/>
+<rect x="457" y="640" width="1.5" height="12" fill="#c0e2c1"/>
+<rect x="458" y="640" width="1.5" height="12" fill="#bfe2c0"/>
+<rect x="459" y="640" width="1.5" height="12" fill="#bee1bf"/>
+<rect x="460" y="640" width="1.5" height="12" fill="#bce1be"/>
+<rect x="461" y="640" width="1.5" height="12" fill="#bbe0bd"/>
+<rect x="462" y="640" width="1.5" height="12" fill="#bae0bb"/>
+<rect x="463" y="640" width="1.5" height="12" fill="#b9dfba"/>
+<rect x="464" y="640" width="1.5" height="12" fill="#b8dfb9"/>
+<rect x="465" y="640" width="1.5" height="12" fill="#b7deb8"/>
+<rect x="466" y="640" width="1.5" height="12" fill="#b5ddb7"/>
+<rect x="467" y="640" width="1.5" height="12" fill="#b4ddb6"/>
+<rect x="468" y="640" width="1.5" height="12" fill="#b3dcb5"/>
+<rect x="469" y="640" width="1.5" height="12" fill="#b2dcb3"/>
+<rect x="470" y="640" width="1.5" height="12" fill="#b1dbb2"/>
+<rect x="471" y="640" width="1.5" height="12" fill="#b0dbb1"/>
+<rect x="472" y="640" width="1.5" height="12" fill="#aedab0"/>
+<rect x="473" y="640" width="1.5" height="12" fill="#addaaf"/>
+<rect x="474" y="640" width="1.5" height="12" fill="#acd9ae"/>
+<rect x="475" y="640" width="1.5" height="12" fill="#abd9ad"/>
+<rect x="476" y="640" width="1.5" height="12" fill="#aad8ac"/>
+<rect x="477" y="640" width="1.5" height="12" fill="#a9d8aa"/>
+<rect x="478" y="640" width="1.5" height="12" fill="#a7d7a9"/>
+<rect x="479" y="640" width="1.5" height="12" fill="#a6d7a8"/>
+<rect x="480" y="640" width="1.5" height="12" fill="#a5d6a7"/>
+<rect x="481" y="640" width="1.5" height="12" fill="#a3d5a5"/>
+<rect x="482" y="640" width="1.5" height="12" fill="#a1d4a3"/>
+<rect x="483" y="640" width="1.5" height="12" fill="#9fd3a1"/>
+<rect x="484" y="640" width="1.5" height="12" fill="#9dd29f"/>
+<rect x="485" y="640" width="1.5" height="12" fill="#9ad29d"/>
+<rect x="486" y="640" width="1.5" height="12" fill="#98d19b"/>
+<rect x="487" y="640" width="1.5" height="12" fill="#96d099"/>
+<rect x="488" y="640" width="1.5" height="12" fill="#94cf97"/>
+<rect x="489" y="640" width="1.5" height="12" fill="#92ce95"/>
+<rect x="490" y="640" width="1.5" height="12" fill="#90cd93"/>
+<rect x="491" y="640" width="1.5" height="12" fill="#8ecc91"/>
+<rect x="492" y="640" width="1.5" height="12" fill="#8ccb8f"/>
+<rect x="493" y="640" width="1.5" height="12" fill="#8aca8d"/>
+<rect x="494" y="640" width="1.5" height="12" fill="#88c98b"/>
+<rect x="495" y="640" width="1.5" height="12" fill="#86c989"/>
+<rect x="496" y="640" width="1.5" height="12" fill="#83c886"/>
+<rect x="497" y="640" width="1.5" height="12" fill="#81c784"/>
+<rect x="498" y="640" width="1.5" height="12" fill="#7fc682"/>
+<rect x="499" y="640" width="1.5" height="12" fill="#7dc580"/>
+<rect x="500" y="640" width="1.5" height="12" fill="#7bc47e"/>
+<rect x="501" y="640" width="1.5" height="12" fill="#79c37c"/>
+<rect x="502" y="640" width="1.5" height="12" fill="#77c27a"/>
+<rect x="503" y="640" width="1.5" height="12" fill="#75c178"/>
+<rect x="504" y="640" width="1.5" height="12" fill="#73c076"/>
+<rect x="505" y="640" width="1.5" height="12" fill="#71c074"/>
+<rect x="506" y="640" width="1.5" height="12" fill="#6ebf72"/>
+<rect x="507" y="640" width="1.5" height="12" fill="#6cbe70"/>
+<rect x="508" y="640" width="1.5" height="12" fill="#6abd6e"/>
+<rect x="509" y="640" width="1.5" height="12" fill="#68bc6c"/>
+<rect x="510" y="640" width="1.5" height="12" fill="#66bb6a"/>
+<rect x="511" y="640" width="1.5" height="12" fill="#64b968"/>
+<rect x="512" y="640" width="1.5" height="12" fill="#62b766"/>
+<rect x="513" y="640" width="1.5" height="12" fill="#60b564"/>
+<rect x="514" y="640" width="1.5" height="12" fill="#5fb363"/>
+<rect x="515" y="640" width="1.5" height="12" fill="#5db161"/>
+<rect x="516" y="640" width="1.5" height="12" fill="#5baf5f"/>
+<rect x="517" y="640" width="1.5" height="12" fill="#59ad5d"/>
+<rect x="518" y="640" width="1.5" height="12" fill="#57aa5b"/>
+<rect x="519" y="640" width="1.5" height="12" fill="#55a859"/>
+<rect x="520" y="640" width="1.5" height="12" fill="#53a657"/>
+<rect x="521" y="640" width="1.5" height="12" fill="#51a455"/>
+<rect x="522" y="640" width="1.5" height="12" fill="#50a254"/>
+<rect x="523" y="640" width="1.5" height="12" fill="#4ea052"/>
+<rect x="524" y="640" width="1.5" height="12" fill="#4c9e50"/>
+<rect x="525" y="640" width="1.5" height="12" fill="#4a9c4e"/>
+<rect x="526" y="640" width="1.5" height="12" fill="#489a4c"/>
+<rect x="527" y="640" width="1.5" height="12" fill="#46984a"/>
+<rect x="528" y="640" width="1.5" height="12" fill="#449648"/>
+<rect x="529" y="640" width="1.5" height="12" fill="#439447"/>
+<rect x="530" y="640" width="1.5" height="12" fill="#419245"/>
+<rect x="531" y="640" width="1.5" height="12" fill="#3f9043"/>
+<rect x="532" y="640" width="1.5" height="12" fill="#3d8e41"/>
+<rect x="533" y="640" width="1.5" height="12" fill="#3b8b3f"/>
+<rect x="534" y="640" width="1.5" height="12" fill="#39893d"/>
+<rect x="535" y="640" width="1.5" height="12" fill="#37873b"/>
+<rect x="536" y="640" width="1.5" height="12" fill="#358539"/>
+<rect x="537" y="640" width="1.5" height="12" fill="#348338"/>
+<rect x="538" y="640" width="1.5" height="12" fill="#328136"/>
+<rect x="539" y="640" width="1.5" height="12" fill="#307f34"/>
+<rect x="540" y="640" width="1.5" height="12" fill="#2e7d32"/>
+<rect x="541" y="640" width="1.5" height="12" fill="#2d7c31"/>
+<rect x="542" y="640" width="1.5" height="12" fill="#2d7b31"/>
+<rect x="543" y="640" width="1.5" height="12" fill="#2c7a30"/>
+<rect x="544" y="640" width="1.5" height="12" fill="#2b7930"/>
+<rect x="545" y="640" width="1.5" height="12" fill="#2b782f"/>
+<rect x="546" y="640" width="1.5" height="12" fill="#2a772e"/>
+<rect x="547" y="640" width="1.5" height="12" fill="#2a762e"/>
+<rect x="548" y="640" width="1.5" height="12" fill="#29752d"/>
+<rect x="549" y="640" width="1.5" height="12" fill="#28742d"/>
+<rect x="550" y="640" width="1.5" height="12" fill="#28732c"/>
+<rect x="551" y="640" width="1.5" height="12" fill="#27722b"/>
+<rect x="552" y="640" width="1.5" height="12" fill="#26712b"/>
+<rect x="553" y="640" width="1.5" height="12" fill="#26702a"/>
+<rect x="554" y="640" width="1.5" height="12" fill="#256f2a"/>
+<rect x="555" y="640" width="1.5" height="12" fill="#256e29"/>
+<rect x="556" y="640" width="1.5" height="12" fill="#246c28"/>
+<rect x="557" y="640" width="1.5" height="12" fill="#236b28"/>
+<rect x="558" y="640" width="1.5" height="12" fill="#236a27"/>
+<rect x="559" y="640" width="1.5" height="12" fill="#226927"/>
+<rect x="560" y="640" width="1.5" height="12" fill="#216826"/>
+<rect x="561" y="640" width="1.5" height="12" fill="#216725"/>
+<rect x="562" y="640" width="1.5" height="12" fill="#206625"/>
+<rect x="563" y="640" width="1.5" height="12" fill="#1f6524"/>
+<rect x="564" y="640" width="1.5" height="12" fill="#1f6424"/>
+<rect x="565" y="640" width="1.5" height="12" fill="#1e6323"/>
+<rect x="566" y="640" width="1.5" height="12" fill="#1e6222"/>
+<rect x="567" y="640" width="1.5" height="12" fill="#1d6122"/>
+<rect x="568" y="640" width="1.5" height="12" fill="#1c6021"/>
+<rect x="569" y="640" width="1.5" height="12" fill="#1c5f21"/>
+<text x="420" y="664" font-size="8" fill="#888">11.9%</text>
+<text x="570" y="664" text-anchor="end" font-size="8" fill="#888">29.0%</text>
+</svg>

@@ -1,0 +1,32 @@
+<svg width="780" height="459" viewBox="0 0 680 400" xmlns="http://www.w3.org/2000/svg" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" role="img" aria-label="外国人延べ宿泊者数の推移（全国）">
+<title>外国人延べ宿泊者数の推移（全国）</title>
+<rect width="680" height="400" fill="#fafafa" rx="8"/>
+<text x="340" y="28" text-anchor="middle" font-size="16" font-weight="bold" fill="#333">外国人延べ宿泊者数の推移（全国）</text>
+<rect x="65" y="60" width="590" height="290" fill="#f9fafb" stroke="#d1d5db"/>
+<line x1="65" y1="350" x2="655" y2="350" stroke="#e5e7eb" stroke-width="0.5"/>
+<text x="60" y="353" text-anchor="end" font-size="9" fill="#6b7280">0.0億</text>
+<line x1="65" y1="292" x2="655" y2="292" stroke="#e5e7eb" stroke-width="0.5"/>
+<text x="60" y="295" text-anchor="end" font-size="9" fill="#6b7280">0.3億</text>
+<line x1="65" y1="234" x2="655" y2="234" stroke="#e5e7eb" stroke-width="0.5"/>
+<text x="60" y="237" text-anchor="end" font-size="9" fill="#6b7280">0.6億</text>
+<line x1="65" y1="176" x2="655" y2="176" stroke="#e5e7eb" stroke-width="0.5"/>
+<text x="60" y="179" text-anchor="end" font-size="9" fill="#6b7280">0.9億</text>
+<line x1="65" y1="118.00000000000003" x2="655" y2="118.00000000000003" stroke="#e5e7eb" stroke-width="0.5"/>
+<text x="60" y="121.00000000000003" text-anchor="end" font-size="9" fill="#6b7280">1.2億</text>
+<line x1="65" y1="60" x2="655" y2="60" stroke="#e5e7eb" stroke-width="0.5"/>
+<text x="60" y="63" text-anchor="end" font-size="9" fill="#6b7280">1.5億</text>
+<text x="65" y="366" text-anchor="middle" font-size="9" fill="#6b7280">2009</text>
+<text x="143.66666666666669" y="366" text-anchor="middle" font-size="9" fill="#6b7280">2011</text>
+<text x="222.33333333333334" y="366" text-anchor="middle" font-size="9" fill="#6b7280">2013</text>
+<text x="301" y="366" text-anchor="middle" font-size="9" fill="#6b7280">2015</text>
+<text x="379.6666666666667" y="366" text-anchor="middle" font-size="9" fill="#6b7280">2017</text>
+<text x="458.3333333333333" y="366" text-anchor="middle" font-size="9" fill="#6b7280">2019</text>
+<text x="537" y="366" text-anchor="middle" font-size="9" fill="#6b7280">2021</text>
+<text x="615.6666666666666" y="366" text-anchor="middle" font-size="9" fill="#6b7280">2023</text>
+<text x="655" y="366" text-anchor="middle" font-size="9" fill="#6b7280">2024</text>
+<polyline points="65.0,315.1 104.3,300.4 143.7,317.5 183.0,304.6 222.3,290.4 261.7,269.7 301.0,234.6 340.3,227.8 379.7,210.9 419.0,190.6 458.3,156.8 497.7,319.7 537.0,343.4 576.3,324.0 615.7,168.7 655.0,85.8" fill="none" stroke="#1565c0" stroke-width="2.5" stroke-linejoin="round"/>
+<circle cx="65" cy="315.0981610362817" r="3.5" fill="#fff" stroke="#1565c0" stroke-width="2"/>
+<circle cx="655" cy="85.76740284780044" r="3.5" fill="#fff" stroke="#1565c0" stroke-width="2"/>
+<line x1="65" y1="58" x2="80" y2="58" stroke="#1565c0" stroke-width="2.5"/>
+<text x="84" y="61" font-size="9" fill="#6b7280">外国人延べ宿泊者数</text>
+</svg>

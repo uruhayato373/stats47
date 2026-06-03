@@ -1,0 +1,106 @@
+<svg width="700" height="700" viewBox="0 0 700 700" xmlns="http://www.w3.org/2000/svg" font-family="'Noto Sans JP',sans-serif" role="img" aria-label="小学校 × 中学校 1人当たり教育費">
+  <title>小学校 × 中学校 1人当たり教育費</title>
+  <rect width="700" height="700" fill="#ffffff"/>
+  <text x="350" y="22" text-anchor="middle" font-size="13" font-weight="bold" fill="#111827">小学校 × 中学校 児童生徒1人当たり学校教育費</text>
+  <text x="350" y="38" text-anchor="middle" font-size="9" fill="#6b7280">単位: 万円</text>
+  <rect x="70" y="50" width="600" height="600" fill="#f9fafb" stroke="#d1d5db" stroke-width="1"/>
+  <line x1="70" y1="50" x2="70" y2="650" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="70" y="666" text-anchor="middle" font-size="9" fill="#6b7280">80万円</text>
+  <line x1="155.71428571428572" y1="50" x2="155.71428571428572" y2="650" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="155.71428571428572" y="666" text-anchor="middle" font-size="9" fill="#6b7280">90万円</text>
+  <line x1="241.42857142857142" y1="50" x2="241.42857142857142" y2="650" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="241.42857142857142" y="666" text-anchor="middle" font-size="9" fill="#6b7280">100万円</text>
+  <line x1="327.1428571428571" y1="50" x2="327.1428571428571" y2="650" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="327.1428571428571" y="666" text-anchor="middle" font-size="9" fill="#6b7280">110万円</text>
+  <line x1="412.85714285714283" y1="50" x2="412.85714285714283" y2="650" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="412.85714285714283" y="666" text-anchor="middle" font-size="9" fill="#6b7280">120万円</text>
+  <line x1="498.57142857142856" y1="50" x2="498.57142857142856" y2="650" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="498.57142857142856" y="666" text-anchor="middle" font-size="9" fill="#6b7280">130万円</text>
+  <line x1="584.2857142857142" y1="50" x2="584.2857142857142" y2="650" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="584.2857142857142" y="666" text-anchor="middle" font-size="9" fill="#6b7280">140万円</text>
+  <line x1="670" y1="50" x2="670" y2="650" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="670" y="666" text-anchor="middle" font-size="9" fill="#6b7280">150万円</text>
+  <line x1="70" y1="650" x2="670" y2="650" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="64" y="653.5" text-anchor="end" font-size="9" fill="#6b7280">90万円</text>
+  <line x1="70" y1="590" x2="670" y2="590" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="64" y="593.5" text-anchor="end" font-size="9" fill="#6b7280">100万円</text>
+  <line x1="70" y1="530" x2="670" y2="530" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="64" y="533.5" text-anchor="end" font-size="9" fill="#6b7280">110万円</text>
+  <line x1="70" y1="470" x2="670" y2="470" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="64" y="473.5" text-anchor="end" font-size="9" fill="#6b7280">120万円</text>
+  <line x1="70" y1="410" x2="670" y2="410" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="64" y="413.5" text-anchor="end" font-size="9" fill="#6b7280">130万円</text>
+  <line x1="70" y1="350" x2="670" y2="350" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="64" y="353.5" text-anchor="end" font-size="9" fill="#6b7280">140万円</text>
+  <line x1="70" y1="290" x2="670" y2="290" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="64" y="293.5" text-anchor="end" font-size="9" fill="#6b7280">150万円</text>
+  <line x1="70" y1="230" x2="670" y2="230" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="64" y="233.5" text-anchor="end" font-size="9" fill="#6b7280">160万円</text>
+  <line x1="70" y1="170" x2="670" y2="170" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="64" y="173.5" text-anchor="end" font-size="9" fill="#6b7280">170万円</text>
+  <line x1="70" y1="110" x2="670" y2="110" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="64" y="113.5" text-anchor="end" font-size="9" fill="#6b7280">180万円</text>
+  <line x1="70" y1="50" x2="670" y2="50" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="64" y="53.5" text-anchor="end" font-size="9" fill="#6b7280">190万円</text>
+  <circle cx="319.3" cy="384.5" r="5" fill="#d32f2f" opacity="0.7"/>
+  <text x="294.3" y="389.5" font-size="8" fill="#111827" font-weight="500">東京</text>
+  <circle cx="222.2" cy="535.0" r="5" fill="#1565c0" opacity="0.7"/>
+  <text x="230.2" y="527.0" font-size="8" fill="#111827" font-weight="500">大阪</text>
+  <circle cx="144.2" cy="603.6" r="5" fill="#1565c0" opacity="0.7"/>
+  <text x="152.2" y="595.6" font-size="8" fill="#111827" font-weight="500">愛知</text>
+  <circle cx="87.4" cy="616.7" r="3.5" fill="#1565c0" opacity="0.7"/>
+  <circle cx="452.8" cy="306.5" r="5" fill="#1565c0" opacity="0.7"/>
+  <text x="460.8" y="298.5" font-size="8" fill="#111827" font-weight="500">北海</text>
+  <circle cx="174.7" cy="558.3" r="3.5" fill="#1565c0" opacity="0.7"/>
+  <circle cx="118.0" cy="622.4" r="5" fill="#1565c0" opacity="0.7"/>
+  <text x="126.0" y="614.4" font-size="8" fill="#111827" font-weight="500">神奈川</text>
+  <circle cx="165.2" cy="569.9" r="5" fill="#1565c0" opacity="0.7"/>
+  <text x="173.2" y="561.9" font-size="8" fill="#111827" font-weight="500">兵庫</text>
+  <circle cx="127.6" cy="548.5" r="3.5" fill="#1565c0" opacity="0.7"/>
+  <circle cx="335.4" cy="457.8" r="3.5" fill="#1565c0" opacity="0.7"/>
+  <circle cx="125.9" cy="565.2" r="3.5" fill="#1565c0" opacity="0.7"/>
+  <circle cx="375.7" cy="338.6" r="3.5" fill="#1565c0" opacity="0.7"/>
+  <circle cx="320.8" cy="444.5" r="3.5" fill="#1565c0" opacity="0.7"/>
+  <circle cx="243.1" cy="577.1" r="3.5" fill="#1565c0" opacity="0.7"/>
+  <circle cx="224.9" cy="546.8" r="3.5" fill="#1565c0" opacity="0.7"/>
+  <circle cx="397.6" cy="449.2" r="3.5" fill="#1565c0" opacity="0.7"/>
+  <circle cx="184.0" cy="534.7" r="3.5" fill="#1565c0" opacity="0.7"/>
+  <circle cx="269.9" cy="440.0" r="3.5" fill="#1565c0" opacity="0.7"/>
+  <circle cx="237.8" cy="522.9" r="5" fill="#1565c0" opacity="0.7"/>
+  <text x="245.8" y="514.9" font-size="8" fill="#111827" font-weight="500">沖縄</text>
+  <circle cx="257.8" cy="457.0" r="3.5" fill="#1565c0" opacity="0.7"/>
+  <circle cx="234.1" cy="529.2" r="3.5" fill="#1565c0" opacity="0.7"/>
+  <circle cx="397.3" cy="319.1" r="3.5" fill="#1565c0" opacity="0.7"/>
+  <circle cx="226.5" cy="531.8" r="3.5" fill="#1565c0" opacity="0.7"/>
+  <circle cx="149.9" cy="545.8" r="3.5" fill="#1565c0" opacity="0.7"/>
+  <circle cx="367.0" cy="400.7" r="3.5" fill="#1565c0" opacity="0.7"/>
+  <circle cx="273.1" cy="503.3" r="3.5" fill="#1565c0" opacity="0.7"/>
+  <circle cx="645.7" cy="253.2" r="5" fill="#1565c0" opacity="0.7"/>
+  <text x="653.7" y="245.2" font-size="8" fill="#111827" font-weight="500">岩手</text>
+  <circle cx="496.0" cy="276.3" r="5" fill="#1565c0" opacity="0.7"/>
+  <text x="504.0" y="268.3" font-size="8" fill="#111827" font-weight="500">青森</text>
+  <circle cx="261.6" cy="473.2" r="3.5" fill="#1565c0" opacity="0.7"/>
+  <circle cx="282.4" cy="429.4" r="3.5" fill="#1565c0" opacity="0.7"/>
+  <circle cx="294.4" cy="430.0" r="3.5" fill="#1565c0" opacity="0.7"/>
+  <circle cx="280.5" cy="425.4" r="3.5" fill="#1565c0" opacity="0.7"/>
+  <circle cx="145.9" cy="574.5" r="3.5" fill="#1565c0" opacity="0.7"/>
+  <circle cx="338.8" cy="446.1" r="3.5" fill="#1565c0" opacity="0.7"/>
+  <circle cx="151.8" cy="508.8" r="3.5" fill="#1565c0" opacity="0.7"/>
+  <circle cx="499.1" cy="395.4" r="3.5" fill="#1565c0" opacity="0.7"/>
+  <circle cx="532.0" cy="278.0" r="5" fill="#1565c0" opacity="0.7"/>
+  <text x="540.0" y="270.0" font-size="8" fill="#111827" font-weight="500">秋田</text>
+  <circle cx="405.4" cy="303.0" r="3.5" fill="#1565c0" opacity="0.7"/>
+  <circle cx="281.3" cy="455.9" r="3.5" fill="#1565c0" opacity="0.7"/>
+  <circle cx="345.6" cy="490.1" r="3.5" fill="#1565c0" opacity="0.7"/>
+  <circle cx="341.7" cy="460.9" r="5" fill="#1565c0" opacity="0.7"/>
+  <text x="349.7" y="452.9" font-size="8" fill="#111827" font-weight="500">福井</text>
+  <circle cx="296.6" cy="453.1" r="3.5" fill="#1565c0" opacity="0.7"/>
+  <circle cx="522.5" cy="230.6" r="5" fill="#1565c0" opacity="0.7"/>
+  <text x="530.5" y="222.6" font-size="8" fill="#111827" font-weight="500">島根</text>
+  <circle cx="470.1" cy="115.2" r="5" fill="#1565c0" opacity="0.7"/>
+  <text x="478.1" y="107.2" font-size="8" fill="#111827" font-weight="500">高知</text>
+  <circle cx="462.7" cy="336.4" r="3.5" fill="#1565c0" opacity="0.7"/>
+  <circle cx="630.7" cy="87.8" r="5" fill="#1565c0" opacity="0.7"/>
+  <text x="638.7" y="79.8" font-size="8" fill="#111827" font-weight="500">徳島</text>
+  <circle cx="456.7" cy="398.1" r="3.5" fill="#1565c0" opacity="0.7"/>
+</svg>

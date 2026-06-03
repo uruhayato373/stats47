@@ -1,0 +1,20 @@
+<svg width="960" height="398" viewBox="0 0 960 398" xmlns="http://www.w3.org/2000/svg" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" role="img" aria-label="この記事でわかったこと">
+<rect width="960" height="398" fill="#f9fafb"/>
+<text x="480" y="48" text-anchor="middle" font-size="26" font-weight="bold" fill="#1f2937">この記事でわかったこと</text>
+<rect x="50" y="78" width="860" height="80" fill="#ffffff" rx="8"/>
+<circle cx="94" cy="118" r="20" fill="#1565c0"/>
+<text x="94" y="125" text-anchor="middle" font-size="16" font-weight="bold" fill="#fff">1</text>
+<text x="130" y="123" font-size="18" font-weight="bold" fill="#1f2937">小学校1人当たり教育費──岩手県147万円 vs 埼玉県82万円で約1.8倍</text>
+<rect x="50" y="158" width="860" height="80" fill="#f9fafb" rx="8"/>
+<circle cx="94" cy="198" r="20" fill="#2e7d32"/>
+<text x="94" y="205" text-anchor="middle" font-size="16" font-weight="bold" fill="#fff">2</text>
+<text x="130" y="203" font-size="18" font-weight="bold" fill="#1f2937">人口が少ない県ほど1人当たり教育費が高い──小規模校の維持コストが影響</text>
+<rect x="50" y="238" width="860" height="80" fill="#ffffff" rx="8"/>
+<circle cx="94" cy="278" r="20" fill="#e65100"/>
+<text x="94" y="285" text-anchor="middle" font-size="16" font-weight="bold" fill="#fff">3</text>
+<text x="130" y="283" font-size="18" font-weight="bold" fill="#1f2937">小学校と中学校の1人当たり教育費は強い正の相関──教育投資は学校段階間で連動</text>
+<rect x="50" y="318" width="860" height="80" fill="#f9fafb" rx="8"/>
+<circle cx="94" cy="358" r="20" fill="#6a1b9a"/>
+<text x="94" y="365" text-anchor="middle" font-size="16" font-weight="bold" fill="#fff">4</text>
+<text x="130" y="363" font-size="18" font-weight="bold" fill="#1f2937">東京は教育費の絶対額は全国最大だが、1人当たりでは中位に収まる</text>
+</svg>
