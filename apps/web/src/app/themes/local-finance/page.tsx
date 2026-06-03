@@ -3,7 +3,7 @@ import Link from "next/link";
 import type { FinanceFlowData } from "@/features/finance-flow";
 import {
   LocalFinanceDashboard,
-  loadFinanceTrends,
+  loadFinanceCards,
 } from "@/features/local-finance-dashboard";
 import { LOCAL_FINANCE_THEME } from "@/features/theme-dashboard/server";
 
@@ -38,10 +38,8 @@ async function loadInitialFinanceFlow(): Promise<FinanceFlowData | undefined> {
 }
 
 export default async function LocalFinanceThemePage() {
-  const [trends, initialFinanceFlow] = await Promise.all([
-    loadFinanceTrends(),
-    loadInitialFinanceFlow(),
-  ]);
+  const cards = loadFinanceCards();
+  const initialFinanceFlow = await loadInitialFinanceFlow();
 
   return (
     <div>
@@ -62,7 +60,7 @@ export default async function LocalFinanceThemePage() {
           </Link>
         </nav>
       </div>
-      <LocalFinanceDashboard trends={trends} initialFinanceFlow={initialFinanceFlow} />
+      <LocalFinanceDashboard cards={cards} initialFinanceFlow={initialFinanceFlow} />
     </div>
   );
 }
