@@ -38,6 +38,21 @@ stats47 の active 指標数を **1,950 (2026-05-19) → 2,500 (2026 Q3)** に�
 
 ## 実行履歴
 
+## [RANKING-PUBLISH-PIPELINE-01] ranking 公開パイプライン修復 → 完全データ 122 metric の本番公開
+
+- **status**: pending
+- **tier**: 2
+- **target_metric**: indicator-count (公開ベース)
+- **owner**: claude
+- **due**: 2026-09-30 (Q3。着手は `generate-known-ranking-keys` 修復とセット)
+- **verification_command**: `curl -s -o /dev/null -w "%{http_code}" -A "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)" "https://stats47.jp/ranking/acupuncture-moxibustion-count"` が **410 → 200** になり、sitemap.xml に 122 key が掲載されること
+- **related_pr**: #430, #431
+- **背景**: 「完全データ」122 ranking metric を config で `isActive:true` 化 + `GONE_RANKING_KEYS` 除去済 (PR #430/#431, 2026-06-03 デプロイ) だが、本番は全件 **410 のまま公開未達**。原因は middleware の `isGone || !isKnown` 判定に対し `KNOWN_RANKING_KEYS` / R2 `app/ranking-items/all.json` 等の派生リストが未反映で、その生成パイプラインが DBレス移行 Phase F で**未配線** (`generate-ranking-items.ts`) / **破損** (`generate-known-ranking-keys.ts`) のまま残っていたため。**= 文書化では直らない実装課題 (memory 化したのは再発時の調査手間であって、欠陥そのものは本施策で解消する)**
+- **想定効果**: 公開 ranking +122 (indicator-count baseline 1950 → goal 2500 への寄与)。観測値 `app/stats/<key>/values.json` は R2 に揃っている [根拠: 2026-06-03 実測で values.json HTTP 200 確認] ため、パイプライン修復のみで公開可能
+- **手順 (依存順)**: ① `generate-ranking-items.ts` を `.claude/skills/db/sync-snapshots/run.sh` に配線 → R2 all.json/item.json 再生成 ② `apps/web/scripts/generate-known-ranking-keys.ts` 修復 → `KNOWN_RANKING_KEYS` 再生成 ③ `build-sitemap-ranking-keys.cjs` / `INDEXABLE_RANKING_KEYS` 再生成 ④ 再デプロイ ⑤ `gh workflow run purge-cdn.yml` ⑥ 本番 URL 200 実測 (`/deploy` Step 7.5)
+- **GSC 影響 (連動)**: /ranking インデックス対象 +122。「クロール済み・インデックス未登録」再発リスク (過去 1,453 件) のため `indexing.md` の URL Inspection モニタと連動させる
+- **詳細手順 / 122 key 一覧**: `docs/50_Issues/feature-backlog.md`「122 metric (完全データ) の本番公開」、memory `project_ranking_publish_pipeline_gap`、session-handoff `2026-06-04-git-cleanup-deploy-122metric.md`
+
 ## [BATCH-2026-05-19-01] 10 件処理 → 9 件追加 (priority high)
 
 - **status**: partial (9/10 success)
