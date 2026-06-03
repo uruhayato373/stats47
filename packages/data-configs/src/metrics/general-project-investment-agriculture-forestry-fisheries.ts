@@ -33,7 +33,7 @@ export const generalProjectInvestmentAgricultureForestryFisheries: MetricConfig 
   "calculation": {
     "isCalculated": false,
   },
-  "isActive": false,
+  "isActive": true,
   "isFeatured": false,
   "featuredOrder": 0,
 };

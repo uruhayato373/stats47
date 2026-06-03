@@ -36,7 +36,7 @@ export const annualMinimumRelativeHumidity: MetricConfig = {
     "isCalculated": false,
   },
   "seoTitle": "最小相対湿度（年間）",
-  "isActive": false,
+  "isActive": true,
   "isFeatured": false,
   "featuredOrder": 0,
 };

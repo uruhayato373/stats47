@@ -42,7 +42,7 @@ export const hobbyLeisureAvgTimeUnemployedMale: MetricConfig = {
     "isCalculated": false,
   },
   "seoTitle": "趣味・娯楽の平均時間（無業者・男）",
-  "isActive": false,
+  "isActive": true,
   "isFeatured": false,
   "featuredOrder": 0,
 };

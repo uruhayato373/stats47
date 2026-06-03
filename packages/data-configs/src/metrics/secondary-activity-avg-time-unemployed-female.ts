@@ -47,7 +47,7 @@ export const secondaryActivityAvgTimeUnemployedFemale: MetricConfig = {
     "isCalculated": false,
   },
   "seoTitle": "2次活動の平均時間（無業者・女）",
-  "isActive": false,
+  "isActive": true,
   "isFeatured": false,
   "featuredOrder": 0,
 };

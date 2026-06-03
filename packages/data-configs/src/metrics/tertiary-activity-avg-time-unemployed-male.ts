@@ -47,7 +47,7 @@ export const tertiaryActivityAvgTimeUnemployedMale: MetricConfig = {
     "isCalculated": false,
   },
   "seoTitle": "3次活動の平均時間（無業者・男）",
-  "isActive": false,
+  "isActive": true,
   "isFeatured": false,
   "featuredOrder": 0,
 };

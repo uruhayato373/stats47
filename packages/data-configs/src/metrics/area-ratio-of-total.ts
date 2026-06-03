@@ -33,7 +33,7 @@ export const areaRatioOfTotal: MetricConfig = {
     "isCalculated": false,
   },
   "seoTitle": "面積割合（全国面積に占める割合）",
-  "isActive": false,
+  "isActive": true,
   "isFeatured": false,
   "featuredOrder": 0,
 };

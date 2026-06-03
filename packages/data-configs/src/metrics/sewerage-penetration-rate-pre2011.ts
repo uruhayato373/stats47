@@ -34,7 +34,7 @@ export const seweragePenetrationRatePre2011: MetricConfig = {
     "isCalculated": false,
   },
   "seoTitle": "下水道普及率（－2011）",
-  "isActive": false,
+  "isActive": true,
   "isFeatured": false,
   "featuredOrder": 0,
 };

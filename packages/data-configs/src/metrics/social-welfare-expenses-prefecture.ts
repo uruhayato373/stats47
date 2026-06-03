@@ -47,7 +47,7 @@ export const socialWelfareExpensesPrefecture: MetricConfig = {
     "isCalculated": false,
   },
   "groupKey": "social-welfare-expenses-prefecture",
-  "isActive": false,
+  "isActive": true,
   "isFeatured": false,
   "featuredOrder": 0,
 };

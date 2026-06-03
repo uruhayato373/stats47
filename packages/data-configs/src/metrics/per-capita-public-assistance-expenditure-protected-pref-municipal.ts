@@ -48,7 +48,7 @@ export const perCapitaPublicAssistanceExpenditureProtectedPrefMunicipal: MetricC
   },
   "groupKey": "public-assistance-expenses-prefecture",
   "seoTitle": "被保護実人員1人当たり生活保護費",
-  "isActive": false,
+  "isActive": true,
   "isFeatured": false,
   "featuredOrder": 0,
 };
