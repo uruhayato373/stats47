@@ -1,0 +1,146 @@
+<svg width="780" height="588" viewBox="0 0 680 513" xmlns="http://www.w3.org/2000/svg" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" role="img" aria-label="ごみリサイクル率（都道府県別）">
+<title>ごみリサイクル率（都道府県別）</title>
+<rect width="680" height="513" fill="#fafafa" rx="8"/>
+<text x="340" y="28" text-anchor="middle" font-size="16" font-weight="bold" fill="#333">ごみリサイクル率（都道府県別）</text>
+<text x="85" y="66.66" text-anchor="end" font-size="6" fill="#374151">岡山</text>
+<rect x="90" y="62" width="480" height="5" rx="2" fill="#66bb6a" opacity="0.85"/>
+<text x="574" y="66.66" font-size="6" fill="#6b7280">29.0%</text>
+<text x="85" y="75.66" text-anchor="end" font-size="6" fill="#374151">鳥取</text>
+<rect x="90" y="71" width="466.7586206896551" height="5" rx="2" fill="#66bb6a" opacity="0.85"/>
+<text x="560.7586206896551" y="75.66" font-size="6" fill="#6b7280">28.2%</text>
+<text x="85" y="84.66" text-anchor="end" font-size="6" fill="#374151">東京</text>
+<rect x="90" y="80" width="412.13793103448273" height="5" rx="2" fill="#66bb6a" opacity="0.85"/>
+<text x="506.13793103448273" y="84.66" font-size="6" fill="#6b7280">24.9%</text>
+<text x="85" y="93.66" text-anchor="end" font-size="6" fill="#374151">埼玉</text>
+<rect x="90" y="89" width="402.2068965517241" height="5" rx="2" fill="#66bb6a" opacity="0.85"/>
+<text x="496.2068965517241" y="93.66" font-size="6" fill="#6b7280">24.3%</text>
+<text x="85" y="102.66" text-anchor="end" font-size="6" fill="#374151">神奈川</text>
+<rect x="90" y="98" width="400.55172413793105" height="5" rx="2" fill="#66bb6a" opacity="0.85"/>
+<text x="494.55172413793105" y="102.66" font-size="6" fill="#6b7280">24.2%</text>
+<text x="85" y="111.66" text-anchor="end" font-size="6" fill="#374151">北海道</text>
+<rect x="90" y="107" width="377.3793103448276" height="5" rx="2" fill="#66bb6a" opacity="0.85"/>
+<text x="471.3793103448276" y="111.66" font-size="6" fill="#6b7280">22.8%</text>
+<text x="85" y="120.66" text-anchor="end" font-size="6" fill="#374151">千葉</text>
+<rect x="90" y="116" width="374.0689655172414" height="5" rx="2" fill="#66bb6a" opacity="0.85"/>
+<text x="468.0689655172414" y="120.66" font-size="6" fill="#6b7280">22.6%</text>
+<text x="85" y="129.66" text-anchor="end" font-size="6" fill="#374151">長野</text>
+<rect x="90" y="125" width="364.13793103448273" height="5" rx="2" fill="#66bb6a" opacity="0.85"/>
+<text x="458.13793103448273" y="129.66" font-size="6" fill="#6b7280">22.0%</text>
+<text x="85" y="138.66" text-anchor="end" font-size="6" fill="#374151">愛知</text>
+<rect x="90" y="134" width="364.13793103448273" height="5" rx="2" fill="#66bb6a" opacity="0.85"/>
+<text x="458.13793103448273" y="138.66" font-size="6" fill="#6b7280">22.0%</text>
+<text x="85" y="147.66" text-anchor="end" font-size="6" fill="#374151">山口</text>
+<rect x="90" y="143" width="357.51724137931035" height="5" rx="2" fill="#66bb6a" opacity="0.85"/>
+<text x="451.51724137931035" y="147.66" font-size="6" fill="#6b7280">21.6%</text>
+<text x="85" y="156.66" text-anchor="end" font-size="6" fill="#374151">富山</text>
+<rect x="90" y="152" width="354.20689655172407" height="5" rx="2" fill="#66bb6a" opacity="0.85"/>
+<text x="448.20689655172407" y="156.66" font-size="6" fill="#6b7280">21.4%</text>
+<text x="85" y="165.66" text-anchor="end" font-size="6" fill="#374151">福岡</text>
+<rect x="90" y="161" width="354.20689655172407" height="5" rx="2" fill="#66bb6a" opacity="0.85"/>
+<text x="448.20689655172407" y="165.66" font-size="6" fill="#6b7280">21.4%</text>
+<text x="85" y="174.66" text-anchor="end" font-size="6" fill="#374151">広島</text>
+<rect x="90" y="170" width="340.96551724137936" height="5" rx="2" fill="#66bb6a" opacity="0.85"/>
+<text x="434.96551724137936" y="174.66" font-size="6" fill="#6b7280">20.6%</text>
+<text x="85" y="183.66" text-anchor="end" font-size="6" fill="#374151">茨城</text>
+<rect x="90" y="179" width="331.0344827586207" height="5" rx="2" fill="#66bb6a" opacity="0.85"/>
+<text x="425.0344827586207" y="183.66" font-size="6" fill="#6b7280">20.0%</text>
+<text x="85" y="192.66" text-anchor="end" font-size="6" fill="#374151">佐賀</text>
+<rect x="90" y="188" width="331.0344827586207" height="5" rx="2" fill="#66bb6a" opacity="0.85"/>
+<text x="425.0344827586207" y="192.66" font-size="6" fill="#6b7280">20.0%</text>
+<text x="85" y="201.66" text-anchor="end" font-size="6" fill="#374151">島根</text>
+<rect x="90" y="197" width="329.37931034482756" height="5" rx="2" fill="#66bb6a" opacity="0.85"/>
+<text x="423.37931034482756" y="201.66" font-size="6" fill="#6b7280">19.9%</text>
+<text x="85" y="210.66" text-anchor="end" font-size="6" fill="#374151">熊本</text>
+<rect x="90" y="206" width="327.7241379310345" height="5" rx="2" fill="#66bb6a" opacity="0.85"/>
+<text x="421.7241379310345" y="210.66" font-size="6" fill="#6b7280">19.8%</text>
+<text x="85" y="219.66" text-anchor="end" font-size="6" fill="#374151">高知</text>
+<rect x="90" y="215" width="324.41379310344826" height="5" rx="2" fill="#66bb6a" opacity="0.85"/>
+<text x="418.41379310344826" y="219.66" font-size="6" fill="#6b7280">19.6%</text>
+<text x="85" y="228.66" text-anchor="end" font-size="6" fill="#374151">三重</text>
+<rect x="90" y="224" width="322.7586206896552" height="5" rx="2" fill="#66bb6a" opacity="0.85"/>
+<text x="416.7586206896552" y="228.66" font-size="6" fill="#6b7280">19.5%</text>
+<text x="85" y="237.66" text-anchor="end" font-size="6" fill="#374151">香川</text>
+<rect x="90" y="233" width="311.1724137931035" height="5" rx="2" fill="#66bb6a" opacity="0.85"/>
+<text x="405.1724137931035" y="237.66" font-size="6" fill="#6b7280">18.8%</text>
+<text x="85" y="246.66" text-anchor="end" font-size="6" fill="#374151">新潟</text>
+<rect x="90" y="242" width="309.51724137931035" height="5" rx="2" fill="#66bb6a" opacity="0.85"/>
+<text x="403.51724137931035" y="246.66" font-size="6" fill="#6b7280">18.7%</text>
+<text x="85" y="255.66" text-anchor="end" font-size="6" fill="#374151">大分</text>
+<rect x="90" y="251" width="299.58620689655174" height="5" rx="2" fill="#66bb6a" opacity="0.85"/>
+<text x="393.58620689655174" y="255.66" font-size="6" fill="#6b7280">18.1%</text>
+<text x="85" y="264.66" text-anchor="end" font-size="6" fill="#374151">静岡</text>
+<rect x="90" y="260" width="296.27586206896547" height="5" rx="2" fill="#66bb6a" opacity="0.85"/>
+<text x="390.27586206896547" y="264.66" font-size="6" fill="#6b7280">17.9%</text>
+<text x="85" y="273.66" text-anchor="end" font-size="6" fill="#374151">岐阜</text>
+<rect x="90" y="269" width="283.0344827586207" height="5" rx="2" fill="#66bb6a" opacity="0.85"/>
+<text x="377.0344827586207" y="273.66" font-size="6" fill="#6b7280">17.1%</text>
+<text x="85" y="282.66" text-anchor="end" font-size="6" fill="#374151">宮崎</text>
+<rect x="90" y="278" width="274.7586206896552" height="5" rx="2" fill="#66bb6a" opacity="0.85"/>
+<text x="368.7586206896552" y="282.66" font-size="6" fill="#6b7280">16.6%</text>
+<text x="85" y="291.66" text-anchor="end" font-size="6" fill="#374151">岩手</text>
+<rect x="90" y="287" width="271.4482758620689" height="5" rx="2" fill="#66bb6a" opacity="0.85"/>
+<text x="365.4482758620689" y="291.66" font-size="6" fill="#6b7280">16.4%</text>
+<text x="85" y="300.66" text-anchor="end" font-size="6" fill="#374151">徳島</text>
+<rect x="90" y="296" width="261.51724137931035" height="5" rx="2" fill="#66bb6a" opacity="0.85"/>
+<text x="355.51724137931035" y="300.66" font-size="6" fill="#6b7280">15.8%</text>
+<text x="85" y="309.66" text-anchor="end" font-size="6" fill="#374151">愛媛</text>
+<rect x="90" y="305" width="261.51724137931035" height="5" rx="2" fill="#66bb6a" opacity="0.85"/>
+<text x="355.51724137931035" y="309.66" font-size="6" fill="#6b7280">15.8%</text>
+<text x="85" y="318.66" text-anchor="end" font-size="6" fill="#374151">長崎</text>
+<rect x="90" y="314" width="261.51724137931035" height="5" rx="2" fill="#66bb6a" opacity="0.85"/>
+<text x="355.51724137931035" y="318.66" font-size="6" fill="#6b7280">15.8%</text>
+<text x="85" y="327.66" text-anchor="end" font-size="6" fill="#374151">滋賀</text>
+<rect x="90" y="323" width="259.8620689655172" height="5" rx="2" fill="#66bb6a" opacity="0.85"/>
+<text x="353.8620689655172" y="327.66" font-size="6" fill="#6b7280">15.7%</text>
+<text x="85" y="336.66" text-anchor="end" font-size="6" fill="#374151">奈良</text>
+<rect x="90" y="332" width="259.8620689655172" height="5" rx="2" fill="#66bb6a" opacity="0.85"/>
+<text x="353.8620689655172" y="336.66" font-size="6" fill="#6b7280">15.7%</text>
+<text x="85" y="345.66" text-anchor="end" font-size="6" fill="#374151">山梨</text>
+<rect x="90" y="341" width="258.2068965517241" height="5" rx="2" fill="#66bb6a" opacity="0.85"/>
+<text x="352.2068965517241" y="345.66" font-size="6" fill="#6b7280">15.6%</text>
+<text x="85" y="354.66" text-anchor="end" font-size="6" fill="#374151">鹿児島</text>
+<rect x="90" y="350" width="258.2068965517241" height="5" rx="2" fill="#66bb6a" opacity="0.85"/>
+<text x="352.2068965517241" y="354.66" font-size="6" fill="#6b7280">15.6%</text>
+<text x="85" y="363.66" text-anchor="end" font-size="6" fill="#374151">宮城</text>
+<rect x="90" y="359" width="253.24137931034485" height="5" rx="2" fill="#66bb6a" opacity="0.85"/>
+<text x="347.2413793103449" y="363.66" font-size="6" fill="#6b7280">15.3%</text>
+<text x="85" y="372.66" text-anchor="end" font-size="6" fill="#374151">兵庫</text>
+<rect x="90" y="368" width="251.5862068965517" height="5" rx="2" fill="#66bb6a" opacity="0.85"/>
+<text x="345.5862068965517" y="372.66" font-size="6" fill="#6b7280">15.2%</text>
+<text x="85" y="381.66" text-anchor="end" font-size="6" fill="#374151">栃木</text>
+<rect x="90" y="377" width="248.27586206896552" height="5" rx="2" fill="#66bb6a" opacity="0.85"/>
+<text x="342.2758620689655" y="381.66" font-size="6" fill="#6b7280">15.0%</text>
+<text x="85" y="390.66" text-anchor="end" font-size="6" fill="#374151">沖縄</text>
+<rect x="90" y="386" width="246.62068965517244" height="5" rx="2" fill="#66bb6a" opacity="0.85"/>
+<text x="340.62068965517244" y="390.66" font-size="6" fill="#6b7280">14.9%</text>
+<text x="85" y="399.66" text-anchor="end" font-size="6" fill="#374151">京都</text>
+<rect x="90" y="395" width="241.6551724137931" height="5" rx="2" fill="#66bb6a" opacity="0.85"/>
+<text x="335.65517241379314" y="399.66" font-size="6" fill="#6b7280">14.6%</text>
+<text x="85" y="408.66" text-anchor="end" font-size="6" fill="#374151">群馬</text>
+<rect x="90" y="404" width="228.41379310344828" height="5" rx="2" fill="#66bb6a" opacity="0.85"/>
+<text x="322.41379310344826" y="408.66" font-size="6" fill="#6b7280">13.8%</text>
+<text x="85" y="417.66" text-anchor="end" font-size="6" fill="#374151">秋田</text>
+<rect x="90" y="413" width="225.10344827586206" height="5" rx="2" fill="#66bb6a" opacity="0.85"/>
+<text x="319.1034482758621" y="417.66" font-size="6" fill="#6b7280">13.6%</text>
+<text x="85" y="426.66" text-anchor="end" font-size="6" fill="#374151">山形</text>
+<rect x="90" y="422" width="221.79310344827587" height="5" rx="2" fill="#66bb6a" opacity="0.85"/>
+<text x="315.7931034482759" y="426.66" font-size="6" fill="#6b7280">13.4%</text>
+<text x="85" y="435.66" text-anchor="end" font-size="6" fill="#374151">福島</text>
+<rect x="90" y="431" width="218.48275862068965" height="5" rx="2" fill="#66bb6a" opacity="0.85"/>
+<text x="312.48275862068965" y="435.66" font-size="6" fill="#6b7280">13.2%</text>
+<text x="85" y="444.66" text-anchor="end" font-size="6" fill="#374151">石川</text>
+<rect x="90" y="440" width="213.51724137931035" height="5" rx="2" fill="#66bb6a" opacity="0.85"/>
+<text x="307.51724137931035" y="444.66" font-size="6" fill="#6b7280">12.9%</text>
+<text x="85" y="453.66" text-anchor="end" font-size="6" fill="#374151">福井</text>
+<rect x="90" y="449" width="210.20689655172413" height="5" rx="2" fill="#66bb6a" opacity="0.85"/>
+<text x="304.2068965517241" y="453.66" font-size="6" fill="#6b7280">12.7%</text>
+<text x="85" y="462.66" text-anchor="end" font-size="6" fill="#374151">青森</text>
+<rect x="90" y="458" width="208.55172413793102" height="5" rx="2" fill="#66bb6a" opacity="0.85"/>
+<text x="302.55172413793105" y="462.66" font-size="6" fill="#6b7280">12.6%</text>
+<text x="85" y="471.66" text-anchor="end" font-size="6" fill="#374151">大阪</text>
+<rect x="90" y="467" width="208.55172413793102" height="5" rx="2" fill="#66bb6a" opacity="0.85"/>
+<text x="302.55172413793105" y="471.66" font-size="6" fill="#6b7280">12.6%</text>
+<text x="85" y="480.66" text-anchor="end" font-size="6" fill="#374151">和歌山</text>
+<rect x="90" y="476" width="196.9655172413793" height="5" rx="2" fill="#66bb6a" opacity="0.85"/>
+<text x="290.9655172413793" y="480.66" font-size="6" fill="#6b7280">11.9%</text>
+</svg>

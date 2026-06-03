@@ -1,0 +1,107 @@
+<svg width="960" height="624" viewBox="0 0 960 624" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="テレビ・ラジオ等 平均消費時間（女性有業者）上位10・下位10">
+  <title>テレビ・ラジオ等 平均消費時間（女性有業者）上位10・下位10</title>
+  <rect width="960" height="624" fill="#f9fafb"/>
+  <text x="480" y="38" text-anchor="middle" font-family="'Noto Sans JP',sans-serif" font-size="20" font-weight="bold" fill="#1f2937">テレビ・ラジオ等 平均消費時間（女性有業者）上位10・下位10</text>
+  <rect x="30" y="80" width="432" height="40" rx="8" fill="#dc2626"/>  <text x="246" y="106" text-anchor="middle" font-family="'Noto Sans JP',sans-serif" font-size="15" font-weight="bold" fill="#ffffff">消費時間が長い都道府県</text>
+  <rect x="30" y="124" width="432" height="44" rx="6" fill="#fef2f2"/>
+  <circle cx="60" cy="146" r="14" fill="#dc2626"/>  <text x="60" y="150.32" text-anchor="middle" font-family="'Noto Sans JP',sans-serif" font-size="12" font-weight="bold" fill="#ffffff">1</text>
+  <text x="84" y="150.68" font-family="'Noto Sans JP',sans-serif" font-size="13" font-weight="bold" fill="#1f2937">北海道</text>
+  <text x="229.68" y="150.32" text-anchor="end" font-family="'Noto Sans JP',sans-serif" font-size="12" fill="#dc2626" font-weight="600">99分</text>
+  <rect x="241.68" y="139" width="201.00959999999998" height="14" rx="4" fill="#ef4444" opacity="0.8"/>
+  <rect x="30" y="168" width="432" height="44" rx="6" fill="#ffffff"/>
+  <circle cx="60" cy="190" r="14" fill="#dc2626"/>  <text x="60" y="194.32" text-anchor="middle" font-family="'Noto Sans JP',sans-serif" font-size="12" font-weight="bold" fill="#ffffff">1</text>
+  <text x="84" y="194.68" font-family="'Noto Sans JP',sans-serif" font-size="13" font-weight="bold" fill="#1f2937">青森県</text>
+  <text x="229.68" y="194.32" text-anchor="end" font-family="'Noto Sans JP',sans-serif" font-size="12" fill="#dc2626" font-weight="600">99分</text>
+  <rect x="241.68" y="183" width="201.00959999999998" height="14" rx="4" fill="#ef4444" opacity="0.8"/>
+  <rect x="30" y="212" width="432" height="44" rx="6" fill="#fef2f2"/>
+  <circle cx="60" cy="234" r="14" fill="#dc2626"/>  <text x="60" y="238.32" text-anchor="middle" font-family="'Noto Sans JP',sans-serif" font-size="12" font-weight="bold" fill="#ffffff">1</text>
+  <text x="84" y="238.68" font-family="'Noto Sans JP',sans-serif" font-size="13" font-weight="bold" fill="#1f2937">香川県</text>
+  <text x="229.68" y="238.32" text-anchor="end" font-family="'Noto Sans JP',sans-serif" font-size="12" fill="#dc2626" font-weight="600">99分</text>
+  <rect x="241.68" y="227" width="201.00959999999998" height="14" rx="4" fill="#ef4444" opacity="0.8"/>
+  <rect x="30" y="256" width="432" height="44" rx="6" fill="#ffffff"/>
+  <circle cx="60" cy="278" r="14" fill="#dc2626"/>  <text x="60" y="282.32" text-anchor="middle" font-family="'Noto Sans JP',sans-serif" font-size="12" font-weight="bold" fill="#ffffff">1</text>
+  <text x="84" y="282.68" font-family="'Noto Sans JP',sans-serif" font-size="13" font-weight="bold" fill="#1f2937">愛媛県</text>
+  <text x="229.68" y="282.32" text-anchor="end" font-family="'Noto Sans JP',sans-serif" font-size="12" fill="#dc2626" font-weight="600">99分</text>
+  <rect x="241.68" y="271" width="201.00959999999998" height="14" rx="4" fill="#ef4444" opacity="0.8"/>
+  <rect x="30" y="300" width="432" height="44" rx="6" fill="#fef2f2"/>
+  <circle cx="60" cy="322" r="14" fill="#dc2626"/>  <text x="60" y="326.32" text-anchor="middle" font-family="'Noto Sans JP',sans-serif" font-size="12" font-weight="bold" fill="#ffffff">5</text>
+  <text x="84" y="326.68" font-family="'Noto Sans JP',sans-serif" font-size="13" font-weight="bold" fill="#1f2937">鳥取県</text>
+  <text x="229.68" y="326.32" text-anchor="end" font-family="'Noto Sans JP',sans-serif" font-size="12" fill="#dc2626" font-weight="600">98分</text>
+  <rect x="241.68" y="315" width="198.9792" height="14" rx="4" fill="#ef4444" opacity="0.8"/>
+  <rect x="30" y="344" width="432" height="44" rx="6" fill="#ffffff"/>
+  <circle cx="60" cy="366" r="14" fill="#dc2626"/>  <text x="60" y="370.32" text-anchor="middle" font-family="'Noto Sans JP',sans-serif" font-size="12" font-weight="bold" fill="#ffffff">6</text>
+  <text x="84" y="370.68" font-family="'Noto Sans JP',sans-serif" font-size="13" font-weight="bold" fill="#1f2937">富山県</text>
+  <text x="229.68" y="370.32" text-anchor="end" font-family="'Noto Sans JP',sans-serif" font-size="12" fill="#dc2626" font-weight="600">96分</text>
+  <rect x="241.68" y="359" width="194.9184" height="14" rx="4" fill="#ef4444" opacity="0.8"/>
+  <rect x="30" y="388" width="432" height="44" rx="6" fill="#fef2f2"/>
+  <circle cx="60" cy="410" r="14" fill="#dc2626"/>  <text x="60" y="414.32" text-anchor="middle" font-family="'Noto Sans JP',sans-serif" font-size="12" font-weight="bold" fill="#ffffff">6</text>
+  <text x="84" y="414.68" font-family="'Noto Sans JP',sans-serif" font-size="13" font-weight="bold" fill="#1f2937">和歌山県</text>
+  <text x="229.68" y="414.32" text-anchor="end" font-family="'Noto Sans JP',sans-serif" font-size="12" fill="#dc2626" font-weight="600">96分</text>
+  <rect x="241.68" y="403" width="194.9184" height="14" rx="4" fill="#ef4444" opacity="0.8"/>
+  <rect x="30" y="432" width="432" height="44" rx="6" fill="#ffffff"/>
+  <circle cx="60" cy="454" r="14" fill="#dc2626"/>  <text x="60" y="458.32" text-anchor="middle" font-family="'Noto Sans JP',sans-serif" font-size="12" font-weight="bold" fill="#ffffff">8</text>
+  <text x="84" y="458.68" font-family="'Noto Sans JP',sans-serif" font-size="13" font-weight="bold" fill="#1f2937">福島県</text>
+  <text x="229.68" y="458.32" text-anchor="end" font-family="'Noto Sans JP',sans-serif" font-size="12" fill="#dc2626" font-weight="600">95分</text>
+  <rect x="241.68" y="447" width="192.88799999999998" height="14" rx="4" fill="#ef4444" opacity="0.8"/>
+  <rect x="30" y="476" width="432" height="44" rx="6" fill="#fef2f2"/>
+  <circle cx="60" cy="498" r="14" fill="#dc2626"/>  <text x="60" y="502.32" text-anchor="middle" font-family="'Noto Sans JP',sans-serif" font-size="12" font-weight="bold" fill="#ffffff">8</text>
+  <text x="84" y="502.68" font-family="'Noto Sans JP',sans-serif" font-size="13" font-weight="bold" fill="#1f2937">新潟県</text>
+  <text x="229.68" y="502.32" text-anchor="end" font-family="'Noto Sans JP',sans-serif" font-size="12" fill="#dc2626" font-weight="600">95分</text>
+  <rect x="241.68" y="491" width="192.88799999999998" height="14" rx="4" fill="#ef4444" opacity="0.8"/>
+  <rect x="30" y="520" width="432" height="44" rx="6" fill="#ffffff"/>
+  <circle cx="60" cy="542" r="14" fill="#dc2626"/>  <text x="60" y="546.32" text-anchor="middle" font-family="'Noto Sans JP',sans-serif" font-size="12" font-weight="bold" fill="#ffffff">10</text>
+  <text x="84" y="546.68" font-family="'Noto Sans JP',sans-serif" font-size="13" font-weight="bold" fill="#1f2937">山形県</text>
+  <text x="229.68" y="546.32" text-anchor="end" font-family="'Noto Sans JP',sans-serif" font-size="12" fill="#dc2626" font-weight="600">93分</text>
+  <rect x="241.68" y="535" width="188.8272" height="14" rx="4" fill="#ef4444" opacity="0.8"/>
+  <rect x="498" y="80" width="432" height="40" rx="8" fill="#059669"/>  <text x="714" y="106" text-anchor="middle" font-family="'Noto Sans JP',sans-serif" font-size="15" font-weight="bold" fill="#ffffff">消費時間が短い都道府県</text>
+  <rect x="498" y="124" width="432" height="44" rx="6" fill="#ecfdf5"/>
+  <circle cx="528" cy="146" r="14" fill="#059669"/>  <text x="528" y="150.32" text-anchor="middle" font-family="'Noto Sans JP',sans-serif" font-size="12" font-weight="bold" fill="#ffffff">47</text>
+  <text x="552" y="150.68" font-family="'Noto Sans JP',sans-serif" font-size="13" font-weight="bold" fill="#1f2937">滋賀県</text>
+  <text x="697.6800000000001" y="150.32" text-anchor="end" font-family="'Noto Sans JP',sans-serif" font-size="12" fill="#059669" font-weight="600">65分</text>
+  <rect x="709.6800000000001" y="139" width="131.976" height="14" rx="4" fill="#34d399" opacity="0.8"/>
+  <rect x="498" y="168" width="432" height="44" rx="6" fill="#ffffff"/>
+  <circle cx="528" cy="190" r="14" fill="#059669"/>  <text x="528" y="194.32" text-anchor="middle" font-family="'Noto Sans JP',sans-serif" font-size="12" font-weight="bold" fill="#ffffff">46</text>
+  <text x="552" y="194.68" font-family="'Noto Sans JP',sans-serif" font-size="13" font-weight="bold" fill="#1f2937">東京都</text>
+  <text x="697.6800000000001" y="194.32" text-anchor="end" font-family="'Noto Sans JP',sans-serif" font-size="12" fill="#059669" font-weight="600">70分</text>
+  <rect x="709.6800000000001" y="183" width="142.128" height="14" rx="4" fill="#34d399" opacity="0.8"/>
+  <rect x="498" y="212" width="432" height="44" rx="6" fill="#ecfdf5"/>
+  <circle cx="528" cy="234" r="14" fill="#059669"/>  <text x="528" y="238.32" text-anchor="middle" font-family="'Noto Sans JP',sans-serif" font-size="12" font-weight="bold" fill="#ffffff">44</text>
+  <text x="552" y="238.68" font-family="'Noto Sans JP',sans-serif" font-size="13" font-weight="bold" fill="#1f2937">京都府</text>
+  <text x="697.6800000000001" y="238.32" text-anchor="end" font-family="'Noto Sans JP',sans-serif" font-size="12" fill="#059669" font-weight="600">75分</text>
+  <rect x="709.6800000000001" y="227" width="152.28" height="14" rx="4" fill="#34d399" opacity="0.8"/>
+  <rect x="498" y="256" width="432" height="44" rx="6" fill="#ffffff"/>
+  <circle cx="528" cy="278" r="14" fill="#059669"/>  <text x="528" y="282.32" text-anchor="middle" font-family="'Noto Sans JP',sans-serif" font-size="12" font-weight="bold" fill="#ffffff">44</text>
+  <text x="552" y="282.68" font-family="'Noto Sans JP',sans-serif" font-size="13" font-weight="bold" fill="#1f2937">宮城県</text>
+  <text x="697.6800000000001" y="282.32" text-anchor="end" font-family="'Noto Sans JP',sans-serif" font-size="12" fill="#059669" font-weight="600">75分</text>
+  <rect x="709.6800000000001" y="271" width="152.28" height="14" rx="4" fill="#34d399" opacity="0.8"/>
+  <rect x="498" y="300" width="432" height="44" rx="6" fill="#ecfdf5"/>
+  <circle cx="528" cy="322" r="14" fill="#059669"/>  <text x="528" y="326.32" text-anchor="middle" font-family="'Noto Sans JP',sans-serif" font-size="12" font-weight="bold" fill="#ffffff">43</text>
+  <text x="552" y="326.68" font-family="'Noto Sans JP',sans-serif" font-size="13" font-weight="bold" fill="#1f2937">岡山県</text>
+  <text x="697.6800000000001" y="326.32" text-anchor="end" font-family="'Noto Sans JP',sans-serif" font-size="12" fill="#059669" font-weight="600">77分</text>
+  <rect x="709.6800000000001" y="315" width="156.3408" height="14" rx="4" fill="#34d399" opacity="0.8"/>
+  <rect x="498" y="344" width="432" height="44" rx="6" fill="#ffffff"/>
+  <circle cx="528" cy="366" r="14" fill="#059669"/>  <text x="528" y="370.32" text-anchor="middle" font-family="'Noto Sans JP',sans-serif" font-size="12" font-weight="bold" fill="#ffffff">42</text>
+  <text x="552" y="370.68" font-family="'Noto Sans JP',sans-serif" font-size="13" font-weight="bold" fill="#1f2937">島根県</text>
+  <text x="697.6800000000001" y="370.32" text-anchor="end" font-family="'Noto Sans JP',sans-serif" font-size="12" fill="#059669" font-weight="600">78分</text>
+  <rect x="709.6800000000001" y="359" width="158.3712" height="14" rx="4" fill="#34d399" opacity="0.8"/>
+  <rect x="498" y="388" width="432" height="44" rx="6" fill="#ecfdf5"/>
+  <circle cx="528" cy="410" r="14" fill="#059669"/>  <text x="528" y="414.32" text-anchor="middle" font-family="'Noto Sans JP',sans-serif" font-size="12" font-weight="bold" fill="#ffffff">41</text>
+  <text x="552" y="414.68" font-family="'Noto Sans JP',sans-serif" font-size="13" font-weight="bold" fill="#1f2937">愛知県</text>
+  <text x="697.6800000000001" y="414.32" text-anchor="end" font-family="'Noto Sans JP',sans-serif" font-size="12" fill="#059669" font-weight="600">80分</text>
+  <rect x="709.6800000000001" y="403" width="162.43200000000002" height="14" rx="4" fill="#34d399" opacity="0.8"/>
+  <rect x="498" y="432" width="432" height="44" rx="6" fill="#ffffff"/>
+  <circle cx="528" cy="454" r="14" fill="#059669"/>  <text x="528" y="458.32" text-anchor="middle" font-family="'Noto Sans JP',sans-serif" font-size="12" font-weight="bold" fill="#ffffff">40</text>
+  <text x="552" y="458.68" font-family="'Noto Sans JP',sans-serif" font-size="13" font-weight="bold" fill="#1f2937">千葉県</text>
+  <text x="697.6800000000001" y="458.32" text-anchor="end" font-family="'Noto Sans JP',sans-serif" font-size="12" fill="#059669" font-weight="600">81分</text>
+  <rect x="709.6800000000001" y="447" width="164.4624" height="14" rx="4" fill="#34d399" opacity="0.8"/>
+  <rect x="498" y="476" width="432" height="44" rx="6" fill="#ecfdf5"/>
+  <circle cx="528" cy="498" r="14" fill="#059669"/>  <text x="528" y="502.32" text-anchor="middle" font-family="'Noto Sans JP',sans-serif" font-size="12" font-weight="bold" fill="#ffffff">38</text>
+  <text x="552" y="502.68" font-family="'Noto Sans JP',sans-serif" font-size="13" font-weight="bold" fill="#1f2937">福井県</text>
+  <text x="697.6800000000001" y="502.32" text-anchor="end" font-family="'Noto Sans JP',sans-serif" font-size="12" fill="#059669" font-weight="600">82分</text>
+  <rect x="709.6800000000001" y="491" width="166.4928" height="14" rx="4" fill="#34d399" opacity="0.8"/>
+  <rect x="498" y="520" width="432" height="44" rx="6" fill="#ffffff"/>
+  <circle cx="528" cy="542" r="14" fill="#059669"/>  <text x="528" y="546.32" text-anchor="middle" font-family="'Noto Sans JP',sans-serif" font-size="12" font-weight="bold" fill="#ffffff">38</text>
+  <text x="552" y="546.68" font-family="'Noto Sans JP',sans-serif" font-size="13" font-weight="bold" fill="#1f2937">神奈川県</text>
+  <text x="697.6800000000001" y="546.32" text-anchor="end" font-family="'Noto Sans JP',sans-serif" font-size="12" fill="#059669" font-weight="600">82分</text>
+  <rect x="709.6800000000001" y="535" width="166.4928" height="14" rx="4" fill="#34d399" opacity="0.8"/>
+</svg>
