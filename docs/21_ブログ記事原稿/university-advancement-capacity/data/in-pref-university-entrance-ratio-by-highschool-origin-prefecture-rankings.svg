@@ -1,0 +1,65 @@
+<!-- data-source: in-pref-university-entrance-ratio-by-highschool-origin-prefecture-rankings.json | generated: 2026-06-02T21:24:43.109Z -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 300" width="680" height="300" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" role="img" aria-label="県内大学入学者割合 都道府県ランキング（2024年）">
+  <style>
+    .svg-bg{fill:#fafafa}
+    .svg-title{fill:#222}
+    .svg-subtitle{fill:#666}
+    .svg-label{fill:#333}
+    .svg-legend{fill:#888}
+    @media (prefers-color-scheme:dark){
+      .svg-bg{fill:#1f2937}
+      .svg-title{fill:#f9fafb}
+      .svg-subtitle{fill:#9ca3af}
+      .svg-label{fill:#e5e7eb}
+      .svg-legend{fill:#9ca3af}
+    }
+  </style>
+  <rect width="680" height="300" class="svg-bg" rx="8"/>
+  <text x="340" y="24" text-anchor="middle" font-size="16" font-weight="bold" class="svg-title">県内大学入学者割合 都道府県ランキング（2024年）</text>
+  
+  <text x="227.5" y="54" text-anchor="middle" font-size="12" font-weight="bold" fill="#1565c0">上位 5</text>
+  <text x="542.5" y="54" text-anchor="middle" font-size="12" font-weight="bold" fill="#c62828">下位 5</text>
+  
+      <text x="84" y="82" text-anchor="end" font-size="11" class="svg-label">愛知県</text>
+      <rect x="90" y="63" width="195" height="30" fill="#1565c0" rx="2"/>
+      <text x="289" y="82" font-size="10" class="svg-label">71.4％</text>
+    
+      <text x="84" y="118" text-anchor="end" font-size="11" class="svg-label">東京都</text>
+      <rect x="90" y="99" width="187.89915966386553" height="30" fill="#1976d2" rx="2"/>
+      <text x="281.89915966386553" y="118" font-size="10" class="svg-label">68.8％</text>
+    
+      <text x="84" y="154" text-anchor="end" font-size="11" class="svg-label">福岡県</text>
+      <rect x="90" y="135" width="179.97899159663868" height="30" fill="#1e88e5" rx="2"/>
+      <text x="273.9789915966387" y="154" font-size="10" class="svg-label">65.9％</text>
+    
+      <text x="84" y="190" text-anchor="end" font-size="11" class="svg-label">北海道</text>
+      <rect x="90" y="171" width="178.34033613445376" height="30" fill="#2196f3" rx="2"/>
+      <text x="272.34033613445376" y="190" font-size="10" class="svg-label">65.3％</text>
+    
+      <text x="84" y="226" text-anchor="end" font-size="11" class="svg-label">大阪府</text>
+      <rect x="90" y="207" width="164.1386554621849" height="30" fill="#42a5f5" rx="2"/>
+      <text x="258.1386554621849" y="226" font-size="10" class="svg-label">60.1％</text>
+    
+  
+      <text x="399" y="82" text-anchor="end" font-size="11" class="svg-label">鳥取県</text>
+      <rect x="405" y="63" width="41.239495798319325" height="30" fill="#c62828" rx="2"/>
+      <text x="450.23949579831935" y="82" font-size="10" class="svg-label">15.1％</text>
+    
+      <text x="399" y="118" text-anchor="end" font-size="11" class="svg-label">奈良県</text>
+      <rect x="405" y="99" width="41.5126050420168" height="30" fill="#d32f2f" rx="2"/>
+      <text x="450.5126050420168" y="118" font-size="10" class="svg-label">15.2％</text>
+    
+      <text x="399" y="154" text-anchor="end" font-size="11" class="svg-label">佐賀県</text>
+      <rect x="405" y="135" width="47.79411764705882" height="30" fill="#e53935" rx="2"/>
+      <text x="456.79411764705884" y="154" font-size="10" class="svg-label">17.5％</text>
+    
+      <text x="399" y="190" text-anchor="end" font-size="11" class="svg-label">香川県</text>
+      <rect x="405" y="171" width="48.34033613445378" height="30" fill="#ef5350" rx="2"/>
+      <text x="457.34033613445376" y="190" font-size="10" class="svg-label">17.7％</text>
+    
+      <text x="399" y="226" text-anchor="end" font-size="11" class="svg-label">島根県</text>
+      <rect x="405" y="207" width="48.61344537815126" height="30" fill="#e57373" rx="2"/>
+      <text x="457.61344537815125" y="226" font-size="10" class="svg-label">17.8％</text>
+    
+  <text x="340" y="282" text-anchor="middle" font-size="10" class="svg-legend">凡例: 青系=上位 / 赤系=下位</text>
+</svg>

@@ -1,0 +1,87 @@
+<svg width="700" height="700" viewBox="0 0 560 560" xmlns="http://www.w3.org/2000/svg" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" role="img" aria-label="都市公園面積 vs 都市公園数">
+<title>都市公園面積 vs 都市公園数</title>
+<rect width="560" height="560" fill="#fafafa" rx="8"/>
+<text x="280" y="28" text-anchor="middle" font-size="16" font-weight="bold" fill="#333">都市公園面積 vs 都市公園数</text>
+<rect x="65" y="65" width="465" height="440" fill="#f9fafb" stroke="#d1d5db"/>
+<line x1="65" y1="65" x2="65" y2="505" stroke="#e5e7eb" stroke-width="0.5"/>
+<text x="65" y="519" text-anchor="middle" font-size="8" fill="#6b7280">4.3</text>
+<line x1="158" y1="65" x2="158" y2="505" stroke="#e5e7eb" stroke-width="0.5"/>
+<text x="158" y="519" text-anchor="middle" font-size="8" fill="#6b7280">9.0</text>
+<line x1="251" y1="65" x2="251" y2="505" stroke="#e5e7eb" stroke-width="0.5"/>
+<text x="251" y="519" text-anchor="middle" font-size="8" fill="#6b7280">13.7</text>
+<line x1="343.99999999999994" y1="65" x2="343.99999999999994" y2="505" stroke="#e5e7eb" stroke-width="0.5"/>
+<text x="343.99999999999994" y="519" text-anchor="middle" font-size="8" fill="#6b7280">18.4</text>
+<line x1="437" y1="65" x2="437" y2="505" stroke="#e5e7eb" stroke-width="0.5"/>
+<text x="437" y="519" text-anchor="middle" font-size="8" fill="#6b7280">23.1</text>
+<line x1="530" y1="65" x2="530" y2="505" stroke="#e5e7eb" stroke-width="0.5"/>
+<text x="530" y="519" text-anchor="middle" font-size="8" fill="#6b7280">27.8</text>
+<line x1="65" y1="505" x2="530" y2="505" stroke="#e5e7eb" stroke-width="0.5"/>
+<text x="60" y="508" text-anchor="end" font-size="8" fill="#6b7280">18.9</text>
+<line x1="65" y1="417" x2="530" y2="417" stroke="#e5e7eb" stroke-width="0.5"/>
+<text x="60" y="420" text-anchor="end" font-size="8" fill="#6b7280">138.5</text>
+<line x1="65" y1="329" x2="530" y2="329" stroke="#e5e7eb" stroke-width="0.5"/>
+<text x="60" y="332" text-anchor="end" font-size="8" fill="#6b7280">258.1</text>
+<line x1="65" y1="241" x2="530" y2="241" stroke="#e5e7eb" stroke-width="0.5"/>
+<text x="60" y="244" text-anchor="end" font-size="8" fill="#6b7280">377.6</text>
+<line x1="65" y1="153" x2="530" y2="153" stroke="#e5e7eb" stroke-width="0.5"/>
+<text x="60" y="156" text-anchor="end" font-size="8" fill="#6b7280">497.2</text>
+<line x1="65" y1="65" x2="530" y2="65" stroke="#e5e7eb" stroke-width="0.5"/>
+<text x="60" y="68" text-anchor="end" font-size="8" fill="#6b7280">616.8</text>
+<line x1="226.71643277501133" y1="65" x2="226.71643277501133" y2="505" stroke="#9ca3af" stroke-dasharray="4,3" opacity="0.6"/>
+<line x1="65" y1="433.42383223568316" x2="530" y2="433.42383223568316" stroke="#9ca3af" stroke-dasharray="4,3" opacity="0.6"/>
+<circle cx="530" cy="493.9238283210116" r="4.5" fill="#42a5f5" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>北海道：1人当たり公園面積=27.84 公園数（100km2当たり）=33.98</title></circle>
+<text x="536" y="487.9238283210116" font-size="8" fill="#374151">北海道</text>
+<circle cx="369.9212765957447" cy="496.67631218010905" r="4.5" fill="#42a5f5" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>山形県：1人当たり公園面積=19.75 公園数（100km2当たり）=30.24</title></circle>
+<text x="375.9212765957447" y="490.67631218010905" font-size="8" fill="#374151">山形</text>
+<circle cx="349.9361702127659" cy="442.42146990934333" r="4.5" fill="#42a5f5" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>宮城県：1人当たり公園面積=18.74 公園数（100km2当たり）=103.96</title></circle>
+<circle cx="344.79148936170213" cy="505" r="4.5" fill="#42a5f5" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>秋田県：1人当たり公園面積=18.48 公園数（100km2当たり）=18.93</title></circle>
+<text x="350.79148936170213" y="499" font-size="8" fill="#374151">秋田</text>
+<circle cx="338.65744680851066" cy="478.70421168835514" r="4.5" fill="#ab47bc" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>宮崎県：1人当たり公園面積=18.17 公園数（100km2当たり）=54.66</title></circle>
+<circle cx="326.1914893617021" cy="498.7517144481986" r="4.5" fill="#42a5f5" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>青森県：1人当たり公園面積=17.54 公園数（100km2当たり）=27.42</title></circle>
+<circle cx="319.26595744680856" cy="482.1705750510153" r="4.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>香川県：1人当たり公園面積=17.19 公園数（100km2当たり）=49.95</title></circle>
+<circle cx="306.79999999999995" cy="494.8364165523701" r="4.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>島根県：1人当たり公園面積=16.56 公園数（100km2当たり）=32.74</title></circle>
+<circle cx="302.64468085106387" cy="433.8769946141237" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>富山県：1人当たり公園面積=16.35 公園数（100km2当たり）=115.57</title></circle>
+<circle cx="298.68723404255314" cy="454.4396681497341" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>福井県：1人当たり公園面積=16.15 公園数（100km2当たり）=87.63</title></circle>
+<circle cx="292.1574468085106" cy="461.5048673602516" r="4.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>岡山県：1人当たり公園面積=15.82 公園数（100km2当たり）=78.03</title></circle>
+<circle cx="288.7936170212766" cy="465.0374669655103" r="4.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>山口県：1人当たり公園面積=15.65 公園数（100km2当たり）=73.23</title></circle>
+<circle cx="276.1297872340425" cy="462.33650018398953" r="4.5" fill="#66bb6a" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>栃木県：1人当たり公園面積=15.01 公園数（100km2当たり）=76.9</title></circle>
+<circle cx="267.8191489361702" cy="478.68949252333323" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>新潟県：1人当たり公園面積=14.59 公園数（100km2当たり）=54.68</title></circle>
+<circle cx="261.09148936170214" cy="456.9787241160138" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>石川県：1人当たり公園面積=14.25 公園数（100km2当たり）=84.18</title></circle>
+<circle cx="256.5404255319149" cy="496.09490516174355" r="4.5" fill="#42a5f5" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>福島県：1人当たり公園面積=14.02 公園数（100km2当たり）=31.03</title></circle>
+<circle cx="256.14468085106387" cy="310.0961763623591" r="4.5" fill="#ffa726" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>奈良県：1人当たり公園面積=14 公園数（100km2当たり）=283.76</title></circle>
+<text x="262.14468085106387" y="304.0961763623591" font-size="8" fill="#374151">奈良</text>
+<circle cx="255.15531914893617" cy="491.4289298497976" r="4.5" fill="#42a5f5" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>岩手県：1人当たり公園面積=13.95 公園数（100km2当たり）=37.37</title></circle>
+<circle cx="255.15531914893617" cy="470.57187301374904" r="4.5" fill="#66bb6a" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>群馬県：1人当たり公園面積=13.95 公園数（100km2当たり）=65.71</title></circle>
+<circle cx="254.1659574468085" cy="496.5732780249557" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>長野県：1人当たり公園面積=13.9 公園数（100km2当たり）=30.38</title></circle>
+<circle cx="241.7" cy="354.99698926170004" r="4.5" fill="#ffa726" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>兵庫県：1人当たり公園面積=13.27 公園数（100km2当たり）=222.75</title></circle>
+<circle cx="224.48510638297873" cy="488.1686347974442" r="4.5" fill="#ab47bc" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>鹿児島県：1人当たり公園面積=12.4 公園数（100km2当たり）=41.8</title></circle>
+<circle cx="218.7468085106383" cy="493.45281504031044" r="4.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>鳥取県：1人当たり公園面積=12.11 公園数（100km2当たり）=34.62</title></circle>
+<circle cx="216.96595744680852" cy="491.362693607199" r="4.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>愛媛県：1人当たり公園面積=12.02 公園数（100km2当たり）=37.46</title></circle>
+<circle cx="206.87446808510637" cy="465.01538821797743" r="4.5" fill="#ab47bc" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>長崎県：1人当たり公園面積=11.51 公園数（100km2当たり）=73.26</title></circle>
+<circle cx="202.71914893617023" cy="462.14515103870474" r="4.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>高知県：1人当たり公園面積=11.3 公園数（100km2当たり）=77.16</title></circle>
+<circle cx="201.136170212766" cy="469.6519251998796" r="4.5" fill="#ab47bc" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>大分県：1人当たり公園面積=11.22 公園数（100km2当たり）=66.96</title></circle>
+<circle cx="194.80425531914895" cy="412.96106111798747" r="4.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>広島県：1人当たり公園面積=10.9 公園数（100km2当たり）=143.99</title></circle>
+<circle cx="194.40851063829788" cy="504.26404174890445" r="4.5" fill="#ab47bc" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>佐賀県：1人当たり公園面積=10.88 公園数（100km2当たり）=19.93</title></circle>
+<circle cx="190.05531914893618" cy="469.59304853979194" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>岐阜県：1人当たり公園面積=10.66 公園数（100km2当たり）=67.04</title></circle>
+<circle cx="186.6914893617021" cy="464.2941491319038" r="4.5" fill="#ab47bc" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>沖縄県：1人当たり公園面積=10.49 公園数（100km2当たり）=74.24</title></circle>
+<circle cx="181.15106382978723" cy="502.56397818887365" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>山梨県：1人当たり公園面積=10.21 公園数（100km2当たり）=22.24</title></circle>
+<circle cx="179.1723404255319" cy="415.1394975412304" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>三重県：1人当たり公園面積=10.11 公園数（100km2当たり）=141.03</title></circle>
+<circle cx="177.98510638297876" cy="477.33532934131733" r="4.5" fill="#66bb6a" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>茨城県：1人当たり公園面積=10.05 公園数（100km2当たり）=56.52</title></circle>
+<circle cx="164.7276595744681" cy="351.64101963670424" r="4.5" fill="#ab47bc" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>福岡県：1人当たり公園面積=9.38 公園数（100km2当たり）=227.31</title></circle>
+<circle cx="162.35319148936168" cy="483.4217040778778" r="4.5" fill="#ffa726" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>滋賀県：1人当たり公園面積=9.26 公園数（100km2当たり）=48.25</title></circle>
+<circle cx="160.96808510638297" cy="446.91081524102634" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>静岡県：1人当たり公園面積=9.19 公園数（100km2当たり）=97.86</title></circle>
+<circle cx="151.27234042553192" cy="465.66303147894155" r="4.5" fill="#ab47bc" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>熊本県：1人当たり公園面積=8.7 公園数（100km2当たり）=72.38</title></circle>
+<circle cx="148.50212765957448" cy="477.1366206135216" r="4.5" fill="#ffa726" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>和歌山県：1人当たり公園面積=8.56 公園数（100km2当たり）=56.79</title></circle>
+<circle cx="137.81702127659574" cy="396.1223363329208" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>愛知県：1人当たり公園面積=8.02 公園数（100km2当たり）=166.87</title></circle>
+<circle cx="136.43191489361703" cy="499.3772789616298" r="4.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>徳島県：1人当たり公園面積=7.95 公園数（100km2当たり）=26.57</title></circle>
+<circle cx="133.2659574468085" cy="364.7116381761616" r="4.5" fill="#ffa726" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>京都府：1人当たり公園面積=7.79 公園数（100km2当たり）=209.55</title></circle>
+<circle cx="122.38297872340426" cy="356.1377245508982" r="4.5" fill="#66bb6a" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>埼玉県：1人当たり公園面積=7.24 公園数（100km2当たり）=221.2</title></circle>
+<circle cx="118.02978723404254" cy="359.994145786639" r="4.5" fill="#66bb6a" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>千葉県：1人当たり公園面積=7.02 公園数（100km2当たり）=215.96</title></circle>
+<text x="124.02978723404254" y="353.994145786639" font-size="8" fill="#374151">千葉</text>
+<circle cx="94.28510638297874" cy="131.14056802595928" r="4.5" fill="#66bb6a" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>神奈川県：1人当たり公園面積=5.82 公園数（100km2当たり）=526.92</title></circle>
+<text x="100.28510638297874" y="125.14056802595928" font-size="8" fill="#374151">神奈川</text>
+<circle cx="93.69148936170214" cy="132.6051249456395" r="4.5" fill="#ffa726" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>大阪府：1人当たり公園面積=5.79 公園数（100km2当たり）=524.93</title></circle>
+<text x="99.69148936170214" y="126.60512494563949" font-size="8" fill="#374151">大阪</text>
+<circle cx="65" cy="65" r="4.5" fill="#66bb6a" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>東京都：1人当たり公園面積=4.34 公園数（100km2当たり）=616.79</title></circle>
+<text x="71" y="59" font-size="8" fill="#374151">東京</text>
+</svg>
