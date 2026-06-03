@@ -1,0 +1,117 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 400" font-family="'Hiragino Sans','Noto Sans JP',sans-serif">
+  <rect width="960" height="400" fill="#f8f9fa" rx="8"/>
+
+  <text x="480" y="36" text-anchor="middle" font-size="18" font-weight="bold" fill="#1a1a2e">食品9品目の全国平均変化率（2019年→2024年）</text>
+
+  <!-- Grid area: x=200..880, y=60..360 -->
+  <!-- 9 items, each row height = 33px, starting at y=68 -->
+  <!-- Scale: -10% to +35%, zero line at x=200 + (10/45)*680 = 200 + 151 = 351 -->
+
+  <!-- Background grid lines -->
+  <line x1="200" y1="60" x2="200" y2="365" stroke="#e0e0e0" stroke-width="0.5"/>
+  <line x1="351" y1="60" x2="351" y2="365" stroke="#999" stroke-width="1" stroke-dasharray="4,2"/>
+  <line x1="502" y1="60" x2="502" y2="365" stroke="#e0e0e0" stroke-width="0.5"/>
+  <line x1="654" y1="60" x2="654" y2="365" stroke="#e0e0e0" stroke-width="0.5"/>
+  <line x1="805" y1="60" x2="805" y2="365" stroke="#e0e0e0" stroke-width="0.5"/>
+
+  <!-- X-axis labels -->
+  <text x="200" y="385" text-anchor="middle" font-size="10" fill="#666">-10%</text>
+  <text x="351" y="385" text-anchor="middle" font-size="10" fill="#666">0%</text>
+  <text x="502" y="385" text-anchor="middle" font-size="10" fill="#666">+10%</text>
+  <text x="654" y="385" text-anchor="middle" font-size="10" fill="#666">+20%</text>
+  <text x="805" y="385" text-anchor="middle" font-size="10" fill="#666">+30%</text>
+
+  <!-- Zero line label -->
+  <text x="351" y="55" text-anchor="middle" font-size="9" fill="#999">0%</text>
+
+  <!-- Scale: 1% = 680/45 = 15.11px -->
+  <!-- Zero at x=351 -->
+
+  <!-- Row 1: アイスクリーム +32.5% -> barW = 32.5 * 15.11 = 491 -->
+  <g transform="translate(0, 68)">
+    <text x="190" y="17" text-anchor="end" font-size="12" fill="#333" font-weight="bold">アイスクリーム</text>
+    <rect x="351" y="4" width="491" height="22" rx="4" fill="#e74c3c"/>
+    <text x="848" y="19" font-size="11" fill="#c0392b" font-weight="bold">+32.5%</text>
+    <text x="360" y="19" font-size="9" fill="#fff">9,471→12,549円</text>
+  </g>
+
+  <!-- Row 2: ラーメン外食 +25.5% -> barW = 25.5 * 15.11 = 385 -->
+  <g transform="translate(0, 101)">
+    <text x="190" y="17" text-anchor="end" font-size="12" fill="#333" font-weight="bold">ラーメン外食</text>
+    <rect x="351" y="4" width="385" height="22" rx="4" fill="#e67e22"/>
+    <text x="742" y="19" font-size="11" fill="#d35400" font-weight="bold">+25.5%</text>
+    <text x="360" y="19" font-size="9" fill="#fff">7,332→9,205円</text>
+  </g>
+
+  <!-- Row 3: コーヒー +24.1% -> barW = 24.1 * 15.11 = 364 -->
+  <g transform="translate(0, 134)">
+    <text x="190" y="17" text-anchor="end" font-size="12" fill="#333" font-weight="bold">コーヒー</text>
+    <rect x="351" y="4" width="364" height="22" rx="4" fill="#f39c12"/>
+    <text x="721" y="19" font-size="11" fill="#d35400" font-weight="bold">+24.1%</text>
+    <text x="360" y="19" font-size="9" fill="#fff">6,472→8,033円</text>
+  </g>
+
+  <!-- Row 4: 焼肉 +23.7% -> barW = 23.7 * 15.11 = 358 -->
+  <g transform="translate(0, 167)">
+    <text x="190" y="17" text-anchor="end" font-size="12" fill="#333" font-weight="bold">焼肉</text>
+    <rect x="351" y="4" width="358" height="22" rx="4" fill="#f39c12"/>
+    <text x="715" y="19" font-size="11" fill="#d35400" font-weight="bold">+23.7%</text>
+    <text x="360" y="19" font-size="9" fill="#fff">7,500→9,277円</text>
+  </g>
+
+  <!-- Row 5: ビール +18.0% -> barW = 18.0 * 15.11 = 272 -->
+  <g transform="translate(0, 200)">
+    <text x="190" y="17" text-anchor="end" font-size="12" fill="#333" font-weight="bold">ビール</text>
+    <rect x="351" y="4" width="272" height="22" rx="4" fill="#f1c40f"/>
+    <text x="629" y="19" font-size="11" fill="#b7950b" font-weight="bold">+18.0%</text>
+    <text x="360" y="19" font-size="9" fill="#555">10,788→12,730円</text>
+  </g>
+
+  <!-- Row 6: すし外食 +10.7% -> barW = 10.7 * 15.11 = 162 -->
+  <g transform="translate(0, 233)">
+    <text x="190" y="17" text-anchor="end" font-size="12" fill="#333" font-weight="bold">すし外食</text>
+    <rect x="351" y="4" width="162" height="22" rx="4" fill="#f1c40f" opacity="0.8"/>
+    <text x="519" y="19" font-size="11" fill="#b7950b" font-weight="bold">+10.7%</text>
+    <text x="360" y="19" font-size="9" fill="#555">14,670→16,239円</text>
+  </g>
+
+  <!-- Row 7: 食パン +9.6% -> barW = 9.6 * 15.11 = 145 -->
+  <g transform="translate(0, 266)">
+    <text x="190" y="17" text-anchor="end" font-size="12" fill="#333" font-weight="bold">食パン</text>
+    <rect x="351" y="4" width="145" height="22" rx="4" fill="#f1c40f" opacity="0.6"/>
+    <text x="502" y="19" font-size="11" fill="#b7950b" font-weight="bold">+9.6%</text>
+    <text x="360" y="19" font-size="9" fill="#555">9,664→10,589円</text>
+  </g>
+
+  <!-- Row 8: ワイン +7.2% -> barW = 7.2 * 15.11 = 109 -->
+  <g transform="translate(0, 299)">
+    <text x="190" y="17" text-anchor="end" font-size="12" fill="#333" font-weight="bold">ワイン</text>
+    <rect x="351" y="4" width="109" height="22" rx="4" fill="#f1c40f" opacity="0.5"/>
+    <text x="466" y="19" font-size="11" fill="#b7950b" font-weight="bold">+7.2%</text>
+    <text x="360" y="19" font-size="9" fill="#555">3,141→3,366円</text>
+  </g>
+
+  <!-- Row 9: 冷凍ぎょうざ -7.8% -> barW = 7.8 * 15.11 = 118 (negative direction) -->
+  <g transform="translate(0, 332)">
+    <text x="190" y="17" text-anchor="end" font-size="12" fill="#333" font-weight="bold">冷凍ぎょうざ</text>
+    <rect x="233" y="4" width="118" height="22" rx="4" fill="#3498db"/>
+    <text x="222" y="19" text-anchor="end" font-size="11" fill="#2471a3" font-weight="bold">-7.8%</text>
+    <text x="240" y="19" font-size="9" fill="#fff">2,063→1,902円</text>
+  </g>
+
+  <!-- Annotation: Ice cream surge -->
+  <g transform="translate(720, 68)">
+    <rect x="0" y="28" width="200" height="38" rx="4" fill="#fdf2f2" stroke="#e74c3c" stroke-width="0.5"/>
+    <text x="10" y="47" font-size="9" fill="#c0392b" font-weight="bold">アイスは5年で32%増!</text>
+    <text x="10" y="60" font-size="8" fill="#c0392b">猛暑続きと高級路線が後押し</text>
+  </g>
+
+  <!-- Annotation: Gyoza decline -->
+  <g transform="translate(100, 332)">
+    <rect x="0" y="24" width="170" height="28" rx="4" fill="#eef6fc" stroke="#3498db" stroke-width="0.5"/>
+    <text x="10" y="42" font-size="9" fill="#2471a3" font-weight="bold">唯一のマイナス: 冷凍ぎょうざ</text>
+  </g>
+
+  <!-- Source -->
+  <text x="940" y="398" text-anchor="end" font-size="9" fill="#999">出典：総務省「家計調査」全国平均（二人以上の世帯）</text>
+</svg>

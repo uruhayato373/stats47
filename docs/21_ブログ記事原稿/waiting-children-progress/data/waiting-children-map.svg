@@ -1,0 +1,390 @@
+<svg width="600" height="690" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 690" role="img" aria-label="待機児童数 都道府県マップ">
+  <title>待機児童数 都道府県マップ</title>
+  <rect width="600" height="690" fill="#f9fafb"/>
+  <text x="300" y="19" text-anchor="middle" font-size="11.5" font-weight="700" fill="#111827">待機児童数 都道府県マップ</text>
+  <text x="300" y="34" text-anchor="middle" font-size="9" fill="#6b7280">単位：人</text>
+  <g aria-label="北海道 28人">
+    <title>北海道：28人</title>
+    <rect x="491" y="45" width="74" height="74" rx="3" fill="#71b0fb" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="528" y="80" font-size="7" font-weight="700">北海道</tspan>
+      <tspan x="528" y="93" font-size="7">28</tspan>
+    </text>
+  </g>
+  <g aria-label="青森 0人">
+    <title>青森県：0人</title>
+    <rect x="491" y="159.5" width="74" height="36" rx="3" fill="#e5e7eb" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="528" y="175.5" font-size="7" font-weight="700">青森</tspan>
+      <tspan x="528" y="188.5" font-size="7">0</tspan>
+    </text>
+  </g>
+  <g aria-label="岩手 22人">
+    <title>岩手県：22人</title>
+    <rect x="529" y="197.5" width="36" height="36" rx="3" fill="#7ab6fc" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="547" y="213.5" font-size="7" font-weight="700">岩手</tspan>
+      <tspan x="547" y="226.5" font-size="7">22</tspan>
+    </text>
+  </g>
+  <g aria-label="宮城 18人">
+    <title>宮城県：18人</title>
+    <rect x="529" y="236" width="36" height="36" rx="3" fill="#82bafc" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="547" y="252" font-size="7" font-weight="700">宮城</tspan>
+      <tspan x="547" y="265" font-size="7">18</tspan>
+    </text>
+  </g>
+  <g aria-label="秋田 2人">
+    <title>秋田県：2人</title>
+    <rect x="491" y="197.5" width="36" height="36" rx="3" fill="#bbd9fe" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="509" y="213.5" font-size="7" font-weight="700">秋田</tspan>
+      <tspan x="509" y="226.5" font-size="7">2</tspan>
+    </text>
+  </g>
+  <g aria-label="山形 0人">
+    <title>山形県：0人</title>
+    <rect x="491" y="236" width="36" height="36" rx="3" fill="#e5e7eb" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="509" y="252" font-size="7" font-weight="700">山形</tspan>
+      <tspan x="509" y="265" font-size="7">0</tspan>
+    </text>
+  </g>
+  <g aria-label="福島 17人">
+    <title>福島県：17人</title>
+    <rect x="491" y="274" width="74" height="36" rx="3" fill="#84bbfc" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="528" y="290" font-size="7" font-weight="700">福島</tspan>
+      <tspan x="528" y="303" font-size="7">17</tspan>
+    </text>
+  </g>
+  <g aria-label="茨城 4人">
+    <title>茨城県：4人</title>
+    <rect x="529" y="312.5" width="36" height="36" rx="3" fill="#aed3fd" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="547" y="328.5" font-size="7" font-weight="700">茨城</tspan>
+      <tspan x="547" y="341.5" font-size="7">4</tspan>
+    </text>
+  </g>
+  <g aria-label="栃木 0人">
+    <title>栃木県：0人</title>
+    <rect x="491" y="312.5" width="36" height="36" rx="3" fill="#e5e7eb" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="509" y="328.5" font-size="7" font-weight="700">栃木</tspan>
+      <tspan x="509" y="341.5" font-size="7">0</tspan>
+    </text>
+  </g>
+  <g aria-label="群馬 12人">
+    <title>群馬県：12人</title>
+    <rect x="453" y="312.5" width="36" height="36" rx="3" fill="#8ec2fd" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="471" y="328.5" font-size="7" font-weight="700">群馬</tspan>
+      <tspan x="471" y="341.5" font-size="7">12</tspan>
+    </text>
+  </g>
+  <g aria-label="埼玉 241人">
+    <title>埼玉県：241人</title>
+    <rect x="491" y="350.5" width="36" height="36" rx="3" fill="#1e50da" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#ffffff" text-anchor="middle">
+      <tspan x="509" y="366.5" font-size="7" font-weight="700">埼玉</tspan>
+      <tspan x="509" y="379.5" font-size="7">241</tspan>
+    </text>
+  </g>
+  <g aria-label="千葉 83人">
+    <title>千葉県：83人</title>
+    <rect x="529" y="350.5" width="36" height="74" rx="3" fill="#4086f6" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#ffffff" text-anchor="middle">
+      <tspan x="547" y="385.5" font-size="7" font-weight="700">千葉</tspan>
+      <tspan x="547" y="398.5" font-size="7">83</tspan>
+    </text>
+  </g>
+  <g aria-label="東京 361人">
+    <title>東京都：361人</title>
+    <rect x="491" y="388.5" width="36" height="36" rx="3" fill="#1e40af" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#ffffff" text-anchor="middle">
+      <tspan x="509" y="404.5" font-size="7" font-weight="700">東京</tspan>
+      <tspan x="509" y="417.5" font-size="7">361</tspan>
+    </text>
+  </g>
+  <g aria-label="神奈川 188人">
+    <title>神奈川県：188人</title>
+    <rect x="491" y="427" width="36" height="36" rx="3" fill="#225ce5" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#ffffff" text-anchor="middle">
+      <tspan x="509" y="443" font-size="7" font-weight="700">神奈川</tspan>
+      <tspan x="509" y="456" font-size="7">188</tspan>
+    </text>
+  </g>
+  <g aria-label="新潟 0人">
+    <title>新潟県：0人</title>
+    <rect x="415" y="274" width="74" height="36" rx="3" fill="#e5e7eb" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="452" y="290" font-size="7" font-weight="700">新潟</tspan>
+      <tspan x="452" y="303" font-size="7">0</tspan>
+    </text>
+  </g>
+  <g aria-label="富山 0人">
+    <title>富山県：0人</title>
+    <rect x="376" y="274" width="36" height="36" rx="3" fill="#e5e7eb" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="394" y="290" font-size="7" font-weight="700">富山</tspan>
+      <tspan x="394" y="303" font-size="7">0</tspan>
+    </text>
+  </g>
+  <g aria-label="石川 0人">
+    <title>石川県：0人</title>
+    <rect x="338" y="274" width="36" height="36" rx="3" fill="#e5e7eb" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="356" y="290" font-size="7" font-weight="700">石川</tspan>
+      <tspan x="356" y="303" font-size="7">0</tspan>
+    </text>
+  </g>
+  <g aria-label="福井 0人">
+    <title>福井県：0人</title>
+    <rect x="338" y="312.5" width="36" height="36" rx="3" fill="#e5e7eb" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="356" y="328.5" font-size="7" font-weight="700">福井</tspan>
+      <tspan x="356" y="341.5" font-size="7">0</tspan>
+    </text>
+  </g>
+  <g aria-label="山梨 0人">
+    <title>山梨県：0人</title>
+    <rect x="453" y="350.5" width="36" height="36" rx="3" fill="#e5e7eb" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="471" y="366.5" font-size="7" font-weight="700">山梨</tspan>
+      <tspan x="471" y="379.5" font-size="7">0</tspan>
+    </text>
+  </g>
+  <g aria-label="長野 30人">
+    <title>長野県：30人</title>
+    <rect x="415" y="312.5" width="36" height="74" rx="3" fill="#6eaefb" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="433" y="347.5" font-size="7" font-weight="700">長野</tspan>
+      <tspan x="433" y="360.5" font-size="7">30</tspan>
+    </text>
+  </g>
+  <g aria-label="岐阜 1人">
+    <title>岐阜県：1人</title>
+    <rect x="376" y="312.5" width="36" height="74" rx="3" fill="#c4defe" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="394" y="347.5" font-size="7" font-weight="700">岐阜</tspan>
+      <tspan x="394" y="360.5" font-size="7">1</tspan>
+    </text>
+  </g>
+  <g aria-label="静岡 16人">
+    <title>静岡県：16人</title>
+    <rect x="415" y="388.5" width="74" height="36" rx="3" fill="#86bdfc" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="452" y="404.5" font-size="7" font-weight="700">静岡</tspan>
+      <tspan x="452" y="417.5" font-size="7">16</tspan>
+    </text>
+  </g>
+  <g aria-label="愛知 57人">
+    <title>愛知県：57人</title>
+    <rect x="376" y="388.5" width="36" height="36" rx="3" fill="#5298f8" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#ffffff" text-anchor="middle">
+      <tspan x="394" y="404.5" font-size="7" font-weight="700">愛知</tspan>
+      <tspan x="394" y="417.5" font-size="7">57</tspan>
+    </text>
+  </g>
+  <g aria-label="三重 108人">
+    <title>三重県：108人</title>
+    <rect x="338" y="388.5" width="36" height="74" rx="3" fill="#3579f3" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#ffffff" text-anchor="middle">
+      <tspan x="356" y="423.5" font-size="7" font-weight="700">三重</tspan>
+      <tspan x="356" y="436.5" font-size="7">108</tspan>
+    </text>
+  </g>
+  <g aria-label="滋賀 353人">
+    <title>滋賀県：353人</title>
+    <rect x="338" y="350.5" width="36" height="36" rx="3" fill="#1e41b2" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#ffffff" text-anchor="middle">
+      <tspan x="356" y="366.5" font-size="7" font-weight="700">滋賀</tspan>
+      <tspan x="356" y="379.5" font-size="7">353</tspan>
+    </text>
+  </g>
+  <g aria-label="京都 14人">
+    <title>京都府：14人</title>
+    <rect x="262" y="350.5" width="74" height="36" rx="3" fill="#8abffc" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="299" y="366.5" font-size="7" font-weight="700">京都</tspan>
+      <tspan x="299" y="379.5" font-size="7">14</tspan>
+    </text>
+  </g>
+  <g aria-label="大阪 111人">
+    <title>大阪府：111人</title>
+    <rect x="262" y="388.5" width="36" height="36" rx="3" fill="#3478f2" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#ffffff" text-anchor="middle">
+      <tspan x="280" y="404.5" font-size="7" font-weight="700">大阪</tspan>
+      <tspan x="280" y="417.5" font-size="7">111</tspan>
+    </text>
+  </g>
+  <g aria-label="兵庫 256人">
+    <title>兵庫県：256人</title>
+    <rect x="224" y="350.5" width="36" height="74" rx="3" fill="#1d4dd6" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#ffffff" text-anchor="middle">
+      <tspan x="242" y="385.5" font-size="7" font-weight="700">兵庫</tspan>
+      <tspan x="242" y="398.5" font-size="7">256</tspan>
+    </text>
+  </g>
+  <g aria-label="奈良 135人">
+    <title>奈良県：135人</title>
+    <rect x="300" y="388.5" width="36" height="36" rx="3" fill="#2c6def" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#ffffff" text-anchor="middle">
+      <tspan x="318" y="404.5" font-size="7" font-weight="700">奈良</tspan>
+      <tspan x="318" y="417.5" font-size="7">135</tspan>
+    </text>
+  </g>
+  <g aria-label="和歌山 22人">
+    <title>和歌山県：22人</title>
+    <rect x="262" y="427" width="74" height="36" rx="3" fill="#7ab6fc" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="299" y="443" font-size="7" font-weight="700">和歌山</tspan>
+      <tspan x="299" y="456" font-size="7">22</tspan>
+    </text>
+  </g>
+  <g aria-label="鳥取 0人">
+    <title>鳥取県：0人</title>
+    <rect x="185" y="350.5" width="36" height="36" rx="3" fill="#e5e7eb" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="203" y="366.5" font-size="7" font-weight="700">鳥取</tspan>
+      <tspan x="203" y="379.5" font-size="7">0</tspan>
+    </text>
+  </g>
+  <g aria-label="島根 0人">
+    <title>島根県：0人</title>
+    <rect x="147" y="350.5" width="36" height="36" rx="3" fill="#e5e7eb" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="165" y="366.5" font-size="7" font-weight="700">島根</tspan>
+      <tspan x="165" y="379.5" font-size="7">0</tspan>
+    </text>
+  </g>
+  <g aria-label="岡山 31人">
+    <title>岡山県：31人</title>
+    <rect x="185" y="388.5" width="36" height="36" rx="3" fill="#6cadfb" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="203" y="404.5" font-size="7" font-weight="700">岡山</tspan>
+      <tspan x="203" y="417.5" font-size="7">31</tspan>
+    </text>
+  </g>
+  <g aria-label="広島 0人">
+    <title>広島県：0人</title>
+    <rect x="147" y="388.5" width="36" height="36" rx="3" fill="#e5e7eb" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="165" y="404.5" font-size="7" font-weight="700">広島</tspan>
+      <tspan x="165" y="417.5" font-size="7">0</tspan>
+    </text>
+  </g>
+  <g aria-label="山口 14人">
+    <title>山口県：14人</title>
+    <rect x="109" y="350.5" width="36" height="74" rx="3" fill="#8abffc" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="127" y="385.5" font-size="7" font-weight="700">山口</tspan>
+      <tspan x="127" y="398.5" font-size="7">14</tspan>
+    </text>
+  </g>
+  <g aria-label="徳島 0人">
+    <title>徳島県：0人</title>
+    <rect x="185" y="503" width="36" height="36" rx="3" fill="#e5e7eb" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="203" y="519" font-size="7" font-weight="700">徳島</tspan>
+      <tspan x="203" y="532" font-size="7">0</tspan>
+    </text>
+  </g>
+  <g aria-label="香川 3人">
+    <title>香川県：3人</title>
+    <rect x="185" y="465" width="36" height="36" rx="3" fill="#b4d6fd" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="203" y="481" font-size="7" font-weight="700">香川</tspan>
+      <tspan x="203" y="494" font-size="7">3</tspan>
+    </text>
+  </g>
+  <g aria-label="愛媛 0人">
+    <title>愛媛県：0人</title>
+    <rect x="147" y="465" width="36" height="36" rx="3" fill="#e5e7eb" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="165" y="481" font-size="7" font-weight="700">愛媛</tspan>
+      <tspan x="165" y="494" font-size="7">0</tspan>
+    </text>
+  </g>
+  <g aria-label="高知 5人">
+    <title>高知県：5人</title>
+    <rect x="147" y="503" width="36" height="36" rx="3" fill="#a8d0fd" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="165" y="519" font-size="7" font-weight="700">高知</tspan>
+      <tspan x="165" y="532" font-size="7">5</tspan>
+    </text>
+  </g>
+  <g aria-label="福岡 57人">
+    <title>福岡県：57人</title>
+    <rect x="71" y="427" width="36" height="36" rx="3" fill="#5298f8" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#ffffff" text-anchor="middle">
+      <tspan x="89" y="443" font-size="7" font-weight="700">福岡</tspan>
+      <tspan x="89" y="456" font-size="7">57</tspan>
+    </text>
+  </g>
+  <g aria-label="佐賀 6人">
+    <title>佐賀県：6人</title>
+    <rect x="33" y="427" width="36" height="36" rx="3" fill="#a3cdfd" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="51" y="443" font-size="7" font-weight="700">佐賀</tspan>
+      <tspan x="51" y="456" font-size="7">6</tspan>
+    </text>
+  </g>
+  <g aria-label="長崎 0人">
+    <title>長崎県：0人</title>
+    <rect x="33" y="465" width="36" height="36" rx="3" fill="#e5e7eb" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="51" y="481" font-size="7" font-weight="700">長崎</tspan>
+      <tspan x="51" y="494" font-size="7">0</tspan>
+    </text>
+  </g>
+  <g aria-label="熊本 4人">
+    <title>熊本県：4人</title>
+    <rect x="33" y="503" width="36" height="36" rx="3" fill="#aed3fd" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="51" y="519" font-size="7" font-weight="700">熊本</tspan>
+      <tspan x="51" y="532" font-size="7">4</tspan>
+    </text>
+  </g>
+  <g aria-label="大分 0人">
+    <title>大分県：0人</title>
+    <rect x="71" y="465" width="36" height="36" rx="3" fill="#e5e7eb" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="89" y="481" font-size="7" font-weight="700">大分</tspan>
+      <tspan x="89" y="494" font-size="7">0</tspan>
+    </text>
+  </g>
+  <g aria-label="宮崎 0人">
+    <title>宮崎県：0人</title>
+    <rect x="71" y="503" width="36" height="36" rx="3" fill="#e5e7eb" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="89" y="519" font-size="7" font-weight="700">宮崎</tspan>
+      <tspan x="89" y="532" font-size="7">0</tspan>
+    </text>
+  </g>
+  <g aria-label="鹿児島 12人">
+    <title>鹿児島県：12人</title>
+    <rect x="33" y="541.5" width="74" height="36" rx="3" fill="#8ec2fd" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="70" y="557.5" font-size="7" font-weight="700">鹿児島</tspan>
+      <tspan x="70" y="570.5" font-size="7">12</tspan>
+    </text>
+  </g>
+  <g aria-label="沖縄 356人">
+    <title>沖縄県：356人</title>
+    <rect x="33" y="617.5" width="36" height="36" rx="3" fill="#1e41b1" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#ffffff" text-anchor="middle">
+      <tspan x="51" y="633.5" font-size="7" font-weight="700">沖縄</tspan>
+      <tspan x="51" y="646.5" font-size="7">356</tspan>
+    </text>
+  </g>
+  <text x="33" y="54" font-size="8.5" fill="#374151" font-weight="600">待機児童数</text>
+  <rect x="33" y="60" width="20" height="10" rx="1" fill="#e5e7eb"/>
+  <rect x="55" y="60" width="20" height="10" rx="1" fill="#dbeafe"/>
+  <rect x="77" y="60" width="20" height="10" rx="1" fill="#60a5fa"/>
+  <rect x="99" y="60" width="20" height="10" rx="1" fill="#2563eb"/>
+  <rect x="121" y="60" width="20" height="10" rx="1" fill="#1e40af"/>
+  <text x="33" y="82" font-size="7" fill="#6b7280">0</text>
+  <text x="131" y="82" font-size="7" fill="#6b7280" text-anchor="middle">多い</text>
+</svg>

@@ -1,0 +1,463 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 520" font-family="'Hiragino Sans','Noto Sans JP',sans-serif">
+  <defs>
+    <!-- Ramen color scale: light pink to deep red -->
+    <linearGradient id="ramen-legend" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#fee0d2"/>
+      <stop offset="50%" stop-color="#fb6a4a"/>
+      <stop offset="100%" stop-color="#a50f15"/>
+    </linearGradient>
+    <!-- Gyoza color scale: light blue to deep blue -->
+    <linearGradient id="gyoza-legend" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#deebf7"/>
+      <stop offset="50%" stop-color="#6baed6"/>
+      <stop offset="100%" stop-color="#08519c"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="960" height="520" fill="#f8f9fa" rx="8"/>
+
+  <!-- Title -->
+  <text x="480" y="32" text-anchor="middle" font-size="18" font-weight="bold" fill="#1a1a2e">ラーメン外食 vs 冷凍ぎょうざ ── 都道府県タイルマップ（2024年・円）</text>
+
+  <!-- Left panel: Ramen -->
+  <text x="220" y="58" text-anchor="middle" font-size="15" font-weight="bold" fill="#c0392b">ラーメン外食費</text>
+
+  <!-- Right panel: Gyoza -->
+  <text x="740" y="58" text-anchor="middle" font-size="15" font-weight="bold" fill="#2471a3">冷凍ぎょうざ購入額</text>
+
+  <!-- ============ LEFT: RAMEN TILE MAP ============ -->
+  <!-- Grid: x range 0-13, y range 0-15. Tile size=28, gap=2. Origin offset: ox=18, oy=68 -->
+  <!-- Color mapping: min ~3935, max ~22389 -->
+  <!-- 5 tiers: <6000=#fee0d2, 6000-9000=#fcbba1, 9000-12000=#fb6a4a, 12000-16000=#de2d26, >16000=#a50f15 -->
+
+  <g id="ramen-map">
+    <!-- Hokkaido (x=12,y=0, w=2,h=2) -->
+    <rect x="378" y="68" width="58" height="58" rx="3" fill="#fcbba1"/>
+    <text x="407" y="93" text-anchor="middle" font-size="9" font-weight="bold" fill="#333">北海道</text>
+    <text x="407" y="107" text-anchor="middle" font-size="8" fill="#555">8,498</text>
+
+    <!-- Aomori (x=12,y=3, w=2) -->
+    <rect x="378" y="158" width="58" height="28" rx="3" fill="#fb6a4a"/>
+    <text x="407" y="175" text-anchor="middle" font-size="9" font-weight="bold" fill="#fff">青森</text>
+
+    <!-- Iwate (x=13,y=4) -->
+    <rect x="408" y="188" width="28" height="28" rx="3" fill="#fb6a4a"/>
+    <text x="422" y="201" text-anchor="middle" font-size="8" font-weight="bold" fill="#fff">岩手</text>
+    <text x="422" y="212" text-anchor="middle" font-size="7" fill="#ffe">11,540</text>
+
+    <!-- Akita (x=12,y=4) -->
+    <rect x="378" y="188" width="28" height="28" rx="3" fill="#de2d26"/>
+    <text x="392" y="201" text-anchor="middle" font-size="8" font-weight="bold" fill="#fff">秋田</text>
+    <text x="392" y="212" text-anchor="middle" font-size="7" fill="#ffe">14,067</text>
+
+    <!-- Miyagi (x=13,y=5) -->
+    <rect x="408" y="218" width="28" height="28" rx="3" fill="#de2d26"/>
+    <text x="422" y="231" text-anchor="middle" font-size="8" font-weight="bold" fill="#fff">宮城</text>
+    <text x="422" y="242" text-anchor="middle" font-size="7" fill="#ffe">15,534</text>
+
+    <!-- Yamagata (x=12,y=5) -->
+    <rect x="378" y="218" width="28" height="28" rx="3" fill="#a50f15"/>
+    <text x="392" y="231" text-anchor="middle" font-size="8" font-weight="bold" fill="#fff">山形</text>
+    <text x="392" y="242" text-anchor="middle" font-size="7" fill="#ffe">22,389</text>
+
+    <!-- Fukushima (x=12,y=6, w=2) -->
+    <rect x="378" y="248" width="58" height="28" rx="3" fill="#fb6a4a"/>
+    <text x="407" y="262" text-anchor="middle" font-size="8" font-weight="bold" fill="#fff">福島 10,825</text>
+
+    <!-- Niigata (x=10,y=6, w=2) -->
+    <rect x="318" y="248" width="58" height="28" rx="3" fill="#a50f15"/>
+    <text x="347" y="262" text-anchor="middle" font-size="8" font-weight="bold" fill="#fff">新潟 16,292</text>
+
+    <!-- Toyama (x=9,y=6) -->
+    <rect x="288" y="248" width="28" height="28" rx="3" fill="#fb6a4a"/>
+    <text x="302" y="261" text-anchor="middle" font-size="8" font-weight="bold" fill="#fff">富山</text>
+
+    <!-- Ishikawa (x=8,y=6) -->
+    <rect x="258" y="248" width="28" height="28" rx="3" fill="#fb6a4a"/>
+    <text x="272" y="261" text-anchor="middle" font-size="8" font-weight="bold" fill="#fff">石川</text>
+
+    <!-- Fukui (x=8,y=7) -->
+    <rect x="258" y="278" width="28" height="28" rx="3" fill="#fb6a4a"/>
+    <text x="272" y="295" text-anchor="middle" font-size="8" font-weight="bold" fill="#555">福井</text>
+
+    <!-- Gifu (x=9,y=7, h=2) -->
+    <rect x="288" y="278" width="28" height="58" rx="3" fill="#fcbba1"/>
+    <text x="302" y="305" text-anchor="middle" font-size="8" font-weight="bold" fill="#555">岐阜</text>
+
+    <!-- Nagano (x=10,y=7, h=2) -->
+    <rect x="318" y="278" width="28" height="58" rx="3" fill="#fcbba1"/>
+    <text x="332" y="305" text-anchor="middle" font-size="8" font-weight="bold" fill="#555">長野</text>
+
+    <!-- Gunma (x=11,y=7) -->
+    <rect x="348" y="278" width="28" height="28" rx="3" fill="#fb6a4a"/>
+    <text x="362" y="295" text-anchor="middle" font-size="8" font-weight="bold" fill="#fff">群馬</text>
+
+    <!-- Tochigi (x=12,y=7) -->
+    <rect x="378" y="278" width="28" height="28" rx="3" fill="#de2d26"/>
+    <text x="392" y="291" text-anchor="middle" font-size="8" font-weight="bold" fill="#fff">栃木</text>
+    <text x="392" y="302" text-anchor="middle" font-size="7" fill="#ffe">14,498</text>
+
+    <!-- Ibaraki (x=13,y=7) -->
+    <rect x="408" y="278" width="28" height="28" rx="3" fill="#fb6a4a"/>
+    <text x="422" y="295" text-anchor="middle" font-size="8" font-weight="bold" fill="#fff">茨城</text>
+
+    <!-- Yamanashi (x=11,y=8) -->
+    <rect x="348" y="308" width="28" height="28" rx="3" fill="#fcbba1"/>
+    <text x="362" y="325" text-anchor="middle" font-size="8" font-weight="bold" fill="#555">山梨</text>
+
+    <!-- Saitama (x=12,y=8) -->
+    <rect x="378" y="308" width="28" height="28" rx="3" fill="#fb6a4a"/>
+    <text x="392" y="325" text-anchor="middle" font-size="8" font-weight="bold" fill="#fff">埼玉</text>
+
+    <!-- Chiba (x=13,y=8, h=2) -->
+    <rect x="408" y="308" width="28" height="58" rx="3" fill="#fcbba1"/>
+    <text x="422" y="335" text-anchor="middle" font-size="8" font-weight="bold" fill="#555">千葉</text>
+
+    <!-- Tokyo (x=12,y=9) -->
+    <rect x="378" y="338" width="28" height="28" rx="3" fill="#fcbba1"/>
+    <text x="392" y="355" text-anchor="middle" font-size="8" font-weight="bold" fill="#555">東京</text>
+
+    <!-- Kanagawa (x=12,y=10) -->
+    <rect x="378" y="368" width="28" height="28" rx="3" fill="#fcbba1"/>
+    <text x="392" y="385" text-anchor="middle" font-size="8" font-weight="bold" fill="#555">神奈川</text>
+
+    <!-- Shizuoka (x=10,y=9, w=2) -->
+    <rect x="318" y="338" width="58" height="28" rx="3" fill="#fb6a4a"/>
+    <text x="347" y="355" text-anchor="middle" font-size="8" font-weight="bold" fill="#fff">静岡</text>
+
+    <!-- Aichi (x=9,y=9) -->
+    <rect x="288" y="338" width="28" height="28" rx="3" fill="#fcbba1"/>
+    <text x="302" y="355" text-anchor="middle" font-size="8" font-weight="bold" fill="#555">愛知</text>
+
+    <!-- Shiga (x=8,y=8) -->
+    <rect x="258" y="308" width="28" height="28" rx="3" fill="#fcbba1"/>
+    <text x="272" y="325" text-anchor="middle" font-size="8" font-weight="bold" fill="#555">滋賀</text>
+
+    <!-- Mie (x=8,y=9, h=2) -->
+    <rect x="258" y="338" width="28" height="58" rx="3" fill="#fee0d2"/>
+    <text x="272" y="365" text-anchor="middle" font-size="8" font-weight="bold" fill="#555">三重</text>
+
+    <!-- Kyoto (x=6,y=8, w=2) -->
+    <rect x="198" y="308" width="58" height="28" rx="3" fill="#fcbba1"/>
+    <text x="227" y="325" text-anchor="middle" font-size="8" font-weight="bold" fill="#555">京都</text>
+
+    <!-- Hyogo (x=5,y=8, h=2) -->
+    <rect x="168" y="308" width="28" height="58" rx="3" fill="#fee0d2"/>
+    <text x="182" y="335" text-anchor="middle" font-size="8" font-weight="bold" fill="#a50f15">兵庫</text>
+    <text x="182" y="348" text-anchor="middle" font-size="7" fill="#a50f15">4,192</text>
+
+    <!-- Osaka (x=6,y=9) -->
+    <rect x="198" y="338" width="28" height="28" rx="3" fill="#fcbba1"/>
+    <text x="212" y="355" text-anchor="middle" font-size="8" font-weight="bold" fill="#555">大阪</text>
+
+    <!-- Nara (x=7,y=9) -->
+    <rect x="228" y="338" width="28" height="28" rx="3" fill="#fee0d2"/>
+    <text x="242" y="355" text-anchor="middle" font-size="8" font-weight="bold" fill="#555">奈良</text>
+
+    <!-- Wakayama (x=6,y=10, w=2) -->
+    <rect x="198" y="368" width="58" height="28" rx="3" fill="#fee0d2"/>
+    <text x="227" y="385" text-anchor="middle" font-size="8" font-weight="bold" fill="#555">和歌山</text>
+
+    <!-- Tottori (x=4,y=8) -->
+    <rect x="138" y="308" width="28" height="28" rx="3" fill="#fb6a4a"/>
+    <text x="152" y="325" text-anchor="middle" font-size="8" font-weight="bold" fill="#fff">鳥取</text>
+
+    <!-- Okayama (x=4,y=9) -->
+    <rect x="138" y="338" width="28" height="28" rx="3" fill="#fcbba1"/>
+    <text x="152" y="355" text-anchor="middle" font-size="8" font-weight="bold" fill="#555">岡山</text>
+
+    <!-- Shimane (x=3,y=8) -->
+    <rect x="108" y="308" width="28" height="28" rx="3" fill="#fcbba1"/>
+    <text x="122" y="325" text-anchor="middle" font-size="8" font-weight="bold" fill="#555">島根</text>
+
+    <!-- Hiroshima (x=3,y=9) -->
+    <rect x="108" y="338" width="28" height="28" rx="3" fill="#fcbba1"/>
+    <text x="122" y="355" text-anchor="middle" font-size="8" font-weight="bold" fill="#555">広島</text>
+
+    <!-- Yamaguchi (x=2,y=8, h=2) -->
+    <rect x="78" y="308" width="28" height="58" rx="3" fill="#fcbba1"/>
+    <text x="92" y="335" text-anchor="middle" font-size="8" font-weight="bold" fill="#555">山口</text>
+
+    <!-- Ehime (x=3,y=11) -->
+    <rect x="108" y="398" width="28" height="28" rx="3" fill="#fee0d2"/>
+    <text x="122" y="411" text-anchor="middle" font-size="8" font-weight="bold" fill="#a50f15">愛媛</text>
+    <text x="122" y="422" text-anchor="middle" font-size="7" fill="#a50f15">3,935</text>
+
+    <!-- Kagawa (x=4,y=11) -->
+    <rect x="138" y="398" width="28" height="28" rx="3" fill="#fee0d2"/>
+    <text x="152" y="415" text-anchor="middle" font-size="8" font-weight="bold" fill="#555">香川</text>
+
+    <!-- Kochi (x=3,y=12) -->
+    <rect x="108" y="428" width="28" height="28" rx="3" fill="#fcbba1"/>
+    <text x="122" y="445" text-anchor="middle" font-size="8" font-weight="bold" fill="#555">高知</text>
+
+    <!-- Tokushima (x=4,y=12) -->
+    <rect x="138" y="428" width="28" height="28" rx="3" fill="#fee0d2"/>
+    <text x="152" y="445" text-anchor="middle" font-size="8" font-weight="bold" fill="#555">徳島</text>
+
+    <!-- Fukuoka (x=1,y=10) -->
+    <rect x="48" y="368" width="28" height="28" rx="3" fill="#fb6a4a"/>
+    <text x="62" y="385" text-anchor="middle" font-size="8" font-weight="bold" fill="#fff">福岡</text>
+
+    <!-- Saga (x=0,y=10) -->
+    <rect x="18" y="368" width="28" height="28" rx="3" fill="#fcbba1"/>
+    <text x="32" y="385" text-anchor="middle" font-size="8" font-weight="bold" fill="#555">佐賀</text>
+
+    <!-- Oita (x=1,y=11) -->
+    <rect x="48" y="398" width="28" height="28" rx="3" fill="#fee0d2"/>
+    <text x="62" y="411" text-anchor="middle" font-size="8" font-weight="bold" fill="#555">大分</text>
+    <text x="62" y="422" text-anchor="middle" font-size="7" fill="#555">5,026</text>
+
+    <!-- Nagasaki (x=0,y=11) -->
+    <rect x="18" y="398" width="28" height="28" rx="3" fill="#fee0d2"/>
+    <text x="32" y="411" text-anchor="middle" font-size="8" font-weight="bold" fill="#555">長崎</text>
+    <text x="32" y="422" text-anchor="middle" font-size="7" fill="#555">4,868</text>
+
+    <!-- Miyazaki (x=1,y=12) -->
+    <rect x="48" y="428" width="28" height="28" rx="3" fill="#fcbba1"/>
+    <text x="62" y="445" text-anchor="middle" font-size="8" font-weight="bold" fill="#555">宮崎</text>
+
+    <!-- Kumamoto (x=0,y=12) -->
+    <rect x="18" y="428" width="28" height="28" rx="3" fill="#fcbba1"/>
+    <text x="32" y="445" text-anchor="middle" font-size="8" font-weight="bold" fill="#555">熊本</text>
+
+    <!-- Kagoshima (x=0,y=13, w=2) -->
+    <rect x="18" y="458" width="58" height="28" rx="3" fill="#fee0d2"/>
+    <text x="47" y="475" text-anchor="middle" font-size="8" font-weight="bold" fill="#555">鹿児島</text>
+
+    <!-- Okinawa (x=0,y=15) -->
+    <rect x="18" y="488" width="28" height="28" rx="3" fill="#fee0d2"/>
+    <text x="32" y="501" text-anchor="middle" font-size="8" font-weight="bold" fill="#555">沖縄</text>
+    <text x="32" y="512" text-anchor="middle" font-size="7" fill="#555">5,022</text>
+  </g>
+
+  <!-- Ramen legend -->
+  <rect x="80" y="68" width="180" height="12" rx="2" fill="url(#ramen-legend)"/>
+  <text x="80" y="96" font-size="8" fill="#666">3,935円</text>
+  <text x="260" y="96" text-anchor="end" font-size="8" fill="#666">22,389円</text>
+
+  <!-- ============ RIGHT: GYOZA TILE MAP ============ -->
+  <!-- Offset: +500 from left map x-coordinates -->
+
+  <g id="gyoza-map" transform="translate(520, 0)">
+    <!-- Hokkaido (x=12,y=0, w=2,h=2) -->
+    <rect x="-142" y="68" width="58" height="58" rx="3" fill="#c6dbef"/>
+    <text x="-113" y="93" text-anchor="middle" font-size="9" font-weight="bold" fill="#333">北海道</text>
+    <text x="-113" y="107" text-anchor="middle" font-size="8" fill="#555">1,763</text>
+
+    <!-- Aomori (x=12,y=3, w=2) -->
+    <rect x="-142" y="158" width="58" height="28" rx="3" fill="#c6dbef"/>
+    <text x="-113" y="175" text-anchor="middle" font-size="9" font-weight="bold" fill="#333">青森</text>
+
+    <!-- Iwate (x=13,y=4) -->
+    <rect x="-112" y="188" width="28" height="28" rx="3" fill="#c6dbef"/>
+    <text x="-98" y="205" text-anchor="middle" font-size="8" font-weight="bold" fill="#333">岩手</text>
+
+    <!-- Akita (x=12,y=4) -->
+    <rect x="-142" y="188" width="28" height="28" rx="3" fill="#c6dbef"/>
+    <text x="-128" y="205" text-anchor="middle" font-size="8" font-weight="bold" fill="#333">秋田</text>
+
+    <!-- Miyagi (x=13,y=5) -->
+    <rect x="-112" y="218" width="28" height="28" rx="3" fill="#9ecae1"/>
+    <text x="-98" y="235" text-anchor="middle" font-size="8" font-weight="bold" fill="#333">宮城</text>
+
+    <!-- Yamagata (x=12,y=5) -->
+    <rect x="-142" y="218" width="28" height="28" rx="3" fill="#deebf7"/>
+    <text x="-128" y="231" text-anchor="middle" font-size="8" font-weight="bold" fill="#08519c">山形</text>
+    <text x="-128" y="242" text-anchor="middle" font-size="7" fill="#08519c">1,282</text>
+
+    <!-- Fukushima (x=12,y=6, w=2) -->
+    <rect x="-142" y="248" width="58" height="28" rx="3" fill="#c6dbef"/>
+    <text x="-113" y="265" text-anchor="middle" font-size="8" font-weight="bold" fill="#333">福島</text>
+
+    <!-- Niigata (x=10,y=6, w=2) -->
+    <rect x="-202" y="248" width="58" height="28" rx="3" fill="#c6dbef"/>
+    <text x="-173" y="265" text-anchor="middle" font-size="8" font-weight="bold" fill="#333">新潟</text>
+
+    <!-- Toyama (x=9,y=6) -->
+    <rect x="-232" y="248" width="28" height="28" rx="3" fill="#c6dbef"/>
+    <text x="-218" y="265" text-anchor="middle" font-size="8" font-weight="bold" fill="#333">富山</text>
+
+    <!-- Ishikawa (x=8,y=6) -->
+    <rect x="-262" y="248" width="28" height="28" rx="3" fill="#c6dbef"/>
+    <text x="-248" y="265" text-anchor="middle" font-size="8" font-weight="bold" fill="#333">石川</text>
+
+    <!-- Fukui (x=8,y=7) -->
+    <rect x="-262" y="278" width="28" height="28" rx="3" fill="#c6dbef"/>
+    <text x="-248" y="295" text-anchor="middle" font-size="8" font-weight="bold" fill="#333">福井</text>
+
+    <!-- Gifu (x=9,y=7, h=2) -->
+    <rect x="-232" y="278" width="28" height="58" rx="3" fill="#c6dbef"/>
+    <text x="-218" y="305" text-anchor="middle" font-size="8" font-weight="bold" fill="#333">岐阜</text>
+
+    <!-- Nagano (x=10,y=7, h=2) -->
+    <rect x="-202" y="278" width="28" height="58" rx="3" fill="#c6dbef"/>
+    <text x="-188" y="305" text-anchor="middle" font-size="8" font-weight="bold" fill="#333">長野</text>
+
+    <!-- Gunma (x=11,y=7) -->
+    <rect x="-172" y="278" width="28" height="28" rx="3" fill="#6baed6"/>
+    <text x="-158" y="291" text-anchor="middle" font-size="8" font-weight="bold" fill="#fff">群馬</text>
+    <text x="-158" y="302" text-anchor="middle" font-size="7" fill="#fff">2,372</text>
+
+    <!-- Tochigi (x=12,y=7) -->
+    <rect x="-142" y="278" width="28" height="28" rx="3" fill="#3182bd"/>
+    <text x="-128" y="291" text-anchor="middle" font-size="8" font-weight="bold" fill="#fff">栃木</text>
+    <text x="-128" y="302" text-anchor="middle" font-size="7" fill="#fff">2,801</text>
+
+    <!-- Ibaraki (x=13,y=7) -->
+    <rect x="-112" y="278" width="28" height="28" rx="3" fill="#9ecae1"/>
+    <text x="-98" y="295" text-anchor="middle" font-size="8" font-weight="bold" fill="#333">茨城</text>
+
+    <!-- Yamanashi (x=11,y=8) -->
+    <rect x="-172" y="308" width="28" height="28" rx="3" fill="#c6dbef"/>
+    <text x="-158" y="325" text-anchor="middle" font-size="8" font-weight="bold" fill="#333">山梨</text>
+
+    <!-- Saitama (x=12,y=8) -->
+    <rect x="-142" y="308" width="28" height="28" rx="3" fill="#6baed6"/>
+    <text x="-128" y="321" text-anchor="middle" font-size="8" font-weight="bold" fill="#fff">埼玉</text>
+    <text x="-128" y="332" text-anchor="middle" font-size="7" fill="#fff">2,393</text>
+
+    <!-- Chiba (x=13,y=8, h=2) -->
+    <rect x="-112" y="308" width="28" height="58" rx="3" fill="#9ecae1"/>
+    <text x="-98" y="335" text-anchor="middle" font-size="8" font-weight="bold" fill="#333">千葉</text>
+
+    <!-- Tokyo (x=12,y=9) -->
+    <rect x="-142" y="338" width="28" height="28" rx="3" fill="#c6dbef"/>
+    <text x="-128" y="355" text-anchor="middle" font-size="8" font-weight="bold" fill="#333">東京</text>
+
+    <!-- Kanagawa (x=12,y=10) -->
+    <rect x="-142" y="368" width="28" height="28" rx="3" fill="#9ecae1"/>
+    <text x="-128" y="385" text-anchor="middle" font-size="8" font-weight="bold" fill="#333">神奈川</text>
+
+    <!-- Shizuoka (x=10,y=9, w=2) -->
+    <rect x="-202" y="338" width="58" height="28" rx="3" fill="#6baed6"/>
+    <text x="-173" y="351" text-anchor="middle" font-size="8" font-weight="bold" fill="#fff">静岡</text>
+    <text x="-173" y="362" text-anchor="middle" font-size="7" fill="#fff">2,356</text>
+
+    <!-- Aichi (x=9,y=9) -->
+    <rect x="-232" y="338" width="28" height="28" rx="3" fill="#9ecae1"/>
+    <text x="-218" y="355" text-anchor="middle" font-size="8" font-weight="bold" fill="#333">愛知</text>
+
+    <!-- Shiga (x=8,y=8) -->
+    <rect x="-262" y="308" width="28" height="28" rx="3" fill="#c6dbef"/>
+    <text x="-248" y="325" text-anchor="middle" font-size="8" font-weight="bold" fill="#333">滋賀</text>
+
+    <!-- Mie (x=8,y=9, h=2) -->
+    <rect x="-262" y="338" width="28" height="58" rx="3" fill="#c6dbef"/>
+    <text x="-248" y="365" text-anchor="middle" font-size="8" font-weight="bold" fill="#333">三重</text>
+
+    <!-- Kyoto (x=6,y=8, w=2) -->
+    <rect x="-322" y="308" width="58" height="28" rx="3" fill="#c6dbef"/>
+    <text x="-293" y="325" text-anchor="middle" font-size="8" font-weight="bold" fill="#333">京都</text>
+
+    <!-- Hyogo (x=5,y=8, h=2) -->
+    <rect x="-352" y="308" width="28" height="58" rx="3" fill="#c6dbef"/>
+    <text x="-338" y="335" text-anchor="middle" font-size="8" font-weight="bold" fill="#333">兵庫</text>
+
+    <!-- Osaka (x=6,y=9) -->
+    <rect x="-322" y="338" width="28" height="28" rx="3" fill="#c6dbef"/>
+    <text x="-308" y="355" text-anchor="middle" font-size="8" font-weight="bold" fill="#333">大阪</text>
+
+    <!-- Nara (x=7,y=9) -->
+    <rect x="-292" y="338" width="28" height="28" rx="3" fill="#c6dbef"/>
+    <text x="-278" y="355" text-anchor="middle" font-size="8" font-weight="bold" fill="#333">奈良</text>
+
+    <!-- Wakayama (x=6,y=10, w=2) -->
+    <rect x="-322" y="368" width="58" height="28" rx="3" fill="#c6dbef"/>
+    <text x="-293" y="385" text-anchor="middle" font-size="8" font-weight="bold" fill="#333">和歌山</text>
+
+    <!-- Tottori (x=4,y=8) -->
+    <rect x="-382" y="308" width="28" height="28" rx="3" fill="#c6dbef"/>
+    <text x="-368" y="325" text-anchor="middle" font-size="8" font-weight="bold" fill="#333">鳥取</text>
+
+    <!-- Okayama (x=4,y=9) -->
+    <rect x="-382" y="338" width="28" height="28" rx="3" fill="#c6dbef"/>
+    <text x="-368" y="355" text-anchor="middle" font-size="8" font-weight="bold" fill="#333">岡山</text>
+
+    <!-- Shimane (x=3,y=8) -->
+    <rect x="-412" y="308" width="28" height="28" rx="3" fill="#deebf7"/>
+    <text x="-398" y="321" text-anchor="middle" font-size="8" font-weight="bold" fill="#08519c">島根</text>
+    <text x="-398" y="332" text-anchor="middle" font-size="7" fill="#08519c">1,441</text>
+
+    <!-- Hiroshima (x=3,y=9) -->
+    <rect x="-412" y="338" width="28" height="28" rx="3" fill="#c6dbef"/>
+    <text x="-398" y="355" text-anchor="middle" font-size="8" font-weight="bold" fill="#333">広島</text>
+
+    <!-- Yamaguchi (x=2,y=8, h=2) -->
+    <rect x="-442" y="308" width="28" height="58" rx="3" fill="#c6dbef"/>
+    <text x="-428" y="335" text-anchor="middle" font-size="8" font-weight="bold" fill="#333">山口</text>
+
+    <!-- Ehime (x=3,y=11) -->
+    <rect x="-412" y="398" width="28" height="28" rx="3" fill="#deebf7"/>
+    <text x="-398" y="411" text-anchor="middle" font-size="8" font-weight="bold" fill="#08519c">愛媛</text>
+    <text x="-398" y="422" text-anchor="middle" font-size="7" fill="#08519c">1,459</text>
+
+    <!-- Kagawa (x=4,y=11) -->
+    <rect x="-382" y="398" width="28" height="28" rx="3" fill="#c6dbef"/>
+    <text x="-368" y="415" text-anchor="middle" font-size="8" font-weight="bold" fill="#333">香川</text>
+
+    <!-- Kochi (x=3,y=12) -->
+    <rect x="-412" y="428" width="28" height="28" rx="3" fill="#deebf7"/>
+    <text x="-398" y="441" text-anchor="middle" font-size="8" font-weight="bold" fill="#a50f15">高知</text>
+    <text x="-398" y="452" text-anchor="middle" font-size="7" fill="#a50f15">1,105</text>
+
+    <!-- Tokushima (x=4,y=12) -->
+    <rect x="-382" y="428" width="28" height="28" rx="3" fill="#deebf7"/>
+    <text x="-368" y="441" text-anchor="middle" font-size="8" font-weight="bold" fill="#08519c">徳島</text>
+    <text x="-368" y="452" text-anchor="middle" font-size="7" fill="#08519c">1,430</text>
+
+    <!-- Fukuoka (x=1,y=10) -->
+    <rect x="-472" y="368" width="28" height="28" rx="3" fill="#9ecae1"/>
+    <text x="-458" y="385" text-anchor="middle" font-size="8" font-weight="bold" fill="#333">福岡</text>
+
+    <!-- Saga (x=0,y=10) -->
+    <rect x="-502" y="368" width="28" height="28" rx="3" fill="#c6dbef"/>
+    <text x="-488" y="385" text-anchor="middle" font-size="8" font-weight="bold" fill="#333">佐賀</text>
+
+    <!-- Oita (x=1,y=11) -->
+    <rect x="-472" y="398" width="28" height="28" rx="3" fill="#c6dbef"/>
+    <text x="-458" y="415" text-anchor="middle" font-size="8" font-weight="bold" fill="#333">大分</text>
+
+    <!-- Nagasaki (x=0,y=11) -->
+    <rect x="-502" y="398" width="28" height="28" rx="3" fill="#c6dbef"/>
+    <text x="-488" y="415" text-anchor="middle" font-size="8" font-weight="bold" fill="#333">長崎</text>
+
+    <!-- Miyazaki (x=1,y=12) -->
+    <rect x="-472" y="428" width="28" height="28" rx="3" fill="#08519c"/>
+    <text x="-458" y="441" text-anchor="middle" font-size="8" font-weight="bold" fill="#fff">宮崎</text>
+    <text x="-458" y="452" text-anchor="middle" font-size="7" fill="#fff">3,517</text>
+
+    <!-- Kumamoto (x=0,y=12) -->
+    <rect x="-502" y="428" width="28" height="28" rx="3" fill="#c6dbef"/>
+    <text x="-488" y="445" text-anchor="middle" font-size="8" font-weight="bold" fill="#333">熊本</text>
+
+    <!-- Kagoshima (x=0,y=13, w=2) -->
+    <rect x="-502" y="458" width="58" height="28" rx="3" fill="#c6dbef"/>
+    <text x="-473" y="475" text-anchor="middle" font-size="8" font-weight="bold" fill="#333">鹿児島</text>
+
+    <!-- Okinawa (x=0,y=15) -->
+    <rect x="-502" y="488" width="28" height="28" rx="3" fill="#c6dbef"/>
+    <text x="-488" y="505" text-anchor="middle" font-size="8" font-weight="bold" fill="#333">沖縄</text>
+  </g>
+
+  <!-- Gyoza legend -->
+  <rect x="600" y="68" width="180" height="12" rx="2" fill="url(#gyoza-legend)"/>
+  <text x="600" y="96" font-size="8" fill="#666">1,105円</text>
+  <text x="780" y="96" text-anchor="end" font-size="8" fill="#666">3,517円</text>
+
+  <!-- Divider -->
+  <line x1="480" y1="50" x2="480" y2="520" stroke="#ccc" stroke-width="1" stroke-dasharray="4,4"/>
+
+  <!-- Annotation callouts -->
+  <g font-size="9" fill="#c0392b">
+    <text x="320" y="132" text-anchor="end" font-weight="bold">1位 山形 22,389円</text>
+    <text x="320" y="146" text-anchor="end">2位との差6,097円</text>
+    <line x1="325" y1="135" x2="378" y2="225" stroke="#c0392b" stroke-width="0.8" stroke-dasharray="3,2"/>
+  </g>
+
+  <g font-size="9" fill="#2471a3">
+    <text x="660" y="132" font-weight="bold">1位 宮崎 3,517円</text>
+    <text x="660" y="146">2位栃木の1.26倍</text>
+  </g>
+</svg>

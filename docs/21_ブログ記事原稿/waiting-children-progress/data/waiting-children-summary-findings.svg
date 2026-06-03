@@ -1,0 +1,36 @@
+<svg width="960" height="404" viewBox="0 0 960 404" xmlns="http://www.w3.org/2000/svg" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" role="img" aria-label="この記事でわかったこと">
+<rect width="960" height="404" fill="#f9fafb"/>
+<text x="480" y="40" text-anchor="middle" font-size="22" font-weight="bold" fill="#1f2937">この記事でわかったこと</text>
+
+<!-- Item 1 -->
+<rect x="60" y="64" width="840" height="64" fill="#ffffff"/>
+<circle cx="100" cy="96" r="16" fill="#1565c0"/>
+<text x="100" y="102" text-anchor="middle" font-size="14" font-weight="bold" fill="#fff">1</text>
+<text x="140" y="90" font-size="15" font-weight="bold" fill="#1f2937">待機児童数はピークの10分の1以下に</text>
+<text x="140" y="112" font-size="13" fill="#4b5563">2017年の2.6万人→2024年は2,567人。受け皿整備が奏功</text>
+
+<!-- Item 2 -->
+<rect x="60" y="128" width="840" height="64" fill="#f9fafb"/>
+<circle cx="100" cy="160" r="16" fill="#2e7d32"/>
+<text x="100" y="166" text-anchor="middle" font-size="14" font-weight="bold" fill="#fff">2</text>
+<text x="140" y="154" font-size="15" font-weight="bold" fill="#1f2937">上位3都県で全国の4割を占める集中構造</text>
+<text x="140" y="176" font-size="13" fill="#4b5563">東京361人・沖縄356人・滋賀353人に偏在</text>
+
+<!-- Item 3 -->
+<rect x="60" y="192" width="840" height="64" fill="#ffffff"/>
+<circle cx="100" cy="224" r="16" fill="#c62828"/>
+<text x="100" y="230" text-anchor="middle" font-size="14" font-weight="bold" fill="#fff">3</text>
+<text x="140" y="218" font-size="15" font-weight="bold" fill="#1f2937">16県が待機児童ゼロを達成</text>
+<text x="140" y="240" font-size="13" fill="#4b5563">北陸・山陰・九州の地方県が中心。人口減少との表裏一体</text>
+
+<!-- Item 4 -->
+<rect x="60" y="256" width="840" height="64" fill="#f9fafb"/>
+<circle cx="100" cy="288" r="16" fill="#7b1fa2"/>
+<text x="100" y="294" text-anchor="middle" font-size="14" font-weight="bold" fill="#fff">4</text>
+<text x="140" y="282" font-size="15" font-weight="bold" fill="#1f2937">利用率100%超の県も存在</text>
+<text x="140" y="304" font-size="13" fill="#4b5563">鹿児島は定員超過で利用。地方でも需給逼迫の地域がある</text>
+
+<!-- Bottom summary bar -->
+<rect x="60" y="340" width="840" height="48" fill="#e8f5e9" rx="8"/>
+<text x="480" y="370" text-anchor="middle" font-size="13" fill="#2e7d32" font-weight="bold">全体数は激減したが、都市部への集中と潜在的待機児童の課題は残る</text>
+</svg>
