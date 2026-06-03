@@ -1,0 +1,41 @@
+<svg width="780" height="420" viewBox="0 0 680 420" xmlns="http://www.w3.org/2000/svg" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" role="img" aria-label="1人当たり県民所得の推移（全国平均）">
+  <title>1人当たり県民所得の推移（全国平均）</title>
+  <rect width="680" height="420" fill="#fafafa" rx="8"/>
+  <text x="340" y="28" text-anchor="middle" font-size="16" font-weight="bold" fill="#333">1人当たり県民所得の推移（全国平均）</text>
+  <rect x="60" y="60" width="590" height="300" fill="#f9fafb" stroke="#d1d5db"/>
+  <line x1="60" y1="332.7272727272727" x2="650" y2="332.7272727272727" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="52" y="336.7272727272727" text-anchor="end" font-size="9" fill="#6b7280">2,600</text>
+  <line x1="60" y1="278.1818181818182" x2="650" y2="278.1818181818182" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="52" y="282.1818181818182" text-anchor="end" font-size="9" fill="#6b7280">2,800</text>
+  <line x1="60" y1="223.63636363636363" x2="650" y2="223.63636363636363" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="52" y="227.63636363636363" text-anchor="end" font-size="9" fill="#6b7280">3,000</text>
+  <line x1="60" y1="169.0909090909091" x2="650" y2="169.0909090909091" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="52" y="173.0909090909091" text-anchor="end" font-size="9" fill="#6b7280">3,200</text>
+  <line x1="60" y1="114.54545454545453" x2="650" y2="114.54545454545453" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="52" y="118.54545454545453" text-anchor="end" font-size="9" fill="#6b7280">3,400</text>
+  <line x1="60" y1="60" x2="650" y2="60" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="52" y="64" text-anchor="end" font-size="9" fill="#6b7280">3,600</text>
+  <text x="60" y="378" text-anchor="middle" font-size="9" fill="#6b7280">2011</text>
+  <text x="119" y="378" text-anchor="middle" font-size="9" fill="#6b7280">2012</text>
+  <text x="178" y="378" text-anchor="middle" font-size="9" fill="#6b7280">2013</text>
+  <text x="237" y="378" text-anchor="middle" font-size="9" fill="#6b7280">2014</text>
+  <text x="296" y="378" text-anchor="middle" font-size="9" fill="#6b7280">2015</text>
+  <text x="355" y="378" text-anchor="middle" font-size="9" fill="#6b7280">2016</text>
+  <text x="414" y="378" text-anchor="middle" font-size="9" fill="#6b7280">2017</text>
+  <text x="473" y="378" text-anchor="middle" font-size="9" fill="#6b7280">2018</text>
+  <text x="532" y="378" text-anchor="middle" font-size="9" fill="#6b7280">2019</text>
+  <text x="591" y="378" text-anchor="middle" font-size="9" fill="#6b7280">2020</text>
+  <text x="650" y="378" text-anchor="middle" font-size="9" fill="#6b7280">2021</text>
+  <line x1="60" y1="60" x2="60" y2="360" stroke="#999"/>
+  <line x1="60" y1="360" x2="650" y2="360" stroke="#999"/>
+  <polyline points="60,226.63636363636363 119,222.8181818181818 178,187.36363636363637 237,186.27272727272725 296,148.90909090909093 355,147.27272727272725 414,123.54545454545453 473,117.81818181818183 532,132.54545454545456 591,187.36363636363637 650,133.63636363636363" fill="none" stroke="#e65100" stroke-width="2.5" stroke-linejoin="round"/>
+  <circle cx="60" cy="226.63636363636363" r="3.5" fill="#fff" stroke="#e65100" stroke-width="2"/>
+  <text x="60" y="214.63636363636363" text-anchor="middle" font-size="9" font-weight="bold" fill="#e65100">2,989</text>
+  <circle cx="296" cy="148.90909090909093" r="3.5" fill="#fff" stroke="#e65100" stroke-width="2"/>
+  <text x="296" y="136.90909090909093" text-anchor="middle" font-size="9" font-weight="bold" fill="#e65100">3,274</text>
+  <circle cx="591" cy="187.36363636363637" r="3.5" fill="#fff" stroke="#e65100" stroke-width="2"/>
+  <text x="591" y="205.36363636363637" text-anchor="middle" font-size="9" font-weight="bold" fill="#e65100">3,133</text>
+  <circle cx="650" cy="133.63636363636363" r="3.5" fill="#fff" stroke="#e65100" stroke-width="2"/>
+  <text x="650" y="121.63636363636363" text-anchor="end" font-size="9" font-weight="bold" fill="#e65100">3,330</text>
+  <text x="591" y="217.36363636363637" text-anchor="middle" font-size="8" fill="#666">コロナ禍</text>
+</svg>

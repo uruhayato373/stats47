@@ -1,0 +1,24 @@
+<svg width="960" height="326" viewBox="0 0 960 326" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="この記事でわかったこと">
+  <rect width="960" height="326" fill="#f9fafb"/>
+  <text x="480" y="40" text-anchor="middle" font-family="'Noto Sans JP',sans-serif" font-size="22" font-weight="bold" fill="#1f2937">この記事でわかったこと</text>
+  <rect x="60" y="64" width="840" height="64" fill="#ffffff"/>
+  <circle cx="100" cy="96" r="16" fill="#dc2626"/>
+  <text x="100" y="102" text-anchor="middle" font-family="'Noto Sans JP',sans-serif" font-size="14" font-weight="bold" fill="#fff">1</text>
+  <text x="140" y="90" font-family="'Noto Sans JP',sans-serif" font-size="15" font-weight="bold" fill="#1f2937">中学校で17倍の地域差</text>
+  <text x="140" y="112" font-family="'Noto Sans JP',sans-serif" font-size="13" fill="#4b5563">不登校比率は宮城県（84.58）が福井県（49.73）の約1.7倍。都道府県間で大きな開きがある</text>
+  <rect x="60" y="128" width="840" height="64" fill="#f9fafb"/>
+  <circle cx="100" cy="160" r="16" fill="#ea580c"/>
+  <text x="100" y="166" text-anchor="middle" font-family="'Noto Sans JP',sans-serif" font-size="14" font-weight="bold" fill="#fff">2</text>
+  <text x="140" y="154" font-family="'Noto Sans JP',sans-serif" font-size="15" font-weight="bold" fill="#1f2937">小学校も同じ傾向</text>
+  <text x="140" y="176" font-family="'Noto Sans JP',sans-serif" font-size="13" fill="#4b5563">沖縄県（32.69）が最多、福井県（14.50）が最少。小中ともに不登校の地域差は深刻</text>
+  <rect x="60" y="192" width="840" height="64" fill="#ffffff"/>
+  <circle cx="100" cy="224" r="16" fill="#0284c7"/>
+  <text x="100" y="230" text-anchor="middle" font-family="'Noto Sans JP',sans-serif" font-size="14" font-weight="bold" fill="#fff">3</text>
+  <text x="140" y="218" font-family="'Noto Sans JP',sans-serif" font-size="15" font-weight="bold" fill="#1f2937">大都市圏が上位とは限らない</text>
+  <text x="140" y="240" font-family="'Noto Sans JP',sans-serif" font-size="13" fill="#4b5563">東京30位・大阪23位。宮城・北海道・島根など地方県も上位に入り、都市規模だけでは説明できない</text>
+  <rect x="60" y="256" width="840" height="64" fill="#f9fafb"/>
+  <circle cx="100" cy="288" r="16" fill="#7c3aed"/>
+  <text x="100" y="294" text-anchor="middle" font-family="'Noto Sans JP',sans-serif" font-size="14" font-weight="bold" fill="#fff">4</text>
+  <text x="140" y="282" font-family="'Noto Sans JP',sans-serif" font-size="15" font-weight="bold" fill="#1f2937">小学校と中学校の相関は明確</text>
+  <text x="140" y="304" font-family="'Noto Sans JP',sans-serif" font-size="13" fill="#4b5563">小学校で不登校比率が高い県は中学校でも高い傾向。早期の支援体制が鍵を握る</text>
+</svg>

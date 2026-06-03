@@ -1,0 +1,65 @@
+<!-- data-source: local-allocation-tax-ratio-pref-finance-prefecture-rankings.json | generated: 2026-06-02T21:28:44.881Z -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 300" width="680" height="300" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" role="img" aria-label="地方交付税割合 都道府県ランキング（2022年）">
+  <style>
+    .svg-bg{fill:#fafafa}
+    .svg-title{fill:#222}
+    .svg-subtitle{fill:#666}
+    .svg-label{fill:#333}
+    .svg-legend{fill:#888}
+    @media (prefers-color-scheme:dark){
+      .svg-bg{fill:#1f2937}
+      .svg-title{fill:#f9fafb}
+      .svg-subtitle{fill:#9ca3af}
+      .svg-label{fill:#e5e7eb}
+      .svg-legend{fill:#9ca3af}
+    }
+  </style>
+  <rect width="680" height="300" class="svg-bg" rx="8"/>
+  <text x="340" y="24" text-anchor="middle" font-size="16" font-weight="bold" class="svg-title">地方交付税割合 都道府県ランキング（2022年）</text>
+  
+  <text x="227.5" y="54" text-anchor="middle" font-size="12" font-weight="bold" fill="#1565c0">上位 5</text>
+  <text x="542.5" y="54" text-anchor="middle" font-size="12" font-weight="bold" fill="#c62828">下位 5</text>
+  
+      <text x="84" y="82" text-anchor="end" font-size="11" class="svg-label">高知県</text>
+      <rect x="90" y="63" width="195" height="30" fill="#1565c0" rx="2"/>
+      <text x="289" y="82" font-size="10" class="svg-label">37.42％</text>
+    
+      <text x="84" y="118" text-anchor="end" font-size="11" class="svg-label">鳥取県</text>
+      <rect x="90" y="99" width="191.71699625868519" height="30" fill="#1976d2" rx="2"/>
+      <text x="285.7169962586852" y="118" font-size="10" class="svg-label">36.79％</text>
+    
+      <text x="84" y="154" text-anchor="end" font-size="11" class="svg-label">島根県</text>
+      <rect x="90" y="135" width="167.85008017103152" height="30" fill="#1e88e5" rx="2"/>
+      <text x="261.85008017103155" y="154" font-size="10" class="svg-label">32.21％</text>
+    
+      <text x="84" y="190" text-anchor="end" font-size="11" class="svg-label">秋田県</text>
+      <rect x="90" y="171" width="163.47274184927846" height="30" fill="#2196f3" rx="2"/>
+      <text x="257.47274184927846" y="190" font-size="10" class="svg-label">31.37％</text>
+    
+      <text x="84" y="226" text-anchor="end" font-size="11" class="svg-label">奈良県</text>
+      <rect x="90" y="207" width="155.44762159273114" height="30" fill="#42a5f5" rx="2"/>
+      <text x="249.44762159273114" y="226" font-size="10" class="svg-label">29.83％</text>
+    
+  
+      <text x="399" y="82" text-anchor="end" font-size="11" class="svg-label">東京都</text>
+      <rect x="405" y="63" width="1" height="30" fill="#c62828" rx="2"/>
+      <text x="410" y="82" font-size="10" class="svg-label">0％</text>
+    
+      <text x="399" y="118" text-anchor="end" font-size="11" class="svg-label">愛知県</text>
+      <rect x="405" y="99" width="23.710582576162476" height="30" fill="#d32f2f" rx="2"/>
+      <text x="432.7105825761625" y="118" font-size="10" class="svg-label">4.55％</text>
+    
+      <text x="399" y="154" text-anchor="end" font-size="11" class="svg-label">神奈川県</text>
+      <rect x="405" y="135" width="28.973810796365576" height="30" fill="#e53935" rx="2"/>
+      <text x="437.97381079636557" y="154" font-size="10" class="svg-label">5.56％</text>
+    
+      <text x="399" y="190" text-anchor="end" font-size="11" class="svg-label">大阪府</text>
+      <rect x="405" y="171" width="41.27204703367183" height="30" fill="#ef5350" rx="2"/>
+      <text x="450.2720470336718" y="190" font-size="10" class="svg-label">7.92％</text>
+    
+      <text x="399" y="226" text-anchor="end" font-size="11" class="svg-label">千葉県</text>
+      <rect x="405" y="207" width="49.76616782469268" height="30" fill="#e57373" rx="2"/>
+      <text x="458.7661678246927" y="226" font-size="10" class="svg-label">9.55％</text>
+    
+  <text x="340" y="282" text-anchor="middle" font-size="10" class="svg-legend">凡例: 青系=上位 / 赤系=下位</text>
+</svg>

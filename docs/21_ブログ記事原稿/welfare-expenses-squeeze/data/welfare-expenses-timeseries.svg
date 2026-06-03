@@ -1,0 +1,53 @@
+<svg width="780" height="420" viewBox="0 0 780 420" xmlns="http://www.w3.org/2000/svg" font-family="'Noto Sans JP',sans-serif" role="img" aria-label="民生費・土木費・教育費の推移">
+  <rect width="780" height="420" fill="#fafafa" rx="8"/>
+  <text x="390" y="28" text-anchor="middle" font-size="16" font-weight="bold" fill="#333">目的別歳出の推移（全国合計・都道府県財政）</text>
+  <rect x="65" y="60" width="685" height="310" fill="#f9fafb" stroke="#d1d5db" stroke-width="1"/>
+  <line x1="65" y1="370" x2="750" y2="370" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="59" y="373.5" text-anchor="end" font-size="9" fill="#6b7280">0</text>
+  <line x1="65" y1="331.25" x2="750" y2="331.25" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="59" y="334.75" text-anchor="end" font-size="9" fill="#6b7280">2</text>
+  <line x1="65" y1="292.5" x2="750" y2="292.5" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="59" y="296" text-anchor="end" font-size="9" fill="#6b7280">4</text>
+  <line x1="65" y1="253.75" x2="750" y2="253.75" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="59" y="257.25" text-anchor="end" font-size="9" fill="#6b7280">6</text>
+  <line x1="65" y1="215" x2="750" y2="215" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="59" y="218.5" text-anchor="end" font-size="9" fill="#6b7280">8</text>
+  <line x1="65" y1="176.25" x2="750" y2="176.25" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="59" y="179.75" text-anchor="end" font-size="9" fill="#6b7280">10</text>
+  <line x1="65" y1="137.5" x2="750" y2="137.5" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="59" y="141" text-anchor="end" font-size="9" fill="#6b7280">12</text>
+  <line x1="65" y1="98.75" x2="750" y2="98.75" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="59" y="102.25" text-anchor="end" font-size="9" fill="#6b7280">14</text>
+  <line x1="65" y1="60" x2="750" y2="60" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="59" y="63.5" text-anchor="end" font-size="9" fill="#6b7280">16</text>
+  <text x="65" y="386" text-anchor="middle" font-size="8.5" fill="#6b7280">1990</text>
+  <text x="150.625" y="386" text-anchor="middle" font-size="8.5" fill="#6b7280">1994</text>
+  <text x="236.25" y="386" text-anchor="middle" font-size="8.5" fill="#6b7280">1998</text>
+  <text x="321.875" y="386" text-anchor="middle" font-size="8.5" fill="#6b7280">2002</text>
+  <text x="407.5" y="386" text-anchor="middle" font-size="8.5" fill="#6b7280">2006</text>
+  <text x="493.125" y="386" text-anchor="middle" font-size="8.5" fill="#6b7280">2010</text>
+  <text x="578.75" y="386" text-anchor="middle" font-size="8.5" fill="#6b7280">2014</text>
+  <text x="664.375" y="386" text-anchor="middle" font-size="8.5" fill="#6b7280">2018</text>
+  <text x="750" y="386" text-anchor="middle" font-size="8.5" fill="#6b7280">2022</text>
+  <polyline points="65.0,320.5 86.4,316.5 107.8,312.5 129.2,312.5 150.6,306.6 172.0,302.2 193.4,302.0 214.8,298.8 236.3,295.7 257.7,293.7 279.1,290.5 300.5,284.5 321.9,285.2 343.3,293.1 364.7,292.3 386.1,284.6 407.5,275.8 428.9,269.8 450.3,263.5 471.7,239.0 493.1,245.7 514.5,224.8 535.9,228.5 557.3,224.3 578.8,222.7 600.2,213.6 621.6,204.3 643.0,213.6 664.4,219.0 685.8,211.5 707.2,181.5 728.6,189.0 750.0,190.1" fill="none" stroke="#d32f2f" stroke-width="2.5" stroke-linejoin="round"/>
+  <polyline points="65.0,199.3 86.4,187.3 107.8,159.3 129.2,146.0 150.6,153.2 172.0,136.5 193.4,145.5 214.8,157.8 236.3,144.2 257.7,151.8 279.1,171.9 300.5,184.1 321.9,193.3 343.3,209.4 364.7,222.0 386.1,231.0 407.5,236.8 428.9,243.1 450.3,248.6 471.7,241.9 493.1,259.2 514.5,265.1 535.9,267.2 557.3,260.7 578.8,262.9 600.2,268.6 621.6,262.3 643.0,263.9 664.4,262.4 685.8,255.6 707.2,248.0 728.6,247.7 750.0,251.3" fill="none" stroke="#1565c0" stroke-width="2.5" stroke-linejoin="round"/>
+  <polyline points="65.0,162.5 86.4,153.4 107.8,145.0 129.2,141.1 150.6,137.6 172.0,133.6 193.4,129.1 214.8,127.1 236.3,129.0 257.7,133.9 279.1,135.7 300.5,136.5 321.9,140.6 343.3,144.4 364.7,147.0 386.1,150.3 407.5,150.5 428.9,150.4 450.3,155.8 471.7,158.3 493.1,158.6 514.5,157.2 535.9,159.5 557.3,164.7 578.8,158.5 600.2,156.4 621.6,154.8 643.0,176.7 664.4,176.3 685.8,172.7 707.2,172.5 728.6,171.0 750.0,175.3" fill="none" stroke="#2e7d32" stroke-width="2.5" stroke-linejoin="round"/>
+  <circle cx="65.0" cy="320.5" r="3.5" fill="#fff" stroke="#d32f2f" stroke-width="2"/>
+  <text x="65.0" y="310.5" text-anchor="middle" font-size="8.5" font-weight="600" fill="#d32f2f">2.6</text>
+  <circle cx="750.0" cy="190.1" r="3.5" fill="#fff" stroke="#d32f2f" stroke-width="2"/>
+  <text x="750.0" y="180.1" text-anchor="middle" font-size="8.5" font-weight="600" fill="#d32f2f">9.3</text>
+  <circle cx="236.3" cy="144.2" r="3.5" fill="#fff" stroke="#1565c0" stroke-width="2"/>
+  <text x="236.3" y="134.2" text-anchor="middle" font-size="8.5" font-weight="600" fill="#1565c0">11.7</text>
+  <circle cx="750.0" cy="251.3" r="3.5" fill="#fff" stroke="#1565c0" stroke-width="2"/>
+  <text x="750.0" y="265.3" text-anchor="middle" font-size="8.5" font-weight="600" fill="#1565c0">6.1</text>
+  <circle cx="65.0" cy="162.5" r="3.5" fill="#fff" stroke="#2e7d32" stroke-width="2"/>
+  <text x="65.0" y="152.5" text-anchor="middle" font-size="8.5" font-weight="600" fill="#2e7d32">10.7</text>
+  <circle cx="750.0" cy="175.3" r="3.5" fill="#fff" stroke="#2e7d32" stroke-width="2"/>
+  <text x="750.0" y="165.3" text-anchor="middle" font-size="8.5" font-weight="600" fill="#2e7d32">10.0</text>
+  <line x1="600" y1="75" x2="625" y2="75" stroke="#d32f2f" stroke-width="2.5"/>
+  <text x="630" y="79" font-size="11" fill="#d32f2f">民生費</text>
+  <line x1="600" y1="95" x2="625" y2="95" stroke="#1565c0" stroke-width="2.5"/>
+  <text x="630" y="99" font-size="11" fill="#1565c0">土木費</text>
+  <line x1="600" y1="115" x2="625" y2="115" stroke="#2e7d32" stroke-width="2.5"/>
+  <text x="630" y="119" font-size="11" fill="#2e7d32">教育費</text>
+</svg>

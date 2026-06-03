@@ -1,0 +1,29 @@
+<svg width="960" height="478" viewBox="0 0 960 478" xmlns="http://www.w3.org/2000/svg" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" role="img" aria-label="この記事でわかったこと">
+<rect width="960" height="478" fill="#f9fafb"/>
+<text x="480" y="48" text-anchor="middle" font-size="26" font-weight="bold" fill="#1f2937">この記事でわかったこと</text>
+<rect x="50" y="78" width="860" height="80" fill="#ffffff" rx="8"/>
+<circle cx="94" cy="118" r="20" fill="#dc2626"/>
+<text x="94" y="125" text-anchor="middle" font-size="16" font-weight="bold" fill="#fff">1</text>
+<text x="130" y="110" font-size="18" font-weight="bold" fill="#1f2937">男性の未婚率は2005年をピークに微減</text>
+<text x="130" y="136" font-size="16" fill="#4b5563">30-34歳男性の全国平均: 1980年21.5% → 2005年47.1% → 2020年43.7%。急増から頭打ちへ</text>
+<rect x="50" y="158" width="860" height="80" fill="#f9fafb" rx="8"/>
+<circle cx="94" cy="198" r="20" fill="#ea580c"/>
+<text x="94" y="205" text-anchor="middle" font-size="16" font-weight="bold" fill="#fff">2</text>
+<text x="130" y="190" font-size="18" font-weight="bold" fill="#1f2937">女性は30年で3.7倍に急増</text>
+<text x="130" y="216" font-size="16" fill="#4b5563">30-34歳女性: 1980年9.1% → 2020年33.6%。特に1990〜2005年の上昇が急激</text>
+<rect x="50" y="238" width="860" height="80" fill="#ffffff" rx="8"/>
+<circle cx="94" cy="278" r="20" fill="#0284c7"/>
+<text x="94" y="285" text-anchor="middle" font-size="16" font-weight="bold" fill="#fff">3</text>
+<text x="130" y="270" font-size="18" font-weight="bold" fill="#1f2937">婚姻率は半世紀で半減</text>
+<text x="130" y="296" font-size="16" fill="#4b5563">1975年の8.4‰から2022年の4.0‰へ。初婚年齢は夫27→31歳、妻25→30歳に上昇</text>
+<rect x="50" y="318" width="860" height="80" fill="#f9fafb" rx="8"/>
+<circle cx="94" cy="358" r="20" fill="#7c3aed"/>
+<text x="94" y="365" text-anchor="middle" font-size="16" font-weight="bold" fill="#fff">4</text>
+<text x="130" y="350" font-size="18" font-weight="bold" fill="#1f2937">地方ほど男性の未婚率が高い</text>
+<text x="130" y="376" font-size="16" fill="#4b5563">秋田51.8%・青森51.4%。都市部の大阪39.3%・東京39.9%と10ポイント以上の差</text>
+<rect x="50" y="398" width="860" height="80" fill="#ffffff" rx="8"/>
+<circle cx="94" cy="438" r="20" fill="#059669"/>
+<text x="94" y="445" text-anchor="middle" font-size="16" font-weight="bold" fill="#fff">5</text>
+<text x="130" y="430" font-size="18" font-weight="bold" fill="#1f2937">未婚率と出生率は逆相関</text>
+<text x="130" y="456" font-size="16" fill="#4b5563">未婚率が高い県ほど出生率が低い傾向。東京は未婚率は低いが出生率も最低（0.99）という例外</text>
+</svg>

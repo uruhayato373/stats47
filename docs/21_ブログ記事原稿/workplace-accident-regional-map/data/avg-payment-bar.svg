@@ -1,0 +1,148 @@
+<svg width="960" height="882" viewBox="0 0 960 882" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="労災保険平均支給額">
+  <title>労災保険平均支給額</title>
+  <rect width="960" height="882" fill="#fafafa" rx="8"/>
+  <text x="480" y="30" text-anchor="middle" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="20" font-weight="bold" fill="#1f2937">労災保険平均支給額ランキング</text>
+  <text x="92" y="92" text-anchor="end" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="10" fill="#374151">香川県</text>
+  <rect x="100" y="80" width="780" height="14" rx="2" fill="#e65100" opacity="0.85"/>
+  <text x="884" y="92" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="9" fill="#6b7280">79.1</text>
+  <text x="92" y="108" text-anchor="end" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="10" fill="#374151">山口県</text>
+  <rect x="100" y="96" width="770.1390644753476" height="14" rx="2" fill="#e65100" opacity="0.85"/>
+  <text x="874.1390644753476" y="108" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="9" fill="#6b7280">78.1</text>
+  <text x="92" y="124" text-anchor="end" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="10" fill="#374151">徳島県</text>
+  <rect x="100" y="112" width="768.1668773704173" height="14" rx="2" fill="#e65100" opacity="0.85"/>
+  <text x="872.1668773704173" y="124" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="9" fill="#6b7280">77.9</text>
+  <text x="92" y="140" text-anchor="end" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="10" fill="#374151">福岡県</text>
+  <rect x="100" y="128" width="762.2503160556258" height="14" rx="2" fill="#e65100" opacity="0.85"/>
+  <text x="866.2503160556258" y="140" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="9" fill="#6b7280">77.3</text>
+  <text x="92" y="156" text-anchor="end" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="10" fill="#374151">長崎県</text>
+  <rect x="100" y="144" width="729.709228824273" height="14" rx="2" fill="#e65100" opacity="0.85"/>
+  <text x="833.709228824273" y="156" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="9" fill="#6b7280">74.0</text>
+  <text x="92" y="172" text-anchor="end" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="10" fill="#374151">岡山県</text>
+  <rect x="100" y="160" width="717.8761061946902" height="14" rx="2" fill="#ff9800" opacity="0.85"/>
+  <text x="821.8761061946902" y="172" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="9" fill="#6b7280">72.8</text>
+  <text x="92" y="188" text-anchor="end" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="10" fill="#374151">広島県</text>
+  <rect x="100" y="176" width="716.8900126422251" height="14" rx="2" fill="#ff9800" opacity="0.85"/>
+  <text x="820.8900126422251" y="188" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="9" fill="#6b7280">72.7</text>
+  <text x="92" y="204" text-anchor="end" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="10" fill="#374151">愛媛県</text>
+  <rect x="100" y="192" width="713.9317319848294" height="14" rx="2" fill="#ff9800" opacity="0.85"/>
+  <text x="817.9317319848294" y="204" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="9" fill="#6b7280">72.4</text>
+  <text x="92" y="220" text-anchor="end" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="10" fill="#374151">和歌山県</text>
+  <rect x="100" y="208" width="705.0568900126423" height="14" rx="2" fill="#ff9800" opacity="0.85"/>
+  <text x="809.0568900126423" y="220" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="9" fill="#6b7280">71.5</text>
+  <text x="92" y="236" text-anchor="end" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="10" fill="#374151">佐賀県</text>
+  <rect x="100" y="224" width="705.0568900126423" height="14" rx="2" fill="#ff9800" opacity="0.85"/>
+  <text x="809.0568900126423" y="236" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="9" fill="#6b7280">71.5</text>
+  <text x="92" y="252" text-anchor="end" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="10" fill="#374151">鹿児島県</text>
+  <rect x="100" y="240" width="703.0847029077117" height="14" rx="2" fill="#ff9800" opacity="0.85"/>
+  <text x="807.0847029077117" y="252" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="9" fill="#6b7280">71.3</text>
+  <text x="92" y="268" text-anchor="end" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="10" fill="#374151">福井県</text>
+  <rect x="100" y="256" width="693.2237673830595" height="14" rx="2" fill="#ff9800" opacity="0.85"/>
+  <text x="797.2237673830595" y="268" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="9" fill="#6b7280">70.3</text>
+  <text x="92" y="284" text-anchor="end" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="10" fill="#374151">大分県</text>
+  <rect x="100" y="272" width="692.2376738305943" height="14" rx="2" fill="#ff9800" opacity="0.85"/>
+  <text x="796.2376738305943" y="284" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="9" fill="#6b7280">70.2</text>
+  <text x="92" y="300" text-anchor="end" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="10" fill="#374151">熊本県</text>
+  <rect x="100" y="288" width="683.362831858407" height="14" rx="2" fill="#ff9800" opacity="0.85"/>
+  <text x="787.362831858407" y="300" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="9" fill="#6b7280">69.3</text>
+  <text x="92" y="316" text-anchor="end" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="10" fill="#374151">鳥取県</text>
+  <rect x="100" y="304" width="682.3767383059419" height="14" rx="2" fill="#ff9800" opacity="0.85"/>
+  <text x="786.3767383059419" y="316" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="9" fill="#6b7280">69.2</text>
+  <text x="92" y="332" text-anchor="end" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="10" fill="#374151">高知県</text>
+  <rect x="100" y="320" width="678.432364096081" height="14" rx="2" fill="#ff9800" opacity="0.85"/>
+  <text x="782.432364096081" y="332" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="9" fill="#6b7280">68.8</text>
+  <text x="92" y="348" text-anchor="end" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="10" fill="#374151">石川県</text>
+  <rect x="100" y="336" width="670.5436156763591" height="14" rx="2" fill="#ff9800" opacity="0.85"/>
+  <text x="774.5436156763591" y="348" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="9" fill="#6b7280">68.0</text>
+  <text x="92" y="364" text-anchor="end" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="10" fill="#374151">茨城県</text>
+  <rect x="100" y="352" width="665.6131479140329" height="14" rx="2" fill="#ff9800" opacity="0.85"/>
+  <text x="769.6131479140329" y="364" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="9" fill="#6b7280">67.5</text>
+  <text x="92" y="380" text-anchor="end" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="10" fill="#374151">山梨県</text>
+  <rect x="100" y="368" width="662.6548672566372" height="14" rx="2" fill="#ff9800" opacity="0.85"/>
+  <text x="766.6548672566372" y="380" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="9" fill="#6b7280">67.2</text>
+  <text x="92" y="396" text-anchor="end" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="10" fill="#374151">大阪府</text>
+  <rect x="100" y="384" width="655.7522123893806" height="14" rx="2" fill="#ff9800" opacity="0.85"/>
+  <text x="759.7522123893806" y="396" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="9" fill="#6b7280">66.5</text>
+  <text x="92" y="412" text-anchor="end" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="10" fill="#374151">兵庫県</text>
+  <rect x="100" y="400" width="654.7661188369154" height="14" rx="2" fill="#ff9800" opacity="0.85"/>
+  <text x="758.7661188369154" y="412" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="9" fill="#6b7280">66.4</text>
+  <text x="92" y="428" text-anchor="end" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="10" fill="#374151">奈良県</text>
+  <rect x="100" y="416" width="648.849557522124" height="14" rx="2" fill="#ff9800" opacity="0.85"/>
+  <text x="752.849557522124" y="428" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="9" fill="#6b7280">65.8</text>
+  <text x="92" y="444" text-anchor="end" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="10" fill="#374151">栃木県</text>
+  <rect x="100" y="432" width="646.8773704171934" height="14" rx="2" fill="#ff9800" opacity="0.85"/>
+  <text x="750.8773704171934" y="444" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="9" fill="#6b7280">65.6</text>
+  <text x="92" y="460" text-anchor="end" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="10" fill="#374151">京都府</text>
+  <rect x="100" y="448" width="630.1137800252844" height="14" rx="2" fill="#ff9800" opacity="0.85"/>
+  <text x="734.1137800252844" y="460" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="9" fill="#6b7280">63.9</text>
+  <text x="92" y="476" text-anchor="end" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="10" fill="#374151">富山県</text>
+  <rect x="100" y="464" width="627.1554993678889" height="14" rx="2" fill="#ff9800" opacity="0.85"/>
+  <text x="731.1554993678889" y="476" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="9" fill="#6b7280">63.6</text>
+  <text x="92" y="492" text-anchor="end" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="10" fill="#374151">島根県</text>
+  <rect x="100" y="480" width="624.1972187104931" height="14" rx="2" fill="#ff9800" opacity="0.85"/>
+  <text x="728.1972187104931" y="492" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="9" fill="#6b7280">63.3</text>
+  <text x="92" y="508" text-anchor="end" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="10" fill="#374151">北海道</text>
+  <rect x="100" y="496" width="603.4892541087232" height="14" rx="2" fill="#ff9800" opacity="0.85"/>
+  <text x="707.4892541087232" y="508" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="9" fill="#6b7280">61.2</text>
+  <text x="92" y="524" text-anchor="end" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="10" fill="#374151">秋田県</text>
+  <rect x="100" y="512" width="601.5170670037927" height="14" rx="2" fill="#ff9800" opacity="0.85"/>
+  <text x="705.5170670037927" y="524" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="9" fill="#6b7280">61.0</text>
+  <text x="92" y="540" text-anchor="end" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="10" fill="#374151">埼玉県</text>
+  <rect x="100" y="528" width="599.5448798988622" height="14" rx="2" fill="#ff9800" opacity="0.85"/>
+  <text x="703.5448798988622" y="540" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="9" fill="#6b7280">60.8</text>
+  <text x="92" y="556" text-anchor="end" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="10" fill="#374151">静岡県</text>
+  <rect x="100" y="544" width="599.5448798988622" height="14" rx="2" fill="#ff9800" opacity="0.85"/>
+  <text x="703.5448798988622" y="556" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="9" fill="#6b7280">60.8</text>
+  <text x="92" y="572" text-anchor="end" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="10" fill="#374151">群馬県</text>
+  <rect x="100" y="560" width="597.5726927939318" height="14" rx="2" fill="#ff9800" opacity="0.85"/>
+  <text x="701.5726927939318" y="572" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="9" fill="#6b7280">60.6</text>
+  <text x="92" y="588" text-anchor="end" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="10" fill="#374151">沖縄県</text>
+  <rect x="100" y="576" width="597.5726927939318" height="14" rx="2" fill="#ff9800" opacity="0.85"/>
+  <text x="701.5726927939318" y="588" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="9" fill="#6b7280">60.6</text>
+  <text x="92" y="604" text-anchor="end" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="10" fill="#374151">三重県</text>
+  <rect x="100" y="592" width="590.6700379266751" height="14" rx="2" fill="#ff9800" opacity="0.85"/>
+  <text x="694.6700379266751" y="604" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="9" fill="#6b7280">59.9</text>
+  <text x="92" y="620" text-anchor="end" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="10" fill="#374151">滋賀県</text>
+  <rect x="100" y="608" width="587.7117572692795" height="14" rx="2" fill="#ff9800" opacity="0.85"/>
+  <text x="691.7117572692795" y="620" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="9" fill="#6b7280">59.6</text>
+  <text x="92" y="636" text-anchor="end" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="10" fill="#374151">福島県</text>
+  <rect x="100" y="624" width="582.7812895069533" height="14" rx="2" fill="#ff9800" opacity="0.85"/>
+  <text x="686.7812895069533" y="636" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="9" fill="#6b7280">59.1</text>
+  <text x="92" y="652" text-anchor="end" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="10" fill="#374151">山形県</text>
+  <rect x="100" y="640" width="567.9898862199748" height="14" rx="2" fill="#ff9800" opacity="0.85"/>
+  <text x="671.9898862199748" y="652" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="9" fill="#6b7280">57.6</text>
+  <text x="92" y="668" text-anchor="end" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="10" fill="#374151">愛知県</text>
+  <rect x="100" y="656" width="567.0037926675095" height="14" rx="2" fill="#ff9800" opacity="0.85"/>
+  <text x="671.0037926675095" y="668" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="9" fill="#6b7280">57.5</text>
+  <text x="92" y="684" text-anchor="end" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="10" fill="#374151">岐阜県</text>
+  <rect x="100" y="672" width="561.087231352718" height="14" rx="2" fill="#ff9800" opacity="0.85"/>
+  <text x="665.087231352718" y="684" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="9" fill="#6b7280">56.9</text>
+  <text x="92" y="700" text-anchor="end" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="10" fill="#374151">岩手県</text>
+  <rect x="100" y="688" width="555.1706700379267" height="14" rx="2" fill="#ff9800" opacity="0.85"/>
+  <text x="659.1706700379267" y="700" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="9" fill="#6b7280">56.3</text>
+  <text x="92" y="716" text-anchor="end" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="10" fill="#374151">宮崎県</text>
+  <rect x="100" y="704" width="554.1845764854615" height="14" rx="2" fill="#ff9800" opacity="0.85"/>
+  <text x="658.1845764854615" y="716" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="9" fill="#6b7280">56.2</text>
+  <text x="92" y="732" text-anchor="end" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="10" fill="#374151">千葉県</text>
+  <rect x="100" y="720" width="553.1984829329963" height="14" rx="2" fill="#ff9800" opacity="0.85"/>
+  <text x="657.1984829329963" y="732" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="9" fill="#6b7280">56.1</text>
+  <text x="92" y="748" text-anchor="end" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="10" fill="#374151">青森県</text>
+  <rect x="100" y="736" width="549.2541087231353" height="14" rx="2" fill="#ff9800" opacity="0.85"/>
+  <text x="653.2541087231353" y="748" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="9" fill="#6b7280">55.7</text>
+  <text x="92" y="764" text-anchor="end" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="10" fill="#374151">新潟県</text>
+  <rect x="100" y="752" width="544.3236409608091" height="14" rx="2" fill="#0284c7" opacity="0.85"/>
+  <text x="648.3236409608091" y="764" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="9" fill="#6b7280">55.2</text>
+  <text x="92" y="780" text-anchor="end" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="10" fill="#374151">長野県</text>
+  <rect x="100" y="768" width="544.3236409608091" height="14" rx="2" fill="#0284c7" opacity="0.85"/>
+  <text x="648.3236409608091" y="780" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="9" fill="#6b7280">55.2</text>
+  <text x="92" y="796" text-anchor="end" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="10" fill="#374151">宮城県</text>
+  <rect x="100" y="784" width="541.3653603034134" height="14" rx="2" fill="#0284c7" opacity="0.85"/>
+  <text x="645.3653603034134" y="796" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="9" fill="#6b7280">54.9</text>
+  <text x="92" y="812" text-anchor="end" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="10" fill="#374151">東京都</text>
+  <rect x="100" y="800" width="540.3792667509482" height="14" rx="2" fill="#0284c7" opacity="0.85"/>
+  <text x="644.3792667509482" y="812" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="9" fill="#6b7280">54.8</text>
+  <text x="92" y="828" text-anchor="end" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="10" fill="#374151">神奈川県</text>
+  <rect x="100" y="816" width="514.7408343868522" height="14" rx="2" fill="#0284c7" opacity="0.85"/>
+  <text x="618.7408343868522" y="828" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="9" fill="#6b7280">52.2</text>
+  <line x1="737.0583963203054" y1="75" x2="737.0583963203054" y2="837" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <text x="737.0583963203054" y="71" text-anchor="middle" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="10" fill="#dc2626">全国平均 64.6千円</text>
+</svg>

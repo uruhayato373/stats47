@@ -1,0 +1,394 @@
+<svg width="600" height="690" viewBox="0 0 600 690" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="民生費構成比 都道府県マップ">
+  <title>民生費構成比 都道府県マップ</title>
+  <rect width="600" height="690" fill="#f9fafb"/>
+  <text x="300" y="19" text-anchor="middle" font-size="11.5" font-weight="700" fill="#111827">民生費が歳出に占める割合（2022年度）</text>
+  <text x="300" y="34" text-anchor="middle" font-size="9" fill="#6b7280">単位：%</text>
+  <g aria-label="北海道 13.7%">
+    <title>北海道：13.7%</title>
+    <rect x="491" y="45" width="74" height="74" rx="3" fill="rgb(255,177,104)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#333333" text-anchor="middle">
+      <tspan x="528" y="79" font-size="7" font-weight="700">北海道</tspan>
+      <tspan x="528" y="92" font-size="7">13.7%</tspan>
+    </text>
+  </g>
+  <g aria-label="青森 15.3%">
+    <title>青森：15.3%</title>
+    <rect x="491" y="159" width="74" height="36" rx="3" fill="rgb(255,150,89)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#333333" text-anchor="middle">
+      <tspan x="528" y="174" font-size="7" font-weight="700">青森</tspan>
+      <tspan x="528" y="187" font-size="7">15.3%</tspan>
+    </text>
+  </g>
+  <g aria-label="岩手 12.1%">
+    <title>岩手：12.1%</title>
+    <rect x="529" y="197" width="36" height="36" rx="3" fill="rgb(255,203,118)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#333333" text-anchor="middle">
+      <tspan x="547" y="212" font-size="7" font-weight="700">岩手</tspan>
+      <tspan x="547" y="225" font-size="7">12.1%</tspan>
+    </text>
+  </g>
+  <g aria-label="秋田 14.3%">
+    <title>秋田：14.3%</title>
+    <rect x="491" y="197" width="36" height="36" rx="3" fill="rgb(255,167,98)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#333333" text-anchor="middle">
+      <tspan x="509" y="212" font-size="7" font-weight="700">秋田</tspan>
+      <tspan x="509" y="225" font-size="7">14.3%</tspan>
+    </text>
+  </g>
+  <g aria-label="宮城 13.5%">
+    <title>宮城：13.5%</title>
+    <rect x="529" y="235" width="36" height="36" rx="3" fill="rgb(255,180,105)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#333333" text-anchor="middle">
+      <tspan x="547" y="250" font-size="7" font-weight="700">宮城</tspan>
+      <tspan x="547" y="263" font-size="7">13.5%</tspan>
+    </text>
+  </g>
+  <g aria-label="山形 12.2%">
+    <title>山形：12.2%</title>
+    <rect x="491" y="235" width="36" height="36" rx="3" fill="rgb(255,201,117)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#333333" text-anchor="middle">
+      <tspan x="509" y="250" font-size="7" font-weight="700">山形</tspan>
+      <tspan x="509" y="263" font-size="7">12.2%</tspan>
+    </text>
+  </g>
+  <g aria-label="福島 11.5%">
+    <title>福島：11.5%</title>
+    <rect x="491" y="273" width="74" height="36" rx="3" fill="rgb(255,213,124)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#333333" text-anchor="middle">
+      <tspan x="528" y="288" font-size="7" font-weight="700">福島</tspan>
+      <tspan x="528" y="301" font-size="7">11.5%</tspan>
+    </text>
+  </g>
+  <g aria-label="新潟 12.2%">
+    <title>新潟：12.2%</title>
+    <rect x="415" y="273" width="74" height="36" rx="3" fill="rgb(255,201,117)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#333333" text-anchor="middle">
+      <tspan x="452" y="288" font-size="7" font-weight="700">新潟</tspan>
+      <tspan x="452" y="301" font-size="7">12.2%</tspan>
+    </text>
+  </g>
+  <g aria-label="富山 11.8%">
+    <title>富山：11.8%</title>
+    <rect x="377" y="273" width="36" height="36" rx="3" fill="rgb(255,208,121)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#333333" text-anchor="middle">
+      <tspan x="395" y="288" font-size="7" font-weight="700">富山</tspan>
+      <tspan x="395" y="301" font-size="7">11.8%</tspan>
+    </text>
+  </g>
+  <g aria-label="石川 13.7%">
+    <title>石川：13.7%</title>
+    <rect x="339" y="273" width="36" height="36" rx="3" fill="rgb(255,177,104)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#333333" text-anchor="middle">
+      <tspan x="357" y="288" font-size="7" font-weight="700">石川</tspan>
+      <tspan x="357" y="301" font-size="7">13.7%</tspan>
+    </text>
+  </g>
+  <g aria-label="福井 11.6%">
+    <title>福井：11.6%</title>
+    <rect x="339" y="311" width="36" height="36" rx="3" fill="rgb(255,211,123)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#333333" text-anchor="middle">
+      <tspan x="357" y="326" font-size="7" font-weight="700">福井</tspan>
+      <tspan x="357" y="339" font-size="7">11.6%</tspan>
+    </text>
+  </g>
+  <g aria-label="岐阜 14.1%">
+    <title>岐阜：14.1%</title>
+    <rect x="377" y="311" width="36" height="74" rx="3" fill="rgb(255,170,100)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#333333" text-anchor="middle">
+      <tspan x="395" y="345" font-size="7" font-weight="700">岐阜</tspan>
+      <tspan x="395" y="358" font-size="7">14.1%</tspan>
+    </text>
+  </g>
+  <g aria-label="長野 12.8%">
+    <title>長野：12.8%</title>
+    <rect x="415" y="311" width="36" height="74" rx="3" fill="rgb(255,191,112)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#333333" text-anchor="middle">
+      <tspan x="433" y="345" font-size="7" font-weight="700">長野</tspan>
+      <tspan x="433" y="358" font-size="7">12.8%</tspan>
+    </text>
+  </g>
+  <g aria-label="群馬 14.5%">
+    <title>群馬：14.5%</title>
+    <rect x="453" y="311" width="36" height="36" rx="3" fill="rgb(255,163,96)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#333333" text-anchor="middle">
+      <tspan x="471" y="326" font-size="7" font-weight="700">群馬</tspan>
+      <tspan x="471" y="339" font-size="7">14.5%</tspan>
+    </text>
+  </g>
+  <g aria-label="栃木 13.3%">
+    <title>栃木：13.3%</title>
+    <rect x="491" y="311" width="36" height="36" rx="3" fill="rgb(255,183,107)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#333333" text-anchor="middle">
+      <tspan x="509" y="326" font-size="7" font-weight="700">栃木</tspan>
+      <tspan x="509" y="339" font-size="7">13.3%</tspan>
+    </text>
+  </g>
+  <g aria-label="茨城 15.6%">
+    <title>茨城：15.6%</title>
+    <rect x="529" y="311" width="36" height="36" rx="3" fill="rgb(255,145,86)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#333333" text-anchor="middle">
+      <tspan x="547" y="326" font-size="7" font-weight="700">茨城</tspan>
+      <tspan x="547" y="339" font-size="7">15.6%</tspan>
+    </text>
+  </g>
+  <g aria-label="山梨 12.1%">
+    <title>山梨：12.1%</title>
+    <rect x="453" y="349" width="36" height="36" rx="3" fill="rgb(255,203,118)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#333333" text-anchor="middle">
+      <tspan x="471" y="364" font-size="7" font-weight="700">山梨</tspan>
+      <tspan x="471" y="377" font-size="7">12.1%</tspan>
+    </text>
+  </g>
+  <g aria-label="埼玉 18.7%">
+    <title>埼玉：18.7%</title>
+    <rect x="491" y="349" width="36" height="36" rx="3" fill="rgb(255,95,58)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#ffffff" text-anchor="middle">
+      <tspan x="509" y="364" font-size="7" font-weight="700">埼玉</tspan>
+      <tspan x="509" y="377" font-size="7">18.7%</tspan>
+    </text>
+  </g>
+  <g aria-label="千葉 16.8%">
+    <title>千葉：16.8%</title>
+    <rect x="529" y="349" width="36" height="74" rx="3" fill="rgb(255,126,75)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#ffffff" text-anchor="middle">
+      <tspan x="547" y="383" font-size="7" font-weight="700">千葉</tspan>
+      <tspan x="547" y="396" font-size="7">16.8%</tspan>
+    </text>
+  </g>
+  <g aria-label="東京 13.5%">
+    <title>東京：13.5%</title>
+    <rect x="491" y="387" width="36" height="36" rx="3" fill="rgb(255,180,105)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#333333" text-anchor="middle">
+      <tspan x="509" y="402" font-size="7" font-weight="700">東京</tspan>
+      <tspan x="509" y="415" font-size="7">13.5%</tspan>
+    </text>
+  </g>
+  <g aria-label="神奈川 21.8%">
+    <title>神奈川：21.8%</title>
+    <rect x="491" y="425" width="36" height="36" rx="3" fill="rgb(255,44,30)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#ffffff" text-anchor="middle">
+      <tspan x="509" y="440" font-size="7" font-weight="700">神奈川</tspan>
+      <tspan x="509" y="453" font-size="7">21.8%</tspan>
+    </text>
+  </g>
+  <g aria-label="静岡 16.1%">
+    <title>静岡：16.1%</title>
+    <rect x="415" y="387" width="74" height="36" rx="3" fill="rgb(255,137,82)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#333333" text-anchor="middle">
+      <tspan x="452" y="402" font-size="7" font-weight="700">静岡</tspan>
+      <tspan x="452" y="415" font-size="7">16.1%</tspan>
+    </text>
+  </g>
+  <g aria-label="愛知 16.3%">
+    <title>愛知：16.3%</title>
+    <rect x="377" y="387" width="36" height="36" rx="3" fill="rgb(255,134,80)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#333333" text-anchor="middle">
+      <tspan x="395" y="402" font-size="7" font-weight="700">愛知</tspan>
+      <tspan x="395" y="415" font-size="7">16.3%</tspan>
+    </text>
+  </g>
+  <g aria-label="滋賀 14.3%">
+    <title>滋賀：14.3%</title>
+    <rect x="339" y="349" width="36" height="36" rx="3" fill="rgb(255,167,98)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#333333" text-anchor="middle">
+      <tspan x="357" y="364" font-size="7" font-weight="700">滋賀</tspan>
+      <tspan x="357" y="377" font-size="7">14.3%</tspan>
+    </text>
+  </g>
+  <g aria-label="三重 15.3%">
+    <title>三重：15.3%</title>
+    <rect x="339" y="387" width="36" height="74" rx="3" fill="rgb(255,150,89)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#333333" text-anchor="middle">
+      <tspan x="357" y="421" font-size="7" font-weight="700">三重</tspan>
+      <tspan x="357" y="434" font-size="7">15.3%</tspan>
+    </text>
+  </g>
+  <g aria-label="京都 16.7%">
+    <title>京都：16.7%</title>
+    <rect x="263" y="349" width="74" height="36" rx="3" fill="rgb(255,127,76)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#ffffff" text-anchor="middle">
+      <tspan x="300" y="364" font-size="7" font-weight="700">京都</tspan>
+      <tspan x="300" y="377" font-size="7">16.7%</tspan>
+    </text>
+  </g>
+  <g aria-label="兵庫 14.9%">
+    <title>兵庫：14.9%</title>
+    <rect x="225" y="349" width="36" height="74" rx="3" fill="rgb(255,157,93)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#333333" text-anchor="middle">
+      <tspan x="243" y="383" font-size="7" font-weight="700">兵庫</tspan>
+      <tspan x="243" y="396" font-size="7">14.9%</tspan>
+    </text>
+  </g>
+  <g aria-label="大阪 17.4%">
+    <title>大阪：17.4%</title>
+    <rect x="263" y="387" width="36" height="36" rx="3" fill="rgb(255,116,70)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#ffffff" text-anchor="middle">
+      <tspan x="281" y="402" font-size="7" font-weight="700">大阪</tspan>
+      <tspan x="281" y="415" font-size="7">17.4%</tspan>
+    </text>
+  </g>
+  <g aria-label="奈良 16.8%">
+    <title>奈良：16.8%</title>
+    <rect x="301" y="387" width="36" height="36" rx="3" fill="rgb(255,126,75)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#ffffff" text-anchor="middle">
+      <tspan x="319" y="402" font-size="7" font-weight="700">奈良</tspan>
+      <tspan x="319" y="415" font-size="7">16.8%</tspan>
+    </text>
+  </g>
+  <g aria-label="和歌山 13.9%">
+    <title>和歌山：13.9%</title>
+    <rect x="263" y="425" width="74" height="36" rx="3" fill="rgb(255,173,102)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#333333" text-anchor="middle">
+      <tspan x="300" y="440" font-size="7" font-weight="700">和歌山</tspan>
+      <tspan x="300" y="453" font-size="7">13.9%</tspan>
+    </text>
+  </g>
+  <g aria-label="鳥取 13.7%">
+    <title>鳥取：13.7%</title>
+    <rect x="187" y="349" width="36" height="36" rx="3" fill="rgb(255,177,104)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#333333" text-anchor="middle">
+      <tspan x="205" y="364" font-size="7" font-weight="700">鳥取</tspan>
+      <tspan x="205" y="377" font-size="7">13.7%</tspan>
+    </text>
+  </g>
+  <g aria-label="岡山 16.2%">
+    <title>岡山：16.2%</title>
+    <rect x="187" y="387" width="36" height="36" rx="3" fill="rgb(255,136,81)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#333333" text-anchor="middle">
+      <tspan x="205" y="402" font-size="7" font-weight="700">岡山</tspan>
+      <tspan x="205" y="415" font-size="7">16.2%</tspan>
+    </text>
+  </g>
+  <g aria-label="島根 10.8%">
+    <title>島根：10.8%</title>
+    <rect x="149" y="349" width="36" height="36" rx="3" fill="rgb(255,224,130)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#333333" text-anchor="middle">
+      <tspan x="167" y="364" font-size="7" font-weight="700">島根</tspan>
+      <tspan x="167" y="377" font-size="7">10.8%</tspan>
+    </text>
+  </g>
+  <g aria-label="広島 15.7%">
+    <title>広島：15.7%</title>
+    <rect x="149" y="387" width="36" height="36" rx="3" fill="rgb(255,144,85)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#333333" text-anchor="middle">
+      <tspan x="167" y="402" font-size="7" font-weight="700">広島</tspan>
+      <tspan x="167" y="415" font-size="7">15.7%</tspan>
+    </text>
+  </g>
+  <g aria-label="山口 13.4%">
+    <title>山口：13.4%</title>
+    <rect x="111" y="349" width="36" height="74" rx="3" fill="rgb(255,181,106)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#333333" text-anchor="middle">
+      <tspan x="129" y="383" font-size="7" font-weight="700">山口</tspan>
+      <tspan x="129" y="396" font-size="7">13.4%</tspan>
+    </text>
+  </g>
+  <g aria-label="愛媛 15.0%">
+    <title>愛媛：15.0%</title>
+    <rect x="149" y="463" width="36" height="36" rx="3" fill="rgb(255,155,92)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#333333" text-anchor="middle">
+      <tspan x="167" y="478" font-size="7" font-weight="700">愛媛</tspan>
+      <tspan x="167" y="491" font-size="7">15.0%</tspan>
+    </text>
+  </g>
+  <g aria-label="香川 14.6%">
+    <title>香川：14.6%</title>
+    <rect x="187" y="463" width="36" height="36" rx="3" fill="rgb(255,162,95)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#333333" text-anchor="middle">
+      <tspan x="205" y="478" font-size="7" font-weight="700">香川</tspan>
+      <tspan x="205" y="491" font-size="7">14.6%</tspan>
+    </text>
+  </g>
+  <g aria-label="高知 14.3%">
+    <title>高知：14.3%</title>
+    <rect x="149" y="501" width="36" height="36" rx="3" fill="rgb(255,167,98)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#333333" text-anchor="middle">
+      <tspan x="167" y="516" font-size="7" font-weight="700">高知</tspan>
+      <tspan x="167" y="529" font-size="7">14.3%</tspan>
+    </text>
+  </g>
+  <g aria-label="徳島 13.0%">
+    <title>徳島：13.0%</title>
+    <rect x="187" y="501" width="36" height="36" rx="3" fill="rgb(255,188,110)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#333333" text-anchor="middle">
+      <tspan x="205" y="516" font-size="7" font-weight="700">徳島</tspan>
+      <tspan x="205" y="529" font-size="7">13.0%</tspan>
+    </text>
+  </g>
+  <g aria-label="福岡 17.3%">
+    <title>福岡：17.3%</title>
+    <rect x="73" y="425" width="36" height="36" rx="3" fill="rgb(255,118,71)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#ffffff" text-anchor="middle">
+      <tspan x="91" y="440" font-size="7" font-weight="700">福岡</tspan>
+      <tspan x="91" y="453" font-size="7">17.3%</tspan>
+    </text>
+  </g>
+  <g aria-label="佐賀 12.1%">
+    <title>佐賀：12.1%</title>
+    <rect x="35" y="425" width="36" height="36" rx="3" fill="rgb(255,203,118)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#333333" text-anchor="middle">
+      <tspan x="53" y="440" font-size="7" font-weight="700">佐賀</tspan>
+      <tspan x="53" y="453" font-size="7">12.1%</tspan>
+    </text>
+  </g>
+  <g aria-label="大分 13.7%">
+    <title>大分：13.7%</title>
+    <rect x="73" y="463" width="36" height="36" rx="3" fill="rgb(255,177,104)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#333333" text-anchor="middle">
+      <tspan x="91" y="478" font-size="7" font-weight="700">大分</tspan>
+      <tspan x="91" y="491" font-size="7">13.7%</tspan>
+    </text>
+  </g>
+  <g aria-label="長崎 14.3%">
+    <title>長崎：14.3%</title>
+    <rect x="35" y="463" width="36" height="36" rx="3" fill="rgb(255,167,98)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#333333" text-anchor="middle">
+      <tspan x="53" y="478" font-size="7" font-weight="700">長崎</tspan>
+      <tspan x="53" y="491" font-size="7">14.3%</tspan>
+    </text>
+  </g>
+  <g aria-label="宮崎 13.9%">
+    <title>宮崎：13.9%</title>
+    <rect x="73" y="501" width="36" height="36" rx="3" fill="rgb(255,173,102)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#333333" text-anchor="middle">
+      <tspan x="91" y="516" font-size="7" font-weight="700">宮崎</tspan>
+      <tspan x="91" y="529" font-size="7">13.9%</tspan>
+    </text>
+  </g>
+  <g aria-label="熊本 15.1%">
+    <title>熊本：15.1%</title>
+    <rect x="35" y="501" width="36" height="36" rx="3" fill="rgb(255,154,91)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#333333" text-anchor="middle">
+      <tspan x="53" y="516" font-size="7" font-weight="700">熊本</tspan>
+      <tspan x="53" y="529" font-size="7">15.1%</tspan>
+    </text>
+  </g>
+  <g aria-label="鹿児島 16.4%">
+    <title>鹿児島：16.4%</title>
+    <rect x="35" y="539" width="74" height="36" rx="3" fill="rgb(255,132,79)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#ffffff" text-anchor="middle">
+      <tspan x="72" y="554" font-size="7" font-weight="700">鹿児島</tspan>
+      <tspan x="72" y="567" font-size="7">16.4%</tspan>
+    </text>
+  </g>
+  <g aria-label="沖縄 16.5%">
+    <title>沖縄：16.5%</title>
+    <rect x="35" y="615" width="36" height="36" rx="3" fill="rgb(255,131,78)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#ffffff" text-anchor="middle">
+      <tspan x="53" y="630" font-size="7" font-weight="700">沖縄</tspan>
+      <tspan x="53" y="643" font-size="7">16.5%</tspan>
+    </text>
+  </g>
+  <rect x="120" y="660" width="36" height="12" fill="rgb(255,224,130)"/>
+  <rect x="156" y="660" width="36" height="12" fill="rgb(255,204,119)"/>
+  <rect x="192" y="660" width="36" height="12" fill="rgb(255,184,108)"/>
+  <rect x="228" y="660" width="36" height="12" fill="rgb(255,164,97)"/>
+  <rect x="264" y="660" width="36" height="12" fill="rgb(255,144,86)"/>
+  <rect x="300" y="660" width="36" height="12" fill="rgb(255,124,74)"/>
+  <rect x="336" y="660" width="36" height="12" fill="rgb(255,104,63)"/>
+  <rect x="372" y="660" width="36" height="12" fill="rgb(255,84,52)"/>
+  <rect x="408" y="660" width="36" height="12" fill="rgb(255,64,41)"/>
+  <rect x="444" y="660" width="36" height="12" fill="rgb(255,44,30)"/>
+  <text x="120" y="656" font-size="8" fill="#6b7280">10.8%</text>
+  <text x="480" y="656" text-anchor="end" font-size="8" fill="#6b7280">21.8%</text>
+</svg>
