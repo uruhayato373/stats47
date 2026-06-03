@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 360" width="680" height="360" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" role="img" aria-label="この記事でわかったこと">
+  <style>
+    .svg-bg { fill: #ffffff; }
+    .svg-title { fill: #1f2937; }
+    .svg-sub { fill: #6b7280; }
+    .svg-axis { fill: #374151; }
+    .svg-tick { fill: #6b7280; }
+    .svg-grid { stroke: #e5e7eb; }
+    .svg-badge-num { fill: #ffffff; }
+    @media (prefers-color-scheme: dark) {
+      .svg-bg { fill: #1e1e1e; }
+      .svg-title { fill: #f3f4f6; }
+      .svg-sub { fill: #9ca3af; }
+      .svg-axis { fill: #e5e7eb; }
+      .svg-tick { fill: #9ca3af; }
+      .svg-grid { stroke: #374151; }
+    }
+  </style>
+  <rect width="680" height="360" class="svg-bg" rx="8"/>
+  <text x="340.0" y="34" text-anchor="middle" font-size="17" font-weight="bold" class="svg-title">この記事でわかったこと</text>
+  <circle cx="40" cy="69" r="11" fill="#2563eb"/>
+  <text x="40" y="73" text-anchor="middle" font-size="13" font-weight="bold" class="svg-badge-num">1</text>
+  <text x="62" y="74" font-size="13.5" class="svg-axis">1位は京都府 608.4万円、東京都は意外にも6位（571.7万円）</text>
+  <circle cx="40" cy="121" r="11" fill="#2563eb"/>
+  <text x="40" y="125" text-anchor="middle" font-size="13" font-weight="bold" class="svg-badge-num">2</text>
+  <text x="62" y="126" font-size="13.5" class="svg-axis">最下位は沖縄県 402.6万円 — 首位と205.8万円・1.51倍差</text>
+  <circle cx="40" cy="173" r="11" fill="#2563eb"/>
+  <text x="40" y="177" text-anchor="middle" font-size="13" font-weight="bold" class="svg-badge-num">3</text>
+  <text x="62" y="178" font-size="13.5" class="svg-axis">IT事業所は東京に34.1%集中、なのに最高給ではない</text>
+  <circle cx="40" cy="225" r="11" fill="#2563eb"/>
+  <text x="40" y="229" text-anchor="middle" font-size="13" font-weight="bold" class="svg-badge-num">4</text>
+  <text x="62" y="230" font-size="13.5" class="svg-axis">下位は『IT産業が薄い地方』と『隣県に給与を吸われる奈良型』の2系統</text>
+  <circle cx="40" cy="277" r="11" fill="#2563eb"/>
+  <text x="40" y="281" text-anchor="middle" font-size="13" font-weight="bold" class="svg-badge-num">5</text>
+  <text x="62" y="282" font-size="13.5" class="svg-axis">平均年収は勤務地ベース。企業構成・通勤・下流工程比率に左右される</text>
+</svg>

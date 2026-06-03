@@ -1,0 +1,29 @@
+<svg width="960" height="478" viewBox="0 0 960 478" xmlns="http://www.w3.org/2000/svg" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" role="img" aria-label="この記事でわかったこと">
+<rect width="960" height="478" fill="#f9fafb"/>
+<text x="480" y="48" text-anchor="middle" font-size="26" font-weight="bold" fill="#1f2937">この記事でわかったこと</text>
+<rect x="50" y="78" width="860" height="80" fill="#ffffff" rx="8"/>
+<circle cx="94" cy="118" r="20" fill="#dc2626"/>
+<text x="94" y="125" text-anchor="middle" font-size="16" font-weight="bold" fill="#fff">1</text>
+<text x="130" y="110" font-size="18" font-weight="bold" fill="#1f2937">9年で男性+2.26歳、女性+1.76歳</text>
+<text x="130" y="136" font-size="16" fill="#4b5563">全国平均の健康寿命は着実に改善。男性70.42歳→72.68歳、女性73.62歳→75.38歳</text>
+<rect x="50" y="158" width="860" height="80" fill="#f9fafb" rx="8"/>
+<circle cx="94" cy="198" r="20" fill="#ea580c"/>
+<text x="94" y="205" text-anchor="middle" font-size="16" font-weight="bold" fill="#fff">2</text>
+<text x="130" y="190" font-size="18" font-weight="bold" fill="#1f2937">1位は大分県（73.72歳）、47位は岩手県（71.39歳）</text>
+<text x="130" y="216" font-size="16" fill="#4b5563">男性の健康寿命で最大2.33歳の地域差。上位は大分・山梨・埼玉</text>
+<rect x="50" y="238" width="860" height="80" fill="#ffffff" rx="8"/>
+<circle cx="94" cy="278" r="20" fill="#0284c7"/>
+<text x="94" y="285" text-anchor="middle" font-size="16" font-weight="bold" fill="#fff">3</text>
+<text x="130" y="270" font-size="18" font-weight="bold" fill="#1f2937">医師数は47年で2.6倍に増加</text>
+<text x="130" y="296" font-size="16" fill="#4b5563">1975年の13.2万人から2022年の34.3万人へ。ただし健康寿命との相関は弱い</text>
+<rect x="50" y="318" width="860" height="80" fill="#f9fafb" rx="8"/>
+<circle cx="94" cy="358" r="20" fill="#7c3aed"/>
+<text x="94" y="365" text-anchor="middle" font-size="16" font-weight="bold" fill="#fff">4</text>
+<text x="130" y="350" font-size="18" font-weight="bold" fill="#1f2937">医師が多い県≠健康寿命が長い県</text>
+<text x="130" y="376" font-size="16" fill="#4b5563">東京・京都は医師数が多いが健康寿命は中位。大分・山梨は少ないが上位</text>
+<rect x="50" y="398" width="860" height="80" fill="#ffffff" rx="8"/>
+<circle cx="94" cy="438" r="20" fill="#059669"/>
+<text x="94" y="445" text-anchor="middle" font-size="16" font-weight="bold" fill="#fff">5</text>
+<text x="130" y="430" font-size="18" font-weight="bold" fill="#1f2937">「不健康な期間」は縮小していない</text>
+<text x="130" y="456" font-size="16" fill="#4b5563">平均寿命と健康寿命の差は男性約8〜9年、女性約12年。寿命が延びても不健康期間は横ばい</text>
+</svg>

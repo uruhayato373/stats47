@@ -1,0 +1,116 @@
+<svg width="560" height="600" viewBox="0 0 560 600" xmlns="http://www.w3.org/2000/svg" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" role="img" aria-label="消費支出と食料費割合の散布図">
+  <title>消費支出と食料費割合の散布図</title>
+  <rect width="560" height="600" fill="#fafafa" rx="8"/>
+  <text x="280" y="28" text-anchor="middle" font-size="16" font-weight="bold" fill="#333">消費支出と食料費割合の関係</text>
+  <rect x="70" y="55" width="460" height="460" fill="#f9fafb" stroke="#d1d5db"/>
+  <line x1="70" y1="55" x2="70" y2="515" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="70" y="530" text-anchor="middle" font-size="9" fill="#6b7280">240</text>
+  <line x1="140.76923076923077" y1="55" x2="140.76923076923077" y2="515" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="140.76923076923077" y="530" text-anchor="middle" font-size="9" fill="#6b7280">260</text>
+  <line x1="211.53846153846155" y1="55" x2="211.53846153846155" y2="515" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="211.53846153846155" y="530" text-anchor="middle" font-size="9" fill="#6b7280">280</text>
+  <line x1="282.3076923076923" y1="55" x2="282.3076923076923" y2="515" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="282.3076923076923" y="530" text-anchor="middle" font-size="9" fill="#6b7280">300</text>
+  <line x1="353.0769230769231" y1="55" x2="353.0769230769231" y2="515" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="353.0769230769231" y="530" text-anchor="middle" font-size="9" fill="#6b7280">320</text>
+  <line x1="423.84615384615387" y1="55" x2="423.84615384615387" y2="515" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="423.84615384615387" y="530" text-anchor="middle" font-size="9" fill="#6b7280">340</text>
+  <line x1="494.61538461538464" y1="55" x2="494.61538461538464" y2="515" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="494.61538461538464" y="530" text-anchor="middle" font-size="9" fill="#6b7280">360</text>
+  <line x1="70" y1="515" x2="530" y2="515" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="62" y="518" text-anchor="end" font-size="9" fill="#6b7280">24</text>
+  <line x1="70" y1="463.88888888888886" x2="530" y2="463.88888888888886" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="62" y="466.88888888888886" text-anchor="end" font-size="9" fill="#6b7280">25</text>
+  <line x1="70" y1="412.77777777777777" x2="530" y2="412.77777777777777" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="62" y="415.77777777777777" text-anchor="end" font-size="9" fill="#6b7280">26</text>
+  <line x1="70" y1="361.6666666666667" x2="530" y2="361.6666666666667" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="62" y="364.6666666666667" text-anchor="end" font-size="9" fill="#6b7280">27</text>
+  <line x1="70" y1="310.55555555555554" x2="530" y2="310.55555555555554" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="62" y="313.55555555555554" text-anchor="end" font-size="9" fill="#6b7280">28</text>
+  <line x1="70" y1="259.44444444444446" x2="530" y2="259.44444444444446" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="62" y="262.44444444444446" text-anchor="end" font-size="9" fill="#6b7280">29</text>
+  <line x1="70" y1="208.33333333333334" x2="530" y2="208.33333333333334" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="62" y="211.33333333333334" text-anchor="end" font-size="9" fill="#6b7280">30</text>
+  <line x1="70" y1="157.22222222222223" x2="530" y2="157.22222222222223" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="62" y="160.22222222222223" text-anchor="end" font-size="9" fill="#6b7280">31</text>
+  <line x1="70" y1="106.11111111111114" x2="530" y2="106.11111111111114" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="62" y="109.11111111111114" text-anchor="end" font-size="9" fill="#6b7280">32</text>
+  <line x1="70" y1="55" x2="530" y2="55" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="62" y="58" text-anchor="end" font-size="9" fill="#6b7280">33</text>
+  <line x1="291.2216039279871" y1="55" x2="291.2216039279871" y2="515" stroke="#9ca3af" stroke-dasharray="4,3" opacity="0.6"/>
+  <line x1="70" y1="321.5390070921985" x2="530" y2="321.5390070921985" stroke="#9ca3af" stroke-dasharray="4,3" opacity="0.6"/>
+  <circle cx="487.1846153846153" cy="330.99999999999994" r="4.5" fill="#66bb6a" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>埼玉県：357.9千円 27.6%</title></circle>
+  <text x="494.1846153846153" y="327.99999999999994" font-size="8" fill="#374151">埼玉</text>
+  <circle cx="462.7692307692308" cy="285" r="4.5" fill="#66bb6a" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>東京都：351千円 28.5%</title></circle>
+  <text x="469.7692307692308" y="282" font-size="8" fill="#374151">東京</text>
+  <circle cx="412.876923076923" cy="320.77777777777777" r="4.5" fill="#66bb6a" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>千葉県：336.9千円 27.8%</title></circle>
+  <text x="419.876923076923" y="317.77777777777777" font-size="8" fill="#374151">千葉</text>
+  <circle cx="395.8923076923077" cy="310.55555555555554" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>富山県：332.1千円 28%</title></circle>
+  <text x="402.8923076923077" y="307.55555555555554" font-size="8" fill="#374151">富山</text>
+  <circle cx="390.58461538461546" cy="285" r="4.5" fill="#66bb6a" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>神奈川県：330.6千円 28.5%</title></circle>
+  <text x="397.58461538461546" y="282" font-size="8" fill="#374151">神奈川</text>
+  <circle cx="388.8153846153847" cy="453.6666666666667" r="4.5" fill="#66bb6a" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>栃木県：330.1千円 25.2%</title></circle>
+  <text x="395.8153846153847" y="457.6666666666667" font-size="8" fill="#374151">栃木</text>
+  <circle cx="372.1846153846153" cy="351.4444444444445" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>静岡県：325.4千円 27.2%</title></circle>
+  <circle cx="372.1846153846153" cy="382.1111111111111" r="4.5" fill="#ab47bc" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>熊本県：325.4千円 26.6%</title></circle>
+  <text x="379.1846153846153" y="379.1111111111111" font-size="8" fill="#374151">熊本</text>
+  <circle cx="367.93846153846147" cy="397.4444444444444" r="4.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>岡山県：324.2千円 26.3%</title></circle>
+  <circle cx="364.0461538461539" cy="320.77777777777777" r="4.5" fill="#42a5f5" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>山形県：323.1千円 27.8%</title></circle>
+  <circle cx="356.9692307692309" cy="300.33333333333337" r="4.5" fill="#ffa726" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>滋賀県：321.1千円 28.2%</title></circle>
+  <circle cx="349.1846153846153" cy="422.99999999999994" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>長野県：318.9千円 25.8%</title></circle>
+  <circle cx="346.35384615384623" cy="341.22222222222234" r="4.5" fill="#ffa726" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>奈良県：318.1千円 27.4%</title></circle>
+  <circle cx="339.98461538461544" cy="438.33333333333337" r="4.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>鳥取県：316.3千円 25.5%</title></circle>
+  <circle cx="338.21538461538466" cy="443.4444444444445" r="4.5" fill="#66bb6a" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>茨城県：315.8千円 25.4%</title></circle>
+  <circle cx="336.09230769230766" cy="382.1111111111111" r="4.5" fill="#42a5f5" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>宮城県：315.2千円 26.6%</title></circle>
+  <circle cx="333.9692307692308" cy="361.6666666666667" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>石川県：314.6千円 27%</title></circle>
+  <circle cx="329.7230769230768" cy="412.77777777777777" r="4.5" fill="#42a5f5" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>岩手県：313.4千円 26%</title></circle>
+  <circle cx="323.35384615384623" cy="417.88888888888897" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>福井県：311.6千円 25.9%</title></circle>
+  <circle cx="313.7999999999999" cy="249.22222222222226" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>愛知県：308.9千円 29.2%</title></circle>
+  <circle cx="303.53846153846155" cy="361.6666666666667" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>山梨県：306千円 27%</title></circle>
+  <circle cx="299.64615384615377" cy="330.99999999999994" r="4.5" fill="#42a5f5" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>福島県：304.9千円 27.6%</title></circle>
+  <circle cx="292.21538461538466" cy="397.4444444444444" r="4.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>高知県：302.8千円 26.3%</title></circle>
+  <circle cx="289.0307692307691" cy="330.99999999999994" r="4.5" fill="#66bb6a" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>群馬県：301.9千円 27.6%</title></circle>
+  <circle cx="283.72307692307686" cy="274.7777777777778" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>新潟県：300.4千円 28.7%</title></circle>
+  <circle cx="278.4153846153845" cy="336.11111111111114" r="4.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>広島県：298.9千円 27.5%</title></circle>
+  <circle cx="271.6923076923077" cy="382.1111111111111" r="4.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>香川県：297千円 26.6%</title></circle>
+  <circle cx="266.38461538461536" cy="233.88888888888886" r="4.5" fill="#ffa726" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>京都府：295.5千円 29.5%</title></circle>
+  <circle cx="265.3230769230769" cy="412.77777777777777" r="4.5" fill="#ab47bc" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>鹿児島県：295.2千円 26%</title></circle>
+  <circle cx="264.2615384615384" cy="407.6666666666666" r="4.5" fill="#ab47bc" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>大分県：294.9千円 26.1%</title></circle>
+  <circle cx="256.12307692307695" cy="351.4444444444445" r="4.5" fill="#ab47bc" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>佐賀県：292.6千円 27.2%</title></circle>
+  <circle cx="252.9384615384615" cy="356.5555555555555" r="4.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>島根県：291.7千円 27.1%</title></circle>
+  <circle cx="250.46153846153845" cy="377.00000000000006" r="4.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>山口県：291千円 26.7%</title></circle>
+  <circle cx="244.79999999999993" cy="356.5555555555555" r="4.5" fill="#ffa726" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>三重県：289.4千円 27.1%</title></circle>
+  <circle cx="244.79999999999993" cy="290.1111111111112" r="4.5" fill="#ab47bc" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>福岡県：289.4千円 28.4%</title></circle>
+  <circle cx="240.20000000000007" cy="279.8888888888888" r="4.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>徳島県：288.1千円 28.6%</title></circle>
+  <circle cx="234.18461538461528" cy="208.33333333333334" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>岐阜県：286.4千円 30%</title></circle>
+  <text x="241.18461538461528" y="212.33333333333334" font-size="8" fill="#374151">岐阜</text>
+  <circle cx="231" cy="320.77777777777777" r="4.5" fill="#42a5f5" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>北海道：285.5千円 27.8%</title></circle>
+  <circle cx="214.01538461538456" cy="131.66666666666663" r="4.5" fill="#ffa726" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>大阪府：280.7千円 31.5%</title></circle>
+  <text x="221.01538461538456" y="135.66666666666663" font-size="8" fill="#374151">大阪</text>
+  <circle cx="212.24615384615382" cy="116.33333333333331" r="4.5" fill="#ffa726" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>兵庫県：280.2千円 31.8%</title></circle>
+  <text x="207.24615384615382" y="109.33333333333331" font-size="8" fill="#374151">兵庫</text>
+  <circle cx="197.03076923076915" cy="254.33333333333323" r="4.5" fill="#42a5f5" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>秋田県：275.9千円 29.1%</title></circle>
+  <circle cx="177.21538461538466" cy="244.11111111111106" r="4.5" fill="#ab47bc" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>長崎県：270.3千円 29.3%</title></circle>
+  <circle cx="174.73846153846162" cy="228.77777777777771" r="4.5" fill="#ab47bc" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>宮崎県：269.6千円 29.6%</title></circle>
+  <circle cx="160.9384615384615" cy="249.22222222222226" r="4.5" fill="#ffa726" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>和歌山県：265.7千円 29.2%</title></circle>
+  <circle cx="143.9538461538461" cy="172.5555555555556" r="4.5" fill="#42a5f5" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>青森県：260.9千円 30.7%</title></circle>
+  <text x="138.9538461538461" y="165.5555555555556" font-size="8" fill="#374151">青森</text>
+  <circle cx="128.73846153846162" cy="259.44444444444446" r="4.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>愛媛県：256.6千円 29%</title></circle>
+  <text x="135.73846153846162" y="263.44444444444446" font-size="8" fill="#374151">愛媛</text>
+  <circle cx="127.67692307692312" cy="239.00000000000006" r="4.5" fill="#ab47bc" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>沖縄県：256.3千円 29.4%</title></circle>
+  <text x="134.67692307692312" y="243.00000000000006" font-size="8" fill="#374151">沖縄</text>
+  <text x="300" y="560" text-anchor="middle" font-size="10" fill="#6b7280">消費支出（千円）</text>
+  <text x="25" y="285" text-anchor="middle" font-size="10" fill="#6b7280" transform="rotate(-90,25,285)">食料費割合（%）</text>
+  <circle cx="160" cy="566" r="4" fill="#42a5f5"/>
+  <text x="167" y="553.5" font-size="9" fill="#6b7280">北海道・東北</text>
+  <circle cx="240" cy="566" r="4" fill="#66bb6a"/>
+  <text x="247" y="553.5" font-size="9" fill="#6b7280">関東</text>
+  <circle cx="320" cy="566" r="4" fill="#fdd835"/>
+  <text x="327" y="553.5" font-size="9" fill="#6b7280">中部</text>
+  <circle cx="160" cy="582" r="4" fill="#ffa726"/>
+  <text x="167" y="569.5" font-size="9" fill="#6b7280">近畿</text>
+  <circle cx="240" cy="582" r="4" fill="#ef5350"/>
+  <text x="247" y="569.5" font-size="9" fill="#6b7280">中国・四国</text>
+  <circle cx="320" cy="582" r="4" fill="#ab47bc"/>
+  <text x="327" y="569.5" font-size="9" fill="#6b7280">九州・沖縄</text>
+</svg>

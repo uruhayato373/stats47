@@ -16,11 +16,9 @@ import { FinanceSankey } from "@/features/finance-flow/components/FinanceSankey"
 import type { FinanceFlowData } from "@/features/finance-flow/lib/types";
 import { PREFECTURES } from "@/features/migration-flow/lib/prefectures";
 
-import type {
-  FinanceTrendData,
-  TrendPoint,
-  FinanceMetricMeta,
-} from "../lib/load-finance-trends";
+import { MiniBarChart, MiniLineChart, type ChartPoint } from "./MiniCharts";
+
+import type { FinanceTrendData, FinanceMetricMeta } from "../lib/load-finance-trends";
 
 interface Props {
   trends: FinanceTrendData;
@@ -30,81 +28,66 @@ interface Props {
 
 const VALID_CODES = new Set(PREFECTURES.map((p) => p.code));
 
-function fmt(value: number, meta: Pick<FinanceMetricMeta, "decimals" | "unit">): string {
-  return `${value.toFixed(meta.decimals)}${meta.unit}`;
-}
-
-/** 千円 → 億円 / 兆円 */
+/** 千円 → 億円/兆円 */
 function yen(thousandYen: number): string {
   const oku = thousandYen / 100000;
-  if (oku >= 10000) return `${(oku / 10000).toFixed(1)} 兆円`;
+  if (Math.abs(oku) >= 10000) return `${(oku / 10000).toFixed(1)} 兆円`;
   return `${Math.round(oku).toLocaleString("ja-JP")} 億円`;
 }
 
-/** ミニ推移スパークライン (当該団体の実線のみ。類似団体データは未保有のため非表示) */
-function Sparkline({ points }: { points: TrendPoint[] }) {
-  const W = 220;
-  const H = 56;
-  const PAD = 6;
-  if (points.length < 2) {
-    return (
-      <div className="flex h-[56px] items-center text-xs text-muted-foreground">
-        単年データ（推移なし）
-      </div>
-    );
-  }
-  const xs = points.map((p) => p.year);
-  const ys = points.map((p) => p.value);
-  const minX = Math.min(...xs);
-  const maxX = Math.max(...xs);
-  const minY = Math.min(...ys);
-  const maxY = Math.max(...ys);
-  const spanX = maxX - minX || 1;
-  const spanY = maxY - minY || 1;
-  const px = (x: number) => PAD + ((x - minX) / spanX) * (W - PAD * 2);
-  const py = (y: number) => H - PAD - ((y - minY) / spanY) * (H - PAD * 2);
-  const d = points.map((p, i) => `${i === 0 ? "M" : "L"}${px(p.year).toFixed(1)},${py(p.value).toFixed(1)}`).join(" ");
-  const last = points[points.length - 1];
-  return (
-    <svg width="100%" height={H} viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="none" role="img" aria-label="推移">
-      <path d={d} fill="none" stroke="#2563eb" strokeWidth={1.6} />
-      {points.map((p) => (
-        <circle key={p.year} cx={px(p.year)} cy={py(p.value)} r={1.6} fill="#2563eb" />
-      ))}
-      <circle cx={px(last.year)} cy={py(last.value)} r={3} fill="#2563eb" />
-    </svg>
-  );
+/** メトリクスの最新生値を表示文字列に整形 */
+function formatValue(meta: FinanceMetricMeta, rawValue: number): string {
+  const scaled = rawValue * meta.scale;
+  if (meta.unit === "億円") return `${Math.round(scaled).toLocaleString("ja-JP")} 億円`;
+  return `${scaled.toFixed(meta.decimals)}${meta.unit}`;
 }
 
-function KpiTrendCard({ meta, points }: { meta: FinanceMetricMeta; points: TrendPoint[] }) {
-  const latest = points[points.length - 1];
+interface MetricCardProps {
+  meta: FinanceMetricMeta;
+  trends: FinanceTrendData;
+  prefCode: string;
+}
+
+function MetricCard({ meta, trends, prefCode }: MetricCardProps) {
+  const raw = trends.series[meta.key]?.[prefCode] ?? [];
+  if (raw.length === 0) return null;
+  const latest = raw[raw.length - 1];
+  const points: ChartPoint[] = raw.map((p) => ({ year: p.year, value: p.value * meta.scale }));
+  const avg: ChartPoint[] | undefined = meta.showAverage
+    ? raw
+        .map((p) => {
+          const a = trends.nationalAvg[meta.key]?.[p.year];
+          return a == null ? null : { year: p.year, value: a * meta.scale };
+        })
+        .filter((p): p is ChartPoint => p !== null)
+    : undefined;
+
   return (
-    <div className="border border-border bg-white p-4 shadow-sm">
-      <div className="flex items-baseline justify-between">
+    <div className="border border-border bg-white p-3 shadow-sm">
+      <div className="flex items-baseline justify-between gap-2">
         <span className="text-sm font-medium text-slate-600">{meta.label}</span>
-        {latest && (
-          <span className="text-2xl font-bold text-slate-900">{fmt(latest.value, meta)}</span>
+        <span className="text-xl font-bold text-slate-900">{formatValue(meta, latest.value)}</span>
+      </div>
+      <div className="mt-1">
+        {meta.chartType === "bar" ? (
+          <MiniBarChart points={points} />
+        ) : (
+          <MiniLineChart points={points} average={avg} />
         )}
       </div>
-      <div className="mt-2">
-        <Sparkline points={points} />
+      <div className="mt-0.5 flex items-center justify-between text-[10px] text-muted-foreground">
+        <span>{latest.year}年度・全国 {latest.rank} 位</span>
+        {meta.showAverage && <span className="flex items-center gap-1"><span className="inline-block h-px w-3 border-t border-dashed border-slate-400" />全国平均</span>}
       </div>
-      {latest && (
-        <div className="mt-1 text-xs text-muted-foreground">
-          {latest.year}年度・全国 {latest.rank} 位/47
-        </div>
-      )}
     </div>
   );
 }
 
-function TotalCard({ label, thousandYen }: { label: string; thousandYen: number | null }) {
+function TotalRow({ label, value }: { label: string; value: string }) {
   return (
-    <div className="border border-border bg-primary p-4 text-primary-foreground shadow-sm">
-      <div className="text-sm font-medium opacity-90">{label}</div>
-      <div className="mt-1 text-2xl font-bold">
-        {thousandYen == null ? "—" : yen(thousandYen)}
-      </div>
+    <div className="flex items-baseline justify-between border-b border-white/20 py-1.5 last:border-0">
+      <span className="text-xs opacity-90">{label}</span>
+      <span className="text-lg font-bold">{value}</span>
     </div>
   );
 }
@@ -127,7 +110,6 @@ export function LocalFinanceDashboard({ trends, initialFinanceFlow }: Props) {
     window.history.replaceState(null, "", url);
   };
 
-  // 総額カード用 (Sankey と同じ R2 財政フローを再利用)
   const { data: flow } = useFlowData<FinanceFlowData>("finance", prefCode, initialFinanceFlow);
 
   const prefName = useMemo(
@@ -142,12 +124,10 @@ export function LocalFinanceDashboard({ trends, initialFinanceFlow }: Props) {
         <div>
           <h1 className="text-2xl font-bold text-slate-900">
             地方財政｜財政状況
-            <span className="ml-2 text-base font-normal text-muted-foreground">
-              {trends.latestYear}年度
-            </span>
+            <span className="ml-2 text-base font-normal text-muted-foreground">{trends.latestYear}年度</span>
           </h1>
           <p className="mt-1 text-xs text-muted-foreground">
-            出典: 総務省「地方財政状況調査」（Japan Dashboard 互換・都道府県版）
+            出典: 総務省「地方財政状況調査・社会人口統計体系」（Japan Dashboard 互換・都道府県版）
           </p>
         </div>
         <div className="flex items-center gap-2">
@@ -167,30 +147,40 @@ export function LocalFinanceDashboard({ trends, initialFinanceFlow }: Props) {
         </div>
       </div>
 
-      {/* Page 1: 財政状況 */}
-      <section className="mb-10">
-        <h2 className="mb-3 text-lg font-bold text-slate-900">{prefName} の財政状況</h2>
+      {/* Page 1: 財政状況 — 上段: 総額サマリ + 三キーチャート */}
+      <section className="mb-4">
+        <div className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-4">
+          {/* 総額サマリカード */}
+          <div className="border border-border bg-primary p-4 text-primary-foreground shadow-sm">
+            <div className="text-base font-bold">{prefName}</div>
+            <div className="mt-2">
+              <TotalRow label="歳入総額" value={flow ? yen(flow.totals.revenue) : "—"} />
+              <TotalRow label="歳出総額" value={flow ? yen(flow.totals.expenditure) : "—"} />
+              <TotalRow
+                label="実質収支（歳入−歳出）"
+                value={flow ? yen(flow.totals.revenue - flow.totals.expenditure) : "—"}
+              />
+            </div>
+            <div className="mt-2 text-[10px] opacity-80">{flow?.year ?? trends.latestYear}年度</div>
+          </div>
 
-        {/* 総額カード */}
-        <div className="mb-4 grid grid-cols-1 gap-3 sm:grid-cols-3">
-          <TotalCard label="歳入総額" thousandYen={flow?.totals.revenue ?? null} />
-          <TotalCard label="歳出総額" thousandYen={flow?.totals.expenditure ?? null} />
-          <TotalCard
-            label="実質収支（歳入−歳出）"
-            thousandYen={flow ? flow.totals.revenue - flow.totals.expenditure : null}
-          />
+          {/* 三キーチャート */}
+          {trends.topMetrics.map((meta) => (
+            <MetricCard key={meta.key} meta={meta} trends={trends} prefCode={prefCode} />
+          ))}
         </div>
+      </section>
 
-        {/* KPI 推移カード */}
-        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
-          {trends.metrics.map((meta) => {
-            const points = trends.series[meta.key]?.[prefCode] ?? [];
-            if (points.length === 0) return null;
-            return <KpiTrendCard key={meta.key} meta={meta} points={points} />;
-          })}
+      {/* Page 1 下段: 財政指標 4 折れ線 */}
+      <section className="mb-10">
+        <div className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-4">
+          {trends.ratioMetrics.map((meta) => (
+            <MetricCard key={meta.key} meta={meta} trends={trends} prefCode={prefCode} />
+          ))}
         </div>
         <p className="mt-2 text-xs text-muted-foreground">
-          ※ 推移は当該都道府県の値。類似団体平均は stats47 では未保有のため、全国順位を併記しています。
+          ※ 実線=当該都道府県、破線=全国平均（類似団体平均は stats47 では未保有のため全国平均で代替）。
+          積立金・地方債現在高は社会人口統計体系の取得年のみ表示。
         </p>
       </section>
 

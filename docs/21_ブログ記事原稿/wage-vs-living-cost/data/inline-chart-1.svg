@@ -1,0 +1,22 @@
+<svg viewBox="0 0 600 280" xmlns="http://www.w3.org/2000/svg" aria-label="賃金順位と県民所得順位の乖離">
+  <rect x="0" y="0" width="600" height="280" fill="#f8fafc"/>
+  <text x="300" y="28" text-anchor="middle" font-size="14" font-weight="bold" fill="#1e293b">賃金順位 vs 県民所得順位の主な乖離（2024年）</text>
+  <!-- 奈良 下方乖離 -->
+  <text x="90" y="65" text-anchor="end" font-size="12" fill="#334155">奈良</text>
+  <rect x="95" y="50" width="250" height="24" fill="#ef4444" rx="3"/>
+  <text x="351" y="67" font-size="12" fill="#1e293b">28位転落（16位→44位）</text>
+  <!-- 福岡 下方乖離 -->
+  <text x="90" y="105" text-anchor="end" font-size="12" fill="#334155">福岡</text>
+  <rect x="95" y="90" width="208" height="24" fill="#f97316" rx="3"/>
+  <text x="309" y="107" font-size="12" fill="#1e293b">25位転落（12位→37位）</text>
+  <line x1="50" y1="128" x2="550" y2="128" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="4"/>
+  <!-- 富山 上方浮上 -->
+  <text x="90" y="165" text-anchor="end" font-size="12" fill="#334155">富山</text>
+  <rect x="95" y="150" width="189" height="24" fill="#10b981" rx="3"/>
+  <text x="290" y="167" font-size="12" fill="#1e293b">21位浮上（27位→6位）</text>
+  <!-- 茨城 上方浮上 -->
+  <text x="90" y="205" text-anchor="end" font-size="12" fill="#334155">茨城</text>
+  <rect x="95" y="190" width="170" height="24" fill="#059669" rx="3"/>
+  <text x="271" y="207" font-size="12" fill="#1e293b">8位浮上（11位→3位）</text>
+  <text x="300" y="268" text-anchor="middle" font-size="10" fill="#64748b">出典: e-Stat 社会生活統計指標（労働）・e-Stat 県民所得統計 2024年</text>
+</svg>

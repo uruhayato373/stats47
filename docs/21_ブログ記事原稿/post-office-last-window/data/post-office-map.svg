@@ -1,0 +1,115 @@
+<svg width="600" height="700" viewBox="0 0 600 700" xmlns="http://www.w3.org/2000/svg" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" role="img" aria-label="郵便局密度の地域分布">
+<title>郵便局密度の地域分布</title>
+<rect width="600" height="700" fill="#fafafa"/>
+<text x="300" y="28" text-anchor="middle" font-size="16" font-weight="bold" fill="#333">郵便局密度の地域分布</text>
+<rect x="180" y="665" width="4.5" height="12" fill="#fff3e0"/>
+<rect x="184" y="665" width="4.5" height="12" fill="#fff1dc"/>
+<rect x="188" y="665" width="4.5" height="12" fill="#fff0d8"/>
+<rect x="192" y="665" width="4.5" height="12" fill="#ffeed4"/>
+<rect x="196" y="665" width="4.5" height="12" fill="#ffedd0"/>
+<rect x="200" y="665" width="4.5" height="12" fill="#ffebcd"/>
+<rect x="204" y="665" width="4.5" height="12" fill="#ffe9c9"/>
+<rect x="208" y="665" width="4.5" height="12" fill="#ffe8c5"/>
+<rect x="212" y="665" width="4.5" height="12" fill="#ffe6c1"/>
+<rect x="216" y="665" width="4.5" height="12" fill="#ffe5bd"/>
+<rect x="220" y="665" width="4.5" height="12" fill="#ffe3b9"/>
+<rect x="224" y="665" width="4.5" height="12" fill="#ffe1b5"/>
+<rect x="228" y="665" width="4.5" height="12" fill="#ffe0b1"/>
+<rect x="232" y="665" width="4.5" height="12" fill="#ffdead"/>
+<rect x="236" y="665" width="4.5" height="12" fill="#ffdca9"/>
+<rect x="240" y="665" width="4.5" height="12" fill="#ffdba4"/>
+<rect x="244" y="665" width="4.5" height="12" fill="#ffd9a0"/>
+<rect x="248" y="665" width="4.5" height="12" fill="#ffd79c"/>
+<rect x="252" y="665" width="4.5" height="12" fill="#ffd598"/>
+<rect x="256" y="665" width="4.5" height="12" fill="#ffd493"/>
+<rect x="260" y="665" width="4.5" height="12" fill="#ffd28f"/>
+<rect x="264" y="665" width="4.5" height="12" fill="#ffd08b"/>
+<rect x="268" y="665" width="4.5" height="12" fill="#ffcf87"/>
+<rect x="272" y="665" width="4.5" height="12" fill="#ffcd83"/>
+<rect x="276" y="665" width="4.5" height="12" fill="#ffca7c"/>
+<rect x="280" y="665" width="4.5" height="12" fill="#ffc671"/>
+<rect x="284" y="665" width="4.5" height="12" fill="#ffc166"/>
+<rect x="288" y="665" width="4.5" height="12" fill="#ffbd5b"/>
+<rect x="292" y="665" width="4.5" height="12" fill="#ffb950"/>
+<rect x="296" y="665" width="4.5" height="12" fill="#ffb445"/>
+<rect x="300" y="665" width="4.5" height="12" fill="#ffb03b"/>
+<rect x="304" y="665" width="4.5" height="12" fill="#ffab30"/>
+<rect x="308" y="665" width="4.5" height="12" fill="#ffa725"/>
+<rect x="312" y="665" width="4.5" height="12" fill="#ffa31a"/>
+<rect x="316" y="665" width="4.5" height="12" fill="#ff9e0f"/>
+<rect x="320" y="665" width="4.5" height="12" fill="#ff9a04"/>
+<rect x="324" y="665" width="4.5" height="12" fill="#fe9400"/>
+<rect x="328" y="665" width="4.5" height="12" fill="#fc8e00"/>
+<rect x="332" y="665" width="4.5" height="12" fill="#f98800"/>
+<rect x="336" y="665" width="4.5" height="12" fill="#f78200"/>
+<rect x="340" y="665" width="4.5" height="12" fill="#f57c00"/>
+<rect x="344" y="665" width="4.5" height="12" fill="#f37600"/>
+<rect x="348" y="665" width="4.5" height="12" fill="#f17000"/>
+<rect x="352" y="665" width="4.5" height="12" fill="#ef6a00"/>
+<rect x="356" y="665" width="4.5" height="12" fill="#ed6400"/>
+<rect x="360" y="665" width="4.5" height="12" fill="#eb5e00"/>
+<rect x="364" y="665" width="4.5" height="12" fill="#e95800"/>
+<rect x="368" y="665" width="4.5" height="12" fill="#e65200"/>
+<rect x="372" y="665" width="4.5" height="12" fill="#e34f01"/>
+<rect x="376" y="665" width="4.5" height="12" fill="#e04d02"/>
+<rect x="380" y="665" width="4.5" height="12" fill="#dd4b03"/>
+<rect x="384" y="665" width="4.5" height="12" fill="#d94804"/>
+<rect x="388" y="665" width="4.5" height="12" fill="#d64605"/>
+<rect x="392" y="665" width="4.5" height="12" fill="#d34406"/>
+<rect x="396" y="665" width="4.5" height="12" fill="#d04107"/>
+<rect x="400" y="665" width="4.5" height="12" fill="#cc3f08"/>
+<rect x="404" y="665" width="4.5" height="12" fill="#c93d09"/>
+<rect x="408" y="665" width="4.5" height="12" fill="#c63b0a"/>
+<rect x="412" y="665" width="4.5" height="12" fill="#c2380b"/>
+<rect x="416" y="665" width="4.5" height="12" fill="#bf360c"/>
+<text x="180" y="689" font-size="9" fill="#666" text-anchor="middle">6.6</text>
+<text x="420" y="689" font-size="9" fill="#666" text-anchor="middle">105.3</text>
+<text x="300" y="689" font-size="9" fill="#666" text-anchor="middle">局</text>
+<g aria-label="北海道 6.6局"><title>北海道：6.6局</title><rect x="491" y="55" width="74" height="74" rx="3" fill="#fff3e0" stroke="#ffffff" stroke-width="1"/><text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle"><tspan x="528" y="90" font-size="9" font-weight="700">北海道</tspan><tspan x="528" y="103" font-size="7">6.6</tspan></text></g>
+<g aria-label="青森 11.0局"><title>青森県：11.0局</title><rect x="491" y="169" width="74" height="36" rx="3" fill="#ffefd6" stroke="#ffffff" stroke-width="1"/><text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle"><tspan x="528" y="185" font-size="9" font-weight="700">青森</tspan><tspan x="528" y="198" font-size="7">11.0</tspan></text></g>
+<g aria-label="岩手 11.4局"><title>岩手県：11.4局</title><rect x="529" y="207" width="36" height="36" rx="3" fill="#ffeed5" stroke="#ffffff" stroke-width="1"/><text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle"><tspan x="547" y="223" font-size="8" font-weight="700">岩手</tspan><tspan x="547" y="236" font-size="7">11.4</tspan></text></g>
+<g aria-label="秋田 12.4局"><title>秋田県：12.4局</title><rect x="491" y="207" width="36" height="36" rx="3" fill="#ffedd2" stroke="#ffffff" stroke-width="1"/><text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle"><tspan x="509" y="223" font-size="8" font-weight="700">秋田</tspan><tspan x="509" y="236" font-size="7">12.4</tspan></text></g>
+<g aria-label="宮城 14.2局"><title>宮城県：14.2局</title><rect x="529" y="245" width="36" height="36" rx="3" fill="#ffecce" stroke="#ffffff" stroke-width="1"/><text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle"><tspan x="547" y="261" font-size="8" font-weight="700">宮城</tspan><tspan x="547" y="274" font-size="7">14.2</tspan></text></g>
+<g aria-label="山形 13.8局"><title>山形県：13.8局</title><rect x="491" y="245" width="36" height="36" rx="3" fill="#ffeccf" stroke="#ffffff" stroke-width="1"/><text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle"><tspan x="509" y="261" font-size="8" font-weight="700">山形</tspan><tspan x="509" y="274" font-size="7">13.8</tspan></text></g>
+<g aria-label="福島 12.7局"><title>福島県：12.7局</title><rect x="491" y="283" width="74" height="36" rx="3" fill="#ffedd2" stroke="#ffffff" stroke-width="1"/><text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle"><tspan x="528" y="299" font-size="9" font-weight="700">福島</tspan><tspan x="528" y="312" font-size="7">12.7</tspan></text></g>
+<g aria-label="新潟 14.8局"><title>新潟県：14.8局</title><rect x="415" y="283" width="74" height="36" rx="3" fill="#ffebcd" stroke="#ffffff" stroke-width="1"/><text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle"><tspan x="452" y="299" font-size="9" font-weight="700">新潟</tspan><tspan x="452" y="312" font-size="7">14.8</tspan></text></g>
+<g aria-label="富山 15.4局"><title>富山県：15.4局</title><rect x="377" y="283" width="36" height="36" rx="3" fill="#ffeacb" stroke="#ffffff" stroke-width="1"/><text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle"><tspan x="395" y="299" font-size="8" font-weight="700">富山</tspan><tspan x="395" y="312" font-size="7">15.4</tspan></text></g>
+<g aria-label="石川 23.1局"><title>石川県：23.1局</title><rect x="339" y="283" width="36" height="36" rx="3" fill="#ffe3ba" stroke="#ffffff" stroke-width="1"/><text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle"><tspan x="357" y="299" font-size="8" font-weight="700">石川</tspan><tspan x="357" y="312" font-size="7">23.1</tspan></text></g>
+<g aria-label="福井 21.9局"><title>福井県：21.9局</title><rect x="339" y="321" width="36" height="36" rx="3" fill="#ffe4bc" stroke="#ffffff" stroke-width="1"/><text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle"><tspan x="357" y="337" font-size="8" font-weight="700">福井</tspan><tspan x="357" y="350" font-size="7">21.9</tspan></text></g>
+<g aria-label="岐阜 20.1局"><title>岐阜県：20.1局</title><rect x="377" y="321" width="36" height="74" rx="3" fill="#ffe6c1" stroke="#ffffff" stroke-width="1"/><text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle"><tspan x="395" y="356" font-size="8" font-weight="700">岐阜</tspan><tspan x="395" y="369" font-size="7">20.1</tspan></text></g>
+<g aria-label="長野 19.7局"><title>長野県：19.7局</title><rect x="415" y="321" width="36" height="74" rx="3" fill="#ffe6c1" stroke="#ffffff" stroke-width="1"/><text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle"><tspan x="433" y="356" font-size="8" font-weight="700">長野</tspan><tspan x="433" y="369" font-size="7">19.7</tspan></text></g>
+<g aria-label="群馬 14.9局"><title>群馬県：14.9局</title><rect x="453" y="321" width="36" height="36" rx="3" fill="#ffebcc" stroke="#ffffff" stroke-width="1"/><text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle"><tspan x="471" y="337" font-size="8" font-weight="700">群馬</tspan><tspan x="471" y="350" font-size="7">14.9</tspan></text></g>
+<g aria-label="栃木 11.8局"><title>栃木県：11.8局</title><rect x="491" y="321" width="36" height="36" rx="3" fill="#ffeed4" stroke="#ffffff" stroke-width="1"/><text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle"><tspan x="509" y="337" font-size="8" font-weight="700">栃木</tspan><tspan x="509" y="350" font-size="7">11.8</tspan></text></g>
+<g aria-label="茨城 13.2局"><title>茨城県：13.2局</title><rect x="529" y="321" width="36" height="36" rx="3" fill="#ffedd1" stroke="#ffffff" stroke-width="1"/><text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle"><tspan x="547" y="337" font-size="8" font-weight="700">茨城</tspan><tspan x="547" y="350" font-size="7">13.2</tspan></text></g>
+<g aria-label="山梨 27.5局"><title>山梨県：27.5局</title><rect x="453" y="359" width="36" height="36" rx="3" fill="#ffdfaf" stroke="#ffffff" stroke-width="1"/><text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle"><tspan x="471" y="375" font-size="8" font-weight="700">山梨</tspan><tspan x="471" y="388" font-size="7">27.5</tspan></text></g>
+<g aria-label="埼玉 24.8局"><title>埼玉県：24.8局</title><rect x="491" y="359" width="36" height="36" rx="3" fill="#ffe1b6" stroke="#ffffff" stroke-width="1"/><text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle"><tspan x="509" y="375" font-size="8" font-weight="700">埼玉</tspan><tspan x="509" y="388" font-size="7">24.8</tspan></text></g>
+<g aria-label="千葉 20.5局"><title>千葉県：20.5局</title><rect x="529" y="359" width="36" height="74" rx="3" fill="#ffe6c0" stroke="#ffffff" stroke-width="1"/><text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle"><tspan x="547" y="394" font-size="8" font-weight="700">千葉</tspan><tspan x="547" y="407" font-size="7">20.5</tspan></text></g>
+<g aria-label="東京 105.3局"><title>東京都：105.3局</title><rect x="491" y="397" width="36" height="36" rx="3" fill="#bf360c" stroke="#ffffff" stroke-width="1"/><text font-family="'Noto Sans JP',sans-serif" fill="#ffffff" text-anchor="middle"><tspan x="509" y="413" font-size="8" font-weight="700">東京</tspan><tspan x="509" y="426" font-size="7">105.3</tspan></text></g>
+<g aria-label="神奈川 52.0局"><title>神奈川県：52.0局</title><rect x="491" y="435" width="36" height="36" rx="3" fill="#ffbc5a" stroke="#ffffff" stroke-width="1"/><text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle"><tspan x="509" y="451" font-size="8" font-weight="700">神奈川</tspan><tspan x="509" y="464" font-size="7">52.0</tspan></text></g>
+<g aria-label="静岡 20.8局"><title>静岡県：20.8局</title><rect x="415" y="397" width="74" height="36" rx="3" fill="#ffe5bf" stroke="#ffffff" stroke-width="1"/><text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle"><tspan x="452" y="413" font-size="9" font-weight="700">静岡</tspan><tspan x="452" y="426" font-size="7">20.8</tspan></text></g>
+<g aria-label="愛知 30.5局"><title>愛知県：30.5局</title><rect x="377" y="397" width="36" height="36" rx="3" fill="#ffdca7" stroke="#ffffff" stroke-width="1"/><text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle"><tspan x="395" y="413" font-size="8" font-weight="700">愛知</tspan><tspan x="395" y="426" font-size="7">30.5</tspan></text></g>
+<g aria-label="滋賀 20.1局"><title>滋賀県：20.1局</title><rect x="339" y="359" width="36" height="36" rx="3" fill="#ffe6c1" stroke="#ffffff" stroke-width="1"/><text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle"><tspan x="357" y="375" font-size="8" font-weight="700">滋賀</tspan><tspan x="357" y="388" font-size="7">20.1</tspan></text></g>
+<g aria-label="三重 21.7局"><title>三重県：21.7局</title><rect x="339" y="397" width="36" height="74" rx="3" fill="#ffe4bd" stroke="#ffffff" stroke-width="1"/><text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle"><tspan x="357" y="432" font-size="8" font-weight="700">三重</tspan><tspan x="357" y="445" font-size="7">21.7</tspan></text></g>
+<g aria-label="京都 40.4局"><title>京都府：40.4局</title><rect x="263" y="359" width="74" height="36" rx="3" fill="#ffd28e" stroke="#ffffff" stroke-width="1"/><text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle"><tspan x="300" y="375" font-size="9" font-weight="700">京都</tspan><tspan x="300" y="388" font-size="7">40.4</tspan></text></g>
+<g aria-label="兵庫 34.6局"><title>兵庫県：34.6局</title><rect x="225" y="359" width="36" height="74" rx="3" fill="#ffd89d" stroke="#ffffff" stroke-width="1"/><text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle"><tspan x="243" y="394" font-size="8" font-weight="700">兵庫</tspan><tspan x="243" y="407" font-size="7">34.6</tspan></text></g>
+<g aria-label="大阪 83.3局"><title>大阪府：83.3局</title><rect x="263" y="397" width="36" height="36" rx="3" fill="#e95900" stroke="#ffffff" stroke-width="1"/><text font-family="'Noto Sans JP',sans-serif" fill="#ffffff" text-anchor="middle"><tspan x="281" y="413" font-size="8" font-weight="700">大阪</tspan><tspan x="281" y="426" font-size="7">83.3</tspan></text></g>
+<g aria-label="奈良 37.7局"><title>奈良県：37.7局</title><rect x="301" y="397" width="36" height="36" rx="3" fill="#ffd495" stroke="#ffffff" stroke-width="1"/><text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle"><tspan x="319" y="413" font-size="8" font-weight="700">奈良</tspan><tspan x="319" y="426" font-size="7">37.7</tspan></text></g>
+<g aria-label="和歌山 28.2局"><title>和歌山県：28.2局</title><rect x="263" y="435" width="74" height="36" rx="3" fill="#ffdead" stroke="#ffffff" stroke-width="1"/><text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle"><tspan x="300" y="451" font-size="9" font-weight="700">和歌山</tspan><tspan x="300" y="464" font-size="7">28.2</tspan></text></g>
+<g aria-label="鳥取 26.8局"><title>鳥取県：26.8局</title><rect x="187" y="359" width="36" height="36" rx="3" fill="#ffe0b1" stroke="#ffffff" stroke-width="1"/><text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle"><tspan x="205" y="375" font-size="8" font-weight="700">鳥取</tspan><tspan x="205" y="388" font-size="7">26.8</tspan></text></g>
+<g aria-label="岡山 23.4局"><title>岡山県：23.4局</title><rect x="187" y="397" width="36" height="36" rx="3" fill="#ffe3b9" stroke="#ffffff" stroke-width="1"/><text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle"><tspan x="205" y="413" font-size="8" font-weight="700">岡山</tspan><tspan x="205" y="426" font-size="7">23.4</tspan></text></g>
+<g aria-label="島根 29.0局"><title>島根県：29.0局</title><rect x="149" y="359" width="36" height="36" rx="3" fill="#ffddab" stroke="#ffffff" stroke-width="1"/><text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle"><tspan x="167" y="375" font-size="8" font-weight="700">島根</tspan><tspan x="167" y="388" font-size="7">29.0</tspan></text></g>
+<g aria-label="広島 30.3局"><title>広島県：30.3局</title><rect x="149" y="397" width="36" height="36" rx="3" fill="#ffdca8" stroke="#ffffff" stroke-width="1"/><text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle"><tspan x="167" y="413" font-size="8" font-weight="700">広島</tspan><tspan x="167" y="426" font-size="7">30.3</tspan></text></g>
+<g aria-label="山口 23.9局"><title>山口県：23.9局</title><rect x="111" y="359" width="36" height="74" rx="3" fill="#ffe2b8" stroke="#ffffff" stroke-width="1"/><text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle"><tspan x="129" y="394" font-size="8" font-weight="700">山口</tspan><tspan x="129" y="407" font-size="7">23.9</tspan></text></g>
+<g aria-label="愛媛 23.5局"><title>愛媛県：23.5局</title><rect x="149" y="473" width="36" height="36" rx="3" fill="#ffe3b9" stroke="#ffffff" stroke-width="1"/><text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle"><tspan x="167" y="489" font-size="8" font-weight="700">愛媛</tspan><tspan x="167" y="502" font-size="7">23.5</tspan></text></g>
+<g aria-label="香川 21.5局"><title>香川県：21.5局</title><rect x="187" y="473" width="36" height="36" rx="3" fill="#ffe5bd" stroke="#ffffff" stroke-width="1"/><text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle"><tspan x="205" y="489" font-size="8" font-weight="700">香川</tspan><tspan x="205" y="502" font-size="7">21.5</tspan></text></g>
+<g aria-label="高知 27.2局"><title>高知県：27.2局</title><rect x="149" y="511" width="36" height="36" rx="3" fill="#ffdfb0" stroke="#ffffff" stroke-width="1"/><text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle"><tspan x="167" y="527" font-size="8" font-weight="700">高知</tspan><tspan x="167" y="540" font-size="7">27.2</tspan></text></g>
+<g aria-label="徳島 22.7局"><title>徳島県：22.7局</title><rect x="187" y="511" width="36" height="36" rx="3" fill="#ffe3ba" stroke="#ffffff" stroke-width="1"/><text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle"><tspan x="205" y="527" font-size="8" font-weight="700">徳島</tspan><tspan x="205" y="540" font-size="7">22.7</tspan></text></g>
+<g aria-label="福岡 29.2局"><title>福岡県：29.2局</title><rect x="73" y="435" width="36" height="36" rx="3" fill="#ffddab" stroke="#ffffff" stroke-width="1"/><text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle"><tspan x="91" y="451" font-size="8" font-weight="700">福岡</tspan><tspan x="91" y="464" font-size="7">29.2</tspan></text></g>
+<g aria-label="佐賀 15.4局"><title>佐賀県：15.4局</title><rect x="35" y="435" width="36" height="36" rx="3" fill="#ffebcc" stroke="#ffffff" stroke-width="1"/><text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle"><tspan x="53" y="451" font-size="8" font-weight="700">佐賀</tspan><tspan x="53" y="464" font-size="7">15.4</tspan></text></g>
+<g aria-label="大分 22.2局"><title>大分県：22.2局</title><rect x="73" y="473" width="36" height="36" rx="3" fill="#ffe4bc" stroke="#ffffff" stroke-width="1"/><text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle"><tspan x="91" y="489" font-size="8" font-weight="700">大分</tspan><tspan x="91" y="502" font-size="7">22.2</tspan></text></g>
+<g aria-label="長崎 26.6局"><title>長崎県：26.6局</title><rect x="35" y="473" width="36" height="36" rx="3" fill="#ffe0b1" stroke="#ffffff" stroke-width="1"/><text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle"><tspan x="53" y="489" font-size="8" font-weight="700">長崎</tspan><tspan x="53" y="502" font-size="7">26.6</tspan></text></g>
+<g aria-label="宮崎 16.3局"><title>宮崎県：16.3局</title><rect x="73" y="511" width="36" height="36" rx="3" fill="#ffeac9" stroke="#ffffff" stroke-width="1"/><text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle"><tspan x="91" y="527" font-size="8" font-weight="700">宮崎</tspan><tspan x="91" y="540" font-size="7">16.3</tspan></text></g>
+<g aria-label="熊本 20.6局"><title>熊本県：20.6局</title><rect x="35" y="511" width="36" height="36" rx="3" fill="#ffe5bf" stroke="#ffffff" stroke-width="1"/><text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle"><tspan x="53" y="527" font-size="8" font-weight="700">熊本</tspan><tspan x="53" y="540" font-size="7">20.6</tspan></text></g>
+<g aria-label="鹿児島 21.8局"><title>鹿児島県：21.8局</title><rect x="35" y="549" width="74" height="36" rx="3" fill="#ffe4bc" stroke="#ffffff" stroke-width="1"/><text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle"><tspan x="72" y="565" font-size="9" font-weight="700">鹿児島</tspan><tspan x="72" y="578" font-size="7">21.8</tspan></text></g>
+<g aria-label="沖縄 17.8局"><title>沖縄県：17.8局</title><rect x="35" y="625" width="36" height="36" rx="3" fill="#ffe8c6" stroke="#ffffff" stroke-width="1"/><text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle"><tspan x="53" y="641" font-size="8" font-weight="700">沖縄</tspan><tspan x="53" y="654" font-size="7">17.8</tspan></text></g>
+</svg>

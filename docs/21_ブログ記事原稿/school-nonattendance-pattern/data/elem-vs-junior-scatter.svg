@@ -1,0 +1,107 @@
+<svg width="560" height="580" viewBox="0 0 560 580" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="小学校不登校比率 × 中学校不登校比率 散布図">
+  <title>小学校不登校比率 × 中学校不登校比率 散布図</title>
+  <rect width="560" height="580" fill="#fafafa" rx="8"/>
+  <text x="280" y="28" text-anchor="middle" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="16" font-weight="bold" fill="#333">小学校 × 中学校 不登校比率</text>
+  <text x="280" y="46" text-anchor="middle" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="10" fill="#888">全国平均で4象限に分割</text>
+  <rect x="70" y="50" width="460" height="465" fill="#f9fafb" stroke="#d1d5db"/>
+  <line x1="70" y1="50" x2="70" y2="515" stroke="#e5e7eb" stroke-width="0.5"/>
+  <line x1="153.63636363636363" y1="50" x2="153.63636363636363" y2="515" stroke="#e5e7eb" stroke-width="0.5"/>
+  <line x1="237.27272727272728" y1="50" x2="237.27272727272728" y2="515" stroke="#e5e7eb" stroke-width="0.5"/>
+  <line x1="320.9090909090909" y1="50" x2="320.9090909090909" y2="515" stroke="#e5e7eb" stroke-width="0.5"/>
+  <line x1="404.54545454545456" y1="50" x2="404.54545454545456" y2="515" stroke="#e5e7eb" stroke-width="0.5"/>
+  <line x1="488.1818181818182" y1="50" x2="488.1818181818182" y2="515" stroke="#e5e7eb" stroke-width="0.5"/>
+  <line x1="70" y1="515" x2="530" y2="515" stroke="#e5e7eb" stroke-width="0.5"/>
+  <line x1="70" y1="422" x2="530" y2="422" stroke="#e5e7eb" stroke-width="0.5"/>
+  <line x1="70" y1="329" x2="530" y2="329" stroke="#e5e7eb" stroke-width="0.5"/>
+  <line x1="70" y1="236" x2="530" y2="236" stroke="#e5e7eb" stroke-width="0.5"/>
+  <line x1="70" y1="143" x2="530" y2="143" stroke="#e5e7eb" stroke-width="0.5"/>
+  <line x1="70" y1="50" x2="530" y2="50" stroke="#e5e7eb" stroke-width="0.5"/>
+  <line x1="218.09864603481634" y1="50" x2="218.09864603481634" y2="515" stroke="#9ca3af" stroke-dasharray="4,3" opacity="0.6"/>
+  <line x1="70" y1="260.25914893617005" x2="530" y2="260.25914893617005" stroke="#9ca3af" stroke-dasharray="4,3" opacity="0.6"/>
+  <text x="70" y="531" text-anchor="middle" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="9" fill="#6b7280">14</text>
+  <text x="153.63636363636363" y="531" text-anchor="middle" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="9" fill="#6b7280">18</text>
+  <text x="237.27272727272728" y="531" text-anchor="middle" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="9" fill="#6b7280">22</text>
+  <text x="320.9090909090909" y="531" text-anchor="middle" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="9" fill="#6b7280">26</text>
+  <text x="404.54545454545456" y="531" text-anchor="middle" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="9" fill="#6b7280">30</text>
+  <text x="488.1818181818182" y="531" text-anchor="middle" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="9" fill="#6b7280">34</text>
+  <text x="62" y="518" text-anchor="end" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="9" fill="#6b7280">40</text>
+  <text x="62" y="425" text-anchor="end" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="9" fill="#6b7280">50</text>
+  <text x="62" y="332" text-anchor="end" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="9" fill="#6b7280">60</text>
+  <text x="62" y="239" text-anchor="end" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="9" fill="#6b7280">70</text>
+  <text x="62" y="146" text-anchor="end" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="9" fill="#6b7280">80</text>
+  <text x="62" y="53" text-anchor="end" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="9" fill="#6b7280">90</text>
+  <text x="300" y="560" text-anchor="middle" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="10" fill="#6b7280">小学校不登校比率（1,000人当たり、2023年度）</text>
+  <text x="22" y="282.5" text-anchor="middle" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="10" fill="#6b7280" transform="rotate(-90,22,282.5)">中学校不登校比率（1,000人当たり、2023年度）</text>
+  <circle cx="356.5" cy="100.4" r="4.5" fill="#42a5f5" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>宮城県：小学校=27.70 中学校=84.58</title></circle>
+  <text x="362.5" y="94.4" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="8" fill="#374151">宮城</text>
+  <circle cx="209.7" cy="123.3" r="4.5" fill="#42a5f5" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>北海道：小学校=20.68 中学校=82.12</title></circle>
+  <text x="203.7" y="117.3" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="8" fill="#374151">北海道</text>
+  <circle cx="406.8" cy="137.8" r="4.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>島根県：小学校=30.11 中学校=80.56</title></circle>
+  <text x="412.8" y="141.8" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="8" fill="#374151">島根</text>
+  <circle cx="225.8" cy="151.4" r="4.5" fill="#66bb6a" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>栃木県：小学校=21.45 中学校=79.10</title></circle>
+  <text x="231.8" y="145.4" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="8" fill="#374151">栃木</text>
+  <circle cx="335.5" cy="171.8" r="4.5" fill="#ab47bc" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>福岡県：小学校=26.70 中学校=76.90</title></circle>
+  <text x="341.5" y="165.8" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="8" fill="#374151">福岡</text>
+  <circle cx="419.2" cy="175.4" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>長野県：小学校=30.70 中学校=76.52</title></circle>
+  <text x="425.2" y="169.4" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="8" fill="#374151">長野</text>
+  <circle cx="264.7" cy="192.3" r="4.5" fill="#ab47bc" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>熊本県：小学校=23.31 中学校=74.70</title></circle>
+  <circle cx="460.8" cy="200.1" r="4.5" fill="#ab47bc" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>沖縄県：小学校=32.69 中学校=73.86</title></circle>
+  <text x="466.8" y="194.1" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="8" fill="#374151">沖縄</text>
+  <circle cx="230.8" cy="203.3" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>石川県：小学校=21.69 中学校=73.52</title></circle>
+  <circle cx="336.8" cy="203.4" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>静岡県：小学校=26.76 中学校=73.50</title></circle>
+  <circle cx="264.0" cy="203.4" r="4.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>鳥取県：小学校=23.28 中学校=73.50</title></circle>
+  <circle cx="237.1" cy="205.5" r="4.5" fill="#ffa726" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>兵庫県：小学校=21.99 中学校=73.28</title></circle>
+  <circle cx="220.5" cy="212.7" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>山梨県：小学校=21.20 中学校=72.51</title></circle>
+  <circle cx="176.8" cy="216.1" r="4.5" fill="#ab47bc" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>大分県：小学校=19.11 中学校=72.14</title></circle>
+  <circle cx="275.1" cy="221.3" r="4.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>広島県：小学校=23.81 中学校=71.58</title></circle>
+  <circle cx="254.2" cy="222.0" r="4.5" fill="#66bb6a" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>茨城県：小学校=22.81 中学校=71.51</title></circle>
+  <circle cx="272.6" cy="230.0" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>愛知県：小学校=23.69 中学校=70.65</title></circle>
+  <circle cx="126.7" cy="230.0" r="4.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>徳島県：小学校=16.71 中学校=70.64</title></circle>
+  <circle cx="226.2" cy="244.1" r="4.5" fill="#ffa726" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>奈良県：小学校=21.47 中学校=69.13</title></circle>
+  <circle cx="210.7" cy="249.2" r="4.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>山口県：小学校=20.73 中学校=68.58</title></circle>
+  <circle cx="180.6" cy="249.6" r="4.5" fill="#ab47bc" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>長崎県：小学校=19.29 中学校=68.54</title></circle>
+  <circle cx="208.8" cy="252.5" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>新潟県：小学校=20.64 中学校=68.23</title></circle>
+  <circle cx="194.4" cy="252.6" r="4.5" fill="#ffa726" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>大阪府：小学校=19.95 中学校=68.22</title></circle>
+  <text x="200.4" y="264.6" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="8" fill="#374151">大阪</text>
+  <circle cx="129.8" cy="253.9" r="4.5" fill="#42a5f5" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>青森県：小学校=16.86 中学校=68.08</title></circle>
+  <circle cx="256.9" cy="263.8" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>岐阜県：小学校=22.94 中学校=67.01</title></circle>
+  <circle cx="123.3" cy="264.7" r="4.5" fill="#42a5f5" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>福島県：小学校=16.55 中学校=66.91</title></circle>
+  <circle cx="171.6" cy="265.0" r="4.5" fill="#ab47bc" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>鹿児島県：小学校=18.86 中学校=66.88</title></circle>
+  <circle cx="236.6" cy="265.2" r="4.5" fill="#66bb6a" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>神奈川県：小学校=21.97 中学校=66.86</title></circle>
+  <circle cx="208.4" cy="273.0" r="4.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>愛媛県：小学校=20.62 中学校=66.02</title></circle>
+  <circle cx="229.3" cy="274.3" r="4.5" fill="#66bb6a" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>東京都：小学校=21.62 中学校=65.88</title></circle>
+  <text x="201.3" y="268.3" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="8" fill="#374151">東京</text>
+  <circle cx="237.1" cy="289.4" r="4.5" fill="#ffa726" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>和歌山県：小学校=21.99 中学校=64.26</title></circle>
+  <circle cx="146.3" cy="302.3" r="4.5" fill="#42a5f5" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>秋田県：小学校=17.65 中学校=62.87</title></circle>
+  <circle cx="209.3" cy="304.8" r="4.5" fill="#ffa726" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>三重県：小学校=20.66 中学校=62.60</title></circle>
+  <circle cx="177.7" cy="306.0" r="4.5" fill="#66bb6a" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>群馬県：小学校=19.15 中学校=62.47</title></circle>
+  <circle cx="187.1" cy="308.1" r="4.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>高知県：小学校=19.60 中学校=62.25</title></circle>
+  <circle cx="189.0" cy="313.9" r="4.5" fill="#ffa726" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>京都府：小学校=19.69 中学校=61.62</title></circle>
+  <circle cx="198.4" cy="314.4" r="4.5" fill="#ffa726" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>滋賀県：小学校=20.14 中学校=61.57</title></circle>
+  <circle cx="280.8" cy="319.0" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>富山県：小学校=24.08 中学校=61.07</title></circle>
+  <circle cx="160.5" cy="326.2" r="4.5" fill="#ab47bc" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>佐賀県：小学校=18.33 中学校=60.30</title></circle>
+  <circle cx="127.5" cy="327.0" r="4.5" fill="#42a5f5" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>山形県：小学校=16.75 中学校=60.22</title></circle>
+  <circle cx="128.5" cy="329.9" r="4.5" fill="#66bb6a" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>埼玉県：小学校=16.80 中学校=59.90</title></circle>
+  <circle cx="122.7" cy="351.8" r="4.5" fill="#ab47bc" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>宮崎県：小学校=16.52 中学校=57.55</title></circle>
+  <circle cx="115.0" cy="354.5" r="4.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>香川県：小学校=16.15 中学校=57.26</title></circle>
+  <text x="121.0" y="348.5" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="8" fill="#374151">香川</text>
+  <circle cx="177.5" cy="359.1" r="4.5" fill="#66bb6a" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>千葉県：小学校=19.14 中学校=56.76</title></circle>
+  <circle cx="109.9" cy="370.7" r="4.5" fill="#42a5f5" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>岩手県：小学校=15.91 中学校=55.52</title></circle>
+  <text x="115.9" y="382.7" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="8" fill="#374151">岩手</text>
+  <circle cx="152.6" cy="422.6" r="4.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>岡山県：小学校=17.95 中学校=49.94</title></circle>
+  <text x="158.6" y="434.6" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="8" fill="#374151">岡山</text>
+  <circle cx="80.5" cy="424.5" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>福井県：小学校=14.50 中学校=49.73</title></circle>
+  <text x="86.5" y="436.5" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="8" fill="#374151">福井</text>
+  <circle cx="25" cy="562" r="4" fill="#42a5f5" fill-opacity="0.75"/>
+  <text x="32" y="566" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="8" fill="#6b7280">北海道・東北</text>
+  <circle cx="110" cy="562" r="4" fill="#66bb6a" fill-opacity="0.75"/>
+  <text x="117" y="566" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="8" fill="#6b7280">関東</text>
+  <circle cx="195" cy="562" r="4" fill="#fdd835" fill-opacity="0.75"/>
+  <text x="202" y="566" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="8" fill="#6b7280">中部</text>
+  <circle cx="280" cy="562" r="4" fill="#ffa726" fill-opacity="0.75"/>
+  <text x="287" y="566" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="8" fill="#6b7280">近畿</text>
+  <circle cx="365" cy="562" r="4" fill="#ef5350" fill-opacity="0.75"/>
+  <text x="372" y="566" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="8" fill="#6b7280">中国・四国</text>
+  <circle cx="450" cy="562" r="4" fill="#ab47bc" fill-opacity="0.75"/>
+  <text x="457" y="566" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="8" fill="#6b7280">九州・沖縄</text>
+</svg>
