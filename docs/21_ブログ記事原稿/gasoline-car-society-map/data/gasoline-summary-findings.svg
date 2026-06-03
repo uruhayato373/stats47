@@ -1,0 +1,29 @@
+<svg width="960" height="478" viewBox="0 0 960 478" xmlns="http://www.w3.org/2000/svg" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" role="img" aria-label="この記事でわかったこと">
+<rect width="960" height="478" fill="#f9fafb"/>
+<text x="480" y="48" text-anchor="middle" font-size="26" font-weight="bold" fill="#1f2937">この記事でわかったこと</text>
+<rect x="50" y="78" width="860" height="80" fill="#ffffff" rx="8"/>
+<circle cx="94" cy="118" r="20" fill="#dc2626"/>
+<text x="94" y="125" text-anchor="middle" font-size="16" font-weight="bold" fill="#fff">1</text>
+<text x="130" y="110" font-size="18" font-weight="bold" fill="#1f2937">ガソリン販売量は東京が424万klで1位</text>
+<text x="130" y="136" font-size="16" fill="#4b5563">人口・業務用車両の集中が要因。2位・愛知とは153万klの差</text>
+<rect x="50" y="158" width="860" height="80" fill="#f9fafb" rx="8"/>
+<circle cx="94" cy="198" r="20" fill="#ea580c"/>
+<text x="94" y="205" text-anchor="middle" font-size="16" font-weight="bold" fill="#fff">2</text>
+<text x="130" y="190" font-size="18" font-weight="bold" fill="#1f2937">給油所数は北海道1,641箇所で突出</text>
+<text x="130" y="216" font-size="16" fill="#4b5563">広大な面積に対応するインフラ需要。2位・愛知の1.3倍</text>
+<rect x="50" y="238" width="860" height="80" fill="#ffffff" rx="8"/>
+<circle cx="94" cy="278" r="20" fill="#0284c7"/>
+<text x="94" y="285" text-anchor="middle" font-size="16" font-weight="bold" fill="#fff">3</text>
+<text x="130" y="270" font-size="18" font-weight="bold" fill="#1f2937">「ガソリン型」と「都市ガス型」で消費構造が二極化</text>
+<text x="130" y="296" font-size="16" fill="#4b5563">東京・大阪は都市ガス依存、北海道・地方は車社会でガソリン依存が高い</text>
+<rect x="50" y="318" width="860" height="80" fill="#f9fafb" rx="8"/>
+<circle cx="94" cy="358" r="20" fill="#7c3aed"/>
+<text x="94" y="365" text-anchor="middle" font-size="16" font-weight="bold" fill="#fff">4</text>
+<text x="130" y="350" font-size="18" font-weight="bold" fill="#1f2937">都市ガス供給区域外はプロパンガスに依存</text>
+<text x="130" y="376" font-size="16" fill="#4b5563">島根・福井など地方県は都市ガスメーター数が東京の1/200以下</text>
+<rect x="50" y="398" width="860" height="80" fill="#ffffff" rx="8"/>
+<circle cx="94" cy="438" r="20" fill="#059669"/>
+<text x="94" y="445" text-anchor="middle" font-size="16" font-weight="bold" fill="#fff">5</text>
+<text x="130" y="430" font-size="18" font-weight="bold" fill="#1f2937">EV普及で「車社会県」のエネルギー地図が変わる可能性</text>
+<text x="130" y="456" font-size="16" fill="#4b5563">ガソリン依存度の高い地方ほどEV充電インフラ整備の影響が大きい</text>
+</svg>

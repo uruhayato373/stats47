@@ -1,0 +1,31 @@
+<svg width="780" height="482" viewBox="0 0 680 420" xmlns="http://www.w3.org/2000/svg" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" role="img" aria-label="ガソリン販売量の推移（全国）">
+<title>ガソリン販売量の推移（全国）</title>
+<rect width="680" height="420" fill="#fafafa" rx="8"/>
+<text x="340" y="28" text-anchor="middle" font-size="16" font-weight="bold" fill="#333">ガソリン販売量の推移（全国）</text>
+<rect x="65" y="65" width="585" height="305" fill="#f9fafb" stroke="#d1d5db"/>
+<line x1="65" y1="370" x2="650" y2="370" stroke="#e5e7eb" stroke-width="0.5"/>
+<text x="60" y="373" text-anchor="end" font-size="8" fill="#6b7280">42.6</text>
+<line x1="65" y1="309" x2="650" y2="309" stroke="#e5e7eb" stroke-width="0.5"/>
+<text x="60" y="312" text-anchor="end" font-size="8" fill="#6b7280">46.9</text>
+<line x1="65" y1="248.00000000000006" x2="650" y2="248.00000000000006" stroke="#e5e7eb" stroke-width="0.5"/>
+<text x="60" y="251.00000000000006" text-anchor="end" font-size="8" fill="#6b7280">51.3</text>
+<line x1="65" y1="186.99999999999997" x2="650" y2="186.99999999999997" stroke="#e5e7eb" stroke-width="0.5"/>
+<text x="60" y="189.99999999999997" text-anchor="end" font-size="8" fill="#6b7280">55.6</text>
+<line x1="65" y1="126" x2="650" y2="126" stroke="#e5e7eb" stroke-width="0.5"/>
+<text x="60" y="129" text-anchor="end" font-size="8" fill="#6b7280">59.9</text>
+<line x1="65" y1="65" x2="650" y2="65" stroke="#e5e7eb" stroke-width="0.5"/>
+<text x="60" y="68" text-anchor="end" font-size="8" fill="#6b7280">64.2</text>
+<text x="65" y="384" text-anchor="middle" font-size="8" fill="#6b7280">2000</text>
+<text x="141.30434782608694" y="384" text-anchor="middle" font-size="8" fill="#6b7280">2003</text>
+<text x="217.6086956521739" y="384" text-anchor="middle" font-size="8" fill="#6b7280">2006</text>
+<text x="293.9130434782609" y="384" text-anchor="middle" font-size="8" fill="#6b7280">2009</text>
+<text x="370.2173913043478" y="384" text-anchor="middle" font-size="8" fill="#6b7280">2012</text>
+<text x="446.5217391304348" y="384" text-anchor="middle" font-size="8" fill="#6b7280">2015</text>
+<text x="522.8260869565217" y="384" text-anchor="middle" font-size="8" fill="#6b7280">2018</text>
+<text x="599.1304347826086" y="384" text-anchor="middle" font-size="8" fill="#6b7280">2021</text>
+<text x="650" y="384" text-anchor="middle" font-size="8" fill="#6b7280">2023</text>
+<polyline points="65,155.48446799557684 90.43478260869566,143.43327752139828 115.86956521739131,119.50162192440479 141.30434782608694,96.17217917557218 166.73913043478262,78.86363636363637 192.17391304347825,79.87419205591561 217.6086956521739,91.74732827406876 243.04347826086956,106.31676710507759 268.47826086956525,149.67182756917774 293.9130434782609,147.20068754751296 319.3478260869565,143.49086378962508 344.7826086956522,152.22225814898198 370.2173913043478,169.4594606403975 395.65217391304344,187.2588564890091 421.0869565217391,228.21958215775277 446.5217391304348,215.9067822659259 471.95652173913044,221.7329508053612 497.39130434782606,249.42076182921076 522.8260869565217,274.31340769389385 548.2608695652174,296.73289420479927 573.695652173913,356.1363636363636 599.1304347826086,340.78679891320445 624.5652173913044,329.5577307906433 650,336.2877693292598" fill="none" stroke="#1565c0" stroke-width="2.5" stroke-linejoin="round"/>
+<circle cx="65" cy="155.48446799557684" r="3.5" fill="#fff" stroke="#1565c0" stroke-width="2"/>
+<circle cx="650" cy="336.2877693292598" r="3.5" fill="#fff" stroke="#1565c0" stroke-width="2"/>
+<text x="655" y="339.2877693292598" font-size="8" fill="#1565c0">全国 45.0</text>
+</svg>

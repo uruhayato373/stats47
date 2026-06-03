@@ -1,0 +1,87 @@
+<svg width="700" height="700" viewBox="0 0 560 560" xmlns="http://www.w3.org/2000/svg" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" role="img" aria-label="道路密度 vs 道路平均交通量">
+<title>道路密度 vs 道路平均交通量</title>
+<rect width="560" height="560" fill="#fafafa" rx="8"/>
+<text x="280" y="28" text-anchor="middle" font-size="16" font-weight="bold" fill="#333">道路密度 vs 道路平均交通量</text>
+<rect x="65" y="65" width="465" height="440" fill="#f9fafb" stroke="#d1d5db"/>
+<line x1="65" y1="65" x2="65" y2="505" stroke="#e5e7eb" stroke-width="0.5"/>
+<text x="65" y="519" text-anchor="middle" font-size="8" fill="#6b7280">1.1</text>
+<line x1="158" y1="65" x2="158" y2="505" stroke="#e5e7eb" stroke-width="0.5"/>
+<text x="158" y="519" text-anchor="middle" font-size="8" fill="#6b7280">3.4</text>
+<line x1="250.99999999999997" y1="65" x2="250.99999999999997" y2="505" stroke="#e5e7eb" stroke-width="0.5"/>
+<text x="250.99999999999997" y="519" text-anchor="middle" font-size="8" fill="#6b7280">5.7</text>
+<line x1="344" y1="65" x2="344" y2="505" stroke="#e5e7eb" stroke-width="0.5"/>
+<text x="344" y="519" text-anchor="middle" font-size="8" fill="#6b7280">7.9</text>
+<line x1="436.99999999999994" y1="65" x2="436.99999999999994" y2="505" stroke="#e5e7eb" stroke-width="0.5"/>
+<text x="436.99999999999994" y="519" text-anchor="middle" font-size="8" fill="#6b7280">10.2</text>
+<line x1="530" y1="65" x2="530" y2="505" stroke="#e5e7eb" stroke-width="0.5"/>
+<text x="530" y="519" text-anchor="middle" font-size="8" fill="#6b7280">12.5</text>
+<line x1="65" y1="505" x2="530" y2="505" stroke="#e5e7eb" stroke-width="0.5"/>
+<text x="60" y="508" text-anchor="end" font-size="8" fill="#6b7280">2724.0</text>
+<line x1="65" y1="417" x2="530" y2="417" stroke="#e5e7eb" stroke-width="0.5"/>
+<text x="60" y="420" text-anchor="end" font-size="8" fill="#6b7280">5473.6</text>
+<line x1="65" y1="329" x2="530" y2="329" stroke="#e5e7eb" stroke-width="0.5"/>
+<text x="60" y="332" text-anchor="end" font-size="8" fill="#6b7280">8223.2</text>
+<line x1="65" y1="241" x2="530" y2="241" stroke="#e5e7eb" stroke-width="0.5"/>
+<text x="60" y="244" text-anchor="end" font-size="8" fill="#6b7280">10972.8</text>
+<line x1="65" y1="153.00000000000006" x2="530" y2="153.00000000000006" stroke="#e5e7eb" stroke-width="0.5"/>
+<text x="60" y="156.00000000000006" text-anchor="end" font-size="8" fill="#6b7280">13722.4</text>
+<line x1="65" y1="65" x2="530" y2="65" stroke="#e5e7eb" stroke-width="0.5"/>
+<text x="60" y="68" text-anchor="end" font-size="8" fill="#6b7280">16472.0</text>
+<line x1="198.0695863197698" y1="65" x2="198.0695863197698" y2="505" stroke="#9ca3af" stroke-dasharray="4,3" opacity="0.6"/>
+<line x1="65" y1="394.83861482366484" x2="530" y2="394.83861482366484" stroke="#9ca3af" stroke-dasharray="4,3" opacity="0.6"/>
+<circle cx="530" cy="197.69130055280766" r="4.5" fill="#66bb6a" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>埼玉県：道路実延長（km/km2）=12.46 道路平均交通量=12326</title></circle>
+<text x="536" y="191.69130055280766" font-size="8" fill="#374151">埼玉</text>
+<circle cx="473.6737400530504" cy="70.85685190573173" r="4.5" fill="#66bb6a" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>東京都：道路実延長（km/km2）=11.09 道路平均交通量=16289</title></circle>
+<text x="479.6737400530504" y="64.85685190573173" font-size="8" fill="#374151">東京</text>
+<circle cx="457.22811671087527" cy="92.42798952574918" r="4.5" fill="#66bb6a" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>神奈川県：道路実延長（km/km2）=10.69 道路平均交通量=15615</title></circle>
+<text x="463.22811671087527" y="86.42798952574918" font-size="8" fill="#374151">神奈川</text>
+<circle cx="444.89389920424406" cy="65" r="4.5" fill="#ffa726" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>大阪府：道路実延長（km/km2）=10.39 道路平均交通量=16472</title></circle>
+<text x="450.89389920424406" y="59" font-size="8" fill="#374151">大阪</text>
+<circle cx="418.5809018567639" cy="259.4922897876055" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>愛知県：道路実延長（km/km2）=9.75 道路平均交通量=10395</title></circle>
+<text x="424.5809018567639" y="253.4922897876055" font-size="8" fill="#374151">愛知</text>
+<circle cx="391.03448275862064" cy="336.2394530113471" r="4.5" fill="#66bb6a" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>茨城県：道路実延長（km/km2）=9.08 道路平均交通量=7997</title></circle>
+<text x="397.03448275862064" y="330.2394530113471" font-size="8" fill="#374151">茨城</text>
+<circle cx="345.3978779840849" cy="298.0899039860343" r="4.5" fill="#66bb6a" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>千葉県：道路実延長（km/km2）=7.97 道路平均交通量=9189</title></circle>
+<text x="351.3978779840849" y="292.0899039860343" font-size="8" fill="#374151">千葉</text>
+<circle cx="329.7745358090186" cy="301.80244399185335" r="4.5" fill="#ab47bc" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>福岡県：道路実延長（km/km2）=7.59 道路平均交通量=9073</title></circle>
+<circle cx="242.61273209549074" cy="387.9589758510329" r="4.5" fill="#66bb6a" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>群馬県：道路実延長（km/km2）=5.47 道路平均交通量=6381</title></circle>
+<circle cx="242.61273209549074" cy="403.7692755309863" r="4.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>香川県：道路実延長（km/km2）=5.47 道路平均交通量=5887</title></circle>
+<circle cx="212.18832891246686" cy="342.54437009019495" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>静岡県：道路実延長（km/km2）=4.73 道路平均交通量=7800</title></circle>
+<circle cx="203.96551724137933" cy="441.6627873145185" r="4.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>岡山県：道路実延長（km/km2）=4.53 道路平均交通量=4703</title></circle>
+<circle cx="203.14323607427056" cy="387.0628455048007" r="4.5" fill="#ab47bc" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>佐賀県：道路実延長（km/km2）=4.51 道路平均交通量=6409</title></circle>
+<circle cx="198.20954907161803" cy="397.97643293569973" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>三重県：道路実延長（km/km2）=4.39 道路平均交通量=6068</title></circle>
+<circle cx="197.3872679045093" cy="428.2528367762584" r="4.5" fill="#ab47bc" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>長崎県：道路実延長（km/km2）=4.37 道路平均交通量=5122</title></circle>
+<circle cx="196.56498673740052" cy="355.8583066627873" r="4.5" fill="#ffa726" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>兵庫県：道路実延長（km/km2）=4.35 道路平均交通量=7384</title></circle>
+<circle cx="180.9416445623342" cy="376.08524876345655" r="4.5" fill="#66bb6a" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>栃木県：道路実延長（km/km2）=3.97 道路平均交通量=6752</title></circle>
+<circle cx="169.0185676392573" cy="468.1946464940355" r="4.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>徳島県：道路実延長（km/km2）=3.68 道路平均交通量=3874</title></circle>
+<circle cx="165.72944297082228" cy="323.91766075065465" r="4.5" fill="#ab47bc" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>沖縄県：道路実延長（km/km2）=3.6 道路平均交通量=8382</title></circle>
+<circle cx="162.44031830238725" cy="444.5432062845505" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>長野県：道路実延長（km/km2）=3.52 道路平均交通量=4613</title></circle>
+<circle cx="162.44031830238725" cy="434.1096886819901" r="4.5" fill="#ab47bc" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>熊本県：道路実延長（km/km2）=3.52 道路平均交通量=4939</title></circle>
+<circle cx="161.20689655172416" cy="376.2132673843468" r="4.5" fill="#42a5f5" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>宮城県：道路実延長（km/km2）=3.49 道路平均交通量=6748</title></circle>
+<circle cx="160.38461538461542" cy="440.5106197265057" r="4.5" fill="#ffa726" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>奈良県：道路実延長（km/km2）=3.47 道路平均交通量=4739</title></circle>
+<circle cx="157.91777188328913" cy="431.1012510910678" r="4.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>広島県：道路実延長（km/km2）=3.41 道路平均交通量=5033</title></circle>
+<circle cx="157.50663129973475" cy="416.73116089613035" r="4.5" fill="#ffa726" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>京都府：道路実延長（km/km2）=3.4 道路平均交通量=5482</title></circle>
+<circle cx="152.57294429708224" cy="436.92609834157696" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>富山県：道路実延長（km/km2）=3.28 道路平均交通量=4851</title></circle>
+<circle cx="150.106100795756" cy="471.5551352924062" r="4.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>愛媛県：道路実延長（km/km2）=3.22 道路平均交通量=3769</title></circle>
+<circle cx="147.22811671087533" cy="414.6188536514402" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>石川県：道路実延長（km/km2）=3.15 道路平均交通量=5548</title></circle>
+<circle cx="146.40583554376659" cy="362.61128891475124" r="4.5" fill="#ffa726" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>滋賀県：道路実延長（km/km2）=3.13 道路平均交通量=7173</title></circle>
+<circle cx="140.23872679045093" cy="470.27494908350303" r="4.5" fill="#ab47bc" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>鹿児島県：道路実延長（km/km2）=2.98 道路平均交通量=3809</title></circle>
+<circle cx="139.41644562334218" cy="446.1114343904568" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>新潟県：道路実延長（km/km2）=2.96 道路平均交通量=4564</title></circle>
+<circle cx="138.18302387267906" cy="467.2665114925807" r="4.5" fill="#ffa726" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>和歌山県：道路実延長（km/km2）=2.93 道路平均交通量=3903</title></circle>
+<circle cx="137.77188328912467" cy="460.9615944137329" r="4.5" fill="#ab47bc" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>大分県：道路実延長（km/km2）=2.92 道路平均交通量=4100</title></circle>
+<circle cx="136.53846153846155" cy="425.3724178062264" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>岐阜県：道路実延長（km/km2）=2.89 道路平均交通量=5212</title></circle>
+<circle cx="134.48275862068965" cy="459.137329066046" r="4.5" fill="#42a5f5" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>福島県：道路実延長（km/km2）=2.84 道路平均交通量=4157</title></circle>
+<circle cx="129.13793103448276" cy="505" r="4.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>島根県：道路実延長（km/km2）=2.71 道路平均交通量=2724</title></circle>
+<circle cx="129.13793103448276" cy="448.9598487052662" r="4.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>山口県：道路実延長（km/km2）=2.71 道路平均交通量=4475</title></circle>
+<circle cx="125.43766578249338" cy="448.22374163514695" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>福井県：道路実延長（km/km2）=2.62 道路平均交通量=4498</title></circle>
+<circle cx="124.20424403183023" cy="464.9941809717777" r="4.5" fill="#ab47bc" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>宮崎県：道路実延長（km/km2）=2.59 道路平均交通量=3974</title></circle>
+<circle cx="122.9708222811671" cy="468.0986325283678" r="4.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>鳥取県：道路実延長（km/km2）=2.56 道路平均交通量=3877</title></circle>
+<circle cx="120.50397877984085" cy="421.0837940064009" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>山梨県：道路実延長（km/km2）=2.5 道路平均交通量=5346</title></circle>
+<circle cx="107.75862068965517" cy="477.027931335467" r="4.5" fill="#42a5f5" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>岩手県：道路実延長（km/km2）=2.19 道路平均交通量=3598</title></circle>
+<circle cx="103.64721485411141" cy="482.46872272330523" r="4.5" fill="#42a5f5" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>青森県：道路実延長（km/km2）=2.09 道路平均交通量=3428</title></circle>
+<circle cx="101.59151193633953" cy="478.05208030258945" r="4.5" fill="#42a5f5" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>秋田県：道路実延長（km/km2）=2.04 道路平均交通量=3566</title></circle>
+<circle cx="100.35809018567639" cy="499.97526913005527" r="4.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>高知県：道路実延長（km/km2）=2.01 道路平均交通量=2881</title></circle>
+<circle cx="91.72413793103448" cy="469.44282804771603" r="4.5" fill="#42a5f5" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>山形県：道路実延長（km/km2）=1.8 道路平均交通量=3835</title></circle>
+<circle cx="65" cy="501.15944137329063" r="4.5" fill="#42a5f5" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>北海道：道路実延長（km/km2）=1.15 道路平均交通量=2844</title></circle>
+<text x="71" y="495.15944137329063" font-size="8" fill="#374151">北海道</text>
+</svg>

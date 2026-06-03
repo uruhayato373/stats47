@@ -1,0 +1,50 @@
+<svg width="780" height="510" viewBox="0 0 680 510" xmlns="http://www.w3.org/2000/svg" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" role="img" aria-label="給油所数 上位15都道府県">
+<title>給油所数 上位15都道府県</title>
+<rect width="680" height="510" fill="#fafafa" rx="8"/>
+<text x="340" y="28" text-anchor="middle" font-size="16" font-weight="bold" fill="#333">給油所数 上位15都道府県</text>
+<text x="92" y="75" text-anchor="end" font-size="11" fill="#374151">1. 北海道</text>
+<rect x="100" y="60" width="540" height="22" rx="3" fill="#7c3aed" opacity="0.85"/>
+<text x="646" y="75" font-size="10" fill="#6b7280">1,641箇所</text>
+<text x="92" y="103" text-anchor="end" font-size="11" fill="#374151">2. 愛知県</text>
+<rect x="100" y="88" width="416.59963436928706" height="22" rx="3" fill="#7c3aed" opacity="0.85"/>
+<text x="522.5996343692871" y="103" font-size="10" fill="#6b7280">1,266箇所</text>
+<text x="92" y="131" text-anchor="end" font-size="11" fill="#374151">3. 千葉県</text>
+<rect x="100" y="116" width="318.20840950639854" height="22" rx="3" fill="#7c3aed" opacity="0.85"/>
+<text x="424.20840950639854" y="131" font-size="10" fill="#6b7280">967箇所</text>
+<text x="92" y="159" text-anchor="end" font-size="11" fill="#374151">4. 埼玉県</text>
+<rect x="100" y="144" width="309.981718464351" height="22" rx="3" fill="#7c3aed" opacity="0.85"/>
+<text x="415.981718464351" y="159" font-size="10" fill="#6b7280">942箇所</text>
+<text x="92" y="187" text-anchor="end" font-size="11" fill="#374151">5. 茨城県</text>
+<rect x="100" y="172" width="304.0585009140768" height="22" rx="3" fill="#7c3aed" opacity="0.85"/>
+<text x="410.0585009140768" y="187" font-size="10" fill="#6b7280">924箇所</text>
+<text x="92" y="215" text-anchor="end" font-size="11" fill="#374151">6. 兵庫県</text>
+<rect x="100" y="200" width="300.4387568555759" height="22" rx="3" fill="#7c3aed" opacity="0.85"/>
+<text x="406.4387568555759" y="215" font-size="10" fill="#6b7280">913箇所</text>
+<text x="92" y="243" text-anchor="end" font-size="11" fill="#374151">7. 東京都</text>
+<rect x="100" y="228" width="294.84460694698356" height="22" rx="3" fill="#7c3aed" opacity="0.85"/>
+<text x="400.84460694698356" y="243" font-size="10" fill="#6b7280">896箇所</text>
+<text x="92" y="271" text-anchor="end" font-size="11" fill="#374151">8. 静岡県</text>
+<rect x="100" y="256" width="282.6691042047532" height="22" rx="3" fill="#7c3aed" opacity="0.85"/>
+<text x="388.6691042047532" y="271" font-size="10" fill="#6b7280">859箇所</text>
+<text x="92" y="299" text-anchor="end" font-size="11" fill="#374151">9. 福岡県</text>
+<rect x="100" y="284" width="281.6819012797075" height="22" rx="3" fill="#7c3aed" opacity="0.85"/>
+<text x="387.6819012797075" y="299" font-size="10" fill="#6b7280">856箇所</text>
+<text x="92" y="327" text-anchor="end" font-size="11" fill="#374151">10. 大阪府</text>
+<rect x="100" y="312" width="279.0493601462523" height="22" rx="3" fill="#7c3aed" opacity="0.85"/>
+<text x="385.0493601462523" y="327" font-size="10" fill="#6b7280">848箇所</text>
+<text x="92" y="355" text-anchor="end" font-size="11" fill="#374151">11. 新潟県</text>
+<rect x="100" y="340" width="253.71115173674588" height="22" rx="3" fill="#7c3aed" opacity="0.85"/>
+<text x="359.7111517367459" y="355" font-size="10" fill="#6b7280">771箇所</text>
+<text x="92" y="383" text-anchor="end" font-size="11" fill="#374151">12. 神奈川県</text>
+<rect x="100" y="368" width="251.73674588665446" height="22" rx="3" fill="#7c3aed" opacity="0.85"/>
+<text x="357.7367458866545" y="383" font-size="10" fill="#6b7280">765箇所</text>
+<text x="92" y="411" text-anchor="end" font-size="11" fill="#374151">13. 福島県</text>
+<rect x="100" y="396" width="244.82632541133455" height="22" rx="3" fill="#7c3aed" opacity="0.85"/>
+<text x="350.82632541133455" y="411" font-size="10" fill="#6b7280">744箇所</text>
+<text x="92" y="439" text-anchor="end" font-size="11" fill="#374151">13. 長野県</text>
+<rect x="100" y="424" width="244.82632541133455" height="22" rx="3" fill="#7c3aed" opacity="0.85"/>
+<text x="350.82632541133455" y="439" font-size="10" fill="#6b7280">744箇所</text>
+<text x="92" y="467" text-anchor="end" font-size="11" fill="#374151">15. 鹿児島県</text>
+<rect x="100" y="452" width="243.18098720292505" height="22" rx="3" fill="#7c3aed" opacity="0.85"/>
+<text x="349.18098720292505" y="467" font-size="10" fill="#6b7280">739箇所</text>
+</svg>
