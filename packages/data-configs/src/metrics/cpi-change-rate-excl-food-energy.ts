@@ -37,7 +37,7 @@ export const cpiChangeRateExclFoodEnergy: MetricConfig = {
     "isCalculated": false,
   },
   "seoTitle": "消費者物価指数対前年変化率（食料（酒類を除く）及びエネルギーを除く総合）",
-  "isActive": false,
+  "isActive": true,
   "isFeatured": false,
   "featuredOrder": 0,
 };

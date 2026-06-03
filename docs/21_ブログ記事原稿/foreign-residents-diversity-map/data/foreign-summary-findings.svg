@@ -1,0 +1,24 @@
+<svg width="960" height="478" viewBox="0 0 960 478" xmlns="http://www.w3.org/2000/svg" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" role="img" aria-label="この記事でわかったこと">
+<rect width="960" height="478" fill="#f9fafb"/>
+<text x="480" y="48" text-anchor="middle" font-size="26" font-weight="bold" fill="#1f2937">この記事でわかったこと</text>
+<rect x="50" y="78" width="860" height="80" fill="#ffffff" rx="8"/>
+<circle cx="94" cy="118" r="20" fill="#2563eb"/>
+<text x="94" y="125" text-anchor="middle" font-size="16" font-weight="bold" fill="#fff">1</text>
+<text x="130" y="123" font-size="18" font-weight="bold" fill="#1f2937">東京都が人口10万人当たり3,441人で全国1位。2024年の在留外国人は約73.9万人で、全国の約2割を占める</text>
+<rect x="50" y="158" width="860" height="80" fill="#f9fafb" rx="8"/>
+<circle cx="94" cy="198" r="20" fill="#059669"/>
+<text x="94" y="205" text-anchor="middle" font-size="16" font-weight="bold" fill="#fff">2</text>
+<text x="130" y="203" font-size="18" font-weight="bold" fill="#1f2937">愛知・群馬・三重・岐阜・静岡──東海・北関東の製造業地域が上位を独占。人口10万人当たりでは東京に次ぐ密</text>
+<rect x="50" y="238" width="860" height="80" fill="#ffffff" rx="8"/>
+<circle cx="94" cy="278" r="20" fill="#d97706"/>
+<text x="94" y="285" text-anchor="middle" font-size="16" font-weight="bold" fill="#fff">3</text>
+<text x="130" y="283" font-size="18" font-weight="bold" fill="#1f2937">大阪府は韓国籍が最多（約8.7万人）で全国唯一。歴史的な在日コリアンの集住が背景にある</text>
+<rect x="50" y="318" width="860" height="80" fill="#f9fafb" rx="8"/>
+<circle cx="94" cy="358" r="20" fill="#7c3aed"/>
+<text x="94" y="365" text-anchor="middle" font-size="16" font-weight="bold" fill="#fff">4</text>
+<text x="130" y="363" font-size="18" font-weight="bold" fill="#1f2937">愛知・静岡・群馬は南米出身者が多く、自動車・電機産業の技能実習・日系人就労が特徴的</text>
+<rect x="50" y="398" width="860" height="80" fill="#ffffff" rx="8"/>
+<circle cx="94" cy="438" r="20" fill="#dc2626"/>
+<text x="94" y="445" text-anchor="middle" font-size="16" font-weight="bold" fill="#fff">5</text>
+<text x="130" y="443" font-size="18" font-weight="bold" fill="#1f2937">2024年の在留外国人は約376万人で過去最多。2020年国勢調査の約240万人から5割以上増加し、多文化共生は全国的な課題に</text>
+</svg>

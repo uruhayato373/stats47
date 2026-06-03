@@ -33,7 +33,7 @@ export const goodsInventoryWholesaleRetail: MetricConfig = {
     "isCalculated": false,
   },
   "seoTitle": "商品手持額（卸売業＋小売業）",
-  "isActive": false,
+  "isActive": true,
   "isFeatured": false,
   "featuredOrder": 0,
 };

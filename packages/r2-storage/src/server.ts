@@ -14,3 +14,5 @@ export {
     saveToR2,
     type SnapshotReaderOptions
 } from "./lib";
+
+export { assertR2WriteAllowed } from "./scripts/_assert-ci-write";

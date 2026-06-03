@@ -71,7 +71,7 @@ export const cpiChangeRateFurniture: MetricConfig = {
     "isCalculated": false,
   },
   "seoTitle": "消費者物価指数対前年変化率（家具・家事用品）",
-  "isActive": false,
+  "isActive": true,
   "isFeatured": false,
   "featuredOrder": 0,
 };

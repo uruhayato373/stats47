@@ -34,7 +34,7 @@ export const publicBondExpensesPurposePrefecture: MetricConfig = {
     "isCalculated": false,
   },
   "seoTitle": "公債費（目的別歳出内訳）",
-  "isActive": false,
+  "isActive": true,
   "isFeatured": false,
   "featuredOrder": 0,
 };

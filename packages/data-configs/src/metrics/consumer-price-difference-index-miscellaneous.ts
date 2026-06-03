@@ -37,7 +37,7 @@ export const consumerPriceDifferenceIndexMiscellaneous: MetricConfig = {
     "isCalculated": false,
   },
   "seoTitle": "消費者物価地域差指数（諸雑費）",
-  "isActive": false,
+  "isActive": true,
   "isFeatured": false,
   "featuredOrder": 0,
 };

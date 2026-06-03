@@ -37,7 +37,7 @@ export const consumerPriceDifferenceIndexFood: MetricConfig = {
     "isCalculated": false,
   },
   "seoTitle": "消費者物価地域差指数（食料）",
-  "isActive": false,
+  "isActive": true,
   "isFeatured": false,
   "featuredOrder": 0,
 };

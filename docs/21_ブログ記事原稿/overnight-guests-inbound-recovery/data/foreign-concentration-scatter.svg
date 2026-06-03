@@ -1,0 +1,193 @@
+<svg width="700" height="560" viewBox="0 0 560 560" xmlns="http://www.w3.org/2000/svg" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" role="img" aria-label="延べ宿泊者数 × 外国人比率">
+  <title>延べ宿泊者数 × 外国人比率</title>
+  <rect width="560" height="560" fill="#fafafa" rx="8"/>
+  <text x="280" y="28" text-anchor="middle" font-size="16" font-weight="bold" fill="#333">延べ宿泊者数 × 外国人比率</text>
+  <rect x="60" y="65" width="470" height="440" fill="#f9fafb" stroke="#d1d5db"/>
+  <line x1="60" y1="505" x2="530" y2="505" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="52" y="509" text-anchor="end" font-size="9" fill="#6b7280">0%</text>
+  <line x1="60" y1="425" x2="530" y2="425" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="52" y="429" text-anchor="end" font-size="9" fill="#6b7280">10%</text>
+  <line x1="60" y1="345" x2="530" y2="345" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="52" y="349" text-anchor="end" font-size="9" fill="#6b7280">20%</text>
+  <line x1="60" y1="265" x2="530" y2="265" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="52" y="269" text-anchor="end" font-size="9" fill="#6b7280">30%</text>
+  <line x1="60" y1="185" x2="530" y2="185" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="52" y="189" text-anchor="end" font-size="9" fill="#6b7280">40%</text>
+  <line x1="60" y1="105.00000000000001" x2="530" y2="105.00000000000001" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="52" y="109.00000000000001" text-anchor="end" font-size="9" fill="#6b7280">50%</text>
+  <line x1="60" y1="65" x2="60" y2="505" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="60" y="523" text-anchor="middle" font-size="9" fill="#6b7280">0</text>
+  <line x1="154" y1="65" x2="154" y2="505" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="154" y="523" text-anchor="middle" font-size="9" fill="#6b7280">2,000</text>
+  <line x1="248" y1="65" x2="248" y2="505" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="248" y="523" text-anchor="middle" font-size="9" fill="#6b7280">4,000</text>
+  <line x1="342" y1="65" x2="342" y2="505" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="342" y="523" text-anchor="middle" font-size="9" fill="#6b7280">6,000</text>
+  <line x1="436" y1="65" x2="436" y2="505" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="436" y="523" text-anchor="middle" font-size="9" fill="#6b7280">8,000</text>
+  <line x1="530" y1="65" x2="530" y2="505" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="530" y="523" text-anchor="middle" font-size="9" fill="#6b7280">10,000</text>
+  <line x1="60" y1="65" x2="60" y2="505" stroke="#999"/>
+  <line x1="60" y1="505" x2="530" y2="505" stroke="#999"/>
+  <line x1="114.10736899999999" y1="65" x2="114.10736899999999" y2="505" stroke="#9ca3af" stroke-dasharray="4,3" opacity="0.6"/>
+  <line x1="60" y1="397.92940110062966" x2="530" y2="397.92940110062966" stroke="#9ca3af" stroke-dasharray="4,3" opacity="0.6"/>
+  <circle cx="490.67556999999994" cy="90.8900768390462" r="4.5" fill="#66bb6a" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>東京都: 9,163万人泊, 51.8%</title>
+  </circle>
+  <text x="483.67556999999994" y="83.8900768390462" text-anchor="end" font-size="8" fill="#374151">東京</text>
+  <circle cx="295.141799" cy="142.58700000419748" r="4.5" fill="#ffa726" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>大阪府: 5,003万人泊, 45.3%</title>
+  </circle>
+  <text x="302.141799" y="147.58700000419748" text-anchor="start" font-size="8" fill="#374151">大阪</text>
+  <circle cx="232.137359" cy="302.1449532927945" r="4.5" fill="#42a5f5" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>北海道: 3,662万人泊, 25.4%</title>
+  </circle>
+  <text x="239.137359" y="295.1449532927945" text-anchor="start" font-size="8" fill="#374151">北海道</text>
+  <circle cx="194.14599" cy="109.87146876324815" r="4.5" fill="#ffa726" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>京都府: 2,854万人泊, 49.4%</title>
+  </circle>
+  <text x="187.14599" y="114.87146876324815" text-anchor="end" font-size="8" fill="#374151">京都</text>
+  <circle cx="182.544745" cy="371.6046365350061" r="4.5" fill="#66bb6a" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>千葉県: 2,607万人泊, 16.7%</title>
+  </circle>
+  <circle cx="163.851153" cy="346.40724176649246" r="4.5" fill="#ab47bc" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>沖縄県: 2,210万人泊, 19.8%</title>
+  </circle>
+  <text x="170.851153" y="341.40724176649246" text-anchor="start" font-size="8" fill="#374151">沖縄</text>
+  <circle cx="160.942746" cy="361.8326009280548" r="4.5" fill="#66bb6a" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>神奈川県: 2,148万人泊, 17.9%</title>
+  </circle>
+  <circle cx="159.865036" cy="247.12730870091514" r="4.5" fill="#ab47bc" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>福岡県: 2,125万人泊, 32.2%</title>
+  </circle>
+  <text x="166.865036" y="240.12730870091514" text-anchor="start" font-size="8" fill="#374151">福岡</text>
+  <circle cx="150.847522" cy="359.0620799761605" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>愛知県: 1,933万人泊, 18.2%</title>
+  </circle>
+  <circle cx="147.952275" cy="435.08461918693973" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>静岡県: 1,871万人泊, 8.7%</title>
+  </circle>
+  <circle cx="126.465802" cy="415.9411483517494" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>長野県: 1,414万人泊, 11.1%</title>
+  </circle>
+  <circle cx="124.215066" cy="421.65649304167965" r="4.5" fill="#ffa726" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>兵庫県: 1,366万人泊, 10.4%</title>
+  </circle>
+  <circle cx="109.473751" cy="382.5983652422069" r="4.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>広島県: 1,053万人泊, 15.3%</title>
+  </circle>
+  <circle cx="107.88327100000001" cy="365.07285091279584" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>石川県: 1,019万人泊, 17.5%</title>
+  </circle>
+  <circle cx="103.43514400000001" cy="474.63010413871314" r="4.5" fill="#66bb6a" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>栃木県: 924万人泊, 3.8%</title>
+  </circle>
+  <circle cx="102.384976" cy="439.0551425580611" r="4.5" fill="#42a5f5" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>宮城県: 902万人泊, 8.2%</title>
+  </circle>
+  <circle cx="96.56618800000001" cy="475.2664767790397" r="4.5" fill="#42a5f5" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>福島県: 778万人泊, 3.7%</title>
+  </circle>
+  <circle cx="95.163755" cy="458.5375218033455" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>新潟県: 748万人泊, 5.8%</title>
+  </circle>
+  <circle cx="92.37012200000001" cy="480.03099926531013" r="4.5" fill="#ffa726" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>三重県: 689万人泊, 3.1%</title>
+  </circle>
+  <circle cx="91.644207" cy="470.2293767386871" r="4.5" fill="#66bb6a" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>群馬県: 673万人泊, 4.3%</title>
+  </circle>
+  <circle cx="91.084625" cy="344.0807030807031" r="4.5" fill="#ab47bc" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>熊本県: 661万人泊, 20.1%</title>
+  </circle>
+  <circle cx="89.47520399999999" cy="439.8781436762914" r="4.5" fill="#ab47bc" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>長崎県: 627万人泊, 8.1%</title>
+  </circle>
+  <circle cx="89.402824" cy="308.87472985588045" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>山梨県: 626万人泊, 24.5%</title>
+  </circle>
+  <circle cx="88.339355" cy="474.83572844194936" r="4.5" fill="#66bb6a" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>茨城県: 603万人泊, 3.8%</title>
+  </circle>
+  <circle cx="88.044242" cy="439.92456669001785" r="4.5" fill="#ab47bc" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>鹿児島県: 597万人泊, 8.1%</title>
+  </circle>
+  <circle cx="87.931442" cy="318.88355101752353" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>岐阜県: 594万人泊, 23.3%</title>
+  </circle>
+  <circle cx="87.088027" cy="355.25115339703405" r="4.5" fill="#ab47bc" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>大分県: 576万人泊, 18.7%</title>
+  </circle>
+  <circle cx="83.902226" cy="447.6173612449317" r="4.5" fill="#42a5f5" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>岩手県: 509万人泊, 7.2%</title>
+  </circle>
+  <circle cx="83.667273" cy="470.65089691575366" r="4.5" fill="#66bb6a" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>埼玉県: 504万人泊, 4.3%</title>
+  </circle>
+  <circle cx="83.006453" cy="425.9984085769328" r="4.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>岡山県: 489万人泊, 9.9%</title>
+  </circle>
+  <circle cx="79.343367" cy="445.6493812581853" r="4.5" fill="#ffa726" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>滋賀県: 412万人泊, 7.4%</title>
+  </circle>
+  <circle cx="78.744869" cy="417.9467162453896" r="4.5" fill="#ffa726" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>和歌山県: 399万人泊, 10.9%</title>
+  </circle>
+  <circle cx="78.678505" cy="426.6858950970648" r="4.5" fill="#42a5f5" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>青森県: 397万人泊, 9.8%</title>
+  </circle>
+  <circle cx="78.152011" cy="347.20935079865257" r="4.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>香川県: 386万人泊, 19.7%</title>
+  </circle>
+  <circle cx="78.044475" cy="461.01640945497167" r="4.5" fill="#42a5f5" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>山形県: 384万人泊, 5.5%</title>
+  </circle>
+  <circle cx="77.10973899999999" cy="424.2873251894725" r="4.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>愛媛県: 364万人泊, 10.1%</title>
+  </circle>
+  <circle cx="76.805602" cy="477.9996699909947" r="4.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>山口県: 358万人泊, 3.4%</title>
+  </circle>
+  <circle cx="75.344137" cy="447.6717840175697" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>富山県: 326万人泊, 7.2%</title>
+  </circle>
+  <circle cx="73.85607" cy="462.8603168142193" r="4.5" fill="#ab47bc" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>宮崎県: 295万人泊, 5.3%</title>
+  </circle>
+  <circle cx="73.701205" cy="484.83225563007045" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>福井県: 292万人泊, 2.5%</title>
+  </circle>
+  <circle cx="73.52133599999999" cy="486.1823920358166" r="4.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>島根県: 288万人泊, 2.4%</title>
+  </circle>
+  <circle cx="72.714628" cy="473.10042731883306" r="4.5" fill="#42a5f5" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>秋田県: 271万人泊, 4.0%</title>
+  </circle>
+  <circle cx="70.764927" cy="383.02009247252676" r="4.5" fill="#ffa726" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>奈良県: 229万人泊, 15.2%</title>
+  </circle>
+  <circle cx="70.353771" cy="466.2951841411212" r="4.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>高知県: 220万人泊, 4.8%</title>
+  </circle>
+  <circle cx="69.40893" cy="416.84774464258953" r="4.5" fill="#ab47bc" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>佐賀県: 200万人泊, 11.0%</title>
+  </circle>
+  <circle cx="68.858184" cy="463.5720955897958" r="4.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>鳥取県: 188万人泊, 5.2%</title>
+  </circle>
+  <circle cx="67.996439" cy="441.87910331086124" r="4.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1">
+    <title>徳島県: 170万人泊, 7.9%</title>
+  </circle>
+  <circle cx="60" cy="61" r="4" fill="#42a5f5" fill-opacity="0.75"/>
+  <text x="67" y="64" font-size="7" fill="#6b7280">北海道・東北</text>
+  <circle cx="135" cy="61" r="4" fill="#66bb6a" fill-opacity="0.75"/>
+  <text x="142" y="64" font-size="7" fill="#6b7280">関東</text>
+  <circle cx="210" cy="61" r="4" fill="#fdd835" fill-opacity="0.75"/>
+  <text x="217" y="64" font-size="7" fill="#6b7280">中部</text>
+  <circle cx="285" cy="61" r="4" fill="#ffa726" fill-opacity="0.75"/>
+  <text x="292" y="64" font-size="7" fill="#6b7280">近畿</text>
+  <circle cx="360" cy="61" r="4" fill="#ef5350" fill-opacity="0.75"/>
+  <text x="367" y="64" font-size="7" fill="#6b7280">中国・四国</text>
+  <circle cx="435" cy="61" r="4" fill="#ab47bc" fill-opacity="0.75"/>
+  <text x="442" y="64" font-size="7" fill="#6b7280">九州・沖縄</text>
+</svg>

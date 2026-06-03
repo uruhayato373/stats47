@@ -46,7 +46,7 @@ export const disasterRecoveryExpensesPrefecture: MetricConfig = {
     "isCalculated": false,
   },
   "groupKey": "disaster-recovery-expenses-prefecture",
-  "isActive": false,
+  "isActive": true,
   "isFeatured": false,
   "featuredOrder": 0,
 };

@@ -1,0 +1,139 @@
+import type { MetricConfig } from "@stats47/data-configs";
+import { describe, expect, it } from "vitest";
+
+import { buildRankingItemFromMetric, yearNameOf } from "../build-ranking-item-from-metric";
+
+const NOW = "2026-06-03T00:00:00.000Z";
+
+/** total-population 相当の最小 config (live item.json との突合用 fixture) */
+const baseConfig: MetricConfig = {
+  key: "total-population",
+  title: "総人口",
+  unit: "人",
+  category: "population",
+  source: {
+    kind: "estat",
+    statsDataId: "0000010101",
+    cdCat01: "A1101",
+    displayName: "社会・人口統計体系",
+    url: "https://www.stat.go.jp/data/ssds/index.htm",
+  },
+  entities: ["prefecture"],
+  years: { from: 2009, to: 2024 },
+  yearFormat: "fiscal",
+  visualization: {
+    colorScheme: "interpolateBlues",
+    colorSchemeType: "sequential",
+    minValueType: "data-min",
+  },
+  display: { conversionFactor: 1, decimalPlaces: 0 },
+  calculation: { isCalculated: false },
+  surveyId: "census",
+  tags: ["人口", "人口動態"],
+  isActive: true,
+  isFeatured: true,
+  featuredOrder: 2,
+};
+
+describe("yearNameOf", () => {
+  it("fiscal は '年度'", () => {
+    expect(yearNameOf("2024", "fiscal")).toBe("2024年度");
+  });
+  it("calendar は '年'", () => {
+    expect(yearNameOf("2024", "calendar")).toBe("2024年");
+  });
+  it("未指定は '年' (calendar 扱い)", () => {
+    expect(yearNameOf("2024", undefined)).toBe("2024年");
+  });
+});
+
+describe("buildRankingItemFromMetric", () => {
+  it("live item.json (total-population) の主要フィールドを再現する", () => {
+    const item = buildRankingItemFromMetric(baseConfig, {
+      values: { yearCodes: ["2024", "2023", "2022"] },
+      now: NOW,
+      existing: { createdAt: "2025-11-09 04:27:32" },
+    });
+
+    expect(item.rankingKey).toBe("total-population");
+    expect(item.areaType).toBe("prefecture");
+    expect(item.rankingName).toBe("総人口");
+    expect(item.title).toBe("総人口");
+    expect(item.unit).toBe("人");
+    expect(item.categoryKey).toBe("population");
+    expect(item.isActive).toBe(true);
+    expect(item.isFeatured).toBe(true);
+    expect(item.featuredOrder).toBe(2);
+    expect(item.surveyId).toBe("census");
+    expect(item.dataSourceId).toBe("estat");
+    expect(item.tags).toEqual([{ tagKey: "人口" }, { tagKey: "人口動態" }]);
+    expect(item.valueDisplay).toEqual({ conversionFactor: 1, decimalPlaces: 0 });
+    expect(item.visualization).toMatchObject({
+      colorScheme: "interpolateBlues",
+      colorSchemeType: "sequential",
+      minValueType: "data-min",
+    });
+    expect(item.sourceConfig).toEqual({
+      statsDataId: "0000010101",
+      cdCat01: "A1101",
+      source: { name: "社会・人口統計体系", url: "https://www.stat.go.jp/data/ssds/index.htm" },
+    });
+    // createdAt は既存を保持、updatedAt は now
+    expect(item.createdAt).toBe("2025-11-09 04:27:32");
+    expect(item.updatedAt).toBe(NOW);
+  });
+
+  it("fiscal の availableYears は降順で yearName='年度'、latestYear は先頭", () => {
+    const item = buildRankingItemFromMetric(baseConfig, {
+      values: { yearCodes: ["2024", "2023", "2022"] },
+      now: NOW,
+    });
+    expect(item.latestYear).toEqual({ yearCode: "2024", yearName: "2024年度" });
+    expect(item.availableYears).toEqual([
+      { yearCode: "2024", yearName: "2024年度" },
+      { yearCode: "2023", yearName: "2023年度" },
+      { yearCode: "2022", yearName: "2022年度" },
+    ]);
+  });
+
+  it("calendar の yearName は '年' (既存 item.json の '年度' 誤りを是正)", () => {
+    const item = buildRankingItemFromMetric(
+      { ...baseConfig, yearFormat: "calendar" },
+      { values: { yearCodes: ["2005"] }, now: NOW },
+    );
+    expect(item.availableYears).toEqual([{ yearCode: "2005", yearName: "2005年" }]);
+  });
+
+  it("values=null なら latestYear/availableYears は null", () => {
+    const item = buildRankingItemFromMetric(baseConfig, { values: null, now: NOW });
+    expect(item.latestYear).toBeNull();
+    expect(item.availableYears).toBeNull();
+  });
+
+  it("surveyId/tags 省略時は null / [] にフォールバック", () => {
+    const { surveyId: _s, tags: _t, ...noEditorial } = baseConfig;
+    const item = buildRankingItemFromMetric(noEditorial as MetricConfig, {
+      values: null,
+      now: NOW,
+    });
+    expect(item.surveyId).toBeNull();
+    expect(item.tags).toEqual([]);
+  });
+
+  it("isActive/isFeatured/featuredOrder の undefined は false/false/0 に正規化", () => {
+    const { isActive: _a, isFeatured: _f, featuredOrder: _o, ...minimal } = baseConfig;
+    const item = buildRankingItemFromMetric(minimal as MetricConfig, {
+      values: null,
+      now: NOW,
+    });
+    expect(item.isActive).toBe(false);
+    expect(item.isFeatured).toBe(false);
+    expect(item.featuredOrder).toBe(0);
+  });
+
+  it("createdAt は existing 無ければ now を使う", () => {
+    const item = buildRankingItemFromMetric(baseConfig, { values: null, now: NOW });
+    expect(item.createdAt).toBe(NOW);
+    expect(item.updatedAt).toBe(NOW);
+  });
+});

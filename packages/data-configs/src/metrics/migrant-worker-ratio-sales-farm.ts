@@ -33,7 +33,7 @@ export const migrantWorkerRatioSalesFarm: MetricConfig = {
     "isCalculated": false,
   },
   "seoTitle": "出稼者比率（販売農家）",
-  "isActive": false,
+  "isActive": true,
   "isFeatured": false,
   "featuredOrder": 0,
 };

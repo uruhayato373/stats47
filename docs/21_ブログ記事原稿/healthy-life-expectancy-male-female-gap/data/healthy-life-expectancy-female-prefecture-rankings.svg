@@ -1,0 +1,65 @@
+<!-- data-source: healthy-life-expectancy-female-prefecture-rankings.json | generated: 2026-06-02T21:20:29.462Z -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 300" width="680" height="300" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" role="img" aria-label="健康寿命（女性） 都道府県ランキング（2019年）">
+  <style>
+    .svg-bg{fill:#fafafa}
+    .svg-title{fill:#222}
+    .svg-subtitle{fill:#666}
+    .svg-label{fill:#333}
+    .svg-legend{fill:#888}
+    @media (prefers-color-scheme:dark){
+      .svg-bg{fill:#1f2937}
+      .svg-title{fill:#f9fafb}
+      .svg-subtitle{fill:#9ca3af}
+      .svg-label{fill:#e5e7eb}
+      .svg-legend{fill:#9ca3af}
+    }
+  </style>
+  <rect width="680" height="300" class="svg-bg" rx="8"/>
+  <text x="340" y="24" text-anchor="middle" font-size="16" font-weight="bold" class="svg-title">健康寿命（女性） 都道府県ランキング（2019年）</text>
+  
+  <text x="227.5" y="54" text-anchor="middle" font-size="12" font-weight="bold" fill="#1565c0">上位 5</text>
+  <text x="542.5" y="54" text-anchor="middle" font-size="12" font-weight="bold" fill="#c62828">下位 5</text>
+  
+      <text x="84" y="82" text-anchor="end" font-size="11" class="svg-label">三重県</text>
+      <rect x="90" y="63" width="195" height="30" fill="#1565c0" rx="2"/>
+      <text x="289" y="82" font-size="10" class="svg-label">77.58年</text>
+    
+      <text x="84" y="118" text-anchor="end" font-size="11" class="svg-label">山梨県</text>
+      <rect x="90" y="99" width="192.88863109048722" height="30" fill="#1976d2" rx="2"/>
+      <text x="286.88863109048725" y="118" font-size="10" class="svg-label">76.74年</text>
+    
+      <text x="84" y="154" text-anchor="end" font-size="11" class="svg-label">宮崎県</text>
+      <rect x="90" y="135" width="192.81322505800463" height="30" fill="#1e88e5" rx="2"/>
+      <text x="286.8132250580046" y="154" font-size="10" class="svg-label">76.71年</text>
+    
+      <text x="84" y="190" text-anchor="end" font-size="11" class="svg-label">大分県</text>
+      <rect x="90" y="171" width="192.53673627223512" height="30" fill="#2196f3" rx="2"/>
+      <text x="286.5367362722351" y="190" font-size="10" class="svg-label">76.6年</text>
+    
+      <text x="84" y="226" text-anchor="end" font-size="11" class="svg-label">静岡県</text>
+      <rect x="90" y="207" width="192.4864655839134" height="30" fill="#42a5f5" rx="2"/>
+      <text x="286.4864655839134" y="226" font-size="10" class="svg-label">76.58年</text>
+    
+  
+      <text x="399" y="82" text-anchor="end" font-size="11" class="svg-label">京都府</text>
+      <rect x="405" y="63" width="185.1972157772622" height="30" fill="#c62828" rx="2"/>
+      <text x="594.1972157772622" y="82" font-size="10" class="svg-label">73.68年</text>
+    
+      <text x="399" y="118" text-anchor="end" font-size="11" class="svg-label">滋賀県</text>
+      <rect x="405" y="99" width="187.107501933488" height="30" fill="#d32f2f" rx="2"/>
+      <text x="596.107501933488" y="118" font-size="10" class="svg-label">74.44年</text>
+    
+      <text x="399" y="154" text-anchor="end" font-size="11" class="svg-label">東京都</text>
+      <rect x="405" y="135" width="187.38399071925753" height="30" fill="#e53935" rx="2"/>
+      <text x="596.3839907192576" y="154" font-size="10" class="svg-label">74.55年</text>
+    
+      <text x="399" y="190" text-anchor="end" font-size="11" class="svg-label">愛媛県</text>
+      <rect x="405" y="171" width="187.45939675174014" height="30" fill="#ef5350" rx="2"/>
+      <text x="596.4593967517401" y="190" font-size="10" class="svg-label">74.58年</text>
+    
+      <text x="399" y="226" text-anchor="end" font-size="11" class="svg-label">広島県</text>
+      <rect x="405" y="207" width="187.48453209590102" height="30" fill="#e57373" rx="2"/>
+      <text x="596.484532095901" y="226" font-size="10" class="svg-label">74.59年</text>
+    
+  <text x="340" y="282" text-anchor="middle" font-size="10" class="svg-legend">凡例: 青系=上位 / 赤系=下位</text>
+</svg>
