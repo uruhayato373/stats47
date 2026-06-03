@@ -1,0 +1,388 @@
+<svg width="620" height="720" viewBox="0 0 620 720" xmlns="http://www.w3.org/2000/svg"
+     font-family="'Hiragino Sans','Noto Sans JP',sans-serif"
+     role="img" aria-label="ラーメン外食支出の都道府県分布（2024年）">
+  <title>ラーメン外食支出の都道府県分布（2024年）</title>
+  <rect width="620" height="720" fill="#fafafa" rx="8"/>
+  <text x="310" y="28" text-anchor="middle" font-size="16" font-weight="bold" fill="#333">ラーメン外食支出の都道府県分布</text>
+  <text x="310" y="46" text-anchor="middle" font-size="10" fill="#888">2人以上世帯・年間支出（2024年）</text>
+  <g aria-label="北海道 6972円">
+    <title>北海道：6,972円</title>
+    <rect x="491" y="55" width="74" height="74" rx="3" fill="#ffe3ba" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="528" y="94" font-size="9" font-weight="700">北海道</tspan>
+      <tspan x="528" dy="11" font-size="7">7k</tspan>
+    </text>
+  </g>
+  <g aria-label="青森 8982円">
+    <title>青森県：8,982円</title>
+    <rect x="491" y="169" width="74" height="36" rx="3" fill="#ffd9a0" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="528" y="189" font-size="9" font-weight="700">青森</tspan>
+      <tspan x="528" dy="11" font-size="7">9k</tspan>
+    </text>
+  </g>
+  <g aria-label="岩手 11729円">
+    <title>岩手県：11,729円</title>
+    <rect x="529" y="207" width="36" height="36" rx="3" fill="#ffc672" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="547" y="227" font-size="8" font-weight="700">岩手</tspan>
+      <tspan x="547" dy="11" font-size="7">12k</tspan>
+    </text>
+  </g>
+  <g aria-label="秋田 12375円">
+    <title>秋田県：12,375円</title>
+    <rect x="491" y="207" width="36" height="36" rx="3" fill="#ffbd5b" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="509" y="227" font-size="8" font-weight="700">秋田</tspan>
+      <tspan x="509" dy="11" font-size="7">12k</tspan>
+    </text>
+  </g>
+  <g aria-label="宮城 15534円">
+    <title>宮城県：15,534円</title>
+    <rect x="529" y="245" width="36" height="36" rx="3" fill="#fb8e00" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="547" y="265" font-size="8" font-weight="700">宮城</tspan>
+      <tspan x="547" dy="11" font-size="7">16k</tspan>
+    </text>
+  </g>
+  <g aria-label="山形 22389円">
+    <title>山形県：22,389円</title>
+    <rect x="491" y="245" width="36" height="36" rx="3" fill="#bf360c" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#ffffff" text-anchor="middle">
+      <tspan x="509" y="265" font-size="8" font-weight="700">山形</tspan>
+      <tspan x="509" dy="11" font-size="7">22k</tspan>
+    </text>
+  </g>
+  <g aria-label="福島 12272円">
+    <title>福島県：12,272円</title>
+    <rect x="491" y="283" width="74" height="36" rx="3" fill="#ffbf5f" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="528" y="303" font-size="9" font-weight="700">福島</tspan>
+      <tspan x="528" dy="11" font-size="7">12k</tspan>
+    </text>
+  </g>
+  <g aria-label="新潟 16292円">
+    <title>新潟県：16,292円</title>
+    <rect x="415" y="283" width="74" height="36" rx="3" fill="#f67f00" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#ffffff" text-anchor="middle">
+      <tspan x="452" y="303" font-size="9" font-weight="700">新潟</tspan>
+      <tspan x="452" dy="11" font-size="7">16k</tspan>
+    </text>
+  </g>
+  <g aria-label="富山 13775円">
+    <title>富山県：13,775円</title>
+    <rect x="377" y="283" width="36" height="36" rx="3" fill="#ffa92b" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="395" y="303" font-size="8" font-weight="700">富山</tspan>
+      <tspan x="395" dy="11" font-size="7">14k</tspan>
+    </text>
+  </g>
+  <g aria-label="石川 8949円">
+    <title>石川県：8,949円</title>
+    <rect x="339" y="283" width="36" height="36" rx="3" fill="#ffd9a0" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="357" y="303" font-size="8" font-weight="700">石川</tspan>
+      <tspan x="357" dy="11" font-size="7">9k</tspan>
+    </text>
+  </g>
+  <g aria-label="福井 9158円">
+    <title>福井県：9,158円</title>
+    <rect x="339" y="321" width="36" height="36" rx="3" fill="#ffd89d" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="357" y="341" font-size="8" font-weight="700">福井</tspan>
+      <tspan x="357" dy="11" font-size="7">9k</tspan>
+    </text>
+  </g>
+  <g aria-label="岐阜 9513円">
+    <title>岐阜県：9,513円</title>
+    <rect x="377" y="321" width="36" height="74" rx="3" fill="#ffd698" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="395" y="360" font-size="8" font-weight="700">岐阜</tspan>
+      <tspan x="395" dy="11" font-size="7">10k</tspan>
+    </text>
+  </g>
+  <g aria-label="長野 10162円">
+    <title>長野県：10,162円</title>
+    <rect x="415" y="321" width="36" height="74" rx="3" fill="#ffd290" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="433" y="360" font-size="8" font-weight="700">長野</tspan>
+      <tspan x="433" dy="11" font-size="7">10k</tspan>
+    </text>
+  </g>
+  <g aria-label="群馬 10808円">
+    <title>群馬県：10,808円</title>
+    <rect x="453" y="321" width="36" height="36" rx="3" fill="#ffcf87" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="471" y="341" font-size="8" font-weight="700">群馬</tspan>
+      <tspan x="471" dy="11" font-size="7">11k</tspan>
+    </text>
+  </g>
+  <g aria-label="栃木 11530円">
+    <title>栃木県：11,530円</title>
+    <rect x="491" y="321" width="36" height="36" rx="3" fill="#ffc979" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="509" y="341" font-size="8" font-weight="700">栃木</tspan>
+      <tspan x="509" dy="11" font-size="7">12k</tspan>
+    </text>
+  </g>
+  <g aria-label="茨城 8661円">
+    <title>茨城県：8,661円</title>
+    <rect x="529" y="321" width="36" height="36" rx="3" fill="#ffdaa4" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="547" y="341" font-size="8" font-weight="700">茨城</tspan>
+      <tspan x="547" dy="11" font-size="7">9k</tspan>
+    </text>
+  </g>
+  <g aria-label="山梨 7197円">
+    <title>山梨県：7,197円</title>
+    <rect x="453" y="359" width="36" height="36" rx="3" fill="#ffe2b7" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="471" y="379" font-size="8" font-weight="700">山梨</tspan>
+      <tspan x="471" dy="11" font-size="7">7k</tspan>
+    </text>
+  </g>
+  <g aria-label="埼玉 12553円">
+    <title>埼玉県：12,553円</title>
+    <rect x="491" y="359" width="36" height="36" rx="3" fill="#ffbb55" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="509" y="379" font-size="8" font-weight="700">埼玉</tspan>
+      <tspan x="509" dy="11" font-size="7">13k</tspan>
+    </text>
+  </g>
+  <g aria-label="千葉 11078円">
+    <title>千葉県：11,078円</title>
+    <rect x="529" y="359" width="36" height="74" rx="3" fill="#ffcd83" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="547" y="398" font-size="8" font-weight="700">千葉</tspan>
+      <tspan x="547" dy="11" font-size="7">11k</tspan>
+    </text>
+  </g>
+  <g aria-label="東京 9736円">
+    <title>東京都：9,736円</title>
+    <rect x="491" y="397" width="36" height="36" rx="3" fill="#ffd595" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="509" y="417" font-size="8" font-weight="700">東京</tspan>
+      <tspan x="509" dy="11" font-size="7">10k</tspan>
+    </text>
+  </g>
+  <g aria-label="神奈川 8679円">
+    <title>神奈川県：8,679円</title>
+    <rect x="491" y="435" width="36" height="36" rx="3" fill="#ffdaa4" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="509" y="455" font-size="8" font-weight="700">神奈川</tspan>
+      <tspan x="509" dy="11" font-size="7">9k</tspan>
+    </text>
+  </g>
+  <g aria-label="静岡 10198円">
+    <title>静岡県：10,198円</title>
+    <rect x="415" y="397" width="74" height="36" rx="3" fill="#ffd28f" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="452" y="417" font-size="9" font-weight="700">静岡</tspan>
+      <tspan x="452" dy="11" font-size="7">10k</tspan>
+    </text>
+  </g>
+  <g aria-label="愛知 10331円">
+    <title>愛知県：10,331円</title>
+    <rect x="377" y="397" width="36" height="36" rx="3" fill="#ffd18d" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="395" y="417" font-size="8" font-weight="700">愛知</tspan>
+      <tspan x="395" dy="11" font-size="7">10k</tspan>
+    </text>
+  </g>
+  <g aria-label="滋賀 7189円">
+    <title>滋賀県：7,189円</title>
+    <rect x="339" y="359" width="36" height="36" rx="3" fill="#ffe2b7" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="357" y="379" font-size="8" font-weight="700">滋賀</tspan>
+      <tspan x="357" dy="11" font-size="7">7k</tspan>
+    </text>
+  </g>
+  <g aria-label="三重 6251円">
+    <title>三重県：6,251円</title>
+    <rect x="339" y="397" width="36" height="74" rx="3" fill="#ffe7c3" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="357" y="436" font-size="8" font-weight="700">三重</tspan>
+      <tspan x="357" dy="11" font-size="7">6k</tspan>
+    </text>
+  </g>
+  <g aria-label="京都 7774円">
+    <title>京都府：7,774円</title>
+    <rect x="263" y="359" width="74" height="36" rx="3" fill="#ffdfb0" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="300" y="379" font-size="9" font-weight="700">京都</tspan>
+      <tspan x="300" dy="11" font-size="7">8k</tspan>
+    </text>
+  </g>
+  <g aria-label="兵庫 4192円">
+    <title>兵庫県：4,192円</title>
+    <rect x="225" y="359" width="36" height="74" rx="3" fill="#fff2dd" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="243" y="398" font-size="8" font-weight="700">兵庫</tspan>
+      <tspan x="243" dy="11" font-size="7">4k</tspan>
+    </text>
+  </g>
+  <g aria-label="大阪 6931円">
+    <title>大阪府：6,931円</title>
+    <rect x="263" y="397" width="36" height="36" rx="3" fill="#ffe4bb" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="281" y="417" font-size="8" font-weight="700">大阪</tspan>
+      <tspan x="281" dy="11" font-size="7">7k</tspan>
+    </text>
+  </g>
+  <g aria-label="奈良 8222円">
+    <title>奈良県：8,222円</title>
+    <rect x="301" y="397" width="36" height="36" rx="3" fill="#ffddaa" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="319" y="417" font-size="8" font-weight="700">奈良</tspan>
+      <tspan x="319" dy="11" font-size="7">8k</tspan>
+    </text>
+  </g>
+  <g aria-label="和歌山 6563円">
+    <title>和歌山県：6,563円</title>
+    <rect x="263" y="435" width="74" height="36" rx="3" fill="#ffe5bf" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="300" y="455" font-size="9" font-weight="700">和歌山</tspan>
+      <tspan x="300" dy="11" font-size="7">7k</tspan>
+    </text>
+  </g>
+  <g aria-label="鳥取 7280円">
+    <title>鳥取県：7,280円</title>
+    <rect x="187" y="359" width="36" height="36" rx="3" fill="#ffe2b6" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="205" y="379" font-size="8" font-weight="700">鳥取</tspan>
+      <tspan x="205" dy="11" font-size="7">7k</tspan>
+    </text>
+  </g>
+  <g aria-label="岡山 7672円">
+    <title>岡山県：7,672円</title>
+    <rect x="187" y="397" width="36" height="36" rx="3" fill="#ffe0b1" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="205" y="417" font-size="8" font-weight="700">岡山</tspan>
+      <tspan x="205" dy="11" font-size="7">8k</tspan>
+    </text>
+  </g>
+  <g aria-label="島根 7832円">
+    <title>島根県：7,832円</title>
+    <rect x="149" y="359" width="36" height="36" rx="3" fill="#ffdfaf" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="167" y="379" font-size="8" font-weight="700">島根</tspan>
+      <tspan x="167" dy="11" font-size="7">8k</tspan>
+    </text>
+  </g>
+  <g aria-label="広島 7831円">
+    <title>広島県：7,831円</title>
+    <rect x="149" y="397" width="36" height="36" rx="3" fill="#ffdfaf" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="167" y="417" font-size="8" font-weight="700">広島</tspan>
+      <tspan x="167" dy="11" font-size="7">8k</tspan>
+    </text>
+  </g>
+  <g aria-label="山口 5665円">
+    <title>山口県：5,665円</title>
+    <rect x="111" y="359" width="36" height="74" rx="3" fill="#ffeaca" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="129" y="398" font-size="8" font-weight="700">山口</tspan>
+      <tspan x="129" dy="11" font-size="7">6k</tspan>
+    </text>
+  </g>
+  <g aria-label="愛媛 3935円">
+    <title>愛媛県：3,935円</title>
+    <rect x="149" y="473" width="36" height="36" rx="3" fill="#fff3e0" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="167" y="493" font-size="8" font-weight="700">愛媛</tspan>
+      <tspan x="167" dy="11" font-size="7">4k</tspan>
+    </text>
+  </g>
+  <g aria-label="香川 7908円">
+    <title>香川県：7,908円</title>
+    <rect x="187" y="473" width="36" height="36" rx="3" fill="#ffdeae" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="205" y="493" font-size="8" font-weight="700">香川</tspan>
+      <tspan x="205" dy="11" font-size="7">8k</tspan>
+    </text>
+  </g>
+  <g aria-label="高知 11575円">
+    <title>高知県：11,575円</title>
+    <rect x="149" y="511" width="36" height="36" rx="3" fill="#ffc877" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="167" y="531" font-size="8" font-weight="700">高知</tspan>
+      <tspan x="167" dy="11" font-size="7">12k</tspan>
+    </text>
+  </g>
+  <g aria-label="徳島 5446円">
+    <title>徳島県：5,446円</title>
+    <rect x="187" y="511" width="36" height="36" rx="3" fill="#ffebcd" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="205" y="531" font-size="8" font-weight="700">徳島</tspan>
+      <tspan x="205" dy="11" font-size="7">5k</tspan>
+    </text>
+  </g>
+  <g aria-label="福岡 6843円">
+    <title>福岡県：6,843円</title>
+    <rect x="73" y="435" width="36" height="36" rx="3" fill="#ffe4bc" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="91" y="455" font-size="8" font-weight="700">福岡</tspan>
+      <tspan x="91" dy="11" font-size="7">7k</tspan>
+    </text>
+  </g>
+  <g aria-label="佐賀 7932円">
+    <title>佐賀県：7,932円</title>
+    <rect x="35" y="435" width="36" height="36" rx="3" fill="#ffdeae" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="53" y="455" font-size="8" font-weight="700">佐賀</tspan>
+      <tspan x="53" dy="11" font-size="7">8k</tspan>
+    </text>
+  </g>
+  <g aria-label="大分 10067円">
+    <title>大分県：10,067円</title>
+    <rect x="73" y="473" width="36" height="36" rx="3" fill="#ffd391" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="91" y="493" font-size="8" font-weight="700">大分</tspan>
+      <tspan x="91" dy="11" font-size="7">10k</tspan>
+    </text>
+  </g>
+  <g aria-label="長崎 4868円">
+    <title>長崎県：4,868円</title>
+    <rect x="35" y="473" width="36" height="36" rx="3" fill="#ffeed4" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="53" y="493" font-size="8" font-weight="700">長崎</tspan>
+      <tspan x="53" dy="11" font-size="7">5k</tspan>
+    </text>
+  </g>
+  <g aria-label="宮崎 8120円">
+    <title>宮崎県：8,120円</title>
+    <rect x="73" y="511" width="36" height="36" rx="3" fill="#ffddab" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="91" y="531" font-size="8" font-weight="700">宮崎</tspan>
+      <tspan x="91" dy="11" font-size="7">8k</tspan>
+    </text>
+  </g>
+  <g aria-label="熊本 8588円">
+    <title>熊本県：8,588円</title>
+    <rect x="35" y="511" width="36" height="36" rx="3" fill="#ffdba5" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="53" y="531" font-size="8" font-weight="700">熊本</tspan>
+      <tspan x="53" dy="11" font-size="7">9k</tspan>
+    </text>
+  </g>
+  <g aria-label="鹿児島 7290円">
+    <title>鹿児島県：7,290円</title>
+    <rect x="35" y="549" width="74" height="36" rx="3" fill="#ffe2b6" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="72" y="569" font-size="9" font-weight="700">鹿児島</tspan>
+      <tspan x="72" dy="11" font-size="7">7k</tspan>
+    </text>
+  </g>
+  <g aria-label="沖縄 7773円">
+    <title>沖縄県：7,773円</title>
+    <rect x="35" y="625" width="36" height="36" rx="3" fill="#ffdfb0" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="53" y="645" font-size="8" font-weight="700">沖縄</tspan>
+      <tspan x="53" dy="11" font-size="7">8k</tspan>
+    </text>
+  </g>
+
+  <rect x="210" y="678" width="10.5" height="12" fill="#fff3e0"/><rect x="220" y="678" width="10.5" height="12" fill="#ffeed4"/><rect x="230" y="678" width="10.5" height="12" fill="#ffe9c8"/><rect x="240" y="678" width="10.5" height="12" fill="#ffe4bc"/><rect x="250" y="678" width="10.5" height="12" fill="#ffdfaf"/><rect x="260" y="678" width="10.5" height="12" fill="#ffdaa2"/><rect x="270" y="678" width="10.5" height="12" fill="#ffd495"/><rect x="280" y="678" width="10.5" height="12" fill="#ffcf88"/><rect x="290" y="678" width="10.5" height="12" fill="#ffc773"/><rect x="300" y="678" width="10.5" height="12" fill="#ffb951"/><rect x="310" y="678" width="10.5" height="12" fill="#ffab2f"/><rect x="320" y="678" width="10.5" height="12" fill="#ff9d0d"/><rect x="330" y="678" width="10.5" height="12" fill="#fb8d00"/><rect x="340" y="678" width="10.5" height="12" fill="#f47a00"/><rect x="350" y="678" width="10.5" height="12" fill="#ee6700"/><rect x="360" y="678" width="10.5" height="12" fill="#e75500"/><rect x="370" y="678" width="10.5" height="12" fill="#de4b03"/><rect x="380" y="678" width="10.5" height="12" fill="#d44406"/><rect x="390" y="678" width="10.5" height="12" fill="#c93d09"/><rect x="400" y="678" width="10.5" height="12" fill="#bf360c"/>
+  <text x="210" y="704" font-size="9" fill="#6b7280">少ない（4k円）</text>
+  <text x="410" y="704" text-anchor="end" font-size="9" fill="#6b7280">多い（22k円）</text>
+</svg>

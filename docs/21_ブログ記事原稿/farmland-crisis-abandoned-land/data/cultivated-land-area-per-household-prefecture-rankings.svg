@@ -1,0 +1,65 @@
+<!-- data-source: cultivated-land-area-per-household-prefecture-rankings.json | generated: 2026-06-02T21:26:15.439Z -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 300" width="680" height="300" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" role="img" aria-label="耕地面積 都道府県ランキング（2024年）">
+  <style>
+    .svg-bg{fill:#fafafa}
+    .svg-title{fill:#222}
+    .svg-subtitle{fill:#666}
+    .svg-label{fill:#333}
+    .svg-legend{fill:#888}
+    @media (prefers-color-scheme:dark){
+      .svg-bg{fill:#1f2937}
+      .svg-title{fill:#f9fafb}
+      .svg-subtitle{fill:#9ca3af}
+      .svg-label{fill:#e5e7eb}
+      .svg-legend{fill:#9ca3af}
+    }
+  </style>
+  <rect width="680" height="300" class="svg-bg" rx="8"/>
+  <text x="340" y="24" text-anchor="middle" font-size="16" font-weight="bold" class="svg-title">耕地面積 都道府県ランキング（2024年）</text>
+  
+  <text x="227.5" y="54" text-anchor="middle" font-size="12" font-weight="bold" fill="#1565c0">上位 5</text>
+  <text x="542.5" y="54" text-anchor="middle" font-size="12" font-weight="bold" fill="#c62828">下位 5</text>
+  
+      <text x="84" y="82" text-anchor="end" font-size="11" class="svg-label">北海道</text>
+      <rect x="90" y="63" width="195" height="30" fill="#1565c0" rx="2"/>
+      <text x="289" y="82" font-size="10" class="svg-label">302707.9ｍ2</text>
+    
+      <text x="84" y="118" text-anchor="end" font-size="11" class="svg-label">青森県</text>
+      <rect x="90" y="99" width="26.021803527426936" height="30" fill="#1976d2" rx="2"/>
+      <text x="120.02180352742694" y="118" font-size="10" class="svg-label">40394.9ｍ2</text>
+    
+      <text x="84" y="154" text-anchor="end" font-size="11" class="svg-label">秋田県</text>
+      <rect x="90" y="135" width="25.270361295493114" height="30" fill="#1e88e5" rx="2"/>
+      <text x="119.27036129549312" y="154" font-size="10" class="svg-label">39228.4ｍ2</text>
+    
+      <text x="84" y="190" text-anchor="end" font-size="11" class="svg-label">富山県</text>
+      <rect x="90" y="171" width="21.35629099868223" height="30" fill="#2196f3" rx="2"/>
+      <text x="115.35629099868223" y="190" font-size="10" class="svg-label">33152.4ｍ2</text>
+    
+      <text x="84" y="226" text-anchor="end" font-size="11" class="svg-label">宮城県</text>
+      <rect x="90" y="207" width="19.228224635035954" height="30" fill="#42a5f5" rx="2"/>
+      <text x="113.22822463503596" y="226" font-size="10" class="svg-label">29848.9ｍ2</text>
+    
+  
+      <text x="399" y="82" text-anchor="end" font-size="11" class="svg-label">大阪府</text>
+      <rect x="405" y="63" width="3.6831942608699673" height="30" fill="#c62828" rx="2"/>
+      <text x="412.68319426087" y="82" font-size="10" class="svg-label">5717.6ｍ2</text>
+    
+      <text x="399" y="118" text-anchor="end" font-size="11" class="svg-label">東京都</text>
+      <rect x="405" y="99" width="4.10062637942386" height="30" fill="#d32f2f" rx="2"/>
+      <text x="413.1006263794239" y="118" font-size="10" class="svg-label">6365.6ｍ2</text>
+    
+      <text x="399" y="154" text-anchor="end" font-size="11" class="svg-label">山梨県</text>
+      <rect x="405" y="135" width="5.294173029511287" height="30" fill="#e53935" rx="2"/>
+      <text x="414.2941730295113" y="154" font-size="10" class="svg-label">8218.4ｍ2</text>
+    
+      <text x="399" y="190" text-anchor="end" font-size="11" class="svg-label">神奈川県</text>
+      <rect x="405" y="171" width="5.385840607397428" height="30" fill="#ef5350" rx="2"/>
+      <text x="414.3858406073974" y="190" font-size="10" class="svg-label">8360.7ｍ2</text>
+    
+      <text x="399" y="226" text-anchor="end" font-size="11" class="svg-label">奈良県</text>
+      <rect x="405" y="207" width="5.488072825321043" height="30" fill="#e57373" rx="2"/>
+      <text x="414.48807282532107" y="226" font-size="10" class="svg-label">8519.4ｍ2</text>
+    
+  <text x="340" y="282" text-anchor="middle" font-size="10" class="svg-legend">凡例: 青系=上位 / 赤系=下位</text>
+</svg>
