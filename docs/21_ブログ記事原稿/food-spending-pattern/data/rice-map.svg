@@ -1,0 +1,385 @@
+<svg width="600" height="700" viewBox="0 0 600 700" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="米の消費支出額　都道府県マップ">
+  <title>米の消費支出額　都道府県マップ</title>
+  <rect width="600" height="700" fill="#fafafa"/>
+  <text x="300" y="28" text-anchor="middle" font-family="'Noto Sans JP',sans-serif" font-size="16" font-weight="bold" fill="#333">米の消費支出額　都道府県マップ</text>
+  <g aria-label="北海道 32,490円">
+    <title>北海道：32,490円</title>
+    <rect x="491" y="45" width="74" height="74" rx="3" fill="#15803d" stroke="#fff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#ffffff" text-anchor="middle">
+      <tspan x="528" y="80" font-size="7" font-weight="700">北海道</tspan>
+      <tspan x="528" y="93" font-size="7">32.5千</tspan>
+    </text>
+  </g>
+  <g aria-label="青森 25,672円">
+    <title>青森：25,672円</title>
+    <rect x="491" y="159.5" width="74" height="36" rx="3" fill="#53d984" stroke="#fff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="528" y="175.5" font-size="9" font-weight="700">青森</tspan>
+      <tspan x="528" y="188.5" font-size="7">25.7千</tspan>
+    </text>
+  </g>
+  <g aria-label="岩手 27,270円">
+    <title>岩手：27,270円</title>
+    <rect x="529" y="197.5" width="36" height="36" rx="3" fill="#26c761" stroke="#fff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#ffffff" text-anchor="middle">
+      <tspan x="547" y="213.5" font-size="9" font-weight="700">岩手</tspan>
+      <tspan x="547" y="226.5" font-size="7">27.3千</tspan>
+    </text>
+  </g>
+  <g aria-label="宮城 22,830円">
+    <title>宮城：22,830円</title>
+    <rect x="529" y="236" width="36" height="36" rx="3" fill="#95f1b6" stroke="#fff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="547" y="252" font-size="9" font-weight="700">宮城</tspan>
+      <tspan x="547" y="265" font-size="7">22.8千</tspan>
+    </text>
+  </g>
+  <g aria-label="秋田 23,122円">
+    <title>秋田：23,122円</title>
+    <rect x="491" y="197.5" width="36" height="36" rx="3" fill="#91f1b3" stroke="#fff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="509" y="213.5" font-size="9" font-weight="700">秋田</tspan>
+      <tspan x="509" y="226.5" font-size="7">23.1千</tspan>
+    </text>
+  </g>
+  <g aria-label="山形 31,300円">
+    <title>山形：31,300円</title>
+    <rect x="491" y="236" width="36" height="36" rx="3" fill="#169b47" stroke="#fff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#ffffff" text-anchor="middle">
+      <tspan x="509" y="252" font-size="9" font-weight="700">山形</tspan>
+      <tspan x="509" y="265" font-size="7">31.3千</tspan>
+    </text>
+  </g>
+  <g aria-label="福島 30,674円">
+    <title>福島：30,674円</title>
+    <rect x="491" y="274" width="74" height="36" rx="3" fill="#17a64c" stroke="#fff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#ffffff" text-anchor="middle">
+      <tspan x="528" y="290" font-size="9" font-weight="700">福島</tspan>
+      <tspan x="528" y="303" font-size="7">30.7千</tspan>
+    </text>
+  </g>
+  <g aria-label="茨城 21,865円">
+    <title>茨城：21,865円</title>
+    <rect x="529" y="312.5" width="36" height="36" rx="3" fill="#a4f3c0" stroke="#fff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="547" y="328.5" font-size="9" font-weight="700">茨城</tspan>
+      <tspan x="547" y="341.5" font-size="7">21.9千</tspan>
+    </text>
+  </g>
+  <g aria-label="栃木 21,237円">
+    <title>栃木：21,237円</title>
+    <rect x="491" y="312.5" width="36" height="36" rx="3" fill="#adf5c7" stroke="#fff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="509" y="328.5" font-size="9" font-weight="700">栃木</tspan>
+      <tspan x="509" y="341.5" font-size="7">21.2千</tspan>
+    </text>
+  </g>
+  <g aria-label="群馬 32,289円">
+    <title>群馬：32,289円</title>
+    <rect x="453" y="312.5" width="36" height="36" rx="3" fill="#15853f" stroke="#fff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#ffffff" text-anchor="middle">
+      <tspan x="471" y="328.5" font-size="9" font-weight="700">群馬</tspan>
+      <tspan x="471" y="341.5" font-size="7">32.3千</tspan>
+    </text>
+  </g>
+  <g aria-label="埼玉 31,158円">
+    <title>埼玉：31,158円</title>
+    <rect x="491" y="350.5" width="36" height="36" rx="3" fill="#169e48" stroke="#fff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#ffffff" text-anchor="middle">
+      <tspan x="509" y="366.5" font-size="9" font-weight="700">埼玉</tspan>
+      <tspan x="509" y="379.5" font-size="7">31.2千</tspan>
+    </text>
+  </g>
+  <g aria-label="千葉 24,227円">
+    <title>千葉：24,227円</title>
+    <rect x="529" y="350.5" width="36" height="74" rx="3" fill="#7beba4" stroke="#fff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="547" y="385.5" font-size="9" font-weight="700">千葉</tspan>
+      <tspan x="547" y="398.5" font-size="7">24.2千</tspan>
+    </text>
+  </g>
+  <g aria-label="東京 24,438円">
+    <title>東京：24,438円</title>
+    <rect x="491" y="388.5" width="36" height="36" rx="3" fill="#75e89f" stroke="#fff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="509" y="404.5" font-size="9" font-weight="700">東京</tspan>
+      <tspan x="509" y="417.5" font-size="7">24.4千</tspan>
+    </text>
+  </g>
+  <g aria-label="神奈川 27,158円">
+    <title>神奈川：27,158円</title>
+    <rect x="491" y="427" width="36" height="36" rx="3" fill="#29c863" stroke="#fff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#ffffff" text-anchor="middle">
+      <tspan x="509" y="443" font-size="7" font-weight="700">神奈川</tspan>
+      <tspan x="509" y="456" font-size="7">27.2千</tspan>
+    </text>
+  </g>
+  <g aria-label="新潟 32,991円">
+    <title>新潟：32,991円</title>
+    <rect x="415" y="274" width="74" height="36" rx="3" fill="#157539" stroke="#fff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#ffffff" text-anchor="middle">
+      <tspan x="452" y="290" font-size="9" font-weight="700">新潟</tspan>
+      <tspan x="452" y="303" font-size="7">33.0千</tspan>
+    </text>
+  </g>
+  <g aria-label="富山 27,833円">
+    <title>富山：27,833円</title>
+    <rect x="376" y="274" width="36" height="36" rx="3" fill="#21c15c" stroke="#fff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#ffffff" text-anchor="middle">
+      <tspan x="394" y="290" font-size="9" font-weight="700">富山</tspan>
+      <tspan x="394" y="303" font-size="7">27.8千</tspan>
+    </text>
+  </g>
+  <g aria-label="石川 23,519円">
+    <title>石川：23,519円</title>
+    <rect x="338" y="274" width="36" height="36" rx="3" fill="#8bf0af" stroke="#fff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="356" y="290" font-size="9" font-weight="700">石川</tspan>
+      <tspan x="356" y="303" font-size="7">23.5千</tspan>
+    </text>
+  </g>
+  <g aria-label="福井 32,977円">
+    <title>福井：32,977円</title>
+    <rect x="338" y="312.5" width="36" height="36" rx="3" fill="#157539" stroke="#fff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#ffffff" text-anchor="middle">
+      <tspan x="356" y="328.5" font-size="9" font-weight="700">福井</tspan>
+      <tspan x="356" y="341.5" font-size="7">33.0千</tspan>
+    </text>
+  </g>
+  <g aria-label="山梨 28,717円">
+    <title>山梨：28,717円</title>
+    <rect x="453" y="350.5" width="36" height="36" rx="3" fill="#1eb857" stroke="#fff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#ffffff" text-anchor="middle">
+      <tspan x="471" y="366.5" font-size="9" font-weight="700">山梨</tspan>
+      <tspan x="471" y="379.5" font-size="7">28.7千</tspan>
+    </text>
+  </g>
+  <g aria-label="長野 26,172円">
+    <title>長野：26,172円</title>
+    <rect x="415" y="312.5" width="36" height="74" rx="3" fill="#45d479" stroke="#fff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="433" y="347.5" font-size="9" font-weight="700">長野</tspan>
+      <tspan x="433" y="360.5" font-size="7">26.2千</tspan>
+    </text>
+  </g>
+  <g aria-label="岐阜 30,740円">
+    <title>岐阜：30,740円</title>
+    <rect x="376" y="312.5" width="36" height="74" rx="3" fill="#17a54b" stroke="#fff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#ffffff" text-anchor="middle">
+      <tspan x="394" y="347.5" font-size="9" font-weight="700">岐阜</tspan>
+      <tspan x="394" y="360.5" font-size="7">30.7千</tspan>
+    </text>
+  </g>
+  <g aria-label="静岡 32,317円">
+    <title>静岡：32,317円</title>
+    <rect x="415" y="388.5" width="74" height="36" rx="3" fill="#15843f" stroke="#fff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#ffffff" text-anchor="middle">
+      <tspan x="452" y="404.5" font-size="9" font-weight="700">静岡</tspan>
+      <tspan x="452" y="417.5" font-size="7">32.3千</tspan>
+    </text>
+  </g>
+  <g aria-label="愛知 27,880円">
+    <title>愛知：27,880円</title>
+    <rect x="376" y="388.5" width="36" height="36" rx="3" fill="#20c05b" stroke="#fff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#ffffff" text-anchor="middle">
+      <tspan x="394" y="404.5" font-size="9" font-weight="700">愛知</tspan>
+      <tspan x="394" y="417.5" font-size="7">27.9千</tspan>
+    </text>
+  </g>
+  <g aria-label="三重 26,497円">
+    <title>三重：26,497円</title>
+    <rect x="338" y="388.5" width="36" height="74" rx="3" fill="#3bd072" stroke="#fff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="356" y="423.5" font-size="9" font-weight="700">三重</tspan>
+      <tspan x="356" y="436.5" font-size="7">26.5千</tspan>
+    </text>
+  </g>
+  <g aria-label="滋賀 26,613円">
+    <title>滋賀：26,613円</title>
+    <rect x="338" y="350.5" width="36" height="36" rx="3" fill="#38ce6f" stroke="#fff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="356" y="366.5" font-size="9" font-weight="700">滋賀</tspan>
+      <tspan x="356" y="379.5" font-size="7">26.6千</tspan>
+    </text>
+  </g>
+  <g aria-label="京都 25,814円">
+    <title>京都：25,814円</title>
+    <rect x="262" y="350.5" width="74" height="36" rx="3" fill="#4fd881" stroke="#fff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="299" y="366.5" font-size="9" font-weight="700">京都</tspan>
+      <tspan x="299" y="379.5" font-size="7">25.8千</tspan>
+    </text>
+  </g>
+  <g aria-label="大阪 25,965円">
+    <title>大阪：25,965円</title>
+    <rect x="262" y="388.5" width="36" height="36" rx="3" fill="#4ad67e" stroke="#fff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="280" y="404.5" font-size="9" font-weight="700">大阪</tspan>
+      <tspan x="280" y="417.5" font-size="7">26.0千</tspan>
+    </text>
+  </g>
+  <g aria-label="兵庫 27,253円">
+    <title>兵庫：27,253円</title>
+    <rect x="224" y="350.5" width="36" height="74" rx="3" fill="#26c761" stroke="#fff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#ffffff" text-anchor="middle">
+      <tspan x="242" y="385.5" font-size="9" font-weight="700">兵庫</tspan>
+      <tspan x="242" y="398.5" font-size="7">27.3千</tspan>
+    </text>
+  </g>
+  <g aria-label="奈良 23,738円">
+    <title>奈良：23,738円</title>
+    <rect x="300" y="388.5" width="36" height="36" rx="3" fill="#88efad" stroke="#fff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="318" y="404.5" font-size="9" font-weight="700">奈良</tspan>
+      <tspan x="318" y="417.5" font-size="7">23.7千</tspan>
+    </text>
+  </g>
+  <g aria-label="和歌山 27,219円">
+    <title>和歌山：27,219円</title>
+    <rect x="262" y="427" width="74" height="36" rx="3" fill="#27c762" stroke="#fff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#ffffff" text-anchor="middle">
+      <tspan x="299" y="443" font-size="7" font-weight="700">和歌山</tspan>
+      <tspan x="299" y="456" font-size="7">27.2千</tspan>
+    </text>
+  </g>
+  <g aria-label="鳥取 16,752円">
+    <title>鳥取：16,752円</title>
+    <rect x="185" y="350.5" width="36" height="36" rx="3" fill="#f0fdf4" stroke="#fff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="203" y="366.5" font-size="9" font-weight="700">鳥取</tspan>
+      <tspan x="203" y="379.5" font-size="7">16.8千</tspan>
+    </text>
+  </g>
+  <g aria-label="島根 22,265円">
+    <title>島根：22,265円</title>
+    <rect x="147" y="350.5" width="36" height="36" rx="3" fill="#9ef3bc" stroke="#fff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="165" y="366.5" font-size="9" font-weight="700">島根</tspan>
+      <tspan x="165" y="379.5" font-size="7">22.3千</tspan>
+    </text>
+  </g>
+  <g aria-label="岡山 23,503円">
+    <title>岡山：23,503円</title>
+    <rect x="185" y="388.5" width="36" height="36" rx="3" fill="#8bf0b0" stroke="#fff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="203" y="404.5" font-size="9" font-weight="700">岡山</tspan>
+      <tspan x="203" y="417.5" font-size="7">23.5千</tspan>
+    </text>
+  </g>
+  <g aria-label="広島 26,447円">
+    <title>広島：26,447円</title>
+    <rect x="147" y="388.5" width="36" height="36" rx="3" fill="#3dd073" stroke="#fff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="165" y="404.5" font-size="9" font-weight="700">広島</tspan>
+      <tspan x="165" y="417.5" font-size="7">26.4千</tspan>
+    </text>
+  </g>
+  <g aria-label="山口 17,075円">
+    <title>山口：17,075円</title>
+    <rect x="109" y="350.5" width="36" height="74" rx="3" fill="#ebfcf1" stroke="#fff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="127" y="385.5" font-size="9" font-weight="700">山口</tspan>
+      <tspan x="127" y="398.5" font-size="7">17.1千</tspan>
+    </text>
+  </g>
+  <g aria-label="徳島 23,110円">
+    <title>徳島：23,110円</title>
+    <rect x="185" y="503" width="36" height="36" rx="3" fill="#91f1b4" stroke="#fff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="203" y="519" font-size="9" font-weight="700">徳島</tspan>
+      <tspan x="203" y="532" font-size="7">23.1千</tspan>
+    </text>
+  </g>
+  <g aria-label="香川 19,786円">
+    <title>香川：19,786円</title>
+    <rect x="185" y="465" width="36" height="36" rx="3" fill="#c3f8d5" stroke="#fff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="203" y="481" font-size="9" font-weight="700">香川</tspan>
+      <tspan x="203" y="494" font-size="7">19.8千</tspan>
+    </text>
+  </g>
+  <g aria-label="愛媛 21,709円">
+    <title>愛媛：21,709円</title>
+    <rect x="147" y="465" width="36" height="36" rx="3" fill="#a6f4c2" stroke="#fff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="165" y="481" font-size="9" font-weight="700">愛媛</tspan>
+      <tspan x="165" y="494" font-size="7">21.7千</tspan>
+    </text>
+  </g>
+  <g aria-label="高知 22,137円">
+    <title>高知：22,137円</title>
+    <rect x="147" y="503" width="36" height="36" rx="3" fill="#a0f3bd" stroke="#fff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="165" y="519" font-size="9" font-weight="700">高知</tspan>
+      <tspan x="165" y="532" font-size="7">22.1千</tspan>
+    </text>
+  </g>
+  <g aria-label="福岡 28,099円">
+    <title>福岡：28,099円</title>
+    <rect x="71" y="427" width="36" height="36" rx="3" fill="#20be5a" stroke="#fff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#ffffff" text-anchor="middle">
+      <tspan x="89" y="443" font-size="9" font-weight="700">福岡</tspan>
+      <tspan x="89" y="456" font-size="7">28.1千</tspan>
+    </text>
+  </g>
+  <g aria-label="佐賀 27,529円">
+    <title>佐賀：27,529円</title>
+    <rect x="33" y="427" width="36" height="36" rx="3" fill="#22c45d" stroke="#fff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#ffffff" text-anchor="middle">
+      <tspan x="51" y="443" font-size="9" font-weight="700">佐賀</tspan>
+      <tspan x="51" y="456" font-size="7">27.5千</tspan>
+    </text>
+  </g>
+  <g aria-label="長崎 26,968円">
+    <title>長崎：26,968円</title>
+    <rect x="33" y="465" width="36" height="36" rx="3" fill="#2eca67" stroke="#fff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#ffffff" text-anchor="middle">
+      <tspan x="51" y="481" font-size="9" font-weight="700">長崎</tspan>
+      <tspan x="51" y="494" font-size="7">27.0千</tspan>
+    </text>
+  </g>
+  <g aria-label="熊本 29,148円">
+    <title>熊本：29,148円</title>
+    <rect x="33" y="503" width="36" height="36" rx="3" fill="#1cb454" stroke="#fff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#ffffff" text-anchor="middle">
+      <tspan x="51" y="519" font-size="9" font-weight="700">熊本</tspan>
+      <tspan x="51" y="532" font-size="7">29.1千</tspan>
+    </text>
+  </g>
+  <g aria-label="大分 19,724円">
+    <title>大分：19,724円</title>
+    <rect x="71" y="465" width="36" height="36" rx="3" fill="#c4f8d6" stroke="#fff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#374151" text-anchor="middle">
+      <tspan x="89" y="481" font-size="9" font-weight="700">大分</tspan>
+      <tspan x="89" y="494" font-size="7">19.7千</tspan>
+    </text>
+  </g>
+  <g aria-label="宮崎 34,497円">
+    <title>宮崎：34,497円</title>
+    <rect x="71" y="503" width="36" height="36" rx="3" fill="#14532d" stroke="#fff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#ffffff" text-anchor="middle">
+      <tspan x="89" y="519" font-size="9" font-weight="700">宮崎</tspan>
+      <tspan x="89" y="532" font-size="7">34.5千</tspan>
+    </text>
+  </g>
+  <g aria-label="鹿児島 31,172円">
+    <title>鹿児島：31,172円</title>
+    <rect x="33" y="541.5" width="74" height="36" rx="3" fill="#169e48" stroke="#fff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#ffffff" text-anchor="middle">
+      <tspan x="70" y="557.5" font-size="7" font-weight="700">鹿児島</tspan>
+      <tspan x="70" y="570.5" font-size="7">31.2千</tspan>
+    </text>
+  </g>
+  <g aria-label="沖縄 31,505円">
+    <title>沖縄：31,505円</title>
+    <rect x="33" y="617.5" width="36" height="36" rx="3" fill="#169645" stroke="#fff" stroke-width="1"/>
+    <text font-family="'Noto Sans JP',sans-serif" fill="#ffffff" text-anchor="middle">
+      <tspan x="51" y="633.5" font-size="9" font-weight="700">沖縄</tspan>
+      <tspan x="51" y="646.5" font-size="7">31.5千</tspan>
+    </text>
+  </g>
+  <rect x="420" y="640" width="160" height="12" rx="2" fill="url(#lg_rice)"/>
+  <defs><linearGradient id="lg_rice"><stop offset="0%" stop-color="#f0fdf4"/><stop offset="10%" stop-color="#d6fae2"/><stop offset="20%" stop-color="#bbf7d0"/><stop offset="30%" stop-color="#a1f3be"/><stop offset="40%" stop-color="#86efac"/><stop offset="50%" stop-color="#54da85"/><stop offset="60%" stop-color="#22c55e"/><stop offset="70%" stop-color="#1cb454"/><stop offset="80%" stop-color="#16a34a"/><stop offset="90%" stop-color="#157b3c"/><stop offset="100%" stop-color="#14532d"/></linearGradient></defs>
+  <text x="420" y="664" font-family="'Noto Sans JP',sans-serif" font-size="9" fill="#888">16.8千円</text>
+  <text x="580" y="664" text-anchor="end" font-family="'Noto Sans JP',sans-serif" font-size="9" fill="#888">34.5千円</text>
+</svg>

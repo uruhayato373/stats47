@@ -1,0 +1,29 @@
+<svg width="960" height="478" viewBox="0 0 960 478" xmlns="http://www.w3.org/2000/svg" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" role="img" aria-label="この記事でわかったこと">
+<rect width="960" height="478" fill="#f9fafb"/>
+<text x="480" y="48" text-anchor="middle" font-size="26" font-weight="bold" fill="#1f2937">この記事でわかったこと</text>
+<rect x="50" y="78" width="860" height="80" fill="#ffffff" rx="8"/>
+<circle cx="94" cy="118" r="20" fill="#dc2626"/>
+<text x="94" y="125" text-anchor="middle" font-size="16" font-weight="bold" fill="#fff">1</text>
+<text x="130" y="110" font-size="18" font-weight="bold" fill="#1f2937">米文化圏 vs パン文化圏が明確に存在</text>
+<text x="130" y="136" font-size="16" fill="#4b5563">東北・九州は米、近畿はパン。主食レベルで食文化の地域差がある</text>
+<rect x="50" y="158" width="860" height="80" fill="#f9fafb" rx="8"/>
+<circle cx="94" cy="198" r="20" fill="#ea580c"/>
+<text x="94" y="205" text-anchor="middle" font-size="16" font-weight="bold" fill="#fff">2</text>
+<text x="130" y="190" font-size="18" font-weight="bold" fill="#1f2937">米とパンは負の相関ではない</text>
+<text x="130" y="216" font-size="16" fill="#4b5563">米を食べる県がパンを食べないわけではなく、食費全体の水準が影響する</text>
+<rect x="50" y="238" width="860" height="80" fill="#ffffff" rx="8"/>
+<circle cx="94" cy="278" r="20" fill="#0284c7"/>
+<text x="94" y="285" text-anchor="middle" font-size="16" font-weight="bold" fill="#fff">3</text>
+<text x="130" y="270" font-size="18" font-weight="bold" fill="#1f2937">香川は生うどん・そば消費額で圧倒的1位</text>
+<text x="130" y="296" font-size="16" fill="#4b5563">2位以下に大差をつけ、データが「うどん県」の通称を裏付ける</text>
+<rect x="50" y="318" width="860" height="80" fill="#f9fafb" rx="8"/>
+<circle cx="94" cy="358" r="20" fill="#7c3aed"/>
+<text x="94" y="365" text-anchor="middle" font-size="16" font-weight="bold" fill="#fff">4</text>
+<text x="130" y="350" font-size="18" font-weight="bold" fill="#1f2937">カップ麺1位は青森県</text>
+<text x="130" y="376" font-size="16" fill="#4b5563">東北・北陸など寒冷地が上位を占め、気候や生活スタイルとの関連がうかがえる</text>
+<rect x="50" y="398" width="860" height="80" fill="#ffffff" rx="8"/>
+<circle cx="94" cy="438" r="20" fill="#059669"/>
+<text x="94" y="445" text-anchor="middle" font-size="16" font-weight="bold" fill="#fff">5</text>
+<text x="130" y="430" font-size="18" font-weight="bold" fill="#1f2937">食の地域差は消費「額」だけでは測れない</text>
+<text x="130" y="456" font-size="16" fill="#4b5563">支出額は物価や所得の影響を受ける。消費「量」とは異なる点に注意が必要</text>
+</svg>

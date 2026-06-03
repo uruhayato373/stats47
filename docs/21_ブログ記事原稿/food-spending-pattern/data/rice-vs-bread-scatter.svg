@@ -1,0 +1,96 @@
+<svg width="700" height="560" viewBox="0 0 560 560" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="米の消費額 × パンの消費額">
+  <title>米の消費額 × パンの消費額</title>
+  <rect width="560" height="560" fill="#fafafa" rx="8"/>
+  <text x="280" y="28" text-anchor="middle" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="16" font-weight="bold" fill="#333">米の消費額 × パンの消費額</text>
+  <rect x="70" y="60" width="460" height="450" fill="#f9fafb" stroke="#d1d5db"/>
+  <line x1="70" y1="60" x2="70" y2="510" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="70" y="526" text-anchor="middle" font-family="'Noto Sans JP',sans-serif" font-size="9" fill="#6b7280">15千</text>
+  <line x1="185" y1="60" x2="185" y2="510" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="185" y="526" text-anchor="middle" font-family="'Noto Sans JP',sans-serif" font-size="9" fill="#6b7280">20千</text>
+  <line x1="300" y1="60" x2="300" y2="510" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="300" y="526" text-anchor="middle" font-family="'Noto Sans JP',sans-serif" font-size="9" fill="#6b7280">25千</text>
+  <line x1="415" y1="60" x2="415" y2="510" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="415" y="526" text-anchor="middle" font-family="'Noto Sans JP',sans-serif" font-size="9" fill="#6b7280">30千</text>
+  <line x1="530" y1="60" x2="530" y2="510" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="530" y="526" text-anchor="middle" font-family="'Noto Sans JP',sans-serif" font-size="9" fill="#6b7280">35千</text>
+  <line x1="70" y1="510" x2="530" y2="510" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="64" y="513" text-anchor="end" font-family="'Noto Sans JP',sans-serif" font-size="9" fill="#6b7280">25千</text>
+  <line x1="70" y1="397.5" x2="530" y2="397.5" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="64" y="400.5" text-anchor="end" font-family="'Noto Sans JP',sans-serif" font-size="9" fill="#6b7280">30千</text>
+  <line x1="70" y1="285" x2="530" y2="285" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="64" y="288" text-anchor="end" font-family="'Noto Sans JP',sans-serif" font-size="9" fill="#6b7280">35千</text>
+  <line x1="70" y1="172.5" x2="530" y2="172.5" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="64" y="175.5" text-anchor="end" font-family="'Noto Sans JP',sans-serif" font-size="9" fill="#6b7280">40千</text>
+  <line x1="70" y1="60" x2="530" y2="60" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="64" y="63" text-anchor="end" font-family="'Noto Sans JP',sans-serif" font-size="9" fill="#6b7280">45千</text>
+  <text x="300" y="552" text-anchor="middle" font-family="'Noto Sans JP',sans-serif" font-size="11" fill="#374151">米（円）</text>
+  <text x="14" y="285" text-anchor="middle" font-family="'Noto Sans JP',sans-serif" font-size="11" fill="#374151" transform="rotate(-90,14,285)">パン（計）（円）</text>
+  <line x1="333.47282978723405" y1="60" x2="333.47282978723405" y2="510" stroke="#9ca3af" stroke-dasharray="4,3" opacity="0.6"/>
+  <line x1="70" y1="299.29324468085105" x2="530" y2="299.29324468085105" stroke="#9ca3af" stroke-dasharray="4,3" opacity="0.6"/>
+  <text x="526" y="72" text-anchor="end" font-family="'Noto Sans JP',sans-serif" font-size="9" fill="#9ca3af">r = -0.13</text>
+  <circle cx="518.431" cy="389.85" r="4.5" fill="#ab47bc" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>宮崎県</title></circle>
+  <text x="524.431" y="383.85" font-family="'Noto Sans JP',sans-serif" font-size="8" fill="#374151">宮崎</text>
+  <circle cx="483.793" cy="268.035" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>新潟県</title></circle>
+  <text x="489.793" y="262.035" font-family="'Noto Sans JP',sans-serif" font-size="8" fill="#374151">新潟</text>
+  <circle cx="483.471" cy="307.8375" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>福井県</title></circle>
+  <circle cx="472.27000000000004" cy="356.46000000000004" r="4.5" fill="#42a5f5" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>北海道</title></circle>
+  <text x="478.27000000000004" y="350.46000000000004" font-family="'Noto Sans JP',sans-serif" font-size="8" fill="#374151">北海道</text>
+  <circle cx="468.291" cy="355.1775" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>静岡県</title></circle>
+  <circle cx="467.64700000000005" cy="299.60249999999996" r="4.5" fill="#66bb6a" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>群馬県</title></circle>
+  <circle cx="449.615" cy="400.4475" r="4.5" fill="#ab47bc" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>沖縄県</title></circle>
+  <text x="455.615" y="394.4475" font-family="'Noto Sans JP',sans-serif" font-size="8" fill="#374151">沖縄</text>
+  <circle cx="444.9" cy="391.1775" r="4.5" fill="#42a5f5" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>山形県</title></circle>
+  <text x="450.9" y="385.1775" font-family="'Noto Sans JP',sans-serif" font-size="8" fill="#374151">山形</text>
+  <circle cx="441.956" cy="356.39250000000004" r="4.5" fill="#ab47bc" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>鹿児島県</title></circle>
+  <circle cx="441.63399999999996" cy="242.54249999999996" r="4.5" fill="#66bb6a" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>埼玉県</title></circle>
+  <text x="447.63399999999996" y="236.54249999999996" font-family="'Noto Sans JP',sans-serif" font-size="8" fill="#374151">埼玉</text>
+  <circle cx="432.02000000000004" cy="269.7675" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>岐阜県</title></circle>
+  <circle cx="430.50199999999995" cy="364.38" r="4.5" fill="#42a5f5" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>福島県</title></circle>
+  <text x="436.50199999999995" y="358.38" font-family="'Noto Sans JP',sans-serif" font-size="8" fill="#374151">福島</text>
+  <circle cx="395.404" cy="349.64250000000004" r="4.5" fill="#ab47bc" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>熊本県</title></circle>
+  <circle cx="385.491" cy="373.11" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>山梨県</title></circle>
+  <circle cx="371.277" cy="315.69" r="4.5" fill="#ab47bc" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>福岡県</title></circle>
+  <circle cx="366.24" cy="176.77499999999998" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>愛知県</title></circle>
+  <circle cx="365.15900000000005" cy="256.11" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>富山県</title></circle>
+  <text x="371.15900000000005" y="250.11" font-family="'Noto Sans JP',sans-serif" font-size="8" fill="#374151">富山</text>
+  <circle cx="358.167" cy="339.27" r="4.5" fill="#ab47bc" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>佐賀県</title></circle>
+  <circle cx="352.21000000000004" cy="443.85" r="4.5" fill="#42a5f5" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>岩手県</title></circle>
+  <circle cx="351.819" cy="103.9425" r="4.5" fill="#ffa726" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>兵庫県</title></circle>
+  <text x="357.819" y="97.9425" font-family="'Noto Sans JP',sans-serif" font-size="8" fill="#374151">兵庫</text>
+  <circle cx="351.037" cy="279.89250000000004" r="4.5" fill="#ffa726" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>和歌山県</title></circle>
+  <circle cx="349.634" cy="266.48249999999996" r="4.5" fill="#66bb6a" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>神奈川県</title></circle>
+  <circle cx="345.264" cy="265.11" r="4.5" fill="#ab47bc" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>長崎県</title></circle>
+  <circle cx="337.099" cy="231.8775" r="4.5" fill="#ffa726" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>滋賀県</title></circle>
+  <circle cx="334.431" cy="276.3375" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>三重県</title></circle>
+  <circle cx="333.281" cy="209.39999999999998" r="4.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>広島県</title></circle>
+  <circle cx="326.956" cy="347.19" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>長野県</title></circle>
+  <text x="332.956" y="341.19" font-family="'Noto Sans JP',sans-serif" font-size="8" fill="#374151">長野</text>
+  <circle cx="322.195" cy="169.41750000000002" r="4.5" fill="#ffa726" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>大阪府</title></circle>
+  <circle cx="318.722" cy="227.805" r="4.5" fill="#ffa726" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>京都府</title></circle>
+  <text x="324.722" y="221.805" font-family="'Noto Sans JP',sans-serif" font-size="8" fill="#374151">京都</text>
+  <circle cx="315.456" cy="371.5125" r="4.5" fill="#42a5f5" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>青森県</title></circle>
+  <text x="321.456" y="365.5125" font-family="'Noto Sans JP',sans-serif" font-size="8" fill="#374151">青森</text>
+  <circle cx="287.07399999999996" cy="229.42499999999995" r="4.5" fill="#66bb6a" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>東京都</title></circle>
+  <text x="293.07399999999996" y="223.42499999999995" font-family="'Noto Sans JP',sans-serif" font-size="8" fill="#374151">東京</text>
+  <circle cx="282.221" cy="220.47000000000003" r="4.5" fill="#66bb6a" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>千葉県</title></circle>
+  <circle cx="270.97400000000005" cy="250.26" r="4.5" fill="#ffa726" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>奈良県</title></circle>
+  <text x="276.97400000000005" y="244.26" font-family="'Noto Sans JP',sans-serif" font-size="8" fill="#374151">奈良</text>
+  <circle cx="265.937" cy="285.47249999999997" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>石川県</title></circle>
+  <circle cx="265.56899999999996" cy="185.59500000000003" r="4.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>岡山県</title></circle>
+  <circle cx="256.80600000000004" cy="468.105" r="4.5" fill="#42a5f5" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>秋田県</title></circle>
+  <text x="262.80600000000004" y="462.105" font-family="'Noto Sans JP',sans-serif" font-size="8" fill="#374151">秋田</text>
+  <circle cx="256.53" cy="204.09000000000003" r="4.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>徳島県</title></circle>
+  <circle cx="250.09" cy="355.4925" r="4.5" fill="#42a5f5" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>宮城県</title></circle>
+  <text x="256.09000000000003" y="349.4925" font-family="'Noto Sans JP',sans-serif" font-size="8" fill="#374151">宮城</text>
+  <circle cx="237.095" cy="294.17999999999995" r="4.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>島根県</title></circle>
+  <circle cx="234.151" cy="315.75750000000005" r="4.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>高知県</title></circle>
+  <circle cx="227.895" cy="384.02250000000004" r="4.5" fill="#66bb6a" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>茨城県</title></circle>
+  <circle cx="224.30700000000002" cy="278.9475" r="4.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>愛媛県</title></circle>
+  <circle cx="213.451" cy="372.5475" r="4.5" fill="#66bb6a" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>栃木県</title></circle>
+  <circle cx="180.078" cy="261.0825" r="4.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>香川県</title></circle>
+  <text x="186.078" y="255.08249999999998" font-family="'Noto Sans JP',sans-serif" font-size="8" fill="#374151">香川</text>
+  <circle cx="178.652" cy="352.5675" r="4.5" fill="#ab47bc" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>大分県</title></circle>
+  <circle cx="117.725" cy="339.74249999999995" r="4.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>山口県</title></circle>
+  <circle cx="110.29599999999999" cy="263.94000000000005" r="4.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>鳥取県</title></circle>
+  <text x="116.29599999999999" y="257.94000000000005" font-family="'Noto Sans JP',sans-serif" font-size="8" fill="#374151">鳥取</text>
+</svg>
