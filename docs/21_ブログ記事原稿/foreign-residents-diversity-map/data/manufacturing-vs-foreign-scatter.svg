@@ -1,0 +1,107 @@
+<svg width="600" height="480" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 480" role="img" aria-label="製造品出荷額（1人当たり）× 外国人人口（10万人当たり）">
+  <title>製造品出荷額（1人当たり）× 外国人人口（10万人当たり）</title>
+  <rect width="600" height="480" fill="#f9fafb"/>
+  <text x="300" y="22" text-anchor="middle" font-family="'Noto Sans JP',sans-serif" font-size="14" font-weight="bold" fill="#333">製造品出荷額（1人当たり）× 外国人人口（10万人当たり）</text>
+  <line x1="70" y1="420" x2="570" y2="420" stroke="#e5e7eb" stroke-width="0.5"/>
+  <line x1="70" y1="370.19369120088544" x2="570" y2="370.19369120088544" stroke="#e5e7eb" stroke-width="0.5"/>
+  <line x1="70" y1="320.3873824017709" x2="570" y2="320.3873824017709" stroke="#e5e7eb" stroke-width="0.5"/>
+  <line x1="70" y1="270.5810736026564" x2="570" y2="270.5810736026564" stroke="#e5e7eb" stroke-width="0.5"/>
+  <line x1="70" y1="220.77476480354176" x2="570" y2="220.77476480354176" stroke="#e5e7eb" stroke-width="0.5"/>
+  <line x1="70" y1="170.96845600442722" x2="570" y2="170.96845600442722" stroke="#e5e7eb" stroke-width="0.5"/>
+  <line x1="70" y1="121.16214720531269" x2="570" y2="121.16214720531269" stroke="#e5e7eb" stroke-width="0.5"/>
+  <line x1="70" y1="71.35583840619813" x2="570" y2="71.35583840619813" stroke="#e5e7eb" stroke-width="0.5"/>
+  <line x1="70" y1="60" x2="70" y2="420" stroke="#e5e7eb" stroke-width="0.5"/>
+  <line x1="125.55555555555554" y1="60" x2="125.55555555555554" y2="420" stroke="#e5e7eb" stroke-width="0.5"/>
+  <line x1="181.1111111111111" y1="60" x2="181.1111111111111" y2="420" stroke="#e5e7eb" stroke-width="0.5"/>
+  <line x1="236.66666666666666" y1="60" x2="236.66666666666666" y2="420" stroke="#e5e7eb" stroke-width="0.5"/>
+  <line x1="292.2222222222222" y1="60" x2="292.2222222222222" y2="420" stroke="#e5e7eb" stroke-width="0.5"/>
+  <line x1="347.77777777777777" y1="60" x2="347.77777777777777" y2="420" stroke="#e5e7eb" stroke-width="0.5"/>
+  <line x1="403.3333333333333" y1="60" x2="403.3333333333333" y2="420" stroke="#e5e7eb" stroke-width="0.5"/>
+  <line x1="458.8888888888889" y1="60" x2="458.8888888888889" y2="420" stroke="#e5e7eb" stroke-width="0.5"/>
+  <line x1="514.4444444444443" y1="60" x2="514.4444444444443" y2="420" stroke="#e5e7eb" stroke-width="0.5"/>
+  <line x1="570" y1="60" x2="570" y2="420" stroke="#e5e7eb" stroke-width="0.5"/>
+  <line x1="70" y1="420" x2="570" y2="420" stroke="#9ca3af" stroke-width="1"/>
+  <line x1="70" y1="60" x2="70" y2="420" stroke="#9ca3af" stroke-width="1"/>
+  <text x="70" y="438" text-anchor="middle" font-family="'Noto Sans JP',sans-serif" font-size="9" fill="#6b7280">0</text>
+  <text x="125.55555555555554" y="438" text-anchor="middle" font-family="'Noto Sans JP',sans-serif" font-size="9" fill="#6b7280">1</text>
+  <text x="181.1111111111111" y="438" text-anchor="middle" font-family="'Noto Sans JP',sans-serif" font-size="9" fill="#6b7280">2</text>
+  <text x="236.66666666666666" y="438" text-anchor="middle" font-family="'Noto Sans JP',sans-serif" font-size="9" fill="#6b7280">3</text>
+  <text x="292.2222222222222" y="438" text-anchor="middle" font-family="'Noto Sans JP',sans-serif" font-size="9" fill="#6b7280">4</text>
+  <text x="347.77777777777777" y="438" text-anchor="middle" font-family="'Noto Sans JP',sans-serif" font-size="9" fill="#6b7280">5</text>
+  <text x="403.3333333333333" y="438" text-anchor="middle" font-family="'Noto Sans JP',sans-serif" font-size="9" fill="#6b7280">6</text>
+  <text x="458.8888888888889" y="438" text-anchor="middle" font-family="'Noto Sans JP',sans-serif" font-size="9" fill="#6b7280">7</text>
+  <text x="514.4444444444443" y="438" text-anchor="middle" font-family="'Noto Sans JP',sans-serif" font-size="9" fill="#6b7280">8</text>
+  <text x="570" y="438" text-anchor="middle" font-family="'Noto Sans JP',sans-serif" font-size="9" fill="#6b7280">9</text>
+  <text x="300" y="472" text-anchor="middle" font-family="'Noto Sans JP',sans-serif" font-size="11" fill="#374151">製造品出荷額等（1人当たり・百万円）</text>
+  <text x="62" y="424" text-anchor="end" font-family="'Noto Sans JP',sans-serif" font-size="9" fill="#6b7280">0</text>
+  <text x="62" y="374.19369120088544" text-anchor="end" font-family="'Noto Sans JP',sans-serif" font-size="9" fill="#6b7280">500</text>
+  <text x="62" y="324.3873824017709" text-anchor="end" font-family="'Noto Sans JP',sans-serif" font-size="9" fill="#6b7280">1,000</text>
+  <text x="62" y="274.5810736026564" text-anchor="end" font-family="'Noto Sans JP',sans-serif" font-size="9" fill="#6b7280">1,500</text>
+  <text x="62" y="224.77476480354176" text-anchor="end" font-family="'Noto Sans JP',sans-serif" font-size="9" fill="#6b7280">2,000</text>
+  <text x="62" y="174.96845600442722" text-anchor="end" font-family="'Noto Sans JP',sans-serif" font-size="9" fill="#6b7280">2,500</text>
+  <text x="62" y="125.16214720531269" text-anchor="end" font-family="'Noto Sans JP',sans-serif" font-size="9" fill="#6b7280">3,000</text>
+  <text x="62" y="75.35583840619813" text-anchor="end" font-family="'Noto Sans JP',sans-serif" font-size="9" fill="#6b7280">3,500</text>
+  <text x="14" y="240" text-anchor="middle" font-family="'Noto Sans JP',sans-serif" font-size="11" fill="#374151" transform="rotate(-90,14,240)">外国人人口（10万人当たり）</text>
+  <line x1="70" y1="344.14646026935634" x2="570" y2="158.6763974182009" stroke="#ef4444" stroke-width="1.5" stroke-dasharray="6,3" opacity="0.6"/>
+  <circle cx="356.11111111111114" cy="145.5174322080797" r="5" fill="#2563eb" stroke="#1d4ed8" stroke-width="1" opacity="0.85"><title>群馬：製造品出荷額 5.15百万円/人、外国人 2755.5人/10万人</title></circle>
+  <text x="363.11111111111114" y="139.5174322080797" text-anchor="start" font-family="'Noto Sans JP',sans-serif" font-size="8" fill="#1f2937" font-weight="600">群馬</text>
+  <circle cx="186.66666666666669" cy="201.05146651909243" r="5" fill="#2563eb" stroke="#1d4ed8" stroke-width="1" opacity="0.85"><title>埼玉：製造品出荷額 2.10百万円/人、外国人 2198人/10万人</title></circle>
+  <text x="179.66666666666669" y="197.05146651909243" text-anchor="end" font-family="'Noto Sans JP',sans-serif" font-size="8" fill="#1f2937" font-weight="600">埼玉</text>
+  <circle cx="206.11111111111111" cy="194.63641394576644" r="5" fill="#2563eb" stroke="#1d4ed8" stroke-width="1" opacity="0.85"><title>千葉：製造品出荷額 2.45百万円/人、外国人 2262.4人/10万人</title></circle>
+  <text x="213.11111111111111" y="190.63641394576644" text-anchor="start" font-family="'Noto Sans JP',sans-serif" font-size="8" fill="#1f2937" font-weight="600">千葉</text>
+  <circle cx="105" cy="77.23298284449368" r="5" fill="#2563eb" stroke="#1d4ed8" stroke-width="1" opacity="0.85"><title>東京：製造品出荷額 0.63百万円/人、外国人 3441人/10万人</title></circle>
+  <text x="112" y="81.23298284449368" text-anchor="start" font-family="'Noto Sans JP',sans-serif" font-size="8" fill="#1f2937" font-weight="600">東京</text>
+  <circle cx="182.22222222222223" cy="209.14001106806862" r="5" fill="#2563eb" stroke="#1d4ed8" stroke-width="1" opacity="0.85"><title>神奈川：製造品出荷額 2.02百万円/人、外国人 2116.8人/10万人</title></circle>
+  <text x="189.22222222222223" y="221.14001106806862" text-anchor="start" font-family="'Noto Sans JP',sans-serif" font-size="8" fill="#1f2937" font-weight="600">神奈川</text>
+  <circle cx="202.77777777777777" cy="351.99446596568896" r="3.5" fill="#93c5fd" stroke="#60a5fa" stroke-width="1" opacity="0.85"><title>新潟：製造品出荷額 2.39百万円/人、外国人 682.7人/10万人</title></circle>
+  <circle cx="286.6666666666667" cy="262.8411732152739" r="3.5" fill="#93c5fd" stroke="#60a5fa" stroke-width="1" opacity="0.85"><title>富山：製造品出荷額 3.90百万円/人、外国人 1577.7人/10万人</title></circle>
+  <circle cx="225" cy="299.62811289429993" r="3.5" fill="#93c5fd" stroke="#60a5fa" stroke-width="1" opacity="0.85"><title>石川：製造品出荷額 2.79百万円/人、外国人 1208.4人/10万人</title></circle>
+  <circle cx="257.77777777777777" cy="240.79690094078583" r="3.5" fill="#93c5fd" stroke="#60a5fa" stroke-width="1" opacity="0.85"><title>福井：製造品出荷額 3.38百万円/人、外国人 1799人/10万人</title></circle>
+  <circle cx="251.66666666666666" cy="247.9092418372994" r="3.5" fill="#93c5fd" stroke="#60a5fa" stroke-width="1" opacity="0.85"><title>山梨：製造品出荷額 3.27百万円/人、外国人 1727.6人/10万人</title></circle>
+  <circle cx="256.1111111111111" cy="266.83563918096297" r="3.5" fill="#93c5fd" stroke="#60a5fa" stroke-width="1" opacity="0.85"><title>長野：製造品出荷額 3.35百万円/人、外国人 1537.6人/10万人</title></circle>
+  <circle cx="254.44444444444443" cy="173.42888765910345" r="5" fill="#2563eb" stroke="#1d4ed8" stroke-width="1" opacity="0.85"><title>岐阜：製造品出荷額 3.32百万円/人、外国人 2475.3人/10万人</title></circle>
+  <text x="247.44444444444443" y="167.42888765910345" text-anchor="end" font-family="'Noto Sans JP',sans-serif" font-size="8" fill="#1f2937" font-weight="600">岐阜</text>
+  <circle cx="367.7777777777778" cy="184.08743774211396" r="5" fill="#2563eb" stroke="#1d4ed8" stroke-width="1" opacity="0.85"><title>静岡：製造品出荷額 5.36百万円/人、外国人 2368.3人/10万人</title></circle>
+  <text x="374.7777777777778" y="196.08743774211396" text-anchor="start" font-family="'Noto Sans JP',sans-serif" font-size="8" fill="#1f2937" font-weight="600">静岡</text>
+  <circle cx="499.44444444444446" cy="114.42833425567238" r="5" fill="#2563eb" stroke="#1d4ed8" stroke-width="1" opacity="0.85"><title>愛知：製造品出荷額 7.73百万円/人、外国人 3067.6人/10万人</title></circle>
+  <text x="492.44444444444446" y="108.42833425567238" text-anchor="end" font-family="'Noto Sans JP',sans-serif" font-size="8" fill="#1f2937" font-weight="600">愛知</text>
+  <circle cx="448.3333333333333" cy="168.35860542335365" r="5" fill="#2563eb" stroke="#1d4ed8" stroke-width="1" opacity="0.85"><title>三重：製造品出荷額 6.81百万円/人、外国人 2526.2人/10万人</title></circle>
+  <text x="441.3333333333333" y="172.35860542335365" text-anchor="end" font-family="'Noto Sans JP',sans-serif" font-size="8" fill="#1f2937" font-weight="600">三重</text>
+  <circle cx="430.5555555555556" cy="217.73657996679577" r="5" fill="#2563eb" stroke="#1d4ed8" stroke-width="1" opacity="0.85"><title>滋賀：製造品出荷額 6.49百万円/人、外国人 2030.5人/10万人</title></circle>
+  <text x="437.5555555555556" y="213.73657996679577" text-anchor="start" font-family="'Noto Sans JP',sans-serif" font-size="8" fill="#1f2937" font-weight="600">滋賀</text>
+  <circle cx="207.77777777777777" cy="217.37797454344218" r="3.5" fill="#93c5fd" stroke="#60a5fa" stroke-width="1" opacity="0.85"><title>京都：製造品出荷額 2.48百万円/人、外国人 2034.1人/10万人</title></circle>
+  <circle cx="191.66666666666666" cy="184.78472606530158" r="5" fill="#2563eb" stroke="#1d4ed8" stroke-width="1" opacity="0.85"><title>大阪：製造品出荷額 2.19百万円/人、外国人 2361.3人/10万人</title></circle>
+  <text x="198.66666666666666" y="188.78472606530158" text-anchor="start" font-family="'Noto Sans JP',sans-serif" font-size="8" fill="#1f2937" font-weight="600">大阪</text>
+  <circle cx="255.55555555555554" cy="260.9086884338683" r="3.5" fill="#93c5fd" stroke="#60a5fa" stroke-width="1" opacity="0.85"><title>兵庫：製造品出荷額 3.34百万円/人、外国人 1597.1人/10万人</title></circle>
+  <circle cx="152.77777777777777" cy="333.4764803541782" r="3.5" fill="#93c5fd" stroke="#60a5fa" stroke-width="1" opacity="0.85"><title>奈良：製造品出荷額 1.49百万円/人、外国人 868.6人/10万人</title></circle>
+  <circle cx="237.77777777777777" cy="354.90315439955725" r="3.5" fill="#93c5fd" stroke="#60a5fa" stroke-width="1" opacity="0.85"><title>和歌山：製造品出荷額 3.02百万円/人、外国人 653.5人/10万人</title></circle>
+  <circle cx="156.66666666666669" cy="342.42169341449915" r="3.5" fill="#93c5fd" stroke="#60a5fa" stroke-width="1" opacity="0.85"><title>鳥取：製造品出荷額 1.56百万円/人、外国人 778.8人/10万人</title></circle>
+  <circle cx="181.1111111111111" cy="297.84504703929167" r="3.5" fill="#93c5fd" stroke="#60a5fa" stroke-width="1" opacity="0.85"><title>島根：製造品出荷額 2.00百万円/人、外国人 1226.3人/10万人</title></circle>
+  <circle cx="348.3333333333333" cy="287.51521859435525" r="3.5" fill="#93c5fd" stroke="#60a5fa" stroke-width="1" opacity="0.85"><title>岡山：製造品出荷額 5.01百万円/人、外国人 1330人/10万人</title></circle>
+  <circle cx="294.44444444444446" cy="250.17044825677917" r="3.5" fill="#93c5fd" stroke="#60a5fa" stroke-width="1" opacity="0.85"><title>広島：製造品出荷額 4.04百万円/人、外国人 1704.9人/10万人</title></circle>
+  <circle cx="380" cy="313.28500276701715" r="3.5" fill="#93c5fd" stroke="#60a5fa" stroke-width="1" opacity="0.85"><title>山口：製造品出荷額 5.58百万円/人、外国人 1071.3人/10万人</title></circle>
+  <circle cx="242.77777777777777" cy="350.32097399003874" r="3.5" fill="#93c5fd" stroke="#60a5fa" stroke-width="1" opacity="0.85"><title>徳島：製造品出荷額 3.11百万円/人、外国人 699.5人/10万人</title></circle>
+  <circle cx="246.11111111111111" cy="306.2224681793027" r="3.5" fill="#93c5fd" stroke="#60a5fa" stroke-width="1" opacity="0.85"><title>香川：製造品出荷額 3.17百万円/人、外国人 1142.2人/10万人</title></circle>
+  <circle cx="295.55555555555554" cy="336.7238516878805" r="3.5" fill="#93c5fd" stroke="#60a5fa" stroke-width="1" opacity="0.85"><title>愛媛：製造品出荷額 4.06百万円/人、外国人 836人/10万人</title></circle>
+  <circle cx="120.55555555555556" cy="359.2163807415606" r="3.5" fill="#93c5fd" stroke="#60a5fa" stroke-width="1" opacity="0.85"><title>高知：製造品出荷額 0.91百万円/人、外国人 610.2人/10万人</title></circle>
+  <circle cx="196.11111111111111" cy="290.6131710016602" r="3.5" fill="#93c5fd" stroke="#60a5fa" stroke-width="1" opacity="0.85"><title>福岡：製造品出荷額 2.27百万円/人、外国人 1298.9人/10万人</title></circle>
+  <circle cx="225.55555555555557" cy="347.0835639180963" r="3.5" fill="#93c5fd" stroke="#60a5fa" stroke-width="1" opacity="0.85"><title>佐賀：製造品出荷額 2.80百万円/人、外国人 732人/10万人</title></circle>
+  <circle cx="145" cy="356.8754842280022" r="3.5" fill="#93c5fd" stroke="#60a5fa" stroke-width="1" opacity="0.85"><title>長崎：製造品出荷額 1.35百万円/人、外国人 633.7人/10万人</title></circle>
+  <circle cx="178.88888888888889" cy="336.3851687880465" r="3.5" fill="#93c5fd" stroke="#60a5fa" stroke-width="1" opacity="0.85"><title>熊本：製造品出荷額 1.96百万円/人、外国人 839.4人/10万人</title></circle>
+  <circle cx="342.22222222222223" cy="329.88046485888214" r="3.5" fill="#93c5fd" stroke="#60a5fa" stroke-width="1" opacity="0.85"><title>大分：製造品出荷額 4.90百万円/人、外国人 904.7人/10万人</title></circle>
+  <circle cx="162.77777777777777" cy="359.70448256779196" r="3.5" fill="#93c5fd" stroke="#60a5fa" stroke-width="1" opacity="0.85"><title>宮崎：製造品出荷額 1.67百万円/人、外国人 605.3人/10万人</title></circle>
+  <circle cx="152.22222222222223" cy="357.0448256779192" r="3.5" fill="#93c5fd" stroke="#60a5fa" stroke-width="1" opacity="0.85"><title>鹿児島：製造品出荷額 1.48百万円/人、外国人 632人/10万人</title></circle>
+  <circle cx="89.44444444444444" cy="296.7493082457111" r="5" fill="#2563eb" stroke="#1d4ed8" stroke-width="1" opacity="0.85"><title>沖縄：製造品出荷額 0.35百万円/人、外国人 1237.3人/10万人</title></circle>
+  <text x="96.44444444444444" y="308.7493082457111" text-anchor="start" font-family="'Noto Sans JP',sans-serif" font-size="8" fill="#1f2937" font-weight="600">沖縄</text>
+  <circle cx="140.55555555555554" cy="354.5644714997233" r="3.5" fill="#93c5fd" stroke="#60a5fa" stroke-width="1" opacity="0.85"><title>北海道：製造品出荷額 1.27百万円/人、外国人 656.9人/10万人</title></circle>
+  <circle cx="143.88888888888889" cy="376.4792473713337" r="5" fill="#2563eb" stroke="#1d4ed8" stroke-width="1" opacity="0.85"><title>青森：製造品出荷額 1.33百万円/人、外国人 436.9人/10万人</title></circle>
+  <text x="136.88888888888889" y="380.4792473713337" text-anchor="end" font-family="'Noto Sans JP',sans-serif" font-size="8" fill="#1f2937" font-weight="600">青森</text>
+  <circle cx="206.66666666666666" cy="362.9120088544549" r="3.5" fill="#93c5fd" stroke="#60a5fa" stroke-width="1" opacity="0.85"><title>岩手：製造品出荷額 2.46百万円/人、外国人 573.1人/10万人</title></circle>
+  <circle cx="200.55555555555557" cy="335.8273381294964" r="3.5" fill="#93c5fd" stroke="#60a5fa" stroke-width="1" opacity="0.85"><title>宮城：製造品出荷額 2.35百万円/人、外国人 845人/10万人</title></circle>
+  <circle cx="156.11111111111111" cy="382.0973990038738" r="5" fill="#2563eb" stroke="#1d4ed8" stroke-width="1" opacity="0.85"><title>秋田：製造品出荷額 1.55百万円/人、外国人 380.5人/10万人</title></circle>
+  <text x="163.11111111111111" y="394.0973990038738" text-anchor="start" font-family="'Noto Sans JP',sans-serif" font-size="8" fill="#1f2937" font-weight="600">秋田</text>
+  <circle cx="237.22222222222223" cy="353.31931377974547" r="3.5" fill="#93c5fd" stroke="#60a5fa" stroke-width="1" opacity="0.85"><title>山形：製造品出荷額 3.01百万円/人、外国人 669.4人/10万人</title></circle>
+  <circle cx="235" cy="350.0719424460432" r="3.5" fill="#93c5fd" stroke="#60a5fa" stroke-width="1" opacity="0.85"><title>福島：製造品出荷額 2.97百万円/人、外国人 702人/10万人</title></circle>
+  <circle cx="356.6666666666667" cy="219.11123408965133" r="3.5" fill="#93c5fd" stroke="#60a5fa" stroke-width="1" opacity="0.85"><title>茨城：製造品出荷額 5.16百万円/人、外国人 2016.7人/10万人</title></circle>
+  <circle cx="348.88888888888886" cy="227.23962368566686" r="3.5" fill="#93c5fd" stroke="#60a5fa" stroke-width="1" opacity="0.85"><title>栃木：製造品出荷額 5.02百万円/人、外国人 1935.1人/10万人</title></circle>
+</svg>
