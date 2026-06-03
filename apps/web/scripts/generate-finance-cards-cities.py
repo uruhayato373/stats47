@@ -26,31 +26,41 @@ LEFT = {"歳入総額":"revenue","歳出総額":"expenditure","実質収支":"re
 RIGHT = {"標準財政規模":"standardScale","財政力指数":"fiscalIndex","実質公債費比率":"debtServiceRatio","将来負担比率":"futureBurdenRatio","地方債現在高":"localDebt"}
 
 def parse_sheet(ws):
+    # read_only 単一パス: 非空セルを辞書化してから O(1) 参照
+    cells = {}
+    labels = []  # (row, col, normtext)
+    for row in ws.iter_rows():
+        for c in row:
+            v = c.value
+            if v is None: continue
+            cells[(c.row, c.column)] = v
+            if isinstance(v, str):
+                n = norm(v)
+                if n: labels.append((c.row, c.column, n))
+    def get(r, col):
+        return cells.get((r, col))
     out = {}
     fund_row = None
     keiyo = None
-    for row in ws.iter_rows():
-        for c in row:
-            n = norm(c.value)
-            if not n: continue
-            if n in LEFT and LEFT[n] not in out:
-                v = ws.cell(row=c.row, column=CO).value
-                if isinstance(v,(int,float)): out[LEFT[n]] = v
-            elif n in RIGHT and RIGHT[n] not in out:
-                v = ws.cell(row=c.row, column=CS).value
-                if isinstance(v,(int,float)): out[RIGHT[n]] = v
-            elif n == "積立金現在高" and fund_row is None:
-                fund_row = c.row
-            elif n == "経常収支比率" and keiyo is None:
-                for dr in (0,1):
-                    for dc in range(1,9):
-                        v = ws.cell(row=c.row+dr, column=c.column+dc).value
-                        if isinstance(v,(int,float)) and 40<=v<=150:
-                            keiyo = v; break
-                    if keiyo is not None: break
+    for r, col, n in labels:
+        if n in LEFT and LEFT[n] not in out:
+            v = get(r, CO)
+            if isinstance(v,(int,float)): out[LEFT[n]] = v
+        elif n in RIGHT and RIGHT[n] not in out:
+            v = get(r, CS)
+            if isinstance(v,(int,float)): out[RIGHT[n]] = v
+        elif n == "積立金現在高" and fund_row is None:
+            fund_row = r
+        elif n == "経常収支比率" and keiyo is None:
+            for dr in (0,1):
+                for dc in range(1,9):
+                    v = get(r+dr, col+dc)
+                    if isinstance(v,(int,float)) and 40<=v<=150:
+                        keiyo = v; break
+                if keiyo is not None: break
     if fund_row is not None:
         for key,dr in (("fundAdjust",0),("fundRedemption",1),("fundOther",2)):
-            v = ws.cell(row=fund_row+dr, column=CS).value
+            v = get(fund_row+dr, CS)
             out[key] = v if isinstance(v,(int,float)) else 0
     if keiyo is not None: out["currentBalanceRatio"] = keiyo
     return out
@@ -82,7 +92,7 @@ def scrape_year(year, slug):
             else:
                 print("DL FAIL", url, flush=True); continue
         try:
-            wb = openpyxl.load_workbook(fn, data_only=True, read_only=False)
+            wb = openpyxl.load_workbook(fn, data_only=True, read_only=True)
         except Exception as e:
             print("OPEN FAIL", fn, e, flush=True); continue
         for sn in wb.sheetnames:
