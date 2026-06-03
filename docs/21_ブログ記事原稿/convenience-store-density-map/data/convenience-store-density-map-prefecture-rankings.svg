@@ -1,0 +1,65 @@
+<!-- data-source: convenience-store-density-map-prefecture-rankings.json | generated: 2026-06-02T21:24:00.318Z -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 300" width="680" height="300" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" role="img" aria-label="コンビニエンスストア数 都道府県ランキング（2014年）">
+  <style>
+    .svg-bg{fill:#fafafa}
+    .svg-title{fill:#222}
+    .svg-subtitle{fill:#666}
+    .svg-label{fill:#333}
+    .svg-legend{fill:#888}
+    @media (prefers-color-scheme:dark){
+      .svg-bg{fill:#1f2937}
+      .svg-title{fill:#f9fafb}
+      .svg-subtitle{fill:#9ca3af}
+      .svg-label{fill:#e5e7eb}
+      .svg-legend{fill:#9ca3af}
+    }
+  </style>
+  <rect width="680" height="300" class="svg-bg" rx="8"/>
+  <text x="340" y="24" text-anchor="middle" font-size="16" font-weight="bold" class="svg-title">コンビニエンスストア数 都道府県ランキング（2014年）</text>
+  
+  <text x="227.5" y="54" text-anchor="middle" font-size="12" font-weight="bold" fill="#1565c0">上位 5</text>
+  <text x="542.5" y="54" text-anchor="middle" font-size="12" font-weight="bold" fill="#c62828">下位 5</text>
+  
+      <text x="84" y="82" text-anchor="end" font-size="11" class="svg-label">北海道</text>
+      <rect x="90" y="63" width="195" height="30" fill="#1565c0" rx="2"/>
+      <text x="289" y="82" font-size="10" class="svg-label">40.6所</text>
+    
+      <text x="84" y="118" text-anchor="end" font-size="11" class="svg-label">宮城県</text>
+      <rect x="90" y="99" width="159.9384236453202" height="30" fill="#1976d2" rx="2"/>
+      <text x="253.9384236453202" y="118" font-size="10" class="svg-label">33.3所</text>
+    
+      <text x="84" y="154" text-anchor="end" font-size="11" class="svg-label">山梨県</text>
+      <rect x="90" y="135" width="159.9384236453202" height="30" fill="#1e88e5" rx="2"/>
+      <text x="253.9384236453202" y="154" font-size="10" class="svg-label">33.3所</text>
+    
+      <text x="84" y="190" text-anchor="end" font-size="11" class="svg-label">東京都</text>
+      <rect x="90" y="171" width="154.6551724137931" height="30" fill="#2196f3" rx="2"/>
+      <text x="248.6551724137931" y="190" font-size="10" class="svg-label">32.2所</text>
+    
+      <text x="84" y="226" text-anchor="end" font-size="11" class="svg-label">岩手県</text>
+      <rect x="90" y="207" width="148.41133004926107" height="30" fill="#42a5f5" rx="2"/>
+      <text x="242.41133004926107" y="226" font-size="10" class="svg-label">30.9所</text>
+    
+  
+      <text x="399" y="82" text-anchor="end" font-size="11" class="svg-label">奈良県</text>
+      <rect x="405" y="63" width="82.1305418719212" height="30" fill="#c62828" rx="2"/>
+      <text x="491.1305418719212" y="82" font-size="10" class="svg-label">17.1所</text>
+    
+      <text x="399" y="118" text-anchor="end" font-size="11" class="svg-label">香川県</text>
+      <rect x="405" y="99" width="100.86206896551725" height="30" fill="#d32f2f" rx="2"/>
+      <text x="509.86206896551727" y="118" font-size="10" class="svg-label">21所</text>
+    
+      <text x="399" y="154" text-anchor="end" font-size="11" class="svg-label">大阪府</text>
+      <rect x="405" y="135" width="101.82266009852215" height="30" fill="#e53935" rx="2"/>
+      <text x="510.82266009852214" y="154" font-size="10" class="svg-label">21.2所</text>
+    
+      <text x="399" y="190" text-anchor="end" font-size="11" class="svg-label">兵庫県</text>
+      <rect x="405" y="171" width="102.78325123152707" height="30" fill="#ef5350" rx="2"/>
+      <text x="511.78325123152706" y="190" font-size="10" class="svg-label">21.4所</text>
+    
+      <text x="399" y="226" text-anchor="end" font-size="11" class="svg-label">徳島県</text>
+      <rect x="405" y="207" width="103.26354679802955" height="30" fill="#e57373" rx="2"/>
+      <text x="512.2635467980296" y="226" font-size="10" class="svg-label">21.5所</text>
+    
+  <text x="340" y="282" text-anchor="middle" font-size="10" class="svg-legend">凡例: 青系=上位 / 赤系=下位</text>
+</svg>
