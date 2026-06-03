@@ -71,6 +71,57 @@ export function MiniLineChart({ points, average, height = 84 }: LineProps) {
   );
 }
 
+export interface StackPoint {
+  year: number;
+  /** 下から積む値 (表示単位) */
+  segments: number[];
+}
+
+interface StackedBarProps {
+  points: StackPoint[];
+  colors: string[];
+  height?: number;
+}
+
+/** 積み上げ棒 (積立金内訳: 財政調整基金/減債基金/その他特定目的基金) */
+export function MiniStackedBarChart({ points, colors, height = 84 }: StackedBarProps) {
+  const W = 260;
+  const H = height;
+  const padX = 10;
+  const padTop = 8;
+  const padBottom = 18;
+  if (points.length === 0) {
+    return <div className="flex h-[84px] items-center text-xs text-muted-foreground">データなし</div>;
+  }
+  const totals = points.map((p) => p.segments.reduce((a, b) => a + b, 0));
+  const maxY = Math.max(...totals, 0) || 1;
+  const n = points.length;
+  const slot = (W - padX * 2) / n;
+  const barW = Math.min(slot * 0.6, 26);
+  const plotH = H - padTop - padBottom;
+
+  return (
+    <svg width="100%" height={H} viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="xMidYMid meet" role="img" aria-label="内訳推移">
+      {points.map((p, i) => {
+        const cx = padX + slot * (i + 0.5);
+        let yCursor = padTop + plotH;
+        return (
+          <g key={p.year}>
+            {p.segments.map((seg, si) => {
+              const h = (seg / maxY) * plotH;
+              yCursor -= h;
+              return <rect key={si} x={cx - barW / 2} y={yCursor} width={barW} height={Math.max(0, h)} fill={colors[si] ?? "#94a3b8"} opacity={i === n - 1 ? 1 : 0.6} />;
+            })}
+            <text x={cx} y={H - 4} fontSize="8" fill="#94a3b8" textAnchor="middle">
+              {String(p.year).slice(2)}
+            </text>
+          </g>
+        );
+      })}
+    </svg>
+  );
+}
+
 interface BarProps {
   points: ChartPoint[];
   height?: number;
