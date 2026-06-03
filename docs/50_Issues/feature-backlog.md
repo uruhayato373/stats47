@@ -53,6 +53,32 @@ status: pending
 - **検証**: `npx tsc --noEmit -p apps/web/tsconfig.json` + 全 tsc clean
 - **関連**: `~/.claude/plans/drifting-cuddling-blossom.md` の "C (DEFERRED)" セクション
 
+## [pending] 122 metric (完全データ) の本番公開 — 生成パイプライン修復
+
+- **tier**: 2
+- **status**: pending
+- **created**: 2026-06-04
+- **trigger**: `feature/activate-122-ranking-metrics` が config `isActive:false→true` のみ変更し、本番公開に必要な派生リスト/snapshot 更新を欠いていた (2026-06-03 デプロイ時に判明)
+- **概要**: 「完全データの ranking metric 122 件」を本番公開するには config(isActive:true) を起点に複数の派生物を整合再生成する必要があるが、DBレス移行 (Phase F) でパイプラインの一部が未配線/破損のまま残っていた
+- **現状 (2026-06-03 時点・デプロイ済)**:
+  - ✅ config `isActive:false→true` (PR #430, commit `9ac68552`)
+  - ✅ `GONE_RANKING_KEYS` から 122 key 除去 (PR #431, commit `fc4c1f3b`)
+  - ❌ 本番は依然 **410** (middleware `isGone(key) || !isKnown(key)` 判定: `middleware.ts:61`。122 が `KNOWN_RANKING_KEYS` に無いため `!isKnown` で 410)
+- **本番公開に必要な手順 (依存順)**:
+  1. R2 `app/ranking-items/all.json` + `app/ranking/<key>/item.json` を isActive:true で再生成
+     → 生成器 `packages/ranking/src/scripts/generate-ranking-items.ts` は実装済だが **`.claude/skills/db/sync-snapshots/run.sh` に未配線**(旧 monolith exporter は Phase F で削除)。要 task 追加
+  2. `apps/web/scripts/generate-known-ranking-keys.ts` で `KNOWN_RANKING_KEYS` 再生成 (R2 all.json を読む)
+     → memory `project_dbless_migration_2026_05_29` に「known-keys スクリプトは破損済」記録あり。要修復
+  3. `.claude/scripts/gsc/build-sitemap-ranking-keys.cjs` で `SITEMAP_RANKING_KEYS` 再生成
+  4. `INDEXABLE_RANKING_KEYS` 再生成 (GSC pages.csv 依存・要方針)
+  5. config 変更を develop→main 再デプロイ (middleware に新 KNOWN list を載せる)
+  6. `gh workflow run purge-cdn.yml` で CDN 全パージ (410 は `s-maxage=604800` で 7 日エッジキャッシュ。ピンポイント purge の `--urls` input は purge-cdn.yml に無い)
+  7. 本番 `https://stats47.jp/ranking/<key>` が 200 + sitemap 掲載を確認
+- **122 key 一覧**: commit `9ac68552` (`packages/data-configs/src/metrics/*.ts` 122 files) / `fc4c1f3b` (`gone-ranking-keys.ts` の削除 122 行) を参照
+- **データ前提**: 観測値 `app/stats/<key>/values.json` は R2 に存在確認済 (HTTP 200)。データは揃っている
+- **着手判断**: GSC「クロール済み・インデックス未登録」再発リスク (過去 1,453 件) があるため、known 生成修復とセットで SEO 影響評価込みの独立 PR にする
+- **中途半端状態の注意**: 122 は `GONE_RANKING_KEYS` から外れたが `KNOWN` にも無いため挙動は 410 のまま (実害なし)。本タスク着手までこの状態を維持。完全に元へ戻したい場合は PR #431 を revert
+
 ---
 
 ## [done] #129 [T2-AI-CONTENT-01] regional_analysis を UI に配線（または insights へ統合）
