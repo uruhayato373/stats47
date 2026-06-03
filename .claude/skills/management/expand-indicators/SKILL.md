@@ -19,7 +19,7 @@ primary_agent: data-ingester
 >    - ⚠️ `category` は **17 軸の `CategoryKey` のいずれか** (無効キーはコンパイルエラー)。`title` は名前のみ (年・※を焼かない)、`subtitle`=区別子、`note`=注釈、`description`=定義。規約: `.claude/rules/metric-config-standards.md`
 > 2. `npm run build:registry --workspace=packages/data-configs` で registry 再生成
 > 3. `npm run validate:years --workspace=@stats47/data-configs` で年正規化を検証 (フルコード混入なら fail)
-> 4. `npm run validate:config --workspace=@stats47/data-configs` で構造規約を検証 (無効 category は error / 規約: `.claude/rules/metric-config-standards.md`)
+> 4. `npm run validate:config --workspace=@stats47/data-configs` で構造規約を検証 (**いずれも error=CI/pre-commit ブロック**: 無効 category / title 年・注釈(※)混入 / subtitle が注釈・title と冗長 / unit 空 / 重複 title に区別子なし。規約: `.claude/rules/metric-config-standards.md`)
 > 5. `/sync-metrics-cache --apply` で D1 metrics cache 同期
 > 6. `/page-data-batch --metric <key>` で e-Stat → R2 投入
 > 7. `docs/50_Issues/indicator-backlog.md` を手動編集 (status: pending → done)

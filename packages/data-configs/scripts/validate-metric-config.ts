@@ -7,12 +7,13 @@
  * subtitle が title の繰り返し 等) の再発を防ぐ。
  *
  * 2 段階の重大度:
- *   - error (exit 1 / CI・pre-commit をブロック): 無効 category キー。
- *     ※ category は型 (CategoryKey union) でもコンパイル時にブロックされるが、
- *       本 lint は分かりやすいメッセージの runtime backstop。
- *   - warn (exit 0 / 表示のみ): title への年混入 / 注釈(※)の subtitle 混入 /
- *     subtitle が title と冗長 / unit が空・"‐" / 重複 title に区別子なし。
- *     → これらは Phase 3 のデータ是正で解消し、その後 error に昇格する。
+ *   - error (exit 1 / CI・pre-commit をブロック):
+ *       無効 category キー / title への年混入・注釈(※)混入 /
+ *       subtitle が注釈(※)・title と冗長 / unit が空・"‐" / 重複 title に区別子なし。
+ *     ※ 旧 warn だった 5 系統 (title-year/title-note, subtitle-note/redundant, unit, dup-title) は
+ *       Phase 3 のデータ是正で warn=0 を達成 (2026-06) → error に昇格済。これにより量産時の再混入を CI/pre-commit で阻止する。
+ *       category は型 (CategoryKey union) でもコンパイル時にブロックされ、本 lint はその runtime backstop。
+ *   - warn (exit 0 / 表示のみ): 現在は該当チェックなし。将来の段階的 cleanup 用に tier を温存する。
  *
  * 使い方:
  *   npx tsx packages/data-configs/scripts/validate-metric-config.ts
@@ -62,6 +63,17 @@ function normalizeTitle(title: string): string {
   return title.replace(/[（(][^）)]*[）)]/g, "").replace(/\s/g, "").trim();
 }
 
+function tally(list: string[]): string {
+  const counts = list.reduce<Record<string, number>>((acc, m) => {
+    const tag = m.match(/^\[([a-z-]+)\]/)?.[1] ?? "other";
+    acc[tag] = (acc[tag] ?? 0) + 1;
+    return acc;
+  }, {});
+  return Object.entries(counts)
+    .map(([k, v]) => `${k}=${v}`)
+    .join(" ");
+}
+
 function main() {
   const files = readdirSync(METRICS_DIR).filter(
     (f) => f.endsWith(".ts") && f !== "index.ts",
@@ -86,42 +98,42 @@ function main() {
   // error: 無効 category
   for (const r of rows) {
     if (r.category && !VALID_CATEGORIES.has(r.category)) {
-      errors.push(`${r.file}: 無効な category "${r.category}" (17 軸のいずれかにする)`);
+      errors.push(`[category] ${r.file}: 無効な category "${r.category}" (17 軸のいずれかにする)`);
     }
   }
 
-  // warn: title への年混入
+  // error: title への年混入 / 注釈(※)混入
   for (const r of rows) {
     if (/(19|20)\d{2}\s*年?度?/.test(r.title)) {
-      warns.push(`[title-year] ${r.file}: title に年が混入 「${r.title}」`);
+      errors.push(`[title-year] ${r.file}: title に年が混入 「${r.title}」 (年は years/latestYear へ)`);
     }
     if (looksLikeNote(r.title)) {
-      warns.push(`[title-note] ${r.file}: title に注釈(※)が混入 「${r.title}」`);
+      errors.push(`[title-note] ${r.file}: title に注釈(※)が混入 「${r.title}」 (注釈は note へ)`);
     }
   }
 
-  // warn: subtitle が注釈 / title と冗長
+  // error: subtitle が注釈 / title と冗長
   for (const r of rows) {
     if (!r.subtitle) continue;
     const s = r.subtitle.trim();
     if (looksLikeNote(s)) {
-      warns.push(`[subtitle-note] ${r.file}: 注釈は subtitle でなく note へ 「${s.slice(0, 40)}」`);
+      errors.push(`[subtitle-note] ${r.file}: 注釈は subtitle でなく note へ 「${s.slice(0, 40)}」`);
     } else if (r.title && (s === r.title || r.title.includes(s))) {
       // 真の冗長 = subtitle が title と同一/部分集合。
       // subtitle が title を包含する (s.includes(title)) ケースは「定義の追加情報」なので
       // 冗長ではない (例: title「乳用牛飼養頭数」/ subtitle「乳用牛(めす)の飼養頭数合計」)。
-      warns.push(`[subtitle-redundant] ${r.file}: subtitle が title と冗長 「${s.slice(0, 30)}」`);
+      errors.push(`[subtitle-redundant] ${r.file}: subtitle が title と冗長 「${s.slice(0, 30)}」`);
     }
   }
 
-  // warn: unit 空 / プレースホルダ
+  // error: unit 空 / プレースホルダ
   for (const r of rows) {
     if (r.unit === null || r.unit.trim() === "" || r.unit.trim() === "‐" || r.unit.trim() === "-") {
-      warns.push(`[unit] ${r.file}: unit が空/プレースホルダ ("${r.unit}")`);
+      errors.push(`[unit] ${r.file}: unit が空/プレースホルダ ("${r.unit}")`);
     }
   }
 
-  // warn: 重複 title (正規化後同名) に区別子(subtitle)が無い
+  // error: 重複 title (正規化後同名) に区別子(subtitle)が無い
   const byNorm = new Map<string, Row[]>();
   for (const r of rows) {
     const n = normalizeTitle(r.title);
@@ -131,7 +143,7 @@ function main() {
     if (group.length < 2) continue;
     for (const r of group) {
       if (!r.subtitle || looksLikeNote(r.subtitle)) {
-        warns.push(`[dup-title] ${r.file}: 同名 title が ${group.length} 件あるが区別子(subtitle)なし 「${r.title}」`);
+        errors.push(`[dup-title] ${r.file}: 同名 title が ${group.length} 件あるが区別子(subtitle)なし 「${r.title}」`);
       }
     }
   }
@@ -140,19 +152,14 @@ function main() {
   console.log(`metric-config 検証: ${files.length} configs / error ${errors.length} / warn ${warns.length}`);
 
   if (warns.length > 0) {
-    const counts = warns.reduce<Record<string, number>>((acc, w) => {
-      const tag = w.match(/^\[([a-z-]+)\]/)?.[1] ?? "other";
-      acc[tag] = (acc[tag] ?? 0) + 1;
-      return acc;
-    }, {});
-    console.log("⚠️  warn 内訳:", Object.entries(counts).map(([k, v]) => `${k}=${v}`).join(" "));
+    console.log("⚠️  warn 内訳:", tally(warns));
     for (const w of warns.slice(0, 30)) console.log("   " + w);
     if (warns.length > 30) console.log(`   … 他 ${warns.length - 30} 件`);
-    console.log("   → 規約: .claude/rules/metric-config-standards.md / Phase 3 のデータ是正で解消予定");
   }
 
   if (errors.length > 0) {
-    console.error(`\n❌ metric-config 検証: ${errors.length} 件の error (category)`);
+    console.error(`\n❌ metric-config 検証: ${errors.length} 件の error`);
+    console.error("   内訳:", tally(errors));
     for (const e of errors.slice(0, 50)) console.error("   " + e);
     if (errors.length > 50) console.error(`   … 他 ${errors.length - 50} 件`);
     console.error("   規約: .claude/rules/metric-config-standards.md");
