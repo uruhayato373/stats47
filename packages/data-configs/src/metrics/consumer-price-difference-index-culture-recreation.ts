@@ -4,7 +4,7 @@ export const consumerPriceDifferenceIndexCultureRecreation: MetricConfig = {
   "key": "consumer-price-difference-index-culture-recreation",
   "title": "消費者物価地域差指数",
   "subtitle": "教養娯楽",
-  "unit": "‐",
+  "unit": "（全国=100）",
   "category": "economy",
   "source": {
     "kind": "estat",

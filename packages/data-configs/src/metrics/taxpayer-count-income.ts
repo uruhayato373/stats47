@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const taxpayerCountIncome: MetricConfig = {
   "key": "taxpayer-count-income",
   "title": "納税義務者数",
+  "subtitle": "所得割",
   "unit": "人",
   "category": "economy",
   "source": {

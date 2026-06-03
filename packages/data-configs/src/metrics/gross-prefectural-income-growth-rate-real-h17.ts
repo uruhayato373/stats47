@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const grossPrefecturalIncomeGrowthRateRealH17: MetricConfig = {
   "key": "gross-prefectural-income-growth-rate-real-h17",
   "title": "県民総所得対前年増加率",
+  "subtitle": "実質（H17年基準）",
   "unit": "％",
   "category": "economy",
   "source": {

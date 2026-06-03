@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const postOfficeCount: MetricConfig = {
   "key": "post-office-count",
   "title": "郵便局数",
+  "subtitle": "総数",
   "unit": "局",
   "category": "ict",
   "source": {

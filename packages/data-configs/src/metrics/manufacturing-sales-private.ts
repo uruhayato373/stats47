@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const manufacturingSalesPrivate: MetricConfig = {
   "key": "manufacturing-sales-private",
   "title": "売上金額（製造業）",
+  "subtitle": "製造業のみ",
   "unit": "百万円",
   "category": "miningindustry",
   "source": {

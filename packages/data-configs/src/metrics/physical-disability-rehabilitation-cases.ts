@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const physicalDisabilityRehabilitationCases: MetricConfig = {
   "key": "physical-disability-rehabilitation-cases",
   "title": "身体障害者更生援護取扱実人員",
+  "subtitle": "総数",
   "unit": "人",
   "category": "socialsecurity",
   "source": {

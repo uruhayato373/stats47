@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const simpleLifeInsuranceContractCount: MetricConfig = {
   "key": "simple-life-insurance-contract-count",
   "title": "簡易生命保険保有契約件数",
+  "subtitle": "総数",
   "unit": "件",
   "category": "economy",
   "source": {

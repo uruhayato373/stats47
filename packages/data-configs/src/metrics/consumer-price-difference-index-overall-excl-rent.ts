@@ -4,7 +4,7 @@ export const consumerPriceDifferenceIndexOverallExclRent: MetricConfig = {
   "key": "consumer-price-difference-index-overall-excl-rent",
   "title": "消費者物価地域差指数",
   "subtitle": "家賃を除く総合",
-  "unit": "‐",
+  "unit": "（全国=100）",
   "category": "economy",
   "source": {
     "kind": "estat",

@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const manufacturingShipment: MetricConfig = {
   "key": "manufacturing-shipment",
   "title": "製造品出荷額等",
+  "subtitle": "総額（旧統計）",
   "unit": "百万円",
   "category": "miningindustry",
   "source": {

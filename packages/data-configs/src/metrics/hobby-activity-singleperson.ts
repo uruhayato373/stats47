@@ -2,7 +2,7 @@ import type { MetricConfig } from "../types";
 
 export const hobbyActivitySingleperson: MetricConfig = {
   "key": "hobby-activity-singleperson",
-  "title": "趣味・娯楽の行動者数（単身世帯主・男女計・総数・全年齢, 2021年）",
+  "title": "趣味・娯楽の行動者数（単身世帯主・男女計・総数・全年齢）",
   "unit": "千人",
   "category": "educationsports",
   "source": {

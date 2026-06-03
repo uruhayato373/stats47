@@ -16,12 +16,14 @@ primary_agent: data-ingester
 > **暫定運用** (1 metric ずつ手動):
 > 1. `packages/data-configs/src/metrics/<key>.ts` に TS-config を作成 (既存 `japanese-population.ts` をテンプレに)
 >    - ⚠️ `years` は **4 桁年** (`{from:2014,to:2014}` / `{years:[2014]}`)。フルタイムコード (`2014100000`) 禁止。規約: `.claude/rules/estat-api.md`「年の正規化」
+>    - ⚠️ `category` は **17 軸の `CategoryKey` のいずれか** (無効キーはコンパイルエラー)。`title` は名前のみ (年・※を焼かない)、`subtitle`=区別子、`note`=注釈、`description`=定義。規約: `.claude/rules/metric-config-standards.md`
 > 2. `npm run build:registry --workspace=packages/data-configs` で registry 再生成
 > 3. `npm run validate:years --workspace=@stats47/data-configs` で年正規化を検証 (フルコード混入なら fail)
-> 4. `/sync-metrics-cache --apply` で D1 metrics cache 同期
-> 5. `/page-data-batch --metric <key>` で e-Stat → R2 投入
-> 6. `docs/50_Issues/indicator-backlog.md` を手動編集 (status: pending → done)
-> 7. `docs/05_改善ログ/indicator-expansion.md` に batch entry append
+> 4. `npm run validate:config --workspace=@stats47/data-configs` で構造規約を検証 (無効 category は error / 規約: `.claude/rules/metric-config-standards.md`)
+> 5. `/sync-metrics-cache --apply` で D1 metrics cache 同期
+> 6. `/page-data-batch --metric <key>` で e-Stat → R2 投入
+> 7. `docs/50_Issues/indicator-backlog.md` を手動編集 (status: pending → done)
+> 8. `docs/05_改善ログ/indicator-expansion.md` に batch entry append
 
 stats47 の指標を継続的に拡充する。`docs/50_Issues/indicator-backlog.md` の pending 候補から優先度上位 N 件を順次取得・登録し、backlog の status を更新、`docs/05_改善ログ/indicator-expansion.md` に施策バッチとして append する 1 コマンド型スキル (refactor 完了後)。
 

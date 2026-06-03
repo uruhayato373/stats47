@@ -3,7 +3,8 @@ import type { MetricConfig } from "../types";
 export const urbanParksArea: MetricConfig = {
   "key": "urban-parks-area",
   "title": "都市公園面積",
-  "unit": "",
+  "subtitle": "総面積",
+  "unit": "ｈａ",
   "category": "landweather",
   "source": {
     "kind": "estat",

@@ -4,7 +4,7 @@ export const laborExpensesPrefecture: MetricConfig = {
   "key": "labor-expenses-prefecture",
   "title": "労働費",
   "subtitle": "都道府県財政",
-  "unit": "",
+  "unit": "千円",
   "category": "laborwage",
   "source": {
     "kind": "estat",

@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const specializedSchoolStudents: MetricConfig = {
   "key": "specialized-school-students",
   "title": "専修学校生徒数",
+  "subtitle": "総数",
   "unit": "人",
   "category": "educationsports",
   "source": {

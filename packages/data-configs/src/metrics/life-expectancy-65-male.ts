@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const lifeExpectancy65Male: MetricConfig = {
   "key": "life-expectancy-65-male",
   "title": "平均余命",
+  "subtitle": "男性 65歳時点",
   "unit": "年",
   "category": "socialsecurity",
   "source": {

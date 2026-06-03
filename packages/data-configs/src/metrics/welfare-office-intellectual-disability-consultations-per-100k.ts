@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const welfareOfficeIntellectualDisabilityConsultationsPer100k: MetricConfig = {
   "key": "welfare-office-intellectual-disability-consultations-per-100k",
   "title": "福祉事務所知的障害者相談実人員",
+  "subtitle": "人口10万人当たり",
   "unit": "人",
   "category": "socialsecurity",
   "source": {

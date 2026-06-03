@@ -2,7 +2,7 @@ import type { MetricConfig } from "../types";
 
 export const healthCheckupRecipients: MetricConfig = {
   "key": "health-checkup-recipients",
-  "title": "生活習慣病健康診断受診延人員（都道府県別・2020年度）",
+  "title": "生活習慣病健康診断受診延人員（都道府県別）",
   "unit": "人",
   "category": "socialsecurity",
   "source": {

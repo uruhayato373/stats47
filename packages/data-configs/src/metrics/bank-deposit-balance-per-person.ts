@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const bankDepositBalancePerPerson: MetricConfig = {
   "key": "bank-deposit-balance-per-person",
   "title": "国内銀行預金残高",
+  "subtitle": "1人当たり",
   "unit": "万円",
   "category": "economy",
   "source": {

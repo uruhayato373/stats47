@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const travelLeisureAnnualParticipationRate15plus: MetricConfig = {
   "key": "travel-leisure-annual-participation-rate-15plus",
   "title": "旅行・行楽の年間行動者率",
+  "subtitle": "15歳以上",
   "description": "過去1年間に該当の活動をしたことのある人の割合",
   "unit": "％",
   "category": "tourism",

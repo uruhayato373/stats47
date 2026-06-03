@@ -30,6 +30,7 @@ TSX="npx tsx -r ./packages/ranking/src/scripts/setup-cli.js"
 # /page-data-batch (Phase 6.4) で R2 に直接書込まれる。
 declare -a TASKS=(
   "remotion-static|apps/remotion/scripts/export-d1-to-remotion-static.ts --feature all"
+  "item-metadata-refresh|packages/ranking/src/scripts/refresh-item-metadata.ts --apply"
   "master|packages/ranking/src/scripts/export-master-snapshots.ts"
   "item-seo-refresh|packages/ranking/src/scripts/refresh-item-seo.ts --apply"
   "area-profile|packages/area-profile/src/scripts/export-snapshot.ts"

@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const currentSavingsBalanceMultiPersonHouseholds: MetricConfig = {
   "key": "current-savings-balance-multi-person-households",
   "title": "貯蓄現在高",
+  "subtitle": "複数人世帯",
   "unit": "千円",
   "category": "economy",
   "source": {

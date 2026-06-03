@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const avgHeightHighSchool2ndMale: MetricConfig = {
   "key": "avg-height-high-school-2nd-male",
   "title": "平均身長",
+  "subtitle": "高校2年・男子",
   "unit": "cm",
   "category": "educationsports",
   "source": {

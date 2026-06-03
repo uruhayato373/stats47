@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const largeRetailStoreCountPer100kAlt: MetricConfig = {
   "key": "large-retail-store-count-per-100k-alt",
   "title": "大型小売店数",
+  "subtitle": "人口10万人当たり（更新）",
   "unit": "店",
   "category": "commercial",
   "source": {

@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const mediaAvgTimeUnemployedMale: MetricConfig = {
   "key": "media-avg-time-unemployed-male",
   "title": "テレビ・ラジオ・新聞・雑誌の平均時間",
+  "subtitle": "男性・非有業者",
   "unit": "分",
   "category": "socialsecurity",
   "source": {

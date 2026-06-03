@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const kidneyFailureDeathCount: MetricConfig = {
   "key": "kidney-failure-death-count",
   "title": "腎不全による死亡者数",
+  "subtitle": "総数",
   "unit": "人",
   "category": "population",
   "source": {

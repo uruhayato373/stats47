@@ -3,7 +3,7 @@ import type { MetricConfig } from "../types";
 export const marriagesPerTotalPopulation: MetricConfig = {
   "key": "marriages-per-total-population",
   "title": "婚姻率",
-  "unit": "‐",
+  "unit": "人口千対",
   "category": "population",
   "source": {
     "kind": "estat",

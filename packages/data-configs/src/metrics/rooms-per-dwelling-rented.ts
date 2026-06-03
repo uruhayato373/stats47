@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const roomsPerDwellingRented: MetricConfig = {
   "key": "rooms-per-dwelling-rented",
   "title": "居住室数",
+  "subtitle": "借家",
   "unit": "室",
   "category": "construction",
   "source": {

@@ -4,7 +4,7 @@ export const portContainerTonnage: MetricConfig = {
   "key": "port-container-tonnage",
   "title": "コンテナ取扱トン数",
   "unit": "トン",
-  "category": "port",
+  "category": "tourism",
   "source": {
     "kind": "external",
     "fetcherKey": "mlit_dpf",

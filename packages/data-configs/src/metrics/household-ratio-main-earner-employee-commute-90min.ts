@@ -4,7 +4,7 @@ export const householdRatioMainEarnerEmployeeCommute90min: MetricConfig = {
   "key": "household-ratio-main-earner-employee-commute-90min",
   "title": "雇用者世帯の通勤時間",
   "subtitle": "普通世帯・90分以上",
-  "unit": "‐",
+  "unit": "普通世帯千世帯対",
   "category": "population",
   "source": {
     "kind": "estat",

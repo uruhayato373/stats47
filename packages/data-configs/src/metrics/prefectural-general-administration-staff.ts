@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const prefecturalGeneralAdministrationStaff: MetricConfig = {
   "key": "prefectural-general-administration-staff",
   "title": "一般行政部門職員数",
+  "subtitle": "都道府県",
   "unit": "人",
   "category": "administrativefinancial",
   "source": {

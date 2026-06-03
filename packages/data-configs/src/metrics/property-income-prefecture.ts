@@ -4,7 +4,7 @@ export const propertyIncomePrefecture: MetricConfig = {
   "key": "property-income-prefecture",
   "title": "財産収入",
   "subtitle": "都道府県財政",
-  "unit": "",
+  "unit": "千円",
   "category": "administrativefinancial",
   "source": {
     "kind": "estat",

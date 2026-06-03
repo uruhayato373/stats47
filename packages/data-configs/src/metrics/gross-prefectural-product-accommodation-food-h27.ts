@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const grossPrefecturalProductAccommodationFoodH27: MetricConfig = {
   "key": "gross-prefectural-product-accommodation-food-h27",
   "title": "県内総生産額",
+  "subtitle": "宿泊・飲食サービス業",
   "unit": "百万円",
   "category": "commercial",
   "source": {

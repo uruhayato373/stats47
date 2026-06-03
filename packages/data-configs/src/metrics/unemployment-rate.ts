@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const unemploymentRate: MetricConfig = {
   "key": "unemployment-rate",
   "title": "完全失業率",
+  "subtitle": "総数",
   "unit": "％",
   "category": "laborwage",
   "source": {

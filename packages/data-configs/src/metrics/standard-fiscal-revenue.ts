@@ -4,7 +4,7 @@ export const standardFiscalRevenue: MetricConfig = {
   "key": "standard-fiscal-revenue",
   "title": "基準財政収入額",
   "subtitle": "都道府県財政",
-  "unit": "",
+  "unit": "千円",
   "category": "administrativefinancial",
   "source": {
     "kind": "estat",

@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const tertiaryIndustryEstablishmentRatio: MetricConfig = {
   "key": "tertiary-industry-establishment-ratio",
   "title": "第3次産業事業所数構成比",
+  "subtitle": "事業所・企業統計",
   "unit": "％",
   "category": "commercial",
   "source": {

@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const regularCashSalaryMale: MetricConfig = {
   "key": "regular-cash-salary-male",
   "title": "きまって支給する現金給与月額",
+  "subtitle": "男性",
   "unit": "千円",
   "category": "laborwage",
   "source": {

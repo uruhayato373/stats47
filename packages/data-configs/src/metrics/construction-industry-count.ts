@@ -3,7 +3,7 @@ import type { MetricConfig } from "../types";
 export const constructionIndustryCount: MetricConfig = {
   "key": "construction-industry-count",
   "title": "建設業者数",
-  "unit": "‐",
+  "unit": "業者",
   "category": "construction",
   "source": {
     "kind": "estat",

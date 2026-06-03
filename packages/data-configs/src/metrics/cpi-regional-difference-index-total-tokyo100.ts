@@ -4,7 +4,7 @@ export const cpiRegionalDifferenceIndexTotalTokyo100: MetricConfig = {
   "key": "cpi-regional-difference-index-total-tokyo100",
   "title": "消費者物価地域差指数",
   "subtitle": "総合：東京都区部＝100",
-  "unit": "‐",
+  "unit": "（東京=100）",
   "category": "economy",
   "source": {
     "kind": "estat",

@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const juniorHighSchoolCountPer100k1214: MetricConfig = {
   "key": "junior-high-school-count-per-100k-12-14",
   "title": "中学校数",
+  "subtitle": "12〜14歳人口当たり",
   "unit": "校",
   "category": "educationsports",
   "source": {

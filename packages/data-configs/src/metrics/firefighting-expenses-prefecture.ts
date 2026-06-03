@@ -4,7 +4,7 @@ export const firefightingExpensesPrefecture: MetricConfig = {
   "key": "firefighting-expenses-prefecture",
   "title": "消防費",
   "subtitle": "都道府県財政",
-  "unit": "",
+  "unit": "千円",
   "category": "safetyenvironment",
   "source": {
     "kind": "estat",

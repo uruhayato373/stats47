@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const restaurantCountPer1000: MetricConfig = {
   "key": "restaurant-count-per-1000",
   "title": "飲食店数",
+  "subtitle": "1000人当たり",
   "unit": "店",
   "category": "commercial",
   "source": {

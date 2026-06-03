@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const domesticBankDepositBalance: MetricConfig = {
   "key": "domestic-bank-deposit-balance",
   "title": "国内銀行預金残高",
+  "subtitle": "総額",
   "unit": "億円",
   "category": "economy",
   "source": {

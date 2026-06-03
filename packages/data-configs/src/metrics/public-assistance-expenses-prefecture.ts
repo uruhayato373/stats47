@@ -4,7 +4,7 @@ export const publicAssistanceExpensesPrefecture: MetricConfig = {
   "key": "public-assistance-expenses-prefecture",
   "title": "生活保護費",
   "subtitle": "都道府県財政",
-  "unit": "",
+  "unit": "千円",
   "category": "socialsecurity",
   "source": {
     "kind": "estat",

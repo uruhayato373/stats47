@@ -3,7 +3,7 @@ import type { MetricConfig } from "../types";
 export const totalGeneralProjectInvestment: MetricConfig = {
   "key": "total-general-project-investment",
   "title": "一般事業総投資額",
-  "unit": "",
+  "unit": "千円",
   "category": "administrativefinancial",
   "source": {
     "kind": "estat",

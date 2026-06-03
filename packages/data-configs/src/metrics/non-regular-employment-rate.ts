@@ -4,7 +4,7 @@ export const nonRegularEmploymentRate: MetricConfig = {
   "key": "non-regular-employment-rate",
   "title": "非正規雇用率",
   "unit": "%",
-  "category": "labor",
+  "category": "laborwage",
   "source": {
     "kind": "estat",
     "statsDataId": "0004008452",

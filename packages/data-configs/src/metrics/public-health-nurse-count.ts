@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const publicHealthNurseCount: MetricConfig = {
   "key": "public-health-nurse-count",
   "title": "保健師数",
+  "subtitle": "総数",
   "unit": "人",
   "category": "socialsecurity",
   "source": {

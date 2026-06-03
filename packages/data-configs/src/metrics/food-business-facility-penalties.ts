@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const foodBusinessFacilityPenalties: MetricConfig = {
   "key": "food-business-facility-penalties",
   "title": "食品営業施設処分件数",
+  "subtitle": "総数",
   "unit": "件",
   "category": "safetyenvironment",
   "source": {

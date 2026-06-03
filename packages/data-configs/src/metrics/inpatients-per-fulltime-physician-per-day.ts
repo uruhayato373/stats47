@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const inpatientsPerFulltimePhysicianPerDay: MetricConfig = {
   "key": "inpatients-per-fulltime-physician-per-day",
   "title": "一般病院在院患者数",
+  "subtitle": "医師1人当たり",
   "unit": "人",
   "category": "socialsecurity",
   "source": {

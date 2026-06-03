@@ -37,5 +37,6 @@ e-Stat の `@time` は **10 桁のフルタイムコード**（例 `"2009100000"
 - e-Stat API クライアント: `packages/estat-api/`
 - 正準ユーティリティ: `packages/estat-api/src/stats-data/utils/extract-year-code.ts`（`extractYearCode`）
 - year lint: `packages/data-configs/scripts/validate-metric-years.ts`（`npm run validate:years`）
+- **metric config 構造規約 (category 17 軸 / title・subtitle・note・description の役割)**: `.claude/rules/metric-config-standards.md`（lint: `npm run validate:config`）
 - 関連スキル: `/fetch-estat-data`, `/inspect-estat-meta`, `/search-estat`, `/page-data-batch`
-- 関連エージェント: `data-ingester`（量産後に validate:years を実行する）
+- 関連エージェント: `data-ingester`（量産後に validate:years と validate:config を実行する）

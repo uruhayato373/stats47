@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const postalSavingsBalance: MetricConfig = {
   "key": "postal-savings-balance",
   "title": "郵便貯金残高",
+  "subtitle": "総額",
   "unit": "億円",
   "category": "economy",
   "source": {

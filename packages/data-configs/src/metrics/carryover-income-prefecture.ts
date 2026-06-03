@@ -4,7 +4,7 @@ export const carryoverIncomePrefecture: MetricConfig = {
   "key": "carryover-income-prefecture",
   "title": "繰入金",
   "subtitle": "都道府県財政",
-  "unit": "",
+  "unit": "千円",
   "category": "administrativefinancial",
   "source": {
     "kind": "estat",

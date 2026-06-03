@@ -3,7 +3,7 @@ import type { MetricConfig } from "../types";
 export const giniCoefficientDisposableIncome: MetricConfig = {
   "key": "gini-coefficient-disposable-income",
   "title": "等価可処分所得ジニ係数",
-  "unit": "",
+  "unit": "指数",
   "category": "economy",
   "source": {
     "kind": "estat",

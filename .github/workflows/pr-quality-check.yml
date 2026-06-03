@@ -72,6 +72,15 @@ jobs:
           npm run validate:years --workspace=@stats47/data-configs
         continue-on-error: false
 
+      - name: 🧱 Metric Config Gate
+        run: |
+          # metric config の構造規約 (無効 category キー等) を担保。
+          # port/uncategorized/labor/local-economy のような 17 軸外キーの再発防止。
+          # warn (title年・※subtitle・冗長・重複) は表示のみで非ブロック (Phase 3 で是正)。
+          # 規約: .claude/rules/metric-config-standards.md
+          npm run validate:config --workspace=@stats47/data-configs
+        continue-on-error: false
+
       - name: 🖼️ Blog Thumbnail Gate
         run: |
           # 公開R2 (storage.stats47.jp) で全ブログ記事の thumbnail-light.webp が

@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const publicBathCount: MetricConfig = {
   "key": "public-bath-count",
   "title": "公衆浴場数",
+  "subtitle": "総数",
   "unit": "所",
   "category": "commercial",
   "source": {

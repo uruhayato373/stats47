@@ -33,7 +33,11 @@ const columns: ColumnDef<CategoryRankingListItem>[] = [
         {row.original.title}
       </Link>
     ),
-    meta: { minWidth: "200px" },
+    meta: {
+      minWidth: "200px",
+      filterable: true,
+      filterPlaceholder: "キーワードで絞り込み（例: コンビニ）",
+    },
   },
   {
     accessorKey: "latestYear",

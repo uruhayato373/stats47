@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const deathsCerebrovascularDiseasePer100k: MetricConfig = {
   "key": "deaths-cerebrovascular-disease-per-100k",
   "title": "脳血管疾患による死亡者数",
+  "subtitle": "人口10万人当たり",
   "unit": "人",
   "category": "socialsecurity",
   "source": {

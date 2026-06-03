@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const miscellaneousSchoolCount: MetricConfig = {
   "key": "miscellaneous-school-count",
   "title": "各種学校数",
+  "subtitle": "総数",
   "unit": "校",
   "category": "educationsports",
   "source": {

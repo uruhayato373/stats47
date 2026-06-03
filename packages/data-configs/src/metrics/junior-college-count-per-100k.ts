@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const juniorCollegeCountPer100k: MetricConfig = {
   "key": "junior-college-count-per-100k",
   "title": "短期大学数",
+  "subtitle": "人口10万人当たり",
   "unit": "校",
   "category": "educationsports",
   "source": {

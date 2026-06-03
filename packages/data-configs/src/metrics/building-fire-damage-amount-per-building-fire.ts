@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const buildingFireDamageAmountPerBuildingFire: MetricConfig = {
   "key": "building-fire-damage-amount-per-building-fire",
   "title": "建物火災損害額",
+  "subtitle": "建物火災1件当たり",
   "unit": "万円",
   "category": "safetyenvironment",
   "source": {

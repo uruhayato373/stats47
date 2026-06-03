@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const dentalGuidancePersonsPer1000: MetricConfig = {
   "key": "dental-guidance-persons-per-1000",
   "title": "歯科保健指導延人員",
+  "subtitle": "人口1000人当たり（別統計）",
   "unit": "人",
   "category": "socialsecurity",
   "source": {

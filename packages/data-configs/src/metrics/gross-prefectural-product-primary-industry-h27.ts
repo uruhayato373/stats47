@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const grossPrefecturalProductPrimaryIndustryH27: MetricConfig = {
   "key": "gross-prefectural-product-primary-industry-h27",
   "title": "県内総生産額",
+  "subtitle": "第1次産業",
   "unit": "百万円",
   "category": "economy",
   "source": {

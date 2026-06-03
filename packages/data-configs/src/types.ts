@@ -135,18 +135,62 @@ export interface CalculationOptions {
   denominatorRankingKey?: string;
 }
 
+/**
+ * e-Stat 機械分類の category キー (17 軸固定)。表示名・アイコンは
+ * `categories.ts` の CATEGORY_DEFS が SSOT。順序はそちらに合わせる。
+ *
+ * ★ `MetricConfig.category` をこの union で縛ることで、`port` / `uncategorized`
+ *   / `labor` / `local-economy` のような無効キーを **コンパイルエラー**にして
+ *   再発を防ぐ (lint: validate-metric-config.ts でも runtime 検証)。
+ */
+export const CATEGORY_KEYS = [
+  "landweather",
+  "population",
+  "laborwage",
+  "agriculture",
+  "miningindustry",
+  "commercial",
+  "economy",
+  "construction",
+  "energy",
+  "tourism",
+  "educationsports",
+  "administrativefinancial",
+  "safetyenvironment",
+  "socialsecurity",
+  "international",
+  "infrastructure",
+  "ict",
+] as const;
+
+export type CategoryKey = (typeof CATEGORY_KEYS)[number];
+
 /** Metric 1 つ分の全データ要件 */
 export interface MetricConfig {
   /** kebab-case の一意キー。ファイル名と一致 */
   key: string;
-  /** 日本語タイトル */
+  /**
+   * 正準なランキング名 (h1 に表示)。
+   * ★ 年 (例: 2018年)・データ注釈 (※/調査対象外) を **含めない**。
+   *   年は `years`/`latestYear` が、注釈は `note` が持つ。
+   */
   title: string;
+  /**
+   * 同名指標を区別するための短い定義補足のみ (例: 「乳用牛(めす)の飼養頭数合計」)。
+   * ★ title の繰り返しにしない。データ注釈 (※) は `note` に置く。
+   */
   subtitle?: string;
+  /**
+   * データの注意書き / methodology (例: 「内陸県は漁港がなく調査対象外 (0で表示)」)。
+   * UI ではタイトルではなくチャート直下のキャプションに表示する。
+   */
+  note?: string;
+  /** 指標の定義・説明 (散文)。「統計の定義」カードに表示。 */
   description?: string;
-  /** 単位 (例: "人", "万円") */
+  /** 単位 (例: "人", "万円")。空文字・"‐" は禁止。 */
   unit: string;
-  /** カテゴリキー (population, commercial, etc.) */
-  category: string;
+  /** e-Stat 機械分類の category キー (17 軸のいずれか)。CategoryKey で型強制。 */
+  category: CategoryKey;
   /** 観測値の取得元 */
   source: SourceConfig;
   /** 保持するエンティティ種別 (どの stats_* に相当するか) */

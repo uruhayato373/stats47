@@ -3,7 +3,7 @@ import type { MetricConfig } from "../types";
 export const juniorHighSchoolLongAbsenceRatioOver30daysPer1000: MetricConfig = {
   "key": "junior-high-school-long-absence-ratio-over-30days-per-1000",
   "title": "中学校長期欠席生徒比率",
-  "unit": "‐",
+  "unit": "生徒千対",
   "category": "educationsports",
   "source": {
     "kind": "estat",

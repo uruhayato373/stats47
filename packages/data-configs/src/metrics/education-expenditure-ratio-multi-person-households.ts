@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const educationExpenditureRatioMultiPersonHouseholds: MetricConfig = {
   "key": "education-expenditure-ratio-multi-person-households",
   "title": "教育費割合",
+  "subtitle": "複数人世帯",
   "unit": "％",
   "category": "educationsports",
   "source": {

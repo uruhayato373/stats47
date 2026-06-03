@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const elderlyPopulationRatio: MetricConfig = {
   "key": "elderly-population-ratio",
   "title": "65歳以上人口割合",
+  "subtitle": "総数",
   "unit": "％",
   "category": "population",
   "source": {

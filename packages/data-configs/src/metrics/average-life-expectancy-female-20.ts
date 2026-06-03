@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const averageLifeExpectancyFemale20: MetricConfig = {
   "key": "average-life-expectancy-female-20",
   "title": "平均余命",
+  "subtitle": "女性 20歳時点",
   "unit": "年",
   "category": "socialsecurity",
   "source": {

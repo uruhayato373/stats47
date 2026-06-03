@@ -4,7 +4,7 @@ export const healthCenterExpensesPrefecture: MetricConfig = {
   "key": "health-center-expenses-prefecture",
   "title": "保健所費",
   "subtitle": "都道府県財政",
-  "unit": "",
+  "unit": "千円",
   "category": "administrativefinancial",
   "source": {
     "kind": "estat",

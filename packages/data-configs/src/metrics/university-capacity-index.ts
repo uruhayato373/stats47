@@ -3,7 +3,7 @@ import type { MetricConfig } from "../types";
 export const universityCapacityIndex: MetricConfig = {
   "key": "university-capacity-index",
   "title": "大学収容力指数",
-  "unit": "‐",
+  "unit": "指数",
   "category": "educationsports",
   "source": {
     "kind": "estat",

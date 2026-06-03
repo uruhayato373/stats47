@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const pneumoniaDeathRate: MetricConfig = {
   "key": "pneumonia-death-rate",
   "title": "肺炎による死亡者数",
+  "subtitle": "人口10万人当たり",
   "unit": "人",
   "category": "population",
   "source": {

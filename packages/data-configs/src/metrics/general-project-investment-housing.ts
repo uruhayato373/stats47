@@ -4,7 +4,7 @@ export const generalProjectInvestmentHousing: MetricConfig = {
   "key": "general-project-investment-housing",
   "title": "一般事業投資額",
   "subtitle": "住宅",
-  "unit": "",
+  "unit": "千円",
   "category": "construction",
   "source": {
     "kind": "estat",

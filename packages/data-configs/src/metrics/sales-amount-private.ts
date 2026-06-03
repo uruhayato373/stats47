@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const salesAmountPrivate: MetricConfig = {
   "key": "sales-amount-private",
   "title": "売上金額",
+  "subtitle": "個人事業所（商業統計）",
   "unit": "百万円",
   "category": "economy",
   "source": {

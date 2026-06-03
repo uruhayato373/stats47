@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const newGraduateStartingSalaryUniversityFemale: MetricConfig = {
   "key": "new-graduate-starting-salary-university-female",
   "title": "新規学卒者初任給",
+  "subtitle": "大卒・女性",
   "unit": "千円",
   "category": "educationsports",
   "source": {

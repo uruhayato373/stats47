@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const welfareExpenditure: MetricConfig = {
   "key": "welfare-expenditure",
   "title": "民生費（歳出決算）",
+  "subtitle": "歳出決算額",
   "unit": "千円",
   "category": "administrativefinancial",
   "source": {

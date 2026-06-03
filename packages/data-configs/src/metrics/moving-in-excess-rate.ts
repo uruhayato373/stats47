@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const movingInExcessRate: MetricConfig = {
   "key": "moving-in-excess-rate",
   "title": "転入超過率",
+  "subtitle": "外国人移動者",
   "unit": "％",
   "category": "population",
   "source": {

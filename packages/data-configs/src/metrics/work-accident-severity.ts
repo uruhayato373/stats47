@@ -3,7 +3,7 @@ import type { MetricConfig } from "../types";
 export const workAccidentSeverity: MetricConfig = {
   "key": "work-accident-severity",
   "title": "労働災害の重さの程度",
-  "unit": "‐",
+  "unit": "（日/時間）",
   "category": "safetyenvironment",
   "source": {
     "kind": "estat",

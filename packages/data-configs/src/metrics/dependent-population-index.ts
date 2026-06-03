@@ -3,7 +3,7 @@ import type { MetricConfig } from "../types";
 export const dependentPopulationIndex: MetricConfig = {
   "key": "dependent-population-index",
   "title": "従属人口指数",
-  "unit": "‐",
+  "unit": "指数",
   "category": "population",
   "source": {
     "kind": "estat",

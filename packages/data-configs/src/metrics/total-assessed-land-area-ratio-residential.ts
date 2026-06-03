@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const totalAssessedLandAreaRatioResidential: MetricConfig = {
   "key": "total-assessed-land-area-ratio-residential",
   "title": "評価総地積割合",
+  "subtitle": "宅地",
   "unit": "％",
   "category": "landweather",
   "source": {

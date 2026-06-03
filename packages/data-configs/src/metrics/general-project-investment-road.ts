@@ -4,7 +4,7 @@ export const generalProjectInvestmentRoad: MetricConfig = {
   "key": "general-project-investment-road",
   "title": "一般事業投資額",
   "subtitle": "道路",
-  "unit": "",
+  "unit": "千円",
   "category": "infrastructure",
   "source": {
     "kind": "estat",

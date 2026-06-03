@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const widowedRatioMale60plus: MetricConfig = {
   "key": "widowed-ratio-male-60plus",
   "title": "死別者割合",
+  "subtitle": "男性 60歳以上",
   "unit": "％",
   "category": "population",
   "source": {

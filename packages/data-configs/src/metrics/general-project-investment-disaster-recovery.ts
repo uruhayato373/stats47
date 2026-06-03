@@ -4,7 +4,7 @@ export const generalProjectInvestmentDisasterRecovery: MetricConfig = {
   "key": "general-project-investment-disaster-recovery",
   "title": "一般事業投資額",
   "subtitle": "災害復旧",
-  "unit": "",
+  "unit": "千円",
   "category": "administrativefinancial",
   "source": {
     "kind": "estat",

@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const physicalDisabilityCertificatesIssued: MetricConfig = {
   "key": "physical-disability-certificates-issued",
   "title": "身体障害者手帳交付数",
+  "subtitle": "総数",
   "unit": "人",
   "category": "socialsecurity",
   "source": {

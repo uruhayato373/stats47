@@ -5,7 +5,7 @@ export const movingOutRateJapanese: MetricConfig = {
   "title": "転出率",
   "subtitle": "日本人移動者",
   "unit": "％",
-  "category": "uncategorized",
+  "category": "population",
   "source": {
     "kind": "estat",
     "statsDataId": "0000010201",

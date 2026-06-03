@@ -4,7 +4,7 @@ export const loanFundsPrefecture: MetricConfig = {
   "key": "loan-funds-prefecture",
   "title": "貸付金",
   "subtitle": "都道府県財政",
-  "unit": "",
+  "unit": "千円",
   "category": "administrativefinancial",
   "source": {
     "kind": "estat",

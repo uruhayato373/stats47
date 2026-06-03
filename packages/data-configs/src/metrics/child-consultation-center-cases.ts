@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const childConsultationCenterCases: MetricConfig = {
   "key": "child-consultation-center-cases",
   "title": "児童相談所受付件数",
+  "subtitle": "総数",
   "unit": "件",
   "category": "educationsports",
   "source": {

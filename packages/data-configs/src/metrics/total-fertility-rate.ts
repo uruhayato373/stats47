@@ -3,7 +3,7 @@ import type { MetricConfig } from "../types";
 export const totalFertilityRate: MetricConfig = {
   "key": "total-fertility-rate",
   "title": "合計特殊出生率",
-  "unit": "‐",
+  "unit": "（人）",
   "category": "population",
   "source": {
     "kind": "estat",

@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const overseasTravelAnnualParticipationRate10plus: MetricConfig = {
   "key": "overseas-travel-annual-participation-rate-10plus",
   "title": "海外旅行の年間行動者率",
+  "subtitle": "10歳以上",
   "description": "過去1年間に該当の活動をしたことのある人の割合",
   "unit": "％",
   "category": "tourism",

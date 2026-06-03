@@ -4,7 +4,7 @@ export const consumerPriceDifferenceIndexHousing: MetricConfig = {
   "key": "consumer-price-difference-index-housing",
   "title": "消費者物価地域差指数",
   "subtitle": "住居",
-  "unit": "‐",
+  "unit": "（全国=100）",
   "category": "economy",
   "source": {
     "kind": "estat",

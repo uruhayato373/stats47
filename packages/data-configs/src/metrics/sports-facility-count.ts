@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const sportsFacilityCount: MetricConfig = {
   "key": "sports-facility-count",
   "title": "社会体育施設数",
+  "subtitle": "総数（別統計）",
   "unit": "施設",
   "category": "educationsports",
   "source": {

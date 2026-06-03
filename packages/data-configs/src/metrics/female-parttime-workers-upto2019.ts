@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const femaleParttimeWorkersUpto2019: MetricConfig = {
   "key": "female-parttime-workers-upto2019",
   "title": "女性パートタイム労働者数",
+  "subtitle": "〜2018年",
   "unit": "人",
   "category": "laborwage",
   "source": {

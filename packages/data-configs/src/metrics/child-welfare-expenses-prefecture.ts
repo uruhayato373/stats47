@@ -4,7 +4,7 @@ export const childWelfareExpensesPrefecture: MetricConfig = {
   "key": "child-welfare-expenses-prefecture",
   "title": "児童福祉費",
   "subtitle": "都道府県財政",
-  "unit": "",
+  "unit": "千円",
   "category": "educationsports",
   "source": {
     "kind": "estat",

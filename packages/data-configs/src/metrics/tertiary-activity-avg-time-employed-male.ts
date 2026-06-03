@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const tertiaryActivityAvgTimeEmployedMale: MetricConfig = {
   "key": "tertiary-activity-avg-time-employed-male",
   "title": "3次活動の平均時間",
+  "subtitle": "男性・有業者",
   "unit": "分",
   "category": "laborwage",
   "source": {

@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const grossPrefecturalProductRealEstateH27: MetricConfig = {
   "key": "gross-prefectural-product-real-estate-h27",
   "title": "県内総生産額",
+  "subtitle": "不動産業",
   "unit": "百万円",
   "category": "economy",
   "source": {

@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const juniorCollegeCount: MetricConfig = {
   "key": "junior-college-count",
   "title": "短期大学数",
+  "subtitle": "総数",
   "unit": "校",
   "category": "educationsports",
   "source": {

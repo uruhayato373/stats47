@@ -6,6 +6,10 @@ export {
   type RefreshRankingItemSeoResult,
   refreshRankingItemSeoFields,
 } from "./ranking-item-seo-refresh";
+export {
+  type RefreshRankingItemMetadataResult,
+  refreshRankingItemMetadata,
+} from "./ranking-item-metadata-refresh";
 // ranking-items-snapshot (monolith snapshots/ranking-items/all.json) は Phase F (2026-05-30) で削除。
 // runtime 未使用 (per-url の app/ranking/<key>/item.json 等が正)。再生成は per-url exporter。
 // NOTE: ranking-download / ranking-values / ranking-normalized-values exporter は不採用。

@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const foreignResidentCountKoreaPer100k: MetricConfig = {
   "key": "foreign-resident-count-korea-per-100k",
   "title": "外国人人口",
+  "subtitle": "韓国・朝鮮籍（10万人当たり）",
   "unit": "人",
   "category": "population",
   "source": {

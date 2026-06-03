@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const publicPhoneCount: MetricConfig = {
   "key": "public-phone-count",
   "title": "公衆電話設置台数",
+  "subtitle": "総数",
   "unit": "個",
   "category": "ict",
   "source": {

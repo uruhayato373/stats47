@@ -25,12 +25,25 @@ export interface ExportSurveysSnapshotResult {
  * SSOT は D1 `sources` (sourceKind='survey') テーブルではなく git TS マスタ
  * `packages/ranking/src/data/surveys.json` (配信 app/survey/all.json から抽出した静的 reference,
  * displayOrder 順)。survey は低頻度更新の reference データで git TS を SSOT とする (port master と同方針)。
+ *
+ * `validSurveyIds` を渡すと、その集合に含まれる survey だけを書き出す。これは
+ * `exportRankingItemsPerUrl` が `app/survey/{id}/items.json` を生成した survey 群
+ * (= 関連ランキングが 1 件以上ある survey) で、これに絞ることで詳細ページが notFound()
+ * になる orphan survey (例: cpi-regional) を一覧・サイドバー・generateStaticParams から
+ * 排除する。未指定時 (後方互換) はマスタ全件を書き出す。
  */
-export async function exportSurveysSnapshot(): Promise<ExportSurveysSnapshotResult> {
+export async function exportSurveysSnapshot(
+  validSurveyIds?: Iterable<string>,
+): Promise<ExportSurveysSnapshotResult> {
   const startedAt = Date.now();
 
   const dataPath = path.resolve(__dirname, "../data/surveys.json");
-  const surveys = JSON.parse(fs.readFileSync(dataPath, "utf-8")) as Source[];
+  const allSurveys = JSON.parse(fs.readFileSync(dataPath, "utf-8")) as Source[];
+
+  const validSet = validSurveyIds ? new Set(validSurveyIds) : null;
+  const surveys = validSet
+    ? allSurveys.filter((s) => validSet.has(s.id))
+    : allSurveys;
 
   const snapshot: SurveysSnapshot = {
     generatedAt: new Date().toISOString(),

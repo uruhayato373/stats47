@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const psychiatricInpatientsPerNursePerDay: MetricConfig = {
   "key": "psychiatric-inpatients-per-nurse-per-day",
   "title": "精神科病院在院患者数",
+  "subtitle": "看護師1人当たり",
   "unit": "人",
   "category": "socialsecurity",
   "source": {

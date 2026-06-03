@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const govtHealthInsuranceVisitExpenseInsuredPerPerson: MetricConfig = {
   "key": "govt-health-insurance-visit-expense-insured-per-person",
   "title": "政府管掌健康保険受診金額",
+  "subtitle": "被保険者1人当たり",
   "unit": "円",
   "category": "socialsecurity",
   "source": {

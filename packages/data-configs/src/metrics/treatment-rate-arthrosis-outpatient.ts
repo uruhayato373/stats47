@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const treatmentRateArthrosisOutpatient: MetricConfig = {
   "key": "treatment-rate-arthrosis-outpatient",
   "title": "関節症の受療率（外来）",
+  "subtitle": "外来患者の受療率",
   "description": "厚生労働省「患者調査」（2023年）の傷病分類別受療率（人口10万対）。関節症の受療率（外来）のデータ。",
   "unit": "人（人口10万対）",
   "category": "socialsecurity",
