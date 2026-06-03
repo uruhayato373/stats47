@@ -19,10 +19,9 @@
  *   ... --only <key>[,<key>] # 一部 metric のみ (item.json のみ更新、all.json は全件)
  */
 import { listAllMetrics, type MetricConfig, type YearSpec } from "@stats47/data-configs";
-import { saveToR2 } from "@stats47/r2-storage/server";
+import { assertR2WriteAllowed, saveToR2 } from "@stats47/r2-storage/server";
 import { readStatsValues } from "@stats47/stats-r2/readers";
 
-import { assertR2WriteAllowed } from "../../../r2-storage/src/scripts/_assert-ci-write";
 import { buildRankingItemFromMetric } from "../builders/build-ranking-item-from-metric";
 import { RANKING_ITEMS_SNAPSHOT_KEY, rankingItemKeyPath } from "../types/snapshot";
 
