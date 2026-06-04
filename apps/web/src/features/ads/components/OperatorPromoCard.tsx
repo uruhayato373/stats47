@@ -68,6 +68,10 @@ export function OperatorPromoCard({ placement = "global" }: OperatorPromoCardPro
   const [axis, setAxis] = useState<Axis | null>(null);
 
   useEffect(() => {
+    // 初回マウント後にクライアント側でランダムに軸を確定する。
+    // render 中に Math.random() を使うと SSR と client でハッシュ不一致になるため、
+    // 意図的に effect 内で確定させる (mount 1 回のみ)。
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setAxis(Math.random() < 0.5 ? "tenshoku" : "ai");
   }, []);
 
