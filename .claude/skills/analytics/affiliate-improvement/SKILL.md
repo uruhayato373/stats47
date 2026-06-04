@@ -78,19 +78,20 @@ JSON は `.claude/state/ads/inventory-latest.json`。`--json` で stdout に JSO
 
 ### Step 2: GA4 実績取得 (observe モードのみ)
 
-`/fetch-ga4-data` を使うか、GA4 Data API を直接叩いて以下を取得する:
+専用スクリプトで `ad_impression` / `affiliate_click` を (category × position) 別に取得する:
 
-- **dimension**: `eventName` + custom dimension `affiliate_category` / `link_position`
-- **metric**: `eventCount`
-- **filter**: `eventName` in (`ad_impression`, `affiliate_click`)
-
-```
-/fetch-ga4-data last28d events
+```bash
+node .claude/scripts/ads/fetch-affiliate-ga4.cjs 28   # 直近 28 日。snapshot → .claude/state/ads/ga4-affiliate-<date>.json
 ```
 
-> ⚠ **custom dimension の登録が前提**: `affiliate_category` / `link_position` は GA4 管理画面で
-> カスタムディメンション登録済みでないと dimension として引けない。未登録なら
-> `eventName` 単位の総数のみ取得し、内訳は登録後に再取得する (この制約を improvement-log に明記)。
+- dimension: `eventName` + `customEvent:affiliate_category` + `customEvent:link_position`、metric: `eventCount`
+- impression / click を pivot し (category × position) ごとに `CTR = click / impression` を算出
+
+> ⚠ **2 つの前提** (満たさないと内訳が取れない):
+> 1. **GA4 鍵**: `stats47-*.json` がリポジトリルートに必要 → **クラウド実行環境では鍵が無いためローカル / CI で実行**。
+> 2. **custom dimension 登録**: `affiliate_category` / `link_position` を GA4 管理画面で
+>    イベントスコープのカスタムディメンションとして登録済みでないと内訳が引けない。
+>    未登録時はスクリプトが `eventName` 単位の総数にフォールバックする (内訳は登録後に再取得)。
 
 ### Step 3: CTR 集計 + 弱枠特定
 

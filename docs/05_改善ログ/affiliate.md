@@ -82,9 +82,11 @@ agent 用詳細 (検証コマンド・仮説・実測) は 2 層構造の下層
 `sidebar-bottom` の **text 18 枠**のみで banner impression がゼロ。視認性の高い banner 枠を 1 つ足せば
 impression が大きく増える可能性。
 
-- ⚠ **SSG 保全注意**: `apps/web/src/app/ranking/[rankingKey]/page.tsx` は SSG。レンダリング変更は
-  `.claude/rules/nextjs-ssg-preservation.md` に従い、`cookies()/headers()` を layout 経由で混入させない。
-- 実装は本ログとは別 PR (デプロイ影響あり) で、`next build` の `○ Static` 維持を確認してから。
+- **設計提案 (承認待ち)**: `docs/40_アフィリエイト管理/AFF-03-ranking-banner-design.md`
+- **SSG リスクは低い** (確認済): ranking サイドバーの `AffiliateAdSlot` は既に async Server Component で
+  R2 を build 時解決しており、`cookies()/headers()` を増やさなければ force-dynamic 化しない。推奨案 A は
+  `AffiliateAdSlot.tsx` 1 ファイルにバナー優先を足す外科的変更。
+- 実装は本ログとは別 PR で、`next build` の `○ Static` 維持を確認してから。
 - **検証期日後の判定**: 本番 ranking の HTML に banner が描画され、`ad_impression(link_position=ranking-*)` が
   GA4 で観測されれば前進。CTR は AFF-04 で評価。
 
