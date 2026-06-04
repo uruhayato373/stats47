@@ -25,8 +25,13 @@
 ### GA4 計測の前提メモ (observe モードを回す前に確認)
 
 - `ad_impression` / `affiliate_click` は送出済み (`AdImpressionTracker` / `TrackedAffiliateLink`)。
+- **実測経路は GitHub Actions** `.github/workflows/affiliate-ga4-weekly.yml` (週次 cron + dispatch)。
+  既存 metrics workflow と同じ `GOOGLE_SERVICE_ACCOUNT_KEY_JSON` シークレットを鍵ファイルに復元し、
+  `fetch-affiliate-ga4.cjs` を実行 → snapshot `.claude/state/ads/ga4-affiliate-<date>.json` を develop に commit-back。
+  - **検証コマンド (ローカルに鍵がある場合)**: `node .claude/scripts/ads/fetch-affiliate-ga4.cjs 28`
 - 内訳パラメータ `affiliate_category` / `link_position` を GA4 で **dimension として引くにはカスタム
   ディメンション登録が必要**。未登録だと `eventName` 単位の総数しか取れない。
-  - **検証コマンド**: `/fetch-ga4-data last28d events` で `ad_impression` / `affiliate_click` が出るか確認。
   - **未登録時の next action**: GA4 管理画面でイベントスコープのカスタムディメンション
-    `affiliate_category` / `link_position` を登録 → 数日後に内訳取得。
+    `affiliate_category` / `link_position` を登録 → 翌週の workflow 実行で内訳取得。
+  - **[仮説・未検証]** custom dimension が未登録の可能性が高い (新規イベントのため)。初回 workflow 実行の
+    `hasCustomDimensions: false` で判明する。判明したら登録を依頼する。

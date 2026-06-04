@@ -20,7 +20,7 @@ const path = require("path");
 const { google } = require("googleapis");
 
 const PROJECT_ROOT = path.resolve(__dirname, "../../..");
-const PROPERTY_ID = "463218070";
+const PROPERTY_ID = process.env.GA4_PROPERTY_ID || "463218070";
 const KEY_CANDIDATES = ["stats47-f6b5dae19196.json", "stats47-31b18ee67144.json"];
 const EVENTS = ["ad_impression", "affiliate_click"];
 

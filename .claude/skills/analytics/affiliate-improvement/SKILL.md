@@ -88,10 +88,18 @@ node .claude/scripts/ads/fetch-affiliate-ga4.cjs 28   # 直近 28 日。snapshot
 - impression / click を pivot し (category × position) ごとに `CTR = click / impression` を算出
 
 > ⚠ **2 つの前提** (満たさないと内訳が取れない):
-> 1. **GA4 鍵**: `stats47-*.json` がリポジトリルートに必要 → **クラウド実行環境では鍵が無いためローカル / CI で実行**。
+> 1. **GA4 鍵**: `stats47-*.json` がリポジトリルートに必要。**クラウド / web 実行環境には鍵が無いため、
+>    実測は GitHub Actions で行う** → `.github/workflows/affiliate-ga4-weekly.yml`
+>    (週次 cron + `workflow_dispatch`)。シークレット `GOOGLE_SERVICE_ACCOUNT_KEY_JSON` を鍵ファイルに
+>    復元して `fetch-affiliate-ga4.cjs` を実行し、snapshot を develop に commit-back する。
+>    鍵のあるローカルなら直接 `node …` でも可。
 > 2. **custom dimension 登録**: `affiliate_category` / `link_position` を GA4 管理画面で
 >    イベントスコープのカスタムディメンションとして登録済みでないと内訳が引けない。
 >    未登録時はスクリプトが `eventName` 単位の総数にフォールバックする (内訳は登録後に再取得)。
+
+> 注: 外部連携トークンは `actions:write` を持たず `workflow_dispatch` を起動できない (403) ことがある。
+> その場合は週次 cron の自動実行を待つか、`gh` の使えるローカルから dispatch する
+> (`.claude/rules/branch-workflow.md` の実行環境判定)。
 
 ### Step 3: CTR 集計 + 弱枠特定
 
