@@ -7,11 +7,13 @@ import { CATEGORY_AFFILIATE_MAP } from "../constants/affiliate-category";
 import {
   resolveAffiliateBannersByCategoryKey,
   resolveAffiliateTextAds,
+  resolveExperimentVariantsByCategoryKey,
 } from "../services";
 
 import { AdSenseAdWrapper } from "./AdSenseAdWrapper";
 import { AffiliateTextAdList } from "./AffiliateTextAdList";
 import { BannerAd } from "./BannerAd";
+import { VariantAdSlot } from "./VariantAdSlot";
 
 import type { AffiliateLocationCode } from "../types";
 
@@ -27,12 +29,13 @@ function mapPositionToLocation(position: "sidebar" | "footer"): AffiliateLocatio
 /**
  * アフィリエイト広告スロット。
  *
- * 優先順位 (AFF-03 でバナーを最優先に追加):
- * 1. バナー広告 (sidebar のみ・categoryKey 一致の上位1件) — 視認性が高く impression を稼ぐ
+ * 優先順位 (AFF-05 で実験を最優先に追加):
+ * 0. A/B 実験 variant (sidebar・experimentId 付きが 2 件以上) → VariantAdSlot でクライアント加重ランダム
+ * 1. バナー広告 (sidebar のみ・categoryKey 一致の上位1件) — 視認性が高く impression を稼ぐ (AFF-03)
  * 2. テキスト広告 (最大 2 件)
  * 3. なければ AdSense にフォールバック
  *
- * バナー在庫の無いカテゴリ (広告ゼロ8軸など) は 2→3 に流れるため従来挙動と同じ。
+ * experiment / banner 在庫の無いカテゴリ (広告ゼロ8軸など) は下位へ流れるため従来挙動と同じ。
  * 本コンポーネントは async Server Component で R2 を build 時に解決する
  * (cookies()/headers() を使わないため SSG を壊さない: nextjs-ssg-preservation.md)。
  */
@@ -42,6 +45,20 @@ export async function AffiliateAdSlot({
 }: AffiliateAdSlotProps) {
   const locationCode = mapPositionToLocation(position);
   const affiliateCategory = CATEGORY_AFFILIATE_MAP[categoryKey] ?? null;
+
+  // 0. A/B 実験 (sidebar のみ)。experimentId 付き variant が 2 件以上あればクライアント加重ランダム出し分け。
+  if (position === "sidebar") {
+    const variants = await resolveExperimentVariantsByCategoryKey(categoryKey);
+    if (variants.length >= 2) {
+      return (
+        <VariantAdSlot
+          variants={variants}
+          category={affiliateCategory ?? "other"}
+          position="ranking-sidebar"
+        />
+      );
+    }
+  }
 
   // 1. バナー優先 (sidebar のみ)。ranking の主要トラフィックに視認性の高い枠を出す。
   if (position === "sidebar") {

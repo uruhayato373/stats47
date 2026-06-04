@@ -1,14 +1,28 @@
 ---
 type: design-proposal
 target: AFF-05
-status: proposal
+status: implemented-framework
 date: 2026-06-04
 related_log: docs/05_改善ログ/affiliate.md#AFF-05
 ---
 
-# AFF-05 設計提案: クリエイティブ A/B テスト基盤 (どの広告/サイズ/文言が効くか計測)
+# AFF-05 設計: クリエイティブ A/B テスト基盤 (どの広告/サイズ/文言が効くか計測)
 
-> **承認待ち**。本ドキュメントは設計のみ。実装は承認後に別 PR。
+> **2026-06-04: framework 実装済 (方式 A 採用)**。具体的な実験 (枠/variant) は未設定 = データを見て後決め。
+> 実装ファイル: `VariantAdSlot.tsx` / `resolveExperimentVariantsByCategoryKey` / GA4 param 拡張 / `fetch-affiliate-ga4.cjs`。
+
+## 実験の始め方 (P4・運用手順)
+
+1. 対象枠とカテゴリを決める (例: ranking-sidebar の economy)。
+2. `apps/web/scripts/affiliate-ads-data.ts` に **同じ `experimentId`・別 `variantId`** のエントリを 2〜3 件追加
+   (サイズ違いの banner / text / CTA 文言違い)。`weight` 省略時は均等。
+3. develop へ push → `publish-affiliate-ads.yml` が R2 反映。`AffiliateAdSlot` が自動で `VariantAdSlot` 出し分けに切替。
+4. GA4 管理画面で custom dimension `experiment_id` / `variant_id` / `creative_size` を登録。
+5. `node .claude/scripts/ads/fetch-affiliate-ga4.cjs 28` で variant 別 CTR を観測 → 停止ルールで勝者採用。
+
+---
+
+> 以下は設計の根拠 (実装前の提案内容を保持)。
 > 目的: 同じ枠に複数のクリエイティブ候補 (サイズ違い・バナー/テキスト・CTA 文言違い) を用意し、
 > **ランダム配分 (または期間配分) で出し分け → variant 別 CTR を計測 → 勝者を採用**するループを作る。
 

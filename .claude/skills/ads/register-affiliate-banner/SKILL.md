@@ -127,6 +127,11 @@ article.md に `<affiliate-banner>` タグを記述:
   - ランキングサイドバーのテキスト = `locationCode="sidebar-bottom"` の `adType:"text"`
 - categoryKey の対応: `apps/web/src/features/ads/constants/affiliate-category.ts` の `CATEGORY_AFFILIATE_MAP`。
 
+> **A/B テスト (AFF-05・任意)**: 同じ枠で複数クリエイティブを競わせるなら、エントリに
+> `experimentId`（同一実験で共通）・`variantId`（実験内で一意）・`weight`（任意・既定1）を付ける。
+> 同 experimentId が 2 件以上あると ranking sidebar が `VariantAdSlot` でクライアント加重ランダム出し分けに切替わる。
+> 詳細・運用手順: `docs/40_アフィリエイト管理/AFF-05-creative-ab-testing-design.md`。
+
 5. 反映（R2 公開）は **develop への push で `publish-affiliate-ads.yml` が自動発火**（workflow_dispatch ではない）。ローカルからの R2 push は不可。
 
 ### Phase 4: 手動配置（オプション）

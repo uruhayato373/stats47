@@ -6,6 +6,7 @@ import {
 import {
   readActiveAdByCategoryFromR2 as findActiveAdByCategory,
   readActiveBannersByCategoryKeysFromR2 as findActiveBannersByCategoryKeys,
+  readActiveExperimentVariantsByCategoryFromR2 as findActiveExperimentVariantsByCategory,
   readActiveTextAdsByCategoryFromR2 as findActiveTextAdsByCategory,
   readActiveTextAdsByCategoryKeysFromR2 as findActiveTextAdsByCategoryKeys,
 } from "../repositories/affiliate-ad-snapshot";
@@ -25,6 +26,25 @@ export interface ResolvedAffiliateBanner {
   trackingPixelUrl: string;
   width: number;
   height: number;
+}
+
+/**
+ * A/B テスト (AFF-05) の variant 候補。client (VariantAdSlot) が加重ランダムで1つ選ぶ。
+ * banner は imageUrl あり、text は imageUrl=null。
+ */
+export interface ResolvedAffiliateVariant {
+  experimentId: string;
+  variantId: string;
+  weight: number;
+  adType: "banner" | "text";
+  title: string;
+  href: string;
+  trackingPixelUrl: string | null;
+  imageUrl: string | null;
+  width: number | null;
+  height: number | null;
+  /** GA4 creative_size 用 例: "300x250" / "text" */
+  creativeSize: string;
 }
 
 /**
@@ -166,6 +186,45 @@ export async function resolveAffiliateBannersByCategoryKey(
       width: b.width ?? 300,
       height: b.height ?? 250,
     }));
+}
+
+/**
+ * A/B テスト (AFF-05): categoryKey に紐づく experiment variant 候補を解決する。
+ * experimentId を持つ active エントリのみ。1 件以下なら実験成立しないため [] を返し、
+ * 呼び出し側 (AffiliateAdSlot) は従来の banner/text 解決にフォールバックする。
+ */
+export async function resolveExperimentVariantsByCategoryKey(
+  categoryKey: string
+): Promise<ResolvedAffiliateVariant[]> {
+  if (!categoryKey) return [];
+
+  const rows = await findActiveExperimentVariantsByCategory(categoryKey);
+  if (rows.length < 2) return []; // 実験は最低 2 variant 必要
+
+  return rows
+    .filter((r) => {
+      // banner は画像必須、text は htmlContent(href) 必須
+      if (r.adType === "banner") return !!r.imageUrl;
+      return !!r.htmlContent;
+    })
+    .map((r) => {
+      const adType = r.adType === "banner" ? "banner" : "text";
+      const creativeSize =
+        adType === "banner" && r.width && r.height ? `${r.width}x${r.height}` : "text";
+      return {
+        experimentId: r.experimentId as string,
+        variantId: r.variantId as string,
+        weight: r.weight ?? 1,
+        adType,
+        title: r.title,
+        href: r.htmlContent,
+        trackingPixelUrl: r.trackingPixelUrl,
+        imageUrl: adType === "banner" ? r.imageUrl : null,
+        width: r.width,
+        height: r.height,
+        creativeSize,
+      } satisfies ResolvedAffiliateVariant;
+    });
 }
 
 /**

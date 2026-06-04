@@ -7,6 +7,10 @@ interface TrackedAffiliateLinkProps {
   category: string;
   label: string;
   position: string;
+  /** A/B テスト用 (AFF-05・任意) */
+  experimentId?: string;
+  variantId?: string;
+  creativeSize?: string;
   className?: string;
   children: React.ReactNode;
 }
@@ -21,6 +25,9 @@ export function TrackedAffiliateLink({
   category,
   label,
   position,
+  experimentId,
+  variantId,
+  creativeSize,
   className,
   children,
 }: TrackedAffiliateLinkProps) {
@@ -30,7 +37,9 @@ export function TrackedAffiliateLink({
       target="_blank"
       rel="noopener noreferrer sponsored"
       className={className}
-      onClick={() => trackAffiliateClick({ category, label, position })}
+      onClick={() =>
+        trackAffiliateClick({ category, label, position, experimentId, variantId, creativeSize })
+      }
     >
       {children}
     </a>

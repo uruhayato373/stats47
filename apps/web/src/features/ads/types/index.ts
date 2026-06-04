@@ -21,6 +21,15 @@ export interface AffiliateAd {
   height: number | null;
   createdAt: string | null;
   updatedAt: string | null;
+  /**
+   * A/B テスト用 (AFF-05・任意)。同一 experimentId を持つ active エントリが
+   * 「同じ枠で競合する variant 候補」。未設定なら従来どおり priority 解決 (後方互換)。
+   */
+  experimentId?: string | null;
+  /** 実験内で一意なクリエイティブ ID 例: "300x250-A" / "text-cta-benefit" */
+  variantId?: string | null;
+  /** 加重ランダムの重み (既定 1) */
+  weight?: number | null;
 }
 
 export type AffiliateLocationCode =

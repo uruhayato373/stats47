@@ -6,6 +6,10 @@ interface AdImpressionTrackerProps {
   category: string;
   label: string;
   position: string;
+  /** A/B テスト用 (AFF-05・任意) */
+  experimentId?: string;
+  variantId?: string;
+  creativeSize?: string;
   children: React.ReactNode;
 }
 
@@ -17,6 +21,9 @@ export function AdImpressionTracker({
   category,
   label,
   position,
+  experimentId,
+  variantId,
+  creativeSize,
   children,
 }: AdImpressionTrackerProps) {
   const ref = useRef<HTMLDivElement>(null);
@@ -41,6 +48,9 @@ export function AdImpressionTracker({
                 event_label: label,
                 affiliate_category: category,
                 link_position: position,
+                ...(experimentId ? { experiment_id: experimentId } : {}),
+                ...(variantId ? { variant_id: variantId } : {}),
+                ...(creativeSize ? { creative_size: creativeSize } : {}),
               });
             }
           }, 1000);
@@ -58,7 +68,7 @@ export function AdImpressionTracker({
       observer.disconnect();
       if (timer) clearTimeout(timer);
     };
-  }, [category, label, position]);
+  }, [category, label, position, experimentId, variantId, creativeSize]);
 
   return <div ref={ref}>{children}</div>;
 }

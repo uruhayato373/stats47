@@ -13,10 +13,15 @@ export {
   resolveAffiliateBannersByCategoryKey,
   resolveAffiliateTextAds,
   resolveAffiliateTextAdsByTagKeys,
+  resolveExperimentVariantsByCategoryKey,
 } from "./services/resolve-affiliate-ad";
 export { fetchAffiliateAdAction } from "./actions/fetch-affiliate-ad";
 export { AffiliateAdSlot } from "./components/AffiliateAdSlot";
 export { BlogSidebarTextAds } from "./components/BlogSidebarTextAds";
-export type { ResolvedAffiliateAd, ResolvedAffiliateBanner } from "./services/resolve-affiliate-ad";
+export type {
+  ResolvedAffiliateAd,
+  ResolvedAffiliateBanner,
+  ResolvedAffiliateVariant,
+} from "./services/resolve-affiliate-ad";
 export type { AffiliateLocationCode } from "./types";
 export { AreaBannerAd } from "./components/AreaBannerAd";
