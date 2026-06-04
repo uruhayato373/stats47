@@ -68,25 +68,29 @@ agent 用詳細 (検証コマンド・仮説・実測) は 2 層構造の下層
 
 ---
 
-## [AFF-03] ランキングページのバナー枠検討 (要・設計レビュー)
+## [AFF-03] ランキングページのバナー枠追加 (案A 実装)
 
-- **status**: pending
+- **status**: in-progress
 - **tier**: 2
 - **target_metric**: affiliate/impression
 - **owner**: claude
+- **deployed_at**: 2026-06-04
 - **due**: 2026-06-28
-- **verification_command**: `curl -s -A "Googlebot" "https://stats47.jp/ranking/<key>" | grep -c affiliate`
-- **related_pr**: -
+- **verification_command**: `curl -s -A "Googlebot" "https://stats47.jp/ranking/<banner在庫のあるkey>" | grep -c "a8.net"`
+- **related_pr**: (develop→main PR)
 
 **[仮説]** ランキング詳細 (`/ranking/[rankingKey]`) はサイトの主要トラフィックだが、現状 affiliate は
 `sidebar-bottom` の **text 18 枠**のみで banner impression がゼロ。視認性の高い banner 枠を 1 つ足せば
 impression が大きく増える可能性。
 
-- **設計提案 (承認待ち)**: `docs/40_アフィリエイト管理/AFF-03-ranking-banner-design.md`
-- **SSG リスクは低い** (確認済): ranking サイドバーの `AffiliateAdSlot` は既に async Server Component で
-  R2 を build 時解決しており、`cookies()/headers()` を増やさなければ force-dynamic 化しない。推奨案 A は
-  `AffiliateAdSlot.tsx` 1 ファイルにバナー優先を足す外科的変更。
-- 実装は本ログとは別 PR で、`next build` の `○ Static` 維持を確認してから。
+- **設計**: `docs/40_アフィリエイト管理/AFF-03-ranking-banner-design.md` (案A 採用)
+- **実装 (2026-06-04)**: `AffiliateAdSlot` の解決優先順位を「バナー → テキスト → AdSense」に変更。
+  - `resolveAffiliateBannersByCategoryKey(categoryKey, 1)` を新設 (services / server から export)
+  - sidebar のみバナー優先。banner 在庫の無い 8 軸は従来どおり text→AdSense にフォールバック
+  - `cookies()/headers()` を追加していないため SSG は維持 (既存 async RSC と同パターン)。型チェック green。
+  - SSG (`○ Static`) の最終確認は CI の `next build` に委ねる (ローカルはフルビルド未実行)
+- **検証期日後の判定**: 本番 ranking の HTML に banner が描画され、`ad_impression(link_position=ranking-sidebar)` が
+  GA4 で観測されれば前進。CTR は AFF-04 で評価。
 - **検証期日後の判定**: 本番 ranking の HTML に banner が描画され、`ad_impression(link_position=ranking-*)` が
   GA4 で観測されれば前進。CTR は AFF-04 で評価。
 
