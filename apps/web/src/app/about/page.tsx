@@ -5,7 +5,7 @@
  * Trustworthiness 評価を高めるために運営者情報と運営方針を明示するページ。
  *
  * 主な内容:
- * - 運営者プロフィール（KAZU、元県庁職員 20 年）
+ * - 運営者プロフィール（KAZU、元県庁職員 20 年 → AI 独学 → 転職 → 独立）
  * - stats47 のミッションと存在意義
  * - データソース（e-Stat 等の一次情報）
  * - 編集方針（客観性・中立性・出典明示）
@@ -62,14 +62,14 @@ const TEXT_STYLE_WITH_MARGIN = "text-xs leading-relaxed mb-4 md:text-sm";
 export const metadata: Metadata = {
   title: "このサイトについて",
   description:
-    "統計で見る都道府県（stats47）の運営方針と運営者情報。元県庁職員 20 年の経験をもとに、e-Stat 等の一次統計データを分かりやすく可視化。編集方針・データソース・お問い合わせ。",
+    "統計で見る都道府県（stats47）の運営方針と運営者情報。県庁職員を約 20 年務めたのち、在職中に独学で AI を学び、IT・データ業界へ転職・独立。e-Stat 等の一次統計データを分かりやすく可視化。編集方針・データソース・お問い合わせ。",
   alternates: {
     canonical: "/about",
   },
   openGraph: {
     title: "このサイトについて",
     description:
-      "元県庁職員 20 年の開発者が運営する統計可視化サイト。公的統計を正確・中立に届ける編集方針。",
+      "元県庁職員が AI を独学し、転職・独立して運営する統計可視化サイト。公的統計を正確・中立に届ける編集方針。",
     type: "website",
     url: "https://stats47.jp/about",
   },
@@ -118,7 +118,7 @@ export default function AboutPage() {
       <div className="mb-6 md:mb-8">
         <h1 className="text-2xl font-bold mb-4">このサイトについて</h1>
         <p className={`${TEXT_STYLE} text-muted-foreground`}>
-          統計で見る都道府県（stats47）は、47 都道府県の公的統計データを「誰でも使える形」にリデザインする個人運営サイトです。元県庁職員 20 年の経験をもとに、e-Stat などの一次データを可視化し、独自の分析と解説を添えてお届けします。
+          統計で見る都道府県（stats47）は、47 都道府県の公的統計データを「誰でも使える形」にリデザインする個人運営サイトです。県庁職員を約 20 年務めたのち、在職中に独学で AI を学び、IT・データ業界へ転職・独立した運営者が、e-Stat などの一次データを可視化し、独自の分析と解説を添えてお届けします。
         </p>
       </div>
 
@@ -132,7 +132,7 @@ export default function AboutPage() {
             <div>
               <p className="font-semibold text-base">KAZU</p>
               <p className="text-xs text-muted-foreground">
-                元県庁職員 20 年 / データ可視化コンサルタント
+                元県庁職員（約 20 年）→ AI 独学・転職 → 独立 / データ可視化
               </p>
               <div className="flex items-center gap-1 mt-1">
                 <MapPin className="h-3 w-3 text-muted-foreground" />
@@ -144,10 +144,20 @@ export default function AboutPage() {
           <Separator className="mb-4" />
 
           <p className={TEXT_STYLE_WITH_MARGIN}>
-            20 年間、自治体職員として統計の「作る現場」と「使う現場」の両方に身を置いてきました。作る立場で見てきたのは、多くの職員が膨大な手間と時間をかけ、1 件 1 件の数字に込める真摯な仕事。しかし使う立場になると、その貴重なデータは複雑なサイトの奥底に眠り、<strong>どこに何があるか分からず、見つけても加工しなければ使い物にならない</strong>という現実に直面しました。
+            約 20 年間、自治体職員として統計の「作る現場」と「使う現場」の両方に身を置いてきました。作る立場で見てきたのは、多くの職員が膨大な手間と時間をかけ、1 件 1 件の数字に込める真摯な仕事。しかし使う立場になると、その貴重なデータは複雑なサイトの奥底に眠り、<strong>どこに何があるか分からず、見つけても加工しなければ使い物にならない</strong>という現実に直面しました。
           </p>
           <p className={TEXT_STYLE_WITH_MARGIN}>
-            stats47 は、この「探す苦労」と「加工する手間」をゼロにするために 2024 年 10 月に立ち上げたプロジェクトです。公的データの正確性はそのままに、現代の UI/UX で「すぐに使える形」へとリデザインしています。
+            その違和感をきっかけに、在職中から独学で AI・データ処理を学び始めました。数年かけてスキルを蓄え、IT・データ業界へ転職。その後独立し、2024 年 10 月にこの stats47 を立ち上げました。公的データの正確性はそのままに、現代の UI/UX で「すぐに使える形」へとリデザインすることをミッションにしています。
+          </p>
+          <p className={TEXT_STYLE_WITH_MARGIN}>
+            公務員から AI を独学して転職・独立するまでの体験記は、
+            <a href="/blog/koumuin-ai-tenshoku-1500man" className="text-primary underline underline-offset-2">
+              「公務員→AI独学で転職した話」
+            </a>
+            にまとめています。
+            <span className="text-muted-foreground">
+              （※記事内で触れる年収はあくまで個人の結果であり、同様の成果を保証するものではありません）
+            </span>
           </p>
 
           {/* SNS / 外部プロフィール */}

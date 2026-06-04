@@ -12510,5 +12510,2405 @@
     "url": "https://stats47.jp/areas/21000/landweather",
     "status": "success",
     "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:15.002Z",
+    "url": "https://stats47.jp/areas/21000/socialsecurity",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:15.316Z",
+    "url": "https://stats47.jp/areas/21000/energy",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:15.631Z",
+    "url": "https://stats47.jp/areas/21000/tourism",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:15.958Z",
+    "url": "https://stats47.jp/areas/21000/administrativefinancial",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:16.282Z",
+    "url": "https://stats47.jp/areas/21000/agriculture",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:16.580Z",
+    "url": "https://stats47.jp/areas/21000/commercial",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:16.862Z",
+    "url": "https://stats47.jp/areas/21000/educationsports",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:17.164Z",
+    "url": "https://stats47.jp/areas/21000/ict",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:17.448Z",
+    "url": "https://stats47.jp/areas/21000/infrastructure",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:17.732Z",
+    "url": "https://stats47.jp/areas/21000/international",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:18.046Z",
+    "url": "https://stats47.jp/areas/21000/miningindustry",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:18.386Z",
+    "url": "https://stats47.jp/areas/21000/safetyenvironment",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:18.673Z",
+    "url": "https://stats47.jp/areas/22000/laborwage",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:18.954Z",
+    "url": "https://stats47.jp/areas/22000/construction",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:19.236Z",
+    "url": "https://stats47.jp/areas/22000/landweather",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:19.535Z",
+    "url": "https://stats47.jp/areas/22000/socialsecurity",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:19.815Z",
+    "url": "https://stats47.jp/areas/22000/energy",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:20.110Z",
+    "url": "https://stats47.jp/areas/22000/tourism",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:20.386Z",
+    "url": "https://stats47.jp/areas/22000/administrativefinancial",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:20.663Z",
+    "url": "https://stats47.jp/areas/22000/agriculture",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:20.943Z",
+    "url": "https://stats47.jp/areas/22000/commercial",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:21.226Z",
+    "url": "https://stats47.jp/areas/22000/educationsports",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:21.525Z",
+    "url": "https://stats47.jp/areas/22000/ict",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:21.804Z",
+    "url": "https://stats47.jp/areas/22000/infrastructure",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:22.084Z",
+    "url": "https://stats47.jp/areas/22000/international",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:22.370Z",
+    "url": "https://stats47.jp/areas/22000/miningindustry",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:22.650Z",
+    "url": "https://stats47.jp/areas/22000/safetyenvironment",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:22.928Z",
+    "url": "https://stats47.jp/areas/23000/laborwage",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:23.209Z",
+    "url": "https://stats47.jp/areas/23000/construction",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:23.485Z",
+    "url": "https://stats47.jp/areas/23000/landweather",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:23.780Z",
+    "url": "https://stats47.jp/areas/23000/socialsecurity",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:24.102Z",
+    "url": "https://stats47.jp/areas/23000/energy",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:24.399Z",
+    "url": "https://stats47.jp/areas/23000/tourism",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:24.679Z",
+    "url": "https://stats47.jp/areas/23000/administrativefinancial",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:24.961Z",
+    "url": "https://stats47.jp/areas/23000/agriculture",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:25.242Z",
+    "url": "https://stats47.jp/areas/23000/commercial",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:25.527Z",
+    "url": "https://stats47.jp/areas/23000/educationsports",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:25.813Z",
+    "url": "https://stats47.jp/areas/23000/ict",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:26.091Z",
+    "url": "https://stats47.jp/areas/23000/infrastructure",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:26.373Z",
+    "url": "https://stats47.jp/areas/23000/international",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:26.653Z",
+    "url": "https://stats47.jp/areas/23000/miningindustry",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:26.936Z",
+    "url": "https://stats47.jp/areas/23000/safetyenvironment",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:27.218Z",
+    "url": "https://stats47.jp/areas/24000/laborwage",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:27.502Z",
+    "url": "https://stats47.jp/areas/24000/construction",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:27.777Z",
+    "url": "https://stats47.jp/areas/24000/landweather",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:28.053Z",
+    "url": "https://stats47.jp/areas/24000/socialsecurity",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:28.335Z",
+    "url": "https://stats47.jp/areas/24000/energy",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:28.615Z",
+    "url": "https://stats47.jp/areas/24000/tourism",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:28.911Z",
+    "url": "https://stats47.jp/areas/24000/administrativefinancial",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:29.187Z",
+    "url": "https://stats47.jp/areas/24000/agriculture",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:29.468Z",
+    "url": "https://stats47.jp/areas/24000/commercial",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:29.746Z",
+    "url": "https://stats47.jp/areas/24000/educationsports",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:30.031Z",
+    "url": "https://stats47.jp/areas/24000/ict",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:30.306Z",
+    "url": "https://stats47.jp/areas/24000/infrastructure",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:30.606Z",
+    "url": "https://stats47.jp/areas/24000/international",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:30.888Z",
+    "url": "https://stats47.jp/areas/24000/miningindustry",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:31.170Z",
+    "url": "https://stats47.jp/areas/24000/safetyenvironment",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:31.452Z",
+    "url": "https://stats47.jp/areas/25000/laborwage",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:31.734Z",
+    "url": "https://stats47.jp/areas/25000/construction",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:32.011Z",
+    "url": "https://stats47.jp/areas/25000/landweather",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:32.291Z",
+    "url": "https://stats47.jp/areas/25000/socialsecurity",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:32.573Z",
+    "url": "https://stats47.jp/areas/25000/energy",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:32.854Z",
+    "url": "https://stats47.jp/areas/25000/tourism",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:33.136Z",
+    "url": "https://stats47.jp/areas/25000/administrativefinancial",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:33.419Z",
+    "url": "https://stats47.jp/areas/25000/agriculture",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:33.698Z",
+    "url": "https://stats47.jp/areas/25000/commercial",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:33.979Z",
+    "url": "https://stats47.jp/areas/25000/educationsports",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:34.255Z",
+    "url": "https://stats47.jp/areas/25000/ict",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:34.538Z",
+    "url": "https://stats47.jp/areas/25000/infrastructure",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:34.841Z",
+    "url": "https://stats47.jp/areas/25000/international",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:35.123Z",
+    "url": "https://stats47.jp/areas/25000/miningindustry",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:35.416Z",
+    "url": "https://stats47.jp/areas/25000/safetyenvironment",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:35.699Z",
+    "url": "https://stats47.jp/areas/26000/laborwage",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:35.980Z",
+    "url": "https://stats47.jp/areas/26000/construction",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:36.265Z",
+    "url": "https://stats47.jp/areas/26000/landweather",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:36.547Z",
+    "url": "https://stats47.jp/areas/26000/socialsecurity",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:36.827Z",
+    "url": "https://stats47.jp/areas/26000/energy",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:37.111Z",
+    "url": "https://stats47.jp/areas/26000/tourism",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:37.386Z",
+    "url": "https://stats47.jp/areas/26000/administrativefinancial",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:37.665Z",
+    "url": "https://stats47.jp/areas/26000/agriculture",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:37.949Z",
+    "url": "https://stats47.jp/areas/26000/commercial",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:38.230Z",
+    "url": "https://stats47.jp/areas/26000/educationsports",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:38.510Z",
+    "url": "https://stats47.jp/areas/26000/ict",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:38.786Z",
+    "url": "https://stats47.jp/areas/26000/infrastructure",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:39.067Z",
+    "url": "https://stats47.jp/areas/26000/international",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:39.361Z",
+    "url": "https://stats47.jp/areas/26000/miningindustry",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:39.656Z",
+    "url": "https://stats47.jp/areas/26000/safetyenvironment",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:39.951Z",
+    "url": "https://stats47.jp/areas/27000/laborwage",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:40.230Z",
+    "url": "https://stats47.jp/areas/27000/construction",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:40.512Z",
+    "url": "https://stats47.jp/areas/27000/landweather",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:40.792Z",
+    "url": "https://stats47.jp/areas/27000/socialsecurity",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:41.069Z",
+    "url": "https://stats47.jp/areas/27000/energy",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:41.356Z",
+    "url": "https://stats47.jp/areas/27000/tourism",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:41.641Z",
+    "url": "https://stats47.jp/areas/27000/administrativefinancial",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:41.926Z",
+    "url": "https://stats47.jp/areas/27000/agriculture",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:42.206Z",
+    "url": "https://stats47.jp/areas/27000/commercial",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:42.484Z",
+    "url": "https://stats47.jp/areas/27000/educationsports",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:42.762Z",
+    "url": "https://stats47.jp/areas/27000/ict",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:43.054Z",
+    "url": "https://stats47.jp/areas/27000/infrastructure",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:43.330Z",
+    "url": "https://stats47.jp/areas/27000/international",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:43.607Z",
+    "url": "https://stats47.jp/areas/27000/miningindustry",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:43.888Z",
+    "url": "https://stats47.jp/areas/27000/safetyenvironment",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:44.170Z",
+    "url": "https://stats47.jp/areas/28000/laborwage",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:44.451Z",
+    "url": "https://stats47.jp/areas/28000/construction",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:44.736Z",
+    "url": "https://stats47.jp/areas/28000/landweather",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:45.020Z",
+    "url": "https://stats47.jp/areas/28000/socialsecurity",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:45.299Z",
+    "url": "https://stats47.jp/areas/28000/energy",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:45.575Z",
+    "url": "https://stats47.jp/areas/28000/tourism",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:45.858Z",
+    "url": "https://stats47.jp/areas/28000/administrativefinancial",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:46.135Z",
+    "url": "https://stats47.jp/areas/28000/agriculture",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:46.417Z",
+    "url": "https://stats47.jp/areas/28000/commercial",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:46.699Z",
+    "url": "https://stats47.jp/areas/28000/educationsports",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:46.990Z",
+    "url": "https://stats47.jp/areas/28000/ict",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:47.275Z",
+    "url": "https://stats47.jp/areas/28000/infrastructure",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:47.560Z",
+    "url": "https://stats47.jp/areas/28000/international",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:47.842Z",
+    "url": "https://stats47.jp/areas/28000/miningindustry",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:48.122Z",
+    "url": "https://stats47.jp/areas/28000/safetyenvironment",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:48.401Z",
+    "url": "https://stats47.jp/areas/29000/laborwage",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:48.675Z",
+    "url": "https://stats47.jp/areas/29000/construction",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:48.954Z",
+    "url": "https://stats47.jp/areas/29000/landweather",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:49.237Z",
+    "url": "https://stats47.jp/areas/29000/socialsecurity",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:49.518Z",
+    "url": "https://stats47.jp/areas/29000/energy",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:49.797Z",
+    "url": "https://stats47.jp/areas/29000/tourism",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:50.079Z",
+    "url": "https://stats47.jp/areas/29000/administrativefinancial",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:50.358Z",
+    "url": "https://stats47.jp/areas/29000/agriculture",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:50.633Z",
+    "url": "https://stats47.jp/areas/29000/commercial",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:50.912Z",
+    "url": "https://stats47.jp/areas/29000/educationsports",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:51.199Z",
+    "url": "https://stats47.jp/areas/29000/ict",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:51.482Z",
+    "url": "https://stats47.jp/areas/29000/infrastructure",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:51.761Z",
+    "url": "https://stats47.jp/areas/29000/international",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:52.043Z",
+    "url": "https://stats47.jp/areas/29000/miningindustry",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:52.325Z",
+    "url": "https://stats47.jp/areas/29000/safetyenvironment",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:52.609Z",
+    "url": "https://stats47.jp/areas/30000/laborwage",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:52.888Z",
+    "url": "https://stats47.jp/areas/30000/construction",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:53.168Z",
+    "url": "https://stats47.jp/areas/30000/landweather",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:53.447Z",
+    "url": "https://stats47.jp/areas/30000/socialsecurity",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:53.728Z",
+    "url": "https://stats47.jp/areas/30000/energy",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:54.012Z",
+    "url": "https://stats47.jp/areas/30000/tourism",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:54.288Z",
+    "url": "https://stats47.jp/areas/30000/administrativefinancial",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:54.570Z",
+    "url": "https://stats47.jp/areas/30000/agriculture",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:54.851Z",
+    "url": "https://stats47.jp/areas/30000/commercial",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:55.133Z",
+    "url": "https://stats47.jp/areas/30000/educationsports",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:55.416Z",
+    "url": "https://stats47.jp/areas/30000/ict",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:55.693Z",
+    "url": "https://stats47.jp/areas/30000/infrastructure",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:55.974Z",
+    "url": "https://stats47.jp/areas/30000/international",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:56.258Z",
+    "url": "https://stats47.jp/areas/30000/miningindustry",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:56.539Z",
+    "url": "https://stats47.jp/areas/30000/safetyenvironment",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:56.819Z",
+    "url": "https://stats47.jp/areas/31000/laborwage",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:57.097Z",
+    "url": "https://stats47.jp/areas/31000/construction",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:57.377Z",
+    "url": "https://stats47.jp/areas/31000/landweather",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:57.662Z",
+    "url": "https://stats47.jp/areas/31000/socialsecurity",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:57.939Z",
+    "url": "https://stats47.jp/areas/31000/energy",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:58.222Z",
+    "url": "https://stats47.jp/areas/31000/tourism",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:58.502Z",
+    "url": "https://stats47.jp/areas/31000/administrativefinancial",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:58.786Z",
+    "url": "https://stats47.jp/areas/31000/agriculture",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:59.064Z",
+    "url": "https://stats47.jp/areas/31000/commercial",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:59.349Z",
+    "url": "https://stats47.jp/areas/31000/educationsports",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:59.632Z",
+    "url": "https://stats47.jp/areas/31000/ict",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:22:59.908Z",
+    "url": "https://stats47.jp/areas/31000/infrastructure",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:23:00.189Z",
+    "url": "https://stats47.jp/areas/31000/international",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:23:00.469Z",
+    "url": "https://stats47.jp/areas/31000/miningindustry",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:23:00.746Z",
+    "url": "https://stats47.jp/areas/31000/safetyenvironment",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:23:01.030Z",
+    "url": "https://stats47.jp/areas/32000/laborwage",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:23:01.309Z",
+    "url": "https://stats47.jp/areas/32000/construction",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:23:01.593Z",
+    "url": "https://stats47.jp/areas/32000/landweather",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:23:01.878Z",
+    "url": "https://stats47.jp/areas/32000/socialsecurity",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:23:02.160Z",
+    "url": "https://stats47.jp/areas/32000/energy",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:23:02.442Z",
+    "url": "https://stats47.jp/areas/32000/tourism",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:23:02.723Z",
+    "url": "https://stats47.jp/areas/32000/administrativefinancial",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:23:03.004Z",
+    "url": "https://stats47.jp/areas/32000/agriculture",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:23:03.284Z",
+    "url": "https://stats47.jp/areas/32000/commercial",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:23:03.568Z",
+    "url": "https://stats47.jp/areas/32000/educationsports",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:23:03.850Z",
+    "url": "https://stats47.jp/areas/32000/ict",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:23:04.124Z",
+    "url": "https://stats47.jp/areas/32000/infrastructure",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:23:04.408Z",
+    "url": "https://stats47.jp/areas/32000/international",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:23:04.688Z",
+    "url": "https://stats47.jp/areas/32000/miningindustry",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:23:04.968Z",
+    "url": "https://stats47.jp/areas/32000/safetyenvironment",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:23:05.244Z",
+    "url": "https://stats47.jp/areas/33000/laborwage",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:23:05.526Z",
+    "url": "https://stats47.jp/areas/33000/construction",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:23:05.809Z",
+    "url": "https://stats47.jp/areas/33000/landweather",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:23:06.092Z",
+    "url": "https://stats47.jp/areas/33000/socialsecurity",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:23:06.369Z",
+    "url": "https://stats47.jp/areas/33000/energy",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:23:06.656Z",
+    "url": "https://stats47.jp/areas/33000/tourism",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:23:06.943Z",
+    "url": "https://stats47.jp/areas/33000/administrativefinancial",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:23:07.225Z",
+    "url": "https://stats47.jp/areas/33000/agriculture",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:23:07.501Z",
+    "url": "https://stats47.jp/areas/33000/commercial",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:23:07.785Z",
+    "url": "https://stats47.jp/areas/33000/educationsports",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:23:08.068Z",
+    "url": "https://stats47.jp/areas/33000/ict",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:23:08.351Z",
+    "url": "https://stats47.jp/areas/33000/infrastructure",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:23:08.634Z",
+    "url": "https://stats47.jp/areas/33000/international",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:23:08.911Z",
+    "url": "https://stats47.jp/areas/33000/miningindustry",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:23:09.189Z",
+    "url": "https://stats47.jp/areas/33000/safetyenvironment",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:23:09.469Z",
+    "url": "https://stats47.jp/areas/34000/laborwage",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:23:09.749Z",
+    "url": "https://stats47.jp/areas/34000/construction",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:23:10.029Z",
+    "url": "https://stats47.jp/areas/34000/landweather",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:23:10.308Z",
+    "url": "https://stats47.jp/areas/34000/socialsecurity",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:23:10.590Z",
+    "url": "https://stats47.jp/areas/34000/energy",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:23:10.913Z",
+    "url": "https://stats47.jp/areas/34000/tourism",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:23:11.192Z",
+    "url": "https://stats47.jp/areas/34000/administrativefinancial",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-03T22:23:11.476Z",
+    "url": "https://stats47.jp/areas/34000/agriculture",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:04:38.359Z",
+    "url": "https://stats47.jp/areas/34000/commercial",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:04:38.716Z",
+    "url": "https://stats47.jp/areas/34000/educationsports",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:04:39.078Z",
+    "url": "https://stats47.jp/areas/34000/ict",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:04:39.470Z",
+    "url": "https://stats47.jp/areas/34000/infrastructure",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:04:39.781Z",
+    "url": "https://stats47.jp/areas/34000/international",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:04:40.106Z",
+    "url": "https://stats47.jp/areas/34000/miningindustry",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:04:40.456Z",
+    "url": "https://stats47.jp/areas/34000/safetyenvironment",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:04:40.779Z",
+    "url": "https://stats47.jp/areas/35000/laborwage",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:04:41.079Z",
+    "url": "https://stats47.jp/areas/35000/construction",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:04:41.467Z",
+    "url": "https://stats47.jp/areas/35000/landweather",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:04:41.830Z",
+    "url": "https://stats47.jp/areas/35000/socialsecurity",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:04:42.168Z",
+    "url": "https://stats47.jp/areas/35000/energy",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:04:42.491Z",
+    "url": "https://stats47.jp/areas/35000/tourism",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:04:42.793Z",
+    "url": "https://stats47.jp/areas/35000/administrativefinancial",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:04:43.122Z",
+    "url": "https://stats47.jp/areas/35000/agriculture",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:04:43.419Z",
+    "url": "https://stats47.jp/areas/35000/commercial",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:04:43.764Z",
+    "url": "https://stats47.jp/areas/35000/educationsports",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:04:44.090Z",
+    "url": "https://stats47.jp/areas/35000/ict",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:04:44.395Z",
+    "url": "https://stats47.jp/areas/35000/infrastructure",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:04:44.725Z",
+    "url": "https://stats47.jp/areas/35000/international",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:04:45.032Z",
+    "url": "https://stats47.jp/areas/35000/miningindustry",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:04:45.361Z",
+    "url": "https://stats47.jp/areas/35000/safetyenvironment",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:04:45.676Z",
+    "url": "https://stats47.jp/areas/36000/laborwage",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:04:45.986Z",
+    "url": "https://stats47.jp/areas/36000/construction",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:04:46.251Z",
+    "url": "https://stats47.jp/areas/36000/landweather",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:04:46.557Z",
+    "url": "https://stats47.jp/areas/36000/socialsecurity",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:04:46.862Z",
+    "url": "https://stats47.jp/areas/36000/energy",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:04:47.156Z",
+    "url": "https://stats47.jp/areas/36000/tourism",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:04:47.459Z",
+    "url": "https://stats47.jp/areas/36000/administrativefinancial",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:04:47.767Z",
+    "url": "https://stats47.jp/areas/36000/agriculture",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:04:48.076Z",
+    "url": "https://stats47.jp/areas/36000/commercial",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:04:48.378Z",
+    "url": "https://stats47.jp/areas/36000/educationsports",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:04:48.676Z",
+    "url": "https://stats47.jp/areas/36000/ict",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:04:48.989Z",
+    "url": "https://stats47.jp/areas/36000/infrastructure",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:04:49.289Z",
+    "url": "https://stats47.jp/areas/36000/international",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:04:49.591Z",
+    "url": "https://stats47.jp/areas/36000/miningindustry",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:04:49.893Z",
+    "url": "https://stats47.jp/areas/36000/safetyenvironment",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:04:50.191Z",
+    "url": "https://stats47.jp/areas/37000/laborwage",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:04:50.482Z",
+    "url": "https://stats47.jp/areas/37000/construction",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:04:50.782Z",
+    "url": "https://stats47.jp/areas/37000/landweather",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:04:51.090Z",
+    "url": "https://stats47.jp/areas/37000/socialsecurity",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:04:51.386Z",
+    "url": "https://stats47.jp/areas/37000/energy",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:04:51.695Z",
+    "url": "https://stats47.jp/areas/37000/tourism",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:04:51.995Z",
+    "url": "https://stats47.jp/areas/37000/administrativefinancial",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:04:52.283Z",
+    "url": "https://stats47.jp/areas/37000/agriculture",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:04:52.560Z",
+    "url": "https://stats47.jp/areas/37000/commercial",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:04:52.863Z",
+    "url": "https://stats47.jp/areas/37000/educationsports",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:04:53.156Z",
+    "url": "https://stats47.jp/areas/37000/ict",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:04:53.449Z",
+    "url": "https://stats47.jp/areas/37000/infrastructure",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:04:53.715Z",
+    "url": "https://stats47.jp/areas/37000/international",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:04:54.026Z",
+    "url": "https://stats47.jp/areas/37000/miningindustry",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:04:54.332Z",
+    "url": "https://stats47.jp/areas/37000/safetyenvironment",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:04:54.627Z",
+    "url": "https://stats47.jp/areas/38000/laborwage",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:04:54.928Z",
+    "url": "https://stats47.jp/areas/38000/construction",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:04:55.225Z",
+    "url": "https://stats47.jp/areas/38000/landweather",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:04:55.530Z",
+    "url": "https://stats47.jp/areas/38000/socialsecurity",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:04:55.843Z",
+    "url": "https://stats47.jp/areas/38000/energy",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:04:56.149Z",
+    "url": "https://stats47.jp/areas/38000/tourism",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:04:56.450Z",
+    "url": "https://stats47.jp/areas/38000/administrativefinancial",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:04:56.759Z",
+    "url": "https://stats47.jp/areas/38000/agriculture",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:04:57.083Z",
+    "url": "https://stats47.jp/areas/38000/commercial",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:04:57.393Z",
+    "url": "https://stats47.jp/areas/38000/educationsports",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:04:57.696Z",
+    "url": "https://stats47.jp/areas/38000/ict",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:04:58.001Z",
+    "url": "https://stats47.jp/areas/38000/infrastructure",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:04:58.317Z",
+    "url": "https://stats47.jp/areas/38000/international",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:04:58.615Z",
+    "url": "https://stats47.jp/areas/38000/miningindustry",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:04:58.918Z",
+    "url": "https://stats47.jp/areas/38000/safetyenvironment",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:04:59.216Z",
+    "url": "https://stats47.jp/areas/39000/laborwage",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:04:59.517Z",
+    "url": "https://stats47.jp/areas/39000/construction",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:04:59.819Z",
+    "url": "https://stats47.jp/areas/39000/landweather",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:00.129Z",
+    "url": "https://stats47.jp/areas/39000/socialsecurity",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:00.427Z",
+    "url": "https://stats47.jp/areas/39000/energy",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:00.734Z",
+    "url": "https://stats47.jp/areas/39000/tourism",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:01.037Z",
+    "url": "https://stats47.jp/areas/39000/administrativefinancial",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:01.337Z",
+    "url": "https://stats47.jp/areas/39000/agriculture",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:01.627Z",
+    "url": "https://stats47.jp/areas/39000/commercial",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:01.929Z",
+    "url": "https://stats47.jp/areas/39000/educationsports",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:02.232Z",
+    "url": "https://stats47.jp/areas/39000/ict",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:02.540Z",
+    "url": "https://stats47.jp/areas/39000/infrastructure",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:02.839Z",
+    "url": "https://stats47.jp/areas/39000/international",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:03.135Z",
+    "url": "https://stats47.jp/areas/39000/miningindustry",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:03.438Z",
+    "url": "https://stats47.jp/areas/39000/safetyenvironment",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:03.732Z",
+    "url": "https://stats47.jp/areas/40000/laborwage",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:04.046Z",
+    "url": "https://stats47.jp/areas/40000/construction",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:04.346Z",
+    "url": "https://stats47.jp/areas/40000/landweather",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:04.653Z",
+    "url": "https://stats47.jp/areas/40000/socialsecurity",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:04.954Z",
+    "url": "https://stats47.jp/areas/40000/energy",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:05.262Z",
+    "url": "https://stats47.jp/areas/40000/tourism",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:05.564Z",
+    "url": "https://stats47.jp/areas/40000/administrativefinancial",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:05.872Z",
+    "url": "https://stats47.jp/areas/40000/agriculture",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:06.165Z",
+    "url": "https://stats47.jp/areas/40000/commercial",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:06.461Z",
+    "url": "https://stats47.jp/areas/40000/educationsports",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:06.761Z",
+    "url": "https://stats47.jp/areas/40000/ict",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:07.055Z",
+    "url": "https://stats47.jp/areas/40000/infrastructure",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:07.354Z",
+    "url": "https://stats47.jp/areas/40000/international",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:07.662Z",
+    "url": "https://stats47.jp/areas/40000/miningindustry",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:07.965Z",
+    "url": "https://stats47.jp/areas/40000/safetyenvironment",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:08.264Z",
+    "url": "https://stats47.jp/areas/41000/laborwage",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:08.563Z",
+    "url": "https://stats47.jp/areas/41000/construction",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:08.844Z",
+    "url": "https://stats47.jp/areas/41000/landweather",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:09.147Z",
+    "url": "https://stats47.jp/areas/41000/socialsecurity",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:09.455Z",
+    "url": "https://stats47.jp/areas/41000/energy",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:09.763Z",
+    "url": "https://stats47.jp/areas/41000/tourism",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:10.063Z",
+    "url": "https://stats47.jp/areas/41000/administrativefinancial",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:10.368Z",
+    "url": "https://stats47.jp/areas/41000/agriculture",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:10.666Z",
+    "url": "https://stats47.jp/areas/41000/commercial",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:10.968Z",
+    "url": "https://stats47.jp/areas/41000/educationsports",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:11.273Z",
+    "url": "https://stats47.jp/areas/41000/ict",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:11.581Z",
+    "url": "https://stats47.jp/areas/41000/infrastructure",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:11.890Z",
+    "url": "https://stats47.jp/areas/41000/international",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:12.195Z",
+    "url": "https://stats47.jp/areas/41000/miningindustry",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:12.491Z",
+    "url": "https://stats47.jp/areas/41000/safetyenvironment",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:12.788Z",
+    "url": "https://stats47.jp/areas/42000/laborwage",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:13.098Z",
+    "url": "https://stats47.jp/areas/42000/construction",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:13.409Z",
+    "url": "https://stats47.jp/areas/42000/landweather",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:13.703Z",
+    "url": "https://stats47.jp/areas/42000/socialsecurity",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:14.008Z",
+    "url": "https://stats47.jp/areas/42000/energy",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:14.309Z",
+    "url": "https://stats47.jp/areas/42000/tourism",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:14.605Z",
+    "url": "https://stats47.jp/areas/42000/administrativefinancial",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:14.899Z",
+    "url": "https://stats47.jp/areas/42000/agriculture",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:15.196Z",
+    "url": "https://stats47.jp/areas/42000/commercial",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:15.508Z",
+    "url": "https://stats47.jp/areas/42000/educationsports",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:15.810Z",
+    "url": "https://stats47.jp/areas/42000/ict",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:16.116Z",
+    "url": "https://stats47.jp/areas/42000/infrastructure",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:16.421Z",
+    "url": "https://stats47.jp/areas/42000/international",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:16.727Z",
+    "url": "https://stats47.jp/areas/42000/miningindustry",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:17.029Z",
+    "url": "https://stats47.jp/areas/42000/safetyenvironment",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:17.326Z",
+    "url": "https://stats47.jp/areas/43000/laborwage",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:17.607Z",
+    "url": "https://stats47.jp/areas/43000/construction",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:17.903Z",
+    "url": "https://stats47.jp/areas/43000/landweather",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:18.205Z",
+    "url": "https://stats47.jp/areas/43000/socialsecurity",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:18.500Z",
+    "url": "https://stats47.jp/areas/43000/energy",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:18.803Z",
+    "url": "https://stats47.jp/areas/43000/tourism",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:19.099Z",
+    "url": "https://stats47.jp/areas/43000/administrativefinancial",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:19.406Z",
+    "url": "https://stats47.jp/areas/43000/agriculture",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:19.715Z",
+    "url": "https://stats47.jp/areas/43000/commercial",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:20.019Z",
+    "url": "https://stats47.jp/areas/43000/educationsports",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:20.322Z",
+    "url": "https://stats47.jp/areas/43000/ict",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:20.622Z",
+    "url": "https://stats47.jp/areas/43000/infrastructure",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:20.928Z",
+    "url": "https://stats47.jp/areas/43000/international",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:21.232Z",
+    "url": "https://stats47.jp/areas/43000/miningindustry",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:21.536Z",
+    "url": "https://stats47.jp/areas/43000/safetyenvironment",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:21.841Z",
+    "url": "https://stats47.jp/areas/44000/laborwage",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:22.139Z",
+    "url": "https://stats47.jp/areas/44000/construction",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:22.437Z",
+    "url": "https://stats47.jp/areas/44000/landweather",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:22.732Z",
+    "url": "https://stats47.jp/areas/44000/socialsecurity",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:23.044Z",
+    "url": "https://stats47.jp/areas/44000/energy",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:23.339Z",
+    "url": "https://stats47.jp/areas/44000/tourism",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:23.646Z",
+    "url": "https://stats47.jp/areas/44000/administrativefinancial",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:23.958Z",
+    "url": "https://stats47.jp/areas/44000/agriculture",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:24.267Z",
+    "url": "https://stats47.jp/areas/44000/commercial",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:24.568Z",
+    "url": "https://stats47.jp/areas/44000/educationsports",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:24.869Z",
+    "url": "https://stats47.jp/areas/44000/ict",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:25.144Z",
+    "url": "https://stats47.jp/areas/44000/infrastructure",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:25.435Z",
+    "url": "https://stats47.jp/areas/44000/international",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:25.741Z",
+    "url": "https://stats47.jp/areas/44000/miningindustry",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:26.039Z",
+    "url": "https://stats47.jp/areas/44000/safetyenvironment",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:26.342Z",
+    "url": "https://stats47.jp/areas/45000/laborwage",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:26.640Z",
+    "url": "https://stats47.jp/areas/45000/construction",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:26.945Z",
+    "url": "https://stats47.jp/areas/45000/landweather",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:27.247Z",
+    "url": "https://stats47.jp/areas/45000/socialsecurity",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:27.549Z",
+    "url": "https://stats47.jp/areas/45000/energy",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:27.850Z",
+    "url": "https://stats47.jp/areas/45000/tourism",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:28.143Z",
+    "url": "https://stats47.jp/areas/45000/administrativefinancial",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:28.446Z",
+    "url": "https://stats47.jp/areas/45000/agriculture",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:28.747Z",
+    "url": "https://stats47.jp/areas/45000/commercial",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:29.050Z",
+    "url": "https://stats47.jp/areas/45000/educationsports",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:29.355Z",
+    "url": "https://stats47.jp/areas/45000/ict",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:29.763Z",
+    "url": "https://stats47.jp/areas/45000/infrastructure",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:30.039Z",
+    "url": "https://stats47.jp/areas/45000/international",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:30.348Z",
+    "url": "https://stats47.jp/areas/45000/miningindustry",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:30.655Z",
+    "url": "https://stats47.jp/areas/45000/safetyenvironment",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:31.035Z",
+    "url": "https://stats47.jp/areas/46000/laborwage",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:31.312Z",
+    "url": "https://stats47.jp/areas/46000/construction",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:31.614Z",
+    "url": "https://stats47.jp/areas/46000/landweather",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:31.915Z",
+    "url": "https://stats47.jp/areas/46000/socialsecurity",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:32.213Z",
+    "url": "https://stats47.jp/areas/46000/energy",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:32.507Z",
+    "url": "https://stats47.jp/areas/46000/tourism",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:32.801Z",
+    "url": "https://stats47.jp/areas/46000/administrativefinancial",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:33.108Z",
+    "url": "https://stats47.jp/areas/46000/agriculture",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:33.412Z",
+    "url": "https://stats47.jp/areas/46000/commercial",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:33.776Z",
+    "url": "https://stats47.jp/areas/46000/educationsports",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:34.087Z",
+    "url": "https://stats47.jp/areas/46000/ict",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:34.384Z",
+    "url": "https://stats47.jp/areas/46000/infrastructure",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:34.781Z",
+    "url": "https://stats47.jp/areas/46000/international",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:35.082Z",
+    "url": "https://stats47.jp/areas/46000/miningindustry",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:35.380Z",
+    "url": "https://stats47.jp/areas/46000/safetyenvironment",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:35.685Z",
+    "url": "https://stats47.jp/areas/47000/laborwage",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:35.984Z",
+    "url": "https://stats47.jp/areas/47000/construction",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:36.293Z",
+    "url": "https://stats47.jp/areas/47000/landweather",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:36.589Z",
+    "url": "https://stats47.jp/areas/47000/socialsecurity",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:36.892Z",
+    "url": "https://stats47.jp/areas/47000/energy",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:37.187Z",
+    "url": "https://stats47.jp/areas/47000/tourism",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:37.597Z",
+    "url": "https://stats47.jp/areas/47000/administrativefinancial",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:37.897Z",
+    "url": "https://stats47.jp/areas/47000/agriculture",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:38.205Z",
+    "url": "https://stats47.jp/areas/47000/commercial",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:38.571Z",
+    "url": "https://stats47.jp/areas/47000/educationsports",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:38.874Z",
+    "url": "https://stats47.jp/areas/47000/ict",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:39.172Z",
+    "url": "https://stats47.jp/areas/47000/infrastructure",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
+  },
+  {
+    "timestamp": "2026-06-04T22:05:39.469Z",
+    "url": "https://stats47.jp/areas/47000/international",
+    "status": "success",
+    "coverageState": "unindexed-urls-combined.csv"
   }
 ]
