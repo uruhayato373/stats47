@@ -69,9 +69,6 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git fetch origin develop
-          git checkout develop
-          git pull --rebase origin develop
           git add ".claude/state/ads/"
           if git diff --cached --quiet; then
             echo "No GA4 affiliate snapshot changes — skipping commit."
@@ -79,4 +76,6 @@ jobs:
           fi
           DATE=$(date -u +%Y-%m-%d)
           git commit -m "chore(ads): affiliate GA4 snapshot ${DATE} [skip ci]"
+          # commit 済みなので unstaged changes は無く rebase が通る
+          git pull --rebase origin develop
           git push origin develop

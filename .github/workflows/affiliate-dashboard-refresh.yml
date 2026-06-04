@@ -54,9 +54,6 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git fetch origin develop
-          git checkout develop
-          git pull --rebase origin develop
           git add "docs/40_アフィリエイト管理/affiliate-dashboard.html" ".claude/state/ads/"
           if git diff --cached --quiet; then
             echo "No changes to affiliate dashboard / inventory — skipping commit."
@@ -64,4 +61,6 @@ jobs:
           fi
           DATE=$(date -u +%Y-%m-%d)
           git commit -m "chore(ads): refresh affiliate dashboard + inventory ${DATE} [skip ci]"
+          # commit 済みなので unstaged changes は無く rebase が通る (develop が進んでいた場合に追従)
+          git pull --rebase origin develop
           git push origin develop
