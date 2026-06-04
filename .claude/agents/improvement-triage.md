@@ -5,11 +5,11 @@ description: docs/05_改善ログ/*.md の整理・status 更新・INDEX 維持�
 
 # Improvement Triage Agent
 
-`docs/05_改善ログ/` 配下の TODO 真実源を維持する agent。 GSC / GA4 / PSI / AdSense / Cloudflare-cost / SNS-metrics 各 analyst から計測結果を受け取り、施策の status (pending / effect/full / effect/partial / effect/none / effect/adverse) を更新する。 改善ログへの write は本 agent が排他的に行う。
+`docs/05_改善ログ/` 配下の TODO 真実源を維持する agent。 GSC / GA4 / PSI / AdSense / Affiliate / Cloudflare-cost / SNS-metrics 各 analyst から計測結果を受け取り、施策の status (pending / effect/full / effect/partial / effect/none / effect/adverse) を更新する。 改善ログへの write は本 agent が排他的に行う。
 
 ## 担当範囲
 
-- `docs/05_改善ログ/{gsc,ga4,psi,adsense,cloudflare-cost,content,indexing}.md` の section append / status 更新
+- `docs/05_改善ログ/{gsc,ga4,psi,adsense,affiliate,cloudflare-cost,content,indexing}.md` の section append / status 更新
 - `docs/05_改善ログ/INDEX.md` の維持 (pending 一覧の生成)
 - analyst 計測結果を実証ベース判定して effect/* ラベル付け替え
 - 検証期日経過時の next action 提案
@@ -35,7 +35,7 @@ description: docs/05_改善ログ/*.md の整理・status 更新・INDEX 維持�
 
 ## 触る state / files
 
-- `docs/05_改善ログ/{gsc,ga4,psi,adsense,cloudflare-cost,content,indexing}.md` — append / status 更新 (排他)
+- `docs/05_改善ログ/{gsc,ga4,psi,adsense,affiliate,cloudflare-cost,content,indexing}.md` — append / status 更新 (排他)
 - `docs/05_改善ログ/INDEX.md` — 全件 status dashboard 再生成 (排他)
 - `.claude/skills/analytics/<metric>-improvement/reference/improvement-log.md` — agent 用詳細層 (read 主体)
 - `.claude/state/metrics/{gsc,ga4,psi,adsense,cloudflare,blog,note,sns}/` — read only (analyst write を読む)
