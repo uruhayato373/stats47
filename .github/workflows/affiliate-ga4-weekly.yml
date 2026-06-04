@@ -1,0 +1,82 @@
+name: 📊 Fetch Affiliate GA4 Metrics
+
+# GA4 から アフィリエイト計測イベント (ad_impression / affiliate_click) を取得し、
+# (category × position) 別の impression / click / CTR snapshot を develop に commit-back する。
+#
+# クラウド / web 実行環境には GA4 鍵が無いため、実測は CI で行う (既存 metrics workflow と同じ
+# GOOGLE_SERVICE_ACCOUNT_KEY_JSON シークレットを stats47-*.json に復元して実行)。
+#
+# 前提: GA4 管理画面で custom dimension `affiliate_category` / `link_position` (イベントスコープ) を
+# 登録済みであること。未登録時はスクリプトが eventName 総数にフォールバックする (内訳なし)。
+
+on:
+  workflow_dispatch:
+    inputs:
+      days:
+        description: "集計日数"
+        required: false
+        default: "28"
+  schedule:
+    - cron: "0 13 * * 0" # JST 22:00 Sunday (UTC 13:00) — 週次 metrics fetch の後
+
+permissions:
+  contents: write
+
+concurrency:
+  group: affiliate-ga4-fetch
+  cancel-in-progress: false
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: 🧰 Checkout develop
+        uses: actions/checkout@v4
+        with:
+          ref: develop
+          fetch-depth: 1
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 📊 Fetch affiliate GA4 metrics
+        env:
+          GOOGLE_SERVICE_ACCOUNT_KEY_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY_JSON }}
+          GA4_PROPERTY_ID: ${{ secrets.GA4_PROPERTY_ID }}
+        run: |
+          set -euo pipefail
+          if [ -z "${GOOGLE_SERVICE_ACCOUNT_KEY_JSON:-}" ]; then
+            echo "::error::GOOGLE_SERVICE_ACCOUNT_KEY_JSON secret 未設定"; exit 1
+          fi
+          echo "$GOOGLE_SERVICE_ACCOUNT_KEY_JSON" > stats47-f6b5dae19196.json
+          chmod 600 stats47-f6b5dae19196.json
+          DAYS="${{ github.event.inputs.days || '28' }}"
+          node .claude/scripts/ads/fetch-affiliate-ga4.cjs "$DAYS" | tee /tmp/affiliate-ga4.md
+          rm -f stats47-f6b5dae19196.json
+
+      - name: 📝 Job summary
+        if: always()
+        run: cat /tmp/affiliate-ga4.md >> "$GITHUB_STEP_SUMMARY" 2>/dev/null || true
+
+      - name: 💾 Commit snapshot if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch origin develop
+          git checkout develop
+          git pull --rebase origin develop
+          git add ".claude/state/ads/"
+          if git diff --cached --quiet; then
+            echo "No GA4 affiliate snapshot changes — skipping commit."
+            exit 0
+          fi
+          DATE=$(date -u +%Y-%m-%d)
+          git commit -m "chore(ads): affiliate GA4 snapshot ${DATE} [skip ci]"
+          git push origin develop

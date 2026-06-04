@@ -1,0 +1,37 @@
+# affiliate-improvement 詳細ログ (agent 用・append-only)
+
+2 層構造の下層。人間向け要約は `docs/05_改善ログ/affiliate.md`。
+記入は `.claude/rules/evidence-based-judgment.md` のテンプレに従う (想定値の根拠・検証コマンド・実測を必須)。
+
+---
+
+## AFF-01 在庫ベースライン棚卸し
+
+- **デプロイ日**: 2026-06-04
+- **想定効果**: なし (計測の起点)
+- **検証コマンド**: `npx tsx .claude/scripts/ads/audit-affiliate-inventory.ts`
+- **実測 (2026-06-04)**:
+  - active 72 枠 / 実広告主 29 社
+  - カテゴリ 17 軸中 9 軸カバー。ゼロ軸 8: agriculture / miningindustry / commercial / educationsports / safetyenvironment / international / infrastructure / ict
+  - 手薄軸: landweather (2)
+  - locationCode: blog-bottom 47 / sidebar-bottom 18 / area-sidebar 4 / sidebar-sticky 2 / sidebar-inline 1
+  - adType: banner 54 / text 18
+  - ページ描画: ranking は sidebar-bottom の text のみ (banner impression ゼロ)
+- **判定**: ベースライン確定。effect ラベルなし。
+- **未確定 / 仮説**:
+  - **[仮説]** ゼロ 8 軸はトラフィックがあっても収益化ゼロ → AFF-02 で補充。
+  - **[仮説]** ranking の banner 不在が impression の最大の取りこぼし → AFF-03 で枠追加検討。
+
+### GA4 計測の前提メモ (observe モードを回す前に確認)
+
+- `ad_impression` / `affiliate_click` は送出済み (`AdImpressionTracker` / `TrackedAffiliateLink`)。
+- **実測経路は GitHub Actions** `.github/workflows/affiliate-ga4-weekly.yml` (週次 cron + dispatch)。
+  既存 metrics workflow と同じ `GOOGLE_SERVICE_ACCOUNT_KEY_JSON` シークレットを鍵ファイルに復元し、
+  `fetch-affiliate-ga4.cjs` を実行 → snapshot `.claude/state/ads/ga4-affiliate-<date>.json` を develop に commit-back。
+  - **検証コマンド (ローカルに鍵がある場合)**: `node .claude/scripts/ads/fetch-affiliate-ga4.cjs 28`
+- 内訳パラメータ `affiliate_category` / `link_position` を GA4 で **dimension として引くにはカスタム
+  ディメンション登録が必要**。未登録だと `eventName` 単位の総数しか取れない。
+  - **未登録時の next action**: GA4 管理画面でイベントスコープのカスタムディメンション
+    `affiliate_category` / `link_position` を登録 → 翌週の workflow 実行で内訳取得。
+  - **[仮説・未検証]** custom dimension が未登録の可能性が高い (新規イベントのため)。初回 workflow 実行の
+    `hasCustomDimensions: false` で判明する。判明したら登録を依頼する。

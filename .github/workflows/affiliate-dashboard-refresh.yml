@@ -1,0 +1,67 @@
+name: 📊 Refresh Affiliate Dashboard
+
+# アフィリエイト在庫の棚卸し JSON と管理画面 HTML を再生成し、変更があれば develop に commit-back する。
+#
+# - SSOT (apps/web/scripts/affiliate-ads-data.ts) が変わったら自動で dashboard を同期
+# - 週次 cron で棚卸し snapshot を履歴として残す (.claude/state/ads/inventory-YYYY-MM-DD.json)
+# - 本番 R2 / アプリには触れない (生成物は docs/ と .claude/state のみ)。R2 反映は publish-affiliate-ads.yml が別途担当。
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [develop]
+    paths:
+      - "apps/web/scripts/affiliate-ads-data.ts"
+      - ".claude/scripts/ads/build-affiliate-dashboard.ts"
+      - ".claude/scripts/ads/audit-affiliate-inventory.ts"
+      - ".github/workflows/affiliate-dashboard-refresh.yml"
+  schedule:
+    - cron: "0 12 * * 0" # JST 21:00 Sunday (UTC 12:00) — 週次棚卸し snapshot
+
+permissions:
+  contents: write
+
+concurrency:
+  group: affiliate-dashboard-refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: 🧰 Checkout develop
+        uses: actions/checkout@v4
+        with:
+          ref: develop
+          fetch-depth: 1
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 📊 Regenerate inventory audit + dashboard
+        run: |
+          npx -y tsx .claude/scripts/ads/audit-affiliate-inventory.ts --json > /dev/null
+          npx -y tsx .claude/scripts/ads/build-affiliate-dashboard.ts > /dev/null
+
+      - name: 💾 Commit if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch origin develop
+          git checkout develop
+          git pull --rebase origin develop
+          git add "docs/40_アフィリエイト管理/affiliate-dashboard.html" ".claude/state/ads/"
+          if git diff --cached --quiet; then
+            echo "No changes to affiliate dashboard / inventory — skipping commit."
+            exit 0
+          fi
+          DATE=$(date -u +%Y-%m-%d)
+          git commit -m "chore(ads): refresh affiliate dashboard + inventory ${DATE} [skip ci]"
+          git push origin develop
