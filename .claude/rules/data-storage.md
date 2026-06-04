@@ -63,7 +63,7 @@ git TS 化し永続 D1 を全廃した。アプリが読む各データの真実
 | 週次計画・週次レビュー | `docs/03_週次運用/週次{計画,レビュー}/YYYY-Www.md` |
 | 週次メトリクスサマリ（自動生成） | `docs/03_週次運用/メトリクス/YYYY-Www.md` |
 | 批判的レビュー・事前検死・SEO 監査・SNS 週報・パフォーマンス・コスト月報 | `docs/04_レビュー/<subcategory>/{YYYY-MM-DD,YYYY-Www,YYYY-MM}.md` |
-| 改善施策の人間向け要約 | `docs/05_改善ログ/{gsc,ga4,adsense,psi,cloudflare-cost}.md` (append-only) |
+| 改善施策の人間向け要約 | `docs/05_改善ログ/{gsc,ga4,adsense,psi,affiliate,cloudflare-cost}.md` (append-only) |
 | YouTube 実験 (1 実験 1 ファイル) | `docs/15_実験ログ/youtube/EXP-NNN.md` |
 | コンテンツ backlog | `docs/{20_ブログ記事企画,22_YouTube企画,30_note記事企画}/backlog/` |
 | 未着手の機能・自動化・UI 改善 backlog | `docs/50_Issues/{feature,automation,ui-improvements}-backlog.md` |
@@ -83,6 +83,7 @@ git TS 化し永続 D1 を全廃した。アプリが読む各データの真実
 | Cloudflare 月次 snapshot JSON + budget 閾値 | `.claude/skills/analytics/cloudflare-cost-improvement/reference/`（人間向け要約は `docs/04_レビュー/cloudflare-cost/YYYY-MM.md` と `docs/05_改善ログ/cloudflare-cost.md`） |
 | Cloudflare 日次 usage（D1/Workers/R2） | `.claude/state/metrics/cloudflare/{snapshots/YYYY-MM-DD.json,history.csv,LATEST.md}`（GitHub Actions 日次 JST 02:30、閾値違反時 `[Cloudflare Alert]` Issues 起票）/ 閾値: `.claude/skills/analytics/cloudflare-cost-improvement/reference/budgets-daily.json` |
 | SNS 投稿メトリクス時系列 | `.claude/skills/analytics/sns-metrics-improvement/snapshots/YYYY-MM-DD/metrics.csv`（書き込み: `.claude/scripts/lib/sns-metrics-store.cjs`） |
+| アフィリエイト在庫棚卸し + GA4 実測 snapshot | `.claude/state/ads/{inventory-*.json,ga4-affiliate-*.json}`（`affiliate-dashboard-refresh.yml` / `affiliate-ga4-weekly.yml` が生成・commit-back、AFF-05） |
 | NSM 週次 JSON snapshot | `.claude/skills/management/nsm-experiment/reference/weekly-snapshots/YYYY-Www.json` |
 | 実験 state（PDCA） | `.claude/state/experiments.json` |
 | RemoteTrigger 記録 | `.claude/state/triggers.json` |
@@ -110,7 +111,7 @@ git TS 化し永続 D1 を全廃した。アプリが読む各データの真実
 
 ## 2 層構造（improvement 系）
 
-改善施策スキル (gsc / ga4 / adsense / cloudflare-cost / psi / sns-metrics) は **必ず 2 層** で記録:
+改善施策スキル (gsc / ga4 / adsense / affiliate / cloudflare-cost / psi / sns-metrics) は **必ず 2 層** で記録:
 
 | 層 | 場所 | 用途 |
 |---|---|---|

@@ -19,7 +19,7 @@ Obsidian で振り返り・思考整理する習慣を支えるため、ファ�
 | 週次計画・週次レビュー | `docs/03_週次運用/週次{計画,レビュー}/YYYY-Www.md` |
 | 週次メトリクス自動生成 | `docs/03_週次運用/メトリクス/YYYY-Www.md` |
 | 批判的レビュー・事前検死・SEO 監査・SNS 週報・パフォーマンスレポート・コスト月報 | `docs/04_レビュー/<subcategory>/YYYY-MM-DD.md` |
-| 改善施策の人間向け要約 (gsc / ga4 / adsense / psi / cloudflare-cost) | `docs/05_改善ログ/<metric>.md` (append-only) |
+| 改善施策の人間向け要約 (gsc / ga4 / adsense / psi / affiliate / cloudflare-cost) | `docs/05_改善ログ/<metric>.md` (append-only) |
 | YouTube 実験・回復 | `docs/15_実験ログ/youtube/EXP-NNN.md` / `recovery-YYYY-MM-DD.md` |
 | ブログ / note / YouTube コンテンツ backlog | `docs/{20_ブログ記事企画,22_YouTube企画,30_note記事企画}/backlog/` |
 | 機能 / 自動化 / UI 改善 backlog (未着手) | `docs/50_Issues/{feature,automation,ui-improvements}-backlog.md` |
@@ -48,7 +48,7 @@ PR で close される単発タスクか？
 
 ## 改善施策の 2 層構造
 
-improvement 系スキル (gsc / ga4 / adsense / cloudflare-cost / psi / sns-metrics) は 2 層で記録する:
+improvement 系スキル (gsc / ga4 / adsense / affiliate / cloudflare-cost / psi / sns-metrics) は 2 層で記録する:
 
 | 層 | 場所 | 内容 |
 |---|---|---|
