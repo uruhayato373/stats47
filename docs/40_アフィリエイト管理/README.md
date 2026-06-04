@@ -73,6 +73,7 @@ addedAt: YYYY-MM-DD
 | ID | ASP | 商材 | 報酬 | CV 条件 | 配置記事 |
 |---|---|---|---|---|---|
 | `moshimo-ai-onikanri-93995` | moshimo | AI鬼管理｜Claude Code 業務自動化トレーニング | ¥15,000/件 | LINE 登録 or 無料診断予約完了 | blog: `koumuin-claude-code-estat-automation`, note: `koumuin-shigoto-kouritsuka-ai` |
+| `a8-strategy-career-koumuin-ai-tenshoku-260601701360` | a8 | STRATEGY CAREER｜エンジニア転職 | （A8 管理画面参照） | （A8 管理画面参照） | blog: `koumuin-ai-tenshoku-1500man` |
 
 ## PR / 景表法対応ルール
 

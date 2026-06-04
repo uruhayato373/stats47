@@ -7,7 +7,7 @@ import {
   CardTitle,
 } from "@stats47/components/atoms/ui/card";
 
-import { FurusatoNozeiCard, SidebarPromoBanner, TechSchoolPromoCard } from "@/features/ads";
+import { FurusatoNozeiCard, OperatorPromoCard, SidebarPromoBanner, TechSchoolPromoCard } from "@/features/ads";
 
 import { AdSenseAd, RANKING_PAGE_SIDEBAR, RANKING_SIDEBAR_TOP } from "@/lib/google-adsense";
 
@@ -28,6 +28,8 @@ interface RightRailWidgetsProps {
   showTechSchool?: boolean;
   /** 高単価アフィリエイトバナーを表示するか (default: true) */
   showPromoBanner?: boolean;
+  /** 運営者カード (転職/AI学習ランダム) を表示するか (default: true) */
+  showOperatorCard?: boolean;
   /** 表示する SIDEBAR_PROMO_BANNERS の index (default: 0 = STRATEGY CAREER) */
   promoBannerIndex?: number;
   /** 独立スクロール (xl で `max-h+overflow-auto`) を有効にするか (default: true) */
@@ -59,6 +61,7 @@ export async function RightRailWidgets({
   showTopAd = true,
   showTechSchool = true,
   showPromoBanner = true,
+  showOperatorCard = true,
   promoBannerIndex = 0,
   stickyScroll = true,
 }: RightRailWidgetsProps) {
@@ -68,6 +71,8 @@ export async function RightRailWidgets({
 
   return (
     <div className={`flex flex-col gap-3 ${scrollClass}`}>
+      {showOperatorCard && <OperatorPromoCard placement="sidebar" />}
+
       {showTechSchool && <TechSchoolPromoCard />}
 
       {showPromoBanner && <SidebarPromoBanner index={promoBannerIndex} />}
