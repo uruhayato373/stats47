@@ -77,6 +77,9 @@ export function VariantAdSlot({ variants, category, position }: VariantAdSlotPro
       }
     }
 
+    // 出し分けは client 限定 (ランダム + localStorage)。SSR は null を返し mount 後に確定する
+    // 設計なので setState-in-effect は意図的 (hydration mismatch 回避のため初期描画では選べない)。
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setChosen(assigned);
   }, [variants]);
 
