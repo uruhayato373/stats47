@@ -1,6 +1,6 @@
 ---
 name: affiliate-improvement
-description: アフィリエイト広告の impression / click / CTR を GA4 (ad_impression / affiliate_click) と在庫棚卸しで分析し、弱い枠を特定して改善施策を docs/05_改善ログ/affiliate.md に記録するループ。Use when user says "アフィリエイト改善", "アフィリエイト分析", "imp/click 増やす", "広告クリック改善".
+description: アフィリエイト広告の impression / click / CTR を GA4 (ad_impression / affiliate_click) と在庫棚卸しで分析し、弱い枠を特定して改善施策を docs/05_改善ログ/affiliate.md に記録するループ。在庫の管理画面 (単体 HTML) を開く機能も持つ。Use when user says "アフィリエイト改善", "アフィリエイト分析", "imp/click 増やす", "広告クリック改善", "アフィリエイト管理画面", "管理画面を開いて", "アフィリエイト一覧見せて", "在庫見せて".
 primary_agent: adsense-analyst
 co_agents: [improvement-triage]
 ---
@@ -32,13 +32,36 @@ co_agents: [improvement-triage]
 $ARGUMENTS — [mode]
              mode:
                - status (デフォルト) : 最新の在庫棚卸し + 進行中施策 (AFF-NN) を要約
+               - dashboard         : 管理画面 (単体 HTML) を再生成して開く / ユーザーに渡す
                - audit             : 在庫棚卸しのみ再実行 (17 軸ギャップ + 配置偏り)
                - observe           : GA4 imp/click を取得 → CTR 集計 → 弱枠特定 → 実測を追記
                - action            : 新しい施策 section (AFF-NN) を追加
                - next              : 次に着手すべき改善候補を提示
 ```
 
+「アフィリエイト管理画面を開いて」「在庫一覧見せて」等の指示は **dashboard モード** に該当する。
+
 ## 手順
+
+### Step 0: 管理画面を開く (dashboard モード)
+
+ユーザーが「管理画面を開いて / アフィリエイト一覧見せて / 在庫見せて」と指示したら、最新 SSOT から
+管理画面 HTML を再生成して開く (または渡す)。**いつでもこのモードだけ単独で実行してよい**。
+
+```bash
+npx tsx .claude/scripts/ads/build-affiliate-dashboard.ts
+# → docs/40_アフィリエイト管理/affiliate-dashboard.html (依存なし・自己完結)
+```
+
+「開く」の意味は実行環境で分岐する (`.claude/rules/branch-workflow.md` の実行環境判定と同じ):
+
+| 環境 | 開き方 |
+|---|---|
+| ローカル (GUI あり) | 生成後 `open docs/40_アフィリエイト管理/affiliate-dashboard.html` (macOS) / `xdg-open …` (Linux) でブラウザ起動 |
+| Claude Code on the web / クラウド (GUI なし) | 生成後 **SendUserFile でユーザーに HTML を渡す** (ブラウザは手元で開いてもらう) |
+
+- 管理画面は read-only (確認用)。バナーの追加・変更は `/register-affiliate-banner` に委譲する。
+- 在庫を更新した直後に開く場合は、先に `/register-affiliate-banner` で SSOT を更新 → 本モードで再生成。
 
 ### Step 1: 在庫棚卸し (audit)
 
