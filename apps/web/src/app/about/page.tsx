@@ -14,6 +14,8 @@
 
 import { ReactNode } from "react";
 
+import Link from "next/link";
+
 import { Badge } from "@stats47/components/atoms/ui/badge";
 import { Button } from "@stats47/components/atoms/ui/button";
 import {
@@ -151,9 +153,9 @@ export default function AboutPage() {
           </p>
           <p className={TEXT_STYLE_WITH_MARGIN}>
             公務員から AI を独学して転職・独立するまでの体験記は、
-            <a href="/blog/koumuin-ai-tenshoku-1500man" className="text-primary underline underline-offset-2">
+            <Link href="/blog/koumuin-ai-tenshoku-1500man" className="text-primary underline underline-offset-2">
               「公務員→AI独学で転職した話」
-            </a>
+            </Link>
             にまとめています。
             <span className="text-muted-foreground">
               （※記事内で触れる年収はあくまで個人の結果であり、同様の成果を保証するものではありません）
