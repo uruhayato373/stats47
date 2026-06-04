@@ -91,8 +91,6 @@ impression が大きく増える可能性。
   - SSG (`○ Static`) の最終確認は CI の `next build` に委ねる (ローカルはフルビルド未実行)
 - **検証期日後の判定**: 本番 ranking の HTML に banner が描画され、`ad_impression(link_position=ranking-sidebar)` が
   GA4 で観測されれば前進。CTR は AFF-04 で評価。
-- **検証期日後の判定**: 本番 ranking の HTML に banner が描画され、`ad_impression(link_position=ranking-*)` が
-  GA4 で観測されれば前進。CTR は AFF-04 で評価。
 
 ---
 
@@ -111,3 +109,32 @@ impression が大きく増える可能性。
 下位枠を特定 → categoryKey マッチ修正 / CTA 文言改善 / 位置調整を打つ。
 
 - 4 週ごとに GA4 snapshot で before/after を比較し、ここに effect/* を記録する。
+
+---
+
+## [AFF-05] クリエイティブ A/B テスト基盤 (framework 実装)
+
+- **status**: in-progress
+- **tier**: 2
+- **target_metric**: affiliate/ctr
+- **owner**: claude
+- **deployed_at**: 2026-06-04
+- **due**: 2026-07-12
+- **verification_command**: `node .claude/scripts/ads/fetch-affiliate-ga4.cjs 28` (variant 別 CTR・拡張後)
+- **related_pr**: (develop→main PR)
+
+**[仮説]** どの広告/サイズ/文言が効くかは事前に分からない。同一枠に複数 variant (サイズ違い・バナー/テキスト・
+CTA 文言違い) を用意し、**クライアント側 加重ランダム + variant 属性付き GA4 計測**で CTR を比較すれば、
+勝者を実証的に選べる。
+
+- **設計**: `docs/40_アフィリエイト管理/AFF-05-creative-ab-testing-design.md` (方式 A: クライアント加重ランダム採用)
+- **実装 (2026-06-04・framework のみ。具体的な実験は未設定 = 枠は後決め)**:
+  - SSOT `AffiliateAd` に `experimentId?` / `variantId?` / `weight?` を任意追加 (後方互換)。export 時に整合 validate
+  - GA4 `ad_impression` / `affiliate_click` に `experiment_id` / `variant_id` / `creative_size` param を任意追加
+  - client `VariantAdSlot` (加重ランダム + localStorage sticky + 固定高さ枠) を新設し、`AffiliateAdSlot` の
+    sidebar で「experiment variant ≥ 2 件あれば最優先で出し分け」。無ければ従来 (banner→text→AdSense)
+  - `fetch-affiliate-ga4.cjs` を variant 次元の多段フォールバック集計に拡張 (未登録時は自動降格)
+  - `cookies()/headers()` 不使用で SSG 維持。型チェック green
+- **次アクション (P4 = 実験開始)**: GA4 を見て対象枠を決め、SSOT に variant エントリ (同 experimentId・別 variantId) を
+  2〜3 件追加 → `/register-affiliate-banner` で反映。GA4 で variant 用 custom dimension 登録。
+- **停止ルール**: 各 variant imp ≥ 1,000 (or 4 週)、勝者 CTR が次点比 +20% かつ 95% 有意で採用。ピーキング回避。

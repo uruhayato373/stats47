@@ -54,17 +54,42 @@ async function runReport(analyticsdata, dimensions) {
   return data.rows || [];
 }
 
-function pivot(rows, hasCustomDims) {
-  // key = category|position, value = { impressions, clicks }
+// 取得を試みる dimension の tier (richest → 最小)。未登録 custom dimension があると runReport が
+// 失敗するため、上から順に試し最初に成功した tier を使う。
+const DIM_TIERS = [
+  [
+    "eventName",
+    "customEvent:affiliate_category",
+    "customEvent:link_position",
+    "customEvent:experiment_id",
+    "customEvent:variant_id",
+    "customEvent:creative_size",
+  ],
+  ["eventName", "customEvent:affiliate_category", "customEvent:link_position"],
+  ["eventName"],
+];
+
+const shortName = (apiName) => apiName.replace(/^customEvent:/, "");
+
+/**
+ * dimNames[0] は eventName。残りを複合キーにして impression/click を集計し CTR を出す。
+ * 各 value dimension は短縮名 (affiliate_category 等) のフィールドとして row に展開する。
+ */
+function pivot(rows, dimNames) {
+  const valueDims = dimNames.slice(1);
   const map = new Map();
   for (const r of rows) {
     const dims = (r.dimensionValues || []).map((d) => d.value);
     const event = dims[0];
-    const category = hasCustomDims ? dims[1] || "(unset)" : "(all)";
-    const position = hasCustomDims ? dims[2] || "(unset)" : "(all)";
+    const fields = {};
+    valueDims.forEach((dn, i) => {
+      fields[shortName(dn)] = dims[i + 1] || "(unset)";
+    });
+    const key = valueDims.length
+      ? valueDims.map((_, i) => dims[i + 1] || "(unset)").join("|")
+      : "(all)";
     const count = Number((r.metricValues || [])[0]?.value || 0);
-    const key = `${category}|${position}`;
-    const cur = map.get(key) || { category, position, impressions: 0, clicks: 0 };
+    const cur = map.get(key) || { ...fields, impressions: 0, clicks: 0 };
     if (event === "ad_impression") cur.impressions += count;
     else if (event === "affiliate_click") cur.clicks += count;
     map.set(key, cur);
@@ -82,26 +107,26 @@ async function main() {
   });
   const analyticsdata = google.analyticsdata({ version: "v1beta", auth });
 
-  let hasCustomDims = true;
-  let rows;
-  try {
-    rows = await runReport(analyticsdata, [
-      "eventName",
-      "customEvent:affiliate_category",
-      "customEvent:link_position",
-    ]);
-  } catch (e) {
-    // カスタムディメンション未登録時は eventName のみで再取得 (内訳なし)
-    process.stderr.write(
-      `[warn] custom dimension 取得失敗 → eventName 単位にフォールバック: ${e.message}\n`,
-    );
-    hasCustomDims = false;
-    rows = await runReport(analyticsdata, ["eventName"]);
+  let usedDims = null;
+  let rows = null;
+  for (const tier of DIM_TIERS) {
+    try {
+      rows = await runReport(analyticsdata, tier);
+      usedDims = tier;
+      break;
+    } catch (e) {
+      process.stderr.write(
+        `[warn] dims=[${tier.join(", ")}] 取得失敗 → 次の tier にフォールバック: ${e.message}\n`,
+      );
+    }
   }
+  if (!rows || !usedDims) throw new Error("GA4 取得失敗 (全 dimension tier)");
 
-  const pivoted = pivot(rows, hasCustomDims).sort(
-    (a, b) => b.impressions - a.impressions,
-  );
+  const valueDimNames = usedDims.slice(1).map(shortName);
+  const hasCategoryDims = valueDimNames.includes("affiliate_category");
+  const hasVariantDims = valueDimNames.includes("variant_id");
+
+  const pivoted = pivot(rows, usedDims).sort((a, b) => b.impressions - a.impressions);
   const totalImp = pivoted.reduce((s, v) => s + v.impressions, 0);
   const totalClick = pivoted.reduce((s, v) => s + v.clicks, 0);
   const date = new Date().toISOString().slice(0, 10);
@@ -110,7 +135,9 @@ async function main() {
     generatedAt: new Date().toISOString(),
     date,
     days: Number(process.argv[2] || 28),
-    hasCustomDimensions: hasCustomDims,
+    dimensions: valueDimNames,
+    hasCategoryBreakdown: hasCategoryDims,
+    hasVariantBreakdown: hasVariantDims,
     totals: {
       impressions: totalImp,
       clicks: totalClick,
@@ -131,9 +158,14 @@ async function main() {
   const out = [];
   out.push(`# アフィリエイト GA4 実測 (${date}, 直近 ${snapshot.days} 日)`);
   out.push("");
-  if (!hasCustomDims) {
+  if (!hasCategoryDims) {
     out.push(
-      "> ⚠ カスタムディメンション未登録のため内訳なし (総数のみ)。GA4 管理画面で `affiliate_category` / `link_position` を登録してください。",
+      "> ⚠ custom dimension `affiliate_category` / `link_position` 未登録のため内訳なし (総数のみ)。GA4 管理画面で登録してください。",
+    );
+    out.push("");
+  } else if (!hasVariantDims) {
+    out.push(
+      "> ⚠ A/B variant 用 custom dimension (`experiment_id` / `variant_id` / `creative_size`) 未登録。variant 別 CTR を取るには GA4 管理画面で登録してください。",
     );
     out.push("");
   }
@@ -141,16 +173,39 @@ async function main() {
     `総 impression **${totalImp}** / click **${totalClick}** / CTR **${pct(snapshot.totals.ctr)}**`,
   );
   out.push("");
-  out.push("| category | position | impressions | clicks | CTR |");
-  out.push("|---|---|---:|---:|---:|");
+
+  // 列順 (登録済みの dimension のみ)
+  const COL_ORDER = [
+    "affiliate_category",
+    "link_position",
+    "experiment_id",
+    "variant_id",
+    "creative_size",
+  ].filter((c) => valueDimNames.includes(c));
+
+  const headerCols = [...COL_ORDER, "impressions", "clicks", "CTR"];
+  const align = COL_ORDER.map(() => "---").concat(["---:", "---:", "---:"]);
+  out.push(`| ${headerCols.join(" | ")} |`);
+  out.push(`|${align.join("|")}|`);
   for (const v of pivoted) {
+    const cells = COL_ORDER.map((c) => v[c] ?? "(all)");
+    cells.push(String(v.impressions), String(v.clicks), pct(v.ctr));
+    out.push(`| ${cells.join(" | ")} |`);
+  }
+
+  // variant 別の experiment サマリ (登録済みのとき)
+  if (hasVariantDims) {
+    out.push("");
+    out.push("## experiment 別 variant CTR (勝敗判定の入力)");
+    out.push("");
     out.push(
-      `| ${v.category} | ${v.position} | ${v.impressions} | ${v.clicks} | ${pct(v.ctr)} |`,
+      "> 停止ルール: 各 variant imp ≥ 1,000 (or 4 週)、勝者 CTR が次点比 +20% かつ 95% 有意で採用。",
     );
   }
+
   process.stdout.write(out.join("\n") + "\n");
   process.stderr.write(
-    `\n[ga4] snapshot → .claude/state/ads/ga4-affiliate-${date}.json\n`,
+    `\n[ga4] snapshot → .claude/state/ads/ga4-affiliate-${date}.json (dims: ${valueDimNames.join(",") || "none"})\n`,
   );
 }
 

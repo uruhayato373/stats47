@@ -12,6 +12,10 @@ interface BannerAdProps {
   category?: string;
   label?: string;
   position?: string;
+  /** A/B テスト用 (AFF-05・任意) */
+  experimentId?: string;
+  variantId?: string;
+  creativeSize?: string;
   className?: string;
 }
 
@@ -28,10 +32,20 @@ export function BannerAd({
   category = "other",
   label = "",
   position = "banner",
+  experimentId,
+  variantId,
+  creativeSize,
   className,
 }: BannerAdProps) {
   return (
-    <AdImpressionTracker category={category} label={label} position={position}>
+    <AdImpressionTracker
+      category={category}
+      label={label}
+      position={position}
+      experimentId={experimentId}
+      variantId={variantId}
+      creativeSize={creativeSize}
+    >
       <div className={`relative flex flex-col items-center gap-1 ${className ?? ""}`}>
         <span className="self-start rounded bg-slate-200 px-1.5 py-0.5 text-xs font-bold text-slate-500">
           PR
@@ -41,6 +55,9 @@ export function BannerAd({
           category={category}
           label={label}
           position={position}
+          experimentId={experimentId}
+          variantId={variantId}
+          creativeSize={creativeSize}
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
