@@ -12,10 +12,20 @@ stats47 が掲載しているアフィリエイトバナーの単一情報源（
 
 | 方式 | 概要 | 用途 | 管理場所 |
 |---|---|---|---|
-| **タグベース自動配置** | 記事の tags → `TAG_AFFILIATE_MAP` → `AffiliateCategory` で自動マッチ | カテゴリ全体に薄く広く配置（労働 / 住宅 / 経済 等） | `apps/web/src/features/ads/constants/affiliate-category.ts` + D1 `affiliate_ads` |
+| **タグベース自動配置** | 記事の tags / categoryKey → `CATEGORY_AFFILIATE_MAP` で自動マッチ | カテゴリ全体に薄く広く配置（労働 / 住宅 / 経済 等） | **git TS SSOT** `apps/web/scripts/affiliate-ads-data.ts` (`AFFILIATE_ADS[]`) → R2 `app/affiliate-ads/all.json` |
 | **直接属性方式** | 記事中に `<affiliate-banner src=... href=... tracking=...>` を直書き | 特定記事の文脈にピンポイント配置（メイキング系等） | 本ディレクトリ + 各記事 `article.md` |
 
-本ディレクトリで管理するのは **直接属性方式** のバナーのみ。タグベース自動配置のバナーは D1 / TS 定数で管理する。
+本ディレクトリで管理するのは **直接属性方式** のバナーのみ。タグベース自動配置のバナーは **git TS `apps/web/scripts/affiliate-ads-data.ts` が単一 SSOT**（完全DBレス。永続 D1 は廃止）。
+
+## 在庫棚卸し・最適化ループ
+
+impression / click を継続的に増やすための計測ループ:
+
+- **棚卸し (決定的)**: `npx tsx .claude/scripts/ads/audit-affiliate-inventory.ts`
+  — 17 軸カバレッジ・配置偏り・ページ描画カバレッジを出力 (JSON は `.claude/state/ads/inventory-latest.json`)
+- **改善ログ (人間向け)**: `docs/05_改善ログ/affiliate.md` (AFF-NN section)
+- **最適化スキル**: `/affiliate-improvement` (GA4 imp/click → CTR 分析 → 弱枠特定 → 施策記録、担当 `adsense-analyst`)
+- **計測**: GA4 `ad_impression` / `affiliate_click`（`apps/web/src/lib/analytics/events.ts`）
 
 ## ディレクトリ構造
 
