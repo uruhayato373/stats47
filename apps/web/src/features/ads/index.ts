@@ -3,6 +3,7 @@ export { AdSenseAdWrapper } from "./components/AdSenseAdWrapper";
 export { BannerAd } from "./components/BannerAd";
 export { FurusatoNozeiCard } from "./components/FurusatoNozeiCard";
 export { FurusatoNozeiPopularCard } from "./components/FurusatoNozeiPopularCard";
+export { OperatorPromoCard } from "./components/OperatorPromoCard";
 export { SidebarPromoBanner } from "./components/SidebarPromoBanner";
 export { TechSchoolPromoCard } from "./components/TechSchoolPromoCard";
 // AreaBannerAd は server-only 依存のため barrel export しない
