@@ -292,7 +292,9 @@ export function checkInverseRankClaims(content, gt) {
   const body = content.replace(/^---[\s\S]*?\n---\n/, "");
   const prefPattern = PREF_NAMES.join("|");
   const inverseRe = new RegExp(
-    `(?<![・、と])(\\d+)[ \\t]*位[ \\t]*(?:は|の|に|が|を|で|まで|から)?[ \\t]{0,2}(${prefPattern})(?:都|府|県)?(?![・、])`,
+    // 先頭に数字を含めない (?<![・、と\d]): 「45位 岩手県」を「5位 岩手県」と誤マッチしないため。
+    // 二桁順位 (下位グループ 4X位/3X位) を一桁順位に切り詰める false positive を防ぐ。
+    `(?<![・、と\\d])(\\d+)[ \\t]*位[ \\t]*(?:は|の|に|が|を|で|まで|から)?[ \\t]{0,2}(${prefPattern})(?:都|府|県)?(?![・、])`,
     "g"
   );
   const seenClaims = new Set();
