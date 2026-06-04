@@ -12,7 +12,7 @@ tags:
   - ユニバーサルサービス
   - 防災
 publishedAt: (未定)
-updatedAt: 2026-06-02
+updatedAt: "2026-06-04"
 published: true
 ---
 

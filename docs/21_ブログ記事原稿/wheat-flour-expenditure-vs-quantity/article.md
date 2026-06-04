@@ -12,7 +12,7 @@ tags:
   - 都道府県別
   - 食文化
 publishedAt: (未定)
-updatedAt: 2026-06-02
+updatedAt: "2026-06-04"
 published: true
 ---
 

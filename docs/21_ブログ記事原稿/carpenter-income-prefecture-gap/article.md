@@ -12,7 +12,7 @@ tags:
   - 賃金構造基本統計調査
   - 建設業
 publishedAt: 2026-06-02
-updatedAt: 2026-06-01
+updatedAt: "2026-06-04"
 published: true
 ogImage: /blog/carpenter-income-prefecture-gap/og.png
 ---

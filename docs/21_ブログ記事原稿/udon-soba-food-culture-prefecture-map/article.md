@@ -11,7 +11,7 @@ tags:
   - 麺文化
   - 家計調査
 publishedAt: (未定)
-updatedAt: 2026-06-02
+updatedAt: "2026-06-04"
 published: true
 ogImage: /blog/udon-soba-food-culture-prefecture-map/og.png
 ---

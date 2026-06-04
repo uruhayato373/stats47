@@ -12,7 +12,7 @@ tags:
   - 食文化
   - 栃木
 publishedAt: 2026-05-31
-updatedAt: 2026-06-01
+updatedAt: "2026-06-04"
 published: true
 ogImage: /blog/strawberry-consumption-prefecture-gap/og.png
 ---

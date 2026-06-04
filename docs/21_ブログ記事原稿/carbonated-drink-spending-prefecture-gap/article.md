@@ -12,7 +12,7 @@ tags:
   - 都道府県ランキング
   - 食文化
 publishedAt: 2026-06-02
-updatedAt: 2026-06-01
+updatedAt: "2026-06-04"
 published: true
 ogImage: /blog/carbonated-drink-spending-prefecture-gap/og.png
 ---

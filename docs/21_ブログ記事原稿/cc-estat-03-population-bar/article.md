@@ -12,7 +12,7 @@ tags:
   - D3
   - バーチャート
 publishedAt: 2026-05-17
-updatedAt: 2026-05-17
+updatedAt: "2026-06-04"
 published: true
 ogImage: /blog/cc-estat-03-population-bar/og.png
 ---

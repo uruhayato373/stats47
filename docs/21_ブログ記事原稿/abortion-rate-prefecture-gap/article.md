@@ -12,7 +12,7 @@ tags:
   - 都道府県別
   - 女性健康
 publishedAt: 2026-05-17
-updatedAt: 2026-05-17
+updatedAt: "2026-06-04"
 published: true
 ogImage: /blog/abortion-rate-prefecture-gap/og.png
 ---

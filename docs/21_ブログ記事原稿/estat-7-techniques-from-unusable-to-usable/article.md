@@ -12,7 +12,7 @@ tags:
   - 公務員
   - 業務効率化
 publishedAt: 2026-05-25
-updatedAt: 2026-05-25
+updatedAt: "2026-06-04"
 published: true
 ---
 

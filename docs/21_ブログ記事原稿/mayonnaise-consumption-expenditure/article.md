@@ -12,7 +12,7 @@ tags:
   - 家計調査
   - 地域差
 publishedAt: (未定)
-updatedAt: 2026-06-02
+updatedAt: "2026-06-04"
 published: true
 ogImage: /blog/mayonnaise-consumption-expenditure/og.png
 ---

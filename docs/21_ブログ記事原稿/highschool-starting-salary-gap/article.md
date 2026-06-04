@@ -11,6 +11,7 @@ tags:
   - 地域格差
 category: laborwage
 publishedAt: 2026-03-31
+updatedAt: "2026-06-04"
 published: true
 ---
 

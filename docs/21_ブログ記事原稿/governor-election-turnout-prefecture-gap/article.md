@@ -12,7 +12,7 @@ tags:
   - 政治参加
   - 地方選挙
 publishedAt: 2026-05-31
-updatedAt: 2026-05-31
+updatedAt: "2026-06-04"
 published: true
 ogImage: /blog/governor-election-turnout-prefecture-gap/og.png
 ---

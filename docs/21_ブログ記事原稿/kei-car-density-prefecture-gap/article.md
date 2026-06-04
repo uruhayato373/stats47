@@ -12,7 +12,7 @@ tags:
   - 社会人口統計体系
   - 地域格差
 publishedAt: 2026-05-31
-updatedAt: 2026-05-31
+updatedAt: "2026-06-04"
 published: true
 ogImage: /blog/kei-car-density-prefecture-gap/og.png
 ---

@@ -12,7 +12,7 @@ tags:
   - 全国消費実態調査
   - 地方の暮らし
 publishedAt: 2026-06-02
-updatedAt: 2026-05-31
+updatedAt: "2026-06-04"
 published: true
 ogImage: /blog/car-ownership-household-prefecture-gap/og.png
 ---

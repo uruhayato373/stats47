@@ -12,7 +12,7 @@ tags:
   - 地域医療
   - 病院経営
 publishedAt: (未定)
-updatedAt: 2026-06-02
+updatedAt: "2026-06-04"
 published: true
 ogImage: /blog/general-hospital-bed-occupancy-rate/og.png
 ---

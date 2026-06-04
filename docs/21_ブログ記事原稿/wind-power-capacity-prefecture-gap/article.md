@@ -12,7 +12,7 @@ tags:
   - 都道府県ランキング
   - 青森
 publishedAt: 2026-06-02
-updatedAt: 2026-05-30
+updatedAt: "2026-06-04"
 published: true
 ogImage: /blog/wind-power-capacity-prefecture-gap/og.png
 ---

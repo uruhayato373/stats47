@@ -12,7 +12,7 @@ tags:
   - 教育
   - 人口
 publishedAt: (未定)
-updatedAt: 2026-06-02
+updatedAt: "2026-06-04"
 published: true
 ---
 

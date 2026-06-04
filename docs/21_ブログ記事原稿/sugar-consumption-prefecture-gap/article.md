@@ -12,7 +12,7 @@ tags:
   - 都道府県別
   - 総務省
 publishedAt: 2026-05-17
-updatedAt: 2026-05-25
+updatedAt: "2026-06-04"
 published: true
 ogImage: /blog/sugar-consumption-prefecture-gap/og.png
 ---

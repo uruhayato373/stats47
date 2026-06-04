@@ -12,7 +12,7 @@ tags:
   - 畜産
   - 農業
 publishedAt: 2026-06-02
-updatedAt: 2026-05-30
+updatedAt: "2026-06-04"
 published: true
 ogImage: /blog/dairy-cattle-hokkaido-monopoly/og.png
 ---

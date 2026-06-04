@@ -10,6 +10,7 @@ tags:
 category: socialsecurity
 published: true
 publishedAt: "2026-03-27"
+updatedAt: "2026-06-04"
 ---
 
 **人口10万人あたりの薬局数で最も多いのは[佐賀県](/areas/41000)**（64.5所）、最も少ないのは[沖縄県](/areas/47000)（39.4所）です。しかしこの数値を見て「沖縄は薬局が少ない県」と理解するのは誤りです。

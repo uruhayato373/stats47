@@ -12,7 +12,7 @@ tags:
   - サンキー
   - D3
 publishedAt: 2026-05-17
-updatedAt: 2026-05-17
+updatedAt: "2026-06-04"
 published: true
 ogImage: /blog/cc-estat-13-agri-sankey/og.png
 ---

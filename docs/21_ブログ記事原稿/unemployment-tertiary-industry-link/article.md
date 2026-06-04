@@ -11,7 +11,7 @@ tags:
   - 産業構造
   - 都道府県別
 publishedAt: 2026-05-17
-updatedAt: 2026-05-17
+updatedAt: "2026-06-04"
 published: true
 ---
 

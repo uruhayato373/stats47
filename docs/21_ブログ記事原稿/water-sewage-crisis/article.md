@@ -11,6 +11,7 @@ tags:
   - 人口減少
 category: living
 publishedAt: 2026-03-06
+updatedAt: "2026-06-04"
 published: true
 ---
 

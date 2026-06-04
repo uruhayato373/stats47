@@ -10,6 +10,7 @@ tags:
   - 財政健全性
 category: administrativefinancial
 publishedAt: 2026-03-09
+updatedAt: "2026-06-04"
 published: true
 ---
 

@@ -12,7 +12,7 @@ tags:
   - 再生可能エネルギー
   - 住宅・土地統計調査
 publishedAt: 2026-05-31
-updatedAt: 2026-06-01
+updatedAt: "2026-06-04"
 published: true
 ogImage: /blog/solar-panel-housing-prefecture-gap/og.png
 ---

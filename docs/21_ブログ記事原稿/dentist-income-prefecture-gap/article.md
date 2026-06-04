@@ -12,7 +12,7 @@ tags:
   - 賃金格差
   - 賃金構造基本統計調査
 publishedAt: 2026-05-31
-updatedAt: 2026-05-31
+updatedAt: "2026-06-04"
 published: true
 ogImage: /blog/dentist-income-prefecture-gap/og.png
 ---

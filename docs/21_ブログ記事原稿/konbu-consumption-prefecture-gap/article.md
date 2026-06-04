@@ -12,7 +12,7 @@ tags:
   - 家計調査
   - 2024年
 publishedAt: 2026-05-17
-updatedAt: 2026-05-25
+updatedAt: "2026-06-04"
 published: true
 ogImage: /blog/konbu-consumption-prefecture-gap/og.png
 ---

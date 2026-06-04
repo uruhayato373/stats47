@@ -12,7 +12,7 @@ tags:
   - 作物統計
   - 2019年
 publishedAt: 2026-05-17
-updatedAt: 2026-05-24
+updatedAt: "2026-06-04"
 published: true
 ogImage: /blog/rice-harvest-volume-prefecture-gap/og.png
 ---

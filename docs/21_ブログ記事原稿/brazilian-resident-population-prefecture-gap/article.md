@@ -12,7 +12,7 @@ tags:
   - 自動車産業
   - 2024年
 publishedAt: 2026-05-17
-updatedAt: 2026-05-25
+updatedAt: "2026-06-04"
 published: true
 ogImage: /blog/brazilian-resident-population-prefecture-gap/og.png
 ---

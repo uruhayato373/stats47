@@ -12,7 +12,7 @@ tags:
   - 都道府県別
   - 日本海
 publishedAt: 2026-05-17
-updatedAt: 2026-05-17
+updatedAt: "2026-06-04"
 published: true
 ogImage: /blog/bonito-catch-zero-prefectures-gap/og.png
 ---

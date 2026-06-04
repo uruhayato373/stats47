@@ -12,7 +12,7 @@ tags:
   - AI 活用
   - 行政
 publishedAt: 2026-05-25
-updatedAt: 2026-05-25
+updatedAt: "2026-06-04"
 published: true
 ---
 

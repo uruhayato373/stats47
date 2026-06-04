@@ -5,6 +5,7 @@ subtitle: "県債歳入比 × 高齢化率で見る世代間負担の地域差"
 description: "県債歳入比だけでは見えない「世代間負担」を独自指標 (県債歳入比 × 高齢化率 ÷ 現役世代比率) で47都道府県比較。1位 秋田 148.3 / 47位 東京 14.1 で 10 倍超の差。負債と高齢化が同時進行する地域の構造を可視化する。"
 category: administrativefinancial
 publishedAt: 2026-04-27
+updatedAt: "2026-06-04"
 published: true
 ---
 

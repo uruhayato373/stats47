@@ -12,7 +12,7 @@ tags:
   - 東西格差
   - 家計調査
 publishedAt: (未定)
-updatedAt: 2026-06-02
+updatedAt: "2026-06-04"
 published: true
 ---
 

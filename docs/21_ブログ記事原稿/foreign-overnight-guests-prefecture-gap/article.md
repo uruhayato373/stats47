@@ -12,7 +12,7 @@ tags:
   - 観光統計
   - 2024年
 publishedAt: 2026-05-17
-updatedAt: 2026-05-25
+updatedAt: "2026-06-04"
 published: true
 ogImage: /blog/foreign-overnight-guests-prefecture-gap/og.png
 ---

@@ -12,7 +12,7 @@ tags:
   - 家計調査
   - 食文化
 publishedAt: 2026-05-31
-updatedAt: 2026-06-01
+updatedAt: "2026-06-04"
 published: true
 ogImage: /blog/instant-noodles-consumption-prefecture-gap/og.png
 ---

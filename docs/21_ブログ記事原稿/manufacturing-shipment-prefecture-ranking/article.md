@@ -10,7 +10,7 @@ tags:
 category: miningindustry
 published: true
 publishedAt: "2026-03-27"
-updatedAt: "2026-05-29"
+updatedAt: "2026-06-04"
 ---
 
 

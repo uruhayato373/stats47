@@ -12,7 +12,7 @@ tags:
   - 都道府県ランキング
   - 家計調査
 publishedAt: 2026-06-02
-updatedAt: 2026-05-31
+updatedAt: "2026-06-04"
 published: true
 ogImage: /blog/beef-consumption-prefecture-gap/og.png
 ---
