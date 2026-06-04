@@ -13,7 +13,7 @@ tags:
   - キャリア
 publishedAt: 2026-06-04
 updatedAt: 2026-06-04
-published: false
+published: true
 ---
 
 > ⚠ この記事には PR（アフィリエイトリンク）を含みます。
@@ -55,7 +55,7 @@ published: false
 
 特に、未経験に近い分野へ挑む場合は、求人の探し方そのものが難しい。私のように「年収をある程度確保しつつ、自分らしく働ける環境」を探すなら、条件で絞り込めるエンジニア特化のエージェントを使うと効率的でした。
 
-※PR：私が情報収集の段階で利用したエンジニア転職サービスの一つです。
+※PR：エンジニア・データ職に強い転職サービスです。私のように未経験から挑戦する人の情報収集・条件比較に向いています。
 
 <affiliate-banner src="https://www24.a8.net/svt/bgt?aid=260601701360&wid=001&eno=01&mid=s00000026573001005000&mc=1" href="https://px.a8.net/svt/ejp?a8mat=4B5LK5+5YC2K2+5P1E+5ZEMP" tracking="https://www18.a8.net/0.gif?a8mat=4B5LK5+5YC2K2+5P1E+5ZEMP" width="320" height="100" label="STRATEGY CAREER｜エンジニア転職"></affiliate-banner>
 
