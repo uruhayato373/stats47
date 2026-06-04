@@ -12,7 +12,11 @@ AdSense と A8.net 等アフィリエイトの収益計測・改善施策計画�
 - AdSense 週次 snapshot 取得 (`/fetch-adsense-data`)
 - AdSense 改善施策計画 + 詳細記録 (`/adsense-improvement`)
 - アフィリエイトバナー登録 (`/register-affiliate-banner`)
+- アフィリエイト imp/click/CTR 改善ループ + 在庫管理画面 (`/affiliate-improvement`)
 - 収益計測の RPM / CPC / Earnings 分析
+
+> **「アフィリエイト管理画面を開いて」「在庫一覧見せて」** の指示は `/affiliate-improvement` の
+> **dashboard モード** で対応 (SSOT から単体 HTML を再生成 → ローカルは `open`、クラウドは SendUserFile)。
 
 ## 担当スキル
 
@@ -21,6 +25,7 @@ AdSense と A8.net 等アフィリエイトの収益計測・改善施策計画�
 | `/fetch-adsense-data` | AdSense 週次 snapshot |
 | `/adsense-improvement` | AdSense 改善施策の agent 用詳細記録 |
 | `/register-affiliate-banner` | A8.net バナーの登録・配置設計 |
+| `/affiliate-improvement` | アフィリエイト imp/click/CTR 改善ループ + 在庫管理画面 (dashboard モード) |
 
 ## 担当外
 
@@ -39,7 +44,9 @@ AdSense と A8.net 等アフィリエイトの収益計測・改善施策計画�
 - `.claude/state/metrics/adsense/` — AdSense 週次 history (CRUD)
 - `.claude/skills/analytics/adsense-improvement/reference/` — agent 用詳細層 (CRUD)
 - `docs/05_改善ログ/adsense.md` — read only (improvement-triage 経由)
-- `docs/40_アフィリエイト管理/` — アフィリエイト管理文書 (CRUD)
+- `docs/40_アフィリエイト管理/` — アフィリエイト管理文書 + 生成物 `affiliate-dashboard.html` (CRUD)
+- `.claude/scripts/ads/` — 棚卸し / 管理画面 生成スクリプト (run)
+- `.claude/state/ads/` — 在庫 snapshot JSON (CRUD)
 
 ## File Boundary (並行衝突回避)
 

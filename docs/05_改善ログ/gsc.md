@@ -861,3 +861,14 @@ stats47.jp の GSC インデックス状況が悪化し続けている。
 
 ### マイグレーション元
 - `.claude/skills/analytics/gsc-improvement/reference/improvement-log.md` (git commit `5cbcadd3`, 2026-04-21 時点)
+
+---
+
+## [NOTE] 122 metric の本番公開保留 — GSC への含意 (2026-06-03)
+
+- **status**: pending（施策効果判定ではなく将来影響の注記。effect ラベル対象外）
+- **背景**: `feature/activate-122-ranking-metrics` で 122 ranking metric を `isActive:true` 化 + `GONE_RANKING_KEYS` から除去（PR #430/#431・デプロイ済）。だが `KNOWN_RANKING_KEYS` / R2 `app/ranking-items/all.json` 未反映で **本番は全件 410 のまま**（`middleware.ts:61` の `isGone || !isKnown` で 410）。
+- **GSC への含意**:
+  - 現状: 122 は gone から外れたが KNOWN にも無く 410 のまま = **GSC 上の挙動は従来どおりで変化なし**。「クロール済み未登録 /ranking 453」への `KNOWN_RANKING_KEYS` middleware 対策方針と矛盾しない。
+  - 将来公開時（feature-backlog の「122 metric 本番公開」着手時）: /ranking のインデックス対象が 122 増える。**「クロール済み・インデックス未登録」再発（過去 1,453 件）のリスク**があるため、SITEMAP/INDEXABLE 反映と URL Inspection API での GSC モニタをセットにすること。
+- **関連**: `docs/50_Issues/feature-backlog.md`「122 metric (完全データ) の本番公開」/ memory `project_ranking_publish_pipeline_gap` / session-handoff `docs/04_レビュー/session-handoff/2026-06-04-git-cleanup-deploy-122metric.md`

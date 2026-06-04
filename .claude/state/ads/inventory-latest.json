@@ -1,0 +1,48 @@
+{
+  "generatedAt": "2026-06-04T07:00:12.700Z",
+  "date": "2026-06-04",
+  "totals": {
+    "entries": 72,
+    "active": 72,
+    "uniqueAdvertisers": 29
+  },
+  "byCategory": {
+    "administrativefinancial": 7,
+    "energy": 7,
+    "tourism": 11,
+    "socialsecurity": 8,
+    "economy": 13,
+    "construction": 8,
+    "population": 8,
+    "laborwage": 8,
+    "landweather": 2
+  },
+  "byLocation": {
+    "blog-bottom": 47,
+    "sidebar-sticky": 2,
+    "area-sidebar": 4,
+    "sidebar-inline": 1,
+    "sidebar-bottom": 18
+  },
+  "byAdType": {
+    "banner": 54,
+    "text": 18
+  },
+  "coverage": {
+    "categoriesCovered": 9,
+    "categoriesTotal": 17,
+    "gapCategories": [
+      "agriculture",
+      "miningindustry",
+      "commercial",
+      "educationsports",
+      "safetyenvironment",
+      "international",
+      "infrastructure",
+      "ict"
+    ],
+    "thinCategories": [
+      "landweather"
+    ]
+  }
+}

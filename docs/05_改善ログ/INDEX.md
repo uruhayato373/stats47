@@ -18,6 +18,7 @@ stats47 の **全 SEO / 性能 / コスト / コンテンツ施策の TODO 真�
 | [ga4.md](./ga4.md) | GA4 計測精度 / NSM / bounce / bot 除外 | GA4-CLEAN-01 (Japan-only クリーン値併記) |
 | [psi.md](./psi.md) | Core Web Vitals (LCP / CLS / FCP) | T1-PSI-LCP-02 (Leaflet preload)、T2-CWV-04 (/areas /search CLS) |
 | [adsense.md](./adsense.md) | AdSense 収益 | ADSENSE-MOBILE-01 (モバイル広告の位置改善) |
+| [affiliate.md](./affiliate.md) | アフィリエイト広告 (impression / click / CTR) | AFF-01 (在庫ベースライン棚卸し)、AFF-02 (ゼロ 8 軸の在庫補充) |
 | [cloudflare-cost.md](./cloudflare-cost.md) | Cloudflare コスト | Phase 9 (D1 read 0 監視) |
 | [content.md](./content.md) | ブログ / note / YouTube 公開・更新 | CONTENT-NOTE-01 (note A-laborwage 5 本) |
 | [indexing.md](./indexing.md) | Coverage Drilldown / sitemap / Indexing API | INDEXING-AUTO-01 (Indexing API 自動再送信)、INDEXING-DRILLDOWN-01 |

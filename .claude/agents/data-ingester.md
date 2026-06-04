@@ -76,6 +76,11 @@ Phase 6 (2026-05-27) の D1 → R2 移行後、本 agent は D1 stats_* テー�
   note=注釈 / description=定義。年・※を title に焼かない)
 - **2026-05-27 marriages/divorces 2023-2024 喪失事故**: DELETE+INSERT で他ソース年度を一掃。UPSERT 必須化で再発防止 (詳細: auto memory `project_estat_backfill_lessons.md`)
 - **note_articles テーブル消失 (2026-03)**: schema delete + migration reset の合わせ技で消失。本 agent は schema 操作不可、 `db-schema-manager` 経由で行うこと
+- **isActive:true ≠ 本番公開 (2026-06-03)**: metric を `isActive:true` にしても ranking は本番公開されない。
+  本番は `KNOWN_RANKING_KEYS` / R2 `app/ranking-items/all.json` 等の派生リストと整合して初めて 200 を返す
+  (middleware は `isGone || !isKnown` で 410)。公開は config 起点の多段再生成 (generate-ranking-items 配線 +
+  known 再生成 + sitemap/indexable + 再デプロイ + purge + 本番実測) が必要。手順: memory
+  `project_ranking_publish_pipeline_gap` / `docs/50_Issues/feature-backlog.md`。activate 量産時はここまでをセットで計画すること
 
 ## Output Contract
 

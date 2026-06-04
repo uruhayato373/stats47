@@ -69,6 +69,25 @@ npm run validate:config --workspace=@stats47/data-configs   # 構造規約 (cate
 
 警告 (warn) を新たに増やさない。注釈は `note` に、年は `years` に、区別は `subtitle` に置く。
 
+## isActive:true ≠ 本番公開（多段依存・★再発防止 2026-06-03）
+
+`MetricConfig.isActive` を `true` にしただけでは ranking は **本番公開されない**。本番アプリは R2 snapshot と
+派生リスト（`KNOWN_RANKING_KEYS` / `SITEMAP_RANKING_KEYS` / `INDEXABLE_RANKING_KEYS` / R2 `app/ranking-items/all.json`）
+と整合して初めて 200 を返す。middleware は `isGone(key) || !isKnown(key)` で 410 を返すため、`GONE_RANKING_KEYS`
+から外しても `KNOWN_RANKING_KEYS` に無ければ **410 のまま**になる。
+
+公開には config(isActive) を起点に以下を整合再生成する（依存順・詳細手順は memory
+`project_ranking_publish_pipeline_gap` / `docs/50_Issues/feature-backlog.md`「122 metric の本番公開」）:
+
+1. R2 `app/ranking-items/all.json` + `app/ranking/<key>/item.json` 再生成（`packages/ranking/src/scripts/generate-ranking-items.ts`。※ 2026-06 時点で sync-snapshots 未配線）
+2. `KNOWN_RANKING_KEYS` 再生成（`apps/web/scripts/generate-known-ranking-keys.ts`）
+3. `SITEMAP_RANKING_KEYS` / `INDEXABLE_RANKING_KEYS` 再生成
+4. 再デプロイ → CDN purge（410 は 7 日キャッシュ）
+5. **本番 URL を Googlebot UA で実測**し 200 を確認（`/deploy` Step 7.5）
+
+> 2026-06-03 事故: 122 metric を `isActive:true` 化 + `GONE_RANKING_KEYS` 除去だけ行い、上記 2-5 未反映で
+> 全件 410 のまま公開未達だった。「isActive を変えた=公開した」と思い込まないこと。
+
 ## 関連
 
 - 型: `packages/data-configs/src/types.ts` (`MetricConfig` / `CategoryKey` / `CATEGORY_KEYS`)
