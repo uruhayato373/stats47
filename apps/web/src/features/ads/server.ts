@@ -10,6 +10,7 @@ export {
   resolveAffiliateAd,
   resolveAffiliateBanners,
   resolveAffiliateBannersByCategory,
+  resolveAffiliateBannersByCategoryKey,
   resolveAffiliateTextAds,
   resolveAffiliateTextAdsByTagKeys,
 } from "./services/resolve-affiliate-ad";
