@@ -1,6 +1,7 @@
 export {
   resolveAffiliateAd,
   resolveAffiliateBanners,
+  resolveAffiliateBannersByCategoryKey,
   resolveAffiliateTextAds,
   resolveAffiliateTextAdsByTagKeys,
 } from "./resolve-affiliate-ad";

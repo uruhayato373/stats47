@@ -144,6 +144,31 @@ export async function resolveAffiliateBanners(
 }
 
 /**
+ * 単一 categoryKey に対応するバナー広告を priority 降順で解決する (最大 limit 件)。
+ * ランキング / カテゴリ等、categoryKey を持つページのサイドバーにバナーを出す用途。
+ * (resolveAffiliateBanners は tagKey ベースのため、categoryKey 直指定はこちらを使う)
+ */
+export async function resolveAffiliateBannersByCategoryKey(
+  categoryKey: string,
+  limit = 1
+): Promise<ResolvedAffiliateBanner[]> {
+  if (!categoryKey) return [];
+
+  const banners = await findActiveBannersByCategoryKeys([categoryKey], limit);
+
+  return banners
+    .filter((b) => b.imageUrl && b.trackingPixelUrl)
+    .map((b) => ({
+      title: b.title,
+      href: b.htmlContent,
+      imageUrl: b.imageUrl!,
+      trackingPixelUrl: b.trackingPixelUrl!,
+      width: b.width ?? 300,
+      height: b.height ?? 250,
+    }));
+}
+
+/**
  * すべての AffiliateCategory に対してバナーを一括解決する。
  * category prop で affiliate-banner を宣言的に配置する際のサーバー側解決に使う。
  */
