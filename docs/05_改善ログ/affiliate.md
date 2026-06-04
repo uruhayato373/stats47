@@ -91,8 +91,6 @@ impression が大きく増える可能性。
   - SSG (`○ Static`) の最終確認は CI の `next build` に委ねる (ローカルはフルビルド未実行)
 - **検証期日後の判定**: 本番 ranking の HTML に banner が描画され、`ad_impression(link_position=ranking-sidebar)` が
   GA4 で観測されれば前進。CTR は AFF-04 で評価。
-- **検証期日後の判定**: 本番 ranking の HTML に banner が描画され、`ad_impression(link_position=ranking-*)` が
-  GA4 で観測されれば前進。CTR は AFF-04 で評価。
 
 ---
 
@@ -111,3 +109,26 @@ impression が大きく増える可能性。
 下位枠を特定 → categoryKey マッチ修正 / CTA 文言改善 / 位置調整を打つ。
 
 - 4 週ごとに GA4 snapshot で before/after を比較し、ここに effect/* を記録する。
+
+---
+
+## [AFF-05] クリエイティブ A/B テスト基盤 (要・承認)
+
+- **status**: pending
+- **tier**: 2
+- **target_metric**: affiliate/ctr
+- **owner**: claude
+- **due**: 2026-07-12
+- **verification_command**: `node .claude/scripts/ads/fetch-affiliate-ga4.cjs 28` (variant 別 CTR・拡張後)
+- **related_pr**: -
+
+**[仮説]** どの広告/サイズ/文言が効くかは事前に分からない。同一枠に複数 variant (サイズ違い・バナー/テキスト・
+CTA 文言違い) を用意し、**クライアント側 加重ランダム + variant 属性付き GA4 計測**で CTR を比較すれば、
+勝者を実証的に選べる。
+
+- **設計提案 (承認待ち)**: `docs/40_アフィリエイト管理/AFF-05-creative-ab-testing-design.md`
+- SSG 制約のため出し分けは**クライアント側**で行う (サーバー出し分けは force-dynamic 化で SSG が崩れる)。
+- SSOT に `experimentId` / `variantId` / `weight` を任意追加 (後方互換)。GA4 に `experiment_id` / `variant_id` /
+  `creative_size` param 追加 (custom dimension 登録要)。
+- 段階投入: P1 SSOT+GA4 param → P2 client 加重ランダム枠 → P3 variant 別集計 → P4 初回実験。
+- 停止ルール (最小 imp 1,000 or 4 週、+20% かつ 95% 有意で採用) を実験開始時に固定しピーキング回避。
