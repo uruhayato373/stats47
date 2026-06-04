@@ -134,6 +134,21 @@ export async function readActiveBannersByCategoryKeysFromR2(
     .slice(0, limit);
 }
 
+/**
+ * A/B テスト (AFF-05) 用: categoryKey に紐づく experiment variant を全件取得する。
+ * experimentId を持つ active エントリのみ (adType は banner/text 両方)。priority 降順。
+ * experiment が無いカテゴリでは空配列を返す (呼び出し側は従来解決にフォールバック)。
+ */
+export async function readActiveExperimentVariantsByCategoryFromR2(
+  categoryKey: string,
+): Promise<AffiliateAdRow[]> {
+  if (!categoryKey) return [];
+  const active = await getActive();
+  return active
+    .filter((a) => a.categoryKey === categoryKey && !!a.experimentId && !!a.variantId)
+    .sort(compareByPriorityDesc);
+}
+
 export async function readActiveBannersByLocationFromR2(
   locationCode: AffiliateLocationCode,
   limit = 10,

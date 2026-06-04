@@ -28,17 +28,25 @@ export function trackCsvDownload(params: {
 
 /**
  * アフィリエイトリンクのクリックイベントを GA4 に送信する。
+ * experimentId / variantId / creativeSize は A/B テスト (AFF-05) 用の任意属性。
  */
 export function trackAffiliateClick(params: {
   category: string;
   label: string;
   position: string;
+  experimentId?: string;
+  variantId?: string;
+  creativeSize?: string;
 }): void {
   sendEvent("affiliate_click", {
     event_category: "affiliate",
     event_label: params.label,
     affiliate_category: params.category,
     link_position: params.position,
+    // 任意属性は値があるときだけ送る (未設定実験は従来どおりの payload)
+    ...(params.experimentId ? { experiment_id: params.experimentId } : {}),
+    ...(params.variantId ? { variant_id: params.variantId } : {}),
+    ...(params.creativeSize ? { creative_size: params.creativeSize } : {}),
   });
 }
 

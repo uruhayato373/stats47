@@ -21,7 +21,43 @@ import { AFFILIATE_ADS } from "./affiliate-ads-data";
 
 dotenv.config({ path: ".env.local" });
 
+/**
+ * A/B テスト (AFF-05) の整合性をビルド時に検証する (手編集 JSON を SSOT にしない原則)。
+ * - experimentId と variantId は両方セットで使う
+ * - 同一 experimentId 内で variantId は一意
+ * - weight は非負
+ */
+function validateExperiments(): void {
+  const seen = new Map<string, Set<string>>();
+  const errors: string[] = [];
+  for (const ad of AFFILIATE_ADS) {
+    if (!ad.experimentId && !ad.variantId) continue;
+    if (ad.experimentId && !ad.variantId) {
+      errors.push(`${ad.id}: experimentId があるが variantId が無い`);
+      continue;
+    }
+    if (ad.variantId && !ad.experimentId) {
+      errors.push(`${ad.id}: variantId があるが experimentId が無い`);
+      continue;
+    }
+    if (typeof ad.weight === "number" && ad.weight < 0) {
+      errors.push(`${ad.id}: weight が負 (${ad.weight})`);
+    }
+    const set = seen.get(ad.experimentId as string) ?? new Set<string>();
+    if (set.has(ad.variantId as string)) {
+      errors.push(`experiment "${ad.experimentId}": variantId "${ad.variantId}" が重複`);
+    }
+    set.add(ad.variantId as string);
+    seen.set(ad.experimentId as string, set);
+  }
+  if (errors.length > 0) {
+    throw new Error(`affiliate experiment 検証エラー:\n - ${errors.join("\n - ")}`);
+  }
+}
+
 async function main() {
+  validateExperiments();
+
   const snapshot: AffiliateAdsSnapshot = {
     generatedAt: new Date().toISOString(),
     ads: AFFILIATE_ADS,
