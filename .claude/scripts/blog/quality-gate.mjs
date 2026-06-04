@@ -112,31 +112,14 @@ function countSvgCharts(text) {
 // 標準は「上位5+下位5 の SVG チャート」。表だけ・上下非対称表・truncated 表は不可。
 // 5 vs 10 の本数差は gate では判定しない (良記事=top10+bottom10 を誤爆しないため。本数は
 // blog-quality-standards.md の基準 + blog-critic の意味判断に委ねる)。
-function detectRankingTables(text) {
-  const tables = [];
-  let cur = null;
-  for (const ln of text.split("\n")) {
-    if (/^\s*\|.*\|\s*$/.test(ln)) (cur ??= []).push(ln);
-    else if (cur) {
-      tables.push(cur);
-      cur = null;
-    }
-  }
-  if (cur) tables.push(cur);
-  return tables
-    .filter((rows) => /順位|rank/i.test(rows[0] || ""))
-    .map((rows) => {
-      const ranks = [];
-      for (const r of rows.slice(2)) {
-        const m = r.match(/^\s*\|\s*(\d{1,2})\s*\|/);
-        if (m) ranks.push(Number(m[1]));
-      }
-      const topRun = ranks.filter((r) => r <= 12).length;
-      const bottomRun = ranks.filter((r) => r >= 36).length;
-      const noMiddle = !ranks.some((r) => r > 12 && r < 36);
-      const asymmetric = topRun >= 3 && bottomRun >= 1 && topRun !== bottomRun && noMiddle && ranks.length < 47;
-      return { topRun, bottomRun, asymmetric };
-    });
+// markdown 表は全面禁止 (2026-06-04)。データは SVG 図、列挙/手順は箇条書きで表現する。
+// GFM の表は区切り行 (|---|---|) を必ず 1 行持つので、それを 1 表ブロック = 1 件として数える。
+// 「どの表なら OK か」の線引きを消すため、ランキング表/比較表/全件表を区別せず一律ブロックする。
+function countMarkdownTables(text) {
+  // frontmatter / code fence を除外してから区切り行を数える (誤検出防止)。
+  let t = text.replace(/^---[\s\S]*?\n---\n/, "");
+  t = t.replace(/```[\s\S]*?```/g, "");
+  return (t.match(/^\s*\|[ :|-]+\|\s*$/gm) || []).length;
 }
 
 // charCount は「読者が読む地の文 (prose)」のみを数える。
@@ -241,19 +224,13 @@ checks.rankingSourceLinks = sourceLinkLint.stats.rankingSourceLinks;
 checks.tailRankingLinks = sourceLinkLint.stats.tailRankingLinks;
 warnings.push(...sourceLinkLint.warnings);
 
-// ランキング表現の一貫性 (2026-06-02 追加): 標準は「上位5+下位5 の SVG チャート」。
-// 表だけ (チャート0) / 上下非対称表 / truncated 表は不可。本数 (5 vs 10) は基準 + critic 判断。
-const rankingTbls = detectRankingTables(content);
-checks.rankingTables = rankingTbls.length;
-if (rankingTbls.length > 0 && checks.charts === 0) {
+// markdown 表の全面禁止 (2026-06-04): データは SVG 図、列挙/手順は箇条書きで表現する。
+// 旧「チャート0 / 上下非対称 / truncated 表」の個別判定は「表禁止」に包含されるため廃止。
+const markdownTables = countMarkdownTables(content);
+checks.markdownTables = markdownTables;
+if (markdownTables > 0) {
   blockers.push(
-    "ランキング表ありチャート0 — ランキングは上位5+下位5 の SVG チャートで可視化すること (表だけは不可)",
-  );
-}
-const asym = rankingTbls.find((t) => t.asymmetric);
-if (asym) {
-  blockers.push(
-    `上下非対称ランキング表 (top${asym.topRun}/bottom${asym.bottomRun}) — 上位N+下位N を対称にするか SVG 化`,
+    `markdown 表 ${markdownTables} 件 — 記事に表は禁止。データは SVG 図 (上位5+下位5 等)、列挙/手順は箇条書きにすること`,
   );
 }
 
