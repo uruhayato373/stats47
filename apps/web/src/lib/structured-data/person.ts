@@ -20,9 +20,9 @@ export function buildOperatorPersonSchema(baseUrl: string) {
     "@type": "Person",
     name: "KAZU",
     url: `${baseUrl}/about`,
-    jobTitle: "データ可視化コンサルタント / 元県庁職員（20 年）",
+    jobTitle: "データ可視化 / 元県庁職員（約 20 年）",
     description:
-      "20 年間、自治体職員として統計の作る側・使う側の両方に身を置いた経験を活かし、公的統計を現代の UI/UX で再設計する stats47 を運営。",
+      "約 20 年間、自治体職員として統計の作る側・使う側の両方に身を置いたのち、在職中に独学で AI を学び IT・データ業界へ転職・独立。その経験を活かし、公的統計を現代の UI/UX で再設計する stats47 を運営。",
     worksFor: {
       "@type": "Organization",
       name: "統計で見る都道府県",

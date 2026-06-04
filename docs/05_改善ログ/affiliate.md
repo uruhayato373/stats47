@@ -138,3 +138,33 @@ CTA 文言違い) を用意し、**クライアント側 加重ランダム + va
 - **次アクション (P4 = 実験開始)**: GA4 を見て対象枠を決め、SSOT に variant エントリ (同 experimentId・別 variantId) を
   2〜3 件追加 → `/register-affiliate-banner` で反映。GA4 で variant 用 custom dimension 登録。
 - **停止ルール**: 各 variant imp ≥ 1,000 (or 4 週)、勝者 CTR が次点比 +20% かつ 95% 有意で採用。ピーキング回避。
+
+---
+
+## [AFF-06] 公務員 AI 転職体験記で STRATEGY CAREER を訴求
+
+- **status**: pending
+- **tier**: 2
+- **target_metric**: affiliate/ctr
+- **owner**: claude
+- **due**: 2026-07-04
+- **verification_command**: `node .claude/scripts/ads/fetch-affiliate-ga4.cjs 28`（`af_strategy_career_*` の `ad_impression` / `affiliate_click` を `page_path=/blog/koumuin-ai-tenshoku-1500man` で集計）
+- **related_pr**: -
+
+**[仮説]** STRATEGY CAREER（エンジニア転職）は `laborwage` タグ記事の blog-bottom に薄く自動配置しているが、
+広告と読者文脈のマッチが弱く CTR が伸びにくい。「公務員が AI を独学して転職・独立し、年収が公務員時代の
+2 倍以上になった」一人称の体験記（`/blog/koumuin-ai-tenshoku-1500man`、`laborwage` タグ）を新設し、
+「転職を決めた」セクション直下に同案件を `<affiliate-banner>` で **直接属性配置**（末尾集約しない）すれば、
+転職検討の意図が最も高まる文脈で接触でき、blog-bottom 単独より CTR が高まると見込む。
+
+- **施策内容**:
+  - 体験記ブログ `koumuin-ai-tenshoku-1500man`（`published: false` の下書き）を作成。景表法対応（冒頭 PR 表記・
+    リンク直前「※PR：」・年収は個人結果である旨の打消し表示）済み。
+  - 本文インライン + `laborwage` タグによる blog-bottom 自動配置の二重接触。
+  - `/about` を体験ストーリー軸（県庁→AI 独学→転職→独立→stats47）に書き換え、体験記への導線を追加（about には
+    バナー非設置・リンクのみ）。
+- **想定効果**: [仮説] 体験記文脈のインライン枠は blog-bottom 単独より高 CTR を見込むが、定量基準は実測前のため
+  未設定。公開後 4 週で GA4 実測 → blog-bottom 平均 CTR と比較して effect/* を判定する（80% 未満なら CTA 文言 /
+  配置位置を見直し）。
+- **未確定 / 仮説**: 記事は現在 `published: false`。公開には blog-critic レビュー（`review.md` PASS）と
+  オーナーによる経歴・年収表記の事実確認が前提。公開・GA4 計測前に effect/* は付けない。
