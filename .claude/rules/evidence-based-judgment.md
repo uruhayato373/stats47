@@ -152,7 +152,7 @@ curl -s -o /dev/null -w "%{http_code}\n" \
 
 ## スキル設計上の取り込み方
 
-`improvement` 系スキル（gsc-improvement / ga4-improvement / performance-improvement / sns-metrics-improvement / cloudflare-cost-improvement / adsense-improvement）と判定系スキル（seo-audit / weekly-review / critical-review / nsm-experiment）は、effect ラベル付与手順の **直前** に以下のチェックリストを置く:
+`improvement` 系スキル（gsc-improvement / ga4-improvement / performance-improvement / sns-metrics-improvement / cloudflare-cost-improvement / adsense-improvement / affiliate-improvement）と判定系スキル（seo-audit / weekly-review / critical-review / nsm-experiment）は、effect ラベル付与手順の **直前** に以下のチェックリストを置く:
 
 ```markdown
 ## 実証チェックリスト（effect/* ラベルを付ける前に必須）
@@ -194,7 +194,7 @@ NG ワードの検出スクリプト（CI で走らせるか手動レビュー�
 ```bash
 NG="のはず\|と思われる\|Google の仕様\|クロール予算枯渇\|壊滅\|兆候\|浸透待ち\|だろう\|と考えられる"
 grep -rn "$NG" \
-  .claude/skills/analytics/{gsc,ga4,performance,sns-metrics,cloudflare-cost,adsense}-improvement/reference/ \
+  .claude/skills/analytics/{gsc,ga4,performance,sns-metrics,cloudflare-cost,adsense,affiliate}-improvement/reference/ \
   .claude/skills/analytics/seo-audit/SKILL.md \
   .claude/skills/management/{weekly-review,critical-review,nsm-experiment}/SKILL.md \
   | grep -v "evidence-based-judgment\|archive/" \
