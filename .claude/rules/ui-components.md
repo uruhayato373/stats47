@@ -38,6 +38,7 @@ CSS Grid (`lg:grid` + `items-start`) 内の `sticky` aside には **必ず `max-
   Table / Card / Accordion / Select / Button 等が揃っている。素の HTML 要素（`<table>`, `<select>`, `<button>` 等）で実装せず、まず `packages/components/src/` に該当コンポーネントがないか確認すること。
 
 - **ページ見出し（h1）は `text-2xl font-bold` に統一する。** `text-3xl` 以上は使わない。
+  - **例外: hero バナー内の h1**（色付き `HeroShell` / hero セクション内のキャッチコピー）は `text-2xl sm:text-3xl`（home のみ `text-3xl sm:text-4xl lg:text-5xl`）のレスポンシブ大見出しを許容する。マーケ目的の意図的拡大であり、コンテンツ本文の h1（ranking/category 詳細・記事タイトル）とは役割が異なる。該当: `app/page.tsx`・`category/[categoryKey]`・`themes`・`survey/[surveyKey]`・`tag/[tagKey]`。本文コンテンツの h1 では `text-2xl` を厳守する。
 
 ## melta-ui デザインシステム準拠
 
