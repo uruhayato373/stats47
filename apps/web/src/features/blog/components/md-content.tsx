@@ -205,7 +205,8 @@ function makeMdComponents(slug?: string, affiliateBannersByCategory?: Record<str
                 nodeChildren.every((c) => c.type === "element" && (c.tagName === "img" || c.tagName === "ad-slot" || c.tagName === "data-source" || c.tagName === "source-link" || c.tagName === "affiliate-banner" || c.tagName === "ranking-table" || c.tagName === "site-link"));
             if (hasBlockElement) return <>{children}</>;
             return (
-                <p className="my-3 leading-7" {...props}>
+                // Zenn 準拠: 行間 1.9 / 連続段落間 24px (p+p{margin-top:1.5em} の移植)
+                <p className="my-4 leading-[1.9] [&+p]:mt-6" {...props}>
                     {children}
                 </p>
             );
@@ -384,7 +385,7 @@ export function MDContent({ source, slug, relatedArticleTitles, affiliateBanners
     );
     return (
         <article
-            className="prose prose-zinc max-w-none prose-pre:my-4 prose-pre:bg-slate-900 prose-pre:text-slate-100 prose-pre:border prose-pre:border-slate-700 prose-pre:shadow-sm prose-pre:p-4 prose-code:before:content-none prose-code:after:content-none"
+            className="prose prose-zinc max-w-none [--tw-prose-body:#27272a] prose-pre:my-4 prose-pre:bg-slate-900 prose-pre:text-slate-100 prose-pre:border prose-pre:border-slate-700 prose-pre:shadow-sm prose-pre:p-4 prose-code:before:content-none prose-code:after:content-none"
             suppressHydrationWarning
         >
             <ReactMarkdown
