@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 300" role="img" aria-label="昼夜間人口比率 上位3・下位3県 (2020年・%)">
+  <rect width="100%" height="100%" fill="#f8fafc" rx="6"/>
+  <!-- 上位 -->
+  <text x="108" y="28" text-anchor="end" font-size="13" fill="#475569">1. 東京都</text>
+  <rect x="118" y="12" width="480" height="22" fill="#1d4ed8" rx="2"/>
+  <text x="604" y="28" font-size="12" fill="#334155">116.1%</text>
+  <text x="108" y="56" text-anchor="end" font-size="13" fill="#475569">2. 大阪府</text>
+  <rect x="118" y="40" width="320" height="22" fill="#3b82f6" rx="2"/>
+  <text x="444" y="56" font-size="12" fill="#334155">103.9%</text>
+  <text x="108" y="84" text-anchor="end" font-size="13" fill="#475569">3. 京都府</text>
+  <rect x="118" y="68" width="300" height="22" fill="#60a5fa" rx="2"/>
+  <text x="424" y="84" font-size="12" fill="#334155">101.7%</text>
+  <line x1="118" y1="100" x2="620" y2="100" stroke="#cbd5e1" stroke-dasharray="4"/>
+  <text x="370" y="115" text-anchor="middle" font-size="11" fill="#94a3b8">100%ライン（昼夜均衡）</text>
+  <!-- 下位 -->
+  <text x="108" y="166" text-anchor="end" font-size="13" fill="#475569">45. 奈良県</text>
+  <rect x="118" y="150" width="270" height="22" fill="#f97316" rx="2"/>
+  <text x="394" y="166" font-size="12" fill="#334155">91.1%</text>
+  <text x="108" y="194" text-anchor="end" font-size="13" fill="#475569">46. 千葉県</text>
+  <rect x="118" y="178" width="264" height="22" fill="#ef4444" rx="2"/>
+  <text x="388" y="194" font-size="12" fill="#334155">90.3%</text>
+  <text x="108" y="222" text-anchor="end" font-size="13" fill="#475569">47. 埼玉県</text>
+  <rect x="118" y="206" width="248" height="22" fill="#b91c1c" rx="2"/>
+  <text x="372" y="222" font-size="12" fill="#334155">89.6%</text>
+  <text x="370" y="270" text-anchor="middle" font-size="11" fill="#64748b">昼夜間人口比率（2020年国勢調査）</text>
+  <text x="118" y="256" font-size="11" fill="#64748b">※100%超＝昼間に人口が流入、100%未満＝昼間に人口が流出</text>
+</svg>
