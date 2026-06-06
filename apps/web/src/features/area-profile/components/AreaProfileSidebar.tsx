@@ -93,7 +93,7 @@ export function AreaProfileSidebar({ strengths, weaknesses }: AreaProfileSidebar
                 title="全国上位"
                 items={strengths}
                 icon={<TrendingUp className="h-4 w-4" />}
-                titleClassName="text-green-700"
+                titleClassName="text-emerald-700"
             />
             <RankingCard
                 title="全国下位"
