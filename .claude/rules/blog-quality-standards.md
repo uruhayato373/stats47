@@ -335,7 +335,7 @@ awk -F',' 'NR>1 && $1 ~ /\/blog\// && $3 >= 200 && ($4+0) < 0.02 && ($4+0) > 0 {
 2. 必要なら本文も編集 ([!NOTE] callout 追加、内部リンク強化)
 3. `bash .claude/skills/db/sync-snapshots/run.sh --only blog` で R2 push
    （`export-blog-snapshot.ts` が article.md frontmatter を直接読んで `app/blog/all.json` を生成 = 完全DBレス。D1 articles テーブルは廃止済）
-4. 改善ログ `docs/05_改善ログ/gsc.md` に BLOG-CTR-NN として記録
+4. 改善バックログ `docs/02_実装計画/improvement-backlog.md` に BLOG-CTR-NN として記録
 5. feature ブランチで commit → develop merge → PR develop → main → CI green → merge → Cloudflare Pages 自動 deploy
 
 ## 実証データ (2026-05-23 ベース)
@@ -396,5 +396,5 @@ node .claude/scripts/blog/audit-published-blog.mjs
 - **是正ループの正典 (計画的に順次品質向上): `docs/02_実装計画/blog-remediation-loop.md`** ★既存記事を直すときはまずこれ
 - 親方針: `docs/02_実装計画/100x-pv-strategy.md` Phase 0 (CTR 改修)
 - 実測判定ルール: `.claude/rules/evidence-based-judgment.md`
-- 改善ログ: `docs/05_改善ログ/gsc.md` BLOG-CTR-03 / BLOG-CTR-04
+- 改善バックログ: `docs/02_実装計画/improvement-backlog.md` (BLOG-CTR-03 / BLOG-CTR-04)
 - 既存スキル: `.claude/skills/blog/brushup-blog/SKILL.md` (`--target queue` が是正の実行エンジン)

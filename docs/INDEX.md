@@ -11,7 +11,7 @@
 | `02_実装計画/` | 実装ロードマップ・フェーズ計画 | 内容更新が中心。完了した設計書は `archive/` へ |
 | `03_週次運用/` | 週次計画・週次レビュー・週次メトリクス | `週次計画/YYYY-Www.md` / `週次レビュー/YYYY-Www.md` / `メトリクス/YYYY-Www.md` を週次 append |
 | `04_レビュー/` | 批判的レビュー・事前検死・SEO 監査・SNS 週報・パフォーマンス・コスト月報 | カテゴリ別サブディレクトリで蓄積 |
-| `05_改善ログ/` | gsc / ga4 / adsense / psi / affiliate / cloudflare-cost 改善施策の人間向け要約 | 1 metric = 1 ファイル append-only。frontmatter `status:` で施策の進捗管理 |
+| `02_実装計画/improvement-backlog.md` | 改善施策の TODO 一覧 (pending / in-progress) | tier/due/owner のシンプルな表。旧 `05_改善ログ/` から 2026-06-06 移行 |
 | `10_SNS戦略/` | SNS コンテンツ設計 | 内容更新が中心 |
 | `15_実験ログ/` | YouTube 実験ファイル群 (1 実験 1 ファイル) | `youtube/EXP-NNN.md` |
 | `20_ブログ記事企画/` | ブログ記事の企画・テーマ案 | `backlog/` 配下に蓄積。直下は INDEX/運用ファイル (`01_ブログ記事一括企画.md` / `brushup-queue.md`) のみ |
@@ -58,7 +58,7 @@
 
 1. **戦略・要件の変更** → `00_プロジェクト管理/` 該当ファイルを Edit (新規ファイル追加禁止)
 2. **週次計画・レビュー** → `/weekly-plan` / `/weekly-review` スキルが `03_週次運用/` に自動生成
-3. **改善施策の記録** → `/{gsc,ga4,adsense,affiliate,cloudflare-cost,performance}-improvement action` が `05_改善ログ/` に append
+3. **改善施策の記録** → `docs/02_実装計画/improvement-backlog.md` の該当行の status を更新
 4. **コンテンツ backlog** → 該当 `*企画/backlog/` に Write
 5. **未着手の機能・自動化バックログ** → `50_Issues/{feature,automation}-backlog.md` に section 追加
 6. **機能改修 / バグ** → `gh issue create --label enhancement` で Issues 起票

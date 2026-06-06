@@ -114,26 +114,14 @@ DB: .local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6
 - docs/02_実装計画/01_実装ロードマップ.md の現在のスプリント・未完了タスク
 - 未着手の Issue 一覧（`gh issue list --state open --label enhancement`、PR で close される機能改修）+ docs/50_Issues/feature-backlog.md の section ごとの `tier:` で優先度判定
 
-- 改善ログ pending 一覧（**真実源**: `docs/05_改善ログ/*.md`）
+- 改善バックログ pending 一覧（**真実源**: `docs/02_実装計画/improvement-backlog.md`）
   ```bash
-  # 今週末まで due の Tier 1/2 を抽出 (Must/Should 候補)
-  SUNDAY=$(date -u -d "$(date +%G-W%V-7) +6 days" +%Y-%m-%d 2>/dev/null || \
-           python3 -c "from datetime import date,timedelta; t=date.today(); print(t+timedelta(days=(6-t.weekday())))")
-  node .claude/scripts/lib/scan-pending-improvements.mjs \
-    --due-before "$SUNDAY" \
-    --tier 1,2 \
-    --format markdown
+  # Tier 1/2 の pending / in-progress を表示
+  grep -E "^\| (AFF|INDEXING|SEO|BLOG|ADSENSE|GA4|PSI|CWV|P0|Q-|CTR|CONTENT|AICONTENT)" \
+    docs/02_実装計画/improvement-backlog.md
   ```
-  → 出力された各エントリを Phase 3 の Must / Should 候補として組み込む
-  → Tier 1 は Must 優先、Tier 2 は Should 候補
-
-- 効果判定遅れエントリ（triage）
-  ```bash
-  # deployed_at から 14 日以上経過した pending|in-progress
-  node .claude/scripts/lib/scan-pending-improvements.mjs --overdue-days 14
-  ```
-  → これらは Phase 4 「前週と同じ失敗を繰り返してないか」の検出材料
-  → 該当があれば Phase 3 で「effect 判定タスク」として 1 つ計画に組み込む
+  → Tier 1 は Must 優先、Tier 2 は Should 候補として計画に組み込む
+  → due が今週以内のエントリを最優先
 
 - ブログ品質是正キュー（**計画的に順次品質向上**・真実源: `.claude/state/blog/remediation-queue.json`）
   ```bash
@@ -316,8 +304,8 @@ tags: []
 
 ## 改善ログ pending (今週着手対象)
 
-<!-- Agent D が scan-pending-improvements.mjs で抽出した Tier 1/2 エントリ。
-     ここに転載することで「真実源は改善ログ、当週ビューは週次計画」の連動を明示。 -->
+<!-- docs/02_実装計画/improvement-backlog.md から今週着手する Tier 1/2 エントリを転載。
+     真実源は improvement-backlog.md、当週ビューは週次計画。 -->
 | Tier | Metric | ID | Status | Due | Owner |
 |---|---|---|---|---|---|
 | 1 | gsc | T0-DECAY-01 | in-progress | 2026-06-14 | claude |

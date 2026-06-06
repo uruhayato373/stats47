@@ -18,10 +18,7 @@ goal:
 related_files:
   - docs/02_実装計画/01_実装ロードマップ.md
   - docs/02_実装計画/seo-todo-unify-phase-1-3.md
-  - docs/05_改善ログ/INDEX.md
-  - docs/05_改善ログ/indexing.md
-  - docs/05_改善ログ/gsc.md
-  - docs/05_改善ログ/content.md
+  - docs/02_実装計画/improvement-backlog.md
 phases:
   - { id: 0, name: "漏れ止め", weeks: "W21-W28", multiplier: 1.5, target_monthly_pv: 38000, status: implementation-complete, effect_measurement_due: "2026-06-20" }
   - { id: 1, name: "面の拡張", weeks: "W29-W44", multiplier: 4, target_monthly_pv: 150000, status: partial-implementation-360-cities-ssg, prep_complete: true }
@@ -209,7 +206,7 @@ Phase 0 完了 (effect/full) は以下すべてを満たすこと:
 
 - **週次レビュー**: `docs/03_週次運用/週次レビュー/YYYY-Www.md` で Phase 進捗を毎週確認
 - **月次振り返り**: 各月末に Phase 完了判定 (上記基準と照合)
-- **真実源**: `docs/05_改善ログ/{indexing,gsc,content,psi,ga4,adsense,cloudflare-cost,ai-content}.md` の status 集約
+- **真実源**: `docs/02_実装計画/improvement-backlog.md` の status 集約
 - **自動 triage**: `.github/workflows/improvement-log-reminder-weekly.yml` (日曜 22:00 JST) で overdue 検知
 
 ## 関連ドキュメント
@@ -219,5 +216,5 @@ Phase 0 完了 (effect/full) は以下すべてを満たすこと:
 - SEO TODO 一元化基盤: `docs/02_実装計画/seo-todo-unify-phase-1-3.md`
 - ペルソナ Two-track 戦略: `docs/00_プロジェクト管理/04_ターゲットペルソナ.md`
 - マーケティング戦略: `docs/00_プロジェクト管理/03_マーケティング戦略.md`
-- 改善ログ INDEX (TODO 真実源): `docs/05_改善ログ/INDEX.md`
+- 改善バックログ (TODO 真実源): `docs/02_実装計画/improvement-backlog.md`
 - 実証ベース判定ルール: `.claude/rules/evidence-based-judgment.md`

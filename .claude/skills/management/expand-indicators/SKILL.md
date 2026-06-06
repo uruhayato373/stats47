@@ -23,9 +23,9 @@ primary_agent: data-ingester
 > 5. `/sync-metrics-cache --apply` で D1 metrics cache 同期
 > 6. `/page-data-batch --metric <key>` で e-Stat → R2 投入
 > 7. `docs/50_Issues/indicator-backlog.md` を手動編集 (status: pending → done)
-> 8. `docs/05_改善ログ/indicator-expansion.md` に batch entry append
+> 8. `docs/02_実装計画/improvement-backlog.md` に batch entry append
 
-stats47 の指標を継続的に拡充する。`docs/50_Issues/indicator-backlog.md` の pending 候補から優先度上位 N 件を順次取得・登録し、backlog の status を更新、`docs/05_改善ログ/indicator-expansion.md` に施策バッチとして append する 1 コマンド型スキル (refactor 完了後)。
+stats47 の指標を継続的に拡充する。`docs/50_Issues/indicator-backlog.md` の pending 候補から優先度上位 N 件を順次取得・登録し、backlog の status を更新、`docs/02_実装計画/improvement-backlog.md` に施策バッチとして append する 1 コマンド型スキル (refactor 完了後)。
 
 **現行 schema** (Phase 6/7 後):
 - TS-config (`packages/data-configs/src/metrics/<key>.ts`) — metric メタの SSOT
@@ -164,7 +164,7 @@ recipe を `/tmp/expand-indicators/recipes-YYYY-MM-DD-NN.json` (配列) とし�
 
 ### Phase 5: 改善ログ append
 
-9. `docs/05_改善ログ/indicator-expansion.md` を Read し、`## 実行履歴` セクション末尾に下記テンプレで新 batch entry を Edit append:
+9. `docs/02_実装計画/improvement-backlog.md` を Read し、`## 実行履歴` セクション末尾に下記テンプレで新 batch entry を Edit append:
    - section ID: `[BATCH-YYYY-MM-DD-NN]` (NN は当日 N 回目)
    - 追加リスト表 (slug / category / theme / estat_id / rows / latest_year)
    - 結果サマリ (成功 / 失敗 / skip / backlog 残)
@@ -180,7 +180,7 @@ recipe を `/tmp/expand-indicators/recipes-YYYY-MM-DD-NN.json` (配列) とし�
     [expand-indicators] 完了
       成功: 8 件 / 失敗: 1 件 / skip: 1 件
       backlog 残: pending=29 / failed=1 / done=8
-      改善ログ: docs/05_改善ログ/indicator-expansion.md#BATCH-2026-05-19-01
+      改善ログ: docs/02_実装計画/improvement-backlog.md#BATCH-2026-05-19-01
 
     次のアクション候補:
       1. /generate-known-ranking-keys (新規 metric.key を middleware に登録)
@@ -193,7 +193,7 @@ recipe を `/tmp/expand-indicators/recipes-YYYY-MM-DD-NN.json` (配列) とし�
 | 更新対象 | 内容 |
 |---|---|
 | `docs/50_Issues/indicator-backlog.md` | 該当行 `status` 更新 + frontmatter `updated:` |
-| `docs/05_改善ログ/indicator-expansion.md` | 新 batch entry append + frontmatter `updated:` |
+| `docs/02_実装計画/improvement-backlog.md` | 新 batch entry append + frontmatter `updated:` |
 | ローカル D1 | `metrics` + `stats_prefecture` + `sources` (upsert) + `estat_metainfo` (status='registered') |
 | `/tmp/expand-indicators/recipes-*.json` | recipe 入力 (ephemeral) |
 | `/tmp/expand-indicators/<slug>.debug.json` | 失敗時のみ debug ダンプ (ephemeral) |
@@ -231,7 +231,7 @@ recipe を `/tmp/expand-indicators/recipes-YYYY-MM-DD-NN.json` (配列) とし�
 ## 関連
 
 - backlog: [`docs/50_Issues/indicator-backlog.md`](../../../../docs/50_Issues/indicator-backlog.md)
-- 改善ログ: [`docs/05_改善ログ/indicator-expansion.md`](../../../../docs/05_改善ログ/indicator-expansion.md)
+- 改善ログ: [`docs/02_実装計画/improvement-backlog.md`](../../../../docs/02_実装計画/improvement-backlog.md)
 - パーサ: [`.claude/scripts/management/parse-backlog.cjs`](../../../scripts/management/parse-backlog.cjs)
 - orchestrator: [`.claude/scripts/management/ingest-indicator.mjs`](../../../scripts/management/ingest-indicator.mjs)
 - 連携スキル: `/inspect-estat-meta`, `/generate-known-ranking-keys`, `/sync-snapshots`

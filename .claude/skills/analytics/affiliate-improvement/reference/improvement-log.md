@@ -1,6 +1,6 @@
 # affiliate-improvement 詳細ログ (agent 用・append-only)
 
-2 層構造の下層。人間向け要約は `docs/05_改善ログ/affiliate.md`。
+agent 用詳細ログ。施策一覧 (簡易表) は `docs/02_実装計画/improvement-backlog.md`。
 記入は `.claude/rules/evidence-based-judgment.md` のテンプレに従う (想定値の根拠・検証コマンド・実測を必須)。
 
 ---

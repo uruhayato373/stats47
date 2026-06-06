@@ -20,7 +20,7 @@
 |---|---|---|
 | `strategy-advisor` | 週次 PDCA・NSM・批判的 review (knowledge / triage は分離) | 既存縮退 |
 | `knowledge-curator` 🆕 | 失敗・学びの記録 + auto memory 整理 | strategy-advisor 分離 |
-| `improvement-triage` 🆕 | 改善ログ INDEX 整理 + status 更新 (`docs/05_改善ログ/` 排他 append) | strategy-advisor 分離 |
+| `improvement-triage` 🆕 | 改善バックログ整理 + status 更新 (`docs/02_実装計画/improvement-backlog.md` 排他 append) | strategy-advisor 分離 |
 
 ## Tier 2: Data / Infra (5 体)
 
@@ -89,12 +89,12 @@
 | `article-writer × 5` + `chart-author` | `.local/r2/app/blog/<slug>/` を slug 単位排他、chart-author は `docs/21_ブログ記事原稿/<slug>/` を読むのみ |
 | `data-ingester` → `snapshot-exporter` → `r2-publisher` | D1 write → `.local/r2/app/` write → R2 push の一方向。同 ranking_key は逐次、別 key は並列可 |
 | `x-strategist` + `instagram-strategist` + `youtube-strategist` | API / state / metrics サブディレクトリが完全分離 |
-| `gsc-analyst` + `improvement-triage` | gsc-analyst → `.claude/state/metrics/gsc/` write、triage → `docs/05_改善ログ/gsc.md` 排他 append |
+| `gsc-analyst` + `improvement-triage` | gsc-analyst → `.claude/state/metrics/gsc/` write、triage → `docs/02_実装計画/improvement-backlog.md` 排他 append |
 | `code-reviewer` + `ui-consistency-reviewer` + `tdd-guide` | 全員 read-only、git diff のみ |
 
 **禁則**:
 - D1 への並列 write 禁止 (better-sqlite3 単一プロセス前提)。同 D1 への `data-ingester` / `db-schema-manager` 起動は逐次
-- `docs/05_改善ログ/<metric>.md` への書き込みは `improvement-triage` のみ。analyst 系は `.claude/state/` にしか書かない
+- `docs/02_実装計画/improvement-backlog.md` への書き込みは `improvement-triage` のみ。analyst 系は `.claude/state/` にしか書かない
 
 ## チーム連携パターン (新体制版)
 
@@ -111,7 +111,7 @@
 
 ## 移行ステータス
 
-**Phase 1-5 完了 (2026-05-28)**: 新 18 agent 追加 → 既存 8 agent 縮退記述 → 136 SKILL.md に `primary_agent` frontmatter 付与 (task-router のみ意図的 skip) → 縮退 agent への primary 参照 28 件を精査し責務に応じて 4 件移動・24 件維持 (Session B) → 並行運用検証 (Session 5-1/5-2/5-3) 実施済。L3-1 統合は Cluster 1 (blog-review) + Cluster 7 (brushup-blog) のみ実装、Cluster 2/3/4/5/6 は KEEP-SKIP 判定 (各 Cluster の責務分離が既に適切なため、形式統合より現状維持が CLAUDE.md 行動原則「シンプル最優先」に整合)。判定詳細: `docs/05_改善ログ/agent-parallelism.md` AGENT-L3-CONSOLIDATE-01。
+**Phase 1-5 完了 (2026-05-28)**: 新 18 agent 追加 → 既存 8 agent 縮退記述 → 136 SKILL.md に `primary_agent` frontmatter 付与 (task-router のみ意図的 skip) → 縮退 agent への primary 参照 28 件を精査し責務に応じて 4 件移動・24 件維持 (Session B) → 並行運用検証 (Session 5-1/5-2/5-3) 実施済。L3-1 統合は Cluster 1 (blog-review) + Cluster 7 (brushup-blog) のみ実装、Cluster 2/3/4/5/6 は KEEP-SKIP 判定 (各 Cluster の責務分離が既に適切なため、形式統合より現状維持が CLAUDE.md 行動原則「シンプル最優先」に整合)。判定詳細: `docs/02_実装計画/improvement-backlog.md` AGENT-L3-CONSOLIDATE-01。
 
 | 旧 agent | 状態 | 移行先 |
 |---|---|---|

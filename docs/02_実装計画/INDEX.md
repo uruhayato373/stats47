@@ -11,7 +11,7 @@ tags: [実装計画]
 完了・superseded した記録は `archive/` へ移す（削除はしない）。
 
 > 三大ロードマップ: `01_実装ロードマップ.md`（Sprint 単位）/ `100x-pv-strategy.md`（24ヶ月 PV）/ `seo-todo-unify-phase-1-3.md`（SEO×TODO 統一）。
-> 個別施策の TODO 真実源は `docs/05_改善ログ/`、未着手 backlog は `docs/50_Issues/`。
+> 個別施策の TODO 真実源は `docs/02_実装計画/improvement-backlog.md`、未着手 backlog は `docs/50_Issues/`。
 >
 > **2026-05-29 集約**: 散在していた個別計画をテーマ別に 4 ファイルへ統合した（`phase-1-plan` / `phase-2-plan` / `theme-dashboard-plan` / `gis-content-plan`。各ファイル冒頭の `<!-- 元ファイル: -->` で出自を保持）。
 

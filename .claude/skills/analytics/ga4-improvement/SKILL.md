@@ -1,10 +1,10 @@
 ---
 name: ga4-improvement
-description: Google Analytics 4 のアクセス指標（Users / Sessions / Engagement / Bounce / Key Events）を docs/05_改善ログ/ga4.md で追跡し、週次 snapshot と施策の効果判定を記録する。Use when user says "GA4改善", "PV改善", "流入改善", "GA4記録".
+description: Google Analytics 4 のアクセス指標（Users / Sessions / Engagement / Bounce / Key Events）を docs/02_実装計画/improvement-backlog.md で追跡し、週次 snapshot と施策の効果判定を記録する。Use when user says "GA4改善", "PV改善", "流入改善", "GA4記録".
 primary_agent: ga4-analyst
 ---
 
-GA4 の週次メトリクス（Active Users / Sessions / Engagement / Bounce Rate / Key Events）を **`docs/05_改善ログ/ga4.md` で時系列追跡**し、打った施策と効果を記録するスキル。
+GA4 の週次メトリクス（Active Users / Sessions / Engagement / Bounce Rate / Key Events）を **`docs/02_実装計画/improvement-backlog.md` で時系列追跡**し、打った施策と効果を記録するスキル。
 
 コンテンツ追加・UI 改善・流入施策・サイト構造変更の効果は 1〜4 週間遅延するため、「何をいつしたか」「数値がどう動いたか」「次の候補は何か」を 1 ファイルに append-only で記録する。
 
@@ -14,11 +14,11 @@ GA4 の週次メトリクス（Active Users / Sessions / Engagement / Bounce Rat
 |---|---|---|
 | 生メトリクス CSV | git: `reference/snapshots/YYYY-Www/` | immutable、diff 比較、オフライン可 |
 | 目標しきい値設定 | git: `reference/budgets.json` | プロジェクト設定 |
-| 施策（1 施策 1 section、人間向け要約） | `docs/05_改善ログ/ga4.md` | Obsidian で時系列・status 別に絞り込み可能 |
+| 施策（1 施策 1 section、人間向け要約） | `docs/02_実装計画/improvement-backlog.md` | Obsidian で時系列・status 別に絞り込み可能 |
 | 詳細ログ（agent 用、検証コマンド・仮説） | `reference/improvement-log.md` | append-only、agent が深掘り参照 |
 | 週次推移サマリ | `.claude/state/metrics/ga4/LATEST.md` / `history.csv` | GitHub Actions が自動更新 |
 
-→ **2 層構造**: `docs/05_改善ログ/ga4.md` は人間が眺める要約、`reference/improvement-log.md` は agent が深掘りする詳細。
+→ **1 層構造**: `docs/02_実装計画/improvement-backlog.md` (簡易表) + agent 用詳細は `.claude/skills/analytics/ga4-improvement/reference/improvement-log.md`。
 
 ## frontmatter / status
 
@@ -63,7 +63,7 @@ GA4 メトリクス取得の優先順:
 ```
 以下を並列に実行して要約:
 1. reference/snapshots/ 配下の最新 YYYY-Www ディレクトリの CSV を Read
-2. docs/05_改善ログ/ga4.md を Read し status: pending / in-progress の section を抽出
+2. docs/02_実装計画/improvement-backlog.md を Read し status: pending / in-progress の section を抽出
 3. reference/improvement-log.md を Read し未判定の検証コマンド一覧を抽出
 4. .claude/state/metrics/ga4/LATEST.md を Read し週次推移を取得
 
@@ -115,7 +115,7 @@ GA4 メトリクス取得の優先順:
    - .claude/state/metrics/ga4/history.csv から取得しても可
 
 5. 進行中施策の効果判定（最重要）:
-   docs/05_改善ログ/ga4.md を Read し status: pending の section を抽出。
+   docs/02_実装計画/improvement-backlog.md を Read し status: pending の section を抽出。
    各施策に対して:
    - 経過日数 = observe 実行日 - deployed_at
    - 実測 delta = 最新値 - デプロイ時点の値（前週 snapshot から読む）
@@ -125,7 +125,7 @@ GA4 メトリクス取得の優先順:
      * 経過 ≥ 14 かつ 20-80% → status: effect/partial
      * 経過 ≥ 14 かつ < 20% → status: effect/none
      * 逆方向 → status: effect/adverse
-   - 判定結果を docs/05_改善ログ/ga4.md の該当 section の「実測」「判定」欄に Edit insert:
+   - 判定結果を docs/02_実装計画/improvement-backlog.md の該当 section の「実測」「判定」欄に Edit insert:
      ```
      ### 実測
      - 経過日数: N 日
@@ -158,7 +158,7 @@ GA4 メトリクス取得の優先順:
    - 変更内容サマリ / 変更ファイル
    - verification_command（copy-pasteable な fetch-ga4-data / API 呼び出し）
 
-2. docs/05_改善ログ/ga4.md を Read し、見出し直下（最新を上）に以下 section を Edit insert:
+2. docs/02_実装計画/improvement-backlog.md を Read し、見出し直下（最新を上）に以下 section を Edit insert:
 
    ```markdown
    ## <施策タイトル>
@@ -187,7 +187,7 @@ GA4 メトリクス取得の優先順:
 #### mode = next
 
 ```
-1. docs/05_改善ログ/ga4.md を Read し status: pending を除いた施策 + 過去 effect/full の派生候補を抽出
+1. docs/02_実装計画/improvement-backlog.md を Read し status: pending を除いた施策 + 過去 effect/full の派生候補を抽出
 2. reference/improvement-log.md の「次の候補」「仮説」セクションから未着手を拾う
 3. 最新 snapshot の「次のアクション」候補も合わせる
 
@@ -197,14 +197,14 @@ GA4 メトリクス取得の優先順:
 
 ### Step 3: 共通ルール
 
-- **docs/05_改善ログ/ga4.md は append-only** — section の追加・status の更新のみ。過去判定の改竄は禁止
+- **docs/02_実装計画/improvement-backlog.md は append-only** — section の追加・status の更新のみ。過去判定の改竄は禁止
 - **snapshots/YYYY-Www/ も append-only** — 過去の CSV は改変しない
 - **日付は絶対日付** — 「今週」「先週」は使わない
 - **数値はソース明示** — "snapshots/2026-W17/overview.csv" のような相対パス
 - **施策は 1 PR 1 section** — 複数目的の PR は分割
 - **想定効果値はデプロイ前に書く** — 後付けバイアス防止
 - **週次 /weekly-review から observe モードが自動呼び出し** される想定
-- **2 層構造を維持** — docs/ は人間が眺める要約、reference/improvement-log.md は agent が深掘りする詳細
+- **1 層構造を維持** — `docs/02_実装計画/improvement-backlog.md` (簡易表)、reference/improvement-log.md は agent が深掘りする詳細
 
 ## 参照パターン
 
@@ -214,10 +214,10 @@ ls -t .claude/skills/analytics/ga4-improvement/reference/snapshots/ | head -3
 cat .claude/state/metrics/ga4/LATEST.md
 
 # 進行中（pending）施策
-cat docs/05_改善ログ/ga4.md | grep -B1 -A4 'status.*pending'
+cat docs/02_実装計画/improvement-backlog.md | grep -B1 -A4 'status.*pending'
 
 # 効果測定済み施策
-cat docs/05_改善ログ/ga4.md | grep -B1 'status.*effect/'
+cat docs/02_実装計画/improvement-backlog.md | grep -B1 'status.*effect/'
 
 # 詳細ログ
 cat .claude/skills/analytics/ga4-improvement/reference/improvement-log.md
@@ -248,7 +248,7 @@ cat .claude/skills/analytics/ga4-improvement/reference/improvement-log.md
 
 ## 前提
 
-- `docs/05_改善ログ/ga4.md` が存在（front-matter `type: improvement-log` / `metric: ga4`）。存在しなければ初回 action 時に新規作成
+- `docs/02_実装計画/improvement-backlog.md` が存在すること（施策 ID は `GA4-*`）
 - `reference/budgets.json` / `reference/snapshots/` / `reference/improvement-log.md` 初期化済
 - GA4 プロパティ ID: `463218070`
 - 本番 URL: `https://stats47.jp`

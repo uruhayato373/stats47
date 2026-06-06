@@ -46,7 +46,7 @@ GSC 高インプレ記事を「候補選定 → データ接地 → AI リライ
   factual + quality ゲート再検証 → stage → thumbnail → diff-push (app/blog/<slug>) → all.json 再生成 → push
         │
         ▼
-[GitHub Actions or Routine: 月次]  measure-gsc-impact.mjs → docs/05_改善ログ/gsc.md に effect ラベル
+[GitHub Actions or Routine: 月次]  measure-gsc-impact.mjs → docs/02_実装計画/improvement-backlog.md に effect ラベル
 ```
 
 ## コンポーネント (再利用 9 割)

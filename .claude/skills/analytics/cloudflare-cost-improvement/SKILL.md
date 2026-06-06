@@ -1,10 +1,10 @@
 ---
 name: cloudflare-cost-improvement
-description: Cloudflare Workers / D1 / R2 の月次コストと主要メトリクス（D1 rows read、Workers CPU ms、storage、月額課金）を docs/05_改善ログ/cloudflare-cost.md で追跡し、budget 超過検知・施策と効果を記録する。Use when user says "Cloudflare コスト確認", "D1 使用量", "Workers CPU 使用量", "請求書チェック", or when analyzing Cloudflare invoices / cost anomalies.
+description: Cloudflare Workers / D1 / R2 の月次コストと主要メトリクス（D1 rows read、Workers CPU ms、storage、月額課金）を docs/02_実装計画/improvement-backlog.md で追跡し、budget 超過検知・施策と効果を記録する。Use when user says "Cloudflare コスト確認", "D1 使用量", "Workers CPU 使用量", "請求書チェック", or when analyzing Cloudflare invoices / cost anomalies.
 primary_agent: performance-auditor
 ---
 
-Cloudflare の月次コスト・リソース使用量を **`docs/05_改善ログ/cloudflare-cost.md` で時系列追跡**し、打った施策と効果を記録するスキル。
+Cloudflare の月次コスト・リソース使用量を **`docs/02_実装計画/improvement-backlog.md` で時系列追跡**し、打った施策と効果を記録するスキル。
 
 Cloudflare の請求は月次（前月 15 日〜当月 14 日集計、翌 15 日請求）。施策効果の測定は「デプロイから 14 日以上経過した観測値」で判定する。
 
@@ -16,12 +16,12 @@ Cloudflare の請求は月次（前月 15 日〜当月 14 日集計、翌 15 日
 | 日次 usage snapshot（自動） | git: `.claude/state/metrics/cloudflare/{snapshots/YYYY-MM-DD.json,history.csv,LATEST.md}` | `.github/workflows/cloudflare-usage-daily.yml` が日次 02:30 JST 自動更新 |
 | budget しきい値（月次） | git: `reference/budgets.json` | 月次レビュー用 |
 | budget しきい値（日次） | git: `reference/budgets-daily.json` | 日次自動アラート用、cloudflare-usage-daily.yml が参照 |
-| 施策（1 施策 1 section、人間向け要約） | `docs/05_改善ログ/cloudflare-cost.md` | Obsidian で時系列・status 別に絞り込み可能 |
+| 施策（1 施策 1 section、人間向け要約） | `docs/02_実装計画/improvement-backlog.md` | Obsidian で時系列・status 別に絞り込み可能 |
 | 詳細ログ（agent 用、検証コマンド・仮説） | `reference/improvement-log.md` | append-only、agent が深掘り参照 |
 | 月次スナップショット（人間向け要約） | `docs/04_レビュー/cloudflare-cost/YYYY-MM.md` | `.claude/scripts/cloudflare/monthly-snapshot.mjs` が自動書き出し |
 | 日次アラート（自動起票） | GitHub Issues ラベル `cloudflare-alert,auto-generated` タイトル `[Cloudflare Alert] ...` | 閾値違反時のみ起票・解決後 close で運用 |
 
-→ **2 層構造**: `docs/05_改善ログ/cloudflare-cost.md` は人間が眺める施策要約、`reference/improvement-log.md` は agent が深掘りする詳細。日次アラートのみ Issues に残す（PSI/Cloudflare daily アラート方針）。
+→ **1 層構造**: `docs/02_実装計画/improvement-backlog.md` (簡易表) + agent 用詳細は `.claude/skills/analytics/cloudflare-cost-improvement/reference/improvement-log.md`。日次アラートのみ Issues に残す（PSI/Cloudflare daily アラート方針）。
 
 ## frontmatter / status
 
@@ -67,7 +67,7 @@ Cloudflare メトリクス取得の優先順:
 ```
 以下を並列に実行して要約:
 1. reference/weekly-snapshots/ 配下の最新 YYYY-Www.json を Read
-2. docs/05_改善ログ/cloudflare-cost.md を Read し status: pending / in-progress の section を抽出
+2. docs/02_実装計画/improvement-backlog.md を Read し status: pending / in-progress の section を抽出
 3. reference/improvement-log.md を Read し未判定の検証コマンド一覧を抽出
 4. .claude/state/metrics/cloudflare/LATEST.md を Read し日次推移を取得
 
@@ -100,7 +100,7 @@ Cloudflare メトリクス取得の優先順:
    - .claude/state/metrics/cloudflare/history.csv から取得しても可
 
 5. 進行中施策の効果判定（最重要）:
-   docs/05_改善ログ/cloudflare-cost.md を Read し status: pending の section を抽出。
+   docs/02_実装計画/improvement-backlog.md を Read し status: pending の section を抽出。
    各施策に対して:
    - 経過日数 = observe 実行日 - deployed_at
    - 実測 delta = 最新値 - デプロイ時点の値（前月 snapshot から読む）
@@ -110,7 +110,7 @@ Cloudflare メトリクス取得の優先順:
      * 経過 ≥ 14 かつ 20-80% → status: effect/partial
      * 経過 ≥ 14 かつ < 20% → status: effect/none
      * 逆方向 → status: effect/adverse
-   - 判定結果を docs/05_改善ログ/cloudflare-cost.md の該当 section の「実測」「判定」欄に Edit insert:
+   - 判定結果を docs/02_実装計画/improvement-backlog.md の該当 section の「実測」「判定」欄に Edit insert:
      ```
      ### 実測
      - 経過日数: N 日
@@ -142,7 +142,7 @@ Cloudflare メトリクス取得の優先順:
    - 変更内容サマリ / 変更ファイル
    - verification_command（copy-pasteable な GraphQL query / curl）
 
-2. docs/05_改善ログ/cloudflare-cost.md を Read し、見出し直下（最新を上）に以下 section を Edit insert:
+2. docs/02_実装計画/improvement-backlog.md を Read し、見出し直下（最新を上）に以下 section を Edit insert:
 
    ```markdown
    ## <施策タイトル>
@@ -171,7 +171,7 @@ Cloudflare メトリクス取得の優先順:
 #### mode = next
 
 ```
-1. docs/05_改善ログ/cloudflare-cost.md を Read し status: pending を除いた施策 + 過去 effect/full の派生候補を抽出
+1. docs/02_実装計画/improvement-backlog.md を Read し status: pending を除いた施策 + 過去 effect/full の派生候補を抽出
 2. reference/improvement-log.md の「次の候補」「仮説」セクションから未着手を拾う
 3. 最新 snapshot の「次のアクション」候補も合わせる
 
@@ -194,21 +194,21 @@ Cloudflare メトリクス取得の優先順:
    - metrics 表
    - budget 判定
    - 前月比（前月の docs/04_レビュー/cloudflare-cost/YYYY-MM.md を Read して比較）
-   - 進行中施策の status 一覧（docs/05_改善ログ/cloudflare-cost.md から抽出）
+   - 進行中施策の status 一覧（docs/02_実装計画/improvement-backlog.md から抽出）
 6. Step 2-observe-5 と同じ施策効果判定を実行
 7. 合計額・超過指標をユーザーに報告
 ```
 
 ### Step 3: 共通ルール
 
-- **docs/05_改善ログ/cloudflare-cost.md は append-only** — section の追加・status の更新のみ。過去判定の改竄は禁止
+- **docs/02_実装計画/improvement-backlog.md は append-only** — section の追加・status の更新のみ。過去判定の改竄は禁止
 - **weekly-snapshots/*.json も append-only** — 過去の JSON は改変しない
 - **日付は絶対日付** — 「今月」「先月」は使わない
 - **数値はソース明示** — "invoice IN-62466340" or "GraphQL API at 2026-04-21 JST"
 - **施策は 1 PR 1 section** — 複数目的の PR は分割
 - **想定効果値はデプロイ前に書く** — 後付けバイアス防止
 - **月次請求到着時は必ず invoice モード実行** — この記録を起点に効果判定
-- **2 層構造を維持** — docs/ は人間が眺める要約、reference/improvement-log.md は agent が深掘りする詳細
+- **1 層構造を維持** — `docs/02_実装計画/improvement-backlog.md` (簡易表)、reference/improvement-log.md は agent が深掘りする詳細
 
 ## 参照パターン
 
@@ -219,10 +219,10 @@ ls -t docs/04_レビュー/cloudflare-cost/*.md | head -3
 cat .claude/state/metrics/cloudflare/LATEST.md
 
 # 進行中（pending）施策
-cat docs/05_改善ログ/cloudflare-cost.md | grep -B1 -A4 'status.*pending'
+cat docs/02_実装計画/improvement-backlog.md | grep -B1 -A4 'status.*pending'
 
 # 効果測定済み施策
-cat docs/05_改善ログ/cloudflare-cost.md | grep -B1 'status.*effect/'
+cat docs/02_実装計画/improvement-backlog.md | grep -B1 'status.*effect/'
 
 # 詳細ログ
 cat .claude/skills/analytics/cloudflare-cost-improvement/reference/improvement-log.md
@@ -272,6 +272,6 @@ gh issue list --label cloudflare-alert --state open
 
 - `.mcp.json` に `cloudflare-observability` と `cloudflare-graphql` 登録済
 - Cloudflare アカウントへのブラウザログイン済（OAuth 認可用）
-- `docs/05_改善ログ/cloudflare-cost.md` が存在（front-matter `type: improvement-log` / `metric: cloudflare-cost`）
+- `docs/02_実装計画/improvement-backlog.md` が存在すること（施策 ID は `CF-*` 等）
 - `docs/04_レビュー/cloudflare-cost/` ディレクトリ存在
 - `reference/budgets.json` / `reference/weekly-snapshots/` 初期化済

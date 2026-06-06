@@ -291,7 +291,7 @@ features/redesign/
 ### Phase 5 — 計測 + 微調整（W26）
 
 - W21 と W26 で AdSense RPM / Affiliate CTR を比較
-- 効果判定: `docs/05_改善ログ/{adsense,gsc}.md` に effect/* で記録
+- 効果判定: `docs/02_実装計画/improvement-backlog.md` に effect/* で記録
 - 想定: RPM ¥36 → ¥60 程度（中央値仮説）
 
 ---
@@ -423,7 +423,7 @@ W21 セッションで Phase 1 (横幅最大化 + 共通プリミティブ + 右
 - `.claude/rules/nextjs-ssg-preservation.md` — SSG 死守規約
 - `.claude/rules/coding-standards.md` — TS / React 規約
 - `docs/02_実装計画/seo-todo-unify-phase-1-3.md` — SEO 改善との整合
-- `docs/05_改善ログ/adsense.md` — AdSense 改善ログ（Phase 5 完了時に記入）
+- `docs/02_実装計画/improvement-backlog.md` — 改善バックログ（Phase 5 完了時に記入）
 
 ## 12. 完了の定義
 
@@ -434,7 +434,7 @@ W21 セッションで Phase 1 (横幅最大化 + 共通プリミティブ + 右
 3. AdSense RPM が Phase 0 baseline 比 +60% 以上
 4. Lighthouse Performance / SEO 全ページで合格水準
 5. SSG ステータスが全ページで `○ (Static)`
-6. `docs/05_改善ログ/adsense.md` および `docs/05_改善ログ/gsc.md` に effect/* で記録
+6. `docs/02_実装計画/improvement-backlog.md` に effect/* で記録
 
 ## 13. 実装ログ (2026-05-23)
 
@@ -483,5 +483,5 @@ W21 セッションで Phase 1 (横幅最大化 + 共通プリミティブ + 右
 
 1. **コミット & PR**: feature/d-redesign ブランチ (or 現行 feature/station-passengers から派生) で develop に merge → main PR
 2. **GSC URL Inspection**: deploy 後 1 週間以内に主要ページの再クロール状況を確認
-3. **AdSense RPM 計測**: W22 末で W21 baseline (¥36) との比較を `docs/05_改善ログ/adsense.md` に記録 (effect/* ラベル)
+3. **AdSense RPM 計測**: W22 末で W21 baseline (¥36) との比較を `docs/02_実装計画/improvement-backlog.md` に記録 (effect/* ラベル)
 4. **deferred 3 ページ**: 必要に応じて Phase 6 で着手

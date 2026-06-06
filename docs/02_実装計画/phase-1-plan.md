@@ -273,7 +273,7 @@ Phase 1 目標 38K → 150K (+112K) の **10-25% をこの施策で確保**。
 
 本設計書完成により、以下の改善ログ TODO を更新:
 
-- `docs/05_改善ログ/indexing.md` **[P0-CITIES-DIAG]** → status: completed, **設計書リンク追加**, **次の TODO**: P1-CITIES-EXEC (Phase 1 実装) として新規追加
+- `docs/02_実装計画/improvement-backlog.md` **[P0-CITIES-DIAG]** → status: completed, **設計書リンク追加**, **次の TODO**: P1-CITIES-EXEC (Phase 1 実装) として新規追加
 - `docs/02_実装計画/100x-pv-strategy.md` Phase 1 section に本設計書のリンクを追加
 
 ---

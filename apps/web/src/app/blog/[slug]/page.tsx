@@ -19,7 +19,6 @@ import {
 import { BlogSidebarTextAds, resolveAffiliateBannersByCategory } from "@/features/ads/server";
 import { TagBadge, ArticleRenderer, ArticleTableOfContents, generateBlogMetadata, type Article } from "@/features/blog";
 import {
-    ArticleAffiliateBanner,
     RelatedRankingsSection,
     listLatestArticles,
     listArticlesByTagKey,
@@ -196,7 +195,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                 <div className="lg:grid lg:grid-cols-[minmax(0,1fr)_360px] lg:gap-8 lg:items-start xl:grid-cols-[280px_minmax(0,1fr)_360px]">
 
                     {/* 左カラム (xl+): TOC + 高単価アフィリエイトバナー + 上部 AdSense (sticky) */}
-                    <aside className="hidden xl:flex xl:flex-col xl:gap-3 xl:sticky xl:top-20 xl:max-h-[calc(100vh-5.5rem)] xl:overflow-hidden xl:pr-1">
+                    <aside className="hidden xl:flex xl:flex-col xl:gap-3 xl:sticky xl:top-20 xl:max-h-[calc(100vh-5.5rem)] xl:overflow-y-auto xl:pr-1">
                         <ArticleTableOfContents content={article.content} compact />
                         {/* A8.net バナー広告: STRATEGY CAREER (高単価・目次の下) */}
                         <SidebarPromoBanner index={0} position="sidebar-left" />
@@ -250,9 +249,6 @@ export default async function BlogPostPage({ params }: PageProps) {
                             </CardContent>
                         </Card>
 
-                        {/* バナー広告（タグキーベース・ランダム表示） */}
-                        <ArticleAffiliateBanner tagKeys={tagKeys} />
-
                         {/* lg 未満で表示する各種関連 widget (lg+ では右カラムに集約) */}
                         <div className="space-y-6 lg:hidden">
                             <Card>
@@ -283,7 +279,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                     </main>
 
                     {/* 右カラム (lg+): 関連 widget + 広告 (sticky)。lg=2カラム(本文+右)、xl=3カラム */}
-                    <aside className="hidden lg:flex lg:flex-col lg:gap-3 lg:sticky lg:top-20 lg:max-h-[calc(100vh-5.5rem)] lg:overflow-hidden lg:pr-1">
+                    <aside className="hidden lg:flex lg:flex-col lg:gap-3 lg:sticky lg:top-20 lg:max-h-[calc(100vh-5.5rem)] lg:overflow-y-auto lg:pr-1">
                         {/* A8.net バナー広告 (above-fold 最上部) */}
                         <SidebarPromoBanner index={1} position="sidebar-right" />
 
