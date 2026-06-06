@@ -9,6 +9,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { fetchPrefectures, REGIONS } from "@stats47/area";
+import { getCategoryDescription } from "@stats47/data-configs";
 import {
   readRankingValuesFromR2,
   readTopRankingValuesBatchFromR2,
@@ -40,8 +41,6 @@ import {
 } from "@/features/redesign";
 
 import { AdSenseAd, RANKING_PAGE_FOOTER, CONTENT_FOOTER } from "@/lib/google-adsense";
-import { getCategoryDescription } from "@stats47/data-configs";
-
 import { generateOGMetadata } from "@/lib/metadata/og-generator";
 
 import type { Metadata } from "next";
