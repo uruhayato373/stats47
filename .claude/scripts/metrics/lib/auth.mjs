@@ -86,6 +86,27 @@ export function toCsv(rows, headers) {
 }
 
 /**
+ * ISO 週 (YYYY-Www) をカレンダー週の月曜・日曜に変換する。
+ * @param {string} week - e.g. "2026-W23"
+ * @returns {{ startDate: string, endDate: string }} YYYY-MM-DD 形式
+ */
+export function isoWeekToDateRange(week) {
+  const [year, weekNum] = week.split("-W").map(Number);
+  // Jan 4 は常に week 1 に含まれる (ISO 8601)
+  const jan4 = new Date(Date.UTC(year, 0, 4));
+  // week 1 の月曜日
+  const week1Mon = new Date(jan4);
+  week1Mon.setUTCDate(jan4.getUTCDate() - (jan4.getUTCDay() || 7) + 1);
+  // 対象週の月曜日
+  const monday = new Date(week1Mon);
+  monday.setUTCDate(week1Mon.getUTCDate() + (weekNum - 1) * 7);
+  // 対象週の日曜日
+  const sunday = new Date(monday);
+  sunday.setUTCDate(monday.getUTCDate() + 6);
+  return { startDate: fmtDate(monday), endDate: fmtDate(sunday) };
+}
+
+/**
  * YYYY-MM-DD へフォーマット
  */
 export function fmtDate(d) {

@@ -37,7 +37,7 @@ SEO / 性能 / コスト / コンテンツ施策の TODO 一覧。旧 `docs/05_�
 | AICONTENT-001 | wheat-flour-consumption-quantity ai_content リライト — **blocked**: DBless 移行で生成パイプライン削除済 (Phase D)。enhance-ranking-ai-content SKILL.md が D1 参照で stale。要パイプライン再設計 | pending | 2026-07-15 | claude | ai-content |
 | BLOG-CTR-05 | Tier 3 brushup (3 記事) + /category description 差別化 — 全完了 (2026-06-06): child-height/manufacturing seoTitle + temperature-extremes-map full brushup + 17カテゴリ description (PR #448)。GSC 計測 4 週後 | effect/pending | 2026-06-20 | claude | gsc |
 | AFF-02 | 広告ゼロ 8 軸の在庫補充 | pending | 2026-06-21 | uruhayato373 | affiliate |
-| GA4-PIPELINE-02 | history.csv の pageviews をカレンダー週バケット + Japan-only に統一 | pending | 2026-06-21 | claude | ga4 |
+| GA4-PIPELINE-02 | history.csv の pageviews をカレンダー週バケット + Japan-only に統一 — deployed 2026-06-06: fetch-ga4-snapshot に overview-clean.csv (Japan-only, calendar week) 追加、update-history-csv が preferする実装。W23 backfill済 (4264 pvs vs 旧17745)。W24〜が初の真値計測週 | effect/pending | 2026-07-12 | claude | ga4 |
 | CTR-AUTO-01 | CTR 改善候補の月次自動抽出 (Phase 3 sprint) | in-progress | 2026-06-21 | claude | gsc |
 | AFF-03 | ランキングページのバナー枠追加 (案 A 実装) | effect/pending | 2026-06-28 | claude | affiliate |
 | CONTENT-DRAFT-01 | /draft-from-trend skill 実装 (Phase 2 → Phase 3 での稼働) | in-progress | 2026-06-28 | claude | content |

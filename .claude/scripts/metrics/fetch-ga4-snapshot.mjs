@@ -16,6 +16,7 @@ import {
   PROJECT_ROOT,
   resolveServiceAccountKeyFile,
   parseWeekArg,
+  isoWeekToDateRange,
   toCsv,
   fmtDate,
 } from "./lib/auth.mjs";
@@ -91,6 +92,28 @@ async function main() {
   } catch (e) {
     errors.push(`overview: ${e.message}`);
     console.error("[ga4-snapshot] overview failed:", e.message);
+  }
+
+  // overview-clean: Japan-only, calendar week (GA4-PIPELINE-02)
+  try {
+    const { startDate: weekStart, endDate: weekEnd } = isoWeekToDateRange(week);
+    const metrics = ["activeUsers", "sessions", "engagedSessions", "screenPageViews", "averageSessionDuration", "bounceRate", "engagementRate"];
+    const raw = await runReport(analyticsdata, property, {
+      dateRanges: [{ startDate: weekStart, endDate: weekEnd }],
+      metrics: metrics.map((n) => ({ name: n })),
+      dimensionFilter: {
+        filter: {
+          fieldName: "country",
+          stringFilter: { matchType: "EXACT", value: "Japan" },
+        },
+      },
+    });
+    const rows = raw.map((r) => toRow(r, [], metrics));
+    writeFileSync(join(outDir, "overview-clean.csv"), toCsv(rows, metrics));
+    summary.push(`overview-clean.csv: ${rows.length} rows`);
+  } catch (e) {
+    errors.push(`overview-clean: ${e.message}`);
+    console.error("[ga4-snapshot] overview-clean failed:", e.message);
   }
 
   // pages

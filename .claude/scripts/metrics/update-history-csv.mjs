@@ -174,7 +174,10 @@ function markdownGsc(history, latest) {
 // ── GA4 集約 ──
 
 function aggregateGa4(snapDir, week) {
-  const overview = readCsv(join(snapDir, "overview.csv"));
+  // GA4-PIPELINE-02: prefer overview-clean.csv (Japan-only, calendar week) over raw 28d overview
+  const cleanPath = join(snapDir, "overview-clean.csv");
+  const rawPath = join(snapDir, "overview.csv");
+  const overview = existsSync(cleanPath) ? readCsv(cleanPath) : readCsv(rawPath);
   if (!overview || overview.rows.length === 0) return null;
   const r = overview.rows[0];
   return {
