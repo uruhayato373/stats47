@@ -114,43 +114,42 @@ export default async function TagArticlesPage({ params }: PageProps) {
             </div>
 
             <div className="container mx-auto px-4 py-4">
-                {/* Hero (D 暗色) — マスタープラン § 5.3 準拠 */}
-                <HeroShell variant="dark" className="mb-6">
-                    <div className="grid grid-cols-1 gap-6 p-6 md:grid-cols-[1fr,360px] md:p-8">
-                        <div className="min-w-0">
-                            <p className="inline-flex items-center gap-1.5 rounded-full bg-white/15 px-2.5 py-0.5 text-[10.5px] font-bold uppercase tracking-widest text-white">
-                                タグ
-                            </p>
-                            <h1 className="mt-2 text-2xl font-extrabold leading-tight text-white sm:text-3xl">
-                                {tag}
-                            </h1>
-                            <p className="mt-2 max-w-xl text-sm leading-relaxed text-white/85">
-                                「{tag}」タグが付いた都道府県統計ブログの記事 {articles.length} 本を掲載しています。
-                            </p>
-                        </div>
-                        <div>
-                            <KpiGrid columns={2}>
-                                <KpiTile
-                                    label="記事数"
-                                    value={String(articles.length)}
-                                    unit="件"
-                                    variant="dark"
-                                />
-                                <KpiTile
-                                    label="タグ"
-                                    value={tag}
-                                    variant="dark"
-                                />
-                            </KpiGrid>
-                        </div>
-                    </div>
-                </HeroShell>
-
                 {articles.length === 0 ? (
                     notFound()
                 ) : (
-                    <div className="mt-6 xl:grid xl:grid-cols-[minmax(0,1fr)_360px] xl:gap-8 xl:items-start">
+                    <div className="xl:grid xl:grid-cols-[minmax(0,1fr)_360px] xl:gap-8 xl:items-start">
                         <main className="min-w-0">
+                            {/* Hero (D 暗色) — マスタープラン § 5.3 準拠 */}
+                            <HeroShell variant="dark" className="mb-6">
+                                <div className="grid grid-cols-1 gap-6 p-6 md:grid-cols-[1fr,360px] md:p-8">
+                                    <div className="min-w-0">
+                                        <p className="inline-flex items-center gap-1.5 rounded-full bg-white/15 px-2.5 py-0.5 text-[10.5px] font-bold uppercase tracking-widest text-white">
+                                            タグ
+                                        </p>
+                                        <h1 className="mt-2 text-2xl font-extrabold leading-tight text-white sm:text-3xl">
+                                            {tag}
+                                        </h1>
+                                        <p className="mt-2 max-w-xl text-sm leading-relaxed text-white/85">
+                                            「{tag}」タグが付いた都道府県統計ブログの記事 {articles.length} 本を掲載しています。
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <KpiGrid columns={2}>
+                                            <KpiTile
+                                                label="記事数"
+                                                value={String(articles.length)}
+                                                unit="件"
+                                                variant="dark"
+                                            />
+                                            <KpiTile
+                                                label="タグ"
+                                                value={tag}
+                                                variant="dark"
+                                            />
+                                        </KpiGrid>
+                                    </div>
+                                </div>
+                            </HeroShell>
                             <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
                                 {articles.map((article) => (
                                     <Link

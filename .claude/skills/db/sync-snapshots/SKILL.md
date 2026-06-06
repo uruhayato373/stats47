@@ -34,6 +34,7 @@ URL → R2 パス対応は `.claude/rules/r2-storage-design.md` を参照。
 |---|---|---|---|
 | item-metadata-refresh (**master の直前**) | `packages/ranking/src/scripts/refresh-item-metadata.ts --apply` | `app/ranking/{key}/item.json` の title/subtitle/annotation(note)/categoryKey を git TS config から patch。master の category 再グループ化に反映させるため master の前に実行 | — |
 | master (per-URL + surveys + categories) | `packages/ranking/src/scripts/export-master-snapshots.ts` | `app/home/featured.json` / `app/category/{key}/items.json` / `app/ranking/{key}/item.json` / `app/survey/{id}/items.json` / `app/survey/all.json` | ~13MB |
+| **ranking-items** (master の直後) | `packages/ranking/src/scripts/generate-ranking-items.ts` | `app/ranking-items/all.json` / `app/ranking/{key}/item.json` — config(isActive:true) の全 metric を再生成。新規 metric 公開時に必須 | — |
 | item-seo-refresh (master の直後) | `packages/ranking/src/scripts/refresh-item-seo.ts --apply` | `app/ranking/{key}/item.json` の seoTitle/seoDescription を git TS config から patch (Q-DESIGN R0)。master が materialize した item.json を上書き | — |
 | remotion-static | `apps/remotion/scripts/export-d1-to-remotion-static.ts --feature all` | `apps/remotion/public/<feature>/*.json` (R2 push 対象外) | — |
 | area-profile | `packages/area-profile/src/scripts/export-snapshot.ts` | `app/areas/{areaCode}/profile.json` | ~4MB (47 files) |

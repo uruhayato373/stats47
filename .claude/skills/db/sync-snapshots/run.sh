@@ -32,6 +32,7 @@ declare -a TASKS=(
   "remotion-static|apps/remotion/scripts/export-d1-to-remotion-static.ts --feature all"
   "item-metadata-refresh|packages/ranking/src/scripts/refresh-item-metadata.ts --apply"
   "master|packages/ranking/src/scripts/export-master-snapshots.ts"
+  "ranking-items|packages/ranking/src/scripts/generate-ranking-items.ts"
   "item-seo-refresh|packages/ranking/src/scripts/refresh-item-seo.ts --apply"
   "area-profile|packages/area-profile/src/scripts/export-snapshot.ts"
   "city-profile|packages/area-profile/src/scripts/export-city-snapshot.ts"

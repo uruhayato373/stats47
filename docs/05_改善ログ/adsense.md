@@ -80,7 +80,7 @@ W21 (05/13-19) ベースライン: RPM ¥36、Viewability 54.3% (W17 の 61.9% �
 - **due**: 2026-06-08
 - **closed_at**: 2026-06-06
 - **verification_command**: `node .claude/scripts/metrics/fetch-adsense-snapshot.mjs 2026-W23 && cat .claude/skills/analytics/adsense-improvement/reference/snapshots/2026-W23/devices.csv`
-- **plan**: `/Users/minamidaisuke/.claude/plans/stats47-swift-thacker.md`
+- **plan**: (削除済、2026-06-06 effect/full で完了)
 
 ### 現状 (2026-05-20)
 

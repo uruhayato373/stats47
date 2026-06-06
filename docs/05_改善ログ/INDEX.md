@@ -19,11 +19,9 @@ stats47 の **全 SEO / 性能 / コスト / コンテンツ施策の TODO 真�
 | [psi.md](./psi.md) | Core Web Vitals (LCP / CLS / FCP) | T1-PSI-LCP-02 (Leaflet preload)、T2-CWV-04 (/areas /search CLS) |
 | [adsense.md](./adsense.md) | AdSense 収益 | ADSENSE-MOBILE-01 (モバイル広告の位置改善) |
 | [affiliate.md](./affiliate.md) | アフィリエイト広告 (impression / click / CTR) | AFF-01 (在庫ベースライン棚卸し)、AFF-02 (ゼロ 8 軸の在庫補充) |
-| [cloudflare-cost.md](./cloudflare-cost.md) | Cloudflare コスト | Phase 9 (D1 read 0 監視) |
 | [content.md](./content.md) | ブログ / note / YouTube 公開・更新 | CONTENT-NOTE-01 (note A-laborwage 5 本) |
 | [indexing.md](./indexing.md) | Coverage Drilldown / sitemap / Indexing API | INDEXING-AUTO-01 (Indexing API 自動再送信)、INDEXING-DRILLDOWN-01 |
 | [ai-content.md](./ai-content.md) | ranking_key の ai_content リライト (NotebookLM 補強、CTR 改善目的) | AICONTENT-001 (wheat-flour-consumption-quantity 初回リライト) |
-| [sns.md](./sns.md) | SNS 投稿パイプライン / メトリクス計測 / funnel | SNS-PIPELINE-01 (sns_posts 同期ズレ調査) |
 
 ## どこに何を書くか
 

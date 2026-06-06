@@ -184,7 +184,7 @@ automation-backlog #289 (`docs/50_Issues/automation-backlog.md` から移行)。
 
 ## [INDEXING-DRILLDOWN-01] Coverage Drilldown 週次記録 + 収束観測 + Indexing API URL_DELETED (旧 T0-DECAY-01)
 
-- **status**: in-progress
+- **status**: effect/pending
 - **tier**: 1
 - **target_metric**: gsc-index-coverage
 - **owner**: claude
@@ -285,6 +285,37 @@ Indexing API 導入（本施策開始時）＋自然再クロールを仮定:
 
 - 新規発生する 404（アプリケーションの新しいバグ）は別 section
 - ブログ記事削除 or 統計データ更新に伴う意図的な URL 廃止は、本施策と独立して行う
+
+### W23 観測 (2026-06-06)
+
+**測定方法**: URL Inspection API (20 URL サンプル)
+**結果**: indexed 19/20 (95%)、crawled-not-indexed 1/20 (5%)
+
+| 週 | 測定方法 | サンプル数 | indexed率 | crawled-not-indexed率 |
+|---|---|---:|---:|---:|
+| W17 | GSC UI Coverage Report (手動) | — | — | 404:5,919 / 5xx:2,041 / soft:497 / cni:2,322 |
+| W19 | URL Inspection API | 100 | 91% | 8% |
+| W20 | URL Inspection API | 10 | 100% | 0% |
+| W23 | URL Inspection API | 20 | 95% | 5% |
+
+**⚠️ W24 FINAL 判定 — データ方法論の非互換により判定保留**
+
+W17 ベースライン (10,779件) は **GSC UI Coverage Report** (Googlebot視点の全URL)。
+W23 実測値は **URL Inspection API** (自分が指定したURLのみ、20件サンプル) — 直接比較不可。
+
+**利用可能な代理証拠:**
+- W23 pages.csv に dashboard/tags/stats/correlation URLの表示なし → 問題URLが検索から排除
+- 検索表示ページ数: W19: 1,096 → W22: 1,240 → W23: 1,284 (+17%) → インデックス改善傾向
+- URL Inspection API trending: W19 91% → W23 95% indexed rate
+
+**判定**: FINAL判定には手動でのGSC UI Coverage Report確認が必要。
+
+**INDEXING-SITEMAP-02 未デプロイ影響**: sitemap削減 (ranking 1,900→948、cities 1,719→360) が未実施のため、薄いページのcrawl-not-indexed件数は依然高水準と推測。SITEMAP-02デプロイ後に再測定が必要。
+
+**next action**:
+1. GSC UI → カバレッジ → 「除外」で404/5xx/crawled-not-indexed件数を手動確認
+2. [INDEXING-SITEMAP-02] のデプロイ → 4週後に再測定
+3. 測定方法の統一: `url-inspection-daily.cjs --limit 1500` で週次自動取得に移行
 
 ### 関連 (連携施策)
 

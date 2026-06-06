@@ -263,54 +263,53 @@ export default async function CategoryPage({ params }: PageProps) {
 
   return (
     <div className="container mx-auto px-4 py-4 text-foreground">
-      {/* Hero (D 暗色) — マスタープラン § 5.3 準拠 */}
-      <HeroShell variant="dark" className="mb-6">
-        <div className="grid grid-cols-1 gap-6 p-6 md:grid-cols-[1fr,360px] md:p-8">
-          <div className="min-w-0">
-            <p className="inline-flex rounded-full bg-white/15 px-2.5 py-0.5 text-[10.5px] font-bold uppercase tracking-widest text-white">
-              カテゴリ
-            </p>
-            <h1 className="mt-2 text-2xl font-extrabold leading-tight text-white sm:text-3xl">
-              {category.categoryName}
-            </h1>
-            <p className="mt-2 max-w-xl text-sm leading-relaxed text-white/85">
-              {category.categoryName}分野の都道府県別ランキング {rankingItems.length} 件を、地図・グラフ・テーブルで比較できます。
-            </p>
-          </div>
-          <div>
-            <KpiGrid columns={2}>
-              <KpiTile
-                label="ランキング数"
-                value={String(rankingItems.length)}
-                unit="件"
-                variant="dark"
-              />
-              <KpiTile
-                label={usingFallbackFeatured ? "主要" : "注目"}
-                value={String(usingFallbackFeatured ? featuredRaw.length : featuredCount)}
-                unit="件"
-                variant="dark"
-              />
-              <KpiTile
-                label="最新データ"
-                value={latestYear || "—"}
-                unit={latestYear ? "年" : ""}
-                variant="dark"
-              />
-              <KpiTile
-                label="関連調査"
-                value={String(surveysResult.length)}
-                unit="件"
-                variant="dark"
-              />
-            </KpiGrid>
-          </div>
-        </div>
-      </HeroShell>
-
       <div className="lg:grid lg:grid-cols-[minmax(0,1fr)_360px] lg:gap-8 lg:items-start">
         {/* メインコンテンツ */}
         <main className="min-w-0">
+          {/* Hero (D 暗色) — マスタープラン § 5.3 準拠 */}
+          <HeroShell variant="dark" className="mb-6">
+            <div className="grid grid-cols-1 gap-6 p-6 md:grid-cols-[1fr,360px] md:p-8">
+              <div className="min-w-0">
+                <p className="inline-flex rounded-full bg-white/15 px-2.5 py-0.5 text-[10.5px] font-bold uppercase tracking-widest text-white">
+                  カテゴリ
+                </p>
+                <h1 className="mt-2 text-2xl font-extrabold leading-tight text-white sm:text-3xl">
+                  {category.categoryName}
+                </h1>
+                <p className="mt-2 max-w-xl text-sm leading-relaxed text-white/85">
+                  {category.categoryName}分野の都道府県別ランキング {rankingItems.length} 件を、地図・グラフ・テーブルで比較できます。
+                </p>
+              </div>
+              <div>
+                <KpiGrid columns={2}>
+                  <KpiTile
+                    label="ランキング数"
+                    value={String(rankingItems.length)}
+                    unit="件"
+                    variant="dark"
+                  />
+                  <KpiTile
+                    label={usingFallbackFeatured ? "主要" : "注目"}
+                    value={String(usingFallbackFeatured ? featuredRaw.length : featuredCount)}
+                    unit="件"
+                    variant="dark"
+                  />
+                  <KpiTile
+                    label="最新データ"
+                    value={latestYear || "—"}
+                    unit={latestYear ? "年" : ""}
+                    variant="dark"
+                  />
+                  <KpiTile
+                    label="関連調査"
+                    value={String(surveysResult.length)}
+                    unit="件"
+                    variant="dark"
+                  />
+                </KpiGrid>
+              </div>
+            </div>
+          </HeroShell>
           {/* 注目ランキング */}
           {featuredItems.length > 0 && (
             <section className="mb-8">
@@ -404,7 +403,7 @@ export default async function CategoryPage({ params }: PageProps) {
         </main>
 
         {/* 右サイドバー（lg+、360px、independent scroll で全 widget 到達可能） */}
-        <aside className="hidden lg:flex lg:flex-col lg:gap-4 lg:sticky lg:top-20 lg:max-h-[calc(100vh-5.5rem)] lg:overflow-y-auto lg:pr-1">
+        <aside className="hidden lg:flex lg:flex-col lg:gap-4 lg:sticky lg:top-20 lg:pr-1">
 
           <div className="flex flex-col gap-4">
             {/* 新着記事 */}
