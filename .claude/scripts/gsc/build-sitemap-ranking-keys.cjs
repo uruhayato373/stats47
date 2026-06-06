@@ -73,6 +73,24 @@ function existingIndexableKeys() {
   return keys;
 }
 
+/** KNOWN_RANKING_KEYS (全 isActive ranking) を取り込む (正規表現抽出)
+ *  INDEXING-SITEMAP-02: 「コンテンツ実体のある URL」= R2 active = KNOWN_RANKING_KEYS を全包含。
+ *  GSC impressions 0 でも isActive なら sitemap に載せてクロール機会を与える。
+ */
+function knownRankingKeys() {
+  const p = path.join(
+    PROJECT_ROOT,
+    "packages/ranking/src/config/known-ranking-keys.ts",
+  );
+  const keys = new Set();
+  if (!fs.existsSync(p)) return keys;
+  const text = fs.readFileSync(p, "utf8");
+  const re = /"([a-z0-9][a-z0-9-]*)"/g;
+  let m;
+  while ((m = re.exec(text))) keys.add(m[1]);
+  return keys;
+}
+
 function main() {
   const weeks = fs
     .readdirSync(SNAPSHOTS_DIR)
@@ -103,6 +121,16 @@ function main() {
     }
   }
 
+  // INDEXING-SITEMAP-02: 全 isActive ranking を sitemap に含める
+  const knownKeys = knownRankingKeys();
+  let addedFromKnown = 0;
+  for (const k of knownKeys) {
+    if (!union.has(k)) {
+      union.add(k);
+      addedFromKnown++;
+    }
+  }
+
   const sorted = [...union].sort();
 
   const header = `/**
@@ -110,14 +138,13 @@ function main() {
  *
  * **生成: node .claude/scripts/gsc/build-sitemap-ranking-keys.cjs**
  *
- * 複数週 GSC impressions の和集合 + 既存 INDEXABLE_RANKING_KEYS。
- * 「過去に検索表示された実績がある = indexed 済み」を保守的に拾い、
- * 一度も impressions を得ていない長期 crawled-not-indexed キーのみ sitemap から外す。
+ * 複数週 GSC impressions の和集合 + 既存 INDEXABLE_RANKING_KEYS + 全 KNOWN_RANKING_KEYS (isActive)。
+ * INDEXING-SITEMAP-02: 「コンテンツ実体のある URL」= isActive な全ランキングを sitemap に包含。
  * 2026-05-05 の単一週絞り込みによる大量インデックス削除を回避する設計 (詳細はスクリプト docstring)。
  *
  * 集計週: ${weeks.join(", ")}
  *   週別 impressions>=1 キー数: ${perWeek.join(" / ")}
- * 和集合: ${sorted.length} キー (うち既存 INDEXABLE から追加 ${addedFromIndexable} / INDEXABLE 総数 ${indexableCount})
+ * 和集合: ${sorted.length} キー (INDEXABLE +${addedFromIndexable} / KNOWN +${addedFromKnown} / INDEXABLE 総数 ${indexableCount} / KNOWN 総数 ${knownKeys.size})
  * 生成日: ${new Date().toISOString().slice(0, 10)}
  *
  * 安全弁: url-policy.ts shouldIncludeInSitemap は本セットが空の場合 KNOWN 全件に
@@ -135,6 +162,7 @@ ${sorted.map((k) => `  "${k}",`).join("\n")}
   console.log(`  weeks: ${weeks.join(", ")}`);
   console.log(`  per-week: ${perWeek.join(" / ")}`);
   console.log(`  added from INDEXABLE: ${addedFromIndexable}`);
+  console.log(`  added from KNOWN (isActive): ${addedFromKnown}`);
 }
 
 main();
