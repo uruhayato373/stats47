@@ -131,13 +131,19 @@
   * {
     @apply border-border;
   }
-  
+
+  /* サイト全体の基準フォントサイズ (= 106.25%)。Tailwind の text-* と spacing は rem 基準のため、
+     html を上げると文字・余白が比例して拡大する。Zenn 体感に寄せた全体拡大。 */
+  html {
+    font-size: 17px;
+  }
+
   body {
     /* Zenn / 記事準拠の system フォントスタック (游ゴシック / Hiragino 軸、Web フォント非依存) */
     font-family: -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
       "Hiragino Sans", "Yu Gothic UI", "Yu Gothic", YuGothic, Meiryo, "Segoe UI",
       "Helvetica Neue", Arial, sans-serif;
-    font-size: 16px;
+    font-size: 1rem;
     line-height: 1.7;
     background-color: hsl(var(--background));
     color: hsl(var(--foreground));
@@ -163,15 +169,15 @@
   }
 
   .blog-article h2 {
-    @apply text-2xl font-bold mt-12 mb-6 py-3 border-y border-border scroll-mt-20 text-center;
+    @apply text-2xl font-bold mt-10 mb-4 pb-2 border-b border-border scroll-mt-20;
   }
 
   .blog-article h3 {
-    @apply text-xl font-semibold mt-8 mb-4 scroll-mt-20;
+    @apply text-xl font-bold mt-9 mb-2 scroll-mt-20;
   }
 
   .blog-article p {
-    @apply my-4 leading-7;
+    @apply my-4 leading-[1.9];
   }
 
   .blog-article ul,

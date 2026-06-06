@@ -16,7 +16,7 @@ SEO / 性能 / コスト / コンテンツ施策の TODO 一覧。旧 `docs/05_�
 |---|---|---|---|---|---|
 | AFF-01 | 在庫ベースライン棚卸し (2026-06-04) | effect/none | 2026-06-11 | claude | affiliate |
 | INDEXING-AUTO-01 | Indexing API による問題 URL の自動再送信 (日次 200/day 稼働中) | effect/pending | 2026-06-20 | claude | indexing |
-| SEO-TITLE-FIX-01 | タイトル double-suffix バグ修正 (31 ページ) | pending | 2026-06-20 | claude | gsc |
+| SEO-TITLE-FIX-01 | タイトル double-suffix バグ修正 (31+3 ページ) | effect/pending | 2026-06-20 | claude | gsc |
 | BLOG-WAVE-2026-05-25-auto | curiosity gap auto-brushup 54 記事 | pending | 2026-06-22 | claude | gsc |
 | BLOG-WAVE-2026-05-28-manual | GSC 駆動 上位 4 記事 手動 brushup | pending | 2026-06-25 | claude | gsc |
 | BLOG-WAVE-2026-05-29-auto | GSC 改善余地上位 4 記事 auto-brushup | pending | 2026-06-26 | claude | gsc |

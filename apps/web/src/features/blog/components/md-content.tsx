@@ -59,7 +59,7 @@ function makeMdComponents(slug?: string, affiliateBannersByCategory?: Record<str
             return (
                 <h2
                     id={id}
-                    className="mt-12 mb-6 scroll-mt-20 border-y border-border py-3 text-center text-2xl font-bold"
+                    className="mt-10 mb-4 scroll-mt-20 border-b border-border pb-2 text-2xl font-bold"
                     {...props}
                 >
                     {children}
@@ -71,7 +71,7 @@ function makeMdComponents(slug?: string, affiliateBannersByCategory?: Record<str
             return (
                 <h3
                     id={id}
-                    className="mt-8 mb-3 scroll-mt-20 text-xl font-semibold"
+                    className="mt-9 mb-2 scroll-mt-20 text-xl font-bold"
                     {...props}
                 >
                     {children}
