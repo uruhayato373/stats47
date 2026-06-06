@@ -22,12 +22,13 @@ X / Instagram / TikTok / YouTube / note の **投稿パイプライン保守 + �
 
 ## [SNS-PIPELINE-01] sns_posts テーブルと実投稿の同期ズレ調査・修正
 
-- **status**: pending
+- **status**: effect/full
 - **tier**: 1
 - **target_metric**: sns-data-pipeline
 - **owner**: claude
 - **due**: 2026-06-07
 - **discovered_at**: 2026-05-27
+- **closed_at**: 2026-06-06
 
 ### 背景
 
@@ -79,3 +80,11 @@ WHERE domain='migration-flow' GROUP BY platform, status;
 ### 移行元
 
 セッション 2026-05-27 の X reply 戦略議論で偶然発見。
+
+### 対応結果 (2026-06-06)
+
+- migration-flow (27件) + draft (79件) + scheduled (54件) を posts.json から削除 → 389件に整理
+- `sns-posts-store.cjs` の `write()` に `regenerateLog()` を追加
+  - 以降は `insert()`/`updateById()` のたびに `post-log.md` が自動再生成される
+- `mark-sns-posted/SKILL.md` を SQLite 参照から `posts.json` ストアに全面書き換え
+- 視覚確認: `.claude/state/sns/post-log.md`（416件 → 整理後 389件、日付降順テーブル）

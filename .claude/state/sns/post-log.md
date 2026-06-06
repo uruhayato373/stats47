@@ -1,9 +1,9 @@
 # SNS 投稿ログ
 
 投稿済み全件。`posted_at` 降順。
-スクリプトで自動生成 — 手編集しない (`sns-posts-store.cjs` が `append()` のたびに再生成)。
+スクリプトで自動生成 — 手編集しない。
 
-**416 件** (最終更新: 2026-05-31)
+**389 件** (最終更新: 2026-05-31)
 
 | 日付 | 媒体 | コンテンツ | キャプション | URL |
 |---|---|---|---|---|
@@ -14,46 +14,19 @@
 | 2026-05-27 | 𝕏 X | ranking/theft-offenses-recognized-per-1000 | 人口1000人あたり窃盗、大阪は長崎の約4倍。北関東が意外と多い。  1位 大阪府 6.65件 2位 茨城県 5.24件… | — |
 | 2026-05-26 | ▶️ YouTube | ranking/yoy-landscape-v2 | 東京一極集中はいつ始まった？｜47都道府県 人口前年度比1976-2024 | [🔗](https://www.youtube.com/watch?v=3O4v9iVgntE) |
 | 2026-05-26 | 𝕏 X | ranking/traffic-accident-deaths-per-100k | 人口10万人あたり交通事故死者、徳島は東京の5倍。地方の交通リスクの現実。  1位 徳島県 4.8人 2位 愛媛県 4.… | — |
-| 2026-05-25 | 📸 Instagram | port/cargo-total | 日本の港湾、14年で何が起きたのか🚢  ▼海上出入貨物量 トップは14年ずっと #名古屋港 だが貨物量は -15%（20… | [🔗](https://www.instagram.com/reel/DYwuJ_2EsBT/) |
+| 2026-05-25 | 📸 Instagram | port/cargo-total | 日本の港湾、14年で何が起きたのか🚢  ▼海上出入貨物量 トップは14年ずっと #名古屋港 だが貨物量は -15%（2… | [🔗](https://www.instagram.com/reel/DYwuJ_2EsBT/) |
 | 2026-05-25 | 𝕏 X | ranking/library-count-per-million | 人口100万人あたり図書館数、山梨は神奈川の7倍。都会ほど図書館が少ない逆転現象。  1位 山梨県 65.8館 2位 島… | — |
 | 2026-05-24 | 📸 Instagram | highway-history/japan-58years | 日本の高速道路は58年で何キロまで広がったのか？  1962年の名神部分開通から2020年まで、毎年の新規開通区間を地図… | [🔗](https://www.instagram.com/reel/DYuApUviuyQ/) |
-| 2026-05-24 | 📸 Instagram | migration-flow/shiga | 滋賀県は2025年、310人の転出超過。 他県へ人が流出する側 としての姿を地図アニメーションで可視化しました。  近接… | [🔗](https://www.instagram.com/reel/DYtGLvTjpgw/) |
-| 2026-05-24 | 📸 Instagram | migration-flow/mie | 三重県は2025年、5,986人の転出超過。 他県へ人が流出する側 としての姿を地図アニメーションで可視化しました。  … | [🔗](https://www.instagram.com/reel/DYtGDPqlAKe/) |
-| 2026-05-24 | 📸 Instagram | migration-flow/aichi | 愛知県は2025年、2,181人の転出超過。 他県へ人が流出する側 としての姿を地図アニメーションで可視化しました。  … | [🔗](https://www.instagram.com/reel/DYtF-XRE4Gz/) |
-| 2026-05-24 | 📸 Instagram | migration-flow/shizuoka | 静岡県は2025年、6,711人の転出超過。 他県へ人が流出する側 としての姿を地図アニメーションで可視化しました。  … | [🔗](https://www.instagram.com/reel/DYtF5gIFJr8/) |
-| 2026-05-24 | 📸 Instagram | migration-flow/gifu | 岐阜県は2025年、4,528人の転出超過。 他県へ人が流出する側 としての姿を地図アニメーションで可視化しました。  … | [🔗](https://www.instagram.com/reel/DYtF0sVAY9f/) |
-| 2026-05-24 | 📸 Instagram | migration-flow/nagano | 長野県は2025年、1,415人の転出超過。 他県へ人が流出する側 としての姿を地図アニメーションで可視化しました。  … | [🔗](https://www.instagram.com/reel/DYtFv7MCHso/) |
-| 2026-05-24 | 📸 Instagram | migration-flow/yamanashi | 山梨県は2025年、862人の転出超過。 他県へ人が流出する側 としての姿を地図アニメーションで可視化しました。  近接… | [🔗](https://www.instagram.com/reel/DYtFsHagTiu/) |
-| 2026-05-24 | 📸 Instagram | migration-flow/fukui | 福井県は2025年、3,157人の転出超過。 他県へ人が流出する側 としての姿を地図アニメーションで可視化しました。  … | [🔗](https://www.instagram.com/reel/DYtFnQGCprf/) |
-| 2026-05-24 | 📸 Instagram | migration-flow/ishikawa | 石川県は2025年、2,774人の転出超過。 他県へ人が流出する側 としての姿を地図アニメーションで可視化しました。  … | [🔗](https://www.instagram.com/reel/DYtFcS0D10C/) |
-| 2026-05-24 | 📸 Instagram | migration-flow/toyama | 富山県は2025年、2,324人の転出超過。 他県へ人が流出する側 としての姿を地図アニメーションで可視化しました。  … | [🔗](https://www.instagram.com/reel/DYtFXpfgHBP/) |
-| 2026-05-24 | 📸 Instagram | migration-flow/niigata | 新潟県は2025年、6,379人の転出超過。 他県へ人が流出する側 としての姿を地図アニメーションで可視化しました。  … | [🔗](https://www.instagram.com/reel/DYtFTawFMmp/) |
-| 2026-05-24 | 📸 Instagram | migration-flow/kanagawa | 神奈川県は2025年、28,052人の転入超過。 全国から人が集まる側 としての姿を地図アニメーションで可視化しました。… | [🔗](https://www.instagram.com/reel/DYtFKm0DqCu/) |
-| 2026-05-24 | 📸 Instagram | migration-flow/chiba | 千葉県は2025年、3,899人の転入超過。 全国から人が集まる側 としての姿を地図アニメーションで可視化しました。  … | [🔗](https://www.instagram.com/reel/DYtFF_yDddY/) |
-| 2026-05-24 | 📸 Instagram | migration-flow/saitama | 埼玉県は2025年、15,721人の転入超過。 全国から人が集まる側 としての姿を地図アニメーションで可視化しました。 … | [🔗](https://www.instagram.com/reel/DYtFBWkFH8n/) |
-| 2026-05-24 | 📸 Instagram | migration-flow/gunma | 群馬県は2025年、1,516人の転出超過。 他県へ人が流出する側 としての姿を地図アニメーションで可視化しました。  … | [🔗](https://www.instagram.com/reel/DYtE8kRAg96/) |
-| 2026-05-24 | 📸 Instagram | migration-flow/tochigi | 栃木県は2025年、2,011人の転出超過。 他県へ人が流出する側 としての姿を地図アニメーションで可視化しました。  … | [🔗](https://www.instagram.com/reel/DYtE1hElJvs/) |
-| 2026-05-24 | 📸 Instagram | migration-flow/ibaraki | 茨城県は2025年、5,960人の転出超過。 他県へ人が流出する側 としての姿を地図アニメーションで可視化しました。  … | [🔗](https://www.instagram.com/reel/DYtExFuDMX3/) |
-| 2026-05-24 | 📸 Instagram | migration-flow/fukushima | 福島県は2025年、7,197人の転出超過。 他県へ人が流出する側 としての姿を地図アニメーションで可視化しました。  … | [🔗](https://www.instagram.com/reel/DYtEoXxCQxS/) |
-| 2026-05-24 | 📸 Instagram | migration-flow/yamagata | 山形県は2025年、4,281人の転出超過。 他県へ人が流出する側 としての姿を地図アニメーションで可視化しました。  … | [🔗](https://www.instagram.com/reel/DYtEjSbj_H4/) |
-| 2026-05-24 | 📸 Instagram | migration-flow/akita | 秋田県は2025年、3,836人の転出超過。 他県へ人が流出する側 としての姿を地図アニメーションで可視化しました。  … | [🔗](https://www.instagram.com/reel/DYtEcS-jj-0/) |
-| 2026-05-24 | 📸 Instagram | migration-flow/miyagi | 宮城県は2025年、2,046人の転出超過。 他県へ人が流出する側 としての姿を地図アニメーションで可視化しました。  … | [🔗](https://www.instagram.com/reel/DYtEY5YlPYN/) |
-| 2026-05-24 | 📸 Instagram | migration-flow/iwate | 岩手県は2025年、3,967人の転出超過。 他県へ人が流出する側 としての姿を地図アニメーションで可視化しました。  … | [🔗](https://www.instagram.com/reel/DYtEQb5E55L/) |
-| 2026-05-24 | 📸 Instagram | migration-flow/aomori | 青森県は2025年、4,542人の転出超過。 他県へ人が流出する側 としての姿を地図アニメーションで可視化しました。  … | [🔗](https://www.instagram.com/reel/DYtEGkMDyJo/) |
-| 2026-05-24 | 📸 Instagram | migration-flow/hokkaido | 北海道は2025年、5,162人の転出超過。 他県へ人が流出する側 としての姿を地図アニメーションで可視化しました。  … | [🔗](https://www.instagram.com/reel/DYtEB4Xkhqo/) |
-| 2026-05-24 | 📸 Instagram | migration-flow/tokyo | 東京都は2025年、65,219人の転入超過。 全国から人が集まる側 としての姿を地図アニメーションで可視化しました。 … | [🔗](https://www.instagram.com/reel/DYtD6lkExxr/) |
 | 2026-05-24 | 𝕏 X | ranking/divorces-per-total-population | 沖縄の離婚率は富山の2倍。ずっと全国1位。  1位 沖縄県 2.10 2位 宮崎県 1.67 3位 大阪府 1.65  … | — |
 | 2026-05-23 | ▶️ YouTube | station-passengers/station-passengers-47 | 都道府県別 鉄道駅ランキング｜全国8565駅 日本一忙しい駅は？ | [🔗](https://www.youtube.com/watch?v=wjLQCiuEeNI) |
 | 2026-05-23 | 𝕏 X | ranking/local-debt-current-ratio | 地方債の割合、静岡県が全国ワースト。収入の2倍超の借金。  1位 静岡県 208.5％ 2位 新潟県 205.1％ 3位… | [🔗](https://x.com/stats47jp373/status/2040195137754816611) |
-| 2026-05-22 | 📸 Instagram | migration-flow/tokyo | 2025年、東京都には全国から人が集まり続けています。地図アニメーションで可視化しました。  東京都の転入超過は65,2… | [🔗](https://www.instagram.com/reel/DYpAU3XDi2x/) |
-| 2026-05-22 | 📸 Instagram | migration-flow/hyogo | 2025年、兵庫県から人はどこへ動いたのか。地図アニメーションで可視化しました。  兵庫県は2025年、転出超過2,10… | [🔗](https://www.instagram.com/reel/DYo-cPFFRg8/) |
 | 2026-05-22 | 𝕏 X | ranking/real-public-debt-service-ratio | 実質公債費比率、北海道18.9%。借金返済で財政を圧迫。  1位 北海道 18.9％ 2位 新潟県 18.2％ 3位 京… | [🔗](https://x.com/stats47jp373/status/2039900704975049133) |
 | 2026-05-21 | 𝕏 X | ranking/real-balance-ratio | 実質収支比率、島根県7.5%で全国1位。黒字幅が最も大きい県。  1位 島根県 7.5％ 2位 東京都 7.1％ 3位 … | — |
 | 2026-05-21 | 𝕏 X | other/migration-flow-hyogo-2025 | 兵庫県は2025年、引っ越しの収支で2,102人を失った。  最も人が行き交う相手は隣の大阪府。なのに流入31,591＜… | [🔗](https://x.com/stats47jp373/status/2057416096224096350) |
 | 2026-05-20 | 𝕏 X | ranking/personnel-expenditure-ratio-pref-finance | 人件費割合、三重県25.5%。東京都は17%。財政支出の4分の1が人件費の県がある。  1位 三重県 25.5％ 2位 … | — |
 | 2026-05-19 | 𝕏 X | ranking/governor-salary-prefecture | 東京都知事の月給は全国最下位の73万円。1位神奈川の半分。  1位 神奈川県 145万円 2位 埼玉県 142万円 3位… | [🔗](https://x.com/stats47jp373/status/2036639208568398206) |
 | 2026-05-18 | 𝕏 X | ranking/laspeyres-index-prefecture | ラスパイレス指数、国家公務員より高い県がある。  1位 静岡県 101.8 2位 愛知県 101.0 3位 三重県 10… | [🔗](https://x.com/stats47jp373/status/2040013944757338576) |
-| 2026-05-17 | 📸 Instagram | ranking/starting-salary-university | 大卒初任給 県別ランキング 2023年最新版📊  1位は秋田の26.77万円、47位鳥取と1.32倍格差。 秋田・山口・… | [🔗](https://www.instagram.com/p/DYbFaRvE6ht/) |
+| 2026-05-17 | 📸 Instagram | ranking/starting-salary-university | 大卒初任給 県別ランキング 2023年最新版📊  1位は秋田の26.77万円、47位鳥取と1.32倍格差。 秋田・山口… | [🔗](https://www.instagram.com/p/DYbFaRvE6ht/) |
 | 2026-05-17 | 𝕏 X | ranking/per-capita-welfare-expenditure-pref-municipal | 住民1人あたり民生費、沖縄県37万円。静岡県の1.7倍。  1位 沖縄県 371.4千円 2位 高知県 347.0千円 … | — |
 | 2026-05-16 | 𝕏 X | ranking/future-burden-ratio | 将来負担比率、兵庫県が全国ワースト。330%は年収の3倍超の借金。  1位 兵庫県 330.8％ 2位 北海道 311.… | [🔗](https://x.com/stats47jp373/status/2039832748727365999) |
 | 2026-05-15 | 𝕏 X | ranking/inflow-population-ratio | 東京都の流入人口比率19.7%。昼間に人口が2割増える異常な都市。  1位 東京都 19.67％ 2位 京都府 7.36… | [🔗](https://x.com/stats47jp373/status/2038564394473595308) |
@@ -63,14 +36,14 @@
 | 2026-05-12 | 𝕏 X | ranking/treatment-rate-diabetes-outpatient | 糖尿病の外来受療率、山口県が全国1位。沖縄の2.5倍。  1位 山口県 246人 2位 香川県 237人 3位 大分県 … | [🔗](https://x.com/stats47jp373/status/2038926781277995389) |
 | 2026-05-11 | 𝕏 X | ranking/rice-harvest-volume | 米の収穫量、新潟県がダントツ1位。64万トン。  1位 新潟県 646,100t 2位 北海道 588,100t 3位 … | [🔗](https://x.com/stats47jp373/status/2038202003416096943) |
 | 2026-05-10 | 📝 note | ranking/a-maximum-temperature |  | [🔗](https://note.com/stats47/n/n863f429319ca) |
-| 2026-05-10 | 📸 Instagram | ranking/maximum-temperature | 【都道府県ランキング】最高気温（2024年度）  🌡️ 1位: 熊本県 36.2℃ 🌡️ 2位: 山口県 35.9℃ 🌡… | [🔗](https://www.instagram.com/p/DYI7ozUkue0/) |
+| 2026-05-10 | 📸 Instagram | ranking/maximum-temperature | 【都道府県ランキング】最高気温（2024年度）  🌡️ 1位: 熊本県 36.2℃ 🌡️ 2位: 山口県 35.9℃… | [🔗](https://www.instagram.com/p/DYI7ozUkue0/) |
 | 2026-05-10 | ▶️ YouTube | ranking/annual-emergency-dispatches-per-1000 | 救急出動49年の変遷 大阪が3.7倍に激増 #Shorts #都道府県 | [🔗](https://www.youtube.com/watch?v=08no2ZRhTyo) |
 | 2026-05-10 | 𝕏 X | ranking/pharmacy-count-per-100k | 人口あたり薬局数、佐賀県が全国1位。  1位 佐賀県 64.5所 2位 高知県 60.4所 3位 山形県 60.0所  … | [🔗](https://x.com/stats47jp373/status/2038813533367124005) |
 | 2026-05-09 | 📸 Instagram | ranking/ramen-dining-consumption-expenditure | ラーメン消費1位は山形県。 年間22,389円で2位の5.7倍。  二人以上世帯の年間中華そば消費支出額（2024年・県… | [🔗](https://www.instagram.com/p/DYGUC_QmsJb/) |
 | 2026-05-09 | 𝕏 X | ranking/number-of-hotel-rooms | ホテル客室数、東京は11万室で2位大阪の1.6倍。  1位 東京都 110,641室 2位 大阪府 71,193室 3位… | [🔗](https://x.com/stats47jp373/status/2038383199907110914) |
-| 2026-05-08 | 📸 Instagram | ranking/icecream-consumption-expenditure | 【都道府県ランキング】アイス消費支出額（2024年度）  🍦 1位: 山形県 14,747円 🍦 2位: 静岡県 14,… | [🔗](https://www.instagram.com/p/DYDvTlZFDk9/) |
+| 2026-05-08 | 📸 Instagram | ranking/icecream-consumption-expenditure | 【都道府県ランキング】アイス消費支出額（2024年度）  🍦 1位: 山形県 14,747円 🍦 2位: 静岡県 1… | [🔗](https://www.instagram.com/p/DYDvTlZFDk9/) |
 | 2026-05-08 | 𝕏 X | ranking/night-soil-treatment-population-ratio | し尿処理人口比率、岩手県が19.6%。令和の時代に5人に1人が汲み取り式。  1位 岩手県 19.6％ 2位 長崎県 1… | [🔗](https://x.com/stats47jp373/status/2039289169566924956) |
-| 2026-05-07 | 📸 Instagram | ranking/gyoza-frozen-consumption-expenditure | 【都道府県ランキング】冷凍餃子の消費額（2024年度）  📊 1位: 宮崎県 3,517円 📊 47位: 高知県 1,1… | [🔗](https://www.instagram.com/p/DYBKe8KFbFI/) |
+| 2026-05-07 | 📸 Instagram | ranking/gyoza-frozen-consumption-expenditure | 【都道府県ランキング】冷凍餃子の消費額（2024年度）  📊 1位: 宮崎県 3,517円 📊 47位: 高知県 1… | [🔗](https://www.instagram.com/p/DYBKe8KFbFI/) |
 | 2026-05-07 | 𝕏 X | ranking/icecream-consumption-expenditure | アイス消費額1位は山形県。暑い沖縄じゃない。  1位 山形県 14,747円 2位 静岡県 14,400円 3位 埼玉県… | [🔗](https://x.com/stats47jp373/status/2037296033604976686) |
 | 2026-05-06 | 𝕏 X | ranking/convenience-store-count-per-100k | 人口あたりコンビニ数、北海道が圧倒的1位。  1位 北海道 40.6所 2位 宮城県 33.3所 3位 山梨県 33.3… | [🔗](https://x.com/stats47jp373/status/2037839616007684527) |
 | 2026-05-03 | 𝕏 X | ranking/university-count-per-100k | 人口あたり大学数、京都府が全国1位。学生の街。  1位 京都府 1.35校 2位 石川県 1.28校 3位 新潟県 1.… | [🔗](https://x.com/stats47jp373/status/2038020811714412568) |
@@ -82,7 +55,7 @@
 | 2026-04-27 | 𝕏 X | ranking/voter-turnout-house-single | 衆院選投票率、山形県64%。山口県は50%を切る。  1位 山形県 64.34％ 2位 新潟県 63.16％ 3位 島根… | [🔗](https://x.com/stats47jp373/status/2037726380813959255) |
 | 2026-04-26 | 📸 Instagram | bar-chart-race/fiscal-strength-index-prefecture | 東京が圧倒的すぎる。 40年間、誰も追いつけなかった。  都道府県別「財政力指数」の40年間（1982〜2022年度）を… | [🔗](https://www.instagram.com/reel/DXlEpKwDNhW/) |
 | 2026-04-26 | 𝕏 X | ranking/treatment-rate-cancer-outpatient | がん外来受療率、和歌山県は沖縄県の3.4倍。  1位 和歌山県 247人 2位 鳥取県 208人 3位 山形県 203人… | [🔗](https://x.com/stats47jp373/status/2039175922029658356) |
-| 2026-04-24 | 📸 Instagram | ranking/gyoza-frozen-consumption-expenditure | 【都道府県ランキング】冷凍餃子の消費額（2024年度）  📊 1位: 宮崎県 3,517円 📊 47位: 高知県 1,1… | [🔗](https://www.instagram.com/p/DXiF5oKkj3b/) |
+| 2026-04-24 | 📸 Instagram | ranking/gyoza-frozen-consumption-expenditure | 【都道府県ランキング】冷凍餃子の消費額（2024年度）  📊 1位: 宮崎県 3,517円 📊 47位: 高知県 1… | [🔗](https://www.instagram.com/p/DXiF5oKkj3b/) |
 | 2026-04-24 | 𝕏 X | ranking/gyoza-frozen-consumption-expenditure | 餃子消費額1位は宮崎県。宇都宮じゃない。  1位 宮崎県 3,517円 2位 栃木県 2,801円 3位 埼玉県 2,3… | [🔗](https://x.com/stats47jp373/status/2036933647207387399) |
 | 2026-04-23 | 𝕏 X | ranking/fiscal-strength-index-prefecture | 東京が圧倒的すぎる。  都道府県別 財政力指数の40年間をバーチャートレースで可視化。  1982年度→2022年度、東… | [🔗](https://x.com/stats47jp373/status/2037758155653071055) |
 | 2026-04-22 | 𝕏 X | ranking/suicide-rate-per-100k | 自殺率、和歌山県が全国ワースト。人口10万人あたり21.8人。  1位 和歌山県 21.8 2位 宮崎県 21.5 3位… | [🔗](https://x.com/stats47jp373/status/2038451147690709076) |
@@ -94,67 +67,67 @@
 | 2026-04-14 | 𝕏 X | ranking/actual-income-worker-households-per-month | データで見ると、勤労者世帯の実収入(2024年、二人以上世帯)は1位 東京都79.4万円/月、47位 沖縄県49.4万円… | [🔗](https://x.com/stats47jp373/status/2043797804553019739) |
 | 2026-04-14 | 𝕏 X | ranking/total-fertility-rate | データで見ると、都道府県別の合計特殊出生率(2023年)は1位 沖縄県1.60、47位 東京都0.99。1位と47位で1… | [🔗](https://x.com/stats47jp373/status/2043796543929758163) |
 | 2026-03-30 | 𝕏 X | ranking/per-taxpayer-taxable-income | データで見ると、都道府県別の1人当たり課税対象所得（2024年度）は 1位 東京都 542万円 → 47位 秋田県 30… | [🔗](https://x.com/stats47jp373/status/2038584994340487399) |
-| 2026-03-28 | ▶️ YouTube | ranking/None | 都道府県別「泥棒が多い県」ランキング 1位は大阪でも2位は意外すぎる県だった【2023年最新】 | [🔗](https://www.youtube.com/watch?v=gzdSq-COcHM) |
-| 2026-03-25 | ▶️ YouTube | ranking/None | アイス消費ランキング 沖縄46位で山形1位の逆転 #Shorts #アイスクリーム #都道府県ランキング #アイス #S… | [🔗](https://www.youtube.com/watch?v=ukgfKYCHLT0) |
-| 2026-03-25 | ▶️ YouTube | ranking/None | ぎょうざ消費ランキング 1位は宇都宮じゃなかった｜2024年 #Shorts #餃子 #都道府県ランキング #ぎょうざ … | [🔗](https://www.youtube.com/watch?v=GApPs4yHKJs) |
-| 2026-03-25 | ▶️ YouTube | ranking/None | 知事給料ランキング 東京都知事が最下位の理由 #Shorts #知事給料 #都道府県ランキング #公務員給与 #Shor… | [🔗](https://www.youtube.com/watch?v=zy1_p9OpPNc) |
+| 2026-03-28 | ▶️ YouTube | ranking/ | 都道府県別「泥棒が多い県」ランキング 1位は大阪でも2位は意外すぎる県だった【2023年最新】 | [🔗](https://www.youtube.com/watch?v=gzdSq-COcHM) |
+| 2026-03-25 | ▶️ YouTube | ranking/ | アイス消費ランキング 沖縄46位で山形1位の逆転 #Shorts #アイスクリーム #都道府県ランキング #アイス #S… | [🔗](https://www.youtube.com/watch?v=ukgfKYCHLT0) |
+| 2026-03-25 | ▶️ YouTube | ranking/ | ぎょうざ消費ランキング 1位は宇都宮じゃなかった｜2024年 #Shorts #餃子 #都道府県ランキング #ぎょうざ … | [🔗](https://www.youtube.com/watch?v=GApPs4yHKJs) |
+| 2026-03-25 | ▶️ YouTube | ranking/ | 知事給料ランキング 東京都知事が最下位の理由 #Shorts #知事給料 #都道府県ランキング #公務員給与 #Shor… | [🔗](https://www.youtube.com/watch?v=zy1_p9OpPNc) |
 | 2026-03-25 | 𝕏 X | ranking/gender-wage-gap | ちなみに男女間の賃金格差を都道府県別で見ると、格差が最も小さいのは愛媛県（女性/男性=89.7%）、最も大きいのは宮城県… | — |
 | 2026-03-25 | 𝕏 X | ranking/nurse-salary | 都道府県別の看護師の給与データ。1位は東京都（35.9万円）、47位は鹿児島県（25.3万円）。同じ看護師でも地域で10… | [🔗](https://x.com/stats47jp373/status/2036727635032846571) |
 | 2026-03-25 | 𝕏 X | ranking/minimum-wage-by-region | 最低賃金の都道府県別ランキング、1位の東京（1,163円）と47位の岩手（893円）で時給270円の差。地図で見ると東西… | — |
 | 2026-03-25 | 𝕏 X | ranking/consumer-price-difference-index-overall | これ、データで見ると面白くて。東京は給与が高い分、物価指数も全国1位（104.0）。可処分所得で比べると地方との差はかな… | [🔗](https://x.com/stats47jp373/status/2036728570505232743) |
-| 2026-03-24 | ▶️ YouTube | ranking/None | 外国人人口ランキング 群馬が11位の意外｜都道府県別 #Shorts #外国人人口 #都道府県ランキング #多文化共生 … | [🔗](https://www.youtube.com/watch?v=3hzLSJ_O17k) |
-| 2026-03-24 | ▶️ YouTube | ranking/None | 火災死傷者ランキング TOP5が全て東北｜人口あたり都道府県別 #Shorts #火災 #都道府県ランキング #防災 #… | [🔗](https://www.youtube.com/watch?v=D-l6ZKmduAY) |
+| 2026-03-24 | ▶️ YouTube | ranking/ | 外国人人口ランキング 群馬が11位の意外｜都道府県別 #Shorts #外国人人口 #都道府県ランキング #多文化共生 … | [🔗](https://www.youtube.com/watch?v=3hzLSJ_O17k) |
+| 2026-03-24 | ▶️ YouTube | ranking/ | 火災死傷者ランキング TOP5が全て東北｜人口あたり都道府県別 #Shorts #火災 #都道府県ランキング #防災 #… | [🔗](https://www.youtube.com/watch?v=D-l6ZKmduAY) |
 | 2026-03-24 | 𝕏 X | ranking/population-density-per-km2-total-area | 人口密度、東京6,445人に対し北海道64人。100倍の差。 | [🔗](https://x.com/stats47jp373/status/2036276831578366428) |
 | 2026-03-24 | 𝕏 X | ranking/avg-salary-admin-prefecture | 県庁職員の給料、最大で月8.6万円の差がある。 | [🔗](https://x.com/stats47jp373/status/2036390064159113302) |
 | 2026-03-24 | 𝕏 X | ranking/beer-consumption-expenditure | ビールに最も金を使う県は秋田県。 | [🔗](https://x.com/stats47jp373/status/2036571259258245131) |
 | 2026-03-24 | 𝕏 X | ranking/ramen-dining-consumption-expenditure | ラーメンに最も金を使う県は山形県。年間22,389円。 | [🔗](https://x.com/stats47jp373/status/2036208870226354357) |
 | 2026-03-24 | 𝕏 X | ranking/total-fertility-rate | https://stats47.jp/ranking/total-fertility-rate… | [🔗](https://x.com/stats47jp373/status/2035606942417375449) |
-| 2026-03-23 | ▶️ YouTube | ranking/None | 可処分所得ランキング 大阪32位の衝撃｜勤労者世帯の手取り収入 #Shorts #可処分所得 #都道府県ランキング #手… | [🔗](https://www.youtube.com/watch?v=v2GT_J_1iME) |
-| 2026-03-23 | ▶️ YouTube | ranking/None | 経常収支比率ランキング 大阪だけ100%超えの危険水域！東京は余裕の79%【2022年度】#経常収支比率 #都道府県ラン… | [🔗](https://www.youtube.com/watch?v=5LbX4KGCGiM) |
-| 2026-03-23 | ▶️ YouTube | ranking/None | コンビニ数ランキング 1位は東京じゃなく北海道！大阪は45位の衝撃【人口あたり】#コンビニ #都道府県ランキング #Sh… | [🔗](https://www.youtube.com/watch?v=s2EQynyzxKA) |
-| 2026-03-23 | ▶️ YouTube | ranking/None | 公務員ボーナスランキング 東京186万vs高知144万 42万円差の実態【2024年】#公務員ボーナス #都道府県ランキ… | [🔗](https://www.youtube.com/watch?v=_-bkHCLA97s) |
-| 2026-03-22 | ▶️ YouTube | ranking/None | ビール年間消費額ランキング 東北がTOP3独占！秋田が1位の理由は？【2024年】#ビール #都道府県ランキング #Sh… | [🔗](https://www.youtube.com/watch?v=nTPl87Oa4sA) |
-| 2026-03-22 | ▶️ YouTube | ranking/None | 警察官の給料ランキング 東京と長野で月15万円差！最下位が意外すぎる【2024年】#警察官給与 #都道府県ランキング #… | [🔗](https://www.youtube.com/watch?v=pla2YPWD3lA) |
-| 2026-03-22 | ▶️ YouTube | ranking/None | 公務員の給料ランキング 東京と青森で月8万円差！地域手当の闇【2024年】#公務員給与 #都道府県ランキング #Shor… | [🔗](https://www.youtube.com/watch?v=mhDgeIsykBU) |
-| 2026-03-22 | ▶️ YouTube | ranking/None | 世帯年収ランキング 年収1位は東京じゃない！意外な県が200万円差で独走【2019年】#世帯年収 #都道府県ランキング … | [🔗](https://www.youtube.com/watch?v=z89IRgdOLkU) |
-| 2026-03-20 | ▶️ YouTube | ranking/None | 大阪vs愛知 人口・社会7番勝負 寿命に1年の差がつく #Shorts #都道府県ランキング | [🔗](https://www.youtube.com/watch?v=KhuhIBB4nI8) |
-| 2026-03-19 | ▶️ YouTube | ranking/None | 大阪vs愛知 暮らし7番勝負 月収9万円の差がつく #Shorts #お金 #統計データ | [🔗](https://www.youtube.com/watch?v=yikEShprAYA) |
-| 2026-03-18 | ▶️ YouTube | ranking/None | 大阪vs愛知 経済力7番勝負 稼ぐ力はどっちが上？ #Shorts #お金 #統計データ | [🔗](https://www.youtube.com/watch?v=Ak1DAjYbsqA) |
-| 2026-03-16 | ▶️ YouTube | ranking/None | 都道府県の一般行政職員（定年退職者）の平均退職手当ランキング（2024年） | [🔗](https://www.youtube.com/watch?v=3NWBwhHh7Ds) |
-| 2026-03-15 | ▶️ YouTube | ranking/None | 1人当たり預金残高ランキング 50年の変遷【都道府県別】 | [🔗](https://www.youtube.com/watch?v=utXKp1v1tGU) |
-| 2026-03-15 | ▶️ YouTube | ranking/None | 教員1人当たり児童数ランキング 50年の変遷【都道府県別】 | [🔗](https://www.youtube.com/watch?v=6sPMgLOA_yY) |
+| 2026-03-23 | ▶️ YouTube | ranking/ | 可処分所得ランキング 大阪32位の衝撃｜勤労者世帯の手取り収入 #Shorts #可処分所得 #都道府県ランキング #手… | [🔗](https://www.youtube.com/watch?v=v2GT_J_1iME) |
+| 2026-03-23 | ▶️ YouTube | ranking/ | 経常収支比率ランキング 大阪だけ100%超えの危険水域！東京は余裕の79%【2022年度】#経常収支比率 #都道府県ラン… | [🔗](https://www.youtube.com/watch?v=5LbX4KGCGiM) |
+| 2026-03-23 | ▶️ YouTube | ranking/ | コンビニ数ランキング 1位は東京じゃなく北海道！大阪は45位の衝撃【人口あたり】#コンビニ #都道府県ランキング #Sh… | [🔗](https://www.youtube.com/watch?v=s2EQynyzxKA) |
+| 2026-03-23 | ▶️ YouTube | ranking/ | 公務員ボーナスランキング 東京186万vs高知144万 42万円差の実態【2024年】#公務員ボーナス #都道府県ランキ… | [🔗](https://www.youtube.com/watch?v=_-bkHCLA97s) |
+| 2026-03-22 | ▶️ YouTube | ranking/ | ビール年間消費額ランキング 東北がTOP3独占！秋田が1位の理由は？【2024年】#ビール #都道府県ランキング #Sh… | [🔗](https://www.youtube.com/watch?v=nTPl87Oa4sA) |
+| 2026-03-22 | ▶️ YouTube | ranking/ | 警察官の給料ランキング 東京と長野で月15万円差！最下位が意外すぎる【2024年】#警察官給与 #都道府県ランキング #… | [🔗](https://www.youtube.com/watch?v=pla2YPWD3lA) |
+| 2026-03-22 | ▶️ YouTube | ranking/ | 公務員の給料ランキング 東京と青森で月8万円差！地域手当の闇【2024年】#公務員給与 #都道府県ランキング #Shor… | [🔗](https://www.youtube.com/watch?v=mhDgeIsykBU) |
+| 2026-03-22 | ▶️ YouTube | ranking/ | 世帯年収ランキング 年収1位は東京じゃない！意外な県が200万円差で独走【2019年】#世帯年収 #都道府県ランキング … | [🔗](https://www.youtube.com/watch?v=z89IRgdOLkU) |
+| 2026-03-20 | ▶️ YouTube | ranking/ | 大阪vs愛知 人口・社会7番勝負 寿命に1年の差がつく #Shorts #都道府県ランキング | [🔗](https://www.youtube.com/watch?v=KhuhIBB4nI8) |
+| 2026-03-19 | ▶️ YouTube | ranking/ | 大阪vs愛知 暮らし7番勝負 月収9万円の差がつく #Shorts #お金 #統計データ | [🔗](https://www.youtube.com/watch?v=yikEShprAYA) |
+| 2026-03-18 | ▶️ YouTube | ranking/ | 大阪vs愛知 経済力7番勝負 稼ぐ力はどっちが上？ #Shorts #お金 #統計データ | [🔗](https://www.youtube.com/watch?v=Ak1DAjYbsqA) |
+| 2026-03-16 | ▶️ YouTube | ranking/ | 都道府県の一般行政職員（定年退職者）の平均退職手当ランキング（2024年） | [🔗](https://www.youtube.com/watch?v=3NWBwhHh7Ds) |
+| 2026-03-15 | ▶️ YouTube | ranking/ | 1人当たり預金残高ランキング 50年の変遷【都道府県別】 | [🔗](https://www.youtube.com/watch?v=utXKp1v1tGU) |
+| 2026-03-15 | ▶️ YouTube | ranking/ | 教員1人当たり児童数ランキング 50年の変遷【都道府県別】 | [🔗](https://www.youtube.com/watch?v=6sPMgLOA_yY) |
 | 2026-03-15 | 𝕏 X | ranking/retirement-allowance-admin-prefecture |  | — |
 | 2026-03-15 | 📸 Instagram | ranking/retirement-allowance-admin-prefecture |  | — |
 | 2026-03-15 | ▶️ YouTube | ranking/retirement-allowance-admin-prefecture |  | — |
 | 2026-03-15 | 🎵 TikTok | ranking/retirement-allowance-admin-prefecture |  | — |
 | 2026-03-15 | 📝 note | ranking/retirement-allowance-admin-prefecture |  | — |
-| 2026-03-14 | ▶️ YouTube | ranking/None | 高校進学率ランキング 23年の変遷【都道府県別】 | [🔗](https://www.youtube.com/watch?v=iLIp7aeyPzY) |
-| 2026-03-14 | ▶️ YouTube | ranking/None | 【社会増減率ランキング】32県で人口流出…東京一極集中が再加速 都道府県別データで見る人口移動の実態 | [🔗](https://www.youtube.com/watch?v=pri1FGbxrpc) |
+| 2026-03-14 | ▶️ YouTube | ranking/ | 高校進学率ランキング 23年の変遷【都道府県別】 | [🔗](https://www.youtube.com/watch?v=iLIp7aeyPzY) |
+| 2026-03-14 | ▶️ YouTube | ranking/ | 【社会増減率ランキング】32県で人口流出…東京一極集中が再加速 都道府県別データで見る人口移動の実態 | [🔗](https://www.youtube.com/watch?v=pri1FGbxrpc) |
 | 2026-03-14 | 𝕏 X | ranking/social-increase-rate | 【社会増減率ランキング】47都道府県中、32県で人口流出  転入と転出の差を人口比で見る「社会増減率」（2019年度） … | [🔗](https://x.com/stats47jp373/status/2032777835715375452) |
 | 2026-03-14 | 📸 Instagram | ranking/social-increase-rate | 47都道府県中、32県で人口が流出している。 東京に人が集まり続ける日本の現実。  社会増減率とは、転入者数と転出者数の… | [🔗](https://www.instagram.com/stats47jp/reel/DV3NtaGDREa/) |
 | 2026-03-14 | ▶️ YouTube | ranking/social-increase-rate | 32県で人口流出！社会増減率TOP5 #Shorts #都道府県ランキング #お金 #統計データ #都道府県ランキング … | [🔗](https://www.youtube.com/watch?v=jC0ixKJU0zk) |
 | 2026-03-14 | 🎵 TikTok | ranking/social-increase-rate |  | [🔗](https://www.tiktok.com/@stats47jp/video/7616996944866446612) |
-| 2026-03-13 | ▶️ YouTube | ranking/None | 【女性労働力比率】最下位は東京じゃない 大阪が47位の理由 #都道府県ランキング #統計データ #ranking | [🔗](https://www.youtube.com/watch?v=vkNNHTJEOvg) |
-| 2026-03-13 | ▶️ YouTube | ranking/None | 最高気温ランキング 50年の変遷【都道府県別】猛暑の変化 #都道府県ランキング #統計データ #ranking | [🔗](https://www.youtube.com/watch?v=dOmHgWB0Orw) |
+| 2026-03-13 | ▶️ YouTube | ranking/ | 【女性労働力比率】最下位は東京じゃない 大阪が47位の理由 #都道府県ランキング #統計データ #ranking | [🔗](https://www.youtube.com/watch?v=vkNNHTJEOvg) |
+| 2026-03-13 | ▶️ YouTube | ranking/ | 最高気温ランキング 50年の変遷【都道府県別】猛暑の変化 #都道府県ランキング #統計データ #ranking | [🔗](https://www.youtube.com/watch?v=dOmHgWB0Orw) |
 | 2026-03-13 | 𝕏 X | ranking/apple-consumption-expenditure |  | — |
 | 2026-03-13 | 📸 Instagram | ranking/apple-consumption-expenditure |  | — |
 | 2026-03-13 | ▶️ YouTube | ranking/apple-consumption-expenditure |  | — |
 | 2026-03-13 | 🎵 TikTok | ranking/apple-consumption-expenditure |  | — |
 | 2026-03-13 | 📝 note | ranking/apple-consumption-expenditure |  | — |
 | 2026-03-13 | 𝕏 X | ranking/hobby-participation-rate-diy |  | — |
-| 2026-03-13 | 📸 Instagram | ranking/hobby-participation-rate-diy | 【都道府県ランキング】日曜大工の行動者率（2021年）  🏆 1位: 滋賀県 13.6％ 📉 47位: 大分県 9.3％… | [🔗](https://www.instagram.com/stats47jp/p/DVVt4_KE4vi/) |
+| 2026-03-13 | 📸 Instagram | ranking/hobby-participation-rate-diy | 【都道府県ランキング】日曜大工の行動者率（2021年）  🏆 1位: 滋賀県 13.6％ 📉 47位: 大分県 9.… | [🔗](https://www.instagram.com/stats47jp/p/DVVt4_KE4vi/) |
 | 2026-03-13 | 📝 note | ranking/hobby-participation-rate-diy |  | — |
-| 2026-03-11 | ▶️ YouTube | ranking/None | 生活保護受給率ランキング 48年の変遷｜都道府県別 #都道府県ランキング #統計データ #ranking | [🔗](https://www.youtube.com/watch?v=HhEW7X9s-O0) |
-| 2026-03-11 | ▶️ YouTube | ranking/None | 人口密度ランキング 49年の変遷｜都道府県別 #都道府県ランキング #統計データ #ranking | [🔗](https://www.youtube.com/watch?v=kwSC6cCCG-o) |
-| 2026-03-10 | ▶️ YouTube | ranking/None | 家賃ランキング 49年の変遷｜都道府県別 | [🔗](https://www.youtube.com/watch?v=LSxrK_gFLbI) |
-| 2026-03-10 | ▶️ YouTube | ranking/None | 高齢化率ランキング 19年の変遷｜都道府県別 | [🔗](https://www.youtube.com/watch?v=Kgr2gdqNpKc) |
-| 2026-03-10 | ▶️ YouTube | ranking/None | 高校卒業後の進学率ランキング 京都73％vs沖縄46％【都道府県別2022】 #都道府県ランキング #統計データ #ra… | [🔗](https://www.youtube.com/watch?v=j1UWXqAb71M) |
-| 2026-03-09 | ▶️ YouTube | ranking/None | 自殺率ランキング 14年の変遷｜都道府県別 | [🔗](https://www.youtube.com/watch?v=jl-FGm59Ssw) |
-| 2026-03-09 | ▶️ YouTube | ranking/None | 合計特殊出生率ランキング 43年の変遷【都道府県別】 | [🔗](https://www.youtube.com/watch?v=PgxyBPb8rx4) |
-| 2026-03-09 | ▶️ YouTube | ranking/None | 【まぐろ消費額ランキング】1位静岡県10,654円 47位長崎県1,224円 格差8.7倍 #都道府県ランキング #統計… | [🔗](https://www.youtube.com/watch?v=ov3fA2cJJ_w) |
-| 2026-03-08 | ▶️ YouTube | ranking/None | 1人当たり県民所得 都道府県別ランキング【2020年度】東京と沖縄で2.4倍差 #都道府県ランキング #統計データ #r… | [🔗](https://www.youtube.com/watch?v=oT5Expu918I) |
+| 2026-03-11 | ▶️ YouTube | ranking/ | 生活保護受給率ランキング 48年の変遷｜都道府県別 #都道府県ランキング #統計データ #ranking | [🔗](https://www.youtube.com/watch?v=HhEW7X9s-O0) |
+| 2026-03-11 | ▶️ YouTube | ranking/ | 人口密度ランキング 49年の変遷｜都道府県別 #都道府県ランキング #統計データ #ranking | [🔗](https://www.youtube.com/watch?v=kwSC6cCCG-o) |
+| 2026-03-10 | ▶️ YouTube | ranking/ | 家賃ランキング 49年の変遷｜都道府県別 | [🔗](https://www.youtube.com/watch?v=LSxrK_gFLbI) |
+| 2026-03-10 | ▶️ YouTube | ranking/ | 高齢化率ランキング 19年の変遷｜都道府県別 | [🔗](https://www.youtube.com/watch?v=Kgr2gdqNpKc) |
+| 2026-03-10 | ▶️ YouTube | ranking/ | 高校卒業後の進学率ランキング 京都73％vs沖縄46％【都道府県別2022】 #都道府県ランキング #統計データ #ra… | [🔗](https://www.youtube.com/watch?v=j1UWXqAb71M) |
+| 2026-03-09 | ▶️ YouTube | ranking/ | 自殺率ランキング 14年の変遷｜都道府県別 | [🔗](https://www.youtube.com/watch?v=jl-FGm59Ssw) |
+| 2026-03-09 | ▶️ YouTube | ranking/ | 合計特殊出生率ランキング 43年の変遷【都道府県別】 | [🔗](https://www.youtube.com/watch?v=PgxyBPb8rx4) |
+| 2026-03-09 | ▶️ YouTube | ranking/ | 【まぐろ消費額ランキング】1位静岡県10,654円 47位長崎県1,224円 格差8.7倍 #都道府県ランキング #統計… | [🔗](https://www.youtube.com/watch?v=ov3fA2cJJ_w) |
+| 2026-03-08 | ▶️ YouTube | ranking/ | 1人当たり県民所得 都道府県別ランキング【2020年度】東京と沖縄で2.4倍差 #都道府県ランキング #統計データ #r… | [🔗](https://www.youtube.com/watch?v=oT5Expu918I) |
 | 2026-03-08 | 𝕏 X | bar-chart-race/active-job-opening-ratio |  | — |
-| 2026-03-08 | 📸 Instagram | bar-chart-race/active-job-opening-ratio | 📊有効求人倍率ランキング2022！あなたの県は何位？  2022年の有効求人倍率ランキングを発表！1位は福井県で1.94… | [🔗](https://www.instagram.com/stats47jp/reel/DSRToj7jFx0/) |
+| 2026-03-08 | 📸 Instagram | bar-chart-race/active-job-opening-ratio | 📊有効求人倍率ランキング2022！あなたの県は何位？  2022年の有効求人倍率ランキングを発表！1位は福井県で1.9… | [🔗](https://www.instagram.com/stats47jp/reel/DSRToj7jFx0/) |
 | 2026-03-08 | ▶️ YouTube | bar-chart-race/active-job-opening-ratio |  | — |
 | 2026-03-08 | 🎵 TikTok | bar-chart-race/active-job-opening-ratio |  | [🔗](https://www.tiktok.com/@stats47jp/video/7615756480121146645) |
 | 2026-03-08 | 𝕏 X | bar-chart-race/actual-income-worker-households-per-month |  | — |
@@ -257,13 +230,13 @@
 | 2026-03-08 | 📸 Instagram | bar-chart-race/vacant-housing-ratio |  | — |
 | 2026-03-08 | ▶️ YouTube | bar-chart-race/vacant-housing-ratio |  | — |
 | 2026-03-08 | 🎵 TikTok | bar-chart-race/vacant-housing-ratio |  | — |
-| 2026-03-07 | ▶️ YouTube | ranking/None | 【ぎょうざ消費額ランキング】1位宮崎県3,689円 宇都宮の栃木は2位 静岡17位 | [🔗](https://www.youtube.com/watch?v=ojZZ3IuD90s) |
-| 2026-03-06 | ▶️ YouTube | ranking/None | 【うどん】香川16,371円でぶっちぎり1位！そば・うどん消費が多い県・少ない県【2023年】 #都道府県ランキング #… | [🔗](https://www.youtube.com/watch?v=PLlI3_oPWhQ) |
-| 2026-03-06 | ▶️ YouTube | ranking/None | 【緑茶消費額ランキング】1位静岡県8,749円 47位沖縄県1,321円 格差6.6倍 | [🔗](https://www.youtube.com/watch?v=BM-oA5s0jWg) |
-| 2026-03-06 | ▶️ YouTube | ranking/None | 【高齢化率】秋田県39％が1位 東京都22.8％で最下位【2023年度】 #都道府県ランキング #統計データ #rank… | [🔗](https://www.youtube.com/watch?v=F4f1MLyWl0o) |
-| 2026-03-06 | ▶️ YouTube | ranking/None | 【交通事故】群馬527件で全国ワースト！事故が多い県・少ない県【2023年】 | [🔗](https://www.youtube.com/watch?v=fHlM28N42fE) |
+| 2026-03-07 | ▶️ YouTube | ranking/ | 【ぎょうざ消費額ランキング】1位宮崎県3,689円 宇都宮の栃木は2位 静岡17位 | [🔗](https://www.youtube.com/watch?v=ojZZ3IuD90s) |
+| 2026-03-06 | ▶️ YouTube | ranking/ | 【うどん】香川16,371円でぶっちぎり1位！そば・うどん消費が多い県・少ない県【2023年】 #都道府県ランキング #… | [🔗](https://www.youtube.com/watch?v=PLlI3_oPWhQ) |
+| 2026-03-06 | ▶️ YouTube | ranking/ | 【緑茶消費額ランキング】1位静岡県8,749円 47位沖縄県1,321円 格差6.6倍 | [🔗](https://www.youtube.com/watch?v=BM-oA5s0jWg) |
+| 2026-03-06 | ▶️ YouTube | ranking/ | 【高齢化率】秋田県39％が1位 東京都22.8％で最下位【2023年度】 #都道府県ランキング #統計データ #rank… | [🔗](https://www.youtube.com/watch?v=F4f1MLyWl0o) |
+| 2026-03-06 | ▶️ YouTube | ranking/ | 【交通事故】群馬527件で全国ワースト！事故が多い県・少ない県【2023年】 | [🔗](https://www.youtube.com/watch?v=fHlM28N42fE) |
 | 2026-03-06 | 𝕏 X | ranking/abandoned-cultivated-land-area | 福島県の耕地放棄面積25,226ha、東京都の26.4倍。  2014年度ランキング、上位3県は福島・茨城・千葉。すべて… | [🔗](https://x.com/stats47jp373/status/2027651744671609316) |
-| 2026-03-06 | 📸 Instagram | ranking/abandoned-cultivated-land-area | 福島県の耕地放棄面積は東京都の26倍。 震災から3年、数字が語る「帰れない農地」の現実。  📊 耕地放棄面積ランキング（… | [🔗](https://www.instagram.com/stats47jp/reel/DVSxVonjYBb/) |
+| 2026-03-06 | 📸 Instagram | ranking/abandoned-cultivated-land-area | 福島県の耕地放棄面積は東京都の26倍。 震災から3年、数字が語る「帰れない農地」の現実。  📊 耕地放棄面積ランキング… | [🔗](https://www.instagram.com/stats47jp/reel/DVSxVonjYBb/) |
 | 2026-03-06 | ▶️ YouTube | ranking/abandoned-cultivated-land-area | 耕地放棄面積ランキング｜1位は東京の26倍のあの県【2014年度】#Shorts #都道府県ランキング #耕作放棄地 #… | [🔗](https://www.youtube.com/watch?v=m69_eP12q8Q) |
 | 2026-03-06 | 🎵 TikTok | ranking/abandoned-cultivated-land-area |  | [🔗](https://www.tiktok.com/@stats47jp/video/7611818830901398804) |
 | 2026-03-06 | 📝 note | ranking/abandoned-cultivated-land-area |  | — |
@@ -273,12 +246,12 @@
 | 2026-03-06 | 🎵 TikTok | ranking/active-job-opening-ratio |  | [🔗](https://www.tiktok.com/@stats47jp/video/7614679199470603541) |
 | 2026-03-06 | 📝 note | ranking/active-job-opening-ratio |  | — |
 | 2026-03-06 | 𝕏 X | ranking/actual-income-worker-households-per-month |  | — |
-| 2026-03-06 | 📸 Instagram | ranking/actual-income-worker-households-per-month | 💰勤労者世帯の月収ランキング2023！あなたの地域はいくら？  2023年の勤労者世帯の1ヶ月あたり実収入ランキングを発… | [🔗](https://www.instagram.com/reel/DTPcSycDlm-/) |
+| 2026-03-06 | 📸 Instagram | ranking/actual-income-worker-households-per-month | 💰勤労者世帯の月収ランキング2023！あなたの地域はいくら？  2023年の勤労者世帯の1ヶ月あたり実収入ランキングを… | [🔗](https://www.instagram.com/reel/DTPcSycDlm-/) |
 | 2026-03-06 | ▶️ YouTube | ranking/actual-income-worker-households-per-month | 勤労世帯の実収入 都道府県別｜東京79万vs沖縄49万【2024年度】 #都道府県ランキング #統計データ #ranki… | [🔗](https://www.youtube.com/watch?v=vmz9RdxSDyQ) |
 | 2026-03-06 | 🎵 TikTok | ranking/actual-income-worker-households-per-month |  | — |
 | 2026-03-06 | 📝 note | ranking/actual-income-worker-households-per-month |  | — |
 | 2026-03-06 | 𝕏 X | ranking/avg-savings-rate-worker-households |  | — |
-| 2026-03-06 | 📸 Instagram | ranking/avg-savings-rate-worker-households | 💰平均貯蓄率ランキング2023！あなたの県は何位？  2023年の勤労者世帯の平均貯蓄率ランキングを発表！1位は福井県で… | [🔗](https://www.instagram.com/reel/DTw_bekjf-z/) |
+| 2026-03-06 | 📸 Instagram | ranking/avg-savings-rate-worker-households | 💰平均貯蓄率ランキング2023！あなたの県は何位？  2023年の勤労者世帯の平均貯蓄率ランキングを発表！1位は福井県… | [🔗](https://www.instagram.com/reel/DTw_bekjf-z/) |
 | 2026-03-06 | ▶️ YouTube | ranking/avg-savings-rate-worker-households | 平均貯蓄率ランキング推移 47都道府県【1975-2024】 #都道府県ランキング #統計データ #ranking | [🔗](https://www.youtube.com/watch?v=NH3buCgFcSs) |
 | 2026-03-06 | 🎵 TikTok | ranking/avg-savings-rate-worker-households |  | — |
 | 2026-03-06 | 📝 note | ranking/avg-savings-rate-worker-households |  | — |
@@ -288,7 +261,7 @@
 | 2026-03-06 | 🎵 TikTok | ranking/car-ownership-multi-person-households-per-1000 |  | — |
 | 2026-03-06 | 📝 note | ranking/car-ownership-multi-person-households-per-1000 |  | — |
 | 2026-03-06 | 𝕏 X | ranking/consumer-price-difference-index-overall |  | — |
-| 2026-03-06 | 📸 Instagram | ranking/consumer-price-difference-index-overall | 👗服の値段、地域差ありすぎ！被服・履物物価指数2023  2023年の「被服及び履物」の消費者物価地域差指数ランキング！… | [🔗](https://www.instagram.com/reel/DTWyAI3DW5I/) |
+| 2026-03-06 | 📸 Instagram | ranking/consumer-price-difference-index-overall | 👗服の値段、地域差ありすぎ！被服・履物物価指数2023  2023年の「被服及び履物」の消費者物価地域差指数ランキング… | [🔗](https://www.instagram.com/reel/DTWyAI3DW5I/) |
 | 2026-03-06 | ▶️ YouTube | ranking/consumer-price-difference-index-overall |  | — |
 | 2026-03-06 | 🎵 TikTok | ranking/consumer-price-difference-index-overall |  | — |
 | 2026-03-06 | 📝 note | ranking/consumer-price-difference-index-overall |  | — |
@@ -298,7 +271,7 @@
 | 2026-03-06 | 🎵 TikTok | ranking/current-savings-balance-multi-person-households |  | — |
 | 2026-03-06 | 📝 note | ranking/current-savings-balance-multi-person-households |  | — |
 | 2026-03-06 | 𝕏 X | ranking/divorces-per-total-population | 離婚率の最下位4県が全部「北陸」って知ってた？  離婚率（2022年・人口千人あたり） 1位 沖縄県 2.10 2位 宮… | [🔗](https://x.com/stats47jp373/status/2031565787249652196) |
-| 2026-03-06 | 📸 Instagram | ranking/divorces-per-total-population | 【都道府県ランキング】離婚率（2022年度）  💔 1位: 沖縄県 2.10 💔 2位: 宮崎県 1.67 💔 47位:… | [🔗](https://www.instagram.com/reel/DXp_REfkenF/) |
+| 2026-03-06 | 📸 Instagram | ranking/divorces-per-total-population | 【都道府県ランキング】離婚率（2022年度）  💔 1位: 沖縄県 2.10 💔 2位: 宮崎県 1.67 💔 4… | [🔗](https://www.instagram.com/reel/DXp_REfkenF/) |
 | 2026-03-06 | ▶️ YouTube | ranking/divorces-per-total-population |  | — |
 | 2026-03-06 | 🎵 TikTok | ranking/divorces-per-total-population |  | [🔗](https://www.tiktok.com/@stats47jp/video/7614677646416530708) |
 | 2026-03-06 | 📝 note | ranking/divorces-per-total-population |  | — |
@@ -377,7 +350,7 @@
 | 2026-03-06 | ▶️ YouTube | ranking/ssdse-d-md22 |  | — |
 | 2026-03-06 | 🎵 TikTok | ranking/ssdse-d-md22 |  | — |
 | 2026-03-06 | 📝 note | ranking/ssdse-d-md22 |  | — |
-| 2026-03-06 | 📸 Instagram | ranking/total-fertility-rate | 【都道府県ランキング】合計特殊出生率（2023年度）  👶 1位: 沖縄県 1.60 👶 2位: 長崎県 1.49 👶 … | [🔗](https://www.instagram.com/stats47jp/reel/DVszvDHjQN8/) |
+| 2026-03-06 | 📸 Instagram | ranking/total-fertility-rate | 【都道府県ランキング】合計特殊出生率（2023年度）  👶 1位: 沖縄県 1.60 👶 2位: 長崎県 1.49 … | [🔗](https://www.instagram.com/stats47jp/reel/DVszvDHjQN8/) |
 | 2026-03-06 | ▶️ YouTube | ranking/total-fertility-rate | 【合計特殊出生率】47都道府県すべてが2.0割れ｜1位沖縄1.70 47位東京1.04 #都道府県ランキング #統計デー… | [🔗](https://www.youtube.com/watch?v=0113mrnGw2U) |
 | 2026-03-06 | 🎵 TikTok | ranking/total-fertility-rate |  | [🔗](https://www.tiktok.com/@stats47jp/video/7613742025862548756) |
 | 2026-03-06 | 📝 note | ranking/total-fertility-rate |  | — |
@@ -401,25 +374,25 @@
 | 2026-03-06 | ▶️ YouTube | ranking/vacant-housing-ratio | 【空き家比率ランキング】1位徳島県21.3% 47位埼玉県9.3%｜5軒に1軒が空き家 #都道府県ランキング #統計デー… | [🔗](https://www.youtube.com/watch?v=64VvE-PHvws) |
 | 2026-03-06 | 🎵 TikTok | ranking/vacant-housing-ratio |  | [🔗](https://www.tiktok.com/@stats47jp/video/7613328829075000597) |
 | 2026-03-06 | 📝 note | ranking/vacant-housing-ratio |  | — |
-| 2026-03-02 | ▶️ YouTube | ranking/None | 【りんご消費額ランキング】1位青森県8,800円 47位大分県3,390円 格差2.6倍 #都道府県ランキング #統計デ… | [🔗](https://www.youtube.com/watch?v=QCnxPMPWAn8) |
-| 2026-03-01 | ▶️ YouTube | ranking/None | 日曜大工する人が多い都道府県ランキング【2021年】 #都道府県ランキング #統計データ #ranking　#日曜大工 … | [🔗](https://www.youtube.com/watch?v=Uc1tcPxSPZk) |
-| 2026-02-02 | ▶️ YouTube | ranking/None | 📊テレビ・ラジオ・新聞・雑誌の平均時間（無業者・男）ランキング2021！あなたの県は何位？ | [🔗](https://www.youtube.com/watch?v=ph6Wf5SL6VU) |
-| 2026-01-26 | ▶️ YouTube | ranking/None | 📊一般粉じん発生施設数ランキング2022！あなたの県は何位？ | [🔗](https://www.youtube.com/watch?v=A0KF64AnVjU) |
-| 2026-01-21 | ▶️ YouTube | ranking/None | 💰平均貯蓄率ランキング2023！あなたの県は何位？ | [🔗](https://www.youtube.com/watch?v=SMamINouurU) |
-| 2026-01-21 | ▶️ YouTube | ranking/None | 🤰妊産婦保健指導数ランキング2022！あなたの県は何位？ | [🔗](https://www.youtube.com/watch?v=h6Ti20fy55U) |
-| 2026-01-21 | ▶️ YouTube | ranking/None | 👩‍🦳無業女性の趣味時間ランキング2021！あなたの地域は？ | [🔗](https://www.youtube.com/watch?v=6v2I_zFOUJY) |
-| 2026-01-20 | ▶️ YouTube | ranking/None | 👴無業男性の趣味時間ランキング2021！あなたの地域は？ | [🔗](https://www.youtube.com/watch?v=v1pSyCU7juA) |
-| 2026-01-20 | ▶️ YouTube | ranking/None | 📊趣味・娯楽の時間ランキング2021！あなたの県は何位？ | [🔗](https://www.youtube.com/watch?v=E8-B3gK_g4E) |
-| 2026-01-15 | ▶️ YouTube | ranking/None | 💰みんなの借金額は？世帯の負債額ランキング2019！ | [🔗](https://www.youtube.com/watch?v=bhQR02P3M_Y) |
-| 2026-01-15 | ▶️ YouTube | ranking/None | 🚗自動車の保有台数ランキング2014！あなたの県は何位？ | [🔗](https://www.youtube.com/watch?v=hZWARs1FfXw) |
-| 2026-01-15 | ▶️ YouTube | ranking/None | 🦷歯科健診・保健指導者数ランキング2020！あなたの県は何位？ | [🔗](https://www.youtube.com/watch?v=bGFJgWKzLLs) |
-| 2026-01-14 | ▶️ YouTube | ranking/None | 🏥脳血管疾患による死亡者数ランキング2022！あなたの県は何位？ | [🔗](https://www.youtube.com/watch?v=p8zNjyv0yhI) |
-| 2026-01-13 | ▶️ YouTube | ranking/None | 📊趣味・遊び代ランキング2023！あなたの県は何位？ #ranking #投資 #統計データ | [🔗](https://www.youtube.com/watch?v=8qnL63zJ0jM) |
-| 2026-01-11 | ▶️ YouTube | ranking/None | 👗服の値段、地域差ありすぎ！被服・履物物価指数2023 | [🔗](https://www.youtube.com/watch?v=Cxvv4Rvpdl8) |
-| 2026-01-10 | ▶️ YouTube | ranking/None | ⚖️小学5年生女子の平均体重ランキング2022！一番重いのはどこ？ | [🔗](https://www.youtube.com/watch?v=pYsQO0wVOnM) |
-| 2026-01-08 | ▶️ YouTube | ranking/None | 勤労者世帯の月収ランキング2023！あなたの地域はいくら？ | [🔗](https://www.youtube.com/watch?v=prxc6p5Ktmk) |
-| 2025-12-19 | ▶️ YouTube | ranking/None | 都道府県一般行政部門職員数ランキング2023！あなたの県は何位？ | [🔗](https://www.youtube.com/watch?v=L1QqphMMIZE) |
-| 2025-12-18 | ▶️ YouTube | ranking/None | 農業産出額ランキング2022！あなたの県は何位？ | [🔗](https://www.youtube.com/watch?v=tAyxhTp5qrI) |
-| 2025-12-17 | ▶️ YouTube | ranking/None | 日本の未来を映す鏡？老年化指数ランキング2022！あなたの県は何位？ | [🔗](https://www.youtube.com/watch?v=xy_9K8LrarM) |
-| 2025-12-17 | ▶️ YouTube | ranking/None | 火災死傷者数（建物火災100件当たり）ランキング2022！あなたの県は何位？ | [🔗](https://www.youtube.com/watch?v=ATBffBAXfOM) |
-| 2025-12-16 | ▶️ YouTube | ranking/None | 高校2年男子の体重ランキング2022！あなたの県は何位？ | [🔗](https://www.youtube.com/watch?v=CyCy5ikVJ44) |
+| 2026-03-02 | ▶️ YouTube | ranking/ | 【りんご消費額ランキング】1位青森県8,800円 47位大分県3,390円 格差2.6倍 #都道府県ランキング #統計デ… | [🔗](https://www.youtube.com/watch?v=QCnxPMPWAn8) |
+| 2026-03-01 | ▶️ YouTube | ranking/ | 日曜大工する人が多い都道府県ランキング【2021年】 #都道府県ランキング #統計データ #ranking　#日曜大工 … | [🔗](https://www.youtube.com/watch?v=Uc1tcPxSPZk) |
+| 2026-02-02 | ▶️ YouTube | ranking/ | 📊テレビ・ラジオ・新聞・雑誌の平均時間（無業者・男）ランキング2021！あなたの県は何位？ | [🔗](https://www.youtube.com/watch?v=ph6Wf5SL6VU) |
+| 2026-01-26 | ▶️ YouTube | ranking/ | 📊一般粉じん発生施設数ランキング2022！あなたの県は何位？ | [🔗](https://www.youtube.com/watch?v=A0KF64AnVjU) |
+| 2026-01-21 | ▶️ YouTube | ranking/ | 💰平均貯蓄率ランキング2023！あなたの県は何位？ | [🔗](https://www.youtube.com/watch?v=SMamINouurU) |
+| 2026-01-21 | ▶️ YouTube | ranking/ | 🤰妊産婦保健指導数ランキング2022！あなたの県は何位？ | [🔗](https://www.youtube.com/watch?v=h6Ti20fy55U) |
+| 2026-01-21 | ▶️ YouTube | ranking/ | 👩‍🦳無業女性の趣味時間ランキング2021！あなたの地域は？ | [🔗](https://www.youtube.com/watch?v=6v2I_zFOUJY) |
+| 2026-01-20 | ▶️ YouTube | ranking/ | 👴無業男性の趣味時間ランキング2021！あなたの地域は？ | [🔗](https://www.youtube.com/watch?v=v1pSyCU7juA) |
+| 2026-01-20 | ▶️ YouTube | ranking/ | 📊趣味・娯楽の時間ランキング2021！あなたの県は何位？ | [🔗](https://www.youtube.com/watch?v=E8-B3gK_g4E) |
+| 2026-01-15 | ▶️ YouTube | ranking/ | 💰みんなの借金額は？世帯の負債額ランキング2019！ | [🔗](https://www.youtube.com/watch?v=bhQR02P3M_Y) |
+| 2026-01-15 | ▶️ YouTube | ranking/ | 🚗自動車の保有台数ランキング2014！あなたの県は何位？ | [🔗](https://www.youtube.com/watch?v=hZWARs1FfXw) |
+| 2026-01-15 | ▶️ YouTube | ranking/ | 🦷歯科健診・保健指導者数ランキング2020！あなたの県は何位？ | [🔗](https://www.youtube.com/watch?v=bGFJgWKzLLs) |
+| 2026-01-14 | ▶️ YouTube | ranking/ | 🏥脳血管疾患による死亡者数ランキング2022！あなたの県は何位？ | [🔗](https://www.youtube.com/watch?v=p8zNjyv0yhI) |
+| 2026-01-13 | ▶️ YouTube | ranking/ | 📊趣味・遊び代ランキング2023！あなたの県は何位？ #ranking #投資 #統計データ | [🔗](https://www.youtube.com/watch?v=8qnL63zJ0jM) |
+| 2026-01-11 | ▶️ YouTube | ranking/ | 👗服の値段、地域差ありすぎ！被服・履物物価指数2023 | [🔗](https://www.youtube.com/watch?v=Cxvv4Rvpdl8) |
+| 2026-01-10 | ▶️ YouTube | ranking/ | ⚖️小学5年生女子の平均体重ランキング2022！一番重いのはどこ？ | [🔗](https://www.youtube.com/watch?v=pYsQO0wVOnM) |
+| 2026-01-08 | ▶️ YouTube | ranking/ | 勤労者世帯の月収ランキング2023！あなたの地域はいくら？ | [🔗](https://www.youtube.com/watch?v=prxc6p5Ktmk) |
+| 2025-12-19 | ▶️ YouTube | ranking/ | 都道府県一般行政部門職員数ランキング2023！あなたの県は何位？ | [🔗](https://www.youtube.com/watch?v=L1QqphMMIZE) |
+| 2025-12-18 | ▶️ YouTube | ranking/ | 農業産出額ランキング2022！あなたの県は何位？ | [🔗](https://www.youtube.com/watch?v=tAyxhTp5qrI) |
+| 2025-12-17 | ▶️ YouTube | ranking/ | 日本の未来を映す鏡？老年化指数ランキング2022！あなたの県は何位？ | [🔗](https://www.youtube.com/watch?v=xy_9K8LrarM) |
+| 2025-12-17 | ▶️ YouTube | ranking/ | 火災死傷者数（建物火災100件当たり）ランキング2022！あなたの県は何位？ | [🔗](https://www.youtube.com/watch?v=ATBffBAXfOM) |
+| 2025-12-16 | ▶️ YouTube | ranking/ | 高校2年男子の体重ランキング2022！あなたの県は何位？ | [🔗](https://www.youtube.com/watch?v=CyCy5ikVJ44) |
