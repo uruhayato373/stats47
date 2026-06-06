@@ -28,8 +28,8 @@ melta-ui 規約準拠は**良好**（主要禁止パターンの大半が 0 件�
 |---|---|---|---|---|
 | major (a11y) | `HeaderClient.tsx:146` | メガメニュートリガが `outline-none` でフォーカスリング無し（WCAG 2.4.7 不適合） | `focus-visible:ring-2 focus-visible:ring-primary/50` 追加 | ✅ 修正済 |
 | minor (装飾) | `TechSchoolPromoCard.tsx:26` (inline) | `border-l-4` + `bg-gradient-to-r` = AI 装飾カラーバー | 全周 `border border-slate-200 bg-card` に | ✅ 修正済 |
-| minor (色) | 4 件 (AreaRelatedRankings / RankBadge / DefinitionsCard / MobileNavDrawer) | `bg-rose/yellow/green` → 規約は red/amber/emerald | 統一（RankBadge yellow=金メダルは意図なら許容） | 未対応 |
-| minor (motion) | 5 件 (RankingSidebar skeleton/thumbnail / SlidePresentation) | `duration-500`（鈍い） | `duration-300` 以下 | 未対応 |
+| minor (色) | 6 件 (AreaRelatedRankings / RankBadge / DefinitionsCard / MobileNavDrawer / KpiCard / md-content) | `bg/text rose/yellow/green` → red/amber/emerald | 統一（RankBadge 金メダル=amber-500） | ✅ 修正済 (81923ccb) |
+| minor (motion) | 5 件 (RankingSidebar skeleton/client / RankingThumbnail / SlidePresentation×2) | `duration-500`（鈍い） | `duration-300` に | ✅ 修正済 (81923ccb) |
 | 許容 | `text-blue-*` 18 件 | 相関/トレンド/コロプレスの**データ可視化セマンティック色**（リンクではない・アイコン併用済） | 規約上 OK | — |
 | 許容 | md-content blockquote `border-l-4` | 引用の左ボーダーは慣習（Zenn も 3px） | OK | — |
 | 許容 | `TechSchoolPromoCard.tsx:53` (sidebar) | purple→blue 全面グラデ ad カード | 意図的な ad デザイン（コンテンツと差別化） | — |
@@ -46,10 +46,10 @@ melta-ui 規約準拠は**良好**（主要禁止パターンの大半が 0 件�
 
 ## 残課題（未対応）
 
-1. [minor] 色トークン統一（bg-rose/yellow/green → red/amber/emerald）4 件
-2. [minor] motion `duration-500` → 300 以下 5 件
-3. [polish] home 中段グラデプレビューの彩度抑制 / 空プレースホルダの CLS 対策
-4. [verify] dev クリーン再起動 → ranking/blog/area のモバイル回帰を実機確認
+1. [polish] home 中段グラデプレビューの彩度抑制 / 空プレースホルダの CLS 対策
+2. [verify] dev クリーン再起動 → ranking/blog/area のモバイル回帰を実機確認
+
+> 色トークン統一・motion 鈍化解消は 81923ccb で対応済。
 
 ## 補足: 並行セッション / git レース
 
