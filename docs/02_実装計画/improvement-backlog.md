@@ -14,8 +14,8 @@ SEO / 性能 / コスト / コンテンツ施策の TODO 一覧。旧 `docs/05_�
 
 | ID | タイトル | Status | Due | Owner | Metric |
 |---|---|---|---|---|---|
-| AFF-01 | 在庫ベースライン棚卸し (2026-06-04) | in-progress | 2026-06-11 | claude | affiliate |
-| INDEXING-AUTO-01 | Indexing API による問題 URL の自動再送信 | in-progress | 2026-06-14 | claude | indexing |
+| AFF-01 | 在庫ベースライン棚卸し (2026-06-04) | effect/none | 2026-06-11 | claude | affiliate |
+| INDEXING-AUTO-01 | Indexing API による問題 URL の自動再送信 (日次 200/day 稼働中) | effect/pending | 2026-06-20 | claude | indexing |
 | SEO-TITLE-FIX-01 | タイトル double-suffix バグ修正 (31 ページ) | pending | 2026-06-20 | claude | gsc |
 | BLOG-WAVE-2026-05-25-auto | curiosity gap auto-brushup 54 記事 | pending | 2026-06-22 | claude | gsc |
 | BLOG-WAVE-2026-05-28-manual | GSC 駆動 上位 4 記事 手動 brushup | pending | 2026-06-25 | claude | gsc |
@@ -39,6 +39,6 @@ SEO / 性能 / コスト / コンテンツ施策の TODO 一覧。旧 `docs/05_�
 | AFF-02 | 広告ゼロ 8 軸の在庫補充 | pending | 2026-06-21 | uruhayato373 | affiliate |
 | GA4-PIPELINE-02 | history.csv の pageviews をカレンダー週バケット + Japan-only に統一 | pending | 2026-06-21 | claude | ga4 |
 | CTR-AUTO-01 | CTR 改善候補の月次自動抽出 (Phase 3 sprint) | in-progress | 2026-06-21 | claude | gsc |
-| AFF-03 | ランキングページのバナー枠追加 (案 A 実装) | in-progress | 2026-06-28 | claude | affiliate |
+| AFF-03 | ランキングページのバナー枠追加 (案 A 実装) | effect/pending | 2026-06-28 | claude | affiliate |
 | CONTENT-DRAFT-01 | /draft-from-trend skill 実装 (Phase 2 → Phase 3 での稼働) | in-progress | 2026-06-28 | claude | content |
 | AFF-06 | 公務員 AI 転職体験記で STRATEGY CAREER を訴求 | pending | 2026-07-04 | claude | affiliate |
