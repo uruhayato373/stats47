@@ -72,12 +72,13 @@ W21 (05/13-19) ベースライン: RPM ¥36、Viewability 54.3% (W17 の 61.9% �
 
 ## [ADSENSE-MOBILE-01] モバイル広告の位置改善（深すぎる配置の是正）
 
-- **status**: deployed-unverified
+- **status**: effect/full
 - **tier**: 1
 - **target_metric**: adsense-rpm
 - **owner**: claude
 - **deployed_at**: 2026-05-20 (PR #320 + #321 マージ済み、develop=main で本番反映済み)
 - **due**: 2026-06-08
+- **closed_at**: 2026-06-06
 - **verification_command**: `node .claude/scripts/metrics/fetch-adsense-snapshot.mjs 2026-W23 && cat .claude/skills/analytics/adsense-improvement/reference/snapshots/2026-W23/devices.csv`
 - **plan**: `/Users/minamidaisuke/.claude/plans/stats47-swift-thacker.md`
 
@@ -124,3 +125,18 @@ W21 データでモバイルが構造的に undermonetized:
 
 - Anchor 広告は UX 毀損リスク。直帰率（GA4）と滞在時間を施策後 2 週で監視
 - LCP がさらに悪化する可能性 → PSI 日次計測で施策前後を比較
+
+### 検証結果 (2026-06-06 / W23実測)
+
+| 指標 | W21 baseline | W23 実測 | 変化 | 目標 | 判定 |
+|---|---|---|---|---|---|
+| モバイル RPM | ¥17 | ¥36 | +¥19 (+112%) | ¥30 | ✅ 超過 |
+| 全体 Earnings/週 | ¥47 | ¥120 | +¥73 (+155%) | ¥70 | ✅ 超過 |
+| 全体 RPM | ¥21 | ¥50 | +¥29 (+138%) | — | — |
+| Viewability | 49.7% | 60.4% | +10.7pp | 70%+ | ⚠️ 未達 (ADSENSE-RPM-01 で継続) |
+| モバイル CTR | 0.96% | 8.12% | +746% | — | Anchor 効果 |
+
+- モバイル PV は 914 → 747 (-18%) だが、RPM 改善がカバーし Earnings は ¥15 → ¥27 (+80%)
+- Viewability 70% 目標は未達だが、これは ADSENSE-RPM-01 (due 6/30) のスコープ
+
+**verdict: effect/full** — モバイル RPM・全体 Earnings ともに目標値を超過
