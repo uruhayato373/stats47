@@ -27,7 +27,7 @@ export function DataTableHeaderCell<TData, TValue>({
             <th
                 scope="col"
                 style={{ width, minWidth }}
-                className="h-10 px-3 py-2 text-sm text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0"
+                className="h-10 px-4 py-2 text-sm text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0"
             />
         );
     }
@@ -37,7 +37,7 @@ export function DataTableHeaderCell<TData, TValue>({
             <th
                 scope="col"
                 style={{ width, minWidth }}
-                className="h-10 px-3 py-2 text-sm text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0"
+                className="h-10 px-4 py-2 text-sm text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0"
             >
                 {flexRender(header.column.columnDef.header, header.getContext())}
             </th>

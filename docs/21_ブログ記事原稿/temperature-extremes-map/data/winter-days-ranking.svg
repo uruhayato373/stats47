@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 360" style="max-width:560px;width:100%;font-family:sans-serif">
+  <title>冬日（日平均気温0℃未満）日数ランキング（2024年）</title>
+  <rect width="560" height="360" fill="#f8fafc" rx="8"/>
+  <text x="280" y="22" text-anchor="middle" font-size="13" font-weight="bold" fill="#1e293b">冬日（日平均気温0℃未満）日数ランキング（2024年）</text>
+  <text x="280" y="38" text-anchor="middle" font-size="11" fill="#64748b">上位5県・下位5県（0日）</text>
+  <rect x="110" y="53" width="402" height="18" fill="#818cf8" rx="2"/>
+  <text x="105" y="66" text-anchor="end" font-size="11" fill="#334155">北海道</text>
+  <text x="516" y="66" font-size="11" fill="#475569" font-weight="bold">84.3日</text>
+  <rect x="110" y="79" width="285" height="18" fill="#818cf8" rx="2"/>
+  <text x="105" y="92" text-anchor="end" font-size="11" fill="#334155">岩手</text>
+  <text x="399" y="92" font-size="11" fill="#475569" font-weight="bold">59.8日</text>
+  <rect x="110" y="105" width="242" height="18" fill="#818cf8" rx="2"/>
+  <text x="105" y="118" text-anchor="end" font-size="11" fill="#334155">青森</text>
+  <text x="356" y="118" font-size="11" fill="#475569" font-weight="bold">50.8日</text>
+  <rect x="110" y="131" width="199" height="18" fill="#818cf8" rx="2"/>
+  <text x="105" y="144" text-anchor="end" font-size="11" fill="#334155">長野</text>
+  <text x="313" y="144" font-size="11" fill="#475569" font-weight="bold">41.8日</text>
+  <rect x="110" y="157" width="173" height="18" fill="#818cf8" rx="2"/>
+  <text x="105" y="170" text-anchor="end" font-size="11" fill="#334155">山形</text>
+  <text x="287" y="170" font-size="11" fill="#475569" font-weight="bold">36.4日</text>
+  <line x1="20" y1="182" x2="540" y2="182" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="4"/>
+  <text x="280" y="194" text-anchor="middle" font-size="10" fill="#94a3b8">…中位省略…</text>
+  <rect x="110" y="203" width="0" height="18" fill="#86efac" rx="2"/>
+  <text x="105" y="216" text-anchor="end" font-size="11" fill="#334155">静岡</text>
+  <text x="114" y="216" font-size="11" fill="#475569" font-weight="bold">0.0日</text>
+  <rect x="110" y="229" width="0" height="18" fill="#86efac" rx="2"/>
+  <text x="105" y="242" text-anchor="end" font-size="11" fill="#334155">大阪</text>
+  <text x="114" y="242" font-size="11" fill="#475569" font-weight="bold">0.0日</text>
+  <rect x="110" y="255" width="0" height="18" fill="#86efac" rx="2"/>
+  <text x="105" y="268" text-anchor="end" font-size="11" fill="#334155">神奈川</text>
+  <text x="114" y="268" font-size="11" fill="#475569" font-weight="bold">0.0日</text>
+  <rect x="110" y="281" width="0" height="18" fill="#86efac" rx="2"/>
+  <text x="105" y="294" text-anchor="end" font-size="11" fill="#334155">千葉</text>
+  <text x="114" y="294" font-size="11" fill="#475569" font-weight="bold">0.0日</text>
+  <rect x="110" y="307" width="0" height="18" fill="#86efac" rx="2"/>
+  <text x="105" y="320" text-anchor="end" font-size="11" fill="#334155">沖縄</text>
+  <text x="114" y="320" font-size="11" fill="#475569" font-weight="bold">0.0日</text>
+  <text x="280" y="354" text-anchor="middle" font-size="10" fill="#94a3b8">出典: 総務省 e-Stat 社会・人口統計体系 2024年</text>
+</svg>

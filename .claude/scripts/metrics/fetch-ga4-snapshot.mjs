@@ -76,9 +76,10 @@ async function main() {
   const analyticsdata = google.analyticsdata({ version: "v1beta", auth });
 
   const summary = [];
+  const errors = [];
 
   // overview
-  {
+  try {
     const metrics = ["activeUsers", "sessions", "screenPageViews", "averageSessionDuration", "bounceRate", "newUsers"];
     const raw = await runReport(analyticsdata, property, {
       dateRanges,
@@ -87,10 +88,13 @@ async function main() {
     const rows = raw.map((r) => toRow(r, [], metrics));
     writeFileSync(join(outDir, "overview.csv"), toCsv(rows, metrics));
     summary.push(`overview.csv: ${rows.length} rows`);
+  } catch (e) {
+    errors.push(`overview: ${e.message}`);
+    console.error("[ga4-snapshot] overview failed:", e.message);
   }
 
   // pages
-  {
+  try {
     const dims = ["pagePath"];
     const metrics = ["screenPageViews", "activeUsers", "averageSessionDuration", "engagementRate"];
     const raw = await runReportPaged(analyticsdata, property, {
@@ -102,10 +106,13 @@ async function main() {
     const rows = raw.map((r) => toRow(r, dims, metrics));
     writeFileSync(join(outDir, "pages.csv"), toCsv(rows, [...dims, ...metrics]));
     summary.push(`pages.csv: ${rows.length} rows`);
+  } catch (e) {
+    errors.push(`pages: ${e.message}`);
+    console.error("[ga4-snapshot] pages failed:", e.message);
   }
 
   // channels
-  {
+  try {
     const dims = ["sessionDefaultChannelGroup"];
     const metrics = ["sessions", "activeUsers", "screenPageViews", "bounceRate"];
     const raw = await runReport(analyticsdata, property, {
@@ -117,10 +124,13 @@ async function main() {
     const rows = raw.map((r) => toRow(r, dims, metrics));
     writeFileSync(join(outDir, "channels.csv"), toCsv(rows, [...dims, ...metrics]));
     summary.push(`channels.csv: ${rows.length} rows`);
+  } catch (e) {
+    errors.push(`channels: ${e.message}`);
+    console.error("[ga4-snapshot] channels failed:", e.message);
   }
 
   // devices
-  {
+  try {
     const dims = ["deviceCategory"];
     const metrics = ["sessions", "activeUsers", "screenPageViews", "averageSessionDuration"];
     const raw = await runReport(analyticsdata, property, {
@@ -131,10 +141,13 @@ async function main() {
     const rows = raw.map((r) => toRow(r, dims, metrics));
     writeFileSync(join(outDir, "devices.csv"), toCsv(rows, [...dims, ...metrics]));
     summary.push(`devices.csv: ${rows.length} rows`);
+  } catch (e) {
+    errors.push(`devices: ${e.message}`);
+    console.error("[ga4-snapshot] devices failed:", e.message);
   }
 
   // daily
-  {
+  try {
     const dims = ["date"];
     const metrics = ["activeUsers", "sessions", "screenPageViews", "newUsers"];
     const raw = await runReport(analyticsdata, property, {
@@ -146,11 +159,19 @@ async function main() {
     const rows = raw.map((r) => toRow(r, dims, metrics));
     writeFileSync(join(outDir, "daily.csv"), toCsv(rows, [...dims, ...metrics]));
     summary.push(`daily.csv: ${rows.length} rows`);
+  } catch (e) {
+    errors.push(`daily: ${e.message}`);
+    console.error("[ga4-snapshot] daily failed:", e.message);
   }
 
   console.log(`[ga4-snapshot] ${week} saved to ${outDir}`);
   console.log(`period: ${fmtDate(startDate)} ~ ${fmtDate(endDate)}`);
   console.log(summary.join("\n"));
+  if (errors.length > 0) {
+    console.warn(`[ga4-snapshot] ${errors.length} report(s) failed (partial results saved):`);
+    errors.forEach((e) => console.warn(" -", e));
+    process.exitCode = 1;
+  }
 }
 
 main().catch((e) => {
