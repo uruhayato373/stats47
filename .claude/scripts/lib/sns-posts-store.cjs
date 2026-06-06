@@ -19,6 +19,41 @@ const fs = require("node:fs");
 const path = require("node:path");
 
 const STORE_PATH = path.resolve(__dirname, "../../state/sns/posts.json");
+const LOG_PATH = path.resolve(__dirname, "../../state/sns/post-log.md");
+
+const PLATFORM_LABEL = {
+  instagram: "📸 Instagram",
+  x: "𝕏 X",
+  youtube: "▶️ YouTube",
+  tiktok: "🎵 TikTok",
+  note: "📝 note",
+};
+
+function regenerateLog(posts) {
+  const posted = posts
+    .filter((p) => p.status === "posted")
+    .sort((a, b) => (b.posted_at || "").localeCompare(a.posted_at || ""));
+  const latestDate = posted[0]?.posted_at?.slice(0, 10) ?? "—";
+  const rows = posted.map((p) => {
+    const date = (p.posted_at || "").slice(0, 10) || "—";
+    const platform = PLATFORM_LABEL[p.platform] || p.platform || "—";
+    const topic = `${p.domain || ""}/${p.content_key || ""}`;
+    const cap = (p.caption || "").replace(/\n/g, " ").replace(/\|/g, "｜").slice(0, 60) +
+      ((p.caption || "").length > 60 ? "…" : "");
+    const url = p.post_url ? `[🔗](${p.post_url})` : "—";
+    return `| ${date} | ${platform} | ${topic} | ${cap} | ${url} |`;
+  });
+  const md = [
+    "# SNS 投稿ログ\n",
+    "投稿済み全件。`posted_at` 降順。",
+    "スクリプトで自動生成 — 手編集しない (`sns-posts-store.cjs` が `insert()`/`updateById()` のたびに再生成)。\n",
+    `**${posted.length} 件** (最終更新: ${latestDate})\n`,
+    "| 日付 | 媒体 | コンテンツ | キャプション | URL |",
+    "|---|---|---|---|---|",
+    ...rows,
+  ].join("\n");
+  fs.writeFileSync(LOG_PATH, md + "\n");
+}
 
 function maxId(posts) {
   return posts.reduce((m, p) => Math.max(m, p.id || 0), 0);
@@ -43,7 +78,8 @@ function write(data) {
   fs.mkdirSync(path.dirname(STORE_PATH), { recursive: true });
   const tmp = `${STORE_PATH}.tmp`;
   fs.writeFileSync(tmp, `${JSON.stringify(data, null, 2)}\n`);
-  fs.renameSync(tmp, STORE_PATH); // 原子的置換 (read-modify-write の取りこぼし防止)
+  fs.renameSync(tmp, STORE_PATH);
+  regenerateLog(data.posts); // post-log.md を常に最新に保つ
 }
 
 /** 全レコード (配列)。呼び出し側で JS フィルタする。 */
