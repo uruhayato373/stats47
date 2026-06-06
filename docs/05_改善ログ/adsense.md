@@ -37,44 +37,6 @@ AdSense 広告収益・RPM・CTR・ビューアビリティの改善施策。施
 
 ---
 
-## [ADSENSE-OAUTH-01] ローカル .env.local の OAuth refresh_token 再認証
-
-- **status**: resolved / superseded (2026-06-06) — ローカル `.env.local` 経路は CI 専任化 (2026-05-29) で設計から除外。AdSense は GHA `fetch-metrics-weekly.yml` 経由で取得継続中 (W21/W22/W23 実取得)。OAuth 同意画面は **In production publish 済** (owner 確認 2026-06-06) で失効リスクも解消 → **完全解決・残アクションなし** → 下記「2026-06-06 更新」参照
-- **tier**: 1
-- **blocker**: なし (旧: local AdSense snapshot 取得不可。CI 専任化で local 取得自体を廃止したため解消)
-- **target_metric**: adsense-data-pipeline
-- **owner**: uruhayato373
-- **due**: 2026-06-07
-- **related_memory**: `~/.claude/projects/-Users-minamidaisuke-stats47/memory/project_adsense_local_oauth_expired.md`
-- **related_review**: 2026-05-16-session-summary.md (削除済、critical-review カバレッジ整理から移行)
-
-### 背景
-
-2026-05-16 に local の `GOOGLE_ADSENSE_REFRESH_TOKEN` (.env.local) が `invalid_grant` を返した。Google Testing OAuth は約 3 週間未使用で refresh_token 失効する仕様。GitHub Actions の secret は別系統で 2026-05-17 に更新済 (W21 snapshot は GHA 経由で取得可) だが、ローカルから `/fetch-adsense-data` 実行不能。
-
-### 施策
-
-`.claude/skills/analytics/fetch-adsense-data/oauth-setup/` の対話スクリプトで再認証 → 新 refresh_token を `.env.local` の `GOOGLE_ADSENSE_REFRESH_TOKEN` に保存。
-
-### 検証
-
-- **検証コマンド**: `/fetch-adsense-data last7d` がローカルで成功 (`invalid_grant` エラーが出ない)
-- **検証期日**: 2026-06-07
-- **期日後の判定**: ローカル取得成功 → effect/full
-
-### 2026-06-06 更新 (superseded)
-
-ローカル `.env.local` は 2026-05-29 の CI 専任化 (memory `project_env_local_ci_consolidation`) で削除済み (現在ファイル不在)。AdSense メトリクスは GHA `fetch-metrics-weekly.yml` (secrets 経由・AdSense step は `continue-on-error: true`) で取得継続中:
-
-- `.claude/state/metrics/adsense/history.csv`: W21 (¥47) / W22 (¥100) を実取得済み
-- GHA secret `GOOGLE_ADSENSE_REFRESH_TOKEN` は 2026-05-20 更新で有効 (`gh secret list` で確認)
-
-よって「ローカル再認証」タスクは不要 (実行しても `.env.local` 不在で `oauth-setup.js` が crash する)。
-
-**根本対策は実施済み (2026-06-06 確認)**: OAuth 同意画面は既に **In production** に publish 済み (owner 確認)。これにより Testing mode の約7日 auto-expire 問題は存在せず、GHA token の失効リスクも解消。実測の裏付け: token は 2026-05-20 設定で 17 日後 (06-06) も有効 (run 27046929360 で W23 取得成功・`invalid_grant` なし)。**本施策は完全解決・残アクションなし。**
-
-(参考) 万一 token を再発行する必要が生じた場合の手順: 一時 `.env.local` に CLIENT_ID/SECRET を置く → `node .claude/scripts/adsense/oauth-setup.js` → `gh secret set GOOGLE_ADSENSE_REFRESH_TOKEN` → `rm .env.local`。
-
 ## [ADSENSE-RPM-01] レバー A: RPM ¥36 → ¥65 (Viewability 54%→70%+)
 
 - **status**: pending
@@ -107,39 +69,6 @@ W21 (05/13-19) ベースライン: RPM ¥36、Viewability 54.3% (W17 の 61.9% �
   - RPM ≥ ¥50 → effect/full
   - ¥40 ≤ RPM < ¥50 → effect/partial
   - RPM < ¥40 → effect/none (自動広告/配置見直し)
-
-## [ADSENSE-DELIVERY-01] レバー B: デリバリー率 0.93 → 1.05 (lazyLoad 緩和)
-
-- **status**: pending
-- **tier**: 2
-- **target_metric**: adsense-delivery
-- **owner**: claude
-- **due**: 2026-06-21
-- **blocked_by**: PSI 日次計測の baseline 安定化 (LCP 悪化監視)
-- **related_review**: 2026-05-21-monetization.md (削除済、critical-review カバレッジ整理から移行)
-
-### 背景
-
-W21 で Impressions/PV 0.93 まで改善済 (W17 の 0.42 から)。残課題は `AdSenseScript.tsx` の 3,000ms 遅延 + `AdSenseAd.tsx` の lazyLoad `rootMargin`。Mobile LCP 5-19 秒の土台で深い枠が描画前離脱 → 発火しない。
-
-### 施策
-
-1. `AdSenseScript.tsx` の 3,000ms 遅延を測定しながら段階的に短縮 (3000 → 2000 → 1000ms の A/B)
-2. `AdSenseAd.tsx` の lazyLoad `rootMargin` を緩和 (例: 0px → 200px)
-3. 各変更後 PSI 日次計測で LCP 悪化を監視、ADVERSE なら roll back
-
-### 想定効果
-
-- 想定: 0.93 → 1.05 (1.1x)、これ以上は LCP 改善前提
-- 根拠: lazyLoad rootMargin を広げた分だけ広告 request が増える比例関係
-
-### 検証
-
-- **検証コマンド**: 施策後 2 週で `Impressions/PV` を計測、並行で `.claude/state/metrics/psi/LATEST.md` の Mobile LCP を確認
-- **検証期日**: 2026-06-21 (W25)
-- **期日後の判定**:
-  - Impressions/PV ≥ 1.05 AND LCP 悪化 +200ms 以内 → effect/full
-  - Impressions/PV 増 + LCP 悪化 +500ms 超 → effect/adverse (roll back)
 
 ## [ADSENSE-MOBILE-01] モバイル広告の位置改善（深すぎる配置の是正）
 

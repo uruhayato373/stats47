@@ -203,37 +203,6 @@ Cloudflare Dashboard > Security > WAF > Custom rules に以下を追加:
 - **検証期日**: 2026-06-14
 - **期日後の判定**: 5 ファイル揃う → effect/full、欠損残る → effect/partial
 
-## [GA4-BOT-03] notSet / overseas sessions の週次トラッキング自動化
-
-- **status**: pending
-- **tier**: 3
-- **target_metric**: ga4-measurement-accuracy
-- **owner**: 未定 (claude/uruhayato373 どちらでも)
-- **due**: 2026-07-01
-- **blocked_by**: GA4-CLEAN-01 (Phase 1) 完了
-- **related_review**: 2026-05-16-ga4-bot-pollution.md (削除済、critical-review カバレッジ整理から移行)
-
-### 背景
-
-`/fetch-ga4-data` snapshot で生成される `pollution-summary.csv` は週次の単発出力で時系列化されていない。前週比のアラート (例: notSet が +50% 増) が出せない状態。
-
-### 施策
-
-1. `/fetch-ga4-data` snapshot 実行後、`pollution-summary.csv` を `.claude/state/metrics/ga4/pollution-history.csv` に append
-2. `/weekly-review` で前週比 notSet/overseas 増減を表示
-3. 閾値 (例: notSet が前週比 +50% 増) を超えたら `[GA4 Alert]` Issue 起票
-
-### 想定効果
-
-- 想定: bot 流入の急増を 1 週間以内に検知、Cloudflare WAF rule のメンテ判断ができる
-- 想定工数: M (1-2h)、GA4-CLEAN-01 Phase 1 完了後に着手可
-
-### 検証
-
-- **検証コマンド**: `.claude/state/metrics/ga4/pollution-history.csv` が 2 週分以上の row を持つ
-- **検証期日**: 2026-07-01
-- **期日後の判定**: 自動 append + 前週比表示が機能 → effect/full
-
 ## [GA4-TEMPLATE] 新規施策テンプレ
 
 新しい施策を追加するとき以下をコピーして埋める。
