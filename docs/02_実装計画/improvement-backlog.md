@@ -33,7 +33,7 @@ SEO / 性能 / コスト / コンテンツ施策の TODO 一覧。旧 `docs/05_�
 | ID | タイトル | Status | Due | Owner | Metric |
 |---|---|---|---|---|---|
 | GA4-BOT-02 | Cloudflare WAF rule で bot スキャナをブロック | pending | 2026-06-14 | uruhayato373 | ga4 |
-| GA4-PIPELINE-01 | fetch-ga4-data snapshot に per-report try/catch を標準化 | pending | 2026-06-14 | claude | ga4 |
+| GA4-PIPELINE-01 | fetch-ga4-data snapshot に per-report try/catch を標準化 — deployed 2026-06-06 | effect/full | 2026-06-14 | claude | ga4 |
 | AICONTENT-001 | wheat-flour-consumption-quantity ai_content リライト | pending | 2026-06-15 | claude | ai-content |
 | BLOG-CTR-05 | Tier 3 brushup (3 記事) + /category description 差別化 | pending | 2026-06-20 | claude | gsc |
 | AFF-02 | 広告ゼロ 8 軸の在庫補充 | pending | 2026-06-21 | uruhayato373 | affiliate |
