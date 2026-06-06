@@ -14,13 +14,10 @@ import { Card, CardContent, CardHeader, CardTitle } from "@stats47/components/at
 import { ShareButtons } from "@/components/molecules/ShareButtons";
 
 import {
-    FurusatoNozeiCard,
-    FurusatoNozeiPopularCard,
     SidebarPromoBanner,
-    pickPrefCodeForSlug,
 } from "@/features/ads";
 import { BlogSidebarTextAds, resolveAffiliateBannersByCategory } from "@/features/ads/server";
-import { TagBadge, ArticleRelatedBooks, ArticleRenderer, ArticleTableOfContents, extractPrefecturesFromArticle, generateBlogMetadata, type Article } from "@/features/blog";
+import { TagBadge, ArticleRenderer, ArticleTableOfContents, generateBlogMetadata, type Article } from "@/features/blog";
 import {
     ArticleAffiliateBanner,
     RelatedRankingsSection,
@@ -121,27 +118,6 @@ export default async function BlogPostPage({ params }: PageProps) {
         resolveAffiliateBannersByCategory(),
     ]);
 
-    // 記事に登場する都道府県を抽出 (ふるさと納税 widget の表示先決定用)
-    const prefCodes = extractPrefecturesFromArticle({
-        title: article.title,
-        body: article.content,
-        tagKeys,
-        limit: 1,
-    });
-
-    /**
-     * ふるさと納税 widget の 3 段ロジック:
-     *   1. 記事から都道府県を抽出できた → その県を表示
-     *   2. 抽出できなかった → slug ハッシュで決定論的に県を選ぶ (記事固定・サイト全体で 47 県分散)
-     *   3. (どちらでも楽天 API レスポンスが空なら) 全国人気返礼品 fallback
-     *
-     * 1/2 は同じ `<FurusatoNozeiCard>` を使い、3 は別コンポーネント。
-     * - 並べて表示する必要はないので「1/2 を表示できなかった時のみ 3 を表示」する想定
-     * - ただし FurusatoNozeiCard は API 呼出結果が空でも県固定リンクで描画する
-     *   ため、3 は「1 と 2 の両方が無効 (例: 楽天 APP ID 未設定)」時のみ意味を持つ
-     */
-    const furusatoAreaCode = prefCodes[0] ?? pickPrefCodeForSlug(slug);
-
     // 記事本文中の /blog/{slug} リンクからスラッグを抽出し、DB からタイトルを取得
     const blogLinkSlugs = [...article.content.matchAll(/\]\(\/blog\/([a-z0-9-]+)\)/g)]
         .map((m) => m[1])
@@ -212,11 +188,12 @@ export default async function BlogPostPage({ params }: PageProps) {
             </div>
 
             {/* メインコンテンツ
-                - xl+: 3 カラム (左 300 + 本文 auto + 右 300、左右対称で 300x250 バナーを両サイドに配置)
-                - xl 未満: 1 カラム
+                - xl+ (1280px〜): 3 カラム (左 280 + 本文 + 右 360)
+                - lg (1024〜1279px): 2 カラム (本文 + 右レール 360。左 TOC は記事冒頭へ積み下ろし)
+                - lg 未満: 1 カラム
                 container は max-w-[1700px] で 1920px+ 画面の余白を最小化 */}
             <div className="mx-auto max-w-[1700px] px-4 py-6">
-                <div className="xl:grid xl:grid-cols-[280px_minmax(0,1fr)_360px] xl:gap-8 xl:items-start">
+                <div className="lg:grid lg:grid-cols-[minmax(0,1fr)_360px] lg:gap-8 lg:items-start xl:grid-cols-[280px_minmax(0,1fr)_360px]">
 
                     {/* 左カラム (xl+): TOC + 高単価アフィリエイトバナー + 上部 AdSense (sticky) */}
                     <aside className="hidden xl:flex xl:flex-col xl:gap-3 xl:sticky xl:top-20 xl:max-h-[calc(100vh-5.5rem)] xl:overflow-y-auto xl:pr-1">
@@ -239,7 +216,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                             <CardContent className="p-6 sm:p-8 overflow-hidden">
                                 {/* 記事ヘッダー */}
                                 <header className="mb-8">
-                                    <h1 className="mb-4 border-b-4 border-primary pb-3 text-lg font-bold">{article.title}</h1>
+                                    <h1 className="mb-4 border-b-4 border-primary pb-3 text-2xl font-bold">{article.title}</h1>
                                     {article.frontmatter.subtitle && (
                                         <p className="mb-4 text-sm text-muted-foreground">{article.frontmatter.subtitle}</p>
                                     )}
@@ -276,8 +253,8 @@ export default async function BlogPostPage({ params }: PageProps) {
                         {/* バナー広告（タグキーベース・ランダム表示） */}
                         <ArticleAffiliateBanner tagKeys={tagKeys} />
 
-                        {/* xl 未満で表示する各種関連 widget (xl+ では右カラムに集約) */}
-                        <div className="space-y-6 xl:hidden">
+                        {/* lg 未満で表示する各種関連 widget (lg+ では右カラムに集約) */}
+                        <div className="space-y-6 lg:hidden">
                             <Card>
                                 <CardHeader className="pb-2">
                                     <CardTitle className="text-sm font-medium text-muted-foreground">広告</CardTitle>
@@ -287,12 +264,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                                 </CardContent>
                             </Card>
 
-                            <ArticleRelatedBooks tagKeys={tagKeys} />
-
                             <RelatedRankingsSection tagKeys={tagKeys} />
-
-                            <FurusatoNozeiCard areaCode={furusatoAreaCode} />
-                            {prefCodes.length === 0 && <FurusatoNozeiPopularCard />}
 
                             <BlogRelatedArticlesSection articles={relatedArticles} currentSlug={slug} articleTagsMap={articleTagsMap} />
 
@@ -310,27 +282,13 @@ export default async function BlogPostPage({ params }: PageProps) {
                         </div>
                     </main>
 
-                    {/* 右カラム (xl+): 関連 widget + 広告 (independent scroll) */}
-                    <aside className="hidden xl:flex xl:flex-col xl:gap-3 xl:sticky xl:top-20 xl:max-h-[calc(100vh-5.5rem)] xl:overflow-y-auto xl:pr-1">
+                    {/* 右カラム (lg+): 関連 widget + 広告 (independent scroll)。lg=2カラム(本文+右)、xl=3カラム */}
+                    <aside className="hidden lg:flex lg:flex-col lg:gap-3 lg:sticky lg:top-20 lg:max-h-[calc(100vh-5.5rem)] lg:overflow-y-auto lg:pr-1">
                         {/* A8.net バナー広告 (above-fold 最上部) */}
                         <SidebarPromoBanner index={1} position="sidebar-right" />
 
-                        {/* 関連書籍 */}
-                        <Card>
-                            <CardHeader className="py-3 px-4">
-                                <CardTitle className="text-base">関連書籍</CardTitle>
-                            </CardHeader>
-                            <CardContent className="p-4 pt-3">
-                                <ArticleRelatedBooks tagKeys={tagKeys} compact />
-                            </CardContent>
-                        </Card>
-
                         {/* 関連ランキング */}
                         <RelatedRankingsSection tagKeys={tagKeys} compact />
-
-                        {/* ふるさと納税: 記事の都道府県 (or slug ハッシュ) */}
-                        <FurusatoNozeiCard areaCode={furusatoAreaCode} />
-                        {prefCodes.length === 0 && <FurusatoNozeiPopularCard />}
 
                         {/* 関連記事 */}
                         <BlogRelatedArticlesSection articles={relatedArticles} currentSlug={slug} articleTagsMap={articleTagsMap} compact />
