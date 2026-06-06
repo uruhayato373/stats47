@@ -49,7 +49,7 @@ interface RightRailWidgetsProps {
  *   7. bottomWidgets
  *   8. AdSense Rectangle (下部)
  *
- * デフォルトで `xl:sticky xl:top-20` により sticky 配置。独立スクロールなし。
+ * デフォルトで `xl:max-h-[calc(100vh-5.5rem)] xl:overflow-y-auto` により sticky + 独立スクロール配置。
  */
 export async function RightRailWidgets({
   furusatoAreaCode,
@@ -65,7 +65,7 @@ export async function RightRailWidgets({
   stickyScroll = true,
 }: RightRailWidgetsProps) {
   const scrollClass = stickyScroll
-    ? "xl:sticky xl:top-20 xl:pr-1"
+    ? "xl:sticky xl:top-20 xl:max-h-[calc(100vh-5.5rem)] xl:overflow-y-auto xl:pr-1"
     : "";
 
   return (
