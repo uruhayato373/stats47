@@ -123,11 +123,10 @@ h1 の `text-lg`→`text-2xl` を修正済み。
 - ランキングページの `container mx-auto px-4 py-4` の `py-4` を `py-6` 程度に
 - カード間の `gap` を `gap-3` → `gap-4` 程度に
 
-### ③ body font-size の検討
-- 現状 effective 12px root（text-base = 12px）
-- `html { font-size: 13.5px }` 程度に引き上げるとサイト全体で1段階改善
-- ただし全コンポーネントに影響するため、十分なビジュアルテストが必要
-- **工数が大きいため、①②を先に実施して効果を確認してから判断する**
+### ③ body font-size の検討 — ✅ 完了 (2026-06-06)
+- **対応済み**: `html { font-size: 17px }` へ引き上げ（globals.css）+ 記事 h2/h3 を Zenn 完全準拠化。サイト全体の文字・余白が 6% 比例拡大。本番デプロイ・モバイル375px回帰検証済 (はみ出しなし)。
+- 詳細: `docs/04_レビュー/critical-review/2026-06-06-design-review.md`
+- 残: ①テーブル padding ②ページ余白（下記、別途）
 
 ## 完了条件
 
