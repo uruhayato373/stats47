@@ -25,7 +25,7 @@ SEO / 性能 / コスト / コンテンツ施策の TODO 一覧。旧 `docs/05_�
 | Q-DESIGN-01 | ranking/blog 問い設計の集客施策 (戦略 doc20 起点) | pending | 2026-06-30 | claude | gsc |
 | CWV-RANKING-LCP-01 | ranking mobile LCP — map tile preload を lg 以上に限定 | pending | 2026-07-01 | claude | psi |
 | CWV-THEMES-CLS-01 | useSearchParams→useEffect 置換で ThemeDashboardTabbed Suspense fallback={null} CLS を除去 — deployed 2026-06-06 | effect/pending | 2026-07-01 | claude | psi |
-| P0-RANKING-INDEX | /ranking インデックス率 43% → 70%+ 改善 (100x Phase 0 主軸) — KNOWN_RANKING_KEYS +128 完了 (2026-06-06)。残: all.json sync + sitemap 追加 | in-progress | 2026-07-06 | claude | gsc |
+| P0-RANKING-INDEX | /ranking インデックス率 43% → 70%+ 改善 (100x Phase 0 主軸) — KNOWN +128・all.json sync 完了(2026-06-06, active=2093)。sitemap は PR #447 デプロイ後に自動反映。GSC 計測は 4-6 週後 | effect/pending | 2026-07-06 | claude | gsc |
 | P0-AREAS-01 | /areas/{prefCode} 47 ページの SEO 監査 + 内部リンク強化 | pending | 2026-07-06 | claude | indexing |
 
 ## Tier 2 (Should)
