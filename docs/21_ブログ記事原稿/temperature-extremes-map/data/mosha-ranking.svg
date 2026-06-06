@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 580 380" style="max-width:580px;width:100%;font-family:sans-serif">
+  <title>猛暑日（35℃以上）日数ランキング</title>
+  <rect width="580" height="380" fill="#f8fafc" rx="8"/>
+  <text x="290" y="24" text-anchor="middle" font-size="13" font-weight="bold" fill="#1e293b">猛暑日（35℃以上）年間日数（2024年）</text>
+  <text x="290" y="40" text-anchor="middle" font-size="11" fill="#64748b">上位10県・下位5県</text>
+  <!-- bars top 10 -->
+  <rect x="110" y="52" width="232" height="20" fill="#ef4444" rx="2"/>
+  <rect x="110" y="76" width="217" height="20" fill="#ef4444" rx="2"/>
+  <rect x="110" y="100" width="203" height="20" fill="#f87171" rx="2"/>
+  <rect x="110" y="124" width="200" height="20" fill="#f87171" rx="2"/>
+  <rect x="110" y="148" width="187" height="20" fill="#fca5a5" rx="2"/>
+  <rect x="110" y="172" width="186" height="20" fill="#fca5a5" rx="2"/>
+  <rect x="110" y="196" width="182" height="20" fill="#fca5a5" rx="2"/>
+  <rect x="110" y="220" width="181" height="20" fill="#fca5a5" rx="2"/>
+  <rect x="110" y="244" width="174" height="20" fill="#fecaca" rx="2"/>
+  <rect x="110" y="268" width="174" height="20" fill="#fecaca" rx="2"/>
+  <!-- labels top 10 -->
+  <text x="105" y="67" text-anchor="end" font-size="11" fill="#334155">1. 京都</text>
+  <text x="105" y="91" text-anchor="end" font-size="11" fill="#334155">2. 埼玉</text>
+  <text x="105" y="115" text-anchor="end" font-size="11" fill="#334155">3. 山梨</text>
+  <text x="105" y="139" text-anchor="end" font-size="11" fill="#334155">4. 岐阜</text>
+  <text x="105" y="163" text-anchor="end" font-size="11" fill="#334155">5. 奈良</text>
+  <text x="105" y="187" text-anchor="end" font-size="11" fill="#334155">6. 岡山</text>
+  <text x="105" y="211" text-anchor="end" font-size="11" fill="#334155">7. 大阪</text>
+  <text x="105" y="235" text-anchor="end" font-size="11" fill="#334155">8. 熊本</text>
+  <text x="105" y="259" text-anchor="end" font-size="11" fill="#334155">9. 愛知</text>
+  <text x="105" y="283" text-anchor="end" font-size="11" fill="#334155">10. 福岡</text>
+  <!-- values top 10 -->
+  <text x="347" y="67" font-size="11" fill="#b91c1c" font-weight="bold">19.4日</text>
+  <text x="332" y="91" font-size="11" fill="#b91c1c" font-weight="bold">18.1日</text>
+  <text x="318" y="115" font-size="11" fill="#dc2626">16.9日</text>
+  <text x="315" y="139" font-size="11" fill="#dc2626">16.7日</text>
+  <text x="302" y="163" font-size="11" fill="#dc2626">15.6日</text>
+  <text x="301" y="187" font-size="11" fill="#dc2626">15.2日</text>
+  <text x="297" y="211" font-size="11" fill="#dc2626">14.5日</text>
+  <text x="296" y="235" font-size="11" fill="#b45309">15.1日</text>
+  <text x="289" y="259" font-size="11" fill="#b45309">13.8日</text>
+  <text x="289" y="283" font-size="11" fill="#b45309">13.1日</text>
+  <!-- 区切り -->
+  <line x1="20" y1="300" x2="560" y2="300" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="4"/>
+  <text x="290" y="318" text-anchor="middle" font-size="10" fill="#94a3b8">…最下位（猛暑日がほぼゼロ）…</text>
+  <!-- 最下位圏 -->
+  <rect x="110" y="327" width="6" height="20" fill="#bfdbfe" rx="2"/>
+  <text x="105" y="342" text-anchor="end" font-size="11" fill="#334155">47. 沖縄</text>
+  <text x="121" y="342" font-size="11" fill="#1e40af" font-weight="bold">0.2日</text>
+  <text x="290" y="370" text-anchor="middle" font-size="10" fill="#94a3b8">出典: 総務省 e-Stat 社会・人口統計体系 2024年</text>
+</svg>
