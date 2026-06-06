@@ -23,10 +23,10 @@ SEO / 性能 / コスト / コンテンツ施策の TODO 一覧。旧 `docs/05_�
 | INDEXING-SITEMAP-02 | sitemap を「コンテンツ実体のある URL」に一致させ未登録を削減 — deployed 2026-06-06: KNOWN_RANKING_KEYS 追加で 948→2125 ranking URL (+1177)。GSC 計測 4-6 週後 | effect/pending | 2026-07-18 | claude | indexing |
 | ADSENSE-RPM-01 | RPM ¥36 → ¥65 (Viewability 54%→70%+) — W23 実測 RPM ¥50 / Viewability 60.4%。deployed 2026-06-06: ranking sidebar 広告を先頭移動。GSC計測 4週後 | effect/pending | 2026-07-04 | claude | adsense |
 | Q-DESIGN-01 | ranking/blog 問い設計の集客施策 (戦略 doc20 起点) | pending | 2026-06-30 | claude | gsc |
-| CWV-RANKING-LCP-01 | ranking mobile LCP — map tile preload を lg 以上に限定 | pending | 2026-07-01 | claude | psi |
+| CWV-RANKING-LCP-01 | ranking mobile LCP — map tile preload を lg 以上に限定 — deployed (commit 1b09ae45): media="(min-width:1024px)" 適用済み。PSI 計測 4 週後 | effect/pending | 2026-07-01 | claude | psi |
 | CWV-THEMES-CLS-01 | useSearchParams→useEffect 置換で ThemeDashboardTabbed Suspense fallback={null} CLS を除去 — deployed 2026-06-06 | effect/pending | 2026-07-01 | claude | psi |
 | P0-RANKING-INDEX | /ranking インデックス率 43% → 70%+ 改善 (100x Phase 0 主軸) — KNOWN +128・all.json sync 完了(2026-06-06, active=2093)。sitemap は PR #447 デプロイ後に自動反映。GSC 計測は 4-6 週後 | effect/pending | 2026-07-06 | claude | gsc |
-| P0-AREAS-01 | /areas/{prefCode} 47 ページの SEO 監査 + 内部リンク強化 | pending | 2026-07-06 | claude | indexing |
+| P0-AREAS-01 | /areas/{prefCode} 47 ページの SEO 監査 + 内部リンク強化 — deployed 2026-06-06: AreaRelatedBlogArticles 追加 (strength/weakness rankingKey → tag → blog) + CategoryNavGrid の theme なし category → /category/{key} リンク修正。GSC 計測 4-6 週後 | effect/pending | 2026-07-18 | claude | indexing |
 
 ## Tier 2 (Should)
 

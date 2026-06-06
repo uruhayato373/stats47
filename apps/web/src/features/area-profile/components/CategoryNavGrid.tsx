@@ -38,7 +38,7 @@ export function CategoryNavGrid({ categories, areaCode }: Props) {
                     const themeSlug = CATEGORY_TO_THEME[cat.categoryKey];
                     const href = themeSlug
                         ? `/areas/${areaCode}/${themeSlug}`
-                        : `/areas/${areaCode}`;
+                        : `/category/${cat.categoryKey}`;
                     const color = getCategoryColor(cat.categoryKey);
                     return (
                         <Link

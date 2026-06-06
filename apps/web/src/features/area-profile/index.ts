@@ -17,6 +17,7 @@ export { CategoryNavGrid } from "./components/CategoryNavGrid";
 export { CategorySelect } from "./components/CategorySelect";
 export { CitiesNavCard } from "./components/CitiesNavCard";
 export { AreaRelatedRankingsCard } from "./components/AreaRelatedRankingsCard";
+export { AreaRelatedBlogArticles } from "./components/AreaRelatedBlogArticles";
 
 // チャートセクション（Server Component）
 export { AreaChartSection } from "./components/AreaChartSection";
