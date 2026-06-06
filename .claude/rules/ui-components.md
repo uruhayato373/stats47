@@ -7,6 +7,31 @@
 - **角丸はサイト全体でフラット（`--radius: 0`）**。`rounded-xl`/`rounded-2xl` の手動付与は禁止（`rounded-none`）。**円形のみ `rounded-full`**（アイコン背景・ピル・アバター）。
 - **本文フォントは system スタック**（游ゴシック/Hiragino、Web フォント非依存）。Inter/Noto Sans JP は読み込まない（コードのみ Geist Mono）。
 
+## Sticky aside の max-h 必須ルール（★削除禁止・2026-06-06）
+
+CSS Grid (`lg:grid` + `items-start`) 内の `sticky` aside には **必ず `max-h-[calc(100vh-5.5rem)]` と `overflow-hidden` または `overflow-y-auto` を付ける**。
+
+- Grid の行高 = 列のうち最も高い要素で決まる。aside に `max-h` がないと aside の自然高が行高を決定し、フッターが画面外に押し出される（記事本文の末尾でスクロール終了しているように見えてもフッターに届かない）。
+- **削除した事例**: 2026-06-06、subagent が blog/category/ranking ページの aside から `max-h` を除去してフッターが非表示になった（commit `5d9afb24`、revert `a2c76216`・`b18be52a`）。
+
+```tsx
+// ✅ 必須パターン (blog/[slug]/page.tsx の右 aside)
+<aside className="hidden lg:flex lg:flex-col lg:gap-3 lg:sticky lg:top-20
+                  lg:max-h-[calc(100vh-5.5rem)] lg:overflow-hidden lg:pr-1">
+
+// ✅ RightRailWidgets の scrollClass (stickyScroll=true 時)
+"xl:sticky xl:top-20 xl:max-h-[calc(100vh-5.5rem)] xl:overflow-y-auto xl:pr-1"
+
+// ❌ max-h なしは禁止 (フッターが見えなくなる)
+<aside className="hidden lg:flex lg:flex-col lg:gap-3 lg:sticky lg:top-20 lg:pr-1">
+```
+
+適用箇所:
+- `apps/web/src/app/blog/[slug]/page.tsx` — 左・右 aside
+- `apps/web/src/app/category/[categoryKey]/page.tsx` — 右 aside
+- `apps/web/src/features/redesign/components/RightRailWidgets.tsx` — `scrollClass`
+- 3カラムレイアウトを持つすべての新規ページ
+
 ## コンポーネント選択
 
 - **`@stats47/components` の shadcn ベースコンポーネントを優先使用する。**

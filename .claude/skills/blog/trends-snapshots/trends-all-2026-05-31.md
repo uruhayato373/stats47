@@ -5,7 +5,7 @@
 > トレンド総数: 約110件（google-trends 数件 / yahoo 約20 / hatena 約12 / google-news 約25 / note 15 / gsc 22クエリ）→ 採用候補: 9 / 簡易★☆☆: 8 / 除外: 大多数
 > クロスソースヒット（3ソース以上）: 3件（物価・値上げ／人口減少／台風・気象）── うち新規余地は人口減少のみ
 > 白書エンリッチ: 未実行（`--whitepaper` 指定なし → Phase 4.5/4.6 skip）
-> 既存記事との突合: R2 `app/blog/all.json` の公開済 **212本** をフル参照（`.local/r2` は SSD 未接続のため public R2 経由で取得）
+> 既存記事との突合: R2 `app/blog/all.json` の公開済 **212本** をフル参照（public R2 経由で取得）
 > ソース注記: Google Trends はほぼ芸能・事件で統計化トピック僅少（官僚給与・ドンキPB のみ拾える）/ Yahoo「ライフ」フィードは HTTP 500 でスキップ / GSC は WoW（current 2026-05-20〜05-27 vs prev 05-13〜05-20）
 
 ---
