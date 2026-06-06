@@ -12,10 +12,8 @@
  * title/seoTitle/description/tags 等は常に現行 frontmatter で refresh (brushup 反映)。
  *
  * 使用方法:
- *   - SSD 接続: NODE_ENV=development NODE_OPTIONS='--conditions react-server' npx tsx scripts/export-blog-snapshot.ts
- *       → .local/r2 のローカル FS を list/read、slug は list から列挙
- *   - SSD 非接続: R2_PUBLIC_FETCH_URL=https://storage.stats47.jp NODE_OPTIONS='--conditions react-server' npx tsx ...
- *       → 公開 URL から read。list 不可なので slug は committed seed (packages/database/seed/articles.json) から列挙
+ *   R2_PUBLIC_FETCH_URL=https://storage.stats47.jp NODE_OPTIONS='--conditions react-server' npx tsx scripts/export-blog-snapshot.ts
+ *   → 公開 URL から read。list 不可なので slug は committed seed (packages/database/seed/articles.json) から列挙
  */
 
 import dotenv from "dotenv";
@@ -84,7 +82,7 @@ interface ArticleSeedRow {
 
 /**
  * slug → {ext, hasCharts} を列挙する。
- *  1. R2 list (SSD ローカル FS / S3) — data/*.json まで見て hasCharts を実測
+ *  1. R2 list (ローカル FS / S3) — data/*.json まで見て hasCharts を実測
  *  2. 不可なら committed seed (packages/database/seed/articles.json) から列挙
  *     (公開URL専用環境。format/has_charts は seed 値を採用)
  */
@@ -139,9 +137,8 @@ async function main() {
   // frontmatter だけからは published を完全復元できない。旧 sync-articles-from-r2 と同じく
   // 「frontmatter の published 明示が最優先、無ければ配信中の状態を保持」する sticky 方式にする。
   //
-  // 運用注意: prior は「配信中 (cloud) の all.json」が真。SSD 接続時は fetchFromR2 がローカルを
-  // 先に読むため、ローカル all.json が古いと sticky 源がずれる。再生成前にローカル all.json を
-  // cloud と同期するか (例: scripts/dev で cp)、R2_PUBLIC_FETCH_URL 経由で cloud を読ませること。
+  // 運用注意: prior は「配信中 (cloud) の all.json」が真。R2_PUBLIC_FETCH_URL を設定して
+  // cloud を読ませること (公開 URL 経由が標準)。
   const prior = await fetchFromR2AsJson<BlogSnapshot>(BLOG_SNAPSHOT_KEY);
   const priorBySlug = new Map<string, SnapshotArticle>(
     (prior?.articles ?? []).map((a) => [a.slug, a]),

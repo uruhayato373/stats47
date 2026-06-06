@@ -63,7 +63,7 @@ git TS 化し永続 D1 を全廃した。アプリが読む各データの真実
 | 週次計画・週次レビュー | `docs/03_週次運用/週次{計画,レビュー}/YYYY-Www.md` |
 | 週次メトリクスサマリ（自動生成） | `docs/03_週次運用/メトリクス/YYYY-Www.md` |
 | 批判的レビュー・事前検死・SEO 監査・SNS 週報・パフォーマンス・コスト月報 | `docs/04_レビュー/<subcategory>/{YYYY-MM-DD,YYYY-Www,YYYY-MM}.md` |
-| 改善施策の人間向け要約 | `docs/05_改善ログ/{gsc,ga4,adsense,psi,affiliate,cloudflare-cost}.md` (append-only) |
+| 改善施策の一覧・TODO | `docs/02_実装計画/improvement-backlog.md` |
 | YouTube 実験 (1 実験 1 ファイル) | `docs/15_実験ログ/youtube/EXP-NNN.md` |
 | コンテンツ backlog | `docs/{20_ブログ記事企画,22_YouTube企画,30_note記事企画}/backlog/` |
 | 未着手の機能・自動化・UI 改善 backlog | `docs/50_Issues/{feature,automation,ui-improvements}-backlog.md` |
@@ -78,9 +78,9 @@ git TS 化し永続 D1 を全廃した。アプリが読む各データの真実
 |---|---|
 | GSC/GA4/AdSense 週次 snapshot (CSV) + budget 閾値 | `.claude/skills/analytics/{gsc,ga4,adsense}-improvement/reference/`（生 CSV + budgets.json、GitHub Actions が日曜 JST 20:00 に自動更新） |
 | GSC/GA4/AdSense/PSI の週次集約履歴（前週比・人間向け LATEST.md） | `.claude/state/metrics/{gsc,ga4,adsense,psi}/{history.csv,LATEST.md}`（GitHub Actions が自動更新、人間は LATEST.md を見れば 10 秒で把握） |
-| 改善施策の agent 用詳細ログ (検証コマンド・仮説・期日) | `.claude/skills/analytics/<metric>-improvement/reference/improvement-log.md` (2 層構造の下層) |
+| 改善施策の agent 用詳細ログ (検証コマンド・仮説・期日) | `.claude/skills/analytics/<metric>-improvement/reference/improvement-log.md` |
 | PSI 日次計測（19 URL × mobile/desktop） | `.claude/state/metrics/psi/psi-batch-*.json`（GitHub Actions 日次 JST 02:00、閾値違反時 `[PSI Alert]` Issues 起票）/ URL リスト: `.claude/config/psi-urls.txt` / 閾値: `.claude/skills/analytics/performance-improvement/budgets.json` |
-| Cloudflare 月次 snapshot JSON + budget 閾値 | `.claude/skills/analytics/cloudflare-cost-improvement/reference/`（人間向け要約は `docs/04_レビュー/cloudflare-cost/YYYY-MM.md` と `docs/05_改善ログ/cloudflare-cost.md`） |
+| Cloudflare 月次 snapshot JSON + budget 閾値 | `.claude/skills/analytics/cloudflare-cost-improvement/reference/`（人間向け要約は `docs/04_レビュー/cloudflare-cost/YYYY-MM.md`、施策一覧は `docs/02_実装計画/improvement-backlog.md`） |
 | Cloudflare 日次 usage（D1/Workers/R2） | `.claude/state/metrics/cloudflare/{snapshots/YYYY-MM-DD.json,history.csv,LATEST.md}`（GitHub Actions 日次 JST 02:30、閾値違反時 `[Cloudflare Alert]` Issues 起票）/ 閾値: `.claude/skills/analytics/cloudflare-cost-improvement/reference/budgets-daily.json` |
 | SNS 投稿メトリクス時系列 | `.claude/skills/analytics/sns-metrics-improvement/snapshots/YYYY-MM-DD/metrics.csv`（書き込み: `.claude/scripts/lib/sns-metrics-store.cjs`） |
 | アフィリエイト在庫棚卸し + GA4 実測 snapshot | `.claude/state/ads/{inventory-*.json,ga4-affiliate-*.json}`（`affiliate-dashboard-refresh.yml` / `affiliate-ga4-weekly.yml` が生成・commit-back、AFF-05） |
@@ -109,14 +109,14 @@ git TS 化し永続 D1 を全廃した。アプリが読む各データの真実
 
 迷う場合は **docs/ または .claude/ を優先**。アプリが読む配信データは常に **R2 JSON**（上流 SSOT は git TS、永続 DB は持たない）。
 
-## 2 層構造（improvement 系）
+## 改善施策の記録構造 (1 層構造)
 
-改善施策スキル (gsc / ga4 / adsense / affiliate / cloudflare-cost / psi / sns-metrics) は **必ず 2 層** で記録:
+改善施策スキル (gsc / ga4 / adsense / affiliate / cloudflare-cost / psi / sns-metrics) は以下の構造で記録:
 
-| 層 | 場所 | 用途 |
-|---|---|---|
-| 人間向け要約 | `docs/05_改善ログ/<metric>.md` | section 単位の施策一覧 + status (pending/effect/full等) |
-| agent 用詳細 | `.claude/skills/analytics/<metric>-improvement/reference/improvement-log.md` | 検証コマンド・仮説・URL inspection 結果など |
+| 場所 | 用途 |
+|---|---|
+| `docs/02_実装計画/improvement-backlog.md` | 全施策の一覧 (簡易表)。**TODO 真実源**。status / Tier / 期日を管理 |
+| `.claude/skills/analytics/<metric>-improvement/reference/improvement-log.md` | agent 用詳細ログ。検証コマンド・仮説・URL inspection 結果など |
 
 ## 本原則の根拠
 

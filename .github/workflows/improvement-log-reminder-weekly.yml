@@ -1,9 +1,8 @@
 name: 🔁 Improvement Log Triage (weekly)
+# 2026-06-06: docs/05_改善ログ/ 廃止により無効化。TODO 真実源は docs/02_実装計画/improvement-backlog.md に移行。
 
 on:
-  schedule:
-    - cron: "0 13 * * 0" # JST Sun 22:00 (UTC Sun 13:00)
-  workflow_dispatch:
+  workflow_dispatch: # schedule は削除 (手動実行のみ残置)
     inputs:
       overdue_days:
         description: "deployed_at から何日以上経過したエントリを対象にするか (default 14)"

@@ -150,7 +150,7 @@ raw 要素を components パッケージへ置換、フォーマッタは `@stat
 - **apps/web に DB 依存が残存（本体検証済）**: `package.json` に `@stats47/database`, `better-sqlite3`,
   `@types/better-sqlite3`。完全DBレスでは runtime 不要 → import グラフ確認の上で除去候補。
 - **D1 時代の legacy script**: `packages/database/scripts/{seed-to-d1-sql,dump-tables-to-seed,extract-articles-seed-from-r2}.ts`,
-  `scripts/dev/local-r2-mode.sh`, `r2-storage` の `db:pull`/`db:push`（doc 17 superseded）。
+  `r2-storage` の `db:pull`/`db:push`（doc 17 superseded）。`scripts/dev/local-r2-mode.sh` は 2026-06-06 に削除済。
 - **build-time exporter に残る D1 query**: `apps/web/scripts/export-fishing-ports-snapshot.ts:30-32`（`db.select().from(fishingPorts)`）→ git TS 化検討。
 - **R2 write script の CI ガード漏れ**: 一部 `export-*.ts` が `assertR2WriteAllowed()` 未呼び出し（要確認）。
 - **knip**: 未使用 ~114 source file（`blog/charts/Blog{Bar,Line,Scatter}ChartClient.tsx`, `atoms/{CountUp,ScrollReveal}.tsx` 等）、

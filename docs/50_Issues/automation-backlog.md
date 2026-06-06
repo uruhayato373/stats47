@@ -96,7 +96,7 @@ stale な auto-generated alert を月初に自動 close する。ただし「閾
 
 ## #289 [moved] Indexing API による問題 URL の自動再送信
 
-> **2026-05-18 移行**: 本タスクは `docs/05_改善ログ/indexing.md` の `[INDEXING-AUTO-01]` に移行。Phase 2 (W23-W24) で実装予定。
+> **2026-05-18 移行**: 本タスクは `docs/02_実装計画/improvement-backlog.md` の `[INDEXING-AUTO-01]` に移行。Phase 2 (W23-W24) で実装予定。
 
 ---
 
@@ -164,7 +164,7 @@ W21 SEO TODO 一元化 sprint (PR #308 / #310 / #311) で deployed 済のため 
 |---|---|---|
 | #285 | improvement-log triage 週次自動化 | PR #308: `.github/workflows/improvement-log-reminder-weekly.yml` + `.claude/scripts/lib/scan-pending-improvements.mjs` |
 | #288 | /weekly-plan 前週残タスク自動転載 | PR #308: `.claude/skills/management/weekly-plan/SKILL.md` Phase 1 Agent D |
-| #289 | Indexing API による問題 URL の自動再送信 | PR #310: `.claude/skills/analytics/auto-resubmit-url/SKILL.md` + `.claude/scripts/gsc/auto-resubmit.mjs` (改善ログ `docs/05_改善ログ/indexing.md` [INDEXING-AUTO-01] に移行) |
+| #289 | Indexing API による問題 URL の自動再送信 | PR #310: `.claude/skills/analytics/auto-resubmit-url/SKILL.md` + `.claude/scripts/gsc/auto-resubmit.mjs` (改善バックログ `docs/02_実装計画/improvement-backlog.md` [INDEXING-AUTO-01] に移行) |
 | #290 | /fetch-ga4-data snapshot に bot 除外クリーン値併記 | PR #308 / #310: `.claude/skills/analytics/fetch-ga4-data/SKILL.md` snapshot モード + `.claude/skills/analytics/ga4-improvement/SKILL.md` observe |
 
-以後は `docs/05_改善ログ/<metric>.md` を真実源とする (CLAUDE.md「改善施策の TODO 真実源」)。
+以後は `docs/02_実装計画/improvement-backlog.md` を真実源とする (CLAUDE.md「改善施策の TODO 真実源」)。

@@ -54,7 +54,7 @@ YYYY-MM-DD-<method>[-<batch>]
 
 | 場所 | 内容 |
 |---|---|
-| `docs/05_改善ログ/gsc.md` の section heading | `## [BLOG-WAVE-<wave_id>] <title> (legacy: <旧 BLOG-CTR-*>)` |
+| `docs/02_実装計画/improvement-backlog.md` の section heading | `## [BLOG-WAVE-<wave_id>] <title> (legacy: <旧 BLOG-CTR-*>)` |
 | section frontmatter | `wave_id`, `legacy_section_ids`, `predecessor_wave`, `successor_wave` |
 | `.claude/state/blog/auto-brushup-history.json` | 各 entry に `wave_id` フィールド (2026-05-27 migration 済) |
 | commit message | 必須ではない (legacy refactoring を避けるため) |
@@ -86,7 +86,7 @@ YYYY-MM-DD-<method>[-<batch>]
 
 | Docs | 内容 | 更新トリガ |
 |---|---|---|
-| `docs/05_改善ログ/gsc.md` | wave section の真実源 (status / effect / 判定基準) | wave deploy 時 + effect 計測時 |
+| `docs/02_実装計画/improvement-backlog.md` | wave section の真実源 (status / effect / 判定基準) | wave deploy 時 + effect 計測時 |
 | `docs/03_週次運用/週次計画/YYYY-Www.md` | 週次 TODO | 週次 (月曜) |
 | `docs/03_週次運用/週次レビュー/YYYY-Www.md` | 週次振り返り | 週次 (日曜) |
 | `docs/04_レビュー/session-handoff/YYYY-MM-DD-*.md` | 大規模 session 完了時のハンドオフ | session 完了時 |
@@ -104,7 +104,8 @@ YYYY-MM-DD-<method>[-<batch>]
 
 | State | 内容 | 書き込み箇所 |
 |---|---|---|
-| `.claude/state/blog/auto-brushup-history.json` | wave_id 駆動 source of truth (Phase D で effect 計測の入力) | `/brushup-blog --target batch` 実行時 |
+| `.claude/state/blog/remediation-queue.json` | **品質是正キュー (状態付き)**。「次に何を直すか」の真実源。pending/in-progress/done + wave_id。GSC×品質 blocker の統合スコア。**正典: `docs/02_実装計画/blog-remediation-loop.md`** | `build-remediation-queue.mjs` (build / --mark-* / --next) |
+| `.claude/state/blog/auto-brushup-history.json` | wave_id 駆動 source of truth (effect 計測の入力 + 是正キューの done シード) | `/brushup-blog --target batch\|queue` 実行時 |
 | `.claude/state/blog/auto-brushup-skipped.log` | dedup でスキップした slug ログ | 同上 |
 | `.claude/state/blog/SHARED-failure-cases.md` | F-001〜N の failure ledger | factual FAIL 検出時 |
 

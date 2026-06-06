@@ -111,9 +111,10 @@ function makeMdComponents(slug?: string, affiliateBannersByCategory?: Record<str
                 slug && !src.startsWith("http") && !src.startsWith("/")
                     ? `https://storage.stats47.jp/app/blog/${slug}/${src}`
                     : src;
+            const isSvg = resolvedSrc.endsWith(".svg");
             return (
                 <span
-                    className="block mt-2 -mx-6 sm:-mx-8 overflow-x-hidden not-prose"
+                    className={`block mt-2 overflow-x-hidden not-prose ${isSvg ? "-mx-6 sm:-mx-8 md:mx-auto md:max-w-2xl" : "-mx-6 sm:-mx-8"}`}
                 >
                     <Image
                         src={resolvedSrc}
@@ -121,7 +122,7 @@ function makeMdComponents(slug?: string, affiliateBannersByCategory?: Record<str
                         width={800}
                         height={450}
                         className="h-auto w-full rounded-lg"
-                        sizes="(max-width: 800px) 100vw, 800px"
+                        sizes="(max-width: 768px) 100vw, 672px"
                         decoding="async"
                         loading="lazy"
                         unoptimized

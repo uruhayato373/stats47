@@ -57,8 +57,7 @@ function tryLegacyRedirect(pathname: string, baseUrl: string): Response | null {
       return NextResponse.redirect(new URL(`/areas/${key}`, baseUrl), { status: 301 });
     }
     if (pageType === "ranking" && key) {
-      // 301→410 チェーン解消: KNOWN にない or GONE なら直接 410
-      if (UrlPolicy.ranking.isGone(key) || !UrlPolicy.ranking.isKnown(key)) return gone();
+      if (UrlPolicy.ranking.isGone(key)) return gone();
       return NextResponse.redirect(new URL(`/ranking/${key}`, baseUrl), { status: 301 });
     }
   }
@@ -128,16 +127,15 @@ function checkContentTypePolicy(pathname: string): Response | null {
   if (pathname.startsWith("/ranking/prefecture/")) {
     const slug = pathname.slice("/ranking/prefecture/".length).split("/")[0];
     if (!slug) return gone();
-    // 301→410 チェーン解消: KNOWN にない or GONE なら直接 410
-    if (UrlPolicy.ranking.isGone(slug) || !UrlPolicy.ranking.isKnown(slug)) return gone();
+    if (UrlPolicy.ranking.isGone(slug)) return gone();
     return NextResponse.redirect(new URL(`/ranking/${slug}`, "https://stats47.jp"), { status: 301 });
   }
 
-  // /ranking/{key}: GONE または unknown は 410（一括判定で重複削除）
+  // /ranking/{key}: GONE は 410。未登録キーは page の notFound() に委譲
   if (pathname.startsWith("/ranking/")) {
     const rankingKey = pathname.slice("/ranking/".length).split("/")[0];
     if (rankingKey) {
-      if (UrlPolicy.ranking.isGone(rankingKey) || !UrlPolicy.ranking.isKnown(rankingKey)) {
+      if (UrlPolicy.ranking.isGone(rankingKey)) {
         return gone();
       }
     }

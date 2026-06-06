@@ -2,9 +2,9 @@
 /**
  * ブログ記事サムネイル・OGP PNG 一括生成 (Satori + sharp) — ローカル FS (.local/r2) 版
  *
- * ⚠️ 本スクリプトは .local/r2 (SSD symlink) を読み書きする旧経路。
- *    SSD 非依存で cloud R2 へ直接 push したい場合は
- *    `generate-blog-thumbnails-cloud.ts` を使う (完全DBレス / SSD非依存の正経路)。
+ * ⚠️ 本スクリプトは .local/r2 (ローカル FS) を読み書きする旧経路。
+ *    cloud R2 へ直接 push したい場合は
+ *    `generate-blog-thumbnails-cloud.ts` を使う (完全DBレスの正経路)。
  *
  * Usage:
  *   npx tsx apps/web/scripts/generate-blog-thumbnails.ts

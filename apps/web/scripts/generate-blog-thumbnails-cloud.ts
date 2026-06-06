@@ -1,8 +1,8 @@
 #!/usr/bin/env tsx
 /**
- * ブログ記事サムネイル・OGP の監査 + 生成 + cloud R2 push (完全DBレス / SSD非依存)
+ * ブログ記事サムネイル・OGP の監査 + 生成 + cloud R2 push (完全DBレス)
  *
- * SSD (.local/r2) を一切使わない。読み=公開 R2 URL (storage.stats47.jp)、
+ * 読み=公開 R2 URL (storage.stats47.jp)、
  * 書き=wrangler CLI (`wrangler r2 object put --remote`、S3 鍵不要)。
  * 生成物は /tmp に出して push するだけなのでローカルに残らない。
  *

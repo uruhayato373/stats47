@@ -77,4 +77,4 @@ node .claude/scripts/gsc/auto-resubmit.mjs \
 
 - 認証実装の参考: `.claude/scripts/gsc/url-inspection-daily.cjs`
 - 既存類似スキル: `.claude/skills/analytics/indexing-api-submit/SKILL.md` (手動 1 件 / batch 用、本スキルは drilldown 全件自動)
-- 改善ログ記入先: `docs/05_改善ログ/gsc.md` + `.claude/skills/analytics/gsc-improvement/reference/improvement-log.md`
+- 改善ログ記入先: `docs/02_実装計画/improvement-backlog.md` + `.claude/skills/analytics/gsc-improvement/reference/improvement-log.md`

@@ -15,7 +15,7 @@ related_files:
   - .claude/scripts/blog/generate-article-charts.mjs
   - .github/workflows/improvement-log-reminder-weekly.yml
   - .github/workflows/generate-article-charts.yml
-  - docs/05_改善ログ/{content,indexing,ga4}.md
+  - docs/02_実装計画/improvement-backlog.md
   - .claude/state/triggers.json
 ---
 
@@ -40,7 +40,7 @@ related_files:
 1. **Phase 進捗確認**: 本ファイルの上記 frontmatter `phases:` を見る
 2. **改善ログ pending 一覧**: `node .claude/scripts/lib/scan-pending-improvements.mjs --format markdown`
 3. **今週着手対象**: `node .claude/scripts/lib/scan-pending-improvements.mjs --due-before $(date -u -d 'next sunday' +%Y-%m-%d) --tier 1,2`
-4. **W22 動作検証宿題**: `docs/05_改善ログ/ga4.md` の `[GA4-CLEAN-01]` 残作業 #3
+4. **W22 動作検証宿題**: `docs/02_実装計画/improvement-backlog.md` の `[GA4-CLEAN-01]` 残作業 #3
 5. **Phase 2 着手**: 下記「3. 自動化ロードマップ」の Phase 2 を参照
 
 ---
@@ -51,10 +51,10 @@ stats47 は 2026-05 時点で計測基盤 (15 GitHub Actions + 1 launchd + 1 Rou
 
 - **SEO ボトルネックが明確**: Coverage Drilldown 未登録 16.6k、PSI Mobile LCP 5-10 秒、CLS 0.14+ URL あり
 - **pending 施策が 8 件以上滞留**: T0-DECAY-01 / T1-PSI-LCP-02 / T2-CWV-04 / BLOG-CTR-02 / EXP-005 など、判定期日が来ても次アクションが流れない
-- **TODO が 4 箇所に散在**: `docs/03_週次運用/週次計画/`・`docs/05_改善ログ/`・`docs/50_Issues/`・記事内 `{TODO:...}` 記号 (A-laborwage 等 45 箇所)。状態定義もバラバラ
+- **TODO が 4 箇所に散在**: `docs/03_週次運用/週次計画/`・`docs/02_実装計画/improvement-backlog.md`・`docs/50_Issues/`・記事内 `{TODO:...}` 記号 (A-laborwage 等 45 箇所)。状態定義もバラバラ
 - **ブログ自動化はトレンド検出のみ**: 「発見 → 企画 → 執筆 → 校正 → 公開」11 ステップのうち 9 が手動
 
-このプランは (1) **SEO 改善を 4 軸 × 期日のマトリクスで W21-W26 にスケジュール**、(2) **`docs/05_改善ログ/` を TODO の単一真実源に再編**、(3) **トレンド記事を「下書き自動 → 人手 1 回レビュー → 公開」の半自動パイプライン化** の三層で攻める。新規スキルは 3 個に絞り、既存資源を最大活用する。
+このプランは (1) **SEO 改善を 4 軸 × 期日のマトリクスで W21-W26 にスケジュール**、(2) **`docs/02_実装計画/improvement-backlog.md` を TODO の単一真実源に再編**、(3) **トレンド記事を「下書き自動 → 人手 1 回レビュー → 公開」の半自動パイプライン化** の三層で攻める。新規スキルは 3 個に絞り、既存資源を最大活用する。
 
 ## ゴール (KPI と期日)
 
@@ -66,7 +66,7 @@ stats47 は 2026-05 時点で計測基盤 (15 GitHub Actions + 1 launchd + 1 Rou
 | B. GSC CTR | 2.50% | **3.8%** by W25 |
 | B. GSC Avg Position | 8.64 | **7.5** by W25 |
 | D. 新規公開記事 (内トレンド) | — | **12 本 (内 4 本)** by W26 |
-| TODO 一元化 | 4 箇所散在 | `docs/05_改善ログ/` 1 箇所、Tier 確定 backlog section = 0 by W22 |
+| TODO 一元化 | 4 箇所散在 | `docs/02_実装計画/improvement-backlog.md` 1 箇所、Tier 確定 backlog section = 0 by W22 |
 | 半自動 PR review→merge median | — | **≤ 30 min** by W26 |
 
 ## 1. SEO 4 軸ロードマップ (優先順: A → C → B → D)
@@ -84,7 +84,7 @@ stats47 は 2026-05 時点で計測基盤 (15 GitHub Actions + 1 launchd + 1 Rou
 
 | 場所 | 役割 | 更新主体 |
 |---|---|---|
-| `docs/05_改善ログ/<metric>.md` | **唯一の TODO 真実源**。全 SEO/性能/コスト/コンテンツ施策の status / tier / 期日を section frontmatter で管理 (append-only) | 人間 + improvement 系スキル |
+| `docs/02_実装計画/improvement-backlog.md` | **唯一の TODO 真実源**。全 SEO/性能/コスト/コンテンツ施策の status / tier / 期日を管理 | 人間 + improvement-triage agent |
 | `docs/03_週次運用/週次計画/YYYY-Www.md` | **当週ビュー**。改善ログから Tier/期日でフィルタした抽出ビュー (Routine 生成) | `/weekly-plan` |
 | `docs/50_Issues/{feature,automation,ui-improvements}-backlog.md` | **未着手アイデア倉庫**。Tier 未確定段階。Tier 確定後は改善ログへ移行・section 削除 | 人間 |
 | `.claude/skills/analytics/<metric>-improvement/reference/improvement-log.md` | **agent 専用詳細ログ** (現状維持)。検証コマンド・rubric 保持 | 各 `*-improvement` skill |
@@ -108,9 +108,9 @@ stats47 は 2026-05 時点で計測基盤 (15 GitHub Actions + 1 launchd + 1 Rou
 
 現状 5 metric (`gsc / ga4 / psi / adsense / cloudflare-cost`) に追加:
 
-- `docs/05_改善ログ/content.md` — ブログ/note/YouTube 公開・更新タスク。記事内 `{TODO:...}` 45 件をここへ集約予定、原稿側は「改善ログ参照」のみに簡素化
-- `docs/05_改善ログ/indexing.md` — Coverage Drilldown / sitemap / Indexing API
-- `docs/05_改善ログ/ga4.md` — GA4 NSM / bounce / bot 除外
+- `docs/02_実装計画/improvement-backlog.md` の content セクション — ブログ/note/YouTube 公開・更新タスク。記事内 `{TODO:...}` 45 件を集約
+- 同上 indexing セクション — Coverage Drilldown / sitemap / Indexing API
+- 同上 ga4 セクション — GA4 NSM / bounce / bot 除外
 
 ### 自動進捗反映 (Phase 1 で deployed)
 
@@ -176,7 +176,7 @@ scan は `node .claude/scripts/lib/scan-pending-improvements.mjs` を使用 (JSO
         ↓
 [GATE 2: 1 週後の効果測定 (自動)]
   fetch-metrics-weekly.yml が GSC clicks/impressions 取得
-  → docs/05_改善ログ/content.md に section auto-append (status: pending)
+  → docs/02_実装計画/improvement-backlog.md に section auto-append (status: pending)
 ```
 
 ### 人手レビュー最小化の工夫
@@ -189,9 +189,7 @@ scan は `node .claude/scripts/lib/scan-pending-improvements.mjs` を使用 (JSO
 
 | パス | 種別 | 用途 | Phase |
 |---|---|---|---|
-| `docs/05_改善ログ/content.md` | 新規 docs | コンテンツ施策 TODO 真実源 | ✅ 1 |
-| `docs/05_改善ログ/indexing.md` | 新規 docs | Indexing/sitemap/Drilldown 真実源 | ✅ 1 |
-| `docs/05_改善ログ/ga4.md` | 新規 docs | GA4 NSM/bounce/bot 施策真実源 | ✅ 1 |
+| `docs/02_実装計画/improvement-backlog.md` (content/indexing/ga4 セクション) | 統合 docs | 改善施策 TODO 真実源 (Phase 1 で新設→2026-06 に improvement-backlog.md に統合) | ✅ 1 |
 | `.claude/scripts/lib/scan-pending-improvements.mjs` | 新規 script | pending エントリ抽出 | ✅ 1 |
 | `.github/workflows/improvement-log-reminder-weekly.yml` | 新規 Actions | 週次 triage Issue 起票 | ✅ 1 |
 | `.claude/skills/management/weekly-plan/SKILL.md` | 改修 | 前週残転載 + 改善ログ自動抽出 | ✅ 1 |
@@ -271,7 +269,7 @@ W21 セッション (2026-05-18) で Phase 1 → Phase 2 → Phase 3 を 3 sprin
 
 | 成果物 | 場所 |
 |---|---|
-| 改善ログ 3 metric 新設 | `docs/05_改善ログ/{content,indexing,ga4}.md` |
+| 改善ログ 3 metric 新設 (→ 2026-06 に improvement-backlog.md 統合) | `docs/02_実装計画/improvement-backlog.md` |
 | pending エントリ抽出スクリプト | `.claude/scripts/lib/scan-pending-improvements.mjs` |
 | 週次 triage workflow | `.github/workflows/improvement-log-reminder-weekly.yml` |
 | weekly-plan SKILL.md 改修 | scan-pending 連動 + 前週残転載 |

@@ -43,14 +43,14 @@ AdSense と A8.net 等アフィリエイトの収益計測・改善施策計画�
 
 - `.claude/state/metrics/adsense/` — AdSense 週次 history (CRUD)
 - `.claude/skills/analytics/adsense-improvement/reference/` — agent 用詳細層 (CRUD)
-- `docs/05_改善ログ/adsense.md` — read only (improvement-triage 経由)
+- `docs/02_実装計画/improvement-backlog.md` — read only (improvement-triage 経由)
 - `docs/40_アフィリエイト管理/` — アフィリエイト管理文書 + 生成物 `affiliate-dashboard.html` (CRUD)
 - `.claude/scripts/ads/` — 棚卸し / 管理画面 生成スクリプト (run)
 - `.claude/state/ads/` — 在庫 snapshot JSON (CRUD)
 
 ## File Boundary (並行衝突回避)
 
-- `docs/05_改善ログ/adsense.md` への write 一切なし (improvement-triage 経由)
+- `docs/02_実装計画/improvement-backlog.md` への write 一切なし (improvement-triage 経由)
 - `.claude/state/metrics/adsense/` への write は本 agent が排他
 - 並行起動可能 agent: gsc-analyst / ga4-analyst / performance-auditor (state は別)、 improvement-triage (read only)
 - 並行起動 NG: 同期間 fetch-adsense-data の adsense-analyst 2 体同時

@@ -225,7 +225,7 @@ git push origin develop
 ## 関連ドキュメント
 
 - 全体プラン: `docs/02_実装計画/seo-todo-unify-phase-1-3.md`
-- 改善ログ INDEX: `docs/05_改善ログ/INDEX.md`
+- 改善バックログ: `docs/02_実装計画/improvement-backlog.md`
 - 自動化インベントリ: `docs/01_技術設計/10_自動化インベントリ.md`
 - triggers.json: `.claude/state/triggers.json`
 - NotebookLM skill: `.claude/skills/blog/notebooklm-research/SKILL.md`

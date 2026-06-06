@@ -3,7 +3,7 @@ type: design-proposal
 target: AFF-05
 status: implemented-framework
 date: 2026-06-04
-related_log: docs/05_改善ログ/affiliate.md#AFF-05
+related_log: docs/02_実装計画/improvement-backlog.md#AFF-05
 ---
 
 # AFF-05 設計: クリエイティブ A/B テスト基盤 (どの広告/サイズ/文言が効くか計測)
@@ -90,7 +90,7 @@ weight?: number | null;        // 加重ランダムの重み (既定 1)
 
 1. **最小サンプル**: 各 variant が impression ≥ 1,000 に達するまで判定しない (低トラフィック枠は期間で代替: 最低4週)。
 2. **比較**: variant 間の CTR を 2 標本比率の z 検定 (有意水準 5%) で比較。実用上は「勝者 CTR が次点比 +20% かつ 95% 有意」を採用条件にする。
-3. **勝者採用**: 勝った variant の `weight` を上げる/他を `isActive:false`。`docs/05_改善ログ/affiliate.md` に
+3. **勝者採用**: 勝った variant の `weight` を上げる/他を `isActive:false`。`docs/02_実装計画/improvement-backlog.md` に
    想定/実測/サンプル/判定根拠を記録 (effect/* は実測が揃ってから)。
 4. **多重比較**: 1 実験の variant は 2〜3 個に絞る (4 個以上は必要サンプルが急増)。
 

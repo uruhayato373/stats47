@@ -2,3 +2,4 @@ week,total_count,count_404,count_5xx,count_redirect,count_alt_canonical,count_du
 2026-W17,4919,1000,1000,1000,885,534,500,,gcsエラー,2026-04-25T22:48:40.429Z,,,,,
 2026-W19,100,0,0,1,0,0,0,8,0,0,91,0,,url-inspection-api,2026-05-10T04:44:14.650Z
 2026-W20,10,0,0,0,0,0,0,0,0,0,10,0,,url-inspection-api,2026-05-16T09:32:12.432Z
+2026-W23,20,0,0,0,0,0,0,1,0,0,19,0,,url-inspection-api,2026-06-06T02:25:39.597Z

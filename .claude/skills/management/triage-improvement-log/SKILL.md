@@ -1,14 +1,14 @@
 ---
 name: triage-improvement-log
-description: 改善ログ全 metric を Tier × 期日マトリクスで可視化 + 自動アクション提案 + CSV エクスポート (scan-pending-improvements.mjs の高度ラッパー)。Use when user says "改善ログ triage", "施策の優先順位", "triage-improvement-log".
+description: 改善バックログ全施策を Tier × 期日マトリクスで可視化 + 自動アクション提案 + CSV エクスポート (triage-matrix.mjs の高度ラッパー)。Use when user says "改善ログ triage", "施策の優先順位", "triage-improvement-log".
 primary_agent: improvement-triage
 ---
 
 # triage-improvement-log
 
-`docs/05_改善ログ/*.md` 配下の pending / in-progress 施策を、**Tier × 期日カテゴリ** のマトリクスで一望し、人間が「次にどれを潰すか」を判定するための UX レイヤースキル。
+`docs/02_実装計画/improvement-backlog.md` の pending / in-progress 施策を、**Tier × 期日カテゴリ** のマトリクスで一望し、人間が「次にどれを潰すか」を判定するための UX レイヤースキル。
 
-`scan-pending-improvements.mjs` (原始抽出) の上に、weekly triage 用の表示モード (markdown / csv / matrix) と自動アクション提案を追加する。
+`triage-matrix.mjs` (原始抽出) の上に、weekly triage 用の表示モード (markdown / csv / matrix) と自動アクション提案を追加する。
 
 ## いつ使うか
 
@@ -17,19 +17,10 @@ primary_agent: improvement-triage
 - effect 判定が遅延している施策の一括棚卸し
 - CSV に書き出して Notion / スプレッドシートで管理したいとき
 
-## scan-pending との差別化
-
-| スキル | レイヤー | 用途 | 出力 |
-|---|---|---|---|
-| `scan-pending-improvements.mjs` | 原始データ抽出 | JSON / Tier 順 markdown table | machine-readable 中心 |
-| `triage-improvement-log` (本スキル) | 人間判定 UX | matrix 集計 / csv export / action 提案 | 意思決定のための要約 |
-
-scan = 「全データ取って」、triage = 「Tier × 期日で分けて、優先度を提案して」。
-
 ## 実行コマンド
 
 ```bash
-# Markdown 素通し (scan の Tier 順 table)
+# Markdown 素通し (Tier 順 table)
 node .claude/scripts/lib/triage-matrix.mjs --format markdown
 
 # CSV エクスポート (Notion / スプレッドシート向け)
@@ -53,7 +44,7 @@ node .claude/scripts/lib/triage-matrix.mjs --format matrix --week 2026-W21
 
 ### markdown
 
-`scan-pending-improvements.mjs --format markdown` を素通しで表示。Tier 順 table + 詳細リンク。
+Tier 順 table + 詳細リンク。
 
 ### csv
 
@@ -82,8 +73,8 @@ Tier × 期日カテゴリの集計マトリクス。
 
 ### 自動アクション提案
 
-- **EXP-005** (gsc, tier 1, deployed 2026-04-20, 28d): 期限切れ警告: 検証コマンド実行 or due 延長 → docs/05_改善ログ/gsc.md#exp-005-...
-- **T2-CLEAN-03** (ga4, tier 2, due 2026-05-10): effect 判定実施を本週内に → docs/05_改善ログ/ga4.md#t2-clean-03-...
+- **EXP-005** (gsc, tier 1, deployed 2026-04-20, 28d): 期限切れ警告: 検証コマンド実行 or due 延長 → docs/02_実装計画/improvement-backlog.md#exp-005
+- **T2-CLEAN-03** (ga4, tier 2, due 2026-05-10): effect 判定実施を本週内に → docs/02_実装計画/improvement-backlog.md#t2-clean-03
 ```
 
 期日カテゴリ判定 (今日基準):
@@ -111,7 +102,7 @@ Tier × 期日カテゴリの集計マトリクス。
 # 1. matrix で全体感を把握
 node .claude/scripts/lib/triage-matrix.mjs --format matrix
 
-# 2. 「超過」列に注目し、各 deep_link を順に開いて検証
+# 2. 「超過」列に注目し、各施策の検証コマンドを実行
 # 3. 必要なら csv に書き出して Notion に貼る
 node .claude/scripts/lib/triage-matrix.mjs --format csv > /tmp/triage-$(date +%Y-W%V).csv
 ```
@@ -127,15 +118,14 @@ node .claude/scripts/lib/triage-matrix.mjs --format markdown
 ## 関連
 
 - `.claude/scripts/lib/triage-matrix.mjs` — 本スキルの実装
-- `.claude/scripts/lib/scan-pending-improvements.mjs` — 原始データ抽出 (本スキルが依存)
 - `.github/workflows/improvement-log-reminder-weekly.yml` — 週次 triage Issue 起票 (本スキルの主要呼び出し元)
-- `docs/05_改善ログ/INDEX.md` — 改善ログ全体構造
-- `.claude/rules/docs-vs-issues.md` — 改善ログ 2 層構造 (人間向け要約 / agent 用詳細)
+- `docs/02_実装計画/improvement-backlog.md` — 改善バックログ全体 (TODO 真実源)
+- `.claude/rules/docs-vs-issues.md` — 改善施策の置き場所
 - `.claude/rules/evidence-based-judgment.md` — effect 判定の実証ベース原則
 
 ## 制約・注意
 
-- 本スキルは `docs/05_改善ログ/*.md` を直接書き換えない (read-only)
-- 集計対象は `scan-pending-improvements.mjs` の対象と同じ (status: pending | in-progress)
+- 本スキルは `docs/02_実装計画/improvement-backlog.md` を直接書き換えない (read-only)
+- 集計対象は triage-matrix.mjs の対象と同じ (status: pending | in-progress)
 - TEMPLATE section (`-XXX` で終わる ID 等) は自動除外
 - マトリクスの集計は今日 (UTC) を基準。timezone shift は意図的に行わない

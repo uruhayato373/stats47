@@ -1,7 +1,7 @@
 /**
  * ブログ記事サムネイル / OGP の Satori レンダリング共通ロジック。
  *
- * SSD 版 (generate-blog-thumbnails.ts) と cloud-first 版
+ * ローカル版 (generate-blog-thumbnails.ts) と cloud-first 版
  * (generate-blog-thumbnails-cloud.ts) で同一デザインを共有し drift を防ぐ。
  * デザインを変えるときは本ファイルだけを編集すれば両経路に反映される。
  */

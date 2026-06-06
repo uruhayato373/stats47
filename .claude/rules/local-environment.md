@@ -21,38 +21,11 @@ packages/
 ## ストレージ
 
 - **データ層は「完全DBレス」が正典** → `docs/01_技術設計/19_完全DBレス設計.md`。本番は R2 snapshot のみ読む。SSOT は **git TS (設定・運用エンティティ) と R2 (観測値・配信) の二つだけ**。Derived (area_profiles / correlations) は **エフェメラル計算 → R2**。**永続/リモート D1 は廃止。クラウド/ローカルとも git TS 編集 + R2 直接反映で作業する (D1 認証は不要)。**
-- **ローカルビルド DB (SQLite)**: `packages/database/.data/stats47.sqlite`（旧 batch / エフェメラル集計が建てる**使い捨てビルドキャッシュ**。SSOT ではない）。git 管理外。**不在でも git TS 編集 / R2 直接反映 / エフェメラル集計は可能 = 基本「正常」**。R2 を読みたいだけなら下記「公開 URL 経由」で SSD/DB なしに取得できる。
+- **ローカルビルド DB (SQLite)**: `packages/database/.data/stats47.sqlite`（旧 batch / エフェメラル集計が建てる**使い捨てビルドキャッシュ**。SSOT ではない）。git 管理外。**不在でも git TS 編集 / R2 直接反映 / エフェメラル集計は可能 = 基本「正常」**。R2 を読みたいだけなら公開 URL 経由で認証なしに取得できる。
   - これは **Cloudflare D1 サービスではない**。本番は R2 snapshot のみ読み、DB を一切 query しない。
 - **dev server の miniflare**: `next.config.ts` の `initOpenNextCloudflareForDev({ persist: { path: "../../.local/d1" } })` は **R2 dev binding cache** (`.local/d1/r2/stats47/blobs/`) のために残置。`[[d1_databases]]` binding (STATS47_STATIC_DB) は app が read しないため vestigial（miniflare が `.local/d1/.../miniflare-D1DatabaseObject/*.sqlite` を作るが、batch は参照しない）。**`apps/web/.wrangler/state/` は使わない。**
-- **R2 読み取り (SSD/認証なし・標準)**: ビルド/集計スクリプトは **公開 URL 経由**で R2 を読める →
+- **R2 読み取り (標準)**: ビルド/集計スクリプトは **公開 URL 経由**で R2 を読める →
   `R2_PUBLIC_FETCH_URL=https://storage.stats47.jp`（GET のみ・list 不可）+ `NODE_OPTIONS='--conditions react-server'`。
-  これが SSD 非依存の標準経路 (下記 dual-mode は legacy)。
-- **ローカル R2 (任意)**: SSD 接続時は `.local/r2/` 配下のローカル FS tier も使える（高速）。
-
-## R2 読み取り経路 (SSD 非依存化済 / dual-mode は legacy)
-
-**2026-05-30 SSD 非依存化完了。** R2 読み取りは **公開 URL 経由が標準**で、SSD も S3 認証も要らない。
-以下の SSD dual-mode (`.local/r2` symlink ↔ SSD) は **legacy / 任意**であり、SSD が物理接続されているときだけ
-高速なローカル FS tier として使える。SSD は触らないのが既定。
-
-`fetchFromR2` のフォールバック (`packages/r2-storage/.../fetch.ts`):
-
-```
-1. ローカル FS (.local/r2)        ← SSD 接続時のみ有効・任意
-2. Workers R2 binding              ← CF Workers ランタイム
-3. S3 API (R2_*  認証)             ← ローカルで直接叩く場合 (トークン要)
-4. 公開 URL (R2_PUBLIC_FETCH_URL)  ← ★標準・SSD/認証なし (https://storage.stats47.jp、GET のみ)
-```
-
-- **標準 (SSD 非接続)**: `R2_PUBLIC_FETCH_URL=https://storage.stats47.jp NODE_OPTIONS='--conditions react-server'`
-  でビルド/集計スクリプトを実行。`R2_PUBLIC_FETCH_URL` 設定時は binding 試行を skip して公開 URL を使う。
-- **SSD 接続時 (任意)**: `NODE_ENV=development NODE_OPTIONS='--conditions react-server'` でローカル FS tier。
-- Worker ランタイムは `R2_PUBLIC_FETCH_URL` 未設定 + binding 段優先で不変 (公開 URL tier は影響しない)。
-- **コード/docs/tsc/git 作業は SSD 不要**。
-
-> ⚠️ 旧 `scripts/dev/local-r2-mode.sh`(SSD/cloud symlink モード切替) と `db:pull`/リモート D1 前提は legacy。
-> 新規作業では公開 URL tier を使うこと。SSD 上の `.local/r2*` / playwright-*-profile symlink は SNS 自動化等で
-> まだ参照されうるため残置 (削除は別 scope)。
 
 ## R2 書き込み (push / 削除) は CI / クラウド専用 ★
 

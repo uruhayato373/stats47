@@ -114,6 +114,16 @@ function auditArticle(meta, body) {
   else if (prose < 2400) flags.push(["warning", `prose ${prose}<2400 (やや薄い)`]);
   const svg = countSvg(body);
 
+  // 図あたり prose 字数 (2026-06-06: quality-gate.mjs と一貫)。「図はあるが薄い」を弾く。
+  // 比率には data 画像参照 (![](*.svg)) の正確な枚数を使う (countSvg の .svg 文字列カウントは過大)。
+  const chartCount = (body.match(/!\[[^\]]*\]\([^)]*\.svg\)/g) || []).length;
+  let prosePerChart = null;
+  if (chartCount >= 1) {
+    prosePerChart = Math.round(prose / chartCount);
+    if (prosePerChart < 350) flags.push(["blocker", `prose/図 ${prosePerChart}<350 (図はあるが薄い)`]);
+    else if (prosePerChart < 550) flags.push(["warning", `prose/図 ${prosePerChart}<550 (図あたりやや薄い)`]);
+  }
+
   // ranking 表現の一貫性
   const rTables = rankingTables(body);
   const hasRankingTable = rTables.length > 0;
@@ -161,6 +171,8 @@ function auditArticle(meta, body) {
     links,
     h2,
     svg,
+    chartCount,
+    prosePerChart,
     rankingTables: rTables.length,
     blockers: sev.blocker,
     warnings: sev.warning,

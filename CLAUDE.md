@@ -24,7 +24,7 @@
 - **エージェント実行モード**: Agent tool 起動時は `mode: "bypassPermissions"` をデフォルト
 - **Agent prompt 冒頭に Output Format を必ず指定** → `.claude/rules/agent-output-contract.md`
 - **一時ファイルは `/tmp/`**: プロジェクトルートに作らない (pre-commit が `tmp_*` 等を自動削除)
-- **計画・レビュー・改善ログは `docs/` 配下**: 週次計画・レビュー・批判的レビュー・pre-mortem・改善ログ・コンテンツバックログはすべて `docs/03_週次運用/` `docs/04_レビュー/` `docs/05_改善ログ/` `docs/50_Issues/` 等に置く。Issues は (a) `enhancement`/`bug` ラベルの PR で close される機能改修、(b) `auto-generated` ラベルの日次アラート (PSI/Cloudflare) のみ → `.claude/rules/docs-vs-issues.md`
+- **計画・レビュー・改善ログは `docs/` 配下**: 週次計画・レビュー・批判的レビュー・pre-mortem・改善バックログ・コンテンツバックログはすべて `docs/03_週次運用/` `docs/04_レビュー/` `docs/02_実装計画/improvement-backlog.md` `docs/50_Issues/` 等に置く。Issues は (a) `enhancement`/`bug` ラベルの PR で close される機能改修、(b) `auto-generated` ラベルの日次アラート (PSI/Cloudflare) のみ → `.claude/rules/docs-vs-issues.md`
 - **完全 DB レスが正典** → `docs/01_技術設計/19_完全DBレス設計.md`（doc 18 ハイブリッドは 2026-05-29 同日に superseded）。永続/常駐 D1 を SSOT に持たない。SSOT は **git TS** と **R2** の二つだけ。本番アプリは R2 snapshot のみ読む:
   - **Authored / 設定** (低volume・人手・型/review: テーマのチャート定義等) → **git TS が SSOT** → 生成スクリプトで R2 反映
   - **Authored / 運用** (page_components / theme_metrics / sns_posts / affiliate_ads / categories/themes) → **git TS 定義が SSOT** → 生成スクリプトで R2 JSON（横断整合性はビルド時に検証）。手編集 JSON を SSOT にしない
@@ -43,8 +43,7 @@
 | 完了前検証 | `/verification-loop` (ビルド + 型チェック) |
 | バグ修正の教訓 | `/knowledge` |
 | 同じエラー 2 回目 | `/continuous-learning` でパターン化 |
-| **改善施策の TODO 真実源** (status / tier / 期日) | `docs/05_改善ログ/{gsc,ga4,psi,adsense,affiliate,cloudflare-cost,content,indexing}.md` — INDEX: `docs/05_改善ログ/INDEX.md` |
-| 改善施策デプロイ (人間向け要約) | `docs/05_改善ログ/{gsc,ga4,adsense,psi,affiliate,cloudflare-cost}.md` |
+| **改善施策の TODO 真実源** (status / tier / 期日) | `docs/02_実装計画/improvement-backlog.md` |
 | 改善施策デプロイ (agent 用詳細) | `.claude/skills/analytics/{gsc,ga4,adsense,affiliate,sns-metrics,cloudflare-cost,performance}-improvement/reference/improvement-log.md` |
 | 週次計画進捗 | `docs/03_週次運用/週次計画/YYYY-Www.md` の TODO チェックボックスを Edit |
 | 週次振り返り | `docs/03_週次運用/週次レビュー/YYYY-Www.md` |
@@ -88,7 +87,7 @@ CLAUDE.md 内に詳細を複製しない。状況に応じて参照する。
 | SEO 向上 × TODO 一元化 × 自動化拡張プラン (W21-W26) | `docs/02_実装計画/seo-todo-unify-phase-1-3.md` |
 | 白書チャート逆引き inventory (11 白書 → area/theme 素材リスト) | `docs/02_実装計画/whitepaper-chart-inventory/README.md` |
 | area プロフィール チャート構成設計 (17 テーマ) | `docs/02_実装計画/area-charts-planning/README.md` |
-| 改善ログ INDEX (TODO 真実源、scan tool 使い方) | `docs/05_改善ログ/INDEX.md` ★施策追加時必読 |
+| 改善バックログ (TODO 真実源) | `docs/02_実装計画/improvement-backlog.md` ★施策追加時必読 |
 | システム構成・技術スタック | `docs/01_技術設計/` |
 | **データ層アーキテクチャ (完全DBレス・正典)** ★データ保存先判定時必読 | `docs/01_技術設計/19_完全DBレス設計.md` (doc 18 ハイブリッドは superseded) |
 | DDD ドメイン分類 | `docs/01_技術設計/04_DDDドメイン分類.md` |
@@ -128,4 +127,5 @@ Issues は「PR で close される機能改修・バグ」と「日次アラー
 過去の移行履歴:
 - `docs/90_課題管理/` (2026-04 廃止) → GitHub Issues 経由 → `docs/50_Issues/` (2026-05)
 - `docs/03_レビュー/` (2026-04-21 廃止) → GitHub Issues 経由 → `docs/04_レビュー/` (2026-05)
-- `weekly-plan` / `weekly-review` / `critical-review` / `pre-mortem` / `*-improvement` 系ラベル (2026-05 廃止) → `docs/03_週次運用/` / `docs/04_レビュー/` / `docs/05_改善ログ/`
+- `weekly-plan` / `weekly-review` / `critical-review` / `pre-mortem` / `*-improvement` 系ラベル (2026-05 廃止) → `docs/03_週次運用/` / `docs/04_レビュー/` / `docs/02_実装計画/improvement-backlog.md`
+- `docs/05_改善ログ/` (2026-06 廃止) → `docs/02_実装計画/improvement-backlog.md` (pending 移行) + `.claude/skills/analytics/*/reference/improvement-log.md` (詳細ログ)

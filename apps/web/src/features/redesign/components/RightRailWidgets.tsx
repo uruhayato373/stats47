@@ -49,8 +49,7 @@ interface RightRailWidgetsProps {
  *   7. bottomWidgets
  *   8. AdSense Rectangle (下部)
  *
- * デフォルトで `xl:max-h-[calc(100vh-5.5rem)] xl:overflow-y-auto` により
- * viewport 内で独立スクロール (記事本文を読みつつ全 widget に到達可能)。
+ * デフォルトで `xl:max-h-[calc(100vh-5.5rem)] xl:overflow-y-auto` により sticky + 独立スクロール配置。
  */
 export async function RightRailWidgets({
   furusatoAreaCode,

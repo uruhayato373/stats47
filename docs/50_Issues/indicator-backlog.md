@@ -139,7 +139,7 @@ related_skill: .claude/skills/management/expand-indicators/SKILL.md
 /expand-indicators --target 10
 ```
 
-追加後は本 backlog 該当行の `status` を `done` に更新し、改善ログ `docs/05_改善ログ/indicator-expansion.md` に append する。`/expand-indicators` 未実装なら G4 で新設する。
+追加後は本 backlog 該当行の `status` を `done` に更新し、`docs/02_実装計画/improvement-backlog.md` に append する。`/expand-indicators` 未実装なら G4 で新設する。
 
 ## 制約・注意
 

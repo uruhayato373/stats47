@@ -19,7 +19,6 @@ import {
 import { BlogSidebarTextAds, resolveAffiliateBannersByCategory } from "@/features/ads/server";
 import { TagBadge, ArticleRenderer, ArticleTableOfContents, generateBlogMetadata, type Article } from "@/features/blog";
 import {
-    ArticleAffiliateBanner,
     RelatedRankingsSection,
     listLatestArticles,
     listArticlesByTagKey,
@@ -250,9 +249,6 @@ export default async function BlogPostPage({ params }: PageProps) {
                             </CardContent>
                         </Card>
 
-                        {/* バナー広告（タグキーベース・ランダム表示） */}
-                        <ArticleAffiliateBanner tagKeys={tagKeys} />
-
                         {/* lg 未満で表示する各種関連 widget (lg+ では右カラムに集約) */}
                         <div className="space-y-6 lg:hidden">
                             <Card>
@@ -282,7 +278,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                         </div>
                     </main>
 
-                    {/* 右カラム (lg+): 関連 widget + 広告 (independent scroll)。lg=2カラム(本文+右)、xl=3カラム */}
+                    {/* 右カラム (lg+): 関連 widget + 広告 (sticky)。lg=2カラム(本文+右)、xl=3カラム */}
                     <aside className="hidden lg:flex lg:flex-col lg:gap-3 lg:sticky lg:top-20 lg:max-h-[calc(100vh-5.5rem)] lg:overflow-y-auto lg:pr-1">
                         {/* A8.net バナー広告 (above-fold 最上部) */}
                         <SidebarPromoBanner index={1} position="sidebar-right" />
