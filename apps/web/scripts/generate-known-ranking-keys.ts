@@ -10,11 +10,10 @@
  * `cachedFindRankingItem` → notFound と同一の有効性判定であり、middleware Fix 6 の
  * 410 ゲートを SSG と完全一致させる。
  *
- * ローカル R2 ミラー (`.local/r2`、dual-mode で外付け SSD) を直接読む。生成物は git commit
+ * ローカル R2 ミラー (`.local/r2`、CI が mkdir -p で作成) を直接読む。生成物は git commit
  * する設計 (CI ビルド環境は R2 binding が無いため)。
  *
- * 使い方: SSD 接続 (`scripts/dev/local-r2-mode.sh ssd`) のうえ
- *   `cd apps/web && npx tsx scripts/generate-known-ranking-keys.ts`
+ * 使い方: `cd apps/web && npx tsx scripts/generate-known-ranking-keys.ts`
  * 更新タイミング: ranking item を追加/有効化した後。必ず git commit してからデプロイ。
  */
 
@@ -31,7 +30,7 @@ const OUT_PATH = path.resolve(
 
 if (!fs.existsSync(RANKING_DIR)) {
   console.error(`[generate-known-ranking-keys] R2 ranking snapshot not found at ${RANKING_DIR}`);
-  console.error("ローカル R2 を有効化してください: `scripts/dev/local-r2-mode.sh ssd` (SSD 接続)。");
+  console.error("ローカル R2 ディレクトリが存在しません。sync-snapshots.yml で .local/r2 を生成してください。");
   process.exit(1);
 }
 
@@ -74,11 +73,11 @@ const header = `/**
  * 用途:
  *  - middleware (url-policy) の 410 判定（apps/web は \`@stats47/ranking/config\` 経由で re-export）
  *  - 基盤1 \`listRankingItemsWithTagsFromR2\` の git 列挙フォールバック
- *    （SSD/S3 が無い公開URL専用環境では R2 を list できないため、本リストから item.json を列挙）
+ *    （公開URL環境では R2 を list できないため、本リストから item.json を列挙）
  *
  * 真実源: R2 \`app/ranking/<key>/item.json\` (areaType=prefecture & isActive)。
  * 更新方法: \`cd apps/web && npx tsx scripts/generate-known-ranking-keys.ts\`
- *           （R2 list が要るため SSD 接続 or S3 認証が必要。公開URLは list 不可）
+ *           （R2 list が要るため S3 認証が必要。公開URLは list 不可）
  * 更新タイミング: ranking item 追加/有効化後。必ず git commit してからデプロイ。
  *
  * 最終生成日: ${today}

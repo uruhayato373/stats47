@@ -138,7 +138,7 @@ async function main() {
   const indexPath = path.join(process.cwd(), "public", "search-index.json");
   const metaPath = path.join(process.cwd(), "public", "search-index-meta.json");
 
-  // R2 データ源が読めない環境 (CI で R2 不在 / SSD 非接続 等) では documents が 0 件になる。
+  // R2 データ源が読めない環境 (CI で R2 不在 等) では documents が 0 件になる。
   // この場合に空インデックスで上書きすると本番検索が壊れるため、既存の committed
   // search-index.json を保持して early return する (旧 D1 版の writeEmptyIndex と同じ安全策)。
   // search-index.json はローカルで再生成して commit する運用 (prebuild の CI 実行は no-op)。

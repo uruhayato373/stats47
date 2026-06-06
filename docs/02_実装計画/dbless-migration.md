@@ -3,7 +3,7 @@ type: migration-plan
 date: 2026-05-29
 status: active
 canonical: docs/01_技術設計/19_完全DBレス設計.md
-scope: 完全DBレス移行。Phase C(消費者/基盤)+SSD非依存=完了 / Phase B・E・F 残
+scope: 完全DBレス移行。Phase C(消費者/基盤)完了 / Phase B・E・F 残
 tags: [architecture, dbless, migration]
 ---
 
@@ -11,7 +11,7 @@ tags: [architecture, dbless, migration]
 
 > 2026-05-29 統合: 棚卸し(inventory) / 実行スペック(spec) / 残スクリプト再構築(rebuild) の3計画を1ファイルに集約。
 > 正典アーキテクチャは `docs/01_技術設計/19_完全DBレス設計.md`。
-> **現況**: Phase C(全消費者+基盤のDBレス化)+SSD非依存化は完了。**Phase B(正典改訂)/E(page_components)/F(server.ts削除・schema最終確定)が残**。
+> **現況**: Phase C(全消費者+基盤のDBレス化)は完了。**Phase B(正典改訂)/E(page_components)/F(server.ts削除・schema最終確定)が残**。
 > 各セクション冒頭の `<!-- 元ファイル -->` で出自を保持。
 
 
@@ -25,15 +25,14 @@ tags: [architecture, dbless, migration]
 ### ★ 実装進捗 (2026-05-29 セッション、随時更新) — 再開時はここを最初に読む
 
 すべて develop に commit + push 済。**全消費者 + 基盤 が DB レス完了** (2.1/2.2-pref/2.2b/2.3/2.4/2.5/2.6 + 基盤1/2)。
-**さらに SSD 非依存化を完遂** (別プラン `quiet-forging-flurry.md` 柱1-3): 公開 R2 URL `storage.stats47.jp`
-を突破口に、ビルド/再生成を **SSD・S3認証なし**で実行可能に。残デファーは無し (Phase E のみ別 scope)。
+公開 R2 URL `storage.stats47.jp` を使い、ビルド/再生成を **S3認証なし**で実行可能に。残デファーは無し (Phase E のみ別 scope)。
 
 - 柱1: r2-storage に公開URL fetch tier (commit c738f4fc)
 - 柱2: list 依存を git 列挙フォールバックに置換 (known-ranking-keys を packages/ranking へ移設, 7a3fd844)
 - 2.2b city: 削除済 run-batch-city を R2 から再構築。6 spot city が cloud baseline と完全一致 (141e656c)
 - 2.5 port: git TS master (administrator 込み) + R2 stats。years/by-port/by-year が baseline 完全一致 (f02e358a)
 - 2.1 recompute: 計算可能な全計算型 ranking で rank 完全一致を検証 (b2324f2e)
-- 柱3: wrangler push helper + SSD非依存 deploy 経路 (5ca45fed)
+- 柱3: wrangler push helper (S3鍵不要 deploy 経路) (5ca45fed)
 
 | ステップ | 状態 | commit/メモ |
 |---|---|---|
@@ -143,7 +142,7 @@ tags: [architecture, dbless, migration]
 
 ### 4. 検証戦略
 
-- **前提**: SSD 接続（`.local/r2` symlink モード = `scripts/dev/local-r2-mode.sh ssd`）。観測値・現行 snapshot がローカルに揃う。SSD 非接続時は `fetchFromR2` の S3 fallback で読めるが、突合は SSD 接続で実施。
+- **前提**: ローカル R2 ミラーまたは公開 URL `https://storage.stats47.jp` 経由で観測値・snapshot にアクセスできること。
 - **突合の基本形**: 「**再計算結果 vs 現行配信 R2 snapshot**」のファイル単位 diff。旧 D1 経路は壊れているため git diff 0 は目標にしない（正典の owner 判断どおり「R2 配信中 snapshot を正とみなす」）。
 - **許容差の考え方**:
   - ranking values: rank はタイブレーク順で ±1 許容、value は相対誤差 1e-6 以内。
@@ -327,9 +326,9 @@ A (死蔵除去) ──▶ C (Derived エフェメラル化) ──▶ D (観測
 #### Mac/Cloudflare 認証が要る項目(ローカル実行/検証で必要)
 
 - `npm run test:integration --workspace=packages/database` — vitest pool-workers が miniflare temp DB を起動(wrangler.toml KEEP 検証)。
-- `data-refresh.yml` の db:pull/push 改修検証 — R2 S3 認証(`.env.local`)。SSD 非接続時は cloud fallback。
+- `data-refresh.yml` の db:pull/push 改修検証 — R2 S3 認証(`.env.local` or GitHub Secrets)。
 - `/push-r2` による R2 snapshot 反映 — Cloudflare R2 token(プロキシ制約時は wrangler CLI fallback)。
-- remotion exporter の出力 diff 検証 — ローカル D1(Mac 内蔵)+ R2(SSD or cloud)両方へのアクセス。
+- remotion exporter の出力 diff 検証 — ローカル D1(Mac 内蔵)+ R2(公開 URL 経由)へのアクセス。
 
 #### 設計決定待ち(コードだけでは決着不能)
 
@@ -354,13 +353,12 @@ A (死蔵除去) ──▶ C (Derived エフェメラル化) ──▶ D (観測
 - **件数の乖離**: registry で `prefecture` を宣言する metric = **2169 件**、現行 known-keys = **1969 件**。差 200 = 「宣言あり・観測値未投入」。
 - **DBレス版の正しい実装**: `listMetricKeysByEntity('prefecture')` ∩ `R2 app/stats/<key>/values.json` 実在、で観測値ありに絞る。単純な registry walk(2169件)に置換すると観測値なし 200 URL が 410 されず**空ページ/ソフト404 の SEO リスク**。
 - **ブロッカー (重要・2026-05-29 実機確認)**: 検証に R2 stats データが要るが **R2 読み取りの両経路が断たれている**:
-  - ローカル: **SSD 未接続**(`.local/r2` symlink が dangling、`app/stats` = 0 件)。
-  - cloud: **S3 API が 401 Unauthorized**(`.env.local` の `R2_ACCESS_KEY_ID`(32桁)/`R2_SECRET_ACCESS_KEY`(64桁) は形式正常・endpoint も正常だが**トークン失効/無効**)。
-  - → known-keys 再生成・Phase C の diff 検証・Phase E の検証は **R2 アクセス復旧まで実行不能**。復旧手段: (a) SSD 接続、または (b) Cloudflare で R2 S3 API トークン再発行 → `.env.local` 更新。
+  - cloud: **S3 API が 401 Unauthorized**(`.env.local` の `R2_ACCESS_KEY_ID`/`R2_SECRET_ACCESS_KEY` が形式正常だが**トークン失効/無効**)。
+  - → known-keys 再生成・Phase C の diff 検証・Phase E の検証は **R2 アクセス復旧まで実行不能**。復旧手段: Cloudflare で R2 S3 API トークン再発行 → `.env.local` 更新。現在は R2 書込 CI 専任化済のため、通常は公開 URL 読取で十分。
 - **意味判断**: 旧クエリの `is_active=1` フィルタは registry に対応フィールドが無い。DBレスでは「R2 観測値の実在」を唯一の基準にする想定 (is_active は廃止)。
 
-#### Phase D の進捗 (2026-05-29、SSD 接続後)
-- ✅ **known-ranking-keys: 完了**。SSD 接続で R2 アクセス回復 → `generate-known-ranking-keys.ts` を DBレス版
+#### Phase D の進捗 (2026-05-29)
+- ✅ **known-ranking-keys: 完了**。`generate-known-ranking-keys.ts` を DBレス版
   (R2 `app/ranking/<key>/item.json` の areaType=prefecture & isActive、generateStaticParams と同源)に書換・再生成。
   **1969 → 1992 件** (+24: stale で 410 されていた有効ページ復活 / -1: per-taxpayer-taxable-income は
   areaType=city に変更済で prefecture ルート不可)。tsc PASS。commit 済。
@@ -373,7 +371,7 @@ A (死蔵除去) ──▶ C (Derived エフェメラル化) ──▶ D (観測
 - `sync-metrics-cache` の扱いは Phase C と entangled (exporter が D1 metrics を読む間は維持)。即削除は不可。
 - `data-refresh.yml` db:pull/push は全 Derived エフェメラル化 (Phase C) 後。
 
-#### Phase C の進捗 (2026-05-29、SSD 接続後)
+#### Phase C の進捗 (2026-05-29)
 
 調査で 13 exporter は均一でなく **3 グループ**と判明 (多くは「使い捨て計算」不要で master の参照先付替えで済む):
 1. **既に R2 から stats 読み** (remotion 3本): 残る D1 依存は prefecture 名称引きのみ。

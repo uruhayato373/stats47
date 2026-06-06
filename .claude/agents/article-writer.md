@@ -9,7 +9,7 @@ description: 1 つの metric を受け取って統計記事 1 本を完成させ
 
 ## 担当範囲
 
-- metric データの取得 (**公開 R2 URL** `https://storage.stats47.jp/app/ranking/<key>/values.json` から TOP10 + 最下位 + 倍率を抽出。SSD/認証不要)
+- metric データの取得 (**公開 R2 URL** `https://storage.stats47.jp/app/ranking/<key>/values.json` から TOP10 + 最下位 + 倍率を抽出。認証不要)
 - 記事タイトル・subtitle・seo_title の生成 (**curiosity gap** ルール準拠 → `.claude/rules/blog-quality-standards.md`)
 - 原稿執筆 (callout・内部リンク・source-link をルール準拠で配置)
 - **`docs/21_ブログ記事原稿/<slug>/article.md` へのドラフト書き出し** (完全DBレス: article.md frontmatter が SSOT。公開は CI)
@@ -100,12 +100,10 @@ node .claude/scripts/lib/article-factual-check.mjs \
 
 **順序が重要**: タイトルや framing を考える前に、必ず以下を完了する。
 
-> ★**データ取得は公開 R2 URL を既定とする**（完全DBレス / SSD・認証不要）。`.local/r2`(SSD) は
-> sandbox で read 不可(EPERM)になりうる、`.env.local` の S3 creds も無い前提。**`sqlite3`/D1 直読は廃止**。
+> ★**データ取得は公開 R2 URL を既定とする**（完全DBレス / 認証不要）。`.env.local` の S3 creds も無い前提。**`sqlite3`/D1 直読は廃止**。
 > PATH が壊れている環境があるので **curl は絶対パス `/usr/bin/curl`** で叩く。
 
 1. ランキング値を**公開 R2 URL**から取得: `/usr/bin/curl -s https://storage.stats47.jp/app/ranking/<metric_key>/values.json`
-   （SSD 物理接続時のみ `.local/r2/app/ranking/<key>/values.json` の Read も可。ただし EPERM の場合は迷わず公開 URL へ）
 2. `partitions[partitions.length - 1]` (最新年) を使う
 3. TOP 10 と BOTTOM 5、最大値/最小値、倍率を計算
 4. metric メタ (title・unit・category・subtitle) は **git TS が SSOT**: `packages/data-configs/src/metrics/<key>.ts` を Read、

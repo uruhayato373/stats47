@@ -50,7 +50,7 @@ Derived (area_profiles/相関)          : R2 観測値をエフェメラル計�
 
 - **クラウド/ローカルとも git TS 編集 + R2 直接反映で作業**（永続 D1 認証は不要 = クラウド完結）
 - 設定の R2 反映の実装例: `apps/web/scripts/export-page-components-snapshot.ts`（git TS `data/page-components/` → R2、Phase E 実装済）
-- R2 読みは公開 URL 経由で SSD/認証なしに可能: `R2_PUBLIC_FETCH_URL=https://storage.stats47.jp`
+- R2 読みは公開 URL 経由で可能: `R2_PUBLIC_FETCH_URL=https://storage.stats47.jp`
 - ranking-values（~30K files）の更新は `SKIP_VALUES=1` で他のみ更新し、必要な場合のみフル実行
 - ロールバックは R2 の旧 snapshot ファイルへの上書き push で対応
 - 旧 `db:pull`/`db:push` / リモート D1 seed/export は廃止 (legacy)。手編集 JSON を SSOT にしない（git TS → 生成）

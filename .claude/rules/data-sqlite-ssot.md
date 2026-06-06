@@ -83,13 +83,12 @@ correlations / area_profiles は **R2 観測値を入力に使い捨て計算 �
 
 普段 area_profiles / correlation 値を永続 DB に持たない。毎回 R2 観測値から再計算可能。
 
-## R2 読み取り (SSD/認証なし)
+## R2 読み取り (公開 URL 経由)
 
 ビルド/集計スクリプトが R2 を読むとき:
-- **公開 URL 経由 (推奨・SSD/認証不要)**: `R2_PUBLIC_FETCH_URL=https://storage.stats47.jp` を設定
+- **公開 URL 経由 (認証不要)**: `R2_PUBLIC_FETCH_URL=https://storage.stats47.jp` を設定
   (list は不可、GET のみ)。`NODE_OPTIONS='--conditions react-server'`。
-- SSD が物理接続されている場合はローカル FS (`.local/r2`) tier も使える (任意)。
-- 旧 `db:pull` / リモート D1 / SSD dual-mode の前提は使わない。
+- 旧 `db:pull` / リモート D1 の前提は使わない。
 
 ## 関連
 

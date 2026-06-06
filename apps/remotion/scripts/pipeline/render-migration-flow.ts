@@ -18,7 +18,7 @@
  * 前提: apps/remotion/public/migration-flow/{NN}.json が生成済み
  *       (cities/{NN}.topojson・municipalities/{NN}.json もあれば市区町村コロプレスが描画される)。
  *
- * 注意: Remotion の bundle() は public/ 全体をコピーする。SSD 未接続時に
+ * 注意: Remotion の bundle() は public/ 全体をコピーする。
  *       public/backgrounds/ges/{landscape,portrait} が dangling symlink になっていると
  *       コピーが ENOENT で落ちるため、bundle 前に壊れた symlink を退避し直後に復元する
  *       (migration-flow は GES 背景を使わないので退避しても描画に影響しない)。

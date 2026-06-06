@@ -1,5 +1,5 @@
 /**
- * push-r2-wrangler — SSD / S3 認証なしで R2 へ push する薄い helper (完全DBレス deploy 用)。
+ * push-r2-wrangler — S3 認証なしで R2 へ push する薄い helper (完全DBレス deploy 用)。
  *
  * 既存の diff-push-r2.ts は S3 API (R2_ACCESS_KEY_ID 等) を使うが、cloud-first 化で
  * .env.local の S3 鍵は削除済。本 helper は wrangler CLI (`wrangler r2 object put --remote`)
@@ -14,7 +14,7 @@
  *   # 実 push
  *   npx tsx packages/r2-storage/src/scripts/push-r2-wrangler.ts app/ports --apply
  *
- * 読み取りローカルルート: SSD 接続時は .local/r2 (symlink)、cloud モード時は実 stage dir。
+ * 読み取りローカルルート: .local/r2 (CI が mkdir -p で作成する stage dir)。
  */
 
 import { execFileSync } from "node:child_process";
@@ -54,8 +54,7 @@ function main(): void {
   const root = findLocalR2Root();
   if (!root) {
     console.error(
-      "ローカル R2 ルートが見つかりません。SSD 接続 (local-r2-mode.sh ssd) か " +
-        "cloud モード (local-r2-mode.sh cloud) で stage dir を用意してください。",
+      "ローカル R2 ルートが見つかりません。sync-snapshots.yml で .local/r2 stage dir を生成してください。",
     );
     process.exit(1);
   }

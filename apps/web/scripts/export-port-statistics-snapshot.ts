@@ -12,8 +12,7 @@
  *   - app/port-statistics/by-port/<portCode>.json (各港の時系列)
  *
  * Usage:
- *   - SSD 接続: NODE_ENV=development NODE_OPTIONS='--conditions react-server' npx tsx apps/web/scripts/export-port-statistics-snapshot.ts
- *   - SSD 非接続: R2_PUBLIC_FETCH_URL=https://storage.stats47.jp NODE_OPTIONS='--conditions react-server' npx tsx ...
+ *   R2_PUBLIC_FETCH_URL=https://storage.stats47.jp NODE_OPTIONS='--conditions react-server' npx tsx apps/web/scripts/export-port-statistics-snapshot.ts
  */
 
 import dotenv from "dotenv";
