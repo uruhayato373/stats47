@@ -38,7 +38,7 @@ SEO / 性能 / コスト / コンテンツ施策の TODO 一覧。旧 `docs/05_�
 | BLOG-CTR-05 | Tier 3 brushup (3 記事) + /category description 差別化 — 全完了 (2026-06-06): child-height/manufacturing seoTitle + temperature-extremes-map full brushup + 17カテゴリ description (PR #448)。GSC 計測 4 週後 | effect/pending | 2026-06-20 | claude | gsc |
 | AFF-02 | 広告ゼロ 8 軸の在庫補充 | pending | 2026-06-21 | uruhayato373 | affiliate |
 | GA4-PIPELINE-02 | history.csv の pageviews をカレンダー週バケット + Japan-only に統一 — deployed 2026-06-06: fetch-ga4-snapshot に overview-clean.csv (Japan-only, calendar week) 追加、update-history-csv が preferする実装。W23 backfill済 (4264 pvs vs 旧17745)。W24〜が初の真値計測週 | effect/pending | 2026-07-12 | claude | ga4 |
-| CTR-AUTO-01 | CTR 改善候補の月次自動抽出 (Phase 3 sprint) | in-progress | 2026-06-21 | claude | gsc |
+| CTR-AUTO-01 | CTR 改善候補の月次自動抽出 (Phase 3 sprint) — 実装済み: ctr-improvement-monthly.yml (毎月5日 JST 09:00) + extract-low-ctr-queries.mjs。初回 Issue は 2026-07-05 に自動生成予定 | effect/pending | 2026-07-05 | claude | gsc |
 | AFF-03 | ランキングページのバナー枠追加 (案 A 実装) | effect/pending | 2026-06-28 | claude | affiliate |
-| CONTENT-DRAFT-01 | /draft-from-trend skill 実装 (Phase 2 → Phase 3 での稼働) | in-progress | 2026-06-28 | claude | content |
-| AFF-06 | 公務員 AI 転職体験記で STRATEGY CAREER を訴求 | pending | 2026-07-04 | claude | affiliate |
+| CONTENT-DRAFT-01 | /draft-from-trend skill 実装 (Phase 2 → Phase 3 での稼働) — 実装完了: SKILL.md 6-step orchestrator (plan-blog-trends → fetch-article-data → article.md → generate-article-charts → factual-check)。初稼働は W24 以降 trend snapshot ★★★ 候補で検証 | effect/pending | 2026-07-12 | claude | content |
+| AFF-06 | 公務員 AI 転職体験記で STRATEGY CAREER を訴求 — deployed 2026-06-04: koumuin-ai-tenshoku-1500man 公開済み (publishedAt: 2026-06-04, STRATEGY CAREER affiliate-banner 挿入済)。GA4 CV 計測 4 週後 | effect/pending | 2026-07-04 | claude | affiliate |
