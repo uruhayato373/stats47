@@ -461,6 +461,17 @@ observe モードがこの週に判定変化を起こした施策のみを列挙
 - `effect/adverse` が含まれる場合は **このセクション冒頭で警告**
 - 着手待ち（`effect/pending` かつ経過日数 < 14）の Tier 1 施策は下部に「待機中」として別枠で列挙
 
+**ブログ品質是正キューの進捗** (`.claude/state/blog/remediation-queue.json` の `summary` を Read):
+
+```bash
+node -e 'const q=require("./.claude/state/blog/remediation-queue.json");console.log(q.summary)'
+```
+
+- 「pending N (must-fix M) / done D」を 1 行で記載し、**前週比で pending がいくつ減ったか**を明記する (順次品質向上の進捗指標)。
+- この週に remediated_at が付いた記事 (= 今週是正した wave) を抽出し、対応する `## [BLOG-WAVE-<wave_id>]` (gsc.md) の効果を判定する。
+  due (デプロイ +28 日) を過ぎた BLOG-WAVE は GSC clicks/CTR の before/after で effect 判定 → gsc.md の `status:` を更新 (`.claude/rules/evidence-based-judgment.md` 準拠、実測コマンド併記)。
+- 仕組み全体: `docs/02_実装計画/blog-remediation-loop.md`。
+
 ### AdSense（過去 7 日） — snapshot CSV: `.claude/skills/analytics/adsense-improvement/reference/snapshots/YYYY-Www/` / Issue: `#NN` (`adsense-snapshot`)
 
 `.env.local` に AdSense OAuth 未設定の場合は本節を省略し「AdSense OAuth 未設定」と 1 行記載。

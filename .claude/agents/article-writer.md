@@ -133,10 +133,20 @@ node .claude/scripts/lib/article-factual-check.mjs \
 - 「1位 <県><値>・最下位 <県><値>」「N倍差」「47都道府県YYYY」を含める
 - 例: 「健康寿命1位は男大分73.72年・女三重77.58年｜岩手と京都が最下位 47都道府県2019」
 
-### Phase 3: 本文執筆 (固定 6 セクション)
+### Phase 3: 本文執筆 (アーキタイプを選ぶ → 章構成に従う)
 
-> ★`.claude/rules/blog-quality-standards.md` 準拠: callout (`[!NOTE]`/`[!WARNING]`/`[!TIP]`) を 2-4 個配置。
-> `<source-link href="/ranking/<key>">` は**対応する図・H2 の直下にインライン配置** (末尾にまとめるのは禁止アンチパターン)。
+> ★まず**記事アーキタイプを 1 つ選ぶ** (正典 `.claude/rules/blog-quality-standards.md`「記事アーキタイプ」)。
+> data の性質で決める: 単一指標を掘る=**A** / 2 指標の相関・真因=**B** / 時系列の変化(V字・急増減)=**C** /
+> 物価・住居など読者の生活含意=**D** / カテゴリ送客のハブ=**E**。迷ったら **A** (既定)。
+> 選んだ型の**章構成テンプレ・目安字数・必須分析視点**に従う。frontmatter に `archetype:` を宣言する (Phase 4)。
+> B/C/D を選んだら散布図/折れ線/内訳分解など型固有の SVG・分析が必要 → `/generate-article-charts` で生成。
+>
+> ★全型共通 (正典準拠): callout (`[!NOTE]`/`[!WARNING]`/`[!TIP]`) を 3-4 個、**記事固有の「読み違い防止の知識」**に
+> する (全記事共通の「年次が異なる」定型は不可)。`<source-link href="/ranking/<key>">` は**対応する図・H2 の直下に
+> インライン配置** (末尾集約は禁止)。**各図の直後に「なぜ上位/下位か」の解釈段落を置く** (図あたり ~600字、`<350字/図`
+> は `quality-gate.mjs` の blocker)。**核心の insight は冒頭〜前半に先出しする。**
+
+以下は **既定の A (単一指標 深掘り) の 6 セクション**。B〜E を選んだ場合は正典の各型テンプレに差し替える。
 
 1. **リード文** (2-3 段落)
    - 指標の定義 (1 文)
@@ -178,6 +188,7 @@ seoTitle: "<seo_title>"
 subtitle: "<subtitle>"
 slug: <slug>
 description: "<60-120 全角の説明、TOP3 + 最下位 + 倍率を含める>"
+archetype: <A|B|C|D|E (Phase 3 で選んだ型。blog-critic が必須分析視点の審査に使う)>
 category: <metric.category_key>
 tags:
   - <主要キーワード 4-5 件>
@@ -233,7 +244,9 @@ data ファイルを使った場合は `docs/21_ブログ記事原稿/<slug>/dat
 - [ ] 既存記事と slug が重複していない (`/usr/bin/curl -s https://storage.stats47.jp/app/blog/all.json` で確認)
 - [ ] ドラフトを `docs/21_ブログ記事原稿/<slug>/article.md` に書き出した (`.local/r2` ではない)
 - [ ] factual gate (`node .claude/scripts/lib/article-factual-check.mjs ".../article.md" ".../data"`) が pass
-- [ ] callout 2-4 個 + source-link をインライン配置した
+- [ ] callout 3-4 個 (記事固有の「読み違い防止の知識」、定型反復でない) + source-link をインライン配置した
+- [ ] アーキタイプを 1 つ選び frontmatter `archetype:` に宣言、その型の必須分析視点を満たした
+- [ ] 各図の直後に解釈段落がある (図あたり ~600字、`<350字/図` は gate blocker)
 
 ## 既存テンプレ参照
 

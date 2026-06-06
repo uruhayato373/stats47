@@ -217,6 +217,27 @@ if (checks.callouts < 3) {
   warnings.push(`callouts < 3 (actual: ${checks.callouts}) — 推奨は 3-4 個`);
 }
 
+// 図あたり prose 字数 (厚みの担保 ★2026-06-06)。「SVG はあるが文章が薄い」を決定的に弾く。
+// 実測: 良記事 ~600字/図 (各図の後に 3-4 段落の解釈) vs 薄い記事 ~280字/図 (図の後 1-2 文で次の図)。
+// 総 prose 床だけでは「図を増やして 1 図 1-2 文」を弾けないため、図あたり字数を床にする。
+// 副次効果: 図を増やすほど分母が増え prose 要求も増える → まとめ findings 図/装飾 SVG での水増しが不能。
+// チャート 0 の記事には適用しない (表禁止チェック・チャート0 warning が別途カバー)。
+// 正典: .claude/rules/blog-quality-standards.md「図あたり prose 字数の床」。
+if (checks.charts >= 1) {
+  const prosePerChart = Math.round(checks.charCount / checks.charts);
+  checks.prosePerChart = prosePerChart;
+  if (prosePerChart < 350) {
+    blockers.push(
+      `prose/図 = ${prosePerChart}字 (charts: ${checks.charts}, prose: ${checks.charCount}) < 350 — ` +
+        `図を貼って解説が薄い。各図の直後に「なぜ上位/下位か」の解釈段落を足す (良記事は ~600字/図)。図を減らすのも可`,
+    );
+  } else if (prosePerChart < 550) {
+    warnings.push(
+      `prose/図 = ${prosePerChart}字 (charts: ${checks.charts}) < 550 — 図あたりの解説がやや薄い (良記事は ~600字/図、critic の意味判断で可否)`,
+    );
+  }
+}
+
 // source-link 配置チェック (2026-05-28 追加、article-structure-lint.mjs に切り出し)
 // /ranking/ リンクの末尾集約を検出。WARN 扱い (回遊性の問題だが描画は壊れない)。
 const sourceLinkLint = lintSourceLinkPlacement(content);

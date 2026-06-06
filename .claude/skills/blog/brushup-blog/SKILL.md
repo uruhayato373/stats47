@@ -1,7 +1,7 @@
 ---
 name: brushup-blog
-description: ブログ記事の brushup (改善優先度キュー生成 / 1 記事リライト / ユーザー指示時の一括リライト)。--target priority で GSC × D1 から brushup-queue.md 生成、--target article <slug> でリライト (default focus=CTR-reframe、エキスパート視点追加 focus 時のみ nlm cross query で白書補強)、--target batch で優先度上位を一括リライト。Use when user says "ブログ改善優先度", "どの記事を直す", "ブログをブラッシュアップ", "記事を補強", "一括リライト", "brushup".
-argument-hint: --target priority | --target article <slug> [--focus CTR-reframe|エキスパート視点追加|最新データ更新|CTA強化] | --target batch [--count 5] [--dry-run]
+description: ブログ記事の品質是正 (計画的な順次是正 / 1 記事リライト / ユーザー指示時の一括リライト)。★推奨は --target queue: 状態付き是正キュー (.claude/state/blog/remediation-queue.json、GSC×品質blocker統合スコア) の pending 上位を順に是正し article-writer(archetype+図あたり字数)→blog-critic PASS→publish。--target article <slug> で 1 記事リライト、--target batch でユーザー指示時の一括。仕組み正典 docs/02_実装計画/blog-remediation-loop.md。Use when user says "ブログ品質を上げる", "記事を順次直す", "ブログ改善", "どの記事を直す", "ブラッシュアップ", "記事を補強", "一括リライト", "brushup".
+argument-hint: --target queue [--next 5] | --target article <slug> [--focus CTR-reframe|エキスパート視点追加|最新データ更新|CTA強化] | --target batch [--count 5] [--dry-run] | --target priority (legacy)
 primary_agent: article-writer
 ---
 
@@ -17,7 +17,8 @@ primary_agent: article-writer
 
 | 引数 | 必須 | 説明 |
 |---|---|---|
-| `--target` | Yes | `priority` (キュー生成) / `article` (1 記事リライト) / `batch` (一括リライト、ユーザー指示時のみ) |
+| `--target` | Yes | `queue` (★推奨・計画的是正の実行エンジン) / `article` (1 記事リライト) / `batch` (一括リライト、ユーザー指示時のみ) / `priority` (legacy、`queue` に置換) |
+| `--next` | `--target queue` の時 Optional | 取り出す pending 件数 (default 5) |
 | `<slug>` | `--target article` 時のみ Yes | 記事スラグ (例: `household-income-tokyo-okinawa`) |
 | `--focus` | `--target article` の時 Optional | リライト観点 (省略時 `CTR-reframe`): `CTR-reframe` / `エキスパート視点追加` / `最新データ更新` / `CTA強化` |
 | `--count` | `--target batch` の時 Optional | 処理件数 (default 5、最大 5 にクランプ) |
@@ -25,7 +26,63 @@ primary_agent: article-writer
 
 ---
 
-## --target priority: ブログ改善優先度キュー生成
+## --target queue: 計画的是正 (★推奨・週次バッチの実行エンジン)
+
+`build-remediation-queue.mjs` が作る**状態付き是正キュー** (`.claude/state/blog/remediation-queue.json`) を消費し、
+pending 上位 N 件を順に是正する。GSC 流入 (expectedLift) × 品質 blocker severity を**統合スコア**で序列化し、
+publish-blocker を持つ記事 (**must-fix レーン**) を最上位に置く。「次に何を直すか」「何本消化したか」「効いたか」を
+キューが追跡するので、**週次で少しずつ品質を底上げ**できる。正典: `docs/02_実装計画/blog-remediation-loop.md`。
+
+### Step 1: キューを最新化
+
+```bash
+node .claude/scripts/blog/build-remediation-queue.mjs
+# audit を fresh 取得 (audit-published-blog.mjs) → 最新 GSC とマージ → 状態を保ったまま upsert。
+# done は「直近 brushup 済 かつ audit が blocker 0 を確認」した記事のみ。blocker が残れば自動で再 pending。
+```
+
+### Step 2: 次の N 件を取り出す
+
+```bash
+node .claude/scripts/blog/build-remediation-queue.mjs --next 5   # pending 上位 N を JSONL で出力
+```
+
+各 entry は `{slug, lane, priority, combinedScore, gsc{}, quality{blockers,prosePerChart,flags}}`。
+
+### Step 3: 各記事を 1 件ずつ是正 (`--target article` エンジンを再利用)
+
+各 slug について順に:
+
+1. **in-progress に印**: `node .claude/scripts/blog/build-remediation-queue.mjs --mark-in-progress <slug>`
+2. **focus は `quality.flags` の blocker 内訳から決める** (`--target article` のリライトエンジンを適用):
+   - markdown 表 / truncated 表 / チャート0 → 表を **SVG (上位5+下位5)** に置換
+   - `prose/図 <350` → **各図直下に「なぜ上位/下位か」の解釈段落**を追加 (記事アーキタイプの必須分析視点。図あたり ~600字)
+   - `callouts<2` → **記事固有の「読み違い防止の知識」** callout を追加 (全記事共通の定型は不可)
+   - `internalLinks<3` / source-link 末尾集約 → source-link を各図直下にインライン配置
+   - opportunity レーン (blocker 無し・CTR 改善余地) → `CTR-reframe`
+3. **記事アーキタイプを 1 つ選び frontmatter `archetype: A|B|C|D|E` を宣言** (正典「記事アーキタイプ」)。型の章構成・必須分析視点に従う。
+4. **quality-gate を通す**: `node .claude/scripts/blog/quality-gate.mjs <draft path>`。`prose/図` blocker を含め blocker 0 になるまで直す。
+5. **blog-critic を別 agent で起動** → `docs/21_…/<slug>/review.md` verdict: PASS まで反復 (★自己採点禁止)。
+6. **done に印 + wave_id**: `node .claude/scripts/blog/build-remediation-queue.mjs --mark-done <slug> --wave-id YYYY-MM-DD-manual`
+
+### Step 4: wave を記録 (history + 改善ログ)
+
+- `.claude/state/blog/auto-brushup-history.json` に通過記事を追記 (wave_id 一致、`.claude/rules/blog-data-schema.md` の命名規則)。
+- `docs/05_改善ログ/gsc.md` に `## [BLOG-WAVE-<wave_id>]` section を追加 (frontmatter `status: pending` / `due: <+28日>` / `wave_id`)。
+- 公開は CI (`publish-blog.yml` / develop push)。`quality-gate.mjs` が公開前に再 enforce する。
+
+### cadence (週次・人手ゲート)
+
+- **weekly-plan** が毎週 `--next` で top-N を「ブログ品質是正 N 本」Must として転載する。
+- 是正の効果は 4 週後に **weekly-review** が wave_id (gsc.md の BLOG-WAVE section) で判定する。
+- **全自動ではなく人手ゲート** (critic PASS 必須)。auto-brushup の 13% FAIL リスクを避け、人がバッチ単位で確認しながら進める。
+
+---
+
+## --target priority: ブログ改善優先度キュー生成 (legacy → `--target queue` に置換)
+
+> ⚠️ **legacy**: 本モードは D1 articles テーブル参照 (DBレス移行で廃止) + 状態を持たない上書きキューで、
+> `--target queue` (状態付き是正キュー) に置換された。新規は `--target queue` を使う。以下は旧仕様の記録。
 
 GSC の impressions × CTR と D1 の article メタデータを掛け合わせて、改善効果が最も高い記事を特定し `brushup-queue.md` に出力する。
 

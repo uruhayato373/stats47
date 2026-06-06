@@ -135,6 +135,16 @@ DB: .local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6
   → これらは Phase 4 「前週と同じ失敗を繰り返してないか」の検出材料
   → 該当があれば Phase 3 で「effect 判定タスク」として 1 つ計画に組み込む
 
+- ブログ品質是正キュー（**計画的に順次品質向上**・真実源: `.claude/state/blog/remediation-queue.json`）
+  ```bash
+  # 最新化 (audit fresh + GSC マージ、状態保持の upsert) → 次の 3 件を取り出す
+  node .claude/scripts/blog/build-remediation-queue.mjs
+  node .claude/scripts/blog/build-remediation-queue.mjs --next 3
+  ```
+  → pending 上位 3 件を「**ブログ品質是正 3 本**」として Phase 3 の **Must** に転載する (must-fix レーン優先)。
+  → 実行は `/brushup-blog --target queue --next 3` (article-writer が archetype + 図あたり字数で是正 → blog-critic PASS → publish)。
+  → これは毎週の**定常 Must**。少しずつ消化しキュー pending を減らす。仕組み: `docs/02_実装計画/blog-remediation-loop.md`。
+
 - 直近の批判的レビュー・Pre-Mortem ドキュメント
   ls -t docs/04_レビュー/critical-review/*.md | head -5
   ls -t docs/04_レビュー/pre-mortem/*.md | head -3
