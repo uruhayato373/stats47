@@ -40,6 +40,8 @@ import {
 } from "@/features/redesign";
 
 import { AdSenseAd, RANKING_PAGE_FOOTER, CONTENT_FOOTER } from "@/lib/google-adsense";
+import { getCategoryDescription } from "@stats47/data-configs";
+
 import { generateOGMetadata } from "@/lib/metadata/og-generator";
 
 import type { Metadata } from "next";
@@ -130,11 +132,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       .join("・");
 
     const title = `${category.categoryName}`;
-    const description = rankingCount > 0
-      ? (sampleTitles
-          ? `${category.categoryName}に関する都道府県別ランキング ${rankingCount} 件を掲載。${sampleTitles}など、47都道府県を比較・分析できます。`
-          : `${category.categoryName}に関する都道府県別ランキング ${rankingCount} 件を掲載。47都道府県を統計データで比較・分析できます。`)
-      : `${category.categoryName}に関する都道府県別ランキング一覧。47都道府県を統計データで比較できます。`;
+    const customDesc = getCategoryDescription(categoryKey);
+    const description = customDesc
+      ?? (rankingCount > 0
+        ? (sampleTitles
+            ? `${category.categoryName}に関する都道府県別ランキング ${rankingCount} 件を掲載。${sampleTitles}など、47都道府県を比較・分析できます。`
+            : `${category.categoryName}に関する都道府県別ランキング ${rankingCount} 件を掲載。47都道府県を統計データで比較・分析できます。`)
+        : `${category.categoryName}に関する都道府県別ランキング一覧。47都道府県を統計データで比較できます。`);
 
     return {
       title,

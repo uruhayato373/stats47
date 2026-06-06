@@ -10,6 +10,7 @@ export {
 export {
   CATEGORIES,
   getCategoryName,
+  getCategoryDescription,
   listCategories,
   type CategoryMeta,
 } from "./categories";
