@@ -18,7 +18,7 @@ SEO / 性能 / コスト / コンテンツ施策の TODO 一覧。旧 `docs/05_�
 | INDEXING-AUTO-01 | Indexing API による問題 URL の自動再送信 (日次 200/day 稼働中) | effect/pending | 2026-06-20 | claude | indexing |
 | SEO-TITLE-FIX-01 | タイトル double-suffix バグ修正 (31+3 ページ) | effect/pending | 2026-06-20 | claude | gsc |
 | BLOG-WAVE-2026-05-25-auto | curiosity gap auto-brushup 54 記事 | pending | 2026-06-22 | claude | gsc |
-| BLOG-WAVE-2026-05-28-manual | GSC 駆動 上位 4 記事 手動 brushup | pending | 2026-06-25 | claude | gsc |
+| BLOG-WAVE-2026-05-28-manual | GSC 駆動 上位 4 記事 手動 brushup — 全 4 記事 deployed (2026-06-06): dairy-cattle/habitable-area/food-trio/population-density。GSC 計測 4 週後 (2026-07-04) | effect/pending | 2026-07-04 | claude | gsc |
 | BLOG-WAVE-2026-05-29-auto | GSC 改善余地上位 4 記事 auto-brushup | pending | 2026-06-26 | claude | gsc |
 | INDEXING-SITEMAP-02 | sitemap を「コンテンツ実体のある URL」に一致させ未登録を削減 | pending | 2026-06-28 | claude | indexing |
 | ADSENSE-RPM-01 | RPM ¥36 → ¥65 (Viewability 54%→70%+) | pending | 2026-06-30 | claude | adsense |
