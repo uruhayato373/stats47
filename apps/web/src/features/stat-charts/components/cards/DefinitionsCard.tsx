@@ -41,10 +41,10 @@ const COLOR_MAP: Record<string, { bg: string; border: string; text: string; icon
     icon: "text-blue-600",
   },
   rose: {
-    bg: "bg-rose-50",
-    border: "border-rose-200",
-    text: "text-rose-700",
-    icon: "text-rose-600",
+    bg: "bg-red-50",
+    border: "border-red-200",
+    text: "text-red-700",
+    icon: "text-red-600",
   },
   purple: {
     bg: "bg-purple-50",

@@ -173,7 +173,7 @@ function makeMdComponents(slug?: string, affiliateBannersByCategory?: Record<str
             if (!codeClassName) {
                 return (
                     <code
-                        className="rounded border border-slate-200 bg-slate-100 px-1.5 py-0.5 text-[0.92em] font-mono text-rose-700"
+                        className="rounded border border-slate-200 bg-slate-100 px-1.5 py-0.5 text-[0.92em] font-mono text-red-700"
                         {...props}
                     >
                         {children}

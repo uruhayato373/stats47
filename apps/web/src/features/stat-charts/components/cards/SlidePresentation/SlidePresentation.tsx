@@ -57,7 +57,7 @@ function SlidePlayer({ slides, aspectRatio }: { slides: SlideData[]; aspectRatio
     <Card className="overflow-hidden">
       {/* アクセントバー */}
       <div
-        className={`h-1.5 ${slide.accent} transition-colors duration-500`}
+        className={`h-1.5 ${slide.accent} transition-colors duration-300`}
       />
 
       <CardContent className="p-0">
@@ -69,7 +69,7 @@ function SlidePlayer({ slides, aspectRatio }: { slides: SlideData[]; aspectRatio
           <div className="flex justify-between items-start mb-6">
             <div>
               <span
-                className={`inline-block px-3 py-1 rounded-full text-[10px] font-black tracking-widest text-white ${slide.accent} transition-colors duration-500`}
+                className={`inline-block px-3 py-1 rounded-full text-[10px] font-black tracking-widest text-white ${slide.accent} transition-colors duration-300`}
               >
                 {slide.category}
               </span>

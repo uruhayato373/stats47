@@ -162,7 +162,7 @@ export function RankingSidebarClient({
     }
 
     return (
-        <Card className="h-full w-full overflow-hidden animate-in fade-in duration-500">
+        <Card className="h-full w-full overflow-hidden animate-in fade-in duration-300">
             <CardHeader className="py-3 px-4">
                 {categoryIcon && (
                     <CategoryIcon categoryKey={categoryKey ?? ""} lucideIconName={categoryIcon} className="h-4 w-4 text-muted-foreground" />
