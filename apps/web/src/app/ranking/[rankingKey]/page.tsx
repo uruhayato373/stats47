@@ -331,9 +331,9 @@ export default async function RankingKeyPage({
         // 右サイドバー: 関連ランキング・関連記事
         sidebarSection={
           <Suspense fallback={<div className="space-y-4 animate-pulse"><div className="h-64 bg-muted rounded-lg" /><div className="h-32 bg-muted rounded-lg" /></div>}>
+            <AdSenseAd format={RANKING_SIDEBAR_TOP.format} slotId={RANKING_SIDEBAR_TOP.slotId} />
             <RankingItemsSidebar rankingKey={rankingKey} areaType={areaType} categoryKey={rankingItem.categoryKey} />
             <SidebarPromoBanner />
-            <AdSenseAd format={RANKING_SIDEBAR_TOP.format} slotId={RANKING_SIDEBAR_TOP.slotId} />
             <RelatedArticlesCard rankingKey={rankingKey} areaType={areaType} />
             <AffiliateAdSlot categoryKey={rankingItem.categoryKey ?? ""} position="sidebar" />
             <SurveyCard surveys={allSurveys.map((s: { id: string; name: string }) => ({ id: s.id, name: s.name }))} currentSurveyId={rankingItem.surveyId ?? undefined} />
