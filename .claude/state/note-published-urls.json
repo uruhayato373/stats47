@@ -1,9 +1,16 @@
 {
   "description": "note.com 公開済み記事の slug -> URL 対応表。回遊フッタ・本文内部リンク (../slug/draft.md) を note URL に書き換える際の参照元。記事を公開するたびに追記する。",
-  "updated": "2026-05-21",
+  "updated": "2026-06-06",
   "batch1_update": "2026-05-21: koumuin #01-#05 を update モードで再更新 (バッチ1)。カバーを料金バッジ除去版に差し替え、本文を修正済み draft.md で再ペースト、画像を全挿入 (#01:10 / #02:6 / #03:8 / #04:10 / #05:7 枚)、有料3記事 (#01/#03/#05) の有料エリア境界を有料セクション1直前に再設定 (¥300 据え置き)、無料2記事 (#02/#04) は試し読みエリアを記事末尾に設定 (全文無料)、全5本をマガジン公務員×Claude Code実務活用ガイドに追加。",
   "note": "2026-05-20: koumuin-claude-code #00/#02/#29 を誤って note.com/dobokunote (誤アカウント) に公開。ロールバックのため articles をクリアし 3 本のディレクトリを docs/ に戻した。note.com 側の記事削除/下書き化はユーザーが手動対応。2026-05-20: #00 を正しいアカウント note.com/stats47 に試験公開。2026-05-21: #00 を修正済み draft.md (旧価格 ¥1,500 → ¥300 全 14 箇所) で update モード初回実行で更新。2026-05-21: #01-#05 を update モードで復旧 — アイキャッチを価格なし再生成版に差し替え、本文画像を全挿入 (#01:12 / #02:6 / #03:9 / #04:11 / #05:7 枚)、有料3記事 (#01/#03/#05) の有料エリア境界を再設定 (価格 ¥300 据え置き)。",
   "articles": {
+    "koumuin-gis-01-depopulation-medical": {
+      "vertical": "koumuin-gis",
+      "title": "自治体職員のためのGIS入門 — 無料の国土数値情報で「過疎地域×医療機関」を可視化する",
+      "url": "https://note.com/stats47/n686dcc017bbe",
+      "is_paid": false,
+      "published_at": "2026-06-06"
+    },
     "00-claude-code-intro-for-public-servants": {
       "vertical": "koumuin-claude-code",
       "title": "Claude Code とは何か — ターミナル未経験の公務員のための導入ガイド",
