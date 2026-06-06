@@ -10,7 +10,7 @@
  *
  * 入力:
  *   - .claude/state/metrics/{psi,gsc,ga4,adsense}/history.csv
- *   - docs/05_改善ログ/*.md の status: pending を抽出（pending 施策一覧）
+ *   - docs/02_実装計画/improvement-backlog.md の status: pending|in-progress を抽出（pending 施策一覧）
  *   - gh issue list --label auto-generated (残存アラート Issue 集計)
  */
 
@@ -248,36 +248,18 @@ function alertsSection(week) {
 }
 
 function pendingSection() {
-  // docs/05_改善ログ/*.md の status: pending section を集計
-  const metrics = ["gsc", "ga4", "adsense", "psi", "cloudflare-cost"];
-  const lines = [];
-  for (const metric of metrics) {
-    const file = join(PROJECT_ROOT, "docs/05_改善ログ", `${metric}.md`);
-    if (!existsSync(file)) continue;
-    const content = readFileSync(file, "utf-8");
-    // 各 section（## で開始）を分割し、status: pending を含むものを抽出
-    const sections = content.split(/\n(?=## )/);
-    for (const section of sections) {
-      if (!/\*\*status\*\*:\s*pending/.test(section)) continue;
-      const titleMatch = section.match(/^## (.+)$/m);
-      const deployedMatch = section.match(/\*\*deployed_at\*\*:\s*(\d{4}-\d{2}-\d{2})/);
-      const tierMatch = section.match(/\*\*tier\*\*:\s*(\d)/);
-      if (!titleMatch) continue;
-      const title = titleMatch[1];
-      const deployedAt = deployedMatch?.[1];
-      const tier = tierMatch?.[1] ?? "?";
-      let daysStr = "";
-      let marker = "";
-      if (deployedAt) {
-        const days = Math.floor((Date.now() - new Date(deployedAt).getTime()) / 86400000);
-        daysStr = ` — ${days}日経過`;
-        if (days >= 14) marker = " 👀";
-      }
-      lines.push(`- [${metric} T${tier}] ${title}${daysStr}${marker}`);
-    }
+  // improvement-backlog.md の pending|in-progress を scan-pending-improvements.mjs で取得
+  const scanScript = join(PROJECT_ROOT, ".claude/scripts/lib/scan-pending-improvements.mjs");
+  let entries;
+  try {
+    const out = execSync(`node "${scanScript}" --format markdown --status pending,in-progress`, {
+      cwd: PROJECT_ROOT,
+      encoding: "utf-8",
+    });
+    return out || "なし（pending 施策なし）\n";
+  } catch {
+    return "なし（scan-pending-improvements 実行失敗）\n";
   }
-  if (lines.length === 0) return "なし（全施策が効果判定済み、または docs/05_改善ログ/ 未整備）\n";
-  return lines.join("\n") + "\n";
 }
 
 function main() {

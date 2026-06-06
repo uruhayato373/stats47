@@ -10,7 +10,7 @@ import { Medal } from "lucide-react";
 function lookupRankColor(rank: number): string {
     switch (rank) {
         case 1:
-            return "text-yellow-500 bg-yellow-500/10 border-yellow-500/20";
+            return "text-amber-500 bg-amber-500/10 border-amber-500/20";
         case 2:
             return "text-slate-400 bg-slate-400/10 border-slate-400/20";
         case 3:

@@ -321,6 +321,24 @@ GSC（Google Search Console）の継続的追跡と改善施策の記録。
     - 5/9 効果判定後に再選定するか継続するかは経営判断 (PHASE-11-3)
   - **5/9 まで sitemap には触らない方針** — PHASE-9 単一変数効果計測の独立性確保のため
 
+### [INDEXING-AUTO-01] Indexing API による問題 URL 自動再送信 (毎日 JST 06:30)
+
+- **デプロイ日**: 2026-05-23 (初回送信), 2026-06-06 (全 CSV 集約修正)
+- **想定効果**: 「クロール済み - インデックス未登録」の URL が Indexing API `URL_UPDATED` で再クロール → インデックス率向上。200 URL/day 上限で段階的に改善。根拠: Indexing API 公式 (https://developers.google.com/search/apis/indexing-api, アクセス日 2026-06-06) は JobPosting/BroadcastEvent 推奨だが、汎用ページも `URL_UPDATED` で再クロール促進は可能。効果は補助的。
+- **自動化**: `.github/workflows/gsc-auto-resubmit-daily.yml` (毎日 JST 06:30 = UTC 21:30)
+- **スクリプト**: `.claude/scripts/gsc/auto-resubmit.mjs --execute --max 200`
+- **入力**: `.claude/state/metrics/gsc/coverage-drilldown/` 以下の全 CSV (indexed-submitted 除外)、7 日以内 dedup
+- **実績 (2026-06-06 時点)**:
+  - 総送信: 2,235 success / 386 error (うち quota 超過・resubmit 系)
+  - 最終送信: 2026-06-06 JST 06:30 (200 URLs)
+  - 現在のプール: 1,825 URLs (dedup 後、3,149 ユニーク URL 中)
+- **2026-06-06 修正**: `findLatestCsv` (最新 1 件) → `findAllCsvs` (全 CSV 集約) に変更。W23 ドリルダウン (1 URL) 追加後に W22 unindexed-urls-combined.csv (3,140 URL) が無視される問題を修正。
+- **検証コマンド**: `node .claude/scripts/gsc/auto-resubmit.mjs --dry-run`
+- **実測**: effect/pending [送信済みだが Google インデックス反映を URL Inspection で未観測。検証期日: 2026-06-20、`node .claude/scripts/gsc/url-inspection-daily.cjs --limit 50` で coverageState 変化を確認]
+- **未確定 / 仮説**:
+  - **[仮説]** Indexing API 送信で 30 日以内に一部 URL の coverageState が「送信して登録されました」に遷移する。検証期日: 2026-06-20
+  - **注意**: `redirect-urls.csv` (W19) も含まれているが、リダイレクト先の最終 URL は別途 sitemap に含まれているため送信は無害 (dedup で再送 7 日制限あり)。
+
 ### [PHASE-9-FOLLOWUP] Cloudflare token 集約 + Smoke Test cascade fix
 
 - **対応日**: 2026-04-26 / コミット: `e97b6db7`

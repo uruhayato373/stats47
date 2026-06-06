@@ -81,7 +81,7 @@ export function AreaRelatedRankingsCard({
         <Card>
           <CardHeader className="flex flex-row items-center justify-between gap-3 space-y-0 py-4 px-5">
             <div className="flex items-center gap-2">
-              <TrendingDown className="h-4 w-4 text-rose-600" />
+              <TrendingDown className="h-4 w-4 text-red-600" />
               <CardTitle className="text-base">
                 {profile.areaName}が下位
               </CardTitle>
@@ -101,7 +101,7 @@ export function AreaRelatedRankingsCard({
                   key={`${item.rankingKey}-${idx}`}
                   className="flex items-baseline gap-2"
                 >
-                  <span className="inline-flex h-5 w-7 shrink-0 items-center justify-center rounded bg-rose-50 text-[10px] font-bold text-rose-700 dark:bg-rose-950 dark:text-rose-400">
+                  <span className="inline-flex h-5 w-7 shrink-0 items-center justify-center rounded bg-red-50 text-[10px] font-bold text-red-700 dark:bg-red-950 dark:text-red-400">
                     {item.rank}位
                   </span>
                   <Link

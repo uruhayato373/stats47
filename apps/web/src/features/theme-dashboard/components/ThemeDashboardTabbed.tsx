@@ -1,9 +1,8 @@
 "use client";
 
-import { useCallback, useMemo, useState, useTransition } from "react";
+import { useCallback, useEffect, useMemo, useState, useTransition } from "react";
 
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
 
 import { lookupArea } from "@stats47/area";
 import {
@@ -75,14 +74,18 @@ export function ThemeDashboardTabbed({
   const [isYearPending, startYearTransition] = useTransition();
 
   // 選択中の都道府県 — URL ?pref=01000 で初期値を受け取れる (areas からのリダイレクト用)
-  const searchParams = useSearchParams();
-  const initialPrefFromQuery = useMemo(() => {
-    const p = searchParams?.get("pref");
-    return p && /^\d{5}$/.test(p) ? p : null;
-  }, [searchParams]);
+  // useSearchParams() は SSG で fallback={null} の Suspense を要求して CLS を招くため、
+  // window.location.search を useEffect で読む (MigrationFlowSectionClient と同じパターン)。
   const [selectedPrefectureCode, setSelectedPrefectureCode] = useState<
     string | null
-  >(initialPrefFromQuery);
+  >(null);
+  useEffect(() => {
+    const p = new URLSearchParams(window.location.search).get("pref");
+    if (p && /^\d{5}$/.test(p)) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setSelectedPrefectureCode(p);
+    }
+  }, []);
 
   // 現在のタブのデータ
   const currentYear = selectedYearMap[selectedTabKey];

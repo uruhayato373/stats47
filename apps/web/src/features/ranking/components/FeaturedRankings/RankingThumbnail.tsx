@@ -36,7 +36,7 @@ export function RankingThumbnail({ baseSrc, lightSrc, darkSrc, src, alt, classNa
     }
 
     const imgClassName = cn(
-        "object-cover w-full h-full transition-transform duration-500 group-hover:scale-105",
+        "object-cover w-full h-full transition-transform duration-300 group-hover:scale-105",
         className
     );
 

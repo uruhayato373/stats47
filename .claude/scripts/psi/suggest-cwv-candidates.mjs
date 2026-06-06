@@ -259,7 +259,7 @@ function renderMarkdown(results) {
     }
     lines.push("");
     lines.push("### 改善提案ポインタ");
-    lines.push("- LCP/CLS 過去施策: `docs/05_改善ログ/psi.md`");
+    lines.push("- LCP/CLS 過去施策: `docs/02_実装計画/improvement-backlog.md`");
     lines.push(
       "- 詳細ログ: `.claude/skills/analytics/performance-improvement/reference/improvement-log.md`"
     );

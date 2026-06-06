@@ -40,7 +40,7 @@ const NAV_LINKS = [
   { href: "/", label: "ホーム", icon: Home, color: "bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-400" },
   { href: "/themes", label: "ランキング", icon: TrendingUp, color: "bg-teal-100 text-teal-600 dark:bg-teal-950 dark:text-teal-400" },
   { href: "/blog", label: "ブログ", icon: BookOpen, color: "bg-pink-100 text-pink-600 dark:bg-pink-950 dark:text-pink-400" },
-  { href: "/areas", label: "地域の特徴", icon: MapPin, color: "bg-green-100 text-green-600 dark:bg-green-950 dark:text-green-400" },
+  { href: "/areas", label: "地域の特徴", icon: MapPin, color: "bg-emerald-100 text-emerald-600 dark:bg-emerald-950 dark:text-emerald-400" },
   { href: "/category/population/compare", label: "地域間比較", icon: ArrowLeftRight, color: "bg-blue-100 text-blue-600 dark:bg-blue-950 dark:text-blue-400" },
   { href: "/search", label: "検索", icon: Search, color: "bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-400" },
 ] as const;

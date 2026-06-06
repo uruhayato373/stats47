@@ -3,7 +3,7 @@
  * GSC SEO 改修 + 記事追加の効果計測
  *
  * 2026-05-17 に実施した SEO タイトル改修 10 件 + 新規記事 6 本の効果を、
- * 週次 GSC snapshot を diff して docs/05_改善ログ/gsc.md に追記する。
+ * 週次 GSC snapshot を diff して .claude/skills/analytics/gsc-improvement/reference/improvement-log.md に追記する。
  *
  * Usage:
  *   node .claude/scripts/blog/measure-gsc-impact.mjs <before-week> <after-week>
@@ -29,7 +29,7 @@ const SNAPSHOT_DIR = path.join(
   PROJECT_ROOT,
   ".claude/skills/analytics/gsc-improvement/reference/snapshots"
 );
-const LOG_PATH = path.join(PROJECT_ROOT, "docs/05_改善ログ/gsc.md");
+const LOG_PATH = path.join(PROJECT_ROOT, ".claude/skills/analytics/gsc-improvement/reference/improvement-log.md");
 
 // ====== 計測対象 ======
 

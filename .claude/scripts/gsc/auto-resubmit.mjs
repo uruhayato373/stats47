@@ -69,32 +69,28 @@ function nowISO() {
   return new Date().toISOString();
 }
 
-function findLatestCsv(dir) {
-  if (!fs.existsSync(dir)) return null;
-  const candidates = [];
-  // recurse 1 level deep (YYYY-Www subdirs)
+/**
+ * drilldown ディレクトリ以下の全 CSV パスを返す (indexed-submitted を除く)。
+ * CI では checkout 後の mtime が全ファイル同一になり「最新 1 件」選択が
+ * 非決定的になるため、全 CSV を集約して dedup を上位レイヤ (recentlyResubmitted) に委ねる。
+ */
+function findAllCsvs(dir) {
+  if (!fs.existsSync(dir)) return [];
+  const paths = [];
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
     if (entry.isDirectory()) {
       const subDir = path.join(dir, entry.name);
       for (const file of fs.readdirSync(subDir)) {
         if (!file.endsWith(".csv")) continue;
-        // INDEXED 済 URL は対象外
         if (file === "indexed-submitted-urls.csv") continue;
-        const full = path.join(subDir, file);
-        const stat = fs.statSync(full);
-        candidates.push({ path: full, mtime: stat.mtimeMs, name: file });
+        paths.push(path.join(subDir, file));
       }
     } else if (entry.isFile() && entry.name.endsWith(".csv")) {
-      // skip top-level history.csv 等
       if (entry.name === "history.csv") continue;
-      const full = path.join(dir, entry.name);
-      const stat = fs.statSync(full);
-      candidates.push({ path: full, mtime: stat.mtimeMs, name: entry.name });
+      paths.push(path.join(dir, entry.name));
     }
   }
-  if (candidates.length === 0) return null;
-  candidates.sort((a, b) => b.mtime - a.mtime);
-  return candidates[0].path;
+  return paths;
 }
 
 /**
@@ -228,22 +224,40 @@ function loadAuth() {
 // ---------- main ----------
 
 async function main() {
-  // 1. 入力 CSV 特定
-  const csvPath = INPUT
-    ? path.resolve(INPUT)
-    : findLatestCsv(DRILLDOWN_DIR);
+  // 1. 入力 CSV 特定 (--input 指定時は単一ファイル、省略時は全 CSV 集約)
+  let csvPaths;
+  if (INPUT) {
+    const p = path.resolve(INPUT);
+    if (!fs.existsSync(p)) {
+      console.log(`[skip] 指定 CSV が存在しません: ${p}`);
+      process.exit(0);
+    }
+    csvPaths = [p];
+  } else {
+    csvPaths = findAllCsvs(DRILLDOWN_DIR);
+  }
 
-  if (!csvPath || !fs.existsSync(csvPath)) {
+  if (csvPaths.length === 0) {
     console.log(
       `[skip] 入力 CSV なし (DRILLDOWN_DIR=${DRILLDOWN_DIR})。終了します。`
     );
     process.exit(0);
   }
-  console.log(`[input] ${path.relative(PROJECT_ROOT, csvPath)}`);
+  console.log(`[input] ${csvPaths.length} CSV ファイル: ${csvPaths.map(p => path.relative(PROJECT_ROOT, p)).join(", ")}`);
 
-  // 2. 未 INDEXED 抽出
-  const candidates = extractNonIndexed(csvPath);
-  console.log(`[extract] non-indexed URLs: ${candidates.length}`);
+  // 2. 未 INDEXED 抽出 (全 CSV を集約して URL 重複は Set で排除)
+  const urlSeen = new Set();
+  const allCandidates = [];
+  for (const csvPath of csvPaths) {
+    for (const c of extractNonIndexed(csvPath)) {
+      if (!urlSeen.has(c.url)) {
+        urlSeen.add(c.url);
+        allCandidates.push(c);
+      }
+    }
+  }
+  const candidates = allCandidates;
+  console.log(`[extract] non-indexed URLs: ${candidates.length} (${csvPaths.length} CSV 集約)`);
 
   // 3. 履歴 dedup (7 日以内除外)
   const history = loadHistory();
