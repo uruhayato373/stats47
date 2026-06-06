@@ -403,7 +403,7 @@ export default async function CategoryPage({ params }: PageProps) {
         </main>
 
         {/* 右サイドバー（lg+、360px、independent scroll で全 widget 到達可能） */}
-        <aside className="hidden lg:flex lg:flex-col lg:gap-4 lg:sticky lg:top-20 lg:pr-1">
+        <aside className="hidden lg:flex lg:flex-col lg:gap-4 lg:sticky lg:top-20 lg:max-h-[calc(100vh-5.5rem)] lg:overflow-y-auto lg:pr-1">
 
           <div className="flex flex-col gap-4">
             {/* 新着記事 */}
