@@ -39,9 +39,9 @@ AdSense 広告収益・RPM・CTR・ビューアビリティの改善施策。施
 
 ## [ADSENSE-OAUTH-01] ローカル .env.local の OAuth refresh_token 再認証
 
-- **status**: pending
+- **status**: resolved / superseded (2026-06-06) — ローカル `.env.local` 経路は CI 専任化 (2026-05-29) で設計から除外。AdSense は GHA `fetch-metrics-weekly.yml` 経由で取得継続中 (W21/W22/W23 実取得)。OAuth 同意画面は **In production publish 済** (owner 確認 2026-06-06) で失効リスクも解消 → **完全解決・残アクションなし** → 下記「2026-06-06 更新」参照
 - **tier**: 1
-- **blocker**: local AdSense snapshot 取得が不可 (GHA 側は別系統で取得継続)
+- **blocker**: なし (旧: local AdSense snapshot 取得不可。CI 専任化で local 取得自体を廃止したため解消)
 - **target_metric**: adsense-data-pipeline
 - **owner**: uruhayato373
 - **due**: 2026-06-07
@@ -61,6 +61,19 @@ AdSense 広告収益・RPM・CTR・ビューアビリティの改善施策。施
 - **検証コマンド**: `/fetch-adsense-data last7d` がローカルで成功 (`invalid_grant` エラーが出ない)
 - **検証期日**: 2026-06-07
 - **期日後の判定**: ローカル取得成功 → effect/full
+
+### 2026-06-06 更新 (superseded)
+
+ローカル `.env.local` は 2026-05-29 の CI 専任化 (memory `project_env_local_ci_consolidation`) で削除済み (現在ファイル不在)。AdSense メトリクスは GHA `fetch-metrics-weekly.yml` (secrets 経由・AdSense step は `continue-on-error: true`) で取得継続中:
+
+- `.claude/state/metrics/adsense/history.csv`: W21 (¥47) / W22 (¥100) を実取得済み
+- GHA secret `GOOGLE_ADSENSE_REFRESH_TOKEN` は 2026-05-20 更新で有効 (`gh secret list` で確認)
+
+よって「ローカル再認証」タスクは不要 (実行しても `.env.local` 不在で `oauth-setup.js` が crash する)。
+
+**根本対策は実施済み (2026-06-06 確認)**: OAuth 同意画面は既に **In production** に publish 済み (owner 確認)。これにより Testing mode の約7日 auto-expire 問題は存在せず、GHA token の失効リスクも解消。実測の裏付け: token は 2026-05-20 設定で 17 日後 (06-06) も有効 (run 27046929360 で W23 取得成功・`invalid_grant` なし)。**本施策は完全解決・残アクションなし。**
+
+(参考) 万一 token を再発行する必要が生じた場合の手順: 一時 `.env.local` に CLIENT_ID/SECRET を置く → `node .claude/scripts/adsense/oauth-setup.js` → `gh secret set GOOGLE_ADSENSE_REFRESH_TOKEN` → `rm .env.local`。
 
 ## [ADSENSE-RPM-01] レバー A: RPM ¥36 → ¥65 (Viewability 54%→70%+)
 
