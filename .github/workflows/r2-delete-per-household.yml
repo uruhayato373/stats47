@@ -1,0 +1,47 @@
+name: 🗑️ R2 Cleanup — per_household files
+
+# per_household 正規化を廃止したため、R2 に残存する
+# app/ranking/*/values-per_household.json を一括削除する一回限りのワークフロー。
+# 実行・確認後はこのワークフロー自体を削除してよい。
+
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "true: ファイル一覧表示のみ (削除しない)"
+        required: false
+        default: "true"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: r2-write
+  cancel-in-progress: false
+
+env:
+  R2_S3_ENDPOINT: https://${{ secrets.CLOUDFLARE_ACCOUNT_ID }}.r2.cloudflarestorage.com
+  R2_ACCESS_KEY_ID: ${{ secrets.CLOUDFLARE_R2_ACCESS_KEY_ID }}
+  R2_SECRET_ACCESS_KEY: ${{ secrets.CLOUDFLARE_R2_SECRET_ACCESS_KEY }}
+  CLOUDFLARE_R2_BUCKET_NAME: stats47
+
+jobs:
+  delete:
+    name: Delete per_household files from R2
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: List & delete per_household files
+        run: npx tsx packages/r2-storage/src/scripts/delete-r2-per-household.ts ${{ inputs.dry_run == 'true' && '--dry-run' || '' }}
+        env:
+          CI: "true"
+          GITHUB_ACTIONS: "true"
