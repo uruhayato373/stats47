@@ -104,3 +104,17 @@ Baseline のデータから以下を優先候補として検討:
 - **未確定 / 仮説**: 自動 stub。Append-only ルールに従い、後続で更新する場合は新エントリを追加
 
 _Auto-stub by `.claude/scripts/lib/append-improvement-log.mjs`_
+
+---
+
+### [T2-SNS-STATION-01] feat: category description 差別化 + BLOG-CTR-05 brushup + GA4 try/catch + CWV CLS 修
+
+- **デプロイ日**: 2026-06-06 / コミット: `73917c8`
+- **想定効果**: (未記入 — `.claude/rules/evidence-based-judgment.md` に従って記入)
+- **検証コマンド**: (未記入)
+- **実測 (before)**: (未記入)
+- **実測 (after)**: (未記入)
+- **判定**: `effect/pending` — 自動 stub。判定は次の週次レビューで埋める
+- **未確定 / 仮説**: 自動 stub。Append-only ルールに従い、後続で更新する場合は新エントリを追加
+
+_Auto-stub by `.claude/scripts/lib/append-improvement-log.mjs`_
