@@ -1,31 +1,31 @@
 {
-  "generatedAt": "2026-06-07T12:28:16.812Z",
+  "generatedAt": "2026-06-07T22:20:02.471Z",
   "date": "2026-06-07",
   "totals": {
-    "entries": 72,
-    "active": 72,
-    "uniqueAdvertisers": 29
+    "entries": 68,
+    "active": 68,
+    "uniqueAdvertisers": 28
   },
   "byCategory": {
     "administrativefinancial": 7,
     "energy": 7,
-    "tourism": 11,
+    "tourism": 9,
     "socialsecurity": 8,
     "economy": 13,
     "construction": 8,
-    "population": 8,
-    "laborwage": 8,
+    "laborwage": 7,
+    "population": 7,
     "landweather": 2
   },
   "byLocation": {
-    "blog-bottom": 47,
+    "blog-bottom": 44,
     "sidebar-sticky": 2,
-    "area-sidebar": 4,
+    "area-sidebar": 3,
     "sidebar-inline": 1,
     "sidebar-bottom": 18
   },
   "byAdType": {
-    "banner": 54,
+    "banner": 50,
     "text": 18
   },
   "coverage": {
