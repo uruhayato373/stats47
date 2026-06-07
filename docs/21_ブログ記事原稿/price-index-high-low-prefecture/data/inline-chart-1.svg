@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 580 350" style="max-width:580px;width:100%;font-family:sans-serif">
+  <title>費目別消費者物価地域差指数の格差</title>
+  <rect width="580" height="350" fill="#f8fafc" rx="8"/>
+  <text x="290" y="22" text-anchor="middle" font-size="13" font-weight="bold" fill="#1e293b">費目別 物価格差（最高県 vs 最安県）</text>
+  <text x="290" y="38" text-anchor="middle" font-size="11" fill="#64748b">各費目の最高値（赤）と最安値（青）の指数</text>
+  <!-- 住居費 -->
+  <text x="105" y="72" text-anchor="end" font-size="11" fill="#334155">住居費</text>
+  <rect x="110" y="56" width="283" height="20" fill="#ef4444" rx="2"/>
+  <rect x="110" y="80" width="204" height="20" fill="#3b82f6" rx="2"/>
+  <text x="398" y="70" font-size="11" fill="#b91c1c" font-weight="bold">東京 127.2</text>
+  <text x="319" y="94" font-size="11" fill="#1e40af" font-weight="bold">岐阜 81.3</text>
+  <!-- 光熱水道 -->
+  <text x="105" y="122" text-anchor="end" font-size="11" fill="#334155">光熱・水道</text>
+  <rect x="110" y="106" width="238" height="20" fill="#f87171" rx="2"/>
+  <rect x="110" y="130" width="174" height="20" fill="#60a5fa" rx="2"/>
+  <text x="353" y="120" font-size="11" fill="#dc2626">北海道 119.6</text>
+  <text x="289" y="144" font-size="11" fill="#2563eb">大阪 87.0</text>
+  <!-- 教育費 -->
+  <text x="105" y="172" text-anchor="end" font-size="11" fill="#334155">教育費</text>
+  <rect x="110" y="156" width="250" height="20" fill="#fca5a5" rx="2"/>
+  <rect x="110" y="180" width="160" height="20" fill="#93c5fd" rx="2"/>
+  <text x="365" y="170" font-size="11" fill="#dc2626">大阪 125.1</text>
+  <text x="275" y="194" font-size="11" fill="#2563eb">富山 78.8</text>
+  <!-- 食料費 -->
+  <text x="105" y="222" text-anchor="end" font-size="11" fill="#334155">食料費</text>
+  <rect x="110" y="206" width="213" height="20" fill="#fecaca" rx="2"/>
+  <rect x="110" y="230" width="192" height="20" fill="#bfdbfe" rx="2"/>
+  <text x="328" y="220" font-size="11" fill="#dc2626">沖縄 106.7</text>
+  <text x="307" y="244" font-size="11" fill="#1d4ed8">群馬 96.0</text>
+  <!-- 総合費 -->
+  <text x="105" y="272" text-anchor="end" font-size="11" fill="#334155">総合</text>
+  <rect x="110" y="256" width="208" height="20" fill="#e5e7eb" rx="2" stroke="#94a3b8"/>
+  <rect x="110" y="280" width="193" height="20" fill="#e5e7eb" rx="2" stroke="#94a3b8"/>
+  <text x="323" y="270" font-size="11" fill="#475569">東京 104.0</text>
+  <text x="308" y="294" font-size="11" fill="#475569">群馬 96.2</text>
+  <!-- 格差ラベル -->
+  <text x="510" y="70" font-size="11" fill="#b91c1c" font-weight="bold">45.9pt差</text>
+  <text x="510" y="120" font-size="11" fill="#b45309">32.6pt差</text>
+  <text x="510" y="170" font-size="11" fill="#b45309">46.3pt差</text>
+  <text x="510" y="220" font-size="11" fill="#64748b">10.9pt差</text>
+  <text x="510" y="270" font-size="11" fill="#94a3b8">7.8pt差</text>
+  <text x="290" y="340" text-anchor="middle" font-size="10" fill="#94a3b8">出典: 総務省 e-Stat 社会生活統計指標 2024年</text>
+</svg>
