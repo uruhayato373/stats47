@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 280" role="img" aria-label="費目別物価地域差指数の最大・最小（2024年）">
+  <rect width="100%" height="100%" fill="#f8fafc" rx="6"/>
+  <text x="340" y="22" text-anchor="middle" font-size="13" fill="#1e293b" font-weight="bold">費目別 物価格差の範囲（2024年・全国平均=100）</text>
+  <!-- Reference line at 100 -->
+  <line x1="200" y1="40" x2="200" y2="250" stroke="#94a3b8" stroke-width="1" stroke-dasharray="4"/>
+  <text x="200" y="258" text-anchor="middle" font-size="10" fill="#94a3b8">全国平均(100)</text>
+  <!-- Scale: 75-130, center=100 at x=200, 1pt=3.5px -->
+  <!-- 総合: 96.2-104.0 -->
+  <text x="50" y="75" text-anchor="middle" font-size="12" fill="#475569">総合</text>
+  <text x="50" y="88" text-anchor="middle" font-size="10" fill="#94a3b8">差 7.8pt</text>
+  <rect x="185" y="65" width="28" height="20" fill="#3b82f6" rx="3"/>
+  <text x="172" y="78" text-anchor="end" font-size="10" fill="#475569">96.2</text>
+  <text x="217" y="78" font-size="10" fill="#475569">104.0</text>
+  <!-- 食料: 95.8-106.7 -->
+  <text x="50" y="120" text-anchor="middle" font-size="12" fill="#475569">食料</text>
+  <text x="50" y="133" text-anchor="middle" font-size="10" fill="#94a3b8">差 10.9pt</text>
+  <rect x="181" y="110" width="38" height="20" fill="#60a5fa" rx="3"/>
+  <text x="168" y="123" text-anchor="end" font-size="10" fill="#475569">95.8</text>
+  <text x="222" y="123" font-size="10" fill="#475569">106.7</text>
+  <!-- 光熱水道: 87.0-119.6 -->
+  <text x="50" y="165" text-anchor="middle" font-size="12" fill="#475569">光熱水道</text>
+  <text x="50" y="178" text-anchor="middle" font-size="10" fill="#94a3b8">差 32.6pt</text>
+  <rect x="151" y="155" width="114" height="20" fill="#f59e0b" rx="3"/>
+  <text x="138" y="168" text-anchor="end" font-size="10" fill="#475569">87.0</text>
+  <text x="270" y="168" font-size="10" fill="#475569">119.6</text>
+  <!-- 住居: 81.3-127.2 -->
+  <text x="50" y="210" text-anchor="middle" font-size="12" fill="#475569">住居</text>
+  <text x="50" y="223" text-anchor="middle" font-size="10" fill="#dc2626" font-weight="bold">差 45.9pt</text>
+  <rect x="121" y="200" width="161" height="20" fill="#ef4444" rx="3"/>
+  <text x="108" y="213" text-anchor="end" font-size="10" fill="#475569">81.3</text>
+  <text x="286" y="213" font-size="10" fill="#475569">127.2</text>
+</svg>

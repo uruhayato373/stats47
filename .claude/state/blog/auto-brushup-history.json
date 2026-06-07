@@ -603,6 +603,33 @@
       "expectedLift": 4,
       "impressions": 138,
       "ctr_before": 0.0145
+    },
+    {
+      "date": "2026-06-07",
+      "wave_id": "2026-06-07-manual",
+      "slug": "consumer-price-regional-gap",
+      "framing": "費目分解で住居費が格差9割を可視化 (表→SVG3枚, archetype D)",
+      "expectedLift": 26,
+      "impressions": 241,
+      "ctr_before": 0
+    },
+    {
+      "date": "2026-06-07",
+      "wave_id": "2026-06-07-manual",
+      "slug": "curry-roux-consumption-gap",
+      "framing": "表→上位5+下位5 SVG, 内部リンク補強, archetype A",
+      "expectedLift": 1,
+      "impressions": 6,
+      "ctr_before": 0
+    },
+    {
+      "date": "2026-06-07",
+      "wave_id": "2026-06-07-manual",
+      "slug": "doctor-income-prefecture-gap",
+      "framing": "表→上位5+下位5 SVG, 内部リンク補強, archetype A",
+      "expectedLift": 0,
+      "impressions": 0,
+      "ctr_before": 0
     }
   ]
 }
