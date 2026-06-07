@@ -1,0 +1,244 @@
+{
+  "title": "カレールウ年間消費量（2024年・g／世帯）",
+  "unit": "g",
+  "year": "2024",
+  "yearName": "2024年",
+  "rankingKey": "curry-roux-consumption-quantity",
+  "data": [
+    {
+      "pref": "新潟県",
+      "value": 1815,
+      "rank": 1
+    },
+    {
+      "pref": "徳島県",
+      "value": 1526,
+      "rank": 2
+    },
+    {
+      "pref": "山形県",
+      "value": 1524,
+      "rank": 3
+    },
+    {
+      "pref": "鳥取県",
+      "value": 1520,
+      "rank": 4
+    },
+    {
+      "pref": "北海道",
+      "value": 1468,
+      "rank": 5
+    },
+    {
+      "pref": "福島県",
+      "value": 1439,
+      "rank": 6
+    },
+    {
+      "pref": "静岡県",
+      "value": 1406,
+      "rank": 7
+    },
+    {
+      "pref": "香川県",
+      "value": 1405,
+      "rank": 8
+    },
+    {
+      "pref": "鹿児島県",
+      "value": 1400,
+      "rank": 9
+    },
+    {
+      "pref": "佐賀県",
+      "value": 1392,
+      "rank": 10
+    },
+    {
+      "pref": "島根県",
+      "value": 1372,
+      "rank": 11
+    },
+    {
+      "pref": "岡山県",
+      "value": 1347,
+      "rank": 12
+    },
+    {
+      "pref": "滋賀県",
+      "value": 1346,
+      "rank": 13
+    },
+    {
+      "pref": "埼玉県",
+      "value": 1314,
+      "rank": 14
+    },
+    {
+      "pref": "広島県",
+      "value": 1308,
+      "rank": 15
+    },
+    {
+      "pref": "岩手県",
+      "value": 1306,
+      "rank": 16
+    },
+    {
+      "pref": "長野県",
+      "value": 1306,
+      "rank": 17
+    },
+    {
+      "pref": "富山県",
+      "value": 1295,
+      "rank": 18
+    },
+    {
+      "pref": "大分県",
+      "value": 1272,
+      "rank": 19
+    },
+    {
+      "pref": "千葉県",
+      "value": 1266,
+      "rank": 20
+    },
+    {
+      "pref": "石川県",
+      "value": 1255,
+      "rank": 21
+    },
+    {
+      "pref": "山梨県",
+      "value": 1251,
+      "rank": 22
+    },
+    {
+      "pref": "青森県",
+      "value": 1234,
+      "rank": 23
+    },
+    {
+      "pref": "高知県",
+      "value": 1227,
+      "rank": 24
+    },
+    {
+      "pref": "大阪府",
+      "value": 1199,
+      "rank": 25
+    },
+    {
+      "pref": "福井県",
+      "value": 1195,
+      "rank": 26
+    },
+    {
+      "pref": "熊本県",
+      "value": 1193,
+      "rank": 27
+    },
+    {
+      "pref": "和歌山県",
+      "value": 1189,
+      "rank": 28
+    },
+    {
+      "pref": "福岡県",
+      "value": 1184,
+      "rank": 29
+    },
+    {
+      "pref": "三重県",
+      "value": 1178,
+      "rank": 30
+    },
+    {
+      "pref": "宮崎県",
+      "value": 1162,
+      "rank": 31
+    },
+    {
+      "pref": "神奈川県",
+      "value": 1148,
+      "rank": 32
+    },
+    {
+      "pref": "山口県",
+      "value": 1119,
+      "rank": 33
+    },
+    {
+      "pref": "栃木県",
+      "value": 1103,
+      "rank": 34
+    },
+    {
+      "pref": "長崎県",
+      "value": 1098,
+      "rank": 35
+    },
+    {
+      "pref": "秋田県",
+      "value": 1097,
+      "rank": 36
+    },
+    {
+      "pref": "宮城県",
+      "value": 1092,
+      "rank": 37
+    },
+    {
+      "pref": "岐阜県",
+      "value": 1078,
+      "rank": 38
+    },
+    {
+      "pref": "愛媛県",
+      "value": 1076,
+      "rank": 39
+    },
+    {
+      "pref": "沖縄県",
+      "value": 1065,
+      "rank": 40
+    },
+    {
+      "pref": "群馬県",
+      "value": 1048,
+      "rank": 41
+    },
+    {
+      "pref": "奈良県",
+      "value": 1033,
+      "rank": 42
+    },
+    {
+      "pref": "東京都",
+      "value": 1032,
+      "rank": 43
+    },
+    {
+      "pref": "京都府",
+      "value": 960,
+      "rank": 44
+    },
+    {
+      "pref": "愛知県",
+      "value": 955,
+      "rank": 45
+    },
+    {
+      "pref": "兵庫県",
+      "value": 894,
+      "rank": 46
+    },
+    {
+      "pref": "茨城県",
+      "value": 885,
+      "rank": 47
+    }
+  ]
+}

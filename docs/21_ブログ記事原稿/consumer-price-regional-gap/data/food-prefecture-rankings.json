@@ -1,0 +1,244 @@
+{
+  "title": "消費者物価地域差指数 食料（2024年）",
+  "unit": "",
+  "year": "2024",
+  "yearName": "2024年度",
+  "rankingKey": "consumer-price-difference-index-food",
+  "data": [
+    {
+      "pref": "沖縄県",
+      "value": 106.7,
+      "rank": 1
+    },
+    {
+      "pref": "東京都",
+      "value": 103,
+      "rank": 2
+    },
+    {
+      "pref": "福井県",
+      "value": 102.5,
+      "rank": 3
+    },
+    {
+      "pref": "島根県",
+      "value": 102.5,
+      "rank": 4
+    },
+    {
+      "pref": "鳥取県",
+      "value": 102.4,
+      "rank": 5
+    },
+    {
+      "pref": "北海道",
+      "value": 102.3,
+      "rank": 6
+    },
+    {
+      "pref": "神奈川県",
+      "value": 102.1,
+      "rank": 7
+    },
+    {
+      "pref": "石川県",
+      "value": 102.1,
+      "rank": 8
+    },
+    {
+      "pref": "熊本県",
+      "value": 102.1,
+      "rank": 9
+    },
+    {
+      "pref": "山口県",
+      "value": 102,
+      "rank": 10
+    },
+    {
+      "pref": "山形県",
+      "value": 101.8,
+      "rank": 11
+    },
+    {
+      "pref": "京都府",
+      "value": 101.4,
+      "rank": 12
+    },
+    {
+      "pref": "広島県",
+      "value": 101.2,
+      "rank": 13
+    },
+    {
+      "pref": "高知県",
+      "value": 101,
+      "rank": 14
+    },
+    {
+      "pref": "徳島県",
+      "value": 100.8,
+      "rank": 15
+    },
+    {
+      "pref": "香川県",
+      "value": 100.8,
+      "rank": 16
+    },
+    {
+      "pref": "富山県",
+      "value": 100.7,
+      "rank": 17
+    },
+    {
+      "pref": "岡山県",
+      "value": 100.7,
+      "rank": 18
+    },
+    {
+      "pref": "長崎県",
+      "value": 100.7,
+      "rank": 19
+    },
+    {
+      "pref": "千葉県",
+      "value": 100.4,
+      "rank": 20
+    },
+    {
+      "pref": "三重県",
+      "value": 100.3,
+      "rank": 21
+    },
+    {
+      "pref": "愛媛県",
+      "value": 100.2,
+      "rank": 22
+    },
+    {
+      "pref": "兵庫県",
+      "value": 100,
+      "rank": 23
+    },
+    {
+      "pref": "宮城県",
+      "value": 99.7,
+      "rank": 24
+    },
+    {
+      "pref": "秋田県",
+      "value": 99.6,
+      "rank": 25
+    },
+    {
+      "pref": "大阪府",
+      "value": 99.5,
+      "rank": 26
+    },
+    {
+      "pref": "大分県",
+      "value": 99.3,
+      "rank": 27
+    },
+    {
+      "pref": "和歌山県",
+      "value": 98.9,
+      "rank": 28
+    },
+    {
+      "pref": "新潟県",
+      "value": 98.8,
+      "rank": 29
+    },
+    {
+      "pref": "滋賀県",
+      "value": 98.8,
+      "rank": 30
+    },
+    {
+      "pref": "岩手県",
+      "value": 98.7,
+      "rank": 31
+    },
+    {
+      "pref": "福岡県",
+      "value": 98.7,
+      "rank": 32
+    },
+    {
+      "pref": "佐賀県",
+      "value": 98.3,
+      "rank": 33
+    },
+    {
+      "pref": "鹿児島県",
+      "value": 98.2,
+      "rank": 34
+    },
+    {
+      "pref": "埼玉県",
+      "value": 98.1,
+      "rank": 35
+    },
+    {
+      "pref": "奈良県",
+      "value": 98.1,
+      "rank": 36
+    },
+    {
+      "pref": "栃木県",
+      "value": 98,
+      "rank": 37
+    },
+    {
+      "pref": "山梨県",
+      "value": 98,
+      "rank": 38
+    },
+    {
+      "pref": "岐阜県",
+      "value": 97.7,
+      "rank": 39
+    },
+    {
+      "pref": "青森県",
+      "value": 97.6,
+      "rank": 40
+    },
+    {
+      "pref": "福島県",
+      "value": 97.5,
+      "rank": 41
+    },
+    {
+      "pref": "静岡県",
+      "value": 97.5,
+      "rank": 42
+    },
+    {
+      "pref": "愛知県",
+      "value": 97.5,
+      "rank": 43
+    },
+    {
+      "pref": "宮崎県",
+      "value": 97.5,
+      "rank": 44
+    },
+    {
+      "pref": "茨城県",
+      "value": 97.4,
+      "rank": 45
+    },
+    {
+      "pref": "群馬県",
+      "value": 96,
+      "rank": 46
+    },
+    {
+      "pref": "長野県",
+      "value": 95.8,
+      "rank": 47
+    }
+  ]
+}

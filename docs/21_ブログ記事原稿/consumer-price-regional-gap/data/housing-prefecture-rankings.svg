@@ -1,0 +1,65 @@
+<!-- data-source: housing-prefecture-rankings.json | generated: 2026-06-07T10:21:42.842Z -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 300" width="680" height="300" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" role="img" aria-label="消費者物価地域差指数 住居（2024年）">
+  <style>
+    .svg-bg{fill:#fafafa}
+    .svg-title{fill:#222}
+    .svg-subtitle{fill:#666}
+    .svg-label{fill:#333}
+    .svg-legend{fill:#888}
+    @media (prefers-color-scheme:dark){
+      .svg-bg{fill:#1f2937}
+      .svg-title{fill:#f9fafb}
+      .svg-subtitle{fill:#9ca3af}
+      .svg-label{fill:#e5e7eb}
+      .svg-legend{fill:#9ca3af}
+    }
+  </style>
+  <rect width="680" height="300" class="svg-bg" rx="8"/>
+  <text x="340" y="24" text-anchor="middle" font-size="16" font-weight="bold" class="svg-title">消費者物価地域差指数 住居（2024年）</text>
+  
+  <text x="227.5" y="54" text-anchor="middle" font-size="12" font-weight="bold" fill="#1565c0">上位 5</text>
+  <text x="542.5" y="54" text-anchor="middle" font-size="12" font-weight="bold" fill="#c62828">下位 5</text>
+  
+      <text x="84" y="82" text-anchor="end" font-size="11" class="svg-label">東京都</text>
+      <rect x="90" y="63" width="195" height="30" fill="#1565c0" rx="2"/>
+      <text x="289" y="82" font-size="10" class="svg-label">127.2</text>
+    
+      <text x="84" y="118" text-anchor="end" font-size="11" class="svg-label">千葉県</text>
+      <rect x="90" y="99" width="175.37735849056605" height="30" fill="#1976d2" rx="2"/>
+      <text x="269.37735849056605" y="118" font-size="10" class="svg-label">114.4</text>
+    
+      <text x="84" y="154" text-anchor="end" font-size="11" class="svg-label">神奈川県</text>
+      <rect x="90" y="135" width="173.07783018867926" height="30" fill="#1e88e5" rx="2"/>
+      <text x="267.0778301886793" y="154" font-size="10" class="svg-label">112.9</text>
+    
+      <text x="84" y="190" text-anchor="end" font-size="11" class="svg-label">埼玉県</text>
+      <rect x="90" y="171" width="164.4929245283019" height="30" fill="#2196f3" rx="2"/>
+      <text x="258.4929245283019" y="190" font-size="10" class="svg-label">107.3</text>
+    
+      <text x="84" y="226" text-anchor="end" font-size="11" class="svg-label">京都府</text>
+      <rect x="90" y="207" width="156.06132075471697" height="30" fill="#42a5f5" rx="2"/>
+      <text x="250.06132075471697" y="226" font-size="10" class="svg-label">101.8</text>
+    
+  
+      <text x="399" y="82" text-anchor="end" font-size="11" class="svg-label">岐阜県</text>
+      <rect x="405" y="63" width="124.63443396226414" height="30" fill="#c62828" rx="2"/>
+      <text x="533.6344339622641" y="82" font-size="10" class="svg-label">81.3</text>
+    
+      <text x="399" y="118" text-anchor="end" font-size="11" class="svg-label">岡山県</text>
+      <rect x="405" y="99" width="125.70754716981132" height="30" fill="#d32f2f" rx="2"/>
+      <text x="534.7075471698113" y="118" font-size="10" class="svg-label">82</text>
+    
+      <text x="399" y="154" text-anchor="end" font-size="11" class="svg-label">石川県</text>
+      <rect x="405" y="135" width="126.93396226415094" height="30" fill="#e53935" rx="2"/>
+      <text x="535.933962264151" y="154" font-size="10" class="svg-label">82.8</text>
+    
+      <text x="399" y="190" text-anchor="end" font-size="11" class="svg-label">香川県</text>
+      <rect x="405" y="171" width="127.70047169811319" height="30" fill="#ef5350" rx="2"/>
+      <text x="536.7004716981132" y="190" font-size="10" class="svg-label">83.3</text>
+    
+      <text x="399" y="226" text-anchor="end" font-size="11" class="svg-label">愛媛県</text>
+      <rect x="405" y="207" width="130.3066037735849" height="30" fill="#e57373" rx="2"/>
+      <text x="539.3066037735849" y="226" font-size="10" class="svg-label">85</text>
+    
+  <text x="340" y="282" text-anchor="middle" font-size="10" class="svg-legend">凡例: 青系=上位 / 赤系=下位</text>
+</svg>
