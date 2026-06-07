@@ -28,7 +28,10 @@ import { Separator } from "@stats47/components/atoms/ui/separator";
 import { ExternalLink, Instagram, MapPin, Youtube, Briefcase, Target } from "lucide-react";
 
 import { getRequiredBaseUrl } from "@/lib/env";
-import { buildOperatorPersonSchema } from "@/lib/structured-data/person";
+import {
+  buildOperatorPersonSchema,
+  getOperatorPersonId,
+} from "@/lib/structured-data/person";
 import { buildOrganizationSchema } from "@/lib/structured-data/scripts";
 
 import type { Metadata } from "next";
@@ -89,6 +92,7 @@ export default function AboutPage() {
     url: `${baseUrl}/about`,
     mainEntity: {
       "@type": "Person",
+      "@id": getOperatorPersonId(baseUrl),
       name: "KAZU",
       url: `${baseUrl}/about`,
     },
@@ -150,6 +154,9 @@ export default function AboutPage() {
           </p>
           <p className={TEXT_STYLE_WITH_MARGIN}>
             その違和感をきっかけに、在職中から独学で AI・データ処理を学び始めました。数年かけてスキルを蓄え、IT・データ業界へ転職。その後独立し、2024 年 10 月にこの stats47 を立ち上げました。公的データの正確性はそのままに、現代の UI/UX で「すぐに使える形」へとリデザインすることをミッションにしています。
+          </p>
+          <p className={TEXT_STYLE_WITH_MARGIN}>
+            統計を「作る側」にいたからこそ、数字がどう集計され、どこに落とし穴があるかを実感として知っています。だからこそ stats47 では、推計や孫引きを避け、<strong>総務省 e-Stat などの一次統計だけを出典に明記してそのまま可視化する</strong>方針を貫いています。元のデータに当たれること——それが、ここの数字を信じていただける理由です。
           </p>
           <p className={TEXT_STYLE_WITH_MARGIN}>
             公務員から AI を独学して転職・独立するまでの体験記は、
