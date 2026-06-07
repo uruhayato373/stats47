@@ -657,6 +657,33 @@
       "expectedLift": 0,
       "impressions": 536,
       "ctr_before": 0.0354
+    },
+    {
+      "date": "2026-06-07",
+      "wave_id": "2026-06-07-manual-3",
+      "slug": "sports-urban-paradox",
+      "framing": "表3(ウォーキング/ゴルフ→SVG, 体育館→箇条書き)+findings図除去+関連削除, archetype B",
+      "expectedLift": 3,
+      "impressions": 428,
+      "ctr_before": 0.0304
+    },
+    {
+      "date": "2026-06-07",
+      "wave_id": "2026-06-07-manual-3",
+      "slug": "marriage-unmarried-crisis",
+      "framing": "inline svg抽出+関連節削除+内部リンク, archetype B (図1+濃い真因分析)",
+      "expectedLift": 12,
+      "impressions": 314,
+      "ctr_before": 0.0159
+    },
+    {
+      "date": "2026-06-07",
+      "wave_id": "2026-06-07-manual-3",
+      "slug": "automotive-industry-transformation-map",
+      "framing": "findings図除去+関連削除+callout3+author修正+データ出典, archetype A",
+      "expectedLift": 0,
+      "impressions": 290,
+      "ctr_before": 0.0448
     }
   ]
 }

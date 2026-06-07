@@ -1,0 +1,93 @@
+<svg width="700" height="700" viewBox="0 0 560 560" xmlns="http://www.w3.org/2000/svg" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" role="img" aria-label="輸送用機械出荷額 vs 製造品出荷額に占める構成比">
+<title>輸送用機械出荷額 vs 製造品出荷額に占める構成比</title>
+<rect width="560" height="560" fill="#fafafa" rx="8"/>
+<text x="280" y="24" text-anchor="middle" font-size="13" font-weight="bold" fill="#333">輸送用機械出荷額 vs 製造品出荷額に占める構成比</text>
+<text x="280" y="40" text-anchor="middle" font-size="9" fill="#888">輸送用機械・製造品出荷額等</text>
+<rect x="70" y="60" width="460" height="450" fill="#f9fafb" stroke="#d1d5db"/>
+<line x1="70" y1="510" x2="530" y2="510" stroke="#e5e7eb" stroke-width="0.5"/>
+<text x="64" y="513" text-anchor="end" font-size="8" fill="#6b7280">0</text>
+<line x1="70" y1="435" x2="530" y2="435" stroke="#e5e7eb" stroke-width="0.5"/>
+<text x="64" y="438" text-anchor="end" font-size="8" fill="#6b7280">3兆円</text>
+<line x1="70" y1="360.00000000000006" x2="530" y2="360.00000000000006" stroke="#e5e7eb" stroke-width="0.5"/>
+<text x="64" y="363.00000000000006" text-anchor="end" font-size="8" fill="#6b7280">6兆円</text>
+<line x1="70" y1="285" x2="530" y2="285" stroke="#e5e7eb" stroke-width="0.5"/>
+<text x="64" y="288" text-anchor="end" font-size="8" fill="#6b7280">9兆円</text>
+<line x1="70" y1="210.00000000000003" x2="530" y2="210.00000000000003" stroke="#e5e7eb" stroke-width="0.5"/>
+<text x="64" y="213.00000000000003" text-anchor="end" font-size="8" fill="#6b7280">12兆円</text>
+<line x1="70" y1="135" x2="530" y2="135" stroke="#e5e7eb" stroke-width="0.5"/>
+<text x="64" y="138" text-anchor="end" font-size="8" fill="#6b7280">15兆円</text>
+<line x1="70" y1="60" x2="530" y2="60" stroke="#e5e7eb" stroke-width="0.5"/>
+<text x="64" y="63" text-anchor="end" font-size="8" fill="#6b7280">18兆円</text>
+<line x1="70" y1="60" x2="70" y2="510" stroke="#e5e7eb" stroke-width="0.5"/>
+<text x="70" y="524" text-anchor="middle" font-size="8" fill="#6b7280">0%</text>
+<line x1="162" y1="60" x2="162" y2="510" stroke="#e5e7eb" stroke-width="0.5"/>
+<text x="162" y="524" text-anchor="middle" font-size="8" fill="#6b7280">10%</text>
+<line x1="254" y1="60" x2="254" y2="510" stroke="#e5e7eb" stroke-width="0.5"/>
+<text x="254" y="524" text-anchor="middle" font-size="8" fill="#6b7280">20%</text>
+<line x1="346" y1="60" x2="346" y2="510" stroke="#e5e7eb" stroke-width="0.5"/>
+<text x="346" y="524" text-anchor="middle" font-size="8" fill="#6b7280">30%</text>
+<line x1="438" y1="60" x2="438" y2="510" stroke="#e5e7eb" stroke-width="0.5"/>
+<text x="438" y="524" text-anchor="middle" font-size="8" fill="#6b7280">40%</text>
+<line x1="530" y1="60" x2="530" y2="510" stroke="#e5e7eb" stroke-width="0.5"/>
+<text x="530" y="524" text-anchor="middle" font-size="8" fill="#6b7280">50%</text>
+<line x1="184.09281754592706" y1="60" x2="184.09281754592706" y2="510" stroke="#9ca3af" stroke-dasharray="4,3" opacity="0.6"/>
+<line x1="70" y1="480.0551079787234" x2="530" y2="480.0551079787234" stroke="#9ca3af" stroke-dasharray="4,3" opacity="0.6"/>
+<circle cx="434.3983230413137" cy="74.425525" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>愛知県：構成比=39.6% 出荷額=17.4兆円</title></circle>
+<text x="440.3983230413137" y="70.425525" font-size="8" fill="#374151">愛知</text>
+<circle cx="296.4390394769139" cy="408.771375" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>静岡県：構成比=24.6% 出荷額=4.0兆円</title></circle>
+<text x="302.4390394769139" y="404.771375" font-size="8" fill="#374151">静岡</text>
+<circle cx="288.60901968377186" cy="415.931125" r="4.5" fill="#66bb6a" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>神奈川県：構成比=23.8% 出荷額=3.8兆円</title></circle>
+<text x="294.60901968377186" y="411.931125" font-size="8" fill="#374151">神奈川</text>
+<circle cx="410.2577655980537" cy="427.22995" r="4.5" fill="#ab47bc" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>福岡県：構成比=37.0% 出荷額=3.3兆円</title></circle>
+<text x="416.2577655980537" y="423.22995" font-size="8" fill="#374151">福岡</text>
+<circle cx="449.964600980185" cy="428.545925" r="4.5" fill="#66bb6a" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>群馬県：構成比=41.3% 出荷額=3.3兆円</title></circle>
+<text x="455.964600980185" y="424.545925" font-size="8" fill="#374151">群馬</text>
+<circle cx="367.3149803880716" cy="438.33855" r="4.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>広島県：構成比=32.3% 出荷額=2.9兆円</title></circle>
+<text x="373.3149803880716" y="434.33855" font-size="8" fill="#374151">広島</text>
+<circle cx="288.9415971326356" cy="447.57865" r="4.5" fill="#ffa726" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>三重県：構成比=23.8% 出荷額=2.5兆円</title></circle>
+<text x="294.9415971326356" y="443.57865" font-size="8" fill="#374151">三重</text>
+<circle cx="230.09112057204263" cy="454.04225" r="4.5" fill="#66bb6a" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>埼玉県：構成比=17.4% 出荷額=2.2兆円</title></circle>
+<circle cx="145.07461713276075" cy="475.36817499999995" r="4.5" fill="#ffa726" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>大阪府：構成比=8.2% 出荷額=1.4兆円</title></circle>
+<text x="151.07461713276075" y="471.36817499999995" font-size="8" fill="#374151">大阪</text>
+<circle cx="214.38609043171965" cy="477.68870000000004" r="4.5" fill="#66bb6a" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>栃木県：構成比=15.7% 出荷額=1.3兆円</title></circle>
+<text x="220.38609043171965" y="473.68870000000004" font-size="8" fill="#374151">栃木</text>
+<circle cx="146.86008412252437" cy="478.149225" r="4.5" fill="#ffa726" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>兵庫県：構成比=8.4% 出荷額=1.3兆円</title></circle>
+<circle cx="229.02980506672296" cy="479.402" r="4.5" fill="#66bb6a" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>東京都：構成比=17.3% 出荷額=1.2兆円</title></circle>
+<text x="235.02980506672296" y="475.402" font-size="8" fill="#374151">東京</text>
+<circle cx="258.34568288071443" cy="481.252" r="4.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>山口県：構成比=20.5% 出荷額=1.1兆円</title></circle>
+<circle cx="247.14479585063617" cy="482.9713" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>岐阜県：構成比=19.3% 出荷額=1.1兆円</title></circle>
+<circle cx="197.78028385924847" cy="483.62075" r="4.5" fill="#ffa726" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>滋賀県：構成比=13.9% 出荷額=1.1兆円</title></circle>
+<text x="203.78028385924847" y="479.62075" font-size="8" fill="#374151">滋賀</text>
+<circle cx="194.58276594593477" cy="486.09860000000003" r="4.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>岡山県：構成比=13.5% 出荷額=96億円</title></circle>
+<circle cx="142.1915299848653" cy="486.11145" r="4.5" fill="#66bb6a" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>茨城県：構成比=7.8% 出荷額=96億円</title></circle>
+<circle cx="218.17935512419626" cy="494.512475" r="4.5" fill="#ab47bc" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>大分県：構成比=16.1% 出荷額=62億円</title></circle>
+<circle cx="296.76683108159847" cy="494.629775" r="4.5" fill="#42a5f5" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>岩手県：構成比=24.6% 出荷額=61億円</title></circle>
+<circle cx="185.74670852379728" cy="496.292825" r="4.5" fill="#42a5f5" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>宮城県：構成比=12.6% 出荷額=55億円</title></circle>
+<circle cx="165.44311131669178" cy="497.636525" r="4.5" fill="#42a5f5" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>福島県：構成比=10.4% 出荷額=49億円</title></circle>
+<circle cx="135.14306195677858" cy="499.302525" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>長野県：構成比=7.1% 出荷額=43億円</title></circle>
+<circle cx="144.53725362214345" cy="499.32505" r="4.5" fill="#ffa726" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>京都府：構成比=8.1% 出荷額=43億円</title></circle>
+<circle cx="129.91184535727652" cy="500.903775" r="4.5" fill="#42a5f5" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>北海道：構成比=6.5% 出荷額=36億円</title></circle>
+<circle cx="187.55801907185798" cy="500.992925" r="4.5" fill="#ab47bc" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>熊本県：構成比=12.8% 出荷額=36億円</title></circle>
+<circle cx="149.87793260373994" cy="501.742775" r="4.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>愛媛県：構成比=8.7% 出荷額=33億円</title></circle>
+<circle cx="173.09922711495528" cy="502.914825" r="4.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>香川県：構成比=11.2% 出荷額=28億円</title></circle>
+<circle cx="209.1295003481358" cy="503.8642" r="4.5" fill="#ab47bc" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>長崎県：構成比=15.1% 出荷額=25億円</title></circle>
+<circle cx="175.9651952871946" cy="504.15939999999995" r="4.5" fill="#ab47bc" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>佐賀県：構成比=11.5% 出荷額=23億円</title></circle>
+<circle cx="155.6503510599926" cy="505.012075" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>福井県：構成比=9.3% 出荷額=20億円</title></circle>
+<circle cx="108.46860180537489" cy="505.031225" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>新潟県：構成比=4.2% 出荷額=20億円</title></circle>
+<circle cx="130.50243527691043" cy="505.6813" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>石川県：構成比=6.6% 出荷額=17億円</title></circle>
+<circle cx="160.23913310824082" cy="505.79275" r="4.5" fill="#ffa726" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>奈良県：構成比=9.8% 出荷額=17億円</title></circle>
+<circle cx="101.43406855509836" cy="506.8807" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>富山県：構成比=3.4% 出荷額=12億円</title></circle>
+<circle cx="107.55737772059581" cy="507.109425" r="4.5" fill="#42a5f5" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>山形県：構成比=4.1% 出荷額=12億円</title></circle>
+<circle cx="77.82881987075596" cy="507.46277499999997" r="4.5" fill="#66bb6a" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>千葉県：構成比=0.9% 出荷額=10億円</title></circle>
+<circle cx="103.89450719700264" cy="507.66955" r="4.5" fill="#fdd835" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>山梨県：構成比=3.7% 出荷額=9.3億円</title></circle>
+<circle cx="130.36012761278772" cy="508.089" r="4.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>島根県：構成比=6.6% 出荷額=7.6億円</title></circle>
+<circle cx="116.07572714128092" cy="508.362525" r="4.5" fill="#42a5f5" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>秋田県：構成比=5.0% 出荷額=6.5億円</title></circle>
+<circle cx="99.28894559795847" cy="508.421875" r="4.5" fill="#ab47bc" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>鹿児島県：構成比=3.2% 出荷額=6.3億円</title></circle>
+<circle cx="103.57749982892949" cy="508.506575" r="4.5" fill="#ab47bc" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>宮崎県：構成比=3.6% 出荷額=6.0億円</title></circle>
+<circle cx="92.03757774515634" cy="508.99605" r="4.5" fill="#42a5f5" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>青森県：構成比=2.4% 出荷額=4.0億円</title></circle>
+<circle cx="126.8536019694458" cy="509.154675" r="4.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>高知県：構成比=6.2% 出荷額=3.4億円</title></circle>
+<circle cx="97.75969050805026" cy="509.44077500000003" r="4.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>鳥取県：構成比=3.0% 出荷額=2.2億円</title></circle>
+<circle cx="77.90024847647327" cy="509.614575" r="4.5" fill="#ef5350" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>徳島県：構成比=0.9% 出荷額=1.5億円</title></circle>
+<circle cx="75.93620107264364" cy="509.615525" r="4.5" fill="#ffa726" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>和歌山県：構成比=0.6% 出荷額=1.5億円</title></circle>
+<circle cx="74.22736655539626" cy="509.946075" r="4.5" fill="#ab47bc" fill-opacity="0.75" stroke="#fff" stroke-width="1"><title>沖縄県：構成比=0.5% 出荷額=2157百万円</title></circle>
+</svg>
