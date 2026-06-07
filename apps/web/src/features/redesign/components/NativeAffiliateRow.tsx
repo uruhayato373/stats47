@@ -1,13 +1,13 @@
 import Image from "next/image";
 
-import { Sparkles } from "lucide-react";
-
 import {
   Card,
   CardContent,
   CardHeader,
   CardTitle,
 } from "@stats47/components/atoms/ui/card";
+import { Sparkles } from "lucide-react";
+
 
 import { TrackedAffiliateLink } from "@/features/ads/components/tracked-affiliate-link";
 import type { ResolvedAffiliateBanner } from "@/features/ads/services/resolve-affiliate-ad";
