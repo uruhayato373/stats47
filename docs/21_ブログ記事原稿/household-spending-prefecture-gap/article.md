@@ -10,7 +10,9 @@ tags:
   - 食料費
   - 生活費
 category: economy
+archetype: D
 publishedAt: 2026-03-09
+updatedAt: 2026-06-07
 published: true
 ---
 
