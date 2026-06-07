@@ -20,7 +20,7 @@ related_skill: .claude/skills/management/expand-indicators/SKILL.md
 - 現状 stats47 active: **1,950 指標** (G2 結果、17 カテゴリ / 17 テーマ)
 - 競合 todo-ran ~1,501 / uub ~1,843 (公式表記)
 - e-Stat candidate pool: **8,838 件** (status='candidate'、`agriculture` 2,443 / `construction` 1,464 / `socialsecurity` 1,044 が最大)
-- 拡充候補 (本 backlog): **38 件** (high 14 / medium 14 / low 10)
+- 拡充候補 (本 backlog): **残 28 件** (pending 16 / failed 12)。対応済み 44 件は削除 (2026-06-07、git 履歴参照)
 - 主要 Gap カテゴリ 5 個 (店舗分布 / 工業細目 / 水産魚種 / 健康・受療率 / 政治参加)
 
 ## Gap カテゴリ分析
@@ -55,39 +55,12 @@ related_skill: .claude/skills/management/expand-indicators/SKILL.md
 - Gap 推定: ~30-50
 - 拡充戦略: candidate に該当ヒット少 → e-Stat 以外 (総務省 公開データ) の取り込み検討、優先度 **low** (e-Stat 経由は薄い)
 
-## backlog 候補リスト (38 件、priority 順)
+## backlog 候補リスト (残 28 件: pending 16 / failed 12、priority 順。done 44 件は対応済みで削除)
 
 | priority | candidate_slug | category | suggested_theme | estat_stats_data_id | rationale | status |
 |---|---|---|---|---|---|---|
-| high | convenience-store-sales-monthly | commercial | local-economy | 0004032502 | コンビニ販売額 todo-ran 強い | done |
-| high | convenience-store-sales-yoy | commercial | local-economy | 0003395254 | 前年比増減で時系列 | done |
-| high | retail-establishments-by-prefecture | commercial | local-economy | 0004003256 | 卸売・小売事業所数 | done |
-| high | retail-sales-amount-by-prefecture | commercial | local-economy | 0004003259 | 年間商品販売額 | done |
-| high | retail-sales-area-by-class | commercial | local-economy | 0004003261 | 売場面積 中分類別 | done |
-| high | patient-receiving-rate-by-disease | socialsecurity | healthcare | 0004026105 | 傷病分類×受療率 競合薄 | done |
-| high | patient-receiving-rate-by-age | socialsecurity | healthcare | 0004026104 | 性年齢×受療率 | done |
-| high | inpatient-rate-by-bedtype | socialsecurity | healthcare | 0004002555 | 病床種類×入院受療率 | done |
 | high | sex-age-receiving-rate-2020 | socialsecurity | healthcare | 0003315937 | 過去比較用 2020 | failed <!-- failed: latest_year 2017 > 5y old @ 2026-05-19 --> |
-| high | hospital-staff-by-occupation | socialsecurity | healthcare | 0004027744 | 保健所職員数 職種別 | done |
-| high | smartphone-usage-time-by-age | ict | (新規) | 0003457306 | 年齢×スマホ利用時間 ict 拡充 | done |
-| high | smartphone-usage-rate-by-sex | ict | (新規) | 0003457311 | 男女×スマホ行動者率 | done |
-| high | smartphone-usage-students | educationsports | education-culture | 0003457319 | 在学者スマホ利用時間 | done |
-| high | hobby-activity-by-couple | educationsports | (新規) | 0003455918 | 共働き×趣味娯楽行動者数 | done |
-| medium | hobby-activity-singleperson | educationsports | (新規) | 0003455926 | 単身世帯主×趣味行動 | done |
-| medium | fishery-workers-coastal-offshore | agriculture | fishery-marine | 0003262278 | 沿岸沖合別漁業就業者 | done <!-- 47 prefs (内陸 8 県=0 補完) @ 2026-05-19 --> |
-| medium | fishery-household-sex-age | agriculture | fishery-marine | 0003262280 | 漁業世帯員 性年齢別 | done <!-- 47 prefs (内陸 8 県=0 補完) @ 2026-05-19 --> |
-| medium | fishing-vessel-tonnage-class | agriculture | fishery-marine | 0003262281 | 動力船トン数別 | done <!-- 47 prefs (内陸 8 県=0 補完) @ 2026-05-19 --> |
-| medium | fishing-vessel-crew | agriculture | fishery-marine | 0003262282 | 乗組員 性年齢別 | done <!-- 47 prefs (内陸 8 県=0 補完) @ 2026-05-19 --> |
-| medium | fishery-management-orgs | agriculture | fishery-marine | 0003262285 | 漁業管理組織数 | done <!-- 47 prefs (内陸 8 県=0 補完) @ 2026-05-19 --> |
-| medium | recreational-fishing-count | agriculture | fishery-marine | 0003262287 | 遊漁数 | done <!-- 47 prefs (内陸 8 県=0 補完) @ 2026-05-19 --> |
-| medium | fishing-port-count-by-type | agriculture | fishery-marine | 0003262291 | 漁港数 種類別 | done <!-- 47 prefs (内陸 8 県=0 補完) @ 2026-05-19 --> |
-| medium | port-entry-vessel-count | agriculture | fishery-marine | 0003262295 | 漁港入港船隻数 | done <!-- 47 prefs (内陸 8 県=0 補完) @ 2026-05-19 --> |
-| medium | vegetable-cultivation-area | agriculture | (新規) | 0003423836 | 都道府県品目別 野菜作付 | done |
 | medium | vegetable-farm-scale | agriculture | (新規) | 0003279127 | 野菜農家数 面積規模別 | failed <!-- failed: only 45 prefectures @ 2026-05-19 --> |
-| medium | household-types-by-area | population | (新規) | 0003355518 | 家族類型×普通世帯数 | done |
-| medium | household-income-by-type | population | (新規) | 0003355488 | 年間収入×世帯人員 | done |
-| medium | elderly-household-detail | population | aging-society | 0003355281 | 65 歳以上 家族類型別 | done |
-| medium | traffic-accident-death-by-age | safetyenvironment | safety | 0003411708 | 路上事故死亡 年齢×性 | done |
 | low | wood-manufacturing-plants | miningindustry | manufacturing | 0003234639 | 合単板工場数 | failed <!-- failed: only 9-region aggregate, no 47-pref data @ 2026-05-19 --> |
 | low | wood-manufacturing-workers | miningindustry | manufacturing | 0003234640 | 合単板従業者数 | failed <!-- failed: only 9-region aggregate, no 47-pref data @ 2026-05-19 --> |
 | low | plywood-production-type | miningindustry | manufacturing | 0003234646 | 普通合板 種類厚さ別 | failed <!-- failed: only 9-region aggregate, no 47-pref data @ 2026-05-19 --> |
@@ -97,24 +70,7 @@ related_skill: .claude/skills/management/expand-indicators/SKILL.md
 | low | mushroom-cultivation-orgs | agriculture | (新規) | 0003279379 | きのこ品目別事業体 | failed <!-- failed: 北海道(00042)/沖縄(00057) non-standard codes need custom mapping @ 2026-05-19 --> |
 | low | product-shipping-by-item | commercial | manufacturing | 0004003978 | 品目別出荷事業所数 | failed <!-- failed: no area dimension (品目別 only) @ 2026-05-19 --> |
 | low | product-shipping-small-est | commercial | manufacturing | 0004003990 | 品目別出荷 従業者 3 人以下 | failed <!-- failed: no area dimension (品目別 only) @ 2026-05-19 --> |
-| low | accident-death-30day | safetyenvironment | safety | 0003281586 | 30 日以内事故死者 | done |
 | high | bus-passenger-transport | safetyenvironment | (新規:transport) | 0003443768 | 営業用バス 輸送人員 年度 | failed <!-- failed: area codes are transport-district-based (00001-00054), not standard 47-pref codes @ 2026-05-21 --> |
-| high | factory-industrial-park-rate | construction | (新規:industry-loc) | 0003411445 | 工業団地内立地率 件数 | done <!-- 47 prefs (9 prefs=0 補完: 青森/東京/福井/島根/徳島/長崎/大分/宮崎/沖縄) @ 2026-05-21 --> |
-| high | factory-location-area-annual | construction | (新規:industry-loc) | 0003411431 | 工場立地敷地面積 年次 | done <!-- 47 prefs (direct API ingest, no getAreaMap needed) @ 2026-05-21 --> |
-| high | health-checkup-recipients | socialsecurity | healthcare | 0004027740 | 健康診断受診延人員 種類別 | done <!-- 47 prefs @ 2026-05-21 --> |
-| high | vaccination-recipients-disease | socialsecurity | healthcare | 0004027806 | 定期予防接種者数 対象疾病 | done <!-- 47 prefs (HPV第1回 cat02=380, age総数) @ 2026-05-21 --> |
-| high | maternal-child-health-guidance | socialsecurity | healthcare | 0004027833 | 妊産婦乳幼児保健指導 | done <!-- 47 prefs (cat03 全種別合計, tab=180) @ 2026-05-21 --> |
-| high | dental-checkup-recipients | socialsecurity | healthcare | 0004027738 | 歯科健診保健指導受診者 | done <!-- 47 prefs @ 2026-05-21 --> |
-| medium | dental-hygienist-by-prefecture | socialsecurity | healthcare | 0004027006 | 歯科衛生士・技工士 都道府県 | done <!-- 47 prefs @ 2026-05-22 --> |
-| medium | midwife-by-prefecture | socialsecurity | healthcare | 0004026929 | 就業助産師数 都道府県 | done <!-- 47 prefs @ 2026-05-22 --> |
-| medium | pharmacy-count-by-prefecture | socialsecurity | healthcare | 0004026870 | 薬局数 都道府県 | done <!-- 47 prefs @ 2026-05-22 --> |
-| medium | designated-difficult-disease | socialsecurity | healthcare | 0004026904 | 指定難病受給者数 疾患別 | done <!-- 47 prefs (area=68: 都道府県+指定都市 → 都道府県のみ抽出) @ 2026-05-22 --> |
-| medium | mental-health-application | socialsecurity | healthcare | 0004026960 | 精神障害者申請通報状況 | done <!-- 47 prefs (area=68 → 都道府県のみ) @ 2026-05-22 --> |
-| medium | cook-licensees-by-prefecture | socialsecurity | (新規:professionals) | 0004026840 | 就業調理師 場所別 | done <!-- 47 prefs (hardcoded PREF_NAMES_BY_CODE 使用、getAreaMap rate-limit回避) @ 2026-05-22 --> |
-| medium | food-sanitation-inspection | socialsecurity | (新規:food-safety) | 0004026844 | 食品収去試験 都道府県 | done <!-- 47 prefs (area=128 → 都道府県のみ) @ 2026-05-22 --> |
-| medium | food-business-establishments | socialsecurity | (新規:food-safety) | 0004027019 | 食品関係営業施設数 | done <!-- 47 prefs (area=128 → 都道府県のみ) @ 2026-05-22 --> |
-| medium | rabies-vaccination-dogs | socialsecurity | (新規:pet) | 0004026906 | 犬予防注射済票交付数 | done <!-- 47 prefs (area=128 → 都道府県のみ) @ 2026-05-22 --> |
-| medium | dog-registration-count | socialsecurity | (新規:pet) | 0004026908 | 犬登録頭数・徘徊犬抑留 | done <!-- skipped: already registered (47 prefs confirmed) @ 2026-05-22 --> |
 | medium | infectious-disease-deaths | socialsecurity | healthcare | 0003411705 | 感染症死亡数 都道府県 | pending |
 | medium | factory-employment-planned | construction | (新規:industry-loc) | 0003411450 | 工場立地 雇用予定従業者数 | pending |
 | medium | factory-by-industry | construction | (新規:industry-loc) | 0003411456 | 工場立地件数 業種別 | pending |
