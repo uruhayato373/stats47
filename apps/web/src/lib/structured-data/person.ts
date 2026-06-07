@@ -13,16 +13,32 @@ export const OPERATOR_SOCIAL_URLS = [
   "https://www.youtube.com/@stats47jp",
 ] as const;
 
-/** Person schema を生成する */
+/**
+ * 運営者 Person の安定 @id を返す。
+ * /about の Person と各記事 author を同一エンティティとして結ぶための共通識別子。
+ */
+export function getOperatorPersonId(baseUrl: string) {
+  return `${baseUrl}/about#operator`;
+}
+
+/** Person schema を生成する（/about の正準エンティティ） */
 export function buildOperatorPersonSchema(baseUrl: string) {
   return {
     "@context": "https://schema.org",
     "@type": "Person",
+    "@id": getOperatorPersonId(baseUrl),
     name: "KAZU",
     url: `${baseUrl}/about`,
     jobTitle: "データ可視化 / 元県庁職員（約 20 年）",
     description:
-      "約 20 年間、自治体職員として統計の作る側・使う側の両方に身を置いたのち、在職中に独学で AI を学び IT・データ業界へ転職・独立。その経験を活かし、公的統計を現代の UI/UX で再設計する stats47 を運営。",
+      "約 20 年間、自治体職員として統計の作る側・使う側の両方に身を置いたのち、在職中に独学で AI を学び IT・データ業界へ転職・独立。その経験を活かし、e-Stat などの一次統計を現代の UI/UX で再設計する stats47 を運営しています。",
+    knowsAbout: [
+      "公的統計",
+      "都道府県データ",
+      "データ可視化",
+      "e-Stat",
+      "地方自治体行政",
+    ],
     worksFor: {
       "@type": "Organization",
       name: "統計で見る都道府県",
@@ -32,10 +48,14 @@ export function buildOperatorPersonSchema(baseUrl: string) {
   };
 }
 
-/** Article の author 用（inline、@context は親に含まれる） */
+/**
+ * Article の author 用（inline、@context は親に含まれる）。
+ * /about の正準 Person を @id で参照し、E-E-A-T のために同一人物として連結する。
+ */
 export function buildPersonAsAuthor(baseUrl: string) {
   return {
     "@type": "Person",
+    "@id": getOperatorPersonId(baseUrl),
     name: "KAZU",
     url: `${baseUrl}/about`,
     jobTitle: "データ可視化コンサルタント",
