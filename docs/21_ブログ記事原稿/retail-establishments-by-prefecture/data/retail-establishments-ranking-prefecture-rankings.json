@@ -1,0 +1,243 @@
+{
+  "title": "上位5・下位5 小売業事業所数",
+  "unit": "事業所",
+  "year": "2021",
+  "rankingKey": "retail-establishments-by-prefecture",
+  "data": [
+    {
+      "pref": "東京都",
+      "value": 87895,
+      "rank": 1
+    },
+    {
+      "pref": "大阪府",
+      "value": 55351,
+      "rank": 2
+    },
+    {
+      "pref": "愛知県",
+      "value": 46535,
+      "rank": 3
+    },
+    {
+      "pref": "神奈川県",
+      "value": 45729,
+      "rank": 4
+    },
+    {
+      "pref": "埼玉県",
+      "value": 37716,
+      "rank": 5
+    },
+    {
+      "pref": "福岡県",
+      "value": 37411,
+      "rank": 6
+    },
+    {
+      "pref": "北海道",
+      "value": 36771,
+      "rank": 7
+    },
+    {
+      "pref": "兵庫県",
+      "value": 35887,
+      "rank": 8
+    },
+    {
+      "pref": "千葉県",
+      "value": 32259,
+      "rank": 9
+    },
+    {
+      "pref": "静岡県",
+      "value": 28344,
+      "rank": 10
+    },
+    {
+      "pref": "広島県",
+      "value": 20951,
+      "rank": 11
+    },
+    {
+      "pref": "茨城県",
+      "value": 20103,
+      "rank": 12
+    },
+    {
+      "pref": "京都府",
+      "value": 19457,
+      "rank": 13
+    },
+    {
+      "pref": "新潟県",
+      "value": 18884,
+      "rank": 14
+    },
+    {
+      "pref": "長野県",
+      "value": 17194,
+      "rank": 15
+    },
+    {
+      "pref": "宮城県",
+      "value": 16838,
+      "rank": 16
+    },
+    {
+      "pref": "岐阜県",
+      "value": 16211,
+      "rank": 17
+    },
+    {
+      "pref": "福島県",
+      "value": 15321,
+      "rank": 18
+    },
+    {
+      "pref": "群馬県",
+      "value": 14717,
+      "rank": 19
+    },
+    {
+      "pref": "栃木県",
+      "value": 14666,
+      "rank": 20
+    },
+    {
+      "pref": "岡山県",
+      "value": 14441,
+      "rank": 21
+    },
+    {
+      "pref": "鹿児島県",
+      "value": 14430,
+      "rank": 22
+    },
+    {
+      "pref": "熊本県",
+      "value": 14402,
+      "rank": 23
+    },
+    {
+      "pref": "三重県",
+      "value": 13431,
+      "rank": 24
+    },
+    {
+      "pref": "長崎県",
+      "value": 12015,
+      "rank": 25
+    },
+    {
+      "pref": "沖縄県",
+      "value": 11454,
+      "rank": 26
+    },
+    {
+      "pref": "山口県",
+      "value": 11286,
+      "rank": 27
+    },
+    {
+      "pref": "愛媛県",
+      "value": 11263,
+      "rank": 28
+    },
+    {
+      "pref": "青森県",
+      "value": 10744,
+      "rank": 29
+    },
+    {
+      "pref": "岩手県",
+      "value": 10512,
+      "rank": 30
+    },
+    {
+      "pref": "山形県",
+      "value": 10011,
+      "rank": 31
+    },
+    {
+      "pref": "石川県",
+      "value": 9790,
+      "rank": 32
+    },
+    {
+      "pref": "大分県",
+      "value": 9735,
+      "rank": 33
+    },
+    {
+      "pref": "宮崎県",
+      "value": 9418,
+      "rank": 34
+    },
+    {
+      "pref": "滋賀県",
+      "value": 9409,
+      "rank": 35
+    },
+    {
+      "pref": "富山県",
+      "value": 9141,
+      "rank": 36
+    },
+    {
+      "pref": "和歌山県",
+      "value": 8890,
+      "rank": 37
+    },
+    {
+      "pref": "秋田県",
+      "value": 8858,
+      "rank": 38
+    },
+    {
+      "pref": "奈良県",
+      "value": 8704,
+      "rank": 39
+    },
+    {
+      "pref": "香川県",
+      "value": 8026,
+      "rank": 40
+    },
+    {
+      "pref": "佐賀県",
+      "value": 7189,
+      "rank": 41
+    },
+    {
+      "pref": "福井県",
+      "value": 7047,
+      "rank": 42
+    },
+    {
+      "pref": "山梨県",
+      "value": 7034,
+      "rank": 43
+    },
+    {
+      "pref": "高知県",
+      "value": 6879,
+      "rank": 44
+    },
+    {
+      "pref": "徳島県",
+      "value": 6544,
+      "rank": 45
+    },
+    {
+      "pref": "島根県",
+      "value": 6405,
+      "rank": 46
+    },
+    {
+      "pref": "鳥取県",
+      "value": 4733,
+      "rank": 47
+    }
+  ]
+}

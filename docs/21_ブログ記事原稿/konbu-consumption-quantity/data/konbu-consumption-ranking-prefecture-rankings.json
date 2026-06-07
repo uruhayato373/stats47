@@ -1,0 +1,243 @@
+{
+  "title": "上位5・下位5 こんぶ消費量",
+  "unit": "g",
+  "year": "2024",
+  "rankingKey": "konbu-consumption-quantity",
+  "data": [
+    {
+      "pref": "岩手県",
+      "value": 535,
+      "rank": 1
+    },
+    {
+      "pref": "山形県",
+      "value": 420,
+      "rank": 2
+    },
+    {
+      "pref": "秋田県",
+      "value": 361,
+      "rank": 3
+    },
+    {
+      "pref": "青森県",
+      "value": 345,
+      "rank": 4
+    },
+    {
+      "pref": "新潟県",
+      "value": 302,
+      "rank": 5
+    },
+    {
+      "pref": "福井県",
+      "value": 263,
+      "rank": 6
+    },
+    {
+      "pref": "富山県",
+      "value": 257,
+      "rank": 7
+    },
+    {
+      "pref": "茨城県",
+      "value": 241,
+      "rank": 8
+    },
+    {
+      "pref": "宮城県",
+      "value": 228,
+      "rank": 9
+    },
+    {
+      "pref": "神奈川県",
+      "value": 222,
+      "rank": 10
+    },
+    {
+      "pref": "栃木県",
+      "value": 213,
+      "rank": 11
+    },
+    {
+      "pref": "和歌山県",
+      "value": 209,
+      "rank": 12
+    },
+    {
+      "pref": "愛媛県",
+      "value": 203,
+      "rank": 13
+    },
+    {
+      "pref": "石川県",
+      "value": 199,
+      "rank": 14
+    },
+    {
+      "pref": "山口県",
+      "value": 198,
+      "rank": 15
+    },
+    {
+      "pref": "島根県",
+      "value": 197,
+      "rank": 16
+    },
+    {
+      "pref": "岐阜県",
+      "value": 183,
+      "rank": 17
+    },
+    {
+      "pref": "鳥取県",
+      "value": 183,
+      "rank": 17
+    },
+    {
+      "pref": "長崎県",
+      "value": 181,
+      "rank": 19
+    },
+    {
+      "pref": "群馬県",
+      "value": 179,
+      "rank": 20
+    },
+    {
+      "pref": "沖縄県",
+      "value": 179,
+      "rank": 20
+    },
+    {
+      "pref": "長野県",
+      "value": 178,
+      "rank": 22
+    },
+    {
+      "pref": "愛知県",
+      "value": 175,
+      "rank": 23
+    },
+    {
+      "pref": "宮崎県",
+      "value": 168,
+      "rank": 24
+    },
+    {
+      "pref": "滋賀県",
+      "value": 166,
+      "rank": 25
+    },
+    {
+      "pref": "兵庫県",
+      "value": 165,
+      "rank": 26
+    },
+    {
+      "pref": "福島県",
+      "value": 164,
+      "rank": 27
+    },
+    {
+      "pref": "東京都",
+      "value": 157,
+      "rank": 28
+    },
+    {
+      "pref": "広島県",
+      "value": 152,
+      "rank": 29
+    },
+    {
+      "pref": "大分県",
+      "value": 152,
+      "rank": 29
+    },
+    {
+      "pref": "岡山県",
+      "value": 151,
+      "rank": 31
+    },
+    {
+      "pref": "高知県",
+      "value": 149,
+      "rank": 32
+    },
+    {
+      "pref": "福岡県",
+      "value": 149,
+      "rank": 32
+    },
+    {
+      "pref": "千葉県",
+      "value": 148,
+      "rank": 34
+    },
+    {
+      "pref": "埼玉県",
+      "value": 143,
+      "rank": 35
+    },
+    {
+      "pref": "徳島県",
+      "value": 142,
+      "rank": 36
+    },
+    {
+      "pref": "大阪府",
+      "value": 135,
+      "rank": 37
+    },
+    {
+      "pref": "三重県",
+      "value": 121,
+      "rank": 38
+    },
+    {
+      "pref": "香川県",
+      "value": 112,
+      "rank": 39
+    },
+    {
+      "pref": "奈良県",
+      "value": 110,
+      "rank": 40
+    },
+    {
+      "pref": "静岡県",
+      "value": 107,
+      "rank": 41
+    },
+    {
+      "pref": "熊本県",
+      "value": 104,
+      "rank": 42
+    },
+    {
+      "pref": "鹿児島県",
+      "value": 102,
+      "rank": 43
+    },
+    {
+      "pref": "佐賀県",
+      "value": 97,
+      "rank": 44
+    },
+    {
+      "pref": "京都府",
+      "value": 95,
+      "rank": 45
+    },
+    {
+      "pref": "北海道",
+      "value": 57,
+      "rank": 46
+    },
+    {
+      "pref": "山梨県",
+      "value": 56,
+      "rank": 47
+    }
+  ]
+}
