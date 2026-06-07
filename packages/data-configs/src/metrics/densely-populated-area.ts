@@ -47,13 +47,6 @@ export const denselyPopulatedArea: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "ｋｍ2/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "人口集中地区面積ランキング都道府県【2020年】｜1位東京都（1,091.78ｋｍ2）",

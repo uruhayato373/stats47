@@ -97,13 +97,6 @@ export const telephoneSubscriptionCount: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "加入/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "groupKey": "telephone-subscription-count",

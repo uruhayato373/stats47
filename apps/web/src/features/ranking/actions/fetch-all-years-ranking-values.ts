@@ -44,7 +44,6 @@ const fetchAllYearsCore = cache(async (
 const ALLOWED_NORMALIZATION_TYPES = new Set([
   "per_population",
   "per_area",
-  "per_household",
 ]);
 
 /**

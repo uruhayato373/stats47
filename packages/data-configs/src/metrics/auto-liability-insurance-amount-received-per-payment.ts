@@ -49,13 +49,6 @@ export const autoLiabilityInsuranceAmountReceivedPerPayment: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "万円/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "自動車損害賠償責任保険受取保険金額ランキング都道府県【2023年】｜1位大阪府（72.9万円）",

@@ -49,13 +49,6 @@ export const marriages: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "組/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "婚姻件数ランキング都道府県【2023年】｜1位東京都（71,774組）",

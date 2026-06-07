@@ -50,13 +50,6 @@ export const averageAgeOfFirstMarriageWife: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "歳/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "平均婚姻年齢ランキング都道府県【2023年】｜1位東京都（30.7歳）",

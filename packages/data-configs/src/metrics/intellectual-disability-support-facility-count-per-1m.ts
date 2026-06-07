@@ -49,13 +49,6 @@ export const intellectualDisabilitySupportFacilityCountPer1m: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "所/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "知的障害者援護施設数ランキング都道府県【2011年】｜1位高知県（30.3所）",

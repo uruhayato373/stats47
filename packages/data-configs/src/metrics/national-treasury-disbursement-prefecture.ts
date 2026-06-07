@@ -81,13 +81,6 @@ export const nationalTreasuryDisbursementPrefecture: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "国庫支出金ランキング都道府県【2022年】｜1位東京都（1,258,540,739）",

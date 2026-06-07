@@ -84,13 +84,6 @@ export const fireDepartmentMemberCountPer100ThousandPeople: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "人/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "消防吏員数ランキング都道府県【2022年】｜1位秋田県（222人）",

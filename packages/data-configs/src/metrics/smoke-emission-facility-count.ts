@@ -83,13 +83,6 @@ export const smokeEmissionFacilityCount: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "件/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "ばい煙発生施設数ランキング都道府県【2023年】｜1位北海道（15,438件）",

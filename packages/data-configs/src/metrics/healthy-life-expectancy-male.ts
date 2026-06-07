@@ -57,13 +57,6 @@ export const healthyLifeExpectancyMale: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "年/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "健康寿命（男性）ランキング都道府県【2019年】｜1位大分県（73.72年）",

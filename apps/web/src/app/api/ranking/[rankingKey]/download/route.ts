@@ -19,7 +19,7 @@ import {
  * パラメータは全て whitelist 検証で path injection を防ぐ。
  *
  * @param format    csv | json
- * @param basis     original | per_population | per_area | per_household | all-bases
+ * @param basis     original | per_population | per_area | all-bases
  *                  (省略時は original)
  * @param encoding  utf8 | sjis (CSV のみ。JSON は常に utf8)
  */
@@ -29,7 +29,6 @@ const ALLOWED_BASES = new Set([
   "original",
   "per_population",
   "per_area",
-  "per_household",
   "all-bases",
 ] as const);
 const ALLOWED_ENCODINGS = new Set(["utf8", "sjis"] as const);

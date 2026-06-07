@@ -48,13 +48,6 @@ export const nursesGeneralHospitalPer100beds: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "人/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "一般病院看護師・准看護師数ランキング都道府県【2023年】｜1位長野県（80.3人）",

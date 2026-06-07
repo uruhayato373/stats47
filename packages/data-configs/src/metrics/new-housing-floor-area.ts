@@ -48,13 +48,6 @@ export const newHousingFloorArea: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "m2/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "着工新設住宅床面積ランキング都道府県【2024年】｜1位東京都（8,562,476m2）",

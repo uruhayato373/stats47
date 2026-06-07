@@ -51,13 +51,6 @@ export const libraryLendingBooks: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "冊/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "図書館館外貸出冊数ランキング都道府県【2020年】｜1位東京都（85,113,851冊）",

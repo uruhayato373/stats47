@@ -96,13 +96,6 @@ export const maximumTemperature: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "℃/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "最高気温ランキング都道府県【2024年】｜1位熊本県（36.2℃）",

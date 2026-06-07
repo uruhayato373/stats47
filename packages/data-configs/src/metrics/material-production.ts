@@ -49,13 +49,6 @@ export const materialProduction: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "千ｍ3/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "素材生産量ランキング都道府県【2007年】｜1位北海道（3,511千ｍ3）",

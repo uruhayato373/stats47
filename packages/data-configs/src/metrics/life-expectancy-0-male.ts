@@ -57,13 +57,6 @@ export const lifeExpectancy0Male: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "年/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "平均余命ランキング都道府県【2020年】｜1位滋賀県（82.73年）",

@@ -47,13 +47,6 @@ export const floodDamageBridge: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "百万円/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "水害橋梁被害額ランキング都道府県【2014年】｜1位岐阜県（574百万円）",

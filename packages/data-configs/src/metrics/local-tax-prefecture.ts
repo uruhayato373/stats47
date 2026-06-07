@@ -71,13 +71,6 @@ export const localTaxPrefecture: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "地方税ランキング都道府県【2022年】｜1位東京都（6,186,895,771）",

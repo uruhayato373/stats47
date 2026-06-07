@@ -72,13 +72,6 @@ export const numberOfSimpleLodgingFacilities: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "施設/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "簡易宿所営業施設数ランキング都道府県【2023年】｜1位長野県（4,231施設）",

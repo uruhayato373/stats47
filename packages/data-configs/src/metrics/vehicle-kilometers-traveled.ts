@@ -50,13 +50,6 @@ export const vehicleKilometersTraveled: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "千台･km/12h/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "自動車走行台キロランキング都道府県【2005年】｜1位北海道（61,603千台･km/12h）",

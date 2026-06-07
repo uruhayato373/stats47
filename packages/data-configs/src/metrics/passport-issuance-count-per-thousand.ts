@@ -70,13 +70,6 @@ export const passportIssuanceCountPerThousand: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "件/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "一般旅券発行件数ランキング都道府県【2024年】｜1位東京都（50.9件）",

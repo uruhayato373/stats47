@@ -47,13 +47,6 @@ export const forestArea: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "ｈａ/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "林野面積ランキング都道府県【2019年】｜1位北海道（5,503,768ｈａ）",

@@ -47,13 +47,6 @@ export const cityGasSupplyAreaHouseholds: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "戸/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "都市ガス供給区域内世帯数ランキング都道府県【2016年】｜1位東京都（6,888,964戸）",

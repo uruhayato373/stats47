@@ -55,13 +55,6 @@ export const campsitePublic: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "施設/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "キャンプ場数（公共）ランキング都道府県【2021年】｜1位北海道（134施設）",

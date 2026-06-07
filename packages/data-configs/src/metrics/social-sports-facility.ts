@@ -75,13 +75,6 @@ export const socialSportsFacility: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "施設/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "社会体育施設数ランキング都道府県【2021年】｜1位北海道（3,728施設）",

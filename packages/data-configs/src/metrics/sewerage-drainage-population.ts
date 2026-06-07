@@ -47,13 +47,6 @@ export const sewerageDrainagePopulation: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "人/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "下水道排水区域人口ランキング都道府県【2021年】｜1位東京都（13,750,230人）",

@@ -83,13 +83,6 @@ export const standardFiscalDemandMunicipality: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "基準財政需要額ランキング都道府県【2022年】｜1位東京都（2,321,407,108）",

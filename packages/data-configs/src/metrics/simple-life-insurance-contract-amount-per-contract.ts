@@ -49,13 +49,6 @@ export const simpleLifeInsuranceContractAmountPerContract: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "万円/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "簡易生命保険保有契約保険金額ランキング都道府県【2006年】｜1位神奈川県（303.1万円）",

@@ -47,13 +47,6 @@ export const floodDamageTotal: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "百万円/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "水害被害額合計ランキング都道府県【2014年】｜1位広島県（44,441百万円）",

@@ -56,13 +56,6 @@ export const singleMotherHouseholds: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "世帯/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "母子世帯数ランキング都道府県【2020年】｜1位東京都（53,043世帯）",

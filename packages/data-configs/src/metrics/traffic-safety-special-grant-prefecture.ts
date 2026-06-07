@@ -60,13 +60,6 @@ export const trafficSafetySpecialGrantPrefecture: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "交通安全対策特別交付金ランキング都道府県【2022年】｜1位東京都（2,700,289）",

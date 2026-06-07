@@ -47,13 +47,6 @@ export const averageLifeExpectancyFemale20: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "年/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "平均余命ランキング都道府県【2020年】｜1位岡山県（68.58年）",

@@ -46,13 +46,6 @@ export const finalEnergyConsumption: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "TJ/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "最終エネルギー消費量ランキング都道府県【2022年】｜1位東京都（970,018TJ）",

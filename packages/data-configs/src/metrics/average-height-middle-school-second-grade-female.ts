@@ -47,13 +47,6 @@ export const averageHeightMiddleSchoolSecondGradeFemale: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "cm/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "平均身長ランキング都道府県【2023年】｜1位富山県（155.7cm）",

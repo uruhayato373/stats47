@@ -52,13 +52,6 @@ export const avgAgeAdminPrefecture: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "歳/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "一般行政職 平均年齢ランキング都道府県【2024年】｜1位長野県（45歳）",

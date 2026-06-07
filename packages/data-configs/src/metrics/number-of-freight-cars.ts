@@ -68,13 +68,6 @@ export const numberOfFreightCars: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "両/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "貨物車数ランキング都道府県【2008年】｜1位愛知県（828,810両）",

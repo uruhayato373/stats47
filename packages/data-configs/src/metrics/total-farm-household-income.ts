@@ -46,13 +46,6 @@ export const totalFarmHouseholdIncome: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "千円/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "農家総所得ランキング都道府県【2003年】｜1位大阪府（12,836千円）",

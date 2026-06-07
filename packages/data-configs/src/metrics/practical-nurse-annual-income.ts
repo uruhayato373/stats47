@@ -60,13 +60,6 @@ export const practicalNurseAnnualIncome: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "万円/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "准看護師の平均年収ランキング都道府県【2023年】｜1位東京都（480.8万円）",

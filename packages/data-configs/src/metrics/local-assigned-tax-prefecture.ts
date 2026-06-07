@@ -47,13 +47,6 @@ export const localAssignedTaxPrefecture: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "地方譲与税ランキング都道府県【2022年】｜1位神奈川県（176,225,237）",

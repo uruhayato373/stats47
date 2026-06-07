@@ -20,7 +20,6 @@ import type { RankingValue } from "@stats47/ranking";
 const ALLOWED_NORMALIZATION_TYPES = new Set([
   "per_population",
   "per_area",
-  "per_household",
 ]);
 
 /**

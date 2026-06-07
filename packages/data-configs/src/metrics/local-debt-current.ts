@@ -60,13 +60,6 @@ export const localDebtCurrent: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "地方債現在高ランキング都道府県【2022年】｜1位北海道（5,778,413,965）",

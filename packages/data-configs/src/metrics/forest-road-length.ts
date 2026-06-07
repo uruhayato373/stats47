@@ -70,13 +70,6 @@ export const forestRoadLength: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "ｋｍ/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "林道延長ランキング都道府県【2022年】｜1位北海道（24,093ｋｍ）",

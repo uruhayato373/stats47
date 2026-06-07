@@ -46,13 +46,6 @@ export const annualPrecipitation: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "ｍｍ/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "年間降水量ランキング都道府県【2024年】｜1位静岡県（3,753.5ｍｍ）",

@@ -48,13 +48,6 @@ export const constructionContractDisasterRecovery: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "百万円/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "災害復旧工事請負契約額ランキング都道府県【2023年】｜1位福島県（95,969百万円）",

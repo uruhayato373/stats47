@@ -47,13 +47,6 @@ export const riceHarvestVolume: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "t/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "水稲収穫量ランキング都道府県【2019年】｜1位新潟県（646,100t）",

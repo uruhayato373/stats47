@@ -46,13 +46,6 @@ export const electricityGenerationCapacity: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "Ｍｗｈ/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "発電電力量ランキング都道府県【2023年】｜1位千葉県（80,635,294Ｍｗｈ）",

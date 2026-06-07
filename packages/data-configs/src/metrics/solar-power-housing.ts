@@ -48,13 +48,6 @@ export const solarPowerHousing: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "戸/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "太陽光を利用した発電機器のある住宅数ランキング都道府県【2023年】｜1位愛知県（208,300戸）",

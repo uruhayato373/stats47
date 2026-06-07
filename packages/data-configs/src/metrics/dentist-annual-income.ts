@@ -60,13 +60,6 @@ export const dentistAnnualIncome: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "万円/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "歯科医師の平均年収ランキング都道府県【2023年】｜1位三重県（4,118.9万円）",

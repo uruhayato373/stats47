@@ -65,13 +65,6 @@ export const finalDisposalSiteRemainingCapacity: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "千ｍ3/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "最終処分場残余容量ランキング都道府県【2023年】｜1位東京都（21,771千ｍ3）",

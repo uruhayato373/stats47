@@ -49,13 +49,6 @@ export const annualCloudyDays: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "日/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "年間曇天日数ランキング都道府県【2007年】｜1位福井県（201日）",

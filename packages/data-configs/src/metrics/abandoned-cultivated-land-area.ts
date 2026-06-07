@@ -47,13 +47,6 @@ export const abandonedCultivatedLandArea: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "ｈａ/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "耕地放棄面積ランキング都道府県【2014年】｜1位福島県（25,226ｈａ）",

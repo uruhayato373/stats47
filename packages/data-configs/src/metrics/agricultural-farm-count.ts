@@ -46,13 +46,6 @@ export const agriculturalFarmCount: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "戸/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "農家数ランキング都道府県【2019年】｜1位長野県（89,786戸）",

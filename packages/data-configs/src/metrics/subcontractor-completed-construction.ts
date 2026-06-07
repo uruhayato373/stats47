@@ -80,13 +80,6 @@ export const subcontractorCompletedConstruction: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "百万円/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "下請完成工事高ランキング都道府県【2023年】｜1位東京都（13,182,266百万円）",

@@ -47,13 +47,6 @@ export const schoolTeacherAnnualIncome: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "万円/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "小中学校教員の平均年収ランキング都道府県【2023】最も高いのは? 1位愛知886万円",

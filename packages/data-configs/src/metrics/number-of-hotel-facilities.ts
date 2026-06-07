@@ -59,13 +59,6 @@ export const numberOfHotelFacilities: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "施設/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "ホテル営業施設数ランキング都道府県【2017年】｜1位東京都（718施設）",

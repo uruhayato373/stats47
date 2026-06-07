@@ -46,13 +46,6 @@ export const floodAffectedMunicipalities: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "延数/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "水害被災市区町村数（一般資産等）ランキング都道府県【2014年】｜1位神奈川県（33延数）",

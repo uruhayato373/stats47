@@ -52,13 +52,6 @@ export const baseballFieldPublic: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "施設/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "野球場・ソフトボール場数（公共）ランキング都道府県【2021年】｜1位東京都（578施設）",

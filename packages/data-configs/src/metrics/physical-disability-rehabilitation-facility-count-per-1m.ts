@@ -76,13 +76,6 @@ export const physicalDisabilityRehabilitationFacilityCountPer1m: MetricConfig = 
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "所/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "身体障害者更生援護施設数ランキング都道府県【2011年】｜1位高知県（17.2所）",

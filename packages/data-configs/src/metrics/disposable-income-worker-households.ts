@@ -47,13 +47,6 @@ export const disposableIncomeWorkerHouseholds: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "円/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "可処分所得（二人以上の世帯のうち勤労者世帯）ランキング都道府県【2024年】｜1位東京都（637,958円）",

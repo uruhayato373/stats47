@@ -84,13 +84,6 @@ export const primeContractorCompletedConstruction: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "百万円/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "元請完成工事高ランキング都道府県【2023年】｜1位東京都（32,398,018百万円）",

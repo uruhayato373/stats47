@@ -47,13 +47,6 @@ export const earthquakeRetrofitHousing: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "住宅/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "耐震工事をした住宅数（持ち家）ランキング都道府県【2008年】｜1位東京都（88,900住宅）",

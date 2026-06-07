@@ -46,13 +46,6 @@ export const maritimeImportExportCargo: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "トン/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "海上出入貨物ランキング都道府県【2023年】｜1位愛知県（200,603,167トン）",

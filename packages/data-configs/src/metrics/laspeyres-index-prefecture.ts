@@ -54,13 +54,6 @@ export const laspeyresIndexPrefecture: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "ラスパイレス指数ランキング都道府県【2025年】｜1位静岡県（101.8）",

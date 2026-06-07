@@ -63,13 +63,6 @@ export const nurseryChildrenPerNurseryTeacher: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "人/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "保育所等在所児数ランキング都道府県【2020年】｜1位福井県（13.58人）",

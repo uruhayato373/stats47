@@ -46,13 +46,6 @@ export const floodAffectedRivers: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "延数/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "水害被災河川・海岸数（一般資産等）ランキング都道府県【2014年】｜1位静岡県（143延数）",

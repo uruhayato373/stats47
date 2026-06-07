@@ -56,13 +56,6 @@ export const tatamiPerDwellingOwner: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "畳/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "持ち家住宅の居住室の畳数ランキング都道府県【2023年】｜1位富山県（53.16畳）",

@@ -48,13 +48,6 @@ export const trafficAccidentCasualtiesElderly65plus: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "人/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "交通事故死傷者数（高齢者）ランキング都道府県【2024年】｜1位東京都（6,346人）",

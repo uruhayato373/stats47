@@ -37,13 +37,6 @@ export const treatmentRateDiabetesOutpatient: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "人（人口10万対）/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "糖尿病の受療率（外来）ランキング都道府県【2023年】｜1位山口県（246人（人口10万対））",

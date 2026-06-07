@@ -48,13 +48,6 @@ export const windPowerCapacity: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "kW/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "風力発電導入量（設備容量）ランキング都道府県【2017年】｜1位青森県（417,463kW）",

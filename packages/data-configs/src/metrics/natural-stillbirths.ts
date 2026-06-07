@@ -46,13 +46,6 @@ export const naturalStillbirths: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "胎/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "自然死産数ランキング都道府県【2007年】｜1位東京都（1,201胎）",

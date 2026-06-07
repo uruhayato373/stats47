@@ -66,13 +66,6 @@ export const publicRentalHousingRentPer33m2: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "円/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "公営賃貸住宅の家賃ランキング都道府県【2014年】｜1位東京都（3,647円）",

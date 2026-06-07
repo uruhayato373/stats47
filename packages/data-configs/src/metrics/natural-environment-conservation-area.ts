@@ -80,13 +80,6 @@ export const naturalEnvironmentConservationArea: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "ｈａ/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "自然環境保全地域面積ランキング都道府県【2024年】｜1位神奈川県（11,236.4ｈａ）",

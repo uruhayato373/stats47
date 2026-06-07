@@ -16,13 +16,12 @@ export interface RankingDownloadSeries {
   values: RankingValue[];
 }
 
-const NORM_TYPES = ["per_population", "per_area", "per_household"] as const;
+const NORM_TYPES = ["per_population", "per_area"] as const;
 
 const BASIS_LABELS: Record<string, string> = {
   original: "総数",
   per_population: "人口10万人あたり",
   per_area: "面積100km²あたり",
-  per_household: "1世帯あたり",
 };
 
 /**
@@ -71,7 +70,7 @@ export async function getRankingDownloadSeries(
     return series;
   }
 
-  // 個別の正規化基準 (per_population / per_area / per_household)
+  // 個別の正規化基準 (per_population / per_area)
   const normResult = await readAllYearsNormalizedRankingValuesFromR2(
     rankingKey,
     areaType,

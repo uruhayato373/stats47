@@ -80,13 +80,6 @@ export const totalPublicEnterpriseInvestment: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "公営企業総投資額ランキング都道府県【2022年】｜1位東京都（649,787,632）",

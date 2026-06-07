@@ -47,13 +47,6 @@ export const windPowerTurbineCount: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "基/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "風力発電導入量（設置基数）ランキング都道府県【2017年】｜1位北海道（304基）",

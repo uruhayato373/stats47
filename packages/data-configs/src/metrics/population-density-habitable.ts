@@ -54,13 +54,6 @@ export const populationDensityHabitable: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "人/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "人口密度（可住地面積1km²当たり）ランキング市区町村【2020年】｜1位東京都 豊島区（23,182.1人）",

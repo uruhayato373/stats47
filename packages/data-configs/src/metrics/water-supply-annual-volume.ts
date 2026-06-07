@@ -47,13 +47,6 @@ export const waterSupplyAnnualVolume: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "千m3/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "上水道年間給水量ランキング都道府県【2022年】｜1位東京都（1,550,325千m3）",
