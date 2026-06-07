@@ -59,6 +59,7 @@ import { AffiliateAdSlot, resolveAffiliateBanners } from "@/features/ads/server"
 import { findCategoryByKey } from "@/features/category/server";
 import {
   generateRankingBreadcrumbStructuredData,
+  generateRankingFAQStructuredData,
   generateRankingPageMetaData,
   generateRankingPageStructuredData,
   getRankingTitle,
@@ -249,6 +250,11 @@ export default async function RankingKeyPage({
     rankingItem,
     category: breadcrumbCategory,
   });
+  const faqStructuredData = generateRankingFAQStructuredData({
+    rankingItem,
+    rankingValues,
+    selectedYear,
+  });
 
   // --- 5. レンダリング ---
   // Composition Pattern:
@@ -276,6 +282,12 @@ export default async function RankingKeyPage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbStructuredData) }}
       />
+      {faqStructuredData && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqStructuredData) }}
+        />
+      )}
       {/* map tile preload: lg(1024px)以上のみ。モバイルは table がデフォルト表示のため不要 */}
       {initialTileUrls.map((url, idx) => (
         <link

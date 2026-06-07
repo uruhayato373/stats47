@@ -5,7 +5,7 @@
  */
 
 
-import { getRankingTitle, type RankingItem, type RankingValue } from "@stats47/ranking";
+import { filterOutNationalArea, getRankingTitle, type RankingItem, type RankingValue } from "@stats47/ranking";
 
 import { getRequiredBaseUrl } from "@/lib/env";
 import { buildPersonAsAuthor } from "@/lib/structured-data/person";
@@ -130,6 +130,80 @@ export function generateRankingTopPageStructuredData({
       position: index + 1,
       name: item.title,
       url: `${baseUrl}/ranking/${item.rankingKey}`,
+    })),
+  };
+}
+
+/**
+ * ランキングページ用 FAQPage 構造化データを生成する。
+ *
+ * Google の PAA (People Also Ask) / FAQ リッチリザルトを狙い、疑問形クエリへの CTR を上げる。
+ * データから 4 つの Q&A を動的に生成する:
+ *   1. 1位の都道府県
+ *   2. 最下位の都道府県
+ *   3. 全国平均
+ *   4. 格差（最高÷最低倍率）
+ */
+export function generateRankingFAQStructuredData({
+  rankingItem,
+  rankingValues,
+  selectedYear,
+}: {
+  rankingItem: RankingItem;
+  rankingValues: RankingValue[];
+  selectedYear: string | undefined;
+}): object | null {
+  const prefValues = filterOutNationalArea(rankingValues).filter(
+    (v) => v.value != null,
+  );
+  if (prefValues.length === 0) return null;
+
+  const itemName = getRankingTitle(rankingItem);
+  const unit = rankingItem.unit || "";
+  const yearSuffix = selectedYear ? `（${selectedYear}年度）` : "";
+
+  const sorted = [...prefValues].sort((a, b) => (a.rank ?? 99) - (b.rank ?? 99));
+  const top = sorted[0];
+  const bottom = sorted[sorted.length - 1];
+
+  const avg =
+    prefValues.reduce((s, v) => s + (v.value ?? 0), 0) / prefValues.length;
+  const avgText = `${Math.round(avg * 10) / 10}${unit}`;
+
+  const ratio =
+    top.value && bottom.value && bottom.value !== 0
+      ? (top.value / bottom.value).toFixed(1)
+      : null;
+
+  const faqs: { q: string; a: string }[] = [
+    {
+      q: `都道府県別${itemName}ランキングで1位はどこですか？`,
+      a: `${yearSuffix ? selectedYear + "年度の" : ""}${itemName}ランキング1位は${top.areaName}です。${top.value != null ? `値は${top.value}${unit}` : ""}${yearSuffix}。`,
+    },
+    {
+      q: `${itemName}が最も低い（少ない）都道府県はどこですか？`,
+      a: `${bottom.areaName}が最下位です。${bottom.value != null ? `値は${bottom.value}${unit}` : ""}${yearSuffix}。1位の${top.areaName}と比べると${ratio ? `約${ratio}倍の差があります。` : "大きな差があります。"}`,
+    },
+    {
+      q: `${itemName}の全国平均はいくつですか？`,
+      a: `${yearSuffix ? selectedYear + "年度の" : ""}全国平均は約${avgText}です。最多は${top.areaName}（${top.value}${unit}）、最少は${bottom.areaName}（${bottom.value}${unit}）です。`,
+    },
+    {
+      q: `${itemName}の都道府県格差はどのくらいですか？`,
+      a: `最も多い${top.areaName}（${top.value}${unit}）と最も少ない${bottom.areaName}（${bottom.value}${unit}）の差は${ratio ? `約${ratio}倍` : "大きい"}です${yearSuffix}。`,
+    },
+  ];
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map(({ q, a }) => ({
+      "@type": "Question",
+      name: q,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: a,
+      },
     })),
   };
 }

@@ -12,6 +12,7 @@ export { generateRankingPageMetaData } from "./generate-meta-data";
 // export { generateRankingPageTitle } from "./generate-page-title"; // Removed, use computeRankingTitle directly
 export {
   generateRankingBreadcrumbStructuredData,
+  generateRankingFAQStructuredData,
   generateRankingPageStructuredData,
   generateRankingTopPageStructuredData,
 } from "./generate-structured-data";
