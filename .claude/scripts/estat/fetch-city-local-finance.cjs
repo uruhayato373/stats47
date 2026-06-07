@@ -18,7 +18,7 @@
  * Usage:
  *   node .claude/scripts/estat/fetch-city-local-finance.cjs [--dry-run] [--limit-cat01 D2202]
  *
- * docs/50_Issues/feature-backlog.md #292+
+ * docs/02_実装計画/feature-backlog.md #292+
  */
 
 "use strict";

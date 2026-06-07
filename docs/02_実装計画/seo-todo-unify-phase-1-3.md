@@ -195,7 +195,7 @@ scan は `node .claude/scripts/lib/scan-pending-improvements.mjs` を使用 (JSO
 | `.claude/skills/management/weekly-plan/SKILL.md` | 改修 | 前週残転載 + 改善ログ自動抽出 | ✅ 1 |
 | `.claude/skills/analytics/{fetch-,}ga4{-improvement,}/SKILL.md` | 改修 | Japan-only clean 値併記 + observe 連動 | ✅ 1 |
 | `docs/01_技術設計/10_自動化インベントリ.md` | 改修 | 新規 Actions を追記 | ✅ 1 |
-| `docs/50_Issues/automation-backlog.md` | 改修 | #285/288/290 を [in-progress]、#289 を indexing.md に移行 | ✅ 1 |
+| `docs/02_実装計画/feature-backlog.md` | 改修 | #285/288/290 を [in-progress]、#289 を indexing.md に移行 | ✅ 1 |
 | `.claude/skills/blog/draft-from-trend/SKILL.md` | 新規 skill | トレンド企画 → 下書き自動生成 | 📋 2 |
 | `.claude/skills/management/triage-improvement-log/SKILL.md` | 新規 skill | 改善ログ横断 triage | 📋 2 |
 | `.claude/skills/analytics/auto-resubmit-url/SKILL.md` | 新規 skill | Indexing API 自動再送信 | 📋 2 |

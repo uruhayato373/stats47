@@ -87,8 +87,7 @@
       { "dir": "22_YouTube企画", "role": "YouTube企画 + SNS枠定義 (backlog/)" },
       { "dir": "30_note記事企画", "role": "note企画 (backlog/、A〜D系)" },
       { "dir": "31_note記事原稿", "role": "下書き原稿" },
-      { "dir": "40_アフィリエイト管理", "role": "アフィリエイト商材管理" },
-      { "dir": "50_Issues", "role": "feature/automation/UI改善 backlog" }
+      { "dir": "40_アフィリエイト管理", "role": "アフィリエイト商材管理" }
     ]
   },
   "contentStrategy": {

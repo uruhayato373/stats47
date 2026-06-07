@@ -22,7 +22,7 @@ Obsidian で振り返り・思考整理する習慣を支えるため、ファ�
 | 改善施策の一覧・TODO (gsc / ga4 / adsense / psi / affiliate / cloudflare-cost 等) | `docs/02_実装計画/improvement-backlog.md` |
 | YouTube 実験・回復 | `docs/15_実験ログ/youtube/EXP-NNN.md` / `recovery-YYYY-MM-DD.md` |
 | ブログ / note / YouTube コンテンツ backlog | `docs/{20_ブログ記事企画,22_YouTube企画,30_note記事企画}/backlog/` |
-| 機能 / 自動化 / UI 改善 backlog (未着手) | `docs/50_Issues/{feature,automation,ui-improvements}-backlog.md` |
+| 機能 / 自動化 backlog (未着手) | `docs/02_実装計画/feature-backlog.md`（指標拡充候補は `docs/02_実装計画/indicator-backlog.md`） |
 
 ### GitHub Issues に置くもの
 
@@ -88,3 +88,4 @@ PR で機能改修を行う場合、関連する docs/ ファイル (改善ロ�
 - 2026-04-21: `docs/03_レビュー/` 廃止 → GitHub Issues (`critical-review` 等ラベル)
 - 2026-05-16: GitHub Issues 集約 → `docs/03_週次運用/` `docs/04_レビュー/` `docs/50_Issues/` に移行。`weekly-plan` / `weekly-review` / `critical-review` / `pre-mortem` / `*-improvement` / `cost-snapshot` / `tier-*` / `effect/*` / `metric/*` / `content/*` 等のラベルを廃止 ([Phase A-E 詳細](../../plans/issu-close-cryptic-rabin.md))
 - 2026-06-06: `docs/05_改善ログ/` 廃止 → `docs/02_実装計画/improvement-backlog.md` に統合 (1 層構造化)
+- 2026-06-07: `docs/50_Issues/` 廃止 → `docs/02_実装計画/feature-backlog.md`（機能+自動化）/ `indicator-backlog.md`（指標拡充）に統合。ui-improvements は対応済みで削除

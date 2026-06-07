@@ -24,7 +24,7 @@
 - **エージェント実行モード**: Agent tool 起動時は `mode: "bypassPermissions"` をデフォルト
 - **Agent prompt 冒頭に Output Format を必ず指定** → `.claude/rules/agent-output-contract.md`
 - **一時ファイルは `/tmp/`**: プロジェクトルートに作らない (pre-commit が `tmp_*` 等を自動削除)
-- **計画・レビュー・改善ログは `docs/` 配下**: 週次計画・レビュー・批判的レビュー・pre-mortem・改善バックログ・コンテンツバックログはすべて `docs/03_週次運用/` `docs/04_レビュー/` `docs/02_実装計画/improvement-backlog.md` `docs/50_Issues/` 等に置く。Issues は (a) `enhancement`/`bug` ラベルの PR で close される機能改修、(b) `auto-generated` ラベルの日次アラート (PSI/Cloudflare) のみ → `.claude/rules/docs-vs-issues.md`
+- **計画・レビュー・改善ログは `docs/` 配下**: 週次計画・レビュー・批判的レビュー・pre-mortem・改善バックログ・コンテンツバックログはすべて `docs/03_週次運用/` `docs/04_レビュー/` `docs/02_実装計画/improvement-backlog.md` `docs/02_実装計画/feature-backlog.md` 等に置く。Issues は (a) `enhancement`/`bug` ラベルの PR で close される機能改修、(b) `auto-generated` ラベルの日次アラート (PSI/Cloudflare) のみ → `.claude/rules/docs-vs-issues.md`
 - **完全 DB レスが正典** → `docs/01_技術設計/19_完全DBレス設計.md`（doc 18 ハイブリッドは 2026-05-29 同日に superseded）。永続/常駐 D1 を SSOT に持たない。SSOT は **git TS** と **R2** の二つだけ。本番アプリは R2 snapshot のみ読む:
   - **Authored / 設定** (低volume・人手・型/review: テーマのチャート定義等) → **git TS が SSOT** → 生成スクリプトで R2 反映
   - **Authored / 運用** (page_components / theme_metrics / sns_posts / affiliate_ads / categories/themes) → **git TS 定義が SSOT** → 生成スクリプトで R2 JSON（横断整合性はビルド時に検証）。手編集 JSON を SSOT にしない
@@ -50,7 +50,7 @@
 | 批判的レビュー / 事前検死 | `docs/04_レビュー/{critical-review,pre-mortem}/YYYY-MM-DD-<topic>.md` |
 | YouTube 実験ログ | `docs/15_実験ログ/youtube/EXP-NNN.md` |
 | コンテンツ backlog | `docs/22_YouTube企画/backlog/` / `docs/30_note記事企画/backlog/` |
-| 未着手の機能・自動化バックログ | `docs/50_Issues/{feature-backlog,automation-backlog,ui-improvements}.md` |
+| 未着手の機能・自動化バックログ | `docs/02_実装計画/feature-backlog.md`（指標拡充候補は `docs/02_実装計画/indicator-backlog.md`） |
 | 非自明な API 仕様・制約 | `/knowledge` (問題・原因・対策の 3 項目) |
 | プロジェクト固有の恒常事実 | auto memory (`~/.claude/projects/-Users-minamidaisuke-stats47/memory/`) |
 
@@ -125,7 +125,7 @@ Issues は「PR で close される機能改修・バグ」と「日次アラー
 - `psi-alert` — PSI 日次計測の閾値違反 (`psi-audit-daily.yml`)
 
 過去の移行履歴:
-- `docs/90_課題管理/` (2026-04 廃止) → GitHub Issues 経由 → `docs/50_Issues/` (2026-05)
+- `docs/90_課題管理/` (2026-04 廃止) → GitHub Issues 経由 → `docs/50_Issues/` (2026-05) → `docs/02_実装計画/{feature-backlog,indicator-backlog}.md` (2026-06-07 統合)
 - `docs/03_レビュー/` (2026-04-21 廃止) → GitHub Issues 経由 → `docs/04_レビュー/` (2026-05)
 - `weekly-plan` / `weekly-review` / `critical-review` / `pre-mortem` / `*-improvement` 系ラベル (2026-05 廃止) → `docs/03_週次運用/` / `docs/04_レビュー/` / `docs/02_実装計画/improvement-backlog.md`
 - `docs/05_改善ログ/` (2026-06 廃止) → `docs/02_実装計画/improvement-backlog.md` (pending 移行) + `.claude/skills/analytics/*/reference/improvement-log.md` (詳細ログ)
