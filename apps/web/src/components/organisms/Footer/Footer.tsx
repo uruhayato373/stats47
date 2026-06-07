@@ -1,16 +1,4 @@
-/**
- * Mega Footer (D 最適化版)
- *
- * 全カテゴリ + 全テーマを Server Component で SSG。
- * サイドバー閉じた分の内部リンク密度を補完し、SEO 維持。
- */
-
 import Link from "next/link";
-
-import { isOk } from "@stats47/types";
-
-import { listCategories } from "@/features/category/server";
-import { ALL_THEMES } from "@/features/theme-dashboard/server";
 
 import { FooterSocialLinks } from "./FooterSocialLinks";
 
@@ -30,12 +18,8 @@ const SITE_LINKS = [
   { href: "/terms", label: "利用規約" },
 ] as const;
 
-export async function Footer() {
+export function Footer() {
   const currentYear = new Date().getFullYear();
-
-  // カテゴリ取得 (R2 cached)。失敗時は空配列で fallback
-  const catResult = await listCategories().catch(() => null);
-  const categories = catResult && isOk(catResult) ? catResult.data : [];
 
   return (
     <footer
@@ -44,7 +28,7 @@ export async function Footer() {
     >
       <div className="mx-auto max-w-[1700px] px-4 sm:px-6">
         {/* メインリンクグリッド */}
-        <div className="grid grid-cols-2 gap-6 sm:grid-cols-4 lg:grid-cols-5">
+        <div className="grid grid-cols-2 gap-6 sm:grid-cols-3">
           {/* コンテンツ */}
           <div>
             <h3 className="mb-2.5 text-xs font-semibold uppercase tracking-wider text-foreground">
@@ -63,75 +47,6 @@ export async function Footer() {
               ))}
             </ul>
           </div>
-
-          {/* カテゴリ */}
-          {categories.length > 0 && (
-            <div>
-              <h3 className="mb-2.5 text-xs font-semibold uppercase tracking-wider text-foreground">
-                カテゴリ
-              </h3>
-              <ul className="space-y-1.5">
-                {categories.slice(0, 9).map((cat) => (
-                  <li key={cat.categoryKey}>
-                    <Link
-                      href={`/category/${cat.categoryKey}`}
-                      className="text-xs text-muted-foreground transition-colors hover:text-foreground"
-                    >
-                      {cat.categoryName}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-
-          {/* テーマ (前半) */}
-          <div>
-            <h3 className="mb-2.5 text-xs font-semibold uppercase tracking-wider text-foreground">
-              テーマ
-            </h3>
-            <ul className="space-y-1.5">
-              {ALL_THEMES.slice(0, 9).map((theme) => (
-                <li key={theme.themeKey}>
-                  <Link
-                    href={`/themes/${theme.themeKey}`}
-                    className="text-xs text-muted-foreground transition-colors hover:text-foreground"
-                  >
-                    {theme.title}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* テーマ (後半) */}
-          {ALL_THEMES.length > 9 && (
-            <div>
-              <h3 className="mb-2.5 text-xs font-semibold uppercase tracking-wider text-foreground sm:invisible">
-                テーマ続き
-              </h3>
-              <ul className="space-y-1.5">
-                {ALL_THEMES.slice(9).map((theme) => (
-                  <li key={theme.themeKey}>
-                    <Link
-                      href={`/themes/${theme.themeKey}`}
-                      className="text-xs text-muted-foreground transition-colors hover:text-foreground"
-                    >
-                      {theme.title}
-                    </Link>
-                  </li>
-                ))}
-                <li>
-                  <Link
-                    href="/themes"
-                    className="text-xs font-semibold text-primary hover:underline"
-                  >
-                    すべて見る →
-                  </Link>
-                </li>
-              </ul>
-            </div>
-          )}
 
           {/* サイト情報 */}
           <div>
