@@ -47,13 +47,6 @@ export const industrialWaterUsage: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "ｍ3／日/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "工業用水量ランキング都道府県【2015年】｜1位千葉県（16,122,494ｍ3／日）",

@@ -80,13 +80,6 @@ export const prefecturalNatureParkArea: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "ｈａ/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "都道府県立自然公園面積ランキング都道府県【2024年】｜1位新潟県（128,580ｈａ）",

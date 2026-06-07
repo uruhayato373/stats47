@@ -46,13 +46,6 @@ export const housingSiteValuePer33m2: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "千円/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "住宅敷地価額ランキング都道府県【2004年】｜1位東京都（781.2千円）",

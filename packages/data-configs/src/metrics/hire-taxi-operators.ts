@@ -78,13 +78,6 @@ export const hireTaxiOperators: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "社/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "ハイヤー・タクシー事業者ランキング都道府県【2013年】｜1位東京都（16,256社）",

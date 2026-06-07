@@ -59,13 +59,6 @@ export const numberOfIndividualFisheryManagement: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "世帯/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "個人漁業経営体系数ランキング都道府県【2003年】｜1位北海道（14,857世帯）",

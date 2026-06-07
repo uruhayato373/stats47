@@ -81,13 +81,6 @@ export const gasolineSalesVolume: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "ＫＬ/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "ガソリン販売量ランキング都道府県【2023年】｜1位東京都（4,244,833ＫＬ）",

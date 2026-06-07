@@ -69,13 +69,6 @@ export const maternalHealthGuidancePer100Births: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "人/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "妊産婦保健指導数ランキング都道府県【2023年】｜1位広島県（278.6人）",

@@ -47,13 +47,6 @@ export const newOwnerOccupiedStarts: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "戸/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "着工新設持家数ランキング都道府県【2024年】｜1位愛知県（15,980戸）",

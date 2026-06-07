@@ -74,13 +74,6 @@ export const frequencyOfOccupationalAccidents: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "‐/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "労働災害発生の頻度ランキング都道府県【2023年】｜1位高知県（3.7‐）",

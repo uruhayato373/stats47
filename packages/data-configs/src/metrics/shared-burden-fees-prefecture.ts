@@ -81,13 +81,6 @@ export const sharedBurdenFeesPrefecture: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "分担金及び負担金ランキング都道府県【2022年】｜1位東京都（67,381,743）",

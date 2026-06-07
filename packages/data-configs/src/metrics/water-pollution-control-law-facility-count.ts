@@ -80,13 +80,6 @@ export const waterPollutionControlLawFacilityCount: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "件/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "水質汚濁防止法上の特定事業場数ランキング都道府県【2023年】｜1位長野県（12,414件）",

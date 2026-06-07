@@ -80,13 +80,6 @@ export const monthlyAverageActualWorkingHoursFemalePre2019: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "時間/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "月間平均実労働時間数ランキング都道府県【2019年】｜1位岐阜県（172時間）",

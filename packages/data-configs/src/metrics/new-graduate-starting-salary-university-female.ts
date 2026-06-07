@@ -47,13 +47,6 @@ export const newGraduateStartingSalaryUniversityFemale: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "千円/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "新規学卒者初任給ランキング都道府県【2019年】｜1位東京都（216.2千円）",

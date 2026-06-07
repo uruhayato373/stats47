@@ -61,13 +61,6 @@ export const mailItemsHandled: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "万通/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "郵便物引受数ランキング都道府県【2006年】｜1位東京都（629,840万通）",

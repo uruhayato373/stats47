@@ -83,13 +83,6 @@ export const ordinaryConstructionExpensesPrefecture: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "普通建設事業費ランキング都道府県【2022年】｜1位東京都（778,693,263）",

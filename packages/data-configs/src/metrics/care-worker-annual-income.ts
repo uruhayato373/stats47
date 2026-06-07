@@ -47,13 +47,6 @@ export const careWorkerAnnualIncome: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "万円/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "介護職員の平均年収ランキング都道府県【2023年】｜1位広島県（411.3万円）",

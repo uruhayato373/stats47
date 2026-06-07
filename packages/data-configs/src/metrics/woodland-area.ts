@@ -47,13 +47,6 @@ export const woodlandArea: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "ｈａ/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "森林面積ランキング都道府県【2019年】｜1位北海道（5,313,034ｈａ）",

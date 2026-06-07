@@ -46,13 +46,6 @@ export const maximumSnowDepth: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "ｃｍ/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "最深積雪ランキング都道府県【2007年】｜1位北海道（78ｃｍ）",

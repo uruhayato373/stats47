@@ -80,13 +80,6 @@ export const prefecturalNaturalParkCount: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "箇所/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "都道府県立自然公園数ランキング都道府県【2024年】｜1位高知県（18箇所）",

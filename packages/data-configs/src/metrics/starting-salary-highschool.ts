@@ -48,13 +48,6 @@ export const startingSalaryHighschool: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "千円/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "高卒初任給1位は三重20.8万円、沖縄16.5万円との1.3倍差｜47都道府県2023",

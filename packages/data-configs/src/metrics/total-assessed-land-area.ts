@@ -75,13 +75,6 @@ export const totalAssessedLandArea: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "ｍ2/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "評価総地積ランキング都道府県【2023年】｜1位北海道（27,212,846,547ｍ2）",

@@ -53,13 +53,6 @@ export const salesAmountPrivate: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "百万円/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "売上金額ランキング都道府県【2020年】｜1位東京都（488,168,851百万円）",

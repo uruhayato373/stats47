@@ -55,13 +55,6 @@ export const currentSavingsBalanceMultiPersonHouseholds: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "千円/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "貯蓄現在高ランキング都道府県【2014年】｜1位東京都（19,669千円）",

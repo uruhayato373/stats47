@@ -47,13 +47,6 @@ export const portCargoExport: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "トン/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "輸出貨物量（港湾統計）ランキング都道府県【2023年】｜1位愛知県（53,405,445トン）",

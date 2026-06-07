@@ -49,13 +49,6 @@ export const bambooProduction: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "千束/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "竹材生産量ランキング都道府県【2007年】｜1位鹿児島県（426千束）",

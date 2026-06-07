@@ -46,13 +46,6 @@ export const factoryEstablishmentCount: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "件/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "工場立地件数ランキング都道府県【2020年】｜1位茨城県（65件）",

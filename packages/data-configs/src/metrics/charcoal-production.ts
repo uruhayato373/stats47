@@ -49,13 +49,6 @@ export const charcoalProduction: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "トン/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "木炭生産量ランキング都道府県【2007年】｜1位岩手県（4,519トン）",

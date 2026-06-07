@@ -48,13 +48,6 @@ export const garbageFinalDisposal: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "t/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "ごみ最終処分量ランキング都道府県【2023年】｜1位大阪府（319,002t）",

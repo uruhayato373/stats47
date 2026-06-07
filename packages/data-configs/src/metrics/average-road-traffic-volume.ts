@@ -47,13 +47,6 @@ export const averageRoadTrafficVolume: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "台/12h/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "道路平均交通量ランキング都道府県【2020年】｜1位大阪府（16,472台/12h）",

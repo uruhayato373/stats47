@@ -56,13 +56,6 @@ export const dayTimePopulation: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "人/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "昼間人口ランキング都道府県【2020年】｜1位東京都（16,315,279人）",

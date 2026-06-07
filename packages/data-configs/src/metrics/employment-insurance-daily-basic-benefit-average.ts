@@ -81,13 +81,6 @@ export const employmentInsuranceDailyBasicBenefitAverage: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "千円/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "雇用保険（日雇）基本手当平均支給額ランキング都道府県【2023年】｜1位三重県（1,132.5千円）",

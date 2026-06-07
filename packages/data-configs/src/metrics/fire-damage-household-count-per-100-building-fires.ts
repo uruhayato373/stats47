@@ -80,13 +80,6 @@ export const fireDamageHouseholdCountPer100BuildingFires: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "世帯/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "火災り災世帯数ランキング都道府県【2023年】｜1位大阪府（110.3世帯）",

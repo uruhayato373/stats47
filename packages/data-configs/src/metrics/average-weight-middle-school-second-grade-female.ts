@@ -47,13 +47,6 @@ export const averageWeightMiddleSchoolSecondGradeFemale: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "kg/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "平均体重ランキング都道府県【2023年】｜1位岩手県（48.9kg）",

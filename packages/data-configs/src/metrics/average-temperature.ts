@@ -46,13 +46,6 @@ export const averageTemperature: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "℃/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "年平均気温ランキング都道府県【2024年】｜1位沖縄県（24.4℃）",

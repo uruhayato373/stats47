@@ -79,13 +79,6 @@ export const totalGeneralProjectInvestment: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "一般事業総投資額ランキング都道府県【2022年】｜1位東京都（1,938,965,474）",

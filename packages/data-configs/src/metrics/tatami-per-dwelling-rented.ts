@@ -52,13 +52,6 @@ export const tatamiPerDwellingRented: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "畳/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "借家住宅の居住室の畳数ランキング都道府県【2023年】｜1位奈良県（21.01畳）",

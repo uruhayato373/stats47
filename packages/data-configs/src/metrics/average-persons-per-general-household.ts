@@ -46,13 +46,6 @@ export const averagePersonsPerGeneralHousehold: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "人/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "一般世帯の平均人員ランキング都道府県【2020年】｜1位山形県（2.61人）",

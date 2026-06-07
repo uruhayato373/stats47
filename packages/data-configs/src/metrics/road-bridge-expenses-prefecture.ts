@@ -81,13 +81,6 @@ export const roadBridgeExpensesPrefecture: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "道路橋りょう費ランキング都道府県【2022年】｜1位北海道（145,347,812）",

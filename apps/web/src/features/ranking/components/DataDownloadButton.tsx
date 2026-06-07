@@ -31,7 +31,7 @@ interface DataDownloadButtonProps {
     normalizationBasis: string | null;
   };
   /**
-   * 現在表示中の正規化タイプ (per_population / per_area / per_household)。
+   * 現在表示中の正規化タイプ (per_population / per_area)。
    * 指定された場合、その基準で計算済みの値をダウンロードする。
    * 未指定なら総数 (basis=original)。
    */

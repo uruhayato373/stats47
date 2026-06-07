@@ -46,13 +46,6 @@ export const cityGasSalesVolume: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "万ＭＪ/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "都市ガス販売量ランキング都道府県【2016年】｜1位東京都（23,010,341万ＭＪ）",

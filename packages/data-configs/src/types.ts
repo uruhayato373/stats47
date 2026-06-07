@@ -110,7 +110,7 @@ export interface DisplayConfig {
 
 /** 計算オプション (per_population, per_area などの派生 metric 生成定義) */
 export interface NormalizationOption {
-  type: "per_population" | "per_area" | "per_household";
+  type: "per_population" | "per_area";
   label: string;
   unit: string;
   scaleFactor: number;

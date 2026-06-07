@@ -46,13 +46,6 @@ export const electricityDemand: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "Ｍｗｈ/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "電力需要量ランキング都道府県【2023年】｜1位東京都（75,521,853Ｍｗｈ）",

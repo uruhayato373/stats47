@@ -48,13 +48,6 @@ export const constructionContractPortAirport: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "百万円/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "港湾・空港工事請負契約額ランキング都道府県【2023年】｜1位東京都（158,539百万円）",

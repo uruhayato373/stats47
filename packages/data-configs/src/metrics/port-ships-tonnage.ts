@@ -47,13 +47,6 @@ export const portShipsTonnage: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "総トン/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "入港船舶総トン数（港湾統計）ランキング都道府県【2023年】｜1位神奈川県（399,226,924総トン）",

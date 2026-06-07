@@ -60,13 +60,6 @@ export const nurseryTeacherAnnualIncome: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "万円/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "保育士の平均年収ランキング都道府県【2023年】｜1位東京都（453.5万円）",

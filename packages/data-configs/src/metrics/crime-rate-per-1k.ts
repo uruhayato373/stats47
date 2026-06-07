@@ -53,13 +53,6 @@ export const crimeRatePer1k: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "件/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "刑法犯認知件数（人口千人当たり）ランキング市区町村【2005年】｜1位大阪府 大阪市 中央区（191.03件）",

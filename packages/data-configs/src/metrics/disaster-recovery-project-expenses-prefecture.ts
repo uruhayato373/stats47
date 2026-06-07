@@ -81,13 +81,6 @@ export const disasterRecoveryProjectExpensesPrefecture: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "災害復旧事業費ランキング都道府県【2022年】｜1位熊本県（48,914,832）",

@@ -48,13 +48,6 @@ export const nurseSalary: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "千円/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "看護師の給与ランキング都道府県【2022年】｜1位東京都（359.8千円）",

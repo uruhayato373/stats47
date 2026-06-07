@@ -47,13 +47,6 @@ export const newGraduateScheduledSalaryHighschoolFemale: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "千円/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "新規学卒者所定内給与額ランキング都道府県【2024年】｜1位広島県（214.4千円）",

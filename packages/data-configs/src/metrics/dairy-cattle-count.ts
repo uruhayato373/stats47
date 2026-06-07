@@ -47,13 +47,6 @@ export const dairyCattleCount: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "頭/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "乳用牛飼養頭数ランキング都道府県【2018年】｜1位北海道（790,900頭）",

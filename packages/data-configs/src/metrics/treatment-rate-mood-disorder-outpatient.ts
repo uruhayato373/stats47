@@ -37,13 +37,6 @@ export const treatmentRateMoodDisorderOutpatient: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "人（人口10万対）/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "気分障害（うつ病を含む）の受療率（外来）ランキング都道府県【2023年】｜1位北海道（124人（人口10万対））",

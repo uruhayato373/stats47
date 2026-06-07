@@ -52,13 +52,6 @@ export const overtimePayAdminPrefecture: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "円/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "一般行政職 時間外勤務手当ランキング都道府県【2024年】｜1位石川県（62,496円）",

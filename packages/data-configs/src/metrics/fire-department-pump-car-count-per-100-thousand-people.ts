@@ -85,13 +85,6 @@ export const fireDepartmentPumpCarCountPer100ThousandPeople: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "台/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "消防ポンプ自動車等現有数ランキング都道府県【2022年】｜1位山形県（241.2台）",

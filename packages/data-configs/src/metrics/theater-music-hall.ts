@@ -55,13 +55,6 @@ export const theaterMusicHall: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "施設/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "劇場・音楽堂等数ランキング都道府県【2021年】｜1位東京都（132施設）",

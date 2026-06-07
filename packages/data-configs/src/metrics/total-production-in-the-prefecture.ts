@@ -47,13 +47,6 @@ export const totalProductionInThePrefecture: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "百万円/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "県内総生産額ランキング都道府県【2021年】｜1位東京都（113,685,917百万円）",

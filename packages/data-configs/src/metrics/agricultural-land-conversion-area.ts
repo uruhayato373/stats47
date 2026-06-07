@@ -46,13 +46,6 @@ export const agriculturalLandConversionArea: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "ｈａ/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "農地の転用面積ランキング都道府県【2022年】｜1位茨城県（1,025ｈａ）",

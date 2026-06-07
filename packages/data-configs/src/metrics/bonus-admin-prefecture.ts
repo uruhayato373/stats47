@@ -52,13 +52,6 @@ export const bonusAdminPrefecture: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "円/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "一般行政職 期末・勤勉手当（ボーナス）ランキング都道府県【2024年】｜1位東京都（1,863,900円）",

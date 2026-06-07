@@ -46,13 +46,6 @@ export const homeHelperUsersPerOffice: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "人/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "訪問介護利用者数ランキング都道府県【2023年】｜1位富山県（43.68人）",

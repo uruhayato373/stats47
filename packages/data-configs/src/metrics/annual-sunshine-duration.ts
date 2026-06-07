@@ -46,13 +46,6 @@ export const annualSunshineDuration: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "時間/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "年間日照時間ランキング都道府県【2024年】｜1位高知県（2,309時間）",

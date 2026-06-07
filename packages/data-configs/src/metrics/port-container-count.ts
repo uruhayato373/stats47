@@ -46,13 +46,6 @@ export const portContainerCount: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "TEU/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "コンテナ取扱個数（港湾統計）ランキング都道府県【2023年】｜1位東京都（4,599,530TEU）",

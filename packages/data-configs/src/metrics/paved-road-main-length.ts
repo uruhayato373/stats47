@@ -47,13 +47,6 @@ export const pavedRoadMainLength: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "km/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "舗装道路実延長（主要道路）ランキング都道府県【2023年】｜1位北海道（18,033.3km）",

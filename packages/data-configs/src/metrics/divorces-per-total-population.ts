@@ -46,13 +46,6 @@ export const divorcesPerTotalPopulation: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "‐/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "離婚率ランキング都道府県【2024年】｜東京5.7‐・秋田2.5‐、都市ほど高い構造と沖縄急落の理由",

@@ -47,13 +47,6 @@ export const keiCarCount: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "台/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "軽自動車等台数ランキング都道府県【2024年】｜1位愛知県（2,201,199台）",

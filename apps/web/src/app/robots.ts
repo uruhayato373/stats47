@@ -36,7 +36,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: [
       {
         userAgent: "*",
-        // ranking の派生指標 toggle URL (?norm=per_population / per_area / per_household) を明示的に許可
+        // ranking の派生指標 toggle URL (?norm=per_population / per_area) を明示的に許可
         allow: ["/", "/ranking/*?norm=*"],
         disallow: [
           "/admin/*", // 管理画面

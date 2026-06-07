@@ -46,13 +46,6 @@ export const jrPassengerTransport: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "千人/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "ＪＲ輸送人員ランキング都道府県【2023年】｜1位東京都（2,990,528.4千人）",

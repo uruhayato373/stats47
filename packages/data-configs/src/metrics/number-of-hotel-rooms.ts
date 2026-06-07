@@ -46,13 +46,6 @@ export const numberOfHotelRooms: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "室/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "ホテル営業施設客室数ランキング都道府県【2017年】｜1位東京都（110,641室）",

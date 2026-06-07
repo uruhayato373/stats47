@@ -84,13 +84,6 @@ export const lowestTemperature: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "℃/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "最低気温ランキング都道府県【2024年】｜1位沖縄県（15.3℃）",

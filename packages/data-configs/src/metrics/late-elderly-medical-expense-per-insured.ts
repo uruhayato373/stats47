@@ -55,13 +55,6 @@ export const lateElderlyMedicalExpensePerInsured: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "円/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "後期高齢者医療費ランキング都道府県【2023年】｜1位福岡県（1,195,147円）",

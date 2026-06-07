@@ -46,13 +46,6 @@ export const averagePaymentAmountOfWorkersCompensationInsuranceBenefits: MetricC
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "千円/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "労働者災害補償保険給付平均支給額ランキング都道府県【2023年】｜1位香川県（79.1千円）",

@@ -56,13 +56,6 @@ export const floorAreaPerDwellingRented: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "ｍ2/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "借家住宅の延べ面積ランキング都道府県【2023年】｜1位佐賀県（53.7ｍ2）",

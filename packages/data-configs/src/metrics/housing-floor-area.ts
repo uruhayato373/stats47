@@ -55,13 +55,6 @@ export const housingFloorArea: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
-      {
-        "type": "per_household",
-        "label": "1世帯あたり",
-        "unit": "m²/世帯",
-        "scaleFactor": 1,
-        "decimalPlaces": 4,
-      },
     ],
   },
   "seoTitle": "1住宅当たり延べ面積ランキング市区町村【2023年】｜1位秋田県 美郷町（211.42m²）",
