@@ -1,3 +1,5 @@
+import { Card, CardContent } from "@stats47/components/atoms/ui/card";
+
 import {
   RANKING_PAGE_FOOTER,
   RANKING_PAGE_TABLE_SIDE,
@@ -66,16 +68,20 @@ export async function AffiliateAdSlot({
     const banner = banners[0];
     if (banner) {
       return (
-        <BannerAd
-          href={banner.href}
-          imageUrl={banner.imageUrl}
-          trackingPixelUrl={banner.trackingPixelUrl}
-          width={banner.width}
-          height={banner.height}
-          category={affiliateCategory ?? "other"}
-          label={banner.title}
-          position="ranking-sidebar"
-        />
+        <Card>
+          <CardContent className="p-3">
+            <BannerAd
+              href={banner.href}
+              imageUrl={banner.imageUrl}
+              trackingPixelUrl={banner.trackingPixelUrl}
+              width={banner.width}
+              height={banner.height}
+              category={affiliateCategory ?? "other"}
+              label={banner.title}
+              position="ranking-sidebar"
+            />
+          </CardContent>
+        </Card>
       );
     }
   }
@@ -93,9 +99,13 @@ export async function AffiliateAdSlot({
     position === "footer" ? RANKING_PAGE_FOOTER : RANKING_PAGE_TABLE_SIDE;
 
   return (
-    <AdSenseAdWrapper
-      format={adSlot.format}
-      slotId={adSlot.slotId}
-    />
+    <Card>
+      <CardContent className="p-3">
+        <AdSenseAdWrapper
+          format={adSlot.format}
+          slotId={adSlot.slotId}
+        />
+      </CardContent>
+    </Card>
   );
 }

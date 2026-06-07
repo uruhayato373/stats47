@@ -42,6 +42,7 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@stats47/components/atoms/ui/breadcrumb";
+import { Card, CardContent } from "@stats47/components/atoms/ui/card";
 import { fetchPrefectureTopology } from "@stats47/gis/geoshape";
 import {
   readRankingValuesFromR2,
@@ -343,7 +344,7 @@ export default async function RankingKeyPage({
         // 右サイドバー: 関連ランキング・関連記事
         sidebarSection={
           <Suspense fallback={<div className="space-y-4 animate-pulse"><div className="h-64 bg-muted rounded-lg" /><div className="h-32 bg-muted rounded-lg" /></div>}>
-            <AdSenseAd format={RANKING_SIDEBAR_TOP.format} slotId={RANKING_SIDEBAR_TOP.slotId} />
+            <Card><CardContent className="p-3"><AdSenseAd format={RANKING_SIDEBAR_TOP.format} slotId={RANKING_SIDEBAR_TOP.slotId} /></CardContent></Card>
             <RankingItemsSidebar rankingKey={rankingKey} areaType={areaType} categoryKey={rankingItem.categoryKey} />
             <SidebarPromoBanner />
             <RelatedArticlesCard rankingKey={rankingKey} areaType={areaType} />

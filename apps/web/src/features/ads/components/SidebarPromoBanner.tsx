@@ -1,3 +1,5 @@
+import { Card, CardContent } from "@stats47/components/atoms/ui/card";
+
 import { SIDEBAR_PROMO_BANNERS } from "../constants/sidebar-banners";
 
 import { BannerAd } from "./BannerAd";
@@ -11,8 +13,7 @@ interface SidebarPromoBannerProps {
 
 /**
  * 全ページ共通サイドバー用の固定アフィリエイトバナー。
- * SIDEBAR_PROMO_BANNERS (単一ソース) から 1 件を BannerAd で描画する。
- * BannerAd 経由なので GA4 クリック/インプレッション計測 + rel="sponsored" + 計測ピクセルを保証する。
+ * Card でラップし他のサイドバーウィジェットと見た目を統一する。
  */
 export function SidebarPromoBanner({
   index = 0,
@@ -22,14 +23,18 @@ export function SidebarPromoBanner({
   const banner = SIDEBAR_PROMO_BANNERS[index % SIDEBAR_PROMO_BANNERS.length];
 
   return (
-    <BannerAd
-      href={banner.href}
-      imageUrl={banner.imageUrl}
-      trackingPixelUrl={banner.trackingPixelUrl}
-      width={banner.width}
-      height={banner.height}
-      label={banner.label}
-      position={position}
-    />
+    <Card>
+      <CardContent className="p-3">
+        <BannerAd
+          href={banner.href}
+          imageUrl={banner.imageUrl}
+          trackingPixelUrl={banner.trackingPixelUrl}
+          width={banner.width}
+          height={banner.height}
+          label={banner.label}
+          position={position}
+        />
+      </CardContent>
+    </Card>
   );
 }
