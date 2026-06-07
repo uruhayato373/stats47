@@ -1,0 +1,89 @@
+name: 📸 Instagram angle-post carousel
+
+# posts.json の angle-post エントリを carousel として投稿する。
+# workflow_dispatch でテスト投稿、または cron でスケジュール実行。
+
+on:
+  workflow_dispatch:
+    inputs:
+      content_key:
+        description: "content_key (例: annual-precipitation)"
+        required: true
+        default: "annual-precipitation"
+      angle:
+        description: "投稿角度 (体験/数字/理由/反論/結論)、空なら最初の draft"
+        required: false
+      post_id:
+        description: "posts.json の id (指定時は直接指定)"
+        required: false
+  schedule:
+    # 投稿スケジュール (JST):
+    #   月 12:00 = UTC 03:00 → 体験 (2026-06-09T21:00 は当日深夜 → 後で調整)
+    #   火 07:30 = UTC 22:30 前日
+    #   火 19:00 = UTC 10:00
+    #   水 10:00 = UTC 01:00
+    #   水 12:00 = UTC 03:00
+    # 当面は workflow_dispatch のみで手動運用
+    # - cron: "0 3 9 6 *"   # 2026-06-09 JST 12:00 (テスト用)
+
+permissions:
+  contents: write
+
+concurrency:
+  group: post-angle-carousel-${{ github.run_id }}
+  cancel-in-progress: false
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: 🧰 Checkout develop
+        uses: actions/checkout@v4
+        with:
+          ref: develop
+          fetch-depth: 1
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: 📸 Post carousel to Instagram
+        id: post
+        env:
+          INSTAGRAM_ACCESS_TOKEN: ${{ secrets.INSTAGRAM_ACCESS_TOKEN }}
+          INSTAGRAM_BUSINESS_ACCOUNT_ID: ${{ secrets.INSTAGRAM_BUSINESS_ACCOUNT_ID }}
+          CONTENT_KEY: ${{ inputs.content_key }}
+          ANGLE: ${{ inputs.angle }}
+          POST_ID: ${{ inputs.post_id }}
+        run: |
+          set -o pipefail
+          node .claude/scripts/instagram/post-angle-carousel.cjs 2>&1 | tee /tmp/post-output.log
+          PERMALINK=$(grep -oE 'PERMALINK=https?://[^ ]+' /tmp/post-output.log | head -1 | cut -d= -f2- || echo "")
+          MEDIA_ID=$(grep -oE 'MEDIA_ID=[0-9]+' /tmp/post-output.log | head -1 | cut -d= -f2 || echo "")
+          if [ -n "${PERMALINK}" ]; then POSTED=true; else POSTED=false; fi
+          echo "permalink=${PERMALINK}" >> "$GITHUB_OUTPUT"
+          echo "media_id=${MEDIA_ID}" >> "$GITHUB_OUTPUT"
+          echo "posted=${POSTED}" >> "$GITHUB_OUTPUT"
+
+      - name: 💾 Commit posts.json update
+        if: steps.post.outputs.posted == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add .claude/state/sns/posts.json .claude/state/metrics/sns/instagram-publish-log.csv 2>/dev/null || true
+          git diff --staged --quiet && echo "no changes" && exit 0
+          git commit -m "chore(sns): mark angle-post posted (id=${{ inputs.post_id || 'auto' }}, key=${{ inputs.content_key }})"
+          git push origin develop
+
+      - name: 📊 Summary
+        if: always()
+        run: |
+          if [ "${{ steps.post.outputs.posted }}" = "true" ]; then
+            echo "## ✅ 投稿完了" >> $GITHUB_STEP_SUMMARY
+            echo "- **permalink**: ${{ steps.post.outputs.permalink }}" >> $GITHUB_STEP_SUMMARY
+            echo "- **media_id**: ${{ steps.post.outputs.media_id }}" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "## ⏭️ 投稿スキップ (該当エントリなし)" >> $GITHUB_STEP_SUMMARY
+          fi
