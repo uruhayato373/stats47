@@ -16,15 +16,6 @@ on:
       post_id:
         description: "posts.json の id (指定時は直接指定)"
         required: false
-  schedule:
-    # 投稿スケジュール (JST):
-    #   月 12:00 = UTC 03:00 → 体験 (2026-06-09T21:00 は当日深夜 → 後で調整)
-    #   火 07:30 = UTC 22:30 前日
-    #   火 19:00 = UTC 10:00
-    #   水 10:00 = UTC 01:00
-    #   水 12:00 = UTC 03:00
-    # 当面は workflow_dispatch のみで手動運用
-    # - cron: "0 3 9 6 *"   # 2026-06-09 JST 12:00 (テスト用)
 
 permissions:
   contents: write
