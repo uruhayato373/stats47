@@ -21,7 +21,6 @@
 | `31_note記事原稿/` | note 記事の下書き原稿（制作中ヴァーティカル） | ヴァーティカル全記事公開後 `32_note公開済み/` へ移動 |
 | `32_note公開済み/` | note で公開完了したヴァーティカルの記事ソース | ヴァーティカル単位で移動・修正は `--update` |
 | `40_アフィリエイト管理/` | アフィリエイト商材・配置管理 | 内容更新 |
-| `50_Issues/` | 未着手の機能・自動化・UI 改善 backlog | `feature-backlog.md` / `automation-backlog.md` / `ui-improvements.md` |
 
 ## 00_プロジェクト管理/ の固定構成
 
@@ -60,7 +59,7 @@
 2. **週次計画・レビュー** → `/weekly-plan` / `/weekly-review` スキルが `03_週次運用/` に自動生成
 3. **改善施策の記録** → `docs/02_実装計画/improvement-backlog.md` の該当行の status を更新
 4. **コンテンツ backlog** → 該当 `*企画/backlog/` に Write
-5. **未着手の機能・自動化バックログ** → `50_Issues/{feature,automation}-backlog.md` に section 追加
+5. **未着手の機能・自動化バックログ** → `docs/02_実装計画/feature-backlog.md` に section 追加
 6. **機能改修 / バグ** → `gh issue create --label enhancement` で Issues 起票
 
 ### lifecycle

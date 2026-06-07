@@ -55,6 +55,7 @@ export { AiContentAccordion } from "./components/AiContentAccordion";
 export { AiInsightCard } from "./components/AiInsightCard";
 export { AiMarkdownContent } from "./components/AiMarkdownContent";
 export { RankingHeroCard } from "./components/RankingHeroCard";
+export { RankingTop10Chart } from "./components/RankingTop10Chart";
 export { DataUsageCard } from "./components/DataUsageCard";
 export { RankingFaqSection } from "./components/RankingFaqSection";
 

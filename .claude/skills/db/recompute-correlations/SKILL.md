@@ -7,7 +7,7 @@ primary_agent: snapshot-exporter
 
 > ⚠️ **NOT IMPLEMENTED (Phase 7)** — 2026-05-28 時点では SKILL.md と方針のみ確定。実装スクリプト `packages/correlation/src/scripts/recompute.ts` は未作成。
 > 既存の相関 snapshot (`app/correlation/top-pairs.json` 等) は Phase 6 移行前の D1 から派生したものをそのまま使用中。再計算が必要な時点で Phase 7 として着手する。
-> Issue: `docs/50_Issues/feature-backlog.md` の "Phase 7: recompute-correlations 実装" 項を参照。
+> Issue: `docs/02_実装計画/feature-backlog.md` の "Phase 7: recompute-correlations 実装" 項を参照。
 
 R2 の `app/stats/<metric>/values.json` を入力に、Pearson 相関を batch 計算 → R2 snapshot に書き出し → 一時テーブル破棄。
 

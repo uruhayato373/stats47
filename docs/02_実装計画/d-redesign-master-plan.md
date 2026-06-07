@@ -391,7 +391,7 @@ W21 セッションで Phase 1 (横幅最大化 + 共通プリミティブ + 右
 
 ### 残作業
 
-詳細は `docs/50_Issues/feature-backlog.md` の以下セクションを参照:
+詳細は `docs/02_実装計画/feature-backlog.md` の以下セクションを参照:
 
 - **T2-REDESIGN-PHASE2**: KPI Tile クリック化 + 本文中 NativeAffiliateRow 周期挿入
 - **T2-REDESIGN-PHASE3**: A8.net 統合 + compare/search ページ実装 + 環境変数本番設定 + CSV ダウンロード R2 push 反映

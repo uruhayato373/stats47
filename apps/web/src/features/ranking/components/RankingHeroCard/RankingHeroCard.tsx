@@ -134,6 +134,36 @@ export function RankingHeroCard({
   const lastStat =
     stats.last?.value != null ? formatStatValue(stats.last.value, unit) : null;
 
+  // 格差倍率 (1位 ÷ 最下位)。最下位が 0 以下なら算出不能 → 全国合計にフォールバック (#222 KPI サマリー)
+  const gapRatio =
+    stats.top?.value != null && stats.last?.value != null && stats.last.value > 0
+      ? stats.top.value / stats.last.value
+      : null;
+  const gapText =
+    gapRatio != null
+      ? `${gapRatio >= 100 ? Math.round(gapRatio).toLocaleString() : gapRatio.toFixed(1)}倍`
+      : null;
+
+  // 暗色スタットの 3 項目 (#222): 格差倍率(なければ全国合計) / 全国平均 / 最少(=最下位)
+  const statItems: Array<{
+    label: string;
+    stat?: { num: string; suffix: string } | null;
+    text?: string;
+    suffixName?: string | null;
+    show: boolean;
+  }> = [
+    gapText != null
+      ? { label: "格差", text: gapText, show: true }
+      : { label: "全国合計", stat: totalStat, show: stats.count > 0 },
+    { label: "全国平均", stat: avgStat, show: stats.count > 0 },
+    {
+      label: "最少",
+      stat: lastStat,
+      suffixName: stats.last?.areaName,
+      show: lastStat !== null,
+    },
+  ];
+
   return (
     <div
       className="grid grid-cols-1 items-stretch gap-6 rounded-none border border-border p-5 shadow-sm lg:grid-cols-2"
@@ -273,21 +303,16 @@ export function RankingHeroCard({
         </div>
 
         <div className="grid grid-cols-3 gap-3">
-          {[
-            { label: "全国合計", stat: totalStat, show: stats.count > 0 },
-            { label: "全国平均", stat: avgStat, show: stats.count > 0 },
-            {
-              label: "最少",
-              stat: lastStat,
-              suffixName: stats.last?.areaName,
-              show: lastStat !== null,
-            },
-          ].map((item) => (
+          {statItems.map((item) => (
             <div key={item.label}>
               <p className="text-[10.5px] tracking-normal text-white/60">
                 {item.label}
               </p>
-              {item.show && item.stat ? (
+              {item.text ? (
+                <p className="mt-0.5 font-mono text-sm font-bold tabular-nums text-white">
+                  {item.text}
+                </p>
+              ) : item.show && item.stat ? (
                 <p className="mt-0.5 font-mono text-sm font-bold tabular-nums text-white">
                   {item.suffixName ? `${item.suffixName} ` : ""}
                   {item.stat.num}

@@ -18,7 +18,7 @@ tags: [refactoring, tech-debt, scalability, dedup]
 プロジェクト肥大化（~150K LOC / 3 apps + 22 packages）に伴い顕在化してきた
 **重複・データ格納場所の乖離・都道府県コード(2桁/5桁)の不整合・スケール上のボトルネック**を、
 多角的に棚卸しして「今のうちに直すべき負債」を優先度付きで抽出する。本ドキュメントは施策の真実源ではなく
-**課題インベントリ**。着手するものは `docs/50_Issues/*-backlog.md` または個別 PR に切り出す。
+**課題インベントリ**。着手するものは `docs/02_実装計画/feature-backlog.md` または個別 PR に切り出す。
 
 ## 調査方法
 
@@ -197,7 +197,7 @@ DB 依存除去（要 import 確認）。低リスクなので最初の quick wi
 
 ## 次アクション
 
-- 本レビューを基に `docs/50_Issues/feature-backlog.md` / `automation-backlog.md` へ未着手項目を起票。
+- 本レビューを基に `docs/02_実装計画/feature-backlog.md` / `automation-backlog.md` へ未着手項目を起票。
 - フェーズ 1（quick wins）は本ブランチ系列で順次着手可能。フェーズ 2/3 は影響範囲が広いので個別 PR + `next build` の SSG 区分確認（`nextjs-ssg-preservation.md`）を伴う。
 
 ---
