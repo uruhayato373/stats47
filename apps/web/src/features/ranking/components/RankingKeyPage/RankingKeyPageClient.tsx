@@ -40,7 +40,6 @@ import {
     RankingYearSelector,
     AreaTypeToggle,
     RankingHeroCard,
-    RankingTop10Chart,
     DataUsageCard,
     classifyRankingSubtitle,
 } from "@/features/ranking";
@@ -454,9 +453,6 @@ export function RankingKeyPageClient({
             {/* メインコンテンツ + 右サイドバー (CSS のみで切替: JS ハイドレーション由来の CLS を防ぐ) */}
             <div className="mt-4 lg:flex lg:gap-4 lg:items-start">
             <main className="flex flex-col gap-4 min-w-0 flex-1">
-                    {/* 上位10件チャート: 地図・テーブルの前に magnitude を一目で (#223 グラフ→データ) */}
-                    <RankingTop10Chart rankingValues={rankingValues} />
-
                     {/* 地図＋データテーブル */}
                     {isBelowLg ? (
                         /* モバイル: タブ切替（デフォルト table: Leaflet タイルを LCP 要素から除外） */
