@@ -2,26 +2,26 @@
   "week_id": "2026-W23",
   "year": 2026,
   "week": 23,
-  "generated_at": "2026-06-06T00:17:44.153Z",
+  "generated_at": "2026-06-07T11:39:11.458Z",
   "ranges": {
     "ga4": {
       "this": {
-        "start": "2026-05-30",
-        "end": "2026-06-05"
+        "start": "2026-05-31",
+        "end": "2026-06-06"
       },
       "prev": {
-        "start": "2026-05-23",
-        "end": "2026-05-29"
+        "start": "2026-05-24",
+        "end": "2026-05-30"
       }
     },
     "gsc": {
       "this": {
-        "start": "2026-05-28",
-        "end": "2026-06-03"
+        "start": "2026-05-29",
+        "end": "2026-06-04"
       },
       "prev": {
-        "start": "2026-05-21",
-        "end": "2026-05-27"
+        "start": "2026-05-22",
+        "end": "2026-05-28"
       }
     }
   },
@@ -29,132 +29,160 @@
     "channels": [
       {
         "channel": "Organic Search",
-        "thisUsers": 1079,
-        "prevUsers": 1053,
-        "userDelta": 26,
-        "userDeltaPct": 2.4691358024691357,
-        "thisSessions": 1279,
-        "prevSessions": 1257,
-        "thisEngagedSessions": 739,
-        "prevEngagedSessions": 825,
-        "thisEngagementRate": 0.5777951524628616
+        "thisUsers": 1113,
+        "prevUsers": 1042,
+        "userDelta": 71,
+        "userDeltaPct": 6.813819577735125,
+        "thisSessions": 1321,
+        "prevSessions": 1248,
+        "thisEngagedSessions": 915,
+        "prevEngagedSessions": 829,
+        "thisEngagementRate": 0.6926570779712339
       },
       {
         "channel": "Direct",
-        "thisUsers": 573,
-        "prevUsers": 477,
-        "userDelta": 96,
-        "userDeltaPct": 20.125786163522015,
-        "thisSessions": 603,
-        "prevSessions": 529,
-        "thisEngagedSessions": 66,
-        "prevEngagedSessions": 76,
-        "thisEngagementRate": 0.10945273631840796
-      },
-      {
-        "channel": "Unassigned",
-        "thisUsers": 219,
-        "prevUsers": 57,
-        "userDelta": 162,
-        "userDeltaPct": 284.2105263157895,
-        "thisSessions": 235,
-        "prevSessions": 65,
-        "thisEngagedSessions": 27,
-        "prevEngagedSessions": 34,
-        "thisEngagementRate": 0.1148936170212766
+        "thisUsers": 653,
+        "prevUsers": 420,
+        "userDelta": 233,
+        "userDeltaPct": 55.47619047619048,
+        "thisSessions": 682,
+        "prevSessions": 461,
+        "thisEngagedSessions": 100,
+        "prevEngagedSessions": 77,
+        "thisEngagementRate": 0.1466275659824047
       },
       {
         "channel": "Referral",
-        "thisUsers": 131,
-        "prevUsers": 138,
-        "userDelta": -7,
-        "userDeltaPct": -5.072463768115942,
-        "thisSessions": 182,
-        "prevSessions": 182,
-        "thisEngagedSessions": 93,
-        "prevEngagedSessions": 121,
-        "thisEngagementRate": 0.510989010989011
+        "thisUsers": 135,
+        "prevUsers": 131,
+        "userDelta": 4,
+        "userDeltaPct": 3.0534351145038165,
+        "thisSessions": 187,
+        "prevSessions": 175,
+        "thisEngagedSessions": 114,
+        "prevEngagedSessions": 114,
+        "thisEngagementRate": 0.6096256684491979
+      },
+      {
+        "channel": "Unassigned",
+        "thisUsers": 61,
+        "prevUsers": 59,
+        "userDelta": 2,
+        "userDeltaPct": 3.389830508474576,
+        "thisSessions": 67,
+        "prevSessions": 69,
+        "thisEngagedSessions": 30,
+        "prevEngagedSessions": 37,
+        "thisEngagementRate": 0.44776119402985076
       },
       {
         "channel": "Organic Social",
-        "thisUsers": 14,
-        "prevUsers": 93,
-        "userDelta": -79,
-        "userDeltaPct": -84.94623655913979,
-        "thisSessions": 18,
-        "prevSessions": 104,
+        "thisUsers": 11,
+        "prevUsers": 95,
+        "userDelta": -84,
+        "userDeltaPct": -88.42105263157895,
+        "thisSessions": 15,
+        "prevSessions": 106,
         "thisEngagedSessions": 8,
-        "prevEngagedSessions": 59,
-        "thisEngagementRate": 0.4444444444444444
+        "prevEngagedSessions": 58,
+        "thisEngagementRate": 0.5333333333333333
       }
     ],
     "total": {
-      "thisUsers": 2016,
-      "prevUsers": 1818,
-      "thisSessions": 2317,
-      "prevSessions": 2137,
-      "thisEngagedSessions": 933,
+      "thisUsers": 1973,
+      "prevUsers": 1747,
+      "thisSessions": 2272,
+      "prevSessions": 2059,
+      "thisEngagedSessions": 1167,
       "prevEngagedSessions": 1115,
-      "userDelta": 198,
-      "userDeltaPct": 10.891089108910892,
-      "engagedSessionDelta": -182,
-      "engagedSessionDeltaPct": -16.322869955156953
+      "userDelta": 226,
+      "userDeltaPct": 12.936462507155122,
+      "engagedSessionDelta": 52,
+      "engagedSessionDeltaPct": 4.663677130044843
     },
     "organic": {
       "channel": "Organic Search",
-      "thisUsers": 1079,
-      "prevUsers": 1053,
-      "userDelta": 26,
-      "userDeltaPct": 2.4691358024691357,
-      "thisSessions": 1279,
-      "prevSessions": 1257,
-      "thisEngagedSessions": 739,
-      "prevEngagedSessions": 825,
-      "thisEngagementRate": 0.5777951524628616
+      "thisUsers": 1113,
+      "prevUsers": 1042,
+      "userDelta": 71,
+      "userDeltaPct": 6.813819577735125,
+      "thisSessions": 1321,
+      "prevSessions": 1248,
+      "thisEngagedSessions": 915,
+      "prevEngagedSessions": 829,
+      "thisEngagementRate": 0.6926570779712339
     }
   },
   "gsc": {
     "total": {
-      "thisClicks": 206,
-      "prevClicks": 403,
-      "clickDelta": -197,
-      "clickDeltaPct": -48.883374689826304,
-      "thisImpressions": 8804,
-      "prevImpressions": 12882,
-      "impressionDelta": -4078,
-      "thisCtr": 0.02339845524761472,
-      "prevCtr": 0.03128396211768359,
-      "thisPosition": 8.665379373012268,
-      "prevPosition": 8.726983387672721
+      "thisClicks": 287,
+      "prevClicks": 372,
+      "clickDelta": -85,
+      "clickDeltaPct": -22.849462365591396,
+      "thisImpressions": 10919,
+      "prevImpressions": 12096,
+      "impressionDelta": -1177,
+      "thisCtr": 0.026284458283725616,
+      "prevCtr": 0.030753968253968252,
+      "thisPosition": 8.629819580547668,
+      "prevPosition": 8.767774470899472
     },
     "topQueries": [
+      {
+        "query": "健康寿命 都 道府県 ランキング 2026",
+        "clicks": 3,
+        "impressions": 25,
+        "ctr": 0.12,
+        "position": 4.720000000000001
+      },
       {
         "query": "うどん 消費量",
         "clicks": 2,
         "impressions": 6,
         "ctr": 0.3333333333333333,
-        "position": 11.333333333333334
+        "position": 11
       },
       {
-        "query": "健康寿命 都 道府県 ランキング 2026",
+        "query": "うどん 消費量 都道府県",
         "clicks": 2,
-        "impressions": 22,
+        "impressions": 15,
+        "ctr": 0.13333333333333333,
+        "position": 8.733333333333334
+      },
+      {
+        "query": "うどん消費量ランキング",
+        "clicks": 2,
+        "impressions": 37,
+        "ctr": 0.05405405405405406,
+        "position": 9.81081081081081
+      },
+      {
+        "query": "うどんの消費量ランキング",
+        "clicks": 1,
+        "impressions": 11,
         "ctr": 0.09090909090909091,
-        "position": 4.681818181818182
+        "position": 8.09090909090909
       },
       {
         "query": "うどん消費量 都道府県",
         "clicks": 1,
-        "impressions": 10,
-        "ctr": 0.1,
-        "position": 8.3
+        "impressions": 9,
+        "ctr": 0.1111111111111111,
+        "position": 8.222222222222221
       },
       {
-        "query": "うどん消費量ランキング",
+        "query": "うどん消費量ランキング 最新",
         "clicks": 1,
-        "impressions": 32,
-        "ctr": 0.03125,
-        "position": 10.71875
+        "impressions": 1,
+        "ctr": 1,
+        "position": 7
+      },
+      {
+        "query": "こんにゃく 消費量 都道府県",
+        "clicks": 1,
+        "impressions": 4,
+        "ctr": 0.25,
+        "position": 6.5
       },
       {
         "query": "ブリ 漁獲量 ランキング 日本",
@@ -164,39 +192,11 @@
         "position": 6
       },
       {
-        "query": "中国地方5県のうち乳用牛の飼育頭数がもっとも多いのはどこでしょう？",
-        "clicks": 1,
-        "impressions": 465,
-        "ctr": 0.002150537634408602,
-        "position": 10.490322580645161
-      },
-      {
-        "query": "中絶率 都 道府県 ランキング",
-        "clicks": 1,
-        "impressions": 7,
-        "ctr": 0.14285714285714285,
-        "position": 8.571428571428571
-      },
-      {
-        "query": "乳牛飼育頭数ランキング",
-        "clicks": 1,
-        "impressions": 20,
-        "ctr": 0.05,
-        "position": 7.85
-      },
-      {
-        "query": "健康寿命 都道府県 ランキング 最新",
-        "clicks": 1,
-        "impressions": 4,
-        "ctr": 0.25,
-        "position": 11.75
-      },
-      {
-        "query": "子育て しやすい 県 ランキング",
+        "query": "ブロッコリー 消費量",
         "clicks": 1,
         "impressions": 3,
         "ctr": 0.3333333333333333,
-        "position": 6.666666666666667
+        "position": 4.333333333333334
       }
     ]
   },
@@ -205,7 +205,7 @@
     "reason": "PSI_API_KEY 未設定"
   },
   "notes": [
-    "GSC データは 3 日遅延のため、直近期間は 2026-05-28 〜 2026-06-03 を採用",
+    "GSC データは 3 日遅延のため、直近期間は 2026-05-29 〜 2026-06-04 を採用",
     "NSM = 週間エンゲージドセッション数 (GA4 engagedSessions 全チャネル合計)",
     "NSM 定義: docs/04_レビュー/critical-review/*-nsm.md"
   ]
