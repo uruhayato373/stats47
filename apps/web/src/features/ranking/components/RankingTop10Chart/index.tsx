@@ -3,8 +3,9 @@
 import dynamic from "next/dynamic";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@stats47/components/atoms/ui/card";
-import type { RankingValue } from "@stats47/ranking";
 import { BarChart3 } from "lucide-react";
+
+import type { RankingValue } from "@stats47/ranking";
 
 // グラフ本体は SSR 不要 + 重い D3 のため dynamic import (#223 完了条件: SSR 不要・dynamic import)
 const RankingAllPrefecturesChart = dynamic(
