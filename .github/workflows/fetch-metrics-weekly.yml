@@ -115,7 +115,7 @@ jobs:
           cp -r .claude/skills/management/nsm-experiment/reference/weekly-snapshots/. /tmp/metrics-publish/nsm 2>/dev/null || true
           find /tmp/metrics-publish -maxdepth 4 -type f | head -40
 
-      - name: 📤 Publish to develop branch
+      - name: 🔀 Switch to develop & restore metrics
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -142,17 +142,35 @@ jobs:
           mkdir -p .claude/skills/management/nsm-experiment/reference/weekly-snapshots
           cp -r /tmp/metrics-publish/nsm/. .claude/skills/management/nsm-experiment/reference/weekly-snapshots/ 2>/dev/null || true
 
+      # 是正ループの自動化 (docs/02_実装計画/blog-remediation-loop.md Phase 2)。
+      # develop の最新 history + 今 fetch した GSC snapshot + 公開 R2 audit を入力に
+      # 「次に何を直すか」(remediation-queue) を再構築し、due に達した是正 wave の効果を計測する。
+      - name: ♻️ Rebuild remediation queue (next-to-fix)
+        continue-on-error: true # 品質 audit の R2 取得失敗等で週次計測本体を止めない
+        env:
+          R2_PUBLIC_FETCH_URL: https://storage.stats47.jp
+        run: node .claude/scripts/blog/build-remediation-queue.mjs
+
+      - name: 📐 Measure blog remediation wave impact (wave_id 駆動)
+        continue-on-error: true
+        run: node .claude/scripts/blog/measure-gsc-impact.mjs --min-weeks 2
+
+      - name: 📤 Commit & push to develop
+        run: |
           git add .claude/skills/analytics/gsc-improvement/reference/snapshots
           git add .claude/skills/analytics/ga4-improvement/reference/snapshots
           git add .claude/skills/analytics/adsense-improvement/reference/snapshots
           git add .claude/state/metrics
           git add "docs/20_ブログ記事企画/brushup-queue.md" 2>/dev/null || true
           git add .claude/skills/management/nsm-experiment/reference/weekly-snapshots
+          # 是正ループの自動再構築物
+          git add .claude/state/blog/remediation-queue.json 2>/dev/null || true
+          git add .claude/skills/analytics/gsc-improvement/reference/improvement-log.md 2>/dev/null || true
 
           if git diff --cached --quiet; then
             echo "No metrics changes to publish"
             exit 0
           fi
 
-          git commit -m "chore(metrics): weekly snapshot ${{ steps.week.outputs.week }} [skip ci]"
+          git commit -m "chore(metrics): weekly snapshot ${{ steps.week.outputs.week }} + remediation queue/effect [skip ci]"
           git push origin develop

@@ -107,10 +107,25 @@ lane = blockers>0 ? "must-fix" : expectedLift>0 ? "opportunity" : "clean"(キュ
 - must-fix の主因: markdown 表 (表禁止違反) / 図あたり字数 <350 / callout・内部リンク不足。
 - 週 3 本ペースなら must-fix 101 本は約 8 ヶ月で解消。高流入×blocker から消すので effect は早期に GSC に出る想定。
 
-## 今後 (Phase 2)
+## Phase 2 (2026-06-08 実装済 — フルループ自動化)
 
-- `measure-gsc-impact.mjs` の **wave_id 駆動化** (現状 BLOG-CTR-02 ハードコード)。due 到達 wave を自動で before/after 判定し gsc.md status を更新する。本ループの ④ を半自動化する。
-- 週次 cron で `build-remediation-queue.mjs` を回し commit-back (キューを常に最新化)。
+①〜④ の自動化が `fetch-metrics-weekly.yml` (日曜 JST20:00 cron) に配線済。手動は **blog-critic の PASS レビューだけ**に絞られた。
+
+- ✅ **週次 cron でキュー再構築 + commit-back**: GSC snapshot fetch 直後、develop の最新 history + fresh GSC +
+  公開 R2 audit を入力に `build-remediation-queue.mjs` を回し `remediation-queue.json` を develop へ commit-back。
+  「次に何を直すか」が毎週自動で最新化される (race 無し・単一コミット)。R2 audit 失敗時も `continue-on-error`
+  で週次計測本体は止めない。
+- ✅ **`measure-gsc-impact.mjs` の wave_id 駆動化**: BLOG-CTR-02 ハードコードを撤廃し、`auto-brushup-history.json`
+  の wave_id を真実源に **due (是正から `--min-weeks` 以上経過) に達した各 wave** の before/after を週次 GSC で
+  自動 diff。`improvement-log.md` の `## [BLOG-WAVE-<wave_id>]` を upsert (冪等)。delta を提示するだけで
+  status は `effect/pending` 据え置き — **effect/full|partial の確定は weekly-review (人間) が 2-4 週連続観測で**
+  行う (evidence-based-judgment.md 準拠)。
+  - before 週 = wave 週直前の利用可能 snapshot 週、after 週 = 最新週。ISO 週は `isoWeekOf` で算出。
+  - 手動再計測: `node .claude/scripts/blog/measure-gsc-impact.mjs [--wave <id>] [--min-weeks N] [--dry-run]`
+
+> **自動化の境界**: 選定 → 是正案 → 決定的 gate → 公開 → 効果計測 (delta) はすべて自動。
+> **blog-critic の PASS (読者価値の意味判断) のみ意図的に人手ゲート**として残す
+> (「書いた本人が自己採点して公開」を構造的に不能にする設計)。
 
 ## 関連
 

@@ -13,6 +13,35 @@ GSC（Google Search Console）の継続的追跡と改善施策の記録。
 - **想定効果は必ず根拠を併記**（過去事例 / Google 公式ガイド / 計算式）
 - **実測値は取得コマンドへのリンク併記**
 
+## [BLOG-WAVE-2026-05-23-manual]
+
+- **status**: effect/pending (人間が 2-4 週連続観測で確定 / evidence-based-judgment.md)
+- **wave_id**: 2026-05-23-manual / **記事数**: 10
+- **remediated_at**: 2026-05-23 (週 2026-W21)
+- **before**: 2026-W20 → **after**: 2026-W23 (経過 2 週)
+- **計測日**: 2026-06-08 (自動: measure-gsc-impact.mjs)
+
+| slug | imp (before→after) | clicks | CTR | position |
+|---|---|---|---|---|
+| `child-height-regional-gap` | 1719→1830 (+111) | 13→13 (+0) | 0.8%→0.7% (-0.05pp) | 10.6→10.2 (-0.4) |
+| `consumer-price-regional-gap` | 250→242 (-8) | 1→0 (-1) | 0.4%→0.0% (-0.40pp) | 7.3→9.4 (+2.1) |
+| `fiscal-self-reliance-gap` | 583→774 (+191) | 16→23 (+7) | 2.7%→3.0% (+0.23pp) | 8.8→8.7 (-0.1) |
+| `fishery-species-prefecture-specialty` | 273→94 (-179) | 3→2 (-1) | 1.1%→2.1% (+1.03pp) | 8.1→7.8 (-0.2) |
+| `habitable-area-land-use` | 658→785 (+127) | 2→4 (+2) | 0.3%→0.5% (+0.21pp) | 8.1→9.0 (+0.8) |
+| `overnight-guests-inbound-recovery` | 383→181 (-202) | 1→2 (+1) | 0.3%→1.1% (+0.84pp) | 8.3→7.7 (-0.6) |
+| `park-green-space-gap` | 225→392 (+167) | 2→2 (+0) | 0.9%→0.5% (-0.38pp) | 7.5→7.3 (-0.1) |
+| `population-density-urbanization` | 259→426 (+167) | 4→7 (+3) | 1.5%→1.6% (+0.10pp) | 11.1→8.4 (-2.7) |
+| `price-index-high-low-prefecture` | 1403→988 (-415) | 26→20 (-6) | 1.9%→2.0% (+0.17pp) | 8.5→9.4 (+0.9) |
+| `temperature-extremes-map` | 1388→2725 (+1337) | 21→31 (+10) | 1.5%→1.1% (-0.38pp) | 9.1→9.1 (-0.0) |
+
+**wave 合計**: imp 7141→8437 (+1296) / clicks 89→104 (+15) / CTR 1.25%→1.23% (-0.01pp)
+
+### 判定
+
+- **[実測]** clicks +15 / imp +1296 (2026-W20→2026-W23, 10 記事)
+- **[判定] effect/pending** — 自動計測は delta 提示まで。最低 2-4 週連続で正方向なら weekly-review が effect/full|partial を確定する (evidence-based-judgment.md)
+- **検証コマンド**: `node .claude/scripts/blog/measure-gsc-impact.mjs --wave 2026-05-23-manual`
+
 ## 新規エントリテンプレ（必ず参照: `.claude/rules/evidence-based-judgment.md`）
 
 ```markdown

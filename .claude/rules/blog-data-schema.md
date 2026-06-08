@@ -80,7 +80,7 @@ YYYY-MM-DD-<method>[-<batch>]
 | `/publish-article` | draft → publish (factual gate あり) | `.claude/scripts/lib/article-factual-check.mjs` |
 | `/draft-from-trend` | trend → 新規 draft 生成 | `.claude/scripts/blog/{fetch-article-data,generate-article-charts}.mjs` |
 | `/publish-bulk-articles` | 複数記事の bulk publish | factual gate 共有 |
-| `/measure-blog-impact` (Phase D 新設予定) | wave 単位の effect 計測 | `measure-gsc-impact.mjs` (要 SKILL 化 + wave_id 駆動化) |
+| `measure-gsc-impact.mjs` (wave_id 駆動・2026-06-08〜) | due 到達 wave の before/after を週次 GSC で自動 diff → `improvement-log.md` の `## [BLOG-WAVE-<id>]` upsert。`fetch-metrics-weekly.yml` cron に配線済 (delta 提示まで・status 確定は weekly-review) | `measure-gsc-impact.mjs` |
 | `/analyze-winning-patterns` | 天井ループ: GSC実測×構造特徴で勝ち要因抽出 (順位交絡統制付き)。正典 `docs/02_実装計画/blog-continuous-quality-loop.md` | `.claude/scripts/blog/analyze-winning-patterns.mjs` |
 
 ### Docs (人間向け真実源)
@@ -132,4 +132,4 @@ YYYY-MM-DD-<method>[-<batch>]
 - 親 plan: `~/.claude/plans/recursive-purring-planet.md`
 - Phase B (data schema 統一) で実装予定の migrate script: `.claude/scripts/blog/migrate-data-schema.mjs` (未着手)
 - Phase C で実装予定の value detector: `.claude/scripts/lib/article-factual-check.mjs` の `checkValueClaims` (未実装、Phase B 前提)
-- Phase D で実装予定: `.claude/skills/blog/measure-blog-impact/SKILL.md` (未作成)
+- Phase D (wave 効果計測): `measure-gsc-impact.mjs` を wave_id 駆動化し `fetch-metrics-weekly.yml` cron に配線済 (2026-06-08)。SKILL 化はせず週次 cron で自動実行。正典: `docs/02_実装計画/blog-remediation-loop.md` Phase 2
