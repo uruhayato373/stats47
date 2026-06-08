@@ -19,8 +19,8 @@
  * チャート種別 (ファイル名パターン):
  *   *-prefecture-rankings.json → bar chart (上位 5 + 下位 5)   [実装済み]
  *   *-tile-grid.json           → tile-grid-map (都道府県地図)    [実装済み]
- *   *-timeseries.json          → line chart                      [TODO]
- *   *-scatter.json             → scatter chart                   [TODO]
+ *   *-timeseries.json          → line chart (時系列・多系列対応)  [実装済み]
+ *   *-scatter.json             → scatter chart (group色分け対応)  [実装済み]
  *   *-stacked.json             → stacked-bar                     [TODO]
  *   *-findings.json            → summary-findings table          [TODO]
  *
@@ -278,7 +278,204 @@ function genTileGridMapSvg(data, meta = {}) {
 </svg>`;
 }
 
-// TODO: 他チャート種別の実装 (line / scatter / stacked / summary)
+// ---------- line (時系列) 生成 ----------
+// 入力 JSON: { title, unit, xLabel?, series:[{label, color?, data:[{year,value}]}] }
+//   単系列省略形: { title, unit, data:[{year,value}] } も可。
+const SERIES_COLORS = ["#1565c0", "#c62828", "#2e7d32", "#6a1b9a", "#ef6c00", "#00838f"];
+function svgStyleBlock() {
+  return `<style>
+    .svg-bg{fill:#fafafa}
+    .svg-title{fill:#222}
+    .svg-subtitle{fill:#666}
+    .svg-label{fill:#333}
+    .svg-axis{stroke:#9ca3af}
+    .svg-grid{stroke:#e5e7eb}
+    .svg-tick{fill:#666}
+    .svg-legend{fill:#888}
+    @media (prefers-color-scheme:dark){
+      .svg-bg{fill:#1f2937}
+      .svg-title{fill:#f9fafb}
+      .svg-subtitle{fill:#9ca3af}
+      .svg-label{fill:#e5e7eb}
+      .svg-axis{stroke:#6b7280}
+      .svg-grid{stroke:#374151}
+      .svg-tick{fill:#9ca3af}
+      .svg-legend{fill:#9ca3af}
+    }
+  </style>`;
+}
+function niceTicks(min, max, count = 4) {
+  if (min === max) return [min];
+  const step = (max - min) / count;
+  return Array.from({ length: count + 1 }, (_, i) => Math.round((min + step * i) * 100) / 100);
+}
+function genLineChartSvg(data, meta = {}) {
+  const title = meta.title || data.title || "推移";
+  const unit = meta.unit || data.unit || "";
+  let series = data.series;
+  if (!series && Array.isArray(data.data)) series = [{ label: data.label || "", data: data.data }];
+  if (!series && Array.isArray(data)) series = [{ label: "", data }];
+  series = (series || []).filter((s) => Array.isArray(s.data) && s.data.length);
+  if (!series.length) return `<!-- empty data -->`;
+
+  const allYears = [...new Set(series.flatMap((s) => s.data.map((d) => Number(d.year))))].sort((a, b) => a - b);
+  const allVals = series.flatMap((s) => s.data.map((d) => Number(d.value)));
+  const xMin = allYears[0];
+  const xMax = allYears[allYears.length - 1];
+  let yMin = Math.min(...allVals);
+  let yMax = Math.max(...allVals);
+  const pad = (yMax - yMin) * 0.08 || Math.abs(yMax) * 0.08 || 1;
+  yMin -= pad;
+  yMax += pad;
+
+  const W = 680;
+  const multi = series.length > 1;
+  const H = 380 + (multi ? 24 : 0);
+  const ml = 64, mr = 24, mt = 50, mb = 56;
+  const pw = W - ml - mr;
+  const ph = H - mt - mb - (multi ? 24 : 0);
+  const xOf = (y) => ml + (xMax === xMin ? pw / 2 : ((y - xMin) / (xMax - xMin)) * pw);
+  const yOf = (v) => mt + ph - ((v - yMin) / (yMax - yMin)) * ph;
+
+  const yTicks = niceTicks(yMin + pad, yMax - pad, 4);
+  const grid = yTicks
+    .map((t) => `<line x1="${ml}" y1="${yOf(t).toFixed(1)}" x2="${ml + pw}" y2="${yOf(t).toFixed(1)}" class="svg-grid" stroke-width="0.5"/>
+    <text x="${ml - 8}" y="${(yOf(t) + 4).toFixed(1)}" text-anchor="end" font-size="10" class="svg-tick">${t}</text>`)
+    .join("");
+
+  // X 軸ラベル (最大 7 個 + 最後に 年)。間引く。
+  const xStep = Math.max(1, Math.ceil(allYears.length / 7));
+  const xLabels = allYears
+    .filter((_, i) => i % xStep === 0 || i === allYears.length - 1)
+    .map((yr, idx, arr) => {
+      const isLast = idx === arr.length - 1;
+      return `<text x="${xOf(yr).toFixed(1)}" y="${mt + ph + 18}" text-anchor="middle" font-size="10" class="svg-tick">${yr}${isLast ? "年" : ""}</text>`;
+    })
+    .join("");
+
+  const lines = series
+    .map((s, i) => {
+      const color = s.color || SERIES_COLORS[i % SERIES_COLORS.length];
+      const pts = s.data
+        .slice()
+        .sort((a, b) => a.year - b.year)
+        .map((d) => `${xOf(Number(d.year)).toFixed(1)},${yOf(Number(d.value)).toFixed(1)}`)
+        .join(" ");
+      const sorted = s.data.slice().sort((a, b) => a.year - b.year);
+      const ends = [sorted[0], sorted[sorted.length - 1]]
+        .map((d) => `<circle cx="${xOf(Number(d.year)).toFixed(1)}" cy="${yOf(Number(d.value)).toFixed(1)}" r="3.5" fill="#fff" stroke="${color}" stroke-width="2"/>`)
+        .join("");
+      return `<polyline points="${pts}" fill="none" stroke="${color}" stroke-width="2.5" stroke-linejoin="round"/>${ends}`;
+    })
+    .join("");
+
+  let legend = "";
+  if (multi) {
+    const ly = H - 16;
+    const itemW = 110;
+    const totalW = series.length * itemW;
+    let sx = (W - totalW) / 2;
+    legend = series
+      .map((s, i) => {
+        const color = s.color || SERIES_COLORS[i % SERIES_COLORS.length];
+        const x = sx + i * itemW;
+        return `<line x1="${x}" y1="${ly}" x2="${x + 20}" y2="${ly}" stroke="${color}" stroke-width="2.5"/><text x="${x + 24}" y="${ly + 4}" font-size="11" class="svg-legend">${s.label || "系列" + (i + 1)}</text>`;
+      })
+      .join("");
+  }
+
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" role="img" aria-label="${title}">
+  ${svgStyleBlock()}
+  <rect width="${W}" height="${H}" class="svg-bg" rx="8"/>
+  <text x="${W / 2}" y="28" text-anchor="middle" font-size="16" font-weight="bold" class="svg-title">${title}</text>
+  ${unit ? `<text x="${ml}" y="${mt - 8}" font-size="10" class="svg-subtitle">単位: ${unit}</text>` : ""}
+  <rect x="${ml}" y="${mt}" width="${pw}" height="${ph}" class="svg-bg" stroke="#d1d5db" stroke-width="0.5"/>
+  ${grid}
+  ${xLabels}
+  ${lines}
+  ${legend}
+</svg>`;
+}
+
+// ---------- scatter (散布図) 生成 ----------
+// 入力 JSON: { title, xLabel, yLabel, xUnit?, yUnit?, points:[{label, x, y, group?}] }
+//   points の別名 data も可。group があれば地方ブロック等で色分け + 凡例。
+function genScatterChartSvg(data, meta = {}) {
+  const title = meta.title || data.title || "散布図";
+  const xLabel = data.xLabel || meta.xLabel || "X";
+  const yLabel = data.yLabel || meta.yLabel || "Y";
+  const points = (data.points || data.data || []).filter((p) => typeof p.x === "number" && typeof p.y === "number");
+  if (!points.length) return `<!-- empty data -->`;
+
+  const xs = points.map((p) => p.x);
+  const ys = points.map((p) => p.y);
+  let xMin = Math.min(...xs), xMax = Math.max(...xs), yMin = Math.min(...ys), yMax = Math.max(...ys);
+  const px = (xMax - xMin) * 0.08 || 1;
+  const py = (yMax - yMin) * 0.08 || 1;
+  xMin -= px; xMax += px; yMin -= py; yMax += py;
+
+  const groups = [...new Set(points.map((p) => p.group).filter(Boolean))];
+  const multi = groups.length > 0;
+  const colorOf = (p) => (p.group ? SERIES_COLORS[groups.indexOf(p.group) % SERIES_COLORS.length] : "#1976d2");
+
+  const W = 680;
+  const legendRows = multi ? Math.ceil(groups.length / 3) : 0;
+  const H = 420 + legendRows * 18;
+  const ml = 64, mr = 24, mt = 50, mb = 56 + legendRows * 18;
+  const pw = W - ml - mr;
+  const ph = H - mt - mb;
+  const xOf = (v) => ml + ((v - xMin) / (xMax - xMin)) * pw;
+  const yOf = (v) => mt + ph - ((v - yMin) / (yMax - yMin)) * ph;
+
+  const xTicks = niceTicks(xMin + px, xMax - px, 4);
+  const yTicks = niceTicks(yMin + py, yMax - py, 4);
+  const grid =
+    yTicks
+      .map((t) => `<line x1="${ml}" y1="${yOf(t).toFixed(1)}" x2="${ml + pw}" y2="${yOf(t).toFixed(1)}" class="svg-grid" stroke-width="0.5"/><text x="${ml - 8}" y="${(yOf(t) + 4).toFixed(1)}" text-anchor="end" font-size="10" class="svg-tick">${t}</text>`)
+      .join("") +
+    xTicks
+      .map((t) => `<text x="${xOf(t).toFixed(1)}" y="${mt + ph + 18}" text-anchor="middle" font-size="10" class="svg-tick">${t}</text>`)
+      .join("");
+
+  // 点ラベルは混雑回避のため点数 <=20 のときのみ表示
+  const showLabels = points.length <= 20;
+  const dots = points
+    .map((p) => {
+      const cx = xOf(p.x).toFixed(1);
+      const cy = yOf(p.y).toFixed(1);
+      const lbl = showLabels && p.label ? `<text x="${(+cx + 6).toFixed(1)}" y="${(+cy + 3).toFixed(1)}" font-size="9" class="svg-label">${p.label}</text>` : "";
+      return `<circle cx="${cx}" cy="${cy}" r="4" fill="${colorOf(p)}" fill-opacity="0.8" stroke="#fff" stroke-width="0.8"/>${lbl}`;
+    })
+    .join("");
+
+  let legend = "";
+  if (multi) {
+    const baseY = H - legendRows * 18 - 2;
+    legend = groups
+      .map((g, i) => {
+        const row = Math.floor(i / 3);
+        const col = i % 3;
+        const x = 80 + col * 180;
+        const y = baseY + row * 18;
+        return `<circle cx="${x}" cy="${y - 3}" r="4" fill="${SERIES_COLORS[i % SERIES_COLORS.length]}"/><text x="${x + 10}" y="${y}" font-size="10" class="svg-legend">${g}</text>`;
+      })
+      .join("");
+  }
+
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" role="img" aria-label="${title}">
+  ${svgStyleBlock()}
+  <rect width="${W}" height="${H}" class="svg-bg" rx="8"/>
+  <text x="${W / 2}" y="28" text-anchor="middle" font-size="16" font-weight="bold" class="svg-title">${title}</text>
+  <rect x="${ml}" y="${mt}" width="${pw}" height="${ph}" class="svg-bg" stroke="#d1d5db" stroke-width="0.5"/>
+  ${grid}
+  ${dots}
+  <text x="${ml + pw / 2}" y="${mt + ph + 40}" text-anchor="middle" font-size="11" class="svg-subtitle">${xLabel}${data.xUnit ? ` (${data.xUnit})` : ""}</text>
+  <text x="16" y="${mt + ph / 2}" text-anchor="middle" font-size="11" class="svg-subtitle" transform="rotate(-90 16 ${mt + ph / 2})">${yLabel}${data.yUnit ? ` (${data.yUnit})` : ""}</text>
+  ${legend}
+</svg>`;
+}
+
+// TODO: 他チャート種別の実装 (stacked / summary)
 function genStubSvg(chartType, name) {
   const W = 680;
   const H = 480;
@@ -491,6 +688,10 @@ for (const { file, type, parsed } of jsonMeta) {
     svg = genBarChartSvg(parsed);
   } else if (type === "tile-grid") {
     svg = genTileGridMapSvg(parsed);
+  } else if (type === "line") {
+    svg = genLineChartSvg(parsed);
+  } else if (type === "scatter") {
+    svg = genScatterChartSvg(parsed);
   } else if (type) {
     warn(`chart type "${type}" not implemented for ${file} — emitting stub SVG`);
     svg = genStubSvg(type, baseName);

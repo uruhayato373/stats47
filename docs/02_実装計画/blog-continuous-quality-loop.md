@@ -116,7 +116,8 @@ opportunity レーンの tiebreaker (適合度が低い=改善余地が大きい
 
 ## 7. 未実装・今後
 
+- [x] `tile-grid` (都道府県地図) / `line` (時系列・多系列) / `scatter` (group色分け) generator 実装 (2026-06-08)
+- [ ] `stacked` / `summary(findings)` generator 実装 (現状 stub)
 - [ ] GA4 per-page 滞在/engagement を analyze-winning-patterns に統合 (中身の質を主指標化)
-- [ ] `scatter` / `line` チャートの generator 実装 (現状 stub。tile-grid は 2026-06-08 実装済)
 - [ ] featureSignal の時系列追跡 (週次で signal が安定する特徴を "確定勝ちパターン" に昇格)
 - [ ] 書き戻しの A/B 検証を wave_id で紐付け (blog-data-schema.md の wave 命名)
