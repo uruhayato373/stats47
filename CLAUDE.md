@@ -49,7 +49,7 @@
 | 週次振り返り | `docs/03_週次運用/週次レビュー/YYYY-Www.md` |
 | 批判的レビュー / 事前検死 | `docs/04_レビュー/{critical-review,pre-mortem}/YYYY-MM-DD-<topic>.md` |
 | YouTube 実験ログ | `docs/15_実験ログ/youtube/EXP-NNN.md` |
-| コンテンツ backlog | `docs/22_YouTube企画/backlog/` / `docs/30_note記事企画/backlog/` |
+| コンテンツ backlog | `docs/30_note記事企画/backlog/` |
 | 未着手の機能・自動化バックログ | `docs/02_実装計画/feature-backlog.md`（指標拡充候補は `docs/02_実装計画/indicator-backlog.md`） |
 | 非自明な API 仕様・制約 | `/knowledge` (問題・原因・対策の 3 項目) |
 | プロジェクト固有の恒常事実 | auto memory (`~/.claude/projects/-Users-minamidaisuke-stats47/memory/`) |

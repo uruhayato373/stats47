@@ -159,6 +159,50 @@ function hasDataSource(text) {
   return /## データ出典|## 出典|^- 農林水産省|^- 総務省|^- 厚生労働省|^- 国土交通省|^- e-Stat/m.test(text);
 }
 
+// 文体チェック (2026-06-08): 本文は ですます調 に統一する (正典: blog-quality-standards.md「文体」)。
+// である調 (である。/だ。/だった。/ではない。/だろう。/のだ。 等の plain copula 文末) を検出。
+// 注: 地の文のみ対象。callout/引用 (> 行)・見出し・表・コード・タグ・frontmatter は除外
+// (注記やデータ出典の体言止め・引用は別文体を許容するため)。plain 動詞終止形 (する。等) は
+// 誤検出を避け gate では捕まえない (blog-critic の意味判断に委ねる)。copula である調が 1 つでも
+// あれば「ですます調に統一されていない」と決定的に判定できる。
+function getProseForTone(text) {
+  let t = text.replace(/^---[\s\S]*?\n---\n/, ""); // frontmatter
+  t = t.replace(/```[\s\S]*?```/g, ""); // code fence
+  t = t.replace(/<[^>]+>[\s\S]*?<\/[^>]+>/g, ""); // ペアタグ
+  t = t.replace(/<[^>]+>/g, ""); // 単独タグ
+  t = t.replace(/!\[[^\]]*\]\([^)]*\)/g, ""); // 画像
+  t = t
+    .split("\n")
+    .filter((l) => !/^\s*\|/.test(l)) // 表行
+    .filter((l) => !/^\s*>/.test(l)) // callout / blockquote
+    .filter((l) => !/^\s*#{1,6}\s/.test(l)) // 見出し
+    .join("\n");
+  t = t.replace(/\[([^\]]+)\]\([^)]*\)/g, "$1"); // リンク→テキスト
+  return t;
+}
+const DEARU_ENDINGS = [
+  /である[。、]/g,
+  /であった[。、]/g,
+  /だった[。、]/g,
+  /ではない[。、]/g,
+  /ではなく[、。]/g,
+  /だろう[。、]/g,
+  /のだ[。、]/g,
+  /のである[。、]/g,
+  /(?<![んでぐ])だ。/g, // 「だ。」終止 (んだ。/口語の ぐだ 等は除外)
+];
+function countDearuEndings(text) {
+  const prose = getProseForTone(text);
+  let n = 0;
+  const samples = [];
+  for (const p of DEARU_ENDINGS) {
+    const m = prose.match(p) || [];
+    n += m.length;
+    if (m.length && samples.length < 4) samples.push(m[0]);
+  }
+  return { count: n, samples };
+}
+
 // ============================================================================
 // チェック実行
 // ============================================================================
@@ -171,6 +215,7 @@ const checks = {
   hasSeoTitle: hasSeoTitle(content),
   hasDescription: hasDescription(content),
   hasDataSource: hasDataSource(content),
+  dearuEndings: countDearuEndings(content).count,
 };
 
 const blockers = [];
@@ -208,6 +253,15 @@ if (checks.charCount > 25000) {
 }
 if (checks.h2Count < 4) {
   blockers.push(`H2 sections < 4 (actual: ${checks.h2Count}) — 構造が浅い`);
+}
+
+// 文体: ですます調に統一 (である調 copula 文末を blocker。正典: blog-quality-standards.md「文体」)。
+if (checks.dearuEndings > 0) {
+  const { samples } = countDearuEndings(content);
+  blockers.push(
+    `である調 文末 ${checks.dearuEndings} 箇所 [${samples.join(",")}] — 本文は ですます調 に統一する ` +
+      `(である。→です。/ だった。→でした。/ ではない。→ではありません。/ だろう。→でしょう。)。callout・引用は対象外`,
+  );
 }
 
 if (checks.charts === 0) {

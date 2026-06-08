@@ -10896,6 +10896,238 @@
       "deleted_at": null,
       "template": null,
       "metric_keys": null
+    },
+    {
+      "id": 575,
+      "platform": "instagram",
+      "post_type": "angle-post",
+      "domain": "ranking",
+      "content_key": "annual-precipitation",
+      "caption": "静岡に住んだら、年間3,754mmの雨と共に生きることになる。\n\n東京の約2倍。宮城（1,028mm）の約3.7倍。\n同じ日本でも、雨との付き合い方がまるで違う。\n\n梅雨・台風・大雨特報が当たり前の静岡と、晴れが続く東北。\nどちらに住むかで、傘の使い方も、家の造りも、体感する季節も変わる。\n\n🔖 保存してね\n👆 @stats47jp プロフィールリンクから全ランキングをチェック\n\n#都道府県 #ランキング #統計 #データ可視化 #stats47 #インフォグラフィック #年間降水量 #梅雨 #気象 #防災",
+      "media_format": "carousel",
+      "media_path": null,
+      "slide_copies": [
+        {
+          "slide": 1,
+          "text": "あなたの県は\n雨が多い？少ない？\n年間降水量ランキング2024"
+        },
+        {
+          "slide": 2,
+          "text": "1位 静岡 3,754mm\n台風・梅雨・大雨が重なる\n傘が手放せない毎日"
+        },
+        {
+          "slide": 3,
+          "text": "47位 宮城 1,028mm\n年間を通じて晴れが多め\n洗濯日和が続く東北"
+        },
+        {
+          "slide": 4,
+          "text": "同じ日本で3.7倍の差\nあなたの県は\nどちら寄り？"
+        },
+        {
+          "slide": 5,
+          "text": "出典: 気象庁(2024)\n🔖 保存してね\n👆 @stats47jp プロフィールから"
+        }
+      ],
+      "needs_text_cards": true,
+      "post_url": "https://www.instagram.com/p/DZR6feSHJP0/",
+      "status": "posted",
+      "angle": "体験",
+      "trend_keyword": "大雨・線状降水帯・梅雨入り",
+      "scheduled_for": "2026-06-09T21:00:00",
+      "posted_at": "2026-06-07T09:37:57.118Z",
+      "impressions": null,
+      "likes": null,
+      "reposts": null,
+      "replies": null,
+      "bookmarks": null,
+      "created_at": "2026-06-07",
+      "updated_at": "2026-06-07T09:37:57.118Z"
+    },
+    {
+      "id": 576,
+      "platform": "instagram",
+      "post_type": "angle-post",
+      "domain": "ranking",
+      "content_key": "annual-precipitation",
+      "caption": "静岡の年間降水量、3,754mm。\n\n最下位・宮城の1,028mmと比べると、その差3.7倍。\n「同じ日本」とは思えない数字が並ぶ。\n\n全国平均は1,913mm。平均すら超えない県が半数以上存在する。\nTOP5はすべて太平洋・日本海に面した南寄りの県。\nワースト5は内陸・東北が独占。地形と気候帯がそのまま数字に出ている。\n\n🔖 保存してね\n👆 @stats47jp プロフィールリンクから全データを確認\n\n#都道府県 #ランキング #統計 #データ可視化 #stats47 #インフォグラフィック #年間降水量 #気象 #水害 #天気",
+      "media_format": "carousel",
+      "media_path": null,
+      "slide_copies": [
+        {
+          "slide": 1,
+          "text": "都道府県の降水量\n最大と最小で3.7倍差\n年間降水量ランキング2024"
+        },
+        {
+          "slide": 2,
+          "text": "TOP5\n1位 静岡 3,754mm\n2位 沖縄 3,069mm\n3位 鹿児島 3,065mm\n4位 宮崎 2,966mm\n5位 石川 2,780mm"
+        },
+        {
+          "slide": 3,
+          "text": "ワースト5\n43位 埼玉 1,214mm\n44位 長野 1,153mm\n45位 北海道 1,120mm\n46位 福島 1,102mm\n47位 宮城 1,028mm"
+        },
+        {
+          "slide": 4,
+          "text": "3,754 vs 1,028mm\n全国平均は1,913mm\n3.7倍の格差が示すもの"
+        },
+        {
+          "slide": 5,
+          "text": "出典: 気象庁(2024)\n🔖 保存してね\n👆 @stats47jp プロフィールから"
+        }
+      ],
+      "needs_text_cards": true,
+      "post_url": "https://www.instagram.com/p/DZR6ytvlela/",
+      "status": "posted",
+      "angle": "数字",
+      "trend_keyword": "大雨・線状降水帯・梅雨入り",
+      "scheduled_for": "2026-06-10T07:30:00",
+      "posted_at": "2026-06-07T09:40:36.821Z",
+      "impressions": null,
+      "likes": null,
+      "reposts": null,
+      "replies": null,
+      "bookmarks": null,
+      "created_at": "2026-06-07",
+      "updated_at": "2026-06-07T09:40:36.821Z"
+    },
+    {
+      "id": 577,
+      "platform": "instagram",
+      "post_type": "angle-post",
+      "domain": "ranking",
+      "content_key": "annual-precipitation",
+      "caption": "なぜ静岡が年間降水量1位（3,754mm）なのか。\n\n答えは地理にある。静岡は太平洋に面し、黒潮の暖湿流が直撃。梅雨前線が停滞しやすく、台風の上陸・接近も多い。山地が海に迫る地形が、湿った空気を強制的に上昇させて雨を降らせる。\n\n一方、最下位の宮城（1,028mm）は北東の季節風が遮られ、夏は高気圧の影響下。山を越えた乾いた空気が支配する。\n\n気候帯と地形が、雨量を決める構造がここにある。\n\n🔖 保存してね\n👆 @stats47jp プロフィールリンクから詳細データを確認\n\n#都道府県 #ランキング #統計 #データ可視化 #stats47 #インフォグラフィック #年間降水量 #梅雨 #気象 #線状降水帯",
+      "media_format": "carousel",
+      "media_path": null,
+      "slide_copies": [
+        {
+          "slide": 1,
+          "text": "なぜ静岡が1位？\n降水量3,754mmの理由\n年間降水量ランキング2024"
+        },
+        {
+          "slide": 2,
+          "text": "太平洋×黒潮の影響\n梅雨前線が停滞しやすく\n台風も直撃しやすい地形"
+        },
+        {
+          "slide": 3,
+          "text": "なぜ東北は少ない？\n宮城は1,028mm\n全国最下位の理由は？"
+        },
+        {
+          "slide": 4,
+          "text": "北東季節風が遮られ\n夏は太平洋高気圧が支配\n山越えの乾いた風の影響"
+        },
+        {
+          "slide": 5,
+          "text": "出典: 気象庁(2024)\n🔖 保存してね\n👆 @stats47jp プロフィールから"
+        }
+      ],
+      "needs_text_cards": true,
+      "post_url": "https://www.instagram.com/p/DZR6zYgFOgn/",
+      "status": "posted",
+      "angle": "理由",
+      "trend_keyword": "大雨・線状降水帯・梅雨入り",
+      "scheduled_for": "2026-06-10T19:00:00",
+      "posted_at": "2026-06-07T09:46:17.712Z",
+      "impressions": null,
+      "likes": null,
+      "reposts": null,
+      "replies": null,
+      "bookmarks": null,
+      "created_at": "2026-06-07",
+      "updated_at": "2026-06-07T09:46:17.712Z"
+    },
+    {
+      "id": 578,
+      "platform": "instagram",
+      "post_type": "angle-post",
+      "domain": "ranking",
+      "content_key": "annual-precipitation",
+      "caption": "「沖縄が一番雨が多い」と思っていませんか？\n\n実際のデータを見ると、1位は静岡（3,754mm）で、沖縄は2位（3,069mm）。\n\n沖縄には梅雨があり、台風も上陸しやすい。それでも静岡に届かない理由は、台風シーズン以外の降水量の差にある。静岡は梅雨前線の停滞＋秋雨＋太平洋側の冬の雨と、年間を通じて雨が降り続ける。\n\n「南国＝雨が多い」は半分正解。地形と季節風の組み合わせが雨量を決める。\n\n🔖 保存してね\n👆 @stats47jp プロフィールリンクから全ランキングを確認\n\n#都道府県 #ランキング #統計 #データ可視化 #stats47 #インフォグラフィック #年間降水量 #梅雨 #気象 #大雨",
+      "media_format": "carousel",
+      "media_path": null,
+      "slide_copies": [
+        {
+          "slide": 1,
+          "text": "「沖縄が雨1位」は\n本当に正しいの？\n年間降水量ランキング2024"
+        },
+        {
+          "slide": 2,
+          "text": "実データはこう↓\n1位 静岡 3,754mm\n2位 沖縄 3,069mm"
+        },
+        {
+          "slide": 3,
+          "text": "沖縄は梅雨も台風も多い\nそれでも静岡に届かない\n季節外の雨量の差が大きい"
+        },
+        {
+          "slide": 4,
+          "text": "梅雨＋秋雨＋台風\n年中雨が降り続ける静岡\n「南国＝雨多い」は半分正解"
+        },
+        {
+          "slide": 5,
+          "text": "出典: 気象庁(2024)\n🔖 保存してね\n👆 @stats47jp プロフィールから"
+        }
+      ],
+      "needs_text_cards": true,
+      "post_url": "https://www.instagram.com/p/DZR6zmJFNT9/",
+      "status": "posted",
+      "angle": "反論",
+      "trend_keyword": "大雨・線状降水帯・梅雨入り",
+      "scheduled_for": "2026-06-11T10:00:00",
+      "posted_at": "2026-06-07T09:46:17.712Z",
+      "impressions": null,
+      "likes": null,
+      "reposts": null,
+      "replies": null,
+      "bookmarks": null,
+      "created_at": "2026-06-07",
+      "updated_at": "2026-06-07T09:46:17.712Z"
+    },
+    {
+      "id": 579,
+      "platform": "instagram",
+      "post_type": "angle-post",
+      "domain": "ranking",
+      "content_key": "annual-precipitation",
+      "caption": "年間降水量の格差（3.7倍）の答えは、「気候帯×地形」。\n\n太平洋側は黒潮・梅雨・台風が重なり雨量が増える。日本海側は冬の湿った北西風で降雪が多い。内陸・東北は山脈に守られて乾燥しやすい。\n\n1位の静岡（3,754mm）、2位の沖縄（3,069mm）、3位の鹿児島（3,065mm）。TOP3は「南国」というより「太平洋に開いた地形」を持つ県が並ぶ。\n\n最下位の宮城（1,028mm）と比べると、年間で2,726mm以上の差。同じ日本とは思えない数字だ。\n\n🔖 保存してね\n👆 @stats47jp プロフィールリンクから全データを確認\n\n#都道府県 #ランキング #統計 #データ可視化 #stats47 #インフォグラフィック #年間降水量 #梅雨 #気象 #防災",
+      "media_format": "carousel",
+      "media_path": null,
+      "slide_copies": [
+        {
+          "slide": 1,
+          "text": "降水量格差3.7倍の答え\n「気候帯×地形」で決まる\n年間降水量ランキング2024"
+        },
+        {
+          "slide": 2,
+          "text": "太平洋側→黒潮・梅雨・台風\n日本海側→冬の北西風・雪\n内陸・東北→山脈が遮る"
+        },
+        {
+          "slide": 3,
+          "text": "TOP3は南国ではなく\n静岡・沖縄・鹿児島\n太平洋に開いた地形が共通点"
+        },
+        {
+          "slide": 4,
+          "text": "1位静岡 3,754mm\n47位宮城 1,028mm\n格差2,726mm・3.7倍"
+        },
+        {
+          "slide": 5,
+          "text": "出典: 気象庁(2024)\n🔖 保存してね\n👆 @stats47jp プロフィールから"
+        }
+      ],
+      "needs_text_cards": true,
+      "post_url": "https://www.instagram.com/p/DZR6z41lPOX/",
+      "status": "posted",
+      "angle": "結論",
+      "trend_keyword": "大雨・線状降水帯・梅雨入り",
+      "scheduled_for": "2026-06-11T12:00:00",
+      "posted_at": "2026-06-07T09:46:17.712Z",
+      "impressions": null,
+      "likes": null,
+      "reposts": null,
+      "replies": null,
+      "bookmarks": null,
+      "created_at": "2026-06-07",
+      "updated_at": "2026-06-07T09:46:17.712Z"
     }
-  ]
+  ],
+  "nextId": 580,
+  "total_count": 394
 }

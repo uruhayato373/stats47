@@ -65,7 +65,7 @@ git TS 化し永続 D1 を全廃した。アプリが読む各データの真実
 | 批判的レビュー・事前検死・SEO 監査・SNS 週報・パフォーマンス・コスト月報 | `docs/04_レビュー/<subcategory>/{YYYY-MM-DD,YYYY-Www,YYYY-MM}.md` |
 | 改善施策の一覧・TODO | `docs/02_実装計画/improvement-backlog.md` |
 | YouTube 実験 (1 実験 1 ファイル) | `docs/15_実験ログ/youtube/EXP-NNN.md` |
-| コンテンツ backlog | `docs/{20_ブログ記事企画,22_YouTube企画,30_note記事企画}/backlog/` |
+| コンテンツ backlog | `docs/{20_ブログ記事企画,30_note記事企画}/backlog/` |
 | 未着手の機能・自動化 backlog | `docs/02_実装計画/feature-backlog.md`（指標拡充候補は `docs/02_実装計画/indicator-backlog.md`） |
 
 詳細: [`docs-vs-issues.md`](./docs-vs-issues.md)

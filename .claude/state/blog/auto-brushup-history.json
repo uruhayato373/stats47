@@ -603,6 +603,87 @@
       "expectedLift": 4,
       "impressions": 138,
       "ctr_before": 0.0145
+    },
+    {
+      "date": "2026-06-07",
+      "wave_id": "2026-06-07-manual",
+      "slug": "consumer-price-regional-gap",
+      "framing": "費目分解で住居費が格差9割を可視化 (表→SVG3枚, archetype D)",
+      "expectedLift": 26,
+      "impressions": 241,
+      "ctr_before": 0
+    },
+    {
+      "date": "2026-06-07",
+      "wave_id": "2026-06-07-manual",
+      "slug": "curry-roux-consumption-gap",
+      "framing": "表→上位5+下位5 SVG, 内部リンク補強, archetype A",
+      "expectedLift": 1,
+      "impressions": 6,
+      "ctr_before": 0
+    },
+    {
+      "date": "2026-06-07",
+      "wave_id": "2026-06-07-manual",
+      "slug": "doctor-income-prefecture-gap",
+      "framing": "表→上位5+下位5 SVG, 内部リンク補強, archetype A",
+      "expectedLift": 0,
+      "impressions": 0,
+      "ctr_before": 0
+    },
+    {
+      "date": "2026-06-07",
+      "wave_id": "2026-06-07-manual-2",
+      "slug": "price-index-high-low-prefecture",
+      "framing": "表2(非対称truncated)→総合SVG, inline svg抽出, 4象限→箇条書き, 関連2節削除, archetype D",
+      "expectedLift": 9,
+      "impressions": 1003,
+      "ctr_before": 0.0229
+    },
+    {
+      "date": "2026-06-07",
+      "wave_id": "2026-06-07-manual-2",
+      "slug": "household-spending-prefecture-gap",
+      "framing": "まとめfindings図(水増し)除去, callout/prose補強, 散布図象限を実平均で補正",
+      "expectedLift": 0,
+      "impressions": 635,
+      "ctr_before": 0.0425
+    },
+    {
+      "date": "2026-06-07",
+      "wave_id": "2026-06-07-manual-2",
+      "slug": "local-government-debt-burden",
+      "framing": "findings図除去, source-link 4を各図直下に分散, 関連記事削除, データ出典追加, archetype B",
+      "expectedLift": 0,
+      "impressions": 536,
+      "ctr_before": 0.0354
+    },
+    {
+      "date": "2026-06-07",
+      "wave_id": "2026-06-07-manual-3",
+      "slug": "sports-urban-paradox",
+      "framing": "表3(ウォーキング/ゴルフ→SVG, 体育館→箇条書き)+findings図除去+関連削除, archetype B",
+      "expectedLift": 3,
+      "impressions": 428,
+      "ctr_before": 0.0304
+    },
+    {
+      "date": "2026-06-07",
+      "wave_id": "2026-06-07-manual-3",
+      "slug": "marriage-unmarried-crisis",
+      "framing": "inline svg抽出+関連節削除+内部リンク, archetype B (図1+濃い真因分析)",
+      "expectedLift": 12,
+      "impressions": 314,
+      "ctr_before": 0.0159
+    },
+    {
+      "date": "2026-06-07",
+      "wave_id": "2026-06-07-manual-3",
+      "slug": "automotive-industry-transformation-map",
+      "framing": "findings図除去+関連削除+callout3+author修正+データ出典, archetype A",
+      "expectedLift": 0,
+      "impressions": 290,
+      "ctr_before": 0.0448
     }
   ]
 }
