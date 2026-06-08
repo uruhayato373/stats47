@@ -333,6 +333,20 @@ checks.isPerCapitaArticle = factual.isPerCapitaArticle;
 blockers.push(...factual.blockers);
 warnings.push(...factual.warnings);
 
+// fail-closed: rank 主張があるのに ground truth (data/*.json) が無い記事は「検証不能」= blocker。
+// (2026-06-08 追加) cron 自動生成ドラフトが data 無しで rank を捏造 → factual-check は gt 空だと
+// skip するため素通りしていた穴を塞ぐ。「N位」を 2 件以上含むのに groundTruthPrefCount===0 なら、
+// 数値が一切検証できない状態での公開を止める。data/*.json を生成して再検証すること。
+// rank 主張の無い解説記事 (guide 等) は対象外 (rankClaimCount < 2 でスルー)。
+const rankClaimCount = (getProseForTone(content).match(/(?<![・、と\d])\d+\s*位/g) || []).length;
+checks.rankClaimCount = rankClaimCount;
+if (rankClaimCount >= 2 && checks.groundTruthPrefCount === 0) {
+  blockers.push(
+    `rank 主張 ${rankClaimCount} 件あるが data/*.json (ground truth) が無く検証不能 — ` +
+      `数値捏造リスク。/page-data-batch か R2 values から data を生成し factual-check を通すこと`,
+  );
+}
+
 // ============================================================================
 // critic レビュー必須 (公開記事は「別 agent の意味レビュー」を経ること) ★再発防止
 // ============================================================================
