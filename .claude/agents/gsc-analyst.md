@@ -15,6 +15,7 @@ Google Search Console の専任 agent。 fetch (週次 snapshot)、 inspect (URL
 - 自動 URL 再送信 (`/auto-resubmit-url`)
 - Indexing API での即時送信 (`/indexing-api-submit`)
 - sitemap 提出 (`/submit-sitemap`)
+- ブログ勝ち要因分析 (`/analyze-winning-patterns`) — GSC 実測 (CTR/順位) × 構造特徴で「良い記事」を学習する天井ループ
 
 ## 担当スキル
 
@@ -26,6 +27,7 @@ Google Search Console の専任 agent。 fetch (週次 snapshot)、 inspect (URL
 | `/auto-resubmit-url` | 自動 URL 再送信 |
 | `/indexing-api-submit` | Indexing API 即時送信 |
 | `/submit-sitemap` | sitemap 提出 |
+| `/analyze-winning-patterns` | ブログ勝ち要因分析 (CTR×構造特徴→featureSignals、順位交絡統制付き)。co: blog-critic / trend-scout |
 
 ## 担当外
 

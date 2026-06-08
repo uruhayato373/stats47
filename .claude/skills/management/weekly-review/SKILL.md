@@ -470,7 +470,17 @@ node -e 'const q=require("./.claude/state/blog/remediation-queue.json");console.
 - 「pending N (must-fix M) / done D」を 1 行で記載し、**前週比で pending がいくつ減ったか**を明記する (順次品質向上の進捗指標)。
 - この週に remediated_at が付いた記事 (= 今週是正した wave) を抽出し、対応する `## [BLOG-WAVE-<wave_id>]` (gsc.md) の効果を判定する。
   due (デプロイ +28 日) を過ぎた BLOG-WAVE は GSC clicks/CTR の before/after で effect 判定 → gsc.md の `status:` を更新 (`.claude/rules/evidence-based-judgment.md` 準拠、実測コマンド併記)。
-- 仕組み全体: `docs/02_実装計画/blog-remediation-loop.md`。
+- 仕組み全体 (床): `docs/02_実装計画/blog-remediation-loop.md`。
+
+**ブログ勝ち要因 (天井ループ・GSC 更新後に実行)**:
+
+```bash
+node .claude/scripts/blog/analyze-winning-patterns.mjs   # CTR×構造特徴→featureSignals + 順位交絡統制
+```
+
+- 最新 `docs/04_レビュー/blog-quality/<date>-winning-patterns.md` の **robust かつ confidence hi/mid** のシグナルを 1-2 行で記載。
+- **robust な勝ちパターンのみ** `.claude/rules/blog-quality-standards.md` への書き戻しを検討 (定性裏取り後、`evidence-based-judgment.md` 準拠)。weakened/confounded は書き戻さない。
+- 仕組み全体 (天井): `docs/02_実装計画/blog-continuous-quality-loop.md`。
 
 ### AdSense（過去 7 日） — snapshot CSV: `.claude/skills/analytics/adsense-improvement/reference/snapshots/YYYY-Www/` / Issue: `#NN` (`adsense-snapshot`)
 
