@@ -1,10 +1,11 @@
 "use client";
 
+import { Button } from "@stats47/components/atoms/ui/button";
 import { Download } from "lucide-react";
 
-import { Button } from "@stats47/components/atoms/ui/button";
 
 import type { AreaType } from "@/features/area";
+
 import { trackCsvDownload } from "@/lib/analytics/events";
 
 interface DataUsageCardProps {
