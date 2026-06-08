@@ -86,7 +86,9 @@ async function fetchText(url) {
 async function loadPublishedSlugs() {
   const j = JSON.parse(await fetchText(`${R2}/app/blog/all.json`));
   const arts = Array.isArray(j) ? j : j.articles || [];
-  return arts.filter((a) => a.published !== false).map((a) => a.slug);
+  return arts
+    .filter((a) => a.published !== false)
+    .map((a) => ({ slug: a.slug, publishedAt: a.publishedAt || null }));
 }
 
 // ── 3. 記事の構造特徴抽出 (決定的) ───────────────────────────────────
@@ -258,6 +260,90 @@ function buildConformance(all, winners) {
   });
 }
 
+// ── 4.5 交絡分析 ────────────────────────────────────────────────────
+function quantile(arr, q) {
+  const a = arr.filter((x) => typeof x === "number").sort((x, y) => x - y);
+  if (!a.length) return null;
+  const pos = (a.length - 1) * q;
+  const base = Math.floor(pos);
+  return a[base + 1] !== undefined ? a[base] + (pos - base) * (a[base + 1] - a[base]) : a[base];
+}
+function pearson(xs, ys) {
+  const pairs = xs.map((x, i) => [x, ys[i]]).filter(([x, y]) => typeof x === "number" && typeof y === "number");
+  const n = pairs.length;
+  if (n < 4) return null;
+  const mx = pairs.reduce((s, p) => s + p[0], 0) / n;
+  const my = pairs.reduce((s, p) => s + p[1], 0) / n;
+  let num = 0, dx = 0, dy = 0;
+  for (const [x, y] of pairs) {
+    num += (x - mx) * (y - my);
+    dx += (x - mx) ** 2;
+    dy += (y - my) ** 2;
+  }
+  return dx && dy ? Math.round((num / Math.sqrt(dx * dy)) * 100) / 100 : null;
+}
+function yearOf(d) {
+  const m = String(d || "").match(/(\d{4})/);
+  return m ? Number(m[1]) : null;
+}
+// 掲載順位を統制したシグナル再計算: position の四分位中央バンドに絞り、その中で CTR 中央値で
+// 上下に割って各特徴の lift/Δ を再計算。元シグナルと同符号で残れば robust、消えれば confounded。
+function analyzeConfounders(articles, signals) {
+  const medPos = median(articles.map((a) => a.position));
+  const winnersByCtr = [...articles].sort((a, b) => b.ctr - a.ctr).slice(0, Math.floor(articles.length / 3));
+  const losersByCtr = [...articles].sort((a, b) => a.ctr - b.ctr).slice(0, Math.floor(articles.length / 3));
+
+  // position の交絡: CTR は順位に依存。winner が単に上位表示なだけかを見る。
+  const winnerPos = median(winnersByCtr.map((a) => a.position));
+  const loserPos = median(losersByCtr.map((a) => a.position));
+  const corrTitlePos = pearson(articles.map((a) => a.titleLen), articles.map((a) => a.position));
+  const corrCtrPos = pearson(articles.map((a) => a.ctr), articles.map((a) => a.position));
+
+  // age の交絡: 古い記事ほど被リンク/評価が蓄積し上位化しうる。
+  const winnerYear = median(winnersByCtr.map((a) => yearOf(a.publishedAt)));
+  const loserYear = median(losersByCtr.map((a) => yearOf(a.publishedAt)));
+
+  // 順位統制バンド (IQR 中央) 内で再計算
+  const q1 = quantile(articles.map((a) => a.position), 0.25);
+  const q3 = quantile(articles.map((a) => a.position), 0.75);
+  const band = articles.filter((a) => a.position >= q1 && a.position <= q3);
+  let robust = [];
+  if (band.length >= 8) {
+    const bByCtr = [...band].sort((a, b) => b.ctr - a.ctr);
+    const bt = Math.max(2, Math.floor(band.length / 2));
+    const bw = bByCtr.slice(0, bt);
+    const bl = bByCtr.slice(-bt);
+    const bandSignals = buildSignals(bw, bl);
+    const bandMap = new Map(bandSignals.map((s) => [s.feature, s]));
+    robust = signals.map((s) => {
+      const b = bandMap.get(s.feature);
+      const orig = s.lift ?? s.delta ?? 0;
+      const ctrl = b ? (b.lift ?? b.delta ?? 0) : 0;
+      const sameSign = orig === 0 ? false : Math.sign(orig) === Math.sign(ctrl);
+      const persists = sameSign && Math.abs(ctrl) >= Math.abs(orig) * 0.5;
+      return {
+        feature: s.feature,
+        rawEffect: orig,
+        positionControlledEffect: ctrl,
+        verdict: persists ? "robust" : sameSign ? "weakened" : "confounded",
+      };
+    });
+  }
+
+  return {
+    note: "CTR は掲載順位に強く依存。winner が単に上位表示でないか、特徴が順位統制後も残るかを検証",
+    medianPositionAll: medPos,
+    winnerMedianPosition: winnerPos,
+    loserMedianPosition: loserPos,
+    corr_titleLen_position: corrTitlePos, // 正=長いほど下位 / 負=短いほど下位
+    corr_ctr_position: corrCtrPos, // 通常は強い負相関 (上位ほど CTR 高)
+    winnerMedianYear: winnerYear,
+    loserMedianYear: loserYear,
+    positionControlledBand: { q1Position: q1, q3Position: q3, n: band.length },
+    robustSignals: robust,
+  };
+}
+
 // ── 5. main ─────────────────────────────────────────────────────────
 async function main() {
   process.stderr.write(`勝ち要因解析: GSC 読み込み中...\n`);
@@ -266,17 +352,25 @@ async function main() {
     console.error("[error] GSC snapshot が見つからない (.claude/skills/analytics/gsc-improvement/reference/snapshots/)");
     process.exit(1);
   }
-  const publishedSlugs = await loadPublishedSlugs();
+  const published = await loadPublishedSlugs();
+  const pubAtBySlug = new Map(published.map((p) => [p.slug, p.publishedAt]));
   // 評価対象 = 公開済 かつ impressions >= MIN_IMP (CTR がノイズにならない母数)
-  const evalSlugs = publishedSlugs.filter((s) => (gsc.bySlug.get(s)?.impressions || 0) >= MIN_IMP);
-  process.stderr.write(`公開 ${publishedSlugs.length} 本 / 評価対象 (imp>=${MIN_IMP}) ${evalSlugs.length} 本を取得...\n`);
+  const evalSlugs = published.map((p) => p.slug).filter((s) => (gsc.bySlug.get(s)?.impressions || 0) >= MIN_IMP);
+  process.stderr.write(`公開 ${published.length} 本 / 評価対象 (imp>=${MIN_IMP}) ${evalSlugs.length} 本を取得...\n`);
 
   const articles = (
     await mapLimit(evalSlugs, CONCURRENCY, async (slug) => {
       const md = await fetchText(`${R2}/app/blog/${slug}/article.md`);
       const feat = extractFeatures(slug, md);
       const g = gsc.bySlug.get(slug);
-      return { ...feat, ctr: g.ctr, position: g.position, clicks: g.clicks, impressions: g.impressions };
+      return {
+        ...feat,
+        publishedAt: pubAtBySlug.get(slug) || null,
+        ctr: g.ctr,
+        position: g.position,
+        clicks: g.clicks,
+        impressions: g.impressions,
+      };
     })
   ).filter((a) => a && !a.error && a.title);
 
@@ -288,6 +382,10 @@ async function main() {
 
   const signals = buildSignals(winners, losers);
   const conformance = buildConformance(articles, winners);
+
+  // ── 交絡分析 (★最重要): CTR は掲載順位に強く依存する。順位を部分的に統制して
+  // 各シグナルが頑健か (=順位の交絡でないか) を判定する。.claude/rules/evidence-based-judgment.md。
+  const confounders = analyzeConfounders(articles, signals);
 
   const out = {
     generatedAt: new Date().toISOString(),
@@ -304,6 +402,7 @@ async function main() {
       medianPosition: median(losers.map((a) => a.position)),
     },
     featureSignals: signals,
+    confounders,
     perArticleConformance: conformance.sort((a, b) => (a.conformance ?? 1) - (b.conformance ?? 1)),
   };
 
@@ -353,6 +452,26 @@ ${winners.slice(0, 8).map((a) => `- \`${a.slug}\` — CTR ${(a.ctr * 100).toFixe
 ${signals.map(sigLine).join("\n")}
 
 bool 特徴の lift = winner 群での出現率 − loser 群での出現率 (pt)。num 特徴の Δ = 中央値差。
+
+## 交絡分析 (★順位統制後も残るシグナルだけが信頼できる)
+
+CTR は **掲載順位 (position)** に強く依存する。winner が「単に上位表示なだけ」なら、その特徴は
+順位の交絡であって因果ではない。順位を部分統制 (IQR 中央バンドで再計算) して頑健性を判定する。
+
+- winner 中央順位 **${confounders.winnerMedianPosition}** vs loser **${confounders.loserMedianPosition}**
+  ${confounders.winnerMedianPosition < confounders.loserMedianPosition - 1 ? "→ winner は明確に上位表示。CTR 差の主因は順位の可能性が高い (特徴は交絡を疑う)" : "→ 順位差は小さい。特徴差が CTR を説明しうる"}
+- corr(CTR, 順位) = **${confounders.corr_ctr_position}** (通常は強い負相関)
+- corr(タイトル長, 順位) = **${confounders.corr_titleLen_position}** ${Math.abs(confounders.corr_titleLen_position ?? 0) >= 0.3 ? "→ タイトル長は順位と相関。「短い方が勝つ」は順位交絡の疑い" : "→ タイトル長と順位は弱相関"}
+- winner 中央公開年 ${confounders.winnerMedianYear} vs loser ${confounders.loserMedianYear} ${(confounders.winnerMedianYear ?? 0) < (confounders.loserMedianYear ?? 0) ? "→ winner はやや古い (被リンク蓄積=上位化の交絡)" : ""}
+
+### 順位統制後の頑健性 (バンド n=${confounders.positionControlledBand.n})
+
+| 特徴 | 生 effect | 順位統制後 | 判定 |
+|---|---|---|---|
+${confounders.robustSignals.map((r) => `| ${r.feature} | ${r.rawEffect > 0 ? "+" : ""}${r.rawEffect} | ${r.positionControlledEffect > 0 ? "+" : ""}${r.positionControlledEffect} | ${r.verdict === "robust" ? "✅ robust" : r.verdict === "weakened" ? "⚠️ weakened" : "❌ confounded"} |`).join("\n")}
+
+**robust** = 順位統制後も同符号で効果が半分以上残る → 因果候補。**confounded** = 統制で消える → 順位の交絡。
+**書き戻してよいのは robust かつ confidence hi/mid のシグナルだけ**。
 
 ## 読み方と次アクション
 

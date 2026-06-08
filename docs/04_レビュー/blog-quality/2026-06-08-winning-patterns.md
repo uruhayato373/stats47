@@ -51,6 +51,38 @@ tags: [blog-quality, continuous-learning]
 
 bool 特徴の lift = winner 群での出現率 − loser 群での出現率 (pt)。num 特徴の Δ = 中央値差。
 
+## 交絡分析 (★順位統制後も残るシグナルだけが信頼できる)
+
+CTR は **掲載順位 (position)** に強く依存する。winner が「単に上位表示なだけ」なら、その特徴は
+順位の交絡であって因果ではない。順位を部分統制 (IQR 中央バンドで再計算) して頑健性を判定する。
+
+- winner 中央順位 **7.38** vs loser **8.13**
+  → 順位差は小さい。特徴差が CTR を説明しうる
+- corr(CTR, 順位) = **-0.29** (通常は強い負相関)
+- corr(タイトル長, 順位) = **0.04** → タイトル長と順位は弱相関
+- winner 中央公開年 2026 vs loser 2026 
+
+### 順位統制後の頑健性 (バンド n=59)
+
+| 特徴 | 生 effect | 順位統制後 | 判定 |
+|---|---|---|---|
+| prosePerChart | -364 | -240 | ✅ robust |
+| prose | -107 | -119 | ✅ robust |
+| introChars | -25 | -26 | ✅ robust |
+| hasLine | -23.1 | -24.2 | ✅ robust |
+| curiosityGap | -20.5 | -6.9 | ⚠️ weakened |
+| titleLen | -16 | -18 | ✅ robust |
+| hasMap | +15.4 | +6.9 | ⚠️ weakened |
+| hasScatter | +15.4 | +10.3 | ✅ robust |
+| desumasu | +12.8 | +17.2 | ✅ robust |
+| chartCount | +1 | +1 | ✅ robust |
+| callouts | -1 | -1 | ✅ robust |
+| internalLinks | 0 | 0 | ❌ confounded |
+| h2 | 0 | -1 | ❌ confounded |
+
+**robust** = 順位統制後も同符号で効果が半分以上残る → 因果候補。**confounded** = 統制で消える → 順位の交絡。
+**書き戻してよいのは robust かつ confidence hi/mid のシグナルだけ**。
+
 ## 読み方と次アクション
 
 1. **confidence hi/mid の正の lift** → 勝ちパターン候補。`blog-quality-standards.md` の archetype / チェックリストに

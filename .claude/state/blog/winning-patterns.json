@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-08T20:49:59.004Z",
+  "generatedAt": "2026-06-08T21:11:20.744Z",
   "gscWeek": "2026-W23",
   "method": "winner/loser = CTR 三分位 (imp>=15)。主指標 CTR+position、滞在(GA4)は未統合",
   "sample": {
@@ -171,6 +171,101 @@
       "confidence": "hi"
     }
   ],
+  "confounders": {
+    "note": "CTR は掲載順位に強く依存。winner が単に上位表示でないか、特徴が順位統制後も残るかを検証",
+    "medianPositionAll": 7.86,
+    "winnerMedianPosition": 7.38,
+    "loserMedianPosition": 8.13,
+    "corr_titleLen_position": 0.04,
+    "corr_ctr_position": -0.29,
+    "winnerMedianYear": 2026,
+    "loserMedianYear": 2026,
+    "positionControlledBand": {
+      "q1Position": 7.08,
+      "q3Position": 8.87,
+      "n": 59
+    },
+    "robustSignals": [
+      {
+        "feature": "prosePerChart",
+        "rawEffect": -364,
+        "positionControlledEffect": -240,
+        "verdict": "robust"
+      },
+      {
+        "feature": "prose",
+        "rawEffect": -107,
+        "positionControlledEffect": -119,
+        "verdict": "robust"
+      },
+      {
+        "feature": "introChars",
+        "rawEffect": -25,
+        "positionControlledEffect": -26,
+        "verdict": "robust"
+      },
+      {
+        "feature": "hasLine",
+        "rawEffect": -23.1,
+        "positionControlledEffect": -24.2,
+        "verdict": "robust"
+      },
+      {
+        "feature": "curiosityGap",
+        "rawEffect": -20.5,
+        "positionControlledEffect": -6.9,
+        "verdict": "weakened"
+      },
+      {
+        "feature": "titleLen",
+        "rawEffect": -16,
+        "positionControlledEffect": -18,
+        "verdict": "robust"
+      },
+      {
+        "feature": "hasMap",
+        "rawEffect": 15.4,
+        "positionControlledEffect": 6.9,
+        "verdict": "weakened"
+      },
+      {
+        "feature": "hasScatter",
+        "rawEffect": 15.4,
+        "positionControlledEffect": 10.3,
+        "verdict": "robust"
+      },
+      {
+        "feature": "desumasu",
+        "rawEffect": 12.8,
+        "positionControlledEffect": 17.2,
+        "verdict": "robust"
+      },
+      {
+        "feature": "chartCount",
+        "rawEffect": 1,
+        "positionControlledEffect": 1,
+        "verdict": "robust"
+      },
+      {
+        "feature": "callouts",
+        "rawEffect": -1,
+        "positionControlledEffect": -1,
+        "verdict": "robust"
+      },
+      {
+        "feature": "internalLinks",
+        "rawEffect": 0,
+        "positionControlledEffect": 0,
+        "verdict": "confounded"
+      },
+      {
+        "feature": "h2",
+        "rawEffect": 0,
+        "positionControlledEffect": -1,
+        "verdict": "confounded"
+      }
+    ]
+  },
   "perArticleConformance": [
     {
       "slug": "library-books-prefecture-gap",
