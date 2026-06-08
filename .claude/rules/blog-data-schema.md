@@ -81,6 +81,7 @@ YYYY-MM-DD-<method>[-<batch>]
 | `/draft-from-trend` | trend → 新規 draft 生成 | `.claude/scripts/blog/{fetch-article-data,generate-article-charts}.mjs` |
 | `/publish-bulk-articles` | 複数記事の bulk publish | factual gate 共有 |
 | `/measure-blog-impact` (Phase D 新設予定) | wave 単位の effect 計測 | `measure-gsc-impact.mjs` (要 SKILL 化 + wave_id 駆動化) |
+| `/analyze-winning-patterns` | 天井ループ: GSC実測×構造特徴で勝ち要因抽出 (順位交絡統制付き)。正典 `docs/02_実装計画/blog-continuous-quality-loop.md` | `.claude/scripts/blog/analyze-winning-patterns.mjs` |
 
 ### Docs (人間向け真実源)
 
@@ -105,6 +106,7 @@ YYYY-MM-DD-<method>[-<batch>]
 | State | 内容 | 書き込み箇所 |
 |---|---|---|
 | `.claude/state/blog/remediation-queue.json` | **品質是正キュー (状態付き)**。「次に何を直すか」の真実源。pending/in-progress/done + wave_id。GSC×品質 blocker の統合スコア。**正典: `docs/02_実装計画/blog-remediation-loop.md`** | `build-remediation-queue.mjs` (build / --mark-* / --next) |
+| `.claude/state/blog/winning-patterns.json` | **勝ち要因 (天井ループ)**。featureSignals (confidence付) + 順位交絡統制 (robust/confounded) + 記事別 conformance。build-remediation-queue が conformance を tiebreaker に読む。**正典: `docs/02_実装計画/blog-continuous-quality-loop.md`** | `analyze-winning-patterns.mjs` |
 | `.claude/state/blog/auto-brushup-history.json` | wave_id 駆動 source of truth (effect 計測の入力 + 是正キューの done シード) | `/brushup-blog --target batch\|queue` 実行時 |
 | `.claude/state/blog/auto-brushup-skipped.log` | dedup でスキップした slug ログ | 同上 |
 | `.claude/state/blog/SHARED-failure-cases.md` | F-001〜N の failure ledger | factual FAIL 検出時 |

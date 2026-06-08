@@ -200,6 +200,19 @@ for (const e of history.entries || []) {
 }
 const dedupCutoff = nowMs - DEDUP_DAYS * 24 * 60 * 60 * 1000;
 
+// 3.5 勝ちパターン適合度 (analyze-winning-patterns.mjs の出力があれば取り込む)。
+// 床(blocker)是正に加え、流入はあるが勝ちプロファイルから外れた記事を opportunity で優先する。
+const conformanceBySlug = new Map();
+const wpPath = path.join(__dirname, "..", "..", "state", "blog", "winning-patterns.json");
+if (fs.existsSync(wpPath)) {
+  try {
+    const wp = JSON.parse(fs.readFileSync(wpPath, "utf8"));
+    for (const c of wp.perArticleConformance || []) conformanceBySlug.set(c.slug, c.conformance);
+  } catch {
+    /* 壊れていても床ループは動かす */
+  }
+}
+
 // 4. 全 published 記事を走査して raw entry を作る
 const slugs = new Set([...auditBySlug.keys(), ...gscBySlug.keys()]);
 const raw = [];
@@ -222,6 +235,7 @@ for (const slug of slugs) {
       prose: a.prose,
       chartCount: a.chartCount ?? a.svg,
       prosePerChart: a.prosePerChart ?? null,
+      conformance: conformanceBySlug.has(slug) ? conformanceBySlug.get(slug) : null,
       flags,
     },
     severity,
@@ -243,7 +257,11 @@ const LANE_RANK = { "must-fix": 0, opportunity: 1, clean: 2 };
 raw.sort((x, y) => {
   if (LANE_RANK[x.lane] !== LANE_RANK[y.lane]) return LANE_RANK[x.lane] - LANE_RANK[y.lane];
   if (y.combinedScore !== x.combinedScore) return y.combinedScore - x.combinedScore;
-  return y.gsc.expectedLift - x.gsc.expectedLift;
+  if (y.gsc.expectedLift !== x.gsc.expectedLift) return y.gsc.expectedLift - x.gsc.expectedLift;
+  // tiebreaker: 勝ちパターン適合度が低い (=改善余地が大きい) ものを先に
+  const cx = x.quality.conformance ?? 1;
+  const cy = y.quality.conformance ?? 1;
+  return cx - cy;
 });
 
 // 7. 既存キューの状態を引き継いで upsert

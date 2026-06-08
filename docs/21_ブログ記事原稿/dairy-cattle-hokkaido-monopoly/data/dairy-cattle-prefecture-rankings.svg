@@ -1,0 +1,91 @@
+<!-- data-source: dairy-cattle-prefecture-rankings.json | generated: 2026-05-30T00:04:54.815Z -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 480" width="680" height="480" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" role="img" aria-label="都道府県別ランキング">
+  <rect width="680" height="480" fill="#fafafa" rx="8"/>
+  <text x="340" y="24" text-anchor="middle" font-size="16" font-weight="bold" fill="#222">都道府県別ランキング</text>
+  
+  <text x="227.5" y="54" text-anchor="middle" font-size="12" font-weight="bold" fill="#1565c0">上位 10</text>
+  <text x="542.5" y="54" text-anchor="middle" font-size="12" font-weight="bold" fill="#c62828">下位 10</text>
+  
+      <text x="84" y="82" text-anchor="end" font-size="11" fill="#333">北海道</text>
+      <rect x="90" y="63" width="195" height="30" fill="#1565c0" rx="2"/>
+      <text x="289" y="82" font-size="10" fill="#333">790900</text>
+    
+      <text x="84" y="118" text-anchor="end" font-size="11" fill="#333">栃木</text>
+      <rect x="90" y="99" width="12.796181565305348" height="30" fill="#1976d2" rx="2"/>
+      <text x="106.79618156530535" y="118" font-size="10" fill="#333">51900</text>
+    
+      <text x="84" y="154" text-anchor="end" font-size="11" fill="#333">熊本</text>
+      <rect x="90" y="135" width="10.55253508661019" height="30" fill="#1e88e5" rx="2"/>
+      <text x="104.55253508661019" y="154" font-size="10" fill="#333">42800</text>
+    
+      <text x="84" y="190" text-anchor="end" font-size="11" fill="#333">岩手</text>
+      <rect x="90" y="171" width="10.33063598432166" height="30" fill="#2196f3" rx="2"/>
+      <text x="104.33063598432166" y="190" font-size="10" fill="#333">41900</text>
+    
+      <text x="84" y="226" text-anchor="end" font-size="11" fill="#333">群馬</text>
+      <rect x="90" y="207" width="8.58009862182324" height="30" fill="#42a5f5" rx="2"/>
+      <text x="102.58009862182324" y="226" font-size="10" fill="#333">34800</text>
+    
+      <text x="84" y="262" text-anchor="end" font-size="11" fill="#333">千葉</text>
+      <rect x="90" y="243" width="7.470603110380578" height="30" fill="#64b5f6" rx="2"/>
+      <text x="101.47060311038058" y="262" font-size="10" fill="#333">30300</text>
+    
+      <text x="84" y="298" text-anchor="end" font-size="11" fill="#333">愛知</text>
+      <rect x="90" y="279" width="6.015931217600203" height="30" fill="#90caf9" rx="2"/>
+      <text x="100.0159312176002" y="298" font-size="10" fill="#333">24400</text>
+    
+      <text x="84" y="334" text-anchor="end" font-size="11" fill="#333">茨城</text>
+      <rect x="90" y="315" width="5.86799848274118" height="30" fill="#1565c0" rx="2"/>
+      <text x="99.86799848274119" y="334" font-size="10" fill="#333">23800</text>
+    
+      <text x="84" y="370" text-anchor="end" font-size="11" fill="#333">宮城</text>
+      <rect x="90" y="351" width="4.659881148059173" height="30" fill="#1976d2" rx="2"/>
+      <text x="98.65988114805917" y="370" font-size="10" fill="#333">18900</text>
+    
+      <text x="84" y="406" text-anchor="end" font-size="11" fill="#333">岡山</text>
+      <rect x="90" y="387" width="3.96952838538374" height="30" fill="#1e88e5" rx="2"/>
+      <text x="97.96952838538374" y="406" font-size="10" fill="#333">16100</text>
+    
+  
+      <text x="399" y="82" text-anchor="end" font-size="11" fill="#333">和歌山</text>
+      <rect x="405" y="63" width="1" height="30" fill="#c62828" rx="2"/>
+      <text x="410" y="82" font-size="10" fill="#333">610</text>
+    
+      <text x="399" y="118" text-anchor="end" font-size="11" fill="#333">福井</text>
+      <rect x="405" y="99" width="1" height="30" fill="#d32f2f" rx="2"/>
+      <text x="410" y="118" font-size="10" fill="#333">1070</text>
+    
+      <text x="399" y="154" text-anchor="end" font-size="11" fill="#333">大阪</text>
+      <rect x="405" y="135" width="1" height="30" fill="#e53935" rx="2"/>
+      <text x="410" y="154" font-size="10" fill="#333">1280</text>
+    
+      <text x="399" y="190" text-anchor="end" font-size="11" fill="#333">東京</text>
+      <rect x="405" y="171" width="1" height="30" fill="#ef5350" rx="2"/>
+      <text x="410" y="190" font-size="10" fill="#333">1520</text>
+    
+      <text x="399" y="226" text-anchor="end" font-size="11" fill="#333">富山</text>
+      <rect x="405" y="207" width="1" height="30" fill="#e57373" rx="2"/>
+      <text x="410" y="226" font-size="10" fill="#333">2020</text>
+    
+      <text x="399" y="262" text-anchor="end" font-size="11" fill="#333">佐賀</text>
+      <rect x="405" y="243" width="1" height="30" fill="#ef9a9a" rx="2"/>
+      <text x="410" y="262" font-size="10" fill="#333">2380</text>
+    
+      <text x="399" y="298" text-anchor="end" font-size="11" fill="#333">山口</text>
+      <rect x="405" y="279" width="1" height="30" fill="#c62828" rx="2"/>
+      <text x="410" y="298" font-size="10" fill="#333">2750</text>
+    
+      <text x="399" y="334" text-anchor="end" font-size="11" fill="#333">滋賀</text>
+      <rect x="405" y="315" width="1" height="30" fill="#d32f2f" rx="2"/>
+      <text x="410" y="334" font-size="10" fill="#333">2760</text>
+    
+      <text x="399" y="370" text-anchor="end" font-size="11" fill="#333">奈良</text>
+      <rect x="405" y="351" width="1" height="30" fill="#e53935" rx="2"/>
+      <text x="410" y="370" font-size="10" fill="#333">3110</text>
+    
+      <text x="399" y="406" text-anchor="end" font-size="11" fill="#333">石川</text>
+      <rect x="405" y="387" width="1" height="30" fill="#ef5350" rx="2"/>
+      <text x="410" y="406" font-size="10" fill="#333">3300</text>
+    
+  <text x="340" y="462" text-anchor="middle" font-size="10" fill="#888">凡例: 青系=上位 / 赤系=下位</text>
+</svg>

@@ -77,11 +77,12 @@ node .claude/scripts/blog/build-remediation-queue.mjs
 ```
 combinedScore = 0.6 × norm(GSC expectedLift) + 0.4 × norm(blockers×3 + warnings)
 lane = blockers>0 ? "must-fix" : expectedLift>0 ? "opportunity" : "clean"(キュー除外)
-ソート = lane (must-fix → opportunity) → combinedScore 降順 → expectedLift 降順
+ソート = lane (must-fix → opportunity) → combinedScore 降順 → expectedLift 降順 → conformance 昇順
 ```
 
 - **must-fix レーン最上位**: publish-blocker を持つ記事を必ず先に消す。レーン内は高流入×blocker が最優先、低流入 blocker も残り順次消化。
 - **opportunity レーン**: blocker は無いが CTR 改善余地 (expectedLift) がある記事 (CTR-reframe 対象)。
+- **conformance tiebreaker (天井ループ連携)**: `.claude/state/blog/winning-patterns.json` (`analyze-winning-patterns.mjs` の出力) があれば各記事に勝ちパターン適合度 (`conformance`) を付与し、同スコア時は **適合度が低い (=改善余地が大きい) 記事を先に**取り出す。天井ループ正典: `docs/02_実装計画/blog-continuous-quality-loop.md`。
 
 ## 状態機械 (upsert で進捗を保持)
 
