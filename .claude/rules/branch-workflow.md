@@ -25,6 +25,22 @@ PR は **develop → main の 1 段階のみ**。feature/* → develop は直 me
 - **main**: 本番デプロイブランチ。**develop → main の PR 経由でのみ更新**。`gh pr create --base main --head develop` で CI (`.github/workflows/pr-quality-check.yml`) を発火 → green を確認してマージ → Cloudflare Pages 自動デプロイ
 - main への直接コミット / push / force push は禁止
 
+## hotfix / main 直行を入れたら main → develop を即同期する（★分岐再発防止・2026-06-08）
+
+緊急 hotfix を `hotfix/* → main` の PR で入れる等、**develop を経由せず main に commit が乗った場合**、main が develop より先行して **main/develop が分岐**する。同じ内容を develop でも別 SHA で持っていると、次の `develop → main` PR が **重複コミット込みで巨大化・コンフリクト化**する（2026-06-08 実際に発生: PR が 2955 ファイル diff になり手作業 reconcile が必要だった）。
+
+**規約**: main に develop 非経由の commit が入ったら、**その場で `origin/main` を develop に取り込んで同期する**。
+
+```bash
+git fetch origin main develop
+git rev-list --count origin/develop..origin/main   # >0 なら main が先行＝要同期
+git switch develop && git pull origin develop
+git merge origin/main --no-edit                    # コンフリクトは内容同一なら ours/theirs で解決
+git push origin develop
+```
+
+原則は「main に入るものは必ず develop を先に通す」。hotfix もできる限り `feature → develop → PR develop→main` に乗せ、緊急で main 直行した場合のみ上記で即同期する。`/deploy` は Step 1 で `origin/develop..origin/main` を必ずチェックする。
+
 ## なぜ PR を develop → main にだけ置くか
 
 - `pr-quality-check.yml` の trigger は `pull_request: branches: [main]` のため、CI は **main PR でしか発火しない**

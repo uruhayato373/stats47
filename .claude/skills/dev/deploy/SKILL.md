@@ -89,6 +89,29 @@ git status -s | grep -v "^??" | head             # 自分以外の tracked 変�
   この場合デプロイ後に `develop` が `main` より遅れるので、別途 `main → develop` を取り込んで同期する（並行セッションが落ち着いてから）。
 - develop が origin とクリーン（乖離なし・自分のみ）なら通常どおり Step 3 へ進む。
 
+#### main 先行（hotfix 直行）チェック（★必須・2026-06-08 追加）
+
+上の乖離チェックは「develop が origin/develop からズレているか」だけを見る。**hotfix が develop を経由せず main へ直行している場合、`main` が `develop` より先行して main/develop が分岐し、develop→main PR が重複コミット込みで巨大化・コンフリクト化する**（2026-06-08 発生: PR が 2955 ファイル diff に）。develop→main PR を作る前に必ず確認する:
+
+```bash
+git fetch origin main develop
+git rev-list --count origin/develop..origin/main   # main が develop より先行している commit 数
+```
+
+- **0 なら** main は develop に内包済み → そのまま Step 3 へ。
+- **>0 なら** main 先行＝分岐している。**先に `origin/main` を develop に取り込んで同期してから** develop→main PR を作る（これをしないと PR が巨大化する）:
+
+  ```bash
+  git switch develop && git pull origin develop
+  git merge origin/main --no-edit
+  # コンフリクトは内容同一（hotfix と develop の重複）なら ours/theirs で解決:
+  #   コード   → main(theirs) の lint 修正済み版を採用
+  #   docs等   → develop(ours) の最新状態を採用
+  git push origin develop
+  ```
+
+  詳細規約: `.claude/rules/branch-workflow.md` の「hotfix / main 直行を入れたら main → develop を即同期する」。
+
 ### Step 1.5: feature ブランチ化（develop/main にいる場合）
 
 `$CURRENT_BRANCH` が `develop` or `main` の場合、未 push コミットがあるなら **feature ブランチへ移動**する。ブランチ名はユーザーに確認するか `feature/<日時>-<短い要約>` 形式で提案。
