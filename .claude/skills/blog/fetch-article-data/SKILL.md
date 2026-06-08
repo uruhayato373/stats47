@@ -8,6 +8,16 @@ primary_agent: chart-author
 
 **本スキルは既存のデータソース取得を組み合わせる aggregator。** ローカル D1 + e-Stat API + R2 snapshot から取得し、記事 1 本分の `data/*.json` を整える。
 
+> ⚠️ **cloud / DBレス環境では機能しない (★2026-06-08 重要)**: 本スクリプト (`fetch-article-data.mjs`) は
+> `docs/20_ブログ記事企画/backlog/` の企画 MD と **ローカル D1** (`.local/d1/...miniflare...sqlite`) に依存する。
+> headless / cloud セッション (D1 不在) では **data を生成できず空振り**する。その状態で記事を書くと data/*.json が
+> 無く、`quality-gate.mjs` の factual-check は ground truth 0 で **rank 検証を skip** していた → AI が順位を捏造しても
+> 素通りした (2026-06-07 週次自動生成10本が全て順位捏造、未検証のままドラフト化された事故)。
+> **対策**: (1) cloud では R2 公開 URL `https://storage.stats47.jp/app/ranking/<key>/values.json` から直接取得し
+> `data/<name>-prefecture-rankings.json` (`{title,unit,year,rankingKey,data:[{pref,value,rank}]}`、value 降順で rank
+> 再計算) を生成する。(2) `quality-gate.mjs` は 2026-06-08 以降 **rank 主張があるのに data 無しなら blocker** (fail-closed)
+> で公開を止める。詳細は memory `project_blog_brushup_dbless_scaffold`。
+
 ## 用途
 
 - 企画確定後、`/generate-article-charts` で使う前のデータ準備

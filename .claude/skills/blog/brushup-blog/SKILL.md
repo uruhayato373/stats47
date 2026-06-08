@@ -56,6 +56,8 @@ node .claude/scripts/blog/build-remediation-queue.mjs --next 5   # pending 上�
 1. **in-progress に印**: `node .claude/scripts/blog/build-remediation-queue.mjs --mark-in-progress <slug>`
 2. **focus は `quality.flags` の blocker 内訳から決める** (`--target article` のリライトエンジンを適用):
    - markdown 表 / truncated 表 / チャート0 → 表を **SVG (上位5+下位5)** に置換
+   - `である調 文末` (dearuEndings>0) → **本文を ですます調 に変換** (である。→です。/だった。→でした。/ではない。→ではありません。/動詞終止形→ます形)。callout・引用・データ出典の体言止めは対象外 (正典 `.claude/rules/blog-quality-standards.md`「文体」)
+   - `rank 主張あるが data 無し` (検証不能 blocker) → R2 `app/ranking/<key>/values.json` から `data/<name>-prefecture-rankings.json` を生成 (value 降順で rank 再計算) し本文数値を data に一致させる
    - `prose/図 <350` → **各図直下に「なぜ上位/下位か」の解釈段落**を追加 (記事アーキタイプの必須分析視点。図あたり ~600字)
    - `callouts<2` → **記事固有の「読み違い防止の知識」** callout を追加 (全記事共通の定型は不可)
    - `internalLinks<3` / source-link 末尾集約 → source-link を各図直下にインライン配置
