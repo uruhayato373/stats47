@@ -115,7 +115,7 @@ function getProseForTone(text) {
     .join("\n");
   return t.replace(/\[([^\]]+)\]\([^)]*\)/g, "$1");
 }
-const DEARU = [/である[。、]/g, /であった[。、]/g, /だった[。、]/g, /ではない[。、]/g, /だろう[。、]/g, /のだ[。、]/g, /のである[。、]/g, /(?<![んでぐ])だ。/g];
+const DEARU = [/である[。、]/g, /であった[。、]/g, /だった[。、]/g, /ではない。/g, /だろう[。、]/g, /のだ[。、]/g, /のである[。、]/g, /(?<![んでぐ])だ。/g];
 function countDearu(md) {
   const p = getProseForTone(md);
   return DEARU.reduce((n, re) => n + (p.match(re) || []).length, 0);
