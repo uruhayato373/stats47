@@ -84,6 +84,12 @@ export interface ThemeIndicatorData {
   rankingValues: RankingValue[];
   /** 利用可能年度リスト（年度セレクタ用） */
   availableYears?: { yearCode: string; yearName: string }[];
+  /**
+   * 全国値（e-Stat の areaCode "00000" 行の値、最新年度）。
+   * 計算型 / city / port 指標など全国行が無い場合は undefined。
+   * 表示側は undefined なら都道府県値の単純平均にフォールバックする。
+   */
+  nationalValue?: number;
 }
 
 /** Server → Client に渡す props */
