@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 280" role="img" aria-label="都市公園数（100km²当たり）上位10・下位5">
+  <rect width="100%" height="100%" fill="#f8fafc" rx="6"/>
+  <text x="340" y="22" text-anchor="middle" font-size="13" fill="#1e293b" font-weight="bold">都市公園数（100km²当たり）上位10・下位5</text>
+  <!-- Bars - top 10 + bottom 5 -->
+  <!-- 1 東京 617 -->
+  <text x="108" y="52" text-anchor="end" font-size="12" fill="#475569">1. 東京都</text>
+  <rect x="116" y="37" width="480" height="20" fill="#1d4ed8" rx="2"/>
+  <text x="602" y="52" font-size="11" fill="#334155">617</text>
+  <!-- 2 神奈川 527 -->
+  <text x="108" y="76" text-anchor="end" font-size="12" fill="#475569">2. 神奈川</text>
+  <rect x="116" y="61" width="410" height="20" fill="#3b82f6" rx="2"/>
+  <text x="532" y="76" font-size="11" fill="#334155">527</text>
+  <!-- 3 大阪 525 -->
+  <text x="108" y="100" text-anchor="end" font-size="12" fill="#475569">3. 大阪府</text>
+  <rect x="116" y="85" width="408" height="20" fill="#3b82f6" rx="2"/>
+  <text x="530" y="100" font-size="11" fill="#334155">525</text>
+  <!-- 4 埼玉 312 -->
+  <text x="108" y="124" text-anchor="end" font-size="12" fill="#475569">4. 埼玉県</text>
+  <rect x="116" y="109" width="242" height="20" fill="#60a5fa" rx="2"/>
+  <text x="364" y="124" font-size="11" fill="#334155">312</text>
+  <!-- 5 奈良 298 -->
+  <text x="108" y="148" text-anchor="end" font-size="12" fill="#475569">5. 奈良県</text>
+  <rect x="116" y="133" width="232" height="20" fill="#60a5fa" rx="2"/>
+  <text x="354" y="148" font-size="11" fill="#334155">298</text>
+  <!-- gap -->
+  <text x="300" y="175" text-anchor="middle" font-size="10" fill="#94a3b8">〜 中略 〜</text>
+  <!-- 43 岩手 20 -->
+  <text x="108" y="200" text-anchor="end" font-size="12" fill="#475569">43. 岩手県</text>
+  <rect x="116" y="185" width="16" height="20" fill="#fca5a5" rx="2"/>
+  <text x="138" y="200" font-size="11" fill="#334155">20</text>
+  <!-- 44 秋田 19 -->
+  <text x="108" y="224" text-anchor="end" font-size="12" fill="#475569">44. 秋田県</text>
+  <rect x="116" y="209" width="15" height="20" fill="#f87171" rx="2"/>
+  <text x="137" y="224" font-size="11" fill="#334155">19</text>
+  <!-- 45 山梨 22 -->
+  <text x="108" y="248" text-anchor="end" font-size="12" fill="#475569">45. 山梨県</text>
+  <rect x="116" y="233" width="17" height="20" fill="#fca5a5" rx="2"/>
+  <text x="139" y="248" font-size="11" fill="#334155">22</text>
+</svg>
