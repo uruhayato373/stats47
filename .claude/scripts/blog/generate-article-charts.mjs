@@ -18,7 +18,7 @@
  *
  * チャート種別 (ファイル名パターン):
  *   *-prefecture-rankings.json → bar chart (上位 5 + 下位 5)   [実装済み]
- *   *-tile-grid.json           → tile-grid-map                   [TODO]
+ *   *-tile-grid.json           → tile-grid-map (都道府県地図)    [実装済み]
  *   *-timeseries.json          → line chart                      [TODO]
  *   *-scatter.json             → scatter chart                   [TODO]
  *   *-stacked.json             → stacked-bar                     [TODO]
@@ -170,7 +170,115 @@ function genBarChartSvg(data, meta = {}) {
   return svg;
 }
 
-// TODO: 他チャート種別の実装 (tile-grid / line / scatter / stacked / summary)
+// ---------- tile-grid map 生成 (都道府県地図) ----------
+// 入力 JSON 想定形式: [{ pref: "宮崎県", value: 123, unit: "ml" }, ...] or { data: [...], title, unit }
+// 47 県を日本列島に模したグリッドへ配置し、value で choropleth (青のシーケンシャル) 着色する。
+// 配置データは packages/visualization/src/d3/constants/tile-grid-layout.ts と同一 (自己完結のため埋込)。
+const TILE_GRID_LAYOUT = [
+  { name: "北海道", x: 12, y: 0, w: 2, h: 2 },
+  { name: "青森", x: 12, y: 3, w: 2, h: 1 }, { name: "岩手", x: 13, y: 4 }, { name: "秋田", x: 12, y: 4 },
+  { name: "宮城", x: 13, y: 5 }, { name: "山形", x: 12, y: 5 }, { name: "福島", x: 12, y: 6, w: 2, h: 1 },
+  { name: "新潟", x: 10, y: 6, w: 2, h: 1 }, { name: "富山", x: 9, y: 6 }, { name: "石川", x: 8, y: 6 },
+  { name: "福井", x: 8, y: 7 }, { name: "岐阜", x: 9, y: 7, w: 1, h: 2 }, { name: "長野", x: 10, y: 7, w: 1, h: 2 },
+  { name: "群馬", x: 11, y: 7 }, { name: "栃木", x: 12, y: 7 }, { name: "茨城", x: 13, y: 7 },
+  { name: "山梨", x: 11, y: 8 }, { name: "埼玉", x: 12, y: 8 }, { name: "千葉", x: 13, y: 8, w: 1, h: 2 },
+  { name: "東京", x: 12, y: 9 }, { name: "神奈川", x: 12, y: 10 }, { name: "静岡", x: 10, y: 9, w: 2, h: 1 },
+  { name: "愛知", x: 9, y: 9 }, { name: "滋賀", x: 8, y: 8 }, { name: "三重", x: 8, y: 9, w: 1, h: 2 },
+  { name: "京都", x: 6, y: 8, w: 2, h: 1 }, { name: "兵庫", x: 5, y: 8, w: 1, h: 2 }, { name: "大阪", x: 6, y: 9 },
+  { name: "奈良", x: 7, y: 9 }, { name: "和歌山", x: 6, y: 10, w: 2, h: 1 }, { name: "鳥取", x: 4, y: 8 },
+  { name: "岡山", x: 4, y: 9 }, { name: "島根", x: 3, y: 8 }, { name: "広島", x: 3, y: 9 },
+  { name: "山口", x: 2, y: 8, w: 1, h: 2 }, { name: "愛媛", x: 3, y: 11 }, { name: "香川", x: 4, y: 11 },
+  { name: "高知", x: 3, y: 12 }, { name: "徳島", x: 4, y: 12 }, { name: "福岡", x: 1, y: 10 },
+  { name: "佐賀", x: 0, y: 10 }, { name: "大分", x: 1, y: 11 }, { name: "長崎", x: 0, y: 11 },
+  { name: "宮崎", x: 1, y: 12 }, { name: "熊本", x: 0, y: 12 }, { name: "鹿児島", x: 0, y: 13, w: 2, h: 1 },
+  { name: "沖縄", x: 0, y: 15 },
+];
+// 都/道/府/県 を落として配置データと突合 (記事 data は "宮崎県"、配置は "宮崎")。
+const normPref = (s) => String(s || "").replace(/[都道府県]$/, "").replace(/^北海$/, "北海道").trim();
+
+function genTileGridMapSvg(data, meta = {}) {
+  const items = Array.isArray(data) ? data : data.data || [];
+  if (!items.length) return `<!-- empty data -->`;
+  const title = meta.title || data.title || "都道府県マップ";
+  const unit = meta.unit || data.unit || "";
+  const valByPref = new Map();
+  for (const it of items) {
+    const key = normPref(it.pref || it.areaName || it.label || it.name);
+    if (key) valByPref.set(key, it.value ?? null);
+  }
+  const vals = [...valByPref.values()].filter((v) => typeof v === "number");
+  const minV = Math.min(...vals, 0);
+  const maxV = Math.max(...vals, 1);
+  // 9 段シーケンシャル (薄→濃)。light/dark 両対応の vivid 青系。
+  const scale = ["#eff6ff", "#dbeafe", "#bfdbfe", "#93c5fd", "#60a5fa", "#3b82f6", "#2563eb", "#1d4ed8", "#1e40af"];
+  const colorFor = (v) => {
+    if (typeof v !== "number") return "#e5e7eb"; // データ無し (灰)
+    const t = maxV === minV ? 0.5 : (v - minV) / (maxV - minV);
+    return scale[Math.min(scale.length - 1, Math.max(0, Math.round(t * (scale.length - 1))))];
+  };
+  const textOn = (v) => {
+    if (typeof v !== "number") return "#9ca3af";
+    const t = maxV === minV ? 0.5 : (v - minV) / (maxV - minV);
+    return t > 0.55 ? "#ffffff" : "#1f2937"; // 濃色タイルは白文字
+  };
+
+  const cell = 40;
+  const gap = 3;
+  const cols = 14; // x: 0..13
+  const rows = 16; // y: 0..15
+  const padTop = 56;
+  const padBottom = 60;
+  const padX = 16;
+  const W = cols * (cell + gap) + padX * 2;
+  const H = padTop + rows * (cell + gap) + padBottom;
+
+  const tiles = TILE_GRID_LAYOUT.map((c) => {
+    const w = (c.w || 1) * cell + ((c.w || 1) - 1) * gap;
+    const h = (c.h || 1) * cell + ((c.h || 1) - 1) * gap;
+    const px = padX + c.x * (cell + gap);
+    const py = padTop + c.y * (cell + gap);
+    const v = valByPref.has(c.name) ? valByPref.get(c.name) : null;
+    const fill = colorFor(v);
+    const tcol = textOn(v);
+    const valLabel = typeof v === "number" ? `${v}` : "—";
+    return `
+      <rect x="${px}" y="${py}" width="${w}" height="${h}" fill="${fill}" stroke="#ffffff" stroke-width="1.5" rx="3"/>
+      <text x="${px + w / 2}" y="${py + h / 2 - 2}" text-anchor="middle" font-size="10" font-weight="bold" fill="${tcol}">${c.name}</text>
+      <text x="${px + w / 2}" y="${py + h / 2 + 11}" text-anchor="middle" font-size="8" fill="${tcol}">${valLabel}</text>`;
+  }).join("");
+
+  // 凡例 (薄→濃 グラデバー)
+  const legW = 200;
+  const legX = (W - legW) / 2;
+  const legY = H - 38;
+  const legStops = scale
+    .map((c, i) => `<rect x="${legX + (i * legW) / scale.length}" y="${legY}" width="${legW / scale.length}" height="12" fill="${c}"/>`)
+    .join("");
+
+  const style = `<style>
+    .svg-bg{fill:#fafafa}
+    .svg-title{fill:#222}
+    .svg-legend{fill:#888}
+    @media (prefers-color-scheme:dark){
+      .svg-bg{fill:#1f2937}
+      .svg-title{fill:#f9fafb}
+      .svg-legend{fill:#9ca3af}
+    }
+  </style>`;
+
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" role="img" aria-label="${title}">
+  ${style}
+  <rect width="${W}" height="${H}" class="svg-bg" rx="8"/>
+  <text x="${W / 2}" y="28" text-anchor="middle" font-size="16" font-weight="bold" class="svg-title">${title}</text>
+  ${unit ? `<text x="${W / 2}" y="46" text-anchor="middle" font-size="11" class="svg-legend">単位: ${unit}（薄い＝小 / 濃い＝大）</text>` : ""}
+  ${tiles}
+  ${legStops}
+  <text x="${legX - 6}" y="${legY + 10}" text-anchor="end" font-size="9" class="svg-legend">${minV}</text>
+  <text x="${legX + legW + 6}" y="${legY + 10}" text-anchor="start" font-size="9" class="svg-legend">${maxV}</text>
+</svg>`;
+}
+
+// TODO: 他チャート種別の実装 (line / scatter / stacked / summary)
 function genStubSvg(chartType, name) {
   const W = 680;
   const H = 480;
@@ -381,6 +489,8 @@ for (const { file, type, parsed } of jsonMeta) {
   let svg;
   if (type === "bar") {
     svg = genBarChartSvg(parsed);
+  } else if (type === "tile-grid") {
+    svg = genTileGridMapSvg(parsed);
   } else if (type) {
     warn(`chart type "${type}" not implemented for ${file} — emitting stub SVG`);
     svg = genStubSvg(type, baseName);
