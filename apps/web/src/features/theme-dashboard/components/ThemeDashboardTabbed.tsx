@@ -2,9 +2,11 @@
 
 import { useCallback, useEffect, useMemo, useState, useTransition } from "react";
 
+import dynamic from "next/dynamic";
 import Link from "next/link";
 
 import { lookupArea } from "@stats47/area";
+import { Skeleton } from "@stats47/components/atoms/ui/skeleton";
 import {
   Tabs,
   TabsContent,
@@ -23,9 +25,21 @@ import { MetricFocusCharts } from "./MetricFocusCharts";
 import { PopulationScatterSection } from "./PopulationScatterSection";
 import { ScrollableTabsList } from "./ScrollableTabsList";
 import { ThemeCombinationAnalysis } from "./ThemeCombinationAnalysis";
-import { ThemeLeafletMap } from "./ThemeLeafletMap";
 import { ThemeMetricsDashboard } from "./ThemeMetricsDashboard";
 import { ThemeYoyCharts } from "./ThemeYoyCharts";
+
+// LCP 改善: ThemeLeafletMap を dynamic import で遅延ロード。
+// leaflet 関連コード (タイル/Choropleth/ドリルダウンアクション) を初期バンドルから外し、
+// desktop の LCP 要素を leaflet タイル → 静的テキストに移行する。
+const ThemeLeafletMap = dynamic(
+  () => import("./ThemeLeafletMap").then((mod) => ({ default: mod.ThemeLeafletMap })),
+  {
+    ssr: false,
+    loading: () => (
+      <Skeleton className="h-[400px] lg:h-[500px] w-full rounded-md" />
+    ),
+  }
+);
 
 import type { ThemeDashboardClientProps } from "../types";
 import type { RankingValue } from "@stats47/ranking";
