@@ -8,6 +8,7 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@stats47/components/atoms/ui/breadcrumb";
+import { formatNumberForDisplay } from "@stats47/utils";
 
 import { SidebarPromoBanner } from "@/features/ads";
 import { resolveAffiliateBanners } from "@/features/ads/server";
@@ -57,6 +58,33 @@ export async function ThemePageLayout({ theme, data, areaContext }: Props) {
   const nativeBanners = theme.relatedArticleTagKeys && theme.relatedArticleTagKeys.length > 0
     ? await resolveAffiliateBanners(theme.relatedArticleTagKeys, 4).catch(() => [])
     : [];
+
+  // Hero 右側: 代表指標（rankingKeys 順=primary 始まり）の先頭4件の全国値を表示する。
+  // 全国値が無い指標（計算型 / city / port）は都道府県値の単純平均にフォールバック。
+  const tabLabelByKey = new Map(
+    theme.tabIndicators.map((t) => [t.rankingKey, t.tabLabel] as const),
+  );
+  const heroKpis = theme.rankingKeys
+    .filter((key) => data.indicatorDataMap[key])
+    .slice(0, 4)
+    .map((key) => {
+      const d = data.indicatorDataMap[key];
+      const values = d.rankingValues
+        .map((v) => v.value)
+        .filter((v): v is number => typeof v === "number" && Number.isFinite(v));
+      const mean =
+        values.length > 0
+          ? values.reduce((a, b) => a + b, 0) / values.length
+          : null;
+      const figure = d.nationalValue ?? mean;
+      return {
+        key,
+        label: tabLabelByKey.get(key) ?? d.rankingItem.title,
+        value: figure !== null ? formatNumberForDisplay(figure) : "—",
+        unit: d.rankingItem.unit ?? undefined,
+      };
+    });
+
   return (
     <div className="container mx-auto px-4 py-4 text-foreground">
       <script
@@ -126,33 +154,24 @@ export async function ThemePageLayout({ theme, data, areaContext }: Props) {
               {theme.description}
             </p>
           </div>
-          <div>
-            <KpiGrid columns={2}>
-              <KpiTile
-                label="指標数"
-                value={String(theme.rankingKeys.length)}
-                unit="件"
-                variant="dark"
-              />
-              <KpiTile
-                label="エリア"
-                value="47"
-                unit="都道府県"
-                variant="dark"
-              />
-              <KpiTile
-                label="可視化"
-                value="地図 + グラフ"
-                variant="dark"
-              />
-              <KpiTile
-                label="データ"
-                value="CSV"
-                unit="DL 可"
-                variant="dark"
-              />
-            </KpiGrid>
-          </div>
+          {heroKpis.length > 0 && (
+            <div>
+              <p className="mb-2 text-[10.5px] font-semibold uppercase tracking-widest text-white/55">
+                全国値
+              </p>
+              <KpiGrid columns={2}>
+                {heroKpis.map((kpi) => (
+                  <KpiTile
+                    key={kpi.key}
+                    label={kpi.label}
+                    value={kpi.value}
+                    unit={kpi.unit}
+                    variant="dark"
+                  />
+                ))}
+              </KpiGrid>
+            </div>
+          )}
         </div>
       </HeroShell>
 
