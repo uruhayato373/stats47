@@ -67,6 +67,48 @@ function proseCharCount(t) {
   return s.replace(/\s/g, "").length;
 }
 
+// ── 文体チェック (2026-06-08: quality-gate.mjs とパリティ) ─────────────────
+// 本文は ですます調 に統一する (正典: blog-quality-standards.md「文体」)。である調
+// (である。/だ。/だった。/ではない。/だろう。/のだ。 等の plain copula 文末) を検出。
+// 地の文のみ対象。callout/引用 (> 行)・見出し・表・コード・タグ・frontmatter は除外。
+// これが無いと是正キューが文体違反を拾えず、である調記事が永遠に修正対象に載らない。
+function getProseForTone(text) {
+  let t = text.replace(/^---[\s\S]*?\n---\n/, ""); // frontmatter
+  t = t.replace(/```[\s\S]*?```/g, ""); // code fence
+  t = t.replace(/<[^>]+>[\s\S]*?<\/[^>]+>/g, ""); // ペアタグ
+  t = t.replace(/<[^>]+>/g, ""); // 単独タグ
+  t = t.replace(/!\[[^\]]*\]\([^)]*\)/g, ""); // 画像
+  t = t
+    .split("\n")
+    .filter((l) => !/^\s*\|/.test(l)) // 表行
+    .filter((l) => !/^\s*>/.test(l)) // callout / blockquote
+    .filter((l) => !/^\s*#{1,6}\s/.test(l)) // 見出し
+    .join("\n");
+  t = t.replace(/\[([^\]]+)\]\([^)]*\)/g, "$1"); // リンク→テキスト
+  return t;
+}
+const DEARU_ENDINGS = [
+  /である[。、]/g,
+  /であった[。、]/g,
+  /だった[。、]/g,
+  /ではない。/g, // 文末のみ。「ではなく、」「ではない、」等の連用中止は ですます と両立するため除外 (誤検知防止)
+  /だろう[。、]/g,
+  /のだ[。、]/g,
+  /のである[。、]/g,
+  /(?<![んでぐ])だ。/g, // 「だ。」終止 (んだ。/口語の ぐだ 等は除外)
+];
+function countDearuEndings(text) {
+  const prose = getProseForTone(text);
+  let n = 0;
+  const samples = [];
+  for (const p of DEARU_ENDINGS) {
+    const m = prose.match(p) || [];
+    n += m.length;
+    if (m.length && samples.length < 4) samples.push(m[0]);
+  }
+  return { count: n, samples };
+}
+
 // ── 新規: ranking 表現の一貫性チェック (ユーザー指摘の核心) ────────────────
 // 「順位」列を持つランキング表を検出。
 function rankingTables(t) {
@@ -113,6 +155,15 @@ function auditArticle(meta, body) {
   if (prose < 1600) flags.push(["blocker", `prose ${prose}<1600 (薄い)`]);
   else if (prose < 2400) flags.push(["warning", `prose ${prose}<2400 (やや薄い)`]);
   const svg = countSvg(body);
+
+  // 文体: ですます調統一 (である調 copula 文末を blocker。quality-gate.mjs とパリティ)。
+  const dearu = countDearuEndings(body);
+  if (dearu.count > 0) {
+    flags.push([
+      "blocker",
+      `である調 文末 ${dearu.count}箇所 [${dearu.samples.join(",")}] — ですます調に統一 (である。→です。/だった。→でした。)`,
+    ]);
+  }
 
   // 図あたり prose 字数 (2026-06-06: quality-gate.mjs と一貫)。「図はあるが薄い」を弾く。
   // 比率には data 画像参照 (![](*.svg)) の正確な枚数を使う (countSvg の .svg 文字列カウントは過大)。
@@ -174,6 +225,7 @@ function auditArticle(meta, body) {
     chartCount,
     prosePerChart,
     rankingTables: rTables.length,
+    dearuEndings: dearu.count,
     blockers: sev.blocker,
     warnings: sev.warning,
     flags,

@@ -77,11 +77,12 @@ node .claude/scripts/blog/build-remediation-queue.mjs
 ```
 combinedScore = 0.6 × norm(GSC expectedLift) + 0.4 × norm(blockers×3 + warnings)
 lane = blockers>0 ? "must-fix" : expectedLift>0 ? "opportunity" : "clean"(キュー除外)
-ソート = lane (must-fix → opportunity) → combinedScore 降順 → expectedLift 降順
+ソート = lane (must-fix → opportunity) → combinedScore 降順 → expectedLift 降順 → conformance 昇順
 ```
 
 - **must-fix レーン最上位**: publish-blocker を持つ記事を必ず先に消す。レーン内は高流入×blocker が最優先、低流入 blocker も残り順次消化。
 - **opportunity レーン**: blocker は無いが CTR 改善余地 (expectedLift) がある記事 (CTR-reframe 対象)。
+- **conformance tiebreaker (天井ループ連携)**: `.claude/state/blog/winning-patterns.json` (`analyze-winning-patterns.mjs` の出力) があれば各記事に勝ちパターン適合度 (`conformance`) を付与し、同スコア時は **適合度が低い (=改善余地が大きい) 記事を先に**取り出す。天井ループ正典: `docs/02_実装計画/blog-continuous-quality-loop.md`。
 
 ## 状態機械 (upsert で進捗を保持)
 
@@ -94,11 +95,27 @@ lane = blockers>0 ? "must-fix" : expectedLift>0 ? "opportunity" : "clean"(キュ
 > **「直さず done でごまかす」が不能**: mark-done しても次の audit で blocker が残れば再 pending に戻る。
 > done を名乗れるのは決定的 gate を実際に通った記事だけ。
 
-## cadence (週次・人手ゲート)
+## cadence (日次運用 / 週次)
 
-- **毎週 weekly-plan の定常 Must**: `--next 3` で top-N を「ブログ品質是正 3 本」として計画に入れる。
-- **実行**: `/brushup-blog --target queue` (article-writer が archetype + 図あたり字数で是正 → blog-critic PASS 必須)。
-- **全自動にしない**: auto-brushup は 13% FAIL + 27% WARN の実績 (memory `project_blog_brushup_risk_2026_05_25`)。人がバッチ単位で確認しながら順次進める。
+### 日次運用 (推奨・2026-06-09〜): 「今日の10記事を教わって Pro セッションで agent がリライト」
+
+CI で Claude を動かさず (APIコストゼロ)、リライト本体は人間が **Claude Pro セッション**で agent に回させる運用。
+
+- **毎朝 JST08:00**: `blog-remediation-daily.yml` (cron) が ① キューを最新化 (公開R2 audit + 最新GSC) して
+  develop へ commit-back ② pending 上位 10 件を GitHub Issue **「📝 ブログ是正: 今日のリライト」**に upsert
+  (body 置換で常に当日の10件を表示・`auto-generated` ラベル)。
+- **人間の作業 (1 セッション/日)**: Issue を見て Claude セッションで `/brushup-blog --target queue --next 10`
+  を回す → article-writer が archetype + 図あたり字数で是正 → **quality-gate (決定的) + blog-critic PASS** →
+  PASS のみ公開・REVISE はドラフト保留 → mark-done(wave_id)。
+- **品質の担保**: CI を通さず人間がセッションで見届けるため、無人公開の drift を避けつつ throughput を上げられる。
+  `measure-gsc-impact.mjs` が翌週次で効果を自動計測。
+- **なぜ CI 全自動 (claude-code-action) にしないか**: auto-brushup は 13% FAIL + 27% WARN の実績
+  (memory `project_blog_brushup_risk_2026_05_25`)。API トークンコストも発生する。日次 Issue + Pro セッションなら
+  コストゼロで critic ゲートと人間の見届けを両立できる。
+
+### 週次 (補助)
+
+- **weekly-plan の定常 Must**: `--next 3` で top-N を「ブログ品質是正 3 本」として計画に入れる (日次運用しない週の保険)。
 
 ## 現状 (2026-06-06 初期構築)
 
@@ -106,10 +123,25 @@ lane = blockers>0 ? "must-fix" : expectedLift>0 ? "opportunity" : "clean"(キュ
 - must-fix の主因: markdown 表 (表禁止違反) / 図あたり字数 <350 / callout・内部リンク不足。
 - 週 3 本ペースなら must-fix 101 本は約 8 ヶ月で解消。高流入×blocker から消すので effect は早期に GSC に出る想定。
 
-## 今後 (Phase 2)
+## Phase 2 (2026-06-08 実装済 — フルループ自動化)
 
-- `measure-gsc-impact.mjs` の **wave_id 駆動化** (現状 BLOG-CTR-02 ハードコード)。due 到達 wave を自動で before/after 判定し gsc.md status を更新する。本ループの ④ を半自動化する。
-- 週次 cron で `build-remediation-queue.mjs` を回し commit-back (キューを常に最新化)。
+①〜④ の自動化が `fetch-metrics-weekly.yml` (日曜 JST20:00 cron) に配線済。手動は **blog-critic の PASS レビューだけ**に絞られた。
+
+- ✅ **週次 cron でキュー再構築 + commit-back**: GSC snapshot fetch 直後、develop の最新 history + fresh GSC +
+  公開 R2 audit を入力に `build-remediation-queue.mjs` を回し `remediation-queue.json` を develop へ commit-back。
+  「次に何を直すか」が毎週自動で最新化される (race 無し・単一コミット)。R2 audit 失敗時も `continue-on-error`
+  で週次計測本体は止めない。
+- ✅ **`measure-gsc-impact.mjs` の wave_id 駆動化**: BLOG-CTR-02 ハードコードを撤廃し、`auto-brushup-history.json`
+  の wave_id を真実源に **due (是正から `--min-weeks` 以上経過) に達した各 wave** の before/after を週次 GSC で
+  自動 diff。`improvement-log.md` の `## [BLOG-WAVE-<wave_id>]` を upsert (冪等)。delta を提示するだけで
+  status は `effect/pending` 据え置き — **effect/full|partial の確定は weekly-review (人間) が 2-4 週連続観測で**
+  行う (evidence-based-judgment.md 準拠)。
+  - before 週 = wave 週直前の利用可能 snapshot 週、after 週 = 最新週。ISO 週は `isoWeekOf` で算出。
+  - 手動再計測: `node .claude/scripts/blog/measure-gsc-impact.mjs [--wave <id>] [--min-weeks N] [--dry-run]`
+
+> **自動化の境界**: 選定 → 是正案 → 決定的 gate → 公開 → 効果計測 (delta) はすべて自動。
+> **blog-critic の PASS (読者価値の意味判断) のみ意図的に人手ゲート**として残す
+> (「書いた本人が自己採点して公開」を構造的に不能にする設計)。
 
 ## 関連
 

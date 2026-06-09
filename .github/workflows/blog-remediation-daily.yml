@@ -1,0 +1,107 @@
+name: 📝 Blog remediation daily (今日のリライト10記事)
+
+# 是正ループの日次運用入口 (Claude Pro セッションで agent がリライトする運用)。
+# CI で Claude は動かさない (決定的・APIコストゼロ)。
+#   1. remediation-queue を最新化 (公開R2 audit + 最新GSC) → develop へ commit-back
+#   2. pending 上位 10 件を「今日のリライト」Issue に upsert 通知
+# 実リライトは人間が Claude セッションで `/brushup-blog --target queue --next 10` を回す。
+# 正典: docs/02_実装計画/blog-remediation-loop.md
+
+on:
+  schedule:
+    - cron: "0 23 * * *" # JST 08:00 (UTC 前日 23:00)
+  workflow_dispatch:
+    inputs:
+      next:
+        description: "今日のリライト件数 (default 10)"
+        required: false
+        default: "10"
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: blog-remediation-daily
+  cancel-in-progress: false
+
+jobs:
+  daily:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: 🧰 Checkout develop
+        uses: actions/checkout@v4
+        with:
+          ref: develop
+          fetch-depth: 1
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      # 公開R2 audit (品質blocker) + 最新GSC snapshot を入力にキューを最新化。
+      # 「直さず done でごまかし」を防ぐため done の退行を audit で再 pending に戻す。
+      - name: ♻️ Rebuild remediation queue
+        continue-on-error: true # R2 取得失敗等で Issue 通知本体を止めない
+        env:
+          R2_PUBLIC_FETCH_URL: https://storage.stats47.jp
+        run: node .claude/scripts/blog/build-remediation-queue.mjs
+
+      - name: 📝 Compose today's rewrite issue body
+        id: compose
+        run: |
+          NEXT="${{ inputs.next || '10' }}"
+          mkdir -p /tmp/blog-remediation
+          node .claude/scripts/blog/compose-daily-rewrite-issue.mjs --next "$NEXT" \
+            > /tmp/blog-remediation/issue.md
+          if head -1 /tmp/blog-remediation/issue.md | grep -q "^skip:"; then
+            echo "skipped=true" >> $GITHUB_OUTPUT
+            echo "--- skipped ---"; cat /tmp/blog-remediation/issue.md
+          else
+            echo "skipped=false" >> $GITHUB_OUTPUT
+            head -20 /tmp/blog-remediation/issue.md
+          fi
+
+      - name: 📄 Write GitHub Step Summary
+        if: steps.compose.outputs.skipped == 'false'
+        run: cat /tmp/blog-remediation/issue.md >> $GITHUB_STEP_SUMMARY
+
+      - name: 🔔 Open or update daily rewrite issue
+        if: steps.compose.outputs.skipped == 'false'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          TITLE="📝 ブログ是正: 今日のリライト"
+
+          # 既存ラベルのみ使用 (auto-generated は運用済)。
+          EXISTING=$(gh issue list \
+            --state open \
+            --search "\"${TITLE}\" in:title" \
+            --json number,title --jq ".[] | select(.title==\"${TITLE}\") | .number" | head -1)
+
+          if [ -n "$EXISTING" ]; then
+            echo "Updating existing issue #$EXISTING (body 置換で常に今日の10件を表示)"
+            gh issue edit "$EXISTING" --body-file /tmp/blog-remediation/issue.md
+          else
+            echo "Creating new daily rewrite issue"
+            gh issue create \
+              --title "$TITLE" \
+              --label "auto-generated" \
+              --body-file /tmp/blog-remediation/issue.md
+          fi
+
+      - name: 📤 Commit refreshed queue to develop
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .claude/state/blog/remediation-queue.json
+          if git diff --cached --quiet; then
+            echo "No queue change to commit"
+            exit 0
+          fi
+          # rebuild で dirty な作業ツリーのまま pull すると失敗するため commit を先に。
+          git commit -m "chore(blog): refresh remediation queue (daily) [skip ci]"
+          git pull --rebase origin develop
+          git push origin develop
