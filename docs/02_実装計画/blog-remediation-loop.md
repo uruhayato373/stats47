@@ -95,11 +95,27 @@ lane = blockers>0 ? "must-fix" : expectedLift>0 ? "opportunity" : "clean"(キュ
 > **「直さず done でごまかす」が不能**: mark-done しても次の audit で blocker が残れば再 pending に戻る。
 > done を名乗れるのは決定的 gate を実際に通った記事だけ。
 
-## cadence (週次・人手ゲート)
+## cadence (日次運用 / 週次)
 
-- **毎週 weekly-plan の定常 Must**: `--next 3` で top-N を「ブログ品質是正 3 本」として計画に入れる。
-- **実行**: `/brushup-blog --target queue` (article-writer が archetype + 図あたり字数で是正 → blog-critic PASS 必須)。
-- **全自動にしない**: auto-brushup は 13% FAIL + 27% WARN の実績 (memory `project_blog_brushup_risk_2026_05_25`)。人がバッチ単位で確認しながら順次進める。
+### 日次運用 (推奨・2026-06-09〜): 「今日の10記事を教わって Pro セッションで agent がリライト」
+
+CI で Claude を動かさず (APIコストゼロ)、リライト本体は人間が **Claude Pro セッション**で agent に回させる運用。
+
+- **毎朝 JST08:00**: `blog-remediation-daily.yml` (cron) が ① キューを最新化 (公開R2 audit + 最新GSC) して
+  develop へ commit-back ② pending 上位 10 件を GitHub Issue **「📝 ブログ是正: 今日のリライト」**に upsert
+  (body 置換で常に当日の10件を表示・`auto-generated` ラベル)。
+- **人間の作業 (1 セッション/日)**: Issue を見て Claude セッションで `/brushup-blog --target queue --next 10`
+  を回す → article-writer が archetype + 図あたり字数で是正 → **quality-gate (決定的) + blog-critic PASS** →
+  PASS のみ公開・REVISE はドラフト保留 → mark-done(wave_id)。
+- **品質の担保**: CI を通さず人間がセッションで見届けるため、無人公開の drift を避けつつ throughput を上げられる。
+  `measure-gsc-impact.mjs` が翌週次で効果を自動計測。
+- **なぜ CI 全自動 (claude-code-action) にしないか**: auto-brushup は 13% FAIL + 27% WARN の実績
+  (memory `project_blog_brushup_risk_2026_05_25`)。API トークンコストも発生する。日次 Issue + Pro セッションなら
+  コストゼロで critic ゲートと人間の見届けを両立できる。
+
+### 週次 (補助)
+
+- **weekly-plan の定常 Must**: `--next 3` で top-N を「ブログ品質是正 3 本」として計画に入れる (日次運用しない週の保険)。
 
 ## 現状 (2026-06-06 初期構築)
 
