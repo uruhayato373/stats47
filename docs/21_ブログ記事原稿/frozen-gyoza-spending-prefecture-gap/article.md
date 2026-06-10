@@ -15,6 +15,7 @@ publishedAt: 2026-05-31
 updatedAt: 2026-06-10
 published: true
 ogImage: /blog/frozen-gyoza-spending-prefecture-gap/og.png
+archetype: A
 ---
 
 「餃子といえば宇都宮、それに浜松」──餃子購入額の街対決はニュースの定番です。だが家計調査の**ぎょうざ消費支出額**(都道府県庁所在市・二人以上世帯の年間支出)で47都道府県を並べると、王者は宇都宮(栃木県)でも浜松(静岡県)でもありません。

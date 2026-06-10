@@ -15,6 +15,7 @@ publishedAt: 2026-05-31
 updatedAt: 2026-06-10
 published: true
 ogImage: /blog/pachinko-participation-prefecture-gap/og.png
+archetype: A
 ---
 
 「パチンコが盛んな県」と聞いて、まずどこを思い浮かべるでしょうか。繁華街にホールがひしめく東京や大阪、あるいは雪国でレジャーの選択肢が限られる東北──そんなイメージを持つ方は多いでしょう。しかし2021年の社会生活基本調査が描いた地図は、その直感をきれいに裏切っています。

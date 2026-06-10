@@ -15,6 +15,7 @@ publishedAt: 2026-05-31
 updatedAt: 2026-06-10
 published: true
 ogImage: /blog/pharmacist-income-prefecture-gap/og.png
+archetype: A
 ---
 
 「薬剤師の年収が一番高いのは、どの都道府県だと思いますか?」──多くの人は東京や大阪といった大都市を思い浮かべるはずです。求人が多く、物価も高い大都市なら給与も高いでしょう、と。
