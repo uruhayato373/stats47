@@ -5,17 +5,17 @@
   "scoring": "combined = 0.6*norm(GSC expectedLift) + 0.4*norm(blockers*3+warnings); lane: must-fix > opportunity",
   "summary": {
     "total": 209,
-    "pending": 197,
+    "pending": 194,
     "inProgress": 0,
-    "done": 12,
-    "mustFixPending": 174,
+    "done": 15,
+    "mustFixPending": 171,
     "opportunityPending": 23
   },
   "queue": [
     {
       "slug": "frozen-gyoza-spending-prefecture-gap",
       "lane": "must-fix",
-      "status": "pending",
+      "status": "done",
       "priority": 1,
       "combinedScore": 0.4,
       "gsc": {
@@ -43,15 +43,15 @@
           "blocker: 記事内関連セクション — ページ側コンポーネントが正典 (記事から削除)"
         ]
       },
-      "wave_id": null,
-      "remediated_at": null,
+      "wave_id": "2026-06-10-manual",
+      "remediated_at": "2026-06-10",
       "in_progress_at": null,
       "last_brushup": null
     },
     {
       "slug": "pachinko-participation-prefecture-gap",
       "lane": "must-fix",
-      "status": "pending",
+      "status": "done",
       "priority": 2,
       "combinedScore": 0.4,
       "gsc": {
@@ -79,15 +79,15 @@
           "blocker: 記事内関連セクション — ページ側コンポーネントが正典 (記事から削除)"
         ]
       },
-      "wave_id": null,
-      "remediated_at": null,
+      "wave_id": "2026-06-10-manual",
+      "remediated_at": "2026-06-10",
       "in_progress_at": null,
       "last_brushup": null
     },
     {
       "slug": "pharmacist-income-prefecture-gap",
       "lane": "must-fix",
-      "status": "pending",
+      "status": "done",
       "priority": 3,
       "combinedScore": 0.4,
       "gsc": {
@@ -115,8 +115,8 @@
           "blocker: 記事内関連セクション — ページ側コンポーネントが正典 (記事から削除)"
         ]
       },
-      "wave_id": null,
-      "remediated_at": null,
+      "wave_id": "2026-06-10-manual",
+      "remediated_at": "2026-06-10",
       "in_progress_at": null,
       "last_brushup": null
     },

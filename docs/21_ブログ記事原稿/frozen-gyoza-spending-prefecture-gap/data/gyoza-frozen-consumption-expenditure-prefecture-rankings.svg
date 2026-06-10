@@ -1,0 +1,65 @@
+<!-- data-source: gyoza-frozen-consumption-expenditure-prefecture-rankings.json | generated: 2026-06-10T04:46:15.021Z -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 300" width="680" height="300" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" role="img" aria-label="ぎょうざ消費支出額（2024年・47都道府県）">
+  <style>
+    .svg-bg{fill:#fafafa}
+    .svg-title{fill:#222}
+    .svg-subtitle{fill:#666}
+    .svg-label{fill:#333}
+    .svg-legend{fill:#888}
+    @media (prefers-color-scheme:dark){
+      .svg-bg{fill:#1f2937}
+      .svg-title{fill:#f9fafb}
+      .svg-subtitle{fill:#9ca3af}
+      .svg-label{fill:#e5e7eb}
+      .svg-legend{fill:#9ca3af}
+    }
+  </style>
+  <rect width="680" height="300" class="svg-bg" rx="8"/>
+  <text x="340" y="24" text-anchor="middle" font-size="16" font-weight="bold" class="svg-title">ぎょうざ消費支出額（2024年・47都道府県）</text>
+  
+  <text x="227.5" y="54" text-anchor="middle" font-size="12" font-weight="bold" fill="#1565c0">上位 5</text>
+  <text x="542.5" y="54" text-anchor="middle" font-size="12" font-weight="bold" fill="#c62828">下位 5</text>
+  
+      <text x="84" y="82" text-anchor="end" font-size="11" class="svg-label">宮崎県</text>
+      <rect x="90" y="63" width="195" height="30" fill="#1565c0" rx="2"/>
+      <text x="289" y="82" font-size="10" class="svg-label">3517円</text>
+    
+      <text x="84" y="118" text-anchor="end" font-size="11" class="svg-label">栃木県</text>
+      <rect x="90" y="99" width="155.30139323286892" height="30" fill="#1976d2" rx="2"/>
+      <text x="249.30139323286892" y="118" font-size="10" class="svg-label">2801円</text>
+    
+      <text x="84" y="154" text-anchor="end" font-size="11" class="svg-label">埼玉県</text>
+      <rect x="90" y="135" width="132.67984077338642" height="30" fill="#1e88e5" rx="2"/>
+      <text x="226.67984077338642" y="154" font-size="10" class="svg-label">2393円</text>
+    
+      <text x="84" y="190" text-anchor="end" font-size="11" class="svg-label">福岡県</text>
+      <rect x="90" y="171" width="132.125390958203" height="30" fill="#2196f3" rx="2"/>
+      <text x="226.125390958203" y="190" font-size="10" class="svg-label">2383円</text>
+    
+      <text x="84" y="226" text-anchor="end" font-size="11" class="svg-label">滋賀県</text>
+      <rect x="90" y="207" width="129.96303667898778" height="30" fill="#42a5f5" rx="2"/>
+      <text x="223.96303667898778" y="226" font-size="10" class="svg-label">2344円</text>
+    
+  
+      <text x="399" y="82" text-anchor="end" font-size="11" class="svg-label">高知県</text>
+      <rect x="405" y="63" width="61.26670457776515" height="30" fill="#c62828" rx="2"/>
+      <text x="470.26670457776515" y="82" font-size="10" class="svg-label">1105円</text>
+    
+      <text x="399" y="118" text-anchor="end" font-size="11" class="svg-label">山形県</text>
+      <rect x="405" y="99" width="71.08046630651124" height="30" fill="#d32f2f" rx="2"/>
+      <text x="480.08046630651125" y="118" font-size="10" class="svg-label">1282円</text>
+    
+      <text x="399" y="154" text-anchor="end" font-size="11" class="svg-label">徳島県</text>
+      <rect x="405" y="135" width="79.28632357122548" height="30" fill="#e53935" rx="2"/>
+      <text x="488.28632357122547" y="154" font-size="10" class="svg-label">1430円</text>
+    
+      <text x="399" y="190" text-anchor="end" font-size="11" class="svg-label">秋田県</text>
+      <rect x="405" y="171" width="82.28035257321581" height="30" fill="#ef5350" rx="2"/>
+      <text x="491.2803525732158" y="190" font-size="10" class="svg-label">1484円</text>
+    
+      <text x="399" y="226" text-anchor="end" font-size="11" class="svg-label">佐賀県</text>
+      <rect x="405" y="207" width="82.72391242536253" height="30" fill="#e57373" rx="2"/>
+      <text x="491.7239124253625" y="226" font-size="10" class="svg-label">1492円</text>
+    
+  <text x="340" y="282" text-anchor="middle" font-size="10" class="svg-legend">凡例: 青系=上位 / 赤系=下位</text>
+</svg>
