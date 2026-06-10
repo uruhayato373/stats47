@@ -5,10 +5,10 @@
   "scoring": "combined = 0.6*norm(GSC expectedLift) + 0.4*norm(blockers*3+warnings); lane: must-fix > opportunity",
   "summary": {
     "total": 209,
-    "pending": 194,
+    "pending": 191,
     "inProgress": 0,
-    "done": 15,
-    "mustFixPending": 171,
+    "done": 18,
+    "mustFixPending": 168,
     "opportunityPending": 23
   },
   "queue": [
@@ -123,7 +123,7 @@
     {
       "slug": "tofu-consumption-prefecture-gap",
       "lane": "must-fix",
-      "status": "pending",
+      "status": "done",
       "priority": 4,
       "combinedScore": 0.4,
       "gsc": {
@@ -151,15 +151,15 @@
           "blocker: 記事内関連セクション — ページ側コンポーネントが正典 (記事から削除)"
         ]
       },
-      "wave_id": null,
-      "remediated_at": null,
+      "wave_id": "2026-06-10-manual",
+      "remediated_at": "2026-06-10",
       "in_progress_at": null,
       "last_brushup": null
     },
     {
       "slug": "yogurt-spending-prefecture-gap",
       "lane": "must-fix",
-      "status": "pending",
+      "status": "done",
       "priority": 5,
       "combinedScore": 0.4,
       "gsc": {
@@ -187,15 +187,15 @@
           "blocker: 記事内関連セクション — ページ側コンポーネントが正典 (記事から削除)"
         ]
       },
-      "wave_id": null,
-      "remediated_at": null,
+      "wave_id": "2026-06-10-manual",
+      "remediated_at": "2026-06-10",
       "in_progress_at": null,
       "last_brushup": null
     },
     {
       "slug": "library-books-prefecture-gap",
       "lane": "must-fix",
-      "status": "pending",
+      "status": "done",
       "priority": 6,
       "combinedScore": 0.397,
       "gsc": {
@@ -222,8 +222,8 @@
           "blocker: 記事内関連セクション — ページ側コンポーネントが正典 (記事から削除)"
         ]
       },
-      "wave_id": null,
-      "remediated_at": null,
+      "wave_id": "2026-06-10-manual",
+      "remediated_at": "2026-06-10",
       "in_progress_at": null,
       "last_brushup": null
     },
