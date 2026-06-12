@@ -155,8 +155,13 @@ North Star Metric を **週次収益 (AdSense 確定額 + アフィ発生額)** 
 
 ### P2: トラフィック成長 (W30-W40)
 
+> ランキングページ側の実行計画は従属計画 [`ranking-page-quality-plan.md`](./ranking-page-quality-plan.md) に詳細化済 (2026-06-12)。
+> 層別 Wave 方式 (Tier A 15 件パイロット → 対照群比 +20% lift 実証 → Tier B/C 量産)。
+> パイロット Wave R1 のみ P1 期間中 (W25-W26) に先行着手を許可する (計測 4 週の先行確保・広告施策と独立のため)。
+
 | 施策 | 内容 | 担当 | 期日 | 検証方法 |
 |---|---|---|---|---|
+| ranking 品質向上 | `ranking-page-quality-plan.md` の Wave R1→R3 (構造解釈新設 + seoTitle CTR 改修 + AICONTENT-02 再建) | Sonnet/Opus | W26 パイロット / W30 判定 | 対照群比 clicks lift (GSC page filter `/ranking/`) |
 | blog 量産 | B/D archetype 週 2-3 本 (執筆 + blog-critic) | Sonnet | 継続 | GSC clicks 増を週次計測 |
 | BLOG-WAVE brushup 継続 | effect 確定を踏まえた是正 | Sonnet | 継続 | measure-gsc-impact.mjs |
 | 高単価アフィ特化記事 | 転職×都道府県年収、引越し×地域 | Sonnet | W36 | アフィ発生額を実測 |
@@ -256,4 +261,5 @@ North Star Metric を **週次収益 (AdSense 確定額 + アフィ発生額)** 
 | 日付 | 改訂者 | 内容 |
 |---|---|---|
 | 2026-06-12 | Fable | 初版作成。100x-pv-strategy.md を収益化観点で supersede |
+| 2026-06-12 | Fable | P2 従属計画 `ranking-page-quality-plan.md` を登録 (層別 Wave 方式・R1 パイロットの P1 期間中先行を許可) |
 | 2026-06-W25 (予定) | Fable | GA4 真値確定後、PV 系目標値を固定 |
