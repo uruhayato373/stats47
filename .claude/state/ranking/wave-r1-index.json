@@ -1,0 +1,82 @@
+{
+  "waveId": "RANK-WAVE-2026-06-12",
+  "title": "Tier A ランキングページ品質向上パイロット",
+  "period": {"start": "2026-W25", "measureAt": "2026-W30"},
+  "status": "preparing",
+  "gateCondition": "改修群 clicks が対照群比 +20% 以上 → Wave R2 (Tier B 78件) 実施",
+
+  "treatmentGroup": {
+    "description": "Tier A 15件 (imp≥200 & pos 4-15) — seoTitle改修 + structuralInterpretation追加",
+    "pages": [
+      {"key": "public-phone-count",           "imp": 1323, "ctr": 0.0295, "pos": 4.68,  "seoTitle": "updated", "structInterpretation": "draft"},
+      {"key": "fresh-udon-soba-consumption-quantity", "imp": 924, "ctr": 0.0325, "pos": 8.17,  "seoTitle": "existing-ok", "structInterpretation": "draft"},
+      {"key": "mayonnaise-consumption-expenditure",   "imp": 903, "ctr": 0.0465, "pos": 6.75,  "seoTitle": "existing-ok", "structInterpretation": "draft"},
+      {"key": "dairy-cattle-count",           "imp": 831, "ctr": 0.0012, "pos": 10.32, "seoTitle": "updated", "structInterpretation": "draft"},
+      {"key": "natto-consumption-expenditure","imp": 789, "ctr": 0.0266, "pos": 8.69,  "seoTitle": "updated", "structInterpretation": "draft"},
+      {"key": "chicken-consumption-quantity", "imp": 454, "ctr": 0.0352, "pos": 8.43,  "seoTitle": "pending", "structInterpretation": "pending"},
+      {"key": "beef-consumption-quantity",    "imp": 419, "ctr": 0.0215, "pos": 7.17,  "seoTitle": "updated", "structInterpretation": "pending"},
+      {"key": "elementary-school-children-count","imp": 288, "ctr": 0.0417, "pos": 8.62, "seoTitle": "existing-ok", "structInterpretation": "pending"},
+      {"key": "general-hospital-bed-occupancy-rate","imp": 272, "ctr": 0.0478, "pos": 4.41, "seoTitle": "existing-ok", "structInterpretation": "pending"},
+      {"key": "retail-establishments-by-prefecture","imp": 255, "ctr": 0.0039, "pos": 8.44, "seoTitle": "updated", "structInterpretation": "pending"},
+      {"key": "konbu-consumption-quantity",   "imp": 251, "ctr": 0.0359, "pos": 7.75,  "seoTitle": "updated", "structInterpretation": "pending"},
+      {"key": "pasta-consumption-quantity",   "imp": 240, "ctr": 0.0333, "pos": 6.47,  "seoTitle": "pending", "structInterpretation": "pending"},
+      {"key": "sushi-dining-consumption-expenditure","imp": 235, "ctr": 0.0298, "pos": 7.96, "seoTitle": "updated", "structInterpretation": "pending"},
+      {"key": "school-teacher-annual-income", "imp": 227, "ctr": 0.0176, "pos": 7.46,  "seoTitle": "updated", "structInterpretation": "pending"},
+      {"key": "potato-consumption-quantity",  "imp": 212, "ctr": 0.0189, "pos": 6.19,  "seoTitle": "existing-ok", "structInterpretation": "pending"}
+    ]
+  },
+
+  "controlGroup": {
+    "description": "Tier B 15件 — 改修なし (対照群・clicks/CTR/pos を同期間計測)",
+    "pages": [
+      {"key": "paved-road-total-length",                              "imp": 199, "ctr": 0.0201, "pos": 7.21},
+      {"key": "green-tea-consumption-quantity",                       "imp": 193, "ctr": 0.0622, "pos": 6.78},
+      {"key": "total-fertility-rate",                                 "imp": 186, "ctr": 0.0054, "pos": 11.02},
+      {"key": "convenience-store-count-commercial",                   "imp": 181, "ctr": 0.0276, "pos": 8.30},
+      {"key": "squid-consumption-quantity",                           "imp": 174, "ctr": 0.0172, "pos": 7.80},
+      {"key": "residential-building-construction-cost",               "imp": 170, "ctr": 0.0000, "pos": 9.69},
+      {"key": "cabbage-consumption-expenditure",                      "imp": 159, "ctr": 0.0126, "pos": 8.79},
+      {"key": "treatment-rate-mental-disorder-inpatient",             "imp": 156, "ctr": 0.0064, "pos": 7.53},
+      {"key": "avg-salary-police-prefecture",                         "imp": 152, "ctr": 0.0197, "pos": 12.08},
+      {"key": "abortion-rate",                                        "imp": 149, "ctr": 0.0403, "pos": 8.38},
+      {"key": "soba-udon-dining-consumption-expenditure",             "imp": 146, "ctr": 0.0137, "pos": 6.82},
+      {"key": "consumption-expenditure-multi-person-households-per-month","imp": 146, "ctr": 0.0205, "pos": 7.94},
+      {"key": "avg-salary-education-prefecture",                      "imp": 141, "ctr": 0.0000, "pos": 5.23},
+      {"key": "miso-consumption-quantity",                            "imp": 135, "ctr": 0.0296, "pos": 7.16},
+      {"key": "marine-fishery-aquaculture-output-value",              "imp": 133, "ctr": 0.0075, "pos": 9.58}
+    ]
+  },
+
+  "completedActions": {
+    "seoTitleUpdated": [
+      "public-phone-count",
+      "dairy-cattle-count",
+      "natto-consumption-expenditure",
+      "beef-consumption-quantity",
+      "retail-establishments-by-prefecture",
+      "konbu-consumption-quantity",
+      "sushi-dining-consumption-expenditure",
+      "school-teacher-annual-income"
+    ],
+    "structInterpretationDrafted": [
+      "public-phone-count",
+      "fresh-udon-soba-consumption-quantity",
+      "mayonnaise-consumption-expenditure",
+      "dairy-cattle-count",
+      "natto-consumption-expenditure"
+    ]
+  },
+
+  "nextActions": [
+    "Opus: AICONTENT-02 パイプライン実装 (.claude/scripts/ranking/) — factual gate + critic → R2 push",
+    "Sonnet: remaining 10件の structuralInterpretation ドラフト生成",
+    "W25 デプロイ後4週計測 → W30 GSC before/after 比較"
+  ],
+
+  "measurement": {
+    "method": "GSC pages フィルタ /ranking/ + 対象キー",
+    "metrics": ["clicks/週", "CTR", "avg position"],
+    "baseline": "2026-W23スナップショット",
+    "judgeAt": "2026-W30"
+  }
+}
