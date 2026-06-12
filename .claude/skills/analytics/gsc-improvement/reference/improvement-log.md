@@ -71,6 +71,27 @@ GSC（Google Search Console）の継続的追跡と改善施策の記録。
 
 ## Action Log
 
+### [RANK-LINK-01] サイト横断内部リンク監査 + theme→410 リンク修正
+
+- **デプロイ日**: 2026-06-12 / ブランチ: `claude/dazzling-knuth-23fd05`
+- **監査結果 (実測 2026-06-12、/tmp/audit-rank-links.mjs で R2 公開 URL + git TS を横断)**:
+  - KNOWN_RANKING_KEYS 2,121 件のうち R2 `app/category/{key}/items.json` 未掲載 **137 件**
+    (内訳: economy 26 / laborwage 25 / commercial 15 / population 13 / socialsecurity 12 /
+    administrativefinancial 12 / tourism 10 / 他 8 カテゴリ 24。全リスト: 監査スクリプト再実行で再現可)
+  - category+theme+blog どの導線からもリンクされない true orphan **120 件** (137 件の部分集合)
+  - theme 定数 → 410 ページへのリンク **3 件** (dwelling-per-floor-area / prefectural-income-per-capita / per-capita-prefectural-income-h27)
+  - blog source-link 14 キーは全件 KNOWN (問題なし)
+- **実施 (コード)**:
+  - `per-capita-prefectural-income-h27`: isActive true 化 + GONE_RANKING_KEYS から除去 + KNOWN 再生成で追加
+    (R2 item.json/values.json/stats values すべて 200 を curl で確認済 → 410→200 化)
+  - `local-economy` テーマ: `prefectural-income-per-capita` → `per-capita-prefectural-income-h27` に差替
+  - `living-housing` テーマ: `dwelling-per-floor-area` (inactive・観測値なし) → `housing-floor-area` (KNOWN・active) に差替
+  - `prefectural-income-per-capita`: 観測値未投入の placeholder (source.kind=external/unknown, values.json 404) のため isActive false 化。410 は意図どおり
+  - `population-migration-inter-prefecture`: entities=migration-flow のペア観測 metric でランキングページ非対象。コード内に /ranking/ リンクなし → 410 のまま正常 (修正不要と判定)
+- **検証コマンド**: `npm run validate:config --workspace=@stats47/data-configs` (error 0) / `npx tsc --noEmit -p apps/web/tsconfig.json` (pass) / vitest url-policy + all-themes (19 pass) / `node /tmp/audit-rank-links.mjs` 再実行で theme not-KNOWN 0 件
+- **残タスク**: (1) ユーザーが GitHub Actions `sync-snapshots.yml` を only=master で手動実行 → category items.json 137 件 gap 解消 (orphan 120 件が category 導線獲得) (2) デプロイ後 `curl -A Googlebot https://stats47.jp/ranking/per-capita-prefectural-income-h27` で 200 実測
+- **判定**: effect/pending [検証期日 2026-07-12: GSC W27 snapshot で zero-imp ranking 件数 (W23 基準 ~1,285) の減少を比較。category 導線追加 137 件 + theme 導線 2 件が対象]
+
 ### [URL-INSP-2026-05-16] URL Inspection 日次測定（--limit 10 実行）
 - **実行日**: 2026-05-16
 - **実行コマンド**: `node .claude/scripts/gsc/url-inspection-daily.cjs --limit 10`
