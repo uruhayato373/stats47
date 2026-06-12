@@ -9,7 +9,7 @@ export const LOCAL_ECONOMY_SET: IndicatorSet = {
   usage: "theme",
   metrics: [
     { rankingKey: "per-taxpayer-taxable-income", shortLabel: "課税所得", role: "primary" },
-    { rankingKey: "prefectural-income-per-capita", shortLabel: "1人当たり県民所得", role: "secondary" },
+    { rankingKey: "per-capita-prefectural-income-h27", shortLabel: "1人当たり県民所得", role: "secondary" },
     { rankingKey: "minimum-wage-by-region", shortLabel: "最低賃金", role: "secondary" },
     { rankingKey: "active-job-opening-ratio", shortLabel: "有効求人倍率", role: "secondary" },
     { rankingKey: "unemployment-rate", shortLabel: "失業率", role: "secondary" },
