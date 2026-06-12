@@ -13,16 +13,16 @@
       {"key": "mayonnaise-consumption-expenditure",   "imp": 903, "ctr": 0.0465, "pos": 6.75,  "seoTitle": "existing-ok", "structInterpretation": "draft"},
       {"key": "dairy-cattle-count",           "imp": 831, "ctr": 0.0012, "pos": 10.32, "seoTitle": "updated", "structInterpretation": "draft"},
       {"key": "natto-consumption-expenditure","imp": 789, "ctr": 0.0266, "pos": 8.69,  "seoTitle": "updated", "structInterpretation": "draft"},
-      {"key": "chicken-consumption-quantity", "imp": 454, "ctr": 0.0352, "pos": 8.43,  "seoTitle": "pending", "structInterpretation": "pending"},
-      {"key": "beef-consumption-quantity",    "imp": 419, "ctr": 0.0215, "pos": 7.17,  "seoTitle": "updated", "structInterpretation": "pending"},
-      {"key": "elementary-school-children-count","imp": 288, "ctr": 0.0417, "pos": 8.62, "seoTitle": "existing-ok", "structInterpretation": "pending"},
-      {"key": "general-hospital-bed-occupancy-rate","imp": 272, "ctr": 0.0478, "pos": 4.41, "seoTitle": "existing-ok", "structInterpretation": "pending"},
-      {"key": "retail-establishments-by-prefecture","imp": 255, "ctr": 0.0039, "pos": 8.44, "seoTitle": "updated", "structInterpretation": "pending"},
-      {"key": "konbu-consumption-quantity",   "imp": 251, "ctr": 0.0359, "pos": 7.75,  "seoTitle": "updated", "structInterpretation": "pending"},
-      {"key": "pasta-consumption-quantity",   "imp": 240, "ctr": 0.0333, "pos": 6.47,  "seoTitle": "pending", "structInterpretation": "pending"},
-      {"key": "sushi-dining-consumption-expenditure","imp": 235, "ctr": 0.0298, "pos": 7.96, "seoTitle": "updated", "structInterpretation": "pending"},
-      {"key": "school-teacher-annual-income", "imp": 227, "ctr": 0.0176, "pos": 7.46,  "seoTitle": "updated", "structInterpretation": "pending"},
-      {"key": "potato-consumption-quantity",  "imp": 212, "ctr": 0.0189, "pos": 6.19,  "seoTitle": "existing-ok", "structInterpretation": "pending"}
+      {"key": "chicken-consumption-quantity", "imp": 454, "ctr": 0.0352, "pos": 8.43,  "seoTitle": "updated", "structInterpretation": "draft"},
+      {"key": "beef-consumption-quantity",    "imp": 419, "ctr": 0.0215, "pos": 7.17,  "seoTitle": "updated", "structInterpretation": "draft"},
+      {"key": "elementary-school-children-count","imp": 288, "ctr": 0.0417, "pos": 8.62, "seoTitle": "existing-ok", "structInterpretation": "draft"},
+      {"key": "general-hospital-bed-occupancy-rate","imp": 272, "ctr": 0.0478, "pos": 4.41, "seoTitle": "existing-ok", "structInterpretation": "draft"},
+      {"key": "retail-establishments-by-prefecture","imp": 255, "ctr": 0.0039, "pos": 8.44, "seoTitle": "updated", "structInterpretation": "draft"},
+      {"key": "konbu-consumption-quantity",   "imp": 251, "ctr": 0.0359, "pos": 7.75,  "seoTitle": "updated", "structInterpretation": "draft"},
+      {"key": "pasta-consumption-quantity",   "imp": 240, "ctr": 0.0333, "pos": 6.47,  "seoTitle": "updated", "structInterpretation": "draft"},
+      {"key": "sushi-dining-consumption-expenditure","imp": 235, "ctr": 0.0298, "pos": 7.96, "seoTitle": "updated", "structInterpretation": "draft"},
+      {"key": "school-teacher-annual-income", "imp": 227, "ctr": 0.0176, "pos": 7.46,  "seoTitle": "updated", "structInterpretation": "draft"},
+      {"key": "potato-consumption-quantity",  "imp": 212, "ctr": 0.0189, "pos": 6.19,  "seoTitle": "existing-ok", "structInterpretation": "draft"}
     ]
   },
 
@@ -56,20 +56,33 @@
       "retail-establishments-by-prefecture",
       "konbu-consumption-quantity",
       "sushi-dining-consumption-expenditure",
-      "school-teacher-annual-income"
+      "school-teacher-annual-income",
+      "chicken-consumption-quantity",
+      "pasta-consumption-quantity"
     ],
     "structInterpretationDrafted": [
       "public-phone-count",
       "fresh-udon-soba-consumption-quantity",
       "mayonnaise-consumption-expenditure",
       "dairy-cattle-count",
-      "natto-consumption-expenditure"
-    ]
+      "natto-consumption-expenditure",
+      "chicken-consumption-quantity",
+      "beef-consumption-quantity",
+      "elementary-school-children-count",
+      "general-hospital-bed-occupancy-rate",
+      "retail-establishments-by-prefecture",
+      "konbu-consumption-quantity",
+      "pasta-consumption-quantity",
+      "sushi-dining-consumption-expenditure",
+      "school-teacher-annual-income",
+      "potato-consumption-quantity"
+    ],
   },
 
   "nextActions": [
+    "USER MANUAL: GitHub Actions → sync-snapshots.yml → Run workflow (only=master) — 138件カテゴリ内部リンク gap 修正",
     "Opus: AICONTENT-02 パイプライン実装 (.claude/scripts/ranking/) — factual gate + critic → R2 push",
-    "Sonnet: remaining 10件の structuralInterpretation ドラフト生成",
+    "Sonnet: chicken/pasta の seoTitle 更新 (2件残り)",
     "W25 デプロイ後4週計測 → W30 GSC before/after 比較"
   ],
 
