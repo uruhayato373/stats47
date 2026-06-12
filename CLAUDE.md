@@ -84,6 +84,7 @@ CLAUDE.md 内に詳細を複製しない。状況に応じて参照する。
 | docs 全体構成・運用ルール | `docs/INDEX.md` |
 | プロジェクト概要・要件 | `docs/00_プロジェクト管理/01_プロジェクト定義.md` |
 | 実装ロードマップ | `docs/02_実装計画/01_実装ロードマップ.md` |
+| **収益化マスタープラン (収益化・チャネル・広告配置の SSOT)** ★収益関連の判断時必読 | `docs/02_実装計画/monetization-master-plan.md` (100x-pv-strategy は参考資料に降格) |
 | SEO 向上 × TODO 一元化 × 自動化拡張プラン (W21-W26) | `docs/02_実装計画/seo-todo-unify-phase-1-3.md` |
 | 白書チャート逆引き inventory (11 白書 → area/theme 素材リスト) | `docs/02_実装計画/whitepaper-chart-inventory/README.md` |
 | area プロフィール チャート構成設計 (17 テーマ) | `docs/02_実装計画/area-charts-planning/README.md` |
