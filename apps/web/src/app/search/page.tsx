@@ -24,7 +24,8 @@ function buildResultsSummary(
   return `「${query}」の検索結果 ${resultsCount} 件`;
 }
 
-// 検索インデックスはビルド時に static JSON として bundle 済み（D1 read なし）。
+// 検索インデックスは public 静的アセット (/search-index.json) を runtime fetch する
+// (Worker バンドルに焼き込まない / isolate 単位でキャッシュ。search-server.ts 参照)。
 // searchParams が異なれば Next.js が per-request render に切替えるので force-dynamic は不要。
 
 const searchTitle = "検索 | stats47";
@@ -60,17 +61,18 @@ export default async function SearchPage({ searchParams }: PageProps) {
     ? tags.split(",").filter(Boolean)
     : undefined;
 
-  const initialResults = q
-    ? searchDocumentsServer(q, {
-        type: parsedType,
-        category: parsedType !== "blog" ? category : undefined,
-        tags: parsedType === "blog" ? parsedTags : undefined,
-        year: parsedType === "blog" ? year : undefined,
-        month: parsedType === "blog" ? month : undefined,
-      }).results
-    : [];
-
-  const filterMeta = getSearchIndexMeta();
+  const [initialResults, filterMeta] = await Promise.all([
+    q
+      ? searchDocumentsServer(q, {
+          type: parsedType,
+          category: parsedType !== "blog" ? category : undefined,
+          tags: parsedType === "blog" ? parsedTags : undefined,
+          year: parsedType === "blog" ? year : undefined,
+          month: parsedType === "blog" ? month : undefined,
+        }).then((r) => r.results)
+      : Promise.resolve([]),
+    getSearchIndexMeta(),
+  ]);
 
   return (
     <PageShell>
