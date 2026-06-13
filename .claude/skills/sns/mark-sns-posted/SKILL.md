@@ -9,7 +9,7 @@ co_agents: [instagram-strategist, x-strategist]
 手動投稿後に `sns-posts-store.cjs` 経由で `.claude/state/sns/posts.json` に記録し、メディアファイルを削除する。
 記録と同時に `.claude/state/sns/post-log.md` が自動再生成される（視覚確認用）。
 
-> **SQLite / D1 は使わない。** SSOT は `posts.json` のみ (完全DBレス doc19)。
+> **SQLite / D1 は使わない。** SSOT は `posts.json` のみ (完全DBレス doc12)。
 
 ## 引数
 

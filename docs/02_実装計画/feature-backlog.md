@@ -101,7 +101,7 @@ Phase 1/2 後の最終フェーズ（外部契約・noindex ページ）:
   2. `.claude/scripts/triage/close-stale-alerts.mjs` — 対象ラベル `{psi-snapshot,cost-snapshot,youtube-experiment},auto-generated`、open かつ updated_at 14 日以上前。**例外: 同種 alert が直近 3 日以内に立っていれば「閾値継続中」と判断し close せずコメント引き継ぎ**
   3. 月初サマリを `[Auto Alert Triage] YYYY-MM` Issue に記録
 - **工数**: S（30min-1h、gh API のみ）。**dry-run で先に動作確認**（誤 close リスク）
-- **関連**: `docs/01_技術設計/10_自動化インベントリ.md`
+- **関連**: `docs/01_技術設計/06_自動化インベントリ.md`
 
 ---
 

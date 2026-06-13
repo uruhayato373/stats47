@@ -25,7 +25,7 @@
 - **Agent prompt 冒頭に Output Format を必ず指定** → `.claude/rules/agent-output-contract.md`
 - **一時ファイルは `/tmp/`**: プロジェクトルートに作らない (pre-commit が `tmp_*` 等を自動削除)
 - **計画・レビュー・改善ログは `docs/` 配下**: 週次計画・レビュー・批判的レビュー・pre-mortem・改善バックログ・コンテンツバックログはすべて `docs/03_週次運用/` `docs/04_レビュー/` `docs/02_実装計画/improvement-backlog.md` `docs/02_実装計画/feature-backlog.md` 等に置く。Issues は (a) `enhancement`/`bug` ラベルの PR で close される機能改修、(b) `auto-generated` ラベルの日次アラート (PSI/Cloudflare) のみ → `.claude/rules/docs-vs-issues.md`
-- **完全 DB レスが正典** → `docs/01_技術設計/19_完全DBレス設計.md`（doc 18 ハイブリッドは 2026-05-29 同日に superseded）。永続/常駐 D1 を SSOT に持たない。SSOT は **git TS** と **R2** の二つだけ。本番アプリは R2 snapshot のみ読む:
+- **完全 DB レスが正典** → `docs/01_技術設計/12_完全DBレス設計.md`（doc 18 ハイブリッドは 2026-05-29 同日に superseded）。永続/常駐 D1 を SSOT に持たない。SSOT は **git TS** と **R2** の二つだけ。本番アプリは R2 snapshot のみ読む:
   - **Authored / 設定** (低volume・人手・型/review: テーマのチャート定義等) → **git TS が SSOT** → 生成スクリプトで R2 反映
   - **Authored / 運用** (page_components / theme_metrics / sns_posts / affiliate_ads / categories/themes) → **git TS 定義が SSOT** → 生成スクリプトで R2 JSON（横断整合性はビルド時に検証）。手編集 JSON を SSOT にしない
   - **Reference** (metrics=TS / articles=article.md / estat_catalog=e-Stat API / prefectures=JSON) → **再生成**
@@ -70,7 +70,7 @@ CLAUDE.md 内に詳細を複製しない。状況に応じて参照する。
 | `estat-api.md` | e-Stat API 利用スキル |
 | `metric-config-standards.md` | metric config 作成・編集 (category 17 軸 / title・subtitle・note・description の役割 / validate:config) |
 | `branch-workflow.md` | PR・デプロイ作業・DB データ反映 |
-| `data-storage.md` | スキル設計時 (git TS / R2 vs `.claude/` vs `docs/` 判定。正典は `docs/01_技術設計/19_完全DBレス設計.md`) |
+| `data-storage.md` | スキル設計時 (git TS / R2 vs `.claude/` vs `docs/` 判定。正典は `docs/01_技術設計/12_完全DBレス設計.md`) |
 | `docs-vs-issues.md` | docs/ と GitHub Issues の使い分け (新規スキル・新規記録時必読) |
 | `skill-code-placement.md` | スクリプト新規作成 |
 | `local-environment.md` | 環境セットアップ・モノレポ構成・頻用コマンド |
@@ -89,16 +89,16 @@ CLAUDE.md 内に詳細を複製しない。状況に応じて参照する。
 | 白書チャート逆引き inventory (11 白書 → area/theme 素材リスト) | `docs/02_実装計画/whitepaper-chart-inventory/README.md` |
 | area プロフィール チャート構成設計 (17 テーマ) | `docs/02_実装計画/area-charts-planning/README.md` |
 | 改善バックログ (TODO 真実源) | `docs/02_実装計画/improvement-backlog.md` ★施策追加時必読 |
-| システム構成・技術スタック・モノレポ構造 | `docs/01_技術設計/02_システムアーキテクチャ.md` |
-| **データ層アーキテクチャ (完全DBレス・正典)** ★データ保存先判定時必読 | `docs/01_技術設計/19_完全DBレス設計.md` (doc 18 ハイブリッドは superseded) |
-| DDD ドメイン分類 | `docs/01_技術設計/04_DDDドメイン分類.md` |
-| エラーハンドリング規約 | `docs/01_技術設計/05_エラーハンドリング規約.md` |
-| 自動化インベントリ ★追加・削除時は必ず更新 | `docs/01_技術設計/10_自動化インベントリ.md` |
-| URL 構造・301 マッピング・canonical 戦略 ★新規ページ作成時必読 | `docs/01_技術設計/15_URL構造.md` |
-| **情報設計 (ページ責務・3タクソノミー・ファネル役割)** ★page_components配置/分類軸追加/ページKPI判定時必読 | `docs/01_技術設計/11_情報設計.md` |
-| 統一レイアウト (横幅/レール/フラット/フォント/ナビ) ★UI実装時必読 | `docs/01_技術設計/21_統一レイアウト設計.md` |
-| 国土数値情報 GIS データ | `docs/01_技術設計/08_国土数値情報GISデータ.md` |
-| 国土交通データプラットフォーム | `docs/01_技術設計/09_国土交通データプラットフォーム.md` |
+| システム構成・技術スタック・モノレポ構造 | `docs/01_技術設計/01_システムアーキテクチャ.md` |
+| **データ層アーキテクチャ (完全DBレス・正典)** ★データ保存先判定時必読 | `docs/01_技術設計/12_完全DBレス設計.md` (doc 18 ハイブリッドは superseded) |
+| DDD ドメイン分類 | `docs/01_技術設計/02_DDDドメイン分類.md` |
+| エラーハンドリング規約 | `docs/01_技術設計/03_エラーハンドリング規約.md` |
+| 自動化インベントリ ★追加・削除時は必ず更新 | `docs/01_技術設計/06_自動化インベントリ.md` |
+| URL 構造・301 マッピング・canonical 戦略 ★新規ページ作成時必読 | `docs/01_技術設計/11_URL構造.md` |
+| **情報設計 (ページ責務・3タクソノミー・ファネル役割)** ★page_components配置/分類軸追加/ページKPI判定時必読 | `docs/01_技術設計/07_情報設計.md` |
+| 統一レイアウト (横幅/レール/フラット/フォント/ナビ) ★UI実装時必読 | `docs/01_技術設計/13_統一レイアウト設計.md` |
+| 国土数値情報 GIS データ | `docs/01_技術設計/04_国土数値情報GISデータ.md` |
+| 国土交通データプラットフォーム | `docs/01_技術設計/05_国土交通データプラットフォーム.md` |
 | Pre-commit フック | `.husky/README.md` |
 | CI/CD・デプロイ | `.github/workflows/README.md` |
 | テスト構成・追加指針 | `apps/web/tests/README.md` |

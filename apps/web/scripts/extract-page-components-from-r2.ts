@@ -2,7 +2,7 @@
  * 【一回限り】現行 cloud R2 の page_components / ranking page-cards を reverse-extract し、
  * git TS SSOT (apps/web/scripts/data/page-components/) に verbatim 保存する。
  *
- * 完全DBレス (doc19) Phase E: 永続 D1 が消えて cloud R2 が唯一コピーになった page_components を
+ * 完全DBレス (doc12) Phase E: 永続 D1 が消えて cloud R2 が唯一コピーになった page_components を
  * git に取り込み、以後 git を SSOT にする。R2 list 不可のため key は git TS から列挙し公開URLで probe。
  * 配信 JSON を文字列のまま保存するため、generator が書き戻せば byte 完全一致する。
  *

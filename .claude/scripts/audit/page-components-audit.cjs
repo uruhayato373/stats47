@@ -2,7 +2,7 @@
 /**
  * page_components の pageType 別配置を棚卸しし、area / theme 責務分離違反を検出する。
  *
- * 判定基準: docs/01_技術設計/11_情報設計.md
+ * 判定基準: docs/01_技術設計/07_情報設計.md
  *
  * 出力: docs/04_レビュー/area-theme-audit/YYYY-MM-DD.md
  *
@@ -144,7 +144,7 @@ lines.push("---");
 lines.push("");
 lines.push(`# area / theme 責務分離 棚卸し (${today})`);
 lines.push("");
-lines.push("判定基準: [`docs/01_技術設計/11_情報設計.md`](../../01_技術設計/11_情報設計.md)");
+lines.push("判定基準: [`docs/01_技術設計/07_情報設計.md`](../../01_技術設計/07_情報設計.md)");
 lines.push("");
 lines.push("## サマリ");
 lines.push("");

@@ -15,7 +15,7 @@ tags: [whitepaper, chart-inventory, planning]
 - `/root/.claude/plans/47-swirling-wreath.md` — Phase A-E 全体計画
 - `docs/02_実装計画/theme-charts-planning/README.md` — theme 側の既存チャート設計 (17 ファイル drafted)
 - `docs/02_実装計画/area-charts-planning/README.md` — area 側のチャート設計 (本 inventory の出力を Phase D で振り分け)
-- `docs/01_技術設計/11_情報設計.md` — area / theme の責務判定基準
+- `docs/01_技術設計/07_情報設計.md` — area / theme の責務判定基準
 
 ## 進捗表
 

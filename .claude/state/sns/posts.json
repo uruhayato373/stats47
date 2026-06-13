@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "description": "SNS 投稿台帳 (完全DBレス doc19 Phase E)。SQLite から移行。書込専用運用ログ。store: .claude/scripts/lib/sns-posts-store.cjs",
+    "description": "SNS 投稿台帳 (完全DBレス doc12 Phase E)。SQLite から移行。書込専用運用ログ。store: .claude/scripts/lib/sns-posts-store.cjs",
     "count": 389,
     "nextId": 575
   },

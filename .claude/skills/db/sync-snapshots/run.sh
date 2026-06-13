@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# sync-snapshots: git TS / R2 観測値から R2 snapshot を順次 export する (完全DBレス doc19)
+# sync-snapshots: git TS / R2 観測値から R2 snapshot を順次 export する (完全DBレス doc12)
 # 各 export は git TS (data/page-components, affiliate-ads-data 等) / article.md / R2 観測値を入力に
 # .local/r2/app/ へ snapshot を生成し、末尾で diff-push-r2 が R2 に push する。永続 D1 は読まない。
 

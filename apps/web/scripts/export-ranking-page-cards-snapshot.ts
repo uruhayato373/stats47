@@ -1,5 +1,5 @@
 /**
- * ranking page cards を git TS SSOT から R2 snapshot 化する (完全DBレス → docs/01_技術設計/19_完全DBレス設計.md)。
+ * ranking page cards を git TS SSOT から R2 snapshot 化する (完全DBレス → docs/01_技術設計/12_完全DBレス設計.md)。
  *
  * SSOT は `apps/web/scripts/data/page-components/ranking-page-cards/<rankingKey>.json`
  * (git tracked、cloud R2 から reverse-extract)。永続 D1 は読まない。verbatim 書き戻しで配信 byte 一致。

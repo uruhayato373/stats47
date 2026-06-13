@@ -1,5 +1,5 @@
 /**
- * affiliate_ads を git TS SSOT から R2 snapshot 化する (完全DBレス → docs/01_技術設計/19_完全DBレス設計.md)。
+ * affiliate_ads を git TS SSOT から R2 snapshot 化する (完全DBレス → docs/01_技術設計/12_完全DBレス設計.md)。
  *
  * SSOT は `apps/web/scripts/affiliate-ads-data.ts` の AFFILIATE_ADS (git TS)。永続 D1 は読まない。
  * 手動 A8.net バナー登録は affiliate-ads-data.ts を直接編集する。

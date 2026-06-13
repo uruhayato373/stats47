@@ -1,5 +1,5 @@
 /**
- * Blog snapshot exporter (完全DBレス: docs/01_技術設計/19_完全DBレス設計.md)
+ * Blog snapshot exporter (完全DBレス: docs/01_技術設計/12_完全DBレス設計.md)
  *
  * 記事メタの SSOT は R2 `app/blog/<slug>/article.{md,mdx}` の YAML frontmatter。
  * D1 articles テーブルは廃止したため、frontmatter を直接読んで `app/blog/all.json` を生成する。

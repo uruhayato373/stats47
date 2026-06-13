@@ -13,7 +13,7 @@ import { metrics } from "./metrics";
 /**
  * themes — テーマダッシュボード (/themes/[themeKey]) の構成定義
  *
- * ⚠️ 完全DBレス (doc 19): **SSOT は git TS `packages/types/src/indicator-sets/*.ts`**。
+ * ⚠️ 完全DBレス (doc 12): **SSOT は git TS `packages/types/src/indicator-sets/*.ts`**。
  * web app は `ALL_THEMES` (indicator-sets → toThemeConfig) を直読し、R2/DB を fetch しない。
  * この schema 定義と R2 `app/themes/[key]/config.json` は vestigial (どの live reader も使わない)。
  * schema は型ソース / テスト用に残置 (永続 D1 なし)。

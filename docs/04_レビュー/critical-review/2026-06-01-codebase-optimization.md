@@ -4,7 +4,7 @@ topic: codebase-optimization
 date: 2026-06-01
 status: active
 related_docs:
-  - docs/01_技術設計/19_完全DBレス設計.md
+  - docs/01_技術設計/12_完全DBレス設計.md
   - .claude/rules/estat-api.md
   - .claude/rules/r2-storage-design.md
   - .claude/rules/ui-components.md

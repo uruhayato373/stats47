@@ -54,7 +54,7 @@ const DEFAULT_ACCENTS = [
  * previewImageUrl / previewVideoUrl 未指定なら 80px グラデアクセント (LCP 影響なし)、
  * 指定時は 16:9 のプレビュー画像/動画を表示 (lazy load + motion-reduce 対応)。
  *
- * 画像/動画の生成: docs/01_技術設計/12_homepage-previews.md
+ * 画像/動画の生成: docs/01_技術設計/08_homepage-previews.md
  */
 export function NextUpGrid({
   title = "次に読む",

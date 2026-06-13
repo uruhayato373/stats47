@@ -69,7 +69,7 @@ interface HeaderClientProps {
  * PC: ロゴ + ナビ（ランキング / ブログ + テーマ メガメニュー）+ 検索 + テーマ切替。
  * モバイル（lg 未満）: メニューボタンでドロワー（MobileNavDrawer）を開く。
  *
- * 設計仕様: docs/01_技術設計/21_統一レイアウト設計.md
+ * 設計仕様: docs/01_技術設計/13_統一レイアウト設計.md
  */
 export function HeaderClient({ themes }: HeaderClientProps) {
   const { toggleTheme } = useTheme();

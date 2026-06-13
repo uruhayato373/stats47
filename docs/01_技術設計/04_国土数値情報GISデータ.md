@@ -24,7 +24,7 @@ npx tsx packages/gis/src/mlit-ksj/scripts/list-datasets.ts --category=transport
 # RANKINGS を D1 に seed (Phase 2 で hardcode から移管)
 npx tsx packages/gis/src/mlit-ksj/scripts/seed-from-registry.ts
 
-# docs/01_技術設計/08_...md の自動セクションを再生成
+# docs/01_技術設計/04_...md の自動セクションを再生成
 npx tsx packages/gis/src/mlit-ksj/scripts/generate-docs.ts
 
 # 単一データセット取得（全国）
@@ -313,7 +313,7 @@ packages/gis/src/mlit-ksj/
     ├── run-pipeline.ts          # パイプライン CLI エントリポイント (D1 status='registered' 必須)
     ├── list-datasets.ts         # gis_datasets テーブル一覧 CLI (status 集計付き)
     ├── seed-from-registry.ts    # RANKINGS を D1 (is_ranking_target/ranking_config) に seed
-    ├── generate-docs.ts         # docs/01_技術設計/08_...md の自動セクションを D1 から生成
+    ├── generate-docs.ts         # docs/01_技術設計/04_...md の自動セクションを D1 から生成
     └── register-ksj-rankings.ts # is_ranking_target=1 から metrics/stats を生成
 ```
 

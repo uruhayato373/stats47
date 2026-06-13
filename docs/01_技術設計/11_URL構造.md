@@ -138,7 +138,7 @@ middleware.ts (`apps/web/src/middleware.ts`) の `tryLegacyRedirect` 関数と e
 ## 関連
 
 - 親方針: `~/.claude/plans/ok-validated-stroustrup.md` (2026-05-28 URL 構造整理 Plan)
-- 3 タクソノミー役割分担: `docs/01_技術設計/11_情報設計.md`
+- 3 タクソノミー役割分担: `docs/01_技術設計/07_情報設計.md`
 - middleware 実装: `apps/web/src/middleware.ts`
 - SSG 保全ルール: `.claude/rules/nextjs-ssg-preservation.md`
 - インデックス制御: `.claude/rules/coding-standards.md` 「新規ページ作成時のインデックス制御チェックリスト」

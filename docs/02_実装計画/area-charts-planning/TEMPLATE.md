@@ -68,7 +68,7 @@ primary metric の **県固有 line** (例: 「{県名} の {指標名} の年�
 - [ ] 「全国の主題横断時系列」を含んでいないか？ (含んでいるなら theme へ)
 - [ ] 「全国平均と単県の対比」だけのチャートを含んでいないか？ (含んでいるなら ranking へ)
 
-判定基準: `docs/01_技術設計/11_情報設計.md`
+判定基準: `docs/01_技術設計/07_情報設計.md`
 
 ## 4. 白書由来の追加チャート候補 (Phase D で埋まる)
 
@@ -99,6 +99,6 @@ primary metric の **県固有 line** (例: 「{県名} の {指標名} の年�
 
 - 親 index: `./README.md`
 - 対応する theme 計画: `../theme-charts-planning/<theme_key>.md`
-- 責務分離ルール: `docs/01_技術設計/11_情報設計.md`
+- 責務分離ルール: `docs/01_技術設計/07_情報設計.md`
 - area 実装: `apps/web/src/features/area-profile/`
 - 親計画: `/root/.claude/plans/47-swirling-wreath.md`

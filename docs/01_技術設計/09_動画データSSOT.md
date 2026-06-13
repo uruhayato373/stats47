@@ -114,7 +114,7 @@ R2 (app/stats/<metric>/*.json) [値 SSOT]
 - 親方針: `.claude/rules/data-sqlite-ssot.md`
 - 派生先と運用ルール: `.claude/rules/data-storage.md`
 - R2 キーパス設計: `.claude/rules/r2-storage-design.md`
-- DDD ドメイン分類: `docs/01_技術設計/04_DDDドメイン分類.md`
+- DDD ドメイン分類: `docs/01_技術設計/02_DDDドメイン分類.md`
 - TS-config 型定義: `packages/data-configs/src/types.ts`
 - R2 reader: `packages/stats-r2/src/readers/index.ts`
 - Remotion exporter 実装: `apps/remotion/scripts/exporters/`

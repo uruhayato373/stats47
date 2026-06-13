@@ -99,7 +99,7 @@ Phase 3 の実測を見て判断:
 
 ### 関連
 
-- GIS データセット管理 (真実源 D1 化): `docs/01_技術設計/08_国土数値情報GISデータ.md`
+- GIS データセット管理 (真実源 D1 化): `docs/01_技術設計/04_国土数値情報GISデータ.md`
 - 既存 note マガジン: `docs/31_note記事原稿/koumuin-claude-code/`
 - 競合ベンチマーク: auto memory `project_competitor_indicator_benchmark.md`
 
@@ -220,4 +220,4 @@ mining スクリプト: `/tmp/mine-correlations.cjs` (使い捨て。恒久化�
 - 親戦略: `docs/02_実装計画/gis-statistics-content-strategy.md`
 - #1 実装計画: `~/.claude/plans/stateless-stargazing-teapot.md`
 - #2 企画: `docs/02_実装計画/gis-cross-02-sunshine-solar.md`
-- KSJ データセット管理: `docs/01_技術設計/08_国土数値情報GISデータ.md`
+- KSJ データセット管理: `docs/01_技術設計/04_国土数値情報GISデータ.md`

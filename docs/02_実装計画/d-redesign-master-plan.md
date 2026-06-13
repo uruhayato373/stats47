@@ -7,9 +7,9 @@ tags: [redesign, monetization, desktop-first, d-option]
 ---
 
 > **⚠️ 2026-06 更新**: レイアウト（横幅/レール/サイドバー/角丸/フォント）の正典は
-> [`docs/01_技術設計/21_統一レイアウト設計.md`](../01_技術設計/21_統一レイアウト設計.md)。
+> [`docs/01_技術設計/13_統一レイアウト設計.md`](../01_技術設計/13_統一レイアウト設計.md)。
 > 本プランの「左サイドバー」「`rounded-xl`」「Inter/Noto」等は現行実装
-> （PC サイドバー廃止・フラット `--radius:0`・system フォント・`PageShell`）と異なる。実装の正は doc 21。
+> （PC サイドバー廃止・フラット `--radius:0`・system フォント・`PageShell`）と異なる。実装の正は doc 13。
 
 > **確定事項 (2026-05-23)**
 > - ふるさと納税: A8.net 既加入 → `FurusatoNozeiCard` に商品ID 流し込み

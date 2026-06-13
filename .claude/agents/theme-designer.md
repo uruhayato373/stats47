@@ -19,7 +19,7 @@ DB の ranking_items に閉じない。e-Stat API に存在する全指標が候
 - **Phase 2**: e-Stat API の未登録指標を探索（`/search-estat` + `/inspect-estat-meta`）
 - **Phase 3**: 他の政府データソース（国土数値情報、Japan Dashboard 等）も考慮
 
-### 2. コンポーネント定義は page_components の git TS JSON が唯一の SSOT（完全DBレス doc19 Phase E）
+### 2. コンポーネント定義は page_components の git TS JSON が唯一の SSOT（完全DBレス doc12 Phase E）
 
 **IndicatorSet にチャート定義を含めてはならない。** 全ダッシュボードコンポーネント（KPI・チャート・属性マトリクス等）は
 **git TS** `apps/web/scripts/data/page-components/<pageType>/<pageKey>.json`（配列）に格納する。永続/リモート D1 への INSERT は廃止。

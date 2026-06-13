@@ -223,6 +223,6 @@ ranking とテーマで**完全統一**した。
 
 ## 関連
 
-- データ層正典: `docs/01_技術設計/19_完全DBレス設計.md` (出典マップは Reference = 外部Excelから再生成)
-- タクソノミー: `docs/01_技術設計/11_情報設計.md` (survey を category/theme/tag と並ぶ軸として要追記)
+- データ層正典: `docs/01_技術設計/12_完全DBレス設計.md` (出典マップは Reference = 外部Excelから再生成)
+- タクソノミー: `docs/01_技術設計/07_情報設計.md` (survey を category/theme/tag と並ぶ軸として要追記)
 - 出典 Excel: https://www.stat.go.jp/data/ssds/2.html (アクセス日 2026-06-02)

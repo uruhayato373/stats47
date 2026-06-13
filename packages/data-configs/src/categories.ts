@@ -1,7 +1,7 @@
 /**
  * カテゴリマスタ (git TS = SSOT)
  *
- * 完全DBレス (docs/01_技術設計/19_完全DBレス設計.md) §3: 運用エンティティの設定は
+ * 完全DBレス (docs/01_技術設計/12_完全DBレス設計.md) §3: 運用エンティティの設定は
  * git TS を SSOT にする。categories は従来 D1 `categories` テーブルにあったが、本ファイルを
  * 単一ソースにする。確定値は 2026-05-29 時点の配信中 (`apps/web/public/search-index-meta.json`
  * の categories[] および D1 categories テーブルと完全一致、17 件・displayOrder 順) を固定したもの。

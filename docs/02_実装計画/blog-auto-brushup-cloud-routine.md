@@ -154,5 +154,5 @@ OUTPUT FORMAT: 最後に 1 テーブルのみ。列: slug | verdict(PASS/REVISE/
 - 親方針: `docs/02_実装計画/100x-pv-strategy.md` Phase 0 / `seo-todo-unify-phase-1-3.md` (trend pipeline 先例)
 - 品質基準 (正典): `.claude/rules/blog-quality-standards.md`
 - wave 命名 / 効果計測: `.claude/rules/blog-data-schema.md`
-- 完全DBレス: `docs/01_技術設計/19_完全DBレス設計.md`
-- 自動化インベントリ: `docs/01_技術設計/10_自動化インベントリ.md`
+- 完全DBレス: `docs/01_技術設計/12_完全DBレス設計.md`
+- 自動化インベントリ: `docs/01_技術設計/06_自動化インベントリ.md`

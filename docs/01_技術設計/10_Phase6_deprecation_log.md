@@ -91,4 +91,4 @@ Phase 1-6 で D1 (15GB) を R2 へ全面移行し、Phase 6.7 で legacy 資産�
 - Phase 6.7 plan: `~/.claude/plans/drifting-cuddling-blossom.md`
 - データ管理アーキテクチャ: `.claude/rules/data-sqlite-ssot.md`
 - R2 namespace 設計: `.claude/rules/r2-storage-design.md`
-- 動画データ SSOT: `docs/01_技術設計/13_動画データSSOT.md`
+- 動画データ SSOT: `docs/01_技術設計/09_動画データSSOT.md`

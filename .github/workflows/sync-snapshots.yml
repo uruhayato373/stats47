@@ -1,7 +1,7 @@
 name: 🗂️ Sync Snapshots → R2
 
 # git TS (data/page-components, affiliate-ads 等) / article.md / R2 観測値を入力に
-# 配信 snapshot を再生成し R2 (app/) に push する手動 workflow。完全DBレス (doc19)。
+# 配信 snapshot を再生成し R2 (app/) に push する手動 workflow。完全DBレス (doc12)。
 #
 # R2 書き込みはこの CI / クラウド専用 (ローカルからの push は _assert-ci-write ガードで停止)。
 # ローカルは公開 URL 経由の読み取り専用。

@@ -16,7 +16,7 @@ Phase 6 (2026-05-27) の D1 → R2 移行後、本 agent は D1 stats_* テー�
 - カバレッジ / FK 整合性検証 (`/verify-d1-integrity`、ビルドキャッシュ対象)
 - MLIT KSJ データ取得 (`/fetch-mlit-ksj`)
 
-> page_components は完全DBレス (doc19 Phase E) で **git TS SSOT** `apps/web/scripts/data/page-components/` に移行済。
+> page_components は完全DBレス (doc12 Phase E) で **git TS SSOT** `apps/web/scripts/data/page-components/` に移行済。
 > D1 投入 (`/populate-component-data`) は廃止。編集は JSON 直編集 + `export-page-components-snapshot.ts`。
 
 ## 担当スキル

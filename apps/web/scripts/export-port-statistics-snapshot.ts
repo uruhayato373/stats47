@@ -1,5 +1,5 @@
 /**
- * ports + 港湾統計 を R2 snapshot 化する (完全DBレス: docs/01_技術設計/19_完全DBレス設計.md)。
+ * ports + 港湾統計 を R2 snapshot 化する (完全DBレス: docs/01_技術設計/12_完全DBレス設計.md)。
  *
  * 入力 (D1 廃止):
  *   - port master = git TS `packages/area/src/data/ports.json` (PortMetaRow[], administrator 込み)

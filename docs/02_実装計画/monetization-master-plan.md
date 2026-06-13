@@ -97,7 +97,7 @@ North Star Metric を **週次収益 (AdSense 確定額 + アフィ発生額)** 
 
 - モバイル本文中 in-content を主役にする。
 - 低効率枠 (ranking 最下部 CTR 0%・viewability 36.6% の右サイドバー) は廃止/移設。
-- CLS 予約 (`AdSenseAd.tsx:25-29`) と統一レイアウト規約 (`21_統一レイアウト設計`)、`nextjs-ssg-preservation` は遵守する。
+- CLS 予約 (`AdSenseAd.tsx:25-29`) と統一レイアウト規約 (`13_統一レイアウト設計`)、`nextjs-ssg-preservation` は遵守する。
 
 ### 判断5: アフィは文脈一致のみ
 
@@ -185,7 +185,7 @@ North Star Metric を **週次収益 (AdSense 確定額 + アフィ発生額)** 
 | ranking 本文中枠設計 | チャート直下に配置。CLS 予約 (`AdSenseAd.tsx:25-29`) を必ず付ける。未使用の `RANKING_PAGE_TABLE_SIDE` スロットの活用を検討 |
 | home の収益密度 | 現状 `RANKING_PAGE_FOOTER` 1枠のみ。流入の入口として枠追加を検討 |
 | areas・themes の扱い | 流入 1.5% のため広告は後回し。内部リンク強化で育成優先。areas はアフィ (ふるさと納税/引越し) を優先 |
-| 規約遵守 | 統一レイアウト (`21_統一レイアウト設計`)・melta-ui・`nextjs-ssg-preservation` を維持。広告実装で SSG を壊さない |
+| 規約遵守 | 統一レイアウト (`13_統一レイアウト設計`)・melta-ui・`nextjs-ssg-preservation` を維持。広告実装で SSG を壊さない |
 
 ---
 

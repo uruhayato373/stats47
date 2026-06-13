@@ -131,4 +131,4 @@ tags: [gis, content-plan, sunshine, solar, gis-cross]
 
 - 親戦略: `docs/02_実装計画/gis-content-plan.md`
 - 第 1 弾実装: `docs/02_実装計画/gis-content-plan.md` Phase 2 / 掛け合わせページ `/gis-cross/depopulation-medical`
-- GIS データセット管理: `docs/01_技術設計/08_国土数値情報GISデータ.md`
+- GIS データセット管理: `docs/01_技術設計/04_国土数値情報GISデータ.md`

@@ -2,7 +2,7 @@
 type: plan
 date: 2026-05-30
 status: active
-canonical: docs/01_技術設計/19_完全DBレス設計.md
+canonical: docs/01_技術設計/12_完全DBレス設計.md
 tags: [実装計画, theme-dashboard]
 ---
 
@@ -11,7 +11,7 @@ tags: [実装計画, theme-dashboard]
 `/themes/[themeKey]` ダッシュボード（KPI カード + チャート）の現行アーキテクチャ・実装状況・今後の拡充。
 
 > **2026-05-30 全面改訂**: 旧「D1 `themes`/`theme_metrics` テーブルへ移行」案（2026-05-26）は
-> **完全DBレス化（doc19）により破棄**した。loader は D1 config.json へ切り替えられず（旧 Phase 1C 未実施）、
+> **完全DBレス化（doc12）により破棄**した。loader は D1 config.json へ切り替えられず（旧 Phase 1C 未実施）、
 > 現行は **git TS → R2 で完結**＝既に DBレス整合。本ファイルは現行実装に基づいて書き直したもの。
 
 ## 現行アーキテクチャ（DBレス）
@@ -105,7 +105,7 @@ SSOT は単一（`data/page-components/`）なので drift しない。指標セ
 
 ## 関連
 
-- 正典アーキテクチャ: `docs/01_技術設計/19_完全DBレス設計.md`
+- 正典アーキテクチャ: `docs/01_技術設計/12_完全DBレス設計.md`
 - 完全DBレス移行: `dbless-migration.md`
 - チャート設計詳細（17 テーマの指標選定）: `theme-charts-planning/`
 - R2 キーパス規約: `.claude/rules/r2-storage-design.md`

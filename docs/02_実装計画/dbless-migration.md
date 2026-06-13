@@ -2,7 +2,7 @@
 type: migration-plan
 date: 2026-05-29
 status: active
-canonical: docs/01_技術設計/19_完全DBレス設計.md
+canonical: docs/01_技術設計/12_完全DBレス設計.md
 scope: 完全DBレス移行。Phase C(消費者/基盤)完了 / Phase B・E・F 残
 tags: [architecture, dbless, migration]
 ---
@@ -10,7 +10,7 @@ tags: [architecture, dbless, migration]
 # 完全DBレス移行 (統合)
 
 > 2026-05-29 統合: 棚卸し(inventory) / 実行スペック(spec) / 残スクリプト再構築(rebuild) の3計画を1ファイルに集約。
-> 正典アーキテクチャは `docs/01_技術設計/19_完全DBレス設計.md`。
+> 正典アーキテクチャは `docs/01_技術設計/12_完全DBレス設計.md`。
 > **現況**: Phase C(全消費者+基盤のDBレス化)は完了。**Phase B(正典改訂)/E(page_components)/F(server.ts削除・schema最終確定)が残**。
 > 各セクション冒頭の `<!-- 元ファイル -->` で出自を保持。
 
@@ -288,7 +288,7 @@ DELETE は `confirmedDead=true`(実参照 0)のみ「即削除可」。参照あ
 | `.claude/rules/data-storage.md` | EDIT | false | `:3-6` 2026-05-29 ハイブリッド注記済(実参照確認済)。本体 D1 用語の読み替えが残る | `grep -n 'D1\|エフェメラル' .claude/rules/data-storage.md` |
 | `.claude/rules/data-sqlite-ssot.md` / `local-environment.md` / `branch-workflow.md` | EDIT | false | data-storage.md/CLAUDE.md から参照。用語統一・エフェメラル読み替え | (各 grep) |
 | `docs/01_技術設計/17_リモートD1ハイブリッド設計.md` | DELETE(archives/) | false | plan doc のみ参照(実参照確認済)。`18_データ層ハイブリッド設計.md` に統合済 | `rg '17_リモートD1' --glob '!**/node_modules/**'` |
-| `docs/01_技術設計/14_Phase6_deprecation_log.md` | EDIT | false | plan doc のみ参照。Phase 7-10 残課題を本計画に置換 | `head -100 docs/01_技術設計/14_Phase6_deprecation_log.md` |
+| `docs/01_技術設計/10_Phase6_deprecation_log.md` | EDIT | false | plan doc のみ参照。Phase 7-10 残課題を本計画に置換 | `head -100 docs/01_技術設計/10_Phase6_deprecation_log.md` |
 
 **Phase F 完了ゲート**: 全 workspace `npx tsc --noEmit`(apps/web/tsconfig.json + remotion + 各 package)green。`next build` で全 SSG ページ `○ Static` 維持(`.claude/rules/nextjs-ssg-preservation.md` 準拠)。`npm run test:integration --workspace=packages/database` green。`rg 'getDrizzle' --glob '!**/node_modules/**' -l` が schema/型ソース範囲のみ。
 
@@ -344,7 +344,7 @@ A (死蔵除去) ──▶ C (Derived エフェメラル化) ──▶ D (観測
 実行時に判明した、spec 生成時点では未検出の事実。次セッションはこれを前提にすること。
 
 #### 実行済 (feature/dbless-migration)
-- **Phase B**: doc19 を新正典化、doc18 を superseded、CLAUDE.md §4 更新 (commit `9306daac`)。
+- **Phase B**: doc12 を新正典化、doc18 を superseded、CLAUDE.md §4 更新 (commit `9306daac`)。
 - **Phase A**: `run-correlation-batch` skill 削除 + `snapshot-exporter.md` 参照を `/recompute-correlations` に置換。
 - **Phase D (partial)**: `packages/ranking/src/repositories/metric/`(find-metric-by-key-and-area-type + index)をディレクトリごと削除。外部参照0・型チェック PASS。
 
@@ -520,7 +520,7 @@ remotion 群が唯一クリーンに移行できた理由 = **git TS master (pre
 | CI: `.github/workflows/data-refresh.yml` | EDIT | `db:pull`/`db:push`削除、e-Stat→R2直行+Derivedエフェメラル→R2に。metric cache行は廃止 | 月次データ更新の中核 |
 | CI: `.github/workflows/deploy-workers.yml` | EDIT | 行84のD1権限言及・遺産コメント除去(本番binding削除済) | デプロイCIノイズ除去 |
 | docs: `data-storage.md` / `data-sqlite-ssot.md` / `local-environment.md` / `branch-workflow.md` | EDIT | 「ローカルビルドDB」「リモートD1→exporter→R2」前提を git TS+R2+エフェメラルに読み替え | 新規skill設計ガイド, デプロイ手順 |
-| `docs/01_技術設計/14_Phase6_deprecation_log.md` | EDIT | Phase 7残課題(A-D)が完全DBレスのメインタスクに。新Phase定義で組み直し | 記録ドキュメント |
+| `docs/01_技術設計/10_Phase6_deprecation_log.md` | EDIT | Phase 7残課題(A-D)が完全DBレスのメインタスクに。新Phase定義で組み直し | 記録ドキュメント |
 
 ### 4. 維持 (KEEP) の要点
 

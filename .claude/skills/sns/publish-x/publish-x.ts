@@ -21,7 +21,7 @@
 import { chromium, type BrowserContext, type Page } from "playwright";
 import * as path from "path";
 import * as fs from "fs";
-// 完全DBレス (doc19 Phase E): sns_posts は共有ストア (.claude/state/sns/posts.json) 経由で読み書きする。
+// 完全DBレス (doc12 Phase E): sns_posts は共有ストア (.claude/state/sns/posts.json) 経由で読み書きする。
 import store from "../../../scripts/lib/sns-posts-store.cjs";
 
 // ─── 設定 ──────────────────────────────────────────
