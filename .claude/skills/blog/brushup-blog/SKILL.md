@@ -56,7 +56,7 @@ node .claude/scripts/blog/build-remediation-queue.mjs --next 5   # pending 上�
 1. **in-progress に印**: `node .claude/scripts/blog/build-remediation-queue.mjs --mark-in-progress <slug>`
 2. **focus は `quality.flags` の blocker 内訳から決める** (`--target article` のリライトエンジンを適用):
    - markdown 表 / truncated 表 / チャート0 → 表を **SVG (上位5+下位5)** に置換
-   - `である調 文末` (dearuEndings>0) → **本文を ですます調 に変換** (である。→です。/だった。→でした。/ではない。→ではありません。/動詞終止形→ます形)。callout・引用・データ出典の体言止めは対象外 (正典 `.claude/rules/blog-quality-standards.md`「文体」)
+   - `である調 文末` (dearuEndings>0) → **本文を ですます調 に変換** (である。→です。/だった。→でした。/ではない。→ではありません。/動詞終止形→ます形)。callout・引用・データ出典の体言止めは対象外 (正典 `.claude/rules/blog-quality-standards.md`「文体」)。**★copula だけの正規表現一括置換は禁止** (2026-06-13 実証): 動詞終止形・形容詞終止 (〜もたらす。/〜多い。) が常体で残り「です。」と混在して崩壊し、`quality-gate.mjs` は copula しか見ないため**通ってしまう**。必ず article-writer エンジンが**文単位で ですます完全化**する
    - `rank 主張あるが data 無し` (検証不能 blocker) → R2 `app/ranking/<key>/values.json` から `data/<name>-prefecture-rankings.json` を生成 (value 降順で rank 再計算) し本文数値を data に一致させる
    - `prose/図 <350` → **各図直下に「なぜ上位/下位か」の解釈段落**を追加 (記事アーキタイプの必須分析視点。図あたり ~600字)
    - `callouts<2` → **記事固有の「読み違い防止の知識」** callout を追加 (全記事共通の定型は不可)
@@ -78,6 +78,7 @@ node .claude/scripts/blog/build-remediation-queue.mjs --next 5   # pending 上�
 - **weekly-plan** が毎週 `--next` で top-N を「ブログ品質是正 N 本」Must として転載する。
 - 是正の効果は 4 週後に **weekly-review** が wave_id (gsc.md の BLOG-WAVE section) で判定する。
 - **全自動ではなく人手ゲート** (critic PASS 必須)。auto-brushup の 13% FAIL リスクを避け、人がバッチ単位で確認しながら進める。
+- **★大量是正は 20-30 本/バッチに分割する** (2026-06-13 実証): 173 本を 1 Workflow (writer→critic→revise→critic) で全自動投入したら **14M token + session limit 到達**で critic 段が大量失敗した。writer は quality-gate 反復+SVG生成+全文書き換えで 1 本 ~10万 token と重く、critic が後追いで枠を食い潰す。`--next` の top-N を小バッチで回し、バッチ間で結果確認する。詳細: memory `project_blog_mass_rewrite_lessons`。
 
 ---
 

@@ -161,7 +161,7 @@ function auditArticle(meta, body) {
   if (dearu.count > 0) {
     flags.push([
       "blocker",
-      `である調 文末 ${dearu.count}箇所 [${dearu.samples.join(",")}] — ですます調に統一 (である。→です。/だった。→でした。)`,
+      `である調 文末 ${dearu.count}箇所 [${dearu.samples.join(",")}] — ですます調に統一 (copula だけでなく動詞終止形も: である。→です。/だった。→でした。/〜する。→〜します。)。正規表現の copula 一括置換は不可 (動詞終止形が常体で残り崩壊) → article-writer で文単位変換`,
     ]);
   }
 
