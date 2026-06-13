@@ -1,7 +1,7 @@
 /**
  * affiliate_ads の git TS SSOT が現行 cloud R2 配信を semantic 再現できるか検証する。
  *
- * 完全DBレス移行 (doc19) の Phase E verify。git TS (affiliate-ads-data.ts) から生成した
+ * 完全DBレス移行 (doc12) の Phase E verify。git TS (affiliate-ads-data.ts) から生成した
  * ads が、現行配信 app/affiliate-ads/all.json (公開URL) と deep-equal か確認する。
  * generatedAt は実行毎に変わるため比較対象外。
  *

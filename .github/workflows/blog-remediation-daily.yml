@@ -5,7 +5,7 @@ name: 📝 Blog remediation daily (今日のリライト10記事)
 #   1. remediation-queue を最新化 (公開R2 audit + 最新GSC) → develop へ commit-back
 #   2. pending 上位 10 件を「今日のリライト」Issue に upsert 通知
 # 実リライトは人間が Claude セッションで `/brushup-blog --target queue --next 10` を回す。
-# 正典: docs/02_実装計画/blog-remediation-loop.md
+# 正典: docs/02_実装計画/06_ブログ品質是正ループ.md
 
 on:
   schedule:

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * docs/02_実装計画/improvement-backlog.md のマークダウンテーブルを走査し、
+ * docs/02_実装計画/03_改善バックログ.md のマークダウンテーブルを走査し、
  * status: pending|in-progress な施策を抽出する。
  *
  * weekly-plan の自動候補抽出と、triage-matrix.mjs の両方で利用する。
@@ -16,7 +16,7 @@
  *   [
  *     {
  *       metric: "gsc",
- *       file: "docs/02_実装計画/improvement-backlog.md",
+ *       file: "docs/02_実装計画/03_改善バックログ.md",
  *       section_id: "BLOG-CTR-02",
  *       title: "SEO タイトル改修 ...",
  *       status: "pending",
@@ -24,7 +24,7 @@
  *       target_metric: "gsc",
  *       due: "2026-06-13",
  *       owner: "claude",
- *       deep_link: "docs/02_実装計画/improvement-backlog.md"
+ *       deep_link: "docs/02_実装計画/03_改善バックログ.md"
  *     }
  *   ]
  */
@@ -36,8 +36,8 @@ import { fileURLToPath } from "node:url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const PROJECT_ROOT = path.resolve(__dirname, "..", "..", "..");
-const BACKLOG_PATH = path.join(PROJECT_ROOT, "docs/02_実装計画/improvement-backlog.md");
-const BACKLOG_REL = "docs/02_実装計画/improvement-backlog.md";
+const BACKLOG_PATH = path.join(PROJECT_ROOT, "docs/02_実装計画/03_改善バックログ.md");
+const BACKLOG_REL = "docs/02_実装計画/03_改善バックログ.md";
 
 const args = process.argv.slice(2);
 function getArg(flag) {
@@ -55,7 +55,7 @@ const TARGET_TIERS = TIER_FILTER
   ? new Set(TIER_FILTER.split(",").map((s) => Number(s.trim())))
   : null;
 
-/** improvement-backlog.md のマークダウンテーブルを行パースして施策一覧を返す */
+/** 03_改善バックログ.md のマークダウンテーブルを行パースして施策一覧を返す */
 function parseBacklog() {
   const content = readFileSync(BACKLOG_PATH, "utf-8");
   const entries = [];

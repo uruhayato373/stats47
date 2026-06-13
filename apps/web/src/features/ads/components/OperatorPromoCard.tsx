@@ -80,11 +80,13 @@ export function OperatorPromoCard({ placement = "global" }: OperatorPromoCardPro
       ? "mx-auto w-full max-w-2xl px-4 py-8"
       : "w-full";
 
-  // 確定前はレイアウトシフトを抑えるため最小高さのプレースホルダを返す
+  // 確定前はレイアウトシフトを抑えるため、実コンテンツに近い高さのスケルトンを返す。
+  // min-h で下限だけ確保していたが、height:320px の固定値にすることで
+  // 上方向のシフト (コンテンツが出現してスペースが増える方向) を防ぎ CLS を最小化する。
   if (axis === null) {
     return (
       <div className={wrapperClass} aria-hidden>
-        <div className="min-h-[320px] rounded-none border bg-card" />
+        <div className="h-[320px] rounded-none border bg-card" />
       </div>
     );
   }

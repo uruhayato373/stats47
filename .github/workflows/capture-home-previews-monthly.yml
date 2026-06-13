@@ -3,7 +3,7 @@ name: 📸 Capture Home Previews (Monthly)
 # homepage 末尾「このサイトの主要ページ」セクション用のプレビュー画像/動画を
 # 月次で再撮影し、R2 (app/home/previews/) に push する。
 #
-# 仕様: docs/01_技術設計/12_homepage-previews.md
+# 仕様: docs/01_技術設計/08_homepage-previews.md
 
 on:
   schedule:

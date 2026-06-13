@@ -9,7 +9,7 @@
  * surveyId / tags は statsDataId から決定的導出不可な editorial データのため
  * MetricConfig.surveyId / MetricConfig.tags (backfill 済) を SSOT とする。
  *
- * 関連: docs/01_技術設計/19_完全DBレス設計.md (metrics = Reference/再生成),
+ * 関連: docs/01_技術設計/12_完全DBレス設計.md (metrics = Reference/再生成),
  *       コミット 67168f54 が残した follow-up の完成。
  */
 import type { MetricConfig } from "@stats47/data-configs";

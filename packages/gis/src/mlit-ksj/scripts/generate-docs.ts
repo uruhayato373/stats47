@@ -1,6 +1,6 @@
 #!/usr/bin/env tsx
 /**
- * D1 gis_datasets から docs/01_技術設計/08_国土数値情報GISデータ.md の
+ * D1 gis_datasets から docs/01_技術設計/04_国土数値情報GISデータ.md の
  * 「登録済みデータセット」「ダウンロード済みデータ」「候補一覧」3 表を自動生成する。
  *
  * Phase 2 of GIS dataset management refactor (plan: stateless-stargazing-teapot).
@@ -22,7 +22,7 @@ import Database from "better-sqlite3";
 const LOCAL_D1_PATH =
   "packages/database/.data/stats47.sqlite";
 
-const DOCS_PATH = "docs/01_技術設計/08_国土数値情報GISデータ.md";
+const DOCS_PATH = "docs/01_技術設計/04_国土数値情報GISデータ.md";
 
 const AUTO_START = "<!-- AUTO-GENERATED:START -->";
 const AUTO_END = "<!-- AUTO-GENERATED:END -->";

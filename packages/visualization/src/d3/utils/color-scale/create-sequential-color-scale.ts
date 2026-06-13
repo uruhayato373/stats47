@@ -27,7 +27,7 @@ export async function createSequentialColorScale(
   } = options;
 
   const d3Module = providedD3 || (await import("d3"));
-  const d3 = (d3Module as any).default || d3Module;
+  const d3 = d3Module;
 
   if (!data || data.length === 0) {
     return () => noDataColor;

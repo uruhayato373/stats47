@@ -23,9 +23,9 @@ interface PageProps {
 }
 
 // 836ページ (47×18) をビルド時に全プリレンダリングすると CI が R2 大量アクセスで
-// タイムアウトするため ISR (オンデマンド生成+キャッシュ) を採用。
-// 初回アクセス時に SSR → Cloudflare エッジキャッシュに保存。
-export const dynamic = "force-dynamic";
+// タイムアウトするため、generateStaticParams を持たず ISR (オンデマンド生成+キャッシュ) を採用。
+// force-dynamic は付けない (毎リクエスト full render になりキャッシュが効かないため)。
+// 初回アクセス時にレンダリング → R2 incremental cache / エッジに 24h 保存。
 export const revalidate = 86400;
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {

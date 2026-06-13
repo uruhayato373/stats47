@@ -70,7 +70,7 @@ $ARGUMENTS — [--mode <expert|proofread>] <記事パスまたは slug>
 2. frontmatter の `tags` と本文の見出しからテーマを把握し、 ペルソナを設定する
 3. 記事本文・チャート説明・データ出典を確認する
 4. 上記の構造・観点に従いレビューを作成する
-5. レビュー結果を `docs/04_レビュー/expert-review/{slug}.md` に Write tool で書き出す。 frontmatter は以下:
+5. レビュー結果を `docs/04_レビュー/{date}-expert-review-{slug}.md` に Write tool で書き出す。 frontmatter は以下:
    ```yaml
    ---
    type: blog-review
@@ -103,9 +103,9 @@ $ARGUMENTS — [--mode <expert|proofread>] <記事パスまたは slug>
 
 ### 出力先 (expert モード)
 
-`docs/04_レビュー/expert-review/{slug}.md` (slug は blog 記事の slug と一致させる)。
+`docs/04_レビュー/{date}-expert-review-{slug}.md` (slug は blog 記事の slug と一致させる)。
 
-過去のレビューは `ls -t docs/04_レビュー/expert-review/*.md | head -5` で参照できる。
+過去のレビューは `ls -t docs/04_レビュー/*-expert-review-*.md | head -5` で参照できる。
 
 ---
 

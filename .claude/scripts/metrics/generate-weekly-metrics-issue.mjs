@@ -10,7 +10,7 @@
  *
  * 入力:
  *   - .claude/state/metrics/{psi,gsc,ga4,adsense}/history.csv
- *   - docs/02_実装計画/improvement-backlog.md の status: pending|in-progress を抽出（pending 施策一覧）
+ *   - docs/02_実装計画/03_改善バックログ.md の status: pending|in-progress を抽出（pending 施策一覧）
  *   - gh issue list --label auto-generated (残存アラート Issue 集計)
  */
 
@@ -248,7 +248,7 @@ function alertsSection(week) {
 }
 
 function pendingSection() {
-  // improvement-backlog.md の pending|in-progress を scan-pending-improvements.mjs で取得
+  // 03_改善バックログ.md の pending|in-progress を scan-pending-improvements.mjs で取得
   const scanScript = join(PROJECT_ROOT, ".claude/scripts/lib/scan-pending-improvements.mjs");
   let entries;
   try {

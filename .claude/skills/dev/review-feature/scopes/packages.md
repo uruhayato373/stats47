@@ -158,7 +158,7 @@ $ARGUMENTS — レビュー対象（以下のいずれか）
 - パネリストのキャラクターを維持する（テストエンジニアがパフォーマンスを語る等は NG）
 - **コードを実際に読んでからレビューする。推測でレビューしない**
 - 「all」モードでは、個別パッケージの深掘りよりも**横断的な問題の発見**を優先する
-- 出力は `docs/04_レビュー/dev-review/packages-{対象名}-{YYYY-MM-DD}.md` に Write tool で書き出す。frontmatter:
+- 出力は `docs/04_レビュー/{YYYY-MM-DD}-dev-review-packages-{対象名}.md` に Write tool で書き出す。frontmatter:
   ```yaml
   ---
   type: dev-review
@@ -168,7 +168,7 @@ $ARGUMENTS — レビュー対象（以下のいずれか）
   ---
   ```
   ファイル名例:
-  - 単一: `packages-r2-storage-2026-05-04.md`
-  - 複数: `packages-r2-storage-ranking-2026-05-04.md`
-  - 横断: `packages-all-2026-05-04.md`
-- 書き出したファイルパスを報告する。過去のレビューは `ls -t docs/04_レビュー/dev-review/*.md | head -5` で参照できる
+  - 単一: `2026-05-04-dev-review-packages-r2-storage.md`
+  - 複数: `2026-05-04-dev-review-packages-r2-storage-ranking.md`
+  - 横断: `2026-05-04-dev-review-packages-all.md`
+- 書き出したファイルパスを報告する。過去のレビューは `ls -t docs/04_レビュー/*-dev-review-packages-*.md | head -5` で参照できる

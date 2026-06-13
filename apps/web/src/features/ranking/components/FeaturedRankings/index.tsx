@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import { buildRankingDisplayInfo } from "@stats47/ranking";
-import { readTopRankingValuesBatchFromR2, readRankingValuesFromR2 } from "@stats47/ranking/server";
+import { readRankingValuesFromR2 } from "@stats47/ranking/server";
 import { isOk } from "@stats47/types";
 import { generateMiniTileSvg } from "@stats47/visualization/server";
 
@@ -25,6 +25,10 @@ interface FeaturedRankingsProps {
  *
  * おすすめランキングをカード形式で表示するサーバーコンポーネント。
  * 各ランキングの1位データとタイルマップSVGを生成してカードに表示する。
+ *
+ * 最適化: 全47行データは tile map と rank=1 の両方で必要なため、
+ * 各ランキングで1回だけ fetch し rank=1 を自前で抽出する（旧実装は
+ * readTopRankingValuesBatchFromR2 で内部的に同じ fetch を重複させていた）。
  */
 export async function FeaturedRankings({ limit = 6, showHeader = true }: FeaturedRankingsProps) {
   let items: {
@@ -49,30 +53,29 @@ export async function FeaturedRankings({ limit = 6, showHeader = true }: Feature
         return true;
       });
 
-      // 1位データ + 全47件データを並列取得
-      const batchItems = uniqueItems.map((item) => ({
-        rankingKey: item.rankingKey,
-        yearCode: item.availableYears?.[0]?.yearCode || item.latestYear?.yearCode || "2024",
-      }));
-
-      const [batchResult, ...allValuesResults] = await Promise.all([
-        readTopRankingValuesBatchFromR2(batchItems, "prefecture"),
-        ...uniqueItems.map((item) => {
+      // 全47行データを並列で一括取得（rank=1 抽出 + tile map 生成の両用途を1フェッチで賄う）
+      const allValuesResults = await Promise.all(
+        uniqueItems.map((item) => {
           const yearCode = item.availableYears?.[0]?.yearCode || item.latestYear?.yearCode || "2024";
           return readRankingValuesFromR2(item.rankingKey, "prefecture", yearCode);
         }),
-      ]);
-      const topMap = isOk(batchResult) ? batchResult.data : new Map();
+      );
 
       items = uniqueItems.map((item, idx) => {
         const latestYear = item.availableYears?.[0]?.yearCode || item.latestYear?.yearCode || "2024";
         const displayInfo = buildRankingDisplayInfo(item);
-        const top = topMap.get(item.rankingKey);
-
-        // タイルマップSVG生成
         const valuesResult = allValuesResults[idx];
+
+        let topAreaName: string | undefined;
+        let topValue: string | undefined;
         let tileMapSvg: string | undefined;
+
         if (isOk(valuesResult) && valuesResult.data.length > 0) {
+          const top = valuesResult.data.find((v) => v.rank === 1);
+          if (top) {
+            topAreaName = top.areaName;
+            topValue = top.value !== null ? top.value.toLocaleString("ja-JP") : undefined;
+          }
           tileMapSvg = generateMiniTileSvg(
             valuesResult.data.flatMap((v) => v.value !== null ? [{ areaCode: v.areaCode, value: v.value }] : []),
             item.visualization?.colorScheme,
@@ -85,8 +88,8 @@ export async function FeaturedRankings({ limit = 6, showHeader = true }: Feature
           title: displayInfo.title,
           latestYear,
           unit: displayInfo.unit,
-          topAreaName: top?.areaName,
-          topValue: top && top.value !== null ? top.value.toLocaleString("ja-JP") : undefined,
+          topAreaName,
+          topValue,
           demographicAttr: displayInfo.demographicAttr || undefined,
           normalizationBasis: displayInfo.normalizationBasis || undefined,
           tileMapSvg,

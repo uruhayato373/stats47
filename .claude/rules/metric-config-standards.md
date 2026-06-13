@@ -33,7 +33,7 @@
   `categories.ts` の `CATEGORY_DEFS`。
 - **`category` は `CategoryKey` union 型なので無効キーはコンパイルエラー**になる。新規キーを増やさない。
 - category は「e-Stat 機械分類の内部 backbone」であり、ユーザー向け主要ナビは theme
-  (`/themes/*`)。役割分担: `docs/01_技術設計/16_タクソノミー役割分担.md`。
+  (`/themes/*`)。役割分担: `docs/01_技術設計/07_情報設計.md`。
 
 ## UI 配置 (この型を前提にした描画)
 
@@ -77,7 +77,7 @@ npm run validate:config --workspace=@stats47/data-configs   # 構造規約 (cate
 から外しても `KNOWN_RANKING_KEYS` に無ければ **410 のまま**になる。
 
 公開には config(isActive) を起点に以下を整合再生成する（依存順・詳細手順は memory
-`project_ranking_publish_pipeline_gap` / `docs/02_実装計画/feature-backlog.md`「122 metric の本番公開」）:
+`project_ranking_publish_pipeline_gap` / `docs/02_実装計画/04_機能バックログ.md`「122 metric の本番公開」）:
 
 1. R2 `app/ranking-items/all.json` + `app/ranking/<key>/item.json` 再生成（`packages/ranking/src/scripts/generate-ranking-items.ts`。※ 2026-06 時点で sync-snapshots 未配線）
 2. `KNOWN_RANKING_KEYS` 再生成（`apps/web/scripts/generate-known-ranking-keys.ts`）
@@ -93,5 +93,5 @@ npm run validate:config --workspace=@stats47/data-configs   # 構造規約 (cate
 - 型: `packages/data-configs/src/types.ts` (`MetricConfig` / `CategoryKey` / `CATEGORY_KEYS`)
 - lint: `packages/data-configs/scripts/validate-metric-config.ts`
 - e-Stat 年の正規化: `.claude/rules/estat-api.md`
-- タクソノミー役割分担: `docs/01_技術設計/16_タクソノミー役割分担.md`
+- タクソノミー役割分担: `docs/01_技術設計/07_情報設計.md`
 - UI 振り分け util: `apps/web/src/features/ranking/utils/classify-subtitle.ts`

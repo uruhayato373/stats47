@@ -1,13 +1,13 @@
 "use client";
 
 import { cn } from "@stats47/components";
-import * as d3 from "d3";
+import { select, schemeTableau10 } from "d3";
 import { useEffect, useRef } from "react";
 import { computeFontSize } from "../../../shared/layout";
 import { useD3Tooltip } from "../../hooks/useD3Tooltip";
 import type { D3RadarChartProps } from "./types";
 
-const DEFAULT_COLORS = d3.schemeTableau10 as readonly string[];
+const DEFAULT_COLORS = schemeTableau10 as readonly string[];
 
 function defaultFormat(value: number): string {
   return value.toLocaleString();
@@ -40,7 +40,7 @@ export function RadarChart({
   useEffect(() => {
     if (!svgRef.current || !axes.length || !data.length) return;
 
-    const svg = d3.select(svgRef.current);
+    const svg = select(svgRef.current);
     svg.selectAll("*").remove();
 
     const margin = Math.max(60, width * 0.12);

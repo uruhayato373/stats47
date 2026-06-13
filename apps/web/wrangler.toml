@@ -14,17 +14,20 @@ binding = "ASSETS"
 NODE_ENV = "development"
 NEXT_PUBLIC_ENV = "development"
 
-# デフォルト設定（ローカル開発用）
-# Static DB (Local) - Drizzle マイグレーションでスキーマ管理
-[[d1_databases]]
-binding = "STATS47_STATIC_DB"
-database_name = "stats47_local_static"
-database_id = "6cea2d7a-87c2-408b-9de3-72b1bc240478" # Production Static ID (for remote preview)
-migrations_dir = "../../packages/database/drizzle"
+# 完全DBレス (doc 12): 本番アプリは D1 を一切 query しない。
+# vestigial だった [[d1_databases]] STATS47_STATIC_DB binding は削除済 (2026-06)。
+# 型は packages/database/src/schema/*.ts (型ソース) で保持、ランタイム src からの参照は cloudflare.d.ts の型宣言のみ。
 
 # デフォルトR2ストレージ（ローカル開発用）
 [[r2_buckets]]
 binding = "STATS47_BUCKET"
+bucket_name = "stats47"
+preview_bucket_name = "stats47"
+
+# OpenNext incremental cache 用 R2 binding（ローカル開発用）。
+# r2-incremental-cache override が固定名 NEXT_INC_CACHE_R2_BUCKET を要求する。
+[[r2_buckets]]
+binding = "NEXT_INC_CACHE_R2_BUCKET"
 bucket_name = "stats47"
 preview_bucket_name = "stats47"
 
@@ -79,6 +82,13 @@ NEXT_PUBLIC_AMAZON_ASSOCIATE_TAG = "stats47-22"
 
 [[env.production.r2_buckets]]
 binding = "STATS47_BUCKET"
+bucket_name = "stats47"
+
+# OpenNext incremental cache 用 R2 binding（Production）。
+# deploy 前に `opennextjs-cloudflare populateCache remote --env production` で
+# ビルド済 ISR/SSG エントリをこのバケット (prefix incremental-cache/) に投入する。
+[[env.production.r2_buckets]]
+binding = "NEXT_INC_CACHE_R2_BUCKET"
 bucket_name = "stats47"
 
 

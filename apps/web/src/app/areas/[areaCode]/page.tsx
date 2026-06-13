@@ -38,6 +38,9 @@ import { AdSenseAd, RANKING_SIDEBAR_TOP } from "@/lib/google-adsense";
 import type { Metadata } from "next";
 
 
+/** 24時間 ISR */
+export const revalidate = 86400;
+
 /** ビルド時に全47都道府県を事前生成 */
 export function generateStaticParams() {
     const prefectures = fetchPrefectures();
@@ -56,6 +59,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
         return {
             title: "地域の特徴が見つかりません",
             description: "指定された地域のデータは存在しません。",
+            alternates: { canonical: "/areas" },
         };
     }
 
@@ -81,13 +85,16 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function AreaProfilePage({ params }: PageProps) {
     const { areaCode } = await params;
-    const profile = await getAreaProfileAction(areaCode);
+    // profile と categories は独立 (互いに依存しない) ため並列取得する。
+    const [profile, categoriesResult] = await Promise.all([
+        getAreaProfileAction(areaCode),
+        listCategories(),
+    ]);
 
     if (!profile) {
         notFound();
     }
 
-    const categoriesResult = await listCategories();
     const categories = isOk(categoriesResult) ? categoriesResult.data : [];
 
     const [structuredData, breadcrumbStructuredData] = await Promise.all([

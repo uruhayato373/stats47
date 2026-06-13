@@ -128,7 +128,7 @@ stats47 に適した収益化モデルを 3-5 案生成する。以下のカテ�
 
 ### Step 6: critical-review レポートを Write する
 
-レビュー本文を `docs/04_レビュー/critical-review/{YYYY-MM-DD}-monetization.md` に Write tool で出力する。日付は今日（JST）の `YYYY-MM-DD` を使用する。
+レビュー本文を `docs/04_レビュー/{YYYY-MM-DD}-monetization.md` に Write tool で出力する。日付は今日（JST）の `YYYY-MM-DD` を使用する。
 
 frontmatter は以下を必ず含める:
 
@@ -150,14 +150,14 @@ critical-review の結論から戦略本体に反映すべき変更を特定し�
 
 - 追記・修正対象: 推奨アクション、Phase 1/2/3 ロードマップ、優先度マトリクスの結論部分
 - 大幅な方針転換がある場合は「変更履歴」セクションに日付と要旨を追加
-- 旧 GitHub Issue 運用は廃止: critical-review レポートは `docs/04_レビュー/critical-review/` に蓄積し、戦略の最新版は `02_収益化戦略.md` に集約する
+- 旧 GitHub Issue 運用は廃止: critical-review レポートは `docs/04_レビュー/` に蓄積し、戦略の最新版は `02_収益化戦略.md` に集約する
 
 ### Step 8: 過去レビューの参照
 
 過去のレビュー履歴は以下で確認:
 
 ```bash
-ls -t docs/04_レビュー/critical-review/*.md | head -5
+ls -t docs/04_レビュー/*.md | head -5
 ```
 
 ## 注意事項
@@ -169,7 +169,7 @@ ls -t docs/04_レビュー/critical-review/*.md | head -5
 
 ## 参照
 
-- `docs/02_実装計画/01_実装ロードマップ.md` — KPI・スプリント目標
+- `docs/02_実装計画/02_実装ロードマップ.md` — KPI・スプリント目標
 - `docs/00_プロジェクト管理/01_概要/` — プロジェクト概要
 - `.claude/skills/management/growth-loops/SKILL.md` — 成長ループ分析
 - 原典: Paweł Huryn の Monetization Strategy フレームワーク

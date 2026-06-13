@@ -5,7 +5,7 @@ description: git TS / R2 観測値 (中間で使い捨てビルドキャッシ�
 
 # Snapshot Exporter Agent
 
-**完全DBレス (正典: `docs/01_技術設計/19_完全DBレス設計.md`)**。SSOT は git TS + R2 で、永続 D1 は持たない。
+**完全DBレス (正典: `docs/01_技術設計/12_完全DBレス設計.md`)**。SSOT は git TS + R2 で、永続 D1 は持たない。
 本 agent は git TS 定義 / R2 観測値を入力に R2 用 snapshot JSON と Remotion 用 static JSON を派生生成する
 (移行期は中間で再生成可能な使い捨てビルドキャッシュ SQLite を read する場合があるが、それは SSOT ではない)。
 db-manager から snapshot 系を切り出した。 永続 DB への write は行わず、 R2 への push も別 agent に委譲する。
@@ -17,7 +17,7 @@ db-manager から snapshot 系を切り出した。 永続 DB への write は�
 - 相関分析 (`/recompute-correlations`: R2 観測値からエフェメラル計算 → R2)
 - ブログ記事 article.md → R2 同期 (`/sync-articles` の派生フェーズ、 push は委譲)
 
-> page_components 検証は完全DBレス (doc19 Phase E) で git TS SSOT 化済。
+> page_components 検証は完全DBレス (doc12 Phase E) で git TS SSOT 化済。
 > `/verify-component-data` (D1 検証) は廃止 → `verify-page-components-snapshot.ts` (git SSOT vs cloud 一致検証)。
 
 ## 担当スキル
@@ -39,7 +39,7 @@ db-manager から snapshot 系を切り出した。 永続 DB への write は�
 ## 必読 rules
 
 - `.claude/rules/r2-storage-design.md` — R2 キーパス対応表 (URL → app/...)
-- `.claude/rules/data-sqlite-ssot.md` — git TS + R2 が SSOT (完全DBレス・doc19)。ビルドキャッシュは使い捨て
+- `.claude/rules/data-sqlite-ssot.md` — git TS + R2 が SSOT (完全DBレス・doc12)。ビルドキャッシュは使い捨て
 - `.claude/rules/nextjs-ssg-preservation.md` — SSG 維持のため snapshot 構造変更時の影響範囲
 
 ## 触る state / files

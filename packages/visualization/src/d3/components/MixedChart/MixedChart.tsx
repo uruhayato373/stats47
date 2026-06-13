@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "@stats47/components";
-import * as d3 from "d3";
+import { schemeTableau10, select, scaleBand, scaleLinear, max, line, axisBottom, axisLeft, axisRight } from "d3";
 import { useEffect, useRef } from "react";
 import {
   computeChartLayout,
@@ -31,7 +31,7 @@ export function MixedChart({
   leftAxisFormatter = compactAxisFormat,
   rightAxisFormatter = compactAxisFormat,
   unit = "",
-  colors = d3.schemeTableau10,
+  colors = schemeTableau10,
   isLoading = false,
   className,
 }: MixedChartProps) {
@@ -55,14 +55,13 @@ export function MixedChart({
   useEffect(() => {
     if (!svgRef.current || !data.length) return;
 
-    const svg = d3.select(svgRef.current);
+    const svg = select(svgRef.current);
     svg.selectAll("*").remove();
 
     const catValues = data.map((d) => String(d[categoryKey] ?? ""));
 
     // X軸: バンドスケール（棒の幅用）
-    const x = d3
-      .scaleBand()
+    const x = scaleBand()
       .domain(catValues)
       .range([marginLeft, width - marginRight])
       .padding(0.2);
@@ -72,9 +71,8 @@ export function MixedChart({
     const colValues = data.flatMap((d) =>
       colKeys.map((k) => d[k]).filter((v): v is number => typeof v === "number")
     );
-    const yLeft = d3
-      .scaleLinear()
-      .domain([0, d3.max(colValues) ?? 0])
+    const yLeft = scaleLinear()
+      .domain([0, max(colValues) ?? 0])
       .nice()
       .range([height - marginBottom, marginTop]);
 
@@ -83,9 +81,8 @@ export function MixedChart({
     const lineValues = data.flatMap((d) =>
       lineKeys.map((k) => d[k]).filter((v): v is number => typeof v === "number")
     );
-    const yRight = d3
-      .scaleLinear()
-      .domain([0, d3.max(lineValues) ?? 0])
+    const yRight = scaleLinear()
+      .domain([0, max(lineValues) ?? 0])
       .nice()
       .range([height - marginBottom, marginTop]);
 
@@ -123,8 +120,7 @@ export function MixedChart({
     lines.forEach((s) => {
       const filtered = data.filter((d) => d[s.dataKey] != null);
 
-      const lineFn = d3
-        .line<(typeof filtered)[number]>()
+      const lineFn = line<(typeof filtered)[number]>()
         .x((d) => xCenter(d))
         .y((d) => yRight(Number(d[s.dataKey])));
 
@@ -174,8 +170,7 @@ export function MixedChart({
       .append("g")
       .attr("transform", `translate(0,${height - marginBottom})`)
       .call(
-        d3
-          .axisBottom(x)
+        axisBottom(x)
           .tickValues(tickValues)
           .tickFormat((val) => {
             const row = data.find((d) => String(d[categoryKey]) === val);
@@ -192,8 +187,7 @@ export function MixedChart({
       .append("g")
       .attr("transform", `translate(${marginLeft},0)`)
       .call(
-        d3
-          .axisLeft(yLeft)
+        axisLeft(yLeft)
           .ticks(innerHeight / 40)
           .tickFormat((v) => leftAxisFormatter(Number(v)))
       )
@@ -209,8 +203,7 @@ export function MixedChart({
       .append("g")
       .attr("transform", `translate(${width - marginRight},0)`)
       .call(
-        d3
-          .axisRight(yRight)
+        axisRight(yRight)
           .ticks(innerHeight / 40)
           .tickFormat((v) => rightAxisFormatter(Number(v)))
       )

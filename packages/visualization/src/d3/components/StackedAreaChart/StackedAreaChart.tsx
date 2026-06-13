@@ -1,7 +1,8 @@
 "use client";
 
 import { cn } from "@stats47/components";
-import * as d3 from "d3";
+import { select, scalePoint, stack, stackOrderNone, stackOffsetNone, max, scaleLinear, area, curveMonotoneX, axisBottom, axisLeft } from "d3";
+import type { SeriesPoint } from "d3";
 import { useEffect, useRef } from "react";
 import {
   computeChartLayout,
@@ -21,7 +22,7 @@ function defaultFormat(value: number): string {
 /**
  * D3 StackedAreaChart - 積み上げ面グラフ（100% 積み上げ対応）
  *
- * `d3.stack()` + `d3.area()` で描画。
+ * `stack()` + `area()` で描画。
  * `normalize: true` で各カテゴリの合計を 100% に正規化する。
  */
 export function StackedAreaChart({
@@ -74,7 +75,7 @@ export function StackedAreaChart({
   useEffect(() => {
     if (!svgRef.current || !data.length || !series.length) return;
 
-    const svg = d3.select(svgRef.current);
+    const svg = select(svgRef.current);
     svg.selectAll("*").remove();
 
     const keys = series.map((s) => s.key);
@@ -103,39 +104,35 @@ export function StackedAreaChart({
 
     // X scale
     const catValues = processedData.map((d) => String(d[categoryKey] ?? ""));
-    const x = d3
-      .scalePoint()
+    const x = scalePoint()
       .domain(catValues)
       .range([marginLeft, width - marginRight]);
 
     // Stack
-    const stack = d3
-      .stack<StackedAreaDataNode>()
+    const stackGen = stack<StackedAreaDataNode>()
       .keys(keys)
       .value((d, key) => Number(d[key]) || 0)
-      .order(d3.stackOrderNone)
-      .offset(d3.stackOffsetNone);
+      .order(stackOrderNone)
+      .offset(stackOffsetNone);
 
-    const stackedData = stack(processedData);
+    const stackedData = stackGen(processedData);
 
     // Y scale
     const yMax = normalize
       ? 100
-      : d3.max(stackedData, (layer) => d3.max(layer, (d) => d[1])) ?? 0;
+      : max(stackedData, (layer) => max(layer, (d) => d[1])) ?? 0;
     const computedDomain: [number, number] = [0, yMax];
-    const y = d3
-      .scaleLinear()
+    const y = scaleLinear()
       .domain(!normalize && yDomainProp ? yDomainProp : computedDomain)
       .nice()
       .range([height - marginBottom, marginTop]);
 
     // Area generator
-    const area = d3
-      .area<d3.SeriesPoint<StackedAreaDataNode>>()
+    const areaFn = area<SeriesPoint<StackedAreaDataNode>>()
       .x((d) => x(String(d.data[categoryKey] ?? "")) ?? 0)
       .y0((d) => y(d[0]))
       .y1((d) => y(d[1]))
-      .curve(d3.curveMonotoneX);
+      .curve(curveMonotoneX);
 
     // Draw areas with per-series tooltips
     const labelMap = new Map(series.map((s) => [s.key, s.label]));
@@ -147,11 +144,11 @@ export function StackedAreaChart({
       .join("path")
       .attr("fill", (d) => colorMap.get(d.key) ?? "#888")
       .attr("fill-opacity", 0.7)
-      .attr("d", area)
+      .attr("d", areaFn)
       .attr("class", "transition-opacity duration-200")
       .style("cursor", "pointer")
       .on("mouseenter", function (event, d) {
-        d3.select(this).attr("fill-opacity", 0.9);
+        select(this).attr("fill-opacity", 0.9);
         const seriesLabel = labelMap.get(d.key) ?? d.key;
         showTooltip(event, seriesLabel, {
           metricTitle: seriesLabel,
@@ -160,7 +157,7 @@ export function StackedAreaChart({
       })
       .on("mousemove", (event) => updateTooltipPosition(event))
       .on("mouseleave", function () {
-        d3.select(this).attr("fill-opacity", 0.7);
+        select(this).attr("fill-opacity", 0.7);
         hideTooltip();
       });
 
@@ -231,8 +228,7 @@ export function StackedAreaChart({
       const num = parseInt(code, 10);
       return !isNaN(num) && num % tickInterval === 0;
     });
-    const xAxis = d3
-      .axisBottom(x)
+    const xAxis = axisBottom(x)
       .tickValues(filteredTicks.length > 0 ? filteredTicks : catValues)
       .tickFormat((val) => {
         const row = processedData.find(
@@ -250,8 +246,7 @@ export function StackedAreaChart({
       .call((g) => g.selectAll(".tick text").attr("font-size", baseFontSize).attr("dy", "8"));
 
     // Y axis
-    const yAxis = d3
-      .axisLeft(y)
+    const yAxis = axisLeft(y)
       .ticks(innerHeight / 40)
       .tickFormat((v) => yFormat(Number(v)));
     svg

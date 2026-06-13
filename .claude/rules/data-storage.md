@@ -1,6 +1,6 @@
 # 記録先の統一原則 (git TS + R2 vs `.claude/` vs `docs/`)
 
-> **⚠️ 2026-05-29 更新: データ層は「完全DBレス」が正典 → [`docs/01_技術設計/19_完全DBレス設計.md`](../../docs/01_技術設計/19_完全DBレス設計.md)。**
+> **⚠️ 2026-05-29 更新: データ層は「完全DBレス」が正典 → [`docs/01_技術設計/12_完全DBレス設計.md`](../../docs/01_技術設計/12_完全DBレス設計.md)。**
 > 永続/リモート D1 を SSOT に持たない。アプリが読むデータの SSOT は形で選ぶ: **設定/運用エンティティ=git TS** /
 > **観測値=R2** / **配信=R2 snapshot** / **Derived(集計)=エフェメラル計算 → R2**。
 > `.claude/` と `docs/` の使い分け（本ファイルの主眼）は不変。
@@ -13,7 +13,7 @@
 
 > **注**: 旧 docs / skill が「D1」「ローカルビルド DB」と呼んでいた層は **SSOT ではない**。
 > Cloudflare D1 サービスではなく、再生成可能な使い捨てビルドキャッシュ / エフェメラル集計エンジン。
-> SSOT は git TS と R2 のみ。用語と決定表: [`data-sqlite-ssot.md`](./data-sqlite-ssot.md) / 正典: doc 19。
+> SSOT は git TS と R2 のみ。用語と決定表: [`data-sqlite-ssot.md`](./data-sqlite-ssot.md) / 正典: doc 12。
 
 Phase 6 (2026-05-27) で観測値・相関結果を R2 へ移行、Phase F (2026-05-30) で運用エンティティの SSOT も
 git TS 化し永続 D1 を全廃した。アプリが読む各データの真実源:
@@ -62,11 +62,11 @@ git TS 化し永続 D1 を全廃した。アプリが読む各データの真実
 | 技術設計・アーキテクチャ | `docs/01_技術設計/` |
 | 週次計画・週次レビュー | `docs/03_週次運用/週次{計画,レビュー}/YYYY-Www.md` |
 | 週次メトリクスサマリ（自動生成） | `docs/03_週次運用/メトリクス/YYYY-Www.md` |
-| 批判的レビュー・事前検死・SEO 監査・SNS 週報・パフォーマンス・コスト月報 | `docs/04_レビュー/<subcategory>/{YYYY-MM-DD,YYYY-Www,YYYY-MM}.md` |
-| 改善施策の一覧・TODO | `docs/02_実装計画/improvement-backlog.md` |
+| 批判的レビュー・事前検死・SEO 監査・SNS 週報・パフォーマンス・コスト月報 | `docs/04_レビュー/{YYYY-MM-DD,YYYY-Www,YYYY-MM}-<topic-slug>.md`（フラット。日付先頭・slug に種別を含める例 `-monetization` / `-pre-mortem-<x>` / `-sns-weekly` / `-cloudflare-cost`。種別絞り込みは frontmatter `type:`） |
+| 改善施策の一覧・TODO | `docs/02_実装計画/03_改善バックログ.md` |
 | YouTube 実験 (1 実験 1 ファイル) | `docs/15_実験ログ/youtube/EXP-NNN.md` |
 | コンテンツ backlog | `docs/{20_ブログ記事企画,30_note記事企画}/backlog/` |
-| 未着手の機能・自動化 backlog | `docs/02_実装計画/feature-backlog.md`（指標拡充候補は `docs/02_実装計画/indicator-backlog.md`） |
+| 未着手の機能・自動化 backlog | `docs/02_実装計画/04_機能バックログ.md`（指標拡充候補は `docs/02_実装計画/05_指標バックログ.md`） |
 
 詳細: [`docs-vs-issues.md`](./docs-vs-issues.md)
 
@@ -80,7 +80,7 @@ git TS 化し永続 D1 を全廃した。アプリが読む各データの真実
 | GSC/GA4/AdSense/PSI の週次集約履歴（前週比・人間向け LATEST.md） | `.claude/state/metrics/{gsc,ga4,adsense,psi}/{history.csv,LATEST.md}`（GitHub Actions が自動更新、人間は LATEST.md を見れば 10 秒で把握） |
 | 改善施策の agent 用詳細ログ (検証コマンド・仮説・期日) | `.claude/skills/analytics/<metric>-improvement/reference/improvement-log.md` |
 | PSI 日次計測（19 URL × mobile/desktop） | `.claude/state/metrics/psi/psi-batch-*.json`（GitHub Actions 日次 JST 02:00、閾値違反時 `[PSI Alert]` Issues 起票）/ URL リスト: `.claude/config/psi-urls.txt` / 閾値: `.claude/skills/analytics/performance-improvement/budgets.json` |
-| Cloudflare 月次 snapshot JSON + budget 閾値 | `.claude/skills/analytics/cloudflare-cost-improvement/reference/`（人間向け要約は `docs/04_レビュー/cloudflare-cost/YYYY-MM.md`、施策一覧は `docs/02_実装計画/improvement-backlog.md`） |
+| Cloudflare 月次 snapshot JSON + budget 閾値 | `.claude/skills/analytics/cloudflare-cost-improvement/reference/`（人間向け要約は `docs/04_レビュー/YYYY-MM-cloudflare-cost.md`、施策一覧は `docs/02_実装計画/03_改善バックログ.md`） |
 | Cloudflare 日次 usage（D1/Workers/R2） | `.claude/state/metrics/cloudflare/{snapshots/YYYY-MM-DD.json,history.csv,LATEST.md}`（GitHub Actions 日次 JST 02:30、閾値違反時 `[Cloudflare Alert]` Issues 起票）/ 閾値: `.claude/skills/analytics/cloudflare-cost-improvement/reference/budgets-daily.json` |
 | SNS 投稿メトリクス時系列 | `.claude/skills/analytics/sns-metrics-improvement/snapshots/YYYY-MM-DD/metrics.csv`（書き込み: `.claude/scripts/lib/sns-metrics-store.cjs`） |
 | アフィリエイト在庫棚卸し + GA4 実測 snapshot | `.claude/state/ads/{inventory-*.json,ga4-affiliate-*.json}`（`affiliate-dashboard-refresh.yml` / `affiliate-ga4-weekly.yml` が生成・commit-back、AFF-05） |
@@ -100,7 +100,7 @@ git TS 化し永続 D1 を全廃した。アプリが読む各データの真実
 ```
 スキルが生成するデータの本質は？
   ├─ アプリが読む Authored エンティティ (設定 / 運用)  → git TS が SSOT → 生成スクリプトで R2 JSON
-  │      （詳細・判定は 19_完全DBレス設計.md §3 / data-sqlite-ssot.md）
+  │      （詳細・判定は 12_完全DBレス設計.md §3 / data-sqlite-ssot.md）
   ├─ 観測値から計算できる集計 (Derived)              → エフェメラル計算 → R2 (永続しない)
   ├─ 人間が読み返す計画・レビュー・改善ログ          → docs/
   ├─ エージェントが参照する詳細ログ・state          → .claude/
@@ -115,7 +115,7 @@ git TS 化し永続 D1 を全廃した。アプリが読む各データの真実
 
 | 場所 | 用途 |
 |---|---|
-| `docs/02_実装計画/improvement-backlog.md` | 全施策の一覧 (簡易表)。**TODO 真実源**。status / Tier / 期日を管理 |
+| `docs/02_実装計画/03_改善バックログ.md` | 全施策の一覧 (簡易表)。**TODO 真実源**。status / Tier / 期日を管理 |
 | `.claude/skills/analytics/<metric>-improvement/reference/improvement-log.md` | agent 用詳細ログ。検証コマンド・仮説・URL inspection 結果など |
 
 ## 本原則の根拠

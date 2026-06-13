@@ -1,7 +1,7 @@
 /**
  * homepage 末尾「このサイトの主要ページ」セクション用プレビュー画像/動画の撮影スクリプト。
  *
- * 仕様: docs/01_技術設計/12_homepage-previews.md
+ * 仕様: docs/01_技術設計/08_homepage-previews.md
  *
  * 使い方:
  *   npx tsx apps/web/scripts/capture-home-previews.ts \

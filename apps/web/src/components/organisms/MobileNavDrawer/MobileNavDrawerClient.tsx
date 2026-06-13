@@ -51,7 +51,7 @@ const NAV_LINKS = [
  * PC 常設サイドバー廃止に伴い、モバイル（lg 未満）のナビ手段として残す。
  * `useSidebarStore.isOpen` で開閉。PC では何も描画しない。
  *
- * 設計仕様: docs/01_技術設計/21_統一レイアウト設計.md
+ * 設計仕様: docs/01_技術設計/13_統一レイアウト設計.md
  */
 export function MobileNavDrawerClient({ themes }: MobileNavDrawerClientProps) {
   const isOpen = useSidebarStore((s) => s.isOpen);

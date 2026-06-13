@@ -2,7 +2,7 @@
  * extract-articles-seed-from-r2: R2 の app/blog/<slug>/article.md frontmatter から
  * articles テーブルの seed JSON を再構成する。
  *
- * 設計上の含意 (docs/01_技術設計/17_リモートD1ハイブリッド設計.md):
+ * 設計上の含意 (docs/01_技術設計/archive/17_リモートD1ハイブリッド設計.md):
  *   articles テーブルは article.md の frontmatter から全列が再構成可能 = Derived。
  *   D1 を SSOT にする必要は無く、R2 (article.md) が真実源。本 script はその実証兼 seed 生成。
  *

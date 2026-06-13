@@ -526,5 +526,5 @@ export async function GET() {
 **関連**:
 - `.claude/scripts/estat/backfill-stats-prefecture.cjs` (要 UPSERT 化リファクタ)
 - `.claude/scripts/estat/restore-from-r2-cache.cjs` (UPSERT 実例)
-- `docs/01_技術設計/10_自動化インベントリ.md` 手動運用ツールセクション
+- `docs/01_技術設計/06_自動化インベントリ.md` 手動運用ツールセクション
 - memory: `project_estat_backfill_lessons.md` (本件 + e-Stat 全年度取得規約)

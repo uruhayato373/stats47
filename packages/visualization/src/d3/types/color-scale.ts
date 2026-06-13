@@ -9,6 +9,10 @@ import type { D3Module } from "./d3";
  */
 export interface VisualizationDataPoint {
   value: number;
+  // index signature は `any` 必須 (`unknown` にしない)。`unknown` にすると index signature を
+  // 持たない既存データ型 (RankingValue / StatsSchema 等) が MapDataPoint へ代入不可になり、
+  // map 系コンポーネント全体が型エラーになる (TS2322 "Index signature is missing")。
+  // 柔軟なチャートデータ点として任意キーを許容する意図的設計。
   [key: string]: any;
 }
 

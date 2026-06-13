@@ -43,6 +43,11 @@ const NUMERIC_KEYS: (keyof YearRecord)[] = [
   "fundAdjust", "fundRedemption", "fundOther", "localDebt",
 ];
 
+// NOTE: これは R2 data reader ではない (r2-storage-design.md の module-cache 禁止対象外)。
+// 入力 cardsJson は build 時に bundle される immutable な静的 import であり、派生計算
+// (年度一覧・47県平均) を warm isolate 内で 1 度だけ行うための pure compute memo。
+// R2 fetch を伴わないため stale 化リスクがなく、データ更新は再ビルド (= isolate 再起動) で反映される。
+// unstable_cache は async 関数専用でこの同期関数には適用できない。
 let cached: FinanceCardsData | null = null;
 
 export function loadFinanceCards(): FinanceCardsData {

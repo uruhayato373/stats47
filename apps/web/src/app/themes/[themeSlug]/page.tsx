@@ -23,6 +23,9 @@ import type { Metadata } from "next";
  * Plan: /root/.claude/plans/ok-validated-stroustrup.md Phase 3
  */
 
+/** 24時間 ISR */
+export const revalidate = 86400;
+
 /** ALL_THEMES から static params を生成。local-finance は専用ファイルが優先されるため除外。 */
 export function generateStaticParams() {
   return ALL_THEMES.filter((t) => t.themeKey !== "local-finance").map((t) => ({

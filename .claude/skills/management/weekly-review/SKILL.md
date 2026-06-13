@@ -105,7 +105,7 @@ node .claude/scripts/snapshot-weekly-metrics.mjs [YYYY-Www]
    - raw: overview.csv / pages.csv(全件) / channels.csv / devices.csv / daily.csv
    - clean: overview-clean.csv / channels-clean.csv (country=Japan only, engagedSessions/engagementRate 含む)
    - pollution-summary.csv (overseas_sessions / notSet_sessions の bot 推定 1 行)
-   レビュー本文には **raw と clean の両方を併記**し、bot 影響を視覚化する（詳細: `docs/04_レビュー/critical-review/2026-05-16-ga4-bot-pollution.md`）。
+   レビュー本文には **raw と clean の両方を併記**し、bot 影響を視覚化する（詳細: `docs/04_レビュー/2026-05-16-ga4-bot-pollution.md`）。
    取得完了後、`/ga4-improvement observe` を実行する。observe は以下を行う:
    - 新しい `[GA4 Snapshot] YYYY-Www` Issue を `ga4-snapshot` ラベルで作成
    - budgets.json で閾値判定
@@ -177,7 +177,7 @@ node .claude/scripts/snapshot-weekly-metrics.mjs [YYYY-Www]
 
 7. SNS メトリクスと YouTube のレビュー本文への埋め込み
    SNS / YouTube の週次ハイライトは本レビュードキュメント `docs/03_週次運用/週次レビュー/YYYY-Www.md` 本文に直接記載する。
-   GA4/GSC の詳細データは snapshot CSV (`.claude/skills/analytics/{gsc,ga4}-improvement/reference/snapshots/`) と改善ログ (`docs/02_実装計画/improvement-backlog.md`) に分離済みなので、レビュー本文では「主要指標の前週差 + 改善ログ section 参照」のみに圧縮する。
+   GA4/GSC の詳細データは snapshot CSV (`.claude/skills/analytics/{gsc,ga4}-improvement/reference/snapshots/`) と改善ログ (`docs/02_実装計画/03_改善バックログ.md`) に分離済みなので、レビュー本文では「主要指標の前週差 + 改善ログ section 参照」のみに圧縮する。
 
 出力形式:
 - 「パフォーマンス概況」（overview.csv / GSC サマリー + AdSense + YouTube + SNS の主要指標を 1 行で明記）
@@ -224,8 +224,8 @@ node .claude/scripts/snapshot-weekly-metrics.mjs [YYYY-Www]
   → git log と照合して完了/未達を判定
 - 今週 close された Issue（`gh issue list --state closed --search "closed:>=<today-7d>"`、enhancement / auto-generated ラベル等）
 - 今週追加された各種レビュー ドキュメント
-  ls -t docs/04_レビュー/critical-review/*.md | head -5
-  ls -t docs/04_レビュー/pre-mortem/*.md | head -3
+  ls -t docs/04_レビュー/*.md | grep -v 'pre-mortem' | head -5
+  ls -t docs/04_レビュー/*-pre-mortem-*.md | head -3
   → ファイル名の日付（YYYY-MM-DD-{topic}.md）で当週分を抽出
 
 「前週からの引き継ぎ」: 前週計画 `docs/03_週次運用/週次計画/YYYY-W(n-1).md` の Must / Should / Could 未達チェックボックスを Read tool で取得し、本レビューの「計画 vs 実績」セクションで「継続」「持ち越し」と判定する。
@@ -250,7 +250,7 @@ node .claude/scripts/snapshot-weekly-metrics.mjs [YYYY-Www]
 
 ### Phase 2.5: ロードマップ実測値の更新
 
-`docs/02_実装計画/01_実装ロードマップ.md` の「現在のステータス」テーブルを、DB の実測値で更新する。
+`docs/02_実装計画/02_実装ロードマップ.md` の「現在のステータス」テーブルを、DB の実測値で更新する。
 
 #### 取得するデータ
 
@@ -424,7 +424,7 @@ pollution 監査（pollution-summary.csv, raw - clean の差分）:
 
 - overseas_sessions: N（前週 N, +N% 増減）
 - notSet_sessions: N（前週 N, +N% 増減）
-- ⚠️ overseas / notSet が前週比 +30% 超で増えた場合は GA4 Admin の bot filter 設定確認 + Cloudflare WAF rule 追加を `docs/04_レビュー/critical-review/` に起票
+- ⚠️ overseas / notSet が前週比 +30% 超で増えた場合は GA4 Admin の bot filter 設定確認 + Cloudflare WAF rule 追加を `docs/04_レビュー/` に起票
 
 主要な動き:
 - Organic Search (clean): N → N (+N) ※ clean ベースで評価
@@ -451,7 +451,7 @@ pollution 監査（pollution-summary.csv, raw - clean の差分）:
 **GSC Alert**: `/gsc-improvement observe` のアラート判定結果を 1 行で記載（閾値非超過なら本節は省略）:
 - 登録済み ≤ -10% / 404 ≥ +5% / 5xx ≥ +20% のいずれか発火時、対象指標と対応方針を明記
 
-**施策効果サマリ** (`docs/02_実装計画/improvement-backlog.md` を Read し `status: pending` 以外の行を抽出):
+**施策効果サマリ** (`docs/02_実装計画/03_改善バックログ.md` を Read し `status: pending` 以外の行を抽出):
 
 | Section | Tier | 経過日数 | ターゲット | status |
 |---|---|---|---|---|
@@ -470,7 +470,7 @@ node -e 'const q=require("./.claude/state/blog/remediation-queue.json");console.
 - 「pending N (must-fix M) / done D」を 1 行で記載し、**前週比で pending がいくつ減ったか**を明記する (順次品質向上の進捗指標)。
 - この週に remediated_at が付いた記事 (= 今週是正した wave) を抽出し、対応する `## [BLOG-WAVE-<wave_id>]` (gsc.md) の効果を判定する。
   due (デプロイ +28 日) を過ぎた BLOG-WAVE は GSC clicks/CTR の before/after で effect 判定 → gsc.md の `status:` を更新 (`.claude/rules/evidence-based-judgment.md` 準拠、実測コマンド併記)。
-- 仕組み全体 (床): `docs/02_実装計画/blog-remediation-loop.md`。
+- 仕組み全体 (床): `docs/02_実装計画/06_ブログ品質是正ループ.md`。
 
 **ブログ勝ち要因 (天井ループ・GSC 更新後に実行)**:
 
@@ -478,9 +478,9 @@ node -e 'const q=require("./.claude/state/blog/remediation-queue.json");console.
 node .claude/scripts/blog/analyze-winning-patterns.mjs   # CTR×構造特徴→featureSignals + 順位交絡統制
 ```
 
-- 最新 `docs/04_レビュー/blog-quality/<date>-winning-patterns.md` の **robust かつ confidence hi/mid** のシグナルを 1-2 行で記載。
+- 最新 `docs/04_レビュー/<date>-blog-winning-patterns.md` の **robust かつ confidence hi/mid** のシグナルを 1-2 行で記載。
 - **robust な勝ちパターンのみ** `.claude/rules/blog-quality-standards.md` への書き戻しを検討 (定性裏取り後、`evidence-based-judgment.md` 準拠)。weakened/confounded は書き戻さない。
-- 仕組み全体 (天井): `docs/02_実装計画/blog-continuous-quality-loop.md`。
+- 仕組み全体 (天井): `docs/02_実装計画/07_ブログ勝ちパターン学習.md`。
 
 ### AdSense（過去 7 日） — snapshot CSV: `.claude/skills/analytics/adsense-improvement/reference/snapshots/YYYY-Www/` / Issue: `#NN` (`adsense-snapshot`)
 
@@ -544,7 +544,7 @@ node .claude/scripts/blog/analyze-winning-patterns.mjs   # CTR×構造特徴→f
 ## 関連ドキュメント・Issue
 
 <!-- GA4/GSC/AdSense snapshot Issue（auto-generated ラベル）や施策 Issue（enhancement ラベル）は #番号で参照 -->
-<!-- critical-review / pre-mortem は `../../04_レビュー/{critical-review,pre-mortem}/<file>.md` で相対リンク参照 -->
+<!-- critical-review / pre-mortem は `../../04_レビュー/<file>.md` で相対リンク参照 -->
 ```
 
 ## 運用ルール
@@ -560,8 +560,8 @@ node .claude/scripts/blog/analyze-winning-patterns.mjs   # CTR×構造特徴→f
 - ペアの週次計画: `docs/03_週次運用/週次計画/YYYY-Www.md`（Phase 4.5 で `status: archived` に書き換え）
 - `gsc-snapshot` / `ga4-snapshot` / `adsense-snapshot` — Phase 1 Agent C が observe モードで作成する snapshot Issue（auto-generated 系として存続）
 - `gsc-improvement` / `ga4-improvement` / `adsense-improvement` — 施策 Issue（enhancement ラベルで存続、effect 判定は各 observe が担当）
-- 当週分の critical-review: `docs/04_レビュー/critical-review/YYYY-MM-DD-*.md`
-- 当週分の pre-mortem: `docs/04_レビュー/pre-mortem/YYYY-MM-DD-*.md`
+- 当週分の critical-review: `docs/04_レビュー/YYYY-MM-DD-*.md` (type: critical-review)
+- 当週分の pre-mortem: `docs/04_レビュー/YYYY-MM-DD-pre-mortem-*.md`
 
 ## 実証チェックリスト（observe で effect ラベル変更 / Issue コメント post する前に必須）
 
@@ -596,7 +596,7 @@ node .claude/scripts/blog/analyze-winning-patterns.mjs   # CTR×構造特徴→f
 - `.claude/skills/analytics/gsc-improvement/reference/snapshots/` — GSC 週次 snapshot CSV + budgets.json（施策・観測は GitHub Issues `gsc-*` ラベル側）
 - `.claude/skills/analytics/ga4-improvement/reference/snapshots/` — GA4 週次 snapshot CSV + budgets.json（施策・観測は GitHub Issues `ga4-*` ラベル側）
 - `.claude/skills/analytics/adsense-improvement/reference/snapshots/` — AdSense 週次 snapshot CSV + budgets.json（施策・観測は GitHub Issues `adsense-*` ラベル側）
-- `docs/02_実装計画/01_実装ロードマップ.md` — KPI・スプリント目標
+- `docs/02_実装計画/02_実装ロードマップ.md` — KPI・スプリント目標
 - DB `sns_posts` / `sns_metrics` テーブル — SNS コンテンツ状況・メトリクス
 - `.claude/skills/analytics/fetch-ga4-data/SKILL.md` — GA4 データ取得手順（snapshot モード）
 - `.claude/skills/analytics/fetch-gsc-data/SKILL.md` — GSC データ取得手順（snapshot モード）

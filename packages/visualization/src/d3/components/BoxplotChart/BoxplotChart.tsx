@@ -2,7 +2,7 @@
 
 import { REGIONS } from "@stats47/area";
 import { cn } from "@stats47/components";
-import * as d3 from "d3";
+import { select, ascending, min, max, quantile, scaleBand, scaleLinear, axisLeft, axisBottom } from "d3";
 import { useEffect, useRef } from "react";
 import { computeAxisDomain } from "../../../shared";
 import { CHART_STYLES } from "../../constants";
@@ -91,10 +91,9 @@ export function BoxplotChart({
     const chartWidth = width - margin.left - margin.right;
     const chartHeight = height - margin.top - margin.bottom;
 
-    d3.select(svgEl).selectAll("*").remove();
+    select(svgEl).selectAll("*").remove();
 
-    const svg = d3
-      .select(svgEl)
+    const svg = select(svgEl)
       .style("font-family", "'Noto Sans JP', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Meiryo', sans-serif");
 
     const g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
@@ -102,26 +101,26 @@ export function BoxplotChart({
     // データ処理: 地域別グルーピング・統計量計算
     const groupedData = REGIONS.map((region) => {
       const items = filteredData.filter((d) => (region.prefectures as readonly string[]).includes(d.areaCode));
-      const values = items.map((d) => d.value).sort(d3.ascending);
-      const min = d3.min(values) ?? 0;
-      const max = d3.max(values) ?? 0;
-      const q1 = d3.quantile(values, 0.25) ?? 0;
-      const median = d3.quantile(values, 0.5) ?? 0;
-      const q3 = d3.quantile(values, 0.75) ?? 0;
-      return { ...region, items, min, max, q1, median, q3 };
+      const values = items.map((d) => d.value).sort(ascending);
+      const minVal = min(values) ?? 0;
+      const maxVal = max(values) ?? 0;
+      const q1 = quantile(values, 0.25) ?? 0;
+      const median = quantile(values, 0.5) ?? 0;
+      const q3 = quantile(values, 0.75) ?? 0;
+      return { ...region, items, min: minVal, max: maxVal, q1, median, q3 };
     });
 
     // スケール
-    const xScale = d3.scaleBand().domain(groupedData.map((d) => d.regionName)).range([0, chartWidth]).padding(0.2);
+    const xScale = scaleBand().domain(groupedData.map((d) => d.regionName)).range([0, chartWidth]).padding(0.2);
 
     const axisDomain = computeAxisDomain(filteredData.map((d) => d.value), { clampMinToZero: minValueType !== "data-min" });
     const yDomainMin = yAxisMin !== undefined ? yAxisMin : axisDomain.min;
     const yDomainMax = yAxisMax !== undefined ? yAxisMax : axisDomain.max;
-    const yScale = d3.scaleLinear().domain([yDomainMin, yDomainMax]).range([chartHeight, 0]);
+    const yScale = scaleLinear().domain([yDomainMin, yDomainMax]).range([chartHeight, 0]);
 
     // グリッド線
     g.append("g")
-      .call(d3.axisLeft(yScale).tickSize(-chartWidth).tickFormat(() => ""))
+      .call(axisLeft(yScale).tickSize(-chartWidth).tickFormat(() => ""))
       .style("stroke", BORDER)
       .style("stroke-opacity", CHART_STYLES.grid.strokeOpacity);
 
@@ -220,12 +219,12 @@ export function BoxplotChart({
     });
 
     // X軸
-    const xAxis = g.append("g").attr("transform", `translate(0,${chartHeight})`).call(d3.axisBottom(xScale).tickSize(0));
+    const xAxis = g.append("g").attr("transform", `translate(0,${chartHeight})`).call(axisBottom(xScale).tickSize(0));
     xAxis.selectAll("text").attr("dy", "1.2em").style("font-size", `${20 * scale}px`).style("font-weight", "bold").style("fill", TEXT_MUTED);
     xAxis.selectAll("line, path").style("stroke", TEXT_MUTED);
 
     // Y軸
-    const yAxis = g.append("g").call(d3.axisLeft(yScale));
+    const yAxis = g.append("g").call(axisLeft(yScale));
     yAxis.selectAll("text").style("font-size", `${14 * scale}px`).style("fill", TEXT_MUTED);
     yAxis.selectAll("line, path").style("stroke", TEXT_MUTED);
 

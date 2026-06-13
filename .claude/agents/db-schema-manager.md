@@ -5,7 +5,7 @@ description: Drizzle schema (型ソース) + migration SQL (使い捨てビル�
 
 # DB Schema Manager Agent
 
-**完全DBレス (正典: `docs/01_技術設計/19_完全DBレス設計.md`)**。永続/リモート D1 は廃止。
+**完全DBレス (正典: `docs/01_技術設計/12_完全DBレス設計.md`)**。永続/リモート D1 は廃止。
 本 agent が扱うのは **Drizzle schema 定義 (型ソース / テスト基盤 / エフェメラル計算の temp table 型)** と
 **migration SQL** であり、その適用先は **再生成可能な使い捨てビルドキャッシュ SQLite / テスト用 :memory:** に限る。
 リモート D1 への `wrangler d1 migrations apply` は対象外 (本番は R2 snapshot のみ、DB を持たない)。

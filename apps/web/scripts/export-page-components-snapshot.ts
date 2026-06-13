@@ -1,5 +1,5 @@
 /**
- * page_components を git TS SSOT から R2 snapshot 化する (完全DBレス → docs/01_技術設計/19_完全DBレス設計.md)。
+ * page_components を git TS SSOT から R2 snapshot 化する (完全DBレス → docs/01_技術設計/12_完全DBレス設計.md)。
  *
  * SSOT は `apps/web/scripts/data/page-components/{area,area-category,city-category,theme}/<key>.json`
  * (git tracked、cloud R2 から reverse-extract。以後は git が SSOT)。永続 D1 は読まない。

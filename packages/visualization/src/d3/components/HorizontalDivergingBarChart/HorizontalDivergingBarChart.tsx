@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "@stats47/components";
-import * as d3 from "d3";
+import { select, scaleLinear, scaleBand, axisTop } from "d3";
 import { useEffect, useRef } from "react";
 import { computeChartLayout, computeMarginsByRatio } from "../../../shared/layout";
 import { useD3Tooltip } from "../../hooks/useD3Tooltip";
@@ -45,7 +45,7 @@ export function HorizontalDivergingBarChart({
   useEffect(() => {
     if (!svgRef.current || data.length === 0) return;
 
-    const svg = d3.select(svgRef.current);
+    const svg = select(svgRef.current);
     svg.selectAll("*").remove();
 
     // 乖離度の大きい順にソート
@@ -59,14 +59,12 @@ export function HorizontalDivergingBarChart({
     const maxVal = Math.max(baseline, ...values);
     const padding = (maxVal - minVal) * 0.15 || 2;
 
-    const x = d3
-      .scaleLinear()
+    const x = scaleLinear()
       .domain([minVal - padding, maxVal + padding])
       .range([0, innerWidth]);
 
     // Y スケール（カテゴリ軸）
-    const y = d3
-      .scaleBand()
+    const y = scaleBand()
       .domain(sorted.map((d) => d.label))
       .range([0, innerHeight])
       .padding(0.25);
@@ -78,8 +76,7 @@ export function HorizontalDivergingBarChart({
     // X 軸（上）
     g.append("g")
       .call(
-        d3
-          .axisTop(x)
+        axisTop(x)
           .ticks(5)
           .tickSize(-innerHeight)
           .tickFormat((d) => String(d))
@@ -114,7 +111,7 @@ export function HorizontalDivergingBarChart({
       .attr("rx", 2)
       .attr("opacity", 0.85)
       .on("mouseenter", function (event, d) {
-        d3.select(this).attr("opacity", 1);
+        select(this).attr("opacity", 1);
         const diff = d.value - baseline;
         const sign = diff >= 0 ? "+" : "";
         showTooltip(event, d.label, {
@@ -127,7 +124,7 @@ export function HorizontalDivergingBarChart({
         updateTooltipPosition(event);
       })
       .on("mouseleave", function () {
-        d3.select(this).attr("opacity", 0.85);
+        select(this).attr("opacity", 0.85);
         hideTooltip();
       });
 

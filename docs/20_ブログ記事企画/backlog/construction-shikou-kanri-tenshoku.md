@@ -9,7 +9,7 @@ updated: 2026-05-29
 tags: [content-plan, construction, labor, affiliate, 転職, 施工管理技士]
 target_affiliate: labor (転職) + 資格スクール
 related_strategy: docs/00_プロジェクト管理/02_収益化戦略.md
-related_review: docs/04_レビュー/critical-review/2026-05-29-monetization.md
+related_review: docs/04_レビュー/2026-05-29-monetization.md
 ---
 
 # 土木施工管理技士（1級・2級）ガイド × 建設転職アフィリエイト — 記事企画 + 競合分析
@@ -132,7 +132,7 @@ competitor 構造を踏襲しつつ、**各記事に「県別年収/求人デー
 4. **Tier B 資格ガイド** を topical authority 補強として順次（各記事に県別データ1セクション必須）
 
 ## 関連
-- 収益化レビュー: `docs/04_レビュー/critical-review/2026-05-29-monetization.md`
+- 収益化レビュー: `docs/04_レビュー/2026-05-29-monetization.md`
 - アフィリエイト基盤: `apps/web/src/features/ads/constants/affiliate-category.ts` / `apps/web/src/features/ads/README.md`
 - 記事品質規約: `.claude/rules/blog-quality-standards.md`
 - 既存 construction backlog: `docs/20_ブログ記事企画/backlog/construction.md`

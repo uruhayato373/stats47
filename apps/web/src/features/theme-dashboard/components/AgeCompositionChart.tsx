@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 
 import { Skeleton } from "@stats47/components/atoms/ui/skeleton";
+import { select, stack, stackOrderNone, stackOffsetNone, scaleBand, scaleLinear, max, axisBottom } from "d3";
 
 export interface AgeCompositionSeries {
   key: string;
@@ -99,14 +100,14 @@ function StackedBarChart({ data }: { data: AgeCompositionData }) {
       return;
     let cancelled = false;
 
-    import("d3").then((d3) => {
+    {
       if (cancelled || !svgRef.current || !containerRef.current) return;
 
-      const svg = d3.select(svgRef.current);
+      const svg = select(svgRef.current);
       svg.selectAll("*").remove();
 
       // ツールチップ
-      const container = d3.select(containerRef.current);
+      const container = select(containerRef.current);
       container.selectAll(".age-tooltip").remove();
       const tooltip = container
         .append("div")
@@ -135,14 +136,13 @@ function StackedBarChart({ data }: { data: AgeCompositionData }) {
       const keys = series.map((s) => s.key);
       const colorMap = new Map(series.map((s) => [s.key, s.color]));
 
-      const stack = d3
-        .stack<Record<string, string | number>>()
+      const stackGen = stack<Record<string, string | number>>()
         .keys(keys)
         .value((d, key) => Number(d[key]) || 0)
-        .order(d3.stackOrderNone)
-        .offset(d3.stackOffsetNone);
+        .order(stackOrderNone)
+        .offset(stackOffsetNone);
 
-      const stackedData = stack(trendData);
+      const stackedData = stackGen(trendData);
 
       const catValues = trendData.map((d) => String(d.category));
       const filteredTicks = catValues.filter((val) => {
@@ -150,16 +150,14 @@ function StackedBarChart({ data }: { data: AgeCompositionData }) {
         return !isNaN(num) && num % 5 === 0;
       });
 
-      const x = d3
-        .scaleBand()
+      const x = scaleBand()
         .domain(catValues)
         .range([marginLeft, width - marginRight])
         .padding(0.15);
 
       const yMax =
-        d3.max(stackedData, (layer) => d3.max(layer, (d) => d[1])) ?? 0;
-      const y = d3
-        .scaleLinear()
+        max(stackedData, (layer) => max(layer, (d) => d[1])) ?? 0;
+      const y = scaleLinear()
         .domain([0, yMax])
         .nice()
         .range([height - marginBottom, marginTop]);
@@ -215,8 +213,7 @@ function StackedBarChart({ data }: { data: AgeCompositionData }) {
         .append("g")
         .attr("transform", `translate(0,${height - marginBottom})`)
         .call(
-          d3
-            .axisBottom(x)
+          axisBottom(x)
             .tickValues(filteredTicks.length > 0 ? filteredTicks : catValues)
             .tickFormat((val) => {
               const row = trendData.find((d) => String(d.category) === val);
@@ -226,13 +223,13 @@ function StackedBarChart({ data }: { data: AgeCompositionData }) {
         )
         .call((g) => g.selectAll(".domain").remove())
         .call((g) => g.selectAll(".tick text").attr("font-size", 13));
-    });
+    }
 
     const container = containerRef.current;
     return () => {
       cancelled = true;
       if (container) {
-        d3Select(container).selectAll(".age-tooltip").remove();
+        select(container).selectAll(".age-tooltip").remove();
       }
     };
   }, [trendData, series]);
@@ -251,14 +248,3 @@ function StackedBarChart({ data }: { data: AgeCompositionData }) {
   );
 }
 
-// cleanup 用に d3.select だけ同期 import
-function d3Select(el: Element) {
-  // lazy fallback - cleanup 時に d3 がロード済みならそのまま使う
-  try {
-    // eslint-disable-next-line @typescript-eslint/no-require-imports
-    const d3 = require("d3");
-    return d3.select(el);
-  } catch {
-    return { selectAll: () => ({ remove: () => {} }) };
-  }
-}

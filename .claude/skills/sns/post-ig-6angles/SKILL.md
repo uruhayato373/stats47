@@ -412,4 +412,4 @@ jq '[.posts[] | select(.platform=="instagram" and .angle!=null)]' \
 
 - `.claude/agents/instagram-strategist.md` — 戦略レイヤー（参照元）
 - `.claude/skills/sns/post-x-6angles/SKILL.md` — X 版（切り口フレーム共通）
-- `docs/02_実装計画/improvement-backlog.md` — SNS-IG-01（Instagram リーチ拡大施策）
+- `docs/02_実装計画/03_改善バックログ.md` — SNS-IG-01（Instagram リーチ拡大施策）

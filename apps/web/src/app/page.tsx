@@ -24,7 +24,7 @@ import { AdSenseAd, RANKING_PAGE_FOOTER } from "@/lib/google-adsense";
 
 /**
  * 主要ページプレビュー画像/動画の R2 公開 URL ベース。
- * 仕様: docs/01_技術設計/12_homepage-previews.md
+ * 仕様: docs/01_技術設計/08_homepage-previews.md
  * 撮影: apps/web/scripts/capture-home-previews.ts
  * R2 ファイルが未生成の場合、NextUpGrid は previewImageUrl の 404 を許容し
  * グラデアクセントへフォールバックする (object src が失敗しても layout は変わらない)。

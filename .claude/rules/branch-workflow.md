@@ -52,7 +52,7 @@ git push origin develop
 - `/deploy` スキルで実行
 - フロー: feature/* で作業 → ローカルで develop に merge → `git push origin develop` → `gh pr create --base main --head develop` → CI green → マージ → main 自動デプロイ → 必要なら `/purge-cdn`
 
-## データ反映フロー（完全DBレスが正典 → `docs/01_技術設計/19_完全DBレス設計.md`）
+## データ反映フロー（完全DBレスが正典 → `docs/01_技術設計/12_完全DBレス設計.md`）
 
 **本番は R2 スナップショット配信のみ。** SSOT は git TS と R2 の二つだけ。永続/リモート D1 は廃止。
 オーサリング SSOT を生成スクリプトで R2 に直接反映する（D1 を経由しない）:

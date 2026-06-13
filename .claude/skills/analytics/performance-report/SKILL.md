@@ -148,7 +148,7 @@ CWV の 3 指標（LCP, CLS, INP）を評価する:
 
 ### 保存先
 
-`docs/04_レビュー/performance-report/{YYYY-Www}.md` に Write tool で書き出す。frontmatter:
+`docs/04_レビュー/{YYYY-Www}-performance-report.md` に Write tool で書き出す。frontmatter:
 
 ```yaml
 ---
@@ -257,7 +257,7 @@ status: active
 - `.claude/skills/analytics/performance-improvement/snapshots/YYYY-MM-DD/metrics.csv` — 計測履歴
 - `.claude/skills/analytics/performance-improvement/budgets.json` — 閾値設定
 - `.claude/skills/analytics/performance-improvement/reference/improvement-log.md` — 改善施策ログ
-- `ls -t docs/04_レビュー/performance-report/*.md` — 過去のレポート
+- `ls -t docs/04_レビュー/*-performance-report.md` — 過去のレポート
 
 ## DB パス
 

@@ -12,20 +12,17 @@ function setConsentCookie(value: string) {
   document.cookie = `${CONSENT_COOKIE_NAME}=${value}; path=/; max-age=${COOKIE_MAX_AGE}; SameSite=Lax`;
 }
 
+type GtagConsentParams = {
+  analytics_storage?: "granted" | "denied";
+  ad_storage?: "granted" | "denied";
+};
+
 function syncGtag(value: "granted" | "denied") {
-  if (value === "granted") {
-    window.gtag?.("consent", "update", {
-      analytics_storage: "granted",
-      ad_storage: "granted",
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- gtag consent API types not available
-    } as any);
-  } else {
-    window.gtag?.("consent", "update", {
-      analytics_storage: "denied",
-      ad_storage: "denied",
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- gtag consent API types not available
-    } as any);
-  }
+  const params: GtagConsentParams =
+    value === "granted"
+      ? { analytics_storage: "granted", ad_storage: "granted" }
+      : { analytics_storage: "denied", ad_storage: "denied" };
+  window.gtag?.("consent", "update", params);
 }
 
 /**

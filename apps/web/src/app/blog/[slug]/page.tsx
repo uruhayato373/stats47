@@ -110,19 +110,22 @@ export default async function BlogPostPage({ params }: PageProps) {
         notFound();
     }
 
-    const articleTagData = await getTagKeysForArticle(slug);
-    const tagKeys = articleTagData.map((t) => t.tagKey);
-    const [relatedArticles, affiliateBannersByCategory] = await Promise.all([
-        getRelatedArticles(tagKeys, slug),
-        resolveAffiliateBannersByCategory(),
-    ]);
-
     // 記事本文中の /blog/{slug} リンクからスラッグを抽出し、DB からタイトルを取得
     const blogLinkSlugs = [...article.content.matchAll(/\]\(\/blog\/([a-z0-9-]+)\)/g)]
         .map((m) => m[1])
         .filter((s) => s !== slug);
     const uniqueSlugs = [...new Set(blogLinkSlugs)];
-    const relatedArticleTitles = await findArticleTitlesBySlugs(uniqueSlugs);
+
+    // tagKeys / 本文リンクのタイトル / アフィバナーは互いに独立 → 並列取得 (waterfall 解消)
+    const [articleTagData, relatedArticleTitles, affiliateBannersByCategory] =
+        await Promise.all([
+            getTagKeysForArticle(slug),
+            findArticleTitlesBySlugs(uniqueSlugs),
+            resolveAffiliateBannersByCategory(),
+        ]);
+    const tagKeys = articleTagData.map((t) => t.tagKey);
+    // relatedArticles は tagKeys 依存、articleTagsMap は relatedArticles 依存 (チェーン)
+    const relatedArticles = await getRelatedArticles(tagKeys, slug);
     const articleTagsMap = await getTagsForArticles(relatedArticles.map((a) => a.slug));
 
     const baseUrl = getRequiredBaseUrl();

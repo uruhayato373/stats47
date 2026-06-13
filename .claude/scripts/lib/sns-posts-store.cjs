@@ -1,9 +1,9 @@
 /**
- * SNS 投稿台帳ストア (完全DBレス doc19 Phase E)。
+ * SNS 投稿台帳ストア (完全DBレス doc12 Phase E)。
  *
  * sns_posts は「書込専用の運用ログ」(投稿のたびに append、指標を後から UPDATE) であり、
  * authored config と性質が違うため git TS ではなく **エージェント用 state** として
- * `.claude/state/sns/posts.json` に置く (doc19 §3 / data-storage.md の `.claude/` カテゴリ)。
+ * `.claude/state/sns/posts.json` に置く (doc12 §3 / data-storage.md の `.claude/` カテゴリ)。
  * 永続/リモート D1・ローカル SQLite は使わない。
  *
  * 全 SNS 自動化スクリプト (publish-x / post-instagram / generate-schedule / delete-* /

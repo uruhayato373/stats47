@@ -9,7 +9,7 @@ primary_agent: theme-component-builder
 
 `/design-theme-charts` で設計したチャートをテーマページに反映する。
 
-> **完全DBレス (doc19 Phase E)**: page_components の SSOT は **git TS** `apps/web/scripts/data/page-components/`。
+> **完全DBレス (doc12 Phase E)**: page_components の SSOT は **git TS** `apps/web/scripts/data/page-components/`。
 > 永続/リモート D1 への INSERT は廃止。**JSON を直接編集 → generator で R2 反映 → verify** のフローに統一。
 
 ## SSOT の場所
@@ -70,6 +70,6 @@ primary_agent: theme-component-builder
 
 ## 関連
 
-- 正典: `docs/01_技術設計/19_完全DBレス設計.md` (§5 運用エンティティ標準フロー)
+- 正典: `docs/01_技術設計/12_完全DBレス設計.md` (§5 運用エンティティ標準フロー)
 - 設計: `/design-theme-charts` / reader: `apps/web/src/features/stat-charts/services/page-components-snapshot.ts`
 - 生成: `apps/web/scripts/export-page-components-snapshot.ts` / 検証: `apps/web/scripts/verify-page-components-snapshot.ts`

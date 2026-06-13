@@ -16,7 +16,7 @@ Phase 6 (2026-05-27) の D1 → R2 移行後、本 agent は D1 stats_* テー�
 - カバレッジ / FK 整合性検証 (`/verify-d1-integrity`、ビルドキャッシュ対象)
 - MLIT KSJ データ取得 (`/fetch-mlit-ksj`)
 
-> page_components は完全DBレス (doc19 Phase E) で **git TS SSOT** `apps/web/scripts/data/page-components/` に移行済。
+> page_components は完全DBレス (doc12 Phase E) で **git TS SSOT** `apps/web/scripts/data/page-components/` に移行済。
 > D1 投入 (`/populate-component-data`) は廃止。編集は JSON 直編集 + `export-page-components-snapshot.ts`。
 
 ## 担当スキル
@@ -80,7 +80,7 @@ Phase 6 (2026-05-27) の D1 → R2 移行後、本 agent は D1 stats_* テー�
   本番は `KNOWN_RANKING_KEYS` / R2 `app/ranking-items/all.json` 等の派生リストと整合して初めて 200 を返す
   (middleware は `isGone || !isKnown` で 410)。公開は config 起点の多段再生成 (generate-ranking-items 配線 +
   known 再生成 + sitemap/indexable + 再デプロイ + purge + 本番実測) が必要。手順: memory
-  `project_ranking_publish_pipeline_gap` / `docs/02_実装計画/feature-backlog.md`。activate 量産時はここまでをセットで計画すること
+  `project_ranking_publish_pipeline_gap` / `docs/02_実装計画/04_機能バックログ.md`。activate 量産時はここまでをセットで計画すること
 
 ## Output Contract
 

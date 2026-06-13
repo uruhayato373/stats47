@@ -161,7 +161,7 @@ NSM を駆動する 3-5 の Input Metrics を定義する。各 Input Metric は
 
 ### Step 6: critical-review レポートを Write する
 
-レビュー本文（NSM 定義・7 基準評価・Input Metrics）を `docs/04_レビュー/critical-review/{YYYY-MM-DD}-nsm.md` に Write tool で出力する。日付は今日（JST）の `YYYY-MM-DD` を使用する。
+レビュー本文（NSM 定義・7 基準評価・Input Metrics）を `docs/04_レビュー/{YYYY-MM-DD}-nsm.md` に Write tool で出力する。日付は今日（JST）の `YYYY-MM-DD` を使用する。
 
 frontmatter は以下を必ず含める:
 
@@ -183,14 +183,14 @@ status: active
 過去の NSM 定義変遷は以下で確認:
 
 ```bash
-ls -t docs/04_レビュー/critical-review/*.md | head -5
+ls -t docs/04_レビュー/*.md | head -5
 ```
 
-旧 GitHub Issue 運用は廃止: critical-review レポートは `docs/04_レビュー/critical-review/` に蓄積する。
+旧 GitHub Issue 運用は廃止: critical-review レポートは `docs/04_レビュー/` に蓄積する。
 
 ## 参照
 
-- `docs/02_実装計画/01_実装ロードマップ.md` — KPI・スプリント目標
+- `docs/02_実装計画/02_実装ロードマップ.md` — KPI・スプリント目標
 - `docs/00_プロジェクト管理/01_概要/` — プロジェクト概要・ビジョン
 - `.claude/skills/management/weekly-plan/SKILL.md` — 週次計画（NSM 統合先）
 - `.claude/skills/management/growth-loops/SKILL.md` — 成長ループ分析

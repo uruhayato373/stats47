@@ -1,11 +1,11 @@
 # データ管理アーキテクチャ (完全DBレス)
 
-> **⚠️ 2026-05-29 更新: 正典は [`docs/01_技術設計/19_完全DBレス設計.md`](../../docs/01_技術設計/19_完全DBレス設計.md)。**
+> **⚠️ 2026-05-29 更新: 正典は [`docs/01_技術設計/12_完全DBレス設計.md`](../../docs/01_技術設計/12_完全DBレス設計.md)。**
 > stats47 は **完全DBレス**に決定 (doc 18 ハイブリッド / doc 17 リモートD1 は同日 superseded)。
 > **永続/リモート D1 を SSOT に持たない。** SSOT は **git TS (コード)** と **R2 (観測値・配信)** の二つだけ。
 > 本番アプリは R2 snapshot のみ読む。Derived (area_profiles / correlations) は
 > **エフェメラル計算** (使い捨て `:memory:` SQLite / DuckDB が R2 を読む) → R2 へ書き出す。
-> 本ファイルと食い違う場合は **doc 19 が優先**。
+> 本ファイルと食い違う場合は **doc 12 が優先**。
 
 stats47 の data layer は **2 層モデル** で構成される。永続 DB は登場しない。
 
@@ -24,7 +24,7 @@ stats47 の data layer は **2 層モデル** で構成される。永続 DB は
 >   schema 定義 (`packages/database/src/schema/*.ts`) は **型ソース / テスト基盤 / エフェメラル計算の temp table 型**
 >   として残す (配信 R2 に影響しない)。プロセス終了で消える前提のものだけ建ててよい。
 
-## データ分類と置き場 (決定表 — doc 19 §3 準拠)
+## データ分類と置き場 (決定表 — doc 12 §3 準拠)
 
 | 種別 | サブ判定 | SSOT 置き場 | 該当 |
 |---|---|---|---|
@@ -55,7 +55,7 @@ Phase 1-4 で「D1 を SSOT として全データを集約」したが、5.5M �
 Phase 6 (2026-05-27) で観測値を R2 JSON に全面移行。2026-05-29 にオーナー判断で **運用エンティティの SSOT も
 リモート D1 → git TS に移し、永続 D1 を全廃**(完全DBレス)。横断クエリ・参照整合性はビルド時に解決する。
 
-## 禁止事項 (doc 19 §8)
+## 禁止事項 (doc 12 §8)
 
 | NG | OK |
 |---|---|
@@ -92,10 +92,9 @@ correlations / area_profiles は **R2 観測値を入力に使い捨て計算 �
 
 ## 関連
 
-- **正典**: `docs/01_技術設計/19_完全DBレス設計.md`
-- 却下した代替案: `docs/01_技術設計/18_データ層ハイブリッド設計.md` / `17_リモートD1ハイブリッド設計.md`
-- 実行計画: `docs/02_実装計画/dbless-migration.md`
-- Phase 6 観測値 R2 移行: `docs/01_技術設計/14_Phase6_deprecation_log.md`
+- **正典**: `docs/01_技術設計/12_完全DBレス設計.md`
+- 却下した代替案: `docs/01_技術設計/archive/18_データ層ハイブリッド設計.md` / `archive/17_リモートD1ハイブリッド設計.md`
+- Phase 6 観測値 R2 移行: `docs/01_技術設計/10_Phase6_deprecation_log.md`
 - 記録先分類: `.claude/rules/data-storage.md`
 - R2 キー設計: `.claude/rules/r2-storage-design.md`
 - TS-config 詳細: `packages/data-configs/src/types.ts` / R2 stats 型: `packages/stats-r2/src/types.ts`

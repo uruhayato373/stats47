@@ -25,7 +25,7 @@ interface PageShellProps {
  * 横幅・サイドレール・余白の SSOT。各 page.tsx は `container mx-auto` や
  * `max-w-[…]` を直接書かず、必ず本コンポーネントを経由する。
  *
- * 設計仕様: docs/01_技術設計/21_統一レイアウト設計.md
+ * 設計仕様: docs/01_技術設計/13_統一レイアウト設計.md
  *
  * グリッド（xl: 1280px 以上）:
  * - レールなし     : 1700px 中央寄せ

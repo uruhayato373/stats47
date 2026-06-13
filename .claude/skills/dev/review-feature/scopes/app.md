@@ -109,7 +109,7 @@ $ARGUMENTS — レビュー対象（以下のいずれか）
 
 ## 出力先
 
-`docs/04_レビュー/dev-review/app-{ルート名}-{YYYY-MM-DD}.md` に Write tool で書き出す。frontmatter:
+`docs/04_レビュー/{YYYY-MM-DD}-dev-review-app-{ルート名}.md` に Write tool で書き出す。frontmatter:
 
 ```yaml
 ---
@@ -121,11 +121,11 @@ status: active
 ```
 
 複数ルート指定時のファイル名例:
-- 単一ルート: `app-ranking-2026-05-04.md`
-- 複数ルート: `app-ranking-areas-2026-05-04.md`
-- 横断: `app-2026-05-04.md`
+- 単一ルート: `2026-05-04-dev-review-app-ranking.md`
+- 複数ルート: `2026-05-04-dev-review-app-ranking-areas.md`
+- 横断: `2026-05-04-dev-review-app.md`
 
-`ls -t docs/04_レビュー/dev-review/*.md | head -5` で過去のレビューを参照できる。
+`ls -t docs/04_レビュー/*-dev-review-app*.md | head -5` で過去のレビューを参照できる。
 
 ## 出力フォーマット
 

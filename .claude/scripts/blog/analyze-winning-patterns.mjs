@@ -15,7 +15,7 @@
  *   node .claude/scripts/blog/analyze-winning-patterns.mjs --json /tmp/wp.json
  *
  * 出力:
- *   docs/04_レビュー/blog-quality/<date>-winning-patterns.md   人間向けレポート (勝ち要因 + 仮説)
+ *   docs/04_レビュー/<date>-blog-winning-patterns.md   人間向けレポート (勝ち要因 + 仮説)
  *   .claude/state/blog/winning-patterns.json                   機械向け (featureSignals + perArticleConformance)
  *
  * 主指標 = CTR (同 impression 条件での "魅力") + 掲載順位 (position)。
@@ -412,9 +412,9 @@ async function main() {
 
   // ── レポート (人間向け) ──
   const date = new Date().toISOString().slice(0, 10);
-  const reportDir = path.join(PROJECT_ROOT, "docs/04_レビュー/blog-quality");
+  const reportDir = path.join(PROJECT_ROOT, "docs/04_レビュー");
   fs.mkdirSync(reportDir, { recursive: true });
-  const reportPath = path.join(reportDir, `${date}-winning-patterns.md`);
+  const reportPath = path.join(reportDir, `${date}-blog-winning-patterns.md`);
   const sigLine = (s) =>
     s.kind === "bool"
       ? `| ${s.feature} | 勝 ${s.winnerRate}% / 負 ${s.loserRate}% | lift ${s.lift > 0 ? "+" : ""}${s.lift}pt | ${s.confidence} |`
@@ -483,8 +483,8 @@ ${confounders.robustSignals.map((r) => `| ${r.feature} | ${r.rawEffect > 0 ? "+"
 4. NotebookLM で winner 上位の "なぜ刺さるか" を定性深掘り → 仮説を本レポートに追記。
 
 ## 関連
-- 仕組み正典: \`docs/02_実装計画/blog-continuous-quality-loop.md\`
-- 床を上げる側: \`docs/02_実装計画/blog-remediation-loop.md\` (\`build-remediation-queue.mjs\`)
+- 仕組み正典: \`docs/02_実装計画/07_ブログ勝ちパターン学習.md\`
+- 床を上げる側: \`docs/02_実装計画/06_ブログ品質是正ループ.md\` (\`build-remediation-queue.mjs\`)
 - 品質基準(書き戻し先): \`.claude/rules/blog-quality-standards.md\`
 `;
   fs.writeFileSync(reportPath, md);

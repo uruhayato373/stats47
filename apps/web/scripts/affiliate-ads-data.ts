@@ -1,7 +1,7 @@
 import type { AffiliateAd } from "../src/features/ads/types";
 
 /**
- * affiliate_ads SSOT (完全DBレス → docs/01_技術設計/19_完全DBレス設計.md)。
+ * affiliate_ads SSOT (完全DBレス → docs/01_技術設計/12_完全DBレス設計.md)。
  *
  * 手動 A8.net バナー登録をここで管理する (git TS が単一 SSOT)。
  * 反映: export-affiliate-ads-snapshot.ts が本配列 → R2 app/affiliate-ads/all.json を生成。
@@ -709,7 +709,7 @@ export const AFFILIATE_ADS: AffiliateAd[] = [
     "title": "STRATEGY CAREER｜エンジニア転職",
     "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B5LK5+5YC2K2+5P1E+5ZEMP",
     "areaCode": null, "categoryKey": "economy", "locationCode": "blog-bottom",
-    "isActive": true, "priority": 80, "startDate": null, "endDate": null, "targetCategories": null,
+    "isActive": true, "priority": 80, "startDate": null, "endDate": null, "targetCategories": null, "targetRankingKeys": ["software-engineer-annual-income", "system-consultant-annual-income"],
     "adType": "banner",
     "imageUrl": "https://www24.a8.net/svt/bgt?aid=260601701360&wid=001&eno=01&mid=s00000026573001005000&mc=1",
     "trackingPixelUrl": "https://www18.a8.net/0.gif?a8mat=4B5LK5+5YC2K2+5P1E+5ZEMP",
@@ -721,7 +721,7 @@ export const AFFILIATE_ADS: AffiliateAd[] = [
     "title": "STRATEGY CAREER｜エンジニア転職",
     "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B5LK5+5YC2K2+5P1E+5ZEMP",
     "areaCode": null, "categoryKey": "laborwage", "locationCode": "blog-bottom",
-    "isActive": true, "priority": 80, "startDate": null, "endDate": null, "targetCategories": null,
+    "isActive": true, "priority": 80, "startDate": null, "endDate": null, "targetCategories": null, "targetRankingKeys": ["software-engineer-annual-income", "system-consultant-annual-income"],
     "adType": "banner",
     "imageUrl": "https://www24.a8.net/svt/bgt?aid=260601701360&wid=001&eno=01&mid=s00000026573001005000&mc=1",
     "trackingPixelUrl": "https://www18.a8.net/0.gif?a8mat=4B5LK5+5YC2K2+5P1E+5ZEMP",
@@ -733,7 +733,7 @@ export const AFFILIATE_ADS: AffiliateAd[] = [
     "title": "STRATEGY CAREER｜エンジニア転職",
     "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B5LK5+5YC2K2+5P1E+5ZEMP",
     "areaCode": null, "categoryKey": "population", "locationCode": "blog-bottom",
-    "isActive": true, "priority": 80, "startDate": null, "endDate": null, "targetCategories": null,
+    "isActive": true, "priority": 80, "startDate": null, "endDate": null, "targetCategories": null, "targetRankingKeys": ["software-engineer-annual-income", "system-consultant-annual-income"],
     "adType": "banner",
     "imageUrl": "https://www24.a8.net/svt/bgt?aid=260601701360&wid=001&eno=01&mid=s00000026573001005000&mc=1",
     "trackingPixelUrl": "https://www18.a8.net/0.gif?a8mat=4B5LK5+5YC2K2+5P1E+5ZEMP",
@@ -745,7 +745,7 @@ export const AFFILIATE_ADS: AffiliateAd[] = [
     "title": "STRATEGY CAREER｜エンジニア転職",
     "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B5LK5+5YC2K2+5P1E+5ZEMP",
     "areaCode": null, "categoryKey": "tourism", "locationCode": "blog-bottom",
-    "isActive": true, "priority": 80, "startDate": null, "endDate": null, "targetCategories": null,
+    "isActive": true, "priority": 80, "startDate": null, "endDate": null, "targetCategories": null, "targetRankingKeys": ["software-engineer-annual-income", "system-consultant-annual-income"],
     "adType": "banner",
     "imageUrl": "https://www24.a8.net/svt/bgt?aid=260601701360&wid=001&eno=01&mid=s00000026573001005000&mc=1",
     "trackingPixelUrl": "https://www18.a8.net/0.gif?a8mat=4B5LK5+5YC2K2+5P1E+5ZEMP",
@@ -757,7 +757,7 @@ export const AFFILIATE_ADS: AffiliateAd[] = [
     "title": "STRATEGY CAREER｜エンジニア転職",
     "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B5LK5+5YC2K2+5P1E+5ZEMP",
     "areaCode": null, "categoryKey": "construction", "locationCode": "blog-bottom",
-    "isActive": true, "priority": 80, "startDate": null, "endDate": null, "targetCategories": null,
+    "isActive": true, "priority": 80, "startDate": null, "endDate": null, "targetCategories": null, "targetRankingKeys": ["software-engineer-annual-income", "system-consultant-annual-income"],
     "adType": "banner",
     "imageUrl": "https://www24.a8.net/svt/bgt?aid=260601701360&wid=001&eno=01&mid=s00000026573001005000&mc=1",
     "trackingPixelUrl": "https://www18.a8.net/0.gif?a8mat=4B5LK5+5YC2K2+5P1E+5ZEMP",
@@ -769,7 +769,7 @@ export const AFFILIATE_ADS: AffiliateAd[] = [
     "title": "STRATEGY CAREER｜エンジニア転職",
     "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B5LK5+5YC2K2+5P1E+5ZEMP",
     "areaCode": null, "categoryKey": "socialsecurity", "locationCode": "blog-bottom",
-    "isActive": true, "priority": 80, "startDate": null, "endDate": null, "targetCategories": null,
+    "isActive": true, "priority": 80, "startDate": null, "endDate": null, "targetCategories": null, "targetRankingKeys": ["software-engineer-annual-income", "system-consultant-annual-income"],
     "adType": "banner",
     "imageUrl": "https://www24.a8.net/svt/bgt?aid=260601701360&wid=001&eno=01&mid=s00000026573001005000&mc=1",
     "trackingPixelUrl": "https://www18.a8.net/0.gif?a8mat=4B5LK5+5YC2K2+5P1E+5ZEMP",
@@ -781,7 +781,7 @@ export const AFFILIATE_ADS: AffiliateAd[] = [
     "title": "STRATEGY CAREER｜エンジニア転職",
     "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B5LK5+5YC2K2+5P1E+5ZEMP",
     "areaCode": null, "categoryKey": "energy", "locationCode": "blog-bottom",
-    "isActive": true, "priority": 80, "startDate": null, "endDate": null, "targetCategories": null,
+    "isActive": true, "priority": 80, "startDate": null, "endDate": null, "targetCategories": null, "targetRankingKeys": ["software-engineer-annual-income", "system-consultant-annual-income"],
     "adType": "banner",
     "imageUrl": "https://www24.a8.net/svt/bgt?aid=260601701360&wid=001&eno=01&mid=s00000026573001005000&mc=1",
     "trackingPixelUrl": "https://www18.a8.net/0.gif?a8mat=4B5LK5+5YC2K2+5P1E+5ZEMP",
@@ -793,7 +793,7 @@ export const AFFILIATE_ADS: AffiliateAd[] = [
     "title": "STRATEGY CAREER｜エンジニア転職",
     "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B5LK5+5YC2K2+5P1E+5ZEMP",
     "areaCode": null, "categoryKey": "administrativefinancial", "locationCode": "blog-bottom",
-    "isActive": true, "priority": 80, "startDate": null, "endDate": null, "targetCategories": null,
+    "isActive": true, "priority": 80, "startDate": null, "endDate": null, "targetCategories": null, "targetRankingKeys": ["software-engineer-annual-income", "system-consultant-annual-income"],
     "adType": "banner",
     "imageUrl": "https://www24.a8.net/svt/bgt?aid=260601701360&wid=001&eno=01&mid=s00000026573001005000&mc=1",
     "trackingPixelUrl": "https://www18.a8.net/0.gif?a8mat=4B5LK5+5YC2K2+5P1E+5ZEMP",

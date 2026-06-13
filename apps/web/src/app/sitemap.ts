@@ -78,7 +78,7 @@ const STATIC_PAGES: MetadataRoute.Sitemap = [
   // /gis-cross/* (廃止 2026-05-29) → /themes に統合。各ページは middleware で 301 転送:
   //  migration-flow → /themes/population-dynamics, depopulation-medical → /themes/healthcare,
   //  sunshine-map → /themes/climate, hub → /themes。テーマ URL は THEME_PAGES に含まれる。
-  { url: `${BASE_URL}/search`, changeFrequency: "weekly", priority: 0.4 },
+  // /search は robots: noindex のため sitemap に含めない (2026-06 削除)。
   { url: `${BASE_URL}/about`, changeFrequency: "monthly", priority: 0.5 },
   { url: `${BASE_URL}/privacy`, changeFrequency: "yearly", priority: 0.2 },
   { url: `${BASE_URL}/terms`, changeFrequency: "yearly", priority: 0.2 },

@@ -3,18 +3,18 @@ type: redesign-tracker
 date: 2026-05-25
 status: active
 source_bundle: stats47-ranking-handoff (13).zip — 2026-05-22 20:31 export
-master_plan: docs/02_実装計画/d-redesign-master-plan.md
+master_plan: docs/02_実装計画/12_リデザイン残作業.md
 last_updated: 2026-05-25 (PR #349-#354 series)
 ---
 
 # stats47 リデザイン進捗トラッカー
 
 > **⚠️ 2026-06 更新**: レイアウト（横幅/レール/サイドバー/角丸/フォント）の正典は
-> [`docs/01_技術設計/21_統一レイアウト設計.md`](../../../docs/01_技術設計/21_統一レイアウト設計.md) に移行。
+> [`docs/01_技術設計/13_統一レイアウト設計.md`](../../../docs/01_技術設計/13_統一レイアウト設計.md) に移行。
 > 本トラッカーと配下の HTML モックアップ（サイドバー前提・`rounded-xl`・Inter/Noto 等）は
-> **当時の探索資産（履歴）**であり、現行実装（PC サイドバー廃止・フラット `--radius:0`・system フォント・`PageShell`）とは異なる。実装の正は doc 21。
+> **当時の探索資産（履歴）**であり、現行実装（PC サイドバー廃止・フラット `--radius:0`・system フォント・`PageShell`）とは異なる。実装の正は doc 13。
 
-> **全体設計**: [`docs/02_実装計画/d-redesign-master-plan.md`](../../../docs/02_実装計画/d-redesign-master-plan.md)
+> **全体設計**: [`docs/02_実装計画/12_リデザイン残作業.md`](../../../docs/02_実装計画/12_リデザイン残作業.md)
 > 11 ページとも D案（収益最大化）に統一、Phase 0 → ranking Phase 2 → home → area → category → theme → 残りの順で実装する。
 
 Claude Design (claude.ai/design) でモックアップした **11 ページ × 各 4 案** のリデザインを、`/ranking` ページから順次本実装していくための真実源。

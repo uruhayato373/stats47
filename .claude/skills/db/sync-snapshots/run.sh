@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# sync-snapshots: git TS / R2 観測値から R2 snapshot を順次 export する (完全DBレス doc19)
+# sync-snapshots: git TS / R2 観測値から R2 snapshot を順次 export する (完全DBレス doc12)
 # 各 export は git TS (data/page-components, affiliate-ads-data 等) / article.md / R2 観測値を入力に
 # .local/r2/app/ へ snapshot を生成し、末尾で diff-push-r2 が R2 に push する。永続 D1 は読まない。
 
@@ -40,8 +40,6 @@ declare -a TASKS=(
   "page-components|apps/web/scripts/export-page-components-snapshot.ts"
   "affiliate-ads|apps/web/scripts/export-affiliate-ads-snapshot.ts"
   "ranking-page-cards|apps/web/scripts/export-ranking-page-cards-snapshot.ts"
-  "fishing-ports|apps/web/scripts/export-fishing-ports-snapshot.ts"
-  "port-statistics|apps/web/scripts/export-port-statistics-snapshot.ts"
   "station-passengers|apps/web/scripts/export-station-passengers-snapshot.ts"
   "migration-flow|apps/web/scripts/export-migration-flow-r2.ts"
   "finance-flow|apps/web/scripts/generate-finance-flow.ts"

@@ -6,17 +6,26 @@ import { logger } from "@stats47/logger";
  * @param data - APIレスポンス
  * @param url - リクエストURL
  */
-export function validateResponse(data: any, url: string): void {
+export function validateResponse(data: unknown, url: string): void {
   if (!data || typeof data !== "object") {
     throw new Error(`不正なレスポンス形式です: ${url}`);
   }
 
-  const result = data.GET_STATS_DATA?.RESULT;
-  if (!result) return;
+  const record = data as Record<string, unknown>;
+  const statsData = record.GET_STATS_DATA;
+  const result =
+    statsData && typeof statsData === "object"
+      ? (statsData as Record<string, unknown>).RESULT
+      : undefined;
+  if (!result || typeof result !== "object") return;
 
-  const status = result.STATUS;
+  const resultRecord = result as Record<string, unknown>;
+  const status = resultRecord.STATUS;
   if (status !== 0 && status !== 1) {
-    const errorMsg = result.ERROR_MSG || "不明なエラー";
+    const errorMsg =
+      typeof resultRecord.ERROR_MSG === "string"
+        ? resultRecord.ERROR_MSG
+        : "不明なエラー";
     logger.error({ status, errorMsg, url }, "e-Stat APIエラーレスポンス");
     throw new Error(`e-Stat APIエラー [${status}]: ${errorMsg}`);
   }

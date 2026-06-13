@@ -1,7 +1,7 @@
 /**
  * page_components / ranking page-cards の git TS SSOT が現行 cloud R2 配信と byte 一致するか検証する。
  *
- * 完全DBレス (doc19) Phase E verify。data/page-components/ 配下の各 git JSON を、対応する
+ * 完全DBレス (doc12) Phase E verify。data/page-components/ 配下の各 git JSON を、対応する
  * 配信 R2 key (公開URL) と文字列比較する。1 件でも不一致なら exit 1。
  *
  * 使用方法:

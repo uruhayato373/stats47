@@ -4,7 +4,7 @@ import { cn } from "@stats47/components";
 
 import { Button } from "@stats47/components";
 import { getMaxDecimalPlaces, formatValueWithPrecision } from "@stats47/utils";
-import * as d3 from "d3";
+import { select, scaleLinear, scaleBand, scaleOrdinal, schemeTableau10, range, max, easeLinear, interpolateNumber, interval, Timer } from "d3";
 import { Pause, Play, RotateCcw } from "lucide-react";
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { computeChartLayout, computeFontSize, computeMarginsByRatio } from "../../../shared/layout";
@@ -40,7 +40,7 @@ export function BarChartRace({
     const { showTooltip, hideTooltip, updateTooltipPosition } = useD3Tooltip();
     const [isPlaying, setIsPlaying] = useState(false);
     const [currentDate, setCurrentDate] = useState<string>("");
-    const timerRef = useRef<d3.Timer | null>(null);
+    const timerRef = useRef<Timer | null>(null);
     const dateIndexRef = useRef(0);
 
     // --- コンテナサイズ測定 → viewBox に反映 ---
@@ -103,12 +103,12 @@ export function BarChartRace({
     useEffect(() => {
         if (!svgRef.current || data.length === 0) return;
 
-        const svg = d3.select(svgRef.current);
+        const svg = select(svgRef.current);
         svg.selectAll("*").remove();
 
         // 値ラベルの最大文字幅を事前計算し、バー領域から除外する
         const allValues = data.flatMap((f) => f.items.map((i) => i.value));
-        const maxVal = d3.max(allValues) ?? 1;
+        const maxVal = max(allValues) ?? 1;
         const maxLabelText = formatValue(maxVal);
         // 一時的な <text> で実測
         const tempText = svg.append("text")
@@ -118,18 +118,17 @@ export function BarChartRace({
         tempText.remove();
 
         const globalMax = maxVal;
-        const x = d3.scaleLinear([0, globalMax], [marginLeft, viewWidth - marginRight - labelWidth]);
+        const x = scaleLinear([0, globalMax], [marginLeft, viewWidth - marginRight - labelWidth]);
         const barsTop = marginTop;
         const barsBottom = barsTop + innerHeight * 0.9;
-        const y = d3
-            .scaleBand()
-            .domain(d3.range(topN).map((n) => n.toString()))
+        const y = scaleBand()
+            .domain(range(topN).map((n) => n.toString()))
             .rangeRound([barsTop, barsBottom])
             .padding(0.1);
 
         // Color scale — collect all unique names across all frames for consistent colors
         const allNames = Array.from(new Set(data.flatMap((d) => d.items.map((i) => i.name))));
-        const color = d3.scaleOrdinal(d3.schemeTableau10).domain(allNames);
+        const color = scaleOrdinal(schemeTableau10).domain(allNames);
 
         // ClipPath: バー領域のみに描画を制限（exit 要素が下にはみ出さないよう barsBottom + 1バー分で切る）
         const clipId = `bar-race-clip-${Math.random().toString(36).slice(2, 8)}`;
@@ -201,7 +200,7 @@ export function BarChartRace({
                 .merge(bars)
                 .transition()
                 .duration(duration)
-                .ease(d3.easeLinear)
+                .ease(easeLinear)
                 .attr("y", (d) => yPos(d))
                 .attr("width", (d) => x(d.value) - x(0));
 
@@ -209,7 +208,7 @@ export function BarChartRace({
                 .exit()
                 .transition()
                 .duration(duration)
-                .ease(d3.easeLinear)
+                .ease(easeLinear)
                 .attr("width", 0)
                 .attr("y", yExit)
                 .style("opacity", 0)
@@ -233,7 +232,7 @@ export function BarChartRace({
                 .merge(labels)
                 .transition()
                 .duration(duration)
-                .ease(d3.easeLinear)
+                .ease(easeLinear)
                 .attr("y", (d) => yCenter(d))
                 .attr("font-size", axisFontSize)
                 .text((d) => d.name);
@@ -242,7 +241,7 @@ export function BarChartRace({
                 .exit()
                 .transition()
                 .duration(duration)
-                .ease(d3.easeLinear)
+                .ease(easeLinear)
                 .attr("y", yExit)
                 .style("opacity", 0)
                 .remove();
@@ -265,13 +264,13 @@ export function BarChartRace({
                 .merge(values)
                 .transition()
                 .duration(duration)
-                .ease(d3.easeLinear)
+                .ease(easeLinear)
                 .attr("x", (d) => x(d.value) + 6)
                 .attr("y", (d) => yCenter(d))
                 .attr("font-size", axisFontSize)
                 .tween("text", function (d) {
                     const prev = parseFloat(this.textContent?.replace(/,/g, "") || "0");
-                    const interp = d3.interpolateNumber(prev, d.value);
+                    const interp = interpolateNumber(prev, d.value);
                     return function (t) {
                         this.textContent = formatValue(interp(t));
                     };
@@ -296,7 +295,7 @@ export function BarChartRace({
     // Timer Loop
     useEffect(() => {
         if (isPlaying) {
-            timerRef.current = d3.interval(() => {
+            timerRef.current = interval(() => {
                 if (dateIndexRef.current >= data.length - 1) {
                     setIsPlaying(false);
                     timerRef.current?.stop();

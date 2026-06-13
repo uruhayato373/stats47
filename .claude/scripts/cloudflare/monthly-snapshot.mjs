@@ -5,7 +5,7 @@
  * 入力: `.claude/state/metrics/cloudflare/snapshots/YYYY-MM-DD.json`（日次 GraphQL 取得結果）
  * 出力:
  *   - `.claude/skills/analytics/cloudflare-cost-improvement/reference/monthly-snapshots/YYYY-MM.json`
- *   - `docs/04_レビュー/cloudflare-cost/YYYY-MM.md`（人間向け要約、frontmatter 付き）
+ *   - `docs/04_レビュー/YYYY-MM-cloudflare-cost.md`（人間向け要約、frontmatter 付き）
  *
  * 集計対象: 「請求月」= 前月の 15 日から当月の 14 日（Cloudflare の請求サイクル）
  *   - 当 script が JST 09:00 of 15th に走るので、当月の請求サイクルが直前で締まる想定
@@ -28,7 +28,7 @@ const PROJECT_ROOT = path.resolve(__dirname, "..", "..", "..");
 
 const SNAPSHOTS_DIR = path.join(PROJECT_ROOT, ".claude/state/metrics/cloudflare/snapshots");
 const MONTHLY_DIR = path.join(PROJECT_ROOT, ".claude/skills/analytics/cloudflare-cost-improvement/reference/monthly-snapshots");
-const DOCS_DIR = path.join(PROJECT_ROOT, "docs/04_レビュー/cloudflare-cost");
+const DOCS_DIR = path.join(PROJECT_ROOT, "docs/04_レビュー");
 const BUDGETS_PATH = path.join(PROJECT_ROOT, ".claude/skills/analytics/cloudflare-cost-improvement/reference/budgets.json");
 
 const args = process.argv.slice(2);
@@ -284,7 +284,7 @@ function main() {
   }
 
   mkdirSync(DOCS_DIR, { recursive: true });
-  const docsOut = path.join(DOCS_DIR, `${cycle}.md`);
+  const docsOut = path.join(DOCS_DIR, `${cycle}-cloudflare-cost.md`);
   if (existsSync(docsOut)) {
     console.log(`Already exists: ${docsOut}. Skip.`);
     return;

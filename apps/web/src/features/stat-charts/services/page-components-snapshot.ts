@@ -9,8 +9,6 @@ export function pageComponentsKeyPath(pageType: string, pageKey: string): string
   return `app/page-components/${pageType}/${encodeURIComponent(pageKey)}.json`;
 }
 
-const cache = new Map<string, PageComponent[]>();
-
 /** @deprecated pageComponentsKeyPath を使用してください */
 export const PAGE_COMPONENTS_SNAPSHOT_KEY = "app/page-components/all.json";
 
@@ -57,6 +55,8 @@ export interface PageComponentsSnapshot {
  * 旧: page-components/all.json (全件) → in-memory cache → key で lookup
  * 新: page-components/{pageType}/{pageKey}.json を 1 fetch → そのまま返す
  *
+ * module-level cache は持たない (r2-storage-design.md: data reader は module cache 禁止)。
+ * 再 push 後の stale を避けるため、キャッシュは Next.js / CDN レイヤに委ねる。
  * build 時 (NEXT_PHASE=phase-production-build) は [] を返す。
  */
 export async function readPageComponentsFromR2(
@@ -67,15 +67,9 @@ export async function readPageComponentsFromR2(
     return [];
   }
 
-  const cacheKey = `${pageType}|${pageKey}`;
-  if (cache.has(cacheKey)) return cache.get(cacheKey)!;
-
   try {
     const data = await fetchFromR2AsJson<PageComponent[]>(pageComponentsKeyPath(pageType, pageKey));
-    // 一時的な miss (data=null) は恒久キャッシュしない。warm isolate が
-    // 再 push 後も空配列を返し続けるのを防ぐ (cf. r2-storage-design.md)。
     if (!data) return [];
-    cache.set(cacheKey, data);
     return data;
   } catch (error) {
     logger.error(

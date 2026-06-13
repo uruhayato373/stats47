@@ -129,7 +129,8 @@ export async function resolveAffiliateTextAdsByTagKeys(
  */
 export async function resolveAffiliateBanners(
   tagKeys: string[],
-  limit = 2
+  limit = 2,
+  rankingKey?: string
 ): Promise<ResolvedAffiliateBanner[]> {
   // tagKey → AffiliateCategory → categoryKey(s) を一括収集
   const triedCategories = new Set<string>();
@@ -148,8 +149,8 @@ export async function resolveAffiliateBanners(
 
   if (allCategoryKeys.length === 0) return [];
 
-  // 一括クエリで取得
-  const banners = await findActiveBannersByCategoryKeys(allCategoryKeys, limit);
+  // 一括クエリで取得 (rankingKey 指定時は targetRankingKeys ターゲティングを適用)
+  const banners = await findActiveBannersByCategoryKeys(allCategoryKeys, limit, rankingKey);
 
   return banners
     .filter((b) => b.imageUrl && b.trackingPixelUrl)
@@ -170,11 +171,12 @@ export async function resolveAffiliateBanners(
  */
 export async function resolveAffiliateBannersByCategoryKey(
   categoryKey: string,
-  limit = 1
+  limit = 1,
+  rankingKey?: string
 ): Promise<ResolvedAffiliateBanner[]> {
   if (!categoryKey) return [];
 
-  const banners = await findActiveBannersByCategoryKeys([categoryKey], limit);
+  const banners = await findActiveBannersByCategoryKeys([categoryKey], limit, rankingKey);
 
   return banners
     .filter((b) => b.imageUrl && b.trackingPixelUrl)

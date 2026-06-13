@@ -8,7 +8,7 @@ description: テーマダッシュボードの page_components 設計・監査�
 > **[完全DBレス Phase E (2026-05-30)]** page_components の SSOT は git TS
 > `apps/web/scripts/data/page-components/<pageType>/<key>.json`。永続/リモート D1 への INSERT は廃止。
 > 追加 = JSON 配列を直接編集 → `export-page-components-snapshot.ts` で R2 生成 → `verify-page-components-snapshot.ts` で検証。
-> `page_component_assignments` テーブルは PR #216 で page_components に統合済 (廃止)。正典: `docs/01_技術設計/19_完全DBレス設計.md`。
+> `page_component_assignments` テーブルは PR #216 で page_components に統合済 (廃止)。正典: `docs/01_技術設計/12_完全DBレス設計.md`。
 
 テーマダッシュボードの page_components を設計・追加する専門エージェント。既存テーマの可視化を強化する。
 
