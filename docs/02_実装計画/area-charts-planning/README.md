@@ -17,7 +17,7 @@ tags: [area-charts, planning]
 ## 親計画
 
 - `/root/.claude/plans/47-swirling-wreath.md` — Phase A-E 全体計画
-- `docs/01_技術設計/11_area-vs-theme責務分離.md` — area / theme 責務判定基準 (本計画の絶対準拠先)
+- `docs/01_技術設計/11_情報設計.md` — area / theme 責務判定基準 (本計画の絶対準拠先)
 - `docs/02_実装計画/theme-charts-planning/README.md` — theme 側の対応する設計 (mirror 元)
 - `docs/02_実装計画/whitepaper-chart-inventory/README.md` — Phase D で本計画に振り分けられる素材リスト
 
@@ -51,7 +51,7 @@ status: `not-started` → `drafted` (Agent によるリサーチ稿) → `review
 
 ## area に配置するチャート (3 種)
 
-`docs/01_技術設計/11_area-vs-theme責務分離.md` の判定基準に従い、area には以下のみ:
+`docs/01_技術設計/11_情報設計.md` の判定基準に従い、area には以下のみ:
 
 | chart_type | 用途 | 例 |
 |---|---|---|
@@ -84,7 +84,7 @@ area は `chart_target: prefecture` に**限定**する。`national` / `age` / `
 
 ## 関連
 
-- 責務分離ルール: `docs/01_技術設計/11_area-vs-theme責務分離.md`
+- 責務分離ルール: `docs/01_技術設計/11_情報設計.md`
 - mirror 元: `docs/02_実装計画/theme-charts-planning/README.md`
 - 素材リスト: `docs/02_実装計画/whitepaper-chart-inventory/README.md`
 - area 実装: `apps/web/src/features/area-profile/`

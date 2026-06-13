@@ -121,7 +121,7 @@ user が CLI を実行して結果 JSON を `reference/queries/<wp-slug>/*.json`
 
 ## Phase D での responsibility 判定
 
-`docs/01_技術設計/11_area-vs-theme責務分離.md` の判定基準に従い、各 chart を以下に振り分け:
+`docs/01_技術設計/11_情報設計.md` の判定基準に従い、各 chart を以下に振り分け:
 
 - `area`: 47 県別 + 単一県のプロフィール構成に使う (`chart_target: prefecture` 必須)
 - `theme`: 主題横断・全国時系列・国際比較・年齢構成 (`chart_target: national / age / time-series` 等)
@@ -141,7 +141,7 @@ user が CLI を実行して結果 JSON を `reference/queries/<wp-slug>/*.json`
 ## 関連
 
 - 親計画: `/root/.claude/plans/47-swirling-wreath.md`
-- 責務分離ルール: `docs/01_技術設計/11_area-vs-theme責務分離.md`
+- 責務分離ルール: `docs/01_技術設計/11_情報設計.md`
 - mirror 元フォーマット: `docs/02_実装計画/theme-charts-planning/README.md`
 - 白書 SSOT: `.claude/skills/blog/brushup-blog --target article/SKILL.md`
 - e-Stat 照合 (Phase C): `.claude/skills/estat/search-estat/SKILL.md`

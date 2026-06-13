@@ -3,7 +3,7 @@
  *
  * curated テーマ一覧 (ALL_THEMES) を MobileNavDrawerClient に渡す。
  * category は内部 backbone に降格し、主要ナビ (ドロワー) には出さない
- * (役割分担: docs/01_技術設計/16_タクソノミー役割分担.md)。
+ * (役割分担: docs/01_技術設計/11_情報設計.md)。
  * PC では client 側が `return null` するため描画コストはほぼゼロ。
  * `cookies()` / `headers()` は呼ばない（SSG 維持）。
  *

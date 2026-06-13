@@ -79,7 +79,7 @@ node .claude/scripts/notebooklm-cross-query.mjs \
 
 ## 5. responsibility 振り分け (Phase D で埋まる)
 
-`docs/01_技術設計/11_area-vs-theme責務分離.md` の判定基準に従い:
+`docs/01_技術設計/11_情報設計.md` の判定基準に従い:
 
 | responsibility | 件数 | 配置先 |
 |---|---|---|
