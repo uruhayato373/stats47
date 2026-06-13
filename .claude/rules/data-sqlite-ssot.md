@@ -93,7 +93,7 @@ correlations / area_profiles は **R2 観測値を入力に使い捨て計算 �
 ## 関連
 
 - **正典**: `docs/01_技術設計/19_完全DBレス設計.md`
-- 却下した代替案: `docs/01_技術設計/18_データ層ハイブリッド設計.md` / `17_リモートD1ハイブリッド設計.md`
+- 却下した代替案: `docs/01_技術設計/archive/18_データ層ハイブリッド設計.md` / `archive/17_リモートD1ハイブリッド設計.md`
 - 実行計画: `docs/02_実装計画/dbless-migration.md`
 - Phase 6 観測値 R2 移行: `docs/01_技術設計/14_Phase6_deprecation_log.md`
 - 記録先分類: `.claude/rules/data-storage.md`
