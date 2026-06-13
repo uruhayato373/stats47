@@ -8,9 +8,9 @@
  * 2026-05-05 の単一週絞り込みによる大量インデックス削除を回避する設計 (詳細はスクリプト docstring)。
  *
  * 集計週: 2026-W16, 2026-W17, 2026-W18, 2026-W19, 2026-W20, 2026-W21, 2026-W22, 2026-W23
- *   週別 impressions>=1 キー数: 2026-W16: 314 / 2026-W17: 339 / 2026-W18: 621 / 2026-W19: 681 / 2026-W20: 798 / 2026-W21: 822 / 2026-W22: 842 / 2026-W23: 824
- * 和集合: 2125 キー (INDEXABLE +0 / KNOWN +1148 / INDEXABLE 総数 338 / KNOWN 総数 2120)
- * 生成日: 2026-06-06
+ *   週別 impressions>=1 キー数: 2026-W16: 314 / 2026-W17: 339 / 2026-W18: 621 / 2026-W19: 681 / 2026-W20: 798 / 2026-W21: 822 / 2026-W22: 842 / 2026-W23: 835
+ * 和集合: 2126 キー (INDEXABLE +0 / KNOWN +1142 / INDEXABLE 総数 338 / KNOWN 総数 2121)
+ * 生成日: 2026-06-13
  *
  * 安全弁: url-policy.ts shouldIncludeInSitemap は本セットが空の場合 KNOWN 全件に
  *         フォールバックする (生成失敗時の大量削除を防ぐ)。
@@ -1395,6 +1395,7 @@ export const SITEMAP_RANKING_KEYS = new Set<string>([
   "per-capita-kenmin-shotoku-h23",
   "per-capita-national-tax-collected",
   "per-capita-police-expenditure-pref-municipal",
+  "per-capita-prefectural-income-h27",
   "per-capita-public-assistance-expenditure-protected-pref-municipal",
   "per-capita-public-works-expenditure-pref-municipal",
   "per-capita-sanitation-expenditure-pref-municipal",

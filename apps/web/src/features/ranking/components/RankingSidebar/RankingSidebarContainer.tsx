@@ -1,11 +1,9 @@
-import {
-  readRankingItemFromR2,
-  readRankingItemsByCategoryFromR2,
-} from "@stats47/ranking/server";
+import { readRankingItemFromR2 } from "@stats47/ranking/server";
 import { isOk } from "@stats47/types";
 
 import type { AreaType } from "@/features/area";
 import { findCategoryByKey } from "@/features/category/server";
+import { readRankingItemsByCategory } from "@/features/ranking/lib/cached-category-items";
 
 import { RankingSidebarClient } from "./RankingSidebarClient";
 
@@ -46,7 +44,7 @@ export async function RankingSidebarContainer({
     // 2. カテゴリ名とランキングアイテムを並列取得
     const [catResult, result] = await Promise.all([
         findCategoryByKey(categoryKey),
-        readRankingItemsByCategoryFromR2(categoryKey),
+        readRankingItemsByCategory(categoryKey),
     ]);
 
     if (!isOk(result)) {

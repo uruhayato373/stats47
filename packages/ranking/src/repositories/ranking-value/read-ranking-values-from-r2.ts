@@ -14,8 +14,6 @@ import {
 
 const STALE_AFTER_DAYS = 90;
 
-const keyCache = new Map<string, RankingValuesKeySnapshot | null>();
-
 function warnIfStale(generatedAt: string, rankingKey: string, areaType: string): void {
   const ageDays = (Date.now() - new Date(generatedAt).getTime()) / (1000 * 60 * 60 * 24);
   if (ageDays > STALE_AFTER_DAYS) {
@@ -30,21 +28,15 @@ async function loadRankingValuesForKey(
   rankingKey: string,
   areaType: string,
 ): Promise<RankingValuesKeySnapshot | null> {
-  const cacheKey = `${rankingKey}|${areaType}`;
-  if (keyCache.has(cacheKey)) return keyCache.get(cacheKey) ?? null;
-
   const path = rankingValuesKeyPath(rankingKey, areaType);
   const snapshot = await fetchFromR2AsJson<RankingValuesKeySnapshot>(path);
 
   if (!snapshot) {
     logger.warn({ rankingKey, areaType, path }, "ranking-values snapshot が R2 に存在しません");
-    // 不在を恒久キャッシュしない。push 直後 / 一時的 miss で warm isolate が
-    // 空のままになるのを防ぐため、次アクセスで再取得を試みる。
     return null;
   }
 
   warnIfStale(snapshot.generatedAt, rankingKey, areaType);
-  keyCache.set(cacheKey, snapshot);
   return snapshot;
 }
 
@@ -52,8 +44,13 @@ async function loadRankingValuesForKey(
  * R2 snapshot から ranking_values を取得。
  *
  * - 1 fetch per (rankingKey, areaType) — yearCode は in-memory filter
- * - module-level cache により同一キーの複数年度アクセスは 1 R2 fetch で済む
  * - build 時 (NEXT_PHASE=phase-production-build) は ok([]) を返す
+ *
+ * ※ module-level cache は持たない (.claude/rules/r2-storage-design.md)。各 render は 1 (key,areaType)
+ *   につき 1 回しか呼ばないため request 内 dedup は不要。旧 keyCache は warm isolate で R2 push 後の
+ *   stale を招き、月次 data-refresh の観測値更新が反映されない問題があったため撤去。
+ *   同一 render で同一 key を複数 component が読む場合に dedup したくなったら、app 層で React cache()
+ *   ラップする (cachedFindRankingItem と同じパターン)。
  */
 export async function readRankingValuesFromR2(
   rankingKey: string,

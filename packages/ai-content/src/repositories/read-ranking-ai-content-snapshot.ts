@@ -5,8 +5,6 @@ import { fetchFromR2AsJson } from "@stats47/r2-storage/server";
 
 import { aiContentKeyPath, type AiContentSnapshotRow } from "../types/snapshot";
 
-const cache = new Map<string, AiContentSnapshotRow | null>();
-
 /**
  * R2 上の ai-content/{key}.json から取得。
  *
@@ -14,6 +12,10 @@ const cache = new Map<string, AiContentSnapshotRow | null>();
  * 新: ai-content/{key}.json を 1 fetch → そのまま返す
  *
  * build 時 (NEXT_PHASE=phase-production-build) は null を返す。
+ *
+ * ※ module-level cache は持たない (.claude/rules/r2-storage-design.md)。ranking ページ render で
+ *   1 回しか読まないため request 内 dedup は不要。module cache は warm isolate で R2 push 後の
+ *   stale を招く (ISR 再生成を無効化) ため撤去。
  */
 export async function readRankingAiContentFromR2(
   rankingKey: string,
@@ -23,11 +25,8 @@ export async function readRankingAiContentFromR2(
     return null;
   }
 
-  if (cache.has(rankingKey)) return cache.get(rankingKey) ?? null;
-
   try {
     const data = await fetchFromR2AsJson<AiContentSnapshotRow>(aiContentKeyPath(rankingKey));
-    cache.set(rankingKey, data ?? null);
     return data ?? null;
   } catch (error) {
     logger.error(
