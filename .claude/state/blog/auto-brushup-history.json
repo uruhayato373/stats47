@@ -684,6 +684,54 @@
       "expectedLift": 0,
       "impressions": 290,
       "ctr_before": 0.0448
+    },
+    {
+      "date": "2026-06-10",
+      "wave_id": "2026-06-10-manual",
+      "slug": "frozen-gyoza-spending-prefecture-gap",
+      "framing": "表2削除→上位5+下位5 SVG・である調→ですます・関連削除・内部リンク6・解釈段落補強(prose2818)・title curiosity gap改題, archetype A",
+      "expectedLift": 0,
+      "impressions": 0
+    },
+    {
+      "date": "2026-06-10",
+      "wave_id": "2026-06-10-manual",
+      "slug": "pachinko-participation-prefecture-gap",
+      "framing": "表2削除→上位5+下位5 SVG・である調→ですます・関連削除・内部リンク4・解釈段落補強(prose3309), archetype A",
+      "expectedLift": 0,
+      "impressions": 0
+    },
+    {
+      "date": "2026-06-10",
+      "wave_id": "2026-06-10-manual",
+      "slug": "pharmacist-income-prefecture-gap",
+      "framing": "表2削除→上位5+下位5 SVG・である調→ですます・関連削除・内部リンク6・callout差別化・差分表現統一(prose2962), archetype A",
+      "expectedLift": 0,
+      "impressions": 0
+    },
+    {
+      "date": "2026-06-10",
+      "wave_id": "2026-06-10-manual",
+      "slug": "tofu-consumption-prefecture-gap",
+      "framing": "表2削除→上位5+下位5 SVG・である調→ですます・関連削除・内部リンク5・解釈補強(prose3296), archetype A",
+      "expectedLift": 0,
+      "impressions": 0
+    },
+    {
+      "date": "2026-06-10",
+      "wave_id": "2026-06-10-manual",
+      "slug": "yogurt-spending-prefecture-gap",
+      "framing": "表2削除→上位5+下位5 SVG・である調→ですます・関連削除・内部リンク6・解釈補強(prose2819), archetype A",
+      "expectedLift": 0,
+      "impressions": 0
+    },
+    {
+      "date": "2026-06-10",
+      "wave_id": "2026-06-10-manual",
+      "slug": "library-books-prefecture-gap",
+      "framing": "薄記事大幅加筆: inline svg除去→生成SVG・表2削除・callout3追加・である調→ですます・title改題・数値修正・人口あたり逆転を実数回収(prose2706), archetype A",
+      "expectedLift": 0,
+      "impressions": 37
     }
   ]
 }

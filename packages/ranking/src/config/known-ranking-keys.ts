@@ -14,8 +14,8 @@
  * 更新タイミング: ranking item 追加/有効化 + CI generate-ranking-items 実行後。
  *                 必ず git commit してからデプロイ。
  *
- * 最終生成日: 2026-06-06
- * 件数: 2120
+ * 最終生成日: 2026-06-12
+ * 件数: 2121
  */
 export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "abandoned-cultivated-land-area",
@@ -1395,6 +1395,7 @@ export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "per-capita-kenmin-shotoku-h23",
   "per-capita-national-tax-collected",
   "per-capita-police-expenditure-pref-municipal",
+  "per-capita-prefectural-income-h27",
   "per-capita-public-assistance-expenditure-protected-pref-municipal",
   "per-capita-public-works-expenditure-pref-municipal",
   "per-capita-sanitation-expenditure-pref-municipal",

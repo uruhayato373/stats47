@@ -11,7 +11,7 @@ export const LIVING_HOUSING_SET: IndicatorSet = {
     // 住宅
     { rankingKey: "vacant-housing-ratio", shortLabel: "空き家率", role: "primary" },
     { rankingKey: "owner-occupied-housing-ratio", shortLabel: "持ち家率", role: "secondary" },
-    { rankingKey: "dwelling-per-floor-area", shortLabel: "延べ面積", role: "secondary" },
+    { rankingKey: "housing-floor-area", shortLabel: "延べ面積", role: "secondary" },
     // 世帯
     { rankingKey: "households", shortLabel: "世帯数", role: "context" },
     { rankingKey: "nuclear-family-households-ratio", shortLabel: "核家族世帯率", role: "context" },
@@ -32,7 +32,7 @@ export const LIVING_HOUSING_SET: IndicatorSet = {
       rankingKeys: [
         "vacant-housing-ratio",
         "owner-occupied-housing-ratio",
-        "dwelling-per-floor-area",
+        "housing-floor-area",
       ],
     },
     {

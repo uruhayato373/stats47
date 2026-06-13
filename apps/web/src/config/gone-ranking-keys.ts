@@ -6,6 +6,7 @@
  * Google にインデックスからの即時除去を促す。
  *
  * 更新日: 2026-03-27（442 → 489 件。inactive 50 件追加、active 復帰 3 件削除）
+ * 更新日: 2026-06-12（per-capita-prefectural-income-h27 を active 復帰で削除。RANK-LINK-01）
  */
 export const GONE_RANKING_KEYS = new Set([
   "actual-road-length",
@@ -251,7 +252,6 @@ export const GONE_RANKING_KEYS = new Set([
   "paved-road-length",
   "penal-code-offenses-recognized-per-1000",
   "per-capita-kenmin-shotoku-h27",
-  "per-capita-prefectural-income-h27",
   "persons-on-public-assistance",
   "persons-on-public-assistance-benefit",
   "planned-construction-cost",

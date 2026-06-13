@@ -16,7 +16,9 @@ export const prefecturalIncomePerCapita: MetricConfig = {
   ],
   "years": "all",
   "yearFormat": "fiscal",
-  "isActive": true,
+  // 観測値未投入 (R2 values.json なし・source は placeholder)。データ投入まで非公開。
+  // 公開中の同名指標は per-capita-prefectural-income-h27 (H27年基準)。
+  "isActive": false,
   "isFeatured": false,
   "featuredOrder": 0,
 };

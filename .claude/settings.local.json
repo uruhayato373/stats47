@@ -143,7 +143,8 @@
       "WebFetch(domain:shibutani.org)",
       "WebSearch",
       "Bash(python3 -c ' *)",
-      "Bash(git ls-tree *)"
+      "Bash(git ls-tree *)",
+      "Bash(mkdir -p /home/user/stats47/.claude/state/ranking/wave-r1-drafts)"
     ],
     "defaultMode": "bypassPermissions"
   }
