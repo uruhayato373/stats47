@@ -1,0 +1,65 @@
+<!-- data-source: dog-registration-count-prefecture-rankings.json | generated: 2026-06-13T00:26:53.678Z -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 300" width="680" height="300" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" role="img" aria-label="犬の登録頭数（2020年・47都道府県）">
+  <style>
+    .svg-bg{fill:#fafafa}
+    .svg-title{fill:#222}
+    .svg-subtitle{fill:#666}
+    .svg-label{fill:#333}
+    .svg-legend{fill:#888}
+    @media (prefers-color-scheme:dark){
+      .svg-bg{fill:#1f2937}
+      .svg-title{fill:#f9fafb}
+      .svg-subtitle{fill:#9ca3af}
+      .svg-label{fill:#e5e7eb}
+      .svg-legend{fill:#9ca3af}
+    }
+  </style>
+  <rect width="680" height="300" class="svg-bg" rx="8"/>
+  <text x="340" y="24" text-anchor="middle" font-size="16" font-weight="bold" class="svg-title">犬の登録頭数（2020年・47都道府県）</text>
+  
+  <text x="227.5" y="54" text-anchor="middle" font-size="12" font-weight="bold" fill="#1565c0">上位 5</text>
+  <text x="542.5" y="54" text-anchor="middle" font-size="12" font-weight="bold" fill="#c62828">下位 5</text>
+  
+      <text x="84" y="82" text-anchor="end" font-size="11" class="svg-label">東京都</text>
+      <rect x="90" y="63" width="195" height="30" fill="#1565c0" rx="2"/>
+      <text x="289" y="82" font-size="10" class="svg-label">510511頭</text>
+    
+      <text x="84" y="118" text-anchor="end" font-size="11" class="svg-label">神奈川県</text>
+      <rect x="90" y="99" width="172.72578847468517" height="30" fill="#1976d2" rx="2"/>
+      <text x="266.72578847468515" y="118" font-size="10" class="svg-label">452197頭</text>
+    
+      <text x="84" y="154" text-anchor="end" font-size="11" class="svg-label">愛知県</text>
+      <rect x="90" y="135" width="165.02068515663717" height="30" fill="#1e88e5" rx="2"/>
+      <text x="259.02068515663717" y="154" font-size="10" class="svg-label">432025頭</text>
+    
+      <text x="84" y="190" text-anchor="end" font-size="11" class="svg-label">大阪府</text>
+      <rect x="90" y="171" width="146.3060541300775" height="30" fill="#2196f3" rx="2"/>
+      <text x="240.3060541300775" y="190" font-size="10" class="svg-label">383030頭</text>
+    
+      <text x="84" y="226" text-anchor="end" font-size="11" class="svg-label">埼玉県</text>
+      <rect x="90" y="207" width="133.47682028398998" height="30" fill="#42a5f5" rx="2"/>
+      <text x="227.47682028398998" y="226" font-size="10" class="svg-label">349443頭</text>
+    
+  
+      <text x="399" y="82" text-anchor="end" font-size="11" class="svg-label">鳥取県</text>
+      <rect x="405" y="63" width="8.260869991048185" height="30" fill="#c62828" rx="2"/>
+      <text x="417.2608699910482" y="82" font-size="10" class="svg-label">21627頭</text>
+    
+      <text x="399" y="118" text-anchor="end" font-size="11" class="svg-label">福井県</text>
+      <rect x="405" y="99" width="11.531681001976452" height="30" fill="#d32f2f" rx="2"/>
+      <text x="420.53168100197644" y="118" font-size="10" class="svg-label">30190頭</text>
+    
+      <text x="399" y="154" text-anchor="end" font-size="11" class="svg-label">島根県</text>
+      <rect x="405" y="135" width="12.220373312230295" height="30" fill="#e53935" rx="2"/>
+      <text x="421.2203733122303" y="154" font-size="10" class="svg-label">31993頭</text>
+    
+      <text x="399" y="190" text-anchor="end" font-size="11" class="svg-label">秋田県</text>
+      <rect x="405" y="171" width="14.096229072439183" height="30" fill="#ef5350" rx="2"/>
+      <text x="423.0962290724392" y="190" font-size="10" class="svg-label">36904頭</text>
+    
+      <text x="399" y="226" text-anchor="end" font-size="11" class="svg-label">佐賀県</text>
+      <rect x="405" y="207" width="14.219223483921013" height="30" fill="#e57373" rx="2"/>
+      <text x="423.21922348392104" y="226" font-size="10" class="svg-label">37226頭</text>
+    
+  <text x="340" y="282" text-anchor="middle" font-size="10" class="svg-legend">凡例: 青系=上位 / 赤系=下位</text>
+</svg>
