@@ -100,7 +100,9 @@ async function postQuery(query: string, apiKey: string): Promise<unknown> {
 
 function buildQuery(prefCode: string, nextToken: string | null): string {
   if (nextToken) {
-    const esc = nextToken.replace(/"/g, '\\"');
+    // GraphQL 文字列リテラルへの埋め込み: バックスラッシュを先にエスケープしてから
+    // 二重引用符をエスケープする（順序を逆にすると `\"` が壊れる / 不完全サニタイズ）。
+    const esc = nextToken.replace(/\\/g, "\\\\").replace(/"/g, '\\"');
     return `query { getAllData(size: ${PAGE_SIZE}, nextDataRequestToken: "${esc}") { nextDataRequestToken data { id title metadata } } }`;
   }
   const filter = `{ AND: [{ attributeName: "DPF:dataset_id", is: "${DATASET_ID}" }, { attributeName: "DPF:prefecture_code", is: "${prefCode}" }] }`;

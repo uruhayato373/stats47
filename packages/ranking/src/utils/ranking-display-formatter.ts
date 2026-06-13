@@ -51,7 +51,10 @@ export function buildRankingDisplayContext(item: {
   const title = item.title
     .replace(/（\d{4}年度?）/, "")
     .replace(/^都道府県別\s*/, "")
-    .replace(/\s*ランキング$/, "")
+    // 末尾 `\s*ランキング$` は無界量指定子 + $ アンカーで多項式バックトラッキングを起こす
+    // (js/polynomial-redos)。タイトルの末尾空白は高々数文字なので {0,32} で線形化する
+    // (出力不変: 32 字超の連続空白を持つランキング名は存在しない)。
+    .replace(/\s{0,32}ランキング$/, "")
     .trim();
 
   const subtitle = item.subtitle || "";
