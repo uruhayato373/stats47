@@ -23,12 +23,12 @@ import { ThemeAwareImage } from "@/components/atoms/ThemeAwareImage";
 import { resolveAffiliateBanners } from "@/features/ads/server";
 import { listLatestArticles } from "@/features/blog/server";
 import { findCategoryByKey } from "@/features/category/server";
-import { readRankingItemsByCategory } from "@/features/ranking/lib/cached-category-items";
 import {
   FeaturedRankingCard,
   CategoryRankingTable,
   SurveyCard,
   isCaveatNote,
+  readRankingItemsByCategory,
   type CategoryRankingListItem,
 } from "@/features/ranking";
 import {
