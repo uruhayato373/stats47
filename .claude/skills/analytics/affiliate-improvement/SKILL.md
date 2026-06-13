@@ -1,6 +1,6 @@
 ---
 name: affiliate-improvement
-description: アフィリエイト広告の impression / click / CTR を GA4 (ad_impression / affiliate_click) と在庫棚卸しで分析し、弱い枠を特定して改善施策を docs/02_実装計画/improvement-backlog.md に記録するループ。在庫の管理画面 (単体 HTML) を開く機能も持つ。Use when user says "アフィリエイト改善", "アフィリエイト分析", "imp/click 増やす", "広告クリック改善", "アフィリエイト管理画面", "管理画面を開いて", "アフィリエイト一覧見せて", "在庫見せて".
+description: アフィリエイト広告の impression / click / CTR を GA4 (ad_impression / affiliate_click) と在庫棚卸しで分析し、弱い枠を特定して改善施策を docs/02_実装計画/03_改善バックログ.md に記録するループ。在庫の管理画面 (単体 HTML) を開く機能も持つ。Use when user says "アフィリエイト改善", "アフィリエイト分析", "imp/click 増やす", "広告クリック改善", "アフィリエイト管理画面", "管理画面を開いて", "アフィリエイト一覧見せて", "在庫見せて".
 primary_agent: adsense-analyst
 co_agents: [improvement-triage]
 ---
@@ -19,7 +19,7 @@ co_agents: [improvement-triage]
 
 | 層 | 場所 | 用途 |
 |---|---|---|
-| 施策一覧 | `docs/02_実装計画/improvement-backlog.md` | AFF-NN 行の追加・status 更新 |
+| 施策一覧 | `docs/02_実装計画/03_改善バックログ.md` | AFF-NN 行の追加・status 更新 |
 | agent 用詳細 | `.claude/skills/analytics/affiliate-improvement/reference/improvement-log.md` | 検証コマンド・仮説・実測値・GA4 クエリ結果 |
 | 在庫 snapshot (機械) | `.claude/state/ads/inventory-*.json` | audit script が生成、ループの入力 |
 
@@ -115,7 +115,7 @@ baseline / 中央値は実測から決め、根拠を improvement-log に書く 
 
 ### Step 4: 施策の記録 (action モード)
 
-`docs/02_実装計画/improvement-backlog.md` に新 section を追加 (INDEX.md の frontmatter 規約準拠):
+`docs/02_実装計画/03_改善バックログ.md` に新 section を追加 (INDEX.md の frontmatter 規約準拠):
 
 ```markdown
 ## [AFF-NN] タイトル
@@ -136,7 +136,7 @@ baseline / 中央値は実測から決め、根拠を improvement-log に書く 
 ### Step 5: 効果判定 (observe モードで before/after)
 
 施策デプロイから 1〜4 週後に GA4 を再取得し、impression / CTR の before/after を比較。
-実証チェックリストを通してから `docs/02_実装計画/improvement-backlog.md` の status を effect/* に更新する。
+実証チェックリストを通してから `docs/02_実装計画/03_改善バックログ.md` の status を effect/* に更新する。
 status 更新は排他的 writer の `improvement-triage` に委譲してもよい。
 
 ## 在庫追加・配置変更の実行委譲
@@ -152,7 +152,7 @@ status 更新は排他的 writer の `improvement-triage` に委譲してもよ�
 | ファイル | 役割 |
 |---|---|
 | `.claude/scripts/ads/audit-affiliate-inventory.ts` | 在庫棚卸し (決定的) |
-| `docs/02_実装計画/improvement-backlog.md` | 人間向け施策ログ (AFF-NN) |
+| `docs/02_実装計画/03_改善バックログ.md` | 人間向け施策ログ (AFF-NN) |
 | `reference/improvement-log.md` | agent 用詳細ログ |
 | `apps/web/scripts/affiliate-ads-data.ts` | 在庫 SSOT |
 | `apps/web/src/lib/analytics/events.ts` | GA4 計測イベント定義 |

@@ -40,8 +40,6 @@ declare -a TASKS=(
   "page-components|apps/web/scripts/export-page-components-snapshot.ts"
   "affiliate-ads|apps/web/scripts/export-affiliate-ads-snapshot.ts"
   "ranking-page-cards|apps/web/scripts/export-ranking-page-cards-snapshot.ts"
-  "fishing-ports|apps/web/scripts/export-fishing-ports-snapshot.ts"
-  "port-statistics|apps/web/scripts/export-port-statistics-snapshot.ts"
   "station-passengers|apps/web/scripts/export-station-passengers-snapshot.ts"
   "migration-flow|apps/web/scripts/export-migration-flow-r2.ts"
   "finance-flow|apps/web/scripts/generate-finance-flow.ts"

@@ -4,7 +4,7 @@ created: 2026-05-18
 updated: 2026-05-18
 status: pending-user-action
 related_pr: [308, 310, 311, 312]
-related_plan: docs/02_実装計画/seo-todo-unify-phase-1-3.md
+related_plan: docs/02_実装計画/03_改善バックログ.md
 ---
 
 # SEO TODO 手動作業マニュアル (W21 sprint 後)
@@ -121,7 +121,7 @@ Phase 3 の `stats47-daily-trend-pipeline` Routine。当初 `RemoteTrigger` crea
 stats47 daily trend pipeline を実行してください (Phase 3 半自動公開)。
 
 ## 前提
-- 関連 plan: docs/02_実装計画/seo-todo-unify-phase-1-3.md Phase 3
+- 関連 plan: docs/02_実装計画/03_改善バックログ.md Phase 3
 - orchestrator skill: .claude/skills/blog/draft-from-trend/SKILL.md
 - 1 回の実行で 1 記事のみ (バッチ化禁止)
 - PR は draft 必須 (人手 GATE 1 レビュー = E-E-A-T / 独自性)
@@ -224,8 +224,8 @@ git push origin develop
 
 ## 関連ドキュメント
 
-- 全体プラン: `docs/02_実装計画/seo-todo-unify-phase-1-3.md`
-- 改善バックログ: `docs/02_実装計画/improvement-backlog.md`
+- 全体プラン: `docs/02_実装計画/03_改善バックログ.md`
+- 改善バックログ: `docs/02_実装計画/03_改善バックログ.md`
 - 自動化インベントリ: `docs/01_技術設計/06_自動化インベントリ.md`
 - triggers.json: `.claude/state/triggers.json`
 - NotebookLM skill: `.claude/skills/blog/notebooklm-research/SKILL.md`

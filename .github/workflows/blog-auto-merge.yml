@@ -9,7 +9,7 @@ name: 🔀 Blog Auto-Merge (brushup-auto → develop)
 #   - Routine 側で quality-gate + factual + blog-critic PASS 済 + 公開ブリッジでも再ゲート (多重防御)
 #   - 緊急停止: GitHub Actions UI の "Disable workflow"
 #
-# 関連: docs/02_実装計画/blog-auto-brushup-cloud-routine.md (⑦ auto-merge)
+# 関連: docs/02_実装計画/08_ブログ自動化設計.md (⑦ auto-merge)
 
 on:
   pull_request:

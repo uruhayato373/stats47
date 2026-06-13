@@ -35,6 +35,20 @@ function compareByPriorityDesc(a: AffiliateAdRow, b: AffiliateAdRow): number {
   return (b.priority ?? 0) - (a.priority ?? 0);
 }
 
+/**
+ * ranking-key 単位のターゲティング判定 (転職クラスタの文脈一致配置)。
+ * - targetRankingKeys 未設定/空 → 無制限 (従来挙動・後方互換)。
+ * - 設定済 かつ rankingKey 指定あり → 一致時のみ対象 (ranking ページの native / sidebar 枠)。
+ * - 設定済 かつ rankingKey 無し (blog 等 非 ranking 文脈) → ターゲティングを適用せず従来どおり表示。
+ *   (ranking 専用のターゲティングを非 ranking 文脈に波及させないための非対称設計)
+ */
+function matchesRankingTarget(ad: AffiliateAdRow, rankingKey?: string): boolean {
+  const targets = ad.targetRankingKeys;
+  if (!targets || targets.length === 0) return true;
+  if (rankingKey == null) return true;
+  return targets.includes(rankingKey);
+}
+
 async function getActive(): Promise<AffiliateAdRow[]> {
   if (process.env.NEXT_PHASE === "phase-production-build") return [];
   try {
@@ -124,12 +138,19 @@ export async function readActiveBannersByCategoryFromR2(
 export async function readActiveBannersByCategoryKeysFromR2(
   categoryKeys: string[],
   limit = 2,
+  rankingKey?: string,
 ): Promise<AffiliateAdRow[]> {
   if (categoryKeys.length === 0) return [];
   const active = await getActive();
   const set = new Set(categoryKeys);
   return active
-    .filter((a) => a.categoryKey && set.has(a.categoryKey) && a.adType === "banner")
+    .filter(
+      (a) =>
+        a.categoryKey &&
+        set.has(a.categoryKey) &&
+        a.adType === "banner" &&
+        matchesRankingTarget(a, rankingKey),
+    )
     .sort(compareByPriorityDesc)
     .slice(0, limit);
 }

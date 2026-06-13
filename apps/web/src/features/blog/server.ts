@@ -23,6 +23,7 @@ export {
   readArticleSummariesByTagKeyFromR2 as listArticleSummariesByTagKey,
   readTagKeysForArticleFromR2 as getTagKeysForArticle,
   readTagsForArticlesFromR2 as getTagsForArticles,
+  readBlogSnapshotMetaFromR2,
 } from "./repositories/blog-snapshot-reader";
 
 // サービス

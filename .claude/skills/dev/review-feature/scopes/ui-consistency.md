@@ -217,7 +217,7 @@ Phase 1 の結果をページ種別ごとに整理する。
 - 全パネリストが同じ結論を出してはならない。意見の対立・矛盾を恐れない
 - 褒めるだけのパネリストを作ってはならない。全員が最低 1 つ批判する
 - `.claude/rules/ui-components.md` の UI コンポーネント規約・レスポンシブ規約を基準とする
-- 出力は `docs/04_レビュー/dev-review/ui-consistency-{YYYY-MM-DD}.md` に Write tool で書き出す。frontmatter:
+- 出力は `docs/04_レビュー/{YYYY-MM-DD}-dev-review-ui-consistency.md` に Write tool で書き出す。frontmatter:
   ```yaml
   ---
   type: dev-review
@@ -226,7 +226,7 @@ Phase 1 の結果をページ種別ごとに整理する。
   status: active
   ---
   ```
-- 書き出したファイルパスを報告する。過去のレビューは `ls -t docs/04_レビュー/dev-review/*.md | head -5` で参照できる
+- 書き出したファイルパスを報告する。過去のレビューは `ls -t docs/04_レビュー/*-dev-review-ui-consistency*.md | head -5` で参照できる
 
 ## 関連スキル
 

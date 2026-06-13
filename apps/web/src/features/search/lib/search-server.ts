@@ -25,6 +25,12 @@ const searchIndexMetaJson = require("../../../../public/search-index-meta.json")
 // eslint-disable-next-line @typescript-eslint/no-require-imports
 const searchIndexJson = require("../../../../public/search-index.json");
 
+// Module-level cache is intentional here.
+// MiniSearch instances contain tokenizer closures and are NOT JSON-serializable,
+// so Next.js `unstable_cache` (requires serializable return values) cannot be used.
+// This caches the deserialized search index — a static, deploy-time artifact
+// from `public/search-index.json` (not R2 data) — so it is deserialized only once
+// per Worker isolate. Safe because the index is immutable within a deployment.
 let cachedInstance: MiniSearch<SearchDocument> | null = null;
 
 function getServerSearchInstance(): MiniSearch<SearchDocument> {

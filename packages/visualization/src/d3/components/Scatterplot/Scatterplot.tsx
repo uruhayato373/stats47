@@ -1,6 +1,6 @@
 "use client";
 
-import * as d3 from "d3";
+import { select, range, extent, scaleLog, scaleTime, scaleLinear, axisBottom, axisLeft } from "d3";
 import { useEffect, useRef } from "react";
 import { cn } from "@stats47/components";
 import { computeChartLayout, computeFontSize, computeMarginsByRatio } from "../../../shared/layout";
@@ -67,13 +67,13 @@ export function Scatterplot({
     useEffect(() => {
         if (!svgRef.current || data.length === 0) return;
 
-        const svg = d3.select(svgRef.current);
+        const svg = select(svgRef.current);
         svg.selectAll("*").remove();
 
         // Compute values.
         const X = data.map((d) => d.x);
         const Y = data.map((d) => d.y);
-        const I = d3.range(data.length);
+        const I = range(data.length);
 
         // Compute default domains.
         let currentXDomain = xDomain;
@@ -81,44 +81,44 @@ export function Scatterplot({
 
         if (currentXDomain === undefined) {
             if (xType === "time") {
-                currentXDomain = d3.extent(X) as [Date, Date];
+                currentXDomain = extent(X) as [Date, Date];
             } else {
-                currentXDomain = d3.extent(X as number[]) as [number, number];
+                currentXDomain = extent(X as number[]) as [number, number];
             }
         }
 
         if (currentYDomain === undefined) {
             if (yType === "time") {
-                currentYDomain = d3.extent(Y) as [Date, Date];
+                currentYDomain = extent(Y) as [Date, Date];
             } else {
-                currentYDomain = d3.extent(Y as number[]) as [number, number];
+                currentYDomain = extent(Y as number[]) as [number, number];
             }
         }
 
         // Construct scales and axes.
-        const xScale = (xType === "log" ? d3.scaleLog() : xType === "time" ? d3.scaleTime() : d3.scaleLinear()) as any;
+        const xScale = (xType === "log" ? scaleLog() : xType === "time" ? scaleTime() : scaleLinear()) as any;
         xScale.domain(currentXDomain as any)
             .range([marginLeft, width - marginRight]);
 
-        const yScale = (yType === "log" ? d3.scaleLog() : yType === "time" ? d3.scaleTime() : d3.scaleLinear()) as any;
+        const yScale = (yType === "log" ? scaleLog() : yType === "time" ? scaleTime() : scaleLinear()) as any;
         yScale.domain(currentYDomain as any)
             .range([height - marginBottom, marginTop]);
 
-        const xAxis = d3.axisBottom(xScale).ticks(width / 80, xFormat);
-        const yAxis = d3.axisLeft(yScale).ticks(height / 50, yFormat);
+        const xAxis = axisBottom(xScale).ticks(width / 80, xFormat);
+        const yAxis = axisLeft(yScale).ticks(height / 50, yFormat);
 
         if (grid) {
             svg.append("g")
                 .attr("transform", `translate(0,${height - marginBottom})`)
                 .attr("class", "grid")
                 .style("stroke-opacity", CHART_STYLES.grid.strokeOpacity)
-                .call(d3.axisBottom(xScale).ticks(width / 80).tickSize(-height + marginTop + marginBottom).tickFormat(() => ""));
+                .call(axisBottom(xScale).ticks(width / 80).tickSize(-height + marginTop + marginBottom).tickFormat(() => ""));
 
             svg.append("g")
                 .attr("transform", `translate(${marginLeft},0)`)
                 .attr("class", "grid")
                 .style("stroke-opacity", CHART_STYLES.grid.strokeOpacity)
-                .call(d3.axisLeft(yScale).ticks(height / 50).tickSize(-width + marginLeft + marginRight).tickFormat(() => ""));
+                .call(axisLeft(yScale).ticks(height / 50).tickSize(-width + marginLeft + marginRight).tickFormat(() => ""));
         }
 
         // Add axes.

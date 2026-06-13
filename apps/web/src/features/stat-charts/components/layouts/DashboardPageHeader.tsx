@@ -1,5 +1,3 @@
-"use client";
-
 import React, { type PropsWithChildren } from "react";
 
 import { Card, CardContent } from "@stats47/components/atoms/ui/card";

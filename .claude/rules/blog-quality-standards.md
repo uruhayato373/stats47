@@ -30,7 +30,7 @@ stats47.jp の `/blog/{slug}` 記事を新規作成または brushup する際�
 > node .claude/scripts/blog/build-remediation-queue.mjs   # コミット済み履歴+公開R2+GSCから再構築 (どこでも可)
 > ```
 > で最新化し `/brushup-blog --target queue --next 3` で週次バッチ是正する。仕組みの正典:
-> **`docs/02_実装計画/blog-remediation-loop.md`**。新規記事を書くときの型は本ファイルの「記事アーキタイプ」節。
+> **`docs/02_実装計画/06_ブログ品質是正ループ.md`**。新規記事を書くときの型は本ファイルの「記事アーキタイプ」節。
 
 ### critic レビュー成果物 `review.md` (公開の必須条件)
 
@@ -352,7 +352,7 @@ awk -F',' 'NR>1 && $1 ~ /\/blog\// && $3 >= 200 && ($4+0) < 0.02 && ($4+0) > 0 {
 2. 必要なら本文も編集 ([!NOTE] callout 追加、内部リンク強化)
 3. `bash .claude/skills/db/sync-snapshots/run.sh --only blog` で R2 push
    （`export-blog-snapshot.ts` が article.md frontmatter を直接読んで `app/blog/all.json` を生成 = 完全DBレス。D1 articles テーブルは廃止済）
-4. 改善バックログ `docs/02_実装計画/improvement-backlog.md` に BLOG-CTR-NN として記録
+4. 改善バックログ `docs/02_実装計画/03_改善バックログ.md` に BLOG-CTR-NN として記録
 5. feature ブランチで commit → develop merge → PR develop → main → CI green → merge → Cloudflare Pages 自動 deploy
 
 ## 実証データ (2026-05-23 ベース)
@@ -385,11 +385,11 @@ node .claude/scripts/blog/audit-article-structure.mjs
 node .claude/scripts/blog/audit-chart-quality.mjs
 
 # ★公開済み全記事を R2 公開 URL から取得し決定的チェックを一括適用 (cloud 可・週次棚卸し)
-#   → /tmp/published-blog-audit.json + docs/04_レビュー/blog-quality/<date>-published-inventory.md
+#   → /tmp/published-blog-audit.json + docs/04_レビュー/<date>-blog-quality-inventory.md
 node .claude/scripts/blog/audit-published-blog.mjs
 ```
 
-公開記事の品質棚卸し (最新): `docs/04_レビュー/blog-quality/2026-06-02-published-inventory.md`。
+公開記事の品質棚卸し (最新): `docs/04_レビュー/2026-06-02-blog-quality-inventory.md`。
 週次是正ループ (GSC 優先で blocker 記事を /brushup-blog → critic PASS) は同ファイル参照。
 
 ### enforce される箇所 (2026-06-02〜 / 公開前ブロック)
@@ -412,7 +412,7 @@ node .claude/scripts/blog/audit-published-blog.mjs
 
 本ファイルの決定的ルールは「床」(全記事を一定品質に揃える)。その上で**アクセス数の多い記事を実測分析して
 「良い記事とは何か」を学び、本ファイルの基準自体を引き上げる**のが「天井」ループ。正典:
-**`docs/02_実装計画/blog-continuous-quality-loop.md`**。
+**`docs/02_実装計画/07_ブログ勝ちパターン学習.md`**。
 
 - **床 (決定的)**: `quality-gate.mjs` / `audit-published-blog.mjs` → `/brushup-blog --target queue`。文体ですます・
   上位5+下位5 SVG・地理は `tile-grid` 地図 (`*-tile-grid.json` → tile-grid-map)・表禁止・図あたり字数 等。
@@ -421,10 +421,10 @@ node .claude/scripts/blog/audit-published-blog.mjs
 
 ## 関連ドキュメント
 
-- **継続品質ループの正典: `docs/02_実装計画/blog-continuous-quality-loop.md`** ★床と天井の全体像
-- **是正ループの正典 (計画的に順次品質向上): `docs/02_実装計画/blog-remediation-loop.md`** ★既存記事を直すときはまずこれ
+- **継続品質ループの正典: `docs/02_実装計画/07_ブログ勝ちパターン学習.md`** ★床と天井の全体像
+- **是正ループの正典 (計画的に順次品質向上): `docs/02_実装計画/06_ブログ品質是正ループ.md`** ★既存記事を直すときはまずこれ
 - 勝ち要因分析スキル: `.claude/skills/blog/analyze-winning-patterns/SKILL.md`
-- 親方針: `docs/02_実装計画/100x-pv-strategy.md` Phase 0 (CTR 改修)
+- 親方針: `docs/02_実装計画/01_収益化マスタープラン.md` Phase 0 (CTR 改修)
 - 実測判定ルール: `.claude/rules/evidence-based-judgment.md`
-- 改善バックログ: `docs/02_実装計画/improvement-backlog.md` (BLOG-CTR-03 / BLOG-CTR-04)
+- 改善バックログ: `docs/02_実装計画/03_改善バックログ.md` (BLOG-CTR-03 / BLOG-CTR-04)
 - 既存スキル: `.claude/skills/blog/brushup-blog/SKILL.md` (`--target queue` が是正の実行エンジン)

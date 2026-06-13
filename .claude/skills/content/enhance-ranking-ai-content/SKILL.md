@@ -149,7 +149,7 @@ curl -I https://r2-public.stats47.jp/app/ranking/<rankingKey>/ai-content.json | 
 
 ### Step 7: 改善ログに section append
 
-`docs/02_実装計画/improvement-backlog.md` に新 section を append (id: `AICONTENT-NNN` 連番、due は today + 28d):
+`docs/02_実装計画/03_改善バックログ.md` に新 section を append (id: `AICONTENT-NNN` 連番、due は today + 28d):
 
 ```markdown
 ## [AICONTENT-NNN] <ranking_key> ai_content リライト (NotebookLM 補強)
@@ -186,7 +186,7 @@ NotebookLM クエリ数: 3
 WebSearch 補完: あり / なし
 差分: faq +N字 / regionalAnalysis +N字 / insights +N字 / prefectureCommentary +N字
 R2 PUT: app/ranking/<ranking_key>/ai-content.json (last-modified YYYY-MM-DDTHH:MM:SSZ)
-改善ログ: docs/02_実装計画/improvement-backlog.md [AICONTENT-NNN]
+改善ログ: docs/02_実装計画/03_改善バックログ.md [AICONTENT-NNN]
 検証期日: YYYY-MM-DD (4 週後)
 ```
 
@@ -225,7 +225,7 @@ R2 PUT: app/ranking/<ranking_key>/ai-content.json (last-modified YYYY-MM-DDTHH:M
 - `/notebooklm-research` (公開済ブログ用、本スキルとは対象が異なる)
 - `/brushup-blog --target article` (GSC ベース seoTitle 改訂、メタ改訂で内容深化とは別軸)
 - `/sync-snapshots --only ai-content` (Step 6 で個別 export しない選択肢)
-- 改善バックログ: `docs/02_実装計画/improvement-backlog.md`
+- 改善バックログ: `docs/02_実装計画/03_改善バックログ.md`
 - 効果判定ルール: `.claude/rules/evidence-based-judgment.md` (effect/* 付与前必読)
 - GSC 抽出: `.claude/scripts/gsc/extract-low-ctr-ranking-pages.mjs`
 - NotebookLM ラッパー: `.claude/scripts/notebooklm-cross-query.mjs`
@@ -234,6 +234,6 @@ R2 PUT: app/ranking/<ranking_key>/ai-content.json (last-modified YYYY-MM-DDTHH:M
 
 - [ ] 対象 `metrics` 行に新 faq / regionalAnalysis / insights / prefectureCommentary が UPDATE 済
 - [ ] R2 `app/ranking/<ranking_key>/ai-content.json` の last-modified が更新済
-- [ ] `docs/02_実装計画/improvement-backlog.md` に `[AICONTENT-NNN]` section が append 済 (status: pending, due 4 週後)
+- [ ] `docs/02_実装計画/03_改善バックログ.md` に `[AICONTENT-NNN]` section が append 済 (status: pending, due 4 週後)
 - [ ] commit メッセージで `<ranking_key>` を明示
 - [ ] 改善ログ section に `verification_command` が埋まっており、4 週後に再実行で effect 判定可能

@@ -59,7 +59,7 @@ Phase 1-6 で D1 (15GB) を R2 へ全面移行し、Phase 6.7 で legacy 資産�
 - 前提: `packages/ranking` / `packages/correlation` / `packages/area-profile` 配下 12 ファイルが `statsPrefecture` 等を JOIN で参照中 (実 D1 にテーブル無いため runtime 実行で失敗する可能性)
 - 着手判断: production が壊れた reader を呼んでいるか確認後
 
-詳細: `docs/02_実装計画/feature-backlog.md` の "Phase 7: stats_* schema + correlations schema 削除" 項
+詳細: `docs/02_実装計画/04_機能バックログ.md` の "Phase 7: stats_* schema + correlations schema 削除" 項
 
 ### B. `/recompute-correlations` 実装
 
@@ -67,7 +67,7 @@ Phase 1-6 で D1 (15GB) を R2 へ全面移行し、Phase 6.7 で legacy 資産�
 - 既存の `app/correlation/*.json` snapshot は Phase 6 以前の D1 派生で運用継続中
 - 着手判断: 新規 metric が大量に追加されて相関データが陳腐化したタイミング
 
-詳細: `docs/02_実装計画/feature-backlog.md` の "Phase 7: recompute-correlations 実装" 項
+詳細: `docs/02_実装計画/04_機能バックログ.md` の "Phase 7: recompute-correlations 実装" 項
 
 ### C. 未投入 2 metric の source ID 確定 + R2 投入
 

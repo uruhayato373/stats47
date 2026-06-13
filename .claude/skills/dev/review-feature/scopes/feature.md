@@ -132,7 +132,7 @@ $ARGUMENTS — レビュー対象（以下のいずれか）
 - パネリストのキャラクターを維持する
 - **コードを実際に読んでからレビューする。推測でレビューしない**
 - ドメイン固有パネリストは、汎用パネリストと異なる視点を提供すること（重複回避）
-- 出力は `docs/04_レビュー/dev-review/feature-{feature名}-{YYYY-MM-DD}.md` に Write tool で書き出す。frontmatter:
+- 出力は `docs/04_レビュー/{YYYY-MM-DD}-dev-review-feature-{feature名}.md` に Write tool で書き出す。frontmatter:
   ```yaml
   ---
   type: dev-review
@@ -141,4 +141,4 @@ $ARGUMENTS — レビュー対象（以下のいずれか）
   status: active
   ---
   ```
-- 書き出したファイルパスを報告する。過去のレビューは `ls -t docs/04_レビュー/dev-review/*.md | head -5` で参照できる
+- 書き出したファイルパスを報告する。過去のレビューは `ls -t docs/04_レビュー/*-dev-review-feature-*.md | head -5` で参照できる

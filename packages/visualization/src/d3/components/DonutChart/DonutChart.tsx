@@ -1,6 +1,6 @@
 "use client";
 
-import * as d3 from "d3";
+import { select, schemeTableau10, arc, pie, scaleOrdinal, sum } from "d3";
 import { useEffect, useRef } from "react";
 import { cn } from "@stats47/components";
 import { computeFontSize } from "../../../shared/layout";
@@ -20,7 +20,7 @@ export function DonutChart({
     outerRadius,
     labelThreshold = 0.05,
     centerText,
-    colors = d3.schemeTableau10,
+    colors = schemeTableau10,
     title,
     isLoading = false,
     className,
@@ -32,23 +32,23 @@ export function DonutChart({
     useEffect(() => {
         if (!svgRef.current || data.length === 0) return;
 
-        const svg = d3.select(svgRef.current);
+        const svg = select(svgRef.current);
         svg.selectAll("*").remove();
 
         const margin = 1;
         const effectiveOuterRadius = outerRadius || Math.min(width, height) / 2 - margin;
         const effectiveInnerRadius = innerRadius !== undefined ? innerRadius : effectiveOuterRadius / 2;
 
-        const arc = d3.arc<any>()
+        const arcFn = arc<any>()
             .innerRadius(effectiveInnerRadius)
             .outerRadius(effectiveOuterRadius);
 
-        const pie = d3.pie<DonutChartDataNode>()
+        const pieFn = pie<DonutChartDataNode>()
             .padAngle(1 / effectiveOuterRadius)
             .sort(null) // オリジナルの並び順を維持
             .value(d => d.value);
 
-        const color = d3.scaleOrdinal(data.map(d => d.name), colors);
+        const color = scaleOrdinal(data.map(d => d.name), colors);
 
         const g = svg.append("g")
             .attr("transform", `translate(${width / 2},${height / 2})`);
@@ -56,14 +56,14 @@ export function DonutChart({
         // セグメント（Path）の描画
         g.append("g")
             .selectAll("path")
-            .data(pie(data))
+            .data(pieFn(data))
             .join("path")
             .attr("fill", d => d.data.color || color(d.data.name))
-            .attr("d", arc)
+            .attr("d", arcFn)
             .attr("class", "transition-all duration-300 hover:opacity-80")
             .style("cursor", "pointer")
             .on("mouseenter", (event, d) => {
-                const total = d3.sum(data, d => d.value);
+                const total = sum(data, d => d.value);
                 const percentage = ((d.data.value / total) * 100).toFixed(1);
                 showTooltip(event, d.data.name, {
                     value: d.data.value,
@@ -81,11 +81,11 @@ export function DonutChart({
             });
 
         // ラベルの描画
-        const labelArc = d3.arc<any>()
+        const labelArc = arc<any>()
             .innerRadius(effectiveInnerRadius + (effectiveOuterRadius - effectiveInnerRadius) * 0.5)
             .outerRadius(effectiveInnerRadius + (effectiveOuterRadius - effectiveInnerRadius) * 0.5);
 
-        const total = d3.sum(data, d => d.value);
+        const total = sum(data, d => d.value);
 
         const baseFontSize = computeFontSize(width, height, 0.025); // 12 / 600 = 0.02
 
@@ -94,7 +94,7 @@ export function DonutChart({
             .attr("font-size", baseFontSize)
             .attr("text-anchor", "middle")
             .selectAll("text")
-            .data(pie(data))
+            .data(pieFn(data))
             .join("text")
             .attr("transform", d => `translate(${labelArc.centroid(d)})`)
             .selectAll("tspan")

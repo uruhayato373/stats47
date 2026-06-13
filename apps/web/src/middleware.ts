@@ -34,6 +34,18 @@ function gone(): Response {
 const OLD_CATEGORY_KEYS = LEGACY_CATEGORY_KEYS_SET;
 
 /**
+ * Type A テーマ（都道府県単位で集計できる）のスラグ集合。
+ * `/areas/{prefCode}/{themeSlug}` を Next.js に委譲してよいか判定する。
+ * リクエストごとに new Set を作らないよう module スコープに hoist (2026-06)。
+ */
+const TYPE_A_THEME_SLUGS = new Set([
+  "population-dynamics", "aging-society", "living-housing", "local-economy",
+  "labor-wages", "manufacturing", "healthcare", "safety", "education-culture",
+  "tourism", "consumer-prices", "foreign-residents", "occupation-salary",
+  "real-income", "labor-mobility", "local-finance", "fishery-marine", "climate",
+]);
+
+/**
  * `isValidPrefCode` は UrlPolicy から再 export（既存テスト互換のため）。
  */
 export const isValidPrefCode = UrlPolicy.area.isValidPrefCode;
@@ -122,13 +134,13 @@ function tryLegacyRedirect(pathname: string, baseUrl: string): Response | null {
 // 各コンテンツタイプの未登録 / 削除済 key を 410 化して Google に削除シグナル送信。
 // Phase 9 で Fix 6 / Fix 7 / Fix 9 / 旧 ranking ロジック等の重複を 1 関数に集約。
 
-function checkContentTypePolicy(pathname: string): Response | null {
+function checkContentTypePolicy(pathname: string, baseUrl: string): Response | null {
   // /ranking/prefecture/{slug} → /ranking/{slug} へ 301（known なら）/ 直接 410（unknown なら）
   if (pathname.startsWith("/ranking/prefecture/")) {
     const slug = pathname.slice("/ranking/prefecture/".length).split("/")[0];
     if (!slug) return gone();
     if (UrlPolicy.ranking.isGone(slug)) return gone();
-    return NextResponse.redirect(new URL(`/ranking/${slug}`, "https://stats47.jp"), { status: 301 });
+    return NextResponse.redirect(new URL(`/ranking/${slug}`, baseUrl), { status: 301 });
   }
 
   // /ranking/{key}: GONE は 410。未登録キーは page の notFound() に委譲
@@ -150,7 +162,7 @@ function checkContentTypePolicy(pathname: string): Response | null {
       const jaKey = REDIRECT_TAG_KEYS.get(tagKey);
       if (jaKey) {
         return NextResponse.redirect(
-          new URL(`/tag/${encodeURIComponent(jaKey)}`, "https://stats47.jp"),
+          new URL(`/tag/${encodeURIComponent(jaKey)}`, baseUrl),
           { status: 301 },
         );
       }
@@ -170,7 +182,7 @@ function checkContentTypePolicy(pathname: string): Response | null {
       const newSlug = BLOG_SLUG_REDIRECTS[slug];
       if (newSlug) {
         return NextResponse.redirect(
-          new URL(`/blog/${newSlug}`, "https://stats47.jp"),
+          new URL(`/blog/${newSlug}`, baseUrl),
           { status: 301 },
         );
       }
@@ -268,12 +280,7 @@ function checkAreasPolicy(pathname: string, req: NextRequest): Response | null {
   }
 
   // /areas/{prefCode}/{themeSlug} — Type A テーマページは通過させる (410 対象外)
-  const TYPE_A_THEME_SLUGS = new Set([
-    "population-dynamics", "aging-society", "living-housing", "local-economy",
-    "labor-wages", "manufacturing", "healthcare", "safety", "education-culture",
-    "tourism", "consumer-prices", "foreign-residents", "occupation-salary",
-    "real-income", "labor-mobility", "local-finance", "fishery-marine", "climate",
-  ]);
+  // TYPE_A_THEME_SLUGS は module スコープに hoist 済 (per-request の new Set を回避)。
   if (
     seg.length === 3 &&
     /^\d{5}$/.test(seg[1]) &&
@@ -321,7 +328,8 @@ export default function middleware(req: NextRequest) {
   }
 
   // --- Section 2: コンテンツタイプ別 Allowlist 判定 ---
-  const contentResponse = checkContentTypePolicy(pathname);
+  // baseUrl は req.url 由来の origin を使う (preview/staging が prod へ 301 しないように)。
+  const contentResponse = checkContentTypePolicy(pathname, req.url);
   if (contentResponse) return contentResponse;
 
   // --- Section 1: 旧 URL 構造の 301/410 ---

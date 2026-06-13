@@ -1,6 +1,6 @@
 ---
 name: brushup-blog
-description: ブログ記事の品質是正 (計画的な順次是正 / 1 記事リライト / ユーザー指示時の一括リライト)。★推奨は --target queue: 状態付き是正キュー (.claude/state/blog/remediation-queue.json、GSC×品質blocker統合スコア) の pending 上位を順に是正し article-writer(archetype+図あたり字数)→blog-critic PASS→publish。--target article <slug> で 1 記事リライト、--target batch でユーザー指示時の一括。仕組み正典 docs/02_実装計画/blog-remediation-loop.md。Use when user says "ブログ品質を上げる", "記事を順次直す", "ブログ改善", "どの記事を直す", "ブラッシュアップ", "記事を補強", "一括リライト", "brushup".
+description: ブログ記事の品質是正 (計画的な順次是正 / 1 記事リライト / ユーザー指示時の一括リライト)。★推奨は --target queue: 状態付き是正キュー (.claude/state/blog/remediation-queue.json、GSC×品質blocker統合スコア) の pending 上位を順に是正し article-writer(archetype+図あたり字数)→blog-critic PASS→publish。--target article <slug> で 1 記事リライト、--target batch でユーザー指示時の一括。仕組み正典 docs/02_実装計画/06_ブログ品質是正ループ.md。Use when user says "ブログ品質を上げる", "記事を順次直す", "ブログ改善", "どの記事を直す", "ブラッシュアップ", "記事を補強", "一括リライト", "brushup".
 argument-hint: --target queue [--next 5] | --target article <slug> [--focus CTR-reframe|エキスパート視点追加|最新データ更新|CTA強化] | --target batch [--count 5] [--dry-run] | --target priority (legacy)
 primary_agent: article-writer
 ---
@@ -31,7 +31,7 @@ primary_agent: article-writer
 `build-remediation-queue.mjs` が作る**状態付き是正キュー** (`.claude/state/blog/remediation-queue.json`) を消費し、
 pending 上位 N 件を順に是正する。GSC 流入 (expectedLift) × 品質 blocker severity を**統合スコア**で序列化し、
 publish-blocker を持つ記事 (**must-fix レーン**) を最上位に置く。「次に何を直すか」「何本消化したか」「効いたか」を
-キューが追跡するので、**週次で少しずつ品質を底上げ**できる。正典: `docs/02_実装計画/blog-remediation-loop.md`。
+キューが追跡するので、**週次で少しずつ品質を底上げ**できる。正典: `docs/02_実装計画/06_ブログ品質是正ループ.md`。
 
 ### Step 1: キューを最新化
 
@@ -70,7 +70,7 @@ node .claude/scripts/blog/build-remediation-queue.mjs --next 5   # pending 上�
 ### Step 4: wave を記録 (history + 改善ログ)
 
 - `.claude/state/blog/auto-brushup-history.json` に通過記事を追記 (wave_id 一致、`.claude/rules/blog-data-schema.md` の命名規則)。
-- `docs/02_実装計画/improvement-backlog.md` に `## [BLOG-WAVE-<wave_id>]` section を追加 (frontmatter `status: pending` / `due: <+28日>` / `wave_id`)。
+- `docs/02_実装計画/03_改善バックログ.md` に `## [BLOG-WAVE-<wave_id>]` section を追加 (frontmatter `status: pending` / `due: <+28日>` / `wave_id`)。
 - 公開は CI (`publish-blog.yml` / develop push)。`quality-gate.mjs` が公開前に再 enforce する。
 
 ### cadence (週次・人手ゲート)

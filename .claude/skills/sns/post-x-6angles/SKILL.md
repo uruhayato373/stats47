@@ -457,5 +457,5 @@ jq '[.posts[] | select(.status=="draft" and .angle!=null)] | length' \
 ## 関連
 
 - `.claude/agents/x-strategist.md` — 戦略レイヤー（参照元）
-- `docs/02_実装計画/improvement-backlog.md` — SNS-X-01（Organic Social 回復施策）
+- `docs/02_実装計画/03_改善バックログ.md` — SNS-X-01（Organic Social 回復施策）
 - `.claude/state/sns/posts.json` — 投稿 registry

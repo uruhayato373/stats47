@@ -5,7 +5,7 @@ name: 📤 Blog Auto-Publish (develop → R2)
 # dispatch 403 (外部連携トークンの workflow 実行不可) を回避し、R2 secrets を持つ
 # ネイティブ CI として publish-blog のロジックを実行する。
 #
-# === 段階導入 (docs/02_実装計画/blog-auto-brushup-cloud-routine.md) ===
+# === 段階導入 (docs/02_実装計画/08_ブログ自動化設計.md) ===
 #   現在 = Phase 1: workflow_dispatch のみ (手動起動)。実 CI でステップが通るか検証する段階。
 #   次   = Phase 2: 検証 OK 後、後続コミットで `on: push: branches:[develop]` を追加する。
 #          その「マージ」自体が自動公開の解禁の意思表示 (git 履歴に残る)。

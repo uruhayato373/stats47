@@ -120,7 +120,9 @@ export function AdSenseAd({
   }
 
   const isArticleFormat = format === "article";
-  const reservedMinHeight = isArticleFormat ? 0 : getReservedMinHeight(format);
+  // article (fluid/in-article) は 0×0 フレキシブルで getReservedMinHeight が 250px fallback を返すが、
+  // 記事内広告は高さが予測困難なため 120px を確保して CLS を抑制する（infeed と同水準）。
+  const reservedMinHeight = isArticleFormat ? 120 : getReservedMinHeight(format);
 
   return (
     <div

@@ -1,6 +1,6 @@
 ---
 name: whitepaper-chart-inventory
-description: 11 種の白書 (NotebookLM ノートブック) から「実描画されているチャート」を逆引き抽出し、`docs/02_実装計画/whitepaper-chart-inventory/<wp-slug>.md` にチャート一覧を整理する。後段の e-Stat 紐付け・area/theme 配置決定の入力となる。Use when user says "白書チャート逆引き", "whitepaper chart inventory", "/whitepaper-chart-inventory".
+description: 11 種の白書 (NotebookLM ノートブック) から「実描画されているチャート」を逆引き抽出し、`.claude/skills/analytics/whitepaper-chart-inventory/reference/inventory/<wp-slug>.md` にチャート一覧を整理する。後段の e-Stat 紐付け・area/theme 配置決定の入力となる。Use when user says "白書チャート逆引き", "whitepaper chart inventory", "/whitepaper-chart-inventory".
 primary_agent: performance-auditor
 ---
 
@@ -12,9 +12,9 @@ e-Stat 全件 enumeration (~6000 statsDataId) より信号/雑音比が 1 桁高
 
 | データ | 保管先 | 理由 |
 |---|---|---|
-| 進捗 index | git: `docs/02_実装計画/whitepaper-chart-inventory/README.md` | 11 白書の status を 1 ファイルで俯瞰 |
-| 各白書 chart 一覧 | git: `docs/02_実装計画/whitepaper-chart-inventory/<wp-slug>.md` | 1 白書 = 1 ファイル、人間レビュー対象 |
-| テンプレート | git: `docs/02_実装計画/whitepaper-chart-inventory/TEMPLATE.md` | 各白書 MD の統一フォーマット |
+| 進捗 index | git: `.claude/skills/analytics/whitepaper-chart-inventory/reference/inventory/README.md` | 11 白書の status を 1 ファイルで俯瞰 |
+| 各白書 chart 一覧 | git: `.claude/skills/analytics/whitepaper-chart-inventory/reference/inventory/<wp-slug>.md` | 1 白書 = 1 ファイル、人間レビュー対象 |
+| テンプレート | git: `.claude/skills/analytics/whitepaper-chart-inventory/reference/inventory/TEMPLATE.md` | 各白書 MD の統一フォーマット |
 | query 履歴 (agent 用) | git: `.claude/skills/analytics/whitepaper-chart-inventory/reference/queries/<wp-slug>/<chapter>.txt` | nlm 生レスポンスの保存先 (parse 失敗時の再解析用) |
 
 ## 引数
@@ -50,7 +50,7 @@ $ARGUMENTS — <wp-slug> [mode]
 
 ## 出力フォーマット (各白書 MD のチャート行)
 
-`docs/02_実装計画/whitepaper-chart-inventory/TEMPLATE.md` 参照。1 chart = 1 テーブル行で以下の列を持つ:
+`.claude/skills/analytics/whitepaper-chart-inventory/reference/inventory/TEMPLATE.md` 参照。1 chart = 1 テーブル行で以下の列を持つ:
 
 | 列 | 用途 |
 |---|---|
@@ -70,7 +70,7 @@ $ARGUMENTS — <wp-slug> [mode]
 
 `<wp-slug>` を引数に取り、以下を実行:
 
-1. `docs/02_実装計画/whitepaper-chart-inventory/<wp-slug>.md` が無ければ TEMPLATE.md をコピーして作成
+1. `.claude/skills/analytics/whitepaper-chart-inventory/reference/inventory/<wp-slug>.md` が無ければ TEMPLATE.md をコピーして作成
 2. 白書の章リストを推定 (notebook の構成を `notebooklm ask` で問い合わせる初回 query)
 3. 各章ごとに以下の query を生成 (本セッションでは実行しない、user 環境で実行)
 
@@ -111,7 +111,7 @@ user が CLI を実行して結果 JSON を `reference/queries/<wp-slug>/*.json`
 
 1. 各 JSON を Read で読む
 2. テーブル行に整形 (`chart_id` は `<wp-slug>-<chapter>-<連番>` を採番)
-3. `docs/02_実装計画/whitepaper-chart-inventory/<wp-slug>.md` の「## チャート一覧」セクションに append
+3. `.claude/skills/analytics/whitepaper-chart-inventory/reference/inventory/<wp-slug>.md` の「## チャート一覧」セクションに append
 4. `chart_type` が enum 外なら `## Phase D 拡張候補` セクションに追記
 5. `responsibility` 列は `undecided` で初期化 (Phase D で確定)
 
@@ -142,7 +142,7 @@ user が CLI を実行して結果 JSON を `reference/queries/<wp-slug>/*.json`
 
 - 親計画: `/root/.claude/plans/47-swirling-wreath.md`
 - 責務分離ルール: `docs/01_技術設計/07_情報設計.md`
-- mirror 元フォーマット: `docs/02_実装計画/theme-charts-planning/README.md`
+- mirror 元フォーマット: `./reference/inventory/TEMPLATE.md`
 - 白書 SSOT: `.claude/skills/blog/brushup-blog --target article/SKILL.md`
 - e-Stat 照合 (Phase C): `.claude/skills/estat/search-estat/SKILL.md`
 - nlm CLI wrapper: `.claude/scripts/notebooklm-cross-query.mjs`

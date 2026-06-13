@@ -1,6 +1,6 @@
 # Phase 2 Authority 30 本 アウトライン INDEX
 
-`docs/02_実装計画/phase-2/authority-content-plan.md` の 30 本企画 (Series A-D) のアウトライン集。各記事 1 ファイル。
+`docs/02_実装計画/91_将来構想_Phase2.md` の 30 本企画 (Series A-D) のアウトライン集。各記事 1 ファイル。
 
 2026-05-25 一括生成。フル draft 化は順次実施。
 
@@ -45,7 +45,7 @@
 
 - Two-track Axis B (公務員 AI 業務効率化) の主軸コンテンツ
 - 2 軸戦略: [`docs/00_プロジェクト管理/04_ターゲットペルソナ.md`](../../../../00_プロジェクト管理/04_ターゲットペルソナ.md)
-- 100x-pv-strategy Phase 2 (W45-2027W20、×3 倍率): [`docs/02_実装計画/phase-2/authority-content-plan.md`](../../../../02_実装計画/phase-2/authority-content-plan.md)
+- 100x-pv-strategy Phase 2 (W45-2027W20、×3 倍率): [`docs/02_実装計画/91_将来構想_Phase2.md`](../../../../02_実装計画/91_将来構想_Phase2.md)
 
 ## blog ↔ note 戦略
 

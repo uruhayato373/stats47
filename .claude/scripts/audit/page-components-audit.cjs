@@ -4,7 +4,7 @@
  *
  * 判定基準: docs/01_技術設計/07_情報設計.md
  *
- * 出力: docs/04_レビュー/area-theme-audit/YYYY-MM-DD.md
+ * 出力: docs/04_レビュー/YYYY-MM-DD-area-theme-audit.md
  *
  * 使い方:
  *   node .claude/scripts/audit/page-components-audit.cjs
@@ -203,9 +203,9 @@ lines.push("3. ローカル D1 で反映後、`/sync-snapshots --only page-compo
 lines.push("4. 該当 area ページ・theme ページの表示を browser で確認");
 lines.push("");
 
-const outDir = path.join(PROJECT_ROOT, "docs/04_レビュー/area-theme-audit");
+const outDir = path.join(PROJECT_ROOT, "docs/04_レビュー");
 fs.mkdirSync(outDir, { recursive: true });
-const outPath = path.join(outDir, `${today}.md`);
+const outPath = path.join(outDir, `${today}-area-theme-audit.md`);
 fs.writeFileSync(outPath, lines.join("\n"), "utf-8");
 
 console.log(`✓ 出力: ${path.relative(PROJECT_ROOT, outPath)}`);

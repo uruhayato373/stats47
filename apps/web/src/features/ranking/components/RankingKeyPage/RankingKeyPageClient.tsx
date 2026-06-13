@@ -52,7 +52,7 @@ import {
     RANKING_INCONTENT_MOBILE,
 } from "@/lib/google-adsense";
 
-import { useBreakpoint } from "@/hooks/useBreakpoint";
+// useBreakpoint removed from layout-gating (replaced with CSS classes for CLS fix)
 
 import { fetchRankingValuesAction } from "../../actions/fetch-ranking-values";
 
@@ -123,8 +123,9 @@ export function RankingKeyPageClient({
     const [isPending, startTransition] = useTransition();
     const pathname = usePathname();
     const router = useRouter();
-    const isBelowLg = useBreakpoint("belowLg");
-    const isAboveXl = useBreakpoint("aboveXl");
+    // NOTE: useBreakpoint removed for layout-gating usages — replaced with CSS-only
+    // responsive classes to eliminate post-hydration CLS (desktop 0.264).
+    // The hook file is kept because other non-layout consumers may still use it.
 
     // ランキングページ閲覧イベント
     useEffect(() => {
@@ -453,9 +454,16 @@ export function RankingKeyPageClient({
             {/* メインコンテンツ + 右サイドバー (CSS のみで切替: JS ハイドレーション由来の CLS を防ぐ) */}
             <div className="mt-4 lg:flex lg:gap-4 lg:items-start">
             <main className="flex flex-col gap-4 min-w-0 flex-1">
-                    {/* 地図＋データテーブル */}
-                    {isBelowLg ? (
-                        /* モバイル: タブ切替（デフォルト table: Leaflet タイルを LCP 要素から除外） */
+                    {/* 地図＋データテーブル
+                        CLS 修正: JS ブレイクポイントフックを廃止し CSS クラスのみで切り替え。
+                        SSR HTML に両ブランチを含め、CSS が表示/非表示を決定する。
+                        - モバイル (< lg): Tabs コンテナを表示、デスクトップグリッドを非表示
+                        - デスクトップ (≥ lg): Tabs コンテナを非表示、デスクトップグリッドを表示
+                          - xl 以上: grid-cols-2 (地図+テーブル横並び)
+                          - lg 〜 xl: flex-col (縦並び)
+                    */}
+                    {/* モバイル専用: タブ切替（デフォルト table: Leaflet タイルを LCP 要素から除外） */}
+                    <div className="lg:hidden">
                         <Tabs defaultValue="table" className="w-full">
                             <TabsList className="w-full grid grid-cols-2">
                                 <TabsTrigger value="map" className="flex items-center gap-1.5">
@@ -486,9 +494,10 @@ export function RankingKeyPageClient({
                                 />
                             </TabsContent>
                         </Tabs>
-                    ) : (
-                        /* デスクトップ: xl以上は地図+テーブル2列、lg〜xl未満は縦並び */
-                        <div className={`relative ${isAboveXl ? "grid grid-cols-2 gap-4 items-start" : "flex flex-col gap-4"}`}>
+                    </div>
+                    {/* デスクトップ専用: xl以上は地図+テーブル2列、lg〜xl未満は縦並び */}
+                    <div className="hidden lg:block">
+                        <div className="relative flex flex-col gap-4 xl:grid xl:grid-cols-2 xl:gap-4 xl:items-start">
                             {isPending && (
                                 <div className="absolute inset-0 z-10 bg-background/50 flex items-center justify-center backdrop-blur-[1px]">
                                     <Skeleton className="w-full h-full opacity-50" />
@@ -509,7 +518,7 @@ export function RankingKeyPageClient({
                                 cardFooter={cardFooter}
                             />
                         </div>
-                    )}
+                    </div>
 
                     {/* データ注釈 (※系): チャート直下に控えめ表示。
                         0 値の意味など読み違い防止の注記をタイトルではなくここに置く。 */}
@@ -591,7 +600,7 @@ export function RankingKeyPageClient({
 
                 {/* 右サイドバー: CSS で lg 以上のみ表示 (JS 判定廃止 → CLS 防止) */}
                 {sidebarSection && (
-                    <aside className="hidden lg:block lg:w-[300px] lg:shrink-0 lg:sticky lg:top-20">
+                    <aside className="hidden lg:flex lg:flex-col lg:gap-4 lg:w-[300px] lg:shrink-0 lg:sticky lg:top-20 lg:max-h-[calc(100vh-5.5rem)] lg:overflow-y-auto">
                         <div className="flex flex-col gap-4">
                             {sidebarSection}
                             <AdSenseAd

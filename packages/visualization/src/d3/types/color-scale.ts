@@ -9,7 +9,7 @@ import type { D3Module } from "./d3";
  */
 export interface VisualizationDataPoint {
   value: number;
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 /**

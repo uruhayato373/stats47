@@ -115,6 +115,13 @@ export default function RootLayout({
           href="https://storage.stats47.jp"
           crossOrigin="anonymous"
         />
+        {/* Google AdSense への preconnect（広告スクリプトの TLS/DNS 事前確立） */}
+        <link
+          rel="preconnect"
+          href="https://pagead2.googlesyndication.com"
+          crossOrigin="anonymous"
+        />
+        <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com" />
       </head>
       <body
         className="antialiased"

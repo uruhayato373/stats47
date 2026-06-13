@@ -64,7 +64,7 @@
 - メトリクスツリー
 - 計測方法と `/weekly-plan` への統合提案
 
-**保存先**: `docs/04_レビュー/critical-review/{YYYY-MM-DD}-nsm.md` (frontmatter `type: critical-review` / `topic: nsm`)
+**保存先**: `docs/04_レビュー/{YYYY-MM-DD}-nsm.md` (frontmatter `type: critical-review` / `topic: nsm`)
 
 ### `/growth-loops`
 
@@ -91,7 +91,7 @@
 - 30-60-90日ロードマップ
 - 計測指標
 
-**保存先**: `docs/04_レビュー/critical-review/{YYYY-MM-DD}-growth-loops.md` (frontmatter `type: critical-review` / `topic: growth-loops`)
+**保存先**: `docs/04_レビュー/{YYYY-MM-DD}-growth-loops.md` (frontmatter `type: critical-review` / `topic: growth-loops`)
 
 ### `/monetization-strategy`
 
@@ -114,7 +114,7 @@
 - 低コスト検証実験の設計
 - 実装ロードマップ
 
-**保存先**: `docs/04_レビュー/critical-review/{YYYY-MM-DD}-monetization.md` + 決定事項は `docs/00_プロジェクト管理/02_収益化戦略.md` を Edit で反映
+**保存先**: `docs/04_レビュー/{YYYY-MM-DD}-monetization.md` + 決定事項は `docs/00_プロジェクト管理/02_収益化戦略.md` を Edit で反映
 
 ### `/weekly-plan`, `/weekly-review`
 
@@ -133,7 +133,7 @@
 /critical-review <対象>  # ファイルパス / スキル名 / PR 番号 等
 ```
 
-**保存先**: `docs/04_レビュー/critical-review/{YYYY-MM-DD}-{topic}.md` (frontmatter `type: critical-review`)
+**保存先**: `docs/04_レビュー/{YYYY-MM-DD}-{topic}.md` (frontmatter `type: critical-review`)
 
 ### `/knowledge`
 
@@ -154,9 +154,9 @@ Management 系スキルの出力はすべて `docs/` 配下に統一されてい
 |---|---|---|
 | `/weekly-plan` | `docs/03_週次運用/週次計画/YYYY-Www.md` | `weekly-plan` |
 | `/weekly-review` | `docs/03_週次運用/週次レビュー/YYYY-Www.md` | `weekly-review` |
-| `/critical-review` | `docs/04_レビュー/critical-review/{YYYY-MM-DD}-{topic}.md` | `critical-review` |
-| `/north-star-metric` | `docs/04_レビュー/critical-review/{YYYY-MM-DD}-nsm.md` | `critical-review` (topic: nsm) |
-| `/growth-loops` | `docs/04_レビュー/critical-review/{YYYY-MM-DD}-growth-loops.md` | `critical-review` (topic: growth-loops) |
-| `/monetization-strategy` | `docs/04_レビュー/critical-review/{YYYY-MM-DD}-monetization.md` + 決定は `docs/00_プロジェクト管理/02_収益化戦略.md` 更新 | `critical-review` (topic: monetization) |
-| `/pre-mortem` | `docs/04_レビュー/pre-mortem/{YYYY-MM-DD}-{topic}.md` | `pre-mortem` |
-| `/performance-report` | `docs/04_レビュー/performance-report/YYYY-Www.md` | `performance-report` |
+| `/critical-review` | `docs/04_レビュー/{YYYY-MM-DD}-{topic}.md` | `critical-review` |
+| `/north-star-metric` | `docs/04_レビュー/{YYYY-MM-DD}-nsm.md` | `critical-review` (topic: nsm) |
+| `/growth-loops` | `docs/04_レビュー/{YYYY-MM-DD}-growth-loops.md` | `critical-review` (topic: growth-loops) |
+| `/monetization-strategy` | `docs/04_レビュー/{YYYY-MM-DD}-monetization.md` + 決定は `docs/00_プロジェクト管理/02_収益化戦略.md` 更新 | `critical-review` (topic: monetization) |
+| `/pre-mortem` | `docs/04_レビュー/{YYYY-MM-DD}-pre-mortem-{topic}.md` | `pre-mortem` |
+| `/performance-report` | `docs/04_レビュー/{YYYY-MM-DD}-performance-report.md` | `performance-report` |

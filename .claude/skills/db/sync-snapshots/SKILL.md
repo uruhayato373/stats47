@@ -43,8 +43,6 @@ URL → R2 パス対応は `.claude/rules/r2-storage-design.md` を参照。
 | page-components | `apps/web/scripts/export-page-components-snapshot.ts` (git TS `data/page-components/`) | `app/page-components/{pageType}/{key}.json` (per-page, 98 files) | ~150KB |
 | affiliate-ads | `apps/web/scripts/export-affiliate-ads-snapshot.ts` (git TS `affiliate-ads-data.ts`) | `app/affiliate-ads/all.json` | ~15KB |
 | ranking-page-cards | `apps/web/scripts/export-ranking-page-cards-snapshot.ts` | `app/ranking/{key}/page-cards.json` | ~16KB |
-| fishing-ports | `apps/web/scripts/export-fishing-ports-snapshot.ts` | `app/fishing-ports/all.json` | ~620KB |
-| ports + port-statistics | `apps/web/scripts/export-port-statistics-snapshot.ts` | `app/ports/...` | ~50MB (715 files) |
 | station-passengers | `apps/web/scripts/export-station-passengers-snapshot.ts` | `app/station-passengers/{NN}/{stations,lines}.json` ・ `app/station-passengers/index.json` | ~10MB (95 files) |
 
 ## R2 push は CI / クラウド専用 (★重要)
@@ -81,7 +79,7 @@ ranking-values は旧 30K files から 2,116 files に削減済み。`SKIP_VALUE
 ```bash
 bash .claude/skills/db/sync-snapshots/run.sh --only blog
 bash .claude/skills/db/sync-snapshots/run.sh --only ranking-values
-bash .claude/skills/db/sync-snapshots/run.sh --only port-statistics
+bash .claude/skills/db/sync-snapshots/run.sh --only station-passengers
 ```
 
 ### dry-run (実行しない、走るスクリプトをリスト表示)
@@ -100,7 +98,6 @@ bash .claude/skills/db/sync-snapshots/run.sh --dry-run
 | AI コンテンツ生成完了 | ai-content |
 | ダッシュボード設定変更 | page-components |
 | area_profile バッチ完了 | area-profile |
-| 港湾統計データ更新 | port-statistics |
 | 全部入れ替え (大規模リカバリ) | 全部 |
 
 ## 注意

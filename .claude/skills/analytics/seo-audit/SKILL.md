@@ -242,7 +242,7 @@ stats47 の主力は 1,800+ 件のランキングページ。以下を重点チ�
 
 ### Phase 4: 出力
 
-`docs/04_レビュー/seo-audit/{YYYY-MM-DD}.md` に Write tool で書き出す。frontmatter:
+`docs/04_レビュー/{YYYY-MM-DD}-seo-audit.md` に Write tool で書き出す。frontmatter:
 
 ```yaml
 ---
@@ -252,7 +252,7 @@ status: active
 ---
 ```
 
-過去の監査は `ls -t docs/04_レビュー/seo-audit/*.md | head -5` で参照できる。
+過去の監査は `ls -t docs/04_レビュー/*-seo-audit.md | head -5` で参照できる。
 
 ## 出力フォーマット
 
@@ -397,7 +397,7 @@ focus: "all | technical | content | keywords | programmatic"
 
 ## 前回レポートとの比較
 
-`ls -t docs/04_レビュー/seo-audit/*.md | head -3` で過去のレポートがある場合:
+`ls -t docs/04_レビュー/*-seo-audit.md | head -3` で過去のレポートがある場合:
 - 前回のアクションリストの実行状況を確認（Read tool で本文を取得）
 - 主要指標の推移を記載（トラフィック・インデックス率・順位）
 - 前回 P0/P1 で未実行のアクションは今回も引き継ぐ
@@ -464,6 +464,6 @@ VALUES ('crawled_not_indexed', '施策タイトル', '詳細', 'planned', N, dat
 - `apps/web/src/lib/structured-data/` — 構造化データ実装
 - `apps/web/src/middleware.ts` — リダイレクト設定
 - `apps/web/tests/e2e/seo/` — SEO 関連 E2E テスト
-- `docs/04_レビュー/seo-audit/` — 過去の監査レポート
+- `docs/04_レビュー/` — 過去の監査レポート (`*-seo-audit.md`)
 - DB `seo_tracking` テーブル — SEO カバレッジ指標の数値推移
 - DB `seo_actions` テーブル — SEO 改善施策の管理（planned → in_progress → done）

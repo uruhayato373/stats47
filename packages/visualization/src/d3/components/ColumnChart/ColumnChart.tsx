@@ -2,7 +2,7 @@
 
 import { cn } from "@stats47/components";
 
-import * as d3 from "d3";
+import { schemeTableau10, select, stack, scaleBand, scaleLinear, max, scaleOrdinal, axisBottom, axisLeft } from "d3";
 import { useEffect, useRef } from "react";
 import { computeChartLayout, computeFontSize, computeMarginsByRatio } from "../../../shared/layout";
 import { CHART_STYLES } from "../../constants";
@@ -23,7 +23,7 @@ export function ColumnChart({
   marginBottom: propsMarginBottom,
   marginLeft: propsMarginLeft,
   yAxisFormatter = (d) => (d / 1e6).toFixed(0) + "M",
-  colors = d3.schemeTableau10,
+  colors = schemeTableau10,
   isLoading = false,
   tooltipFormatter,
   unit = "",
@@ -47,26 +47,24 @@ export function ColumnChart({
   useEffect(() => {
     if (!svgRef.current || !data || data.length === 0) return;
 
-    const svg = d3.select(svgRef.current);
+    const svg = select(svgRef.current);
     svg.selectAll("*").remove();
 
     // --- スタック計算 ---
-    const series = d3.stack<any>()
+    const series = stack<any>()
       .keys(keys)(data);
 
     // --- スケール設定 ---
-    const x = d3
-      .scaleBand()
+    const x = scaleBand()
       .domain(data.map((d) => d[indexBy] as string))
       .range([marginLeft, width - marginRight])
       .padding(0.1);
 
-    const y = d3
-      .scaleLinear()
-      .domain([0, d3.max(series, (d) => d3.max(d, (d) => d[1])) ?? 0])
+    const y = scaleLinear()
+      .domain([0, max(series, (d) => max(d, (d) => d[1])) ?? 0])
       .rangeRound([height - marginBottom, marginTop]);
 
-    const color = d3.scaleOrdinal<string>().domain(keys).range(colors);
+    const color = scaleOrdinal<string>().domain(keys).range(colors);
 
     // --- 描画 ---
     // Bars
@@ -98,7 +96,7 @@ export function ColumnChart({
     svg
       .append("g")
       .attr("transform", `translate(0,${height - marginBottom})`)
-      .call(d3.axisBottom(x).tickSizeOuter(0))
+      .call(axisBottom(x).tickSizeOuter(0))
       .call((g) => g.selectAll(".domain").remove())
       .call((g) => g.selectAll(".tick line").remove())
       .call((g) => g.selectAll(".tick text").attr("font-size", baseFontSize).attr("dy", "8"));
@@ -107,7 +105,7 @@ export function ColumnChart({
     svg
       .append("g")
       .attr("transform", `translate(${marginLeft},0)`)
-      .call(d3.axisLeft(y).ticks(innerHeight / 40, "s"))
+      .call(axisLeft(y).ticks(innerHeight / 40, "s"))
       .call((g) => g.selectAll(".domain").remove())
       .call((g) => g.selectAll(".tick line").attr("stroke-opacity", 0).clone()
           .attr("x2", width - marginLeft - marginRight)

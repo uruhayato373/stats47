@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "@stats47/components";
-import * as d3 from "d3";
+import { select, scaleBand, scaleLinear, max, axisBottom, axisLeft } from "d3";
 import { useEffect, useRef } from "react";
 import {
   computeChartLayout,
@@ -77,26 +77,24 @@ export function DivergingBarChart({
   useEffect(() => {
     if (!svgRef.current || !data || data.length === 0) return;
 
-    const svg = d3.select(svgRef.current);
+    const svg = select(svgRef.current);
     svg.selectAll("*").remove();
 
     // X scale (band)
-    const x = d3
-      .scaleBand()
+    const x = scaleBand()
       .domain(data.map((d) => String(d[categoryKey])))
       .range([marginLeft, width - marginRight])
       .padding(0.15);
 
     // Calculate max value for symmetric Y domain
-    const maxPositive = d3.max(data, (d) => Number(d[positiveKey]) || 0) ?? 0;
-    const maxNegative = d3.max(data, (d) => Number(d[negativeKey]) || 0) ?? 0;
+    const maxPositive = max(data, (d) => Number(d[positiveKey]) || 0) ?? 0;
+    const maxNegative = max(data, (d) => Number(d[negativeKey]) || 0) ?? 0;
     const maxVal = yDomain
       ? yDomain[1]
       : Math.max(maxPositive, maxNegative);
 
     // Y scale: [-maxVal, +maxVal] (symmetric)
-    const y = d3
-      .scaleLinear()
+    const y = scaleLinear()
       .domain([-maxVal, maxVal])
       .nice()
       .range([height - marginBottom, marginTop]);
@@ -171,8 +169,7 @@ export function DivergingBarChart({
       .append("g")
       .attr("transform", `translate(0,${height - marginBottom})`)
       .call(
-        d3
-          .axisBottom(x)
+        axisBottom(x)
           .tickValues(tickValues.length > 0 ? tickValues : catValues)
           .tickFormat((val) => {
             const row = data.find((d) => String(d[categoryKey]) === val);
@@ -189,8 +186,7 @@ export function DivergingBarChart({
       .append("g")
       .attr("transform", `translate(${marginLeft},0)`)
       .call(
-        d3
-          .axisLeft(y)
+        axisLeft(y)
           .ticks(innerHeight / 50)
           .tickFormat((v) => formatY(Number(v))),
       )

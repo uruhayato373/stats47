@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "@stats47/components";
-import * as d3 from "d3";
+import { select, scaleBand, interpolateRgb } from "d3";
 import { useEffect, useRef } from "react";
 import { computeChartLayout, computeMarginsByRatio } from "../../../shared/layout";
 import { useD3Tooltip } from "../../hooks/useD3Tooltip";
@@ -45,15 +45,15 @@ export function CategoryHeatmap({
   useEffect(() => {
     if (!svgRef.current || data.length === 0) return;
 
-    const svg = d3.select(svgRef.current);
+    const svg = select(svgRef.current);
     svg.selectAll("*").remove();
 
     // X/Y ドメイン
     const xLabels = [...new Set(data.map((d) => d.x))];
     const yLabels = [...new Set(data.map((d) => d.y))];
 
-    const x = d3.scaleBand().domain(xLabels).range([0, innerWidth]).padding(0.05);
-    const y = d3.scaleBand().domain(yLabels).range([0, innerHeight]).padding(0.05);
+    const x = scaleBand().domain(xLabels).range([0, innerWidth]).padding(0.05);
+    const y = scaleBand().domain(yLabels).range([0, innerHeight]).padding(0.05);
 
     // 色スケール（基準値を中心にした diverging）
     const values = data.map((d) => d.value);
@@ -67,9 +67,9 @@ export function CategoryHeatmap({
       const t = deviation / maxDeviation; // -1 to +1
       if (Math.abs(t) < 0.05) return "hsl(var(--muted))";
       if (t > 0) {
-        return d3.interpolateRgb("#dbeafe", positiveColor)(Math.abs(t));
+        return interpolateRgb("#dbeafe", positiveColor)(Math.abs(t));
       }
-      return d3.interpolateRgb("#ffedd5", negativeColor)(Math.abs(t));
+      return interpolateRgb("#ffedd5", negativeColor)(Math.abs(t));
     };
 
     const g = svg
@@ -114,7 +114,7 @@ export function CategoryHeatmap({
       .attr("stroke", "hsl(var(--background))")
       .attr("stroke-width", 1)
       .on("mouseenter", function (event, d) {
-        d3.select(this).attr("stroke", "hsl(var(--foreground))").attr("stroke-width", 2);
+        select(this).attr("stroke", "hsl(var(--foreground))").attr("stroke-width", 2);
         const diff = d.value - baseline;
         const sign = diff >= 0 ? "+" : "";
         showTooltip(event, d.y, {
@@ -125,7 +125,7 @@ export function CategoryHeatmap({
       })
       .on("mousemove", (event) => updateTooltipPosition(event))
       .on("mouseleave", function () {
-        d3.select(this).attr("stroke", "hsl(var(--background))").attr("stroke-width", 1);
+        select(this).attr("stroke", "hsl(var(--background))").attr("stroke-width", 1);
         hideTooltip();
       });
 

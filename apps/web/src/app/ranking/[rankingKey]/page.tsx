@@ -91,6 +91,7 @@ import type { RankingValue } from "@stats47/ranking";
 import type { Metadata } from "next";
 
 /** 24時間 ISR */
+export const revalidate = 86400;
 
 /** ビルド時に全 rankingKey を事前生成（DB利用不可時はISRに委ねる） */
 export async function generateStaticParams() {
@@ -129,6 +130,7 @@ export async function generateMetadata({
       return {
         title: "ランキングが見つかりません",
         description: "指定されたランキングは存在しません",
+        alternates: { canonical: "/ranking" },
       };
     }
 
@@ -219,7 +221,7 @@ export default async function RankingKeyPage({
   // --- 3f. ネイティブアフィリエイト枠 (D Phase 2) ---
   const affiliateTagKeys = (rankingItem.tags ?? []).map((t) => t.tagKey);
   const nativeBannersPromise = affiliateTagKeys.length > 0
-    ? resolveAffiliateBanners(affiliateTagKeys, 4).catch((error) => {
+    ? resolveAffiliateBanners(affiliateTagKeys, 4, rankingKey).catch((error) => {
         logger.error({ error }, "RankingKeyPage: native banners 取得失敗");
         return [];
       })
@@ -348,7 +350,7 @@ export default async function RankingKeyPage({
             <RankingItemsSidebar rankingKey={rankingKey} areaType={areaType} categoryKey={rankingItem.categoryKey} />
             <SidebarPromoBanner />
             <RelatedArticlesCard rankingKey={rankingKey} areaType={areaType} />
-            <AffiliateAdSlot categoryKey={rankingItem.categoryKey ?? ""} position="sidebar" />
+            <AffiliateAdSlot categoryKey={rankingItem.categoryKey ?? ""} position="sidebar" rankingKey={rankingKey} />
             <SurveyCard surveys={allSurveys.map((s: { id: string; name: string }) => ({ id: s.id, name: s.name }))} currentSurveyId={rankingItem.surveyId ?? undefined} />
             <PortStatisticsMapCard rankingKey={rankingKey} groupKey={rankingItem.groupKey} />
           </Suspense>

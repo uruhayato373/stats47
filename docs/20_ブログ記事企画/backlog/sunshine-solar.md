@@ -4,7 +4,7 @@ created: 2026-05-20
 updated: 2026-05-20
 status: draft
 title: 掛け合わせコンテンツ #2 企画 — 日照時間 × 太陽光発電
-parent: docs/02_実装計画/gis-content-plan.md
+parent: docs/02_実装計画/11_GISコンテンツ戦略.md
 deliverables: [掛け合わせページ, ブログ記事, note記事]
 tags: [gis, content-plan, sunshine, solar, gis-cross]
 ---
@@ -13,7 +13,7 @@ tags: [gis, content-plan, sunshine, solar, gis-cross]
 
 ## Context
 
-統計 × GIS 掛け合わせコンテンツ戦略 (`gis-content-plan.md`) の第 2 弾候補。
+統計 × GIS 掛け合わせコンテンツ戦略 (`11_GISコンテンツ戦略.md`) の第 2 弾候補。
 第 1 弾 (過疎地域 × 医療機関、`/gis-cross/depopulation-medical`) は実装・公開済み。
 
 本企画の根拠は **note アクセス実測データ** (2026-04-21〜05-20、月 4,441 ビュー):
@@ -129,6 +129,6 @@ tags: [gis, content-plan, sunshine, solar, gis-cross]
 
 ## 関連
 
-- 親戦略: `docs/02_実装計画/gis-content-plan.md`
-- 第 1 弾実装: `docs/02_実装計画/gis-content-plan.md` Phase 2 / 掛け合わせページ `/gis-cross/depopulation-medical`
+- 親戦略: `docs/02_実装計画/11_GISコンテンツ戦略.md`
+- 第 1 弾実装: `docs/02_実装計画/11_GISコンテンツ戦略.md` Phase 2 / 掛け合わせページ `/gis-cross/depopulation-medical`
 - GIS データセット管理: `docs/01_技術設計/04_国土数値情報GISデータ.md`

@@ -37,7 +37,7 @@ description: 失敗と学びの記録、auto memory の維持、継続学習パ�
 - `~/.claude/projects/-Users-minamidaisuke-stats47/memory/*.md` — auto memory (CRUD、排他)
 - `~/.claude/projects/-Users-minamidaisuke-stats47/memory/MEMORY.md` — memory index (CRUD、排他)
 - `.claude/skills/learned/*.md` — 学習済みパターン (CRUD)
-- `docs/02_実装計画/improvement-backlog.md` — read only (status 更新は triage に委譲)
+- `docs/02_実装計画/03_改善バックログ.md` — read only (status 更新は triage に委譲)
 
 ## File Boundary (並行衝突回避)
 
