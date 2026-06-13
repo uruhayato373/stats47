@@ -1,128 +1,23 @@
 {
-  "generatedAt": "2026-06-13T09:49:26.515Z",
+  "generatedAt": "2026-06-13T10:11:16.821Z",
   "gscWeek": "2026-W23",
-  "auditGeneratedAt": "2026-06-13T09:49:26.469Z",
+  "auditGeneratedAt": "2026-06-13T10:11:16.797Z",
   "scoring": "combined = 0.6*norm(GSC expectedLift) + 0.4*norm(blockers*3+warnings); lane: must-fix > opportunity",
   "summary": {
     "total": 206,
-    "pending": 193,
+    "pending": 194,
     "inProgress": 0,
-    "done": 13,
+    "done": 12,
     "mustFixPending": 170,
-    "opportunityPending": 23
+    "opportunityPending": 24
   },
   "queue": [
-    {
-      "slug": "musical-instrument-expenditure-prefecture-gap",
-      "lane": "must-fix",
-      "status": "done",
-      "priority": 1,
-      "combinedScore": 0.4,
-      "gsc": {
-        "impressions": 0,
-        "clicks": 0,
-        "ctr": 0,
-        "position": 0,
-        "expectedLift": 0
-      },
-      "quality": {
-        "blockers": 7,
-        "warnings": 0,
-        "prose": 1578,
-        "chartCount": 0,
-        "prosePerChart": null,
-        "conformance": null,
-        "flags": [
-          "blocker: callouts 0<2",
-          "blocker: internalLinks 0<3",
-          "blocker: prose 1578<1600 (薄い)",
-          "blocker: である調 文末 3箇所 [である。,だ。] — ですます調に統一 (である。→です。/だった。→でした。)",
-          "blocker: ランキング表あり/チャート0 — 上位5+下位5 SVG に置換 (表だけ不可)",
-          "blocker: インライン <svg> — 生成画像 ![](data/*.svg) に統一",
-          "blocker: 記事内関連セクション — ページ側コンポーネントが正典 (記事から削除)"
-        ]
-      },
-      "wave_id": null,
-      "remediated_at": "2026-06-13",
-      "in_progress_at": null,
-      "last_brushup": null
-    },
-    {
-      "slug": "local-debt-current-ratio-prefecture-gap",
-      "lane": "must-fix",
-      "status": "pending",
-      "priority": 2,
-      "combinedScore": 0.366,
-      "gsc": {
-        "impressions": 15,
-        "clicks": 0,
-        "ctr": 0,
-        "position": 13.53,
-        "expectedLift": 1
-      },
-      "quality": {
-        "blockers": 6,
-        "warnings": 1,
-        "prose": 1665,
-        "chartCount": 0,
-        "prosePerChart": null,
-        "conformance": 0,
-        "flags": [
-          "blocker: callouts 0<2",
-          "blocker: internalLinks 0<3",
-          "warning: prose 1665<2400 (やや薄い)",
-          "blocker: である調 文末 3箇所 [だろう。,だ。] — ですます調に統一 (である。→です。/だった。→でした。)",
-          "blocker: ランキング表あり/チャート0 — 上位5+下位5 SVG に置換 (表だけ不可)",
-          "blocker: インライン <svg> — 生成画像 ![](data/*.svg) に統一",
-          "blocker: 記事内関連セクション — ページ側コンポーネントが正典 (記事から削除)"
-        ]
-      },
-      "wave_id": null,
-      "remediated_at": null,
-      "in_progress_at": null,
-      "last_brushup": null
-    },
-    {
-      "slug": "inflow-population-ratio-prefecture-gap",
-      "lane": "must-fix",
-      "status": "pending",
-      "priority": 3,
-      "combinedScore": 0.366,
-      "gsc": {
-        "impressions": 3,
-        "clicks": 0,
-        "ctr": 0,
-        "position": 4.67,
-        "expectedLift": 1
-      },
-      "quality": {
-        "blockers": 6,
-        "warnings": 1,
-        "prose": 1625,
-        "chartCount": 0,
-        "prosePerChart": null,
-        "conformance": null,
-        "flags": [
-          "blocker: callouts 0<2",
-          "blocker: internalLinks 0<3",
-          "warning: prose 1625<2400 (やや薄い)",
-          "blocker: である調 文末 1箇所 [である。] — ですます調に統一 (である。→です。/だった。→でした。)",
-          "blocker: ランキング表あり/チャート0 — 上位5+下位5 SVG に置換 (表だけ不可)",
-          "blocker: インライン <svg> — 生成画像 ![](data/*.svg) に統一",
-          "blocker: 記事内関連セクション — ページ側コンポーネントが正典 (記事から削除)"
-        ]
-      },
-      "wave_id": null,
-      "remediated_at": null,
-      "in_progress_at": null,
-      "last_brushup": null
-    },
     {
       "slug": "train-commuters-prefecture-gap",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 4,
-      "combinedScore": 0.362,
+      "priority": 1,
+      "combinedScore": 0.4,
       "gsc": {
         "impressions": 33,
         "clicks": 2,
@@ -156,8 +51,8 @@
       "slug": "future-burden-ratio-extreme-gap",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 5,
-      "combinedScore": 0.362,
+      "priority": 2,
+      "combinedScore": 0.4,
       "gsc": {
         "impressions": 0,
         "clicks": 0,
@@ -191,8 +86,8 @@
       "slug": "low-birthweight-rate-prefecture-gap",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 6,
-      "combinedScore": 0.362,
+      "priority": 3,
+      "combinedScore": 0.4,
       "gsc": {
         "impressions": 0,
         "clicks": 0,
@@ -226,8 +121,8 @@
       "slug": "smartphone-ownership-prefecture-gap",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 7,
-      "combinedScore": 0.362,
+      "priority": 4,
+      "combinedScore": 0.4,
       "gsc": {
         "impressions": 0,
         "clicks": 0,
@@ -261,8 +156,8 @@
       "slug": "roadside-station-prefecture-gap",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 8,
-      "combinedScore": 0.35,
+      "priority": 5,
+      "combinedScore": 0.386,
       "gsc": {
         "impressions": 17,
         "clicks": 0,
@@ -295,8 +190,8 @@
       "slug": "cc-estat-16-commerce-bubble",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 9,
-      "combinedScore": 0.347,
+      "priority": 6,
+      "combinedScore": 0.383,
       "gsc": {
         "impressions": 5,
         "clicks": 0,
@@ -329,8 +224,8 @@
       "slug": "disaster-damage-per-person-prefecture-gap",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 10,
-      "combinedScore": 0.347,
+      "priority": 7,
+      "combinedScore": 0.383,
       "gsc": {
         "impressions": 4,
         "clicks": 0,
@@ -363,8 +258,8 @@
       "slug": "cc-estat-05-medical-cost-choropleth",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 11,
-      "combinedScore": 0.343,
+      "priority": 8,
+      "combinedScore": 0.379,
       "gsc": {
         "impressions": 7,
         "clicks": 0,
@@ -397,8 +292,8 @@
       "slug": "golf-participation-prefecture-gap",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 12,
-      "combinedScore": 0.343,
+      "priority": 9,
+      "combinedScore": 0.379,
       "gsc": {
         "impressions": 0,
         "clicks": 0,
@@ -431,8 +326,8 @@
       "slug": "self-financing-ratio-prefecture-gap",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 13,
-      "combinedScore": 0.343,
+      "priority": 10,
+      "combinedScore": 0.379,
       "gsc": {
         "impressions": 0,
         "clicks": 0,
@@ -465,8 +360,8 @@
       "slug": "aging-rate-akita-vs-okinawa",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 14,
-      "combinedScore": 0.316,
+      "priority": 11,
+      "combinedScore": 0.348,
       "gsc": {
         "impressions": 64,
         "clicks": 1,
@@ -499,8 +394,8 @@
       "slug": "whisky-consumption-prefecture-gap",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 15,
-      "combinedScore": 0.312,
+      "priority": 12,
+      "combinedScore": 0.344,
       "gsc": {
         "impressions": 22,
         "clicks": 0,
@@ -533,8 +428,8 @@
       "slug": "outpatient-rate-prefecture-gap",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 16,
-      "combinedScore": 0.309,
+      "priority": 13,
+      "combinedScore": 0.341,
       "gsc": {
         "impressions": 31,
         "clicks": 1,
@@ -567,8 +462,8 @@
       "slug": "fresh-udon-soba-consumption-prefecture-gap",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 17,
-      "combinedScore": 0.305,
+      "priority": 14,
+      "combinedScore": 0.337,
       "gsc": {
         "impressions": 100,
         "clicks": 5,
@@ -601,8 +496,8 @@
       "slug": "prefectural-height-male-female-gap",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 18,
-      "combinedScore": 0.305,
+      "priority": 15,
+      "combinedScore": 0.337,
       "gsc": {
         "impressions": 15,
         "clicks": 1,
@@ -635,8 +530,8 @@
       "slug": "extreme-heat-days-prefecture",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 19,
-      "combinedScore": 0.305,
+      "priority": 16,
+      "combinedScore": 0.337,
       "gsc": {
         "impressions": 75,
         "clicks": 2,
@@ -669,8 +564,8 @@
       "slug": "chicken-consumption-prefecture-gap",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 20,
-      "combinedScore": 0.305,
+      "priority": 17,
+      "combinedScore": 0.337,
       "gsc": {
         "impressions": 0,
         "clicks": 0,
@@ -703,8 +598,8 @@
       "slug": "inpatient-rate-prefecture-gap",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 21,
-      "combinedScore": 0.305,
+      "priority": 18,
+      "combinedScore": 0.337,
       "gsc": {
         "impressions": 0,
         "clicks": 0,
@@ -737,8 +632,8 @@
       "slug": "minimum-wage-increase-rate-prefecture-gap",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 22,
-      "combinedScore": 0.305,
+      "priority": 19,
+      "combinedScore": 0.337,
       "gsc": {
         "impressions": 0,
         "clicks": 0,
@@ -771,8 +666,8 @@
       "slug": "cc-estat-20-publish",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 23,
-      "combinedScore": 0.297,
+      "priority": 20,
+      "combinedScore": 0.327,
       "gsc": {
         "impressions": 28,
         "clicks": 0,
@@ -801,44 +696,11 @@
       "last_brushup": null
     },
     {
-      "slug": "fishery-catch-aquaculture-shift",
-      "lane": "must-fix",
-      "status": "pending",
-      "priority": 24,
-      "combinedScore": 0.293,
-      "gsc": {
-        "impressions": 228,
-        "clicks": 0,
-        "ctr": 0,
-        "position": 10.08,
-        "expectedLift": 22
-      },
-      "quality": {
-        "blockers": 3,
-        "warnings": 2,
-        "prose": 1961,
-        "chartCount": 0,
-        "prosePerChart": null,
-        "conformance": 0.25,
-        "flags": [
-          "warning: prose 1961<2400 (やや薄い)",
-          "blocker: である調 文末 4箇所 [だ。] — ですます調に統一 (である。→です。/だった。→でした。)",
-          "blocker: インライン <svg> — 生成画像 ![](data/*.svg) に統一",
-          "blocker: 記事内関連セクション — ページ側コンポーネントが正典 (記事から削除)",
-          "warning: source-link 末尾集約 3個 — 各図直下へ分散"
-        ]
-      },
-      "wave_id": null,
-      "remediated_at": null,
-      "in_progress_at": null,
-      "last_brushup": "2026-05-25"
-    },
-    {
       "slug": "cc-estat-04-aging-heatmap",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 25,
-      "combinedScore": 0.289,
+      "priority": 21,
+      "combinedScore": 0.32,
       "gsc": {
         "impressions": 8,
         "clicks": 0,
@@ -870,8 +732,8 @@
       "slug": "cc-estat-14-energy-area-chart",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 26,
-      "combinedScore": 0.289,
+      "priority": 22,
+      "combinedScore": 0.32,
       "gsc": {
         "impressions": 3,
         "clicks": 0,
@@ -903,8 +765,8 @@
       "slug": "cc-estat-02-search-skill",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 27,
-      "combinedScore": 0.286,
+      "priority": 23,
+      "combinedScore": 0.316,
       "gsc": {
         "impressions": 22,
         "clicks": 1,
@@ -936,8 +798,8 @@
       "slug": "cc-estat-11-tourism-stacked",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 28,
-      "combinedScore": 0.286,
+      "priority": 24,
+      "combinedScore": 0.316,
       "gsc": {
         "impressions": 2,
         "clicks": 0,
@@ -966,11 +828,44 @@
       "last_brushup": null
     },
     {
+      "slug": "fishery-catch-aquaculture-shift",
+      "lane": "must-fix",
+      "status": "pending",
+      "priority": 25,
+      "combinedScore": 0.315,
+      "gsc": {
+        "impressions": 228,
+        "clicks": 0,
+        "ctr": 0,
+        "position": 10.08,
+        "expectedLift": 22
+      },
+      "quality": {
+        "blockers": 3,
+        "warnings": 2,
+        "prose": 1961,
+        "chartCount": 0,
+        "prosePerChart": null,
+        "conformance": 0.25,
+        "flags": [
+          "warning: prose 1961<2400 (やや薄い)",
+          "blocker: である調 文末 4箇所 [だ。] — ですます調に統一 (である。→です。/だった。→でした。)",
+          "blocker: インライン <svg> — 生成画像 ![](data/*.svg) に統一",
+          "blocker: 記事内関連セクション — ページ側コンポーネントが正典 (記事から削除)",
+          "warning: source-link 末尾集約 3個 — 各図直下へ分散"
+        ]
+      },
+      "wave_id": null,
+      "remediated_at": null,
+      "in_progress_at": null,
+      "last_brushup": "2026-05-25"
+    },
+    {
       "slug": "marriage-divorce-okinawa",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 29,
-      "combinedScore": 0.27,
+      "priority": 26,
+      "combinedScore": 0.296,
       "gsc": {
         "impressions": 41,
         "clicks": 0,
@@ -1002,8 +897,8 @@
       "slug": "agriculture-hokkaido-dominance",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 30,
-      "combinedScore": 0.255,
+      "priority": 27,
+      "combinedScore": 0.279,
       "gsc": {
         "impressions": 100,
         "clicks": 0,
@@ -1034,8 +929,8 @@
       "slug": "wheat-flour-consumption-prefecture",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 31,
-      "combinedScore": 0.248,
+      "priority": 28,
+      "combinedScore": 0.274,
       "gsc": {
         "impressions": 72,
         "clicks": 5,
@@ -1067,8 +962,8 @@
       "slug": "police-officer-density-vs-crime-gap",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 32,
-      "combinedScore": 0.248,
+      "priority": 29,
+      "combinedScore": 0.274,
       "gsc": {
         "impressions": 0,
         "clicks": 0,
@@ -1097,41 +992,11 @@
       "last_brushup": null
     },
     {
-      "slug": "park-green-space-gap",
-      "lane": "must-fix",
-      "status": "pending",
-      "priority": 33,
-      "combinedScore": 0.242,
-      "gsc": {
-        "impressions": 385,
-        "clicks": 2,
-        "ctr": 0.0052,
-        "position": 7.25,
-        "expectedLift": 44
-      },
-      "quality": {
-        "blockers": 1,
-        "warnings": 1,
-        "prose": 2504,
-        "chartCount": 2,
-        "prosePerChart": 1252,
-        "conformance": null,
-        "flags": [
-          "blocker: である調 文末 14箇所 [だ。] — ですます調に統一 (である。→です。/だった。→でした。)",
-          "warning: source-link 末尾集約 2個 — 各図直下へ分散"
-        ]
-      },
-      "wave_id": null,
-      "remediated_at": null,
-      "in_progress_at": null,
-      "last_brushup": "2026-05-25"
-    },
-    {
       "slug": "cc-estat-15-crime-small-multiple",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 34,
-      "combinedScore": 0.236,
+      "priority": 30,
+      "combinedScore": 0.26,
       "gsc": {
         "impressions": 3,
         "clicks": 0,
@@ -1162,8 +1027,8 @@
       "slug": "cc-estat-19-skill-pipeline",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 35,
-      "combinedScore": 0.232,
+      "priority": 31,
+      "combinedScore": 0.256,
       "gsc": {
         "impressions": 10,
         "clicks": 0,
@@ -1194,8 +1059,8 @@
       "slug": "ai-claude-code-pref-analysis",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 36,
-      "combinedScore": 0.229,
+      "priority": 32,
+      "combinedScore": 0.253,
       "gsc": {
         "impressions": 24,
         "clicks": 3,
@@ -1226,8 +1091,8 @@
       "slug": "cc-estat-01-setup",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 37,
-      "combinedScore": 0.229,
+      "priority": 33,
+      "combinedScore": 0.253,
       "gsc": {
         "impressions": 44,
         "clicks": 3,
@@ -1258,8 +1123,8 @@
       "slug": "cc-estat-08-bar-chart-race",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 38,
-      "combinedScore": 0.229,
+      "priority": 34,
+      "combinedScore": 0.253,
       "gsc": {
         "impressions": 0,
         "clicks": 0,
@@ -1290,8 +1155,8 @@
       "slug": "cc-estat-09-radar-prefecture",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 39,
-      "combinedScore": 0.229,
+      "priority": 35,
+      "combinedScore": 0.253,
       "gsc": {
         "impressions": 7,
         "clicks": 1,
@@ -1322,8 +1187,8 @@
       "slug": "cc-estat-12-housing-treemap",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 40,
-      "combinedScore": 0.229,
+      "priority": 36,
+      "combinedScore": 0.253,
       "gsc": {
         "impressions": 4,
         "clicks": 1,
@@ -1354,8 +1219,8 @@
       "slug": "cc-estat-17-edu-slope-graph",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 41,
-      "combinedScore": 0.229,
+      "priority": 37,
+      "combinedScore": 0.253,
       "gsc": {
         "impressions": 1,
         "clicks": 0,
@@ -1386,8 +1251,8 @@
       "slug": "mineral-water-spending-prefecture-gap",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 42,
-      "combinedScore": 0.229,
+      "priority": 38,
+      "combinedScore": 0.253,
       "gsc": {
         "impressions": 0,
         "clicks": 0,
@@ -1415,11 +1280,41 @@
       "last_brushup": null
     },
     {
+      "slug": "park-green-space-gap",
+      "lane": "must-fix",
+      "status": "pending",
+      "priority": 39,
+      "combinedScore": 0.25,
+      "gsc": {
+        "impressions": 385,
+        "clicks": 2,
+        "ctr": 0.0052,
+        "position": 7.25,
+        "expectedLift": 44
+      },
+      "quality": {
+        "blockers": 1,
+        "warnings": 1,
+        "prose": 2504,
+        "chartCount": 2,
+        "prosePerChart": 1252,
+        "conformance": null,
+        "flags": [
+          "blocker: である調 文末 14箇所 [だ。] — ですます調に統一 (である。→です。/だった。→でした。)",
+          "warning: source-link 末尾集約 2個 — 各図直下へ分散"
+        ]
+      },
+      "wave_id": null,
+      "remediated_at": null,
+      "in_progress_at": null,
+      "last_brushup": "2026-05-25"
+    },
+    {
       "slug": "electricity-demand-gap",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 43,
-      "combinedScore": 0.213,
+      "priority": 40,
+      "combinedScore": 0.235,
       "gsc": {
         "impressions": 39,
         "clicks": 1,
@@ -1451,8 +1346,8 @@
       "slug": "housing-cost-livability-trend",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 44,
-      "combinedScore": 0.198,
+      "priority": 41,
+      "combinedScore": 0.218,
       "gsc": {
         "impressions": 90,
         "clicks": 2,
@@ -1480,42 +1375,11 @@
       "last_brushup": "2026-05-25"
     },
     {
-      "slug": "precipitation-snow-regional-gap",
-      "lane": "must-fix",
-      "status": "pending",
-      "priority": 45,
-      "combinedScore": 0.19,
-      "gsc": {
-        "impressions": 207,
-        "clicks": 1,
-        "ctr": 0.0048,
-        "position": 10.14,
-        "expectedLift": 15
-      },
-      "quality": {
-        "blockers": 2,
-        "warnings": 1,
-        "prose": 2625,
-        "chartCount": 0,
-        "prosePerChart": null,
-        "conformance": 0.61,
-        "flags": [
-          "blocker: インライン <svg> — 生成画像 ![](data/*.svg) に統一",
-          "blocker: 記事内関連セクション — ページ側コンポーネントが正典 (記事から削除)",
-          "warning: source-link 末尾集約 3個 — 各図直下へ分散"
-        ]
-      },
-      "wave_id": null,
-      "remediated_at": null,
-      "in_progress_at": null,
-      "last_brushup": "2026-05-25"
-    },
-    {
       "slug": "future-population-disappearing-prefectures",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 46,
-      "combinedScore": 0.19,
+      "priority": 42,
+      "combinedScore": 0.211,
       "gsc": {
         "impressions": 0,
         "clicks": 0,
@@ -1546,8 +1410,8 @@
       "slug": "ict-digital-divide-composite-analysis",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 47,
-      "combinedScore": 0.19,
+      "priority": 43,
+      "combinedScore": 0.211,
       "gsc": {
         "impressions": 12,
         "clicks": 1,
@@ -1575,11 +1439,42 @@
       "last_brushup": "2026-05-25"
     },
     {
+      "slug": "precipitation-snow-regional-gap",
+      "lane": "must-fix",
+      "status": "pending",
+      "priority": 44,
+      "combinedScore": 0.204,
+      "gsc": {
+        "impressions": 207,
+        "clicks": 1,
+        "ctr": 0.0048,
+        "position": 10.14,
+        "expectedLift": 15
+      },
+      "quality": {
+        "blockers": 2,
+        "warnings": 1,
+        "prose": 2625,
+        "chartCount": 0,
+        "prosePerChart": null,
+        "conformance": 0.61,
+        "flags": [
+          "blocker: インライン <svg> — 生成画像 ![](data/*.svg) に統一",
+          "blocker: 記事内関連セクション — ページ側コンポーネントが正典 (記事から削除)",
+          "warning: source-link 末尾集約 3個 — 各図直下へ分散"
+        ]
+      },
+      "wave_id": null,
+      "remediated_at": null,
+      "in_progress_at": null,
+      "last_brushup": "2026-05-25"
+    },
+    {
       "slug": "cc-estat-07-birthrate-line",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 48,
-      "combinedScore": 0.179,
+      "priority": 45,
+      "combinedScore": 0.197,
       "gsc": {
         "impressions": 9,
         "clicks": 0,
@@ -1609,8 +1504,8 @@
       "slug": "unemployment-structure",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 49,
-      "combinedScore": 0.175,
+      "priority": 46,
+      "combinedScore": 0.189,
       "gsc": {
         "impressions": 108,
         "clicks": 1,
@@ -1637,41 +1532,11 @@
       "last_brushup": "2026-05-25"
     },
     {
-      "slug": "foreign-overnight-guests-prefecture-gap",
-      "lane": "must-fix",
-      "status": "pending",
-      "priority": 50,
-      "combinedScore": 0.171,
-      "gsc": {
-        "impressions": 230,
-        "clicks": 0,
-        "ctr": 0,
-        "position": 8.7,
-        "expectedLift": 25
-      },
-      "quality": {
-        "blockers": 1,
-        "warnings": 1,
-        "prose": 2111,
-        "chartCount": 2,
-        "prosePerChart": 1056,
-        "conformance": 0.64,
-        "flags": [
-          "warning: prose 2111<2400 (やや薄い)",
-          "blocker: である調 文末 7箇所 [だ。] — ですます調に統一 (である。→です。/だった。→でした。)"
-        ]
-      },
-      "wave_id": null,
-      "remediated_at": null,
-      "in_progress_at": null,
-      "last_brushup": "2026-05-25"
-    },
-    {
       "slug": "safe-driving-5-features",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 51,
-      "combinedScore": 0.171,
+      "priority": 47,
+      "combinedScore": 0.189,
       "gsc": {
         "impressions": 107,
         "clicks": 5,
@@ -1701,8 +1566,8 @@
       "slug": "cc-estat-06-income-scatter",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 52,
-      "combinedScore": 0.171,
+      "priority": 48,
+      "combinedScore": 0.189,
       "gsc": {
         "impressions": 3,
         "clicks": 0,
@@ -1732,8 +1597,8 @@
       "slug": "cc-estat-10-wage-box-plot",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 53,
-      "combinedScore": 0.171,
+      "priority": 49,
+      "combinedScore": 0.189,
       "gsc": {
         "impressions": 0,
         "clicks": 0,
@@ -1763,8 +1628,8 @@
       "slug": "sunshine-solar-housing-correlation",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 54,
-      "combinedScore": 0.171,
+      "priority": 50,
+      "combinedScore": 0.189,
       "gsc": {
         "impressions": 0,
         "clicks": 0,
@@ -1791,29 +1656,28 @@
       "last_brushup": null
     },
     {
-      "slug": "local-tax-regional-gap",
+      "slug": "foreign-overnight-guests-prefecture-gap",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 55,
-      "combinedScore": 0.156,
+      "priority": 51,
+      "combinedScore": 0.179,
       "gsc": {
-        "impressions": 173,
-        "clicks": 3,
-        "ctr": 0.0173,
-        "position": 8.65,
-        "expectedLift": 6
+        "impressions": 230,
+        "clicks": 0,
+        "ctr": 0,
+        "position": 8.7,
+        "expectedLift": 25
       },
       "quality": {
-        "blockers": 2,
+        "blockers": 1,
         "warnings": 1,
-        "prose": 2271,
-        "chartCount": 0,
-        "prosePerChart": null,
-        "conformance": 0.48,
+        "prose": 2111,
+        "chartCount": 2,
+        "prosePerChart": 1056,
+        "conformance": 0.64,
         "flags": [
-          "warning: prose 2271<2400 (やや薄い)",
-          "blocker: インライン <svg> — 生成画像 ![](data/*.svg) に統一",
-          "blocker: 記事内関連セクション — ページ側コンポーネントが正典 (記事から削除)"
+          "warning: prose 2111<2400 (やや薄い)",
+          "blocker: である調 文末 7箇所 [だ。] — ですます調に統一 (である。→です。/だった。→でした。)"
         ]
       },
       "wave_id": null,
@@ -1825,8 +1689,8 @@
       "slug": "traffic-accident-deaths-regional-risk",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 56,
-      "combinedScore": 0.156,
+      "priority": 52,
+      "combinedScore": 0.172,
       "gsc": {
         "impressions": 7,
         "clicks": 0,
@@ -1854,28 +1718,29 @@
       "last_brushup": null
     },
     {
-      "slug": "commercial-sales-productivity-gap",
+      "slug": "local-tax-regional-gap",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 57,
-      "combinedScore": 0.155,
+      "priority": 53,
+      "combinedScore": 0.17,
       "gsc": {
-        "impressions": 249,
-        "clicks": 2,
-        "ctr": 0.008,
-        "position": 7.86,
-        "expectedLift": 21
+        "impressions": 173,
+        "clicks": 3,
+        "ctr": 0.0173,
+        "position": 8.65,
+        "expectedLift": 6
       },
       "quality": {
-        "blockers": 1,
+        "blockers": 2,
         "warnings": 1,
-        "prose": 2048,
-        "chartCount": 3,
-        "prosePerChart": 683,
-        "conformance": 0.53,
+        "prose": 2271,
+        "chartCount": 0,
+        "prosePerChart": null,
+        "conformance": 0.48,
         "flags": [
-          "warning: prose 2048<2400 (やや薄い)",
-          "blocker: である調 文末 8箇所 [ではない。,だ。] — ですます調に統一 (である。→です。/だった。→でした。)"
+          "warning: prose 2271<2400 (やや薄い)",
+          "blocker: インライン <svg> — 生成画像 ![](data/*.svg) に統一",
+          "blocker: 記事内関連セクション — ページ側コンポーネントが正典 (記事から削除)"
         ]
       },
       "wave_id": null,
@@ -1887,8 +1752,8 @@
       "slug": "forest-coverage-woodland-economy",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 58,
-      "combinedScore": 0.152,
+      "priority": 54,
+      "combinedScore": 0.168,
       "gsc": {
         "impressions": 47,
         "clicks": 1,
@@ -1916,11 +1781,41 @@
       "last_brushup": null
     },
     {
+      "slug": "commercial-sales-productivity-gap",
+      "lane": "must-fix",
+      "status": "pending",
+      "priority": 55,
+      "combinedScore": 0.163,
+      "gsc": {
+        "impressions": 249,
+        "clicks": 2,
+        "ctr": 0.008,
+        "position": 7.86,
+        "expectedLift": 21
+      },
+      "quality": {
+        "blockers": 1,
+        "warnings": 1,
+        "prose": 2048,
+        "chartCount": 3,
+        "prosePerChart": 683,
+        "conformance": 0.53,
+        "flags": [
+          "warning: prose 2048<2400 (やや薄い)",
+          "blocker: である調 文末 8箇所 [ではない。,だ。] — ですます調に統一 (である。→です。/だった。→でした。)"
+        ]
+      },
+      "wave_id": null,
+      "remediated_at": null,
+      "in_progress_at": null,
+      "last_brushup": "2026-05-25"
+    },
+    {
       "slug": "cpi-change-regional-pattern",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 59,
-      "combinedScore": 0.145,
+      "priority": 56,
+      "combinedScore": 0.159,
       "gsc": {
         "impressions": 57,
         "clicks": 1,
@@ -1947,42 +1842,11 @@
       "last_brushup": "2026-05-25"
     },
     {
-      "slug": "firefighting-capacity-gap",
-      "lane": "must-fix",
-      "status": "pending",
-      "priority": 60,
-      "combinedScore": 0.141,
-      "gsc": {
-        "impressions": 118,
-        "clicks": 1,
-        "ctr": 0.0085,
-        "position": 7.47,
-        "expectedLift": 12
-      },
-      "quality": {
-        "blockers": 1,
-        "warnings": 2,
-        "prose": 2013,
-        "chartCount": 6,
-        "prosePerChart": 336,
-        "conformance": 0.64,
-        "flags": [
-          "warning: prose 2013<2400 (やや薄い)",
-          "blocker: prose/図 336<350 (図はあるが薄い)",
-          "warning: source-link 末尾集約 5個 — 各図直下へ分散"
-        ]
-      },
-      "wave_id": null,
-      "remediated_at": null,
-      "in_progress_at": null,
-      "last_brushup": null
-    },
-    {
       "slug": "sports-facility-regional-divide",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 61,
-      "combinedScore": 0.141,
+      "priority": 57,
+      "combinedScore": 0.155,
       "gsc": {
         "impressions": 13,
         "clicks": 0,
@@ -2009,42 +1873,42 @@
       "last_brushup": null
     },
     {
-      "slug": "recycling-rate-gap",
+      "slug": "firefighting-capacity-gap",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 62,
-      "combinedScore": 0.133,
+      "priority": 58,
+      "combinedScore": 0.151,
       "gsc": {
-        "impressions": 81,
-        "clicks": 0,
-        "ctr": 0,
-        "position": 7.84,
-        "expectedLift": 10
+        "impressions": 118,
+        "clicks": 1,
+        "ctr": 0.0085,
+        "position": 7.47,
+        "expectedLift": 12
       },
       "quality": {
         "blockers": 1,
         "warnings": 2,
-        "prose": 2369,
-        "chartCount": 2,
-        "prosePerChart": 1185,
-        "conformance": 0.59,
+        "prose": 2013,
+        "chartCount": 6,
+        "prosePerChart": 336,
+        "conformance": 0.64,
         "flags": [
-          "warning: prose 2369<2400 (やや薄い)",
-          "blocker: である調 文末 7箇所 [ではない。,だ。] — ですます調に統一 (である。→です。/だった。→でした。)",
-          "warning: source-link 末尾集約 3個 — 各図直下へ分散"
+          "warning: prose 2013<2400 (やや薄い)",
+          "blocker: prose/図 336<350 (図はあるが薄い)",
+          "warning: source-link 末尾集約 5個 — 各図直下へ分散"
         ]
       },
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": "2026-05-25"
+      "last_brushup": null
     },
     {
       "slug": "dual-income-reversal",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 63,
-      "combinedScore": 0.133,
+      "priority": 59,
+      "combinedScore": 0.147,
       "gsc": {
         "impressions": 51,
         "clicks": 1,
@@ -2074,8 +1938,8 @@
       "slug": "library-museum-cultural-capital",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 64,
-      "combinedScore": 0.133,
+      "priority": 60,
+      "combinedScore": 0.147,
       "gsc": {
         "impressions": 48,
         "clicks": 3,
@@ -2105,8 +1969,8 @@
       "slug": "international-cooperation-volunteer-map",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 65,
-      "combinedScore": 0.133,
+      "priority": 61,
+      "combinedScore": 0.147,
       "gsc": {
         "impressions": 28,
         "clicks": 2,
@@ -2136,8 +2000,8 @@
       "slug": "foreign-population-growth-rate",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 66,
-      "combinedScore": 0.133,
+      "priority": 62,
+      "combinedScore": 0.147,
       "gsc": {
         "impressions": 47,
         "clicks": 7,
@@ -2167,8 +2031,8 @@
       "slug": "vacant-house-crisis",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 67,
-      "combinedScore": 0.133,
+      "priority": 63,
+      "combinedScore": 0.147,
       "gsc": {
         "impressions": 22,
         "clicks": 0,
@@ -2198,8 +2062,8 @@
       "slug": "inbound-by-nationality-regional-preference",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 68,
-      "combinedScore": 0.133,
+      "priority": 64,
+      "combinedScore": 0.147,
       "gsc": {
         "impressions": 0,
         "clicks": 0,
@@ -2229,8 +2093,8 @@
       "slug": "inbound-overnight-regional-gap",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 69,
-      "combinedScore": 0.133,
+      "priority": 65,
+      "combinedScore": 0.147,
       "gsc": {
         "impressions": 0,
         "clicks": 0,
@@ -2260,8 +2124,8 @@
       "slug": "overseas-travel-gap",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 70,
-      "combinedScore": 0.133,
+      "priority": 66,
+      "combinedScore": 0.147,
       "gsc": {
         "impressions": 8,
         "clicks": 1,
@@ -2291,8 +2155,8 @@
       "slug": "ryokan-vs-hotel-overnight-shift",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 71,
-      "combinedScore": 0.133,
+      "priority": 67,
+      "combinedScore": 0.147,
       "gsc": {
         "impressions": 3,
         "clicks": 0,
@@ -2322,8 +2186,8 @@
       "slug": "travel-behavior-gender-gap",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 72,
-      "combinedScore": 0.133,
+      "priority": 68,
+      "combinedScore": 0.147,
       "gsc": {
         "impressions": 0,
         "clicks": 0,
@@ -2350,27 +2214,29 @@
       "last_brushup": null
     },
     {
-      "slug": "sunshine-pacific-vs-nihonkai",
+      "slug": "recycling-rate-gap",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 73,
-      "combinedScore": 0.118,
+      "priority": 69,
+      "combinedScore": 0.143,
       "gsc": {
-        "impressions": 279,
-        "clicks": 4,
-        "ctr": 0.0143,
-        "position": 8.39,
-        "expectedLift": 16
+        "impressions": 81,
+        "clicks": 0,
+        "ctr": 0,
+        "position": 7.84,
+        "expectedLift": 10
       },
       "quality": {
         "blockers": 1,
-        "warnings": 0,
-        "prose": 3115,
-        "chartCount": 1,
-        "prosePerChart": 3115,
-        "conformance": null,
+        "warnings": 2,
+        "prose": 2369,
+        "chartCount": 2,
+        "prosePerChart": 1185,
+        "conformance": 0.59,
         "flags": [
-          "blocker: である調 文末 1箇所 [だ。] — ですます調に統一 (である。→です。/だった。→でした。)"
+          "warning: prose 2369<2400 (やや薄い)",
+          "blocker: である調 文末 7箇所 [ではない。,だ。] — ですます調に統一 (である。→です。/だった。→でした。)",
+          "warning: source-link 末尾集約 3個 — 各図直下へ分散"
         ]
       },
       "wave_id": null,
@@ -2379,41 +2245,41 @@
       "last_brushup": "2026-05-25"
     },
     {
-      "slug": "bonito-catch-prefecture",
+      "slug": "highway-japan-58years",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 74,
-      "combinedScore": 0.118,
+      "priority": 70,
+      "combinedScore": 0.13,
       "gsc": {
-        "impressions": 235,
-        "clicks": 4,
-        "ctr": 0.017,
-        "position": 8.46,
-        "expectedLift": 11
+        "impressions": 8,
+        "clicks": 0,
+        "ctr": 0,
+        "position": 8,
+        "expectedLift": 1
       },
       "quality": {
-        "blockers": 1,
-        "warnings": 1,
-        "prose": 1894,
-        "chartCount": 2,
-        "prosePerChart": 947,
-        "conformance": 0.62,
+        "blockers": 2,
+        "warnings": 0,
+        "prose": 1466,
+        "chartCount": 0,
+        "prosePerChart": null,
+        "conformance": null,
         "flags": [
-          "warning: prose 1894<2400 (やや薄い)",
-          "blocker: である調 文末 4箇所 [だ。] — ですます調に統一 (である。→です。/だった。→でした。)"
+          "blocker: prose 1466<1600 (薄い)",
+          "blocker: ランキング表あり/チャート0 — 上位5+下位5 SVG に置換 (表だけ不可)"
         ]
       },
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": "2026-05-25"
+      "last_brushup": null
     },
     {
       "slug": "road-infrastructure-density",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 75,
-      "combinedScore": 0.118,
+      "priority": 71,
+      "combinedScore": 0.128,
       "gsc": {
         "impressions": 103,
         "clicks": 2,
@@ -2440,41 +2306,41 @@
       "last_brushup": null
     },
     {
-      "slug": "highway-japan-58years",
+      "slug": "bonito-catch-prefecture",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 76,
-      "combinedScore": 0.118,
+      "priority": 72,
+      "combinedScore": 0.126,
       "gsc": {
-        "impressions": 8,
-        "clicks": 0,
-        "ctr": 0,
-        "position": 8,
-        "expectedLift": 1
+        "impressions": 235,
+        "clicks": 4,
+        "ctr": 0.017,
+        "position": 8.46,
+        "expectedLift": 11
       },
       "quality": {
-        "blockers": 2,
-        "warnings": 0,
-        "prose": 1466,
-        "chartCount": 0,
-        "prosePerChart": null,
-        "conformance": null,
+        "blockers": 1,
+        "warnings": 1,
+        "prose": 1894,
+        "chartCount": 2,
+        "prosePerChart": 947,
+        "conformance": 0.62,
         "flags": [
-          "blocker: prose 1466<1600 (薄い)",
-          "blocker: ランキング表あり/チャート0 — 上位5+下位5 SVG に置換 (表だけ不可)"
+          "warning: prose 1894<2400 (やや薄い)",
+          "blocker: である調 文末 4箇所 [だ。] — ですます調に統一 (である。→です。/だった。→でした。)"
         ]
       },
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": null
+      "last_brushup": "2026-05-25"
     },
     {
       "slug": "farmland-crisis-abandoned-land",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 77,
-      "combinedScore": 0.114,
+      "priority": 73,
+      "combinedScore": 0.126,
       "gsc": {
         "impressions": 182,
         "clicks": 23,
@@ -2505,8 +2371,8 @@
       "slug": "bonito-catch-zero-prefectures-gap",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 78,
-      "combinedScore": 0.114,
+      "priority": 74,
+      "combinedScore": 0.126,
       "gsc": {
         "impressions": 0,
         "clicks": 0,
@@ -2535,8 +2401,8 @@
       "slug": "cc-estat-18-cache-r2",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 79,
-      "combinedScore": 0.114,
+      "priority": 75,
+      "combinedScore": 0.126,
       "gsc": {
         "impressions": 1,
         "clicks": 0,
@@ -2565,8 +2431,8 @@
       "slug": "koumuin-claude-code-estat-automation",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 80,
-      "combinedScore": 0.114,
+      "priority": 76,
+      "combinedScore": 0.126,
       "gsc": {
         "impressions": 0,
         "clicks": 0,
@@ -2595,8 +2461,8 @@
       "slug": "public-phone-prefecture-vanishing",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 81,
-      "combinedScore": 0.114,
+      "priority": 77,
+      "combinedScore": 0.126,
       "gsc": {
         "impressions": 0,
         "clicks": 0,
@@ -2622,11 +2488,40 @@
       "last_brushup": null
     },
     {
+      "slug": "sunshine-pacific-vs-nihonkai",
+      "lane": "must-fix",
+      "status": "pending",
+      "priority": 78,
+      "combinedScore": 0.124,
+      "gsc": {
+        "impressions": 279,
+        "clicks": 4,
+        "ctr": 0.0143,
+        "position": 8.39,
+        "expectedLift": 16
+      },
+      "quality": {
+        "blockers": 1,
+        "warnings": 0,
+        "prose": 3115,
+        "chartCount": 1,
+        "prosePerChart": 3115,
+        "conformance": null,
+        "flags": [
+          "blocker: である調 文末 1箇所 [だ。] — ですます調に統一 (である。→です。/だった。→でした。)"
+        ]
+      },
+      "wave_id": null,
+      "remediated_at": null,
+      "in_progress_at": null,
+      "last_brushup": "2026-05-25"
+    },
+    {
       "slug": "school-nonattendance-pattern",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 82,
-      "combinedScore": 0.11,
+      "priority": 79,
+      "combinedScore": 0.12,
       "gsc": {
         "impressions": 41,
         "clicks": 0,
@@ -2656,8 +2551,8 @@
       "slug": "communication-cost-burden",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 83,
-      "combinedScore": 0.11,
+      "priority": 80,
+      "combinedScore": 0.12,
       "gsc": {
         "impressions": 30,
         "clicks": 0,
@@ -2687,8 +2582,8 @@
       "slug": "sugar-consumption-prefecture-gap",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 84,
-      "combinedScore": 0.103,
+      "priority": 81,
+      "combinedScore": 0.111,
       "gsc": {
         "impressions": 93,
         "clicks": 1,
@@ -2717,8 +2612,8 @@
       "slug": "brazilian-resident-population-prefecture-gap",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 85,
-      "combinedScore": 0.099,
+      "priority": 82,
+      "combinedScore": 0.107,
       "gsc": {
         "impressions": 44,
         "clicks": 0,
@@ -2747,8 +2642,8 @@
       "slug": "konbu-consumption-prefecture-gap",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 86,
-      "combinedScore": 0.099,
+      "priority": 83,
+      "combinedScore": 0.107,
       "gsc": {
         "impressions": 47,
         "clicks": 0,
@@ -2774,71 +2669,11 @@
       "last_brushup": "2026-05-25"
     },
     {
-      "slug": "inflation-rate-prefecture-gap",
-      "lane": "must-fix",
-      "status": "pending",
-      "priority": 87,
-      "combinedScore": 0.095,
-      "gsc": {
-        "impressions": 68,
-        "clicks": 1,
-        "ctr": 0.0147,
-        "position": 7.13,
-        "expectedLift": 5
-      },
-      "quality": {
-        "blockers": 1,
-        "warnings": 1,
-        "prose": 3454,
-        "chartCount": 5,
-        "prosePerChart": 691,
-        "conformance": 0.61,
-        "flags": [
-          "blocker: である調 文末 8箇所 [ではない。,だ。] — ですます調に統一 (である。→です。/だった。→でした。)",
-          "warning: source-link 末尾集約 2個 — 各図直下へ分散"
-        ]
-      },
-      "wave_id": null,
-      "remediated_at": null,
-      "in_progress_at": null,
-      "last_brushup": "2026-05-25"
-    },
-    {
-      "slug": "pharma-medical-device-production-map",
-      "lane": "must-fix",
-      "status": "pending",
-      "priority": 88,
-      "combinedScore": 0.095,
-      "gsc": {
-        "impressions": 53,
-        "clicks": 1,
-        "ctr": 0.0189,
-        "position": 6.15,
-        "expectedLift": 5
-      },
-      "quality": {
-        "blockers": 1,
-        "warnings": 1,
-        "prose": 2511,
-        "chartCount": 6,
-        "prosePerChart": 419,
-        "conformance": 0.67,
-        "flags": [
-          "blocker: である調 文末 9箇所 [だろう。,だ。] — ですます調に統一 (である。→です。/だった。→でした。)",
-          "warning: prose/図 419<550 (図あたりやや薄い)"
-        ]
-      },
-      "wave_id": null,
-      "remediated_at": null,
-      "in_progress_at": null,
-      "last_brushup": null
-    },
-    {
       "slug": "commercial-land-price-trend",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 89,
-      "combinedScore": 0.095,
+      "priority": 84,
+      "combinedScore": 0.105,
       "gsc": {
         "impressions": 22,
         "clicks": 1,
@@ -2868,8 +2703,8 @@
       "slug": "crime-rate-regional-gap",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 90,
-      "combinedScore": 0.095,
+      "priority": 85,
+      "combinedScore": 0.105,
       "gsc": {
         "impressions": 36,
         "clicks": 1,
@@ -2899,8 +2734,8 @@
       "slug": "water-infrastructure-crisis",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 91,
-      "combinedScore": 0.095,
+      "priority": 86,
+      "combinedScore": 0.105,
       "gsc": {
         "impressions": 57,
         "clicks": 2,
@@ -2930,8 +2765,8 @@
       "slug": "pollution-complaints-regional-map",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 92,
-      "combinedScore": 0.095,
+      "priority": 87,
+      "combinedScore": 0.105,
       "gsc": {
         "impressions": 21,
         "clicks": 1,
@@ -2961,8 +2796,8 @@
       "slug": "gasoline-car-society-map",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 93,
-      "combinedScore": 0.095,
+      "priority": 88,
+      "combinedScore": 0.105,
       "gsc": {
         "impressions": 26,
         "clicks": 1,
@@ -2992,8 +2827,8 @@
       "slug": "energy-infrastructure-gas-electricity",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 94,
-      "combinedScore": 0.095,
+      "priority": 89,
+      "combinedScore": 0.105,
       "gsc": {
         "impressions": 0,
         "clicks": 0,
@@ -3023,8 +2858,8 @@
       "slug": "inbound-overnight-stay-concentration",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 95,
-      "combinedScore": 0.095,
+      "priority": 90,
+      "combinedScore": 0.105,
       "gsc": {
         "impressions": 0,
         "clicks": 0,
@@ -3054,8 +2889,8 @@
       "slug": "renewable-energy-regional-gap",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 96,
-      "combinedScore": 0.095,
+      "priority": 91,
+      "combinedScore": 0.105,
       "gsc": {
         "impressions": 0,
         "clicks": 0,
@@ -3085,8 +2920,8 @@
       "slug": "urban-parks-green-infrastructure",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 97,
-      "combinedScore": 0.095,
+      "priority": 92,
+      "combinedScore": 0.105,
       "gsc": {
         "impressions": 0,
         "clicks": 0,
@@ -3116,8 +2951,8 @@
       "slug": "waste-management-recycling-gap",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 98,
-      "combinedScore": 0.095,
+      "priority": 93,
+      "combinedScore": 0.105,
       "gsc": {
         "impressions": 0,
         "clicks": 0,
@@ -3144,11 +2979,71 @@
       "last_brushup": null
     },
     {
+      "slug": "inflation-rate-prefecture-gap",
+      "lane": "must-fix",
+      "status": "pending",
+      "priority": 94,
+      "combinedScore": 0.103,
+      "gsc": {
+        "impressions": 68,
+        "clicks": 1,
+        "ctr": 0.0147,
+        "position": 7.13,
+        "expectedLift": 5
+      },
+      "quality": {
+        "blockers": 1,
+        "warnings": 1,
+        "prose": 3454,
+        "chartCount": 5,
+        "prosePerChart": 691,
+        "conformance": 0.61,
+        "flags": [
+          "blocker: である調 文末 8箇所 [ではない。,だ。] — ですます調に統一 (である。→です。/だった。→でした。)",
+          "warning: source-link 末尾集約 2個 — 各図直下へ分散"
+        ]
+      },
+      "wave_id": null,
+      "remediated_at": null,
+      "in_progress_at": null,
+      "last_brushup": "2026-05-25"
+    },
+    {
+      "slug": "pharma-medical-device-production-map",
+      "lane": "must-fix",
+      "status": "pending",
+      "priority": 95,
+      "combinedScore": 0.103,
+      "gsc": {
+        "impressions": 53,
+        "clicks": 1,
+        "ctr": 0.0189,
+        "position": 6.15,
+        "expectedLift": 5
+      },
+      "quality": {
+        "blockers": 1,
+        "warnings": 1,
+        "prose": 2511,
+        "chartCount": 6,
+        "prosePerChart": 419,
+        "conformance": 0.67,
+        "flags": [
+          "blocker: である調 文末 9箇所 [だろう。,だ。] — ですます調に統一 (である。→です。/だった。→でした。)",
+          "warning: prose/図 419<550 (図あたりやや薄い)"
+        ]
+      },
+      "wave_id": null,
+      "remediated_at": null,
+      "in_progress_at": null,
+      "last_brushup": null
+    },
+    {
       "slug": "beef-consumption-prefecture-gap",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 99,
-      "combinedScore": 0.091,
+      "priority": 96,
+      "combinedScore": 0.099,
       "gsc": {
         "impressions": 34,
         "clicks": 0,
@@ -3177,8 +3072,8 @@
       "slug": "fishery-species-prefecture-specialty",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 100,
-      "combinedScore": 0.088,
+      "priority": 97,
+      "combinedScore": 0.096,
       "gsc": {
         "impressions": 94,
         "clicks": 2,
@@ -3207,8 +3102,8 @@
       "slug": "savings-rate-gap",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 101,
-      "combinedScore": 0.084,
+      "priority": 98,
+      "combinedScore": 0.092,
       "gsc": {
         "impressions": 16,
         "clicks": 0,
@@ -3234,40 +3129,11 @@
       "last_brushup": "2026-05-25"
     },
     {
-      "slug": "sewerage-water-supply-gap",
-      "lane": "must-fix",
-      "status": "pending",
-      "priority": 102,
-      "combinedScore": 0.08,
-      "gsc": {
-        "impressions": 48,
-        "clicks": 0,
-        "ctr": 0,
-        "position": 8.08,
-        "expectedLift": 6
-      },
-      "quality": {
-        "blockers": 1,
-        "warnings": 0,
-        "prose": 2882,
-        "chartCount": 5,
-        "prosePerChart": 576,
-        "conformance": 0.51,
-        "flags": [
-          "blocker: である調 文末 10箇所 [である。,だ。] — ですます調に統一 (である。→です。/だった。→でした。)"
-        ]
-      },
-      "wave_id": null,
-      "remediated_at": null,
-      "in_progress_at": null,
-      "last_brushup": "2026-05-29"
-    },
-    {
       "slug": "carbonated-drink-spending-prefecture-gap",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 103,
-      "combinedScore": 0.08,
+      "priority": 99,
+      "combinedScore": 0.088,
       "gsc": {
         "impressions": 7,
         "clicks": 0,
@@ -3296,8 +3162,8 @@
       "slug": "household-income-tokyo-okinawa",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 104,
-      "combinedScore": 0.08,
+      "priority": 100,
+      "combinedScore": 0.088,
       "gsc": {
         "impressions": 7,
         "clicks": 0,
@@ -3323,11 +3189,40 @@
       "last_brushup": "2026-05-25"
     },
     {
+      "slug": "sewerage-water-supply-gap",
+      "lane": "must-fix",
+      "status": "pending",
+      "priority": 101,
+      "combinedScore": 0.086,
+      "gsc": {
+        "impressions": 48,
+        "clicks": 0,
+        "ctr": 0,
+        "position": 8.08,
+        "expectedLift": 6
+      },
+      "quality": {
+        "blockers": 1,
+        "warnings": 0,
+        "prose": 2882,
+        "chartCount": 5,
+        "prosePerChart": 576,
+        "conformance": 0.51,
+        "flags": [
+          "blocker: である調 文末 10箇所 [である。,だ。] — ですます調に統一 (である。→です。/だった。→でした。)"
+        ]
+      },
+      "wave_id": null,
+      "remediated_at": null,
+      "in_progress_at": null,
+      "last_brushup": "2026-05-29"
+    },
+    {
       "slug": "telework-gap-tokyo-6x",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 105,
-      "combinedScore": 0.076,
+      "priority": 102,
+      "combinedScore": 0.084,
       "gsc": {
         "impressions": 22,
         "clicks": 2,
@@ -3356,8 +3251,8 @@
       "slug": "semiconductor-electronics-regional-map",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 106,
-      "combinedScore": 0.076,
+      "priority": 103,
+      "combinedScore": 0.084,
       "gsc": {
         "impressions": 90,
         "clicks": 8,
@@ -3386,8 +3281,8 @@
       "slug": "workplace-accident-regional-map",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 107,
-      "combinedScore": 0.076,
+      "priority": 104,
+      "combinedScore": 0.084,
       "gsc": {
         "impressions": 24,
         "clicks": 3,
@@ -3416,8 +3311,8 @@
       "slug": "food-spending-pattern",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 108,
-      "combinedScore": 0.076,
+      "priority": 105,
+      "combinedScore": 0.084,
       "gsc": {
         "impressions": 140,
         "clicks": 9,
@@ -3446,8 +3341,8 @@
       "slug": "car-ownership-household-prefecture-gap",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 109,
-      "combinedScore": 0.076,
+      "priority": 106,
+      "combinedScore": 0.084,
       "gsc": {
         "impressions": 5,
         "clicks": 0,
@@ -3476,8 +3371,8 @@
       "slug": "engineer-telework-prefecture",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 110,
-      "combinedScore": 0.076,
+      "priority": 107,
+      "combinedScore": 0.084,
       "gsc": {
         "impressions": 0,
         "clicks": 0,
@@ -3506,8 +3401,8 @@
       "slug": "engineer-vs-professions-income",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 111,
-      "combinedScore": 0.076,
+      "priority": 108,
+      "combinedScore": 0.084,
       "gsc": {
         "impressions": 0,
         "clicks": 0,
@@ -3536,8 +3431,8 @@
       "slug": "income-1000man-which-prefecture",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 112,
-      "combinedScore": 0.076,
+      "priority": 109,
+      "combinedScore": 0.084,
       "gsc": {
         "impressions": 0,
         "clicks": 0,
@@ -3566,8 +3461,8 @@
       "slug": "industrial-water-manufacturing-nexus",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 113,
-      "combinedScore": 0.076,
+      "priority": 110,
+      "combinedScore": 0.084,
       "gsc": {
         "impressions": 4,
         "clicks": 0,
@@ -3596,8 +3491,8 @@
       "slug": "it-establishments-prefecture",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 114,
-      "combinedScore": 0.076,
+      "priority": 111,
+      "combinedScore": 0.084,
       "gsc": {
         "impressions": 0,
         "clicks": 0,
@@ -3626,8 +3521,8 @@
       "slug": "it-industry-concentration",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 115,
-      "combinedScore": 0.076,
+      "priority": 112,
+      "combinedScore": 0.084,
       "gsc": {
         "impressions": 0,
         "clicks": 0,
@@ -3656,8 +3551,8 @@
       "slug": "long-commute-telework-potential",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 116,
-      "combinedScore": 0.076,
+      "priority": 113,
+      "combinedScore": 0.084,
       "gsc": {
         "impressions": 0,
         "clicks": 0,
@@ -3686,8 +3581,8 @@
       "slug": "natto-consumption-east-west-divide",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 117,
-      "combinedScore": 0.076,
+      "priority": 114,
+      "combinedScore": 0.084,
       "gsc": {
         "impressions": 0,
         "clicks": 0,
@@ -3716,8 +3611,8 @@
       "slug": "passport-issuance-prefecture-gap",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 118,
-      "combinedScore": 0.076,
+      "priority": 115,
+      "combinedScore": 0.084,
       "gsc": {
         "impressions": 0,
         "clicks": 0,
@@ -3746,8 +3641,8 @@
       "slug": "prefecture-salary-remote-gap",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 119,
-      "combinedScore": 0.076,
+      "priority": 116,
+      "combinedScore": 0.084,
       "gsc": {
         "impressions": 0,
         "clicks": 0,
@@ -3776,8 +3671,8 @@
       "slug": "professor-income-prefecture-gap",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 120,
-      "combinedScore": 0.076,
+      "priority": 117,
+      "combinedScore": 0.084,
       "gsc": {
         "impressions": 0,
         "clicks": 0,
@@ -3806,8 +3701,8 @@
       "slug": "shochu-consumption-prefecture-gap",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 121,
-      "combinedScore": 0.076,
+      "priority": 118,
+      "combinedScore": 0.084,
       "gsc": {
         "impressions": 4,
         "clicks": 0,
@@ -3836,8 +3731,8 @@
       "slug": "sixth-industry-direct-sales",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 122,
-      "combinedScore": 0.076,
+      "priority": 119,
+      "combinedScore": 0.084,
       "gsc": {
         "impressions": 0,
         "clicks": 0,
@@ -3866,8 +3761,8 @@
       "slug": "software-engineer-income-gap",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 123,
-      "combinedScore": 0.076,
+      "priority": 120,
+      "combinedScore": 0.084,
       "gsc": {
         "impressions": 0,
         "clicks": 0,
@@ -3896,8 +3791,8 @@
       "slug": "solar-panel-housing-prefecture-gap",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 124,
-      "combinedScore": 0.076,
+      "priority": 121,
+      "combinedScore": 0.084,
       "gsc": {
         "impressions": 0,
         "clicks": 0,
@@ -3926,8 +3821,8 @@
       "slug": "strawberry-consumption-prefecture-gap",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 125,
-      "combinedScore": 0.076,
+      "priority": 122,
+      "combinedScore": 0.084,
       "gsc": {
         "impressions": 0,
         "clicks": 0,
@@ -3956,8 +3851,8 @@
       "slug": "system-consultant-income-ranking",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 126,
-      "combinedScore": 0.076,
+      "priority": 123,
+      "combinedScore": 0.084,
       "gsc": {
         "impressions": 0,
         "clicks": 0,
@@ -3986,8 +3881,8 @@
       "slug": "welfare-expenses-squeeze",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 127,
-      "combinedScore": 0.076,
+      "priority": 124,
+      "combinedScore": 0.084,
       "gsc": {
         "impressions": 0,
         "clicks": 0,
@@ -4016,8 +3911,8 @@
       "slug": "wind-power-capacity-prefecture-gap",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 128,
-      "combinedScore": 0.076,
+      "priority": 125,
+      "combinedScore": 0.084,
       "gsc": {
         "impressions": 0,
         "clicks": 0,
@@ -4046,8 +3941,8 @@
       "slug": "working-hours-overtime-gap",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 129,
-      "combinedScore": 0.076,
+      "priority": 126,
+      "combinedScore": 0.084,
       "gsc": {
         "impressions": 0,
         "clicks": 0,
@@ -4076,8 +3971,8 @@
       "slug": "library-books-prefecture-gap",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 130,
-      "combinedScore": 0.072,
+      "priority": 127,
+      "combinedScore": 0.078,
       "gsc": {
         "impressions": 37,
         "clicks": 0,
@@ -4105,8 +4000,8 @@
       "slug": "unemployment-tertiary-industry-link",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 131,
-      "combinedScore": 0.065,
+      "priority": 128,
+      "combinedScore": 0.071,
       "gsc": {
         "impressions": 18,
         "clicks": 0,
@@ -4134,8 +4029,8 @@
       "slug": "manufacturing-labor-productivity-pref",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 132,
-      "combinedScore": 0.065,
+      "priority": 129,
+      "combinedScore": 0.071,
       "gsc": {
         "impressions": 16,
         "clicks": 0,
@@ -4163,8 +4058,8 @@
       "slug": "manufacturing-shipment-prefecture-ranking",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 133,
-      "combinedScore": 0.065,
+      "priority": 130,
+      "combinedScore": 0.071,
       "gsc": {
         "impressions": 68,
         "clicks": 1,
@@ -4192,8 +4087,8 @@
       "slug": "minimum-wage-1000yen-breakthrough",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 134,
-      "combinedScore": 0.061,
+      "priority": 131,
+      "combinedScore": 0.067,
       "gsc": {
         "impressions": 17,
         "clicks": 0,
@@ -4221,8 +4116,8 @@
       "slug": "food-price-regional-2026",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 135,
-      "combinedScore": 0.061,
+      "priority": 132,
+      "combinedScore": 0.067,
       "gsc": {
         "impressions": 5,
         "clicks": 0,
@@ -4250,8 +4145,8 @@
       "slug": "general-bed-utilization-pressure-map",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 136,
-      "combinedScore": 0.061,
+      "priority": 133,
+      "combinedScore": 0.067,
       "gsc": {
         "impressions": 3,
         "clicks": 0,
@@ -4276,11 +4171,40 @@
       "last_brushup": null
     },
     {
+      "slug": "inflow-population-ratio-prefecture-gap",
+      "lane": "must-fix",
+      "status": "pending",
+      "priority": 134,
+      "combinedScore": 0.067,
+      "gsc": {
+        "impressions": 3,
+        "clicks": 0,
+        "ctr": 0,
+        "position": 4.67,
+        "expectedLift": 1
+      },
+      "quality": {
+        "blockers": 1,
+        "warnings": 0,
+        "prose": 3405,
+        "chartCount": 1,
+        "prosePerChart": 3405,
+        "conformance": null,
+        "flags": [
+          "blocker: internalLinks 1<3"
+        ]
+      },
+      "wave_id": null,
+      "remediated_at": null,
+      "in_progress_at": null,
+      "last_brushup": null
+    },
+    {
       "slug": "inpatient-rate-aging-burden",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 137,
-      "combinedScore": 0.061,
+      "priority": 135,
+      "combinedScore": 0.067,
       "gsc": {
         "impressions": 6,
         "clicks": 0,
@@ -4308,8 +4232,8 @@
       "slug": "chicken-consumption-quantity",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 138,
-      "combinedScore": 0.057,
+      "priority": 136,
+      "combinedScore": 0.063,
       "gsc": {
         "impressions": 18,
         "clicks": 1,
@@ -4337,8 +4261,8 @@
       "slug": "prefectural-income-gdp-ranking",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 139,
-      "combinedScore": 0.057,
+      "priority": 137,
+      "combinedScore": 0.063,
       "gsc": {
         "impressions": 196,
         "clicks": 5,
@@ -4366,8 +4290,8 @@
       "slug": "annual-precipitation-rainy-season-gap",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 140,
-      "combinedScore": 0.057,
+      "priority": 138,
+      "combinedScore": 0.063,
       "gsc": {
         "impressions": 0,
         "clicks": 0,
@@ -4395,8 +4319,8 @@
       "slug": "bank-deposit-balance-shikoku-anomaly",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 141,
-      "combinedScore": 0.057,
+      "priority": 139,
+      "combinedScore": 0.063,
       "gsc": {
         "impressions": 0,
         "clicks": 0,
@@ -4424,8 +4348,8 @@
       "slug": "beef-consumption-quantity",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 142,
-      "combinedScore": 0.057,
+      "priority": 140,
+      "combinedScore": 0.063,
       "gsc": {
         "impressions": 9,
         "clicks": 1,
@@ -4453,8 +4377,8 @@
       "slug": "carpenter-income-prefecture-gap",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 143,
-      "combinedScore": 0.057,
+      "priority": 141,
+      "combinedScore": 0.063,
       "gsc": {
         "impressions": 7,
         "clicks": 0,
@@ -4482,8 +4406,8 @@
       "slug": "coffee-consumption-prefecture-gap",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 144,
-      "combinedScore": 0.057,
+      "priority": 142,
+      "combinedScore": 0.063,
       "gsc": {
         "impressions": 10,
         "clicks": 1,
@@ -4511,8 +4435,8 @@
       "slug": "dentist-income-prefecture-gap",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 145,
-      "combinedScore": 0.057,
+      "priority": 143,
+      "combinedScore": 0.063,
       "gsc": {
         "impressions": 3,
         "clicks": 1,
@@ -4540,8 +4464,8 @@
       "slug": "divorces-per-total-population",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 146,
-      "combinedScore": 0.057,
+      "priority": 144,
+      "combinedScore": 0.063,
       "gsc": {
         "impressions": 0,
         "clicks": 0,
@@ -4569,8 +4493,8 @@
       "slug": "elementary-school-children-count",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 147,
-      "combinedScore": 0.057,
+      "priority": 145,
+      "combinedScore": 0.063,
       "gsc": {
         "impressions": 0,
         "clicks": 0,
@@ -4598,8 +4522,8 @@
       "slug": "fertility-fiscal-nexus",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 148,
-      "combinedScore": 0.057,
+      "priority": 146,
+      "combinedScore": 0.063,
       "gsc": {
         "impressions": 2,
         "clicks": 0,
@@ -4627,8 +4551,8 @@
       "slug": "frozen-gyoza-spending-prefecture-gap",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 149,
-      "combinedScore": 0.057,
+      "priority": 147,
+      "combinedScore": 0.063,
       "gsc": {
         "impressions": 0,
         "clicks": 0,
@@ -4656,8 +4580,8 @@
       "slug": "general-hospital-bed-occupancy-rate",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 150,
-      "combinedScore": 0.057,
+      "priority": 148,
+      "combinedScore": 0.063,
       "gsc": {
         "impressions": 0,
         "clicks": 0,
@@ -4685,8 +4609,8 @@
       "slug": "inbound-overnight-guests-prefecture",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 151,
-      "combinedScore": 0.057,
+      "priority": 149,
+      "combinedScore": 0.063,
       "gsc": {
         "impressions": 0,
         "clicks": 0,
@@ -4714,8 +4638,8 @@
       "slug": "instant-noodles-consumption-prefecture-gap",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 152,
-      "combinedScore": 0.057,
+      "priority": 150,
+      "combinedScore": 0.063,
       "gsc": {
         "impressions": 0,
         "clicks": 0,
@@ -4743,8 +4667,8 @@
       "slug": "kei-car-density-prefecture-gap",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 153,
-      "combinedScore": 0.057,
+      "priority": 151,
+      "combinedScore": 0.063,
       "gsc": {
         "impressions": 0,
         "clicks": 0,
@@ -4772,8 +4696,8 @@
       "slug": "mayonnaise-consumption-expenditure",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 154,
-      "combinedScore": 0.057,
+      "priority": 152,
+      "combinedScore": 0.063,
       "gsc": {
         "impressions": 0,
         "clicks": 0,
@@ -4801,8 +4725,8 @@
       "slug": "middle-school-height-east-west-puzzle",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 155,
-      "combinedScore": 0.057,
+      "priority": 153,
+      "combinedScore": 0.063,
       "gsc": {
         "impressions": 0,
         "clicks": 0,
@@ -4830,8 +4754,8 @@
       "slug": "minimum-wage-1000yen-prefecture",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 156,
-      "combinedScore": 0.057,
+      "priority": 154,
+      "combinedScore": 0.063,
       "gsc": {
         "impressions": 0,
         "clicks": 0,
@@ -4859,8 +4783,8 @@
       "slug": "mochi-consumption-prefecture-gap",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 157,
-      "combinedScore": 0.057,
+      "priority": 155,
+      "combinedScore": 0.063,
       "gsc": {
         "impressions": 0,
         "clicks": 0,
@@ -4885,11 +4809,40 @@
       "last_brushup": null
     },
     {
+      "slug": "musical-instrument-expenditure-prefecture-gap",
+      "lane": "must-fix",
+      "status": "pending",
+      "priority": 156,
+      "combinedScore": 0.063,
+      "gsc": {
+        "impressions": 0,
+        "clicks": 0,
+        "ctr": 0,
+        "position": 0,
+        "expectedLift": 0
+      },
+      "quality": {
+        "blockers": 1,
+        "warnings": 0,
+        "prose": 3425,
+        "chartCount": 1,
+        "prosePerChart": 3425,
+        "conformance": null,
+        "flags": [
+          "blocker: internalLinks 2<3"
+        ]
+      },
+      "wave_id": null,
+      "remediated_at": null,
+      "in_progress_at": null,
+      "last_brushup": null
+    },
+    {
       "slug": "natto-consumption-expenditure",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 158,
-      "combinedScore": 0.057,
+      "priority": 157,
+      "combinedScore": 0.063,
       "gsc": {
         "impressions": 0,
         "clicks": 0,
@@ -4917,8 +4870,8 @@
       "slug": "oyster-consumption-prefecture-gap",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 159,
-      "combinedScore": 0.057,
+      "priority": 158,
+      "combinedScore": 0.063,
       "gsc": {
         "impressions": 0,
         "clicks": 0,
@@ -4946,8 +4899,8 @@
       "slug": "pachinko-participation-prefecture-gap",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 160,
-      "combinedScore": 0.057,
+      "priority": 159,
+      "combinedScore": 0.063,
       "gsc": {
         "impressions": 0,
         "clicks": 0,
@@ -4975,8 +4928,8 @@
       "slug": "pharmacist-income-prefecture-gap",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 161,
-      "combinedScore": 0.057,
+      "priority": 160,
+      "combinedScore": 0.063,
       "gsc": {
         "impressions": 0,
         "clicks": 0,
@@ -5004,8 +4957,8 @@
       "slug": "piano-ownership-prefecture-gap",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 162,
-      "combinedScore": 0.057,
+      "priority": 161,
+      "combinedScore": 0.063,
       "gsc": {
         "impressions": 0,
         "clicks": 0,
@@ -5033,8 +4986,8 @@
       "slug": "public-phone-count-gap",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 163,
-      "combinedScore": 0.057,
+      "priority": 162,
+      "combinedScore": 0.063,
       "gsc": {
         "impressions": 0,
         "clicks": 0,
@@ -5062,8 +5015,8 @@
       "slug": "taxi-driver-income-prefecture-gap",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 164,
-      "combinedScore": 0.057,
+      "priority": 163,
+      "combinedScore": 0.063,
       "gsc": {
         "impressions": 0,
         "clicks": 0,
@@ -5091,8 +5044,8 @@
       "slug": "telework-rate-tokyo-gap",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 165,
-      "combinedScore": 0.057,
+      "priority": 164,
+      "combinedScore": 0.063,
       "gsc": {
         "impressions": 0,
         "clicks": 0,
@@ -5120,8 +5073,8 @@
       "slug": "tofu-consumption-prefecture-gap",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 166,
-      "combinedScore": 0.057,
+      "priority": 165,
+      "combinedScore": 0.063,
       "gsc": {
         "impressions": 0,
         "clicks": 0,
@@ -5149,8 +5102,8 @@
       "slug": "udon-soba-food-culture-prefecture-map",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 167,
-      "combinedScore": 0.057,
+      "priority": 166,
+      "combinedScore": 0.063,
       "gsc": {
         "impressions": 0,
         "clicks": 0,
@@ -5178,8 +5131,8 @@
       "slug": "wheat-flour-consumption-food-culture-gap",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 168,
-      "combinedScore": 0.057,
+      "priority": 167,
+      "combinedScore": 0.063,
       "gsc": {
         "impressions": 0,
         "clicks": 0,
@@ -5207,8 +5160,8 @@
       "slug": "wheat-flour-expenditure-vs-quantity",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 169,
-      "combinedScore": 0.057,
+      "priority": 168,
+      "combinedScore": 0.063,
       "gsc": {
         "impressions": 0,
         "clicks": 0,
@@ -5236,8 +5189,8 @@
       "slug": "yakiniku-spending-prefecture-gap",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 170,
-      "combinedScore": 0.057,
+      "priority": 169,
+      "combinedScore": 0.063,
       "gsc": {
         "impressions": 0,
         "clicks": 0,
@@ -5265,8 +5218,8 @@
       "slug": "yogurt-spending-prefecture-gap",
       "lane": "must-fix",
       "status": "pending",
-      "priority": 171,
-      "combinedScore": 0.057,
+      "priority": 170,
+      "combinedScore": 0.063,
       "gsc": {
         "impressions": 0,
         "clicks": 0,
@@ -5294,7 +5247,7 @@
       "slug": "temperature-extremes-map",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 172,
+      "priority": 171,
       "combinedScore": 0.6,
       "gsc": {
         "impressions": 2721,
@@ -5349,7 +5302,7 @@
       "lane": "opportunity",
       "status": "done",
       "priority": null,
-      "combinedScore": 0.381,
+      "combinedScore": 0.383,
       "gsc": {
         "impressions": 1174,
         "clicks": 7,
@@ -5377,8 +5330,8 @@
       "slug": "dairy-cattle-hokkaido-monopoly",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 173,
-      "combinedScore": 0.212,
+      "priority": 172,
+      "combinedScore": 0.214,
       "gsc": {
         "impressions": 457,
         "clicks": 1,
@@ -5406,8 +5359,8 @@
       "slug": "habitable-area-land-use",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 174,
-      "combinedScore": 0.185,
+      "priority": 173,
+      "combinedScore": 0.187,
       "gsc": {
         "impressions": 572,
         "clicks": 4,
@@ -5435,8 +5388,8 @@
       "slug": "noodle-consumption-prefecture-character",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 175,
-      "combinedScore": 0.144,
+      "priority": 174,
+      "combinedScore": 0.15,
       "gsc": {
         "impressions": 948,
         "clicks": 25,
@@ -5466,7 +5419,7 @@
       "slug": "food-trio-prefecture-map",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 176,
+      "priority": 175,
       "combinedScore": 0.125,
       "gsc": {
         "impressions": 416,
@@ -5520,7 +5473,7 @@
       "slug": "population-density-urbanization",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 177,
+      "priority": 176,
       "combinedScore": 0.079,
       "gsc": {
         "impressions": 426,
@@ -5542,6 +5495,35 @@
       "remediated_at": null,
       "in_progress_at": null,
       "last_brushup": "2026-05-25"
+    },
+    {
+      "slug": "overnight-guests-inbound-recovery",
+      "lane": "opportunity",
+      "status": "done",
+      "priority": null,
+      "combinedScore": 0.07,
+      "gsc": {
+        "impressions": 181,
+        "clicks": 2,
+        "ctr": 0.011,
+        "position": 7.72,
+        "expectedLift": 13
+      },
+      "quality": {
+        "blockers": 0,
+        "warnings": 1,
+        "prose": 2946,
+        "chartCount": 7,
+        "prosePerChart": 421,
+        "conformance": 0.78,
+        "flags": [
+          "warning: prose/図 421<550 (図あたりやや薄い)"
+        ]
+      },
+      "wave_id": "2026-05-23-manual",
+      "remediated_at": "2026-05-23",
+      "in_progress_at": null,
+      "last_brushup": "2026-05-23"
     },
     {
       "slug": "price-index-high-low-prefecture",
@@ -5571,40 +5553,11 @@
       "last_brushup": "2026-06-07"
     },
     {
-      "slug": "overnight-guests-inbound-recovery",
-      "lane": "opportunity",
-      "status": "done",
-      "priority": null,
-      "combinedScore": 0.068,
-      "gsc": {
-        "impressions": 181,
-        "clicks": 2,
-        "ctr": 0.011,
-        "position": 7.72,
-        "expectedLift": 13
-      },
-      "quality": {
-        "blockers": 0,
-        "warnings": 1,
-        "prose": 2946,
-        "chartCount": 7,
-        "prosePerChart": 421,
-        "conformance": 0.78,
-        "flags": [
-          "warning: prose/図 421<550 (図あたりやや薄い)"
-        ]
-      },
-      "wave_id": "2026-05-23-manual",
-      "remediated_at": "2026-05-23",
-      "in_progress_at": null,
-      "last_brushup": "2026-05-23"
-    },
-    {
       "slug": "fertility-rate-prefecture-gap",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 178,
-      "combinedScore": 0.061,
+      "priority": 177,
+      "combinedScore": 0.063,
       "gsc": {
         "impressions": 403,
         "clicks": 3,
@@ -5627,6 +5580,126 @@
       "remediated_at": null,
       "in_progress_at": null,
       "last_brushup": "2026-05-25"
+    },
+    {
+      "slug": "energy-consumption-structure-shift",
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 178,
+      "combinedScore": 0.046,
+      "gsc": {
+        "impressions": 7,
+        "clicks": 0,
+        "ctr": 0,
+        "position": 7.14,
+        "expectedLift": 1
+      },
+      "quality": {
+        "blockers": 0,
+        "warnings": 2,
+        "prose": 2380,
+        "chartCount": 6,
+        "prosePerChart": 397,
+        "conformance": null,
+        "flags": [
+          "warning: prose 2380<2400 (やや薄い)",
+          "warning: prose/図 397<550 (図あたりやや薄い)"
+        ]
+      },
+      "wave_id": null,
+      "remediated_at": null,
+      "in_progress_at": null,
+      "last_brushup": null
+    },
+    {
+      "slug": "occupation-income-gap-pilot-vs-careworker",
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 179,
+      "combinedScore": 0.046,
+      "gsc": {
+        "impressions": 8,
+        "clicks": 0,
+        "ctr": 0,
+        "position": 8.88,
+        "expectedLift": 1
+      },
+      "quality": {
+        "blockers": 0,
+        "warnings": 2,
+        "prose": 2334,
+        "chartCount": 1,
+        "prosePerChart": 2334,
+        "conformance": null,
+        "flags": [
+          "warning: prose 2334<2400 (やや薄い)",
+          "warning: source-link 末尾集約 5個 — 各図直下へ分散"
+        ]
+      },
+      "wave_id": null,
+      "remediated_at": null,
+      "in_progress_at": null,
+      "last_brushup": null
+    },
+    {
+      "slug": "savings-balance-gap",
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 180,
+      "combinedScore": 0.046,
+      "gsc": {
+        "impressions": 8,
+        "clicks": 0,
+        "ctr": 0,
+        "position": 8.75,
+        "expectedLift": 1
+      },
+      "quality": {
+        "blockers": 0,
+        "warnings": 2,
+        "prose": 2009,
+        "chartCount": 5,
+        "prosePerChart": 402,
+        "conformance": null,
+        "flags": [
+          "warning: prose 2009<2400 (やや薄い)",
+          "warning: prose/図 402<550 (図あたりやや薄い)"
+        ]
+      },
+      "wave_id": null,
+      "remediated_at": null,
+      "in_progress_at": null,
+      "last_brushup": null
+    },
+    {
+      "slug": "unmarried-rate-40years-crisis",
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 181,
+      "combinedScore": 0.046,
+      "gsc": {
+        "impressions": 6,
+        "clicks": 0,
+        "ctr": 0,
+        "position": 4.5,
+        "expectedLift": 1
+      },
+      "quality": {
+        "blockers": 0,
+        "warnings": 2,
+        "prose": 2311,
+        "chartCount": 6,
+        "prosePerChart": 385,
+        "conformance": null,
+        "flags": [
+          "warning: prose 2311<2400 (やや薄い)",
+          "warning: prose/図 385<550 (図あたりやや薄い)"
+        ]
+      },
+      "wave_id": null,
+      "remediated_at": null,
+      "in_progress_at": null,
+      "last_brushup": null
     },
     {
       "slug": "marriage-unmarried-crisis",
@@ -5659,8 +5732,8 @@
       "slug": "pharmacy-count-prefecture-ranking",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 179,
-      "combinedScore": 0.042,
+      "priority": 182,
+      "combinedScore": 0.044,
       "gsc": {
         "impressions": 57,
         "clicks": 0,
@@ -5685,131 +5758,11 @@
       "last_brushup": "2026-05-25"
     },
     {
-      "slug": "energy-consumption-structure-shift",
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 180,
-      "combinedScore": 0.042,
-      "gsc": {
-        "impressions": 7,
-        "clicks": 0,
-        "ctr": 0,
-        "position": 7.14,
-        "expectedLift": 1
-      },
-      "quality": {
-        "blockers": 0,
-        "warnings": 2,
-        "prose": 2380,
-        "chartCount": 6,
-        "prosePerChart": 397,
-        "conformance": null,
-        "flags": [
-          "warning: prose 2380<2400 (やや薄い)",
-          "warning: prose/図 397<550 (図あたりやや薄い)"
-        ]
-      },
-      "wave_id": null,
-      "remediated_at": null,
-      "in_progress_at": null,
-      "last_brushup": null
-    },
-    {
-      "slug": "occupation-income-gap-pilot-vs-careworker",
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 181,
-      "combinedScore": 0.042,
-      "gsc": {
-        "impressions": 8,
-        "clicks": 0,
-        "ctr": 0,
-        "position": 8.88,
-        "expectedLift": 1
-      },
-      "quality": {
-        "blockers": 0,
-        "warnings": 2,
-        "prose": 2334,
-        "chartCount": 1,
-        "prosePerChart": 2334,
-        "conformance": null,
-        "flags": [
-          "warning: prose 2334<2400 (やや薄い)",
-          "warning: source-link 末尾集約 5個 — 各図直下へ分散"
-        ]
-      },
-      "wave_id": null,
-      "remediated_at": null,
-      "in_progress_at": null,
-      "last_brushup": null
-    },
-    {
-      "slug": "savings-balance-gap",
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 182,
-      "combinedScore": 0.042,
-      "gsc": {
-        "impressions": 8,
-        "clicks": 0,
-        "ctr": 0,
-        "position": 8.75,
-        "expectedLift": 1
-      },
-      "quality": {
-        "blockers": 0,
-        "warnings": 2,
-        "prose": 2009,
-        "chartCount": 5,
-        "prosePerChart": 402,
-        "conformance": null,
-        "flags": [
-          "warning: prose 2009<2400 (やや薄い)",
-          "warning: prose/図 402<550 (図あたりやや薄い)"
-        ]
-      },
-      "wave_id": null,
-      "remediated_at": null,
-      "in_progress_at": null,
-      "last_brushup": null
-    },
-    {
-      "slug": "unmarried-rate-40years-crisis",
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 183,
-      "combinedScore": 0.042,
-      "gsc": {
-        "impressions": 6,
-        "clicks": 0,
-        "ctr": 0,
-        "position": 4.5,
-        "expectedLift": 1
-      },
-      "quality": {
-        "blockers": 0,
-        "warnings": 2,
-        "prose": 2311,
-        "chartCount": 6,
-        "prosePerChart": 385,
-        "conformance": null,
-        "flags": [
-          "warning: prose 2311<2400 (やや薄い)",
-          "warning: prose/図 385<550 (図あたりやや薄い)"
-        ]
-      },
-      "wave_id": null,
-      "remediated_at": null,
-      "in_progress_at": null,
-      "last_brushup": null
-    },
-    {
       "slug": "barber-beauty-salon-regional-gap",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 184,
-      "combinedScore": 0.034,
+      "priority": 183,
+      "combinedScore": 0.036,
       "gsc": {
         "impressions": 34,
         "clicks": 0,
@@ -5838,7 +5791,7 @@
       "lane": "opportunity",
       "status": "done",
       "priority": null,
-      "combinedScore": 0.03,
+      "combinedScore": 0.032,
       "gsc": {
         "impressions": 28,
         "clicks": 0,
@@ -5866,8 +5819,8 @@
       "slug": "prefectural-debt-future-burden",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 185,
-      "combinedScore": 0.03,
+      "priority": 184,
+      "combinedScore": 0.032,
       "gsc": {
         "impressions": 25,
         "clicks": 0,
@@ -5895,8 +5848,8 @@
       "slug": "household-spending-before-after-inflation",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 186,
-      "combinedScore": 0.03,
+      "priority": 185,
+      "combinedScore": 0.032,
       "gsc": {
         "impressions": 15,
         "clicks": 0,
@@ -5925,7 +5878,7 @@
       "lane": "opportunity",
       "status": "done",
       "priority": null,
-      "combinedScore": 0.027,
+      "combinedScore": 0.029,
       "gsc": {
         "impressions": 16,
         "clicks": 0,
@@ -5954,7 +5907,7 @@
       "lane": "opportunity",
       "status": "done",
       "priority": null,
-      "combinedScore": 0.027,
+      "combinedScore": 0.029,
       "gsc": {
         "impressions": 18,
         "clicks": 0,
@@ -5982,8 +5935,8 @@
       "slug": "water-sewage-crisis",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 187,
-      "combinedScore": 0.027,
+      "priority": 186,
+      "combinedScore": 0.029,
       "gsc": {
         "impressions": 30,
         "clicks": 0,
@@ -6011,8 +5964,8 @@
       "slug": "healthy-life-expectancy-male-female-gap",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 188,
-      "combinedScore": 0.027,
+      "priority": 187,
+      "combinedScore": 0.029,
       "gsc": {
         "impressions": 14,
         "clicks": 0,
@@ -6029,6 +5982,35 @@
         "conformance": null,
         "flags": [
           "warning: prose 2201<2400 (やや薄い)"
+        ]
+      },
+      "wave_id": null,
+      "remediated_at": null,
+      "in_progress_at": null,
+      "last_brushup": null
+    },
+    {
+      "slug": "household-solo-vs-dualincome",
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 188,
+      "combinedScore": 0.025,
+      "gsc": {
+        "impressions": 12,
+        "clicks": 0,
+        "ctr": 0,
+        "position": 8.08,
+        "expectedLift": 1
+      },
+      "quality": {
+        "blockers": 0,
+        "warnings": 1,
+        "prose": 2825,
+        "chartCount": 6,
+        "prosePerChart": 471,
+        "conformance": null,
+        "flags": [
+          "warning: prose/図 471<550 (図あたりやや薄い)"
         ]
       },
       "wave_id": null,
@@ -6064,39 +6046,10 @@
       "last_brushup": "2026-05-25"
     },
     {
-      "slug": "household-solo-vs-dualincome",
-      "lane": "opportunity",
-      "status": "pending",
-      "priority": 189,
-      "combinedScore": 0.023,
-      "gsc": {
-        "impressions": 12,
-        "clicks": 0,
-        "ctr": 0,
-        "position": 8.08,
-        "expectedLift": 1
-      },
-      "quality": {
-        "blockers": 0,
-        "warnings": 1,
-        "prose": 2825,
-        "chartCount": 6,
-        "prosePerChart": 471,
-        "conformance": null,
-        "flags": [
-          "warning: prose/図 471<550 (図あたりやや薄い)"
-        ]
-      },
-      "wave_id": null,
-      "remediated_at": null,
-      "in_progress_at": null,
-      "last_brushup": null
-    },
-    {
       "slug": "food-consumption-prefecture-battle",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 190,
+      "priority": 189,
       "combinedScore": 0.015,
       "gsc": {
         "impressions": 72,
@@ -6123,7 +6076,7 @@
       "slug": "foreign-residents-diversity-map",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 191,
+      "priority": 190,
       "combinedScore": 0.015,
       "gsc": {
         "impressions": 250,
@@ -6150,7 +6103,7 @@
       "slug": "purchasing-power-adjusted",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 192,
+      "priority": 191,
       "combinedScore": 0.011,
       "gsc": {
         "impressions": 21,
@@ -6204,7 +6157,7 @@
       "slug": "software-engineer-salary-prefecture-gap",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 193,
+      "priority": 192,
       "combinedScore": 0.008,
       "gsc": {
         "impressions": 17,
@@ -6231,7 +6184,7 @@
       "slug": "population-migration-tokyo-concentration",
       "lane": "opportunity",
       "status": "pending",
-      "priority": 194,
+      "priority": 193,
       "combinedScore": 0.008,
       "gsc": {
         "impressions": 19,
@@ -6253,6 +6206,33 @@
       "remediated_at": null,
       "in_progress_at": null,
       "last_brushup": "2026-05-25"
+    },
+    {
+      "slug": "local-debt-current-ratio-prefecture-gap",
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 194,
+      "combinedScore": 0.004,
+      "gsc": {
+        "impressions": 15,
+        "clicks": 0,
+        "ctr": 0,
+        "position": 13.53,
+        "expectedLift": 1
+      },
+      "quality": {
+        "blockers": 0,
+        "warnings": 0,
+        "prose": 3836,
+        "chartCount": 2,
+        "prosePerChart": 1918,
+        "conformance": 0,
+        "flags": []
+      },
+      "wave_id": null,
+      "remediated_at": null,
+      "in_progress_at": null,
+      "last_brushup": null
     },
     {
       "slug": "curry-roux-consumption-gap",
