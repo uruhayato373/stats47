@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 498" width="760" height="498" role="img" aria-label="耕作放棄地面積 上位5・下位5（都道府県別）">
+  <style>
+    text { font-family: -apple-system, "Hiragino Sans", "Yu Gothic", sans-serif; }
+  </style>
+  <text x="380" y="28" text-anchor="middle" font-size="18" font-weight="700" fill="#475569">耕作放棄地面積 上位5・下位5（都道府県別）</text>
+  <text x="380" y="48" text-anchor="middle" font-size="12" fill="#64748b">上位5（青）／下位5（橙）・2014年</text>
+
+  <text x="92" y="88" text-anchor="end" font-size="15" font-weight="600" fill="#475569">福島県</text>
+  <rect x="100" y="71" width="532" height="24" rx="2" fill="#1d4ed8">
+    <title>福島県：耕作放棄地面積=25,226ha（1位）</title>
+  </rect>
+  <text x="640" y="88" font-size="14" font-weight="600" fill="#64748b">25,226ha</text>
+  <text x="92" y="126" text-anchor="end" font-size="15" font-weight="600" fill="#475569">茨城県</text>
+  <rect x="100" y="109" width="504.41512724966304" height="24" rx="2" fill="#2563eb">
+    <title>茨城県：耕作放棄地面積=23,918ha（2位）</title>
+  </rect>
+  <text x="612.4151272496631" y="126" font-size="14" font-weight="600" fill="#64748b">23,918ha</text>
+  <text x="92" y="164" text-anchor="end" font-size="15" font-weight="600" fill="#475569">千葉県</text>
+  <rect x="100" y="147" width="402.00523269642434" height="24" rx="2" fill="#3b82f6">
+    <title>千葉県：耕作放棄地面積=19,062ha（3位）</title>
+  </rect>
+  <text x="510.00523269642434" y="164" font-size="14" font-weight="600" fill="#64748b">19,062ha</text>
+  <text x="92" y="202" text-anchor="end" font-size="15" font-weight="600" fill="#475569">北海道</text>
+  <rect x="100" y="185" width="393.4007769761358" height="24" rx="2" fill="#60a5fa">
+    <title>北海道：耕作放棄地面積=18,654ha（4位）</title>
+  </rect>
+  <text x="501.4007769761358" y="202" font-size="14" font-weight="600" fill="#64748b">18,654ha</text>
+  <text x="92" y="240" text-anchor="end" font-size="15" font-weight="600" fill="#475569">岩手県</text>
+  <rect x="100" y="223" width="367.5452311107587" height="24" rx="2" fill="#93c5fd">
+    <title>岩手県：耕作放棄地面積=17,428ha（5位）</title>
+  </rect>
+  <text x="475.5452311107587" y="240" font-size="14" font-weight="600" fill="#64748b">17,428ha</text>
+  <line x1="100" y1="256" x2="748" y2="256" stroke="#cbd5e1" stroke-dasharray="4 4"/>
+  <text x="100" y="270" font-size="12" fill="#94a3b8">— 下位5 —</text>
+  <text x="92" y="296" text-anchor="end" font-size="15" font-weight="600" fill="#475569">沖縄県</text>
+  <rect x="100" y="279" width="51.56346626496472" height="24" rx="2" fill="#fdba74">
+    <title>沖縄県：耕作放棄地面積=2,445ha（43位）</title>
+  </rect>
+  <text x="159.56346626496472" y="296" font-size="14" font-weight="600" fill="#64748b">2,445ha</text>
+  <text x="92" y="334" text-anchor="end" font-size="15" font-weight="600" fill="#475569">滋賀県</text>
+  <rect x="100" y="317" width="47.999365733766744" height="24" rx="2" fill="#fb923c">
+    <title>滋賀県：耕作放棄地面積=2,276ha（44位）</title>
+  </rect>
+  <text x="155.99936573376675" y="334" font-size="14" font-weight="600" fill="#64748b">2,276ha</text>
+  <text x="92" y="372" text-anchor="end" font-size="15" font-weight="600" fill="#475569">福井県</text>
+  <rect x="100" y="355" width="41.63038135257274" height="24" rx="2" fill="#f97316">
+    <title>福井県：耕作放棄地面積=1,974ha（45位）</title>
+  </rect>
+  <text x="149.63038135257273" y="372" font-size="14" font-weight="600" fill="#64748b">1,974ha</text>
+  <text x="92" y="410" text-anchor="end" font-size="15" font-weight="600" fill="#475569">大阪府</text>
+  <rect x="100" y="393" width="35.24030761912313" height="24" rx="2" fill="#ea580c">
+    <title>大阪府：耕作放棄地面積=1,671ha（46位）</title>
+  </rect>
+  <text x="143.24030761912314" y="410" font-size="14" font-weight="600" fill="#64748b">1,671ha</text>
+  <text x="92" y="448" text-anchor="end" font-size="15" font-weight="600" fill="#475569">東京都</text>
+  <rect x="100" y="431" width="20.16142075636248" height="24" rx="2" fill="#c2410c">
+    <title>東京都：耕作放棄地面積=956ha（47位）</title>
+  </rect>
+  <text x="128.16142075636247" y="448" font-size="14" font-weight="600" fill="#64748b">956ha</text>
+</svg>

@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 562" font-family="system-ui, -apple-system, sans-serif" role="img" aria-label="延べ宿泊者数 上位5・下位5（都道府県）">
+<title>延べ宿泊者数 上位5・下位5（都道府県）</title>
+<text x="86" y="26" font-size="17" font-weight="700" fill="#0f172a">延べ宿泊者数 上位5・下位5（都道府県）</text>
+<text x="86" y="44" font-size="11.5" fill="#64748b">単位: 人泊（2024年度・上位5/下位5）</text>
+<text x="78" y="78.0" font-size="12.5" font-weight="600" text-anchor="end" fill="#334155">1. 東京都</text>
+<rect x="86" y="54" width="524.0" height="38" rx="3" fill="#2563eb"/>
+<text x="618.0" y="78.0" font-size="12" fill="#475569">91,633,100</text>
+<text x="78" y="124.0" font-size="12.5" font-weight="600" text-anchor="end" fill="#334155">2. 大阪府</text>
+<rect x="86" y="100" width="286.1" height="38" rx="3" fill="#2563eb"/>
+<text x="380.1" y="124.0" font-size="12" fill="#475569">50,030,170</text>
+<text x="78" y="170.0" font-size="12.5" font-weight="600" text-anchor="end" fill="#334155">3. 北海道</text>
+<rect x="86" y="146" width="209.4" height="38" rx="3" fill="#2563eb"/>
+<text x="303.4" y="170.0" font-size="12" fill="#475569">36,624,970</text>
+<text x="78" y="216.0" font-size="12.5" font-weight="600" text-anchor="end" fill="#334155">4. 京都府</text>
+<rect x="86" y="192" width="163.2" height="38" rx="3" fill="#2563eb"/>
+<text x="257.2" y="216.0" font-size="12" fill="#475569">28,541,700</text>
+<text x="78" y="262.0" font-size="12.5" font-weight="600" text-anchor="end" fill="#334155">5. 千葉県</text>
+<rect x="86" y="238" width="149.1" height="38" rx="3" fill="#2563eb"/>
+<text x="243.1" y="262.0" font-size="12" fill="#475569">26,073,350</text>
+<text x="86" y="290" font-size="11" fill="#94a3b8">┄┄ 下位5 ┄┄</text>
+<text x="78" y="326.0" font-size="12.5" font-weight="600" text-anchor="end" fill="#334155">43. 奈良県</text>
+<rect x="86" y="302" width="13.1" height="38" rx="3" fill="#ea580c"/>
+<text x="107.1" y="326.0" font-size="12" fill="#475569">2,290,410</text>
+<text x="78" y="372.0" font-size="12.5" font-weight="600" text-anchor="end" fill="#334155">44. 高知県</text>
+<rect x="86" y="348" width="12.6" height="38" rx="3" fill="#ea580c"/>
+<text x="106.6" y="372.0" font-size="12" fill="#475569">2,202,930</text>
+<text x="78" y="418.0" font-size="12.5" font-weight="600" text-anchor="end" fill="#334155">45. 佐賀県</text>
+<rect x="86" y="394" width="11.4" height="38" rx="3" fill="#ea580c"/>
+<text x="105.4" y="418.0" font-size="12" fill="#475569">2,001,900</text>
+<text x="78" y="464.0" font-size="12.5" font-weight="600" text-anchor="end" fill="#334155">46. 鳥取県</text>
+<rect x="86" y="440" width="10.8" height="38" rx="3" fill="#ea580c"/>
+<text x="104.8" y="464.0" font-size="12" fill="#475569">1,884,720</text>
+<text x="78" y="510.0" font-size="12.5" font-weight="600" text-anchor="end" fill="#334155">47. 徳島県</text>
+<rect x="86" y="486" width="9.7" height="38" rx="3" fill="#ea580c"/>
+<text x="103.7" y="510.0" font-size="12" fill="#475569">1,701,370</text>
+</svg>

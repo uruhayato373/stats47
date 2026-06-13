@@ -1,0 +1,107 @@
+[
+  {
+    "areaName": "香川県",
+    "rank": 1,
+    "value": 16788,
+    "label": "生うどん・そば消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "滋賀県",
+    "rank": 2,
+    "value": 12827,
+    "label": "生うどん・そば消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "兵庫県",
+    "rank": 3,
+    "value": 12615,
+    "label": "生うどん・そば消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "長野県",
+    "rank": 4,
+    "value": 12213,
+    "label": "生うどん・そば消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "島根県",
+    "rank": 5,
+    "value": 12016,
+    "label": "生うどん・そば消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "高知県",
+    "rank": 6,
+    "value": 11768,
+    "label": "生うどん・そば消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "岡山県",
+    "rank": 7,
+    "value": 11749,
+    "label": "生うどん・そば消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "徳島県",
+    "rank": 8,
+    "value": 11608,
+    "label": "生うどん・そば消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "群馬県",
+    "rank": 9,
+    "value": 11572,
+    "label": "生うどん・そば消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "奈良県",
+    "rank": 10,
+    "value": 11529,
+    "label": "生うどん・そば消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "神奈川県",
+    "rank": 43,
+    "value": 7263,
+    "label": "生うどん・そば消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "長崎県",
+    "rank": 44,
+    "value": 6894,
+    "label": "生うどん・そば消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "福岡県",
+    "rank": 45,
+    "value": 6686,
+    "label": "生うどん・そば消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "熊本県",
+    "rank": 46,
+    "value": 6638,
+    "label": "生うどん・そば消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "沖縄県",
+    "rank": 47,
+    "value": 4378,
+    "label": "生うどん・そば消費量",
+    "unit": "g"
+  }
+]

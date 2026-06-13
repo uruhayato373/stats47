@@ -1,5 +1,4 @@
-<!-- data-source: sake-consumption-quantity-prefecture-rankings.json | generated: 2026-06-13T00:26:52.699Z -->
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 300" width="680" height="300" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" role="img" aria-label="清酒消費量（2024年・47都道府県）">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 522" width="720" height="522" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" role="img" aria-label="清酒消費量 上位5・下位5（2024年・ml/世帯）">
   <style>
     .svg-bg{fill:#fafafa}
     .svg-title{fill:#222}
@@ -14,52 +13,40 @@
       .svg-legend{fill:#9ca3af}
     }
   </style>
-  <rect width="680" height="300" class="svg-bg" rx="8"/>
-  <text x="340" y="24" text-anchor="middle" font-size="16" font-weight="bold" class="svg-title">清酒消費量（2024年・47都道府県）</text>
+  <rect width="720" height="522" class="svg-bg" rx="8"/>
+  <text x="360" y="28" text-anchor="middle" font-size="16" font-weight="bold" class="svg-title">清酒消費量 上位5・下位5（2024年）</text>
+  <text x="360" y="48" text-anchor="middle" font-size="11" class="svg-subtitle">1世帯あたり年間消費量（ml）／総務省 家計調査</text>
+  <line x1="160" y1="271" x2="704" y2="271" class="svg-legend" stroke="currentColor" stroke-width="1" stroke-dasharray="4 4" opacity="0.5"/>
   
-  <text x="227.5" y="54" text-anchor="middle" font-size="12" font-weight="bold" fill="#1565c0">上位 5</text>
-  <text x="542.5" y="54" text-anchor="middle" font-size="12" font-weight="bold" fill="#c62828">下位 5</text>
-  
-      <text x="84" y="82" text-anchor="end" font-size="11" class="svg-label">福島県</text>
-      <rect x="90" y="63" width="195" height="30" fill="#1565c0" rx="2"/>
-      <text x="289" y="82" font-size="10" class="svg-label">11756ml</text>
-    
-      <text x="84" y="118" text-anchor="end" font-size="11" class="svg-label">新潟県</text>
-      <rect x="90" y="99" width="149.3849948962232" height="30" fill="#1976d2" rx="2"/>
-      <text x="243.3849948962232" y="118" font-size="10" class="svg-label">9006ml</text>
-    
-      <text x="84" y="154" text-anchor="end" font-size="11" class="svg-label">山形県</text>
-      <rect x="90" y="135" width="145.2713507995917" height="30" fill="#1e88e5" rx="2"/>
-      <text x="239.2713507995917" y="154" font-size="10" class="svg-label">8758ml</text>
-    
-      <text x="84" y="190" text-anchor="end" font-size="11" class="svg-label">宮城県</text>
-      <rect x="90" y="171" width="141.60556311670635" height="30" fill="#2196f3" rx="2"/>
-      <text x="235.60556311670635" y="190" font-size="10" class="svg-label">8537ml</text>
-    
-      <text x="84" y="226" text-anchor="end" font-size="11" class="svg-label">富山県</text>
-      <rect x="90" y="207" width="140.5937393671317" height="30" fill="#42a5f5" rx="2"/>
-      <text x="234.5937393671317" y="226" font-size="10" class="svg-label">8476ml</text>
-    
-  
-      <text x="399" y="82" text-anchor="end" font-size="11" class="svg-label">沖縄県</text>
-      <rect x="405" y="63" width="12.705852330724738" height="30" fill="#c62828" rx="2"/>
-      <text x="421.7058523307247" y="82" font-size="10" class="svg-label">766ml</text>
-    
-      <text x="399" y="118" text-anchor="end" font-size="11" class="svg-label">宮崎県</text>
-      <rect x="405" y="99" width="42.844930248383804" height="30" fill="#d32f2f" rx="2"/>
-      <text x="451.8449302483838" y="118" font-size="10" class="svg-label">2583ml</text>
-    
-      <text x="399" y="154" text-anchor="end" font-size="11" class="svg-label">高知県</text>
-      <rect x="405" y="135" width="46.792701599183395" height="30" fill="#e53935" rx="2"/>
-      <text x="455.7927015991834" y="154" font-size="10" class="svg-label">2821ml</text>
-    
-      <text x="399" y="190" text-anchor="end" font-size="11" class="svg-label">山口県</text>
-      <rect x="405" y="171" width="48.03674719292276" height="30" fill="#ef5350" rx="2"/>
-      <text x="457.03674719292275" y="190" font-size="10" class="svg-label">2896ml</text>
-    
-      <text x="399" y="226" text-anchor="end" font-size="11" class="svg-label">徳島県</text>
-      <rect x="405" y="207" width="52.96316774413065" height="30" fill="#e57373" rx="2"/>
-      <text x="461.96316774413066" y="226" font-size="10" class="svg-label">3193ml</text>
-    
-  <text x="340" y="282" text-anchor="middle" font-size="10" class="svg-legend">凡例: 青系=上位 / 赤系=下位</text>
+  <text x="150" y="93" text-anchor="end" font-size="13" font-weight="600" class="svg-label">1位 福島</text>
+  <rect x="160" y="76" width="464.0" height="26" rx="2" fill="#1565c0"><title>福島 11,756ml</title></rect>
+  <text x="630.0" y="93" font-size="12" font-weight="600" class="svg-label">11,756</text>
+  <text x="150" y="131" text-anchor="end" font-size="13" font-weight="600" class="svg-label">2位 新潟</text>
+  <rect x="160" y="114" width="355.5" height="26" rx="2" fill="#1976d2"><title>新潟 9,006ml</title></rect>
+  <text x="521.5" y="131" font-size="12" font-weight="600" class="svg-label">9,006</text>
+  <text x="150" y="169" text-anchor="end" font-size="13" font-weight="600" class="svg-label">3位 山形</text>
+  <rect x="160" y="152" width="345.7" height="26" rx="2" fill="#1e88e5"><title>山形 8,758ml</title></rect>
+  <text x="511.7" y="169" font-size="12" font-weight="600" class="svg-label">8,758</text>
+  <text x="150" y="207" text-anchor="end" font-size="13" font-weight="600" class="svg-label">4位 宮城</text>
+  <rect x="160" y="190" width="336.9" height="26" rx="2" fill="#2196f3"><title>宮城 8,537ml</title></rect>
+  <text x="502.9" y="207" font-size="12" font-weight="600" class="svg-label">8,537</text>
+  <text x="150" y="245" text-anchor="end" font-size="13" font-weight="600" class="svg-label">5位 富山</text>
+  <rect x="160" y="228" width="334.5" height="26" rx="2" fill="#42a5f5"><title>富山 8,476ml</title></rect>
+  <text x="500.5" y="245" font-size="12" font-weight="600" class="svg-label">8,476</text>
+  <text x="150" y="305" text-anchor="end" font-size="13" font-weight="600" class="svg-label">43位 徳島</text>
+  <rect x="160" y="288" width="126.0" height="26" rx="2" fill="#e65100"><title>徳島 3,193ml</title></rect>
+  <text x="292.0" y="305" font-size="12" font-weight="600" class="svg-label">3,193</text>
+  <text x="150" y="343" text-anchor="end" font-size="13" font-weight="600" class="svg-label">44位 山口</text>
+  <rect x="160" y="326" width="114.3" height="26" rx="2" fill="#ef6c00"><title>山口 2,896ml</title></rect>
+  <text x="280.3" y="343" font-size="12" font-weight="600" class="svg-label">2,896</text>
+  <text x="150" y="381" text-anchor="end" font-size="13" font-weight="600" class="svg-label">45位 高知</text>
+  <rect x="160" y="364" width="111.3" height="26" rx="2" fill="#f57c00"><title>高知 2,821ml</title></rect>
+  <text x="277.3" y="381" font-size="12" font-weight="600" class="svg-label">2,821</text>
+  <text x="150" y="419" text-anchor="end" font-size="13" font-weight="600" class="svg-label">46位 宮崎</text>
+  <rect x="160" y="402" width="101.9" height="26" rx="2" fill="#fb8c00"><title>宮崎 2,583ml</title></rect>
+  <text x="267.9" y="419" font-size="12" font-weight="600" class="svg-label">2,583</text>
+  <text x="150" y="457" text-anchor="end" font-size="13" font-weight="600" class="svg-label">47位 沖縄</text>
+  <rect x="160" y="440" width="30.2" height="26" rx="2" fill="#ffa726"><title>沖縄 766ml</title></rect>
+  <text x="196.2" y="457" font-size="12" font-weight="600" class="svg-label">766</text>
+  <text x="360" y="506" text-anchor="middle" font-size="10" class="svg-legend">凡例: 青系=上位5 / 橙系=下位5</text>
 </svg>

@@ -1,0 +1,39 @@
+<svg viewBox="0 0 760 490" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="年間降水量 上位5・下位5（47都道府県・2024年）">
+  <text x="380" y="28" text-anchor="middle" font-size="15" font-weight="bold" fill="#64748b">年間降水量 上位5・下位5（47都道府県・2024年）</text>
+  <text x="380" y="46" text-anchor="middle" font-size="11.5" fill="#94a3b8">1位 静岡 3,753.5mm ／ 47位 宮城 1,027.5mm（約3.65倍）</text>
+  <rect x="112" y="56" width="11" height="11" rx="1.5" fill="#2563eb"/>
+  <text x="128" y="66" font-size="11" fill="#94a3b8">上位5</text>
+  <rect x="176" y="56" width="11" height="11" rx="1.5" fill="#ea580c"/>
+  <text x="192" y="66" font-size="11" fill="#94a3b8">下位5</text>
+  <text x="96" y="93" text-anchor="end" font-size="13" fill="#64748b">静岡 (1位)</text>
+  <rect x="112" y="77" width="538" height="22" rx="2" fill="#2563eb"/>
+  <text x="658" y="93" font-size="12.5" font-weight="bold" fill="#64748b">3,753.5mm</text>
+  <text x="96" y="131" text-anchor="end" font-size="13" fill="#64748b">沖縄 (2位)</text>
+  <rect x="112" y="115" width="439.8886372718796" height="22" rx="2" fill="#2563eb"/>
+  <text x="559.8886372718796" y="131" font-size="12.5" font-weight="bold" fill="#64748b">3,069mm</text>
+  <text x="96" y="169" text-anchor="end" font-size="13" fill="#64748b">鹿児島 (3位)</text>
+  <rect x="112" y="153" width="439.2436392700147" height="22" rx="2" fill="#2563eb"/>
+  <text x="559.2436392700147" y="169" font-size="12.5" font-weight="bold" fill="#64748b">3,064.5mm</text>
+  <text x="96" y="207" text-anchor="end" font-size="13" fill="#64748b">宮崎 (4位)</text>
+  <rect x="112" y="191" width="425.0536832289863" height="22" rx="2" fill="#2563eb"/>
+  <text x="545.0536832289863" y="207" font-size="12.5" font-weight="bold" fill="#64748b">2,965.5mm</text>
+  <text x="96" y="245" text-anchor="end" font-size="13" fill="#64748b">石川 (5位)</text>
+  <rect x="112" y="229" width="398.465432263221" height="22" rx="2" fill="#2563eb"/>
+  <text x="518.4654322632209" y="245" font-size="12.5" font-weight="bold" fill="#64748b">2,780mm</text>
+  <text x="96" y="283" text-anchor="end" font-size="13" fill="#64748b">埼玉 (43位)</text>
+  <rect x="112" y="267" width="173.9344611695751" height="22" rx="2" fill="#ea580c"/>
+  <text x="293.9344611695751" y="283" font-size="12.5" font-weight="bold" fill="#64748b">1,213.5mm</text>
+  <text x="96" y="321" text-anchor="end" font-size="13" fill="#64748b">長野 (44位)</text>
+  <rect x="112" y="305" width="165.19115492207274" height="22" rx="2" fill="#ea580c"/>
+  <text x="285.19115492207277" y="321" font-size="12.5" font-weight="bold" fill="#64748b">1,152.5mm</text>
+  <text x="96" y="359" text-anchor="end" font-size="13" fill="#64748b">北海道 (45位)</text>
+  <rect x="112" y="343" width="160.53283601971492" height="22" rx="2" fill="#ea580c"/>
+  <text x="280.5328360197149" y="359" font-size="12.5" font-weight="bold" fill="#64748b">1,120mm</text>
+  <text x="96" y="397" text-anchor="end" font-size="13" fill="#64748b">福島 (46位)</text>
+  <rect x="112" y="381" width="157.88117756760357" height="22" rx="2" fill="#ea580c"/>
+  <text x="277.8811775676036" y="397" font-size="12.5" font-weight="bold" fill="#64748b">1,101.5mm</text>
+  <text x="96" y="435" text-anchor="end" font-size="13" fill="#64748b">宮城 (47位)</text>
+  <rect x="112" y="419" width="147.27454375915812" height="22" rx="2" fill="#ea580c"/>
+  <text x="267.2745437591581" y="435" font-size="12.5" font-weight="bold" fill="#64748b">1,027.5mm</text>
+  <text x="380" y="478" text-anchor="middle" font-size="10" fill="#94a3b8">出典: e-Stat 社会・人口統計体系 2024年</text>
+</svg>

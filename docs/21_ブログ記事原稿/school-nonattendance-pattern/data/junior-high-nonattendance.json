@@ -1,0 +1,331 @@
+[
+  {
+    "areaName": "宮城県",
+    "rank": 1,
+    "value": 84.58,
+    "label": "中学校不登校比率",
+    "unit": "‐"
+  },
+  {
+    "areaName": "北海道",
+    "rank": 2,
+    "value": 82.12,
+    "label": "中学校不登校比率",
+    "unit": "‐"
+  },
+  {
+    "areaName": "島根県",
+    "rank": 3,
+    "value": 80.56,
+    "label": "中学校不登校比率",
+    "unit": "‐"
+  },
+  {
+    "areaName": "栃木県",
+    "rank": 4,
+    "value": 79.1,
+    "label": "中学校不登校比率",
+    "unit": "‐"
+  },
+  {
+    "areaName": "福岡県",
+    "rank": 5,
+    "value": 76.9,
+    "label": "中学校不登校比率",
+    "unit": "‐"
+  },
+  {
+    "areaName": "長野県",
+    "rank": 6,
+    "value": 76.52,
+    "label": "中学校不登校比率",
+    "unit": "‐"
+  },
+  {
+    "areaName": "熊本県",
+    "rank": 7,
+    "value": 74.7,
+    "label": "中学校不登校比率",
+    "unit": "‐"
+  },
+  {
+    "areaName": "沖縄県",
+    "rank": 8,
+    "value": 73.86,
+    "label": "中学校不登校比率",
+    "unit": "‐"
+  },
+  {
+    "areaName": "石川県",
+    "rank": 9,
+    "value": 73.52,
+    "label": "中学校不登校比率",
+    "unit": "‐"
+  },
+  {
+    "areaName": "静岡県",
+    "rank": 10,
+    "value": 73.5,
+    "label": "中学校不登校比率",
+    "unit": "‐"
+  },
+  {
+    "areaName": "鳥取県",
+    "rank": 10,
+    "value": 73.5,
+    "label": "中学校不登校比率",
+    "unit": "‐"
+  },
+  {
+    "areaName": "兵庫県",
+    "rank": 12,
+    "value": 73.28,
+    "label": "中学校不登校比率",
+    "unit": "‐"
+  },
+  {
+    "areaName": "山梨県",
+    "rank": 13,
+    "value": 72.51,
+    "label": "中学校不登校比率",
+    "unit": "‐"
+  },
+  {
+    "areaName": "大分県",
+    "rank": 14,
+    "value": 72.14,
+    "label": "中学校不登校比率",
+    "unit": "‐"
+  },
+  {
+    "areaName": "広島県",
+    "rank": 15,
+    "value": 71.58,
+    "label": "中学校不登校比率",
+    "unit": "‐"
+  },
+  {
+    "areaName": "茨城県",
+    "rank": 16,
+    "value": 71.51,
+    "label": "中学校不登校比率",
+    "unit": "‐"
+  },
+  {
+    "areaName": "愛知県",
+    "rank": 17,
+    "value": 70.65,
+    "label": "中学校不登校比率",
+    "unit": "‐"
+  },
+  {
+    "areaName": "徳島県",
+    "rank": 18,
+    "value": 70.64,
+    "label": "中学校不登校比率",
+    "unit": "‐"
+  },
+  {
+    "areaName": "奈良県",
+    "rank": 19,
+    "value": 69.13,
+    "label": "中学校不登校比率",
+    "unit": "‐"
+  },
+  {
+    "areaName": "山口県",
+    "rank": 20,
+    "value": 68.58,
+    "label": "中学校不登校比率",
+    "unit": "‐"
+  },
+  {
+    "areaName": "長崎県",
+    "rank": 21,
+    "value": 68.54,
+    "label": "中学校不登校比率",
+    "unit": "‐"
+  },
+  {
+    "areaName": "新潟県",
+    "rank": 22,
+    "value": 68.23,
+    "label": "中学校不登校比率",
+    "unit": "‐"
+  },
+  {
+    "areaName": "大阪府",
+    "rank": 23,
+    "value": 68.22,
+    "label": "中学校不登校比率",
+    "unit": "‐"
+  },
+  {
+    "areaName": "青森県",
+    "rank": 24,
+    "value": 68.08,
+    "label": "中学校不登校比率",
+    "unit": "‐"
+  },
+  {
+    "areaName": "岐阜県",
+    "rank": 25,
+    "value": 67.01,
+    "label": "中学校不登校比率",
+    "unit": "‐"
+  },
+  {
+    "areaName": "福島県",
+    "rank": 26,
+    "value": 66.91,
+    "label": "中学校不登校比率",
+    "unit": "‐"
+  },
+  {
+    "areaName": "鹿児島県",
+    "rank": 27,
+    "value": 66.88,
+    "label": "中学校不登校比率",
+    "unit": "‐"
+  },
+  {
+    "areaName": "神奈川県",
+    "rank": 28,
+    "value": 66.86,
+    "label": "中学校不登校比率",
+    "unit": "‐"
+  },
+  {
+    "areaName": "愛媛県",
+    "rank": 29,
+    "value": 66.02,
+    "label": "中学校不登校比率",
+    "unit": "‐"
+  },
+  {
+    "areaName": "東京都",
+    "rank": 30,
+    "value": 65.88,
+    "label": "中学校不登校比率",
+    "unit": "‐"
+  },
+  {
+    "areaName": "和歌山県",
+    "rank": 31,
+    "value": 64.26,
+    "label": "中学校不登校比率",
+    "unit": "‐"
+  },
+  {
+    "areaName": "秋田県",
+    "rank": 32,
+    "value": 62.87,
+    "label": "中学校不登校比率",
+    "unit": "‐"
+  },
+  {
+    "areaName": "三重県",
+    "rank": 33,
+    "value": 62.6,
+    "label": "中学校不登校比率",
+    "unit": "‐"
+  },
+  {
+    "areaName": "群馬県",
+    "rank": 34,
+    "value": 62.47,
+    "label": "中学校不登校比率",
+    "unit": "‐"
+  },
+  {
+    "areaName": "高知県",
+    "rank": 35,
+    "value": 62.25,
+    "label": "中学校不登校比率",
+    "unit": "‐"
+  },
+  {
+    "areaName": "京都府",
+    "rank": 36,
+    "value": 61.62,
+    "label": "中学校不登校比率",
+    "unit": "‐"
+  },
+  {
+    "areaName": "滋賀県",
+    "rank": 37,
+    "value": 61.57,
+    "label": "中学校不登校比率",
+    "unit": "‐"
+  },
+  {
+    "areaName": "富山県",
+    "rank": 38,
+    "value": 61.07,
+    "label": "中学校不登校比率",
+    "unit": "‐"
+  },
+  {
+    "areaName": "佐賀県",
+    "rank": 39,
+    "value": 60.3,
+    "label": "中学校不登校比率",
+    "unit": "‐"
+  },
+  {
+    "areaName": "山形県",
+    "rank": 40,
+    "value": 60.22,
+    "label": "中学校不登校比率",
+    "unit": "‐"
+  },
+  {
+    "areaName": "埼玉県",
+    "rank": 41,
+    "value": 59.9,
+    "label": "中学校不登校比率",
+    "unit": "‐"
+  },
+  {
+    "areaName": "宮崎県",
+    "rank": 42,
+    "value": 57.55,
+    "label": "中学校不登校比率",
+    "unit": "‐"
+  },
+  {
+    "areaName": "香川県",
+    "rank": 43,
+    "value": 57.26,
+    "label": "中学校不登校比率",
+    "unit": "‐"
+  },
+  {
+    "areaName": "千葉県",
+    "rank": 44,
+    "value": 56.76,
+    "label": "中学校不登校比率",
+    "unit": "‐"
+  },
+  {
+    "areaName": "岩手県",
+    "rank": 45,
+    "value": 55.52,
+    "label": "中学校不登校比率",
+    "unit": "‐"
+  },
+  {
+    "areaName": "岡山県",
+    "rank": 46,
+    "value": 49.94,
+    "label": "中学校不登校比率",
+    "unit": "‐"
+  },
+  {
+    "areaName": "福井県",
+    "rank": 47,
+    "value": 49.73,
+    "label": "中学校不登校比率",
+    "unit": "‐"
+  }
+]

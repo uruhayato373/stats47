@@ -1,0 +1,93 @@
+{
+  "key": "building-fire-count-per-100-thousand-people",
+  "name": "fire-rate",
+  "year": "2023",
+  "unit": "件",
+  "top5": [
+    {
+      "areaName": "茨城県",
+      "rank": 1,
+      "value": 49,
+      "unit": "件"
+    },
+    {
+      "areaName": "山梨県",
+      "rank": 2,
+      "value": 47.1,
+      "unit": "件"
+    },
+    {
+      "areaName": "大分県",
+      "rank": 3,
+      "value": 46.9,
+      "unit": "件"
+    },
+    {
+      "areaName": "栃木県",
+      "rank": 4,
+      "value": 45.9,
+      "unit": "件"
+    },
+    {
+      "areaName": "山口県",
+      "rank": 5,
+      "value": 45.2,
+      "unit": "件"
+    }
+  ],
+  "bottom5": [
+    {
+      "areaName": "福井県",
+      "rank": 43,
+      "value": 23.4,
+      "unit": "件"
+    },
+    {
+      "areaName": "大阪府",
+      "rank": 44,
+      "value": 22.4,
+      "unit": "件"
+    },
+    {
+      "areaName": "神奈川県",
+      "rank": 45,
+      "value": 22.2,
+      "unit": "件"
+    },
+    {
+      "areaName": "京都府",
+      "rank": 46,
+      "value": 20.4,
+      "unit": "件"
+    },
+    {
+      "areaName": "富山県",
+      "rank": 47,
+      "value": 17.7,
+      "unit": "件"
+    }
+  ],
+  "count": 47,
+  "max": {
+    "areaType": "prefecture",
+    "areaCode": "08000",
+    "areaName": "茨城県",
+    "yearCode": "2023",
+    "yearName": "2023年度",
+    "metricKey": "building-fire-count-per-100-thousand-people",
+    "value": 49,
+    "unit": "件",
+    "rank": 1
+  },
+  "min": {
+    "areaType": "prefecture",
+    "areaCode": "16000",
+    "areaName": "富山県",
+    "yearCode": "2023",
+    "yearName": "2023年度",
+    "metricKey": "building-fire-count-per-100-thousand-people",
+    "value": 17.7,
+    "unit": "件",
+    "rank": 47
+  }
+}

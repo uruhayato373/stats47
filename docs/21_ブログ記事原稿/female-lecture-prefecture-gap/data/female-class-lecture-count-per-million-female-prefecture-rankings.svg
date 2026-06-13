@@ -1,65 +1,7 @@
-<!-- data-source: female-class-lecture-count-per-million-female-prefecture-rankings.json | generated: 2026-06-13T00:26:54.048Z -->
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 300" width="680" height="300" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" role="img" aria-label="女性学級・講座数（2020年・47都道府県）">
-  <style>
-    .svg-bg{fill:#fafafa}
-    .svg-title{fill:#222}
-    .svg-subtitle{fill:#666}
-    .svg-label{fill:#333}
-    .svg-legend{fill:#888}
-    @media (prefers-color-scheme:dark){
-      .svg-bg{fill:#1f2937}
-      .svg-title{fill:#f9fafb}
-      .svg-subtitle{fill:#9ca3af}
-      .svg-label{fill:#e5e7eb}
-      .svg-legend{fill:#9ca3af}
-    }
-  </style>
-  <rect width="680" height="300" class="svg-bg" rx="8"/>
-  <text x="340" y="24" text-anchor="middle" font-size="16" font-weight="bold" class="svg-title">女性学級・講座数（2020年・47都道府県）</text>
-  
-  <text x="227.5" y="54" text-anchor="middle" font-size="12" font-weight="bold" fill="#1565c0">上位 5</text>
-  <text x="542.5" y="54" text-anchor="middle" font-size="12" font-weight="bold" fill="#c62828">下位 5</text>
-  
-      <text x="84" y="82" text-anchor="end" font-size="11" class="svg-label">島根県</text>
-      <rect x="90" y="63" width="195" height="30" fill="#1565c0" rx="2"/>
-      <text x="289" y="82" font-size="10" class="svg-label">3148.5学級･講座</text>
-    
-      <text x="84" y="118" text-anchor="end" font-size="11" class="svg-label">富山県</text>
-      <rect x="90" y="99" width="155.47975226298237" height="30" fill="#1976d2" rx="2"/>
-      <text x="249.47975226298237" y="118" font-size="10" class="svg-label">2510.4学級･講座</text>
-    
-      <text x="84" y="154" text-anchor="end" font-size="11" class="svg-label">福井県</text>
-      <rect x="90" y="135" width="113.02382086707956" height="30" fill="#1e88e5" rx="2"/>
-      <text x="207.02382086707956" y="154" font-size="10" class="svg-label">1824.9学級･講座</text>
-    
-      <text x="84" y="190" text-anchor="end" font-size="11" class="svg-label">鳥取県</text>
-      <rect x="90" y="171" width="109.30776560266794" height="30" fill="#2196f3" rx="2"/>
-      <text x="203.30776560266793" y="190" font-size="10" class="svg-label">1764.9学級･講座</text>
-    
-      <text x="84" y="226" text-anchor="end" font-size="11" class="svg-label">愛媛県</text>
-      <rect x="90" y="207" width="97.78180085755122" height="30" fill="#42a5f5" rx="2"/>
-      <text x="191.78180085755122" y="226" font-size="10" class="svg-label">1578.8学級･講座</text>
-    
-  
-      <text x="399" y="82" text-anchor="end" font-size="11" class="svg-label">東京都</text>
-      <rect x="405" y="63" width="1" height="30" fill="#c62828" rx="2"/>
-      <text x="410" y="82" font-size="10" class="svg-label">5.2学級･講座</text>
-    
-      <text x="399" y="118" text-anchor="end" font-size="11" class="svg-label">神奈川県</text>
-      <rect x="405" y="99" width="1" height="30" fill="#d32f2f" rx="2"/>
-      <text x="410" y="118" font-size="10" class="svg-label">6.2学級･講座</text>
-    
-      <text x="399" y="154" text-anchor="end" font-size="11" class="svg-label">大阪府</text>
-      <rect x="405" y="135" width="1.1333968556455456" height="30" fill="#e53935" rx="2"/>
-      <text x="410.13339685564557" y="154" font-size="10" class="svg-label">18.3学級･講座</text>
-    
-      <text x="399" y="190" text-anchor="end" font-size="11" class="svg-label">千葉県</text>
-      <rect x="405" y="171" width="1.659838018103859" height="30" fill="#ef5350" rx="2"/>
-      <text x="410.65983801810387" y="190" font-size="10" class="svg-label">26.8学級･講座</text>
-    
-      <text x="399" y="226" text-anchor="end" font-size="11" class="svg-label">熊本県</text>
-      <rect x="405" y="207" width="2.365888518342068" height="30" fill="#e57373" rx="2"/>
-      <text x="411.36588851834205" y="226" font-size="10" class="svg-label">38.2学級･講座</text>
-    
-  <text x="340" y="282" text-anchor="middle" font-size="10" class="svg-legend">凡例: 青系=上位 / 赤系=下位</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 436" width="720" height="436" font-family="system-ui, -apple-system, sans-serif" role="img" aria-label="女性学級・講座数 上位5・下位5（2020年）">
+<title>女性学級・講座数（人口100万人当たり）上位5・下位5 2020年</title>
+<text x="130" y="28" font-size="17" font-weight="700" fill="#64748b">女性学級・講座数（人口100万人当たり・2020年）</text>
+<text x="130" y="46" font-size="13" fill="#94a3b8">上位5県（青）と下位5県（橙）／単位: 学級・講座</text>
+<text x="120" y="78" text-anchor="end" font-size="15" font-weight="600" fill="#64748b">1位 島根</text><rect x="130" y="62" width="500" height="22" rx="2" fill="#3b82f6"><title>島根 3148.5 学級・講座</title></rect><text x="622" y="78" text-anchor="end" font-size="14" font-weight="700" fill="#ffffff">3,148.5</text><text x="120" y="112" text-anchor="end" font-size="15" font-weight="600" fill="#64748b">2位 富山</text><rect x="130" y="96" width="398.66603144354457" height="22" rx="2" fill="#3b82f6"><title>富山 2510.4 学級・講座</title></rect><text x="520.6660314435446" y="112" text-anchor="end" font-size="14" font-weight="700" fill="#ffffff">2,510.4</text><text x="120" y="146" text-anchor="end" font-size="15" font-weight="600" fill="#64748b">3位 福井</text><rect x="130" y="130" width="289.8046688899476" height="22" rx="2" fill="#3b82f6"><title>福井 1824.9 学級・講座</title></rect><text x="411.8046688899476" y="146" text-anchor="end" font-size="14" font-weight="700" fill="#ffffff">1,824.9</text><text x="120" y="180" text-anchor="end" font-size="15" font-weight="600" fill="#64748b">4位 鳥取</text><rect x="130" y="164" width="280.2763220581229" height="22" rx="2" fill="#3b82f6"><title>鳥取 1764.9 学級・講座</title></rect><text x="402.2763220581229" y="180" text-anchor="end" font-size="14" font-weight="700" fill="#ffffff">1,764.9</text><text x="120" y="214" text-anchor="end" font-size="15" font-weight="600" fill="#64748b">5位 愛媛</text><rect x="130" y="198" width="250.72256630141337" height="22" rx="2" fill="#3b82f6"><title>愛媛 1578.8 学級・講座</title></rect><text x="372.7225663014134" y="214" text-anchor="end" font-size="14" font-weight="700" fill="#ffffff">1,578.8</text><text x="120" y="248" text-anchor="end" font-size="15" font-weight="600" fill="#64748b">43位 熊本</text><rect x="130" y="232" width="6.066380816261712" height="22" rx="2" fill="#f97316"><title>熊本 38.2 学級・講座</title></rect><text x="144.0663808162617" y="248" text-anchor="start" font-size="14" font-weight="700" fill="#f97316">38.2</text><text x="120" y="282" text-anchor="end" font-size="15" font-weight="600" fill="#64748b">44位 千葉</text><rect x="130" y="266" width="4.255994918215023" height="22" rx="2" fill="#f97316"><title>千葉 26.8 学級・講座</title></rect><text x="142.25599491821504" y="282" text-anchor="start" font-size="14" font-weight="700" fill="#f97316">26.8</text><text x="120" y="316" text-anchor="end" font-size="15" font-weight="600" fill="#64748b">45位 大阪</text><rect x="130" y="300" width="2.9061457837065268" height="22" rx="2" fill="#f97316"><title>大阪 18.3 学級・講座</title></rect><text x="140.90614578370653" y="316" text-anchor="start" font-size="14" font-weight="700" fill="#f97316">18.3</text><text x="120" y="350" text-anchor="end" font-size="15" font-weight="600" fill="#64748b">46位 神奈川</text><rect x="130" y="334" width="2" height="22" rx="2" fill="#f97316"><title>神奈川 6.2 学級・講座</title></rect><text x="140" y="350" text-anchor="start" font-size="14" font-weight="700" fill="#f97316">6.2</text><text x="120" y="384" text-anchor="end" font-size="15" font-weight="600" fill="#64748b">47位 東京</text><rect x="130" y="368" width="2" height="22" rx="2" fill="#f97316"><title>東京 5.2 学級・講座</title></rect><text x="140" y="384" text-anchor="start" font-size="14" font-weight="700" fill="#f97316">5.2</text>
+<line x1="130" y1="56" x2="130" y2="396" stroke="#94a3b8" stroke-width="1"/>
 </svg>

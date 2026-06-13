@@ -1,0 +1,93 @@
+{
+  "key": "fire-department-member-count-per-100-thousand-people",
+  "name": "fire-member",
+  "year": "2022",
+  "unit": "人",
+  "top5": [
+    {
+      "areaName": "秋田県",
+      "rank": 1,
+      "value": 222,
+      "unit": "人"
+    },
+    {
+      "areaName": "青森県",
+      "rank": 2,
+      "value": 220.3,
+      "unit": "人"
+    },
+    {
+      "areaName": "島根県",
+      "rank": 3,
+      "value": 182.4,
+      "unit": "人"
+    },
+    {
+      "areaName": "北海道",
+      "rank": 4,
+      "value": 178.8,
+      "unit": "人"
+    },
+    {
+      "areaName": "高知県",
+      "rank": 5,
+      "value": 178.7,
+      "unit": "人"
+    }
+  ],
+  "bottom5": [
+    {
+      "areaName": "兵庫県",
+      "rank": 43,
+      "value": 114.9,
+      "unit": "人"
+    },
+    {
+      "areaName": "沖縄県",
+      "rank": 44,
+      "value": 113.1,
+      "unit": "人"
+    },
+    {
+      "areaName": "愛知県",
+      "rank": 45,
+      "value": 111.8,
+      "unit": "人"
+    },
+    {
+      "areaName": "神奈川県",
+      "rank": 46,
+      "value": 109.9,
+      "unit": "人"
+    },
+    {
+      "areaName": "福岡県",
+      "rank": 47,
+      "value": 98.7,
+      "unit": "人"
+    }
+  ],
+  "count": 47,
+  "max": {
+    "areaType": "prefecture",
+    "areaCode": "05000",
+    "areaName": "秋田県",
+    "yearCode": "2022",
+    "yearName": "2022年度",
+    "metricKey": "fire-department-member-count-per-100-thousand-people",
+    "value": 222,
+    "unit": "人",
+    "rank": 1
+  },
+  "min": {
+    "areaType": "prefecture",
+    "areaCode": "40000",
+    "areaName": "福岡県",
+    "yearCode": "2022",
+    "yearName": "2022年度",
+    "metricKey": "fire-department-member-count-per-100-thousand-people",
+    "value": 98.7,
+    "unit": "人",
+    "rank": 47
+  }
+}

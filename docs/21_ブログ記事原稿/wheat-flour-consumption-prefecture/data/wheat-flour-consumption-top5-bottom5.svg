@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 562" width="720" height="562" font-family="-apple-system, BlinkMacSystemFont, 'Hiragino Sans', 'Yu Gothic', sans-serif" role="img" aria-label="都道府県別 小麦粉消費量 上位5県と下位5県（2024年）">
+  <rect x="0" y="0" width="720" height="562" fill="none"/>
+  <text x="16" y="30" font-size="18" font-weight="700" fill="#0f172a">都道府県別 小麦粉消費量 上位5県・下位5県（2024年）</text>
+  <text x="16" y="52" font-size="13" fill="#64748b">青＝上位／橙＝下位・単位：g（2人以上世帯の年間消費量）</text>
+  <g>
+    <text x="16" y="98" font-size="15" font-weight="600" fill="#334155">三重</text>
+    <rect x="120" y="78" width="470.0" height="30" rx="2" fill="#2563eb">
+      <title>三重 3072g (1位)</title>
+    </rect>
+    <text x="604" y="98" font-size="14" font-weight="700" fill="#0f172a">3,072g</text>
+  </g>
+  <g>
+    <text x="16" y="144" font-size="15" font-weight="600" fill="#334155">千葉</text>
+    <rect x="120" y="124" width="429.5" height="30" rx="2" fill="#2563eb">
+      <title>千葉 2807g (2位)</title>
+    </rect>
+    <text x="604" y="144" font-size="14" font-weight="700" fill="#0f172a">2,807g</text>
+  </g>
+  <g>
+    <text x="16" y="190" font-size="15" font-weight="600" fill="#334155">長野</text>
+    <rect x="120" y="170" width="428.2" height="30" rx="2" fill="#2563eb">
+      <title>長野 2799g (3位)</title>
+    </rect>
+    <text x="604" y="190" font-size="14" font-weight="700" fill="#0f172a">2,799g</text>
+  </g>
+  <g>
+    <text x="16" y="236" font-size="15" font-weight="600" fill="#334155">岐阜</text>
+    <rect x="120" y="216" width="427.2" height="30" rx="2" fill="#2563eb">
+      <title>岐阜 2792g (4位)</title>
+    </rect>
+    <text x="604" y="236" font-size="14" font-weight="700" fill="#0f172a">2,792g</text>
+  </g>
+  <g>
+    <text x="16" y="282" font-size="15" font-weight="600" fill="#334155">熊本</text>
+    <rect x="120" y="262" width="406.2" height="30" rx="2" fill="#2563eb">
+      <title>熊本 2655g (5位)</title>
+    </rect>
+    <text x="604" y="282" font-size="14" font-weight="700" fill="#0f172a">2,655g</text>
+  </g>
+  <g>
+    <text x="16" y="328" font-size="15" font-weight="600" fill="#334155">新潟</text>
+    <rect x="120" y="308" width="236.8" height="30" rx="2" fill="#ea580c">
+      <title>新潟 1548g (43位)</title>
+    </rect>
+    <text x="604" y="328" font-size="14" font-weight="700" fill="#0f172a">1,548g</text>
+  </g>
+  <g>
+    <text x="16" y="374" font-size="15" font-weight="600" fill="#334155">宮城</text>
+    <rect x="120" y="354" width="236.7" height="30" rx="2" fill="#ea580c">
+      <title>宮城 1547g (44位)</title>
+    </rect>
+    <text x="604" y="374" font-size="14" font-weight="700" fill="#0f172a">1,547g</text>
+  </g>
+  <g>
+    <text x="16" y="420" font-size="15" font-weight="600" fill="#334155">富山</text>
+    <rect x="120" y="400" width="227.4" height="30" rx="2" fill="#ea580c">
+      <title>富山 1486g (45位)</title>
+    </rect>
+    <text x="604" y="420" font-size="14" font-weight="700" fill="#0f172a">1,486g</text>
+  </g>
+  <g>
+    <text x="16" y="466" font-size="15" font-weight="600" fill="#334155">高知</text>
+    <rect x="120" y="446" width="225.4" height="30" rx="2" fill="#ea580c">
+      <title>高知 1473g (46位)</title>
+    </rect>
+    <text x="604" y="466" font-size="14" font-weight="700" fill="#0f172a">1,473g</text>
+  </g>
+  <g>
+    <text x="16" y="512" font-size="15" font-weight="600" fill="#334155">山梨</text>
+    <rect x="120" y="492" width="196.4" height="30" rx="2" fill="#ea580c">
+      <title>山梨 1284g (47位)</title>
+    </rect>
+    <text x="604" y="512" font-size="14" font-weight="700" fill="#0f172a">1,284g</text>
+  </g>
+</svg>

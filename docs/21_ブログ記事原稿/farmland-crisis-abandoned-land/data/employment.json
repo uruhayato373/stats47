@@ -1,0 +1,82 @@
+[
+  {
+    "areaName": "北海道",
+    "rank": 1,
+    "value": 96557,
+    "display": 96557,
+    "label": "農業就業人口",
+    "unit": "人"
+  },
+  {
+    "areaName": "茨城県",
+    "rank": 2,
+    "value": 89594,
+    "display": 89594,
+    "label": "農業就業人口",
+    "unit": "人"
+  },
+  {
+    "areaName": "長野県",
+    "rank": 3,
+    "value": 82922,
+    "display": 82922,
+    "label": "農業就業人口",
+    "unit": "人"
+  },
+  {
+    "areaName": "新潟県",
+    "rank": 4,
+    "value": 79324,
+    "display": 79324,
+    "label": "農業就業人口",
+    "unit": "人"
+  },
+  {
+    "areaName": "福島県",
+    "rank": 5,
+    "value": 77703,
+    "display": 77703,
+    "label": "農業就業人口",
+    "unit": "人"
+  },
+  {
+    "areaName": "奈良県",
+    "rank": 43,
+    "value": 19419,
+    "display": 19419,
+    "label": "農業就業人口",
+    "unit": "人"
+  },
+  {
+    "areaName": "福井県",
+    "rank": 44,
+    "value": 18509,
+    "display": 18509,
+    "label": "農業就業人口",
+    "unit": "人"
+  },
+  {
+    "areaName": "石川県",
+    "rank": 45,
+    "value": 17508,
+    "display": 17508,
+    "label": "農業就業人口",
+    "unit": "人"
+  },
+  {
+    "areaName": "大阪府",
+    "rank": 46,
+    "value": 14796,
+    "display": 14796,
+    "label": "農業就業人口",
+    "unit": "人"
+  },
+  {
+    "areaName": "東京都",
+    "rank": 47,
+    "value": 10986,
+    "display": 10986,
+    "label": "農業就業人口",
+    "unit": "人"
+  }
+]

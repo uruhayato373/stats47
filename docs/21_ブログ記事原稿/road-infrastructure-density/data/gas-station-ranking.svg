@@ -1,0 +1,31 @@
+<!-- data-source: gas-station-ranking.json | generated: 2026-06-13T04:37:44.929Z -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 464" width="760" height="464" role="img" aria-label="給油所密度 上位5・下位5（2023年度・箇所/100km）" font-family="system-ui,-apple-system,'Hiragino Sans','Yu Gothic',sans-serif">
+<style>
+    .svg-bg{fill:#ffffff;}
+    .svg-title{fill:#0f172a;font-size:16px;font-weight:700;}
+    .svg-label{fill:#334155;font-size:13px;}
+    .svg-value{fill:#0f172a;font-size:13px;font-weight:600;}
+    .bar-top{fill:#2563eb;}
+    .bar-bottom{fill:#ea7317;}
+    @media (prefers-color-scheme:dark){
+      .svg-bg{fill:#0b1220;}
+      .svg-title{fill:#f1f5f9;}
+      .svg-label{fill:#cbd5e1;}
+      .svg-value{fill:#f1f5f9;}
+      .bar-top{fill:#60a5fa;}
+      .bar-bottom{fill:#fb923c;}
+    }
+  </style>
+<rect class="svg-bg" x="0" y="0" width="760" height="464"/>
+<text class="svg-title" x="16" y="30">給油所密度 上位5・下位5（2023年度・箇所/100km）</text>
+<g><title>大阪府：道路実延長100km当たり給油所数=4.4箇所（1位）</title><text class="svg-label" x="16" y="79">大阪府</text><rect class="bar-top" x="92" y="63" width="580.0" height="24" rx="2"/><text class="svg-value" x="680" y="79">4.4</text></g>
+<g><title>沖縄県：道路実延長100km当たり給油所数=3.9箇所（2位）</title><text class="svg-label" x="16" y="117">沖縄県</text><rect class="bar-top" x="92" y="101" width="514.1" height="24" rx="2"/><text class="svg-value" x="614.090909090909" y="117">3.9</text></g>
+<g><title>東京都：道路実延長100km当たり給油所数=3.7箇所（3位）</title><text class="svg-label" x="16" y="155">東京都</text><rect class="bar-top" x="92" y="139" width="487.7" height="24" rx="2"/><text class="svg-value" x="587.7272727272727" y="155">3.7</text></g>
+<g><title>香川県：道路実延長100km当たり給油所数=3.2箇所（4位）</title><text class="svg-label" x="16" y="193">香川県</text><rect class="bar-top" x="92" y="177" width="421.8" height="24" rx="2"/><text class="svg-value" x="521.8181818181818" y="193">3.2</text></g>
+<g><title>神奈川県：道路実延長100km当たり給油所数=3箇所（5位）</title><text class="svg-label" x="16" y="231">神奈川県</text><rect class="bar-top" x="92" y="215" width="395.5" height="24" rx="2"/><text class="svg-value" x="495.45454545454544" y="231">3</text></g>
+<g><title>岡山県：道路実延長100km当たり給油所数=1.7箇所（42位）</title><text class="svg-label" x="16" y="269">岡山県</text><rect class="bar-bottom" x="92" y="253" width="224.1" height="24" rx="2"/><text class="svg-value" x="324.09090909090907" y="269">1.7</text></g>
+<g><title>群馬県：道路実延長100km当たり給油所数=1.6箇所（44位）</title><text class="svg-label" x="16" y="307">群馬県</text><rect class="bar-bottom" x="92" y="291" width="210.9" height="24" rx="2"/><text class="svg-value" x="310.9090909090909" y="307">1.6</text></g>
+<g><title>長野県：道路実延長100km当たり給油所数=1.6箇所（44位）</title><text class="svg-label" x="16" y="345">長野県</text><rect class="bar-bottom" x="92" y="329" width="210.9" height="24" rx="2"/><text class="svg-value" x="310.9090909090909" y="345">1.6</text></g>
+<g><title>島根県：道路実延長100km当たり給油所数=1.6箇所（44位）</title><text class="svg-label" x="16" y="383">島根県</text><rect class="bar-bottom" x="92" y="367" width="210.9" height="24" rx="2"/><text class="svg-value" x="310.9090909090909" y="383">1.6</text></g>
+<g><title>岩手県：道路実延長100km当たり給油所数=1.4箇所（47位）</title><text class="svg-label" x="16" y="421">岩手県</text><rect class="bar-bottom" x="92" y="405" width="184.5" height="24" rx="2"/><text class="svg-value" x="284.5454545454545" y="421">1.4</text></g>
+</svg>

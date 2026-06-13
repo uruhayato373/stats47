@@ -1,0 +1,17 @@
+[
+  { "areaName": "東京", "rank": 1, "value": 2691476, "label": "鉄道通勤・通学者数", "unit": "人" },
+  { "areaName": "神奈川", "rank": 2, "value": 1452020, "label": "鉄道通勤・通学者数", "unit": "人" },
+  { "areaName": "大阪", "rank": 3, "value": 1108472, "label": "鉄道通勤・通学者数", "unit": "人" },
+  { "areaName": "埼玉", "rank": 4, "value": 873768, "label": "鉄道通勤・通学者数", "unit": "人" },
+  { "areaName": "千葉", "rank": 5, "value": 805249, "label": "鉄道通勤・通学者数", "unit": "人" },
+  { "areaName": "兵庫", "rank": 6, "value": 539930, "label": "鉄道通勤・通学者数", "unit": "人" },
+  { "areaName": "愛知", "rank": 7, "value": 505533, "label": "鉄道通勤・通学者数", "unit": "人" },
+  { "areaName": "福岡", "rank": 8, "value": 258055, "label": "鉄道通勤・通学者数", "unit": "人" },
+  { "areaName": "北海道", "rank": 9, "value": 222484, "label": "鉄道通勤・通学者数", "unit": "人" },
+  { "areaName": "京都", "rank": 10, "value": 203581, "label": "鉄道通勤・通学者数", "unit": "人" },
+  { "areaName": "高知", "rank": 43, "value": 5560, "label": "鉄道通勤・通学者数", "unit": "人" },
+  { "areaName": "鳥取", "rank": 44, "value": 5144, "label": "鉄道通勤・通学者数", "unit": "人" },
+  { "areaName": "徳島", "rank": 45, "value": 4723, "label": "鉄道通勤・通学者数", "unit": "人" },
+  { "areaName": "宮崎", "rank": 46, "value": 4528, "label": "鉄道通勤・通学者数", "unit": "人" },
+  { "areaName": "島根", "rank": 47, "value": 3370, "label": "鉄道通勤・通学者数", "unit": "人" }
+]

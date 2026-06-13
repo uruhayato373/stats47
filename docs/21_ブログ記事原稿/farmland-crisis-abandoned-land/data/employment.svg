@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 498" width="760" height="498" role="img" aria-label="農業就業人口 上位5・下位5（都道府県別）">
+  <style>
+    text { font-family: -apple-system, "Hiragino Sans", "Yu Gothic", sans-serif; }
+  </style>
+  <text x="380" y="28" text-anchor="middle" font-size="18" font-weight="700" fill="#475569">農業就業人口 上位5・下位5（都道府県別）</text>
+  <text x="380" y="48" text-anchor="middle" font-size="12" fill="#64748b">上位5（青）／下位5（橙）・2014年</text>
+
+  <text x="92" y="88" text-anchor="end" font-size="15" font-weight="600" fill="#475569">北海道</text>
+  <rect x="100" y="71" width="532" height="24" rx="2" fill="#1d4ed8">
+    <title>北海道：農業就業人口=9.7万人（1位）</title>
+  </rect>
+  <text x="640" y="88" font-size="14" font-weight="600" fill="#64748b">9.7万人</text>
+  <text x="92" y="126" text-anchor="end" font-size="15" font-weight="600" fill="#475569">茨城県</text>
+  <rect x="100" y="109" width="493.63596632041174" height="24" rx="2" fill="#2563eb">
+    <title>茨城県：農業就業人口=9.0万人（2位）</title>
+  </rect>
+  <text x="601.6359663204117" y="126" font-size="14" font-weight="600" fill="#64748b">9.0万人</text>
+  <text x="92" y="164" text-anchor="end" font-size="15" font-weight="600" fill="#475569">長野県</text>
+  <rect x="100" y="147" width="456.87525503070725" height="24" rx="2" fill="#3b82f6">
+    <title>長野県：農業就業人口=8.3万人（3位）</title>
+  </rect>
+  <text x="564.8752550307072" y="164" font-size="14" font-weight="600" fill="#64748b">8.3万人</text>
+  <text x="92" y="202" text-anchor="end" font-size="15" font-weight="600" fill="#475569">新潟県</text>
+  <rect x="100" y="185" width="437.0513582650662" height="24" rx="2" fill="#60a5fa">
+    <title>新潟県：農業就業人口=7.9万人（4位）</title>
+  </rect>
+  <text x="545.0513582650663" y="202" font-size="14" font-weight="600" fill="#64748b">7.9万人</text>
+  <text x="92" y="240" text-anchor="end" font-size="15" font-weight="600" fill="#475569">福島県</text>
+  <rect x="100" y="223" width="428.12013629255256" height="24" rx="2" fill="#93c5fd">
+    <title>福島県：農業就業人口=7.8万人（5位）</title>
+  </rect>
+  <text x="536.1201362925526" y="240" font-size="14" font-weight="600" fill="#64748b">7.8万人</text>
+  <line x1="100" y1="256" x2="748" y2="256" stroke="#cbd5e1" stroke-dasharray="4 4"/>
+  <text x="100" y="270" font-size="12" fill="#94a3b8">— 下位5 —</text>
+  <text x="92" y="296" text-anchor="end" font-size="15" font-weight="600" fill="#475569">奈良県</text>
+  <rect x="100" y="279" width="106.99284360533156" height="24" rx="2" fill="#fdba74">
+    <title>奈良県：農業就業人口=1.9万人（43位）</title>
+  </rect>
+  <text x="214.99284360533156" y="296" font-size="14" font-weight="600" fill="#64748b">1.9万人</text>
+  <text x="92" y="334" text-anchor="end" font-size="15" font-weight="600" fill="#475569">福井県</text>
+  <rect x="100" y="317" width="101.97901757511107" height="24" rx="2" fill="#fb923c">
+    <title>福井県：農業就業人口=1.9万人（44位）</title>
+  </rect>
+  <text x="209.97901757511107" y="334" font-size="14" font-weight="600" fill="#64748b">1.9万人</text>
+  <text x="92" y="372" text-anchor="end" font-size="15" font-weight="600" fill="#475569">石川県</text>
+  <rect x="100" y="355" width="96.46380894186854" height="24" rx="2" fill="#f97316">
+    <title>石川県：農業就業人口=1.8万人（45位）</title>
+  </rect>
+  <text x="204.46380894186854" y="372" font-size="14" font-weight="600" fill="#64748b">1.8万人</text>
+  <text x="92" y="410" text-anchor="end" font-size="15" font-weight="600" fill="#475569">大阪府</text>
+  <rect x="100" y="393" width="81.5215054320246" height="24" rx="2" fill="#ea580c">
+    <title>大阪府：農業就業人口=1.5万人（46位）</title>
+  </rect>
+  <text x="189.52150543202458" y="410" font-size="14" font-weight="600" fill="#64748b">1.5万人</text>
+  <text x="92" y="448" text-anchor="end" font-size="15" font-weight="600" fill="#475569">東京都</text>
+  <rect x="100" y="431" width="60.529552492310245" height="24" rx="2" fill="#c2410c">
+    <title>東京都：農業就業人口=1.1万人（47位）</title>
+  </rect>
+  <text x="168.52955249231024" y="448" font-size="14" font-weight="600" fill="#64748b">1.1万人</text>
+</svg>

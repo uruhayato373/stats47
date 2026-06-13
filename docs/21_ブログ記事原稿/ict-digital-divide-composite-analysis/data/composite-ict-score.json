@@ -1,0 +1,16 @@
+{
+  "label": "複合ICTスコア",
+  "unit": "偏差値zスコア",
+  "note": "PC所有(2014)・携帯契約(2023)・交通通信費割合(2024)・旧メディア消費時間(2021)の4指標をzスコア化し平均。交通通信費割合と旧メディア消費時間は符号反転(低いほど先進)。e-Stat各統計から独自算出。",
+  "data": [
+    { "areaName": "東京", "rank": 1, "value": 2.92, "unit": "zスコア" },
+    { "areaName": "滋賀", "rank": 2, "value": 1.12, "unit": "zスコア" },
+    { "areaName": "神奈川", "rank": 3, "value": 1.01, "unit": "zスコア" },
+    { "areaName": "京都", "rank": 4, "value": 0.87, "unit": "zスコア" },
+    { "areaName": "愛知", "rank": 5, "value": 0.81, "unit": "zスコア" },
+    { "areaName": "大分", "rank": 44, "value": -0.70, "unit": "zスコア" },
+    { "areaName": "秋田", "rank": 45, "value": -0.83, "unit": "zスコア" },
+    { "areaName": "青森", "rank": 46, "value": -1.00, "unit": "zスコア" },
+    { "areaName": "福島", "rank": 47, "value": -1.05, "unit": "zスコア" }
+  ]
+}

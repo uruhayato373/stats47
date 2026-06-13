@@ -1,0 +1,12 @@
+[
+  {"areaName":"東京都","rank":1,"value":13463000,"label":"人口","unit":"人"},
+  {"areaName":"神奈川県","rank":2,"value":8941000,"label":"人口","unit":"人"},
+  {"areaName":"大阪府","rank":3,"value":8453000,"label":"人口","unit":"人"},
+  {"areaName":"愛知県","rank":4,"value":7160000,"label":"人口","unit":"人"},
+  {"areaName":"埼玉県","rank":5,"value":7083000,"label":"人口","unit":"人"},
+  {"areaName":"福井県","rank":43,"value":721000,"label":"人口","unit":"人"},
+  {"areaName":"徳島県","rank":44,"value":678000,"label":"人口","unit":"人"},
+  {"areaName":"高知県","rank":45,"value":649000,"label":"人口","unit":"人"},
+  {"areaName":"島根県","rank":46,"value":631000,"label":"人口","unit":"人"},
+  {"areaName":"鳥取県","rank":47,"value":525000,"label":"人口","unit":"人"}
+]

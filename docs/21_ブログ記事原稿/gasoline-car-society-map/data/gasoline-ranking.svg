@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 514" width="720" height="514" role="img" aria-label="ガソリン販売量 上位5・下位5（2023年度）" style="background:#ffffff;font-family:system-ui,sans-serif;">
+  <title>ガソリン販売量 上位5・下位5（2023年度）</title>
+  <rect x="0" y="0" width="720" height="514" fill="#ffffff"/>
+  <text x="0" y="24" font-size="17" font-weight="700" fill="#0f172a">ガソリン販売量 上位5・下位5（2023年度）</text>
+  <text x="0" y="44" font-size="12" fill="#64748b">上位5（青）と下位5（橙）／単位: kl</text>
+  <g>
+    <text x="0" y="78" font-size="14" font-weight="600" fill="#64748b">1位</text>
+    <text x="34" y="78" font-size="14" font-weight="600" fill="#334155">東京都</text>
+    <rect x="96" y="56" width="490.0" height="34" rx="2" fill="#2563eb"/>
+    <text x="594" y="78" font-size="13" fill="#475569">4,244,833kl</text>
+  </g>
+  <g>
+    <text x="0" y="122" font-size="14" font-weight="600" fill="#64748b">2位</text>
+    <text x="34" y="122" font-size="14" font-weight="600" fill="#334155">愛知県</text>
+    <rect x="96" y="100" width="319.2" height="34" rx="2" fill="#2563eb"/>
+    <text x="423.1602331587603" y="122" font-size="13" fill="#475569">2,764,861kl</text>
+  </g>
+  <g>
+    <text x="0" y="166" font-size="14" font-weight="600" fill="#64748b">3位</text>
+    <text x="34" y="166" font-size="14" font-weight="600" fill="#334155">大阪府</text>
+    <rect x="96" y="144" width="260.0" height="34" rx="2" fill="#2563eb"/>
+    <text x="364.03216380950676" y="166" font-size="13" fill="#475569">2,252,639kl</text>
+  </g>
+  <g>
+    <text x="0" y="210" font-size="14" font-weight="600" fill="#64748b">4位</text>
+    <text x="34" y="210" font-size="14" font-weight="600" fill="#334155">埼玉県</text>
+    <rect x="96" y="188" width="254.4" height="34" rx="2" fill="#2563eb"/>
+    <text x="358.42378062929686" y="210" font-size="13" fill="#475569">2,204,054kl</text>
+  </g>
+  <g>
+    <text x="0" y="254" font-size="14" font-weight="600" fill="#64748b">5位</text>
+    <text x="34" y="254" font-size="14" font-weight="600" fill="#334155">北海道</text>
+    <rect x="96" y="232" width="239.3" height="34" rx="2" fill="#2563eb"/>
+    <text x="343.27704811944307" y="254" font-size="13" fill="#475569">2,072,839kl</text>
+  </g>
+  <g>
+    <text x="0" y="298" font-size="14" font-weight="600" fill="#64748b">43位</text>
+    <text x="34" y="298" font-size="14" font-weight="600" fill="#334155">徳島県</text>
+    <rect x="96" y="276" width="33.0" height="34" rx="2" fill="#ea7317"/>
+    <text x="136.97339141492728" y="298" font-size="13" fill="#475569">285,646kl</text>
+  </g>
+  <g>
+    <text x="0" y="342" font-size="14" font-weight="600" fill="#64748b">44位</text>
+    <text x="34" y="342" font-size="14" font-weight="600" fill="#334155">和歌山県</text>
+    <rect x="96" y="320" width="32.6" height="34" rx="2" fill="#ea7317"/>
+    <text x="136.63770800877208" y="342" font-size="13" fill="#475569">282,738kl</text>
+  </g>
+  <g>
+    <text x="0" y="386" font-size="14" font-weight="600" fill="#64748b">45位</text>
+    <text x="34" y="386" font-size="14" font-weight="600" fill="#334155">鳥取県</text>
+    <rect x="96" y="364" width="30.9" height="34" rx="2" fill="#ea7317"/>
+    <text x="134.90111201076698" y="386" font-size="13" fill="#475569">267,694kl</text>
+  </g>
+  <g>
+    <text x="0" y="430" font-size="14" font-weight="600" fill="#64748b">46位</text>
+    <text x="34" y="430" font-size="14" font-weight="600" fill="#334155">高知県</text>
+    <rect x="96" y="408" width="30.2" height="34" rx="2" fill="#ea7317"/>
+    <text x="134.2263975991517" y="430" font-size="13" fill="#475569">261,849kl</text>
+  </g>
+  <g>
+    <text x="0" y="474" font-size="14" font-weight="600" fill="#64748b">47位</text>
+    <text x="34" y="474" font-size="14" font-weight="600" fill="#334155">島根県</text>
+    <rect x="96" y="452" width="28.8" height="34" rx="2" fill="#ea7317"/>
+    <text x="132.82975608227696" y="474" font-size="13" fill="#475569">249,750kl</text>
+  </g>
+</svg>

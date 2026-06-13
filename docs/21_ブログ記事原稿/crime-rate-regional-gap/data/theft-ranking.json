@@ -1,0 +1,331 @@
+[
+  {
+    "areaName": "大阪府",
+    "rank": 1,
+    "value": 6.65,
+    "unit": "件",
+    "label": "窃盗犯認知件数"
+  },
+  {
+    "areaName": "茨城県",
+    "rank": 2,
+    "value": 5.24,
+    "unit": "件",
+    "label": "窃盗犯認知件数"
+  },
+  {
+    "areaName": "群馬県",
+    "rank": 3,
+    "value": 5.21,
+    "unit": "件",
+    "label": "窃盗犯認知件数"
+  },
+  {
+    "areaName": "埼玉県",
+    "rank": 4,
+    "value": 4.96,
+    "unit": "件",
+    "label": "窃盗犯認知件数"
+  },
+  {
+    "areaName": "栃木県",
+    "rank": 5,
+    "value": 4.92,
+    "unit": "件",
+    "label": "窃盗犯認知件数"
+  },
+  {
+    "areaName": "千葉県",
+    "rank": 6,
+    "value": 4.52,
+    "unit": "件",
+    "label": "窃盗犯認知件数"
+  },
+  {
+    "areaName": "福岡県",
+    "rank": 7,
+    "value": 4.33,
+    "unit": "件",
+    "label": "窃盗犯認知件数"
+  },
+  {
+    "areaName": "東京都",
+    "rank": 8,
+    "value": 4.25,
+    "unit": "件",
+    "label": "窃盗犯認知件数"
+  },
+  {
+    "areaName": "兵庫県",
+    "rank": 9,
+    "value": 4.24,
+    "unit": "件",
+    "label": "窃盗犯認知件数"
+  },
+  {
+    "areaName": "愛知県",
+    "rank": 10,
+    "value": 4.21,
+    "unit": "件",
+    "label": "窃盗犯認知件数"
+  },
+  {
+    "areaName": "岐阜県",
+    "rank": 11,
+    "value": 4.09,
+    "unit": "件",
+    "label": "窃盗犯認知件数"
+  },
+  {
+    "areaName": "沖縄県",
+    "rank": 12,
+    "value": 4.08,
+    "unit": "件",
+    "label": "窃盗犯認知件数"
+  },
+  {
+    "areaName": "三重県",
+    "rank": 13,
+    "value": 4,
+    "unit": "件",
+    "label": "窃盗犯認知件数"
+  },
+  {
+    "areaName": "岡山県",
+    "rank": 14,
+    "value": 3.52,
+    "unit": "件",
+    "label": "窃盗犯認知件数"
+  },
+  {
+    "areaName": "香川県",
+    "rank": 14,
+    "value": 3.52,
+    "unit": "件",
+    "label": "窃盗犯認知件数"
+  },
+  {
+    "areaName": "高知県",
+    "rank": 16,
+    "value": 3.49,
+    "unit": "件",
+    "label": "窃盗犯認知件数"
+  },
+  {
+    "areaName": "神奈川県",
+    "rank": 17,
+    "value": 3.48,
+    "unit": "件",
+    "label": "窃盗犯認知件数"
+  },
+  {
+    "areaName": "愛媛県",
+    "rank": 17,
+    "value": 3.48,
+    "unit": "件",
+    "label": "窃盗犯認知件数"
+  },
+  {
+    "areaName": "滋賀県",
+    "rank": 19,
+    "value": 3.46,
+    "unit": "件",
+    "label": "窃盗犯認知件数"
+  },
+  {
+    "areaName": "宮城県",
+    "rank": 20,
+    "value": 3.39,
+    "unit": "件",
+    "label": "窃盗犯認知件数"
+  },
+  {
+    "areaName": "広島県",
+    "rank": 21,
+    "value": 3.29,
+    "unit": "件",
+    "label": "窃盗犯認知件数"
+  },
+  {
+    "areaName": "京都府",
+    "rank": 22,
+    "value": 3.27,
+    "unit": "件",
+    "label": "窃盗犯認知件数"
+  },
+  {
+    "areaName": "福島県",
+    "rank": 23,
+    "value": 3.21,
+    "unit": "件",
+    "label": "窃盗犯認知件数"
+  },
+  {
+    "areaName": "山梨県",
+    "rank": 24,
+    "value": 3.13,
+    "unit": "件",
+    "label": "窃盗犯認知件数"
+  },
+  {
+    "areaName": "石川県",
+    "rank": 25,
+    "value": 3.06,
+    "unit": "件",
+    "label": "窃盗犯認知件数"
+  },
+  {
+    "areaName": "佐賀県",
+    "rank": 26,
+    "value": 3.04,
+    "unit": "件",
+    "label": "窃盗犯認知件数"
+  },
+  {
+    "areaName": "富山県",
+    "rank": 27,
+    "value": 2.91,
+    "unit": "件",
+    "label": "窃盗犯認知件数"
+  },
+  {
+    "areaName": "宮崎県",
+    "rank": 28,
+    "value": 2.87,
+    "unit": "件",
+    "label": "窃盗犯認知件数"
+  },
+  {
+    "areaName": "静岡県",
+    "rank": 29,
+    "value": 2.85,
+    "unit": "件",
+    "label": "窃盗犯認知件数"
+  },
+  {
+    "areaName": "奈良県",
+    "rank": 29,
+    "value": 2.85,
+    "unit": "件",
+    "label": "窃盗犯認知件数"
+  },
+  {
+    "areaName": "北海道",
+    "rank": 31,
+    "value": 2.74,
+    "unit": "件",
+    "label": "窃盗犯認知件数"
+  },
+  {
+    "areaName": "和歌山県",
+    "rank": 31,
+    "value": 2.74,
+    "unit": "件",
+    "label": "窃盗犯認知件数"
+  },
+  {
+    "areaName": "鹿児島県",
+    "rank": 31,
+    "value": 2.74,
+    "unit": "件",
+    "label": "窃盗犯認知件数"
+  },
+  {
+    "areaName": "新潟県",
+    "rank": 34,
+    "value": 2.72,
+    "unit": "件",
+    "label": "窃盗犯認知件数"
+  },
+  {
+    "areaName": "鳥取県",
+    "rank": 35,
+    "value": 2.7,
+    "unit": "件",
+    "label": "窃盗犯認知件数"
+  },
+  {
+    "areaName": "長野県",
+    "rank": 36,
+    "value": 2.67,
+    "unit": "件",
+    "label": "窃盗犯認知件数"
+  },
+  {
+    "areaName": "福井県",
+    "rank": 37,
+    "value": 2.65,
+    "unit": "件",
+    "label": "窃盗犯認知件数"
+  },
+  {
+    "areaName": "徳島県",
+    "rank": 38,
+    "value": 2.61,
+    "unit": "件",
+    "label": "窃盗犯認知件数"
+  },
+  {
+    "areaName": "青森県",
+    "rank": 39,
+    "value": 2.51,
+    "unit": "件",
+    "label": "窃盗犯認知件数"
+  },
+  {
+    "areaName": "熊本県",
+    "rank": 40,
+    "value": 2.36,
+    "unit": "件",
+    "label": "窃盗犯認知件数"
+  },
+  {
+    "areaName": "山口県",
+    "rank": 41,
+    "value": 2.02,
+    "unit": "件",
+    "label": "窃盗犯認知件数"
+  },
+  {
+    "areaName": "山形県",
+    "rank": 42,
+    "value": 1.89,
+    "unit": "件",
+    "label": "窃盗犯認知件数"
+  },
+  {
+    "areaName": "島根県",
+    "rank": 43,
+    "value": 1.83,
+    "unit": "件",
+    "label": "窃盗犯認知件数"
+  },
+  {
+    "areaName": "大分県",
+    "rank": 44,
+    "value": 1.76,
+    "unit": "件",
+    "label": "窃盗犯認知件数"
+  },
+  {
+    "areaName": "秋田県",
+    "rank": 45,
+    "value": 1.75,
+    "unit": "件",
+    "label": "窃盗犯認知件数"
+  },
+  {
+    "areaName": "岩手県",
+    "rank": 46,
+    "value": 1.69,
+    "unit": "件",
+    "label": "窃盗犯認知件数"
+  },
+  {
+    "areaName": "長崎県",
+    "rank": 47,
+    "value": 1.68,
+    "unit": "件",
+    "label": "窃盗犯認知件数"
+  }
+]

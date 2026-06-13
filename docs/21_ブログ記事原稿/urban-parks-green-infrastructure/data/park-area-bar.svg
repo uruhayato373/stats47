@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 420" font-family="system-ui,-apple-system,sans-serif" role="img" aria-label="1人当たり都市公園面積 上位5・下位5（2023年度）">
+<title>1人当たり都市公園面積 上位5・下位5（2023年度）</title>
+<text x="110" y="32" font-size="18" font-weight="700" fill="#64748b">1人当たり都市公園面積 上位5・下位5（2023年度）</text>
+<text x="102" y="78.0" font-size="14" text-anchor="end" fill="#64748b">1位 北海道</text>
+<rect x="110" y="62" width="490.0" height="22" rx="2" fill="#2563eb"/>
+<text x="608.0" y="78.0" font-size="14" font-weight="600" fill="#475569">27.84 ㎡</text>
+<text x="102" y="112.0" font-size="14" text-anchor="end" fill="#64748b">2位 山形県</text>
+<rect x="110" y="96" width="347.6" height="22" rx="2" fill="#2563eb"/>
+<text x="465.6" y="112.0" font-size="14" font-weight="600" fill="#475569">19.75 ㎡</text>
+<text x="102" y="146.0" font-size="14" text-anchor="end" fill="#64748b">3位 宮城県</text>
+<rect x="110" y="130" width="329.8" height="22" rx="2" fill="#2563eb"/>
+<text x="447.8" y="146.0" font-size="14" font-weight="600" fill="#475569">18.74 ㎡</text>
+<text x="102" y="180.0" font-size="14" text-anchor="end" fill="#64748b">4位 秋田県</text>
+<rect x="110" y="164" width="325.3" height="22" rx="2" fill="#2563eb"/>
+<text x="443.3" y="180.0" font-size="14" font-weight="600" fill="#475569">18.48 ㎡</text>
+<text x="102" y="214.0" font-size="14" text-anchor="end" fill="#64748b">5位 宮崎県</text>
+<rect x="110" y="198" width="319.8" height="22" rx="2" fill="#2563eb"/>
+<text x="437.8" y="214.0" font-size="14" font-weight="600" fill="#475569">18.17 ㎡</text>
+<text x="102" y="248.0" font-size="14" text-anchor="end" fill="#64748b">43位 埼玉県</text>
+<rect x="110" y="232" width="127.4" height="22" rx="2" fill="#ea580c"/>
+<text x="245.4" y="248.0" font-size="14" font-weight="600" fill="#475569">7.24 ㎡</text>
+<text x="102" y="282.0" font-size="14" text-anchor="end" fill="#64748b">44位 千葉県</text>
+<rect x="110" y="266" width="123.6" height="22" rx="2" fill="#ea580c"/>
+<text x="241.6" y="282.0" font-size="14" font-weight="600" fill="#475569">7.02 ㎡</text>
+<text x="102" y="316.0" font-size="14" text-anchor="end" fill="#64748b">45位 神奈川県</text>
+<rect x="110" y="300" width="102.4" height="22" rx="2" fill="#ea580c"/>
+<text x="220.4" y="316.0" font-size="14" font-weight="600" fill="#475569">5.82 ㎡</text>
+<text x="102" y="350.0" font-size="14" text-anchor="end" fill="#64748b">46位 大阪府</text>
+<rect x="110" y="334" width="101.9" height="22" rx="2" fill="#ea580c"/>
+<text x="219.9" y="350.0" font-size="14" font-weight="600" fill="#475569">5.79 ㎡</text>
+<text x="102" y="384.0" font-size="14" text-anchor="end" fill="#64748b">47位 東京都</text>
+<rect x="110" y="368" width="76.4" height="22" rx="2" fill="#ea580c"/>
+<text x="194.4" y="384.0" font-size="14" font-weight="600" fill="#475569">4.34 ㎡</text>
+<line x1="10" y1="226" x2="640" y2="226" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="4 4"/>
+</svg>

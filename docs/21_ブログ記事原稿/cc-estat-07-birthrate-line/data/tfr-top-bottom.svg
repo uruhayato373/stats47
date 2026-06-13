@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 500" role="img" aria-label="合計特殊出生率 上位5・下位5（2023年度・47都道府県）" font-family="system-ui, sans-serif">
+  <title>合計特殊出生率 上位5・下位5（2023年度）</title>
+  <text x="16" y="26" font-size="17" font-weight="bold" fill="#1e293b">合計特殊出生率 上位5・下位5（2023年度）</text>
+  <text x="16" y="46" font-size="12" fill="#334155">青=上位（高い） / 橙=下位（低い）・出典 人口動態統計</text>
+  
+  <text x="86" y="81" text-anchor="end" font-size="15" fill="#334155" font-family="system-ui, sans-serif">沖縄県</text>
+  <rect x="96" y="62" width="536.0" height="28" rx="2" fill="#2563eb"><title>沖縄県 1位 1.6</title></rect>
+  <text x="640" y="81" font-size="14" fill="#334155" font-family="system-ui, sans-serif">1.60</text>
+  <text x="86" y="121" text-anchor="end" font-size="15" fill="#334155" font-family="system-ui, sans-serif">長崎県</text>
+  <rect x="96" y="102" width="499.1" height="28" rx="2" fill="#2563eb"><title>長崎県 2位 1.49</title></rect>
+  <text x="603.15" y="121" font-size="14" fill="#334155" font-family="system-ui, sans-serif">1.49</text>
+  <text x="86" y="161" text-anchor="end" font-size="15" fill="#334155" font-family="system-ui, sans-serif">宮崎県</text>
+  <rect x="96" y="142" width="499.1" height="28" rx="2" fill="#2563eb"><title>宮崎県 2位 1.49</title></rect>
+  <text x="603.15" y="161" font-size="14" fill="#334155" font-family="system-ui, sans-serif">1.49</text>
+  <text x="86" y="201" text-anchor="end" font-size="15" fill="#334155" font-family="system-ui, sans-serif">鹿児島県</text>
+  <rect x="96" y="182" width="495.8" height="28" rx="2" fill="#2563eb"><title>鹿児島県 4位 1.48</title></rect>
+  <text x="599.8" y="201" font-size="14" fill="#334155" font-family="system-ui, sans-serif">1.48</text>
+  <text x="86" y="241" text-anchor="end" font-size="15" fill="#334155" font-family="system-ui, sans-serif">熊本県</text>
+  <rect x="96" y="222" width="492.4" height="28" rx="2" fill="#2563eb"><title>熊本県 5位 1.47</title></rect>
+  <text x="596.45" y="241" font-size="14" fill="#334155" font-family="system-ui, sans-serif">1.47</text>
+  <text x="86" y="297" text-anchor="end" font-size="15" fill="#334155" font-family="system-ui, sans-serif">京都府</text>
+  <rect x="96" y="278" width="371.8" height="28" rx="2" fill="#ea580c"><title>京都府 43位 1.11</title></rect>
+  <text x="475.84999999999997" y="297" font-size="14" fill="#334155" font-family="system-ui, sans-serif">1.11</text>
+  <text x="86" y="337" text-anchor="end" font-size="15" fill="#334155" font-family="system-ui, sans-serif">秋田県</text>
+  <rect x="96" y="318" width="368.5" height="28" rx="2" fill="#ea580c"><title>秋田県 44位 1.1</title></rect>
+  <text x="472.5" y="337" font-size="14" fill="#334155" font-family="system-ui, sans-serif">1.10</text>
+  <text x="86" y="377" text-anchor="end" font-size="15" fill="#334155" font-family="system-ui, sans-serif">宮城県</text>
+  <rect x="96" y="358" width="358.4" height="28" rx="2" fill="#ea580c"><title>宮城県 45位 1.07</title></rect>
+  <text x="462.45" y="377" font-size="14" fill="#334155" font-family="system-ui, sans-serif">1.07</text>
+  <text x="86" y="417" text-anchor="end" font-size="15" fill="#334155" font-family="system-ui, sans-serif">北海道</text>
+  <rect x="96" y="398" width="355.1" height="28" rx="2" fill="#ea580c"><title>北海道 46位 1.06</title></rect>
+  <text x="459.09999999999997" y="417" font-size="14" fill="#334155" font-family="system-ui, sans-serif">1.06</text>
+  <text x="86" y="457" text-anchor="end" font-size="15" fill="#334155" font-family="system-ui, sans-serif">東京都</text>
+  <rect x="96" y="438" width="331.6" height="28" rx="2" fill="#ea580c"><title>東京都 47位 0.99</title></rect>
+  <text x="435.65" y="457" font-size="14" fill="#334155" font-family="system-ui, sans-serif">0.99</text>
+  <line x1="96" y1="50" x2="96" y2="472" stroke="#94a3b8" stroke-width="1" />
+</svg>

@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 482" role="img" aria-label="実収入ランキング（勤労者世帯・月額）">
+<!-- data-source: actual-income.json | generated: 2026-06-13T10:31:23.219Z -->
+<title>実収入ランキング（勤労者世帯・月額）</title>
+<text x="16" y="28" font-family="sans-serif" font-size="18" font-weight="700" fill="#334155">実収入ランキング（勤労者世帯・月額）</text>
+<text x="16" y="46" font-family="sans-serif" font-size="12" fill="#64748b">2024年・千円（上位5＝青／下位5＝橙）</text>
+<text x="16" y="79" font-family="sans-serif" font-size="13" fill="#334155">1位 東京都</text>
+<rect x="150" y="63" width="440" height="22" rx="2" fill="#2563eb"><title>東京：実収入ランキング（勤労者世帯・月額）=794.2</title></rect>
+<text x="598" y="79" font-family="sans-serif" font-size="12" fill="#64748b">794.2千円</text>
+<text x="16" y="117" font-family="sans-serif" font-size="13" fill="#334155">2位 埼玉県</text>
+<rect x="150" y="101" width="424" height="22" rx="2" fill="#2563eb"><title>埼玉：実収入ランキング（勤労者世帯・月額）=764.6</title></rect>
+<text x="582" y="117" font-family="sans-serif" font-size="12" fill="#64748b">764.6千円</text>
+<text x="16" y="155" font-family="sans-serif" font-size="13" fill="#334155">3位 千葉県</text>
+<rect x="150" y="139" width="416" height="22" rx="2" fill="#2563eb"><title>千葉：実収入ランキング（勤労者世帯・月額）=750</title></rect>
+<text x="574" y="155" font-family="sans-serif" font-size="12" fill="#64748b">750千円</text>
+<text x="16" y="193" font-family="sans-serif" font-size="13" fill="#334155">4位 奈良県</text>
+<rect x="150" y="177" width="409" height="22" rx="2" fill="#2563eb"><title>奈良：実収入ランキング（勤労者世帯・月額）=738.5</title></rect>
+<text x="567" y="193" font-family="sans-serif" font-size="12" fill="#64748b">738.5千円</text>
+<text x="16" y="231" font-family="sans-serif" font-size="13" fill="#334155">5位 栃木県</text>
+<rect x="150" y="215" width="393" height="22" rx="2" fill="#2563eb"><title>栃木：実収入ランキング（勤労者世帯・月額）=709.1</title></rect>
+<text x="551" y="231" font-family="sans-serif" font-size="12" fill="#64748b">709.1千円</text>
+<text x="16" y="287" font-family="sans-serif" font-size="13" fill="#334155">43位 兵庫県</text>
+<rect x="150" y="271" width="302" height="22" rx="2" fill="#ea580c"><title>兵庫：実収入ランキング（勤労者世帯・月額）=545.8</title></rect>
+<text x="460" y="287" font-family="sans-serif" font-size="12" fill="#64748b">545.8千円</text>
+<text x="16" y="325" font-family="sans-serif" font-size="13" fill="#334155">44位 秋田県</text>
+<rect x="150" y="309" width="284" height="22" rx="2" fill="#ea580c"><title>秋田：実収入ランキング（勤労者世帯・月額）=512.5</title></rect>
+<text x="442" y="325" font-family="sans-serif" font-size="12" fill="#64748b">512.5千円</text>
+<text x="16" y="363" font-family="sans-serif" font-size="13" fill="#334155">45位 宮崎県</text>
+<rect x="150" y="347" width="281" height="22" rx="2" fill="#ea580c"><title>宮崎：実収入ランキング（勤労者世帯・月額）=507.8</title></rect>
+<text x="439" y="363" font-family="sans-serif" font-size="12" fill="#64748b">507.8千円</text>
+<text x="16" y="401" font-family="sans-serif" font-size="13" fill="#334155">46位 愛媛県</text>
+<rect x="150" y="385" width="275" height="22" rx="2" fill="#ea580c"><title>愛媛：実収入ランキング（勤労者世帯・月額）=496.5</title></rect>
+<text x="433" y="401" font-family="sans-serif" font-size="12" fill="#64748b">496.5千円</text>
+<text x="16" y="439" font-family="sans-serif" font-size="13" fill="#334155">47位 沖縄県</text>
+<rect x="150" y="423" width="273" height="22" rx="2" fill="#ea580c"><title>沖縄：実収入ランキング（勤労者世帯・月額）=493.6</title></rect>
+<text x="431" y="439" font-family="sans-serif" font-size="12" fill="#64748b">493.6千円</text>
+<line x1="16" y1="255" x2="704" y2="255" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="4 4"/>
+</svg>

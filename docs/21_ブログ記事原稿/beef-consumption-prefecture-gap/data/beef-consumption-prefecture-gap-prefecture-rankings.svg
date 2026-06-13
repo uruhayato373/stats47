@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 390" width="680" height="390" style="background:#fff;font-family:system-ui,sans-serif;">
+  <title>牛肉消費量 上位5県・下位5県(2024年・世帯あたり年間g)</title>
+  <text x="340" y="24" text-anchor="middle" font-size="14" font-weight="bold" fill="#0f172a" font-family="system-ui,sans-serif">牛肉消費量 上位5県・下位5県（2024年）</text>
+  <text x="340" y="40" text-anchor="middle" font-size="11" fill="#64748b" font-family="system-ui,sans-serif">世帯あたり年間購入数量・単位g / 出典: 総務省 家計調査</text>
+  <rect x="120" y="50" width="420.0" height="24" fill="#1e6fb5" rx="2"/>
+  <text x="114" y="67" text-anchor="end" font-size="12" fill="#1e293b" font-family="system-ui,sans-serif">1位 兵庫</text>
+  <text x="546.0" y="67" text-anchor="start" font-size="11" fill="#334155" font-family="system-ui,sans-serif">7,899g</text>
+  <rect x="120" y="80" width="410.6" height="24" fill="#1e6fb5" rx="2"/>
+  <text x="114" y="97" text-anchor="end" font-size="12" fill="#1e293b" font-family="system-ui,sans-serif">2位 大阪</text>
+  <text x="536.6" y="97" text-anchor="start" font-size="11" fill="#334155" font-family="system-ui,sans-serif">7,722g</text>
+  <rect x="120" y="110" width="403.6" height="24" fill="#1e6fb5" rx="2"/>
+  <text x="114" y="127" text-anchor="end" font-size="12" fill="#1e293b" font-family="system-ui,sans-serif">3位 愛媛</text>
+  <text x="529.6" y="127" text-anchor="start" font-size="11" fill="#334155" font-family="system-ui,sans-serif">7,590g</text>
+  <rect x="120" y="140" width="401.8" height="24" fill="#1e6fb5" rx="2"/>
+  <text x="114" y="157" text-anchor="end" font-size="12" fill="#1e293b" font-family="system-ui,sans-serif">4位 福岡</text>
+  <text x="527.8" y="157" text-anchor="start" font-size="11" fill="#334155" font-family="system-ui,sans-serif">7,557g</text>
+  <rect x="120" y="170" width="397.1" height="24" fill="#1e6fb5" rx="2"/>
+  <text x="114" y="187" text-anchor="end" font-size="12" fill="#1e293b" font-family="system-ui,sans-serif">5位 佐賀</text>
+  <text x="523.1" y="187" text-anchor="start" font-size="11" fill="#334155" font-family="system-ui,sans-serif">7,468g</text>
+  <line x1="120" y1="204" x2="600" y2="204" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="120" y="198" font-size="11" fill="#94a3b8" font-family="system-ui,sans-serif">下位5県</text>
+  <rect x="120" y="220" width="175.3" height="24" fill="#ea7317" rx="2"/>
+  <text x="114" y="237" text-anchor="end" font-size="12" fill="#1e293b" font-family="system-ui,sans-serif">43位 群馬</text>
+  <text x="301.3" y="237" text-anchor="start" font-size="11" fill="#9a4a08" font-family="system-ui,sans-serif">3,297g</text>
+  <rect x="120" y="250" width="174.7" height="24" fill="#ea7317" rx="2"/>
+  <text x="114" y="267" text-anchor="end" font-size="12" fill="#1e293b" font-family="system-ui,sans-serif">44位 宮城</text>
+  <text x="300.7" y="267" text-anchor="start" font-size="11" fill="#9a4a08" font-family="system-ui,sans-serif">3,286g</text>
+  <rect x="120" y="280" width="174.2" height="24" fill="#ea7317" rx="2"/>
+  <text x="114" y="297" text-anchor="end" font-size="12" fill="#1e293b" font-family="system-ui,sans-serif">45位 秋田</text>
+  <text x="300.2" y="297" text-anchor="start" font-size="11" fill="#9a4a08" font-family="system-ui,sans-serif">3,276g</text>
+  <rect x="120" y="310" width="169.0" height="24" fill="#ea7317" rx="2"/>
+  <text x="114" y="327" text-anchor="end" font-size="12" fill="#1e293b" font-family="system-ui,sans-serif">46位 長野</text>
+  <text x="295.0" y="327" text-anchor="start" font-size="11" fill="#9a4a08" font-family="system-ui,sans-serif">3,178g</text>
+  <rect x="120" y="340" width="128.5" height="24" fill="#ea7317" rx="2"/>
+  <text x="114" y="357" text-anchor="end" font-size="12" fill="#1e293b" font-family="system-ui,sans-serif">47位 岩手</text>
+  <text x="254.5" y="357" text-anchor="start" font-size="11" fill="#9a4a08" font-family="system-ui,sans-serif">2,417g</text>
+</svg>

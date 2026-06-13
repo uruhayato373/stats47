@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 522" width="760" height="522" role="img" aria-label="発電電力量 上位5・下位5（2023年度）" font-family="system-ui, -apple-system, 'Hiragino Sans', sans-serif">
+<title>発電電力量 上位5・下位5（2023年度）</title>
+<text x="0" y="24" font-size="18" font-weight="700" fill="#2563eb">発電電力量 上位5・下位5（2023年度）</text>
+<text x="0" y="44" font-size="12" fill="#64748b">単位: MWh　上位5（青）と下位5（橙）</text>
+<text x="0" y="78" font-size="13" font-weight="600" fill="#0f172a">1位 千葉県</text>
+<rect x="162" y="56" width="448" height="34" rx="3" fill="#2563eb"/>
+<text x="618" y="78" font-size="13" font-weight="600" fill="#0f172a">80,635,294</text>
+<text x="0" y="120" font-size="13" font-weight="600" fill="#0f172a">2位 神奈川県</text>
+<rect x="162" y="98" width="407.45142810541495" height="34" rx="3" fill="#2563eb"/>
+<text x="577.451428105415" y="120" font-size="13" font-weight="600" fill="#0f172a">73,336,977</text>
+<text x="0" y="162" font-size="13" font-weight="600" fill="#0f172a">3位 愛知県</text>
+<rect x="162" y="140" width="339.2662711690491" height="34" rx="3" fill="#2563eb"/>
+<text x="509.2662711690491" y="162" font-size="13" font-weight="600" fill="#0f172a">61,064,365</text>
+<text x="0" y="204" font-size="13" font-weight="600" fill="#0f172a">4位 福島県</text>
+<rect x="162" y="182" width="299.4085562582559" height="34" rx="3" fill="#2563eb"/>
+<text x="469.4085562582559" y="204" font-size="13" font-weight="600" fill="#0f172a">53,890,395</text>
+<text x="0" y="246" font-size="13" font-weight="600" fill="#0f172a">5位 福井県</text>
+<rect x="162" y="224" width="282.7756300361477" height="34" rx="3" fill="#2563eb"/>
+<text x="452.7756300361477" y="246" font-size="13" font-weight="600" fill="#0f172a">50,896,643</text>
+<line x1="0" x2="760" y1="271" y2="271" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="4 4"/>
+<text x="0" y="306" font-size="13" font-weight="600" fill="#0f172a">43位 鳥取県</text>
+<rect x="162" y="284" width="10.332508541483088" height="34" rx="3" fill="#ea580c"/>
+<text x="180.3325085414831" y="306" font-size="13" font-weight="600" fill="#0f172a">1,859,743</text>
+<text x="0" y="348" font-size="13" font-weight="600" fill="#0f172a">44位 和歌山県</text>
+<rect x="162" y="326" width="10.009850822891524" height="34" rx="3" fill="#ea580c"/>
+<text x="180.00985082289154" y="348" font-size="13" font-weight="600" fill="#0f172a">1,801,668</text>
+<text x="0" y="390" font-size="13" font-weight="600" fill="#0f172a">45位 滋賀県</text>
+<rect x="162" y="368" width="6.970873473841368" height="34" rx="3" fill="#ea580c"/>
+<text x="176.97087347384138" y="390" font-size="13" font-weight="600" fill="#0f172a">1,254,684</text>
+<text x="0" y="432" font-size="13" font-weight="600" fill="#0f172a">46位 奈良県</text>
+<rect x="162" y="410" width="6.966123196624049" height="34" rx="3" fill="#ea580c"/>
+<text x="176.96612319662404" y="432" font-size="13" font-weight="600" fill="#0f172a">1,253,829</text>
+<text x="0" y="474" font-size="13" font-weight="600" fill="#0f172a">47位 埼玉県</text>
+<rect x="162" y="452" width="2.987279887638284" height="34" rx="3" fill="#ea580c"/>
+<text x="172.9872798876383" y="474" font-size="13" font-weight="600" fill="#0f172a">537,679</text>
+</svg>

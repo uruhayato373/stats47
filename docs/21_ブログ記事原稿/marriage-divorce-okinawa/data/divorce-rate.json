@@ -1,0 +1,19 @@
+{
+  "label": "離婚率",
+  "unit": "‐",
+  "year": "2022",
+  "note": "人口千人当たりの離婚件数。厚生労働省「人口動態統計」2022年。本ファイルは記事本文で言及した順位・値のみを収録した派生抽出 (全件はランキングページ参照)。順位を本文が明記していない県は rank=null。",
+  "data": [
+    { "areaName": "沖縄県", "rank": 1, "value": 2.1, "label": "離婚率", "unit": "‐" },
+    { "areaName": "宮崎県", "rank": 2, "value": 1.67, "label": "離婚率", "unit": "‐" },
+    { "areaName": "大阪府", "rank": null, "value": 1.61, "label": "離婚率", "unit": "‐" },
+    { "areaName": "福岡県", "rank": null, "value": 1.61, "label": "離婚率", "unit": "‐" },
+    { "areaName": "北海道", "rank": 5, "value": null, "label": "離婚率", "unit": "‐" },
+    { "areaName": "東京都", "rank": 29, "value": 1.37, "label": "離婚率", "unit": "‐" },
+    { "areaName": "滋賀県", "rank": 37, "value": null, "label": "離婚率", "unit": "‐" },
+    { "areaName": "新潟県", "rank": null, "value": 1.12, "label": "離婚率", "unit": "‐" },
+    { "areaName": "石川県", "rank": null, "value": 1.12, "label": "離婚率", "unit": "‐" },
+    { "areaName": "福井県", "rank": null, "value": 1.13, "label": "離婚率", "unit": "‐" },
+    { "areaName": "富山県", "rank": null, "value": 1.06, "label": "離婚率", "unit": "‐" }
+  ]
+}

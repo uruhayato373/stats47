@@ -1,0 +1,331 @@
+[
+  {
+    "areaName": "埼玉",
+    "rank": 1,
+    "value": 14840,
+    "label": "楽器消費支出額",
+    "unit": "円"
+  },
+  {
+    "areaName": "岩手",
+    "rank": 2,
+    "value": 7401,
+    "label": "楽器消費支出額",
+    "unit": "円"
+  },
+  {
+    "areaName": "奈良",
+    "rank": 3,
+    "value": 5895,
+    "label": "楽器消費支出額",
+    "unit": "円"
+  },
+  {
+    "areaName": "佐賀",
+    "rank": 4,
+    "value": 5223,
+    "label": "楽器消費支出額",
+    "unit": "円"
+  },
+  {
+    "areaName": "鹿児島",
+    "rank": 5,
+    "value": 4623,
+    "label": "楽器消費支出額",
+    "unit": "円"
+  },
+  {
+    "areaName": "岡山",
+    "rank": 6,
+    "value": 4186,
+    "label": "楽器消費支出額",
+    "unit": "円"
+  },
+  {
+    "areaName": "三重",
+    "rank": 7,
+    "value": 4006,
+    "label": "楽器消費支出額",
+    "unit": "円"
+  },
+  {
+    "areaName": "宮崎",
+    "rank": 8,
+    "value": 3293,
+    "label": "楽器消費支出額",
+    "unit": "円"
+  },
+  {
+    "areaName": "京都",
+    "rank": 9,
+    "value": 3207,
+    "label": "楽器消費支出額",
+    "unit": "円"
+  },
+  {
+    "areaName": "東京",
+    "rank": 10,
+    "value": 3169,
+    "label": "楽器消費支出額",
+    "unit": "円"
+  },
+  {
+    "areaName": "新潟",
+    "rank": 11,
+    "value": 2106,
+    "label": "楽器消費支出額",
+    "unit": "円"
+  },
+  {
+    "areaName": "広島",
+    "rank": 12,
+    "value": 1950,
+    "label": "楽器消費支出額",
+    "unit": "円"
+  },
+  {
+    "areaName": "沖縄",
+    "rank": 13,
+    "value": 1164,
+    "label": "楽器消費支出額",
+    "unit": "円"
+  },
+  {
+    "areaName": "福井",
+    "rank": 14,
+    "value": 1085,
+    "label": "楽器消費支出額",
+    "unit": "円"
+  },
+  {
+    "areaName": "福岡",
+    "rank": 15,
+    "value": 1059,
+    "label": "楽器消費支出額",
+    "unit": "円"
+  },
+  {
+    "areaName": "茨城",
+    "rank": 16,
+    "value": 942,
+    "label": "楽器消費支出額",
+    "unit": "円"
+  },
+  {
+    "areaName": "北海",
+    "rank": 17,
+    "value": 937,
+    "label": "楽器消費支出額",
+    "unit": "円"
+  },
+  {
+    "areaName": "神奈川",
+    "rank": 18,
+    "value": 930,
+    "label": "楽器消費支出額",
+    "unit": "円"
+  },
+  {
+    "areaName": "青森",
+    "rank": 19,
+    "value": 848,
+    "label": "楽器消費支出額",
+    "unit": "円"
+  },
+  {
+    "areaName": "熊本",
+    "rank": 20,
+    "value": 766,
+    "label": "楽器消費支出額",
+    "unit": "円"
+  },
+  {
+    "areaName": "宮城",
+    "rank": 21,
+    "value": 741,
+    "label": "楽器消費支出額",
+    "unit": "円"
+  },
+  {
+    "areaName": "大阪",
+    "rank": 22,
+    "value": 706,
+    "label": "楽器消費支出額",
+    "unit": "円"
+  },
+  {
+    "areaName": "兵庫",
+    "rank": 23,
+    "value": 599,
+    "label": "楽器消費支出額",
+    "unit": "円"
+  },
+  {
+    "areaName": "千葉",
+    "rank": 24,
+    "value": 537,
+    "label": "楽器消費支出額",
+    "unit": "円"
+  },
+  {
+    "areaName": "山形",
+    "rank": 25,
+    "value": 531,
+    "label": "楽器消費支出額",
+    "unit": "円"
+  },
+  {
+    "areaName": "香川",
+    "rank": 26,
+    "value": 528,
+    "label": "楽器消費支出額",
+    "unit": "円"
+  },
+  {
+    "areaName": "群馬",
+    "rank": 27,
+    "value": 506,
+    "label": "楽器消費支出額",
+    "unit": "円"
+  },
+  {
+    "areaName": "秋田",
+    "rank": 28,
+    "value": 475,
+    "label": "楽器消費支出額",
+    "unit": "円"
+  },
+  {
+    "areaName": "富山",
+    "rank": 29,
+    "value": 445,
+    "label": "楽器消費支出額",
+    "unit": "円"
+  },
+  {
+    "areaName": "山梨",
+    "rank": 30,
+    "value": 433,
+    "label": "楽器消費支出額",
+    "unit": "円"
+  },
+  {
+    "areaName": "愛知",
+    "rank": 31,
+    "value": 404,
+    "label": "楽器消費支出額",
+    "unit": "円"
+  },
+  {
+    "areaName": "岐阜",
+    "rank": 32,
+    "value": 403,
+    "label": "楽器消費支出額",
+    "unit": "円"
+  },
+  {
+    "areaName": "大分",
+    "rank": 33,
+    "value": 399,
+    "label": "楽器消費支出額",
+    "unit": "円"
+  },
+  {
+    "areaName": "高知",
+    "rank": 34,
+    "value": 387,
+    "label": "楽器消費支出額",
+    "unit": "円"
+  },
+  {
+    "areaName": "徳島",
+    "rank": 35,
+    "value": 374,
+    "label": "楽器消費支出額",
+    "unit": "円"
+  },
+  {
+    "areaName": "愛媛",
+    "rank": 36,
+    "value": 373,
+    "label": "楽器消費支出額",
+    "unit": "円"
+  },
+  {
+    "areaName": "栃木",
+    "rank": 37,
+    "value": 362,
+    "label": "楽器消費支出額",
+    "unit": "円"
+  },
+  {
+    "areaName": "石川",
+    "rank": 38,
+    "value": 313,
+    "label": "楽器消費支出額",
+    "unit": "円"
+  },
+  {
+    "areaName": "福島",
+    "rank": 39,
+    "value": 233,
+    "label": "楽器消費支出額",
+    "unit": "円"
+  },
+  {
+    "areaName": "静岡",
+    "rank": 40,
+    "value": 214,
+    "label": "楽器消費支出額",
+    "unit": "円"
+  },
+  {
+    "areaName": "長野",
+    "rank": 41,
+    "value": 208,
+    "label": "楽器消費支出額",
+    "unit": "円"
+  },
+  {
+    "areaName": "滋賀",
+    "rank": 42,
+    "value": 187,
+    "label": "楽器消費支出額",
+    "unit": "円"
+  },
+  {
+    "areaName": "島根",
+    "rank": 43,
+    "value": 155,
+    "label": "楽器消費支出額",
+    "unit": "円"
+  },
+  {
+    "areaName": "鳥取",
+    "rank": 44,
+    "value": 97,
+    "label": "楽器消費支出額",
+    "unit": "円"
+  },
+  {
+    "areaName": "長崎",
+    "rank": 45,
+    "value": 88,
+    "label": "楽器消費支出額",
+    "unit": "円"
+  },
+  {
+    "areaName": "山口",
+    "rank": 46,
+    "value": 37,
+    "label": "楽器消費支出額",
+    "unit": "円"
+  },
+  {
+    "areaName": "和歌山",
+    "rank": 47,
+    "value": 23,
+    "label": "楽器消費支出額",
+    "unit": "円"
+  }
+]

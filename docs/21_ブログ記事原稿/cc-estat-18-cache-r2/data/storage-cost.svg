@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 210" width="720" height="210" role="img" aria-label="ストレージ別 月額試算（10万PV / 100KB JSON, 米ドル）">
+  <!-- data-source: storage-cost.json | generated: 2026-06-13T04:41:58.469Z -->
+  <style>
+    .lbl{font-family:system-ui,-apple-system,'Segoe UI',sans-serif;}
+    .val{font-family:system-ui,-apple-system,'Segoe UI',sans-serif;}
+    text{fill:#334155;}
+    @media (prefers-color-scheme: dark){ text{fill:#cbd5e1;} .lbl{fill:#cbd5e1;} .val{fill:#94a3b8;} }
+  </style>
+  <text x="16" y="28" font-size="17" font-weight="700" class="lbl">ストレージ別 月額試算（10万PV / 100KB JSON, 米ドル）</text>
+  
+  <g>
+    <title>AWS S3：ストレージ別 月額試算（10万PV / 100KB JSON, 米ドル）=1.13</title>
+    <text x="120" y="73" text-anchor="end" dominant-baseline="central" font-size="15" fill="#334155" class="lbl">AWS S3</text>
+    <rect x="130" y="56" width="470.0" height="34" rx="3" fill="#ea580c" opacity="0.92"/>
+    <text x="608" y="73" dominant-baseline="central" font-size="14" fill="#475569" class="val">$1.13</text>
+  </g>
+  <g>
+    <title>GCS：ストレージ別 月額試算（10万PV / 100KB JSON, 米ドル）=1</title>
+    <text x="120" y="115" text-anchor="end" dominant-baseline="central" font-size="15" fill="#334155" class="lbl">GCS</text>
+    <rect x="130" y="98" width="415.9" height="34" rx="3" fill="#ea580c" opacity="0.92"/>
+    <text x="553.929203539823" y="115" dominant-baseline="central" font-size="14" fill="#475569" class="val">$1.00</text>
+  </g>
+  <g>
+    <title>Cloudflare R2：ストレージ別 月額試算（10万PV / 100KB JSON, 米ドル）=0</title>
+    <text x="120" y="157" text-anchor="end" dominant-baseline="central" font-size="15" fill="#334155" class="lbl">Cloudflare R2</text>
+    <rect x="130" y="140" width="2.0" height="34" rx="3" fill="#2563eb" opacity="0.92"/>
+    <text x="140" y="157" dominant-baseline="central" font-size="14" fill="#475569" class="val">$0.00</text>
+  </g>
+  
+</svg>

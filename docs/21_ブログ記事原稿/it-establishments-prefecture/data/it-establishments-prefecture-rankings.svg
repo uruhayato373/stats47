@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 482" role="img" aria-label="情報通信業の事業所数 上位5県と下位5県 (2014年)" font-family="system-ui, sans-serif" style="max-width:100%;height:auto" color="#1e293b">
+<text x="150" y="28" font-size="17" font-weight="700" fill="currentColor">情報通信業の事業所数 上位5県・下位5県（2014年・単位:所）</text>
+<line x1="150" y1="246" x2="670" y2="246" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="4 4"/>
+<text x="670" y="240" text-anchor="end" font-size="11" fill="#94a3b8">▲ 上位 ／ ▼ 下位</text>
+<g>
+<title>東京都 1位 22,591所</title>
+<text x="140" y="76" text-anchor="end" dominant-baseline="middle" font-size="14" fill="#64748b">1位</text>
+<text x="104" y="76" text-anchor="end" dominant-baseline="middle" font-size="14" font-weight="600" fill="currentColor">東京都</text>
+<rect x="150" y="61" width="520.0" height="28" rx="2" fill="#2563eb"/>
+<text x="662" y="76" text-anchor="end" dominant-baseline="middle" font-size="13" font-weight="700" fill="#ffffff">22,591</text>
+</g>
+<g>
+<title>大阪府 2位 6,152所</title>
+<text x="140" y="114" text-anchor="end" dominant-baseline="middle" font-size="14" fill="#64748b">2位</text>
+<text x="104" y="114" text-anchor="end" dominant-baseline="middle" font-size="14" font-weight="600" fill="currentColor">大阪府</text>
+<rect x="150" y="99" width="141.6" height="28" rx="2" fill="#2563eb"/>
+<text x="283.6068345801425" y="114" text-anchor="end" dominant-baseline="middle" font-size="13" font-weight="700" fill="#ffffff">6,152</text>
+</g>
+<g>
+<title>神奈川県 3位 4,032所</title>
+<text x="140" y="152" text-anchor="end" dominant-baseline="middle" font-size="14" fill="#64748b">3位</text>
+<text x="104" y="152" text-anchor="end" dominant-baseline="middle" font-size="14" font-weight="600" fill="currentColor">神奈川県</text>
+<rect x="150" y="137" width="92.8" height="28" rx="2" fill="#2563eb"/>
+<text x="234.80864060909212" y="152" text-anchor="end" dominant-baseline="middle" font-size="13" font-weight="700" fill="#ffffff">4,032</text>
+</g>
+<g>
+<title>愛知県 4位 3,518所</title>
+<text x="140" y="190" text-anchor="end" dominant-baseline="middle" font-size="14" fill="#64748b">4位</text>
+<text x="104" y="190" text-anchor="end" dominant-baseline="middle" font-size="14" font-weight="600" fill="currentColor">愛知県</text>
+<rect x="150" y="175" width="81.0" height="28" rx="2" fill="#2563eb"/>
+<text x="222.9773803727148" y="190" text-anchor="end" dominant-baseline="middle" font-size="13" font-weight="700" fill="#ffffff">3,518</text>
+</g>
+<g>
+<title>福岡県 5位 2,693所</title>
+<text x="140" y="228" text-anchor="end" dominant-baseline="middle" font-size="14" fill="#64748b">5位</text>
+<text x="104" y="228" text-anchor="end" dominant-baseline="middle" font-size="14" font-weight="600" fill="currentColor">福岡県</text>
+<rect x="150" y="213" width="62.0" height="28" rx="2" fill="#2563eb"/>
+<text x="217.98751715284848" y="228" text-anchor="start" dominant-baseline="middle" font-size="13" font-weight="700" fill="currentColor">2,693</text>
+</g>
+<g>
+<title>和歌山県 43位 259所</title>
+<text x="140" y="266" text-anchor="end" dominant-baseline="middle" font-size="14" fill="#64748b">43位</text>
+<text x="104" y="266" text-anchor="end" dominant-baseline="middle" font-size="14" font-weight="600" fill="currentColor">和歌山県</text>
+<rect x="150" y="251" width="6.0" height="28" rx="2" fill="#ea7317"/>
+<text x="161.96166615023682" y="266" text-anchor="start" dominant-baseline="middle" font-size="13" font-weight="700" fill="currentColor">259</text>
+</g>
+<g>
+<title>徳島県 44位 247所</title>
+<text x="140" y="304" text-anchor="end" dominant-baseline="middle" font-size="14" fill="#64748b">44位</text>
+<text x="104" y="304" text-anchor="end" dominant-baseline="middle" font-size="14" font-weight="600" fill="currentColor">徳島県</text>
+<rect x="150" y="289" width="5.7" height="28" rx="2" fill="#ea7317"/>
+<text x="161.68544995794787" y="304" text-anchor="start" dominant-baseline="middle" font-size="13" font-weight="700" fill="currentColor">247</text>
+</g>
+<g>
+<title>高知県 45位 243所</title>
+<text x="140" y="342" text-anchor="end" dominant-baseline="middle" font-size="14" fill="#64748b">45位</text>
+<text x="104" y="342" text-anchor="end" dominant-baseline="middle" font-size="14" font-weight="600" fill="currentColor">高知県</text>
+<rect x="150" y="327" width="5.6" height="28" rx="2" fill="#ea7317"/>
+<text x="161.59337789385154" y="342" text-anchor="start" dominant-baseline="middle" font-size="13" font-weight="700" fill="currentColor">243</text>
+</g>
+<g>
+<title>鳥取県 46位 221所</title>
+<text x="140" y="380" text-anchor="end" dominant-baseline="middle" font-size="14" fill="#64748b">46位</text>
+<text x="104" y="380" text-anchor="end" dominant-baseline="middle" font-size="14" font-weight="600" fill="currentColor">鳥取県</text>
+<rect x="150" y="365" width="5.1" height="28" rx="2" fill="#ea7317"/>
+<text x="161.08698154132176" y="380" text-anchor="start" dominant-baseline="middle" font-size="13" font-weight="700" fill="currentColor">221</text>
+</g>
+<g>
+<title>佐賀県 47位 218所</title>
+<text x="140" y="418" text-anchor="end" dominant-baseline="middle" font-size="14" fill="#64748b">47位</text>
+<text x="104" y="418" text-anchor="end" dominant-baseline="middle" font-size="14" font-weight="600" fill="currentColor">佐賀県</text>
+<rect x="150" y="403" width="5.0" height="28" rx="2" fill="#ea7317"/>
+<text x="161.01792749324952" y="418" text-anchor="start" dominant-baseline="middle" font-size="13" font-weight="700" fill="currentColor">218</text>
+</g>
+<text x="150" y="468" font-size="11" fill="#94a3b8">出典: 総務省・経済産業省「経済センサス」(2014年) ／ stats47.jp</text>
+</svg>

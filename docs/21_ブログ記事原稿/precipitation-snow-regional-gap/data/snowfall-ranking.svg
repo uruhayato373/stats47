@@ -1,0 +1,39 @@
+<svg viewBox="0 0 760 490" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="年間降雪量 上位5・下位5（都道府県庁所在地）">
+  <text x="380" y="28" text-anchor="middle" font-size="15" font-weight="bold" fill="#64748b">年間降雪量 上位5・下位5（都道府県庁所在地）</text>
+  <text x="380" y="46" text-anchor="middle" font-size="11.5" fill="#94a3b8">日本海側が突出 ／ 太平洋側・西日本はほぼ0〜1cm</text>
+  <rect x="112" y="56" width="11" height="11" rx="1.5" fill="#2563eb"/>
+  <text x="128" y="66" font-size="11" fill="#94a3b8">上位5</text>
+  <rect x="176" y="56" width="11" height="11" rx="1.5" fill="#ea580c"/>
+  <text x="192" y="66" font-size="11" fill="#94a3b8">下位5</text>
+  <text x="96" y="93" text-anchor="end" font-size="13" fill="#64748b">青森 (1位)</text>
+  <rect x="112" y="77" width="538" height="22" rx="2" fill="#2563eb"/>
+  <text x="658" y="93" font-size="12.5" font-weight="bold" fill="#64748b">567cm</text>
+  <text x="96" y="131" text-anchor="end" font-size="13" fill="#64748b">北海道 (2位)</text>
+  <rect x="112" y="115" width="454.5008818342152" height="22" rx="2" fill="#2563eb"/>
+  <text x="574.5008818342152" y="131" font-size="12.5" font-weight="bold" fill="#64748b">479cm</text>
+  <text x="96" y="169" text-anchor="end" font-size="13" fill="#64748b">山形 (3位)</text>
+  <rect x="112" y="153" width="270.42328042328046" height="22" rx="2" fill="#2563eb"/>
+  <text x="390.42328042328046" y="169" font-size="12.5" font-weight="bold" fill="#64748b">285cm</text>
+  <text x="96" y="207" text-anchor="end" font-size="13" fill="#64748b">富山 (4位)</text>
+  <rect x="112" y="191" width="240.0599647266314" height="22" rx="2" fill="#2563eb"/>
+  <text x="360.0599647266314" y="207" font-size="12.5" font-weight="bold" fill="#64748b">253cm</text>
+  <text x="96" y="245" text-anchor="end" font-size="13" fill="#64748b">福井 (5位)</text>
+  <rect x="112" y="229" width="176.48677248677248" height="22" rx="2" fill="#2563eb"/>
+  <text x="296.48677248677245" y="245" font-size="12.5" font-weight="bold" fill="#64748b">186cm</text>
+  <text x="96" y="283" text-anchor="end" font-size="13" fill="#64748b">大阪</text>
+  <rect x="112" y="267" width="2" height="22" rx="2" fill="#ea580c"/>
+  <text x="122" y="283" font-size="12.5" font-weight="bold" fill="#64748b">1cm</text>
+  <text x="96" y="321" text-anchor="end" font-size="13" fill="#64748b">兵庫</text>
+  <rect x="112" y="305" width="2" height="22" rx="2" fill="#ea580c"/>
+  <text x="122" y="321" font-size="12.5" font-weight="bold" fill="#64748b">1cm</text>
+  <text x="96" y="359" text-anchor="end" font-size="13" fill="#64748b">岡山</text>
+  <rect x="112" y="343" width="2" height="22" rx="2" fill="#ea580c"/>
+  <text x="122" y="359" font-size="12.5" font-weight="bold" fill="#64748b">1cm</text>
+  <text x="96" y="397" text-anchor="end" font-size="13" fill="#64748b">宮崎</text>
+  <rect x="112" y="381" width="2" height="22" rx="2" fill="#ea580c"/>
+  <text x="122" y="397" font-size="12.5" font-weight="bold" fill="#64748b">0cm</text>
+  <text x="96" y="435" text-anchor="end" font-size="13" fill="#64748b">沖縄</text>
+  <rect x="112" y="419" width="2" height="22" rx="2" fill="#ea580c"/>
+  <text x="122" y="435" font-size="12.5" font-weight="bold" fill="#64748b">0cm</text>
+  <text x="380" y="478" text-anchor="middle" font-size="10" fill="#94a3b8">出典: e-Stat 社会・人口統計体系 2024年</text>
+</svg>

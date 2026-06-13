@@ -1,0 +1,310 @@
+[
+  {
+    "areaName": "北海道",
+    "rank": 1,
+    "value": 114359,
+    "label": "海面養殖業収獲量",
+    "unit": "トン"
+  },
+  {
+    "areaName": "広島県",
+    "rank": 2,
+    "value": 92134,
+    "label": "海面養殖業収獲量",
+    "unit": "トン"
+  },
+  {
+    "areaName": "宮城県",
+    "rank": 3,
+    "value": 88994,
+    "label": "海面養殖業収獲量",
+    "unit": "トン"
+  },
+  {
+    "areaName": "愛媛県",
+    "rank": 4,
+    "value": 62475,
+    "label": "海面養殖業収獲量",
+    "unit": "トン"
+  },
+  {
+    "areaName": "兵庫県",
+    "rank": 5,
+    "value": 61887,
+    "label": "海面養殖業収獲量",
+    "unit": "トン"
+  },
+  {
+    "areaName": "青森県",
+    "rank": 6,
+    "value": 58024,
+    "label": "海面養殖業収獲量",
+    "unit": "トン"
+  },
+  {
+    "areaName": "熊本県",
+    "rank": 7,
+    "value": 47864,
+    "label": "海面養殖業収獲量",
+    "unit": "トン"
+  },
+  {
+    "areaName": "鹿児島県",
+    "rank": 8,
+    "value": 45127,
+    "label": "海面養殖業収獲量",
+    "unit": "トン"
+  },
+  {
+    "areaName": "佐賀県",
+    "rank": 9,
+    "value": 38442,
+    "label": "海面養殖業収獲量",
+    "unit": "トン"
+  },
+  {
+    "areaName": "岩手県",
+    "rank": 10,
+    "value": 28844,
+    "label": "海面養殖業収獲量",
+    "unit": "トン"
+  },
+  {
+    "areaName": "福岡県",
+    "rank": 11,
+    "value": 28613,
+    "label": "海面養殖業収獲量",
+    "unit": "トン"
+  },
+  {
+    "areaName": "長崎県",
+    "rank": 12,
+    "value": 22532,
+    "label": "海面養殖業収獲量",
+    "unit": "トン"
+  },
+  {
+    "areaName": "高知県",
+    "rank": 13,
+    "value": 21826,
+    "label": "海面養殖業収獲量",
+    "unit": "トン"
+  },
+  {
+    "areaName": "沖縄県",
+    "rank": 14,
+    "value": 21728,
+    "label": "海面養殖業収獲量",
+    "unit": "トン"
+  },
+  {
+    "areaName": "三重県",
+    "rank": 15,
+    "value": 19105,
+    "label": "海面養殖業収獲量",
+    "unit": "トン"
+  },
+  {
+    "areaName": "岡山県",
+    "rank": 16,
+    "value": 16677,
+    "label": "海面養殖業収獲量",
+    "unit": "トン"
+  },
+  {
+    "areaName": "大分県",
+    "rank": 17,
+    "value": 16388,
+    "label": "海面養殖業収獲量",
+    "unit": "トン"
+  },
+  {
+    "areaName": "香川県",
+    "rank": 18,
+    "value": 16213,
+    "label": "海面養殖業収獲量",
+    "unit": "トン"
+  },
+  {
+    "areaName": "宮崎県",
+    "rank": 19,
+    "value": 15005,
+    "label": "海面養殖業収獲量",
+    "unit": "トン"
+  },
+  {
+    "areaName": "愛知県",
+    "rank": 20,
+    "value": 9391,
+    "label": "海面養殖業収獲量",
+    "unit": "トン"
+  },
+  {
+    "areaName": "徳島県",
+    "rank": 21,
+    "value": 8544,
+    "label": "海面養殖業収獲量",
+    "unit": "トン"
+  },
+  {
+    "areaName": "千葉県",
+    "rank": 22,
+    "value": 3440,
+    "label": "海面養殖業収獲量",
+    "unit": "トン"
+  },
+  {
+    "areaName": "和歌山県",
+    "rank": 23,
+    "value": 3046,
+    "label": "海面養殖業収獲量",
+    "unit": "トン"
+  },
+  {
+    "areaName": "静岡県",
+    "rank": 24,
+    "value": 2643,
+    "label": "海面養殖業収獲量",
+    "unit": "トン"
+  },
+  {
+    "areaName": "鳥取県",
+    "rank": 25,
+    "value": 1801,
+    "label": "海面養殖業収獲量",
+    "unit": "トン"
+  },
+  {
+    "areaName": "新潟県",
+    "rank": 26,
+    "value": 1270,
+    "label": "海面養殖業収獲量",
+    "unit": "トン"
+  },
+  {
+    "areaName": "石川県",
+    "rank": 27,
+    "value": 1238,
+    "label": "海面養殖業収獲量",
+    "unit": "トン"
+  },
+  {
+    "areaName": "山口県",
+    "rank": 28,
+    "value": 729,
+    "label": "海面養殖業収獲量",
+    "unit": "トン"
+  },
+  {
+    "areaName": "京都府",
+    "rank": 29,
+    "value": 718,
+    "label": "海面養殖業収獲量",
+    "unit": "トン"
+  },
+  {
+    "areaName": "神奈川県",
+    "rank": 30,
+    "value": 691,
+    "label": "海面養殖業収獲量",
+    "unit": "トン"
+  },
+  {
+    "areaName": "島根県",
+    "rank": 31,
+    "value": 543,
+    "label": "海面養殖業収獲量",
+    "unit": "トン"
+  },
+  {
+    "areaName": "大阪府",
+    "rank": 32,
+    "value": 411,
+    "label": "海面養殖業収獲量",
+    "unit": "トン"
+  },
+  {
+    "areaName": "福井県",
+    "rank": 33,
+    "value": 350,
+    "label": "海面養殖業収獲量",
+    "unit": "トン"
+  },
+  {
+    "areaName": "福島県",
+    "rank": 34,
+    "value": 285,
+    "label": "海面養殖業収獲量",
+    "unit": "トン"
+  },
+  {
+    "areaName": "秋田県",
+    "rank": 35,
+    "value": 148,
+    "label": "海面養殖業収獲量",
+    "unit": "トン"
+  },
+  {
+    "areaName": "富山県",
+    "rank": 36,
+    "value": 21,
+    "label": "海面養殖業収獲量",
+    "unit": "トン"
+  },
+  {
+    "areaName": "栃木県",
+    "rank": 37,
+    "value": 0,
+    "label": "海面養殖業収獲量",
+    "unit": "トン"
+  },
+  {
+    "areaName": "群馬県",
+    "rank": 37,
+    "value": 0,
+    "label": "海面養殖業収獲量",
+    "unit": "トン"
+  },
+  {
+    "areaName": "埼玉県",
+    "rank": 37,
+    "value": 0,
+    "label": "海面養殖業収獲量",
+    "unit": "トン"
+  },
+  {
+    "areaName": "山梨県",
+    "rank": 37,
+    "value": 0,
+    "label": "海面養殖業収獲量",
+    "unit": "トン"
+  },
+  {
+    "areaName": "長野県",
+    "rank": 37,
+    "value": 0,
+    "label": "海面養殖業収獲量",
+    "unit": "トン"
+  },
+  {
+    "areaName": "岐阜県",
+    "rank": 37,
+    "value": 0,
+    "label": "海面養殖業収獲量",
+    "unit": "トン"
+  },
+  {
+    "areaName": "滋賀県",
+    "rank": 37,
+    "value": 0,
+    "label": "海面養殖業収獲量",
+    "unit": "トン"
+  },
+  {
+    "areaName": "奈良県",
+    "rank": 37,
+    "value": 0,
+    "label": "海面養殖業収獲量",
+    "unit": "トン"
+  }
+]

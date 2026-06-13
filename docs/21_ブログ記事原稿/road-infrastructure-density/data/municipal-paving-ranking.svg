@@ -1,0 +1,31 @@
+<!-- data-source: municipal-paving-ranking.json | generated: 2026-06-13T04:37:44.929Z -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 464" width="760" height="464" role="img" aria-label="市町村道舗装率 上位5・下位5（2023年度・％）" font-family="system-ui,-apple-system,'Hiragino Sans','Yu Gothic',sans-serif">
+<style>
+    .svg-bg{fill:#ffffff;}
+    .svg-title{fill:#0f172a;font-size:16px;font-weight:700;}
+    .svg-label{fill:#334155;font-size:13px;}
+    .svg-value{fill:#0f172a;font-size:13px;font-weight:600;}
+    .bar-top{fill:#2563eb;}
+    .bar-bottom{fill:#ea7317;}
+    @media (prefers-color-scheme:dark){
+      .svg-bg{fill:#0b1220;}
+      .svg-title{fill:#f1f5f9;}
+      .svg-label{fill:#cbd5e1;}
+      .svg-value{fill:#f1f5f9;}
+      .bar-top{fill:#60a5fa;}
+      .bar-bottom{fill:#fb923c;}
+    }
+  </style>
+<rect class="svg-bg" x="0" y="0" width="760" height="464"/>
+<text class="svg-title" x="16" y="30">市町村道舗装率 上位5・下位5（2023年度・％）</text>
+<g><title>佐賀県：市町村道舗装率=96.6％（1位）</title><text class="svg-label" x="16" y="79">佐賀県</text><rect class="bar-top" x="92" y="63" width="580.0" height="24" rx="2"/><text class="svg-value" x="680" y="79">96.6</text></g>
+<g><title>大阪府：市町村道舗装率=96％（2位）</title><text class="svg-label" x="16" y="117">大阪府</text><rect class="bar-top" x="92" y="101" width="576.4" height="24" rx="2"/><text class="svg-value" x="676.3975155279504" y="117">96</text></g>
+<g><title>香川県：市町村道舗装率=95.3％（3位）</title><text class="svg-label" x="16" y="155">香川県</text><rect class="bar-top" x="92" y="139" width="572.2" height="24" rx="2"/><text class="svg-value" x="672.1946169772257" y="155">95.3</text></g>
+<g><title>滋賀県：市町村道舗装率=93.4％（4位）</title><text class="svg-label" x="16" y="193">滋賀県</text><rect class="bar-top" x="92" y="177" width="560.8" height="24" rx="2"/><text class="svg-value" x="660.7867494824018" y="193">93.4</text></g>
+<g><title>山口県：市町村道舗装率=92.7％（5位）</title><text class="svg-label" x="16" y="231">山口県</text><rect class="bar-top" x="92" y="215" width="556.6" height="24" rx="2"/><text class="svg-value" x="656.583850931677" y="231">92.7</text></g>
+<g><title>青森県：市町村道舗装率=66.6％（43位）</title><text class="svg-label" x="16" y="269">青森県</text><rect class="bar-bottom" x="92" y="253" width="399.9" height="24" rx="2"/><text class="svg-value" x="499.8757763975155" y="269">66.6</text></g>
+<g><title>茨城県：市町村道舗装率=65.8％（44位）</title><text class="svg-label" x="16" y="307">茨城県</text><rect class="bar-bottom" x="92" y="291" width="395.1" height="24" rx="2"/><text class="svg-value" x="495.07246376811594" y="307">65.8</text></g>
+<g><title>秋田県：市町村道舗装率=65.6％（45位）</title><text class="svg-label" x="16" y="345">秋田県</text><rect class="bar-bottom" x="92" y="329" width="393.9" height="24" rx="2"/><text class="svg-value" x="493.871635610766" y="345">65.6</text></g>
+<g><title>北海道：市町村道舗装率=60.5％（46位）</title><text class="svg-label" x="16" y="383">北海道</text><rect class="bar-bottom" x="92" y="367" width="363.3" height="24" rx="2"/><text class="svg-value" x="463.2505175983437" y="383">60.5</text></g>
+<g><title>岩手県：市町村道舗装率=59.8％（47位）</title><text class="svg-label" x="16" y="421">岩手県</text><rect class="bar-bottom" x="92" y="405" width="359.0" height="24" rx="2"/><text class="svg-value" x="459.04761904761904" y="421">59.8</text></g>
+</svg>

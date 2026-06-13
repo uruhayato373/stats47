@@ -1,0 +1,58 @@
+<!-- data-source: waste-recycling-rate.json | generated: 2026-06-13T10:44:17.532Z -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 504" width="760" height="504" role="img" aria-label="ごみリサイクル率 上位5・下位5">
+<style>.svg-bg{fill:#fafafa}.svg-title{fill:#0f172a}.svg-sub{fill:#64748b}.svg-rank{fill:#334155}.svg-val{fill:#0f172a}.svg-sep{fill:#64748b}@media (prefers-color-scheme:dark){.svg-bg{fill:#1f2937}.svg-title{fill:#f9fafb}.svg-sub{fill:#9ca3af}.svg-rank{fill:#e5e7eb}.svg-val{fill:#f9fafb}.svg-sep{fill:#9ca3af}}</style>
+<rect width="760" height="504" class="svg-bg" rx="8"/>
+<text x="150" y="30" font-size="19" font-weight="700" class="svg-title" font-family="sans-serif">ごみリサイクル率</text>
+<text x="150" y="48" font-size="12" class="svg-sub" font-family="sans-serif">上位5（青）／下位5（橙）・単位 %</text>
+<g><title>岡山県：ごみリサイクル率=29.0%（1位）</title>
+<text x="140" y="75" font-size="13" class="svg-rank" text-anchor="end" font-family="sans-serif">1位 岡山県</text>
+<rect x="150" y="56" width="500.0" height="28" rx="2" fill="#2563eb"/>
+<text x="658.0" y="75" font-size="13" font-weight="600" class="svg-val" font-family="sans-serif">29.0%</text>
+</g>
+<g><title>鳥取県：ごみリサイクル率=28.2%（2位）</title>
+<text x="140" y="113" font-size="13" class="svg-rank" text-anchor="end" font-family="sans-serif">2位 鳥取県</text>
+<rect x="150" y="94" width="486.2" height="28" rx="2" fill="#2563eb"/>
+<text x="644.2" y="113" font-size="13" font-weight="600" class="svg-val" font-family="sans-serif">28.2%</text>
+</g>
+<g><title>東京都：ごみリサイクル率=24.9%（3位）</title>
+<text x="140" y="151" font-size="13" class="svg-rank" text-anchor="end" font-family="sans-serif">3位 東京都</text>
+<rect x="150" y="132" width="429.3" height="28" rx="2" fill="#2563eb"/>
+<text x="587.3" y="151" font-size="13" font-weight="600" class="svg-val" font-family="sans-serif">24.9%</text>
+</g>
+<g><title>埼玉県：ごみリサイクル率=24.3%（4位）</title>
+<text x="140" y="189" font-size="13" class="svg-rank" text-anchor="end" font-family="sans-serif">4位 埼玉県</text>
+<rect x="150" y="170" width="419.0" height="28" rx="2" fill="#2563eb"/>
+<text x="577.0" y="189" font-size="13" font-weight="600" class="svg-val" font-family="sans-serif">24.3%</text>
+</g>
+<g><title>神奈川県：ごみリサイクル率=24.2%（5位）</title>
+<text x="140" y="227" font-size="13" class="svg-rank" text-anchor="end" font-family="sans-serif">5位 神奈川県</text>
+<rect x="150" y="208" width="417.2" height="28" rx="2" fill="#2563eb"/>
+<text x="575.2" y="227" font-size="13" font-weight="600" class="svg-val" font-family="sans-serif">24.2%</text>
+</g>
+<text x="142" y="269" font-size="13" class="svg-sep" text-anchor="end" font-family="sans-serif">…</text>
+<g><title>石川県：ごみリサイクル率=12.9%（43位）</title>
+<text x="140" y="287.8" font-size="13" class="svg-rank" text-anchor="end" font-family="sans-serif">43位 石川県</text>
+<rect x="150" y="268.8" width="222.4" height="28" rx="2" fill="#ea580c"/>
+<text x="380.4" y="287.8" font-size="13" font-weight="600" class="svg-val" font-family="sans-serif">12.9%</text>
+</g>
+<g><title>福井県：ごみリサイクル率=12.7%（44位）</title>
+<text x="140" y="325.8" font-size="13" class="svg-rank" text-anchor="end" font-family="sans-serif">44位 福井県</text>
+<rect x="150" y="306.8" width="219.0" height="28" rx="2" fill="#ea580c"/>
+<text x="377.0" y="325.8" font-size="13" font-weight="600" class="svg-val" font-family="sans-serif">12.7%</text>
+</g>
+<g><title>青森県：ごみリサイクル率=12.6%（45位）</title>
+<text x="140" y="363.8" font-size="13" class="svg-rank" text-anchor="end" font-family="sans-serif">45位 青森県</text>
+<rect x="150" y="344.8" width="217.2" height="28" rx="2" fill="#ea580c"/>
+<text x="375.2" y="363.8" font-size="13" font-weight="600" class="svg-val" font-family="sans-serif">12.6%</text>
+</g>
+<g><title>大阪府：ごみリサイクル率=12.6%（45位）</title>
+<text x="140" y="401.8" font-size="13" class="svg-rank" text-anchor="end" font-family="sans-serif">45位 大阪府</text>
+<rect x="150" y="382.8" width="217.2" height="28" rx="2" fill="#ea580c"/>
+<text x="375.2" y="401.8" font-size="13" font-weight="600" class="svg-val" font-family="sans-serif">12.6%</text>
+</g>
+<g><title>和歌山県：ごみリサイクル率=11.9%（47位）</title>
+<text x="140" y="439.8" font-size="13" class="svg-rank" text-anchor="end" font-family="sans-serif">47位 和歌山県</text>
+<rect x="150" y="420.8" width="205.2" height="28" rx="2" fill="#ea580c"/>
+<text x="363.2" y="439.8" font-size="13" font-weight="600" class="svg-val" font-family="sans-serif">11.9%</text>
+</g>
+</svg>

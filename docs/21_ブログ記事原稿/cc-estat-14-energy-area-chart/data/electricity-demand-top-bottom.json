@@ -1,0 +1,72 @@
+[
+  {
+    "areaName": "東京",
+    "rank": 1,
+    "value": 75521853,
+    "label": "電力需要量",
+    "unit": "MWh"
+  },
+  {
+    "areaName": "愛知",
+    "rank": 2,
+    "value": 56119552,
+    "label": "電力需要量",
+    "unit": "MWh"
+  },
+  {
+    "areaName": "大阪",
+    "rank": 3,
+    "value": 53301121,
+    "label": "電力需要量",
+    "unit": "MWh"
+  },
+  {
+    "areaName": "神奈川",
+    "rank": 4,
+    "value": 46168289,
+    "label": "電力需要量",
+    "unit": "MWh"
+  },
+  {
+    "areaName": "兵庫",
+    "rank": 5,
+    "value": 36942203,
+    "label": "電力需要量",
+    "unit": "MWh"
+  },
+  {
+    "areaName": "山梨",
+    "rank": 43,
+    "value": 5725526,
+    "label": "電力需要量",
+    "unit": "MWh"
+  },
+  {
+    "areaName": "和歌山",
+    "rank": 44,
+    "value": 5720611,
+    "label": "電力需要量",
+    "unit": "MWh"
+  },
+  {
+    "areaName": "島根",
+    "rank": 45,
+    "value": 4842399,
+    "label": "電力需要量",
+    "unit": "MWh"
+  },
+  {
+    "areaName": "高知",
+    "rank": 46,
+    "value": 3753874,
+    "label": "電力需要量",
+    "unit": "MWh"
+  },
+  {
+    "areaName": "鳥取",
+    "rank": 47,
+    "value": 3416535,
+    "label": "電力需要量",
+    "unit": "MWh"
+  }
+]

@@ -1,0 +1,22 @@
+[
+  { "areaName": "医師", "rank": 1, "value": 1442.8, "label": "職種別平均年収", "unit": "万円" },
+  { "areaName": "大学教授", "rank": 2, "value": 977.8, "label": "職種別平均年収", "unit": "万円" },
+  { "areaName": "大学准教授", "rank": 3, "value": 811.7, "label": "職種別平均年収", "unit": "万円" },
+  { "areaName": "研究者", "rank": 4, "value": 670.2, "label": "職種別平均年収", "unit": "万円" },
+  { "areaName": "高校教員", "rank": 5, "value": 614.9, "label": "職種別平均年収", "unit": "万円" },
+  { "areaName": "システムコンサルタント", "rank": 6, "value": 612.0, "label": "職種別平均年収", "unit": "万円" },
+  { "areaName": "薬剤師", "rank": 7, "value": 578.0, "label": "職種別平均年収", "unit": "万円" },
+  { "areaName": "助産師", "rank": 8, "value": 563.2, "label": "職種別平均年収", "unit": "万円" },
+  { "areaName": "建築技術者", "rank": 9, "value": 559.3, "label": "職種別平均年収", "unit": "万円" },
+  { "areaName": "電気工", "rank": 10, "value": 539.5, "label": "職種別平均年収", "unit": "万円" },
+  { "areaName": "ソフトウェア作成者", "rank": 11, "value": 507.9, "label": "職種別平均年収", "unit": "万円" },
+  { "areaName": "看護師", "rank": 12, "value": 499.3, "label": "職種別平均年収", "unit": "万円" },
+  { "areaName": "トラック運転手", "rank": 13, "value": 467.8, "label": "職種別平均年収", "unit": "万円" },
+  { "areaName": "自動車整備士", "rank": 14, "value": 460.7, "label": "職種別平均年収", "unit": "万円" },
+  { "areaName": "大工", "rank": 15, "value": 431.7, "label": "職種別平均年収", "unit": "万円" },
+  { "areaName": "デザイナー", "rank": 16, "value": 395.2, "label": "職種別平均年収", "unit": "万円" },
+  { "areaName": "介護職員", "rank": 17, "value": 360.3, "label": "職種別平均年収", "unit": "万円" },
+  { "areaName": "警備員", "rank": 18, "value": 353.9, "label": "職種別平均年収", "unit": "万円" },
+  { "areaName": "調理士", "rank": 19, "value": 339.6, "label": "職種別平均年収", "unit": "万円" },
+  { "areaName": "販売店員", "rank": 20, "value": 337.8, "label": "職種別平均年収", "unit": "万円" }
+]

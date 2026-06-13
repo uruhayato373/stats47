@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 304" width="680" height="304" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" role="img" aria-label="従業者1人当たり商業年間商品販売額">
+  <style>
+    .svg-bg{fill:#fafafa}
+    .svg-title{fill:#222}
+    .svg-subtitle{fill:#666}
+    .svg-label{fill:#333}
+    .svg-legend{fill:#888}
+    @media (prefers-color-scheme:dark){
+      .svg-bg{fill:#1f2937}
+      .svg-title{fill:#f9fafb}
+      .svg-subtitle{fill:#9ca3af}
+      .svg-label{fill:#e5e7eb}
+      .svg-legend{fill:#9ca3af}
+    }
+  </style>
+  <rect width="680" height="304" class="svg-bg" rx="8"/>
+  <text x="340" y="24" text-anchor="middle" font-size="16" font-weight="bold" class="svg-title">従業者1人当たり商業年間商品販売額</text>
+  <text x="340" y="44" text-anchor="middle" font-size="11" class="svg-subtitle">上位5・下位5（2022年度・万円）</text>
+  <text x="232" y="58" text-anchor="middle" font-size="12" font-weight="bold" fill="#1565c0">上位 5</text>
+  <text x="544" y="58" text-anchor="middle" font-size="12" font-weight="bold" fill="#e65100">下位 5</text>
+  
+      <g><title>東京都：従業者1人当たり商業年間商品販売額=13442.7万円</title>
+      <text x="90" y="86" text-anchor="end" font-size="11" class="svg-label">東京都</text>
+      <rect x="96" y="67" width="186.0" height="30" fill="#1565c0" rx="2"/>
+      <text x="286.0" y="86" font-size="10" class="svg-label">13442.7万円</text>
+      </g>
+      <g><title>大阪府：従業者1人当たり商業年間商品販売額=8281.5万円</title>
+      <text x="90" y="122" text-anchor="end" font-size="11" class="svg-label">大阪府</text>
+      <rect x="96" y="103" width="114.6" height="30" fill="#1976d2" rx="2"/>
+      <text x="214.6" y="122" font-size="10" class="svg-label">8281.5万円</text>
+      </g>
+      <g><title>愛知県：従業者1人当たり商業年間商品販売額=7512.2万円</title>
+      <text x="90" y="158" text-anchor="end" font-size="11" class="svg-label">愛知県</text>
+      <rect x="96" y="139" width="103.9" height="30" fill="#1e88e5" rx="2"/>
+      <text x="203.9" y="158" font-size="10" class="svg-label">7512.2万円</text>
+      </g>
+      <g><title>宮城県：従業者1人当たり商業年間商品販売額=6262.8万円</title>
+      <text x="90" y="194" text-anchor="end" font-size="11" class="svg-label">宮城県</text>
+      <rect x="96" y="175" width="86.7" height="30" fill="#2196f3" rx="2"/>
+      <text x="186.7" y="194" font-size="10" class="svg-label">6262.8万円</text>
+      </g>
+      <g><title>福岡県：従業者1人当たり商業年間商品販売額=6047.3万円</title>
+      <text x="90" y="230" text-anchor="end" font-size="11" class="svg-label">福岡県</text>
+      <rect x="96" y="211" width="83.7" height="30" fill="#42a5f5" rx="2"/>
+      <text x="183.7" y="230" font-size="10" class="svg-label">6047.3万円</text>
+      </g>
+  
+      <g><title>奈良県：従業者1人当たり商業年間商品販売額=2540.3万円</title>
+      <text x="402" y="86" text-anchor="end" font-size="11" class="svg-label">奈良県</text>
+      <rect x="408" y="67" width="35.1" height="30" fill="#e65100" rx="2"/>
+      <text x="447.1" y="86" font-size="10" class="svg-label">2540.3万円</text>
+      </g>
+      <g><title>高知県：従業者1人当たり商業年間商品販売額=2858.2万円</title>
+      <text x="402" y="122" text-anchor="end" font-size="11" class="svg-label">高知県</text>
+      <rect x="408" y="103" width="39.5" height="30" fill="#ef6c00" rx="2"/>
+      <text x="451.5" y="122" font-size="10" class="svg-label">2858.2万円</text>
+      </g>
+      <g><title>島根県：従業者1人当たり商業年間商品販売額=3000.2万円</title>
+      <text x="402" y="158" text-anchor="end" font-size="11" class="svg-label">島根県</text>
+      <rect x="408" y="139" width="41.5" height="30" fill="#f57c00" rx="2"/>
+      <text x="453.5" y="158" font-size="10" class="svg-label">3000.2万円</text>
+      </g>
+      <g><title>佐賀県：従業者1人当たり商業年間商品販売額=3075万円</title>
+      <text x="402" y="194" text-anchor="end" font-size="11" class="svg-label">佐賀県</text>
+      <rect x="408" y="175" width="42.5" height="30" fill="#fb8c00" rx="2"/>
+      <text x="454.5" y="194" font-size="10" class="svg-label">3075万円</text>
+      </g>
+      <g><title>徳島県：従業者1人当たり商業年間商品販売額=3104.4万円</title>
+      <text x="402" y="230" text-anchor="end" font-size="11" class="svg-label">徳島県</text>
+      <rect x="408" y="211" width="43.0" height="30" fill="#ff9800" rx="2"/>
+      <text x="455.0" y="230" font-size="10" class="svg-label">3104.4万円</text>
+      </g>
+  <text x="340" y="286" text-anchor="middle" font-size="10" class="svg-legend">凡例: 青系=上位 / 橙系=下位</text>
+</svg>

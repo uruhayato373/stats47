@@ -1,5 +1,5 @@
-<!-- data-source: local-debt-current-ratio-prefecture-rankings.json | generated: 2026-06-13T09:55:49.847Z -->
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 300" width="680" height="300" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" role="img" aria-label="地方債現在高の割合（2022年度・標準財政規模比）">
+<!-- data-source: local-debt-current-ratio-prefecture-rankings.json | generated: 2026-06-13 -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 560" width="680" height="560" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" role="img" aria-label="地方債現在高の割合 上位5・下位5（2022年度・標準財政規模比）">
   <style>
     .svg-bg{fill:#fafafa}
     .svg-title{fill:#222}
@@ -14,52 +14,44 @@
       .svg-legend{fill:#9ca3af}
     }
   </style>
-  <rect width="680" height="300" class="svg-bg" rx="8"/>
-  <text x="340" y="24" text-anchor="middle" font-size="16" font-weight="bold" class="svg-title">地方債現在高の割合（2022年度・標準財政規模比）</text>
-  <text x="340" y="42" text-anchor="middle" font-size="11" class="svg-subtitle">上位5県 vs 下位5県</text>
-  <text x="227.5" y="54" text-anchor="middle" font-size="12" font-weight="bold" fill="#1565c0">上位 5</text>
-  <text x="542.5" y="54" text-anchor="middle" font-size="12" font-weight="bold" fill="#c62828">下位 5</text>
-  
-      <text x="84" y="82" text-anchor="end" font-size="11" class="svg-label">静岡県</text>
-      <rect x="90" y="63" width="195" height="30" fill="#1565c0" rx="2"/>
-      <text x="289" y="82" font-size="10" class="svg-label">208.5%</text>
-    
-      <text x="84" y="118" text-anchor="end" font-size="11" class="svg-label">新潟県</text>
-      <rect x="90" y="99" width="191.82014388489208" height="30" fill="#1976d2" rx="2"/>
-      <text x="285.8201438848921" y="118" font-size="10" class="svg-label">205.1%</text>
-    
-      <text x="84" y="154" text-anchor="end" font-size="11" class="svg-label">秋田県</text>
-      <rect x="90" y="135" width="181.15827338129495" height="30" fill="#1e88e5" rx="2"/>
-      <text x="275.158273381295" y="154" font-size="10" class="svg-label">193.7%</text>
-    
-      <text x="84" y="190" text-anchor="end" font-size="11" class="svg-label">北海道</text>
-      <rect x="90" y="171" width="176.66906474820144" height="30" fill="#2196f3" rx="2"/>
-      <text x="270.66906474820144" y="190" font-size="10" class="svg-label">188.9%</text>
-    
-      <text x="84" y="226" text-anchor="end" font-size="11" class="svg-label">石川県</text>
-      <rect x="90" y="207" width="176.66906474820144" height="30" fill="#42a5f5" rx="2"/>
-      <text x="270.66906474820144" y="226" font-size="10" class="svg-label">188.9%</text>
-    
-  
-      <text x="399" y="82" text-anchor="end" font-size="11" class="svg-label">東京都</text>
-      <rect x="405" y="63" width="38.906474820143885" height="30" fill="#c62828" rx="2"/>
-      <text x="447.9064748201439" y="82" font-size="10" class="svg-label">41.6%</text>
-    
-      <text x="399" y="118" text-anchor="end" font-size="11" class="svg-label">沖縄県</text>
-      <rect x="405" y="99" width="57.89208633093525" height="30" fill="#d32f2f" rx="2"/>
-      <text x="466.89208633093523" y="118" font-size="10" class="svg-label">61.9%</text>
-    
-      <text x="399" y="154" text-anchor="end" font-size="11" class="svg-label">福島県</text>
-      <rect x="405" y="135" width="108.76978417266187" height="30" fill="#e53935" rx="2"/>
-      <text x="517.7697841726618" y="154" font-size="10" class="svg-label">116.3%</text>
-    
-      <text x="399" y="190" text-anchor="end" font-size="11" class="svg-label">栃木県</text>
-      <rect x="405" y="171" width="110.07913669064749" height="30" fill="#ef5350" rx="2"/>
-      <text x="519.0791366906475" y="190" font-size="10" class="svg-label">117.7%</text>
-    
-      <text x="399" y="226" text-anchor="end" font-size="11" class="svg-label">青森県</text>
-      <rect x="405" y="207" width="112.97841726618705" height="30" fill="#e57373" rx="2"/>
-      <text x="521.9784172661871" y="226" font-size="10" class="svg-label">120.8%</text>
-    
-  <text x="340" y="282" text-anchor="middle" font-size="10" class="svg-legend">凡例: 青系=上位 / 赤系=下位</text>
+  <rect width="680" height="560" class="svg-bg" rx="8"/>
+  <text x="340" y="26" text-anchor="middle" font-size="16" font-weight="bold" class="svg-title">地方債現在高の割合 上位5・下位5（2022年度）</text>
+  <text x="340" y="44" text-anchor="middle" font-size="11" class="svg-subtitle">標準財政規模に対する地方債残高の比率（％）</text>
+
+  <text x="110" y="74" text-anchor="end" font-size="13" font-weight="bold" fill="#1565c0">上位5</text>
+  <text x="120" y="98" text-anchor="end" font-size="11" class="svg-label">1. 静岡県</text>
+  <rect x="130" y="86" width="480" height="18" fill="#1565c0" rx="2"/>
+  <text x="616" y="100" font-size="10" class="svg-label">208.5%</text>
+  <text x="120" y="124" text-anchor="end" font-size="11" class="svg-label">2. 新潟県</text>
+  <rect x="130" y="112" width="472" height="18" fill="#1976d2" rx="2"/>
+  <text x="608" y="126" font-size="10" class="svg-label">205.1%</text>
+  <text x="120" y="150" text-anchor="end" font-size="11" class="svg-label">3. 秋田県</text>
+  <rect x="130" y="138" width="446" height="18" fill="#1e88e5" rx="2"/>
+  <text x="582" y="152" font-size="10" class="svg-label">193.7%</text>
+  <text x="120" y="176" text-anchor="end" font-size="11" class="svg-label">4. 北海道</text>
+  <rect x="130" y="164" width="435" height="18" fill="#2196f3" rx="2"/>
+  <text x="571" y="178" font-size="10" class="svg-label">188.9%</text>
+  <text x="120" y="202" text-anchor="end" font-size="11" class="svg-label">4. 石川県</text>
+  <rect x="130" y="190" width="435" height="18" fill="#42a5f5" rx="2"/>
+  <text x="571" y="204" font-size="10" class="svg-label">188.9%</text>
+
+  <text x="110" y="262" text-anchor="end" font-size="13" font-weight="bold" fill="#c62828">下位5</text>
+  <text x="120" y="286" text-anchor="end" font-size="11" class="svg-label">43. 青森県</text>
+  <rect x="130" y="274" width="278" height="18" fill="#ef9a9a" rx="2"/>
+  <text x="414" y="288" font-size="10" class="svg-label">120.8%</text>
+  <text x="120" y="312" text-anchor="end" font-size="11" class="svg-label">44. 栃木県</text>
+  <rect x="130" y="300" width="271" height="18" fill="#ef5350" rx="2"/>
+  <text x="407" y="314" font-size="10" class="svg-label">117.7%</text>
+  <text x="120" y="338" text-anchor="end" font-size="11" class="svg-label">45. 福島県</text>
+  <rect x="130" y="326" width="268" height="18" fill="#f4511e" rx="2"/>
+  <text x="404" y="340" font-size="10" class="svg-label">116.3%</text>
+  <text x="120" y="364" text-anchor="end" font-size="11" class="svg-label">46. 沖縄県</text>
+  <rect x="130" y="352" width="143" height="18" fill="#e53935" rx="2"/>
+  <text x="279" y="366" font-size="10" class="svg-label">61.9%</text>
+  <text x="120" y="390" text-anchor="end" font-size="11" class="svg-label">47. 東京都</text>
+  <rect x="130" y="378" width="96" height="18" fill="#c62828" rx="2"/>
+  <text x="232" y="392" font-size="10" class="svg-label">41.6%</text>
+
+  <text x="340" y="436" text-anchor="middle" font-size="10" class="svg-legend">青系=上位（借金比率が高い） / 橙赤系=下位（借金比率が低い）</text>
+  <text x="340" y="456" text-anchor="middle" font-size="10" class="svg-legend">出典: 総務省「地方財政状況調査」2022年度</text>
 </svg>
