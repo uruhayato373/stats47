@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 292" width="700" height="292" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" role="img" aria-label="1日あたり供給可能な最大水量（2022年度）">
+  <style>
+    .svg-bg{fill:#fafafa}
+    .svg-title{fill:#222}
+    .svg-subtitle{fill:#666}
+    .svg-label{fill:#333}
+    .svg-legend{fill:#888}
+    @media (prefers-color-scheme:dark){
+      .svg-bg{fill:#1f2937}
+      .svg-title{fill:#f9fafb}
+      .svg-subtitle{fill:#9ca3af}
+      .svg-label{fill:#e5e7eb}
+      .svg-legend{fill:#9ca3af}
+    }
+  </style>
+  <rect width="700" height="292" class="svg-bg" rx="8"/>
+  <text x="350" y="26" text-anchor="middle" font-size="16" font-weight="bold" class="svg-title">1日あたり供給可能な最大水量（2022年度）</text>
+  <text x="350" y="45" text-anchor="middle" font-size="11" class="svg-subtitle">上水道施設能力 上位5・下位5</text>
+  <text x="228.5" y="58" text-anchor="middle" font-size="12" font-weight="bold" fill="#1565c0">上位 5</text>
+  <text x="537.5" y="58" text-anchor="middle" font-size="12" font-weight="bold" fill="#e65100">下位 5</text>
+  
+      <text x="90" y="87" text-anchor="end" font-size="11" class="svg-label">東京</text>
+      <rect x="96" y="69" width="169.0" height="26" fill="#1565c0" rx="2"/>
+      <text x="269" y="87" font-size="9.5" class="svg-label">7,004,350</text>
+      <text x="90" y="121" text-anchor="end" font-size="11" class="svg-label">大阪</text>
+      <rect x="96" y="103" width="128.7" height="26" fill="#1976d2" rx="2"/>
+      <text x="228.68757600633893" y="121" font-size="9.5" class="svg-label">5,333,567</text>
+      <text x="90" y="155" text-anchor="end" font-size="11" class="svg-label">神奈川</text>
+      <rect x="96" y="137" width="123.2" height="26" fill="#1e88e5" rx="2"/>
+      <text x="223.168568532412" y="155" font-size="9.5" class="svg-label">5,104,827</text>
+      <text x="90" y="189" text-anchor="end" font-size="11" class="svg-label">愛知</text>
+      <rect x="96" y="171" width="87.2" height="26" fill="#2196f3" rx="2"/>
+      <text x="187.1701100030695" y="189" font-size="9.5" class="svg-label">3,612,840</text>
+      <text x="90" y="223" text-anchor="end" font-size="11" class="svg-label">千葉</text>
+      <rect x="96" y="205" width="76.1" height="26" fill="#42a5f5" rx="2"/>
+      <text x="176.08400822346113" y="223" font-size="9.5" class="svg-label">3,153,367</text>
+  
+      <text x="399" y="87" text-anchor="end" font-size="11" class="svg-label">福井</text>
+      <rect x="405" y="69" width="11.7" height="26" fill="#e65100" rx="2"/>
+      <text x="420.6873922633792" y="87" font-size="9.5" class="svg-label">484,394</text>
+      <text x="399" y="121" text-anchor="end" font-size="11" class="svg-label">佐賀</text>
+      <rect x="405" y="103" width="10.8" height="26" fill="#ef6c00" rx="2"/>
+      <text x="419.77465931885183" y="121" font-size="9.5" class="svg-label">446,565</text>
+      <text x="399" y="155" text-anchor="end" font-size="11" class="svg-label">高知</text>
+      <rect x="405" y="137" width="10.3" height="26" fill="#f57c00" rx="2"/>
+      <text x="419.28170294174333" y="155" font-size="9.5" class="svg-label">426,134</text>
+      <text x="399" y="189" text-anchor="end" font-size="11" class="svg-label">島根</text>
+      <rect x="405" y="171" width="7.9" height="26" fill="#fb8c00" rx="2"/>
+      <text x="416.9300083519527" y="189" font-size="9.5" class="svg-label">328,666</text>
+      <text x="399" y="223" text-anchor="end" font-size="11" class="svg-label">鳥取</text>
+      <rect x="405" y="205" width="7.2" height="26" fill="#ffa726" rx="2"/>
+      <text x="416.2065102400651" y="223" font-size="9.5" class="svg-label">298,680</text>
+  <text x="350" y="276" text-anchor="middle" font-size="10" class="svg-legend">単位: m³/日  /  青系=上位・橙系=下位</text>
+</svg>

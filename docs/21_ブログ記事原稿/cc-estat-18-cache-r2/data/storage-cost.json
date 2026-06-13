@@ -1,0 +1,17 @@
+[
+  {
+    "label": "AWS S3",
+    "value": 1.13,
+    "unit": "USD"
+  },
+  {
+    "label": "GCS",
+    "value": 1,
+    "unit": "USD"
+  },
+  {
+    "label": "Cloudflare R2",
+    "value": 0,
+    "unit": "USD"
+  }
+]

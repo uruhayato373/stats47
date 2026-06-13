@@ -1,0 +1,68 @@
+<!-- data-source: education-ranking.json | generated: 2026-06-13T19:24:59.776004 -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 466" font-family="system-ui, sans-serif" role="img" aria-label="中学校教育費（児童生徒1人あたり）上位5・下位5（47都道府県・2022年度）">
+<title>中学校教育費（児童生徒1人あたり）上位5・下位5（47都道府県・2022年度）</title>
+<text x="360.0" y="28" text-anchor="middle" font-size="17" font-weight="700" fill="#0f172a">中学校教育費（児童生徒1人あたり）上位5・下位5（47都道府県・2022年度）</text>
+<text x="360.0" y="48" text-anchor="middle" font-size="12" fill="#64748b">1人あたり中学校教育費（万円表示）（上位5＝青／下位5＝橙）</text>
+<g>
+<rect x="144" y="69" width="0" height="0" fill="none"/>
+<text x="150" y="85" text-anchor="end" font-size="13" fill="#334155">1. 徳島県</text>
+<rect x="162" y="70" width="408.0" height="22" rx="2" fill="#2563eb"><title>徳島県：中学校教育費=1837025円（1位）</title></rect>
+<text x="576.0" y="85" font-size="12" fill="#475569">183.7万円</text>
+</g>
+<g>
+<rect x="144" y="103" width="0" height="0" fill="none"/>
+<text x="150" y="119" text-anchor="end" font-size="13" fill="#334155">2. 高知県</text>
+<rect x="162" y="104" width="397.8" height="22" rx="2" fill="#2563eb"><title>高知県：中学校教育費=1791278円（2位）</title></rect>
+<text x="565.8" y="119" font-size="12" fill="#475569">179.1万円</text>
+</g>
+<g>
+<rect x="144" y="137" width="0" height="0" fill="none"/>
+<text x="150" y="153" text-anchor="end" font-size="13" fill="#334155">3. 島根県</text>
+<rect x="162" y="138" width="355.1" height="22" rx="2" fill="#2563eb"><title>島根県：中学校教育費=1598929円（3位）</title></rect>
+<text x="523.1" y="153" font-size="12" fill="#475569">159.9万円</text>
+</g>
+<g>
+<rect x="144" y="171" width="0" height="0" fill="none"/>
+<text x="150" y="187" text-anchor="end" font-size="13" fill="#334155">4. 岩手県</text>
+<rect x="162" y="172" width="346.8" height="22" rx="2" fill="#2563eb"><title>岩手県：中学校教育費=1561266円（4位）</title></rect>
+<text x="514.8" y="187" font-size="12" fill="#475569">156.1万円</text>
+</g>
+<g>
+<rect x="144" y="205" width="0" height="0" fill="none"/>
+<text x="150" y="221" text-anchor="end" font-size="13" fill="#334155">5. 青森県</text>
+<rect x="162" y="206" width="338.2" height="22" rx="2" fill="#2563eb"><title>青森県：中学校教育費=1522912円（5位）</title></rect>
+<text x="506.2" y="221" font-size="12" fill="#475569">152.3万円</text>
+</g>
+<line x1="12" y1="225" x2="708" y2="225" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="3 3"/>
+<g>
+<rect x="144" y="239" width="0" height="0" fill="none"/>
+<text x="150" y="255" text-anchor="end" font-size="13" fill="#334155">43. 奈良県</text>
+<rect x="162" y="240" width="227.8" height="22" rx="2" fill="#ea7317"><title>奈良県：中学校教育費=1025787円（43位）</title></rect>
+<text x="395.8" y="255" font-size="12" fill="#475569">102.6万円</text>
+</g>
+<g>
+<rect x="144" y="273" width="0" height="0" fill="none"/>
+<text x="150" y="289" text-anchor="end" font-size="13" fill="#334155">44. 岐阜県</text>
+<rect x="162" y="274" width="226.9" height="22" rx="2" fill="#ea7317"><title>岐阜県：中学校教育費=1021529円（44位）</title></rect>
+<text x="394.9" y="289" font-size="12" fill="#475569">102.2万円</text>
+</g>
+<g>
+<rect x="144" y="307" width="0" height="0" fill="none"/>
+<text x="150" y="323" text-anchor="end" font-size="13" fill="#334155">45. 愛知県</text>
+<rect x="162" y="308" width="217.1" height="22" rx="2" fill="#ea7317"><title>愛知県：中学校教育費=977336円（45位）</title></rect>
+<text x="385.1" y="323" font-size="12" fill="#475569">97.7万円</text>
+</g>
+<g>
+<rect x="144" y="341" width="0" height="0" fill="none"/>
+<text x="150" y="357" text-anchor="end" font-size="13" fill="#334155">46. 埼玉県</text>
+<rect x="162" y="342" width="212.2" height="22" rx="2" fill="#ea7317"><title>埼玉県：中学校教育費=955429円（46位）</title></rect>
+<text x="380.2" y="357" font-size="12" fill="#475569">95.5万円</text>
+</g>
+<g>
+<rect x="144" y="375" width="0" height="0" fill="none"/>
+<text x="150" y="391" text-anchor="end" font-size="13" fill="#334155">47. 神奈川県</text>
+<rect x="162" y="376" width="210.1" height="22" rx="2" fill="#ea7317"><title>神奈川県：中学校教育費=945954円（47位）</title></rect>
+<text x="378.1" y="391" font-size="12" fill="#475569">94.6万円</text>
+</g>
+<text x="12" y="452" font-size="11" fill="#94a3b8">出典: e-Stat 政府統計</text>
+</svg>

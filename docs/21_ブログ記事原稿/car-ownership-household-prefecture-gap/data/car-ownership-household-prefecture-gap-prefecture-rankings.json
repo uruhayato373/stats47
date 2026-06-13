@@ -1,0 +1,12 @@
+[
+  { "areaName": "山形", "rank": 1, "value": 2111, "label": "1000世帯あたり自動車保有台数", "unit": "台" },
+  { "areaName": "福井", "rank": 2, "value": 2101, "label": "1000世帯あたり自動車保有台数", "unit": "台" },
+  { "areaName": "富山", "rank": 3, "value": 2057, "label": "1000世帯あたり自動車保有台数", "unit": "台" },
+  { "areaName": "長野", "rank": 4, "value": 1969, "label": "1000世帯あたり自動車保有台数", "unit": "台" },
+  { "areaName": "岐阜", "rank": 5, "value": 1960, "label": "1000世帯あたり自動車保有台数", "unit": "台" },
+  { "areaName": "兵庫", "rank": 43, "value": 1144, "label": "1000世帯あたり自動車保有台数", "unit": "台" },
+  { "areaName": "京都", "rank": 44, "value": 1073, "label": "1000世帯あたり自動車保有台数", "unit": "台" },
+  { "areaName": "神奈川", "rank": 45, "value": 917, "label": "1000世帯あたり自動車保有台数", "unit": "台" },
+  { "areaName": "大阪", "rank": 46, "value": 843, "label": "1000世帯あたり自動車保有台数", "unit": "台" },
+  { "areaName": "東京", "rank": 47, "value": 665, "label": "1000世帯あたり自動車保有台数", "unit": "台" }
+]

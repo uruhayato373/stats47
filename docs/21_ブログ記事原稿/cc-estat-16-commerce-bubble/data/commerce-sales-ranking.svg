@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 470" role="img" aria-label="商業年間商品販売額 上位5・下位5（2022年度・百万円）">
+  <style>
+    .ttl{font:600 16px system-ui,sans-serif;fill:#334155}
+    .sub{font:12px system-ui,sans-serif;fill:#64748b}
+    .nm{font:13px system-ui,sans-serif;fill:#475569}
+    .vl{font:600 12px system-ui,sans-serif;fill:#334155}
+    .grp{font:600 12px system-ui,sans-serif;fill:#64748b}
+  </style>
+  <text class="ttl" x="20" y="30">商業年間商品販売額 上位5・下位5</text>
+  <text class="sub" x="20" y="50">経済センサス活動調査2021（2022年度公表）／単位: 兆円</text>
+
+  <text class="grp" x="20" y="78">上位5</text>
+  <!-- 東京都 -->
+  <text class="nm" x="20" y="100">1 東京都</text>
+  <rect x="120" y="88" width="560" height="16" rx="2" fill="#1d4ed8"/>
+  <text class="vl" x="688" y="101">211.9</text>
+  <!-- 大阪府 -->
+  <text class="nm" x="20" y="124">2 大阪府</text>
+  <rect x="120" y="112" width="170" height="16" rx="2" fill="#2563eb"/>
+  <text class="vl" x="298" y="125">64.3</text>
+  <!-- 愛知県 -->
+  <text class="nm" x="20" y="148">3 愛知県</text>
+  <rect x="120" y="136" width="118.6" height="16" rx="2" fill="#3b82f6"/>
+  <text class="vl" x="247" y="149">44.9</text>
+  <!-- 神奈川県 -->
+  <text class="nm" x="20" y="172">4 神奈川県</text>
+  <rect x="120" y="160" width="66" height="16" rx="2" fill="#3b82f6"/>
+  <text class="vl" x="194" y="173">25.0</text>
+  <!-- 福岡県 -->
+  <text class="nm" x="20" y="196">5 福岡県</text>
+  <rect x="120" y="184" width="63.7" height="16" rx="2" fill="#60a5fa"/>
+  <text class="vl" x="192" y="197">24.1</text>
+
+  <line x1="20" y1="218" x2="740" y2="218" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="4 4"/>
+
+  <text class="grp" x="20" y="244">下位5</text>
+  <!-- 佐賀県 -->
+  <text class="nm" x="20" y="266">43 佐賀県</text>
+  <rect x="120" y="254" width="4.7" height="16" rx="2" fill="#ea580c"/>
+  <text class="vl" x="133" y="267">1.8</text>
+  <!-- 徳島県 -->
+  <text class="nm" x="20" y="290">44 徳島県</text>
+  <rect x="120" y="278" width="4.1" height="16" rx="2" fill="#f97316"/>
+  <text class="vl" x="133" y="291">1.5</text>
+  <!-- 高知県 -->
+  <text class="nm" x="20" y="314">45 高知県</text>
+  <rect x="120" y="302" width="4.0" height="16" rx="2" fill="#f97316"/>
+  <text class="vl" x="133" y="315">1.5</text>
+  <!-- 島根県 -->
+  <text class="nm" x="20" y="338">46 島根県</text>
+  <rect x="120" y="326" width="3.8" height="16" rx="2" fill="#fb923c"/>
+  <text class="vl" x="133" y="339">1.4</text>
+  <!-- 鳥取県 -->
+  <text class="nm" x="20" y="362">47 鳥取県</text>
+  <rect x="120" y="350" width="3.4" height="16" rx="2" fill="#fb923c"/>
+  <text class="vl" x="133" y="363">1.3</text>
+
+  <text class="sub" x="20" y="400">東京都は鳥取県の約163倍。東京1都で全国の約35%を占めます。</text>
+</svg>

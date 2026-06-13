@@ -1,0 +1,30 @@
+[
+  {
+    "areaName": "東京都",
+    "rank": 1,
+    "value": 417,
+    "label": "韓国人延べ宿泊者数",
+    "unit": "万人泊"
+  },
+  {
+    "areaName": "大阪府",
+    "rank": 2,
+    "value": 386,
+    "label": "韓国人延べ宿泊者数",
+    "unit": "万人泊"
+  },
+  {
+    "areaName": "福岡県",
+    "rank": 3,
+    "value": 289,
+    "label": "韓国人延べ宿泊者数",
+    "unit": "万人泊"
+  },
+  {
+    "areaName": "北海道",
+    "rank": 4,
+    "value": 214,
+    "label": "韓国人延べ宿泊者数",
+    "unit": "万人泊"
+  }
+]

@@ -1,0 +1,331 @@
+[
+  {
+    "areaName": "北海道",
+    "rank": 1,
+    "value": 1138000,
+    "label": "耕地面積",
+    "unit": "ha"
+  },
+  {
+    "areaName": "新潟県",
+    "rank": 2,
+    "value": 166500,
+    "label": "耕地面積",
+    "unit": "ha"
+  },
+  {
+    "areaName": "茨城県",
+    "rank": 3,
+    "value": 158300,
+    "label": "耕地面積",
+    "unit": "ha"
+  },
+  {
+    "areaName": "青森県",
+    "rank": 4,
+    "value": 147300,
+    "label": "耕地面積",
+    "unit": "ha"
+  },
+  {
+    "areaName": "岩手県",
+    "rank": 5,
+    "value": 146000,
+    "label": "耕地面積",
+    "unit": "ha"
+  },
+  {
+    "areaName": "秋田県",
+    "rank": 6,
+    "value": 145600,
+    "label": "耕地面積",
+    "unit": "ha"
+  },
+  {
+    "areaName": "福島県",
+    "rank": 7,
+    "value": 133700,
+    "label": "耕地面積",
+    "unit": "ha"
+  },
+  {
+    "areaName": "宮城県",
+    "rank": 8,
+    "value": 123900,
+    "label": "耕地面積",
+    "unit": "ha"
+  },
+  {
+    "areaName": "栃木県",
+    "rank": 9,
+    "value": 120400,
+    "label": "耕地面積",
+    "unit": "ha"
+  },
+  {
+    "areaName": "千葉県",
+    "rank": 10,
+    "value": 119500,
+    "label": "耕地面積",
+    "unit": "ha"
+  },
+  {
+    "areaName": "山形県",
+    "rank": 11,
+    "value": 113200,
+    "label": "耕地面積",
+    "unit": "ha"
+  },
+  {
+    "areaName": "鹿児島県",
+    "rank": 12,
+    "value": 110400,
+    "label": "耕地面積",
+    "unit": "ha"
+  },
+  {
+    "areaName": "長野県",
+    "rank": 13,
+    "value": 103800,
+    "label": "耕地面積",
+    "unit": "ha"
+  },
+  {
+    "areaName": "熊本県",
+    "rank": 14,
+    "value": 103300,
+    "label": "耕地面積",
+    "unit": "ha"
+  },
+  {
+    "areaName": "福岡県",
+    "rank": 15,
+    "value": 78000,
+    "label": "耕地面積",
+    "unit": "ha"
+  },
+  {
+    "areaName": "埼玉県",
+    "rank": 16,
+    "value": 72700,
+    "label": "耕地面積",
+    "unit": "ha"
+  },
+  {
+    "areaName": "愛知県",
+    "rank": 17,
+    "value": 72000,
+    "label": "耕地面積",
+    "unit": "ha"
+  },
+  {
+    "areaName": "兵庫県",
+    "rank": 18,
+    "value": 71300,
+    "label": "耕地面積",
+    "unit": "ha"
+  },
+  {
+    "areaName": "群馬県",
+    "rank": 19,
+    "value": 63200,
+    "label": "耕地面積",
+    "unit": "ha"
+  },
+  {
+    "areaName": "宮崎県",
+    "rank": 20,
+    "value": 62500,
+    "label": "耕地面積",
+    "unit": "ha"
+  },
+  {
+    "areaName": "岡山県",
+    "rank": 21,
+    "value": 61600,
+    "label": "耕地面積",
+    "unit": "ha"
+  },
+  {
+    "areaName": "静岡県",
+    "rank": 22,
+    "value": 58300,
+    "label": "耕地面積",
+    "unit": "ha"
+  },
+  {
+    "areaName": "富山県",
+    "rank": 23,
+    "value": 57400,
+    "label": "耕地面積",
+    "unit": "ha"
+  },
+  {
+    "areaName": "三重県",
+    "rank": 24,
+    "value": 55700,
+    "label": "耕地面積",
+    "unit": "ha"
+  },
+  {
+    "areaName": "岐阜県",
+    "rank": 25,
+    "value": 53900,
+    "label": "耕地面積",
+    "unit": "ha"
+  },
+  {
+    "areaName": "大分県",
+    "rank": 26,
+    "value": 53800,
+    "label": "耕地面積",
+    "unit": "ha"
+  },
+  {
+    "areaName": "広島県",
+    "rank": 27,
+    "value": 50500,
+    "label": "耕地面積",
+    "unit": "ha"
+  },
+  {
+    "areaName": "滋賀県",
+    "rank": 28,
+    "value": 49600,
+    "label": "耕地面積",
+    "unit": "ha"
+  },
+  {
+    "areaName": "佐賀県",
+    "rank": 29,
+    "value": 49600,
+    "label": "耕地面積",
+    "unit": "ha"
+  },
+  {
+    "areaName": "長崎県",
+    "rank": 30,
+    "value": 44900,
+    "label": "耕地面積",
+    "unit": "ha"
+  },
+  {
+    "areaName": "愛媛県",
+    "rank": 31,
+    "value": 43600,
+    "label": "耕地面積",
+    "unit": "ha"
+  },
+  {
+    "areaName": "山口県",
+    "rank": 32,
+    "value": 42900,
+    "label": "耕地面積",
+    "unit": "ha"
+  },
+  {
+    "areaName": "石川県",
+    "rank": 33,
+    "value": 39500,
+    "label": "耕地面積",
+    "unit": "ha"
+  },
+  {
+    "areaName": "福井県",
+    "rank": 34,
+    "value": 39500,
+    "label": "耕地面積",
+    "unit": "ha"
+  },
+  {
+    "areaName": "沖縄県",
+    "rank": 35,
+    "value": 35900,
+    "label": "耕地面積",
+    "unit": "ha"
+  },
+  {
+    "areaName": "島根県",
+    "rank": 36,
+    "value": 35600,
+    "label": "耕地面積",
+    "unit": "ha"
+  },
+  {
+    "areaName": "鳥取県",
+    "rank": 37,
+    "value": 32300,
+    "label": "耕地面積",
+    "unit": "ha"
+  },
+  {
+    "areaName": "和歌山県",
+    "rank": 38,
+    "value": 30700,
+    "label": "耕地面積",
+    "unit": "ha"
+  },
+  {
+    "areaName": "京都府",
+    "rank": 39,
+    "value": 29000,
+    "label": "耕地面積",
+    "unit": "ha"
+  },
+  {
+    "areaName": "香川県",
+    "rank": 40,
+    "value": 28100,
+    "label": "耕地面積",
+    "unit": "ha"
+  },
+  {
+    "areaName": "徳島県",
+    "rank": 41,
+    "value": 27200,
+    "label": "耕地面積",
+    "unit": "ha"
+  },
+  {
+    "areaName": "高知県",
+    "rank": 42,
+    "value": 25000,
+    "label": "耕地面積",
+    "unit": "ha"
+  },
+  {
+    "areaName": "山梨県",
+    "rank": 43,
+    "value": 23000,
+    "label": "耕地面積",
+    "unit": "ha"
+  },
+  {
+    "areaName": "奈良県",
+    "rank": 44,
+    "value": 18700,
+    "label": "耕地面積",
+    "unit": "ha"
+  },
+  {
+    "areaName": "神奈川県",
+    "rank": 45,
+    "value": 17800,
+    "label": "耕地面積",
+    "unit": "ha"
+  },
+  {
+    "areaName": "大阪府",
+    "rank": 46,
+    "value": 11900,
+    "label": "耕地面積",
+    "unit": "ha"
+  },
+  {
+    "areaName": "東京都",
+    "rank": 47,
+    "value": 6090,
+    "label": "耕地面積",
+    "unit": "ha"
+  }
+]

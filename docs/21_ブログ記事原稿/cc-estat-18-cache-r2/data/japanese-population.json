@@ -1,0 +1,72 @@
+[
+  {
+    "areaName": "東京",
+    "rank": 1,
+    "value": 13463000,
+    "label": "日本人人口",
+    "unit": "人"
+  },
+  {
+    "areaName": "神奈川",
+    "rank": 2,
+    "value": 8941000,
+    "label": "日本人人口",
+    "unit": "人"
+  },
+  {
+    "areaName": "大阪",
+    "rank": 3,
+    "value": 8453000,
+    "label": "日本人人口",
+    "unit": "人"
+  },
+  {
+    "areaName": "愛知",
+    "rank": 4,
+    "value": 7160000,
+    "label": "日本人人口",
+    "unit": "人"
+  },
+  {
+    "areaName": "埼玉",
+    "rank": 5,
+    "value": 7083000,
+    "label": "日本人人口",
+    "unit": "人"
+  },
+  {
+    "areaName": "福井",
+    "rank": 43,
+    "value": 721000,
+    "label": "日本人人口",
+    "unit": "人"
+  },
+  {
+    "areaName": "徳島",
+    "rank": 44,
+    "value": 678000,
+    "label": "日本人人口",
+    "unit": "人"
+  },
+  {
+    "areaName": "高知",
+    "rank": 45,
+    "value": 649000,
+    "label": "日本人人口",
+    "unit": "人"
+  },
+  {
+    "areaName": "島根",
+    "rank": 46,
+    "value": 631000,
+    "label": "日本人人口",
+    "unit": "人"
+  },
+  {
+    "areaName": "鳥取",
+    "rank": 47,
+    "value": 525000,
+    "label": "日本人人口",
+    "unit": "人"
+  }
+]

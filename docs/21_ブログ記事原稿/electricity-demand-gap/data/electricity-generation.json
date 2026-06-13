@@ -1,0 +1,331 @@
+[
+  {
+    "areaName": "千葉県",
+    "rank": 1,
+    "value": 80635294,
+    "label": "発電電力量",
+    "unit": "Ｍｗｈ"
+  },
+  {
+    "areaName": "神奈川県",
+    "rank": 2,
+    "value": 73336977,
+    "label": "発電電力量",
+    "unit": "Ｍｗｈ"
+  },
+  {
+    "areaName": "愛知県",
+    "rank": 3,
+    "value": 61064365,
+    "label": "発電電力量",
+    "unit": "Ｍｗｈ"
+  },
+  {
+    "areaName": "福島県",
+    "rank": 4,
+    "value": 53890395,
+    "label": "発電電力量",
+    "unit": "Ｍｗｈ"
+  },
+  {
+    "areaName": "福井県",
+    "rank": 5,
+    "value": 50896643,
+    "label": "発電電力量",
+    "unit": "Ｍｗｈ"
+  },
+  {
+    "areaName": "兵庫県",
+    "rank": 6,
+    "value": 42821182,
+    "label": "発電電力量",
+    "unit": "Ｍｗｈ"
+  },
+  {
+    "areaName": "茨城県",
+    "rank": 7,
+    "value": 36838838,
+    "label": "発電電力量",
+    "unit": "Ｍｗｈ"
+  },
+  {
+    "areaName": "新潟県",
+    "rank": 8,
+    "value": 36795899,
+    "label": "発電電力量",
+    "unit": "Ｍｗｈ"
+  },
+  {
+    "areaName": "北海道",
+    "rank": 9,
+    "value": 29938468,
+    "label": "発電電力量",
+    "unit": "Ｍｗｈ"
+  },
+  {
+    "areaName": "長崎県",
+    "rank": 10,
+    "value": 20931048,
+    "label": "発電電力量",
+    "unit": "Ｍｗｈ"
+  },
+  {
+    "areaName": "山口県",
+    "rank": 11,
+    "value": 20698053,
+    "label": "発電電力量",
+    "unit": "Ｍｗｈ"
+  },
+  {
+    "areaName": "佐賀県",
+    "rank": 12,
+    "value": 18519516,
+    "label": "発電電力量",
+    "unit": "Ｍｗｈ"
+  },
+  {
+    "areaName": "三重県",
+    "rank": 13,
+    "value": 18365001,
+    "label": "発電電力量",
+    "unit": "Ｍｗｈ"
+  },
+  {
+    "areaName": "大分県",
+    "rank": 14,
+    "value": 17554188,
+    "label": "発電電力量",
+    "unit": "Ｍｗｈ"
+  },
+  {
+    "areaName": "鹿児島県",
+    "rank": 15,
+    "value": 17267381,
+    "label": "発電電力量",
+    "unit": "Ｍｗｈ"
+  },
+  {
+    "areaName": "愛媛県",
+    "rank": 16,
+    "value": 16562858,
+    "label": "発電電力量",
+    "unit": "Ｍｗｈ"
+  },
+  {
+    "areaName": "徳島県",
+    "rank": 17,
+    "value": 16337402,
+    "label": "発電電力量",
+    "unit": "Ｍｗｈ"
+  },
+  {
+    "areaName": "大阪府",
+    "rank": 18,
+    "value": 15465056,
+    "label": "発電電力量",
+    "unit": "Ｍｗｈ"
+  },
+  {
+    "areaName": "秋田県",
+    "rank": 19,
+    "value": 14711370,
+    "label": "発電電力量",
+    "unit": "Ｍｗｈ"
+  },
+  {
+    "areaName": "富山県",
+    "rank": 20,
+    "value": 14452991,
+    "label": "発電電力量",
+    "unit": "Ｍｗｈ"
+  },
+  {
+    "areaName": "宮城県",
+    "rank": 21,
+    "value": 14283059,
+    "label": "発電電力量",
+    "unit": "Ｍｗｈ"
+  },
+  {
+    "areaName": "島根県",
+    "rank": 22,
+    "value": 12432841,
+    "label": "発電電力量",
+    "unit": "Ｍｗｈ"
+  },
+  {
+    "areaName": "京都府",
+    "rank": 23,
+    "value": 11943697,
+    "label": "発電電力量",
+    "unit": "Ｍｗｈ"
+  },
+  {
+    "areaName": "広島県",
+    "rank": 24,
+    "value": 11070526,
+    "label": "発電電力量",
+    "unit": "Ｍｗｈ"
+  },
+  {
+    "areaName": "福岡県",
+    "rank": 25,
+    "value": 10973587,
+    "label": "発電電力量",
+    "unit": "Ｍｗｈ"
+  },
+  {
+    "areaName": "栃木県",
+    "rank": 26,
+    "value": 10665573,
+    "label": "発電電力量",
+    "unit": "Ｍｗｈ"
+  },
+  {
+    "areaName": "岐阜県",
+    "rank": 27,
+    "value": 8902817,
+    "label": "発電電力量",
+    "unit": "Ｍｗｈ"
+  },
+  {
+    "areaName": "熊本県",
+    "rank": 28,
+    "value": 7758083,
+    "label": "発電電力量",
+    "unit": "Ｍｗｈ"
+  },
+  {
+    "areaName": "静岡県",
+    "rank": 29,
+    "value": 7517253,
+    "label": "発電電力量",
+    "unit": "Ｍｗｈ"
+  },
+  {
+    "areaName": "沖縄県",
+    "rank": 30,
+    "value": 7492858,
+    "label": "発電電力量",
+    "unit": "Ｍｗｈ"
+  },
+  {
+    "areaName": "長野県",
+    "rank": 31,
+    "value": 7106142,
+    "label": "発電電力量",
+    "unit": "Ｍｗｈ"
+  },
+  {
+    "areaName": "石川県",
+    "rank": 32,
+    "value": 6416441,
+    "label": "発電電力量",
+    "unit": "Ｍｗｈ"
+  },
+  {
+    "areaName": "岡山県",
+    "rank": 33,
+    "value": 6234735,
+    "label": "発電電力量",
+    "unit": "Ｍｗｈ"
+  },
+  {
+    "areaName": "山形県",
+    "rank": 34,
+    "value": 5784945,
+    "label": "発電電力量",
+    "unit": "Ｍｗｈ"
+  },
+  {
+    "areaName": "東京都",
+    "rank": 35,
+    "value": 5734852,
+    "label": "発電電力量",
+    "unit": "Ｍｗｈ"
+  },
+  {
+    "areaName": "青森県",
+    "rank": 36,
+    "value": 5447184,
+    "label": "発電電力量",
+    "unit": "Ｍｗｈ"
+  },
+  {
+    "areaName": "宮崎県",
+    "rank": 37,
+    "value": 4486625,
+    "label": "発電電力量",
+    "unit": "Ｍｗｈ"
+  },
+  {
+    "areaName": "群馬県",
+    "rank": 38,
+    "value": 4432249,
+    "label": "発電電力量",
+    "unit": "Ｍｗｈ"
+  },
+  {
+    "areaName": "高知県",
+    "rank": 39,
+    "value": 3965355,
+    "label": "発電電力量",
+    "unit": "Ｍｗｈ"
+  },
+  {
+    "areaName": "岩手県",
+    "rank": 40,
+    "value": 3876659,
+    "label": "発電電力量",
+    "unit": "Ｍｗｈ"
+  },
+  {
+    "areaName": "香川県",
+    "rank": 41,
+    "value": 3521639,
+    "label": "発電電力量",
+    "unit": "Ｍｗｈ"
+  },
+  {
+    "areaName": "山梨県",
+    "rank": 42,
+    "value": 2643351,
+    "label": "発電電力量",
+    "unit": "Ｍｗｈ"
+  },
+  {
+    "areaName": "鳥取県",
+    "rank": 43,
+    "value": 1859743,
+    "label": "発電電力量",
+    "unit": "Ｍｗｈ"
+  },
+  {
+    "areaName": "和歌山県",
+    "rank": 44,
+    "value": 1801668,
+    "label": "発電電力量",
+    "unit": "Ｍｗｈ"
+  },
+  {
+    "areaName": "滋賀県",
+    "rank": 45,
+    "value": 1254684,
+    "label": "発電電力量",
+    "unit": "Ｍｗｈ"
+  },
+  {
+    "areaName": "奈良県",
+    "rank": 46,
+    "value": 1253829,
+    "label": "発電電力量",
+    "unit": "Ｍｗｈ"
+  },
+  {
+    "areaName": "埼玉県",
+    "rank": 47,
+    "value": 537679,
+    "label": "発電電力量",
+    "unit": "Ｍｗｈ"
+  }
+]

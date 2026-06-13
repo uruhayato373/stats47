@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 412" width="720" height="412" role="img" aria-label="都市ガス供給区域内世帯比率 上位5・下位5（2016年度・％）" font-family="system-ui, -apple-system, 'Hiragino Kaku Gothic ProN', sans-serif">
+<style>
+    .svg-bg{fill:#fafafa}
+    .svg-title{fill:#222}
+    .svg-subtitle{fill:#666}
+    .svg-label{fill:#334155}
+    .svg-val{fill:#475569}
+    .svg-div{stroke:#cbd5e1}
+    @media (prefers-color-scheme:dark){
+      .svg-bg{fill:#1f2937}
+      .svg-title{fill:#f9fafb}
+      .svg-subtitle{fill:#9ca3af}
+      .svg-label{fill:#e5e7eb}
+      .svg-val{fill:#cbd5e1}
+      .svg-div{stroke:#4b5563}
+    }
+  </style>
+<rect x="0" y="0" width="720" height="412" class="svg-bg" rx="8"/>
+<text x="92" y="28" font-size="15" font-weight="bold" class="svg-title">都市ガス供給区域内世帯比率 上位5・下位5（2016年度・％）</text>
+<text x="92" y="44" font-size="11" class="svg-subtitle">単位: % ／ 青=上位5・橙=下位5</text>
+<line x1="92" y1="226" x2="674" y2="226" class="svg-div" stroke-dasharray="3 3" stroke-width="1"/>
+<text x="84" y="68" text-anchor="end" dominant-baseline="middle" font-size="13" class="svg-label">大阪府</text><rect x="92" y="56" width="542.0" height="24" rx="2" fill="#2563eb"><title>大阪府: 106.7%</title></rect><text x="640.0" y="68" dominant-baseline="middle" font-size="12" class="svg-val">106.7</text><text x="84" y="102" text-anchor="end" dominant-baseline="middle" font-size="13" class="svg-label">東京都</text><rect x="92" y="90" width="523.2" height="24" rx="2" fill="#2563eb"><title>東京都: 103%</title></rect><text x="621.2" y="102" dominant-baseline="middle" font-size="12" class="svg-val">103</text><text x="84" y="136" text-anchor="end" dominant-baseline="middle" font-size="13" class="svg-label">神奈川県</text><rect x="92" y="124" width="511.5" height="24" rx="2" fill="#2563eb"><title>神奈川県: 100.7%</title></rect><text x="609.5" y="136" dominant-baseline="middle" font-size="12" class="svg-val">100.7</text><text x="84" y="170" text-anchor="end" dominant-baseline="middle" font-size="13" class="svg-label">埼玉県</text><rect x="92" y="158" width="472.4" height="24" rx="2" fill="#2563eb"><title>埼玉県: 93%</title></rect><text x="570.4" y="170" dominant-baseline="middle" font-size="12" class="svg-val">93</text><text x="84" y="204" text-anchor="end" dominant-baseline="middle" font-size="13" class="svg-label">千葉県</text><rect x="92" y="192" width="471.4" height="24" rx="2" fill="#2563eb"><title>千葉県: 92.8%</title></rect><text x="569.4" y="204" dominant-baseline="middle" font-size="12" class="svg-val">92.8</text><text x="84" y="238" text-anchor="end" dominant-baseline="middle" font-size="13" class="svg-label">高知県</text><rect x="92" y="226" width="152.9" height="24" rx="2" fill="#ea580c"><title>高知県: 30.1%</title></rect><text x="250.9" y="238" dominant-baseline="middle" font-size="12" class="svg-val">30.1</text><text x="84" y="272" text-anchor="end" dominant-baseline="middle" font-size="13" class="svg-label">島根県</text><rect x="92" y="260" width="134.1" height="24" rx="2" fill="#ea580c"><title>島根県: 26.4%</title></rect><text x="232.1" y="272" dominant-baseline="middle" font-size="12" class="svg-val">26.4</text><text x="84" y="306" text-anchor="end" dominant-baseline="middle" font-size="13" class="svg-label">福井県</text><rect x="92" y="294" width="132.6" height="24" rx="2" fill="#ea580c"><title>福井県: 26.1%</title></rect><text x="230.6" y="306" dominant-baseline="middle" font-size="12" class="svg-val">26.1</text><text x="84" y="340" text-anchor="end" dominant-baseline="middle" font-size="13" class="svg-label">山梨県</text><rect x="92" y="328" width="125.0" height="24" rx="2" fill="#ea580c"><title>山梨県: 24.6%</title></rect><text x="223.0" y="340" dominant-baseline="middle" font-size="12" class="svg-val">24.6</text><text x="84" y="374" text-anchor="end" dominant-baseline="middle" font-size="13" class="svg-label">徳島県</text><rect x="92" y="362" width="118.9" height="24" rx="2" fill="#ea580c"><title>徳島県: 23.4%</title></rect><text x="216.9" y="374" dominant-baseline="middle" font-size="12" class="svg-val">23.4</text>
+</svg>

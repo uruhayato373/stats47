@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 438" role="img" aria-label="1人当たりの国民医療費 上位5・下位5 (2022年度)">
+<title>1人当たりの国民医療費 上位5・下位5 (2022年度・単位千円)</title>
+<text x="0" y="24" font-size="17" font-weight="700" fill="currentColor">1人当たりの国民医療費 上位5・下位5（2022年度）</text>
+<text x="0" y="44" font-size="12" fill="#475569">単位: 千円／青=上位（高額）・橙=下位（低額）</text>
+<text x="0" y="77" font-size="13" fill="currentColor">1位 高知県</text>
+<rect x="150" y="62" width="540.0" height="22" rx="2" fill="#2563eb"/>
+<text x="698.0" y="77" font-size="13" font-weight="600" fill="currentColor">479</text>
+<text x="0" y="111" font-size="13" fill="currentColor">2位 鹿児島県</text>
+<rect x="150" y="96" width="515.2" height="22" rx="2" fill="#2563eb"/>
+<text x="673.2" y="111" font-size="13" font-weight="600" fill="currentColor">457</text>
+<text x="0" y="145" font-size="13" fill="currentColor">3位 徳島県</text>
+<rect x="150" y="130" width="505.1" height="22" rx="2" fill="#2563eb"/>
+<text x="663.1" y="145" font-size="13" font-weight="600" fill="currentColor">448</text>
+<text x="0" y="179" font-size="13" fill="currentColor">3位 長崎県</text>
+<rect x="150" y="164" width="505.1" height="22" rx="2" fill="#2563eb"/>
+<text x="663.1" y="179" font-size="13" font-weight="600" fill="currentColor">448</text>
+<text x="0" y="213" font-size="13" fill="currentColor">5位 佐賀県</text>
+<rect x="150" y="198" width="501.7" height="22" rx="2" fill="#2563eb"/>
+<text x="659.7" y="213" font-size="13" font-weight="600" fill="currentColor">445</text>
+<line x1="0" y1="228" x2="760" y2="228" stroke="#94a3b8" stroke-width="1" stroke-dasharray="4 4" opacity="0.5"/>
+<text x="0" y="265" font-size="13" fill="currentColor">43位 茨城県</text>
+<rect x="150" y="250" width="383.3" height="22" rx="2" fill="#ea580c"/>
+<text x="541.3" y="265" font-size="13" font-weight="600" fill="currentColor">340</text>
+<text x="0" y="299" font-size="13" fill="currentColor">44位 滋賀県</text>
+<rect x="150" y="284" width="382.2" height="22" rx="2" fill="#ea580c"/>
+<text x="540.2" y="299" font-size="13" font-weight="600" fill="currentColor">339</text>
+<text x="0" y="333" font-size="13" fill="currentColor">45位 神奈川県</text>
+<rect x="150" y="318" width="381.0" height="22" rx="2" fill="#ea580c"/>
+<text x="539.0" y="333" font-size="13" font-weight="600" fill="currentColor">338</text>
+<text x="0" y="367" font-size="13" fill="currentColor">46位 千葉県</text>
+<rect x="150" y="352" width="376.5" height="22" rx="2" fill="#ea580c"/>
+<text x="534.5" y="367" font-size="13" font-weight="600" fill="currentColor">334</text>
+<text x="0" y="401" font-size="13" fill="currentColor">47位 埼玉県</text>
+<rect x="150" y="386" width="374.3" height="22" rx="2" fill="#ea580c"/>
+<text x="532.3" y="401" font-size="13" font-weight="600" fill="currentColor">332</text>
+</svg>

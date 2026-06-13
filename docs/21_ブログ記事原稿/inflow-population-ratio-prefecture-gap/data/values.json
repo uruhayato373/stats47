@@ -1,0 +1,331 @@
+[
+  {
+    "areaName": "東京都",
+    "rank": 1,
+    "value": 19.67,
+    "label": "流入人口比率",
+    "unit": "％"
+  },
+  {
+    "areaName": "京都府",
+    "rank": 2,
+    "value": 7.36,
+    "label": "流入人口比率",
+    "unit": "％"
+  },
+  {
+    "areaName": "大阪府",
+    "rank": 3,
+    "value": 6.82,
+    "label": "流入人口比率",
+    "unit": "％"
+  },
+  {
+    "areaName": "佐賀県",
+    "rank": 4,
+    "value": 5.04,
+    "label": "流入人口比率",
+    "unit": "％"
+  },
+  {
+    "areaName": "奈良県",
+    "rank": 5,
+    "value": 4.07,
+    "label": "流入人口比率",
+    "unit": "％"
+  },
+  {
+    "areaName": "埼玉県",
+    "rank": 6,
+    "value": 3.5,
+    "label": "流入人口比率",
+    "unit": "％"
+  },
+  {
+    "areaName": "神奈川県",
+    "rank": 7,
+    "value": 3.44,
+    "label": "流入人口比率",
+    "unit": "％"
+  },
+  {
+    "areaName": "群馬県",
+    "rank": 8,
+    "value": 3.2,
+    "label": "流入人口比率",
+    "unit": "％"
+  },
+  {
+    "areaName": "滋賀県",
+    "rank": 9,
+    "value": 3.01,
+    "label": "流入人口比率",
+    "unit": "％"
+  },
+  {
+    "areaName": "茨城県",
+    "rank": 10,
+    "value": 3,
+    "label": "流入人口比率",
+    "unit": "％"
+  },
+  {
+    "areaName": "千葉県",
+    "rank": 11,
+    "value": 2.95,
+    "label": "流入人口比率",
+    "unit": "％"
+  },
+  {
+    "areaName": "栃木県",
+    "rank": 12,
+    "value": 2.93,
+    "label": "流入人口比率",
+    "unit": "％"
+  },
+  {
+    "areaName": "岐阜県",
+    "rank": 13,
+    "value": 2.58,
+    "label": "流入人口比率",
+    "unit": "％"
+  },
+  {
+    "areaName": "兵庫県",
+    "rank": 14,
+    "value": 2.43,
+    "label": "流入人口比率",
+    "unit": "％"
+  },
+  {
+    "areaName": "愛知県",
+    "rank": 15,
+    "value": 2.33,
+    "label": "流入人口比率",
+    "unit": "％"
+  },
+  {
+    "areaName": "和歌山県",
+    "rank": 16,
+    "value": 2,
+    "label": "流入人口比率",
+    "unit": "％"
+  },
+  {
+    "areaName": "三重県",
+    "rank": 17,
+    "value": 1.74,
+    "label": "流入人口比率",
+    "unit": "％"
+  },
+  {
+    "areaName": "鳥取県",
+    "rank": 18,
+    "value": 1.49,
+    "label": "流入人口比率",
+    "unit": "％"
+  },
+  {
+    "areaName": "島根県",
+    "rank": 19,
+    "value": 1.37,
+    "label": "流入人口比率",
+    "unit": "％"
+  },
+  {
+    "areaName": "福岡県",
+    "rank": 19,
+    "value": 1.37,
+    "label": "流入人口比率",
+    "unit": "％"
+  },
+  {
+    "areaName": "山梨県",
+    "rank": 21,
+    "value": 1.3,
+    "label": "流入人口比率",
+    "unit": "％"
+  },
+  {
+    "areaName": "岡山県",
+    "rank": 22,
+    "value": 1.27,
+    "label": "流入人口比率",
+    "unit": "％"
+  },
+  {
+    "areaName": "山口県",
+    "rank": 23,
+    "value": 1.12,
+    "label": "流入人口比率",
+    "unit": "％"
+  },
+  {
+    "areaName": "広島県",
+    "rank": 24,
+    "value": 1.1,
+    "label": "流入人口比率",
+    "unit": "％"
+  },
+  {
+    "areaName": "福島県",
+    "rank": 25,
+    "value": 1.06,
+    "label": "流入人口比率",
+    "unit": "％"
+  },
+  {
+    "areaName": "石川県",
+    "rank": 26,
+    "value": 1.05,
+    "label": "流入人口比率",
+    "unit": "％"
+  },
+  {
+    "areaName": "香川県",
+    "rank": 27,
+    "value": 1.04,
+    "label": "流入人口比率",
+    "unit": "％"
+  },
+  {
+    "areaName": "福井県",
+    "rank": 28,
+    "value": 1.02,
+    "label": "流入人口比率",
+    "unit": "％"
+  },
+  {
+    "areaName": "宮城県",
+    "rank": 29,
+    "value": 0.98,
+    "label": "流入人口比率",
+    "unit": "％"
+  },
+  {
+    "areaName": "大分県",
+    "rank": 29,
+    "value": 0.98,
+    "label": "流入人口比率",
+    "unit": "％"
+  },
+  {
+    "areaName": "静岡県",
+    "rank": 31,
+    "value": 0.94,
+    "label": "流入人口比率",
+    "unit": "％"
+  },
+  {
+    "areaName": "熊本県",
+    "rank": 32,
+    "value": 0.85,
+    "label": "流入人口比率",
+    "unit": "％"
+  },
+  {
+    "areaName": "岩手県",
+    "rank": 33,
+    "value": 0.82,
+    "label": "流入人口比率",
+    "unit": "％"
+  },
+  {
+    "areaName": "富山県",
+    "rank": 34,
+    "value": 0.75,
+    "label": "流入人口比率",
+    "unit": "％"
+  },
+  {
+    "areaName": "宮崎県",
+    "rank": 35,
+    "value": 0.7,
+    "label": "流入人口比率",
+    "unit": "％"
+  },
+  {
+    "areaName": "愛媛県",
+    "rank": 36,
+    "value": 0.6,
+    "label": "流入人口比率",
+    "unit": "％"
+  },
+  {
+    "areaName": "長崎県",
+    "rank": 36,
+    "value": 0.6,
+    "label": "流入人口比率",
+    "unit": "％"
+  },
+  {
+    "areaName": "徳島県",
+    "rank": 38,
+    "value": 0.57,
+    "label": "流入人口比率",
+    "unit": "％"
+  },
+  {
+    "areaName": "山形県",
+    "rank": 39,
+    "value": 0.52,
+    "label": "流入人口比率",
+    "unit": "％"
+  },
+  {
+    "areaName": "鹿児島県",
+    "rank": 39,
+    "value": 0.52,
+    "label": "流入人口比率",
+    "unit": "％"
+  },
+  {
+    "areaName": "青森県",
+    "rank": 41,
+    "value": 0.48,
+    "label": "流入人口比率",
+    "unit": "％"
+  },
+  {
+    "areaName": "長野県",
+    "rank": 42,
+    "value": 0.45,
+    "label": "流入人口比率",
+    "unit": "％"
+  },
+  {
+    "areaName": "高知県",
+    "rank": 43,
+    "value": 0.33,
+    "label": "流入人口比率",
+    "unit": "％"
+  },
+  {
+    "areaName": "秋田県",
+    "rank": 44,
+    "value": 0.29,
+    "label": "流入人口比率",
+    "unit": "％"
+  },
+  {
+    "areaName": "新潟県",
+    "rank": 45,
+    "value": 0.27,
+    "label": "流入人口比率",
+    "unit": "％"
+  },
+  {
+    "areaName": "沖縄県",
+    "rank": 46,
+    "value": 0.09,
+    "label": "流入人口比率",
+    "unit": "％"
+  },
+  {
+    "areaName": "北海道",
+    "rank": 47,
+    "value": 0.07,
+    "label": "流入人口比率",
+    "unit": "％"
+  }
+]

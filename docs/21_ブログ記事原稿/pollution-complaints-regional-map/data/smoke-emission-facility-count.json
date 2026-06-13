@@ -1,0 +1,331 @@
+[
+  {
+    "areaName": "北海道",
+    "rank": 1,
+    "value": 15438,
+    "label": "ばい煙発生施設数",
+    "unit": "件"
+  },
+  {
+    "areaName": "大阪",
+    "rank": 2,
+    "value": 12811,
+    "label": "ばい煙発生施設数",
+    "unit": "件"
+  },
+  {
+    "areaName": "東京",
+    "rank": 3,
+    "value": 12400,
+    "label": "ばい煙発生施設数",
+    "unit": "件"
+  },
+  {
+    "areaName": "愛知",
+    "rank": 4,
+    "value": 12071,
+    "label": "ばい煙発生施設数",
+    "unit": "件"
+  },
+  {
+    "areaName": "神奈川",
+    "rank": 5,
+    "value": 8626,
+    "label": "ばい煙発生施設数",
+    "unit": "件"
+  },
+  {
+    "areaName": "兵庫",
+    "rank": 6,
+    "value": 8486,
+    "label": "ばい煙発生施設数",
+    "unit": "件"
+  },
+  {
+    "areaName": "千葉",
+    "rank": 7,
+    "value": 6784,
+    "label": "ばい煙発生施設数",
+    "unit": "件"
+  },
+  {
+    "areaName": "静岡",
+    "rank": 8,
+    "value": 6608,
+    "label": "ばい煙発生施設数",
+    "unit": "件"
+  },
+  {
+    "areaName": "福岡",
+    "rank": 9,
+    "value": 6350,
+    "label": "ばい煙発生施設数",
+    "unit": "件"
+  },
+  {
+    "areaName": "埼玉",
+    "rank": 10,
+    "value": 6259,
+    "label": "ばい煙発生施設数",
+    "unit": "件"
+  },
+  {
+    "areaName": "茨城",
+    "rank": 11,
+    "value": 5711,
+    "label": "ばい煙発生施設数",
+    "unit": "件"
+  },
+  {
+    "areaName": "新潟",
+    "rank": 12,
+    "value": 5128,
+    "label": "ばい煙発生施設数",
+    "unit": "件"
+  },
+  {
+    "areaName": "長野",
+    "rank": 13,
+    "value": 4817,
+    "label": "ばい煙発生施設数",
+    "unit": "件"
+  },
+  {
+    "areaName": "福島",
+    "rank": 14,
+    "value": 4557,
+    "label": "ばい煙発生施設数",
+    "unit": "件"
+  },
+  {
+    "areaName": "栃木",
+    "rank": 15,
+    "value": 4362,
+    "label": "ばい煙発生施設数",
+    "unit": "件"
+  },
+  {
+    "areaName": "三重",
+    "rank": 16,
+    "value": 4160,
+    "label": "ばい煙発生施設数",
+    "unit": "件"
+  },
+  {
+    "areaName": "広島",
+    "rank": 17,
+    "value": 4037,
+    "label": "ばい煙発生施設数",
+    "unit": "件"
+  },
+  {
+    "areaName": "宮城",
+    "rank": 18,
+    "value": 3996,
+    "label": "ばい煙発生施設数",
+    "unit": "件"
+  },
+  {
+    "areaName": "群馬",
+    "rank": 19,
+    "value": 3944,
+    "label": "ばい煙発生施設数",
+    "unit": "件"
+  },
+  {
+    "areaName": "岐阜",
+    "rank": 20,
+    "value": 3747,
+    "label": "ばい煙発生施設数",
+    "unit": "件"
+  },
+  {
+    "areaName": "岩手",
+    "rank": 21,
+    "value": 3536,
+    "label": "ばい煙発生施設数",
+    "unit": "件"
+  },
+  {
+    "areaName": "京都",
+    "rank": 22,
+    "value": 3503,
+    "label": "ばい煙発生施設数",
+    "unit": "件"
+  },
+  {
+    "areaName": "岡山",
+    "rank": 23,
+    "value": 3463,
+    "label": "ばい煙発生施設数",
+    "unit": "件"
+  },
+  {
+    "areaName": "山口",
+    "rank": 24,
+    "value": 3393,
+    "label": "ばい煙発生施設数",
+    "unit": "件"
+  },
+  {
+    "areaName": "青森",
+    "rank": 25,
+    "value": 3203,
+    "label": "ばい煙発生施設数",
+    "unit": "件"
+  },
+  {
+    "areaName": "富山",
+    "rank": 26,
+    "value": 3031,
+    "label": "ばい煙発生施設数",
+    "unit": "件"
+  },
+  {
+    "areaName": "鹿児島",
+    "rank": 27,
+    "value": 2954,
+    "label": "ばい煙発生施設数",
+    "unit": "件"
+  },
+  {
+    "areaName": "滋賀",
+    "rank": 28,
+    "value": 2928,
+    "label": "ばい煙発生施設数",
+    "unit": "件"
+  },
+  {
+    "areaName": "熊本",
+    "rank": 29,
+    "value": 2624,
+    "label": "ばい煙発生施設数",
+    "unit": "件"
+  },
+  {
+    "areaName": "石川",
+    "rank": 30,
+    "value": 2377,
+    "label": "ばい煙発生施設数",
+    "unit": "件"
+  },
+  {
+    "areaName": "秋田",
+    "rank": 31,
+    "value": 2347,
+    "label": "ばい煙発生施設数",
+    "unit": "件"
+  },
+  {
+    "areaName": "山形",
+    "rank": 32,
+    "value": 2345,
+    "label": "ばい煙発生施設数",
+    "unit": "件"
+  },
+  {
+    "areaName": "愛媛",
+    "rank": 33,
+    "value": 2273,
+    "label": "ばい煙発生施設数",
+    "unit": "件"
+  },
+  {
+    "areaName": "山梨",
+    "rank": 34,
+    "value": 1833,
+    "label": "ばい煙発生施設数",
+    "unit": "件"
+  },
+  {
+    "areaName": "奈良",
+    "rank": 35,
+    "value": 1808,
+    "label": "ばい煙発生施設数",
+    "unit": "件"
+  },
+  {
+    "areaName": "大分",
+    "rank": 36,
+    "value": 1807,
+    "label": "ばい煙発生施設数",
+    "unit": "件"
+  },
+  {
+    "areaName": "長崎",
+    "rank": 37,
+    "value": 1805,
+    "label": "ばい煙発生施設数",
+    "unit": "件"
+  },
+  {
+    "areaName": "福井",
+    "rank": 38,
+    "value": 1802,
+    "label": "ばい煙発生施設数",
+    "unit": "件"
+  },
+  {
+    "areaName": "和歌山",
+    "rank": 39,
+    "value": 1755,
+    "label": "ばい煙発生施設数",
+    "unit": "件"
+  },
+  {
+    "areaName": "香川",
+    "rank": 40,
+    "value": 1745,
+    "label": "ばい煙発生施設数",
+    "unit": "件"
+  },
+  {
+    "areaName": "宮崎",
+    "rank": 41,
+    "value": 1742,
+    "label": "ばい煙発生施設数",
+    "unit": "件"
+  },
+  {
+    "areaName": "徳島",
+    "rank": 42,
+    "value": 1498,
+    "label": "ばい煙発生施設数",
+    "unit": "件"
+  },
+  {
+    "areaName": "沖縄",
+    "rank": 43,
+    "value": 1466,
+    "label": "ばい煙発生施設数",
+    "unit": "件"
+  },
+  {
+    "areaName": "島根",
+    "rank": 44,
+    "value": 1310,
+    "label": "ばい煙発生施設数",
+    "unit": "件"
+  },
+  {
+    "areaName": "佐賀",
+    "rank": 45,
+    "value": 1287,
+    "label": "ばい煙発生施設数",
+    "unit": "件"
+  },
+  {
+    "areaName": "高知",
+    "rank": 46,
+    "value": 1233,
+    "label": "ばい煙発生施設数",
+    "unit": "件"
+  },
+  {
+    "areaName": "鳥取",
+    "rank": 47,
+    "value": 994,
+    "label": "ばい煙発生施設数",
+    "unit": "件"
+  }
+]

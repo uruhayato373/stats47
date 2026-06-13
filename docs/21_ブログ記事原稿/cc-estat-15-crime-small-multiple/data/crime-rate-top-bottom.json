@@ -1,0 +1,19 @@
+{
+  "rankingKey": "penal-code-offenses-recognized-per-1000",
+  "label": "刑法犯認知件数（人口千人当たり）",
+  "unit": "件",
+  "yearCode": "2023",
+  "source": "警察庁・総務省統計局",
+  "items": [
+    { "areaName": "大阪府", "rank": 1, "value": 9.15, "label": "刑法犯認知件数（人口千人当たり）", "unit": "件" },
+    { "areaName": "群馬県", "rank": 2, "value": 7.01, "label": "刑法犯認知件数（人口千人当たり）", "unit": "件" },
+    { "areaName": "茨城県", "rank": 3, "value": 7.0, "label": "刑法犯認知件数（人口千人当たり）", "unit": "件" },
+    { "areaName": "兵庫県", "rank": 4, "value": 6.94, "label": "刑法犯認知件数（人口千人当たり）", "unit": "件" },
+    { "areaName": "埼玉県", "rank": 5, "value": 6.77, "label": "刑法犯認知件数（人口千人当たり）", "unit": "件" },
+    { "areaName": "長崎県", "rank": 43, "value": 2.99, "label": "刑法犯認知件数（人口千人当たり）", "unit": "件" },
+    { "areaName": "山形県", "rank": 44, "value": 2.9, "label": "刑法犯認知件数（人口千人当たり）", "unit": "件" },
+    { "areaName": "大分県", "rank": 45, "value": 2.73, "label": "刑法犯認知件数（人口千人当たり）", "unit": "件" },
+    { "areaName": "秋田県", "rank": 46, "value": 2.63, "label": "刑法犯認知件数（人口千人当たり）", "unit": "件" },
+    { "areaName": "岩手県", "rank": 47, "value": 2.46, "label": "刑法犯認知件数（人口千人当たり）", "unit": "件" }
+  ]
+}

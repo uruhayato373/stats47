@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 412" role="img" aria-label="人口100万人あたり図書館数 上位5・下位5（2021）">
+  <title>人口100万人あたり図書館数 上位5・下位5（2021）</title>
+  <text x="86" y="26" font-size="17" fill="#0f172a" font-weight="700">人口100万人あたり図書館数 上位5・下位5（2021）</text>
+  <text x="86" y="46" font-size="12" fill="#64748b">上位5（青）／下位5（橙）・単位: 館</text>
+  <line x1="86" y1="228" x2="708" y2="228" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="4 4" />
+  
+    <text x="78" y="78" text-anchor="end" font-size="15" fill="#475569" font-weight="600">山梨県</text>
+    <rect x="86" y="62" width="514" height="20" rx="2" fill="#2563eb" />
+    <text x="608" y="78" font-size="14" fill="#334155" font-weight="700">65.8館</text>
+    <text x="78" y="112" text-anchor="end" font-size="15" fill="#475569" font-weight="600">島根県</text>
+    <rect x="86" y="96" width="481.9726443768997" height="20" rx="2" fill="#2563eb" />
+    <text x="575.9726443768998" y="112" font-size="14" fill="#334155" font-weight="700">61.7館</text>
+    <text x="78" y="146" text-anchor="end" font-size="15" fill="#475569" font-weight="600">長野県</text>
+    <rect x="86" y="130" width="460.8814589665654" height="20" rx="2" fill="#2563eb" />
+    <text x="554.8814589665653" y="146" font-size="14" fill="#334155" font-weight="700">59館</text>
+    <text x="78" y="180" text-anchor="end" font-size="15" fill="#475569" font-weight="600">高知県</text>
+    <rect x="86" y="164" width="456.97568389057756" height="20" rx="2" fill="#2563eb" />
+    <text x="550.9756838905776" y="180" font-size="14" fill="#334155" font-weight="700">58.5館</text>
+    <text x="78" y="214" text-anchor="end" font-size="15" fill="#475569" font-weight="600">富山県</text>
+    <rect x="86" y="198" width="426.5106382978724" height="20" rx="2" fill="#2563eb" />
+    <text x="520.5106382978724" y="214" font-size="14" fill="#334155" font-weight="700">54.6館</text>
+    <text x="78" y="248" text-anchor="end" font-size="15" fill="#475569" font-weight="600">兵庫県</text>
+    <rect x="86" y="232" width="153.887537993921" height="20" rx="2" fill="#ea7317" />
+    <text x="247.887537993921" y="248" font-size="14" fill="#334155" font-weight="700">19.7館</text>
+    <text x="78" y="282" text-anchor="end" font-size="15" fill="#475569" font-weight="600">大阪府</text>
+    <rect x="86" y="266" width="137.48328267477206" height="20" rx="2" fill="#ea7317" />
+    <text x="231.48328267477206" y="282" font-size="14" fill="#334155" font-weight="700">17.6館</text>
+    <text x="78" y="316" text-anchor="end" font-size="15" fill="#475569" font-weight="600">宮城県</text>
+    <rect x="86" y="300" width="119.51671732522797" height="20" rx="2" fill="#ea7317" />
+    <text x="213.51671732522797" y="316" font-size="14" fill="#334155" font-weight="700">15.3館</text>
+    <text x="78" y="350" text-anchor="end" font-size="15" fill="#475569" font-weight="600">愛知県</text>
+    <rect x="86" y="334" width="100.76899696048633" height="20" rx="2" fill="#ea7317" />
+    <text x="194.76899696048633" y="350" font-size="14" fill="#334155" font-weight="700">12.9館</text>
+    <text x="78" y="384" text-anchor="end" font-size="15" fill="#475569" font-weight="600">神奈川県</text>
+    <rect x="86" y="368" width="71.86626139817629" height="20" rx="2" fill="#ea7317" />
+    <text x="165.86626139817628" y="384" font-size="14" fill="#334155" font-weight="700">9.2館</text>
+</svg>

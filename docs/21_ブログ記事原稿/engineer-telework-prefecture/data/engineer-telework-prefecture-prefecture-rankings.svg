@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 460" role="img" aria-label="テレワーク実施率 上位5・下位5（2022年）">
+<style>text{font-family:system-ui,-apple-system,"Hiragino Sans","Yu Gothic",sans-serif;}</style>
+<title>テレワーク実施率 上位5・下位5（2022年・％）</title>
+<text x="96" y="28" font-size="18" font-weight="700" fill="#0f172a">テレワーク実施率 上位5・下位5（2022年・％）</text>
+<text x="96" y="46" font-size="12" fill="#334155">青=上位5 / 橙=下位5</text>
+<rect x="96" y="56.0" width="594.0" height="28.6" fill="#2563eb" rx="2"><title>東京都 39.8％</title></rect>
+<text x="88" y="74.3" font-size="13" text-anchor="end" fill="#334155">東京都</text>
+<text x="696.0" y="74.3" font-size="13" font-weight="600" fill="#0f172a">39.8％</text>
+<rect x="96" y="94.6" width="447.7" height="28.6" fill="#2563eb" rx="2"><title>神奈川県 30.0％</title></rect>
+<text x="88" y="112.9" font-size="13" text-anchor="end" fill="#334155">神奈川県</text>
+<text x="549.7" y="112.9" font-size="13" font-weight="600" fill="#0f172a">30.0％</text>
+<rect x="96" y="133.2" width="356.7" height="28.6" fill="#2563eb" rx="2"><title>千葉県 23.9％</title></rect>
+<text x="88" y="151.5" font-size="13" text-anchor="end" fill="#334155">千葉県</text>
+<text x="458.7" y="151.5" font-size="13" font-weight="600" fill="#0f172a">23.9％</text>
+<rect x="96" y="171.8" width="323.9" height="28.6" fill="#2563eb" rx="2"><title>埼玉県 21.7％</title></rect>
+<text x="88" y="190.1" font-size="13" text-anchor="end" fill="#334155">埼玉県</text>
+<text x="425.9" y="190.1" font-size="13" font-weight="600" fill="#0f172a">21.7％</text>
+<rect x="96" y="210.4" width="294.0" height="28.6" fill="#2563eb" rx="2"><title>大阪府 19.7％</title></rect>
+<text x="88" y="228.7" font-size="13" text-anchor="end" fill="#334155">大阪府</text>
+<text x="396.0" y="228.7" font-size="13" font-weight="600" fill="#0f172a">19.7％</text>
+<rect x="96" y="249.0" width="113.4" height="28.6" fill="#ea580c" rx="2"><title>高知県 7.6％</title></rect>
+<text x="88" y="267.3" font-size="13" text-anchor="end" fill="#334155">高知県</text>
+<text x="215.4" y="267.3" font-size="13" font-weight="600" fill="#0f172a">7.6％</text>
+<rect x="96" y="287.6" width="113.4" height="28.6" fill="#ea580c" rx="2"><title>鹿児島県 7.6％</title></rect>
+<text x="88" y="305.9" font-size="13" text-anchor="end" fill="#334155">鹿児島県</text>
+<text x="215.4" y="305.9" font-size="13" font-weight="600" fill="#0f172a">7.6％</text>
+<rect x="96" y="326.2" width="107.5" height="28.6" fill="#ea580c" rx="2"><title>青森県 7.2％</title></rect>
+<text x="88" y="344.5" font-size="13" text-anchor="end" fill="#334155">青森県</text>
+<text x="209.5" y="344.5" font-size="13" font-weight="600" fill="#0f172a">7.2％</text>
+<rect x="96" y="364.8" width="106.0" height="28.6" fill="#ea580c" rx="2"><title>島根県 7.1％</title></rect>
+<text x="88" y="383.1" font-size="13" text-anchor="end" fill="#334155">島根県</text>
+<text x="208.0" y="383.1" font-size="13" font-weight="600" fill="#0f172a">7.1％</text>
+<rect x="96" y="403.4" width="95.5" height="28.6" fill="#ea580c" rx="2"><title>秋田県 6.4％</title></rect>
+<text x="88" y="421.7" font-size="13" text-anchor="end" fill="#334155">秋田県</text>
+<text x="197.5" y="421.7" font-size="13" font-weight="600" fill="#0f172a">6.4％</text>
+</svg>

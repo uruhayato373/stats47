@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 412" width="720" height="412" role="img" aria-label="ガソリン販売量 上位5・下位5（2023年度・万KL）" font-family="system-ui, -apple-system, 'Hiragino Kaku Gothic ProN', sans-serif">
+<style>
+    .svg-bg{fill:#fafafa}
+    .svg-title{fill:#222}
+    .svg-subtitle{fill:#666}
+    .svg-label{fill:#334155}
+    .svg-val{fill:#475569}
+    .svg-div{stroke:#cbd5e1}
+    @media (prefers-color-scheme:dark){
+      .svg-bg{fill:#1f2937}
+      .svg-title{fill:#f9fafb}
+      .svg-subtitle{fill:#9ca3af}
+      .svg-label{fill:#e5e7eb}
+      .svg-val{fill:#cbd5e1}
+      .svg-div{stroke:#4b5563}
+    }
+  </style>
+<rect x="0" y="0" width="720" height="412" class="svg-bg" rx="8"/>
+<text x="92" y="28" font-size="15" font-weight="bold" class="svg-title">ガソリン販売量 上位5・下位5（2023年度・万KL）</text>
+<text x="92" y="44" font-size="11" class="svg-subtitle">単位: 万KL ／ 青=上位5・橙=下位5</text>
+<line x1="92" y1="226" x2="674" y2="226" class="svg-div" stroke-dasharray="3 3" stroke-width="1"/>
+<text x="84" y="68" text-anchor="end" dominant-baseline="middle" font-size="13" class="svg-label">東京都</text><rect x="92" y="56" width="542.0" height="24" rx="2" fill="#2563eb"><title>東京都: 424.5万KL</title></rect><text x="640.0" y="68" dominant-baseline="middle" font-size="12" class="svg-val">424.5</text><text x="84" y="102" text-anchor="end" dominant-baseline="middle" font-size="13" class="svg-label">愛知県</text><rect x="92" y="90" width="353.0" height="24" rx="2" fill="#2563eb"><title>愛知県: 276.5万KL</title></rect><text x="451.0" y="102" dominant-baseline="middle" font-size="12" class="svg-val">276.5</text><text x="84" y="136" text-anchor="end" dominant-baseline="middle" font-size="13" class="svg-label">大阪府</text><rect x="92" y="124" width="287.7" height="24" rx="2" fill="#2563eb"><title>大阪府: 225.3万KL</title></rect><text x="385.7" y="136" dominant-baseline="middle" font-size="12" class="svg-val">225.3</text><text x="84" y="170" text-anchor="end" dominant-baseline="middle" font-size="13" class="svg-label">埼玉県</text><rect x="92" y="158" width="281.4" height="24" rx="2" fill="#2563eb"><title>埼玉県: 220.4万KL</title></rect><text x="379.4" y="170" dominant-baseline="middle" font-size="12" class="svg-val">220.4</text><text x="84" y="204" text-anchor="end" dominant-baseline="middle" font-size="13" class="svg-label">北海道</text><rect x="92" y="192" width="264.7" height="24" rx="2" fill="#2563eb"><title>北海道: 207.3万KL</title></rect><text x="362.7" y="204" dominant-baseline="middle" font-size="12" class="svg-val">207.3</text><text x="84" y="238" text-anchor="end" dominant-baseline="middle" font-size="13" class="svg-label">徳島県</text><rect x="92" y="226" width="36.5" height="24" rx="2" fill="#ea580c"><title>徳島県: 28.6万KL</title></rect><text x="134.5" y="238" dominant-baseline="middle" font-size="12" class="svg-val">28.6</text><text x="84" y="272" text-anchor="end" dominant-baseline="middle" font-size="13" class="svg-label">和歌山県</text><rect x="92" y="260" width="36.1" height="24" rx="2" fill="#ea580c"><title>和歌山県: 28.3万KL</title></rect><text x="134.1" y="272" dominant-baseline="middle" font-size="12" class="svg-val">28.3</text><text x="84" y="306" text-anchor="end" dominant-baseline="middle" font-size="13" class="svg-label">鳥取県</text><rect x="92" y="294" width="34.2" height="24" rx="2" fill="#ea580c"><title>鳥取県: 26.8万KL</title></rect><text x="132.2" y="306" dominant-baseline="middle" font-size="12" class="svg-val">26.8</text><text x="84" y="340" text-anchor="end" dominant-baseline="middle" font-size="13" class="svg-label">高知県</text><rect x="92" y="328" width="33.5" height="24" rx="2" fill="#ea580c"><title>高知県: 26.2万KL</title></rect><text x="131.5" y="340" dominant-baseline="middle" font-size="12" class="svg-val">26.2</text><text x="84" y="374" text-anchor="end" dominant-baseline="middle" font-size="13" class="svg-label">島根県</text><rect x="92" y="362" width="31.9" height="24" rx="2" fill="#ea580c"><title>島根県: 25万KL</title></rect><text x="129.9" y="374" dominant-baseline="middle" font-size="12" class="svg-val">25</text>
+</svg>

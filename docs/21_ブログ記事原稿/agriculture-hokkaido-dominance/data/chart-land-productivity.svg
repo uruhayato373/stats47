@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 352" role="img" aria-label="耕地1ha当たり農業産出額 上位5・下位3（万円/ha・2022年度）" font-family="system-ui, -apple-system, 'Hiragino Sans', 'Yu Gothic', sans-serif">
+<title>耕地1ha当たり農業産出額 上位5・下位3（万円/ha・2022年度）</title>
+<text x="360" y="30" text-anchor="middle" font-size="18" font-weight="700" fill="#94a3b8">耕地1ha当たり農業産出額 上位5・下位3（万円/ha・2022年度）</text>
+<text x="96" y="78" text-anchor="end" font-size="14" fill="#94a3b8">宮崎</text>
+<rect x="108" y="62" width="500" height="20" rx="2" fill="#2563eb"><title>宮崎: 544.3</title></rect>
+<text x="616" y="78" text-anchor="start" font-size="13" font-weight="600" fill="#64748b">544.3</text>
+<text x="96" y="112" text-anchor="end" font-size="14" fill="#94a3b8">山梨</text>
+<rect x="108" y="96" width="461" height="20" rx="2" fill="#2563eb"><title>山梨: 501.7</title></rect>
+<text x="577" y="112" text-anchor="start" font-size="13" font-weight="600" fill="#64748b">501.7</text>
+<text x="96" y="146" text-anchor="end" font-size="14" fill="#94a3b8">鹿児島</text>
+<rect x="108" y="130" width="420" height="20" rx="2" fill="#2563eb"><title>鹿児島: 457.4</title></rect>
+<text x="536" y="146" text-anchor="start" font-size="13" font-weight="600" fill="#64748b">457.4</text>
+<text x="96" y="180" text-anchor="end" font-size="14" fill="#94a3b8">愛知</text>
+<rect x="108" y="164" width="392" height="20" rx="2" fill="#2563eb"><title>愛知: 427.2</title></rect>
+<text x="508" y="180" text-anchor="start" font-size="13" font-weight="600" fill="#64748b">427.2</text>
+<text x="96" y="214" text-anchor="end" font-size="14" fill="#94a3b8">高知</text>
+<rect x="108" y="198" width="382" height="20" rx="2" fill="#2563eb"><title>高知: 415.9</title></rect>
+<text x="498" y="214" text-anchor="start" font-size="13" font-weight="600" fill="#64748b">415.9</text>
+<text x="96" y="248" text-anchor="end" font-size="14" fill="#94a3b8">北海道</text>
+<rect x="108" y="232" width="104" height="20" rx="2" fill="#ea580c"><title>北海道: 113.2（45位）</title></rect>
+<text x="220" y="248" text-anchor="start" font-size="13" font-weight="600" fill="#64748b">113.2（45位）</text>
+<text x="96" y="282" text-anchor="end" font-size="14" fill="#94a3b8">福井</text>
+<rect x="108" y="266" width="95" height="20" rx="2" fill="#ea580c"><title>福井: 103.8（46位）</title></rect>
+<text x="211" y="282" text-anchor="start" font-size="13" font-weight="600" fill="#64748b">103.8（46位）</text>
+<text x="96" y="316" text-anchor="end" font-size="14" fill="#94a3b8">富山</text>
+<rect x="108" y="300" width="90" height="20" rx="2" fill="#ea580c"><title>富山: 98.1（47位）</title></rect>
+<text x="206" y="316" text-anchor="start" font-size="13" font-weight="600" fill="#64748b">98.1（47位）</text>
+<line x1="108" y1="226" x2="608" y2="226" stroke="#94a3b8" stroke-width="1" stroke-dasharray="4 4" opacity="0.5"/>
+</svg>

@@ -1,0 +1,39 @@
+<svg viewBox="0 0 760 490" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="年間降水日数 上位5・下位5（47都道府県・2024年）">
+  <text x="380" y="28" text-anchor="middle" font-size="15" font-weight="bold" fill="#64748b">年間降水日数 上位5・下位5（47都道府県・2024年）</text>
+  <text x="380" y="46" text-anchor="middle" font-size="11.5" fill="#94a3b8">1位 富山 182日 ／ 47位 岡山 86日</text>
+  <rect x="112" y="56" width="11" height="11" rx="1.5" fill="#2563eb"/>
+  <text x="128" y="66" font-size="11" fill="#94a3b8">上位5</text>
+  <rect x="176" y="56" width="11" height="11" rx="1.5" fill="#ea580c"/>
+  <text x="192" y="66" font-size="11" fill="#94a3b8">下位5</text>
+  <text x="96" y="93" text-anchor="end" font-size="13" fill="#64748b">富山 (1位)</text>
+  <rect x="112" y="77" width="538" height="22" rx="2" fill="#2563eb"/>
+  <text x="658" y="93" font-size="12.5" font-weight="bold" fill="#64748b">182日</text>
+  <text x="96" y="131" text-anchor="end" font-size="13" fill="#64748b">石川 (2位)</text>
+  <rect x="112" y="115" width="508.4395604395604" height="22" rx="2" fill="#2563eb"/>
+  <text x="628.4395604395604" y="131" font-size="12.5" font-weight="bold" fill="#64748b">172日</text>
+  <text x="96" y="169" text-anchor="end" font-size="13" fill="#64748b">福井 (3位)</text>
+  <rect x="112" y="153" width="502.5274725274725" height="22" rx="2" fill="#2563eb"/>
+  <text x="622.5274725274726" y="169" font-size="12.5" font-weight="bold" fill="#64748b">170日</text>
+  <text x="96" y="207" text-anchor="end" font-size="13" fill="#64748b">秋田 (4位)</text>
+  <rect x="112" y="191" width="478.8791208791209" height="22" rx="2" fill="#2563eb"/>
+  <text x="598.8791208791208" y="207" font-size="12.5" font-weight="bold" fill="#64748b">162日</text>
+  <text x="96" y="245" text-anchor="end" font-size="13" fill="#64748b">新潟 (5位)</text>
+  <rect x="112" y="229" width="475.9230769230769" height="22" rx="2" fill="#2563eb"/>
+  <text x="595.9230769230769" y="245" font-size="12.5" font-weight="bold" fill="#64748b">161日</text>
+  <text x="96" y="283" text-anchor="end" font-size="13" fill="#64748b">山梨 (43位)</text>
+  <rect x="112" y="267" width="280.8241758241758" height="22" rx="2" fill="#ea580c"/>
+  <text x="400.8241758241758" y="283" font-size="12.5" font-weight="bold" fill="#64748b">95日</text>
+  <text x="96" y="321" text-anchor="end" font-size="13" fill="#64748b">広島 (43位)</text>
+  <rect x="112" y="305" width="280.8241758241758" height="22" rx="2" fill="#ea580c"/>
+  <text x="400.8241758241758" y="321" font-size="12.5" font-weight="bold" fill="#64748b">95日</text>
+  <text x="96" y="359" text-anchor="end" font-size="13" fill="#64748b">香川 (45位)</text>
+  <rect x="112" y="343" width="274.9120879120879" height="22" rx="2" fill="#ea580c"/>
+  <text x="394.9120879120879" y="359" font-size="12.5" font-weight="bold" fill="#64748b">93日</text>
+  <text x="96" y="397" text-anchor="end" font-size="13" fill="#64748b">宮城 (46位)</text>
+  <rect x="112" y="381" width="266.04395604395603" height="22" rx="2" fill="#ea580c"/>
+  <text x="386.04395604395603" y="397" font-size="12.5" font-weight="bold" fill="#64748b">90日</text>
+  <text x="96" y="435" text-anchor="end" font-size="13" fill="#64748b">岡山 (47位)</text>
+  <rect x="112" y="419" width="254.2197802197802" height="22" rx="2" fill="#ea580c"/>
+  <text x="374.2197802197802" y="435" font-size="12.5" font-weight="bold" fill="#64748b">86日</text>
+  <text x="380" y="478" text-anchor="middle" font-size="10" fill="#94a3b8">出典: e-Stat 社会・人口統計体系 2024年</text>
+</svg>

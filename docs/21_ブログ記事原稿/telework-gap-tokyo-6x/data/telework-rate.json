@@ -1,0 +1,72 @@
+[
+  {
+    "areaName": "東京都",
+    "rank": 1,
+    "value": 39.8,
+    "label": "テレワーク実施率",
+    "unit": "％"
+  },
+  {
+    "areaName": "神奈川県",
+    "rank": 2,
+    "value": 30,
+    "label": "テレワーク実施率",
+    "unit": "％"
+  },
+  {
+    "areaName": "千葉県",
+    "rank": 3,
+    "value": 23.9,
+    "label": "テレワーク実施率",
+    "unit": "％"
+  },
+  {
+    "areaName": "埼玉県",
+    "rank": 4,
+    "value": 21.7,
+    "label": "テレワーク実施率",
+    "unit": "％"
+  },
+  {
+    "areaName": "大阪府",
+    "rank": 5,
+    "value": 19.7,
+    "label": "テレワーク実施率",
+    "unit": "％"
+  },
+  {
+    "areaName": "高知県",
+    "rank": 43,
+    "value": 7.6,
+    "label": "テレワーク実施率",
+    "unit": "％"
+  },
+  {
+    "areaName": "鹿児島県",
+    "rank": 44,
+    "value": 7.6,
+    "label": "テレワーク実施率",
+    "unit": "％"
+  },
+  {
+    "areaName": "青森県",
+    "rank": 45,
+    "value": 7.2,
+    "label": "テレワーク実施率",
+    "unit": "％"
+  },
+  {
+    "areaName": "島根県",
+    "rank": 46,
+    "value": 7.1,
+    "label": "テレワーク実施率",
+    "unit": "％"
+  },
+  {
+    "areaName": "秋田県",
+    "rank": 47,
+    "value": 6.4,
+    "label": "テレワーク実施率",
+    "unit": "％"
+  }
+]

@@ -1,0 +1,68 @@
+<!-- data-source: income-ranking.json | generated: 2026-06-13T19:24:59.775785 -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 466" font-family="system-ui, sans-serif" role="img" aria-label="1人当たり県民所得 上位5・下位5（47都道府県・2020年度）">
+<title>1人当たり県民所得 上位5・下位5（47都道府県・2020年度）</title>
+<text x="360.0" y="28" text-anchor="middle" font-size="17" font-weight="700" fill="#0f172a">1人当たり県民所得 上位5・下位5（47都道府県・2020年度）</text>
+<text x="360.0" y="48" text-anchor="middle" font-size="12" fill="#64748b">1人あたり県民所得（千円）（上位5＝青／下位5＝橙）</text>
+<g>
+<rect x="144" y="69" width="0" height="0" fill="none"/>
+<text x="150" y="85" text-anchor="end" font-size="13" fill="#334155">1. 東京都</text>
+<rect x="162" y="70" width="408.0" height="22" rx="2" fill="#2563eb"><title>東京都：1人当たり県民所得=5214千円（1位）</title></rect>
+<text x="576.0" y="85" font-size="12" fill="#475569">5,214千円</text>
+</g>
+<g>
+<rect x="144" y="103" width="0" height="0" fill="none"/>
+<text x="150" y="119" text-anchor="end" font-size="13" fill="#334155">2. 愛知県</text>
+<rect x="162" y="104" width="268.2" height="22" rx="2" fill="#2563eb"><title>愛知県：1人当たり県民所得=3428千円（2位）</title></rect>
+<text x="436.2" y="119" font-size="12" fill="#475569">3,428千円</text>
+</g>
+<g>
+<rect x="144" y="137" width="0" height="0" fill="none"/>
+<text x="150" y="153" text-anchor="end" font-size="13" fill="#334155">3. 福井県</text>
+<rect x="162" y="138" width="249.0" height="22" rx="2" fill="#2563eb"><title>福井県：1人当たり県民所得=3182千円（3位）</title></rect>
+<text x="417.0" y="153" font-size="12" fill="#475569">3,182千円</text>
+</g>
+<g>
+<rect x="144" y="171" width="0" height="0" fill="none"/>
+<text x="150" y="187" text-anchor="end" font-size="13" fill="#334155">4. 栃木県</text>
+<rect x="162" y="172" width="245.1" height="22" rx="2" fill="#2563eb"><title>栃木県：1人当たり県民所得=3132千円（4位）</title></rect>
+<text x="413.1" y="187" font-size="12" fill="#475569">3,132千円</text>
+</g>
+<g>
+<rect x="144" y="205" width="0" height="0" fill="none"/>
+<text x="150" y="221" text-anchor="end" font-size="13" fill="#334155">5. 富山県</text>
+<rect x="162" y="206" width="244.1" height="22" rx="2" fill="#2563eb"><title>富山県：1人当たり県民所得=3120千円（5位）</title></rect>
+<text x="412.1" y="221" font-size="12" fill="#475569">3,120千円</text>
+</g>
+<line x1="12" y1="225" x2="708" y2="225" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="3 3"/>
+<g>
+<rect x="144" y="239" width="0" height="0" fill="none"/>
+<text x="150" y="255" text-anchor="end" font-size="13" fill="#334155">43. 愛媛県</text>
+<rect x="162" y="240" width="193.4" height="22" rx="2" fill="#ea7317"><title>愛媛県：1人当たり県民所得=2471千円（43位）</title></rect>
+<text x="361.4" y="255" font-size="12" fill="#475569">2,471千円</text>
+</g>
+<g>
+<rect x="144" y="273" width="0" height="0" fill="none"/>
+<text x="150" y="289" text-anchor="end" font-size="13" fill="#334155">44. 鹿児島県</text>
+<rect x="162" y="274" width="188.4" height="22" rx="2" fill="#ea7317"><title>鹿児島県：1人当たり県民所得=2408千円（44位）</title></rect>
+<text x="356.4" y="289" font-size="12" fill="#475569">2,408千円</text>
+</g>
+<g>
+<rect x="144" y="307" width="0" height="0" fill="none"/>
+<text x="150" y="323" text-anchor="end" font-size="13" fill="#334155">45. 鳥取県</text>
+<rect x="162" y="308" width="181.0" height="22" rx="2" fill="#ea7317"><title>鳥取県：1人当たり県民所得=2313千円（45位）</title></rect>
+<text x="349.0" y="323" font-size="12" fill="#475569">2,313千円</text>
+</g>
+<g>
+<rect x="144" y="341" width="0" height="0" fill="none"/>
+<text x="150" y="357" text-anchor="end" font-size="13" fill="#334155">46. 宮崎県</text>
+<rect x="162" y="342" width="179.1" height="22" rx="2" fill="#ea7317"><title>宮崎県：1人当たり県民所得=2289千円（46位）</title></rect>
+<text x="347.1" y="357" font-size="12" fill="#475569">2,289千円</text>
+</g>
+<g>
+<rect x="144" y="375" width="0" height="0" fill="none"/>
+<text x="150" y="391" text-anchor="end" font-size="13" fill="#334155">47. 沖縄県</text>
+<rect x="162" y="376" width="169.6" height="22" rx="2" fill="#ea7317"><title>沖縄県：1人当たり県民所得=2167千円（47位）</title></rect>
+<text x="337.6" y="391" font-size="12" fill="#475569">2,167千円</text>
+</g>
+<text x="12" y="452" font-size="11" fill="#94a3b8">出典: e-Stat 政府統計</text>
+</svg>

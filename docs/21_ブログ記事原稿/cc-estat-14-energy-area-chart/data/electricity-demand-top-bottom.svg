@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 532" role="img" aria-label="電力需要量 上位5・下位5 (2023年度, MWh)" font-family="system-ui, sans-serif">
+  <text x="360" y="28" font-size="17" font-weight="700" text-anchor="middle" fill="#334155">電力需要量 上位5・下位5 (2023年度・MWh)</text>
+  <text x="140" y="50" font-size="12" text-anchor="end" fill="#94a3b8">上位5 (青) / 下位5 (橙)</text>
+  <line x1="150" y1="58" x2="150" y2="484" stroke="#94a3b8" stroke-width="1"/>
+  <line x1="8" y1="270" x2="712" y2="270" stroke="#94a3b8" stroke-width="1" stroke-dasharray="4 4" opacity="0.6"/>
+  
+  <g>
+    <title>東京都 1位 75,521,853 MWh</title>
+    <text x="140" y="84" font-size="14" text-anchor="end" dominant-baseline="middle" fill="#334155">東京都</text>
+    <rect x="150" y="70" width="420" height="28" rx="2" fill="#2563eb" />
+    <text x="578" y="84" font-size="13" dominant-baseline="middle" fill="#334155">75,521,853</text>
+  </g>
+  <g>
+    <title>愛知県 2位 56,119,552 MWh</title>
+    <text x="140" y="124" font-size="14" text-anchor="end" dominant-baseline="middle" fill="#334155">愛知県</text>
+    <rect x="150" y="110" width="312.09790151732636" height="28" rx="2" fill="#2563eb" />
+    <text x="470.09790151732636" y="124" font-size="13" dominant-baseline="middle" fill="#334155">56,119,552</text>
+  </g>
+  <g>
+    <title>大阪府 3位 53,301,121 MWh</title>
+    <text x="140" y="164" font-size="14" text-anchor="end" dominant-baseline="middle" fill="#334155">大阪府</text>
+    <rect x="150" y="150" width="296.4237492954523" height="28" rx="2" fill="#2563eb" />
+    <text x="454.4237492954523" y="164" font-size="13" dominant-baseline="middle" fill="#334155">53,301,121</text>
+  </g>
+  <g>
+    <title>神奈川県 4位 46,168,289 MWh</title>
+    <text x="140" y="204" font-size="14" text-anchor="end" dominant-baseline="middle" fill="#334155">神奈川県</text>
+    <rect x="150" y="190" width="256.75590057357306" height="28" rx="2" fill="#2563eb" />
+    <text x="414.75590057357306" y="204" font-size="13" dominant-baseline="middle" fill="#334155">46,168,289</text>
+  </g>
+  <g>
+    <title>兵庫県 5位 36,942,203 MWh</title>
+    <text x="140" y="244" font-size="14" text-anchor="end" dominant-baseline="middle" fill="#334155">兵庫県</text>
+    <rect x="150" y="230" width="205.4468295421724" height="28" rx="2" fill="#2563eb" />
+    <text x="363.4468295421724" y="244" font-size="13" dominant-baseline="middle" fill="#334155">36,942,203</text>
+  </g>
+  <g>
+    <title>山梨県 43位 5,725,526 MWh</title>
+    <text x="140" y="296" font-size="14" text-anchor="end" dominant-baseline="middle" fill="#334155">山梨県</text>
+    <rect x="150" y="282" width="31.84139192135553" height="28" rx="2" fill="#ea580c" />
+    <text x="189.84139192135552" y="296" font-size="13" dominant-baseline="middle" fill="#334155">5,725,526</text>
+  </g>
+  <g>
+    <title>和歌山県 44位 5,720,611 MWh</title>
+    <text x="140" y="336" font-size="14" text-anchor="end" dominant-baseline="middle" fill="#334155">和歌山県</text>
+    <rect x="150" y="322" width="31.81405811110064" height="28" rx="2" fill="#ea580c" />
+    <text x="189.81405811110065" y="336" font-size="13" dominant-baseline="middle" fill="#334155">5,720,611</text>
+  </g>
+  <g>
+    <title>島根県 45位 4,842,399 MWh</title>
+    <text x="140" y="376" font-size="14" text-anchor="end" dominant-baseline="middle" fill="#334155">島根県</text>
+    <rect x="150" y="362" width="26.930054007017013" height="28" rx="2" fill="#ea580c" />
+    <text x="184.93005400701702" y="376" font-size="13" dominant-baseline="middle" fill="#334155">4,842,399</text>
+  </g>
+  <g>
+    <title>高知県 46位 3,753,874 MWh</title>
+    <text x="140" y="416" font-size="14" text-anchor="end" dominant-baseline="middle" fill="#334155">高知県</text>
+    <rect x="150" y="402" width="20.876435327930842" height="28" rx="2" fill="#ea580c" />
+    <text x="178.87643532793084" y="416" font-size="13" dominant-baseline="middle" fill="#334155">3,753,874</text>
+  </g>
+  <g>
+    <title>鳥取県 47位 3,416,535 MWh</title>
+    <text x="140" y="456" font-size="14" text-anchor="end" dominant-baseline="middle" fill="#334155">鳥取県</text>
+    <rect x="150" y="442" width="19.00039052272724" height="28" rx="2" fill="#ea580c" />
+    <text x="177.00039052272723" y="456" font-size="13" dominant-baseline="middle" fill="#334155">3,416,535</text>
+  </g>
+  <text x="360" y="512" font-size="12" text-anchor="middle" fill="#94a3b8">出典: e-Stat「電力需要量」(2023年度)</text>
+</svg>

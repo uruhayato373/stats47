@@ -1,0 +1,20 @@
+{
+  "label": "婚姻率",
+  "unit": "‐",
+  "year": "2022",
+  "note": "人口千人当たりの婚姻件数。厚生労働省「人口動態統計」2022年。本ファイルは記事本文で言及した順位・値のみを収録した派生抽出 (全件はランキングページ参照)。順位を本文が明記していない県は rank=null。",
+  "data": [
+    { "areaName": "東京都", "rank": 1, "value": 5.36, "label": "婚姻率", "unit": "‐" },
+    { "areaName": "大阪府", "rank": 2, "value": 4.6, "label": "婚姻率", "unit": "‐" },
+    { "areaName": "沖縄県", "rank": 3, "value": 4.46, "label": "婚姻率", "unit": "‐" },
+    { "areaName": "愛知県", "rank": null, "value": 4.46, "label": "婚姻率", "unit": "‐" },
+    { "areaName": "神奈川県", "rank": null, "value": 4.35, "label": "婚姻率", "unit": "‐" },
+    { "areaName": "福岡県", "rank": null, "value": 4.27, "label": "婚姻率", "unit": "‐" },
+    { "areaName": "滋賀県", "rank": 7, "value": null, "label": "婚姻率", "unit": "‐" },
+    { "areaName": "北海道", "rank": 25, "value": null, "label": "婚姻率", "unit": "‐" },
+    { "areaName": "山形県", "rank": null, "value": 3.06, "label": "婚姻率", "unit": "‐" },
+    { "areaName": "青森県", "rank": null, "value": 3.04, "label": "婚姻率", "unit": "‐" },
+    { "areaName": "岩手県", "rank": null, "value": 2.97, "label": "婚姻率", "unit": "‐" },
+    { "areaName": "秋田県", "rank": null, "value": 2.63, "label": "婚姻率", "unit": "‐" }
+  ]
+}

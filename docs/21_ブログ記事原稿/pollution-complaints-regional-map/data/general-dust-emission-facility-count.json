@@ -1,0 +1,331 @@
+[
+  {
+    "areaName": "北海道",
+    "rank": 1,
+    "value": 4845,
+    "label": "一般粉じん発生施設数",
+    "unit": "件"
+  },
+  {
+    "areaName": "愛知",
+    "rank": 2,
+    "value": 4790,
+    "label": "一般粉じん発生施設数",
+    "unit": "件"
+  },
+  {
+    "areaName": "兵庫",
+    "rank": 3,
+    "value": 4593,
+    "label": "一般粉じん発生施設数",
+    "unit": "件"
+  },
+  {
+    "areaName": "福岡",
+    "rank": 4,
+    "value": 3418,
+    "label": "一般粉じん発生施設数",
+    "unit": "件"
+  },
+  {
+    "areaName": "栃木",
+    "rank": 5,
+    "value": 2976,
+    "label": "一般粉じん発生施設数",
+    "unit": "件"
+  },
+  {
+    "areaName": "大分",
+    "rank": 6,
+    "value": 2966,
+    "label": "一般粉じん発生施設数",
+    "unit": "件"
+  },
+  {
+    "areaName": "岡山",
+    "rank": 7,
+    "value": 2525,
+    "label": "一般粉じん発生施設数",
+    "unit": "件"
+  },
+  {
+    "areaName": "茨城",
+    "rank": 8,
+    "value": 2511,
+    "label": "一般粉じん発生施設数",
+    "unit": "件"
+  },
+  {
+    "areaName": "千葉",
+    "rank": 9,
+    "value": 2190,
+    "label": "一般粉じん発生施設数",
+    "unit": "件"
+  },
+  {
+    "areaName": "広島",
+    "rank": 10,
+    "value": 2126,
+    "label": "一般粉じん発生施設数",
+    "unit": "件"
+  },
+  {
+    "areaName": "福島",
+    "rank": 11,
+    "value": 2066,
+    "label": "一般粉じん発生施設数",
+    "unit": "件"
+  },
+  {
+    "areaName": "神奈川",
+    "rank": 12,
+    "value": 2041,
+    "label": "一般粉じん発生施設数",
+    "unit": "件"
+  },
+  {
+    "areaName": "東京",
+    "rank": 13,
+    "value": 1720,
+    "label": "一般粉じん発生施設数",
+    "unit": "件"
+  },
+  {
+    "areaName": "山口",
+    "rank": 14,
+    "value": 1707,
+    "label": "一般粉じん発生施設数",
+    "unit": "件"
+  },
+  {
+    "areaName": "岩手",
+    "rank": 15,
+    "value": 1705,
+    "label": "一般粉じん発生施設数",
+    "unit": "件"
+  },
+  {
+    "areaName": "三重",
+    "rank": 16,
+    "value": 1686,
+    "label": "一般粉じん発生施設数",
+    "unit": "件"
+  },
+  {
+    "areaName": "埼玉",
+    "rank": 17,
+    "value": 1634,
+    "label": "一般粉じん発生施設数",
+    "unit": "件"
+  },
+  {
+    "areaName": "大阪",
+    "rank": 18,
+    "value": 1565,
+    "label": "一般粉じん発生施設数",
+    "unit": "件"
+  },
+  {
+    "areaName": "和歌山",
+    "rank": 19,
+    "value": 1561,
+    "label": "一般粉じん発生施設数",
+    "unit": "件"
+  },
+  {
+    "areaName": "青森",
+    "rank": 20,
+    "value": 1370,
+    "label": "一般粉じん発生施設数",
+    "unit": "件"
+  },
+  {
+    "areaName": "長野",
+    "rank": 21,
+    "value": 1365,
+    "label": "一般粉じん発生施設数",
+    "unit": "件"
+  },
+  {
+    "areaName": "富山",
+    "rank": 22,
+    "value": 1214,
+    "label": "一般粉じん発生施設数",
+    "unit": "件"
+  },
+  {
+    "areaName": "静岡",
+    "rank": 23,
+    "value": 1130,
+    "label": "一般粉じん発生施設数",
+    "unit": "件"
+  },
+  {
+    "areaName": "鹿児島",
+    "rank": 24,
+    "value": 1107,
+    "label": "一般粉じん発生施設数",
+    "unit": "件"
+  },
+  {
+    "areaName": "岐阜",
+    "rank": 25,
+    "value": 1024,
+    "label": "一般粉じん発生施設数",
+    "unit": "件"
+  },
+  {
+    "areaName": "愛媛",
+    "rank": 26,
+    "value": 1007,
+    "label": "一般粉じん発生施設数",
+    "unit": "件"
+  },
+  {
+    "areaName": "長崎",
+    "rank": 27,
+    "value": 962,
+    "label": "一般粉じん発生施設数",
+    "unit": "件"
+  },
+  {
+    "areaName": "香川",
+    "rank": 28,
+    "value": 914,
+    "label": "一般粉じん発生施設数",
+    "unit": "件"
+  },
+  {
+    "areaName": "熊本",
+    "rank": 29,
+    "value": 904,
+    "label": "一般粉じん発生施設数",
+    "unit": "件"
+  },
+  {
+    "areaName": "新潟",
+    "rank": 30,
+    "value": 876,
+    "label": "一般粉じん発生施設数",
+    "unit": "件"
+  },
+  {
+    "areaName": "徳島",
+    "rank": 31,
+    "value": 852,
+    "label": "一般粉じん発生施設数",
+    "unit": "件"
+  },
+  {
+    "areaName": "高知",
+    "rank": 32,
+    "value": 748,
+    "label": "一般粉じん発生施設数",
+    "unit": "件"
+  },
+  {
+    "areaName": "宮城",
+    "rank": 33,
+    "value": 737,
+    "label": "一般粉じん発生施設数",
+    "unit": "件"
+  },
+  {
+    "areaName": "沖縄",
+    "rank": 34,
+    "value": 719,
+    "label": "一般粉じん発生施設数",
+    "unit": "件"
+  },
+  {
+    "areaName": "京都",
+    "rank": 35,
+    "value": 695,
+    "label": "一般粉じん発生施設数",
+    "unit": "件"
+  },
+  {
+    "areaName": "山梨",
+    "rank": 36,
+    "value": 665,
+    "label": "一般粉じん発生施設数",
+    "unit": "件"
+  },
+  {
+    "areaName": "石川",
+    "rank": 37,
+    "value": 658,
+    "label": "一般粉じん発生施設数",
+    "unit": "件"
+  },
+  {
+    "areaName": "山形",
+    "rank": 38,
+    "value": 647,
+    "label": "一般粉じん発生施設数",
+    "unit": "件"
+  },
+  {
+    "areaName": "群馬",
+    "rank": 39,
+    "value": 636,
+    "label": "一般粉じん発生施設数",
+    "unit": "件"
+  },
+  {
+    "areaName": "島根",
+    "rank": 40,
+    "value": 609,
+    "label": "一般粉じん発生施設数",
+    "unit": "件"
+  },
+  {
+    "areaName": "秋田",
+    "rank": 41,
+    "value": 568,
+    "label": "一般粉じん発生施設数",
+    "unit": "件"
+  },
+  {
+    "areaName": "福井",
+    "rank": 42,
+    "value": 551,
+    "label": "一般粉じん発生施設数",
+    "unit": "件"
+  },
+  {
+    "areaName": "宮崎",
+    "rank": 43,
+    "value": 549,
+    "label": "一般粉じん発生施設数",
+    "unit": "件"
+  },
+  {
+    "areaName": "滋賀",
+    "rank": 44,
+    "value": 455,
+    "label": "一般粉じん発生施設数",
+    "unit": "件"
+  },
+  {
+    "areaName": "奈良",
+    "rank": 45,
+    "value": 392,
+    "label": "一般粉じん発生施設数",
+    "unit": "件"
+  },
+  {
+    "areaName": "佐賀",
+    "rank": 46,
+    "value": 391,
+    "label": "一般粉じん発生施設数",
+    "unit": "件"
+  },
+  {
+    "areaName": "鳥取",
+    "rank": 47,
+    "value": 324,
+    "label": "一般粉じん発生施設数",
+    "unit": "件"
+  }
+]

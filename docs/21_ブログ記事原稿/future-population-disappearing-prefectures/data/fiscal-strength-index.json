@@ -1,0 +1,331 @@
+[
+  {
+    "areaName": "東京",
+    "rank": 1,
+    "value": 1.06397,
+    "label": "財政力指数",
+    "unit": ""
+  },
+  {
+    "areaName": "愛知",
+    "rank": 2,
+    "value": 0.86737,
+    "label": "財政力指数",
+    "unit": ""
+  },
+  {
+    "areaName": "神奈川",
+    "rank": 3,
+    "value": 0.845,
+    "label": "財政力指数",
+    "unit": ""
+  },
+  {
+    "areaName": "千葉",
+    "rank": 4,
+    "value": 0.745,
+    "label": "財政力指数",
+    "unit": ""
+  },
+  {
+    "areaName": "大阪",
+    "rank": 5,
+    "value": 0.74187,
+    "label": "財政力指数",
+    "unit": ""
+  },
+  {
+    "areaName": "埼玉",
+    "rank": 6,
+    "value": 0.73883,
+    "label": "財政力指数",
+    "unit": ""
+  },
+  {
+    "areaName": "静岡",
+    "rank": 7,
+    "value": 0.67663,
+    "label": "財政力指数",
+    "unit": ""
+  },
+  {
+    "areaName": "茨城",
+    "rank": 8,
+    "value": 0.62125,
+    "label": "財政力指数",
+    "unit": ""
+  },
+  {
+    "areaName": "福岡",
+    "rank": 9,
+    "value": 0.62027,
+    "label": "財政力指数",
+    "unit": ""
+  },
+  {
+    "areaName": "兵庫",
+    "rank": 10,
+    "value": 0.61217,
+    "label": "財政力指数",
+    "unit": ""
+  },
+  {
+    "areaName": "栃木",
+    "rank": 11,
+    "value": 0.61003,
+    "label": "財政力指数",
+    "unit": ""
+  },
+  {
+    "areaName": "群馬",
+    "rank": 12,
+    "value": 0.59896,
+    "label": "財政力指数",
+    "unit": ""
+  },
+  {
+    "areaName": "宮城",
+    "rank": 13,
+    "value": 0.59081,
+    "label": "財政力指数",
+    "unit": ""
+  },
+  {
+    "areaName": "広島",
+    "rank": 14,
+    "value": 0.58235,
+    "label": "財政力指数",
+    "unit": ""
+  },
+  {
+    "areaName": "三重",
+    "rank": 15,
+    "value": 0.56594,
+    "label": "財政力指数",
+    "unit": ""
+  },
+  {
+    "areaName": "京都",
+    "rank": 16,
+    "value": 0.56087,
+    "label": "財政力指数",
+    "unit": ""
+  },
+  {
+    "areaName": "滋賀",
+    "rank": 17,
+    "value": 0.53361,
+    "label": "財政力指数",
+    "unit": ""
+  },
+  {
+    "areaName": "岐阜",
+    "rank": 18,
+    "value": 0.52697,
+    "label": "財政力指数",
+    "unit": ""
+  },
+  {
+    "areaName": "福島",
+    "rank": 19,
+    "value": 0.51343,
+    "label": "財政力指数",
+    "unit": ""
+  },
+  {
+    "areaName": "岡山",
+    "rank": 20,
+    "value": 0.50803,
+    "label": "財政力指数",
+    "unit": ""
+  },
+  {
+    "areaName": "長野",
+    "rank": 21,
+    "value": 0.50303,
+    "label": "財政力指数",
+    "unit": ""
+  },
+  {
+    "areaName": "石川",
+    "rank": 22,
+    "value": 0.48495,
+    "label": "財政力指数",
+    "unit": ""
+  },
+  {
+    "areaName": "富山",
+    "rank": 23,
+    "value": 0.45346,
+    "label": "財政力指数",
+    "unit": ""
+  },
+  {
+    "areaName": "香川",
+    "rank": 24,
+    "value": 0.45137,
+    "label": "財政力指数",
+    "unit": ""
+  },
+  {
+    "areaName": "新潟",
+    "rank": 25,
+    "value": 0.45127,
+    "label": "財政力指数",
+    "unit": ""
+  },
+  {
+    "areaName": "北海",
+    "rank": 26,
+    "value": 0.44422,
+    "label": "財政力指数",
+    "unit": ""
+  },
+  {
+    "areaName": "山口",
+    "rank": 27,
+    "value": 0.42898,
+    "label": "財政力指数",
+    "unit": ""
+  },
+  {
+    "areaName": "愛媛",
+    "rank": 28,
+    "value": 0.42197,
+    "label": "財政力指数",
+    "unit": ""
+  },
+  {
+    "areaName": "奈良",
+    "rank": 29,
+    "value": 0.40953,
+    "label": "財政力指数",
+    "unit": ""
+  },
+  {
+    "areaName": "福井",
+    "rank": 30,
+    "value": 0.40106,
+    "label": "財政力指数",
+    "unit": ""
+  },
+  {
+    "areaName": "熊本",
+    "rank": 31,
+    "value": 0.39703,
+    "label": "財政力指数",
+    "unit": ""
+  },
+  {
+    "areaName": "山梨",
+    "rank": 32,
+    "value": 0.37341,
+    "label": "財政力指数",
+    "unit": ""
+  },
+  {
+    "areaName": "大分",
+    "rank": 33,
+    "value": 0.37136,
+    "label": "財政力指数",
+    "unit": ""
+  },
+  {
+    "areaName": "山形",
+    "rank": 34,
+    "value": 0.35964,
+    "label": "財政力指数",
+    "unit": ""
+  },
+  {
+    "areaName": "沖縄",
+    "rank": 35,
+    "value": 0.35962,
+    "label": "財政力指数",
+    "unit": ""
+  },
+  {
+    "areaName": "岩手",
+    "rank": 36,
+    "value": 0.35368,
+    "label": "財政力指数",
+    "unit": ""
+  },
+  {
+    "areaName": "青森",
+    "rank": 37,
+    "value": 0.34201,
+    "label": "財政力指数",
+    "unit": ""
+  },
+  {
+    "areaName": "佐賀",
+    "rank": 38,
+    "value": 0.34091,
+    "label": "財政力指数",
+    "unit": ""
+  },
+  {
+    "areaName": "宮崎",
+    "rank": 39,
+    "value": 0.34084,
+    "label": "財政力指数",
+    "unit": ""
+  },
+  {
+    "areaName": "鹿児島",
+    "rank": 40,
+    "value": 0.33868,
+    "label": "財政力指数",
+    "unit": ""
+  },
+  {
+    "areaName": "長崎",
+    "rank": 41,
+    "value": 0.33263,
+    "label": "財政力指数",
+    "unit": ""
+  },
+  {
+    "areaName": "和歌山",
+    "rank": 42,
+    "value": 0.31774,
+    "label": "財政力指数",
+    "unit": ""
+  },
+  {
+    "areaName": "徳島",
+    "rank": 43,
+    "value": 0.312,
+    "label": "財政力指数",
+    "unit": ""
+  },
+  {
+    "areaName": "秋田",
+    "rank": 44,
+    "value": 0.3094,
+    "label": "財政力指数",
+    "unit": ""
+  },
+  {
+    "areaName": "鳥取",
+    "rank": 45,
+    "value": 0.27043,
+    "label": "財政力指数",
+    "unit": ""
+  },
+  {
+    "areaName": "高知",
+    "rank": 46,
+    "value": 0.26114,
+    "label": "財政力指数",
+    "unit": ""
+  },
+  {
+    "areaName": "島根",
+    "rank": 47,
+    "value": 0.25373,
+    "label": "財政力指数",
+    "unit": ""
+  }
+]

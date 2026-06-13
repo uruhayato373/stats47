@@ -1,0 +1,23 @@
+[
+  {
+    "areaName": "東京都",
+    "rank": 1,
+    "value": 717,
+    "label": "米国人延べ宿泊者数",
+    "unit": "万人泊"
+  },
+  {
+    "areaName": "京都府",
+    "rank": 2,
+    "value": 204,
+    "label": "米国人延べ宿泊者数",
+    "unit": "万人泊"
+  },
+  {
+    "areaName": "大阪府",
+    "rank": 3,
+    "value": 143,
+    "label": "米国人延べ宿泊者数",
+    "unit": "万人泊"
+  }
+]

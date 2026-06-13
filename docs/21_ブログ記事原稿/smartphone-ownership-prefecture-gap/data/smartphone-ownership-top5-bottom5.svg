@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 398" width="700" height="398" style="font-family:system-ui,sans-serif;">
+  <title>スマートフォン所有数量ランキング 上位5・下位5（2014年度、二人以上の世帯1000世帯あたり台数）</title>
+  <text x="350" y="26" text-anchor="middle" font-size="15" font-weight="bold" fill="#334155">スマホ所有数量 上位5・下位5（1000世帯あたり台数・2014年度）</text>
+  <rect x="120" y="58" width="440.0" height="22" fill="#1d4ed8" rx="2"/>
+  <text x="112" y="74" text-anchor="end" font-size="13" fill="#475569">滋賀</text>
+  <text x="568.0" y="74" text-anchor="start" font-size="12" fill="#64748b">1281台 (1位)</text>
+  <rect x="120" y="88" width="437.9" height="22" fill="#1d4ed8" rx="2"/>
+  <text x="112" y="104" text-anchor="end" font-size="13" fill="#475569">東京</text>
+  <text x="565.9" y="104" text-anchor="start" font-size="12" fill="#64748b">1275台 (2位)</text>
+  <rect x="120" y="118" width="422.5" height="22" fill="#1d4ed8" rx="2"/>
+  <text x="112" y="134" text-anchor="end" font-size="13" fill="#475569">奈良</text>
+  <text x="550.5" y="134" text-anchor="start" font-size="12" fill="#64748b">1230台 (3位)</text>
+  <rect x="120" y="148" width="417.7" height="22" fill="#1d4ed8" rx="2"/>
+  <text x="112" y="164" text-anchor="end" font-size="13" fill="#475569">愛知</text>
+  <text x="545.7" y="164" text-anchor="start" font-size="12" fill="#64748b">1216台 (4位)</text>
+  <rect x="120" y="178" width="414.9" height="22" fill="#1d4ed8" rx="2"/>
+  <text x="112" y="194" text-anchor="end" font-size="13" fill="#475569">京都</text>
+  <text x="542.9" y="194" text-anchor="start" font-size="12" fill="#64748b">1208台 (5位)</text>
+  <rect x="120" y="228" width="283.7" height="22" fill="#ea580c" rx="2"/>
+  <text x="112" y="244" text-anchor="end" font-size="13" fill="#475569">島根</text>
+  <text x="411.7" y="244" text-anchor="start" font-size="12" fill="#64748b">826台 (47位)</text>
+  <rect x="120" y="258" width="291.3" height="22" fill="#ea580c" rx="2"/>
+  <text x="112" y="274" text-anchor="end" font-size="13" fill="#475569">青森</text>
+  <text x="419.3" y="274" text-anchor="start" font-size="12" fill="#64748b">848台 (46位)</text>
+  <rect x="120" y="288" width="291.6" height="22" fill="#ea580c" rx="2"/>
+  <text x="112" y="304" text-anchor="end" font-size="13" fill="#475569">山口</text>
+  <text x="419.6" y="304" text-anchor="start" font-size="12" fill="#64748b">849台 (45位)</text>
+  <rect x="120" y="318" width="297.1" height="22" fill="#ea580c" rx="2"/>
+  <text x="112" y="334" text-anchor="end" font-size="13" fill="#475569">北海道</text>
+  <text x="425.1" y="334" text-anchor="start" font-size="12" fill="#64748b">865台 (44位)</text>
+  <rect x="120" y="348" width="299.9" height="22" fill="#ea580c" rx="2"/>
+  <text x="112" y="364" text-anchor="end" font-size="13" fill="#475569">高知</text>
+  <text x="427.9" y="364" text-anchor="start" font-size="12" fill="#64748b">873台 (43位)</text>
+  <line x1="120" y1="214" x2="640" y2="214" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="4,3"/>
+</svg>

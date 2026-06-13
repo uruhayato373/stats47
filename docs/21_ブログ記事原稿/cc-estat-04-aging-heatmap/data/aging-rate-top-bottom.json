@@ -1,0 +1,72 @@
+[
+  {
+    "areaName": "秋田",
+    "rank": 1,
+    "value": 39.5,
+    "label": "65歳以上人口割合",
+    "unit": "％"
+  },
+  {
+    "areaName": "高知",
+    "rank": 2,
+    "value": 36.6,
+    "label": "65歳以上人口割合",
+    "unit": "％"
+  },
+  {
+    "areaName": "青森",
+    "rank": 3,
+    "value": 35.7,
+    "label": "65歳以上人口割合",
+    "unit": "％"
+  },
+  {
+    "areaName": "徳島",
+    "rank": 3,
+    "value": 35.7,
+    "label": "65歳以上人口割合",
+    "unit": "％"
+  },
+  {
+    "areaName": "山形",
+    "rank": 5,
+    "value": 35.6,
+    "label": "65歳以上人口割合",
+    "unit": "％"
+  },
+  {
+    "areaName": "滋賀",
+    "rank": 43,
+    "value": 27.3,
+    "label": "65歳以上人口割合",
+    "unit": "％"
+  },
+  {
+    "areaName": "神奈川",
+    "rank": 44,
+    "value": 26,
+    "label": "65歳以上人口割合",
+    "unit": "％"
+  },
+  {
+    "areaName": "愛知",
+    "rank": 45,
+    "value": 25.8,
+    "label": "65歳以上人口割合",
+    "unit": "％"
+  },
+  {
+    "areaName": "沖縄",
+    "rank": 46,
+    "value": 24.2,
+    "label": "65歳以上人口割合",
+    "unit": "％"
+  },
+  {
+    "areaName": "東京",
+    "rank": 47,
+    "value": 22.7,
+    "label": "65歳以上人口割合",
+    "unit": "％"
+  }
+]
