@@ -24,13 +24,6 @@ binding = "STATS47_BUCKET"
 bucket_name = "stats47"
 preview_bucket_name = "stats47"
 
-# OpenNext incremental cache 用 R2 binding（ローカル開発用）。
-# r2-incremental-cache override が固定名 NEXT_INC_CACHE_R2_BUCKET を要求する。
-[[r2_buckets]]
-binding = "NEXT_INC_CACHE_R2_BUCKET"
-bucket_name = "stats47"
-preview_bucket_name = "stats47"
-
 
 # Observability設定（デフォルト）
 [observability]
@@ -82,13 +75,6 @@ NEXT_PUBLIC_AMAZON_ASSOCIATE_TAG = "stats47-22"
 
 [[env.production.r2_buckets]]
 binding = "STATS47_BUCKET"
-bucket_name = "stats47"
-
-# OpenNext incremental cache 用 R2 binding（Production）。
-# deploy 前に `opennextjs-cloudflare populateCache remote --env production` で
-# ビルド済 ISR/SSG エントリをこのバケット (prefix incremental-cache/) に投入する。
-[[env.production.r2_buckets]]
-binding = "NEXT_INC_CACHE_R2_BUCKET"
 bucket_name = "stats47"
 
 
