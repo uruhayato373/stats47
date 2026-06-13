@@ -6,6 +6,31 @@ import { getS3Client } from "../clients/get-s3-client";
 import { detectEnvironment } from "../utils/detect-environment";
 import { findLocalR2Root } from "../utils/find-local-r2-root";
 
+/**
+ * R2 オブジェクトキーの安全性を検証する（defense-in-depth）。
+ *
+ * 正当な R2 キーは `app/...` `gis/...` `ges/...` `sns/...` `video/...` のような
+ * スラッシュ区切りの相対パスのみ。以下を拒否する:
+ * - パストラバーサル (`..` セグメント / バックスラッシュ)
+ * - 絶対パス・プロトコル相対 URL (`/foo`, `//evil.com`)
+ * - スキーム付き URL (`http:`, `file:` 等) — SSRF / ローカルファイル読み出し防止
+ * - NUL バイト
+ *
+ * 正当なキー（`app/blog/<slug>/data/chart.json` 等）は一切拒否しない。
+ */
+function isSafeR2Key(key: string): boolean {
+  if (typeof key !== "string" || key.length === 0) return false;
+  if (key.includes("\0") || key.includes("\\")) return false;
+  // 絶対パス / プロトコル相対 (`/foo`, `//host`)
+  if (key.startsWith("/")) return false;
+  // スキーム付き URL (`http://`, `file:`, `data:` 等)
+  if (/^[a-z][a-z0-9+.-]*:/i.test(key)) return false;
+  // `..` をパスセグメントとして含む（先頭/中間/末尾いずれも）
+  const segments = key.split("/");
+  if (segments.some((s) => s === "..")) return false;
+  return true;
+}
+
 function fetchFromLocalFs(key: string): Buffer | null {
   try {
     // eslint-disable-next-line @typescript-eslint/no-require-imports
@@ -73,6 +98,14 @@ export async function fetchFromR2(
   key: string,
   options?: { async?: boolean }
 ): Promise<Buffer | null> {
+  // defense-in-depth: 呼び出し側 (API route 等) の検証漏れに備え、
+  // パストラバーサル / 絶対パス / スキーム付き URL を core reader で拒否する。
+  // 正当な `app/...` `gis/...` キーは通過する（挙動不変）。
+  if (!isSafeR2Key(key)) {
+    logger.warn({ key }, "不正な R2 キーを拒否しました");
+    return null;
+  }
+
   const localData = fetchFromLocalFs(key);
   if (localData !== null) return localData;
 

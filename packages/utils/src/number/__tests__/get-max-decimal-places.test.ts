@@ -31,6 +31,15 @@ describe("getDecimalPlaces", () => {
     expect(getDecimalPlaces(1e-3)).toBe(3);  // 0.001
     expect(getDecimalPlaces(1.5e-2)).toBe(3);  // 0.015
   });
+
+  // 末尾0トリムを正規表現 /0+$/ から線形時間の手動トリムへ置換した際の
+  // 挙動同一性を担保する（js/polynomial-redos 修正のリグレッション防止）。
+  it("末尾0の桁数を旧 /0+$/ と同じく無視する", () => {
+    expect(getDecimalPlaces(1.2300)).toBe(2); // String -> "1.23"
+    expect(getDecimalPlaces(1.5)).toBe(1);
+    expect(getDecimalPlaces(0.10)).toBe(1);   // String -> "0.1"
+    expect(getDecimalPlaces(12.0)).toBe(0);   // 整数扱い
+  });
 });
 
 describe("getMaxDecimalPlaces", () => {
