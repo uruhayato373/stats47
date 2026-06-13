@@ -13,7 +13,6 @@ import { getCategoryDescription } from "@stats47/data-configs";
 import {
   readRankingValuesFromR2,
   readTopRankingValuesBatchFromR2,
-  readRankingItemsByCategoryFromR2,
   readSurveysFromR2,
 } from "@stats47/ranking/server";
 import { isOk } from "@stats47/types";
@@ -24,6 +23,7 @@ import { ThemeAwareImage } from "@/components/atoms/ThemeAwareImage";
 import { resolveAffiliateBanners } from "@/features/ads/server";
 import { listLatestArticles } from "@/features/blog/server";
 import { findCategoryByKey } from "@/features/category/server";
+import { readRankingItemsByCategory } from "@/features/ranking/lib/cached-category-items";
 import {
   FeaturedRankingCard,
   CategoryRankingTable,
@@ -117,7 +117,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   try {
     const [catResult, rankingResult] = await Promise.all([
       findCategoryByKey(categoryKey),
-      readRankingItemsByCategoryFromR2(categoryKey),
+      readRankingItemsByCategory(categoryKey),
     ]);
     const category = isOk(catResult) ? catResult.data : null;
 
@@ -168,7 +168,7 @@ export default async function CategoryPage({ params }: PageProps) {
   const fallbackTags = CATEGORY_FALLBACK_TAGS[categoryKey] ?? [];
 
   const [rankingResult, latestArticles, surveysResult, nativeBanners] = await Promise.all([
-    readRankingItemsByCategoryFromR2(categoryKey),
+    readRankingItemsByCategory(categoryKey),
     listLatestArticles(4).catch(() => []),
     readSurveysFromR2().then((r) => isOk(r) ? r.data : []).catch(() => []),
     fallbackTags.length > 0

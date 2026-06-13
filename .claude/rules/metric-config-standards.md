@@ -73,8 +73,10 @@ npm run validate:config --workspace=@stats47/data-configs   # 構造規約 (cate
 
 `MetricConfig.isActive` を `true` にしただけでは ranking は **本番公開されない**。本番アプリは R2 snapshot と
 派生リスト（`KNOWN_RANKING_KEYS` / `SITEMAP_RANKING_KEYS` / `INDEXABLE_RANKING_KEYS` / R2 `app/ranking-items/all.json`）
-と整合して初めて 200 を返す。middleware は `isGone(key) || !isKnown(key)` で 410 を返すため、`GONE_RANKING_KEYS`
-から外しても `KNOWN_RANKING_KEYS` に無ければ **410 のまま**になる。
+と整合して初めて 200 を返す。**ranking の middleware は `isGone` のみ 410** を返し、未登録キー（`GONE_RANKING_KEYS`
+に無いが `KNOWN_RANKING_KEYS` にも無い）は middleware を素通りして page の `notFound()` で **404** になる
+（`apps/web/src/middleware.ts:146-154`、2026-06-06 `5d9afb24` で notFound 委譲に変更。tag/theme は `!isKnown→410` だが
+ranking は異なる）。いずれにせよ **200 にはならない**ので、`GONE_RANKING_KEYS` から外すだけでなく下記を整合させる必要がある。
 
 公開には config(isActive) を起点に以下を整合再生成する（依存順・詳細手順は memory
 `project_ranking_publish_pipeline_gap` / `docs/02_実装計画/04_機能バックログ.md`「122 metric の本番公開」）:
@@ -82,11 +84,12 @@ npm run validate:config --workspace=@stats47/data-configs   # 構造規約 (cate
 1. R2 `app/ranking-items/all.json` + `app/ranking/<key>/item.json` 再生成（`packages/ranking/src/scripts/generate-ranking-items.ts`。※ 2026-06 時点で sync-snapshots 未配線）
 2. `KNOWN_RANKING_KEYS` 再生成（`apps/web/scripts/generate-known-ranking-keys.ts`）
 3. `SITEMAP_RANKING_KEYS` / `INDEXABLE_RANKING_KEYS` 再生成
-4. 再デプロイ → CDN purge（410 は 7 日キャッシュ）
+4. 再デプロイ → CDN purge（GONE の 410 は 7 日エッジキャッシュ。未登録キーの 404 は ISR）
 5. **本番 URL を Googlebot UA で実測**し 200 を確認（`/deploy` Step 7.5）
 
 > 2026-06-03 事故: 122 metric を `isActive:true` 化 + `GONE_RANKING_KEYS` 除去だけ行い、上記 2-5 未反映で
-> 全件 410 のまま公開未達だった。「isActive を変えた=公開した」と思い込まないこと。
+> 全件未達だった（当時の middleware は ranking 未登録キーを 410 にしていた。2026-06-06 `5d9afb24` 以降は
+> 404 に変更。いずれも 200 ではない）。「isActive を変えた=公開した」と思い込まないこと。
 
 ## 関連
 

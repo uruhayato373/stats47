@@ -26,8 +26,10 @@ TSX="npx tsx -r ./packages/ranking/src/scripts/setup-cli.js"
 # remotion-static は Remotion 用 public/<feature>/*.json を D1 から再生成 (R2 push 対象外、ローカル file のみ更新)
 #
 # Phase 6 (2026-05-27): stats_* テーブル DROP に伴い、ranking-values / ranking-normalized-values /
-# ranking-download / correlation の各 export task は廃止。観測値は app/stats/<metric>/*.json として
+# ranking-download の各 D1 export task は廃止。観測値は app/stats/<metric>/*.json として
 # /page-data-batch (Phase 6.4) で R2 に直接書込まれる。
+# correlation は 2026-06-14 に復活: D1 ではなく R2 観測値を入力に使い捨て :memory: SQLite で
+# 集計するエフェメラル producer (build-correlation-snapshot.ts) として再実装 (DBレス Derived)。
 declare -a TASKS=(
   "remotion-static|apps/remotion/scripts/export-d1-to-remotion-static.ts --feature all"
   "item-metadata-refresh|packages/ranking/src/scripts/refresh-item-metadata.ts --apply"
@@ -43,6 +45,7 @@ declare -a TASKS=(
   "station-passengers|apps/web/scripts/export-station-passengers-snapshot.ts"
   "migration-flow|apps/web/scripts/export-migration-flow-r2.ts"
   "finance-flow|apps/web/scripts/generate-finance-flow.ts"
+  "correlation|packages/correlation/src/scripts/build-correlation-snapshot.ts"
 )
 
 run_task() {

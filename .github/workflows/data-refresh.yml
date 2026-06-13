@@ -1,13 +1,23 @@
 name: 🔄 Data Refresh (e-Stat → R2)
 
-# クラウド/CI からデータ追加するための workflow。
-# ローカルビルド DB (SQLite) を R2 経由で pull → e-Stat fetch → snapshot 再生成 →
-# R2 反映 → ビルド DB を push し戻す。
+# クラウド/CI から e-Stat 観測値を更新する workflow。完全DBレス (doc 12)。
 #
-# 設計: ~/.claude/plans/floating-roaming-squid.md / .claude/rules/data-sqlite-ssot.md
+# パイプライン (R2 直結・永続/ビルド DB を SSOT にしない):
+#   1. page-data-batch: e-Stat → .local/r2/app/stats/<metric>/{values,cities}.json (R2 直書き)
+#   2. diff-push-r2 --prefix app/stats: 観測値を R2 に push
+#   3. sync-snapshots run.sh: 派生 snapshot (master / ranking-values / area-profile 等) を
+#      git TS + R2 観測値から再生成 → R2 push。exporter は .local/r2 (本 run で更新済) を
+#      公開 URL より優先して読むため、同一 job 内で最新観測値を反映できる。
 #
-# ⚠️ 初回は必ず workflow_dispatch + dry_run=true で動作確認してから本実行すること。
-#    schedule (cron) は手動実行で round-trip が確認できるまで有効化しない (下記コメント参照)。
+# ※ 旧 db:pull/db:push (ビルド DB round-trip) は廃止。観測値も exporter も DB を読まない
+#   (page-data-batch / export-master-snapshots / generate-ranking-items / area-profile は
+#   いずれも R2 + git TS 直結)。build DB pull は remotion-static 等 一部 task の保険として
+#   best-effort で残す (失敗しても続行)。SSOT は git TS と R2 のみ。
+#
+# R2 書き込みはこの CI / クラウド専用 (_assert-ci-write ガードでローカル push は停止)。
+#
+# 動作確認: workflow_dispatch + dry_run=true で fetch のみ実行し、その後 dry_run=false で
+#   1 metric (例 metric=japanese-population) を実 push 確認してから schedule を信頼すること。
 
 on:
   workflow_dispatch:
@@ -21,27 +31,30 @@ on:
         required: false
         default: ""
       dry_run:
-        description: "true: fetch のみで R2/DB に書き込まない"
+        description: "true: fetch のみで R2 に書き込まない (手動実行の既定)"
         required: false
         default: "true"
-  # 動作確認後に有効化する (例: 毎月 5日 03:00 UTC = 12:00 JST):
-  # schedule:
-  #   - cron: "0 3 5 * *"
+  # 毎月 5日 03:00 UTC (= 12:00 JST) に全 metric を refresh。schedule 実行は
+  # inputs が空 → 全 metric・実 push (dry_run 既定 'true' は workflow_dispatch のみ適用)。
+  schedule:
+    - cron: "0 3 5 * *"
 
 permissions:
   contents: read
 
 concurrency:
-  # workflow_dispatch と将来の cron の衝突を吸収。db:push 内の soft lock と二重防御。
-  group: data-refresh
+  # sync-snapshots.yml と同じ group で R2 push を直列化 (同時 push による破損防止)。
+  group: r2-write
   cancel-in-progress: false
 
 env:
-  # db-r2-sync.ts / diff-push-r2.ts が要求する R2 S3 認証 (CLOUDFLARE_* secrets から導出)
+  # diff-push-r2.ts が要求する R2 S3 認証 (CLOUDFLARE_* secrets から導出)
   R2_S3_ENDPOINT: https://${{ secrets.CLOUDFLARE_ACCOUNT_ID }}.r2.cloudflarestorage.com
   R2_ACCESS_KEY_ID: ${{ secrets.CLOUDFLARE_R2_ACCESS_KEY_ID }}
   R2_SECRET_ACCESS_KEY: ${{ secrets.CLOUDFLARE_R2_SECRET_ACCESS_KEY }}
   CLOUDFLARE_R2_BUCKET_NAME: stats47
+  # exporter の R2 観測値読み取りは公開 URL 経由 (認証不要・ビルド DB 非依存)
+  R2_PUBLIC_FETCH_URL: https://storage.stats47.jp
   NEXT_PUBLIC_ESTAT_APP_ID: ${{ secrets.NEXT_PUBLIC_ESTAT_APP_ID }}
 
 jobs:
@@ -64,13 +77,13 @@ jobs:
       - name: 📦 Install dependencies
         run: npm ci
 
-      # ローカルビルド DB を R2 から取得 (snapshot exporter が読むために必須)。
-      # 初回 (R2 に database/stats47.sqlite が無い) は失敗するので、
-      # 一度ローカルで db:migrate:local + db:push して seed しておくこと。
-      - name: ⬇️ Pull local build DB (SQLite) from R2
+      # 一部 task (remotion-static 等) が読むビルド DB を R2 から取得 (read-only / best-effort)。
+      # DBレスで不要になった観測値・ranking 系 exporter には影響しないため、不在でも続行する。
+      - name: ⬇️ Pull build DB (best-effort)
+        continue-on-error: true
         run: npm run db:pull --workspace=packages/r2-storage
 
-      # e-Stat → R2 (app/stats)。観測値は R2 直行、metrics cache は build DB に反映。
+      # e-Stat → .local/r2/app/stats (観測値 R2 直書き)。dry_run=true なら fetch のみ。
       - name: 📊 page-data-batch (e-Stat fetch)
         run: |
           ARGS=""
@@ -80,16 +93,15 @@ jobs:
           echo "page-data-batch.ts $ARGS"
           npx tsx packages/data-configs/scripts/page-data-batch.ts $ARGS
 
+      # 観測値を R2 に push (app/stats)。schedule 実行 (inputs.dry_run='') では push される。
       - name: ☁️ Push observations to R2 (app/stats)
         if: inputs.dry_run != 'true'
         run: npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix app/stats
 
-      # build DB → 派生 snapshot (master / ranking-values 等) 再生成 + R2 push
-      - name: 🗂️ Regenerate derived snapshots
+      # 派生 snapshot (master / ranking-values / area-profile 等) を git TS + 更新済観測値から
+      # 再生成 → R2 push (run.sh は CI=true で push する)。
+      # ※ correlation snapshot の生成 task は run.sh から廃止済 (producer 未実装)。観測値更新後も
+      #   app/correlation/* は再生成されない (別途エフェメラル計算の実装が必要 / 機能バックログ)。
+      - name: 🗂️ Regenerate derived snapshots + push to R2
         if: inputs.dry_run != 'true'
         run: bash .claude/skills/db/sync-snapshots/run.sh
-
-      # 変異した build DB (metrics cache 等) を R2 に書き戻す (soft lock + 世代 backup)
-      - name: ⬆️ Push local build DB (SQLite) back to R2
-        if: inputs.dry_run != 'true'
-        run: npm run db:push --workspace=packages/r2-storage
