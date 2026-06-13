@@ -305,10 +305,10 @@ native/sidebar 解決時に「`targetRankingKeys` 未設定なら従来通り (�
 STRATEGY CAREER は **3 経路**で表示されており、今回の targeting は (1) のみカバー。エンジニア転職を本当に該当 ranking だけに限定するには (2)(3) も対処が必要:
 
 1. ✅ **snapshot バナー** (`af_strategy_career_*_001` / a8mat `5ZEMP` / adType=banner) → `targetRankingKeys` で限定済。
-2. ⬜ **snapshot テキスト広告** (`af_strategy_career_text_*` / a8mat `5YJRM` / adType=text) → **未 targeting**。text 解決経路 (`resolveAffiliateTextAds*` / `readActiveTextAds*`) に rankingKey フィルタを通し、text エントリにも `targetRankingKeys` を付与する必要あり。
-3. ⬜ **コード直書きの hardcoded promo** (`apps/web/src/features/ads/constants/sidebar-banners.ts` の `SidebarPromoBanner`・a8mat `5YZ75`) → snapshot 非経由のため targeting 対象外。**全カテゴリ全ページに STRATEGY CAREER を表示**している。ranking/category 文脈で出し分けるか、職種年収ページでは抑制する改修が必要。
+2. ✅ **snapshot テキスト広告** (`af_strategy_career_text_*` / a8mat `5YJRM` / adType=text) → **完了 (PR #469)**。`readActiveTextAdsByCategoryFromR2` に rankingKey フィルタ + text 9 件に `targetRankingKeys`。
+3. ✅ **コード直書きの hardcoded promo** (`sidebar-banners.ts` の `SidebarPromoBanner`・a8mat `5YZ75`) → **完了 (PR #469)**。`SidebarBannerConfig.targetRankingKeys` + `selectPromoBannerIndexForRanking` で ranking 文脈に応じ出し分け。IT 職以外は汎用 recruit バナー (`4B3RUY`) にフォールバック。
 
-→ 真の「文脈一致」には (2)(3) の follow-up が要る。(1) だけでは sidebar promo (3) が全ページに残る。
+**本番検証 (2026-06-13・PR #469 deploy bf1fd7e7 + CDN purge 後)**: software-engineer ページ = STRATEGY CAREER 表示 / nurse・cook ページ = STRATEGY CAREER **0**・汎用バナー表示。**3 経路すべて文脈一致を達成し、職種年収ページへのエンジニア転職漏れを完全停止**。
 
 ---
 
