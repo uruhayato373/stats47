@@ -1,4 +1,14 @@
 /**
+ * 文字列末尾の "0" を線形時間で除去する（正規表現のバックトラッキング回避）。
+ * `s.replace(/0+$/, "")` と完全に同一の結果を返す。
+ */
+function stripTrailingZeros(s: string): string {
+  let end = s.length;
+  while (end > 0 && s.charCodeAt(end - 1) === 48 /* '0' */) end--;
+  return s.slice(0, end);
+}
+
+/**
  * 数値が整数値かどうかを判定する関数（浮動小数点数の精度問題を考慮）
  */
 function isIntegerValue(value: number): boolean {
@@ -16,9 +26,11 @@ export function getDecimalPlaces(value: number): number {
   if (decimalIndex === -1) return 0;
 
   // 末尾の0を無視するためにトリミングが必要な場合がある（toStringの仕様によるが念のため）
+  // 注: 正規表現 /0+$/ は末尾アンカーでバックトラッキングが起き得るため、
+  // 線形時間の手動トリムにする（入力は number の文字列で挙動は同一）。
   const fractionalPart = str.slice(decimalIndex + 1);
-  const trimmedPart = fractionalPart.replace(/0+$/, "");
-  
+  const trimmedPart = stripTrailingZeros(fractionalPart);
+
   if (trimmedPart.length === 0) return 0;
 
   // 指数表記の場合を処理
