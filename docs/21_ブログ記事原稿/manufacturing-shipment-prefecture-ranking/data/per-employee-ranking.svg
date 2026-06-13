@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 259" width="680" height="259" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" role="img" aria-label="従業者1人当たり製造品出荷額 上位5県・下位5県（2023年）">
+  <style>
+    .svg-bg{fill:#fafafa}
+    .svg-title{fill:#222}
+    .svg-subtitle{fill:#666}
+    .svg-label{fill:#333}
+    .svg-legend{fill:#888}
+    @media (prefers-color-scheme:dark){
+      .svg-bg{fill:#1f2937}
+      .svg-title{fill:#f9fafb}
+      .svg-subtitle{fill:#9ca3af}
+      .svg-label{fill:#e5e7eb}
+      .svg-legend{fill:#9ca3af}
+    }
+  </style>
+  <rect width="680" height="259" class="svg-bg" rx="8"/>
+  <text x="340" y="24" text-anchor="middle" font-size="15" font-weight="bold" class="svg-title">従業者1人当たり製造品出荷額 上位5県・下位5県（2023年）</text>
+  <text x="340" y="44" text-anchor="middle" font-size="11" class="svg-subtitle">単位: 万円／1位 大分県8,547万円 ⇔ 47位 沖縄県2,167万円（約3.9倍）</text>
+  <text x="229" y="58" text-anchor="middle" font-size="12" font-weight="bold" fill="#1565c0">上位 5 県</text>
+  <text x="543" y="58" text-anchor="middle" font-size="12" font-weight="bold" fill="#e65100">下位 5 県</text>
+  <text x="86" y="86" text-anchor="end" font-size="11" class="svg-label">1位 大分県</text>
+  <rect x="92" y="67" width="182.0" height="30" fill="#1565c0" rx="2"/>
+  <text x="280.0" y="86" font-size="10" class="svg-label">8,547万円</text>
+  <text x="86" y="122" text-anchor="end" font-size="11" class="svg-label">2位 山口県</text>
+  <rect x="92" y="103" width="168.6" height="30" fill="#1976d2" rx="2"/>
+  <text x="266.6" y="122" font-size="10" class="svg-label">7,917万円</text>
+  <text x="86" y="158" text-anchor="end" font-size="11" class="svg-label">3位 千葉県</text>
+  <rect x="92" y="139" width="154.5" height="30" fill="#1e88e5" rx="2"/>
+  <text x="252.5" y="158" font-size="10" class="svg-label">7,254万円</text>
+  <text x="86" y="194" text-anchor="end" font-size="11" class="svg-label">4位 愛知県</text>
+  <rect x="92" y="175" width="145.4" height="30" fill="#2196f3" rx="2"/>
+  <text x="243.4" y="194" font-size="10" class="svg-label">6,826万円</text>
+  <text x="86" y="230" text-anchor="end" font-size="11" class="svg-label">5位 愛媛県</text>
+  <rect x="92" y="211" width="144.4" height="30" fill="#42a5f5" rx="2"/>
+  <text x="242.4" y="230" font-size="10" class="svg-label">6,782万円</text>
+  <text x="400" y="86" text-anchor="end" font-size="11" class="svg-label">43位 新潟県</text>
+  <rect x="406" y="67" width="64.5" height="30" fill="#e65100" rx="2"/>
+  <text x="476.5" y="86" font-size="10" class="svg-label">3,029万円</text>
+  <text x="400" y="122" text-anchor="end" font-size="11" class="svg-label">44位 鳥取県</text>
+  <rect x="406" y="103" width="59.4" height="30" fill="#ef6c00" rx="2"/>
+  <text x="471.4" y="122" font-size="10" class="svg-label">2,791万円</text>
+  <text x="400" y="158" text-anchor="end" font-size="11" class="svg-label">45位 高知県</text>
+  <rect x="406" y="139" width="57.9" height="30" fill="#f57c00" rx="2"/>
+  <text x="469.9" y="158" font-size="10" class="svg-label">2,717万円</text>
+  <text x="400" y="194" text-anchor="end" font-size="11" class="svg-label">46位 秋田県</text>
+  <rect x="406" y="175" width="54.4" height="30" fill="#fb8c00" rx="2"/>
+  <text x="466.4" y="194" font-size="10" class="svg-label">2,557万円</text>
+  <text x="400" y="230" text-anchor="end" font-size="11" class="svg-label">47位 沖縄県</text>
+  <rect x="406" y="211" width="46.1" height="30" fill="#ff9800" rx="2"/>
+  <text x="458.1" y="230" font-size="10" class="svg-label">2,167万円</text>
+</svg>

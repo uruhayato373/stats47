@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 574" role="img" aria-label="小麦粉消費支出額 上位5県・下位5県 2024年">
+  <title>小麦粉消費支出額 上位5県・下位5県（2024年・家計調査）</title>
+  <text x="120" y="28" font-size="18" font-weight="700" fill="#0f172a">小麦粉消費支出額 上位5県・下位5県（2024年）</text>
+  <text x="120" y="46" font-size="12" fill="#64748b">単位: 円/年・二人以上世帯（青=上位 / 橙=下位）</text>
+  <text x="110" y="78" text-anchor="end" font-size="15" fill="#64748b">1位 岐阜</text>
+  <rect x="120" y="56" width="530" height="34" rx="2" fill="#2563eb"><title>岐阜 1位 1042円</title></rect>
+  <text x="658" y="78" font-size="14" font-weight="600" fill="#475569">1,042円</text>
+  <text x="110" y="126" text-anchor="end" font-size="15" fill="#64748b">2位 三重</text>
+  <rect x="120" y="104" width="464" height="34" rx="2" fill="#2563eb"><title>三重 2位 912円</title></rect>
+  <text x="592" y="126" font-size="14" font-weight="600" fill="#475569">912円</text>
+  <text x="110" y="174" text-anchor="end" font-size="15" fill="#64748b">3位 福岡</text>
+  <rect x="120" y="152" width="458" height="34" rx="2" fill="#2563eb"><title>福岡 3位 900円</title></rect>
+  <text x="586" y="174" font-size="14" font-weight="600" fill="#475569">900円</text>
+  <text x="110" y="222" text-anchor="end" font-size="15" fill="#64748b">4位 長野</text>
+  <rect x="120" y="200" width="436" height="34" rx="2" fill="#2563eb"><title>長野 4位 857円</title></rect>
+  <text x="564" y="222" font-size="14" font-weight="600" fill="#475569">857円</text>
+  <text x="110" y="270" text-anchor="end" font-size="15" fill="#64748b">5位 千葉</text>
+  <rect x="120" y="248" width="408" height="34" rx="2" fill="#2563eb"><title>千葉 5位 802円</title></rect>
+  <text x="536" y="270" font-size="14" font-weight="600" fill="#475569">802円</text>
+  <text x="110" y="340" text-anchor="end" font-size="15" fill="#64748b">43位 高知</text>
+  <rect x="120" y="318" width="259" height="34" rx="2" fill="#ea580c"><title>高知 43位 510円</title></rect>
+  <text x="387" y="340" font-size="14" font-weight="600" fill="#475569">510円</text>
+  <text x="110" y="388" text-anchor="end" font-size="15" fill="#64748b">44位 佐賀</text>
+  <rect x="120" y="366" width="254" height="34" rx="2" fill="#ea580c"><title>佐賀 44位 499円</title></rect>
+  <text x="382" y="388" font-size="14" font-weight="600" fill="#475569">499円</text>
+  <text x="110" y="436" text-anchor="end" font-size="15" fill="#64748b">45位 島根</text>
+  <rect x="120" y="414" width="248" height="34" rx="2" fill="#ea580c"><title>島根 45位 488円</title></rect>
+  <text x="376" y="436" font-size="14" font-weight="600" fill="#475569">488円</text>
+  <text x="110" y="484" text-anchor="end" font-size="15" fill="#64748b">46位 新潟</text>
+  <rect x="120" y="462" width="246" height="34" rx="2" fill="#ea580c"><title>新潟 46位 484円</title></rect>
+  <text x="374" y="484" font-size="14" font-weight="600" fill="#475569">484円</text>
+  <text x="110" y="532" text-anchor="end" font-size="15" fill="#64748b">47位 山梨</text>
+  <rect x="120" y="510" width="245" height="34" rx="2" fill="#ea580c"><title>山梨 47位 482円</title></rect>
+  <text x="373" y="532" font-size="14" font-weight="600" fill="#475569">482円</text>
+</svg>

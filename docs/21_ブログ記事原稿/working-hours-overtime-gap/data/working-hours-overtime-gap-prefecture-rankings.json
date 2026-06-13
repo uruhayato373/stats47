@@ -1,0 +1,331 @@
+[
+  {
+    "areaName": "群馬県",
+    "rank": 1,
+    "value": 180,
+    "label": "月間平均実労働時間（男性）",
+    "unit": "時間"
+  },
+  {
+    "areaName": "青森県",
+    "rank": 2,
+    "value": 179,
+    "label": "月間平均実労働時間（男性）",
+    "unit": "時間"
+  },
+  {
+    "areaName": "福井県",
+    "rank": 2,
+    "value": 179,
+    "label": "月間平均実労働時間（男性）",
+    "unit": "時間"
+  },
+  {
+    "areaName": "岐阜県",
+    "rank": 2,
+    "value": 179,
+    "label": "月間平均実労働時間（男性）",
+    "unit": "時間"
+  },
+  {
+    "areaName": "兵庫県",
+    "rank": 2,
+    "value": 179,
+    "label": "月間平均実労働時間（男性）",
+    "unit": "時間"
+  },
+  {
+    "areaName": "埼玉県",
+    "rank": 6,
+    "value": 178,
+    "label": "月間平均実労働時間（男性）",
+    "unit": "時間"
+  },
+  {
+    "areaName": "静岡県",
+    "rank": 6,
+    "value": 178,
+    "label": "月間平均実労働時間（男性）",
+    "unit": "時間"
+  },
+  {
+    "areaName": "京都府",
+    "rank": 6,
+    "value": 178,
+    "label": "月間平均実労働時間（男性）",
+    "unit": "時間"
+  },
+  {
+    "areaName": "奈良県",
+    "rank": 6,
+    "value": 178,
+    "label": "月間平均実労働時間（男性）",
+    "unit": "時間"
+  },
+  {
+    "areaName": "和歌山県",
+    "rank": 6,
+    "value": 178,
+    "label": "月間平均実労働時間（男性）",
+    "unit": "時間"
+  },
+  {
+    "areaName": "宮城県",
+    "rank": 11,
+    "value": 177,
+    "label": "月間平均実労働時間（男性）",
+    "unit": "時間"
+  },
+  {
+    "areaName": "茨城県",
+    "rank": 11,
+    "value": 177,
+    "label": "月間平均実労働時間（男性）",
+    "unit": "時間"
+  },
+  {
+    "areaName": "千葉県",
+    "rank": 11,
+    "value": 177,
+    "label": "月間平均実労働時間（男性）",
+    "unit": "時間"
+  },
+  {
+    "areaName": "新潟県",
+    "rank": 11,
+    "value": 177,
+    "label": "月間平均実労働時間（男性）",
+    "unit": "時間"
+  },
+  {
+    "areaName": "山梨県",
+    "rank": 11,
+    "value": 177,
+    "label": "月間平均実労働時間（男性）",
+    "unit": "時間"
+  },
+  {
+    "areaName": "長野県",
+    "rank": 11,
+    "value": 177,
+    "label": "月間平均実労働時間（男性）",
+    "unit": "時間"
+  },
+  {
+    "areaName": "鳥取県",
+    "rank": 11,
+    "value": 177,
+    "label": "月間平均実労働時間（男性）",
+    "unit": "時間"
+  },
+  {
+    "areaName": "広島県",
+    "rank": 11,
+    "value": 177,
+    "label": "月間平均実労働時間（男性）",
+    "unit": "時間"
+  },
+  {
+    "areaName": "香川県",
+    "rank": 11,
+    "value": 177,
+    "label": "月間平均実労働時間（男性）",
+    "unit": "時間"
+  },
+  {
+    "areaName": "愛媛県",
+    "rank": 11,
+    "value": 177,
+    "label": "月間平均実労働時間（男性）",
+    "unit": "時間"
+  },
+  {
+    "areaName": "福岡県",
+    "rank": 11,
+    "value": 177,
+    "label": "月間平均実労働時間（男性）",
+    "unit": "時間"
+  },
+  {
+    "areaName": "佐賀県",
+    "rank": 11,
+    "value": 177,
+    "label": "月間平均実労働時間（男性）",
+    "unit": "時間"
+  },
+  {
+    "areaName": "鹿児島県",
+    "rank": 11,
+    "value": 177,
+    "label": "月間平均実労働時間（男性）",
+    "unit": "時間"
+  },
+  {
+    "areaName": "富山県",
+    "rank": 24,
+    "value": 176,
+    "label": "月間平均実労働時間（男性）",
+    "unit": "時間"
+  },
+  {
+    "areaName": "石川県",
+    "rank": 24,
+    "value": 176,
+    "label": "月間平均実労働時間（男性）",
+    "unit": "時間"
+  },
+  {
+    "areaName": "愛知県",
+    "rank": 24,
+    "value": 176,
+    "label": "月間平均実労働時間（男性）",
+    "unit": "時間"
+  },
+  {
+    "areaName": "三重県",
+    "rank": 24,
+    "value": 176,
+    "label": "月間平均実労働時間（男性）",
+    "unit": "時間"
+  },
+  {
+    "areaName": "滋賀県",
+    "rank": 24,
+    "value": 176,
+    "label": "月間平均実労働時間（男性）",
+    "unit": "時間"
+  },
+  {
+    "areaName": "岡山県",
+    "rank": 24,
+    "value": 176,
+    "label": "月間平均実労働時間（男性）",
+    "unit": "時間"
+  },
+  {
+    "areaName": "山口県",
+    "rank": 24,
+    "value": 176,
+    "label": "月間平均実労働時間（男性）",
+    "unit": "時間"
+  },
+  {
+    "areaName": "宮崎県",
+    "rank": 24,
+    "value": 176,
+    "label": "月間平均実労働時間（男性）",
+    "unit": "時間"
+  },
+  {
+    "areaName": "北海道",
+    "rank": 32,
+    "value": 175,
+    "label": "月間平均実労働時間（男性）",
+    "unit": "時間"
+  },
+  {
+    "areaName": "岩手県",
+    "rank": 32,
+    "value": 175,
+    "label": "月間平均実労働時間（男性）",
+    "unit": "時間"
+  },
+  {
+    "areaName": "栃木県",
+    "rank": 32,
+    "value": 175,
+    "label": "月間平均実労働時間（男性）",
+    "unit": "時間"
+  },
+  {
+    "areaName": "神奈川県",
+    "rank": 32,
+    "value": 175,
+    "label": "月間平均実労働時間（男性）",
+    "unit": "時間"
+  },
+  {
+    "areaName": "大阪府",
+    "rank": 32,
+    "value": 175,
+    "label": "月間平均実労働時間（男性）",
+    "unit": "時間"
+  },
+  {
+    "areaName": "島根県",
+    "rank": 32,
+    "value": 175,
+    "label": "月間平均実労働時間（男性）",
+    "unit": "時間"
+  },
+  {
+    "areaName": "長崎県",
+    "rank": 32,
+    "value": 175,
+    "label": "月間平均実労働時間（男性）",
+    "unit": "時間"
+  },
+  {
+    "areaName": "熊本県",
+    "rank": 32,
+    "value": 175,
+    "label": "月間平均実労働時間（男性）",
+    "unit": "時間"
+  },
+  {
+    "areaName": "大分県",
+    "rank": 32,
+    "value": 175,
+    "label": "月間平均実労働時間（男性）",
+    "unit": "時間"
+  },
+  {
+    "areaName": "福島県",
+    "rank": 41,
+    "value": 174,
+    "label": "月間平均実労働時間（男性）",
+    "unit": "時間"
+  },
+  {
+    "areaName": "高知県",
+    "rank": 41,
+    "value": 174,
+    "label": "月間平均実労働時間（男性）",
+    "unit": "時間"
+  },
+  {
+    "areaName": "山形県",
+    "rank": 43,
+    "value": 173,
+    "label": "月間平均実労働時間（男性）",
+    "unit": "時間"
+  },
+  {
+    "areaName": "徳島県",
+    "rank": 43,
+    "value": 173,
+    "label": "月間平均実労働時間（男性）",
+    "unit": "時間"
+  },
+  {
+    "areaName": "秋田県",
+    "rank": 45,
+    "value": 172,
+    "label": "月間平均実労働時間（男性）",
+    "unit": "時間"
+  },
+  {
+    "areaName": "沖縄県",
+    "rank": 45,
+    "value": 172,
+    "label": "月間平均実労働時間（男性）",
+    "unit": "時間"
+  },
+  {
+    "areaName": "東京都",
+    "rank": 47,
+    "value": 170,
+    "label": "月間平均実労働時間（男性）",
+    "unit": "時間"
+  }
+]

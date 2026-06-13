@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 534" role="img" aria-label="離婚率 都道府県ランキング 2024年 上位5県・下位5県">
+  <style>
+    .svg-title{fill:#0f172a}
+    .svg-subtitle{fill:#64748b}
+    .svg-label{fill:#475569}
+    @media (prefers-color-scheme:dark){
+      .svg-title{fill:#f9fafb}
+      .svg-subtitle{fill:#9ca3af}
+      .svg-label{fill:#e5e7eb}
+    }
+  </style>
+  <title>離婚率（人口千対）都道府県ランキング 2024年 — 上位5県・下位5県</title>
+  <text class="svg-title" x="96" y="28" font-size="16" font-weight="700">離婚率（人口千対）2024年 — 上位5・下位5</text>
+  <text class="svg-subtitle" x="96" y="46" font-size="12">青=上位（都市圏）／橙=下位（東北・近畿内陸）　単位：‐（1,000人あたり件数）</text>
+  <g>
+    <title>東京 5.7‐（1位）</title>
+    <rect x="96" y="60" width="600.0" height="30" rx="2" fill="#2563eb" stroke="#1e40af" stroke-width="1"/>
+    <text class="svg-label" x="86" y="75" text-anchor="end" dominant-baseline="central" font-size="14" font-weight="600">東京</text>
+    <text x="704" y="75" dominant-baseline="central" font-size="13" font-weight="700" fill="#2563eb">5.7‐</text>
+  </g>
+  <g>
+    <title>大阪 4.7‐（2位）</title>
+    <rect x="96" y="104" width="494.7" height="30" rx="2" fill="#2563eb" stroke="#1e40af" stroke-width="1"/>
+    <text class="svg-label" x="86" y="119" text-anchor="end" dominant-baseline="central" font-size="14" font-weight="600">大阪</text>
+    <text x="598.7368421052631" y="119" dominant-baseline="central" font-size="13" font-weight="700" fill="#2563eb">4.7‐</text>
+  </g>
+  <g>
+    <title>愛知 4.5‐（3位）</title>
+    <rect x="96" y="148" width="473.7" height="30" rx="2" fill="#2563eb" stroke="#1e40af" stroke-width="1"/>
+    <text class="svg-label" x="86" y="163" text-anchor="end" dominant-baseline="central" font-size="14" font-weight="600">愛知</text>
+    <text x="577.6842105263158" y="163" dominant-baseline="central" font-size="13" font-weight="700" fill="#2563eb">4.5‐</text>
+  </g>
+  <g>
+    <title>神奈川 4.4‐（4位）</title>
+    <rect x="96" y="192" width="463.2" height="30" rx="2" fill="#2563eb" stroke="#1e40af" stroke-width="1"/>
+    <text class="svg-label" x="86" y="207" text-anchor="end" dominant-baseline="central" font-size="14" font-weight="600">神奈川</text>
+    <text x="567.1578947368421" y="207" dominant-baseline="central" font-size="13" font-weight="700" fill="#2563eb">4.4‐</text>
+  </g>
+  <g>
+    <title>沖縄 4.4‐（4位）</title>
+    <rect x="96" y="236" width="463.2" height="30" rx="2" fill="#2563eb" stroke="#1e40af" stroke-width="1"/>
+    <text class="svg-label" x="86" y="251" text-anchor="end" dominant-baseline="central" font-size="14" font-weight="600">沖縄</text>
+    <text x="567.1578947368421" y="251" dominant-baseline="central" font-size="13" font-weight="700" fill="#2563eb">4.4‐</text>
+  </g>
+  <g>
+    <title>奈良 3‐（43位）</title>
+    <rect x="96" y="304" width="315.8" height="30" rx="2" fill="#ea7317" stroke="#c2570a" stroke-width="1"/>
+    <text class="svg-label" x="86" y="319" text-anchor="end" dominant-baseline="central" font-size="14" font-weight="600">奈良</text>
+    <text x="419.7894736842105" y="319" dominant-baseline="central" font-size="13" font-weight="700" fill="#ea7317">3.0‐</text>
+  </g>
+  <g>
+    <title>青森 2.9‐（44位）</title>
+    <rect x="96" y="348" width="305.3" height="30" rx="2" fill="#ea7317" stroke="#c2570a" stroke-width="1"/>
+    <text class="svg-label" x="86" y="363" text-anchor="end" dominant-baseline="central" font-size="14" font-weight="600">青森</text>
+    <text x="409.26315789473676" y="363" dominant-baseline="central" font-size="13" font-weight="700" fill="#ea7317">2.9‐</text>
+  </g>
+  <g>
+    <title>岩手 2.9‐（44位）</title>
+    <rect x="96" y="392" width="305.3" height="30" rx="2" fill="#ea7317" stroke="#c2570a" stroke-width="1"/>
+    <text class="svg-label" x="86" y="407" text-anchor="end" dominant-baseline="central" font-size="14" font-weight="600">岩手</text>
+    <text x="409.26315789473676" y="407" dominant-baseline="central" font-size="13" font-weight="700" fill="#ea7317">2.9‐</text>
+  </g>
+  <g>
+    <title>山形 2.9‐（44位）</title>
+    <rect x="96" y="436" width="305.3" height="30" rx="2" fill="#ea7317" stroke="#c2570a" stroke-width="1"/>
+    <text class="svg-label" x="86" y="451" text-anchor="end" dominant-baseline="central" font-size="14" font-weight="600">山形</text>
+    <text x="409.26315789473676" y="451" dominant-baseline="central" font-size="13" font-weight="700" fill="#ea7317">2.9‐</text>
+  </g>
+  <g>
+    <title>秋田 2.5‐（47位）</title>
+    <rect x="96" y="480" width="263.2" height="30" rx="2" fill="#ea7317" stroke="#c2570a" stroke-width="1"/>
+    <text class="svg-label" x="86" y="495" text-anchor="end" dominant-baseline="central" font-size="14" font-weight="600">秋田</text>
+    <text x="367.1578947368421" y="495" dominant-baseline="central" font-size="13" font-weight="700" fill="#ea7317">2.5‐</text>
+  </g>
+</svg>

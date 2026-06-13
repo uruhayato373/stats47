@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 370" width="680" height="370" style="font-family:system-ui,sans-serif;">
+  <title>ピアノ・電子ピアノ所有数量 上位5県・下位5県（1000世帯あたり台数・2014年度）</title>
+  <text x="340" y="24" text-anchor="middle" font-size="14" font-weight="bold" fill="#0f172a" font-family="system-ui,sans-serif">ピアノ・電子ピアノ所有数量 上位5県・下位5県（2014年度）</text>
+  <text x="340" y="41" text-anchor="middle" font-size="11" fill="#64748b" font-family="system-ui,sans-serif">二人以上の世帯 1000世帯あたり台数・出典: 総務省 社会・人口統計体系</text>
+  <rect x="120" y="50" width="420.0" height="24" fill="#2563eb" rx="2"/>
+  <text x="114" y="67" text-anchor="end" font-size="12" fill="#475569" font-family="system-ui,sans-serif">1位 山梨</text>
+  <text x="546.0" y="67" text-anchor="start" font-size="11" fill="#475569" font-family="system-ui,sans-serif">446台</text>
+  <rect x="120" y="80" width="400.2" height="24" fill="#2563eb" rx="2"/>
+  <text x="114" y="97" text-anchor="end" font-size="12" fill="#475569" font-family="system-ui,sans-serif">2位 長野</text>
+  <text x="526.2" y="97" text-anchor="start" font-size="11" fill="#475569" font-family="system-ui,sans-serif">425台</text>
+  <rect x="120" y="110" width="394.6" height="24" fill="#2563eb" rx="2"/>
+  <text x="114" y="127" text-anchor="end" font-size="12" fill="#475569" font-family="system-ui,sans-serif">3位 滋賀</text>
+  <text x="520.6" y="127" text-anchor="start" font-size="11" fill="#475569" font-family="system-ui,sans-serif">419台</text>
+  <rect x="120" y="140" width="378.6" height="24" fill="#2563eb" rx="2"/>
+  <text x="114" y="157" text-anchor="end" font-size="12" fill="#475569" font-family="system-ui,sans-serif">4位 福井</text>
+  <text x="504.6" y="157" text-anchor="start" font-size="11" fill="#475569" font-family="system-ui,sans-serif">402台</text>
+  <rect x="120" y="170" width="377.6" height="24" fill="#2563eb" rx="2"/>
+  <text x="114" y="187" text-anchor="end" font-size="12" fill="#475569" font-family="system-ui,sans-serif">5位 岡山</text>
+  <text x="503.6" y="187" text-anchor="start" font-size="11" fill="#475569" font-family="system-ui,sans-serif">401台</text>
+  <line x1="120" y1="202" x2="600" y2="202" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="120" y="198" font-size="11" fill="#94a3b8" font-family="system-ui,sans-serif">下位5県</text>
+  <rect x="120" y="214" width="253.3" height="24" fill="#f97316" rx="2"/>
+  <text x="114" y="231" text-anchor="end" font-size="12" fill="#475569" font-family="system-ui,sans-serif">43位 高知</text>
+  <text x="379.3" y="231" text-anchor="start" font-size="11" fill="#9a4a08" font-family="system-ui,sans-serif">269台</text>
+  <rect x="120" y="244" width="244.8" height="24" fill="#f97316" rx="2"/>
+  <text x="114" y="261" text-anchor="end" font-size="12" fill="#475569" font-family="system-ui,sans-serif">44位 宮崎</text>
+  <text x="370.8" y="261" text-anchor="start" font-size="11" fill="#9a4a08" font-family="system-ui,sans-serif">260台</text>
+  <rect x="120" y="274" width="240.1" height="24" fill="#f97316" rx="2"/>
+  <text x="114" y="291" text-anchor="end" font-size="12" fill="#475569" font-family="system-ui,sans-serif">45位 鹿児島</text>
+  <text x="366.1" y="291" text-anchor="start" font-size="11" fill="#9a4a08" font-family="system-ui,sans-serif">255台</text>
+  <rect x="120" y="304" width="215.7" height="24" fill="#f97316" rx="2"/>
+  <text x="114" y="321" text-anchor="end" font-size="12" fill="#475569" font-family="system-ui,sans-serif">46位 沖縄</text>
+  <text x="341.7" y="321" text-anchor="start" font-size="11" fill="#9a4a08" font-family="system-ui,sans-serif">229台</text>
+  <rect x="120" y="334" width="202.5" height="24" fill="#f97316" rx="2"/>
+  <text x="114" y="351" text-anchor="end" font-size="12" fill="#475569" font-family="system-ui,sans-serif">47位 青森</text>
+  <text x="328.5" y="351" text-anchor="start" font-size="11" fill="#9a4a08" font-family="system-ui,sans-serif">215台</text>
+</svg>

@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 560" width="720" height="560" font-family="-apple-system, BlinkMacSystemFont, 'Hiragino Sans', 'Yu Gothic', sans-serif" role="img" aria-label="地域別最低賃金 上位5県と下位5県（2024年度）">
+  <rect x="0" y="0" width="720" height="560" fill="none"/>
+  <text x="16" y="30" font-size="18" font-weight="700" fill="#0f172a">地域別最低賃金 上位5県・下位5県（2024年度）</text>
+  <text x="16" y="52" font-size="13" fill="#64748b">青＝上位（都市部）／橙＝下位（地方）・単位：円</text>
+  
+  <g>
+    <text x="16" y="98" font-size="15" font-weight="600" fill="#334155">東京</text>
+    <rect x="120" y="78" width="470.0" height="30" rx="2" fill="#2563eb">
+      <title>東京 1163円 (1位)</title>
+    </rect>
+    <text x="604" y="98" font-size="14" font-weight="700" fill="#0f172a">1163円</text>
+  </g>
+  <g>
+    <text x="16" y="144" font-size="15" font-weight="600" fill="#334155">神奈川</text>
+    <rect x="120" y="124" width="467.9" height="30" rx="2" fill="#2563eb">
+      <title>神奈川 1162円 (2位)</title>
+    </rect>
+    <text x="604" y="144" font-size="14" font-weight="700" fill="#0f172a">1162円</text>
+  </g>
+  <g>
+    <text x="16" y="190" font-size="15" font-weight="600" fill="#334155">大阪</text>
+    <rect x="120" y="170" width="366.7" height="30" rx="2" fill="#2563eb">
+      <title>大阪 1114円 (3位)</title>
+    </rect>
+    <text x="604" y="190" font-size="14" font-weight="700" fill="#0f172a">1114円</text>
+  </g>
+  <g>
+    <text x="16" y="236" font-size="15" font-weight="600" fill="#334155">埼玉</text>
+    <rect x="120" y="216" width="290.9" height="30" rx="2" fill="#2563eb">
+      <title>埼玉 1078円 (4位)</title>
+    </rect>
+    <text x="604" y="236" font-size="14" font-weight="700" fill="#0f172a">1078円</text>
+  </g>
+  <g>
+    <text x="16" y="282" font-size="15" font-weight="600" fill="#334155">愛知</text>
+    <rect x="120" y="262" width="288.7" height="30" rx="2" fill="#2563eb">
+      <title>愛知 1077円 (5位)</title>
+    </rect>
+    <text x="604" y="282" font-size="14" font-weight="700" fill="#0f172a">1077円</text>
+  </g>
+  <g>
+    <text x="16" y="328" font-size="15" font-weight="600" fill="#334155">宮崎</text>
+    <rect x="120" y="308" width="25.3" height="30" rx="2" fill="#ea580c">
+      <title>宮崎 952円 (42位)</title>
+    </rect>
+    <text x="604" y="328" font-size="14" font-weight="700" fill="#0f172a">952円</text>
+  </g>
+  <g>
+    <text x="16" y="374" font-size="15" font-weight="600" fill="#334155">沖縄</text>
+    <rect x="120" y="354" width="25.3" height="30" rx="2" fill="#ea580c">
+      <title>沖縄 952円 (42位)</title>
+    </rect>
+    <text x="604" y="374" font-size="14" font-weight="700" fill="#0f172a">952円</text>
+  </g>
+  <g>
+    <text x="16" y="420" font-size="15" font-weight="600" fill="#334155">岩手</text>
+    <rect x="120" y="400" width="25.3" height="30" rx="2" fill="#ea580c">
+      <title>岩手 952円 (42位)</title>
+    </rect>
+    <text x="604" y="420" font-size="14" font-weight="700" fill="#0f172a">952円</text>
+  </g>
+  <g>
+    <text x="16" y="466" font-size="15" font-weight="600" fill="#334155">高知</text>
+    <rect x="120" y="446" width="25.3" height="30" rx="2" fill="#ea580c">
+      <title>高知 952円 (42位)</title>
+    </rect>
+    <text x="604" y="466" font-size="14" font-weight="700" fill="#0f172a">952円</text>
+  </g>
+  <g>
+    <text x="16" y="512" font-size="15" font-weight="600" fill="#334155">秋田</text>
+    <rect x="120" y="492" width="23.2" height="30" rx="2" fill="#ea580c">
+      <title>秋田 951円 (47位)</title>
+    </rect>
+    <text x="604" y="512" font-size="14" font-weight="700" fill="#0f172a">951円</text>
+  </g>
+</svg>

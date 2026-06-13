@@ -1,0 +1,72 @@
+[
+  {
+    "areaName": "沖縄県",
+    "rank": 1,
+    "value": 1.6,
+    "label": "合計特殊出生率",
+    "unit": "‐"
+  },
+  {
+    "areaName": "長崎県",
+    "rank": 2,
+    "value": 1.49,
+    "label": "合計特殊出生率",
+    "unit": "‐"
+  },
+  {
+    "areaName": "宮崎県",
+    "rank": 2,
+    "value": 1.49,
+    "label": "合計特殊出生率",
+    "unit": "‐"
+  },
+  {
+    "areaName": "鹿児島県",
+    "rank": 4,
+    "value": 1.48,
+    "label": "合計特殊出生率",
+    "unit": "‐"
+  },
+  {
+    "areaName": "熊本県",
+    "rank": 5,
+    "value": 1.47,
+    "label": "合計特殊出生率",
+    "unit": "‐"
+  },
+  {
+    "areaName": "京都府",
+    "rank": 43,
+    "value": 1.11,
+    "label": "合計特殊出生率",
+    "unit": "‐"
+  },
+  {
+    "areaName": "秋田県",
+    "rank": 44,
+    "value": 1.1,
+    "label": "合計特殊出生率",
+    "unit": "‐"
+  },
+  {
+    "areaName": "宮城県",
+    "rank": 45,
+    "value": 1.07,
+    "label": "合計特殊出生率",
+    "unit": "‐"
+  },
+  {
+    "areaName": "北海道",
+    "rank": 46,
+    "value": 1.06,
+    "label": "合計特殊出生率",
+    "unit": "‐"
+  },
+  {
+    "areaName": "東京都",
+    "rank": 47,
+    "value": 0.99,
+    "label": "合計特殊出生率",
+    "unit": "‐"
+  }
+]

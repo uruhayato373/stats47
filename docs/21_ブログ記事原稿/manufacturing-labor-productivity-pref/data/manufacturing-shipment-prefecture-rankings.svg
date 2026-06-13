@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 496" width="760" height="496" role="img" aria-label="製造品出荷額ランキング（2021年）">
+  <style>
+    .svg-title { fill: #0f172a; }
+    .svg-sub   { fill: #475569; }
+    .svg-label { fill: #334155; }
+    .svg-value { fill: #1e293b; }
+    @media (prefers-color-scheme: dark) {
+      .svg-title { fill: #f1f5f9; }
+      .svg-sub   { fill: #cbd5e1; }
+      .svg-label { fill: #e2e8f0; }
+      .svg-value { fill: #f1f5f9; }
+    }
+  </style>
+  <title>製造品出荷額ランキング（2021年）</title>
+  <desc>上位5県・下位5県の製造品出荷額等（単位: 億円）。上位を青、下位を橙で表示。</desc>
+  <text class="svg-title" x="20" y="30" font-size="18" font-weight="700">製造品出荷額ランキング（2021年）</text>
+  <text class="svg-sub" x="20" y="52" font-size="13">上位5県・下位5県の製造品出荷額等（単位: 億円）</text>
+  <line x1="0" y1="260" x2="760" y2="260" stroke="#94a3b8" stroke-width="1" stroke-dasharray="4 4" opacity="0.6" />
+  
+    <g>
+      <text class="svg-label" x="96" y="93" text-anchor="end" font-size="15" font-weight="600">1位 愛知</text>
+      <rect x="112" y="76" width="542" height="24" rx="2" fill="#2563eb" />
+      <text class="svg-value" x="662" y="93" text-anchor="start" font-size="14" font-weight="700">47.9兆円</text>
+    </g>
+    <g>
+      <text class="svg-label" x="96" y="131" text-anchor="end" font-size="15" font-weight="600">2位 大阪</text>
+      <rect x="112" y="114" width="210.55283059050498" height="24" rx="2" fill="#2563eb" />
+      <text class="svg-value" x="330.552830590505" y="131" text-anchor="start" font-size="14" font-weight="700">18.6兆円</text>
+    </g>
+    <g>
+      <text class="svg-label" x="96" y="169" text-anchor="end" font-size="15" font-weight="600">3位 神奈川</text>
+      <rect x="112" y="152" width="196.62672618625066" height="24" rx="2" fill="#2563eb" />
+      <text class="svg-value" x="316.62672618625066" y="169" text-anchor="start" font-size="14" font-weight="700">17.4兆円</text>
+    </g>
+    <g>
+      <text class="svg-label" x="96" y="207" text-anchor="end" font-size="15" font-weight="600">4位 静岡</text>
+      <rect x="112" y="190" width="195.66821729380766" height="24" rx="2" fill="#2563eb" />
+      <text class="svg-value" x="315.66821729380763" y="207" text-anchor="start" font-size="14" font-weight="700">17.3兆円</text>
+    </g>
+    <g>
+      <text class="svg-label" x="96" y="245" text-anchor="end" font-size="15" font-weight="600">5位 兵庫</text>
+      <rect x="112" y="228" width="186.74853950132166" height="24" rx="2" fill="#2563eb" />
+      <text class="svg-value" x="306.74853950132166" y="245" text-anchor="start" font-size="14" font-weight="700">16.5兆円</text>
+    </g>
+    <g>
+      <text class="svg-label" x="96" y="283" text-anchor="end" font-size="15" font-weight="600">43位 秋田</text>
+      <rect x="112" y="266" width="15.90762632948182" height="24" rx="2" fill="#ea580c" />
+      <text class="svg-value" x="135.90762632948181" y="283" text-anchor="start" font-size="14" font-weight="700">1.4兆円</text>
+    </g>
+    <g>
+      <text class="svg-label" x="96" y="321" text-anchor="end" font-size="15" font-weight="600">44位 島根</text>
+      <rect x="112" y="304" width="14.559829291819955" height="24" rx="2" fill="#ea580c" />
+      <text class="svg-value" x="134.55982929181994" y="321" text-anchor="start" font-size="14" font-weight="700">1.3兆円</text>
+    </g>
+    <g>
+      <text class="svg-label" x="96" y="359" text-anchor="end" font-size="15" font-weight="600">45位 鳥取</text>
+      <rect x="112" y="342" width="9.552271028466675" height="24" rx="2" fill="#ea580c" />
+      <text class="svg-value" x="129.5522710284667" y="359" text-anchor="start" font-size="14" font-weight="700">0.8兆円</text>
+    </g>
+    <g>
+      <text class="svg-label" x="96" y="397" text-anchor="end" font-size="15" font-weight="600">46位 高知</text>
+      <rect x="112" y="380" width="6.806884283405645" height="24" rx="2" fill="#ea580c" />
+      <text class="svg-value" x="126.80688428340565" y="397" text-anchor="start" font-size="14" font-weight="700">0.6兆円</text>
+    </g>
+    <g>
+      <text class="svg-label" x="96" y="435" text-anchor="end" font-size="15" font-weight="600">47位 沖縄</text>
+      <rect x="112" y="418" width="5.204465639132596" height="24" rx="2" fill="#ea580c" />
+      <text class="svg-value" x="125.2044656391326" y="435" text-anchor="start" font-size="14" font-weight="700">0.5兆円</text>
+    </g>
+</svg>

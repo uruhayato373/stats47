@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 378" width="680" height="378" font-family="system-ui,sans-serif">
+  <title>都道府県別 入院受療率（人口10万対）ランキング 上位5・下位5 2023年</title>
+  <text x="340" y="26" text-anchor="middle" font-size="14" font-weight="bold" fill="#64748b" font-family="system-ui,sans-serif">入院受療率（人口10万対）上位5・下位5（2023年）</text>
+  <line x1="92" y1="203" x2="630" y2="203" stroke="#94a3b8" stroke-width="1" stroke-dasharray="4,3"/>
+  <rect x="92" y="50" width="478.0" height="24" fill="#2563eb" rx="2"/>
+  <text x="86" y="67" text-anchor="end" font-size="12" fill="#334155" font-family="system-ui,sans-serif">高知</text>
+  <text x="576.0" y="67" text-anchor="start" font-size="11" fill="#1d4ed8" font-family="system-ui,sans-serif">1,785人 (1位)</text>
+  <rect x="92" y="80" width="466.8" height="24" fill="#2563eb" rx="2"/>
+  <text x="86" y="97" text-anchor="end" font-size="12" fill="#334155" font-family="system-ui,sans-serif">鹿児島</text>
+  <text x="564.8" y="97" text-anchor="start" font-size="11" fill="#1d4ed8" font-family="system-ui,sans-serif">1,743人 (2位)</text>
+  <rect x="92" y="110" width="442.1" height="24" fill="#2563eb" rx="2"/>
+  <text x="86" y="127" text-anchor="end" font-size="12" fill="#334155" font-family="system-ui,sans-serif">長崎</text>
+  <text x="540.1" y="127" text-anchor="start" font-size="11" fill="#1d4ed8" font-family="system-ui,sans-serif">1,651人 (3位)</text>
+  <rect x="92" y="140" width="410.8" height="24" fill="#2563eb" rx="2"/>
+  <text x="86" y="157" text-anchor="end" font-size="12" fill="#334155" font-family="system-ui,sans-serif">山口</text>
+  <text x="508.8" y="157" text-anchor="start" font-size="11" fill="#1d4ed8" font-family="system-ui,sans-serif">1,534人 (4位)</text>
+  <rect x="92" y="170" width="410.0" height="24" fill="#2563eb" rx="2"/>
+  <text x="86" y="187" text-anchor="end" font-size="12" fill="#334155" font-family="system-ui,sans-serif">熊本</text>
+  <text x="508.0" y="187" text-anchor="start" font-size="11" fill="#1d4ed8" font-family="system-ui,sans-serif">1,531人 (5位)</text>
+  <rect x="92" y="214" width="198.4" height="24" fill="#ea580c" rx="2"/>
+  <text x="86" y="231" text-anchor="end" font-size="12" fill="#334155" font-family="system-ui,sans-serif">千葉</text>
+  <text x="296.4" y="231" text-anchor="start" font-size="11" fill="#c2410c" font-family="system-ui,sans-serif">741人 (43位)</text>
+  <rect x="92" y="244" width="190.7" height="24" fill="#ea580c" rx="2"/>
+  <text x="86" y="261" text-anchor="end" font-size="12" fill="#334155" font-family="system-ui,sans-serif">愛知</text>
+  <text x="288.7" y="261" text-anchor="start" font-size="11" fill="#c2410c" font-family="system-ui,sans-serif">712人 (44位)</text>
+  <rect x="92" y="274" width="188.0" height="24" fill="#ea580c" rx="2"/>
+  <text x="86" y="291" text-anchor="end" font-size="12" fill="#334155" font-family="system-ui,sans-serif">埼玉</text>
+  <text x="286.0" y="291" text-anchor="start" font-size="11" fill="#c2410c" font-family="system-ui,sans-serif">702人 (45位)</text>
+  <rect x="92" y="304" width="179.7" height="24" fill="#ea580c" rx="2"/>
+  <text x="86" y="321" text-anchor="end" font-size="12" fill="#334155" font-family="system-ui,sans-serif">東京</text>
+  <text x="277.7" y="321" text-anchor="start" font-size="11" fill="#c2410c" font-family="system-ui,sans-serif">671人 (46位)</text>
+  <rect x="92" y="334" width="178.1" height="24" fill="#ea580c" rx="2"/>
+  <text x="86" y="351" text-anchor="end" font-size="12" fill="#334155" font-family="system-ui,sans-serif">神奈川</text>
+  <text x="276.1" y="351" text-anchor="start" font-size="11" fill="#c2410c" font-family="system-ui,sans-serif">665人 (47位)</text>
+</svg>

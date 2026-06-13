@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 470" role="img" aria-label="延べ宿泊者数 上位5・下位5（2024年度、全施設合計）">
+  <title>延べ宿泊者数 上位5・下位5（2024年度・全施設合計・万人泊）</title>
+  <text x="150" y="26" font-size="16" font-weight="700" fill="currentColor">延べ宿泊者数 上位5・下位5（万人泊・2024年度）</text>
+  <text x="150" y="44" font-size="12" fill="currentColor" opacity="0.7">全施設合計。上位＝青／下位＝橙。バー長は最大値（東京）基準</text>
+  <line x1="150" y1="52" x2="150" y2="448" stroke="currentColor" stroke-opacity="0.25" stroke-width="1"/>
+  <line x1="10" y1="248" x2="660" y2="248" stroke="currentColor" stroke-opacity="0.18" stroke-width="1" stroke-dasharray="4 4"/>
+
+  <text x="138" y="73" text-anchor="end" dominant-baseline="central" font-size="14" font-weight="600" fill="currentColor">1位 東京</text>
+  <rect x="150" y="60" width="500.0" height="26" rx="2" fill="#2563eb"><title>東京：9,163万人泊（1位）</title></rect>
+  <text x="658.0" y="73" dominant-baseline="central" font-size="13" font-weight="700" fill="currentColor">9,163</text>
+
+  <text x="138" y="109" text-anchor="end" dominant-baseline="central" font-size="14" font-weight="600" fill="currentColor">2位 大阪</text>
+  <rect x="150" y="96" width="273.0" height="26" rx="2" fill="#2563eb"><title>大阪：5,003万人泊（2位）</title></rect>
+  <text x="431.0" y="109" dominant-baseline="central" font-size="13" font-weight="700" fill="currentColor">5,003</text>
+
+  <text x="138" y="145" text-anchor="end" dominant-baseline="central" font-size="14" font-weight="600" fill="currentColor">3位 北海道</text>
+  <rect x="150" y="132" width="199.8" height="26" rx="2" fill="#2563eb"><title>北海道：3,662万人泊（3位）</title></rect>
+  <text x="357.8" y="145" dominant-baseline="central" font-size="13" font-weight="700" fill="currentColor">3,662</text>
+
+  <text x="138" y="181" text-anchor="end" dominant-baseline="central" font-size="14" font-weight="600" fill="currentColor">4位 京都</text>
+  <rect x="150" y="168" width="155.7" height="26" rx="2" fill="#2563eb"><title>京都：2,854万人泊（4位）</title></rect>
+  <text x="313.7" y="181" dominant-baseline="central" font-size="13" font-weight="700" fill="currentColor">2,854</text>
+
+  <text x="138" y="217" text-anchor="end" dominant-baseline="central" font-size="14" font-weight="600" fill="currentColor">5位 千葉</text>
+  <rect x="150" y="204" width="142.3" height="26" rx="2" fill="#2563eb"><title>千葉：2,607万人泊（5位）</title></rect>
+  <text x="300.3" y="217" dominant-baseline="central" font-size="13" font-weight="700" fill="currentColor">2,607</text>
+
+  <text x="138" y="269" text-anchor="end" dominant-baseline="central" font-size="14" font-weight="600" fill="currentColor">43位 奈良</text>
+  <rect x="150" y="256" width="12.5" height="26" rx="2" fill="#ea580c"><title>奈良：229万人泊（43位）</title></rect>
+  <text x="170.5" y="269" dominant-baseline="central" font-size="13" font-weight="700" fill="currentColor">229</text>
+
+  <text x="138" y="305" text-anchor="end" dominant-baseline="central" font-size="14" font-weight="600" fill="currentColor">44位 高知</text>
+  <rect x="150" y="292" width="12.0" height="26" rx="2" fill="#ea580c"><title>高知：220万人泊（44位）</title></rect>
+  <text x="170.0" y="305" dominant-baseline="central" font-size="13" font-weight="700" fill="currentColor">220</text>
+
+  <text x="138" y="341" text-anchor="end" dominant-baseline="central" font-size="14" font-weight="600" fill="currentColor">45位 佐賀</text>
+  <rect x="150" y="328" width="10.9" height="26" rx="2" fill="#ea580c"><title>佐賀：200万人泊（45位）</title></rect>
+  <text x="168.9" y="341" dominant-baseline="central" font-size="13" font-weight="700" fill="currentColor">200</text>
+
+  <text x="138" y="377" text-anchor="end" dominant-baseline="central" font-size="14" font-weight="600" fill="currentColor">46位 鳥取</text>
+  <rect x="150" y="364" width="10.3" height="26" rx="2" fill="#ea580c"><title>鳥取：188万人泊（46位）</title></rect>
+  <text x="168.3" y="377" dominant-baseline="central" font-size="13" font-weight="700" fill="currentColor">188</text>
+
+  <text x="138" y="413" text-anchor="end" dominant-baseline="central" font-size="14" font-weight="600" fill="currentColor">47位 徳島</text>
+  <rect x="150" y="400" width="9.3" height="26" rx="2" fill="#ea580c"><title>徳島：170万人泊（47位）</title></rect>
+  <text x="167.3" y="413" dominant-baseline="central" font-size="13" font-weight="700" fill="currentColor">170</text>
+</svg>

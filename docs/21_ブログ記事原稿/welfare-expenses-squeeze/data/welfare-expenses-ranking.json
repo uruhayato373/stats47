@@ -1,0 +1,72 @@
+[
+  {
+    "areaName": "東京都",
+    "rank": 1,
+    "value": 12447,
+    "label": "民生費",
+    "unit": "億円"
+  },
+  {
+    "areaName": "大阪府",
+    "rank": 2,
+    "value": 6781,
+    "label": "民生費",
+    "unit": "億円"
+  },
+  {
+    "areaName": "神奈川県",
+    "rank": 3,
+    "value": 5427,
+    "label": "民生費",
+    "unit": "億円"
+  },
+  {
+    "areaName": "愛知県",
+    "rank": 4,
+    "value": 4632,
+    "label": "民生費",
+    "unit": "億円"
+  },
+  {
+    "areaName": "北海道",
+    "rank": 5,
+    "value": 4180,
+    "label": "民生費",
+    "unit": "億円"
+  },
+  {
+    "areaName": "徳島県",
+    "rank": 43,
+    "value": 695,
+    "label": "民生費",
+    "unit": "億円"
+  },
+  {
+    "areaName": "高知県",
+    "rank": 44,
+    "value": 690,
+    "label": "民生費",
+    "unit": "億円"
+  },
+  {
+    "areaName": "福井県",
+    "rank": 45,
+    "value": 621,
+    "label": "民生費",
+    "unit": "億円"
+  },
+  {
+    "areaName": "島根県",
+    "rank": 46,
+    "value": 610,
+    "label": "民生費",
+    "unit": "億円"
+  },
+  {
+    "areaName": "鳥取県",
+    "rank": 47,
+    "value": 523,
+    "label": "民生費",
+    "unit": "億円"
+  }
+]

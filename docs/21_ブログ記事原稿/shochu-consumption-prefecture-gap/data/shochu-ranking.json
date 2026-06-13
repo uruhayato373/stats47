@@ -1,0 +1,72 @@
+[
+  {
+    "areaName": "宮崎県",
+    "rank": 1,
+    "value": 19273,
+    "label": "焼酎消費量",
+    "unit": "ml"
+  },
+  {
+    "areaName": "鹿児島県",
+    "rank": 2,
+    "value": 12503,
+    "label": "焼酎消費量",
+    "unit": "ml"
+  },
+  {
+    "areaName": "大分県",
+    "rank": 3,
+    "value": 11440,
+    "label": "焼酎消費量",
+    "unit": "ml"
+  },
+  {
+    "areaName": "熊本県",
+    "rank": 4,
+    "value": 11262,
+    "label": "焼酎消費量",
+    "unit": "ml"
+  },
+  {
+    "areaName": "島根県",
+    "rank": 5,
+    "value": 11229,
+    "label": "焼酎消費量",
+    "unit": "ml"
+  },
+  {
+    "areaName": "和歌山県",
+    "rank": 43,
+    "value": 4698,
+    "label": "焼酎消費量",
+    "unit": "ml"
+  },
+  {
+    "areaName": "石川県",
+    "rank": 44,
+    "value": 4547,
+    "label": "焼酎消費量",
+    "unit": "ml"
+  },
+  {
+    "areaName": "大阪府",
+    "rank": 45,
+    "value": 4477,
+    "label": "焼酎消費量",
+    "unit": "ml"
+  },
+  {
+    "areaName": "京都府",
+    "rank": 46,
+    "value": 4416,
+    "label": "焼酎消費量",
+    "unit": "ml"
+  },
+  {
+    "areaName": "宮城県",
+    "rank": 47,
+    "value": 3773,
+    "label": "焼酎消費量",
+    "unit": "ml"
+  }
+]

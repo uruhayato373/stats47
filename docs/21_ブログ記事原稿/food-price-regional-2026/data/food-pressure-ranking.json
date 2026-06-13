@@ -1,0 +1,331 @@
+[
+  {
+    "areaName": "兵庫",
+    "rank": 1,
+    "value": 31.8,
+    "label": "食品インフレ家計圧迫指数",
+    "unit": ""
+  },
+  {
+    "areaName": "沖縄",
+    "rank": 2,
+    "value": 31.37,
+    "label": "食品インフレ家計圧迫指数",
+    "unit": ""
+  },
+  {
+    "areaName": "大阪",
+    "rank": 3,
+    "value": 31.34,
+    "label": "食品インフレ家計圧迫指数",
+    "unit": ""
+  },
+  {
+    "areaName": "青森",
+    "rank": 4,
+    "value": 29.96,
+    "label": "食品インフレ家計圧迫指数",
+    "unit": ""
+  },
+  {
+    "areaName": "京都",
+    "rank": 5,
+    "value": 29.91,
+    "label": "食品インフレ家計圧迫指数",
+    "unit": ""
+  },
+  {
+    "areaName": "長崎",
+    "rank": 6,
+    "value": 29.51,
+    "label": "食品インフレ家計圧迫指数",
+    "unit": ""
+  },
+  {
+    "areaName": "東京",
+    "rank": 7,
+    "value": 29.36,
+    "label": "食品インフレ家計圧迫指数",
+    "unit": ""
+  },
+  {
+    "areaName": "岐阜",
+    "rank": 8,
+    "value": 29.31,
+    "label": "食品インフレ家計圧迫指数",
+    "unit": ""
+  },
+  {
+    "areaName": "神奈川",
+    "rank": 9,
+    "value": 29.1,
+    "label": "食品インフレ家計圧迫指数",
+    "unit": ""
+  },
+  {
+    "areaName": "愛媛",
+    "rank": 10,
+    "value": 29.06,
+    "label": "食品インフレ家計圧迫指数",
+    "unit": ""
+  },
+  {
+    "areaName": "秋田",
+    "rank": 11,
+    "value": 28.98,
+    "label": "食品インフレ家計圧迫指数",
+    "unit": ""
+  },
+  {
+    "areaName": "和歌山",
+    "rank": 12,
+    "value": 28.88,
+    "label": "食品インフレ家計圧迫指数",
+    "unit": ""
+  },
+  {
+    "areaName": "宮崎",
+    "rank": 13,
+    "value": 28.86,
+    "label": "食品インフレ家計圧迫指数",
+    "unit": ""
+  },
+  {
+    "areaName": "徳島",
+    "rank": 14,
+    "value": 28.83,
+    "label": "食品インフレ家計圧迫指数",
+    "unit": ""
+  },
+  {
+    "areaName": "愛知",
+    "rank": 15,
+    "value": 28.47,
+    "label": "食品インフレ家計圧迫指数",
+    "unit": ""
+  },
+  {
+    "areaName": "北海道",
+    "rank": 16,
+    "value": 28.44,
+    "label": "食品インフレ家計圧迫指数",
+    "unit": ""
+  },
+  {
+    "areaName": "新潟",
+    "rank": 17,
+    "value": 28.36,
+    "label": "食品インフレ家計圧迫指数",
+    "unit": ""
+  },
+  {
+    "areaName": "山形",
+    "rank": 18,
+    "value": 28.3,
+    "label": "食品インフレ家計圧迫指数",
+    "unit": ""
+  },
+  {
+    "areaName": "富山",
+    "rank": 19,
+    "value": 28.2,
+    "label": "食品インフレ家計圧迫指数",
+    "unit": ""
+  },
+  {
+    "areaName": "福岡",
+    "rank": 20,
+    "value": 28.03,
+    "label": "食品インフレ家計圧迫指数",
+    "unit": ""
+  },
+  {
+    "areaName": "千葉",
+    "rank": 21,
+    "value": 27.91,
+    "label": "食品インフレ家計圧迫指数",
+    "unit": ""
+  },
+  {
+    "areaName": "滋賀",
+    "rank": 22,
+    "value": 27.86,
+    "label": "食品インフレ家計圧迫指数",
+    "unit": ""
+  },
+  {
+    "areaName": "広島",
+    "rank": 23,
+    "value": 27.83,
+    "label": "食品インフレ家計圧迫指数",
+    "unit": ""
+  },
+  {
+    "areaName": "島根",
+    "rank": 24,
+    "value": 27.78,
+    "label": "食品インフレ家計圧迫指数",
+    "unit": ""
+  },
+  {
+    "areaName": "石川",
+    "rank": 25,
+    "value": 27.57,
+    "label": "食品インフレ家計圧迫指数",
+    "unit": ""
+  },
+  {
+    "areaName": "山口",
+    "rank": 26,
+    "value": 27.23,
+    "label": "食品インフレ家計圧迫指数",
+    "unit": ""
+  },
+  {
+    "areaName": "三重",
+    "rank": 27,
+    "value": 27.18,
+    "label": "食品インフレ家計圧迫指数",
+    "unit": ""
+  },
+  {
+    "areaName": "熊本",
+    "rank": 28,
+    "value": 27.16,
+    "label": "食品インフレ家計圧迫指数",
+    "unit": ""
+  },
+  {
+    "areaName": "埼玉",
+    "rank": 29,
+    "value": 27.08,
+    "label": "食品インフレ家計圧迫指数",
+    "unit": ""
+  },
+  {
+    "areaName": "福島",
+    "rank": 30,
+    "value": 26.91,
+    "label": "食品インフレ家計圧迫指数",
+    "unit": ""
+  },
+  {
+    "areaName": "奈良",
+    "rank": 31,
+    "value": 26.88,
+    "label": "食品インフレ家計圧迫指数",
+    "unit": ""
+  },
+  {
+    "areaName": "香川",
+    "rank": 32,
+    "value": 26.81,
+    "label": "食品インフレ家計圧迫指数",
+    "unit": ""
+  },
+  {
+    "areaName": "佐賀",
+    "rank": 33,
+    "value": 26.74,
+    "label": "食品インフレ家計圧迫指数",
+    "unit": ""
+  },
+  {
+    "areaName": "高知",
+    "rank": 34,
+    "value": 26.56,
+    "label": "食品インフレ家計圧迫指数",
+    "unit": ""
+  },
+  {
+    "areaName": "福井",
+    "rank": 35,
+    "value": 26.55,
+    "label": "食品インフレ家計圧迫指数",
+    "unit": ""
+  },
+  {
+    "areaName": "宮城",
+    "rank": 36,
+    "value": 26.52,
+    "label": "食品インフレ家計圧迫指数",
+    "unit": ""
+  },
+  {
+    "areaName": "静岡",
+    "rank": 37,
+    "value": 26.52,
+    "label": "食品インフレ家計圧迫指数",
+    "unit": ""
+  },
+  {
+    "areaName": "群馬",
+    "rank": 38,
+    "value": 26.5,
+    "label": "食品インフレ家計圧迫指数",
+    "unit": ""
+  },
+  {
+    "areaName": "岡山",
+    "rank": 39,
+    "value": 26.48,
+    "label": "食品インフレ家計圧迫指数",
+    "unit": ""
+  },
+  {
+    "areaName": "山梨",
+    "rank": 40,
+    "value": 26.46,
+    "label": "食品インフレ家計圧迫指数",
+    "unit": ""
+  },
+  {
+    "areaName": "鳥取",
+    "rank": 41,
+    "value": 26.11,
+    "label": "食品インフレ家計圧迫指数",
+    "unit": ""
+  },
+  {
+    "areaName": "大分",
+    "rank": 42,
+    "value": 25.92,
+    "label": "食品インフレ家計圧迫指数",
+    "unit": ""
+  },
+  {
+    "areaName": "岩手",
+    "rank": 43,
+    "value": 25.66,
+    "label": "食品インフレ家計圧迫指数",
+    "unit": ""
+  },
+  {
+    "areaName": "鹿児島",
+    "rank": 44,
+    "value": 25.53,
+    "label": "食品インフレ家計圧迫指数",
+    "unit": ""
+  },
+  {
+    "areaName": "茨城",
+    "rank": 45,
+    "value": 24.74,
+    "label": "食品インフレ家計圧迫指数",
+    "unit": ""
+  },
+  {
+    "areaName": "長野",
+    "rank": 46,
+    "value": 24.72,
+    "label": "食品インフレ家計圧迫指数",
+    "unit": ""
+  },
+  {
+    "areaName": "栃木",
+    "rank": 47,
+    "value": 24.7,
+    "label": "食品インフレ家計圧迫指数",
+    "unit": ""
+  }
+]

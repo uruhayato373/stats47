@@ -1,0 +1,77 @@
+<!-- data-source: manufacturing-shipment.json | top5+bottom5 -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 730 388" role="img" font-family="system-ui, -apple-system, 'Hiragino Sans', 'Yu Gothic', sans-serif">
+  <title>製造品出荷額等 上位5県・下位5県（2023年度）</title>
+  <text x="16" y="28" font-size="17" font-weight="700" fill="#334155">製造品出荷額等 上位5県・下位5県（2023年度）</text>
+  <text x="16" y="48" font-size="12" fill="#64748b">単位: 兆円　青=上位5 / 橙=下位5</text>
+  <line x1="104" y1="58" x2="104" y2="364" stroke="#94a3b8" stroke-width="1" />
+  <g>
+    <title>愛知：製造品出荷額等 上位5県・下位5県（2023年度）=58.0兆円（1位）</title>
+    <text x="96" y="73" text-anchor="end" dominant-baseline="central" font-size="14" fill="#334155">愛知</text>
+    <text x="96" y="87" text-anchor="end" dominant-baseline="central" font-size="10" fill="#64748b">1位</text>
+    <rect x="104" y="68" width="496.0" height="22" rx="2" fill="#2563eb" />
+    <text x="608.0" y="79" text-anchor="start" dominant-baseline="central" font-size="13" fill="#475569">58.0兆円</text>
+  </g>
+  <g>
+    <title>静岡：製造品出荷額等 上位5県・下位5県（2023年度）=19.8兆円（2位）</title>
+    <text x="96" y="103" text-anchor="end" dominant-baseline="central" font-size="14" fill="#334155">静岡</text>
+    <text x="96" y="117" text-anchor="end" dominant-baseline="central" font-size="10" fill="#64748b">2位</text>
+    <rect x="104" y="98" width="169.3" height="22" rx="2" fill="#2563eb" />
+    <text x="281.3" y="109" text-anchor="start" dominant-baseline="central" font-size="13" fill="#475569">19.8兆円</text>
+  </g>
+  <g>
+    <title>大阪：製造品出荷額等 上位5県・下位5県（2023年度）=19.3兆円（3位）</title>
+    <text x="96" y="133" text-anchor="end" dominant-baseline="central" font-size="14" fill="#334155">大阪</text>
+    <text x="96" y="147" text-anchor="end" dominant-baseline="central" font-size="10" fill="#64748b">3位</text>
+    <rect x="104" y="128" width="165.0" height="22" rx="2" fill="#2563eb" />
+    <text x="277.0" y="139" text-anchor="start" dominant-baseline="central" font-size="13" fill="#475569">19.3兆円</text>
+  </g>
+  <g>
+    <title>神奈川：製造品出荷額等 上位5県・下位5県（2023年度）=18.5兆円（4位）</title>
+    <text x="96" y="163" text-anchor="end" dominant-baseline="central" font-size="14" fill="#334155">神奈川</text>
+    <text x="96" y="177" text-anchor="end" dominant-baseline="central" font-size="10" fill="#64748b">4位</text>
+    <rect x="104" y="158" width="158.2" height="22" rx="2" fill="#2563eb" />
+    <text x="270.2" y="169" text-anchor="start" dominant-baseline="central" font-size="13" fill="#475569">18.5兆円</text>
+  </g>
+  <g>
+    <title>兵庫：製造品出荷額等 上位5県・下位5県（2023年度）=18.5兆円（5位）</title>
+    <text x="96" y="193" text-anchor="end" dominant-baseline="central" font-size="14" fill="#334155">兵庫</text>
+    <text x="96" y="207" text-anchor="end" dominant-baseline="central" font-size="10" fill="#64748b">5位</text>
+    <rect x="104" y="188" width="158.2" height="22" rx="2" fill="#2563eb" />
+    <text x="270.2" y="199" text-anchor="start" dominant-baseline="central" font-size="13" fill="#475569">18.5兆円</text>
+  </g>
+  <g>
+    <title>秋田：製造品出荷額等 上位5県・下位5県（2023年度）=1.6兆円（43位）</title>
+    <text x="96" y="223" text-anchor="end" dominant-baseline="central" font-size="14" fill="#334155">秋田</text>
+    <text x="96" y="237" text-anchor="end" dominant-baseline="central" font-size="10" fill="#64748b">43位</text>
+    <rect x="104" y="218" width="13.7" height="22" rx="2" fill="#ea580c" />
+    <text x="125.7" y="229" text-anchor="start" dominant-baseline="central" font-size="13" fill="#475569">1.6兆円</text>
+  </g>
+  <g>
+    <title>島根：製造品出荷額等 上位5県・下位5県（2023年度）=1.4兆円（44位）</title>
+    <text x="96" y="253" text-anchor="end" dominant-baseline="central" font-size="14" fill="#334155">島根</text>
+    <text x="96" y="267" text-anchor="end" dominant-baseline="central" font-size="10" fill="#64748b">44位</text>
+    <rect x="104" y="248" width="12.0" height="22" rx="2" fill="#ea580c" />
+    <text x="124.0" y="259" text-anchor="start" dominant-baseline="central" font-size="13" fill="#475569">1.4兆円</text>
+  </g>
+  <g>
+    <title>鳥取：製造品出荷額等 上位5県・下位5県（2023年度）=0.9兆円（45位）</title>
+    <text x="96" y="283" text-anchor="end" dominant-baseline="central" font-size="14" fill="#334155">鳥取</text>
+    <text x="96" y="297" text-anchor="end" dominant-baseline="central" font-size="10" fill="#64748b">45位</text>
+    <rect x="104" y="278" width="7.7" height="22" rx="2" fill="#ea580c" />
+    <text x="119.7" y="289" text-anchor="start" dominant-baseline="central" font-size="13" fill="#475569">0.9兆円</text>
+  </g>
+  <g>
+    <title>高知：製造品出荷額等 上位5県・下位5県（2023年度）=0.7兆円（46位）</title>
+    <text x="96" y="313" text-anchor="end" dominant-baseline="central" font-size="14" fill="#334155">高知</text>
+    <text x="96" y="327" text-anchor="end" dominant-baseline="central" font-size="10" fill="#64748b">46位</text>
+    <rect x="104" y="308" width="6.0" height="22" rx="2" fill="#ea580c" />
+    <text x="118.0" y="319" text-anchor="start" dominant-baseline="central" font-size="13" fill="#475569">0.7兆円</text>
+  </g>
+  <g>
+    <title>沖縄：製造品出荷額等 上位5県・下位5県（2023年度）=0.5兆円（47位）</title>
+    <text x="96" y="343" text-anchor="end" dominant-baseline="central" font-size="14" fill="#334155">沖縄</text>
+    <text x="96" y="357" text-anchor="end" dominant-baseline="central" font-size="10" fill="#64748b">47位</text>
+    <rect x="104" y="338" width="4.3" height="22" rx="2" fill="#ea580c" />
+    <text x="116.3" y="349" text-anchor="start" dominant-baseline="central" font-size="13" fill="#475569">0.5兆円</text>
+  </g>
+</svg>

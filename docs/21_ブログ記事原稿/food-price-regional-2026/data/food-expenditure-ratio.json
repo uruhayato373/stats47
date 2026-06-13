@@ -1,0 +1,331 @@
+[
+  {
+    "areaName": "兵庫",
+    "rank": 1,
+    "value": 31.8,
+    "label": "食料費割合",
+    "unit": "％"
+  },
+  {
+    "areaName": "大阪",
+    "rank": 2,
+    "value": 31.5,
+    "label": "食料費割合",
+    "unit": "％"
+  },
+  {
+    "areaName": "青森",
+    "rank": 3,
+    "value": 30.7,
+    "label": "食料費割合",
+    "unit": "％"
+  },
+  {
+    "areaName": "岐阜",
+    "rank": 4,
+    "value": 30,
+    "label": "食料費割合",
+    "unit": "％"
+  },
+  {
+    "areaName": "宮崎",
+    "rank": 5,
+    "value": 29.6,
+    "label": "食料費割合",
+    "unit": "％"
+  },
+  {
+    "areaName": "京都",
+    "rank": 6,
+    "value": 29.5,
+    "label": "食料費割合",
+    "unit": "％"
+  },
+  {
+    "areaName": "沖縄",
+    "rank": 7,
+    "value": 29.4,
+    "label": "食料費割合",
+    "unit": "％"
+  },
+  {
+    "areaName": "長崎",
+    "rank": 8,
+    "value": 29.3,
+    "label": "食料費割合",
+    "unit": "％"
+  },
+  {
+    "areaName": "愛知",
+    "rank": 9,
+    "value": 29.2,
+    "label": "食料費割合",
+    "unit": "％"
+  },
+  {
+    "areaName": "和歌山",
+    "rank": 9,
+    "value": 29.2,
+    "label": "食料費割合",
+    "unit": "％"
+  },
+  {
+    "areaName": "秋田",
+    "rank": 11,
+    "value": 29.1,
+    "label": "食料費割合",
+    "unit": "％"
+  },
+  {
+    "areaName": "愛媛",
+    "rank": 12,
+    "value": 29,
+    "label": "食料費割合",
+    "unit": "％"
+  },
+  {
+    "areaName": "新潟",
+    "rank": 13,
+    "value": 28.7,
+    "label": "食料費割合",
+    "unit": "％"
+  },
+  {
+    "areaName": "徳島",
+    "rank": 14,
+    "value": 28.6,
+    "label": "食料費割合",
+    "unit": "％"
+  },
+  {
+    "areaName": "東京",
+    "rank": 15,
+    "value": 28.5,
+    "label": "食料費割合",
+    "unit": "％"
+  },
+  {
+    "areaName": "神奈川",
+    "rank": 15,
+    "value": 28.5,
+    "label": "食料費割合",
+    "unit": "％"
+  },
+  {
+    "areaName": "福岡",
+    "rank": 17,
+    "value": 28.4,
+    "label": "食料費割合",
+    "unit": "％"
+  },
+  {
+    "areaName": "滋賀",
+    "rank": 18,
+    "value": 28.2,
+    "label": "食料費割合",
+    "unit": "％"
+  },
+  {
+    "areaName": "富山",
+    "rank": 19,
+    "value": 28,
+    "label": "食料費割合",
+    "unit": "％"
+  },
+  {
+    "areaName": "北海道",
+    "rank": 20,
+    "value": 27.8,
+    "label": "食料費割合",
+    "unit": "％"
+  },
+  {
+    "areaName": "山形",
+    "rank": 20,
+    "value": 27.8,
+    "label": "食料費割合",
+    "unit": "％"
+  },
+  {
+    "areaName": "千葉",
+    "rank": 20,
+    "value": 27.8,
+    "label": "食料費割合",
+    "unit": "％"
+  },
+  {
+    "areaName": "福島",
+    "rank": 23,
+    "value": 27.6,
+    "label": "食料費割合",
+    "unit": "％"
+  },
+  {
+    "areaName": "群馬",
+    "rank": 23,
+    "value": 27.6,
+    "label": "食料費割合",
+    "unit": "％"
+  },
+  {
+    "areaName": "埼玉",
+    "rank": 23,
+    "value": 27.6,
+    "label": "食料費割合",
+    "unit": "％"
+  },
+  {
+    "areaName": "広島",
+    "rank": 26,
+    "value": 27.5,
+    "label": "食料費割合",
+    "unit": "％"
+  },
+  {
+    "areaName": "奈良",
+    "rank": 27,
+    "value": 27.4,
+    "label": "食料費割合",
+    "unit": "％"
+  },
+  {
+    "areaName": "静岡",
+    "rank": 28,
+    "value": 27.2,
+    "label": "食料費割合",
+    "unit": "％"
+  },
+  {
+    "areaName": "佐賀",
+    "rank": 28,
+    "value": 27.2,
+    "label": "食料費割合",
+    "unit": "％"
+  },
+  {
+    "areaName": "三重",
+    "rank": 30,
+    "value": 27.1,
+    "label": "食料費割合",
+    "unit": "％"
+  },
+  {
+    "areaName": "島根",
+    "rank": 30,
+    "value": 27.1,
+    "label": "食料費割合",
+    "unit": "％"
+  },
+  {
+    "areaName": "石川",
+    "rank": 32,
+    "value": 27,
+    "label": "食料費割合",
+    "unit": "％"
+  },
+  {
+    "areaName": "山梨",
+    "rank": 32,
+    "value": 27,
+    "label": "食料費割合",
+    "unit": "％"
+  },
+  {
+    "areaName": "山口",
+    "rank": 34,
+    "value": 26.7,
+    "label": "食料費割合",
+    "unit": "％"
+  },
+  {
+    "areaName": "宮城",
+    "rank": 35,
+    "value": 26.6,
+    "label": "食料費割合",
+    "unit": "％"
+  },
+  {
+    "areaName": "香川",
+    "rank": 35,
+    "value": 26.6,
+    "label": "食料費割合",
+    "unit": "％"
+  },
+  {
+    "areaName": "熊本",
+    "rank": 35,
+    "value": 26.6,
+    "label": "食料費割合",
+    "unit": "％"
+  },
+  {
+    "areaName": "岡山",
+    "rank": 38,
+    "value": 26.3,
+    "label": "食料費割合",
+    "unit": "％"
+  },
+  {
+    "areaName": "高知",
+    "rank": 38,
+    "value": 26.3,
+    "label": "食料費割合",
+    "unit": "％"
+  },
+  {
+    "areaName": "大分",
+    "rank": 40,
+    "value": 26.1,
+    "label": "食料費割合",
+    "unit": "％"
+  },
+  {
+    "areaName": "岩手",
+    "rank": 41,
+    "value": 26,
+    "label": "食料費割合",
+    "unit": "％"
+  },
+  {
+    "areaName": "鹿児島",
+    "rank": 41,
+    "value": 26,
+    "label": "食料費割合",
+    "unit": "％"
+  },
+  {
+    "areaName": "福井",
+    "rank": 43,
+    "value": 25.9,
+    "label": "食料費割合",
+    "unit": "％"
+  },
+  {
+    "areaName": "長野",
+    "rank": 44,
+    "value": 25.8,
+    "label": "食料費割合",
+    "unit": "％"
+  },
+  {
+    "areaName": "鳥取",
+    "rank": 45,
+    "value": 25.5,
+    "label": "食料費割合",
+    "unit": "％"
+  },
+  {
+    "areaName": "茨城",
+    "rank": 46,
+    "value": 25.4,
+    "label": "食料費割合",
+    "unit": "％"
+  },
+  {
+    "areaName": "栃木",
+    "rank": 47,
+    "value": 25.2,
+    "label": "食料費割合",
+    "unit": "％"
+  }
+]

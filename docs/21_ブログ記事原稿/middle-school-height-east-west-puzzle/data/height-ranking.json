@@ -1,0 +1,331 @@
+[
+  {
+    "areaName": "秋田",
+    "rank": 1,
+    "value": 163.6,
+    "unit": "cm",
+    "label": "中学2年男子 平均身長"
+  },
+  {
+    "areaName": "青森",
+    "rank": 2,
+    "value": 162.9,
+    "unit": "cm",
+    "label": "中学2年男子 平均身長"
+  },
+  {
+    "areaName": "山形",
+    "rank": 3,
+    "value": 162.6,
+    "unit": "cm",
+    "label": "中学2年男子 平均身長"
+  },
+  {
+    "areaName": "北海道",
+    "rank": 4,
+    "value": 162.5,
+    "unit": "cm",
+    "label": "中学2年男子 平均身長"
+  },
+  {
+    "areaName": "富山",
+    "rank": 4,
+    "value": 162.5,
+    "unit": "cm",
+    "label": "中学2年男子 平均身長"
+  },
+  {
+    "areaName": "新潟",
+    "rank": 6,
+    "value": 162.3,
+    "unit": "cm",
+    "label": "中学2年男子 平均身長"
+  },
+  {
+    "areaName": "石川",
+    "rank": 7,
+    "value": 161.8,
+    "unit": "cm",
+    "label": "中学2年男子 平均身長"
+  },
+  {
+    "areaName": "福井",
+    "rank": 7,
+    "value": 161.8,
+    "unit": "cm",
+    "label": "中学2年男子 平均身長"
+  },
+  {
+    "areaName": "岩手",
+    "rank": 9,
+    "value": 161.5,
+    "unit": "cm",
+    "label": "中学2年男子 平均身長"
+  },
+  {
+    "areaName": "神奈川",
+    "rank": 9,
+    "value": 161.5,
+    "unit": "cm",
+    "label": "中学2年男子 平均身長"
+  },
+  {
+    "areaName": "宮城",
+    "rank": 11,
+    "value": 161.4,
+    "unit": "cm",
+    "label": "中学2年男子 平均身長"
+  },
+  {
+    "areaName": "東京",
+    "rank": 11,
+    "value": 161.4,
+    "unit": "cm",
+    "label": "中学2年男子 平均身長"
+  },
+  {
+    "areaName": "奈良",
+    "rank": 13,
+    "value": 161.3,
+    "unit": "cm",
+    "label": "中学2年男子 平均身長"
+  },
+  {
+    "areaName": "徳島",
+    "rank": 14,
+    "value": 161.2,
+    "unit": "cm",
+    "label": "中学2年男子 平均身長"
+  },
+  {
+    "areaName": "京",
+    "rank": 15,
+    "value": 161.1,
+    "unit": "cm",
+    "label": "中学2年男子 平均身長"
+  },
+  {
+    "areaName": "茨城",
+    "rank": 16,
+    "value": 161,
+    "unit": "cm",
+    "label": "中学2年男子 平均身長"
+  },
+  {
+    "areaName": "埼玉",
+    "rank": 16,
+    "value": 161,
+    "unit": "cm",
+    "label": "中学2年男子 平均身長"
+  },
+  {
+    "areaName": "千葉",
+    "rank": 16,
+    "value": 161,
+    "unit": "cm",
+    "label": "中学2年男子 平均身長"
+  },
+  {
+    "areaName": "山梨",
+    "rank": 16,
+    "value": 161,
+    "unit": "cm",
+    "label": "中学2年男子 平均身長"
+  },
+  {
+    "areaName": "大阪",
+    "rank": 16,
+    "value": 161,
+    "unit": "cm",
+    "label": "中学2年男子 平均身長"
+  },
+  {
+    "areaName": "福岡",
+    "rank": 16,
+    "value": 161,
+    "unit": "cm",
+    "label": "中学2年男子 平均身長"
+  },
+  {
+    "areaName": "栃木",
+    "rank": 22,
+    "value": 160.9,
+    "unit": "cm",
+    "label": "中学2年男子 平均身長"
+  },
+  {
+    "areaName": "群馬",
+    "rank": 22,
+    "value": 160.9,
+    "unit": "cm",
+    "label": "中学2年男子 平均身長"
+  },
+  {
+    "areaName": "長野",
+    "rank": 22,
+    "value": 160.9,
+    "unit": "cm",
+    "label": "中学2年男子 平均身長"
+  },
+  {
+    "areaName": "和歌山",
+    "rank": 22,
+    "value": 160.9,
+    "unit": "cm",
+    "label": "中学2年男子 平均身長"
+  },
+  {
+    "areaName": "大分",
+    "rank": 22,
+    "value": 160.9,
+    "unit": "cm",
+    "label": "中学2年男子 平均身長"
+  },
+  {
+    "areaName": "福島",
+    "rank": 27,
+    "value": 160.8,
+    "unit": "cm",
+    "label": "中学2年男子 平均身長"
+  },
+  {
+    "areaName": "岐阜",
+    "rank": 27,
+    "value": 160.8,
+    "unit": "cm",
+    "label": "中学2年男子 平均身長"
+  },
+  {
+    "areaName": "静岡",
+    "rank": 27,
+    "value": 160.8,
+    "unit": "cm",
+    "label": "中学2年男子 平均身長"
+  },
+  {
+    "areaName": "兵庫",
+    "rank": 27,
+    "value": 160.8,
+    "unit": "cm",
+    "label": "中学2年男子 平均身長"
+  },
+  {
+    "areaName": "鳥取",
+    "rank": 27,
+    "value": 160.8,
+    "unit": "cm",
+    "label": "中学2年男子 平均身長"
+  },
+  {
+    "areaName": "長崎",
+    "rank": 27,
+    "value": 160.8,
+    "unit": "cm",
+    "label": "中学2年男子 平均身長"
+  },
+  {
+    "areaName": "熊本",
+    "rank": 27,
+    "value": 160.8,
+    "unit": "cm",
+    "label": "中学2年男子 平均身長"
+  },
+  {
+    "areaName": "愛媛",
+    "rank": 34,
+    "value": 160.7,
+    "unit": "cm",
+    "label": "中学2年男子 平均身長"
+  },
+  {
+    "areaName": "佐賀",
+    "rank": 34,
+    "value": 160.7,
+    "unit": "cm",
+    "label": "中学2年男子 平均身長"
+  },
+  {
+    "areaName": "三重",
+    "rank": 36,
+    "value": 160.6,
+    "unit": "cm",
+    "label": "中学2年男子 平均身長"
+  },
+  {
+    "areaName": "滋賀",
+    "rank": 36,
+    "value": 160.6,
+    "unit": "cm",
+    "label": "中学2年男子 平均身長"
+  },
+  {
+    "areaName": "香川",
+    "rank": 38,
+    "value": 160.5,
+    "unit": "cm",
+    "label": "中学2年男子 平均身長"
+  },
+  {
+    "areaName": "宮崎",
+    "rank": 38,
+    "value": 160.5,
+    "unit": "cm",
+    "label": "中学2年男子 平均身長"
+  },
+  {
+    "areaName": "鹿児島",
+    "rank": 38,
+    "value": 160.5,
+    "unit": "cm",
+    "label": "中学2年男子 平均身長"
+  },
+  {
+    "areaName": "岡山",
+    "rank": 41,
+    "value": 160.4,
+    "unit": "cm",
+    "label": "中学2年男子 平均身長"
+  },
+  {
+    "areaName": "愛知",
+    "rank": 42,
+    "value": 160.3,
+    "unit": "cm",
+    "label": "中学2年男子 平均身長"
+  },
+  {
+    "areaName": "広島",
+    "rank": 42,
+    "value": 160.3,
+    "unit": "cm",
+    "label": "中学2年男子 平均身長"
+  },
+  {
+    "areaName": "島根",
+    "rank": 44,
+    "value": 159.9,
+    "unit": "cm",
+    "label": "中学2年男子 平均身長"
+  },
+  {
+    "areaName": "山口",
+    "rank": 44,
+    "value": 159.9,
+    "unit": "cm",
+    "label": "中学2年男子 平均身長"
+  },
+  {
+    "areaName": "沖縄",
+    "rank": 46,
+    "value": 159.8,
+    "unit": "cm",
+    "label": "中学2年男子 平均身長"
+  },
+  {
+    "areaName": "高知",
+    "rank": 47,
+    "value": 159.7,
+    "unit": "cm",
+    "label": "中学2年男子 平均身長"
+  }
+]

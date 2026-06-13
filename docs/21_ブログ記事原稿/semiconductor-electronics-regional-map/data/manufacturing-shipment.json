@@ -1,0 +1,20 @@
+{
+  "rankingKey": "manufacturing-shipment-amount",
+  "label": "製造品出荷額等",
+  "unit": "兆円",
+  "yearCode": "2023",
+  "note": "R2 app/ranking/manufacturing-shipment-amount/values.json (2023年度) より採録。元単位は百万円、兆円に換算して表示。",
+  "values": [
+    { "areaName": "愛知県", "rank": 1, "value": 58.0, "unit": "兆円" },
+    { "areaName": "静岡県", "rank": 2, "value": 19.8, "unit": "兆円" },
+    { "areaName": "大阪府", "rank": 3, "value": 19.3, "unit": "兆円" },
+    { "areaName": "神奈川県", "rank": 4, "value": 18.5, "unit": "兆円" },
+    { "areaName": "兵庫県", "rank": 5, "value": 18.5, "unit": "兆円" },
+    { "areaName": "三重県", "rank": 9, "value": 12.3, "unit": "兆円" },
+    { "areaName": "秋田県", "rank": 43, "value": 1.6, "unit": "兆円" },
+    { "areaName": "島根県", "rank": 44, "value": 1.4, "unit": "兆円" },
+    { "areaName": "鳥取県", "rank": 45, "value": 0.9, "unit": "兆円" },
+    { "areaName": "高知県", "rank": 46, "value": 0.7, "unit": "兆円" },
+    { "areaName": "沖縄県", "rank": 47, "value": 0.5, "unit": "兆円" }
+  ]
+}

@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 508" role="img" aria-label="国内銀行預金残高（1人あたり）上位5県と下位5県（2024年度）">
+  <title>国内銀行預金残高（1人あたり）上位5県・下位5県（2024年度）</title>
+  <text x="96" y="28" font-size="18" font-weight="700" fill="#0f172a">1人あたり国内銀行預金残高（2024年度・万円）</text>
+  <text x="96" y="58" font-size="13" font-weight="700" fill="#2563eb">上位5県</text>
+  <text x="88" y="89" text-anchor="end" dominant-baseline="middle" font-size="14" fill="#64748b">1位</text>
+  <rect x="96" y="76" width="534.0" height="24" rx="0" fill="#2563eb"/>
+  <text x="638" y="89" dominant-baseline="middle" font-size="14" font-weight="600" fill="#334155">東京都 2,641.1万円</text>
+  <text x="88" y="127" text-anchor="end" dominant-baseline="middle" font-size="14" fill="#64748b">2位</text>
+  <rect x="96" y="114" width="189.6" height="24" rx="0" fill="#2563eb"/>
+  <text x="293.55170194237246" y="127" dominant-baseline="middle" font-size="14" font-weight="600" fill="#334155">大阪府 937.5万円</text>
+  <text x="88" y="165" text-anchor="end" dominant-baseline="middle" font-size="14" fill="#64748b">3位</text>
+  <rect x="96" y="152" width="159.9" height="24" rx="0" fill="#2563eb"/>
+  <text x="263.8704327742229" y="165" dominant-baseline="middle" font-size="14" font-weight="600" fill="#334155">徳島県 790.7万円</text>
+  <text x="88" y="203" text-anchor="end" dominant-baseline="middle" font-size="14" fill="#64748b">4位</text>
+  <rect x="96" y="190" width="140.8" height="24" rx="0" fill="#2563eb"/>
+  <text x="244.8040589148461" y="203" dominant-baseline="middle" font-size="14" font-weight="600" fill="#334155">愛媛県 696.4万円</text>
+  <text x="88" y="241" text-anchor="end" dominant-baseline="middle" font-size="14" fill="#64748b">5位</text>
+  <rect x="96" y="228" width="140.6" height="24" rx="0" fill="#2563eb"/>
+  <text x="244.60187043277423" y="241" dominant-baseline="middle" font-size="14" font-weight="600" fill="#334155">香川県 695.4万円</text>
+  <text x="96" y="278" font-size="13" font-weight="700" fill="#ea580c">下位5県</text>
+  <text x="88" y="309" text-anchor="end" dominant-baseline="middle" font-size="14" fill="#64748b">43位</text>
+  <rect x="96" y="296" width="85.8" height="24" rx="0" fill="#ea580c"/>
+  <text x="189.84922948771344" y="309" dominant-baseline="middle" font-size="14" font-weight="600" fill="#334155">青森県 424.6万円</text>
+  <text x="88" y="347" text-anchor="end" dominant-baseline="middle" font-size="14" fill="#64748b">44位</text>
+  <rect x="96" y="334" width="83.0" height="24" rx="0" fill="#ea580c"/>
+  <text x="186.99837189050018" y="347" dominant-baseline="middle" font-size="14" font-weight="600" fill="#334155">北海道 410.5万円</text>
+  <text x="88" y="385" text-anchor="end" dominant-baseline="middle" font-size="14" fill="#64748b">45位</text>
+  <rect x="96" y="372" width="82.9" height="24" rx="0" fill="#ea580c"/>
+  <text x="186.85683995304987" y="385" dominant-baseline="middle" font-size="14" font-weight="600" fill="#334155">佐賀県 409.8万円</text>
+  <text x="88" y="423" text-anchor="end" dominant-baseline="middle" font-size="14" fill="#64748b">46位</text>
+  <rect x="96" y="410" width="81.8" height="24" rx="0" fill="#ea580c"/>
+  <text x="185.82567869448337" y="423" dominant-baseline="middle" font-size="14" font-weight="600" fill="#334155">宮崎県 404.7万円</text>
+  <text x="88" y="461" text-anchor="end" dominant-baseline="middle" font-size="14" fill="#64748b">47位</text>
+  <rect x="96" y="448" width="76.7" height="24" rx="0" fill="#ea580c"/>
+  <text x="180.69009124985803" y="461" dominant-baseline="middle" font-size="14" font-weight="600" fill="#334155">鹿児島県 379.3万円</text>
+</svg>

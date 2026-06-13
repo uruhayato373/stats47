@@ -1,0 +1,55 @@
+<!-- data-source: height-ranking.json -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 300" width="680" height="300" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" role="img" aria-label="中学2年男子 平均身長（2023年度・47都道府県の上位5県と下位5県）">
+  <style>
+    .svg-bg{fill:#fafafa}
+    .svg-title{fill:#222}
+    .svg-subtitle{fill:#666}
+    .svg-label{fill:#333}
+    .svg-legend{fill:#888}
+    @media (prefers-color-scheme:dark){
+      .svg-bg{fill:#1f2937}
+      .svg-title{fill:#f9fafb}
+      .svg-subtitle{fill:#9ca3af}
+      .svg-label{fill:#e5e7eb}
+      .svg-legend{fill:#9ca3af}
+    }
+  </style>
+  <rect width="680" height="300" class="svg-bg" rx="8"/>
+  <text x="340" y="24" text-anchor="middle" font-size="16" font-weight="bold" class="svg-title">中学2年男子 平均身長（2023年度・上位5県と下位5県）</text>
+  <text x="340" y="42" text-anchor="middle" font-size="10" class="svg-subtitle">バーは155cmを基点に差を強調（全国平均161.06cm）</text>
+
+  <text x="227.5" y="60" text-anchor="middle" font-size="12" font-weight="bold" fill="#1565c0">上位 5</text>
+  <text x="542.5" y="60" text-anchor="middle" font-size="12" font-weight="bold" fill="#c62828">下位 5</text>
+
+      <text x="84" y="82" text-anchor="end" font-size="11" class="svg-label">秋田県</text>
+      <rect x="90" y="63" width="195.0" height="30" fill="#1565c0" rx="2"/>
+      <text x="289.0" y="82" font-size="10" class="svg-label">163.6cm</text>
+      <text x="84" y="118" text-anchor="end" font-size="11" class="svg-label">青森県</text>
+      <rect x="90" y="99" width="179.13" height="30" fill="#1976d2" rx="2"/>
+      <text x="273.13" y="118" font-size="10" class="svg-label">162.9cm</text>
+      <text x="84" y="154" text-anchor="end" font-size="11" class="svg-label">山形県</text>
+      <rect x="90" y="135" width="172.33" height="30" fill="#1e88e5" rx="2"/>
+      <text x="266.33000000000004" y="154" font-size="10" class="svg-label">162.6cm</text>
+      <text x="84" y="190" text-anchor="end" font-size="11" class="svg-label">北海道</text>
+      <rect x="90" y="171" width="170.06" height="30" fill="#2196f3" rx="2"/>
+      <text x="264.06" y="190" font-size="10" class="svg-label">162.5cm</text>
+      <text x="84" y="226" text-anchor="end" font-size="11" class="svg-label">富山県</text>
+      <rect x="90" y="207" width="170.06" height="30" fill="#42a5f5" rx="2"/>
+      <text x="264.06" y="226" font-size="10" class="svg-label">162.5cm</text>
+
+      <text x="399" y="82" text-anchor="end" font-size="11" class="svg-label">広島県</text>
+      <rect x="405" y="63" width="120.17" height="30" fill="#c62828" rx="2"/>
+      <text x="529.17" y="82" font-size="10" class="svg-label">160.3cm</text>
+      <text x="399" y="118" text-anchor="end" font-size="11" class="svg-label">島根県</text>
+      <rect x="405" y="99" width="111.1" height="30" fill="#d32f2f" rx="2"/>
+      <text x="520.1" y="118" font-size="10" class="svg-label">159.9cm</text>
+      <text x="399" y="154" text-anchor="end" font-size="11" class="svg-label">山口県</text>
+      <rect x="405" y="135" width="111.1" height="30" fill="#e53935" rx="2"/>
+      <text x="520.1" y="154" font-size="10" class="svg-label">159.9cm</text>
+      <text x="399" y="190" text-anchor="end" font-size="11" class="svg-label">沖縄県</text>
+      <rect x="405" y="171" width="108.84" height="30" fill="#ef5350" rx="2"/>
+      <text x="517.84" y="190" font-size="10" class="svg-label">159.8cm</text>
+      <text x="399" y="226" text-anchor="end" font-size="11" class="svg-label">高知県</text>
+      <rect x="405" y="207" width="106.57" height="30" fill="#f87171" rx="2"/>
+      <text x="515.5699999999999" y="226" font-size="10" class="svg-label">159.7cm</text>
+</svg>

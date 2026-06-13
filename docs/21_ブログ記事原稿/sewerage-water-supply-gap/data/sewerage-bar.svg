@@ -1,0 +1,56 @@
+<!-- data-source: sewerage-penetration-rate-2012on values.json (2021) | top5+bottom5 -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 488" width="760" height="488" role="img" aria-label="下水道普及率 上位5・下位5（2021年度）">
+<text x="150" y="30" font-size="19" font-weight="700" fill="#475569" font-family="sans-serif">下水道普及率（2021年度）</text>
+<text x="150" y="48" font-size="12" fill="#64748b" font-family="sans-serif">上位5（青）／下位5（橙）・単位 %</text>
+<g><title>東京都：下水道普及率=99.7%（1位）</title>
+<text x="140" y="75" font-size="13" fill="#64748b" text-anchor="end" font-family="sans-serif">1位 東京都</text>
+<rect x="150" y="56" width="498.5" height="28" rx="2" fill="#2563eb"/>
+<text x="656.5" y="75" font-size="13" font-weight="600" fill="#475569" font-family="sans-serif">99.7%</text>
+</g>
+<g><title>神奈川県：下水道普及率=97%（2位）</title>
+<text x="140" y="113" font-size="13" fill="#64748b" text-anchor="end" font-family="sans-serif">2位 神奈川県</text>
+<rect x="150" y="94" width="485.0" height="28" rx="2" fill="#2563eb"/>
+<text x="643.0" y="113" font-size="13" font-weight="600" fill="#475569" font-family="sans-serif">97%</text>
+</g>
+<g><title>大阪府：下水道普及率=96.4%（3位）</title>
+<text x="140" y="151" font-size="13" fill="#64748b" text-anchor="end" font-family="sans-serif">3位 大阪府</text>
+<rect x="150" y="132" width="482.0" height="28" rx="2" fill="#2563eb"/>
+<text x="640.0" y="151" font-size="13" font-weight="600" fill="#475569" font-family="sans-serif">96.4%</text>
+</g>
+<g><title>京都府：下水道普及率=94.9%（4位）</title>
+<text x="140" y="189" font-size="13" fill="#64748b" text-anchor="end" font-family="sans-serif">4位 京都府</text>
+<rect x="150" y="170" width="474.5" height="28" rx="2" fill="#2563eb"/>
+<text x="632.5" y="189" font-size="13" font-weight="600" fill="#475569" font-family="sans-serif">94.9%</text>
+</g>
+<g><title>兵庫県：下水道普及率=93.5%（5位）</title>
+<text x="140" y="227" font-size="13" fill="#64748b" text-anchor="end" font-family="sans-serif">5位 兵庫県</text>
+<rect x="150" y="208" width="467.5" height="28" rx="2" fill="#2563eb"/>
+<text x="625.5" y="227" font-size="13" font-weight="600" fill="#475569" font-family="sans-serif">93.5%</text>
+</g>
+<text x="142" y="264" font-size="13" fill="#64748b" text-anchor="end" font-family="sans-serif">…</text>
+<g><title>香川県：下水道普及率=46.3%（43位）</title>
+<text x="140" y="303" font-size="13" fill="#64748b" text-anchor="end" font-family="sans-serif">43位 香川県</text>
+<rect x="150" y="284" width="231.5" height="28" rx="2" fill="#ea580c"/>
+<text x="389.5" y="303" font-size="13" font-weight="600" fill="#475569" font-family="sans-serif">46.3%</text>
+</g>
+<g><title>鹿児島県：下水道普及率=43%（44位）</title>
+<text x="140" y="341" font-size="13" fill="#64748b" text-anchor="end" font-family="sans-serif">44位 鹿児島県</text>
+<rect x="150" y="322" width="215.0" height="28" rx="2" fill="#ea580c"/>
+<text x="373.0" y="341" font-size="13" font-weight="600" fill="#475569" font-family="sans-serif">43%</text>
+</g>
+<g><title>高知県：下水道普及率=42%（45位）</title>
+<text x="140" y="379" font-size="13" fill="#64748b" text-anchor="end" font-family="sans-serif">45位 高知県</text>
+<rect x="150" y="360" width="210.0" height="28" rx="2" fill="#ea580c"/>
+<text x="368.0" y="379" font-size="13" font-weight="600" fill="#475569" font-family="sans-serif">42%</text>
+</g>
+<g><title>和歌山県：下水道普及率=28.7%（46位）</title>
+<text x="140" y="417" font-size="13" fill="#64748b" text-anchor="end" font-family="sans-serif">46位 和歌山県</text>
+<rect x="150" y="398" width="143.5" height="28" rx="2" fill="#ea580c"/>
+<text x="301.5" y="417" font-size="13" font-weight="600" fill="#475569" font-family="sans-serif">28.7%</text>
+</g>
+<g><title>徳島県：下水道普及率=22.3%（47位）</title>
+<text x="140" y="455" font-size="13" fill="#64748b" text-anchor="end" font-family="sans-serif">47位 徳島県</text>
+<rect x="150" y="436" width="111.5" height="28" rx="2" fill="#ea580c"/>
+<text x="269.5" y="455" font-size="13" font-weight="600" fill="#475569" font-family="sans-serif">22.3%</text>
+</g>
+</svg>

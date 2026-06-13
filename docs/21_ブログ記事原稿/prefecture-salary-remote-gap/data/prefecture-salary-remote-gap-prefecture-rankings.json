@@ -1,0 +1,162 @@
+[
+  {
+    "pref": "東京都",
+    "areaName": "東京都",
+    "rank": 1,
+    "value": 47.1,
+    "label": "平均給与月額",
+    "unit": "万円"
+  },
+  {
+    "pref": "大阪府",
+    "areaName": "大阪府",
+    "rank": 2,
+    "value": 44.7,
+    "label": "平均給与月額",
+    "unit": "万円"
+  },
+  {
+    "pref": "神奈川県",
+    "areaName": "神奈川県",
+    "rank": 3,
+    "value": 44.7,
+    "label": "平均給与月額",
+    "unit": "万円"
+  },
+  {
+    "pref": "愛知県",
+    "areaName": "愛知県",
+    "rank": 4,
+    "value": 43.9,
+    "label": "平均給与月額",
+    "unit": "万円"
+  },
+  {
+    "pref": "静岡県",
+    "areaName": "静岡県",
+    "rank": 5,
+    "value": 43.9,
+    "label": "平均給与月額",
+    "unit": "万円"
+  },
+  {
+    "pref": "兵庫県",
+    "areaName": "兵庫県",
+    "rank": 6,
+    "value": 43.6,
+    "label": "平均給与月額",
+    "unit": "万円"
+  },
+  {
+    "pref": "千葉県",
+    "areaName": "千葉県",
+    "rank": 7,
+    "value": 43.4,
+    "label": "平均給与月額",
+    "unit": "万円"
+  },
+  {
+    "pref": "新潟県",
+    "areaName": "新潟県",
+    "rank": 8,
+    "value": 43.1,
+    "label": "平均給与月額",
+    "unit": "万円"
+  },
+  {
+    "pref": "岩手県",
+    "areaName": "岩手県",
+    "rank": 9,
+    "value": 42.9,
+    "label": "平均給与月額",
+    "unit": "万円"
+  },
+  {
+    "pref": "埼玉県",
+    "areaName": "埼玉県",
+    "rank": 10,
+    "value": 42.8,
+    "label": "平均給与月額",
+    "unit": "万円"
+  },
+  {
+    "pref": "富山県",
+    "areaName": "富山県",
+    "rank": 38,
+    "value": 40.7,
+    "label": "平均給与月額",
+    "unit": "万円"
+  },
+  {
+    "pref": "熊本県",
+    "areaName": "熊本県",
+    "rank": 39,
+    "value": 40.6,
+    "label": "平均給与月額",
+    "unit": "万円"
+  },
+  {
+    "pref": "宮崎県",
+    "areaName": "宮崎県",
+    "rank": 40,
+    "value": 40.5,
+    "label": "平均給与月額",
+    "unit": "万円"
+  },
+  {
+    "pref": "奈良県",
+    "areaName": "奈良県",
+    "rank": 41,
+    "value": 40.4,
+    "label": "平均給与月額",
+    "unit": "万円"
+  },
+  {
+    "pref": "福井県",
+    "areaName": "福井県",
+    "rank": 42,
+    "value": 40.4,
+    "label": "平均給与月額",
+    "unit": "万円"
+  },
+  {
+    "pref": "秋田県",
+    "areaName": "秋田県",
+    "rank": 43,
+    "value": 40.4,
+    "label": "平均給与月額",
+    "unit": "万円"
+  },
+  {
+    "pref": "山口県",
+    "areaName": "山口県",
+    "rank": 44,
+    "value": 40.2,
+    "label": "平均給与月額",
+    "unit": "万円"
+  },
+  {
+    "pref": "高知県",
+    "areaName": "高知県",
+    "rank": 45,
+    "value": 40.2,
+    "label": "平均給与月額",
+    "unit": "万円"
+  },
+  {
+    "pref": "長野県",
+    "areaName": "長野県",
+    "rank": 46,
+    "value": 39.8,
+    "label": "平均給与月額",
+    "unit": "万円"
+  },
+  {
+    "pref": "佐賀県",
+    "areaName": "佐賀県",
+    "rank": 47,
+    "value": 39.5,
+    "label": "平均給与月額",
+    "unit": "万円"
+  }
+]

@@ -1,0 +1,41 @@
+<!-- data-source: /tmp/blog-rewrite-work/safe-driving-5-features/data/accident-count-ranking.json | generated: 2026-06-13T10:23:46.825Z -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 312" width="680" height="312" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" role="img" aria-label="交通事故発生件数 上位5・下位5（2024年・都道府県）">
+  <style>
+    .svg-bg{fill:#fafafa}.svg-title{fill:#222}.svg-subtitle{fill:#666}.svg-label{fill:#333}
+    @media (prefers-color-scheme:dark){.svg-bg{fill:#1f2937}.svg-title{fill:#f9fafb}.svg-subtitle{fill:#9ca3af}.svg-label{fill:#e5e7eb}}
+  </style>
+  <rect width="680" height="312" class="svg-bg" rx="8"/>
+  <text x="340" y="24" text-anchor="middle" font-size="16" font-weight="bold" class="svg-title">人口10万人当たり交通事故発生件数（2024年）</text>
+  <text x="187.5" y="52" text-anchor="middle" font-size="12" font-weight="bold" fill="#1565c0">上位 5</text>
+  <text x="502.5" y="52" text-anchor="middle" font-size="12" font-weight="bold" fill="#e65100">下位 5</text>
+  <text x="84" y="83" text-anchor="end" font-size="11" class="svg-label">静岡県</text>
+  <rect x="90" y="64" width="195.0" height="30" fill="#1565c0" rx="2"/>
+  <text x="289.0" y="83" font-size="10" class="svg-label">494.5件</text>
+  <text x="84" y="119" text-anchor="end" font-size="11" class="svg-label">群馬県</text>
+  <rect x="90" y="100" width="189.0" height="30" fill="#1976d2" rx="2"/>
+  <text x="283.0" y="119" font-size="10" class="svg-label">479.3件</text>
+  <text x="84" y="155" text-anchor="end" font-size="11" class="svg-label">福岡県</text>
+  <rect x="90" y="136" width="143.1" height="30" fill="#1e88e5" rx="2"/>
+  <text x="237.1" y="155" font-size="10" class="svg-label">362.8件</text>
+  <text x="84" y="191" text-anchor="end" font-size="11" class="svg-label">佐賀県</text>
+  <rect x="90" y="172" width="131.3" height="30" fill="#2196f3" rx="2"/>
+  <text x="225.3" y="191" font-size="10" class="svg-label">332.9件</text>
+  <text x="84" y="227" text-anchor="end" font-size="11" class="svg-label">愛知県</text>
+  <rect x="90" y="208" width="129.5" height="30" fill="#42a5f5" rx="2"/>
+  <text x="223.5" y="227" font-size="10" class="svg-label">328.5件</text>
+  <text x="399" y="83" text-anchor="end" font-size="11" class="svg-label">新潟県</text>
+  <rect x="405" y="64" width="50.2" height="30" fill="#e65100" rx="2"/>
+  <text x="459.2" y="83" font-size="10" class="svg-label">127.3件</text>
+  <text x="399" y="119" text-anchor="end" font-size="11" class="svg-label">岩手県</text>
+  <rect x="405" y="100" width="47.9" height="30" fill="#ef6c00" rx="2"/>
+  <text x="456.9" y="119" font-size="10" class="svg-label">121.5件</text>
+  <text x="399" y="155" text-anchor="end" font-size="11" class="svg-label">鳥取県</text>
+  <rect x="405" y="136" width="46.2" height="30" fill="#f57c00" rx="2"/>
+  <text x="455.2" y="155" font-size="10" class="svg-label">117.1件</text>
+  <text x="399" y="191" text-anchor="end" font-size="11" class="svg-label">秋田県</text>
+  <rect x="405" y="172" width="43.1" height="30" fill="#fb8c00" rx="2"/>
+  <text x="452.1" y="191" font-size="10" class="svg-label">109.4件</text>
+  <text x="399" y="227" text-anchor="end" font-size="11" class="svg-label">島根県</text>
+  <rect x="405" y="208" width="42.5" height="30" fill="#ff9800" rx="2"/>
+  <text x="451.5" y="227" font-size="10" class="svg-label">107.8件</text>
+</svg>

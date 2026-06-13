@@ -1,0 +1,331 @@
+[
+  {
+    "areaName": "沖縄",
+    "rank": 1,
+    "value": 106.7,
+    "label": "食料価格地域差指数",
+    "unit": ""
+  },
+  {
+    "areaName": "東京",
+    "rank": 2,
+    "value": 103,
+    "label": "食料価格地域差指数",
+    "unit": ""
+  },
+  {
+    "areaName": "福井",
+    "rank": 3,
+    "value": 102.5,
+    "label": "食料価格地域差指数",
+    "unit": ""
+  },
+  {
+    "areaName": "島根",
+    "rank": 3,
+    "value": 102.5,
+    "label": "食料価格地域差指数",
+    "unit": ""
+  },
+  {
+    "areaName": "鳥取",
+    "rank": 5,
+    "value": 102.4,
+    "label": "食料価格地域差指数",
+    "unit": ""
+  },
+  {
+    "areaName": "北海道",
+    "rank": 6,
+    "value": 102.3,
+    "label": "食料価格地域差指数",
+    "unit": ""
+  },
+  {
+    "areaName": "神奈川",
+    "rank": 7,
+    "value": 102.1,
+    "label": "食料価格地域差指数",
+    "unit": ""
+  },
+  {
+    "areaName": "石川",
+    "rank": 7,
+    "value": 102.1,
+    "label": "食料価格地域差指数",
+    "unit": ""
+  },
+  {
+    "areaName": "熊本",
+    "rank": 7,
+    "value": 102.1,
+    "label": "食料価格地域差指数",
+    "unit": ""
+  },
+  {
+    "areaName": "山口",
+    "rank": 10,
+    "value": 102,
+    "label": "食料価格地域差指数",
+    "unit": ""
+  },
+  {
+    "areaName": "山形",
+    "rank": 11,
+    "value": 101.8,
+    "label": "食料価格地域差指数",
+    "unit": ""
+  },
+  {
+    "areaName": "京都",
+    "rank": 12,
+    "value": 101.4,
+    "label": "食料価格地域差指数",
+    "unit": ""
+  },
+  {
+    "areaName": "広島",
+    "rank": 13,
+    "value": 101.2,
+    "label": "食料価格地域差指数",
+    "unit": ""
+  },
+  {
+    "areaName": "高知",
+    "rank": 14,
+    "value": 101,
+    "label": "食料価格地域差指数",
+    "unit": ""
+  },
+  {
+    "areaName": "徳島",
+    "rank": 15,
+    "value": 100.8,
+    "label": "食料価格地域差指数",
+    "unit": ""
+  },
+  {
+    "areaName": "香川",
+    "rank": 15,
+    "value": 100.8,
+    "label": "食料価格地域差指数",
+    "unit": ""
+  },
+  {
+    "areaName": "富山",
+    "rank": 17,
+    "value": 100.7,
+    "label": "食料価格地域差指数",
+    "unit": ""
+  },
+  {
+    "areaName": "岡山",
+    "rank": 17,
+    "value": 100.7,
+    "label": "食料価格地域差指数",
+    "unit": ""
+  },
+  {
+    "areaName": "長崎",
+    "rank": 17,
+    "value": 100.7,
+    "label": "食料価格地域差指数",
+    "unit": ""
+  },
+  {
+    "areaName": "千葉",
+    "rank": 20,
+    "value": 100.4,
+    "label": "食料価格地域差指数",
+    "unit": ""
+  },
+  {
+    "areaName": "三重",
+    "rank": 21,
+    "value": 100.3,
+    "label": "食料価格地域差指数",
+    "unit": ""
+  },
+  {
+    "areaName": "愛媛",
+    "rank": 22,
+    "value": 100.2,
+    "label": "食料価格地域差指数",
+    "unit": ""
+  },
+  {
+    "areaName": "兵庫",
+    "rank": 23,
+    "value": 100,
+    "label": "食料価格地域差指数",
+    "unit": ""
+  },
+  {
+    "areaName": "宮城",
+    "rank": 24,
+    "value": 99.7,
+    "label": "食料価格地域差指数",
+    "unit": ""
+  },
+  {
+    "areaName": "秋田",
+    "rank": 25,
+    "value": 99.6,
+    "label": "食料価格地域差指数",
+    "unit": ""
+  },
+  {
+    "areaName": "大阪",
+    "rank": 26,
+    "value": 99.5,
+    "label": "食料価格地域差指数",
+    "unit": ""
+  },
+  {
+    "areaName": "大分",
+    "rank": 27,
+    "value": 99.3,
+    "label": "食料価格地域差指数",
+    "unit": ""
+  },
+  {
+    "areaName": "和歌山",
+    "rank": 28,
+    "value": 98.9,
+    "label": "食料価格地域差指数",
+    "unit": ""
+  },
+  {
+    "areaName": "新潟",
+    "rank": 29,
+    "value": 98.8,
+    "label": "食料価格地域差指数",
+    "unit": ""
+  },
+  {
+    "areaName": "滋賀",
+    "rank": 29,
+    "value": 98.8,
+    "label": "食料価格地域差指数",
+    "unit": ""
+  },
+  {
+    "areaName": "岩手",
+    "rank": 31,
+    "value": 98.7,
+    "label": "食料価格地域差指数",
+    "unit": ""
+  },
+  {
+    "areaName": "福岡",
+    "rank": 31,
+    "value": 98.7,
+    "label": "食料価格地域差指数",
+    "unit": ""
+  },
+  {
+    "areaName": "佐賀",
+    "rank": 33,
+    "value": 98.3,
+    "label": "食料価格地域差指数",
+    "unit": ""
+  },
+  {
+    "areaName": "鹿児島",
+    "rank": 34,
+    "value": 98.2,
+    "label": "食料価格地域差指数",
+    "unit": ""
+  },
+  {
+    "areaName": "埼玉",
+    "rank": 35,
+    "value": 98.1,
+    "label": "食料価格地域差指数",
+    "unit": ""
+  },
+  {
+    "areaName": "奈良",
+    "rank": 35,
+    "value": 98.1,
+    "label": "食料価格地域差指数",
+    "unit": ""
+  },
+  {
+    "areaName": "栃木",
+    "rank": 37,
+    "value": 98,
+    "label": "食料価格地域差指数",
+    "unit": ""
+  },
+  {
+    "areaName": "山梨",
+    "rank": 37,
+    "value": 98,
+    "label": "食料価格地域差指数",
+    "unit": ""
+  },
+  {
+    "areaName": "岐阜",
+    "rank": 39,
+    "value": 97.7,
+    "label": "食料価格地域差指数",
+    "unit": ""
+  },
+  {
+    "areaName": "青森",
+    "rank": 40,
+    "value": 97.6,
+    "label": "食料価格地域差指数",
+    "unit": ""
+  },
+  {
+    "areaName": "福島",
+    "rank": 41,
+    "value": 97.5,
+    "label": "食料価格地域差指数",
+    "unit": ""
+  },
+  {
+    "areaName": "静岡",
+    "rank": 41,
+    "value": 97.5,
+    "label": "食料価格地域差指数",
+    "unit": ""
+  },
+  {
+    "areaName": "愛知",
+    "rank": 41,
+    "value": 97.5,
+    "label": "食料価格地域差指数",
+    "unit": ""
+  },
+  {
+    "areaName": "宮崎",
+    "rank": 41,
+    "value": 97.5,
+    "label": "食料価格地域差指数",
+    "unit": ""
+  },
+  {
+    "areaName": "茨城",
+    "rank": 45,
+    "value": 97.4,
+    "label": "食料価格地域差指数",
+    "unit": ""
+  },
+  {
+    "areaName": "群馬",
+    "rank": 46,
+    "value": 96,
+    "label": "食料価格地域差指数",
+    "unit": ""
+  },
+  {
+    "areaName": "長野",
+    "rank": 47,
+    "value": 95.8,
+    "label": "食料価格地域差指数",
+    "unit": ""
+  }
+]

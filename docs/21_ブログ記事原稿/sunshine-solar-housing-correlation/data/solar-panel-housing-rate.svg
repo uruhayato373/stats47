@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 448" role="img" aria-label="太陽光発電機のある住宅率（2023年・上位5/下位5）">
+<title>太陽光発電機のある住宅率（2023年・上位5/下位5）</title>
+<text x="360" y="30" text-anchor="middle" font-size="17" font-weight="700" fill="#64748b">太陽光発電機のある住宅率（2023年・上位5/下位5）</text>
+<rect x="16" y="44" width="14" height="14" rx="2" fill="#3b82f6"/><text x="36" y="56" font-size="12" fill="#64748b">上位5</text>
+<rect x="92" y="44" width="14" height="14" rx="2" fill="#f97316"/><text x="112" y="56" font-size="12" fill="#64748b">下位5</text>
+<text x="130" y="80" text-anchor="end" font-size="14" fill="#64748b">1位 佐賀</text>
+<rect x="140" y="63" width="488.0" height="24" rx="3" fill="#3b82f6"><title>佐賀 1位 10.8%</title></rect>
+<text x="636.0" y="80" font-size="14" fill="#64748b" font-weight="700">10.8%</text>
+<text x="130" y="114" text-anchor="end" font-size="14" fill="#64748b">2位 長野</text>
+<rect x="140" y="97" width="442.8" height="24" rx="3" fill="#3b82f6"><title>長野 2位 9.8%</title></rect>
+<text x="590.8" y="114" font-size="14" fill="#64748b" font-weight="700">9.8%</text>
+<text x="130" y="148" text-anchor="end" font-size="14" fill="#64748b">3位 山梨</text>
+<rect x="140" y="131" width="415.7" height="24" rx="3" fill="#3b82f6"><title>山梨 3位 9.2%</title></rect>
+<text x="563.7" y="148" font-size="14" fill="#64748b" font-weight="700">9.2%</text>
+<text x="130" y="182" text-anchor="end" font-size="14" fill="#64748b">4位 宮崎</text>
+<rect x="140" y="165" width="411.2" height="24" rx="3" fill="#3b82f6"><title>宮崎 4位 9.1%</title></rect>
+<text x="559.2" y="182" font-size="14" fill="#64748b" font-weight="700">9.1%</text>
+<text x="130" y="216" text-anchor="end" font-size="14" fill="#64748b">5位 熊本</text>
+<rect x="140" y="199" width="406.7" height="24" rx="3" fill="#3b82f6"><title>熊本 5位 9%</title></rect>
+<text x="554.7" y="216" font-size="14" fill="#64748b" font-weight="700">9%</text>
+<text x="130" y="241" text-anchor="end" font-size="13" fill="#94a3b8">⋯ 中位37県は省略</text>
+<text x="130" y="270" text-anchor="end" font-size="14" fill="#64748b">43位 大阪</text>
+<rect x="140" y="253" width="117.5" height="24" rx="3" fill="#f97316"><title>大阪 43位 2.6%</title></rect>
+<text x="265.5" y="270" font-size="14" fill="#64748b" font-weight="700">2.6%</text>
+<text x="130" y="304" text-anchor="end" font-size="14" fill="#64748b">44位 新潟</text>
+<rect x="140" y="287" width="103.9" height="24" rx="3" fill="#f97316"><title>新潟 44位 2.3%</title></rect>
+<text x="251.9" y="304" font-size="14" fill="#64748b" font-weight="700">2.3%</text>
+<text x="130" y="338" text-anchor="end" font-size="14" fill="#64748b">45位 秋田</text>
+<rect x="140" y="321" width="103.9" height="24" rx="3" fill="#f97316"><title>秋田 45位 2.3%</title></rect>
+<text x="251.9" y="338" font-size="14" fill="#64748b" font-weight="700">2.3%</text>
+<text x="130" y="372" text-anchor="end" font-size="14" fill="#64748b">46位 北海</text>
+<rect x="140" y="355" width="81.3" height="24" rx="3" fill="#f97316"><title>北海 46位 1.8%</title></rect>
+<text x="229.3" y="372" font-size="14" fill="#64748b" font-weight="700">1.8%</text>
+<text x="130" y="406" text-anchor="end" font-size="14" fill="#64748b">47位 東京</text>
+<rect x="140" y="389" width="81.3" height="24" rx="3" fill="#f97316"><title>東京 47位 1.8%</title></rect>
+<text x="229.3" y="406" font-size="14" fill="#64748b" font-weight="700">1.8%</text>
+</svg>

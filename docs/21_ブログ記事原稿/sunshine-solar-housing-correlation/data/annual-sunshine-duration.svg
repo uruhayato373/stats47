@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 448" role="img" aria-label="年間日照時間（2024年・上位5/下位5）">
+<title>年間日照時間（2024年・上位5/下位5）</title>
+<text x="360" y="30" text-anchor="middle" font-size="17" font-weight="700" fill="#64748b">年間日照時間（2024年・上位5/下位5）</text>
+<rect x="16" y="44" width="14" height="14" rx="2" fill="#3b82f6"/><text x="36" y="56" font-size="12" fill="#64748b">上位5</text>
+<rect x="92" y="44" width="14" height="14" rx="2" fill="#f97316"/><text x="112" y="56" font-size="12" fill="#64748b">下位5</text>
+<text x="130" y="80" text-anchor="end" font-size="14" fill="#64748b">1位 高知</text>
+<rect x="140" y="63" width="488.0" height="24" rx="3" fill="#3b82f6"><title>高知 1位 2309時間</title></rect>
+<text x="636.0" y="80" font-size="14" fill="#64748b" font-weight="700">2309時間</text>
+<text x="130" y="114" text-anchor="end" font-size="14" fill="#64748b">2位 群馬</text>
+<rect x="140" y="97" width="483.0" height="24" rx="3" fill="#3b82f6"><title>群馬 2位 2285時間</title></rect>
+<text x="631.0" y="114" font-size="14" fill="#64748b" font-weight="700">2285時間</text>
+<text x="130" y="148" text-anchor="end" font-size="14" fill="#64748b">3位 埼玉</text>
+<rect x="140" y="131" width="481.5" height="24" rx="3" fill="#3b82f6"><title>埼玉 3位 2278時間</title></rect>
+<text x="629.5" y="148" font-size="14" fill="#64748b" font-weight="700">2278時間</text>
+<text x="130" y="182" text-anchor="end" font-size="14" fill="#64748b">4位 静岡</text>
+<rect x="140" y="165" width="474.7" height="24" rx="3" fill="#3b82f6"><title>静岡 4位 2246時間</title></rect>
+<text x="622.7" y="182" font-size="14" fill="#64748b" font-weight="700">2246時間</text>
+<text x="130" y="216" text-anchor="end" font-size="14" fill="#64748b">5位 愛知</text>
+<rect x="140" y="199" width="473.9" height="24" rx="3" fill="#3b82f6"><title>愛知 5位 2243時間</title></rect>
+<text x="621.9" y="216" font-size="14" fill="#64748b" font-weight="700">2243時間</text>
+<text x="130" y="241" text-anchor="end" font-size="13" fill="#94a3b8">⋯ 中位37県は省略</text>
+<text x="130" y="270" text-anchor="end" font-size="14" fill="#64748b">43位 沖縄</text>
+<rect x="140" y="253" width="371.4" height="24" rx="3" fill="#f97316"><title>沖縄 43位 1758時間</title></rect>
+<text x="519.4" y="270" font-size="14" fill="#64748b" font-weight="700">1758時間</text>
+<text x="130" y="304" text-anchor="end" font-size="14" fill="#64748b">44位 富山</text>
+<rect x="140" y="287" width="364.6" height="24" rx="3" fill="#f97316"><title>富山 44位 1725時間</title></rect>
+<text x="512.6" y="304" font-size="14" fill="#64748b" font-weight="700">1725時間</text>
+<text x="130" y="338" text-anchor="end" font-size="14" fill="#64748b">45位 青森</text>
+<rect x="140" y="321" width="359.5" height="24" rx="3" fill="#f97316"><title>青森 45位 1701時間</title></rect>
+<text x="507.5" y="338" font-size="14" fill="#64748b" font-weight="700">1701時間</text>
+<text x="130" y="372" text-anchor="end" font-size="14" fill="#64748b">46位 新潟</text>
+<rect x="140" y="355" width="344.4" height="24" rx="3" fill="#f97316"><title>新潟 46位 1630時間</title></rect>
+<text x="492.4" y="372" font-size="14" fill="#64748b" font-weight="700">1630時間</text>
+<text x="130" y="406" text-anchor="end" font-size="14" fill="#64748b">47位 山形</text>
+<rect x="140" y="389" width="343.6" height="24" rx="3" fill="#f97316"><title>山形 47位 1626時間</title></rect>
+<text x="491.6" y="406" font-size="14" fill="#64748b" font-weight="700">1626時間</text>
+</svg>

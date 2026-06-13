@@ -1,0 +1,331 @@
+[
+  {
+    "areaName": "高知",
+    "rank": 1,
+    "value": 2309,
+    "label": "年間日照時間",
+    "unit": "時間"
+  },
+  {
+    "areaName": "群馬",
+    "rank": 2,
+    "value": 2285.4,
+    "label": "年間日照時間",
+    "unit": "時間"
+  },
+  {
+    "areaName": "埼玉",
+    "rank": 3,
+    "value": 2278.1,
+    "label": "年間日照時間",
+    "unit": "時間"
+  },
+  {
+    "areaName": "静岡",
+    "rank": 4,
+    "value": 2246.2,
+    "label": "年間日照時間",
+    "unit": "時間"
+  },
+  {
+    "areaName": "愛知",
+    "rank": 5,
+    "value": 2242.5,
+    "label": "年間日照時間",
+    "unit": "時間"
+  },
+  {
+    "areaName": "茨城",
+    "rank": 6,
+    "value": 2239.6,
+    "label": "年間日照時間",
+    "unit": "時間"
+  },
+  {
+    "areaName": "三重",
+    "rank": 7,
+    "value": 2238.4,
+    "label": "年間日照時間",
+    "unit": "時間"
+  },
+  {
+    "areaName": "神奈川",
+    "rank": 8,
+    "value": 2227.3,
+    "label": "年間日照時間",
+    "unit": "時間"
+  },
+  {
+    "areaName": "岐阜",
+    "rank": 9,
+    "value": 2212.2,
+    "label": "年間日照時間",
+    "unit": "時間"
+  },
+  {
+    "areaName": "山梨",
+    "rank": 10,
+    "value": 2208.9,
+    "label": "年間日照時間",
+    "unit": "時間"
+  },
+  {
+    "areaName": "徳島",
+    "rank": 11,
+    "value": 2207.5,
+    "label": "年間日照時間",
+    "unit": "時間"
+  },
+  {
+    "areaName": "和歌山",
+    "rank": 12,
+    "value": 2207.4,
+    "label": "年間日照時間",
+    "unit": "時間"
+  },
+  {
+    "areaName": "兵庫",
+    "rank": 13,
+    "value": 2201,
+    "label": "年間日照時間",
+    "unit": "時間"
+  },
+  {
+    "areaName": "宮崎",
+    "rank": 14,
+    "value": 2190.7,
+    "label": "年間日照時間",
+    "unit": "時間"
+  },
+  {
+    "areaName": "岡山",
+    "rank": 15,
+    "value": 2188.7,
+    "label": "年間日照時間",
+    "unit": "時間"
+  },
+  {
+    "areaName": "大阪",
+    "rank": 16,
+    "value": 2184.6,
+    "label": "年間日照時間",
+    "unit": "時間"
+  },
+  {
+    "areaName": "広島",
+    "rank": 17,
+    "value": 2162.8,
+    "label": "年間日照時間",
+    "unit": "時間"
+  },
+  {
+    "areaName": "香川",
+    "rank": 18,
+    "value": 2153.2,
+    "label": "年間日照時間",
+    "unit": "時間"
+  },
+  {
+    "areaName": "千葉",
+    "rank": 19,
+    "value": 2131.7,
+    "label": "年間日照時間",
+    "unit": "時間"
+  },
+  {
+    "areaName": "佐賀",
+    "rank": 20,
+    "value": 2108.6,
+    "label": "年間日照時間",
+    "unit": "時間"
+  },
+  {
+    "areaName": "東京",
+    "rank": 21,
+    "value": 2100.2,
+    "label": "年間日照時間",
+    "unit": "時間"
+  },
+  {
+    "areaName": "栃木",
+    "rank": 22,
+    "value": 2099,
+    "label": "年間日照時間",
+    "unit": "時間"
+  },
+  {
+    "areaName": "愛媛",
+    "rank": 23,
+    "value": 2087.4,
+    "label": "年間日照時間",
+    "unit": "時間"
+  },
+  {
+    "areaName": "大分",
+    "rank": 24,
+    "value": 2081.2,
+    "label": "年間日照時間",
+    "unit": "時間"
+  },
+  {
+    "areaName": "熊本",
+    "rank": 25,
+    "value": 2071.8,
+    "label": "年間日照時間",
+    "unit": "時間"
+  },
+  {
+    "areaName": "鹿児島",
+    "rank": 26,
+    "value": 2057.7,
+    "label": "年間日照時間",
+    "unit": "時間"
+  },
+  {
+    "areaName": "福岡",
+    "rank": 27,
+    "value": 2037,
+    "label": "年間日照時間",
+    "unit": "時間"
+  },
+  {
+    "areaName": "滋賀",
+    "rank": 28,
+    "value": 2030,
+    "label": "年間日照時間",
+    "unit": "時間"
+  },
+  {
+    "areaName": "山口",
+    "rank": 29,
+    "value": 1991.4,
+    "label": "年間日照時間",
+    "unit": "時間"
+  },
+  {
+    "areaName": "宮城",
+    "rank": 30,
+    "value": 1976.9,
+    "label": "年間日照時間",
+    "unit": "時間"
+  },
+  {
+    "areaName": "京都",
+    "rank": 31,
+    "value": 1950.6,
+    "label": "年間日照時間",
+    "unit": "時間"
+  },
+  {
+    "areaName": "長崎",
+    "rank": 32,
+    "value": 1945.1,
+    "label": "年間日照時間",
+    "unit": "時間"
+  },
+  {
+    "areaName": "長野",
+    "rank": 33,
+    "value": 1939.1,
+    "label": "年間日照時間",
+    "unit": "時間"
+  },
+  {
+    "areaName": "奈良",
+    "rank": 34,
+    "value": 1929.7,
+    "label": "年間日照時間",
+    "unit": "時間"
+  },
+  {
+    "areaName": "北海",
+    "rank": 35,
+    "value": 1919.5,
+    "label": "年間日照時間",
+    "unit": "時間"
+  },
+  {
+    "areaName": "島根",
+    "rank": 36,
+    "value": 1903.4,
+    "label": "年間日照時間",
+    "unit": "時間"
+  },
+  {
+    "areaName": "岩手",
+    "rank": 37,
+    "value": 1895.2,
+    "label": "年間日照時間",
+    "unit": "時間"
+  },
+  {
+    "areaName": "福井",
+    "rank": 38,
+    "value": 1815.3,
+    "label": "年間日照時間",
+    "unit": "時間"
+  },
+  {
+    "areaName": "石川",
+    "rank": 39,
+    "value": 1801.8,
+    "label": "年間日照時間",
+    "unit": "時間"
+  },
+  {
+    "areaName": "福島",
+    "rank": 40,
+    "value": 1791.4,
+    "label": "年間日照時間",
+    "unit": "時間"
+  },
+  {
+    "areaName": "鳥取",
+    "rank": 41,
+    "value": 1775.9,
+    "label": "年間日照時間",
+    "unit": "時間"
+  },
+  {
+    "areaName": "秋田",
+    "rank": 42,
+    "value": 1762.4,
+    "label": "年間日照時間",
+    "unit": "時間"
+  },
+  {
+    "areaName": "沖縄",
+    "rank": 43,
+    "value": 1757.5,
+    "label": "年間日照時間",
+    "unit": "時間"
+  },
+  {
+    "areaName": "富山",
+    "rank": 44,
+    "value": 1725.2,
+    "label": "年間日照時間",
+    "unit": "時間"
+  },
+  {
+    "areaName": "青森",
+    "rank": 45,
+    "value": 1701,
+    "label": "年間日照時間",
+    "unit": "時間"
+  },
+  {
+    "areaName": "新潟",
+    "rank": 46,
+    "value": 1629.6,
+    "label": "年間日照時間",
+    "unit": "時間"
+  },
+  {
+    "areaName": "山形",
+    "rank": 47,
+    "value": 1625.6,
+    "label": "年間日照時間",
+    "unit": "時間"
+  }
+]

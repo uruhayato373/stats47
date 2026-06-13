@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 376" width="720" height="376" style="font-family:system-ui,sans-serif;" role="img">
+<title>コーヒー消費量 上位5県・下位5県(2024年・世帯あたり年間g)</title>
+<rect x="0" y="0" width="720" height="376" fill="#ffffff"/>
+<text x="360" y="24" text-anchor="middle" font-size="15" font-weight="bold" fill="#0f172a" font-family="system-ui,sans-serif">コーヒー消費量 上位5県・下位5県（2024年）</text>
+<text x="360" y="42" text-anchor="middle" font-size="11" fill="#475569" font-family="system-ui,sans-serif">県庁所在市・二人以上世帯の年間購入数量 単位g / 出典: 総務省 家計調査</text>
+<rect x="128" y="52" width="440.0" height="24" fill="#1e6fb5" rx="2"/>
+<text x="122" y="69" text-anchor="end" font-size="12" fill="#1e293b" font-family="system-ui,sans-serif">1位 鳥取</text>
+<text x="574.0" y="69" text-anchor="start" font-size="11" fill="#334155" font-family="system-ui,sans-serif">3,293g</text>
+<rect x="128" y="82" width="437.2" height="24" fill="#1e6fb5" rx="2"/>
+<text x="122" y="99" text-anchor="end" font-size="12" fill="#1e293b" font-family="system-ui,sans-serif">2位 石川</text>
+<text x="571.2" y="99" text-anchor="start" font-size="11" fill="#334155" font-family="system-ui,sans-serif">3,272g</text>
+<rect x="128" y="112" width="406.6" height="24" fill="#1e6fb5" rx="2"/>
+<text x="122" y="129" text-anchor="end" font-size="12" fill="#1e293b" font-family="system-ui,sans-serif">3位 兵庫</text>
+<text x="540.6" y="129" text-anchor="start" font-size="11" fill="#334155" font-family="system-ui,sans-serif">3,043g</text>
+<rect x="128" y="142" width="405.8" height="24" fill="#1e6fb5" rx="2"/>
+<text x="122" y="159" text-anchor="end" font-size="12" fill="#1e293b" font-family="system-ui,sans-serif">4位 福岡</text>
+<text x="539.8" y="159" text-anchor="start" font-size="11" fill="#334155" font-family="system-ui,sans-serif">3,037g</text>
+<rect x="128" y="172" width="405.0" height="24" fill="#1e6fb5" rx="2"/>
+<text x="122" y="189" text-anchor="end" font-size="12" fill="#1e293b" font-family="system-ui,sans-serif">5位 滋賀</text>
+<text x="539.0" y="189" text-anchor="start" font-size="11" fill="#334155" font-family="system-ui,sans-serif">3,031g</text>
+<rect x="128" y="202" width="270.0" height="24" fill="#e07b2a" rx="2"/>
+<text x="122" y="219" text-anchor="end" font-size="12" fill="#1e293b" font-family="system-ui,sans-serif">43位 福井</text>
+<text x="404.0" y="219" text-anchor="start" font-size="11" fill="#334155" font-family="system-ui,sans-serif">2,021g</text>
+<rect x="128" y="232" width="257.5" height="24" fill="#e07b2a" rx="2"/>
+<text x="122" y="249" text-anchor="end" font-size="12" fill="#1e293b" font-family="system-ui,sans-serif">44位 高知</text>
+<text x="391.5" y="249" text-anchor="start" font-size="11" fill="#334155" font-family="system-ui,sans-serif">1,927g</text>
+<rect x="128" y="262" width="253.9" height="24" fill="#e07b2a" rx="2"/>
+<text x="122" y="279" text-anchor="end" font-size="12" fill="#1e293b" font-family="system-ui,sans-serif">45位 鹿児島</text>
+<text x="387.9" y="279" text-anchor="start" font-size="11" fill="#334155" font-family="system-ui,sans-serif">1,900g</text>
+<rect x="128" y="292" width="230.5" height="24" fill="#e07b2a" rx="2"/>
+<text x="122" y="309" text-anchor="end" font-size="12" fill="#1e293b" font-family="system-ui,sans-serif">46位 静岡</text>
+<text x="364.5" y="309" text-anchor="start" font-size="11" fill="#334155" font-family="system-ui,sans-serif">1,725g</text>
+<rect x="128" y="322" width="228.4" height="24" fill="#e07b2a" rx="2"/>
+<text x="122" y="339" text-anchor="end" font-size="12" fill="#1e293b" font-family="system-ui,sans-serif">47位 宮崎</text>
+<text x="362.4" y="339" text-anchor="start" font-size="11" fill="#334155" font-family="system-ui,sans-serif">1,709g</text>
+</svg>

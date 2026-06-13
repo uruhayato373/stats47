@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 408" width="720" height="408" font-family="system-ui,-apple-system,sans-serif" role="img">
+  <title>都道府県別 イワシ類漁獲量ランキング 上位5・下位5（2015年）</title>
+  <text x="360" y="26" text-anchor="middle" font-size="15" font-weight="700" fill="#3b82f6">イワシ類漁獲量ランキング 上位5・下位5（2015年）</text>
+  <text x="360" y="46" text-anchor="middle" font-size="11.5" fill="#94a3b8">単位: トン｜上位（青）と下位（橙）で漁獲規模を比較</text>
+  <rect x="110" y="62" width="520" height="18" rx="2" fill="#3b82f6"/>
+  <text x="102" y="77" text-anchor="end" font-size="12.5" fill="#64748b">長崎</text>
+  <text x="638" y="77" text-anchor="start" font-size="11.5" fill="#64748b">71,391t（1位）</text>
+  <rect x="110" y="92" width="477" height="18" rx="2" fill="#3b82f6"/>
+  <text x="102" y="107" text-anchor="end" font-size="12.5" fill="#64748b">三重</text>
+  <text x="595" y="107" text-anchor="start" font-size="11.5" fill="#64748b">65,501t（2位）</text>
+  <rect x="110" y="122" width="458" height="18" rx="2" fill="#3b82f6"/>
+  <text x="102" y="137" text-anchor="end" font-size="12.5" fill="#64748b">宮崎</text>
+  <text x="576" y="137" text-anchor="start" font-size="11.5" fill="#64748b">62,823t（3位）</text>
+  <rect x="110" y="152" width="432" height="18" rx="2" fill="#3b82f6"/>
+  <text x="102" y="167" text-anchor="end" font-size="12.5" fill="#64748b">茨城</text>
+  <text x="550" y="167" text-anchor="start" font-size="11.5" fill="#64748b">59,249t（4位）</text>
+  <rect x="110" y="182" width="318" height="18" rx="2" fill="#3b82f6"/>
+  <text x="102" y="197" text-anchor="end" font-size="12.5" fill="#64748b">島根</text>
+  <text x="436" y="197" text-anchor="start" font-size="11.5" fill="#64748b">43,692t（5位）</text>
+  <line x1="110" y1="223" x2="630" y2="223" stroke="#94a3b8" stroke-width="1" stroke-dasharray="4,3" opacity="0.6"/>
+  <rect x="110" y="242" width="4" height="18" rx="2" fill="#f97316"/>
+  <text x="102" y="257" text-anchor="end" font-size="12.5" fill="#64748b">岡山</text>
+  <text x="122" y="257" text-anchor="start" font-size="11.5" fill="#64748b">423t（33位）</text>
+  <rect x="110" y="272" width="4" height="18" rx="2" fill="#f97316"/>
+  <text x="102" y="287" text-anchor="end" font-size="12.5" fill="#64748b">新潟</text>
+  <text x="122" y="287" text-anchor="start" font-size="11.5" fill="#64748b">269t（34位）</text>
+  <rect x="110" y="302" width="4" height="18" rx="2" fill="#f97316"/>
+  <text x="102" y="317" text-anchor="end" font-size="12.5" fill="#64748b">福井</text>
+  <text x="122" y="317" text-anchor="start" font-size="11.5" fill="#64748b">139t（35位）</text>
+  <rect x="110" y="332" width="4" height="18" rx="2" fill="#f97316"/>
+  <text x="102" y="347" text-anchor="end" font-size="12.5" fill="#64748b">秋田</text>
+  <text x="122" y="347" text-anchor="start" font-size="11.5" fill="#64748b">23t（36位）</text>
+  <rect x="110" y="362" width="4" height="18" rx="2" fill="#f97316"/>
+  <text x="102" y="377" text-anchor="end" font-size="12.5" fill="#64748b">山形</text>
+  <text x="122" y="377" text-anchor="start" font-size="11.5" fill="#64748b">21t（37位）</text>
+</svg>

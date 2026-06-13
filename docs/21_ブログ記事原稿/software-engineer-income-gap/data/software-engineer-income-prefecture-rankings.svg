@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 488" role="img" aria-label="ソフトウェア作成者の平均年収 上位6・下位5（2023年）">
+  <title>ソフトウェア作成者の平均年収 上位6・下位5（2023年）</title>
+  <text x="140" y="28" font-size="18" font-weight="bold" fill="#64748b" font-family="system-ui, sans-serif">ソフトウェア作成者の平均年収 上位6・下位5（2023年・万円）</text>
+  <line x1="140" y1="262" x2="650" y2="262" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="4 4"/>
+  <g>
+    <text x="130" y="78" text-anchor="end" font-size="15" fill="#94a3b8" font-family="system-ui, sans-serif">1位 京都府</text>
+    <rect x="140" y="61" width="510" height="22" rx="2" fill="#2563eb"><title>京都府 1位 608.4万円</title></rect>
+    <text x="658" y="78" font-size="14" fill="#64748b" font-family="system-ui, sans-serif">608.4万円</text>
+  </g><g>
+    <text x="130" y="112" text-anchor="end" font-size="15" fill="#94a3b8" font-family="system-ui, sans-serif">2位 愛知県</text>
+    <rect x="140" y="95" width="500.02465483234715" height="22" rx="2" fill="#2563eb"><title>愛知県 2位 596.5万円</title></rect>
+    <text x="648.0246548323471" y="112" font-size="14" fill="#64748b" font-family="system-ui, sans-serif">596.5万円</text>
+  </g><g>
+    <text x="130" y="146" text-anchor="end" font-size="15" fill="#94a3b8" font-family="system-ui, sans-serif">3位 栃木県</text>
+    <rect x="140" y="129" width="491.8096646942801" height="22" rx="2" fill="#2563eb"><title>栃木県 3位 586.7万円</title></rect>
+    <text x="639.8096646942802" y="146" font-size="14" fill="#64748b" font-family="system-ui, sans-serif">586.7万円</text>
+  </g><g>
+    <text x="130" y="180" text-anchor="end" font-size="15" fill="#94a3b8" font-family="system-ui, sans-serif">4位 大阪府</text>
+    <rect x="140" y="163" width="489.965483234714" height="22" rx="2" fill="#2563eb"><title>大阪府 4位 584.5万円</title></rect>
+    <text x="637.9654832347139" y="180" font-size="14" fill="#64748b" font-family="system-ui, sans-serif">584.5万円</text>
+  </g><g>
+    <text x="130" y="214" text-anchor="end" font-size="15" fill="#94a3b8" font-family="system-ui, sans-serif">5位 岐阜県</text>
+    <rect x="140" y="197" width="486.1094674556213" height="22" rx="2" fill="#2563eb"><title>岐阜県 5位 579.9万円</title></rect>
+    <text x="634.1094674556214" y="214" font-size="14" fill="#64748b" font-family="system-ui, sans-serif">579.9万円</text>
+  </g><g>
+    <text x="130" y="248" text-anchor="end" font-size="15" fill="#94a3b8" font-family="system-ui, sans-serif">6位 東京都</text>
+    <rect x="140" y="231" width="479.2357001972387" height="22" rx="2" fill="#2563eb"><title>東京都 6位 571.7万円</title></rect>
+    <text x="627.2357001972387" y="248" font-size="14" fill="#64748b" font-family="system-ui, sans-serif">571.7万円</text>
+  </g><g>
+    <text x="130" y="282" text-anchor="end" font-size="15" fill="#94a3b8" font-family="system-ui, sans-serif">43位 島根県</text>
+    <rect x="140" y="265" width="364.3096646942801" height="22" rx="2" fill="#ea580c"><title>島根県 43位 434.6万円</title></rect>
+    <text x="512.3096646942802" y="282" font-size="14" fill="#64748b" font-family="system-ui, sans-serif">434.6万円</text>
+  </g><g>
+    <text x="130" y="316" text-anchor="end" font-size="15" fill="#94a3b8" font-family="system-ui, sans-serif">44位 青森県</text>
+    <rect x="140" y="299" width="362.3816568047337" height="22" rx="2" fill="#ea580c"><title>青森県 44位 432.3万円</title></rect>
+    <text x="510.3816568047337" y="316" font-size="14" fill="#64748b" font-family="system-ui, sans-serif">432.3万円</text>
+  </g><g>
+    <text x="130" y="350" text-anchor="end" font-size="15" fill="#94a3b8" font-family="system-ui, sans-serif">45位 宮崎県</text>
+    <rect x="140" y="333" width="353.7475345167653" height="22" rx="2" fill="#ea580c"><title>宮崎県 45位 422万円</title></rect>
+    <text x="501.7475345167653" y="350" font-size="14" fill="#64748b" font-family="system-ui, sans-serif">422万円</text>
+  </g><g>
+    <text x="130" y="384" text-anchor="end" font-size="15" fill="#94a3b8" font-family="system-ui, sans-serif">46位 奈良県</text>
+    <rect x="140" y="367" width="341.7603550295858" height="22" rx="2" fill="#ea580c"><title>奈良県 46位 407.7万円</title></rect>
+    <text x="489.7603550295858" y="384" font-size="14" fill="#64748b" font-family="system-ui, sans-serif">407.7万円</text>
+  </g><g>
+    <text x="130" y="418" text-anchor="end" font-size="15" fill="#94a3b8" font-family="system-ui, sans-serif">47位 沖縄県</text>
+    <rect x="140" y="401" width="337.48520710059177" height="22" rx="2" fill="#ea580c"><title>沖縄県 47位 402.6万円</title></rect>
+    <text x="485.48520710059177" y="418" font-size="14" fill="#64748b" font-family="system-ui, sans-serif">402.6万円</text>
+  </g>
+  <text x="140" y="480" font-size="12" fill="#64748b" font-family="system-ui, sans-serif">青=上位／橙=下位　出典: 厚生労働省 賃金構造基本統計調査(2023)</text>
+</svg>

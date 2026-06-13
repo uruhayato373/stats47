@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 306" width="760" height="306" role="img" aria-label="製造業 1人あたり出荷額（2021年）">
+  <style>
+    .svg-title { fill: #0f172a; }
+    .svg-sub   { fill: #475569; }
+    .svg-label { fill: #334155; }
+    .svg-value { fill: #1e293b; }
+    @media (prefers-color-scheme: dark) {
+      .svg-title { fill: #f1f5f9; }
+      .svg-sub   { fill: #cbd5e1; }
+      .svg-label { fill: #e2e8f0; }
+      .svg-value { fill: #f1f5f9; }
+    }
+  </style>
+  <title>製造業 1人あたり出荷額（2021年）</title>
+  <desc>本文で値を示した主要県（製造品出荷額÷従業者数の派生指標）（単位: 万円/人）。上位を青、下位を橙で表示。</desc>
+  <text class="svg-title" x="20" y="30" font-size="18" font-weight="700">製造業 1人あたり出荷額（2021年）</text>
+  <text class="svg-sub" x="20" y="52" font-size="13">本文で値を示した主要県（製造品出荷額÷従業者数の派生指標）（単位: 万円/人）</text>
+  <line x1="0" y1="222" x2="760" y2="222" stroke="#94a3b8" stroke-width="1" stroke-dasharray="4 4" opacity="0.6" />
+  
+    <g>
+      <text class="svg-label" x="96" y="93" text-anchor="end" font-size="15" font-weight="600">1位 大分</text>
+      <rect x="112" y="76" width="542" height="24" rx="2" fill="#2563eb" />
+      <text class="svg-value" x="662" y="93" text-anchor="start" font-size="14" font-weight="700">7,308</text>
+    </g>
+    <g>
+      <text class="svg-label" x="96" y="131" text-anchor="end" font-size="15" font-weight="600">2位 山口</text>
+      <rect x="112" y="114" width="522.7170224411603" height="24" rx="2" fill="#2563eb" />
+      <text class="svg-value" x="642.7170224411603" y="131" text-anchor="start" font-size="14" font-weight="700">7,048</text>
+    </g>
+    <g>
+      <text class="svg-label" x="96" y="169" text-anchor="end" font-size="15" font-weight="600">3位 千葉</text>
+      <rect x="112" y="152" width="471.4688013136289" height="24" rx="2" fill="#2563eb" />
+      <text class="svg-value" x="591.4688013136289" y="169" text-anchor="start" font-size="14" font-weight="700">6,357</text>
+    </g>
+    <g>
+      <text class="svg-label" x="96" y="207" text-anchor="end" font-size="15" font-weight="600">5位 愛知</text>
+      <rect x="112" y="190" width="439.80021893815" height="24" rx="2" fill="#2563eb" />
+      <text class="svg-value" x="559.80021893815" y="207" text-anchor="start" font-size="14" font-weight="700">5,930</text>
+    </g>
+    <g>
+      <text class="svg-label" x="96" y="245" text-anchor="end" font-size="15" font-weight="600">47位 沖縄</text>
+      <rect x="112" y="228" width="148.40476190476193" height="24" rx="2" fill="#ea580c" />
+      <text class="svg-value" x="268.4047619047619" y="245" text-anchor="start" font-size="14" font-weight="700">2,001</text>
+    </g>
+</svg>

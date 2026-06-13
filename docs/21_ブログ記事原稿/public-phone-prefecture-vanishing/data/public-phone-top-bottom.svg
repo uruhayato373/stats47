@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 572" role="img" aria-label="公衆電話設置台数 上位5・下位5 都道府県 (2024年度)">
+  <!-- data-source: ranking.json | generated: 2026-06-13T04:42:09.172Z -->
+  <title>公衆電話設置台数 上位5・下位5 都道府県 (2024年度)</title>
+  <text x="150" y="28" font-size="17" font-weight="bold" fill="#64748b">公衆電話設置台数 上位5・下位5（2024年度・単位:個）</text>
+  <text x="150" y="48" font-size="12" fill="#94a3b8">青=上位5　橙=下位5</text>
+  <g>
+    <title>東京都：公衆電話設置台数=10,717個 (1位)</title>
+    <text x="140" y="81" text-anchor="end" dominant-baseline="middle" font-size="15" fill="#64748b">1位 東京都</text>
+    <rect x="150" y="66" width="520.0" height="28" rx="2" fill="#2563eb" />
+    <text x="678.0" y="81" dominant-baseline="middle" font-size="14" fill="#64748b">10,717</text>
+  </g>
+  <g>
+    <title>大阪府：公衆電話設置台数=5,807個 (2位)</title>
+    <text x="140" y="127" text-anchor="end" dominant-baseline="middle" font-size="15" fill="#64748b">2位 大阪府</text>
+    <rect x="150" y="112" width="281.8" height="28" rx="2" fill="#2563eb" />
+    <text x="439.8" y="127" dominant-baseline="middle" font-size="14" fill="#64748b">5,807</text>
+  </g>
+  <g>
+    <title>神奈川県：公衆電話設置台数=5,263個 (3位)</title>
+    <text x="140" y="173" text-anchor="end" dominant-baseline="middle" font-size="15" fill="#64748b">3位 神奈川県</text>
+    <rect x="150" y="158" width="255.4" height="28" rx="2" fill="#2563eb" />
+    <text x="413.4" y="173" dominant-baseline="middle" font-size="14" fill="#64748b">5,263</text>
+  </g>
+  <g>
+    <title>愛知県：公衆電話設置台数=5,112個 (4位)</title>
+    <text x="140" y="219" text-anchor="end" dominant-baseline="middle" font-size="15" fill="#64748b">4位 愛知県</text>
+    <rect x="150" y="204" width="248.0" height="28" rx="2" fill="#2563eb" />
+    <text x="406.0" y="219" dominant-baseline="middle" font-size="14" fill="#64748b">5,112</text>
+  </g>
+  <g>
+    <title>千葉県：公衆電話設置台数=4,713個 (5位)</title>
+    <text x="140" y="265" text-anchor="end" dominant-baseline="middle" font-size="15" fill="#64748b">5位 千葉県</text>
+    <rect x="150" y="250" width="228.7" height="28" rx="2" fill="#2563eb" />
+    <text x="386.7" y="265" dominant-baseline="middle" font-size="14" fill="#64748b">4,713</text>
+  </g>
+  <g>
+    <title>福井県：公衆電話設置台数=692個 (43位)</title>
+    <text x="140" y="329" text-anchor="end" dominant-baseline="middle" font-size="15" fill="#64748b">43位 福井県</text>
+    <rect x="150" y="314" width="33.6" height="28" rx="2" fill="#ea580c" />
+    <text x="191.6" y="329" dominant-baseline="middle" font-size="14" fill="#64748b">692</text>
+  </g>
+  <g>
+    <title>香川県：公衆電話設置台数=681個 (44位)</title>
+    <text x="140" y="375" text-anchor="end" dominant-baseline="middle" font-size="15" fill="#64748b">44位 香川県</text>
+    <rect x="150" y="360" width="33.0" height="28" rx="2" fill="#ea580c" />
+    <text x="191.0" y="375" dominant-baseline="middle" font-size="14" fill="#64748b">681</text>
+  </g>
+  <g>
+    <title>鳥取県：公衆電話設置台数=603個 (45位)</title>
+    <text x="140" y="421" text-anchor="end" dominant-baseline="middle" font-size="15" fill="#64748b">45位 鳥取県</text>
+    <rect x="150" y="406" width="29.3" height="28" rx="2" fill="#ea580c" />
+    <text x="187.3" y="421" dominant-baseline="middle" font-size="14" fill="#64748b">603</text>
+  </g>
+  <g>
+    <title>佐賀県：公衆電話設置台数=596個 (46位)</title>
+    <text x="140" y="467" text-anchor="end" dominant-baseline="middle" font-size="15" fill="#64748b">46位 佐賀県</text>
+    <rect x="150" y="452" width="28.9" height="28" rx="2" fill="#ea580c" />
+    <text x="186.9" y="467" dominant-baseline="middle" font-size="14" fill="#64748b">596</text>
+  </g>
+  <g>
+    <title>徳島県：公衆電話設置台数=509個 (47位)</title>
+    <text x="140" y="513" text-anchor="end" dominant-baseline="middle" font-size="15" fill="#64748b">47位 徳島県</text>
+    <rect x="150" y="498" width="24.7" height="28" rx="2" fill="#ea580c" />
+    <text x="182.7" y="513" dominant-baseline="middle" font-size="14" fill="#64748b">509</text>
+  </g>
+  <line x1="150" y1="299.0" x2="670" y2="299.0" stroke="#94a3b8" stroke-dasharray="4 4" stroke-width="1" />
+</svg>

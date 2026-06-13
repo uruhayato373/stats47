@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 468" role="img" aria-label="在留外国人数（2024年）上位5・下位5" font-family="system-ui, sans-serif" color="#334155">
+  <title>在留外国人数（2024年）上位5・下位5</title>
+  <text x="400" y="30" text-anchor="middle" font-size="18" font-weight="700" fill="currentColor">在留外国人数（2024年）上位5・下位5</text>
+  <g>
+    <rect x="108" y="44" width="12" height="12" rx="2" fill="#2563eb"/>
+    <text x="126" y="54" font-size="12" fill="currentColor">上位5</text>
+    <rect x="180" y="44" width="12" height="12" rx="2" fill="#ea580c"/>
+    <text x="198" y="54" font-size="12" fill="currentColor">下位5</text>
+  </g>
+    <text x="96" y="75" text-anchor="end" dominant-baseline="middle" font-size="15" fill="currentColor">東京都</text>
+    <rect x="108" y="60" width="566.0" height="26" rx="2" fill="#2563eb"><title>東京都 738,946人</title></rect>
+    <text x="682" y="75" dominant-baseline="middle" font-size="14" fill="currentColor" font-weight="600">738,946人</text>
+    <text x="96" y="113" text-anchor="end" dominant-baseline="middle" font-size="15" fill="currentColor">大阪府</text>
+    <rect x="108" y="98" width="255.5" height="26" rx="2" fill="#2563eb"><title>大阪府 333,564人</title></rect>
+    <text x="371.4952919428483" y="113" dominant-baseline="middle" font-size="14" fill="currentColor" font-weight="600">333,564人</text>
+    <text x="96" y="151" text-anchor="end" dominant-baseline="middle" font-size="15" fill="currentColor">愛知県</text>
+    <rect x="108" y="136" width="254.1" height="26" rx="2" fill="#2563eb"><title>愛知県 331,733人</title></rect>
+    <text x="370.0928268100781" y="151" dominant-baseline="middle" font-size="14" fill="currentColor" font-weight="600">331,733人</text>
+    <text x="96" y="189" text-anchor="end" dominant-baseline="middle" font-size="15" fill="currentColor">神奈川県</text>
+    <rect x="108" y="174" width="224.0" height="26" rx="2" fill="#2563eb"><title>神奈川県 292,450人</title></rect>
+    <text x="340.0037837676907" y="189" dominant-baseline="middle" font-size="14" fill="currentColor" font-weight="600">292,450人</text>
+    <text x="96" y="227" text-anchor="end" dominant-baseline="middle" font-size="15" fill="currentColor">埼玉県</text>
+    <rect x="108" y="212" width="201.0" height="26" rx="2" fill="#2563eb"><title>埼玉県 262,382人</title></rect>
+    <text x="316.97302373921775" y="227" dominant-baseline="middle" font-size="14" fill="currentColor" font-weight="600">262,382人</text>
+    <line x1="16" y1="249" x2="674" y2="249" stroke="currentColor" stroke-opacity="0.25" stroke-dasharray="4 4"/>
+    <text x="96" y="273" text-anchor="end" dominant-baseline="middle" font-size="15" fill="currentColor">徳島県</text>
+    <rect x="108" y="258" width="6.8" height="26" rx="2" fill="#ea580c"><title>徳島県 8,907人</title></rect>
+    <text x="122.82236861692193" y="273" dominant-baseline="middle" font-size="14" fill="currentColor" font-weight="600">8,907人</text>
+    <text x="96" y="311" text-anchor="end" dominant-baseline="middle" font-size="15" fill="currentColor">青森県</text>
+    <rect x="108" y="296" width="6.6" height="26" rx="2" fill="#ea580c"><title>青森県 8,603人</title></rect>
+    <text x="122.58951804326703" y="311" dominant-baseline="middle" font-size="14" fill="currentColor" font-weight="600">8,603人</text>
+    <text x="96" y="349" text-anchor="end" dominant-baseline="middle" font-size="15" fill="currentColor">高知県</text>
+    <rect x="108" y="334" width="5.2" height="26" rx="2" fill="#ea580c"><title>高知県 6,848人</title></rect>
+    <text x="121.24526555391057" y="349" dominant-baseline="middle" font-size="14" fill="currentColor" font-weight="600">6,848人</text>
+    <text x="96" y="387" text-anchor="end" dominant-baseline="middle" font-size="15" fill="currentColor">鳥取県</text>
+    <rect x="108" y="372" width="4.6" height="26" rx="2" fill="#ea580c"><title>鳥取県 6,068人</title></rect>
+    <text x="120.64782000308547" y="387" dominant-baseline="middle" font-size="14" fill="currentColor" font-weight="600">6,068人</text>
+    <text x="96" y="425" text-anchor="end" dominant-baseline="middle" font-size="15" fill="currentColor">秋田県</text>
+    <rect x="108" y="410" width="4.5" height="26" rx="2" fill="#ea580c"><title>秋田県 5,851人</title></rect>
+    <text x="120.4816075870226" y="425" dominant-baseline="middle" font-size="14" fill="currentColor" font-weight="600">5,851人</text>
+</svg>

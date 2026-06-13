@@ -1,0 +1,331 @@
+[
+  {
+    "areaName": "山梨",
+    "rank": 1,
+    "value": 446,
+    "label": "ピアノ・電子ピアノ所有数量",
+    "unit": "台"
+  },
+  {
+    "areaName": "長野",
+    "rank": 2,
+    "value": 425,
+    "label": "ピアノ・電子ピアノ所有数量",
+    "unit": "台"
+  },
+  {
+    "areaName": "滋賀",
+    "rank": 3,
+    "value": 419,
+    "label": "ピアノ・電子ピアノ所有数量",
+    "unit": "台"
+  },
+  {
+    "areaName": "福井",
+    "rank": 4,
+    "value": 402,
+    "label": "ピアノ・電子ピアノ所有数量",
+    "unit": "台"
+  },
+  {
+    "areaName": "岡山",
+    "rank": 5,
+    "value": 401,
+    "label": "ピアノ・電子ピアノ所有数量",
+    "unit": "台"
+  },
+  {
+    "areaName": "愛媛",
+    "rank": 6,
+    "value": 393,
+    "label": "ピアノ・電子ピアノ所有数量",
+    "unit": "台"
+  },
+  {
+    "areaName": "香川",
+    "rank": 7,
+    "value": 390,
+    "label": "ピアノ・電子ピアノ所有数量",
+    "unit": "台"
+  },
+  {
+    "areaName": "栃木",
+    "rank": 8,
+    "value": 387,
+    "label": "ピアノ・電子ピアノ所有数量",
+    "unit": "台"
+  },
+  {
+    "areaName": "奈良",
+    "rank": 9,
+    "value": 385,
+    "label": "ピアノ・電子ピアノ所有数量",
+    "unit": "台"
+  },
+  {
+    "areaName": "静岡",
+    "rank": 10,
+    "value": 372,
+    "label": "ピアノ・電子ピアノ所有数量",
+    "unit": "台"
+  },
+  {
+    "areaName": "三重",
+    "rank": 11,
+    "value": 366,
+    "label": "ピアノ・電子ピアノ所有数量",
+    "unit": "台"
+  },
+  {
+    "areaName": "徳島",
+    "rank": 11,
+    "value": 366,
+    "label": "ピアノ・電子ピアノ所有数量",
+    "unit": "台"
+  },
+  {
+    "areaName": "和歌山",
+    "rank": 13,
+    "value": 365,
+    "label": "ピアノ・電子ピアノ所有数量",
+    "unit": "台"
+  },
+  {
+    "areaName": "群馬",
+    "rank": 14,
+    "value": 364,
+    "label": "ピアノ・電子ピアノ所有数量",
+    "unit": "台"
+  },
+  {
+    "areaName": "茨城",
+    "rank": 15,
+    "value": 363,
+    "label": "ピアノ・電子ピアノ所有数量",
+    "unit": "台"
+  },
+  {
+    "areaName": "岐阜",
+    "rank": 16,
+    "value": 360,
+    "label": "ピアノ・電子ピアノ所有数量",
+    "unit": "台"
+  },
+  {
+    "areaName": "鳥取",
+    "rank": 17,
+    "value": 348,
+    "label": "ピアノ・電子ピアノ所有数量",
+    "unit": "台"
+  },
+  {
+    "areaName": "愛知",
+    "rank": 18,
+    "value": 344,
+    "label": "ピアノ・電子ピアノ所有数量",
+    "unit": "台"
+  },
+  {
+    "areaName": "兵庫",
+    "rank": 18,
+    "value": 344,
+    "label": "ピアノ・電子ピアノ所有数量",
+    "unit": "台"
+  },
+  {
+    "areaName": "広島",
+    "rank": 20,
+    "value": 343,
+    "label": "ピアノ・電子ピアノ所有数量",
+    "unit": "台"
+  },
+  {
+    "areaName": "石川",
+    "rank": 21,
+    "value": 342,
+    "label": "ピアノ・電子ピアノ所有数量",
+    "unit": "台"
+  },
+  {
+    "areaName": "東京",
+    "rank": 22,
+    "value": 340,
+    "label": "ピアノ・電子ピアノ所有数量",
+    "unit": "台"
+  },
+  {
+    "areaName": "山形",
+    "rank": 23,
+    "value": 336,
+    "label": "ピアノ・電子ピアノ所有数量",
+    "unit": "台"
+  },
+  {
+    "areaName": "富山",
+    "rank": 24,
+    "value": 331,
+    "label": "ピアノ・電子ピアノ所有数量",
+    "unit": "台"
+  },
+  {
+    "areaName": "埼玉",
+    "rank": 25,
+    "value": 330,
+    "label": "ピアノ・電子ピアノ所有数量",
+    "unit": "台"
+  },
+  {
+    "areaName": "佐賀",
+    "rank": 26,
+    "value": 329,
+    "label": "ピアノ・電子ピアノ所有数量",
+    "unit": "台"
+  },
+  {
+    "areaName": "熊本",
+    "rank": 27,
+    "value": 326,
+    "label": "ピアノ・電子ピアノ所有数量",
+    "unit": "台"
+  },
+  {
+    "areaName": "千葉",
+    "rank": 28,
+    "value": 322,
+    "label": "ピアノ・電子ピアノ所有数量",
+    "unit": "台"
+  },
+  {
+    "areaName": "神奈川",
+    "rank": 29,
+    "value": 321,
+    "label": "ピアノ・電子ピアノ所有数量",
+    "unit": "台"
+  },
+  {
+    "areaName": "長崎",
+    "rank": 30,
+    "value": 318,
+    "label": "ピアノ・電子ピアノ所有数量",
+    "unit": "台"
+  },
+  {
+    "areaName": "新潟",
+    "rank": 31,
+    "value": 316,
+    "label": "ピアノ・電子ピアノ所有数量",
+    "unit": "台"
+  },
+  {
+    "areaName": "山口",
+    "rank": 31,
+    "value": 316,
+    "label": "ピアノ・電子ピアノ所有数量",
+    "unit": "台"
+  },
+  {
+    "areaName": "京都",
+    "rank": 33,
+    "value": 312,
+    "label": "ピアノ・電子ピアノ所有数量",
+    "unit": "台"
+  },
+  {
+    "areaName": "岩手",
+    "rank": 34,
+    "value": 299,
+    "label": "ピアノ・電子ピアノ所有数量",
+    "unit": "台"
+  },
+  {
+    "areaName": "大分",
+    "rank": 35,
+    "value": 298,
+    "label": "ピアノ・電子ピアノ所有数量",
+    "unit": "台"
+  },
+  {
+    "areaName": "島根",
+    "rank": 36,
+    "value": 296,
+    "label": "ピアノ・電子ピアノ所有数量",
+    "unit": "台"
+  },
+  {
+    "areaName": "福岡",
+    "rank": 36,
+    "value": 296,
+    "label": "ピアノ・電子ピアノ所有数量",
+    "unit": "台"
+  },
+  {
+    "areaName": "北海",
+    "rank": 38,
+    "value": 289,
+    "label": "ピアノ・電子ピアノ所有数量",
+    "unit": "台"
+  },
+  {
+    "areaName": "秋田",
+    "rank": 39,
+    "value": 282,
+    "label": "ピアノ・電子ピアノ所有数量",
+    "unit": "台"
+  },
+  {
+    "areaName": "福島",
+    "rank": 39,
+    "value": 282,
+    "label": "ピアノ・電子ピアノ所有数量",
+    "unit": "台"
+  },
+  {
+    "areaName": "大阪",
+    "rank": 41,
+    "value": 279,
+    "label": "ピアノ・電子ピアノ所有数量",
+    "unit": "台"
+  },
+  {
+    "areaName": "宮城",
+    "rank": 42,
+    "value": 277,
+    "label": "ピアノ・電子ピアノ所有数量",
+    "unit": "台"
+  },
+  {
+    "areaName": "高知",
+    "rank": 43,
+    "value": 269,
+    "label": "ピアノ・電子ピアノ所有数量",
+    "unit": "台"
+  },
+  {
+    "areaName": "宮崎",
+    "rank": 44,
+    "value": 260,
+    "label": "ピアノ・電子ピアノ所有数量",
+    "unit": "台"
+  },
+  {
+    "areaName": "鹿児島",
+    "rank": 45,
+    "value": 255,
+    "label": "ピアノ・電子ピアノ所有数量",
+    "unit": "台"
+  },
+  {
+    "areaName": "沖縄",
+    "rank": 46,
+    "value": 229,
+    "label": "ピアノ・電子ピアノ所有数量",
+    "unit": "台"
+  },
+  {
+    "areaName": "青森",
+    "rank": 47,
+    "value": 215,
+    "label": "ピアノ・電子ピアノ所有数量",
+    "unit": "台"
+  }
+]
