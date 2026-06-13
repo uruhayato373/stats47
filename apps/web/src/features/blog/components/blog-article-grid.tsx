@@ -25,8 +25,12 @@ export function BlogArticleGrid({ articles, firstPagePriority = false }: BlogArt
     return (
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {articles.map((article, index) => {
-                // LCP 対象: page 1 の先頭画像のみ priority=true、他はすべて lazy
+                // LCP 対象: page 1 の先頭画像に priority (preload + fetchpriority=high)。
+                // mobile(1列) は縦長で先頭行 ~4 枚が above-fold になり、その中の lazy 画像が
+                // LCP 要素になっていた (PSI 診断: LCP=index 1 の lazy サムネ)。above-fold は
+                // lazy にせず eager で読む (lazy above-fold アンチパターンの解消)。
                 const isLcp = firstPagePriority && index === 0;
+                const isAboveFold = firstPagePriority && index < 4;
                 return (
                     <Link
                         key={article.slug}
@@ -42,7 +46,7 @@ export function BlogArticleGrid({ articles, firstPagePriority = false }: BlogArt
                                 sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
                                 className="object-cover transition-transform duration-200 group-hover:scale-105"
                                 priority={isLcp}
-                                loading={isLcp ? undefined : "lazy"}
+                                loading={isLcp ? undefined : isAboveFold ? "eager" : "lazy"}
                             />
                         </div>
                     </Link>
