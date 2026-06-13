@@ -14,7 +14,10 @@ vi.mock("@stats47/logger/server", () => ({
   logger: { error: vi.fn(), warn: vi.fn(), info: vi.fn() },
 }));
 
-import { readActiveBannersByCategoryKeysFromR2 } from "../affiliate-ad-snapshot";
+import {
+  readActiveBannersByCategoryKeysFromR2,
+  readActiveTextAdsByCategoryFromR2,
+} from "../affiliate-ad-snapshot";
 
 import type { AffiliateAd } from "../../types";
 
@@ -81,5 +84,49 @@ describe("readActiveBannersByCategoryKeysFromR2 — targetRankingKeys ターゲ�
   it("rankingKey 未指定 (blog 等 非 ranking 文脈) ではターゲティングを適用せず両方返す (後方互換)", async () => {
     const result = await readActiveBannersByCategoryKeysFromR2(["laborwage"], 10);
     expect(result.map((a) => a.id).sort()).toEqual(["generic-tenshoku", "strategy-career"]);
+  });
+});
+
+describe("readActiveTextAdsByCategoryFromR2 — targetRankingKeys ターゲティング (text 広告)", () => {
+  const engineerText = banner({
+    id: "strategy-career-text",
+    adType: "text",
+    imageUrl: null,
+    locationCode: "sidebar-bottom",
+    targetRankingKeys: ["software-engineer-annual-income"],
+  });
+  const genericText = banner({
+    id: "generic-text",
+    adType: "text",
+    imageUrl: null,
+    locationCode: "sidebar-bottom",
+    targetRankingKeys: null,
+  });
+
+  beforeEach(() => {
+    mockLoadSnapshot.mockResolvedValue({
+      generatedAt: "2026-01-01T00:00:00.000Z",
+      ads: [engineerText, genericText],
+    });
+  });
+
+  it("対象 rankingKey 一致時は両方返す", async () => {
+    const r = await readActiveTextAdsByCategoryFromR2(
+      "laborwage",
+      "sidebar-bottom",
+      10,
+      "software-engineer-annual-income",
+    );
+    expect(r.map((a) => a.id).sort()).toEqual(["generic-text", "strategy-career-text"]);
+  });
+
+  it("非対象 rankingKey ではエンジニア転職 text を除外し汎用のみ返す", async () => {
+    const r = await readActiveTextAdsByCategoryFromR2(
+      "laborwage",
+      "sidebar-bottom",
+      10,
+      "nurse-annual-income",
+    );
+    expect(r.map((a) => a.id)).toEqual(["generic-text"]);
   });
 });

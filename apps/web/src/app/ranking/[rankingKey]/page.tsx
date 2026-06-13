@@ -55,7 +55,7 @@ import {
 import { isOk } from "@stats47/types";
 import { getInitialMapTileUrls } from "@stats47/visualization/leaflet/constants";
 
-import { SidebarPromoBanner } from "@/features/ads";
+import { SidebarPromoBanner, selectPromoBannerIndexForRanking } from "@/features/ads";
 import { AffiliateAdSlot, resolveAffiliateBanners } from "@/features/ads/server";
 import { findCategoryByKey } from "@/features/category/server";
 import {
@@ -348,7 +348,7 @@ export default async function RankingKeyPage({
           <Suspense fallback={<div className="space-y-4 animate-pulse"><div className="h-64 bg-muted rounded-lg" /><div className="h-32 bg-muted rounded-lg" /></div>}>
             <Card><CardContent className="p-3"><AdSenseAd format={RANKING_SIDEBAR_TOP.format} slotId={RANKING_SIDEBAR_TOP.slotId} /></CardContent></Card>
             <RankingItemsSidebar rankingKey={rankingKey} areaType={areaType} categoryKey={rankingItem.categoryKey} />
-            <SidebarPromoBanner />
+            <SidebarPromoBanner index={selectPromoBannerIndexForRanking(rankingKey)} />
             <RelatedArticlesCard rankingKey={rankingKey} areaType={areaType} />
             <AffiliateAdSlot categoryKey={rankingItem.categoryKey ?? ""} position="sidebar" rankingKey={rankingKey} />
             <SurveyCard surveys={allSurveys.map((s: { id: string; name: string }) => ({ id: s.id, name: s.name }))} currentSurveyId={rankingItem.surveyId ?? undefined} />

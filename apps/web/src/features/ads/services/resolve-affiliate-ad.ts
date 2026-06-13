@@ -72,9 +72,10 @@ export async function resolveAffiliateAd(
 export async function resolveAffiliateTextAds(
   categoryKey: string,
   locationCode: AffiliateLocationCode = "sidebar-bottom",
-  limit = 2
+  limit = 2,
+  rankingKey?: string
 ): Promise<ResolvedAffiliateAd[]> {
-  const ads = await findActiveTextAdsByCategory(categoryKey, locationCode, limit);
+  const ads = await findActiveTextAdsByCategory(categoryKey, locationCode, limit, rankingKey);
   return ads.map((ad) => ({
     title: ad.title,
     href: ad.htmlContent,

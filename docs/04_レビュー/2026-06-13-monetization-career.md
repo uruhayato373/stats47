@@ -298,7 +298,17 @@ native/sidebar 解決時に「`targetRankingKeys` 未設定なら従来通り (�
 - thread: `resolveAffiliateBanners` (native) / `resolveAffiliateBannersByCategoryKey` (sidebar) → `AffiliateAdSlot`(rankingKey prop) → ranking `page.tsx` が rankingKey を供給。
 - データ: STRATEGY CAREER バナー 8 件に `targetRankingKeys: ["software-engineer-annual-income","system-consultant-annual-income"]` (建築技術者/デザイナーは IT 文脈外のため除外。汎用「転職サイトバナー」は全 laborwage で文脈OKのため無変更)。
 - テスト: `repositories/__tests__/affiliate-ad-snapshot.test.ts` 新規 3 件 (一致表示 / 非一致除外=看護師ページ漏れ防止 / blog後方互換)。`__tests__/resolve-affiliate-ad.test.ts` の呼出シグネチャを 3 引数に更新。全 green。
-- **残: オーナー承認 → PR (develop→main) + data push で `publish-affiliate-ads.yml` 発火 → CDN purge → 本番で漏れ停止を確認**。
+- **デプロイ済 (2026-06-13)**: PR #466 で本番反映 (main 9418f78f)。CDN purge 実行済。snapshot バナー (`5ZEMP`) は targeting で非エンジニア ranking から除外を確認 (全ページ 0)。
+
+#### 本番検証で判明した積み残し (★targeting 未完・follow-up)
+
+STRATEGY CAREER は **3 経路**で表示されており、今回の targeting は (1) のみカバー。エンジニア転職を本当に該当 ranking だけに限定するには (2)(3) も対処が必要:
+
+1. ✅ **snapshot バナー** (`af_strategy_career_*_001` / a8mat `5ZEMP` / adType=banner) → `targetRankingKeys` で限定済。
+2. ⬜ **snapshot テキスト広告** (`af_strategy_career_text_*` / a8mat `5YJRM` / adType=text) → **未 targeting**。text 解決経路 (`resolveAffiliateTextAds*` / `readActiveTextAds*`) に rankingKey フィルタを通し、text エントリにも `targetRankingKeys` を付与する必要あり。
+3. ⬜ **コード直書きの hardcoded promo** (`apps/web/src/features/ads/constants/sidebar-banners.ts` の `SidebarPromoBanner`・a8mat `5YZ75`) → snapshot 非経由のため targeting 対象外。**全カテゴリ全ページに STRATEGY CAREER を表示**している。ranking/category 文脈で出し分けるか、職種年収ページでは抑制する改修が必要。
+
+→ 真の「文脈一致」には (2)(3) の follow-up が要る。(1) だけでは sidebar promo (3) が全ページに残る。
 
 ---
 
