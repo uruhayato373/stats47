@@ -212,16 +212,6 @@ jobs:
 
       - name: Deploy to Production
         uses: cloudflare/wrangler-action@v3
-        env:
-          # `wrangler deploy` は OpenNext プロジェクトを検出すると自動で
-          # `opennextjs-cloudflare deploy`（= populateCache + deploy）へ転送する。
-          # populateCache は account-level の R2 バケット存在チェック API を叩くが、
-          # 現行 CLOUDFLARE_API_TOKEN にその権限が無く 403 (code 10000) で deploy 全体が落ちる。
-          # OPEN_NEXT_DEPLOY=true で転送を抑止し、素の `wrangler deploy` を実行する。
-          # r2IncrementalCache は runtime で binding (NEXT_INC_CACHE_R2_BUCKET) 経由に
-          # オンデマンド自動シードされるため、deploy 時 populateCache をスキップしても機能する。
-          # 事前シード (populateCache) を復活させたい場合は API token に R2 バケット管理権限を付与する。
-          OPEN_NEXT_DEPLOY: "true"
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
