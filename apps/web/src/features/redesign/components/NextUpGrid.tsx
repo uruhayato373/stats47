@@ -38,13 +38,14 @@ const COLUMN_CLASS: Record<2 | 3 | 4, string> = {
   4: "grid-cols-1 sm:grid-cols-2 lg:grid-cols-4",
 };
 
+// melta-ui muted palette — low-saturation slate/neutral tints (design-review 2026-06-06)
 const DEFAULT_ACCENTS = [
-  "from-amber-200 to-amber-500",
-  "from-sky-200 to-sky-600",
-  "from-pink-200 to-pink-500",
-  "from-emerald-200 to-emerald-500",
-  "from-violet-200 to-violet-500",
-  "from-rose-200 to-rose-500",
+  "from-slate-100 to-slate-300",
+  "from-slate-200 to-slate-400",
+  "from-neutral-100 to-neutral-300",
+  "from-zinc-100 to-zinc-300",
+  "from-stone-100 to-stone-300",
+  "from-gray-100 to-gray-300",
 ];
 
 /**

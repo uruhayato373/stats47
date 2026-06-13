@@ -1,10 +1,19 @@
 "use client";
 
+import dynamic from "next/dynamic";
+
 import { Card, CardContent, CardHeader, CardTitle } from "@stats47/components/atoms/ui/card";
-import { BoxplotChart } from "@stats47/visualization/d3";
 import { GitCompareArrows } from "lucide-react";
 
 import type { RankingValue } from "@stats47/ranking";
+
+const BoxplotChartDynamic = dynamic(
+  () => import("@stats47/visualization/d3/BoxplotChart").then((m) => m.BoxplotChart),
+  {
+    ssr: false,
+    loading: () => <div className="h-[280px] w-full animate-pulse rounded bg-muted" />,
+  },
+);
 
 interface Props {
   rankingValues: RankingValue[];
@@ -40,7 +49,7 @@ export function RankingBoxplotChart({
         <CardTitle>地域別分布</CardTitle>
       </CardHeader>
       <CardContent className="p-4">
-        <BoxplotChart
+        <BoxplotChartDynamic
           data={data}
           decimalPlaces={decimalPlaces}
           minValueType={minValueType}

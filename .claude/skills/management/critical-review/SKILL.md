@@ -50,7 +50,7 @@ $ARGUMENTS — レビュー対象のファイルパス（例: `docs/10_SNS戦略
    - 例: 「DB レコード数」→ better-sqlite3 で直接 COUNT する
    - ロードマップの進捗欄は古い可能性が高いため、ソースオブトゥルースとして扱わない
 4. 上記の構造・観点に従いレビューを作成
-5. Write tool で `docs/04_レビュー/critical-review/{YYYY-MM-DD}-{topic}.md` を作成（topic は対象ドキュメントから推測した短い slug、例 `nsm` / `monetization` / `growth-loops`）。frontmatter:
+5. Write tool で `docs/04_レビュー/{YYYY-MM-DD}-{topic}.md` を作成（topic は対象ドキュメントから推測した短い slug、例 `nsm` / `monetization` / `growth-loops`）。frontmatter:
    ```yaml
    ---
    type: critical-review
@@ -65,7 +65,7 @@ $ARGUMENTS — レビュー対象のファイルパス（例: `docs/10_SNS戦略
 
 ## 出力先
 
-`docs/04_レビュー/critical-review/{YYYY-MM-DD}-{topic}.md`
+`docs/04_レビュー/{YYYY-MM-DD}-{topic}.md`
 
 本文には以下の順でセクションを含める:
 - 対象（関連ドキュメントの相対リンク）
@@ -99,6 +99,6 @@ $ARGUMENTS — レビュー対象のファイルパス（例: `docs/10_SNS戦略
 
 ## 参照
 
-- `ls -t docs/04_レビュー/critical-review/*.md | head -5` — 過去のレビュー（トーンやフォーマットの参考）
-- `grep -l "status: draft\|status: published" docs/04_レビュー/critical-review/*.md` — 意思決定待ちのレビュー
-- `docs/04_レビュー/critical-review/` — 出力先ディレクトリ
+- `ls -t docs/04_レビュー/*.md | head -5` — 過去のレビュー（トーンやフォーマットの参考）
+- `grep -l "status: draft\|status: published" docs/04_レビュー/*.md` — 意思決定待ちのレビュー
+- `docs/04_レビュー/` — 出力先ディレクトリ

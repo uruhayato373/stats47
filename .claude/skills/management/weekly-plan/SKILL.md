@@ -111,14 +111,14 @@ DB: .local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6
 
 ```
 調査項目:
-- docs/02_実装計画/01_実装ロードマップ.md の現在のスプリント・未完了タスク
-- 未着手の Issue 一覧（`gh issue list --state open --label enhancement`、PR で close される機能改修）+ docs/02_実装計画/feature-backlog.md の section ごとの `tier:` で優先度判定
+- docs/02_実装計画/02_実装ロードマップ.md の現在のスプリント・未完了タスク
+- 未着手の Issue 一覧（`gh issue list --state open --label enhancement`、PR で close される機能改修）+ docs/02_実装計画/04_機能バックログ.md の section ごとの `tier:` で優先度判定
 
-- 改善バックログ pending 一覧（**真実源**: `docs/02_実装計画/improvement-backlog.md`）
+- 改善バックログ pending 一覧（**真実源**: `docs/02_実装計画/03_改善バックログ.md`）
   ```bash
   # Tier 1/2 の pending / in-progress を表示
   grep -E "^\| (AFF|INDEXING|SEO|BLOG|ADSENSE|GA4|PSI|CWV|P0|Q-|CTR|CONTENT|AICONTENT)" \
-    docs/02_実装計画/improvement-backlog.md
+    docs/02_実装計画/03_改善バックログ.md
   ```
   → Tier 1 は Must 優先、Tier 2 は Should 候補として計画に組み込む
   → due が今週以内のエントリを最優先
@@ -131,12 +131,12 @@ DB: .local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6
   ```
   → pending 上位 3 件を「**ブログ品質是正 3 本**」として Phase 3 の **Must** に転載する (must-fix レーン優先)。
   → 実行は `/brushup-blog --target queue --next 3` (article-writer が archetype + 図あたり字数で是正 → blog-critic PASS → publish)。
-  → これは毎週の**定常 Must**。少しずつ消化しキュー pending を減らす。仕組み: `docs/02_実装計画/blog-remediation-loop.md`。
+  → これは毎週の**定常 Must**。少しずつ消化しキュー pending を減らす。仕組み: `docs/02_実装計画/06_ブログ品質是正ループ.md`。
 
 - 直近の批判的レビュー・Pre-Mortem ドキュメント
-  ls -t docs/04_レビュー/critical-review/*.md | head -5
-  ls -t docs/04_レビュー/pre-mortem/*.md | head -3
-  → 繰り返し指摘されているパターンを抽出（Read tool または `cat docs/04_レビュー/critical-review/<file>.md` で本文確認）
+  ls -t docs/04_レビュー/*.md | grep -v 'pre-mortem' | head -5
+  ls -t docs/04_レビュー/*-pre-mortem-*.md | head -3
+  → 繰り返し指摘されているパターンを抽出（Read tool または `cat docs/04_レビュー/<file>.md` で本文確認）
 
 - 前週の計画・レビュー ドキュメント + 残タスク自動抽出
   ls -t docs/03_週次運用/週次計画/*.md | head -2
@@ -304,8 +304,8 @@ tags: []
 
 ## 改善ログ pending (今週着手対象)
 
-<!-- docs/02_実装計画/improvement-backlog.md から今週着手する Tier 1/2 エントリを転載。
-     真実源は improvement-backlog.md、当週ビューは週次計画。 -->
+<!-- docs/02_実装計画/03_改善バックログ.md から今週着手する Tier 1/2 エントリを転載。
+     真実源は 03_改善バックログ.md、当週ビューは週次計画。 -->
 | Tier | Metric | ID | Status | Due | Owner |
 |---|---|---|---|---|---|
 | 1 | gsc | T0-DECAY-01 | in-progress | 2026-06-14 | claude |
@@ -324,13 +324,13 @@ tags: []
 ## 批判的レビュー
 
 <!-- Phase 4 の結果を引用形式で記載 -->
-<!-- 関連する critical-review ドキュメントがあれば `../../04_レビュー/critical-review/<file>.md` で参照 -->
+<!-- 関連する critical-review ドキュメントがあれば `../../04_レビュー/<file>.md` で参照 -->
 
 ## 関連ドキュメント・Issue
 
 <!-- 施策 Issue（enhancement ラベル）、Pre-Mortem、NSM 実験、snapshot Issue 等を列挙 -->
 - 前週レビュー: `../週次レビュー/YYYY-W(n-1).md`
-- 前月 Pre-Mortem: `../../04_レビュー/pre-mortem/YYYY-MM-DD-{topic}.md`（該当あれば）
+- 前月 Pre-Mortem: `../../04_レビュー/YYYY-MM-DD-pre-mortem-{topic}.md`（該当あれば）
 - 関連施策 Issue: #NNN（enhancement / auto-generated ラベル）
 
 ## 次週への申し送り候補
@@ -350,14 +350,14 @@ tags: []
 
 - 本スキル出力: `docs/03_週次運用/週次計画/YYYY-Www.md`
 - ペアの週次レビュー: `docs/03_週次運用/週次レビュー/YYYY-Www.md`
-- Phase 4 で参照する批判的レビュー: `docs/04_レビュー/critical-review/*.md`
-- Phase 4 で参照する事前検死: `docs/04_レビュー/pre-mortem/*.md`
+- Phase 4 で参照する批判的レビュー: `docs/04_レビュー/*.md` (type: critical-review)
+- Phase 4 で参照する事前検死: `docs/04_レビュー/*-pre-mortem-*.md`
 
 ## 参照
 
-- `docs/02_実装計画/01_実装ロードマップ.md` — KPI・スプリント目標
+- `docs/02_実装計画/02_実装ロードマップ.md` — KPI・スプリント目標
 - `gh issue list --state open --label enhancement` — 未解決の機能改善 Issue（残存ラベル）
-- `ls -t docs/04_レビュー/critical-review/*.md | head -5` — 過去の批判的指摘
+- `ls -t docs/04_レビュー/*.md | head -5` — 過去の批判的指摘
 - `ls -t docs/03_週次運用/週次計画/*.md | head -5` / `ls -t docs/03_週次運用/週次レビュー/*.md | head -5` — 過去の週次計画・レビュー
 - DB `sns_posts` / `sns_metrics` テーブル — SNS コンテンツ状況・メトリクス
 - `.claude/skills/management/critical-review/SKILL.md` — 批判的レビューの精神

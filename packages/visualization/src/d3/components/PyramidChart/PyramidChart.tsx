@@ -11,7 +11,7 @@ import { useEffect, useRef, useState } from "react";
 
 import type { D3PyramidChartProps } from "../../types/d3";
 import { useD3Tooltip } from "../../hooks/useD3Tooltip";
-import * as d3 from "d3";
+import { select, rollup, sum, stack, stackOffsetDiverging, max, scaleLinear, scaleBand, scaleOrdinal, format } from "d3";
 import { computeChartLayout, computeFontSize, computeMarginsByRatio } from "../../../shared/layout";
 
 
@@ -64,7 +64,7 @@ export function PyramidChart({
     }
 
     // SVGをクリア
-    d3.select(svgRef.current).selectAll("*").remove();
+    select(svgRef.current).selectAll("*").remove();
 
     // データをd3.js用の形式に変換
     // 男性は既に負の値、女性は既に正の値として渡される
@@ -83,10 +83,10 @@ export function PyramidChart({
     ]);
 
     // 各年齢階級のバイアス（負の値の合計）を計算
-    const biasMap = d3.rollup(
+    const biasMap = rollup(
       data,
       (v) =>
-        d3.sum(
+        sum(
           v,
           (d) => d.value * Math.min(0, signs.get(d.category) || 0)
         ),
@@ -117,10 +117,10 @@ export function PyramidChart({
     // スタックを準備（内側から外側へ積み上げ、男性→女性の順）
     // d3.rollupでnameをキーとしてグループ化し、各グループ内でcategoryをキーとしてvalueを集約
     // データは既に正負の値として渡されているので、そのまま使用
-    const rollupData = d3.rollup(
+    const rollupData = rollup(
       data,
       (data) =>
-        d3.rollup(
+        rollup(
           data,
           ([d]) => d.value,
           (d) => d.category
@@ -146,14 +146,13 @@ export function PyramidChart({
       return obj;
     });
 
-    const series = d3
-      .stack<StackDataItem>()
+    const series = stack<StackDataItem>()
       .keys(["男性", "女性"])
       .value((d, category) => {
         // データは既に正負の値として渡されているので、そのまま返す
         return d[category as keyof StackDataItem] as number || 0;
       })
-      .offset(d3.stackOffsetDiverging)(stackData);
+      .offset(stackOffsetDiverging)(stackData);
 
     // スケールを構築（男女対称にするため絶対値の最大でドメインを設定）
     const allValues: number[] = [];
@@ -162,32 +161,28 @@ export function PyramidChart({
         allValues.push(point[0], point[1]);
       });
     });
-    const maxAbs = d3.max(allValues, (v) => Math.abs(v)) ?? 0;
-    const x = d3
-      .scaleLinear()
+    const maxAbs = max(allValues, (v) => Math.abs(v)) ?? 0;
+    const x = scaleLinear()
       .domain([-maxAbs, maxAbs])
       .rangeRound([marginLeft, width - marginRight]);
 
     // y軸のdomainは上から下の順序なので、年齢の高い方が上になるようにそのまま使用
-    const y = d3
-      .scaleBand()
+    const y = scaleBand()
       .domain(bias.map(([name]) => name))
       .rangeRound([marginTop, height - marginBottom])
       .padding(0.1);
 
-    const color = d3
-      .scaleOrdinal()
+    const color = scaleOrdinal()
       .domain(["男性", "女性"])
       .range([maleColor, femaleColor]);
 
     // パーセンテージフォーマッター（値の絶対値をフォーマット）
     const formatValue = ((format) => (x: number) => format(Math.abs(x)))(
-      d3.format(",")
+      format(",")
     );
 
     // SVGコンテナを作成
-    const svg = d3
-      .select(svgRef.current)
+    const svg = select(svgRef.current)
       .attr("viewBox", `0 0 ${width} ${height}`)
       .attr("class", "w-full h-auto")
       .attr("style", `max-width: 100%; height: auto; font: ${baseFontSize}px sans-serif;`);
@@ -233,7 +228,7 @@ export function PyramidChart({
     // クリーンアップ関数
     return () => {
       if (svgRef.current) {
-        d3.select(svgRef.current).selectAll("*").remove();
+        select(svgRef.current).selectAll("*").remove();
       }
     };
   }, [isClient, chartData, width, height, valueFormatter, marginTop, marginRight, marginBottom, marginLeft, baseFontSize, showTooltip, updateTooltipPosition, hideTooltip]);

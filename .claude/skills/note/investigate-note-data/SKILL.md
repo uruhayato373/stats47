@@ -20,7 +20,7 @@ note 記事（B/C/D シリーズ）のデータ調査・分析。相関分析・
 > - `FROM observations WHERE category_code = ?` → `fs.readFileSync('.local/r2/app/stats/<key>/values.json')` をパースして filter
 > - `FROM correlations` → `.local/r2/app/correlation/by-ranking-key/<key>.json` を fetch
 >
-> Phase 8 で本 SKILL.md を R2 fetch ベースに全面 refactor 予定 ([feature-backlog.md](../../../../docs/02_実装計画/feature-backlog.md))。
+> Phase 8 で本 SKILL.md を R2 fetch ベースに全面 refactor 予定 ([04_機能バックログ.md](../../../../docs/02_実装計画/04_機能バックログ.md))。
 
 ## 用途
 

@@ -2,7 +2,8 @@
 
 import { cn } from "@stats47/components";
 
-import * as d3 from "d3";
+import { select, hierarchy, treemap, scaleOrdinal, quantize, interpolateRainbow } from "d3";
+import type { HierarchyRectangularNode } from "d3";
 import { useEffect, useRef } from "react";
 import { useD3Tooltip } from "../../hooks/useD3Tooltip";
 import type { HierarchyDataNode } from "../../types/base";
@@ -27,26 +28,24 @@ export function TreemapChart({
   useEffect(() => {
     if (!svgRef.current || !data?.children?.length) return;
 
-    const svg = d3.select(svgRef.current);
+    const svg = select(svgRef.current);
     svg.selectAll("*").remove();
 
-    const root = d3
-      .hierarchy(data)
+    const root = hierarchy(data)
       .sum((d) => (d as HierarchyDataNode).value ?? 0)
       .sort((a, b) => (b.value ?? 0) - (a.value ?? 0));
 
-    const treemap = d3
-      .treemap<HierarchyDataNode>()
+    const treemapLayout = treemap<HierarchyDataNode>()
       .size([width, height])
       .paddingOuter(Math.max(1, Math.round(width * 0.005)))
       .paddingInner(Math.max(1, Math.round(width * 0.0017)))
       .round(true);
 
-    treemap(root);
+    treemapLayout(root);
 
-    const color = d3.scaleOrdinal(
-      d3.quantize(
-        d3.interpolateRainbow,
+    const color = scaleOrdinal(
+      quantize(
+        interpolateRainbow,
         data.children?.length ? data.children.length + 1 : 11
       )
     );
@@ -56,18 +55,18 @@ export function TreemapChart({
       .data(root.leaves())
       .join("g")
       .attr("transform", (d) => {
-        const node = d as d3.HierarchyRectangularNode<HierarchyDataNode>;
+        const node = d as HierarchyRectangularNode<HierarchyDataNode>;
         return `translate(${node.x0},${node.y0})`;
       });
 
     cell
       .append("rect")
       .attr("width", (d) => {
-        const node = d as d3.HierarchyRectangularNode<HierarchyDataNode>;
+        const node = d as HierarchyRectangularNode<HierarchyDataNode>;
         return node.x1 - node.x0;
       })
       .attr("height", (d) => {
-        const node = d as d3.HierarchyRectangularNode<HierarchyDataNode>;
+        const node = d as HierarchyRectangularNode<HierarchyDataNode>;
         return node.y1 - node.y0;
       })
       .attr("fill", (d) => color((d.data as HierarchyDataNode).name))
@@ -87,7 +86,7 @@ export function TreemapChart({
       .on("mousemove", (event) => updateTooltipPosition(event))
       .on("mouseleave", () => hideTooltip());
 
-    const fontSize = (d: d3.HierarchyRectangularNode<HierarchyDataNode>) => {
+    const fontSize = (d: HierarchyRectangularNode<HierarchyDataNode>) => {
       const w = d.x1 - d.x0;
       const h = d.y1 - d.y0;
       return Math.min(12, Math.sqrt(w * h) / 8);
@@ -95,25 +94,25 @@ export function TreemapChart({
 
     cell
       .filter((d) => {
-        const node = d as d3.HierarchyRectangularNode<HierarchyDataNode>;
+        const node = d as HierarchyRectangularNode<HierarchyDataNode>;
         const minW = width * 0.066;
         const minH = height * 0.05;
         return node.x1 - node.x0 > minW && node.y1 - node.y0 > minH;
       })
       .append("text")
       .attr("x", (d) => {
-        const node = d as d3.HierarchyRectangularNode<HierarchyDataNode>;
+        const node = d as HierarchyRectangularNode<HierarchyDataNode>;
         return (node.x1 - node.x0) / 2;
       })
       .attr("y", (d) => {
-        const node = d as d3.HierarchyRectangularNode<HierarchyDataNode>;
+        const node = d as HierarchyRectangularNode<HierarchyDataNode>;
         return (node.y1 - node.y0) / 2;
       })
       .attr("dy", "0.35em")
       .attr("text-anchor", "middle")
       .attr("fill", "#333")
       .style("font-size", (d) =>
-        `${fontSize(d as d3.HierarchyRectangularNode<HierarchyDataNode>)}px`
+        `${fontSize(d as HierarchyRectangularNode<HierarchyDataNode>)}px`
       )
       .style("pointer-events", "none")
       .text((d) => (d.data as HierarchyDataNode).name);

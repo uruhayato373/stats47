@@ -39,7 +39,7 @@ primary_agent: strategy-advisor
 
 - 3月・6月・9月・12月の **15日以降** → `/pre-mortem` を追加実行
 - それ以外 → `/weekly-review` のみ
-- 前回の pre-mortem が同月に既に存在する場合（`ls docs/04_レビュー/pre-mortem/{YYYY-MM}-*.md 2>/dev/null` でヒットする）→ スキップ
+- 前回の pre-mortem が同月に既に存在する場合（`ls docs/04_レビュー/{YYYY-MM}-pre-mortem-*.md 2>/dev/null` でヒットする）→ スキップ
 
 ### 3. 複合的な依頼の場合
 
@@ -74,26 +74,26 @@ primary_agent: strategy-advisor
 |---|---|---|---|
 | `/weekly-review` | プロジェクト進捗 | 毎週 | `docs/03_週次運用/週次レビュー/YYYY-Www.md` |
 | `/weekly-plan` | 来週の計画 | 毎週 | `docs/03_週次運用/週次計画/YYYY-Www.md` |
-| `/pre-mortem` | プロジェクトリスク + 対策 | 四半期 | `docs/04_レビュー/pre-mortem/YYYY-MM-DD-{topic}.md` |
-| `/seo-audit` | SEO 総合監査 | 月次 | `docs/04_レビュー/seo-audit/YYYY-MM-DD.md` |
+| `/pre-mortem` | プロジェクトリスク + 対策 | 四半期 | `docs/04_レビュー/YYYY-MM-DD-pre-mortem-{topic}.md` |
+| `/seo-audit` | SEO 総合監査 | 月次 | `docs/04_レビュー/YYYY-MM-DD-seo-audit.md` |
 
 ### 随時レビュー
 
 | スキル | 対象 | トリガー | 出力先 |
 |---|---|---|---|
-| `/blog-review --mode expert` | ブログ記事（データ正確性） | 記事パス指定 | `docs/04_レビュー/expert-review/{slug}.md` |
+| `/blog-review --mode expert` | ブログ記事（データ正確性） | 記事パス指定 | `docs/04_レビュー/{slug}-expert-review.md` |
 | `/panel-review` | ブログ記事企画 | 企画・アイデア | stdout |
 | `/blog-review --mode proofread` | 記事公開前チェック | 公開前 | stdout |
-| `/critical-review` | 設計書・計画書 | ドキュメントパス指定 | `docs/04_レビュー/critical-review/YYYY-MM-DD-{topic}.md` |
+| `/critical-review` | 設計書・計画書 | ドキュメントパス指定 | `docs/04_レビュー/YYYY-MM-DD-{topic}.md` |
 | `/ui-panel-review` | Web ページ UI/UX | URL 指定 | stdout |
-| `/review-feature --scope app <route\|all>` | App Router 層の品質 | ルート指定 or all | `docs/04_レビュー/dev-review/app-YYYY-MM-DD.md` |
-| `/review-feature --scope feature <name>` | feature ドメイン品質 | feature 名指定 | `docs/04_レビュー/dev-review/feature-YYYY-MM-DD.md` |
-| `/review-feature --scope feature ads` | ads ドメイン品質 | 随時 | `docs/04_レビュー/dev-review/feature-ads-YYYY-MM-DD.md` |
-| `/review-feature --scope ui-consistency` | UI 横断の一貫性 | 整合性の疑問 | `docs/04_レビュー/dev-review/ui-consistency-YYYY-MM-DD.md` |
-| `/review-feature --scope packages` | packages/ コード品質 | コード変更後 | `docs/04_レビュー/dev-review/packages-YYYY-MM-DD.md` |
-| `/review-feature --scope types` | 型安全性 | tsc エラー時 | `docs/04_レビュー/dev-review/types-YYYY-MM-DD.md` |
+| `/review-feature --scope app <route\|all>` | App Router 層の品質 | ルート指定 or all | `docs/04_レビュー/YYYY-MM-DD-dev-review-app.md` |
+| `/review-feature --scope feature <name>` | feature ドメイン品質 | feature 名指定 | `docs/04_レビュー/YYYY-MM-DD-dev-review-feature.md` |
+| `/review-feature --scope feature ads` | ads ドメイン品質 | 随時 | `docs/04_レビュー/YYYY-MM-DD-dev-review-feature-ads.md` |
+| `/review-feature --scope ui-consistency` | UI 横断の一貫性 | 整合性の疑問 | `docs/04_レビュー/YYYY-MM-DD-dev-review-ui-consistency.md` |
+| `/review-feature --scope packages` | packages/ コード品質 | コード変更後 | `docs/04_レビュー/YYYY-MM-DD-dev-review-packages.md` |
+| `/review-feature --scope types` | 型安全性 | tsc エラー時 | `docs/04_レビュー/YYYY-MM-DD-dev-review-types.md` |
 | `/review-tests` | テストの確認・作成 | コード変更後 | stdout |
-| `/sns-weekly-report` | SNS 週次パフォーマンス | 毎週 | `docs/04_レビュー/sns-weekly-report/YYYY-Www.md` |
+| `/sns-weekly-report` | SNS 週次パフォーマンス | 毎週 | `docs/04_レビュー/YYYY-Www-sns-weekly.md` |
 
 ### 過去分の参照
 

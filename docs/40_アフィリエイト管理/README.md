@@ -26,7 +26,7 @@ impression / click を継続的に増やすための計測ループ:
 - **管理画面 (単体 HTML)**: `npx tsx .claude/scripts/ads/build-affiliate-dashboard.ts`
   — SSOT から自己完結 HTML `affiliate-dashboard.html` を生成。ブラウザで開くとバナー画像プレビュー付きで
   全枠を確認でき、カテゴリ / 配置 / adType / active 状態で絞り込める (本番未変更・いつでも再生成可)
-- **改善バックログ (人間向け)**: `docs/02_実装計画/improvement-backlog.md` (AFF-NN section)
+- **改善バックログ (人間向け)**: `docs/02_実装計画/03_改善バックログ.md` (AFF-NN section)
 - **最適化スキル**: `/affiliate-improvement` (GA4 imp/click → CTR 分析 → 弱枠特定 → 施策記録、担当 `adsense-analyst`)
 - **計測**: GA4 `ad_impression` / `affiliate_click`（`apps/web/src/lib/analytics/events.ts`）
 

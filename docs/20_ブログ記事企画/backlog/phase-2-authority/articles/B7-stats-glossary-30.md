@@ -15,7 +15,7 @@ status: outline
 - 副: 「相関 回帰 違い」「公務員 統計入門」
 
 ## 独自角度
-note にない **辞書系記事**。Phase 2 backlink asset L2 (`docs/02_実装計画/phase-2/backlink-assets/L2-stats-glossary-50.csv`) の高優先 30 語を抽出して記事化。
+note にない **辞書系記事**。Phase 2 被リンク戦略の linkable asset L2「統計用語辞典」（[`docs/02_実装計画/91_将来構想_Phase2.md`](../../../../02_実装計画/91_将来構想_Phase2.md)）の高優先 30 語を抽出して記事化。
 
 ## 構成
 1. 導入 (300字): 「議会で『相関と因果は違うんですよ』と言われた時の即答リスト」

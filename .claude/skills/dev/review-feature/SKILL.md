@@ -51,9 +51,9 @@ $ARGUMENTS — --scope <name> [scope-specific args]
 - パネリストのキャラクターを維持する（SEO 専門家がアクセシビリティを語る等は NG）
 - **コードを実際に読んでからレビューする**。推測でレビューしない
 
-### 出力先（docs/04_レビュー/dev-review/）
+### 出力先（docs/04_レビュー/）
 
-すべてのレビューは `docs/04_レビュー/dev-review/{scope}-{YYYY-MM-DD}.md` に Write tool で書き出す。frontmatter は以下:
+すべてのレビューは `docs/04_レビュー/{YYYY-MM-DD}-dev-review-{scope}.md` に Write tool で書き出す。frontmatter は以下:
 
 ```yaml
 ---
@@ -65,13 +65,13 @@ status: active
 ```
 
 ファイル名例:
-- `feature-ads-2026-05-04.md`
-- `app-ranking-2026-05-04.md`
-- `packages-all-2026-05-04.md`
-- `types-2026-05-04.md`
-- `ui-consistency-2026-05-04.md`
+- `2026-05-04-dev-review-feature-ads.md`
+- `2026-05-04-dev-review-app-ranking.md`
+- `2026-05-04-dev-review-packages-all.md`
+- `2026-05-04-dev-review-types.md`
+- `2026-05-04-dev-review-ui-consistency.md`
 
-過去のレビューは `ls -t docs/04_レビュー/dev-review/*.md | head -5` で参照できる。
+過去のレビューは `ls -t docs/04_レビュー/*-dev-review-*.md | head -5` で参照できる。
 
 ### 出力フォーマット（共通骨格）
 

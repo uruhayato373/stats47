@@ -2,9 +2,9 @@
 
 import { useState } from "react";
 
-import Image from "next/image";
-
 import { cn } from "@stats47/components";
+
+import { ThemeAwareImage } from "@/components/atoms/ThemeAwareImage";
 
 interface RankingThumbnailProps {
     /** オプション: ベースとなる画像パス（拡張子とテーマサフィックスを除く） */
@@ -20,10 +20,10 @@ interface RankingThumbnailProps {
 }
 
 /**
- * ランキングのサムネイル画像を表示するクライアントコンポーネント
- * 画像の読み込み失敗をハンドリングします。
- * baseSrcを指定することで、CSSレベルでのdark/light切替を自動で行います。
- * Tailwind の class-based dark mode に対応（dark: クラスで切替）。
+ * ランキングのサムネイル画像を表示するクライアントコンポーネント。
+ * ThemeAwareImage を利用して light/dark を CSS hidden ではなく
+ * 1 枚だけ描画する（二重ダウンロード防止）。
+ * baseSrc を指定すると -light.png / -dark.png を自動解決する。
  */
 export function RankingThumbnail({ baseSrc, lightSrc, darkSrc, src, alt, className }: RankingThumbnailProps) {
     const [error, setError] = useState(false);
@@ -32,48 +32,43 @@ export function RankingThumbnail({ baseSrc, lightSrc, darkSrc, src, alt, classNa
     const resolvedDark = darkSrc || (baseSrc ? `${baseSrc}-dark.png` : undefined);
 
     if (error || (!resolvedLight && !resolvedDark)) {
-        return <div className={cn("bg-muted w-full h-full flex items-center justify-center text-muted-foreground/50 text-[10px]", className)}>No Image</div>;
+        return (
+            <div className={cn("bg-muted w-full h-full flex items-center justify-center text-muted-foreground/50 text-[10px]", className)}>
+                No Image
+            </div>
+        );
     }
 
-    const imgClassName = cn(
+    const imgClass = cn(
         "object-cover w-full h-full transition-transform duration-300 group-hover:scale-105",
         className
     );
 
     if (resolvedDark && resolvedLight) {
+        // ThemeAwareImage: 1 枚だけ描画（dark/light を CSS hidden で重複させない）
         return (
-            <>
-                <Image
-                    src={resolvedLight}
-                    alt={alt}
-                    fill
-                    sizes="(max-width: 768px) 50vw, 25vw"
-                    className={cn(imgClassName, "dark:hidden")}
-                    onError={() => setError(true)}
-                    unoptimized
-                />
-                <Image
-                    src={resolvedDark}
-                    alt={alt}
-                    fill
-                    sizes="(max-width: 768px) 50vw, 25vw"
-                    className={cn(imgClassName, "hidden dark:block")}
-                    onError={() => setError(true)}
-                    unoptimized
-                />
-            </>
+            <ThemeAwareImage
+                lightSrc={resolvedLight}
+                darkSrc={resolvedDark}
+                alt={alt}
+                fill
+                sizes="(max-width: 768px) 50vw, 25vw"
+                className={imgClass}
+                onError={() => setError(true)}
+            />
         );
     }
 
+    // single source（dark なし）
     return (
-        <Image
-            src={resolvedLight || resolvedDark || ""}
+        <ThemeAwareImage
+            lightSrc={resolvedLight || resolvedDark || ""}
+            darkSrc={resolvedLight || resolvedDark || ""}
             alt={alt}
             fill
             sizes="(max-width: 768px) 50vw, 25vw"
-            className={imgClassName}
+            className={imgClass}
             onError={() => setError(true)}
-            unoptimized
         />
     );
 }

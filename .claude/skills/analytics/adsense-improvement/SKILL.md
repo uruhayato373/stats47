@@ -1,10 +1,10 @@
 ---
 name: adsense-improvement
-description: Google AdSense の広告収益・RPM・CTR・ビューアビリティを docs/02_実装計画/improvement-backlog.md で追跡し、週次 snapshot と施策の効果判定を記録する。Use when user says "AdSense改善", "広告収益改善", "RPM改善", "AdSense記録".
+description: Google AdSense の広告収益・RPM・CTR・ビューアビリティを docs/02_実装計画/03_改善バックログ.md で追跡し、週次 snapshot と施策の効果判定を記録する。Use when user says "AdSense改善", "広告収益改善", "RPM改善", "AdSense記録".
 primary_agent: adsense-analyst
 ---
 
-AdSense の週次メトリクス（Earnings / Page RPM / CTR / Impressions / Active View）を **`docs/02_実装計画/improvement-backlog.md` で時系列追跡**し、打った施策と効果を記録するスキル。
+AdSense の週次メトリクス（Earnings / Page RPM / CTR / Impressions / Active View）を **`docs/02_実装計画/03_改善バックログ.md` で時系列追跡**し、打った施策と効果を記録するスキル。
 
 広告配置・フォーマット変更・コンテンツ追加の効果は 1〜4 週間で現れるため、「何をいつしたか」「数値がどう動いたか」「次の候補は何か」を 1 ファイルに append-only で記録する。
 
@@ -14,11 +14,11 @@ AdSense の週次メトリクス（Earnings / Page RPM / CTR / Impressions / Act
 |---|---|---|
 | 生メトリクス CSV | git: `reference/snapshots/YYYY-Www/` | immutable、diff 比較、オフライン可 |
 | 目標しきい値設定 | git: `reference/budgets.json` | プロジェクト設定 |
-| 施策（1 施策 1 section、人間向け要約） | `docs/02_実装計画/improvement-backlog.md` | Obsidian で時系列・status 別に絞り込み可能 |
+| 施策（1 施策 1 section、人間向け要約） | `docs/02_実装計画/03_改善バックログ.md` | Obsidian で時系列・status 別に絞り込み可能 |
 | 詳細ログ（agent 用、検証コマンド・仮説） | `reference/improvement-log.md` | append-only、agent が深掘り参照 |
 | 週次推移サマリ | `.claude/state/metrics/adsense/LATEST.md` / `history.csv` | GitHub Actions が自動更新 |
 
-→ **1 層構造**: `docs/02_実装計画/improvement-backlog.md` (簡易表) + agent 用詳細は `.claude/skills/analytics/adsense-improvement/reference/improvement-log.md`。
+→ **1 層構造**: `docs/02_実装計画/03_改善バックログ.md` (簡易表) + agent 用詳細は `.claude/skills/analytics/adsense-improvement/reference/improvement-log.md`。
 
 ## frontmatter / status
 
@@ -61,7 +61,7 @@ AdSense メトリクス取得の優先順:
 ```
 以下を並列に実行して要約:
 1. reference/snapshots/ 配下の最新 YYYY-Www ディレクトリの CSV を Read
-2. docs/02_実装計画/improvement-backlog.md を Read し status: pending / in-progress の section を抽出
+2. docs/02_実装計画/03_改善バックログ.md を Read し status: pending / in-progress の section を抽出
 3. reference/improvement-log.md を Read し未判定の検証コマンド一覧を抽出
 4. .claude/state/metrics/adsense/LATEST.md を Read し週次推移を取得
 
@@ -99,7 +99,7 @@ AdSense メトリクス取得の優先順:
    - 前月同時期（同日数分）と比較
 
 6. 進行中施策の効果判定（最重要）:
-   docs/02_実装計画/improvement-backlog.md を Read し status: pending の section を抽出。
+   docs/02_実装計画/03_改善バックログ.md を Read し status: pending の section を抽出。
    各施策に対して:
    - 経過日数 = observe 実行日 - deployed_at
    - 実測 delta = 最新値 - デプロイ時点の値（前週 snapshot から読む）
@@ -109,7 +109,7 @@ AdSense メトリクス取得の優先順:
      * 経過 ≥ 14 かつ 20-80% → status: effect/partial
      * 経過 ≥ 14 かつ < 20% → status: effect/none
      * 逆方向 → status: effect/adverse
-   - 判定結果を docs/02_実装計画/improvement-backlog.md の該当 section の「実測」「判定」欄に Edit insert:
+   - 判定結果を docs/02_実装計画/03_改善バックログ.md の該当 section の「実測」「判定」欄に Edit insert:
      ```
      ### 実測
      - 経過日数: N 日
@@ -143,7 +143,7 @@ AdSense メトリクス取得の優先順:
    - ポリシーチェック（配置・ラベリング・Auto ads との矛盾）
    - verification_command（copy-pasteable な fetch-adsense-data / API 呼び出し）
 
-2. docs/02_実装計画/improvement-backlog.md を Read し、見出し直下（最新を上）に以下 section を Edit insert:
+2. docs/02_実装計画/03_改善バックログ.md を Read し、見出し直下（最新を上）に以下 section を Edit insert:
 
    ```markdown
    ## <施策タイトル>
@@ -172,7 +172,7 @@ AdSense メトリクス取得の優先順:
 #### mode = next
 
 ```
-1. docs/02_実装計画/improvement-backlog.md を Read し status: pending を除いた施策 + 過去 effect/full の派生候補を抽出
+1. docs/02_実装計画/03_改善バックログ.md を Read し status: pending を除いた施策 + 過去 effect/full の派生候補を抽出
 2. reference/improvement-log.md の「次の候補」「仮説」セクションから未着手を拾う
 3. 最新 snapshot の「次のアクション」候補も合わせる
 
@@ -189,7 +189,7 @@ AdSense 特有の改善パターン:
 
 ### Step 3: 共通ルール
 
-- **docs/02_実装計画/improvement-backlog.md は append-only** — section の追加・status の更新のみ。過去判定の改竄は禁止
+- **docs/02_実装計画/03_改善バックログ.md は append-only** — section の追加・status の更新のみ。過去判定の改竄は禁止
 - **snapshots/YYYY-Www/ も append-only** — 過去の CSV は改変しない
 - **日付は絶対日付** — 「今週」「先週」は使わない
 - **数値はソース明示** — "snapshots/2026-W17/overview.csv" のような相対パス
@@ -197,7 +197,7 @@ AdSense 特有の改善パターン:
 - **想定効果値はデプロイ前に書く** — 後付けバイアス防止
 - **ポリシー遵守の確認は必須** — 配置変更時は AdSense ポリシーに抵触しないこと
 - **週次 /weekly-review から observe モードが自動呼び出し** される想定
-- **1 層構造を維持** — `docs/02_実装計画/improvement-backlog.md` (簡易表)、reference/improvement-log.md は agent が深掘りする詳細
+- **1 層構造を維持** — `docs/02_実装計画/03_改善バックログ.md` (簡易表)、reference/improvement-log.md は agent が深掘りする詳細
 
 ## 参照パターン
 
@@ -207,10 +207,10 @@ ls -t .claude/skills/analytics/adsense-improvement/reference/snapshots/ | head -
 cat .claude/state/metrics/adsense/LATEST.md
 
 # 進行中（pending）施策
-cat docs/02_実装計画/improvement-backlog.md | grep -B1 -A4 'status.*pending'
+cat docs/02_実装計画/03_改善バックログ.md | grep -B1 -A4 'status.*pending'
 
 # 効果測定済み施策
-cat docs/02_実装計画/improvement-backlog.md | grep -B1 'status.*effect/'
+cat docs/02_実装計画/03_改善バックログ.md | grep -B1 'status.*effect/'
 
 # 詳細ログ
 cat .claude/skills/analytics/adsense-improvement/reference/improvement-log.md
@@ -242,7 +242,7 @@ cat .claude/skills/analytics/adsense-improvement/reference/improvement-log.md
 
 ## 前提
 
-- `docs/02_実装計画/improvement-backlog.md` が存在すること（施策 ID は `ADSENSE-*` または `AFF-*`）
+- `docs/02_実装計画/03_改善バックログ.md` が存在すること（施策 ID は `ADSENSE-*` または `AFF-*`）
 - `reference/budgets.json` / `reference/snapshots/` / `reference/improvement-log.md` 初期化済
 - AdSense Management API の OAuth 設定済（`.env.local` に CLIENT_ID / SECRET / REFRESH_TOKEN / ACCOUNT_ID）
 - Publisher ID: `ca-pub-7995274743017484`

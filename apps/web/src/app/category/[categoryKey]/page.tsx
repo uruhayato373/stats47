@@ -45,6 +45,9 @@ import { generateOGMetadata } from "@/lib/metadata/og-generator";
 
 import type { Metadata } from "next";
 
+/** 24時間 ISR */
+export const revalidate = 86400;
+
 /** カテゴリ Key → アフィリエイト用 fallback タグ */
 const CATEGORY_FALLBACK_TAGS: Record<string, string[]> = {
   population: ["population", "household-structure"],

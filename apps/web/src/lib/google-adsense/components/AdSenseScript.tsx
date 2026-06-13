@@ -36,16 +36,21 @@ export function AdSenseScript() {
       document.head.appendChild(script);
     };
 
-    // メインコンテンツの描画を優先し、アイドル時にスクリプトを読み込む
-    const timer = setTimeout(() => {
+    // メインコンテンツの描画を優先し、アイドル時にスクリプトを読み込む。
+    // 3000ms 遅延は広告の遅延展開 → CLS を引き起こしていたため requestIdleCallback のみに変更。
+    // ブラウザがアイドルになったタイミングで読み込み、強制遅延は排除する。
+    let rafId: number;
+    const schedule = () => {
       if ("requestIdleCallback" in window) {
-        requestIdleCallback(load);
+        (window as Window & typeof globalThis).requestIdleCallback(load, { timeout: 4000 });
       } else {
         load();
       }
-    }, 3000);
+    };
+    // rAF で 1 フレーム待ち、初期レイアウト確定後にアイドルキューに積む
+    rafId = requestAnimationFrame(schedule);
 
-    return () => clearTimeout(timer);
+    return () => cancelAnimationFrame(rafId);
   }, [clientId, isEnabled]);
 
   // このコンポーネントはUIをレンダリングしない

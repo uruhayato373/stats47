@@ -4,7 +4,7 @@ description: >
   特定の課題(goal)について「実装 → 計測 → 評価・改善」のサイクルを反復して、終了条件を満たすまで漏れなく追跡するメタスキル。
   既存の improvement 系スキル(performance-improvement / gsc-improvement / ga4-improvement / adsense-improvement / sns-metrics-improvement / cloudflare-cost-improvement)を統括する。
   define(定義) → cycle(サイクル実行) → status(進捗確認) → close(完了 or 撤退) の流れで、サイクルごとに人間確認を挟みつつ goal 達成まで運用する。
-  記録は docs/04_レビュー/goals/<slug>-YYYY-MM-DD.md に 1 goal 1 ファイルで append-only。
+  記録は docs/04_レビュー/<slug>-YYYY-MM-DD-goals.md に 1 goal 1 ファイルで append-only。
   Use when user asks to [/goal, 課題達成, 目標達成, サイクル運用, やり切る, 終了条件まで反復, PSI 改善のループ管理, goal 進捗].
 primary_agent: strategy-advisor
 ---
@@ -31,7 +31,7 @@ stats47 には改善ループスキル(performance-improvement / gsc-improvement
 
 施策実体・計測コマンド・improvement-log は各 improvement スキルに**委譲**する(車輪の再発明禁止)。本スキルはサイクル全体の制御・記録に集中する。
 
-詳細設計は `docs/02_実装計画/archive/goal-skill-design.md` を参照。
+詳細設計は git 履歴（旧 `docs/02_実装計画/archive/goal-skill-design.md`）を参照。
 
 ---
 
@@ -61,7 +61,7 @@ stats47 には改善ループスキル(performance-improvement / gsc-improvement
 | `.claude/skills/management/goal/scripts/create-goal.cjs` | define 時のテンプレ展開・slug 重複チェック |
 | `.claude/skills/management/goal/scripts/update-cycle.cjs` | cycle の md / meta.json 更新 |
 | `.claude/skills/management/goal/scripts/status-report.cjs` | status のテーブル生成 |
-| `docs/04_レビュー/goals/<slug>-YYYY-MM-DD.md` | **goal 記録ファイル**(append-only、人間向け) |
+| `docs/04_レビュー/<slug>-YYYY-MM-DD-goals.md` | **goal 記録ファイル**(append-only、人間向け) |
 | `.claude/state/goals/<slug>/meta.json` | ステータス・cycle 数等の機械可読版 |
 
 ---
@@ -104,13 +104,13 @@ abandoned  abandoned   abandoned   next_cycle | success | revert
    - 既存の最新計測データが `.claude/state/metrics/<metric>/` にあれば使う
    - なければ「ベースライン計測を先に実行してください」と促す
 5. `node .claude/skills/management/goal/scripts/create-goal.cjs --slug <slug> --metric <metric> --title "<title>" --success-criteria "<criteria>" --abort-criteria "<criteria>" --max-cycles <N>` を実行
-6. 生成された md(`docs/04_レビュー/goals/<slug>-YYYY-MM-DD.md`)を表示
+6. 生成された md(`docs/04_レビュー/<slug>-YYYY-MM-DD-goals.md`)を表示
 7. ユーザーに「次サイクルを開始しますか?(`/goal cycle <slug>`)」と問う
 
 **出力**:
 ```
 ✅ Goal 登録完了: <slug>
-   md: docs/04_レビュー/goals/<slug>-YYYY-MM-DD.md
+   md: docs/04_レビュー/<slug>-YYYY-MM-DD-goals.md
    meta: .claude/state/goals/<slug>/meta.json
    ベースライン: <値>
 次: /goal cycle <slug>
@@ -147,7 +147,7 @@ abandoned  abandoned   abandoned   next_cycle | success | revert
    - `reference/cycle-decision-tree.md` を Read して effect 4 値の判定基準を提示
    - AskUserQuestion で effect 判定を確定(full / partial / none / adverse / pending)
    - 判定 = adverse の場合: 「revert PR を作成してください」と促す
-   - md(`docs/04_レビュー/goals/<slug>-YYYY-MM-DD.md`)の cycle セクションに append:
+   - md(`docs/04_レビュー/<slug>-YYYY-MM-DD-goals.md`)の cycle セクションに append:
      - 仮説 / 想定効果 / 施策(PR) / デプロイ日 / 計測(取得コマンド・ソース) / 判定 / 次サイクル
    - `node .claude/skills/management/goal/scripts/update-cycle.cjs --slug <slug> --cycle N --status judged --effect <effect>` で meta.json 更新
 6. **判定完了後の自動判定**:
@@ -232,7 +232,7 @@ abandoned  abandoned   abandoned   next_cycle | success | revert
 ```
 ✅ Goal クローズ完了: <slug> → CLOSED-<種別>
    学習資産を /knowledge に移管しました。
-   md: docs/04_レビュー/goals/<slug>-YYYY-MM-DD.md
+   md: docs/04_レビュー/<slug>-YYYY-MM-DD-goals.md
 ```
 
 ---
@@ -320,4 +320,4 @@ If verdict needs justification, add a Reason column with ≤ 8 words.
 - `.claude/rules/agent-output-contract.md` — Agent 出力契約
 - `.claude/skills/management/knowledge/SKILL.md` — 教訓の蓄積
 - `.claude/skills/analytics/performance-improvement/reference/improvement-log.md` — PSI 改善履歴(連携例)
-- `docs/02_実装計画/archive/goal-skill-design.md` — 本スキルの設計プラン(承認済)
+- 本スキルの設計プラン(承認済) — git 履歴（旧 `docs/02_実装計画/archive/goal-skill-design.md`）

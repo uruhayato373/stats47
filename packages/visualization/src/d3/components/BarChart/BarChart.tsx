@@ -1,6 +1,6 @@
 "use client";
 
-import * as d3 from "d3";
+import { schemeTableau10, scaleBand, scaleLinear, scaleOrdinal, axisTop, axisLeft, max, stack, select } from "d3";
 import { useEffect, useRef } from "react";
 import { cn } from "@stats47/components";
 import { computeChartLayout, computeFontSize, computeMarginsByRatio } from "../../../shared/layout";
@@ -28,7 +28,7 @@ export function BarChart({
     marginLeft: propsMarginLeft,
     xLabel,
     yLabel,
-    colors = d3.schemeTableau10,
+    colors = schemeTableau10,
     valueFormat = (d) => d.toLocaleString(),
     unit = "",
     title,
@@ -59,10 +59,10 @@ export function BarChart({
     useEffect(() => {
         if (!svgRef.current || data.length === 0) return;
 
-        const svg = d3.select(svgRef.current);
+        const svg = select(svgRef.current);
         svg.selectAll("*").remove();
 
-        const y0 = d3.scaleBand()
+        const y0 = scaleBand()
             .domain(data.map(d => String(d[indexBy])))
             .range([marginTop, height - marginBottom])
             .padding(0.1);
@@ -71,21 +71,21 @@ export function BarChart({
 
         if (hasKeys && keys && mode === "grouped") {
             // --- グループ棒グラフ（並列表示）---
-            const y1 = d3.scaleBand()
+            const y1 = scaleBand()
                 .domain(keys)
                 .range([0, y0.bandwidth()])
                 .padding(0.05);
 
-            const computedMax = d3.max(data, d => d3.max(keys, k => Number(d[k]) || 0)) ?? 0;
-            const x = d3.scaleLinear()
+            const computedMax = max(data, d => max(keys, k => Number(d[k]) || 0)) ?? 0;
+            const x = scaleLinear()
                 .domain(xDomainProp ?? [0, computedMax])
                 .range([marginLeft, width - marginRight]);
-            const color = d3.scaleOrdinal<string>().domain(keys).range(colors);
+            const color = scaleOrdinal<string>().domain(keys).range(colors);
 
-            const xAxis = d3.axisTop(x)
+            const xAxis = axisTop(x)
                 .ticks(innerWidth / 80)
                 .tickFormat(d => valueFormat(d as number));
-            const yAxis = d3.axisLeft(y0).tickSizeOuter(0);
+            const yAxis = axisLeft(y0).tickSizeOuter(0);
 
             g.append("g")
                 .selectAll("g")
@@ -134,17 +134,17 @@ export function BarChart({
 
         } else if (hasKeys && keys) {
             // --- 積み上げ棒グラフ ---
-            const series = d3.stack<ChartDataNode>().keys(keys)(data);
-            const computedMax = d3.max(series, d => d3.max(d, d => d[1])) ?? 0;
-            const x = d3.scaleLinear()
+            const series = stack<ChartDataNode>().keys(keys)(data);
+            const computedMax = max(series, d => max(d, d => d[1])) ?? 0;
+            const x = scaleLinear()
                 .domain(xDomainProp ?? [0, computedMax])
                 .range([marginLeft, width - marginRight]);
-            const color = d3.scaleOrdinal<string>().domain(keys).range(colors);
+            const color = scaleOrdinal<string>().domain(keys).range(colors);
 
-            const xAxis = d3.axisTop(x)
+            const xAxis = axisTop(x)
                 .ticks(innerWidth / 80)
                 .tickFormat(d => valueFormat(d as number));
-            const yAxis = d3.axisLeft(y0).tickSizeOuter(0);
+            const yAxis = axisLeft(y0).tickSizeOuter(0);
 
             g.append("g")
                 .selectAll("g")
@@ -201,16 +201,16 @@ export function BarChart({
             // Legend is rendered as HTML below the SVG
         } else {
             // --- 単一系列の横棒グラフ（Observable Horizontal Bar Chart パターン） ---
-            const xMax = d3.max(data, d => Number(d[valueKey])) ?? 0;
-            const x = d3.scaleLinear()
+            const xMax = max(data, d => Number(d[valueKey])) ?? 0;
+            const x = scaleLinear()
                 .domain(xDomainProp ?? [0, xMax])
                 .range([marginLeft, width - marginRight]);
             const barColor = (colors[0] as string) ?? "#888";
 
-            const xAxis = d3.axisTop(x)
+            const xAxis = axisTop(x)
                 .ticks(innerWidth / 80)
                 .tickFormat(d => valueFormat(d as number));
-            const yAxis = d3.axisLeft(y0).tickSizeOuter(0);
+            const yAxis = axisLeft(y0).tickSizeOuter(0);
 
             g.append("g")
                 .selectAll("rect")

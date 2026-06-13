@@ -129,7 +129,7 @@ YouTube → Instagram → X → note.com → サイト → 各 SNS のフォロ�
 
 ### Step 6: critical-review レポートを Write する
 
-レビュー本文を `docs/04_レビュー/critical-review/{YYYY-MM-DD}-growth-loops.md` に Write tool で出力する。日付は今日（JST）の `YYYY-MM-DD` を使用する。
+レビュー本文を `docs/04_レビュー/{YYYY-MM-DD}-growth-loops.md` に Write tool で出力する。日付は今日（JST）の `YYYY-MM-DD` を使用する。
 
 frontmatter は以下を必ず含める:
 
@@ -149,14 +149,14 @@ status: active
 過去のループ設計変遷は以下で確認:
 
 ```bash
-ls -t docs/04_レビュー/critical-review/*.md | head -5
+ls -t docs/04_レビュー/*.md | head -5
 ```
 
-旧 GitHub Issue 運用は廃止: critical-review レポートは `docs/04_レビュー/critical-review/` に蓄積する。
+旧 GitHub Issue 運用は廃止: critical-review レポートは `docs/04_レビュー/` に蓄積する。
 
 ## 参照
 
-- `docs/02_実装計画/01_実装ロードマップ.md` — KPI・スプリント目標
+- `docs/02_実装計画/02_実装ロードマップ.md` — KPI・スプリント目標
 - D1 `sns_posts` / `sns_metrics` テーブル — SNS 投稿状況・メトリクス
 - `.claude/skills/management/weekly-plan/SKILL.md` — 週次計画
 - 原典: Ognjen Boskovic の Growth Loops フレームワーク

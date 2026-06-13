@@ -2,7 +2,8 @@
 
 import { cn } from "@stats47/components";
 
-import * as d3 from "d3";
+import { select, hierarchy, partition, scaleOrdinal, quantize, interpolateRainbow, arc, interpolate } from "d3";
+import type { HierarchyRectangularNode } from "d3";
 import { useEffect, useRef } from "react";
 import { computeFontSize } from "../../../shared/layout";
 import { useD3Tooltip } from "../../hooks/useD3Tooltip";
@@ -12,7 +13,7 @@ import type { SunburstChartProps } from "./types";
 /**
  * D3の階層ノードを拡張した型（Sunburstのアニメーション用）
  */
-interface SunburstHierarchyNode extends d3.HierarchyRectangularNode<HierarchyDataNode> {
+interface SunburstHierarchyNode extends HierarchyRectangularNode<HierarchyDataNode> {
     current?: SunburstHierarchyNode;
     target?: SunburstHierarchyNode;
 }
@@ -38,29 +39,29 @@ export function SunburstChart({
         if (!svgRef.current || !data) return;
 
         // SVGの初期化
-        const svg = d3.select(svgRef.current);
+        const svg = select(svgRef.current);
         svg.selectAll("*").remove();
 
         // 階層データの作成
-        const root = d3.hierarchy(data)
+        const root = hierarchy(data)
             .sum(d => d.value ?? 0)
             .sort((a, b) => (b.value ?? 0) - (a.value ?? 0));
 
-        const hierarchy = d3.partition<HierarchyDataNode>()
+        const hierarchyRoot = partition<HierarchyDataNode>()
             .size([2 * Math.PI, root.height + 1])(root) as SunburstHierarchyNode;
 
         // currentプロパティの初期化（描画前に必須）
-        hierarchy.each((d: SunburstHierarchyNode) => {
+        hierarchyRoot.each((d: SunburstHierarchyNode) => {
             d.current = d;
         });
 
         // D3のカラースキーム
-        const color = d3.scaleOrdinal(
-            d3.quantize(d3.interpolateRainbow, data.children?.length ? data.children.length + 1 : 11)
+        const color = scaleOrdinal(
+            quantize(interpolateRainbow, data.children?.length ? data.children.length + 1 : 11)
         );
 
         // アークジェネレータ
-        const arc = d3.arc<SunburstHierarchyNode>()
+        const arcFn = arc<SunburstHierarchyNode>()
             .startAngle(d => d.x0)
             .endAngle(d => d.x1)
             .padAngle(d => Math.min((d.x1 - d.x0) / 2, 0.005))
@@ -75,7 +76,7 @@ export function SunburstChart({
         // セグメント（Path）の描画
         const path = g.append("g")
             .selectAll("path")
-            .data(hierarchy.descendants().slice(1)) // ルートは除外（中心にするため）
+            .data(hierarchyRoot.descendants().slice(1)) // ルートは除外（中心にするため）
             .join("path")
             .attr("fill", d => {
                 let node = d as SunburstHierarchyNode;
@@ -90,7 +91,7 @@ export function SunburstChart({
                 const node = d as SunburstHierarchyNode;
                 return arcVisible(node.current!) ? "auto" : "none";
             })
-            .attr("d", d => arc((d as SunburstHierarchyNode).current!));
+            .attr("d", d => arcFn((d as SunburstHierarchyNode).current!));
 
         // クリック時の挙動
         path.filter(d => !!d.children)
@@ -118,7 +119,7 @@ export function SunburstChart({
             .attr("text-anchor", "middle")
             .style("user-select", "none")
             .selectAll("text")
-            .data(hierarchy.descendants().slice(1))
+            .data(hierarchyRoot.descendants().slice(1))
             .join("text")
             .attr("dy", "0.35em")
             .attr("fill-opacity", d => +labelVisible((d as SunburstHierarchyNode).current!))
@@ -129,7 +130,7 @@ export function SunburstChart({
 
         // 中心（ルート）ボタン
         const parent = g.append("circle")
-            .datum(hierarchy)
+            .datum(hierarchyRoot)
             .attr("r", radius)
             .attr("fill", "none")
             .attr("pointer-events", "all")
@@ -137,9 +138,9 @@ export function SunburstChart({
 
         // ズーム（クリック）処理
         function clicked(event: any, p: SunburstHierarchyNode) {
-            parent.datum(p.parent || hierarchy);
+            parent.datum(p.parent || hierarchyRoot);
 
-            hierarchy.each((d: SunburstHierarchyNode) => {
+            hierarchyRoot.each((d: SunburstHierarchyNode) => {
                 d.target = {
                     x0: Math.max(0, Math.min(1, (d.x0 - (p.x0 ?? 0)) / ((p.x1 ?? 1) - (p.x0 ?? 0)))) * 2 * Math.PI,
                     x1: Math.max(0, Math.min(1, (d.x1 - (p.x0 ?? 0)) / ((p.x1 ?? 1) - (p.x0 ?? 0)))) * 2 * Math.PI,
@@ -152,18 +153,18 @@ export function SunburstChart({
 
             path.transition(t)
                 .tween("data", (d: any) => {
-                    const i = d3.interpolate(d.current, d.target);
+                    const i = interpolate(d.current, d.target);
                     return (t: number) => d.current = i(t);
                 })
                 .filter(function (d: any) {
-                    return !!+d3.select(this).attr("fill-opacity") || arcVisible(d.target);
+                    return !!+select(this).attr("fill-opacity") || arcVisible(d.target);
                 })
                 .attr("fill-opacity", (d: any) => arcVisible(d.target) ? (d.children ? 0.6 : 0.4) : 0)
                 .attr("pointer-events", (d: any) => arcVisible(d.target) ? "auto" : "none")
-                .attrTween("d", (d: any) => () => arc(d.current) || "");
+                .attrTween("d", (d: any) => () => arcFn(d.current) || "");
 
             label.filter(function (d: any) {
-                return !!+d3.select(this).attr("fill-opacity") || labelVisible(d.target);
+                return !!+select(this).attr("fill-opacity") || labelVisible(d.target);
             }).transition(t)
                 .attr("fill-opacity", (d: any) => +labelVisible(d.target))
                 .attrTween("transform", (d: any) => () => labelTransform(d.current));

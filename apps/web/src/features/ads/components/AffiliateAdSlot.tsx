@@ -22,6 +22,8 @@ import type { AffiliateLocationCode } from "../types";
 interface AffiliateAdSlotProps {
   categoryKey: string;
   position?: "sidebar" | "footer";
+  /** ranking ページで指定。targetRankingKeys を持つ広告の文脈一致フィルタに使う (任意) */
+  rankingKey?: string;
 }
 
 function mapPositionToLocation(position: "sidebar" | "footer"): AffiliateLocationCode {
@@ -44,6 +46,7 @@ function mapPositionToLocation(position: "sidebar" | "footer"): AffiliateLocatio
 export async function AffiliateAdSlot({
   categoryKey,
   position = "sidebar",
+  rankingKey,
 }: AffiliateAdSlotProps) {
   const locationCode = mapPositionToLocation(position);
   const affiliateCategory = CATEGORY_AFFILIATE_MAP[categoryKey] ?? null;
@@ -64,7 +67,7 @@ export async function AffiliateAdSlot({
 
   // 1. バナー優先 (sidebar のみ)。ranking の主要トラフィックに視認性の高い枠を出す。
   if (position === "sidebar") {
-    const banners = await resolveAffiliateBannersByCategoryKey(categoryKey, 1);
+    const banners = await resolveAffiliateBannersByCategoryKey(categoryKey, 1, rankingKey);
     const banner = banners[0];
     if (banner) {
       return (

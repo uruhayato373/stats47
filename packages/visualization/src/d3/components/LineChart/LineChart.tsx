@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "@stats47/components";
-import * as d3 from "d3";
+import { schemeTableau10, select, scalePoint, scaleLinear, line, axisBottom, axisLeft, pointer } from "d3";
 import { useEffect, useRef } from "react";
 import {
   computeChartLayout,
@@ -12,7 +12,7 @@ import { CHART_STYLES, compactAxisFormat } from "../../constants";
 import { useD3Tooltip } from "../../hooks/useD3Tooltip";
 import type { D3LineChartProps, TimeSeriesDataNode } from "./types";
 
-const DEFAULT_COLORS = d3.schemeTableau10 as readonly string[];
+const DEFAULT_COLORS = schemeTableau10 as readonly string[];
 
 /**
  * 折れ線グラフ用の Y 軸・ツールチップフォーマット（デフォルト）
@@ -77,12 +77,11 @@ export function LineChart({
   useEffect(() => {
     if (!svgRef.current || !data.length) return;
 
-    const svg = d3.select(svgRef.current);
+    const svg = select(svgRef.current);
     svg.selectAll("*").remove();
 
     const catValues = data.map((d) => String(d[categoryKey] ?? ""));
-    const x = d3
-      .scalePoint()
+    const x = scalePoint()
       .domain(catValues)
       .range([marginLeft, width - marginRight]);
 
@@ -98,8 +97,7 @@ export function LineChart({
     const yMin = allValues.length ? Math.min(...allValues) : 0;
     const yMax = allValues.length ? Math.max(...allValues) : 0;
     const computedDomain: [number, number] = [Math.min(0, yMin), yMax];
-    const y = d3
-      .scaleLinear()
+    const y = scaleLinear()
       .domain(yDomainProp ?? computedDomain)
       .nice()
       .range([height - marginBottom, marginTop]);
@@ -108,11 +106,11 @@ export function LineChart({
       ? seriesConfig!
       : [{ dataKey: valueKey, name: valueKey, color: colors[0] ?? "#888" }];
 
-    const line = d3.line<TimeSeriesDataNode>().x((d) => x(String(d[categoryKey])) ?? 0);
+    const lineFn = line<TimeSeriesDataNode>().x((d) => x(String(d[categoryKey])) ?? 0);
 
     seriesToDraw.forEach((s) => {
       const filtered = data.filter((d) => d[s.dataKey] != null);
-      const pathLine = line.y((d) => y(Number(d[s.dataKey])));
+      const pathLine = lineFn.y((d) => y(Number(d[s.dataKey])));
       svg
         .append("path")
         .datum(filtered)
@@ -134,8 +132,7 @@ export function LineChart({
       return !isNaN(num) && num % tickInterval === 0;
     });
 
-    const xAxis = d3
-      .axisBottom(x)
+    const xAxis = axisBottom(x)
       .tickValues(filteredTicks)
       .tickFormat((val) => {
         const row = data.find((d) => String(d[categoryKey]) === val);
@@ -150,8 +147,7 @@ export function LineChart({
       .call((g) => g.selectAll(".tick line").remove())
       .call((g) => g.selectAll(".tick text").attr("font-size", baseFontSize).attr("dy", "8"));
 
-    const yAxis = d3
-      .axisLeft(y)
+    const yAxis = axisLeft(y)
       .ticks(innerHeight / 40, "s")
       .tickFormat((v) => yAxisFormatter(Number(v)));
     svg
@@ -216,7 +212,7 @@ export function LineChart({
       .attr("fill", "transparent")
       .style("cursor", "crosshair")
       .on("mousemove", (event) => {
-        const [mouseX] = d3.pointer(event);
+        const [mouseX] = pointer(event);
 
         // 最も近いX位置を二分探索
         let closestIdx = 0;

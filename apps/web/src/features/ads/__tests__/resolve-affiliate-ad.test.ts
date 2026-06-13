@@ -89,8 +89,9 @@ describe("resolveAffiliateBanners", () => {
 
     // wages と employment は両方 "labor" → categoryKey "laborwage"
     // 重複排除されるので categoryKey は ["laborwage"] の1つだけ
+    // rankingKey 未指定なので第3引数は undefined (非 ranking 文脈)
     expect(mockFindBanners).toHaveBeenCalledTimes(1);
-    expect(mockFindBanners).toHaveBeenCalledWith(["laborwage"], 2);
+    expect(mockFindBanners).toHaveBeenCalledWith(["laborwage"], 2, undefined);
     expect(result).toHaveLength(1);
     expect(result[0]).toEqual({
       title: "バナー1",

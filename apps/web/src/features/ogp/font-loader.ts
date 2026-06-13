@@ -29,7 +29,13 @@ async function fetchFontData(family: string, weight: number): Promise<ArrayBuffe
   return buffer;
 }
 
-export async function loadOgpFonts(): Promise<OgFont[]> {
+// Module-scope memoization. These are build/runtime font *assets* (not R2 page data),
+// so caching the fetched Promise across calls within a warm isolate is acceptable and
+// avoids re-fetching ~MB of Google Fonts on every OGP image render.
+// On failure we reset the cache so a later call can retry instead of permanently caching [].
+let fontsPromise: Promise<OgFont[]> | null = null;
+
+async function loadOgpFontsUncached(): Promise<OgFont[]> {
   try {
     const [regular, bold, black] = await Promise.all([
       fetchFontData('Noto Sans JP', 400),
@@ -45,4 +51,14 @@ export async function loadOgpFonts(): Promise<OgFont[]> {
     // Font loading failure → Satori will use fallback (Latin only)
     return [];
   }
+}
+
+export async function loadOgpFonts(): Promise<OgFont[]> {
+  if (fontsPromise) return fontsPromise;
+  const promise = loadOgpFontsUncached();
+  fontsPromise = promise;
+  // Don't permanently cache a failed (empty) result — allow a retry on the next call.
+  const fonts = await promise;
+  if (fonts.length === 0) fontsPromise = null;
+  return fonts;
 }

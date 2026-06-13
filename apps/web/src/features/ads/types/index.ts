@@ -14,6 +14,13 @@ export interface AffiliateAd {
   startDate: string | null;
   endDate: string | null;
   targetCategories: string | null;
+  /**
+   * ranking-key 単位のターゲティング (任意・転職クラスタの文脈一致配置用)。
+   * - 未設定/空 → categoryKey 単位の従来挙動 (後方互換)。
+   * - 設定済 → ranking ページではこの key 群に一致する時のみ表示。非 ranking 文脈 (blog 等) では適用しない。
+   * 例: エンジニア転職広告を職種年収 ranking のうち software-engineer / system-consultant 等にだけ出す。
+   */
+  targetRankingKeys?: string[] | null;
   adType: string;
   imageUrl: string | null;
   trackingPixelUrl: string | null;

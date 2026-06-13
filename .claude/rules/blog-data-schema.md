@@ -54,7 +54,7 @@ YYYY-MM-DD-<method>[-<batch>]
 
 | 場所 | 内容 |
 |---|---|
-| `docs/02_実装計画/improvement-backlog.md` の section heading | `## [BLOG-WAVE-<wave_id>] <title> (legacy: <旧 BLOG-CTR-*>)` |
+| `docs/02_実装計画/03_改善バックログ.md` の section heading | `## [BLOG-WAVE-<wave_id>] <title> (legacy: <旧 BLOG-CTR-*>)` |
 | section frontmatter | `wave_id`, `legacy_section_ids`, `predecessor_wave`, `successor_wave` |
 | `.claude/state/blog/auto-brushup-history.json` | 各 entry に `wave_id` フィールド (2026-05-27 migration 済) |
 | commit message | 必須ではない (legacy refactoring を避けるため) |
@@ -81,16 +81,16 @@ YYYY-MM-DD-<method>[-<batch>]
 | `/draft-from-trend` | trend → 新規 draft 生成 | `.claude/scripts/blog/{fetch-article-data,generate-article-charts}.mjs` |
 | `/publish-bulk-articles` | 複数記事の bulk publish | factual gate 共有 |
 | `measure-gsc-impact.mjs` (wave_id 駆動・2026-06-08〜) | due 到達 wave の before/after を週次 GSC で自動 diff → `improvement-log.md` の `## [BLOG-WAVE-<id>]` upsert。`fetch-metrics-weekly.yml` cron に配線済 (delta 提示まで・status 確定は weekly-review) | `measure-gsc-impact.mjs` |
-| `/analyze-winning-patterns` | 天井ループ: GSC実測×構造特徴で勝ち要因抽出 (順位交絡統制付き)。正典 `docs/02_実装計画/blog-continuous-quality-loop.md` | `.claude/scripts/blog/analyze-winning-patterns.mjs` |
+| `/analyze-winning-patterns` | 天井ループ: GSC実測×構造特徴で勝ち要因抽出 (順位交絡統制付き)。正典 `docs/02_実装計画/07_ブログ勝ちパターン学習.md` | `.claude/scripts/blog/analyze-winning-patterns.mjs` |
 
 ### Docs (人間向け真実源)
 
 | Docs | 内容 | 更新トリガ |
 |---|---|---|
-| `docs/02_実装計画/improvement-backlog.md` | wave section の真実源 (status / effect / 判定基準) | wave deploy 時 + effect 計測時 |
+| `docs/02_実装計画/03_改善バックログ.md` | wave section の真実源 (status / effect / 判定基準) | wave deploy 時 + effect 計測時 |
 | `docs/03_週次運用/週次計画/YYYY-Www.md` | 週次 TODO | 週次 (月曜) |
 | `docs/03_週次運用/週次レビュー/YYYY-Www.md` | 週次振り返り | 週次 (日曜) |
-| `docs/04_レビュー/session-handoff/YYYY-MM-DD-*.md` | 大規模 session 完了時のハンドオフ | session 完了時 |
+| `docs/04_レビュー/YYYY-MM-DD-session-handoff-<x>.md` | 大規模 session 完了時のハンドオフ (フラット。種別絞り込みは frontmatter `type:`) | session 完了時 |
 
 ### Memory (auto memory)
 
@@ -105,8 +105,8 @@ YYYY-MM-DD-<method>[-<batch>]
 
 | State | 内容 | 書き込み箇所 |
 |---|---|---|
-| `.claude/state/blog/remediation-queue.json` | **品質是正キュー (状態付き)**。「次に何を直すか」の真実源。pending/in-progress/done + wave_id。GSC×品質 blocker の統合スコア。**正典: `docs/02_実装計画/blog-remediation-loop.md`** | `build-remediation-queue.mjs` (build / --mark-* / --next) |
-| `.claude/state/blog/winning-patterns.json` | **勝ち要因 (天井ループ)**。featureSignals (confidence付) + 順位交絡統制 (robust/confounded) + 記事別 conformance。build-remediation-queue が conformance を tiebreaker に読む。**正典: `docs/02_実装計画/blog-continuous-quality-loop.md`** | `analyze-winning-patterns.mjs` |
+| `.claude/state/blog/remediation-queue.json` | **品質是正キュー (状態付き)**。「次に何を直すか」の真実源。pending/in-progress/done + wave_id。GSC×品質 blocker の統合スコア。**正典: `docs/02_実装計画/06_ブログ品質是正ループ.md`** | `build-remediation-queue.mjs` (build / --mark-* / --next) |
+| `.claude/state/blog/winning-patterns.json` | **勝ち要因 (天井ループ)**。featureSignals (confidence付) + 順位交絡統制 (robust/confounded) + 記事別 conformance。build-remediation-queue が conformance を tiebreaker に読む。**正典: `docs/02_実装計画/07_ブログ勝ちパターン学習.md`** | `analyze-winning-patterns.mjs` |
 | `.claude/state/blog/auto-brushup-history.json` | wave_id 駆動 source of truth (effect 計測の入力 + 是正キューの done シード) | `/brushup-blog --target batch\|queue` 実行時 |
 | `.claude/state/blog/auto-brushup-skipped.log` | dedup でスキップした slug ログ | 同上 |
 | `.claude/state/blog/SHARED-failure-cases.md` | F-001〜N の failure ledger | factual FAIL 検出時 |
@@ -132,4 +132,4 @@ YYYY-MM-DD-<method>[-<batch>]
 - 親 plan: `~/.claude/plans/recursive-purring-planet.md`
 - Phase B (data schema 統一) で実装予定の migrate script: `.claude/scripts/blog/migrate-data-schema.mjs` (未着手)
 - Phase C で実装予定の value detector: `.claude/scripts/lib/article-factual-check.mjs` の `checkValueClaims` (未実装、Phase B 前提)
-- Phase D (wave 効果計測): `measure-gsc-impact.mjs` を wave_id 駆動化し `fetch-metrics-weekly.yml` cron に配線済 (2026-06-08)。SKILL 化はせず週次 cron で自動実行。正典: `docs/02_実装計画/blog-remediation-loop.md` Phase 2
+- Phase D (wave 効果計測): `measure-gsc-impact.mjs` を wave_id 駆動化し `fetch-metrics-weekly.yml` cron に配線済 (2026-06-08)。SKILL 化はせず週次 cron で自動実行。正典: `docs/02_実装計画/06_ブログ品質是正ループ.md` Phase 2
