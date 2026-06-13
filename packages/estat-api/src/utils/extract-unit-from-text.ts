@@ -20,14 +20,17 @@ export function extractUnitFromText(text: string): string | null {
   let candidate: string | null = null;
 
   // 全角括弧: （単位）
-  const fullWidthMatch = text.match(/（([^）]+)）$/);
+  // bounded quantifier ({1,40}) で末尾アンカー時のバックトラッキングを線形化する
+  // (js/polynomial-redos)。単位は isValidUnit が 10 文字超を弾くため、上限 40 でも
+  // 出力は不変 (40 字を超える候補は元々 isValidUnit で null になる)。
+  const fullWidthMatch = text.match(/（([^）]{1,40})）$/);
   if (fullWidthMatch) {
     candidate = fullWidthMatch[1];
   }
 
   // 半角括弧: (単位)
   if (!candidate) {
-    const halfWidthMatch = text.match(/\(([^)]+)\)$/);
+    const halfWidthMatch = text.match(/\(([^)]{1,40})\)$/);
     if (halfWidthMatch) {
       candidate = halfWidthMatch[1];
     }

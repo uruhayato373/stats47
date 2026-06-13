@@ -20,6 +20,19 @@ function defaultFormat(value: number): string {
 }
 
 /**
+ * innerHTML へ補間する前にデータ由来テキストの HTML 特殊文字をエスケープする
+ * (js/html-constructed-from-input)。ラベル・単位はデータ/props 由来のため XSS を防ぐ。
+ */
+function escapeHtml(value: string): string {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+/**
  * D3 StackedAreaChart - 積み上げ面グラフ（100% 積み上げ対応）
  *
  * `stack()` + `area()` で描画。
@@ -190,12 +203,12 @@ export function StackedAreaChart({
         hoverLine.attr("x1", xPos).attr("x2", xPos).attr("stroke-opacity", 0.4);
         const categoryLabel =
           (d.label as string) ?? String(d[categoryKey]);
-        const unitStr = normalize ? "%" : unit;
+        const unitStr = escapeHtml(normalize ? "%" : unit);
         const total = keys.reduce((sum, k) => sum + (Number(d[k]) || 0), 0);
         const rows = series.map((s) => {
           const val = Number(d[s.key]) || 0;
           const pct = total > 0 ? ((val / total) * 100).toFixed(1) : "0.0";
-          return `<div style="display:flex;align-items:center;gap:4px;"><span style="display:inline-block;width:7px;height:7px;border-radius:2px;background:${s.color};opacity:0.7;flex-shrink:0;"></span><span style="font-size:0.6875rem;">${s.label}</span><span style="margin-left:auto;font-variant-numeric:tabular-nums;font-weight:600;font-size:0.75rem;">${val.toLocaleString()}</span><span style="font-size:0.625rem;color:hsl(var(--muted-foreground));">${unitStr}</span><span style="font-size:0.625rem;color:hsl(var(--muted-foreground));">(${pct}%)</span></div>`;
+          return `<div style="display:flex;align-items:center;gap:4px;"><span style="display:inline-block;width:7px;height:7px;border-radius:2px;background:${escapeHtml(String(s.color))};opacity:0.7;flex-shrink:0;"></span><span style="font-size:0.6875rem;">${escapeHtml(String(s.label))}</span><span style="margin-left:auto;font-variant-numeric:tabular-nums;font-weight:600;font-size:0.75rem;">${val.toLocaleString()}</span><span style="font-size:0.625rem;color:hsl(var(--muted-foreground));">${unitStr}</span><span style="font-size:0.625rem;color:hsl(var(--muted-foreground));">(${pct}%)</span></div>`;
         });
         let tooltip = document.getElementById(TOOLTIP_ID_STACKED) as HTMLDivElement | null;
         if (!tooltip) {
@@ -204,7 +217,7 @@ export function StackedAreaChart({
           Object.assign(tooltip.style, TOOLTIP_STYLES);
           document.body.appendChild(tooltip);
         }
-        tooltip.innerHTML = `<div style="display:grid;gap:4px;"><div style="font-weight:500;border-bottom:1px solid hsl(var(--border));padding-bottom:4px;margin-bottom:2px;">${categoryLabel}</div>${rows.join("")}</div>`;
+        tooltip.innerHTML = `<div style="display:grid;gap:4px;"><div style="font-weight:500;border-bottom:1px solid hsl(var(--border));padding-bottom:4px;margin-bottom:2px;">${escapeHtml(categoryLabel)}</div>${rows.join("")}</div>`;
         tooltip.style.opacity = "1";
         clampTooltipPosition(tooltip, event.pageX, event.pageY);
       })
