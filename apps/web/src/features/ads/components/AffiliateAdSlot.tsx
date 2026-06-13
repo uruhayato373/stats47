@@ -90,7 +90,7 @@ export async function AffiliateAdSlot({
   }
 
   // 2. テキスト広告
-  const ads = await resolveAffiliateTextAds(categoryKey, locationCode, 2);
+  const ads = await resolveAffiliateTextAds(categoryKey, locationCode, 2, rankingKey);
   if (ads.length > 0) {
     return (
       <AffiliateTextAdList ads={ads} affiliateCategory={affiliateCategory} position={position} />

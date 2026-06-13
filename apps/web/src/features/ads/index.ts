@@ -15,6 +15,7 @@ export type { AffiliateCategory } from "./constants/affiliate-category";
 export { CATEGORY_AFFILIATE_MAP, TAG_AFFILIATE_MAP, AFFILIATE_THEME } from "./constants/affiliate-category";
 export { CATEGORY_BOOKS, buildAmazonUrl } from "./constants/related-books";
 export type { BookRecommendation } from "./constants/related-books";
+export { selectPromoBannerIndexForRanking } from "./constants/sidebar-banners";
 export type { AffiliateAd, AffiliateLocationCode } from "./types";
 
 // Utilities

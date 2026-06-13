@@ -87,6 +87,7 @@ export async function readActiveTextAdsByCategoryFromR2(
   categoryKey: string,
   locationCode: AffiliateLocationCode = "sidebar-bottom",
   limit = 2,
+  rankingKey?: string,
 ): Promise<AffiliateAdRow[]> {
   const active = await getActive();
   return active
@@ -94,7 +95,8 @@ export async function readActiveTextAdsByCategoryFromR2(
       (a) =>
         a.categoryKey === categoryKey &&
         a.locationCode === locationCode &&
-        a.adType === "text",
+        a.adType === "text" &&
+        matchesRankingTarget(a, rankingKey),
     )
     .sort(compareByPriorityDesc)
     .slice(0, limit);
