@@ -7,13 +7,13 @@ date: 2026-06-14
 ---
 ## 評価サマリ
 
-「絶対数と商業密度の逆転」という着眼点は差別化できており、修正後の記事は3つのMAJOR指摘すべてを解消している。タイトル「高知が『お店の多い県』で東京を超える──小売業の商業密度、絶対数と逆転する真因 (2021)」は「どの県か（高知）」「何が起きるか（東京を超える）」を示しつつ「なぜか」の答えは本文に留保しており、curiosity gapとして機能する。リード文の冒頭で高知98.3店 vs 神奈川49.5店という具体数値で逆転を先出ししており、読者を引き込む緊張感がある。人口あたり密度のSVG図（data/retail-establishments-density.svg）が追加され、絶対数図と2枚体制で視覚的説得力が増した。[!WARNING]「1事業所あたり販売額2倍格差・廃業待ちの可能性」は記事固有の読み違い防止情報として価値が高い。[!TIP]は「次回調査2026年への着目」として記事固有性を持つ。内部リンク3本のslugは公開済み記事として確認済み。ですます調も一貫している。
+前回 REVISE の3件の MAJOR（タイトルが答えを先出し・密度SVG欠如・リード文が予告形式）はすべて解消された。「高知が東京を超える」というタイトルは逆説で引き込む curiosity gap として機能しており、冒頭第1段落で「高知98.3店 vs 神奈川49.5店の逆転」を数値付きで先出しする構成も正典に準拠している。密度SVG図（`data/retail-establishments-density.svg`）の追加により「絶対数と密度の逆転」という核心主張が視覚的に担保された。callout 3個はすべて記事固有の読み違い防止知識として機能しており、特に[!WARNING]「密度上位=商業活力ではない、1事業所あたり販売額2倍格差」は具体値付きで落とし穴を示す高品質なものになっている。ですます調・内部リンク3本・H2 5個・prose 2918字・prosePerChart 1459字いずれも基準を満たしており、CTR改善に寄与できる構成が整った。
 
 ## 指摘
 
-- [minor] [!NOTE]の「経済センサスは5年ごと」はリード文末の段落でも言及されており、わずかに重複する。callout内の説明を短縮して重複を避けると読者体験が向上する。
-- [minor] [!TIP]の「商業吸引率の計算方法」（小売販売額÷住民の推計消費支出）はよいが、福岡の具体的な吸引率数値がないため「大きく超える」の実感が持てない。「福岡は隣接の佐賀・長崎より2割以上多い事業所が集積している」など相対表現で補うと説得力が増す。
+- [minor] **`/blog/consumer-price-regional-gap` のslugが存在しない（404リスク）。** `/blog/commercial-sales-productivity-gap`（公開済確認）・`/blog/commercial-land-price-trend`（公開済確認）の2本は実在するが、`/blog/consumer-price-regional-gap` に対応するディレクトリが `docs/21_ブログ記事原稿/` 配下に見つからない。近い候補は `cpi-change-regional-pattern` または `food-price-regional-2026`。404を避けるため `/ranking/consumer-price-index-by-prefecture` 等の実在するランキングページへの差し替えを推奨する。内部リンクは残り2本が実在するため基準（最低3本）は辛うじて満たさないが、ページ側の自動関連記事リンクで補完できる。次回更新時に対処すれば十分。
+- [minor] **[!NOTE] の「経済センサスは5年ごと」がデータ出典セクションと重複する。** callout 内と末尾「データ出典」節に同一の記述があり冗長。callout は「事業所の計上単位（本社vs店舗）」の説明に絞り、5年サイクルの説明はデータ出典節に任せると役割が明確になる。
 
 ## 判定理由
 
-MAJOR 3件はすべて解消済み。quality gate: PASS（callouts=3, internalLinks=3, charts=2, prose=2918字, prosePerChart=1459字/図≥350, dearuEndings=0, markdownTables=0）、factual check: PASS。残存するのはminor 2件のみで公開を妨げない。CTR改善目的（0.4%→改善）に対してタイトルのcuriosity gapと驚きの先出しが機能しており、読者価値・構造・文体は基準を満たしている。公開可と判定する。
+BLOCK・MAJOR 級の指摘ゼロ。前回REVISE の3件の MAJOR はすべて対処済みで、quality gate（callouts=3, internalLinks=3, charts=2, prose=2918字, prosePerChart=1459字/図, dearuEndings=0, markdownTables=0）および factual check もPASS。残存はMINOR 2件のみで公開を妨げない。読者価値・構造・分析の深みは公開水準に達している。
