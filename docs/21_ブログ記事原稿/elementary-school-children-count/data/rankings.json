@@ -1,0 +1,18 @@
+[
+  {"areaName": "東京都", "rank": 1, "value": 620624, "label": "小学校児童数", "unit": "人"},
+  {"areaName": "神奈川県", "rank": 2, "value": 433328, "label": "小学校児童数", "unit": "人"},
+  {"areaName": "大阪府", "rank": 3, "value": 404004, "label": "小学校児童数", "unit": "人"},
+  {"areaName": "愛知県", "rank": 4, "value": 389232, "label": "小学校児童数", "unit": "人"},
+  {"areaName": "埼玉県", "rank": 5, "value": 351268, "label": "小学校児童数", "unit": "人"},
+  {"areaName": "千葉県", "rank": 6, "value": 295699, "label": "小学校児童数", "unit": "人"},
+  {"areaName": "福岡県", "rank": 7, "value": 271649, "label": "小学校児童数", "unit": "人"},
+  {"areaName": "兵庫県", "rank": 8, "value": 264806, "label": "小学校児童数", "unit": "人"},
+  {"areaName": "北海道", "rank": 9, "value": 216088, "label": "小学校児童数", "unit": "人"},
+  {"areaName": "静岡県", "rank": 10, "value": 170820, "label": "小学校児童数", "unit": "人"},
+  {"areaName": "沖縄県", "rank": 15, "value": 99638, "label": "小学校児童数", "unit": "人"},
+  {"areaName": "秋田県", "rank": 43, "value": 35116, "label": "小学校児童数", "unit": "人"},
+  {"areaName": "徳島県", "rank": 44, "value": 32354, "label": "小学校児童数", "unit": "人"},
+  {"areaName": "島根県", "rank": 45, "value": 31785, "label": "小学校児童数", "unit": "人"},
+  {"areaName": "高知県", "rank": 46, "value": 29635, "label": "小学校児童数", "unit": "人"},
+  {"areaName": "鳥取県", "rank": 47, "value": 26620, "label": "小学校児童数", "unit": "人"}
+]

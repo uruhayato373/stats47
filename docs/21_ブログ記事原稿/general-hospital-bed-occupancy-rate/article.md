@@ -12,9 +12,9 @@ tags:
   - 地域医療
   - 病院経営
 archetype: A
-publishedAt: 2026-06-07
-updatedAt: "2026-06-04"
-published: true
+publishedAt: 2026-06-14
+updatedAt: 2026-06-14
+published: false
 ogImage: /blog/general-hospital-bed-occupancy-rate/og.png
 ---
 

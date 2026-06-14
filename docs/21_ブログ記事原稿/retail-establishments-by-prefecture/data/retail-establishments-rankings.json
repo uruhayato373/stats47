@@ -1,0 +1,17 @@
+[
+  {"areaName": "東京都", "rank": 1, "value": 87895, "label": "小売業事業所数", "unit": "事業所"},
+  {"areaName": "大阪府", "rank": 2, "value": 55351, "label": "小売業事業所数", "unit": "事業所"},
+  {"areaName": "愛知県", "rank": 3, "value": 46535, "label": "小売業事業所数", "unit": "事業所"},
+  {"areaName": "神奈川県", "rank": 4, "value": 45729, "label": "小売業事業所数", "unit": "事業所"},
+  {"areaName": "埼玉県", "rank": 5, "value": 37716, "label": "小売業事業所数", "unit": "事業所"},
+  {"areaName": "福岡県", "rank": 6, "value": 37411, "label": "小売業事業所数", "unit": "事業所"},
+  {"areaName": "北海道", "rank": 7, "value": 36771, "label": "小売業事業所数", "unit": "事業所"},
+  {"areaName": "兵庫県", "rank": 8, "value": 35887, "label": "小売業事業所数", "unit": "事業所"},
+  {"areaName": "千葉県", "rank": 9, "value": 32259, "label": "小売業事業所数", "unit": "事業所"},
+  {"areaName": "静岡県", "rank": 10, "value": 28344, "label": "小売業事業所数", "unit": "事業所"},
+  {"areaName": "山梨県", "rank": 43, "value": 7034, "label": "小売業事業所数", "unit": "事業所"},
+  {"areaName": "高知県", "rank": 44, "value": 6879, "label": "小売業事業所数", "unit": "事業所"},
+  {"areaName": "徳島県", "rank": 45, "value": 6544, "label": "小売業事業所数", "unit": "事業所"},
+  {"areaName": "島根県", "rank": 46, "value": 6405, "label": "小売業事業所数", "unit": "事業所"},
+  {"areaName": "鳥取県", "rank": 47, "value": 4733, "label": "小売業事業所数", "unit": "事業所"}
+]

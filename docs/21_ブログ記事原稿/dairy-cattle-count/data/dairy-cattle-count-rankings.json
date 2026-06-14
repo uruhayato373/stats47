@@ -1,0 +1,17 @@
+[
+  {"areaName": "北海道", "rank": 1, "value": 790900, "label": "乳用牛飼養頭数", "unit": "頭"},
+  {"areaName": "栃木県", "rank": 2, "value": 51900, "label": "乳用牛飼養頭数", "unit": "頭"},
+  {"areaName": "熊本県", "rank": 3, "value": 42800, "label": "乳用牛飼養頭数", "unit": "頭"},
+  {"areaName": "岩手県", "rank": 4, "value": 41900, "label": "乳用牛飼養頭数", "unit": "頭"},
+  {"areaName": "群馬県", "rank": 5, "value": 34800, "label": "乳用牛飼養頭数", "unit": "頭"},
+  {"areaName": "千葉県", "rank": 6, "value": 30300, "label": "乳用牛飼養頭数", "unit": "頭"},
+  {"areaName": "愛知県", "rank": 7, "value": 24400, "label": "乳用牛飼養頭数", "unit": "頭"},
+  {"areaName": "茨城県", "rank": 8, "value": 23800, "label": "乳用牛飼養頭数", "unit": "頭"},
+  {"areaName": "宮城県", "rank": 9, "value": 18900, "label": "乳用牛飼養頭数", "unit": "頭"},
+  {"areaName": "岡山県", "rank": 10, "value": 16100, "label": "乳用牛飼養頭数", "unit": "頭"},
+  {"areaName": "富山県", "rank": 42, "value": 2020, "label": "乳用牛飼養頭数", "unit": "頭"},
+  {"areaName": "東京都", "rank": 43, "value": 1520, "label": "乳用牛飼養頭数", "unit": "頭"},
+  {"areaName": "大阪府", "rank": 44, "value": 1280, "label": "乳用牛飼養頭数", "unit": "頭"},
+  {"areaName": "福井県", "rank": 45, "value": 1070, "label": "乳用牛飼養頭数", "unit": "頭"},
+  {"areaName": "和歌山県", "rank": 46, "value": 610, "label": "乳用牛飼養頭数", "unit": "頭"}
+]
