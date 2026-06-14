@@ -14,7 +14,7 @@ tags:
   - 建設業
 publishedAt: 2026-06-02
 updatedAt: "2026-06-04"
-published: false
+published: true
 ogImage: /blog/carpenter-income-prefecture-gap/og.png
 ---
 

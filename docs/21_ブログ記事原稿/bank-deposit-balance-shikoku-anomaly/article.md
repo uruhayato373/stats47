@@ -14,7 +14,7 @@ tags:
   - 金融資産
 publishedAt: 2026-05-29
 updatedAt: "2026-06-04"
-published: false
+published: true
 ogImage: /blog/bank-deposit-balance-shikoku-anomaly/og.png
 ---
 

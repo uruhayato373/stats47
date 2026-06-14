@@ -14,7 +14,7 @@ tags:
   - 地域差
 publishedAt: 2026-06-07
 updatedAt: "2026-06-04"
-published: false
+published: true
 ogImage: /blog/mayonnaise-consumption-expenditure/og.png
 ---
 

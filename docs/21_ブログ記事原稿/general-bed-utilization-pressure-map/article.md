@@ -12,7 +12,7 @@ tags:
   - 医療提供体制
 publishedAt: 2026-03-29
 updatedAt: 2026-03-29
-published: false
+published: true
 ogImage: /blog/general-bed-utilization-pressure-map/og.png
 ---
 

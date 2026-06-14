@@ -14,7 +14,7 @@ tags:
   - 地域格差
 publishedAt: 2026-05-31
 updatedAt: "2026-06-04"
-published: false
+published: true
 ogImage: /blog/professor-income-prefecture-gap/og.png
 ---
 

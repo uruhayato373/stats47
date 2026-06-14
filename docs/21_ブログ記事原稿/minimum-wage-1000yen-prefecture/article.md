@@ -14,7 +14,7 @@ tags:
   - 都道府県ランキング
 publishedAt: 2026-05-29
 updatedAt: "2026-06-04"
-published: false
+published: true
 ogImage: /blog/minimum-wage-1000yen-prefecture/og.png
 ---
 

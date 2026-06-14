@@ -13,7 +13,7 @@ tags:
   - 医療
 publishedAt: 2026-03-29
 updatedAt: 2026-03-29
-published: false
+published: true
 ogImage: /blog/inpatient-rate-aging-burden/og.png
 ---
 

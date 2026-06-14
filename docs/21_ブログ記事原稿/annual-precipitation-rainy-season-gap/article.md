@@ -14,7 +14,7 @@ tags:
   - 気候
 publishedAt: 2026-06-07
 updatedAt: "2026-06-06"
-published: false
+published: true
 ogImage: /blog/annual-precipitation-rainy-season-gap/og.png
 ---
 

@@ -12,7 +12,7 @@ tags:
   - 家計調査
 publishedAt: 2026-06-07
 updatedAt: "2026-06-04"
-published: false
+published: true
 ogImage: /blog/udon-soba-food-culture-prefecture-map/og.png
 description: "「うどん県」香川がトップ、では博多うどんで知られる福岡はどこにいるのでしょうか。2024年家計調査で生うどん・そば消費量を47都道府県で比較すると、福岡は下位に沈み、内陸の長野やそば文化圏が上位に並ぶ意外な地図が浮かび上がります。"
 ---

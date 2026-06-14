@@ -14,7 +14,7 @@ tags:
   - 食文化
 publishedAt: 2026-05-31
 updatedAt: "2026-06-04"
-published: false
+published: true
 ogImage: /blog/mochi-consumption-prefecture-gap/og.png
 ---
 

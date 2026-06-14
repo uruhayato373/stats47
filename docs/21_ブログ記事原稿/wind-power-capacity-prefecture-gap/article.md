@@ -14,7 +14,7 @@ tags:
   - 青森
 publishedAt: 2026-06-02
 updatedAt: "2026-06-04"
-published: false
+published: true
 ogImage: /blog/wind-power-capacity-prefecture-gap/og.png
 ---
 

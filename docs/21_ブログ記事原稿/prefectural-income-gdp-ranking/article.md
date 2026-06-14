@@ -9,7 +9,7 @@ tags:
   - 県内総生産
 archetype: A
 category: economy
-published: false
+published: true
 publishedAt: "2026-03-27"
 ---
 

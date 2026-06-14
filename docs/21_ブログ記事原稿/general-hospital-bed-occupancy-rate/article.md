@@ -14,7 +14,7 @@ tags:
 archetype: A
 publishedAt: 2026-06-07
 updatedAt: "2026-06-04"
-published: false
+published: true
 ogImage: /blog/general-hospital-bed-occupancy-rate/og.png
 ---
 

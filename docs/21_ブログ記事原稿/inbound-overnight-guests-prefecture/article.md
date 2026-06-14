@@ -14,7 +14,7 @@ tags:
   - 宿泊旅行統計調査
 publishedAt: 2026-05-29
 updatedAt: 未定
-published: false
+published: true
 ogImage: /blog/inbound-overnight-guests-prefecture/og.png
 ---
 

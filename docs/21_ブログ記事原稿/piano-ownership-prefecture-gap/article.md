@@ -14,7 +14,7 @@ tags:
   - 1000世帯あたり
 publishedAt: 2026-06-02
 updatedAt: "2026-06-04"
-published: false
+published: true
 ogImage: /blog/piano-ownership-prefecture-gap/og.png
 ---
 
