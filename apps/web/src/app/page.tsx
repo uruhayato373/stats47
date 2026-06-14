@@ -23,22 +23,27 @@ import {
 import { AdSenseAd, RANKING_PAGE_FOOTER } from "@/lib/google-adsense";
 
 /**
- * ISR (5 分) で再検証する。
+ * 動的レンダリング（ランタイム SSR）を強制する。
  *
  * このページは `<FeaturedRankings>`（注目のランキング）と `listLatestArticles`（最新記事）を
- * R2 snapshot から読む。ビルド環境では R2 が読めない（S3 creds 不一致 + R2_PUBLIC_FETCH_URL 未設定で
- * `fetchFromR2` が throw、build log: `home/featured.json が R2 に存在しません` / `hasS3Credentials:false`）
- * ため、純 SSG だと「注目のランキング」セクションが null のまま焼き込まれ、トップに /ranking 詳細への
- * 導線が消える（クリックできるのは /themes だけになる）回帰が起きていた。
+ * R2 snapshot から読む。**ビルド環境では R2 が読めない**（detectEnvironment が要求する
+ * `R2_ACCESS_KEY_ID/SECRET/ENDPOINT` と deploy が渡す `CLOUDFLARE_R2_*` の名前不一致 +
+ * `R2_PUBLIC_FETCH_URL` 未設定で `fetchFromR2` が throw、build log: `home/featured.json が R2 に
+ * 存在しません` / `hasS3Credentials:false`）。
  *
- * `revalidate` を付けて ISR 化すると、Cloudflare Workers ランタイムでの再生成時に R2 バインディングで
- * featured.json / values / 記事を実データ取得でき、tile map・1 位データ付きで正しく描画される
- * （/ranking/[key]（revalidate=86400）が同じ理由で正常に出ているのと同様）。デプロイ直後の最大 5 分は
- * ビルド時の空セクションが配信されるが、その後は自己回復する。build 側に手を入れて全 ranking ページを
- * 事前生成させる（R2_PUBLIC_FETCH_URL を build env に追加）と generateStaticParams が ~1,800 件返して
- * ビルドが激重になるため、ランタイム ISR で局所的に解決する。
+ * トップは純 SSG（`○ /`）で **ビルド時に空の FeaturedRankings を焼き込み**、本 OpenNext 構成では
+ * prerendered ページは再デプロイまで配信され続ける（`revalidate` を付けても時間ベース ISR 再生成が
+ * 効かず `x-nextjs-stale-time` が無限のまま＝検証で空のまま byte 一致を確認）ため、トップから
+ * /ranking 詳細への導線が恒久的に消える回帰が起きていた。
+ *
+ * `force-dynamic` でビルド時 prerender を止め、**毎リクエスト Cloudflare Workers ランタイムで描画**
+ * させると、R2 バインディング（ランタイムで稼働。/ranking/[key] が同経路で実データ描画されるのと同じ）で
+ * featured.json / values / 記事を取得でき、tile map・1 位データ付きで正しく出る。
+ *
+ * 不採用: build env に `R2_PUBLIC_FETCH_URL` を足してビルド時に読む案は、/ranking/[key] の
+ * generateStaticParams が ~1,800 件返してビルドが激重化するため見送り。
  */
-export const revalidate = 300;
+export const dynamic = "force-dynamic";
 
 /**
  * 主要ページプレビュー画像/動画の R2 公開 URL ベース。
