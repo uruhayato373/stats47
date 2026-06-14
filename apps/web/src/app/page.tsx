@@ -23,6 +23,24 @@ import {
 import { AdSenseAd, RANKING_PAGE_FOOTER } from "@/lib/google-adsense";
 
 /**
+ * ISR (5 分) で再検証する。
+ *
+ * このページは `<FeaturedRankings>`（注目のランキング）と `listLatestArticles`（最新記事）を
+ * R2 snapshot から読む。ビルド環境では R2 が読めない（S3 creds 不一致 + R2_PUBLIC_FETCH_URL 未設定で
+ * `fetchFromR2` が throw、build log: `home/featured.json が R2 に存在しません` / `hasS3Credentials:false`）
+ * ため、純 SSG だと「注目のランキング」セクションが null のまま焼き込まれ、トップに /ranking 詳細への
+ * 導線が消える（クリックできるのは /themes だけになる）回帰が起きていた。
+ *
+ * `revalidate` を付けて ISR 化すると、Cloudflare Workers ランタイムでの再生成時に R2 バインディングで
+ * featured.json / values / 記事を実データ取得でき、tile map・1 位データ付きで正しく描画される
+ * （/ranking/[key]（revalidate=86400）が同じ理由で正常に出ているのと同様）。デプロイ直後の最大 5 分は
+ * ビルド時の空セクションが配信されるが、その後は自己回復する。build 側に手を入れて全 ranking ページを
+ * 事前生成させる（R2_PUBLIC_FETCH_URL を build env に追加）と generateStaticParams が ~1,800 件返して
+ * ビルドが激重になるため、ランタイム ISR で局所的に解決する。
+ */
+export const revalidate = 300;
+
+/**
  * 主要ページプレビュー画像/動画の R2 公開 URL ベース。
  * 仕様: docs/01_技術設計/08_homepage-previews.md
  * 撮影: apps/web/scripts/capture-home-previews.ts
