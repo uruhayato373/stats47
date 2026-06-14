@@ -14,7 +14,7 @@ tags:
   - SEO
 publishedAt: 2026-05-17
 updatedAt: 2026-05-17
-published: false
+published: true
 ogImage: /blog/cc-estat-20-publish/og.png
 ---
 
@@ -605,6 +605,8 @@ URL 構造も把握しておくと、Claude Code に追加ページを頼むと�
 - [Part 9 県民性レーダーチャート](https://stats47.jp/blog/cc-estat-09-radar-prefecture)
 - [Part 10 賃金格差ボックスプロット](https://stats47.jp/blog/cc-estat-10-wage-box-plot)
 - [Part 11 観光客スタックドエリア](https://stats47.jp/blog/cc-estat-11-tourism-stacked)
+- [Part 12 産業構成ツリーマップ](https://stats47.jp/blog/cc-estat-12-industry-treemap)
+- [Part 13 人口増減コロプレス](https://stats47.jp/blog/cc-estat-13-popchange-choropleth)
 - [Part 14 エネルギー消費エリアチャート](https://stats47.jp/blog/cc-estat-14-energy-area-chart)
 - [Part 15 犯罪率 Small Multiple](https://stats47.jp/blog/cc-estat-15-crime-small-multiple)
 - [Part 16 商業バブルチャート](https://stats47.jp/blog/cc-estat-16-commerce-bubble)
