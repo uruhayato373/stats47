@@ -43,3 +43,6 @@ export type { RankingTopPageData, FeaturedRankingItemView } from "./lib/ranking-
 
 // Server components (sidebar cards)
 export { PortStatisticsMapCard } from "./components/RankingSidebar/PortStatisticsMapCard";
+
+// Cached category items reader (R2) — server-only を server entry に閉じ込め、app/ から index 経由でなく server から参照させる
+export { readRankingItemsByCategory } from "./lib/cached-category-items";

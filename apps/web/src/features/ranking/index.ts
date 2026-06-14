@@ -76,6 +76,3 @@ export { RankingPageCardsSkeleton } from "./components/RankingPageCards/RankingP
 
 // Sidebar cards (client)
 export { SurveyCard } from "./components/RankingSidebar/SurveyCard";
-
-// Cached category items reader (R2) — app/ からは no-restricted-imports のため index 経由で参照する
-export { readRankingItemsByCategory } from "./lib/cached-category-items";

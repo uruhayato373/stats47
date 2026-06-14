@@ -28,9 +28,9 @@ import {
   CategoryRankingTable,
   SurveyCard,
   isCaveatNote,
-  readRankingItemsByCategory,
   type CategoryRankingListItem,
 } from "@/features/ranking";
+import { readRankingItemsByCategory } from "@/features/ranking/server";
 import {
   HeroShell,
   KpiGrid,
