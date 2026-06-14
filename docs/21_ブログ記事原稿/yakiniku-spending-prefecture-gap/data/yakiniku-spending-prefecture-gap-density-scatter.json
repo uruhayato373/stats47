@@ -1,0 +1,82 @@
+[
+  {
+    "areaName": "高知",
+    "densityValue": 92.4,
+    "densityUnit": "人/km²",
+    "yakinikuValue": 21768,
+    "yakinikuUnit": "円",
+    "label": "人口密度×焼肉支出"
+  },
+  {
+    "areaName": "大分",
+    "densityValue": 171.1,
+    "densityUnit": "人/km²",
+    "yakinikuValue": 15270,
+    "yakinikuUnit": "円",
+    "label": "人口密度×焼肉支出"
+  },
+  {
+    "areaName": "岡山",
+    "densityValue": 257.4,
+    "densityUnit": "人/km²",
+    "yakinikuValue": 13915,
+    "yakinikuUnit": "円",
+    "label": "人口密度×焼肉支出"
+  },
+  {
+    "areaName": "滋賀",
+    "densityValue": 349.0,
+    "densityUnit": "人/km²",
+    "yakinikuValue": 12676,
+    "yakinikuUnit": "円",
+    "label": "人口密度×焼肉支出"
+  },
+  {
+    "areaName": "熊本",
+    "densityValue": 229.0,
+    "densityUnit": "人/km²",
+    "yakinikuValue": 12365,
+    "yakinikuUnit": "円",
+    "label": "人口密度×焼肉支出"
+  },
+  {
+    "areaName": "岩手",
+    "densityValue": 75.0,
+    "densityUnit": "人/km²",
+    "yakinikuValue": 6776,
+    "yakinikuUnit": "円",
+    "label": "人口密度×焼肉支出"
+  },
+  {
+    "areaName": "長崎",
+    "densityValue": 303.1,
+    "densityUnit": "人/km²",
+    "yakinikuValue": 6440,
+    "yakinikuUnit": "円",
+    "label": "人口密度×焼肉支出"
+  },
+  {
+    "areaName": "沖縄",
+    "densityValue": 642.4,
+    "densityUnit": "人/km²",
+    "yakinikuValue": 5277,
+    "yakinikuUnit": "円",
+    "label": "人口密度×焼肉支出"
+  },
+  {
+    "areaName": "新潟",
+    "densityValue": 166.8,
+    "densityUnit": "人/km²",
+    "yakinikuValue": 5237,
+    "yakinikuUnit": "円",
+    "label": "人口密度×焼肉支出"
+  },
+  {
+    "areaName": "兵庫",
+    "densityValue": 635.3,
+    "densityUnit": "人/km²",
+    "yakinikuValue": 3943,
+    "yakinikuUnit": "円",
+    "label": "人口密度×焼肉支出"
+  }
+]

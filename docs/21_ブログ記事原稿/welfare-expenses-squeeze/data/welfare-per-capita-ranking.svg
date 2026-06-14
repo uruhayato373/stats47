@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 480" role="img" aria-label="一人当たり民生費 上位5・下位5（2022年度）">
+  <text x="360" y="30" text-anchor="middle" font-size="18" font-weight="bold" fill="#0f172a" font-family="sans-serif">一人当たり民生費 上位5・下位5（2022年度）</text>
+  <g>
+    <title>沖縄県：10.4万円 rank=1</title>
+    <text x="122" y="70" text-anchor="end" dominant-baseline="middle" font-size="15" fill="#334155" font-family="sans-serif">沖縄県（1位）</text>
+    <rect x="132" y="56" width="470.0" height="26" rx="2" fill="#2563eb"/>
+    <text x="610.0" y="70" dominant-baseline="middle" font-size="14" fill="#475569" font-family="sans-serif">10.4万円</text>
+  </g>
+  <g>
+    <title>高知県：10.3万円 rank=2</title>
+    <text x="122" y="110" text-anchor="end" dominant-baseline="middle" font-size="15" fill="#334155" font-family="sans-serif">高知県（2位）</text>
+    <rect x="132" y="96" width="464.5" height="26" rx="2" fill="#2563eb"/>
+    <text x="604.5" y="110" dominant-baseline="middle" font-size="14" fill="#475569" font-family="sans-serif">10.3万円</text>
+  </g>
+  <g>
+    <title>徳島県：10.0万円 rank=3</title>
+    <text x="122" y="150" text-anchor="end" dominant-baseline="middle" font-size="15" fill="#334155" font-family="sans-serif">徳島県（3位）</text>
+    <rect x="132" y="136" width="450.0" height="26" rx="2" fill="#2563eb"/>
+    <text x="590.0" y="150" dominant-baseline="middle" font-size="14" fill="#475569" font-family="sans-serif">10.0万円</text>
+  </g>
+  <g>
+    <title>和歌山県：9.9万円 rank=4</title>
+    <text x="122" y="190" text-anchor="end" dominant-baseline="middle" font-size="15" fill="#334155" font-family="sans-serif">和歌山県（4位）</text>
+    <rect x="132" y="176" width="445.5" height="26" rx="2" fill="#2563eb"/>
+    <text x="585.5" y="190" dominant-baseline="middle" font-size="14" fill="#475569" font-family="sans-serif">9.9万円</text>
+  </g>
+  <g>
+    <title>秋田県：9.8万円 rank=5</title>
+    <text x="122" y="230" text-anchor="end" dominant-baseline="middle" font-size="15" fill="#334155" font-family="sans-serif">秋田県（5位）</text>
+    <rect x="132" y="216" width="445.0" height="26" rx="2" fill="#2563eb"/>
+    <text x="585.0" y="230" dominant-baseline="middle" font-size="14" fill="#475569" font-family="sans-serif">9.8万円</text>
+  </g>
+  <g>
+    <title>愛知県：6.4万円 rank=43</title>
+    <text x="122" y="270" text-anchor="end" dominant-baseline="middle" font-size="15" fill="#334155" font-family="sans-serif">愛知県（43位）</text>
+    <rect x="132" y="256" width="289.7" height="26" rx="2" fill="#ea580c"/>
+    <text x="429.7" y="270" dominant-baseline="middle" font-size="14" fill="#475569" font-family="sans-serif">6.4万円</text>
+  </g>
+  <g>
+    <title>静岡県：6.3万円 rank=44</title>
+    <text x="122" y="310" text-anchor="end" dominant-baseline="middle" font-size="15" fill="#334155" font-family="sans-serif">静岡県（44位）</text>
+    <rect x="132" y="296" width="283.2" height="26" rx="2" fill="#ea580c"/>
+    <text x="423.2" y="310" dominant-baseline="middle" font-size="14" fill="#475569" font-family="sans-serif">6.3万円</text>
+  </g>
+  <g>
+    <title>千葉県：6.1万円 rank=45</title>
+    <text x="122" y="350" text-anchor="end" dominant-baseline="middle" font-size="15" fill="#334155" font-family="sans-serif">千葉県（45位）</text>
+    <rect x="132" y="336" width="273.7" height="26" rx="2" fill="#ea580c"/>
+    <text x="413.7" y="350" dominant-baseline="middle" font-size="14" fill="#475569" font-family="sans-serif">6.1万円</text>
+  </g>
+  <g>
+    <title>神奈川県：6.0万円 rank=46</title>
+    <text x="122" y="390" text-anchor="end" dominant-baseline="middle" font-size="15" fill="#334155" font-family="sans-serif">神奈川県（46位）</text>
+    <rect x="132" y="376" width="272.8" height="26" rx="2" fill="#ea580c"/>
+    <text x="412.8" y="390" dominant-baseline="middle" font-size="14" fill="#475569" font-family="sans-serif">6.0万円</text>
+  </g>
+  <g>
+    <title>埼玉県：5.9万円 rank=47</title>
+    <text x="122" y="430" text-anchor="end" dominant-baseline="middle" font-size="15" fill="#334155" font-family="sans-serif">埼玉県（47位）</text>
+    <rect x="132" y="416" width="264.4" height="26" rx="2" fill="#ea580c"/>
+    <text x="404.4" y="430" dominant-baseline="middle" font-size="14" fill="#475569" font-family="sans-serif">5.9万円</text>
+  </g>
+  <text x="132" y="470" font-size="12" fill="#64748b" font-family="sans-serif">青=上位5（一人当たり多い） / 橙=下位5・単位:万円／人</text>
+</svg>

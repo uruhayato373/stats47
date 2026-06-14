@@ -1,0 +1,578 @@
+[
+  {
+    "areaName": "京都府",
+    "year": 2007,
+    "rank": 25,
+    "value": 2486,
+    "label": "即席麺消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "京都府",
+    "year": 2008,
+    "rank": 43,
+    "value": 1918,
+    "label": "即席麺消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "京都府",
+    "year": 2009,
+    "rank": 24,
+    "value": 2535,
+    "label": "即席麺消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "京都府",
+    "year": 2010,
+    "rank": 17,
+    "value": 2806,
+    "label": "即席麺消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "京都府",
+    "year": 2011,
+    "rank": 29,
+    "value": 2506,
+    "label": "即席麺消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "京都府",
+    "year": 2012,
+    "rank": 23,
+    "value": 2711,
+    "label": "即席麺消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "京都府",
+    "year": 2013,
+    "rank": 12,
+    "value": 3543,
+    "label": "即席麺消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "京都府",
+    "year": 2014,
+    "rank": 39,
+    "value": 2522,
+    "label": "即席麺消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "京都府",
+    "year": 2015,
+    "rank": 23,
+    "value": 2687,
+    "label": "即席麺消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "京都府",
+    "year": 2016,
+    "rank": 21,
+    "value": 2757,
+    "label": "即席麺消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "京都府",
+    "year": 2017,
+    "rank": 40,
+    "value": 2225,
+    "label": "即席麺消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "京都府",
+    "year": 2018,
+    "rank": 32,
+    "value": 2186,
+    "label": "即席麺消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "京都府",
+    "year": 2019,
+    "rank": 27,
+    "value": 2445,
+    "label": "即席麺消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "京都府",
+    "year": 2020,
+    "rank": 32,
+    "value": 2672,
+    "label": "即席麺消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "京都府",
+    "year": 2021,
+    "rank": 39,
+    "value": 2568,
+    "label": "即席麺消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "京都府",
+    "year": 2022,
+    "rank": 18,
+    "value": 2998,
+    "label": "即席麺消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "京都府",
+    "year": 2023,
+    "rank": 22,
+    "value": 2791,
+    "label": "即席麺消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "京都府",
+    "year": 2024,
+    "rank": 5,
+    "value": 3489,
+    "label": "即席麺消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "熊本県",
+    "year": 2007,
+    "rank": 2,
+    "value": 3450,
+    "label": "即席麺消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "熊本県",
+    "year": 2008,
+    "rank": 11,
+    "value": 2800,
+    "label": "即席麺消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "熊本県",
+    "year": 2009,
+    "rank": 10,
+    "value": 3210,
+    "label": "即席麺消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "熊本県",
+    "year": 2010,
+    "rank": 20,
+    "value": 2757,
+    "label": "即席麺消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "熊本県",
+    "year": 2011,
+    "rank": 25,
+    "value": 2599,
+    "label": "即席麺消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "熊本県",
+    "year": 2012,
+    "rank": 9,
+    "value": 3103,
+    "label": "即席麺消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "熊本県",
+    "year": 2013,
+    "rank": 19,
+    "value": 3315,
+    "label": "即席麺消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "熊本県",
+    "year": 2014,
+    "rank": 16,
+    "value": 3293,
+    "label": "即席麺消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "熊本県",
+    "year": 2015,
+    "rank": 10,
+    "value": 3128,
+    "label": "即席麺消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "熊本県",
+    "year": 2016,
+    "rank": 23,
+    "value": 2717,
+    "label": "即席麺消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "熊本県",
+    "year": 2017,
+    "rank": 4,
+    "value": 3324,
+    "label": "即席麺消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "熊本県",
+    "year": 2018,
+    "rank": 2,
+    "value": 3838,
+    "label": "即席麺消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "熊本県",
+    "year": 2019,
+    "rank": 1,
+    "value": 3676,
+    "label": "即席麺消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "熊本県",
+    "year": 2020,
+    "rank": 2,
+    "value": 4197,
+    "label": "即席麺消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "熊本県",
+    "year": 2021,
+    "rank": 4,
+    "value": 3637,
+    "label": "即席麺消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "熊本県",
+    "year": 2022,
+    "rank": 8,
+    "value": 3350,
+    "label": "即席麺消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "熊本県",
+    "year": 2023,
+    "rank": 2,
+    "value": 4074,
+    "label": "即席麺消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "熊本県",
+    "year": 2024,
+    "rank": 1,
+    "value": 4147,
+    "label": "即席麺消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "鳥取県",
+    "year": 2007,
+    "rank": 5,
+    "value": 3115,
+    "label": "即席麺消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "鳥取県",
+    "year": 2008,
+    "rank": 3,
+    "value": 3583,
+    "label": "即席麺消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "鳥取県",
+    "year": 2009,
+    "rank": 1,
+    "value": 4261,
+    "label": "即席麺消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "鳥取県",
+    "year": 2010,
+    "rank": 1,
+    "value": 4932,
+    "label": "即席麺消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "鳥取県",
+    "year": 2011,
+    "rank": 3,
+    "value": 3654,
+    "label": "即席麺消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "鳥取県",
+    "year": 2012,
+    "rank": 1,
+    "value": 4404,
+    "label": "即席麺消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "鳥取県",
+    "year": 2013,
+    "rank": 2,
+    "value": 4576,
+    "label": "即席麺消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "鳥取県",
+    "year": 2014,
+    "rank": 1,
+    "value": 4427,
+    "label": "即席麺消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "鳥取県",
+    "year": 2015,
+    "rank": 1,
+    "value": 4209,
+    "label": "即席麺消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "鳥取県",
+    "year": 2016,
+    "rank": 1,
+    "value": 4835,
+    "label": "即席麺消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "鳥取県",
+    "year": 2017,
+    "rank": 1,
+    "value": 4554,
+    "label": "即席麺消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "鳥取県",
+    "year": 2018,
+    "rank": 1,
+    "value": 4739,
+    "label": "即席麺消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "鳥取県",
+    "year": 2019,
+    "rank": 4,
+    "value": 3383,
+    "label": "即席麺消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "鳥取県",
+    "year": 2020,
+    "rank": 1,
+    "value": 4252,
+    "label": "即席麺消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "鳥取県",
+    "year": 2021,
+    "rank": 5,
+    "value": 3608,
+    "label": "即席麺消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "鳥取県",
+    "year": 2022,
+    "rank": 1,
+    "value": 4426,
+    "label": "即席麺消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "鳥取県",
+    "year": 2023,
+    "rank": 1,
+    "value": 4679,
+    "label": "即席麺消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "鳥取県",
+    "year": 2024,
+    "rank": 2,
+    "value": 4091,
+    "label": "即席麺消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "長野県",
+    "year": 2007,
+    "rank": 33,
+    "value": 2261,
+    "label": "即席麺消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "長野県",
+    "year": 2008,
+    "rank": 27,
+    "value": 2356,
+    "label": "即席麺消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "長野県",
+    "year": 2009,
+    "rank": 42,
+    "value": 2053,
+    "label": "即席麺消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "長野県",
+    "year": 2010,
+    "rank": 44,
+    "value": 1945,
+    "label": "即席麺消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "長野県",
+    "year": 2011,
+    "rank": 43,
+    "value": 2002,
+    "label": "即席麺消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "長野県",
+    "year": 2012,
+    "rank": 45,
+    "value": 2072,
+    "label": "即席麺消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "長野県",
+    "year": 2013,
+    "rank": 47,
+    "value": 2347,
+    "label": "即席麺消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "長野県",
+    "year": 2014,
+    "rank": 46,
+    "value": 2100,
+    "label": "即席麺消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "長野県",
+    "year": 2015,
+    "rank": 44,
+    "value": 1971,
+    "label": "即席麺消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "長野県",
+    "year": 2016,
+    "rank": 35,
+    "value": 2337,
+    "label": "即席麺消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "長野県",
+    "year": 2017,
+    "rank": 41,
+    "value": 2101,
+    "label": "即席麺消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "長野県",
+    "year": 2018,
+    "rank": 29,
+    "value": 2312,
+    "label": "即席麺消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "長野県",
+    "year": 2019,
+    "rank": 44,
+    "value": 1952,
+    "label": "即席麺消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "長野県",
+    "year": 2020,
+    "rank": 42,
+    "value": 2371,
+    "label": "即席麺消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "長野県",
+    "year": 2021,
+    "rank": 37,
+    "value": 2644,
+    "label": "即席麺消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "長野県",
+    "year": 2022,
+    "rank": 21,
+    "value": 2878,
+    "label": "即席麺消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "長野県",
+    "year": 2023,
+    "rank": 40,
+    "value": 2334,
+    "label": "即席麺消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "長野県",
+    "year": 2024,
+    "rank": 47,
+    "value": 1751,
+    "label": "即席麺消費量",
+    "unit": "g"
+  }
+]

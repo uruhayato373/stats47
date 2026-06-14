@@ -1,0 +1,56 @@
+<!-- data-source: instant-noodles-consumption-prefecture-gap-timeseries.json | generated: 2026-06-14T00:00:00.000Z -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 340" width="680" height="340" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" role="img" aria-label="即席麺消費量の推移（京都・熊本・鳥取・長野、2007-2024年・g）">
+  <style>
+    .svg-bg{fill:#fafafa}
+    .svg-title{fill:#222}
+    .svg-axis{fill:#666}
+    .svg-grid{stroke:#e5e7eb}
+    .svg-legend{fill:#333}
+    @media (prefers-color-scheme:dark){
+      .svg-bg{fill:#1f2937}
+      .svg-title{fill:#f9fafb}
+      .svg-axis{fill:#9ca3af}
+      .svg-grid{stroke:#374151}
+      .svg-legend{fill:#e5e7eb}
+    }
+  </style>
+  <rect width="680" height="340" class="svg-bg" rx="8"/>
+  <text x="340" y="26" text-anchor="middle" font-size="16" font-weight="bold" class="svg-title">即席麺消費量の推移（2007→2024年・g）</text>
+  <text x="340" y="44" text-anchor="middle" font-size="11" class="svg-axis">京都の中位→上位への上昇と、長野の下落</text>
+  <line x1="56" y1="296.0" x2="560" y2="296.0" class="svg-grid" stroke-width="1"/>
+  <text x="48" y="300.0" text-anchor="end" font-size="10" class="svg-axis">0</text>
+  <line x1="56" y1="247.6" x2="560" y2="247.6" class="svg-grid" stroke-width="1"/>
+  <text x="48" y="251.6" text-anchor="end" font-size="10" class="svg-axis">1000</text>
+  <line x1="56" y1="199.2" x2="560" y2="199.2" class="svg-grid" stroke-width="1"/>
+  <text x="48" y="203.2" text-anchor="end" font-size="10" class="svg-axis">2000</text>
+  <line x1="56" y1="150.8" x2="560" y2="150.8" class="svg-grid" stroke-width="1"/>
+  <text x="48" y="154.8" text-anchor="end" font-size="10" class="svg-axis">3000</text>
+  <line x1="56" y1="102.4" x2="560" y2="102.4" class="svg-grid" stroke-width="1"/>
+  <text x="48" y="106.4" text-anchor="end" font-size="10" class="svg-axis">4000</text>
+  <line x1="56" y1="54.0" x2="560" y2="54.0" class="svg-grid" stroke-width="1"/>
+  <text x="48" y="58.0" text-anchor="end" font-size="10" class="svg-axis">5000</text>
+  <text x="56.0" y="314.0" text-anchor="middle" font-size="9" class="svg-axis">2007</text>
+  <text x="85.6" y="314.0" text-anchor="middle" font-size="9" class="svg-axis">2008</text>
+  <text x="174.6" y="314.0" text-anchor="middle" font-size="9" class="svg-axis">2011</text>
+  <text x="263.5" y="314.0" text-anchor="middle" font-size="9" class="svg-axis">2014</text>
+  <text x="352.5" y="314.0" text-anchor="middle" font-size="9" class="svg-axis">2017</text>
+  <text x="441.4" y="314.0" text-anchor="middle" font-size="9" class="svg-axis">2020</text>
+  <text x="530.4" y="314.0" text-anchor="middle" font-size="9" class="svg-axis">2023</text>
+  <text x="560.0" y="314.0" text-anchor="middle" font-size="9" class="svg-axis">2024</text>
+  <polyline points="56.0,175.7 85.6,203.2 115.3,173.3 144.9,160.2 174.6,174.7 204.2,164.8 233.9,124.5 263.5,173.9 293.2,165.9 322.8,162.6 352.5,188.3 382.1,190.2 411.8,177.7 441.4,166.7 471.1,171.7 500.7,150.9 530.4,160.9 560.0,127.1" fill="none" stroke="#1565c0" stroke-width="2.2" stroke-linejoin="round"/>
+  <circle cx="560.0" cy="127.1" r="3" fill="#1565c0"/>
+  <text x="566.0" y="131.1" font-size="10" font-weight="bold" fill="#1565c0">京都 3489g</text>
+  <circle cx="56.0" cy="175.7" r="3" fill="#1565c0"/>
+  <polyline points="56.0,129.0 85.6,160.5 115.3,140.6 144.9,162.6 174.6,170.2 204.2,145.8 233.9,135.6 263.5,136.6 293.2,144.6 322.8,164.5 352.5,135.1 382.1,110.2 411.8,118.1 441.4,92.9 471.1,120.0 500.7,133.9 530.4,98.8 560.0,95.3" fill="none" stroke="#e53935" stroke-width="2.2" stroke-linejoin="round"/>
+  <circle cx="560.0" cy="95.3" r="3" fill="#e53935"/>
+  <text x="566.0" y="99.3" font-size="10" font-weight="bold" fill="#e53935">熊本 4147g</text>
+  <circle cx="56.0" cy="129.0" r="3" fill="#e53935"/>
+  <polyline points="56.0,145.2 85.6,122.6 115.3,89.8 144.9,57.3 174.6,119.1 204.2,82.8 233.9,74.5 263.5,81.7 293.2,92.3 322.8,62.0 352.5,75.6 382.1,66.6 411.8,132.3 441.4,90.2 471.1,121.4 500.7,81.8 530.4,69.5 560.0,98.0" fill="none" stroke="#2e7d32" stroke-width="2.2" stroke-linejoin="round"/>
+  <circle cx="560.0" cy="98.0" r="3" fill="#2e7d32"/>
+  <text x="566.0" y="102.0" font-size="10" font-weight="bold" fill="#2e7d32">鳥取 4091g</text>
+  <circle cx="56.0" cy="145.2" r="3" fill="#2e7d32"/>
+  <polyline points="56.0,186.6 85.6,182.0 115.3,196.6 144.9,201.9 174.6,199.1 204.2,195.7 233.9,182.4 263.5,194.4 293.2,200.6 322.8,182.9 352.5,194.3 382.1,184.1 411.8,201.5 441.4,181.2 471.1,168.0 500.7,156.7 530.4,183.0 560.0,211.3" fill="none" stroke="#f59e0b" stroke-width="2.2" stroke-linejoin="round"/>
+  <circle cx="560.0" cy="211.3" r="3" fill="#f59e0b"/>
+  <text x="566.0" y="215.3" font-size="10" font-weight="bold" fill="#f59e0b">長野 1751g</text>
+  <circle cx="56.0" cy="186.6" r="3" fill="#f59e0b"/>
+</svg>

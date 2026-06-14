@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 480" role="img" aria-label="歳出に占める民生費の割合 上位5・下位5（2022年度）">
+  <text x="360" y="30" text-anchor="middle" font-size="18" font-weight="bold" fill="#0f172a" font-family="sans-serif">歳出に占める民生費の割合 上位5・下位5（2022年度）</text>
+  <g>
+    <title>神奈川県：21.8% rank=1</title>
+    <text x="122" y="70" text-anchor="end" dominant-baseline="middle" font-size="15" fill="#334155" font-family="sans-serif">神奈川県（1位）</text>
+    <rect x="132" y="56" width="470.0" height="26" rx="2" fill="#2563eb"/>
+    <text x="610.0" y="70" dominant-baseline="middle" font-size="14" fill="#475569" font-family="sans-serif">21.8%</text>
+  </g>
+  <g>
+    <title>埼玉県：18.7% rank=2</title>
+    <text x="122" y="110" text-anchor="end" dominant-baseline="middle" font-size="15" fill="#334155" font-family="sans-serif">埼玉県（2位）</text>
+    <rect x="132" y="96" width="402.9" height="26" rx="2" fill="#2563eb"/>
+    <text x="542.9" y="110" dominant-baseline="middle" font-size="14" fill="#475569" font-family="sans-serif">18.7%</text>
+  </g>
+  <g>
+    <title>大阪府：17.4% rank=3</title>
+    <text x="122" y="150" text-anchor="end" dominant-baseline="middle" font-size="15" fill="#334155" font-family="sans-serif">大阪府（3位）</text>
+    <rect x="132" y="136" width="375.9" height="26" rx="2" fill="#2563eb"/>
+    <text x="515.9" y="150" dominant-baseline="middle" font-size="14" fill="#475569" font-family="sans-serif">17.4%</text>
+  </g>
+  <g>
+    <title>福岡県：17.3% rank=4</title>
+    <text x="122" y="190" text-anchor="end" dominant-baseline="middle" font-size="15" fill="#334155" font-family="sans-serif">福岡県（4位）</text>
+    <rect x="132" y="176" width="372.4" height="26" rx="2" fill="#2563eb"/>
+    <text x="512.4" y="190" dominant-baseline="middle" font-size="14" fill="#475569" font-family="sans-serif">17.3%</text>
+  </g>
+  <g>
+    <title>千葉県：16.8% rank=5</title>
+    <text x="122" y="230" text-anchor="end" dominant-baseline="middle" font-size="15" fill="#334155" font-family="sans-serif">千葉県（5位）</text>
+    <rect x="132" y="216" width="361.6" height="26" rx="2" fill="#2563eb"/>
+    <text x="501.6" y="230" dominant-baseline="middle" font-size="14" fill="#475569" font-family="sans-serif">16.8%</text>
+  </g>
+  <g>
+    <title>山梨県：12.1% rank=43</title>
+    <text x="122" y="270" text-anchor="end" dominant-baseline="middle" font-size="15" fill="#334155" font-family="sans-serif">山梨県（43位）</text>
+    <rect x="132" y="256" width="260.6" height="26" rx="2" fill="#ea580c"/>
+    <text x="400.6" y="270" dominant-baseline="middle" font-size="14" fill="#475569" font-family="sans-serif">12.1%</text>
+  </g>
+  <g>
+    <title>富山県：11.8% rank=44</title>
+    <text x="122" y="310" text-anchor="end" dominant-baseline="middle" font-size="15" fill="#334155" font-family="sans-serif">富山県（44位）</text>
+    <rect x="132" y="296" width="253.9" height="26" rx="2" fill="#ea580c"/>
+    <text x="393.9" y="310" dominant-baseline="middle" font-size="14" fill="#475569" font-family="sans-serif">11.8%</text>
+  </g>
+  <g>
+    <title>福井県：11.6% rank=45</title>
+    <text x="122" y="350" text-anchor="end" dominant-baseline="middle" font-size="15" fill="#334155" font-family="sans-serif">福井県（45位）</text>
+    <rect x="132" y="336" width="250.0" height="26" rx="2" fill="#ea580c"/>
+    <text x="390.0" y="350" dominant-baseline="middle" font-size="14" fill="#475569" font-family="sans-serif">11.6%</text>
+  </g>
+  <g>
+    <title>福島県：11.5% rank=46</title>
+    <text x="122" y="390" text-anchor="end" dominant-baseline="middle" font-size="15" fill="#334155" font-family="sans-serif">福島県（46位）</text>
+    <rect x="132" y="376" width="248.1" height="26" rx="2" fill="#ea580c"/>
+    <text x="388.1" y="390" dominant-baseline="middle" font-size="14" fill="#475569" font-family="sans-serif">11.5%</text>
+  </g>
+  <g>
+    <title>島根県：10.8% rank=47</title>
+    <text x="122" y="430" text-anchor="end" dominant-baseline="middle" font-size="15" fill="#334155" font-family="sans-serif">島根県（47位）</text>
+    <rect x="132" y="416" width="233.4" height="26" rx="2" fill="#ea580c"/>
+    <text x="373.4" y="430" dominant-baseline="middle" font-size="14" fill="#475569" font-family="sans-serif">10.8%</text>
+  </g>
+  <text x="132" y="470" font-size="12" fill="#64748b" font-family="sans-serif">青=上位5（構成比高い） / 橙=下位5・単位:％</text>
+</svg>

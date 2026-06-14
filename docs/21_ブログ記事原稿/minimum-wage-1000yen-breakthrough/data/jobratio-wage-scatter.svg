@@ -1,0 +1,102 @@
+<!-- data-source: jobratio-wage-scatter | generated: 2026-06-14T04:32:41.270Z -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 470" width="680" height="470" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" role="img" aria-label="有効求人倍率（2022年度）× 最低賃金（2024年度）の散布図。47都道府県、Pearson r=-0.38の弱い負の相関">
+  <style>
+    .svg-bg{fill:#fafafa}
+    .svg-title{fill:#222}
+    .svg-subtitle{fill:#666}
+    .svg-axis{stroke:#9ca3af}
+    .svg-grid{stroke:#e5e7eb}
+    .svg-tick{fill:#666}
+    .svg-trend{stroke:#94a3b8}
+    .svg-note{fill:#888}
+    .svg-pt{fill:#3b82f6}
+    .svg-pt-hi{fill:#dc2626}
+    .svg-ptlabel{fill:#334155}
+    @media (prefers-color-scheme:dark){
+      .svg-bg{fill:#1f2937}
+      .svg-title{fill:#f9fafb}
+      .svg-subtitle{fill:#9ca3af}
+      .svg-axis{stroke:#6b7280}
+      .svg-grid{stroke:#374151}
+      .svg-tick{fill:#9ca3af}
+      .svg-trend{stroke:#64748b}
+      .svg-note{fill:#9ca3af}
+      .svg-pt{fill:#60a5fa}
+      .svg-pt-hi{fill:#f87171}
+      .svg-ptlabel{fill:#cbd5e1}
+    }
+  </style>
+  <rect width="680" height="470" class="svg-bg" rx="8"/>
+  <text x="340" y="28" text-anchor="middle" font-size="16" font-weight="bold" class="svg-title">有効求人倍率と最低賃金の関係（47都道府県）</text>
+  <text x="340" y="46" text-anchor="middle" font-size="11" class="svg-subtitle">横軸=有効求人倍率(2022年度) / 縦軸=最低賃金(2024年度)　Pearson r=-0.38（弱い負の相関）</text>
+  <rect x="70" y="54" width="560" height="300" class="svg-bg" stroke="#d1d5db" stroke-width="0.5"/>
+  <line x1="70" y1="329.0" x2="630" y2="329.0" class="svg-grid" stroke-width="0.5"/><text x="62" y="332.5" text-anchor="end" font-size="10" class="svg-tick">960</text>
+  <line x1="70" y1="279.0" x2="630" y2="279.0" class="svg-grid" stroke-width="0.5"/><text x="62" y="282.5" text-anchor="end" font-size="10" class="svg-tick">1000</text>
+  <line x1="70" y1="229.0" x2="630" y2="229.0" class="svg-grid" stroke-width="0.5"/><text x="62" y="232.5" text-anchor="end" font-size="10" class="svg-tick">1040</text>
+  <line x1="70" y1="179.0" x2="630" y2="179.0" class="svg-grid" stroke-width="0.5"/><text x="62" y="182.5" text-anchor="end" font-size="10" class="svg-tick">1080</text>
+  <line x1="70" y1="129.0" x2="630" y2="129.0" class="svg-grid" stroke-width="0.5"/><text x="62" y="132.5" text-anchor="end" font-size="10" class="svg-tick">1120</text>
+  <line x1="70" y1="79.0" x2="630" y2="79.0" class="svg-grid" stroke-width="0.5"/><text x="62" y="82.5" text-anchor="end" font-size="10" class="svg-tick">1160</text>
+  <line x1="70.0" y1="54" x2="70.0" y2="354" class="svg-grid" stroke-width="0.5"/><text x="70.0" y="370" text-anchor="middle" font-size="10" class="svg-tick">0.8</text>
+  <line x1="163.3" y1="54" x2="163.3" y2="354" class="svg-grid" stroke-width="0.5"/><text x="163.3" y="370" text-anchor="middle" font-size="10" class="svg-tick">1.0</text>
+  <line x1="256.7" y1="54" x2="256.7" y2="354" class="svg-grid" stroke-width="0.5"/><text x="256.7" y="370" text-anchor="middle" font-size="10" class="svg-tick">1.2</text>
+  <line x1="350.0" y1="54" x2="350.0" y2="354" class="svg-grid" stroke-width="0.5"/><text x="350.0" y="370" text-anchor="middle" font-size="10" class="svg-tick">1.4</text>
+  <line x1="443.3" y1="54" x2="443.3" y2="354" class="svg-grid" stroke-width="0.5"/><text x="443.3" y="370" text-anchor="middle" font-size="10" class="svg-tick">1.6</text>
+  <line x1="536.7" y1="54" x2="536.7" y2="354" class="svg-grid" stroke-width="0.5"/><text x="536.7" y="370" text-anchor="middle" font-size="10" class="svg-tick">1.8</text>
+  <line x1="630.0" y1="54" x2="630.0" y2="354" class="svg-grid" stroke-width="0.5"/><text x="630.0" y="370" text-anchor="middle" font-size="10" class="svg-tick">2.0</text>
+  <line x1="70.0" y1="220.4" x2="630.0" y2="342.9" class="svg-trend" stroke-width="1.5" stroke-dasharray="6 4"/>
+  <circle cx="602.0" cy="299.0" r="4" class="svg-pt-hi" fill-opacity="0.85" stroke="#fff" stroke-width="0.7"><title>福井: 求人倍率1.94倍 / 最低賃金984円</title></circle>
+  <circle cx="588.0" cy="326.5" r="4" class="svg-pt" fill-opacity="0.85" stroke="#fff" stroke-width="0.7"><title>島根: 求人倍率1.91倍 / 最低賃金962円</title></circle>
+  <circle cx="513.3" cy="297.8" r="4" class="svg-pt" fill-opacity="0.85" stroke="#fff" stroke-width="0.7"><title>新潟: 求人倍率1.75倍 / 最低賃金985円</title></circle>
+  <circle cx="490.0" cy="277.8" r="4" class="svg-pt" fill-opacity="0.85" stroke="#fff" stroke-width="0.7"><title>岐阜: 求人倍率1.7倍 / 最低賃金1001円</title></circle>
+  <circle cx="471.3" cy="335.3" r="4" class="svg-pt" fill-opacity="0.85" stroke="#fff" stroke-width="0.7"><title>山形: 求人倍率1.66倍 / 最低賃金955円</title></circle>
+  <circle cx="471.3" cy="281.5" r="4" class="svg-pt" fill-opacity="0.85" stroke="#fff" stroke-width="0.7"><title>長野: 求人倍率1.66倍 / 最低賃金998円</title></circle>
+  <circle cx="457.3" cy="281.5" r="4" class="svg-pt" fill-opacity="0.85" stroke="#fff" stroke-width="0.7"><title>富山: 求人倍率1.63倍 / 最低賃金998円</title></circle>
+  <circle cx="448.0" cy="332.8" r="4" class="svg-pt" fill-opacity="0.85" stroke="#fff" stroke-width="0.7"><title>鳥取: 求人倍率1.61倍 / 最低賃金957円</title></circle>
+  <circle cx="448.0" cy="254.0" r="4" class="svg-pt" fill-opacity="0.85" stroke="#fff" stroke-width="0.7"><title>広島: 求人倍率1.61倍 / 最低賃金1020円</title></circle>
+  <circle cx="443.3" cy="305.3" r="4" class="svg-pt" fill-opacity="0.85" stroke="#fff" stroke-width="0.7"><title>山口: 求人倍率1.6倍 / 最低賃金979円</title></circle>
+  <circle cx="434.0" cy="339.0" r="4" class="svg-pt" fill-opacity="0.85" stroke="#fff" stroke-width="0.7"><title>熊本: 求人倍率1.58倍 / 最低賃金952円</title></circle>
+  <circle cx="434.0" cy="339.0" r="4" class="svg-pt" fill-opacity="0.85" stroke="#fff" stroke-width="0.7"><title>宮崎: 求人倍率1.58倍 / 最低賃金952円</title></circle>
+  <circle cx="424.7" cy="299.0" r="4" class="svg-pt" fill-opacity="0.85" stroke="#fff" stroke-width="0.7"><title>石川: 求人倍率1.56倍 / 最低賃金984円</title></circle>
+  <circle cx="415.3" cy="334.0" r="4" class="svg-pt" fill-opacity="0.85" stroke="#fff" stroke-width="0.7"><title>愛媛: 求人倍率1.54倍 / 最低賃金956円</title></circle>
+  <circle cx="401.3" cy="335.3" r="4" class="svg-pt" fill-opacity="0.85" stroke="#fff" stroke-width="0.7"><title>福島: 求人倍率1.51倍 / 最低賃金955円</title></circle>
+  <circle cx="401.3" cy="250.3" r="4" class="svg-pt" fill-opacity="0.85" stroke="#fff" stroke-width="0.7"><title>三重: 求人倍率1.51倍 / 最低賃金1023円</title></circle>
+  <circle cx="401.3" cy="301.5" r="4" class="svg-pt" fill-opacity="0.85" stroke="#fff" stroke-width="0.7"><title>岡山: 求人倍率1.51倍 / 最低賃金982円</title></circle>
+  <circle cx="401.3" cy="316.5" r="4" class="svg-pt" fill-opacity="0.85" stroke="#fff" stroke-width="0.7"><title>香川: 求人倍率1.51倍 / 最低賃金970円</title></circle>
+  <circle cx="396.7" cy="340.3" r="4" class="svg-pt-hi" fill-opacity="0.85" stroke="#fff" stroke-width="0.7"><title>秋田: 求人倍率1.5倍 / 最低賃金951円</title></circle>
+  <circle cx="387.3" cy="272.8" r="4" class="svg-pt" fill-opacity="0.85" stroke="#fff" stroke-width="0.7"><title>茨城: 求人倍率1.48倍 / 最低賃金1005円</title></circle>
+  <circle cx="387.3" cy="336.5" r="4" class="svg-pt" fill-opacity="0.85" stroke="#fff" stroke-width="0.7"><title>大分: 求人倍率1.48倍 / 最低賃金954円</title></circle>
+  <circle cx="382.7" cy="312.8" r="4" class="svg-pt" fill-opacity="0.85" stroke="#fff" stroke-width="0.7"><title>宮城: 求人倍率1.47倍 / 最低賃金973円</title></circle>
+  <circle cx="378.0" cy="75.3" r="4" class="svg-pt-hi" fill-opacity="0.85" stroke="#fff" stroke-width="0.7"><title>東京: 求人倍率1.46倍 / 最低賃金1163円</title></circle>
+  <circle cx="364.0" cy="337.8" r="4" class="svg-pt" fill-opacity="0.85" stroke="#fff" stroke-width="0.7"><title>鹿児島: 求人倍率1.43倍 / 最低賃金953円</title></circle>
+  <circle cx="359.3" cy="182.8" r="4" class="svg-pt" fill-opacity="0.85" stroke="#fff" stroke-width="0.7"><title>愛知: 求人倍率1.42倍 / 最低賃金1077円</title></circle>
+  <circle cx="350.0" cy="236.5" r="4" class="svg-pt" fill-opacity="0.85" stroke="#fff" stroke-width="0.7"><title>静岡: 求人倍率1.4倍 / 最低賃金1034円</title></circle>
+  <circle cx="345.3" cy="297.8" r="4" class="svg-pt" fill-opacity="0.85" stroke="#fff" stroke-width="0.7"><title>群馬: 求人倍率1.39倍 / 最低賃金985円</title></circle>
+  <circle cx="345.3" cy="294.0" r="4" class="svg-pt" fill-opacity="0.85" stroke="#fff" stroke-width="0.7"><title>山梨: 求人倍率1.39倍 / 最低賃金988円</title></circle>
+  <circle cx="322.0" cy="334.0" r="4" class="svg-pt" fill-opacity="0.85" stroke="#fff" stroke-width="0.7"><title>佐賀: 求人倍率1.34倍 / 最低賃金956円</title></circle>
+  <circle cx="317.3" cy="339.0" r="4" class="svg-pt" fill-opacity="0.85" stroke="#fff" stroke-width="0.7"><title>岩手: 求人倍率1.33倍 / 最低賃金952円</title></circle>
+  <circle cx="303.3" cy="304.0" r="4" class="svg-pt" fill-opacity="0.85" stroke="#fff" stroke-width="0.7"><title>徳島: 求人倍率1.3倍 / 最低賃金980円</title></circle>
+  <circle cx="289.3" cy="337.8" r="4" class="svg-pt" fill-opacity="0.85" stroke="#fff" stroke-width="0.7"><title>長崎: 求人倍率1.27倍 / 最低賃金953円</title></circle>
+  <circle cx="270.7" cy="274.0" r="4" class="svg-pt" fill-opacity="0.85" stroke="#fff" stroke-width="0.7"><title>栃木: 求人倍率1.23倍 / 最低賃金1004円</title></circle>
+  <circle cx="266.0" cy="136.5" r="4" class="svg-pt" fill-opacity="0.85" stroke="#fff" stroke-width="0.7"><title>大阪: 求人倍率1.22倍 / 最低賃金1114円</title></circle>
+  <circle cx="256.7" cy="337.8" r="4" class="svg-pt" fill-opacity="0.85" stroke="#fff" stroke-width="0.7"><title>青森: 求人倍率1.2倍 / 最低賃金953円</title></circle>
+  <circle cx="242.7" cy="206.5" r="4" class="svg-pt" fill-opacity="0.85" stroke="#fff" stroke-width="0.7"><title>京: 求人倍率1.17倍 / 最低賃金1058円</title></circle>
+  <circle cx="242.7" cy="289.0" r="4" class="svg-pt" fill-opacity="0.85" stroke="#fff" stroke-width="0.7"><title>福岡: 求人倍率1.17倍 / 最低賃金992円</title></circle>
+  <circle cx="238.0" cy="266.5" r="4" class="svg-pt" fill-opacity="0.85" stroke="#fff" stroke-width="0.7"><title>北海: 求人倍率1.16倍 / 最低賃金1010円</title></circle>
+  <circle cx="238.0" cy="339.0" r="4" class="svg-pt" fill-opacity="0.85" stroke="#fff" stroke-width="0.7"><title>高知: 求人倍率1.16倍 / 最低賃金952円</title></circle>
+  <circle cx="224.0" cy="296.5" r="4" class="svg-pt" fill-opacity="0.85" stroke="#fff" stroke-width="0.7"><title>奈良: 求人倍率1.13倍 / 最低賃金986円</title></circle>
+  <circle cx="200.7" cy="257.8" r="4" class="svg-pt" fill-opacity="0.85" stroke="#fff" stroke-width="0.7"><title>滋賀: 求人倍率1.08倍 / 最低賃金1017円</title></circle>
+  <circle cx="200.7" cy="304.0" r="4" class="svg-pt" fill-opacity="0.85" stroke="#fff" stroke-width="0.7"><title>和歌山: 求人倍率1.08倍 / 最低賃金980円</title></circle>
+  <circle cx="186.7" cy="181.5" r="4" class="svg-pt" fill-opacity="0.85" stroke="#fff" stroke-width="0.7"><title>埼玉: 求人倍率1.05倍 / 最低賃金1078円</title></circle>
+  <circle cx="172.7" cy="214.0" r="4" class="svg-pt" fill-opacity="0.85" stroke="#fff" stroke-width="0.7"><title>兵庫: 求人倍率1.02倍 / 最低賃金1052円</title></circle>
+  <circle cx="158.7" cy="339.0" r="4" class="svg-pt-hi" fill-opacity="0.85" stroke="#fff" stroke-width="0.7"><title>沖縄: 求人倍率0.99倍 / 最低賃金952円</title></circle>
+  <circle cx="144.7" cy="184.0" r="4" class="svg-pt" fill-opacity="0.85" stroke="#fff" stroke-width="0.7"><title>千葉: 求人倍率0.96倍 / 最低賃金1076円</title></circle>
+  <circle cx="107.3" cy="76.5" r="4" class="svg-pt-hi" fill-opacity="0.85" stroke="#fff" stroke-width="0.7"><title>神奈川: 求人倍率0.88倍 / 最低賃金1162円</title></circle>
+  <text x="608.0" y="292.0" text-anchor="start" font-size="10" font-weight="bold" class="svg-ptlabel">福井</text>
+  <text x="402.7" y="352.3" text-anchor="start" font-size="10" font-weight="bold" class="svg-ptlabel">秋田</text>
+  <text x="384.0" y="68.3" text-anchor="start" font-size="10" font-weight="bold" class="svg-ptlabel">東京</text>
+  <text x="164.7" y="351.0" text-anchor="start" font-size="10" font-weight="bold" class="svg-ptlabel">沖縄</text>
+  <text x="99.3" y="69.5" text-anchor="end" font-size="10" font-weight="bold" class="svg-ptlabel">神奈川</text>
+  <text x="350" y="392" text-anchor="middle" font-size="11" class="svg-subtitle">有効求人倍率（倍）</text>
+  <text x="22" y="204" text-anchor="middle" font-size="11" class="svg-subtitle" transform="rotate(-90 22 204)">最低賃金（円）</text>
+  <text x="70" y="448" font-size="10" class="svg-note">点線=回帰直線。r²=0.14で、賃金のばらつきの大半は求人倍率以外の要因で決まる（赤=本文で言及した県）。</text>
+</svg>
