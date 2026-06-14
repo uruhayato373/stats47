@@ -543,6 +543,17 @@ export function RankingKeyPageClient({
                     {/* データの考察（常時表示カード） — 本来テーブル直下で読まれるべき主要コンテンツ */}
                     {insightsSection}
 
+                    {/* 広告: 本文中（モバイル専用）。考察直下 = テーブルと主要コンテンツを読んだ
+                        全読者が到達する高 viewability 位置。デスクトップはサイドバー広告でカバー。
+                        旧位置（相関分析の後）は折りたたみ 3 セクション下で到達率が低かったため上方移設
+                        （収益化マスタープラン P1: モバイル本文中広告 / mobile セグメントで計測）。 */}
+                    <div className="lg:hidden">
+                        <AdSenseAd
+                            format={RANKING_INCONTENT_MOBILE.format}
+                            slotId={RANKING_INCONTENT_MOBILE.slotId}
+                        />
+                    </div>
+
                     {/* よくある質問（折りたたみ）+ JSON-LD */}
                     {faqSection}
 
@@ -559,14 +570,6 @@ export function RankingKeyPageClient({
 
                     {/* 相関分析セクション */}
                     {correlationSection}
-
-                    {/* 広告: 解析セクション中盤（モバイル専用。デスクトップはサイドバー広告でカバー） */}
-                    <div className="lg:hidden">
-                        <AdSenseAd
-                            format={RANKING_INCONTENT_MOBILE.format}
-                            slotId={RANKING_INCONTENT_MOBILE.slotId}
-                        />
-                    </div>
 
                     {/* ランキングページカード（補足チャート） */}
                     {rankingPageCards}
