@@ -30,7 +30,7 @@ user-invocable: false
 | e-Stat からデータ取得 | `/search-estat` → `/fetch-estat-data` | 「e-Statで犯罪データ探して」 |
 | メトリクスデータ更新 | `/page-data-batch` | 「データ更新して」 |
 | スナップショット更新・本番反映 | `/sync-snapshots` | 「データ反映して」「スナップショット更新して」 |
-| 相関分析を実行 | `/recompute-correlations` (Phase 7 未実装) | 「相関分析やり直して」 |
+| 相関分析を実行 | `/recompute-correlations` (実装済: build-correlation-snapshot.ts) | 「相関分析やり直して」 |
 | R2 にアップロード | `/push-r2` | 「R2にpushして」 |
 | AI コンテンツ生成 | `/generate-ai-content` | 「AIコンテンツ作って」 |
 
