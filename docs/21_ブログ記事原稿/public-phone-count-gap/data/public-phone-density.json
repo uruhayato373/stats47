@@ -1,0 +1,331 @@
+[
+  {
+    "areaName": "高知県",
+    "rank": 1,
+    "value": 144.2,
+    "label": "公衆電話 人口10万人あたり台数",
+    "unit": "台"
+  },
+  {
+    "areaName": "島根県",
+    "rank": 2,
+    "value": 134.5,
+    "label": "公衆電話 人口10万人あたり台数",
+    "unit": "台"
+  },
+  {
+    "areaName": "山口県",
+    "rank": 3,
+    "value": 133.2,
+    "label": "公衆電話 人口10万人あたり台数",
+    "unit": "台"
+  },
+  {
+    "areaName": "青森県",
+    "rank": 4,
+    "value": 125,
+    "label": "公衆電話 人口10万人あたり台数",
+    "unit": "台"
+  },
+  {
+    "areaName": "山梨県",
+    "rank": 5,
+    "value": 123.5,
+    "label": "公衆電話 人口10万人あたり台数",
+    "unit": "台"
+  },
+  {
+    "areaName": "宮崎県",
+    "rank": 6,
+    "value": 120.1,
+    "label": "公衆電話 人口10万人あたり台数",
+    "unit": "台"
+  },
+  {
+    "areaName": "山形県",
+    "rank": 7,
+    "value": 115,
+    "label": "公衆電話 人口10万人あたり台数",
+    "unit": "台"
+  },
+  {
+    "areaName": "鳥取県",
+    "rank": 8,
+    "value": 114.9,
+    "label": "公衆電話 人口10万人あたり台数",
+    "unit": "台"
+  },
+  {
+    "areaName": "新潟県",
+    "rank": 9,
+    "value": 114.2,
+    "label": "公衆電話 人口10万人あたり台数",
+    "unit": "台"
+  },
+  {
+    "areaName": "和歌山県",
+    "rank": 10,
+    "value": 110.4,
+    "label": "公衆電話 人口10万人あたり台数",
+    "unit": "台"
+  },
+  {
+    "areaName": "岩手県",
+    "rank": 11,
+    "value": 104.1,
+    "label": "公衆電話 人口10万人あたり台数",
+    "unit": "台"
+  },
+  {
+    "areaName": "群馬県",
+    "rank": 12,
+    "value": 102.5,
+    "label": "公衆電話 人口10万人あたり台数",
+    "unit": "台"
+  },
+  {
+    "areaName": "福島県",
+    "rank": 13,
+    "value": 99.9,
+    "label": "公衆電話 人口10万人あたり台数",
+    "unit": "台"
+  },
+  {
+    "areaName": "秋田県",
+    "rank": 14,
+    "value": 99.6,
+    "label": "公衆電話 人口10万人あたり台数",
+    "unit": "台"
+  },
+  {
+    "areaName": "広島県",
+    "rank": 15,
+    "value": 97.8,
+    "label": "公衆電話 人口10万人あたり台数",
+    "unit": "台"
+  },
+  {
+    "areaName": "奈良県",
+    "rank": 16,
+    "value": 96.4,
+    "label": "公衆電話 人口10万人あたり台数",
+    "unit": "台"
+  },
+  {
+    "areaName": "福井県",
+    "rank": 17,
+    "value": 96,
+    "label": "公衆電話 人口10万人あたり台数",
+    "unit": "台"
+  },
+  {
+    "areaName": "茨城県",
+    "rank": 18,
+    "value": 95.2,
+    "label": "公衆電話 人口10万人あたり台数",
+    "unit": "台"
+  },
+  {
+    "areaName": "岡山県",
+    "rank": 19,
+    "value": 95.1,
+    "label": "公衆電話 人口10万人あたり台数",
+    "unit": "台"
+  },
+  {
+    "areaName": "宮城県",
+    "rank": 20,
+    "value": 94.4,
+    "label": "公衆電話 人口10万人あたり台数",
+    "unit": "台"
+  },
+  {
+    "areaName": "長崎県",
+    "rank": 21,
+    "value": 93.8,
+    "label": "公衆電話 人口10万人あたり台数",
+    "unit": "台"
+  },
+  {
+    "areaName": "鹿児島県",
+    "rank": 22,
+    "value": 93.7,
+    "label": "公衆電話 人口10万人あたり台数",
+    "unit": "台"
+  },
+  {
+    "areaName": "栃木県",
+    "rank": 23,
+    "value": 93.3,
+    "label": "公衆電話 人口10万人あたり台数",
+    "unit": "台"
+  },
+  {
+    "areaName": "沖縄県",
+    "rank": 24,
+    "value": 92.1,
+    "label": "公衆電話 人口10万人あたり台数",
+    "unit": "台"
+  },
+  {
+    "areaName": "岐阜県",
+    "rank": 25,
+    "value": 84.2,
+    "label": "公衆電話 人口10万人あたり台数",
+    "unit": "台"
+  },
+  {
+    "areaName": "京都府",
+    "rank": 26,
+    "value": 84.2,
+    "label": "公衆電話 人口10万人あたり台数",
+    "unit": "台"
+  },
+  {
+    "areaName": "北海道",
+    "rank": 27,
+    "value": 83.4,
+    "label": "公衆電話 人口10万人あたり台数",
+    "unit": "台"
+  },
+  {
+    "areaName": "石川県",
+    "rank": 28,
+    "value": 81.3,
+    "label": "公衆電話 人口10万人あたり台数",
+    "unit": "台"
+  },
+  {
+    "areaName": "大分県",
+    "rank": 29,
+    "value": 80.3,
+    "label": "公衆電話 人口10万人あたり台数",
+    "unit": "台"
+  },
+  {
+    "areaName": "東京都",
+    "rank": 30,
+    "value": 79.6,
+    "label": "公衆電話 人口10万人あたり台数",
+    "unit": "台"
+  },
+  {
+    "areaName": "千葉県",
+    "rank": 31,
+    "value": 77.8,
+    "label": "公衆電話 人口10万人あたり台数",
+    "unit": "台"
+  },
+  {
+    "areaName": "長野県",
+    "rank": 32,
+    "value": 77.6,
+    "label": "公衆電話 人口10万人あたり台数",
+    "unit": "台"
+  },
+  {
+    "areaName": "愛媛県",
+    "rank": 33,
+    "value": 77.4,
+    "label": "公衆電話 人口10万人あたり台数",
+    "unit": "台"
+  },
+  {
+    "areaName": "佐賀県",
+    "rank": 34,
+    "value": 76.7,
+    "label": "公衆電話 人口10万人あたり台数",
+    "unit": "台"
+  },
+  {
+    "areaName": "香川県",
+    "rank": 35,
+    "value": 75.8,
+    "label": "公衆電話 人口10万人あたり台数",
+    "unit": "台"
+  },
+  {
+    "areaName": "三重県",
+    "rank": 36,
+    "value": 75.1,
+    "label": "公衆電話 人口10万人あたり台数",
+    "unit": "台"
+  },
+  {
+    "areaName": "徳島県",
+    "rank": 37,
+    "value": 75.1,
+    "label": "公衆電話 人口10万人あたり台数",
+    "unit": "台"
+  },
+  {
+    "areaName": "滋賀県",
+    "rank": 38,
+    "value": 73.2,
+    "label": "公衆電話 人口10万人あたり台数",
+    "unit": "台"
+  },
+  {
+    "areaName": "富山県",
+    "rank": 39,
+    "value": 73,
+    "label": "公衆電話 人口10万人あたり台数",
+    "unit": "台"
+  },
+  {
+    "areaName": "愛知県",
+    "rank": 40,
+    "value": 71.4,
+    "label": "公衆電話 人口10万人あたり台数",
+    "unit": "台"
+  },
+  {
+    "areaName": "福岡県",
+    "rank": 41,
+    "value": 71.1,
+    "label": "公衆電話 人口10万人あたり台数",
+    "unit": "台"
+  },
+  {
+    "areaName": "大阪府",
+    "rank": 42,
+    "value": 68.7,
+    "label": "公衆電話 人口10万人あたり台数",
+    "unit": "台"
+  },
+  {
+    "areaName": "兵庫県",
+    "rank": 43,
+    "value": 65.9,
+    "label": "公衆電話 人口10万人あたり台数",
+    "unit": "台"
+  },
+  {
+    "areaName": "静岡県",
+    "rank": 44,
+    "value": 60.6,
+    "label": "公衆電話 人口10万人あたり台数",
+    "unit": "台"
+  },
+  {
+    "areaName": "熊本県",
+    "rank": 45,
+    "value": 59.9,
+    "label": "公衆電話 人口10万人あたり台数",
+    "unit": "台"
+  },
+  {
+    "areaName": "神奈川県",
+    "rank": 46,
+    "value": 58.9,
+    "label": "公衆電話 人口10万人あたり台数",
+    "unit": "台"
+  },
+  {
+    "areaName": "埼玉県",
+    "rank": 47,
+    "value": 48.4,
+    "label": "公衆電話 人口10万人あたり台数",
+    "unit": "台"
+  }
+]

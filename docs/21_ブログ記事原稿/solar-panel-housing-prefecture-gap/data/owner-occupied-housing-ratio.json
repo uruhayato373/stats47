@@ -1,0 +1,331 @@
+[
+ {
+  "areaName": "秋田県",
+  "rank": 1,
+  "value": 77.1,
+  "label": "持ち家比率",
+  "unit": "％"
+ },
+ {
+  "areaName": "山形県",
+  "rank": 2,
+  "value": 75,
+  "label": "持ち家比率",
+  "unit": "％"
+ },
+ {
+  "areaName": "富山県",
+  "rank": 3,
+  "value": 74.9,
+  "label": "持ち家比率",
+  "unit": "％"
+ },
+ {
+  "areaName": "新潟県",
+  "rank": 4,
+  "value": 74,
+  "label": "持ち家比率",
+  "unit": "％"
+ },
+ {
+  "areaName": "和歌山県",
+  "rank": 5,
+  "value": 73.8,
+  "label": "持ち家比率",
+  "unit": "％"
+ },
+ {
+  "areaName": "岐阜県",
+  "rank": 6,
+  "value": 73.7,
+  "label": "持ち家比率",
+  "unit": "％"
+ },
+ {
+  "areaName": "福井県",
+  "rank": 7,
+  "value": 73.5,
+  "label": "持ち家比率",
+  "unit": "％"
+ },
+ {
+  "areaName": "奈良県",
+  "rank": 8,
+  "value": 73.2,
+  "label": "持ち家比率",
+  "unit": "％"
+ },
+ {
+  "areaName": "三重県",
+  "rank": 9,
+  "value": 72.3,
+  "label": "持ち家比率",
+  "unit": "％"
+ },
+ {
+  "areaName": "長野県",
+  "rank": 10,
+  "value": 71.7,
+  "label": "持ち家比率",
+  "unit": "％"
+ },
+ {
+  "areaName": "青森県",
+  "rank": 11,
+  "value": 71.4,
+  "label": "持ち家比率",
+  "unit": "％"
+ },
+ {
+  "areaName": "群馬県",
+  "rank": 12,
+  "value": 71.1,
+  "label": "持ち家比率",
+  "unit": "％"
+ },
+ {
+  "areaName": "滋賀県",
+  "rank": 13,
+  "value": 70.9,
+  "label": "持ち家比率",
+  "unit": "％"
+ },
+ {
+  "areaName": "岩手県",
+  "rank": 14,
+  "value": 70.3,
+  "label": "持ち家比率",
+  "unit": "％"
+ },
+ {
+  "areaName": "島根県",
+  "rank": 15,
+  "value": 69.6,
+  "label": "持ち家比率",
+  "unit": "％"
+ },
+ {
+  "areaName": "鳥取県",
+  "rank": 15,
+  "value": 69.6,
+  "label": "持ち家比率",
+  "unit": "％"
+ },
+ {
+  "areaName": "香川県",
+  "rank": 17,
+  "value": 69.4,
+  "label": "持ち家比率",
+  "unit": "％"
+ },
+ {
+  "areaName": "茨城県",
+  "rank": 17,
+  "value": 69.4,
+  "label": "持ち家比率",
+  "unit": "％"
+ },
+ {
+  "areaName": "栃木県",
+  "rank": 19,
+  "value": 69.1,
+  "label": "持ち家比率",
+  "unit": "％"
+ },
+ {
+  "areaName": "山梨県",
+  "rank": 20,
+  "value": 68.6,
+  "label": "持ち家比率",
+  "unit": "％"
+ },
+ {
+  "areaName": "福島県",
+  "rank": 21,
+  "value": 68.3,
+  "label": "持ち家比率",
+  "unit": "％"
+ },
+ {
+  "areaName": "徳島県",
+  "rank": 22,
+  "value": 68.1,
+  "label": "持ち家比率",
+  "unit": "％"
+ },
+ {
+  "areaName": "佐賀県",
+  "rank": 23,
+  "value": 67.9,
+  "label": "持ち家比率",
+  "unit": "％"
+ },
+ {
+  "areaName": "石川県",
+  "rank": 24,
+  "value": 67.8,
+  "label": "持ち家比率",
+  "unit": "％"
+ },
+ {
+  "areaName": "静岡県",
+  "rank": 25,
+  "value": 67.4,
+  "label": "持ち家比率",
+  "unit": "％"
+ },
+ {
+  "areaName": "山口県",
+  "rank": 26,
+  "value": 67,
+  "label": "持ち家比率",
+  "unit": "％"
+ },
+ {
+  "areaName": "高知県",
+  "rank": 27,
+  "value": 66,
+  "label": "持ち家比率",
+  "unit": "％"
+ },
+ {
+  "areaName": "宮崎県",
+  "rank": 28,
+  "value": 65.7,
+  "label": "持ち家比率",
+  "unit": "％"
+ },
+ {
+  "areaName": "岡山県",
+  "rank": 29,
+  "value": 65.6,
+  "label": "持ち家比率",
+  "unit": "％"
+ },
+ {
+  "areaName": "埼玉県",
+  "rank": 30,
+  "value": 65.1,
+  "label": "持ち家比率",
+  "unit": "％"
+ },
+ {
+  "areaName": "愛媛県",
+  "rank": 31,
+  "value": 65,
+  "label": "持ち家比率",
+  "unit": "％"
+ },
+ {
+  "areaName": "長崎県",
+  "rank": 32,
+  "value": 64.7,
+  "label": "持ち家比率",
+  "unit": "％"
+ },
+ {
+  "areaName": "千葉県",
+  "rank": 32,
+  "value": 64.7,
+  "label": "持ち家比率",
+  "unit": "％"
+ },
+ {
+  "areaName": "兵庫県",
+  "rank": 34,
+  "value": 64.4,
+  "label": "持ち家比率",
+  "unit": "％"
+ },
+ {
+  "areaName": "鹿児島県",
+  "rank": 35,
+  "value": 63.3,
+  "label": "持ち家比率",
+  "unit": "％"
+ },
+ {
+  "areaName": "熊本県",
+  "rank": 36,
+  "value": 62.9,
+  "label": "持ち家比率",
+  "unit": "％"
+ },
+ {
+  "areaName": "大分県",
+  "rank": 37,
+  "value": 62.3,
+  "label": "持ち家比率",
+  "unit": "％"
+ },
+ {
+  "areaName": "広島県",
+  "rank": 38,
+  "value": 61.9,
+  "label": "持ち家比率",
+  "unit": "％"
+ },
+ {
+  "areaName": "京都府",
+  "rank": 39,
+  "value": 60.7,
+  "label": "持ち家比率",
+  "unit": "％"
+ },
+ {
+  "areaName": "宮城県",
+  "rank": 40,
+  "value": 60,
+  "label": "持ち家比率",
+  "unit": "％"
+ },
+ {
+  "areaName": "愛知県",
+  "rank": 41,
+  "value": 59.6,
+  "label": "持ち家比率",
+  "unit": "％"
+ },
+ {
+  "areaName": "神奈川県",
+  "rank": 42,
+  "value": 58.7,
+  "label": "持ち家比率",
+  "unit": "％"
+ },
+ {
+  "areaName": "北海道",
+  "rank": 43,
+  "value": 57,
+  "label": "持ち家比率",
+  "unit": "％"
+ },
+ {
+  "areaName": "大阪府",
+  "rank": 44,
+  "value": 54.5,
+  "label": "持ち家比率",
+  "unit": "％"
+ },
+ {
+  "areaName": "福岡県",
+  "rank": 45,
+  "value": 52.7,
+  "label": "持ち家比率",
+  "unit": "％"
+ },
+ {
+  "areaName": "東京都",
+  "rank": 46,
+  "value": 44.7,
+  "label": "持ち家比率",
+  "unit": "％"
+ },
+ {
+  "areaName": "沖縄県",
+  "rank": 47,
+  "value": 42.6,
+  "label": "持ち家比率",
+  "unit": "％"
+ }
+]
