@@ -62,6 +62,8 @@ export function BannerAd({
             width={width ?? undefined}
             height={height ?? undefined}
             alt=""
+            loading="lazy"
+            decoding="async"
             className="max-w-full h-auto"
           />
         </TrackedAffiliateLink>
