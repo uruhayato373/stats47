@@ -299,6 +299,14 @@
       "is_paid": false,
       "price_jpy": 0,
       "published_at": "2026-06-16"
+    },
+    "20-complaint-reply-patterns": {
+      "vertical": "koumuin-claude-code",
+      "title": "苦情メール返信案を 5 パターン出す prompt",
+      "url": "https://note.com/stats47/n/n311eeeba660b",
+      "is_paid": true,
+      "price_jpy": 300,
+      "published_at": "2026-06-16"
     }
   },
   "batch2_update": "2026-05-21: koumuin #07-#12 を新規公開 (バッチ2)。有料4記事 (#07/#08/#11/#12 各¥300) は有料エリア境界を この続きは有料パートです 直前に設定、無料2記事 (#09/#10) は試し読みラインを記事末尾に設定 (全文無料)。本文画像を全挿入 (#07:5 / #08:5 / #09:5 / #10:4 / #11:7 / #12:5 枚)、全6本をマガジン 公務員×Claude Code実務活用ガイド に追加。#11/#12 で **「」** 形式の太字が note 上で literal ** として残る軽微なレンダリング崩れあり (本文内容は完全、bold スタイルのみ欠落)。",
