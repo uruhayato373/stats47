@@ -25,8 +25,11 @@ note.com に投稿する記事の**ソースの真実源（SSOT）**。下書き
 
 ## 本文ファイル
 
-- 本文は記事ディレクトリ直下の `note.md`（または旧 `draft.md`。現状混在。統一は別途タスク）。
+- 本文は記事ディレクトリ直下の **`draft.md`**（2026-06-15 に `note.md` から統一。旧 `note.md` は draft.md に rename 済）。
+  生成スキル（post-note-ranking / write-note-section / generate-note-charts / generate-kakei-charts）も draft.md を出力する。
+  publish-note の解決ロジックは後方互換で note.md もフォールバック検索する。
 - 付随: `data.json` / `tags.txt` / `hashtags.txt` / `images/`。
+- 記事間の内部リンクは `../<slug>/draft.md` 形式（公開時に `note-published-urls.json` を元に note URL へ書き換え）。
 
 ## 画像 — SVG をソース、PNG は再生成方式
 

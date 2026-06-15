@@ -24,7 +24,7 @@ note 記事（B/C/D シリーズ）の原稿をチェックし、修正理由付
 
 ## 引数
 
-- **原稿ファイル**: `docs/31_note記事原稿/<slug>/note.md`
+- **原稿ファイル**: `docs/31_note記事原稿/<slug>/draft.md`
 - **シリーズ**: B / C / D
 - **トーン**: 会話的 / 権威的 / データドリブン
 - **ターゲット読者レベル**: 初心者 / 中級者 / 上級者
@@ -116,7 +116,7 @@ note 記事（B/C/D シリーズ）の原稿をチェックし、修正理由付
 - 理由: ...
 ```
 
-修正を反映した原稿を `note.md` に上書き保存する。
+修正を反映した原稿を `draft.md` に上書き保存する。
 
 ## 品質チェックリスト（全記事共通）
 
@@ -176,7 +176,7 @@ INSERT INTO note_articles (
 
 ### 4. note.com への投稿手順
 
-1. `docs/31_note記事原稿/<vertical>/<slug>/draft.md`（または `docs/31_note記事原稿/<slug>/note.md`）の内容を note エディタにペースト
+1. `docs/31_note記事原稿/<vertical>/<slug>/draft.md`（または `docs/31_note記事原稿/<slug>/draft.md`）の内容を note エディタにペースト
 2. `images/` の画像をアップロード（あれば）
 3. 無料で公開
 4. 公開後、ローカル D1 で status と noteUrl を更新:

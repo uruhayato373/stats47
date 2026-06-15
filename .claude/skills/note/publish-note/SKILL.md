@@ -64,7 +64,7 @@ browser-use CLI（Chrome プロファイル経由）で note.com エディタを
 ## 前提条件
 
 1. browser-use CLI がインストール済み
-2. 記事ファイルが存在する: `docs/31_note記事原稿/<vertical>/<slug>/{note.md,draft.md}` または `docs/31_note記事原稿/<slug>/{note.md,draft.md}`（下書き・公開済みとも同じ場所で単一管理）
+2. 記事ファイルが存在する: `docs/31_note記事原稿/<vertical>/<slug>/draft.md` または `docs/31_note記事原稿/<slug>/draft.md`（本文ファイル名は `draft.md` に統一。下書き・公開済みとも同じ場所で単一管理）
 3. Chrome **Profile 5** で `note.com/stats47` にログイン済み
 4. **有料記事の場合**: frontmatter に `is_paid: true` と `price_jpy: <数値>` を必ず記載。本文には有料境界の目印として `ここから先は有料部分:` 行を入れる（Phase 0 が free/paid に分割するために必要）
 5. **予約投稿**: note プレミアム加入アカウントでのみ可能（通常アカウントでは「日時の設定」が押せない、2026-05-18 確認）
@@ -165,7 +165,7 @@ browser-use --headed --profile "Profile 5" state 2>&1 > /tmp/note-acct.txt
 詳細手順は **[references/editor-operations.md](references/editor-operations.md)** を参照。
 
 主なポイント:
-- **Phase 0**: Node.js スクリプトで note.md / draft.md を読み込み、frontmatter から `title` / `is_paid` / `price_jpy` 抽出、本文を「ここから先は有料部分:」行で free/paid 分割、セグメント分割（URL vs テキスト）して `/tmp/note-data-<slug>.json` に出力
+- **Phase 0**: Node.js スクリプトで draft.md を読み込み、frontmatter から `title` / `is_paid` / `price_jpy` 抽出、本文を「ここから先は有料部分:」行で free/paid 分割、セグメント分割（URL vs テキスト）して `/tmp/note-data-<slug>.json` に出力
 - **Phase 0 ガード（マガジン URL 未注入チェック）**: 本文に未注入プレースホルダー `{{MAGAZINE_URL}}` が残っていたら、その記事は**公開せず中断**する。回遊フッタの `{{MAGAZINE_URL}}` は公開前に `inject-magazine-url.cjs` で実 URL に置換しておく必要がある（未置換のまま公開するとプレースホルダー文字列がそのまま記事に出る）。バッチ中の 1 記事が該当した場合、その記事だけスキップし他は続行してよい
 - **Phase 2**: アイキャッチは**必ず本文入力前**に実行（本文入力後はスクロール位置がずれてボタン検出に失敗する）
 - **Phase 4**: 全セグメントを 1 つの文字列に連結し **1 回だけ** ClipboardEvent paste（`type` は markdown 変換しない。連続 paste 不可）。本文は `window.__nb` に**チャンク分割注入**してから paste 発火する（一括 eval は大きい本文で daemon ペイロード上限に当たりタイムアウト）。URL は plain text のまま貼られる（カード化は手動）

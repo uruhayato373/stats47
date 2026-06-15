@@ -106,4 +106,4 @@ find_idx_retry() {
 - **一時ファイルは `/tmp/` に作成**: `note-data-<slug>.json`, `note-state.txt`, スクリーンショット等
 - **$BU 変数を使わない**: 毎回 `browser-use --headed --profile "Profile 5"` をフルで書く
 - **`--session` は指定しない**: デフォルトセッション使用
-- **B/C/D シリーズ**: 画像配置が異なる場合あり。note.md の `![...](...)` 行を参照して挿入先を判断
+- **B/C/D シリーズ**: 画像配置が異なる場合あり。draft.md の `![...](...)` 行を参照して挿入先を判断

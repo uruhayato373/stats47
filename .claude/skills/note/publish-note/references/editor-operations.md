@@ -15,7 +15,7 @@ const slug = '<SLUG>';
 const projectRoot = '/Users/minamidaisuke/stats47';
 
 // 探索: 31_note記事原稿（下書き〜公開済みを単一管理）の <slug> 直下および <vertical>/<slug>。
-// 各ディレクトリ内では note.md と draft.md の両方をチェック（ファイル名は現状混在）。
+// 本文ファイル名は draft.md に統一済。note.md は後方互換のフォールバックとして残す。
 const baseDirs = [];
 for (const root of ['docs/31_note記事原稿']) {
   const rootAbs = path.join(projectRoot, root);
@@ -31,7 +31,7 @@ for (const root of ['docs/31_note記事原稿']) {
 let articleDir = null;
 let articleFile = null;
 outer: for (const d of baseDirs) {
-  for (const f of ['note.md', 'draft.md']) {
+  for (const f of ['draft.md', 'note.md']) {
     if (fs.existsSync(path.join(d, f))) {
       articleDir = d;
       articleFile = f;
