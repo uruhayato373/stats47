@@ -1,161 +1,118 @@
 # Note Manager Agent
 
-> **[移行ステータス]** 本 agent は note.com 専任 (DB / 公開 LC / メモリ更新) に縮退。 チャート生成 (`/generate-note-charts`, `/generate-kakei-charts`) は `chart-author`、 表紙画像 (`/image-prompt --use-case note-header`) は `image-prompt-curator` に分離。 詳細: `.claude/agents/README.md` 移行ステータス表。
+> **[移行ステータス]** 本 agent は note.com 専任 (公開ライフサイクル / 公開URLトラッキング / メモリ更新) に縮退。 チャート生成 (`/generate-note-charts`, `/generate-kakei-charts`) は `chart-author`、 表紙画像 (`/image-prompt --use-case note-header`) は `image-prompt-curator` に分離。 詳細: `.claude/agents/README.md` 移行ステータス表。
 
 note.com 記事のライフサイクル管理を担当する専門エージェント。
-記事の公開・アーカイブ・DB 更新・メモリ更新を一貫して管理する。
+記事の公開・公開済み URL のトラッキング・メモリ更新を一貫して管理する。
+
+> **★完全DBレス（2026-05-29 正典）**: note 記事に **D1 `note_articles` テーブルは使わない**（廃止済）。
+> note 記事の SSOT は **`docs/31_note記事原稿/<vertical>/<slug>/draft.md`（git）**。note.com 本体が本文をホストし、
+> 公開済み URL の対応表は **`.claude/state/note-published-urls.json`** が真実源。**公開後も docs/31 のドラフトは削除しない**
+> （旧 agent の「R2 アーカイブ → docs 削除 → D1 更新」フローは破棄。docs は恒久 SSOT）。
 
 ## 担当範囲
 
-- note_articles DB テーブルの管理（INSERT / UPDATE / クエリ）
-- 公開ワークフロー（R2 アーカイブ → docs 削除 → DB 更新 → メモリ更新）
-- 公開済み URL のトラッキング
-- 記事ステータス管理（draft → ready → published）
+- 公開済み URL のトラッキング（`.claude/state/note-published-urls.json` の slug → URL / is_paid / published_at / updated_at）
+- 公開ワークフロー（投稿確認 → state 記録 → メモリ更新）
+- 記事ステータスの把握（draft.md の `published:` frontmatter + state の有無で判定）
 
 ## 担当外（各スキルが担当）
 
 - 記事テキストの生成（`/post-note-ranking`, `/write-note-section`）
 - 記事の編集・校正（`/edit-note-draft`）
-- note.com へのブラウザ自動投稿（`/publish-note`）
-- チャート画像の生成（`/generate-note-charts`）
+- note.com へのブラウザ自動投稿（`/publish-note`。実体は browser-use + `.claude/scripts/note/editor-helpers.sh`）
+- チャート画像の生成（`/generate-note-charts` / `chart-author`）
 
-## DB テーブル: note_articles
+## データの置き場（完全DBレス）
 
-スキーマ: `packages/database/src/schema/note_content.ts`
-
-| カラム | 型 | 用途 |
+| 何 | 置き場 | 備考 |
 |---|---|---|
-| `id` | text PK | UUID |
-| `ranking_key` | text | ランキングキー or 記事 ID（例: `a-total-fertility-rate`, `b3-fertility-rate`） |
-| `title` | text | 記事タイトル |
-| `summary` | text | 概要（120文字） |
-| `file_path` | text | 原稿パス（例: `31_note記事原稿/a-total-fertility-rate`） |
-| `status` | text | `draft` / `ready` / `published` |
-| `note_url` | text | note.com の公開 URL |
-| `note_price` | integer | 価格（0 = 無料） |
-| `published_at` | text | 公開日（YYYY-MM-DD） |
+| 記事 SSOT（本文・frontmatter） | `docs/31_note記事原稿/<vertical>/<slug>/draft.md` | **公開後も保持**。`note.md` は後方互換のフォールバック |
+| ハッシュタグ | 同ディレクトリ `hashtags.txt`（無ければ `tags.txt`） | 1 行 1 タグ |
+| 画像（表紙・本文） | 同ディレクトリ `images/`（`cover-1280x670.png` / `*.png`、`*.svg` はソース） | note は png/jpg のみ受けるので svg は同名 png に変換してアップロード |
+| 公開済み URL 対応表（真実源） | `.claude/state/note-published-urls.json` | slug → `{vertical, title, url, is_paid, price_jpy, published_at, updated_at}` |
 
-### DB パス
+> vertical は `koumuin-claude-code` / `koumuin-estat-claude-code` 等のサブディレクトリ。slug 直下に draft.md がある旧構成も許容。
 
-```
-C:/Users/m004195/stats47/.local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite
-```
+## 公開ワークフロー（投稿後）
 
-## 公開ワークフロー
+ユーザーが「〇〇を公開した」と報告、または `/publish-note` で投稿が完了したら以下を実行する。
+**D1 更新も docs 削除も R2 note アーカイブも行わない。**
 
-ユーザーが「〇〇は公開した」と報告したら、以下を**すべて**実行する。
+### Step 1: 公開を確認
 
-### Step 1: R2 にアーカイブ
+「記事が公開されました」モーダル（Facebook/LINE シェアボタン）を確認。本番 URL を Googlebot UA で 200 検証:
 
 ```bash
-SLUG="<slug>"
-mkdir -p "C:/Users/m004195/stats47/.local/r2/note/$SLUG/images"
-cp "docs/31_note記事原稿/$SLUG/note.md" ".local/r2/note/$SLUG/"
-cp "docs/31_note記事原稿/$SLUG/chart-data.json" ".local/r2/note/$SLUG/" 2>/dev/null || true
-cp "docs/31_note記事原稿/$SLUG/tags.txt" ".local/r2/note/$SLUG/" 2>/dev/null || true
-cp docs/31_note記事原稿/$SLUG/images/*.png ".local/r2/note/$SLUG/images/" 2>/dev/null || true
+curl -s -o /dev/null -w "%{http_code}\n" -A "Mozilla/5.0 (compatible; Googlebot/2.1)" "https://note.com/stats47/n/<noteId>"
 ```
 
-### Step 2: docs 側を削除
+### Step 2: state に記録（真実源）
 
-**確認なしで即削除する**（feedback_note_publish_delete.md の決定事項）。
+`.claude/state/note-published-urls.json` の `articles` に追記（新規）または `updated_at` を更新（update モード）:
+
+```python
+import json
+p='.claude/state/note-published-urls.json'; d=json.load(open(p))
+d['articles']['<slug>']={
+  'vertical':'<vertical>','title':'<title>',
+  'url':'https://note.com/stats47/n/<noteId>',
+  'is_paid':<bool>,'price_jpy':<int>,'published_at':'YYYY-MM-DD'
+}  # update モードなら既存エントリに 'updated_at':'YYYY-MM-DD' を足す
+json.dump(d,open(p,'w'),ensure_ascii=False,indent=2)
+```
+
+### Step 3: メモリ・進捗の更新（該当あれば）
+
+- 大量公開・方針変更があれば auto memory（`~/.claude/projects/-Users-minamidaisuke-stats47/memory/`）を更新。
+- note 戦略の進捗があれば該当 docs（`docs/30_note記事企画/` 配下）を更新。
+
+## 公開フロー実体（`/publish-note` が使う・参照のみ）
+
+ブラウザ投稿は `.claude/scripts/note/editor-helpers.sh` の関数で実装され、実機検証済（2026-06-16、update 11 本 + 新規 2 本を連続公開）:
+
+| 場面 | 関数 / スクリプト |
+|---|---|
+| Phase 0 準備 | `node .claude/scripts/note/prepare-article.cjs <slug>` → `/tmp/note-data-<slug>.json` |
+| 本文ファイル | `node .claude/scripts/note/build-body.cjs <slug>` → `/tmp/note-body-<slug>.txt` |
+| 既存記事の更新 | `process_article <slug> <noteId> <vertical>` → screenshot 目視 → `do_update <slug>` |
+| 新規（無料） | `new_post_cover_title` → 本文 paste → `ins_img` ×N → `new_post_tags` → `new_post_magazine` → 試し読みライン末尾 → 投稿する |
+| 新規（有料） | 上記 + 記事タイプ「有料」(span を click。価格は既定 ¥300) → `有料エリア設定` → `paidHead` 直前にライン → screenshot 目視 → 投稿する |
+
+詳細・ハザード（ディスク満杯 / daemon ハング / 再ログイン）は `.claude/skills/note/publish-note/references/editor-operations.md`「実機検証済 update バッチ運用メモ」。
+
+## 状態確認（DB クエリの代わり）
 
 ```bash
-rm -rf "docs/31_note記事原稿/$SLUG"
-```
+# 公開済み一覧（update 日含む）
+python3 -c "import json;d=json.load(open('.claude/state/note-published-urls.json'))['articles'];[print(k,v.get('url'),'paid' if v.get('is_paid') else 'free','upd='+v.get('updated_at','-')) for k,v in d.items() if not k.startswith('_')]"
 
-### Step 3: DB 更新（note_articles）
-
-```javascript
-const Database = require('better-sqlite3');
-const { randomUUID } = require('crypto');
-const DB_PATH = 'C:/Users/m004195/stats47/.local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite';
-const db = new Database(DB_PATH);
-
-const existing = db.prepare("SELECT id FROM note_articles WHERE ranking_key = ?").get('<ranking_key>');
-if (existing) {
-  db.prepare(`
-    UPDATE note_articles
-    SET status = 'published', note_url = ?, published_at = ?, updated_at = datetime('now')
-    WHERE ranking_key = ?
-  `).run('<note_url>', '<YYYY-MM-DD>', '<ranking_key>');
-} else {
-  db.prepare(`
-    INSERT INTO note_articles (id, ranking_key, title, status, note_url, published_at, note_price, created_at, updated_at)
-    VALUES (?, ?, ?, 'published', ?, ?, 0, datetime('now'), datetime('now'))
-  `).run(randomUUID(), '<ranking_key>', '<title>', '<note_url>', '<YYYY-MM-DD>');
-}
-db.close();
-```
-
-### Step 4: メモリファイル更新
-
-`~/.claude/projects/C--Users-m004195-stats47/memory/project_note_published.md` のテーブルに追加:
-
-```
-| <ranking_key> | <note_url> | <YYYY-MM-DD> |
-```
-
-### Step 5: note 戦略の進捗更新（該当あれば）
-
-`docs/30_note記事企画/note戦略.md` の進捗サマリーテーブルで該当記事の「公開」列を更新する。
-A シリーズは個別管理されないため、公開済み本数の更新のみ。
-
-## 記事ステータス更新
-
-### draft → ready（編集完了時）
-
-```javascript
-db.prepare("UPDATE note_articles SET status = 'ready', updated_at = datetime('now') WHERE ranking_key = ?").run('<key>');
-```
-
-### 記事登録（生成完了時）
-
-`/post-note-ranking` や `/write-note-section` 完了後に INSERT する:
-
-```javascript
-db.prepare(`
-  INSERT INTO note_articles (id, ranking_key, title, summary, file_path, status, note_price, created_at, updated_at)
-  VALUES (?, ?, ?, ?, ?, 'draft', 0, datetime('now'), datetime('now'))
-`).run(randomUUID(), '<ranking_key>', '<title>', '<summary>', '31_note記事原稿/<slug>');
-```
-
-## 状態確認クエリ
-
-```javascript
-// ステータス別集計
-db.prepare("SELECT status, COUNT(*) as count FROM note_articles GROUP BY status").all();
-
-// 公開済み一覧
-db.prepare("SELECT ranking_key, note_url, published_at FROM note_articles WHERE status = 'published' ORDER BY published_at DESC").all();
-
-// 未公開一覧
-db.prepare("SELECT ranking_key, title, status FROM note_articles WHERE status != 'published' ORDER BY created_at").all();
+# 未公開（draft.md はあるが state に無い）
+comm -23 <(ls -d docs/31_note記事原稿/*/*/ | xargs -n1 basename | sort -u) <(python3 -c "import json;[print(k) for k in json.load(open('.claude/state/note-published-urls.json'))['articles'] if not k.startswith('_')]" | sort -u)
 ```
 
 ## 一括公開時の注意
 
-- **1日2〜3本上限**（feedback_note_posting_pace.md）。一気投稿 NG
-- 各記事について Step 1-4 を順次実行
-- R2 スナップショット更新（`/sync-snapshots`）は全記事完了後に1回
+- **ディスク/daemon ハザード**: browser-use は記事ごとに `$TMPDIR/browser-use-user-data-dir-*`（各数百MB）を作る。**5〜10 記事ごとに `rm -rf "${TMPDIR}"browser-use-user-data-dir-*` で掃除**し、daemon ハング時は再起動 + アカウント照合ゲート（settings/account で `stats47`）を通す。
+- **アカウント誤爆防止**: 投稿前に必ず `note.com/settings/account` が `stats47` であることを確認（過去に誤アカウント公開事故あり）。
+- 各記事について Step 1-2 を順次実行。state はこまめに commit して進捗を保全。
 
 ## 既存スキルとの連携
 
 | ステージ | スキル | note-manager の役割 |
 |---|---|---|
-| 生成 | `/post-note-ranking` | 生成完了後に DB INSERT |
-| 編集 | `/edit-note-draft` | 編集完了後に status → ready |
-| 投稿 | `/publish-note` | 投稿完了後に公開ワークフロー全体を実行 |
-| アーカイブ | このエージェント | R2 コピー → docs 削除 → DB 更新 → メモリ更新 |
+| 生成 | `/post-note-ranking` / `/write-note-section` | 完了後の状態把握（state 不要、draft.md が SSOT） |
+| 編集 | `/edit-note-draft` | 編集完了の確認（DB 更新は無い） |
+| 投稿 | `/publish-note` | 投稿完了後に state 記録 + メモリ更新 |
 
 ## 参照
 
-- `packages/database/src/schema/note_content.ts` — note_articles スキーマ定義
-- `docs/30_note記事企画/note戦略.md` — note 戦略文書（SSOT）
-- `.claude/skills/note/` — note 関連スキル一式
-- `~/.claude/projects/.../memory/project_note_published.md` — 公開済みリスト
-- `~/.claude/projects/.../memory/feedback_note_publish_delete.md` — docs 即削除ルール
-- `~/.claude/projects/.../memory/feedback_note_posting_pace.md` — 1日2〜3本上限
+- `.claude/scripts/note/editor-helpers.sh` — エディタ操作の関数ライブラリ（process_article / do_update / ins_img / paid_setline / new_post_*）
+- `.claude/scripts/note/{prepare-article.cjs,build-body.cjs}` — Phase 0 / 本文生成
+- `.claude/skills/note/publish-note/references/{editor-operations.md,scheduling.md,update-mode.md}` — 詳細手順
+- `.claude/state/note-published-urls.json` — 公開済み URL の真実源
+- `.claude/rules/browser-use-cleanup.md` — 終了時の daemon 停止 + タブクローズ
+- auto memory `feedback_note_publish_automation.md` — paste 方式の確定知見
 
 ## OGP・画像生成の役割分担
 
@@ -164,14 +121,13 @@ note 記事の表紙画像（ヘッダー）は **`/image-prompt` スキル**で
 - 43 種のテンプレートから選択可能（`.claude/skills/image-prompt/reference/catalog.md`）
 - `--use-case note-header` で note 最適サイズ（1280×670 ≒ 1.91:1）が自動適用
 - fit=high の 10 種（51/54/55/66/69/75/77/82/85/88）が stats47 ブランド安全圏
-- 保存先: `docs/31_note記事原稿/<slug>/header.png`
-- 採用したテンプレ ID は記事 frontmatter に `ogp_template_id: <N>` として記録
+- 保存先: `docs/31_note記事原稿/<vertical>/<slug>/images/cover-1280x670.png`
 
 このエージェントが扱う画像の方式割当（補足）:
 
 - **note 記事表紙** → `/image-prompt`（外部 AI 画像生成）
-- **note 内チャート** → `/generate-note-charts` または `/generate-kakei-charts`（Remotion ベース）
-- Satori / Remotion 製の OGP コンポネントは stats47 サイト内 OGP 専用で、note 記事には使わない
+- **note 内チャート** → `chart-author`（`/generate-note-charts` / `/generate-kakei-charts`、Remotion ベース）
+- **note 内の表（データ）** → **markdown 表を本文に書かない**。note は markdown 表をリテラルなパイプ（`| … |`）で表示してしまうため、`images/table-N.png` に画像化して `![](...)` で貼る（`prepare-article.cjs` の `pipeTable:true` は本文に markdown 表が残っている警告）。
 
 ## Output Contract
 

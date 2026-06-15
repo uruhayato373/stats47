@@ -180,8 +180,9 @@ browser-use --headed --profile "Profile 5" state 2>&1 > /tmp/note-acct.txt
 
 主なポイント:
 - **Phase 7-Pricing**: `is_paid=true` + `price_jpy>0` のときだけ実行。有料ラジオをクリック → Shadow DOM 内 `<input id=price>` に JS で価格を上書き（`type` 不可: 初期値 300 と連結される）
-- **Phase 7-Boundary（有料境界・自動／初回 live で DOM 確定）**: 「有料エリア設定」ボタン → 境界設定画面で **`segmentsPaid[0]` の先頭段落を錨**に有料ラインを自動設定。⚠️ **境界画面 DOM は未観測のため初回 live で state+screenshot を捕捉して B-3 セレクタを確定**。⚠️ **誤露出防止で最終「投稿/予約投稿」は自動で押さず、境界を screenshot 確認後に人間が確定**する。詳細は [references/scheduling.md](references/scheduling.md) Phase 7-Boundary
-- 「公開に進む」→ ハッシュタグ入力 → 日時設定 → 予約投稿
+- **Phase 7-Boundary（有料境界・自動・2026-06-16 実機確定）**: 「有料エリア設定」ボタン → 境界設定画面で **`segmentsPaid[0]` の先頭見出しを錨**に有料ラインを自動設定。✅ **境界画面 DOM は確定済（update 11 本 + 新規 2 本連続成功）**。⚠️ **誤露出防止で最終「投稿/更新」前に境界を screenshot で目視確認**してから押す（エージェントが Read で screenshot 検証後に押下して可）。詳細は [references/scheduling.md](references/scheduling.md) Phase 7-Boundary
+- 「公開に進む」→ ハッシュタグ入力（**1 個ずつ click→type→Enter**。まとめて type すると combobox の value に連結され失敗）→ マガジン追加 → 日時設定 → 投稿
+- ★**エディタ操作の実体は関数ライブラリ `.claude/scripts/note/editor-helpers.sh`**（`source` して `process_article`（update）/ `new_post_cover_title`+`ins_img`+`new_post_tags`+`new_post_magazine`+`paid_setline`（新規）/ `do_update`）。手書きせずこれを使う。詳細は [references/editor-operations.md](references/editor-operations.md)「実機検証済 update バッチ運用メモ」
 - 予約日時が指定されていない場合でも Phase 7 で**即時公開**が可能（「今すぐ公開」ボタンをクリック）。日時設定をスキップして直接「今すぐ公開」を選ぶ
 - 日時も即時公開も有料設定も不要な場合（下書き保存のみ）は Phase 7 全体をスキップ
 

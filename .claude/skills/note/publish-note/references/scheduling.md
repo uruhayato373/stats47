@@ -35,7 +35,8 @@
    - 「価格」ヘッダ + Shadow DOM 内の `<input type=text id=price placeholder=300 value=300>` が現れる
    - 画面右上の「投稿する」ボタンの label が **「有料エリア設定」** に変わる（= ボディ側で有料境界を設定するモードへ遷移する次画面が起動するボタン）
 3. **`#price` input は最初に value=300 が入っている**。`type` で追加すると "3001200" のように連結されるので、必ず JS で value を上書きしてから input/change イベントを dispatch する
-4. **「有料エリア設定」画面ではボディ上で有料境界（区切り線）を選択する必要がある**。本検証では当該画面まで進んでいないため自動化未確定。下記「未確定領域」を参照
+4. **「有料エリア設定」画面ではボディ上で有料境界（区切り線）を選択する必要がある**。**2026-06-16 に全工程を実機検証済（update 11 本 + 新規 2 本連続成功）**。robust 実装は `.claude/scripts/note/editor-helpers.sh` の `paid_setline`（要素ベース scroll + 空白/バッククォート/先頭`#` 非依存マッチ）。下記 Phase 7-Boundary 参照。
+   - ★**有料ラジオは「有料」span（テキスト要素）を click する**。親 `<div>` を click しても選択されない事例があった（2026-06-16・cc#20）。価格は既定で value=300 が入るので ¥300 ならそのままでよい。
 5. **予約投稿はプレミアム加入者のみ**（通常アカウントは「日時の設定」ボタンが押せない or プレミアム表示が出る）
 
 ### 自動操作 step
@@ -161,14 +162,14 @@ browser-use --headed --profile "Profile 5" click "$UPD_IDX"; sleep 5
 browser-use --headed --profile "Profile 5" screenshot /tmp/note-done-<slug>.png   # 「記事が公開されました」確認
 ```
 
-### 運用ルール（2026-06-15 更新: 半自動 → 自動／初回 live で DOM 確定）
+### 運用ルール（2026-06-16 更新: 境界 DOM 確定済・robust 実装は editor-helpers.sh）
 
-- **無料記事（is_paid=false）**: Phase 7 全自動（従来どおり）。
-- **有料記事（is_paid=true）**: 価格設定（7-Pricing）+ 有料境界設定（7-Boundary）まで自動。ただし
-  **(1) 境界画面 DOM は初回 live で確定**（B-2 捕捉に基づき B-3 セレクタを固定）、
-  **(2) 最終投稿ボタンは誤露出防止で人間が screenshot 確認後に確定**する。
+- **無料記事（is_paid=false）**: Phase 7 全自動。新規は確定ボタン「投稿する」/ update は「更新する」。試し読みラインは**末尾**（全文無料）。
+- **有料記事（is_paid=true）**: 価格設定（7-Pricing）+ 有料境界設定（7-Boundary）まで自動。**境界画面 DOM は 2026-06-16 に確定済**（11 本連続成功）。
+  最終確定ボタンは**境界を screenshot で目視確認してから押す**（誤露出防止のゲートは維持。エージェントが Read で screenshot を検証してから押下して可）。
+- ★**robust 実装は `.claude/scripts/note/editor-helpers.sh` の `paid_setline` / `process_article` を使う**。下記 B-3paid の素朴な `grep -B3 -F "$PAID_HEAD"` は **state がビューポート内しか出さない／`### `・バッククォート・全角空白で突合が外れる**ため脆い。`paid_setline` は要素ベース scroll で paidHead をビューに入れ、空白・バッククォート・先頭 `#` を除去して突合する（この差異で複数記事が「not-found」になった）。
 - リンクカード化（本文 URL）は Phase 4-3 で自動（editor-operations.md 参照）。
-- レポートには有料記事について「価格=自動／境界=自動設定（要目視確認）／最終投稿=手動確定」を明記する。
+- レポートには有料記事について「価格=自動／境界=自動設定（screenshot 目視）／最終投稿=screenshot 確認後に確定」を明記する。
 
 ### 予約投稿との併用（is_paid=true + 予約）
 

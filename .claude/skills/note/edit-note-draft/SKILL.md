@@ -146,23 +146,13 @@ note 記事（B/C/D シリーズ）の原稿をチェックし、修正理由付
 
 ## 公開準備（編集完了後）
 
-### 1. DB にメタデータ登録
+### 1. メタデータ（完全DBレス: DB 登録はしない）
 
-ローカル D1（SQLite）の `note_articles` テーブルに直接 INSERT する:
+> ★**note は完全DBレス。D1 `note_articles` テーブルは廃止済（使わない）。** 状態は **draft.md の frontmatter** と
+> **`.claude/state/note-published-urls.json`** で表す。旧版の「ローカル D1 に INSERT」手順は無効。
 
-```sql
-INSERT INTO note_articles (
-  id, ranking_key, title, summary, file_path,
-  status, note_price, created_at, updated_at
-) VALUES (
-  '<uuid>', '<articleId>', '<タイトル>', '<概要120文字>',
-  '31_note記事原稿/<slug>',
-  'draft', 0, datetime('now'), datetime('now')
-);
-```
-
-`ranking_key` フィールドには `articleId`（例: `B-1`）を格納する。
-`note_price` は 0（全記事無料）。
+編集完了したら draft.md の frontmatter を整える（`title` / `is_paid` / `price_jpy` / `published: false`）。
+ハッシュタグは同ディレクトリ `hashtags.txt`。DB への登録・INSERT は一切不要。
 
 ### 2. note 戦略の進捗更新
 
@@ -176,16 +166,13 @@ INSERT INTO note_articles (
 
 ### 4. note.com への投稿手順
 
-1. `docs/31_note記事原稿/<vertical>/<slug>/draft.md`（または `docs/31_note記事原稿/<slug>/draft.md`）の内容を note エディタにペースト
-2. `images/` の画像をアップロード（あれば）
-3. 無料で公開
-4. 公開後、ローカル D1 で status と noteUrl を更新:
-   ```sql
-   UPDATE note_articles
-   SET status = 'published', note_url = '<note.com URL>', updated_at = datetime('now')
-   WHERE ranking_key = '<articleId>';
-   ```
-5. `docs/30_note記事企画/note戦略.md` の進捗サマリーで「公開」列を更新
+投稿は **`/publish-note`**（実体は browser-use + `.claude/scripts/note/editor-helpers.sh`）に委譲する。手順の要点:
+
+1. `node .claude/scripts/note/prepare-article.cjs <slug>` → `build-body.cjs <slug>` で Phase 0 を生成
+2. `editor-helpers.sh` を `source` し、新規は `new_post_*` 系、既存更新は `process_article <slug> <noteId> <vertical>` → screenshot 目視 → `do_update`
+3. `images/` の画像は `ins_img` が再挿入（`.svg` は同名 `.png` に置換）。表は `images/table-N.png` で画像化（markdown 表は note でリテラルパイプ表示になる）
+4. 公開後は **`.claude/state/note-published-urls.json`** に slug→URL / is_paid / published_at（update なら updated_at）を記録（**D1 更新は無い**）
+5. note 戦略の進捗があれば `docs/30_note記事企画/` 配下を更新
 
 ## 参照
 
