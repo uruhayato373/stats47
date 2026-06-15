@@ -186,7 +186,7 @@ Cloudflare 手動パージが必要です。
 ```
 1. /fetch-gsc-data snapshot YYYY-Www
    ↓
-2. /plan-blog-from-gsc 5 30 → backlog/gsc-driven-YYYY-MM-DD.md
+2. /draft-from-trend を複数 metric で実行 (GSC ギャップから metric 選定)
    ↓
 3. Agent(article-writer) × N 並列
       → .local/r2/app/blog/<slug>/article.md × N
@@ -207,6 +207,6 @@ Cloudflare 手動パージが必要です。
 
 - `Agent(article-writer)` — 本スキルの入力 (article.md) を生成する subagent
 - `/sync-snapshots --only blog` — Phase 3 で内部呼び出し
-- `/plan-blog-from-gsc` — 量産フローの上流
+- `/draft-from-trend` — 量産フローの上流 (1 metric = 1 記事)
 - `.claude/rules/branch-workflow.md` — sync 後にデプロイが必要な場合 (今回は不要、R2 反映のみで本番に出る)
 - `.claude/rules/data-storage.md` — D1 vs R2 の使い分け

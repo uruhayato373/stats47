@@ -21,7 +21,7 @@ Obsidian で振り返り・思考整理する習慣を支えるため、ファ�
 | 批判的レビュー・事前検死・SEO 監査・SNS 週報・パフォーマンスレポート・コスト月報 | `docs/04_レビュー/{YYYY-MM-DD,YYYY-Www,YYYY-MM}-<topic-slug>.md`（フラット。日付先頭・slug に種別を含める例 `-monetization` / `-pre-mortem-<x>` / `-sns-weekly` / `-performance-report` / `-cloudflare-cost`。種別絞り込みは frontmatter `type:`） |
 | 改善施策の一覧・TODO (gsc / ga4 / adsense / psi / affiliate / cloudflare-cost 等) | `docs/02_実装計画/03_改善バックログ.md` |
 | YouTube 実験・回復 | `docs/15_実験ログ/youtube/EXP-NNN.md` / `recovery-YYYY-MM-DD.md` |
-| ブログ / note コンテンツ backlog | `docs/{20_ブログ記事企画,30_note記事企画}/backlog/` |
+| ブログ / note コンテンツ backlog | `docs/30_note記事企画/backlog/` |
 | 機能 / 自動化 backlog (未着手) | `docs/02_実装計画/04_機能バックログ.md`（指標拡充候補は `docs/02_実装計画/05_指標バックログ.md`） |
 
 ### GitHub Issues に置くもの

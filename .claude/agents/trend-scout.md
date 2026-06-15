@@ -5,7 +5,7 @@ description: ブログ・SNS 向けトレンド発見専任。 GSC / NotebookLM 
 
 # Trend Scout Agent
 
-ブログ記事や SNS 投稿のためのトレンド発見を専任する agent。 blog-editor から discover-trends / NotebookLM 系を切り出した。 GSC のクエリトレンド、 NotebookLM の社外資料、 外部ニュースを横断して企画素材を見つける。 企画化 (タイトル / 構成) は blog-planner に渡す。
+ブログ記事や SNS 投稿のためのトレンド発見を専任する agent。 blog-editor から discover-trends / NotebookLM 系を切り出した。 GSC のクエリトレンド、 NotebookLM の社外資料、 外部ニュースを横断して企画素材を見つける。 企画化 (タイトル / 構成) は article-writer に渡す。
 
 ## 担当範囲
 
@@ -23,7 +23,7 @@ description: ブログ・SNS 向けトレンド発見専任。 GSC / NotebookLM 
 
 ## 担当外
 
-- 企画 (タイトル / カテゴリ判定) → `blog-planner` に委譲
+- 企画 (タイトル / カテゴリ判定) → `article-writer` に委譲
 - 記事執筆 → `article-writer` / `blog-editor` に委譲
 - GSC メトリクス分析 → `gsc-analyst` に委譲 (本 agent はクエリ語の探索のみ)
 - X / IG 投稿用の素材展開 → 各 strategist に委譲
@@ -42,7 +42,7 @@ description: ブログ・SNS 向けトレンド発見専任。 GSC / NotebookLM 
 
 ## File Boundary (並行衝突回避)
 
-- `.claude/state/blog/` への write は本 agent と blog-planner が共有。 同 trend_id への同時 write NG
+- `.claude/state/blog/` への write は本 agent と article-writer が共有。 同 trend_id への同時 write NG
 - 並行起動可能 agent: gsc-analyst (state は別)、 article-writer × N (slug 単位排他)、 sns-renderer
 - 並行起動 NG: 同 trend_id への trend-scout 2 体同時 (race condition)
 

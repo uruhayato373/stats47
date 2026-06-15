@@ -34,7 +34,7 @@ Google Search Console の専任 agent。 fetch (週次 snapshot)、 inspect (URL
 - 改善ログ status 更新 (effect/* 判定) → `improvement-triage` に委譲
 - GA4 / PSI / AdSense 計測 → 各 analyst に委譲
 - ブログ記事改修 → `blog-editor` に委譲
-- カテゴリ別企画 → `blog-planner` に委譲
+- カテゴリ別企画 → `article-writer` に委譲
 
 ## 必読 rules
 

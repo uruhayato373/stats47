@@ -9,7 +9,7 @@ co_agents: [article-writer, blog-editor]
 
 ## 用途
 
-- `/fetch-article-data` で取得した JSON からチャート SVG を生成したいとき
+- `fetch-ranking-data-r2.mjs` で取得した JSON からチャート SVG を生成したいとき
 - 記事のチャートプレースホルダー（`<!-- chart:xxx -->`）を SVG 画像参照に差し替えたいとき
 
 ## 前提
@@ -494,5 +494,5 @@ function colorInterp(colors, t) {
 
 ## 関連スキル
 
-- `/fetch-article-data` — チャート用データの一括取得（このスキルの前に使用）
+- `fetch-ranking-data-r2.mjs` — チャート用データの一括取得（このスキルの前に使用）
 - `/md-syntax` — 記事内で使えるマークダウン記法一覧

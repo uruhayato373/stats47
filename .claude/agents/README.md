@@ -37,7 +37,6 @@
 | agent | role | 派生元 |
 |---|---|---|
 | `trend-scout` 🆕 | トレンド発見 (GSC / NotebookLM / 外部ソース) | blog-editor 分割 |
-| `blog-planner` 🆕 | カテゴリ / GSC / affiliate 企画 | blog-editor 分割 |
 | `blog-editor` | 公開 / 一括公開 / brushup (企画と review は分離) | 既存縮退 |
 | `article-writer` | 1 metric → 1 記事 (並列起動量産単位) | 既存 |
 | `chart-author` 🆕 | SVG / Remotion チャート生成 (blog / note 共通) | blog-editor + note-manager 分離 |
@@ -101,9 +100,9 @@
 | シナリオ | エージェント連携 |
 |---|---|
 | ランキング追加 → SNS 一式 | estat-researcher → data-ingester → snapshot-exporter → r2-publisher → x/IG/YT-strategist (3 並列) |
-| GSC 中位クエリ → 量産 | gsc-analyst → trend-scout → blog-planner → article-writer × N (並列) → chart-author → blog-editor (publish) |
+| GSC 中位クエリ → 量産 | gsc-analyst → trend-scout → article-writer × N (並列, metric→R2直執筆) → chart-author → blog-editor (publish) |
 | 週次 PDCA | strategy-advisor (orchestrator) → gsc/ga4/adsense-analyst (3 並列) → improvement-triage |
-| トレンド → ブログ記事 | trend-scout → blog-planner → article-writer → chart-author → blog-critic → blog-editor (publish) |
+| トレンド → ブログ記事 | trend-scout → article-writer (metric→R2直執筆) → chart-author → blog-critic → blog-editor (publish) |
 | トレンド → IG リール | trend-scout → sns-renderer (render-bar-chart-race) → instagram-strategist |
 | YouTube 動画制作 | youtube-strategist → sns-renderer → sns-metrics-sync (公開後) |
 | コード変更 → デプロイ | code-reviewer + ui-consistency-reviewer + tdd-guide (3 並列) → devops-runner |
@@ -117,7 +116,7 @@
 |---|---|---|
 | `data-pipeline` | **削除済 (2026-05-28)** | `estat-researcher` + `data-ingester` |
 | `db-manager` | **削除済 (2026-05-28)** | `db-schema-manager` + `snapshot-exporter` + `r2-publisher` + `data-ingester` |
-| `blog-editor` | 縮退予定 (Phase 3、publish 系のみ保持) | + `trend-scout` + `blog-planner` + `chart-author` + `blog-critic` |
+| `blog-editor` | 縮退予定 (Phase 3、publish 系のみ保持) | + `trend-scout` + `chart-author` + `blog-critic` (企画は article-writer に統合) |
 | `seo-auditor` | 縮退予定 (Phase 3) | `gsc-analyst` + `ga4-analyst` + `performance-auditor` + `adsense-analyst` |
 | `sns-renderer` | 役割縮退 (render 専任) | `sns-metrics-sync`, `image-prompt-curator` に分離 |
 | `theme-enhancer` | リネーム予定 (Phase 3) | `theme-component-builder` |

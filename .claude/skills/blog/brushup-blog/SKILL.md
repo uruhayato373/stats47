@@ -132,7 +132,7 @@ GSC データは実測値。 D1 の `articles` テーブルの `updated_at` が�
 
 #### Step 4: brushup-queue.md 出力
 
-`docs/20_ブログ記事企画/brushup-queue.md` に以下の形式で書き出す:
+`.claude/state/blog/remediation-queue.json` に以下の形式で書き出す:
 
 ```markdown
 # ブログ改善優先度キュー
@@ -319,7 +319,7 @@ quality-gate は内部で `article-factual-check.mjs` を呼び、rank/値の da
 以下は **quality-gate が blocker 化**しているので必ず是正する (棚卸し: `audit-published-blog.mjs`):
 
 1. **チャート**: `<chart-placeholder ... data="X"/>` と インライン `<svg>` を **生成画像 `![](data/X.svg)`** に統一。
-   - data/*.json があれば `node .claude/scripts/blog/generate-article-charts.mjs --slug <slug>` で **上位5+下位5** SVG を生成し placeholder を自動置換。data が無ければ `fetch-article-data.mjs` で ranking から取得してから生成。
+   - data/*.json があれば `node .claude/scripts/blog/generate-article-charts.mjs --slug <slug>` で **上位5+下位5** SVG を生成し placeholder を自動置換。data が無ければ `fetch-ranking-data-r2.mjs` で ranking から取得してから生成。
 2. **記事内『関連ランキング/関連記事』セクション削除**: ページ側 (`RelatedRankingsSection`/`BlogRelatedArticlesSection`) が正典。`## 関連ランキング` `### 関連記事` 見出しごと markdown から除去 (二重表示の解消)。
 3. **source-link を各図直下にインライン配置**: 末尾集約をやめ、対応する図の直下へ分散。
 4. **truncated 表 / 上下非対称表の除去**: 全件表 or SVG 化 (上下対称)。
@@ -400,7 +400,7 @@ gh pr create --base main --head develop \
 ## 参照
 
 - **記事品質の正典: `.claude/rules/blog-quality-standards.md`** (curiosity gap / callout / 内部リンク / source-link 配置の単一ソース)
-- 優先度キュー: `docs/20_ブログ記事企画/brushup-queue.md` (`--target priority` で生成)
+- 優先度キュー: `.claude/state/blog/remediation-queue.json` (`--target priority` で生成)
 - 品質確認: `/blog-review --mode proofread` で最終チェック
 - factual + 形式の防壁: `node .claude/scripts/blog/quality-gate.mjs <slug>` (内部で `article-factual-check.mjs` を呼ぶ)
 - 失敗事例 ledger: `.claude/skills/blog/SHARED-failure-cases.md`
