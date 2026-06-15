@@ -274,13 +274,69 @@ browser-use --headed --profile "Profile 5" eval "
 sleep 3
 ```
 
-### 4-3. URL カード化（手動仕上げ）
+### 4-3. URL カード化（自動）
 
-一括 paste では URL は plain text のまま。OGP カードに変換するには以下のいずれか:
+一括 paste 直後、URL は plain text の独立行になっている。これを OGP リンクカードへ変換する手順を
+**自動化する**（手動レシピ「各 URL 行を行末クリック → Enter → 4 秒待ち」を browser-use で再現）。
 
-**人間が手動で**（推奨）: エディタ上で各 URL 行をクリック → 行末で Enter → 4 秒待つ → カード化
+> **動作の根拠**: note エディタは「bare URL のみの行」でキャレットが行末にあるとき Enter で
+> その行を OGP カードへ変換する（doboku-note / stats47 両方で手動確認済みの挙動）。本実装はその
+> 既知手順を eval(Selection API) + 実 Enter キーで自動再現する。**初回 live 実行で 1 記事を検証**し、
+> カード化されない場合は下の「カード化フォールバック」を使う。
 
-**または別 Phase で自動化（未実装、TODO）**: paste 後に各 URL の text node を eval で発見 → Selection API でカーソルを行末に置く → Enter キーを dispatch して note の URL→card 変換をトリガする実装を将来追加する余地あり。
+```bash
+URL_COUNT=$(jq -r '.urlCount' /tmp/note-data-<slug>.json)
+if [ "${URL_COUNT:-0}" -gt 0 ]; then
+  jq -r '.segments[] | select(.type=="url") | .content' /tmp/note-data-<slug>.json > /tmp/note-urls-<slug>.txt
+
+  while IFS= read -r url; do
+    [ -z "$url" ] && continue
+    # encodeURIComponent 相当: ' を %27 に逃がす（eval の JS 文字列破断回避）
+    ESC_URL=$(printf '%s' "$url" | sed "s/'/%27/g")
+
+    # (a) 当該 URL 行の text node を発見し、キャレットを行末へ置く
+    browser-use --headed --profile "Profile 5" eval "
+      (function(){
+        const target = decodeURIComponent('$ESC_URL');
+        const editor = document.querySelector('[contenteditable=true]');
+        if (!editor) return 'no-editor';
+        let node = null;
+        const w = document.createTreeWalker(editor, NodeFilter.SHOW_TEXT);
+        let t; while ((t = w.nextNode())) {
+          if (t.textContent && t.textContent.trim() === target) { node = t; break; }
+        }
+        if (!node) return 'url-not-found';
+        const range = document.createRange();
+        range.selectNodeContents(node);
+        range.collapse(false);                 // 行末へ collapse
+        const sel = window.getSelection();
+        sel.removeAllRanges(); sel.addRange(range);
+        (node.parentElement || editor).scrollIntoView({block:'center'});
+        editor.focus();
+        return 'caret-set:' + target.slice(0,40);
+      })();
+    "
+    # (b) 実 Enter キーを送出 → note の URL→card 変換をトリガ
+    browser-use --headed --profile "Profile 5" keys Enter
+    # (c) カード変換待機（必須・4 秒未満だと次操作でレイアウトが壊れる）
+    sleep 4
+  done < /tmp/note-urls-<slug>.txt
+
+  # (d) 変換確認: 埋め込みカード要素の数を数える（0 のままならフォールバックへ）
+  browser-use --headed --profile "Profile 5" eval "
+    const e=document.querySelector('[contenteditable=true]');
+    const cards=e?e.querySelectorAll('figure, iframe, [data-name=embed], a[contenteditable=false]').length:0;
+    'cards:'+cards;
+  "
+fi
+```
+
+**カード化フォールバック**（自動で変換されない URL があった場合）: その URL 行を `click` で選択 →
+`keys End` で行末 → `keys Enter` → `sleep 4` を個別に実行する。それでも変換されなければ手動仕上げに切替え、
+`/tmp/note-cardfail-<slug>.txt` に残った URL を記録してレポートする（黙って飛ばさない）。
+
+> **要素セレクタの初回確認**: `figure / iframe / [data-name=embed]` は note の DOM 変更で変わりうる。
+> 初回 live 実行時に変換後 state を `browser-use ... state` で確認し、実際のカード要素名に合わせて (d) を更新する。
 
 ---
 
@@ -288,7 +344,7 @@ sleep 3
 - 必ず ClipboardEvent paste を使う（type は markdown 変換が効かない）
 - 連続 paste は不可 → 全本文を 1 つの string に連結し、1 回だけ paste 発火する
 - 本文は window.__nb にチャンク分割注入する（eval 1 回 ≤ 4KB）。一括 eval は大きい本文でタイムアウトする
-- URL カード化は paste 後の手動 / 別 Phase の責務
+- URL カード化は paste 後に Phase 4-3 で自動（行末キャレット → 実 Enter → 4 秒待機）。変換できない URL のみフォールバック/手動
 
 ## Phase 5: 挿絵の挿入
 

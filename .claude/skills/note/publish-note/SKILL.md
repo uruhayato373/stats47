@@ -50,7 +50,7 @@ browser-use CLI（Chrome プロファイル経由）で note.com エディタを
 - 対象 slug が `.claude/state/note-published-urls.json` の `articles` に無ければ
   「未公開のため更新不可」で中断
 - 本文と本文中画像のみ差し替える。アイキャッチ・ハッシュタグ・価格は触らない
-- 有料記事の更新は有料エリア境界の再設定が絡むため半自動（要ユーザー告知）
+- 有料記事の更新は有料エリア境界の再設定が絡む。Phase 7-Boundary で境界を自動設定するが、誤露出防止のため**最終投稿は screenshot 確認後に人間が確定**する（要ユーザー告知）
 
 ## 投稿先アカウント（最重要）
 
@@ -124,10 +124,10 @@ end tell' 2>/dev/null || true
   Phase 1: ブラウザ起動 → ★アカウント照合ゲート★ → エディタ表示
   Phase 2: アイキャッチ画像（※必ず本文入力前に実行）
   Phase 3: タイトル入力
-  Phase 4: 本文入力（一括 ClipboardEvent paste、URL は plain text）
+  Phase 4: 本文入力（一括 ClipboardEvent paste）→ Phase 4-3: URL カード化（自動）
   Phase 5: 挿絵の挿入（目次経由、画像が揃っている場合）
   Phase 6: 下書き保存
-  Phase 7: 公開設定（タグ・予約投稿）
+  Phase 7: 公開設定（有料価格→有料境界→タグ→予約/即時。有料は最終投稿のみ手動確定）
   Phase 8: 確認スクリーンショット
 → 全記事完了後にブラウザを閉じる + 必須クリーンアップ（pkill daemon）
 ```
@@ -168,18 +168,19 @@ browser-use --headed --profile "Profile 5" state 2>&1 > /tmp/note-acct.txt
 - **Phase 0**: Node.js スクリプトで draft.md を読み込み、frontmatter から `title` / `is_paid` / `price_jpy` 抽出、本文を「ここから先は有料部分:」行で free/paid 分割、セグメント分割（URL vs テキスト）して `/tmp/note-data-<slug>.json` に出力
 - **Phase 0 ガード（マガジン URL 未注入チェック）**: 本文に未注入プレースホルダー `{{MAGAZINE_URL}}` が残っていたら、その記事は**公開せず中断**する。回遊フッタの `{{MAGAZINE_URL}}` は公開前に `inject-magazine-url.cjs` で実 URL に置換しておく必要がある（未置換のまま公開するとプレースホルダー文字列がそのまま記事に出る）。バッチ中の 1 記事が該当した場合、その記事だけスキップし他は続行してよい
 - **Phase 2**: アイキャッチは**必ず本文入力前**に実行（本文入力後はスクロール位置がずれてボタン検出に失敗する）
-- **Phase 4**: 全セグメントを 1 つの文字列に連結し **1 回だけ** ClipboardEvent paste（`type` は markdown 変換しない。連続 paste 不可）。本文は `window.__nb` に**チャンク分割注入**してから paste 発火する（一括 eval は大きい本文で daemon ペイロード上限に当たりタイムアウト）。URL は plain text のまま貼られる（カード化は手動）
+- **Phase 4**: 全セグメントを 1 つの文字列に連結し **1 回だけ** ClipboardEvent paste（`type` は markdown 変換しない。連続 paste 不可）。本文は `window.__nb` に**チャンク分割注入**してから paste 発火する（一括 eval は大きい本文で daemon ペイロード上限に当たりタイムアウト）。
+- **Phase 4-3（URL カード化・自動）**: paste 後に plain text の URL 行を OGP リンクカードへ自動変換する。各 URL の text node を eval(Selection API) で発見 → 行末にキャレット → 実 Enter キー送出 → 4 秒待機（既知の手動レシピを自動再現）。詳細・フォールバックは [references/editor-operations.md](references/editor-operations.md) §4-3。**初回 live で 1 記事のカード化を検証**（DOM 変更時はカード要素セレクタを更新）
 - **Phase 5**: 目次からセクションにジャンプし、見出し直後にメニューから画像挿入
 
 ### Phase 7: 公開設定（有料設定・タグ・予約投稿）
 
 詳細手順は **[references/scheduling.md](references/scheduling.md)** を参照。
 
-実行順序: 公開に進む → **Phase 7-Pricing**（有料時のみ）→ Phase 7-Tags（ハッシュタグ）→ Phase 7-Schedule（予約 or 即時）
+実行順序: 公開に進む → **Phase 7-Pricing**（有料時のみ）→ **Phase 7-Boundary**（有料時のみ）→ Phase 7-Tags（ハッシュタグ）→ Phase 7-Schedule（予約 or 即時）
 
 主なポイント:
 - **Phase 7-Pricing**: `is_paid=true` + `price_jpy>0` のときだけ実行。有料ラジオをクリック → Shadow DOM 内 `<input id=price>` に JS で価格を上書き（`type` 不可: 初期値 300 と連結される）
-- 有料記事は最後のボタン label が「投稿する」→「有料エリア設定」に変化。**有料エリア境界選択画面は本検証では未到達 → 半自動（価格までは自動、境界設定以降は手動）が当面の運用**
+- **Phase 7-Boundary（有料境界・自動／初回 live で DOM 確定）**: 「有料エリア設定」ボタン → 境界設定画面で **`segmentsPaid[0]` の先頭段落を錨**に有料ラインを自動設定。⚠️ **境界画面 DOM は未観測のため初回 live で state+screenshot を捕捉して B-3 セレクタを確定**。⚠️ **誤露出防止で最終「投稿/予約投稿」は自動で押さず、境界を screenshot 確認後に人間が確定**する。詳細は [references/scheduling.md](references/scheduling.md) Phase 7-Boundary
 - 「公開に進む」→ ハッシュタグ入力 → 日時設定 → 予約投稿
 - 予約日時が指定されていない場合でも Phase 7 で**即時公開**が可能（「今すぐ公開」ボタンをクリック）。日時設定をスキップして直接「今すぐ公開」を選ぶ
 - 日時も即時公開も有料設定も不要な場合（下書き保存のみ）は Phase 7 全体をスキップ

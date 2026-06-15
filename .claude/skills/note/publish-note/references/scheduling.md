@@ -111,24 +111,70 @@ if [ "$IS_PAID" = "true" ] && [ "$PRICE" -gt 0 ]; then
 fi
 ```
 
-### 未確定領域（要追加検証）
+## Phase 7-Boundary: 有料エリア境界の設定（is_paid=true・自動／初回 live で DOM 確定）
 
-以下は本検証では到達していない。実装する前に同じ手順で DOM 投資を行うこと:
+価格設定（7-Pricing）の後、primary ボタン label が「有料エリア設定」に変わる。これをクリックすると
+ボディ上で**有料ライン（ここから先が有料）を置く画面**になる。境界 = 有料本文の先頭段落
+（`segmentsPaid[0]`）の直前。frontmatter の `ここから先は有料部分:` で Phase 0 が free/paid を分割済みなので、
+**有料先頭段落の冒頭テキストを錨**にして境界を置く。
 
-1. **有料エリア設定画面の DOM**
-   - 「有料エリア設定」ボタンをクリックした後、ボディ上で有料境界を指定する画面が現れる
-   - frontmatter の `ここから先は有料部分:` マーカー行を境界として自動選択する手法は未確認
-   - 暫定対応: `is_paid=true` のときは Phase 7-Pricing で価格設定までを自動化し、有料エリア設定ボタン押下以降は**手動で完了**するよう案内を出す
-2. **投稿実行ボタン（有料エリア設定確認 → 投稿）の selector**
-   - 上記画面に到達後、最終的に「投稿する」を押す flow も未検証
-3. **予約投稿との併用**
-   - is_paid=true + 予約投稿 の同時指定がどの順番で UI 操作が必要か未検証
+> **⚠️ 安全原則（誤露出防止）**: 境界を誤ると有料本文が無料露出する。本 Phase は **境界設定までで停止し、
+> 最終「投稿/予約投稿」ボタンは自動で押さない**。境界が正しいか screenshot で確認してから人間が投稿を確定する。
+>
+> **⚠️ 初回 live 検証**: 「有料エリア設定」画面の DOM は stats47/doboku-note とも未観測。本手順は
+> **初回実行で画面 state + screenshot を必ず捕捉**し、捕捉結果に基づいて B-3 の境界コントロール click を
+> 確定させる（捕捉前にハードコードしたセレクタで盲打ちしない）。一度確定したら以降は同セレクタで自動運用する。
 
-### 暫定運用ルール
+```bash
+if [ "$IS_PAID" = "true" ] && [ "$PRICE" -gt 0 ]; then
+  # B-1. 「有料エリア設定」ボタン → 境界設定画面へ
+  browser-use --headed --profile "Profile 5" state 2>&1 > /tmp/note-state.txt
+  AREA_IDX=$(find_idx "有料エリア設定")
+  if [ -z "$AREA_IDX" ]; then echo "ERROR: 『有料エリア設定』ボタン未検出。価格設定の確認が必要"; exit 1; fi
+  browser-use --headed --profile "Profile 5" click "$AREA_IDX"
+  sleep 3
 
-- **完全自動化対応**: `is_paid=false`（無料記事）の場合のみ Phase 7 全自動
-- **半自動化対応**: `is_paid=true` の場合は Phase 7-Pricing まで自動 → 「有料エリア設定」ボタン以降は人間が手動完了
-- スキル完了時のレポートで `is_paid=true` の記事は「有料エリア設定が未完了」と明記する
+  # B-2. ★境界設定画面の DOM を必ず捕捉（未観測画面のため。初回はここで実構造を確定する）
+  browser-use --headed --profile "Profile 5" state 2>&1 > /tmp/note-paidarea-state.txt
+  browser-use --headed --profile "Profile 5" screenshot /tmp/note-paidarea-<slug>.png
+  echo "[Phase 7-Boundary] 境界設定画面 DOM=/tmp/note-paidarea-state.txt 画面=/tmp/note-paidarea-<slug>.png に捕捉"
+
+  # B-3. 有料先頭段落を錨に境界を置く
+  #   PAID_HEAD = segmentsPaid[0] の冒頭。PAID_HEAD 段落の *直前* の境界コントロールを click する。
+  PAID_HEAD=$(jq -r '.segmentsPaid[0].content' /tmp/note-data-<slug>.json | head -c 24)
+  #   ↓ 実セレクタは B-2 捕捉で確定（初回確定後はこの grep を実 DOM パターンに置換して固定運用）:
+  BOUNDARY_IDX=$(grep -B3 -F "$PAID_HEAD" /tmp/note-paidarea-state.txt \
+    | grep -oiE '\[[0-9]+\]<[^>]*(有料|ここから|paid|line|区切)' | tail -1 | grep -oE '[0-9]+')
+  if [ -n "$BOUNDARY_IDX" ]; then
+    browser-use --headed --profile "Profile 5" click "$BOUNDARY_IDX"
+    sleep 2
+    echo "[Phase 7-Boundary] 境界(idx=$BOUNDARY_IDX)を PAID_HEAD='$PAID_HEAD' 直前に設定"
+  else
+    echo "WARN: 境界コントロール未特定。/tmp/note-paidarea-state.txt を確認し B-3 の grep を実 DOM に合わせ確定（初回のみ）。設定せず停止。"
+    exit 1
+  fi
+
+  # B-4. 設定後 screenshot（PAID_HEAD 直前に有料ラインが入ったか目視確認用）
+  browser-use --headed --profile "Profile 5" screenshot /tmp/note-paidarea-set-<slug>.png
+  echo "[Phase 7-Boundary] 設定後=/tmp/note-paidarea-set-<slug>.png。PAID_HEAD 直前に有料ラインがあるか確認"
+
+  # B-5. ★最終「投稿/予約投稿」は自動で押さない。境界を screenshot で確認してから人間が確定する（誤露出防止）。
+fi
+```
+
+### 運用ルール（2026-06-15 更新: 半自動 → 自動／初回 live で DOM 確定）
+
+- **無料記事（is_paid=false）**: Phase 7 全自動（従来どおり）。
+- **有料記事（is_paid=true）**: 価格設定（7-Pricing）+ 有料境界設定（7-Boundary）まで自動。ただし
+  **(1) 境界画面 DOM は初回 live で確定**（B-2 捕捉に基づき B-3 セレクタを固定）、
+  **(2) 最終投稿ボタンは誤露出防止で人間が screenshot 確認後に確定**する。
+- リンクカード化（本文 URL）は Phase 4-3 で自動（editor-operations.md 参照）。
+- レポートには有料記事について「価格=自動／境界=自動設定（要目視確認）／最終投稿=手動確定」を明記する。
+
+### 予約投稿との併用（is_paid=true + 予約）
+
+価格 → 有料境界設定 → タグ → 日時設定 → 予約投稿、の順。境界が予約フローのどの段階で確定するかは
+初回 live（B-2 捕捉）で順序を確認し、確定後に本節へ実順序を追記する。
 
 ---
 
