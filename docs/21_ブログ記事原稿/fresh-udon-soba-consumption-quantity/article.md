@@ -14,7 +14,7 @@ tags:
   - 都道府県ランキング
 publishedAt: 2026-06-14
 updatedAt: 2026-06-14
-published: false
+published: true
 ogImage: /blog/fresh-udon-soba-consumption-quantity/og.png
 ---
 
@@ -26,7 +26,7 @@ ogImage: /blog/fresh-udon-soba-consumption-quantity/og.png
 
 ## 上位5県・下位5県のランキング
 
-![生うどん・そば消費量 上位5県・下位5県（2024年）](data/fresh-udon-soba-rankings.svg)
+![生うどん・そば消費量 上位5県・下位5県（2024年）](data/fresh-udon-soba-prefecture-rankings.svg)
 
 2024年のランキングでまず目を引くのは、香川県の突出ぶりです。1位の香川（16,788g）と2位の滋賀（12,827g）の差だけで約4,000g近くあり、香川がいかに飛び抜けているかがわかります。
 

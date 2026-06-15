@@ -14,7 +14,7 @@ tags:
   - 経済センサス
 publishedAt: 2026-06-14
 updatedAt: 2026-06-14
-published: false
+published: true
 ogImage: /blog/retail-establishments-by-prefecture/og.png
 ---
 
@@ -26,7 +26,7 @@ ogImage: /blog/retail-establishments-by-prefecture/og.png
 
 ## 絶対数ランキング：大都市圏が独占する上位
 
-![小売業事業所数 上位5・下位5（2021年）](data/retail-establishments-rankings.svg)
+![小売業事業所数 上位5・下位5（2021年）](data/retail-establishments-prefecture-rankings.svg)
 
 上位5県はいずれも大都市圏です。1位・東京都（87,895事業所）、2位・大阪府（55,351）、3位・愛知県（46,535）、4位・神奈川県（45,729）、5位・埼玉県（37,716）と続きます。東京と大阪の差だけでも32,544事業所あり、人口集積がそのまま商業集積に直結していることがわかります。
 
@@ -41,7 +41,7 @@ ogImage: /blog/retail-establishments-by-prefecture/og.png
 
 ## 商業密度ランキング：人口あたりで見ると順位が逆転する
 
-![小売業事業所数（人口10万人あたり） 上位5・下位5（2021年）](data/retail-establishments-density.svg)
+![小売業事業所数（人口10万人あたり） 上位5・下位5（2021年）](data/retail-establishments-density-prefecture-rankings.svg)
 
 人口10万人あたりの小売業事業所数（商業密度）に直すと、ランキングは様変わりします。1位は高知県（98.3店/10万人）で、絶対数では44位という下位グループです。2位・和歌山県（95.6）、3位・島根県（95.6）、4位・山形県（93.6）、5位・秋田県（93.2）と続き、上位5県はすべて人口が少ない地方県です。
 

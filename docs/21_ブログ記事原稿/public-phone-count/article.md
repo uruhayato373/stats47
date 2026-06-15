@@ -14,7 +14,7 @@ tags:
   - 災害対応
 publishedAt: 2026-06-14
 updatedAt: 2026-06-14
-published: false
+published: true
 ogImage: /blog/public-phone-count/og.png
 ---
 
@@ -22,7 +22,7 @@ ogImage: /blog/public-phone-count/og.png
 
 「人口が多い東京が1位」は想像がつくとしても、なぜこれほど格差が開くのでしょうか。そして、スマートフォンが普及しきったこの時代に、公衆電話はなぜまだ残り続けているのか。データから見えてくる構造的な理由を探ります。
 
-![公衆電話設置台数 上位5・下位5（2024年）](data/public-phone-count-rankings.svg)
+![公衆電話設置台数 上位5・下位5（2024年）](data/public-phone-count-prefecture-rankings.svg)
 
 <source-link href="/ranking/public-phone-count">公衆電話設置台数の全47都道府県ランキングを見る</source-link>
 
@@ -66,7 +66,7 @@ ogImage: /blog/public-phone-count/og.png
 
 最も重要な視点は「現在の格差」よりも「激減の軌跡」です。
 
-![公衆電話設置台数 全国合計の推移（1984〜2024年）](data/public-phone-count-trend.svg)
+![公衆電話設置台数 全国合計の推移（1984〜2024年）](data/public-phone-count-trend-timeseries.svg)
 
 <source-link href="/ranking/public-phone-count">公衆電話設置台数の都道府県別データを詳しく見る</source-link>
 

@@ -11,6 +11,7 @@ tags:
   - 地方自治
 category: economy
 publishedAt: 2026-03-05
+published: true
 ---
 
 「なぜ人口733万人もいる埼玉県が、一人当たり地方税額で振るわないのか」──これが地方財政の構造を最も鮮明に示す問いです。
