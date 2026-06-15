@@ -162,7 +162,9 @@
       "url": "https://note.com/stats47/n/nb62db0d2826f",
       "is_paid": true,
       "price_jpy": 300,
-      "published_at": "2026-05-22"
+      "published_at": "2026-05-22",
+      "updated_at": "2026-06-16",
+      "update_note": "ですます化+画像4枚再挿入+有料ライン(有料セクション1直前)再設定。境界screenshot検証済"
     },
     "17-year-on-year-analysis": {
       "vertical": "koumuin-claude-code",
