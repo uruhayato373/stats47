@@ -432,3 +432,59 @@ browser-use --headed --profile "Profile 5" screenshot /tmp/note-publish-<slug>.p
 ```bash
 browser-use --headed --profile "Profile 5" close
 ```
+
+---
+
+## 実機検証済 update バッチ運用メモ（2026-06-16・必読）
+
+estat #00/#03/#08(無料) + cc#16(有料¥300) を --update で実機公開して確定した、再現性のある手順とハザード。
+
+### 再利用スクリプト（手書きしない）
+- **Phase 0**: `node .claude/scripts/note/prepare-article.cjs <slug>` → `/tmp/note-data-<slug>.json`
+  （title/isPaid/priceJpy/segments/segmentsPaid/imgRefs(afterHeading付)/paidHead/pipeTable を出力）
+- **本文ファイル**: `node .claude/scripts/note/build-body.cjs <slug>` → `/tmp/note-body-<slug>.txt`
+  → これを 400 字チャンクで `window.__nb` に注入 → 1 回 ClipboardEvent paste（Phase 4-2）。
+
+### update の本文クリア → 再ペースト（検証済）
+1. 編集画面 `editor.note.com/notes/<noteId>/edit` を開く（noteId は note-published-urls.json の url 末尾）。
+2. クリア: `selectNodeContents(contenteditable)` → `execCommand('delete')`。**タイトルは別 textarea なので無傷**（検証済）。
+3. BODY_IDX = `grep -oE '\[[0-9]+\]<div contenteditable=true'` → click でフォーカス → チャンク注入 → paste。
+
+### 画像の再挿入（確定パターン）
+本文 paste で画像は剥がれるので再挿入する。位置は `imgRefs[].afterHeading`（直前見出し）を錨にする:
+```bash
+# 見出し名を TOC でクリック→ジャンプ→その見出し直後の段落 index を awk で取得
+H=$(grep -oE '\[[0-9]+\]<div role=menuitem aria-label=<見出し>' s.txt | grep -oE '[0-9]+' | head -1)
+# ジャンプ後 state を取り、見出し行の直後の最初の <p id> を取る:
+P=$(awk '/<見出しテキスト>$/{f=1} f&&/<p id/{print;exit}' s2.txt | grep -oE '\[[0-9]+\]' | head -1 | tr -d '[]')
+# 見出し直後に空行を作る → メニュー → 画像 → upload
+click $P; keys Home; keys Enter; keys ArrowUp
+MENU=$(grep -oE '\[[0-9]+\]<button aria-label=メニューを開く' m.txt | grep -oE '[0-9]+' | head -1); click $MENU
+IB=$(grep -B2 -E '^\s+画像\s*$' m2.txt | grep -oE '\[[0-9]+\]' | tail -1 | tr -d '[]'); click $IB
+F=$(grep -oE '\[[0-9]+\]<input[^>]*image-upload-input' m3.txt | grep -oE '[0-9]+' | head -1); upload $F <png>
+sleep 4
+```
+- 箇条書きの後に置く場合は `click <最後の箇条書き>; keys End; keys Enter; keys Enter`（2回目 Enter でリスト脱出）。
+- 見出しでなくコード行が錨の画像は、その Step 見出しに寄せて置く（位置は近ければ可）。
+
+### 公開（update）の最終分岐 ★無料 / 有料で違う（検証済）
+「公開に進む」後の設定画面の **primary ボタンで分岐**する（[scheduling.md](./scheduling.md) Phase 7-Boundary）:
+- **無料記事**: ボタンが直接「**更新する**」=既存の試し読みライン（全文無料）が保持される → そのまま click で公開。
+  （ボタンが「試し読みエリアを設定」の場合のみライン画面で**末尾**にラインを置く＝全文無料。）
+- **有料記事**: 本文 re-paste で有料ラインがリセットされ、ボタンは「**有料エリア設定**」になる →
+  ライン画面で **`paidHead`（=segmentsPaid[0] 冒頭。例「有料セクション 1: …」）の直前**の「ラインをこの場所に変更」を click。
+  正しく置くと黒バー「**このラインより先を有料にする**」が paidHead の直前に出る → **screenshot で必ず目視**してから「更新する」。
+  価格・有料タイプ・ハッシュタグは re-paste で保持される（触らない）。
+- 成功は **「記事が公開されました」モーダル**（X/Facebook/LINE 共有ボタン）で確認。後に note-published-urls.json に updated_at 記録。
+
+### ★ハザード（長時間バッチで実際に発生・必ず対策）
+1. **ディスク満杯（ENOSPC）**: browser-use は記事ごとに一時 `$TMPDIR/browser-use-user-data-dir-*`（各 数百MB）を作り、
+   長時間バッチで**ディスクを食い潰してハーネスの出力すら書けなくなる**。**数記事ごとに必ず掃除**:
+   ```bash
+   rm -rf "${TMPDIR}"browser-use-user-data-dir-* /tmp/note-*.png 2>/dev/null
+   ```
+2. **daemon ハング / セッション断**: 長時間で `state`/`screenshot` が timeout。
+   `pkill -KILL -f browser_use.skill_cli.daemon` で再起動するが、**再起動後に note セッションが切れて
+   ログイン画面に飛ぶことがある**（再ログインが要る）。再開前に必ずアカウント照合ゲート（settings/account で `stats47`）を通す。
+3. **対策**: **5〜10 記事ごとに区切る**（区切りで temp 掃除 + 状態をコミット）。1 記事あたり ~25-35 browser 操作。
+   ライブ記事は「更新する」を押すまで変わらないので、途中で落ちても**ライブは無傷**（編集ドラフトをやり直すだけ）。
