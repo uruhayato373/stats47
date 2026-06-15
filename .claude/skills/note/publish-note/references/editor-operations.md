@@ -444,7 +444,10 @@ estat #00/#03/#08(無料) + cc#16(有料¥300) を --update で実機公開し�
   （title/isPaid/priceJpy/segments/segmentsPaid/imgRefs(afterHeading付)/paidHead/pipeTable を出力）
   - 有料境界マーカーは「ここから先は有料部分:」と「ここから先は有料部分**です**:」の 2 表記が混在する。
     prepare-article.cjs の `PAID_MARK` は行全体を許容するので両方拾える（`[:：]` 必須にすると paidHead が空になる）。
-  - ★**`pipeTable:true` の記事は本文に markdown 表（`\| … \|`）が残っている**。note は markdown 表を**リテラルなパイプ**（`\| 列 \| 列 \|`）で表示してしまい崩れる。データ表は **`images/table-N.png` に画像化**して `![](data/table-N.png)` で貼り、本文の markdown 表は削除する（持ち越し: 2026-06-16 時点で update 済の estat 各本・cc#18・#21 の翻訳表などに残存。表の画像化は別タスク）。新規 cc#22 以降は table-N.png 化済で `pipeTable:false`。
+  - ★**`pipeTable:true` の記事は本文に markdown 表（`\| … \|`）が残っている**。note は markdown 表を**リテラルなパイプ**（`\| 列 \| 列 \|`）で表示してしまい崩れる。データ表は **`images/table-N.png` に画像化**して `![](data/table-N.png)` で貼り、本文の markdown 表は削除する。
+    - **画像化ツール（冪等）**: `node .claude/scripts/note/render-md-tables.cjs` — draft.md の markdown 表を SVG→PNG（`images/table-N.png`）に変換し本文を画像埋め込みに置換。コードフェンス内 `\|` は対象外。**公開前に走らせる**。
+      ⚠️ **現状 SERIES パスが `koumuin-claude-code` 固定**で `koumuin-estat-claude-code` 等を未カバー。estat 系も処理するには SERIES を vertical 横断に一般化する必要がある（持ち越し）。
+    - **持ち越し**: 2026-06-16 時点で update 済の estat 各本・cc#18・#21 の翻訳表などに markdown 表が残存（公開済みなので literal pipe 表示）。上記ツールを一般化して再実行 → `--update` で貼り直すのが是正手順。新規 cc#22 以降は table-N.png 化済で `pipeTable:false`。
 - **本文ファイル**: `node .claude/scripts/note/build-body.cjs <slug>` → `/tmp/note-body-<slug>.txt`
   → これを 400 字チャンクで `window.__nb` に注入 → 1 回 ClipboardEvent paste（Phase 4-2）。
 - **エディタ操作の関数ライブラリ（★update バッチの本体・2026-06-16 実機で 11 本連続成功）**:
