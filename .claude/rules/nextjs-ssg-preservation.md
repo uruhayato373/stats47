@@ -105,5 +105,4 @@ cd apps/web && npm run build 2>&1 | grep -E "Route|○|ƒ|Static|Dynamic" | head
 ## 関連
 
 - 失敗 commit: `ebad87c2 fix: revert EXP-004 layout async cookies() — ranking pages 500 fix` (2026-05-10)
-- 改善策カタログ: `docs/04_レビュー/2026-05-16-psi-improvement-strategy.md` §3.A.A1
 - auto memory: `feedback_nextjs_ssg_cookies.md`

@@ -22,16 +22,13 @@ docs/04_レビュー/<YYYY-Www>-<topic-slug>.md        (週次。例: 2026-W22-s
 ## 現在の文書 (カテゴリ別)
 
 ### 批判的レビュー (`type: critical-review`)
-- [2026-05-29-monetization.md](2026-05-29-monetization.md) — 収益化戦略分析。お金・健康・人間関係の YMYL 高収益 3 本柱
 - [2026-06-13-monetization-career.md](2026-06-13-monetization-career.md) — 収益化戦略分析。転職アフィリエイト特化・ユニットエコノミクス
 - [2026-06-01-codebase-optimization.md](2026-06-01-codebase-optimization.md) — スケール前のコード負債棚卸し (重複/SSOT散逸/DBレス取り残し)。deferred リファクタの生きた backlog
 
 ### パフォーマンス / コード監査 (`type: performance-report`)
 - [2026-06-13-code-audit.md](2026-06-13-code-audit.md) — 全コード監査 (PSI悪化要因→是正)。実施状況つき。**TODO 真実源は `docs/02_実装計画/03_改善バックログ.md` PERF-***
-- [2026-05-16-psi-improvement-strategy.md](2026-05-16-psi-improvement-strategy.md) — PSI 改善策の網羅カタログ。`.claude/rules/nextjs-ssg-preservation.md` が A1 (Cookie banner SSR化) で参照
 
 ### ブログ品質 (`type: blog-quality / blog-winning-patterns`)
-- [2026-06-02-blog-quality-inventory.md](2026-06-02-blog-quality-inventory.md) — 公開記事の品質棚卸しスナップショット (是正キューの基礎)
 - [2026-06-08-blog-winning-patterns.md](2026-06-08-blog-winning-patterns.md) — GSC 実測 × 構造特徴の勝ち要因分析 (順位交絡統制つき)
 
 ### SNS 週報 (`type: sns-weekly-report`)

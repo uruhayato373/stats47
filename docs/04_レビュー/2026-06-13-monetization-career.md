@@ -320,4 +320,4 @@ STRATEGY CAREER は **3 経路**で表示されており、今回の targeting �
 - 賃金データ: `reference_estat_wage_survey` (memory) / 賃金構造基本統計調査 `0003445758`
 - 記事品質: `.claude/rules/blog-quality-standards.md`
 - 実証判定: `.claude/rules/evidence-based-judgment.md`
-- 過去レビュー: `docs/04_レビュー/2026-05-29-monetization.md` (YMYL 3本柱)
+- 収益化方針の正典: `docs/02_実装計画/01_収益化マスタープラン.md` (旧 YMYL 3本柱レビューはマスタープランに吸収)

@@ -390,7 +390,7 @@ node .claude/scripts/blog/audit-chart-quality.mjs
 node .claude/scripts/blog/audit-published-blog.mjs
 ```
 
-公開記事の品質棚卸し (最新): `docs/04_レビュー/2026-06-02-blog-quality-inventory.md`。
+公開記事の品質是正キュー (真実源): `.claude/state/blog/remediation-queue.json` (build-remediation-queue.mjs が R2+GSC から再構築)。
 週次是正ループ (GSC 優先で blocker 記事を /brushup-blog → critic PASS) は同ファイル参照。
 
 ### enforce される箇所 (2026-06-02〜 / 公開前ブロック)
