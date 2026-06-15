@@ -44,11 +44,14 @@ for (const l of raw.split("\n")) {
 body = body.replace(/<!--[\s\S]*?-->\n?/g, "").replace(/!\[.*?\]\(.*?\)\n?/g, "").replace(/^---$/gm, "");
 body = body.replace(/\n*^##\s*公開時にコピーするハッシュタグ[\s\S]*$/m, "").replace(/^#\s+.*\n+/, "").trim();
 let bodyPaid = "";
+// マーカーは「ここから先は有料部分:」と「ここから先は有料部分です:」の 2 種が混在するため
+// 行全体を許容する（[:：] を必須にすると「です:」表記を取りこぼし paidHead が空になる）。
+const PAID_MARK = /^ここから先は有料部分[^\n]*$/m;
 if (isPaid) {
-  const sm = body.match(/^ここから先は有料部分[:：][^\n]*$/m);
+  const sm = body.match(PAID_MARK);
   if (sm) { const idx = body.indexOf(sm[0]); bodyPaid = body.substring(idx + sm[0].length).trim(); }
 }
-body = body.replace(/^ここから先は有料部分[:：][^\n]*$\n?/m, "").trim();
+body = body.replace(/^ここから先は有料部分[^\n]*$\n?/m, "").trim();
 function seg(t) {
   const ls = t.split("\n"); const s = []; let b = [];
   for (const l of ls) {

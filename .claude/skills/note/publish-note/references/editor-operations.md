@@ -442,8 +442,19 @@ estat #00/#03/#08(無料) + cc#16(有料¥300) を --update で実機公開し�
 ### 再利用スクリプト（手書きしない）
 - **Phase 0**: `node .claude/scripts/note/prepare-article.cjs <slug>` → `/tmp/note-data-<slug>.json`
   （title/isPaid/priceJpy/segments/segmentsPaid/imgRefs(afterHeading付)/paidHead/pipeTable を出力）
+  - 有料境界マーカーは「ここから先は有料部分:」と「ここから先は有料部分**です**:」の 2 表記が混在する。
+    prepare-article.cjs の `PAID_MARK` は行全体を許容するので両方拾える（`[:：]` 必須にすると paidHead が空になる）。
 - **本文ファイル**: `node .claude/scripts/note/build-body.cjs <slug>` → `/tmp/note-body-<slug>.txt`
   → これを 400 字チャンクで `window.__nb` に注入 → 1 回 ClipboardEvent paste（Phase 4-2）。
+- **エディタ操作の関数ライブラリ（★update バッチの本体・2026-06-16 実機で 11 本連続成功）**:
+  `source .claude/scripts/note/editor-helpers.sh` で以下が使える。
+  - `process_article <slug> <noteId> <vertical>` — 本文クリア→チャンク paste→URLカード→画像再挿入→有料境界 line→`/tmp/note-publish-<slug>.png`。
+  - `do_update <slug>` — 「更新する」→「記事が公開されました」確認→ `note-published-urls.json` に `updated_at` 記録。
+  - `ins_img` / `paid_setline` は単体でも呼べる（screenshot は必ず目視してから `do_update`）。
+  - ★実装上の確定知見: (a) 画像アンカーは **eval-scroll**（TOC 非依存。サブ見出し・コード行アンカーも拾う）。
+    (b) 有料見出しの突合は **空白・バッククォート(インラインコード)・先頭 `#` を除去して比較**（エディタの textContent と
+    state プレビューでバッククォート有無が食い違うため）。(c) `### ` 除去は **BSD sed の `\+` 非対応**に注意し `sed 's/^#* *//'` を使う。
+    (d) 画像参照が `.svg` でも note は png/jpg のみ受けるので **同名 `.png` に置換**してアップロードする。
 
 ### update の本文クリア → 再ペースト（検証済）
 1. 編集画面 `editor.note.com/notes/<noteId>/edit` を開く（noteId は note-published-urls.json の url 末尾）。

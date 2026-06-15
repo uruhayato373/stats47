@@ -1,0 +1,153 @@
+# note エディタ操作の再利用シェル関数（publish-note --update 用・実機検証済 2026-06-16）
+# 使い方:
+#   export PATH="$HOME/.browser-use-env/bin:$PATH"
+#   source .claude/scripts/note/editor-helpers.sh
+#   process_article <slug> <noteId> <vertical>   # 本文クリア→ペースト→URLカード→画像→有料境界→screenshot
+#   # screenshot を目視で検証してから:
+#   do_update <slug>                              # 「更新する」→公開モーダル確認→state に updated_at 記録
+#
+# 前提: Phase 0 で `node .claude/scripts/note/prepare-article.cjs <slug>` を実行し
+#       /tmp/note-data-<slug>.json を生成済みであること（build-body.cjs は process_article 内で呼ぶ）。
+# 詳細フロー・ハザードは .claude/skills/note/publish-note/references/editor-operations.md を参照。
+
+BU(){ browser-use --headed --profile "Profile 5" "$@"; }
+
+# ---- 画像挿入: 本文中のアンカーテキストへ eval-scroll → 直後段落に画像を挿入 ----
+# 見出しでなくサブ見出し・コード行アンカーでも startsWith/includes で拾う。svg は呼び出し側で png に置換する。
+ins_img(){
+  local H="$1" IMG="$2"
+  if [ ! -f "$IMG" ]; then echo "  [WARN] image missing: $IMG"; return 1; fi
+  local ESC=$(printf '%s' "$H" | sed "s/'/%27/g")
+  local R=$(BU eval "(function(){const e=document.querySelector('[contenteditable=true]');if(!e)return 'no-editor';const w=document.createTreeWalker(e,NodeFilter.SHOW_TEXT);let t,hit=null;const target=decodeURIComponent('$ESC');while((t=w.nextNode())){if(t.textContent&&t.textContent.trim().startsWith(target)){hit=t;break;}}if(!hit){const w2=document.createTreeWalker(e,NodeFilter.SHOW_TEXT);while((t=w2.nextNode())){if(t.textContent&&t.textContent.includes(target)){hit=t;break;}}}if(!hit)return 'not-found';(hit.parentElement||e).scrollIntoView({block:'center'});return 'scrolled';})();" 2>&1 | grep -oiE "scrolled|not-found|no-editor" | head -1)
+  if [ "$R" != "scrolled" ]; then echo "  [WARN] anchor scroll failed ($R): $H"; return 1; fi
+  sleep 1.2
+  BU state 2>&1 > /tmp/ns.txt
+  local ANCHOR=$(awk -v h="$H" '
+    index($0,h){found=1; next}
+    found && /\[[0-9]+\]<p id=/ {match($0,/\[[0-9]+\]/); print substr($0,RSTART+1,RLENGTH-2); exit}
+    found && /\[[0-9]+\]<li/ {match($0,/\[[0-9]+\]/); print substr($0,RSTART+1,RLENGTH-2); exit}
+    ' /tmp/ns.txt)
+  if [ -z "$ANCHOR" ]; then echo "  [WARN] anchor para not found after: $H"; return 1; fi
+  BU click "$ANCHOR" >/dev/null 2>&1; sleep 0.4
+  BU keys Home >/dev/null 2>&1; sleep 0.3
+  BU keys Enter >/dev/null 2>&1; sleep 0.4
+  BU keys ArrowUp >/dev/null 2>&1; sleep 0.5
+  BU state 2>&1 > /tmp/ns.txt
+  local MENU=$(grep -oE "\[[0-9]+\]<button aria-label=メニューを開く" /tmp/ns.txt | grep -oE "[0-9]+" | head -1)
+  BU click "$MENU" >/dev/null 2>&1; sleep 1
+  BU state 2>&1 > /tmp/ns.txt
+  local IB=$(awk '/^\t*\*?\[[0-9]+\]<button \/>/{i=$0} /^\t*画像\s*$/{print i; exit}' /tmp/ns.txt | grep -oE "[0-9]+" | head -1)
+  BU click "$IB" >/dev/null 2>&1; sleep 1.5
+  BU state 2>&1 > /tmp/ns.txt
+  local UP=$(grep -oE "\[[0-9]+\]<input id=note-editor-image-upload-input" /tmp/ns.txt | grep -oE "[0-9]+" | head -1)
+  BU upload "$UP" "$IMG" 2>&1 | grep -iE "uploaded|error" | sed 's/^/  /'
+  sleep 5
+  echo "  [OK] $H <- $(basename "$IMG") (anchor=$ANCHOR)"
+}
+
+# ---- 有料境界: 公開に進む→有料エリア設定→paidHead 直前にラインを置く→screenshot ----
+# 空白・バッククォート(インラインコード)・先頭 # に非依存でマッチする（state とプレビューの差異を吸収）。
+paid_setline(){
+  local HEAD="$1" SHOT="$2"
+  BU state 2>&1 > /tmp/ps.txt
+  local PUB=$(awk '/^\t*公開に進む\s*$/{print prev} {prev=$0}' /tmp/ps.txt | grep -oE "\[[0-9]+\]" | grep -oE "[0-9]+" | head -1)
+  BU click "$PUB" >/dev/null 2>&1; sleep 3
+  BU state 2>&1 > /tmp/ps.txt
+  if ! grep -qE "有料エリア設定" /tmp/ps.txt; then echo "  [WARN] no 有料エリア設定 (free?)"; return 2; fi
+  local SET=$(awk '/^\t*有料エリア設定\s*$/{print prev} {prev=$0}' /tmp/ps.txt | grep -oE "\[[0-9]+\]" | grep -oE "[0-9]+" | head -1)
+  BU click "$SET" >/dev/null 2>&1; sleep 2.5
+  local HSTRIP=$(printf '%s' "$HEAD" | tr -d '\140')
+  local ESC=$(printf '%s' "$HSTRIP" | sed "s/'/%27/g")
+  BU eval "(function(){const root=document.querySelector('[contenteditable=false][role=textbox]');if(!root)return 'no-root';const norm=s=>(s||'').replace(/[\s　\140]/g,'');const target=norm(decodeURIComponent('$ESC'));const els=root.querySelectorAll('h1,h2,h3,h4,p,li');for(const el of els){if(norm(el.textContent).includes(target)){el.scrollIntoView({block:'center'});return 'scrolled';}}return 'not-found';})();" 2>&1 | grep -iE "scrolled|not-found|no-root" | sed 's/^/  /'
+  sleep 1.5
+  BU state 2>&1 > /tmp/ps.txt
+  local BTN=$(HEAD="$HEAD" python3 - << 'PY'
+import os,re
+head=os.environ['HEAD']
+norm=lambda s:re.sub(r'[\s　`#]','',s)
+ht=norm(head)
+lines=open('/tmp/ps.txt',encoding='utf-8').read().split('\n')
+hidx=None
+for i,l in enumerate(lines):
+    if ht and ht in norm(l):
+        hidx=i
+if hidx is None:
+    print(''); raise SystemExit
+for j in range(hidx-1, max(hidx-4,-1), -1):
+    m=re.search(r'\[(\d+)\]<button',lines[j])
+    if m:
+        print(m.group(1)); break
+else:
+    print('')
+PY
+)
+  if [ -z "$BTN" ]; then echo "  [WARN] line button not found for: $HEAD"; return 1; fi
+  BU click "$BTN" >/dev/null 2>&1; sleep 1.5
+  BU screenshot "$SHOT" >/dev/null 2>&1
+  echo "  [OK] line set before: $HEAD (btn=$BTN) shot=$SHOT"
+}
+
+# ---- 更新確定: 「更新する」→「記事が公開されました」確認→ note-published-urls.json に updated_at 記録 ----
+do_update(){
+  local SLUG="$1"
+  BU state 2>&1 > /tmp/ps.txt
+  local UPD=$(awk '/^\t*更新する\s*$/{print prev} {prev=$0}' /tmp/ps.txt | grep -oE "\[[0-9]+\]" | grep -oE "[0-9]+" | head -1)
+  BU click "$UPD" >/dev/null 2>&1; sleep 5
+  BU state 2>&1 > /tmp/ps.txt
+  if grep -qE "記事が公開されました" /tmp/ps.txt; then
+    SLUG="$SLUG" python3 - << 'PY'
+import json,os
+slug=os.environ['SLUG']
+p='.claude/state/note-published-urls.json'
+d=json.load(open(p))
+if slug in d['articles']:
+    d['articles'][slug]['updated_at']='2026-06-16'
+    json.dump(d,open(p,'w'),ensure_ascii=False,indent=2)
+    print('  [PUBLISHED] %s  updated_at recorded'%slug)
+else:
+    print('  [PUBLISHED] %s  (not in state map!)'%slug)
+PY
+  else
+    echo "  [FAIL] $SLUG — no publish modal (idx=$UPD)"; grep -nE "エラー|error|必須" /tmp/ps.txt | head -3
+  fi
+}
+
+# ---- 1 記事の --update を screenshot 直前まで自動実行（JSON 駆動） ----
+# article_subdir 例: koumuin-estat-claude-code。実行後 /tmp/note-publish-<slug>.png を必ず目視→ do_update。
+process_article(){
+  local SLUG="$1" NOTEID="$2" VERT="$3"
+  local J="/tmp/note-data-$SLUG.json"
+  local ADIR="/Users/minamidaisuke/stats47/docs/31_note記事原稿/$VERT/$SLUG/images"
+  node /Users/minamidaisuke/stats47/.claude/scripts/note/build-body.cjs "$SLUG" >/dev/null
+  BU open "https://editor.note.com/notes/$NOTEID/edit" >/dev/null 2>&1; sleep 6
+  BU state 2>&1 > /tmp/ns.txt
+  if ! grep -qE "contenteditable=true role=textbox" /tmp/ns.txt; then echo "  [FAIL] editor not loaded for $SLUG"; return 1; fi
+  BU eval "(function(){const e=document.querySelector('[contenteditable=true]');e.focus();const r=document.createRange();r.selectNodeContents(e);const s=window.getSelection();s.removeAllRanges();s.addRange(r);document.execCommand('delete');return 'c';})();" >/dev/null 2>&1
+  local BODY="/tmp/note-body-$SLUG.txt"
+  BU eval "window.__nb='';'init'" >/dev/null 2>&1
+  local BODYLEN=$(node -e "process.stdout.write(String([...require('fs').readFileSync('$BODY','utf8')].length))")
+  local OFFSET=0
+  while [ "$OFFSET" -lt "$BODYLEN" ]; do
+    local CHUNK=$(node -e "const b=[...require('fs').readFileSync('$BODY','utf8')]; process.stdout.write(encodeURIComponent(b.slice($OFFSET,$OFFSET+400).join('')).replace(/'/g,'%27'))")
+    BU eval "window.__nb+=decodeURIComponent('$CHUNK');String(window.__nb.length)" >/dev/null 2>&1
+    OFFSET=$((OFFSET + 400))
+  done
+  local PN=$(BU eval "const editor=document.querySelector('[contenteditable=true]');editor.focus();const dt=new DataTransfer();dt.setData('text/plain',window.__nb);editor.dispatchEvent(new ClipboardEvent('paste',{clipboardData:dt,bubbles:true,cancelable:true}));const n=window.__nb.length;delete window.__nb;'pasted '+n;" 2>&1 | grep -oiE "pasted [0-9]+")
+  echo "  $SLUG: $PN"
+  sleep 4
+  jq -r '.segments[] | select(.type=="url") | .content' "$J" > /tmp/urls.txt
+  while IFS= read -r url; do
+    [ -z "$url" ] && continue
+    local EU=$(printf '%s' "$url" | sed "s/'/%27/g")
+    BU eval "(function(){const target=decodeURIComponent('$EU');const e=document.querySelector('[contenteditable=true]');if(!e)return 'x';let n=null;const w=document.createTreeWalker(e,NodeFilter.SHOW_TEXT);let t;while((t=w.nextNode())){if(t.textContent&&t.textContent.trim()===target){n=t;break;}}if(!n)return 'nf';const r=document.createRange();r.selectNodeContents(n);r.collapse(false);const s=window.getSelection();s.removeAllRanges();s.addRange(r);(n.parentElement||e).scrollIntoView({block:'center'});e.focus();return 'ok';})();" >/dev/null 2>&1
+    BU keys Enter >/dev/null 2>&1; sleep 4
+  done < /tmp/urls.txt
+  local NIMG=$(jq -r '.imgRefs | length' "$J")
+  for i in $(seq 0 $((NIMG-1))); do
+    local FILE=$(jq -r ".imgRefs[$i].file" "$J" | sed 's/\.svg$/.png/')
+    local HEAD=$(jq -r ".imgRefs[$i].afterHeading" "$J")
+    ins_img "$HEAD" "$ADIR/$FILE"
+  done
+  local FULLHEAD=$(jq -r '.segmentsPaid[0].content' "$J" | head -1 | sed 's/^#* *//')
+  paid_setline "$FULLHEAD" "/tmp/note-publish-$SLUG.png"
+}
