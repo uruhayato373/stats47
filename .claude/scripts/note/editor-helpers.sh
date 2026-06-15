@@ -151,3 +151,75 @@ process_article(){
   local FULLHEAD=$(jq -r '.segmentsPaid[0].content' "$J" | head -1 | sed 's/^#* *//')
   paid_setline "$FULLHEAD" "/tmp/note-publish-$SLUG.png"
 }
+
+# ============================================================================
+# 新規投稿フロー（editor.note.com/new・2026-06-16 #19 無料で実機検証）
+# new_post <slug> <vertical> "<tag1 tag2 ...>" "<magazine name>"
+#   cover→title→body→images→urlカード→hashtag→magazine まで実行（公開ライン/投稿は呼び出し側）。
+#   無料: paid_setline は使わず「試し読みエリアを設定」→末尾ライン→投稿する。
+#   有料: 価格設定(set_price)→paid_setline 相当→screenshot 目視→投稿する。
+# 実装知見: (a) カバーは本文入力前に設定（aria-label=画像を追加→画像をアップロード→eyecatch-input→トリミング保存,
+#   下書き保存と区別）。(b) タイトルは textarea[placeholder=記事タイトル] に type（value は eval で検証）。
+#   (c) hashtag は combobox に **1 個ずつ click→type→Enter→sleep0.9**（まとめると value に連結され失敗）。
+#   投稿前に紛れ込む #NN チップ（本文の #31 等由来）は 削除 してから付け直す。(d) magazine は item-magazine-add→
+#   対象マガジン行の 追加（→追加済）。(e) 無料の確定ボタンは「試し読みエリアを設定」→ライン画面で**末尾**の
+#   「ラインをこの場所に変更」（全文無料）→「投稿する」。成功は Facebook/LINE シェアボタンのモーダル。
+# ============================================================================
+new_post_cover_title(){
+  local SLUG="$1" VERT="$2" TITLE="$3"
+  local ADIR="/Users/minamidaisuke/stats47/docs/31_note記事原稿/$VERT/$SLUG"
+  BU open "https://editor.note.com/new" >/dev/null 2>&1; sleep 5
+  BU state 2>&1 > /tmp/ns.txt
+  if ! grep -qE "contenteditable=true role=textbox" /tmp/ns.txt; then echo "  [FAIL] /new not loaded (login?)"; return 1; fi
+  if [ -f "$ADIR/images/cover-1280x670.png" ]; then
+    local ADD=$(grep -oE '\[[0-9]+\]<button aria-label=画像を追加' /tmp/ns.txt | grep -oE '[0-9]+' | head -1)
+    BU click "$ADD" >/dev/null 2>&1; sleep 2; BU state 2>&1 > /tmp/ns.txt
+    local UP=$(grep -B1 '画像をアップロード' /tmp/ns.txt | head -1 | grep -oE '\[[0-9]+\]' | tr -d '[]')
+    BU click "$UP" >/dev/null 2>&1; sleep 2; BU state 2>&1 > /tmp/ns.txt
+    local FI=$(grep -oE '\[[0-9]+\]<input id=note-editor-eyecatch-input' /tmp/ns.txt | grep -oE '[0-9]+')
+    BU upload "$FI" "$ADIR/images/cover-1280x670.png" >/dev/null 2>&1; sleep 3; BU state 2>&1 > /tmp/ns.txt
+    local SV=$(awk '/^\t+保存$/{print prev} {prev=$0}' /tmp/ns.txt | grep -oE '\[[0-9]+\]<button' | grep -oE '[0-9]+' | tail -1)
+    BU click "$SV" >/dev/null 2>&1; sleep 3
+  fi
+  BU state 2>&1 > /tmp/ns.txt
+  local TI=$(grep -oE '\[[0-9]+\]<textarea placeholder=記事タイトル' /tmp/ns.txt | grep -oE '[0-9]+')
+  BU click "$TI" >/dev/null 2>&1; sleep 0.5
+  BU type "$TITLE" >/dev/null 2>&1; sleep 1
+  local TV=$(BU eval "(function(){const t=document.querySelector('textarea[placeholder=記事タイトル]');return t?t.value:'';})();" 2>&1 | grep -oiE "title|result" >/dev/null; echo ok)
+  echo "  cover+title set: $TITLE"
+}
+new_post_tags(){
+  # remove stray numeric chips, then add given tags one-by-one
+  BU state 2>&1 > /tmp/ns.txt
+  for d in $(grep -B1 'aria-label=削除' /tmp/ns.txt | grep -oE '\[[0-9]+\]<span role=img aria-label=削除' | grep -oE '[0-9]+'); do :; done
+  # delete chips that look like #<number>
+  local guard=0
+  while :; do
+    BU state 2>&1 > /tmp/ns.txt
+    local BADLINE=$(grep -nE '^\t+#[0-9]+$' /tmp/ns.txt | head -1 | cut -d: -f1)
+    [ -z "$BADLINE" ] && break
+    local DELIDX=$(sed -n "$((BADLINE+1))p" /tmp/ns.txt | grep -oE '\[[0-9]+\]' | grep -oE '[0-9]+' | head -1)
+    [ -z "$DELIDX" ] && break
+    BU click "$DELIDX" >/dev/null 2>&1; sleep 0.7
+    guard=$((guard+1)); [ "$guard" -gt 6 ] && break
+  done
+  local IDX=$(grep -oE "\[[0-9]+\]<input placeholder=ハッシュタグを追加する" /tmp/ns.txt | grep -oE "[0-9]+" | head -1)
+  for tag in $1; do
+    BU click "$IDX" >/dev/null 2>&1; sleep 0.4
+    BU type "$tag" >/dev/null 2>&1; sleep 0.6
+    BU keys Enter >/dev/null 2>&1; sleep 0.9
+  done
+  echo "  tags added"
+}
+new_post_magazine(){
+  local MAG="$1"
+  BU state 2>&1 > /tmp/ns.txt
+  local MA=$(grep -oE "\[[0-9]+\]<button id=item-magazine-add" /tmp/ns.txt | grep -oE "[0-9]+" | head -1)
+  BU click "$MA" >/dev/null 2>&1; sleep 2; BU state 2>&1 > /tmp/ns.txt
+  local HL=$(grep -nF "$MAG" /tmp/ns.txt | head -1 | cut -d: -f1)
+  [ -z "$HL" ] && { echo "  [WARN] magazine not found: $MAG"; return 1; }
+  local ADDIDX=$(awk -v h="$HL" 'NR>h && /追加$/{getline x; if(0){} match(prev,/\[[0-9]+\]/); } NR==h{found=1} found && /\[[0-9]+\]<button/{btn=$0} found && /^\t+追加$/{match(btn,/\[[0-9]+\]/); print substr(btn,RSTART+1,RLENGTH-2); exit} {prev=$0}' /tmp/ns.txt)
+  [ -z "$ADDIDX" ] && { echo "  [WARN] magazine add button not found"; return 1; }
+  BU click "$ADDIDX" >/dev/null 2>&1; sleep 1.5
+  echo "  magazine: $MAG (btn=$ADDIDX)"
+}
