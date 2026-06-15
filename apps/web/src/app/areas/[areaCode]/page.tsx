@@ -12,8 +12,8 @@ import {
 } from "@stats47/components/atoms/ui/breadcrumb";
 import { isOk } from "@stats47/types";
 
-import { FurusatoNozeiCard, SidebarPromoBanner } from "@/features/ads";
-import { AreaBannerAd } from "@/features/ads/server";
+import { PageShell } from "@/components/layout";
+
 import {
     AreaProfilePageClient,
     AreaProfileSidebar,
@@ -114,9 +114,21 @@ export default async function AreaProfilePage({ params }: PageProps) {
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbStructuredData) }}
             />
 
-            {/* パンくずナビゲーション */}
-            <div className="container mx-auto px-4 pt-4">
-                <Breadcrumb>
+            <PageShell
+                rightRail={
+                    <RightRailWidgets
+                        furusatoAreaCode={areaCode}
+                        topWidgets={
+                            <AreaProfileSidebar
+                                strengths={profile.strengths}
+                                weaknesses={profile.weaknesses}
+                            />
+                        }
+                    />
+                }
+            >
+                {/* パンくずナビゲーション */}
+                <Breadcrumb className="mb-4">
                     <BreadcrumbList>
                         <BreadcrumbItem>
                             <BreadcrumbLink asChild>
@@ -135,15 +147,11 @@ export default async function AreaProfilePage({ params }: PageProps) {
                         </BreadcrumbItem>
                     </BreadcrumbList>
                 </Breadcrumb>
-            </div>
 
-            {/* ヘッダー + ヒーロー */}
-            <AreaProfilePageClient profile={profile} />
+                {/* ヘッダー */}
+                <AreaProfilePageClient profile={profile} />
 
-            {/* 2 カラムレイアウト (xl+ で右サイドバー、xl 未満は main のみ) */}
-            <div className="container mx-auto px-4 py-10">
-                <div className="xl:grid xl:grid-cols-[minmax(0,1fr)_360px] xl:gap-8 xl:items-start">
-                    <main className="min-w-0 space-y-10">
+                <main className="min-w-0 space-y-10">
                     {/* DB管理チャート */}
                     <AreaChartSection
                         areaCode={areaCode}
@@ -179,33 +187,8 @@ export default async function AreaProfilePage({ params }: PageProps) {
                         format={RANKING_SIDEBAR_TOP.format}
                         slotId={RANKING_SIDEBAR_TOP.slotId}
                     />
-
-                    {/* アフィリエイト + 県の強み弱み (xl 未満では main 内に表示) */}
-                    <div className="xl:hidden space-y-6">
-                        <AreaProfileSidebar
-                            strengths={profile.strengths}
-                            weaknesses={profile.weaknesses}
-                        />
-                        <SidebarPromoBanner />
-                        <AreaBannerAd />
-                        <FurusatoNozeiCard areaCode={areaCode} />
-                    </div>
                 </main>
-
-                    {/* 右サイドバー (xl+) — 県の強み弱み + ふるさと納税 + Claude Code 講座 + 関連 AdSense */}
-                    <aside className="hidden xl:block">
-                        <RightRailWidgets
-                            furusatoAreaCode={areaCode}
-                            topWidgets={
-                                <AreaProfileSidebar
-                                    strengths={profile.strengths}
-                                    weaknesses={profile.weaknesses}
-                                />
-                            }
-                        />
-                    </aside>
-                </div>
-            </div>
+            </PageShell>
         </>
     );
 }

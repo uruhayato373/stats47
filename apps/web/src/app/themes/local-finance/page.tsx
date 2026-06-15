@@ -1,11 +1,14 @@
 import Link from "next/link";
 
+import { PageShell } from "@/components/layout";
+
 import type { FinanceFlowData } from "@/features/finance-flow";
 import {
   LocalFinanceDashboard,
   loadFinanceCards,
 } from "@/features/local-finance-dashboard";
 import { LOCAL_FINANCE_THEME } from "@/features/theme-dashboard/server";
+
 
 import { generateOGMetadata } from "@/lib/metadata/og-generator";
 
@@ -44,7 +47,7 @@ export default async function LocalFinanceThemePage() {
   return (
     <div>
       {/* 都道府県 / 市区町村 切替 */}
-      <div className="container mx-auto px-4 pt-4">
+      <PageShell className="pb-0">
         <nav
           aria-label="表示単位切替"
           className="inline-flex rounded-full border border-border bg-white p-1 shadow-sm text-xs"
@@ -59,7 +62,7 @@ export default async function LocalFinanceThemePage() {
             市区町村
           </Link>
         </nav>
-      </div>
+      </PageShell>
       <LocalFinanceDashboard cards={cards} initialFinanceFlow={initialFinanceFlow} />
     </div>
   );

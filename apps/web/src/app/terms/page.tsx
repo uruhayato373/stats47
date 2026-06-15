@@ -12,7 +12,7 @@ import {
   CardTitle,
 } from "@stats47/components/atoms/ui/card";
 
-import { PageShell } from "@/components/layout";
+import { PageShell, PageHeader } from "@/components/layout";
 
 import { generateOGMetadata } from "@/lib/metadata/og-generator";
 
@@ -39,12 +39,11 @@ export const metadata: Metadata = {
 export default function TermsPage() {
   return (
     <PageShell variant="reading">
-      <div className="mb-8">
-        <h1 className="text-lg font-bold mb-4">利用規約</h1>
-        <p className="text-muted-foreground leading-relaxed">
-          本規約は、統計で見る都道府県（stats47、以下「当サービス」）の提供するサービスの利用条件を定めるものです。利用者は、本規約に同意の上、当サービスを利用するものとします。
-        </p>
-      </div>
+      <PageHeader
+        title="利用規約"
+        description="本規約は、統計で見る都道府県（stats47、以下「当サービス」）の提供するサービスの利用条件を定めるものです。利用者は、本規約に同意の上、当サービスを利用するものとします。"
+      />
+
 
       <div className="space-y-6">
         {/* 第1条（適用） */}

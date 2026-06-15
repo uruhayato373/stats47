@@ -19,6 +19,8 @@ import { isOk } from "@stats47/types";
 
 
 
+import { PageShell, PageHeader } from "@/components/layout";
+
 import { FurusatoNozeiCard } from "@/features/ads";
 import { AreaBannerAd } from "@/features/ads/server";
 import { CategoryNavGrid, CitiesNavCard } from "@/features/area-profile";
@@ -159,52 +161,43 @@ export default async function CityPage({ params }: PageProps) {
     const cityBasePath = `/areas/${areaCode}/cities/${cityCode}`;
 
     return (
-        <>
+        <PageShell>
             {/* パンくずナビゲーション */}
-            <div className="container mx-auto px-4 pt-4">
-                <Breadcrumb>
-                    <BreadcrumbList>
-                        <BreadcrumbItem>
-                            <BreadcrumbLink asChild>
-                                <Link href="/">ホーム</Link>
-                            </BreadcrumbLink>
-                        </BreadcrumbItem>
-                        <BreadcrumbSeparator />
-                        <BreadcrumbItem>
-                            <BreadcrumbLink asChild>
-                                <Link href="/areas">都道府県一覧</Link>
-                            </BreadcrumbLink>
-                        </BreadcrumbItem>
-                        <BreadcrumbSeparator />
-                        <BreadcrumbItem>
-                            <BreadcrumbLink asChild>
-                                <Link href={`/areas/${areaCode}`}>{pref.areaName}</Link>
-                            </BreadcrumbLink>
-                        </BreadcrumbItem>
-                        <BreadcrumbSeparator />
-                        <BreadcrumbItem>
-                            <BreadcrumbPage>{city.areaName}</BreadcrumbPage>
-                        </BreadcrumbItem>
-                    </BreadcrumbList>
-                </Breadcrumb>
-            </div>
+            <Breadcrumb className="mb-4">
+                <BreadcrumbList>
+                    <BreadcrumbItem>
+                        <BreadcrumbLink asChild>
+                            <Link href="/">ホーム</Link>
+                        </BreadcrumbLink>
+                    </BreadcrumbItem>
+                    <BreadcrumbSeparator />
+                    <BreadcrumbItem>
+                        <BreadcrumbLink asChild>
+                            <Link href="/areas">都道府県一覧</Link>
+                        </BreadcrumbLink>
+                    </BreadcrumbItem>
+                    <BreadcrumbSeparator />
+                    <BreadcrumbItem>
+                        <BreadcrumbLink asChild>
+                            <Link href={`/areas/${areaCode}`}>{pref.areaName}</Link>
+                        </BreadcrumbLink>
+                    </BreadcrumbItem>
+                    <BreadcrumbSeparator />
+                    <BreadcrumbItem>
+                        <BreadcrumbPage>{city.areaName}</BreadcrumbPage>
+                    </BreadcrumbItem>
+                </BreadcrumbList>
+            </Breadcrumb>
 
             {/* ヘッダー */}
-            <div className="container mx-auto px-4 pt-6">
-                <div className="border-b pb-4">
-                    <h1 className="text-lg font-bold">
-                        {city.areaName}の統計データ
-                    </h1>
-                    <p className="mt-2 text-muted-foreground">
-                        {pref.areaName} {city.areaName}
-                    </p>
-                </div>
-            </div>
+            <PageHeader
+                title={`${city.areaName}の統計データ`}
+                description={`${pref.areaName} ${city.areaName}`}
+            />
 
             {/* 1カラムレイアウト */}
-            <div className="container mx-auto px-4 py-10">
-                <main className="min-w-0 space-y-10">
-                    {validStrengths.length > 0 && (
+            <main className="min-w-0 space-y-10">
+                {validStrengths.length > 0 && (
                         <section className="rounded-lg border border-border bg-card p-6 shadow-sm">
                             <h2 className="text-lg font-bold text-foreground">
                                 {city.areaName}の強み (県内ランキング上位)
@@ -254,8 +247,7 @@ export default async function CityPage({ params }: PageProps) {
                     <div className="mt-8">
                         <AdSenseAd format={CONTENT_FOOTER.format} slotId={CONTENT_FOOTER.slotId} />
                     </div>
-                </main>
-            </div>
-        </>
+            </main>
+        </PageShell>
     );
 }

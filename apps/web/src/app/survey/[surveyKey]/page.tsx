@@ -15,6 +15,8 @@ import {
 } from "@stats47/ranking/server";
 import { isOk } from "@stats47/types";
 
+import { PageShell, PageHeader } from "@/components/layout";
+
 import { resolveAffiliateBanners } from "@/features/ads/server";
 import {
   FeaturedRankingCard,
@@ -23,9 +25,6 @@ import {
   type CategoryRankingListItem,
 } from "@/features/ranking";
 import {
-  HeroShell,
-  KpiGrid,
-  KpiTile,
   NativeAffiliateRow,
   SectionEyebrow,
   InfeedAd,
@@ -163,67 +162,44 @@ export default async function SurveyPage({ params }: PageProps) {
     notFound();
   }
 
+  const statsText = [
+    `全 ${rankingItems.length} ランキング`,
+    featuredCount > 0 ? `注目 ${featuredCount} 件` : null,
+    latestYear ? `最新 ${latestYear} 年` : null,
+    "47 都道府県",
+  ]
+    .filter(Boolean)
+    .join(" ・ ");
+
   return (
-    <div className="container mx-auto px-4 py-4 text-foreground">
-      {/* Hero (D 暗色) — マスタープラン § 5.3 準拠 */}
-      <HeroShell variant="dark" className="mb-6">
-        <div className="grid grid-cols-1 gap-6 p-6 md:grid-cols-[1fr,360px] md:p-8">
-          <div className="min-w-0">
-            <p className="inline-flex items-center gap-1.5 rounded-full bg-white/15 px-2.5 py-0.5 text-[10.5px] font-bold uppercase tracking-widest text-white">
-              📊 政府統計
-            </p>
-            <h1 className="mt-2 text-2xl font-extrabold leading-tight text-white sm:text-3xl">
-              {survey.name}
-            </h1>
-            <p className="mt-2 text-sm font-medium text-white/80">
+    <PageShell>
+      <PageHeader
+        eyebrow="政府統計"
+        title={survey.name}
+        description={
+          <>
+            <span className="font-medium text-foreground">
               {survey.organization}
-            </p>
+            </span>
             {survey.description && (
-              <p className="mt-2 max-w-xl text-sm leading-relaxed text-white/80">
-                {survey.description}
-              </p>
+              <span className="mt-1 block">{survey.description}</span>
             )}
-            {survey.url && (
-              <a
-                href={survey.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-3 inline-flex items-center gap-1 rounded-md border border-white/30 px-3 py-1.5 text-xs font-medium text-white transition-colors hover:bg-white/10"
-              >
-                公式サイト ↗
-              </a>
-            )}
-          </div>
-          <div>
-            <KpiGrid columns={2}>
-              <KpiTile
-                label="ランキング数"
-                value={String(rankingItems.length)}
-                unit="件"
-                variant="dark"
-              />
-              <KpiTile
-                label="注目"
-                value={String(featuredCount)}
-                unit="件"
-                variant="dark"
-              />
-              <KpiTile
-                label="最新データ"
-                value={latestYear || "—"}
-                unit={latestYear ? "年" : ""}
-                variant="dark"
-              />
-              <KpiTile
-                label="エリア"
-                value="47"
-                unit="都道府県"
-                variant="dark"
-              />
-            </KpiGrid>
-          </div>
-        </div>
-      </HeroShell>
+          </>
+        }
+        stats={statsText}
+        actions={
+          survey.url ? (
+            <a
+              href={survey.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 rounded-none border px-3 py-1.5 text-xs font-medium text-foreground transition-colors hover:bg-accent/50"
+            >
+              公式サイト ↗
+            </a>
+          ) : undefined
+        }
+      />
 
       {featuredItems.length > 0 && (
         <section className="mb-8">
@@ -278,6 +254,6 @@ export default async function SurveyPage({ params }: PageProps) {
         format={RANKING_PAGE_FOOTER.format}
         slotId={RANKING_PAGE_FOOTER.slotId}
       />
-    </div>
+    </PageShell>
   );
 }

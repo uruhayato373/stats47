@@ -55,6 +55,8 @@ import {
 import { isOk } from "@stats47/types";
 import { getInitialMapTileUrls } from "@stats47/visualization/leaflet/constants";
 
+import { PageShell } from "@/components/layout";
+
 import { SidebarPromoBanner, selectPromoBannerIndexForRanking } from "@/features/ads";
 import { AffiliateAdSlot, resolveAffiliateBanners } from "@/features/ads/server";
 import { findCategoryByKey } from "@/features/category/server";
@@ -304,7 +306,7 @@ export default async function RankingKeyPage({
       ))}
 
       {/* パンくずナビゲーション (category があれば階層に組み込み、内部リンク強化) */}
-      <div className="container mx-auto px-4 pt-4">
+      <PageShell className="pb-0">
         <Breadcrumb>
           <BreadcrumbList>
             <BreadcrumbItem>
@@ -330,7 +332,7 @@ export default async function RankingKeyPage({
             </BreadcrumbItem>
           </BreadcrumbList>
         </Breadcrumb>
-      </div>
+      </PageShell>
 
       <RankingKeyPageClient
         rankingKey={rankingKey}

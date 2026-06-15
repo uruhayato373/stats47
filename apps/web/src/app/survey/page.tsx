@@ -13,7 +13,7 @@ import {
 } from "@stats47/ranking/server";
 import { isOk } from "@stats47/types";
 
-import { PageShell } from "@/components/layout";
+import { PageShell, PageHeader } from "@/components/layout";
 
 import { AdSenseAd, CONTENT_FOOTER } from "@/lib/google-adsense";
 import { generateOGMetadata } from "@/lib/metadata/og-generator";
@@ -57,12 +57,11 @@ export default async function SurveyIndexPage() {
 
   return (
     <PageShell>
-      <div className="mb-6">
-        <h1 className="text-lg font-bold">調査別ランキング一覧</h1>
-        <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
-          政府統計調査ごとに、都道府県別ランキングを分類しています。各調査をクリックすると、その調査データに基づくランキングの一覧を閲覧できます。
-        </p>
-      </div>
+      <PageHeader
+        eyebrow="政府統計"
+        title="調査別ランキング一覧"
+        description="政府統計調査ごとに、都道府県別ランキングを分類しています。各調査をクリックすると、その調査データに基づくランキングの一覧を閲覧できます。"
+      />
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {sortedSurveys.map((survey) => {
@@ -71,7 +70,7 @@ export default async function SurveyIndexPage() {
             <Link
               key={survey.id}
               href={`/survey/${survey.id}`}
-              className="block bg-card border rounded-lg p-4 shadow-sm hover:shadow-md hover:border-primary/30 transition-all"
+              className="block rounded-none border bg-card p-4 shadow-sm transition-colors hover:border-primary/30 hover:shadow-md"
             >
               <div className="flex items-start justify-between">
                 <div className="min-w-0 flex-1">

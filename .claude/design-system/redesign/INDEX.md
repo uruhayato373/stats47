@@ -1,13 +1,20 @@
 ---
 type: redesign-tracker
 date: 2026-05-25
-status: active
+status: superseded-by-minimal
 source_bundle: stats47-ranking-handoff (13).zip — 2026-05-22 20:31 export
 master_plan: docs/02_実装計画/12_リデザイン残作業.md
-last_updated: 2026-05-25 (PR #349-#354 series)
+last_updated: 2026-06-15 (minimal redesign supersede)
 ---
 
 # stats47 リデザイン進捗トラッカー
+
+> **⚠️ 2026-06-15 更新（D案 page-top ヒーロー/KPI は退役）**: 下表の各ページが採用していた
+> **D案の暗色ヒーロー + page-top KPI タイル**（`HeroShell` / `KpiGrid` / `KpiTile`）は、
+> 2026-06-15 の全面ミニマル化で退役した。ページ見出しは `@/components/layout` の `PageHeader`
+> （h1 + 1 行説明 + 細い統計テキスト）に統一。下表の「採用案 D / NextUpGrid / ネイティブaff hero」
+> 等の記述は**当時の履歴**であり、現行は doc 12 のミニマル方針を正とする。
+> レイアウト土台（PageShell / 1700px / フラット）は不変。
 
 > **⚠️ 2026-06 更新**: レイアウト（横幅/レール/サイドバー/角丸/フォント）の正典は
 > [`docs/01_技術設計/13_統一レイアウト設計.md`](../../../docs/01_技術設計/13_統一レイアウト設計.md) に移行。

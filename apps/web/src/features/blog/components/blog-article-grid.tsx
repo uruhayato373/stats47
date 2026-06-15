@@ -35,7 +35,7 @@ export function BlogArticleGrid({ articles, firstPagePriority = false }: BlogArt
                     <Link
                         key={article.slug}
                         href={`/blog/${article.slug}`}
-                        className="group block overflow-hidden rounded-lg transition-all duration-200 hover:-translate-y-1 hover:shadow-md"
+                        className="group block overflow-hidden rounded-none border transition-shadow duration-200 hover:shadow-md"
                     >
                         <div className="relative aspect-[1200/630] w-full bg-muted overflow-hidden md:aspect-square">
                             <ThemeAwareImage

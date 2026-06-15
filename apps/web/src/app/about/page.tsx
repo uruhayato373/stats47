@@ -27,6 +27,8 @@ import {
 import { Separator } from "@stats47/components/atoms/ui/separator";
 import { ExternalLink, Instagram, MapPin, Youtube, Briefcase, Target } from "lucide-react";
 
+import { PageShell, PageHeader } from "@/components/layout";
+
 import { getRequiredBaseUrl } from "@/lib/env";
 import {
   buildOperatorPersonSchema,
@@ -105,7 +107,7 @@ export default function AboutPage() {
   };
 
   return (
-    <main className="px-4 py-6 md:px-6 md:py-8">
+    <PageShell>
       {/* 構造化データ: Person (運営者) / Organization / AboutPage */}
       <script
         type="application/ld+json"
@@ -120,13 +122,10 @@ export default function AboutPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(aboutPageSchema) }}
       />
 
-      {/* ページヘッダー */}
-      <div className="mb-6 md:mb-8">
-        <h1 className="text-2xl font-bold mb-4">このサイトについて</h1>
-        <p className={`${TEXT_STYLE} text-muted-foreground`}>
-          統計で見る都道府県（stats47）は、47 都道府県の公的統計データを「誰でも使える形」にリデザインする個人運営サイトです。県庁職員を約 20 年務めたのち、在職中に独学で AI を学び、IT・データ業界へ転職・独立した運営者が、e-Stat などの一次データを可視化し、独自の分析と解説を添えてお届けします。
-        </p>
-      </div>
+      <PageHeader
+        title="このサイトについて"
+        description="統計で見る都道府県（stats47）は、47 都道府県の公的統計データを「誰でも使える形」にリデザインする個人運営サイトです。県庁職員を約 20 年務めたのち、在職中に独学で AI を学び、IT・データ業界へ転職・独立した運営者が、e-Stat などの一次データを可視化し、独自の分析と解説を添えてお届けします。"
+      />
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6">
         {/* 1. 運営者プロフィール */}
@@ -303,6 +302,6 @@ export default function AboutPage() {
           </p>
         </AboutSection>
       </div>
-    </main>
+    </PageShell>
   );
 }

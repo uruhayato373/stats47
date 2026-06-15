@@ -1,14 +1,12 @@
 /**
- * D-System リデザイン共通プリミティブ
+ * リデザイン共通プリミティブ
  *
- * 11 ページの D 案リデザインで共通利用する原子コンポーネント群。
- * 詳細: docs/02_実装計画/12_リデザイン残作業.md
+ * 2026-06-15 の全面ミニマル化で page-top ヒーロー（HeroShell / KpiGrid / KpiTile）は退役。
+ * ページ見出しは `@/components/layout` の PageHeader に統一した。ここには本文内・サイドレール用の
+ * 補助コンポーネントのみ残す。
  */
 
 export {
-  HeroShell,
-  KpiTile,
-  KpiGrid,
   SectionEyebrow,
   InfeedAd,
   NativeAffiliateRow,
