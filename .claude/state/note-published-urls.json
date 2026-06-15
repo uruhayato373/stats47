@@ -210,7 +210,9 @@
       "title": "47 都道府県データを 1 コマンドで取得する — fetch-estat-data スキルの使い方",
       "url": "https://note.com/stats47/n/n914ee28ff773",
       "is_paid": false,
-      "published_at": "2026-06-14"
+      "published_at": "2026-06-14",
+      "updated_at": "2026-06-16",
+      "update_note": "ですます化 + 画像3枚再挿入"
     },
     "04-excel-download-and-parse": {
       "vertical": "koumuin-estat-claude-code",
@@ -249,7 +251,9 @@
       "title": "他自治体ベンチマーク表を 5 分で作る — 議会答弁・議事用の比較資料を自動生成",
       "url": "https://note.com/stats47/n/nd4afc48385a3",
       "is_paid": false,
-      "published_at": "2026-06-14"
+      "published_at": "2026-06-14",
+      "updated_at": "2026-06-16",
+      "update_note": "ですます化 + 画像3枚再挿入 (本文パイプ表は元から literal=要画像化・別タスク)"
     },
     "09-assembly-chart-generation": {
       "vertical": "koumuin-estat-claude-code",
