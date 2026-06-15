@@ -185,7 +185,9 @@
       "title": "e-Stat × Claude Code とは — 自治体職員のための統計データ業務効率化ガイド",
       "url": "https://note.com/stats47/n/n258277f96f88",
       "is_paid": false,
-      "published_at": "2026-06-14"
+      "published_at": "2026-06-14",
+      "updated_at": "2026-06-15",
+      "update_note": "ですます化 + 画像2枚再挿入 + 全文無料ライン(末尾)"
     },
     "01-estat-api-key-setup": {
       "vertical": "koumuin-estat-claude-code",

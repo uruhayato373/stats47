@@ -111,55 +111,54 @@ if [ "$IS_PAID" = "true" ] && [ "$PRICE" -gt 0 ]; then
 fi
 ```
 
-## Phase 7-Boundary: 有料エリア境界の設定（is_paid=true・自動／初回 live で DOM 確定）
+## Phase 7-Boundary: 試し読み／有料ライン設定（2026-06-15 実機検証済）
 
-価格設定（7-Pricing）の後、primary ボタン label が「有料エリア設定」に変わる。これをクリックすると
-ボディ上で**有料ライン（ここから先が有料）を置く画面**になる。境界 = 有料本文の先頭段落
-（`segmentsPaid[0]`）の直前。frontmatter の `ここから先は有料部分:` で Phase 0 が free/paid を分割済みなので、
-**有料先頭段落の冒頭テキストを錨**にして境界を置く。
+**実機で確定したフロー**（2026-06-15、`00-estat-claude-code-intro` の --update で全工程成功）:
 
-> **⚠️ 安全原則（誤露出防止）**: 境界を誤ると有料本文が無料露出する。本 Phase は **境界設定までで停止し、
-> 最終「投稿/予約投稿」ボタンは自動で押さない**。境界が正しいか screenshot で確認してから人間が投稿を確定する。
->
-> **⚠️ 初回 live 検証**: 「有料エリア設定」画面の DOM は stats47/doboku-note とも未観測。本手順は
-> **初回実行で画面 state + screenshot を必ず捕捉**し、捕捉結果に基づいて B-3 の境界コントロール click を
-> 確定させる（捕捉前にハードコードしたセレクタで盲打ちしない）。一度確定したら以降は同セレクタで自動運用する。
+1. **公開設定画面**（公開に進む後）右上の primary ボタンを押す → ライン設定画面へ。
+   - ラベルは **無料記事=「試し読みエリアを設定」/ 有料記事=「有料エリア設定」**。どちらも同じライン設定画面。
+2. ライン設定画面: 各ブロック境界に **「ラインをこの場所に変更」** ボタンが並ぶ。画面上部に警告
+   「設定したラインより上が無料で読めるエリアになります。**ラインを設定しない場合は購入・購読した人だけが読める記事になります**」。
+   - ⚠️ **ラインを置かずに更新すると全文ロック**される。必ずラインを置く。
+   - **無料記事 → ラインを「記事末尾」に置く（=全文無料）**。`state` は**ビューポート内のボタンしか出さない**ので、
+     先に eval で最下部までスクロール → 末尾の「ラインをこの場所に変更」を click（クリック後ボタンが黒反転＋×表示）。
+   - **有料記事 → `segmentsPaid[0]` 先頭段落の直前の「ラインをこの場所に変更」を click**（その段落へスクロール→錨テキストで特定）。
+3. 右上 **「更新する」（新規は「投稿する」）** を click → **「記事が公開されました」モーダル**（X/Facebook/LINE/リンクコピーの共有ボタン）が出れば成功。
+4. 成功後 `.claude/state/note-published-urls.json` に `updated_at` を記録。
+
+> ボタン index は state 上で**ラベル行の 1 つ前の `[NNN]<button>` 行**から取る（例: `grep -B1 "ラインをこの場所に変更" state.txt | grep -oE '\[[0-9]+\]' | tail -1`）。
 
 ```bash
-if [ "$IS_PAID" = "true" ] && [ "$PRICE" -gt 0 ]; then
-  # B-1. 「有料エリア設定」ボタン → 境界設定画面へ
-  browser-use --headed --profile "Profile 5" state 2>&1 > /tmp/note-state.txt
-  AREA_IDX=$(find_idx "有料エリア設定")
-  if [ -z "$AREA_IDX" ]; then echo "ERROR: 『有料エリア設定』ボタン未検出。価格設定の確認が必要"; exit 1; fi
-  browser-use --headed --profile "Profile 5" click "$AREA_IDX"
-  sleep 3
+# 前提: 「公開に進む」済 → 公開設定画面 → 記事タイプ(無料/有料)・価格(有料時 7-Pricing)設定済
+export PATH="$HOME/.browser-use-env/bin:$PATH"
+# B-1. ライン設定画面へ（無料=試し読みエリアを設定 / 有料=有料エリア設定）
+browser-use --headed --profile "Profile 5" state 2>&1 > /tmp/note-state.txt
+AREA_IDX=$(grep -B1 -E "(試し読みエリアを設定|有料エリア設定)" /tmp/note-state.txt | grep -oE '\[[0-9]+\]' | tail -1 | tr -d '[]')
+browser-use --headed --profile "Profile 5" click "$AREA_IDX"; sleep 3
 
-  # B-2. ★境界設定画面の DOM を必ず捕捉（未観測画面のため。初回はここで実構造を確定する）
-  browser-use --headed --profile "Profile 5" state 2>&1 > /tmp/note-paidarea-state.txt
-  browser-use --headed --profile "Profile 5" screenshot /tmp/note-paidarea-<slug>.png
-  echo "[Phase 7-Boundary] 境界設定画面 DOM=/tmp/note-paidarea-state.txt 画面=/tmp/note-paidarea-<slug>.png に捕捉"
+# B-2. 最下部までスクロール（state はビューポート内ボタンのみ列挙するため）
+browser-use --headed --profile "Profile 5" eval "(function(){let n=0;document.querySelectorAll('*').forEach(el=>{if(el.scrollHeight>el.clientHeight+50){el.scrollTop=el.scrollHeight;n++;}});window.scrollTo(0,document.body.scrollHeight);return 'scrolled:'+n;})();"
+sleep 2
+browser-use --headed --profile "Profile 5" state 2>&1 > /tmp/note-line.txt
+browser-use --headed --profile "Profile 5" screenshot /tmp/note-line-<slug>.png
 
-  # B-3. 有料先頭段落を錨に境界を置く
-  #   PAID_HEAD = segmentsPaid[0] の冒頭。PAID_HEAD 段落の *直前* の境界コントロールを click する。
-  PAID_HEAD=$(jq -r '.segmentsPaid[0].content' /tmp/note-data-<slug>.json | head -c 24)
-  #   ↓ 実セレクタは B-2 捕捉で確定（初回確定後はこの grep を実 DOM パターンに置換して固定運用）:
-  BOUNDARY_IDX=$(grep -B3 -F "$PAID_HEAD" /tmp/note-paidarea-state.txt \
-    | grep -oiE '\[[0-9]+\]<[^>]*(有料|ここから|paid|line|区切)' | tail -1 | grep -oE '[0-9]+')
-  if [ -n "$BOUNDARY_IDX" ]; then
-    browser-use --headed --profile "Profile 5" click "$BOUNDARY_IDX"
-    sleep 2
-    echo "[Phase 7-Boundary] 境界(idx=$BOUNDARY_IDX)を PAID_HEAD='$PAID_HEAD' 直前に設定"
-  else
-    echo "WARN: 境界コントロール未特定。/tmp/note-paidarea-state.txt を確認し B-3 の grep を実 DOM に合わせ確定（初回のみ）。設定せず停止。"
-    exit 1
-  fi
-
-  # B-4. 設定後 screenshot（PAID_HEAD 直前に有料ラインが入ったか目視確認用）
-  browser-use --headed --profile "Profile 5" screenshot /tmp/note-paidarea-set-<slug>.png
-  echo "[Phase 7-Boundary] 設定後=/tmp/note-paidarea-set-<slug>.png。PAID_HEAD 直前に有料ラインがあるか確認"
-
-  # B-5. ★最終「投稿/予約投稿」は自動で押さない。境界を screenshot で確認してから人間が確定する（誤露出防止）。
+if [ "$IS_PAID" = "true" ]; then
+  # B-3paid. segmentsPaid[0] 先頭を錨に、その直前のラインボタンを click（要・該当段落へスクロール）
+  PAID_HEAD=$(jq -r '.segmentsPaid[0].content' /tmp/note-data-<slug>.json | head -c 20)
+  LINE_IDX=$(grep -B3 -F "$PAID_HEAD" /tmp/note-line.txt | grep -B1 "ラインをこの場所に変更" | grep -oE '\[[0-9]+\]' | tail -1 | tr -d '[]')
+  [ -z "$LINE_IDX" ] && { echo "WARN: 有料境界ボタン未特定。/tmp/note-line-<slug>.png を確認。盲更新しない"; exit 1; }
+else
+  # B-3free. 末尾（最後の「ラインをこの場所に変更」）= 全文無料
+  LINE_IDX=$(grep -B1 "ラインをこの場所に変更" /tmp/note-line.txt | grep -oE '\[[0-9]+\]' | tail -1 | tr -d '[]')
 fi
+browser-use --headed --profile "Profile 5" click "$LINE_IDX"; sleep 2
+# B-4. ★更新前に screenshot 検証（ラインが意図位置=末尾/境界にあり黒反転しているか）
+browser-use --headed --profile "Profile 5" screenshot /tmp/note-line-set-<slug>.png
+# 検証OKなら更新（有料は特に、ラインが境界にあることを screenshot で確認してから）
+browser-use --headed --profile "Profile 5" state 2>&1 > /tmp/note-upd.txt
+UPD_IDX=$(grep -B1 -E "(更新する|投稿する)" /tmp/note-upd.txt | grep -oE '\[[0-9]+\]' | tail -1 | tr -d '[]')
+browser-use --headed --profile "Profile 5" click "$UPD_IDX"; sleep 5
+browser-use --headed --profile "Profile 5" screenshot /tmp/note-done-<slug>.png   # 「記事が公開されました」確認
 ```
 
 ### 運用ルール（2026-06-15 更新: 半自動 → 自動／初回 live で DOM 確定）
