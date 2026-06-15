@@ -157,30 +157,10 @@
   },
   "files": {
     "blog_backlog": {
-      "path": "docs/20_ブログ記事企画/backlog/",
-      "total": 37,
-      "categoryFiles": [
-        "economy.md", "population.md", "ict.md", "infrastructure.md", "energy.md",
-        "tourism.md", "agriculture.md", "miningindustry.md", "safetyenvironment.md",
-        "educationsports.md", "commercial.md", "landweather.md", "administrativefinancial.md",
-        "laborwage.md", "construction.md", "socialsecurity.md"
-      ],
-      "horizontalFiles": [
-        "population-tokyo-concentration-deep.md", "2030-population-prediction.md",
-        "aging-2040-collapse-frontier.md", "wage-vs-cost-real-living-index.md",
-        "disaster-resilience-comparison.md", "migration-attractiveness-ranking.md",
-        "kakei-chousa.md", "economy-food.md", "money-theme.md", "population-future.md"
-      ],
-      "affiliateFiles": [
-        "affiliate-furusato.md", "affiliate-ai-tools-koumuin.md",
-        "affiliate-iju-shien.md", "affiliate-fp-investment-pref.md"
-      ],
-      "aiStatFiles": [
-        "ai-estat-chatgpt-7steps.md", "ai-claude-code-pref-analysis.md",
-        "ai-excel-stat-formatting.md", "ai-rag-municipal-data.md"
-      ],
-      "batchFiles": ["30-batch-2026-05-16.md", "trends-2026-04-27.md"],
-      "index": "INDEX.md"
+      "status": "retired-2026-06-15",
+      "note": "docs/20_ブログ記事企画 は廃止。企画文書を持たず metric→/draft-from-trend→R2(app/blog) で生成 (生成→公開→ライブ反復)。",
+      "articleSSOT": "R2 app/blog/<slug>",
+      "draftOutbox": "docs/21_ブログ記事原稿 (ephemeral, 公開後CIが自動削除)"
     },
     "note_backlog": {
       "path": "docs/30_note記事企画/backlog/",

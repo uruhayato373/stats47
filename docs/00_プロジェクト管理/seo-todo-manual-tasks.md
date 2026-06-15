@@ -132,9 +132,9 @@ stats47 daily trend pipeline を実行してください (Phase 3 半自動公�
 2. `ls -t .claude/skills/blog/trends-snapshots/*.md | head -1` で最新 snapshot 取得
 3. snapshot からマッチ度 ★★★ かつ urgency=high を 1 件選ぶ。該当なしなら `[skip] no high-priority trend` と出して exit 0
 4. `/draft-from-trend` skill を読んで順番に実行:
-   - `/plan-blog-trends` で docs/20_/backlog/trends-YYYY-MM-DD.md に企画追記、slug 確定
-   - `node .claude/scripts/blog/fetch-article-data.mjs --slug <slug>` で data JSON 配置
-   - article.md 雛形生成 (frontmatter + H2 8-12 + chart placeholder)
+   - snapshot から metric を 1 つ選び slug を確定 (実在する metric key か確認)
+   - `node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug <slug> --keys <metricKey>` で R2 観測値直 fetch → docs/21/<slug>/data/*.json 配置
+   - article.md 生成 (frontmatter + ですます + 上位5+下位5 SVG + callout + source-link インライン)
    - `node .claude/scripts/blog/generate-article-charts.mjs --slug <slug>` で SVG 生成
 5. `feature/trend-auto-YYYY-MM-DD-<slug>` branch 作成 → commit → push
 6. `gh pr create --base develop --draft --label trend-auto --title "[auto-draft] <slug>" --body <PR body>`
@@ -202,9 +202,9 @@ node .claude/scripts/psi/suggest-cwv-candidates.mjs \
 node .claude/scripts/psi/generate-cwv-pr.mjs \
   --url https://stats47.jp/ranking/area-population --dry-run
 
-# fetch-article-data dry-run (Phase 3、既存 slug 必要)
-node .claude/scripts/blog/fetch-article-data.mjs \
-  --slug <既存 slug> --dry-run
+# fetch-ranking-data-r2 dry-run (R2 直データ接地、metric key 指定)
+node .claude/scripts/blog/fetch-ranking-data-r2.mjs \
+  --slug <slug> --keys <metricKey> --dry-run
 ```
 
 すべて exit 0 で完了すれば本番動作も問題なし。
