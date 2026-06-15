@@ -29,7 +29,7 @@ B/C/D シリーズの4ステップワークフロー（validate → design → w
 
 ```
 docs/31_note記事原稿/a-<rankingKey>/
-├── note.md              ← 記事本文
+├── draft.md              ← 記事本文
 ├── chart-data.json      ← チャート生成用データ（共通ルール）
 ├── tags.txt             ← note 投稿時にコピペするタグ（1行1タグ、最大99個）
 └── images/              ← Remotion で生成した画像
@@ -141,7 +141,7 @@ console.log('Saved: ' + dir + '/chart-data.json');
 
 ### Phase 2: 記事テキスト生成
 
-4. 以下のテンプレートで `note.md` を生成する:
+4. 以下のテンプレートで `draft.md` を生成する:
 
 #### 記事設計の基本方針
 
@@ -487,7 +487,7 @@ cp .local/r2/sns/ranking/<RANKING_KEY>/note/images/*.png "$ARTICLE_DIR/"
 ### Phase 4: 確認
 
 8. 生成物を確認:
-- `note.md` の文字数（2500〜4000字が目安）
+- `draft.md` の文字数（2500〜4000字が目安）
 - stats47.jp リンクが合計5本以上あること（記事中盤「あなたの県は何位？」+ 末尾「もっと詳しく」）
 - 全リンクに UTM パラメータが付与されていないこと（素 URL）
 - リンクパスが `/ranking/`（`/rankings/` ではない）であること

@@ -166,11 +166,10 @@ inspect-knip.js
 # git worktree (Agent isolation 用、リポジトリにコミットしない)
 .claude/worktrees/
 
-# note 公開済み記事 (docs/32_note公開済み/) の PNG は SVG から再生成できる派生物のため
-# コミットしない (.claude/scripts/note/regenerate-svg-png.sh で随時再生成)。
-# SVG ソースを持たない旧記事の PNG のみ例外として追跡する。
-docs/32_note公開済み/**/images/*.png
-!docs/32_note公開済み/a-maximum-temperature/images/*.png
+# note 記事 (docs/31_note記事原稿/) の PNG は SVG から再生成できる派生物
+# (.claude/scripts/note/regenerate-svg-png.sh で随時再生成)。容量を詰めたい公開済み記事は
+# PNG を削除し SVG のみ残してよい。SVG ソースを持たない旧記事 (例: a-maximum-temperature) は
+# PNG が唯一のソースなので追跡対象 (docs/31 配下の images は現状すべて追跡)。
 
 
 # 再生成可能な D1 投入 SQL (seed-to-d1-sql.ts で生成)

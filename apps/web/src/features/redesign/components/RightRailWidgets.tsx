@@ -32,24 +32,26 @@ interface RightRailWidgetsProps {
   showOperatorCard?: boolean;
   /** 表示する SIDEBAR_PROMO_BANNERS の index (default: 0 = STRATEGY CAREER) */
   promoBannerIndex?: number;
-  /** 独立スクロール (xl で `max-h+overflow-auto`) を有効にするか (default: true) */
+  /**
+   * 独立スクロール (xl で sticky + `max-h+overflow-auto`) を有効にするか (default: false)。
+   * 既定は自然フロー = レールが本文と一緒にスクロールする（本文を主役にするため）。
+   * sticky にすると max-h+overflow が必須になる（フッター消失防止 / ui-components.md）。
+   */
   stickyScroll?: boolean;
 }
 
 /**
- * 全ページ共通の右サイドバー widget セット (D-System Phase 1)
+ * 全ページ共通の右サイドバー widget セット。
  *
- * 配置順 (above-fold 優先):
- *   1. Claude Code 副業講座 (gradient、最高 CTR 期待)
- *   2. 高単価アフィリエイトバナー (SidebarPromoBanner)
- *   3. topWidgets (関連ランキング・関連記事など)
- *   4. AdSense Rectangle (上部)
- *   5. midWidgets
- *   6. ふるさと納税 (furusatoAreaCode 指定時)
- *   7. bottomWidgets
- *   8. AdSense Rectangle (下部)
+ * 配置順 (本文関連 widget を上・promo/広告を下):
+ *   1. topWidgets / midWidgets / bottomWidgets (関連ランキング・関連記事など)
+ *   2. ふるさと納税 (furusatoAreaCode 指定時)
+ *   ── 区切り ──
+ *   3. promo 群 (運営者カード / Claude Code 講座 / アフィリエイトバナー)
+ *   4. AdSense Rectangle (上 → 下)
  *
- * デフォルトで `xl:max-h-[calc(100vh-5.5rem)] xl:overflow-y-auto` により sticky + 独立スクロール配置。
+ * 既定は自然フロー（sticky/独立スクロールなし）。本文を主役にするため促進系を下げている。
+ * 設計仕様: docs/01_技術設計/13_統一レイアウト設計.md
  */
 export async function RightRailWidgets({
   furusatoAreaCode,
@@ -62,22 +64,40 @@ export async function RightRailWidgets({
   showPromoBanner = true,
   showOperatorCard = true,
   promoBannerIndex = 0,
-  stickyScroll = true,
+  stickyScroll = false,
 }: RightRailWidgetsProps) {
   const scrollClass = stickyScroll
     ? "xl:sticky xl:top-20 xl:max-h-[calc(100vh-5.5rem)] xl:overflow-y-auto xl:pr-1"
     : "";
 
+  const hasContent =
+    !!topWidgets || !!midWidgets || !!bottomWidgets || !!furusatoAreaCode;
+  const hasPromoOrAds =
+    showOperatorCard ||
+    showTechSchool ||
+    showPromoBanner ||
+    showTopAd ||
+    showBottomAd;
+
   return (
     <div className={`flex flex-col gap-3 ${scrollClass}`}>
+      {/* 本文関連 widget（主役） */}
+      {topWidgets}
+      {midWidgets}
+      {bottomWidgets}
+      {furusatoAreaCode && <FurusatoNozeiCard areaCode={furusatoAreaCode} />}
+
+      {/* 区切り: 本文関連と promo/広告の境界 */}
+      {hasContent && hasPromoOrAds && (
+        <hr className="my-1 border-t border-border" />
+      )}
+
+      {/* promo 群（本文関連の下へ降格） */}
       {showOperatorCard && <OperatorPromoCard placement="sidebar" />}
-
       {showTechSchool && <TechSchoolPromoCard />}
-
       {showPromoBanner && <SidebarPromoBanner index={promoBannerIndex} />}
 
-      {topWidgets}
-
+      {/* AdSense（収益枠は維持・最下部） */}
       {showTopAd && (
         <Card>
           <CardHeader className="pb-2">
@@ -94,12 +114,6 @@ export async function RightRailWidgets({
           </CardContent>
         </Card>
       )}
-
-      {midWidgets}
-
-      {furusatoAreaCode && <FurusatoNozeiCard areaCode={furusatoAreaCode} />}
-
-      {bottomWidgets}
 
       {showBottomAd && (
         <Card>

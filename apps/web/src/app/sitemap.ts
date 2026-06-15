@@ -73,6 +73,8 @@ export async function generateSitemaps(): Promise<{ id: number }[]> {
 
 const STATIC_PAGES: MetadataRoute.Sitemap = [
   { url: BASE_URL, changeFrequency: "daily", priority: 1.0 },
+  // /ranking 索引ハブ（2026-06-15 再設置。全カテゴリ＝全ランキングのブラウズ入口）
+  { url: `${BASE_URL}/ranking`, changeFrequency: "weekly", priority: 0.8 },
   { url: `${BASE_URL}/areas`, changeFrequency: "weekly", priority: 0.8 },
   { url: `${BASE_URL}/themes`, changeFrequency: "weekly", priority: 0.8 },
   // /gis-cross/* (廃止 2026-05-29) → /themes に統合。各ページは middleware で 301 転送:

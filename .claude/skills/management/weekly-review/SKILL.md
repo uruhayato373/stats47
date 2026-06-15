@@ -128,11 +128,21 @@ node .claude/scripts/snapshot-weekly-metrics.mjs [YYYY-Www]
    順位 11-20 位の「あと一押し」クエリは queries.csv から抽出する。
 
    **Coverage Drilldown データ（Phase 8、2026-04-26）**:
-   GitHub Actions `gsc-url-inspection-daily.yml` が毎朝 JST 06:00 に自動取得・集計している。
+   GitHub Actions `gsc-url-inspection-daily.yml` が毎朝 JST 06:00 に自動取得・集計している（API 視点・自サイト把握 URL のみ）。
    レビュー本文「パフォーマンス → GSC」セクションに以下を埋め込む:
-   - `.claude/state/metrics/gsc/coverage-drilldown/LATEST.md` の表（カテゴリ × 件数 × 前週比）
-   - 詳細週次データ: `.claude/state/metrics/gsc/coverage-drilldown/YYYY-Www/{category}-urls.csv`
+   - `.claude/state/metrics/gsc/coverage-drilldown/LATEST.md` の表（カテゴリ × 件数 × 前週比、url-inspection 由来）
+   - 詳細週次データ: `.claude/state/metrics/gsc/coverage-drilldown/YYYY-Www/{category}-urls.csv`（url-inspection 由来）
    - 関連 issue: #43（[T0-DECAY-01] Coverage Drilldown 週次記録）
+
+   **GSC カバレッジ是正ループ（COVERAGE-LOOP-01、2026-06-16〜）**:
+   ユーザーが GSC UI から「ページ」export を取得していれば（API では取れない総件数・未把握 URL を含む）、是正ループを回す。
+   正典: `docs/02_実装計画/12_GSCカバレッジ是正ループ.md` / 実行: `/gsc-coverage-remediation`。
+   - 取り込み: `python3 .claude/scripts/gsc/ingest-gsc-export.py`（~/Downloads の cp932 zip を自動正規化 → `coverage-drilldown/YYYY-Www/{category}-drilldown.csv`）
+   - 構築: `node .claude/scripts/gsc/build-coverage-queue.mjs`（本番 HTTP 実測で A/B 分類）
+   - レビューに埋め込む: **`.claude/state/gsc/LATEST.md`**（要対応 action 別件数・カテゴリ総件数）と
+     `.claude/state/gsc/coverage-totals-history.csv`（404/soft404 件数の前週比トレンド）
+   - effect 判定は再送信 URL の coverageState 遷移を実測してから（`evidence-based-judgment.md`）。
+     真実源は `.claude/state/gsc/coverage-remediation-queue.json`、TODO は backlog `COVERAGE-LOOP-01`/`COVERAGE-DEACT-01`。
 
 4.5. AdSense snapshot 取得 → snapshot Issue 作成
    `.env.local` に AdSense OAuth クレデンシャル（CLIENT_ID / SECRET / REFRESH_TOKEN / ACCOUNT_ID）が揃っている場合のみ実行:

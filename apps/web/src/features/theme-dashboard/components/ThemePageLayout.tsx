@@ -8,16 +8,12 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@stats47/components/atoms/ui/breadcrumb";
-import { formatNumberForDisplay } from "@stats47/utils";
+
+import { PageHeader } from "@/components/layout";
 
 import { SidebarPromoBanner } from "@/features/ads";
 import { resolveAffiliateBanners } from "@/features/ads/server";
-import {
-  HeroShell,
-  KpiGrid,
-  KpiTile,
-  NativeAffiliateRow,
-} from "@/features/redesign";
+import { NativeAffiliateRow } from "@/features/redesign";
 import { loadPageComponents } from "@/features/stat-charts/server";
 import { prefetchThemeKpiData } from "@/features/stat-charts/services/prefetch-theme-kpi";
 
@@ -59,34 +55,8 @@ export async function ThemePageLayout({ theme, data, areaContext }: Props) {
     ? await resolveAffiliateBanners(theme.relatedArticleTagKeys, 4).catch(() => [])
     : [];
 
-  // Hero 右側: 代表指標（rankingKeys 順=primary 始まり）の先頭4件の全国値を表示する。
-  // 全国値が無い指標（計算型 / city / port）は都道府県値の単純平均にフォールバック。
-  const tabLabelByKey = new Map(
-    theme.tabIndicators.map((t) => [t.rankingKey, t.tabLabel] as const),
-  );
-  const heroKpis = theme.rankingKeys
-    .filter((key) => data.indicatorDataMap[key])
-    .slice(0, 4)
-    .map((key) => {
-      const d = data.indicatorDataMap[key];
-      const values = d.rankingValues
-        .map((v) => v.value)
-        .filter((v): v is number => typeof v === "number" && Number.isFinite(v));
-      const mean =
-        values.length > 0
-          ? values.reduce((a, b) => a + b, 0) / values.length
-          : null;
-      const figure = d.nationalValue ?? mean;
-      return {
-        key,
-        label: tabLabelByKey.get(key) ?? d.rankingItem.title,
-        value: figure !== null ? formatNumberForDisplay(figure) : "—",
-        unit: d.rankingItem.unit ?? undefined,
-      };
-    });
-
   return (
-    <div className="container mx-auto px-4 py-4 text-foreground">
+    <div className="text-foreground">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbData) }}
@@ -140,40 +110,11 @@ export async function ThemePageLayout({ theme, data, areaContext }: Props) {
         </div>
       )}
 
-      {/* Hero (D 暗色) — マスタープラン § 5.3 準拠 */}
-      <HeroShell variant="dark" className="mb-6">
-        <div className="grid grid-cols-1 gap-6 p-6 md:grid-cols-[1fr,360px] md:p-8">
-          <div className="min-w-0">
-            <p className="text-[11px] font-bold uppercase tracking-widest text-white/70">
-              テーマダッシュボード
-            </p>
-            <h1 className="mt-2 text-2xl font-extrabold leading-tight text-white sm:text-3xl">
-              {theme.title}
-            </h1>
-            <p className="mt-2 max-w-xl text-sm leading-relaxed text-white/85">
-              {theme.description}
-            </p>
-          </div>
-          {heroKpis.length > 0 && (
-            <div>
-              <p className="mb-2 text-[10.5px] font-semibold uppercase tracking-widest text-white/55">
-                全国値
-              </p>
-              <KpiGrid columns={2}>
-                {heroKpis.map((kpi) => (
-                  <KpiTile
-                    key={kpi.key}
-                    label={kpi.label}
-                    value={kpi.value}
-                    unit={kpi.unit}
-                    variant="dark"
-                  />
-                ))}
-              </KpiGrid>
-            </div>
-          )}
-        </div>
-      </HeroShell>
+      <PageHeader
+        eyebrow="テーマダッシュボード"
+        title={theme.title}
+        description={theme.description}
+      />
 
       <ThemeDashboardClient
         themeConfig={theme}

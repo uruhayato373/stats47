@@ -7,6 +7,10 @@
  *
  * 更新日: 2026-03-27（442 → 489 件。inactive 50 件追加、active 復帰 3 件削除）
  * 更新日: 2026-06-12（per-capita-prefectural-income-h27 を active 復帰で削除。RANK-LINK-01）
+ * 更新日: 2026-06-16（COVERAGE-DEACT-01。GSC カバレッジ是正ループで「config も R2 データも無いのに
+ *   stale prerender で 200 を返す空 ranking」32 件を特定し追加。Google が soft404 判定していた発生源。
+ *   middleware 410 で stale ページより前段で短絡し即時除去を促す。将来データ投入時は本 Set から削除して復帰可。
+ *   一覧の真実源: .claude/state/gsc/coverage-remediation-queue.json の content_verdict=deactivate）
  */
 export const GONE_RANKING_KEYS = new Set([
   "actual-road-length",
@@ -375,4 +379,37 @@ export const GONE_RANKING_KEYS = new Set([
   "wind-power-generation-number-of-units",
   "young-population",
   "young-population-ratio",
+  // ── COVERAGE-DEACT-01 (2026-06-16): config/R2 データ無しで stale prerender 200 を返す空 ranking ──
+  "agricultural-output-city",
+  "edu-academic-junior-math",
+  "electricity-consumption",
+  "passenger-car-ownership-per-household",
+  "ssdse-c-lb013002",
+  "ssdse-c-lb014002",
+  "ssdse-c-lb021104",
+  "ssdse-c-lb024001",
+  "ssdse-c-lb051303",
+  "ssdse-c-lb052003",
+  "ssdse-c-lb061011",
+  "ssdse-c-lb072014",
+  "ssdse-c-lb080012",
+  "ssdse-c-lb091005",
+  "ssdse-c-lb092004",
+  "ssdse-c-lb103001",
+  "ssdse-c-lb121107",
+  "ssdse-c-lb121201",
+  "ssdse-d-md03",
+  "ssdse-d-md31",
+  "ssdse-d-md33",
+  "ssdse-d-mf0211",
+  "ssdse-d-mg07",
+  "ssdse-d-mg09",
+  "ssdse-f-avg-temp-under-0",
+  "ssdse-f-max-temp-avg",
+  "ssdse-f-snow-depth-over-10",
+  "ssdse-f-snow-depth-over-5",
+  "ssdse-f-wind-over-10",
+  "university-advancement",
+  "unmarried-ratio-female-20-24",
+  "unmarried-ratio-male-20-24",
 ]);

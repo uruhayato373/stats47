@@ -33,7 +33,7 @@ primary_agent: note-manager
 
 ```
 docs/31_note記事原稿/<slug>/
-├── note.md          ← 本文（このスキルで作成）
+├── draft.md          ← 本文（このスキルで作成）
 ├── chart-data.json  ← チャート生成用データ（A シリーズ: このスキルで作成）
 ├── images/          ← 画像（.gitignore 対象）
 └── _data/           ← 作業ファイル
@@ -102,7 +102,7 @@ note のアルゴリズム方針に沿い、おすすめ表示されやすく読
 4. stats47.jp リンクを配置（UTM パラメータは不要、素の URL で記載）
 5. CTA セクションを作成
 6. チャート生成（`/generate-note-charts`）を執筆と同時に行うことを推奨
-7. `note.md` に保存
+7. `draft.md` に保存
 
 ### シリーズ別の執筆ポイント
 
@@ -194,7 +194,7 @@ note 記事の stats47.jp リンクには UTM パラメータを付けない。�
 ## 出力
 
 ```
-docs/31_note記事原稿/<slug>/note.md
+docs/31_note記事原稿/<slug>/draft.md
 docs/31_note記事原稿/<slug>/hashtags.txt
 ```
 

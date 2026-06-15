@@ -5,7 +5,7 @@
  * 初期結果を HTML に含める。クローラーが検索結果をインデックスできる。
  * インタラクティブな検索・フィルタリングはクライアント側で処理。
  */
-import { PageShell } from "@/components/layout";
+import { PageShell, PageHeader } from "@/components/layout";
 
 import { SearchPageClient, type ContentType } from "@/features/search";
 import { getSearchIndexMeta, searchDocumentsServer } from "@/features/search/server";
@@ -74,23 +74,16 @@ export default async function SearchPage({ searchParams }: PageProps) {
 
   return (
     <PageShell>
-      {/* Hero (軽量): 検索クエリ + 結果サマリ */}
-      <header className="mb-5">
-        <p className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
-          検索
-        </p>
-        <h1 className="mt-1 text-2xl font-bold leading-tight text-foreground sm:text-3xl">
-          {q ? `「${q}」の検索結果` : "サイト内検索"}
-          {q && initialResults.length > 0 && (
-            <span className="ml-3 align-middle text-xs font-medium text-muted-foreground">
-              {initialResults.length} 件
-            </span>
-          )}
-        </h1>
-        <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground">
-          {buildResultsSummary(q, initialResults.length)}
-        </p>
-      </header>
+      <PageHeader
+        eyebrow="検索"
+        title={q ? `「${q}」の検索結果` : "サイト内検索"}
+        description={buildResultsSummary(q, initialResults.length)}
+        stats={
+          q && initialResults.length > 0
+            ? `${initialResults.length} 件`
+            : undefined
+        }
+      />
 
       <SearchPageClient
         initialResults={initialResults}

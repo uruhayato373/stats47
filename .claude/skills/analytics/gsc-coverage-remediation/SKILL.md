@@ -1,0 +1,132 @@
+---
+name: gsc-coverage-remediation
+description: GSC「ページ」インデックスカバレッジ (見つからない404 / ソフト404 / 5xx / クロール済未登録) を計画的に是正する閉ループ。Use when user says "GSCのカバレッジ", "インデックス未登録", "404が多い", "ソフト404", "見つかりませんでした", "カバレッジ是正". GSC UI export を取り込み→本番HTTP実測でA/B分類→SSOTキュー化→live再送信/薄さ確認→経過観測を1サイクルで回す。
+primary_agent: gsc-analyst
+co_agents: [improvement-triage]
+---
+
+GSC のインデックスカバレッジ問題 (404 / soft404 / 5xx / crawled-not-indexed) を **週次で計画的に順次是正**する閉ループ。
+ブログ品質是正ループ (`docs/02_実装計画/06_ブログ品質是正ループ.md`) と同型。「次に何を直すか・何をやったか・効いたか」を
+**1 つの状態付きキュー**で追える。
+
+> **正典**: `docs/02_実装計画/12_GSCカバレッジ是正ループ.md`。
+> **SSOT (機械)**: `.claude/state/gsc/coverage-remediation-queue.json`。**人間向け要約**: `.claude/state/gsc/LATEST.md`。
+
+## 前提となる事実 (これを取り違えない)
+
+- **404=8,378 / redirect=1,277 / robots=2,651 / noindex=1,434 の大半は「意図的削除・旧URL・設計上のブロック」**で、
+  0 件にはできないし目標でもない。GSC は 410 も「404」に束ねる。Google の再クロールは遅く週〜月単位でしか減らない。
+- **実際に直すべきは「sitemap/サイトが参照しているのに 404/soft404/5xx」= 生きてるのに誤登録された URL だけ**。
+  これは本番 HTTP を実測すれば機械的に判別できる (現在 200 を返すか)。
+- 効果判定は `.claude/rules/evidence-based-judgment.md` に従う (推測で effect/* を付けない)。
+
+## ループ全体図
+
+```
+[1] ユーザーが GSC UI から export (週次・10分)  → ~/Downloads に zip
+       ↓
+[2] ingest-gsc-export.py        cp932 zip を正規化 → coverage-drilldown/<週>/<category>-drilldown.csv + category-totals.json
+       ↓
+[3] build-coverage-queue.mjs    本番 HTTP を Googlebot UA で実測 → A/B 分類 → coverage-remediation-queue.json (状態保持)
+       │                         + LATEST.md + coverage-totals-history.csv (経過観測) + coverage-live-resubmit-urls.csv (curated)
+       ↓
+[4] 是正 (action 別):
+       resubmit(live)      → CI gsc-auto-resubmit-daily.yml が curated CSV を Indexing API 送信
+       content-check(soft) → gsc-analyst で薄さ/描画確認 → 補強 or noindex → 良ければ resubmit 格上げ
+       fix-5xx             → 実バグ修正 (PR)
+       verify-intent(404)  → 旧URL/内部パスか確認。死亡が正なら resolved-by-design でマーク
+       ↓
+[5] 記録      improvement-log [COVERAGE-LOOP-01] + 改善バックログ status / build --mark-done
+       ↓
+[6] 経過観測  次週 export → ingest+build で件数減 (8378↓) と登録済↑ を totals-history で追う
+```
+
+## 実行手順
+
+### Phase 0 — 前提確認
+- ユーザーに「GSC UI から export 済みか」を確認。未取得なら `USER_EXPORT_GUIDE.md` Step 2/3 を案内
+  (インデックス作成 > ページ → 各カテゴリを開いて右上エクスポート → `~/Downloads` へ)。
+- export 不要で「キュー状態だけ見たい」なら Phase 3 の `--no-probe` か `--next` だけ実行。
+
+### Phase 1 — 取り込み (ingest)
+```bash
+python3 .claude/scripts/gsc/ingest-gsc-export.py        # ~/Downloads の GSC zip を自動検出・正規化
+# 週を明示する場合: --week 2026-W25 / 日付指定: --date 2026-06-16
+```
+- cp932 ファイル名を復元し、カテゴリ判定して `coverage-drilldown/<週>/<category>-drilldown.csv` に保存。
+- **生 drilldown は `-drilldown.csv`** (auto-resubmit は拾わない)。集計は `category-totals.json`、推移は `coverage-trend.csv`。
+
+### Phase 2 — キュー構築 (本番 HTTP 実測)
+```bash
+node .claude/scripts/gsc/build-coverage-queue.mjs       # actionable URL を実測 → 分類 → upsert
+# 高速 (実測せずキャッシュ): --no-probe   /  実測上限: --probe-limit 2500
+```
+- actionable カテゴリ (404 / soft404 / 5xx / crawled-not-indexed / discovered) のみ実測する。意図的カテゴリは放置。
+- 状態 (pending / in-progress / done / resolved-by-design) を **upsert で保持**。done を毎回潰さない。
+
+### Phase 3 — 報告
+- `.claude/state/gsc/LATEST.md` を読み、ユーザーに「総件数 (意図的の内訳)」と「要対応 pending の action 別件数」を提示。
+- `node .claude/scripts/gsc/build-coverage-queue.mjs --next 20` で次にやる actionable を JSONL で取得。
+
+### Phase 4 — 是正 (action 別。gsc-analyst サブエージェントに委譲)
+
+| action | 対応 | 委譲先 |
+|---|---|---|
+| `resubmit` | 既に curated CSV (`coverage-live-resubmit-urls.csv`) に出力済 → CI に送信を委ねる | (CI) |
+| `content-check` | soft404 の薄さ/描画を確認。本当に thin なら content 補強 or `noindex`、十分なら resubmit 格上げ | **gsc-analyst** |
+| `fix-5xx` | 実バグ。再現確認 → 修正 PR | gsc-analyst → 実装 |
+| `verify-intent` | 旧URL/内部パス (`/tmp/*` `/.local/*` 等) か確認。死亡が正なら放置確定 | gsc-analyst |
+
+`content-check` のバッチ判定は subagent に委譲する (Agent tool, `mode: bypassPermissions`)。
+**OUTPUT FORMAT を prompt 冒頭に固定**すること (`.claude/rules/agent-output-contract.md`):
+```
+OUTPUT FORMAT: 1 markdown table only.
+Columns: URL | thin? | 推奨 (resubmit/noindex/enrich) | 理由(≤10語)
+No prose before/after.
+TASK: 以下の soft404→現在200 の URL 群が「薄い/空」か判定。R2 観測値の年数・データ点数を確認。
+```
+
+### Phase 5 — 是正の実送信 (R2/Indexing API は CI 専用)
+- **live (resubmit) の Indexing API 送信は CI が行う**。curated CSV は coverage-drilldown 配下に出力済なので
+  `gsc-auto-resubmit-daily.yml` (毎日 JST 06:30) が自動で拾う。即時送信したい場合は workflow_dispatch:
+  ```bash
+  gh workflow run gsc-auto-resubmit-daily.yml -f max=200    # ローカルに gh + actions:write がある時のみ
+  ```
+  (クラウド/web 環境は dispatch 不可。develop/main への commit 経由で cron に委ねる → `.claude/rules/branch-workflow.md`)
+- ローカルからの Indexing API 直送・R2 push は禁止 (`_assert-ci-write` で停止)。
+
+### Phase 6 — 記録 (真実源を更新)
+- 完了した URL を done に: `node .claude/scripts/gsc/build-coverage-queue.mjs --mark-done <url> --wave-id 2026-MM-DD-coverage`
+- `improvement-log.md` の `[COVERAGE-LOOP-01]` に「何をやったか」(送信件数・content-check 結果・fix-5xx PR) を追記。
+- 改善バックログ `docs/02_実装計画/03_改善バックログ.md` の `COVERAGE-LOOP-01` 行の status / 期日を更新 (improvement-triage)。
+- **effect/* を付ける前に実証チェックリスト** (`evidence-based-judgment.md`): 送信した URL が次週 indexed 化したかを
+  URL Inspection / totals-history で確認してからでないと effect/full を付けない。
+
+### Phase 7 — 経過観測 (次サイクルの起点)
+- 次週ユーザーが再 export → Phase 1-2 を再実行。`coverage-totals-history.csv` に週次の件数が積まれる。
+- 判定指標: **404・soft404 の総件数が減少**、**登録済みが増加**、**resubmit した URL が indexed 化**。
+- done だった URL が再び壊れて検出されたら自動で再 actionable 化される (5xx 再発は pending に戻す)。
+
+## 真実源とファイル
+
+| 役割 | パス | 書く / 読む |
+|---|---|---|
+| **状態付きキュー (SSOT・機械)** | `.claude/state/gsc/coverage-remediation-queue.json` | build が書く / skill・agent が読む |
+| 人間向け要約 | `.claude/state/gsc/LATEST.md` | build が書く / 人間が読む |
+| 経過観測 (週次件数) | `.claude/state/gsc/coverage-totals-history.csv` | build が追記 |
+| 取り込み済 drilldown | `.claude/state/metrics/gsc/coverage-drilldown/<週>/*-drilldown.csv` | ingest が書く |
+| curated 再送信入力 | `.claude/state/metrics/gsc/coverage-drilldown/<週>/coverage-live-resubmit-urls.csv` | build が書く / auto-resubmit が読む |
+| agent 用詳細ログ | `.claude/skills/analytics/gsc-improvement/reference/improvement-log.md` `[COVERAGE-LOOP-01]` | skill/agent |
+| TODO 真実源 | `docs/02_実装計画/03_改善バックログ.md` `COVERAGE-LOOP-01` | improvement-triage |
+
+## cadence (週次)
+- `/weekly-review` 前にユーザーが export (10分) → 本スキルで取り込み・是正。
+- 自動アーム (CI・既存): `gsc-url-inspection-daily.yml` (個別URL状態) + `gsc-auto-resubmit-daily.yml` (curated 送信) が毎日稼働。
+  本スキルの週次手動アームは「UI export でしか取れない総件数・未把握URL」を補う (API は自サイト視点のみ)。
+
+## 関連
+- 正典: `docs/02_実装計画/12_GSCカバレッジ是正ループ.md`
+- 同型: `docs/02_実装計画/06_ブログ品質是正ループ.md`
+- 実測判定: `.claude/rules/evidence-based-judgment.md`
+- export 手順: `.claude/skills/analytics/gsc-improvement/reference/USER_EXPORT_GUIDE.md`
+- agent: `gsc-analyst` (実行) / `improvement-triage` (status 更新)

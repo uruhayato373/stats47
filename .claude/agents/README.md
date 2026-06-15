@@ -41,7 +41,7 @@
 | `article-writer` | 1 metric → 1 記事 (並列起動量産単位) | 既存 |
 | `chart-author` 🆕 | SVG / Remotion チャート生成 (blog / note 共通) | blog-editor + note-manager 分離 |
 | `blog-critic` 🆕 | expert review / panel review | blog-editor 分割 |
-| `note-manager` | note.com DB / 公開 LC (chart は chart-author に委譲) | 既存縮退 |
+| `note-manager` | note.com 公開LC / 公開URLトラッキング (完全DBレス: D1 note_articles 廃止、SSOT=docs/31 + note-published-urls.json。chart は chart-author に委譲) | 既存縮退 |
 
 ## Tier 4: SNS (5 体)
 

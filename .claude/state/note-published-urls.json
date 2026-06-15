@@ -162,7 +162,9 @@
       "url": "https://note.com/stats47/n/nb62db0d2826f",
       "is_paid": true,
       "price_jpy": 300,
-      "published_at": "2026-05-22"
+      "published_at": "2026-05-22",
+      "updated_at": "2026-06-16",
+      "update_note": "ですます化+画像4枚再挿入+有料ライン(有料セクション1直前)再設定。境界screenshot検証済"
     },
     "17-year-on-year-analysis": {
       "vertical": "koumuin-claude-code",
@@ -170,7 +172,8 @@
       "url": "https://note.com/stats47/n/n5afa58e8e1e4",
       "is_paid": true,
       "price_jpy": 300,
-      "published_at": "2026-05-22"
+      "published_at": "2026-05-22",
+      "updated_at": "2026-06-16"
     },
     "18-pr-magazine-rewrite": {
       "vertical": "koumuin-claude-code",
@@ -178,14 +181,17 @@
       "url": "https://note.com/stats47/n/nef4df902db37",
       "is_paid": true,
       "price_jpy": 300,
-      "published_at": "2026-05-22"
+      "published_at": "2026-05-22",
+      "updated_at": "2026-06-16"
     },
     "00-estat-claude-code-intro": {
       "vertical": "koumuin-estat-claude-code",
       "title": "e-Stat × Claude Code とは — 自治体職員のための統計データ業務効率化ガイド",
       "url": "https://note.com/stats47/n/n258277f96f88",
       "is_paid": false,
-      "published_at": "2026-06-14"
+      "published_at": "2026-06-14",
+      "updated_at": "2026-06-15",
+      "update_note": "ですます化 + 画像2枚再挿入 + 全文無料ライン(末尾)"
     },
     "01-estat-api-key-setup": {
       "vertical": "koumuin-estat-claude-code",
@@ -193,7 +199,8 @@
       "url": "https://note.com/stats47/n/nc5a1358141a5",
       "is_paid": true,
       "published_at": "2026-06-14",
-      "price_jpy": 300
+      "price_jpy": 300,
+      "updated_at": "2026-06-16"
     },
     "02-search-estat-statsdataid": {
       "vertical": "koumuin-estat-claude-code",
@@ -201,14 +208,17 @@
       "url": "https://note.com/stats47/n/n7e4572d23a1b",
       "is_paid": true,
       "published_at": "2026-06-14",
-      "price_jpy": 300
+      "price_jpy": 300,
+      "updated_at": "2026-06-16"
     },
     "03-fetch-prefecture-ranking": {
       "vertical": "koumuin-estat-claude-code",
       "title": "47 都道府県データを 1 コマンドで取得する — fetch-estat-data スキルの使い方",
       "url": "https://note.com/stats47/n/n914ee28ff773",
       "is_paid": false,
-      "published_at": "2026-06-14"
+      "published_at": "2026-06-14",
+      "updated_at": "2026-06-16",
+      "update_note": "ですます化 + 画像3枚再挿入"
     },
     "04-excel-download-and-parse": {
       "vertical": "koumuin-estat-claude-code",
@@ -216,7 +226,8 @@
       "url": "https://note.com/stats47/n/n23262330a5e5",
       "is_paid": true,
       "published_at": "2026-06-14",
-      "price_jpy": 300
+      "price_jpy": 300,
+      "updated_at": "2026-06-16"
     },
     "05-pandas-duckdb-derived-metrics": {
       "vertical": "koumuin-estat-claude-code",
@@ -224,7 +235,8 @@
       "url": "https://note.com/stats47/n/n0477d544669b",
       "is_paid": true,
       "published_at": "2026-06-14",
-      "price_jpy": 300
+      "price_jpy": 300,
+      "updated_at": "2026-06-16"
     },
     "06-prefecture-code-and-merge": {
       "vertical": "koumuin-estat-claude-code",
@@ -232,7 +244,8 @@
       "url": "https://note.com/stats47/n/n7ba7ee560bbb",
       "is_paid": true,
       "published_at": "2026-06-14",
-      "price_jpy": 300
+      "price_jpy": 300,
+      "updated_at": "2026-06-16"
     },
     "07-year-on-year-diff": {
       "vertical": "koumuin-estat-claude-code",
@@ -240,14 +253,17 @@
       "url": "https://note.com/stats47/n/n0bd95dda8588",
       "is_paid": true,
       "published_at": "2026-06-14",
-      "price_jpy": 300
+      "price_jpy": 300,
+      "updated_at": "2026-06-16"
     },
     "08-benchmark-table-5min": {
       "vertical": "koumuin-estat-claude-code",
       "title": "他自治体ベンチマーク表を 5 分で作る — 議会答弁・議事用の比較資料を自動生成",
       "url": "https://note.com/stats47/n/nd4afc48385a3",
       "is_paid": false,
-      "published_at": "2026-06-14"
+      "published_at": "2026-06-14",
+      "updated_at": "2026-06-16",
+      "update_note": "ですます化 + 画像3枚再挿入 (本文パイプ表は元から literal=要画像化・別タスク)"
     },
     "09-assembly-chart-generation": {
       "vertical": "koumuin-estat-claude-code",
@@ -255,7 +271,8 @@
       "url": "https://note.com/stats47/n/nce1681932f40",
       "is_paid": true,
       "published_at": "2026-06-14",
-      "price_jpy": 300
+      "price_jpy": 300,
+      "updated_at": "2026-06-16"
     },
     "10-claude-skills-routinize": {
       "vertical": "koumuin-estat-claude-code",
@@ -263,7 +280,8 @@
       "url": "https://note.com/stats47/n/n53c16adaf2c7",
       "is_paid": true,
       "published_at": "2026-06-14",
-      "price_jpy": 300
+      "price_jpy": 300,
+      "updated_at": "2026-06-16"
     },
     "11-mcp-sqlite-search": {
       "vertical": "koumuin-estat-claude-code",
@@ -271,7 +289,32 @@
       "url": "https://note.com/stats47/n/n347f923606f1",
       "is_paid": true,
       "published_at": "2026-06-14",
-      "price_jpy": 300
+      "price_jpy": 300,
+      "updated_at": "2026-06-16"
+    },
+    "19-faq-auto-generation": {
+      "vertical": "koumuin-claude-code",
+      "title": "住民問い合わせ FAQ を Claude Code で自動生成",
+      "url": "https://note.com/stats47/n/nb149e4940b5f",
+      "is_paid": false,
+      "price_jpy": 0,
+      "published_at": "2026-06-16"
+    },
+    "20-complaint-reply-patterns": {
+      "vertical": "koumuin-claude-code",
+      "title": "苦情メール返信案を 5 パターン出す prompt",
+      "url": "https://note.com/stats47/n/n311eeeba660b",
+      "is_paid": true,
+      "price_jpy": 300,
+      "published_at": "2026-06-16"
+    },
+    "21-disaster-sns-multilang": {
+      "vertical": "koumuin-claude-code",
+      "title": "災害時の SNS 発信文を Claude Code で多言語化",
+      "url": "https://note.com/stats47/n/nf01a62d2dc16",
+      "is_paid": true,
+      "price_jpy": 300,
+      "published_at": "2026-06-16"
     }
   },
   "batch2_update": "2026-05-21: koumuin #07-#12 を新規公開 (バッチ2)。有料4記事 (#07/#08/#11/#12 各¥300) は有料エリア境界を この続きは有料パートです 直前に設定、無料2記事 (#09/#10) は試し読みラインを記事末尾に設定 (全文無料)。本文画像を全挿入 (#07:5 / #08:5 / #09:5 / #10:4 / #11:7 / #12:5 枚)、全6本をマガジン 公務員×Claude Code実務活用ガイド に追加。#11/#12 で **「」** 形式の太字が note 上で literal ** として残る軽微なレンダリング崩れあり (本文内容は完全、bold スタイルのみ欠落)。",

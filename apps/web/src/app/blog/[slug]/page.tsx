@@ -167,7 +167,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
             />
             {/* パンくずナビゲーション */}
-            <div className="container mx-auto px-4 pt-4">
+            <div className="mx-auto max-w-[1700px] px-4 pt-4">
                 <Breadcrumb>
                     <BreadcrumbList>
                         <BreadcrumbItem>
@@ -197,8 +197,8 @@ export default async function BlogPostPage({ params }: PageProps) {
             <div className="mx-auto max-w-[1700px] px-4 py-6">
                 <div className="lg:grid lg:grid-cols-[minmax(0,1fr)_360px] lg:gap-8 lg:items-start xl:grid-cols-[280px_minmax(0,1fr)_360px]">
 
-                    {/* 左カラム (xl+): TOC + 高単価アフィリエイトバナー + 上部 AdSense (sticky) */}
-                    <aside className="hidden xl:flex xl:flex-col xl:gap-3 xl:sticky xl:top-20 xl:max-h-[calc(100vh-5.5rem)] xl:overflow-y-auto xl:pr-1">
+                    {/* 左カラム (xl+): TOC + 高単価アフィリエイトバナー + 上部 AdSense (自然フロー) */}
+                    <aside className="hidden xl:flex xl:flex-col xl:gap-3">
                         <ArticleTableOfContents content={article.content} compact />
                         {/* A8.net バナー広告: STRATEGY CAREER (高単価・目次の下) */}
                         <SidebarPromoBanner index={0} position="sidebar-left" />
@@ -218,7 +218,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                             <CardContent className="p-6 sm:p-8 overflow-hidden">
                                 {/* 記事ヘッダー */}
                                 <header className="mb-8">
-                                    <h1 className="mb-4 border-b-4 border-primary pb-3 text-2xl font-bold">{article.title}</h1>
+                                    <h1 className="mb-4 border-b pb-3 text-2xl font-bold">{article.title}</h1>
                                     {article.frontmatter.subtitle && (
                                         <p className="mb-4 text-sm text-muted-foreground">{article.frontmatter.subtitle}</p>
                                     )}
@@ -281,18 +281,18 @@ export default async function BlogPostPage({ params }: PageProps) {
                         </div>
                     </main>
 
-                    {/* 右カラム (lg+): 関連 widget + 広告 (sticky)。lg=2カラム(本文+右)、xl=3カラム */}
-                    <aside className="hidden lg:flex lg:flex-col lg:gap-3 lg:sticky lg:top-20 lg:max-h-[calc(100vh-5.5rem)] lg:overflow-y-auto lg:pr-1">
-                        {/* A8.net バナー広告 (above-fold 最上部) */}
-                        <SidebarPromoBanner index={1} position="sidebar-right" />
-
-                        {/* 関連ランキング */}
+                    {/* 右カラム (lg+): 関連 widget(上) + 広告/promo(下) を自然フロー。lg=2カラム(本文+右)、xl=3カラム */}
+                    <aside className="hidden lg:flex lg:flex-col lg:gap-3">
+                        {/* 本文関連 widget（主役・上） */}
                         <RelatedRankingsSection tagKeys={tagKeys} compact />
 
-                        {/* 関連記事 */}
                         <BlogRelatedArticlesSection articles={relatedArticles} currentSlug={slug} articleTagsMap={articleTagsMap} compact />
 
-                        {/* AdSense Rectangle (下部) */}
+                        <hr className="my-1 border-t border-border" />
+
+                        {/* promo / 広告（本文関連の下へ降格） */}
+                        <SidebarPromoBanner index={1} position="sidebar-right" />
+
                         <Card>
                             <CardHeader className="pb-2">
                                 <CardTitle className="text-sm font-medium text-muted-foreground">広告</CardTitle>
@@ -302,7 +302,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                             </CardContent>
                         </Card>
 
-                        {/* テキストリンク広告 (strategy career / 就職エージェントneo) — 右サイドバー下部 */}
+                        {/* テキストリンク広告 (strategy career / 就職エージェントneo) */}
                         <BlogSidebarTextAds tagKeys={tagKeys} />
                     </aside>
 

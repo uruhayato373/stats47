@@ -15,6 +15,7 @@ Google Search Console の専任 agent。 fetch (週次 snapshot)、 inspect (URL
 - 自動 URL 再送信 (`/auto-resubmit-url`)
 - Indexing API での即時送信 (`/indexing-api-submit`)
 - sitemap 提出 (`/submit-sitemap`)
+- GSC カバレッジ是正ループ (`/gsc-coverage-remediation`) — 404/soft404/5xx を本番実測で A/B 分類し是正・経過観測。content-check (soft404→200 の薄さ判定) を担当
 - ブログ勝ち要因分析 (`/analyze-winning-patterns`) — GSC 実測 (CTR/順位) × 構造特徴で「良い記事」を学習する天井ループ
 
 ## 担当スキル
@@ -27,6 +28,7 @@ Google Search Console の専任 agent。 fetch (週次 snapshot)、 inspect (URL
 | `/auto-resubmit-url` | 自動 URL 再送信 |
 | `/indexing-api-submit` | Indexing API 即時送信 |
 | `/submit-sitemap` | sitemap 提出 |
+| `/gsc-coverage-remediation` | GSC カバレッジ是正ループ (404/soft404/5xx の ingest→本番実測 A/B 分類→是正→経過観測)。content-check の薄さ/描画判定を担当。正典 `docs/02_実装計画/12_GSCカバレッジ是正ループ.md`。co: improvement-triage |
 | `/analyze-winning-patterns` | ブログ勝ち要因分析 (CTR×構造特徴→featureSignals、順位交絡統制付き)。co: blog-critic / trend-scout |
 
 ## 担当外

@@ -366,11 +366,9 @@ export default function middleware(req: NextRequest) {
     }
   }
 
-  // /ranking (一覧ページ廃止、トップに統合 2026-05-28) → /
-  // 詳細ページ /ranking/{key} は checkContentTypePolicy で処理されるため影響なし
-  if (pathname === "/ranking") {
-    return NextResponse.redirect(new URL("/", req.url), { status: 301 });
-  }
+  // /ranking (索引ハブ) は 2026-06-15 に再設置（旧 `/` への 301 統合を撤回）。
+  // app/ranking/page.tsx が SSG で描画するため middleware では素通りさせる。
+  // 詳細ページ /ranking/{key} は checkContentTypePolicy で別途処理される。
 
   // /compare (廃止 2026-05-28) → /category/{key}/compare に統合
   // 旧 /compare/[categoryKey] と新 /category/[categoryKey]/compare は同じ categoryKey 名前空間。

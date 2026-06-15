@@ -15,8 +15,10 @@ stats47 (Next.js App Router on Cloudflare Pages) の URL 体系・301 マッピ�
 /about, /privacy, /terms, /search       静的ページ
 /not-found                              404
 
+/ranking                                ランキング索引ハブ (全17カテゴリ網羅ブラウズ。SSG)
+                                         ※ 2026-05-28 に / へ 301 統合したが 2026-06-15 再設置
+                                         　 (ヘッダー第一ナビ「ランキング」の正規の着地。home とは役割が異なる)
 /ranking/[rankingKey]                   ランキング詳細 (主力ページ、1,800+ 件)
-                                         ※ /ranking 一覧は 2026-05-28 廃止 → / に 301
 
 /category/[categoryKey]                 カテゴリ別ランキング一覧 (17 軸)
 /category/[categoryKey]/compare         地域間比較 (2 県 vs)
@@ -58,7 +60,7 @@ middleware.ts (`apps/web/src/middleware.ts`) の `tryLegacyRedirect` 関数と e
 
 | 旧 URL | 新 URL | 状態 | 導入日 |
 |---|---|---|---|
-| `/ranking` (一覧) | `/` | 301 | 2026-05-28 (Phase 1) |
+| ~~`/ranking` (一覧) → `/`~~ | — | **撤回** | 2026-05-28 導入 → **2026-06-15 索引ハブとして再設置**（301 削除） |
 | `/compare` | `/category/population/compare` | 301 | 2026-05-28 (Phase 2) |
 | `/compare/[categoryKey]` | `/category/[categoryKey]/compare` (クエリ保持) | 301 | 2026-05-28 (Phase 2) |
 | `/{categoryKey}` (1 階層) | `/category/{categoryKey}` | 301 | 既存 |
@@ -99,6 +101,7 @@ middleware.ts (`apps/web/src/middleware.ts`) の `tryLegacyRedirect` 関数と e
 | URL パターン | canonical 先 | 理由 |
 |---|---|---|
 | `/` | `/` | トップ |
+| `/ranking` | `/ranking` | ランキング索引ハブ (2026-06-15 再設置) |
 | `/ranking/[rankingKey]` | `/ranking/[rankingKey]` | 主力 SEO 対象 |
 | `/category/[key]` | `/category/[key]` | カテゴリハブ |
 | `/category/[key]/compare?areas=A,B` | `/category/[key]/compare` (クエリ抜き) | noindex のため canonical は base path |
@@ -116,7 +119,7 @@ middleware.ts (`apps/web/src/middleware.ts`) の `tryLegacyRedirect` 関数と e
 **含める**:
 - index, follow な URL
 - ユーザー価値があり Google に index させたいページ
-- 例: `/`, `/areas`, `/themes`, `/themes/[key]`, `/category/[key]`, `/areas/[code]`, `/ranking/[key]`, `/blog/[slug]`
+- 例: `/`, `/ranking`, `/areas`, `/themes`, `/themes/[key]`, `/category/[key]`, `/areas/[code]`, `/ranking/[key]`, `/blog/[slug]`
 
 **含めない**:
 - noindex / robots: "noindex" 指定があるページ

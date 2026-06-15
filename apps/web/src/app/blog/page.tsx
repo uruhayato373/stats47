@@ -9,6 +9,8 @@ import {
     BreadcrumbSeparator,
 } from "@stats47/components/atoms/ui/breadcrumb";
 
+import { PageShell, PageHeader } from "@/components/layout";
+
 import { BlogArticleGrid } from "@/features/blog";
 import { listLatestArticles, readBlogSnapshotMetaFromR2 } from "@/features/blog/server";
 
@@ -51,80 +53,76 @@ export default async function BlogIndexPage({ searchParams }: PageProps) {
     const hasPrevPage = currentPage > 1;
 
     return (
-        <>
+        <PageShell>
             {/* パンくずナビゲーション */}
-            <div className="container mx-auto px-4 pt-4">
-                <Breadcrumb>
-                    <BreadcrumbList>
-                        <BreadcrumbItem>
-                            <BreadcrumbLink asChild>
-                                <Link href="/">ホーム</Link>
-                            </BreadcrumbLink>
-                        </BreadcrumbItem>
-                        <BreadcrumbSeparator />
-                        <BreadcrumbItem>
-                            <BreadcrumbPage>ブログ</BreadcrumbPage>
-                        </BreadcrumbItem>
-                    </BreadcrumbList>
-                </Breadcrumb>
+            <Breadcrumb className="mb-4">
+                <BreadcrumbList>
+                    <BreadcrumbItem>
+                        <BreadcrumbLink asChild>
+                            <Link href="/">ホーム</Link>
+                        </BreadcrumbLink>
+                    </BreadcrumbItem>
+                    <BreadcrumbSeparator />
+                    <BreadcrumbItem>
+                        <BreadcrumbPage>ブログ</BreadcrumbPage>
+                    </BreadcrumbItem>
+                </BreadcrumbList>
+            </Breadcrumb>
+
+            <PageHeader
+                eyebrow="統計ブログ"
+                title="ブログ"
+                description="都道府県の統計データを分析した記事を掲載しています"
+            />
+
+            <div className="mb-6 flex flex-wrap gap-4">
+                <Link href="/search?type=blog" className="text-sm text-primary hover:underline">
+                    記事を検索する →
+                </Link>
+                <Link href="/blog/tags" className="text-sm text-primary hover:underline">
+                    タグ一覧から記事を探す →
+                </Link>
             </div>
 
-            <div className="container mx-auto px-4 py-6">
-                <div className="mb-6">
-                    <h1 className="text-2xl font-bold mb-1">ブログ</h1>
-                    <p className="text-sm text-muted-foreground">
-                        都道府県の統計データを分析した記事を掲載しています
-                    </p>
-                </div>
-                <div className="mb-6 flex flex-wrap gap-4">
-                    <Link href="/search?type=blog" className="text-sm text-primary hover:underline">
-                        記事を検索する →
-                    </Link>
-                    <Link href="/blog/tags" className="text-sm text-primary hover:underline">
-                        タグ一覧から記事を探す →
-                    </Link>
-                </div>
+            <p className="mb-4 text-sm text-muted-foreground">
+                {currentPage > 1 ? `${currentPage} ページ目` : `全 ${meta ? "記事一覧" : "記事一覧"}`}
+            </p>
+            <BlogArticleGrid articles={articles} firstPagePriority={currentPage === 1} />
 
-                <p className="mb-4 text-sm text-muted-foreground">
-                    {currentPage > 1 ? `${currentPage} ページ目` : `全 ${meta ? "記事一覧" : "記事一覧"}`}
-                </p>
-                <BlogArticleGrid articles={articles} firstPagePriority={currentPage === 1} />
+            {/* ページネーション */}
+            {(hasPrevPage || hasNextPage) && (
+                <nav className="mt-8 flex items-center justify-center gap-3" aria-label="ページネーション">
+                    {hasPrevPage ? (
+                        <Link
+                            href={currentPage === 2 ? "/blog" : `/blog?page=${currentPage - 1}`}
+                            className="rounded-none border border-border bg-card px-4 py-2 text-sm font-medium hover:bg-accent transition-colors"
+                        >
+                            ← 前のページ
+                        </Link>
+                    ) : (
+                        <span className="rounded-none border border-border px-4 py-2 text-sm font-medium text-muted-foreground opacity-50 cursor-not-allowed">
+                            ← 前のページ
+                        </span>
+                    )}
+                    <span className="text-sm text-muted-foreground">{currentPage} ページ</span>
+                    {hasNextPage ? (
+                        <Link
+                            href={`/blog?page=${currentPage + 1}`}
+                            className="rounded-none border border-border bg-card px-4 py-2 text-sm font-medium hover:bg-accent transition-colors"
+                        >
+                            次のページ →
+                        </Link>
+                    ) : (
+                        <span className="rounded-none border border-border px-4 py-2 text-sm font-medium text-muted-foreground opacity-50 cursor-not-allowed">
+                            次のページ →
+                        </span>
+                    )}
+                </nav>
+            )}
 
-                {/* ページネーション */}
-                {(hasPrevPage || hasNextPage) && (
-                    <nav className="mt-8 flex items-center justify-center gap-3" aria-label="ページネーション">
-                        {hasPrevPage ? (
-                            <Link
-                                href={currentPage === 2 ? "/blog" : `/blog?page=${currentPage - 1}`}
-                                className="rounded-md border border-border bg-card px-4 py-2 text-sm font-medium hover:bg-accent transition-colors"
-                            >
-                                ← 前のページ
-                            </Link>
-                        ) : (
-                            <span className="rounded-md border border-border px-4 py-2 text-sm font-medium text-muted-foreground opacity-50 cursor-not-allowed">
-                                ← 前のページ
-                            </span>
-                        )}
-                        <span className="text-sm text-muted-foreground">{currentPage} ページ</span>
-                        {hasNextPage ? (
-                            <Link
-                                href={`/blog?page=${currentPage + 1}`}
-                                className="rounded-md border border-border bg-card px-4 py-2 text-sm font-medium hover:bg-accent transition-colors"
-                            >
-                                次のページ →
-                            </Link>
-                        ) : (
-                            <span className="rounded-md border border-border px-4 py-2 text-sm font-medium text-muted-foreground opacity-50 cursor-not-allowed">
-                                次のページ →
-                            </span>
-                        )}
-                    </nav>
-                )}
-
-                <div className="mt-8">
-                    <AdSenseAd format={CONTENT_FOOTER.format} slotId={CONTENT_FOOTER.slotId} />
-                </div>
+            <div className="mt-8">
+                <AdSenseAd format={CONTENT_FOOTER.format} slotId={CONTENT_FOOTER.slotId} />
             </div>
-        </>
+        </PageShell>
     );
 }

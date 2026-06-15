@@ -33,6 +33,8 @@ import {
 import { Separator } from "@stats47/components/atoms/ui/separator";
 import { ExternalLink, Instagram, MapPin, Youtube } from "lucide-react";
 
+import { PageShell, PageHeader } from "@/components/layout";
+
 interface LegalSectionProps {
   /** セクション番号（例: "1", "第1条"） */
   number?: string;
@@ -99,14 +101,11 @@ export const metadata = {
  */
 export default function PrivacyPage() {
   return (
-    <main className="px-4 py-6 md:px-6 md:py-8">
-      {/* ページヘッダー */}
-      <div className="mb-6 md:mb-8">
-        <h1 className="text-lg font-bold mb-4">プライバシーポリシー</h1>
-        <p className={`${TEXT_STYLE} text-muted-foreground`}>
-          統計で見る都道府県（以下「当サービス」）は、ユーザーの個人情報の保護を重要視しています。本プライバシーポリシーは、当サービスがどのように個人情報を収集、使用、保護するかについて説明します。
-        </p>
-      </div>
+    <PageShell>
+      <PageHeader
+        title="プライバシーポリシー"
+        description="統計で見る都道府県（以下「当サービス」）は、ユーザーの個人情報の保護を重要視しています。本プライバシーポリシーは、当サービスがどのように個人情報を収集、使用、保護するかについて説明します。"
+      />
 
       {/* カードセクション */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6">
@@ -398,6 +397,6 @@ export default function PrivacyPage() {
       <footer className="text-xs text-muted-foreground border-t border-border pt-6 mt-8">
         <p>最終更新日: {LAST_UPDATED_DATE.toLocaleDateString("ja-JP")}</p>
       </footer>
-    </main>
+    </PageShell>
   );
 }

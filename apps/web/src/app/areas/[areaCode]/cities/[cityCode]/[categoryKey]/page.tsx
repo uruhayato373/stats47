@@ -12,6 +12,8 @@ import {
 } from "@stats47/components/atoms/ui/breadcrumb";
 import { isOk } from "@stats47/types";
 
+import { PageShell, PageHeader } from "@/components/layout";
+
 import { FurusatoNozeiCard } from "@/features/ads";
 import { AreaBannerAd } from "@/features/ads/server";
 import { CitiesNavCard } from "@/features/area-profile";
@@ -105,58 +107,49 @@ export default async function CityCategoryPage({ params, searchParams }: PagePro
 
 
     return (
-        <>
+        <PageShell>
             {/* パンくずナビゲーション */}
-            <div className="container mx-auto px-4 pt-4">
-                <Breadcrumb>
-                    <BreadcrumbList>
-                        <BreadcrumbItem>
-                            <BreadcrumbLink asChild>
-                                <Link href="/">ホーム</Link>
-                            </BreadcrumbLink>
-                        </BreadcrumbItem>
-                        <BreadcrumbSeparator />
-                        <BreadcrumbItem>
-                            <BreadcrumbLink asChild>
-                                <Link href="/areas">都道府県一覧</Link>
-                            </BreadcrumbLink>
-                        </BreadcrumbItem>
-                        <BreadcrumbSeparator />
-                        <BreadcrumbItem>
-                            <BreadcrumbLink asChild>
-                                <Link href={`/areas/${areaCode}`}>{pref.areaName}</Link>
-                            </BreadcrumbLink>
-                        </BreadcrumbItem>
-                        <BreadcrumbSeparator />
-                        <BreadcrumbItem>
-                            <BreadcrumbLink asChild>
-                                <Link href={cityBasePath}>{city.areaName}</Link>
-                            </BreadcrumbLink>
-                        </BreadcrumbItem>
-                        <BreadcrumbSeparator />
-                        <BreadcrumbItem>
-                            <BreadcrumbPage>{category.categoryName}</BreadcrumbPage>
-                        </BreadcrumbItem>
-                    </BreadcrumbList>
-                </Breadcrumb>
-            </div>
+            <Breadcrumb className="mb-4">
+                <BreadcrumbList>
+                    <BreadcrumbItem>
+                        <BreadcrumbLink asChild>
+                            <Link href="/">ホーム</Link>
+                        </BreadcrumbLink>
+                    </BreadcrumbItem>
+                    <BreadcrumbSeparator />
+                    <BreadcrumbItem>
+                        <BreadcrumbLink asChild>
+                            <Link href="/areas">都道府県一覧</Link>
+                        </BreadcrumbLink>
+                    </BreadcrumbItem>
+                    <BreadcrumbSeparator />
+                    <BreadcrumbItem>
+                        <BreadcrumbLink asChild>
+                            <Link href={`/areas/${areaCode}`}>{pref.areaName}</Link>
+                        </BreadcrumbLink>
+                    </BreadcrumbItem>
+                    <BreadcrumbSeparator />
+                    <BreadcrumbItem>
+                        <BreadcrumbLink asChild>
+                            <Link href={cityBasePath}>{city.areaName}</Link>
+                        </BreadcrumbLink>
+                    </BreadcrumbItem>
+                    <BreadcrumbSeparator />
+                    <BreadcrumbItem>
+                        <BreadcrumbPage>{category.categoryName}</BreadcrumbPage>
+                    </BreadcrumbItem>
+                </BreadcrumbList>
+            </Breadcrumb>
 
             {/* ヘッダー */}
-            <div className="container mx-auto px-4 pt-6">
-                <div className="border-b pb-4">
-                    <h1 className="text-lg font-bold">
-                        {city.areaName}の{category.categoryName}データ
-                    </h1>
-                    <p className="mt-2 text-muted-foreground">
-                        {pref.areaName} {city.areaName}
-                    </p>
-                </div>
-            </div>
+            <PageHeader
+                title={`${city.areaName}の${category.categoryName}データ`}
+                description={`${pref.areaName} ${city.areaName}`}
+            />
 
             {/* 1カラムレイアウト */}
-            <div className="container mx-auto px-4 py-10">
-                <main className="min-w-0 space-y-10">
-                    <AreaDashboardSection
+            <main className="min-w-0 space-y-10">
+                <AreaDashboardSection
                         area={area}
                         categoryKey={categoryKey}
                         categories={categories}
@@ -178,8 +171,7 @@ export default async function CityCategoryPage({ params, searchParams }: PagePro
                     <div className="mt-8">
                         <AdSenseAd format={CONTENT_FOOTER.format} slotId={CONTENT_FOOTER.slotId} />
                     </div>
-                </main>
-            </div>
-        </>
+            </main>
+        </PageShell>
     );
 }
