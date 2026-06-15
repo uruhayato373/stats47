@@ -252,7 +252,7 @@ stats47.jp の実例:
 「公務員のための e-Stat × Claude Code 実務ガイド」全 12 本のシリーズ第 06 回。e-Stat 業務の効率化に関心がある方は、マガジン購読がお得です。
 
 ▶️ マガジン: 公務員のための e-Stat × Claude Code 実務ガイド
-🔗 {{ESTAT_MAGAZINE_URL}}
+🔗 https://note.com/stats47/m/m1b836e4c8dce
 
 姉妹マガジン「公務員 × Claude Code 実務活用ガイド (全 33 本)」では議事録・議会答弁・条例レビューなど統計以外の業務効率化を扱っています。
 
