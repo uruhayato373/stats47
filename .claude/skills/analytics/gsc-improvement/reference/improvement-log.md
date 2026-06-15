@@ -484,6 +484,37 @@ GSC（Google Search Console）の継続的追跡と改善施策の記録。
   - **[仮説]** Indexing API 送信で 30 日以内に一部 URL の coverageState が「送信して登録されました」に遷移する。検証期日: 2026-06-20
   - **注意**: `redirect-urls.csv` (W19) も含まれているが、リダイレクト先の最終 URL は別途 sitemap に含まれているため送信は無害 (dedup で再送 7 日制限あり)。
 
+### [COVERAGE-LOOP-01] GSC カバレッジ是正ループ構築 + 初回サイクル
+
+- **構築日**: 2026-06-16 / 正典: `docs/02_実装計画/12_GSCカバレッジ是正ループ.md` / スキル: `/gsc-coverage-remediation`
+- **背景**: GSC「ページ」未登録 ~17,900 件 (登録済 ~2,600)。実 URL で精査すると **大半は意図的削除・旧URL・設計ブロックで是正対象外**。「sitemap が参照しているのに 404/soft404/5xx = 生きてるのに誤登録」だけが真の actionable と判明。これを週次で順次是正する閉ループを構築。
+- **構築物**:
+  - `ingest-gsc-export.py` — GSC UI export (cp932 zip) を正規化 → `coverage-drilldown/<週>/<category>-drilldown.csv` + `category-totals.json` + `coverage-trend.csv`
+  - `build-coverage-queue.mjs` — actionable URL を本番 HTTP 実測 (Googlebot UA) → A/B 分類 → SSOT `.claude/state/gsc/coverage-remediation-queue.json` (状態保持) + `LATEST.md` + `coverage-totals-history.csv` + curated `coverage-live-resubmit-urls.csv`
+  - `/gsc-coverage-remediation` skill — 取り込み→ビルド→content-check を gsc-analyst 委譲→記録→経過観測
+  - **命名規約**: 生 drilldown は `-drilldown.csv` (auto-resubmit が拾わない)。live だけ curated `-urls.csv` に出す → INDEXING-AUTO-01 の「死んだ404を送信して quota 浪費」を構造的に回避 (上記 redirect-urls.csv 注意の再発防止)。
+- **初回サイクル実測 (2026-06-16, week 2026-W25)**:
+  - GSC 総件数: 404=8,378 / crawled-not-indexed=2,937 / robots=2,651 / noindex=1,434 / redirect=1,277 / soft404=383 / 5xx=200
+  - 本番実測で actionable 追跡 1,583 URL → 要対応 **190 件**: resubmit 85 (404/5xx→現在200・例 `ranking/income-per-capita`/`birthrate-total`) / content-check 97 (soft404→現在200) / fix-5xx 1 (`/opengraph-image?…` 500) / verify-intent 7 (旧内部パス `/tmp/*.json`・`/.local/d1` 等、404維持が正)
+  - curated 再送信 CSV 85 URL 出力済 (`coverage-drilldown/2026-W25/coverage-live-resubmit-urls.csv`) → `gsc-auto-resubmit-daily.yml` が次回拾う
+- **想定効果**: resubmit 85 件の indexed 化 + soft404 97 件のうち補強分。根拠: 全件 200 を本番実測済 (生存確認)。トレンドは登録済 1,371(5/05)→2,604(6/12) 回復・未登録 20,239(6/05)→17,893(6/12) 減少 (出典: GSC「ページ」推移 CSV `coverage-trend.csv`)
+- **検証コマンド**: `python3 .claude/scripts/gsc/ingest-gsc-export.py && node .claude/scripts/gsc/build-coverage-queue.mjs` (次週 export 後) → `coverage-totals-history.csv` で 404/soft404 件数減・登録済増を確認 / 個別は `node .claude/scripts/gsc/url-inspection-daily.cjs --limit 50`
+- **判定**: pending [構築完了・初回キュー生成済。effect は次週 export 後の件数差 + resubmit URL の coverageState 遷移を実測してから。検証期日: 2026-06-23]
+- **未確定 / 仮説**:
+  - **[仮説]** resubmit 85 件は既に 200 を返す生存ページなので、Indexing API 送信で 1-2 週内に coverageState が「送信して登録されました」へ遷移する。検証期日: 2026-06-23、`url-inspection-daily.cjs` で確認。期日後に遷移ゼロなら sitemap 未掲載を疑い `KNOWN_RANKING_KEYS`/sitemap 整合を確認 (`project_ranking_publish_pipeline_gap`)。
+  - **[仮説]** soft404 97 件の一部は観測値が薄い (1年のみ等)。content-check (gsc-analyst) で R2 観測値の年数を確認し、thin なら補強 or noindex、十分なら resubmit 格上げ。
+
+- **2026-06-16 content-check 実行結果 (soft404→現在200 の 97 件を gsc-analyst 2体で実データ判定)**:
+  - **resubmit 6** (データ完備=Google の誤判定 → curated CSV に格上げ、85→91): `themes/labor-wages` (client-rendered chart で JS 未クロール) + ranking 5 (`other-charges-consumption-expenditure` 47pref/18yr・`nursery-teacher-annual-income` 47pref/13yr・`public-health-nurse-annual-income`・`high-school-teacher-annual-income` 各47pref/3yr・`barber-beautician-annual-income` 42pref/3yr、全て ai-content あり)
+  - **deactivate 32** (★真の修正対象): `university-advancement`/`electricity-consumption`/`agricultural-output-city`/`ssdse-*` 系等 **32 ranking が 200 を返すのに `values.json` 404 = データ無しの空ページ**。`packages/data-configs/src/metrics/<key>.ts` に config も無く、`KNOWN_RANKING_KEYS` に残った orphan が空シェルを 200 描画している (`project_ranking_publish_pipeline_gap` の逆パターン)。→ KNOWN/sitemap から除去し 404/410 化 or noindex すべき (resubmit は禁物=空ページを送信してしまう)
+  - **noindex 13**: city ページ 7 (`/areas/{pref}/cities/{city}` SSR本文 ~92字の空テンプレ) + `/search` 1 + 未公開 blog 5 (`migration-destination-ranking-factors` 等、200 で本文0=公開されたことがない) → robots noindex or 正しく 410
+  - **enrich 46**: area×category 45 (`/areas/{pref}/labor-wages` 等、本文6870字が全県一致=全国チャート流用で県名のみ差。Google の near-duplicate 判定は正しい→県別データ補強まで indexing 不適) + 未公開だが md ありの blog 1 (`medical-access-regional-gap`)
+  - **判定**: content-check 完了。verdict は SSOT (`coverage-remediation-queue.json` の `content_verdict`/`content_signal`) に永続化済 (build の HTTP 再分類で上書きされない)。resubmit 6 は次回 CI で送信。deactivate/noindex/enrich はコード/config 変更が要るため follow-up (下記)。
+- **follow-up (COVERAGE-LOOP-01 から派生)**:
+  1. **deactivate 32 → COVERAGE-DEACT-01 実装済 (2026-06-16)**: 根本原因は **stale ISR prerender** — 本 OpenNext 構成は revalidate が効かず、過去デプロイ時の prerender 200 が再デプロイまで配信される (`feedback_home_pure_ssg_r2_empty`、`x-nextjs-cache: STALE` で確認)。32 本は現在 config も R2 (all.json 2169/item.json/values.json) も無いのに stale 200 を返していた。→ `apps/web/src/config/gone-ranking-keys.ts` に 32 本追加 (middleware:72 `isGone`→410 で stale ページより前段で短絡)。KNOWN(2121)/sitemap には元々不在のため変更不要。GONE∩KNOWN=0 検証済・url-policy test 13/13 pass。**次デプロイで有効化** → 本番 410 を Googlebot UA で実測したら queue を done に。queue: content_verdict=deactivate / wave 2026-06-16-coverage-deact / status in-progress。
+  2. **noindex 13** (未着手): city/search/未公開blog を noindex or 410。
+  3. **enrich 46** (未着手): area×category の県別データ化 (全国テンプレ流用の解消)。情報設計 `docs/01_技術設計/07_情報設計.md` の area ページ責務と併せて判断。
+
 ### [PHASE-9-FOLLOWUP] Cloudflare token 集約 + Smoke Test cascade fix
 
 - **対応日**: 2026-04-26 / コミット: `e97b6db7`

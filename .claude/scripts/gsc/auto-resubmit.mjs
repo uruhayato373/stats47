@@ -83,10 +83,18 @@ function findAllCsvs(dir) {
       for (const file of fs.readdirSync(subDir)) {
         if (!file.endsWith(".csv")) continue;
         if (file === "indexed-submitted-urls.csv") continue;
+        // GSC UI export の生 drilldown (死んだ404/redirect/robots を含む) は送信対象にしない。
+        // build-coverage-queue.mjs が本番実測で live を選別した curated `coverage-live-resubmit-urls.csv`
+        // (= -urls.csv) だけを拾う。生は `-drilldown.csv`、推移は `coverage-trend.csv`。
+        // 正典: docs/02_実装計画/12_GSCカバレッジ是正ループ.md
+        if (file.endsWith("-drilldown.csv")) continue;
+        if (file === "coverage-trend.csv") continue;
         paths.push(path.join(subDir, file));
       }
     } else if (entry.isFile() && entry.name.endsWith(".csv")) {
       if (entry.name === "history.csv") continue;
+      if (entry.name.endsWith("-drilldown.csv")) continue;
+      if (entry.name === "coverage-trend.csv") continue;
       paths.push(path.join(dir, entry.name));
     }
   }
