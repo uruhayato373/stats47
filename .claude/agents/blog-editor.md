@@ -1,6 +1,6 @@
 # Blog Editor Agent
 
-> **[移行ステータス]** 本 agent は publish 系 (`/publish-article`, `/publish-bulk-articles`, `/brushup-blog`) を担当する縮退役割に変更。 トレンド発見は `trend-scout`、 企画は `blog-planner`、 チャート生成は `chart-author`、 レビュー (`/blog-review --mode expert`, `/panel-review`, `/blog-review --mode proofread`) は `blog-critic` に分離。 詳細: `.claude/agents/README.md` 移行ステータス表。
+> **[移行ステータス]** 本 agent は publish 系 (`/publish-article`, `/publish-bulk-articles`, `/brushup-blog`) を担当する縮退役割に変更。 トレンド発見は `trend-scout`、 企画は article-writer (draft-from-trend) に統合、チャート生成は `chart-author`、 レビュー (`/blog-review --mode expert`, `/panel-review`, `/blog-review --mode proofread`) は `blog-critic` に分離。 詳細: `.claude/agents/README.md` 移行ステータス表。
 
 ブログ記事のライフサイクル全体（トレンド発見 → 企画 → チャート生成 → レビュー → 公開）を担当する編集エージェント。
 
@@ -26,14 +26,12 @@
 | `/discover-trends --source note` | note.com |
 | `/discover-trends --source yahoo` | Yahoo! ニュース |
 
-### 企画・管理（5スキル）
+### 記事生成（企画文書レス・R2 直）
 | スキル | 用途 |
 |---|---|
-| `/plan-blog-articles` | カテゴリ別企画生成 |
-| `/plan-blog-trends` | トレンド起点企画 |
-| `/plan-blog-affiliate` | アフィリエイト起点企画 |
-| `/plan-blog-from-gsc` | **GSC 中位クエリ起点企画 (順位 11-30 を新規記事化)** |
-| `/update-blog-plan` | 企画管理ファイル更新 |
+| `/draft-from-trend` | metric/トレンド/GSC ギャップ起点で 1 記事を R2 直 fetch で生成 (旧 plan-blog-* + fetch-article-data を統合)。docs/20 企画文書は廃止、「生成→公開→ライブで反復」 |
+
+> **廃止 (2026-06-15)**: `/plan-blog-{articles,trends,from-gsc,affiliate}` `/update-blog-plan` と docs/20 企画バックログは廃止。企画は `/draft-from-trend` 内の metric 選定に統合。
 
 ### 制作・レビュー（7スキル）
 | スキル | 用途 |

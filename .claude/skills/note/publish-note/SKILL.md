@@ -16,16 +16,13 @@ browser-use CLI（Chrome プロファイル経由）で note.com エディタを
 
 ## 記事ディレクトリの運用ルール
 
-| 状態 | 置き場所 |
-|---|---|
-| 制作中（ヴァーティカルの全記事が公開完了していない） | `docs/31_note記事原稿/<vertical>/<slug>/` |
-| 公開完了（ヴァーティカルの全記事が公開済み） | `docs/32_note公開済み/<vertical>/<slug>/` |
+**記事ソースは `docs/31_note記事原稿/` で単一管理する**（下書き〜公開済みまで同じ場所。2026-06-15 に旧 `32_note公開済み/` を統合し、ヴァーティカル単位の物理移動は廃止）。置き場所: `docs/31_note記事原稿/<vertical>/<slug>/` または `docs/31_note記事原稿/<slug>/`。
 
-**移動はヴァーティカル単位で行う。** あるヴァーティカルの全記事を公開し終えたら、`docs/31_note記事原稿/<vertical>/` フォルダごと `docs/32_note公開済み/<vertical>/` へ移動する。記事間の相対リンク（`../<slug>/draft.md`）を生かしたままにするため、**記事単位では移動しない**。個別記事の公開状況は `.claude/state/note-published-urls.json` で管理する。Phase 0 は両ディレクトリを検索するため、移動後も `/publish-note --update` の参照は正常に動作する。
+- **公開しても移動しない。** 記事間の相対リンク（`../<slug>/...`）を公開後も生かすため。
+- **公開状態の真実源**: 各記事 frontmatter `status: draft | published` + slug→URL は `.claude/state/note-published-urls.json`（公開のたび追記）。ディレクトリ位置で状態を表さない。
+- 旧ルール（公開後 `.local/r2/note/` へ移動）は廃止。note 記事は note.com がホストするため **R2 は配信にも保管にも使わない**。docs/ は git 管理なので版管理・バックアップ・差分は自動で確保される。
 
-旧ルール（公開後 `.local/r2/note/` へ移動）は廃止。note 記事は note.com がホストするため R2 は配信にも保管にも使わない。docs/ は git 管理されるので版管理・バックアップは自動で確保される。
-
-**公開済み（`32_note公開済み/`）の画像**: 容量節約のため `draft.md` + `*.svg` のみ保管し、`*.png` は持たない（SVG から再生成できる派生物のため）。公開済み記事を `--update` するときは、本文をペーストする前に `.claude/scripts/note/regenerate-svg-png.sh docs/32_note公開済み/<vertical>` で PNG を再生成してからアップロードする。SVG ソースを持たない旧記事は PNG が保管されているため再生成不要。
+**画像**: 容量を詰めたい公開済み記事は `*.svg` のみ残し `*.png`（SVG からの派生物）を削除してよい。`--update` 時は本文ペースト前に `.claude/scripts/note/regenerate-svg-png.sh docs/31_note記事原稿/<vertical or slug>` で PNG を再生成してからアップロードする。SVG ソースを持たない旧記事は PNG が唯一のソースなので保管・再生成不要。
 
 ## 引数（バッチ対応）
 
@@ -53,7 +50,7 @@ browser-use CLI（Chrome プロファイル経由）で note.com エディタを
 - 対象 slug が `.claude/state/note-published-urls.json` の `articles` に無ければ
   「未公開のため更新不可」で中断
 - 本文と本文中画像のみ差し替える。アイキャッチ・ハッシュタグ・価格は触らない
-- 有料記事の更新は有料エリア境界の再設定が絡むため半自動（要ユーザー告知）
+- 有料記事の更新は有料エリア境界の再設定が絡む。Phase 7-Boundary で境界を自動設定するが、誤露出防止のため**最終投稿は screenshot 確認後に人間が確定**する（要ユーザー告知）
 
 ## 投稿先アカウント（最重要）
 
@@ -67,7 +64,7 @@ browser-use CLI（Chrome プロファイル経由）で note.com エディタを
 ## 前提条件
 
 1. browser-use CLI がインストール済み
-2. 記事ファイルが存在する: `docs/31_note記事原稿/<vertical>/<slug>/{note.md,draft.md}`（制作中）または `docs/32_note公開済み/<vertical>/<slug>/{note.md,draft.md}`（公開完了ヴァーティカル）
+2. 記事ファイルが存在する: `docs/31_note記事原稿/<vertical>/<slug>/draft.md` または `docs/31_note記事原稿/<slug>/draft.md`（本文ファイル名は `draft.md` に統一。下書き・公開済みとも同じ場所で単一管理）
 3. Chrome **Profile 5** で `note.com/stats47` にログイン済み
 4. **有料記事の場合**: frontmatter に `is_paid: true` と `price_jpy: <数値>` を必ず記載。本文には有料境界の目印として `ここから先は有料部分:` 行を入れる（Phase 0 が free/paid に分割するために必要）
 5. **予約投稿**: note プレミアム加入アカウントでのみ可能（通常アカウントでは「日時の設定」が押せない、2026-05-18 確認）
@@ -127,10 +124,10 @@ end tell' 2>/dev/null || true
   Phase 1: ブラウザ起動 → ★アカウント照合ゲート★ → エディタ表示
   Phase 2: アイキャッチ画像（※必ず本文入力前に実行）
   Phase 3: タイトル入力
-  Phase 4: 本文入力（一括 ClipboardEvent paste、URL は plain text）
+  Phase 4: 本文入力（一括 ClipboardEvent paste）→ Phase 4-3: URL カード化（自動）
   Phase 5: 挿絵の挿入（目次経由、画像が揃っている場合）
   Phase 6: 下書き保存
-  Phase 7: 公開設定（タグ・予約投稿）
+  Phase 7: 公開設定（有料価格→有料境界→タグ→予約/即時。有料は最終投稿のみ手動確定）
   Phase 8: 確認スクリーンショット
 → 全記事完了後にブラウザを閉じる + 必須クリーンアップ（pkill daemon）
 ```
@@ -168,22 +165,24 @@ browser-use --headed --profile "Profile 5" state 2>&1 > /tmp/note-acct.txt
 詳細手順は **[references/editor-operations.md](references/editor-operations.md)** を参照。
 
 主なポイント:
-- **Phase 0**: Node.js スクリプトで note.md / draft.md を読み込み、frontmatter から `title` / `is_paid` / `price_jpy` 抽出、本文を「ここから先は有料部分:」行で free/paid 分割、セグメント分割（URL vs テキスト）して `/tmp/note-data-<slug>.json` に出力
+- **Phase 0**: Node.js スクリプトで draft.md を読み込み、frontmatter から `title` / `is_paid` / `price_jpy` 抽出、本文を「ここから先は有料部分:」行で free/paid 分割、セグメント分割（URL vs テキスト）して `/tmp/note-data-<slug>.json` に出力
 - **Phase 0 ガード（マガジン URL 未注入チェック）**: 本文に未注入プレースホルダー `{{MAGAZINE_URL}}` が残っていたら、その記事は**公開せず中断**する。回遊フッタの `{{MAGAZINE_URL}}` は公開前に `inject-magazine-url.cjs` で実 URL に置換しておく必要がある（未置換のまま公開するとプレースホルダー文字列がそのまま記事に出る）。バッチ中の 1 記事が該当した場合、その記事だけスキップし他は続行してよい
 - **Phase 2**: アイキャッチは**必ず本文入力前**に実行（本文入力後はスクロール位置がずれてボタン検出に失敗する）
-- **Phase 4**: 全セグメントを 1 つの文字列に連結し **1 回だけ** ClipboardEvent paste（`type` は markdown 変換しない。連続 paste 不可）。本文は `window.__nb` に**チャンク分割注入**してから paste 発火する（一括 eval は大きい本文で daemon ペイロード上限に当たりタイムアウト）。URL は plain text のまま貼られる（カード化は手動）
+- **Phase 4**: 全セグメントを 1 つの文字列に連結し **1 回だけ** ClipboardEvent paste（`type` は markdown 変換しない。連続 paste 不可）。本文は `window.__nb` に**チャンク分割注入**してから paste 発火する（一括 eval は大きい本文で daemon ペイロード上限に当たりタイムアウト）。
+- **Phase 4-3（URL カード化・自動）**: paste 後に plain text の URL 行を OGP リンクカードへ自動変換する。各 URL の text node を eval(Selection API) で発見 → 行末にキャレット → 実 Enter キー送出 → 4 秒待機（既知の手動レシピを自動再現）。詳細・フォールバックは [references/editor-operations.md](references/editor-operations.md) §4-3。**初回 live で 1 記事のカード化を検証**（DOM 変更時はカード要素セレクタを更新）
 - **Phase 5**: 目次からセクションにジャンプし、見出し直後にメニューから画像挿入
 
 ### Phase 7: 公開設定（有料設定・タグ・予約投稿）
 
 詳細手順は **[references/scheduling.md](references/scheduling.md)** を参照。
 
-実行順序: 公開に進む → **Phase 7-Pricing**（有料時のみ）→ Phase 7-Tags（ハッシュタグ）→ Phase 7-Schedule（予約 or 即時）
+実行順序: 公開に進む → **Phase 7-Pricing**（有料時のみ）→ **Phase 7-Boundary**（有料時のみ）→ Phase 7-Tags（ハッシュタグ）→ Phase 7-Schedule（予約 or 即時）
 
 主なポイント:
 - **Phase 7-Pricing**: `is_paid=true` + `price_jpy>0` のときだけ実行。有料ラジオをクリック → Shadow DOM 内 `<input id=price>` に JS で価格を上書き（`type` 不可: 初期値 300 と連結される）
-- 有料記事は最後のボタン label が「投稿する」→「有料エリア設定」に変化。**有料エリア境界選択画面は本検証では未到達 → 半自動（価格までは自動、境界設定以降は手動）が当面の運用**
-- 「公開に進む」→ ハッシュタグ入力 → 日時設定 → 予約投稿
+- **Phase 7-Boundary（有料境界・自動・2026-06-16 実機確定）**: 「有料エリア設定」ボタン → 境界設定画面で **`segmentsPaid[0]` の先頭見出しを錨**に有料ラインを自動設定。✅ **境界画面 DOM は確定済（update 11 本 + 新規 2 本連続成功）**。⚠️ **誤露出防止で最終「投稿/更新」前に境界を screenshot で目視確認**してから押す（エージェントが Read で screenshot 検証後に押下して可）。詳細は [references/scheduling.md](references/scheduling.md) Phase 7-Boundary
+- 「公開に進む」→ ハッシュタグ入力（**1 個ずつ click→type→Enter**。まとめて type すると combobox の value に連結され失敗）→ マガジン追加 → 日時設定 → 投稿
+- ★**エディタ操作の実体は関数ライブラリ `.claude/scripts/note/editor-helpers.sh`**（`source` して `process_article`（update）/ `new_post_cover_title`+`ins_img`+`new_post_tags`+`new_post_magazine`+`paid_setline`（新規）/ `do_update`）。手書きせずこれを使う。詳細は [references/editor-operations.md](references/editor-operations.md)「実機検証済 update バッチ運用メモ」
 - 予約日時が指定されていない場合でも Phase 7 で**即時公開**が可能（「今すぐ公開」ボタンをクリック）。日時設定をスキップして直接「今すぐ公開」を選ぶ
 - 日時も即時公開も有料設定も不要な場合（下書き保存のみ）は Phase 7 全体をスキップ
 

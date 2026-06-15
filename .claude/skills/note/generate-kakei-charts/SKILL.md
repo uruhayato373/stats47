@@ -1,6 +1,6 @@
 ---
 name: generate-kakei-charts
-description: a-kakei 記事（都道府県別家計調査）用 SVG チャートを chart-data.json から一括生成し PNG 変換・note.md 挿入まで行う。Use when user says "家計チャート", "kakei チャート". 大分類比率 + 特徴品目の横棒グラフ.
+description: a-kakei 記事（都道府県別家計調査）用 SVG チャートを chart-data.json から一括生成し PNG 変換・draft.md 挿入まで行う。Use when user says "家計チャート", "kakei チャート". 大分類比率 + 特徴品目の横棒グラフ.
 disable-model-invocation: true
 argument-hint: <slug> or --all
 primary_agent: chart-author
@@ -44,7 +44,7 @@ for d in docs/31_note記事原稿/a-kakei-*/images; do
 done
 ```
 
-### Phase 3: note.md に画像参照を挿入
+### Phase 3: draft.md に画像参照を挿入
 
 「消費支出の全体像」セクションの末尾（次の `##` 見出しの直前）に以下を挿入する。
 
@@ -66,14 +66,14 @@ done
 
 - SVG が 2 枚生成されていること
 - PNG が 2 枚生成されていること（density 288）
-- note.md に画像参照が挿入されていること
+- draft.md に画像参照が挿入されていること
 
 ## 出力ディレクトリ
 
 ```
 docs/31_note記事原稿/<slug>/
 ├── chart-data.json          ← 既存（入力）
-├── note.md                  ← 画像参照を追記
+├── draft.md                  ← 画像参照を追記
 └── images/
     ├── category-ratio.svg
     ├── category-ratio.png

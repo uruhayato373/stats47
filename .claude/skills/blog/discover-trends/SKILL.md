@@ -12,7 +12,7 @@ co_agents: [theme-designer, blog-editor, data-ingester]
 
 - トレンド起点でタイムリーな記事テーマを発見したいとき
 - 複数ソースで同時に話題になっているテーマ（クロスソースヒット）を探したいとき
-- `/plan-blog-articles`（カテゴリ起点）と補完的に使う
+- `/draft-from-trend`（記事化）と補完的に使う
 
 ## 引数
 
@@ -241,7 +241,7 @@ node .claude/scripts/notebooklm-cross-query.mjs --json \
    - データ取得済 ∧ 白書整合（or 有意な逆説）∧ 切り口に出典付与 → **成功（昇格）**
    - 2 周到達 / `/search-estat` 該当なし / e-Stat 取得失敗 → **離脱**（理由を記録、★☆☆ のまま）
 
-4. ループ結果を Phase 5 候補に反映。昇格した候補は「次のアクション」の `/fetch-article-data` を **取得済データ参照**に置き換える。
+4. ループ結果を Phase 5 候補に反映。昇格した候補は「次のアクション」の `fetch-ranking-data-r2.mjs` を **取得済データ参照**に置き換える。
 
 ### Phase 5: 候補生成
 
@@ -280,7 +280,7 @@ node .claude/scripts/notebooklm-cross-query.mjs --json \
 
 ### 次のアクション
 
-- [ ] `/fetch-article-data` でデータ取得
+- [ ] `fetch-ranking-data-r2.mjs` でデータ取得
 - [ ] `/generate-article-charts` でチャート生成
 - [ ] 記事執筆（白書の切り口がある場合は `<data-source>` で出典明記）
 ```
@@ -348,9 +348,9 @@ node .claude/scripts/notebooklm-cross-query.mjs --json \
 
 ## 関連スキル
 
-- `/plan-blog-articles` — カテゴリ起点の記事企画（本スキルと補完関係）
+- `/draft-from-trend` — metric 起点の記事化（本スキルと補完関係）
 - `/notebooklm-research` — 白書 NotebookLM クエリ（本スキルは**企画段階**で白書を当てる、`/notebooklm-research` は**公開済記事の深掘り補強**。同じラッパー `notebooklm-cross-query.mjs` を共用）
-- `/fetch-article-data` — 候補確定後のデータ一括取得
+- `fetch-ranking-data-r2.mjs` — 候補確定後のデータ一括取得
 - `/generate-article-charts` — 記事用チャート SVG 生成
 - `/search-estat` — `--deep` ループで白書アングルに合う統計表を探索
 - `/fetch-estat-data` — 新規データの e-Stat API 取得（`--deep` ループのデータ補完）

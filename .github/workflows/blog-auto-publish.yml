@@ -38,7 +38,7 @@ on:
       - ".github/workflows/blog-auto-publish.yml"
 
 permissions:
-  contents: read
+  contents: write # 公開後に docs/21 ドラフトを自動削除 (ephemeral outbox) して commit-back するため
 
 concurrency:
   group: publish-blog # publish-blog.yml と同一 group で R2 書き込みを直列化
@@ -183,8 +183,35 @@ jobs:
           echo "purge: $URLS"
           npx tsx packages/r2-storage/src/scripts/purge-cache.ts --urls $URLS
 
+      # docs/21 は ephemeral outbox: 公開に成功した slug のドラフトを R2 反映後に削除し、
+      # commit-back する。これで docs/21 は常に空 (未公開ドラフトのみ) に保たれ、R2(正典)と
+      # ドリフトしない。[skip ci] で自己再発火を防止、pull --rebase で他 push との race を吸収。
+      - name: 🧹 Remove published drafts from docs/21 (ephemeral outbox)
+        if: ${{ steps.detect.outputs.slugs != '' && success() }}
+        run: |
+          REMOVED=""
+          for SLUG in $PUBLISHED; do
+            if [ -d "docs/21_ブログ記事原稿/$SLUG" ]; then
+              git rm -r -q "docs/21_ブログ記事原稿/$SLUG" && REMOVED="$REMOVED $SLUG"
+            fi
+          done
+          if git diff --cached --quiet; then
+            echo "削除対象なし (docs/21 に公開済みドラフトの取り残しなし)"; exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -q -m "chore(blog): remove published drafts from docs/21 outbox [skip ci] -${REMOVED}"
+          # 他 workflow の push と競合しても落ちないよう rebase してから push (最大3回)
+          for i in 1 2 3; do
+            if git pull --rebase --quiet origin develop && git push origin HEAD:develop; then
+              echo "✅ outbox cleanup pushed:${REMOVED}"; break
+            fi
+            echo "push retry $i (concurrent push?)"; sleep 3
+          done
+
       - name: 📝 Summary
         if: always()
         run: |
           echo "- ✅ 公開: ${PUBLISHED:-なし}" >> "$GITHUB_STEP_SUMMARY"
           echo "- ⏭️ ゲート未達でスキップ: ${SKIPPED:-なし}" >> "$GITHUB_STEP_SUMMARY"
+          echo "- 🧹 docs/21 outbox: 公開済みドラフトを削除済 (ephemeral)" >> "$GITHUB_STEP_SUMMARY"

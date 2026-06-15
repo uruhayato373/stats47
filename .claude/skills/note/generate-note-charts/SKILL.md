@@ -34,7 +34,7 @@ docs/31_note記事原稿/<slug>/images/
 
 ### Phase 1: チャート設計
 
-1. `note.md` を読み、どのセクションにどんなチャートが効果的か検討
+1. `draft.md` を読み、どのセクションにどんなチャートが効果的か検討
 2. ユーザーとチャート一覧を合意
 3. note 読者はスマホ閲覧が多いため **シンプルで一目でわかるチャート** を優先
 
@@ -111,7 +111,7 @@ node "${CLAUDE_SKILL_DIR}/scripts/svg-to-png.js" docs/31_note記事原稿/<slug>
 
 ### Phase 5: 記事への埋め込み
 
-`note.md` のチャート挿入位置にプレースホルダーを追加:
+`draft.md` のチャート挿入位置にプレースホルダーを追加:
 
 ```markdown
 <!-- 画像: chart-name.png -->

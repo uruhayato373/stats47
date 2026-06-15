@@ -3,6 +3,24 @@
 Blog エコシステム (article 生成 / brushup / factual-check / 効果計測) の **対応関係の真実源**。
 Phase A (2026-05-27) で `recursive-purring-planet.md` plan の一環として整備。
 
+## 0. 記事ライフサイクル (R2ファースト・企画文書レス / 2026-06-15 更新) ★
+
+ブログは **「生成 → 公開 → ライブで反復」** で回す。企画文書 (旧 `docs/20_ブログ記事企画`) は**廃止**。
+
+```
+metric 選定 (GSC ギャップ/トレンド/カテゴリ/ユーザー指示)
+  → fetch-ranking-data-r2.mjs (R2 app/stats/<key> 直 fetch → docs/21/<slug>/data/*.json)
+  → article.md 生成 (docs/21 = ephemeral outbox) + generate-article-charts.mjs
+  → factual-check + quality-gate + blog-critic(review.md PASS)
+  → published:true で develop push → blog-auto-publish.yml が R2 公開 + docs/21 ドラフトを自動削除
+  → 公開後はライブ (stats47.jp/blog/<slug>) で確認 → /brushup-blog (R2 取得→是正) で反復
+```
+
+- **記事の正典 (SSOT) は R2 `app/blog/<slug>`**。`docs/21_ブログ記事原稿` は ephemeral outbox (公開後 CI が自動 `git rm` → 常に空)。`.local/r2/app/blog/` は R2 のローカルミラー (brushup 作業域)。
+- **廃止 (2026-06-15)**: `docs/20_ブログ記事企画` 全体、`/plan-blog-{articles,trends,from-gsc,affiliate}` `/update-blog-plan` スキル、`blog-planner` agent、`fetch-article-data.mjs` (D1依存) / `generate-gsc-driven-plan.mjs` / `generate-brushup-queue.cjs` スクリプト。
+- **置換**: 企画 → `/draft-from-trend` の metric 選定に統合 / データ接地 → `fetch-ranking-data-r2.mjs` (R2直) / brushup キュー → `.claude/state/blog/remediation-queue.json` (`brushup-queue.md` は廃止)。
+- 新規記事の生成・公開はクラウド版でも完結する (git push → push トリガー CI が R2 反映。R2 直書きは CI 専用)。
+
 ## 1. data/*.json 統一 schema (Phase B で実装、ここでは規約のみ宣言)
 
 `.local/r2/app/blog/<slug>/data/*.json` の **統一 schema** (Phase B 完了後の状態):
@@ -78,7 +96,7 @@ YYYY-MM-DD-<method>[-<batch>]
 |---|---|---|
 | `/brushup-blog` | リライトの唯一エンジン。`--target priority` (キュー) / `--target article` (1 記事、CTR-reframe 既定。エキスパート視点追加は対話実行のみ NotebookLM) / `--target batch` (ユーザー指示時の一括、cron なし) | `.claude/scripts/blog/{select-brushup-candidates,quality-gate}.mjs`, `lint-article.cjs` |
 | `/publish-article` | draft → publish (factual gate あり) | `.claude/scripts/lib/article-factual-check.mjs` |
-| `/draft-from-trend` | trend → 新規 draft 生成 | `.claude/scripts/blog/{fetch-article-data,generate-article-charts}.mjs` |
+| `/draft-from-trend` | trend → 新規 draft 生成 | `.claude/scripts/blog/{fetch-ranking-data-r2,generate-article-charts}.mjs` |
 | `/publish-bulk-articles` | 複数記事の bulk publish | factual gate 共有 |
 | `measure-gsc-impact.mjs` (wave_id 駆動・2026-06-08〜) | due 到達 wave の before/after を週次 GSC で自動 diff → `improvement-log.md` の `## [BLOG-WAVE-<id>]` upsert。`fetch-metrics-weekly.yml` cron に配線済 (delta 提示まで・status 確定は weekly-review) | `measure-gsc-impact.mjs` |
 | `/analyze-winning-patterns` | 天井ループ: GSC実測×構造特徴で勝ち要因抽出 (順位交絡統制付き)。正典 `docs/02_実装計画/07_ブログ勝ちパターン学習.md` | `.claude/scripts/blog/analyze-winning-patterns.mjs` |

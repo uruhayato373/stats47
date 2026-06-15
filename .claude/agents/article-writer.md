@@ -22,7 +22,7 @@ description: 1 つの metric を受け取って統計記事 1 本を完成させ
 | R2 への公開 push / all.json 再生成 / 本番 URL 確認 | `publish-blog.yml` (CI、`gh workflow run`) |
 | OG 画像・サムネイル生成 | `publish-blog.yml` の generate-blog-thumbnails step (article.md frontmatter から自動導出) |
 | SVG チャート生成 | `/generate-article-charts` |
-| GSC データ集計・企画立案 | `/plan-blog-from-gsc` |
+| GSC データ集計・企画立案 | `/fetch-gsc-data` + `/draft-from-trend` |
 
 ## 起動方法
 
@@ -262,7 +262,7 @@ data ファイルを使った場合は `docs/21_ブログ記事原稿/<slug>/dat
 
 ## 関連
 
-- `/plan-blog-from-gsc` — GSC 起点の企画ドラフト生成 (本 agent の入力源)
+- `/fetch-gsc-data` + `/draft-from-trend` — GSC 起点の企画ドラフト生成 (本 agent の入力源)
 - `publish-blog.yml` (CI) — 本 agent の出力 (docs/21 ドラフト) を R2 に公開する cloud-first パイプライン
 - `.claude/rules/blog-quality-standards.md` — タイトル/本文の品質基準 (正典)
-- `.claude/skills/blog/plan-blog-articles/SKILL.md` — カテゴリ起点企画 (本 agent と相補)
+- `.claude/skills/blog/draft-from-trend/SKILL.md` — カテゴリ起点企画 (本 agent と相補)

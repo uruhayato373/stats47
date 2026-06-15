@@ -46,7 +46,7 @@ primary_agent: strategy-advisor
   SELECT domain, platform, status, COUNT(*) FROM sns_posts GROUP BY domain, platform, status;
   ```
 - .local/r2/blog/ 配下の記事数（公開済み / 下書き）
-- ブログ記事の未実行企画（`ls docs/20_ブログ記事企画/backlog/ docs/22_YouTube企画/backlog/ docs/30_note記事企画/backlog/ 2>/dev/null | head -20` 件数）
+- ブログ記事の未実行企画（`ls docs/22_YouTube企画/backlog/ docs/30_note記事企画/backlog/ 2>/dev/null | head -20` 件数）
 
 出力形式: 「投稿可能なコンテンツ数」「記事パイプラインの状態」「ボトルネック」
 ```

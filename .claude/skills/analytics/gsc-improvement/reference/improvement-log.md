@@ -13,32 +13,127 @@ GSC（Google Search Console）の継続的追跡と改善施策の記録。
 - **想定効果は必ず根拠を併記**（過去事例 / Google 公式ガイド / 計算式）
 - **実測値は取得コマンドへのリンク併記**
 
+## [BLOG-WAVE-2026-05-29-auto]
+
+- **status**: effect/pending (人間が 2-4 週連続観測で確定 / evidence-based-judgment.md)
+- **wave_id**: 2026-05-29-auto / **記事数**: 4
+- **remediated_at**: 2026-05-29 (週 2026-W22)
+- **before**: 2026-W21 → **after**: 2026-W24 (経過 2 週)
+- **計測日**: 2026-06-14 (自動: measure-gsc-impact.mjs)
+
+| slug | imp (before→after) | clicks | CTR | position |
+|---|---|---|---|---|
+| `agriculture-hokkaido-dominance` | 103→71 (-32) | 0→0 (+0) | 0.0%→0.0% (+0.00pp) | 9.3→11.5 (+2.2) |
+| `manufacturing-aichi-dominance` | 858→940 (+82) | 5→6 (+1) | 0.6%→0.6% (+0.06pp) | 8.7→9.2 (+0.5) |
+| `manufacturing-shipment-prefecture-ranking` | 159→92 (-67) | 0→2 (+2) | 0.0%→2.2% (+2.17pp) | 8.1→9.0 (+0.9) |
+| `sewerage-water-supply-gap` | 138→23 (-115) | 2→0 (-2) | 1.4%→0.0% (-1.45pp) | 9.9→9.7 (-0.1) |
+
+**wave 合計**: imp 1258→1126 (-132) / clicks 7→8 (+1) / CTR 0.56%→0.71% (+0.15pp)
+
+### 判定
+
+- **[実測]** clicks +1 / imp -132 (2026-W21→2026-W24, 4 記事)
+- **[判定] effect/pending** — 自動計測は delta 提示まで。最低 2-4 週連続で正方向なら weekly-review が effect/full|partial を確定する (evidence-based-judgment.md)
+- **検証コマンド**: `node .claude/scripts/blog/measure-gsc-impact.mjs --wave 2026-05-29-auto`
+
+## [BLOG-WAVE-2026-05-25-auto]
+
+- **status**: effect/pending (人間が 2-4 週連続観測で確定 / evidence-based-judgment.md)
+- **wave_id**: 2026-05-25-auto / **記事数**: 53
+- **remediated_at**: 2026-05-25 (週 2026-W22)
+- **before**: 2026-W21 → **after**: 2026-W24 (経過 2 週)
+- **計測日**: 2026-06-14 (自動: measure-gsc-impact.mjs)
+
+| slug | imp (before→after) | clicks | CTR | position |
+|---|---|---|---|---|
+| `aging-rate-akita-vs-okinawa` | 39→74 (+35) | 0→1 (+1) | 0.0%→1.4% (+1.35pp) | 11.2→9.5 (-1.8) |
+| `alcohol-prefecture-map` | 66→52 (-14) | 0→1 (+1) | 0.0%→1.9% (+1.92pp) | 7.0→7.7 (+0.6) |
+| `barber-beauty-salon-regional-gap` | 34→39 (+5) | 0→0 (+0) | 0.0%→0.0% (+0.00pp) | 7.9→8.3 (+0.4) |
+| `birth-death-gap-decline` | 51→20 (-31) | 0→0 (+0) | 0.0%→0.0% (+0.00pp) | 12.4→8.8 (-3.5) |
+| `bonito-catch-prefecture` | 231→291 (+60) | 4→7 (+3) | 1.7%→2.4% (+0.67pp) | 8.5→8.3 (-0.2) |
+| `brazilian-resident-population-prefecture-gap` | 18→44 (+26) | 0→0 (+0) | 0.0%→0.0% (+0.00pp) | 6.7→7.1 (+0.5) |
+| `child-height-regional-gap` | 2005→1159 (-846) | 14→8 (-6) | 0.7%→0.7% (-0.01pp) | 10.2→10.7 (+0.4) |
+| `commercial-land-price-trend` | 27→12 (-15) | 0→1 (+1) | 0.0%→8.3% (+8.33pp) | 6.8→5.6 (-1.2) |
+| `commercial-sales-productivity-gap` | 153→226 (+73) | 2→1 (-1) | 1.3%→0.4% (-0.86pp) | 7.7→8.1 (+0.5) |
+| `communication-cost-burden` | 37→12 (-25) | 1→0 (-1) | 2.7%→0.0% (-2.70pp) | 8.3→6.5 (-1.8) |
+| `consumer-price-regional-gap` | 216→196 (-20) | 0→1 (+1) | 0.0%→0.5% (+0.51pp) | 9.2→9.9 (+0.8) |
+| `cpi-change-regional-pattern` | 56→45 (-11) | 1→1 (+0) | 1.8%→2.2% (+0.44pp) | 7.7→8.0 (+0.3) |
+| `expenditure-structure-comparison` | 16→8 (-8) | 0→1 (+1) | 0.0%→12.5% (+12.50pp) | 9.4→6.1 (-3.3) |
+| `fertility-fiscal-nexus` | 25→2 (-23) | 0→0 (+0) | 0.0%→0.0% (+0.00pp) | 11.0→11.5 (+0.5) |
+| `fertility-rate-prefecture-gap` | 148→469 (+321) | 0→5 (+5) | 0.0%→1.1% (+1.07pp) | 11.5→12.3 (+0.8) |
+| `fiscal-health-50years-trend` | 25→13 (-12) | 0→0 (+0) | 0.0%→0.0% (+0.00pp) | 8.2→8.0 (-0.2) |
+| `fishery-catch-aquaculture-shift` | 133→263 (+130) | 0→1 (+1) | 0.0%→0.4% (+0.38pp) | 10.8→8.5 (-2.3) |
+| `fishery-species-prefecture-specialty` | 273→9 (-264) | 3→0 (-3) | 1.1%→0.0% (-1.10pp) | 8.1→8.0 (-0.1) |
+| `food-trio-prefecture-map` | 340→677 (+337) | 6→1 (-5) | 1.8%→0.1% (-1.62pp) | 7.6→8.4 (+0.8) |
+| `foreign-overnight-guests-prefecture-gap` | 34→267 (+233) | 0→0 (+0) | 0.0%→0.0% (+0.00pp) | 8.4→8.7 (+0.3) |
+| `habitable-area-land-use` | 754→1339 (+585) | 5→5 (+0) | 0.7%→0.4% (-0.29pp) | 8.1→9.1 (+1.0) |
+| `highschool-starting-salary-gap` | 390→281 (-109) | 7→4 (-3) | 1.8%→1.4% (-0.37pp) | 9.1→11.0 (+1.9) |
+| `household-income-tokyo-okinawa` | 25→8 (-17) | 0→0 (+0) | 0.0%→0.0% (+0.00pp) | 10.4→6.1 (-4.3) |
+| `household-spending-before-after-inflation` | 37→16 (-21) | 0→1 (+1) | 0.0%→6.3% (+6.25pp) | 6.2→5.6 (-0.6) |
+| `housing-cost-livability-trend` | 71→84 (+13) | 1→2 (+1) | 1.4%→2.4% (+0.97pp) | 7.7→7.6 (-0.1) |
+| `ict-digital-divide-composite-analysis` | 12→12 (+0) | 0→1 (+1) | 0.0%→8.3% (+8.33pp) | 8.5→7.2 (-1.3) |
+| `inflation-rate-prefecture-gap` | 82→57 (-25) | 1→1 (+0) | 1.2%→1.8% (+0.53pp) | 6.6→7.5 (+0.9) |
+| `konbu-consumption-prefecture-gap` | 34→47 (+13) | 0→0 (+0) | 0.0%→0.0% (+0.00pp) | 6.5→6.7 (+0.2) |
+| `local-tax-regional-gap` | 109→115 (+6) | 2→2 (+0) | 1.8%→1.7% (-0.10pp) | 7.1→10.7 (+3.6) |
+| `marriage-divorce-okinawa` | 50→44 (-6) | 0→1 (+1) | 0.0%→2.3% (+2.27pp) | 7.1→8.6 (+1.5) |
+| `marriage-unmarried-crisis` | 275→202 (-73) | 4→3 (-1) | 1.5%→1.5% (+0.03pp) | 9.2→9.6 (+0.4) |
+| `minimum-wage-1000yen-breakthrough` | 118→10 (-108) | 0→0 (+0) | 0.0%→0.0% (+0.00pp) | 12.1→12.4 (+0.3) |
+| `minimum-wage-gap-regional-economy` | 20→11 (-9) | 0→0 (+0) | 0.0%→0.0% (+0.00pp) | 7.8→7.9 (+0.1) |
+| `park-green-space-gap` | 334→405 (+71) | 4→2 (-2) | 1.2%→0.5% (-0.70pp) | 7.2→8.1 (+1.0) |
+| `pharmacy-count-prefecture-ranking` | 15→64 (+49) | 0→0 (+0) | 0.0%→0.0% (+0.00pp) | 8.7→9.4 (+0.7) |
+| `pollution-complaints-regional-map` | 62→19 (-43) | 1→1 (+0) | 1.6%→5.3% (+3.65pp) | 8.0→7.6 (-0.4) |
+| `population-density-urbanization` | 285→304 (+19) | 4→6 (+2) | 1.4%→2.0% (+0.57pp) | 8.7→8.1 (-0.6) |
+| `population-migration-tokyo-concentration` | 28→18 (-10) | 0→0 (+0) | 0.0%→0.0% (+0.00pp) | 9.2→8.6 (-0.6) |
+| `post-office-last-window` | 78→34 (-44) | 1→1 (+0) | 1.3%→2.9% (+1.66pp) | 6.5→8.3 (+1.8) |
+| `precipitation-snow-regional-gap` | 155→335 (+180) | 1→2 (+1) | 0.6%→0.6% (-0.05pp) | 12.5→10.9 (-1.6) |
+| `prefectural-height-male-female-gap` | 10→15 (+5) | 0→1 (+1) | 0.0%→6.7% (+6.67pp) | 8.5→8.4 (-0.1) |
+| `price-index-high-low-prefecture` | 1527→740 (-787) | 27→12 (-15) | 1.8%→1.6% (-0.15pp) | 8.8→10.2 (+1.5) |
+| `recycling-rate-gap` | 60→130 (+70) | 1→4 (+3) | 1.7%→3.1% (+1.41pp) | 7.8→7.1 (-0.6) |
+| `savings-rate-gap` | 20→13 (-7) | 0→0 (+0) | 0.0%→0.0% (+0.00pp) | 7.2→8.5 (+1.3) |
+| `school-nonattendance-pattern` | 32→36 (+4) | 0→0 (+0) | 0.0%→0.0% (+0.00pp) | 11.0→9.3 (-1.7) |
+| `sugar-consumption-prefecture-gap` | 19→93 (+74) | 0→1 (+1) | 0.0%→1.1% (+1.08pp) | 7.7→8.0 (+0.2) |
+| `sunshine-pacific-vs-nihonkai` | 146→472 (+326) | 0→8 (+8) | 0.0%→1.7% (+1.69pp) | 7.8→8.3 (+0.4) |
+| `temperature-extremes-map` | 2415→2749 (+334) | 36→24 (-12) | 1.5%→0.9% (-0.62pp) | 8.9→9.0 (+0.0) |
+| `truck-driver-2024-crisis` | 67→7 (-60) | 0→2 (+2) | 0.0%→28.6% (+28.57pp) | 5.8→9.3 (+3.5) |
+| `unemployment-structure` | 66→126 (+60) | 1→2 (+1) | 1.5%→1.6% (+0.07pp) | 6.9→7.1 (+0.2) |
+| `unemployment-tertiary-industry-link` | 13→18 (+5) | 0→0 (+0) | 0.0%→0.0% (+0.00pp) | 6.5→6.7 (+0.2) |
+| `wage-vs-living-cost` | 25→23 (-2) | 0→1 (+1) | 0.0%→4.3% (+4.35pp) | 6.9→7.8 (+1.0) |
+| `water-sewage-crisis` | 39→36 (-3) | 0→0 (+0) | 0.0%→0.0% (+0.00pp) | 10.8→11.1 (+0.3) |
+
+**wave 合計**: imp 11300→11741 (+441) / clicks 127→116 (-11) / CTR 1.12%→0.99% (-0.14pp)
+
+### 判定
+
+- **[実測]** clicks -11 / imp +441 (2026-W21→2026-W24, 53 記事)
+- **[判定] effect/pending** — 自動計測は delta 提示まで。最低 2-4 週連続で正方向なら weekly-review が effect/full|partial を確定する (evidence-based-judgment.md)
+- **検証コマンド**: `node .claude/scripts/blog/measure-gsc-impact.mjs --wave 2026-05-25-auto`
+
 ## [BLOG-WAVE-2026-05-23-manual]
 
 - **status**: effect/pending (人間が 2-4 週連続観測で確定 / evidence-based-judgment.md)
 - **wave_id**: 2026-05-23-manual / **記事数**: 10
 - **remediated_at**: 2026-05-23 (週 2026-W21)
-- **before**: 2026-W20 → **after**: 2026-W23 (経過 2 週)
-- **計測日**: 2026-06-08 (自動: measure-gsc-impact.mjs)
+- **before**: 2026-W20 → **after**: 2026-W24 (経過 3 週)
+- **計測日**: 2026-06-14 (自動: measure-gsc-impact.mjs)
 
 | slug | imp (before→after) | clicks | CTR | position |
 |---|---|---|---|---|
-| `child-height-regional-gap` | 1719→1830 (+111) | 13→13 (+0) | 0.8%→0.7% (-0.05pp) | 10.6→10.2 (-0.4) |
-| `consumer-price-regional-gap` | 250→242 (-8) | 1→0 (-1) | 0.4%→0.0% (-0.40pp) | 7.3→9.4 (+2.1) |
-| `fiscal-self-reliance-gap` | 583→774 (+191) | 16→23 (+7) | 2.7%→3.0% (+0.23pp) | 8.8→8.7 (-0.1) |
-| `fishery-species-prefecture-specialty` | 273→94 (-179) | 3→2 (-1) | 1.1%→2.1% (+1.03pp) | 8.1→7.8 (-0.2) |
-| `habitable-area-land-use` | 658→785 (+127) | 2→4 (+2) | 0.3%→0.5% (+0.21pp) | 8.1→9.0 (+0.8) |
-| `overnight-guests-inbound-recovery` | 383→181 (-202) | 1→2 (+1) | 0.3%→1.1% (+0.84pp) | 8.3→7.7 (-0.6) |
-| `park-green-space-gap` | 225→392 (+167) | 2→2 (+0) | 0.9%→0.5% (-0.38pp) | 7.5→7.3 (-0.1) |
-| `population-density-urbanization` | 259→426 (+167) | 4→7 (+3) | 1.5%→1.6% (+0.10pp) | 11.1→8.4 (-2.7) |
-| `price-index-high-low-prefecture` | 1403→988 (-415) | 26→20 (-6) | 1.9%→2.0% (+0.17pp) | 8.5→9.4 (+0.9) |
-| `temperature-extremes-map` | 1388→2725 (+1337) | 21→31 (+10) | 1.5%→1.1% (-0.38pp) | 9.1→9.1 (-0.0) |
+| `child-height-regional-gap` | 1719→1159 (-560) | 13→8 (-5) | 0.8%→0.7% (-0.07pp) | 10.6→10.7 (+0.1) |
+| `consumer-price-regional-gap` | 250→196 (-54) | 1→1 (+0) | 0.4%→0.5% (+0.11pp) | 7.3→9.9 (+2.6) |
+| `fiscal-self-reliance-gap` | 583→721 (+138) | 16→16 (+0) | 2.7%→2.2% (-0.53pp) | 8.8→8.6 (-0.3) |
+| `fishery-species-prefecture-specialty` | 273→9 (-264) | 3→0 (-3) | 1.1%→0.0% (-1.10pp) | 8.1→8.0 (-0.1) |
+| `habitable-area-land-use` | 658→1339 (+681) | 2→5 (+3) | 0.3%→0.4% (+0.07pp) | 8.1→9.1 (+0.9) |
+| `overnight-guests-inbound-recovery` | 383→125 (-258) | 1→3 (+2) | 0.3%→2.4% (+2.14pp) | 8.3→7.3 (-1.0) |
+| `park-green-space-gap` | 225→405 (+180) | 2→2 (+0) | 0.9%→0.5% (-0.40pp) | 7.5→8.1 (+0.7) |
+| `population-density-urbanization` | 259→304 (+45) | 4→6 (+2) | 1.5%→2.0% (+0.43pp) | 11.1→8.1 (-3.0) |
+| `price-index-high-low-prefecture` | 1403→740 (-663) | 26→12 (-14) | 1.9%→1.6% (-0.23pp) | 8.5→10.2 (+1.7) |
+| `temperature-extremes-map` | 1388→2749 (+1361) | 21→24 (+3) | 1.5%→0.9% (-0.64pp) | 9.1→9.0 (-0.2) |
 
-**wave 合計**: imp 7141→8437 (+1296) / clicks 89→104 (+15) / CTR 1.25%→1.23% (-0.01pp)
+**wave 合計**: imp 7141→7747 (+606) / clicks 89→77 (-12) / CTR 1.25%→0.99% (-0.25pp)
 
 ### 判定
 
-- **[実測]** clicks +15 / imp +1296 (2026-W20→2026-W23, 10 記事)
+- **[実測]** clicks -12 / imp +606 (2026-W20→2026-W24, 10 記事)
 - **[判定] effect/pending** — 自動計測は delta 提示まで。最低 2-4 週連続で正方向なら weekly-review が effect/full|partial を確定する (evidence-based-judgment.md)
 - **検証コマンド**: `node .claude/scripts/blog/measure-gsc-impact.mjs --wave 2026-05-23-manual`
 
@@ -388,6 +483,37 @@ GSC（Google Search Console）の継続的追跡と改善施策の記録。
 - **未確定 / 仮説**:
   - **[仮説]** Indexing API 送信で 30 日以内に一部 URL の coverageState が「送信して登録されました」に遷移する。検証期日: 2026-06-20
   - **注意**: `redirect-urls.csv` (W19) も含まれているが、リダイレクト先の最終 URL は別途 sitemap に含まれているため送信は無害 (dedup で再送 7 日制限あり)。
+
+### [COVERAGE-LOOP-01] GSC カバレッジ是正ループ構築 + 初回サイクル
+
+- **構築日**: 2026-06-16 / 正典: `docs/02_実装計画/12_GSCカバレッジ是正ループ.md` / スキル: `/gsc-coverage-remediation`
+- **背景**: GSC「ページ」未登録 ~17,900 件 (登録済 ~2,600)。実 URL で精査すると **大半は意図的削除・旧URL・設計ブロックで是正対象外**。「sitemap が参照しているのに 404/soft404/5xx = 生きてるのに誤登録」だけが真の actionable と判明。これを週次で順次是正する閉ループを構築。
+- **構築物**:
+  - `ingest-gsc-export.py` — GSC UI export (cp932 zip) を正規化 → `coverage-drilldown/<週>/<category>-drilldown.csv` + `category-totals.json` + `coverage-trend.csv`
+  - `build-coverage-queue.mjs` — actionable URL を本番 HTTP 実測 (Googlebot UA) → A/B 分類 → SSOT `.claude/state/gsc/coverage-remediation-queue.json` (状態保持) + `LATEST.md` + `coverage-totals-history.csv` + curated `coverage-live-resubmit-urls.csv`
+  - `/gsc-coverage-remediation` skill — 取り込み→ビルド→content-check を gsc-analyst 委譲→記録→経過観測
+  - **命名規約**: 生 drilldown は `-drilldown.csv` (auto-resubmit が拾わない)。live だけ curated `-urls.csv` に出す → INDEXING-AUTO-01 の「死んだ404を送信して quota 浪費」を構造的に回避 (上記 redirect-urls.csv 注意の再発防止)。
+- **初回サイクル実測 (2026-06-16, week 2026-W25)**:
+  - GSC 総件数: 404=8,378 / crawled-not-indexed=2,937 / robots=2,651 / noindex=1,434 / redirect=1,277 / soft404=383 / 5xx=200
+  - 本番実測で actionable 追跡 1,583 URL → 要対応 **190 件**: resubmit 85 (404/5xx→現在200・例 `ranking/income-per-capita`/`birthrate-total`) / content-check 97 (soft404→現在200) / fix-5xx 1 (`/opengraph-image?…` 500) / verify-intent 7 (旧内部パス `/tmp/*.json`・`/.local/d1` 等、404維持が正)
+  - curated 再送信 CSV 85 URL 出力済 (`coverage-drilldown/2026-W25/coverage-live-resubmit-urls.csv`) → `gsc-auto-resubmit-daily.yml` が次回拾う
+- **想定効果**: resubmit 85 件の indexed 化 + soft404 97 件のうち補強分。根拠: 全件 200 を本番実測済 (生存確認)。トレンドは登録済 1,371(5/05)→2,604(6/12) 回復・未登録 20,239(6/05)→17,893(6/12) 減少 (出典: GSC「ページ」推移 CSV `coverage-trend.csv`)
+- **検証コマンド**: `python3 .claude/scripts/gsc/ingest-gsc-export.py && node .claude/scripts/gsc/build-coverage-queue.mjs` (次週 export 後) → `coverage-totals-history.csv` で 404/soft404 件数減・登録済増を確認 / 個別は `node .claude/scripts/gsc/url-inspection-daily.cjs --limit 50`
+- **判定**: pending [構築完了・初回キュー生成済。effect は次週 export 後の件数差 + resubmit URL の coverageState 遷移を実測してから。検証期日: 2026-06-23]
+- **未確定 / 仮説**:
+  - **[仮説]** resubmit 85 件は既に 200 を返す生存ページなので、Indexing API 送信で 1-2 週内に coverageState が「送信して登録されました」へ遷移する。検証期日: 2026-06-23、`url-inspection-daily.cjs` で確認。期日後に遷移ゼロなら sitemap 未掲載を疑い `KNOWN_RANKING_KEYS`/sitemap 整合を確認 (`project_ranking_publish_pipeline_gap`)。
+  - **[仮説]** soft404 97 件の一部は観測値が薄い (1年のみ等)。content-check (gsc-analyst) で R2 観測値の年数を確認し、thin なら補強 or noindex、十分なら resubmit 格上げ。
+
+- **2026-06-16 content-check 実行結果 (soft404→現在200 の 97 件を gsc-analyst 2体で実データ判定)**:
+  - **resubmit 6** (データ完備=Google の誤判定 → curated CSV に格上げ、85→91): `themes/labor-wages` (client-rendered chart で JS 未クロール) + ranking 5 (`other-charges-consumption-expenditure` 47pref/18yr・`nursery-teacher-annual-income` 47pref/13yr・`public-health-nurse-annual-income`・`high-school-teacher-annual-income` 各47pref/3yr・`barber-beautician-annual-income` 42pref/3yr、全て ai-content あり)
+  - **deactivate 32** (★真の修正対象): `university-advancement`/`electricity-consumption`/`agricultural-output-city`/`ssdse-*` 系等 **32 ranking が 200 を返すのに `values.json` 404 = データ無しの空ページ**。`packages/data-configs/src/metrics/<key>.ts` に config も無く、`KNOWN_RANKING_KEYS` に残った orphan が空シェルを 200 描画している (`project_ranking_publish_pipeline_gap` の逆パターン)。→ KNOWN/sitemap から除去し 404/410 化 or noindex すべき (resubmit は禁物=空ページを送信してしまう)
+  - **noindex 13**: city ページ 7 (`/areas/{pref}/cities/{city}` SSR本文 ~92字の空テンプレ) + `/search` 1 + 未公開 blog 5 (`migration-destination-ranking-factors` 等、200 で本文0=公開されたことがない) → robots noindex or 正しく 410
+  - **enrich 46**: area×category 45 (`/areas/{pref}/labor-wages` 等、本文6870字が全県一致=全国チャート流用で県名のみ差。Google の near-duplicate 判定は正しい→県別データ補強まで indexing 不適) + 未公開だが md ありの blog 1 (`medical-access-regional-gap`)
+  - **判定**: content-check 完了。verdict は SSOT (`coverage-remediation-queue.json` の `content_verdict`/`content_signal`) に永続化済 (build の HTTP 再分類で上書きされない)。resubmit 6 は次回 CI で送信。deactivate/noindex/enrich はコード/config 変更が要るため follow-up (下記)。
+- **follow-up (COVERAGE-LOOP-01 から派生)**:
+  1. **deactivate 32 → COVERAGE-DEACT-01 実装済 (2026-06-16)**: 根本原因は **stale ISR prerender** — 本 OpenNext 構成は revalidate が効かず、過去デプロイ時の prerender 200 が再デプロイまで配信される (`feedback_home_pure_ssg_r2_empty`、`x-nextjs-cache: STALE` で確認)。32 本は現在 config も R2 (all.json 2169/item.json/values.json) も無いのに stale 200 を返していた。→ `apps/web/src/config/gone-ranking-keys.ts` に 32 本追加 (middleware:72 `isGone`→410 で stale ページより前段で短絡)。KNOWN(2121)/sitemap には元々不在のため変更不要。GONE∩KNOWN=0 検証済・url-policy test 13/13 pass。**次デプロイで有効化** → 本番 410 を Googlebot UA で実測したら queue を done に。queue: content_verdict=deactivate / wave 2026-06-16-coverage-deact / status in-progress。
+  2. **noindex 13** (未着手): city/search/未公開blog を noindex or 410。
+  3. **enrich 46** (未着手): area×category の県別データ化 (全国テンプレ流用の解消)。情報設計 `docs/01_技術設計/07_情報設計.md` の area ページ責務と併せて判断。
 
 ### [PHASE-9-FOLLOWUP] Cloudflare token 集約 + Smoke Test cascade fix
 

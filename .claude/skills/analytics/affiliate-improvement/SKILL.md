@@ -144,7 +144,7 @@ status 更新は排他的 writer の `improvement-triage` に委譲してもよ�
 このスキルは **分析と記録**が責務。実際の変更は専用スキルに委譲する:
 
 - 新規バナー / 在庫補充 → `/register-affiliate-banner` (SSOT 追記 → develop push で `publish-affiliate-ads.yml` 自動反映)
-- 収益直結記事の企画 → `/plan-blog-affiliate`
+- 収益直結記事の企画 → `/monetize-article`
 - ランキング等へのバナー枠追加 (レンダリング変更) → 別 PR。`.claude/rules/nextjs-ssg-preservation.md` 厳守 (SSG 崩さない)
 
 ## 関連ファイル

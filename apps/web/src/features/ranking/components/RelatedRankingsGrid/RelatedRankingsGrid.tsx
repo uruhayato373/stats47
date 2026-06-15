@@ -6,9 +6,10 @@ import {
   CardHeader,
   CardTitle,
 } from "@stats47/components/atoms/ui/card";
-import { readRankingItemsByCategoryFromR2 } from "@stats47/ranking/server";
 import { isOk, type AreaType } from "@stats47/types";
 import { ArrowRight, ListOrdered } from "lucide-react";
+
+import { readRankingItemsByCategory } from "@/features/ranking/lib/cached-category-items";
 
 interface RelatedRankingsGridProps {
   /** 現在表示中の rankingKey (除外用) */
@@ -38,7 +39,7 @@ export async function RelatedRankingsGrid({
 }: RelatedRankingsGridProps) {
   if (!categoryKey) return null;
 
-  const result = await readRankingItemsByCategoryFromR2(categoryKey);
+  const result = await readRankingItemsByCategory(categoryKey);
   if (!isOk(result)) return null;
 
   // 現在のランキングを除いた上位 limit 件

@@ -115,7 +115,7 @@
 **計測指標**: `gsc_impressions`（新規クエリ）、`ga4_engagedSessions`、ランキング / テーマへの遷移
 
 **アクション**:
-1. `/plan-blog-articles` でトピック企画
+1. `/draft-from-trend` でトピックを記事化
 2. `/panel-review` で方向性チェック
 3. 執筆 → `/proofread-article` → `/generate-article-charts`
 4. `/publish-article` でデプロイ → 21-28 日待機

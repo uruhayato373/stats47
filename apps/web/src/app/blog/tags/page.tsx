@@ -9,6 +9,8 @@ import {
     BreadcrumbSeparator,
 } from "@stats47/components/atoms/ui/breadcrumb";
 
+import { PageShell, PageHeader } from "@/components/layout";
+
 import { TagCloud } from "@/features/blog";
 import { listAllTagsWithCount } from "@/features/blog/server";
 
@@ -29,47 +31,40 @@ export default async function TagsIndexPage() {
     const tags = await listAllTagsWithCount().catch(() => []);
 
     return (
-        <>
-            <div className="container mx-auto px-4 pt-4">
-                <Breadcrumb>
-                    <BreadcrumbList>
-                        <BreadcrumbItem>
-                            <BreadcrumbLink asChild>
-                                <Link href="/">ホーム</Link>
-                            </BreadcrumbLink>
-                        </BreadcrumbItem>
-                        <BreadcrumbSeparator />
-                        <BreadcrumbItem>
-                            <BreadcrumbLink asChild>
-                                <Link href="/blog">ブログ</Link>
-                            </BreadcrumbLink>
-                        </BreadcrumbItem>
-                        <BreadcrumbSeparator />
-                        <BreadcrumbItem>
-                            <BreadcrumbPage>タグ一覧</BreadcrumbPage>
-                        </BreadcrumbItem>
-                    </BreadcrumbList>
-                </Breadcrumb>
-            </div>
+        <PageShell>
+            <Breadcrumb className="mb-4">
+                <BreadcrumbList>
+                    <BreadcrumbItem>
+                        <BreadcrumbLink asChild>
+                            <Link href="/">ホーム</Link>
+                        </BreadcrumbLink>
+                    </BreadcrumbItem>
+                    <BreadcrumbSeparator />
+                    <BreadcrumbItem>
+                        <BreadcrumbLink asChild>
+                            <Link href="/blog">ブログ</Link>
+                        </BreadcrumbLink>
+                    </BreadcrumbItem>
+                    <BreadcrumbSeparator />
+                    <BreadcrumbItem>
+                        <BreadcrumbPage>タグ一覧</BreadcrumbPage>
+                    </BreadcrumbItem>
+                </BreadcrumbList>
+            </Breadcrumb>
 
-            <div className="container mx-auto px-4 py-8">
-                <h1 className="mb-2 text-lg font-bold">タグ一覧</h1>
-                <p className="mb-8 text-muted-foreground">
-                    タグから記事を探す
+            <PageHeader title="タグ一覧" description="タグから記事を探す" />
+
+            {tags.length === 0 ? (
+                <p className="py-12 text-center text-muted-foreground">
+                    タグはまだありません
                 </p>
+            ) : (
+                <TagCloud tags={tags} />
+            )}
 
-                {tags.length === 0 ? (
-                    <p className="py-12 text-center text-muted-foreground">
-                        タグはまだありません
-                    </p>
-                ) : (
-                    <TagCloud tags={tags} />
-                )}
-
-                <div className="mt-8">
-                    <AdSenseAd format={CONTENT_FOOTER.format} slotId={CONTENT_FOOTER.slotId} />
-                </div>
+            <div className="mt-8">
+                <AdSenseAd format={CONTENT_FOOTER.format} slotId={CONTENT_FOOTER.slotId} />
             </div>
-        </>
+        </PageShell>
     );
 }

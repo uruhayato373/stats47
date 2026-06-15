@@ -13,13 +13,13 @@ import { getCategoryDescription } from "@stats47/data-configs";
 import {
   readRankingValuesFromR2,
   readTopRankingValuesBatchFromR2,
-  readRankingItemsByCategoryFromR2,
   readSurveysFromR2,
 } from "@stats47/ranking/server";
 import { isOk } from "@stats47/types";
 import { generateMiniTileSvg } from "@stats47/visualization/server";
 
 import { ThemeAwareImage } from "@/components/atoms/ThemeAwareImage";
+import { PageShell, PageHeader } from "@/components/layout";
 
 import { resolveAffiliateBanners } from "@/features/ads/server";
 import { listLatestArticles } from "@/features/blog/server";
@@ -31,10 +31,8 @@ import {
   isCaveatNote,
   type CategoryRankingListItem,
 } from "@/features/ranking";
+import { readRankingItemsByCategory } from "@/features/ranking/server";
 import {
-  HeroShell,
-  KpiGrid,
-  KpiTile,
   NativeAffiliateRow,
   SectionEyebrow,
   InfeedAd,
@@ -117,7 +115,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   try {
     const [catResult, rankingResult] = await Promise.all([
       findCategoryByKey(categoryKey),
-      readRankingItemsByCategoryFromR2(categoryKey),
+      readRankingItemsByCategory(categoryKey),
     ]);
     const category = isOk(catResult) ? catResult.data : null;
 
@@ -168,7 +166,7 @@ export default async function CategoryPage({ params }: PageProps) {
   const fallbackTags = CATEGORY_FALLBACK_TAGS[categoryKey] ?? [];
 
   const [rankingResult, latestArticles, surveysResult, nativeBanners] = await Promise.all([
-    readRankingItemsByCategoryFromR2(categoryKey),
+    readRankingItemsByCategory(categoryKey),
     listLatestArticles(4).catch(() => []),
     readSurveysFromR2().then((r) => isOk(r) ? r.data : []).catch(() => []),
     fallbackTags.length > 0
@@ -267,55 +265,71 @@ export default async function CategoryPage({ params }: PageProps) {
     notFound();
   }
 
+  const categoryDescription = getCategoryDescription(categoryKey);
+  const statsText = [
+    `全 ${rankingItems.length} ランキング`,
+    `${usingFallbackFeatured ? "主要" : "注目"} ${usingFallbackFeatured ? featuredRaw.length : featuredCount} 件`,
+    latestYear ? `最新 ${latestYear} 年` : null,
+    surveysResult.length > 0 ? `関連調査 ${surveysResult.length} 件` : null,
+  ]
+    .filter(Boolean)
+    .join(" ・ ");
+
+  const rightRail = (
+    <div className="flex flex-col gap-4">
+      {/* 新着記事 */}
+      {latestArticles.length > 0 && (
+        <div>
+          <h3 className="text-sm font-medium text-muted-foreground mb-2">新着記事</h3>
+          <div className="flex flex-col gap-2">
+            {latestArticles.map((article) => (
+              <Link
+                key={article.slug}
+                href={`/blog/${article.slug}`}
+                className="group block rounded-sm border border-border overflow-hidden hover:border-primary/50 transition-colors"
+              >
+                <div className="relative aspect-square w-full bg-muted overflow-hidden">
+                  <ThemeAwareImage
+                    lightSrc={`${r2Url}/app/blog/${article.slug}/thumbnail-light.webp`}
+                    darkSrc={`${r2Url}/app/blog/${article.slug}/thumbnail-dark.webp`}
+                    alt={article.title}
+                    fill
+                    sizes="256px"
+                    className="object-cover"
+                    loading="lazy"
+                  />
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* 広告 */}
+      <AdSenseAd
+        format={RANKING_PAGE_FOOTER.format}
+        slotId={RANKING_PAGE_FOOTER.slotId}
+      />
+
+      {/* 調査から探す */}
+      <SurveyCard surveys={surveysResult.map((s) => ({ id: s.id, name: s.name }))} />
+    </div>
+  );
+
   return (
-    <div className="container mx-auto px-4 py-4 text-foreground">
-      <div className="lg:grid lg:grid-cols-[minmax(0,1fr)_360px] lg:gap-8 lg:items-start">
-        {/* メインコンテンツ */}
-        <main className="min-w-0">
-          {/* Hero (D 暗色) — マスタープラン § 5.3 準拠 */}
-          <HeroShell variant="dark" className="mb-6">
-            <div className="grid grid-cols-1 gap-6 p-6 md:grid-cols-[1fr,360px] md:p-8">
-              <div className="min-w-0">
-                <p className="inline-flex rounded-full bg-white/15 px-2.5 py-0.5 text-[10.5px] font-bold uppercase tracking-widest text-white">
-                  カテゴリ
-                </p>
-                <h1 className="mt-2 text-2xl font-extrabold leading-tight text-white sm:text-3xl">
-                  {category.categoryName}
-                </h1>
-                <p className="mt-2 max-w-xl text-sm leading-relaxed text-white/85">
-                  {category.categoryName}分野の都道府県別ランキング {rankingItems.length} 件を、地図・グラフ・テーブルで比較できます。
-                </p>
-              </div>
-              <div>
-                <KpiGrid columns={2}>
-                  <KpiTile
-                    label="ランキング数"
-                    value={String(rankingItems.length)}
-                    unit="件"
-                    variant="dark"
-                  />
-                  <KpiTile
-                    label={usingFallbackFeatured ? "主要" : "注目"}
-                    value={String(usingFallbackFeatured ? featuredRaw.length : featuredCount)}
-                    unit="件"
-                    variant="dark"
-                  />
-                  <KpiTile
-                    label="最新データ"
-                    value={latestYear || "—"}
-                    unit={latestYear ? "年" : ""}
-                    variant="dark"
-                  />
-                  <KpiTile
-                    label="関連調査"
-                    value={String(surveysResult.length)}
-                    unit="件"
-                    variant="dark"
-                  />
-                </KpiGrid>
-              </div>
-            </div>
-          </HeroShell>
+    <PageShell rightRail={rightRail}>
+      <PageHeader
+        eyebrow="カテゴリ"
+        title={category.categoryName}
+        description={
+          categoryDescription ??
+          `${category.categoryName}分野の都道府県別ランキング ${rankingItems.length} 件を、地図・グラフ・テーブルで比較できます。`
+        }
+        stats={statsText}
+      />
+
+      {/* メインコンテンツ */}
+      <div className="min-w-0">
           {/* 注目ランキング */}
           {featuredItems.length > 0 && (
             <section className="mb-8">
@@ -406,59 +420,7 @@ export default async function CategoryPage({ params }: PageProps) {
               })}
             </div>
           </section>
-        </main>
-
-        {/* 右サイドバー（lg+、360px、independent scroll で全 widget 到達可能） */}
-        <aside className="hidden lg:flex lg:flex-col lg:gap-4 lg:sticky lg:top-20 lg:max-h-[calc(100vh-5.5rem)] lg:overflow-y-auto lg:pr-1">
-
-          <div className="flex flex-col gap-4">
-            {/* 新着記事 */}
-            {latestArticles.length > 0 && (
-              <div>
-                <h3 className="text-sm font-medium text-muted-foreground mb-2">新着記事</h3>
-                <div className="flex flex-col gap-2">
-                  {latestArticles.map((article) => (
-                    <Link
-                      key={article.slug}
-                      href={`/blog/${article.slug}`}
-                      className="group block rounded-sm border border-border overflow-hidden hover:border-primary/50 transition-colors"
-                    >
-                      <div className="relative aspect-square w-full bg-muted overflow-hidden">
-                        <ThemeAwareImage
-                          lightSrc={`${r2Url}/app/blog/${article.slug}/thumbnail-light.webp`}
-                          darkSrc={`${r2Url}/app/blog/${article.slug}/thumbnail-dark.webp`}
-                          alt={article.title}
-                          fill
-                          sizes="256px"
-                          className="object-cover"
-                          loading="lazy"
-                        />
-                      </div>
-                    </Link>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* 広告 */}
-            <AdSenseAd
-              format={RANKING_PAGE_FOOTER.format}
-              slotId={RANKING_PAGE_FOOTER.slotId}
-            />
-
-            {/* 調査から探す */}
-            <SurveyCard surveys={surveysResult.map(s => ({ id: s.id, name: s.name }))} />
-          </div>
-        </aside>
       </div>
-
-      {/* モバイルフォールバック: 広告 */}
-      <div className="lg:hidden mt-8 flex justify-center">
-        <AdSenseAd
-          format={RANKING_PAGE_FOOTER.format}
-          slotId={RANKING_PAGE_FOOTER.slotId}
-        />
-      </div>
-    </div>
+    </PageShell>
   );
 }

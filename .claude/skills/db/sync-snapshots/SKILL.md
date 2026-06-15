@@ -44,6 +44,7 @@ URL → R2 パス対応は `.claude/rules/r2-storage-design.md` を参照。
 | affiliate-ads | `apps/web/scripts/export-affiliate-ads-snapshot.ts` (git TS `affiliate-ads-data.ts`) | `app/affiliate-ads/all.json` | ~15KB |
 | ranking-page-cards | `apps/web/scripts/export-ranking-page-cards-snapshot.ts` | `app/ranking/{key}/page-cards.json` | ~16KB |
 | station-passengers | `apps/web/scripts/export-station-passengers-snapshot.ts` | `app/station-passengers/{NN}/{stations,lines}.json` ・ `app/station-passengers/index.json` | ~10MB (95 files) |
+| correlation (Derived・エフェメラル計算) | `packages/correlation/src/scripts/build-correlation-snapshot.ts` | `app/correlation/top-pairs.json` ・ `stats.json` ・ `by-ranking-key/{key}.json` — R2 観測値を使い捨て `:memory:` SQLite で集計 (Pearson r / 偏相関 / effectiveR)。`/recompute-correlations` の実体 | ~2000+ files |
 
 ## R2 push は CI / クラウド専用 (★重要)
 

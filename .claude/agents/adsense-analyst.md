@@ -31,7 +31,7 @@ AdSense と A8.net 等アフィリエイトの収益計測・改善施策計画�
 
 - 改善ログ status 更新 → `improvement-triage` に委譲
 - GSC / GA4 / PSI 計測 → 各 analyst に委譲
-- 記事内 affiliate 配置設計 → `blog-planner` / `chart-author` に委譲
+- 記事内 affiliate 配置設計 → `article-writer` / `chart-author` に委譲
 
 ## 必読 rules
 

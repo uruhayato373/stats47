@@ -12,7 +12,7 @@ description: ブログ / note 記事用の SVG / Remotion チャート生成専�
 - ブログ記事用チャート生成 (`/generate-article-charts`)
 - note 記事用チャート生成 (`/generate-note-charts`)
 - 家計 (kakei) note 用専用チャート (`/generate-kakei-charts`)
-- 記事用データ取得 (`/fetch-article-data`)
+- 記事用データ取得 (`/draft-from-trend` ã®ãã¼ã¿æ¥å° fetch-ranking-data-r2.mjs)
 
 ## 担当スキル
 
@@ -21,7 +21,7 @@ description: ブログ / note 記事用の SVG / Remotion チャート生成専�
 | `/generate-article-charts` | ブログ記事の SVG / Remotion チャート生成 |
 | `/generate-note-charts` | note 記事用チャート生成 |
 | `/generate-kakei-charts` | 家計 note 専用チャート |
-| `/fetch-article-data` | 記事執筆用データ取得 (D1 read + R2 snapshot read) |
+| `fetch-ranking-data-r2.mjs` | 記事執筆用データ取得 (R2 観測値直 fetch) |
 
 ## 担当外
 

@@ -15,7 +15,7 @@ user-invocable: false
 | YouTube 通常動画を作りたい・投稿したい | `/publish-youtube-normal` | 「外国人のYouTube動画作って」 |
 | SNS 投稿を作りたい | `/generate-all-sns` → `/render-sns-stills` | 「ランキングのSNS作って」 |
 | ブログ記事のネタ探し | `/discover-trends --source all` | 「トレンド調べて」 |
-| ブログ記事を書きたい | `/plan-blog-articles` | 「記事の企画立てて」 |
+| ブログ記事を書きたい | `/draft-from-trend` | 「記事の企画立てて」 |
 | 記事を公開したい | `/publish-article` | 「この記事公開して」 |
 | note 記事を作りたい | note-manager に委譲 | 「note書いて」 |
 | X/TikTok/IG に投稿したい | `/publish-x` / `/publish-tiktok` / `/publish-instagram` | 「Xに投稿して」 |
@@ -30,7 +30,7 @@ user-invocable: false
 | e-Stat からデータ取得 | `/search-estat` → `/fetch-estat-data` | 「e-Statで犯罪データ探して」 |
 | メトリクスデータ更新 | `/page-data-batch` | 「データ更新して」 |
 | スナップショット更新・本番反映 | `/sync-snapshots` | 「データ反映して」「スナップショット更新して」 |
-| 相関分析を実行 | `/recompute-correlations` (Phase 7 未実装) | 「相関分析やり直して」 |
+| 相関分析を実行 | `/recompute-correlations` (実装済: build-correlation-snapshot.ts) | 「相関分析やり直して」 |
 | R2 にアップロード | `/push-r2` | 「R2にpushして」 |
 | AI コンテンツ生成 | `/generate-ai-content` | 「AIコンテンツ作って」 |
 

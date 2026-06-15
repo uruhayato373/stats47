@@ -18,7 +18,7 @@ const DRY_RUN = process.argv.includes("--dry-run");
 const NEW_AGENTS = new Set([
   "knowledge-curator", "improvement-triage", "estat-researcher",
   "data-ingester", "db-schema-manager", "snapshot-exporter", "r2-publisher",
-  "trend-scout", "blog-planner", "chart-author", "blog-critic", "sns-metrics-sync",
+  "trend-scout", "chart-author", "blog-critic", "sns-metrics-sync",
   "gsc-analyst", "ga4-analyst", "performance-auditor", "adsense-analyst",
   "image-prompt-curator", "ui-consistency-reviewer",
 ]);

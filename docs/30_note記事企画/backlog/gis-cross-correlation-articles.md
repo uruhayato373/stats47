@@ -15,7 +15,7 @@ parent: docs/02_実装計画/11_GISコンテンツ戦略.md
 ## 概要
 
 掛け合わせコンテンツ戦略 (型B = 統計×統計相関) の note 記事企画。ブログ企画
-(`docs/20_ブログ記事企画/backlog/gis-cross-correlation-articles.md`) と同じ 8 本を、
+(旧 blog 企画 backlog 〔docs/20 廃止済〕で挙げた) と同じ 8 本を、
 note 読者向けに企画する。
 
 **note 読者の特性** (アクセス実測 2026-04〜05 より): 都道府県ランキング記事を好む。

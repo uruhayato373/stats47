@@ -40,10 +40,10 @@ type NavItem = {
 
 const NAV_ITEMS: NavItem[] = [
   {
-    href: "/themes",
+    href: "/ranking",
     label: "ランキング",
     icon: TrendingUp,
-    match: (p) => p.includes("/ranking") || p.startsWith("/themes"),
+    match: (p) => p.startsWith("/ranking") || p.startsWith("/category"),
   },
   {
     href: "/blog",

@@ -30,7 +30,7 @@ on:
         default: "true"
 
 permissions:
-  contents: read
+  contents: write # 本番公開後に docs/21 ドラフトを自動削除 (ephemeral outbox) して commit-back するため
 
 concurrency:
   group: publish-blog
@@ -143,9 +143,27 @@ jobs:
           echo "live: https://stats47.jp/blog/$SLUG → HTTP $code"
           [ "$code" = "200" ] || echo "⚠️ まだ 200 でない (ISR/cache 反映待ちの可能性)。数分後に再確認を"
 
+      # docs/21 は ephemeral outbox: 本番公開時のみ、公開した slug のドラフトを R2 反映後に
+      # 自動削除して commit-back する ([skip ci] で再発火防止 / pull --rebase で race 吸収)。
+      - name: 🧹 Remove published draft from docs/21 (ephemeral outbox)
+        if: ${{ github.event.inputs.dry_run == 'false' }}
+        run: |
+          SLUG="${{ github.event.inputs.slug }}"
+          [ -d "docs/21_ブログ記事原稿/$SLUG" ] || { echo "ドラフトなし (削除不要)"; exit 0; }
+          git rm -r -q "docs/21_ブログ記事原稿/$SLUG"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -q -m "chore(blog): remove published draft $SLUG from docs/21 outbox [skip ci]"
+          for i in 1 2 3; do
+            if git pull --rebase --quiet origin develop && git push origin HEAD:develop; then
+              echo "✅ outbox cleanup pushed: $SLUG"; break
+            fi
+            echo "push retry $i (concurrent push?)"; sleep 3
+          done
+
       - name: 📝 Summary
         run: |
           echo "### Publish Blog: ${{ github.event.inputs.slug }}" >> $GITHUB_STEP_SUMMARY
           echo "- dry_run: ${{ github.event.inputs.dry_run }}" >> $GITHUB_STEP_SUMMARY
           echo "- factual gate: passed" >> $GITHUB_STEP_SUMMARY
-          echo "- 公開後: docs/21 のドラフトを削除すること (lifecycle / check-published-drafts.cjs が検出)" >> $GITHUB_STEP_SUMMARY
+          echo "- 🧹 docs/21 outbox: 公開後にドラフトを自動削除 (ephemeral)" >> $GITHUB_STEP_SUMMARY

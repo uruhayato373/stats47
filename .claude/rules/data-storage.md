@@ -65,7 +65,7 @@ git TS 化し永続 D1 を全廃した。アプリが読む各データの真実
 | 批判的レビュー・事前検死・SEO 監査・SNS 週報・パフォーマンス・コスト月報 | `docs/04_レビュー/{YYYY-MM-DD,YYYY-Www,YYYY-MM}-<topic-slug>.md`（フラット。日付先頭・slug に種別を含める例 `-monetization` / `-pre-mortem-<x>` / `-sns-weekly` / `-cloudflare-cost`。種別絞り込みは frontmatter `type:`） |
 | 改善施策の一覧・TODO | `docs/02_実装計画/03_改善バックログ.md` |
 | YouTube 実験 (1 実験 1 ファイル) | `docs/15_実験ログ/youtube/EXP-NNN.md` |
-| コンテンツ backlog | `docs/{20_ブログ記事企画,30_note記事企画}/backlog/` |
+| コンテンツ backlog | `docs/30_note記事企画/backlog/` |
 | 未着手の機能・自動化 backlog | `docs/02_実装計画/04_機能バックログ.md`（指標拡充候補は `docs/02_実装計画/05_指標バックログ.md`） |
 
 詳細: [`docs-vs-issues.md`](./docs-vs-issues.md)
@@ -79,6 +79,8 @@ git TS 化し永続 D1 を全廃した。アプリが読む各データの真実
 | GSC/GA4/AdSense 週次 snapshot (CSV) + budget 閾値 | `.claude/skills/analytics/{gsc,ga4,adsense}-improvement/reference/`（生 CSV + budgets.json、GitHub Actions が日曜 JST 20:00 に自動更新） |
 | GSC/GA4/AdSense/PSI の週次集約履歴（前週比・人間向け LATEST.md） | `.claude/state/metrics/{gsc,ga4,adsense,psi}/{history.csv,LATEST.md}`（GitHub Actions が自動更新、人間は LATEST.md を見れば 10 秒で把握） |
 | 改善施策の agent 用詳細ログ (検証コマンド・仮説・期日) | `.claude/skills/analytics/<metric>-improvement/reference/improvement-log.md` |
+| GSC カバレッジ是正キュー (404/soft404/5xx の A/B 分類・状態保持) | `.claude/state/gsc/{coverage-remediation-queue.json,LATEST.md,coverage-totals-history.csv}`（`build-coverage-queue.mjs` が生成。生 export は `coverage-drilldown/YYYY-Www/{category}-drilldown.csv`。正典 `docs/02_実装計画/12_GSCカバレッジ是正ループ.md`、skill `/gsc-coverage-remediation`） |
+| 整合性監査マーカー (agent/skill/script ドリフトの監査済み記録) | `.claude/state/consistency/audited.json`（`check-agent-skill-consistency.cjs --mark-audited` が記録。Stop hook `check-consistency-on-stop.js` がこのハッシュと現在の変更を比較してゲート判定。skill `/audit-consistency`） |
 | PSI 日次計測（19 URL × mobile/desktop） | `.claude/state/metrics/psi/psi-batch-*.json`（GitHub Actions 日次 JST 02:00、閾値違反時 `[PSI Alert]` Issues 起票）/ URL リスト: `.claude/config/psi-urls.txt` / 閾値: `.claude/skills/analytics/performance-improvement/budgets.json` |
 | Cloudflare 月次 snapshot JSON + budget 閾値 | `.claude/skills/analytics/cloudflare-cost-improvement/reference/`（人間向け要約は `docs/04_レビュー/YYYY-MM-cloudflare-cost.md`、施策一覧は `docs/02_実装計画/03_改善バックログ.md`） |
 | Cloudflare 日次 usage（D1/Workers/R2） | `.claude/state/metrics/cloudflare/{snapshots/YYYY-MM-DD.json,history.csv,LATEST.md}`（GitHub Actions 日次 JST 02:30、閾値違反時 `[Cloudflare Alert]` Issues 起票）/ 閾値: `.claude/skills/analytics/cloudflare-cost-improvement/reference/budgets-daily.json` |

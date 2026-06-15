@@ -1,20 +1,16 @@
 /**
- * D-System リデザイン共通プリミティブ
+ * リデザイン共通プリミティブ
  *
- * 11 ページの D 案リデザインで共通利用する原子コンポーネント群。
- * 詳細: docs/02_実装計画/12_リデザイン残作業.md
+ * 2026-06-15 の全面ミニマル化で page-top ヒーロー（HeroShell / KpiGrid / KpiTile）は退役し、
+ * 未使用化していた DataPackCTA / WidePageShell（PageShell エイリアス）/ NextUpGrid（home preview）も削除した。
+ * ページ見出しは `@/components/layout` の PageHeader、横幅は同 PageShell に統一。
+ * ここには本文内・サイドレール用の補助コンポーネントのみ残す。
  */
 
 export {
-  HeroShell,
-  KpiTile,
-  KpiGrid,
   SectionEyebrow,
   InfeedAd,
   NativeAffiliateRow,
-  DataPackCTA,
   CategoryNav,
-  WidePageShell,
   RightRailWidgets,
-  NextUpGrid,
 } from "./components";

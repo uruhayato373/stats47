@@ -1,5 +1,7 @@
 import { notFound } from "next/navigation";
 
+import { PageShell } from "@/components/layout";
+
 import { ALL_THEMES } from "@/features/theme-dashboard/config/all-themes";
 import {
   ThemePageLayout,
@@ -68,11 +70,15 @@ export default async function ThemeDynamicPage({ params }: PageProps) {
   const data = await loadThemeData(theme);
   if (!data) {
     return (
-      <div className="container mx-auto px-4 py-6">
+      <PageShell>
         <p className="text-muted-foreground">データの取得に失敗しました。</p>
-      </div>
+      </PageShell>
     );
   }
 
-  return <ThemePageLayout theme={theme} data={data} />;
+  return (
+    <PageShell>
+      <ThemePageLayout theme={theme} data={data} />
+    </PageShell>
+  );
 }
