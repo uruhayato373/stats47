@@ -69,9 +69,10 @@ const testCases: SmokeTestCase[] = [
     expectedStatus: 301,
   },
   {
-    name: "ランキング一覧（廃止 2026-05-28 → / に 301）",
+    // 2026-06-15 リデザインで /ranking を索引ハブとして再設置 (旧 301 廃止を撤回)
+    name: "ランキング索引ハブ（2026-06-15 再設置）",
     path: "/ranking",
-    expectedStatus: 301,
+    expectedStatus: 200,
   },
   {
     name: "ランキング詳細（総人口）",
