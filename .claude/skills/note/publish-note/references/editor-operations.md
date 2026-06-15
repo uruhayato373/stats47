@@ -14,11 +14,10 @@ const path = require('path');
 const slug = '<SLUG>';
 const projectRoot = '/Users/minamidaisuke/stats47';
 
-// 探索順: 31_note記事原稿（制作中）と 32_note公開済み（公開完了ヴァーティカル）の
-//         <slug> 直下および <vertical>/<slug> を検索する。
-// 各ディレクトリ内では note.md (旧規約) と draft.md (新規約) の両方をチェック
+// 探索: 31_note記事原稿（下書き〜公開済みを単一管理）の <slug> 直下および <vertical>/<slug>。
+// 各ディレクトリ内では note.md と draft.md の両方をチェック（ファイル名は現状混在）。
 const baseDirs = [];
-for (const root of ['docs/31_note記事原稿', 'docs/32_note公開済み']) {
+for (const root of ['docs/31_note記事原稿']) {
   const rootAbs = path.join(projectRoot, root);
   baseDirs.push(path.join(rootAbs, slug));
   if (fs.existsSync(rootAbs)) {

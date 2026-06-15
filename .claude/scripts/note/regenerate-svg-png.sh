@@ -2,8 +2,8 @@
 #
 # note 記事の SVG → PNG 再生成スクリプト
 #
-# 公開済み記事 (docs/32_note公開済み/) は draft.md + *.svg のみを保管し、
-# 派生物である *.png は持たない方針。PNG が必要になったとき
+# note 記事は docs/31_note記事原稿/ で単一管理し、容量を詰めたい公開済み記事は
+# *.svg のみ残して派生物 *.png を削除してよい。PNG が必要になったとき
 # (publish-note --update での再アップロード等) に本スクリプトで再生成する。
 #
 # 各 .svg から、同じ basename の .png を同じディレクトリに生成する。
@@ -12,7 +12,7 @@
 # Usage:
 #   .claude/scripts/note/regenerate-svg-png.sh <dir>
 #     <dir> 配下を再帰的に走査し、見つかった *.svg すべてを変換する。
-#   例: .claude/scripts/note/regenerate-svg-png.sh docs/32_note公開済み/koumuin-claude-code
+#   例: .claude/scripts/note/regenerate-svg-png.sh docs/31_note記事原稿/koumuin-claude-code
 #
 set -euo pipefail
 

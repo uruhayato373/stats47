@@ -16,16 +16,13 @@ browser-use CLI（Chrome プロファイル経由）で note.com エディタを
 
 ## 記事ディレクトリの運用ルール
 
-| 状態 | 置き場所 |
-|---|---|
-| 制作中（ヴァーティカルの全記事が公開完了していない） | `docs/31_note記事原稿/<vertical>/<slug>/` |
-| 公開完了（ヴァーティカルの全記事が公開済み） | `docs/32_note公開済み/<vertical>/<slug>/` |
+**記事ソースは `docs/31_note記事原稿/` で単一管理する**（下書き〜公開済みまで同じ場所。2026-06-15 に旧 `32_note公開済み/` を統合し、ヴァーティカル単位の物理移動は廃止）。置き場所: `docs/31_note記事原稿/<vertical>/<slug>/` または `docs/31_note記事原稿/<slug>/`。
 
-**移動はヴァーティカル単位で行う。** あるヴァーティカルの全記事を公開し終えたら、`docs/31_note記事原稿/<vertical>/` フォルダごと `docs/32_note公開済み/<vertical>/` へ移動する。記事間の相対リンク（`../<slug>/draft.md`）を生かしたままにするため、**記事単位では移動しない**。個別記事の公開状況は `.claude/state/note-published-urls.json` で管理する。Phase 0 は両ディレクトリを検索するため、移動後も `/publish-note --update` の参照は正常に動作する。
+- **公開しても移動しない。** 記事間の相対リンク（`../<slug>/...`）を公開後も生かすため。
+- **公開状態の真実源**: 各記事 frontmatter `status: draft | published` + slug→URL は `.claude/state/note-published-urls.json`（公開のたび追記）。ディレクトリ位置で状態を表さない。
+- 旧ルール（公開後 `.local/r2/note/` へ移動）は廃止。note 記事は note.com がホストするため **R2 は配信にも保管にも使わない**。docs/ は git 管理なので版管理・バックアップ・差分は自動で確保される。
 
-旧ルール（公開後 `.local/r2/note/` へ移動）は廃止。note 記事は note.com がホストするため R2 は配信にも保管にも使わない。docs/ は git 管理されるので版管理・バックアップは自動で確保される。
-
-**公開済み（`32_note公開済み/`）の画像**: 容量節約のため `draft.md` + `*.svg` のみ保管し、`*.png` は持たない（SVG から再生成できる派生物のため）。公開済み記事を `--update` するときは、本文をペーストする前に `.claude/scripts/note/regenerate-svg-png.sh docs/32_note公開済み/<vertical>` で PNG を再生成してからアップロードする。SVG ソースを持たない旧記事は PNG が保管されているため再生成不要。
+**画像**: 容量を詰めたい公開済み記事は `*.svg` のみ残し `*.png`（SVG からの派生物）を削除してよい。`--update` 時は本文ペースト前に `.claude/scripts/note/regenerate-svg-png.sh docs/31_note記事原稿/<vertical or slug>` で PNG を再生成してからアップロードする。SVG ソースを持たない旧記事は PNG が唯一のソースなので保管・再生成不要。
 
 ## 引数（バッチ対応）
 
@@ -67,7 +64,7 @@ browser-use CLI（Chrome プロファイル経由）で note.com エディタを
 ## 前提条件
 
 1. browser-use CLI がインストール済み
-2. 記事ファイルが存在する: `docs/31_note記事原稿/<vertical>/<slug>/{note.md,draft.md}`（制作中）または `docs/32_note公開済み/<vertical>/<slug>/{note.md,draft.md}`（公開完了ヴァーティカル）
+2. 記事ファイルが存在する: `docs/31_note記事原稿/<vertical>/<slug>/{note.md,draft.md}` または `docs/31_note記事原稿/<slug>/{note.md,draft.md}`（下書き・公開済みとも同じ場所で単一管理）
 3. Chrome **Profile 5** で `note.com/stats47` にログイン済み
 4. **有料記事の場合**: frontmatter に `is_paid: true` と `price_jpy: <数値>` を必ず記載。本文には有料境界の目印として `ここから先は有料部分:` 行を入れる（Phase 0 が free/paid に分割するために必要）
 5. **予約投稿**: note プレミアム加入アカウントでのみ可能（通常アカウントでは「日時の設定」が押せない、2026-05-18 確認）

@@ -168,15 +168,15 @@ INSERT INTO note_articles (
 
 `docs/30_note記事企画/note戦略.md` の進捗サマリーテーブルで、該当記事の「執筆」列を更新する。
 
-### 3. 公開済みディレクトリの扱い
+### 3. 公開状態の扱い（移動しない）
 
-公開済み記事の移動は **ヴァーティカル単位** で行う（記事単位では移動・削除しない）。あるヴァーティカルの全記事を公開し終えたら、`docs/31_note記事原稿/<vertical>/` フォルダごと `docs/32_note公開済み/<vertical>/` へ移動する。記事間の相対リンクを生かすため、個別記事をここで移動してはならない。運用ルールの詳細は `publish-note` スキルの「記事ディレクトリの運用ルール」を参照。
+公開しても記事を**物理移動しない**（2026-06-15 に旧 `32_note公開済み/` を `31_note記事原稿/` に統合）。記事は常に `docs/31_note記事原稿/` に置いたまま、状態は frontmatter `status: draft | published` と `.claude/state/note-published-urls.json`（slug→URL の真実源）で表す。これにより記事間の相対リンク（`../<slug>/...`）が公開後も切れない。運用ルールの詳細は `publish-note` スキルの「記事ディレクトリの運用ルール」を参照。
 
-旧ルール（公開後 `.local/r2/note/` へコピーし docs/ を削除）は廃止。note 記事は note.com がホストし、ソースは docs/ に git 管理で残す。
+旧ルール（公開後 `.local/r2/note/` へコピーし docs/ を削除）は廃止。note 記事は note.com がホストし、ソースは docs/ に git 管理で残す（R2 は使わない）。
 
 ### 4. note.com への投稿手順
 
-1. `docs/31_note記事原稿/<vertical>/<slug>/draft.md`（公開完了ヴァーティカルは `docs/32_note公開済み/<vertical>/<slug>/draft.md`）の内容を note エディタにペースト
+1. `docs/31_note記事原稿/<vertical>/<slug>/draft.md`（または `docs/31_note記事原稿/<slug>/note.md`）の内容を note エディタにペースト
 2. `images/` の画像をアップロード（あれば）
 3. 無料で公開
 4. 公開後、ローカル D1 で status と noteUrl を更新:
