@@ -270,7 +270,7 @@ export function LocalFinanceDashboard({ cards, initialFinanceFlow }: Props) {
           </div>
 
           <CardFrame label="実質収支" value={latest ? oku(latest.realBalance) : "—"} footer={avgLegend}>
-            <MiniLineChart points={lineSeries("realBalance", OKU)} average={avgSeries("realBalance", OKU)} />
+            <MiniLineChart points={lineSeries("realBalance", OKU)} average={avgSeries("realBalance", OKU)} averageName={avgLabel} unit="億円" />
           </CardFrame>
 
           <CardFrame label="積立金現在高" value={oku(fundTotalLatest)}>
@@ -300,7 +300,7 @@ export function LocalFinanceDashboard({ cards, initialFinanceFlow }: Props) {
                 value={latestVal == null ? "—" : `${latestVal.toFixed(meta.decimals)}${meta.unit}`}
                 footer={avgLegend}
               >
-                <MiniLineChart points={lineSeries(meta.key, 1)} average={avgSeries(meta.key, 1)} />
+                <MiniLineChart points={lineSeries(meta.key, 1)} average={avgSeries(meta.key, 1)} averageName={avgLabel} unit={meta.unit} />
               </CardFrame>
             );
           })}
