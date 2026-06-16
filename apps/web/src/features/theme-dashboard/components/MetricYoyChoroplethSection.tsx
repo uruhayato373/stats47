@@ -226,14 +226,14 @@ export function MetricYoyChoroplethSection({
         >
           {projectedPaths.map((p) => {
             const rec = ratioByCode.get(p.areaCode);
-            const fill = rec ? colorScale(rec.ratio) : "#e0e0e0";
+            const fill = rec ? colorScale(rec.ratio) : "hsl(var(--muted))";
             const isHovered = hover?.areaCode === p.areaCode;
             return (
               <path
                 key={p.areaCode}
                 d={p.path}
                 fill={fill}
-                stroke={isHovered ? "#0F172A" : "rgba(15,23,42,0.25)"}
+                stroke={isHovered ? "hsl(var(--foreground))" : "hsl(var(--border))"}
                 strokeWidth={isHovered ? 1.5 : 0.5}
                 strokeLinejoin="round"
                 onMouseEnter={(e) => {

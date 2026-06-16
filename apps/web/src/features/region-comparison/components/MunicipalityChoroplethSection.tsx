@@ -179,9 +179,9 @@ function PrefectureChoropleth({
         .attr("fill", (d) => {
           const code = d.properties.N03_007;
           const entry = ratioMap.get(code);
-          return entry ? colorScale(entry.ratio) : "#e5e7eb";
+          return entry ? colorScale(entry.ratio) : "hsl(var(--muted))";
         })
-        .attr("stroke", "#94a3b8")
+        .attr("stroke", "hsl(var(--border))")
         .attr("stroke-width", 0.5)
         .on("mouseenter", function (event: MouseEvent, d) {
           const code = d.properties.N03_007;
@@ -196,7 +196,7 @@ function PrefectureChoropleth({
           tooltip
             .html(`<span style="font-weight:600">${String(name).replace(/[<>&"]/g, (c) => ({ "<": "&lt;", ">": "&gt;", "&": "&amp;", '"': "&quot;" })[c] ?? c)}</span><br/>${sign}${pct.toFixed(1)}%`)
             .style("opacity", "1");
-          d3.select(this).attr("stroke", "#1e293b").attr("stroke-width", 1.5);
+          d3.select(this).attr("stroke", "hsl(var(--foreground))").attr("stroke-width", 1.5);
         })
         .on("mousemove", function (event: MouseEvent) {
           if (!containerRef.current) return;
@@ -207,7 +207,7 @@ function PrefectureChoropleth({
         })
         .on("mouseleave", function () {
           tooltip.style("opacity", "0");
-          d3.select(this).attr("stroke", "#94a3b8").attr("stroke-width", 0.5);
+          d3.select(this).attr("stroke", "hsl(var(--border))").attr("stroke-width", 0.5);
         });
     }
 
