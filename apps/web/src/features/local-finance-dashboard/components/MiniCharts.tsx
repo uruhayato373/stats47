@@ -2,9 +2,14 @@
 
 /**
  * 地方財政ダッシュボード用のミニチャート (PBI Page1 のカード内チャート再現)。
- * - MiniLineChart: 当該団体(実線・青) + 全国平均(破線・灰)。年は等間隔 + ラベル。
+ * - MiniLineChart: 当該団体(実線・青) + 全国平均(破線・灰)。D3インタラクティブ版。
  * - MiniBarChart: 年次の棒 (積立金現在高 / 地方債現在高)。
  */
+
+import { useEffect, useRef } from "react";
+
+import { useD3Tooltip } from "@stats47/visualization";
+import { line, pointer, scaleLinear, select } from "d3";
 
 export interface ChartPoint {
   year: number;
@@ -18,56 +23,154 @@ const GRAY = "#94a3b8";
 interface LineProps {
   points: ChartPoint[];
   average?: ChartPoint[];
+  /** ツールチップに表示する系列名 */
+  seriesName?: string;
+  /** 全国/類似団体 平均の系列名 */
+  averageName?: string;
+  /** ツールチップの単位 */
+  unit?: string;
   height?: number;
 }
 
-export function MiniLineChart({ points, average, height = 84 }: LineProps) {
-  const W = 260;
-  const H = height;
-  const padX = 10;
-  const padTop = 8;
-  const padBottom = 18;
+export function MiniLineChart({
+  points,
+  average,
+  seriesName = "当該団体",
+  averageName = "全国平均",
+  unit = "",
+  height = 84,
+}: LineProps) {
+  const svgRef = useRef<SVGSVGElement>(null);
+  const { showStackedTooltip, hideTooltip } = useD3Tooltip();
+
+  useEffect(() => {
+    if (!svgRef.current || points.length === 0) return;
+
+    const W = 260;
+    const H = height;
+    const padX = 10;
+    const padTop = 8;
+    const padBottom = 18;
+
+    const allPts = average && average.length > 0 ? [...points, ...average] : points;
+    const ys = allPts.map((p) => p.value);
+    let minY = Math.min(...ys);
+    let maxY = Math.max(...ys);
+    if (minY === maxY) { minY -= 1; maxY += 1; }
+
+    const n = points.length;
+    const xScale = scaleLinear().domain([0, n - 1]).range([padX, W - padX]);
+    const yScale = scaleLinear().domain([minY, maxY]).range([H - padBottom, padTop]);
+
+    const lineFn = line<ChartPoint>((_, i) => xScale(i), (d) => yScale(d.value));
+
+    const svg = select(svgRef.current);
+    svg.selectAll("*").remove();
+
+    // 全国平均 (破線)
+    if (average && average.length > 1) {
+      svg.append("path")
+        .datum(average)
+        .attr("fill", "none")
+        .attr("stroke", GRAY)
+        .attr("stroke-width", 1.3)
+        .attr("stroke-dasharray", "4 3")
+        .attr("d", lineFn);
+    }
+
+    // 当該団体 (実線)
+    if (n > 1) {
+      svg.append("path")
+        .datum(points)
+        .attr("fill", "none")
+        .attr("stroke", BLUE)
+        .attr("stroke-width", 1.8)
+        .attr("d", lineFn);
+    }
+
+    // データポイント
+    svg.append("g")
+      .selectAll("circle")
+      .data(points)
+      .join("circle")
+      .attr("cx", (_, i) => xScale(i))
+      .attr("cy", (d) => yScale(d.value))
+      .attr("r", (_, i) => (i === n - 1 ? 3 : 1.8))
+      .attr("fill", BLUE);
+
+    // 年ラベル (最初と最後)
+    if (n > 0) {
+      svg.append("text").attr("x", xScale(0)).attr("y", H - 4).attr("font-size", 8).attr("fill", GRAY).attr("text-anchor", "start").text(points[0].year);
+      svg.append("text").attr("x", xScale(n - 1)).attr("y", H - 4).attr("font-size", 8).attr("fill", GRAY).attr("text-anchor", "end").text(points[n - 1].year);
+    }
+
+    // クロスヘアライン
+    const crosshair = svg.append("line")
+      .attr("y1", padTop)
+      .attr("y2", H - padBottom)
+      .attr("stroke", GRAY)
+      .attr("stroke-width", 1)
+      .attr("stroke-dasharray", "3 2")
+      .attr("opacity", 0);
+
+    // ハイライトドット (当該団体)
+    const dot = svg.append("circle")
+      .attr("r", 4)
+      .attr("fill", BLUE)
+      .attr("stroke", "white")
+      .attr("stroke-width", 1.5)
+      .attr("opacity", 0);
+
+    // 透明オーバーレイ (インタラクション領域)
+    svg.append("rect")
+      .attr("x", padX)
+      .attr("y", padTop)
+      .attr("width", W - padX * 2)
+      .attr("height", H - padTop - padBottom)
+      .attr("fill", "transparent")
+      .style("cursor", "crosshair")
+      .on("mousemove", (event: MouseEvent) => {
+        const [mouseX] = pointer(event);
+        // 最近傍インデックスを探す
+        let closestIdx = 0;
+        let minDist = Infinity;
+        for (let i = 0; i < n; i++) {
+          const dist = Math.abs(xScale(i) - mouseX);
+          if (dist < minDist) { minDist = dist; closestIdx = i; }
+        }
+        const px = xScale(closestIdx);
+        crosshair.attr("x1", px).attr("x2", px).attr("opacity", 0.5);
+        dot.attr("cx", px).attr("cy", yScale(points[closestIdx].value)).attr("opacity", 1);
+
+        const items = [
+          { name: seriesName, value: points[closestIdx].value, color: BLUE },
+          ...(average && average[closestIdx] != null
+            ? [{ name: averageName, value: average[closestIdx].value, color: GRAY }]
+            : []),
+        ];
+        showStackedTooltip(event, String(points[closestIdx].year), items, { unit });
+      })
+      .on("mouseleave", () => {
+        crosshair.attr("opacity", 0);
+        dot.attr("opacity", 0);
+        hideTooltip();
+      });
+  }, [points, average, height, seriesName, averageName, unit, showStackedTooltip, hideTooltip]);
+
   if (points.length === 0) {
     return <div className="flex h-[84px] items-center text-xs text-muted-foreground">データなし</div>;
   }
-  const series = average && average.length > 0 ? [...points, ...average] : points;
-  const ys = series.map((p) => p.value);
-  let minY = Math.min(...ys);
-  let maxY = Math.max(...ys);
-  if (minY === maxY) {
-    minY -= 1;
-    maxY += 1;
-  }
-  const n = points.length;
-  const x = (i: number) => (n === 1 ? W / 2 : padX + (i / (n - 1)) * (W - padX * 2));
-  const y = (v: number) => padTop + (1 - (v - minY) / (maxY - minY)) * (H - padTop - padBottom);
-
-  const toPath = (pts: ChartPoint[]) =>
-    pts.map((p, i) => `${i === 0 ? "M" : "L"}${x(i).toFixed(1)},${y(p.value).toFixed(1)}`).join(" ");
 
   return (
-    <svg width="100%" height={H} viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="xMidYMid meet" role="img" aria-label="推移">
-      {/* 全国平均 (破線) */}
-      {average && average.length > 1 && (
-        <path d={toPath(average)} fill="none" stroke={GRAY} strokeWidth={1.3} strokeDasharray="4 3" />
-      )}
-      {/* 当該団体 (実線) */}
-      {n > 1 && <path d={toPath(points)} fill="none" stroke={BLUE} strokeWidth={1.8} />}
-      {points.map((p, i) => (
-        <circle key={p.year} cx={x(i)} cy={y(p.value)} r={i === n - 1 ? 3 : 1.8} fill={BLUE} />
-      ))}
-      {/* 年ラベル (最初と最後) */}
-      {n > 0 && (
-        <>
-          <text x={x(0)} y={H - 4} fontSize="8" fill={GRAY} textAnchor="start">
-            {points[0].year}
-          </text>
-          <text x={x(n - 1)} y={H - 4} fontSize="8" fill={GRAY} textAnchor="end">
-            {points[n - 1].year}
-          </text>
-        </>
-      )}
-    </svg>
+    <svg
+      ref={svgRef}
+      width="100%"
+      height={height}
+      viewBox={`0 0 260 ${height}`}
+      preserveAspectRatio="xMidYMid meet"
+      role="img"
+      aria-label="推移"
+    />
   );
 }
 
