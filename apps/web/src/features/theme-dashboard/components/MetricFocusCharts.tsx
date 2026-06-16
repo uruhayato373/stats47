@@ -73,7 +73,7 @@ export function MetricFocusCharts({
         {
           dataKey: "value",
           name: `${areaName}の${rankingItem?.title ?? "値"}`,
-          color: "#2563eb",
+          color: "hsl(var(--primary))",
         },
       ],
       unit: rankingItem?.unit ?? "",
