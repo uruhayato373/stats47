@@ -6,9 +6,10 @@
  * - MiniBarChart: 年次の棒 (積立金現在高 / 地方債現在高)。
  */
 
-import { line, pointer, scaleLinear, select } from "d3";
 import { useEffect, useRef } from "react";
+
 import { useD3Tooltip } from "@stats47/visualization";
+import { line, pointer, scaleLinear, select } from "d3";
 
 export interface ChartPoint {
   year: number;
