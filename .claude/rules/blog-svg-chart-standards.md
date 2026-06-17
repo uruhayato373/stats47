@@ -40,11 +40,7 @@ CLI 内にインライン生成ロジックを書かない（重複・ドリフ�
 | `generateChoroplethSvg` | `choropleth.ts` | `ChoroplethItem[]` + `ChoroplethOptions` | `*-map.json` / `*-tile-grid.json` | ~84 | タイルグリッド 47 都道府県マップ |
 | `generateLineSvg` | `line.ts` | `StatsSchema[]` + `LineOptions` | `*-timeseries.json` / `*-trend.json` | ~39 | 多系列折れ線（時系列・年齢階級）|
 | `generateStackedBarSvg` | `stacked-bar.ts` | `StackedData` + `StackedBarOptions` | `*-stacked.json` / `*-breakdown.json` | ~5 | 積み上げ棒グラフ（構成比）|
-| **`generateFindingsCardSvg`** ★未実装 | `findings-card.ts`（要追加） | `FindingsCardData`（番号付き要点配列） | `*-summary-findings.json` / `*-findings.json` | **~54** | 「この記事でわかったこと」要点カード（番号付き circle + テキスト行） |
-
-> ★ **`generateFindingsCardSvg` は de-facto 標準（54枚）だが svg-builder に未実装**。
-> 現状は `generate-article-charts.mjs` のインライン or 旧スクリプトで生成され、命名・配色・viewBox が不統一。
-> **最優先の共通化対象** → §10 ロードマップ参照。
+| `generateFindingsCardSvg` | `findings-card.ts` | `FindingsCardData`（`{ findings: string[] \| FindingsCardItem[], title?: string }`） | `*-summary-findings.json` / `*-findings.json` | ~54 | 「この記事でわかったこと」要点カード（番号付き circle + テキスト行） |
 
 ### 2-B. テーブルコンポーネント（`packages/svg-builder/src/tables/`）
 
@@ -252,8 +248,8 @@ const svg = generateBarChartSvg(items, { title: "...", palette: "red", ... });
 
 ### 共通化ロードマップ（優先度順）
 
-1. **`generateFindingsCardSvg` を svg-builder に新設**（最頻の未実装型・54枚）
-   → `packages/svg-builder/src/charts/findings-card.ts`。`svgThemeStyle()` + `PALETTES` 準拠で実装し §2-A の ★ を解消
+1. ✅ **`generateFindingsCardSvg` を svg-builder に新設**（2026-06-17 完了）
+   → `packages/svg-builder/src/charts/findings-card.ts` 実装済。`svgThemeStyle()` 準拠。`generate-article-charts.mjs` に `summary` タイプのディスパッチ追加・alias 命名パターン対応済
 2. **CLI のインライン生成器を svg-builder 呼び出しに置換**（`genBarChartSvg` 等 4 関数 → `@stats47/svg-builder`）
    → 重複ロジック消去・ダークモード自動付与。§7 禁止パターンの根絶
 3. **`classifyChartType` に alias ディスパッチを実装**（§4 alias 表を機械化）

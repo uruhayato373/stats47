@@ -22,7 +22,8 @@
  *   *-timeseries.json          → line chart (時系列・多系列対応)  [実装済み]
  *   *-scatter.json             → scatter chart (group色分け対応)  [実装済み]
  *   *-stacked.json             → stacked-bar                     [TODO]
- *   *-findings.json            → summary-findings table          [TODO]
+ *   *-summary-findings.json    → findings card (番号付き要点)     [実装済み]
+ *   *-findings.json            → findings card (番号付き要点)     [実装済み]
  *
  * 関連:
  *   - SKILL.md: .claude/skills/blog/generate-article-charts/SKILL.md (chart 種別仕様の詳細)
@@ -82,12 +83,28 @@ const warn = (msg) => console.warn(`[warn] ${msg}`);
 const err = (msg) => console.error(`[error] ${msg}`);
 
 function detectChartType(filename) {
-  if (filename.endsWith("-prefecture-rankings.json")) return "bar";
-  if (filename.endsWith("-tile-grid.json")) return "tile-grid";
+  // canonical names
+  if (filename.endsWith("-ranking.json")) return "bar";
+  if (filename.endsWith("-map.json")) return "tile-grid";
   if (filename.endsWith("-timeseries.json")) return "line";
   if (filename.endsWith("-scatter.json")) return "scatter";
   if (filename.endsWith("-stacked.json")) return "stacked-bar";
+  if (filename.endsWith("-summary-findings.json")) return "summary";
   if (filename.endsWith("-findings.json")) return "summary";
+  // alias (既存記事の許容パターン)
+  if (filename.endsWith("-prefecture-rankings.json")) return "bar";
+  if (filename.endsWith("-top5-bottom5.json")) return "bar";
+  if (filename.endsWith("-top-bottom.json")) return "bar";
+  if (filename.endsWith("-rate-ranking.json")) return "bar";
+  if (filename.endsWith("-income-ranking.json")) return "bar";
+  if (filename.endsWith("-tile-grid.json")) return "tile-grid";
+  if (filename.endsWith("-income-map.json")) return "tile-grid";
+  if (filename.endsWith("-ratio-map.json")) return "tile-grid";
+  if (filename.endsWith("-trend.json")) return "line";
+  if (filename.endsWith("-national-trend.json")) return "line";
+  if (filename.endsWith("-rate-scatter.json")) return "scatter";
+  if (filename.endsWith("-breakdown.json")) return "stacked-bar";
+  if (filename.endsWith("-composition.json")) return "stacked-bar";
   return null;
 }
 
@@ -475,7 +492,83 @@ function genScatterChartSvg(data, meta = {}) {
 </svg>`;
 }
 
-// TODO: 他チャート種別の実装 (stacked / summary)
+// ---------- findings card 生成 ----------
+// 入力 JSON 想定形式:
+//   { title?: string, findings: string[] }
+//   または { title?: string, findings: [{ text: string }, ...] }
+//   または string[] (findings 配列を直接)
+function genFindingsCardSvg(data) {
+  const title = (Array.isArray(data) ? null : data.title) ?? "この記事でわかったこと";
+  const raw = Array.isArray(data) ? data : data.findings ?? [];
+  const findings = raw.map((f) => (typeof f === "string" ? f : f.text ?? "")).filter(Boolean);
+  if (!findings.length) return `<!-- findings-card: no data -->`;
+
+  const W = 960;
+  const HEADER_H = 72;
+  const CARD_MX = 40;
+  const CIRCLE_R = 18;
+  const CIRCLE_CX = CARD_MX + CIRCLE_R;
+  const TEXT_X = CIRCLE_CX + CIRCLE_R + 14;
+  const LINE_H = 22;
+  const CARD_PAD_V = 14;
+  const CARD_GAP = 10;
+  const CHARS = 28;
+
+  const escXml = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+
+  const estimateLines = (t) => Math.max(1, Math.ceil(t.length / CHARS));
+  const cardH = (t) => CARD_PAD_V * 2 + estimateLines(t) * LINE_H;
+
+  const heights = findings.map(cardH);
+  const totalH = heights.reduce((a, b) => a + b, 0) + CARD_GAP * (findings.length - 1);
+  const H = HEADER_H + totalH + 32;
+
+  const fontFamily = "'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif";
+  const style = `  <style>
+    .svg-bg{fill:#ffffff}
+    .svg-title{fill:#1f2937}
+    .svg-plot{fill:#f9fafb}
+    @media (prefers-color-scheme:dark){
+    .svg-bg{fill:#0f172a}
+    .svg-title{fill:#e2e8f0}
+    .svg-plot{fill:#1e293b}
+    }
+  </style>`;
+
+  const wrapText = (text, x, baseY) => {
+    if (text.length <= CHARS) return `<tspan x="${x}" dy="0">${escXml(text)}</tspan>`;
+    const parts = [];
+    let rem = text, first = true;
+    while (rem.length > 0) {
+      parts.push(`<tspan x="${x}" dy="${first ? 0 : LINE_H}">${escXml(rem.slice(0, CHARS))}</tspan>`);
+      rem = rem.slice(CHARS);
+      first = false;
+    }
+    return parts.join("");
+  };
+
+  let cards = "";
+  let y = HEADER_H;
+  findings.forEach((text, idx) => {
+    const h = heights[idx];
+    const cardW = W - CARD_MX * 2;
+    const cy = y + h / 2;
+    const textY = y + CARD_PAD_V + LINE_H * 0.8;
+    cards += `  <rect x="${CARD_MX}" y="${y}" width="${cardW}" height="${h}" class="svg-plot" rx="8"/>\n`;
+    cards += `  <circle cx="${CIRCLE_CX}" cy="${cy}" r="${CIRCLE_R}" fill="#dc2626"/>\n`;
+    cards += `  <text x="${CIRCLE_CX}" y="${cy + 6}" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">${idx + 1}</text>\n`;
+    cards += `  <text x="${TEXT_X}" y="${textY}" font-size="18" class="svg-title">${wrapText(text, TEXT_X, textY)}</text>\n`;
+    y += h + CARD_GAP;
+  });
+
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" font-family="${fontFamily}" role="img" aria-label="${escXml(title)}">
+${style}
+  <rect width="${W}" height="${H}" class="svg-bg"/>
+  <text x="${W / 2}" y="46" text-anchor="middle" font-size="26" font-weight="bold" class="svg-title">${escXml(title)}</text>
+${cards}</svg>`;
+}
+
+// TODO: 他チャート種別の実装 (stacked)
 function genStubSvg(chartType, name) {
   const W = 680;
   const H = 480;
@@ -692,6 +785,8 @@ for (const { file, type, parsed } of jsonMeta) {
     svg = genLineChartSvg(parsed);
   } else if (type === "scatter") {
     svg = genScatterChartSvg(parsed);
+  } else if (type === "summary") {
+    svg = genFindingsCardSvg(parsed);
   } else if (type) {
     warn(`chart type "${type}" not implemented for ${file} — emitting stub SVG`);
     svg = genStubSvg(type, baseName);
