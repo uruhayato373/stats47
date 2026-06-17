@@ -11,7 +11,8 @@ name: 🎨 Regenerate Blog SVGs (svg-builder 経由・dark mode 付与)
 #   3. ギャラリー HTML を artifact として保存 (視覚レビュー用)
 #   4. dry_run=false のときのみ diff-push-r2 --prefix app/blog で R2 へ反映
 #
-# ⚠️ 視覚変更を伴う: svg-builder の bar chart は 1列+セパレータ形式 (旧 CLI は 2列)。
+# ⚠️ 視覚変更を伴う: svg-builder の bar chart は layout:"columns" (カード型2列ランキング、
+#    順位バッジ+県名+値+横バー、960×N) が既定。旧 CLI の手書き2列とは座標・配色が異なる。
 #    まず dry_run=true で artifact ギャラリーを確認してから本番 push すること。
 #
 # 使い方:

@@ -76,7 +76,13 @@ CLI 内にインライン生成ロジックを書かない（重複・ドリフ�
 | `PALETTES.red` | 多い・危険・ワースト順（1位が最悪の指標） | `#c62828`（濃）〜`#ef9a9a`（薄） |
 | `PALETTES.blue` | 少ない・安全・ベスト順（1位が最良の指標） | `#1565c0`（濃）〜`#f0f8ff`（薄） |
 | `PALETTES.orange` | 中立的に多い（消費量・観光客数等） | `#e65100`（濃）〜`#fff8f0`（薄） |
+| `PALETTES.purple` | 中立的・嗜好品（アルコール等） | `#7b1fa2`（濃）〜`#fdf7ff`（薄） |
+| `PALETTES.green` | 中立的・自然/環境 | `#2e7d32`（濃）〜`#f7fcf8`（薄） |
 | `SCATTER_COLORS.mid` | 散布図ドット（均一色） | fill `#6b8fc9` / stroke `#3b6fa0` |
+
+> **CARD_THEMES（カード型2列ランキング専用）**: `bar-chart.ts` の `layout:"columns"` は header/bar/cardAlt の
+> 専用色セット（`CARD_THEMES`、red=`#dc2626`/`#ef4444`/`#fef2f2` 等の Tailwind 系）を使う。カードはライト固定の
+> 島として描画し、外枠 (`svg-bg`/`svg-title`) のみ dark 追従する（手本 aging-solo / alcohol に忠実）。
 
 **選択基準**:
 - 指標が高い = 悪い（死亡率・犯罪率・失業率） → `red`
@@ -278,5 +284,6 @@ const svg = generateBarChartSvg(items, { title: "...", palette: "red", ... });
 - 監査スキル: `.claude/skills/ui/audit-blog-svg-charts/SKILL.md`
 - ビルダーライブラリ: `packages/svg-builder/src/`
 - 生成 CLI: `.claude/scripts/blog/generate-article-charts.ts`
-- 目視レビューギャラリー: `.claude/scripts/blog/build-svg-gallery.mjs`（全 SVG を HTML 一覧化）
+- 目視レビューギャラリー: `.claude/scripts/blog/build-svg-gallery.mjs`（記事別に全 SVG を HTML 一覧化）
+- カタログ別タブ切替ギャラリー: `.claude/scripts/blog/build-svg-gallery-tabbed.mjs`（6カタログ+未分類にタブ分類。`--source r2` 既定で公開 URL から取得。カタログ内の見た目統一を確認する用途）
 - ブログ品質基準: `.claude/rules/blog-quality-standards.md`

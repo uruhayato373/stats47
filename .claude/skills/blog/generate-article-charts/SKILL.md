@@ -105,7 +105,7 @@ node scripts/temp-generate-charts.mjs
 | 属性 | 値 |
 |---|---|
 | `width`/`height` | **`viewBox` の幅・高さと一致させること**（不一致だと `preserveAspectRatio` で左右に余白ができる） |
-| `viewBox` | 論理座標。バー: `0 0 680 480`, 折れ線: `0 0 680 400〜460`, 散布図: `0 0 560 560`, タイルグリッド: `0 0 600 665〜700` |
+| `viewBox` | 論理座標。ランキング(columns・推奨): `0 0 960 {124+N×44+60}`（10件=624/5件=404）, 折れ線: `0 0 680 420`, 散布図: `0 0 960 624`, タイルグリッド: `0 0 600 700`。※手書き値ではなく svg-builder が自動付与 |
 | `rx` | バー/折れ線: `8`, タイルグリッド: なし |
 | `font-family` | `'Hiragino Sans','Noto Sans JP',sans-serif`（タイルグリッド内テキストは `'Noto Sans JP',sans-serif`） |
 

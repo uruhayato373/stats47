@@ -48,7 +48,14 @@ grep -rn \
 `#c62828`, `#d32f2f`, `#e53935`, `#ef5350`, `#e57373`, `#ef9a9a`,
 `#1565c0`, `#1976d2`, `#1e88e5`, `#2196f3`, `#42a5f5`, `#64b5f6`, `#90caf9`, `#bbdefb`, `#e3f2fd`, `#f0f8ff`,
 `#e65100`, `#ef6c00`, `#f57c00`, `#fb8c00`, `#ffa726`, `#ffb74d`, `#ffcc80`, `#ffe0b2`, `#fff3e0`, `#fff8f0`,
-`#6b8fc9`, `#3b6fa0`）を除いた残りが是正対象。
+`#7b1fa2`, `#8e24aa`, `#9c27b0`, `#ab47bc`, `#ba68c8`, `#ce93d8`, `#e1bee7`, `#f3e5f5`, `#f8eafc`, `#fdf7ff`,
+`#2e7d32`, `#388e3c`, `#43a047`, `#66bb6a`, `#81c784`, `#a5d6a7`, `#c8e6c9`, `#e8f5e9`, `#f1f8f2`, `#f7fcf8`,
+`#6b8fc9`, `#3b6fa0`,
+`#dc2626`, `#ef4444`, `#fef2f2`, `#eff6ff`）を除いた残りが是正対象。
+
+> **CARD_THEMES（カード型2列ランキング `layout:"columns"` の専用色）**: `bar-chart.ts` の `CARD_THEMES`
+> は header/bar/cardAlt の専用色セット（red=`#dc2626`/`#ef4444`/`#fef2f2`、blue=`#1565c0`/`#42a5f5`/`#eff6ff`、
+> purple/orange/green は PALETTES と同系）。これらは上記許可リストに含むため対象外。SSoT は `bar-chart.ts`。
 
 ### C. CSS 変数使用（重大度: high）
 

@@ -156,9 +156,12 @@ node .claude/scripts/lib/article-factual-check.mjs \
    - 全体差 (1位 / 最下位 / 倍率を提示)
    - 「発見」の予告 (この記事で読者が得る示唆を 1 行)
 
-2. **H2: 上位5と下位5** (chart + 解説)
-   - 上位/下位は **生成画像 `![alt](data/<name>.svg)`** で可視化する (上位5+下位5)。
+2. **H2: 上位と下位** (chart + 解説)
+   - 上位/下位は **生成画像 `![alt](data/<name>.svg)`** で可視化する。ランキングは svg-builder の
+     **カード型2列ランキング** (`layout:"columns"` 既定: 左=上位/右=下位、順位バッジ+県名+値+横バー、960×N) になる。
      `node .claude/scripts/blog/generate-article-charts.ts --slug <slug>` で data/*.json から生成。
+   - 件数は `data/<name>-ranking.json` の `topN` で **5 (既定) か 10** を指定。色は `palette`/`rightPalette`
+     (red/blue/orange/purple/green)、カラムヘッダーは `highLabel`/`lowLabel` で指定 (例「年収が高い県」)。
      ★**`<chart-placeholder>` と インライン `<svg>` は禁止** (未描画/混在の温床。`quality-gate.mjs` が blocker。
      正典 = `.claude/rules/blog-quality-standards.md`「記事 markdown の正典テンプレート」)
    - ★**表を置く場合は「全件 (全47件等)」か「置かない」の二択。** 図と重複する
