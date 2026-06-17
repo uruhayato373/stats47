@@ -13,7 +13,7 @@ import {
 } from "@stats47/components/atoms/ui/card";
 import { ArrowRight, BarChart3, MapPin } from "lucide-react";
 
-import type { PageComponent } from "@/features/stat-charts";
+import type { PageComponent } from "@/components/stat-charts";
 
 import { ThemeDbChartRenderer } from "./ThemeDbChartRenderer";
 

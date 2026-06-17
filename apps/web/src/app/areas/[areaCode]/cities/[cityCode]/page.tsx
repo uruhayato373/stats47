@@ -26,7 +26,7 @@ import { AreaBannerAd } from "@/features/ads/server";
 import { CategoryNavGrid, CitiesNavCard } from "@/features/area-profile";
 import { PHASE_1_SSG_CITIES } from "@/features/area-profile/constants/stage-1-cities";
 import { listCategories } from "@/features/category/server";
-import { readCityCategoryKeysFromR2 } from "@/features/stat-charts/server";
+import { readCityCategoryKeysFromR2 } from "@/components/stat-charts/server";
 
 import { AdSenseAd, CONTENT_FOOTER } from "@/lib/google-adsense";
 

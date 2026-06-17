@@ -8,8 +8,8 @@ import { lookupArea } from "@stats47/area";
 import { Card, CardContent, CardHeader, CardTitle } from "@stats47/components/atoms/ui/card";
 import { TrendingUp, MapPin, ArrowDownUp } from "lucide-react";
 
-import { LineChartClient } from "@/features/stat-charts/components/charts/LineChart/LineChartClient";
-import type { LineChartData } from "@/features/stat-charts/types/visualization";
+import { LineChartClient } from "@/components/stat-charts/components/charts/LineChart/LineChartClient";
+import type { LineChartData } from "@/components/stat-charts/types/visualization";
 
 import { fetchMetricTimeseriesAction, type MetricTimeseriesPoint } from "../actions";
 

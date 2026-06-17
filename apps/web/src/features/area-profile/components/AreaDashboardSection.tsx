@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 
-import { DashboardGridLayout, loadPageComponents, type PageComponent } from "@/features/stat-charts/server";
-import type { DashboardComponent } from "@/features/stat-charts/types";
+import { DashboardGridLayout, loadPageComponents, type PageComponent } from "@/components/stat-charts/server";
+import type { DashboardComponent } from "@/components/stat-charts/types";
 
 
 import { CityRankingPreview } from "./CityRankingPreview";

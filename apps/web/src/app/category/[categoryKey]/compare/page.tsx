@@ -125,7 +125,7 @@ export default async function CompareCategoryPage({ params, searchParams }: Page
     const choroplethMapData = await fetchChoroplethMapData(categoryKey, areaCodes);
 
     // loadPageComponents で全コンポーネントを一括取得（R2 snapshot 経由）
-    const { loadPageComponents } = await import("@/features/stat-charts/services/page-components-snapshot").then(
+    const { loadPageComponents } = await import("@/components/stat-charts/services/page-components-snapshot").then(
         (m) => ({ loadPageComponents: m.readPageComponentsFromR2 }),
     );
     const pageComponents = areaCodes.length === 2

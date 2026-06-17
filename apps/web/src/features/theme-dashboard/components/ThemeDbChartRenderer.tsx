@@ -6,10 +6,10 @@ import dynamic from "next/dynamic";
 
 import { Skeleton } from "@stats47/components/atoms/ui/skeleton";
 
-import type { PageComponent, LineChartData, MixedChartData } from "@/features/stat-charts";
-import { CompositionChartClient } from "@/features/stat-charts/components/charts/CompositionChart/CompositionChartClient";
-import { LineChartClient } from "@/features/stat-charts/components/charts/LineChart/LineChartClient";
-import { PyramidChartClient } from "@/features/stat-charts/components/charts/PyramidChart/PyramidChartClient";
+import type { PageComponent, LineChartData, MixedChartData } from "@/components/stat-charts";
+import { CompositionChartClient } from "@/components/stat-charts/components/charts/CompositionChart/CompositionChartClient";
+import { LineChartClient } from "@/components/stat-charts/components/charts/LineChart/LineChartClient";
+import { PyramidChartClient } from "@/components/stat-charts/components/charts/PyramidChart/PyramidChartClient";
 
 import { fetchDbChartDataAction, type DonutChartItem, type CpiProfileItem, type CpiHeatmapItem, fetchPopulationPyramidAction, type PopulationPyramidResult } from "../actions";
 
@@ -48,7 +48,7 @@ interface Props {
 type ChartResult =
   | { type: "line"; data: LineChartData }
   | { type: "mixed"; data: MixedChartData }
-  | { type: "composition"; data: import("@/features/stat-charts/adapters/toCompositionChartData").CompositionChartData }
+  | { type: "composition"; data: import("@/components/stat-charts/adapters/toCompositionChartData").CompositionChartData }
   | { type: "donut"; data: DonutChartItem[] }
   | { type: "cpi-profile"; data: CpiProfileItem[] }
   | { type: "cpi-heatmap"; data: CpiHeatmapItem[] }

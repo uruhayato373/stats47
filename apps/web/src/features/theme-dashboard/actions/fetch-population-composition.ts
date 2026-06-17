@@ -5,8 +5,8 @@ import {
   type GetStatsDataParams,
 } from "@stats47/estat-api/server";
 
-import { toCompositionChartData } from "@/features/stat-charts/adapters/toCompositionChartData";
-import { getEstatCacheStorage } from "@/features/stat-charts/server";
+import { toCompositionChartData } from "@/components/stat-charts/adapters/toCompositionChartData";
+import { getEstatCacheStorage } from "@/components/stat-charts/server";
 
 import type { AgeCompositionData } from "../components";
 

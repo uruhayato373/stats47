@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useRef } from "react";
 
-import { DashboardCard } from "@/features/stat-charts";
+import { DashboardCard } from "@/components/stat-charts";
 
 import type { ComparisonRegion } from "../types";
 import type { TopoJSONTopology } from "@stats47/types";
