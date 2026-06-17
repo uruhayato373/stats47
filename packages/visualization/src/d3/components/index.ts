@@ -9,6 +9,8 @@ export { CityMapChart } from "./CityMapChart";
 export type { CityMapChartProps } from "./CityMapChart";
 export { PrefectureMapChart } from "./PrefectureMapChart";
 export { TileGridMap } from "./TileGridMapChart";
+export * from "./DivergingChoroplethMap";
+export * from "./TimelineChoroplethMap";
 
 // チャートコンポーネント
 export * from "./BarChart";

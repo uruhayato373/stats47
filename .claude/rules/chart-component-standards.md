@@ -58,6 +58,8 @@ Feature-scoped（明示的に例外認定）
 | `SunburstChart` | `D3SunburstChart` | サンバーストチャート（階層内訳） |
 | `TileGridMapChart` | `D3TileGridMapChart` | タイルグリッドマップ（47都道府県） |
 | `TreemapChart` | `D3TreemapChart` | ツリーマップ |
+| `DivergingChoroplethMap` | `DivergingChoroplethMap` | 符号付き増減率コロプレス（RdBu・カスタムtooltip・凡例付き） |
+| `TimelineChoroplethMap` | `TimelineChoroplethMap` | 時系列再生UI付きコロプレス（DivergingChoroplethMapをラップ） |
 
 インポートパス: `@stats47/visualization/d3` または `@stats47/visualization/d3/<ComponentName>`
 
@@ -149,16 +151,13 @@ e-Stat連携・データ変換・ローディング状態を内包したフル�
 | `RankingBoxplotChart` | `@/features/ranking/components/RankingBoxplotChart` | 同上 |
 | `TrendSparklineCard` | `@/features/ranking/components/RankingSidebar` | サイドバー専用 |
 | `AgeCompositionChart` | `@/features/theme-dashboard/components/AgeCompositionChart` | テーマ専用積み上げ棒 |
-| `MunicipalityChoroplethSection` | `@/features/region-comparison/components/MunicipalityChoroplethSection` | **市区町村粒度**コロプレス（県内 TopoJSON）。共有 `PrefectureMapChart`（47県粒度）でカバー不可 |
-| `MetricYoyChoroplethSection` | `@/features/theme-dashboard/components/MetricYoyChoroplethSection` | YoY **時系列再生アニメーション**付きコロプレス。`PrefectureMapChart` に再生軸がないため feature 固有 |
-| `HighwayTimelineMap` | `@/features/highway-history/HighwayTimelineMap` | 年次高速道路網の SVG パス描画（geo path、汎用チャートでない） |
-| `DepopulationChoroplethMap` | `@/features/depopulation-medical/components/DepopulationChoroplethMap` | 過疎×医療の掛け合わせ専用コロプレス |
+| `MunicipalityChoroplethSection` | `@/features/region-comparison/components/MunicipalityChoroplethSection` | データ取得・2 県並列表示のラッパー。描画は共有 `DivergingChoroplethMap` に委譲 |
+| `MetricYoyChoroplethSection` | `@/features/theme-dashboard/components/MetricYoyChoroplethSection` | データ取得・セクションラッパー。描画は共有 `TimelineChoroplethMap` に委譲 |
+| `HighwayTimelineMap` | `@/features/highway-history/HighwayTimelineMap` | 高速道路網の線描画（geo path）。コロプレスではない道路特有の可視化 |
 
-> **地理コロプレスの方針**: 47 都道府県粒度の汎用コロプレスは共有 `PrefectureMapChart`（`@stats47/visualization/d3`）を使う。
-> 上記 feature-scoped 例外は (a) 市区町村粒度、(b) 時系列再生、(c) 掛け合わせ専用、など `PrefectureMapChart` が
-> 設計上カバーしない固有要件を持つもののみ。**新規の 47 県コロプレスを feature 内に独自実装してはならない**。
-> 符号付き増減率（+X.X%）ツールチップなど汎用 `useD3Tooltip`/`createTooltipContent` が表現できない表示は、
-> 例外コンポーネント内のカスタム tooltip を許容する（ただし色は CSS 変数必須）。
+> **地理コロプレスの方針**: 符号付き増減率コロプレスは **`DivergingChoroplethMap`**（`@stats47/visualization/d3`）を使う。
+> 時系列再生UIが必要な場合は **`TimelineChoroplethMap`** でラップする。feature 内に独自のコロプレス実装を追加してはならない。
+> feature 内の `*ChoroplethSection` / `*ChoroplethMap` は「データ取得・レイアウト配置」のみを担い、描画は共有コンポーネントに委譲する。
 
 ---
 

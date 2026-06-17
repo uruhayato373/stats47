@@ -37,6 +37,8 @@
     "./d3/SunburstChart": "./src/d3/components/SunburstChart/index.ts",
     "./d3/TileGridMapChart": "./src/d3/components/TileGridMapChart/index.ts",
     "./d3/TreemapChart": "./src/d3/components/TreemapChart/index.ts",
+    "./d3/DivergingChoroplethMap": "./src/d3/components/DivergingChoroplethMap/index.ts",
+    "./d3/TimelineChoroplethMap": "./src/d3/components/TimelineChoroplethMap/index.ts",
     "./shared": {
       "types": "./src/shared/index.ts",
       "import": "./src/shared/index.ts",
