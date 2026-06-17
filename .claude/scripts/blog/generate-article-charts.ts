@@ -148,9 +148,11 @@ const rawName = (it) => it.pref || it.areaName || it.label || it.name || "";
 const normPref = (s) => String(s || "").replace(/[都道府県]$/, "").replace(/^北海$/, "北海道").trim();
 
 /**
- * bar chart: [{ pref, value }] / { data, title, subtitle, unit }
+ * bar chart: [{ pref, value }] / { data, title, subtitle, unit, topN?, layout? }
  * → svg-builder generateBarChartSvg (BarItem[] with separator)
- * 標準: 上位5 + 下位5 (2026-06-02 確定)
+ *
+ * topN: 上位・下位それぞれの件数。デフォルト 5。10 を指定すると上位10+下位10。
+ * layout: "columns"（デフォルト）で左右2列表示。"single" で縦1列+中略表示。
  */
 function genBarChartSvg(data) {
   const items = Array.isArray(data) ? data : data.data || [];
@@ -159,8 +161,9 @@ function genBarChartSvg(data) {
   const subtitle = (Array.isArray(data) ? null : data.subtitle) ?? undefined;
   const unit = (Array.isArray(data) ? null : data.unit) ?? "";
   const palette = (Array.isArray(data) ? null : data.palette) ?? "red";
+  const N = (Array.isArray(data) ? null : data.topN) ?? 5;
+  const layout = (Array.isArray(data) ? null : data.layout) ?? "columns";
 
-  const N = 5;
   const sorted = [...items].sort((a, b) => (b.value ?? 0) - (a.value ?? 0));
   const top = sorted.slice(0, N);
   const bottom = sorted.slice(-N).reverse();
@@ -177,7 +180,7 @@ function genBarChartSvg(data) {
     })),
   ];
 
-  return generateBarChartSvg(barItems, { title, subtitle, unit, palette });
+  return generateBarChartSvg(barItems, { title, subtitle, unit, palette, layout });
 }
 
 /**
