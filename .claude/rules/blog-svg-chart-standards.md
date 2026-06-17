@@ -250,13 +250,14 @@ const svg = generateBarChartSvg(items, { title: "...", palette: "red", ... });
 
 1. ✅ **`generateFindingsCardSvg` を svg-builder に新設**（2026-06-17 完了）
    → `packages/svg-builder/src/charts/findings-card.ts` 実装済。`svgThemeStyle()` 準拠。`generate-article-charts.ts` に `summary` タイプのディスパッチ追加・alias 命名パターン対応済
-2. **CLI のインライン生成器を svg-builder 呼び出しに置換**（`genBarChartSvg` 等 4 関数 → `@stats47/svg-builder`）
-   → CLI を `.mjs`（node）から `.mts`（tsx）に変換し TS インポートを有効化する。ただし既存 SVG の visual 変更を伴う（単列 + セパレーター形式 vs 現状の2列形式）。デザイン確認後に実施。
+2. ✅ **CLI のインライン生成器を svg-builder 呼び出しに置換**（`genBarChartSvg` 等 5 関数 → `@stats47/svg-builder`）（2026-06-17 完了）
+   → `generate-article-charts.mjs` を `.ts` にリネームし tsx 実行に変更（tsx の ESM hook が `.mjs` entry の imported `.ts` を変換しないため）。5 つのインライン生成器を削除し svg-builder を直接 import する adapter に置換。`svgThemeStyle()` が全チャートに自動付与される。CI（`generate-article-charts.yml`）も `npx tsx` に更新。視覚変更（1列+セパレータ vs 旧2列）を伴うため既存 SVG の是正は Step 4 で dry-run 確認後に実施。
 3. ✅ **`detectChartType` に alias ディスパッチを実装**（§4 alias 表を機械化）（2026-06-17 完了）
-4. **ダークモード未対応 482枚の再生成**（svg-builder 経由で `sync-snapshots` から一括再生成 → R2）
+4. 🔄 **ダークモード未対応 SVG の再生成**（svg-builder 経由で一括再生成 → R2）
+   → ワークフロー `regenerate-blog-svgs.yml` 追加済（2026-06-17）。R2 `app/blog` をダウンロード → 各 slug で `generate-article-charts.ts --base .local/r2/app/blog` を実行し data/*.json から *.svg を再生成（dark mode 自動付与）。**dry_run=true 既定**でギャラリー artifact を出力、本番 R2 push は `dry_run=false` 明示時のみ。`data/*.json` を持たない無意味名 SVG（inline-chart-N）は対象外で手動 brushup が必要。**実行には develop への配備 + workflow dispatch が必要**。まず dry-run でギャラリーを視覚確認してから本番反映する。
 5. **viewBox 標準幅への収斂**（再生成時に §5 標準幅を適用）
 
-> 進捗は是正のたびに本表の「実態」を更新する。再生成は CI（`sync-snapshots.yml`）経由（ローカル R2 書き込み禁止）。
+> 進捗は是正のたびに本表の「実態」を更新する。再生成は CI（`regenerate-blog-svgs.yml` / `sync-snapshots.yml`）経由（ローカル R2 書き込み禁止）。
 
 ---
 
