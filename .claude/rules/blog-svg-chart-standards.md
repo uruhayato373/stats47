@@ -251,8 +251,8 @@ const svg = generateBarChartSvg(items, { title: "...", palette: "red", ... });
 1. ✅ **`generateFindingsCardSvg` を svg-builder に新設**（2026-06-17 完了）
    → `packages/svg-builder/src/charts/findings-card.ts` 実装済。`svgThemeStyle()` 準拠。`generate-article-charts.mjs` に `summary` タイプのディスパッチ追加・alias 命名パターン対応済
 2. **CLI のインライン生成器を svg-builder 呼び出しに置換**（`genBarChartSvg` 等 4 関数 → `@stats47/svg-builder`）
-   → 重複ロジック消去・ダークモード自動付与。§7 禁止パターンの根絶
-3. **`classifyChartType` に alias ディスパッチを実装**（§4 alias 表を機械化）
+   → CLI を `.mjs`（node）から `.mts`（tsx）に変換し TS インポートを有効化する。ただし既存 SVG の visual 変更を伴う（単列 + セパレーター形式 vs 現状の2列形式）。デザイン確認後に実施。
+3. ✅ **`detectChartType` に alias ディスパッチを実装**（§4 alias 表を機械化）（2026-06-17 完了）
 4. **ダークモード未対応 482枚の再生成**（svg-builder 経由で `sync-snapshots` から一括再生成 → R2）
 5. **viewBox 標準幅への収斂**（再生成時に §5 標準幅を適用）
 
