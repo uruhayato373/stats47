@@ -34,9 +34,15 @@ grep -rn \
 # feature 内に SVG / D3 を使った独自チャートが定義されている
 grep -rn \
   --include="*.tsx" \
-  -E '<svg|from "d3"|import.*d3' \
+  -E '<svg|from "d3"|import.*d3|from "d3-' \
   apps/web/src/features/
 ```
+
+**除外（誤検知）**:
+- **アイコン SVG**（`<svg viewBox="0 0 24 24">` 等の小型アイコン、`fill-current`、share/SNS ボタン）はチャートではない。例: `BlogShareRail.tsx`, `md-content.tsx`（markdown レンダラの svg パススルー）
+- **`chart-component-standards.md` §2-D の例外認定リスト**に載っているコンポーネント（`MunicipalityChoroplethSection`, `MetricYoyChoroplethSection`, `HighwayTimelineMap`, `DepopulationChoroplethMap`, `AgeCompositionChart`, `Blog*Chart`, `Ranking*Chart` 等）。これらは正式に feature-scope を認定済み
+
+判定: グレップ結果から上記除外を引いた残りが「未認定の独自実装」= 是正対象。新規に出てきたら §2-D に追加するか共有化する。
 
 ### C. 独自カードラッパー（重大度: medium）
 
@@ -56,13 +62,16 @@ grep -rn \
 
 ```bash
 # D3 を使っているのに useD3Tooltip を使っていないファイル
-files_with_d3=$(grep -rl 'from "d3"' apps/web/src/ packages/visualization/src/)
+# d3-geo / d3-scale / 動的 import("d3") も対象に含める
+files_with_d3=$(grep -rlE 'from "d3"|from "d3-|import\("d3"\)' apps/web/src/ packages/visualization/src/)
 for f in $files_with_d3; do
   if ! grep -q "useD3Tooltip" "$f"; then
     echo "D3 without useD3Tooltip: $f"
   fi
 done
 ```
+
+**除外**: §2-D 例外認定コンポーネント（地理コロプレスの符号付き増減率 tooltip など汎用 `createTooltipContent` が表現できない表示はカスタム tooltip 許容。ただし色は CSS 変数必須）。
 
 ### E. shadcn Card 未使用のカード形状（重大度: low）
 

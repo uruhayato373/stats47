@@ -277,7 +277,7 @@ async function fetchDonutData(
 
   const top = valid.slice(0, topN);
   const otherValue = valid.slice(topN).reduce((sum, i) => sum + i.value, 0);
-  top.push({ name: "その他", value: otherValue, color: "#d4d4d4" });
+  top.push({ name: "その他", value: otherValue, color: "hsl(var(--muted-foreground))" });
   return { type: "donut", data: top };
 }
 

@@ -22,9 +22,9 @@ const STATS_DATA_ID = "0000010101";
 const NATIONAL_AREA_CODE = "00000";
 
 const SEGMENTS = [
-  { code: "A1301", label: "15歳未満", color: "#22c55e" },
-  { code: "A1302", label: "15〜64歳", color: "#3b82f6" },
-  { code: "A1303", label: "65歳以上", color: "#ef4444" },
+  { code: "A1301", label: "15歳未満", color: "hsl(var(--chart-1))" },
+  { code: "A1302", label: "15〜64歳", color: "hsl(var(--chart-2))" },
+  { code: "A1303", label: "65歳以上", color: "hsl(var(--chart-3))" },
 ] as const;
 
 export interface AgeCompositionResult {
