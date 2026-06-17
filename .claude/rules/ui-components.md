@@ -32,6 +32,19 @@ CSS Grid (`lg:grid` + `items-start`) 内の `sticky` aside には **必ず `max-
 - `apps/web/src/features/redesign/components/RightRailWidgets.tsx` — `scrollClass`
 - 3カラムレイアウトを持つすべての新規ページ
 
+## チャートコンポーネント
+
+**チャート・グラフを追加するときは先に `.claude/rules/chart-component-standards.md` のカタログを確認する。**
+既存の `MiniLineChart` / `MiniBarChart` / `ChartCard` 等が使えるケースでは再実装しない。
+新規チャートが必要な場合は `chart-component-builder` agent に設計を依頼する。
+
+## チャートコンポーネント（★新規追加前に必読）
+
+チャート・グラフを追加するときは先に **`.claude/rules/chart-component-standards.md`** のカタログを確認する。
+既存の `MiniLineChart` / `MiniBarChart` / `ChartCard` 等が使えるケースでは再実装しない。
+新規チャートが必要な場合は `chart-component-builder` agent に設計を依頼する。
+規約違反の検出は `/audit-chart-components` スキルで実行する。
+
 ## コンポーネント選択
 
 - **`@stats47/components` の shadcn ベースコンポーネントを優先使用する。**

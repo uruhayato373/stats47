@@ -109,9 +109,9 @@ export function generateScatterSvg(points: ScatterPoint[], options: ScatterOptio
       : null;
   const regionColorMap = regionBlocks ? buildRegionColorMap(regionBlocks) : null;
 
-  const W = 560;
+  const W = 960; // §5 散布図標準幅
   const legendH = regionBlocks ? 40 : 0;
-  const H = 560 + legendH;
+  const H = 624; // §5 散布図標準高さ（凡例は bottom マージンで吸収）
   const plot = makePlotArea(W, H, { top: 58, right: 28, bottom: 58 + legendH, left: 68 });
 
   // 軸範囲

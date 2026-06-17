@@ -1,8 +1,13 @@
 import type { StatsSchema } from "@stats47/types";
 
+// カテゴリカルパレットは globals.css の --chart-1〜5 を循環使用する。
+// 5 系列を超える場合は循環し、はみ出しは呼び出し元が colors prop で上書きする。
 const DEFAULT_COLORS = [
-  "#22c55e", "#f59e0b", "#ef4444", "#3b82f6", "#8b5cf6",
-  "#06b6d4", "#ec4899", "#6b7280", "#059669", "#d97706",
+  "hsl(var(--chart-1))",
+  "hsl(var(--chart-2))",
+  "hsl(var(--chart-3))",
+  "hsl(var(--chart-4))",
+  "hsl(var(--chart-5))",
 ];
 
 export interface CompositionSegment {
@@ -88,7 +93,7 @@ export function toCompositionChartData(
   }));
 
   if (hasTotalData) {
-    series.push({ key: othersLabel, label: othersLabel, color: "#9ca3af" });
+    series.push({ key: othersLabel, label: othersLabel, color: "hsl(var(--muted-foreground))" });
   }
 
   const unit = rawDataList[0]?.[0]?.unit ?? "";

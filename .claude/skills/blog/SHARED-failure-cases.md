@@ -86,11 +86,11 @@
 - `manufacturing-aichi-dominance`: SVG chart で rank 4 = 岡山 7,335万円, rank 5 = 三重 7,085万円 と書いたが、data の正しい rank 4 = 愛媛 6,639万円, rank 5 = 岡山 6,464万円
 
 **根本原因**: 
-- `generate-article-charts.mjs` は data から SVG を生成するが、agent はそれを使わず手書きすることがある
+- `generate-article-charts.ts` は data から SVG を生成するが、agent はそれを使わず手書きすることがある
 - 手書き SVG には provenance がなく、cross-check しにくい
 
 **検出機構** (2026-05-25 追加):
-- `generate-article-charts.mjs` で生成 SVG の冒頭に `<!-- data-source: <file>.json | generated: <iso> -->` provenance comment を embed
+- `generate-article-charts.ts` で生成 SVG の冒頭に `<!-- data-source: <file>.json | generated: <iso> -->` provenance comment を embed
 - `article-factual-check.mjs` の `checkInlineSvgProvenance()` で article.md の inline SVG をスキャン
 - 直前 200 chars に `data-source` comment がない SVG → `INLINE_SVG_NO_PROVENANCE` warning
 

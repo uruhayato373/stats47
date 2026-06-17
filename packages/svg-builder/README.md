@@ -87,18 +87,32 @@ joinStats(xData: StatsSchema[], yData: StatsSchema[])
 
 ## チャート生成関数
 
-### `generateBarChartSvg(items, options)` — 横棒グラフ
+### `generateBarChartSvg(items, options)` — ランキング棒/カード
+
+`layout:"columns"`（推奨）= カード型2列ランキング（左=上位/右=下位、順位バッジ+県名+値+横バー、960×N）。
+`layout:"single"`（既定）= 縦1列+「…中略…」(680 幅)。columns では `BarItem.rank`/`name` を渡す。
 
 ```ts
-import { toSplitItems, generateBarChartSvg } from "@stats47/svg-builder";
+import { generateBarChartSvg } from "@stats47/svg-builder";
 
-const svg = generateBarChartSvg(toSplitItems(data, 5, 5), {
-  title: "交通事故死者数ランキング",
-  subtitle: "2023年度 / 人口10万人あたり",
-  unit: "人",
-  palette: "red",   // "red" | "blue" | "orange"
-  xMin: 0,
-});
+// カード型2列ランキング（aging-solo / alcohol スタイル）
+const svg = generateBarChartSvg(
+  [
+    { rank: 1, name: "高知県", label: "1位 高知県", value: 17.8 },
+    // ...上位 N 件...
+    { label: "…", value: 0, isSeparator: true },
+    // ...下位 N 件...
+  ],
+  {
+    title: "65歳以上「ひとり暮らし率」ランキング",
+    unit: "％",
+    layout: "columns",       // "single" | "columns"
+    palette: "red",          // 左カラム: red|blue|orange|purple|green
+    rightPalette: "blue",    // 右カラム
+    highLabel: "ひとり暮らし率が高い県",
+    lowLabel: "ひとり暮らし率が低い県",
+  },
+);
 ```
 
 ### `generateChoroplethSvg(items, options)` — タイルグリッドマップ

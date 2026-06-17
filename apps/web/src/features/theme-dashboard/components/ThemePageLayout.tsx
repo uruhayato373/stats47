@@ -14,8 +14,8 @@ import { PageHeader } from "@/components/layout";
 import { SidebarPromoBanner } from "@/features/ads";
 import { resolveAffiliateBanners } from "@/features/ads/server";
 import { NativeAffiliateRow } from "@/features/redesign";
-import { loadPageComponents } from "@/features/stat-charts/server";
-import { prefetchThemeKpiData } from "@/features/stat-charts/services/prefetch-theme-kpi";
+import { loadPageComponents } from "@/components/stat-charts/server";
+import { prefetchThemeKpiData } from "@/components/stat-charts/services/prefetch-theme-kpi";
 
 import { AdSenseAd, THEMES_CONTENT } from "@/lib/google-adsense";
 

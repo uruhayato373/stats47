@@ -29,6 +29,9 @@ jobs:
         with:
           node-version: "20"
 
+      - name: 📦 Install dependencies (for tsx + svg-builder)
+        run: npm ci --workspace=packages/svg-builder --include-workspace-root --ignore-scripts
+
       - name: 🔍 Detect changed slugs
         id: slugs
         run: |
@@ -56,7 +59,7 @@ jobs:
           FAIL=0
           while IFS= read -r SLUG; do
             [ -z "$SLUG" ] && continue
-            if OUT=$(node .claude/scripts/blog/generate-article-charts.mjs --slug "$SLUG" --validate 2>&1); then
+            if OUT=$(npx tsx .claude/scripts/blog/generate-article-charts.ts --slug "$SLUG" --validate 2>&1); then
               echo "| \`$SLUG\` | ✅ OK |" >> /tmp/validate/report.md
             else
               FAIL=1

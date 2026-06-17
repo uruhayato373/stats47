@@ -67,15 +67,22 @@ export function lintSvgContent(content) {
   }
 
   // --- theme 依存色の inline 直書き (WARN) ---
-  const foundColors = THEME_DEPENDENT_COLORS.filter((col) => {
-    const re = new RegExp(`(?:fill|stroke)\\s*=\\s*"${escapeRegExp(col)}"`, "i");
-    return re.test(c);
-  });
-  if (foundColors.length > 0) {
-    warnings.push(
-      `theme 依存色を inline 指定: ${foundColors.join(", ")} —` +
-        ` svg-* class (svg-bg/svg-title/svg-axis/svg-tick/svg-grid) に置換すると dark mode 追従`,
-    );
+  // svgThemeStyle() (@media prefers-color-scheme:dark) を含む = svg-builder 出力で、
+  // 何を dark 追従させ何を固定するかは意図的に選択済み。カード型2列ランキング
+  // (layout:"columns") はライト固定のカード島 (#ffffff カード背景 / #1f2937 県名) を
+  // 意図的に使うため、ここで残る inline 色は誤検知。dark style がある SVG はこの WARN を出さない。
+  const hasThemeStyle = /prefers-color-scheme\s*:\s*dark/.test(c);
+  if (!hasThemeStyle) {
+    const foundColors = THEME_DEPENDENT_COLORS.filter((col) => {
+      const re = new RegExp(`(?:fill|stroke)\\s*=\\s*"${escapeRegExp(col)}"`, "i");
+      return re.test(c);
+    });
+    if (foundColors.length > 0) {
+      warnings.push(
+        `theme 依存色を inline 指定: ${foundColors.join(", ")} —` +
+          ` svg-* class (svg-bg/svg-title/svg-axis/svg-tick/svg-grid) に置換すると dark mode 追従`,
+      );
+    }
   }
 
   return { errors, warnings };

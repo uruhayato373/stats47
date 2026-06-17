@@ -16,7 +16,7 @@ import {
 import { isOk, type AreaType, type TopoJSONTopology } from "@stats47/types";
 
 
-import { getEstatCacheStorage } from "@/features/stat-charts/server";
+import { getEstatCacheStorage } from "@/components/stat-charts/server";
 
 import { logger } from "@/lib/logger";
 

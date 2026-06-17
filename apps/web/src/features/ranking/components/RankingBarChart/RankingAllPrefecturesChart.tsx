@@ -23,7 +23,7 @@ const BOTTOM_MARGIN = 10;
 const LEFT_MARGIN = 80;
 const RIGHT_MARGIN = 5;
 
-const BAR_COLOR = "#3b82f6";
+const BAR_COLOR = "hsl(var(--primary))";
 
 export function RankingAllPrefecturesChart({
   rankingValues,

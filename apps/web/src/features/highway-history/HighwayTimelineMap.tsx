@@ -113,11 +113,11 @@ export async function HighwayTimelineMap({
         role="img"
         aria-label={`${year}年時点の日本の高速道路ネットワーク`}
       >
-        <path d={prefPath} fill="#e2e8f0" stroke="#94a3b8" strokeWidth={0.6} />
+        <path d={prefPath} fill="hsl(var(--muted))" stroke="hsl(var(--border))" strokeWidth={0.6} />
         <path
           d={hwyPath}
           fill="none"
-          stroke="#d97706"
+          stroke="hsl(var(--warning))"
           strokeWidth={1.6}
           strokeLinecap="round"
           strokeLinejoin="round"

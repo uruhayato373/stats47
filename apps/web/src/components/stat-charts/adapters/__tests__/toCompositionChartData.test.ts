@@ -71,7 +71,7 @@ describe("toCompositionChartData", () => {
 
     expect(result.trendData[0]["その他"]).toBe(20);
     expect(result.series).toHaveLength(3);
-    expect(result.series[2]).toEqual({ key: "その他", label: "その他", color: "#9ca3af" });
+    expect(result.series[2]).toEqual({ key: "その他", label: "その他", color: "hsl(var(--muted-foreground))" });
   });
 
   it("totalData のその他が負にならない", () => {
@@ -109,7 +109,7 @@ describe("toCompositionChartData", () => {
 
     const result = toCompositionChartData(rawDataList, ["テスト"], []);
 
-    expect(result.series[0].color).toBe("#22c55e");
+    expect(result.series[0].color).toBe("hsl(var(--chart-1))");
   });
 
   it("trendData が年度昇順にソートされる", () => {

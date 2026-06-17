@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 
-import { ChartSkeleton, type DashboardComponent, type DashboardComponentType } from "@/features/stat-charts";
-import { DashboardComponentRenderer, computeSharedYDomain, type PageComponent } from "@/features/stat-charts/server";
+import { ChartSkeleton, type DashboardComponent, type DashboardComponentType } from "@/components/stat-charts";
+import { DashboardComponentRenderer, computeSharedYDomain, type PageComponent } from "@/components/stat-charts/server";
 
 import type { ComparisonRegion } from "../types";
 import type { Area } from "@stats47/area";

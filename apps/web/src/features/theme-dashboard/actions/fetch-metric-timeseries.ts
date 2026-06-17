@@ -7,7 +7,7 @@ import {
 import { readRankingItemFromR2 } from "@stats47/ranking/server";
 import { isOk } from "@stats47/types";
 
-import { getEstatCacheStorage } from "@/features/stat-charts/server";
+import { getEstatCacheStorage } from "@/components/stat-charts/server";
 
 /**
  * 指標の時系列データを取得する Server Action
