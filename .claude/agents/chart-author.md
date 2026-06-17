@@ -48,7 +48,7 @@ description: ブログ / note 記事用の SVG / Remotion チャート生成専�
 | `.local/r2/app/blog/<slug>/data/` | CRUD（生成チャート SVG・data JSON） |
 | `docs/21_ブログ記事原稿/<slug>/` | read 主体（chart 参照） |
 | `docs/31_note記事原稿/<slug>/` | CRUD（note 原稿） |
-| `.claude/scripts/blog/generate-article-charts.mjs` | read / 軽微修正（CLI ディスパッチ追加時） |
+| `.claude/scripts/blog/generate-article-charts.ts` | read / 軽微修正（CLI ディスパッチ追加時） |
 | `.claude/scripts/blog/build-svg-gallery.mjs` | run（目視レビュー用 HTML ギャラリー生成） |
 
 ## File Boundary (並行衝突回避)
@@ -72,7 +72,7 @@ description: ブログ / note 記事用の SVG / Remotion チャート生成専�
 1. `blog-svg-chart-standards.md` §2 カタログに追記（データ命名パターン・関数名・入力型）
 2. `packages/svg-builder/src/charts/<type>.ts` に実装（`svgThemeStyle()` / `PALETTES` 必須）
 3. `packages/svg-builder/src/charts/index.ts` にエクスポート追加
-4. `generate-article-charts.mjs` に命名パターンからのディスパッチ追加
+4. `generate-article-charts.ts` に命名パターンからのディスパッチ追加
 5. `/audit-blog-svg-charts` で違反ゼロを確認
 6. `build-svg-gallery.mjs` でギャラリーを再生成し新チャートの見た目を目視確認、`SendUserFile` で送付
 

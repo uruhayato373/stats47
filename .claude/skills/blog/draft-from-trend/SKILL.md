@@ -66,7 +66,7 @@ node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug <slug> --keys <metric
 ### Step 4: チャート生成
 
 ```bash
-node .claude/scripts/blog/generate-article-charts.mjs --slug <slug>
+node .claude/scripts/blog/generate-article-charts.ts --slug <slug>
 ```
 
 - `data/*.json` → `data/*.svg` を生成。認識サフィックス: `*-prefecture-rankings.json`(bar・`pref` フィールド必須) / `*-timeseries.json`(line) / `*-scatter.json`(scatter) / `*-tile-grid.json`(地図)。
@@ -96,7 +96,7 @@ node .claude/scripts/blog/quality-gate.mjs docs/21_ブログ記事原稿/<slug>/
 
 ## 規約
 
-- **コードを直接書かない** (orchestrator)。R2 データ接地は `fetch-ranking-data-r2.mjs`、チャートは `generate-article-charts.mjs`、検証は `article-factual-check.mjs`/`quality-gate.mjs`。
+- **コードを直接書かない** (orchestrator)。R2 データ接地は `fetch-ranking-data-r2.mjs`、チャートは `generate-article-charts.ts`、検証は `article-factual-check.mjs`/`quality-gate.mjs`。
 - **md-syntax 準拠**: `<source-link>` `<data-source>` は `.claude/skills/blog/md-syntax/SKILL.md`。
 - **TILE_GRID_LAYOUT**: タイルマップは `packages/visualization/src/d3/constants/tile-grid-layout.ts` から import。
 - **完成記事の参考**: 公開済み良記事 (`curl -s https://storage.stats47.jp/app/blog/<slug>/article.md`、例 `health-life-expectancy-structure` / `sports-urban-paradox`)。

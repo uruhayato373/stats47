@@ -158,7 +158,7 @@ node .claude/scripts/lib/article-factual-check.mjs \
 
 2. **H2: 上位5と下位5** (chart + 解説)
    - 上位/下位は **生成画像 `![alt](data/<name>.svg)`** で可視化する (上位5+下位5)。
-     `node .claude/scripts/blog/generate-article-charts.mjs --slug <slug>` で data/*.json から生成。
+     `node .claude/scripts/blog/generate-article-charts.ts --slug <slug>` で data/*.json から生成。
      ★**`<chart-placeholder>` と インライン `<svg>` は禁止** (未描画/混在の温床。`quality-gate.mjs` が blocker。
      正典 = `.claude/rules/blog-quality-standards.md`「記事 markdown の正典テンプレート」)
    - ★**表を置く場合は「全件 (全47件等)」か「置かない」の二択。** 図と重複する

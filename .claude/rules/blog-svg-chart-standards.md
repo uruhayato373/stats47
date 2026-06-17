@@ -18,7 +18,7 @@ Layer 1: SVG ビルダー（共有ライブラリ）
   └── shared/     theme・color・axis・layout・regression・stats-schema
 
 Layer 2: 記事 CLI（スキル実行エントリ）
-  .claude/scripts/blog/generate-article-charts.mjs  ← Layer 1 を呼ぶ
+  .claude/scripts/blog/generate-article-charts.ts  ← Layer 1 を呼ぶ
   .claude/skills/blog/generate-article-charts/       ← スキル定義
 ```
 
@@ -129,7 +129,7 @@ svg += svgThemeStyle();
 | `*-stacked.json` | `*-breakdown` / `*-composition` 等 | `generateStackedBarSvg` |
 | `*-summary-findings.json` | `*-findings` 等 | `generateFindingsCardSvg` ★ |
 
-> **alias の扱い**: `generate-article-charts.mjs` の型判定（`classifyChartType`）が alias を canonical 関数にディスパッチする。
+> **alias の扱い**: `generate-article-charts.ts` の型判定（`classifyChartType`）が alias を canonical 関数にディスパッチする。
 > alias は「既存資産の許容」であり、**新規記事は canonical を使う**こと。`inline-chart-N` / `chart-1` のような
 > **無意味名は禁止**（型が判別不能・監査で F 違反）。
 
@@ -222,7 +222,7 @@ const svg = generateBarChartSvg(items, { title: "...", palette: "red", ... });
 
 3. packages/svg-builder/src/charts/index.ts にエクスポート追加
 
-4. generate-article-charts.mjs で命名パターンから自動ディスパッチする分岐追加
+4. generate-article-charts.ts で命名パターンから自動ディスパッチする分岐追加
 
 5. /audit-blog-svg-charts スキルで違反ゼロを確認
 
@@ -234,7 +234,7 @@ const svg = generateBarChartSvg(items, { title: "...", palette: "red", ... });
 ## 10. 現状ベースライン & 共通化ロードマップ
 
 611 枚の実測（2026-06-17 `analyze-svg-patterns` 集計）から、**6 つの型に収斂する**ことが確定した。
-実物の大半は svg-builder ではなく `generate-article-charts.mjs` のインライン生成・旧スクリプト由来で、
+実物の大半は svg-builder ではなく `generate-article-charts.ts` のインライン生成・旧スクリプト由来で、
 命名・配色・viewBox・ダークモードが不統一。以下が是正ベースラインと共通化ロードマップ。
 
 ### 計測ベースライン（611枚）
@@ -249,7 +249,7 @@ const svg = generateBarChartSvg(items, { title: "...", palette: "red", ... });
 ### 共通化ロードマップ（優先度順）
 
 1. ✅ **`generateFindingsCardSvg` を svg-builder に新設**（2026-06-17 完了）
-   → `packages/svg-builder/src/charts/findings-card.ts` 実装済。`svgThemeStyle()` 準拠。`generate-article-charts.mjs` に `summary` タイプのディスパッチ追加・alias 命名パターン対応済
+   → `packages/svg-builder/src/charts/findings-card.ts` 実装済。`svgThemeStyle()` 準拠。`generate-article-charts.ts` に `summary` タイプのディスパッチ追加・alias 命名パターン対応済
 2. **CLI のインライン生成器を svg-builder 呼び出しに置換**（`genBarChartSvg` 等 4 関数 → `@stats47/svg-builder`）
    → CLI を `.mjs`（node）から `.mts`（tsx）に変換し TS インポートを有効化する。ただし既存 SVG の visual 変更を伴う（単列 + セパレーター形式 vs 現状の2列形式）。デザイン確認後に実施。
 3. ✅ **`detectChartType` に alias ディスパッチを実装**（§4 alias 表を機械化）（2026-06-17 完了）
@@ -274,6 +274,6 @@ const svg = generateBarChartSvg(items, { title: "...", palette: "red", ... });
 - エージェント: `.claude/agents/chart-author.md`
 - 監査スキル: `.claude/skills/ui/audit-blog-svg-charts/SKILL.md`
 - ビルダーライブラリ: `packages/svg-builder/src/`
-- 生成 CLI: `.claude/scripts/blog/generate-article-charts.mjs`
+- 生成 CLI: `.claude/scripts/blog/generate-article-charts.ts`
 - 目視レビューギャラリー: `.claude/scripts/blog/build-svg-gallery.mjs`（全 SVG を HTML 一覧化）
 - ブログ品質基準: `.claude/rules/blog-quality-standards.md`

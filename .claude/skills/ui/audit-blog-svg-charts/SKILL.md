@@ -22,8 +22,8 @@
 Layer 1 を使わず CLI / 一時スクリプト内で SVG を直接組んでいる箇所。
 
 ```bash
-# generate-article-charts.mjs 内に SVG テンプレートリテラルを直接書いているか
-grep -n "function gen.*Svg\|<svg\|viewBox" .claude/scripts/blog/generate-article-charts.mjs
+# generate-article-charts.ts 内に SVG テンプレートリテラルを直接書いているか
+grep -n "function gen.*Svg\|<svg\|viewBox" .claude/scripts/blog/generate-article-charts.ts
 ```
 
 **除外（誤検知）**: 呼び出しコードの `generateBarChartSvg(...)` 等は対象外。
