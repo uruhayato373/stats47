@@ -174,7 +174,7 @@ function textFill(rgbColor: string): string {
 // ─── SVG 定数 ────────────────────────────────────────────────────
 
 const W = 600;
-const TOTAL_H = 665;
+const TOTAL_H = 700; // §5 タイルマップ標準 600×700（既存資産の最頻 viewBox と一致）
 // 凡例：右寄せ（バー右端 x=545、SVG 右端 600 から 55px 余白）
 const BAR_RIGHT = 545; // グラデーションバー右端 x
 const BAR_W     = 140; // バー幅（コンパクト）

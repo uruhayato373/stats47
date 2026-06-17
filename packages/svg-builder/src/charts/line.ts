@@ -77,11 +77,11 @@ export function generateLineSvg(data: StatsSchema[], options: LineChartOptions):
   const series = uniqueDimension(data, seriesKey);
   const valueMap = buildValueMap(data, xKey, seriesKey);
 
-  const W = 560;
+  const W = 680; // §5 折れ線標準幅
   const legendAtBottom = legendPosition === "bottom" && series.length > 1;
   const legendW = !legendAtBottom && series.length > 1 ? 132 : 0;
   const legendBottomH = legendAtBottom ? 22 : 0;
-  const H = 400 + legendBottomH;
+  const H = 420; // §5 折れ線標準高さ（凡例は bottom マージンで吸収）
   const plot = makePlotArea(W, H, { top: 58, right: 14 + legendW, bottom: 60 + legendBottomH, left: 55 });
 
   // Y 軸範囲

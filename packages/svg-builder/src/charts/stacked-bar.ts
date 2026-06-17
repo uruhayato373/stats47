@@ -86,9 +86,9 @@ function generateVertical(
   const series = uniqueDimension(data, seriesKey);
   const valueMap = buildValueMap(data, xKey, seriesKey);
 
-  const W = 520;
+  const W = 680; // §5 積み上げ棒標準幅
   const LEGEND_H = Math.ceil(series.length / 3) * 22 + 12;
-  const H = 380 + LEGEND_H;
+  const H = 380 + LEGEND_H; // 高さは §5 可変（凡例段数で変動）
   const plot = makePlotArea(W, H, { top: 58, right: 24, bottom: 58 + LEGEND_H, left: 55 });
 
   // 値の計算（正規化 or 生値）
@@ -268,7 +268,7 @@ function generateHorizontal(
   const MARGIN_TOP = 58;
   const MARGIN_BOTTOM = 16 + LEGEND_H;
   const H = MARGIN_TOP + xItems.length * (BAR_H + BAR_GAP) - BAR_GAP + MARGIN_BOTTOM;
-  const W = 560;
+  const W = 680; // §5 積み上げ棒標準幅
   const plotLeft = LABEL_W + 4;
   const plotRight = W - 20;
   const plotWidth = plotRight - plotLeft;

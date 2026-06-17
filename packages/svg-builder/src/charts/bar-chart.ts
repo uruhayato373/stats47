@@ -62,10 +62,9 @@ export interface BarChartOptions {
   showAxis?: boolean;
 }
 
-const W = 600;          // 内部座標幅（viewBox）
-const DISPLAY_W = 780;  // 表示幅（Obsidian / Markdown での横幅確保のため）
+const W = 680;          // 内部座標幅（viewBox）= §5 横棒標準幅。width/height 属性も W と一致させる
 const LABEL_X = 90;     // バー開始 X
-const BAR_AREA_W = 470; // バー最大幅
+const BAR_AREA_W = 550; // バー最大幅（W 拡張に合わせて 470→550）
 const BAR_H = 18;
 const ROW_H = 26;
 const SEPARATOR_H = 20; // 区切り行の高さ
@@ -160,9 +159,8 @@ export function generateBarChartSvg(items: BarItem[], options: BarChartOptions):
   const titleText = subtitle
     ? `${title}<tspan font-size="10" font-weight="normal" class="svg-tick">　${subtitle}</tspan>`
     : title;
-  const displayH = Math.round((DISPLAY_W / W) * totalH);
 
-  return `<svg width="${DISPLAY_W}" height="${displayH}" viewBox="0 0 ${W} ${totalH}" xmlns="http://www.w3.org/2000/svg" font-family="${FONT_FAMILY}" role="img" aria-label="${ariaLabel}">
+  return `<svg width="${W}" height="${totalH}" viewBox="0 0 ${W} ${totalH}" xmlns="http://www.w3.org/2000/svg" font-family="${FONT_FAMILY}" role="img" aria-label="${ariaLabel}">
 ${svgThemeStyle()}
   <rect width="${W}" height="${totalH}" class="svg-bg" rx="6"/>
   <text x="${W / 2}" y="22" text-anchor="middle" font-size="14" font-weight="bold" class="svg-title">${titleText}</text>
