@@ -1,0 +1,133 @@
+name: 🎨 Regenerate Blog SVGs (svg-builder 経由・dark mode 付与)
+
+# 公開済みブログ記事 (R2 app/blog/<slug>/data/*.json) の SVG を svg-builder で再生成する。
+# Step 4 (blog-svg-chart-standards.md §10): ダークモード未対応 SVG を一括是正する。
+#
+# 仕組み:
+#   1. R2 app/blog を .local/r2/app/blog にダウンロード (S3 list/get)
+#   2. all.json の slug ごとに generate-article-charts.ts --base .local/r2/app/blog を実行
+#      → data/*.json を入力に svg-builder で *.svg を再生成 (svgThemeStyle() 自動付与)
+#      → data/*.json を持たない無意味名 SVG (inline-chart-N) は対象外 (手動 brushup が必要)
+#   3. ギャラリー HTML を artifact として保存 (視覚レビュー用)
+#   4. dry_run=false のときのみ diff-push-r2 --prefix app/blog で R2 へ反映
+#
+# ⚠️ 視覚変更を伴う: svg-builder の bar chart は 1列+セパレータ形式 (旧 CLI は 2列)。
+#    まず dry_run=true で artifact ギャラリーを確認してから本番 push すること。
+#
+# 使い方:
+#   gh workflow run regenerate-blog-svgs.yml                          # dry-run 全件 (push しない)
+#   gh workflow run regenerate-blog-svgs.yml -f slugs="slug-a slug-b" # 指定 slug のみ dry-run
+#   gh workflow run regenerate-blog-svgs.yml -f dry_run=false         # 本番 push (全件)
+#   gh workflow run regenerate-blog-svgs.yml -f slugs="slug-a" -f dry_run=false  # 指定 slug を本番反映
+
+on:
+  workflow_dispatch:
+    inputs:
+      slugs:
+        description: "対象 slug (スペース区切り)。空なら all.json の全 slug"
+        required: false
+        default: ""
+      dry_run:
+        description: "true: 再生成 + ギャラリーのみ (push しない) / false: R2 へ反映"
+        required: false
+        default: "true"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: regenerate-blog-svgs
+  cancel-in-progress: false
+
+env:
+  R2_S3_ENDPOINT: https://${{ secrets.CLOUDFLARE_ACCOUNT_ID }}.r2.cloudflarestorage.com
+  R2_ACCESS_KEY_ID: ${{ secrets.CLOUDFLARE_R2_ACCESS_KEY_ID }}
+  R2_SECRET_ACCESS_KEY: ${{ secrets.CLOUDFLARE_R2_SECRET_ACCESS_KEY }}
+  CLOUDFLARE_R2_BUCKET_NAME: stats47
+  R2_PUBLIC_FETCH_URL: https://storage.stats47.jp
+
+jobs:
+  regenerate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: 🧰 Checkout develop
+        uses: actions/checkout@v4
+        with:
+          ref: develop
+          fetch-depth: 1
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 📥 Download blog data from R2 (app/blog)
+        run: npx tsx packages/r2-storage/src/scripts/sync-download.ts --prefix app/blog
+
+      - name: 🔎 Resolve target slugs
+        id: targets
+        run: |
+          SLUGS="${{ github.event.inputs.slugs }}"
+          if [ -z "$SLUGS" ]; then
+            # all.json から slug を抽出 (配列 or {articles:[]})
+            SLUGS=$(node -e '
+              const fs=require("fs");
+              const p=".local/r2/app/blog/all.json";
+              if(!fs.existsSync(p)){console.error("all.json not found");process.exit(1)}
+              const j=JSON.parse(fs.readFileSync(p,"utf8"));
+              const arr=Array.isArray(j)?j:(j.articles||j.items||[]);
+              console.log(arr.map(a=>a.slug||a.id).filter(Boolean).join(" "));
+            ')
+          fi
+          echo "list=$SLUGS" >> "$GITHUB_OUTPUT"
+          echo "対象 slug 数: $(echo $SLUGS | wc -w)"
+
+      - name: 🎨 Regenerate SVGs via svg-builder
+        run: |
+          OK=0; SKIP=0; FAIL=0
+          for SLUG in ${{ steps.targets.outputs.list }}; do
+            DIR=".local/r2/app/blog/$SLUG/data"
+            if [ ! -d "$DIR" ] || [ -z "$(ls -A "$DIR"/*.json 2>/dev/null)" ]; then
+              SKIP=$((SKIP+1)); continue
+            fi
+            if npx tsx .claude/scripts/blog/generate-article-charts.ts \
+                 --base .local/r2/app/blog --slug "$SLUG" > /dev/null 2>&1; then
+              OK=$((OK+1))
+            else
+              FAIL=$((FAIL+1)); echo "  ⚠️ regen failed: $SLUG"
+            fi
+          done
+          echo "再生成: ok=$OK skip=$SKIP(no json) fail=$FAIL"
+
+      - name: 🖼️ Build review gallery (local)
+        run: |
+          node .claude/scripts/blog/build-svg-gallery.mjs --source local \
+            --out /tmp/blog-svg-gallery.html || true
+
+      - name: 📤 Upload gallery artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: blog-svg-gallery
+          path: /tmp/blog-svg-gallery.html
+          if-no-files-found: warn
+
+      - name: 📤 Push regenerated SVGs to R2 (本番時のみ)
+        if: ${{ github.event.inputs.dry_run == 'false' }}
+        run: |
+          echo "本番: 再生成 SVG を R2 へ push (app/blog)"
+          npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix app/blog
+
+      - name: 📝 Summary
+        run: |
+          echo "### 🎨 Regenerate Blog SVGs" >> $GITHUB_STEP_SUMMARY
+          echo "- dry_run: \`${{ github.event.inputs.dry_run }}\`" >> $GITHUB_STEP_SUMMARY
+          echo "- 対象 slug: \`${{ github.event.inputs.slugs || 'all' }}\`" >> $GITHUB_STEP_SUMMARY
+          echo "- ギャラリー: artifact \`blog-svg-gallery\` をダウンロードして視覚確認" >> $GITHUB_STEP_SUMMARY
+          if [ "${{ github.event.inputs.dry_run }}" != "false" ]; then
+            echo "- ⚠️ dry-run のため R2 へは push していません" >> $GITHUB_STEP_SUMMARY
+          fi
