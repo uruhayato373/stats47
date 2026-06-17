@@ -40,7 +40,9 @@ grep -rn \
 
 **除外（誤検知）**:
 - **アイコン SVG**（`<svg viewBox="0 0 24 24">` 等の小型アイコン、`fill-current`、share/SNS ボタン）はチャートではない。例: `BlogShareRail.tsx`, `md-content.tsx`（markdown レンダラの svg パススルー）
-- **`chart-component-standards.md` §2-D の例外認定リスト**に載っているコンポーネント（`MunicipalityChoroplethSection`, `MetricYoyChoroplethSection`, `HighwayTimelineMap`, `DepopulationChoroplethMap`, `AgeCompositionChart`, `Blog*Chart`, `Ranking*Chart` 等）。これらは正式に feature-scope を認定済み
+- **OGP 画像ジェネレータ**（`apps/web/src/features/ogp/*`: `CategoryOgp.tsx`, `DefaultOgp.tsx`, `JapanMapSvg.tsx` 等）。`ImageResponse`/Satori 用の静的 SVG 描画であり、データ駆動チャートではない
+- **`chart-component-standards.md` §2-D の例外認定リスト**に載っているコンポーネント（`MunicipalityChoroplethSection`, `MetricYoyChoroplethSection`, `HighwayTimelineMap`, `AgeCompositionChart`, `Blog*Chart`, `Ranking*Chart` 等）。これらは正式に feature-scope を認定済み
+  - `MunicipalityChoroplethSection` / `MetricYoyChoroplethSection` は描画を共有 `DivergingChoroplethMap` / `TimelineChoroplethMap`（`@stats47/visualization/d3`）に委譲する thin wrapper（D3/SVG 直書きなし）。`DepopulationChoroplethMap` は共有 `LeafletChoroplethMap` に委譲済み（§2-D 対象外・クリーン）
 
 判定: グレップ結果から上記除外を引いた残りが「未認定の独自実装」= 是正対象。新規に出てきたら §2-D に追加するか共有化する。
 
@@ -71,7 +73,9 @@ for f in $files_with_d3; do
 done
 ```
 
-**除外**: §2-D 例外認定コンポーネント（地理コロプレスの符号付き増減率 tooltip など汎用 `createTooltipContent` が表現できない表示はカスタム tooltip 許容。ただし色は CSS 変数必須）。
+**除外**:
+- §2-D 例外認定コンポーネント（地理コロプレスの符号付き増減率 tooltip など汎用 `createTooltipContent` が表現できない表示はカスタム tooltip 許容。ただし色は CSS 変数必須）。
+- 共有 `DivergingChoroplethMap` / `TimelineChoroplethMap`（`packages/visualization/src/d3/components/`）。d3-geo/d3-scale で投影・配色するが、符号付き増減率（+X.X%）の React-state tooltip は `useD3Tooltip` が表現できないため許容（色は CSS 変数 + RdBu 凡例グラデーションのみ）。
 
 ### E. shadcn Card 未使用のカード形状（重大度: low）
 
