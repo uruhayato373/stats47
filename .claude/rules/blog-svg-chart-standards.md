@@ -31,13 +31,20 @@ CLI 内にインライン生成ロジックを書かない（重複・ドリフ�
 
 ### 2-A. チャートコンポーネント（`packages/svg-builder/src/charts/`）
 
-| 関数 | ファイル | 入力型 | データ命名パターン | 用途 |
-|---|---|---|---|---|
-| `generateBarChartSvg` | `bar-chart.ts` | `BarItem[]` + `BarChartOptions` | `*-prefecture-rankings.json` | 横棒（上位5+下位5、セパレーター対応） |
-| `generateChoroplethSvg` | `choropleth.ts` | `ChoroplethItem[]` + `ChoroplethOptions` | `*-tile-grid.json` | タイルグリッド 47 都道府県マップ |
-| `generateLineSvg` | `line.ts` | `StatsSchema[]` + `LineOptions` | `*-timeseries.json` | 多系列折れ線（時系列・年齢階級）|
-| `generateScatterSvg` | `scatter.ts` | `ScatterPoint[]` + `ScatterOptions` | `*-scatter.json` | 散布図（全都道府県・相関可視化） |
-| `generateStackedBarSvg` | `stacked-bar.ts` | `StackedData` + `StackedBarOptions` | `*-stacked.json` | 積み上げ棒グラフ（構成比）|
+実データ（611枚 / 2026-06-17 集計）の出現頻度を「実出現」列に併記する。共通化の優先度判定に使う。
+
+| 関数 | ファイル | 入力型 | データ命名パターン | 実出現 | 用途 |
+|---|---|---|---|---|---|
+| `generateBarChartSvg` | `bar-chart.ts` | `BarItem[]` + `BarChartOptions` | `*-ranking.json` / `*-top5-bottom5.json` | ~239 | 横棒（上位5+下位5、セパレーター対応） |
+| `generateScatterSvg` | `scatter.ts` | `ScatterPoint[]` + `ScatterOptions` | `*-scatter.json` | ~166 | 散布図（全都道府県・相関可視化） |
+| `generateChoroplethSvg` | `choropleth.ts` | `ChoroplethItem[]` + `ChoroplethOptions` | `*-map.json` / `*-tile-grid.json` | ~84 | タイルグリッド 47 都道府県マップ |
+| `generateLineSvg` | `line.ts` | `StatsSchema[]` + `LineOptions` | `*-timeseries.json` / `*-trend.json` | ~39 | 多系列折れ線（時系列・年齢階級）|
+| `generateStackedBarSvg` | `stacked-bar.ts` | `StackedData` + `StackedBarOptions` | `*-stacked.json` / `*-breakdown.json` | ~5 | 積み上げ棒グラフ（構成比）|
+| **`generateFindingsCardSvg`** ★未実装 | `findings-card.ts`（要追加） | `FindingsCardData`（番号付き要点配列） | `*-summary-findings.json` / `*-findings.json` | **~54** | 「この記事でわかったこと」要点カード（番号付き circle + テキスト行） |
+
+> ★ **`generateFindingsCardSvg` は de-facto 標準（54枚）だが svg-builder に未実装**。
+> 現状は `generate-article-charts.mjs` のインライン or 旧スクリプトで生成され、命名・配色・viewBox が不統一。
+> **最優先の共通化対象** → §10 ロードマップ参照。
 
 ### 2-B. テーブルコンポーネント（`packages/svg-builder/src/tables/`）
 
@@ -115,13 +122,20 @@ svg += svgThemeStyle();
 
 ### データ JSON（`data/*.json`）
 
-| サフィックス | 対応チャート関数 | 例 |
+**canonical サフィックス**（新規は必ずこれを使う）と、実データに頻出する **alias**（既存の許容形・CLI が同型にディスパッチ）を併記する。
+
+| canonical | alias（実出現） | 対応チャート関数 |
 |---|---|---|
-| `*-prefecture-rankings.json` | `generateBarChartSvg` | `mortality-prefecture-rankings.json` |
-| `*-tile-grid.json` | `generateChoroplethSvg` | `unemployment-tile-grid.json` |
-| `*-timeseries.json` | `generateLineSvg` | `population-timeseries.json` |
-| `*-scatter.json` | `generateScatterSvg` | `income-lifespan-scatter.json` |
-| `*-stacked.json` | `generateStackedBarSvg` | `age-composition-stacked.json` |
+| `*-ranking.json` | `*-prefecture-rankings` / `*-top5-bottom5` / `*-top-bottom` / `*-rate-ranking` / `*-income-ranking` 等 | `generateBarChartSvg` |
+| `*-scatter.json` | `*-rate-scatter` 等 | `generateScatterSvg` |
+| `*-map.json` | `*-tile-grid` / `*-income-map` / `*-ratio-map` 等 | `generateChoroplethSvg` |
+| `*-timeseries.json` | `*-trend` / `*-national-trend` 等 | `generateLineSvg` |
+| `*-stacked.json` | `*-breakdown` / `*-composition` 等 | `generateStackedBarSvg` |
+| `*-summary-findings.json` | `*-findings` 等 | `generateFindingsCardSvg` ★ |
+
+> **alias の扱い**: `generate-article-charts.mjs` の型判定（`classifyChartType`）が alias を canonical 関数にディスパッチする。
+> alias は「既存資産の許容」であり、**新規記事は canonical を使う**こと。`inline-chart-N` / `chart-1` のような
+> **無意味名は禁止**（型が判別不能・監査で F 違反）。
 
 ### 出力 SVG（`data/*.svg`）
 
@@ -143,15 +157,20 @@ svg += svgThemeStyle();
 
 ## 5. viewBox 規格
 
-| チャート種 | 標準 viewBox | 備考 |
-|---|---|---|
-| 横棒（上位5+下位5） | `0 0 560 {height}` | height は件数に応じて可変（1行 30px 基準） |
-| タイルグリッドマップ | `0 0 560 420` | 47 都道府県固定レイアウト |
-| 折れ線（時系列） | `0 0 640 400` | 系列数・期間に応じて調整可 |
-| 散布図 | `0 0 640 480` | 47 点固定 |
-| 積み上げ棒 | `0 0 640 {height}` | 可変 |
+幅は型ごとに固定し、高さのみデータ件数で可変にする（現状 viewBox が断片化しているため標準幅に収斂させる）。
+「実出現の最頻」は 611 枚集計（2026-06-17）の最頻 viewBox。新規は **標準幅** 列に揃える。
+
+| チャート種 | 標準幅 | 高さ | 実出現の最頻 |
+|---|---|---|---|
+| 横棒（ranking） | `680` | 可変（1行 ~30px） | `680×300`（95枚） |
+| 散布図（scatter） | `960` | `624` | `960×624`（80枚） |
+| タイルマップ（map） | `600` | `700` | `600×700`（47枚） |
+| 要点カード（findings） | `960` | 可変（要点数 × ~80px） | `960×478`（26枚） |
+| 折れ線（timeseries） | `680` | `420` | `680×420`（19枚） |
+| 積み上げ棒（stacked） | `680` | 可変 | `680×420` |
 
 `width` と `height` 属性は viewBox と必ず一致させる（svg-lint が検査）。
+**標準幅から外れる既存 SVG は是正対象**（§10 ロードマップ）。
 
 ---
 
@@ -216,11 +235,41 @@ const svg = generateBarChartSvg(items, { title: "...", palette: "red", ... });
 
 ---
 
+## 10. 現状ベースライン & 共通化ロードマップ
+
+611 枚の実測（2026-06-17 `analyze-svg-patterns` 集計）から、**6 つの型に収斂する**ことが確定した。
+実物の大半は svg-builder ではなく `generate-article-charts.mjs` のインライン生成・旧スクリプト由来で、
+命名・配色・viewBox・ダークモードが不統一。以下が是正ベースラインと共通化ロードマップ。
+
+### 計測ベースライン（611枚）
+
+| 指標 | 実態 | 目標 |
+|---|---|---|
+| 6 型への分類可能性 | bar~239 / scatter~166 / map~84 / findings~54 / line~39 / stacked~5 | — |
+| canonical 命名準拠 | **34%**（404枚が alias/無意味名） | 100%（新規）/ alias 許容（既存） |
+| ダークモード対応（`svgThemeStyle`） | **21%**（482枚が未対応） | 100% |
+| viewBox の標準幅準拠 | 断片化（15+ パターン） | 型ごとに標準幅へ収斂 |
+
+### 共通化ロードマップ（優先度順）
+
+1. **`generateFindingsCardSvg` を svg-builder に新設**（最頻の未実装型・54枚）
+   → `packages/svg-builder/src/charts/findings-card.ts`。`svgThemeStyle()` + `PALETTES` 準拠で実装し §2-A の ★ を解消
+2. **CLI のインライン生成器を svg-builder 呼び出しに置換**（`genBarChartSvg` 等 4 関数 → `@stats47/svg-builder`）
+   → 重複ロジック消去・ダークモード自動付与。§7 禁止パターンの根絶
+3. **`classifyChartType` に alias ディスパッチを実装**（§4 alias 表を機械化）
+4. **ダークモード未対応 482枚の再生成**（svg-builder 経由で `sync-snapshots` から一括再生成 → R2）
+5. **viewBox 標準幅への収斂**（再生成時に §5 標準幅を適用）
+
+> 進捗は是正のたびに本表の「実態」を更新する。再生成は CI（`sync-snapshots.yml`）経由（ローカル R2 書き込み禁止）。
+
+---
+
 ## 9. 変更履歴
 
 | 日付 | 変更内容 |
 |---|---|
 | 2026-06-17 | 初版作成（svg-builder 全チャートをカタログ化・SSoT 確立） |
+| 2026-06-17 | 611枚実測で実態是正: findings-card 型追加・命名 alias 表・viewBox 実態反映・共通化ロードマップ（§10）追加 |
 
 ---
 
