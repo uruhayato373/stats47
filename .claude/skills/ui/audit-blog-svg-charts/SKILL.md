@@ -1,0 +1,148 @@
+# /audit-blog-svg-charts
+
+ブログ記事 SVG チャートの規約違反を検出し、是正優先リストを出力するスキル。
+`.claude/rules/blog-svg-chart-standards.md` を基準とする。
+
+## 実行
+
+```
+/audit-blog-svg-charts [--slug <slug>] [--fix]
+```
+
+- 引数なし: 全記事を対象に違反検出 + レポート出力のみ（read-only）
+- `--slug <slug>`: 対象を 1 記事に絞る（`.local/r2/app/blog/<slug>/data/` を対象）
+- `--fix`: 自動是正が可能な違反（インライン色 → PALETTES 等）を実行
+
+---
+
+## 検出項目
+
+### A. CLI インライン生成ロジック（重大度: high）
+
+Layer 1 を使わず CLI / 一時スクリプト内で SVG を直接組んでいる箇所。
+
+```bash
+# generate-article-charts.mjs 内に SVG テンプレートリテラルを直接書いているか
+grep -n "function gen.*Svg\|<svg\|viewBox" .claude/scripts/blog/generate-article-charts.mjs
+```
+
+**除外（誤検知）**: 呼び出しコードの `generateBarChartSvg(...)` 等は対象外。
+
+判定: `function gen*Svg` の関数定義、または `svg += \`<` のような直接組み立てが残存していれば是正対象。
+
+### B. ハードコード色（PALETTES 外の hex）（重大度: high）
+
+```bash
+# PALETTES / SCATTER_COLORS 以外のアドホック hex を使っている箇所
+grep -rn \
+  --include="*.mjs" --include="*.ts" --include="*.cjs" \
+  -E 'fill=["\'"'"']#[0-9a-fA-F]{3,6}["\'"'"']|stroke=["\'"'"']#[0-9a-fA-F]{3,6}["\'"'"']' \
+  packages/svg-builder/src/ .claude/scripts/blog/
+```
+
+**除外**: `svgThemeStyle()` 内のハードコード（規格色 `#ffffff`, `#0f172a` 等）は対象外。
+`PALETTES.red[0]` = `#c62828` 等の既定値は対象外。
+
+判定: 上記 grep から規格色（`#ffffff`, `#0f172a`, `#f9fafb`, `#1e293b`, `#d1d5db`, `#334155`,
+`#1f2937`, `#e2e8f0`, `#374151`, `#cbd5e1`, `#6b7280`, `#94a3b8`, `#e5e7eb`,
+`#c62828`, `#d32f2f`, `#e53935`, `#ef5350`, `#e57373`, `#ef9a9a`,
+`#1565c0`, `#1976d2`, `#1e88e5`, `#2196f3`, `#42a5f5`, `#64b5f6`, `#90caf9`, `#bbdefb`, `#e3f2fd`, `#f0f8ff`,
+`#e65100`, `#ef6c00`, `#f57c00`, `#fb8c00`, `#ffa726`, `#ffb74d`, `#ffcc80`, `#ffe0b2`, `#fff3e0`, `#fff8f0`,
+`#6b8fc9`, `#3b6fa0`）を除いた残りが是正対象。
+
+### C. CSS 変数使用（重大度: high）
+
+静的 SVG は `<img>` サンドボックス内で CSS 変数が解決されない。
+
+```bash
+grep -rn --include="*.ts" --include="*.mjs" \
+  -E 'hsl\(var\(--' \
+  packages/svg-builder/src/ .claude/scripts/blog/
+```
+
+### D. svgThemeStyle() 未挿入（重大度: medium）
+
+```bash
+# packages/svg-builder の chart 実装ファイルで svgThemeStyle を呼んでいないもの
+for f in packages/svg-builder/src/charts/*.ts packages/svg-builder/src/tables/*.ts; do
+  [ "$f" = "packages/svg-builder/src/charts/index.ts" ] && continue
+  grep -q "svgThemeStyle" "$f" || echo "svgThemeStyle 未使用: $f"
+done
+```
+
+### E. プロベナンスコメント欠如（重大度: low）
+
+生成済み SVG ファイル（`.local/r2/app/blog/*/data/*.svg`）にプロベナンスコメントがない。
+
+```bash
+for svg in .local/r2/app/blog/*/data/*.svg; do
+  grep -q "data-source:" "$svg" || echo "provenance なし: $svg"
+done
+```
+
+### F. データ命名パターン不一致（重大度: low）
+
+`data/*.json` のサフィックスが §4 の命名規則と一致しない。
+
+```bash
+# 命名規則外のデータ JSON を探す
+find .local/r2/app/blog -name "*.json" -path "*/data/*" | \
+  grep -Ev '\-(prefecture-rankings|tile-grid|timeseries|scatter|stacked)\.json$' | \
+  grep -v 'meta\.json\|series\.json\|cache\.json'
+```
+
+---
+
+## 出力フォーマット
+
+```
+## ブログ SVG チャート監査レポート
+
+### サマリ
+- A. CLI インライン生成: N 件
+- B. ハードコード色: N 件
+- C. CSS 変数使用: N 件
+- D. svgThemeStyle 未挿入: N 件
+- E. プロベナンスなし: N 件 (N 記事)
+- F. 命名パターン不一致: N 件
+
+### 優先是正リスト（影響大順）
+
+| 優先度 | ファイル | 違反種別 | 是正方法 |
+|---|---|---|---|
+| 1 | scripts/blog/... | A: インライン生成 | packages/svg-builder の関数に移行 |
+| 2 | ... | ... | ... |
+
+### 推奨アクション
+1. ...
+```
+
+---
+
+## --fix オプション（自動是正）
+
+以下のみ自動是正する（その他は手動または `chart-author` agent に依頼）:
+
+- CSS 変数 `hsl(var(--primary))` → `#1565c0`（blue パレット）
+- CSS 変数 `hsl(var(--muted-foreground))` → `#6b7280`
+- プロベナンスコメント付与（`<!-- data-source: {filename} | generated: {ISO} -->`）
+
+---
+
+## 既存ツール連携
+
+| ツール | 用途 |
+|---|---|
+| `.claude/scripts/lib/svg-lint.mjs` | viewBox/width/height/ダークモードの低レベル lint |
+| `.claude/scripts/blog/audit-chart-quality.mjs` | 全記事バッチ監査（本スキルよりも広範・パブリック R2 対応） |
+
+`/audit-blog-svg-charts` は **ソースコード（packages/svg-builder・scripts）の規約準拠** を見る。
+`audit-chart-quality.mjs` は **生成済み SVG ファイルの品質** を見る。両者は補完関係。
+
+---
+
+## 関連
+
+- 基準: `.claude/rules/blog-svg-chart-standards.md`
+- 実行エージェント: `chart-author`
+- ライブラリ: `packages/svg-builder/src/`
