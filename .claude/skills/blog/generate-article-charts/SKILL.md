@@ -162,54 +162,34 @@ node scripts/temp-generate-charts.mjs
 
 ### チャート種別テンプレート
 
-#### 上位10・下位10ランキング（2カラム）
+#### ランキング（カード型2列・推奨）
 
-「上位10・下位10」を表示するランキングチャートは **必ずこの2カラムレイアウトを使う**。1カラムの横棒チャートは使わない。
+ランキングチャートは **svg-builder の `generateBarChartSvg` + `layout:"columns"`（デフォルト）を使う**。手書き SVG・1カラム横棒は使わない（ドリフトの温床）。CLI (`generate-article-charts.ts`) の `genBarChartSvg` アダプターが `*-ranking.json` を自動でこのレイアウトにディスパッチする。
 
-- viewBox: `0 0 960 624`（固定）
-- 左カラム（青系）: 上位10（値が大きい方）
-- 右カラム（赤系）: 下位10（値が小さい方）
-- 各行: 順位円 + 都道府県名 + 値テキスト + 横バー
-- 行背景は白と薄い色を交互に（上位: `#e3f2fd`/`#fff`、下位: `#fef2f2`/`#fff`）
+- viewBox: `960 × (124 + N×44 + 60)`（10件=`960×624` / 5件=`960×404`、aging-solo / alcohol スタイル）
+- 左カラム=上位（`palette`、デフォルト red）、右カラム=下位（`rightPalette`、デフォルト blue）
+- 各行: カード（交互背景）+ 順位バッジ + 都道府県名 + 値 + 横バー
+- ダークモード対応（`svgThemeStyle()` 自動付与）
 
-構造:
-```xml
-<svg width="960" height="624" viewBox="0 0 960 624" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="{タイトル}">
-  <title>{タイトル}</title>
-  <rect width="960" height="624" fill="#f9fafb"/>
-  <text x="480" y="38" text-anchor="middle" font-family="'Noto Sans JP',sans-serif" font-size="20" font-weight="bold" fill="#1f2937">{タイトル}</text>
-  <text x="480" y="60" text-anchor="middle" font-family="'Noto Sans JP',sans-serif" font-size="13" fill="#6b7280">上位10・下位10</text>
+JSON で制御できるオプション（`data/*-ranking.json` のオブジェクト形式で指定）:
 
-  <!-- 左カラム: 上位10 -->
-  <rect x="30" y="80" width="432" height="40" rx="8" fill="{headerColor}"/>
-  <text x="246" y="106" text-anchor="middle" font-family="'Noto Sans JP',sans-serif" font-size="15" font-weight="bold" fill="#ffffff">{上位ラベル}</text>
-  <!-- 各行 i=0..9: y = 124 + 44*i -->
-  <rect x="30" y="{rowY}" width="432" height="44" rx="6" fill="{交互色}"/>
-  <circle cx="60" cy="{rowY+22}" r="14" fill="{headerColor}"/>
-  <text x="60" y="{rowY+26.32}" text-anchor="middle" font-family="'Noto Sans JP',sans-serif" font-size="12" font-weight="bold" fill="#ffffff">{順位}</text>
-  <text x="84" y="{rowY+26.68}" font-family="'Noto Sans JP',sans-serif" font-size="13" font-weight="bold" fill="#1f2937">{県名}</text>
-  <text x="229.68" y="{rowY+26.32}" text-anchor="end" font-family="'Noto Sans JP',sans-serif" font-size="12" fill="{headerColor}" font-weight="600">{値}{単位}</text>
-  <rect x="241.68" y="{rowY+15}" width="{barW}" height="14" rx="4" fill="{barColor}" opacity="0.8"/>
+| キー | 役割 | デフォルト |
+|---|---|---|
+| `topN` | 上位・下位それぞれの件数（**5 または 10**） | `5` |
+| `palette` | 左カラム色（`red`/`blue`/`orange`/`purple`/`green`） | `red` |
+| `rightPalette` | 右カラム色 | `blue` |
+| `highLabel` / `lowLabel` | カラムヘッダー（例「ひとり暮らし率が高い県」） | `上位` / `下位` |
+| `layout` | `columns`（推奨）/ `single`（縦1列+中略・680幅） | `columns` |
 
-  <!-- 右カラム: 下位10（x を +468 シフト） -->
-  <rect x="498" y="80" width="432" height="40" rx="8" fill="#b71c1c"/>
-  ...同様の構造...
+色の使い分け（指標の性質で `palette` を選ぶ）:
+| 指標の性質 | palette（左=上位） | rightPalette（右=下位） |
+|---|---|---|
+| 多い＝悪い（死亡率・犯罪率） | `red` | `blue` |
+| 多い＝良い（収入・経済） | `blue` | `red` |
+| 中立に多い（消費・嗜好品） | `purple` / `orange` | `blue` |
 
-  <!-- フッター -->
-  <text x="480" y="594" text-anchor="middle" font-family="'Noto Sans JP',sans-serif" font-size="11" fill="#6b7280">{補足テキスト}</text>
-</svg>
-```
-
-色の使い分け:
-| 指標の性質 | 上位ヘッダー | 上位バー | 下位ヘッダー | 下位バー |
-|---|---|---|---|---|
-| 多い方がポジティブ（収入・経済指標） | `#1565c0` | `#42a5f5` | `#b71c1c` | `#ef5350` |
-| 多い方がポジティブ（財政・行政） | `#2e7d32` | `#66bb6a` | `#b71c1c` | `#ef5350` |
-| 中立的（人口・面積など） | `#1565c0` | `#42a5f5` | `#b71c1c` | `#ef5350` |
-
-バー幅の計算: `barW = (value / maxValue) * maxBarWidth`（maxBarWidth は約200px）
-
-参考実装: `.local/r2/blog/fiscal-strength-ranking/data/fiscal-strength-ranking.svg`
+> 実装 SSoT: `packages/svg-builder/src/charts/bar-chart.ts`（`renderColumnsLayout` / `CARD_THEMES`）。
+> 手本: `aging-solo-living-crisis`（赤×青10件）/ `alcohol-prefecture-map`（紫×青10件）。
 
 #### 折れ線グラフ
 

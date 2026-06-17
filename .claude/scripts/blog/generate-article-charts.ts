@@ -161,8 +161,11 @@ function genBarChartSvg(data) {
   const subtitle = (Array.isArray(data) ? null : data.subtitle) ?? undefined;
   const unit = (Array.isArray(data) ? null : data.unit) ?? "";
   const palette = (Array.isArray(data) ? null : data.palette) ?? "red";
+  const rightPalette = (Array.isArray(data) ? null : data.rightPalette) ?? "blue";
   const N = (Array.isArray(data) ? null : data.topN) ?? 5;
   const layout = (Array.isArray(data) ? null : data.layout) ?? "columns";
+  const highLabel = (Array.isArray(data) ? null : data.highLabel) ?? "上位";
+  const lowLabel = (Array.isArray(data) ? null : data.lowLabel) ?? "下位";
 
   const sorted = [...items].sort((a, b) => (b.value ?? 0) - (a.value ?? 0));
   const top = sorted.slice(0, N);
@@ -170,17 +173,23 @@ function genBarChartSvg(data) {
 
   const barItems = [
     ...top.map((it, i) => ({
-      label: `${i + 1}位 ${normPref(rawName(it))}`,
+      label: `${i + 1}位 ${rawName(it)}`,
+      name: rawName(it),
+      rank: i + 1,
       value: it.value ?? 0,
     })),
     { label: "…", value: 0, isSeparator: true },
     ...bottom.map((it, i) => ({
-      label: `${sorted.length - N + i + 1}位 ${normPref(rawName(it))}`,
+      label: `${sorted.length - N + i + 1}位 ${rawName(it)}`,
+      name: rawName(it),
+      rank: sorted.length - N + i + 1,
       value: it.value ?? 0,
     })),
   ];
 
-  return generateBarChartSvg(barItems, { title, subtitle, unit, palette, layout });
+  return generateBarChartSvg(barItems, {
+    title, subtitle, unit, palette, rightPalette, layout, highLabel, lowLabel,
+  });
 }
 
 /**

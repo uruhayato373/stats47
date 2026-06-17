@@ -27,7 +27,7 @@ import { FONT_FAMILY, PALETTES, PaletteName, colorByIndex } from "../shared/colo
 import { svgThemeStyle } from "../shared/theme";
 
 export interface BarItem {
-  /** 表示ラベル（例: "1位 徳島"） */
+  /** 表示ラベル（例: "1位 徳島"）。"columns" では name 未指定時のフォールバック。 */
   label: string;
   /** 数値 */
   value: number;
@@ -36,6 +36,10 @@ export interface BarItem {
    * または "columns" レイアウトで左右の分割点として使用する。
    */
   isSeparator?: boolean;
+  /** "columns" レイアウト用: 順位（バッジに表示）。未指定時はカラム内の連番。 */
+  rank?: number;
+  /** "columns" レイアウト用: 都道府県名など（カードに表示）。未指定時は label。 */
+  name?: string;
 }
 
 export interface BarChartOptions {
@@ -57,9 +61,15 @@ export interface BarChartOptions {
   /**
    * レイアウト。デフォルト: "single"。
    * - "single": セパレーターを中略行として縦1列表示（viewBox 幅 680）
-   * - "columns": セパレーター位置で上位/下位に分割し左右2列表示（viewBox 幅 960）
+   * - "columns": セパレーター位置で上位/下位に分割しカード型2列表示（viewBox 幅 960）
    */
   layout?: "single" | "columns";
+  /** "columns" 右カラム（下位/少ない側）のカラーテーマ。デフォルト "blue"。 */
+  rightPalette?: PaletteName;
+  /** "columns" 左カラムのヘッダーラベル。デフォルト "上位"。 */
+  highLabel?: string;
+  /** "columns" 右カラムのヘッダーラベル。デフォルト "下位"。 */
+  lowLabel?: string;
   /**
    * X 軸の起点値。デフォルト: 0。"single" レイアウトのみ対応。
    * 例: 保険普及率のように最小値が 20% 付近の場合は 0 より大きい値を指定する。
@@ -81,13 +91,78 @@ const LABEL_X = 90;     // バー開始 X
 const BAR_AREA_W = 550; // バー最大幅
 const SEPARATOR_H = 20; // 区切り行の高さ
 
-// ---------- "columns" レイアウト定数 ----------
-const COLS_W = 960;          // viewBox 幅（2列）
-const COL_R_OFFSET = 490;    // 右カラムの X オフセット
-const COL_LABEL_X = 90;      // 各カラム内のバー開始 X（カラム相対）
-const COL_BAR_AREA_W = 355;  // 各カラムのバー最大幅
+// ---------- "columns"（カード型2列ランキング）レイアウト定数 ----------
+const COLS_W = 960;        // viewBox 幅（2列）
+const COL_L_X = 30;        // 左カラムの絶対 X
+const COL_R_X = 498;       // 右カラムの絶対 X
+const CARD_W = 432;        // カード幅
+const CARD_H = 44;         // カード高さ
+const ROW_GAP = 44;        // 行間隔
+const FIRST_ROW_Y = 124;   // 1 行目カードの上端 Y
+const HEADER_Y = 80;       // カラムヘッダーバーの Y
+const HEADER_H = 40;       // カラムヘッダーバーの高さ
+const BADGE_DX = 30;       // 順位バッジ中心の X オフセット（カラム相対）
+const BADGE_R = 14;        // 順位バッジ半径
+const NAME_DX = 54;        // 県名の X オフセット
+const VALUE_DX = 199.68;   // 値テキスト右端の X オフセット
+const BAR_DX = 211.68;     // 値バー開始の X オフセット
+const BAR_H_CARD = 14;     // 値バーの高さ
+const CARD_BAR_AREA_W = 200; // 値バー最大幅
+const BOTTOM_PAD = 60;     // 末尾余白
 
-/** "columns" レイアウトのレンダリング */
+/** カード型2列ランキングのカラーテーマ（header=濃 / bar=中 / cardAlt=極薄背景） */
+interface CardTheme {
+  header: string;
+  bar: string;
+  cardAlt: string;
+  badgeText: string;
+}
+const CARD_THEMES: Record<PaletteName, CardTheme> = {
+  red:    { header: "#dc2626", bar: "#ef4444", cardAlt: "#fef2f2", badgeText: "#dc2626" },
+  blue:   { header: "#1565c0", bar: "#42a5f5", cardAlt: "#eff6ff", badgeText: "#1565c0" },
+  orange: { header: "#e65100", bar: "#fb8c00", cardAlt: "#fff3e0", badgeText: "#e65100" },
+  green:  { header: "#2e7d32", bar: "#66bb6a", cardAlt: "#e8f5e9", badgeText: "#2e7d32" },
+  purple: { header: "#7b1fa2", bar: "#ab47bc", cardAlt: "#f3e5f5", badgeText: "#7b1fa2" },
+};
+
+/** カラム1本分の行 SVG を生成 */
+function renderCardColumn(
+  items: BarItem[],
+  colX: number,
+  theme: CardTheme,
+  headerLabel: string,
+  toBarW: (v: number) => number,
+  unit: string,
+): string {
+  const header = [
+    `  <rect x="${colX}" y="${HEADER_Y}" width="${CARD_W}" height="${HEADER_H}" rx="8" fill="${theme.header}"/>`,
+    `  <text x="${colX + CARD_W / 2}" y="${HEADER_Y + 26}" text-anchor="middle" font-size="14" font-weight="bold" fill="#ffffff">${headerLabel}</text>`,
+  ].join("\n");
+
+  const rows = items
+    .map((d, i) => {
+      const rowY = FIRST_ROW_Y + i * ROW_GAP;
+      const cardBg = i % 2 === 0 ? theme.cardAlt : "#ffffff";
+      const cy = rowY + 22;
+      const w = toBarW(d.value);
+      const rank = d.rank ?? i + 1;
+      const name = d.name ?? d.label;
+      const valStr = `${formatTick(d.value, 1)}${unit}`;
+      return [
+        `  <rect x="${colX}" y="${rowY}" width="${CARD_W}" height="${CARD_H}" rx="6" fill="${cardBg}"/>`,
+        `  <circle cx="${colX + BADGE_DX}" cy="${cy}" r="${BADGE_R}" fill="${theme.header}"/>`,
+        `  <text x="${colX + BADGE_DX}" y="${cy + 4.3}" text-anchor="middle" font-size="12" font-weight="bold" fill="#ffffff">${rank}</text>`,
+        `  <text x="${colX + NAME_DX}" y="${cy + 4.7}" font-size="13" font-weight="bold" fill="#1f2937">${name}</text>`,
+        `  <text x="${colX + VALUE_DX}" y="${cy + 4.3}" text-anchor="end" font-size="12" font-weight="600" fill="${theme.badgeText}">${valStr}</text>`,
+        `  <rect x="${colX + BAR_DX}" y="${rowY + 15}" width="${w}" height="${BAR_H_CARD}" rx="4" fill="${theme.bar}" opacity="0.8"/>`,
+      ].join("\n");
+    })
+    .join("\n");
+
+  return `${header}\n${rows}`;
+}
+
+/** "columns"（カード型2列ランキング）レイアウトのレンダリング */
 function renderColumnsLayout(
   topItems: BarItem[],
   bottomItems: BarItem[],
@@ -96,72 +171,39 @@ function renderColumnsLayout(
   const {
     title,
     subtitle,
-    unit,
+    unit = "",
     ariaLabel = title,
     palette = "red",
-    colorFn,
+    rightPalette = "blue",
+    highLabel = "上位",
+    lowLabel = "下位",
   } = options;
 
-  // 両カラム共通スケール（上位・下位のうち大きい方に合わせる）
-  const allValues = [...topItems, ...bottomItems].map((d) => d.value);
-  const maxVal = Math.max(...allValues, 1);
-  const { max: scaleMax } = niceScale(maxVal);
-  const toBarW = (v: number) => Math.max(0, Math.round((v / scaleMax) * COL_BAR_AREA_W));
+  const leftTheme = CARD_THEMES[palette] ?? CARD_THEMES.red;
+  const rightTheme = CARD_THEMES[rightPalette] ?? CARD_THEMES.blue;
 
-  // 右カラムのパレット（左の補色）
-  const rightPalette: PaletteName = palette === "blue" ? "red" : "blue";
-  const getLeftColor = colorFn ?? ((i: number) => colorByIndex(PALETTES[palette], i));
-  const getRightColor = (i: number) => colorByIndex(PALETTES[rightPalette], i);
+  // 両カラム共通スケール（全件の最大値を基準にバー長を決める）
+  const allValues = [...topItems, ...bottomItems].map((d) => d.value);
+  const globalMax = Math.max(...allValues, 1);
+  const toBarW = (v: number) =>
+    Math.max(0, Math.round((Math.max(0, v) / globalMax) * CARD_BAR_AREA_W * 1000) / 1000);
 
   const N = Math.max(topItems.length, bottomItems.length);
-  const FIRST_BAR_Y = 44; // タイトル + カラムヘッダー分
-  const totalH = FIRST_BAR_Y + N * ROW_H + 8;
+  const totalH = FIRST_ROW_Y + N * ROW_GAP + BOTTOM_PAD;
 
-  // 左カラム（上位）
-  const leftRows = topItems.map((d, i) => {
-    const y = FIRST_BAR_Y + i * ROW_H;
-    const w = toBarW(d.value);
-    const fill = getLeftColor(i);
-    const midY = y + 13;
-    return [
-      `  <rect x="${COL_LABEL_X}" y="${y}" width="${w}" height="${BAR_H}" fill="${fill}" rx="2"/>`,
-      `  <text x="${COL_LABEL_X - 5}" y="${midY}" text-anchor="end" font-size="12" class="svg-axis">${d.label}</text>`,
-      `  <text x="${COL_LABEL_X + w + 4}" y="${midY}" font-size="12" class="svg-tick" font-weight="bold">${formatTick(d.value, 1)}</text>`,
-    ].join("\n");
-  });
-
-  // 右カラム（下位）
-  const rightRows = bottomItems.map((d, i) => {
-    const x0 = COL_R_OFFSET;
-    const y = FIRST_BAR_Y + i * ROW_H;
-    const w = toBarW(d.value);
-    const fill = getRightColor(i);
-    const midY = y + 13;
-    return [
-      `  <rect x="${x0 + COL_LABEL_X}" y="${y}" width="${w}" height="${BAR_H}" fill="${fill}" rx="2"/>`,
-      `  <text x="${x0 + COL_LABEL_X - 5}" y="${midY}" text-anchor="end" font-size="12" class="svg-axis">${d.label}</text>`,
-      `  <text x="${x0 + COL_LABEL_X + w + 4}" y="${midY}" font-size="12" class="svg-tick" font-weight="bold">${formatTick(d.value, 1)}</text>`,
-    ].join("\n");
-  });
-
-  const colHeaderY = 38;
-  const leftCenterX = COL_LABEL_X + COL_BAR_AREA_W / 2;
-  const rightCenterX = COL_R_OFFSET + COL_LABEL_X + COL_BAR_AREA_W / 2;
-  const sepX = COL_R_OFFSET - 10;
+  const leftCol = renderCardColumn(topItems, COL_L_X, leftTheme, highLabel, toBarW, unit);
+  const rightCol = renderCardColumn(bottomItems, COL_R_X, rightTheme, lowLabel, toBarW, unit);
 
   const titleText = subtitle
-    ? `${title}<tspan font-size="10" font-weight="normal" class="svg-tick">　${subtitle}</tspan>`
+    ? `${title}<tspan font-size="11" font-weight="normal" class="svg-tick">　${subtitle}</tspan>`
     : title;
 
   return `<svg width="${COLS_W}" height="${totalH}" viewBox="0 0 ${COLS_W} ${totalH}" xmlns="http://www.w3.org/2000/svg" font-family="${FONT_FAMILY}" role="img" aria-label="${ariaLabel}">
 ${svgThemeStyle()}
-  <rect width="${COLS_W}" height="${totalH}" class="svg-bg" rx="6"/>
-  <text x="${COLS_W / 2}" y="22" text-anchor="middle" font-size="14" font-weight="bold" class="svg-title">${titleText}</text>
-  <text x="${leftCenterX}" y="${colHeaderY}" text-anchor="middle" font-size="11" class="svg-axis">上位 ${topItems.length} 件（${unit}）</text>
-  <text x="${rightCenterX}" y="${colHeaderY}" text-anchor="middle" font-size="11" class="svg-axis">下位 ${bottomItems.length} 件（${unit}）</text>
-  <line x1="${sepX}" y1="28" x2="${sepX}" y2="${totalH - 8}" class="svg-grid" stroke-width="1"/>
-${leftRows.join("\n")}
-${rightRows.join("\n")}
+  <rect width="${COLS_W}" height="${totalH}" class="svg-bg"/>
+  <text x="${COLS_W / 2}" y="40" text-anchor="middle" font-size="18" font-weight="bold" class="svg-title">${titleText}</text>
+${leftCol}
+${rightCol}
 </svg>`;
 }
 

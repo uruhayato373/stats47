@@ -35,7 +35,7 @@ CLI 内にインライン生成ロジックを書かない（重複・ドリフ�
 
 | 関数 | ファイル | 入力型 | データ命名パターン | 実出現 | 用途 |
 |---|---|---|---|---|---|
-| `generateBarChartSvg` | `bar-chart.ts` | `BarItem[]` + `BarChartOptions` | `*-ranking.json` / `*-top5-bottom5.json` | ~239 | 横棒（上位5+下位5、セパレーター対応） |
+| `generateBarChartSvg` | `bar-chart.ts` | `BarItem[]` + `BarChartOptions` | `*-ranking.json` / `*-top5-bottom5.json` | ~239 | ランキング棒グラフ。`layout:"columns"`（**デフォルト・推奨**）=カード型2列ランキング（左=上位/右=下位、960×N、`topN` で 5/10 切替）。`layout:"single"`=縦1列+「…中略…」(680幅) |
 | `generateScatterSvg` | `scatter.ts` | `ScatterPoint[]` + `ScatterOptions` | `*-scatter.json` | ~166 | 散布図（全都道府県・相関可視化） |
 | `generateChoroplethSvg` | `choropleth.ts` | `ChoroplethItem[]` + `ChoroplethOptions` | `*-map.json` / `*-tile-grid.json` | ~84 | タイルグリッド 47 都道府県マップ |
 | `generateLineSvg` | `line.ts` | `StatsSchema[]` + `LineOptions` | `*-timeseries.json` / `*-trend.json` | ~39 | 多系列折れ線（時系列・年齢階級）|
@@ -158,7 +158,8 @@ svg += svgThemeStyle();
 
 | チャート種 | 標準幅 | 高さ | 実出現の最頻 |
 |---|---|---|---|
-| 横棒（ranking） | `680` | 可変（1行 ~30px） | `680×300`（95枚） |
+| ランキング（columns・**推奨**） | `960` | 可変（124 + N×44 + 60。10件=624 / 5件=404） | カード型2列（aging-solo / alcohol スタイル） |
+| ランキング（single・1列） | `680` | 可変（1行 ~30px） | `680×300`（95枚） |
 | 散布図（scatter） | `960` | `624` | `960×624`（80枚） |
 | タイルマップ（map） | `600` | `700` | `600×700`（47枚） |
 | 要点カード（findings） | `960` | 可変（要点数 × ~80px） | `960×478`（26枚） |
