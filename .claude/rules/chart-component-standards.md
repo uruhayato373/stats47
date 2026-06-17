@@ -1,6 +1,6 @@
 # チャートコンポーネント標準 (shadcn UI + D3.js)
 
-`apps/web/src/components/charts/` と `packages/visualization/` に置くチャート・カードコンポーネントの**単一ソース**。
+チャート・カードコンポーネントの**単一ソース（SSoT）**。
 新規実装・テーマ追加・監査を行うエージェント / 人間はこれに従う。
 
 > **背景**: テーマページやダッシュボードで独自実装が散在し、色・スタイル・ツールチップが統一されていなかった（2026-06 整理）。
@@ -8,95 +8,211 @@
 
 ---
 
-## 1. コンポーネントカタログ（共通ライブラリ）
+## 1. アーキテクチャ概要（3層構造）
 
-以下が**使ってよいコンポーネント**の全量。新規実装の前に必ずこのカタログを確認する。
+```
+Layer 1: D3プリミティブ
+  packages/visualization/src/d3/components/  ← 軸・描画のみ。データを知らない
 
-### カード系（`apps/web/src/components/charts/`）
+Layer 2: 共有チャートエンジン（e-Stat連携・ローディング・エラー処理）
+  apps/web/src/components/stat-charts/       ← ★ 2026-06移行後の正規パス
+  ├── components/charts/   フルサイズチャート（next/dynamic wrapper）
+  ├── components/cards/    KPI・統計カード
+  ├── adapters/            e-Stat → Chart データ変換
+  └── services/            e-Stat API 接続
 
-| コンポーネント | インポートパス | 用途 |
-|---|---|---|
-| `ChartCard` | `@/components/charts/ChartCard` | チャートを内包するカードラッパー（label / value / chart / footer スロット） |
+Layer 3: UIミニチャート（カード内埋め込み用）
+  apps/web/src/components/charts/            ← ミニチャート + ChartCard
 
-### ミニチャート系（`apps/web/src/components/charts/`）
-
-| コンポーネント | インポートパス | 用途 |
-|---|---|---|
-| `MiniLineChart` | `@/components/charts/MiniCharts` | カード内折れ線（当該団体実線 + 比較破線）。D3 インタラクティブ |
-| `MiniBarChart` | `@/components/charts/MiniCharts` | カード内棒グラフ（正負値対応） |
-| `MiniStackedBarChart` | `@/components/charts/MiniCharts` | カード内積み上げ棒グラフ |
-
-### フルサイズチャート系（`packages/visualization/`）
-
-| コンポーネント | インポートパス | 用途 |
-|---|---|---|
-| `LineChart` | `@stats47/visualization` | 時系列折れ線（複数系列対応、軸あり） |
-| `BarChart` | `@stats47/visualization` | 棒グラフ（軸あり） |
-| `HubSankey` | `@/components/charts/HubSankey` | 財政フロー Sankey 図 |
-
----
-
-## 2. 実装禁止パターン（独自実装アンチパターン）
-
-以下のパターンは**禁止**。カタログから代替を選ぶか、`chart-component-builder` に設計を依頼する。
-
-```typescript
-// ❌ ハードコードカラー（テーマ追従しない）
-const BLUE = "#2563eb";
-const GRAY = "#94a3b8";
-
-// ❌ 独自カードラッパー（CardFrame 等）
-function CardFrame({ label, value, children }) { ... }
-
-// ❌ ページ内インライン SVG チャート（共有不可）
-<svg>
-  <rect fill="#2563eb" ... />
-  ...
-</svg>
-
-// ❌ feature スコープのチャートコンポーネント
-// features/xxx/components/MyChart.tsx  ← feature 内に閉じたチャートを作らない
+Feature-scoped（明示的に例外認定）
+  features/blog/components/charts/           ← ブログ専用（useChartDataに依存、移動不可）
+  features/ranking/components/               ← ランキング専用（AllPrefecturesChart等）
 ```
 
 ---
 
-## 3. 色・スタイル規約
+## 2. コンポーネントカタログ（全量）
 
-### 色は CSS 変数のみ使用（ハードコード禁止）
+### 2-A. D3 プリミティブ（`packages/visualization/src/d3/`）
 
-| 用途 | CSS 変数 | 具体値（light mode） |
+直接使用禁止。Layer 2 または `next/dynamic` 経由でのみ参照する。
+
+| コンポーネント | エクスポート名 | 用途 |
 |---|---|---|
-| 主系列・強調 | `hsl(var(--primary))` | blue-600 相当 |
-| 比較系列・補助 | `hsl(var(--muted-foreground))` | slate-400 相当 |
-| 背景 | `hsl(var(--card))` | white |
-| ボーダー | `hsl(var(--border))` | slate-200 相当 |
+| `BarChart` | `D3BarChart` | 縦棒グラフ |
+| `BarChartRace` | `D3BarChartRace` | バーチャートレース（アニメーション） |
+| `BoxplotChart` | `D3BoxplotChart` | 箱ひげ図（分布） |
+| `CategoryHeatmap` | `D3CategoryHeatmap` | カテゴリ別ヒートマップ |
+| `CityMapChart` | `D3CityMapChart` | 市区町村地図チャート |
+| `ColumnChart` | `D3ColumnChart` | 横棒グラフ |
+| `DivergingBarChart` | `D3DivergingBarChart` | 正負分岐棒グラフ |
+| `DonutChart` | `D3DonutChart` | ドーナツ円グラフ |
+| `HorizontalDivergingBarChart` | `D3HorizontalDivergingBarChart` | 水平正負分岐棒 |
+| `LineChart` | `D3LineChart` | 時系列折れ線 |
+| `MixedChart` | `D3MixedChart` | 複合チャート（折れ線＋棒） |
+| `PrefectureMapChart` | `D3PrefectureMapChart` | 都道府県地図チャート |
+| `PyramidChart` | `D3PyramidChart` | 人口ピラミッド |
+| `RadarChart` | `D3RadarChart` | レーダーチャート |
+| `Scatterplot` | `D3Scatterplot` | 散布図 |
+| `StackedAreaChart` | `D3StackedAreaChart` | 積み上げエリアチャート |
+| `SunburstChart` | `D3SunburstChart` | サンバーストチャート（階層内訳） |
+| `TileGridMapChart` | `D3TileGridMapChart` | タイルグリッドマップ（47都道府県） |
+| `TreemapChart` | `D3TreemapChart` | ツリーマップ |
 
-積み上げ棒など**複数系列が必要な場合のみ**、呼び出し元から `colors` プロップで渡す（コンポーネント内にハードコードしない）。
+インポートパス: `@stats47/visualization/d3` または `@stats47/visualization/d3/<ComponentName>`
+
+---
+
+### 2-B. 共有チャートエンジン（`@/components/stat-charts/`）
+
+e-Stat連携・データ変換・ローディング状態を内包したフルスタックチャート。
+`DashboardComponentRenderer` の `componentType` に対応し、`page_components` git TSから駆動される。
+
+#### チャートコンポーネント
+
+| コンポーネント | インポートパス | `componentType` | 用途 |
+|---|---|---|---|
+| `LineChartClient` | `@/components/stat-charts` | `line-chart` | 時系列折れ線（単一・複数系列） |
+| `BarChartClient` | `@/components/stat-charts/components/charts/BarChart` | `bar-chart` / `category-bar-chart` | 棒グラフ（カテゴリ比較） |
+| `CompositionChartClient` | `@/components/stat-charts/components/charts/CompositionChart` | `stacked-bar-chart` | 積み上げ棒グラフ |
+| `DivergingBarChartClient` | `@/components/stat-charts/components/charts/DivergingBarChart` | `diverging-bar-chart` | 正負分岐棒グラフ |
+| `D3BarChartRaceClient` | `@/components/stat-charts/components/charts/D3BarChartRace` | `custom` (chart_type: bar-chart-race) | バーチャートレース |
+| `MixedChartClient` | `@/components/stat-charts/components/charts/MixedChart` | `multi-trend-chart` | 複合チャート |
+| `PyramidChartClient` | `@/components/stat-charts/components/charts/PyramidChart` | `pyramid-chart` | 人口ピラミッド |
+| `RadarChartDashboardClient` | `@/components/stat-charts/components/charts/RadarChartDashboard` | `radar-chart` | レーダーチャート |
+| `StackedAreaDashboardClient` | `@/components/stat-charts/components/charts/StackedAreaDashboard` | `stacked-area-chart` | 積み上げエリア |
+| `SunburstChartClient` | `@/components/stat-charts/components/charts/SunburstDashboardChart` | `sunburst` / `treemap` | サンバースト・ツリーマップ |
+| `TreemapChartClient` | `@/components/stat-charts/components/charts/TreemapDashboardChart` | `treemap` | ツリーマップ |
+| `AttributeMatrix` | `@/components/stat-charts/components/charts/AttributeMatrix` | `attribute-matrix` | 属性マトリクス |
+| `RankingChart` | `@/components/stat-charts/components/charts/RankingChart` | `data-table` | ランキングテーブル |
+
+#### カードコンポーネント
+
+| コンポーネント | インポートパス | `componentType` | 用途 |
+|---|---|---|---|
+| `KpiCardClient` | `@/components/stat-charts` | `stats-card` | KPI単一値カード |
+| `MultiStatCardClient` | `@/components/stat-charts/components/cards/MultiStatCard` | `multi-stats-card` | 複数KPIカード |
+| `DefinitionsCard` | `@/components/stat-charts/components/cards/DefinitionsCard` | `definitions-card` | 定義・説明テキストカード |
+| `StatsTableClient` | `@/components/stat-charts/components/cards/StatsTable` | `data-table` | 統計テーブル |
+| `SlidePresentation` | `@/components/stat-charts/components/cards/SlidePresentation` | `slide-presentation` | スライド表示 |
+
+#### 共有UI
+
+| コンポーネント | インポートパス | 用途 |
+|---|---|---|
+| `DashboardCard` | `@/components/stat-charts` | チャートを囲むカードラッパー（タイトル・出典付き） |
+| `ChartSkeleton` | `@/components/stat-charts` | ローディングスケルトン |
+| `DashboardComponentRenderer` | `@/components/stat-charts/components/DashboardComponentRenderer` | componentTypeディスパッチャー |
+
+#### アダプター（e-Stat → Chart データ変換）
+
+| 関数 | インポートパス | 用途 |
+|---|---|---|
+| `toLineChartData` | `@/components/stat-charts` | → LineChartData |
+| `toBarChartData` | `@/components/stat-charts/adapters` | → BarChartData |
+| `toKpiCardData` | `@/components/stat-charts/adapters` | → KpiCardData |
+| `toCompositionChartData` | `@/components/stat-charts/adapters` | → CompositionChartData |
+| `toMixedChartData` | `@/components/stat-charts/adapters` | → MixedChartData |
+| `toPyramidChartData` | `@/components/stat-charts/adapters` | → PyramidChartData |
+| `toSunburstData` | `@/components/stat-charts/adapters` | → SunburstData |
+| `toStackedAreaData` | `@/components/stat-charts/adapters` | → StackedAreaData |
+| `toRadarChartData` | `@/components/stat-charts/adapters` | → RadarChartData |
+
+---
+
+### 2-C. UIミニチャート（`apps/web/src/components/charts/`）
+
+カード内に埋め込む小型インタラクティブチャート。データ取得機能を持たない。
+
+| コンポーネント | インポートパス | 用途 |
+|---|---|---|
+| `ChartCard` | `@/components/charts/ChartCard` | label / value / chart / footer スロット付きカード |
+| `MiniLineChart` | `@/components/charts/MiniCharts` | カード内折れ線（実線 + 比較破線）。D3インタラクティブ |
+| `MiniBarChart` | `@/components/charts/MiniCharts` | カード内棒グラフ（正負値対応） |
+| `MiniStackedBarChart` | `@/components/charts/MiniCharts` | カード内積み上げ棒グラフ |
+| `HubSankey` | `@/components/charts/HubSankey` | 財政フローSankey図 |
+
+---
+
+### 2-D. Feature-scoped（例外認定・移動不可）
+
+以下は feature 固有のロジックに依存するため、feature 内に置くことを正式に認定する。
+
+| コンポーネント | 場所 | 理由 |
+|---|---|---|
+| `BlogBarChart` | `@/features/blog/components/charts/BlogBarChart` | `useChartData`（ブログデータ読込）に依存 |
+| `BlogLineChart` | `@/features/blog/components/charts/BlogLineChart` | 同上 |
+| `BlogChoroplethMap` | `@/features/blog/components/charts/BlogChoroplethMap` | 同上 |
+| `BlogScatterPlot` | `@/features/blog/components/charts/BlogScatterPlot` | 同上 |
+| `BlogStatsHighlight` | `@/features/blog/components/charts/BlogStatsHighlight` | 同上 |
+| `RankingAllPrefecturesChart` | `@/features/ranking/components/RankingBarChart` | ランキングページ専用 |
+| `RankingBoxplotChart` | `@/features/ranking/components/RankingBoxplotChart` | 同上 |
+| `TrendSparklineCard` | `@/features/ranking/components/RankingSidebar` | サイドバー専用 |
+| `AgeCompositionChart` | `@/features/theme-dashboard/components/AgeCompositionChart` | テーマ専用積み上げ棒 |
+
+---
+
+## 3. 実装禁止パターン
+
+```typescript
+// ❌ ハードコードカラー（テーマ追従しない）
+const BLUE = "#2563eb";
+fill="#94a3b8"
+
+// ❌ 独自カードラッパー（CardFrame 等）
+function CardFrame({ label, value, children }) { ... }
+
+// ❌ feature内インラインD3（2-Dの例外認定リスト外）
+// features/xxx/components/MyChart.tsx に <svg> や from "d3" を直接書く
+
+// ❌ useD3Tooltip を使わない独自tooltipDiv
+const tooltipRef = useRef<HTMLDivElement>(null);
+tooltip.style("left", ...).style("top", ...);  // ← useD3Tooltip を使う
+```
+
+---
+
+## 4. 色・スタイル規約
+
+### 色は CSS 変数のみ使用
+
+| 用途 | CSS 変数 |
+|---|---|
+| 主系列・強調 | `hsl(var(--primary))` |
+| 比較系列・補助 | `hsl(var(--muted-foreground))` |
+| 背景 | `hsl(var(--card))` |
+| ボーダー | `hsl(var(--border))` |
+| 地図背景（データなし） | `hsl(var(--muted))` |
+| 境界線（地図） | `hsl(var(--border))` |
+| ホバー強調（地図） | `hsl(var(--foreground))` |
+| 道路・特殊用途 | `hsl(var(--warning))` |
+
+複数系列が必要な場合のみ、呼び出し元から `colors` プロップで渡す（コンポーネント内にハードコードしない）。
 
 ### shadcn UI の利用
 
-- カードは必ず `Card` / `CardHeader` / `CardContent`（`@stats47/components/atoms/ui/card`）を使う
+- カードは必ず `Card` / `CardHeader` / `CardContent`（`@stats47/components/atoms/ui/card`）
 - `cn()` は `@stats47/components` からインポート
-- `shadow-lg` 禁止 → `shadow-sm`（デフォルト）/ `shadow-md`（hover）
+- `shadow-lg` 禁止 → `shadow-sm` / `shadow-md`（hover）
 - `rounded-xl` 禁止 → フラット（`--radius: 0`）
 
 ---
 
-## 4. D3.js 利用規約
+## 5. D3.js 利用規約
 
 ### ツールチップ
 
-既存の `useD3Tooltip` を必ず使う（`@stats47/visualization` からインポート）。独自ツールチップ実装禁止。
+`useD3Tooltip` を必ず使う（`@stats47/visualization` からインポート）。独自ツールチップ実装禁止。
 
 ```typescript
 import { useD3Tooltip } from "@stats47/visualization";
-const { showStackedTooltip, hideTooltip } = useD3Tooltip();
+const { showTooltip, showStackedTooltip, hideTooltip, updateTooltipPosition } = useD3Tooltip();
 ```
 
 ### SVG サイズ
 
 - ミニチャート: `viewBox="0 0 260 84"` を基準に `width="100%"` でレスポンシブ
-- フルサイズ: `packages/visualization` の `D3LineChartProps` / `D3BarChartProps` に従う
+- フルサイズ: `packages/visualization` の各 Props 型に従う
 
 ### アクセシビリティ
 
@@ -104,49 +220,50 @@ const { showStackedTooltip, hideTooltip } = useD3Tooltip();
 
 ---
 
-## 5. 配置ルール
-
-| 種別 | 配置場所 | 判定軸 |
-|---|---|---|
-| **汎用ミニチャート**（複数ページで使う小さなチャート） | `apps/web/src/components/charts/` | 2 箇所以上から使われる or 使われる見込みがある |
-| **汎用フルサイズチャート**（D3 軸・凡例あり） | `packages/visualization/src/d3/components/` | パッケージ横断で使う |
-| **ページ固有の複合コンポーネント**（再利用しない） | `apps/web/src/features/<feature>/components/` | 1 feature 内でしか使わないと確定している場合のみ |
-
-**原則**: 迷ったら `apps/web/src/components/charts/` に置く。feature スコープを選ぶ積極的な理由がある場合のみ feature 内に置く。
-
----
-
 ## 6. 新規チャート追加フロー
 
 ```
-1. カタログ確認 → 既存コンポーネントで対応可能か？
-   ├─ YES → 既存を使う（実装しない）
+1. カタログ確認（本ファイル §2）→ 既存で対応可能か？
+   ├─ YES → 既存を使う
    └─ NO  → 2 へ
 
 2. chart-component-builder agent に設計を依頼
-   - 必要なプロップ・色・インタラクションを伝える
-   - agent がカタログに追加し、このファイルを更新する
+   - 必要なprops・色・インタラクションを伝える
+   - agentがカタログ（本ファイル）を更新する
 
-3. 実装（agent または人間）
-   - apps/web/src/components/charts/ に配置
-   - CSS 変数カラーを使う
-   - useD3Tooltip を使う（D3 インタラクティブの場合）
+3. 実装
+   - Layer 2（e-Stat連携あり）→ @/components/stat-charts/components/charts/
+   - Layer 3（UIのみ・データなし）→ @/components/charts/
+   - CSS変数カラーのみ使用
+   - useD3Tooltip を使用（D3インタラクティブの場合）
    - role="img" + aria-label を付与
 
-4. /audit-chart-components スキルで規約違反がないか確認
+4. /audit-chart-components スキルで違反ゼロを確認
+5. 本カタログ（§2）を更新してSSoTを維持
 ```
 
 ---
 
 ## 7. 監査チェックリスト（`/audit-chart-components`）
 
-| 項目 | NG パターン | 検出方法 |
+| 項目 | NGパターン | 検出方法 |
 |---|---|---|
-| ハードコード色 | `#[0-9a-fA-F]{3,6}` が SVG fill/stroke に直書き | grep |
-| 独自カードラッパー | `features/` 配下に card/frame 様の独自ラッパー | grep |
-| feature スコープのチャート | `features/*/components/*.tsx` に SVG / D3 コード | grep |
-| ツールチップ独自実装 | `useD3Tooltip` 未使用なのに tooltip 実装 | grep |
-| shadcn Card 未使用 | カード形状コンポーネントなのに `Card` インポートなし | grep |
+| A. ハードコード色 | `#[0-9a-fA-F]{3,6}` が fill/stroke に直書き | grep |
+| B. 未認定feature-scopeチャート | §2-D以外の`features/*/components/*.tsx`にSVG/D3 | grep |
+| C. 独自カードラッパー | `features/`配下にcard/frame様の独自ラッパー | grep |
+| D. useD3Tooltip未使用 | D3使用ファイルに`useD3Tooltip`なし | grep |
+| E. shadcn Card未使用 | カード形状なのに`Card`インポートなし | grep |
+
+§2-D の例外認定リストに載っているものはB・Dの対象外とする。
+
+---
+
+## 8. 変更履歴
+
+| 日付 | 変更内容 |
+|---|---|
+| 2026-06-17 | 全コンポーネントをカタログ化（3層構造・SSoT確立）。`features/stat-charts/` → `components/stat-charts/` 移行記録 |
+| 2026-06 | 初版作成（MiniCharts・ChartCard・基本ルール） |
 
 ---
 
@@ -155,4 +272,6 @@ const { showStackedTooltip, hideTooltip } = useD3Tooltip();
 - エージェント: `.claude/agents/chart-component-builder.md`
 - スキル: `.claude/skills/ui/audit-chart-components/SKILL.md`
 - shadcn UI 規約: `.claude/rules/ui-components.md`
-- 共通ライブラリ: `apps/web/src/components/charts/` / `packages/visualization/src/d3/`
+- D3プリミティブ: `packages/visualization/src/d3/`
+- 共有エンジン: `apps/web/src/components/stat-charts/`（2026-06移行後）
+- UIミニチャート: `apps/web/src/components/charts/`
