@@ -135,9 +135,38 @@ find .local/r2/app/blog -name "*.json" -path "*/data/*" | \
 |---|---|
 | `.claude/scripts/lib/svg-lint.mjs` | viewBox/width/height/ダークモードの低レベル lint |
 | `.claude/scripts/blog/audit-chart-quality.mjs` | 全記事バッチ監査（本スキルよりも広範・パブリック R2 対応） |
+| `.claude/scripts/blog/build-svg-gallery.mjs` | 全 SVG の目視レビュー用 HTML ギャラリー生成（下記） |
 
 `/audit-blog-svg-charts` は **ソースコード（packages/svg-builder・scripts）の規約準拠** を見る。
 `audit-chart-quality.mjs` は **生成済み SVG ファイルの品質** を見る。両者は補完関係。
+
+---
+
+## 目視レビュー成果物（ギャラリー HTML）
+
+機械検出（A〜F）に加え、**全 SVG を視覚的にレビューできる自己完結 HTML** を生成する。
+配色・レイアウト・可読性など grep で拾えない品質は人間の目視が必要なため、監査の締めに必ず生成する。
+
+```bash
+# R2 公開 URL から全記事の SVG を取得してギャラリー生成（どこでも実行可）
+node .claude/scripts/blog/build-svg-gallery.mjs --source r2 --out /tmp/blog-svg-gallery.html
+
+# ローカルに pull 済みなら local 走査（高速・オフライン）
+node .claude/scripts/blog/build-svg-gallery.mjs --source local
+
+# 動作確認用に件数を絞る
+node .claude/scripts/blog/build-svg-gallery.mjs --source r2 --limit 20
+```
+
+生成後は `SendUserFile` で HTML をユーザーに送付する。ギャラリーの機能:
+
+- 記事ごとにグループ化（タイトル + slug + 枚数）
+- 検索フィルタ（slug・ファイル名）
+- **「⚠ 要確認のみ」トグル**: viewBox 欠如（D-check 相当）・ダークモード未対応（svgThemeStyle なし）を抽出
+- ライト/ダーク切替・viewBox 寸法・生成日（provenance）表示
+
+> A〜F の機械検出は **ソースコードの規約準拠**、ギャラリーは **生成物の見た目** を確認する。
+> 監査レポートの末尾に「ギャラリー生成済み（N 記事 / M 枚 / ⚠ K）」を必ず記載する。
 
 ---
 
@@ -146,3 +175,4 @@ find .local/r2/app/blog -name "*.json" -path "*/data/*" | \
 - 基準: `.claude/rules/blog-svg-chart-standards.md`
 - 実行エージェント: `chart-author`
 - ライブラリ: `packages/svg-builder/src/`
+- ギャラリー生成: `.claude/scripts/blog/build-svg-gallery.mjs`

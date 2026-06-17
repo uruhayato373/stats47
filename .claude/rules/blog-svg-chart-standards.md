@@ -230,4 +230,5 @@ const svg = generateBarChartSvg(items, { title: "...", palette: "red", ... });
 - 監査スキル: `.claude/skills/ui/audit-blog-svg-charts/SKILL.md`
 - ビルダーライブラリ: `packages/svg-builder/src/`
 - 生成 CLI: `.claude/scripts/blog/generate-article-charts.mjs`
+- 目視レビューギャラリー: `.claude/scripts/blog/build-svg-gallery.mjs`（全 SVG を HTML 一覧化）
 - ブログ品質基準: `.claude/rules/blog-quality-standards.md`

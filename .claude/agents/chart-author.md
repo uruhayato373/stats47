@@ -49,6 +49,7 @@ description: ブログ / note 記事用の SVG / Remotion チャート生成専�
 | `docs/21_ブログ記事原稿/<slug>/` | read 主体（chart 参照） |
 | `docs/31_note記事原稿/<slug>/` | CRUD（note 原稿） |
 | `.claude/scripts/blog/generate-article-charts.mjs` | read / 軽微修正（CLI ディスパッチ追加時） |
+| `.claude/scripts/blog/build-svg-gallery.mjs` | run（目視レビュー用 HTML ギャラリー生成） |
 
 ## File Boundary (並行衝突回避)
 
@@ -73,3 +74,15 @@ description: ブログ / note 記事用の SVG / Remotion チャート生成専�
 3. `packages/svg-builder/src/charts/index.ts` にエクスポート追加
 4. `generate-article-charts.mjs` に命名パターンからのディスパッチ追加
 5. `/audit-blog-svg-charts` で違反ゼロを確認
+6. `build-svg-gallery.mjs` でギャラリーを再生成し新チャートの見た目を目視確認、`SendUserFile` で送付
+
+## チャート一括生成・是正後のレビュー（推奨）
+
+複数記事のチャートを生成・是正したら、締めにギャラリーを生成してユーザーに送る:
+
+```bash
+node .claude/scripts/blog/build-svg-gallery.mjs --source r2 --out /tmp/blog-svg-gallery.html
+# 生成後 SendUserFile で /tmp/blog-svg-gallery.html を送付
+```
+
+「⚠ 要確認のみ」トグルで viewBox 欠如・ダークモード未対応を抽出できる。
