@@ -97,3 +97,5 @@ docs/31_note記事原稿/<slug>/_data/plan.md
 ## 参照
 
 - note 戦略（SSOT）: `docs/30_note記事企画/note戦略.md`
+- **執筆パターン 9 型（SSoT）**: `.claude/skills/note/reference/note-writing-patterns.md`
+  → フック・導入の型を選ぶとき必ず参照。型を選んだ理由を plan.md に 1 行記載すること。

@@ -204,3 +204,5 @@ docs/31_note記事原稿/<slug>/hashtags.txt
 
 - note 戦略（SSOT）: `docs/30_note記事企画/note戦略.md`
 - UTM ルール: `/generate-utm-url` スキル
+- **執筆パターン 9 型（SSoT）**: `.claude/skills/note/reference/note-writing-patterns.md`
+  → フック・導入の型は plan.md に記載済みの型を使う。plan.md に型の記載がない場合は `/design-note-structure` に戻る。
