@@ -178,3 +178,5 @@ note 記事（B/C/D シリーズ）の原稿をチェックし、修正理由付
 
 - note 戦略（SSOT）: `docs/30_note記事企画/note戦略.md`
 - UTM ルール: `/generate-utm-url` スキル
+- **執筆パターン 9 型（SSoT）**: `.claude/skills/note/reference/note-writing-patterns.md`
+  → 編集時にフック・導入が型に沿っているかチェックすること。

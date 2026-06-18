@@ -136,3 +136,5 @@ docs/31_note記事原稿/<slug>/_data/plan.md
 ## 参照
 
 - note 戦略（SSOT）: `docs/30_note記事企画/note戦略.md`
+- **執筆パターン 9 型（SSoT）**: `.claude/skills/note/reference/note-writing-patterns.md`
+  → タイトル・フックの切り口を決める際に参照。型を選んでスコアシートに記載すること。
