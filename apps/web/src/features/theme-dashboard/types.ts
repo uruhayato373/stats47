@@ -76,6 +76,12 @@ export interface ThemeConfig {
    * (例: "depopulation-medical" は healthcare と aging-society の両方で使用)。
    */
   embeddedSections?: string[];
+  /**
+   * 地図を非表示にしカード主役レイアウトにする。
+   * true のとき ThemeDashboardTabbed は地図 (ThemeLeafletMap) を描画せず、
+   * 「全国の主要指標」KPI スタットカード (ThemeMetricsDashboard) を主役として先頭に配置する。
+   */
+  hideMap?: boolean;
 }
 
 /** 指標ごとのプリロード済みデータ */

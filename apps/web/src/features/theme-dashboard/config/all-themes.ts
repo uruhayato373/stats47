@@ -70,9 +70,24 @@ const EMBEDDED_SECTIONS: Record<string, string[]> = {
   climate: ["sunshine-map"],
 };
 
+/**
+ * 2026-06-20 デザイン整理: 全テーマを一旦 hideMap (stats-card のみ) に統一。
+ * 埋め込み GIS セクション (EMBEDDED_SECTIONS) も ThemePageLayout 側で
+ * hideMap のとき一旦非表示にする (定義は残すので復活可能)。
+ *
+ * 地図/チャート/GIS を戻したいテーマは、その themeKey を MAP_VISIBLE_THEMES に
+ * 追加する (既定は空 = 全テーマ非表示)。ThemeDashboardTabbed が hideMap: true を
+ * 参照してカードのみレイアウトに分岐する。
+ */
+const MAP_VISIBLE_THEMES = new Set<string>([]);
+
 /** 全テーマ一覧（表示順） */
 export const ALL_THEMES: ThemeConfig[] = THEME_SETS.map((set) => {
   const config = toThemeConfig(set);
   const embeddedSections = EMBEDDED_SECTIONS[config.themeKey];
-  return embeddedSections ? { ...config, embeddedSections } : config;
+  // embeddedSections の定義は残す (どのテーマが GIS を使っていたか分かるように)。
+  // 実際の描画は ThemePageLayout が hideMap を見て一旦止める。
+  const withEmbedded = embeddedSections ? { ...config, embeddedSections } : config;
+  const hideMap = !MAP_VISIBLE_THEMES.has(config.themeKey);
+  return hideMap ? { ...withEmbedded, hideMap: true } : withEmbedded;
 });

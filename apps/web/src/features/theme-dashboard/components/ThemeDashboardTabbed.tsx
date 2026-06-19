@@ -211,10 +211,22 @@ export function ThemeDashboardTabbed({
       indicatorDataMap={indicatorDataMap}
       pageCharts={pageCharts}
       selectedPrefectureCode={selectedPrefectureCode}
+      mapless={themeConfig.hideMap}
+      cardsOnly={themeConfig.hideMap}
     />
   );
 
   // --- レイアウト ---
+
+  // hideMap: 地図・選択タブ・チャートなし。全国の主要指標 KPI スタットカードのみ
+  // を描画する最小ビュー (manufacturing 等)。cardsOnly でチャート・考察も抑制。
+  if (themeConfig.hideMap) {
+    return (
+      <div className="space-y-4 overflow-hidden">
+        {metricsDashboardSection}
+      </div>
+    );
+  }
 
   if (isBelowLg) {
     return (

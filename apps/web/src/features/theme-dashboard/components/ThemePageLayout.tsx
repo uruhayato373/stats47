@@ -125,15 +125,22 @@ export async function ThemePageLayout({ theme, data, areaContext }: Props) {
         highlightAreaCode={areaContext?.areaCode}
       />
 
-      {theme.embeddedSections?.map((sectionKey) => {
-        const Section = THEME_SECTION_REGISTRY[sectionKey];
-        if (!Section) return null;
-        return (
-          <div key={sectionKey} className="mt-8">
-            <Section />
-          </div>
-        );
-      })}
+      {/*
+        埋め込み GIS セクション (人口移動 Sankey / 高速道路タイムライン / 駅乗降 /
+        過疎×医療 / 日照地図)。2026-06-20 デザイン整理中は hideMap テーマで一旦非表示。
+        どのテーマが GIS を使っていたかは all-themes.ts の EMBEDDED_SECTIONS に定義を
+        残してある (theme.embeddedSections として伝播)。復活は hideMap を外すだけ。
+      */}
+      {!theme.hideMap &&
+        theme.embeddedSections?.map((sectionKey) => {
+          const Section = THEME_SECTION_REGISTRY[sectionKey];
+          if (!Section) return null;
+          return (
+            <div key={sectionKey} className="mt-8">
+              <Section />
+            </div>
+          );
+        })}
 
       {/* 広告: ダッシュボード読了後・関連記事の前 */}
       <div className="mt-8">

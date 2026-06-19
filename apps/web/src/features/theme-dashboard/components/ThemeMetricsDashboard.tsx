@@ -28,6 +28,16 @@ interface Props {
   pageCharts?: PageComponent[];
   /** 選択中の都道府県コード（null = 全国） */
   selectedPrefectureCode: string | null;
+  /**
+   * 地図なしレイアウト時に true を渡す。
+   * 県未選択時の「地図で都道府県を選択すると…」ヒントを非表示にする。
+   */
+  mapless?: boolean;
+  /**
+   * true のとき KPI スタットカードのみ描画し、時系列チャート・考察
+   * (markdown-section) を出さない。hideMap のカードのみビュー用。
+   */
+  cardsOnly?: boolean;
 }
 
 interface MetricKpi {
@@ -69,6 +79,8 @@ export function ThemeMetricsDashboard({
   indicatorDataMap,
   pageCharts,
   selectedPrefectureCode,
+  mapless,
+  cardsOnly,
 }: Props) {
   const areaName = selectedPrefectureCode
     ? lookupArea(selectedPrefectureCode)?.areaName ?? "選択地域"
@@ -126,12 +138,13 @@ export function ThemeMetricsDashboard({
     });
   }, [themeConfig.tabIndicators, indicatorDataMap, selectedPrefectureCode]);
 
-  const chartComponents = (pageCharts ?? []).filter(
-    (c) => !NON_CHART_TYPES.has(c.componentType),
-  );
-  const markdownComponents = (pageCharts ?? []).filter(
-    (c) => c.componentType === "markdown-section",
-  );
+  // cardsOnly: KPI スタットカードのみ。チャート・考察は描画しない
+  const chartComponents = cardsOnly
+    ? []
+    : (pageCharts ?? []).filter((c) => !NON_CHART_TYPES.has(c.componentType));
+  const markdownComponents = cardsOnly
+    ? []
+    : (pageCharts ?? []).filter((c) => c.componentType === "markdown-section");
 
   if (
     kpis.length === 0 &&
@@ -158,7 +171,7 @@ export function ThemeMetricsDashboard({
               >
                 {areaName}のプロフィール <ArrowRight className="h-3 w-3" />
               </Link>
-            ) : (
+            ) : mapless ? null : (
               <span className="text-xs text-muted-foreground">
                 地図で都道府県を選択すると順位・全国平均比を表示
               </span>
