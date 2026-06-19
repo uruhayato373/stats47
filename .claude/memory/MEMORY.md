@@ -1,0 +1,78 @@
+# Memory Index
+
+- [feedback_dev_server_web_only.md](feedback_dev_server_web_only.md) — dev サーバーは root `npm run dev`(turbo 23 pkg=遅い/固まる) を使わず web 単体 `npm run dev:web`(=turbo --filter=web) or `npm run dev --workspace=apps/web`(✓ Ready in 2s)。常駐プロセスは run_in_background + Ready polling、前面 sleep 禁止。表示更新されない時はキャッシュより先に listen 確認 (lsof -i :3000)。2026-06-20 取り違え。正典 local-environment.md
+- [project_blog_auto_publish_reconcile_limits.md](project_blog_auto_publish_reconcile_limits.md) — blog公開: MAX_PUBLISH=10 / reconcileは live未掲載のみ(既live改稿は明示slug dispatch) / quality-gateはSVG存在を見ない / chart生成器サフィックス固定。★2026-06-15 R2ファースト化: docs/21=ephemeral outbox(公開後CI自動削除)、docs/20企画サブシステム全廃、新規は /draft-from-trend(metric→fetch-ranking-data-r2→公開→反復)。正典 blog-data-schema.md §0
+- [feedback_fetch_origin_before_implementing.md](feedback_fetch_origin_before_implementing.md) — 実装着手前に git fetch + origin/main vs ローカルHEAD を必ず diff。並行セッションが同日 push→stale ローカルで既デプロイ作業を重複実装する事故 (2026-06-14: モバイル本文中広告移設を PR #479 と重複実装→破棄)。施策IDをバックログ/develop log で既存検索する
+- [feedback_home_pure_ssg_r2_empty.md](feedback_home_pure_ssg_r2_empty.md) — トップ/は純SSGでビルド時R2読めず<FeaturedRankings>が空焼き込み→「注目のランキング」消失。修正は force-dynamic (#478/830b14de)。revalidate(#477)は本OpenNext構成で無効=prerenderedは再デプロイまで配信され時間ISR再生成しない。build envにR2_PUBLIC_FETCH_URL足すとgenerateStaticParams~1800件爆発で不採用。env名不一致(CLOUDFLARE_R2_* vs R2_ACCESS_KEY_ID)がsearch-index/blogビルドも壊す
+- [project_blog_remediation_loop.md](project_blog_remediation_loop.md) — ブログ品質を計画的に順次是正する仕組み。次に直す記事の真実源は remediation-queue.json (統合スコア/must-fixレーン)。週次Must で消化、critic PASS必須。記事アーキタイプA-E+図あたり字数gate (2026-06-06)
+- [project_gsc_coverage_remediation_loop.md](project_gsc_coverage_remediation_loop.md) — GSCカバレッジ是正ループ(2026-06-16構築)。404=8378等の大半は意図的=是正対象外、本番実測でactionableは190件のみ。ingest-gsc-export.py→build-coverage-queue.mjs→SSOT coverage-remediation-queue.json→/gsc-coverage-remediation skill。生drilldownは-drilldown.csv(auto-resubmitが拾わない)、liveだけcurated CSV
+- [project_consistency_audit_mechanism.md](project_consistency_audit_mechanism.md) — 会話完了時に agent/skill/script ドリフトを自発チェックする Stop hook ゲート(2026-06-16)。check-agent-skill-consistency.cjs(--gate/--mark-audited)+check-consistency-on-stop.js+/audit-consistency。解除は --mark-audited か commit。gateは今回変更分のみ点検
+- [project_blog_brushup_dbless_scaffold.md](project_blog_brushup_dbless_scaffold.md) — brushup の DBレス cloud-first 落とし穴。fetch-article-data陳腐化→R2 values直fetch、rank=0で再計算必須、NG_PATTERN(N位/X倍差)が旧title遡及blocker、publish-blogは直列dispatch、未参照費目jsonは残す(factual誤照合回避)
+- [project_blog_mass_rewrite_lessons.md](project_blog_mass_rewrite_lessons.md) — ブログ大量リライトWorkflow教訓(2026-06-13)。である調はcopula正規表現置換禁止(動詞終止形残り崩壊・gateはcopulaのみ)→article-writer必須。173本一括で14M+session limit→20-30本に分割。title固定でNG_PATTERN詰まり→reframe許可
+- [project_ranking_publish_pipeline_gap.md](project_ranking_publish_pipeline_gap.md) — ranking 公開は isActive:true だけ不足。middleware が isGone||!isKnown で410。KNOWN/SITEMAP/INDEXABLE/all.json 再生成が要るが generate-ranking-items 未配線・known生成破損。122 metric が中途半端410状態 (2026-06-03)
+- [project_estat_backfill_lessons.md](project_estat_backfill_lessons.md) — e-Stat backfill は UPSERT 必須。DELETE+INSERT は他ソース年度を喪失する (2026-05-27 marriages/divorces 2023-2024 喪失事故)。year_code 正規化と全年度取得規約も併記
+- [project_blog_brushup_risk_2026_05_25.md](project_blog_brushup_risk_2026_05_25.md) — AI auto-brushup は 13% FAIL + 27% WARN。quality-gate.mjs は形式のみで factual cross-check 不足。data/*.json と本文数値の突合 step 追加が必須
+- [project_blog_publish_cloud_first.md](project_blog_publish_cloud_first.md) — ブログ公開は publish-blog.yml (docs/21→CI→R2、完全DBレス)。新規 workflow は --ref develop、直列ディスパッチ必須。article-writer は公開R2URL+docs/21 化済
+- [project_sns_10k_roadmap.md](project_sns_10k_roadmap.md) — SNS 10K 戦略 (2026-05-24 決定)。IG 10K を 9 ヶ月、X は 1-2K 維持。路線 B×C: 数字対比・意外性で引く / IG Reels 集中
+- [feedback_weekly_plan_content_over_sns.md](feedback_weekly_plan_content_over_sns.md) — 週次計画の Must は記事公開・SEO に集約。SNS/note は NSM に寄与せず Should 以下に降格
+- [feedback_weekly_review_article_status_from_db.md](feedback_weekly_review_article_status_from_db.md) — 週次レビューの記事公開判定は articles テーブルが真実源。git/backlog だけだと誤判定する
+- [project_station_passengers.md](project_station_passengers.md) — 駅別乗降客数機能（S12）PR #328 マージ済み + 47連結 YouTube 動画 (wjLQCiuEeNI) public 公開済み
+- [reference_publish_youtube_47_summary.md](reference_publish_youtube_47_summary.md) — 47県カウントアップまとめ動画 (~22分) を作るスキル /publish-youtube-47-summary
+- [reference_voicevox_setup.md](reference_voicevox_setup.md) — VOICEVOX engine (CPU 版) のローカル起動手順。アプリ不要・CLI のみで 127.0.0.1:50021 立ち上げ
+- [project_redesign_bundle.md](project_redesign_bundle.md) — Claude Design リデザイン11ページ×4案を取り込み済。/apply-redesign で順次実装、ranking=D案Phase1完了
+- [affiliate-strategy.md](affiliate-strategy.md) — アフィリエイト戦略（A8.net バナー登録・記事内配置ルール）
+- [project_survey_id_mapping.md](project_survey_id_mapping.md) — ranking_items の survey_id 修正状況（533件修正済み、残り ssds 172件）
+- [feedback_d1_path.md](feedback_d1_path.md) — ローカル D1 SQLite の実パスは miniflare サブディレクトリ（ルート直下の .sqlite はダミー）
+- [project_city_choropleth_design.md](project_city_choropleth_design.md) — 市区町村コロプレスマップ切替機能の設計結論（既存スキーマで管理、ドリルダウン方式）
+- [project_ga4_setup.md](project_ga4_setup.md) — GA4 設定状況（カスタムイベント一覧・Consent Mode・管理画面設定）
+- [reference_estat_wage_survey.md](reference_estat_wage_survey.md) — 賃金構造基本統計調査(0003445758)の職種別年収データ構造・登録済みキー
+- [project_theme_dashboard_enhancement.md](project_theme_dashboard_enhancement.md) — テーマページ強化計画（右パネルチャート充実・スクリーンショット一覧・エージェント設計）
+- [project_careerdata_expansion.md](project_careerdata_expansion.md) — CareerData.jp展開（新テーマ2つ・職種47化・ブログ6本下書き・旧テーブル14年マージ完了）
+- [feedback_bypass_permissions.md](feedback_bypass_permissions.md) — Agent は bypassPermissions モード、確認なしで最後まで処理
+- [feedback_autonomous_execution.md](feedback_autonomous_execution.md) — スキル実行時は確認不要で自動処理。Sonnet でも実行可能な精度のスキル記述を維持
+- [feedback_note_publish_automation.md](feedback_note_publish_automation.md) — note.com 自動投稿は「全本文を 1 回 ClipboardEvent paste」が唯一の確定動作。type は markdown 変換しない。Profile 1 + browser-use cleanup 必須
+- [project_note_publish_flow_2026_06.md](project_note_publish_flow_2026_06.md) — note公開フロー確立+R2 ephemeral化完了(2026-06-19)。docs/31 完全削除。全74記事(公開37+ドラフト37)→R2 SSOT。編集: restore-from-r2.sh→push→CI削除。cloud Claude Code でコンテンツ編集可能。note.com 投稿はローカル browser-use のみ
+- [project_port_ranking_2023.md](project_port_ranking_2023.md) — 入港船舶総トン数ランキング分析（40県、1位神奈川・124倍格差）
+- [project_d1_time_travel.md](project_d1_time_travel.md) — ロールバックは D1 Time Travel（30日PITR）で賄う設計。R2 バックアップは sync フローから除外
+- [project_note_cover_overlap_validator.md](project_note_cover_overlap_validator.md) — note 記事 cover SVG の CJK テキスト重なり検証スクリプト（生成・編集後は必ず通す）
+- [project_recurrence_guard_scripts.md](project_recurrence_guard_scripts.md) — 過去事故由来 guard スクリプト一覧（`.claude/scripts/lib/check-*.cjs`、新規 refactor 前に索引参照）
+- [project_publish_x_ui_2026_04.md](project_publish_x_ui_2026_04.md) — publish-x の 2026-04 UI 変更対応（24時間制 select、DOM click 必須、posted_at JST 変換）
+- [project_youtube_shadowban_recovery_2026_04.md](project_youtube_shadowban_recovery_2026_04.md) — Issue #88 は 2026-05-16 CLOSED。17 本 public 復元済・pause 解除済、daily audit verdict は likely-shadowban 継続、SUGGESTED_VIDEO 0、個人ch 誤投稿 2 本が手動削除待ち
+- [project_instagram_graph_api_setup.md](project_instagram_graph_api_setup.md) — Instagram Graph API セットアップ完了（2026-04-25）。新フロー・stats47jp・トークン 60 日・business_discovery 不可
+- [feedback_lcp_optimization.md](feedback_lcp_optimization.md) — LCP 改善は LCP 要素の特定が先。HTML 削減も resource preload も JS 描画依存要素には効かない（EXP-002 ADVERSE / EXP-003 PARTIAL 検証）
+- [feedback_browser_use_cleanup.md](feedback_browser_use_cleanup.md) — browser-use の `close` は page だけ閉じる。daemon は `pkill -KILL -f "browser_use.skill_cli.daemon"` 必須
+- [project_d1_sync_pitfalls.md](project_d1_sync_pitfalls.md) — D1 sync の落とし穴：diff-d1 が chunk 失敗を握りつぶす・ranking_data.id 採番ズレ・REST API 変数上限低い。同期後は必ず行数検証
+- [project_gsc_coverage_drilldown.md](project_gsc_coverage_drilldown.md) — GSC 6 種別 Coverage Drilldown CSV を週次で .claude/state/metrics/gsc/coverage-drilldown/ に集約（Phase 7）。gcsエラー/ は廃止、parse-coverage-drilldown.cjs で冪等保存
+- [project_cloudflare_token_consolidated.md](project_cloudflare_token_consolidated.md) — Cloudflare API token は「stats47」1 個に集約 (D1 Edit + R2 Storage Edit + Pages Edit + Account Settings Read)
+- [feedback_github_actions_pr_creation.md](feedback_github_actions_pr_creation.md) — Actions が PR 作成するには repo permission 設定が必要 (gh API で一発設定可)
+- [feedback_d1_query_in_ci.md](feedback_d1_query_in_ci.md) — CI で D1 クエリは pull:d1 ではなく wrangler d1 execute --remote --json で直接
+- [feedback_d1_rest_api_size_limit.md](feedback_d1_rest_api_size_limit.md) — D1 REST API の SQL 文上限は約 100KB（SQLite 既定 1MB より厳しい）。バルク INSERT は 60-80KB に収める
+- [project_competitor_riskmap_jp.md](project_competitor_riskmap_jp.md) — SNS 直接競合 @riskmap.jp（治安/災害/心霊系の都道府県別 Reel/TikTok、1 本 1-2 万いいね）
+- [project_competitor_indicator_benchmark.md](project_competitor_indicator_benchmark.md) — Web 競合指標数ベンチマーク（todo-ran 1,501 / uub 1,843 / stats47 ~533、約 3 倍差）
+- [feedback_sns_competitor_search.md](feedback_sns_competitor_search.md) — SNS 競合検索は「統計／ランキング」だけでなくテーマ別の名乗り（リスク／格差／ご当地）も併走必須
+- [feedback_sns_growth_emotion_themes.md](feedback_sns_growth_emotion_themes.md) — SNS 伸長は感情喚起テーマが主因。stats47 は信頼性 × 網羅性 × Web 送客で差別化（煽り合戦に入らない）
+- [reference_competitor_research_label.md](reference_competitor_research_label.md) — 競合調査は GitHub Issues の `competitor-research` ラベルに集約。Issue #143 が初回
+- [project_d1_to_r2_migration.md](project_d1_to_r2_migration.md) — D1→R2 撤廃 10-phase 計画 (Phase 0/1/2/4 完了、3/5/6+ 残)。月次 \$54→\$5-6
+- [project_observations_migration.md](project_observations_migration.md) — sources/indicators/observations 3 層化リファクタ進捗 (2026-04-30、A-C 完了 / D 部分 / E 未)
+- [project_estat_metainfo_unified.md](project_estat_metainfo_unified.md) — estat_stats_tables を estat_metainfo に統合 (PR #205, 2026-05-04)。status='candidate'/'registered' で 8,461 行を 1 テーブル管理
+- [feedback_agent_output_contract.md](feedback_agent_output_contract.md) — Agent 起動時は prompt 冒頭で OUTPUT FORMAT (Template A/B/C) を必ず指定。末尾の word limit は無視される
+- [feedback_nextjs_ssg_cookies.md](feedback_nextjs_ssg_cookies.md) — layout または layout 配下の Server Component で cookies()/headers() を呼ぶと SSG が崩れて 500。EXP-004/005 で 2 度踏んだので .claude/rules/nextjs-ssg-preservation.md を必読
+- [feedback_skill_schema_drift.md](feedback_skill_schema_drift.md) — SKILL.md が DDD migration 後の現行 schema に追従していないケースあり。indicators→metrics, observations→stats_prefecture, push-r2 は diff-push-r2.ts のみ
+- [project_adsense_local_oauth_expired.md](project_adsense_local_oauth_expired.md) — AdSense .env.local の refresh token 失効 (2026-05-17)。GHA は別系統で有効、要 oauth-setup 再認証
+- [feedback_backlog_ranking_key_audit.md](feedback_backlog_ranking_key_audit.md) — backlog の ranking_key は AI 自動生成名で実在 metric と乖離しがち。実行前に必ず metrics.key 実在チェック
+- [feedback_bulk_blog_publish_isr_404.md](feedback_bulk_blog_publish_isr_404.md) — sync-snapshots --only blog の順序問題で ISR 404 がキャッシュされる。連続 curl で多くは復活、残りは Cloudflare 手動パージ必要
+- [project_seo_todo_unify_phase_1.md](project_seo_todo_unify_phase_1.md) — W21-W26 SEO 向上プラン Phase 1 完了 (2026-05-18, PR #308)。改善ログを TODO 単一真実源に再編
+- [reference_scan_pending_improvements.md](reference_scan_pending_improvements.md) — scan-pending-improvements.mjs の使い方 (改善ログから pending 抽出、weekly-plan と triage workflow が共用)
+- [feedback_improvement_log_as_source_of_truth.md](feedback_improvement_log_as_source_of_truth.md) — TODO 真実源は docs/05_改善ログ/<metric>.md。週次計画と docs/50_Issues/ は派生ビュー
+- [project_note_internal_link_breaks_on_publish.md](project_note_internal_link_breaks_on_publish.md) — note 記事の ../slug/draft.md 内部リンクは公開後に切れる。回遊リンクは note URL 化が必要、対応表は .claude/state/note-published-urls.json
+- [feedback_ga4_history_unreliable_wow.md](feedback_ga4_history_unreliable_wow.md) — GA4 history.csv の pageviews は週次ラベルだが last28d/bot 混入値。WoW は GSC clicks を使う
+- [project_dbless_migration_2026_05_29.md](project_dbless_migration_2026_05_29.md) — 完全DBレス移行開始 (正典=doc19)。Phase A/B/D一部 完了・push済、C/E/known-keys は R2 復旧待ち。server.ts に~50 caller、known-keys スクリプトは破損済
+- [project_r2_s3_token_expired_2026_05_29.md](project_r2_s3_token_expired_2026_05_29.md) — R2 S3 トークン(.env.local)が 401 失効。※2026-06-01: ローカル再発行は原則不要に (R2 書込は CI 専用化、下記参照)
+- [project_r2_writes_ci_only.md](project_r2_writes_ci_only.md) — 2026-06-20 方針転換: ローカル/CI 両方から remote R2 へ読み書き可。remote が唯一の真実源。ローカル R2 ミラー廃止。fetch.ts localFS tier 削除。_assert-ci-write はデフォルト許可。ローカル書き込みには R2 S3 creds 要
+- [project_ranking_download_onthefly.md](project_ranking_download_onthefly.md) — ranking download はオンザフライ生成 (route)。事前 bake は 23K files/1GB/timeout で不採用 (Phase6 削除理由)。iconv-lite SJIS は Workers 動作確認済。exporter 復活させない
+- [feedback_check_why_removed_before_reviving.md](feedback_check_why_removed_before_reviving.md) — 削除済みコードを復活させる前に削除理由を git log/docs で確認。スケール処理は単一サンプル成功で OK としない。sync-snapshots は最後に一括 push で重い task の timeout で全ロスト
+- [project_env_local_ci_consolidation.md](project_env_local_ci_consolidation.md) — .env.local の秘匿値を CI 専任に削減 (2026-05-29)。AdSense/PSI/META/GA 削除済、IG トークンは CI 自動更新へ移行中 (INSTAGRAM_* 最終削除は PR #375 マージ後検証してから)。YouTube は完全撤退 (PR #376 develop マージ済、GOOGLE_OAUTH_* 削除)
+- [feedback_shared_working_copy_git_race.md](feedback_shared_working_copy_git_race.md) — 2 セッションが同一 working copy/.git を共有すると git レース (index/HEAD/branch 奪い合い)。回避は worktree 分離 or SHA退避+server-side PR マージ
+- [project_sankey_landing_views.md](project_sankey_landing_views.md) — Sankey 着地ビュー横展開。migration(#393)/finance(#396) 本番稼働、共通 HubSankey。通勤は Phase 2 (e-Stat statsDataId 0003454526 = 国勢調査2020 従業地集計 O-D)
+- [feedback_sticky_aside_max_h.md](feedback_sticky_aside_max_h.md) — CSS Grid (items-start) 内の sticky aside には max-h-[calc(100vh-5.5rem)] overflow-hidden/auto が必須。削除するとフッターが非表示。2度踏んだ (commit 5d9afb24 → revert a2c76216/b18be52a, 2026-06-06)
+- [feedback_workers_self_fetch_unbundle.md](feedback_workers_self_fetch_unbundle.md) — OpenNext Workers で静的アセットを Worker から外す時、サーバーが自ドメイン URL を fetch すると degrade (self-fetch 落とし穴)。ASSETS binding か別ホスト R2 を使う。型チェックでなくデプロイ+スモークで検証。T2-2 で実証 (2026-06-13)

@@ -38,6 +38,16 @@
 
 完了時に以下を更新する。コミットメッセージ・セッション内メモリだけに閉じ込めない (次エージェントは git log と下記ファイルしか見られない)。
 
+## 検証コマンドの粒度
+
+`apps/web` のフル `build` は重いので、毎回の小変更では実行しない。影響範囲に応じて段階的に検証する。
+
+- 小さな UI / 型 / 単一コンポーネント変更: `npm run type-check --workspace apps/web` を優先
+- ロジック変更・変換処理・共通ユーティリティ変更: 対象テスト + type-check
+- route / metadata / generateStaticParams / SSG / R2 snapshot 生成・参照に触る変更: 必要に応じて対象ページやスクリプトを限定検証
+- フル `npm run build --workspace apps/web`: まとまった変更の節目、SSG/本番配信挙動に関わる変更、リリース前、またはユーザーが明示した場合に実行
+- フル build を省略した場合は、最終報告で「何を検証し、何を未実行か」を明示する
+
 | 種別 | 記録先 |
 |---|---|
 | 完了前検証 | `/verification-loop` (ビルド + 型チェック) |
@@ -53,7 +63,7 @@
 | コンテンツ backlog | `docs/30_note記事企画/backlog/` |
 | 未着手の機能・自動化バックログ | `docs/02_実装計画/04_機能バックログ.md`（指標拡充候補は `docs/02_実装計画/05_指標バックログ.md`） |
 | 非自明な API 仕様・制約 | `/knowledge` (問題・原因・対策の 3 項目) |
-| プロジェクト固有の恒常事実 | auto memory (`~/.claude/projects/-Users-minamidaisuke-stats47/memory/`) |
+| プロジェクト固有の恒常事実 | auto memory → 正典は **repo 内 `.claude/memory/`**（git で複数 PC・クラウドと共有）。Claude Code のグローバルパス `~/.claude/projects/<hash>/memory/` は `.claude/memory/` への symlink。**新しいマシンで clone した直後に `bash .claude/scripts/setup-memory-symlink.sh` を 1 回実行**して symlink を張る |
 
 ## ドキュメント参照ガイド
 
