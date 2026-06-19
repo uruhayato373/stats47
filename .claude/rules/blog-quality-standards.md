@@ -412,8 +412,7 @@ node .claude/scripts/blog/audit-published-blog.mjs
 ## 継続品質ループ (床を上げる × 天井を上げる)
 
 本ファイルの決定的ルールは「床」(全記事を一定品質に揃える)。その上で**アクセス数の多い記事を実測分析して
-「良い記事とは何か」を学び、本ファイルの基準自体を引き上げる**のが「天井」ループ。正典:
-**`docs/02_実装計画/07_ブログ勝ちパターン学習.md`**。
+「良い記事とは何か」を学び、本ファイルの基準自体を引き上げる**のが「天井」ループ（本節が正典）。
 
 - **床 (決定的)**: `quality-gate.mjs` / `audit-published-blog.mjs` → `/brushup-blog --target queue`。文体ですます・
   上位5+下位5 SVG・地理は `tile-grid` 地図 (`*-tile-grid.json` → tile-grid-map)・表禁止・図あたり字数 等。
@@ -422,7 +421,7 @@ node .claude/scripts/blog/audit-published-blog.mjs
 
 ## 関連ドキュメント
 
-- **継続品質ループの正典: `docs/02_実装計画/07_ブログ勝ちパターン学習.md`** ★床と天井の全体像
+- **継続品質ループ (床 × 天井): 本ファイル §継続品質ループ** ★床と天井の全体像
 - **是正ループの正典 (計画的に順次品質向上): `docs/02_実装計画/06_ブログ品質是正ループ.md`** ★既存記事を直すときはまずこれ
 - 勝ち要因分析スキル: `.claude/skills/blog/analyze-winning-patterns/SKILL.md`
 - 親方針: `docs/02_実装計画/01_収益化マスタープラン.md` Phase 0 (CTR 改修)

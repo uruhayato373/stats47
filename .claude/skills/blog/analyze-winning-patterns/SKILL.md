@@ -1,6 +1,6 @@
 ---
 name: analyze-winning-patterns
-description: アクセス数(GSC CTR/順位)の多いブログ記事を「良い記事」と仮置きし、トップ記事の構造特徴を実測と突合して勝ち要因を抽出する。ブログ品質を継続的に底上げするループの「天井を上げる」側。analyze-winning-patterns.mjs で featureSignals + 記事別 conformance を出し、docs/04_レビュー/ にレポート (<date>-blog-winning-patterns.md)。confidence hi/mid の信号だけを blog-quality-standards に書き戻す(定性裏取り必須)。仕組み正典 docs/02_実装計画/07_ブログ勝ちパターン学習.md。Use when user says "良い記事とは何か分析", "勝ちパターン", "アクセスの多い記事を分析", "ブログの質を底上げ", "何が刺さるか", "winning pattern".
+description: アクセス数(GSC CTR/順位)の多いブログ記事を「良い記事」と仮置きし、トップ記事の構造特徴を実測と突合して勝ち要因を抽出する。ブログ品質を継続的に底上げするループの「天井を上げる」側。analyze-winning-patterns.mjs で featureSignals + 記事別 conformance を出し、docs/04_レビュー/ にレポート (<date>-blog-winning-patterns.md)。confidence hi/mid の信号だけを blog-quality-standards に書き戻す(定性裏取り必須)。概念正典: blog-quality-standards.md §継続品質ループ。Use when user says "良い記事とは何か分析", "勝ちパターン", "アクセスの多い記事を分析", "ブログの質を底上げ", "何が刺さるか", "winning pattern".
 argument-hint: [--min-imp 15]
 primary_agent: gsc-analyst
 co_agents: [blog-critic, trend-scout]
@@ -11,7 +11,7 @@ co_agents: [blog-critic, trend-scout]
 「アクセス数の多い記事 = 良い記事」を作業仮説に、トップ記事の構造特徴を **GSC 実測 (CTR / 掲載順位)** と
 突合して「何が勝ちパターンか」を数値化する。`/brushup-blog`(床=blocker是正) と対をなす **天井=基準を引き上げる**側。
 
-> 仕組み正典: `docs/02_実装計画/07_ブログ勝ちパターン学習.md`
+> 概念正典 (天井ループ): `.claude/rules/blog-quality-standards.md` §継続品質ループ
 > 書き戻し先(品質基準): `.claude/rules/blog-quality-standards.md`
 > 判定の歯止め: `.claude/rules/evidence-based-judgment.md`
 
