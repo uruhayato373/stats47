@@ -2,9 +2,11 @@
 
 import { useCallback, useEffect, useMemo, useState, useTransition } from "react";
 
+import dynamic from "next/dynamic";
 import Link from "next/link";
 
 import { lookupArea } from "@stats47/area";
+import { Skeleton } from "@stats47/components/atoms/ui/skeleton";
 import {
   Tabs,
   TabsContent,
@@ -13,22 +15,47 @@ import {
 } from "@stats47/components/atoms/ui/tabs";
 import { Map as MapIcon, Table as TableIcon, BarChart3 } from "lucide-react";
 
-import { RankingDataTable, RankingYearSelector } from "@/features/ranking";
+import { RankingYearSelector } from "@/features/ranking";
 
 import { useBreakpoint } from "@/hooks/useBreakpoint";
 
 import { fetchIndicatorForYearAction } from "../actions";
 
-import { MetricFocusCharts } from "./MetricFocusCharts";
-import { PopulationScatterSection } from "./PopulationScatterSection";
 import { ScrollableTabsList } from "./ScrollableTabsList";
-import { ThemeCombinationAnalysis } from "./ThemeCombinationAnalysis";
-import { ThemeLeafletMap } from "./ThemeLeafletMap";
 import { ThemeMetricsDashboard } from "./ThemeMetricsDashboard";
-import { ThemeYoyCharts } from "./ThemeYoyCharts";
 
 import type { ThemeDashboardClientProps } from "../types";
 import type { RankingValue } from "@stats47/ranking";
+
+const RankingDataTable = dynamic(
+  () => import("@/features/ranking/components/RankingDataTable").then((mod) => mod.RankingDataTable),
+  { ssr: false, loading: () => <Skeleton className="h-[360px] w-full rounded-md" /> },
+);
+
+const ThemeLeafletMap = dynamic(
+  () => import("./ThemeLeafletMap").then((mod) => mod.ThemeLeafletMap),
+  { ssr: false, loading: () => <Skeleton className="h-[400px] lg:h-[500px] w-full rounded-md" /> },
+);
+
+const MetricFocusCharts = dynamic(
+  () => import("./MetricFocusCharts").then((mod) => mod.MetricFocusCharts),
+  { ssr: false, loading: () => <Skeleton className="h-[420px] w-full rounded-md" /> },
+);
+
+const ThemeCombinationAnalysis = dynamic(
+  () => import("./ThemeCombinationAnalysis").then((mod) => mod.ThemeCombinationAnalysis),
+  { ssr: false, loading: () => <Skeleton className="h-[360px] w-full rounded-md" /> },
+);
+
+const ThemeYoyCharts = dynamic(
+  () => import("./ThemeYoyCharts").then((mod) => mod.ThemeYoyCharts),
+  { ssr: false, loading: () => <Skeleton className="h-[420px] w-full rounded-md" /> },
+);
+
+const PopulationScatterSection = dynamic(
+  () => import("./PopulationScatterSection").then((mod) => mod.PopulationScatterSection),
+  { ssr: false, loading: () => <Skeleton className="h-[360px] w-full rounded-md" /> },
+);
 
 /**
  * タブ型テーマダッシュボード Client Component
@@ -220,12 +247,9 @@ export function ThemeDashboardTabbed({
               {combinationAnalysisSection}
               {/* 県未選択時の単独詳細は折りたたみで */}
               {!selectedPrefectureCode && (
-                <details className="rounded-md border border-border bg-card">
-                  <summary className="cursor-pointer px-3 py-2 text-xs font-medium text-muted-foreground hover:text-foreground">
-                    選択指標の単独詳細を表示 (時系列ライン・上下位 5 県)
-                  </summary>
-                  <div className="p-2">{metricFocusSection}</div>
-                </details>
+                <DeferredDetails summary="選択指標の単独詳細を表示 (時系列ライン・上下位 5 県)">
+                  {metricFocusSection}
+                </DeferredDetails>
               )}
             </div>
           }
@@ -269,12 +293,9 @@ export function ThemeDashboardTabbed({
           {selectedPrefectureCode ? (
             metricFocusSection
           ) : (
-            <details className="rounded-md border border-border bg-card">
-              <summary className="cursor-pointer px-3 py-2 text-xs font-medium text-muted-foreground hover:text-foreground">
-                選択指標の単独詳細を表示 (時系列ライン・上下位 5 県)
-              </summary>
-              <div className="p-2">{metricFocusSection}</div>
-            </details>
+            <DeferredDetails summary="選択指標の単独詳細を表示 (時系列ライン・上下位 5 県)">
+              {metricFocusSection}
+            </DeferredDetails>
           )}
           <IndicatorGrid
             rankingKeys={themeConfig.rankingKeys}
@@ -346,6 +367,34 @@ function IndicatorGrid({
           })}
       </div>
     </section>
+  );
+}
+
+function DeferredDetails({
+  summary,
+  children,
+}: {
+  summary: string;
+  children: React.ReactNode;
+}) {
+  const [hasOpened, setHasOpened] = useState(false);
+
+  return (
+    <details
+      className="rounded-md border border-border bg-card"
+      onToggle={(event) => {
+        if (event.currentTarget.open) {
+          setHasOpened(true);
+        }
+      }}
+    >
+      <summary className="cursor-pointer px-3 py-2 text-xs font-medium text-muted-foreground hover:text-foreground">
+        {summary}
+      </summary>
+      <div className="p-2">
+        {hasOpened ? children : null}
+      </div>
+    </details>
   );
 }
 
