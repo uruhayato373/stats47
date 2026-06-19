@@ -45,6 +45,7 @@
 | 同じエラー 2 回目 | `/continuous-learning` でパターン化 |
 | **改善施策の TODO 真実源** (status / tier / 期日) | `docs/02_実装計画/03_改善バックログ.md` |
 | 改善施策デプロイ (agent 用詳細) | `.claude/skills/analytics/{gsc,ga4,adsense,affiliate,sns-metrics,cloudflare-cost,performance}-improvement/reference/improvement-log.md` |
+| **月次の重点 1-2 テーマ** (今月どこに張るか・Pro 予算配分) | `docs/03_週次運用/月次計画/YYYY-MM.md` (`/monthly-plan` で月初生成。週次がこれを分割消化) |
 | 週次計画進捗 | `docs/03_週次運用/週次計画/YYYY-Www.md` の TODO チェックボックスを Edit |
 | 週次振り返り | `docs/03_週次運用/週次レビュー/YYYY-Www.md` |
 | 批判的レビュー / 事前検死 | `docs/04_レビュー/YYYY-MM-DD-<topic-slug>.md` (フラット。slug に種別を含める例 `-monetization` / `-pre-mortem-<x>`、種別は frontmatter `type:` で絞り込み) |
