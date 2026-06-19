@@ -42,10 +42,6 @@ const MetricFocusCharts = dynamic(
   { ssr: false, loading: () => <Skeleton className="h-[420px] w-full rounded-md" /> },
 );
 
-const ThemeCombinationAnalysis = dynamic(
-  () => import("./ThemeCombinationAnalysis").then((mod) => mod.ThemeCombinationAnalysis),
-  { ssr: false, loading: () => <Skeleton className="h-[360px] w-full rounded-md" /> },
-);
 
 const ThemeYoyCharts = dynamic(
   () => import("./ThemeYoyCharts").then((mod) => mod.ThemeYoyCharts),
@@ -208,15 +204,6 @@ export function ThemeDashboardTabbed({
     />
   );
 
-  // 組み合わせ分析 (scatter) — テーマページ独自価値
-  const combinationAnalysisSection = (
-    <ThemeCombinationAnalysis
-      themeConfig={themeConfig}
-      indicatorDataMap={indicatorDataMap}
-      selectedPrefectureCode={selectedPrefectureCode}
-    />
-  );
-
   // フル幅ダッシュボード (KPI カード + 時系列チャート + 考察) — areas スタイル
   const metricsDashboardSection = (
     <ThemeMetricsDashboard
@@ -243,8 +230,6 @@ export function ThemeDashboardTabbed({
               {metricsDashboardSection}
               {/* 県選択時: 選択指標のトレンドを常時可視 */}
               {selectedPrefectureCode && metricFocusSection}
-              {/* テーマ独自の組み合わせ分析 (scatter) */}
-              {combinationAnalysisSection}
               {/* 県未選択時の単独詳細は折りたたみで */}
               {!selectedPrefectureCode && (
                 <DeferredDetails summary="選択指標の単独詳細を表示 (時系列ライン・上下位 5 県)">
@@ -283,30 +268,22 @@ export function ThemeDashboardTabbed({
   // デスクトップ
   return (
     <div className="space-y-4 overflow-hidden">
-      <div className="grid grid-cols-[1fr_380px] gap-4 items-start">
-        {/* 左カラム: タブ + 年度 + 地図 + (県選択時) トレンド + 指標一覧 */}
-        <div className="space-y-3 min-w-0">
-          {indicatorTabs}
-          {yearSelector}
-          <div className="sticky top-20">{mapSection}</div>
-          {/* 県選択時: 選択指標のトレンドを常時可視。未選択時は折りたたみ */}
-          {selectedPrefectureCode ? (
-            metricFocusSection
-          ) : (
-            <DeferredDetails summary="選択指標の単独詳細を表示 (時系列ライン・上下位 5 県)">
-              {metricFocusSection}
-            </DeferredDetails>
-          )}
-          <IndicatorGrid
-            rankingKeys={themeConfig.rankingKeys}
-            indicatorDataMap={indicatorDataMap}
-          />
-        </div>
-
-        {/* 右カラム: 組み合わせ分析 (scatter) */}
-        <div className="space-y-3">
-          {combinationAnalysisSection}
-        </div>
+      <div className="space-y-3">
+        {indicatorTabs}
+        {yearSelector}
+        {mapSection}
+        {/* 県選択時: 選択指標のトレンドを常時可視。未選択時は折りたたみ */}
+        {selectedPrefectureCode ? (
+          metricFocusSection
+        ) : (
+          <DeferredDetails summary="選択指標の単独詳細を表示 (時系列ライン・上下位 5 県)">
+            {metricFocusSection}
+          </DeferredDetails>
+        )}
+        <IndicatorGrid
+          rankingKeys={themeConfig.rankingKeys}
+          indicatorDataMap={indicatorDataMap}
+        />
       </div>
 
       {/* フル幅ダッシュボード (KPI カード + 時系列チャート + 考察) */}
