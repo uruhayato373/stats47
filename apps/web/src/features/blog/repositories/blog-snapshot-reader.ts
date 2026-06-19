@@ -92,14 +92,6 @@ export async function readArticlesByTagKeyFromR2(
   return matched.slice(offset, offset + limit).map(toArticle);
 }
 
-export async function readArticlesByTagFromR2(
-  tagKey: string,
-  limit = 10,
-  offset = 0,
-): Promise<Article[]> {
-  return readArticlesByTagKeyFromR2(tagKey, limit, offset);
-}
-
 export async function readAllTagsWithCountFromR2(): Promise<
   { tag: string; tagKey: string; count: number }[]
 > {

@@ -9,7 +9,7 @@
  *
  * カテゴリを追加/リネームしたら CATEGORIES と本配列の両方を更新すること。
  */
-export const LEGACY_CATEGORY_KEYS = [
+const LEGACY_CATEGORY_KEYS = [
   "administrativefinancial",
   "agriculture",
   "commercial",

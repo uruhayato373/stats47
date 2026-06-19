@@ -10,14 +10,14 @@ export interface StationPassengersBundle {
 }
 
 /** 47 県サマリ index.json の 1 県 */
-export interface PrefSummary {
+interface PrefSummary {
   prefCode: string;
   prefName: string;
   stationCount: number;
   latestTotal: number;
 }
 
-export interface StationPassengersIndex {
+interface StationPassengersIndex {
   generatedAt: string;
   dataset: string;
   years: number[];

@@ -2,7 +2,7 @@
  * シェアリンクの生成ユーティリティ
  */
 
-export interface ShareLinkConfig {
+interface ShareLinkConfig {
   name: string;
   href: string;
   color: string;

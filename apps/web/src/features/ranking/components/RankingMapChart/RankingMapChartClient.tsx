@@ -42,7 +42,7 @@ const TileSwitcher = dynamic(
 /**
  * RankingMapCardのProps型定義
  */
-export interface Props {
+interface Props {
   /** ランキング項目情報（色スキーム設定を含む） */
   rankingItem: RankingItem;
   /** ランキングデータ */

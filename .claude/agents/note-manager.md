@@ -5,10 +5,11 @@
 note.com 記事のライフサイクル管理を担当する専門エージェント。
 記事の公開・公開済み URL のトラッキング・メモリ更新を一貫して管理する。
 
-> **★完全DBレス（2026-05-29 正典）**: note 記事に **D1 `note_articles` テーブルは使わない**（廃止済）。
-> note 記事の SSOT は **`docs/31_note記事原稿/<vertical>/<slug>/draft.md`（git）**。note.com 本体が本文をホストし、
-> 公開済み URL の対応表は **`.claude/state/note-published-urls.json`** が真実源。**公開後も docs/31 のドラフトは削除しない**
-> （旧 agent の「R2 アーカイブ → docs 削除 → D1 更新」フローは破棄。docs は恒久 SSOT）。
+> **★完全DBレス + ephemeral outbox（2026-06-19 正典）**: note 記事に **D1 `note_articles` テーブルは使わない**（廃止済）。
+> 記事の SSOT は **R2 `note/<vertical>/<slug>/`**。**`docs/31_note記事原稿/` は ephemeral outbox**（編集時のみ存在、push 後 CI が自動削除）。
+> - 公開済み URL 対応表の真実源: **`.claude/state/note-published-urls.json`**（slug → url / is_paid / r2_path 等）
+> - ドラフトの真実源: **`.claude/state/note-draft-index.json`**（slug → vertical / r2_path）
+> - 編集前に復元: `bash .claude/scripts/note/restore-from-r2.sh <slug>` → docs/31 に展開。push 後 CI が R2 再同期 + docs/31 削除。
 
 ## 担当範囲
 
@@ -27,10 +28,10 @@ note.com 記事のライフサイクル管理を担当する専門エージェ�
 
 | 何 | 置き場 | 備考 |
 |---|---|---|
-| 記事 SSOT（本文・frontmatter） | `docs/31_note記事原稿/<vertical>/<slug>/draft.md` | **公開後も保持**。`note.md` は後方互換のフォールバック |
-| ハッシュタグ | 同ディレクトリ `hashtags.txt`（無ければ `tags.txt`） | 1 行 1 タグ |
-| 画像（表紙・本文） | 同ディレクトリ `images/`（`cover-1280x670.png` / `*.png`、`*.svg` はソース） | note は png/jpg のみ受けるので svg は同名 png に変換してアップロード |
-| 公開済み URL 対応表（真実源） | `.claude/state/note-published-urls.json` | slug → `{vertical, title, url, is_paid, price_jpy, published_at, updated_at}` |
+| 記事 SSOT（本文・画像・ハッシュタグ） | **R2 `note/<vertical>/<slug>/`** | 公開済み + ドラフト全記事。復元: `restore-from-r2.sh <slug>` |
+| 編集時の作業域（ephemeral outbox） | `docs/31_note記事原稿/<vertical>/<slug>/` | push 後 CI が自動削除。git に長期保持しない |
+| 公開済み URL 対応表（真実源） | `.claude/state/note-published-urls.json` | slug → `{vertical, title, url, is_paid, r2_path, published_at, updated_at}` |
+| ドラフト一覧（真実源） | `.claude/state/note-draft-index.json` | slug → `{vertical, r2_path}` |
 
 > vertical は `koumuin-claude-code` / `koumuin-estat-claude-code` 等のサブディレクトリ。slug 直下に draft.md がある旧構成も許容。
 
@@ -49,7 +50,8 @@ curl -s -o /dev/null -w "%{http_code}\n" -A "Mozilla/5.0 (compatible; Googlebot/
 
 ### Step 2: state に記録（真実源）
 
-`.claude/state/note-published-urls.json` の `articles` に追記（新規）または `updated_at` を更新（update モード）:
+`.claude/state/note-published-urls.json` の `articles` に追記（新規）または `updated_at` を更新（update モード）。
+ドラフト管理中だった場合は **`.claude/state/note-draft-index.json` から slug を削除**する。
 
 ```python
 import json
@@ -87,8 +89,8 @@ json.dump(d,open(p,'w'),ensure_ascii=False,indent=2)
 # 公開済み一覧（update 日含む）
 python3 -c "import json;d=json.load(open('.claude/state/note-published-urls.json'))['articles'];[print(k,v.get('url'),'paid' if v.get('is_paid') else 'free','upd='+v.get('updated_at','-')) for k,v in d.items() if not k.startswith('_')]"
 
-# 未公開（draft.md はあるが state に無い）
-comm -23 <(ls -d docs/31_note記事原稿/*/*/ | xargs -n1 basename | sort -u) <(python3 -c "import json;[print(k) for k in json.load(open('.claude/state/note-published-urls.json'))['articles'] if not k.startswith('_')]" | sort -u)
+# ドラフト一覧 (note-draft-index.json が真実源)
+python3 -c "import json;d=json.load(open('.claude/state/note-draft-index.json'))['drafts'];[print(k,v.get('vertical'),v.get('r2_path','-')) for k,v in d.items()]"
 ```
 
 ## 一括公開時の注意

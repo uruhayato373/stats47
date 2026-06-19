@@ -35,7 +35,7 @@ description: OGP / note 表紙 / SNS 静止素材の画像プロンプト生成�
 ## 触る state / files
 
 - `.claude/skills/image-prompt/reference/catalog.md` — プロンプト catalog (CRUD)
-- `docs/31_note記事原稿/<slug>/header.png` — note 表紙 (write)
+- `docs/31_note記事原稿/<slug>/header.png` — note 表紙 (write。ephemeral outbox: 存在しない場合は先に `bash .claude/scripts/note/restore-from-r2.sh <slug>` で復元)
 - `.local/r2/app/blog/<slug>/og-*.png` — ブログ OGP (write)
 - `.local/r2/sns/` — SNS 静止素材 (write)
 

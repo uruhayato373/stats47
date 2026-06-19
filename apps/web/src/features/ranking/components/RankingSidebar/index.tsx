@@ -8,7 +8,7 @@ import { RankingSidebarSkeleton } from "./RankingSidebarSkeleton";
 /**
  * ランキングサイドバーのProps型定義
  */
-export interface RankingSidebarProps {
+interface RankingSidebarProps {
   /** ランキングキー（現在表示中） */
   rankingKey: string;
   /** 地域タイプ（都道府県/市区町村） */
@@ -23,7 +23,7 @@ export interface RankingSidebarProps {
  * ランキングサイドバーを表示するコンポーネント
  * SuspenseとRankingSidebarSkeletonを内部で処理し、外部からはシンプルに使用できる
  */
-export async function RankingSidebar({
+async function RankingSidebar({
   rankingKey,
   areaType,
   categoryKey,
@@ -39,9 +39,4 @@ export async function RankingSidebar({
   );
 }
 
-export { RankingItemCard } from "./RankingItemCard";
-export { RankingSidebarClient } from "./RankingSidebarClient";
-export type { RankingSidebarClientProps } from "./RankingSidebarClient";
 export { RankingSidebar as RankingItemsSidebar };
-export type { RankingSidebarProps as Props };
-

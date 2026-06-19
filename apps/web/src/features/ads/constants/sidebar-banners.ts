@@ -5,7 +5,7 @@
  * カテゴリに依存せず全ページ共通サイドバーに出す固定クリエイティブをここで一元管理する。
  * 追加・差し替えはこの配列だけを編集する (各ページの page.tsx に URL リテラルを散らさない)。
  */
-export interface SidebarBannerConfig {
+interface SidebarBannerConfig {
   id: string;
   href: string;
   imageUrl: string;

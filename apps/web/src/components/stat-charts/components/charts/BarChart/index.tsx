@@ -1,0 +1,1 @@
+export { DashboardBarChart } from "./BarChart";

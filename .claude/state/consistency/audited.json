@@ -1,18 +1,9 @@
 {
-  "hash": "a98e6d117b0803c371ab5a207e7485e0a1db5b7ba37be2935ab5ff632dadda8f",
-  "audited_at": "2026-06-15T19:52:21",
+  "hash": "13f530cb7433c7d092a2fa7a607057e998d4af0802909e51480611e146f0b237",
+  "audited_at": "2026-06-19T21:29:16",
   "files": [
-    ".claude/agents/gsc-analyst.md",
-    ".claude/hooks/check-consistency-on-stop.js",
-    ".claude/scripts/gsc/auto-resubmit.mjs",
-    ".claude/scripts/gsc/build-coverage-queue.mjs",
-    ".claude/scripts/gsc/ingest-gsc-export.py",
-    ".claude/scripts/lib/check-agent-skill-consistency.cjs",
-    ".claude/settings.json",
-    ".claude/skills/analytics/gsc-coverage-remediation/SKILL.md",
-    ".claude/skills/analytics/gsc-improvement/reference/USER_EXPORT_GUIDE.md",
     ".claude/skills/analytics/gsc-improvement/reference/improvement-log.md",
-    ".claude/skills/dev/audit-consistency/SKILL.md",
-    ".claude/skills/management/weekly-review/SKILL.md"
+    ".claude/skills/management/nsm-experiment/reference/weekly-snapshots/2026-W25.json",
+    ".claude/skills/management/nsm-experiment/reference/weekly-snapshots/index.json"
   ]
 }

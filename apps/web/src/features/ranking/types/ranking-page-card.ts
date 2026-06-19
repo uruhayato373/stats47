@@ -13,8 +13,3 @@ export interface StatsLineChartProps {
   /** 説明文 */
   description?: string;
 }
-
-/** componentType → componentProps の型マッピング */
-export interface RankingPageCardPropsMap {
-  "stats-line-chart": StatsLineChartProps;
-}

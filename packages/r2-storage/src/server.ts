@@ -12,6 +12,7 @@ export {
     listFromR2,
     listFromR2WithSize,
     saveToR2,
+    shouldSkipRemoteR2Read,
     type SnapshotReaderOptions
 } from "./lib";
 

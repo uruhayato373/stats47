@@ -21,7 +21,7 @@ import dotenv from "dotenv";
 import {
   CITY_CATEGORY_KEYS_SNAPSHOT_KEY,
   pageComponentsKeyPath,
-} from "../src/features/stat-charts/services/page-components-snapshot";
+} from "../src/components/stat-charts/services/page-components-snapshot";
 
 dotenv.config({ path: ".env.local" });
 

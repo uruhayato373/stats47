@@ -14,7 +14,7 @@ export function buildHeadingSlug(text: string): string {
     .replace(/^-|-$/g, "");
 }
 
-export interface HeadingItem {
+interface HeadingItem {
   level: 2 | 3;
   text: string;
   id: string;

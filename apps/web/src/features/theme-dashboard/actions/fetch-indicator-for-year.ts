@@ -12,7 +12,7 @@ import {
 } from "@stats47/ranking/server";
 import { isOk } from "@stats47/types";
 
-import { getEstatCacheStorage } from "@/features/stat-charts/server";
+import { getEstatCacheStorage } from "@/components/stat-charts/server";
 
 import type { RankingValue } from "@stats47/ranking";
 

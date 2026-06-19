@@ -29,7 +29,7 @@ export function toThemeConfig(set: IndicatorSet): ThemeConfig {
 
   return {
     themeKey: set.key,
-    title: `${set.title}の統計ダッシュボード`,
+    title: set.title,
     description: set.description,
     rankingKeys,
     defaultRankingKey,

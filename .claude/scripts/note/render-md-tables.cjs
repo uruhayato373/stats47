@@ -15,6 +15,8 @@ const fs = require("fs");
 const path = require("path");
 const sharp = require("sharp");
 
+// docs/31 は ephemeral outbox (push後CI自動削除)。実行前に記事を復元する:
+//   bash .claude/scripts/note/restore-from-r2.sh <slug>
 const SERIES = path.resolve(
   __dirname,
   "../../../docs/31_note記事原稿/koumuin-claude-code",

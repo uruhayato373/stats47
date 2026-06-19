@@ -5,7 +5,7 @@ import {
   type GetStatsDataParams,
 } from "@stats47/estat-api/server";
 
-import { getEstatCacheStorage } from "@/features/stat-charts/server";
+import { getEstatCacheStorage } from "@/components/stat-charts/server";
 
 import type { PyramidChartData } from "@stats47/visualization/d3";
 

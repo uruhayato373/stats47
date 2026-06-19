@@ -1,6 +1,6 @@
 import type { AffiliateCategory } from "./affiliate-category";
 
-export interface BookRecommendation {
+interface BookRecommendation {
   title: string;
   author: string;
   description: string;

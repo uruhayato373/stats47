@@ -6,7 +6,8 @@
 
 | スキル | 用途 | 頻度 |
 |---|---|---|
-| `/weekly-plan` | 週次計画を生成 | 毎週月曜 |
+| `/monthly-plan` | 月次計画を生成（今月の重点1-2テーマに絞る・予算配分） | 毎月初 |
+| `/weekly-plan` | 週次計画を生成（月次の重点を分割消化） | 毎週月曜 |
 | `/weekly-review` | 週次レビューを生成 | 毎週日曜〜月曜 |
 | `/critical-review` | 設計書・計画書に対する批判的レビュー | 随時 |
 | `/knowledge` | 過去の失敗と学びを参照・追記 | バグ解決時 |
@@ -26,12 +27,22 @@
 
 この順序が重要。NSM が定まらないと成長ループの優先度が決まらず、成長の見通しがないと収益化の議論が空転する。
 
+### 月次運用（毎月初）
+
+```
+月初:
+/monthly-plan   ← 今月どこに張るかを決める。週次レビュー4本＋3バックログを集約し、
+                  Pro 予算を制約に「今月の重点1-2テーマ」へ絞る。週次がこれを分割消化する。
+```
+
+`/monthly-plan` は週次の重い収集を再実行せず、週次レビューと各バックログを**集約**する軽量設計（月1回でも予算を圧迫しない）。月末の振り返りは翌月の `/monthly-plan` の「前月の振り返り」で吸収する。
+
 ### 週次運用（毎週のルーティン）
 
 ```
 日曜〜月曜:
 1. /weekly-review   ← 今週の実績を振り返る
-2. /weekly-plan     ← 来週の計画を立てる（レビュー結果を自動参照）
+2. /weekly-plan     ← 来週の計画を立てる（レビュー結果＋今月の重点テーマを自動参照）
 ```
 
 `/weekly-plan` は NSM と Input Metrics を現状サマリーに含める設計になっている。`/north-star-metric` の出力を活用。
@@ -152,6 +163,7 @@ Management 系スキルの出力はすべて `docs/` 配下に統一されてい
 
 | スキル | 出力先 | frontmatter type |
 |---|---|---|
+| `/monthly-plan` | `docs/03_週次運用/月次計画/YYYY-MM.md` | `monthly-plan` |
 | `/weekly-plan` | `docs/03_週次運用/週次計画/YYYY-Www.md` | `weekly-plan` |
 | `/weekly-review` | `docs/03_週次運用/週次レビュー/YYYY-Www.md` | `weekly-review` |
 | `/critical-review` | `docs/04_レビュー/{YYYY-MM-DD}-{topic}.md` | `critical-review` |

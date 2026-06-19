@@ -6,10 +6,7 @@ import dynamic from "next/dynamic";
 
 import { Skeleton } from "@stats47/components/atoms/ui/skeleton";
 
-import type { PageComponent, LineChartData, MixedChartData } from "@/features/stat-charts";
-import { CompositionChartClient } from "@/features/stat-charts/components/charts/CompositionChart/CompositionChartClient";
-import { LineChartClient } from "@/features/stat-charts/components/charts/LineChart/LineChartClient";
-import { PyramidChartClient } from "@/features/stat-charts/components/charts/PyramidChart/PyramidChartClient";
+import type { PageComponent, LineChartData, MixedChartData } from "@/components/stat-charts";
 
 import { fetchDbChartDataAction, type DonutChartItem, type CpiProfileItem, type CpiHeatmapItem, fetchPopulationPyramidAction, type PopulationPyramidResult } from "../actions";
 
@@ -37,6 +34,21 @@ const CategoryHeatmap = dynamic(
   { ssr: false, loading: () => <Skeleton className="h-[280px] w-full rounded-md" /> },
 );
 
+const LineChartClient = dynamic(
+  () => import("@/components/stat-charts/components/charts/LineChart/LineChartClient").then((mod) => mod.LineChartClient),
+  { ssr: false, loading: () => <Skeleton className="h-[250px] w-full rounded-md" /> },
+);
+
+const CompositionChartClient = dynamic(
+  () => import("@/components/stat-charts/components/charts/CompositionChart/CompositionChartClient").then((mod) => mod.CompositionChartClient),
+  { ssr: false, loading: () => <Skeleton className="h-[220px] w-full rounded-md" /> },
+);
+
+const PyramidChartClient = dynamic(
+  () => import("@/components/stat-charts/components/charts/PyramidChart/PyramidChartClient").then((mod) => mod.PyramidChartClient),
+  { ssr: false, loading: () => <Skeleton className="h-[400px] w-full rounded-md" /> },
+);
+
 
 
 interface Props {
@@ -48,7 +60,7 @@ interface Props {
 type ChartResult =
   | { type: "line"; data: LineChartData }
   | { type: "mixed"; data: MixedChartData }
-  | { type: "composition"; data: import("@/features/stat-charts/adapters/toCompositionChartData").CompositionChartData }
+  | { type: "composition"; data: import("@/components/stat-charts/adapters/toCompositionChartData").CompositionChartData }
   | { type: "donut"; data: DonutChartItem[] }
   | { type: "cpi-profile"; data: CpiProfileItem[] }
   | { type: "cpi-heatmap"; data: CpiHeatmapItem[] }

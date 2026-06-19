@@ -14,15 +14,24 @@ browser-use CLI（Chrome プロファイル経由）で note.com エディタを
 - `/post-note-ranking` で生成した A シリーズ記事を投稿
 - 複数記事をバッチで一括予約投稿
 
-## 記事ディレクトリの運用ルール
+## 記事ディレクトリの運用ルール (2026-06-19 更新)
 
-**記事ソースは `docs/31_note記事原稿/` で単一管理する**（下書き〜公開済みまで同じ場所。2026-06-15 に旧 `32_note公開済み/` を統合し、ヴァーティカル単位の物理移動は廃止）。置き場所: `docs/31_note記事原稿/<vertical>/<slug>/` または `docs/31_note記事原稿/<slug>/`。
+### 未公開ドラフト
+`docs/31_note記事原稿/<vertical>/<slug>/` または `docs/31_note記事原稿/<slug>/` で管理。git が SSOT。
 
-- **公開しても移動しない。** 記事間の相対リンク（`../<slug>/...`）を公開後も生かすため。
-- **公開状態の真実源**: 各記事 frontmatter `status: draft | published` + slug→URL は `.claude/state/note-published-urls.json`（公開のたび追記）。ディレクトリ位置で状態を表さない。
-- 旧ルール（公開後 `.local/r2/note/` へ移動）は廃止。note 記事は note.com がホストするため **R2 は配信にも保管にも使わない**。docs/ は git 管理なので版管理・バックアップ・差分は自動で確保される。
+### 公開済み記事
+**公開後は R2 (`note/<vertical>/<slug>/`) に同期し、docs/31 から削除する**（ローカル容量最適化）。
 
-**画像**: 容量を詰めたい公開済み記事は `*.svg` のみ残し `*.png`（SVG からの派生物）を削除してよい。`--update` 時は本文ペースト前に `.claude/scripts/note/regenerate-svg-png.sh docs/31_note記事原稿/<vertical or slug>` で PNG を再生成してからアップロードする。SVG ソースを持たない旧記事は PNG が唯一のソースなので保管・再生成不要。
+- **同期トリガー**: note.com 公開後に `.claude/state/note-published-urls.json` を更新 → develop push → `sync-note-r2.yml` が自動で R2 push + docs/31 削除 + commit-back する
+- **公開状態の真実源**: `.claude/state/note-published-urls.json`（slug → url / is_paid / r2_path 等）
+- **更新 (update モード) の前に復元が必要**:
+  ```bash
+  bash .claude/scripts/note/restore-from-r2.sh <slug>
+  # → docs/31 に draft.md + images/ を復元 (R2 公開 URL 経由・認証不要)
+  # 更新完了後は次の develop push で自動的に再同期・削除される
+  ```
+
+**画像**: `--update` 時は restore 後に `.claude/scripts/note/regenerate-svg-png.sh` で PNG を再生成してからアップロードする。SVG ソースを持たない旧記事は PNG が唯一のソース。
 
 ## 引数（バッチ対応）
 
@@ -64,7 +73,8 @@ browser-use CLI（Chrome プロファイル経由）で note.com エディタを
 ## 前提条件
 
 1. browser-use CLI がインストール済み
-2. 記事ファイルが存在する: `docs/31_note記事原稿/<vertical>/<slug>/draft.md` または `docs/31_note記事原稿/<slug>/draft.md`（本文ファイル名は `draft.md` に統一。下書き・公開済みとも同じ場所で単一管理）
+2. 記事ファイルが存在する: `docs/31_note記事原稿/<vertical>/<slug>/draft.md` または `docs/31_note記事原稿/<slug>/draft.md`
+   （存在しない場合は先に `bash .claude/scripts/note/restore-from-r2.sh <slug>` で R2 から復元する）
 3. Chrome **Profile 5** で `note.com/stats47` にログイン済み
 4. **有料記事の場合**: frontmatter に `is_paid: true` と `price_jpy: <数値>` を必ず記載。本文には有料境界の目印として `ここから先は有料部分:` 行を入れる（Phase 0 が free/paid に分割するために必要）
 5. **予約投稿**: note プレミアム加入アカウントでのみ可能（通常アカウントでは「日時の設定」が押せない、2026-05-18 確認）
@@ -195,6 +205,8 @@ browser-use --headed --profile "Profile 5" state 2>&1 > /tmp/note-acct.txt
 - `articles` に `"<slug>": { "vertical": "...", "title": "...", "url": "...", "is_paid": ..., "published_at": "YYYY-MM-DD" }` を追記
 - 既に同じ slug があれば URL を上書き更新（再公開時）
 - 下書き保存のみ（公開していない）の場合は記録しない
+- **ドラフト管理中だった場合**: `.claude/state/note-draft-index.json` の `drafts` から同 slug を削除する
+  （`note-published-urls.json` が真実源になるため、draft-index から除去して重複を防ぐ）
 
 この記録は、シリーズの公開状況の真実源であり、マガジンへの記事追加・将来のリンク修正の参照元になる。
 

@@ -319,7 +319,7 @@ quality-gate は内部で `article-factual-check.mjs` を呼び、rank/値の da
 以下は **quality-gate が blocker 化**しているので必ず是正する (棚卸し: `audit-published-blog.mjs`):
 
 1. **チャート**: `<chart-placeholder ... data="X"/>` と インライン `<svg>` を **生成画像 `![](data/X.svg)`** に統一。
-   - data/*.json があれば `node .claude/scripts/blog/generate-article-charts.mjs --slug <slug>` で **上位5+下位5** SVG を生成し placeholder を自動置換。data が無ければ `fetch-ranking-data-r2.mjs` で ranking から取得してから生成。
+   - data/*.json があれば `node .claude/scripts/blog/generate-article-charts.ts --slug <slug>` で **上位5+下位5** SVG を生成し placeholder を自動置換。data が無ければ `fetch-ranking-data-r2.mjs` で ranking から取得してから生成。
 2. **記事内『関連ランキング/関連記事』セクション削除**: ページ側 (`RelatedRankingsSection`/`BlogRelatedArticlesSection`) が正典。`## 関連ランキング` `### 関連記事` 見出しごと markdown から除去 (二重表示の解消)。
 3. **source-link を各図直下にインライン配置**: 末尾集約をやめ、対応する図の直下へ分散。
 4. **truncated 表 / 上下非対称表の除去**: 全件表 or SVG 化 (上下対称)。

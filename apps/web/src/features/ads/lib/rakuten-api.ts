@@ -6,7 +6,7 @@
  */
 
 /** 楽天市場 商品検索 API のレスポンス型 */
-export interface RakutenItemSearchResponse {
+interface RakutenItemSearchResponse {
   count: number;
   page: number;
   pageCount: number;
@@ -14,7 +14,7 @@ export interface RakutenItemSearchResponse {
   Items: RakutenItem[];
 }
 
-export interface RakutenItem {
+interface RakutenItem {
   itemName: string;
   itemPrice: number;
   itemUrl: string;
@@ -139,23 +139,6 @@ export async function searchFurusatoItems(
 ): Promise<RakutenItem[]> {
   return searchRakutenItems({
     keyword: prefName,
-    genreId: FURUSATO_NOZEI_GENRE_ID,
-    hits,
-    sort: "-reviewCount",
-  });
-}
-
-/**
- * 都道府県に依存しない、全国の人気ふるさと納税返礼品を検索する。
- *
- * 記事に都道府県が登場しない場合のフォールバックとして使用。
- * `sort=-reviewCount` でレビュー数の多い人気返礼品を返す。
- */
-export async function searchPopularFurusatoItems(
-  hits = 4,
-): Promise<RakutenItem[]> {
-  return searchRakutenItems({
-    keyword: "ふるさと納税",
     genreId: FURUSATO_NOZEI_GENRE_ID,
     hits,
     sort: "-reviewCount",

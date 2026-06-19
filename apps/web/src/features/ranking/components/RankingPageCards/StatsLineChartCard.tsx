@@ -1,5 +1,5 @@
-import { DashboardCard, LineChartClient, toLineChartData } from "@/features/stat-charts";
-import { fetchEstatData, toKpiCardData } from "@/features/stat-charts/server";
+import { DashboardCard, LineChartClient, toLineChartData } from "@/components/stat-charts";
+import { fetchEstatData, toKpiCardData } from "@/components/stat-charts/server";
 
 import type { StatsLineChartProps } from "../../types/ranking-page-card";
 

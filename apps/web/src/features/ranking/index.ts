@@ -15,47 +15,27 @@
 
 // export * from "./actions";
 
-// 型定義のエクスポート
-export type {
-    RankingItem,
-    RankingValue
-} from "@stats47/ranking";
-
 // 値(関数・クラス)のエクスポート。
 // Web側のrepositoriesで同名関数(=Service相当)を定義しているため、
 // Packageからは衝突しないものだけを厳選してエクスポートする。
 export {
-    computeBottomRanking,
     getRankingTitle,
-    computeSortedRankings,
-    computeTopRankings,
-    filterOutNationalArea,
-    normalizeRankingItemProperties,
-    prepareHierarchicalRankings
 } from "@stats47/ranking";
 
 // クライアントコンポーネントのみをエクスポート
-export { RankingBarChartRace } from "./components/RankingBarChartRace";
-export { RankingBoxplotChart } from "./components/RankingBoxplotChart";
 export { RankingDataTable } from "./components/RankingDataTable";
-export { RankingHighlights } from "./components/RankingHighlights";
 export { RankingKeyPageClient } from "./components/RankingKeyPage/RankingKeyPageClient";
 export { RankingMapChartClient } from "./components/RankingMapChart/RankingMapChartClient";
-export { RankingPageHeader } from "./components/RankingPageHeader";
 export { RankingYearSelector } from "./components/RankingPageHeader/RankingYearSelector";
-export { RankingSidebarClient } from "./components/RankingSidebar/RankingSidebarClient";
 export { RankingDefinitionCard } from "./components/RankingDefinitionCard";
 export { RankingSourceCard } from "./components/RankingSourceCard";
 export { FeaturedRankingCard } from "./components/FeaturedRankingCard";
-export type { FeaturedRankingCardProps } from "./components/FeaturedRankingCard";
 export { CategoryRankingTable } from "./components/CategoryRankingList";
 export type { CategoryRankingListItem } from "./components/CategoryRankingList";
-export { RankingTopPageClient } from "./components/RankingTopPage";
 export { AiContentAccordion } from "./components/AiContentAccordion";
 export { AiInsightCard } from "./components/AiInsightCard";
 export { AiMarkdownContent } from "./components/AiMarkdownContent";
 export { RankingHeroCard } from "./components/RankingHeroCard";
-export { RankingTop10Chart } from "./components/RankingTop10Chart";
 export { DataUsageCard } from "./components/DataUsageCard";
 export { RankingFaqSection } from "./components/RankingFaqSection";
 
@@ -64,11 +44,6 @@ export * from "./utils";
 
 // Additional client components
 export { AreaTypeToggle } from "./components/AreaTypeToggle";
-export { NormalizationToggle } from "./components/NormalizationToggle";
-export {
-  DataDownloadIconButton,
-  DataDownloadMenuButton,
-} from "./components/DataDownloadButton";
 
 // Skeleton components
 export { CorrelationSectionSkeleton } from "./components/CorrelationSection/CorrelationSectionSkeleton";

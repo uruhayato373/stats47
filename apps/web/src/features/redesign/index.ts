@@ -11,6 +11,5 @@ export {
   SectionEyebrow,
   InfeedAd,
   NativeAffiliateRow,
-  CategoryNav,
   RightRailWidgets,
 } from "./components";

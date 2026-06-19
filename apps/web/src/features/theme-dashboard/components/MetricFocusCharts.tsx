@@ -2,18 +2,24 @@
 
 import { useEffect, useMemo, useState, useTransition } from "react";
 
+import dynamic from "next/dynamic";
 import Link from "next/link";
 
 import { lookupArea } from "@stats47/area";
 import { Card, CardContent, CardHeader, CardTitle } from "@stats47/components/atoms/ui/card";
+import { Skeleton } from "@stats47/components/atoms/ui/skeleton";
 import { TrendingUp, MapPin, ArrowDownUp } from "lucide-react";
 
-import { LineChartClient } from "@/features/stat-charts/components/charts/LineChart/LineChartClient";
-import type { LineChartData } from "@/features/stat-charts/types/visualization";
+import type { LineChartData } from "@/components/stat-charts/types/visualization";
 
 import { fetchMetricTimeseriesAction, type MetricTimeseriesPoint } from "../actions";
 
 import type { RankingItem, RankingValue } from "@stats47/ranking";
+
+const LineChartClient = dynamic(
+  () => import("@/components/stat-charts/components/charts/LineChart/LineChartClient").then((mod) => mod.LineChartClient),
+  { ssr: false, loading: () => <Skeleton className="h-[250px] w-full rounded-md" /> },
+);
 
 interface Props {
   /** 選択中の metric (rankingKey) */
@@ -73,7 +79,7 @@ export function MetricFocusCharts({
         {
           dataKey: "value",
           name: `${areaName}の${rankingItem?.title ?? "値"}`,
-          color: "#2563eb",
+          color: "hsl(var(--primary))",
         },
       ],
       unit: rankingItem?.unit ?? "",

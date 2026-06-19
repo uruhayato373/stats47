@@ -1,3 +1,0 @@
-/**
- * Category Domain Hooks
- */

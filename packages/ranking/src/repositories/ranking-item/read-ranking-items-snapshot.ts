@@ -1,7 +1,11 @@
 import "server-only";
 
 import { logger } from "@stats47/logger/server";
-import { fetchFromR2AsJson, listFromR2 } from "@stats47/r2-storage/server";
+import {
+  fetchFromR2AsJson,
+  listFromR2,
+  shouldSkipRemoteR2Read,
+} from "@stats47/r2-storage/server";
 import type { AreaType } from "@stats47/types";
 import { err, ok, type Result } from "@stats47/types";
 
@@ -27,6 +31,12 @@ export interface GroupRankingItem {
   subtitle: string | null;
   unit: string;
   normalizationBasis: string | null;
+}
+
+function warnMissingR2Snapshot(bindings: Record<string, unknown>, message: string): void {
+  if (!shouldSkipRemoteR2Read()) {
+    logger.warn(bindings, message);
+  }
 }
 
 // ────────────────────────────────────────────────────────────────────────────
@@ -66,7 +76,7 @@ export async function readFeaturedRankingItemsFromR2(
       homeFeaturedKeyPath(),
     );
     if (!snapshot) {
-      logger.warn(
+      warnMissingR2Snapshot(
         { key: homeFeaturedKeyPath() },
         "home/featured.json が R2 に存在しません",
       );
@@ -87,7 +97,7 @@ export async function readRankingItemsByCategoryFromR2(
       categoryItemsKeyPath(categoryKey),
     );
     if (!snapshot) {
-      logger.warn(
+      warnMissingR2Snapshot(
         { key: categoryItemsKeyPath(categoryKey) },
         "category items snapshot が R2 に存在しません",
       );
@@ -253,7 +263,7 @@ export async function readRankingItemsBySurveyFromR2(
       surveyItemsKeyPath(surveyId),
     );
     if (!snapshot) {
-      logger.warn(
+      warnMissingR2Snapshot(
         { key: surveyItemsKeyPath(surveyId) },
         "survey items snapshot が R2 に存在しません",
       );
@@ -278,7 +288,7 @@ export async function readActiveRankingKeysFromR2(
       RANKING_ITEMS_SNAPSHOT_KEY,
     );
     if (!snapshot) {
-      logger.warn(
+      warnMissingR2Snapshot(
         { key: RANKING_ITEMS_SNAPSHOT_KEY },
         "ranking_items snapshot が R2 に存在しません",
       );
@@ -302,7 +312,7 @@ export async function readActiveKeysForSitemapFromR2(): Promise<
       RANKING_ITEMS_SNAPSHOT_KEY,
     );
     if (!snapshot) {
-      logger.warn(
+      warnMissingR2Snapshot(
         { key: RANKING_ITEMS_SNAPSHOT_KEY },
         "ranking_items snapshot が R2 に存在しません",
       );
@@ -329,7 +339,7 @@ export async function readLatestYearForAreaTypeFromR2(
       RANKING_ITEMS_SNAPSHOT_KEY,
     );
     if (!snapshot) {
-      logger.warn(
+      warnMissingR2Snapshot(
         { key: RANKING_ITEMS_SNAPSHOT_KEY },
         "ranking_items snapshot が R2 に存在しません",
       );
@@ -357,7 +367,7 @@ export async function readRankingItemsByAreaTypeFromR2(
       RANKING_ITEMS_SNAPSHOT_KEY,
     );
     if (!snapshot) {
-      logger.warn(
+      warnMissingR2Snapshot(
         { key: RANKING_ITEMS_SNAPSHOT_KEY },
         "ranking_items snapshot が R2 に存在しません",
       );
@@ -391,7 +401,7 @@ export async function readRankingItemsByGroupKeyFromR2(
       RANKING_ITEMS_SNAPSHOT_KEY,
     );
     if (!snapshot) {
-      logger.warn(
+      warnMissingR2Snapshot(
         { key: RANKING_ITEMS_SNAPSHOT_KEY },
         "ranking_items snapshot が R2 に存在しません",
       );
@@ -427,7 +437,7 @@ export async function readRankingItemsByTagFromR2(
       RANKING_ITEMS_SNAPSHOT_KEY,
     );
     if (!snapshot) {
-      logger.warn(
+      warnMissingR2Snapshot(
         { key: RANKING_ITEMS_SNAPSHOT_KEY },
         "ranking_items snapshot が R2 に存在しません",
       );
@@ -478,7 +488,7 @@ export async function readFirstKeyByTagFromR2(
       RANKING_ITEMS_SNAPSHOT_KEY,
     );
     if (!snapshot) {
-      logger.warn(
+      warnMissingR2Snapshot(
         { key: RANKING_ITEMS_SNAPSHOT_KEY },
         "ranking_items snapshot が R2 に存在しません",
       );

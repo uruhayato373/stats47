@@ -9,7 +9,7 @@ const R2_PREFECTURE_TOPOJSON =
   "https://storage.stats47.jp/gis/mlit/20240101/prefecture.topojson";
 const R2_STATS_JSON = "https://storage.stats47.jp/app/highway-history/stats.json";
 
-export interface HighwayStats {
+interface HighwayStats {
   yearStart: number;
   yearEnd: number;
   totalYears: number;
@@ -113,11 +113,11 @@ export async function HighwayTimelineMap({
         role="img"
         aria-label={`${year}年時点の日本の高速道路ネットワーク`}
       >
-        <path d={prefPath} fill="#e2e8f0" stroke="#94a3b8" strokeWidth={0.6} />
+        <path d={prefPath} fill="hsl(var(--muted))" stroke="hsl(var(--border))" strokeWidth={0.6} />
         <path
           d={hwyPath}
           fill="none"
-          stroke="#d97706"
+          stroke="hsl(var(--warning))"
           strokeWidth={1.6}
           strokeLinecap="round"
           strokeLinejoin="round"

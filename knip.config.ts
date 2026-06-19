@@ -11,9 +11,11 @@ const config: KnipConfig = {
         // middleware / テストセットアップ (vitest.config の setupFiles)
         "src/middleware.{ts,tsx}!",
         "src/config/test.setup.tsx!",
+        "scripts/**/*.{ts,tsx}!",
+        "*.config.{js,cjs,mjs,ts}!",
       ],
-      project: ["src/**/*.{ts,tsx}"],
-      ignore: ["**/__tests__/**", "**/*.test.{ts,tsx}"],
+      project: ["src/**/*.{ts,tsx}", "scripts/**/*.{ts,tsx}", "*.{ts,mjs}"],
+      ignore: ["**/__tests__/**", "**/*.test.{ts,tsx}", "vitest.shims.{ts,d.ts}"],
     },
     "packages/*": {
       entry: "src/index.{ts,tsx}!",
@@ -22,11 +24,14 @@ const config: KnipConfig = {
     }
   },
   ignoreDependencies: [
+    "@expo-google-fonts/noto-sans-jp",
     "@types/*",
     "eslint-config-next",
     "prettier",
+    "topojson-specification",
     "turbo"
-  ]
+  ],
+  ignoreBinaries: ["react-server"]
 };
 
 export default config;

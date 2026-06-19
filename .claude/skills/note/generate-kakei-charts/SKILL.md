@@ -34,6 +34,8 @@ node "${CLAUDE_SKILL_DIR}/scripts/generate-charts.js" --all
 
 ### Phase 2: SVG → PNG 変換
 
+> **ephemeral outbox**: docs/31 が存在しない場合は先に `bash .claude/scripts/note/restore-from-r2.sh <slug>` で復元する。
+
 ```bash
 # 1記事分
 node .claude/skills/note/generate-note-charts/scripts/svg-to-png.js docs/31_note記事原稿/<slug>/images

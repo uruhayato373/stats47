@@ -40,10 +40,3 @@ export interface RankingTableConfig extends BaseChartConfig {
   paginated?: boolean;
   displayUnit?: string;
 }
-
-export type ChartConfig =
-  | ChoroplethMapConfig
-  | LineChartConfig
-  | BarChartConfig
-  | ScatterPlotConfig
-  | RankingTableConfig;

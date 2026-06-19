@@ -1,11 +1,11 @@
 "use server";
 
 
-import { toCompositionChartData, type CompositionChartData } from "@/features/stat-charts/adapters/toCompositionChartData";
-import { toLineChartData } from "@/features/stat-charts/adapters/toLineChartData";
-import { toMixedChartData } from "@/features/stat-charts/adapters/toMixedChartData";
-import { fetchEstatData } from "@/features/stat-charts/server";
-import type { LineChartData, MixedChartData } from "@/features/stat-charts/types/visualization";
+import { toCompositionChartData, type CompositionChartData } from "@/components/stat-charts/adapters/toCompositionChartData";
+import { toLineChartData } from "@/components/stat-charts/adapters/toLineChartData";
+import { toMixedChartData } from "@/components/stat-charts/adapters/toMixedChartData";
+import { fetchEstatData } from "@/components/stat-charts/server";
+import type { LineChartData, MixedChartData } from "@/components/stat-charts/types/visualization";
 
 import type { StatsSchema } from "@stats47/types";
 
@@ -143,7 +143,7 @@ async function fetchAllAndAverage(
   params: import("@stats47/estat-api/server").GetStatsDataParams,
 ): Promise<StatsSchema[] | null> {
   const { fetchFormattedStats } = await import("@stats47/estat-api/server");
-  const { getEstatCacheStorage } = await import("@/features/stat-charts/services/get-estat-cache-storage");
+  const { getEstatCacheStorage } = await import("@/components/stat-charts/services/get-estat-cache-storage");
 
   try {
     const storage = await getEstatCacheStorage();
@@ -277,7 +277,7 @@ async function fetchDonutData(
 
   const top = valid.slice(0, topN);
   const otherValue = valid.slice(topN).reduce((sum, i) => sum + i.value, 0);
-  top.push({ name: "その他", value: otherValue, color: "#d4d4d4" });
+  top.push({ name: "その他", value: otherValue, color: "hsl(var(--muted-foreground))" });
   return { type: "donut", data: top };
 }
 

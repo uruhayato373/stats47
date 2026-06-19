@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 
-export interface AreaMetadataInput {
+interface AreaMetadataInput {
   title: string;
   description: string;
   areaCode: string;
 }
 
-export interface AreaCategoryMetadataInput {
+interface AreaCategoryMetadataInput {
   title: string;
   description: string;
   areaCode: string;

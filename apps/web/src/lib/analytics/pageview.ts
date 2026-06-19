@@ -33,19 +33,3 @@ export function pageview(params: PageViewParams): void {
   });
 }
 
-/**
- * 現在のページのページビューを送信
- *
- * 現在のURLとタイトルを使用してページビューを送信します。
- */
-export function trackPageView(): void {
-  if (typeof window === "undefined") {
-    return;
-  }
-
-  pageview({
-    url: window.location.pathname + window.location.search,
-    title: document.title,
-  });
-}
-

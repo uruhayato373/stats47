@@ -4,7 +4,7 @@ import { logger } from "@stats47/logger";
 import { getR2Client } from "../clients/get-r2-client";
 import { getS3Client } from "../clients/get-s3-client";
 import { detectEnvironment } from "../utils/detect-environment";
-import { findLocalR2Root } from "../utils/find-local-r2-root";
+import { shouldSkipRemoteR2Read } from "../utils/should-skip-remote-r2-read";
 
 /**
  * R2 オブジェクトキーの安全性を検証する（defense-in-depth）。
@@ -29,22 +29,6 @@ function isSafeR2Key(key: string): boolean {
   const segments = key.split("/");
   if (segments.some((s) => s === "..")) return false;
   return true;
-}
-
-function fetchFromLocalFs(key: string): Buffer | null {
-  try {
-    // eslint-disable-next-line @typescript-eslint/no-require-imports
-    const fs = require("fs") as typeof import("fs");
-    // eslint-disable-next-line @typescript-eslint/no-require-imports
-    const path = require("path") as typeof import("path");
-    const r2Root = findLocalR2Root();
-    if (!r2Root) return null;
-    const filePath = path.join(r2Root, key);
-    if (!fs.existsSync(filePath)) return null;
-    return fs.readFileSync(filePath);
-  } catch {
-    return null;
-  }
 }
 
 async function fetchFromS3(key: string): Promise<Buffer | null> {
@@ -85,14 +69,15 @@ async function fetchFromPublicUrl(base: string, key: string): Promise<Buffer | n
 /**
  * オブジェクトを R2 から取得（Buffer形式）
  *
- * 優先順位:
- *   1. ローカルFS (.local/r2/) — seeded / 手動配置ファイル（API 呼び出し不要）
- *   2. Cloudflare Workers R2バインディング
- *   3. S3 API（スクリプト環境）
- *   4. 公開 R2 URL（R2_PUBLIC_FETCH_URL / NEXT_PUBLIC_R2_PUBLIC_URL。認証不要の最終手段）
+ * ローカル FS ミラー読み取りは廃止。remote (binding/S3/公開URL) が唯一の真実源。
  *
- * CF Workers ランタイムは 2 (binding) で必ず先に返るため 4 には到達しない（挙動不変）。
- * 4 は binding も S3 認証も無い build / スクリプト環境でのみ発火する。
+ * 優先順位:
+ *   1. Cloudflare Workers R2バインディング
+ *   2. S3 API（スクリプト環境）
+ *   3. 公開 R2 URL（R2_PUBLIC_FETCH_URL / NEXT_PUBLIC_R2_PUBLIC_URL。認証不要の最終手段）
+ *
+ * CF Workers ランタイムは 1 (binding) で必ず先に返るため 3 には到達しない（挙動不変）。
+ * 3 は binding も S3 認証も無い build / スクリプト環境でのみ発火する。
  */
 export async function fetchFromR2(
   key: string,
@@ -106,9 +91,6 @@ export async function fetchFromR2(
     return null;
   }
 
-  const localData = fetchFromLocalFs(key);
-  if (localData !== null) return localData;
-
   // build / スクリプト環境の明示 opt-in: R2_PUBLIC_FETCH_URL が設定されていれば
   // binding/S3 を試さず公開 URL に直行する。Node スクリプトでは getCloudflareContext()
   // が必ず失敗しノイズ + 遅延になるため、その試行ごと回避する。
@@ -116,6 +98,10 @@ export async function fetchFromR2(
   const forcedPublicBase = process.env.R2_PUBLIC_FETCH_URL?.replace(/\/+$/, "");
   if (forcedPublicBase) {
     return await fetchFromPublicUrl(forcedPublicBase, key);
+  }
+
+  if (shouldSkipRemoteR2Read()) {
+    return null;
   }
 
   const env = detectEnvironment();

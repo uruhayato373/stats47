@@ -144,7 +144,12 @@
       "WebSearch",
       "Bash(python3 -c ' *)",
       "Bash(git ls-tree *)",
-      "Bash(mkdir -p /home/user/stats47/.claude/state/ranking/wave-r1-drafts)"
+      "Bash(mkdir -p /home/user/stats47/.claude/state/ranking/wave-r1-drafts)",
+      "Bash(cp .claude/scripts/blog/generate-article-charts.mjs .claude/scripts/blog/generate-article-charts.ts)",
+      "Bash(rm .claude/scripts/blog/generate-article-charts.mjs)",
+      "Bash(sed -i 's/generate-article-charts\\\\.mjs/generate-article-charts.ts/g' \\\\ *)",
+      "Bash(sed -n '/export function buildGroundTruth/,/^}/p' .claude/scripts/lib/article-factual-check.mjs)",
+      "Bash(sed -n '/function checkRankClaims/,/^}/p' .claude/scripts/lib/article-factual-check.mjs)"
     ],
     "defaultMode": "bypassPermissions"
   }

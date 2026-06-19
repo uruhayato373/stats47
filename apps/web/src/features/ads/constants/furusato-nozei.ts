@@ -1,11 +1,11 @@
-export interface FurusatoNozeiLink {
+interface FurusatoNozeiLink {
   prefCode: string;          // "01000" 形式
   prefName: string;          // "北海道"
   rakutenAreaSlug: string;   // 楽天エリアページのパス名
 }
 
 /** 47都道府県の楽天ふるさと納税エリアページマッピング */
-export const FURUSATO_NOZEI_LINKS: FurusatoNozeiLink[] = [
+const FURUSATO_NOZEI_LINKS: FurusatoNozeiLink[] = [
   { prefCode: "01000", prefName: "北海道", rakutenAreaSlug: "hokkaido" },
   { prefCode: "02000", prefName: "青森県", rakutenAreaSlug: "aomori" },
   { prefCode: "03000", prefName: "岩手県", rakutenAreaSlug: "iwate" },

@@ -11,6 +11,10 @@ const fs = require("fs");
 const path = require("path");
 
 const PROJECT_ROOT = path.resolve(__dirname, "../../..");
+// docs/31 は ephemeral outbox (push後CI自動削除)。実行前に記事を復元する:
+//   bash .claude/scripts/note/restore-from-r2.sh <slug>
+// または全件復元:
+//   python3 .claude/scripts/note/restore-from-r2.sh  ※ restore-from-r2.sh 参照
 const SERIES_DIR = path.join(
   PROJECT_ROOT,
   "docs/31_note記事原稿/koumuin-claude-code",

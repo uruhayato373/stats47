@@ -126,17 +126,6 @@ export async function readActiveTextAdsByCategoryKeysFromR2(
     .slice(0, limit);
 }
 
-export async function readActiveBannersByCategoryFromR2(
-  categoryKey: string,
-  limit = 2,
-): Promise<AffiliateAdRow[]> {
-  const active = await getActive();
-  return active
-    .filter((a) => a.categoryKey === categoryKey && a.adType === "banner")
-    .sort(compareByPriorityDesc)
-    .slice(0, limit);
-}
-
 export async function readActiveBannersByCategoryKeysFromR2(
   categoryKeys: string[],
   limit = 2,

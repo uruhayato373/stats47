@@ -24,7 +24,7 @@ describe("toThemeConfig", () => {
     const config = toThemeConfig(set);
 
     expect(config.themeKey).toBe("test-theme");
-    expect(config.title).toBe("テストテーマの統計ダッシュボード");
+    expect(config.title).toBe("テストテーマ");
     expect(config.description).toBe("テーマの説明");
     expect(config.keywords).toEqual(["テスト", "テーマ"]);
   });

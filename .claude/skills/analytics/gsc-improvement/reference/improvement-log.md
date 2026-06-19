@@ -19,7 +19,7 @@ GSC（Google Search Console）の継続的追跡と改善施策の記録。
 - **wave_id**: 2026-05-29-auto / **記事数**: 4
 - **remediated_at**: 2026-05-29 (週 2026-W22)
 - **before**: 2026-W21 → **after**: 2026-W24 (経過 2 週)
-- **計測日**: 2026-06-14 (自動: measure-gsc-impact.mjs)
+- **計測日**: 2026-06-19 (自動: measure-gsc-impact.mjs)
 
 | slug | imp (before→after) | clicks | CTR | position |
 |---|---|---|---|---|
@@ -42,7 +42,7 @@ GSC（Google Search Console）の継続的追跡と改善施策の記録。
 - **wave_id**: 2026-05-25-auto / **記事数**: 53
 - **remediated_at**: 2026-05-25 (週 2026-W22)
 - **before**: 2026-W21 → **after**: 2026-W24 (経過 2 週)
-- **計測日**: 2026-06-14 (自動: measure-gsc-impact.mjs)
+- **計測日**: 2026-06-19 (自動: measure-gsc-impact.mjs)
 
 | slug | imp (before→after) | clicks | CTR | position |
 |---|---|---|---|---|
@@ -114,7 +114,7 @@ GSC（Google Search Console）の継続的追跡と改善施策の記録。
 - **wave_id**: 2026-05-23-manual / **記事数**: 10
 - **remediated_at**: 2026-05-23 (週 2026-W21)
 - **before**: 2026-W20 → **after**: 2026-W24 (経過 3 週)
-- **計測日**: 2026-06-14 (自動: measure-gsc-impact.mjs)
+- **計測日**: 2026-06-19 (自動: measure-gsc-impact.mjs)
 
 | slug | imp (before→after) | clicks | CTR | position |
 |---|---|---|---|---|

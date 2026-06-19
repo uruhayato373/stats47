@@ -16,7 +16,7 @@ let miniSearchInstance: MiniSearch<SearchDocument> | null = null;
 /**
  * 検索インデックスを取得する（シングルトン）。初回は fetch して復元する。
  */
-export async function getSearchInstance(): Promise<MiniSearch<SearchDocument>> {
+async function getSearchInstance(): Promise<MiniSearch<SearchDocument>> {
   if (miniSearchInstance) return miniSearchInstance;
 
   const res = await fetch(SEARCH_INDEX_URL);

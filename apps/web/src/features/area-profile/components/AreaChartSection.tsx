@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@stats47/components/atoms/ui/card";
 import { BarChart3 } from "lucide-react";
 
-import { DashboardComponentRenderer, loadPageComponents, type PageComponent } from "@/features/stat-charts/server";
+import { DashboardComponentRenderer, loadPageComponents, type PageComponent } from "@/components/stat-charts/server";
 
 interface Props {
   areaCode: string;

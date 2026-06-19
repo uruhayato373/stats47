@@ -15,10 +15,13 @@ describe("ALL_THEMES", () => {
     }
   });
 
-  it("全テーマが title を持つ", () => {
+  it("全テーマが title を持つ（冗長な「ダッシュボード」サフィックスは付けない）", () => {
     for (const theme of ALL_THEMES) {
       expect(theme.title).toBeDefined();
-      expect(theme.title).toContain("ダッシュボード");
+      expect(theme.title.length).toBeGreaterThan(0);
+      // h1 はテーマ名のみ。eyebrow が「テーマダッシュボード」を示すため
+      // title に「の統計ダッシュボード」を焼き込まない (重複排除)。
+      expect(theme.title).not.toContain("ダッシュボード");
     }
   });
 

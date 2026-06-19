@@ -318,6 +318,13 @@ C-5〜C-12 は C-1〜C-4 の反応を見てから骨子を詳細化する。
 
 ---
 
+## 執筆パターン
+
+フック・導入の型は 9 型にカタログ化して SSoT 管理している。
+スキル（`/validate-note-idea` `/design-note-structure` `/write-note-section` `/edit-note-draft`）はこれを参照する。
+
+→ `.claude/skills/note/reference/note-writing-patterns.md`
+
 ## 共通メモ
 
 - A シリーズ: `/post-note-ranking` で自動生成

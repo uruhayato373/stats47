@@ -100,24 +100,12 @@ export interface ThemeDashboardClientProps {
   /** TopoJSON */
   topology: TopoJSONTopology | null;
   /** DB 管理チャート（page_components + page_component_assignments） */
-  pageCharts?: import("@/features/stat-charts/services/load-page-components").PageComponent[];
+  pageCharts?: import("@/components/stat-charts/services/load-page-components").PageComponent[];
   /** KPI カードの全都道府県データ（chartKey → areaCode → KpiCardClientProps） */
-  kpiDataByArea?: Record<string, Record<string, import("@/features/stat-charts/components/cards/KpiCard/KpiCardClient").KpiCardClientProps>>;
+  kpiDataByArea?: Record<string, Record<string, import("@/components/stat-charts/components/cards/KpiCard/KpiCardClient").KpiCardClientProps>>;
   /** ハイライト対象の都道府県コード（5桁、/areas/[code]/[themeSlug] 経由時に設定） */
   highlightAreaCode?: string;
 }
-
-// ============================================================================
-// IndicatorSet → ThemeConfig 変換
-// ============================================================================
-
-/**
- * IndicatorSet → ThemeConfig 変換ユーティリティ
- *
- * @stats47/types の IndicatorPanelTab → ThemeConfig の PanelTabGroup は
- * 構造が同一なのでそのまま渡せる。
- */
-export { toThemeConfig } from "./lib/to-theme-config";
 
 // PanelTabGroup と IndicatorPanelTab の互換性を型レベルで保証
 type _AssertAssignable<A, B> = A extends B ? B extends A ? true : never : never;

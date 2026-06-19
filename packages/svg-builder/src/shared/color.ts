@@ -22,6 +22,18 @@ export const PALETTES = {
     "#ffa726", "#ffb74d", "#ffcc80", "#ffe0b2",
     "#fff3e0", "#fff8f0",
   ],
+  /** 紫（中立的・嗜好品など） */
+  purple: [
+    "#7b1fa2", "#8e24aa", "#9c27b0", "#ab47bc",
+    "#ba68c8", "#ce93d8", "#e1bee7", "#f3e5f5",
+    "#f8eafc", "#fdf7ff",
+  ],
+  /** 緑（中立的・自然/環境など） */
+  green: [
+    "#2e7d32", "#388e3c", "#43a047", "#66bb6a",
+    "#81c784", "#a5d6a7", "#c8e6c9", "#e8f5e9",
+    "#f1f8f2", "#f7fcf8",
+  ],
 } as const;
 
 export type PaletteName = keyof typeof PALETTES;

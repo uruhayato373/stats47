@@ -1,7 +1,6 @@
 import { cache } from "react";
 
 import {
-  getCategoryMetadata,
   readCategoriesFromR2,
   readCategoryByKeyFromR2,
 } from "@stats47/category/server";
@@ -12,5 +11,3 @@ export const listCategories = cache(readCategoriesFromR2);
 // RelatedRankingsGrid + opengraph-image / category ページでは generateMetadata + 本体が
 // 同一 categoryKey で重複 fetch していたため、per-request 1 回に集約する。
 export const findCategoryByKey = cache(readCategoryByKeyFromR2);
-export { getCategoryMetadata };
-

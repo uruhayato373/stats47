@@ -27,23 +27,22 @@ packages/
 - **R2 読み取り (標準)**: ビルド/集計スクリプトは **公開 URL 経由**で R2 を読める →
   `R2_PUBLIC_FETCH_URL=https://storage.stats47.jp`（GET のみ・list 不可）+ `NODE_OPTIONS='--conditions react-server'`。
 
-## R2 書き込み (push / 削除) は CI / クラウド専用 ★
+## R2 読み書き — ローカル / CI 両方から remote R2 が唯一の真実源 ★
 
-**読み取りはローカル可 (公開 URL)、書き込みはローカル禁止。** R2 反映はレビュー済みの git 状態から
-GitHub Actions が行う。ローカルからの誤 push / 誤削除を防ぐため、push 系スクリプト
-(`diff-push-r2.ts` / `push-r2-wrangler.ts` / `db:push` / `delete-r2-prefix.ts` / `r2-cleanup-orphans.ts`)
-は `packages/r2-storage/src/scripts/_assert-ci-write.ts` のガードで **CI 外では停止**する
-(`CI` / `GITHUB_ACTIONS` 未設定 かつ `ALLOW_LOCAL_R2_WRITE` 未設定時)。
+**読み取り・書き込みともにローカルから remote R2 へ直接可能。ローカル R2 ミラー (`.local/r2`) は廃止。**
+`_assert-ci-write.ts` はデフォルト許可に変更済み。ローカル書き込み時は `console.warn` を出すだけで続行する。
 
-| 目的 | 実行方法 (CI) |
+- **読み取り (標準)**: `R2_PUBLIC_FETCH_URL=https://storage.stats47.jp`（GET のみ・list 不可・認証不要）
+- **書き込み (ローカル)**: `.env.local` に R2 S3 creds (`R2_ACCESS_KEY_ID` / `R2_SECRET_ACCESS_KEY` / `R2_S3_ENDPOINT`) または `wrangler login` 認証が必要。S3 creds はユーザーが Cloudflare ダッシュボードで発行する。
+
+| 目的 | 実行方法 |
 |---|---|
-| 配信 snapshot 再生成 + R2 push | `gh workflow run sync-snapshots.yml [-f only=<task>] [-f dry_run=true]` |
-| blog 公開 | `publish-blog.yml` |
-| e-Stat → R2 観測値更新 | `data-refresh.yml` |
+| 配信 snapshot 再生成 + R2 push | CI: `gh workflow run sync-snapshots.yml [-f only=<task>] [-f dry_run=true]` / ローカル: S3 creds 設定後に直接実行可 |
+| blog 公開 | CI: `publish-blog.yml` |
+| e-Stat → R2 観測値更新 | CI: `data-refresh.yml` |
 
-- ローカルで `sync-snapshots/run.sh` を実行すると snapshot は `.local/r2` に生成され、push は自動スキップ。
-- どうしてもローカルから push する場合のみ `ALLOW_LOCAL_R2_WRITE=1` を付与 (非推奨、S3 認証 or `wrangler login` 要)。
 - CI シークレット: `CLOUDFLARE_R2_ACCESS_KEY_ID` / `CLOUDFLARE_R2_SECRET_ACCESS_KEY` / `CLOUDFLARE_ACCOUNT_ID` は設定済。
+- 新規 R2 書き込みスクリプトは先頭で `assertR2WriteAllowed()` を呼ぶこと（呼び出し元への通知のため）。
 
 ## ローカルビルド DB (SQLite) パス固定値
 

@@ -3,7 +3,7 @@ import { computeTopRankings, filterOutNationalArea, type RankingValue } from "@s
 /**
  * ランキングデータの要約情報（meta description / JSON-LD description 共通）
  */
-export interface RankingSummary {
+interface RankingSummary {
   /** 1位の地域名 */
   top1Name: string;
   /** 1位の値（単位付き） */

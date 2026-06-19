@@ -7,7 +7,7 @@
 
 import type { AdFormat } from "./types";
 
-export interface AdSlotConfig {
+interface AdSlotConfig {
   /** 広告スロットID（AdSense 管理画面で発行） */
   slotId: string;
   /** 広告フォーマット */

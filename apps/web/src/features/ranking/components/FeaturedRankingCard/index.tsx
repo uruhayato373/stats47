@@ -3,7 +3,7 @@ import Link from "next/link";
 
 import { RankingThumbnail } from "../FeaturedRankings/RankingThumbnail";
 
-export interface FeaturedRankingCardProps {
+interface FeaturedRankingCardProps {
   rankingKey: string;
   title: string;
   latestYear?: string;

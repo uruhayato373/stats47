@@ -341,6 +341,9 @@ docs/31_note記事原稿/<slug>/_data/
 └── chart-data.json  ← チャート生成用の構造化データ
 ```
 
+> **ephemeral outbox**: docs/31 は作業時のみ存在（push後CI自動削除）。
+> 既存 slug の場合は `bash .claude/scripts/note/restore-from-r2.sh <slug>` で復元してから書き込む。
+
 #### chart-data.json（必須）
 
 **チャート生成（`/generate-note-charts`）で使用する構造化データを JSON で保存すること。** DB から取得・加工したデータを再取得せずにチャート生成できるようにする。

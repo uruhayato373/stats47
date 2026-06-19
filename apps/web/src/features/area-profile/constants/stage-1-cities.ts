@@ -5,7 +5,7 @@
  *
  * 詳細: docs/02_実装計画/cities-revival-plan.md §2.2
  */
-export const STAGE_1_DESIGNATED_CITIES: Array<{ areaCode: string; cityCode: string }> = [
+const STAGE_1_DESIGNATED_CITIES: Array<{ areaCode: string; cityCode: string }> = [
     { areaCode: "01000", cityCode: "01100" }, // 札幌市
     { areaCode: "04000", cityCode: "04100" }, // 仙台市
     { areaCode: "11000", cityCode: "11100" }, // さいたま市
@@ -36,7 +36,7 @@ export const STAGE_1_DESIGNATED_CITIES: Array<{ areaCode: string; cityCode: stri
  *
  * 詳細: docs/02_実装計画/cities-revival-plan.md §2.2 Stage S2
  */
-export const STAGE_2_CITIES: Array<{ areaCode: string; cityCode: string }> = [
+const STAGE_2_CITIES: Array<{ areaCode: string; cityCode: string }> = [
     { areaCode: "16000", cityCode: "16202" }, // 富山県 高岡市
     { areaCode: "18000", cityCode: "18201" }, // 福井県 福井市
     { areaCode: "31000", cityCode: "31203" }, // 鳥取県 倉吉市
@@ -107,7 +107,7 @@ export const STAGE_2_CITIES: Array<{ areaCode: string; cityCode: string }> = [
  *
  * 詳細: docs/02_実装計画/cities-revival-plan.md §2.2 Stage S3
  */
-export const STAGE_3_CITIES: Array<{ areaCode: string; cityCode: string }> = [
+const STAGE_3_CITIES: Array<{ areaCode: string; cityCode: string }> = [
     { areaCode: "02000", cityCode: "02202" }, // 青森県 弘前市 (strengths: 7)
     { areaCode: "02000", cityCode: "02206" }, // 青森県 十和田市 (strengths: 7)
     { areaCode: "03000", cityCode: "03211" }, // 岩手県 釜石市 (strengths: 7)

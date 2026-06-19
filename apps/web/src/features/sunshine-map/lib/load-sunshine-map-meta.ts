@@ -5,9 +5,8 @@ import { fetchFromR2AsJson } from "@stats47/r2-storage/server";
 
 import { type SunshineMapMeta } from "./types";
 
-export const SUNSHINE_MAP_META_KEY = "app/gis-cross/sunshine-map/meta.json";
+const SUNSHINE_MAP_META_KEY = "app/gis-cross/sunshine-map/meta.json";
 
-export { SUNSHINE_MAP_RASTER_PATH } from "./types";
 export type { SunshineMapMeta } from "./types";
 
 export async function loadSunshineMapMeta(): Promise<SunshineMapMeta | null> {

@@ -127,6 +127,9 @@ docs/31_note記事原稿/<slug>/_data/plan.md
 
 検証結果（スコア・タイトル候補・コンセプト・リンク候補リスト）を保存する。
 
+> **ephemeral outbox**: docs/31 は作業時のみ存在（push後CI自動削除）。
+> 既存 slug の場合は `bash .claude/scripts/note/restore-from-r2.sh <slug>` で復元してから書き込む。
+
 ## 判定基準
 
 - 3軸すべて **5点以上** → `/design-note-structure` へ進む
@@ -136,3 +139,5 @@ docs/31_note記事原稿/<slug>/_data/plan.md
 ## 参照
 
 - note 戦略（SSOT）: `docs/30_note記事企画/note戦略.md`
+- **執筆パターン 9 型（SSoT）**: `.claude/skills/note/reference/note-writing-patterns.md`
+  → タイトル・フックの切り口を決める際に参照。型を選んでスコアシートに記載すること。
