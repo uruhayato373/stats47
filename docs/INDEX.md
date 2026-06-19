@@ -9,7 +9,7 @@
 | `00_プロジェクト管理/` | プロジェクトの基盤文書（定義・収益化・マーケ・ペルソナ）+ コンテンツ企画マスター | 内容更新が中心。固定 4 ファイル + 集計ダッシュボード 1 (`05_コンテンツ企画マスター.md`) |
 | `01_技術設計/` | システム構成・DDD 分類・ドメイン設計・フロントエンド設計 | 内容更新が中心。構成変更時のみファイル追加可 |
 | `02_実装計画/` | 実装ロードマップ・フェーズ計画・TODO 真実源 | 連番ファイルのみのフラット構成（サブディレクトリ・archive なし）。完了・superseded は git 履歴へ |
-| `03_週次運用/` | 週次計画・週次レビュー・週次メトリクス | `週次計画/YYYY-Www.md` / `週次レビュー/YYYY-Www.md` / `メトリクス/YYYY-Www.md` を週次 append |
+| `03_週次運用/` | 月次計画・週次計画・週次レビュー・週次メトリクス | `月次計画/YYYY-MM.md`（月初）/ `週次計画/YYYY-Www.md` / `週次レビュー/YYYY-Www.md` / `メトリクス/YYYY-Www.md` を append。月次が重点1-2テーマを決め、週次がそれを分割消化 |
 | `04_レビュー/` | 批判的レビュー・事前検死・SEO 監査・SNS 週報・パフォーマンス・コスト月報 | カテゴリ別サブディレクトリで蓄積 |
 | `02_実装計画/03_改善バックログ.md` | 改善施策の TODO 一覧 (pending / in-progress) | tier/due/owner のシンプルな表。旧 `05_改善ログ/` から 2026-06-06 移行 |
 | `10_SNS戦略/` | SNS コンテンツ設計 | 内容更新が中心 |
@@ -55,11 +55,12 @@
 ### 新規記録の追加先
 
 1. **戦略・要件の変更** → `00_プロジェクト管理/` 該当ファイルを Edit (新規ファイル追加禁止)
-2. **週次計画・レビュー** → `/weekly-plan` / `/weekly-review` スキルが `03_週次運用/` に自動生成
-3. **改善施策の記録** → `docs/02_実装計画/03_改善バックログ.md` の該当行の status を更新
-4. **コンテンツ backlog** → 該当 `*企画/backlog/` に Write
-5. **未着手の機能・自動化バックログ** → `docs/02_実装計画/04_機能バックログ.md` に section 追加
-6. **機能改修 / バグ** → `gh issue create --label enhancement` で Issues 起票
+2. **月次計画（今月の重点1-2テーマ）** → `/monthly-plan` スキルが `03_週次運用/月次計画/YYYY-MM.md` に生成（月初）
+3. **週次計画・レビュー** → `/weekly-plan` / `/weekly-review` スキルが `03_週次運用/` に自動生成（週次は月次の重点を参照）
+4. **改善施策の記録** → `docs/02_実装計画/03_改善バックログ.md` の該当行の status を更新
+5. **コンテンツ backlog** → 該当 `*企画/backlog/` に Write
+6. **未着手の機能・自動化バックログ** → `docs/02_実装計画/04_機能バックログ.md` に section 追加
+7. **機能改修 / バグ** → `gh issue create --label enhancement` で Issues 起票
 
 ### lifecycle
 
@@ -96,8 +97,10 @@ docs/: status: archived に変更 / Issues: PR で close
 
 ```yaml
 ---
-type: weekly-plan | weekly-review | critical-review | pre-mortem | improvement-log | youtube-experiment |
+type: monthly-plan | weekly-plan | weekly-review | critical-review | pre-mortem | improvement-log | youtube-experiment |
       blog-plan | note-plan | youtube-plan | sns-frames | content-plan-index | content-plan-master | ...
+month: 2026-MM       # 月次計画のみ
+focus_themes: []     # 月次計画のみ（今月の重点1-2テーマ）
 week: 2026-Www       # 週次系のみ
 date: 2026-MM-DD
 status: draft | active | pending | completed | archived | effect/full | effect/partial | ...

@@ -111,6 +111,12 @@ DB: .local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6
 
 ```
 調査項目:
+- **今月の月次計画（重点テーマ）**: `docs/03_週次運用/月次計画/YYYY-MM.md` の frontmatter `focus_themes` と「構成タスク」を Read
+  ```bash
+  THIS_MONTH=$(date -u +%Y-%m)
+  cat "docs/03_週次運用/月次計画/${THIS_MONTH}.md" 2>/dev/null || echo "月次計画なし → /monthly-plan の実行を Should で提案"
+  ```
+  → 今週の Must は**今月の重点テーマの構成タスクから優先的に選ぶ**。重点外のタスクを Must に入れる場合は理由を明記。月次計画が無い場合は `/monthly-plan` 実行を提案。
 - docs/02_実装計画/02_実装ロードマップ.md の現在のスプリント・未完了タスク
 - 未着手の Issue 一覧（`gh issue list --state open --label enhancement`、PR で close される機能改修）+ docs/02_実装計画/04_機能バックログ.md の section ごとの `tier:` で優先度判定
 
@@ -273,6 +279,11 @@ tags: []
 
 ## 前週の申し送り
 <!-- `docs/03_週次運用/週次レビュー/YYYY-W(n-1).md` の「来週への申し送り」から引用（相対リンク付き） -->
+
+## 今月の重点（月次計画より）
+<!-- `../月次計画/YYYY-MM.md` の focus_themes を転載。今週の Must はこの重点の構成タスクから優先選択する。 -->
+- **重点テーマ**: <テーマ1> / <テーマ2>（→ `../月次計画/YYYY-MM.md`）
+- **今週この重点で進めること**: <構成タスクのうち今週分>
 
 ## 前週の振り返り (W-1)
 
