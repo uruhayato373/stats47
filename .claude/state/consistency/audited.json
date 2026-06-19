@@ -1,5 +1,9 @@
 {
-  "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-  "audited_at": "2026-06-17T08:40:39",
-  "files": []
+  "hash": "13f530cb7433c7d092a2fa7a607057e998d4af0802909e51480611e146f0b237",
+  "audited_at": "2026-06-19T21:29:16",
+  "files": [
+    ".claude/skills/analytics/gsc-improvement/reference/improvement-log.md",
+    ".claude/skills/management/nsm-experiment/reference/weekly-snapshots/2026-W25.json",
+    ".claude/skills/management/nsm-experiment/reference/weekly-snapshots/index.json"
+  ]
 }
