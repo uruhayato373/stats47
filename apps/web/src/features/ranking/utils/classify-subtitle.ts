@@ -23,7 +23,7 @@ export function isCaveatNote(text: string | null | undefined): boolean {
   );
 }
 
-export interface ClassifiedSubtitle {
+interface ClassifiedSubtitle {
   /** 定義補足 (h1 直下に控えめ表示)。注釈だった場合は null。 */
   subtitle: string | null;
   /** データ注釈 (チャート直下キャプション)。定義だった場合は null。 */

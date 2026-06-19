@@ -1,11 +1,10 @@
 import "server-only";
 
 // Server-only services
-export { fetchEstatData, fetchEstatDataWithCategories } from "./services/fetchEstatData";
+export { fetchEstatData } from "./services/fetchEstatData";
 
 // Server-only utils
 export { computeSharedYDomain } from "./utils/computeSharedYDomain";
-export { computeYAxisDomain } from "./utils/computeYAxisDomain";
 
 // Server-only adapters
 export { toKpiCardData } from "./adapters/toKpiCardData";
@@ -20,9 +19,6 @@ export { type PageComponent } from "./services/load-page-components";
 export {
   readPageComponentsFromR2 as loadPageComponents,
   readCityCategoryKeysFromR2,
-  PAGE_COMPONENTS_SNAPSHOT_KEY,
-  CITY_CATEGORY_KEYS_SNAPSHOT_KEY,
-  type PageComponentsSnapshot,
 } from "./services/page-components-snapshot";
 
 // Server-only services (R2 cache)

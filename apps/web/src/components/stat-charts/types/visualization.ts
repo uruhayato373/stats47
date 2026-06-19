@@ -67,7 +67,7 @@ export interface HierarchyData {
 }
 
 /** バーチャートレース用データ（アダプター内部・年度別フレーム） */
-export interface BarChartRaceData {
+interface BarChartRaceData {
   /** 年度リスト */
   years: string[];
   /** 各年度のランキングデータ */
@@ -84,7 +84,7 @@ export interface BarChartRaceData {
 }
 
 /** 統計カード用データ */
-export interface StatCardData {
+interface StatCardData {
   value: number | null;
   unit: string | null;
   year: string | null;

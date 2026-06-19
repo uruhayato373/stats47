@@ -6,15 +6,11 @@
  * @module AreaProfileDomain
  */
 
-// 型定義のエクスポート
-export type { AreaProfileData, StrengthWeaknessItem } from "./types";
-
 // クライアントコンポーネント
 export { AreaProfilePageClient } from "./components/AreaProfilePageClient";
 export { AreaProfileSidebar } from "./components/AreaProfileSidebar";
 export { RelatedAreas } from "./components/RelatedAreas";
 export { CategoryNavGrid } from "./components/CategoryNavGrid";
-export { CategorySelect } from "./components/CategorySelect";
 export { CitiesNavCard } from "./components/CitiesNavCard";
 export { AreaRelatedRankingsCard } from "./components/AreaRelatedRankingsCard";
 export { AreaRelatedBlogArticles } from "./components/AreaRelatedBlogArticles";
@@ -29,9 +25,6 @@ export {
 } from "./utils/generate-structured-data";
 export {
   generateAreaMetadata,
-  generateAreaCategoryMetadata,
-  type AreaMetadataInput,
-  type AreaCategoryMetadataInput,
 } from "./utils/generate-area-metadata";
 
 // Map component

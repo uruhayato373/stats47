@@ -23,7 +23,7 @@ interface YoyTimeseries {
 
 const TOPO_URL = "/prefecture.topojson";
 
-export interface MetricYoyChoroplethSectionProps {
+interface MetricYoyChoroplethSectionProps {
   /** YoY タイムシリーズ JSON への URL */
   dataUrl: string;
   /** ヘッダーのタイトル */

@@ -24,7 +24,7 @@ const MAX_COLLAPSED_ITEMS = 7;
 const MAX_EXPANDED_ITEMS = 20;
 
 /** サイドバーに必要な最小限のランキング項目型 */
-export interface SidebarRankingItem {
+interface SidebarRankingItem {
     rankingKey: string;
     areaType: string;
     title: string;
@@ -45,7 +45,7 @@ function hashString(s: string): number {
     return h;
 }
 
-export interface RankingSidebarClientProps {
+interface RankingSidebarClientProps {
     /** ランキング項目リスト */
     items: SidebarRankingItem[];
     /** 現在表示中のランキングキー */

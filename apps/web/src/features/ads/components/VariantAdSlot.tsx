@@ -9,7 +9,7 @@ import { TrackedAffiliateLink } from "./tracked-affiliate-link";
  * VariantAdSlot に渡す variant の serializable 形 (ResolvedAffiliateVariant のクライアント側ミラー)。
  * server-only モジュールを client バンドルに引き込まないため、ここでローカル定義する。
  */
-export interface AdVariant {
+interface AdVariant {
   experimentId: string;
   variantId: string;
   weight: number;

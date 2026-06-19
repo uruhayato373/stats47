@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-export interface BlogMetadataInput {
+interface BlogMetadataInput {
   title: string;
   description: string;
   slug: string;

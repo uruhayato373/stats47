@@ -35,9 +35,14 @@ export function toSunburstData(
 }
 
 /**
- * Treemap用も同じロジック（エイリアス）
+ * Treemap 用も同じロジックを使う。
  */
-export const toTreemapData = toSunburstData;
+export function toTreemapData(
+  rawData: StatsSchema[],
+  config: Pick<SunburstEstatParams, "rootCode" | "childCodes" | "groups">
+): HierarchyData | null {
+  return toSunburstData(rawData, config);
+}
 
 function buildHierarchyChildren(
   yearData: StatsSchema[],

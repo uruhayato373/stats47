@@ -15,7 +15,7 @@ import { parseTitle } from "../../utils/parseTitle";
 
 import type { SourceAttribution as SourceAttributionData } from "@stats47/data-configs";
 
-export interface DashboardCardProps {
+interface DashboardCardProps {
   title: string;
   rankingLink?: string | null;
   /** rankingLink のリンクラベル（未指定時は title を使用） */

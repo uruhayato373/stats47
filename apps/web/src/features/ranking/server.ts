@@ -33,13 +33,7 @@ export { CorrelationSectionContainer } from "./components/CorrelationSection";
 export { RankingItemsSidebar } from "./components/RankingSidebar";
 export { RelatedRankingsGrid } from "./components/RelatedRankingsGrid/RelatedRankingsGrid";
 export { RankingPageCardsContainer } from "./components/RankingPageCards";
-export { SurveyBadge } from "./components/SurveyBadge/SurveyBadge";
 export { RelatedArticlesCard } from "./components/RankingSidebar/RelatedArticlesCard";
-export { RelatedGroupCard } from "./components/RankingSidebar/RelatedGroupCard";
-
-// サーバー専用ローダー
-export { loadRankingTopPageData } from "./lib/ranking-top-page-loader";
-export type { RankingTopPageData, FeaturedRankingItemView } from "./lib/ranking-top-page-loader";
 
 // Server components (sidebar cards)
 export { PortStatisticsMapCard } from "./components/RankingSidebar/PortStatisticsMapCard";

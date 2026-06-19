@@ -9,7 +9,7 @@ const R2_PREFECTURE_TOPOJSON =
   "https://storage.stats47.jp/gis/mlit/20240101/prefecture.topojson";
 const R2_STATS_JSON = "https://storage.stats47.jp/app/highway-history/stats.json";
 
-export interface HighwayStats {
+interface HighwayStats {
   yearStart: number;
   yearEnd: number;
   totalYears: number;

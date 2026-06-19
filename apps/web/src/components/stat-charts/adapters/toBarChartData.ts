@@ -70,7 +70,7 @@ export function toStackedBarChartData(
 /**
  * 最新値のみを棒グラフ用に変換
  */
-export function toSimpleBarChartData(
+function toSimpleBarChartData(
   rawDataList: StatsSchema[][],
   seriesLabels: string[]
 ): BarChartData {

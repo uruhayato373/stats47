@@ -15,7 +15,6 @@ import "server-only";
 export {
   readArticleBySlugFromR2 as findArticleBySlug,
   readArticlesByTagKeyFromR2 as listArticlesByTagKey,
-  readArticlesByTagFromR2 as listArticlesByTag,
   readAllTagsWithCountFromR2 as listAllTagsWithCount,
   readAllUniqueTagsFromR2 as listAllUniqueTags,
   readArticleTitlesBySlugsFromR2 as findArticleTitlesBySlugs,
@@ -27,9 +26,7 @@ export {
 } from "./repositories/blog-snapshot-reader";
 
 // サービス
-export { articleService, ArticleService } from "./services/article-service";
+export { articleService } from "./services/article-service";
 
 // サーバーコンポーネント
-export { ArticleAffiliateBanner } from "./components/article-affiliate-banner";
-export { ArticleDataDownloadSection } from "./components/ArticleDataDownloadSection";
 export { RelatedRankingsSection } from "./components/RelatedRankingsSection";

@@ -23,6 +23,3 @@ export interface PageComponent {
   section: string | null;
   sortOrder: number;
 }
-
-/** @deprecated PageComponent を使用してください */
-export type PageChart = PageComponent;

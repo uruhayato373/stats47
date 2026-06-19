@@ -10,7 +10,7 @@ import { RankingSidebarClient } from "./RankingSidebarClient";
 /**
  * RankingSidebarContainer のProps型定義
  */
-export interface RankingSidebarContainerProps {
+interface RankingSidebarContainerProps {
     /** ランキングキー */
     rankingKey: string;
     /** 地域タイプ */

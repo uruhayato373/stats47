@@ -2,7 +2,7 @@
 
 import React from "react";
 
-export interface StatResultItem {
+interface StatResultItem {
   label: string;
   value: number | null;
   unit: string | null;

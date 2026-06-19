@@ -60,7 +60,7 @@ function escapeHtml(text: string): string {
     .replace(/"/g, "&quot;");
 }
 
-export interface DefinitionWithMathProps {
+interface DefinitionWithMathProps {
   /** 定義テキスト。$...$ でインライン数式、$$...$$ でブロック数式を記述可能 */
   content: string;
   /** ラッパーに付与するクラス名 */

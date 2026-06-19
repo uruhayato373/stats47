@@ -53,7 +53,7 @@ export const INDEXABLE_AREA_CATEGORIES = [
   "miningindustry",
   "safetyenvironment",
 ] as const;
-export type IndexableAreaCategory = (typeof INDEXABLE_AREA_CATEGORIES)[number];
+type IndexableAreaCategory = (typeof INDEXABLE_AREA_CATEGORIES)[number];
 
 const INDEXABLE_AREA_CATEGORIES_SET = new Set<string>(
   INDEXABLE_AREA_CATEGORIES,
@@ -63,7 +63,7 @@ const INDEXABLE_AREA_CATEGORIES_SET = new Set<string>(
  * city-category (/areas/{pref}/cities/{city}/{cat}) のインデックス対象。
  * municipality × category は規模が大きいため population/economy に限定維持（2026-06-01 決定）。
  */
-export const INDEXABLE_CITY_CATEGORIES = ["population", "economy"] as const;
+const INDEXABLE_CITY_CATEGORIES = ["population", "economy"] as const;
 const INDEXABLE_CITY_CATEGORIES_SET = new Set<string>(INDEXABLE_CITY_CATEGORIES);
 
 /**

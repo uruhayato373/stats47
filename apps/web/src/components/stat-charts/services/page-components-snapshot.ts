@@ -9,9 +9,6 @@ export function pageComponentsKeyPath(pageType: string, pageKey: string): string
   return `app/page-components/${pageType}/${encodeURIComponent(pageKey)}.json`;
 }
 
-/** @deprecated pageComponentsKeyPath を使用してください */
-export const PAGE_COMPONENTS_SNAPSHOT_KEY = "app/page-components/all.json";
-
 /**
  * city-category page-components が定義済みの categoryKey 一覧 (小さな index)。
  * cities ページが「どのカテゴリに city-category データがあるか」を判定するために読む。
@@ -41,12 +38,6 @@ export async function readCityCategoryKeysFromR2(): Promise<string[]> {
     );
     return [];
   }
-}
-
-/** @deprecated pageComponentsKeyPath を使用してください */
-export interface PageComponentsSnapshot {
-  generatedAt: string;
-  byPage: Record<string, PageComponent[]>;
 }
 
 /**

@@ -9,9 +9,6 @@ export function rankingPageCardsKeyPath(rankingKey: string): string {
   return `app/ranking/${encodeURIComponent(rankingKey)}/page-cards.json`;
 }
 
-/** @deprecated rankingPageCardsKeyPath を使用してください */
-export const RANKING_PAGE_CARDS_SNAPSHOT_KEY = "app/ranking-page-cards/all.json";
-
 /**
  * R2 snapshot に保存される ranking page card 1 件分の構造。
  *
@@ -19,7 +16,7 @@ export const RANKING_PAGE_CARDS_SNAPSHOT_KEY = "app/ranking-page-cards/all.json"
  * 旧 ranking_page_cards テーブル schema への依存を切り離して独立型として定義する。
  * snapshot 形式は完全互換 (フロント reader への影響なし)。
  */
-export interface RankingPageCard {
+interface RankingPageCard {
   id: string;
   rankingKey: string;
   componentType: string;
@@ -29,12 +26,6 @@ export interface RankingPageCard {
   isActive: boolean;
   createdAt: string | null;
   updatedAt: string | null;
-}
-
-export interface RankingPageCardsSnapshot {
-  generatedAt: string;
-  /** key: rankingKey → RankingPageCard[] (displayOrder 昇順、isActive のみ) */
-  byRankingKey: Record<string, RankingPageCard[]>;
 }
 
 // React cache() でリクエストスコープ dedupe。旧実装は module-level Map で

@@ -4,7 +4,7 @@ import { RankingItem, RankingValue } from "@stats47/ranking";
 import { readLatestYearForAreaTypeFromR2, readRankingValuesFromR2, readRankingItemByKeyFromR2 } from "@stats47/ranking/server";
 import { err, ok, type Result } from "@stats47/types";
 
-export interface FetchRankingTableDataResult {
+interface FetchRankingTableDataResult {
   rankingItem: RankingItem | null;
   rankingValues: RankingValue[];
   yearCode: string | null;

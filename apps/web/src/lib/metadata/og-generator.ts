@@ -18,7 +18,7 @@ import type { Metadata } from "next";
 /**
  * OGPメタデータ生成パラメータ
  */
-export interface GenerateOGMetadataParams {
+interface GenerateOGMetadataParams {
   /** ページタイトル */
   title: string;
   /** ページ説明 */

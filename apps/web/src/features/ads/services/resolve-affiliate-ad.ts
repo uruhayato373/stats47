@@ -32,7 +32,7 @@ export interface ResolvedAffiliateBanner {
  * A/B テスト (AFF-05) の variant 候補。client (VariantAdSlot) が加重ランダムで1つ選ぶ。
  * banner は imageUrl あり、text は imageUrl=null。
  */
-export interface ResolvedAffiliateVariant {
+interface ResolvedAffiliateVariant {
   experimentId: string;
   variantId: string;
   weight: number;

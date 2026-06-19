@@ -6,7 +6,7 @@ import { isOk, type TopoJSONTopology } from "@stats47/types";
 
 import type { RankingValue } from "@stats47/ranking";
 
-export interface MunicipalityDrilldownResult {
+interface MunicipalityDrilldownResult {
   topology: TopoJSONTopology;
   values: RankingValue[];
 }
