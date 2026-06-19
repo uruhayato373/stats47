@@ -1,0 +1,153 @@
+{
+  "updated": "2026-06-19",
+  "drafts": {
+    "A-laborwage-commute-time-prefecture": {
+      "vertical": "stats47-note",
+      "r2_path": null
+    },
+    "A-laborwage-job-opening-ratio-prefecture": {
+      "vertical": "stats47-note",
+      "r2_path": null
+    },
+    "A-laborwage-paid-leave-utilization-prefecture": {
+      "vertical": "stats47-note",
+      "r2_path": null
+    },
+    "A-laborwage-starting-salary-by-prefecture": {
+      "vertical": "stats47-note",
+      "r2_path": null
+    },
+    "A-laborwage-wages-by-industry-prefecture": {
+      "vertical": "stats47-note",
+      "r2_path": null
+    },
+    "a-maximum-temperature": {
+      "vertical": "stats47-note",
+      "r2_path": null
+    },
+    "a-number-of-hotel-rooms": {
+      "vertical": "stats47-note",
+      "r2_path": null
+    },
+    "a-overseas-travel-annual-participation-rate-10plus": {
+      "vertical": "stats47-note",
+      "r2_path": null
+    },
+    "a-overseas-travel-annual-participation-rate-15plus": {
+      "vertical": "stats47-note",
+      "r2_path": null
+    },
+    "a-population-density-per-km2-total-area": {
+      "vertical": "stats47-note",
+      "r2_path": null
+    },
+    "a-volunteer-activity-annual-participation-rate-10plus": {
+      "vertical": "stats47-note",
+      "r2_path": null
+    },
+    "a-volunteer-activity-annual-participation-rate-15plus": {
+      "vertical": "stats47-note",
+      "r2_path": null
+    },
+    "b-expenditure-structure": {
+      "vertical": "stats47-note",
+      "r2_path": null
+    },
+    "b-hotel-rooms-nara": {
+      "vertical": "stats47-note",
+      "r2_path": null
+    },
+    "b-hottest-prefecture": {
+      "vertical": "stats47-note",
+      "r2_path": null
+    },
+    "b-local-tax-vs-allocation-tax": {
+      "vertical": "stats47-note",
+      "r2_path": null
+    },
+    "b-pharmacy-density": {
+      "vertical": "stats47-note",
+      "r2_path": null
+    },
+    "b-rich-spending-patterns": {
+      "vertical": "stats47-note",
+      "r2_path": null
+    },
+    "c-engel-food-gap": {
+      "vertical": "stats47-note",
+      "r2_path": null
+    },
+    "c-kita-kanto-fiscal": {
+      "vertical": "stats47-note",
+      "r2_path": null
+    },
+    "c-tokyo-vs-osaka-fiscal": {
+      "vertical": "stats47-note",
+      "r2_path": null
+    },
+    "d-education-income-gap": {
+      "vertical": "stats47-note",
+      "r2_path": null
+    },
+    "d-engel-coefficient-income": {
+      "vertical": "stats47-note",
+      "r2_path": null
+    },
+    "d-kakei-spending-personality": {
+      "vertical": "stats47-note",
+      "r2_path": null
+    },
+    "d1-kakei-prefecture-consumption": {
+      "vertical": "stats47-note",
+      "r2_path": null
+    },
+    "22-monthly-routine-skills": {
+      "vertical": "koumuin-claude-code",
+      "r2_path": null
+    },
+    "23-mcp-internal-system": {
+      "vertical": "koumuin-claude-code",
+      "r2_path": null
+    },
+    "24-subagents-parallel-research": {
+      "vertical": "koumuin-claude-code",
+      "r2_path": null
+    },
+    "25-excel-vba-to-python": {
+      "vertical": "koumuin-claude-code",
+      "r2_path": null
+    },
+    "26-boss-approval-deck": {
+      "vertical": "koumuin-claude-code",
+      "r2_path": null
+    },
+    "27-internal-study-30min": {
+      "vertical": "koumuin-claude-code",
+      "r2_path": null
+    },
+    "28-ai-skeptic-qa": {
+      "vertical": "koumuin-claude-code",
+      "r2_path": null
+    },
+    "29-evaluated-without-side-job": {
+      "vertical": "koumuin-claude-code",
+      "r2_path": null
+    },
+    "30-post-retirement-career": {
+      "vertical": "koumuin-claude-code",
+      "r2_path": null
+    },
+    "koumuin-shigoto-kouritsuka-ai": {
+      "vertical": "stats47-note",
+      "r2_path": null
+    },
+    "pinned-intro": {
+      "vertical": "stats47-note",
+      "r2_path": null
+    },
+    "sunshine-solar-housing": {
+      "vertical": "stats47-note",
+      "r2_path": null
+    }
+  }
+}

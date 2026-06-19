@@ -1,18 +1,19 @@
 name: 📝 Sync Note Articles to R2
 
-# 公開済み note 記事を R2 に同期し、docs/31 から削除する。
-#
-# 使い方:
-#   gh workflow run sync-note-r2.yml                          # dry-run (既定)
-#   gh workflow run sync-note-r2.yml -f dry_run=false         # 本番同期
+# 公開済み / 未公開ドラフト note 記事を R2 に同期し、docs/31 を空にする。
+# docs/31 は ephemeral outbox (編集時のみ、push 後に削除)。
 #
 # 自動トリガー:
-#   - develop への push で note-published-urls.json が更新された場合 (新規公開後)
+#   - develop への push で note-published-urls.json が更新 (新規公開後)
+#   - develop への push で note-draft-index.json が更新 (ドラフト追加後)
+#
+# 手動実行:
+#   gh workflow run sync-note-r2.yml -f dry_run=false
 #
 # 何をするか:
-#   1. note-published-urls.json の公開済み記事のうち r2_path 未記録のものを検出
-#   2. docs/31 の原稿を R2 (note/<vertical>/<slug>/) にアップロード
-#   3. note-published-urls.json に r2_path を追記
+#   1. 公開済み (note-published-urls.json) + ドラフト (note-draft-index.json) を確認
+#   2. r2_path 未記録 && docs/31 に存在するものを R2 にアップロード
+#   3. 各 index に r2_path を追記
 #   4. docs/31 から削除 (git rm) → commit-back
 #
 # 復元 (更新時):
@@ -23,6 +24,7 @@ on:
     branches: [develop]
     paths:
       - '.claude/state/note-published-urls.json'
+      - '.claude/state/note-draft-index.json'
   workflow_dispatch:
     inputs:
       dry_run:
@@ -47,7 +49,7 @@ env:
 jobs:
   sync:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 45
     steps:
       - name: 🧰 Checkout develop
         uses: actions/checkout@v4
@@ -64,51 +66,63 @@ jobs:
       - name: 📦 Install dependencies
         run: npm ci
 
-      - name: 🔍 Check for articles to sync (dry-run)
+      - name: 🔍 Check pending count (published + drafts)
         id: check
         run: |
           DRY_RUN=true node .claude/scripts/note/sync-note-r2.mjs
-          # synced_count が 0 なら後続をスキップ
+          DRY_RUN=true node .claude/scripts/note/sync-drafts-r2.mjs
           node -e "
-            const d=JSON.parse(require('fs').readFileSync('.claude/state/note-published-urls.json','utf8'));
-            const arts=d.articles;
-            const pending=Object.entries(arts).filter(([k,v])=>!k.startsWith('_')&&!v.r2_path);
-            // docs/31 に存在するものだけカウント
             const fs=require('fs');
-            const toSync=pending.filter(([slug,info])=>{
-              const v=info.vertical;
-              return fs.existsSync('docs/31_note記事原稿/'+v+'/'+slug) ||
-                     fs.existsSync('docs/31_note記事原稿/'+slug);
-            });
-            console.log('pending_count='+toSync.length);
-            require('fs').appendFileSync(process.env.GITHUB_OUTPUT, 'pending_count='+toSync.length+'\n');
+            const pub=JSON.parse(fs.readFileSync('.claude/state/note-published-urls.json','utf8'));
+            const dft=JSON.parse(fs.readFileSync('.claude/state/note-draft-index.json','utf8'));
+            const pubPending=Object.entries(pub.articles).filter(([k,v])=>!k.startsWith('_')&&!v.r2_path&&(
+              fs.existsSync('docs/31_note記事原稿/'+v.vertical+'/'+k)||
+              fs.existsSync('docs/31_note記事原稿/'+k)
+            ));
+            const dftPending=Object.entries(dft.drafts).filter(([k,v])=>!v.r2_path&&(
+              v.vertical==='stats47-note'
+                ? fs.existsSync('docs/31_note記事原稿/'+k)
+                : fs.existsSync('docs/31_note記事原稿/'+v.vertical+'/'+k)
+            ));
+            const total=pubPending.length+dftPending.length;
+            console.log('pending_count='+total);
+            fs.appendFileSync(process.env.GITHUB_OUTPUT,'pending_count='+total+'\n');
           "
 
       - name: ⏭️ Skip if nothing to sync
-        if: ${{ steps.check.outputs.pending_count == '0' }}
-        run: echo "同期対象なし (r2_path 記録済み or docs/31 不在) — スキップ"
+        if: steps.check.outputs.pending_count == '0'
+        run: echo "同期対象なし — スキップ"
 
-      - name: 📤 Sync to R2 and update note-published-urls.json
+      - name: 📤 Sync published articles to R2
         if: |
           steps.check.outputs.pending_count != '0' &&
           (github.event_name == 'push' || github.event.inputs.dry_run == 'false')
         run: DRY_RUN=false node .claude/scripts/note/sync-note-r2.mjs
+
+      - name: 📤 Sync draft articles to R2
+        if: |
+          steps.check.outputs.pending_count != '0' &&
+          (github.event_name == 'push' || github.event.inputs.dry_run == 'false')
+        run: DRY_RUN=false node .claude/scripts/note/sync-drafts-r2.mjs
 
       - name: 🧹 Remove synced articles from docs/31
         if: |
           steps.check.outputs.pending_count != '0' &&
           (github.event_name == 'push' || github.event.inputs.dry_run == 'false')
         run: |
-          # r2_path が記録された記事のうち、docs/31 にまだ存在するディレクトリを削除
           node -e "
-            const d=JSON.parse(require('fs').readFileSync('.claude/state/note-published-urls.json','utf8'));
-            const arts=d.articles;
             const fs=require('fs');
+            const pub=JSON.parse(fs.readFileSync('.claude/state/note-published-urls.json','utf8'));
+            const dft=JSON.parse(fs.readFileSync('.claude/state/note-draft-index.json','utf8'));
+            const allArticles=[
+              ...Object.entries(pub.articles).filter(([k])=>!k.startsWith('_')).map(([k,v])=>({slug:k,info:v})),
+              ...Object.entries(dft.drafts).map(([k,v])=>({slug:k,info:v}))
+            ];
             let count=0;
-            for(const [slug,info] of Object.entries(arts)){
-              if(slug.startsWith('_')||!info.r2_path) continue;
+            for(const {slug,info} of allArticles){
+              if(!info.r2_path) continue;
               const v=info.vertical;
-              const nested='docs/31_note記事原稿/'+v+'/'+slug;
+              const nested='docs/31_note記事原稿/'+(v&&v!=='stats47-note'?v+'/':'')+slug;
               const top='docs/31_note記事原稿/'+slug;
               const target=fs.existsSync(nested)?nested:(fs.existsSync(top)?top:null);
               if(target){ console.log(target); count++; }
@@ -120,17 +134,38 @@ jobs:
             git rm -r -q "$dir"
           done
 
-      - name: 💾 Commit-back (r2_path 追記 + docs/31 削除)
+      - name: 🗑️ Remove empty vertical containers from docs/31
+        if: |
+          steps.check.outputs.pending_count != '0' &&
+          (github.event_name == 'push' || github.event.inputs.dry_run == 'false')
+        run: |
+          for d in docs/31_note記事原稿/*/; do
+            [ -d "$d" ] || continue
+            # コンテナが空ならgit rmで削除
+            remaining=$(find "$d" -type f | wc -l)
+            if [ "$remaining" -eq "0" ]; then
+              echo "  empty container: $d"
+              git rm -r -q "$d" 2>/dev/null || true
+            fi
+          done
+          # docs/31 自体が空になったら削除
+          remaining=$(find docs/31_note記事原稿 -type f 2>/dev/null | wc -l)
+          if [ "$remaining" -eq "0" ]; then
+            echo "  docs/31 が空になりました"
+            git rm -r -q docs/31_note記事原稿 2>/dev/null || true
+          fi
+
+      - name: 💾 Commit-back (index 更新 + docs/31 削除)
         if: |
           steps.check.outputs.pending_count != '0' &&
           (github.event_name == 'push' || github.event.inputs.dry_run == 'false')
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add .claude/state/note-published-urls.json
-          git diff --cached --quiet && echo "変更なし (スキップ)" && exit 0
+          git add .claude/state/note-published-urls.json .claude/state/note-draft-index.json
+          git diff --cached --quiet && git diff --stat HEAD -- docs/31_note記事原稿 | grep -q "." || { echo "変更なし (スキップ)"; exit 0; }
           COUNT=$(git diff --cached --name-only | wc -l | tr -d ' ')
-          git commit -q -m "chore(note): sync published articles to R2, remove from docs/31 [skip ci]"
+          git commit -q -m "chore(note): sync all articles to R2, remove from docs/31 [skip ci]"
           for i in 1 2 3; do
             if git pull --rebase --quiet origin develop && git push origin HEAD:develop; then
               echo "✅ commit-back 完了 ($COUNT ファイル)"; break

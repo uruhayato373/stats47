@@ -1,43 +1,57 @@
 #!/usr/bin/env bash
-# 公開済み note 記事を R2 から docs/31 に復元する (更新作業用)
+# note 記事を R2 から docs/31 に復元する (更新/リライト作業用)
+# 公開済み (note-published-urls.json) / ドラフト (note-draft-index.json) 両対応。
 #
 # 使い方:
 #   bash .claude/scripts/note/restore-from-r2.sh <slug>
 #
 # 例:
 #   bash .claude/scripts/note/restore-from-r2.sh 00-claude-code-intro-for-public-servants
+#   bash .claude/scripts/note/restore-from-r2.sh A-laborwage-commute-time-prefecture
 #
-# R2 公開 URL 経由で取得するため、認証不要 (read-only)。
+# 更新後: develop に push → sync-note-r2.yml が R2 に再同期 + docs/31 削除
 
 set -euo pipefail
 
 SLUG="${1:?使い方: $0 <slug>}"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="$(cd "$SCRIPT_DIR/../../.." && pwd)"
-URLS_FILE="$PROJECT_ROOT/.claude/state/note-published-urls.json"
+PUB_FILE="$PROJECT_ROOT/.claude/state/note-published-urls.json"
+DRAFT_FILE="$PROJECT_ROOT/.claude/state/note-draft-index.json"
 R2_BASE="https://storage.stats47.jp"
 
-# note-published-urls.json から vertical と r2_path を取得
-VERTICAL=$(node -e "
-const d=JSON.parse(require('fs').readFileSync('$URLS_FILE','utf8'));
-const a=d.articles['$SLUG'];
-if(!a){console.error('slug not found: $SLUG');process.exit(1);}
-console.log(a.vertical);
-")
+# note-published-urls.json または note-draft-index.json から情報取得
+LOOKUP=$(node -e "
+const fs=require('fs');
+const pub=JSON.parse(fs.readFileSync('$PUB_FILE','utf8'));
+const dft=JSON.parse(fs.readFileSync('$DRAFT_FILE','utf8'));
+const slug='$SLUG';
 
-R2_PATH=$(node -e "
-const d=JSON.parse(require('fs').readFileSync('$URLS_FILE','utf8'));
-const a=d.articles['$SLUG'];
-console.log(a.r2_path || 'note/$VERTICAL/$SLUG');
-")
+if(pub.articles[slug]){
+  const a=pub.articles[slug];
+  const r2=a.r2_path||('note/'+a.vertical+'/'+slug);
+  console.log(JSON.stringify({vertical:a.vertical, r2_path:r2, status:'published'}));
+} else if(dft.drafts[slug]){
+  const d=dft.drafts[slug];
+  const r2=d.r2_path||('note/'+d.vertical+'/'+slug);
+  console.log(JSON.stringify({vertical:d.vertical, r2_path:r2, status:'draft'}));
+} else {
+  console.error('slug not found in published or draft index: '+slug);
+  process.exit(1);
+}
+") || exit 1
+
+VERTICAL=$(echo "$LOOKUP" | node -e "const d=JSON.parse(require('fs').readFileSync('/dev/stdin','utf8')); console.log(d.vertical)")
+R2_PATH=$(echo "$LOOKUP" | node -e "const d=JSON.parse(require('fs').readFileSync('/dev/stdin','utf8')); console.log(d.r2_path)")
+STATUS=$(echo "$LOOKUP" | node -e "const d=JSON.parse(require('fs').readFileSync('/dev/stdin','utf8')); console.log(d.status)")
 
 echo "▶ 復元: $SLUG"
+echo "  status:   $STATUS"
 echo "  vertical: $VERTICAL"
 echo "  r2_path:  $R2_PATH"
 
 MANIFEST_URL="$R2_BASE/$R2_PATH/manifest.json"
 
-# manifest.json を取得してファイル一覧を取得
 echo "  manifest 取得中..."
 MANIFEST=$(curl -sf "$MANIFEST_URL") || {
   echo "❌ manifest.json が取得できません: $MANIFEST_URL"
@@ -55,12 +69,11 @@ for f in d['files']: print(f)
 ")
 
 # docs/31 の出力先ディレクトリを決定
-# コンテナ vertical と同名ディレクトリが存在すれば nested、なければ top-level
 DOCS31="$PROJECT_ROOT/docs/31_note記事原稿"
-if [ -d "$DOCS31/$VERTICAL" ]; then
-  DEST_DIR="$DOCS31/$VERTICAL/$SLUG"
-else
+if [ "$VERTICAL" = "stats47-note" ]; then
   DEST_DIR="$DOCS31/$SLUG"
+else
+  DEST_DIR="$DOCS31/$VERTICAL/$SLUG"
 fi
 
 echo "  出力先: $DEST_DIR"
@@ -71,9 +84,9 @@ if [ -d "$DEST_DIR" ]; then
   [[ "$ans" =~ ^[Yy]$ ]] || { echo "中止"; exit 0; }
 fi
 
-# 各ファイルをダウンロード
 echo "  ファイルをダウンロード中..."
 while IFS= read -r file; do
+  [ "$file" = "manifest.json" ] && continue  # manifest は不要
   url="$R2_BASE/$R2_PATH/$file"
   dest="$DEST_DIR/$file"
   mkdir -p "$(dirname "$dest")"
@@ -86,4 +99,8 @@ done <<< "$FILES"
 
 echo ""
 echo "✅ 復元完了: $DEST_DIR"
-echo "   更新後は publish-note スキル (update モード) で note.com に反映してください。"
+if [ "$STATUS" = "published" ]; then
+  echo "   更新後: develop push → CI が R2 再同期 + docs/31 自動削除 + note.com は browser-use で update"
+else
+  echo "   更新後: develop push → CI が R2 再同期 + docs/31 自動削除"
+fi
