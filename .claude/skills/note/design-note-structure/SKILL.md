@@ -88,6 +88,10 @@ note 戦略（`docs/30_note記事企画/note戦略.md`）の骨子に基づき�
 docs/31_note記事原稿/<slug>/_data/plan.md
 ```
 
+> **ephemeral outbox**: docs/31 は編集時のみ存在する作業域（push後CI自動削除）。
+> 存在しない場合は先に `bash .claude/scripts/note/restore-from-r2.sh <slug>` で復元する。
+> 完了後は `note-draft-index.json` に登録 → push → CI が R2 同期・削除する。
+
 ## 注意
 
 - **トーンは最初に決めて全章統一すること。** 指定しないと章ごとにテンションがバラバラになる。

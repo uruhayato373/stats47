@@ -70,9 +70,12 @@ function main() {
     VERTICAL_PLACEHOLDERS[opts.vertical] ||
     "{{MAGAZINE_URL}}";
 
+  // docs/31 は ephemeral outbox (push後CI自動削除)。
+  // 実行前に対象 slug を復元: bash .claude/scripts/note/restore-from-r2.sh <slug>
   const seriesDir = path.join(PROJECT_ROOT, "docs/31_note記事原稿", opts.vertical);
   if (!fs.existsSync(seriesDir)) {
     console.error(`ERROR: シリーズディレクトリが存在しません: ${seriesDir}`);
+    console.error(`  docs/31 は ephemeral outbox です。先に restore-from-r2.sh で記事を復元してください。`);
     process.exit(2);
   }
 

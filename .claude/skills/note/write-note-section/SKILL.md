@@ -189,7 +189,7 @@ note 記事の stats47.jp リンクには UTM パラメータを付けない。�
 - note は**最大 100 個**のハッシュタグを登録できる
 - `#キーワード` 形式で、スペース区切り、1 行にまとめる
 - 記事のテーマ・登場する都道府県・関連する統計指標・一般的な発見系ワードを網羅する
-- 参考: `docs/31_note記事原稿/b2-sunshine-duration/hashtags.txt`
+- 参考: R2 の任意記事を `bash .claude/scripts/note/restore-from-r2.sh b2-sunshine-duration` で復元して確認
 
 ## 出力
 

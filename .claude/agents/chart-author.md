@@ -47,7 +47,7 @@ description: ブログ / note 記事用の SVG / Remotion チャート生成専�
 | `.claude/rules/blog-svg-chart-standards.md` | カタログ更新（新チャートタイプ追加時に必ず更新） |
 | `.local/r2/app/blog/<slug>/data/` | CRUD（生成チャート SVG・data JSON） |
 | `docs/21_ブログ記事原稿/<slug>/` | read 主体（chart 参照） |
-| `docs/31_note記事原稿/<slug>/` | CRUD（note 原稿） |
+| `docs/31_note記事原稿/<slug>/` | CRUD（note 原稿。ephemeral outbox: 存在しない場合は `restore-from-r2.sh <slug>` 先行必須） |
 | `.claude/scripts/blog/generate-article-charts.ts` | read / 軽微修正（CLI ディスパッチ追加時） |
 | `.claude/scripts/blog/build-svg-gallery.mjs` | run（目視レビュー用 HTML ギャラリー生成） |
 
