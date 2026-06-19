@@ -1,0 +1,146 @@
+name: 📝 Sync Note Articles to R2
+
+# 公開済み note 記事を R2 に同期し、docs/31 から削除する。
+#
+# 使い方:
+#   gh workflow run sync-note-r2.yml                          # dry-run (既定)
+#   gh workflow run sync-note-r2.yml -f dry_run=false         # 本番同期
+#
+# 自動トリガー:
+#   - develop への push で note-published-urls.json が更新された場合 (新規公開後)
+#
+# 何をするか:
+#   1. note-published-urls.json の公開済み記事のうち r2_path 未記録のものを検出
+#   2. docs/31 の原稿を R2 (note/<vertical>/<slug>/) にアップロード
+#   3. note-published-urls.json に r2_path を追記
+#   4. docs/31 から削除 (git rm) → commit-back
+#
+# 復元 (更新時):
+#   bash .claude/scripts/note/restore-from-r2.sh <slug>
+
+on:
+  push:
+    branches: [develop]
+    paths:
+      - '.claude/state/note-published-urls.json'
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "true: R2 push / docs/31 削除なし (検証のみ) / false: 本番"
+        required: false
+        default: "true"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-note-r2
+  cancel-in-progress: false
+
+env:
+  R2_S3_ENDPOINT: https://${{ secrets.CLOUDFLARE_ACCOUNT_ID }}.r2.cloudflarestorage.com
+  R2_ACCESS_KEY_ID: ${{ secrets.CLOUDFLARE_R2_ACCESS_KEY_ID }}
+  R2_SECRET_ACCESS_KEY: ${{ secrets.CLOUDFLARE_R2_SECRET_ACCESS_KEY }}
+  CLOUDFLARE_R2_BUCKET_NAME: stats47
+  R2_PUBLIC_FETCH_URL: https://storage.stats47.jp
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: 🧰 Checkout develop
+        uses: actions/checkout@v4
+        with:
+          ref: develop
+          fetch-depth: 1
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 🔍 Check for articles to sync (dry-run)
+        id: check
+        run: |
+          DRY_RUN=true node .claude/scripts/note/sync-note-r2.mjs
+          # synced_count が 0 なら後続をスキップ
+          node -e "
+            const d=JSON.parse(require('fs').readFileSync('.claude/state/note-published-urls.json','utf8'));
+            const arts=d.articles;
+            const pending=Object.entries(arts).filter(([k,v])=>!k.startsWith('_')&&!v.r2_path);
+            // docs/31 に存在するものだけカウント
+            const fs=require('fs');
+            const toSync=pending.filter(([slug,info])=>{
+              const v=info.vertical;
+              return fs.existsSync('docs/31_note記事原稿/'+v+'/'+slug) ||
+                     fs.existsSync('docs/31_note記事原稿/'+slug);
+            });
+            console.log('pending_count='+toSync.length);
+            require('fs').appendFileSync(process.env.GITHUB_OUTPUT, 'pending_count='+toSync.length+'\n');
+          "
+
+      - name: ⏭️ Skip if nothing to sync
+        if: ${{ steps.check.outputs.pending_count == '0' }}
+        run: echo "同期対象なし (r2_path 記録済み or docs/31 不在) — スキップ"
+
+      - name: 📤 Sync to R2 and update note-published-urls.json
+        if: |
+          steps.check.outputs.pending_count != '0' &&
+          (github.event_name == 'push' || github.event.inputs.dry_run == 'false')
+        run: DRY_RUN=false node .claude/scripts/note/sync-note-r2.mjs
+
+      - name: 🧹 Remove synced articles from docs/31
+        if: |
+          steps.check.outputs.pending_count != '0' &&
+          (github.event_name == 'push' || github.event.inputs.dry_run == 'false')
+        run: |
+          # r2_path が記録された記事のうち、docs/31 にまだ存在するディレクトリを削除
+          node -e "
+            const d=JSON.parse(require('fs').readFileSync('.claude/state/note-published-urls.json','utf8'));
+            const arts=d.articles;
+            const fs=require('fs');
+            let count=0;
+            for(const [slug,info] of Object.entries(arts)){
+              if(slug.startsWith('_')||!info.r2_path) continue;
+              const v=info.vertical;
+              const nested='docs/31_note記事原稿/'+v+'/'+slug;
+              const top='docs/31_note記事原稿/'+slug;
+              const target=fs.existsSync(nested)?nested:(fs.existsSync(top)?top:null);
+              if(target){ console.log(target); count++; }
+            }
+            if(count===0) console.log('__none__');
+          " | while IFS= read -r dir; do
+            [ "$dir" = "__none__" ] && break
+            echo "  git rm: $dir"
+            git rm -r -q "$dir"
+          done
+
+      - name: 💾 Commit-back (r2_path 追記 + docs/31 削除)
+        if: |
+          steps.check.outputs.pending_count != '0' &&
+          (github.event_name == 'push' || github.event.inputs.dry_run == 'false')
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .claude/state/note-published-urls.json
+          git diff --cached --quiet && echo "変更なし (スキップ)" && exit 0
+          COUNT=$(git diff --cached --name-only | wc -l | tr -d ' ')
+          git commit -q -m "chore(note): sync published articles to R2, remove from docs/31 [skip ci]"
+          for i in 1 2 3; do
+            if git pull --rebase --quiet origin develop && git push origin HEAD:develop; then
+              echo "✅ commit-back 完了 ($COUNT ファイル)"; break
+            fi
+            echo "push retry $i"; sleep 3
+          done
+
+      - name: 📋 Summary
+        run: |
+          echo "### Note R2 Sync" >> $GITHUB_STEP_SUMMARY
+          echo "- pending: ${{ steps.check.outputs.pending_count }} 件" >> $GITHUB_STEP_SUMMARY
+          echo "- dry_run: ${{ github.event.inputs.dry_run || 'false (push trigger)' }}" >> $GITHUB_STEP_SUMMARY
+          echo "- 復元: \`bash .claude/scripts/note/restore-from-r2.sh <slug>\`" >> $GITHUB_STEP_SUMMARY
