@@ -66,8 +66,31 @@ interface CategoryMetaOut {
   categoryName: string;
 }
 
+function shouldSkipR2ForLocalPrebuild(): boolean {
+  if (process.env.CLOUDFLARE_WORKERS === "true") return false;
+  if (process.env.CI === "true" || process.env.GITHUB_ACTIONS === "true") return false;
+  if (process.env.R2_PUBLIC_FETCH_URL || process.env.NEXT_PUBLIC_R2_PUBLIC_URL) return false;
+  if (
+    process.env.R2_ACCESS_KEY_ID &&
+    process.env.R2_SECRET_ACCESS_KEY &&
+    process.env.R2_S3_ENDPOINT
+  ) {
+    return false;
+  }
+  return true;
+}
+
 async function main() {
   const documents: SearchDocument[] = [];
+  const indexPath = path.join(process.cwd(), "public", "search-index.json");
+  const metaPath = path.join(process.cwd(), "public", "search-index-meta.json");
+
+  if (shouldSkipR2ForLocalPrebuild() && fs.existsSync(indexPath) && fs.existsSync(metaPath)) {
+    console.log(
+      "ℹ️  ローカルでは R2 を読まないため、既存の search-index.json / meta を保持します",
+    );
+    return;
+  }
 
   // 1. ランキング項目（R2 item.json メタ + git TS の description）
   try {
@@ -134,9 +157,6 @@ async function main() {
   } catch (error) {
     console.warn("ブログ記事の取得に失敗:", error);
   }
-
-  const indexPath = path.join(process.cwd(), "public", "search-index.json");
-  const metaPath = path.join(process.cwd(), "public", "search-index-meta.json");
 
   // R2 データ源が読めない環境 (CI で R2 不在 等) では documents が 0 件になる。
   // この場合に空インデックスで上書きすると本番検索が壊れるため、既存の committed

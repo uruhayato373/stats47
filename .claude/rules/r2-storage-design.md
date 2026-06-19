@@ -11,15 +11,14 @@
 - reader 関数に module-level メモリキャッシュを持たせない。各リクエストが対応する小さい JSON を直接 fetch する
 - `compare/` は `category/` と同じデータを使う。R2 ファイルは `app/category/[key]/items.json` に統一し reader 側で両方から参照する
 
-## R2 書き込み (push / 削除) は CI / クラウド専用 ★
+## R2 読み書き — ローカル / CI 両方から remote が唯一の真実源 ★
 
-- **読み取り**はローカル可 (公開 URL `https://storage.stats47.jp`、認証不要)。**書き込み**はローカル禁止。
-- push / 削除系スクリプトは `packages/r2-storage/src/scripts/_assert-ci-write.ts` のガードで CI 外では停止する
-  (`CI`/`GITHUB_ACTIONS` 未設定 かつ `ALLOW_LOCAL_R2_WRITE` 未設定時)。対象:
-  `diff-push-r2.ts` / `push-r2-wrangler.ts` / `db-r2-sync.ts push` / `delete-r2-prefix.ts` / `r2-cleanup-orphans.ts`。
-- R2 反映は GitHub Actions で行う: `sync-snapshots.yml` (snapshot 再生成+push) / `publish-blog.yml` / `data-refresh.yml`。
-- 新規に R2 書き込みスクリプトを追加する場合は **先頭で `assertR2WriteAllowed()` を呼ぶ**こと。
-- 詳細: `.claude/rules/local-environment.md` の「R2 書き込みは CI / クラウド専用」。
+- **読み取り**はローカル可 (公開 URL `https://storage.stats47.jp`、認証不要)。
+- **書き込み**はローカル / CI 両方から remote R2 へ直接可能。ローカル R2 ミラー (`.local/r2`) は廃止済み。
+- ローカル書き込みには R2 S3 creds (`.env.local`: `R2_ACCESS_KEY_ID` / `R2_SECRET_ACCESS_KEY` / `R2_S3_ENDPOINT`) または `wrangler login` 認証が必要。`_assert-ci-write.ts` はデフォルト許可（ローカル実行時は `console.warn` を出すだけ）。
+- 対象スクリプト: `diff-push-r2.ts` / `push-r2-wrangler.ts` / `db-r2-sync.ts push` / `delete-r2-prefix.ts` / `r2-cleanup-orphans.ts`。
+- 新規に R2 書き込みスクリプトを追加する場合は **先頭で `assertR2WriteAllowed()` を呼ぶ**こと（通知のため）。
+- 詳細: `.claude/rules/local-environment.md` の「R2 読み書き」。
 
 ## URL → R2 キーパス 対応表
 

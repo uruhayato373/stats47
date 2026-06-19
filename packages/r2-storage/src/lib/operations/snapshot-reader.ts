@@ -1,6 +1,7 @@
 import { logger } from "@stats47/logger";
 
 import { fetchFromR2AsJson } from "./fetch";
+import { shouldSkipRemoteR2Read } from "../utils/should-skip-remote-r2-read";
 
 const DEFAULT_STALE_AFTER_DAYS = 30;
 
@@ -56,7 +57,9 @@ export function createSnapshotReader<TSnapshot, TData>(
   return async function loadSnapshot(): Promise<TData> {
     const snapshot = await fetchFromR2AsJson<TSnapshot>(key);
     if (!snapshot) {
-      logger.warn({ key, label }, `${label} snapshot が R2 に存在しません`);
+      if (!shouldSkipRemoteR2Read()) {
+        logger.warn({ key, label }, `${label} snapshot が R2 に存在しません`);
+      }
       return fallback;
     }
 

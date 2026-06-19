@@ -9,12 +9,27 @@ const withBundleAnalyzer = bundleAnalyzer({
   enabled: process.env.ANALYZE === "true",
 });
 
+function isCIEnvironment(): boolean {
+  return (
+    process.env.CI === "true" ||
+    process.env.GITHUB_ACTIONS === "true" ||
+    Boolean(process.env.CI)
+  );
+}
+
 // モノレポルートの .env.local を明示ロード（アプリ内 .env.local 不要）
 config({ path: path.resolve(__dirname, "../../.env.local") });
 
-// 最初に初期化を呼び出す（開発環境で必須）
-// persist.path を wrangler.toml の persist_to と一致させ、
-// pull:d1 スクリプトと dev server が同じ D1/R2 データを参照するようにする
+// local build でも validate-env.ts と同じ公開デフォルトを読む。
+// dotenv は no-override のため、shell / CI / wrangler vars で渡された値を上書きしない。
+if (!isCIEnvironment() && process.env.CLOUDFLARE_WORKERS !== "true") {
+  config({ path: path.resolve(__dirname, ".env.development") });
+}
+
+// 最初に初期化を呼び出す（開発環境で必須）。
+// Wrangler 4.78+ は wrangler.toml の [dev].persist_to を警告扱いするため、
+// OpenNext 側の persist.path でローカル D1/R2 永続化先を一元管理する。
+// pull:d1 スクリプトと dev server が同じ D1/R2 データを参照するようにする。
 try {
   initOpenNextCloudflareForDev({
     persist: { path: "../../.local/d1" },

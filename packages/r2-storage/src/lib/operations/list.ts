@@ -6,6 +6,7 @@ import { getR2Client } from "../clients/get-r2-client";
 import { getS3Client } from "../clients/get-s3-client";
 import { detectEnvironment } from "../utils/detect-environment";
 import { findLocalR2Root } from "../utils/find-local-r2-root";
+import { shouldSkipRemoteR2Read } from "../utils/should-skip-remote-r2-read";
 
 function listFromLocalFs(prefix?: string): Array<{ key: string; size: number }> {
   // eslint-disable-next-line @typescript-eslint/no-require-imports
@@ -73,6 +74,10 @@ export async function listFromR2(
     return listFromLocalFs(prefix).map((o) => o.key);
   }
 
+  if (shouldSkipRemoteR2Read()) {
+    return [];
+  }
+
   if (env.hasS3Credentials) {
     try {
       const objects = await listFromS3(prefix);
@@ -116,6 +121,10 @@ export async function listFromR2WithSize(
 
   if (env.isDevelopment) {
     return listFromLocalFs(prefix);
+  }
+
+  if (shouldSkipRemoteR2Read()) {
+    return [];
   }
 
   if (env.hasS3Credentials) {

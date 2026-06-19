@@ -1,16 +1,16 @@
 /**
- * R2 への書き込み (push / delete / cleanup) は CI / クラウドからのみ許可する方針のガード。
+ * R2 への書き込み (push / delete / cleanup) のガード。
  *
- * 完全DBレス運用では SSOT は git TS と R2 のみ。R2 反映 (書き込み) はレビュー済みの
- * git 状態から CI が行い、ローカルからの誤 push / 誤削除を防ぐ。読み取りは公開 URL
- * 経由で認証不要なのでローカルでも自由に行える (本ガードの対象外)。
+ * 完全DBレス運用では SSOT は git TS と R2 のみ。ローカル / CI 両方から
+ * remote R2 へ読み書きできる（remote が唯一の真実源）。
+ * ローカル書き込み時は R2 S3 creds (.env.local の R2_ACCESS_KEY_ID / R2_SECRET_ACCESS_KEY /
+ * R2_S3_ENDPOINT) または wrangler 認証が必要。
  *
- * - CI (GitHub Actions) では CI=true / GITHUB_ACTIONS=true が立つので素通り。
- * - どうしてもローカルから実行する場合のみ ALLOW_LOCAL_R2_WRITE=1 で明示上書き (非推奨)。
- * - dryRun の場合は書き込まないので常に許可。
+ * - dryRun の場合は R2 に書き込まないので常に許可。
+ * - ローカル実行時は console.warn で 1 行通知してそのまま続行する。
  *
  * 方針: .claude/rules/local-environment.md / .claude/rules/r2-storage-design.md
- *       (R2 読み取り = 公開 URL で認証不要 / 書き込み = CI・クラウド専用)
+ *       (ローカル / CI 両方から remote R2 へ読み書き可。remote が SSOT)
  */
 export function assertR2WriteAllowed(opts: { op?: string; dryRun?: boolean } = {}): void {
   const { op = "R2 write", dryRun = false } = opts;
@@ -18,25 +18,9 @@ export function assertR2WriteAllowed(opts: { op?: string; dryRun?: boolean } = {
 
   const inCI =
     process.env.CI === "true" || process.env.GITHUB_ACTIONS === "true";
-  const override = process.env.ALLOW_LOCAL_R2_WRITE === "1";
-  if (inCI || override) return;
-
-  console.error(
-    [
-      "",
-      `⛔ ${op} はローカルから実行できません (R2 書き込みは CI / クラウド専用)。`,
-      "",
-      "  R2 反映は GitHub Actions から実行してください:",
-      "    • snapshot 再生成 + push  → 'Sync Snapshots → R2' (sync-snapshots.yml) を workflow_dispatch",
-      "    • blog 公開               → publish-blog.yml",
-      "    • e-Stat → R2 データ更新  → data-refresh.yml",
-      "",
-      "  ローカルの R2 読み取りは認証不要 (公開 URL):",
-      "    R2_PUBLIC_FETCH_URL=https://storage.stats47.jp NODE_OPTIONS='--conditions react-server'",
-      "",
-      "  どうしてもローカルから書き込む場合のみ (非推奨): ALLOW_LOCAL_R2_WRITE=1 を付与。",
-      "",
-    ].join("\n"),
-  );
-  process.exit(1);
+  if (!inCI) {
+    console.warn(
+      `⚠️ ローカルから R2 へ書き込みます (remote が唯一の真実源)。S3 認証情報 (R2_ACCESS_KEY_ID/R2_SECRET_ACCESS_KEY/R2_S3_ENDPOINT) または wrangler 認証が必要です。[${op}]`,
+    );
+  }
 }

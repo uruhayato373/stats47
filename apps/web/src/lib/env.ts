@@ -17,6 +17,8 @@ const DEFAULT_BASE_URLS = {
   development: "http://localhost:3000",
 } as const;
 
+const warnedMissingEnv = new Set<string>();
+
 /**
  * 現在の環境を判定
  *
@@ -51,15 +53,19 @@ export function getRequiredBaseUrl(): string {
 
   if (!baseUrl) {
     const fallbackUrl = DEFAULT_BASE_URLS[currentEnv];
-    
-    logger.warn(
-      {
-        env: "NEXT_PUBLIC_BASE_URL",
-        currentEnvironment: currentEnv,
-        fallbackUrl,
-      },
-      `環境変数NEXT_PUBLIC_BASE_URLが設定されていません。デフォルト値（${fallbackUrl}）を使用します。`
-    );
+
+    const warningKey = `NEXT_PUBLIC_BASE_URL:${currentEnv}`;
+    if (!warnedMissingEnv.has(warningKey)) {
+      warnedMissingEnv.add(warningKey);
+      logger.warn(
+        {
+          env: "NEXT_PUBLIC_BASE_URL",
+          currentEnvironment: currentEnv,
+          fallbackUrl,
+        },
+        `環境変数NEXT_PUBLIC_BASE_URLが設定されていません。デフォルト値（${fallbackUrl}）を使用します。`
+      );
+    }
     
     return fallbackUrl;
   }
