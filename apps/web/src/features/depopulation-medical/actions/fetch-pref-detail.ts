@@ -1,8 +1,8 @@
 "use server";
 
+import type { DepopulationMedicalPrefDetail } from "@/features/depopulation-medical/lib/types";
 import { loadDepopulationMedicalPrefDetail } from "@/features/depopulation-medical/server";
 
-import type { DepopulationMedicalPrefDetail } from "@/features/depopulation-medical/lib/types";
 
 /**
  * 県別詳細 (過疎ポリゴン + 医療機関 point) を遅延取得する server action。

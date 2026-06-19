@@ -2,8 +2,8 @@
 
 import { useMemo } from "react";
 
-import { DivergingChoroplethMap } from "@stats47/visualization/d3/DivergingChoroplethMap";
-import type { DivergingChoroplethValue } from "@stats47/visualization/d3/DivergingChoroplethMap";
+import { DivergingChoroplethMap, type DivergingChoroplethValue } from "@stats47/visualization/d3/DivergingChoroplethMap";
+
 import { DashboardCard } from "@/components/stat-charts";
 
 import type { ComparisonRegion } from "../types";

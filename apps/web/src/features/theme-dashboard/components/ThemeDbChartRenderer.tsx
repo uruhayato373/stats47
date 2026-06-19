@@ -7,9 +7,6 @@ import dynamic from "next/dynamic";
 import { Skeleton } from "@stats47/components/atoms/ui/skeleton";
 
 import type { PageComponent, LineChartData, MixedChartData } from "@/components/stat-charts";
-import { CompositionChartClient } from "@/components/stat-charts/components/charts/CompositionChart/CompositionChartClient";
-import { LineChartClient } from "@/components/stat-charts/components/charts/LineChart/LineChartClient";
-import { PyramidChartClient } from "@/components/stat-charts/components/charts/PyramidChart/PyramidChartClient";
 
 import { fetchDbChartDataAction, type DonutChartItem, type CpiProfileItem, type CpiHeatmapItem, fetchPopulationPyramidAction, type PopulationPyramidResult } from "../actions";
 
@@ -35,6 +32,21 @@ const HorizontalDivergingBarChart = dynamic(
 const CategoryHeatmap = dynamic(
   () => import("@stats47/visualization/d3/CategoryHeatmap").then((mod) => mod.CategoryHeatmap),
   { ssr: false, loading: () => <Skeleton className="h-[280px] w-full rounded-md" /> },
+);
+
+const LineChartClient = dynamic(
+  () => import("@/components/stat-charts/components/charts/LineChart/LineChartClient").then((mod) => mod.LineChartClient),
+  { ssr: false, loading: () => <Skeleton className="h-[250px] w-full rounded-md" /> },
+);
+
+const CompositionChartClient = dynamic(
+  () => import("@/components/stat-charts/components/charts/CompositionChart/CompositionChartClient").then((mod) => mod.CompositionChartClient),
+  { ssr: false, loading: () => <Skeleton className="h-[220px] w-full rounded-md" /> },
+);
+
+const PyramidChartClient = dynamic(
+  () => import("@/components/stat-charts/components/charts/PyramidChart/PyramidChartClient").then((mod) => mod.PyramidChartClient),
+  { ssr: false, loading: () => <Skeleton className="h-[400px] w-full rounded-md" /> },
 );
 
 

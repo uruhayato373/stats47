@@ -2,8 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 
-import { TimelineChoroplethMap } from "@stats47/visualization/d3/TimelineChoroplethMap";
-import type { TimelineChoroplethFrame } from "@stats47/visualization/d3/TimelineChoroplethMap";
+import { TimelineChoroplethMap, type TimelineChoroplethFrame } from "@stats47/visualization/d3/TimelineChoroplethMap";
 
 import type { Topology } from "topojson-specification";
 

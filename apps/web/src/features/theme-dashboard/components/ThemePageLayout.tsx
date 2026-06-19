@@ -10,12 +10,12 @@ import {
 } from "@stats47/components/atoms/ui/breadcrumb";
 
 import { PageHeader } from "@/components/layout";
+import { loadPageComponents } from "@/components/stat-charts/server";
+import { prefetchThemeKpiData } from "@/components/stat-charts/services/prefetch-theme-kpi";
 
 import { SidebarPromoBanner } from "@/features/ads";
 import { resolveAffiliateBanners } from "@/features/ads/server";
 import { NativeAffiliateRow } from "@/features/redesign";
-import { loadPageComponents } from "@/components/stat-charts/server";
-import { prefetchThemeKpiData } from "@/components/stat-charts/services/prefetch-theme-kpi";
 
 import { AdSenseAd, THEMES_CONTENT } from "@/lib/google-adsense";
 
