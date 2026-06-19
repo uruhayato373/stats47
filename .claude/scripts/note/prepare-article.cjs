@@ -24,7 +24,12 @@ outer: for (const d of baseDirs) {
     if (fs.existsSync(path.join(d, f))) { articleDir = d; articleFile = f; break outer; }
   }
 }
-if (!articleDir) { console.error("ERROR: not found " + slug); process.exit(1); }
+if (!articleDir) {
+  console.error("ERROR: not found " + slug);
+  console.error("  docs/31_note記事原稿 に記事がありません。先に復元してください:");
+  console.error("  bash .claude/scripts/note/restore-from-r2.sh " + slug);
+  process.exit(1);
+}
 const raw = fs.readFileSync(path.join(articleDir, articleFile), "utf8");
 const fm = (raw.match(/^---\n([\s\S]*?)\n---/) || [])[1] || "";
 const fmF = (k) => {

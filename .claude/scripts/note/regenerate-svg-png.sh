@@ -2,9 +2,9 @@
 #
 # note 記事の SVG → PNG 再生成スクリプト
 #
-# note 記事は docs/31_note記事原稿/ で単一管理し、容量を詰めたい公開済み記事は
-# *.svg のみ残して派生物 *.png を削除してよい。PNG が必要になったとき
-# (publish-note --update での再アップロード等) に本スクリプトで再生成する。
+# note 記事は R2 `note/<vertical>/<slug>/` が SSOT（ephemeral outbox 化済）。
+# 更新時は restore-from-r2.sh <slug> で docs/31 に復元してから本スクリプトを使う。
+# PNG が必要なとき (publish-note --update での再アップロード等) に再生成する。
 #
 # 各 .svg から、同じ basename の .png を同じディレクトリに生成する。
 # 目標幅は viewBox 幅か 1200px の大きい方。viewBox のアスペクト比を維持。

@@ -71,12 +71,21 @@ stats47 (47 都道府県統計サイト) 開発で使い込んだ既存スキル
 
 無料記事は等間隔配置: #00 (入口) / #03 (W1 集客) / #08 (W3 拡散)
 
-## ディレクトリ構成
+## ストレージ (2026-06-19 更新)
+
+**docs/31_note記事原稿/ は ephemeral outbox**。記事の SSOT は R2 `note/koumuin-estat-claude-code/<slug>/`。
+このファイル (INDEX.md) と MAGAZINE.md は `.claude/skills/note/koumuin-estat-claude-code/` に移動済み。
+
+- 記事編集: `bash .claude/scripts/note/restore-from-r2.sh <slug>` → docs/31 に展開 → push → CI 削除
+- ドラフト一覧: `.claude/state/note-draft-index.json`
+- 公開済み一覧: `.claude/state/note-published-urls.json`
+
+## ディレクトリ構成 (R2 上)
 
 ```
-docs/31_note記事原稿/koumuin-estat-claude-code/
-├── INDEX.md                            ← 本ファイル
-├── MAGAZINE.md                         ← マガジン設定 (note.com 入稿用)
+R2 note/koumuin-estat-claude-code/<slug>/
+├── draft.md
+├── MAGAZINE.md                         ← マガジン設定 (note.com 入稿用、skills/ 配下に移動済み)
 ├── strategy.md                         ← 公開順 / 集客 / KPI / 撤退条件
 ├── magazine-cover-1280x670.svg         ← マガジン用カバー
 ├── magazine-cover-1280x670.png         ← PNG 変換版 (note 入稿)

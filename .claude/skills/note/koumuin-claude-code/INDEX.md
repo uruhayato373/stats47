@@ -90,11 +90,20 @@ tags: [koumuin, claude-code, draft-index]
 
 > **基礎編 #31 / #32 について (2026-05-21 追加)**: シリーズが「業務ごとのレシピ集」に偏り、横断的な「頼み方・スキル設計」の土台記事が欠けていたため新設。番号は採番の都合で末尾だが、**推奨読書順は #00 → #31 → #32 → use-case 群**。両記事とも無料 (集客上流)。#31 は #04/#05 等の prompt 解説へ、#32 は #07/#22/#23 の skill 解説へ送客する。両記事とも `ready-to-publish`: SVG 3 個 + カバー 2 枚生成済 (cover 重なり検証 pass)、SS は不要 (0 ショット)。note 投稿のみ残。
 
-## ディレクトリ構成
+## ストレージ (2026-06-19 更新)
+
+**docs/31_note記事原稿/ は ephemeral outbox**。記事の SSOT は R2 `note/koumuin-claude-code/<slug>/`。
+このファイル (INDEX.md) と MAGAZINE.md は `.claude/skills/note/koumuin-claude-code/` に移動済み。
+
+- 記事編集: `bash .claude/scripts/note/restore-from-r2.sh <slug>` → docs/31 に展開 → push → CI 削除
+- ドラフト一覧: `.claude/state/note-draft-index.json`
+- 公開済み一覧: `.claude/state/note-published-urls.json`
+
+## ディレクトリ構成 (R2 上)
 
 ```
-docs/31_note記事原稿/koumuin-claude-code/
-├── INDEX.md                                 ← 本ファイル
+R2 note/koumuin-claude-code/<slug>/
+├── draft.md
 ├── 00-claude-code-intro-for-public-servants/
 │   ├── draft.md                             ← 導入記事 (ターミナル未経験者向け、無料)
 │   └── images/

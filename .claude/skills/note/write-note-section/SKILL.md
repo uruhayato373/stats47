@@ -200,6 +200,24 @@ docs/31_note記事原稿/<slug>/hashtags.txt
 
 全セクション書き終えたら `/edit-note-draft` へ進む（**必ず別チャットで**）。
 
+## 生成後: R2 同期 (ephemeral outbox フロー)
+
+docs/31 は ephemeral outbox。生成後に note-draft-index.json に登録して push する:
+
+```bash
+node -e "
+const fs=require('fs');
+const f='.claude/state/note-draft-index.json';
+const d=JSON.parse(fs.readFileSync(f,'utf8'));
+d.drafts['<slug>']={vertical:'<vertical>',r2_path:null};
+fs.writeFileSync(f,JSON.stringify(d,null,2)+'\n');
+"
+git add .claude/state/note-draft-index.json docs/31_note記事原稿/<slug>
+git commit -m "note: <slug> ドラフト生成"
+git push origin develop
+# → CI が R2 同期 + docs/31 削除。復元は restore-from-r2.sh <slug>
+```
+
 ## 参照
 
 - note 戦略（SSOT）: `docs/30_note記事企画/note戦略.md`

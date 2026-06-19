@@ -73,7 +73,8 @@ browser-use CLI（Chrome プロファイル経由）で note.com エディタを
 ## 前提条件
 
 1. browser-use CLI がインストール済み
-2. 記事ファイルが存在する: `docs/31_note記事原稿/<vertical>/<slug>/draft.md` または `docs/31_note記事原稿/<slug>/draft.md`（本文ファイル名は `draft.md` に統一。下書き・公開済みとも同じ場所で単一管理）
+2. 記事ファイルが存在する: `docs/31_note記事原稿/<vertical>/<slug>/draft.md` または `docs/31_note記事原稿/<slug>/draft.md`
+   （存在しない場合は先に `bash .claude/scripts/note/restore-from-r2.sh <slug>` で R2 から復元する）
 3. Chrome **Profile 5** で `note.com/stats47` にログイン済み
 4. **有料記事の場合**: frontmatter に `is_paid: true` と `price_jpy: <数値>` を必ず記載。本文には有料境界の目印として `ここから先は有料部分:` 行を入れる（Phase 0 が free/paid に分割するために必要）
 5. **予約投稿**: note プレミアム加入アカウントでのみ可能（通常アカウントでは「日時の設定」が押せない、2026-05-18 確認）
@@ -204,6 +205,8 @@ browser-use --headed --profile "Profile 5" state 2>&1 > /tmp/note-acct.txt
 - `articles` に `"<slug>": { "vertical": "...", "title": "...", "url": "...", "is_paid": ..., "published_at": "YYYY-MM-DD" }` を追記
 - 既に同じ slug があれば URL を上書き更新（再公開時）
 - 下書き保存のみ（公開していない）の場合は記録しない
+- **ドラフト管理中だった場合**: `.claude/state/note-draft-index.json` の `drafts` から同 slug を削除する
+  （`note-published-urls.json` が真実源になるため、draft-index から除去して重複を防ぐ）
 
 この記録は、シリーズの公開状況の真実源であり、マガジンへの記事追加・将来のリンク修正の参照元になる。
 

@@ -156,7 +156,32 @@ function parseFrontmatter(content) {
 async function loadDrafts(docsRoot, vertical) {
   const verticalDir = path.join(docsRoot, vertical);
   if (!fs.existsSync(verticalDir)) {
-    throw new Error(`vertical directory not found: ${verticalDir}`);
+    // ephemeral outbox 化以降は docs/31 が存在しない場合がある
+    // note-published-urls.json / note-draft-index.json を参照してスラッグ一覧を返す
+    const pubFile = path.join(PROJECT_ROOT, ".claude/state/note-published-urls.json");
+    const dftFile = path.join(PROJECT_ROOT, ".claude/state/note-draft-index.json");
+    const slugs = [];
+    if (fs.existsSync(pubFile)) {
+      const pub = JSON.parse(fs.readFileSync(pubFile, "utf8"));
+      for (const [slug, v] of Object.entries(pub.articles || {})) {
+        if (v.vertical === vertical) slugs.push(slug);
+      }
+    }
+    if (fs.existsSync(dftFile)) {
+      const dft = JSON.parse(fs.readFileSync(dftFile, "utf8"));
+      for (const [slug, v] of Object.entries(dft.drafts || {})) {
+        if (v.vertical === vertical) slugs.push(slug);
+      }
+    }
+    if (slugs.length === 0) {
+      throw new Error(
+        `vertical directory not found: ${verticalDir}\n` +
+        `  docs/31 が ephemeral outbox 化されています。restore-from-r2.sh <slug> で復元するか、\n` +
+        `  note-published-urls.json / note-draft-index.json を確認してください。`
+      );
+    }
+    // slug だけ分かる場合は frontmatter なしで返す (タイトル等は state から補完)
+    return slugs.map(slug => ({ dir: slug, slug, title: slug, is_paid: false, price_jpy: 0 }));
   }
   const entries = await fsp.readdir(verticalDir, { withFileTypes: true });
   const drafts = [];

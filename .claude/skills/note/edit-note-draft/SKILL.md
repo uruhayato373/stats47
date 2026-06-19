@@ -25,6 +25,7 @@ note 記事（B/C/D シリーズ）の原稿をチェックし、修正理由付
 ## 引数
 
 - **原稿ファイル**: `docs/31_note記事原稿/<slug>/draft.md`
+  （docs/31 になければ先に `bash .claude/scripts/note/restore-from-r2.sh <slug>` で復元する）
 - **シリーズ**: B / C / D
 - **トーン**: 会話的 / 権威的 / データドリブン
 - **ターゲット読者レベル**: 初心者 / 中級者 / 上級者
@@ -158,11 +159,13 @@ note 記事（B/C/D シリーズ）の原稿をチェックし、修正理由付
 
 `docs/30_note記事企画/note戦略.md` の進捗サマリーテーブルで、該当記事の「執筆」列を更新する。
 
-### 3. 公開状態の扱い（移動しない）
+### 3. 公開状態の扱い（ephemeral outbox）
 
-公開しても記事を**物理移動しない**（2026-06-15 に旧 `32_note公開済み/` を `31_note記事原稿/` に統合）。記事は常に `docs/31_note記事原稿/` に置いたまま、状態は frontmatter `status: draft | published` と `.claude/state/note-published-urls.json`（slug→URL の真実源）で表す。これにより記事間の相対リンク（`../<slug>/...`）が公開後も切れない。運用ルールの詳細は `publish-note` スキルの「記事ディレクトリの運用ルール」を参照。
+**docs/31 は ephemeral outbox（2026-06-19 正典）**。記事の SSOT は R2 `note/<vertical>/<slug>/`。
 
-旧ルール（公開後 `.local/r2/note/` へコピーし docs/ を削除）は廃止。note 記事は note.com がホストし、ソースは docs/ に git 管理で残す（R2 は使わない）。
+- 編集完了後は `develop push` → `sync-note-r2.yml` が R2 再同期 + docs/31 自動削除
+- 記事 SSOT（draft.md / images / hashtags.txt）は **R2 が保持**する
+- 運用ルールの詳細は `publish-note` スキルの「記事ディレクトリの運用ルール」を参照
 
 ### 4. note.com への投稿手順
 

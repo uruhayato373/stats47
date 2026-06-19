@@ -518,6 +518,28 @@ cp .local/r2/sns/ranking/<RANKING_KEY>/note/images/*.png "$ARTICLE_DIR/"
 - [ ] `tags.txt` が生成されている（最大99個、1行1タグ）
 - [ ] **数値情報に（）を使っていない — 文中に自然に組み込まれている**
 
+## 生成後: R2 同期 (ephemeral outbox フロー)
+
+生成した記事を R2 SSOT に登録し、docs/31 を CI に削除させる:
+
+```bash
+# 1. note-draft-index.json に slug を追記 (vertical は stats47-note)
+node -e "
+const fs=require('fs');
+const f='.claude/state/note-draft-index.json';
+const d=JSON.parse(fs.readFileSync(f,'utf8'));
+d.drafts['a-<RANKING_KEY>']={vertical:'stats47-note',r2_path:null};
+fs.writeFileSync(f,JSON.stringify(d,null,2)+'\n');
+console.log('追記完了');
+"
+# 2. develop に push → sync-note-r2.yml が R2 同期 + docs/31 削除
+git add .claude/state/note-draft-index.json docs/31_note記事原稿/a-<RANKING_KEY>
+git commit -m "note: a-<RANKING_KEY> ドラフト生成 + R2 同期キュー"
+git push origin develop
+```
+
+cloud Claude Code で編集を続ける場合は `restore-from-r2.sh a-<RANKING_KEY>` で復元する。
+
 ## 量産のコツ
 
 - ビューが見込めるカテゴリから優先: population > economy > health > education > landweather
