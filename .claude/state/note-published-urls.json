@@ -9,7 +9,8 @@
       "title": "自治体職員のためのGIS入門 — 無料の国土数値情報で「過疎地域×医療機関」を可視化する",
       "url": "https://note.com/stats47/n686dcc017bbe",
       "is_paid": false,
-      "published_at": "2026-06-06"
+      "published_at": "2026-06-06",
+      "r2_path": "note/koumuin-gis/koumuin-gis-01-depopulation-medical"
     },
     "00-claude-code-intro-for-public-servants": {
       "vertical": "koumuin-claude-code",
@@ -17,7 +18,8 @@
       "url": "https://note.com/stats47/n/n455ec72c5d62",
       "is_paid": false,
       "published_at": "2026-05-20",
-      "updated_at": "2026-05-21"
+      "updated_at": "2026-05-21",
+      "r2_path": "note/koumuin-claude-code/00-claude-code-intro-for-public-servants"
     },
     "01-claude-code-setup-complete": {
       "vertical": "koumuin-claude-code",
@@ -26,7 +28,8 @@
       "is_paid": true,
       "price_jpy": 300,
       "published_at": "2026-05-21",
-      "updated_at": "2026-05-21"
+      "updated_at": "2026-05-21",
+      "r2_path": "note/koumuin-claude-code/01-claude-code-setup-complete"
     },
     "_comment_batch1": "2026-05-21 batch1 update: #01-#05 を update モードで再更新 (カバー差し替え・本文再ペースト・画像再挿入・有料境界再設定・マガジン追加)",
     "02-internal-network-workarounds": {
@@ -36,7 +39,8 @@
       "is_paid": false,
       "price_jpy": 0,
       "published_at": "2026-05-21",
-      "updated_at": "2026-05-21"
+      "updated_at": "2026-05-21",
+      "r2_path": "note/koumuin-claude-code/02-internal-network-workarounds"
     },
     "03-it-dept-security-doc": {
       "vertical": "koumuin-claude-code",
@@ -45,7 +49,8 @@
       "is_paid": true,
       "price_jpy": 300,
       "published_at": "2026-05-21",
-      "updated_at": "2026-05-21"
+      "updated_at": "2026-05-21",
+      "r2_path": "note/koumuin-claude-code/03-it-dept-security-doc"
     },
     "04-meeting-minutes-30min-to-5min": {
       "vertical": "koumuin-claude-code",
@@ -54,7 +59,8 @@
       "is_paid": false,
       "price_jpy": 0,
       "published_at": "2026-05-21",
-      "updated_at": "2026-05-21"
+      "updated_at": "2026-05-21",
+      "r2_path": "note/koumuin-claude-code/04-meeting-minutes-30min-to-5min"
     },
     "05-assembly-answer-prompts": {
       "vertical": "koumuin-claude-code",
@@ -63,7 +69,8 @@
       "is_paid": true,
       "price_jpy": 300,
       "published_at": "2026-05-21",
-      "updated_at": "2026-05-21"
+      "updated_at": "2026-05-21",
+      "r2_path": "note/koumuin-claude-code/05-assembly-answer-prompts"
     },
     "06-ordinance-revision-review": {
       "vertical": "koumuin-claude-code",
@@ -71,21 +78,24 @@
       "url": "https://note.com/stats47/n/ne23e18ce9289",
       "is_paid": true,
       "price_jpy": 300,
-      "published_at": "2026-05-21"
+      "published_at": "2026-05-21",
+      "r2_path": "note/koumuin-claude-code/06-ordinance-revision-review"
     },
     "31-claude-code-how-to-ask": {
       "vertical": "koumuin-claude-code",
       "title": "Claude Code への頼み方 — 公務員業務で「欲しいもの」を引き出すプロンプトの型",
       "url": "https://note.com/stats47/n/n159230eb514c",
       "is_paid": false,
-      "published_at": "2026-05-21"
+      "published_at": "2026-05-21",
+      "r2_path": "note/koumuin-claude-code/31-claude-code-how-to-ask"
     },
     "32-claude-skills-getting-started": {
       "vertical": "koumuin-claude-code",
       "title": ".claude/skills 入門 — 一度うまくいった頼み方を職場の資産にする",
       "url": "https://note.com/stats47/n/nac5e44284865",
       "is_paid": false,
-      "published_at": "2026-05-21"
+      "published_at": "2026-05-21",
+      "r2_path": "note/koumuin-claude-code/32-claude-skills-getting-started"
     },
     "07-official-doc-skills": {
       "vertical": "koumuin-claude-code",
@@ -93,7 +103,8 @@
       "url": "https://note.com/stats47/n/n1c78ab40901f",
       "is_paid": true,
       "published_at": "2026-05-21",
-      "price_jpy": 300
+      "price_jpy": 300,
+      "r2_path": "note/koumuin-claude-code/07-official-doc-skills"
     },
     "08-proposal-doc-checklist-20": {
       "vertical": "koumuin-claude-code",
@@ -101,21 +112,24 @@
       "url": "https://note.com/stats47/n/n59c27bbc973e",
       "is_paid": true,
       "published_at": "2026-05-21",
-      "price_jpy": 300
+      "price_jpy": 300,
+      "r2_path": "note/koumuin-claude-code/08-proposal-doc-checklist-20"
     },
     "09-assembly-question-points": {
       "vertical": "koumuin-claude-code",
       "title": "議会一般質問の論点整理を 1 時間 → 10 分にする方法",
       "url": "https://note.com/stats47/n/nc276079a5317",
       "is_paid": false,
-      "published_at": "2026-05-21"
+      "published_at": "2026-05-21",
+      "r2_path": "note/koumuin-claude-code/09-assembly-question-points"
     },
     "10-ai-without-personal-info": {
       "vertical": "koumuin-claude-code",
       "title": "個人情報を Claude に送らずに AI 活用する 3 つの設定",
       "url": "https://note.com/stats47/n/n9b2109c9f964",
       "is_paid": false,
-      "published_at": "2026-05-21"
+      "published_at": "2026-05-21",
+      "r2_path": "note/koumuin-claude-code/10-ai-without-personal-info"
     },
     "11-hooks-personal-info-masking": {
       "vertical": "koumuin-claude-code",
@@ -123,7 +137,8 @@
       "url": "https://note.com/stats47/n/ne54920337944",
       "is_paid": true,
       "published_at": "2026-05-21",
-      "price_jpy": 300
+      "price_jpy": 300,
+      "r2_path": "note/koumuin-claude-code/11-hooks-personal-info-masking"
     },
     "12-audit-ready-settings": {
       "vertical": "koumuin-claude-code",
@@ -131,7 +146,8 @@
       "url": "https://note.com/stats47/n/nc53fa60114f8",
       "is_paid": true,
       "published_at": "2026-05-21",
-      "price_jpy": 300
+      "price_jpy": 300,
+      "r2_path": "note/koumuin-claude-code/12-audit-ready-settings"
     },
     "13-ollama-offline-local-llm": {
       "vertical": "koumuin-claude-code",
@@ -139,14 +155,16 @@
       "url": "https://note.com/stats47/n/n1e72ba0b4a43",
       "is_paid": true,
       "price_jpy": 300,
-      "published_at": "2026-05-22"
+      "published_at": "2026-05-22",
+      "r2_path": "note/koumuin-claude-code/13-ollama-offline-local-llm"
     },
     "14-excel-budget-aggregation": {
       "vertical": "koumuin-claude-code",
       "title": "Excel 予算ファイルを Claude Code で集計 (pandas / DuckDB 経由)",
       "url": "https://note.com/stats47/n/nc6e02fbe6073",
       "is_paid": false,
-      "published_at": "2026-05-22"
+      "published_at": "2026-05-22",
+      "r2_path": "note/koumuin-claude-code/14-excel-budget-aggregation"
     },
     "15-data-preprocessing-intro": {
       "vertical": "koumuin-claude-code",
@@ -154,7 +172,8 @@
       "url": "https://note.com/stats47/n/naf04e81afb7b",
       "is_paid": true,
       "price_jpy": 300,
-      "published_at": "2026-05-22"
+      "published_at": "2026-05-22",
+      "r2_path": "note/koumuin-claude-code/15-data-preprocessing-intro"
     },
     "16-subsidy-doc-consistency": {
       "vertical": "koumuin-claude-code",
@@ -164,7 +183,8 @@
       "price_jpy": 300,
       "published_at": "2026-05-22",
       "updated_at": "2026-06-16",
-      "update_note": "ですます化+画像4枚再挿入+有料ライン(有料セクション1直前)再設定。境界screenshot検証済"
+      "update_note": "ですます化+画像4枚再挿入+有料ライン(有料セクション1直前)再設定。境界screenshot検証済",
+      "r2_path": "note/koumuin-claude-code/16-subsidy-doc-consistency"
     },
     "17-year-on-year-analysis": {
       "vertical": "koumuin-claude-code",
@@ -173,7 +193,8 @@
       "is_paid": true,
       "price_jpy": 300,
       "published_at": "2026-05-22",
-      "updated_at": "2026-06-16"
+      "updated_at": "2026-06-16",
+      "r2_path": "note/koumuin-claude-code/17-year-on-year-analysis"
     },
     "18-pr-magazine-rewrite": {
       "vertical": "koumuin-claude-code",
@@ -182,7 +203,8 @@
       "is_paid": true,
       "price_jpy": 300,
       "published_at": "2026-05-22",
-      "updated_at": "2026-06-16"
+      "updated_at": "2026-06-16",
+      "r2_path": "note/koumuin-claude-code/18-pr-magazine-rewrite"
     },
     "00-estat-claude-code-intro": {
       "vertical": "koumuin-estat-claude-code",
@@ -191,7 +213,8 @@
       "is_paid": false,
       "published_at": "2026-06-14",
       "updated_at": "2026-06-15",
-      "update_note": "ですます化 + 画像2枚再挿入 + 全文無料ライン(末尾)"
+      "update_note": "ですます化 + 画像2枚再挿入 + 全文無料ライン(末尾)",
+      "r2_path": "note/koumuin-estat-claude-code/00-estat-claude-code-intro"
     },
     "01-estat-api-key-setup": {
       "vertical": "koumuin-estat-claude-code",
@@ -200,7 +223,8 @@
       "is_paid": true,
       "published_at": "2026-06-14",
       "price_jpy": 300,
-      "updated_at": "2026-06-16"
+      "updated_at": "2026-06-16",
+      "r2_path": "note/koumuin-estat-claude-code/01-estat-api-key-setup"
     },
     "02-search-estat-statsdataid": {
       "vertical": "koumuin-estat-claude-code",
@@ -209,7 +233,8 @@
       "is_paid": true,
       "published_at": "2026-06-14",
       "price_jpy": 300,
-      "updated_at": "2026-06-16"
+      "updated_at": "2026-06-16",
+      "r2_path": "note/koumuin-estat-claude-code/02-search-estat-statsdataid"
     },
     "03-fetch-prefecture-ranking": {
       "vertical": "koumuin-estat-claude-code",
@@ -218,7 +243,8 @@
       "is_paid": false,
       "published_at": "2026-06-14",
       "updated_at": "2026-06-16",
-      "update_note": "ですます化 + 画像3枚再挿入"
+      "update_note": "ですます化 + 画像3枚再挿入",
+      "r2_path": "note/koumuin-estat-claude-code/03-fetch-prefecture-ranking"
     },
     "04-excel-download-and-parse": {
       "vertical": "koumuin-estat-claude-code",
@@ -227,7 +253,8 @@
       "is_paid": true,
       "published_at": "2026-06-14",
       "price_jpy": 300,
-      "updated_at": "2026-06-16"
+      "updated_at": "2026-06-16",
+      "r2_path": "note/koumuin-estat-claude-code/04-excel-download-and-parse"
     },
     "05-pandas-duckdb-derived-metrics": {
       "vertical": "koumuin-estat-claude-code",
@@ -236,7 +263,8 @@
       "is_paid": true,
       "published_at": "2026-06-14",
       "price_jpy": 300,
-      "updated_at": "2026-06-16"
+      "updated_at": "2026-06-16",
+      "r2_path": "note/koumuin-estat-claude-code/05-pandas-duckdb-derived-metrics"
     },
     "06-prefecture-code-and-merge": {
       "vertical": "koumuin-estat-claude-code",
@@ -245,7 +273,8 @@
       "is_paid": true,
       "published_at": "2026-06-14",
       "price_jpy": 300,
-      "updated_at": "2026-06-16"
+      "updated_at": "2026-06-16",
+      "r2_path": "note/koumuin-estat-claude-code/06-prefecture-code-and-merge"
     },
     "07-year-on-year-diff": {
       "vertical": "koumuin-estat-claude-code",
@@ -254,7 +283,8 @@
       "is_paid": true,
       "published_at": "2026-06-14",
       "price_jpy": 300,
-      "updated_at": "2026-06-16"
+      "updated_at": "2026-06-16",
+      "r2_path": "note/koumuin-estat-claude-code/07-year-on-year-diff"
     },
     "08-benchmark-table-5min": {
       "vertical": "koumuin-estat-claude-code",
@@ -263,7 +293,8 @@
       "is_paid": false,
       "published_at": "2026-06-14",
       "updated_at": "2026-06-16",
-      "update_note": "ですます化 + 画像3枚再挿入 (本文パイプ表は元から literal=要画像化・別タスク)"
+      "update_note": "ですます化 + 画像3枚再挿入 (本文パイプ表は元から literal=要画像化・別タスク)",
+      "r2_path": "note/koumuin-estat-claude-code/08-benchmark-table-5min"
     },
     "09-assembly-chart-generation": {
       "vertical": "koumuin-estat-claude-code",
@@ -272,7 +303,8 @@
       "is_paid": true,
       "published_at": "2026-06-14",
       "price_jpy": 300,
-      "updated_at": "2026-06-16"
+      "updated_at": "2026-06-16",
+      "r2_path": "note/koumuin-estat-claude-code/09-assembly-chart-generation"
     },
     "10-claude-skills-routinize": {
       "vertical": "koumuin-estat-claude-code",
@@ -281,7 +313,8 @@
       "is_paid": true,
       "published_at": "2026-06-14",
       "price_jpy": 300,
-      "updated_at": "2026-06-16"
+      "updated_at": "2026-06-16",
+      "r2_path": "note/koumuin-estat-claude-code/10-claude-skills-routinize"
     },
     "11-mcp-sqlite-search": {
       "vertical": "koumuin-estat-claude-code",
@@ -290,7 +323,8 @@
       "is_paid": true,
       "published_at": "2026-06-14",
       "price_jpy": 300,
-      "updated_at": "2026-06-16"
+      "updated_at": "2026-06-16",
+      "r2_path": "note/koumuin-estat-claude-code/11-mcp-sqlite-search"
     },
     "19-faq-auto-generation": {
       "vertical": "koumuin-claude-code",
@@ -298,7 +332,8 @@
       "url": "https://note.com/stats47/n/nb149e4940b5f",
       "is_paid": false,
       "price_jpy": 0,
-      "published_at": "2026-06-16"
+      "published_at": "2026-06-16",
+      "r2_path": "note/koumuin-claude-code/19-faq-auto-generation"
     },
     "20-complaint-reply-patterns": {
       "vertical": "koumuin-claude-code",
@@ -306,7 +341,8 @@
       "url": "https://note.com/stats47/n/n311eeeba660b",
       "is_paid": true,
       "price_jpy": 300,
-      "published_at": "2026-06-16"
+      "published_at": "2026-06-16",
+      "r2_path": "note/koumuin-claude-code/20-complaint-reply-patterns"
     },
     "21-disaster-sns-multilang": {
       "vertical": "koumuin-claude-code",
@@ -314,7 +350,8 @@
       "url": "https://note.com/stats47/n/nf01a62d2dc16",
       "is_paid": true,
       "price_jpy": 300,
-      "published_at": "2026-06-16"
+      "published_at": "2026-06-16",
+      "r2_path": "note/koumuin-claude-code/21-disaster-sns-multilang"
     }
   },
   "batch2_update": "2026-05-21: koumuin #07-#12 を新規公開 (バッチ2)。有料4記事 (#07/#08/#11/#12 各¥300) は有料エリア境界を この続きは有料パートです 直前に設定、無料2記事 (#09/#10) は試し読みラインを記事末尾に設定 (全文無料)。本文画像を全挿入 (#07:5 / #08:5 / #09:5 / #10:4 / #11:7 / #12:5 枚)、全6本をマガジン 公務員×Claude Code実務活用ガイド に追加。#11/#12 で **「」** 形式の太字が note 上で literal ** として残る軽微なレンダリング崩れあり (本文内容は完全、bold スタイルのみ欠落)。",
