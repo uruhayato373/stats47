@@ -144,7 +144,7 @@ metric 選定 (GSC ギャップ/トレンド/カテゴリ/ユーザー指示)
 
 | restoreMethod | 枚数 | 手法 |
 |---|---|---|
-| `source-backfill` | 87 | 既存 json を SSOT に対応付け → `source.json` 後付け (再生成不要・最軽) |
+| `source-backfill` | 87 | 既存 json を SSOT に対応付け → `source.json` 後付け (`backfill-source.mjs`、再生成不要・最軽)。json の値を SSOT照合・埋め込み rankingKey 優先。県キーは areaName/pref/name 対応 |
 | `ssot-restore` | 99 | ranking/tilemap の元データ消失 → `regenerate-tile-maps.ts` / `regenerate-ranking-cards.mjs` で SSOT復元 |
 | `ssot-restore-new` | 169 | scatter/line/findings の元データ消失 → 復元手法 (SSOT照合) の新規実装が要る |
 | `manual` | 76 | 無意味名 (`inline-chart-N`) ・型不明 → 個別手当て |

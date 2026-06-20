@@ -89,7 +89,7 @@ SVG 612枚の棚卸しで **56% が元データ消失（絵だけ）** と判明
 手順:
 1. `node .claude/scripts/blog/build-lineage-queue.mjs` で棚卸し → `svg-lineage-queue.json` 更新（真実源）
 2. `restoreMethod` 別に軽い順で消化:
-   - `source-backfill`: 既存 json を SSOT に対応付け → `source.json` 後付け（最軽・再生成不要）
+   - `source-backfill`: 既存 json を SSOT に対応付け → `source.json` 後付け（`backfill-source.mjs`、最軽・再生成不要）
    - `ssot-restore`: ranking/tilemap → `regenerate-tile-maps.ts` / `regenerate-ranking-cards.mjs` で SSOT復元
    - `ssot-restore-new`: scatter/line/findings → 復元手法を新規実装（SSOT照合・自己検算）
    - `manual`: 無意味名 → 個別手当て
