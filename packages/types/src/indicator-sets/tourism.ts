@@ -4,7 +4,7 @@ export const TOURISM_SET: IndicatorSet = {
   key: "tourism",
   title: "観光",
   description:
-    "都道府県別の宿泊者数・外国人宿泊者数・客室稼働率を地図とランキングで比較。観光需要の地域差を47都道府県のデータで確認できます。",
+    "都道府県別の宿泊者数・外国人宿泊者数・客室稼働率をランキングとチャートで比較。観光需要の地域差を47都道府県のデータで確認できます。",
   category: "tourism",
   usage: "theme",
   metrics: [

@@ -1,5 +1,6 @@
 # Memory Index
 
+- [project_blog_svg_lineage_enforcement.md](project_blog_svg_lineage_enforcement.md) — ブログSVG「1画像=1設定ファイル」徹底(2026-06-20)。612枚中56%が元データ消失=絵だけ。再発防止: generate-article-charts が source.json セット出力+inline も+quality-gate blocker。復元: svg-lineage-queue.json(restoreMethod別)、backfill-source(ranking/line照合n>=3 verified50枚)、ssot-restore(tilemap62枚済)。系譜38%。残りincomplete37/ssot-restore99/new169/manual76はagent特定。正典 blog-data-schema.md §1.7、担当 chart-author
 - [feedback_no_deploy_per_iteration.md](feedback_no_deploy_per_iteration.md) — 変更のたびに本番デプロイしない(CI+deploy 各6-8分=無駄)。UI/ロジック反復は localhost(npm run dev:web)で確認し、まとまりで1回だけデプロイ。デプロイは明示指示 or 本番固有問題の検証時のみ、かつ実行前に確認。2026-06-20 に7回デプロイして指摘された
 
 - [feedback_cloudflare_workers_env_r2_skip.md](feedback_cloudflare_workers_env_r2_skip.md) — 本番Workerでテーマが「データの取得に失敗」/home featured空/ranking SSR空 → wrangler.toml [env.production.vars] の CLOUDFLARE_WORKERS="true" を疑う。shouldSkipRemoteR2Read が CLOUDFLARE_WORKERS≠true かつ CI/S3creds/R2_PUBLIC_FETCH_URL 無しで true(skip)→snapshot reader が黙って空ok([])→loadThemeData null。tail でOkだがエラーログ無し=throwでなく空。テーマは R2 app/ranking/<key>/values.json のみ読む(e-Stat廃止)+force-dynamic必須。2026-06-20 根治

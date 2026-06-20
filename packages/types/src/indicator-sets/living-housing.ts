@@ -4,7 +4,7 @@ export const LIVING_HOUSING_SET: IndicatorSet = {
   key: "living-housing",
   title: "暮らし・住まい",
   description:
-    "都道府県別の空き家比率・持ち家比率・世帯構造・人口密度を地図とランキングで比較。暮らしの地域差を47都道府県のデータで確認できます。",
+    "都道府県別の空き家比率・持ち家比率・世帯構造・人口密度をランキングとチャートで比較。暮らしの地域差を47都道府県のデータで確認できます。",
   category: "lifestyle",
   usage: "theme",
   metrics: [

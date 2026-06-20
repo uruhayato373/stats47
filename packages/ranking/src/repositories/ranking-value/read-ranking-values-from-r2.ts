@@ -11,6 +11,7 @@ import {
   rankingValuesKeyPath,
   type RankingValuesKeySnapshot,
 } from "../../types/snapshot";
+import { parseRankingValuesKeySnapshot } from "../schemas/ranking-values.schemas";
 
 const STALE_AFTER_DAYS = 90;
 
@@ -29,13 +30,14 @@ async function loadRankingValuesForKey(
   areaType: string,
 ): Promise<RankingValuesKeySnapshot | null> {
   const path = rankingValuesKeyPath(rankingKey, areaType);
-  const snapshot = await fetchFromR2AsJson<RankingValuesKeySnapshot>(path);
+  const data = await fetchFromR2AsJson<unknown>(path);
 
-  if (!snapshot) {
+  if (!data) {
     logger.warn({ rankingKey, areaType, path }, "ranking-values snapshot が R2 に存在しません");
     return null;
   }
 
+  const snapshot = parseRankingValuesKeySnapshot(data);
   warnIfStale(snapshot.generatedAt, rankingKey, areaType);
   return snapshot;
 }
@@ -136,8 +138,10 @@ export async function readNormalizedRankingValuesFromR2(
 ): Promise<Result<RankingValue[], Error>> {
   try {
     const path = rankingNormalizedValuesKeyPath(rankingKey, normType);
-    const snapshot = await fetchFromR2AsJson<RankingValuesKeySnapshot>(path);
-    if (!snapshot) return ok([]);
+    const data = await fetchFromR2AsJson<unknown>(path);
+    if (!data) return ok([]);
+
+    const snapshot = parseRankingValuesKeySnapshot(data);
 
     const normalizedYear = yearCode.slice(0, 4);
     const partition = snapshot.partitions.find((p) => p.yearCode.slice(0, 4) === normalizedYear);
@@ -165,8 +169,10 @@ export async function readAllYearsNormalizedRankingValuesFromR2(
 ): Promise<Result<RankingValue[], Error>> {
   try {
     const path = rankingNormalizedValuesKeyPath(rankingKey, normType);
-    const snapshot = await fetchFromR2AsJson<RankingValuesKeySnapshot>(path);
-    if (!snapshot) return ok([]);
+    const data = await fetchFromR2AsJson<unknown>(path);
+    if (!data) return ok([]);
+
+    const snapshot = parseRankingValuesKeySnapshot(data);
 
     const all: RankingValue[] = [];
     for (const partition of snapshot.partitions) {

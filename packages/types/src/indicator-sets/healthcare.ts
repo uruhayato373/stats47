@@ -4,7 +4,7 @@ export const HEALTHCARE_SET: IndicatorSet = {
   key: "healthcare",
   title: "医療・健康",
   description:
-    "都道府県別の医師数・病院数・病床数・国民医療費を地図とランキングで比較。医療体制の地域差を47都道府県のデータで確認できます。",
+    "都道府県別の医師数・病院数・病床数・国民医療費をランキングとチャートで比較。医療体制の地域差を47都道府県のデータで確認できます。",
   category: "welfare",
   usage: "theme",
   metrics: [

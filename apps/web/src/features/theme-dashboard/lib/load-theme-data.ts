@@ -89,9 +89,12 @@ export async function loadThemeData(
 
   if (validItems.length === 0) return null;
 
-  // 2. 全指標のデータ + TopoJSON を並列取得
-  const topologyPromise =
-    areaType === "city"
+  // 2. 全指標のデータ + TopoJSON を並列取得。
+  //    hideMap テーマは地図を描画しないため、巨大な GIS topology を fetch しない
+  //    (無駄なメモリ消費で dev/本番ともに負荷増・OOM の原因になる。2026-06-20)。
+  const topologyPromise = theme.hideMap
+    ? Promise.resolve(null)
+    : areaType === "city"
       ? fetchAllCitiesTopology().catch((error) => {
           logger.error({ error }, "テーマダッシュボード: city topology取得失敗");
           return null;

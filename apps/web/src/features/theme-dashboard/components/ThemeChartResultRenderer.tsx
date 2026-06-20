@@ -91,12 +91,9 @@ function LineResultChart({ chart, result }: { chart: PageComponent; result: Line
     return <ChartEmptyState message="時系列データがありません" />;
   }
 
-  const showLatestValues =
-    (chart.componentProps as Record<string, unknown>)?.showLatestValues === true;
-
   return (
     <>
-      <LineChartClient chartData={data} showLatestValues={showLatestValues} />
+      <LineChartClient chartData={data} showLatestValues={result.showLatestValues === true} />
       <ChartSourceNote sourceName={chart.sourceName} />
     </>
   );
@@ -211,14 +208,10 @@ function CompositionResultChart({
   result: CompositionResult;
 }) {
   const { data } = result;
-  const defaultTab = (chart.componentProps as Record<string, unknown>)?.defaultTab as
-    | "composition"
-    | "trend"
-    | undefined;
 
   return (
     <>
-      <CompositionChartClient chartData={data} defaultTab={defaultTab} />
+      <CompositionChartClient chartData={data} defaultTab={result.defaultTab} />
       <ChartSourceNote sourceName={chart.sourceName} />
     </>
   );

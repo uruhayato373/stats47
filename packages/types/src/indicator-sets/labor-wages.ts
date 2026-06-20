@@ -4,7 +4,7 @@ export const LABOR_WAGES_SET: IndicatorSet = {
   key: "labor-wages",
   title: "労働・賃金",
   description:
-    "都道府県別の最低賃金・初任給・有効求人倍率・失業率・男女賃金格差を地図とランキングで比較。労働市場の地域差を47都道府県のデータで確認できます。",
+    "都道府県別の最低賃金・初任給・有効求人倍率・失業率・男女賃金格差をランキングとチャートで比較。労働市場の地域差を47都道府県のデータで確認できます。",
   category: "economy",
   usage: "theme",
   metrics: [

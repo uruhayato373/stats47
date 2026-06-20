@@ -4,7 +4,7 @@ export const LOCAL_ECONOMY_SET: IndicatorSet = {
   key: "local-economy",
   title: "地域経済",
   description:
-    "都道府県別のGDP・県民所得・産業構造・雇用・財政を地図とランキングで比較。県内総生産、有効求人倍率、製造品出荷額、財政力指数など主要経済指標の推移を47都道府県のデータで確認できます。",
+    "都道府県別のGDP・県民所得・産業構造・雇用・財政をランキングとチャートで比較。県内総生産、有効求人倍率、製造品出荷額、財政力指数など主要経済指標の推移を47都道府県のデータで確認できます。",
   category: "economy",
   usage: "theme",
   metrics: [

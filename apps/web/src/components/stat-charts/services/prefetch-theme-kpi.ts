@@ -26,12 +26,11 @@ export async function prefetchThemeKpiData(
 
   await Promise.all(
     kpiCharts.map(async (chart) => {
-      const props = chart.componentProps as Record<string, unknown>;
-      const estatParams = props.estatParams as GetStatsDataParams | undefined;
-      if (!estatParams?.statsDataId) return;
+      const props = parseKpiCardProps(chart.componentProps);
+      if (!props) return;
 
       try {
-        const response = await fetchEstatDataAllAreas(estatParams);
+        const response = await fetchEstatDataAllAreas(props.estatParams);
         if ("error" in response) return;
 
         // areaCode ごとにグループ化
@@ -48,7 +47,7 @@ export async function prefetchThemeKpiData(
           areaKpis[areaCode] = {
             title: chart.title,
             value: kpi.value,
-            unit: kpi.unit ?? (props.unit as string) ?? "",
+            unit: kpi.unit ?? props.unit ?? "",
             year: kpi.year,
             changeRate: kpi.changeRate,
             changeDirection: kpi.changeDirection,
@@ -66,4 +65,20 @@ export async function prefetchThemeKpiData(
   );
 
   return results;
+}
+
+function parseKpiCardProps(
+  props: Record<string, unknown>,
+): { estatParams: GetStatsDataParams; unit?: string } | null {
+  if (!isRecord(props.estatParams)) return null;
+  if (typeof props.estatParams.statsDataId !== "string") return null;
+
+  return {
+    estatParams: props.estatParams as unknown as GetStatsDataParams,
+    unit: typeof props.unit === "string" ? props.unit : undefined,
+  };
+}
+
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return typeof value === "object" && value !== null && !Array.isArray(value);
 }

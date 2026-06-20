@@ -11,9 +11,9 @@ import {
 } from "../actions";
 
 export type ThemeChartResult =
-  | { type: "line"; data: LineChartData }
+  | { type: "line"; data: LineChartData; showLatestValues?: boolean }
   | { type: "mixed"; data: MixedChartData }
-  | { type: "composition"; data: CompositionChartData }
+  | { type: "composition"; data: CompositionChartData; defaultTab?: "composition" | "trend" }
   | { type: "donut"; data: DonutChartItem[] }
   | { type: "cpi-profile"; data: CpiProfileItem[] }
   | { type: "cpi-heatmap"; data: CpiHeatmapItem[] }
