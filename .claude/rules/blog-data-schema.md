@@ -49,6 +49,56 @@ metric 選定 (GSC ギャップ/トレンド/カテゴリ/ユーザー指示)
 
 **Phase B での migration**: `.claude/scripts/blog/migrate-data-schema.mjs` で flat / nested / timeseries → 統一 schema に一括変換。
 
+## 1.5 ランキングチャートのデータ系譜 + カード型 (2026-06-20 確定) ★
+
+ブログのランキングチャートは **「いつでも復元できる系譜」+「カード型固定」** を必須とする。
+今日まで data JSON が R2 で SVG と名前ドリフトし再生成不能になっていた事故の根治策。
+
+### 3点セット (1 ランキング = basename 共通の 3 ファイル)
+
+| ファイル | 役割 | 必須 |
+|---|---|---|
+| `data/<name>.source.json` | **出典 manifest**（復元用） | ✅ |
+| `data/<name>.json` | 型付きデータ（§1 統一 schema） | ✅ |
+| `data/<name>.svg`（横長）+ `data/<name>-ig.svg`（縦長） | データから決定的生成 | ✅ |
+
+- **永続SSOT = R2 `app/blog/<slug>/data/`**（作業中は docs/21、公開後は R2 のみ）。3点とも R2 に残す。
+- **basename はドリフトさせない**。SVG は必ず data JSON から再生成し、SVG だけ改名しない。
+
+### 出典 manifest の schema（SSOT配慮: e-Stat 生 param を複製しない）
+
+データの真実源は **metric config (git TS) → e-Stat → R2 `app/ranking`/`app/stats`**。manifest はそこを**参照**するだけにし、生 param を blog 側に複製して二重 SSOT を作らない。
+
+```jsonc
+// ranking 由来（大多数）— rankingKey を参照、生paramは持たない
+{ "kind": "ranking", "rankingKey": "<key>", "year": "2020", "unit": "％", "label": "...",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/<key>/values.json",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug <slug> --keys <key> --data-name <name>" }
+
+// metric 化していない e-Stat 直叩き — ここで初めて statsDataId + params を保存
+{ "kind": "estat", "statsDataId": "0003448237", "params": {…}, "year": "2023", "transform": "top5+bottom5" }
+
+// 手動/外部 — データ自体が唯一の源
+{ "kind": "manual", "source": "総務省 決算カード 2022 (URL)" }
+```
+
+> `.source.json` は **観測値ではない**ので、`article-factual-check.mjs` / `quality-gate.mjs` の ground truth 索引と `generate-article-charts.ts` のチャート生成からは除外する（実装済: `endsWith(".source.json")` ガード）。
+
+### カード型は2レイアウト・上位5下位5 固定
+
+ランキングは **上位5+下位5 のカード型のみ**（10件は廃止）。1 データから2バリアントを出力:
+
+| 出力 | layout | 用途 | viewBox |
+|---|---|---|---|
+| `<name>.svg`（article.md が参照） | `columns`（横長2列・上位左/下位右） | ブログ本文 + X | `960×404` |
+| `<name>-ig.svg`（SNS専用・未埋め込み） | `portrait`（縦長スタック・上位5↓下位5） | Instagram フィード/リール | `1080×1350`（4:5） |
+
+実装: `fetch-ranking-data-r2.mjs`（取得 + manifest）→ `generate-article-charts.ts`（2レイアウト生成、`packages/svg-builder` の `generateBarChartSvg` `layout:"columns"|"portrait"`）。
+カード型カタログの SSoT は `.claude/rules/blog-svg-chart-standards.md`。
+
+**既存記事の一括再生成**: `.claude/scripts/blog/regenerate-ranking-cards.mjs`。全公開記事を triage（tractable=1ランキング+key解決可 / ambiguous=複数or key無 / no-ranking）し、tractable を SSOT から横長+縦長へ再生成（dry-run=staging `.local/regen-staging`、R2 push はしない）。before/after ギャラリー `/tmp/regen-cards-gallery.html` を出力。R2 反映は別途 `diff-push-r2` で行う。
+
 ## 2. Wave 命名規則
 
 Blog の brushup 施策は **wave 単位** で記録・追跡する。wave は「同一目的・同一日付・同一手法」でまとめた施策のセット。
