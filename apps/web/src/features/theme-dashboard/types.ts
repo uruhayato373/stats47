@@ -76,6 +76,12 @@ export interface ThemeConfig {
    * (例: "depopulation-medical" は healthcare と aging-society の両方で使用)。
    */
   embeddedSections?: string[];
+  /**
+   * 地図を非表示にしカード主役レイアウトにする。
+   * true のとき ThemeDashboardTabbed は地図 (ThemeLeafletMap) を描画せず、
+   * 「全国の主要指標」KPI スタットカード (ThemeMetricsDashboard) を主役として先頭に配置する。
+   */
+  hideMap?: boolean;
 }
 
 /** 指標ごとのプリロード済みデータ */
@@ -90,6 +96,11 @@ export interface ThemeIndicatorData {
    * 表示側は undefined なら都道府県値の単純平均にフォールバックする。
    */
   nationalValue?: number;
+  /**
+   * 全国行 (areaCode "00000") の値の年次推移。カード内 MiniLineChart 用。
+   * 計算型 / city / port 指標など全国行が無い場合は undefined。
+   */
+  nationalSeries?: { year: number; value: number }[];
 }
 
 /** Server → Client に渡す props */

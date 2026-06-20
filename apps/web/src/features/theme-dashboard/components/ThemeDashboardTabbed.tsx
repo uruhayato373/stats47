@@ -1,19 +1,25 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState, useTransition } from "react";
+import { useCallback, useMemo, useState, useTransition } from "react";
 
 import dynamic from "next/dynamic";
 import Link from "next/link";
 
-import { lookupArea } from "@stats47/area";
-import { Skeleton } from "@stats47/components/atoms/ui/skeleton";
+import { fetchPrefectures, lookupArea } from "@stats47/area";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@stats47/components/atoms/ui/select";
 import {
   Tabs,
   TabsContent,
   TabsList,
   TabsTrigger,
 } from "@stats47/components/atoms/ui/tabs";
-import { Map as MapIcon, Table as TableIcon, BarChart3 } from "lucide-react";
+import { Map as MapIcon, Table as TableIcon, BarChart3, MapPin } from "lucide-react";
 
 import { RankingYearSelector } from "@/features/ranking";
 
@@ -21,40 +27,43 @@ import { useBreakpoint } from "@/hooks/useBreakpoint";
 
 import { fetchIndicatorForYearAction } from "../actions";
 
+import { ChartLoading } from "./ChartState";
 import { ScrollableTabsList } from "./ScrollableTabsList";
 import { ThemeMetricsDashboard } from "./ThemeMetricsDashboard";
+import { useThemePrefecture } from "./ThemePrefectureContext";
 
 import type { ThemeDashboardClientProps } from "../types";
 import type { RankingValue } from "@stats47/ranking";
 
+function chartLoading(props: { height?: number; className?: string }) {
+  const ChartLoadingFallback = () => <ChartLoading {...props} />;
+  ChartLoadingFallback.displayName = "ChartLoadingFallback";
+  return ChartLoadingFallback;
+}
+
 const RankingDataTable = dynamic(
   () => import("@/features/ranking/components/RankingDataTable").then((mod) => mod.RankingDataTable),
-  { ssr: false, loading: () => <Skeleton className="h-[360px] w-full rounded-md" /> },
+  { ssr: false, loading: chartLoading({ height: 360 }) },
 );
 
 const ThemeLeafletMap = dynamic(
   () => import("./ThemeLeafletMap").then((mod) => mod.ThemeLeafletMap),
-  { ssr: false, loading: () => <Skeleton className="h-[400px] lg:h-[500px] w-full rounded-md" /> },
+  { ssr: false, loading: chartLoading({ className: "h-[400px] lg:h-[500px]" }) },
 );
 
 const MetricFocusCharts = dynamic(
   () => import("./MetricFocusCharts").then((mod) => mod.MetricFocusCharts),
-  { ssr: false, loading: () => <Skeleton className="h-[420px] w-full rounded-md" /> },
-);
-
-const ThemeCombinationAnalysis = dynamic(
-  () => import("./ThemeCombinationAnalysis").then((mod) => mod.ThemeCombinationAnalysis),
-  { ssr: false, loading: () => <Skeleton className="h-[360px] w-full rounded-md" /> },
+  { ssr: false, loading: chartLoading({ height: 420 }) },
 );
 
 const ThemeYoyCharts = dynamic(
   () => import("./ThemeYoyCharts").then((mod) => mod.ThemeYoyCharts),
-  { ssr: false, loading: () => <Skeleton className="h-[420px] w-full rounded-md" /> },
+  { ssr: false, loading: chartLoading({ height: 420 }) },
 );
 
 const PopulationScatterSection = dynamic(
   () => import("./PopulationScatterSection").then((mod) => mod.PopulationScatterSection),
-  { ssr: false, loading: () => <Skeleton className="h-[360px] w-full rounded-md" /> },
+  { ssr: false, loading: chartLoading({ height: 360 }) },
 );
 
 /**
@@ -100,19 +109,10 @@ export function ThemeDashboardTabbed({
 
   const [isYearPending, startYearTransition] = useTransition();
 
-  // 選択中の都道府県 — URL ?pref=01000 で初期値を受け取れる (areas からのリダイレクト用)
-  // useSearchParams() は SSG で fallback={null} の Suspense を要求して CLS を招くため、
-  // window.location.search を useEffect で読む (MigrationFlowSectionClient と同じパターン)。
-  const [selectedPrefectureCode, setSelectedPrefectureCode] = useState<
-    string | null
-  >(null);
-  useEffect(() => {
-    const p = new URLSearchParams(window.location.search).get("pref");
-    if (p && /^\d{5}$/.test(p)) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setSelectedPrefectureCode(p);
-    }
-  }, []);
+  // 選択中の都道府県は ThemePrefectureContext を単一ソースとして共有する
+  // (H1・セレクタ・ダッシュボードで同期、URL ?pref= も context が同期)。
+  const { selectedPrefectureCode, setSelected: setSelectedPrefectureCode } =
+    useThemePrefecture();
 
   // 現在のタブのデータ
   const currentYear = selectedYearMap[selectedTabKey];
@@ -165,6 +165,35 @@ export function ThemeDashboardTabbed({
     return year?.yearName ?? currentYear;
   }, [currentAvailableYears, currentYear]);
 
+  // 選択中の都道府県名（セレクタ・H1バナー用）
+  const selectedAreaName = useMemo(() => {
+    if (!selectedPrefectureCode) return null;
+    return lookupArea(selectedPrefectureCode)?.areaName ?? null;
+  }, [selectedPrefectureCode]);
+
+  // 都道府県セレクタ（全国 + 47 都道府県）
+  const prefectureSelector = (
+    <PrefectureSelector
+      value={selectedPrefectureCode}
+      onChange={setSelectedPrefectureCode}
+    />
+  );
+
+  // 選択エリアをH1直下に反映するバナー（client-side表示、SSG不変）
+  const areaBanner = selectedAreaName && (
+    <div className="flex items-center gap-2 rounded-md border border-primary/30 bg-primary/5 px-3 py-2 text-sm">
+      <MapPin className="h-4 w-4 text-primary shrink-0" />
+      <span className="font-medium text-primary">{selectedAreaName}の視点</span>
+      <span className="text-muted-foreground text-xs">— データを{selectedAreaName}でフィルタ表示中</span>
+      <Link
+        href={`/areas/${selectedPrefectureCode}`}
+        className="ml-auto text-xs text-primary hover:underline shrink-0"
+      >
+        {selectedAreaName}プロフィール →
+      </Link>
+    </div>
+  );
+
   // --- 共通パーツ ---
 
   const indicatorTabs = (
@@ -208,15 +237,6 @@ export function ThemeDashboardTabbed({
     />
   );
 
-  // 組み合わせ分析 (scatter) — テーマページ独自価値
-  const combinationAnalysisSection = (
-    <ThemeCombinationAnalysis
-      themeConfig={themeConfig}
-      indicatorDataMap={indicatorDataMap}
-      selectedPrefectureCode={selectedPrefectureCode}
-    />
-  );
-
   // フル幅ダッシュボード (KPI カード + 時系列チャート + 考察) — areas スタイル
   const metricsDashboardSection = (
     <ThemeMetricsDashboard
@@ -224,16 +244,35 @@ export function ThemeDashboardTabbed({
       indicatorDataMap={indicatorDataMap}
       pageCharts={pageCharts}
       selectedPrefectureCode={selectedPrefectureCode}
+      mapless={themeConfig.hideMap}
+      cardsOnly={themeConfig.hideMap}
     />
   );
 
   // --- レイアウト ---
 
+  // hideMap: 地図・選択タブ・チャートなし。都道府県セレクタ + KPI カードビュー。
+  if (themeConfig.hideMap) {
+    return (
+      <div className="space-y-4 overflow-hidden">
+        <div className="flex items-center gap-3 flex-wrap">
+          {prefectureSelector}
+        </div>
+        {areaBanner}
+        {metricsDashboardSection}
+      </div>
+    );
+  }
+
   if (isBelowLg) {
     return (
       <div className="space-y-3 min-w-0 overflow-hidden">
         {indicatorTabs}
-        {yearSelector}
+        <div className="flex flex-wrap items-center gap-2">
+          {yearSelector}
+          {prefectureSelector}
+        </div>
+        {areaBanner}
 
         <DeferredTabs
           mapSection={mapSection}
@@ -243,8 +282,6 @@ export function ThemeDashboardTabbed({
               {metricsDashboardSection}
               {/* 県選択時: 選択指標のトレンドを常時可視 */}
               {selectedPrefectureCode && metricFocusSection}
-              {/* テーマ独自の組み合わせ分析 (scatter) */}
-              {combinationAnalysisSection}
               {/* 県未選択時の単独詳細は折りたたみで */}
               {!selectedPrefectureCode && (
                 <DeferredDetails summary="選択指標の単独詳細を表示 (時系列ライン・上下位 5 県)">
@@ -283,30 +320,26 @@ export function ThemeDashboardTabbed({
   // デスクトップ
   return (
     <div className="space-y-4 overflow-hidden">
-      <div className="grid grid-cols-[1fr_380px] gap-4 items-start">
-        {/* 左カラム: タブ + 年度 + 地図 + (県選択時) トレンド + 指標一覧 */}
-        <div className="space-y-3 min-w-0">
-          {indicatorTabs}
+      <div className="space-y-3">
+        {indicatorTabs}
+        <div className="flex flex-wrap items-center gap-3">
           {yearSelector}
-          <div className="sticky top-20">{mapSection}</div>
-          {/* 県選択時: 選択指標のトレンドを常時可視。未選択時は折りたたみ */}
-          {selectedPrefectureCode ? (
-            metricFocusSection
-          ) : (
-            <DeferredDetails summary="選択指標の単独詳細を表示 (時系列ライン・上下位 5 県)">
-              {metricFocusSection}
-            </DeferredDetails>
-          )}
-          <IndicatorGrid
-            rankingKeys={themeConfig.rankingKeys}
-            indicatorDataMap={indicatorDataMap}
-          />
+          {prefectureSelector}
         </div>
-
-        {/* 右カラム: 組み合わせ分析 (scatter) */}
-        <div className="space-y-3">
-          {combinationAnalysisSection}
-        </div>
+        {areaBanner}
+        {mapSection}
+        {/* 県選択時: 選択指標のトレンドを常時可視。未選択時は折りたたみ */}
+        {selectedPrefectureCode ? (
+          metricFocusSection
+        ) : (
+          <DeferredDetails summary="選択指標の単独詳細を表示 (時系列ライン・上下位 5 県)">
+            {metricFocusSection}
+          </DeferredDetails>
+        )}
+        <IndicatorGrid
+          rankingKeys={themeConfig.rankingKeys}
+          indicatorDataMap={indicatorDataMap}
+        />
       </div>
 
       {/* フル幅ダッシュボード (KPI カード + 時系列チャート + 考察) */}
@@ -451,5 +484,46 @@ function DeferredTabs({
         {mountedTabs.has("table") && tableSection}
       </TabsContent>
     </Tabs>
+  );
+}
+
+// --- 都道府県セレクタ ---
+
+/** 全国 + 47 都道府県の選択肢（モジュールレベルで一度だけ計算） */
+const PREFECTURE_OPTIONS = fetchPrefectures().map((p) => ({
+  value: p.prefCode,
+  label: p.prefName,
+}));
+
+/**
+ * 都道府県セレクタ
+ *
+ * value=null のとき「全国」を表示し、県選択で5桁コードを返す。
+ * 「全国に戻す」は value="all" の SelectItem で表現し、onChange に null を返す。
+ */
+function PrefectureSelector({
+  value,
+  onChange,
+}: {
+  value: string | null;
+  onChange: (code: string | null) => void;
+}) {
+  return (
+    <Select
+      value={value ?? "all"}
+      onValueChange={(v) => onChange(v === "all" ? null : v)}
+    >
+      <SelectTrigger className="w-[140px] h-8 text-xs">
+        <SelectValue placeholder="都道府県を選択" />
+      </SelectTrigger>
+      <SelectContent>
+        <SelectItem value="all">全国</SelectItem>
+        {PREFECTURE_OPTIONS.map((p) => (
+          <SelectItem key={p.value} value={p.value}>
+            {p.label}
+          </SelectItem>
+        ))}
+      </SelectContent>
+    </Select>
   );
 }

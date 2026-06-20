@@ -269,6 +269,8 @@ export const MigrationFlowSchema = z.object({
   theme: z.enum(["light", "dark"]).optional(),
   /** 焦点県コード (2 桁、例: "28" = 兵庫県) */
   focusPrefCode: z.string().optional(),
+  /** 出力フォーマット (landscape 16:9 / portrait 9:16) */
+  format: z.enum(["landscape", "portrait"]).optional(),
 });
 
 /**

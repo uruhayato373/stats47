@@ -1,0 +1,36 @@
+---
+name: feedback_shared_working_copy_git_race
+description: 2 つの Claude セッションが同一 working copy/git dir を共有すると HEAD/branch/index を奪い合い git レースになる。回避策あり
+metadata: 
+  node_type: memory
+  type: feedback
+  originSessionId: 5bf3159d-935d-444d-991d-c99ef203491f
+---
+
+2026-05-29、YouTube 撤退作業中に、別セッション(dbless)と**同一 working copy / .git を共有**していたため git レースが発生した。
+
+**症状:**
+- 自分の commit に相手の staged 削除(`apps/remotion/.../d1-client.ts` 等)が混入した (index 共有のため)
+- `feature/youtube-withdrawal` の先端が相手の dbless commit に置き換わった (branch ref 共有)
+- コマンドの合間に HEAD が動き、`git rebase` が "unstaged changes" で失敗、`git stash` の pathspec が消えるなど挙動が不安定
+
+**Why:** Claude セッションごとに別プロセスでも、cwd が同じなら `.git`(HEAD/refs/index/working tree) は 1 つ。両者の `git add/commit/checkout/reset` が互いを上書きする。
+
+**How to apply (回避策):**
+1. **同時に git 操作する 2 セッションを同じフォルダで動かさない。** 並行作業は `git worktree add ../stats47-<topic> <branch>` か別 clone で working copy を分離する
+2. やむを得ず共有している時に自分の commit を安全に反映するには、**ローカル working copy を触らない経路**を使う:
+   - クリーンな commit を SHA 直接 push で退避: `git push origin <sha>:refs/heads/<backup>`
+   - そこから `gh pr create` + `gh pr merge`(**server-side マージ**) で develop/main へ。ローカル HEAD/index に触れないのでレースしない (この日 PR #376 でこの方法が有効だった)
+3. commit 前に `git diff --cached --name-only` で**相手の staged 変更が混ざっていないか必ず確認**する (混入したら `git reset --soft` + `git restore --staged <相手のファイル>` で外す)
+
+**2026-05-30 再発 (article-writer 改善作業):** worktree で作業していたが、(a) `git branch --show-current` で develop を確認した直後に相手が main copy の HEAD を `feature/dbless-code-cleanup` に切替 → 自分の `git merge --no-ff` が**相手のブランチに着地**(stray merge commit が残った)。(b) worktree のベースが実は古い develop (`b25e591e`) で、相手が後から `3c2e3318` を develop に積んでいたため、自分の commit は **1-behind/1-ahead** で fast-forward push が拒否された。
+
+**確立した race-free レシピ (今回成功):**
+- 自分の commit が develop の祖先ベースの場合、**新しい isolated worktree を origin/develop tip で作り直し** → `git cherry-pick <自分のsha>` で現 develop の上に載せ替え → `git push origin <new-sha>:develop` で **FF ref push**。main working copy の HEAD/index に一切触れない。
+- cherry-pick 前に `git show --stat <develop tip commit>` で**衝突ファイルの有無を確認**(無ければクリーン)。
+- **相手が checked out しているブランチ (`feature/dbless-code-cleanup` 等) の ref は動かさない**(reset すると相手の未コミット作業を破壊しうる)。stray merge commit は content 同一なら後で develop に来ても no-op、放置でよい。
+- `git branch --show-current` の値を**キャッシュして merge 先を決め打ちしない**。共有 copy では一瞬で変わる。
+
+**2026-06-14 再確認 (ブログ下書き60本一括公開):** セッション開始時 develop だった main copy を、別セッションが作業中に `hotfix/home-featured-isr`→`main` へ切替 (ブランチ奪取)。`git worktree add /Users/minamidaisuke/stats47-blog-publish develop` で **develop を隔離 worktree に確保**し、そこで 60 本の article.md 編集 + commit + `git push origin develop` を 4 回実施 → 全て FF push 成功、相手の hotfix/main 作業と一切衝突せず。develop は worktree が握るので相手は develop を checkout できない=排他取得になり安全。完了後 `git worktree remove` で解放。**worktree 側は node_modules 不在**だが、quality-gate.mjs 等のスクリプトは main copy の絶対パス (`/Users/minamidaisuke/stats47/.claude/scripts/...`) で実行しファイルパスだけ worktree を渡せば動く。blog-auto-publish.yml は develop への article.md push で発火し、published:true flip を 1 run で R2 反映 (60本でも MAX_PUBLISH=10 で取りこぼさず all.json reconcile が補完、本番 HTTP 200 を Googlebot UA で実測確認)。
+
+関連: [[project_env_local_ci_consolidation]] [[project_dbless_migration_2026_05_29]] [[project_blog_publish_cloud_first]] [[project_blog_mass_rewrite_lessons]]

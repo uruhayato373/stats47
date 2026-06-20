@@ -35,7 +35,7 @@ CLI 内にインライン生成ロジックを書かない（重複・ドリフ�
 
 | 関数 | ファイル | 入力型 | データ命名パターン | 実出現 | 用途 |
 |---|---|---|---|---|---|
-| `generateBarChartSvg` | `bar-chart.ts` | `BarItem[]` + `BarChartOptions` | `*-ranking.json` / `*-top5-bottom5.json` | ~239 | ランキング棒グラフ。`layout:"columns"`（**デフォルト・推奨**）=カード型2列ランキング（左=上位/右=下位、960×N、`topN` で 5/10 切替）。`layout:"single"`=縦1列+「…中略…」(680幅) |
+| `generateBarChartSvg` | `bar-chart.ts` | `BarItem[]` + `BarChartOptions` | `*-ranking.json` / `*-top5-bottom5.json` | ~239 | ランキングはカード型のみ・**上位5+下位5固定**（10件廃止）。`layout:"columns"`=横長2列カード（左=上位/右=下位、`960×404`、ブログ本文+X 用）/ `layout:"portrait"`=縦長スタックカード（上位5↓下位5、`1080×1350` 4:5、Instagram 用 `-ig.svg`）/ `layout:"single"`=縦1列+「…中略…」(680幅)。`generate-article-charts.ts` が `*-ranking.json` から columns(`<name>.svg`)+portrait(`<name>-ig.svg`)を自動両出力 |
 | `generateScatterSvg` | `scatter.ts` | `ScatterPoint[]` + `ScatterOptions` | `*-scatter.json` | ~166 | 散布図（全都道府県・相関可視化） |
 | `generateChoroplethSvg` | `choropleth.ts` | `ChoroplethItem[]` + `ChoroplethOptions` | `*-map.json` / `*-tile-grid.json` | ~84 | タイルグリッド 47 都道府県マップ |
 | `generateLineSvg` | `line.ts` | `StatsSchema[]` + `LineOptions` | `*-timeseries.json` / `*-trend.json` | ~39 | 多系列折れ線（時系列・年齢階級）|
@@ -164,7 +164,8 @@ svg += svgThemeStyle();
 
 | チャート種 | 標準幅 | 高さ | 実出現の最頻 |
 |---|---|---|---|
-| ランキング（columns・**推奨**） | `960` | 可変（124 + N×44 + 60。10件=624 / 5件=404） | カード型2列（aging-solo / alcohol スタイル） |
+| ランキング横長（columns・ブログ/X） | `960` | `404`（上位5+下位5固定） | カード型2列（aging-solo / alcohol スタイル） |
+| ランキング縦長（portrait・IG `-ig.svg`） | `1080` | `1350`（4:5固定） | 縦長スタック（上位5↓下位5） |
 | ランキング（single・1列） | `680` | 可変（1行 ~30px） | `680×300`（95枚） |
 | 散布図（scatter） | `960` | `624` | `960×624`（80枚） |
 | タイルマップ（map） | `600` | `700` | `600×700`（47枚） |
@@ -173,7 +174,7 @@ svg += svgThemeStyle();
 | 積み上げ棒（stacked） | `680` | 可変 | `680×420` |
 
 `width` と `height` 属性は viewBox と必ず一致させる（svg-lint が検査）。
-**svg-builder の各チャートは §5 標準幅に収斂済（2026-06-17 Step 5）**: bar=680（width/height も 680 に一致、旧 DISPLAY_W=780 スケーリングは廃止）/ scatter=960×624 / map=600×700 / line=680×420 / stacked=680 / findings=960。新規生成は自動的にこの規格になる。
+**svg-builder の各チャートは §5 標準幅に収斂済（2026-06-17 Step 5）**: bar single=680（width/height も 680 に一致、旧 DISPLAY_W=780 スケーリングは廃止）/ **ランキングカード 横長columns=960×404・縦長portrait=1080×1350（2026-06-20）** / scatter=960×624 / map=600×700 / line=680×420 / stacked=680 / findings=960。新規生成は自動的にこの規格になる。
 **標準幅から外れる既存 SVG は再生成で是正**（`regenerate-blog-svgs.yml`・§10 Step 4）。
 
 ---

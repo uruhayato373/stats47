@@ -17,7 +17,6 @@ export const MANUFACTURING_SET: IndicatorSet = {
     { rankingKey: "manufacturing-establishments", shortLabel: "事業所数", role: "secondary" },
     { rankingKey: "manufacturing-employees", shortLabel: "従業者数", role: "secondary" },
     { rankingKey: "manufacturing-establishment-site-area", shortLabel: "敷地面積", role: "context" },
-    { rankingKey: "factory-establishment-count", shortLabel: "工場立地件数", role: "context" },
     // 生産性
     { rankingKey: "manufacturing-shipment-amount-per-employee", shortLabel: "出荷額/人", role: "secondary" },
     { rankingKey: "manufacturing-shipment-amount-per-establishment", shortLabel: "出荷額/所", role: "secondary" },
@@ -42,7 +41,6 @@ export const MANUFACTURING_SET: IndicatorSet = {
         "manufacturing-establishments",
         "manufacturing-employees",
         "manufacturing-establishment-site-area",
-        "factory-establishment-count",
       ],
     },
     {

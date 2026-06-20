@@ -204,7 +204,7 @@ date: YYYY-MM-DD
 ```markdown
 ## 製造品出荷額ランキング
 
-![出荷額 上位10・下位10](data/manufacturing-ranking.svg)
+![出荷額 上位5・下位5](data/manufacturing-ranking.svg)
 
 愛知が58兆円で...（解説）
 
@@ -226,8 +226,9 @@ date: YYYY-MM-DD
 
 ブログ記事は **数値・データを表 (markdown table) で羅列せず、必ず SVG 図で視覚化する**。これがサイト全体の原則。
 
-- ✅ **標準: 上位5+下位5 の SVG チャート** — ランキングの主役は「上位5件 + 下位5件」を 1 枚の SVG (横棒等) にする。モバイル可読性が高く、上下の対比が一目で伝わる。中位は本文の `<source-link href="/ranking/{key}">` でランキング詳細へ誘導する。
-  - 既存の良記事は「上位10+下位10」を使っているものも多い (許容)。**5 でも 10 でもよいが上下は対称**にする。本数の最終判断は本文の情報量と blog-critic に委ねる (gate は本数を判定しない)。
+- ✅ **標準: 上位5+下位5 のカード型 SVG**（2026-06-20 確定。10件は廃止）— ランキングは「上位5件 + 下位5件」をカード型で 1 枚にする。モバイル可読性が高く、上下の対比が一目で伝わる。中位は本文の `<source-link href="/ranking/{key}">` でランキング詳細へ誘導する。
+  - `generate-article-charts.ts` が `*-ranking.json` から **横長 columns (`<name>.svg`・ブログ本文+X) と 縦長 portrait (`<name>-ig.svg`・Instagram) の2レイアウトを自動両出力**する。本文は横長を参照。正典 = `.claude/rules/blog-data-schema.md` §1.5 / カタログ = `blog-svg-chart-standards.md`。
+  - 旧「上位10+下位10」の既存記事は順次 5 へ再生成（`regenerate-ranking-cards.mjs`）。
 - ❌ **禁止: markdown 表 (`| … |`) の一切** — ランキング表・比較表・全件表・定義表を問わず、記事本文に markdown table を置かない。データは SVG 図で、手順・列挙は箇条書き (bullet list) で表現する。
   - ランキング数値 → 上位5+下位5 の SVG 横棒図 (`![alt](data/<name>.svg)`)。全件・中位は `<source-link href="/ranking/{key}">` でランキング詳細へ誘導。
   - 比較・分類・手順 (非データの表) → 箇条書き or 散文。どうしても二次元比較が必要なら SVG 図 (グループ化横棒・散布図・タイルマップ等) にする。

@@ -1,9 +1,9 @@
 {
-  "name": "remotion",
+  "name": "stats47-remotion",
   "version": "1.0.0",
   "scripts": {
     "start": "remotion studio --port 3002",
-    "build": "remotion render",
+    "build": "remotion bundle src/index.ts",
     "render": "remotion render src/index.ts RankingShort out/video.mp4",
     "prepare-data": "tsx scripts/export-d1-to-remotion-static.ts --feature all",
     "pipeline:sns": "tsx scripts/pipeline/render-sns-all.ts",
@@ -26,14 +26,14 @@
     "dotenv": "^17.3.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "remotion": "^4.0.252",
+    "remotion": "4.0.441",
     "sharp": "^0.33.5",
     "tailwind-merge": "^2.2.2",
     "topojson-client": "^3.1.0",
-    "zod": "^3.22.4"
+    "zod": "4.3.6"
   },
   "devDependencies": {
-    "@remotion/cli": "^4.0.252",
+    "@remotion/cli": "4.0.441",
     "@types/better-sqlite3": "^7.6.13",
     "@types/d3-geo": "^3.1.0",
     "@types/d3-scale": "^4.0.0",

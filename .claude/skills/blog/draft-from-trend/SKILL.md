@@ -56,7 +56,7 @@ node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug <slug> --keys <metric
 
 - **frontmatter**: `title`(curiosity-gap・N位/X倍差で終わらない) / `seoTitle` / `subtitle` / `slug` / `description`(緊張感セットアップ) / `archetype` / `category` / `tags` / `publishedAt` / `published: false`(作成時は false、公開時に true)。
 - **文体は ですます調**で統一 (である調 copula 混在は gate blocker)。
-- **可視化は SVG 図のみ・markdown 表は全面禁止**。ランキングは **上位5+下位5** の横棒、地理は tile-grid 地図、時系列は折れ線、相関は散布図。
+- **可視化は SVG 図のみ・markdown 表は全面禁止**。ランキングは **上位5+下位5 のカード型**（`generate-article-charts` が横長 columns `<name>.svg`(本文) + 縦長 portrait `<name>-ig.svg`(IG) を自動両出力）、地理は tile-grid 地図、時系列は折れ線、相関は散布図。
 - **チャート参照**: `![alt](data/<name>-prefecture-rankings.svg)` (生成は Step 4)。`<chart-placeholder>` とインライン `<svg>` は禁止。
 - **source-link**: `<source-link href="/ranking/<key>">` を**各図の直下にインライン**配置 (末尾集約禁止)。
 - **callout 3〜4 個**: 記事固有の読み違い防止知識 (`[!NOTE]`定義 / `[!WARNING]`限界・相関≠因果 / `[!TIP]`読み筋)。

@@ -158,9 +158,12 @@ node .claude/scripts/lib/article-factual-check.mjs \
 
 2. **H2: 上位と下位** (chart + 解説)
    - 上位/下位は **生成画像 `![alt](data/<name>.svg)`** で可視化する。ランキングは svg-builder の
-     **カード型2列ランキング** (`layout:"columns"` 既定: 左=上位/右=下位、順位バッジ+県名+値+横バー、960×N) になる。
-     `node .claude/scripts/blog/generate-article-charts.ts --slug <slug>` で data/*.json から生成。
-   - 件数は `data/<name>-ranking.json` の `topN` で **5 (既定) か 10** を指定。色は `palette`/`rightPalette`
+     **カード型・上位5+下位5 固定**（10件は廃止）。`generate-article-charts.ts` が `data/<name>-ranking.json` から
+     **2レイアウトを自動両出力**する: `<name>.svg`=横長columns(960×404・ブログ本文が参照) と
+     `<name>-ig.svg`=縦長portrait(1080×1350・Instagram用・本文には埋め込まない)。
+     データは `fetch-ranking-data-r2.mjs`（SSOT=R2 app/ranking から取得 + 出典 `.source.json` manifest 生成）→
+     `node .claude/scripts/blog/generate-article-charts.ts --slug <slug>` で生成。正典 = `.claude/rules/blog-data-schema.md` §1.5。
+   - 件数は上位5+下位5 固定（`topN` は廃止）。色は `palette`/`rightPalette`
      (red/blue/orange/purple/green)、カラムヘッダーは `highLabel`/`lowLabel` で指定 (例「年収が高い県」)。
      ★**`<chart-placeholder>` と インライン `<svg>` は禁止** (未描画/混在の温床。`quality-gate.mjs` が blocker。
      正典 = `.claude/rules/blog-quality-standards.md`「記事 markdown の正典テンプレート」)

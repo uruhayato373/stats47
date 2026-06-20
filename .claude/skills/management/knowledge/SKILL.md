@@ -167,32 +167,15 @@ co_agents: [strategy-advisor]
 
 ---
 
-## YouTube OAuth トークン失効（→ 2026-05-03 Production publish で恒久対策済み）
+## OAuth client は Testing publish だと refresh token が 7 日で失効する（教訓・YouTube 撤退で運用終了）
 
-**問題**: `youtube-audit-daily.yml` 等で `invalid_grant: Token has been expired or revoked` エラー。2026-04 以前に複数回再発。
+**問題**: OAuth 連携で `invalid_grant: Token has been expired or revoked` が複数回再発していた。
 
-**根本原因**: Google Cloud Console の OAuth client が **Testing publishing status** だと refresh token が **7 日で auto-expire** する Google 仕様。これを「定期的に失効する」と誤認して再認証で対症療法していた。実際は Production publish で 6 ヶ月有効になる。
+**根本原因**: Google Cloud Console の OAuth client が **Testing publishing status** だと refresh token が **7 日で auto-expire** する Google 仕様。「定期的に失効する」と誤認し再認証で対症療法していた。実際は **Production publish で 6 ヶ月有効**になる。
 
-**恒久対策（2026-05-03 適用、Issue #184）**:
-1. **OAuth client を "In production" に publish 済み**（YouTube + AdSense の両 client）→ 7 日 → 6 ヶ月化
-2. **`.github/workflows/oauth-token-health-check.yml`** が週次（月曜 09:00 JST）で `youtube.channels.list` を叩いて健康確認、失効検知時に `[OAuth Alert]` Issue 自動起票（重複起票なし）
-3. **`youtube-daily-audit.mjs`** は `invalid_grant` を検知したら exit 0 で静かに止まる（連日 failure 量産防止）
+**教訓（恒常的に有効）**: OAuth 連携を増やすときは client を必ず "In production" に publish する。再び 7 日サイクルで失効する場合は publishing status が「テスト」に戻っていないか確認する（scope 変更で Testing に戻ることがある）。
 
-**失効時の復旧手順（runbook）**:
-```bash
-node .claude/scripts/youtube/oauth-setup.js   # ブラウザで Google 再認証 → .env.local 更新
-# ⚠️ チャンネル選択画面で stats47 (UCdRiwDSX1aUd0dSd7Cs08Kg) を必ず選ぶ（2026-05-03 個人ch 誤認証事故）
-gh secret set GOOGLE_OAUTH_REFRESH_TOKEN -b "$(grep '^GOOGLE_OAUTH_REFRESH_TOKEN=' .env.local | cut -d= -f2-)"
-gh workflow run youtube-audit-daily.yml       # 復旧確認
-gh workflow run oauth-token-health-check.yml  # 復旧確認
-```
-
-**注意**: もし再び 7 日サイクルで失効する場合は、Google Cloud Console で publishing status が「テスト」に戻っていないか確認すること。OAuth client の scope を変更すると Testing 扱いに戻ることがある。
-
-**関連ファイル**:
-- 健康確認: `.claude/scripts/youtube/oauth-health-check.mjs`
-- 再認証: `.claude/scripts/youtube/oauth-setup.js`
-- 監視 workflow: `.github/workflows/oauth-token-health-check.yml`
+> 注: YouTube 連携は 2026-05 に完全撤退済み（PR #376）。当時の youtube OAuth runbook / 監視 workflow / `youtube/oauth-*` スクリプトは撤去済みのため本項からは削除した。現存する OAuth 連携は AdSense（`.claude/scripts/adsense/oauth-setup.js`）。
 
 ---
 
@@ -228,7 +211,7 @@ gh workflow run oauth-token-health-check.yml  # 復旧確認
 
 **対策**:
 1. **GA タグだけは `afterInteractive` 必須**（perf 最適化対象から除外）。他の重いライブラリ (lucide-react / D3 / KaTeX 等) は dynamic import で良い
-2. **検証ゲート**: `node .claude/scripts/lib/check-analytics-tag-strategy.cjs` で `GoogleAnalytics.tsx` に `lazyOnload`/`worker` が混入していないかチェック (exit 1 で失敗)
+2. **確認 (手動・自動ゲート未実装)**: `GoogleAnalytics.tsx` の `<Script strategy>` に `lazyOnload`/`worker` が混入していないか目視確認する (GA タグは `afterInteractive` 必須)
 3. デプロイ後の週次レビューで GSC clicks vs GA4 sessions の比率を見る (10 倍以上開いたら計測異常)
 
 ---
@@ -240,7 +223,7 @@ gh workflow run oauth-token-health-check.yml  # 復旧確認
 **原因**: SKILL.md はエージェント実行のソース・オブ・トゥルース。本文セクションがなくなると Sonnet/Opus は「対象外」と解釈し reference スクリプトを呼ばなくなる。refactor で章を切り詰めるとき、SKILL.md の責務範囲を縮めていないか確認する仕組みが無かった。
 
 **対策**:
-1. **検証ゲート**: `node .claude/scripts/lib/check-skill-required-sections.cjs` で重要 SKILL.md の必須見出しが揃っているかチェック。新しい必須セクションを追加するときはスクリプトの `REQUIREMENTS` 配列に登録する
+1. **確認 (手動・自動ゲート未実装)**: 重要 SKILL.md の大幅編集時は必須見出し (対象プラットフォーム / 引数定義など) が揃っているかレビューで確認する
 2. SKILL.md の大幅編集 (refactor / 章削除) を伴う commit はレビュー時に「機能が消えていないか」を必ず確認
 3. 機能が消える可能性のある変更は、関連 reference ファイルへのリンク切れも検証
 
@@ -253,7 +236,7 @@ gh workflow run oauth-token-health-check.yml  # 復旧確認
 **原因**: GA4 の「ボットフィルタリング」は仕様変更で UI から消え、IAB リスト常時参照のみ。リスト未登録 bot は GA4 KPI を歪め続ける (avgDur, engagementRate, top-page ranking)。
 
 **対策**:
-1. **検証ゲート**: `node .claude/scripts/lib/check-ga-bot-anomalies.cjs` を週次 snapshot 取得後に走らせ、`pv/user >= 20` または `avgDur >= 600s` の行を `pages_suspicious.csv` に隔離出力
+1. **確認 (手動・自動ゲート未実装)**: 週次 snapshot 取得後、`pv/user >= 20` または `avgDur >= 600s` の行を bot 疑いとして隔離し、KPI 集計から差し引く
 2. 隔離行は KPI 集計から差し引いた値を併記する (overview avgDur 136s も population-dynamics 1 行除けば実質 84s 付近)
 3. 確定 bot は (a) GA4 内部トラフィック除外フィルタに追加 (b) Cloudflare Dashboard → Security Events で UA 確認後 middleware で 403 化 — のいずれかで対処
 4. 「GA4 で bot フィルタを ON にする」案内は誤情報なので使わない

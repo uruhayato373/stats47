@@ -148,22 +148,29 @@ const rawName = (it) => it.pref || it.areaName || it.label || it.name || "";
 const normPref = (s) => String(s || "").replace(/[都道府県]$/, "").replace(/^北海$/, "北海道").trim();
 
 /**
- * bar chart: [{ pref, value }] / { data, title, subtitle, unit, topN?, layout? }
+ * bar chart: [{ pref, value }] / { data, title, subtitle, unit, layout? }
  * → svg-builder generateBarChartSvg (BarItem[] with separator)
  *
- * topN: 上位・下位それぞれの件数。デフォルト 5。10 を指定すると上位10+下位10。
- * layout: "columns"（デフォルト）で左右2列表示。"single" で縦1列+中略表示。
+ * 件数は標準の「上位5+下位5」に固定（10件は廃止）。データが10件未満のときだけ
+ * 重複しない範囲に自動縮小する。
+ * layout（または layoutOverride）:
+ *   "columns"（デフォルト）= 横長2列カード（ブログ本文 + X 用）
+ *   "portrait"            = 縦長スタックカード（Instagram 用、4:5）
+ *   "single"             = 縦1列+中略
  */
-function genBarChartSvg(data) {
+function genBarChartSvg(data, layoutOverride) {
   const items = Array.isArray(data) ? data : data.data || [];
   if (!items.length) return `<!-- empty data -->`;
   const title = (Array.isArray(data) ? null : data.title) ?? "都道府県別ランキング";
   const subtitle = (Array.isArray(data) ? null : data.subtitle) ?? undefined;
+  const source = (Array.isArray(data) ? null : data.source) ?? undefined;
   const unit = (Array.isArray(data) ? null : data.unit) ?? "";
   const palette = (Array.isArray(data) ? null : data.palette) ?? "red";
   const rightPalette = (Array.isArray(data) ? null : data.rightPalette) ?? "blue";
-  const N = (Array.isArray(data) ? null : data.topN) ?? 5;
-  const layout = (Array.isArray(data) ? null : data.layout) ?? "columns";
+  // 標準は上位5+下位5 のみ。件数が少ない場合は上下が重複しない範囲に縮小。
+  const N = Math.min(5, Math.floor(items.length / 2) || 1);
+  const layout =
+    layoutOverride ?? (Array.isArray(data) ? null : data.layout) ?? "columns";
   const highLabel = (Array.isArray(data) ? null : data.highLabel) ?? "上位";
   const lowLabel = (Array.isArray(data) ? null : data.lowLabel) ?? "下位";
 
@@ -188,7 +195,7 @@ function genBarChartSvg(data) {
   ];
 
   return generateBarChartSvg(barItems, {
-    title, subtitle, unit, palette, rightPalette, layout, highLabel, lowLabel,
+    title, subtitle, source, unit, palette, rightPalette, layout, highLabel, lowLabel,
   });
 }
 
@@ -387,7 +394,9 @@ function extractInlineSvgsToFiles() {
 // ---------- main ----------
 // validate 時は data/ 不在を許容（article.md インライン SVG 検査のため）。
 const jsonFiles = fs.existsSync(DATA_DIR)
-  ? fs.readdirSync(DATA_DIR).filter((f) => f.endsWith(".json")).sort()
+  ? fs.readdirSync(DATA_DIR)
+      .filter((f) => f.endsWith(".json") && !f.endsWith(".source.json")) // .source.json は出典 manifest (チャートではない)
+      .sort()
   : [];
 
 if (jsonFiles.length === 0) {
@@ -527,6 +536,19 @@ for (const { file, type, parsed } of jsonMeta) {
   fs.writeFileSync(svgPath, provenance + svg, "utf8");
   chartNames.push(baseName);
   log(`  [gen] ${baseName}.svg  (${(svg.length / 1024).toFixed(1)} KB)`);
+
+  // ランキング棒は Instagram 用に縦長 portrait バリアントも出力する。
+  // data/<name>-ig.svg は SNS 専用アセットで、article.md には埋め込まない
+  // (ブログ本文は横長 columns の <name>.svg を参照する)。
+  if (type === "bar") {
+    const igSvg = genBarChartSvg(parsed, "portrait");
+    fs.writeFileSync(
+      path.join(DATA_DIR, `${baseName}-ig.svg`),
+      provenance + igSvg,
+      "utf8",
+    );
+    log(`  [gen] ${baseName}-ig.svg  (IG縦長 ${(igSvg.length / 1024).toFixed(1)} KB)`);
+  }
 }
 
 // Phase 3: placeholder replacement

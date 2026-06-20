@@ -30,7 +30,7 @@
         "src.server"
       ],
       "env": {
-        "MLIT_API_KEY": "A6m3-g1F1RAyau2jqRrjRiC6ehxo.Hrc",
+        "MLIT_API_KEY": "",
         "MLIT_BASE_URL": "https://www.mlit-data.jp/api/v1/",
         "PYTHONUNBUFFERED": "1",
         "LOG_LEVEL": "WARNING"

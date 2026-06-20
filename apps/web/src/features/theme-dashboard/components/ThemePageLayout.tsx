@@ -9,7 +9,6 @@ import {
   BreadcrumbSeparator,
 } from "@stats47/components/atoms/ui/breadcrumb";
 
-import { PageHeader } from "@/components/layout";
 import { loadPageComponents } from "@/components/stat-charts/server";
 import { prefetchThemeKpiData } from "@/components/stat-charts/services/prefetch-theme-kpi";
 
@@ -25,7 +24,9 @@ import {
   generateThemePageStructuredData,
 } from "../utils";
 
+import { ThemeAreaHeader } from "./ThemeAreaHeader";
 import { ThemeDashboardClient } from "./ThemeDashboardClient";
+import { ThemePrefectureProvider } from "./ThemePrefectureContext";
 import { ThemeRelatedArticles } from "./ThemeRelatedArticles";
 
 import type { ThemePageData } from "../lib/load-theme-data";
@@ -56,6 +57,10 @@ export async function ThemePageLayout({ theme, data, areaContext }: Props) {
     : [];
 
   return (
+    <ThemePrefectureProvider
+      initialAreaCode={areaContext?.areaCode ?? null}
+      initialAreaName={areaContext?.areaName ?? null}
+    >
     <div className="text-foreground">
       <script
         type="application/ld+json"
@@ -110,11 +115,8 @@ export async function ThemePageLayout({ theme, data, areaContext }: Props) {
         </div>
       )}
 
-      <PageHeader
-        eyebrow="テーマダッシュボード"
-        title={theme.title}
-        description={theme.description}
-      />
+      {/* エリア連動の H1 + 都道府県セレクタ（全国デフォルト・client-side、SSG 不変） */}
+      <ThemeAreaHeader themeTitle={theme.title} description={theme.description} />
 
       <ThemeDashboardClient
         themeConfig={theme}
@@ -125,15 +127,22 @@ export async function ThemePageLayout({ theme, data, areaContext }: Props) {
         highlightAreaCode={areaContext?.areaCode}
       />
 
-      {theme.embeddedSections?.map((sectionKey) => {
-        const Section = THEME_SECTION_REGISTRY[sectionKey];
-        if (!Section) return null;
-        return (
-          <div key={sectionKey} className="mt-8">
-            <Section />
-          </div>
-        );
-      })}
+      {/*
+        埋め込み GIS セクション (人口移動 Sankey / 高速道路タイムライン / 駅乗降 /
+        過疎×医療 / 日照地図)。2026-06-20 デザイン整理中は hideMap テーマで一旦非表示。
+        どのテーマが GIS を使っていたかは all-themes.ts の EMBEDDED_SECTIONS に定義を
+        残してある (theme.embeddedSections として伝播)。復活は hideMap を外すだけ。
+      */}
+      {!theme.hideMap &&
+        theme.embeddedSections?.map((sectionKey) => {
+          const Section = THEME_SECTION_REGISTRY[sectionKey];
+          if (!Section) return null;
+          return (
+            <div key={sectionKey} className="mt-8">
+              <Section />
+            </div>
+          );
+        })}
 
       {/* 広告: ダッシュボード読了後・関連記事の前 */}
       <div className="mt-8">
@@ -161,5 +170,6 @@ export async function ThemePageLayout({ theme, data, areaContext }: Props) {
         <ThemeRelatedArticles tagKeys={theme.relatedArticleTagKeys} />
       )}
     </div>
+    </ThemePrefectureProvider>
   );
 }

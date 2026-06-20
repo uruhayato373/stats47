@@ -5,16 +5,15 @@ import { useMemo } from "react";
 import Link from "next/link";
 
 import { lookupArea } from "@stats47/area";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@stats47/components/atoms/ui/card";
-import { ArrowRight, BarChart3, MapPin } from "lucide-react";
+import { ArrowRight, MapPin } from "lucide-react";
 
+import { ChartCard, ChartPanel } from "@/components/charts/ChartCard";
+import { MiniLineChart } from "@/components/charts/MiniCharts";
 import type { PageComponent } from "@/components/stat-charts";
+import { KpiCardClient } from "@/components/stat-charts/components/cards/KpiCard/KpiCardClient";
 
+import { ChartEmptyState } from "./ChartState";
+import { RankingBarList } from "./RankingBarList";
 import { ThemeDbChartRenderer } from "./ThemeDbChartRenderer";
 
 import type { ThemeConfig, ThemeIndicatorData } from "../types";
@@ -28,18 +27,57 @@ interface Props {
   pageCharts?: PageComponent[];
   /** 選択中の都道府県コード（null = 全国） */
   selectedPrefectureCode: string | null;
+  /**
+   * 地図なしレイアウト時に true を渡す。
+   * 県未選択時の「地図で都道府県を選択すると…」ヒントを非表示にする。
+   */
+  mapless?: boolean;
+  /**
+   * true のとき KPI スタットカードのみ描画し、時系列チャート・考察
+   * (markdown-section) を出さない。hideMap のカードのみビュー用。
+   */
+  cardsOnly?: boolean;
 }
 
 interface MetricKpi {
   metricKey: string;
   title: string;
   unit: string;
-  /** 都道府県選択時はその県の値、未選択時は全国平均 */
+  /** 都道府県選択時はその県の値、未選択時は全都道府県から算出した代表値 */
   value: number | null;
   rank: number | null;
   total: number;
-  diffFromAvgPct: number | null;
-  isNational: boolean;
+  /** 全国行の年次推移（MiniLineChart 用） */
+  series: { year: number; value: number }[];
+}
+
+/** series の最新2点から前年比を計算する */
+function computeYoY(series: { year: number; value: number }[]): {
+  changeRate: number | null;
+  changeDirection: "increase" | "decrease" | "neutral" | null;
+  year: number | null;
+} {
+  if (series.length < 2) {
+    return {
+      changeRate: null,
+      changeDirection: null,
+      year: series.at(-1)?.year ?? null,
+    };
+  }
+  const latest = series[series.length - 1];
+  const prev = series[series.length - 2];
+  if (prev.value === 0) {
+    return { changeRate: null, changeDirection: null, year: latest.year };
+  }
+  const rate =
+    Math.round(((latest.value - prev.value) / prev.value) * 1000) / 10;
+  const dir =
+    rate > 0 ? "increase" : rate < 0 ? "decrease" : "neutral";
+  return {
+    changeRate: rate,
+    changeDirection: dir as "increase" | "decrease" | "neutral",
+    year: latest.year,
+  };
 }
 
 /** KPI 計算に十分な観測数（47 都道府県の大半が揃っている指標のみ採用） */
@@ -55,7 +93,7 @@ const NON_CHART_TYPES = new Set(["kpi-card", "markdown-section"]);
  * 「KPI カード + 時系列チャート + 考察」として一画面に集約する。
  *
  * - KPI カード: tabIndicators（role≠context の指標）を indicatorDataMap から導出。
- *   都道府県選択時はその県の値・全国順位・全国平均比、未選択時は全国平均を表示。
+ *   都道府県選択時はその県の値・全国順位、未選択時は全都道府県から算出した代表値を表示。
  * - 時系列チャート: page_components の line/mixed/composition 等を ThemeDbChartRenderer で描画。
  *   従来 PrefectureStatsPanel は kpi-card 不在のため section 付きチャートを描画できず、
  *   全テーマで埋め草になっていた（本コンポーネントが置き換える）。
@@ -69,6 +107,8 @@ export function ThemeMetricsDashboard({
   indicatorDataMap,
   pageCharts,
   selectedPrefectureCode,
+  mapless,
+  cardsOnly,
 }: Props) {
   const areaName = selectedPrefectureCode
     ? lookupArea(selectedPrefectureCode)?.areaName ?? "選択地域"
@@ -100,18 +140,11 @@ export function ThemeMetricsDashboard({
         ? d.rankingValues.find((v) => v.areaCode === selectedPrefectureCode)
         : undefined;
       const value = isNational
-        ? nationalAverage
+        ? (d.nationalValue ?? nationalAverage)
         : typeof target?.value === "number"
           ? target.value
           : null;
       const rank = isNational ? null : (target?.rank ?? null);
-      const diffFromAvgPct =
-        !isNational &&
-        value !== null &&
-        nationalAverage !== null &&
-        nationalAverage !== 0
-          ? ((value - nationalAverage) / nationalAverage) * 100
-          : null;
 
       return {
         metricKey: key,
@@ -120,18 +153,18 @@ export function ThemeMetricsDashboard({
         value,
         rank,
         total,
-        diffFromAvgPct,
-        isNational,
+        series: d.nationalSeries ?? [],
       };
     });
   }, [themeConfig.tabIndicators, indicatorDataMap, selectedPrefectureCode]);
 
-  const chartComponents = (pageCharts ?? []).filter(
-    (c) => !NON_CHART_TYPES.has(c.componentType),
-  );
-  const markdownComponents = (pageCharts ?? []).filter(
-    (c) => c.componentType === "markdown-section",
-  );
+  // cardsOnly: KPI スタットカードのみ。チャート・考察は描画しない
+  const chartComponents = cardsOnly
+    ? []
+    : (pageCharts ?? []).filter((c) => !NON_CHART_TYPES.has(c.componentType));
+  const markdownComponents = cardsOnly
+    ? []
+    : (pageCharts ?? []).filter((c) => c.componentType === "markdown-section");
 
   if (
     kpis.length === 0 &&
@@ -158,17 +191,161 @@ export function ThemeMetricsDashboard({
               >
                 {areaName}のプロフィール <ArrowRight className="h-3 w-3" />
               </Link>
-            ) : (
+            ) : mapless ? null : (
               <span className="text-xs text-muted-foreground">
-                地図で都道府県を選択すると順位・全国平均比を表示
+                地図で都道府県を選択すると順位を表示
               </span>
             )}
           </div>
-          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
-            {kpis.map((k) => (
-              <KpiTile key={k.metricKey} data={k} />
-            ))}
-          </div>
+          {cardsOnly ? (
+            /* cardsOnly: dashboard-1 風レイアウト */
+            <div className="space-y-4">
+              {/* [A] 上部 KPI 行: 先頭4指標 */}
+              <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+                {kpis.slice(0, 4).map((k) => {
+                  const y = computeYoY(k.series);
+                  return (
+                    <KpiCardClient
+                      key={k.metricKey}
+                      title={k.title}
+                      value={k.value}
+                      unit={k.unit}
+                      year={y.year !== null ? String(y.year) : null}
+                      changeRate={y.changeRate}
+                      changeDirection={y.changeDirection}
+                    />
+                  );
+                })}
+              </div>
+
+              {/* [B] メイングリッド */}
+              <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
+                {/* 左: 大トレンド + 上位都道府県 */}
+                <div className="space-y-4 lg:col-span-2">
+                  {kpis[0] && (
+                    <ChartPanel title={`${kpis[0].title}の全国推移`}>
+                      {kpis[0].series.length >= 2 ? (
+                        <MiniLineChart
+                          points={kpis[0].series}
+                          unit={kpis[0].unit}
+                          seriesName={kpis[0].title}
+                          height={210}
+                        />
+                      ) : (
+                        <ChartEmptyState message="推移データなし" height={210} />
+                      )}
+                    </ChartPanel>
+                  )}
+                  {/* 上位都道府県バー（指標[0] の rankingValues） */}
+                  {(() => {
+                    const firstKey = kpis[0]?.metricKey;
+                    if (!firstKey) return null;
+                    const allValues =
+                      indicatorDataMap[firstKey]?.rankingValues ?? [];
+                    const numericRows = allValues
+                      .filter((v) => typeof v.value === "number")
+                      .slice()
+                      .sort(
+                        (a, b) => (b.value as number) - (a.value as number),
+                      )
+                      .slice(0, 8);
+                    if (numericRows.length === 0) return null;
+                    const max = numericRows[0].value as number;
+                    return (
+                      <ChartPanel
+                        title={`上位都道府県（${kpis[0].title}）`}
+                        contentClassName="space-y-2"
+                      >
+                        <RankingBarList
+                          items={numericRows.map((r) => ({
+                            key: r.areaCode,
+                            label: r.areaName,
+                            value: r.value as number,
+                            tone: "primary",
+                          }))}
+                          max={max}
+                          valueMaximumFractionDigits={1}
+                          className="space-y-2"
+                          labelClassName="w-16 text-muted-foreground"
+                          barClassName="h-4"
+                        />
+                      </ChartPanel>
+                    );
+                  })()}
+                </div>
+
+                {/* 右: 副指標カード（指標[4..6]、最大3） */}
+                {kpis.slice(4, 7).length > 0 && (
+                  <div className="space-y-3">
+                    {kpis.slice(4, 7).map((k) => (
+                      <ChartCard
+                        key={k.metricKey}
+                        label={k.title}
+                        value={
+                          k.value !== null
+                            ? `${k.value.toLocaleString("ja-JP", { maximumFractionDigits: 2 })}${k.unit ? ` ${k.unit}` : ""}`
+                            : "—"
+                        }
+                        chart={
+                          k.series.length >= 2 ? (
+                            <MiniLineChart
+                              points={k.series}
+                              unit={k.unit}
+                              seriesName={k.title}
+                            />
+                          ) : (
+                            <ChartEmptyState message="推移データなし" height={84} />
+                          )
+                        }
+                        footer={
+                          <Link
+                            href={`/ranking/${k.metricKey}`}
+                            className="inline-flex items-center gap-0.5 text-xs text-primary hover:underline"
+                          >
+                            ランキングを見る <ArrowRight className="h-3 w-3" />
+                          </Link>
+                        }
+                      />
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
+          ) : (
+            /* 通常レイアウト: ChartCard グリッド */
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+              {kpis.map((k) => (
+                <ChartCard
+                  key={k.metricKey}
+                  label={k.title}
+                  value={
+                    k.value !== null
+                      ? `${k.value.toLocaleString("ja-JP", { maximumFractionDigits: 2 })}${k.unit ? ` ${k.unit}` : ""}`
+                      : "—"
+                  }
+                  chart={
+                    k.series.length >= 2 ? (
+                      <MiniLineChart
+                        points={k.series}
+                        unit={k.unit}
+                        seriesName={k.title}
+                      />
+                    ) : (
+                      <ChartEmptyState message="推移データなし" height={84} />
+                    )
+                  }
+                  footer={
+                    <Link
+                      href={`/ranking/${k.metricKey}`}
+                      className="inline-flex items-center gap-0.5 text-xs text-primary hover:underline"
+                    >
+                      ランキングを見る <ArrowRight className="h-3 w-3" />
+                    </Link>
+                  }
+                />
+              ))}
+            </div>
+          )}
         </div>
       )}
 
@@ -176,21 +353,13 @@ export function ThemeMetricsDashboard({
       {chartComponents.length > 0 && (
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
           {chartComponents.map((chart) => (
-            <Card
-              key={chart.componentKey}
-              className="border border-border shadow-sm"
-            >
-              <CardHeader className="pb-2">
-                <CardTitle className="text-sm">{chart.title}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <ThemeDbChartRenderer
-                  chart={chart}
-                  prefCode={areaCode}
-                  prefName={areaName}
-                />
-              </CardContent>
-            </Card>
+            <ChartPanel key={chart.componentKey} title={chart.title}>
+              <ThemeDbChartRenderer
+                chart={chart}
+                prefCode={areaCode}
+                prefName={areaName}
+              />
+            </ChartPanel>
           ))}
         </div>
       )}
@@ -205,61 +374,5 @@ export function ThemeMetricsDashboard({
         />
       ))}
     </section>
-  );
-}
-
-function KpiTile({ data }: { data: MetricKpi }) {
-  const { metricKey, title, unit, value, rank, total, diffFromAvgPct, isNational } =
-    data;
-  const isTopHalf = rank !== null && rank <= Math.ceil(total / 2);
-  const rankBadgeColor = !rank
-    ? "bg-muted text-muted-foreground"
-    : rank <= 5
-      ? "bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-200"
-      : rank >= total - 4
-        ? "bg-slate-200 text-slate-700 dark:bg-slate-700/40 dark:text-slate-200"
-        : "bg-muted text-foreground";
-
-  return (
-    <Link
-      href={`/ranking/${metricKey}`}
-      className="block rounded-md border border-border p-2.5 transition-colors hover:bg-muted/50"
-    >
-      <div className="mb-1.5 line-clamp-2 min-h-[2rem] text-xs text-muted-foreground">
-        {title}
-      </div>
-      <div className="mb-1.5 flex items-baseline gap-1">
-        <span className="text-xl font-bold tabular-nums">
-          {value !== null
-            ? value.toLocaleString(undefined, { maximumFractionDigits: 2 })
-            : "—"}
-        </span>
-        {unit && <span className="text-xs text-muted-foreground">{unit}</span>}
-      </div>
-      <div className="flex items-center justify-between gap-1 text-[11px]">
-        {isNational ? (
-          <span className="inline-flex items-center rounded bg-muted px-1.5 py-0.5 text-muted-foreground">
-            全国平均
-          </span>
-        ) : (
-          <span
-            className={`inline-flex items-center rounded px-1.5 py-0.5 ${rankBadgeColor}`}
-          >
-            <BarChart3 className="mr-0.5 h-2.5 w-2.5" />
-            {rank !== null ? `${rank} / ${total} 位` : "順位なし"}
-          </span>
-        )}
-        {diffFromAvgPct !== null && (
-          <span
-            className={`tabular-nums ${
-              isTopHalf ? "text-blue-600 dark:text-blue-300" : "text-slate-500"
-            }`}
-          >
-            全国平均比 {diffFromAvgPct >= 0 ? "+" : ""}
-            {diffFromAvgPct.toFixed(1)}%
-          </span>
-        )}
-      </div>
-    </Link>
   );
 }
