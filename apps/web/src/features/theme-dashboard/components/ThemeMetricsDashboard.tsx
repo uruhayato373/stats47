@@ -10,10 +10,8 @@ import { ArrowRight, MapPin } from "lucide-react";
 import { ChartCard, ChartPanel } from "@/components/charts/ChartCard";
 import { MiniLineChart } from "@/components/charts/MiniCharts";
 import type { PageComponent } from "@/components/stat-charts";
-import { KpiCardClient } from "@/components/stat-charts/components/cards/KpiCard/KpiCardClient";
 
 import { ChartEmptyState } from "./ChartState";
-import { RankingBarList } from "./RankingBarList";
 import { ThemeDbChartRenderer } from "./ThemeDbChartRenderer";
 
 import type { ThemeConfig, ThemeIndicatorData } from "../types";
@@ -49,35 +47,6 @@ interface MetricKpi {
   total: number;
   /** 全国行の年次推移（MiniLineChart 用） */
   series: { year: number; value: number }[];
-}
-
-/** series の最新2点から前年比を計算する */
-function computeYoY(series: { year: number; value: number }[]): {
-  changeRate: number | null;
-  changeDirection: "increase" | "decrease" | "neutral" | null;
-  year: number | null;
-} {
-  if (series.length < 2) {
-    return {
-      changeRate: null,
-      changeDirection: null,
-      year: series.at(-1)?.year ?? null,
-    };
-  }
-  const latest = series[series.length - 1];
-  const prev = series[series.length - 2];
-  if (prev.value === 0) {
-    return { changeRate: null, changeDirection: null, year: latest.year };
-  }
-  const rate =
-    Math.round(((latest.value - prev.value) / prev.value) * 1000) / 10;
-  const dir =
-    rate > 0 ? "increase" : rate < 0 ? "decrease" : "neutral";
-  return {
-    changeRate: rate,
-    changeDirection: dir as "increase" | "decrease" | "neutral",
-    year: latest.year,
-  };
 }
 
 /** KPI 計算に十分な観測数（47 都道府県の大半が揃っている指標のみ採用） */
@@ -197,155 +166,40 @@ export function ThemeMetricsDashboard({
               </span>
             )}
           </div>
-          {cardsOnly ? (
-            /* cardsOnly: dashboard-1 風レイアウト */
-            <div className="space-y-4">
-              {/* [A] 上部 KPI 行: 先頭4指標 */}
-              <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
-                {kpis.slice(0, 4).map((k) => {
-                  const y = computeYoY(k.series);
-                  return (
-                    <KpiCardClient
-                      key={k.metricKey}
-                      title={k.title}
-                      value={k.value}
+          {/* チャート付き stats-card のみ: 各指標を 1 枚の ChartCard(値 + 全国トレンド) で表示。
+             データのみ KPI カード・上位県バー・大トレンドの重複は廃止 (2026-06-20)。 */}
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {kpis.map((k) => (
+              <ChartCard
+                key={k.metricKey}
+                label={k.title}
+                value={
+                  k.value !== null
+                    ? `${k.value.toLocaleString("ja-JP", { maximumFractionDigits: 2 })}${k.unit ? ` ${k.unit}` : ""}`
+                    : "—"
+                }
+                chart={
+                  k.series.length >= 2 ? (
+                    <MiniLineChart
+                      points={k.series}
                       unit={k.unit}
-                      year={y.year !== null ? String(y.year) : null}
-                      changeRate={y.changeRate}
-                      changeDirection={y.changeDirection}
+                      seriesName={k.title}
                     />
-                  );
-                })}
-              </div>
-
-              {/* [B] メイングリッド */}
-              <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
-                {/* 左: 大トレンド + 上位都道府県 */}
-                <div className="space-y-4 lg:col-span-2">
-                  {kpis[0] && (
-                    <ChartPanel title={`${kpis[0].title}の全国推移`}>
-                      {kpis[0].series.length >= 2 ? (
-                        <MiniLineChart
-                          points={kpis[0].series}
-                          unit={kpis[0].unit}
-                          seriesName={kpis[0].title}
-                          height={210}
-                        />
-                      ) : (
-                        <ChartEmptyState message="推移データなし" height={210} />
-                      )}
-                    </ChartPanel>
-                  )}
-                  {/* 上位都道府県バー（指標[0] の rankingValues） */}
-                  {(() => {
-                    const firstKey = kpis[0]?.metricKey;
-                    if (!firstKey) return null;
-                    const allValues =
-                      indicatorDataMap[firstKey]?.rankingValues ?? [];
-                    const numericRows = allValues
-                      .filter((v) => typeof v.value === "number")
-                      .slice()
-                      .sort(
-                        (a, b) => (b.value as number) - (a.value as number),
-                      )
-                      .slice(0, 8);
-                    if (numericRows.length === 0) return null;
-                    const max = numericRows[0].value as number;
-                    return (
-                      <ChartPanel
-                        title={`上位都道府県（${kpis[0].title}）`}
-                        contentClassName="space-y-2"
-                      >
-                        <RankingBarList
-                          items={numericRows.map((r) => ({
-                            key: r.areaCode,
-                            label: r.areaName,
-                            value: r.value as number,
-                            tone: "primary",
-                          }))}
-                          max={max}
-                          valueMaximumFractionDigits={1}
-                          className="space-y-2"
-                          labelClassName="w-16 text-muted-foreground"
-                          barClassName="h-4"
-                        />
-                      </ChartPanel>
-                    );
-                  })()}
-                </div>
-
-                {/* 右: 副指標カード（指標[4..6]、最大3） */}
-                {kpis.slice(4, 7).length > 0 && (
-                  <div className="space-y-3">
-                    {kpis.slice(4, 7).map((k) => (
-                      <ChartCard
-                        key={k.metricKey}
-                        label={k.title}
-                        value={
-                          k.value !== null
-                            ? `${k.value.toLocaleString("ja-JP", { maximumFractionDigits: 2 })}${k.unit ? ` ${k.unit}` : ""}`
-                            : "—"
-                        }
-                        chart={
-                          k.series.length >= 2 ? (
-                            <MiniLineChart
-                              points={k.series}
-                              unit={k.unit}
-                              seriesName={k.title}
-                            />
-                          ) : (
-                            <ChartEmptyState message="推移データなし" height={84} />
-                          )
-                        }
-                        footer={
-                          <Link
-                            href={`/ranking/${k.metricKey}`}
-                            className="inline-flex items-center gap-0.5 text-xs text-primary hover:underline"
-                          >
-                            ランキングを見る <ArrowRight className="h-3 w-3" />
-                          </Link>
-                        }
-                      />
-                    ))}
-                  </div>
-                )}
-              </div>
-            </div>
-          ) : (
-            /* 通常レイアウト: ChartCard グリッド */
-            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
-              {kpis.map((k) => (
-                <ChartCard
-                  key={k.metricKey}
-                  label={k.title}
-                  value={
-                    k.value !== null
-                      ? `${k.value.toLocaleString("ja-JP", { maximumFractionDigits: 2 })}${k.unit ? ` ${k.unit}` : ""}`
-                      : "—"
-                  }
-                  chart={
-                    k.series.length >= 2 ? (
-                      <MiniLineChart
-                        points={k.series}
-                        unit={k.unit}
-                        seriesName={k.title}
-                      />
-                    ) : (
-                      <ChartEmptyState message="推移データなし" height={84} />
-                    )
-                  }
-                  footer={
-                    <Link
-                      href={`/ranking/${k.metricKey}`}
-                      className="inline-flex items-center gap-0.5 text-xs text-primary hover:underline"
-                    >
-                      ランキングを見る <ArrowRight className="h-3 w-3" />
-                    </Link>
-                  }
-                />
-              ))}
-            </div>
-          )}
+                  ) : (
+                    <ChartEmptyState message="推移データなし" height={84} />
+                  )
+                }
+                footer={
+                  <Link
+                    href={`/ranking/${k.metricKey}`}
+                    className="inline-flex items-center gap-0.5 text-xs text-primary hover:underline"
+                  >
+                    ランキングを見る <ArrowRight className="h-3 w-3" />
+                  </Link>
+                }
+              />
+            ))}
+          </div>
         </div>
       )}
 
