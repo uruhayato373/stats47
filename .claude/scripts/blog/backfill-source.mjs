@@ -21,6 +21,9 @@ const R2 = process.env.R2_PUBLIC_FETCH_URL || "https://storage.stats47.jp";
 const RANK = `${R2}/app/ranking`;
 const STAGE = path.join(PROJECT_ROOT, ".local/r2/app/blog");
 const LIMIT = process.argv.includes("--limit") ? Number(process.argv[process.argv.indexOf("--limit") + 1]) : null;
+// 自動採用は 0.95 以上のみ。0.8-0.95 は相関する別指標への偽陽性リスク (例: 婚姻率 json が
+// 上流データ誤りのある divorces キーに 80% 一致) があるため verified にせず incomplete 扱いで agent へ回す。
+const VERIFY_MIN = 0.95;
 
 async function fj(u) { const r = await fetch(u); if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }
 async function ft(u) { const r = await fetch(u); if (!r.ok) throw new Error("HTTP " + r.status); return r.text(); }
@@ -65,6 +68,31 @@ async function ssotPartitions(key) {
   const v = await fj(`${RANK}/${key}/values.json`);
   return (v.partitions || []).map((p) => ({ year: p.yearCode, values: p.values }));
 }
+/** scatter(2軸): points[{label,x,y}] を x/y 別の県→値マップに分解 (短縮名キー。matchRate が県サフィックス吸収) */
+function scatterMaps(json) {
+  const pts = Array.isArray(json.points) ? json.points
+    : (Array.isArray(json) && json[0] && json[0].x != null ? json : null);
+  if (!pts) return null;
+  const xMap = new Map(), yMap = new Map();
+  for (const p of pts) {
+    const name = p.label ?? p.areaName ?? p.name;
+    if (name == null) continue;
+    if (p.x != null) xMap.set(name, Number(p.x));
+    if (p.y != null) yMap.set(name, Number(p.y));
+  }
+  if (xMap.size < 3 || yMap.size < 3) return null;
+  return { xMap, yMap, xLabel: json.xLabel || "", yLabel: json.yLabel || "", xUnit: json.xUnit || "", yUnit: json.yUnit || "" };
+}
+/** 候補 key 群 × 全 partition から、value マップに最も一致する {key,year,rate} を返す (exclude で軸重複回避) */
+async function bestKey(valueMap, keys, exclude) {
+  let best = null;
+  for (const key of keys) {
+    if (key === exclude) continue;
+    let parts; try { parts = await ssotPartitions(key); } catch { continue; }
+    for (const p of parts) { const rate = matchRate(valueMap, p.values); if (!best || rate > best.rate) best = { key, year: p.year, rate }; }
+  }
+  return best;
+}
 
 /** json 埋め込み情報から source.json を導出 (ranking照合できない種別・出自不明の補完) */
 function deriveSourceFromJson(json, dataFile, chartType) {
@@ -105,14 +133,35 @@ async function main() {
     const dir = path.join(STAGE, t.slug, "data");
     const write = (manifest) => { fs.mkdirSync(dir, { recursive: true }); fs.writeFileSync(path.join(dir, `${t.base}.source.json`), JSON.stringify(manifest, null, 2)); };
 
-    // ranking / line: SSOT照合で確定 (verified) を試みる (line は series 最新年値で照合)
-    if (t.chartType === "ranking" || t.chartType === "line") {
+    // 候補 key = json 埋め込み rankingKey + 記事 /ranking/ リンク (chartType に依らず使う)
+    const cand = [...new Set([json.rankingKey || json.rankings?.rankingKey, ...(await keysOf(t.slug))].filter(Boolean))];
+
+    // scatter(2軸): x/y を別々に候補 key へ照合し xKey/yKey を確定 (verified)
+    const sm = scatterMaps(json);
+    if (sm) {
+      if (cand.length) {
+        const bx = await bestKey(sm.xMap, cand);
+        const by = await bestKey(sm.yMap, cand, bx?.key);
+        if (bx && by && bx.rate >= VERIFY_MIN && by.rate >= VERIFY_MIN) {
+          const rate = Math.min(bx.rate, by.rate);
+          write({
+            kind: "scatter", xKey: bx.key, yKey: by.key, year: bx.year,
+            xLabel: sm.xLabel, yLabel: sm.yLabel, xUnit: sm.xUnit, yUnit: sm.yUnit,
+            source: [`r2:app/ranking/${bx.key}/values.json`, `r2:app/ranking/${by.key}/values.json`],
+            upstream: "metric config → e-Stat → R2 app/ranking (x軸/y軸の2指標)",
+            verifiedMatchRate: Math.round(rate * 100), generatedBy: "backfill-source.mjs",
+            note: "source-backfill(scatter): x/y値をSSOTと照合しxKey/yKeyを確定",
+          });
+          return { ...t, mode: "verified", key: `${bx.key}×${by.key}`, year: bx.year, rate: Math.round(rate * 100) };
+        }
+      }
+      // scatter だが両軸 key 確定できず → deriveSourceFromJson(incomplete) に落とす
+    } else {
+      // flat / line / unknown: 単一値マップを候補 key へ照合 (chartType 分類に依らず試みる ← cpi-* unknown 救済)
       const { map: jmap, unit, label } = jsonValueMap(json);
-      if (jmap.size >= 3) {
-        const keys = [...new Set([json.rankingKey || json.rankings?.rankingKey, ...(await keysOf(t.slug))].filter(Boolean))];
-        let best = null;
-        for (const key of keys) { let parts; try { parts = await ssotPartitions(key); } catch { continue; } for (const p of parts) { const rate = matchRate(jmap, p.values); if (!best || rate > best.rate) best = { key, year: p.year, rate }; } }
-        if (best && best.rate >= 0.8) {
+      if (jmap.size >= 3 && cand.length) {
+        const best = await bestKey(jmap, cand);
+        if (best && best.rate >= VERIFY_MIN) {
           write({
             kind: "ranking", rankingKey: best.key, year: best.year, unit, label,
             transform: "all47 (svg-builder が上位5+下位5を抽出)",
@@ -126,7 +175,7 @@ async function main() {
         }
       }
     }
-    // 他 chartType or ranking照合失敗: json 埋め込み情報から導出
+    // scatter 軸未確定 or ranking 照合失敗: json 埋め込み情報から導出
     const manifest = deriveSourceFromJson(json, `${t.base}.json`, t.chartType);
     write(manifest);
     return { ...t, mode: manifest.incomplete ? "incomplete" : "derived", kind: manifest.kind };

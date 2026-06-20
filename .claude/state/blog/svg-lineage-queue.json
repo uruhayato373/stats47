@@ -1,16 +1,16 @@
 {
   "total": 612,
   "byStatus": {
-    "both": 232,
-    "jsonOnly": 37,
+    "both": 242,
+    "jsonOnly": 27,
     "neither": 343
   },
   "byMethod": {
     "manual": 76,
-    "done": 232,
+    "done": 242,
     "ssot-restore-new": 169,
     "ssot-restore": 98,
-    "source-backfill": 37
+    "source-backfill": 27
   },
   "entries": [
     {
@@ -297,9 +297,9 @@
       "base": "worker-vs-manager-scatter",
       "chartType": "scatter",
       "hasJson": true,
-      "hasSource": false,
-      "status": "jsonOnly",
-      "restoreMethod": "source-backfill"
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "carpenter-income-prefecture-gap",
@@ -2457,36 +2457,36 @@
       "base": "cpi-total",
       "chartType": "unknown",
       "hasJson": true,
-      "hasSource": false,
-      "status": "jsonOnly",
-      "restoreMethod": "source-backfill"
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "inflation-rate-prefecture-gap",
       "base": "cpi-food",
       "chartType": "unknown",
       "hasJson": true,
-      "hasSource": false,
-      "status": "jsonOnly",
-      "restoreMethod": "source-backfill"
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "inflation-rate-prefecture-gap",
       "base": "cpi-utilities",
       "chartType": "unknown",
       "hasJson": true,
-      "hasSource": false,
-      "status": "jsonOnly",
-      "restoreMethod": "source-backfill"
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "inflation-rate-prefecture-gap",
       "base": "cpi-housing",
       "chartType": "unknown",
       "hasJson": true,
-      "hasSource": false,
-      "status": "jsonOnly",
-      "restoreMethod": "source-backfill"
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "inflow-population-ratio-prefecture-gap",
@@ -4167,9 +4167,9 @@
       "base": "aging-fatality-scatter",
       "chartType": "scatter",
       "hasJson": true,
-      "hasSource": false,
-      "status": "jsonOnly",
-      "restoreMethod": "source-backfill"
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "safe-driving-5-features",
@@ -4527,9 +4527,9 @@
       "base": "owner-occupied-housing-ratio",
       "chartType": "unknown",
       "hasJson": true,
-      "hasSource": false,
-      "status": "jsonOnly",
-      "restoreMethod": "source-backfill"
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "sports-facility-regional-divide",
@@ -4734,18 +4734,18 @@
       "base": "annual-sunshine-duration",
       "chartType": "unknown",
       "hasJson": true,
-      "hasSource": false,
-      "status": "jsonOnly",
-      "restoreMethod": "source-backfill"
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "sunshine-solar-housing-correlation",
       "base": "solar-panel-housing-rate",
       "chartType": "unknown",
       "hasJson": true,
-      "hasSource": false,
-      "status": "jsonOnly",
-      "restoreMethod": "source-backfill"
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "sunshine-solar-housing-correlation",
@@ -5175,9 +5175,9 @@
       "base": "vacant-aging-scatter",
       "chartType": "scatter",
       "hasJson": true,
-      "hasSource": false,
-      "status": "jsonOnly",
-      "restoreMethod": "source-backfill"
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "wage-vs-living-cost",
