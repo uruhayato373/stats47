@@ -1,15 +1,15 @@
 {
   "total": 612,
   "byStatus": {
-    "both": 247,
+    "both": 299,
     "jsonOnly": 22,
-    "neither": 343
+    "neither": 291
   },
   "byMethod": {
     "manual": 76,
-    "done": 247,
+    "done": 299,
     "ssot-restore-new": 169,
-    "ssot-restore": 98,
+    "ssot-restore": 46,
     "source-backfill": 22
   },
   "entries": [
@@ -116,19 +116,19 @@
       "slug": "annual-precipitation-rainy-season-gap",
       "base": "chart-precipitation-top5-bottom5",
       "chartType": "ranking",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "annual-precipitation-rainy-season-gap",
       "base": "chart-precipitation-days-top5-bottom5",
       "chartType": "ranking",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "annual-precipitation-rainy-season-gap",
@@ -665,10 +665,10 @@
       "slug": "crime-rate-regional-gap",
       "base": "theft-ranking",
       "chartType": "ranking",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "crime-rate-regional-gap",
@@ -683,10 +683,10 @@
       "slug": "crime-rate-regional-gap",
       "base": "arrest-rate-ranking",
       "chartType": "ranking",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "crime-rate-regional-gap",
@@ -1061,10 +1061,10 @@
       "slug": "energy-consumption-structure-shift",
       "base": "energy-ranking",
       "chartType": "ranking",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "energy-consumption-structure-shift",
@@ -1295,19 +1295,19 @@
       "slug": "fertility-fiscal-nexus",
       "base": "total-fertility-rate-top5-bottom5",
       "chartType": "ranking",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "fertility-fiscal-nexus",
       "base": "fiscal-strength-index-top5-bottom5",
       "chartType": "ranking",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "fertility-fiscal-nexus",
@@ -1340,37 +1340,37 @@
       "slug": "firefighting-capacity-gap",
       "base": "fire-rate-ranking",
       "chartType": "ranking",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "firefighting-capacity-gap",
       "base": "fire-dept-density-ranking",
       "chartType": "ranking",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "firefighting-capacity-gap",
       "base": "fire-member-ranking",
       "chartType": "ranking",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "firefighting-capacity-gap",
       "base": "fire-expenditure-ranking",
       "chartType": "ranking",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "fiscal-health-50years-trend",
@@ -1421,10 +1421,10 @@
       "slug": "fiscal-self-reliance-gap",
       "base": "fiscal-strength-ranking",
       "chartType": "ranking",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "fiscal-self-reliance-gap",
@@ -1556,19 +1556,19 @@
       "slug": "food-spending-pattern",
       "base": "noodle-ranking",
       "chartType": "ranking",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "food-spending-pattern",
       "base": "cup-noodle-ranking",
       "chartType": "ranking",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "food-spending-pattern",
@@ -1583,28 +1583,28 @@
       "slug": "food-trio-prefecture-map",
       "base": "tofu-ranking",
       "chartType": "ranking",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "food-trio-prefecture-map",
       "base": "shochu-ranking",
       "chartType": "ranking",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "food-trio-prefecture-map",
       "base": "konbu-ranking",
       "chartType": "ranking",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "foreign-overnight-guests-prefecture-gap",
@@ -1691,10 +1691,10 @@
       "slug": "forest-coverage-woodland-economy",
       "base": "chart1-forest-ratio-ranking",
       "chartType": "ranking",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "forest-coverage-woodland-economy",
@@ -1718,19 +1718,19 @@
       "slug": "forest-coverage-woodland-economy",
       "base": "chart4-forest-road-ranking",
       "chartType": "ranking",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "forest-coverage-woodland-economy",
       "base": "chart5-artificial-forest-ranking",
       "chartType": "ranking",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "forest-coverage-woodland-economy",
@@ -1871,10 +1871,10 @@
       "slug": "health-life-expectancy-structure",
       "base": "health-ranking",
       "chartType": "ranking",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "health-life-expectancy-structure",
@@ -1997,10 +1997,10 @@
       "slug": "household-solo-vs-dualincome",
       "base": "single-household-ranking",
       "chartType": "ranking",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "household-solo-vs-dualincome",
@@ -2078,10 +2078,10 @@
       "slug": "household-spending-prefecture-gap",
       "base": "spending-ranking",
       "chartType": "ranking",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "household-spending-prefecture-gap",
@@ -2123,10 +2123,10 @@
       "slug": "household-structure-transformation",
       "base": "single-household-ranking",
       "chartType": "ranking",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "household-structure-transformation",
@@ -2141,10 +2141,10 @@
       "slug": "household-structure-transformation",
       "base": "dualincome-ranking",
       "chartType": "ranking",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "household-structure-transformation",
@@ -2177,19 +2177,19 @@
       "slug": "ict-media-consumption-gender-gap",
       "base": "media-man-ranking",
       "chartType": "ranking",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "ict-media-consumption-gender-gap",
       "base": "media-woman-ranking",
       "chartType": "ranking",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "ict-media-consumption-gender-gap",
@@ -2735,10 +2735,10 @@
       "slug": "local-tax-revenue-gap",
       "base": "local-tax-ratio-ranking",
       "chartType": "ranking",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "local-tax-revenue-gap",
@@ -2861,10 +2861,10 @@
       "slug": "manufacturing-aichi-dominance",
       "base": "shipment-per-employee-ranking",
       "chartType": "ranking",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "manufacturing-aichi-dominance",
@@ -3203,10 +3203,10 @@
       "slug": "nursing-care-shortage-2040",
       "base": "nursing-welfare-facility-ranking",
       "chartType": "ranking",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "nursing-care-shortage-2040",
@@ -3221,19 +3221,19 @@
       "slug": "nursing-care-shortage-2040",
       "base": "nursing-home-capacity-ranking",
       "chartType": "ranking",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "nursing-care-shortage-2040",
       "base": "nursing-home-staff-ranking",
       "chartType": "ranking",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "nursing-care-shortage-2040",
@@ -3329,10 +3329,10 @@
       "slug": "overseas-travel-gap",
       "base": "overseas-travel-ranking",
       "chartType": "ranking",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "overseas-travel-gap",
@@ -3689,10 +3689,10 @@
       "slug": "population-migration-tokyo-concentration",
       "base": "daytime-population-ranking",
       "chartType": "ranking",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "population-migration-tokyo-concentration",
@@ -3743,19 +3743,19 @@
       "slug": "precipitation-snow-regional-gap",
       "base": "precipitation-ranking",
       "chartType": "ranking",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "precipitation-snow-regional-gap",
       "base": "precipitation-days-ranking",
       "chartType": "ranking",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "precipitation-snow-regional-gap",
@@ -4148,10 +4148,10 @@
       "slug": "ryokan-vs-hotel-overnight-shift",
       "base": "room-utilization-top5-bottom5",
       "chartType": "ranking",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "safe-driving-5-features",
@@ -4247,10 +4247,10 @@
       "slug": "school-nonattendance-pattern",
       "base": "nonattendance-ranking",
       "chartType": "ranking",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "school-nonattendance-pattern",
@@ -4409,10 +4409,10 @@
       "slug": "small-business-dominance-map",
       "base": "big-vs-small-comparison",
       "chartType": "ranking",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "small-business-dominance-map",
@@ -4589,10 +4589,10 @@
       "slug": "sports-urban-paradox",
       "base": "sports-rate-ranking",
       "chartType": "ranking",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "sports-urban-paradox",
@@ -4814,10 +4814,10 @@
       "slug": "telework-rate-tokyo-gap",
       "base": "ict-establishments-rankings",
       "chartType": "ranking",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "telework-rate-tokyo-gap",
@@ -4832,10 +4832,10 @@
       "slug": "telework-rate-tokyo-gap",
       "base": "side-job-rate-rankings",
       "chartType": "ranking",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "tofu-consumption-prefecture-gap",
@@ -4859,19 +4859,19 @@
       "slug": "traffic-accident-deaths-regional-risk",
       "base": "traffic-deaths-ranking",
       "chartType": "ranking",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "traffic-accident-deaths-regional-risk",
       "base": "accident-count-ranking",
       "chartType": "ranking",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "traffic-accident-deaths-regional-risk",
@@ -4895,10 +4895,10 @@
       "slug": "travel-behavior-gender-gap",
       "base": "travel-rate-ranking",
       "chartType": "ranking",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "travel-behavior-gender-gap",
@@ -4913,10 +4913,10 @@
       "slug": "travel-behavior-gender-gap",
       "base": "domestic-travel-ranking",
       "chartType": "ranking",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "travel-behavior-gender-gap",
@@ -4976,28 +4976,28 @@
       "slug": "unemployment-structure",
       "base": "unemployment-rate-ranking",
       "chartType": "ranking",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "unemployment-structure",
       "base": "job-opening-ratio-ranking",
       "chartType": "ranking",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "unemployment-structure",
       "base": "unemployment-rate-male-ranking",
       "chartType": "ranking",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "unemployment-tertiary-industry-link",
@@ -5219,10 +5219,10 @@
       "slug": "waiting-children-progress",
       "base": "childcare-utilization-ranking",
       "chartType": "ranking",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "waiting-children-progress",
@@ -5453,19 +5453,19 @@
       "slug": "workplace-accident-regional-map",
       "base": "frequency-ranking",
       "chartType": "ranking",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "workplace-accident-regional-map",
       "base": "severity-ranking",
       "chartType": "ranking",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "workplace-accident-regional-map",

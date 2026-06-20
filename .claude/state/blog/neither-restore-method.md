@@ -31,6 +31,13 @@
 - **未取込metric** (alcohol=国税庁/地方公務員給与一般/過疎医療/国際ボランティア) → 再生成せず flag (指標バックログ §未取込)。
 - **regenerate-ranking-cards.mjs の罠**: SVG名 `*-ranking` ヒューリスティックで拾うため、neither の `*-comparison`(multi-series)を触らず、既にbothの`*-ranking`を再生成してしまう。**queue の neither base を明示ターゲット**にすること(slug単位でなくbase単位)。**必ず push 前に旧SVG値と新jsonを照合**(規約trust禁止)。
 
+## 進捗 (2026-06-21)
+- **ranking 83枚: 52枚を SSOT再生成して push 済** (`restore-ranking-from-svg.mjs`、both 247→299=48.9%、neither 343→291)。
+- 残 31 (flagged): no-match 16(複数系列比較=service/food/facility-comparison・派生<95%=per-employee/per-establishment/density・close=software-engineer91%/foreign-guests77%) / extraction-fail 7 / missing-metric 3 / held(scale-verified) 5。
+  - **held 5** (`actual-income`/`education-per-student`/`overnight-guests`/`agricultural-output`/`total-farm-household-income`): SSOT raw が旧SVG表示と別スケール(×10/×100/×1e4)。新チャートが記事本文の数値とズレるため push 保留。記事本文のスケールに合わせて json を再スケール or 本文照合してから push。
+  - no-match の comparison系は単一keyでなく複数系列 → ④複数系列扱い。派生<95%は分母/年の特定が要る。
+- **整合性監査で捏造バグ3点修正**(SCALES極端値除外/退化ガード/findPrefInToken短縮名)。
+
 ## 検証 (捏造防止・必須)
 push 前に「再生成 json の上位/下位値 == 旧SVG表示値」を機械照合 (≥0.95)。一致しなければ push せず flag。
 正典: `.claude/rules/blog-data-schema.md §1.6/§1.7`。担当 `chart-author`。ツール: `fetch-ranking-data-r2.mjs` / `generate-article-charts.ts` / `regenerate-tile-maps.ts` / `resolve-scatter-axes.mjs`。
