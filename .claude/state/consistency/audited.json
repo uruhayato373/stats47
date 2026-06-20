@@ -1,8 +1,7 @@
 {
-  "hash": "7754df677810ec959f3962e6ba92d78bb53e84d6108cc92dedbb1f8ab15d55f9",
-  "audited_at": "2026-06-20T02:44:24",
+  "hash": "37dc0b3f2e2fe78d80bb5a9c4b40b3c9bb71fa6524af27a017c941e08abd10af",
+  "audited_at": "2026-06-20T05:15:02",
   "files": [
-    ".claude/skills/blog/draft-from-trend/SKILL.md",
-    ".claude/skills/blog/trends-snapshots/trends-all-2026-06-20.md"
+    ".claude/scripts/blog/regenerate-tile-maps.ts"
   ]
 }

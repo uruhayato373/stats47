@@ -28,7 +28,6 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { generateChoroplethSvg } from "../../../packages/svg-builder/src/charts/index.ts";
-import { formatTick } from "../../../packages/svg-builder/src/shared/axis.ts";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(__dirname, "..", "..", "..");
@@ -39,6 +38,13 @@ const STAGE = path.join(PROJECT_ROOT, ".local/regen-tilemaps");
 const LIMIT = process.argv.includes("--limit")
   ? Number(process.argv[process.argv.indexOf("--limit") + 1])
   : null;
+// --mapping <file>: { "<slug>/<base>": "<correctKey>" } を渡すと triage を行わず、
+// 指定 slug/base のみ correctKey の SSOT で照合・再生成する（記事 /ranking リンクの命名ゆれ救済用）。
+const MAPPING: Record<string, string | { key: string; year?: string }> | null = (() => {
+  const i = process.argv.indexOf("--mapping");
+  if (i === -1) return null;
+  return JSON.parse(fs.readFileSync(process.argv[i + 1], "utf8"));
+})();
 
 // 都道府県 名前(短縮/正式)→ 2桁コード
 const PREF: Record<string, string> = {};
@@ -77,13 +83,13 @@ async function pMap<T, R>(items: T[], fn: (x: T) => Promise<R>, c: number): Prom
   return out;
 }
 
-/** 既存地図SVGの表示値(照合用): name -> "値+単位文字列" */
+/** 既存地図SVGの表示値(照合用): name -> "値+単位文字列"。区切りは全角／半角コロン両対応。 */
 function parseMapDisplay(svg: string): Map<string, string> {
   const m = new Map<string, string>();
   for (const t of [...svg.matchAll(/<title>([^<]*)<\/title>/g)].map((x) => x[1])) {
-    const i = t.indexOf("：");
-    if (i < 0) continue;
-    m.set(t.slice(0, i).trim(), t.slice(i + 1).trim());
+    const mt = t.match(/^(.+?)\s*[:：]\s*(.+)$/);
+    if (!mt) continue;
+    m.set(mt[1].trim(), mt[2].trim());
   }
   return m;
 }
@@ -107,7 +113,9 @@ async function ssotPartitions(key: string) {
   }));
 }
 
-/** SSOT値が既存地図の表示値と一致する割合(0..1)。絶対0.15 or 相対1% を一致とみなす。 */
+/** SSOT値が既存地図の表示値と一致する割合(0..1)。絶対0.15 or 相対2% を一致とみなす。
+ *  地図 title は「468万人」「207.3万kl」「43.6千戸」等の日本語短縮単位を含むため実値化して比較する。 */
+const JP_UNIT_MULT: Record<string, number> = { 千: 1e3, 万: 1e4, 億: 1e8, 兆: 1e12, 京: 1e16 };
 function matchRate(
   ssotVals: Array<{ areaName: string; value: number }>,
   display: Map<string, string>,
@@ -118,35 +126,48 @@ function matchRate(
     const disp = display.get(v.areaName) ?? display.get(v.areaName.replace(/[都道府県]$/, ""));
     if (!disp) continue;
     n++;
-    const dnum = disp.replace(/,/g, "").match(/-?[\d.]+/)?.[0];
-    if (!dnum) continue;
-    const sf = parseFloat(formatTick(v.value, 1).replace(/,/g, ""));
-    if (Math.abs(sf - parseFloat(dnum)) <= Math.max(0.15, Math.abs(sf) * 0.01)) ok++;
+    // 数値 + 直後の日本語短縮単位(千/万/億/兆/京)を解析して実値化する
+    const m = disp.replace(/,/g, "").match(/(-?[\d.]+)\s*(京|兆|億|万|千)?/);
+    if (!m) continue;
+    const dval = parseFloat(m[1]) * (JP_UNIT_MULT[m[2] ?? ""] ?? 1);
+    // 短縮表記の丸め誤差を許容し相対2%で比較（生値同士・スケール短縮の両方を吸収）
+    if (Math.abs(v.value - dval) <= Math.max(0.15, Math.abs(v.value) * 0.02)) ok++;
   }
   return n >= 5 ? ok / n : 0;
 }
 
 async function main() {
-  const manifest = await fj(`${R2}/all.json`);
-  const slugs: string[] = (manifest.articles || []).map((a: { slug: string }) => a.slug).filter(Boolean);
-  console.error(`[tilemap] ${slugs.length} 記事を triage`);
+  let work: Array<{ slug: string; base: string; keys: string[]; year?: string }>;
+  if (MAPPING) {
+    work = Object.entries(MAPPING).map(([sb, val]) => {
+      const i = sb.indexOf("/");
+      const key = typeof val === "string" ? val : val.key;
+      const year = typeof val === "string" ? undefined : val.year;
+      return { slug: sb.slice(0, i), base: sb.slice(i + 1), keys: [key], year };
+    });
+    console.error(`[tilemap] mapping mode: ${work.length} 枚 (correctKey 指定・triage スキップ)`);
+  } else {
+    const manifest = await fj(`${R2}/all.json`);
+    const slugs: string[] = (manifest.articles || []).map((a: { slug: string }) => a.slug).filter(Boolean);
+    console.error(`[tilemap] ${slugs.length} 記事を triage`);
 
-  const found = await pMap(
-    slugs,
-    async (slug) => {
-      const md = await ft(`${R2}/${slug}/article.md`);
-      const refs = [...new Set([...md.matchAll(/\]\(data\/([^)]+)\.svg\)/g)].map((m) => m[1]))].filter(isMapName);
-      const keys = [...new Set([...md.matchAll(/\/ranking\/([a-z0-9-]+)/gi)].map((m) => m[1]))];
-      return { slug, refs, keys };
-    },
-    12,
-  );
-  const targets = found
-    .filter((g) => g && g.refs.length)
-    .flatMap((g) => g.refs.map((r) => ({ slug: g.slug, base: r, keys: g.keys })));
-  console.error(`[tilemap] 地図SVG: ${targets.length} 枚`);
+    const found = await pMap(
+      slugs,
+      async (slug) => {
+        const md = await ft(`${R2}/${slug}/article.md`);
+        const refs = [...new Set([...md.matchAll(/\]\(data\/([^)]+)\.svg\)/g)].map((m) => m[1]))].filter(isMapName);
+        const keys = [...new Set([...md.matchAll(/\/ranking\/([a-z0-9-]+)/gi)].map((m) => m[1]))];
+        return { slug, refs, keys };
+      },
+      12,
+    );
+    const targets = found
+      .filter((g) => g && g.refs.length)
+      .flatMap((g) => g.refs.map((r) => ({ slug: g.slug, base: r, keys: g.keys })));
+    console.error(`[tilemap] 地図SVG: ${targets.length} 枚`);
 
-  const work = LIMIT ? targets.slice(0, LIMIT) : targets;
+    work = LIMIT ? targets.slice(0, LIMIT) : targets;
+  }
   const results: Array<Record<string, unknown>> = [];
   for (const t of work) {
     try {
@@ -165,7 +186,18 @@ async function main() {
           if (!best || rate > best.rate) best = { key, ...p, rate };
         }
       }
-      if (!best || best.rate < 0.8) {
+      // year 指定（記事本文の数値を agent が SSOT と照合済み）があればその年を採用し照合ゲートをスキップする。
+      // 旧地図SVGが県別 title 値を持たず自動照合できないケースの救済（捏造ではなく記事本文検証に基づく）。
+      let trusted = false;
+      if (t.year) {
+        const parts = await ssotPartitions(t.keys[0]);
+        const p = parts.find((x: { year: string }) => String(x.year) === String(t.year));
+        if (p) {
+          best = { key: t.keys[0], ...p, rate: best?.rate ?? 0 };
+          trusted = true;
+        }
+      }
+      if (!best || (!trusted && best.rate < 0.8)) {
         results.push({ ...t, error: `SSOT照合 失敗 (最大一致 ${best ? Math.round(best.rate * 100) : 0}% / key ${t.keys.length})` });
         continue;
       }
@@ -193,6 +225,9 @@ async function main() {
             unit: best.unit,
             source: `r2:app/ranking/${best.key}/values.json`,
             verifiedMatchRate: Math.round(best.rate * 100),
+            ...(trusted
+              ? { trusted: "記事本文の数値を agent が SSOT と照合済み (旧地図SVGは県別title欠落で自動照合不可)" }
+              : {}),
             note: "SSOTから取得。既存地図の表示値と照合し metric+年を確定 (SVGから逆復元しない)",
           },
           null,

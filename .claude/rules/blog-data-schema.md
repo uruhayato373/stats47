@@ -120,7 +120,11 @@ metric 選定 (GSC ギャップ/トレンド/カテゴリ/ユーザー指示)
 
 ### 既存記事の一括再生成
 
-`.claude/scripts/blog/regenerate-tile-maps.ts`（dry-run=staging `.local/regen-tilemaps` + gallery `/tmp/tilemap-gallery.html`、R2 push しない）。記事の `/ranking/<key>` 候補 × 各年の SSOT 値を**既存地図の表示値と照合**し metric+年を確定（一致率≥0.8）。確証できた地図のみ SSOT から再生成、**確証できない地図は flag**（個別に metric→key 特定が要る。捏造しない）。R2 反映は別途 `diff-push-r2`。
+`.claude/scripts/blog/regenerate-tile-maps.ts`（dry-run=staging `.local/regen-tilemaps` + gallery `/tmp/tilemap-gallery.html`、R2 push しない）。記事の `/ranking/<key>` 候補 × 各年の SSOT 値を**既存地図の表示値と照合**し metric+年を確定（一致率≥0.8）。確証できた地図のみ SSOT から再生成、**確証できない地図は flag**（個別に metric→key 特定が要る。捏造しない）。R2 反映は別途 `diff-push-r2`（ローカルは `push-r2-wrangler.ts app/blog --apply`、stage dir は事前にクリーンにする）。
+
+照合は地図 title の日本語短縮単位（万/千/億/兆）を実値化して相対2%で判定する（`468万人` ↔ SSOT `4679280` を同値とみなす）。記事リンクの key が AI 生成の命名ゆれで実在 key とズレている場合（例 `health-life-expectancy-male` ↔ 実在 `healthy-life-expectancy-male`、`activity-rate` ↔ `annual-participation-rate`）は、**`--mapping <json>`**（`{"<slug>/<base>": "<correctKey>"}`）を渡すと triage をスキップし correctKey の SSOT で照合・再生成する。correctKey は `app/ranking/<key>/values.json` が 200 で実在し、かつ照合一致したものだけ staging に出る（値が合わなければ flag = 記事本文と地図のズレ防止）。
+
+旧地図SVGが県別 `<title>` 値を持たない古い形式（自動照合が空振りする）の場合は、mapping 値を `{"key":"<correctKey>","year":"<year>"}` 形式にすると、その年の SSOT で照合ゲートをスキップして生成する。**この trusted モードは年と記事本文の数値を事前に人/agent が突合していることが前提**（捏造防止）。生成された `source.json` には `verifiedMatchRate: 0` と `trusted`（記事本文照合済みの旨）が記録され、自動照合を通っていないことが追跡できる。`source.json` は観測値ではないため factual-check / quality-gate / チャート生成の対象外（§1.5）。
 
 ## 2. Wave 命名規則
 
