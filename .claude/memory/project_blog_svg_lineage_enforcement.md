@@ -25,7 +25,8 @@ metadata:
 - `resolve-scatter-axes.mjs`(新): axisラベルから候補keyを all.json名前検索→SSOT値照合(≥0.95)。独自スキーマ(fiscalIndex/tertiaryRatio)も field指定対応。FLAT_CONFIG=scale表記(平均給与万円=÷10000)、DERIVED_CONFIG=÷人口再計算(per-capita-local-tax 10/10)。同率は最新年優先。5枚 verified。
 
 **neither(json消失)343の再生成に着手 → both 299/612=48.9%(2026-06-21)。** ranking 83枚中52枚を `restore-ranking-from-svg.mjs`(新)で復元・push:旧SVG表示値を抽出→候補key(記事リンク+basename名前検索+ドリフト補正)とSSOT照合(scale込み≥0.95)→`fetch-ranking-data-r2`+`generate-article-charts`で3点セット再生成→push前に旧SVG値と再照合。**chart-author agent生成を整合性監査でレビューし捏造バグ3点修正**: ①SCALES極端値(1e6/1e-6)除外(SSOT全0のgini壊れデータにSVG×極小≈0で偽陽性100%した) ②絶対tol下限0.05撤廃+退化ガード(SSOT無分散は不採用) ③extractSvgValuesがfindPrefInToken未使用で短縮名(徳島)取りこぼし→extraction-fail29→7。**article.mdはpush除外必須(stale地雷)**。
-残 neither 291: ranking flagged 31(複数系列比較/派生<95%/抽出失敗7/未取込3/held scale-verified5=SSOT raw が旧SVGと別スケールで記事本文とズレるため保留) + scatter70 + findings55(authored) + line31 + tilemap15 + stacked13 + manual76。worklist=`source-backfill-residue.md`(22)+`neither-restore-method.md`(手法/落とし穴/進捗)。復元は**SSOTから。SVGの絵から逆復元禁止**(§1.6)、値を自己検算して捏造防止。
+**scatter も着手 → both 326/612=53.3%(neither 264)。** scatter 70中27復元(`restore-scatter-from-svg.mjs`新): 点に数値テキスト無いので点値照合不可 → **記事/ranking/リンクkey(著者由来)を SSOT値域で x/y軸に割当**(`assignLinksByRange`、x/y は元SVG目盛レンジ適合で決定)。**agent初版は name検索で誤確定**(軸「スポーツ行動者率」が実在key「スポーツの年間行動者率」と語順差で逃し camping に)→レビューで link×値域方式に作り直し根治。article.md push除外。base名 `scatter-*`(接尾辞-scatterでない)はgenerator未dispatch→json/sourceのみ。
+残 neither 264: ranking flagged 31(複数系列比較/派生<95%/抽出失敗/未取込/held scale5) + scatter 43(リンク値域不適合) + findings55(authored) + line31 + tilemap15 + stacked13 + manual76。worklist=`source-backfill-residue.md`(22)+`neither-restore-method.md`(手法/落とし穴/進捗)。復元は**SSOTから。SVGの絵から逆復元禁止**(§1.6)、値を自己検算して捏造防止。
 
 副産物バグ: **marriages/divorces の SSOT値が誤り**(divorcesキーに婚姻率の値・marriagesキーは~0.5異常、cdCat01取違え疑い、live /ranking/ に誤データ)。証拠+検証cmd+再取込手順=`docs/02_実装計画/05_指標バックログ.md §D`。
 
