@@ -126,6 +126,32 @@ metric 選定 (GSC ギャップ/トレンド/カテゴリ/ユーザー指示)
 
 旧地図SVGが県別 `<title>` 値を持たない古い形式（自動照合が空振りする）の場合は、mapping 値を `{"key":"<correctKey>","year":"<year>"}` 形式にすると、その年の SSOT で照合ゲートをスキップして生成する。**この trusted モードは年と記事本文の数値を事前に人/agent が突合していることが前提**（捏造防止）。生成された `source.json` には `verifiedMatchRate: 0` と `trusted`（記事本文照合済みの旨）が記録され、自動照合を通っていないことが追跡できる。`source.json` は観測値ではないため factual-check / quality-gate / チャート生成の対象外（§1.5）。
 
+## 1.7 全SVGデータ系譜の整備・再発防止 (2026-06-20 確定) ★
+
+ブログ SVG 612 枚の棚卸しで **56% (344枚) が元データ (`data/<name>.json`) を失い「絵だけ」= 再生成・出典追跡が
+不能**と判明 (✅both 181/30% ・🟡jsonOnly 87/14% ・🔴neither 344/56%)。dark mode 未対応・デザイン不統一・
+タイルマップ未救済の**根本原因**。「1枚ずつ個別救済」でなく、全記事のデータ系譜を体系的に揃える。
+
+### 再発防止 (新規記事で元データ消失を構造的に不可能にする)
+- **gate** (`quality-gate.mjs`): 各 `data/*.svg` に対応する `.json`+`.source.json` の欠落を検出 (§1.5 の3点セット)。
+  **段階導入** (当面 warning、復元完了後に blocker 昇格)。公開記事で3点セットを強制し、SVG だけ残る状態を止める。
+- **生成保証**: `generate-article-charts.ts` / `fetch-ranking-data-r2.mjs` が全チャート種で `source.json` を出力する
+  (ranking は実装済。scatter/line/findings へ拡張)。
+
+### 復元 (既存の欠落を SSOT から揃える)
+真実源 = `.claude/state/blog/svg-lineage-queue.json` (`build-lineage-queue.mjs` が R2 棚卸しで生成、人間用は
+`svg-lineage-LATEST.md`)。各 SVG に `restoreMethod` を割り当て、軽い順に消化する:
+
+| restoreMethod | 枚数 | 手法 |
+|---|---|---|
+| `source-backfill` | 87 | 既存 json を SSOT に対応付け → `source.json` 後付け (再生成不要・最軽) |
+| `ssot-restore` | 99 | ranking/tilemap の元データ消失 → `regenerate-tile-maps.ts` / `regenerate-ranking-cards.mjs` で SSOT復元 |
+| `ssot-restore-new` | 169 | scatter/line/findings の元データ消失 → 復元手法 (SSOT照合) の新規実装が要る |
+| `manual` | 76 | 無意味名 (`inline-chart-N`) ・型不明 → 個別手当て |
+
+**復元は SSOT (`app/ranking`) から行う (SVG の絵から逆復元しない、§1.6)。** 値が記事本文と一致するか自己検算
+(タイルマップの trusted/Derived 手法) して捏造を防ぐ。担当 = `chart-author` agent (データ系譜の整備・復元責務)。
+
 ## 2. Wave 命名規則
 
 Blog の brushup 施策は **wave 単位** で記録・追跡する。wave は「同一目的・同一日付・同一手法」でまとめた施策のセット。
