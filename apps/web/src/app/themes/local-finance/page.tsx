@@ -17,6 +17,10 @@ import type { Metadata } from "next";
 /** ALL_THEMES のエントリ (hideMap・embeddedSections 込み) を正典として使う */
 const theme = ALL_THEMES.find((t) => t.themeKey === "local-finance");
 
+// SSG にすると build 時に R2 を読めず loadThemeData が null になるため runtime 描画
+// （[themeSlug] / home と同型。memory: feedback_home_pure_ssg_r2_empty）
+export const dynamic = "force-dynamic";
+
 export function generateMetadata(): Metadata {
   if (!theme) return {};
   const title = theme.title;
