@@ -6,6 +6,7 @@ export * from "./repositories/ranking-tag";
 export * from "./repositories/ranking-value";
 export * from "./repositories/survey";
 export * from "./repositories/schemas/ranking-items.schemas";
+export * from "./repositories/schemas/ranking-values.schemas";
 export * from "./services/compute-normalization";
 export * from "./services/fetch-ranking-data";
 export * from "./services/fetch-ranking-values-on-demand";

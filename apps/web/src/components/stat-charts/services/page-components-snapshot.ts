@@ -3,6 +3,8 @@ import "server-only";
 import { logger } from "@stats47/logger/server";
 import { fetchFromR2AsJson } from "@stats47/r2-storage/server";
 
+import { parsePageComponents } from "./page-component-schema";
+
 import type { PageComponent } from "./load-page-components";
 
 export function pageComponentsKeyPath(pageType: string, pageKey: string): string {
@@ -59,9 +61,9 @@ export async function readPageComponentsFromR2(
   }
 
   try {
-    const data = await fetchFromR2AsJson<PageComponent[]>(pageComponentsKeyPath(pageType, pageKey));
+    const data = await fetchFromR2AsJson<unknown>(pageComponentsKeyPath(pageType, pageKey));
     if (!data) return [];
-    return data;
+    return parsePageComponents(data);
   } catch (error) {
     logger.error(
       { pageType, pageKey, error: error instanceof Error ? error.message : String(error) },

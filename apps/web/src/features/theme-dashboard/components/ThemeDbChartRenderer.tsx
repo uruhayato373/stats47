@@ -47,8 +47,8 @@ export function ThemeDbChartRenderer({ chart, prefCode }: Props) {
   }, [chart.componentKey, chart.componentType, prefCode]);
 
   if (chart.componentType === "markdown-section") {
-    const props = chart.componentProps as unknown as MarkdownSectionComponentProps;
-    if (!props || typeof props.markdown !== "string") {
+    const props = parseMarkdownSectionComponentProps(chart.componentProps);
+    if (!props) {
       return <ChartEmptyState message="markdown が未設定です" />;
     }
 
@@ -66,4 +66,39 @@ export function ThemeDbChartRenderer({ chart, prefCode }: Props) {
   }
 
   return <ThemeChartResultRenderer chart={chart} chartResult={chartResult} />;
+}
+
+function parseMarkdownSectionComponentProps(
+  value: Record<string, unknown>,
+): MarkdownSectionComponentProps | null {
+  if (typeof value.markdown !== "string") return null;
+
+  const subtitle = typeof value.subtitle === "string" ? value.subtitle : undefined;
+  const sources = parseMarkdownSources(value.sources);
+
+  return {
+    markdown: value.markdown,
+    subtitle,
+    sources,
+  };
+}
+
+function parseMarkdownSources(
+  value: unknown,
+): MarkdownSectionComponentProps["sources"] {
+  if (!Array.isArray(value)) return undefined;
+
+  const sources = value.map((item) => {
+    if (typeof item !== "object" || item === null || Array.isArray(item)) return null;
+    const source = item as Record<string, unknown>;
+    if (typeof source.label !== "string") return null;
+    return {
+      label: source.label,
+      url: typeof source.url === "string" ? source.url : undefined,
+    };
+  });
+
+  return sources.every((source) => source !== null)
+    ? (sources as MarkdownSectionComponentProps["sources"])
+    : undefined;
 }

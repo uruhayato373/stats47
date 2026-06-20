@@ -7,6 +7,15 @@ import { toMixedChartData } from "@/components/stat-charts/adapters/toMixedChart
 import { fetchEstatData } from "@/components/stat-charts/server";
 import type { LineChartData, MixedChartData } from "@/components/stat-charts/types/visualization";
 
+import {
+  parseThemeDbChartComponentProps,
+  type CompositionChartComponentProps,
+  type CpiChartComponentProps,
+  type DonutChartComponentProps,
+  type LineChartComponentProps,
+  type MixedChartComponentProps,
+} from "./theme-chart-props";
+
 import type { StatsSchema } from "@stats47/types";
 
 /** ドーナツチャート用データ */
@@ -31,9 +40,9 @@ export interface CpiHeatmapItem {
 }
 
 type ChartResult =
-  | { type: "line"; data: LineChartData }
+  | { type: "line"; data: LineChartData; showLatestValues?: boolean }
   | { type: "mixed"; data: MixedChartData }
-  | { type: "composition"; data: CompositionChartData }
+  | { type: "composition"; data: CompositionChartData; defaultTab?: "composition" | "trend" }
   | { type: "donut"; data: DonutChartItem[] }
   | { type: "cpi-profile"; data: CpiProfileItem[] }
   | { type: "cpi-heatmap"; data: CpiHeatmapItem[] }
@@ -53,66 +62,71 @@ export async function fetchDbChartDataAction(
   prefCode: string
 ): Promise<ChartResult> {
   const isNational = prefCode === "00000";
+  const parsed = parseThemeDbChartComponentProps(componentType, componentProps);
+  if (!parsed) return null;
 
-  if (componentType === "line-chart") {
-    return fetchLineData(componentProps, prefCode, isNational);
+  if (parsed.componentType === "line-chart") {
+    return fetchLineData(parsed.props, prefCode, isNational);
   }
-  if (componentType === "mixed-chart") {
-    return fetchMixedData(componentProps, prefCode, isNational);
+  if (parsed.componentType === "mixed-chart") {
+    return fetchMixedData(parsed.props, prefCode, isNational);
   }
-  if (componentType === "donut-chart") {
-    return fetchDonutData(componentProps, prefCode, isNational);
+  if (parsed.componentType === "donut-chart") {
+    return fetchDonutData(parsed.props, prefCode, isNational);
   }
-  if (componentType === "composition-chart") {
-    return fetchCompositionData(componentProps, prefCode, isNational);
+  if (parsed.componentType === "composition-chart") {
+    return fetchCompositionData(parsed.props, prefCode, isNational);
   }
-  if (componentType === "cpi-profile") {
-    return fetchCpiProfileData(componentProps, prefCode);
+  if (parsed.componentType === "cpi-profile") {
+    return fetchCpiProfileData(parsed.props, prefCode);
   }
-  if (componentType === "cpi-heatmap") {
-    return fetchCpiHeatmapData(componentProps, prefCode);
+  if (parsed.componentType === "cpi-heatmap") {
+    return fetchCpiHeatmapData(parsed.props, prefCode);
   }
   return null;
 }
 
 async function fetchLineData(
-  props: Record<string, unknown>,
+  props: LineChartComponentProps,
   prefCode: string,
   isNational: boolean
-): Promise<{ type: "line"; data: LineChartData } | null> {
-  const estatParams = props.estatParams as Array<Record<string, string>> | Record<string, string>;
-  const paramsList = Array.isArray(estatParams) ? estatParams : [estatParams];
-  const labels = props.labels as string[] | undefined;
-  const seriesColors = props.seriesColors as string[] | undefined;
+): Promise<{ type: "line"; data: LineChartData; showLatestValues?: boolean } | null> {
+  const paramsList = Array.isArray(props.estatParams)
+    ? props.estatParams
+    : [props.estatParams];
 
   const rawDataList = await fetchAllSeries(paramsList, prefCode, isNational);
   if (!rawDataList) return null;
 
-  const chartData = toLineChartData(rawDataList, labels, seriesColors);
-  return { type: "line", data: chartData };
+  const chartData = toLineChartData(rawDataList, props.labels, props.seriesColors);
+  return {
+    type: "line",
+    data: chartData,
+    showLatestValues: props.showLatestValues,
+  };
 }
 
 async function fetchMixedData(
-  props: Record<string, unknown>,
+  props: MixedChartComponentProps,
   prefCode: string,
   isNational: boolean
 ): Promise<{ type: "mixed"; data: MixedChartData } | null> {
-  const columnParams = props.columnParams as Array<Record<string, string>>;
-  const lineParams = props.lineParams as Array<Record<string, string>>;
-  const columnLabels = props.columnLabels as string[] | undefined;
-  const lineLabels = props.lineLabels as string[] | undefined;
-  const leftUnit = props.leftUnit as string | undefined;
-  const rightUnit = props.rightUnit as string | undefined;
-  const columnColors = props.columnColors as string[] | undefined;
-  const lineColors = props.lineColors as string[] | undefined;
-
   const [colData, lineData] = await Promise.all([
-    fetchAllSeries(columnParams, prefCode, isNational),
-    fetchAllSeries(lineParams, prefCode, isNational),
+    fetchAllSeries(props.columnParams, prefCode, isNational),
+    fetchAllSeries(props.lineParams, prefCode, isNational),
   ]);
   if (!colData || !lineData) return null;
 
-  const chartData = toMixedChartData(colData, lineData, columnLabels, lineLabels, leftUnit, rightUnit, columnColors, lineColors);
+  const chartData = toMixedChartData(
+    colData,
+    lineData,
+    props.columnLabels,
+    props.lineLabels,
+    props.leftUnit,
+    props.rightUnit,
+    props.columnColors,
+    props.lineColors,
+  );
   return { type: "mixed", data: chartData };
 }
 
@@ -189,22 +203,16 @@ async function fetchAllAndAverage(
 }
 
 async function fetchCompositionData(
-  props: Record<string, unknown>,
+  props: CompositionChartComponentProps,
   prefCode: string,
   isNational: boolean
-): Promise<{ type: "composition"; data: CompositionChartData } | null> {
-  const statsDataId = props.statsDataId as string;
-  const segments = props.segments as Array<{ code: string; label: string; color?: string }>;
-  const totalCode = props.totalCode as string | undefined;
-
-  if (!statsDataId || !segments?.length) return null;
-
+): Promise<{ type: "composition"; data: CompositionChartData; defaultTab?: "composition" | "trend" } | null> {
   const segmentData = await Promise.all(
-    segments.map(async (seg) => {
+    props.segments.map(async (seg) => {
       if (isNational) {
-        return await fetchAllAndAverage({ statsDataId, cdCat01: seg.code } as unknown as import("@stats47/estat-api/server").GetStatsDataParams);
+        return await fetchAllAndAverage({ statsDataId: props.statsDataId, cdCat01: seg.code } as unknown as import("@stats47/estat-api/server").GetStatsDataParams);
       }
-      const result = await fetchEstatData(prefCode, { statsDataId, cdCat01: seg.code } as unknown as import("@stats47/estat-api/server").GetStatsDataParams);
+      const result = await fetchEstatData(prefCode, { statsDataId: props.statsDataId, cdCat01: seg.code } as unknown as import("@stats47/estat-api/server").GetStatsDataParams);
       return "error" in result ? null : result.data;
     })
   );
@@ -212,20 +220,22 @@ async function fetchCompositionData(
   if (segmentData.some((d) => d === null)) return null;
 
   let totalData: StatsSchema[] | undefined;
-  if (totalCode) {
+  if (props.totalCode) {
     if (isNational) {
-      totalData = (await fetchAllAndAverage({ statsDataId, cdCat01: totalCode } as unknown as import("@stats47/estat-api/server").GetStatsDataParams)) ?? undefined;
+      totalData = (await fetchAllAndAverage({ statsDataId: props.statsDataId, cdCat01: props.totalCode } as unknown as import("@stats47/estat-api/server").GetStatsDataParams)) ?? undefined;
     } else {
-      const result = await fetchEstatData(prefCode, { statsDataId, cdCat01: totalCode } as unknown as import("@stats47/estat-api/server").GetStatsDataParams);
+      const result = await fetchEstatData(prefCode, { statsDataId: props.statsDataId, cdCat01: props.totalCode } as unknown as import("@stats47/estat-api/server").GetStatsDataParams);
       totalData = "error" in result ? undefined : result.data;
     }
   }
 
-  const labels = segments.map((s) => s.label);
-  const colors = segments.map((s) => s.color).filter((c): c is string => !!c);
+  const labels = props.segments.map((s) => s.label);
+  const colors = props.segments.map((s) => s.color).filter((c): c is string => !!c);
   const chartData = toCompositionChartData(segmentData as StatsSchema[][], labels, colors, totalData);
 
-  return chartData.trendData.length > 0 ? { type: "composition", data: chartData } : null;
+  return chartData.trendData.length > 0
+    ? { type: "composition", data: chartData, defaultTab: props.defaultTab }
+    : null;
 }
 
 /**
@@ -238,22 +248,18 @@ async function fetchCompositionData(
  * - topN?: number (デフォルト 9 — 上位N件 + その他)
  */
 async function fetchDonutData(
-  props: Record<string, unknown>,
+  props: DonutChartComponentProps,
   prefCode: string,
   isNational: boolean
 ): Promise<{ type: "donut"; data: DonutChartItem[] } | null> {
-  const categories = props.categories as Array<{ code: string; label: string; color: string }> | undefined;
-  const statsDataId = props.statsDataId as string | undefined;
-  const topN = (props.topN as number) ?? 9;
-
-  if (!categories || !statsDataId) return null;
+  const topN = props.topN ?? 9;
 
   // 各カテゴリの値を並列取得
   const results = await Promise.all(
-    categories.map(async (cat) => {
+    props.categories.map(async (cat) => {
       const data = isNational
-        ? await fetchAllAndAverage({ statsDataId, cdCat01: cat.code } as unknown as import("@stats47/estat-api/server").GetStatsDataParams)
-        : await fetchSeriesDataForDonut({ statsDataId, cdCat01: cat.code }, prefCode);
+        ? await fetchAllAndAverage({ statsDataId: props.statsDataId, cdCat01: cat.code } as unknown as import("@stats47/estat-api/server").GetStatsDataParams)
+        : await fetchSeriesDataForDonut({ statsDataId: props.statsDataId, cdCat01: cat.code }, prefCode);
       if (!data || data.length === 0) return null;
 
       // 最新年度の値を取得
@@ -299,21 +305,17 @@ async function fetchSeriesDataForDonut(
  * - year?: string (年コード、省略時は最新)
  */
 async function fetchCpiProfileData(
-  props: Record<string, unknown>,
+  props: CpiChartComponentProps,
   prefCode: string
 ): Promise<{ type: "cpi-profile"; data: CpiProfileItem[] } | null> {
-  const statsDataId = props.statsDataId as string;
-  const excludeCodes = new Set((props.excludeCodes as string[]) ?? ["00010", "00120"]);
-  const year = props.year as string | undefined;
-
-  if (!statsDataId) return null;
+  const excludeCodes = new Set(props.excludeCodes ?? ["00010", "00120"]);
 
   try {
     const { fetchFormattedStats } = await import("@stats47/estat-api/server");
     const params = {
-      statsDataId,
+      statsDataId: props.statsDataId,
       cdArea: prefCode,
-      ...(year && { cdTime: year }),
+      ...(props.year && { cdTime: props.year }),
     };
 
     const rawData = await fetchFormattedStats(params as import("@stats47/estat-api/server").GetStatsDataParams);
@@ -321,7 +323,7 @@ async function fetchCpiProfileData(
 
     // 年指定なしの場合は最新年のみフィルタ
     let filtered = rawData.filter((d) => !excludeCodes.has(d.metricKey));
-    if (!year) {
+    if (!props.year) {
       const latestYear = filtered.reduce((max, d) => d.yearCode > max ? d.yearCode : max, "");
       filtered = filtered.filter((d) => d.yearCode === latestYear);
     }
@@ -346,18 +348,15 @@ async function fetchCpiProfileData(
  * - excludeCodes?: string[]
  */
 async function fetchCpiHeatmapData(
-  props: Record<string, unknown>,
+  props: CpiChartComponentProps,
   prefCode: string
 ): Promise<{ type: "cpi-heatmap"; data: CpiHeatmapItem[] } | null> {
-  const statsDataId = props.statsDataId as string;
-  const excludeCodes = new Set((props.excludeCodes as string[]) ?? ["00010", "00120"]);
-
-  if (!statsDataId) return null;
+  const excludeCodes = new Set(props.excludeCodes ?? ["00010", "00120"]);
 
   try {
     const { fetchFormattedStats } = await import("@stats47/estat-api/server");
     const params = {
-      statsDataId,
+      statsDataId: props.statsDataId,
       cdArea: prefCode,
     };
 
