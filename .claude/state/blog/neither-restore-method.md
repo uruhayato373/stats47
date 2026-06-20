@@ -47,6 +47,14 @@
 - 進捗: scatter 70枚中 **27枚を復元・push**(both 299→326=53.3%、neither 291→264)。残43=リンク値域不適合(x-only12/y-only6/no-match24=未取込or別指標/extraction-fail1)。
 - 注意: base名が `scatter-*`(接尾辞 `-scatter` でない)2件は generate-article-charts が dispatch せず SVG未生成 → json/source のみ push(旧SVG保持で lineage 復元)。
 
+## findings 再生成の手法 (2026-06-21・実証済)
+findings は SSOT指標でなく **authored テキスト**。データ = 旧SVGに表示された要点テキストそのもの。
+旧SVG構造 `[title, "1", 見出し1, 本文1, "2", 見出し2, 本文2, …]` を `restore-findings-from-svg.mjs` で抽出し
+`{title, findings:[{heading,text}]}` json + source.json(kind:authored) を生成。**SVGは再生成しない**
+(旧SVGは見出し+本文の richer 形式で表示良好、現 findings-card.ts は単一text簡易形式のため再生成すると劣化)。
+→ push対象は json + source.json の2点のみ(svg保持)。捏造リスク0(データ=SVGテキスト)・視覚変化0。
+- 進捗: findings 55枚**全件復元・push** (both 326→381=62.3%、neither 264→209、fail 0)。
+
 ## 検証 (捏造防止・必須)
 push 前に「再生成 json の上位/下位値 == 旧SVG表示値」を機械照合 (≥0.95)。一致しなければ push せず flag。
 正典: `.claude/rules/blog-data-schema.md §1.6/§1.7`。担当 `chart-author`。ツール: `fetch-ranking-data-r2.mjs` / `generate-article-charts.ts` / `regenerate-tile-maps.ts` / `resolve-scatter-axes.mjs`。
