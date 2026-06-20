@@ -68,8 +68,8 @@ const EMBEDDED_SECTIONS: Record<string, string[]> = {
   healthcare: ["depopulation-medical"],
   "aging-society": ["depopulation-medical"],
   climate: ["sunshine-map"],
-  // local-finance の財政フロー Sankey。hideMap 中は他 GIS 同様一旦非表示 (定義は残し復活可能)。
-  "local-finance": ["finance-flow"],
+  // ※ local-finance は専用 bespoke ページ (LocalFinanceDashboard) が財政フロー Sankey を
+  //   自前で持つため、汎用 embeddedSections には登録しない。
 };
 
 /**

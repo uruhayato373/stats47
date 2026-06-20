@@ -3,22 +3,25 @@ import { notFound } from "next/navigation";
 
 import { PageShell } from "@/components/layout";
 
-import { ALL_THEMES } from "@/features/theme-dashboard/config/all-themes";
+import type { FinanceFlowData } from "@/features/finance-flow";
 import {
-  ThemePageLayout,
-  ThemeSidebar,
-  loadThemeData,
-} from "@/features/theme-dashboard/server";
+  LocalFinanceDashboard,
+  loadFinanceCards,
+} from "@/features/local-finance-dashboard";
+import { ALL_THEMES } from "@/features/theme-dashboard/config/all-themes";
+import { ThemeSidebar } from "@/features/theme-dashboard/server";
 
 import { generateOGMetadata } from "@/lib/metadata/og-generator";
 
 import type { Metadata } from "next";
 
-/** ALL_THEMES のエントリ (hideMap・embeddedSections 込み) を正典として使う */
+/** サイドバー用に ALL_THEMES のエントリ (テーマ一覧 + 指標) を使う */
 const theme = ALL_THEMES.find((t) => t.themeKey === "local-finance");
 
-// SSG にすると build 時に R2 を読めず loadThemeData が null になるため runtime 描画
-// （[themeSlug] / home と同型。memory: feedback_home_pure_ssg_r2_empty）
+const R2_BASE = "https://storage.stats47.jp";
+
+// 財政フロー(R2 public URL fetch) を runtime で確実に読むため force-dynamic。
+// 本ページは bespoke LocalFinanceDashboard を使い、汎用 loadThemeData は経由しない。
 export const dynamic = "force-dynamic";
 
 export function generateMetadata(): Metadata {
@@ -37,17 +40,24 @@ export function generateMetadata(): Metadata {
   };
 }
 
+/** 既定県 (13 東京) の財政フローを SSR で R2 公開 URL から読む */
+async function loadInitialFinanceFlow(): Promise<FinanceFlowData | undefined> {
+  try {
+    const res = await fetch(`${R2_BASE}/app/finance-flow/13.json`, {
+      next: { revalidate: 86400 },
+    });
+    if (res.ok) return (await res.json()) as FinanceFlowData;
+  } catch {
+    // client 側 /api/flow フォールバックに任せる
+  }
+  return undefined;
+}
+
 export default async function LocalFinanceThemePage() {
   if (!theme) notFound();
 
-  const data = await loadThemeData(theme);
-  if (!data) {
-    return (
-      <PageShell>
-        <p className="text-muted-foreground">地方財政データの取得に失敗しました。</p>
-      </PageShell>
-    );
-  }
+  const cards = loadFinanceCards();
+  const initialFinanceFlow = await loadInitialFinanceFlow();
 
   return (
     <PageShell leftRail={<ThemeSidebar theme={theme} />}>
@@ -66,7 +76,7 @@ export default async function LocalFinanceThemePage() {
           市区町村
         </Link>
       </nav>
-      <ThemePageLayout theme={theme} data={data} />
+      <LocalFinanceDashboard cards={cards} initialFinanceFlow={initialFinanceFlow} />
     </PageShell>
   );
 }
