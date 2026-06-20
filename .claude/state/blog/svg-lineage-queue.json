@@ -1,14 +1,14 @@
 {
   "total": 612,
   "byStatus": {
-    "both": 299,
+    "both": 326,
     "jsonOnly": 22,
-    "neither": 291
+    "neither": 264
   },
   "byMethod": {
     "manual": 76,
-    "done": 299,
-    "ssot-restore-new": 169,
+    "done": 326,
+    "ssot-restore-new": 142,
     "ssot-restore": 46,
     "source-backfill": 22
   },
@@ -134,10 +134,10 @@
       "slug": "annual-precipitation-rainy-season-gap",
       "base": "chart-precipitation-scatter",
       "chartType": "scatter",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore-new"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "bank-deposit-balance-shikoku-anomaly",
@@ -431,10 +431,10 @@
       "slug": "childcare-friendly-prefecture-ranking",
       "base": "scatter-employment-fertility",
       "chartType": "scatter",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore-new"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "childcare-friendly-prefecture-ranking",
@@ -476,10 +476,10 @@
       "slug": "commercial-land-price-trend",
       "base": "area-ratio-vs-rate-scatter",
       "chartType": "scatter",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore-new"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "commercial-land-price-trend",
@@ -620,10 +620,10 @@
       "slug": "convenience-store-density-map",
       "base": "convenience-vs-retail-scatter",
       "chartType": "scatter",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore-new"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "convenience-store-density-map",
@@ -845,10 +845,10 @@
       "slug": "dual-income-reversal",
       "base": "head-vs-actual-scatter",
       "chartType": "scatter",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore-new"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "dual-income-reversal",
@@ -917,10 +917,10 @@
       "slug": "education-cost-per-child",
       "base": "elem-vs-junior-cost-scatter",
       "chartType": "scatter",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore-new"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "education-cost-per-child",
@@ -1133,10 +1133,10 @@
       "slug": "energy-infrastructure-gas-electricity",
       "base": "gas-vs-electricity-scatter",
       "chartType": "scatter",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore-new"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "energy-infrastructure-gas-electricity",
@@ -1223,10 +1223,10 @@
       "slug": "expenditure-structure-comparison",
       "base": "welfare-vs-public-works-scatter",
       "chartType": "scatter",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore-new"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "farmland-crisis-abandoned-land",
@@ -1439,10 +1439,10 @@
       "slug": "fiscal-self-reliance-gap",
       "base": "fiscal-vs-self-financing-scatter",
       "chartType": "scatter",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore-new"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "fiscal-self-reliance-gap",
@@ -1520,10 +1520,10 @@
       "slug": "food-price-regional-2026",
       "base": "food-quadrant-scatter",
       "chartType": "scatter",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore-new"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "food-spending-pattern",
@@ -2033,10 +2033,10 @@
       "slug": "household-solo-vs-dualincome",
       "base": "single-vs-dual-income-scatter",
       "chartType": "scatter",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore-new"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "household-solo-vs-dualincome",
@@ -2096,10 +2096,10 @@
       "slug": "household-spending-prefecture-gap",
       "base": "spending-vs-food-ratio-scatter",
       "chartType": "scatter",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore-new"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "household-spending-prefecture-gap",
@@ -2150,10 +2150,10 @@
       "slug": "household-structure-transformation",
       "base": "single-vs-dualincome-scatter",
       "chartType": "scatter",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore-new"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "housing-cost-livability-trend",
@@ -2195,10 +2195,10 @@
       "slug": "ict-media-consumption-gender-gap",
       "base": "media-gender-scatter",
       "chartType": "scatter",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore-new"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "ict-media-consumption-gender-gap",
@@ -2753,10 +2753,10 @@
       "slug": "local-tax-revenue-gap",
       "base": "tax-vs-allocation-scatter",
       "chartType": "scatter",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore-new"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "local-tax-revenue-gap",
@@ -3023,10 +3023,10 @@
       "slug": "minimum-wage-1000yen-breakthrough",
       "base": "jobratio-wage-scatter",
       "chartType": "scatter",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore-new"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "minimum-wage-1000yen-prefecture",
@@ -3239,10 +3239,10 @@
       "slug": "nursing-care-shortage-2040",
       "base": "aging-vs-nursing-facility-scatter",
       "chartType": "scatter",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore-new"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "nursing-care-shortage-2040",
@@ -3698,10 +3698,10 @@
       "slug": "population-migration-tokyo-concentration",
       "base": "social-vs-natural-scatter",
       "chartType": "scatter",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore-new"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "post-office-last-window",
@@ -4337,10 +4337,10 @@
       "slug": "sewerage-water-supply-gap",
       "base": "sewerage-vs-water-scatter",
       "chartType": "scatter",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore-new"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "sewerage-water-supply-gap",
@@ -4418,10 +4418,10 @@
       "slug": "small-business-dominance-map",
       "base": "scatter-small-vs-big",
       "chartType": "scatter",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore-new"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "small-business-dominance-map",
@@ -4517,10 +4517,10 @@
       "slug": "solar-panel-housing-prefecture-gap",
       "base": "detached-vs-solar-scatter",
       "chartType": "scatter",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore-new"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "solar-panel-housing-prefecture-gap",
@@ -4607,10 +4607,10 @@
       "slug": "sports-urban-paradox",
       "base": "sports-vs-facility-scatter",
       "chartType": "scatter",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore-new"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "sports-urban-paradox",
@@ -4697,10 +4697,10 @@
       "slug": "suicide-rate-aging-nexus",
       "base": "suicide-vs-aging-scatter",
       "chartType": "scatter",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore-new"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "suicide-rate-aging-nexus",
@@ -4751,10 +4751,10 @@
       "slug": "sunshine-solar-housing-correlation",
       "base": "sunshine-solar-scatter",
       "chartType": "scatter",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore-new"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "sushi-dining-consumption-expenditure",
@@ -5039,10 +5039,10 @@
       "slug": "university-advancement-capacity",
       "base": "advancement-vs-university-scatter",
       "chartType": "scatter",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore-new"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "university-advancement-capacity",
@@ -5129,10 +5129,10 @@
       "slug": "urban-parks-green-infrastructure",
       "base": "park-area-vs-count-scatter",
       "chartType": "scatter",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore-new"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "urban-parks-green-infrastructure",
@@ -5255,10 +5255,10 @@
       "slug": "waste-management-recycling-gap",
       "base": "recycle-vs-landfill-scatter",
       "chartType": "scatter",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore-new"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "waste-management-recycling-gap",
