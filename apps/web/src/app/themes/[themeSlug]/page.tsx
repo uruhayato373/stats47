@@ -26,15 +26,14 @@ import type { Metadata } from "next";
  * Plan: /root/.claude/plans/ok-validated-stroustrup.md Phase 3
  */
 
-/** 24時間 ISR */
-export const revalidate = 86400;
-
-/** ALL_THEMES から static params を生成。local-finance は専用ファイルが優先されるため除外。 */
-export function generateStaticParams() {
-  return ALL_THEMES.filter((t) => t.themeKey !== "local-finance").map((t) => ({
-    themeSlug: t.themeKey,
-  }));
-}
+/**
+ * force-dynamic（毎リクエスト Cloudflare Workers ランタイムで描画）。
+ * SSG/ISR にすると build 時に R2 から指標データを読めず loadThemeData が null →
+ * 「データの取得に失敗しました」が prerender に焼かれ、ISR 無効のため回復しない
+ * （home ページと同型の SSG-R2-empty バグ。memory: feedback_home_pure_ssg_r2_empty）。
+ * 実行時は Worker から R2 を読めるためデータが揃う。
+ */
+export const dynamic = "force-dynamic";
 
 interface PageProps {
   params: Promise<{ themeSlug: string }>;
