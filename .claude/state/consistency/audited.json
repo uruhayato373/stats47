@@ -1,7 +1,10 @@
 {
-  "hash": "37dc0b3f2e2fe78d80bb5a9c4b40b3c9bb71fa6524af27a017c941e08abd10af",
-  "audited_at": "2026-06-20T05:15:02",
+  "hash": "7a20aca39754224cc1819845dbed2980b31bc966a0994333aa3a4e508b98caf9",
+  "audited_at": "2026-06-20T05:45:56",
   "files": [
-    ".claude/scripts/blog/regenerate-tile-maps.ts"
+    ".claude/agents/README.md",
+    ".claude/agents/theme-designer.md",
+    ".claude/agents/theme-ui-manager.md",
+    ".claude/skills/theme/audit-theme-components/SKILL.md"
   ]
 }

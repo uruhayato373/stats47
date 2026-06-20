@@ -62,12 +62,13 @@
 | `performance-auditor` 🆕 | PSI / Lighthouse / Cloudflare cost | seo-auditor 分割 |
 | `adsense-analyst` 🆕 | AdSense / アフィリエイト収益計測 | seo-auditor 分割 + new |
 
-## Tier 6: Theme / UI (4 体)
+## Tier 6: Theme / UI (5 体)
 
 | agent | role | 派生元 |
 |---|---|---|
-| `theme-designer` | テーマ → IndicatorSet 設計 | 既存 |
+| `theme-designer` | テーマ → IndicatorSet 設計 (どの指標を載せるか) | 既存 |
 | `theme-component-builder` | page_components 監査・INSERT (旧 theme-enhancer) | リネーム |
+| `theme-ui-manager` 🆕 | テーマページ UI 層の統一・監査・是正 (レイアウト/見出し/セレクタ/カード構成/コピー)。重複セレクタ・古い「地図」コピー等のドリフトを管理 | 2026-06-20 新設 |
 | `ui-reviewer` | melta-ui 準拠 + UI panel review | 既存 |
 | `image-prompt-curator` 🆕 | OGP / note 表紙 / SNS 静止素材プロンプト生成 | sns-renderer + note-manager 分離 |
 

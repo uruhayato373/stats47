@@ -251,14 +251,12 @@ export function ThemeDashboardTabbed({
 
   // --- レイアウト ---
 
-  // hideMap: 地図・選択タブ・チャートなし。都道府県セレクタ + KPI カードビュー。
+  // hideMap: 地図・選択タブ・チャートなし。チャート付き stats-card のみ。
+  // 都道府県セレクタは H1 (ThemeAreaHeader の PageHeader actions) に 1 つだけ置く
+  // (本体側 prefectureSelector を二重に出さない)。選択エリアは H1 に反映される。
   if (themeConfig.hideMap) {
     return (
       <div className="space-y-4 overflow-hidden">
-        <div className="flex items-center gap-3 flex-wrap">
-          {prefectureSelector}
-        </div>
-        {areaBanner}
         {metricsDashboardSection}
       </div>
     );
