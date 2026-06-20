@@ -20,6 +20,12 @@ metadata:
 - `ssot-restore-new`: scatter(2軸metric)/line/findings消失 → 手法を新規実装(agent特定)。
 - `manual`: 無意味名(inline-chart-N)。
 
-系譜完全率 30%→**38%**(both 232/612、2026-06-20)。残り incomplete37/ssot-restore99/ssot-restore-new169/manual76 は **agent による SSOT特定**(scatter 2軸metric割出し・ambiguous base→key マッピング)。復元は **SSOTから(`app/ranking`)。SVGの絵から逆復元禁止**(§1.6)。値を記事本文と自己検算して捏造防止。
+系譜完全率 30%→**40.4%**(both 247/612、2026-06-20)。source-backfill を 2 ツールで決定的に消化:
+- `backfill-source.mjs`: scatter 2軸照合 + 全chartType照合(cpi-* unknown 救済) + **0.95精度ガード**(0.8だと相関別指標へ偽陽性)。10枚 verified。
+- `resolve-scatter-axes.mjs`(新): axisラベルから候補keyを all.json名前検索→SSOT値照合(≥0.95)。独自スキーマ(fiscalIndex/tertiaryRatio)も field指定対応。FLAT_CONFIG=scale表記(平均給与万円=÷10000)、DERIVED_CONFIG=÷人口再計算(per-capita-local-tax 10/10)。同率は最新年優先。5枚 verified。
+
+残 source-backfill 22枚(`source-backfill-residue.md`に分類): 派生3(welfare 7/11・retail 0/0構造不良・nurse-favored順位差)/authored全国系列9/複数系列2/semiconductor派生1/未取込3。**+ neither 343(json消失)は未着手=最大バケツ**(regenerate-ranking-cards/tile-maps/新手法で SSOT再生成)。復元は **SSOTから(`app/ranking`)。SVGの絵から逆復元禁止**(§1.6)。値を自己検算して捏造防止。
+
+副産物バグ: **marriages/divorces の SSOT値が誤り**(divorcesキーに婚姻率の値・marriagesキーは~0.5異常、cdCat01取違え疑い、live /ranking/ に誤データ)。証拠+検証cmd+再取込手順=`docs/02_実装計画/05_指標バックログ.md §D`。
 
 正典: `.claude/rules/blog-data-schema.md §1.5/1.6/1.7`。担当 = `chart-author` agent(データ系譜の整備・復元責務)。並行別件: 米/パン metric config(`rice-/bread-consumption-expenditure`、develop、次デプロイ後 data-refresh で取り込み→地図化、未取り込み指標は `docs/02_実装計画/05_指標バックログ.md`)。
