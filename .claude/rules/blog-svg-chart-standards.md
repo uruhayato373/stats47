@@ -185,10 +185,30 @@ svg += svgThemeStyle();
 
 | 重大度 | チェック項目 |
 |---|---|
-| **error** | viewBox 未設定 / width・height 属性なし / 閉じタグなし |
-| **warning** | ダークモード非準拠（`svgThemeStyle()` なし） / テーマ色のインライン指定 |
+| **error** | viewBox 未設定 / width・height 属性なし / 閉じタグなし / **カタログ別 非正規サイズ（統一済みカタログ）** |
+| **warning** | ダークモード非準拠（`svgThemeStyle()` なし） / テーマ色のインライン指定 / **カタログ別 非正規サイズ（未統一カタログ）** |
 
-バッチ監査: `.claude/scripts/blog/audit-chart-quality.mjs` で全記事を一括チェック。
+### カタログ別サイズ統一 gate（`lintSvgSize` / 2026-06-21 追加・★再発防止）
+
+`lintSvgSize(filename, content)` が **filename→chartType→正規 viewBox 幅（§5）** を照合する。
+新規記事・校正で非正規サイズの SVG が混入するのを公開前に止める（ranking が 760×532 / 960×624（旧10+10）等に
+分裂していた事故の再発防止）。配線先＝**`quality-gate.mjs`（pre-commit + publish-blog.yml で発火）** と
+`audit-chart-quality.mjs`（バッチ）。`classifyChartTypeFromName` で型判定。
+
+| chartType | 正規幅 | 重大度 |
+|---|---|---|
+| `bar`（ranking） | 960（columns）/ 680（single） | **error**（統一済み） |
+| `tile-grid`（tilemap） | 600 | **error**（統一済み） |
+| `summary`（findings） | 960 | **error**（統一済み） |
+| `line` | 680 | warning（未統一→統一後 error 昇格） |
+| `scatter` | 960 | warning（未統一） |
+| `stacked-bar` | 680 | warning（未統一） |
+
+是正ツール: ranking=`rerender-ranking-columns.mts`（既存検証済み json から 960×404 columns 再描画。値不変）。
+scatter/line/stacked は対応 restorer で json から再描画して統一する（順次 error 昇格）。
+**幅は不変量**（高さは件数/内容で可変）なので幅で判定する。分類不能名（`inline-chart-N` 等）は対象外。
+
+バッチ監査: `.claude/scripts/blog/audit-chart-quality.mjs` で全記事を一括チェック（内容 lint + サイズ lint）。
 
 ---
 

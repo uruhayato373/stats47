@@ -32,7 +32,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { lintSvgContent, extractInlineSvgs } from "../lib/svg-lint.mjs";
+import { lintSvgContent, extractInlineSvgs, lintSvgSize } from "../lib/svg-lint.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -88,10 +88,13 @@ function auditArticle(slug) {
     }
   };
 
-  // data/*.svg
+  // data/*.svg (内容 lint + カタログ別サイズ統一 lint)
   if (fs.existsSync(dataDir)) {
     for (const f of fs.readdirSync(dataDir).filter((x) => x.endsWith(".svg"))) {
-      consume(`data/${f}`, lintSvgContent(fs.readFileSync(path.join(dataDir, f), "utf8")));
+      const svg = fs.readFileSync(path.join(dataDir, f), "utf8");
+      const a = lintSvgContent(svg);
+      const b = lintSvgSize(f, svg); // 非正規 viewBox 幅 (アスペクト比統一・再発防止)
+      consume(`data/${f}`, { errors: [...a.errors, ...b.errors], warnings: [...a.warnings, ...b.warnings] });
     }
   }
   // article.md インライン <svg>
