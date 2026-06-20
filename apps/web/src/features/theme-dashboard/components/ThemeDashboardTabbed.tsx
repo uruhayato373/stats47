@@ -36,7 +36,9 @@ import type { ThemeDashboardClientProps } from "../types";
 import type { RankingValue } from "@stats47/ranking";
 
 function chartLoading(props: { height?: number; className?: string }) {
-  return () => <ChartLoading {...props} />;
+  const ChartLoadingFallback = () => <ChartLoading {...props} />;
+  ChartLoadingFallback.displayName = "ChartLoadingFallback";
+  return ChartLoadingFallback;
 }
 
 const RankingDataTable = dynamic(

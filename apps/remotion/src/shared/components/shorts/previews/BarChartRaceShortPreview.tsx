@@ -1,5 +1,5 @@
 import React from "react";
-import type { BarChartRaceFrame } from "@stats47/visualization";
+import type { BarChartRaceFrame } from "@stats47/visualization/d3/BarChartRace";
 import type { ThemeName } from "@/shared";
 import type { EventLabel } from "../../../utils/bar-chart-race";
 import { BarChartRaceShort } from "../BarChartRaceShort";

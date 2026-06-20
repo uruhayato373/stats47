@@ -26,8 +26,8 @@ import {
 
 import { ThemeAreaHeader } from "./ThemeAreaHeader";
 import { ThemeDashboardClient } from "./ThemeDashboardClient";
-import { ThemeRelatedArticles } from "./ThemeRelatedArticles";
 import { ThemePrefectureProvider } from "./ThemePrefectureContext";
+import { ThemeRelatedArticles } from "./ThemeRelatedArticles";
 
 import type { ThemePageData } from "../lib/load-theme-data";
 import type { ThemeConfig } from "../types";

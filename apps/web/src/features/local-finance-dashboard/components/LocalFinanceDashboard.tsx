@@ -92,7 +92,7 @@ export function LocalFinanceDashboard({ cards, initialFinanceFlow }: Props) {
     let cancelled = false;
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setCityData(null);
-    // eslint-disable-next-line react-hooks/set-state-in-effect
+     
     setCityName(PREF_ALL);
     fetch(`/finance-cards/cities/${prefCode}.json`)
       .then((r) => (r.ok ? (r.json() as Promise<CityData>) : null))

@@ -6,19 +6,21 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 
 import { lookupArea } from "@stats47/area";
-import { Card, CardContent, CardHeader, CardTitle } from "@stats47/components/atoms/ui/card";
-import { Skeleton } from "@stats47/components/atoms/ui/skeleton";
 import { TrendingUp, MapPin, ArrowDownUp } from "lucide-react";
 
+import { ChartPanel } from "@/components/charts/ChartCard";
 import type { LineChartData } from "@/components/stat-charts/types/visualization";
 
 import { fetchMetricTimeseriesAction, type MetricTimeseriesPoint } from "../actions";
+
+import { ChartEmptyState, ChartLoading } from "./ChartState";
+import { RankingBarList } from "./RankingBarList";
 
 import type { RankingItem, RankingValue } from "@stats47/ranking";
 
 const LineChartClient = dynamic(
   () => import("@/components/stat-charts/components/charts/LineChart/LineChartClient").then((mod) => mod.LineChartClient),
-  { ssr: false, loading: () => <Skeleton className="h-[250px] w-full rounded-md" /> },
+  { ssr: false, loading: () => <ChartLoading height={250} /> },
 );
 
 interface Props {
@@ -106,118 +108,79 @@ export function MetricFocusCharts({
   if (!rankingItem) return null;
 
   return (
-    <Card className="border border-border shadow-sm rounded-lg">
-      <CardHeader className="pb-2">
-        <div className="flex items-center justify-between gap-2 flex-wrap">
-          <div className="flex items-center gap-2">
-            <TrendingUp className="h-4 w-4 text-primary" />
-            <CardTitle className="text-base">
-              {rankingItem.title} — 詳細チャート
-            </CardTitle>
-          </div>
-          <Link
-            href={`/ranking/${metricKey}`}
-            className="text-xs text-primary hover:underline"
-          >
-            指標の詳細 →
-          </Link>
-        </div>
-        <div className="flex items-center gap-1 text-xs text-muted-foreground">
+    <ChartPanel
+      title={`${rankingItem.title} — 詳細チャート`}
+      icon={<TrendingUp className="h-4 w-4 shrink-0 text-primary" />}
+      titleClassName="text-base"
+      className="rounded-lg"
+      contentClassName="space-y-5"
+      action={
+        <Link
+          href={`/ranking/${metricKey}`}
+          className="text-xs text-primary hover:underline"
+        >
+          指標の詳細 →
+        </Link>
+      }
+      description={
+        <div className="flex items-center gap-1">
           <MapPin className="h-3 w-3" />
           <span>{areaName} の時系列推移</span>
           {!selectedPrefectureCode && (
             <span className="ml-1">(地図で都道府県を選択すると切り替わります)</span>
           )}
         </div>
-      </CardHeader>
-      <CardContent className="space-y-5">
-        {/* (A) 時系列ライン */}
-        <section>
-          <h3 className="text-xs font-medium text-muted-foreground mb-2 flex items-center gap-1">
-            <TrendingUp className="h-3 w-3" /> 時系列推移
-          </h3>
-          {isPending ? (
-            <div className="h-[250px] flex items-center justify-center text-xs text-muted-foreground animate-pulse">
-              読込中...
-            </div>
-          ) : lineChartData ? (
-            <LineChartClient chartData={lineChartData} />
-          ) : (
-            <div className="h-[120px] flex items-center justify-center text-xs text-muted-foreground">
-              時系列データがありません
-            </div>
-          )}
-        </section>
+      }
+    >
+      {/* (A) 時系列ライン */}
+      <section>
+        <h3 className="text-xs font-medium text-muted-foreground mb-2 flex items-center gap-1">
+          <TrendingUp className="h-3 w-3" /> 時系列推移
+        </h3>
+        {isPending ? (
+          <ChartLoading height={250} />
+        ) : lineChartData ? (
+          <LineChartClient chartData={lineChartData} />
+        ) : (
+          <ChartEmptyState message="時系列データがありません" height={120} />
+        )}
+      </section>
 
-        {/* (B) 上下位 5 県 bar */}
-        <section>
-          <h3 className="text-xs font-medium text-muted-foreground mb-2 flex items-center gap-1">
-            <ArrowDownUp className="h-3 w-3" /> 上位 5 / 下位 5
-          </h3>
-          <div className="space-y-1">
-            {topFive.map((v) => (
-              <TopBottomRow
-                key={`top-${v.areaCode}`}
-                areaCode={v.areaCode}
-                value={v.value ?? 0}
-                rank={v.rank ?? 0}
-                max={maxAbsValue}
-                unit={rankingItem.unit ?? ""}
-                tone="top"
-                highlighted={v.areaCode === selectedPrefectureCode}
-              />
-            ))}
-            <div className="border-t border-dashed border-border my-1.5" />
-            {bottomFive.map((v) => (
-              <TopBottomRow
-                key={`bot-${v.areaCode}`}
-                areaCode={v.areaCode}
-                value={v.value ?? 0}
-                rank={v.rank ?? 0}
-                max={maxAbsValue}
-                unit={rankingItem.unit ?? ""}
-                tone="bottom"
-                highlighted={v.areaCode === selectedPrefectureCode}
-              />
-            ))}
-          </div>
-        </section>
-      </CardContent>
-    </Card>
-  );
-}
-
-function TopBottomRow({
-  areaCode,
-  value,
-  rank,
-  max,
-  unit,
-  tone,
-  highlighted,
-}: {
-  areaCode: string;
-  value: number;
-  rank: number;
-  max: number;
-  unit: string;
-  tone: "top" | "bottom";
-  highlighted?: boolean;
-}) {
-  const areaName = lookupArea(areaCode)?.areaName ?? areaCode;
-  const widthPercent = Math.min(100, (Math.abs(value) / max) * 100);
-  const color = tone === "top" ? "bg-blue-500" : "bg-slate-400";
-  return (
-    <div className={`flex items-center gap-2 text-xs ${highlighted ? "font-semibold" : ""}`}>
-      <span className="w-6 text-right text-muted-foreground tabular-nums">{rank}</span>
-      <span className="w-14 truncate">{areaName}</span>
-      <div className="flex-1 h-3 bg-muted rounded-sm overflow-hidden">
-        <div className={`h-full ${color}`} style={{ width: `${widthPercent}%` }} />
-      </div>
-      <span className="w-20 text-right tabular-nums">
-        {value.toLocaleString()}
-        <span className="ml-0.5 text-muted-foreground font-normal">{unit}</span>
-      </span>
-    </div>
+      {/* (B) 上下位 5 県 bar */}
+      <section>
+        <h3 className="text-xs font-medium text-muted-foreground mb-2 flex items-center gap-1">
+          <ArrowDownUp className="h-3 w-3" /> 上位 5 / 下位 5
+        </h3>
+        <div className="space-y-1.5">
+          <RankingBarList
+            items={topFive.map((v) => ({
+              key: `top-${v.areaCode}`,
+              areaCode: v.areaCode,
+              value: v.value ?? 0,
+              rank: v.rank,
+              tone: "top",
+              highlighted: v.areaCode === selectedPrefectureCode,
+            }))}
+            max={maxAbsValue}
+            unit={rankingItem.unit ?? ""}
+            showRank
+          />
+          <div className="border-t border-dashed border-border my-1.5" />
+          <RankingBarList
+            items={bottomFive.map((v) => ({
+              key: `bottom-${v.areaCode}`,
+              areaCode: v.areaCode,
+              value: v.value ?? 0,
+              rank: v.rank,
+              tone: "bottom",
+              highlighted: v.areaCode === selectedPrefectureCode,
+            }))}
+            max={maxAbsValue}
+            unit={rankingItem.unit ?? ""}
+            showRank
+          />
+        </div>
+      </section>
+    </ChartPanel>
   );
 }

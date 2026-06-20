@@ -99,6 +99,8 @@ metric 選定 (GSC ギャップ/トレンド/カテゴリ/ユーザー指示)
 
 **既存記事の一括再生成**: `.claude/scripts/blog/regenerate-ranking-cards.mjs`。全公開記事を triage（tractable=1ランキング+key解決可 / ambiguous=複数or key無 / no-ranking）し、tractable を SSOT から横長+縦長へ再生成（dry-run=staging `.local/regen-staging`、R2 push はしない）。before/after ギャラリー `/tmp/regen-cards-gallery.html` を出力。R2 反映は別途 `diff-push-r2` で行う。
 
+> **2つの一括再生成の使い分け（混在防止）**: ランキングの是正は **`regenerate-ranking-cards.mjs`**（SSOT=R2 app/ranking から**再取得**して manifest 付きで横長+縦長を作る。データが R2 に無い記事でも復元できる）が正典。`regenerate-blog-svgs.yml`（CI）は **既存 `data/*.json` を入力に全チャート種を再描画**する用途で、ソース JSON が R2 に残っていない記事のランキングは再生成できない（→ `regenerate-ranking-cards.mjs` を使う）。
+
 ## 2. Wave 命名規則
 
 Blog の brushup 施策は **wave 単位** で記録・追跡する。wave は「同一目的・同一日付・同一手法」でまとめた施策のセット。

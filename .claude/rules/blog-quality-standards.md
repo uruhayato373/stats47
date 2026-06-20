@@ -204,7 +204,7 @@ date: YYYY-MM-DD
 ```markdown
 ## 製造品出荷額ランキング
 
-![出荷額 上位10・下位10](data/manufacturing-ranking.svg)
+![出荷額 上位5・下位5](data/manufacturing-ranking.svg)
 
 愛知が58兆円で...（解説）
 

@@ -134,6 +134,7 @@ apps/web/tests/visual/__screenshots__/**/*-actual.png
 
 # Remotion render output
 apps/remotion/out/
+apps/remotion/build/
 
 # Local development data
 .local/

@@ -1,4 +1,4 @@
-import type { BarChartRaceFrame } from "@stats47/visualization";
+import type { BarChartRaceFrame } from "@stats47/visualization/d3/BarChartRace";
 import type { StatsSchema } from "@stats47/types";
 import { SCENE_DURATION } from "@/utils/constants";
 
@@ -37,6 +37,7 @@ export function toBarChartRaceFrames(stats: StatsSchema[]): BarChartRaceFrame[] 
   const grouped = new Map<string, { yearName: string; items: { name: string; value: number }[] }>();
 
   for (const s of stats) {
+    if (s.value == null) continue;
     let group = grouped.get(s.yearCode);
     if (!group) {
       group = { yearName: s.yearName, items: [] };

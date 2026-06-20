@@ -1,6 +1,6 @@
 import React from "react";
 import { AbsoluteFill, Audio, Sequence, interpolate, staticFile, useCurrentFrame } from "remotion";
-import type { BarChartRaceFrame } from "@stats47/visualization";
+import type { BarChartRaceFrame } from "@stats47/visualization/d3/BarChartRace";
 
 import { COLOR_SCHEMES, FONT, ReelLastPage, SafetyZoneOverlay, type ThemeName } from "@/shared";
 import { SCENE_DURATION } from "@/utils/constants";

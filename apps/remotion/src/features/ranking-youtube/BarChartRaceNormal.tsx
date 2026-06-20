@@ -1,6 +1,6 @@
 import React from "react";
 import { Audio, Sequence, staticFile } from "remotion";
-import type { BarChartRaceFrame } from "@stats47/visualization";
+import type { BarChartRaceFrame } from "@stats47/visualization/d3/BarChartRace";
 
 import { type ThemeName } from "@/shared";
 import { SCENE_DURATION } from "@/utils/constants";

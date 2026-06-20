@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
 import { AbsoluteFill, interpolate, useCurrentFrame, useVideoConfig } from "remotion";
 import { schemeTableau10 } from "d3-scale-chromatic";
-import type { BarChartRaceFrame } from "@stats47/visualization";
+import type { BarChartRaceFrame } from "@stats47/visualization/d3/BarChartRace";
 import { formatValueWithPrecision, getMaxDecimalPlaces } from "@stats47/utils";
 
 import { BRAND, COLOR_SCHEMES, FONT, RANK_COLORS, SPACING, type ThemeName } from "@/shared";

@@ -1,10 +1,16 @@
 "use client";
 
-import { createContext, useCallback, useContext, useEffect, useState } from "react";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+  type ReactNode,
+} from "react";
 
 import { lookupArea } from "@stats47/area";
 
-import type { ReactNode } from "react";
 
 // ============================================================================
 // Context — テーマダッシュボードの選択エリア (全国 / 都道府県) の単一ソース。
@@ -61,7 +67,6 @@ export function ThemePrefectureProvider({
     if (p && /^\d{5}$/.test(p)) {
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setCode(p);
-      // eslint-disable-next-line react-hooks/set-state-in-effect
       setName(lookupArea(p)?.areaName ?? null);
     }
   }, [initialAreaCode]);

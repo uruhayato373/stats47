@@ -13,8 +13,8 @@ import type { PageComponent } from "@/components/stat-charts";
 import { KpiCardClient } from "@/components/stat-charts/components/cards/KpiCard/KpiCardClient";
 
 import { ChartEmptyState } from "./ChartState";
-import { ThemeDbChartRenderer } from "./ThemeDbChartRenderer";
 import { RankingBarList } from "./RankingBarList";
+import { ThemeDbChartRenderer } from "./ThemeDbChartRenderer";
 
 import type { ThemeConfig, ThemeIndicatorData } from "../types";
 

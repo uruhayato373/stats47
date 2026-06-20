@@ -11,15 +11,14 @@
  *   tsx scripts/fetch-station-passengers.ts 13 14 22  # 複数県
  *   tsx scripts/fetch-station-passengers.ts all       # 全 47 県
  *
- * API キー: 環境変数 MLIT_API_KEY、無ければ .mcp.json から読む。
+ * API キー: 環境変数 MLIT_API_KEY を使用する。
  */
-import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { mkdirSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const REMOTION_ROOT = resolve(__dirname, "..");
-const REPO_ROOT = resolve(REMOTION_ROOT, "../..");
 const OUT_DIR = resolve(REMOTION_ROOT, "public/station-passengers");
 
 const DATASET_ID = "nlni_ksj-s12";
@@ -43,10 +42,7 @@ const PREF_NAMES: Record<string, string> = {
 
 function readApiKey(): string {
   if (process.env.MLIT_API_KEY) return process.env.MLIT_API_KEY;
-  const mcp = JSON.parse(readFileSync(resolve(REPO_ROOT, ".mcp.json"), "utf8"));
-  const key = mcp?.mcpServers?.["mlit-dpf-mcp"]?.env?.MLIT_API_KEY;
-  if (!key) throw new Error("MLIT_API_KEY が環境変数にも .mcp.json にも見つかりません");
-  return key;
+  throw new Error("MLIT_API_KEY が環境変数に見つかりません");
 }
 
 interface RawRecord {

@@ -5,8 +5,10 @@ import { useMemo } from "react";
 import dynamic from "next/dynamic";
 
 import { lookupArea } from "@stats47/area";
-import { Card, CardContent, CardHeader, CardTitle } from "@stats47/components/atoms/ui/card";
-import { Skeleton } from "@stats47/components/atoms/ui/skeleton";
+
+import { ChartPanel } from "@/components/charts/ChartCard";
+
+import { ChartLoading } from "./ChartState";
 
 import type { ThemeIndicatorData } from "../types";
 import type { ScatterplotDataNode } from "@stats47/visualization/d3";
@@ -16,7 +18,7 @@ const Scatterplot = dynamic(
   () => import("@stats47/visualization/d3").then((mod) => mod.Scatterplot),
   {
     ssr: false,
-    loading: () => <Skeleton className="h-[300px] w-full rounded-md" />,
+    loading: () => <ChartLoading height={300} />,
   },
 );
 
@@ -128,33 +130,28 @@ export function PopulationScatterSection({
       <h2 className="text-xl font-bold mb-4">相関分析</h2>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         {scatterData.map(({ config, points, xLabel, yLabel, xUnit, yUnit }) => (
-          <Card key={config.id} className="border border-border shadow-sm rounded-sm">
-            <CardHeader className="pb-2">
-              <CardTitle className="text-sm">{config.title}</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <Scatterplot
-                data={points}
-                xLabel={xLabel}
-                yLabel={yLabel}
-                height={280}
-                r={4}
-                fill="hsl(215, 70%, 60%)"
-                stroke="hsl(215, 70%, 40%)"
-                strokeWidth={1}
-                strokeOpacity={0.8}
-                regressionLine={
-                  config.diagonalLine
-                    ? { slope: 1, intercept: 0 }
-                    : undefined
-                }
-              />
-              <p className="text-[10px] text-muted-foreground mt-1">
-                X: {xLabel}（{xUnit}）/ Y: {yLabel}（{yUnit}）
-                {config.diagonalLine && " / 対角線: 出生率=死亡率（自然増減ゼロ）"}
-              </p>
-            </CardContent>
-          </Card>
+          <ChartPanel key={config.id} title={config.title} className="rounded-sm">
+            <Scatterplot
+              data={points}
+              xLabel={xLabel}
+              yLabel={yLabel}
+              height={280}
+              r={4}
+              fill="hsl(215, 70%, 60%)"
+              stroke="hsl(215, 70%, 40%)"
+              strokeWidth={1}
+              strokeOpacity={0.8}
+              regressionLine={
+                config.diagonalLine
+                  ? { slope: 1, intercept: 0 }
+                  : undefined
+              }
+            />
+            <p className="text-[10px] text-muted-foreground mt-1">
+              X: {xLabel}（{xUnit}）/ Y: {yLabel}（{yUnit}）
+              {config.diagonalLine && " / 対角線: 出生率=死亡率（自然増減ゼロ）"}
+            </p>
+          </ChartPanel>
         ))}
       </div>
     </section>

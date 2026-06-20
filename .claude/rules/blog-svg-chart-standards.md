@@ -174,7 +174,7 @@ svg += svgThemeStyle();
 | 積み上げ棒（stacked） | `680` | 可変 | `680×420` |
 
 `width` と `height` 属性は viewBox と必ず一致させる（svg-lint が検査）。
-**svg-builder の各チャートは §5 標準幅に収斂済（2026-06-17 Step 5）**: bar=680（width/height も 680 に一致、旧 DISPLAY_W=780 スケーリングは廃止）/ scatter=960×624 / map=600×700 / line=680×420 / stacked=680 / findings=960。新規生成は自動的にこの規格になる。
+**svg-builder の各チャートは §5 標準幅に収斂済（2026-06-17 Step 5）**: bar single=680（width/height も 680 に一致、旧 DISPLAY_W=780 スケーリングは廃止）/ **ランキングカード 横長columns=960×404・縦長portrait=1080×1350（2026-06-20）** / scatter=960×624 / map=600×700 / line=680×420 / stacked=680 / findings=960。新規生成は自動的にこの規格になる。
 **標準幅から外れる既存 SVG は再生成で是正**（`regenerate-blog-svgs.yml`・§10 Step 4）。
 
 ---

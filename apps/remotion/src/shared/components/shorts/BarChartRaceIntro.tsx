@@ -3,7 +3,7 @@ import { AbsoluteFill, interpolate, spring, useCurrentFrame, useVideoConfig } fr
 import { scaleSequential } from "d3-scale";
 import { interpolateBlues, interpolateYlOrRd, interpolateGreens, interpolatePurples, interpolateOranges } from "d3-scale-chromatic";
 import { TILE_GRID_LAYOUT, type TileGridCell } from "@stats47/visualization";
-import type { BarChartRaceFrame } from "@stats47/visualization";
+import type { BarChartRaceFrame } from "@stats47/visualization/d3/BarChartRace";
 
 import { BRAND, COLOR_SCHEMES, FONT, type ThemeName } from "@/shared";
 

@@ -3,9 +3,9 @@ import { notFound } from "next/navigation";
 import { PageShell } from "@/components/layout";
 
 import { ALL_THEMES } from "@/features/theme-dashboard/config/all-themes";
-import { ThemeSidebar } from "@/features/theme-dashboard/components/ThemeSidebar";
 import {
   ThemePageLayout,
+  ThemeSidebar,
   loadThemeData,
 } from "@/features/theme-dashboard/server";
 
