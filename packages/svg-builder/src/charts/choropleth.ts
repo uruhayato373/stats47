@@ -18,6 +18,9 @@
 import { FONT_FAMILY } from "../shared/color";
 import { formatTick } from "../shared/axis";
 import { svgThemeStyle } from "../shared/theme";
+// D3 カラースキーム (d3-scale-chromatic) を「生成時」に評価し、結果の rgb() を静的 SVG へ焼き込む。
+// （SVG 実行時に D3 は不要。）依存はモノレポ root に hoist 済（migration-flow / remotion が宣言）。
+import * as d3chromatic from "d3-scale-chromatic";
 
 export interface ChoroplethItem {
   /** 都道府県コード "01"〜"47"（"01000" 形式も可） */
@@ -43,10 +46,29 @@ export interface ChoroplethOptions {
   colorMax?: number;
   /** 値フォーマット関数（省略時: formatTick） */
   formatValue?: (v: number) => string;
-  /** カラーストップ（省略時: Reds） */
+  /** カラーストップ（省略時: Reds）。`scheme` 指定時は無視される。 */
   colorStops?: Array<{ t: number; r: number; g: number; b: number }>;
+  /**
+   * D3 カラースキーム名（d3-scale-chromatic の `interpolate<Name>`）。
+   * 例: "Reds" / "Blues" / "Greens" / "Oranges" / "Purples" / "Greys" /
+   *     "Viridis" / "Magma" / "YlOrRd" / "BuPu" / "YlGnBu"（連続単/多色相）、
+   *     "RdYlGn" / "RdBu" / "Spectral" / "BrBG" / "PuOr"（発散）など。
+   * 指定時は `colorStops` より優先。未指定時は `colorStops`（既定 Reds）。
+   */
+  scheme?: string;
+  /** カラースケールを反転する（高い値を淡色側にする等）。 */
+  reverse?: boolean;
+  /** 各タイルに県名の下へ値も表示する（省略時: false = 県名のみ）。 */
+  showValue?: boolean;
   /** 凡例の端ラベル [左端, 右端]（省略時: ["安全", "危険"]） */
   legendLabels?: [string, string];
+}
+
+/** D3 スキーム名 → interpolator 関数を解決（無ければ null）。 */
+function resolveInterp(scheme?: string): ((t: number) => string) | null {
+  if (!scheme) return null;
+  const fn = (d3chromatic as Record<string, unknown>)[`interpolate${scheme}`];
+  return typeof fn === "function" ? (fn as (t: number) => string) : null;
 }
 
 // ─── タイルレイアウト ────────────────────────────────────────────
@@ -158,17 +180,11 @@ function nameFontSize(name: string, w: number, h: number): number {
   return 9;
 }
 
-/**
- * 背景色の知覚輝度に基づきテキスト色を返す。
- * 輝度 > 0.5 → 暗い背景向け白文字ではなく濃いグレー（#374151）、
- * 輝度 ≤ 0.5 → 白（#ffffff）。
- */
-function textFill(rgbColor: string): string {
-  const m = rgbColor.match(/rgb\((\d+),(\d+),(\d+)\)/);
-  if (!m) return "#ffffff";
-  const lum =
-    (0.299 * parseInt(m[1]) + 0.587 * parseInt(m[2]) + 0.114 * parseInt(m[3])) / 255;
-  return lum > 0.5 ? "#374151" : "#ffffff";
+/** 概算幅でタイトルフォントをフィット（CJK≈1em / ASCII・半角≈0.55em）。 */
+function fitTitleFont(text: string, availW: number, maxF: number, minF: number): number {
+  const units = [...text].reduce((w, ch) => w + (/[ -~｡-ﾟ]/.test(ch) ? 0.55 : 1.0), 0);
+  if (units <= 0) return maxF;
+  return Math.max(minF, Math.min(maxF, Math.floor(availW / units)));
 }
 
 // ─── SVG 定数 ────────────────────────────────────────────────────
@@ -200,8 +216,18 @@ export function generateChoroplethSvg(
     colorMax,
     formatValue = (v) => formatTick(v, 1),
     colorStops = COLOR_STOPS,
+    scheme,
+    reverse = false,
+    showValue = false,
     legendLabels = ["安全", "危険"],
   } = options;
+
+  // 色の解決: scheme（D3）指定時は interpolator、無ければ colorStops。reverse で反転。
+  const interp = resolveInterp(scheme);
+  const colorOf = (t: number): string => {
+    const tt = reverse ? 1 - t : t;
+    return interp ? interp(tt) : interpolateColor(tt, colorStops);
+  };
 
   // コードを 2 桁に正規化（"01000" → "01"）
   const byCode = new Map(
@@ -219,52 +245,69 @@ export function generateChoroplethSvg(
     if (!item) return "";
 
     const t = toT(item.value);
-    const fill = interpolateColor(t, colorStops);
+    const fill = colorOf(t);
     const nfs = nameFontSize(item.name, tile.w, tile.h);
 
     const cx = tile.x + tile.w / 2;
-    // 名前を縦中央に配置（baseline = タイル中心 + cap-height 補正）
-    const nameY = tile.y + tile.h / 2 + nfs * 0.38;
-
     const valStr = formatValue(item.value);
+    // テキストは全て白。濃い縁取り(paint-order stroke)+ ソフトシャドウで
+    // 淡色タイルでも背景に依らず読めるようにする（白/黒の切替はしない）。
+    const strokeW = Math.max(1.1, nfs * 0.18).toFixed(1);
 
-    const tc = textFill(fill);
-    const filterAttr = tc === "#ffffff" ? ` filter="url(#txt-shadow)"` : "";
+    const tspans = showValue
+      ? [
+          `      <tspan x="${cx}" y="${(tile.y + tile.h / 2 - 0.5).toFixed(1)}" font-size="${nfs}" font-weight="700">${item.name}</tspan>`,
+          `      <tspan x="${cx}" y="${(tile.y + tile.h / 2 + Math.max(6, nfs - 1.5) + 1).toFixed(1)}" font-size="${Math.max(6, nfs - 1.5).toFixed(1)}" font-weight="600">${valStr}${unit}</tspan>`,
+        ]
+      : [
+          // 名前を縦中央に配置（baseline = タイル中心 + cap-height 補正）
+          `      <tspan x="${cx}" y="${(tile.y + tile.h / 2 + nfs * 0.38).toFixed(1)}" font-size="${nfs}" font-weight="700">${item.name}</tspan>`,
+        ];
 
     return [
       `  <g aria-label="${item.name} ${valStr}${unit}">`,
       `    <title>${item.name}：${valStr}${unit}</title>`,
       `    <rect x="${tile.x}" y="${tile.y}" width="${tile.w}" height="${tile.h}" rx="3" fill="${fill}" stroke="#ffffff" stroke-width="1"/>`,
-      `    <text${filterAttr} font-family="${FONT_FAMILY}" fill="${tc}" text-anchor="middle">`,
-      `      <tspan x="${cx}" y="${nameY.toFixed(1)}" font-size="${nfs}" font-weight="700">${item.name}</tspan>`,
+      `    <text font-family="${FONT_FAMILY}" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="${strokeW}" stroke-linejoin="round" filter="url(#txt-halo-dark)">`,
+      ...tspans,
       `    </text>`,
       `  </g>`,
     ].join("\n");
   });
 
-  // タイトル（バーチャートと同スタイル：14px bold #333 + subtitle は tspan でインライン）
-  const titleText = subtitle
-    ? `${title}<tspan font-size="10" font-weight="normal" class="svg-tick">　${subtitle}</tspan>`
-    : title;
-  const titleLine = `  <text x="${W / 2}" y="22" text-anchor="middle" font-size="14" font-weight="bold" class="svg-title">${titleText}</text>`;
+  // タイトルは左上の余白（日本のタイル配置で空く領域）に左寄せで配置。年は別行・大きめ。
+  const TITLE_X = 28;
+  const titleFont = fitTitleFont(title, 430, 22, 15);
+  const titleLine = [
+    `  <text x="${TITLE_X}" y="58" font-size="${titleFont}" font-weight="bold" class="svg-title">${title}</text>`,
+    subtitle
+      ? `  <text x="${TITLE_X}" y="${58 + titleFont + 12}" font-size="15" class="svg-tick">${subtitle}</text>`
+      : "",
+  ]
+    .filter(Boolean)
+    .join("\n");
 
   // 凡例（グラデーションバー + 最小・中間・最大ラベル）
   const loStr = formatValue(lo);
   const midStr = formatValue((lo + hi) / 2);
   const hiStr = formatValue(hi);
-  // グラデーションストップを colorStops から生成
+  // グラデーションストップ: scheme 指定時は interpolator を等間隔サンプル、無ければ colorStops。
   const toHex = (n: number) => n.toString(16).padStart(2, "0");
-  const gradientStops = colorStops
-    .map((s) => `      <stop offset="${Math.round(s.t * 100)}%"   stop-color="#${toHex(s.r)}${toHex(s.g)}${toHex(s.b)}"/>`)
-    .join("\n");
+  const gradientStops = interp
+    ? [0, 0.25, 0.5, 0.75, 1]
+        .map((t) => `      <stop offset="${t * 100}%"   stop-color="${colorOf(t)}"/>`)
+        .join("\n")
+    : colorStops
+        .map((s) => `      <stop offset="${Math.round(s.t * 100)}%"   stop-color="#${toHex(s.r)}${toHex(s.g)}${toHex(s.b)}"/>`)
+        .join("\n");
   // コンパクト凡例（沖縄右側: x=96〜236, y=625〜647）
   const legend = [
     `  <defs>`,
     `    <linearGradient id="choropleth-lg" x1="0" x2="1">`,
     gradientStops,
     `    </linearGradient>`,
-    `    <filter id="txt-shadow" x="-40%" y="-40%" width="180%" height="180%">`,
-    `      <feDropShadow dx="0" dy="0" stdDeviation="1.3" flood-color="#000000" flood-opacity="0.6"/>`,
+    `    <filter id="txt-halo-dark" x="-40%" y="-40%" width="180%" height="180%">`,
+    `      <feDropShadow dx="0" dy="0" stdDeviation="1.3" flood-color="#000000" flood-opacity="0.7"/>`,
     `    </filter>`,
     `  </defs>`,
     `  <text x="${BAR_X - 4}" y="${BAR_Y + 8}" font-size="8" class="svg-tick" text-anchor="end">${legendLabels[0]}</text>`,

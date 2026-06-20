@@ -204,10 +204,11 @@ function genBarChartSvg(data, layoutOverride) {
  * → svg-builder generateChoroplethSvg (ChoroplethItem[])
  */
 function genTileGridMapSvg(data) {
+  const get = (k) => (Array.isArray(data) ? undefined : data[k]);
   const items = Array.isArray(data) ? data : data.data || [];
   if (!items.length) return `<!-- empty data -->`;
-  const title = (Array.isArray(data) ? null : data.title) ?? "都道府県マップ";
-  const unit = (Array.isArray(data) ? null : data.unit) ?? "";
+  const title = get("title") ?? "都道府県マップ";
+  const unit = get("unit") ?? "";
 
   const choroplethItems = items
     .filter((it) => typeof it.value === "number" && isFinite(it.value))
@@ -219,7 +220,18 @@ function genTileGridMapSvg(data) {
     .filter((it) => it.code && it.name);
 
   if (!choroplethItems.length) return `<!-- empty choropleth data -->`;
-  return generateChoroplethSvg(choroplethItems, { title, unit });
+  return generateChoroplethSvg(choroplethItems, {
+    title,
+    unit,
+    subtitle: get("subtitle"),
+    // D3 カラースキーム名 (例 "Blues" / "Viridis" / "RdYlGn")。未指定時は既定 Reds。
+    scheme: get("scheme") ?? get("colorScheme"),
+    reverse: get("reverse"),
+    showValue: get("showValue"),
+    colorMin: get("colorMin"),
+    colorMax: get("colorMax"),
+    legendLabels: get("legendLabels"),
+  });
 }
 
 /**

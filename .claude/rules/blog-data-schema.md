@@ -101,6 +101,27 @@ metric 選定 (GSC ギャップ/トレンド/カテゴリ/ユーザー指示)
 
 > **2つの一括再生成の使い分け（混在防止）**: ランキングの是正は **`regenerate-ranking-cards.mjs`**（SSOT=R2 app/ranking から**再取得**して manifest 付きで横長+縦長を作る。データが R2 に無い記事でも復元できる）が正典。`regenerate-blog-svgs.yml`（CI）は **既存 `data/*.json` を入力に全チャート種を再描画**する用途で、ソース JSON が R2 に残っていない記事のランキングは再生成できない（→ `regenerate-ranking-cards.mjs` を使う）。
 
+## 1.6 タイルマップ（choropleth）のデータ系譜 + デザイン（2026-06-20 確定） ★
+
+タイルマップもランキングと**同じ SSOT データフロー**に統一する。**SVG からの値の逆復元は禁止**（必ず SSOT から取得し、既存 SVG は metric 照合にのみ使う）。
+
+### デザイン（`packages/svg-builder/src/charts/choropleth.ts` が SSoT）
+
+- サイズ **600×700 固定**。テキストは **全て白 + 濃い縁取り（`paint-order` stroke）+ ソフトシャドウ**（淡色〜濃色どのタイルでも可読。白/黒の切替はしない）。
+- タイトルは**左上の余白に左寄せ・大きく**（自動フィット最大22px）、**年は別行・15px**。
+- **カラーは D3 カラースキーム指定可**: `scheme`（d3-scale-chromatic の `interpolate<Name>`。例 `Blues`/`Viridis`/`RdYlGn`/`RdBu`/`Spectral`/`YlOrRd`…連続・発散とも）。未指定時は既定 Reds。`reverse` で反転。
+- 値表示は `showValue`（県名のみ=既定 / 県名+値）。
+
+### データ取得ルール（SSOT・捏造禁止）
+
+- 地図データの真実源は **R2 `app/ranking/<key>/values.json`**（= metric config → e-Stat → R2 派生。ランキングと同一）。
+- `data/<name>-map.json`（型付き 47 県値）+ `data/<name>-map.source.json`（manifest: `kind:"ranking"`, `rankingKey`, `year`, `verifiedMatchRate`）の3点。author が `scheme` を JSON に指定可。
+- `generate-article-charts.ts` が `*-map.json` を `generateChoroplethSvg` にディスパッチ（`data.scheme`/`reverse`/`showValue`/`legendLabels` を渡す）。
+
+### 既存記事の一括再生成
+
+`.claude/scripts/blog/regenerate-tile-maps.ts`（dry-run=staging `.local/regen-tilemaps` + gallery `/tmp/tilemap-gallery.html`、R2 push しない）。記事の `/ranking/<key>` 候補 × 各年の SSOT 値を**既存地図の表示値と照合**し metric+年を確定（一致率≥0.8）。確証できた地図のみ SSOT から再生成、**確証できない地図は flag**（個別に metric→key 特定が要る。捏造しない）。R2 反映は別途 `diff-push-r2`。
+
 ## 2. Wave 命名規則
 
 Blog の brushup 施策は **wave 単位** で記録・追跡する。wave は「同一目的・同一日付・同一手法」でまとめた施策のセット。

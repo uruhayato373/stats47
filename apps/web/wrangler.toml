@@ -54,6 +54,12 @@ name = "stats47"
 [env.production.vars]
 NODE_ENV = "production"
 NEXT_PUBLIC_ENV = "production"
+# ★必須: Workers ランタイムで R2 snapshot 読みを許可する。
+# shouldSkipRemoteR2Read() は CLOUDFLARE_WORKERS!=="true" かつ CI でも S3creds でも
+# R2_PUBLIC_FETCH_URL でもないと true(skip) を返す。これが未設定だと本番 Worker で
+# readRankingItemFromR2 等が読みを skip → loadThemeData null → テーマが error fallback、
+# home featured も空になる (2026-06-20 根本原因)。
+CLOUDFLARE_WORKERS = "true"
 # NextAuth用のシークレット（本番環境用に別途生成してください）
 # openssl rand -base64 32
 # AUTH_SECRET = "your-production-secret-here-minimum-32-characters"
