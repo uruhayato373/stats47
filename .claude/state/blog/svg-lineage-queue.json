@@ -1,16 +1,16 @@
 {
   "total": 612,
   "byStatus": {
-    "both": 242,
-    "jsonOnly": 27,
+    "both": 246,
+    "jsonOnly": 23,
     "neither": 343
   },
   "byMethod": {
     "manual": 76,
-    "done": 242,
+    "done": 246,
     "ssot-restore-new": 169,
     "ssot-restore": 98,
-    "source-backfill": 27
+    "source-backfill": 23
   },
   "entries": [
     {
@@ -1314,9 +1314,9 @@
       "base": "fiscal-fertility-scatter",
       "chartType": "scatter",
       "hasJson": true,
-      "hasSource": false,
-      "status": "jsonOnly",
-      "restoreMethod": "source-backfill"
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "fertility-rate-prefecture-gap",
@@ -2169,9 +2169,9 @@
       "base": "rent-floorarea-scatter",
       "chartType": "scatter",
       "hasJson": true,
-      "hasSource": false,
-      "status": "jsonOnly",
-      "restoreMethod": "source-backfill"
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "ict-media-consumption-gender-gap",
@@ -3825,9 +3825,9 @@
       "base": "prefecture-salary-remote-gap-prefecture-rankings",
       "chartType": "ranking",
       "hasJson": true,
-      "hasSource": false,
-      "status": "jsonOnly",
-      "restoreMethod": "source-backfill"
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "prefecture-salary-remote-gap",
@@ -5013,9 +5013,9 @@
       "base": "tertiary-unemployment-scatter",
       "chartType": "scatter",
       "hasJson": true,
-      "hasSource": false,
-      "status": "jsonOnly",
-      "restoreMethod": "source-backfill"
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "university-advancement-capacity",
