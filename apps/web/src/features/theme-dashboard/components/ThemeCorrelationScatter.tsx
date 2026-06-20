@@ -2,25 +2,15 @@
 
 import { useMemo } from "react";
 
-import dynamic from "next/dynamic";
-
 import { lookupArea } from "@stats47/area";
 import { ScatterChart as ScatterIcon } from "lucide-react";
 
-import { ChartPanel } from "@/components/charts/ChartCard";
+import { ChartPanel } from "@/components/charts/ChartPanel";
 
-import { ChartLoading } from "./ChartState";
+import { ScatterChartStack } from "./ScatterChartGrid";
 
 import type { ThemeIndicatorData } from "../types";
 import type { ScatterplotDataNode } from "@stats47/visualization/d3";
-
-const Scatterplot = dynamic(
-  () => import("@stats47/visualization/d3").then((mod) => mod.Scatterplot),
-  {
-    ssr: false,
-    loading: () => <ChartLoading height={280} />,
-  },
-);
 
 interface ScatterPair {
   xKey: string;
@@ -77,12 +67,14 @@ export function ThemeCorrelationScatter({
         if (points.length < 3) return null;
 
         return {
-          pair,
+          id: `${pair.xKey}-${pair.yKey}`,
+          title: pair.title ?? `${xData.rankingItem.title} × ${yData.rankingItem.title}`,
           points,
           xLabel: xData.rankingItem.title,
           yLabel: yData.rankingItem.title,
           xUnit: xData.rankingItem.unit,
           yUnit: yData.rankingItem.unit,
+          diagonalLine: pair.diagonalLine,
         };
       })
       .filter((d): d is NonNullable<typeof d> => d !== null);
@@ -103,28 +95,10 @@ export function ThemeCorrelationScatter({
         </span>
       }
     >
-      {scatterData.map(({ pair, points, xLabel, yLabel, xUnit, yUnit }) => (
-        <div key={`${pair.xKey}-${pair.yKey}`}>
-          <h3 className="text-xs font-medium mb-1">
-            {pair.title ?? `${xLabel} × ${yLabel}`}
-          </h3>
-          <Scatterplot
-            data={points}
-            xLabel={xLabel}
-            yLabel={yLabel}
-            height={240}
-            r={4}
-            fill="hsl(215, 70%, 60%)"
-            stroke="hsl(215, 70%, 40%)"
-            strokeWidth={1}
-            strokeOpacity={0.8}
-            regressionLine={
-              pair.diagonalLine ? { slope: 1, intercept: 0 } : undefined
-            }
-          />
-          <p className="text-[10px] text-muted-foreground mt-0.5">
-            X: {xLabel} ({xUnit}) / Y: {yLabel} ({yUnit})
-          </p>
+      {scatterData.map((item) => (
+        <div key={item.id}>
+          <h3 className="mb-1 text-xs font-medium">{item.title}</h3>
+          <ScatterChartStack items={[item]} chartHeight={240} />
         </div>
       ))}
     </ChartPanel>

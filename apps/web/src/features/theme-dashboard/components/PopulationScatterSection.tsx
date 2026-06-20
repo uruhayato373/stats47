@@ -2,25 +2,12 @@
 
 import { useMemo } from "react";
 
-import dynamic from "next/dynamic";
-
 import { lookupArea } from "@stats47/area";
 
-import { ChartPanel } from "@/components/charts/ChartCard";
-
-import { ChartLoading } from "./ChartState";
+import { ScatterChartGrid } from "./ScatterChartGrid";
 
 import type { ThemeIndicatorData } from "../types";
 import type { ScatterplotDataNode } from "@stats47/visualization/d3";
-
-
-const Scatterplot = dynamic(
-  () => import("@stats47/visualization/d3").then((mod) => mod.Scatterplot),
-  {
-    ssr: false,
-    loading: () => <ChartLoading height={300} />,
-  },
-);
 
 interface Props {
   indicatorDataMap: Record<string, ThemeIndicatorData>;
@@ -106,20 +93,28 @@ export function PopulationScatterSection({
       if (points.length < 3) return null;
 
       return {
-        config,
+        id: config.id,
+        title: config.title,
         points,
         xLabel: xData.rankingItem.title,
         yLabel: yData.rankingItem.title,
         xUnit: xData.rankingItem.unit,
         yUnit: yData.rankingItem.unit,
+        diagonalLine: config.diagonalLine,
+        diagonalLineNote: config.diagonalLine
+          ? "対角線: 出生率=死亡率（自然増減ゼロ）"
+          : undefined,
       };
     }).filter(Boolean) as Array<{
-      config: ScatterConfig;
+      id: string;
+      title: string;
       points: ScatterplotDataNode[];
       xLabel: string;
       yLabel: string;
       xUnit: string;
       yUnit: string;
+      diagonalLine?: boolean;
+      diagonalLineNote?: string;
     }>;
   }, [indicatorDataMap, selectedPrefectureCode]);
 
@@ -128,32 +123,11 @@ export function PopulationScatterSection({
   return (
     <section>
       <h2 className="text-xl font-bold mb-4">相関分析</h2>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-        {scatterData.map(({ config, points, xLabel, yLabel, xUnit, yUnit }) => (
-          <ChartPanel key={config.id} title={config.title} className="rounded-sm">
-            <Scatterplot
-              data={points}
-              xLabel={xLabel}
-              yLabel={yLabel}
-              height={280}
-              r={4}
-              fill="hsl(215, 70%, 60%)"
-              stroke="hsl(215, 70%, 40%)"
-              strokeWidth={1}
-              strokeOpacity={0.8}
-              regressionLine={
-                config.diagonalLine
-                  ? { slope: 1, intercept: 0 }
-                  : undefined
-              }
-            />
-            <p className="text-[10px] text-muted-foreground mt-1">
-              X: {xLabel}（{xUnit}）/ Y: {yLabel}（{yUnit}）
-              {config.diagonalLine && " / 対角線: 出生率=死亡率（自然増減ゼロ）"}
-            </p>
-          </ChartPanel>
-        ))}
-      </div>
+      <ScatterChartGrid
+        items={scatterData}
+        chartHeight={280}
+        panelClassName="rounded-sm"
+      />
     </section>
   );
 }
