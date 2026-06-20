@@ -8,11 +8,11 @@
 - flat スケール: `salary-remote-gap-rankings` = avg-salary-all-prefecture ÷10000 (万円表記) → 同上 FLAT_CONFIG
 - 自動照合 10 枚 (cpi-*/sunshine/vacant 等) → `backfill-source.mjs`
 
-## ① 真の派生 (÷人口・÷面積など) — kind:derived。記事の式で再計算→自己検算 (4)
+## ① 真の派生 (÷人口・÷面積など) — kind:derived。記事の式で再計算→自己検算 (残3)
 raw key と 0% = 計算値。分子 raw key は実在。分母(人口/面積)で再計算し json 値と一致を確認してから kind:derived で書く。
-- `local-tax-regional-gap/per-capita-local-tax` (一人当たり地方税額 万円) = local-tax-prefecture ÷ 人口
-- `welfare-expenses-squeeze/welfare-per-capita-ranking` (一人当たり民生費 万円) = 民生費 ÷ 人口
-- `retail-establishments-by-prefecture/retail-establishments-density-prefecture-rankings` (事業所/10万人) = retail-establishments ÷ 人口 ×10万
+- ✅ `local-tax-regional-gap/per-capita-local-tax` = local-tax-prefecture(千円) ÷ total-population × 0.1万円 → **10/10 一致で確定済** (`resolve-scatter-axes.mjs` DERIVED_CONFIG)
+- 🟡 `welfare-expenses-squeeze/welfare-per-capita-ranking` (一人当たり民生費 万円) = 民生費 ÷ total-population × 0.1 で **7/11一致** (4県ズレ=年/分母の微差。agent が正確な年・分母を特定)
+- ✗ `retail-establishments-by-prefecture/retail-establishments-density-prefecture-rankings` = retail ÷ 人口 ×10万 だが json の areaName 構造不良で 0/0 照合不能 (agent が json 構造を確認して再計算)
 - `nurse-income-prefecture-gap/nurse-favored-prefecture-rankings` (相対厚遇度・順位差) = 記事本文の式が要る (順位差系)
 
 ## ② authored / 全国系列 — kind:authored or timeseries (記事固有・県rankingKey無し) (9)

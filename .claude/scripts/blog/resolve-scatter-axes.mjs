@@ -41,6 +41,14 @@ const FLAT_CONFIG = [
     key: "avg-salary-all-prefecture", scale: 10000, label: "平均給与月額", unit: "万円" },
 ];
 
+// 派生(÷人口など): numKey/denKey×K を各県計算し json 値と一致(≥0.95)で確定。式を記録し再現可能に。
+const DERIVED_CONFIG = [
+  { slug: "local-tax-regional-gap", base: "per-capita-local-tax",
+    numKey: "local-tax-prefecture", denKey: "total-population", K: 0.1,
+    unit: "万円", label: "一人当たり地方税額",
+    formula: "local-tax-prefecture(千円) ÷ total-population × 0.1 (万円)" },
+];
+
 async function fj(u) { const r = await fetch(u); if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }
 
 /** scatter json → 指定 field の {areaName/label → 値} マップ (points 配列 or 県別配列 両対応) */
@@ -138,6 +146,43 @@ async function main() {
       note: "派生でなく raw key のスケール表記。json値×scaleでSSOT照合し確定",
     }, null, 2));
     console.log(`✓ ${c.base}: ${Math.round(best.rate * 100)}% (${c.key} ×${c.scale}) year=${best.year} → 書込`);
+  }
+
+  // 派生 (numKey/denKey×K を各県計算して照合)
+  for (const c of DERIVED_CONFIG) {
+    let blog;
+    try { blog = await fj(`${R2}/app/blog/${c.slug}/data/${c.base}.json`); }
+    catch { console.log(`✗ ${c.slug}/${c.base}: json取得失敗`); continue; }
+    const arr = Array.isArray(blog) ? blog : (blog.data || []);
+    const numP = (await ssotPartitions(c.numKey));
+    const denP = (await ssotPartitions(c.denKey)).slice(-1)[0];
+    const denMap = new Map(denP.values.map((v) => [v.areaName.replace(/[都道府県]$/, ""), v.value]));
+    let best = null;
+    for (const np of numP) {
+      const numMap = new Map(np.values.map((v) => [v.areaName.replace(/[都道府県]$/, ""), v.value]));
+      let ok = 0, n = 0;
+      for (const it of arr) {
+        const name = (it.areaName ?? it.label ?? "").replace(/[都道府県]$/, "");
+        if (it.value == null) continue;
+        const nu = numMap.get(name), de = denMap.get(name);
+        if (nu == null || de == null) continue;
+        n++; if (Math.abs(nu / de * c.K - it.value) <= Math.max(0.15, Math.abs(it.value) * 0.03)) ok++;
+      }
+      const rate = n >= 3 ? ok / n : 0;
+      if (!best || rate >= best.rate) best = { year: np.year, rate };
+    }
+    if (!best || best.rate < VERIFY_MIN) { console.log(`✗ ${c.base}: best ${Math.round((best?.rate ?? 0) * 100)}% (${c.formula}) — 採用せず`); continue; }
+    const dir = path.join(STAGE, c.slug, "data");
+    fs.mkdirSync(dir, { recursive: true });
+    fs.writeFileSync(path.join(dir, `${c.base}.source.json`), JSON.stringify({
+      kind: "derived", formula: c.formula, numeratorKey: c.numKey, denominatorKey: c.denKey,
+      year: best.year, unit: c.unit, label: c.label,
+      source: [`r2:app/ranking/${c.numKey}/values.json`, `r2:app/ranking/${c.denKey}/values.json`],
+      upstream: "metric config → e-Stat → R2 app/ranking (分子/分母の2指標をエフェメラル計算)",
+      verifiedMatchRate: Math.round(best.rate * 100), generatedBy: "resolve-scatter-axes.mjs",
+      note: "派生: numKey/denKey×K を各県再計算し json 値と照合して式を確定",
+    }, null, 2));
+    console.log(`✓ ${c.base}: ${Math.round(best.rate * 100)}% (${c.formula}) year=${best.year} → 書込`);
   }
   console.log(`\nstaging: .local/r2/app/blog/<slug>/data/<base>.source.json (R2反映: push-r2-wrangler.ts app/blog --apply)`);
 }
