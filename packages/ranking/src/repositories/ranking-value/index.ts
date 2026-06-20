@@ -4,6 +4,7 @@ export { getAvailableYears } from "./get-available-years";
 export { listRankingValues } from "./list-ranking-values";
 export {
   readAllYearsNormalizedRankingValuesFromR2,
+  readAllYearsRankingValuesFromR2,
   readNormalizedRankingValuesFromR2,
   readRankingValuesByPrefectureFromR2,
   readRankingValuesFromR2,

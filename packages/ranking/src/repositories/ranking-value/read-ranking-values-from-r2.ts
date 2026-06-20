@@ -86,6 +86,41 @@ export async function readRankingValuesFromR2(
 }
 
 /**
+ * 生 R2 snapshot から **全年度** の ranking_values を取得 (1 fetch)。
+ *
+ * - テーマダッシュボードが「current 年の values + 全年トレンド」を 1 read で得るために使う
+ *   (都道府県指標を e-Stat ライブ取得しないための堅牢経路。`/ranking/*` と同一の R2 source)。
+ * - build 時 (NEXT_PHASE=phase-production-build) は ok([]) を返す → 呼び出し側は force-dynamic で
+ *   build prerender を避け、runtime (Worker) で R2 を読む。
+ * - 都道府県 (47×全年) 用。市区町村 (1741×全年) は巨大なため単年 readRankingValuesFromR2 を使う。
+ */
+export async function readAllYearsRankingValuesFromR2(
+  rankingKey: string,
+  areaType: AreaType,
+): Promise<Result<RankingValue[], Error>> {
+  if (process.env.NEXT_PHASE === "phase-production-build") {
+    return ok([]);
+  }
+
+  try {
+    const snapshot = await loadRankingValuesForKey(rankingKey, areaType);
+    if (!snapshot) return ok([]);
+
+    const all: RankingValue[] = [];
+    for (const partition of snapshot.partitions) {
+      all.push(...partition.values);
+    }
+    return ok(all);
+  } catch (error) {
+    logger.error(
+      { rankingKey, areaType, error: error instanceof Error ? error.message : String(error) },
+      "readAllYearsRankingValuesFromR2: failed",
+    );
+    return err(error instanceof Error ? error : new Error(String(error)));
+  }
+}
+
+/**
  * 正規化済み R2 snapshot から ranking_values を取得。
  *
  * normType: "per_population" → app/ranking/{key}/values-per-population.json
