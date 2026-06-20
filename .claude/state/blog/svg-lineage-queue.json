@@ -1,16 +1,16 @@
 {
   "total": 612,
   "byStatus": {
-    "both": 228,
-    "jsonOnly": 40,
-    "neither": 344
+    "both": 232,
+    "jsonOnly": 37,
+    "neither": 343
   },
   "byMethod": {
     "manual": 76,
-    "done": 228,
+    "done": 232,
     "ssot-restore-new": 169,
-    "ssot-restore": 99,
-    "source-backfill": 40
+    "ssot-restore": 98,
+    "source-backfill": 37
   },
   "entries": [
     {
@@ -342,9 +342,9 @@
       "base": "national-medical-expense-per-person",
       "chartType": "unknown",
       "hasJson": true,
-      "hasSource": false,
-      "status": "jsonOnly",
-      "restoreMethod": "source-backfill"
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "cc-estat-13-agri-sankey",
@@ -765,9 +765,9 @@
       "base": "income-timeseries",
       "chartType": "line",
       "hasJson": true,
-      "hasSource": false,
-      "status": "jsonOnly",
-      "restoreMethod": "source-backfill"
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "dentist-income-prefecture-gap",
@@ -2276,10 +2276,10 @@
       "slug": "inbound-overnight-guests-prefecture",
       "base": "inbound-top10",
       "chartType": "ranking",
-      "hasJson": false,
-      "hasSource": false,
-      "status": "neither",
-      "restoreMethod": "ssot-restore"
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "inbound-overnight-guests-prefecture",
@@ -2520,9 +2520,9 @@
       "base": "instant-noodles-consumption-prefecture-gap-timeseries",
       "chartType": "line",
       "hasJson": true,
-      "hasSource": false,
-      "status": "jsonOnly",
-      "restoreMethod": "source-backfill"
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
     },
     {
       "slug": "international-cooperation-volunteer-map",

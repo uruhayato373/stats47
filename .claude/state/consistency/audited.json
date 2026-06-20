@@ -1,8 +1,7 @@
 {
-  "hash": "e267ef3c3e52f34bc4f88894ada7220f52a3187319fa31355f0cae738dade17d",
-  "audited_at": "2026-06-20T07:07:01",
+  "hash": "fe9a3b5485bf54fc2a9653d5510f9bf7e507b926e47cfcbca354f712a88797bc",
+  "audited_at": "2026-06-20T07:20:50",
   "files": [
-    ".claude/scripts/blog/generate-article-charts.ts",
-    ".claude/scripts/blog/quality-gate.mjs"
+    ".claude/scripts/blog/backfill-source.mjs"
   ]
 }
