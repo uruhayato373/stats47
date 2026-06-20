@@ -2,8 +2,19 @@
 name: generate-ai-content
 description: ランキングページ向け AI コンテンツ（FAQ・分析）を Gemini CLI で生成し DB 保存する。Use when user says "AIコンテンツ生成", "FAQ生成", "ランキング分析生成". Claude並列/Gemini逐次選択可.
 disable-model-invocation: true
-primary_agent: image-prompt-curator
+primary_agent: ranking-content-author
 ---
+
+> ⚠️ **このスキルは現在 dead（実行不可）です。** 完全DBレス移行（commit `7569bd5c` "dbless Part D"）で
+> ai-content の **生成 CLI（`generate-parallel.ts` / `save-content.ts` / `build-prompt.ts` / `generate-all.sh` /
+> `list-pending.ts`）と D1→R2 exporter がすべて削除**された。下記の手順・スクリプトは**もう存在しない**。
+> D1 `ai_content` テーブルも廃止。R2 `app/ranking/<key>/ai-content.json` は移行前に焼かれた**凍結データ**で、
+> 現状これを生成・再生成する手段は無い。
+>
+> **要・再構築**（DBレス版: R2 観測値 `app/stats` + ranking item.json → prompt → AI → 決定的ゲート
+> `audit-ai-content.mjs` → R2 `app/ranking/<key>/ai-content.json` 直書き）。担当 `ranking-content-author`。
+> backlog: `docs/02_実装計画/04_機能バックログ.md` `[AICONTENT-DBLESS-REBUILD]`。
+> **以下は再構築時の参考として残す歴史的記述（そのまま実行しない）。**
 
 ランキングページ向け AI コンテンツ（FAQ、地域分析、インサイト）を生成し、DB に保存する。
 

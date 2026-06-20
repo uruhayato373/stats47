@@ -8,8 +8,13 @@ description: >
   "ranking ai content リライト", "ranking_key の AI コンテンツ補強",
   "NotebookLM で ranking ページ強化", "/enhance-ranking-ai-content".
 disable-model-invocation: true
-primary_agent: data-ingester
+primary_agent: ranking-content-author
 ---
+
+> ⚠️ **このスキルは現在 dead（実行不可）です。** 完全DBレス移行（commit `7569bd5c`）で ai-content の生成・保存
+> パイプライン（D1 `ai_content` + 生成 CLI + R2 exporter）が削除された。本スキルは `ai_content` への書き込みを
+> 前提とするため、**writer が存在しない現状では動かない**。再構築（DBレス generation → 決定的ゲート → R2 直書き）
+> が前提。担当 `ranking-content-author` / backlog `[AICONTENT-DBLESS-REBUILD]`。以下は参考の歴史的記述。
 
 # /enhance-ranking-ai-content — ranking_key の ai_content を NotebookLM 補強でリライト
 
