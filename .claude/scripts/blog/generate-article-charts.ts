@@ -397,6 +397,10 @@ function extractInlineSvgsToFiles() {
     const name = `inline-chart-${n}`;
     const aria = block.match(/aria-label="([^"]*)"/);
     fs.writeFileSync(path.join(DATA_DIR, `${name}.svg`), block, "utf8");
+    // 徹底ルール (§1.7): inline SVG も source.json 無しで残さない (1画像=1設定ファイル)。json が無いため
+    // incomplete として記録し、generator 経由チャートへの差し替えを促す (inline は §1.5 アンチパターン)。
+    writeChartSourceIfMissing(path.join(DATA_DIR, `${name}.source.json`), `${name}.svg`, "unknown", undefined);
+    warn(`inline SVG を ${name}.svg に切り出した — inline はデータ系譜が貧弱(§1.7・要差し替え)。generator 経由のチャートにすること`);
     md = md.replace(block, `![${aria ? aria[1] : "チャート"}](data/${name}.svg)`);
   }
   fs.writeFileSync(ARTICLE_MD, md, "utf8");

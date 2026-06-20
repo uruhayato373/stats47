@@ -1,7 +1,8 @@
 {
-  "hash": "39ca0fb490bcd3e818872869241b20d4c4820ebf65a779332aa44d3464275bcc",
-  "audited_at": "2026-06-20T07:00:08",
+  "hash": "e267ef3c3e52f34bc4f88894ada7220f52a3187319fa31355f0cae738dade17d",
+  "audited_at": "2026-06-20T07:07:01",
   "files": [
-    ".claude/scripts/blog/generate-article-charts.ts"
+    ".claude/scripts/blog/generate-article-charts.ts",
+    ".claude/scripts/blog/quality-gate.mjs"
   ]
 }

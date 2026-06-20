@@ -349,8 +349,8 @@ if (rankClaimCount >= 2 && checks.groundTruthPrefCount === 0) {
 // SVGデータ系譜 gate (2026-06-20 追加・再発防止): 各 data/*.svg は data/<name>.json (再生成用) +
 // .source.json (出典manifest) の3点セットが必須 (blog-data-schema.md §1.5)。SVG だけ残って元データが
 // 消えると再生成・出典追跡が不能になる事故 (棚卸しで 612枚中 56% が元データ消失) の再発防止。
-// 段階導入: 既存記事の一括 blocker 化を避けるため当面 warning。新規記事が3点セットを満たすのが前提で、
-// 復元 (🟡 source後付け→🔴 SSOT復元) 完了後に blocker へ昇格する。
+// blocker (徹底・2026-06-20 昇格): generator (generate-article-charts) が SVG とセットで source.json を必ず
+// 出力するため新規記事は通る。既存負債を再公開する記事は復元 (backfill/ssot-restore) してから公開すること。
 const svgRefs = [...new Set([...content.matchAll(/\]\(data\/([^)]+)\.svg\)/g)].map((m) => m[1]))];
 const lineageMissing = [];
 for (const base of svgRefs) {
@@ -363,11 +363,11 @@ for (const base of svgRefs) {
 }
 checks.svgLineageMissing = lineageMissing.length;
 if (lineageMissing.length > 0) {
-  warnings.push(
+  blockers.push(
     `SVGデータ系譜の欠落 ${lineageMissing.length}/${svgRefs.length} 件: ` +
       `${lineageMissing.slice(0, 3).join(", ")}${lineageMissing.length > 3 ? " 他" : ""} — ` +
-      `各 SVG は .json + .source.json の3点セット必須 (blog-data-schema.md §1.5)。` +
-      `SSOTから復元: regenerate-tile-maps.ts / regenerate-ranking-cards.mjs`,
+      `各 SVG は .json + .source.json の3点セット必須 (§1.5/§1.7)。` +
+      `generator(generate-article-charts)を通すか SSOTから復元(backfill-source/regenerate-*)して揃えること`,
   );
 }
 
