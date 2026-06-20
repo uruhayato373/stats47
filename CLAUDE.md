@@ -33,6 +33,7 @@
 - **永続/リモート D1 は廃止**。S3 creds さえあれば集計もクラウドで完結する（旧「集計はローカル限定」制約は消滅）。git TS → R2 反映の実装例: `apps/web/scripts/export-page-components-snapshot.ts`（page_components git TS SSOT `data/page-components/` → R2、Phase E 実装済）
 - **観測値・派生を永続 DB に入れない** (R2 のまま。Phase 6 肥大=解約の再発防止)。schema 定義 (`packages/database/src/schema/*.ts`) と integration テスト基盤は「型ソース / テスト用」として残置可（配信 R2 に影響しない）。移行は完了済（正典: `docs/01_技術設計/12_完全DBレス設計.md`）
 - **browser-use は終了時に必ず daemon 停止 + Chrome タブクローズ** → `.claude/rules/browser-use-cleanup.md`
+- **デプロイは溜めて1回・勝手にしない**: UI/ロジックの反復ごとに本番デプロイしない（develop→main PR + CI + Cloudflare deploy が毎回 6-8分×2 走りコスト/時間の無駄）。**localhost (`npm run dev:web`) で確認し、まとまりで1回だけデプロイ**。デプロイは (a) ユーザーが明示的に求めたとき、(b) 本番でしか再現しない問題の検証時（例: Cloudflare Workers ランタイム固有の R2/env 問題）のみ。本番反映は outward-facing なので、明示指示が無ければ**実行前に確認する** → `.claude/rules/branch-workflow.md`
 
 ## 作業の節目で記録する
 

@@ -346,6 +346,31 @@ if (rankClaimCount >= 2 && checks.groundTruthPrefCount === 0) {
   );
 }
 
+// SVGデータ系譜 gate (2026-06-20 追加・再発防止): 各 data/*.svg は data/<name>.json (再生成用) +
+// .source.json (出典manifest) の3点セットが必須 (blog-data-schema.md §1.5)。SVG だけ残って元データが
+// 消えると再生成・出典追跡が不能になる事故 (棚卸しで 612枚中 56% が元データ消失) の再発防止。
+// blocker (徹底・2026-06-20 昇格): generator (generate-article-charts) が SVG とセットで source.json を必ず
+// 出力するため新規記事は通る。既存負債を再公開する記事は復元 (backfill/ssot-restore) してから公開すること。
+const svgRefs = [...new Set([...content.matchAll(/\]\(data\/([^)]+)\.svg\)/g)].map((m) => m[1]))];
+const lineageMissing = [];
+for (const base of svgRefs) {
+  const hasJson = fs.existsSync(path.join(dataDir, `${base}.json`));
+  const hasSource = fs.existsSync(path.join(dataDir, `${base}.source.json`));
+  if (!hasJson || !hasSource) {
+    const miss = [!hasJson && "json", !hasSource && "source.json"].filter(Boolean).join("+");
+    lineageMissing.push(`${base}.svg (${miss}欠落)`);
+  }
+}
+checks.svgLineageMissing = lineageMissing.length;
+if (lineageMissing.length > 0) {
+  blockers.push(
+    `SVGデータ系譜の欠落 ${lineageMissing.length}/${svgRefs.length} 件: ` +
+      `${lineageMissing.slice(0, 3).join(", ")}${lineageMissing.length > 3 ? " 他" : ""} — ` +
+      `各 SVG は .json + .source.json の3点セット必須 (§1.5/§1.7)。` +
+      `generator(generate-article-charts)を通すか SSOTから復元(backfill-source/regenerate-*)して揃えること`,
+  );
+}
+
 // ============================================================================
 // critic レビュー必須 (公開記事は「別 agent の意味レビュー」を経ること) ★再発防止
 // ============================================================================

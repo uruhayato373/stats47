@@ -10,8 +10,8 @@ import {
   SelectValue,
 } from "@stats47/components/atoms/ui/select";
 
-import { ChartCard, KeyMetricsTableCard } from "@/components/charts/ChartCard";
 import { HubSankey } from "@/components/charts/HubSankey";
+import { KeyMetricsTableCard } from "@/components/charts/KeyMetricsTableCard";
 import {
   MiniBarChart,
   MiniLineChart,
@@ -20,6 +20,7 @@ import {
   type StackPoint,
 } from "@/components/charts/MiniCharts";
 import { SankeyFallback } from "@/components/charts/SankeyFallback";
+import { ChartCard } from "@/components/charts/StatsChartCard";
 
 import { FinanceSankey } from "@/features/finance-flow/components/FinanceSankey";
 import type { FinanceFlowData } from "@/features/finance-flow/lib/types";

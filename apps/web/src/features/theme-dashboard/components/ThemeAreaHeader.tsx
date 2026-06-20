@@ -22,7 +22,6 @@ export function ThemeAreaHeader({
   const title = selectedAreaName ? `${selectedAreaName}の${themeTitle}` : themeTitle;
   return (
     <PageHeader
-      eyebrow="テーマダッシュボード"
       title={title}
       description={description}
       actions={<PrefectureSelect />}

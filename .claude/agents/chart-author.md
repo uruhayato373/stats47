@@ -24,6 +24,8 @@ description: ブログ / note 記事用の SVG / Remotion チャート生成専�
 | `/audit-blog-svg-charts` | SVG カタログ規約違反の検出・是正 |
 | `fetch-ranking-data-r2.mjs` | 記事執筆用データ取得 (R2 観測値直 fetch)。出典 `.source.json` manifest も生成（SSOT=rankingKey 参照） |
 | `regenerate-ranking-cards.mjs` | 既存記事のランキングを一括カード化（SSOT再取得→横長+縦長再生成、dry-run=staging） |
+| `regenerate-tile-maps.ts` | タイルマップを SSOT から統一デザイン再生成（`--mapping`/trusted/Derived・自己検算）。正典 §1.6/§1.7 |
+| `build-lineage-queue.mjs` | 全SVGのデータ系譜を棚卸し→復元キュー生成（`.claude/state/blog/svg-lineage-queue.json`）。系譜整備の真実源 |
 
 ## 担当外
 
@@ -36,6 +38,7 @@ description: ブログ / note 記事用の SVG / Remotion チャート生成専�
 ## 必読 rules
 
 - `.claude/rules/blog-svg-chart-standards.md` — **SVG チャートカタログ（SSoT）** ★チャート追加・変更時必読
+- `.claude/rules/blog-data-schema.md` — **SVGデータ系譜（3点セット・復元キュー・再発防止）** ★§1.5/1.6/1.7 系譜整備時必読
 - `.claude/rules/blog-quality-standards.md` — ブログ記事品質基準（チャート配置・図あたり字数）
 - `.claude/rules/coding-standards.md` — SVG / D3.js コード品質
 - `.claude/rules/r2-storage-design.md` — R2 キーパス
@@ -46,7 +49,8 @@ description: ブログ / note 記事用の SVG / Remotion チャート生成専�
 |---|---|
 | `packages/svg-builder/src/` | CRUD（新規チャートタイプ実装） |
 | `.claude/rules/blog-svg-chart-standards.md` | カタログ更新（新チャートタイプ追加時に必ず更新） |
-| `.local/r2/app/blog/<slug>/data/` | CRUD（生成チャート SVG・data JSON） |
+| `.local/r2/app/blog/<slug>/data/` | CRUD（生成チャート SVG・data JSON・source.json 3点セット） |
+| `.claude/state/blog/svg-lineage-queue.json` | run/read（系譜復元キュー、`build-lineage-queue.mjs` が生成） |
 | `docs/21_ブログ記事原稿/<slug>/` | read 主体（chart 参照） |
 | `docs/31_note記事原稿/<slug>/` | CRUD（note 原稿。ephemeral outbox: 存在しない場合は `restore-from-r2.sh <slug>` 先行必須） |
 | `.claude/scripts/blog/generate-article-charts.ts` | read / 軽微修正（CLI ディスパッチ追加時） |
@@ -76,6 +80,23 @@ description: ブログ / note 記事用の SVG / Remotion チャート生成専�
 4. `generate-article-charts.ts` に命名パターンからのディスパッチ追加
 5. `/audit-blog-svg-charts` で違反ゼロを確認
 6. `build-svg-gallery.mjs` でギャラリーを再生成し新チャートの見た目を目視確認、`SendUserFile` で送付
+
+## データ系譜の整備・復元（再発防止）★2026-06-20
+
+SVG 612枚の棚卸しで **56% が元データ消失（絵だけ）** と判明。`chart-author` は**全記事のデータ系譜を
+体系的に揃える**責務を持つ。正典: `blog-data-schema.md §1.7`。
+
+手順:
+1. `node .claude/scripts/blog/build-lineage-queue.mjs` で棚卸し → `svg-lineage-queue.json` 更新（真実源）
+2. `restoreMethod` 別に軽い順で消化:
+   - `source-backfill`: 既存 json を SSOT に対応付け → `source.json` 後付け（`backfill-source.mjs`、最軽・再生成不要）
+   - `ssot-restore`: ranking/tilemap → `regenerate-tile-maps.ts` / `regenerate-ranking-cards.mjs` で SSOT復元
+   - `ssot-restore-new`: scatter/line/findings → 復元手法を新規実装（SSOT照合・自己検算）
+   - `manual`: 無意味名 → 個別手当て
+3. 復元は **SSOT（`app/ranking`）から（SVGの絵から逆復元しない §1.6）**、値を記事本文と自己検算して捏造防止
+4. `quality-gate.mjs` の系譜 gate（欠落 warning）で確認
+
+**再発防止**: 新規チャート生成時に必ず3点セット（`svg`+`json`+`source.json`）を出力する。gate が公開前に欠落を検出し、SVG だけ残る状態を構造的に防ぐ。
 
 ## チャート一括生成・是正後のレビュー（推奨）
 

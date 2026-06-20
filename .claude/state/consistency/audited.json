@@ -1,8 +1,8 @@
 {
-  "hash": "7754df677810ec959f3962e6ba92d78bb53e84d6108cc92dedbb1f8ab15d55f9",
-  "audited_at": "2026-06-20T02:44:24",
+  "hash": "e267ef3c3e52f34bc4f88894ada7220f52a3187319fa31355f0cae738dade17d",
+  "audited_at": "2026-06-20T07:07:01",
   "files": [
-    ".claude/skills/blog/draft-from-trend/SKILL.md",
-    ".claude/skills/blog/trends-snapshots/trends-all-2026-06-20.md"
+    ".claude/scripts/blog/generate-article-charts.ts",
+    ".claude/scripts/blog/quality-gate.mjs"
   ]
 }

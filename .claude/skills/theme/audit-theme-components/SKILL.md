@@ -14,7 +14,10 @@ primary_agent: theme-component-builder
 1. **1データ1コンポーネント**: 同じ estatParams のコンポーネントが複数存在してはならない
 2. **areas との共有**: テーマ専用コンポーネント（`theme-` prefix）は、areas に同等品がない場合のみ許容
 3. **共通 UI コンポーネント使用**: ThemeDbChartRenderer 経由で LineChartClient, CompositionChartClient 等を使う
-4. **KPI は e-Stat API ベース**: ranking_data ベースの KPI は廃止済み。kpiDataByArea で e-Stat データをプリフェッチ
+4. **本スキルは page_components（チャート JSON）の監査に限定**。ダッシュボード本体の KPI・トレンドは
+   `ThemeMetricsDashboard` が **R2 `app/ranking/<key>/values.json`** から自動生成する**チャート付き stats-card**で、
+   page_components とは別経路（2026-06-20 統一）。本体 UI の整合は **theme-ui-manager** が管理（`docs/02_実装計画/10`）。
+   `kpiDataByArea`（e-Stat estatParams プリフェッチ）は page_components の `kpi-card` 専用で本体 KPI とは無関係。
 
 ## 引数
 
@@ -68,8 +71,9 @@ db.close();
 ### Phase 5: ギャップ分析
 
 6. panelTab 別のチャート・KPI の充実度を確認:
-   - チャートがないタブ
-   - KPI カードがないタブ（kpiDataByArea 用の kpi-card page_components）
+   - チャートがないタブ（page_components の line/composition 等）
+   - ※ ダッシュボード本体の KPI（チャート付き stats-card）は `ThemeMetricsDashboard` が tabIndicators から
+     R2 ranking 値で自動生成するため、page_components の有無で KPI 充実度を判定しない（theme-ui-manager 管轄）
    - areas にあるがテーマに割り当てられていない関連チャート
 
 ### Phase 6: レポート出力

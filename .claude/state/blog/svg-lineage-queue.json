@@ -1,0 +1,5525 @@
+{
+  "total": 612,
+  "byStatus": {
+    "both": 228,
+    "jsonOnly": 40,
+    "neither": 344
+  },
+  "byMethod": {
+    "manual": 76,
+    "done": 228,
+    "ssot-restore-new": 169,
+    "ssot-restore": 99,
+    "source-backfill": 40
+  },
+  "entries": [
+    {
+      "slug": "abortion-rate-prefecture-gap",
+      "base": "inline-chart-1",
+      "chartType": "unknown",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "manual"
+    },
+    {
+      "slug": "abortion-rate-prefecture-gap",
+      "base": "abortion-rate-prefecture-gap-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "aging-rate-akita-vs-okinawa",
+      "base": "aging-index-ranking",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "aging-solo-living-crisis",
+      "base": "aging-solo-ranking",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "aging-solo-living-crisis",
+      "base": "aging-solo-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "aging-solo-living-crisis",
+      "base": "aging-solo-vs-nursing-scatter",
+      "chartType": "scatter",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "aging-solo-living-crisis",
+      "base": "aging-solo-summary-findings",
+      "chartType": "findings",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "alcohol-prefecture-map",
+      "base": "alcohol-consumption-ranking",
+      "chartType": "ranking",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "alcohol-prefecture-map",
+      "base": "alcohol-consumption-map",
+      "chartType": "tilemap",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "alcohol-prefecture-map",
+      "base": "liquor-type-breakdown",
+      "chartType": "stacked",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "alcohol-prefecture-map",
+      "base": "beer-tax-reform-comparison",
+      "chartType": "ranking",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "annual-precipitation-rainy-season-gap",
+      "base": "chart-precipitation-top5-bottom5",
+      "chartType": "ranking",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "annual-precipitation-rainy-season-gap",
+      "base": "chart-precipitation-days-top5-bottom5",
+      "chartType": "ranking",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "annual-precipitation-rainy-season-gap",
+      "base": "chart-precipitation-scatter",
+      "chartType": "scatter",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "bank-deposit-balance-shikoku-anomaly",
+      "base": "bank-deposit-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "barber-beauty-salon-regional-gap",
+      "base": "barber-ranking",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "barber-beauty-salon-regional-gap",
+      "base": "barber-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "barber-beauty-salon-regional-gap",
+      "base": "service-comparison",
+      "chartType": "ranking",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "barber-beauty-salon-regional-gap",
+      "base": "barber-timeseries",
+      "chartType": "line",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "beef-consumption-prefecture-gap",
+      "base": "beef-consumption-prefecture-gap-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "beef-consumption-quantity",
+      "base": "beef-consumption-quantity-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "birth-death-gap-decline",
+      "base": "inline-chart-1",
+      "chartType": "unknown",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "manual"
+    },
+    {
+      "slug": "birth-death-gap-decline",
+      "base": "total-fertility-rate-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "bonito-catch-prefecture",
+      "base": "bonito-ranking",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "bonito-catch-prefecture",
+      "base": "bonito-two-poles",
+      "chartType": "unknown",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "manual"
+    },
+    {
+      "slug": "bonito-catch-zero-prefectures-gap",
+      "base": "bonito-catch-zero-prefectures-gap-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "brazilian-resident-population-prefecture-gap",
+      "base": "brazilian-resident-population-prefecture-gap-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "car-ownership-household-prefecture-gap",
+      "base": "car-ownership-household-prefecture-gap-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "carbonated-drink-spending-prefecture-gap",
+      "base": "carbonated-drink-spending-prefecture-gap-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "care-worker-income-prefecture-gap",
+      "base": "care-worker-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "care-worker-income-prefecture-gap",
+      "base": "care-manager-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "care-worker-income-prefecture-gap",
+      "base": "worker-vs-manager-scatter",
+      "chartType": "scatter",
+      "hasJson": true,
+      "hasSource": false,
+      "status": "jsonOnly",
+      "restoreMethod": "source-backfill"
+    },
+    {
+      "slug": "carpenter-income-prefecture-gap",
+      "base": "carpenter-income-prefecture-gap-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "cc-estat-02-search-skill",
+      "base": "total-population",
+      "chartType": "unknown",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "manual"
+    },
+    {
+      "slug": "cc-estat-03-population-bar",
+      "base": "cc-estat-03-population-bar-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "cc-estat-04-aging-heatmap",
+      "base": "aging-rate-top-bottom",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "cc-estat-05-medical-cost-choropleth",
+      "base": "national-medical-expense-per-person",
+      "chartType": "unknown",
+      "hasJson": true,
+      "hasSource": false,
+      "status": "jsonOnly",
+      "restoreMethod": "source-backfill"
+    },
+    {
+      "slug": "cc-estat-13-agri-sankey",
+      "base": "cc-estat-13-agri-sankey-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "cc-estat-13-agri-sankey",
+      "base": "inline-chart-1",
+      "chartType": "unknown",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "manual"
+    },
+    {
+      "slug": "cc-estat-20-publish",
+      "base": "total-population-ranking",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "chicken-consumption-quantity",
+      "base": "chicken-consumption-quantity-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "child-height-regional-gap",
+      "base": "inline-chart-1",
+      "chartType": "unknown",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "manual"
+    },
+    {
+      "slug": "child-height-regional-gap",
+      "base": "inline-chart-2",
+      "chartType": "unknown",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "manual"
+    },
+    {
+      "slug": "childcare-friendly-prefecture-ranking",
+      "base": "composite-ranking",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "childcare-friendly-prefecture-ranking",
+      "base": "indicator-comparison",
+      "chartType": "ranking",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "childcare-friendly-prefecture-ranking",
+      "base": "tile-grid-score",
+      "chartType": "tilemap",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "childcare-friendly-prefecture-ranking",
+      "base": "scatter-employment-fertility",
+      "chartType": "scatter",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "childcare-friendly-prefecture-ranking",
+      "base": "summary-findings",
+      "chartType": "findings",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "coffee-consumption-prefecture-gap",
+      "base": "coffee-consumption-prefecture-gap-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "commercial-land-price-trend",
+      "base": "commercial-rate-ranking",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "commercial-land-price-trend",
+      "base": "commercial-rate-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "commercial-land-price-trend",
+      "base": "area-ratio-vs-rate-scatter",
+      "chartType": "scatter",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "commercial-land-price-trend",
+      "base": "commercial-rate-timeseries",
+      "chartType": "line",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "commercial-land-price-trend",
+      "base": "commercial-summary-findings",
+      "chartType": "findings",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "commercial-sales-productivity-gap",
+      "base": "inline-chart-1",
+      "chartType": "unknown",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "manual"
+    },
+    {
+      "slug": "commercial-sales-productivity-gap",
+      "base": "inline-chart-2",
+      "chartType": "unknown",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "manual"
+    },
+    {
+      "slug": "commercial-sales-productivity-gap",
+      "base": "annual-sales-amount-per-establishment-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "communication-cost-burden",
+      "base": "comm-cost-ranking",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "communication-cost-burden",
+      "base": "comm-cost-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "communication-cost-burden",
+      "base": "comm-cost-vs-mobile",
+      "chartType": "unknown",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "manual"
+    },
+    {
+      "slug": "communication-cost-burden",
+      "base": "comm-cost-trend",
+      "chartType": "line",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "communication-cost-burden",
+      "base": "comm-cost-summary-findings",
+      "chartType": "findings",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "consumer-price-regional-gap",
+      "base": "overall-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "consumer-price-regional-gap",
+      "base": "inline-chart-1",
+      "chartType": "unknown",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "manual"
+    },
+    {
+      "slug": "consumer-price-regional-gap",
+      "base": "housing-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "convenience-store-density-map",
+      "base": "convenience-ranking",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "convenience-store-density-map",
+      "base": "convenience-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "convenience-store-density-map",
+      "base": "convenience-vs-retail-scatter",
+      "chartType": "scatter",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "convenience-store-density-map",
+      "base": "convenience-summary-findings",
+      "chartType": "findings",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "cpi-change-regional-pattern",
+      "base": "cpi-change-ranking",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "cpi-change-regional-pattern",
+      "base": "cpi-change-food",
+      "chartType": "unknown",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "manual"
+    },
+    {
+      "slug": "cpi-change-regional-pattern",
+      "base": "cpi-change-utilities",
+      "chartType": "unknown",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "manual"
+    },
+    {
+      "slug": "crime-rate-regional-gap",
+      "base": "theft-ranking",
+      "chartType": "ranking",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "crime-rate-regional-gap",
+      "base": "theft-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "crime-rate-regional-gap",
+      "base": "arrest-rate-ranking",
+      "chartType": "ranking",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "crime-rate-regional-gap",
+      "base": "arrest-vs-theft-scatter",
+      "chartType": "scatter",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "crime-rate-regional-gap",
+      "base": "crime-type-composition",
+      "chartType": "stacked",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "crime-rate-regional-gap",
+      "base": "theft-timeseries",
+      "chartType": "line",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "crime-rate-regional-gap",
+      "base": "crime-summary-findings",
+      "chartType": "findings",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "curry-roux-consumption-gap",
+      "base": "curry-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "dairy-cattle-count",
+      "base": "dairy-cattle-count-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "dairy-cattle-hokkaido-monopoly",
+      "base": "dairy-cattle-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "dental-hygienist-income-prefecture-gap",
+      "base": "income-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "dental-hygienist-income-prefecture-gap",
+      "base": "income-timeseries",
+      "chartType": "line",
+      "hasJson": true,
+      "hasSource": false,
+      "status": "jsonOnly",
+      "restoreMethod": "source-backfill"
+    },
+    {
+      "slug": "dentist-income-prefecture-gap",
+      "base": "dentist-income-prefecture-gap-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "depopulation-area-medical-facilities",
+      "base": "depopulation-medical-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": false,
+      "status": "jsonOnly",
+      "restoreMethod": "source-backfill"
+    },
+    {
+      "slug": "divorces-per-total-population",
+      "base": "divorces-per-total-population-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "doctor-income-prefecture-gap",
+      "base": "doctor-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "dog-registration-prefecture-gap",
+      "base": "dog-registration-count-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "dual-income-reversal",
+      "base": "actual-income-ranking",
+      "chartType": "ranking",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "dual-income-reversal",
+      "base": "actual-income-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "dual-income-reversal",
+      "base": "household-head-income-worker-households-per-month-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "dual-income-reversal",
+      "base": "head-vs-actual-scatter",
+      "chartType": "scatter",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "dual-income-reversal",
+      "base": "actual-income-trend",
+      "chartType": "line",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "dual-income-reversal",
+      "base": "income-summary-findings",
+      "chartType": "findings",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "earthquake-insurance-prefecture-gap",
+      "base": "insurance-prefecture-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "earthquake-insurance-prefecture-gap",
+      "base": "insurance-damage-scatter",
+      "chartType": "scatter",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "earthquake-insurance-prefecture-gap",
+      "base": "insurance-timeseries",
+      "chartType": "line",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "education-cost-per-child",
+      "base": "elementary-cost-ranking",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "education-cost-per-child",
+      "base": "elementary-cost-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "education-cost-per-child",
+      "base": "elem-vs-junior-cost-scatter",
+      "chartType": "scatter",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "education-cost-per-child",
+      "base": "education-cost-summary-findings",
+      "chartType": "findings",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "education-expenses-gap",
+      "base": "education-per-student-ranking",
+      "chartType": "ranking",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "education-expenses-gap",
+      "base": "education-per-student-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "education-expenses-gap",
+      "base": "elem-vs-junior-scatter",
+      "chartType": "scatter",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "education-expenses-gap",
+      "base": "education-summary-findings",
+      "chartType": "findings",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "electricity-bill-hike-impact",
+      "base": "utilities-expenditure-ratio-multi-person-households-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "electricity-bill-hike-impact",
+      "base": "consumer-price-difference-index-utilities-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "electricity-bill-hike-impact",
+      "base": "cpi-change-rate-utilities-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "electricity-demand-gap",
+      "base": "electricity-demand-bar",
+      "chartType": "unknown",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "manual"
+    },
+    {
+      "slug": "electricity-demand-gap",
+      "base": "energy-per-capita-tilemap",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "electricity-demand-gap",
+      "base": "demand-vs-generation-scatter",
+      "chartType": "scatter",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "electricity-demand-gap",
+      "base": "lighting-electricity-bar",
+      "chartType": "unknown",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "manual"
+    },
+    {
+      "slug": "electricity-demand-gap",
+      "base": "electricity-summary-findings",
+      "chartType": "findings",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "elementary-school-children-count",
+      "base": "elementary-school-children-count-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "energy-consumption-structure-shift",
+      "base": "energy-trend",
+      "chartType": "line",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "energy-consumption-structure-shift",
+      "base": "energy-ranking",
+      "chartType": "ranking",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "energy-consumption-structure-shift",
+      "base": "energy-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "energy-consumption-structure-shift",
+      "base": "energy-price-scatter",
+      "chartType": "scatter",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "energy-consumption-structure-shift",
+      "base": "solar-ranking",
+      "chartType": "ranking",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "energy-consumption-structure-shift",
+      "base": "energy-summary-findings",
+      "chartType": "findings",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "energy-infrastructure-gas-electricity",
+      "base": "gas-ratio-tilemap",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "energy-infrastructure-gas-electricity",
+      "base": "gas-ratio-bar",
+      "chartType": "unknown",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "manual"
+    },
+    {
+      "slug": "energy-infrastructure-gas-electricity",
+      "base": "electricity-ranking",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "energy-infrastructure-gas-electricity",
+      "base": "gas-vs-electricity-scatter",
+      "chartType": "scatter",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "energy-infrastructure-gas-electricity",
+      "base": "gasoline-trend",
+      "chartType": "line",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "energy-infrastructure-gas-electricity",
+      "base": "energy-summary-findings",
+      "chartType": "findings",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "engel-coefficient-prefecture-ranking",
+      "base": "engel-ranking-top-bottom",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "engel-coefficient-prefecture-ranking",
+      "base": "engel-tilemap",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "engel-coefficient-prefecture-ranking",
+      "base": "engel-timeseries",
+      "chartType": "line",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "engineer-telework-prefecture",
+      "base": "engineer-telework-prefecture-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "engineer-vs-professions-income",
+      "base": "profession-income-comparison",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": false,
+      "status": "jsonOnly",
+      "restoreMethod": "source-backfill"
+    },
+    {
+      "slug": "expenditure-structure-comparison",
+      "base": "welfare-ratio-ranking",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "expenditure-structure-comparison",
+      "base": "welfare-ratio-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "expenditure-structure-comparison",
+      "base": "welfare-vs-public-works-scatter",
+      "chartType": "scatter",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "farmland-crisis-abandoned-land",
+      "base": "chart1-tilemap",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "farmland-crisis-abandoned-land",
+      "base": "chart2-bar-abandoned",
+      "chartType": "unknown",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "manual"
+    },
+    {
+      "slug": "farmland-crisis-abandoned-land",
+      "base": "chart3-bar-employment",
+      "chartType": "unknown",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "manual"
+    },
+    {
+      "slug": "farmland-crisis-abandoned-land",
+      "base": "chart4-scatter",
+      "chartType": "scatter",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "farmland-crisis-abandoned-land",
+      "base": "chart5-bar-per-household",
+      "chartType": "unknown",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "manual"
+    },
+    {
+      "slug": "farmland-crisis-abandoned-land",
+      "base": "chart6-summary-findings",
+      "chartType": "findings",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "female-lecture-prefecture-gap",
+      "base": "female-class-lecture-count-per-million-female-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "fertility-fiscal-nexus",
+      "base": "total-fertility-rate-top5-bottom5",
+      "chartType": "ranking",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "fertility-fiscal-nexus",
+      "base": "fiscal-strength-index-top5-bottom5",
+      "chartType": "ranking",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "fertility-fiscal-nexus",
+      "base": "fiscal-fertility-scatter",
+      "chartType": "scatter",
+      "hasJson": true,
+      "hasSource": false,
+      "status": "jsonOnly",
+      "restoreMethod": "source-backfill"
+    },
+    {
+      "slug": "fertility-rate-prefecture-gap",
+      "base": "fertility-rate-prefecture-gap-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "fertility-rate-prefecture-gap",
+      "base": "marriage-fertility-scatter",
+      "chartType": "scatter",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "firefighting-capacity-gap",
+      "base": "fire-rate-ranking",
+      "chartType": "ranking",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "firefighting-capacity-gap",
+      "base": "fire-dept-density-ranking",
+      "chartType": "ranking",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "firefighting-capacity-gap",
+      "base": "fire-member-ranking",
+      "chartType": "ranking",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "firefighting-capacity-gap",
+      "base": "fire-expenditure-ranking",
+      "chartType": "ranking",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "fiscal-health-50years-trend",
+      "base": "fiscal-ranking",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "fiscal-health-50years-trend",
+      "base": "fiscal-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "fiscal-health-50years-trend",
+      "base": "fiscal-trend",
+      "chartType": "line",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "fiscal-health-50years-trend",
+      "base": "current-balance-trend",
+      "chartType": "line",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "fiscal-health-50years-trend",
+      "base": "fiscal-grants-scatter",
+      "chartType": "scatter",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "fiscal-self-reliance-gap",
+      "base": "fiscal-strength-ranking",
+      "chartType": "ranking",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "fiscal-self-reliance-gap",
+      "base": "fiscal-strength-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "fiscal-self-reliance-gap",
+      "base": "fiscal-vs-self-financing-scatter",
+      "chartType": "scatter",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "fiscal-self-reliance-gap",
+      "base": "current-balance-ratio-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "fiscal-self-reliance-gap",
+      "base": "real-public-debt-service-ratio-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "fiscal-self-reliance-gap",
+      "base": "fiscal-summary-findings",
+      "chartType": "findings",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "fishery-species-prefecture-specialty",
+      "base": "sardine-catch-ranking",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "food-consumption-prefecture-battle",
+      "base": "ramen-gyoza-tilemap",
+      "chartType": "tilemap",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "food-consumption-prefecture-battle",
+      "base": "food-ranking-comparison",
+      "chartType": "ranking",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "food-consumption-prefecture-battle",
+      "base": "price-change-2019-2024",
+      "chartType": "unknown",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "manual"
+    },
+    {
+      "slug": "food-price-regional-2026",
+      "base": "food-pressure-ranking",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "food-price-regional-2026",
+      "base": "food-quadrant-scatter",
+      "chartType": "scatter",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "food-spending-pattern",
+      "base": "rice-map",
+      "chartType": "tilemap",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "food-spending-pattern",
+      "base": "bread-map",
+      "chartType": "tilemap",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "food-spending-pattern",
+      "base": "rice-vs-bread-scatter",
+      "chartType": "scatter",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "food-spending-pattern",
+      "base": "noodle-ranking",
+      "chartType": "ranking",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "food-spending-pattern",
+      "base": "cup-noodle-ranking",
+      "chartType": "ranking",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "food-spending-pattern",
+      "base": "food-summary-findings",
+      "chartType": "findings",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "food-trio-prefecture-map",
+      "base": "tofu-ranking",
+      "chartType": "ranking",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "food-trio-prefecture-map",
+      "base": "shochu-ranking",
+      "chartType": "ranking",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "food-trio-prefecture-map",
+      "base": "konbu-ranking",
+      "chartType": "ranking",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "foreign-overnight-guests-prefecture-gap",
+      "base": "foreign-overnight-guests-prefecture-gap-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "foreign-overnight-guests-prefecture-gap",
+      "base": "inline-chart-2",
+      "chartType": "unknown",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "manual"
+    },
+    {
+      "slug": "foreign-population-growth-rate",
+      "base": "foreign-per-100k-ranking",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "foreign-population-growth-rate",
+      "base": "resident-foreigner-population-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "foreign-residents-diversity-map",
+      "base": "foreign-ranking",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "foreign-residents-diversity-map",
+      "base": "foreign-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "foreign-residents-diversity-map",
+      "base": "foreign-nationality-stacked",
+      "chartType": "stacked",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "foreign-residents-diversity-map",
+      "base": "manufacturing-vs-foreign-scatter",
+      "chartType": "scatter",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "foreign-residents-diversity-map",
+      "base": "foreign-summary-findings",
+      "chartType": "findings",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "forest-coverage-woodland-economy",
+      "base": "chart1-forest-ratio-ranking",
+      "chartType": "ranking",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "forest-coverage-woodland-economy",
+      "base": "chart2-forest-ratio-tilemap",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "forest-coverage-woodland-economy",
+      "base": "chart3-forest-vs-gdp-scatter",
+      "chartType": "scatter",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "forest-coverage-woodland-economy",
+      "base": "chart4-forest-road-ranking",
+      "chartType": "ranking",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "forest-coverage-woodland-economy",
+      "base": "chart5-artificial-forest-ranking",
+      "chartType": "ranking",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "forest-coverage-woodland-economy",
+      "base": "chart6-summary-findings",
+      "chartType": "findings",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "fresh-udon-soba-consumption-quantity",
+      "base": "fresh-udon-soba-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "frozen-gyoza-spending-prefecture-gap",
+      "base": "gyoza-frozen-consumption-expenditure-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "future-burden-ratio-extreme-gap",
+      "base": "future-burden-ratio-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "future-burden-ratio-extreme-gap",
+      "base": "future-burden-ratio-tile-grid",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "gasoline-car-society-map",
+      "base": "gasoline-tilemap",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "gasoline-car-society-map",
+      "base": "gasoline-ranking",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "gasoline-car-society-map",
+      "base": "gas-stations-bar",
+      "chartType": "unknown",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "manual"
+    },
+    {
+      "slug": "gasoline-car-society-map",
+      "base": "gasoline-vs-citygas-scatter",
+      "chartType": "scatter",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "gasoline-car-society-map",
+      "base": "gasoline-summary-findings",
+      "chartType": "findings",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "general-bed-utilization-pressure-map",
+      "base": "bed-utilization-rate-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "general-hospital-bed-occupancy-rate",
+      "base": "general-hospital-bed-occupancy-rate-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "governor-election-turnout-prefecture-gap",
+      "base": "governor-election-turnout-prefecture-gap-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "green-tea-consumption-quantity",
+      "base": "green-tea-consumption-ranking",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "health-life-expectancy-structure",
+      "base": "health-trend",
+      "chartType": "line",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "health-life-expectancy-structure",
+      "base": "health-ranking",
+      "chartType": "ranking",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "health-life-expectancy-structure",
+      "base": "health-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "health-life-expectancy-structure",
+      "base": "doctors-trend",
+      "chartType": "line",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "health-life-expectancy-structure",
+      "base": "health-doctors-scatter",
+      "chartType": "scatter",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "health-life-expectancy-structure",
+      "base": "health-summary-findings",
+      "chartType": "findings",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "healthy-life-expectancy-male-female-gap",
+      "base": "inline-chart-1",
+      "chartType": "unknown",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "manual"
+    },
+    {
+      "slug": "healthy-life-expectancy-male-female-gap",
+      "base": "inline-chart-2",
+      "chartType": "unknown",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "manual"
+    },
+    {
+      "slug": "healthy-life-expectancy-male-female-gap",
+      "base": "healthy-life-expectancy-female-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "highschool-starting-salary-gap",
+      "base": "inline-chart-1",
+      "chartType": "unknown",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "manual"
+    },
+    {
+      "slug": "hospital-bed-utilization-map",
+      "base": "bed-utilization-tilemap",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "hospital-bed-utilization-map",
+      "base": "bed-utilization-top-bottom",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "hospital-bed-utilization-map",
+      "base": "bed-util-vs-inpatient-rate",
+      "chartType": "unknown",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "manual"
+    },
+    {
+      "slug": "hospital-bed-utilization-map",
+      "base": "bed-util-vs-physicians",
+      "chartType": "unknown",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "manual"
+    },
+    {
+      "slug": "household-income-tokyo-okinawa",
+      "base": "inline-chart-1",
+      "chartType": "unknown",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "manual"
+    },
+    {
+      "slug": "household-solo-vs-dualincome",
+      "base": "single-household-ranking",
+      "chartType": "ranking",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "household-solo-vs-dualincome",
+      "base": "nuclear-family-households-ratio-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "household-solo-vs-dualincome",
+      "base": "average-persons-per-general-household-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "household-solo-vs-dualincome",
+      "base": "dual-income-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "household-solo-vs-dualincome",
+      "base": "single-vs-dual-income-scatter",
+      "chartType": "scatter",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "household-solo-vs-dualincome",
+      "base": "household-summary-findings",
+      "chartType": "findings",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "household-spending-before-after-inflation",
+      "base": "spending-change-bars",
+      "chartType": "unknown",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "manual"
+    },
+    {
+      "slug": "household-spending-before-after-inflation",
+      "base": "change-rate-waterfall",
+      "chartType": "unknown",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "manual"
+    },
+    {
+      "slug": "household-spending-before-after-inflation",
+      "base": "engel-trend-context",
+      "chartType": "line",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "household-spending-prefecture-gap",
+      "base": "spending-ranking",
+      "chartType": "ranking",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "household-spending-prefecture-gap",
+      "base": "food-ratio-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "household-spending-prefecture-gap",
+      "base": "spending-vs-food-ratio-scatter",
+      "chartType": "scatter",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "household-spending-prefecture-gap",
+      "base": "culture-recreation-expenditure-ratio-multi-person-households-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "household-spending-prefecture-gap",
+      "base": "clothing-footwear-expenditure-ratio-multi-person-households-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "household-structure-transformation",
+      "base": "single-household-ranking",
+      "chartType": "ranking",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "household-structure-transformation",
+      "base": "household-size-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "household-structure-transformation",
+      "base": "dualincome-ranking",
+      "chartType": "ranking",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "household-structure-transformation",
+      "base": "single-vs-dualincome-scatter",
+      "chartType": "scatter",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "housing-cost-livability-trend",
+      "base": "rent-ranking",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "housing-cost-livability-trend",
+      "base": "rent-floorarea-scatter",
+      "chartType": "scatter",
+      "hasJson": true,
+      "hasSource": false,
+      "status": "jsonOnly",
+      "restoreMethod": "source-backfill"
+    },
+    {
+      "slug": "ict-media-consumption-gender-gap",
+      "base": "media-man-ranking",
+      "chartType": "ranking",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "ict-media-consumption-gender-gap",
+      "base": "media-woman-ranking",
+      "chartType": "ranking",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "ict-media-consumption-gender-gap",
+      "base": "media-gender-scatter",
+      "chartType": "scatter",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "ict-media-consumption-gender-gap",
+      "base": "media-gender-gap-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "ict-media-consumption-gender-gap",
+      "base": "media-summary-findings",
+      "chartType": "findings",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "inbound-by-nationality-regional-preference",
+      "base": "korea-guest-map",
+      "chartType": "tilemap",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "inbound-by-nationality-regional-preference",
+      "base": "taiwan-guest-map",
+      "chartType": "tilemap",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "inbound-by-nationality-regional-preference",
+      "base": "nationality-composition-top15",
+      "chartType": "stacked",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "inbound-by-nationality-regional-preference",
+      "base": "resident-vs-guest-china-scatter",
+      "chartType": "scatter",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "inbound-by-nationality-regional-preference",
+      "base": "usa-guests-ranking",
+      "chartType": "ranking",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "inbound-by-nationality-regional-preference",
+      "base": "summary-findings",
+      "chartType": "findings",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "inbound-overnight-guests-prefecture",
+      "base": "inbound-top10",
+      "chartType": "ranking",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "inbound-overnight-guests-prefecture",
+      "base": "inbound-national-trend",
+      "chartType": "line",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "inbound-overnight-regional-gap",
+      "base": "foreign-guests-ranking",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "inbound-overnight-regional-gap",
+      "base": "foreign-guests-tilemap",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "inbound-overnight-regional-gap",
+      "base": "nationality-breakdown",
+      "chartType": "stacked",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "inbound-overnight-regional-gap",
+      "base": "foreign-ratio-scatter",
+      "chartType": "scatter",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "inbound-overnight-regional-gap",
+      "base": "foreign-guests-trend",
+      "chartType": "line",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "inbound-overnight-regional-gap",
+      "base": "summary-findings",
+      "chartType": "findings",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "inbound-overnight-stay-concentration",
+      "base": "foreign-guests-ranking",
+      "chartType": "ranking",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "inbound-overnight-stay-concentration",
+      "base": "foreign-guest-ratio-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "inbound-overnight-stay-concentration",
+      "base": "nationality-breakdown-top10",
+      "chartType": "stacked",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "inbound-overnight-stay-concentration",
+      "base": "foreign-guests-trend",
+      "chartType": "line",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "inbound-overnight-stay-concentration",
+      "base": "summary-findings",
+      "chartType": "findings",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "income-1000man-which-prefecture",
+      "base": "profession-income-1000man",
+      "chartType": "unknown",
+      "hasJson": true,
+      "hasSource": false,
+      "status": "jsonOnly",
+      "restoreMethod": "source-backfill"
+    },
+    {
+      "slug": "industrial-water-manufacturing-nexus",
+      "base": "chart1-bar",
+      "chartType": "unknown",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "manual"
+    },
+    {
+      "slug": "industrial-water-manufacturing-nexus",
+      "base": "chart2-tilemap",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "industrial-water-manufacturing-nexus",
+      "base": "chart3-efficiency-bar",
+      "chartType": "unknown",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "manual"
+    },
+    {
+      "slug": "industrial-water-manufacturing-nexus",
+      "base": "chart4-scatter-shipment",
+      "chartType": "scatter",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "industrial-water-manufacturing-nexus",
+      "base": "chart5-scatter-addedvalue",
+      "chartType": "scatter",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "industrial-water-manufacturing-nexus",
+      "base": "chart6-summary-findings",
+      "chartType": "findings",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "inflation-rate-prefecture-gap",
+      "base": "cpi-total",
+      "chartType": "unknown",
+      "hasJson": true,
+      "hasSource": false,
+      "status": "jsonOnly",
+      "restoreMethod": "source-backfill"
+    },
+    {
+      "slug": "inflation-rate-prefecture-gap",
+      "base": "cpi-food",
+      "chartType": "unknown",
+      "hasJson": true,
+      "hasSource": false,
+      "status": "jsonOnly",
+      "restoreMethod": "source-backfill"
+    },
+    {
+      "slug": "inflation-rate-prefecture-gap",
+      "base": "cpi-utilities",
+      "chartType": "unknown",
+      "hasJson": true,
+      "hasSource": false,
+      "status": "jsonOnly",
+      "restoreMethod": "source-backfill"
+    },
+    {
+      "slug": "inflation-rate-prefecture-gap",
+      "base": "cpi-housing",
+      "chartType": "unknown",
+      "hasJson": true,
+      "hasSource": false,
+      "status": "jsonOnly",
+      "restoreMethod": "source-backfill"
+    },
+    {
+      "slug": "inflow-population-ratio-prefecture-gap",
+      "base": "inflow-population-ratio-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "inpatient-rate-aging-burden",
+      "base": "inline-chart-1",
+      "chartType": "unknown",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "manual"
+    },
+    {
+      "slug": "instant-noodles-consumption-prefecture-gap",
+      "base": "instant-noodles-consumption-prefecture-gap-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "instant-noodles-consumption-prefecture-gap",
+      "base": "instant-noodles-consumption-prefecture-gap-timeseries",
+      "chartType": "line",
+      "hasJson": true,
+      "hasSource": false,
+      "status": "jsonOnly",
+      "restoreMethod": "source-backfill"
+    },
+    {
+      "slug": "international-cooperation-volunteer-map",
+      "base": "volunteer-rate-ranking",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": false,
+      "status": "jsonOnly",
+      "restoreMethod": "source-backfill"
+    },
+    {
+      "slug": "international-cooperation-volunteer-map",
+      "base": "volunteer-rate-map",
+      "chartType": "tilemap",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "international-cooperation-volunteer-map",
+      "base": "travel-vs-volunteer-scatter",
+      "chartType": "scatter",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "international-cooperation-volunteer-map",
+      "base": "foreign-pop-vs-volunteer-scatter",
+      "chartType": "scatter",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "it-establishments-prefecture",
+      "base": "it-establishments-prefecture-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "it-establishments-prefecture",
+      "base": "it-establishments-prefecture-national-trend",
+      "chartType": "line",
+      "hasJson": true,
+      "hasSource": false,
+      "status": "jsonOnly",
+      "restoreMethod": "source-backfill"
+    },
+    {
+      "slug": "it-industry-concentration",
+      "base": "it-industry-concentration-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "kei-car-density-prefecture-gap",
+      "base": "kei-car-density-prefecture-gap-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "konbu-consumption-prefecture-gap",
+      "base": "inline-chart-1",
+      "chartType": "unknown",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "manual"
+    },
+    {
+      "slug": "konbu-consumption-prefecture-gap",
+      "base": "inline-chart-2",
+      "chartType": "unknown",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "manual"
+    },
+    {
+      "slug": "konbu-consumption-quantity",
+      "base": "konbu-consumption-ranking",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "library-books-prefecture-gap",
+      "base": "library-books-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "library-museum-cultural-capital",
+      "base": "library-per-capita",
+      "chartType": "unknown",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "manual"
+    },
+    {
+      "slug": "library-museum-cultural-capital",
+      "base": "library-lending-tilemap",
+      "chartType": "tilemap",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "library-museum-cultural-capital",
+      "base": "museum-ranking",
+      "chartType": "ranking",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "library-museum-cultural-capital",
+      "base": "library-vs-hobby-scatter",
+      "chartType": "scatter",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "library-museum-cultural-capital",
+      "base": "cultural-facility-stacked",
+      "chartType": "stacked",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "library-museum-cultural-capital",
+      "base": "summary-findings",
+      "chartType": "findings",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "livable-prefecture-composite-ranking",
+      "base": "composite-ranking",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "livable-prefecture-composite-ranking",
+      "base": "radar-comparison",
+      "chartType": "ranking",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "local-debt-current-ratio-prefecture-gap",
+      "base": "local-debt-current-ratio-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "local-debt-current-ratio-prefecture-gap",
+      "base": "local-debt-current-ratio-tile-grid",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "local-tax-regional-gap",
+      "base": "per-capita-local-tax",
+      "chartType": "unknown",
+      "hasJson": true,
+      "hasSource": false,
+      "status": "jsonOnly",
+      "restoreMethod": "source-backfill"
+    },
+    {
+      "slug": "local-tax-revenue-gap",
+      "base": "local-tax-ratio-ranking",
+      "chartType": "ranking",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "local-tax-revenue-gap",
+      "base": "allocation-tax-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "local-tax-revenue-gap",
+      "base": "tax-vs-allocation-scatter",
+      "chartType": "scatter",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "local-tax-revenue-gap",
+      "base": "taxpayer-ratio-per-pref-resident-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "local-tax-revenue-gap",
+      "base": "national-treasury-disbursement-ratio-pref-finance-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "local-tax-revenue-gap",
+      "base": "tax-summary-findings",
+      "chartType": "findings",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "long-commute-telework-potential",
+      "base": "long-commute-telework-potential-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "low-birthweight-rate-prefecture-gap",
+      "base": "low-birthweight-rate-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "low-birthweight-rate-prefecture-gap",
+      "base": "low-birthweight-rate-timeseries",
+      "chartType": "line",
+      "hasJson": true,
+      "hasSource": false,
+      "status": "jsonOnly",
+      "restoreMethod": "source-backfill"
+    },
+    {
+      "slug": "manufacturing-aichi-dominance",
+      "base": "manufacturing-trend",
+      "chartType": "line",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "manufacturing-aichi-dominance",
+      "base": "manufacturing-ranking",
+      "chartType": "ranking",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "manufacturing-aichi-dominance",
+      "base": "manufacturing-heatmap",
+      "chartType": "unknown",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "manual"
+    },
+    {
+      "slug": "manufacturing-aichi-dominance",
+      "base": "industrial-zone-ranking",
+      "chartType": "ranking",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "manufacturing-aichi-dominance",
+      "base": "industry-composition-stacked",
+      "chartType": "stacked",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "manufacturing-aichi-dominance",
+      "base": "shipment-per-employee-ranking",
+      "chartType": "ranking",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "manufacturing-aichi-dominance",
+      "base": "manufacturing-summary-findings",
+      "chartType": "findings",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "manufacturing-labor-productivity-pref",
+      "base": "shipment-productivity-scatter",
+      "chartType": "scatter",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "manufacturing-labor-productivity-pref",
+      "base": "manufacturing-productivity-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "manufacturing-productivity",
+      "base": "chart1-bar-shipment-employees",
+      "chartType": "unknown",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "manual"
+    },
+    {
+      "slug": "manufacturing-productivity",
+      "base": "chart2-ranking-per-employee",
+      "chartType": "ranking",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "manufacturing-productivity",
+      "base": "chart3-tilemap-per-employee",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "manufacturing-productivity",
+      "base": "chart5-ranking-per-establishment",
+      "chartType": "ranking",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "manufacturing-productivity",
+      "base": "chart4-scatter-shipment-vs-value",
+      "chartType": "scatter",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "manufacturing-productivity",
+      "base": "chart6-summary-findings",
+      "chartType": "findings",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "manufacturing-shipment-prefecture-ranking",
+      "base": "shipment-ranking",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "marriage-divorce-okinawa",
+      "base": "marriage-rate",
+      "chartType": "unknown",
+      "hasJson": true,
+      "hasSource": false,
+      "status": "jsonOnly",
+      "restoreMethod": "source-backfill"
+    },
+    {
+      "slug": "marriage-divorce-okinawa",
+      "base": "divorce-rate",
+      "chartType": "unknown",
+      "hasJson": true,
+      "hasSource": false,
+      "status": "jsonOnly",
+      "restoreMethod": "source-backfill"
+    },
+    {
+      "slug": "marriage-unmarried-crisis",
+      "base": "inline-chart-1",
+      "chartType": "unknown",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "manual"
+    },
+    {
+      "slug": "mayonnaise-consumption-expenditure",
+      "base": "mayonnaise-consumption-expenditure-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "middle-school-height-east-west-puzzle",
+      "base": "inline-chart-1",
+      "chartType": "unknown",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "manual"
+    },
+    {
+      "slug": "mineral-water-spending-prefecture-gap",
+      "base": "mineral-water-top-bottom",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "minimum-wage-1000yen-breakthrough",
+      "base": "minimum-wage-top5-bottom5",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "minimum-wage-1000yen-breakthrough",
+      "base": "jobratio-wage-scatter",
+      "chartType": "scatter",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "minimum-wage-1000yen-prefecture",
+      "base": "minimum-wage-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "minimum-wage-1000yen-prefecture",
+      "base": "minimum-wage-trend",
+      "chartType": "line",
+      "hasJson": true,
+      "hasSource": false,
+      "status": "jsonOnly",
+      "restoreMethod": "source-backfill"
+    },
+    {
+      "slug": "minimum-wage-gap-regional-economy",
+      "base": "inline-chart-1",
+      "chartType": "unknown",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "manual"
+    },
+    {
+      "slug": "mobile-contracts-over-population",
+      "base": "mobile-ranking",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "mobile-contracts-over-population",
+      "base": "mobile-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "mobile-contracts-over-population",
+      "base": "mobile-summary-findings",
+      "chartType": "findings",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "mochi-consumption-prefecture-gap",
+      "base": "mochi-consumption-prefecture-gap-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "musical-instrument-expenditure-prefecture-gap",
+      "base": "musical-instrument-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "natto-consumption-east-west-divide",
+      "base": "inline-chart-1",
+      "chartType": "unknown",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "manual"
+    },
+    {
+      "slug": "natto-consumption-east-west-divide",
+      "base": "inline-chart-2",
+      "chartType": "unknown",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "manual"
+    },
+    {
+      "slug": "natto-consumption-expenditure",
+      "base": "natto-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "noodle-consumption-prefecture-character",
+      "base": "udon-tile-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "noodle-consumption-prefecture-character",
+      "base": "ramen-ranking",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "noodle-consumption-prefecture-character",
+      "base": "ramen-tile-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "noodle-consumption-prefecture-character",
+      "base": "udon-ramen-scatter",
+      "chartType": "scatter",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "noodle-consumption-prefecture-character",
+      "base": "summary-findings",
+      "chartType": "findings",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "nurse-income-prefecture-gap",
+      "base": "nurse-income-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "nurse-income-prefecture-gap",
+      "base": "nurse-vs-govwage-scatter",
+      "chartType": "scatter",
+      "hasJson": true,
+      "hasSource": false,
+      "status": "jsonOnly",
+      "restoreMethod": "source-backfill"
+    },
+    {
+      "slug": "nurse-income-prefecture-gap",
+      "base": "nurse-favored-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": false,
+      "status": "jsonOnly",
+      "restoreMethod": "source-backfill"
+    },
+    {
+      "slug": "nursing-care-shortage-2040",
+      "base": "nursing-welfare-facility-ranking",
+      "chartType": "ranking",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "nursing-care-shortage-2040",
+      "base": "nursing-welfare-facility-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "nursing-care-shortage-2040",
+      "base": "nursing-home-capacity-ranking",
+      "chartType": "ranking",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "nursing-care-shortage-2040",
+      "base": "nursing-home-staff-ranking",
+      "chartType": "ranking",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "nursing-care-shortage-2040",
+      "base": "aging-vs-nursing-facility-scatter",
+      "chartType": "scatter",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "nursing-care-shortage-2040",
+      "base": "aging-vs-welfare-expenditure-scatter",
+      "chartType": "scatter",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "nursing-care-shortage-2040",
+      "base": "nursing-care-summary-findings",
+      "chartType": "findings",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "overnight-guests-inbound-recovery",
+      "base": "overnight-trend",
+      "chartType": "line",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "overnight-guests-inbound-recovery",
+      "base": "overnight-ranking",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "overnight-guests-inbound-recovery",
+      "base": "overnight-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "overnight-guests-inbound-recovery",
+      "base": "foreign-trend",
+      "chartType": "line",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "overnight-guests-inbound-recovery",
+      "base": "accommodation-type-trend",
+      "chartType": "line",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "overnight-guests-inbound-recovery",
+      "base": "foreign-concentration-scatter",
+      "chartType": "scatter",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "overnight-guests-inbound-recovery",
+      "base": "overnight-summary-findings",
+      "chartType": "findings",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "overseas-travel-gap",
+      "base": "overseas-travel-ranking",
+      "chartType": "ranking",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "overseas-travel-gap",
+      "base": "overseas-travel-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "overseas-travel-gap",
+      "base": "overseas-travel-gender",
+      "chartType": "unknown",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "manual"
+    },
+    {
+      "slug": "overseas-travel-gap",
+      "base": "income-vs-travel-scatter",
+      "chartType": "scatter",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "overseas-travel-gap",
+      "base": "summary-findings",
+      "chartType": "findings",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "oyster-consumption-prefecture-gap",
+      "base": "oyster-consumption-prefecture-gap-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "pachinko-participation-prefecture-gap",
+      "base": "hobby-participation-rate-pachinko-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "park-green-space-gap",
+      "base": "inline-chart-1",
+      "chartType": "unknown",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "manual"
+    },
+    {
+      "slug": "park-green-space-gap",
+      "base": "national-park-area-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "passport-issuance-prefecture-gap",
+      "base": "passport-issuance-prefecture-gap-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "pasta-consumption-quantity",
+      "base": "pasta-consumption-ranking",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "paved-road-total-length",
+      "base": "paved-road-ranking",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "per-capita-income-gap",
+      "base": "income-timeseries",
+      "chartType": "line",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "per-capita-income-gap",
+      "base": "income-ranking",
+      "chartType": "ranking",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "per-capita-income-gap",
+      "base": "income-map",
+      "chartType": "tilemap",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "per-capita-income-gap",
+      "base": "income-vs-industry-scatter",
+      "chartType": "scatter",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "per-capita-income-gap",
+      "base": "income-growth-ranking",
+      "chartType": "ranking",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "per-capita-income-gap",
+      "base": "income-summary-findings",
+      "chartType": "findings",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "pharma-medical-device-production-map",
+      "base": "chart1-chemical-bar",
+      "chartType": "unknown",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "manual"
+    },
+    {
+      "slug": "pharma-medical-device-production-map",
+      "base": "chart2-chemical-ratio-map",
+      "chartType": "tilemap",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "pharma-medical-device-production-map",
+      "base": "chart3-chemical-ratio-ranking",
+      "chartType": "ranking",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "pharma-medical-device-production-map",
+      "base": "chart4-chemical-vs-transport-scatter",
+      "chartType": "scatter",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "pharma-medical-device-production-map",
+      "base": "chart5-manufacturing-trend",
+      "chartType": "line",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "pharma-medical-device-production-map",
+      "base": "chart6-summary-findings",
+      "chartType": "findings",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "pharmacist-income-prefecture-gap",
+      "base": "pharmacist-annual-income-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "pharmacy-count-prefecture-ranking",
+      "base": "pharmacy-ranking",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "pharmacy-count-prefecture-ranking",
+      "base": "pharmacy-trend",
+      "chartType": "line",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "physical-therapist-income-prefecture-gap",
+      "base": "pt-income-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "physical-therapist-income-prefecture-gap",
+      "base": "profession-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": false,
+      "status": "jsonOnly",
+      "restoreMethod": "source-backfill"
+    },
+    {
+      "slug": "piano-ownership-prefecture-gap",
+      "base": "piano-ownership-prefecture-gap-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "police-officer-density-vs-crime-gap",
+      "base": "police-density-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "police-officer-density-vs-crime-gap",
+      "base": "crime-rate-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "police-officer-density-vs-crime-gap",
+      "base": "police-expenditure-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "pollution-complaints-regional-map",
+      "base": "complaints-ranking",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "pollution-complaints-regional-map",
+      "base": "complaints-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "pollution-complaints-regional-map",
+      "base": "facility-comparison",
+      "chartType": "ranking",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "pollution-complaints-regional-map",
+      "base": "facility-vs-complaints-scatter",
+      "chartType": "scatter",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "population-density-urbanization",
+      "base": "daytime-population-ratio",
+      "chartType": "unknown",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "manual"
+    },
+    {
+      "slug": "population-migration-tokyo-concentration",
+      "base": "migration-ranking",
+      "chartType": "ranking",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "population-migration-tokyo-concentration",
+      "base": "migration-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "population-migration-tokyo-concentration",
+      "base": "daytime-population-ranking",
+      "chartType": "ranking",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "population-migration-tokyo-concentration",
+      "base": "social-vs-natural-scatter",
+      "chartType": "scatter",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "post-office-last-window",
+      "base": "post-office-ranking",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "post-office-last-window",
+      "base": "post-office-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "post-office-last-window",
+      "base": "post-vs-mobile",
+      "chartType": "unknown",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "manual"
+    },
+    {
+      "slug": "potato-consumption-quantity",
+      "base": "potato-consumption-ranking",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "precipitation-snow-regional-gap",
+      "base": "precipitation-ranking",
+      "chartType": "ranking",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "precipitation-snow-regional-gap",
+      "base": "precipitation-days-ranking",
+      "chartType": "ranking",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "precipitation-snow-regional-gap",
+      "base": "snowfall-ranking",
+      "chartType": "ranking",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "prefectural-debt-future-burden",
+      "base": "burden-score-tilemap",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "prefectural-debt-future-burden",
+      "base": "burden-score-top-bottom",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "prefectural-debt-future-burden",
+      "base": "aging-vs-debt-scatter",
+      "chartType": "scatter",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "prefectural-income-gdp-ranking",
+      "base": "income-ranking",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": false,
+      "status": "jsonOnly",
+      "restoreMethod": "source-backfill"
+    },
+    {
+      "slug": "prefectural-income-gdp-ranking",
+      "base": "gdp-ranking",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": false,
+      "status": "jsonOnly",
+      "restoreMethod": "source-backfill"
+    },
+    {
+      "slug": "prefectural-income-gdp-ranking",
+      "base": "summary-findings",
+      "chartType": "findings",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "prefecture-salary-remote-gap",
+      "base": "prefecture-salary-remote-gap-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": false,
+      "status": "jsonOnly",
+      "restoreMethod": "source-backfill"
+    },
+    {
+      "slug": "prefecture-salary-remote-gap",
+      "base": "prefecture-salary-remote-gap-national-trend-timeseries",
+      "chartType": "line",
+      "hasJson": true,
+      "hasSource": false,
+      "status": "jsonOnly",
+      "restoreMethod": "source-backfill"
+    },
+    {
+      "slug": "prefecture-salary-remote-gap",
+      "base": "prefecture-salary-remote-gap-rent-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "price-index-high-low-prefecture",
+      "base": "overall-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "price-index-high-low-prefecture",
+      "base": "inline-chart-1",
+      "chartType": "unknown",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "manual"
+    },
+    {
+      "slug": "professor-income-prefecture-gap",
+      "base": "professor-income-prefecture-gap-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "public-phone-count",
+      "base": "public-phone-count-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "public-phone-count",
+      "base": "public-phone-count-trend-timeseries",
+      "chartType": "line",
+      "hasJson": true,
+      "hasSource": false,
+      "status": "jsonOnly",
+      "restoreMethod": "source-backfill"
+    },
+    {
+      "slug": "public-phone-count-gap",
+      "base": "public-phone-count-gap-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "public-phone-count-gap",
+      "base": "public-phone-density-ranking",
+      "chartType": "ranking",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "public-phone-count-gap",
+      "base": "public-phone-rank-inversion",
+      "chartType": "unknown",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "manual"
+    },
+    {
+      "slug": "public-phone-prefecture-vanishing",
+      "base": "public-phone-top-bottom",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "purchasing-power-adjusted",
+      "base": "income-ranking",
+      "chartType": "ranking",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "purchasing-power-adjusted",
+      "base": "real-income-ranking",
+      "chartType": "ranking",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "purchasing-power-adjusted",
+      "base": "income-map",
+      "chartType": "tilemap",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "purchasing-power-adjusted",
+      "base": "income-trend",
+      "chartType": "line",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "purchasing-power-adjusted",
+      "base": "income-vs-price-scatter",
+      "chartType": "scatter",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "recycling-rate-gap",
+      "base": "inline-chart-1",
+      "chartType": "unknown",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "manual"
+    },
+    {
+      "slug": "recycling-rate-gap",
+      "base": "inline-chart-2",
+      "chartType": "unknown",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "manual"
+    },
+    {
+      "slug": "renewable-energy-regional-gap",
+      "base": "solar-panels-tilemap",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "renewable-energy-regional-gap",
+      "base": "wind-power-bar",
+      "chartType": "unknown",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "manual"
+    },
+    {
+      "slug": "renewable-energy-regional-gap",
+      "base": "solar-vs-wind-scatter",
+      "chartType": "scatter",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "renewable-energy-regional-gap",
+      "base": "solar-energy-stacked-bar",
+      "chartType": "stacked",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "renewable-energy-regional-gap",
+      "base": "renewable-summary-findings",
+      "chartType": "findings",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "retail-establishments-by-prefecture",
+      "base": "retail-establishments-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "retail-establishments-by-prefecture",
+      "base": "retail-establishments-density-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": false,
+      "status": "jsonOnly",
+      "restoreMethod": "source-backfill"
+    },
+    {
+      "slug": "rice-harvest-volume-prefecture-gap",
+      "base": "rice-harvest-volume-prefecture-gap-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "rice-harvest-volume-prefecture-gap",
+      "base": "rice-cultivated-area-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "rice-harvest-volume-prefecture-gap",
+      "base": "rice-yield-per-10a-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "road-infrastructure-density",
+      "base": "road-density-tilemap",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "road-infrastructure-density",
+      "base": "municipal-paving-bar",
+      "chartType": "unknown",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "manual"
+    },
+    {
+      "slug": "road-infrastructure-density",
+      "base": "paving-rate-ranking",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "road-infrastructure-density",
+      "base": "density-vs-traffic-scatter",
+      "chartType": "scatter",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "road-infrastructure-density",
+      "base": "road-summary-findings",
+      "chartType": "findings",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "roadside-station-prefecture-gap",
+      "base": "roadside-station-ranking",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "ryokan-vs-hotel-overnight-shift",
+      "base": "overnight-guests-top5-bottom5",
+      "chartType": "ranking",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "ryokan-vs-hotel-overnight-shift",
+      "base": "room-utilization-top5-bottom5",
+      "chartType": "ranking",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "safe-driving-5-features",
+      "base": "accident-count-ranking",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "safe-driving-5-features",
+      "base": "aging-fatality-scatter",
+      "chartType": "scatter",
+      "hasJson": true,
+      "hasSource": false,
+      "status": "jsonOnly",
+      "restoreMethod": "source-backfill"
+    },
+    {
+      "slug": "safe-driving-5-features",
+      "base": "insurance-ranking",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "sake-consumption-prefecture-gap",
+      "base": "sake-consumption-quantity-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "savings-balance-gap",
+      "base": "savings-ranking",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "savings-balance-gap",
+      "base": "savings-map",
+      "chartType": "tilemap",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "savings-balance-gap",
+      "base": "savings-vs-consumption-scatter",
+      "chartType": "scatter",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "savings-balance-gap",
+      "base": "income-vs-savings-rate-scatter",
+      "chartType": "scatter",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "savings-balance-gap",
+      "base": "savings-summary-findings",
+      "chartType": "findings",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "savings-rate-gap",
+      "base": "inline-chart-1",
+      "chartType": "unknown",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "manual"
+    },
+    {
+      "slug": "school-nonattendance-pattern",
+      "base": "nonattendance-ranking",
+      "chartType": "ranking",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "school-nonattendance-pattern",
+      "base": "nonattendance-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "school-nonattendance-pattern",
+      "base": "elem-vs-junior-scatter",
+      "chartType": "scatter",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "school-nonattendance-pattern",
+      "base": "per-child-public-elementary-school-expenditure-pref-municipal-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "school-nonattendance-pattern",
+      "base": "nonattendance-summary-findings",
+      "chartType": "findings",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "school-teacher-annual-income",
+      "base": "teacher-income-ranking",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "semiconductor-electronics-regional-map",
+      "base": "electronic-components-bar",
+      "chartType": "unknown",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "manual"
+    },
+    {
+      "slug": "semiconductor-electronics-regional-map",
+      "base": "semiconductor-dependency-scatter",
+      "chartType": "scatter",
+      "hasJson": true,
+      "hasSource": false,
+      "status": "jsonOnly",
+      "restoreMethod": "source-backfill"
+    },
+    {
+      "slug": "sewerage-water-supply-gap",
+      "base": "sewerage-tilemap",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "sewerage-water-supply-gap",
+      "base": "sewerage-bar",
+      "chartType": "unknown",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "manual"
+    },
+    {
+      "slug": "sewerage-water-supply-gap",
+      "base": "sewerage-vs-water-scatter",
+      "chartType": "scatter",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "sewerage-water-supply-gap",
+      "base": "sewerage-trend",
+      "chartType": "line",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "sewerage-water-supply-gap",
+      "base": "sewerage-summary-findings",
+      "chartType": "findings",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "shochu-consumption-prefecture-gap",
+      "base": "inline-chart-1",
+      "chartType": "unknown",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "manual"
+    },
+    {
+      "slug": "sixth-industry-direct-sales",
+      "base": "agricultural-output-top-bottom",
+      "chartType": "ranking",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "sixth-industry-direct-sales",
+      "base": "total-farm-household-income-top-bottom",
+      "chartType": "ranking",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "small-business-dominance-map",
+      "base": "small-biz-ranking",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "small-business-dominance-map",
+      "base": "small-biz-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "small-business-dominance-map",
+      "base": "big-vs-small-comparison",
+      "chartType": "ranking",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "small-business-dominance-map",
+      "base": "scatter-small-vs-big",
+      "chartType": "scatter",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "small-business-dominance-map",
+      "base": "industry-composition",
+      "chartType": "stacked",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "small-business-dominance-map",
+      "base": "summary-findings",
+      "chartType": "findings",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "software-engineer-income-gap",
+      "base": "software-engineer-income-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "software-engineer-income-gap",
+      "base": "software-engineer-income-national-trend",
+      "chartType": "line",
+      "hasJson": true,
+      "hasSource": false,
+      "status": "jsonOnly",
+      "restoreMethod": "source-backfill"
+    },
+    {
+      "slug": "software-engineer-salary-prefecture-gap",
+      "base": "se-salary-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "software-engineer-salary-prefecture-gap",
+      "base": "establishment-vs-salary",
+      "chartType": "unknown",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "manual"
+    },
+    {
+      "slug": "software-engineer-salary-prefecture-gap",
+      "base": "se-salary-bottom-rankings",
+      "chartType": "ranking",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "software-engineer-salary-prefecture-gap",
+      "base": "se-salary-findings",
+      "chartType": "findings",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "solar-panel-housing-prefecture-gap",
+      "base": "solar-panel-housing-rate-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "solar-panel-housing-prefecture-gap",
+      "base": "solar-low-detached-contrast",
+      "chartType": "unknown",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "manual"
+    },
+    {
+      "slug": "solar-panel-housing-prefecture-gap",
+      "base": "detached-vs-solar-scatter",
+      "chartType": "scatter",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "solar-panel-housing-prefecture-gap",
+      "base": "owner-occupied-housing-ratio",
+      "chartType": "unknown",
+      "hasJson": true,
+      "hasSource": false,
+      "status": "jsonOnly",
+      "restoreMethod": "source-backfill"
+    },
+    {
+      "slug": "sports-facility-regional-divide",
+      "base": "sports-facility-per-capita",
+      "chartType": "unknown",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "manual"
+    },
+    {
+      "slug": "sports-facility-regional-divide",
+      "base": "sports-facility-tilemap",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "sports-facility-regional-divide",
+      "base": "facility-type-stacked",
+      "chartType": "stacked",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "sports-facility-regional-divide",
+      "base": "facility-vs-activity-scatter",
+      "chartType": "scatter",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "sports-facility-regional-divide",
+      "base": "sports-gender-gap",
+      "chartType": "ranking",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "sports-facility-regional-divide",
+      "base": "summary-findings",
+      "chartType": "findings",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "sports-urban-paradox",
+      "base": "sports-rate-ranking",
+      "chartType": "ranking",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "sports-urban-paradox",
+      "base": "sports-rate-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "sports-urban-paradox",
+      "base": "sports-vs-facility-scatter",
+      "chartType": "scatter",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "sports-urban-paradox",
+      "base": "walking-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "sports-urban-paradox",
+      "base": "golf-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "strawberry-consumption-prefecture-gap",
+      "base": "strawberry-consumption-prefecture-gap-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "students-per-teacher-class-size-gap",
+      "base": "elementary-students-per-teacher-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "students-per-teacher-class-size-gap",
+      "base": "junior-high-students-per-teacher-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "sugar-consumption-prefecture-gap",
+      "base": "sugar-consumption-prefecture-gap-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "sugar-consumption-prefecture-gap",
+      "base": "inline-chart-2",
+      "chartType": "unknown",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "manual"
+    },
+    {
+      "slug": "suicide-rate-aging-nexus",
+      "base": "suicide-ranking",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "suicide-rate-aging-nexus",
+      "base": "suicide-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "suicide-rate-aging-nexus",
+      "base": "suicide-vs-aging-scatter",
+      "chartType": "scatter",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "suicide-rate-aging-nexus",
+      "base": "suicide-timeseries",
+      "chartType": "line",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "suicide-rate-aging-nexus",
+      "base": "suicide-summary-findings",
+      "chartType": "findings",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "sunshine-pacific-vs-nihonkai",
+      "base": "inline-chart-1",
+      "chartType": "unknown",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "manual"
+    },
+    {
+      "slug": "sunshine-solar-housing-correlation",
+      "base": "annual-sunshine-duration",
+      "chartType": "unknown",
+      "hasJson": true,
+      "hasSource": false,
+      "status": "jsonOnly",
+      "restoreMethod": "source-backfill"
+    },
+    {
+      "slug": "sunshine-solar-housing-correlation",
+      "base": "solar-panel-housing-rate",
+      "chartType": "unknown",
+      "hasJson": true,
+      "hasSource": false,
+      "status": "jsonOnly",
+      "restoreMethod": "source-backfill"
+    },
+    {
+      "slug": "sunshine-solar-housing-correlation",
+      "base": "sunshine-solar-scatter",
+      "chartType": "scatter",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "sushi-dining-consumption-expenditure",
+      "base": "sushi-expenditure-ranking",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "system-consultant-income-prefecture-gap",
+      "base": "system-consultant-income-prefecture-gap-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "system-consultant-income-ranking",
+      "base": "system-consultant-income-ranking-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "taxi-driver-income-prefecture-gap",
+      "base": "taxi-driver-income-prefecture-gap-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "telework-gap-tokyo-6x",
+      "base": "telework-summary-findings",
+      "chartType": "findings",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "telework-rate-tokyo-gap",
+      "base": "telework-rate-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "telework-rate-tokyo-gap",
+      "base": "ict-establishments-rankings",
+      "chartType": "ranking",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "telework-rate-tokyo-gap",
+      "base": "telework-ict-scatter",
+      "chartType": "scatter",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "telework-rate-tokyo-gap",
+      "base": "side-job-rate-rankings",
+      "chartType": "ranking",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "tofu-consumption-prefecture-gap",
+      "base": "tofu-consumption-quantity-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "total-fertility-rate",
+      "base": "fertility-rate-ranking",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "traffic-accident-deaths-regional-risk",
+      "base": "traffic-deaths-ranking",
+      "chartType": "ranking",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "traffic-accident-deaths-regional-risk",
+      "base": "accident-count-ranking",
+      "chartType": "ranking",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "traffic-accident-deaths-regional-risk",
+      "base": "insurance-penetration-rate",
+      "chartType": "unknown",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "manual"
+    },
+    {
+      "slug": "train-commuters-prefecture-gap",
+      "base": "train-commuters-top-bottom",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "travel-behavior-gender-gap",
+      "base": "travel-rate-ranking",
+      "chartType": "ranking",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "travel-behavior-gender-gap",
+      "base": "travel-rate-tilemap",
+      "chartType": "tilemap",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "travel-behavior-gender-gap",
+      "base": "domestic-travel-ranking",
+      "chartType": "ranking",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "travel-behavior-gender-gap",
+      "base": "travel-gender-scatter",
+      "chartType": "scatter",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "travel-behavior-gender-gap",
+      "base": "passport-per-capita",
+      "chartType": "unknown",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "manual"
+    },
+    {
+      "slug": "travel-behavior-gender-gap",
+      "base": "summary-findings",
+      "chartType": "findings",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "truck-driver-2024-crisis",
+      "base": "inline-chart-1",
+      "chartType": "unknown",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "manual"
+    },
+    {
+      "slug": "truck-driver-2024-crisis",
+      "base": "inline-chart-2",
+      "chartType": "unknown",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "manual"
+    },
+    {
+      "slug": "udon-soba-food-culture-prefecture-map",
+      "base": "udon-soba-food-culture-prefecture-map-prefecture-rankings",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "unemployment-structure",
+      "base": "unemployment-rate-ranking",
+      "chartType": "ranking",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "unemployment-structure",
+      "base": "job-opening-ratio-ranking",
+      "chartType": "ranking",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "unemployment-structure",
+      "base": "unemployment-rate-male-ranking",
+      "chartType": "ranking",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "unemployment-tertiary-industry-link",
+      "base": "chart-unemployment-top5-bottom5",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "unemployment-tertiary-industry-link",
+      "base": "tertiary-unemployment-scatter",
+      "chartType": "scatter",
+      "hasJson": true,
+      "hasSource": false,
+      "status": "jsonOnly",
+      "restoreMethod": "source-backfill"
+    },
+    {
+      "slug": "university-advancement-capacity",
+      "base": "advancement-rate-ranking",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "university-advancement-capacity",
+      "base": "capacity-index-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "university-advancement-capacity",
+      "base": "advancement-vs-university-scatter",
+      "chartType": "scatter",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "university-advancement-capacity",
+      "base": "university-summary-findings",
+      "chartType": "findings",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "unmarried-rate-40years-crisis",
+      "base": "unmarried-trend",
+      "chartType": "line",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "unmarried-rate-40years-crisis",
+      "base": "unmarried-ranking",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "unmarried-rate-40years-crisis",
+      "base": "unmarried-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "unmarried-rate-40years-crisis",
+      "base": "marriage-rate-trend",
+      "chartType": "line",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "unmarried-rate-40years-crisis",
+      "base": "unmarried-tfr-scatter",
+      "chartType": "scatter",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "unmarried-rate-40years-crisis",
+      "base": "unmarried-summary-findings",
+      "chartType": "findings",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "urban-parks-green-infrastructure",
+      "base": "park-area-tilemap",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "urban-parks-green-infrastructure",
+      "base": "park-area-bar",
+      "chartType": "unknown",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "manual"
+    },
+    {
+      "slug": "urban-parks-green-infrastructure",
+      "base": "park-area-vs-count-scatter",
+      "chartType": "scatter",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "urban-parks-green-infrastructure",
+      "base": "park-types-stacked",
+      "chartType": "stacked",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "urban-parks-green-infrastructure",
+      "base": "park-summary-findings",
+      "chartType": "findings",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "vacant-house-crisis",
+      "base": "vacant-housing-ratio-bars",
+      "chartType": "unknown",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "manual"
+    },
+    {
+      "slug": "vacant-house-crisis",
+      "base": "aging-ratio-bars",
+      "chartType": "unknown",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "manual"
+    },
+    {
+      "slug": "vacant-house-crisis",
+      "base": "vacant-aging-scatter",
+      "chartType": "scatter",
+      "hasJson": true,
+      "hasSource": false,
+      "status": "jsonOnly",
+      "restoreMethod": "source-backfill"
+    },
+    {
+      "slug": "wage-vs-living-cost",
+      "base": "inline-chart-1",
+      "chartType": "unknown",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "manual"
+    },
+    {
+      "slug": "waiting-children-progress",
+      "base": "waiting-children-timeseries",
+      "chartType": "line",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "waiting-children-progress",
+      "base": "waiting-children-ranking",
+      "chartType": "ranking",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "waiting-children-progress",
+      "base": "waiting-children-map",
+      "chartType": "tilemap",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "waiting-children-progress",
+      "base": "childcare-utilization-ranking",
+      "chartType": "ranking",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "waiting-children-progress",
+      "base": "waiting-children-summary-findings",
+      "chartType": "findings",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "waste-management-recycling-gap",
+      "base": "recycling-tilemap",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "waste-management-recycling-gap",
+      "base": "recycling-bar",
+      "chartType": "unknown",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "manual"
+    },
+    {
+      "slug": "waste-management-recycling-gap",
+      "base": "recycle-vs-landfill-scatter",
+      "chartType": "scatter",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "waste-management-recycling-gap",
+      "base": "disposal-capacity-bar",
+      "chartType": "unknown",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "manual"
+    },
+    {
+      "slug": "waste-management-recycling-gap",
+      "base": "waste-summary-findings",
+      "chartType": "findings",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "water-infrastructure-crisis",
+      "base": "water-supply-tilemap",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "water-infrastructure-crisis",
+      "base": "water-supply-volume-bar",
+      "chartType": "unknown",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "manual"
+    },
+    {
+      "slug": "water-infrastructure-crisis",
+      "base": "water-type-stacked-bar",
+      "chartType": "stacked",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "water-infrastructure-crisis",
+      "base": "sewerage-vs-nonflush-scatter",
+      "chartType": "scatter",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "water-infrastructure-crisis",
+      "base": "facility-capacity-bar",
+      "chartType": "unknown",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "manual"
+    },
+    {
+      "slug": "water-infrastructure-crisis",
+      "base": "water-summary-findings",
+      "chartType": "findings",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "water-sewage-crisis",
+      "base": "water-sewerage-timeseries",
+      "chartType": "line",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "water-sewage-crisis",
+      "base": "sewerage-ranking",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "water-sewage-crisis",
+      "base": "sewerage-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "welfare-expenses-squeeze",
+      "base": "welfare-civil-edu-trend",
+      "chartType": "line",
+      "hasJson": true,
+      "hasSource": false,
+      "status": "jsonOnly",
+      "restoreMethod": "source-backfill"
+    },
+    {
+      "slug": "welfare-expenses-squeeze",
+      "base": "welfare-expenses-ranking",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": false,
+      "status": "jsonOnly",
+      "restoreMethod": "source-backfill"
+    },
+    {
+      "slug": "welfare-expenses-squeeze",
+      "base": "welfare-per-capita-ranking",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": false,
+      "status": "jsonOnly",
+      "restoreMethod": "source-backfill"
+    },
+    {
+      "slug": "welfare-expenses-squeeze",
+      "base": "welfare-ratio-ranking",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "wheat-flour-consumption-food-culture-gap",
+      "base": "wheat-flour-consumption-food-culture-gap-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "wheat-flour-expenditure-vs-quantity",
+      "base": "wheat-flour-expenditure-vs-quantity-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "wind-power-capacity-prefecture-gap",
+      "base": "wind-power-capacity-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "wind-power-capacity-prefecture-gap",
+      "base": "wind-power-turbine-count-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "working-hours-overtime-gap",
+      "base": "working-hours-overtime-gap-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "workplace-accident-regional-map",
+      "base": "frequency-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "workplace-accident-regional-map",
+      "base": "frequency-ranking",
+      "chartType": "ranking",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "workplace-accident-regional-map",
+      "base": "severity-ranking",
+      "chartType": "ranking",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore"
+    },
+    {
+      "slug": "workplace-accident-regional-map",
+      "base": "avg-payment-bar",
+      "chartType": "unknown",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "manual"
+    },
+    {
+      "slug": "workplace-accident-regional-map",
+      "base": "freq-severity-scatter",
+      "chartType": "scatter",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "workplace-accident-regional-map",
+      "base": "workers-compensation-insurance-benefits-rate-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "workplace-accident-regional-map",
+      "base": "summary-findings",
+      "chartType": "findings",
+      "hasJson": false,
+      "hasSource": false,
+      "status": "neither",
+      "restoreMethod": "ssot-restore-new"
+    },
+    {
+      "slug": "yakiniku-spending-prefecture-gap",
+      "base": "yakiniku-spending-prefecture-gap-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    },
+    {
+      "slug": "yogurt-spending-prefecture-gap",
+      "base": "yogurt-consumption-expenditure-ranking",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done"
+    }
+  ]
+}
