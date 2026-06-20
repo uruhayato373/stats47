@@ -53,9 +53,14 @@ grep -rn \
 `#6b8fc9`, `#3b6fa0`,
 `#dc2626`, `#ef4444`, `#fef2f2`, `#eff6ff`）を除いた残りが是正対象。
 
-> **CARD_THEMES（カード型2列ランキング `layout:"columns"` の専用色）**: `bar-chart.ts` の `CARD_THEMES`
+> **CARD_THEMES（カード型ランキングの専用色）**: `bar-chart.ts` の `CARD_THEMES`
 > は header/bar/cardAlt の専用色セット（red=`#dc2626`/`#ef4444`/`#fef2f2`、blue=`#1565c0`/`#42a5f5`/`#eff6ff`、
 > purple/orange/green は PALETTES と同系）。これらは上記許可リストに含むため対象外。SSoT は `bar-chart.ts`。
+>
+> **カード型ランキングは2レイアウト（2026-06-20）**: `layout:"columns"`（横長 960×404・ブログ本文 `<name>.svg`）と
+> `layout:"portrait"`（縦長 1080×1350・Instagram 用 `<name>-ig.svg`）の2種を `generate-article-charts.ts` が両出力する。
+> `-ig.svg` は記事 markdown に埋め込まない SNS 専用アセットなので、article.md 参照を辿る監査では「未参照」として扱わない
+> （orphan 判定しない）。カタログ正典は `.claude/rules/blog-svg-chart-standards.md`。
 
 ### C. CSS 変数使用（重大度: high）
 
