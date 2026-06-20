@@ -105,7 +105,7 @@ node scripts/temp-generate-charts.mjs
 | 属性 | 値 |
 |---|---|
 | `width`/`height` | **`viewBox` の幅・高さと一致させること**（不一致だと `preserveAspectRatio` で左右に余白ができる） |
-| `viewBox` | 論理座標。ランキング(columns・推奨): `0 0 960 {124+N×44+60}`（10件=624/5件=404）, 折れ線: `0 0 680 420`, 散布図: `0 0 960 624`, タイルグリッド: `0 0 600 700`。※手書き値ではなく svg-builder が自動付与 |
+| `viewBox` | 論理座標。ランキング横長(columns・ブログ/X): `0 0 960 404`（上位5+下位5）, ランキング縦長(portrait・IG `-ig.svg`): `0 0 1080 1350`（4:5）, 折れ線: `0 0 680 420`, 散布図: `0 0 960 624`, タイルグリッド: `0 0 600 700`。※手書き値ではなく svg-builder が自動付与 |
 | `rx` | バー/折れ線: `8`, タイルグリッド: なし |
 | `font-family` | `'Hiragino Sans','Noto Sans JP',sans-serif`（タイルグリッド内テキストは `'Noto Sans JP',sans-serif`） |
 
@@ -164,22 +164,28 @@ node scripts/temp-generate-charts.mjs
 
 #### ランキング（カード型2列・推奨）
 
-ランキングチャートは **svg-builder の `generateBarChartSvg` + `layout:"columns"`（デフォルト）を使う**。手書き SVG・1カラム横棒は使わない（ドリフトの温床）。CLI (`generate-article-charts.ts`) の `genBarChartSvg` アダプターが `*-ranking.json` を自動でこのレイアウトにディスパッチする。
+ランキングチャートは **svg-builder の `generateBarChartSvg` を使う**。手書き SVG・1カラム横棒は使わない（ドリフトの温床）。件数は **上位5+下位5 のみ**に標準化（10件は廃止）。CLI (`generate-article-charts.ts`) の `genBarChartSvg` アダプターが `*-ranking.json` を自動でディスパッチし、**1つのランキングから2バリアントを出力**する:
 
-- viewBox: `960 × (124 + N×44 + 60)`（10件=`960×624` / 5件=`960×404`、aging-solo / alcohol スタイル）
-- 左カラム=上位（`palette`、デフォルト red）、右カラム=下位（`rightPalette`、デフォルト blue）
+| 出力ファイル | layout | 用途 | viewBox |
+|---|---|---|---|
+| `<name>.svg`（article.md が参照） | `columns`（横長2列・上位左/下位右） | ブログ本文 + X | `960 × (124 + N×44 + 60)`（5件=`960×404`） |
+| `<name>-ig.svg`（SNS専用・未埋め込み） | `portrait`（縦長スタック・上位5↓下位5） | Instagram フィード/リール | `1080 × 1350`（4:5 固定） |
+
+- 件数はデータが10件未満のときだけ重複しない範囲に自動縮小（通常は上位5+下位5）
+- 左/上=上位（`palette`、デフォルト red）、右/下=下位（`rightPalette`、デフォルト blue）
 - 各行: カード（交互背景）+ 順位バッジ + 都道府県名 + 値 + 横バー
-- ダークモード対応（`svgThemeStyle()` 自動付与）
+- ダークモード対応（`svgThemeStyle()` 自動付与。カードはライト固定の島・外枠のみダーク追従）
 
 JSON で制御できるオプション（`data/*-ranking.json` のオブジェクト形式で指定）:
 
 | キー | 役割 | デフォルト |
 |---|---|---|
-| `topN` | 上位・下位それぞれの件数（**5 または 10**） | `5` |
-| `palette` | 左カラム色（`red`/`blue`/`orange`/`purple`/`green`） | `red` |
-| `rightPalette` | 右カラム色 | `blue` |
+| `palette` | 上位カラム色（`red`/`blue`/`orange`/`purple`/`green`） | `red` |
+| `rightPalette` | 下位カラム色 | `blue` |
 | `highLabel` / `lowLabel` | カラムヘッダー（例「ひとり暮らし率が高い県」） | `上位` / `下位` |
-| `layout` | `columns`（推奨）/ `single`（縦1列+中略・680幅） | `columns` |
+| `layout` | `columns`（横長・ブログ/X 用、article.md 参照） / `portrait`（縦長・IG 用） / `single`（縦1列+中略・680幅） | `columns`（+ IG は `-ig.svg` を自動出力） |
+
+> 件数指定 `topN` は廃止（常に上位5+下位5）。10件カードは作らない。
 
 色の使い分け（指標の性質で `palette` を選ぶ）:
 | 指標の性質 | palette（左=上位） | rightPalette（右=下位） |

@@ -47,6 +47,10 @@ const KEYS_OVERRIDE = getArg("--keys");
 const YEAR = getArg("--year");
 const DRY_RUN = args.includes("--dry-run");
 const WRITE_DIGEST = args.includes("--digest");
+// --data-name: primary key の出力 basename を明示指定する (拡張子なし)。
+//   既存記事の参照SVG名 (例: aging-solo-ranking) に合わせて復旧する用途。
+//   未指定時は従来通り `<slug>-prefecture-rankings`。
+const DATA_NAME = getArg("--data-name");
 
 if (!SLUG) {
   console.error("usage: --slug <slug> [--base <dir>] [--keys k1,k2] [--year YYYY] [--dry-run] [--digest]");
@@ -100,7 +104,7 @@ async function getJson(url) {
 // outBaseName: 出力ファイル名 (拡張子なし)。primary ranking は <slug> で固定し、
 //   チャート placeholder `<!-- chart:<slug>-prefecture-rankings -->` と確実に対応させる。
 //   追加参照 key は <key> 名で factual グラウンドトゥルースとしてのみ生成 (チャートなし)。
-async function buildForKey(key, outBaseName) {
+async function buildForKey(key, outBaseName, fullName) {
   const valuesUrl = `${R2_BASE}/app/ranking/${key}/values.json`;
   const itemUrl = `${R2_BASE}/app/ranking/${key}/item.json`;
   const values = await getJson(valuesUrl);
@@ -134,7 +138,9 @@ async function buildForKey(key, outBaseName) {
   const title = item.title || item.rankingName || key;
   const year = partition.yearCode;
   const payload = {
-    title: `${title} 都道府県ランキング（${year}年）`,
+    // カード見出しは簡潔に（指標名）。年はサブタイトルへ分離し、横長/縦長とも見切れにくくする。
+    title,
+    subtitle: `${year}年`,
     label: title,
     unit,
     year,
@@ -144,11 +150,34 @@ async function buildForKey(key, outBaseName) {
     data,
   };
 
-  const fileName = `${outBaseName}-prefecture-rankings.json`;
+  // 出力 basename: --data-name 明示があればそれ (既存SVG名に合わせる復旧用)、
+  // 無ければ従来の `<stem>-prefecture-rankings`。
+  const baseName = fullName || `${outBaseName}-prefecture-rankings`;
+  const fileName = `${baseName}.json`;
   const outPath = path.join(articleDir, "data", fileName);
+  const sourcePath = path.join(articleDir, "data", `${baseName}.source.json`);
+
+  // 出典 manifest (SSOT配慮): e-Stat 生パラメータは複製しない。
+  // 真実源は rankingKey → R2 app/ranking (=metric config → e-Stat → R2 派生)。
+  // これさえあれば --keys <rankingKey> で同じデータを決定的に再取得できる。
+  const manifest = {
+    kind: "ranking",
+    rankingKey: key,
+    year,
+    unit,
+    label: title,
+    transform: "all47 (svg-builder が上位5+下位5を抽出)",
+    source: `r2:app/ranking/${key}/values.json`,
+    upstream: "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+    restore: `node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug ${SLUG} --keys ${key} --data-name ${baseName}`,
+    fetchedAt: new Date().toISOString(),
+    generatedBy: "fetch-ranking-data-r2.mjs",
+  };
+
   if (!DRY_RUN) {
     fs.mkdirSync(path.join(articleDir, "data"), { recursive: true });
     fs.writeFileSync(outPath, JSON.stringify(payload, null, 2));
+    fs.writeFileSync(sourcePath, JSON.stringify(manifest, null, 2));
   }
 
   const ratio = (data[0].value / data[data.length - 1].value).toFixed(1);
@@ -198,8 +227,10 @@ const primaryKey = keys.includes(SLUG) ? SLUG : keys[0];
 const results = [];
 for (const key of keys) {
   const outBaseName = key === primaryKey ? SLUG : key;
+  // --data-name は primary key のみに適用 (既存SVG名へ合わせる復旧用)。
+  const fullName = DATA_NAME && key === primaryKey ? DATA_NAME : null;
   try {
-    results.push(await buildForKey(key, outBaseName));
+    results.push(await buildForKey(key, outBaseName, fullName));
   } catch (e) {
     console.error(`[error] key=${key}: ${e.message}`);
     process.exit(3);

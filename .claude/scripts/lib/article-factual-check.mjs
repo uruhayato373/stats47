@@ -148,7 +148,9 @@ export function buildGroundTruth(dataDir) {
   const idx = {};
   if (!dataDir || !fs.existsSync(dataDir)) return idx;
   for (const file of fs.readdirSync(dataDir)) {
-    if (!file.endsWith(".json")) continue;
+    // .source.json は出典 manifest (rankingKey/年など)。観測値ではないので索引しない
+    // (索引すると year 等が ground truth 値として誤照合する)。
+    if (!file.endsWith(".json") || file.endsWith(".source.json")) continue;
     try {
       const json = JSON.parse(fs.readFileSync(path.join(dataDir, file), "utf8"));
       walkAndIndex(json, idx, file, "", null);
