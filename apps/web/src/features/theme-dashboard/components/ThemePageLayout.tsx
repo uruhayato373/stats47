@@ -9,7 +9,6 @@ import {
   BreadcrumbSeparator,
 } from "@stats47/components/atoms/ui/breadcrumb";
 
-import { PageHeader } from "@/components/layout";
 import { loadPageComponents } from "@/components/stat-charts/server";
 import { prefetchThemeKpiData } from "@/components/stat-charts/services/prefetch-theme-kpi";
 
@@ -25,8 +24,10 @@ import {
   generateThemePageStructuredData,
 } from "../utils";
 
+import { ThemeAreaHeader } from "./ThemeAreaHeader";
 import { ThemeDashboardClient } from "./ThemeDashboardClient";
 import { ThemeRelatedArticles } from "./ThemeRelatedArticles";
+import { ThemePrefectureProvider } from "./ThemePrefectureContext";
 
 import type { ThemePageData } from "../lib/load-theme-data";
 import type { ThemeConfig } from "../types";
@@ -56,6 +57,10 @@ export async function ThemePageLayout({ theme, data, areaContext }: Props) {
     : [];
 
   return (
+    <ThemePrefectureProvider
+      initialAreaCode={areaContext?.areaCode ?? null}
+      initialAreaName={areaContext?.areaName ?? null}
+    >
     <div className="text-foreground">
       <script
         type="application/ld+json"
@@ -110,11 +115,8 @@ export async function ThemePageLayout({ theme, data, areaContext }: Props) {
         </div>
       )}
 
-      <PageHeader
-        eyebrow="テーマダッシュボード"
-        title={theme.title}
-        description={theme.description}
-      />
+      {/* エリア連動の H1 + 都道府県セレクタ（全国デフォルト・client-side、SSG 不変） */}
+      <ThemeAreaHeader themeTitle={theme.title} description={theme.description} />
 
       <ThemeDashboardClient
         themeConfig={theme}
@@ -168,5 +170,6 @@ export async function ThemePageLayout({ theme, data, areaContext }: Props) {
         <ThemeRelatedArticles tagKeys={theme.relatedArticleTagKeys} />
       )}
     </div>
+    </ThemePrefectureProvider>
   );
 }

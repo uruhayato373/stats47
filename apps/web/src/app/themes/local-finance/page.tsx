@@ -1,69 +1,65 @@
 import Link from "next/link";
+import { notFound } from "next/navigation";
 
 import { PageShell } from "@/components/layout";
 
-import type { FinanceFlowData } from "@/features/finance-flow";
-import {
-  LocalFinanceDashboard,
-  loadFinanceCards,
-} from "@/features/local-finance-dashboard";
-import { LOCAL_FINANCE_THEME } from "@/features/theme-dashboard/server";
-
+import { ThemeSidebar } from "@/features/theme-dashboard/components/ThemeSidebar";
+import { ALL_THEMES } from "@/features/theme-dashboard/config/all-themes";
+import { ThemePageLayout, loadThemeData } from "@/features/theme-dashboard/server";
 
 import { generateOGMetadata } from "@/lib/metadata/og-generator";
 
 import type { Metadata } from "next";
 
-const theme = LOCAL_FINANCE_THEME;
-
-const R2_BASE = "https://storage.stats47.jp";
+/** ALL_THEMES のエントリ (hideMap・embeddedSections 込み) を正典として使う */
+const theme = ALL_THEMES.find((t) => t.themeKey === "local-finance");
 
 export function generateMetadata(): Metadata {
-  const title = `${theme.title}`;
+  if (!theme) return {};
+  const title = theme.title;
   return {
     title,
     description: theme.description,
     keywords: theme.keywords,
-    alternates: { canonical: `/themes/${theme.themeKey}` },
-    ...generateOGMetadata({ title, description: theme.description, imageUrl: `/themes/${theme.themeKey}/opengraph-image` }),
+    alternates: { canonical: `/themes/local-finance` },
+    ...generateOGMetadata({
+      title,
+      description: theme.description ?? "",
+      imageUrl: `/themes/local-finance/opengraph-image`,
+    }),
   };
 }
 
-/** 既定県 (13 東京) の財政フローを SSR で R2 から読む */
-async function loadInitialFinanceFlow(): Promise<FinanceFlowData | undefined> {
-  try {
-    const res = await fetch(`${R2_BASE}/app/finance-flow/13.json`, { next: { revalidate: 86400 } });
-    if (res.ok) return (await res.json()) as FinanceFlowData;
-  } catch {
-    // client 側 /api/flow フォールバックに任せる
-  }
-  return undefined;
-}
-
 export default async function LocalFinanceThemePage() {
-  const cards = loadFinanceCards();
-  const initialFinanceFlow = await loadInitialFinanceFlow();
+  if (!theme) notFound();
+
+  const data = await loadThemeData(theme);
+  if (!data) {
+    return (
+      <PageShell>
+        <p className="text-muted-foreground">地方財政データの取得に失敗しました。</p>
+      </PageShell>
+    );
+  }
 
   return (
-    <div>
+    <PageShell leftRail={<ThemeSidebar theme={theme} />}>
       {/* 都道府県 / 市区町村 切替 */}
-      <PageShell className="pb-0">
-        <nav
-          aria-label="表示単位切替"
-          className="inline-flex rounded-full border border-border bg-white p-1 shadow-sm text-xs"
+      <nav
+        aria-label="表示単位切替"
+        className="mb-4 inline-flex rounded-full border border-border bg-white p-1 shadow-sm text-xs"
+      >
+        <span className="px-3 py-1 rounded-full bg-primary text-primary-foreground font-medium">
+          都道府県
+        </span>
+        <Link
+          href="/themes/local-finance/cities"
+          className="px-3 py-1 rounded-full text-muted-foreground hover:text-foreground transition-colors"
         >
-          <span className="px-3 py-1 rounded-full bg-primary text-primary-foreground font-medium">
-            都道府県
-          </span>
-          <Link
-            href="/themes/local-finance/cities"
-            className="px-3 py-1 rounded-full text-muted-foreground hover:text-foreground transition-colors"
-          >
-            市区町村
-          </Link>
-        </nav>
-      </PageShell>
-      <LocalFinanceDashboard cards={cards} initialFinanceFlow={initialFinanceFlow} />
-    </div>
+          市区町村
+        </Link>
+      </nav>
+      <ThemePageLayout theme={theme} data={data} />
+    </PageShell>
   );
 }

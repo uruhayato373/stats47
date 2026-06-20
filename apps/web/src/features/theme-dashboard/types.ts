@@ -96,6 +96,11 @@ export interface ThemeIndicatorData {
    * 表示側は undefined なら都道府県値の単純平均にフォールバックする。
    */
   nationalValue?: number;
+  /**
+   * 全国行 (areaCode "00000") の値の年次推移。カード内 MiniLineChart 用。
+   * 計算型 / city / port 指標など全国行が無い場合は undefined。
+   */
+  nationalSeries?: { year: number; value: number }[];
 }
 
 /** Server → Client に渡す props */

@@ -1,22 +1,22 @@
 import Link from "next/link";
+import { notFound } from "next/navigation";
 
 import { PageShell } from "@/components/layout";
 
-import {
-  ThemePageLayout,
-  loadThemeData,
-  LOCAL_FINANCE_CITY_THEME,
-} from "@/features/theme-dashboard/server";
-
+import { ThemeSidebar } from "@/features/theme-dashboard/components/ThemeSidebar";
+import { ALL_THEMES } from "@/features/theme-dashboard/config/all-themes";
+import { ThemePageLayout, loadThemeData } from "@/features/theme-dashboard/server";
 
 import { generateOGMetadata } from "@/lib/metadata/og-generator";
 
 import type { Metadata } from "next";
 
-const theme = LOCAL_FINANCE_CITY_THEME;
+/** ALL_THEMES のエントリ (hideMap 込み) を正典として使う */
+const theme = ALL_THEMES.find((t) => t.themeKey === "local-finance-city");
 
 export function generateMetadata(): Metadata {
-  const title = `${theme.title}｜${theme.description.slice(0, 30)}`;
+  if (!theme) return {};
+  const title = `${theme.title}｜${(theme.description ?? "").slice(0, 30)}`;
   return {
     title,
     description: theme.description,
@@ -24,13 +24,15 @@ export function generateMetadata(): Metadata {
     alternates: { canonical: `/themes/local-finance/cities` },
     ...generateOGMetadata({
       title,
-      description: theme.description,
+      description: theme.description ?? "",
       imageUrl: `/themes/local-finance/cities/opengraph-image`,
     }),
   };
 }
 
 export default async function LocalFinanceCityThemePage() {
+  if (!theme) notFound();
+
   const data = await loadThemeData(theme, { areaType: "city" });
   if (!data) {
     return (
@@ -41,25 +43,23 @@ export default async function LocalFinanceCityThemePage() {
   }
 
   return (
-    <div>
+    <PageShell leftRail={<ThemeSidebar theme={theme} />}>
       {/* 都道府県版へのナビゲーション */}
-      <PageShell className="pb-0">
-        <nav
-          aria-label="表示単位切替"
-          className="inline-flex rounded-full border border-border bg-white p-1 shadow-sm text-xs"
+      <nav
+        aria-label="表示単位切替"
+        className="mb-4 inline-flex rounded-full border border-border bg-white p-1 shadow-sm text-xs"
+      >
+        <Link
+          href="/themes/local-finance"
+          className="px-3 py-1 rounded-full text-muted-foreground hover:text-foreground transition-colors"
         >
-          <Link
-            href="/themes/local-finance"
-            className="px-3 py-1 rounded-full text-muted-foreground hover:text-foreground transition-colors"
-          >
-            都道府県
-          </Link>
-          <span className="px-3 py-1 rounded-full bg-primary text-primary-foreground font-medium">
-            市区町村
-          </span>
-        </nav>
-      </PageShell>
+          都道府県
+        </Link>
+        <span className="px-3 py-1 rounded-full bg-primary text-primary-foreground font-medium">
+          市区町村
+        </span>
+      </nav>
       <ThemePageLayout theme={theme} data={data} />
-    </div>
+    </PageShell>
   );
 }

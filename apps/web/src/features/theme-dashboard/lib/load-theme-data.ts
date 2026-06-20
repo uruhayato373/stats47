@@ -37,10 +37,10 @@ export interface ThemePageData {
 async function fetchIndicatorValues(
   rankingItem: RankingItem,
   yearCode: string,
-): Promise<{ values: RankingValue[]; nationalValue?: number }> {
+): Promise<{ values: RankingValue[]; nationalValue?: number; nationalSeries?: { year: number; value: number }[] }> {
   const { sourceConfig, calculation } = rankingItem;
 
-  // 計算型アイテムは既存ロジックに委譲（全国行は持たないため nationalValue は無し）
+  // 計算型アイテムは既存ロジックに委譲（全国行は持たないため nationalValue / nationalSeries は無し）
   if (calculation?.isCalculated) {
     const values = await fetchRankingValuesFromSource(rankingItem, yearCode);
     return { values };
@@ -63,11 +63,18 @@ async function fetchIndicatorValues(
   const nationalValue =
     typeof nationalRow?.value === "number" ? nationalRow.value : undefined;
 
+  // 全国行の全年度トレンドを構築（MiniLineChart 用）
+  const nationalSeries = filterToNational(rawData)
+    .filter((d) => typeof d.value === "number" && Number.isFinite(d.value as number))
+    .map((d) => ({ year: Number(String(d.yearCode).slice(0, 4)), value: d.value as number }))
+    .filter((p) => Number.isFinite(p.year))
+    .sort((a, b) => a.year - b.year);
+
   const filteredData = filterOutNationalArea(rawData)
     .filter((d) => d.yearCode === yearCode);
-  if (filteredData.length === 0) return { values: [], nationalValue };
+  if (filteredData.length === 0) return { values: [], nationalValue, nationalSeries };
 
-  return { values: rankByValue(filteredData) as RankingValue[], nationalValue };
+  return { values: rankByValue(filteredData) as RankingValue[], nationalValue, nationalSeries };
 }
 
 /**
@@ -130,6 +137,7 @@ export async function loadThemeData(
         key,
         values: [] as RankingValue[],
         nationalValue: undefined as number | undefined,
+        nationalSeries: undefined as { year: number; value: number }[] | undefined,
       });
 
     // city: R2 から直接読む (e-Stat 経由しない。全国行は無いため平均にフォールバック)
@@ -137,20 +145,20 @@ export async function loadThemeData(
       return readRankingValuesFromR2(key, "city", yearCode)
         .then((result) => {
           const values = isOk(result) ? result.data : [];
-          return { key, values, nationalValue: undefined as number | undefined };
+          return { key, values, nationalValue: undefined as number | undefined, nationalSeries: undefined as { year: number; value: number }[] | undefined };
         })
         .catch((error) => {
           logger.error({ error, key, yearCode }, "テーマダッシュボード: city values 取得失敗");
-          return { key, values: [] as RankingValue[], nationalValue: undefined as number | undefined };
+          return { key, values: [] as RankingValue[], nationalValue: undefined as number | undefined, nationalSeries: undefined as { year: number; value: number }[] | undefined };
         });
     }
 
     // prefecture: 既存ロジック (e-Stat fetch + ランク計算 + 全国値)
     return fetchIndicatorValues(item, yearCode)
-      .then(({ values, nationalValue }) => ({ key, values, nationalValue }))
+      .then(({ values, nationalValue, nationalSeries }) => ({ key, values, nationalValue, nationalSeries }))
       .catch((error) => {
         logger.error({ error, key }, "テーマダッシュボード: e-Stat データ取得失敗");
-        return { key, values: [] as RankingValue[], nationalValue: undefined as number | undefined };
+        return { key, values: [] as RankingValue[], nationalValue: undefined as number | undefined, nationalSeries: undefined as { year: number; value: number }[] | undefined };
       });
   });
 
@@ -170,6 +178,7 @@ export async function loadThemeData(
         rankingValues: values,
         availableYears: item.availableYears ?? [],
         nationalValue: valResult?.nationalValue,
+        nationalSeries: valResult?.nationalSeries,
       };
     }
   }
