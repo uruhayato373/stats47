@@ -52,6 +52,18 @@ git push origin develop
 - `/deploy` スキルで実行
 - フロー: feature/* で作業 → ローカルで develop に merge → `git push origin develop` → `gh pr create --base main --head develop` → CI green → マージ → main 自動デプロイ → 必要なら `/purge-cdn`
 
+### デプロイ頻度の規律 ★毎回デプロイしない（2026-06-20 追加）
+
+**変更のたびに本番デプロイ（develop→main PR → CI → merge → Cloudflare deploy）を回さない。** CI（6-8分）+ Cloudflare ビルド/デプロイ（6-8分）が毎回走り、時間もコストも無駄になる。
+
+- **UI/見た目/ロジックの反復は localhost (`npm run dev:web`) で確認**して完結させる。デプロイしない。
+- 複数の変更を**まとまりに溜めて、完成時に 1 回だけ**デプロイ（コミットも micro-commit ごとの PR を避ける）。
+- デプロイするのは次のときだけ:
+  1. **ユーザーが明示的にデプロイを求めたとき**
+  2. **本番でしか再現しない問題の検証時**（例: Cloudflare Workers ランタイム固有の R2 / env 問題。dev では再現しないため本番で観測するしかない）
+- 本番反映は outward-facing。明示指示が無ければ、デプロイ前に**「デプロイしてよいか」を確認する**。
+- 背景: 2026-06-20 のテーマ UI 改修で 7 回連続デプロイ（#486/490/491/492/493/494/495）してしまい指摘された。本番固有のデータ障害切り分け（#491-493）以外は localhost で十分だった。
+
 ## データ反映フロー（完全DBレスが正典 → `docs/01_技術設計/12_完全DBレス設計.md`）
 
 **本番は R2 スナップショット配信のみ。** SSOT は git TS と R2 の二つだけ。永続/リモート D1 は廃止。

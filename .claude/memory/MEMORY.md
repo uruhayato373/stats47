@@ -1,5 +1,7 @@
 # Memory Index
 
+- [feedback_no_deploy_per_iteration.md](feedback_no_deploy_per_iteration.md) — 変更のたびに本番デプロイしない(CI+deploy 各6-8分=無駄)。UI/ロジック反復は localhost(npm run dev:web)で確認し、まとまりで1回だけデプロイ。デプロイは明示指示 or 本番固有問題の検証時のみ、かつ実行前に確認。2026-06-20 に7回デプロイして指摘された
+
 - [feedback_cloudflare_workers_env_r2_skip.md](feedback_cloudflare_workers_env_r2_skip.md) — 本番Workerでテーマが「データの取得に失敗」/home featured空/ranking SSR空 → wrangler.toml [env.production.vars] の CLOUDFLARE_WORKERS="true" を疑う。shouldSkipRemoteR2Read が CLOUDFLARE_WORKERS≠true かつ CI/S3creds/R2_PUBLIC_FETCH_URL 無しで true(skip)→snapshot reader が黙って空ok([])→loadThemeData null。tail でOkだがエラーログ無し=throwでなく空。テーマは R2 app/ranking/<key>/values.json のみ読む(e-Stat廃止)+force-dynamic必須。2026-06-20 根治
 - [feedback_dev_server_web_only.md](feedback_dev_server_web_only.md) — dev サーバーは root `npm run dev`(turbo 23 pkg=遅い/固まる) を使わず web 単体 `npm run dev:web`(=turbo --filter=web) or `npm run dev --workspace=apps/web`(✓ Ready in 2s)。常駐プロセスは run_in_background + Ready polling、前面 sleep 禁止。表示更新されない時はキャッシュより先に listen 確認 (lsof -i :3000)。2026-06-20 取り違え。正典 local-environment.md
 - [project_blog_auto_publish_reconcile_limits.md](project_blog_auto_publish_reconcile_limits.md) — blog公開: MAX_PUBLISH=10 / reconcileは live未掲載のみ(既live改稿は明示slug dispatch) / quality-gateはSVG存在を見ない / chart生成器サフィックス固定。★2026-06-15 R2ファースト化: docs/21=ephemeral outbox(公開後CI自動削除)、docs/20企画サブシステム全廃、新規は /draft-from-trend(metric→fetch-ranking-data-r2→公開→反復)。正典 blog-data-schema.md §0
