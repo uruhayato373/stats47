@@ -1716,6 +1716,7 @@ import { retailStoreCountPer1000 } from "./metrics/retail-store-count-per-1000";
 import { retailStoreCount } from "./metrics/retail-store-count";
 import { retailStoresPer } from "./metrics/retail-stores-per";
 import { retirementAllowanceAdminPrefecture } from "./metrics/retirement-allowance-admin-prefecture";
+import { riceConsumptionExpenditure } from "./metrics/rice-consumption-expenditure";
 import { riceCrackerConsumptionExpenditure } from "./metrics/rice-cracker-consumption-expenditure";
 import { riceCultivatedArea } from "./metrics/rice-cultivated-area";
 import { riceHarvestVolume } from "./metrics/rice-harvest-volume";
@@ -3929,6 +3930,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "retail-store-count": retailStoreCount,
   "retail-stores-per": retailStoresPer,
   "retirement-allowance-admin-prefecture": retirementAllowanceAdminPrefecture,
+  "rice-consumption-expenditure": riceConsumptionExpenditure,
   "rice-cracker-consumption-expenditure": riceCrackerConsumptionExpenditure,
   "rice-cultivated-area": riceCultivatedArea,
   "rice-harvest-volume": riceHarvestVolume,
