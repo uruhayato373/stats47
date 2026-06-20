@@ -170,6 +170,7 @@ import { botanicalGardenCount } from "./metrics/botanical-garden-count";
 import { bowlingAlleyPublic } from "./metrics/bowling-alley-public";
 import { boysSchoolUniformConsumptionExpenditure } from "./metrics/boys-school-uniform-consumption-expenditure";
 import { boysSchoolUniformConsumptionQuantity } from "./metrics/boys-school-uniform-consumption-quantity";
+import { breadConsumptionExpenditure } from "./metrics/bread-consumption-expenditure";
 import { broccoliConsumptionExpenditure } from "./metrics/broccoli-consumption-expenditure";
 import { broccoliConsumptionQuantity } from "./metrics/broccoli-consumption-quantity";
 import { buildingFireCountPer100ThousandPeople } from "./metrics/building-fire-count-per-100-thousand-people";
@@ -2384,6 +2385,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "bowling-alley-public": bowlingAlleyPublic,
   "boys-school-uniform-consumption-expenditure": boysSchoolUniformConsumptionExpenditure,
   "boys-school-uniform-consumption-quantity": boysSchoolUniformConsumptionQuantity,
+  "bread-consumption-expenditure": breadConsumptionExpenditure,
   "broccoli-consumption-expenditure": broccoliConsumptionExpenditure,
   "broccoli-consumption-quantity": broccoliConsumptionQuantity,
   "building-fire-count-per-100-thousand-people": buildingFireCountPer100ThousandPeople,
