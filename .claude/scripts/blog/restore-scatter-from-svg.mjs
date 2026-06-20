@@ -358,6 +358,27 @@ async function resolveAxis(axisName, linkKeys, svgRange) {
   return best;
 }
 
+/**
+ * 記事 /ranking/ リンク key を SSOT 値域で x/y 軸に割り当てる。
+ * 著者が貼ったリンク = 信頼できる候補集合。x/y は「どちらの軸目盛レンジに値域が適合するか」で決める
+ * (title の語順や name検索の語順差に依存しない)。捏造防止: 退化(全0)は rangeMatch が弾く。
+ * @returns {xBest,yBest} 各 {key,year,xCov/yCov,xScale/yScale,ssotUnit} | null
+ */
+async function assignLinksByRange(linkKeys, xRange, yRange) {
+  const ranked = [];
+  for (const k of linkKeys) {
+    const ssot = await ssotLatest(k);
+    if (!ssot) continue; // 404 未取込
+    const rx = rangeMatch(xRange, ssot), ry = rangeMatch(yRange, ssot);
+    ranked.push({ key: k, year: ssot.year, ssotUnit: ssot.unit,
+      xCov: rx.ok ? rx.cov : 0, xScale: rx.scale, yCov: ry.ok ? ry.cov : 0, yScale: ry.scale });
+  }
+  let xBest = null, yBest = null;
+  for (const r of ranked) if (r.xCov > (xBest?.xCov ?? 0)) xBest = r;
+  for (const r of ranked) if (r.key !== xBest?.key && r.yCov > (yBest?.yCov ?? 0)) yBest = r;
+  return { xBest, yBest };
+}
+
 // ---------- queue から neither scatter を取得 ----------
 function loadTargets() {
   const q = JSON.parse(fs.readFileSync(path.join(PROJECT_ROOT, ".claude/state/blog/svg-lineage-queue.json"), "utf8"));
@@ -404,9 +425,9 @@ async function buildScatterJson(slug, base, xRes, yRes, meta) {
     year: `x:${xs.year}/y:${ys.year}`,
     xSource: `r2:app/ranking/${xRes.key}/values.json`,
     ySource: `r2:app/ranking/${yRes.key}/values.json`,
-    verifiedBy: "axis-range+name",
-    // 点値照合をしていないため verifiedMatchRate は付けない (§タスク指示)。range一致である旨を note に。
-    note: "2軸の軸名(catalog一致) と 軸目盛レンジ(SSOT値域が包含) で確定。点値照合は不可のため verifiedMatchRate なし。",
+    verifiedBy: "article-link+axis-range",
+    // 点値照合をしていないため verifiedMatchRate は付けない。記事リンク key を軸目盛レンジで x/y 割当し確定。
+    note: "記事 /ranking/ リンク key を SSOT値域で x/y 軸に割当 (著者由来=信頼)。x/y は元SVGの軸目盛レンジ適合で決定。点値照合不可のため verifiedMatchRate なし。",
     rangeVerification: {
       x: { svgRange: meta.xRange, ssotRange: [xs.min, xs.max], scale: xRes.rangeScale, cov: xRes.rangeCov },
       y: { svgRange: meta.yRange, ssotRange: [ys.min, ys.max], scale: yRes.rangeScale, cov: yRes.rangeCov },
@@ -457,27 +478,37 @@ for (const { slug, base } of targets) {
   let linkKeys = [];
   try { const md = await fetchText(`${R2}/app/blog/${slug}/article.md`); linkKeys = [...new Set([...md.matchAll(/\/ranking\/([a-z0-9-]+)/gi)].map((m) => m[1]))]; } catch {}
 
-  const xRes = xName ? await resolveAxis(xName, linkKeys, meta.xRange) : null;
-  const yRes = yName ? await resolveAxis(yName, linkKeys, meta.yRange) : null;
+  // 主判定: 記事リンク key を値域で x/y に割り当て (author 由来=信頼。name検索の語順差脆弱性を回避)。
+  // 例: sports率「スポーツの年間行動者率」は軸ラベル「スポーツ行動者率」と語順差で name検索を逃すが、
+  //     記事リンク sports-annual-participation-rate-10plus の値域[52,74]が x目盛55-75に適合して確定する。
+  const LINKCOV = 0.6;
+  const asg = await assignLinksByRange(linkKeys, meta.xRange, meta.yRange);
+  const xLinkOk = asg.xBest && asg.xBest.xCov >= LINKCOV;
+  const yLinkOk = asg.yBest && asg.yBest.yCov >= LINKCOV;
+  // 補助: name検索 (resolved 条件にはしないが、link と一致すれば確信表示に使う)
+  const xName2 = xName ? await resolveAxis(xName, linkKeys, meta.xRange) : null;
+  const yName2 = yName ? await resolveAxis(yName, linkKeys, meta.yRange) : null;
 
-  const xResolved = xRes && xRes.nameOk && xRes.rangeOk;
-  const yResolved = yRes && yRes.nameOk && yRes.rangeOk;
+  let xRes = null, yRes = null;
+  if (xLinkOk) xRes = { key: asg.xBest.key, year: asg.xBest.year, rangeScale: asg.xBest.xScale, rangeCov: asg.xBest.xCov, ssotUnit: asg.xBest.ssotUnit };
+  if (yLinkOk) yRes = { key: asg.yBest.key, year: asg.yBest.year, rangeScale: asg.yBest.yScale, rangeCov: asg.yBest.yCov, ssotUnit: asg.yBest.ssotUnit };
+  if (xRes) rec.xKey = xRes.key;
+  if (yRes) rec.yKey = yRes.key;
 
-  if (xRes) { rec.xKey = xRes.key; rec.xNameOk = xRes.nameOk; rec.xRangeOk = xRes.rangeOk; rec.xScale = xRes.rangeScale; }
-  if (yRes) { rec.yKey = yRes.key; rec.yNameOk = yRes.nameOk; rec.yRangeOk = yRes.rangeOk; rec.yScale = yRes.rangeScale; }
-
+  const xResolved = !!xRes, yResolved = !!yRes;
   if (xResolved && yResolved) {
+    const nameAgree = (xName2 && xName2.nameOk && xName2.key === xRes.key) || (yName2 && yName2.nameOk && yName2.key === yRes.key);
     rec.result = "resolved";
-    rec.note = `x=${xRes.key}(name+range) y=${yRes.key}(name+range)`;
-  } else if (xResolved && !yResolved) {
+    rec.note = `link+range x=${xRes.key}(cov${xRes.rangeCov}) y=${yRes.key}(cov${yRes.rangeCov})${nameAgree ? " +name一致" : ""}`;
+  } else if (xResolved) {
     rec.result = "x-only";
-    rec.note = `x=${xRes.key} ok / y=${yRes ? `${yRes.key} name=${yRes.nameOk} range=${yRes.rangeOk}` : "候補なし"}`;
-  } else if (!xResolved && yResolved) {
+    rec.note = `x=${xRes.key}(cov${xRes.rangeCov}) / y=リンク値域適合なし`;
+  } else if (yResolved) {
     rec.result = "y-only";
-    rec.note = `y=${yRes.key} ok / x=${xRes ? `${xRes.key} name=${xRes.nameOk} range=${xRes.rangeOk}` : "候補なし"}`;
+    rec.note = `y=${yRes.key}(cov${yRes.rangeCov}) / x=リンク値域適合なし`;
   } else {
     rec.result = "no-match";
-    rec.note = `x=${xRes ? `${xRes.key} n=${xRes.nameOk} r=${xRes.rangeOk}` : "なし"} / y=${yRes ? `${yRes.key} n=${yRes.nameOk} r=${yRes.rangeOk}` : "なし"}`;
+    rec.note = `リンク${linkKeys.length}個で x/y 値域適合せず (未取込/別指標)`;
   }
 
   // --apply: resolved のみ生成 (probe ではスキップ)
