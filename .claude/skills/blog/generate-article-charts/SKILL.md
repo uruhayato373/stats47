@@ -235,7 +235,9 @@ JSON で制御できるオプション（`data/*-ranking.json` のオブジェ�
 
 #### タイルグリッドマップ
 
-**重要**: タイルグリッドの配置は `packages/visualization/src/d3/constants/tile-grid-layout.ts` の `TILE_GRID_LAYOUT` が**唯一の正（canonical source）**。ハードコードした座標を使わず、以下のグリッド定義から計算すること。
+**統一仕様（2026-06-20）**: 600×700固定 / 全テキスト白+縁取り / タイトル左上・年15px。色は **D3カラースキーム** を `data/*-map.json` の `scheme`（`Blues`/`Viridis`/`RdYlGn`/`RdBu`/`Spectral`/`YlOrRd`… 未指定時 Reds）で指定。`reverse`（反転）/ `showValue`（県名+値）も可。データ源は SSOT（R2 app/ranking）。既存地図の一括統一は `regenerate-tile-maps.ts`。正典 = `.claude/rules/blog-data-schema.md` §1.6。
+
+**重要**: タイルグリッドの配置は `packages/svg-builder/src/charts/choropleth.ts` の `TILE_LAYOUT` が svg-builder 経由の生成では正。`generate-article-charts.ts` は `genTileGridMapSvg` 経由で `generateChoroplethSvg` にディスパッチする。
 
 ```js
 // --- 正規レイアウト定義（tile-grid-layout.ts と同一） ---

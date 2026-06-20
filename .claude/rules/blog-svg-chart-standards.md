@@ -37,7 +37,7 @@ CLI 内にインライン生成ロジックを書かない（重複・ドリフ�
 |---|---|---|---|---|---|
 | `generateBarChartSvg` | `bar-chart.ts` | `BarItem[]` + `BarChartOptions` | `*-ranking.json` / `*-top5-bottom5.json` | ~239 | ランキングはカード型のみ・**上位5+下位5固定**（10件廃止）。`layout:"columns"`=横長2列カード（左=上位/右=下位、`960×404`、ブログ本文+X 用）/ `layout:"portrait"`=縦長スタックカード（上位5↓下位5、`1080×1350` 4:5、Instagram 用 `-ig.svg`）/ `layout:"single"`=縦1列+「…中略…」(680幅)。`generate-article-charts.ts` が `*-ranking.json` から columns(`<name>.svg`)+portrait(`<name>-ig.svg`)を自動両出力 |
 | `generateScatterSvg` | `scatter.ts` | `ScatterPoint[]` + `ScatterOptions` | `*-scatter.json` | ~166 | 散布図（全都道府県・相関可視化） |
-| `generateChoroplethSvg` | `choropleth.ts` | `ChoroplethItem[]` + `ChoroplethOptions` | `*-map.json` / `*-tile-grid.json` | ~84 | タイルグリッド 47 都道府県マップ |
+| `generateChoroplethSvg` | `choropleth.ts` | `ChoroplethItem[]` + `ChoroplethOptions` | `*-map.json` / `*-tile-grid.json` | ~84 | タイルグリッド47都道府県マップ。**600×700固定・全テキスト白+縁取り・タイトル左上・年15px**。色は **D3カラースキーム** `scheme`(`Blues`/`Viridis`/`RdYlGn`/`RdBu`/`Spectral`/`YlOrRd`…d3-scale-chromatic、未指定時 Reds)、`reverse`/`showValue` 可。データは SSOT(R2 app/ranking)。一括再生成: `regenerate-tile-maps.ts`。正典 `blog-data-schema.md` §1.6 |
 | `generateLineSvg` | `line.ts` | `StatsSchema[]` + `LineOptions` | `*-timeseries.json` / `*-trend.json` | ~39 | 多系列折れ線（時系列・年齢階級）|
 | `generateStackedBarSvg` | `stacked-bar.ts` | `StackedData` + `StackedBarOptions` | `*-stacked.json` / `*-breakdown.json` | ~5 | 積み上げ棒グラフ（構成比）|
 | `generateFindingsCardSvg` | `findings-card.ts` | `FindingsCardData`（`{ findings: string[] \| FindingsCardItem[], title?: string }`） | `*-summary-findings.json` / `*-findings.json` | ~54 | 「この記事でわかったこと」要点カード（番号付き circle + テキスト行） |
