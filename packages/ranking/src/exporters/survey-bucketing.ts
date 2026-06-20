@@ -1,7 +1,7 @@
 /**
  * survey バケット解決ロジック (純粋関数)。exporter から呼ぶ。
  *
- * 背景: ranking item の baked `surveyId` (旧 D1 由来) は、SSDS (社会・人口統計体系=二次統計) 由来の
+ * 背景: ranking item の baked `surveyId` (旧マスタ由来) は、SSDS (社会・人口統計体系=二次統計) 由来の
  * item で頻繁に誤分類されている (実測: SSDS item の 62.9% がミスバケット)。一方、非SSDS の一次統計
  * (国勢調査・家計調査 等) は baked surveyId が正しい (resolver 一致率 95.5%)。
  *

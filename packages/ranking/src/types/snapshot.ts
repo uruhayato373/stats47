@@ -2,7 +2,7 @@ import type { RankingItem } from "./ranking-item";
 import type { RankingValue } from "./ranking-value";
 
 /**
- * データ出所 (survey 等)。完全DBレス Phase F で D1 `sources` schema 型から relocate。
+ * データ出所 (survey 等)。完全DBレス Phase F で `sources` schema 型から relocate。
  * surveys snapshot (app/survey/all.json) の各要素。
  */
 export interface Source {

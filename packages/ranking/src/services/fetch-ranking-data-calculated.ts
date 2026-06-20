@@ -62,7 +62,7 @@ async function fetchCalculatedRankingDataInner(
     "計算型アイテムのエクスポートを開始"
   );
 
-  // 分子と分母のメタデータを取得して、共通の年度を特定 (D1から取得)
+  // 分子と分母のメタデータを取得して、共通の年度を特定 (R2 item.json から取得)
   const [numItemResult, denItemResult] = await Promise.all([
     readRankingItemByKeyFromR2(calculation.numeratorKey),
     readRankingItemByKeyFromR2(calculation.denominatorKey),
@@ -74,7 +74,7 @@ async function fetchCalculatedRankingDataInner(
     return {
       success: false,
       error:
-        "分子または分母のランキングメタデータがD1に見つかりません。先に参照元のエクスポートを実行してください。",
+        "分子または分母のランキングメタデータが R2 item.json に見つかりません。先に参照元のエクスポートを実行してください。",
     };
   }
 

@@ -5,7 +5,7 @@ import { ok, type Result } from "@stats47/types";
 import type { RankingValue } from "../../types";
 
 /**
- * Phase 7 (2026-05-28): D1 stats_prefecture テーブル DROP に伴い no-op 化。
+ * Phase 7 (2026-05-28): 永続観測値テーブル廃止に伴い no-op 化。
  *
  * 旧実装は on-demand キャッシュ書き込み (e-Stat API → stats_prefecture INSERT) を行っていたが、
  * Phase 6 以降は R2 (`app/stats/<metric>/values.json`) が値の SSOT であり、
@@ -25,7 +25,7 @@ export async function upsertRankingValues(
 
   logger.warn(
     { rankingKey, areaType, yearCode, valueCount: values.length },
-    "upsertRankingValues: no-op (Phase 7: D1 stats_* dropped). " +
+    "upsertRankingValues: no-op (Phase 7: 永続観測値テーブル廃止). " +
       "観測値の populate は /page-data-batch を使うこと。on-demand キャッシュは廃止。",
   );
 

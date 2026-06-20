@@ -20,7 +20,7 @@ import type { RankingItem } from "../types/ranking-item";
  * (未定義なら既存値を温存し、誤って空にしない)。それ以外のフィールド
  * (latestYear / tags / availableYears 等) は item.json を verbatim 保持する。
  *
- * 完全DBレス (docs/01_技術設計/19): D1 不使用。読みは公開 URL 経由可、
+ * 完全DBレス (docs/01_技術設計/19)。読みは公開 URL 経由可、
  * 書き (saveToR2) は CI 専用ガード (`_assert-ci-write.ts`) の下でのみ通る。
  */
 

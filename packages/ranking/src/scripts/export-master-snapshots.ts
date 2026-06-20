@@ -6,7 +6,7 @@
  * 通常はバッチ完了時 (/populate-all-rankings, /register-ranking, /sync-articles) に
  * 自動で呼ばれるが、手動で最新化したいときにも単独実行できる。
  *
- * SSOT: git TS (categories/surveys マスタ) + R2 item.json (per-url の正本)。D1 不使用。
+ * SSOT: git TS (categories/surveys マスタ) + R2 item.json (per-url の正本)。
  * ※ per-url は R2 list (item.json 列挙) が要るため SSD 接続 or S3 認証下で実行。
  *
  * Usage:

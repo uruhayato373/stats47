@@ -22,7 +22,7 @@ export interface ExportSurveysSnapshotResult {
 /**
  * surveys snapshot を R2 に書き出す (完全DBレス: docs/01_技術設計/19)。
  *
- * SSOT は D1 `sources` (sourceKind='survey') テーブルではなく git TS マスタ
+ * SSOT は git TS マスタ
  * `packages/ranking/src/data/surveys.json` (配信 app/survey/all.json から抽出した静的 reference,
  * displayOrder 順)。survey は低頻度更新の reference データで git TS を SSOT とする (port master と同方針)。
  *

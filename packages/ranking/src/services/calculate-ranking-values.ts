@@ -1,6 +1,6 @@
 import { logger } from "@stats47/logger/server";
-// 完全DBレス (docs/01_技術設計/19): ranking-item メタは D1 metrics ではなく
-// R2 per-key item.json から読む。findRankingItemByKey(D1) → readRankingItemByKeyFromR2(R2)。
+// 完全DBレス (docs/01_技術設計/19): ranking-item メタは R2 per-key item.json から読む。
+// findRankingItemByKey → readRankingItemByKeyFromR2(R2)。
 import { readRankingItemByKeyFromR2 } from "../repositories/ranking-item";
 import { listRankingValues } from "../repositories/ranking-value";
 import type { AreaType } from "@stats47/types";
