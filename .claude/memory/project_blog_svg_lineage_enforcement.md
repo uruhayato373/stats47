@@ -24,7 +24,8 @@ metadata:
 - `backfill-source.mjs`: scatter 2軸照合 + 全chartType照合(cpi-* unknown 救済) + **0.95精度ガード**(0.8だと相関別指標へ偽陽性)。10枚 verified。
 - `resolve-scatter-axes.mjs`(新): axisラベルから候補keyを all.json名前検索→SSOT値照合(≥0.95)。独自スキーマ(fiscalIndex/tertiaryRatio)も field指定対応。FLAT_CONFIG=scale表記(平均給与万円=÷10000)、DERIVED_CONFIG=÷人口再計算(per-capita-local-tax 10/10)。同率は最新年優先。5枚 verified。
 
-残 source-backfill 22枚(`source-backfill-residue.md`に分類): 派生3(welfare 7/11・retail 0/0構造不良・nurse-favored順位差)/authored全国系列9/複数系列2/semiconductor派生1/未取込3。**+ neither 343(json消失)は未着手=最大バケツ**(regenerate-ranking-cards/tile-maps/新手法で SSOT再生成)。復元は **SSOTから(`app/ranking`)。SVGの絵から逆復元禁止**(§1.6)。値を自己検算して捏造防止。
+**neither(json消失)343の再生成に着手 → both 299/612=48.9%(2026-06-21)。** ranking 83枚中52枚を `restore-ranking-from-svg.mjs`(新)で復元・push:旧SVG表示値を抽出→候補key(記事リンク+basename名前検索+ドリフト補正)とSSOT照合(scale込み≥0.95)→`fetch-ranking-data-r2`+`generate-article-charts`で3点セット再生成→push前に旧SVG値と再照合。**chart-author agent生成を整合性監査でレビューし捏造バグ3点修正**: ①SCALES極端値(1e6/1e-6)除外(SSOT全0のgini壊れデータにSVG×極小≈0で偽陽性100%した) ②絶対tol下限0.05撤廃+退化ガード(SSOT無分散は不採用) ③extractSvgValuesがfindPrefInToken未使用で短縮名(徳島)取りこぼし→extraction-fail29→7。**article.mdはpush除外必須(stale地雷)**。
+残 neither 291: ranking flagged 31(複数系列比較/派生<95%/抽出失敗7/未取込3/held scale-verified5=SSOT raw が旧SVGと別スケールで記事本文とズレるため保留) + scatter70 + findings55(authored) + line31 + tilemap15 + stacked13 + manual76。worklist=`source-backfill-residue.md`(22)+`neither-restore-method.md`(手法/落とし穴/進捗)。復元は**SSOTから。SVGの絵から逆復元禁止**(§1.6)、値を自己検算して捏造防止。
 
 副産物バグ: **marriages/divorces の SSOT値が誤り**(divorcesキーに婚姻率の値・marriagesキーは~0.5異常、cdCat01取違え疑い、live /ranking/ に誤データ)。証拠+検証cmd+再取込手順=`docs/02_実装計画/05_指標バックログ.md §D`。
 
