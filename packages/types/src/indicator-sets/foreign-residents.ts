@@ -4,7 +4,7 @@ export const FOREIGN_RESIDENTS_SET: IndicatorSet = {
   key: "foreign-residents",
   title: "外国人",
   description:
-    "都道府県別の在留外国人数・外国人比率・国籍別人口を地図とランキングで比較。47都道府県の外国人統計を一覧で確認できます。",
+    "都道府県別の在留外国人数・外国人比率・国籍別人口をランキングとチャートで比較。47都道府県の外国人統計を一覧で確認できます。",
   category: "demographics",
   usage: "theme",
   metrics: [

@@ -15,7 +15,7 @@ export const RAILWAY_SET: IndicatorSet = {
   key: "railway",
   title: "鉄道",
   description:
-    "都道府県別の鉄道駅乗降客数・JR/民鉄輸送人員・鉄道駅数を地図とランキングで比較。首都圏・関西圏への利用集中と地方鉄道の縮小、旅客輸送とJR貨物の役割を47都道府県のデータで読み解きます。",
+    "都道府県別の鉄道駅乗降客数・JR/民鉄輸送人員・鉄道駅数をランキングとチャートで比較。首都圏・関西圏への利用集中と地方鉄道の縮小、旅客輸送とJR貨物の役割を47都道府県のデータで読み解きます。",
   category: "economy",
   usage: "theme",
   metrics: [

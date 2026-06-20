@@ -4,7 +4,7 @@ export const POPULATION_DYNAMICS_SET: IndicatorSet = {
   key: "population-dynamics",
   title: "人口動態",
   description:
-    "都道府県別の出生率・死亡率・高齢化率・転入超過率を地図・チャート・ランキングで比較。人口ピラミッド・年齢構成・自然増減率など11指標の推移を47都道府県で確認できます。",
+    "都道府県別の出生率・死亡率・高齢化率・転入超過率をランキングとチャートで比較。人口ピラミッド・年齢構成・自然増減率など11指標の推移を47都道府県で確認できます。",
   category: "demographics",
   usage: "theme",
   metrics: [

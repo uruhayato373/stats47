@@ -4,7 +4,7 @@ export const EDUCATION_CULTURE_SET: IndicatorSet = {
   key: "education-culture",
   title: "教育・文化",
   description:
-    "都道府県別の小学校数・中学校数・高等学校数・図書館数・公民館数を地図とランキングで比較。教育・文化施設の地域差を47都道府県のデータで確認できます。",
+    "都道府県別の小学校数・中学校数・高等学校数・図書館数・公民館数をランキングとチャートで比較。教育・文化施設の地域差を47都道府県のデータで確認できます。",
   category: "education",
   usage: "theme",
   metrics: [
