@@ -1,8 +1,7 @@
 {
-  "hash": "aa8744a2df16ab399df1e2bc96f05615eb1ec4884dfb949a64194ed933e81824",
-  "audited_at": "2026-06-20T06:47:12",
+  "hash": "39ca0fb490bcd3e818872869241b20d4c4820ebf65a779332aa44d3464275bcc",
+  "audited_at": "2026-06-20T07:00:08",
   "files": [
-    ".claude/agents/chart-author.md",
-    ".claude/scripts/blog/backfill-source.mjs"
+    ".claude/scripts/blog/generate-article-charts.ts"
   ]
 }

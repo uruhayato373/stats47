@@ -517,6 +517,52 @@ if (VALIDATE) {
   process.exit(0);
 }
 
+/**
+ * 徹底ルール (§1.7): SVG を生成したら必ず対応する source.json (出典 manifest) もセット出力する。
+ * 「1画像=1設定ファイル」を generator レベルで保証し、「絵だけ (元データ消失)」の発生を構造的に防ぐ。
+ * 既存 source.json (fetch-ranking-data-r2 が SSOT から確定したもの) があれば尊重し上書きしない。
+ */
+function writeChartSourceIfMissing(
+  sourcePath: string,
+  dataFile: string,
+  type: string | undefined,
+  parsed: Record<string, unknown> | undefined,
+): void {
+  if (fs.existsSync(sourcePath)) return; // 確定済み (fetch-ranking-data-r2 等) を尊重
+  const p = (parsed || {}) as Record<string, unknown>;
+  const rankings = p.rankings as Record<string, unknown> | undefined;
+  const rankingKey = (p.rankingKey || rankings?.rankingKey) as string | undefined;
+  const subtitle = typeof p.subtitle === "string" ? p.subtitle : "";
+  const year = (p.year as string) || subtitle.match(/(\d{4})/)?.[1];
+  const common = {
+    generatedBy: "generate-article-charts.ts",
+    chartType: type || "unknown",
+    dataFile,
+    year,
+    unit: (p.unit || rankings?.unit) as string | undefined,
+    label: (p.title || p.label || rankings?.label) as string | undefined,
+  };
+  let manifest: Record<string, unknown>;
+  if (rankingKey) {
+    manifest = {
+      kind: "ranking", rankingKey,
+      source: `r2:app/ranking/${rankingKey}/values.json`,
+      upstream: "metric config → e-Stat → R2 app/ranking",
+      ...common,
+    };
+  } else if (p.derived) {
+    manifest = { kind: "derived", formula: p.derived, ...common };
+  } else {
+    manifest = {
+      kind: type === "summary" ? "authored" : type || "unknown",
+      incomplete: true,
+      note: "出自(rankingKey/derived)が data json に無い。fetch-ranking-data-r2 か backfill-source で SSOT を補完すること",
+      ...common,
+    };
+  }
+  fs.writeFileSync(sourcePath, JSON.stringify(manifest, null, 2));
+}
+
 // Default mode: generate SVGs
 const chartNames = [];
 for (const { file, type, parsed } of jsonMeta) {
@@ -546,6 +592,8 @@ for (const { file, type, parsed } of jsonMeta) {
   // chart 系のチェッカーは「provenance 付き SVG = generator 経由で data から作られた」と信頼可能。
   const provenance = `<!-- data-source: ${file} | generated: ${new Date().toISOString()} -->\n`;
   fs.writeFileSync(svgPath, provenance + svg, "utf8");
+  // 徹底ルール (§1.7): SVG を書いたら必ず source.json もセット出力 (1画像=1設定ファイル)。
+  writeChartSourceIfMissing(path.join(DATA_DIR, `${baseName}.source.json`), file, type, parsed);
   chartNames.push(baseName);
   log(`  [gen] ${baseName}.svg  (${(svg.length / 1024).toFixed(1)} KB)`);
 

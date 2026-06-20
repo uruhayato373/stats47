@@ -135,8 +135,11 @@ metric 選定 (GSC ギャップ/トレンド/カテゴリ/ユーザー指示)
 ### 再発防止 (新規記事で元データ消失を構造的に不可能にする)
 - **gate** (`quality-gate.mjs`): 各 `data/*.svg` に対応する `.json`+`.source.json` の欠落を検出 (§1.5 の3点セット)。
   **段階導入** (当面 warning、復元完了後に blocker 昇格)。公開記事で3点セットを強制し、SVG だけ残る状態を止める。
-- **生成保証**: `generate-article-charts.ts` / `fetch-ranking-data-r2.mjs` が全チャート種で `source.json` を出力する
-  (ranking は実装済。scatter/line/findings へ拡張)。
+- **生成保証 (実装済 2026-06-20・徹底の核心)**: `generate-article-charts.ts` が SVG を書くたびに `source.json` を
+  **セット出力**する (`writeChartSourceIfMissing`、既存の確定版は尊重)。全チャート種 (bar/tile-grid/line/scatter/summary)
+  で「**1画像=1設定ファイル**」を generator レベルで保証し、SVG だけ書いて source.json を書かない経路を構造的に塞ぐ。
+  `fetch-ranking-data-r2.mjs` は SSOT 確定版 (rankingKey 確定) を出力。**復元 (backfill) は過去負債の処理であり、
+  新規は発生源で防ぐのが先決** (場当たりに「絵だけ」を作らない)。
 
 ### 復元 (既存の欠落を SSOT から揃える)
 真実源 = `.claude/state/blog/svg-lineage-queue.json` (`build-lineage-queue.mjs` が R2 棚卸しで生成、人間用は
