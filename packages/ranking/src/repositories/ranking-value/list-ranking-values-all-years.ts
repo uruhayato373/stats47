@@ -9,7 +9,7 @@ import type { RankingValue } from "../../types";
 /**
  * 全年分の RankingValue を R2 から一括取得 (Bar Chart Race 用)。
  * 全国値 (areaCode "00000") は除外。
- * Phase 6 以降: D1 stats_* ではなく `app/stats/<metric>/values.json` から読む。
+ * Phase 6 以降: `app/stats/<metric>/values.json` (R2) から読む。
  */
 export async function listRankingValuesAllYears(
   rankingKey: string,

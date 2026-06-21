@@ -2,7 +2,7 @@
  * CLI スクリプト用セットアップ
  * - .env.local から環境変数をロード（import 巻き上げより前に実行）
  * - server-only モジュールを無効化
- * - NODE_ENV=development を設定（ローカル D1 アダプタ使用のため）
+ * - NODE_ENV=development を設定（ローカル CLI 実行のため）
  *
  * Usage: npx tsx -r ./packages/ranking/src/scripts/setup-cli.js ...
  */

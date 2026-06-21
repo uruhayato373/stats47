@@ -6,7 +6,7 @@ import type { AreaType } from "@stats47/types";
 
 /**
  * 「サイト全体で最も新しい年」を返す。
- * Phase 6 以降は D1 stats_* に SQL MAX をかける代わりに、
+ * Phase 6 以降は SQL MAX 集計の代わりに、
  * 主要 metric (japanese-population) の R2 payload の meta.yearRange[1] を参照する。
  */
 export async function findLatestYear(

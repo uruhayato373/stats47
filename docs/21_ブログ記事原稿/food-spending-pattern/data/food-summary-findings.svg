@@ -1,0 +1,43 @@
+<!-- data-source: food-summary-findings.json | generated: 2026-06-20T22:37:48.297Z -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 504" width="960" height="504" font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" role="img" aria-label="この記事でわかったこと">
+  <style>
+    .svg-bg{fill:#ffffff}
+    .svg-plot{fill:#f9fafb}
+    .svg-plot-border{stroke:#d1d5db}
+    .svg-title{fill:#1f2937}
+    .svg-axis{fill:#374151}
+    .svg-tick{fill:#6b7280}
+    .svg-grid{stroke:#e5e7eb}
+    @media (prefers-color-scheme:dark){
+    .svg-bg{fill:#0f172a}
+    .svg-plot{fill:#1e293b}
+    .svg-plot-border{stroke:#334155}
+    .svg-title{fill:#e2e8f0}
+    .svg-axis{fill:#cbd5e1}
+    .svg-tick{fill:#94a3b8}
+    .svg-grid{stroke:#334155}
+    }
+  </style>
+  <rect width="960" height="504" class="svg-bg"/>
+  <text x="480" y="46" text-anchor="middle" font-size="26" font-weight="bold" class="svg-title">この記事でわかったこと</text>
+  <rect x="40" y="72" width="880" height="72" class="svg-plot" rx="8"/>
+  <circle cx="58" cy="108" r="18" fill="#dc2626"/>
+  <text x="58" y="114" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">1</text>
+  <text x="90" y="103.6" font-size="18" class="svg-title"><tspan x="90" dy="0">米文化圏 vs パン文化圏が明確に存在──東北・九州は米</tspan><tspan x="90" dy="22">、近畿はパン。主食レベルで食文化の地域差があります</tspan></text>
+  <rect x="40" y="154" width="880" height="72" class="svg-plot" rx="8"/>
+  <circle cx="58" cy="190" r="18" fill="#dc2626"/>
+  <text x="58" y="196" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">2</text>
+  <text x="90" y="185.6" font-size="18" class="svg-title"><tspan x="90" dy="0">米とパンは負の相関ではない──米を食べる県がパンを食べな</tspan><tspan x="90" dy="22">いわけではなく、食費全体の水準が影響します</tspan></text>
+  <rect x="40" y="236" width="880" height="72" class="svg-plot" rx="8"/>
+  <circle cx="58" cy="272" r="18" fill="#dc2626"/>
+  <text x="58" y="278" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">3</text>
+  <text x="90" y="267.6" font-size="18" class="svg-title"><tspan x="90" dy="0">香川は生うどん・そば消費額で圧倒的1位──2位以下に大差</tspan><tspan x="90" dy="22">をつけ、データが「うどん県」の通称を裏付けます</tspan></text>
+  <rect x="40" y="318" width="880" height="72" class="svg-plot" rx="8"/>
+  <circle cx="58" cy="354" r="18" fill="#dc2626"/>
+  <text x="58" y="360" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">4</text>
+  <text x="90" y="349.6" font-size="18" class="svg-title"><tspan x="90" dy="0">カップ麺1位は青森県──東北・北陸など寒冷地が上位を占め</tspan><tspan x="90" dy="22">、気候や生活スタイルとの関連がうかがえます</tspan></text>
+  <rect x="40" y="400" width="880" height="72" class="svg-plot" rx="8"/>
+  <circle cx="58" cy="436" r="18" fill="#dc2626"/>
+  <text x="58" y="442" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">5</text>
+  <text x="90" y="431.6" font-size="18" class="svg-title"><tspan x="90" dy="0">食の地域差は消費「額」だけでは測れない──支出額は物価や</tspan><tspan x="90" dy="22">所得の影響を受け、消費「量」とは異なる点に注意が必要です</tspan></text>
+</svg>

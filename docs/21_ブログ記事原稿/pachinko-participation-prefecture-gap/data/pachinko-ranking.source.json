@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "hobby-participation-rate-pachinko",
+  "year": "2021",
+  "unit": "％",
+  "label": "パチンコの行動者率",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/hobby-participation-rate-pachinko/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug pachinko-participation-prefecture-gap --keys hobby-participation-rate-pachinko --data-name pachinko-ranking",
+  "fetchedAt": "2026-06-20T22:56:46.640Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

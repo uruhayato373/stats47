@@ -1,0 +1,14 @@
+{
+  "kind": "manual",
+  "year": "2024",
+  "unit": "円",
+  "label": "米消費支出額（二人以上世帯・県庁所在市）",
+  "transform": "全47県をタイルマップに描画",
+  "source": "総務省 家計調査 2024 (statsDataId 0003348239, cdCat01 010110010 cdCat02 03)",
+  "sourceUrl": "https://www.e-stat.go.jp/stat-search/files?page=1&layout=datalist&toukei=00200561",
+  "metricConfig": "packages/data-configs/src/metrics/rice-consumption-expenditure.ts",
+  "note": "metric config (rice-consumption-expenditure) は存在するが R2 app/ranking 未公開のため、公開済みの記事 SVG (rice-map.svg) の県別表示値を ground truth として data/rice-map.json を構築した。値は家計調査 2024 由来で捏造なし。",
+  "fetchedAt": "2026-06-20T22:37:43.000Z",
+  "generatedBy": "agent (restored from published article SVG)",
+  "trusted": "記事本文の主張(宮崎34.5千/鳥取16.8千・約2倍差)と SVG 表示値を突合済み"
+}

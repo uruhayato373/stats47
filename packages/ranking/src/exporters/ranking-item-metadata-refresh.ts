@@ -25,7 +25,7 @@ import type { RankingItem } from "../types/ranking-item";
  * ★実行順: 本 refresh は **master (exportRankingItemsPerUrl) の前**に走らせること。
  *   master が更新後の categoryKey/title で category items.json を再グループ化するため。
  *
- * 完全DBレス (docs/01_技術設計/19): D1 不使用。読みは公開 URL 経由可、
+ * 完全DBレス (docs/01_技術設計/19)。読みは公開 URL 経由可、
  * 書き (saveToR2) は CI 専用ガード (`_assert-ci-write.ts`) の下でのみ通る。
  */
 

@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "average-height-primary-school-fifth-grade-male",
+  "year": "2023",
+  "unit": "cm",
+  "label": "平均身長",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/average-height-primary-school-fifth-grade-male/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug prefectural-height-male-female-gap --keys average-height-primary-school-fifth-grade-male --data-name height-male-ranking",
+  "fetchedAt": "2026-06-20T21:45:44.880Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

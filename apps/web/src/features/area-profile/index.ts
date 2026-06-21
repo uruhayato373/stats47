@@ -12,6 +12,8 @@ export { AreaProfileSidebar } from "./components/AreaProfileSidebar";
 export { RelatedAreas } from "./components/RelatedAreas";
 export { CategoryNavGrid } from "./components/CategoryNavGrid";
 export { CitiesNavCard } from "./components/CitiesNavCard";
+export { CityBreadcrumbs } from "./components/CityBreadcrumbs";
+export { CityPageFooter } from "./components/CityPageFooter";
 export { AreaRelatedRankingsCard } from "./components/AreaRelatedRankingsCard";
 export { AreaRelatedBlogArticles } from "./components/AreaRelatedBlogArticles";
 
@@ -26,6 +28,7 @@ export {
 export {
   generateAreaMetadata,
 } from "./utils/generate-area-metadata";
+export { getCityRouteContext } from "./utils/city-route-context";
 
 // Map component
 export { AreaSelectorMap } from "./components/AreaSelectorMap";

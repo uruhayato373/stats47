@@ -7,7 +7,7 @@ import type { AreaType } from "@stats47/types";
 import type { RankingValue } from "../../types";
 
 /**
- * Phase 6 以降: D1 stats_prefecture を読まず、R2 (`app/stats/<metric>/values.json`) から取得。
+ * Phase 6 以降: R2 (`app/stats/<metric>/values.json`) から取得。
  * areaType が prefecture/city/port のいずれかに応じて R2 key を分岐。
  * yearCode が指定された場合は memory フィルタ。
  */

@@ -63,7 +63,7 @@ export async function GET(
         "X-Tile-Source": "cartocdn-proxy",
       },
     });
-  } catch (_err) {
+  } catch {
     // upstream 失敗は 502（Leaflet はタイル loading error で fallback する）
     return new Response(null, { status: 502 });
   }

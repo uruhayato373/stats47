@@ -1,0 +1,48 @@
+{
+  "kind": "derived",
+  "chartType": "bar",
+  "year": "2023",
+  "unit": "倍",
+  "label": "同じ職種でも県でこれだけ違う：年収の最大／最小倍率",
+  "formula": "職種ごとに 1位県の平均年収 ÷ 最下位県の平均年収 (賃金構造基本統計調査 2023)",
+  "components": [
+    {
+      "job": "システムコンサルタント",
+      "rankingKey": "system-consultant-annual-income",
+      "ratio": 2.65,
+      "detail": "秋田952.5/沖縄359.1",
+      "source": "r2:app/ranking/system-consultant-annual-income/values.json"
+    },
+    {
+      "job": "タクシー運転手",
+      "rankingKey": "taxi-driver-annual-income",
+      "ratio": 2.54,
+      "detail": "東京586.0/石川230.5",
+      "source": "r2:app/ranking/taxi-driver-annual-income/values.json"
+    },
+    {
+      "job": "薬剤師",
+      "rankingKey": "pharmacist-annual-income",
+      "ratio": 1.52,
+      "detail": "広島706.0/徳島463.7",
+      "source": "r2:app/ranking/pharmacist-annual-income/values.json"
+    },
+    {
+      "job": "ソフトウェア作成者",
+      "rankingKey": "software-engineer-annual-income",
+      "ratio": 1.51,
+      "detail": "京都608.4/沖縄402.6",
+      "source": "r2:app/ranking/software-engineer-annual-income/values.json"
+    },
+    {
+      "job": "介護職員",
+      "rankingKey": "care-worker-annual-income",
+      "ratio": 1.33,
+      "detail": "広島411.3/大分308.6",
+      "source": "r2:app/ranking/care-worker-annual-income/values.json"
+    }
+  ],
+  "upstream": "metric config (packages/data-configs) → e-Stat (賃金構造基本統計調査) → R2 app/ranking (5指標を職種別に集計し倍率を算出)",
+  "verifiedMatchRate": 100,
+  "generatedBy": "article-writer (REVISE fix: 5職種の1位/最下位値をSSOTと突合し全件一致を確認)"
+}

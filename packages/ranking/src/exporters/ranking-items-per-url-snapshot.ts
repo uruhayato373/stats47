@@ -44,7 +44,7 @@ export interface ExportRankingItemsPerUrlResult {
 /**
  * URL 単位の小さい JSON を R2 に生成・保存する (完全DBレス: docs/01_技術設計/19)。
  *
- * SSOT は D1 `metrics` テーブルではなく R2 の per-key `app/ranking/<key>/item.json`
+ * SSOT は R2 の per-key `app/ranking/<key>/item.json`
  * (listRankingItemsWithTagsFromR2)。item.json から全 RankingItem を読み、URL 単位の
  * 派生 snapshot (home/category/survey) を再グループ化して書き出す。
  * ※ enumeration に R2 list が要るため SSD 接続 or S3 認証下で実行すること
@@ -64,7 +64,7 @@ export interface ExportRankingItemsPerUrlResult {
 export async function exportRankingItemsPerUrl(): Promise<ExportRankingItemsPerUrlResult> {
   const startedAt = Date.now();
 
-  // 1. 全 ranking item を R2 item.json から取得 (D1 不使用)
+  // 1. 全 ranking item を R2 item.json から取得
   const itemsResult = await listRankingItemsWithTagsFromR2();
   if (!itemsResult.success) {
     throw itemsResult.error ?? new Error("listRankingItemsWithTagsFromR2 failed");

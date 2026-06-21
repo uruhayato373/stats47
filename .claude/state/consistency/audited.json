@@ -1,7 +1,8 @@
 {
-  "hash": "fe9a3b5485bf54fc2a9653d5510f9bf7e507b926e47cfcbca354f712a88797bc",
-  "audited_at": "2026-06-20T07:20:50",
+  "hash": "0a261cbdc59c712e5a4820e8c80adb721e77534202ecf9092c111dff6d1c1e14",
+  "audited_at": "2026-06-21T07:29:52",
   "files": [
-    ".claude/scripts/blog/backfill-source.mjs"
+    ".claude/scripts/blog/generate-article-charts.ts",
+    ".claude/skills/blog/trends-snapshots/trends-all-2026-06-21.md"
   ]
 }

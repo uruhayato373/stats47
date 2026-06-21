@@ -10,7 +10,7 @@ import { readRankingValuesFromR2 } from "./read-ranking-values-from-r2";
 /**
  * R2 partition snapshot から複数ランキングの rank=1 を一括取得。
  *
- * listTopRankingValuesBatch (D1) のドロップイン代替。
+ * listTopRankingValuesBatch の R2 ドロップイン代替。
  * 各 (rankingKey, yearCode) について 1 partition fetch + rank=1 抽出。
  *
  * 並列度は readRankingValuesFromR2 の Promise.all で吸収する。

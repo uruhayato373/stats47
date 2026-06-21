@@ -51,7 +51,7 @@ export async function fetchRankingValuesFromSource(
 }
 
 /**
- * ランキング値を D1 にキャッシュ保存する。
+ * ランキング値をキャッシュ保存する (Phase 7 以降 upsertRankingValues は no-op)。
  */
 export async function cacheRankingValues(
   rankingItem: RankingItem,
@@ -75,7 +75,7 @@ export async function cacheRankingValues(
 }
 
 /**
- * ランキングデータをオンデマンド取得し、D1 にキャッシュ保存する。
+ * ランキングデータをオンデマンド取得する (キャッシュ保存は Phase 7 以降 no-op)。
  * fetchRankingValuesFromSource + cacheRankingValues の便利関数。
  */
 export async function fetchRankingValuesOnDemand(

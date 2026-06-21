@@ -53,7 +53,6 @@ export const INDEXABLE_AREA_CATEGORIES = [
   "miningindustry",
   "safetyenvironment",
 ] as const;
-type IndexableAreaCategory = (typeof INDEXABLE_AREA_CATEGORIES)[number];
 
 const INDEXABLE_AREA_CATEGORIES_SET = new Set<string>(
   INDEXABLE_AREA_CATEGORIES,

@@ -1,4 +1,4 @@
-// 完全DBレス (Phase F): D1 metrics を引く ranking-item repository は全削除。
+// 完全DBレス (Phase F): ranking-item repository は全削除。
 // runtime / 生成器は R2 item.json リーダ (read-ranking-items-snapshot) のみを使う。
 // CategoryRankingItem 型は types/ranking-item へ relocate 済。
 export {

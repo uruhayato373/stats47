@@ -1,6 +1,10 @@
 import { fetchFromR2AsJson } from "@stats47/r2-storage/server";
 import type { EntityKind } from "@stats47/data-configs";
 import {
+  parseMigrationFlowPayload,
+  parseStatsValuesPayload,
+} from "../schemas";
+import {
   statsR2Key,
   type MigrationFlowPayload,
   type StatsValuesPayload,
@@ -19,7 +23,8 @@ export async function readStatsValues(
   entityKind: Exclude<EntityKind, "migration-flow">,
 ): Promise<StatsValuesPayload | null> {
   const key = statsR2Key(metricKey, entityKind);
-  return await fetchFromR2AsJson<StatsValuesPayload>(key);
+  const data = await fetchFromR2AsJson<unknown>(key);
+  return data ? parseStatsValuesPayload(data) : null;
 }
 
 export async function readMigrationFlow(
@@ -27,7 +32,8 @@ export async function readMigrationFlow(
   year: number,
 ): Promise<MigrationFlowPayload | null> {
   const key = statsR2Key(metricKey, "migration-flow", year);
-  return await fetchFromR2AsJson<MigrationFlowPayload>(key);
+  const data = await fetchFromR2AsJson<unknown>(key);
+  return data ? parseMigrationFlowPayload(data) : null;
 }
 
 /**

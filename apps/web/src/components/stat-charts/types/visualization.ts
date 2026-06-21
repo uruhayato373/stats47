@@ -66,30 +66,6 @@ export interface HierarchyData {
   children?: HierarchyData[];
 }
 
-/** バーチャートレース用データ（アダプター内部・年度別フレーム） */
-interface BarChartRaceData {
-  /** 年度リスト */
-  years: string[];
-  /** 各年度のランキングデータ */
-  frames: Array<{
-    year: string;
-    data: Array<{
-      name: string;
-      value: number;
-      rank: number;
-    }>;
-  }>;
-  /** 単位 */
-  unit?: string;
-}
-
-/** 統計カード用データ */
-interface StatCardData {
-  value: number | null;
-  unit: string | null;
-  year: string | null;
-}
-
 /** KPI カード用データ（値 + 前年比） */
 export interface KpiCardData {
   value: number | null;

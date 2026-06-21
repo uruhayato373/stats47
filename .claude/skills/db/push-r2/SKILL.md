@@ -63,4 +63,4 @@ ALLOW_LOCAL_R2_WRITE=1 npx tsx packages/r2-storage/src/scripts/push-r2-wrangler.
 ## 参照
 
 - `packages/r2-storage/src/scripts/README.md` — アップロード/ダウンロードスクリプトの使い方
-- `packages/r2-storage/src/scripts/sync-upload.ts` — アップロードスクリプト本体
+- `packages/r2-storage/src/scripts/diff-push-r2.ts` — アップロードスクリプト本体 (S3 差分 push)。wrangler 経由は `push-r2-wrangler.ts`

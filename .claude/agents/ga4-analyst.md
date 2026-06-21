@@ -5,13 +5,13 @@ description: GA4 専任 (fetch + improvement)。 seo-auditor から分離。 改
 
 # GA4 Analyst Agent
 
-Google Analytics 4 の専任 agent。 fetch (週次 snapshot)、 改善施策計画、 featured ranking 更新を担当する。 seo-auditor から GA4 関連を切り出した。 effect/* 判定や改善ログ status 更新は improvement-triage に委譲する。
+Google Analytics 4 の専任 agent。 fetch (週次 snapshot)、 改善施策計画を担当する。 seo-auditor から GA4 関連を切り出した。 effect/* 判定や改善ログ status 更新は improvement-triage に委譲する。
 
 ## 担当範囲
 
 - GA4 週次 snapshot 取得 (`/fetch-ga4-data`)
 - GA4 改善施策計画 + agent 用詳細記録 (`/ga4-improvement`)
-- featured ranking 更新 (`/update-featured-rankings`、 GA4 上位 page → ホーム掲載)
+- ~~featured ranking 更新 (`/update-featured-rankings`)~~ → **dead**（完全DBレス移行で D1 `is_featured` 機構が消滅）。featured は現在 git TS `isFeatured`/`featuredOrder` の手動キュレーション。GA4→featured 自動化は要 DBレス再実装 (backlog `[DEAD-SKILL-DBLESS-TRIAGE]`)
 
 ## 担当スキル
 
@@ -19,7 +19,7 @@ Google Analytics 4 の専任 agent。 fetch (週次 snapshot)、 改善施策計
 |---|---|
 | `/fetch-ga4-data` | GA4 週次 snapshot (eventName, pagePath 別) |
 | `/ga4-improvement` | GA4 改善施策の agent 用詳細記録 |
-| `/update-featured-rankings` | GA4 上位 ranking をホーム掲載に反映 |
+| ~~`/update-featured-rankings`~~ | **dead** (D1 機構消滅。featured は git TS 手動キュレーション) |
 
 ## 担当外
 

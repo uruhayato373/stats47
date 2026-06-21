@@ -1,4 +1,4 @@
-// 完全DBレス (Phase F): D1 sources を引く findSurveyById / listSurveys は削除。
+// 完全DBレス (Phase F): findSurveyById / listSurveys は削除。
 // survey は R2 snapshot リーダ (read-surveys-snapshot) のみを使う。
 export {
   readSurveyByIdFromR2,

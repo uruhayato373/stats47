@@ -1,0 +1,140 @@
+<!-- data-source: commercial-rate-timeseries.json | generated: 2026-06-21T07:37:28.170Z -->
+<svg width="680" height="420" viewBox="0 0 680 420" xmlns="http://www.w3.org/2000/svg" font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" role="img" aria-label="商業地変動率の推移（全国平均）">
+  <title>商業地変動率の推移（全国平均）</title>
+  <desc>標準価格対前年平均変動率（％）</desc>
+  <style>
+    .svg-bg{fill:#ffffff}
+    .svg-plot{fill:#f9fafb}
+    .svg-plot-border{stroke:#d1d5db}
+    .svg-title{fill:#1f2937}
+    .svg-axis{fill:#374151}
+    .svg-tick{fill:#6b7280}
+    .svg-grid{stroke:#e5e7eb}
+    @media (prefers-color-scheme:dark){
+    .svg-bg{fill:#0f172a}
+    .svg-plot{fill:#1e293b}
+    .svg-plot-border{stroke:#334155}
+    .svg-title{fill:#e2e8f0}
+    .svg-axis{fill:#cbd5e1}
+    .svg-tick{fill:#94a3b8}
+    .svg-grid{stroke:#334155}
+    }
+  </style>
+  <rect width="680" height="420" class="svg-bg"/>
+  <text x="340" y="22" text-anchor="middle" font-size="12.5" font-weight="bold" class="svg-title">商業地変動率の推移（全国平均）</text>
+  <text x="340" y="37" text-anchor="middle" font-size="9" class="svg-tick">標準価格対前年平均変動率（％）</text>
+  <text x="55.0" y="52.0" font-size="8.5" class="svg-tick">(％)</text>
+  <!-- プロットエリア -->
+  <rect x="55.0" y="58.0" width="611.0" height="302.0" class="svg-plot svg-plot-border" stroke-width="1"/>
+  <!-- Y グリッド -->
+  <line x1="55.0" y1="360.0" x2="666.0" y2="360.0" class="svg-grid" stroke-width="1"/>
+  <text x="50.0" y="363.5" text-anchor="end" font-size="8.5" class="svg-tick">-5</text>
+  <line x1="55.0" y1="284.5" x2="666.0" y2="284.5" class="svg-grid" stroke-width="1"/>
+  <text x="50.0" y="288.0" text-anchor="end" font-size="8.5" class="svg-tick">0</text>
+  <line x1="55.0" y1="209.0" x2="666.0" y2="209.0" class="svg-grid" stroke-width="1"/>
+  <text x="50.0" y="212.5" text-anchor="end" font-size="8.5" class="svg-tick">5</text>
+  <line x1="55.0" y1="133.5" x2="666.0" y2="133.5" class="svg-grid" stroke-width="1"/>
+  <text x="50.0" y="137.0" text-anchor="end" font-size="8.5" class="svg-tick">10</text>
+  <line x1="55.0" y1="58.0" x2="666.0" y2="58.0" class="svg-grid" stroke-width="1"/>
+  <text x="50.0" y="61.5" text-anchor="end" font-size="8.5" class="svg-tick">15</text>
+  <line x1="55.0" y1="284.5" x2="666.0" y2="284.5" stroke="#9ca3af" stroke-width="1.5"/>
+  <!-- X 軸ラベル -->
+  <text x="55.0" y="374.0" font-size="8.5" class="svg-tick" text-anchor="end" transform="rotate(-35,55.0,374.0)">1980</text>
+  <text x="68.9" y="374.0" font-size="8.5" class="svg-tick" text-anchor="end" transform="rotate(-35,68.9,374.0)">1981</text>
+  <text x="82.8" y="374.0" font-size="8.5" class="svg-tick" text-anchor="end" transform="rotate(-35,82.8,374.0)">1982</text>
+  <text x="96.7" y="374.0" font-size="8.5" class="svg-tick" text-anchor="end" transform="rotate(-35,96.7,374.0)">1983</text>
+  <text x="110.5" y="374.0" font-size="8.5" class="svg-tick" text-anchor="end" transform="rotate(-35,110.5,374.0)">1984</text>
+  <text x="124.4" y="374.0" font-size="8.5" class="svg-tick" text-anchor="end" transform="rotate(-35,124.4,374.0)">1985</text>
+  <text x="138.3" y="374.0" font-size="8.5" class="svg-tick" text-anchor="end" transform="rotate(-35,138.3,374.0)">1986</text>
+  <text x="152.2" y="374.0" font-size="8.5" class="svg-tick" text-anchor="end" transform="rotate(-35,152.2,374.0)">1987</text>
+  <text x="166.1" y="374.0" font-size="8.5" class="svg-tick" text-anchor="end" transform="rotate(-35,166.1,374.0)">1988</text>
+  <text x="180.0" y="374.0" font-size="8.5" class="svg-tick" text-anchor="end" transform="rotate(-35,180.0,374.0)">1989</text>
+  <text x="193.9" y="374.0" font-size="8.5" class="svg-tick" text-anchor="end" transform="rotate(-35,193.9,374.0)">1990</text>
+  <text x="207.8" y="374.0" font-size="8.5" class="svg-tick" text-anchor="end" transform="rotate(-35,207.8,374.0)">1991</text>
+  <text x="221.6" y="374.0" font-size="8.5" class="svg-tick" text-anchor="end" transform="rotate(-35,221.6,374.0)">1992</text>
+  <text x="235.5" y="374.0" font-size="8.5" class="svg-tick" text-anchor="end" transform="rotate(-35,235.5,374.0)">1993</text>
+  <text x="249.4" y="374.0" font-size="8.5" class="svg-tick" text-anchor="end" transform="rotate(-35,249.4,374.0)">1994</text>
+  <text x="263.3" y="374.0" font-size="8.5" class="svg-tick" text-anchor="end" transform="rotate(-35,263.3,374.0)">1995</text>
+  <text x="277.2" y="374.0" font-size="8.5" class="svg-tick" text-anchor="end" transform="rotate(-35,277.2,374.0)">1996</text>
+  <text x="291.1" y="374.0" font-size="8.5" class="svg-tick" text-anchor="end" transform="rotate(-35,291.1,374.0)">1997</text>
+  <text x="305.0" y="374.0" font-size="8.5" class="svg-tick" text-anchor="end" transform="rotate(-35,305.0,374.0)">1998</text>
+  <text x="318.8" y="374.0" font-size="8.5" class="svg-tick" text-anchor="end" transform="rotate(-35,318.8,374.0)">1999</text>
+  <text x="332.7" y="374.0" font-size="8.5" class="svg-tick" text-anchor="end" transform="rotate(-35,332.7,374.0)">2000</text>
+  <text x="346.6" y="374.0" font-size="8.5" class="svg-tick" text-anchor="end" transform="rotate(-35,346.6,374.0)">2001</text>
+  <text x="360.5" y="374.0" font-size="8.5" class="svg-tick" text-anchor="end" transform="rotate(-35,360.5,374.0)">2002</text>
+  <text x="374.4" y="374.0" font-size="8.5" class="svg-tick" text-anchor="end" transform="rotate(-35,374.4,374.0)">2003</text>
+  <text x="388.3" y="374.0" font-size="8.5" class="svg-tick" text-anchor="end" transform="rotate(-35,388.3,374.0)">2004</text>
+  <text x="402.2" y="374.0" font-size="8.5" class="svg-tick" text-anchor="end" transform="rotate(-35,402.2,374.0)">2005</text>
+  <text x="416.0" y="374.0" font-size="8.5" class="svg-tick" text-anchor="end" transform="rotate(-35,416.0,374.0)">2006</text>
+  <text x="429.9" y="374.0" font-size="8.5" class="svg-tick" text-anchor="end" transform="rotate(-35,429.9,374.0)">2007</text>
+  <text x="443.8" y="374.0" font-size="8.5" class="svg-tick" text-anchor="end" transform="rotate(-35,443.8,374.0)">2008</text>
+  <text x="457.7" y="374.0" font-size="8.5" class="svg-tick" text-anchor="end" transform="rotate(-35,457.7,374.0)">2009</text>
+  <text x="471.6" y="374.0" font-size="8.5" class="svg-tick" text-anchor="end" transform="rotate(-35,471.6,374.0)">2010</text>
+  <text x="485.5" y="374.0" font-size="8.5" class="svg-tick" text-anchor="end" transform="rotate(-35,485.5,374.0)">2011</text>
+  <text x="499.4" y="374.0" font-size="8.5" class="svg-tick" text-anchor="end" transform="rotate(-35,499.4,374.0)">2012</text>
+  <text x="513.3" y="374.0" font-size="8.5" class="svg-tick" text-anchor="end" transform="rotate(-35,513.3,374.0)">2013</text>
+  <text x="527.1" y="374.0" font-size="8.5" class="svg-tick" text-anchor="end" transform="rotate(-35,527.1,374.0)">2014</text>
+  <text x="541.0" y="374.0" font-size="8.5" class="svg-tick" text-anchor="end" transform="rotate(-35,541.0,374.0)">2015</text>
+  <text x="554.9" y="374.0" font-size="8.5" class="svg-tick" text-anchor="end" transform="rotate(-35,554.9,374.0)">2016</text>
+  <text x="568.8" y="374.0" font-size="8.5" class="svg-tick" text-anchor="end" transform="rotate(-35,568.8,374.0)">2017</text>
+  <text x="582.7" y="374.0" font-size="8.5" class="svg-tick" text-anchor="end" transform="rotate(-35,582.7,374.0)">2018</text>
+  <text x="596.6" y="374.0" font-size="8.5" class="svg-tick" text-anchor="end" transform="rotate(-35,596.6,374.0)">2019</text>
+  <text x="610.5" y="374.0" font-size="8.5" class="svg-tick" text-anchor="end" transform="rotate(-35,610.5,374.0)">2020</text>
+  <text x="624.3" y="374.0" font-size="8.5" class="svg-tick" text-anchor="end" transform="rotate(-35,624.3,374.0)">2021</text>
+  <text x="638.2" y="374.0" font-size="8.5" class="svg-tick" text-anchor="end" transform="rotate(-35,638.2,374.0)">2022</text>
+  <text x="652.1" y="374.0" font-size="8.5" class="svg-tick" text-anchor="end" transform="rotate(-35,652.1,374.0)">2023</text>
+  <text x="666.0" y="374.0" font-size="8.5" class="svg-tick" text-anchor="end" transform="rotate(-35,666.0,374.0)">2024</text>
+  <!-- 系列 -->
+  <polyline points="55.0,184.8 68.9,192.4 82.8,207.5 96.7,234.7 110.5,242.2 124.4,239.2 138.3,224.1 152.2,133.5 166.1,107.8 180.0,95.8 193.9,71.6 207.8,213.5 221.6,316.2 235.5,369.1 249.4,347.9 263.3,355.5 277.2,360.0 291.1,347.9 305.0,355.5 318.8,373.6 332.7,372.1 346.6,381.1 360.5,393.2 374.4,399.3 388.3,391.7 402.2,372.1 416.0,325.3 429.9,249.8 443.8,227.1 457.7,355.5 471.6,376.6 485.5,341.9 499.4,331.3 513.3,316.2 527.1,301.1 541.0,292.1 554.9,286.0 568.8,280.0 582.7,278.5 596.6,269.4 610.5,296.6 624.3,292.1 638.2,285.3 652.1,273.9 666.0,264.9" fill="none" stroke="#1e88e5" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+  <circle cx="55.0" cy="184.8" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="68.9" cy="192.4" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="82.8" cy="207.5" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="96.7" cy="234.7" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="110.5" cy="242.2" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="124.4" cy="239.2" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="138.3" cy="224.1" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="152.2" cy="133.5" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="166.1" cy="107.8" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="180.0" cy="95.8" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="193.9" cy="71.6" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="207.8" cy="213.5" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="221.6" cy="316.2" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="235.5" cy="369.1" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="249.4" cy="347.9" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="263.3" cy="355.5" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="277.2" cy="360.0" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="291.1" cy="347.9" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="305.0" cy="355.5" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="318.8" cy="373.6" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="332.7" cy="372.1" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="346.6" cy="381.1" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="360.5" cy="393.2" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="374.4" cy="399.3" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="388.3" cy="391.7" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="402.2" cy="372.1" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="416.0" cy="325.3" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="429.9" cy="249.8" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="443.8" cy="227.1" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="457.7" cy="355.5" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="471.6" cy="376.6" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="485.5" cy="341.9" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="499.4" cy="331.3" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="513.3" cy="316.2" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="527.1" cy="301.1" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="541.0" cy="292.1" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="554.9" cy="286.0" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="568.8" cy="280.0" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="582.7" cy="278.5" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="596.6" cy="269.4" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="610.5" cy="296.6" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="624.3" cy="292.1" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="638.2" cy="285.3" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="652.1" cy="273.9" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="666.0" cy="264.9" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <!-- 凡例 -->
+  <rect x="678.0" y="58.0" width="12" height="3" fill="#1e88e5" rx="1.5"/>
+  <text x="693.0" y="62.0" font-size="9" class="svg-axis">全国平均</text>
+  <!-- 軸ラベル -->
+
+  <text x="13" y="209.0" text-anchor="middle" font-size="10" class="svg-axis" transform="rotate(-90,13,209.0)">商業地変動率の推移（全国平均）（％）</text>
+</svg>

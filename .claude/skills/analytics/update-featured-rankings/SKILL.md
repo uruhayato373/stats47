@@ -4,7 +4,19 @@ description: GA4 PVデータから注目ランキングを自動更新する（i
 disable-model-invocation: true
 argument-hint: "[--days 7] [--limit 8] [--dry-run]"
 primary_agent: ga4-analyst
+status: dead
 ---
+
+> ⚠️ **このスキルは現在 dead（実行不可）です。** 機構の核だった D1 `indicators.is_featured` UPDATE は
+> 完全DBレス移行で消滅した（`indicators` テーブル廃止 / バッチ `packages/database/scripts/update-featured-rankings.ts`
+> 削除）。featured は現在 **git TS の `isFeatured` / `featuredOrder`**（`packages/data-configs/src/metrics/<key>.ts`）が
+> SSOT で、exporter `packages/ranking/src/exporters/ranking-items-per-url-snapshot.ts` が `app/home/featured.json` を
+> 生成する **手動キュレーション**。
+>
+> **GA4 PV→featured 自動選出を復活させたい場合の DBレス再実装**: GA4 PV 取得 → 上位 key 選定（カテゴリ分散）→
+> 該当 metric config TS の `isFeatured: true` / `featuredOrder: N` を書き換え → exporter 再実行 → `app/home/featured.json`
+> を R2 push。現状この writer は無い。backlog: `docs/02_実装計画/04_機能バックログ.md` `[DEAD-SKILL-DBLESS-TRIAGE]`。
+> **以下は再実装時の参考として残す歴史的記述（そのまま実行しない）。**
 
 GA4 API からランキングページの日次 PV を取得し、PV 上位のランキングを注目ランキング（`indicators.is_featured`）として自動更新する。
 

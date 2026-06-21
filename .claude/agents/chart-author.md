@@ -25,7 +25,13 @@ description: ブログ / note 記事用の SVG / Remotion チャート生成専�
 | `fetch-ranking-data-r2.mjs` | 記事執筆用データ取得 (R2 観測値直 fetch)。出典 `.source.json` manifest も生成（SSOT=rankingKey 参照） |
 | `regenerate-ranking-cards.mjs` | 既存記事のランキングを一括カード化（SSOT再取得→横長+縦長再生成、dry-run=staging） |
 | `regenerate-tile-maps.ts` | タイルマップを SSOT から統一デザイン再生成（`--mapping`/trusted/Derived・自己検算）。正典 §1.6/§1.7 |
+| `rerender-ranking-columns.mts` | **ranking のサイズ統一**: 既存検証済み json から 960×404 columns を直接再描画（値不変・サイズのみ正規化）。非正規サイズ（760×532 等）の是正用 |
+| `restore-{ranking,scatter,findings}-from-svg.mjs` | neither（json消失=絵だけ）の SSOT 再生成。旧SVG値↔SSOT照合（捏造防止）。手法 `.claude/state/blog/neither-restore-method.md` |
 | `build-lineage-queue.mjs` | 全SVGのデータ系譜を棚卸し→復元キュー生成（`.claude/state/blog/svg-lineage-queue.json`）。系譜整備の真実源 |
+
+> **★アスペクト比統一（再発防止）**: チャート生成・是正後は **カタログ別の正規 viewBox 幅**（§5）を守ること。
+> `quality-gate.mjs` / `audit-chart-quality.mjs` の `lintSvgSize` が ranking=960/680・tilemap=600・findings=960 を
+> **blocker** で検査する（scatter/line/stacked は warn・順次統一）。非正規サイズを作らない／見つけたら上記ツールで再描画する。
 
 ## 担当外
 

@@ -32,6 +32,7 @@ import { fileURLToPath } from "node:url";
 
 import { checkArticleFactual } from "../lib/article-factual-check.mjs";
 import { lintSourceLinkPlacement } from "../lib/article-structure-lint.mjs";
+import { lintSvgSize } from "../lib/svg-lint.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -368,6 +369,33 @@ if (lineageMissing.length > 0) {
       `${lineageMissing.slice(0, 3).join(", ")}${lineageMissing.length > 3 ? " 他" : ""} — ` +
       `各 SVG は .json + .source.json の3点セット必須 (§1.5/§1.7)。` +
       `generator(generate-article-charts)を通すか SSOTから復元(backfill-source/regenerate-*)して揃えること`,
+  );
+}
+
+// SVG サイズ統一 gate (2026-06-21 追加・再発防止): 各 data/*.svg の viewBox 幅がカタログの
+// 正規サイズ (blog-svg-chart-standards.md §5) に一致するか検査。統一済み (ranking 960/680・
+// tilemap 600・findings 960) は blocker / 未統一 (scatter/line/stacked) は warning。
+// 新規記事・校正で非正規サイズ SVG が混入するのを公開前に止める。
+const sizeBlockers = [];
+const sizeWarnings = [];
+for (const base of svgRefs) {
+  const svgFile = path.join(dataDir, `${base}.svg`);
+  if (!fs.existsSync(svgFile)) continue; // 欠落は lineage gate が別途捕捉
+  const { errors, warnings } = lintSvgSize(`${base}.svg`, fs.readFileSync(svgFile, "utf8"));
+  sizeBlockers.push(...errors);
+  sizeWarnings.push(...warnings);
+}
+checks.svgSizeViolations = sizeBlockers.length + sizeWarnings.length;
+if (sizeBlockers.length > 0) {
+  blockers.push(
+    `SVG 非正規サイズ ${sizeBlockers.length} 件 (アスペクト比統一): ` +
+      `${sizeBlockers.slice(0, 2).join(" / ")}${sizeBlockers.length > 2 ? " 他" : ""}`,
+  );
+}
+if (sizeWarnings.length > 0) {
+  warnings.push(
+    `SVG 非正規サイズ ${sizeWarnings.length} 件 (未統一カタログ): ` +
+      `${sizeWarnings.slice(0, 2).join(" / ")}${sizeWarnings.length > 2 ? " 他" : ""}`,
   );
 }
 

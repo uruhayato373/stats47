@@ -13,6 +13,11 @@ import iconv from "iconv-lite";
 
 import type { KsjCodeConfig } from "./types";
 
+interface UnzipperFile {
+  path: string;
+  buffer(): Promise<Buffer>;
+}
+
 /**
  * ダウンロード URL を構築
  */
@@ -155,7 +160,7 @@ async function extractAndConvertShapefile(
   const directory = await unzipper.Open.file(zipPath);
 
   // .shp / .dbf / .prj を全て抽出
-  const shpEntries = new Map<string, Map<string, unzipper.File>>();
+  const shpEntries = new Map<string, Map<string, UnzipperFile>>();
   for (const entry of directory.files) {
     const ext = path.extname(entry.path).toLowerCase();
     if ([".shp", ".dbf", ".shx", ".prj", ".cpg"].includes(ext)) {

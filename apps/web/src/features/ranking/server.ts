@@ -1,18 +1,11 @@
 import "server-only";
 
-import { cache } from "react";
-
-import {
-  readFeaturedRankingItemsFromR2,
-  readRankingItemFromR2,
-} from "@stats47/ranking/server";
+import { readFeaturedRankingItemsFromR2 } from "@stats47/ranking/server";
 import { err, type Result } from "@stats47/types";
 
 import type { RankingItem } from "@stats47/ranking";
 
-// cache() でリクエストレベル dedupe（generateMetadata + ページ本体の重複排除）。
-// R2 snapshot 経由なので D1 read は発生しない。reader 内部にも module-level cache あり。
-export const cachedFindRankingItem = cache(readRankingItemFromR2);
+export { cachedFindRankingItem } from "./lib/cached-ranking-item";
 
 /**
  * おすすめランキングを取得する
@@ -34,9 +27,13 @@ export { RankingItemsSidebar } from "./components/RankingSidebar";
 export { RelatedRankingsGrid } from "./components/RelatedRankingsGrid/RelatedRankingsGrid";
 export { RankingPageCardsContainer } from "./components/RankingPageCards";
 export { RelatedArticlesCard } from "./components/RankingSidebar/RelatedArticlesCard";
+export * from "./components/RankingKeyPage/server";
 
 // Server components (sidebar cards)
 export { PortStatisticsMapCard } from "./components/RankingSidebar/PortStatisticsMapCard";
 
 // Cached category items reader (R2) — server-only を server entry に閉じ込め、app/ から index 経由でなく server から参照させる
 export { readRankingItemsByCategory } from "./lib/cached-category-items";
+
+export { loadRankingPageModel } from "./services/load-ranking-page-model";
+export { getRankingPageMetadata, getRankingStaticParams } from "./services/ranking-page-route";

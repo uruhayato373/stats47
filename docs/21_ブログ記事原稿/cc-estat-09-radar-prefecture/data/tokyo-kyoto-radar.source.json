@@ -1,0 +1,17 @@
+{
+  "kind": "ranking-composite",
+  "chart": "radar",
+  "description": "東京都(13000)と京都府(26000)の6指標レーダー。各軸は全47都道府県でmin-max正規化(0..1)、medical/crimeは『低い方が良い』ため1から引いて反転。値・rankはR2 app/ranking SSOTからの確定値。",
+  "prefectures": ["13000", "26000"],
+  "axes": [
+    { "axis": "population", "rankingKey": "japanese-population",                             "year": "2024", "invert": false },
+    { "axis": "income",     "rankingKey": "annual-income-per-household",                     "year": "2019", "invert": false },
+    { "axis": "education",  "rankingKey": "per-capita-education-expenditure-pref-municipal", "year": "2022", "invert": false },
+    { "axis": "medical",    "rankingKey": "national-medical-expense-per-person",            "year": "2022", "invert": true  },
+    { "axis": "crime",      "rankingKey": "criminal-recognition-count",                      "year": "2023", "invert": true  },
+    { "axis": "tourism",    "rankingKey": "tourism-resource-count",                          "year": "2014", "invert": false }
+  ],
+  "source": "r2:app/ranking/<key>/values.json (partitions[last])",
+  "transform": "per-axis min-max over 47 prefs; invert=1-n for medical/crime",
+  "restore": "node /tmp/build-radar.mjs (R2 から再取得→正規化→tokyo-kyoto-radar.json) → node /tmp/render-radar.mjs (radar SVG)"
+}

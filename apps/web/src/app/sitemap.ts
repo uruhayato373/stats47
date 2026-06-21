@@ -255,7 +255,7 @@ async function getTagPages(): Promise<MetadataRoute.Sitemap> {
   // 各 tag の最新 publishedAt を slug→tags リレーション無しで安価に解決するため、
   // 全 article から tagKey 別の max(publishedAt) を組み立てる。
   // 全 article 取得は snapshot in-memory cache 経由なので追加 fetch は発生しない。
-  const { readBlogSnapshotMetaFromR2: _unused, readTagsForArticlesFromR2 } =
+  const { readTagsForArticlesFromR2 } =
     await import("@/features/blog/repositories/blog-snapshot-reader");
   const slugTagMap = await readTagsForArticlesFromR2(
     articlesAll.map((a) => a.slug),

@@ -8,7 +8,7 @@ import type { RankingValue } from "../../types";
 
 /**
  * 複数 metric の rank=1 行を R2 から一括取得 (FeaturedRankings 等)。
- * Phase 6 以降: D1 単発 SELECT ではなく metric 単位の R2 file を並列 fetch。
+ * Phase 6 以降: 単発 SELECT ではなく metric 単位の R2 file を並列 fetch。
  */
 export async function listTopRankingValuesBatch(
   items: { rankingKey: string; yearCode: string }[],

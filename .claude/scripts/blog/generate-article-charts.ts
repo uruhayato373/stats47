@@ -176,7 +176,10 @@ function genBarChartSvg(data, layoutOverride) {
 
   const sorted = [...items].sort((a, b) => (b.value ?? 0) - (a.value ?? 0));
   const top = sorted.slice(0, N);
-  const bottom = sorted.slice(-N).reverse();
+  // 下位 N 件: sorted は降順なので slice(-N) は「下位の中で値が大きい順」=
+  // 表示ランク 43→47 と昇順で一致する。reverse すると最下位が先頭に来て
+  // 連番ランク (43..47) と名前がズレる (rank fabrication) ため reverse しない。
+  const bottom = sorted.slice(-N);
 
   const barItems = [
     ...top.map((it, i) => ({

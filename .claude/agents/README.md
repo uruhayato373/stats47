@@ -2,7 +2,7 @@
 
 `.claude/agents/` に定義されたサブエージェント群。Agent tool の `subagent_type` または直接起動で利用する。
 
-**現在: Phase 1-5 完了 (33 体構成)**。並行運用最適化のため、ドメイン × フェーズで責務を細分化し、各 agent に「担当 skills / 必読 rules / 触る state」を明示している。旧 17 体のうち `data-pipeline` `db-manager` は Phase 6.7 整理で削除済 (-2)、新 18 agent 追加。差し引き 33 体。残る縮退 agent は新 agent に役割委譲済 (Session B で 4 件移動・24 件は責務上維持)。詳細は移行ステータス表。
+**現在: Phase 1-5 完了 (37 体構成)**。並行運用最適化のため、ドメイン × フェーズで責務を細分化し、各 agent に「担当 skills / 必読 rules / 触る state」を明示している。旧 17 体のうち `data-pipeline` `db-manager` は Phase 6.7 整理で削除済 (-2)、新 18 agent 追加。差し引き 33 体。**2026-06-21 に ranking 系 4 体 (`ranking-ui-manager` / `ranking-publisher` / `ranking-content-author` / `ranking-content-critic`) を新設 (+4) → 37 体。**残る縮退 agent は新 agent に役割委譲済 (Session B で 4 件移動・24 件は責務上維持)。詳細は移行ステータス表。
 
 ## 設計思想
 
@@ -22,7 +22,7 @@
 | `knowledge-curator` 🆕 | 失敗・学びの記録 + auto memory 整理 | strategy-advisor 分離 |
 | `improvement-triage` 🆕 | 改善バックログ整理 + status 更新 (`docs/02_実装計画/03_改善バックログ.md` 排他 append) | strategy-advisor 分離 |
 
-## Tier 2: Data / Infra (5 体)
+## Tier 2: Data / Infra (6 体)
 
 | agent | role | 派生元 |
 |---|---|---|
@@ -31,8 +31,9 @@
 | `db-schema-manager` 🆕 | スキーマ・migration・reset 専任 | db-manager 分割 |
 | `snapshot-exporter` 🆕 | D1 → R2 snapshot / Remotion 派生 JSON 生成 | db-manager 分割 |
 | `r2-publisher` 🆕 | R2 push / pull / du 専任 | db-manager 分割 |
+| `ranking-publisher` 🆕 | ranking 公開多段 (generate-ranking-items / KNOWN・SITEMAP・INDEXABLE 再生成 / deploy / purge / 本番実測) のオーケストレーション。観測値=data-ingester、push=r2-publisher、deploy=devops-runner に委譲 | 2026-06-21 新設 |
 
-## Tier 3: Content - Blog / Note (7 体)
+## Tier 3: Content - Blog / Note / Ranking (9 体)
 
 | agent | role | 派生元 |
 |---|---|---|
@@ -42,6 +43,8 @@
 | `chart-author` 🆕 | SVG / Remotion チャート生成 (blog / note 共通) | blog-editor + note-manager 分離 |
 | `blog-critic` 🆕 | expert review / panel review | blog-editor 分割 |
 | `note-manager` | note.com 公開LC / 公開URLトラッキング (完全DBレス: D1 note_articles 廃止、SSOT=R2 `note/<vertical>/<slug>/`。docs/31 は ephemeral outbox。chart は chart-author に委譲) | 既存縮退 |
+| `ranking-content-author` 🆕 | ranking ページの ai-content (考察/地域傾向/FAQ/県別解説) 生成・是正 + 決定的ゲート (audit-ai-content.mjs)。生成は image-prompt-curator/data-ingester から移管 | 2026-06-21 新設 |
+| `ranking-content-critic` 🆕 | ranking ai-content の意味レビュー (重複/読者価値/トーン)。read-only、修正は author に委譲。blog-critic の ranking 版 | 2026-06-21 新設 |
 
 ## Tier 4: SNS (5 体)
 
@@ -62,13 +65,14 @@
 | `performance-auditor` 🆕 | PSI / Lighthouse / Cloudflare cost | seo-auditor 分割 |
 | `adsense-analyst` 🆕 | AdSense / アフィリエイト収益計測 | seo-auditor 分割 + new |
 
-## Tier 6: Theme / UI (5 体)
+## Tier 6: Theme / UI (6 体)
 
 | agent | role | 派生元 |
 |---|---|---|
 | `theme-designer` | テーマ → IndicatorSet 設計 (どの指標を載せるか) | 既存 |
 | `theme-component-builder` | page_components 監査・INSERT (旧 theme-enhancer) | リネーム |
 | `theme-ui-manager` 🆕 | テーマページ UI 層の統一・監査・是正 (レイアウト/見出し/セレクタ/カード構成/コピー)。重複セレクタ・古い「地図」コピー等のドリフトを管理 | 2026-06-20 新設 |
+| `ranking-ui-manager` 🆕 | ランキングページ (/ranking/*) UI 層の統一・監査・是正 (レイアウト/見出し/パンくず/サイドバー/SEO構造化データ/コピー)。theme-ui-manager の ranking 版。データ=data-ingester、公開=ranking-publisher に委譲 | 2026-06-21 新設 |
 | `ui-reviewer` | melta-ui 準拠 + UI panel review | 既存 |
 | `image-prompt-curator` 🆕 | OGP / note 表紙 / SNS 静止素材プロンプト生成 | sns-renderer + note-manager 分離 |
 
@@ -91,6 +95,8 @@
 | `x-strategist` + `instagram-strategist` + `youtube-strategist` | API / state / metrics サブディレクトリが完全分離 |
 | `gsc-analyst` + `improvement-triage` | gsc-analyst → `.claude/state/metrics/gsc/` write、triage → `docs/02_実装計画/03_改善バックログ.md` 排他 append |
 | `code-reviewer` + `ui-consistency-reviewer` + `tdd-guide` | 全員 read-only、git diff のみ |
+| `ranking-ui-manager` + `ranking-publisher` | `features/ranking/**` (UI) vs `config/*-ranking-keys.ts` + 公開 scripts (publish) で非重複 |
+| `ranking-content-author` + `ranking-content-critic` | author=`app/ranking/<key>/ai-content.json` write (key単位) vs critic=read-only。非衝突 |
 
 **禁則**:
 - D1 への並列 write 禁止 (better-sqlite3 単一プロセス前提)。同 D1 への `data-ingester` / `db-schema-manager` 起動は逐次
@@ -100,7 +106,10 @@
 
 | シナリオ | エージェント連携 |
 |---|---|
-| ランキング追加 → SNS 一式 | estat-researcher → data-ingester → snapshot-exporter → r2-publisher → x/IG/YT-strategist (3 並列) |
+| ランキング追加 → SNS 一式 | estat-researcher → data-ingester → snapshot-exporter → r2-publisher → ranking-publisher (公開確定) → x/IG/YT-strategist (3 並列) |
+| ランキング本番公開 (isActive→200) | ranking-publisher (orchestrator) → data-ingester (観測値確認) → devops-runner (deploy) → /purge-cdn → 本番実測 |
+| ランキング UI ドリフト是正 | ranking-ui-manager (監査 → 外科的是正 → localhost 確認、デプロイは ranking-publisher) |
+| ranking ai-content 生成 → 公開 | ranking-content-author (生成 → audit-ai-content.mjs) → ranking-content-critic (意味レビュー) → r2-publisher (R2 反映) |
 | GSC 中位クエリ → 量産 | gsc-analyst → trend-scout → article-writer × N (並列, metric→R2直執筆) → chart-author → blog-editor (publish) |
 | 週次 PDCA | strategy-advisor (orchestrator) → gsc/ga4/adsense-analyst (3 並列) → improvement-triage |
 | トレンド → ブログ記事 | trend-scout → article-writer (metric→R2直執筆) → chart-author → blog-critic → blog-editor (publish) |

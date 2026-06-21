@@ -1,0 +1,7 @@
+{
+  "kind": "authored",
+  "label": "この記事でわかったこと",
+  "transform": "記事本文の findings 要約 (data/*.json と整合)",
+  "source": "記事内分析 (R2 app/ranking 由来の数値)",
+  "generatedBy": "manual (findings card)"
+}

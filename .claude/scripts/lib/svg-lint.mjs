@@ -88,6 +88,57 @@ export function lintSvgContent(content) {
   return { errors, warnings };
 }
 
+// ---------- カタログ別 正規サイズ (アスペクト比統一・再発防止) ----------
+// 正典: blog-svg-chart-standards.md §5。filename→chartType→正規 viewBox 幅。
+// width が固定の不変量 (高さは件数/内容で可変)。違反は「非正規サイズ = 再生成すべき」。
+// 統一済みカタログ (ENFORCED) = error / 未統一 = warning (統一完了後 error に昇格)。
+const CANONICAL_WIDTH = {
+  bar: [960, 680],          // columns 960 (標準) / single 680。760/720/600 等の旧サイズは違反
+  "tile-grid": [600],       // 600×700
+  summary: [960],           // findings card 幅 960 (高さ可変)
+  line: [680],              // 680×420
+  scatter: [960],           // 960×624
+  "stacked-bar": [680],     // 680×可変
+};
+// 全カタログ統一完了 (2026-06-21): both 全件が正規幅。error で再発防止する。
+const SIZE_ENFORCED = new Set(["bar", "tile-grid", "summary", "scatter", "line", "stacked-bar"]);
+
+/** SVG ファイル名 → chartType (generate-article-charts の classifyChartType と同等の suffix 判定) */
+export function classifyChartTypeFromName(filename) {
+  const f = String(filename).replace(/\.svg$/i, "").toLowerCase();
+  if (/(?:-prefecture-rankings|-top5-bottom5|-top-bottom|-rate-ranking|-income-ranking|-ranking|-rankings)$/.test(f)) return "bar";
+  if (/(?:-tile-grid|-income-map|-ratio-map|-map)$/.test(f)) return "tile-grid";
+  if (/(?:-national-trend|-timeseries|-trend)$/.test(f)) return "line";
+  if (/-scatter$/.test(f)) return "scatter";
+  if (/-stacked$/.test(f)) return "stacked-bar";
+  if (/(?:-summary-findings|-findings)$/.test(f)) return "summary";
+  return null; // 分類不能 (無意味名 inline-chart-N 等) は対象外
+}
+
+/**
+ * SVG の viewBox 幅がカタログの正規サイズに一致するか検査する (アスペクト比統一・再発防止)。
+ * @param {string} filename - SVG ファイル名 (chartType 推定に使う)
+ * @param {string} content - SVG 文字列
+ * @returns {{ errors: string[], warnings: string[] }}
+ */
+export function lintSvgSize(filename, content) {
+  const errors = [];
+  const warnings = [];
+  const ct = classifyChartTypeFromName(filename);
+  if (!ct || !CANONICAL_WIDTH[ct]) return { errors, warnings }; // 分類不能は対象外
+  const m = String(content).match(/viewBox\s*=\s*"0 0 (\d+(?:\.\d+)?) (\d+(?:\.\d+)?)"/);
+  if (!m) return { errors, warnings }; // viewBox 欠落は別 check (lintSvgContent) が捕捉
+  const w = Math.round(parseFloat(m[1]));
+  const allowed = CANONICAL_WIDTH[ct];
+  if (!allowed.includes(w)) {
+    const msg = `非正規サイズ: ${ct} の viewBox 幅 ${w} は正規 [${allowed.join("/")}] でない (${path_base(filename)})。` +
+      ` svg-builder で再生成して統一する (ranking は rerender-ranking-columns.mts、tile/scatter/line は対応 restorer)`;
+    (SIZE_ENFORCED.has(ct) ? errors : warnings).push(msg);
+  }
+  return { errors, warnings };
+}
+function path_base(p) { const s = String(p).split("/"); return s[s.length - 1]; }
+
 /**
  * Markdown 本文からインライン <svg>...</svg> ブロックを抽出する。
  * @param {string} md - Markdown 文字列

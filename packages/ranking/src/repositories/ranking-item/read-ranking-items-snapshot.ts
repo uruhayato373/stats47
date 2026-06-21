@@ -39,6 +39,10 @@ function warnMissingR2Snapshot(bindings: Record<string, unknown>, message: strin
   }
 }
 
+function isNextProductionBuild(): boolean {
+  return process.env.NEXT_PHASE === "phase-production-build";
+}
+
 // ────────────────────────────────────────────────────────────────────────────
 // Phase 1 — URL 単位の小さい JSON を使う関数
 // ────────────────────────────────────────────────────────────────────────────
@@ -124,6 +128,9 @@ export async function readRankingItemFromR2(
     const item = snapshot.item;
     return ok(item.areaType === areaType ? item : null);
   } catch (error) {
+    if (isNextProductionBuild()) {
+      return ok(null);
+    }
     logger.error({ error, rankingKey, areaType }, "readRankingItemFromR2: failed");
     return err(error instanceof Error ? error : new Error(String(error)));
   }
@@ -148,7 +155,7 @@ export async function readRankingItemByKeyFromR2(
 
 /**
  * 全 ranking-item を R2 の per-key item.json (`app/ranking/<key>/item.json`) から走査して返す。
- * 完全DBレス (docs/01_技術設計/19): D1 `metrics` を読む `listRankingItemsWithTags` の代替。
+ * 完全DBレス (docs/01_技術設計/19): `listRankingItemsWithTags` の R2 代替。
  * item.json の `.item` は tags まで含む完全な RankingItemWithTags なのでそのまま使える。
  * 旧来の list 系 R2 リーダはモノリス `app/ranking-items/all.json` を読むが、これは廃止予定 (現在欠落)
  * のため、per-key ファイル群を直接イテレートする。
@@ -258,6 +265,10 @@ export async function readTagsForItemFromR2(
 export async function readRankingItemsBySurveyFromR2(
   surveyId: string,
 ): Promise<Result<CategoryRankingItem[], Error>> {
+  if (isNextProductionBuild()) {
+    return ok([]);
+  }
+
   try {
     const snapshot = await fetchFromR2AsJson<SurveyItemsSnapshot>(
       surveyItemsKeyPath(surveyId),
@@ -283,6 +294,12 @@ export async function readRankingItemsBySurveyFromR2(
 export async function readActiveRankingKeysFromR2(
   areaType: AreaType,
 ): Promise<Result<{ rankingKey: string; areaType: string }[], Error>> {
+  if (isNextProductionBuild() && areaType === "prefecture") {
+    return ok(
+      [...KNOWN_RANKING_KEYS].map((rankingKey) => ({ rankingKey, areaType })),
+    );
+  }
+
   try {
     const snapshot = await fetchFromR2AsJson<RankingItemsSnapshot>(
       RANKING_ITEMS_SNAPSHOT_KEY,
@@ -307,6 +324,15 @@ export async function readActiveRankingKeysFromR2(
 export async function readActiveKeysForSitemapFromR2(): Promise<
   Result<{ rankingKey: string; updatedAt: string | null }[], Error>
 > {
+  if (isNextProductionBuild()) {
+    return ok(
+      [...KNOWN_RANKING_KEYS].map((rankingKey) => ({
+        rankingKey,
+        updatedAt: null,
+      })),
+    );
+  }
+
   try {
     const snapshot = await fetchFromR2AsJson<RankingItemsSnapshot>(
       RANKING_ITEMS_SNAPSHOT_KEY,
@@ -396,6 +422,10 @@ export async function readRankingItemsByGroupKeyFromR2(
   groupKey: string,
   areaType: AreaType,
 ): Promise<Result<GroupRankingItem[], Error>> {
+  if (isNextProductionBuild()) {
+    return ok([]);
+  }
+
   try {
     const snapshot = await fetchFromR2AsJson<RankingItemsSnapshot>(
       RANKING_ITEMS_SNAPSHOT_KEY,
@@ -432,6 +462,10 @@ export async function readRankingItemsByTagFromR2(
   tagKey: string,
   categoryNameLookup?: (categoryKey: string) => Promise<string | null>,
 ): Promise<Result<RankingConfigResponse, Error>> {
+  if (isNextProductionBuild()) {
+    return err(new Error(`Skip ranking items by tag during production build: ${tagKey}`));
+  }
+
   try {
     const snapshot = await fetchFromR2AsJson<RankingItemsSnapshot>(
       RANKING_ITEMS_SNAPSHOT_KEY,

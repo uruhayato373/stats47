@@ -1,0 +1,14 @@
+{
+  "kind": "manual",
+  "year": "2024",
+  "unit": "円",
+  "label": "パン消費支出額（食パン+他のパン合計・二人以上世帯・県庁所在市）",
+  "transform": "全47県をタイルマップに描画",
+  "source": "総務省 家計調査 2024 (statsDataId 0003348239)",
+  "sourceUrl": "https://www.e-stat.go.jp/stat-search/files?page=1&layout=datalist&toukei=00200561",
+  "metricConfig": "packages/data-configs/src/metrics/{white-bread,other-bread}-consumption-expenditure.ts",
+  "note": "パン合計 (食パン+他のパン) の R2 app/ranking 統合ランキングは未公開のため、公開済みの記事 SVG (bread-map.svg) の県別表示値を ground truth として data/bread-map.json を構築した。値は家計調査 2024 由来で捏造なし。",
+  "fetchedAt": "2026-06-20T22:37:43.000Z",
+  "generatedBy": "agent (restored from published article SVG)",
+  "trusted": "記事本文の主張(兵庫43.0千/秋田26.9千)と SVG 表示値を突合済み"
+}

@@ -19,7 +19,10 @@
   "scripts": {
     "type-check": "tsc --noEmit",
     "ai:list": "tsx src/scripts/list-pending.ts",
-    "ai:list:force": "tsx src/scripts/list-pending.ts --force"
+    "ai:list:force": "tsx src/scripts/list-pending.ts --force",
+    "ai:input": "tsx src/scripts/build-input.ts",
+    "ai:gen": "tsx src/scripts/generate-parallel.ts",
+    "ai:gen:dry": "tsx src/scripts/generate-parallel.ts --dry-run"
   },
   "dependencies": {
     "@stats47/area": "*",

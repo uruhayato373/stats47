@@ -1,0 +1,43 @@
+<!-- data-source: summary-findings.json | generated: 2026-06-20T22:10:39.220Z -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 570" width="960" height="570" font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" role="img" aria-label="この記事でわかったこと">
+  <style>
+    .svg-bg{fill:#ffffff}
+    .svg-plot{fill:#f9fafb}
+    .svg-plot-border{stroke:#d1d5db}
+    .svg-title{fill:#1f2937}
+    .svg-axis{fill:#374151}
+    .svg-tick{fill:#6b7280}
+    .svg-grid{stroke:#e5e7eb}
+    @media (prefers-color-scheme:dark){
+    .svg-bg{fill:#0f172a}
+    .svg-plot{fill:#1e293b}
+    .svg-plot-border{stroke:#334155}
+    .svg-title{fill:#e2e8f0}
+    .svg-axis{fill:#cbd5e1}
+    .svg-tick{fill:#94a3b8}
+    .svg-grid{stroke:#334155}
+    }
+  </style>
+  <rect width="960" height="570" class="svg-bg"/>
+  <text x="480" y="46" text-anchor="middle" font-size="26" font-weight="bold" class="svg-title">この記事でわかったこと</text>
+  <rect x="40" y="72" width="880" height="94" class="svg-plot" rx="8"/>
+  <circle cx="58" cy="119" r="18" fill="#dc2626"/>
+  <text x="58" y="125" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">1</text>
+  <text x="90" y="103.6" font-size="18" class="svg-title"><tspan x="90" dy="0">外国人延べ宿泊者数は全国で約1.39億人泊（2024年度</tspan><tspan x="90" dy="22">）。上位4都道府県（東京・大阪・京都・北海道）だけで約6</tspan><tspan x="90" dy="22">7.5%を占める</tspan></text>
+  <rect x="40" y="176" width="880" height="72" class="svg-plot" rx="8"/>
+  <circle cx="58" cy="212" r="18" fill="#dc2626"/>
+  <text x="58" y="218" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">2</text>
+  <text x="90" y="207.6" font-size="18" class="svg-title"><tspan x="90" dy="0">1位東京都（約4,743万人泊）と最下位島根県（約7万人</tspan><tspan x="90" dy="22">泊）の差は約700倍。地方分散は依然として進んでいない</tspan></text>
+  <rect x="40" y="258" width="880" height="94" class="svg-plot" rx="8"/>
+  <circle cx="58" cy="305" r="18" fill="#dc2626"/>
+  <text x="58" y="311" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">3</text>
+  <text x="90" y="289.6" font-size="18" class="svg-title"><tspan x="90" dy="0">外国人宿泊比率では東京51.8%・京都49.4%・大阪4</tspan><tspan x="90" dy="22">5.3%と、宿泊者の半数前後が外国人。オーバーツーリズム</tspan><tspan x="90" dy="22">のリスクが高い</tspan></text>
+  <rect x="40" y="362" width="880" height="72" class="svg-plot" rx="8"/>
+  <circle cx="58" cy="398" r="18" fill="#dc2626"/>
+  <text x="58" y="404" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">4</text>
+  <text x="90" y="393.6" font-size="18" class="svg-title"><tspan x="90" dy="0">福岡32.2%・北海道25.4%は比率が中程度で、受入余</tspan><tspan x="90" dy="22">力が残る大都市圏外の集客地として注目される</tspan></text>
+  <rect x="40" y="444" width="880" height="94" class="svg-plot" rx="8"/>
+  <circle cx="58" cy="491" r="18" fill="#dc2626"/>
+  <text x="58" y="497" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">5</text>
+  <text x="90" y="475.6" font-size="18" class="svg-title"><tspan x="90" dy="0">全国合計は2019年の1.01億人泊から2024年に1.</tspan><tspan x="90" dy="22">39億人泊へV字回復し、コロナ前を約37%上回る過去最高</tspan><tspan x="90" dy="22">を記録した</tspan></text>
+</svg>

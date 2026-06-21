@@ -17,7 +17,15 @@ const loadAll = createSnapshotReader<SurveysSnapshot, Source[]>({
   fallback: [],
 });
 
+function isNextProductionBuild(): boolean {
+  return process.env.NEXT_PHASE === "phase-production-build";
+}
+
 export async function readSurveysFromR2(): Promise<Result<Source[], Error>> {
+  if (isNextProductionBuild()) {
+    return ok([]);
+  }
+
   try {
     return ok(await loadAll());
   } catch (error) {
@@ -29,6 +37,10 @@ export async function readSurveysFromR2(): Promise<Result<Source[], Error>> {
 export async function readSurveyByIdFromR2(
   surveyId: string,
 ): Promise<Result<Source | null, Error>> {
+  if (isNextProductionBuild()) {
+    return ok(null);
+  }
+
   try {
     const all = await loadAll();
     return ok(all.find((s) => s.id === surveyId) ?? null);

@@ -1,0 +1,9 @@
+{
+  "kind": "authored",
+  "label": "この記事でわかったこと (要点カード)",
+  "transform": "記事本文の findings を番号付きカードに描画",
+  "source": "記事本文 (米・パン・麺の分析結果の要約)",
+  "note": "authored summary。観測値ではないため factual-check / quality-gate の ground truth 索引対象外 (§1.5)。",
+  "fetchedAt": "2026-06-20T22:37:43.000Z",
+  "generatedBy": "agent"
+}

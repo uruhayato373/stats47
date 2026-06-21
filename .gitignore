@@ -164,6 +164,9 @@ inspect-knip.js
 # e-Stat city meta cache (巨大ローカルキャッシュ、コミット不要)
 .claude/state/estat-city-meta-cache/
 
+# セッションロック (session-guard.js のランタイム状態、マシン固有・コミット不要)
+.claude/state/session-locks/
+
 # git worktree (Agent isolation 用、リポジトリにコミットしない)
 .claude/worktrees/
 

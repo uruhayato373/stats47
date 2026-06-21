@@ -39,20 +39,3 @@ export function toPyramidChartData(
 
   return result;
 }
-
-/**
- * カテゴリ名から年齢階級部分を抽出する。
- * 例: "0～4歳人口（男）" → "0～4歳"
- */
-function extractAgeGroup(categoryName: string): string {
-  // "XX～XX歳" パターン
-  const rangeMatch = categoryName.match(/(\d+[～~]\d+歳)/);
-  if (rangeMatch) return rangeMatch[1];
-
-  // "100歳以上" パターン
-  const overMatch = categoryName.match(/(\d+歳以上)/);
-  if (overMatch) return overMatch[1];
-
-  // フォールバック: 人口・（男）（女）を除去
-  return categoryName.replace(/人口/, "").replace(/[（(][男女][）)]/, "").trim();
-}

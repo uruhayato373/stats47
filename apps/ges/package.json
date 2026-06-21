@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "generate": "tsx scripts/generate-projects.ts",
-    "generate-ports": "tsx scripts/generate-port-projects.ts"
+    "generate-ports": "tsx scripts/generate-port-projects.ts",
+    "type-check": "tsc --noEmit"
   },
   "dependencies": {
     "better-sqlite3": "^11.0.0"
