@@ -210,10 +210,9 @@ browser-use --headed --profile "Profile 5" state 2>&1 > /tmp/note-acct.txt
 主なポイント:
 - **Phase 7-Pricing**: `is_paid=true` + `price_jpy>0` のときだけ実行。有料ラジオをクリック → Shadow DOM 内 `<input id=price>` に JS で価格を上書き（`type` 不可: 初期値 300 と連結される）
 - **Phase 7-Boundary（有料境界・自動・2026-06-16 実機確定）**: 「有料エリア設定」ボタン → 境界設定画面で **`segmentsPaid[0]` の先頭見出しを錨**に有料ラインを自動設定。✅ **境界画面 DOM は確定済（update 11 本 + 新規 2 本連続成功）**。⚠️ **誤露出防止で最終「投稿/更新」前に境界を screenshot で目視確認**してから押す（エージェントが Read で screenshot 検証後に押下して可）。詳細は [references/scheduling.md](references/scheduling.md) Phase 7-Boundary
-- **Phase 7-Tags**: ハッシュタグは `hashtags.txt` から読んで入力する（**1 個ずつ click→type→Enter**。まとめて type すると combobox の value に連結され失敗）。note は最大 10 タグまで設定可能なので、`hashtags.txt` の先頭 10 個を使う。
+- **Phase 7-Tags**: ハッシュタグは `hashtags.txt` から読んで入力する（**1 個ずつ click→type→Enter**。まとめて type すると combobox の value に連結され失敗）。note は最大 99 タグまで設定可能。`hashtags.txt` に 90 個生成しているので全行を使う（99 未満に抑えてエラー回避）。
   ```bash
-  # 先頭 10 タグを取得
-  head -10 docs/31_note記事原稿/[vertical/]<slug>/hashtags.txt
+  cat docs/31_note記事原稿/[vertical/]<slug>/hashtags.txt
   ```
   `hashtags.txt` が無い場合は投稿を中断し `generate-note-hashtags.mjs` を先に実行する。
 - 「公開に進む」→ タグ入力（上記 Phase 7-Tags）→ マガジン追加 → 日時設定 → 投稿
