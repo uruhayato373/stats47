@@ -3,8 +3,9 @@ name: 📝 Blog remediation daily (今日のリライト10記事)
 # 是正ループの日次運用入口 (Claude Pro セッションで agent がリライトする運用)。
 # CI で Claude は動かさない (決定的・APIコストゼロ)。
 #   1. remediation-queue を最新化 (公開R2 audit + 最新GSC) → develop へ commit-back
-#   2. docs/21 (ephemeral outbox) を自動掃除: 公開済み (R2 にある) ドラフトを git rm。
+#   2. docs/21 (ephemeral outbox) を自動掃除: 公開済み (R2 と内容一致) ドラフトを git rm。
 #      広い git add で出戻りした残骸も翌日には自動で消える (2026-06-21 追加・残骸再発防止)
+#      内容一致を要求=brushup 改稿中 (R2 旧版と差分) を誤削除しない安全装置
 #   3. pending 上位 10 件を「今日のリライト」Issue に upsert 通知
 # 実リライトは人間が Claude セッションで `/brushup-blog --target queue --next 10` を回す。
 # 正典: docs/02_実装計画/06_ブログ品質是正ループ.md / .claude/rules/blog-data-schema.md §0
@@ -51,9 +52,9 @@ jobs:
           R2_PUBLIC_FETCH_URL: https://storage.stats47.jp
         run: node .claude/scripts/blog/build-remediation-queue.mjs
 
-      # docs/21 (ephemeral outbox) の自動掃除: 「published:true かつ R2 (正典) に存在」する
-      # 公開済みドラフトを git rm する。広い git add で出戻りした残骸も翌日には自動で消える。
-      # published:false の作業中ドラフトは保持。R2 が SSOT なので削除は可逆。
+      # docs/21 (ephemeral outbox) の自動掃除: 「published:true かつ R2 (正典) の article.md と
+      # 内容が完全一致」するドラフトを git rm する。広い git add で出戻りした残骸も翌日には自動で消える。
+      # published:false の作業中ドラフト / R2 と差分のある改稿中 (brushup) は保持。R2 が SSOT なので削除は可逆。
       - name: 🧹 Prune published drafts from docs/21 outbox
         continue-on-error: true # 掃除失敗で Issue 通知本体を止めない
         env:

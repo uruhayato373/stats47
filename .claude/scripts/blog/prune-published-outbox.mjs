@@ -2,9 +2,13 @@
 /**
  * docs/21 (ephemeral outbox) の自動掃除。
  *
- * 「published:true かつ R2 (正典) に既に存在」するドラフトを git rm する。
- * R2 が唯一の真実源 (SSOT = app/blog/<slug>) なので、公開済みドラフトを docs/21 に
+ * 「published:true かつ R2 (正典) の article.md と内容が一致」するドラフトを git rm する。
+ * R2 が唯一の真実源 (SSOT = app/blog/<slug>) なので、公開済みと完全一致のドラフトを docs/21 に
  * 残す理由はない (削除は可逆: git 履歴 + R2 に実体)。published:false の作業中ドラフトは残す。
+ *
+ * ★安全装置 (内容一致を要求する理由): brushup (既 live 記事の改稿) は docs/21 に published:true の
+ *   まま新版を置き R2 には旧版が live。「存在」だけで消すと改稿中の新版を誤削除する (2026-06-21 監査で
+ *   検出した統合バグ)。publish は cp -R で verbatim コピーなので、完全一致 = 公開済みの取り残しと確定できる。
  *
  * なぜ必要か: blog-auto-publish.yml は公開後に docs/21 を git rm するが、その後の広い
  * `git add` (統合コミット等) が掃除済みドラフトを git に出戻りさせて outbox に残骸が溜まる
@@ -17,7 +21,10 @@
  * 使い方:
  *   node .claude/scripts/blog/prune-published-outbox.mjs            # dry-run (削除せず計画だけ表示)
  *   node .claude/scripts/blog/prune-published-outbox.mjs --apply    # 実際に git rm + 空ディレクトリ削除
+ *   node .claude/scripts/blog/prune-published-outbox.mjs --check    # 検出のみ・取り残しがあれば exit 1 (deploy/publish ガード)
  *   R2_PUBLIC_FETCH_URL=... で正典判定先を上書き可 (既定 https://storage.stats47.jp)
+ *
+ * 呼び出し元: blog-remediation-daily.yml (日次 --apply) / check-published-drafts.cjs (--check ラッパー: /deploy・/publish-article)
  */
 
 import { readFileSync, readdirSync, existsSync, statSync, rmSync } from "node:fs";
@@ -29,6 +36,7 @@ const OUTBOX_REL = "docs/21_ブログ記事原稿";
 const OUTBOX = join(PROJECT_ROOT, OUTBOX_REL);
 const R2_BASE = process.env.R2_PUBLIC_FETCH_URL || "https://storage.stats47.jp";
 const APPLY = process.argv.includes("--apply");
+const CHECK = process.argv.includes("--check"); // 検出のみ・削除しない・取り残しがあれば exit 1 (deploy/publish ガード用)
 const CONCURRENCY = 6;
 
 /** frontmatter の published を読む。true/false/null(不明) */
@@ -42,15 +50,21 @@ function getPublished(articlePath) {
   }
 }
 
-/** R2 (正典) に article.md が存在するか = 公開済みか */
-async function isLiveOnR2(slug) {
+/** R2 (正典) の article.md 本文を返す。未掲載 / 取得失敗は null */
+async function fetchR2Article(slug) {
   const url = `${R2_BASE}/app/blog/${encodeURIComponent(slug)}/article.md`;
   try {
     const res = await fetch(url, { method: "GET", signal: AbortSignal.timeout(8000) });
-    return res.status === 200;
+    if (res.status !== 200) return null;
+    return await res.text();
   } catch {
-    return false;
+    return null;
   }
+}
+
+/** 改行/末尾空白の差を無視して内容比較 (publish は cp -R で verbatim コピー = 一致するはず) */
+function normalizeBody(s) {
+  return String(s).replace(/\r\n/g, "\n").replace(/[ \t]+$/gm, "").trim();
 }
 
 /** git rm -r (tracked のみ除去)。失敗は throw */
@@ -101,17 +115,26 @@ async function main() {
 
     if (hasArticle) {
       const pub = getPublished(articlePath);
-      if (pub === true) {
-        const live = await isLiveOnR2(slug);
-        if (live) return { slug, relDir, action: "rm", kind: "published-live" };
-        return { slug, relDir, action: "keep", reason: "published:true だが R2 未掲載 (公開処理中の可能性) → 保持" };
+      if (pub !== true) {
+        return { slug, relDir, action: "keep", reason: `published:${pub} (作業中ドラフト) → 保持` };
       }
-      return { slug, relDir, action: "keep", reason: `published:${pub} (作業中ドラフト) → 保持` };
+      // published:true → R2 (正典) と内容一致するときだけ削除する。
+      // ★安全装置: brushup (既 live 記事の改稿) は docs/21 に published:true のまま新版を置き、
+      //   R2 には旧版が live。内容が一致しない = 再公開待ちの改稿中なので消してはならない。
+      const r2 = await fetchR2Article(slug);
+      if (r2 == null) {
+        return { slug, relDir, action: "keep", reason: "published:true だが R2 未掲載/取得失敗 (公開処理中の可能性) → 保持" };
+      }
+      const local = readFileSync(articlePath, "utf8");
+      if (normalizeBody(local) === normalizeBody(r2)) {
+        return { slug, relDir, action: "rm", kind: "published-identical" };
+      }
+      return { slug, relDir, action: "keep", reason: "published:true だが R2 と内容差分 (改稿中/再公開待ち) → 保持" };
     }
 
-    // article.md なし = 孤児 (data/ 等の残骸)。R2 に公開済みなら掃除
-    const live = await isLiveOnR2(slug);
-    if (live) return { slug, relDir, action: "rm", kind: "orphan-live" };
+    // article.md なし = 孤児 (data/ 等の残骸)。R2 に公開済みなら掃除 (本文比較対象が無いので存在で判定)
+    const r2 = await fetchR2Article(slug);
+    if (r2 != null) return { slug, relDir, action: "rm", kind: "orphan-live" };
     return { slug, relDir, action: "keep", reason: "article.md 無し・R2 未掲載 (新規作業中の可能性) → 保持" };
   });
 
@@ -135,6 +158,15 @@ async function main() {
   if (!candidates.length) {
     console.log(`\n[prune-outbox] 掃除対象なし (outbox はクリーン)`);
     return;
+  }
+
+  // --check: 検出のみ。取り残しがあれば exit 1 (deploy / publish 前ガード用)。
+  if (CHECK) {
+    console.error(
+      `\n[prune-outbox] ❌ 公開済み (R2 と内容一致) なのに docs/21 に取り残しが ${candidates.length} 件あります。\n` +
+        `  → node .claude/scripts/blog/prune-published-outbox.mjs --apply で掃除 (または日次 cron が翌朝処理)。`,
+    );
+    process.exit(1);
   }
 
   if (!APPLY) {
