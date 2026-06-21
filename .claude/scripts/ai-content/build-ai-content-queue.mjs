@@ -90,7 +90,9 @@ async function fetchAiContent(key) {
     const res = await fetch(url);
     if (res.status === 404) return { present: false, row: null };
     if (!res.ok) return { present: false, row: null, fetchError: res.status };
-    return { present: true, row: await res.json() };
+    // R2 last-modified を「いつ修正したか」の真実源として取り込む (content の updatedAt より権威がある)
+    const lastModified = res.headers.get("last-modified") || null;
+    return { present: true, row: await res.json(), lastModified };
   } catch (e) {
     return { present: false, row: null, fetchError: String(e).slice(0, 60) };
   }
@@ -108,7 +110,16 @@ function classify(key, gsc, fetched) {
   }
   const audit = auditRow(fetched.row);
   if (audit.ok) {
-    return { ...base, status: "done", reason: "ok", blockers: [], warns: audit.warns.map((w) => w.code) };
+    // lastModified = R2 上で「いつ修正/反映されたか」(ISO でなく HTTP-date)。updatedAt は content 自己申告 (null の場合あり)
+    return {
+      ...base,
+      status: "done",
+      reason: "ok",
+      blockers: [],
+      warns: audit.warns.map((w) => w.code),
+      lastModified: fetched.lastModified ?? null,
+      updatedAt: fetched.row?.updatedAt ?? null,
+    };
   }
   const codes = audit.blockers.map((b) => b.code);
   // incomplete (フィールド欠落) と blocker (内容違反) を reason で区別
@@ -168,6 +179,11 @@ async function buildQueue() {
 function writeLatestMd(queue) {
   const s = queue.summary;
   const top = queue.entries.filter((e) => e.status === "needs-regen").slice(0, 20);
+  // done を「いつ修正したか」(R2 last-modified) 降順に。新しく直したものが上。
+  const recentDone = queue.entries
+    .filter((e) => e.status === "done" && e.lastModified)
+    .sort((a, b) => new Date(b.lastModified) - new Date(a.lastModified))
+    .slice(0, 15);
   const lines = [
     `# ranking ai-content 是正キュー (LATEST)`,
     ``,
@@ -180,6 +196,12 @@ function writeLatestMd(queue) {
     `- ✅ done: ${s.done} 件 (impressions 計 ${s.doneImpressions})`,
     `- ⏳ needs-regen: ${s.needsRegen} 件 (impressions 計 ${s.needsImpressions})`,
     `  - 内訳: ${Object.entries(s.needsByReason).map(([k, v]) => `${k} ${v}`).join(" / ") || "—"}`,
+    ``,
+    `## いつ修正したか (done を R2 last-modified 降順・上位15)`,
+    ``,
+    `| R2 last-modified | key | impressions |`,
+    `|---|---|---|`,
+    ...recentDone.map((e) => `| ${e.lastModified} | ${e.rankingKey} | ${e.impressions} |`),
     ``,
     `## 次にやるべき上位20 (impressions 降順)`,
     ``,

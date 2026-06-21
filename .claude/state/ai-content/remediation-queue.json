@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-21T08:55:06.928Z",
+  "generatedAt": "2026-06-21T09:02:23.917Z",
   "gscSnapshot": "2026-W24",
   "scope": "GSC流入のある /ranking/ ページ (SEO優先母集団)",
   "doneCriteria": "R2 の ai-content が auditRow を通る (blocker 0)",
@@ -37,7 +37,9 @@
       "status": "done",
       "reason": "ok",
       "blockers": [],
-      "warns": []
+      "warns": [],
+      "lastModified": "Sun, 21 Jun 2026 08:48:18 GMT",
+      "updatedAt": null
     },
     {
       "rankingKey": "natto-consumption-expenditure",
@@ -47,7 +49,9 @@
       "status": "done",
       "reason": "ok",
       "blockers": [],
-      "warns": []
+      "warns": [],
+      "lastModified": "Sun, 21 Jun 2026 08:48:18 GMT",
+      "updatedAt": null
     },
     {
       "rankingKey": "fresh-udon-soba-consumption-quantity",
@@ -57,7 +61,9 @@
       "status": "done",
       "reason": "ok",
       "blockers": [],
-      "warns": []
+      "warns": [],
+      "lastModified": "Sun, 21 Jun 2026 08:48:18 GMT",
+      "updatedAt": null
     },
     {
       "rankingKey": "dairy-cattle-count",
@@ -69,7 +75,9 @@
       "blockers": [],
       "warns": [
         "pref-count"
-      ]
+      ],
+      "lastModified": "Sun, 21 Jun 2026 08:48:18 GMT",
+      "updatedAt": null
     },
     {
       "rankingKey": "beef-consumption-quantity",
@@ -79,7 +87,9 @@
       "status": "done",
       "reason": "ok",
       "blockers": [],
-      "warns": []
+      "warns": [],
+      "lastModified": "Sun, 21 Jun 2026 08:48:18 GMT",
+      "updatedAt": null
     },
     {
       "rankingKey": "chicken-consumption-quantity",
@@ -89,7 +99,9 @@
       "status": "done",
       "reason": "ok",
       "blockers": [],
-      "warns": []
+      "warns": [],
+      "lastModified": "Sun, 21 Jun 2026 08:48:18 GMT",
+      "updatedAt": null
     },
     {
       "rankingKey": "abortion-rate",
@@ -99,7 +111,9 @@
       "status": "done",
       "reason": "ok",
       "blockers": [],
-      "warns": []
+      "warns": [],
+      "lastModified": "Sun, 21 Jun 2026 08:48:18 GMT",
+      "updatedAt": null
     },
     {
       "rankingKey": "pasta-consumption-quantity",
@@ -109,7 +123,9 @@
       "status": "done",
       "reason": "ok",
       "blockers": [],
-      "warns": []
+      "warns": [],
+      "lastModified": "Sun, 21 Jun 2026 08:48:18 GMT",
+      "updatedAt": null
     },
     {
       "rankingKey": "sushi-dining-consumption-expenditure",
@@ -119,7 +135,9 @@
       "status": "done",
       "reason": "ok",
       "blockers": [],
-      "warns": []
+      "warns": [],
+      "lastModified": "Sun, 21 Jun 2026 08:48:18 GMT",
+      "updatedAt": null
     },
     {
       "rankingKey": "elementary-school-children-count",
@@ -129,7 +147,9 @@
       "status": "done",
       "reason": "ok",
       "blockers": [],
-      "warns": []
+      "warns": [],
+      "lastModified": "Sun, 21 Jun 2026 08:48:18 GMT",
+      "updatedAt": null
     },
     {
       "rankingKey": "general-hospital-bed-occupancy-rate",
@@ -540,7 +560,9 @@
       "warns": [
         "length-short",
         "pref-len"
-      ]
+      ],
+      "lastModified": "Thu, 28 May 2026 11:50:34 GMT",
+      "updatedAt": "2026-05-17T04:33:02.533Z"
     },
     {
       "rankingKey": "cup-noodles-consumption-quantity",
@@ -657,7 +679,9 @@
         "length-short",
         "length-short",
         "pref-len"
-      ]
+      ],
+      "lastModified": "Thu, 28 May 2026 11:50:41 GMT",
+      "updatedAt": "2026-05-17T05:16:59.035Z"
     },
     {
       "rankingKey": "sauce-consumption-expenditure",
@@ -761,7 +785,9 @@
       "blockers": [],
       "warns": [
         "pref-len"
-      ]
+      ],
+      "lastModified": "Thu, 28 May 2026 11:50:34 GMT",
+      "updatedAt": "2026-05-17T04:34:18.857Z"
     },
     {
       "rankingKey": "coffee-consumption-quantity",
@@ -798,7 +824,9 @@
       "status": "done",
       "reason": "ok",
       "blockers": [],
-      "warns": []
+      "warns": [],
+      "lastModified": "Sun, 21 Jun 2026 08:18:28 GMT",
+      "updatedAt": null
     },
     {
       "rankingKey": "toilet-paper-consumption-expenditure",
@@ -990,7 +1018,9 @@
       "blockers": [],
       "warns": [
         "pref-len"
-      ]
+      ],
+      "lastModified": "Thu, 28 May 2026 11:50:55 GMT",
+      "updatedAt": "2026-05-17T08:19:29.637Z"
     },
     {
       "rankingKey": "sports-spectating-consumption-expenditure",
@@ -1460,7 +1490,9 @@
       "warns": [
         "length-short",
         "pref-len"
-      ]
+      ],
+      "lastModified": "Thu, 28 May 2026 11:58:12 GMT",
+      "updatedAt": "2026-05-18T12:55:15.217Z"
     },
     {
       "rankingKey": "treatment-rate-asthma-outpatient",
@@ -2462,7 +2494,9 @@
       "blockers": [],
       "warns": [
         "pref-len"
-      ]
+      ],
+      "lastModified": "Thu, 28 May 2026 11:54:32 GMT",
+      "updatedAt": "2026-05-17T04:54:27.848Z"
     },
     {
       "rankingKey": "physical-therapist-annual-income",
@@ -2636,7 +2670,9 @@
       "warns": [
         "length-short",
         "pref-len"
-      ]
+      ],
+      "lastModified": "Thu, 28 May 2026 11:50:34 GMT",
+      "updatedAt": "2026-05-17T04:30:25.213Z"
     },
     {
       "rankingKey": "avg-salary-all-prefecture",
@@ -2996,7 +3032,9 @@
         "length-short",
         "length-short",
         "pref-len"
-      ]
+      ],
+      "lastModified": "Thu, 28 May 2026 11:50:55 GMT",
+      "updatedAt": "2026-05-17T05:17:04.122Z"
     },
     {
       "rankingKey": "fish-paste-consumption-expenditure",
@@ -3131,7 +3169,9 @@
       "blockers": [],
       "warns": [
         "pref-len"
-      ]
+      ],
+      "lastModified": "Thu, 28 May 2026 11:55:52 GMT",
+      "updatedAt": "2026-05-17T05:17:07.537Z"
     },
     {
       "rankingKey": "software-engineer-annual-income",
@@ -3592,7 +3632,9 @@
       "blockers": [],
       "warns": [
         "pref-len"
-      ]
+      ],
+      "lastModified": "Thu, 28 May 2026 11:53:58 GMT",
+      "updatedAt": "2026-05-17T04:38:12.076Z"
     },
     {
       "rankingKey": "miscellaneous-school-count-per-100k",
@@ -4307,7 +4349,9 @@
       "blockers": [],
       "warns": [
         "pref-len"
-      ]
+      ],
+      "lastModified": "Thu, 28 May 2026 11:53:58 GMT",
+      "updatedAt": "2026-05-17T04:36:48.767Z"
     },
     {
       "rankingKey": "lotus-root-consumption-expenditure",
@@ -4684,7 +4728,9 @@
       "blockers": [],
       "warns": [
         "pref-len"
-      ]
+      ],
+      "lastModified": "Thu, 28 May 2026 11:58:21 GMT",
+      "updatedAt": "2026-05-17T05:14:13.595Z"
     },
     {
       "rankingKey": "other-fresh-fruit-consumption-quantity",
@@ -4830,7 +4876,9 @@
       "warns": [
         "length-short",
         "pref-len"
-      ]
+      ],
+      "lastModified": "Thu, 28 May 2026 11:50:54 GMT",
+      "updatedAt": "2026-05-17T05:15:44.625Z"
     },
     {
       "rankingKey": "general-hospital-bed-count",
@@ -4893,7 +4941,9 @@
       "status": "done",
       "reason": "ok",
       "blockers": [],
-      "warns": []
+      "warns": [],
+      "lastModified": "Thu, 28 May 2026 11:53:51 GMT",
+      "updatedAt": "2026-05-17T04:29:56.503Z"
     },
     {
       "rankingKey": "peach-consumption-expenditure",
@@ -5047,7 +5097,9 @@
       "blockers": [],
       "warns": [
         "pref-len"
-      ]
+      ],
+      "lastModified": "Thu, 28 May 2026 11:54:55 GMT",
+      "updatedAt": "2026-05-17T05:14:19.209Z"
     },
     {
       "rankingKey": "candy-consumption-expenditure",
@@ -5785,7 +5837,9 @@
       "blockers": [],
       "warns": [
         "pref-len"
-      ]
+      ],
+      "lastModified": "Thu, 28 May 2026 11:53:57 GMT",
+      "updatedAt": "2026-05-17T04:31:20.314Z"
     },
     {
       "rankingKey": "manufacturing-net-value-added-private",
@@ -6213,7 +6267,9 @@
       "warns": [
         "length-short",
         "pref-len"
-      ]
+      ],
+      "lastModified": "Thu, 28 May 2026 11:50:41 GMT",
+      "updatedAt": "2026-05-17T05:18:17.355Z"
     },
     {
       "rankingKey": "chikuwa-consumption-expenditure",
@@ -6682,7 +6738,9 @@
       "warns": [
         "length-short",
         "pref-len"
-      ]
+      ],
+      "lastModified": "Thu, 28 May 2026 11:50:48 GMT",
+      "updatedAt": "2026-05-17T04:35:37.534Z"
     },
     {
       "rankingKey": "cleaning-worker-annual-income",
@@ -7095,7 +7153,9 @@
       "warns": [
         "length-short",
         "pref-len"
-      ]
+      ],
+      "lastModified": "Thu, 28 May 2026 11:51:16 GMT",
+      "updatedAt": "2026-05-17T04:46:06.339Z"
     },
     {
       "rankingKey": "contact-lens-consumption-expenditure",
@@ -7895,7 +7955,9 @@
       "blockers": [],
       "warns": [
         "pref-len"
-      ]
+      ],
+      "lastModified": "Thu, 28 May 2026 11:56:42 GMT",
+      "updatedAt": "2026-05-17T04:42:37.896Z"
     },
     {
       "rankingKey": "solar-panel-housing-rate",
@@ -8293,7 +8355,9 @@
       "blockers": [],
       "warns": [
         "pref-len"
-      ]
+      ],
+      "lastModified": "Thu, 28 May 2026 11:53:48 GMT",
+      "updatedAt": "2026-05-17T04:28:35.007Z"
     },
     {
       "rankingKey": "manager-annual-income",
@@ -8851,7 +8915,9 @@
       "status": "done",
       "reason": "ok",
       "blockers": [],
-      "warns": []
+      "warns": [],
+      "lastModified": "Sun, 21 Jun 2026 08:18:28 GMT",
+      "updatedAt": null
     },
     {
       "rankingKey": "beer-consumption-expenditure",
@@ -8981,7 +9047,9 @@
       "status": "done",
       "reason": "ok",
       "blockers": [],
-      "warns": []
+      "warns": [],
+      "lastModified": "Sun, 21 Jun 2026 08:18:28 GMT",
+      "updatedAt": null
     },
     {
       "rankingKey": "area-ratio-of-total",
@@ -9000,7 +9068,9 @@
       "status": "done",
       "reason": "ok",
       "blockers": [],
-      "warns": []
+      "warns": [],
+      "lastModified": "Sun, 21 Jun 2026 08:18:28 GMT",
+      "updatedAt": null
     },
     {
       "rankingKey": "auto-mechanic-annual-income",
@@ -9608,7 +9678,9 @@
       "warns": [
         "causal-insights",
         "pref-len"
-      ]
+      ],
+      "lastModified": "Thu, 28 May 2026 11:54:21 GMT",
+      "updatedAt": "2026-05-17T04:49:54.292Z"
     },
     {
       "rankingKey": "new-graduate-scheduled-salary-university-male",
@@ -10400,7 +10472,9 @@
       "status": "done",
       "reason": "ok",
       "blockers": [],
-      "warns": []
+      "warns": [],
+      "lastModified": "Sun, 21 Jun 2026 08:18:28 GMT",
+      "updatedAt": null
     },
     {
       "rankingKey": "accountant-annual-income",
@@ -10522,7 +10596,9 @@
       "warns": [
         "length-short",
         "pref-len"
-      ]
+      ],
+      "lastModified": "Thu, 28 May 2026 11:51:00 GMT",
+      "updatedAt": "2026-05-17T04:38:14.451Z"
     },
     {
       "rankingKey": "chest-consumption-expenditure",
@@ -11173,7 +11249,9 @@
       "blockers": [],
       "warns": [
         "pref-len"
-      ]
+      ],
+      "lastModified": "Thu, 28 May 2026 11:53:57 GMT",
+      "updatedAt": "2026-05-17T04:35:28.738Z"
     },
     {
       "rankingKey": "margarine-consumption-quantity",
@@ -11377,7 +11455,9 @@
       "blockers": [],
       "warns": [
         "pref-len"
-      ]
+      ],
+      "lastModified": "Thu, 28 May 2026 11:54:46 GMT",
+      "updatedAt": "2026-05-17T05:18:14.939Z"
     },
     {
       "rankingKey": "nurse-annual-income",
