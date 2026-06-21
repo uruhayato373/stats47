@@ -1,9 +1,0 @@
-{
-  "kind": "ranking",
-  "rankingKey": "industrial-water-usage",
-  "year": "2015",
-  "unit": "ｍ3／日",
-  "source": "r2:app/ranking/industrial-water-usage/values.json",
-  "verifiedMatchRate": 100,
-  "note": "SSOTから取得。既存地図の表示値と照合し metric+年を確定 (SVGから逆復元しない)"
-}

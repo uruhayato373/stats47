@@ -1,9 +1,0 @@
-{
-  "kind": "ranking",
-  "rankingKey": "sewerage-penetration-rate-2012on",
-  "year": "2021",
-  "unit": "％",
-  "source": "r2:app/ranking/sewerage-penetration-rate-2012on/values.json",
-  "verifiedMatchRate": 100,
-  "note": "SSOTから取得。既存地図の表示値と照合し metric+年を確定 (SVGから逆復元しない)"
-}
