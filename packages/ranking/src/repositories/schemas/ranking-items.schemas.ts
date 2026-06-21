@@ -150,7 +150,7 @@ export const RankingItemDBSchema = z.object({
     conversionFactor: 1,
     decimalPlaces: 0,
     ...data.value_display_config,
-  };
+  } as RankingItem["valueDisplay"];
 
   const visualization: RankingItem["visualization"] = {
     colorScheme: "interpolateBlues",
@@ -162,19 +162,22 @@ export const RankingItemDBSchema = z.object({
   // calculation_config JSON から計算設定を取得
   const calculation: RankingItem["calculation"] = {
     isCalculated: data.calculation_config?.isCalculated ?? false,
-    type: data.calculation_config?.type,
-    numeratorKey: data.calculation_config?.numeratorKey,
-    denominatorKey: data.calculation_config?.denominatorKey,
-    formula: data.calculation_config?.formula,
-    normalizationOptions: data.calculation_config?.normalizationOptions,
-  };
+    type: data.calculation_config?.type ?? undefined,
+    numeratorKey: data.calculation_config?.numeratorKey ?? undefined,
+    denominatorKey: data.calculation_config?.denominatorKey ?? undefined,
+    formula: data.calculation_config?.formula ?? undefined,
+    normalizationOptions: data.calculation_config?.normalizationOptions ?? undefined,
+  } as RankingItem["calculation"];
 
   const sourceConfig: RankingItem["sourceConfig"] = data.source_config;
 
   // available_years と latest_year のパース結果を型安全にキャスト
   let availableYears: { yearCode: string; yearName: string }[] | undefined = undefined;
   if (Array.isArray(data.available_years)) {
-    availableYears = data.available_years;
+    availableYears = data.available_years.filter(
+      (y): y is { yearCode: string; yearName: string } =>
+        typeof y === "object" && y !== null,
+    );
   }
   
   let latestYear: { yearCode: string; yearName: string } | undefined = undefined;
