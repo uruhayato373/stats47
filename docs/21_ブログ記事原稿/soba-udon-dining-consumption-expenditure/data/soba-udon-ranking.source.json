@@ -1,0 +1,10 @@
+{
+  "kind": "ranking",
+  "rankingKey": "soba-udon-dining-consumption-expenditure",
+  "year": "2024",
+  "unit": "円",
+  "label": "日本そば・うどん消費支出額（外食）",
+  "transform": "top5+bottom5 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/soba-udon-dining-consumption-expenditure/values.json",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug soba-udon-dining-consumption-expenditure --keys soba-udon-dining-consumption-expenditure --data-name soba-udon-ranking"
+}

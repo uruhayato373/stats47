@@ -1,0 +1,10 @@
+{
+  "kind": "ranking",
+  "rankingKey": "squid-consumption-quantity",
+  "year": "2024",
+  "unit": "g",
+  "label": "いか消費量",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/squid-consumption-quantity/values.json",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug squid-consumption-quantity --keys squid-consumption-quantity --data-name squid-ranking"
+}

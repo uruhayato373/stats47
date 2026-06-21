@@ -1,0 +1,15 @@
+[
+  {"areaName": "富山県", "rank": 1, "value": 2014, "label": "いか消費量", "unit": "g"},
+  {"areaName": "秋田県", "rank": 2, "value": 1485, "label": "いか消費量", "unit": "g"},
+  {"areaName": "青森県", "rank": 3, "value": 1438, "label": "いか消費量", "unit": "g"},
+  {"areaName": "鳥取県", "rank": 4, "value": 1321, "label": "いか消費量", "unit": "g"},
+  {"areaName": "新潟県", "rank": 5, "value": 1152, "label": "いか消費量", "unit": "g"},
+  {"areaName": "山形県", "rank": 6, "value": 1108, "label": "いか消費量", "unit": "g"},
+  {"areaName": "福井県", "rank": 7, "value": 1063, "label": "いか消費量", "unit": "g"},
+  {"areaName": "大阪府", "rank": 8, "value": 1018, "label": "いか消費量", "unit": "g"},
+  {"areaName": "福島県", "rank": 9, "value": 926, "label": "いか消費量", "unit": "g"},
+  {"areaName": "岩手県", "rank": 10, "value": 912, "label": "いか消費量", "unit": "g"},
+  {"areaName": "熊本県", "rank": 45, "value": 588, "label": "いか消費量", "unit": "g"},
+  {"areaName": "北海道", "rank": 46, "value": 558, "label": "いか消費量", "unit": "g"},
+  {"areaName": "沖縄県", "rank": 47, "value": 463, "label": "いか消費量", "unit": "g"}
+]
