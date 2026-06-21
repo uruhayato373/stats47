@@ -45,7 +45,7 @@ ai-content の生成パイプラインは完全DBレス移行（commit `7569bd5c
    - **エージェント生成（推奨・1〜数件）**: `ai:input -- <key>` で `{input, prompt}` 取得 → 本 agent が prompt に従い JSON 生成（NotebookLM 出典は `buildRankingContentPromptForKey` の `extraContext` で注入）
    - **自動バッチ（大量）**: `ai:gen -- --limit N`。ただし claude CLI は Claude Code の Bash 内で大きい stdin がブロックされるため **ユーザー端末 / CI で実行**（セッション内は `--dry-run` で検証のみ）
 3. **必ず audit ゲート**: 生成 JSON を `audit-ai-content.mjs --file <候補.json>` に通し blocker 0 を確認（`generate-parallel.ts` は内部で自動実行し blocker 持ちを `[REJECT]`、blocker 0 のみ staging へ）
-4. ゲート通過分は staging（`.local/ai-content-staging/app/ranking/<key>/ai-content.json`）→ **R2 push は r2-publisher / `diff-push-r2 app/ranking` に委譲**
+4. ゲート通過分は staging（`.local/r2/app/ranking/<key>/ai-content.json`）→ **R2 push は r2-publisher / `diff-push-r2 app/ranking` に委譲**
 
 > **残課題（backlog `[AICONTENT-DBLESS-REBUILD]`）**: (a) 実際の大量生成 run（サンドボックス外/CI）、
 > (b) staging → R2 push の `sync-snapshots` タスク配線、(c) 既存 complete 49 件も旧プロンプト由来 blocker

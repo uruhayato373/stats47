@@ -22,7 +22,7 @@ primary_agent: ranking-content-author
 | ランキング観測値（入力） | R2 `app/stats/<key>/values.json`（`listRankingValues` 経由） |
 | ランキングメタ（入力） | R2 `app/ranking/<key>/item.json`（rankingName / unit / yearCode） |
 | プロンプト構築 | `packages/ai-content/src/services/prompts/ranking-content-prompt.ts`（純関数） |
-| 生成物の保存（出力） | staging `.local/ai-content-staging/app/ranking/<key>/ai-content.json` → R2（r2-publisher が push） |
+| 生成物の保存（出力） | staging `.local/r2/app/ranking/<key>/ai-content.json` → R2（r2-publisher が push） |
 
 R2 読み取り env（認証不要）: `NODE_OPTIONS='--conditions react-server' R2_PUBLIC_FETCH_URL=https://storage.stats47.jp`
 
@@ -63,7 +63,7 @@ tail -f /tmp/ai-content-gen.log
 ### 3. R2 反映（r2-publisher / diff-push-r2 に委譲）
 
 ```bash
-# staging (.local/ai-content-staging/app/ranking/<key>/ai-content.json) を R2 へ push
+# staging (.local/r2/app/ranking/<key>/ai-content.json) を R2 へ push
 # → r2-publisher agent もしくは diff-push-r2 app/ranking
 ```
 
@@ -77,7 +77,7 @@ tail -f /tmp/ai-content-gen.log
 | `--area` | `prefecture` | `prefecture` / `city` / `port` |
 | `--force` | false | complete も含め全 active key を再生成 |
 | `--keys k1,k2` | （pending 走査） | 対象 key を明示（pending 判定をスキップ） |
-| `--out <dir>` | `.local/ai-content-staging` | staging 出力 dir |
+| `--out <dir>` | `.local/r2` | staging 出力 dir |
 | `--dry-run` | false | **LLM を呼ばず** prompt 長と staging パスだけ出す（セッション内検証用・課金なし） |
 
 ## 手動で 1 件処理する場合（エージェント生成）

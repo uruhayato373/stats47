@@ -43,7 +43,7 @@ primary_agent: ranking-content-author
 - 入力 + prompt: `packages/ai-content/src/scripts/build-input.ts` → `buildRankingContentPromptForKey(key, area, { extraContext })`（R2 観測値 + item.json から組む。**D1 不使用**）
 - prompt: `packages/ai-content/src/services/prompts/ranking-content-prompt.ts` → `buildRankingContentPrompt(input, { extraContext })`
 - 決定的ゲート: `.claude/scripts/ai-content/audit-ai-content.mjs`（blocker 0 が公開条件）
-- 保存: staging `.local/ai-content-staging/app/ranking/<key>/ai-content.json` → R2 push は r2-publisher / `diff-push-r2 app/ranking`
+- 保存: staging `.local/r2/app/ranking/<key>/ai-content.json` → R2 push は r2-publisher / `diff-push-r2 app/ranking`
 - reader: `packages/ai-content/src/repositories/read-ranking-ai-content-snapshot.ts`
 - R2 key: `app/ranking/<rankingKey>/ai-content.json`
 
@@ -143,7 +143,7 @@ node .claude/scripts/notebooklm-cross-query.mjs --json \
    blocker が 1 件でもあれば是正してから進む（括弧数値・NGワード・FAQ 推測・県別欠落）
 3. `--dry-run` 時はここで終了
 4. `--auto` でない場合はユーザー承認待ち (interactive)、承認後に進む
-5. 承認後、staging `.local/ai-content-staging/app/ranking/<key>/ai-content.json` に書き出す（D1 UPDATE しない）
+5. 承認後、staging `.local/r2/app/ranking/<key>/ai-content.json` に書き出す（D1 UPDATE しない）
 6. **R2 push は r2-publisher / `diff-push-r2 app/ranking` に委譲**（1 件だけ push。全件 export は不要）
 
 ```bash

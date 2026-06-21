@@ -22,7 +22,10 @@ import "dotenv/config";
  *
  *   --dry-run : callAI を呼ばず、各 key の prompt 長と「書き込む予定の staging パス」だけ出す (LLM 課金なし)
  *   --keys    : 対象 key をカンマ区切りで明示 (pending 走査をスキップ)
- *   --out     : staging dir (default .local/ai-content-staging)。配下に app/ranking/<key>/ai-content.json
+ *   --out     : staging dir (default .local/r2 = push ツールの固定ルート)。配下に app/ranking/<key>/ai-content.json
+ *               → push は `push-r2-wrangler.ts app/ranking --apply` または `diff-push-r2.ts --prefix app/ranking`
+ *                 (両者とも .local/r2 を読む。ai-content だけを surgical に push したいなら .local/r2/app/ranking に
+ *                  ai-content.json のみを置いた状態で実行する)
  *
  * 関連: build-input.ts / list-pending.ts / .claude/scripts/ai-content/audit-ai-content.mjs
  *       .claude/agents/ranking-content-author.md
@@ -72,7 +75,8 @@ function parseArgs(): Options {
     limit: Number(get("--limit") ?? Infinity),
     areaType: (get("--area") ?? "prefecture") as AreaType,
     force: a.includes("--force"),
-    outDir: get("--out") ?? path.join(PROJECT_ROOT, ".local/ai-content-staging"),
+    // push ツール (push-r2-wrangler / diff-push-r2) は .local/r2 を固定ルートに読むため既定をそこに合わせる
+    outDir: get("--out") ?? path.join(PROJECT_ROOT, ".local/r2"),
     dryRun: a.includes("--dry-run"),
     keys: get("--keys")?.split(",").map((s) => s.trim()).filter(Boolean) ?? null,
   };
@@ -321,7 +325,9 @@ async function main() {
   );
   if (!opts.dryRun && counters.ok > 0) {
     process.stdout.write(
-      `次: r2-publisher / diff-push-r2 で ${opts.outDir} を R2 app/ranking へ push\n`,
+      `次: ${opts.outDir}/app/ranking/<key>/ai-content.json を R2 へ push\n` +
+        `   npx tsx packages/r2-storage/src/scripts/push-r2-wrangler.ts app/ranking --apply\n` +
+        `   (または diff-push-r2.ts --prefix app/ranking。両者とも .local/r2 を読む)\n`,
     );
   }
 }
