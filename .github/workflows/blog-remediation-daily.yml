@@ -3,9 +3,11 @@ name: 📝 Blog remediation daily (今日のリライト10記事)
 # 是正ループの日次運用入口 (Claude Pro セッションで agent がリライトする運用)。
 # CI で Claude は動かさない (決定的・APIコストゼロ)。
 #   1. remediation-queue を最新化 (公開R2 audit + 最新GSC) → develop へ commit-back
-#   2. pending 上位 10 件を「今日のリライト」Issue に upsert 通知
+#   2. docs/21 (ephemeral outbox) を自動掃除: 公開済み (R2 にある) ドラフトを git rm。
+#      広い git add で出戻りした残骸も翌日には自動で消える (2026-06-21 追加・残骸再発防止)
+#   3. pending 上位 10 件を「今日のリライト」Issue に upsert 通知
 # 実リライトは人間が Claude セッションで `/brushup-blog --target queue --next 10` を回す。
-# 正典: docs/02_実装計画/06_ブログ品質是正ループ.md
+# 正典: docs/02_実装計画/06_ブログ品質是正ループ.md / .claude/rules/blog-data-schema.md §0
 
 on:
   schedule:
@@ -48,6 +50,15 @@ jobs:
         env:
           R2_PUBLIC_FETCH_URL: https://storage.stats47.jp
         run: node .claude/scripts/blog/build-remediation-queue.mjs
+
+      # docs/21 (ephemeral outbox) の自動掃除: 「published:true かつ R2 (正典) に存在」する
+      # 公開済みドラフトを git rm する。広い git add で出戻りした残骸も翌日には自動で消える。
+      # published:false の作業中ドラフトは保持。R2 が SSOT なので削除は可逆。
+      - name: 🧹 Prune published drafts from docs/21 outbox
+        continue-on-error: true # 掃除失敗で Issue 通知本体を止めない
+        env:
+          R2_PUBLIC_FETCH_URL: https://storage.stats47.jp
+        run: node .claude/scripts/blog/prune-published-outbox.mjs --apply
 
       - name: 📝 Compose today's rewrite issue body
         id: compose
@@ -92,16 +103,18 @@ jobs:
               --body-file /tmp/blog-remediation/issue.md
           fi
 
-      - name: 📤 Commit refreshed queue to develop
+      - name: 📤 Commit refreshed queue + outbox prune to develop
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add .claude/state/blog/remediation-queue.json
+          # prune-published-outbox の git rm 結果 (公開済みドラフト削除) もステージ
+          git add -A "docs/21_ブログ記事原稿/"
           if git diff --cached --quiet; then
-            echo "No queue change to commit"
+            echo "No queue / outbox change to commit"
             exit 0
           fi
           # rebuild で dirty な作業ツリーのまま pull すると失敗するため commit を先に。
-          git commit -m "chore(blog): refresh remediation queue (daily) [skip ci]"
+          git commit -m "chore(blog): daily maintenance — queue refresh + outbox prune [skip ci]"
           git pull --rebase origin develop
           git push origin develop
