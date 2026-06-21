@@ -3,6 +3,7 @@ name: generate-ai-content
 description: ランキングページ向け AI コンテンツ（FAQ・分析）を Gemini CLI で生成し DB 保存する。Use when user says "AIコンテンツ生成", "FAQ生成", "ランキング分析生成". Claude並列/Gemini逐次選択可.
 disable-model-invocation: true
 primary_agent: ranking-content-author
+status: dead
 ---
 
 > ⚠️ **このスキルは現在 dead（実行不可）です。** 完全DBレス移行（commit `7569bd5c` "dbless Part D"）で

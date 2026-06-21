@@ -9,6 +9,7 @@ description: >
   "NotebookLM で ranking ページ強化", "/enhance-ranking-ai-content".
 disable-model-invocation: true
 primary_agent: ranking-content-author
+status: dead
 ---
 
 > ⚠️ **このスキルは現在 dead（実行不可）です。** 完全DBレス移行（commit `7569bd5c`）で ai-content の生成・保存

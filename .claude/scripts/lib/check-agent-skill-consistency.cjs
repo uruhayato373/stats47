@@ -12,6 +12,7 @@
  *   [E2] SKILL.md 本文が参照する .claude/scripts|hooks のスクリプトが存在するか
  *   [E3] settings.json の hook command が指すファイルが存在するか
  *   [W1] .claude/scripts/** のスクリプトがどこからも参照されていない (orphan)
+ *   [W2] 非 dead の SKILL.md が参照する packages/**|apps/** の scripts が存在しない (dead-skill 検知)
  *
  * Usage:
  *   node .claude/scripts/lib/check-agent-skill-consistency.cjs            # 全検査 (report)。error あれば exit 1
@@ -72,12 +73,20 @@ function readSafe(p) {
   }
 }
 
+// SKILL が「dead (削除済み機能の歴史的記述)」と明示マークされているか。
+// frontmatter に status: dead または deprecated: true があれば link/script 参照検査から除外する。
+function isDeadSkill(text) {
+  const fm = text.split("---")[1] || "";
+  return /^\s*status:\s*dead\b/m.test(fm) || /^\s*deprecated:\s*true\b/m.test(fm);
+}
+
 // ── 検査 ────────────────────────────────────────────────────────
 function checkSkillAgentLinks(findings, scope) {
   let skillFiles = walk(path.join(ROOT, ".claude/skills"), ["SKILL.md"]);
   if (scope) skillFiles = skillFiles.filter((f) => scope.has(rel(f)));
   for (const sf of skillFiles) {
     const text = readSafe(sf);
+    if (isDeadSkill(text)) continue;
     const fm = text.split("---")[1] || "";
     const agents = new Set();
     const pa = fm.match(/^primary_agent:\s*(.+)$/m);
@@ -107,6 +116,7 @@ function checkSkillScriptRefs(findings, scope) {
   const re = /\.claude\/(?:scripts|hooks)\/[A-Za-z0-9._/-]+\.(?:mjs|cjs|js|py|sh|ts)/g;
   for (const sf of skillFiles) {
     const text = readSafe(sf);
+    if (isDeadSkill(text)) continue;
     const seen = new Set();
     let m;
     while ((m = re.exec(text))) {
@@ -119,6 +129,36 @@ function checkSkillScriptRefs(findings, scope) {
           code: "E2",
           file: rel(sf),
           msg: `参照する ${p} が存在しない`,
+        });
+      }
+    }
+  }
+}
+
+// [W2] dead-skill 検知: 非 dead の SKILL が参照する packages/**|apps/** の "scripts" 配下スクリプトが
+//      存在するか。E2 は .claude/scripts|hooks しか見ないため、migration で削除された生成 CLI を参照した
+//      まま放置された skill (例: 2026-06-21 発見の ai-content 生成パイプライン削除) を捕まえる。意図的に
+//      dead なら frontmatter に status: dead を付けて除外。warn 止まり (既存違反で gate を壊さない)。
+function checkSkillExternalScriptRefs(findings, scope) {
+  let skillFiles = walk(path.join(ROOT, ".claude/skills"), ["SKILL.md"]);
+  if (scope) skillFiles = skillFiles.filter((f) => scope.has(rel(f)));
+  const re = /(?:packages|apps)\/[A-Za-z0-9._/-]+\.(?:mjs|cjs|js|py|sh|ts)/g;
+  for (const sf of skillFiles) {
+    const text = readSafe(sf);
+    if (isDeadSkill(text)) continue;
+    const seen = new Set();
+    let m;
+    while ((m = re.exec(text))) {
+      const p = m[0];
+      if (seen.has(p)) continue;
+      seen.add(p);
+      if (!/\/scripts?\//.test(p)) continue; // scripts ディレクトリ配下のみ (ソース全般の言及は対象外)
+      if (!fs.existsSync(path.join(ROOT, p))) {
+        findings.push({
+          level: "warn",
+          code: "W2",
+          file: rel(sf),
+          msg: `参照する ${p} が存在しない (dead-skill の可能性。意図的なら frontmatter に status: dead)`,
         });
       }
     }
@@ -244,6 +284,7 @@ function runChecks({ orphan, scope }) {
   // scope (Set<relpath>) 指定時は SKILL 系をその集合に絞る (gate=今回の変更だけ点検)。
   checkSkillAgentLinks(findings, scope);
   checkSkillScriptRefs(findings, scope);
+  checkSkillExternalScriptRefs(findings, scope);
   // hook 検査は settings.json が scope に含まれるか、scope 無し(全検査)のときだけ
   if (!scope || scope.has(".claude/settings.json") || scope.has(".claude/settings.local.json")) {
     checkHookFiles(findings);
