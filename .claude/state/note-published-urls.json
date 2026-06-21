@@ -10,7 +10,8 @@
       "url": "https://note.com/stats47/n686dcc017bbe",
       "is_paid": false,
       "published_at": "2026-06-06",
-      "r2_path": "note/koumuin-gis/koumuin-gis-01-depopulation-medical"
+      "r2_path": "note/koumuin-gis/koumuin-gis-01-depopulation-medical",
+      "status": "r2_ready"
     },
     "00-claude-code-intro-for-public-servants": {
       "vertical": "koumuin-claude-code",
@@ -19,7 +20,8 @@
       "is_paid": false,
       "published_at": "2026-05-20",
       "updated_at": "2026-05-21",
-      "r2_path": "note/koumuin-claude-code/00-claude-code-intro-for-public-servants"
+      "r2_path": "note/koumuin-claude-code/00-claude-code-intro-for-public-servants",
+      "status": "r2_ready"
     },
     "01-claude-code-setup-complete": {
       "vertical": "koumuin-claude-code",
@@ -29,7 +31,8 @@
       "price_jpy": 300,
       "published_at": "2026-05-21",
       "updated_at": "2026-05-21",
-      "r2_path": "note/koumuin-claude-code/01-claude-code-setup-complete"
+      "r2_path": "note/koumuin-claude-code/01-claude-code-setup-complete",
+      "status": "r2_ready"
     },
     "_comment_batch1": "2026-05-21 batch1 update: #01-#05 を update モードで再更新 (カバー差し替え・本文再ペースト・画像再挿入・有料境界再設定・マガジン追加)",
     "02-internal-network-workarounds": {
@@ -40,7 +43,8 @@
       "price_jpy": 0,
       "published_at": "2026-05-21",
       "updated_at": "2026-05-21",
-      "r2_path": "note/koumuin-claude-code/02-internal-network-workarounds"
+      "r2_path": "note/koumuin-claude-code/02-internal-network-workarounds",
+      "status": "r2_ready"
     },
     "03-it-dept-security-doc": {
       "vertical": "koumuin-claude-code",
@@ -50,7 +54,8 @@
       "price_jpy": 300,
       "published_at": "2026-05-21",
       "updated_at": "2026-05-21",
-      "r2_path": "note/koumuin-claude-code/03-it-dept-security-doc"
+      "r2_path": "note/koumuin-claude-code/03-it-dept-security-doc",
+      "status": "r2_ready"
     },
     "04-meeting-minutes-30min-to-5min": {
       "vertical": "koumuin-claude-code",
@@ -60,7 +65,8 @@
       "price_jpy": 0,
       "published_at": "2026-05-21",
       "updated_at": "2026-05-21",
-      "r2_path": "note/koumuin-claude-code/04-meeting-minutes-30min-to-5min"
+      "r2_path": "note/koumuin-claude-code/04-meeting-minutes-30min-to-5min",
+      "status": "r2_ready"
     },
     "05-assembly-answer-prompts": {
       "vertical": "koumuin-claude-code",
@@ -70,7 +76,8 @@
       "price_jpy": 300,
       "published_at": "2026-05-21",
       "updated_at": "2026-05-21",
-      "r2_path": "note/koumuin-claude-code/05-assembly-answer-prompts"
+      "r2_path": "note/koumuin-claude-code/05-assembly-answer-prompts",
+      "status": "r2_ready"
     },
     "06-ordinance-revision-review": {
       "vertical": "koumuin-claude-code",
@@ -79,7 +86,8 @@
       "is_paid": true,
       "price_jpy": 300,
       "published_at": "2026-05-21",
-      "r2_path": "note/koumuin-claude-code/06-ordinance-revision-review"
+      "r2_path": "note/koumuin-claude-code/06-ordinance-revision-review",
+      "status": "r2_ready"
     },
     "31-claude-code-how-to-ask": {
       "vertical": "koumuin-claude-code",
@@ -87,7 +95,8 @@
       "url": "https://note.com/stats47/n/n159230eb514c",
       "is_paid": false,
       "published_at": "2026-05-21",
-      "r2_path": "note/koumuin-claude-code/31-claude-code-how-to-ask"
+      "r2_path": "note/koumuin-claude-code/31-claude-code-how-to-ask",
+      "status": "r2_ready"
     },
     "32-claude-skills-getting-started": {
       "vertical": "koumuin-claude-code",
@@ -95,7 +104,8 @@
       "url": "https://note.com/stats47/n/nac5e44284865",
       "is_paid": false,
       "published_at": "2026-05-21",
-      "r2_path": "note/koumuin-claude-code/32-claude-skills-getting-started"
+      "r2_path": "note/koumuin-claude-code/32-claude-skills-getting-started",
+      "status": "r2_ready"
     },
     "07-official-doc-skills": {
       "vertical": "koumuin-claude-code",
@@ -104,7 +114,8 @@
       "is_paid": true,
       "published_at": "2026-05-21",
       "price_jpy": 300,
-      "r2_path": "note/koumuin-claude-code/07-official-doc-skills"
+      "r2_path": "note/koumuin-claude-code/07-official-doc-skills",
+      "status": "r2_ready"
     },
     "08-proposal-doc-checklist-20": {
       "vertical": "koumuin-claude-code",
@@ -113,7 +124,8 @@
       "is_paid": true,
       "published_at": "2026-05-21",
       "price_jpy": 300,
-      "r2_path": "note/koumuin-claude-code/08-proposal-doc-checklist-20"
+      "r2_path": "note/koumuin-claude-code/08-proposal-doc-checklist-20",
+      "status": "r2_ready"
     },
     "09-assembly-question-points": {
       "vertical": "koumuin-claude-code",
@@ -121,7 +133,8 @@
       "url": "https://note.com/stats47/n/nc276079a5317",
       "is_paid": false,
       "published_at": "2026-05-21",
-      "r2_path": "note/koumuin-claude-code/09-assembly-question-points"
+      "r2_path": "note/koumuin-claude-code/09-assembly-question-points",
+      "status": "r2_ready"
     },
     "10-ai-without-personal-info": {
       "vertical": "koumuin-claude-code",
@@ -129,7 +142,8 @@
       "url": "https://note.com/stats47/n/n9b2109c9f964",
       "is_paid": false,
       "published_at": "2026-05-21",
-      "r2_path": "note/koumuin-claude-code/10-ai-without-personal-info"
+      "r2_path": "note/koumuin-claude-code/10-ai-without-personal-info",
+      "status": "r2_ready"
     },
     "11-hooks-personal-info-masking": {
       "vertical": "koumuin-claude-code",
@@ -138,7 +152,8 @@
       "is_paid": true,
       "published_at": "2026-05-21",
       "price_jpy": 300,
-      "r2_path": "note/koumuin-claude-code/11-hooks-personal-info-masking"
+      "r2_path": "note/koumuin-claude-code/11-hooks-personal-info-masking",
+      "status": "r2_ready"
     },
     "12-audit-ready-settings": {
       "vertical": "koumuin-claude-code",
@@ -147,7 +162,8 @@
       "is_paid": true,
       "published_at": "2026-05-21",
       "price_jpy": 300,
-      "r2_path": "note/koumuin-claude-code/12-audit-ready-settings"
+      "r2_path": "note/koumuin-claude-code/12-audit-ready-settings",
+      "status": "r2_ready"
     },
     "13-ollama-offline-local-llm": {
       "vertical": "koumuin-claude-code",
@@ -156,7 +172,8 @@
       "is_paid": true,
       "price_jpy": 300,
       "published_at": "2026-05-22",
-      "r2_path": "note/koumuin-claude-code/13-ollama-offline-local-llm"
+      "r2_path": "note/koumuin-claude-code/13-ollama-offline-local-llm",
+      "status": "r2_ready"
     },
     "14-excel-budget-aggregation": {
       "vertical": "koumuin-claude-code",
@@ -164,7 +181,8 @@
       "url": "https://note.com/stats47/n/nc6e02fbe6073",
       "is_paid": false,
       "published_at": "2026-05-22",
-      "r2_path": "note/koumuin-claude-code/14-excel-budget-aggregation"
+      "r2_path": "note/koumuin-claude-code/14-excel-budget-aggregation",
+      "status": "r2_ready"
     },
     "15-data-preprocessing-intro": {
       "vertical": "koumuin-claude-code",
@@ -173,7 +191,8 @@
       "is_paid": true,
       "price_jpy": 300,
       "published_at": "2026-05-22",
-      "r2_path": "note/koumuin-claude-code/15-data-preprocessing-intro"
+      "r2_path": "note/koumuin-claude-code/15-data-preprocessing-intro",
+      "status": "r2_ready"
     },
     "16-subsidy-doc-consistency": {
       "vertical": "koumuin-claude-code",
@@ -184,7 +203,8 @@
       "published_at": "2026-05-22",
       "updated_at": "2026-06-16",
       "update_note": "ですます化+画像4枚再挿入+有料ライン(有料セクション1直前)再設定。境界screenshot検証済",
-      "r2_path": "note/koumuin-claude-code/16-subsidy-doc-consistency"
+      "r2_path": "note/koumuin-claude-code/16-subsidy-doc-consistency",
+      "status": "r2_ready"
     },
     "17-year-on-year-analysis": {
       "vertical": "koumuin-claude-code",
@@ -194,7 +214,8 @@
       "price_jpy": 300,
       "published_at": "2026-05-22",
       "updated_at": "2026-06-16",
-      "r2_path": "note/koumuin-claude-code/17-year-on-year-analysis"
+      "r2_path": "note/koumuin-claude-code/17-year-on-year-analysis",
+      "status": "r2_ready"
     },
     "18-pr-magazine-rewrite": {
       "vertical": "koumuin-claude-code",
@@ -204,7 +225,8 @@
       "price_jpy": 300,
       "published_at": "2026-05-22",
       "updated_at": "2026-06-16",
-      "r2_path": "note/koumuin-claude-code/18-pr-magazine-rewrite"
+      "r2_path": "note/koumuin-claude-code/18-pr-magazine-rewrite",
+      "status": "r2_ready"
     },
     "00-estat-claude-code-intro": {
       "vertical": "koumuin-estat-claude-code",
@@ -214,7 +236,8 @@
       "published_at": "2026-06-14",
       "updated_at": "2026-06-15",
       "update_note": "ですます化 + 画像2枚再挿入 + 全文無料ライン(末尾)",
-      "r2_path": "note/koumuin-estat-claude-code/00-estat-claude-code-intro"
+      "r2_path": "note/koumuin-estat-claude-code/00-estat-claude-code-intro",
+      "status": "r2_ready"
     },
     "01-estat-api-key-setup": {
       "vertical": "koumuin-estat-claude-code",
@@ -224,7 +247,8 @@
       "published_at": "2026-06-14",
       "price_jpy": 300,
       "updated_at": "2026-06-16",
-      "r2_path": "note/koumuin-estat-claude-code/01-estat-api-key-setup"
+      "r2_path": "note/koumuin-estat-claude-code/01-estat-api-key-setup",
+      "status": "r2_ready"
     },
     "02-search-estat-statsdataid": {
       "vertical": "koumuin-estat-claude-code",
@@ -234,7 +258,8 @@
       "published_at": "2026-06-14",
       "price_jpy": 300,
       "updated_at": "2026-06-16",
-      "r2_path": "note/koumuin-estat-claude-code/02-search-estat-statsdataid"
+      "r2_path": "note/koumuin-estat-claude-code/02-search-estat-statsdataid",
+      "status": "r2_ready"
     },
     "03-fetch-prefecture-ranking": {
       "vertical": "koumuin-estat-claude-code",
@@ -244,7 +269,8 @@
       "published_at": "2026-06-14",
       "updated_at": "2026-06-16",
       "update_note": "ですます化 + 画像3枚再挿入",
-      "r2_path": "note/koumuin-estat-claude-code/03-fetch-prefecture-ranking"
+      "r2_path": "note/koumuin-estat-claude-code/03-fetch-prefecture-ranking",
+      "status": "r2_ready"
     },
     "04-excel-download-and-parse": {
       "vertical": "koumuin-estat-claude-code",
@@ -254,7 +280,8 @@
       "published_at": "2026-06-14",
       "price_jpy": 300,
       "updated_at": "2026-06-16",
-      "r2_path": "note/koumuin-estat-claude-code/04-excel-download-and-parse"
+      "r2_path": "note/koumuin-estat-claude-code/04-excel-download-and-parse",
+      "status": "r2_ready"
     },
     "05-pandas-duckdb-derived-metrics": {
       "vertical": "koumuin-estat-claude-code",
@@ -264,7 +291,8 @@
       "published_at": "2026-06-14",
       "price_jpy": 300,
       "updated_at": "2026-06-16",
-      "r2_path": "note/koumuin-estat-claude-code/05-pandas-duckdb-derived-metrics"
+      "r2_path": "note/koumuin-estat-claude-code/05-pandas-duckdb-derived-metrics",
+      "status": "r2_ready"
     },
     "06-prefecture-code-and-merge": {
       "vertical": "koumuin-estat-claude-code",
@@ -274,7 +302,8 @@
       "published_at": "2026-06-14",
       "price_jpy": 300,
       "updated_at": "2026-06-16",
-      "r2_path": "note/koumuin-estat-claude-code/06-prefecture-code-and-merge"
+      "r2_path": "note/koumuin-estat-claude-code/06-prefecture-code-and-merge",
+      "status": "r2_ready"
     },
     "07-year-on-year-diff": {
       "vertical": "koumuin-estat-claude-code",
@@ -284,7 +313,8 @@
       "published_at": "2026-06-14",
       "price_jpy": 300,
       "updated_at": "2026-06-16",
-      "r2_path": "note/koumuin-estat-claude-code/07-year-on-year-diff"
+      "r2_path": "note/koumuin-estat-claude-code/07-year-on-year-diff",
+      "status": "r2_ready"
     },
     "08-benchmark-table-5min": {
       "vertical": "koumuin-estat-claude-code",
@@ -294,7 +324,8 @@
       "published_at": "2026-06-14",
       "updated_at": "2026-06-16",
       "update_note": "ですます化 + 画像3枚再挿入 (本文パイプ表は元から literal=要画像化・別タスク)",
-      "r2_path": "note/koumuin-estat-claude-code/08-benchmark-table-5min"
+      "r2_path": "note/koumuin-estat-claude-code/08-benchmark-table-5min",
+      "status": "r2_ready"
     },
     "09-assembly-chart-generation": {
       "vertical": "koumuin-estat-claude-code",
@@ -304,7 +335,8 @@
       "published_at": "2026-06-14",
       "price_jpy": 300,
       "updated_at": "2026-06-16",
-      "r2_path": "note/koumuin-estat-claude-code/09-assembly-chart-generation"
+      "r2_path": "note/koumuin-estat-claude-code/09-assembly-chart-generation",
+      "status": "r2_ready"
     },
     "10-claude-skills-routinize": {
       "vertical": "koumuin-estat-claude-code",
@@ -314,7 +346,8 @@
       "published_at": "2026-06-14",
       "price_jpy": 300,
       "updated_at": "2026-06-16",
-      "r2_path": "note/koumuin-estat-claude-code/10-claude-skills-routinize"
+      "r2_path": "note/koumuin-estat-claude-code/10-claude-skills-routinize",
+      "status": "r2_ready"
     },
     "11-mcp-sqlite-search": {
       "vertical": "koumuin-estat-claude-code",
@@ -324,7 +357,8 @@
       "published_at": "2026-06-14",
       "price_jpy": 300,
       "updated_at": "2026-06-16",
-      "r2_path": "note/koumuin-estat-claude-code/11-mcp-sqlite-search"
+      "r2_path": "note/koumuin-estat-claude-code/11-mcp-sqlite-search",
+      "status": "r2_ready"
     },
     "19-faq-auto-generation": {
       "vertical": "koumuin-claude-code",
@@ -333,7 +367,8 @@
       "is_paid": false,
       "price_jpy": 0,
       "published_at": "2026-06-16",
-      "r2_path": "note/koumuin-claude-code/19-faq-auto-generation"
+      "r2_path": "note/koumuin-claude-code/19-faq-auto-generation",
+      "status": "r2_ready"
     },
     "20-complaint-reply-patterns": {
       "vertical": "koumuin-claude-code",
@@ -342,7 +377,8 @@
       "is_paid": true,
       "price_jpy": 300,
       "published_at": "2026-06-16",
-      "r2_path": "note/koumuin-claude-code/20-complaint-reply-patterns"
+      "r2_path": "note/koumuin-claude-code/20-complaint-reply-patterns",
+      "status": "r2_ready"
     },
     "21-disaster-sns-multilang": {
       "vertical": "koumuin-claude-code",
@@ -351,7 +387,8 @@
       "is_paid": true,
       "price_jpy": 300,
       "published_at": "2026-06-16",
-      "r2_path": "note/koumuin-claude-code/21-disaster-sns-multilang"
+      "r2_path": "note/koumuin-claude-code/21-disaster-sns-multilang",
+      "status": "r2_ready"
     },
     "recovered-n73a4d300e045": {
       "vertical": "koumuin-estat-claude-code",
