@@ -96,11 +96,12 @@ const CANONICAL_WIDTH = {
   bar: [960, 680],          // columns 960 (標準) / single 680。760/720/600 等の旧サイズは違反
   "tile-grid": [600],       // 600×700
   summary: [960],           // findings card 幅 960 (高さ可変)
-  line: [680],              // 680×420 (未統一→warn)
-  scatter: [960],           // §5標準 960×624 (未統一→warn)
-  "stacked-bar": [680],     // 680×可変 (未統一→warn)
+  line: [680],              // 680×420
+  scatter: [960],           // 960×624
+  "stacked-bar": [680],     // 680×可変
 };
-const SIZE_ENFORCED = new Set(["bar", "tile-grid", "summary"]); // error にするカタログ
+// 全カタログ統一完了 (2026-06-21): both 全件が正規幅。error で再発防止する。
+const SIZE_ENFORCED = new Set(["bar", "tile-grid", "summary", "scatter", "line", "stacked-bar"]);
 
 /** SVG ファイル名 → chartType (generate-article-charts の classifyChartType と同等の suffix 判定) */
 export function classifyChartTypeFromName(filename) {

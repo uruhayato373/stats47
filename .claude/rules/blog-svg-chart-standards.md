@@ -197,15 +197,17 @@ svg += svgThemeStyle();
 
 | chartType | 正規幅 | 重大度 |
 |---|---|---|
-| `bar`（ranking） | 960（columns）/ 680（single） | **error**（統一済み） |
-| `tile-grid`（tilemap） | 600 | **error**（統一済み） |
-| `summary`（findings） | 960 | **error**（統一済み） |
-| `line` | 680 | warning（未統一→統一後 error 昇格） |
-| `scatter` | 960 | warning（未統一） |
-| `stacked-bar` | 680 | warning（未統一） |
+| `bar`（ranking） | 960（columns）/ 680（single） | **error** |
+| `tile-grid`（tilemap） | 600 | **error** |
+| `summary`（findings） | 960 | **error** |
+| `line` | 680 | **error** |
+| `scatter` | 960 | **error** |
+| `stacked-bar` | 680 | **error** |
 
-是正ツール: ranking=`rerender-ranking-columns.mts`（既存検証済み json から 960×404 columns 再描画。値不変）。
-scatter/line/stacked は対応 restorer で json から再描画して統一する（順次 error 昇格）。
+**全 6 カタログ統一完了（2026-06-21）→ 全て error**。both（json+source あり）の全 SVG が正規幅。
+是正ツール: ranking=`rerender-ranking-columns.mts`（960×404 columns）/ scatter=`rerender-scatter-canonical.mts`（960×624）。
+いずれも既存検証済み json から svg-builder で再描画（値不変・サイズのみ正規化）。line/stacked は generateLineSvg/generateStackedBarSvg が固定幅 680 を出すため新規は自動的に正規。
+> ★ R2 反映は **S3 API 経由（diff-push-r2）が確実**。`push-r2-wrangler`（wrangler put）は稀に「Upload complete」と言いつつ永続化しない flaky 挙動があり、S3 GET で検証すること（2026-06-21 scatter 統一時に発生）。
 **幅は不変量**（高さは件数/内容で可変）なので幅で判定する。分類不能名（`inline-chart-N` 等）は対象外。
 
 バッチ監査: `.claude/scripts/blog/audit-chart-quality.mjs` で全記事を一括チェック（内容 lint + サイズ lint）。
