@@ -22,8 +22,8 @@ browser-use CLI（Chrome プロファイル経由）で note.com エディタを
 ### 公開済み記事
 **公開後は R2 (`note/<vertical>/<slug>/`) に同期し、docs/31 から削除する**（ローカル容量最適化）。
 
-- **同期トリガー**: note.com 公開後に `.claude/state/note-published-urls.json` を更新 → develop push → `sync-note-r2.yml` が自動で R2 push + docs/31 削除 + commit-back する
-- **公開状態の真実源**: `.claude/state/note-published-urls.json`（slug → url / is_paid / r2_path 等）
+- **同期トリガー**: note.com 公開後に R2 `draft.md` の frontmatter を更新（下記「Phase 8 後」手順）→ develop push → `sync-note-r2.yml` が自動で R2 push + docs/31 削除 + commit-back する
+- **公開状態の真実源**: **R2 `draft.md` の frontmatter**（`note_url` フィールド）。`note-published-urls.json` は `build-note-published-index.mjs` が再構築する派生インデックス
 - **更新 (update モード) の前に復元が必要**:
   ```bash
   bash .claude/scripts/note/restore-from-r2.sh <slug>
@@ -220,19 +220,52 @@ browser-use --headed --profile "Profile 5" state 2>&1 > /tmp/note-acct.txt
 - 予約日時が指定されていない場合でも Phase 7 で**即時公開**が可能（「今すぐ公開」ボタンをクリック）。日時設定をスキップして直接「今すぐ公開」を選ぶ
 - 日時も即時公開も有料設定も不要な場合（下書き保存のみ）は Phase 7 全体をスキップ
 
-### Phase 8 後: 公開 URL の自動記録
+### Phase 8 後: 公開 URL をフロントマターに記録（★真実源への書き込み）
 
-記事を公開（即時公開 or 予約投稿）したら、その note 記事 URL を
-`.claude/state/note-published-urls.json` の `articles` に追記する。
+記事を公開（即時公開 or 予約投稿）したら、**R2 `draft.md` の frontmatter に `note_url` を追加**する。
+これが doboku-note と同じ方式の SSOT 管理。
 
-- 公開直後、ブラウザの URL バー（`note.com/stats47/n/<id>`）または Phase 8 の確認画面から URL を取得
-- `articles` に `"<slug>": { "vertical": "...", "title": "...", "url": "...", "is_paid": ..., "published_at": "YYYY-MM-DD" }` を追記
-- 既に同じ slug があれば URL を上書き更新（再公開時）
-- 下書き保存のみ（公開していない）の場合は記録しない
+```bash
+# 1. 公開 URL を取得（Phase 8 のブラウザ URL バー or 確認画面から）
+NOTE_URL="https://note.com/stats47/n/nXXXXX"
+SLUG="<slug>"
+
+# 2. docs/31 の draft.md が存在しない場合は R2 から復元
+bash .claude/scripts/note/restore-from-r2.sh "$SLUG"
+
+# 3. frontmatter に note_url / published / published_at を追加（migrate スクリプト転用）
+NOTE_URL="$NOTE_URL" DRY_RUN=false \
+  node .claude/scripts/note/migrate-note-frontmatter.mjs --slug "$SLUG"
+# ↑ note-published-urls.json に URL が入っていれば自動取得。
+#   新規公開で未登録の場合は下記の手動追記を先に行う。
+
+# 4. note-published-urls.json に追記（派生インデックスの仮登録）
+# → migrate 実行後に build-note-published-index.mjs で再構築する方が正確
+node .claude/scripts/note/build-note-published-index.mjs
+
+# 5. R2 に反映（S3 API 経由 or develop push → sync-note-r2.yml）
+# ローカルに S3 creds があれば:
+node .claude/scripts/note/sync-note-r2.mjs  # または develop push でCIに委ねる
+```
+
+**新規公開時の追加手順** (note-published-urls.json にまだ存在しない場合):
+```javascript
+// .claude/state/note-published-urls.json の articles に手動追記
+"<slug>": {
+  "vertical": "<vertical>",
+  "title": "<title>",
+  "url": "<NOTE_URL>",
+  "is_paid": false,
+  "published_at": "YYYY-MM-DD",
+  "r2_path": "note/<vertical>/<slug>",
+  "status": "r2_ready"
+}
+```
+追記後に `migrate-note-frontmatter.mjs --slug <slug>` → `build-note-published-index.mjs` を実行する。
+
+- **下書き保存のみ**（公開していない）の場合は上記不要
 - **ドラフト管理中だった場合**: `.claude/state/note-draft-index.json` の `drafts` から同 slug を削除する
-  （`note-published-urls.json` が真実源になるため、draft-index から除去して重複を防ぐ）
-
-この記録は、シリーズの公開状況の真実源であり、マガジンへの記事追加・将来のリンク修正の参照元になる。
+  （公開後は frontmatter の `note_url` が真実源になるため）
 
 - **ClipboardEvent 制約**: 最初の1セグメントのみ ClipboardEvent でペースト可能。2回目以降は `type` コマンドを使う
 - **URL カード変換待機**: URL 入力後は **4秒待機**必須。カード変換完了前に次の入力をするとレイアウトが壊れる
