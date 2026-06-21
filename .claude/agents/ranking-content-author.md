@@ -39,8 +39,14 @@ ai-content の生成パイプラインは完全DBレス移行（commit `7569bd5c
 
 実行 env 必須: `NODE_OPTIONS='--conditions react-server' R2_PUBLIC_FETCH_URL=https://storage.stats47.jp`（R2 公開 URL 読み・認証不要）。
 
+**SSOT 是正キュー（中断耐性・どのセッション/PC からでも再開可）**: 「次に何を直すか / どれが done か」の真実源は
+`.claude/state/ai-content/remediation-queue.json`（生成 `node .claude/scripts/ai-content/build-ai-content-queue.mjs`）。
+**done は R2 の ai-content が `auditRow` を通る(blocker 0)かで毎回再導出**（手動ログでなく R2 が真実源＝ドリフト無し）。
+再開手順: `build-ai-content-queue.mjs`（再構築）→ `--next 15`（GSC 流入降順）→ `npm run ai:verify -- --stdin`
+（build-input 不能キーを除外）→ 検証済を並列生成 → `diff-push-r2 --prefix app/ranking` → queue 再構築で done 反映。
+
 **標準ワークフロー**:
-1. `ai:list` で対象把握（2026-06-21 実測: missing 1556 / incomplete 488 / complete 49）
+1. `build-ai-content-queue.mjs --next N` で対象把握（GSC 流入優先。`ai:list` は全件 missing/incomplete/complete の俯瞰用）
 2. 生成（どちらか）:
    - **エージェント生成（推奨・1〜数件）**: `ai:input -- <key>` で `{input, prompt}` 取得 → 本 agent が prompt に従い JSON 生成（NotebookLM 出典は `buildRankingContentPromptForKey` の `extraContext` で注入）
    - **自動バッチ（大量）**: `ai:gen -- --limit N`。ただし claude CLI は Claude Code の Bash 内で大きい stdin がブロックされるため **ユーザー端末 / CI で実行**（セッション内は `--dry-run` で検証のみ）

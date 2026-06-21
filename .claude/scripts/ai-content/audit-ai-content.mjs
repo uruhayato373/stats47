@@ -12,12 +12,17 @@
  *
  * 担当: ranking-content-author (生成後の自己検査) / ranking-content-critic (意味レビュー前の床)
  *
- * Usage:
+ * Usage (CLI):
  *   node .claude/scripts/ai-content/audit-ai-content.mjs <rankingKey>        # R2 公開URLから取得
  *   node .claude/scripts/ai-content/audit-ai-content.mjs --file <path.json>  # ローカルJSON
  *   node .claude/scripts/ai-content/audit-ai-content.mjs <rankingKey> --json # 機械可読出力
  *
- * exit code: blocker が 1 件でもあれば 1、なければ 0 (warn のみは 0)。
+ * Usage (import / 再入可能):
+ *   import { auditRow } from "./audit-ai-content.mjs";
+ *   const { blockers, warns, ok } = auditRow(row);   // row = AiContentSnapshotRow
+ *   → build-ai-content-queue.mjs 等が「同一判定」で done 判定するために使う (drift 防止)
+ *
+ * exit code (CLI): blocker が 1 件でもあれば 1、なければ 0 (warn のみは 0)。
  *
  * 対象スキーマ (AiContentSnapshotRow / packages/ai-content/src/types/snapshot.ts):
  *   { rankingKey, yearCode, faq(JSON文字列), regionalAnalysis(md|null),
@@ -46,34 +51,8 @@ const LEN = {
 const PREF_COMMENTARY_LEN = { min: 60, max: 120 };
 const EXPECTED_PREF_COUNT = 47;
 
-const findings = [];
-const add = (level, code, msg) => findings.push({ level, code, msg });
-
 function jpLen(s) {
   return (s ?? "").replace(/\s/g, "").length;
-}
-
-function parseArgs(argv) {
-  const a = { key: null, file: null, json: false };
-  for (let i = 0; i < argv.length; i++) {
-    const t = argv[i];
-    if (t === "--file") a.file = argv[++i];
-    else if (t === "--json") a.json = true;
-    else if (!t.startsWith("--")) a.key = t;
-  }
-  return a;
-}
-
-async function loadRow({ key, file }) {
-  if (file) {
-    const fs = await import("node:fs");
-    return JSON.parse(fs.readFileSync(file, "utf8"));
-  }
-  if (!key) throw new Error("rankingKey または --file <path> を指定してください");
-  const url = `${R2_PUBLIC}/app/ranking/${encodeURIComponent(key)}/ai-content.json`;
-  const res = await fetch(url);
-  if (!res.ok) throw new Error(`R2 取得失敗 ${res.status}: ${url}`);
-  return res.json();
 }
 
 /** オブジェクトを再帰的に走査し、key が "answer" の文字列値を集める */
@@ -89,42 +68,50 @@ function collectAnswers(node, out = []) {
   return out;
 }
 
-function checkParenNumbers(label, text) {
-  if (!text) return;
-  const bad = [];
-  let m;
-  PAREN_RE.lastIndex = 0;
-  while ((m = PAREN_RE.exec(text)) !== null) {
-    const c = m[1];
-    if (!/[0-9０-９]/.test(c)) continue;      // 数字を含まない括弧は対象外
-    if (YEAR_PAREN_RE.test(c)) continue;      // (2020年度) は許容
-    if (PAREN_ALLOW_PREFIX.test(c)) continue; // (出典…) 等は許容
-    bad.push(`(${c.trim()})`);
+/**
+ * 純関数の監査本体 (再入可能)。row を受け取り {rankingKey, blockers, warns, ok} を返す。
+ * findings は呼び出しローカル (module-level state を持たない) ので並列・反復呼び出し安全。
+ */
+export function auditRow(row) {
+  const findings = [];
+  const add = (level, code, msg) => findings.push({ level, code, msg });
+
+  const checkParenNumbers = (label, text) => {
+    if (!text) return;
+    const bad = [];
+    let m;
+    PAREN_RE.lastIndex = 0;
+    while ((m = PAREN_RE.exec(text)) !== null) {
+      const c = m[1];
+      if (!/[0-9０-９]/.test(c)) continue;      // 数字を含まない括弧は対象外
+      if (YEAR_PAREN_RE.test(c)) continue;      // (2020年度) は許容
+      if (PAREN_ALLOW_PREFIX.test(c)) continue; // (出典…) 等は許容
+      bad.push(`(${c.trim()})`);
+    }
+    if (bad.length) {
+      add("blocker", "paren-number",
+        `${label}: 括弧内数値挿入 ${bad.length} 件 (プロンプト全面禁止)。例: ${bad.slice(0, 3).join(" / ")}`);
+    }
+  };
+
+  const checkNgWords = (label, text) => {
+    if (!text) return;
+    const hit = NG_WORDS.filter((w) => text.includes(w));
+    if (hit.length) add("blocker", "ng-word", `${label}: NGワード ${hit.join("・")} (上位/下位/最も多い 等に置換)`);
+  };
+
+  const checkLen = (label, text, bounds) => {
+    if (!text) return;
+    const n = jpLen(text);
+    if (n < bounds.min) add("warn", "length-short", `${label}: ${n}字 (目安 ${bounds.min}-${bounds.max})`);
+    else if (n > bounds.max) add("warn", "length-long", `${label}: ${n}字 (目安 ${bounds.min}-${bounds.max})`);
+  };
+
+  if (!row || typeof row !== "object") {
+    add("blocker", "no-content", "ai-content が空 / 不正");
+    const blockers = findings.filter((f) => f.level === "blocker");
+    return { rankingKey: undefined, blockers, warns: [], ok: false };
   }
-  if (bad.length) {
-    add(
-      "blocker",
-      "paren-number",
-      `${label}: 括弧内数値挿入 ${bad.length} 件 (プロンプト全面禁止)。例: ${bad.slice(0, 3).join(" / ")}`,
-    );
-  }
-}
-
-function checkNgWords(label, text) {
-  if (!text) return;
-  const hit = NG_WORDS.filter((w) => text.includes(w));
-  if (hit.length) add("blocker", "ng-word", `${label}: NGワード ${hit.join("・")} (上位/下位/最も多い 等に置換)`);
-}
-
-function checkLen(label, text, bounds) {
-  if (!text) return;
-  const n = jpLen(text);
-  if (n < bounds.min) add("warn", "length-short", `${label}: ${n}字 (目安 ${bounds.min}-${bounds.max})`);
-  else if (n > bounds.max) add("warn", "length-long", `${label}: ${n}字 (目安 ${bounds.min}-${bounds.max})`);
-}
-
-function main(row) {
-  if (!row || typeof row !== "object") { add("blocker", "no-content", "ai-content が空 / 不正"); return; }
 
   const { insights, regionalAnalysis, faq, prefectureCommentary, rankingKey } = row;
 
@@ -194,25 +181,55 @@ function main(row) {
     }
   }
 
-  void rankingKey;
+  const blockers = findings.filter((f) => f.level === "blocker");
+  const warns = findings.filter((f) => f.level === "warn");
+  return { rankingKey, blockers, warns, ok: blockers.length === 0 };
 }
 
-const args = parseArgs(process.argv.slice(2));
-const row = await loadRow(args).catch((e) => { console.error(`[audit-ai-content] ${e.message}`); process.exit(2); });
-main(row);
-
-const blockers = findings.filter((f) => f.level === "blocker");
-const warns = findings.filter((f) => f.level === "warn");
-
-if (args.json) {
-  console.log(JSON.stringify({ rankingKey: row.rankingKey, blockers, warns, ok: blockers.length === 0 }, null, 2));
-} else {
-  const label = row.rankingKey ?? args.file ?? "(unknown)";
-  console.log(`# ai-content audit: ${label}`);
-  if (!findings.length) console.log("✓ 違反なし (blocker 0 / warn 0)");
-  for (const f of blockers) console.log(`✗ [BLOCKER:${f.code}] ${f.msg}`);
-  for (const f of warns) console.log(`⚠ [WARN:${f.code}] ${f.msg}`);
-  console.log(`\n計 blocker ${blockers.length} / warn ${warns.length}`);
+// row を R2 公開 URL / ローカル file から取得 (import 側でも再利用可)
+export async function loadRow({ key, file }) {
+  if (file) {
+    const fs = await import("node:fs");
+    return JSON.parse(fs.readFileSync(file, "utf8"));
+  }
+  if (!key) throw new Error("rankingKey または --file <path> を指定してください");
+  const url = `${R2_PUBLIC}/app/ranking/${encodeURIComponent(key)}/ai-content.json`;
+  const res = await fetch(url);
+  if (!res.ok) throw new Error(`R2 取得失敗 ${res.status}: ${url}`);
+  return res.json();
 }
 
-process.exit(blockers.length > 0 ? 1 : 0);
+function parseArgs(argv) {
+  const a = { key: null, file: null, json: false };
+  for (let i = 0; i < argv.length; i++) {
+    const t = argv[i];
+    if (t === "--file") a.file = argv[++i];
+    else if (t === "--json") a.json = true;
+    else if (!t.startsWith("--")) a.key = t;
+  }
+  return a;
+}
+
+// --- CLI (直接実行時のみ) ---
+const invokedDirectly =
+  process.argv[1] && process.argv[1].endsWith("audit-ai-content.mjs");
+
+if (invokedDirectly) {
+  const args = parseArgs(process.argv.slice(2));
+  const row = await loadRow(args).catch((e) => {
+    console.error(`[audit-ai-content] ${e.message}`);
+    process.exit(2);
+  });
+  const { blockers, warns } = auditRow(row);
+  if (args.json) {
+    console.log(JSON.stringify({ rankingKey: row?.rankingKey, blockers, warns, ok: blockers.length === 0 }, null, 2));
+  } else {
+    const label = row?.rankingKey ?? args.file ?? "(unknown)";
+    console.log(`# ai-content audit: ${label}`);
+    if (!blockers.length && !warns.length) console.log("✓ 違反なし (blocker 0 / warn 0)");
+    for (const f of blockers) console.log(`✗ [BLOCKER:${f.code}] ${f.msg}`);
+    for (const f of warns) console.log(`⚠ [WARN:${f.code}] ${f.msg}`);
+    console.log(`\n計 blocker ${blockers.length} / warn ${warns.length}`);
+  }
+  process.exit(blockers.length > 0 ? 1 : 0);
+}
