@@ -1,9 +1,0 @@
-{
-  "kind": "ranking",
-  "rankingKey": "overseas-travel-annual-participation-rate-15plus",
-  "year": "2001",
-  "unit": "％",
-  "source": "r2:app/ranking/overseas-travel-annual-participation-rate-15plus/values.json",
-  "verifiedMatchRate": 100,
-  "note": "SSOTから取得。既存地図の表示値と照合し metric+年を確定 (SVGから逆復元しない)"
-}

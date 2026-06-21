@@ -1,5 +1,0 @@
-{
-  "kind": "authored",
-  "note": "記事本文の分析からの要点まとめ (findings card)。数値は commercial-rate-ranking.json (R2 SSOT) と timeseries に準拠。",
-  "source": "article body (commercial-land-price-trend)"
-}
