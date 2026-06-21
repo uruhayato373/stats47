@@ -3,10 +3,12 @@
  *
  * ダウンロード → 解凍 → 変換 → R2 保存を一括実行。
  *
- * Phase 2 of GIS dataset management refactor (plan: stateless-stargazing-teapot):
- * 純メタデータ (name / category / geometryType 等) は D1 gis_datasets から取得し、
+ * 純メタデータ (name / category / geometryType 等) は使い捨て SQLite gis_datasets から取得し、
  * コード固有設定 (downloadUrlPattern / propertyMap / simplifyOptions) は
  * registry.ts (KsjCodeConfig) から取得してマージする。
+ *
+ * 完全DBレス (2026-06-21): SQLite は git TS から再生成可能な使い捨てキャッシュ (永続/リモート D1 でない)。
+ * メタの SSOT は git TS `datasets.ts`、`seed-from-registry.ts` が SQLite を再構築する。規約: `.claude/rules/gis-data.md`。
  */
 
 import * as fs from "node:fs";
@@ -99,16 +101,17 @@ function resolveDataset(
 
   if (!row) {
     throw new Error(
-      `D1 gis_datasets に data_id='${dataId}' がありません。` +
-        " seed-from-registry.ts を実行するか、新規データセットの場合は registry.ts に追加してください。",
+      `gis_datasets (使い捨て SQLite) に data_id='${dataId}' がありません。` +
+        " datasets.ts に登録済みなら seed-from-registry.ts を実行してください。" +
+        " 新規データセットは datasets.ts (メタ) + registry.ts (技術設定) に追加 → seed-from-registry.ts (完全DBレス・規約: .claude/rules/gis-data.md)。",
     );
   }
 
   if (row.status === "available") {
     throw new Error(
       `data_id='${dataId}' は status='available' (KSJ カタログにあるが stats47 未登録)。\n` +
-        " registry.ts に KsjCodeConfig を追加し、" +
-        ` 'UPDATE gis_datasets SET status=\\'registered\\' WHERE data_id=\\'${dataId}\\'' を実行してください。`,
+        " datasets.ts (GIS_DATASETS) にメタ + registry.ts に KsjCodeConfig を追加し、" +
+        " seed-from-registry.ts を実行してください (available→registered に自動昇格。手動 SQL UPDATE は不要)。",
     );
   }
   if (row.status === "deprecated") {
