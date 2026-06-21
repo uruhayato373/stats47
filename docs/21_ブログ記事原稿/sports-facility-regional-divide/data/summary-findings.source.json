@@ -1,8 +1,0 @@
-{
-  "kind": "manual",
-  "year": "2021",
-  "label": "記事の要点カード",
-  "transform": "本文の SSOT 数値(施設数・体育館数・行動者率ランキング)を要約",
-  "source": "本記事内の grounded ranking json から要約 (community-sports-facility-count-per-million / public-gymnasium-count-per-million / sports-annual-participation-rate-10plus)",
-  "generatedBy": "article-writer (brushup)"
-}

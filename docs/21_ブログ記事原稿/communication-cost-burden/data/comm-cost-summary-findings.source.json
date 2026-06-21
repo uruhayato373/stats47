@@ -1,9 +1,0 @@
-{
-  "kind": "authored",
-  "incomplete": true,
-  "note": "出自(rankingKey/derived)が data json に無い。fetch-ranking-data-r2 か backfill-source で SSOT を補完すること",
-  "generatedBy": "generate-article-charts.ts",
-  "chartType": "summary",
-  "dataFile": "comm-cost-summary-findings.json",
-  "label": "この記事でわかったこと"
-}

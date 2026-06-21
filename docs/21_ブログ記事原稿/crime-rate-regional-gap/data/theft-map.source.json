@@ -1,9 +1,0 @@
-{
-  "kind": "ranking",
-  "rankingKey": "theft-offenses-recognized-per-1000",
-  "year": "2023",
-  "unit": "件",
-  "source": "r2:app/ranking/theft-offenses-recognized-per-1000/values.json",
-  "verifiedMatchRate": 100,
-  "note": "SSOTから取得。既存地図の表示値と照合し metric+年を確定 (SVGから逆復元しない)"
-}
