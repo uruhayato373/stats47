@@ -142,24 +142,30 @@ function checkSkillScriptRefs(findings, scope) {
 function checkSkillExternalScriptRefs(findings, scope) {
   let skillFiles = walk(path.join(ROOT, ".claude/skills"), ["SKILL.md"]);
   if (scope) skillFiles = skillFiles.filter((f) => scope.has(rel(f)));
-  const re = /(?:packages|apps)\/[A-Za-z0-9._/-]+\.(?:mjs|cjs|js|py|sh|ts)/g;
+  const pathRe = /(?:packages|apps)\/[A-Za-z0-9._/-]+\.(?:mjs|cjs|js|py|sh|ts)/g;
+  // 実行コンテキストの行のみ対象 (npx/node/tsx/bash/sh/python/./)。
+  // 歴史的記述・参照リスト中のパス言及 (例: knowledge の事故記録) は実行ではないので除外し誤検知を防ぐ。
+  const RUNNER = /(?:^|\s)(?:npx|node|tsx|bash|sh|python3?|\.\/)\s/;
   for (const sf of skillFiles) {
     const text = readSafe(sf);
     if (isDeadSkill(text)) continue;
     const seen = new Set();
-    let m;
-    while ((m = re.exec(text))) {
-      const p = m[0];
-      if (seen.has(p)) continue;
-      seen.add(p);
-      if (!/\/scripts?\//.test(p)) continue; // scripts ディレクトリ配下のみ (ソース全般の言及は対象外)
-      if (!fs.existsSync(path.join(ROOT, p))) {
-        findings.push({
-          level: "warn",
-          code: "W2",
-          file: rel(sf),
-          msg: `参照する ${p} が存在しない (dead-skill の可能性。意図的なら frontmatter に status: dead)`,
-        });
+    for (const line of text.split("\n")) {
+      if (!RUNNER.test(line)) continue;
+      let m;
+      pathRe.lastIndex = 0;
+      while ((m = pathRe.exec(line))) {
+        const p = m[0];
+        if (seen.has(p) || !/\/scripts?\//.test(p)) continue; // scripts 配下のみ
+        seen.add(p);
+        if (!fs.existsSync(path.join(ROOT, p))) {
+          findings.push({
+            level: "warn",
+            code: "W2",
+            file: rel(sf),
+            msg: `実行参照する ${p} が存在しない (dead-skill の可能性。意図的なら frontmatter に status: dead)`,
+          });
+        }
       }
     }
   }
