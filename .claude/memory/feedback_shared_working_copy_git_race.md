@@ -37,4 +37,8 @@ metadata:
 
 **機構ガード追加 (2026-06-21・①の穴埋め):** 従来この memory は「警告するだけで防止しない」状態だった。`.claude/hooks/session-guard.js` を新設し `.claude/settings.json` の SessionStart + Stop に配線。各セッションが `.claude/state/session-locks/<sessionId>.json` に last_seen を記録し、**SessionStart で同一 working copy (CLAUDE_PROJECT_DIR realpath) の fresh(45分以内)な他セッションを検知して警告**する。Stop で last_seen を refresh (稼働証跡)。worktree/別clone は path が異なるため警告対象外 = 安全な分離は邪魔しない。lock は gitignore 済 (マシン固有ランタイム状態)。これで「2 セッション同一 copy」を**気づく**機構ができた (依然 commit は明示パス+混入 grep が必須)。
 
+**指示 SSOT の共有 (2026-06-21・Codex 規約逸脱の根治):** Codex (OpenAI VSCode 拡張) は `AGENTS.md` を読むが**存在しなかった**ため、プロジェクト規約 (データ保存・デプロイ規律・blog/metric 規約) を一切知らずに作業していた。→ **`AGENTS.md` を `CLAUDE.md` への相対 symlink** にして指示 SSOT を一本化 (Codex も Claude と同じ `CLAUDE.md` + `.claude/rules/` に従う・symlink ゆえ drift しない)。git 共有なので複数 PC でも有効。CLAUDE.md に「並行エージェント (Codex) と SSOT 共有」節を追記 (memory SSOT = `.claude/memory/MEMORY.md` を読む旨 + git 競合注意)。
+
+**Codex WIP を取り込む時の CI 落とし穴 (2026-06-21):** Codex の WIP を `git add -A` で一括コミット→デプロイしたら CI が 2 回 fail。①`npm ci` が `package.json`↔`package-lock.json` 不整合 (Codex が zod 等を package.json に足したが lock 未更新) → **`npm install --package-lock-only` で同期**してコミット。②monorepo 横断 type-check が ranking schema (zod transform の `|null` vs `RankingItem` の `|undefined`) で fail。**自分のローカル `tsc -p apps/web` 単体では出ず、`npm run type-check` (turbo 全パッケージ) で初めて発覚**。教訓: Codex の WIP をデプロイ前に検証するなら **apps/web 単体 tsc では不十分。`npm run type-check` (全パッケージ) + `npm ci --dry-run` (lock 整合) を回す**か、CI に委ねて fail を順次潰す。
+
 関連: [[project_env_local_ci_consolidation]] [[project_dbless_migration_2026_05_29]] [[project_blog_publish_cloud_first]] [[project_blog_mass_rewrite_lessons]]
