@@ -9,7 +9,7 @@ Web パフォーマンスと Cloudflare コストの監査専任 agent。 PSI �
 
 ## 担当範囲
 
-- Lighthouse audit (`/lighthouse-audit`)
+- CWV 計測 (`/lighthouse-audit`、PSI 統合済。`.claude/state/metrics/psi/` に蓄積)
 - PSI 改善施策計画 + agent 用詳細記録 (`/performance-improvement`)
 - パフォーマンスレポート生成 (`/performance-report`)
 - Cloudflare コスト改善施策 + 詳細記録 (`/cloudflare-cost-improvement`)
@@ -23,7 +23,7 @@ Web パフォーマンスと Cloudflare コストの監査専任 agent。 PSI �
 
 | スキル | 用途 |
 |---|---|
-| `/lighthouse-audit` | Lighthouse 実測 |
+| `/lighthouse-audit` | CWV 計測 (PSI。fetch→digest→check) |
 | `/performance-improvement` | PSI 改善施策の agent 用詳細記録 |
 | `/performance-report` | パフォーマンスレポート生成 |
 | `/cloudflare-cost-improvement` | Cloudflare コスト改善施策 |

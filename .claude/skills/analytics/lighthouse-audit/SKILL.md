@@ -1,147 +1,87 @@
 ---
 name: lighthouse-audit
-description: Lighthouse CLI でパフォーマンス測定しDB蓄積する。Use when user says "Lighthouse実行", "パフォーマンス測定", "CWV計測". スコア・CWV・リソース分析をページ種別一括実行.
+description: PageSpeed Insights API で stats47.jp の CWV を計測し .claude/state/metrics/psi に蓄積する。Use when user says "Lighthouse実行", "パフォーマンス測定", "CWV計測", "PSI計測". mobile/desktop 一括計測+閾値チェック.
 disable-model-invocation: true
-argument-hint: "[--url PATH] [--type TYPE] [--strategy mobile|desktop|both] [--dry-run]"
+argument-hint: "[--strategy mobile|desktop] [--file urls.txt]"
 allowed-tools: Read, Bash, Grep
 primary_agent: performance-auditor
 co_agents: [seo-auditor]
 ---
 
-Lighthouse CLI をローカル実行して stats47.jp の各ページのパフォーマンスを測定し、`.claude/skills/analytics/performance-improvement/snapshots/YYYY-MM-DD/metrics.csv` に蓄積する。閾値は同ディレクトリの `budgets.json` を参照。API キー不要・レート制限なし。測定結果はマークダウンテーブルで出力する。
+# /lighthouse-audit — CWV 計測（PSI に統合済）
 
-**記録先の統一原則（.claude/rules/data-storage.md）**: 計測データは `.claude/skills/analytics/performance-improvement/` 配下のファイル。旧 D1 テーブル `performance_metrics` / `performance_budgets` は 2026-04-17 に廃止済み。
+stats47.jp の各ページの Core Web Vitals を計測し、`.claude/state/metrics/psi/` に蓄積する。
+閾値は `.claude/skills/analytics/performance-improvement/budgets.json` を参照。
 
-## 引数
+> **2026-06-21 PSI 統合**。旧版は Lighthouse CLI（`packages/database/scripts/lighthouse-check.ts`）で計測し
+> `performance-improvement/snapshots/*/metrics.csv` に蓄積していたが、当該スクリプトは完全DBレス移行で削除され、
+> その CSV を書く writer が無くなっていた。CWV 監視は **PSI 日次ワークフロー**（`.claude/scripts/psi/*` +
+> `.claude/state/metrics/psi/` + `psi-audit-daily.yml`）に一本化済（Lighthouse Lab data は廃止）。本スキルは
+> その PSI ツールを手動実行する薄いラッパー。計測対象 URL は `.claude/config/psi-urls.txt`（19 URL × mobile/desktop）。
 
-```
-/lighthouse-audit [--url PATH] [--type TYPE] [--strategy mobile|desktop|both] [--dry-run] [--top-pv N]
-```
+## 計測対象
 
-- `--url`: 単一パスを指定して測定（例: `--url /ranking/population-density`）
-- `--type`: ページ種別を指定して一括測定（省略時: `all`）
-  - `homepage`: トップページのみ
-  - `theme`: テーマダッシュボード（`/themes/*`）
-  - `ranking`: ランキングページ（PV 上位から抽出）
-  - `area`: 都道府県ページ（`/areas/*`）
-  - `blog`: ブログ記事（PV 上位から抽出）
-  - `all`: 全種別から代表ページを選出
-- `--strategy`: 測定デバイス（デフォルト: `both`）
-  - `mobile`: モバイルのみ
-  - `desktop`: デスクトップのみ
-  - `both`: モバイル・デスクトップ両方
-- `--dry-run`: API を呼ばず、測定対象 URL の一覧のみ表示
-- `--top-pv N`: PV 上位 N 件を対象とする（デフォルト: `10`）。`.claude/skills/analytics/ga4-improvement/reference/snapshots/<最新週>/pages.csv` から `/ranking/<key>` を PV 降順で抽出
+`.claude/config/psi-urls.txt` に列挙された URL（homepage / theme / ranking / area / blog の代表ページ）。
+対象を変えたいときは同ファイルを編集するか `--file <urls.txt>` で別リストを渡す。
 
-## 実行
-
-**Lighthouse CLI スクリプト（推奨）:**
+## 実行（PSI 日次と同じ 3 ステップ）
 
 ```bash
-npx tsx packages/database/scripts/lighthouse-check.ts $ARGUMENTS
+# 1) 計測 → .claude/state/metrics/psi/psi-batch-<ISO>.json
+npm run fetch-psi-audit                 # = node .claude/scripts/psi/fetch-psi-audit.mjs
+#    オプション: --strategy mobile / --strategy desktop / --file custom-urls.txt
+#    PSI_API_KEY があれば quota が上がる（.env.local / CI secret）。無くても動く（レート制限注意）
+
+# 2) digest 更新 → history.csv (日次トレンド append) + LATEST.md (前日比矢印 + 閾値違反強調)
+npm run psi-audit:digest                # = node .claude/scripts/psi/psi-update-digest.mjs
+
+# 3) 閾値チェック → budgets.json と比較し violations（error 違反で exit 1）
+npm run psi-audit:check                 # = node .claude/scripts/psi/psi-threshold-check.mjs
+#    レポート出力: npm run psi-audit:check -- --output /tmp/psi-report.md
 ```
 
-このスクリプトは:
-- ローカルの Chrome で Lighthouse を実行（API キー不要・レート制限なし）
-- 結果を `.claude/skills/analytics/performance-improvement/snapshots/YYYY-MM-DD/metrics.csv` に自動 UPSERT（同日・同 URL・同 strategy は上書き）
-- `budgets.json` の閾値と突き合わせて違反をレポート
-- マークダウンテーブルで結果を出力
+CI（`.github/workflows/psi-audit-daily.yml`、JST 02:00）は上記を fetch → digest → check の順で自動実行し、
+閾値違反時に `[PSI Alert]`（`psi-alert,auto-generated`）Issue を起票する。手動計測は本スキルで同じ流れを回す。
 
-**デフォルト測定対象:**
-- トップページ、テーマ（3ページ）、都道府県（3ページ）、比較、相関分析 = 計 9 URL
+## バジェット閾値（`budgets.json`）
 
-### フォールバック: PSI API
+| 指標 | Good | Needs Improvement | Poor |
+|---|---|---|---|
+| LCP | < 2500ms | 2500-4000ms | > 4000ms |
+| CLS | < 0.1 | 0.1-0.25 | > 0.25 |
+| INP | < 200ms | 200-500ms | > 500ms |
+| FCP | < 1800ms | 1800-3000ms | > 3000ms |
+| TBT | < 200ms | 200-600ms | > 600ms |
+| Performance Score | >= 90 | 50-89 | < 50 |
 
-CLI が使えない場合（Chrome なし等）は PSI API を使用:
+実際に適用される閾値は `budgets.json` が SSOT（本表は目安）。
 
-```bash
-PSI_API_KEY=$(grep PSI_API_KEY .env.local | cut -d= -f2)
-curl -s "https://www.googleapis.com/pagespeedonline/v5/runPagespeedtest?url=https://stats47.jp/&strategy=mobile&key=${PSI_API_KEY}"
-```
+## 出力の見方
 
-**注意**: PSI API はネットワーク環境によりアクセスできない場合がある（企業プロキシ等）。その場合はブラウザで https://pagespeed.web.dev/ を使用。
-
-## バジェット違反チェック
-
-以下の閾値を超えた場合はレポートに警告を出す:
-
-   | 指標 | Good | Needs Improvement | Poor |
-   |---|---|---|---|
-   | LCP | < 2500ms | 2500-4000ms | > 4000ms |
-   | CLS | < 0.1 | 0.1-0.25 | > 0.25 |
-   | INP | < 200ms | 200-500ms | > 500ms |
-   | FCP | < 1800ms | 1800-3000ms | > 3000ms |
-   | TBT | < 200ms | 200-600ms | > 600ms |
-   | Performance Score | >= 90 | 50-89 | < 50 |
-
-## 出力フォーマット
-
-### コンソール出力（マークダウンテーブル）
-
-```markdown
-## Lighthouse Audit Results — YYYY-MM-DD
-
-### Mobile
-
-| URL | Perf | A11y | BP | SEO | LCP | CLS | FCP | TBT | Budget |
-|---|---|---|---|---|---|---|---|---|---|
-| / | 92 | 100 | 100 | 100 | 1.8s | 0.02 | 0.9s | 120ms | OK |
-| /ranking/pop-density | 78 | 98 | 100 | 100 | 3.2s | 0.15 | 1.5s | 350ms | LCP,CLS |
-
-### Desktop
-
-| URL | Perf | A11y | BP | SEO | LCP | CLS | FCP | TBT | Budget |
-|---|---|---|---|---|---|---|---|---|---|
-| ... |
-
-### CrUX Field Data（実ユーザーデータ）
-
-| URL | LCP p75 | CLS p75 | INP p75 | TTFB p75 | 評価 |
-|---|---|---|---|---|---|
-| / | 2.1s | 0.05 | 120ms | 0.8s | Good |
-
-※ CrUX データはトラフィックが十分なページのみ。低トラフィックページでは null になる。
-
-### Budget Violations
-
-| URL | Strategy | 指標 | 値 | 閾値 | 重大度 |
-|---|---|---|---|---|---|
-| /ranking/xxx | mobile | LCP | 4.2s | 2.5s | Poor |
-
-### Summary
-
-- 測定 URL 数: N
-- バジェット違反: N 件（Poor: N, Needs Improvement: N）
-- 平均 Performance Score: mobile N / desktop N
-```
+- **最新サマリ（人間向け）**: `.claude/state/metrics/psi/LATEST.md`（前日比矢印 + 閾値違反強調）
+- **日次履歴（トレンド分析用）**: `.claude/state/metrics/psi/history.csv`（`date,url,strategy,page_type,score_performance,lcp_ms,cls,tbt_ms,fcp_ms,ttfb_ms,violations_error,violations_warning`）
+- **生バッチ**: `.claude/state/metrics/psi/psi-batch-<ISO>.json`
+- トレンド・期間比較・改善提案のレポート化は `/performance-report`。
 
 ## 注意事項
 
-- **CLI 推奨**: ローカル Lighthouse CLI は API キー不要で安定して動作する。PSI API はフォールバック
-- **CrUX データ**: 実ユーザーデータは Chrome UX Report に十分なトラフィックがあるページのみ返される。新規ページや低トラフィックページでは null
-- **Lab vs Field**: Lighthouse スコアは Lab データ（シミュレーション）。CrUX は Field データ（実ユーザー）。両方を記録する
-- **測定のばらつき**: Lighthouse スコアは測定ごとに ±5 程度のばらつきがある。トレンドで判断すること
-- **Cloudflare Pages**: stats47 は Cloudflare Pages でホスティングされているため、TTFB は一般的に良好。Edge キャッシュの影響も考慮
+- **Field data（実ユーザー）**: PSI は CrUX（実ユーザー p75）も返す。低トラフィックページでは null。
+- **計測のばらつき**: スコアは計測ごとに揺れる。単発値でなくトレンド（history.csv）で判断する。
+- **Cloudflare Pages**: Edge キャッシュにより TTFB は概ね良好。MISS 時との差に注意。
+- **ネットワーク**: PSI API は企業プロキシ等でブロックされることがある。その場合は https://pagespeed.web.dev/ を手動利用。
 
 ## 推奨実行頻度
 
-- **週次**: `--type all --strategy both`（定点観測）
-- **デプロイ後**: `--type homepage --strategy mobile`（リグレッション検出）
-- **月次**: `/performance-report` と組み合わせてトレンド分析
+- **日次**: CI（`psi-audit-daily.yml`）が自動実行。手動は不要。
+- **デプロイ後**: `npm run fetch-psi-audit -- --strategy mobile` でリグレッション確認。
+- **月次**: `/performance-report` でトレンド分析。
 
 ## 参照
 
-- `.claude/skills/analytics/performance-report/SKILL.md` — パフォーマンス総合レポート
-- `.claude/skills/analytics/seo-audit/SKILL.md` — SEO 総合監査（CWV セクションと連携）
-- `.claude/skills/analytics/performance-improvement/budgets.json` — バジェット閾値の設定
-- `.claude/skills/analytics/performance-improvement/snapshots/YYYY-MM-DD/metrics.csv` — 計測結果の蓄積（日別）
-- `.claude/skills/analytics/performance-improvement/reference/improvement-log.md` — 改善施策の記録
+- `.claude/scripts/psi/{fetch-psi-audit,psi-update-digest,psi-threshold-check}.mjs` — PSI ツール本体
+- `.claude/config/psi-urls.txt` — 計測対象 URL リスト
+- `.claude/skills/analytics/performance-improvement/budgets.json` — バジェット閾値（SSOT）
+- `.claude/state/metrics/psi/{LATEST.md,history.csv}` — 蓄積データ
+- `.claude/skills/analytics/performance-report/SKILL.md` — トレンド総合レポート
+- `.github/workflows/psi-audit-daily.yml` — 日次自動計測
 - PageSpeed Insights API: https://developers.google.com/speed/docs/insights/v5/get-started
-
-## データ保存先
-
-- **計測結果**: `.claude/skills/analytics/performance-improvement/snapshots/YYYY-MM-DD/metrics.csv`
-- **閾値**: `.claude/skills/analytics/performance-improvement/budgets.json`
-- PV 上位ページの抽出は GA4 週次 snapshot (`.claude/skills/analytics/ga4-improvement/reference/snapshots/<week>/pages.csv`) を read-only で参照
-
-旧 D1 テーブル `performance_metrics` / `performance_budgets` は 2026-04-17 に廃止。既存データは snapshots/2026-03-27/ および snapshots/2026-03-28/ に移行済み。

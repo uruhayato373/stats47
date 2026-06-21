@@ -1,20 +1,26 @@
 ---
 name: performance-report
-description: パフォーマンス総合レポートを生成する（トレンド・バジェット監査・ページ種別比較・改善提案）。Use when user says "パフォーマンスレポート", "速度レポート", "CWVまとめ". .claude/skills/analytics/performance-improvement/snapshots 配下の CSV から分析.
+description: パフォーマンス総合レポートを生成する（トレンド・バジェット監査・ページ種別比較・改善提案）。Use when user says "パフォーマンスレポート", "速度レポート", "CWVまとめ". .claude/state/metrics/psi の history.csv / LATEST.md から分析.
 argument-hint: "[--period 7d|28d|3m] [--compare]"
 allowed-tools: Read, Bash, Grep
 primary_agent: performance-auditor
 co_agents: [seo-auditor]
 ---
 
-`.claude/skills/analytics/performance-improvement/snapshots/YYYY-MM-DD/metrics.csv` に蓄積された Lighthouse / PSI 計測履歴からパフォーマンス総合レポートを生成する。トレンド分析・バジェット監査・ページ種別比較・改善提案を含む。
+# /performance-report — CWV 総合レポート（PSI state ベース）
 
-**記録先の統一原則（.claude/rules/data-storage.md）**: 計測データは `.claude/skills/analytics/performance-improvement/` 配下のファイル。旧 D1 テーブル `performance_metrics` / `performance_budgets` は 2026-04-17 に廃止済み。
+`.claude/state/metrics/psi/` に蓄積された PSI 計測履歴からパフォーマンス総合レポートを生成する。
+トレンド分析・バジェット監査・ページ種別比較・改善提案を含む。
+
+> **2026-06-21 PSI 統合**。旧版は `packages/database/scripts/performance-report.ts`（削除済）を実行し
+> `performance-improvement/snapshots/*/metrics.csv`（writer 消滅で枯渇）を読んでいた。CWV 監視は PSI 日次
+> ワークフローに一本化済（→ `/lighthouse-audit`）。本スキルは **`.claude/state/metrics/psi/history.csv`
+> （日次トレンド）+ `LATEST.md`（最新前日比）** を入力に、エージェントがレポートを生成する（専用 D1 スクリプトは不要）。
 
 ## 前提条件
 
-- `/lighthouse-audit` が少なくとも1回実行済みであること（`snapshots/YYYY-MM-DD/metrics.csv` にデータが必要）
-- トレンド比較には2回以上の測定データ（複数日の snapshot）が必要
+- `.claude/state/metrics/psi/history.csv` にデータがあること（日次 CI `psi-audit-daily.yml` が蓄積。手動は `/lighthouse-audit`）
+- トレンド比較には複数日のデータが必要
 
 ## 引数
 
@@ -22,131 +28,75 @@ co_agents: [seo-auditor]
 /performance-report [--period 7d|28d|3m] [--compare]
 ```
 
-- `--period`: 分析対象期間（デフォルト: `28d`）
-  - `7d`: 直近7日間
-  - `28d`: 直近28日間
-  - `3m`: 直近3ヶ月
-- `--compare`: 前期間との比較を含める（例: `28d` なら前の28日間と比較）
+- `--period`: 分析対象期間（デフォルト `28d`）。`7d` / `28d` / `3m`
+- `--compare`: 前期間との比較を含める
 
-## 実行
+## 実行手順（エージェント駆動・DBレス）
 
-```bash
-npx tsx packages/database/scripts/performance-report.ts $ARGUMENTS
-```
+1. **最新サマリを読む**: `.claude/state/metrics/psi/LATEST.md`（前日比矢印 + 閾値違反強調。digest 済の人間向けレポート）
 
-スクリプトが存在しない場合は、以下の手順で手動実行する:
-
-### 手動実行手順
-
-1. **データ取得**
+2. **トレンド用に history.csv を期間で絞る**:
 
    ```bash
-   # 期間内の全測定データを集約
-   # --period 28d なら直近 28 日分の snapshots ディレクトリを走査
-   ls -d .claude/skills/analytics/performance-improvement/snapshots/*/ | sort | tail -28
-
-   # 各ディレクトリの metrics.csv を awk/csvkit 等で結合して分析
-   # 各行は page_type カラムを持つ（URL パターン依存の判定は不要）
+   # ヘッダ + 直近 period 日分。history.csv は date,url,strategy,page_type,score_performance,
+   #   lcp_ms,cls,tbt_ms,fcp_ms,ttfb_ms,violations_error,violations_warning
+   head -1 .claude/state/metrics/psi/history.csv
+   awk -F, -v since="$(date -v-28d +%F 2>/dev/null || date -d '28 days ago' +%F)" 'NR==1||$1>=since' \
+     .claude/state/metrics/psi/history.csv
    ```
 
-   CSV カラム定義:
-   - `url`, `page_type`, `strategy`, `date`
-   - `score_performance`, `score_accessibility`, `score_best_practices`, `score_seo`
-   - Lab data: `lcp_ms`, `cls`, `inp_ms`, `fcp_ms`, `si_ms`, `tbt_ms`, `tti_ms`, `ttfb_ms`
-   - Resources: `total_byte_weight`, `js_byte_weight`, `css_byte_weight`, `image_byte_weight`, `font_byte_weight`, `third_party_byte_weight`, `dom_size`, `request_count`
-   - CrUX field data: `crux_lcp_p75`, `crux_inp_p75`, `crux_cls_p75`, `crux_ttfb_p75`, `crux_fcp_p75`
-   - `source` (`lighthouse` or `psi`)
+3. **最新の閾値違反を取り直す**（必要なら）:
 
-2. **セクション別分析の実行**（後述の各セクション参照）
+   ```bash
+   npm run psi-audit:check -- --output /tmp/psi-report.md   # budgets.json と比較した violations
+   ```
 
-3. **レポートファイルの生成・保存**
+4. **CSV カラム定義**（`history.csv`）:
+   - `date`, `url`, `strategy`, `page_type`
+   - `score_performance`
+   - Lab data: `lcp_ms`, `cls`, `tbt_ms`, `fcp_ms`, `ttfb_ms`
+   - `violations_error`, `violations_warning`
+
+   > 注: PSI history.csv は旧 metrics.csv より列が絞られている（accessibility / best_practices / seo /
+   > inp_ms / si_ms / tti_ms / リソース byte weight / CrUX p75 は含まない）。リソース内訳や CrUX field の
+   > 詳細が要る場合は生バッチ `psi-batch-<ISO>.json`（CrUX を含む）を参照する。
+
+5. **レポート生成 → 保存**（後述セクション構成）
 
 ## レポートセクション
 
-### 1. Executive Summary
-
-- 期間内の測定回数・対象 URL 数
-- 全体の平均 Performance Score（mobile / desktop）
+### 1. エグゼクティブサマリー
+- 期間内の計測日数・対象 URL 数
+- 平均 Performance Score（mobile / desktop、前期比 `--compare` 時）
 - CWV 合格率（Good の割合）
-- 前期間比の改善/悪化サマリー（`--compare` 時）
 - 最も改善が必要なページ TOP 3
 
 ### 2. Core Web Vitals ステータス
 
-CWV の 3 指標（LCP, CLS, INP）を評価する:
-
-| 評価 | LCP | CLS | INP |
+| 評価 | LCP | CLS | INP* |
 |---|---|---|---|
 | Good | < 2.5s | < 0.1 | < 200ms |
 | Needs Improvement | 2.5-4.0s | 0.1-0.25 | 200-500ms |
 | Poor | > 4.0s | > 0.25 | > 500ms |
 
-出力:
-- Lab データ（Lighthouse）の CWV 分布
-- Field データ（CrUX）の CWV 分布（データがある場合）
-- ページ別の CWV ステータス一覧
+*INP は history.csv に列が無い（lcp_ms/cls/tbt_ms/fcp_ms/ttfb_ms のみ）。INP/CrUX field は生バッチ参照。
+- Lab データ（PSI）の CWV 分布 / ページ別ステータス
 
 ### 3. ページ種別比較
-
-ページ種別ごとの平均スコア・CWV を比較する:
-
-| 種別 | 件数 | Perf (mob) | Perf (desk) | LCP | CLS | FCP | TBT |
-|---|---|---|---|---|---|---|---|
-| homepage | 1 | N | N | Ns | N | Ns | Nms |
-| theme | N | N | N | Ns | N | Ns | Nms |
-| ranking | N | N | N | Ns | N | Ns | Nms |
-| area | N | N | N | Ns | N | Ns | Nms |
-| blog | N | N | N | Ns | N | Ns | Nms |
+`page_type` ごとの平均 score_performance / lcp_ms / cls / tbt_ms / fcp_ms を比較。
 
 ### 4. トレンド分析
+- 日次の Performance Score 推移（history.csv の date 順）
+- 急悪化アラート（前回比 -10 以上）
+- デプロイとの相関（git log と照合）
 
-複数回の測定データからトレンドを分析する:
+### 5. バジェット違反
+`psi-audit:check` の violations と history.csv の `violations_error` / `violations_warning` から、URL × strategy × 指標 × 初検出日 × 継続期間。
 
-- 日次/週次の Performance Score 推移
-- CWV 各指標の推移グラフ（テキストベース）
-- 急激な悪化があった場合のアラート（前回比 -10 以上）
-- デプロイとの相関（Git コミット履歴との照合）
-
-### 5. Budget Violations
-
-パフォーマンスバジェット違反の一覧:
-
-| URL | Strategy | 指標 | 値 | 閾値 | 重大度 | 初検出日 | 継続期間 |
-|---|---|---|---|---|---|---|---|
-| /ranking/xxx | mobile | LCP | 4.2s | 2.5s | Poor | YYYY-MM-DD | N日 |
-
-バジェット定義:
-- Performance Score >= 80（mobile）/ >= 90（desktop）
-- LCP < 2500ms
-- CLS < 0.1
-- FCP < 1800ms
-- TBT < 200ms
-- Total Byte Weight < 2MB
-
-### 6. リソース分析
-
-- 平均 Total Byte Weight（ページ種別ごと）
-- Main Thread Time の分布
-- 重いページの特定と原因推測（JS バンドル・画像・フォント等）
-
-### 7. 改善アクション
-
-優先度付きの改善提案:
-
-| 優先度 | アクション | 対象ページ | 期待効果 | 実行方法 |
-|---|---|---|---|---|
-| P0 | LCP 改善: 画像最適化 | /ranking/xxx | LCP 4.2s → 2.5s | next/image の priority 設定 |
-| P1 | CLS 改善: レイアウトシフト修正 | /themes/xxx | CLS 0.15 → 0.05 | 明示的な width/height 設定 |
-| P2 | JS バンドル削減 | 全ページ | TBT -100ms | dynamic import の活用 |
-
-改善提案の根拠:
-- Lighthouse の diagnostics・opportunities セクションのデータ
-- ページ種別間の比較（同種別の他ページより悪いもの）
-- CWV の閾値超過
+### 6. 改善アクション
+優先度（P0/P1/P2）付きで、対象ページ・期待効果・実行方法。根拠は閾値超過とページ種別間比較。
 
 ## 出力
-
-### 保存先
 
 `docs/04_レビュー/{YYYY-Www}-performance-report.md` に Write tool で書き出す。frontmatter:
 
@@ -159,108 +109,25 @@ status: active
 ---
 ```
 
-書き出し後、ファイルパスを報告する。関連する Core Web Vitals 系の改善ログや、同週の weekly-review ファイルは本文の「関連リンク」セクションに相対パスで参照する。
-
-### 出力フォーマット（本文）
-
-```markdown
-## 対象月
-- **期間**: YYYY-MM-DD 〜 YYYY-MM-DD
-- **計測元**: `.claude/skills/analytics/performance-improvement/snapshots/`
-
-## エグゼクティブサマリー
-
-- 測定 URL 数: N（mobile: N, desktop: N）
-- 平均 Performance Score: mobile N / desktop N（前期比 ±N）
-- CWV 合格率: N%（Good: N, NI: N, Poor: N）
-- バジェット違反: N 件
-- 最優先改善: {1文で}
-
-## Core Web Vitals ステータス
-
-### Lab Data（Lighthouse）
-
-| 指標 | Good | Needs Improvement | Poor | p50 | p75 |
-|---|---|---|---|---|---|
-| LCP | N (N%) | N (N%) | N (N%) | Ns | Ns |
-| CLS | N (N%) | N (N%) | N (N%) | N | N |
-| FCP | N (N%) | N (N%) | N (N%) | Ns | Ns |
-| TBT | N (N%) | N (N%) | N (N%) | Nms | Nms |
-
-### Field Data（CrUX）
-
-{CrUX データがある場合のみ表示}
-
-## ページ種別比較
-
-{テーブル}
-
-## トレンド
-
-{推移データ}
-
-## バジェット違反
-
-{違反一覧}
-
-## リソース分析
-
-{分析結果}
-
-## 改善アクション
-
-### P0: 即時対応
-
-{アクション一覧}
-
-### P1: 今週中
-
-{アクション一覧}
-
-### P2: 今月中
-
-{アクション一覧}
-
-## 次回への申し送り
-
-- 注視すべきページ
-- 改善後の再測定予定
-- ベースライン数値
-
-## 関連リンク
-
-<!-- CWV 系の改善ログ、同週の weekly-review、バジェット違反対応の docs/ 等を相対パスで列挙 -->
-```
+書き出し後にパスを報告。CWV 改善ログ・同週 weekly-review は「関連リンク」に相対パスで参照。
 
 ## 注意事項
 
-- **データ不足**: 測定データが1回分しかない場合、トレンド分析はスキップされる
-- **CrUX データ**: 低トラフィックページでは Field データが取得できないため、Lab データのみの分析になる
-- **季節性**: トラフィック変動によるサーバー負荷の影響を考慮すること
-- **Cloudflare Pages**: Edge キャッシュの効果で TTFB は一般的に良好。キャッシュ MISS 時との差異に注意
+- **データ不足**: history.csv が 1 日分のみならトレンドはスキップ。
+- **CrUX field**: history.csv には無い。必要時は生バッチ `psi-batch-<ISO>.json` を読む。
+- **季節性 / Cloudflare Edge**: TTFB は Edge キャッシュで概ね良好。MISS 時との差に注意。
 
 ## 推奨実行頻度
 
 - **月次**: フルレポート（`--period 28d --compare`）
 - **四半期**: 長期トレンド（`--period 3m --compare`）
-- **SEO 監査時**: `/seo-audit` の CWV セクションのデータソースとして利用
-
-## Issue ラベル
-
-- `performance-report` — 本スキルが作成する Issue のラベル
-- パフォーマンス改善施策の Issue（Tier 別）からクロスリファレンスされる
+- **SEO 監査時**: `/seo-audit` の CWV セクションのデータソース
 
 ## 参照
 
-- `.claude/skills/analytics/lighthouse-audit/SKILL.md` — PSI 測定・DB 蓄積
-- `.claude/skills/analytics/seo-audit/SKILL.md` — SEO 総合監査
-- `.claude/skills/analytics/performance-improvement/snapshots/YYYY-MM-DD/metrics.csv` — 計測履歴
+- `.claude/skills/analytics/lighthouse-audit/SKILL.md` — PSI 計測（本レポートの入力を作る）
+- `.claude/state/metrics/psi/{history.csv,LATEST.md}` — 計測履歴（入力 SSOT）
+- `.claude/scripts/psi/psi-threshold-check.mjs` — 閾値違反の取得（`npm run psi-audit:check`）
 - `.claude/skills/analytics/performance-improvement/budgets.json` — 閾値設定
 - `.claude/skills/analytics/performance-improvement/reference/improvement-log.md` — 改善施策ログ
 - `ls -t docs/04_レビュー/*-performance-report.md` — 過去のレポート
-
-## DB パス
-
-```
-.local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite
-```
