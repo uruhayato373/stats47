@@ -11,6 +11,8 @@ tags: [gis, mlit, data-source]
 - **ソース**: https://nlftp.mlit.go.jp/ksj/index.html
 - **スキル**: `/fetch-mlit-ksj`
 
+> **⚠️ 本ドキュメント中の「D1 gis_datasets」= ローカル使い捨て SQLite (`packages/database/.data/stats47.sqlite`) の `gis_datasets` テーブル**であり、Cloudflare の永続/リモート D1 サービスではない (完全DBレスで廃止済)。GIS パイプラインは DBレス移行の**既知スコープ例外**で、データセット定義の起点は git TS の `packages/gis/src/mlit-ksj/registry.ts`、`seed-from-registry.ts` がそれをローカル SQLite に seed し、`run-pipeline.ts` が読む (本番アプリは GIS スナップショットを R2 から読むのみで DB query しない)。正典: `docs/01_技術設計/12_完全DBレス設計.md` (§残 D1 依存) / `.claude/rules/data-sqlite-ssot.md`。
+
 ## 使い方
 
 ```bash
