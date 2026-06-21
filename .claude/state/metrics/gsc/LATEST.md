@@ -1,12 +1,12 @@
-# GSC Latest — 2026-W24
+# GSC Latest — 2026-W25
 
 | Metric | 今週 | 前週比 |
 |---|---|---|
-| Clicks | 1644 ▲ |  (+21.9%) |
-| Impressions | 54416 ▲ |  (+15.3%) |
-| CTR | 3.02% · | |
-| Avg Position | 8.95 ▼ | |
-| Queries rows | 1326 | |
-| Pages rows | 1881 | |
+| Clicks | 1763 ▲ |  (+7.2%) |
+| Impressions | 65267 ▲ |  (+19.9%) |
+| CTR | 2.70% · | |
+| Avg Position | 9.29 ▼ | |
+| Queries rows | 1488 | |
+| Pages rows | 2071 | |
 
 履歴: [`history.csv`](./history.csv) (GitHub が表形式でレンダリング)
