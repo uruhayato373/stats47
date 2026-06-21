@@ -1,9 +1,0 @@
-{
-  "kind": "scatter",
-  "incomplete": true,
-  "note": "出自(rankingKey/derived)が data json に無い。fetch-ranking-data-r2 か backfill-source で SSOT を補完すること",
-  "generatedBy": "generate-article-charts.ts",
-  "chartType": "scatter",
-  "dataFile": "comm-cost-scatter.json",
-  "label": "交通・通信費割合 と 携帯電話契約数の関係"
-}
