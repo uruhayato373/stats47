@@ -1,0 +1,334 @@
+import "dotenv/config";
+
+/**
+ * generate-parallel.ts — ランキング AI コンテンツの DBレス バッチ生成 orchestrator。
+ *
+ * 旧版 (7569bd5c で削除) は D1 (`metrics` 読み + `upsertRankingAiContent` 書き) に依存していた。
+ * 本版は **完全DBレス**:
+ *   入力  : R2 観測値 + ranking item.json (build-input.ts)
+ *   生成  : claude / gemini CLI を子プロセス起動 (API キー不要・旧 callAI を踏襲)
+ *   ゲート: 生成物を audit-ai-content.mjs に通し blocker 0 のものだけ採用 (★旧版に無かった品質ゲート)
+ *   出力  : staging dir に AiContentSnapshotRow を書き出す (R2 直書きしない)
+ *           → r2-publisher / diff-push-r2 が staging を app/ranking/<key>/ai-content.json へ push
+ *
+ * ★Claude Code セッション内では claude CLI への大きい stdin がサンドボックスでブロックされるため、
+ *   実生成は **ユーザー端末 (Claude Code 外) か CI** で実行する。セッション内検証は --dry-run を使う。
+ *
+ * CLI:
+ *   NODE_OPTIONS='--conditions react-server' R2_PUBLIC_FETCH_URL=https://storage.stats47.jp \
+ *     tsx packages/ai-content/src/scripts/generate-parallel.ts \
+ *       [--model claude-haiku|claude-sonnet|claude-opus|gemini] [--concurrency N] \
+ *       [--limit N] [--area prefecture] [--force] [--out <dir>] [--dry-run] [--keys k1,k2]
+ *
+ *   --dry-run : callAI を呼ばず、各 key の prompt 長と「書き込む予定の staging パス」だけ出す (LLM 課金なし)
+ *   --keys    : 対象 key をカンマ区切りで明示 (pending 走査をスキップ)
+ *   --out     : staging dir (default .local/ai-content-staging)。配下に app/ranking/<key>/ai-content.json
+ *
+ * 関連: build-input.ts / list-pending.ts / .claude/scripts/ai-content/audit-ai-content.mjs
+ *       .claude/agents/ranking-content-author.md
+ */
+
+import { spawn } from "node:child_process";
+import { mkdirSync, writeFileSync, mkdtempSync, rmSync } from "node:fs";
+import { tmpdir } from "node:os";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+
+import { readActiveRankingKeysFromR2 } from "@stats47/ranking/server";
+import { fetchFromR2AsJson } from "@stats47/r2-storage/server";
+import { isOk } from "@stats47/types";
+import type { AreaType } from "@stats47/types";
+import { aiContentKeyPath, type AiContentSnapshotRow } from "../types/snapshot";
+import { buildRankingContentPromptForKey } from "./build-input";
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+// packages/ai-content/src/scripts → リポジトリルートは 4 つ上
+const PROJECT_ROOT = path.resolve(__dirname, "../../../..");
+const AUDIT_SCRIPT = path.join(
+  PROJECT_ROOT,
+  ".claude/scripts/ai-content/audit-ai-content.mjs",
+);
+
+interface Options {
+  model: string;
+  concurrency: number;
+  limit: number;
+  areaType: AreaType;
+  force: boolean;
+  outDir: string;
+  dryRun: boolean;
+  keys: string[] | null;
+}
+
+function parseArgs(): Options {
+  const a = process.argv.slice(2);
+  const get = (flag: string) => {
+    const i = a.indexOf(flag);
+    return i >= 0 ? a[i + 1] : undefined;
+  };
+  return {
+    model: get("--model") ?? "claude-haiku",
+    concurrency: Number(get("--concurrency") ?? 3),
+    limit: Number(get("--limit") ?? Infinity),
+    areaType: (get("--area") ?? "prefecture") as AreaType,
+    force: a.includes("--force"),
+    outDir: get("--out") ?? path.join(PROJECT_ROOT, ".local/ai-content-staging"),
+    dryRun: a.includes("--dry-run"),
+    keys: get("--keys")?.split(",").map((s) => s.trim()).filter(Boolean) ?? null,
+  };
+}
+
+// ============================================================
+// AI 呼び出し (旧 callAI を踏襲。NODE_OPTIONS / CLAUDECODE を子に渡さない)
+// ============================================================
+
+function callAI(model: string, promptContent: string): Promise<string> {
+  return new Promise((resolve, reject) => {
+    let cmd: string;
+    let args: string[];
+    if (model.startsWith("claude")) {
+      cmd = "claude";
+      let modelId = "claude-haiku-4-5-20251001";
+      if (model === "claude-sonnet") modelId = "claude-sonnet-4-6";
+      else if (model === "claude-opus") modelId = "claude-opus-4-8";
+      args = ["-p", "", "--output-format", "text", "--model", modelId];
+    } else {
+      cmd = "gemini";
+      args = ["-p", "", "-o", "text"];
+    }
+    // NODE_OPTIONS='--conditions react-server' は Bun ベースの claude CLI を壊す。
+    // CLAUDECODE=1 は Claude Code 内で大きい stdin をブロックする。両方を子から除去する。
+    const { NODE_OPTIONS: _n, CLAUDECODE: _c, ...childEnv } = process.env;
+    const proc = spawn(cmd, args, {
+      stdio: ["pipe", "pipe", "pipe"],
+      env: childEnv,
+    });
+    let stdout = "";
+    let stderr = "";
+    proc.stdout.on("data", (d: Buffer) => (stdout += d.toString()));
+    proc.stderr.on("data", (d: Buffer) => (stderr += d.toString()));
+    proc.on("close", (code) => {
+      if (code === 0) resolve(stdout);
+      else
+        reject(
+          new Error(`${model} CLI failed (code ${code}): ${stderr.slice(0, 300)}`),
+        );
+    });
+    proc.on("error", (e) => reject(new Error(`spawn error: ${e.message}`)));
+    proc.stdin.write(promptContent, "utf-8");
+    proc.stdin.end();
+  });
+}
+
+function stripCodeFence(text: string): string {
+  const match = text.match(/```(?:json)?\s*\n?([\s\S]*?)\n?\s*```/);
+  return match ? match[1].trim() : text.trim();
+}
+
+// ============================================================
+// audit ゲート: 候補 row を一時ファイルに書いて audit-ai-content.mjs --file に通す
+// blocker 0 → true / 1 件でもあれば false
+// ============================================================
+
+function runAuditGate(row: AiContentSnapshotRow): Promise<{ ok: boolean; detail: string }> {
+  return new Promise((resolve) => {
+    const dir = mkdtempSync(path.join(tmpdir(), "ai-content-audit-"));
+    const file = path.join(dir, `${row.rankingKey}.json`);
+    writeFileSync(file, JSON.stringify(row), "utf-8");
+    const { NODE_OPTIONS: _n, ...childEnv } = process.env;
+    const proc = spawn("node", [AUDIT_SCRIPT, "--file", file, "--json"], {
+      stdio: ["ignore", "pipe", "pipe"],
+      env: childEnv,
+    });
+    let out = "";
+    proc.stdout.on("data", (d: Buffer) => (out += d.toString()));
+    proc.on("close", (code) => {
+      rmSync(dir, { recursive: true, force: true });
+      // exit 0 = blocker なし / exit 1 = blocker あり / exit 2 = audit 自体のエラー
+      let detail = "";
+      try {
+        const j = JSON.parse(out);
+        detail = (j.blockers ?? []).map((b: { code: string }) => b.code).join(",");
+      } catch {
+        detail = out.slice(0, 120);
+      }
+      resolve({ ok: code === 0, detail });
+    });
+    proc.on("error", (e) => {
+      rmSync(dir, { recursive: true, force: true });
+      resolve({ ok: false, detail: `audit spawn error: ${e.message}` });
+    });
+  });
+}
+
+// ============================================================
+// staging 書き出し: <outDir>/app/ranking/<key>/ai-content.json
+// ============================================================
+
+function writeStaging(outDir: string, row: AiContentSnapshotRow): string {
+  const rel = aiContentKeyPath(row.rankingKey); // app/ranking/<key>/ai-content.json
+  const dest = path.join(outDir, rel);
+  mkdirSync(path.dirname(dest), { recursive: true });
+  writeFileSync(dest, JSON.stringify(row, null, 2) + "\n", "utf-8");
+  return dest;
+}
+
+// ============================================================
+// 1 件処理
+// ============================================================
+
+interface Counters {
+  ok: number;
+  fail: number;
+  skip: number;
+  rejected: number;
+}
+
+async function processOne(
+  rankingKey: string,
+  opts: Options,
+  counters: Counters,
+): Promise<void> {
+  try {
+    const built = await buildRankingContentPromptForKey(rankingKey, opts.areaType);
+    if (!built) {
+      process.stdout.write(`[SKIP] ${rankingKey}: 入力なし (item/観測値が R2 に無い)\n`);
+      counters.skip++;
+      return;
+    }
+    const { meta, prompt } = built;
+
+    if (opts.dryRun) {
+      const dest = path.join(opts.outDir, aiContentKeyPath(rankingKey));
+      process.stdout.write(
+        `[DRY] ${rankingKey} (${meta.yearCode}): prompt ${prompt.length}字 → ${dest}\n`,
+      );
+      counters.ok++;
+      return;
+    }
+
+    const raw = await callAI(opts.model, prompt);
+    const stripped = stripCodeFence(raw.trim());
+    let parsed: {
+      faq?: unknown;
+      regionalAnalysis?: string;
+      insights?: string;
+      prefectureCommentary?: unknown;
+    };
+    try {
+      parsed = JSON.parse(stripped);
+    } catch {
+      process.stdout.write(`[FAIL] ${rankingKey}: JSON parse error\n`);
+      counters.fail++;
+      return;
+    }
+
+    const now = new Date().toISOString();
+    const row: AiContentSnapshotRow = {
+      rankingKey,
+      yearCode: meta.yearCode,
+      faq: parsed.faq ? JSON.stringify(parsed.faq) : null,
+      regionalAnalysis: parsed.regionalAnalysis ?? null,
+      insights: parsed.insights ?? null,
+      prefectureCommentary: parsed.prefectureCommentary
+        ? JSON.stringify(parsed.prefectureCommentary)
+        : null,
+      createdAt: now,
+      updatedAt: now,
+    };
+
+    // ★品質ゲート: blocker があれば採用しない (旧版に無かった安全弁)
+    const gate = await runAuditGate(row);
+    if (!gate.ok) {
+      process.stdout.write(`[REJECT] ${rankingKey}: audit blocker (${gate.detail})\n`);
+      counters.rejected++;
+      return;
+    }
+
+    const dest = writeStaging(opts.outDir, row);
+    process.stdout.write(`[OK] ${rankingKey} (${meta.yearCode}) → ${dest}\n`);
+    counters.ok++;
+  } catch (err) {
+    process.stdout.write(
+      `[FAIL] ${rankingKey}: ${err instanceof Error ? err.message.slice(0, 200) : String(err)}\n`,
+    );
+    counters.fail++;
+  }
+}
+
+// ============================================================
+// pending 抽出 (DBレス: R2 active keys → ai-content.json 未完のもの)
+// ============================================================
+
+async function collectPendingKeys(opts: Options): Promise<string[]> {
+  if (opts.keys) return opts.keys;
+  const keysResult = await readActiveRankingKeysFromR2(opts.areaType);
+  if (!isOk(keysResult)) {
+    throw new Error(`active keys 取得失敗: ${keysResult.error.message}`);
+  }
+  const allKeys = keysResult.data.map((k) => k.rankingKey);
+  if (opts.force) return allKeys;
+
+  const pending: string[] = [];
+  const CONCURRENCY = 16;
+  for (let i = 0; i < allKeys.length; i += CONCURRENCY) {
+    const batch = allKeys.slice(i, i + CONCURRENCY);
+    const results = await Promise.all(
+      batch.map(async (k) => {
+        const row = await fetchFromR2AsJson<AiContentSnapshotRow>(
+          aiContentKeyPath(k),
+        ).catch(() => null);
+        const complete =
+          row &&
+          row.faq &&
+          row.regionalAnalysis &&
+          row.insights &&
+          row.prefectureCommentary;
+        return complete ? null : k;
+      }),
+    );
+    pending.push(...results.filter((k): k is string => k !== null));
+  }
+  return pending;
+}
+
+// ============================================================
+// main
+// ============================================================
+
+async function main() {
+  const opts = parseArgs();
+  const pending = await collectPendingKeys(opts);
+  const targets = Number.isFinite(opts.limit)
+    ? pending.slice(0, opts.limit)
+    : pending;
+
+  process.stdout.write(
+    `=== AI Content Generator (model: ${opts.model}, concurrency: ${opts.concurrency}${opts.dryRun ? ", DRY-RUN" : ""}) ===\n`,
+  );
+  process.stdout.write(
+    `pending ${pending.length} 件中 ${targets.length} 件を処理 → staging: ${opts.outDir}\n`,
+  );
+
+  const counters: Counters = { ok: 0, fail: 0, skip: 0, rejected: 0 };
+  for (let i = 0; i < targets.length; i += opts.concurrency) {
+    const batch = targets.slice(i, i + opts.concurrency);
+    await Promise.all(batch.map((k) => processOne(k, opts, counters)));
+  }
+
+  process.stdout.write(
+    `\n=== 完了: OK ${counters.ok} / REJECT ${counters.rejected} / FAIL ${counters.fail} / SKIP ${counters.skip} ===\n`,
+  );
+  if (!opts.dryRun && counters.ok > 0) {
+    process.stdout.write(
+      `次: r2-publisher / diff-push-r2 で ${opts.outDir} を R2 app/ranking へ push\n`,
+    );
+  }
+}
+
+main().catch((err) => {
+  process.stderr.write(
+    `[generate-parallel] ${err instanceof Error ? err.message : String(err)}\n`,
+  );
+  process.exit(2);
+});

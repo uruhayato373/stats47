@@ -25,21 +25,31 @@ description: ランキングページ向け AI コンテンツ (insights=デー�
 - ai-content のリライト・根拠補強（`/enhance-ranking-ai-content`、NotebookLM/WebSearch 連携）
 - 生成後の決定的ゲート実行（`audit-ai-content.mjs`）と blocker 是正
 
-## ★最優先の責務: 生成パイプラインの DBレス再構築（pipeline は削除済）
+## 生成パイプライン（DBレス・再構築済 2026-06-21）
 
-**確定事実（2026-06-21 実証）**: ai-content の生成パイプラインは完全DBレス移行（commit `7569bd5c`
-"dbless Part D"）で **丸ごと削除**された。生成 CLI（`generate-parallel.ts` / `save-content.ts` /
-`build-prompt.ts` / `generate-all.sh`）・D1 `ai_content` repository・D1→R2 exporter は**もう存在しない**
-（残存は reader `read-ranking-ai-content-snapshot.ts`・prompt `ranking-content-prompt.ts`・types のみ）。
-R2 `app/ranking/<key>/ai-content.json` は移行前の**凍結データ**で、現状 writer が無く生成・再生成できない。
-`generate-ai-content` / `enhance-ranking-ai-content` SKILL は dead（dead バナー付与済）。
+ai-content の生成パイプラインは完全DBレス移行（commit `7569bd5c` "dbless Part D"）で一度丸ごと削除されたが、
+**2026-06-21 に DBレスで再構築・検証済み**。D1 は一切使わず R2 観測値 + ranking item.json から生成し、
+決定的ゲートを通して staging に書き出す。3 スクリプト構成（すべて `packages/ai-content/src/scripts/`）:
 
-→ **本 agent の最初の deliverable は、この生成パイプラインを DBレスで再構築すること**:
-R2 観測値（`app/stats/<key>/values.json`）+ ranking item.json を入力 → `ranking-content-prompt.ts` で prompt 構築
-→ AI（Claude/Gemini）生成 → **`audit-ai-content.mjs` で blocker 0 を確認** → R2 `app/ranking/<key>/ai-content.json`
-へ直書き（CI / S3 creds、`assertR2WriteAllowed`）+ `sync-snapshots` に ai-content タスク配線。
-backlog: `[AICONTENT-DBLESS-REBUILD]`（`docs/02_実装計画/04_機能バックログ.md`）。
-**再構築までは新規生成・リライトは不能**と扱い、そう報告する（`.claude/rules/evidence-based-judgment.md`）。
+| スクリプト | 役割 | npm script |
+|---|---|---|
+| `build-input.ts` | R2 観測値 + item.json → `RankingContentInput` + prompt 文字列（純 read。**AGENT はこれで prompt を得て生成**） | `ai:input -- <key>` |
+| `list-pending.ts` | R2 active keys → ai-content.json の missing / incomplete / complete 分類（ワークリスト） | `ai:list` |
+| `generate-parallel.ts` | buildInput → claude/gemini CLI 生成 → **audit ゲート（blocker 0）** → staging 書込（自動バッチ） | `ai:gen -- [--limit N]` / 検証 `ai:gen:dry` |
+
+実行 env 必須: `NODE_OPTIONS='--conditions react-server' R2_PUBLIC_FETCH_URL=https://storage.stats47.jp`（R2 公開 URL 読み・認証不要）。
+
+**標準ワークフロー**:
+1. `ai:list` で対象把握（2026-06-21 実測: missing 1556 / incomplete 488 / complete 49）
+2. 生成（どちらか）:
+   - **エージェント生成（推奨・1〜数件）**: `ai:input -- <key>` で `{input, prompt}` 取得 → 本 agent が prompt に従い JSON 生成（NotebookLM 出典は `buildRankingContentPromptForKey` の `extraContext` で注入）
+   - **自動バッチ（大量）**: `ai:gen -- --limit N`。ただし claude CLI は Claude Code の Bash 内で大きい stdin がブロックされるため **ユーザー端末 / CI で実行**（セッション内は `--dry-run` で検証のみ）
+3. **必ず audit ゲート**: 生成 JSON を `audit-ai-content.mjs --file <候補.json>` に通し blocker 0 を確認（`generate-parallel.ts` は内部で自動実行し blocker 持ちを `[REJECT]`、blocker 0 のみ staging へ）
+4. ゲート通過分は staging（`.local/ai-content-staging/app/ranking/<key>/ai-content.json`）→ **R2 push は r2-publisher / `diff-push-r2 app/ranking` に委譲**
+
+> **残課題（backlog `[AICONTENT-DBLESS-REBUILD]`）**: (a) 実際の大量生成 run（サンドボックス外/CI）、
+> (b) staging → R2 push の `sync-snapshots` タスク配線、(c) 既存 complete 49 件も旧プロンプト由来 blocker
+> （例 annual-clear-days は括弧数値 blocker 3 件）を持つため再生成対象。詳細: `docs/02_実装計画/04_機能バックログ.md`。
 
 ## 担当スキル
 
@@ -80,7 +90,7 @@ node .claude/scripts/ai-content/audit-ai-content.mjs --file /tmp/ai-content-outp
 
 ## 触る files
 - `packages/ai-content/src/services/prompts/ranking-content-prompt.ts`（生成ルール＝ゲートと同期）
-- `packages/ai-content/src/scripts/{generate-parallel,save-content,build-prompt}.ts`（生成・保存）
+- `packages/ai-content/src/scripts/{build-input,list-pending,generate-parallel}.ts`（DBレス生成パイプライン）
 - `.claude/skills/content/{generate-ai-content,enhance-ranking-ai-content}/SKILL.md`（reconcile 対象）
 - `.claude/scripts/ai-content/audit-ai-content.mjs`（実行・ルール追加時は本体も更新）
 

@@ -9,21 +9,20 @@ description: >
   "NotebookLM で ranking ページ強化", "/enhance-ranking-ai-content".
 disable-model-invocation: true
 primary_agent: ranking-content-author
-status: dead
 ---
 
-> ⚠️ **このスキルは現在 dead（実行不可）です。** 完全DBレス移行（commit `7569bd5c`）で ai-content の生成・保存
-> パイプライン（D1 `ai_content` + 生成 CLI + R2 exporter）が削除された。本スキルは `ai_content` への書き込みを
-> 前提とするため、**writer が存在しない現状では動かない**。再構築（DBレス generation → 決定的ゲート → R2 直書き）
-> が前提。担当 `ranking-content-author` / backlog `[AICONTENT-DBLESS-REBUILD]`。以下は参考の歴史的記述。
+> **2026-06-21 DBレス化**。本スキルは旧版で D1 (`ai_content` SELECT/UPDATE + R2 exporter) に依存していたが、
+> writer が DBレス再構築された（`packages/ai-content/src/scripts/{build-input,generate-parallel}.ts` +
+> 決定的ゲート `audit-ai-content.mjs` + staging→R2）。以下の手順は **D1 を R2 読み + staging 書きに置換済**。
+> NotebookLM 補強（Steps 2-5）と extraContext 注入の中核は不変。担当 `ranking-content-author`。
 
 # /enhance-ranking-ai-content — ranking_key の ai_content を NotebookLM 補強でリライト
 
 `/ranking/<rankingKey>` ページの `ai_content` フィールドを、NotebookLM 横断クエリで取得した白書由来の社会的背景・事例・歴史的文脈で補強しながら再生成する **aggregator orchestrator**。
 
 **棲み分け**:
-- 本スキル: **リライト専用** (`metrics.faq` 等が NOT NULL 前提)、NotebookLM 出典で内容深化
-- `/generate-ai-content`: **初回生成専用** (NULL → 値、Claude/Gemini 並列、`--limit N --force`)
+- 本スキル: **リライト専用** (既存 ai-content.json が存在する前提)、NotebookLM 出典で内容深化
+- `/generate-ai-content`: **初回生成専用** (未生成 → 値、Claude/Gemini 並列、`--limit N --force`)
 - `/notebooklm-research`: **公開済ブログ記事 (`article.md`) 補強専用** (対象が異なる)
 - `/brushup-blog --target article`: **GSC ベース seoTitle / description 改訂** (メタ改訂、内容深化とは別軸)
 
@@ -39,11 +38,13 @@ status: dead
 - `.claude/scripts/notebooklm-cross-query.mjs` (横断クエリ、`--json` 出力)
 - 利用可能 notebook 4 件 (SKILL.md 「利用可能ノートブック」参照、stats47 では主に「最新の白書」)
 
-### ai_content 関連の既存資源
-- DB schema: `packages/database/src/schema/metrics.ts` (yearCode, faq, regionalAnalysis, insights, prefectureCommentary)
-- 1 件更新: `packages/ai-content/src/repositories/upsert-ranking-ai-content.ts` → `upsertRankingAiContent()`
+### ai_content 関連の既存資源（DBレス）
+- 型: `packages/ai-content/src/types/snapshot.ts` → `AiContentSnapshotRow` (yearCode, faq, regionalAnalysis, insights, prefectureCommentary)
+- 入力 + prompt: `packages/ai-content/src/scripts/build-input.ts` → `buildRankingContentPromptForKey(key, area, { extraContext })`（R2 観測値 + item.json から組む。**D1 不使用**）
 - prompt: `packages/ai-content/src/services/prompts/ranking-content-prompt.ts` → `buildRankingContentPrompt(input, { extraContext })`
-- R2 export: `packages/ai-content/src/exporters/ranking-ai-content-snapshot.ts` → `exportRankingAiContentSnapshot()` (全件 16 並列、~2,000 ファイル/秒)
+- 決定的ゲート: `.claude/scripts/ai-content/audit-ai-content.mjs`（blocker 0 が公開条件）
+- 保存: staging `.local/ai-content-staging/app/ranking/<key>/ai-content.json` → R2 push は r2-publisher / `diff-push-r2 app/ranking`
+- reader: `packages/ai-content/src/repositories/read-ranking-ai-content-snapshot.ts`
 - R2 key: `app/ranking/<rankingKey>/ai-content.json`
 
 ### GSC 低 CTR 抽出
@@ -63,23 +64,18 @@ status: dead
 
 ## 実行フロー
 
-### Step 1: 現状取得
+### Step 1: 現状取得（R2・DBレス）
 
-1. ローカル D1 から該当 `ranking_key` の metrics 行を SELECT (yearCode + faq + regionalAnalysis + insights + prefectureCommentary)
-2. R2 `app/ranking/<rankingKey>/ai-content.json` も読み込む (diff 用 baseline)
-3. faq / regionalAnalysis / insights が **NULL の場合は中断**、`/generate-ai-content --key <rankingKey>` を案内する
+1. R2 `app/ranking/<rankingKey>/ai-content.json` を読み込む（既存 baseline = diff 用）
+2. faq / regionalAnalysis / insights が **空の場合は中断**、`/generate-ai-content` で初回生成を案内する
 
 ```bash
-# 例
-NODE_ENV=development NODE_OPTIONS='--conditions react-server' \
-  npx tsx -e "
-    import { getDrizzle } from '@stats47/database/server';
-    import { metrics } from '@stats47/database/server';
-    import { eq } from 'drizzle-orm';
-    const db = await getDrizzle();
-    const row = await db.select().from(metrics).where(eq(metrics.rankingKey, '<key>')).limit(1);
-    console.log(JSON.stringify(row[0], null, 2));
-  "
+# 既存 ai-content (diff baseline)
+curl -s "https://storage.stats47.jp/app/ranking/<key>/ai-content.json" | head -c 2000
+
+# 生成入力 + prompt（R2 観測値 + item.json から組む。D1 不使用）
+NODE_OPTIONS='--conditions react-server' R2_PUBLIC_FETCH_URL=https://storage.stats47.jp \
+  npm run ai:input --workspace=@stats47/ai-content -- <key>
 ```
 
 ### Step 2: ranking メタと上位/下位 5 県の抽出
@@ -140,17 +136,22 @@ node .claude/scripts/notebooklm-cross-query.mjs --json \
 - 引用箇所: {references から代表 2-3 件}
 ```
 
-### Step 6: 差分プレビュー → 適用
+### Step 6: 差分プレビュー → ゲート → staging → R2
 
-1. 既存 metrics 行と新生成 JSON を field 単位で diff 表示 (stdout、unified diff or 段落単位)
-2. `--dry-run` 時はここで終了
-3. `--auto` でない場合はユーザー承認待ち (interactive)、承認後に進む
-4. `upsertRankingAiContent({ rankingKey, yearCode, faq, regionalAnalysis, insights, prefectureCommentary })` で D1 UPDATE
-5. `exportRankingAiContentSnapshot()` で R2 一括 export (~2,000 ファイル、~秒) → 該当 `app/ranking/<key>/ai-content.json` の timestamp 更新確認
+1. 既存 R2 行と新生成 JSON を field 単位で diff 表示 (stdout、unified diff or 段落単位)
+2. **★決定的ゲート**: 新生成 JSON (AiContentSnapshotRow) を一時ファイルに書き `audit-ai-content.mjs --file` に通す。
+   blocker が 1 件でもあれば是正してから進む（括弧数値・NGワード・FAQ 推測・県別欠落）
+3. `--dry-run` 時はここで終了
+4. `--auto` でない場合はユーザー承認待ち (interactive)、承認後に進む
+5. 承認後、staging `.local/ai-content-staging/app/ranking/<key>/ai-content.json` に書き出す（D1 UPDATE しない）
+6. **R2 push は r2-publisher / `diff-push-r2 app/ranking` に委譲**（1 件だけ push。全件 export は不要）
 
 ```bash
-# R2 timestamp 確認 (公開エンドポイント)
-curl -I https://r2-public.stats47.jp/app/ranking/<rankingKey>/ai-content.json | grep -i last-modified
+# 決定的ゲート（blocker 0 を確認）
+node .claude/scripts/ai-content/audit-ai-content.mjs --file /tmp/out-<key>.json
+
+# R2 反映後の timestamp 確認 (公開エンドポイント)
+curl -I https://storage.stats47.jp/app/ranking/<rankingKey>/ai-content.json | grep -i last-modified
 ```
 
 ### Step 7: 改善ログに section append
@@ -213,15 +214,16 @@ R2 PUT: app/ranking/<ranking_key>/ai-content.json (last-modified YYYY-MM-DDTHH:M
 |---|---|
 | NotebookLM 認証切れ (exit 2) | ユーザーに `~/bin/notebooklm login` を案内し中断 |
 | NotebookLM 応答空 | WebSearch のみで実行可だが `extraContext` 薄くなる旨を warning、続行可否をユーザー判断 |
-| LLM 出力 JSON パース失敗 | 1 回 retry、再失敗で中断 (R2 / D1 触らず、Step 7 skip) |
+| LLM 出力 JSON パース失敗 | 1 回 retry、再失敗で中断 (staging / R2 触らず、Step 7 skip) |
+| audit blocker 残存 | 是正してから staging へ。是正不能なら旧データ維持で中断 |
 | `--dry-run` で承認なし終了 | docs 追記もスキップ (副作用なし) |
-| 既存 ai_content NULL | 中断、`/generate-ai-content --key <ranking_key>` を案内 |
-| `prefectureCommentary.items` 47 件揃わない | 再 retry、再失敗で旧データのまま中断 (R2 / D1 触らず) |
+| 既存 ai-content.json 不在 | 中断、`/generate-ai-content` で初回生成を案内 |
+| `prefectureCommentary.items` 47 件揃わない | 再 retry、再失敗で旧データのまま中断 (staging / R2 触らず) |
 
 ## 既知の制約
 
 - NotebookLM 1 クエリ ~30 秒 × 3 = 約 90 秒/件
-- `exportRankingAiContentSnapshot` は全件 export (1 件更新でも 2,000 件 PUT)、所要 ~秒
+- DBレスでは **1 件だけ R2 push**（旧 `exportRankingAiContentSnapshot` の全件 2,000 件 PUT は不要・削除済）
 - ISR キャッシュ (24h) があるため即時反映には個別 purge が必要 (`/purge-cdn` スキル参照)
 - 効果 (CTR / position) は **4 週後の GSC snapshot** でないと判定不能 ([`evidence-based-judgment.md`](.claude/rules/evidence-based-judgment.md))
 
@@ -230,7 +232,7 @@ R2 PUT: app/ranking/<ranking_key>/ai-content.json (last-modified YYYY-MM-DDTHH:M
 - `/generate-ai-content` (初回生成、本スキルの前提)
 - `/notebooklm-research` (公開済ブログ用、本スキルとは対象が異なる)
 - `/brushup-blog --target article` (GSC ベース seoTitle 改訂、メタ改訂で内容深化とは別軸)
-- `/sync-snapshots --only ai-content` (Step 6 で個別 export しない選択肢)
+- r2-publisher / `diff-push-r2 app/ranking` (Step 6 の staging → R2 push 担当)
 - 改善バックログ: `docs/02_実装計画/03_改善バックログ.md`
 - 効果判定ルール: `.claude/rules/evidence-based-judgment.md` (effect/* 付与前必読)
 - GSC 抽出: `.claude/scripts/gsc/extract-low-ctr-ranking-pages.mjs`
@@ -238,7 +240,7 @@ R2 PUT: app/ranking/<ranking_key>/ai-content.json (last-modified YYYY-MM-DDTHH:M
 
 ## 完了条件
 
-- [ ] 対象 `metrics` 行に新 faq / regionalAnalysis / insights / prefectureCommentary が UPDATE 済
+- [ ] 新 faq / regionalAnalysis / insights / prefectureCommentary が audit ゲート blocker 0 で staging に書き出され、R2 反映済
 - [ ] R2 `app/ranking/<ranking_key>/ai-content.json` の last-modified が更新済
 - [ ] `docs/02_実装計画/03_改善バックログ.md` に `[AICONTENT-NNN]` section が append 済 (status: pending, due 4 週後)
 - [ ] commit メッセージで `<ranking_key>` を明示
