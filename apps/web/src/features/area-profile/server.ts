@@ -16,3 +16,4 @@ export const getAreaProfileAction = cache(getAreaProfileActionRaw);
 
 // サーバーコンポーネント
 export { AreaDashboardSection } from "./components/AreaDashboardSection";
+export { readCityProfile, type CityProfileData } from "./services/city-profile";

@@ -21,7 +21,7 @@ declare global {
 /**
  * カスタムイベントの基本パラメータ
  */
-interface BaseEventParams {
+export interface BaseEventParams {
   /**
    * イベントアクション（例: "click", "submit", "download"）
    */
@@ -46,7 +46,7 @@ interface BaseEventParams {
 /**
  * コンバージョンイベントのパラメータ
  */
-interface ConversionEventParams {
+export interface ConversionEventParams {
   /**
    * コンバージョンイベント名（例: "purchase", "signup", "download"）
    */
@@ -71,7 +71,7 @@ interface ConversionEventParams {
 /**
  * エンゲージメント指標のパラメータ
  */
-interface EngagementEventParams {
+export interface EngagementEventParams {
   /**
    * エンゲージメントイベント名（例: "scroll", "video_play", "file_download"）
    */

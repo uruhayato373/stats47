@@ -1,5 +1,5 @@
-<!-- data-source: commercial-summary-findings.json | generated: 2026-06-20T22:26:02.033Z -->
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 526" width="960" height="526" font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" role="img" aria-label="この記事でわかったこと">
+<!-- data-source: commercial-summary-findings.json | generated: 2026-06-21T07:37:28.171Z -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 548" width="960" height="548" font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" role="img" aria-label="この記事でわかったこと">
   <style>
     .svg-bg{fill:#ffffff}
     .svg-plot{fill:#f9fafb}
@@ -18,7 +18,7 @@
     .svg-grid{stroke:#334155}
     }
   </style>
-  <rect width="960" height="526" class="svg-bg"/>
+  <rect width="960" height="548" class="svg-bg"/>
   <text x="480" y="46" text-anchor="middle" font-size="26" font-weight="bold" class="svg-title">この記事でわかったこと</text>
   <rect x="40" y="72" width="880" height="94" class="svg-plot" rx="8"/>
   <circle cx="58" cy="119" r="18" fill="#dc2626"/>
@@ -28,16 +28,16 @@
   <circle cx="58" cy="212" r="18" fill="#dc2626"/>
   <text x="58" y="218" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">2</text>
   <text x="90" y="207.6" font-size="18" class="svg-title"><tspan x="90" dy="0">上位は三大都市圏＋福岡・沖縄・京都など、需要が集中する都</tspan><tspan x="90" dy="22">市・観光地に偏る</tspan></text>
-  <rect x="40" y="258" width="880" height="72" class="svg-plot" rx="8"/>
-  <circle cx="58" cy="294" r="18" fill="#dc2626"/>
-  <text x="58" y="300" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">3</text>
-  <text x="90" y="289.6" font-size="18" class="svg-title"><tspan x="90" dy="0">商業地域の面積比率が高い島根・鳥取・愛媛ほど変動率はマイ</tspan><tspan x="90" dy="22">ナス。「広さ」と「価値」は逆相関</tspan></text>
-  <rect x="40" y="340" width="880" height="72" class="svg-plot" rx="8"/>
-  <circle cx="58" cy="376" r="18" fill="#dc2626"/>
-  <text x="58" y="382" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">4</text>
-  <text x="90" y="371.6" font-size="18" class="svg-title"><tspan x="90" dy="0">全国平均は1992年から26年連続マイナス、2018年に</tspan><tspan x="90" dy="22">+0.4%でプラス転換し2024年は+1.3%まで回復</tspan></text>
-  <rect x="40" y="422" width="880" height="72" class="svg-plot" rx="8"/>
-  <circle cx="58" cy="458" r="18" fill="#dc2626"/>
-  <text x="58" y="464" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">5</text>
-  <text x="90" y="453.6" font-size="18" class="svg-title"><tspan x="90" dy="0">回復は全国一律ではなく、四国・東北・山陰の下落と都市部の</tspan><tspan x="90" dy="22">上昇という二極化が進行中</tspan></text>
+  <rect x="40" y="258" width="880" height="94" class="svg-plot" rx="8"/>
+  <circle cx="58" cy="305" r="18" fill="#dc2626"/>
+  <text x="58" y="311" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">3</text>
+  <text x="90" y="289.6" font-size="18" class="svg-title"><tspan x="90" dy="0">面積比率と変動率の相関はほぼゼロ（-0.08）。面積上位</tspan><tspan x="90" dy="22">の島根・鳥取・愛媛はマイナスで「広さ」は値上がりを保証し</tspan><tspan x="90" dy="22">ない</tspan></text>
+  <rect x="40" y="362" width="880" height="72" class="svg-plot" rx="8"/>
+  <circle cx="58" cy="398" r="18" fill="#dc2626"/>
+  <text x="58" y="404" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">4</text>
+  <text x="90" y="393.6" font-size="18" class="svg-title"><tspan x="90" dy="0">全国平均は1992年以降ほぼマイナス基調（2007-08</tspan><tspan x="90" dy="22">のミニバブルを除く）、2024年は+1.3%まで回復</tspan></text>
+  <rect x="40" y="444" width="880" height="72" class="svg-plot" rx="8"/>
+  <circle cx="58" cy="480" r="18" fill="#dc2626"/>
+  <text x="58" y="486" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">5</text>
+  <text x="90" y="475.6" font-size="18" class="svg-title"><tspan x="90" dy="0">回復は全国一律ではなく、四国・東北・山陰の下落と都市部の</tspan><tspan x="90" dy="22">上昇という二極化が進行中</tspan></text>
 </svg>

@@ -22,6 +22,15 @@ import unzipper from "unzipper";
 import { convertGeoJsonToTopoJson, saveTopoJson } from "../converter";
 import { buildMlitKsjLocalPath } from "../r2-path";
 
+interface UnzipperFile {
+  path: string;
+  buffer(): Promise<Buffer>;
+}
+
+interface UnzipperCentralDirectory {
+  files: UnzipperFile[];
+}
+
 const DATA_ID = "mesh1000r6";
 const VERSION = "24";
 const OUTER_ZIP = `/tmp/mlit-ksj-${DATA_ID}-${VERSION}.zip`;
@@ -47,7 +56,7 @@ function formatBytes(bytes: number): string {
 }
 
 async function extractPrefecture(
-  outerDir: unzipper.CentralDirectory,
+  outerDir: UnzipperCentralDirectory,
   prefCode: string,
   projectRoot: string
 ): Promise<{ sizeBytes: number; featureCount: number }> {
@@ -67,7 +76,7 @@ async function extractPrefecture(
   console.log(`  [${prefCode}] 内側 zip サイズ: ${formatBytes(innerZipBuffer.length)}`);
 
   // 内側 zip を開く
-  const innerDir = await unzipper.Open.buffer(innerZipBuffer);
+  const innerDir = await unzipper.Open.buffer(innerZipBuffer) as UnzipperCentralDirectory;
 
   // GeoJSON エントリを探す
   const geojsonEntry = innerDir.files.find((f) => f.path === geojsonName);
@@ -88,7 +97,7 @@ async function extractPrefecture(
 }
 
 async function extractAndConvert(
-  geojsonEntry: unzipper.File,
+  geojsonEntry: UnzipperFile,
   prefCode: string,
   projectRoot: string
 ): Promise<{ sizeBytes: number; featureCount: number }> {
@@ -149,7 +158,7 @@ async function main() {
   console.log(`  出力先: ${projectRoot}/.local/r2/gis/mlit-ksj/${DATA_ID}/${VERSION}/`);
 
   console.log(`\n  外側 zip を開いています...`);
-  const outerDir = await unzipper.Open.file(OUTER_ZIP);
+  const outerDir = await unzipper.Open.file(OUTER_ZIP) as UnzipperCentralDirectory;
   console.log(`  エントリ数: ${outerDir.files.length}`);
 
   const prefs = singlePref

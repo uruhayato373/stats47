@@ -8,7 +8,13 @@ import { detectEnvironment } from "../utils/detect-environment";
 import { findLocalR2Root } from "../utils/find-local-r2-root";
 import { shouldSkipRemoteR2Read } from "../utils/should-skip-remote-r2-read";
 
-function listFromLocalFs(prefix?: string): Array<{ key: string; size: number }> {
+export interface R2ListedObject {
+  key: string;
+  size: number;
+  lastModified?: Date;
+}
+
+function listFromLocalFs(prefix?: string): R2ListedObject[] {
   // eslint-disable-next-line @typescript-eslint/no-require-imports
   const fs = require("fs") as typeof import("fs");
   // eslint-disable-next-line @typescript-eslint/no-require-imports
@@ -17,16 +23,18 @@ function listFromLocalFs(prefix?: string): Array<{ key: string; size: number }> 
   const dirPath = prefix ? path.join(root, prefix) : root;
   if (!fs.existsSync(dirPath)) return [];
 
-  const results: Array<{ key: string; size: number }> = [];
+  const results: R2ListedObject[] = [];
   function walk(dir: string) {
     for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
       const fullPath = path.join(dir, entry.name);
       if (entry.isDirectory()) {
         walk(fullPath);
       } else {
+        const stat = fs.statSync(fullPath);
         results.push({
           key: path.relative(root, fullPath),
-          size: fs.statSync(fullPath).size,
+          size: stat.size,
+          lastModified: stat.mtime,
         });
       }
     }
@@ -35,10 +43,10 @@ function listFromLocalFs(prefix?: string): Array<{ key: string; size: number }> 
   return results;
 }
 
-async function listFromS3(prefix?: string): Promise<Array<{ key: string; size: number }>> {
+async function listFromS3(prefix?: string): Promise<R2ListedObject[]> {
   const bucketName = process.env.CLOUDFLARE_R2_BUCKET_NAME || "stats47";
   const s3 = getS3Client();
-  const allObjects: Array<{ key: string; size: number }> = [];
+  const allObjects: R2ListedObject[] = [];
   let continuationToken: string | undefined;
 
   do {
@@ -49,7 +57,13 @@ async function listFromS3(prefix?: string): Promise<Array<{ key: string; size: n
       MaxKeys: 1000,
     }));
     for (const obj of response.Contents ?? []) {
-      if (obj.Key) allObjects.push({ key: obj.Key, size: obj.Size ?? 0 });
+      if (obj.Key) {
+        allObjects.push({
+          key: obj.Key,
+          size: obj.Size ?? 0,
+          lastModified: obj.LastModified,
+        });
+      }
     }
     continuationToken = response.IsTruncated ? response.NextContinuationToken : undefined;
   } while (continuationToken);
@@ -116,7 +130,7 @@ export async function listFromR2(
 export async function listFromR2WithSize(
   prefix?: string,
   options?: { async?: boolean }
-): Promise<Array<{ key: string; size: number }>> {
+): Promise<R2ListedObject[]> {
   const env = detectEnvironment();
 
   if (env.isDevelopment) {
@@ -141,14 +155,20 @@ export async function listFromR2WithSize(
   // Cloudflare Workers
   try {
     const client = await getR2Client(options);
-    const allObjects: Array<{ key: string; size: number }> = [];
+    const allObjects: R2ListedObject[] = [];
     let cursor: string | undefined;
 
     do {
       const listOptions: R2ListOptions = prefix ? { prefix, cursor } : { cursor };
       const result = await client.list(listOptions);
       if (result.objects) {
-        allObjects.push(...result.objects.map((obj) => ({ key: obj.key, size: obj.size || 0 })));
+        allObjects.push(
+          ...result.objects.map((obj) => ({
+            key: obj.key,
+            size: obj.size || 0,
+            lastModified: obj.uploaded,
+          })),
+        );
       }
       cursor = result.truncated ? result.cursor : undefined;
     } while (cursor);

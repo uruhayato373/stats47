@@ -20,7 +20,8 @@
     "build:registry": "tsx scripts/build-registry.ts",
     "validate:years": "tsx scripts/validate-metric-years.ts",
     "validate:config": "tsx scripts/validate-metric-config.ts",
-    "test": "vitest"
+    "test": "vitest",
+    "type-check": "tsc --noEmit"
   },
   "dependencies": {
     "@stats47/types": "*"

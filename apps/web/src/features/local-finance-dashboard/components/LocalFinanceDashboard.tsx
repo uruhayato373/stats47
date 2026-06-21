@@ -26,29 +26,17 @@ import { FinanceSankey } from "@/features/finance-flow/components/FinanceSankey"
 import type { FinanceFlowData } from "@/features/finance-flow/lib/types";
 import { PREFECTURES } from "@/features/migration-flow/lib/prefectures";
 
-import type { FinanceCardsData, YearRecord } from "../lib/load-finance-cards";
+import {
+  parseCityFinanceCards,
+  type CityData,
+  type FinanceCardsData,
+  type YearRecord,
+} from "../lib/load-finance-cards";
 
 interface Props {
   cards: FinanceCardsData;
   initialFinanceFlow?: FinanceFlowData;
 }
-
-interface FlowNode {
-  name: string;
-  value: number;
-}
-interface CityFlow {
-  revenue: FlowNode[];
-  expenditure: FlowNode[];
-  totals: { revenue: number; expenditure: number };
-}
-interface CityRecord {
-  type?: string;
-  years: Record<string, YearRecord>;
-  flow?: CityFlow;
-}
-/** 市区町村 JSON: cityName -> CityRecord */
-type CityData = Record<string, CityRecord>;
 
 const VALID_CODES = new Set(PREFECTURES.map((p) => p.code));
 const OKU = 1 / 100000; // 千円 → 億円
@@ -93,10 +81,10 @@ export function LocalFinanceDashboard({ cards, initialFinanceFlow }: Props) {
     let cancelled = false;
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setCityData(null);
-     
+
     setCityName(PREF_ALL);
     fetch(`/finance-cards/cities/${prefCode}.json`)
-      .then((r) => (r.ok ? (r.json() as Promise<CityData>) : null))
+      .then(async (r) => (r.ok ? parseCityFinanceCards(await r.json()) : null))
       .then((d) => {
         if (!cancelled) setCityData(d);
       })

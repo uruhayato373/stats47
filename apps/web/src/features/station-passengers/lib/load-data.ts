@@ -9,22 +9,6 @@ export interface StationPassengersBundle {
   railLines: FeatureCollection | null;
 }
 
-/** 47 県サマリ index.json の 1 県 */
-interface PrefSummary {
-  prefCode: string;
-  prefName: string;
-  stationCount: number;
-  latestTotal: number;
-}
-
-interface StationPassengersIndex {
-  generatedAt: string;
-  dataset: string;
-  years: number[];
-  latestYear: number;
-  prefectures: PrefSummary[];
-}
-
 /** 県境 topojson は全県共通なのでクライアント内でキャッシュ */
 let prefectureTopologyCache: Topology | null = null;
 

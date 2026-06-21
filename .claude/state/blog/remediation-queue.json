@@ -15,7 +15,7 @@
     {
       "slug": "smartphone-ownership-prefecture-gap",
       "lane": "must-fix",
-      "status": "in-progress",
+      "status": "done",
       "priority": 1,
       "combinedScore": 0.4,
       "gsc": {
@@ -42,8 +42,8 @@
           "blocker: 記事内関連セクション — ページ側コンポーネントが正典 (記事から削除)"
         ]
       },
-      "wave_id": null,
-      "remediated_at": null,
+      "wave_id": "2026-06-21-revisefix",
+      "remediated_at": "2026-06-21",
       "in_progress_at": "2026-06-21",
       "last_brushup": null
     },
@@ -152,7 +152,7 @@
     {
       "slug": "self-financing-ratio-prefecture-gap",
       "lane": "must-fix",
-      "status": "in-progress",
+      "status": "done",
       "priority": 5,
       "combinedScore": 0.379,
       "gsc": {
@@ -178,8 +178,8 @@
           "blocker: 記事内関連セクション — ページ側コンポーネントが正典 (記事から削除)"
         ]
       },
-      "wave_id": null,
-      "remediated_at": null,
+      "wave_id": "2026-06-21-revisefix",
+      "remediated_at": "2026-06-21",
       "in_progress_at": "2026-06-21",
       "last_brushup": null
     },
@@ -246,7 +246,7 @@
           "blocker: 記事内関連セクション — ページ側コンポーネントが正典 (記事から削除)"
         ]
       },
-      "wave_id": "2026-06-21-critic3",
+      "wave_id": "2026-06-21-revisefix",
       "remediated_at": "2026-06-21",
       "in_progress_at": null,
       "last_brushup": null
@@ -280,7 +280,7 @@
           "blocker: 記事内関連セクション — ページ側コンポーネントが正典 (記事から削除)"
         ]
       },
-      "wave_id": "2026-06-21-critic3",
+      "wave_id": "2026-06-21-revisefix",
       "remediated_at": "2026-06-21",
       "in_progress_at": null,
       "last_brushup": null
@@ -322,7 +322,7 @@
     {
       "slug": "prefectural-height-male-female-gap",
       "lane": "must-fix",
-      "status": "in-progress",
+      "status": "done",
       "priority": 10,
       "combinedScore": 0.337,
       "gsc": {
@@ -348,8 +348,8 @@
           "blocker: 記事内関連セクション — ページ側コンポーネントが正典 (記事から削除)"
         ]
       },
-      "wave_id": null,
-      "remediated_at": null,
+      "wave_id": "2026-06-21-revisefix",
+      "remediated_at": "2026-06-21",
       "in_progress_at": "2026-06-21",
       "last_brushup": "2026-05-25"
     },
@@ -450,7 +450,7 @@
           "blocker: 記事内関連セクション — ページ側コンポーネントが正典 (記事から削除)"
         ]
       },
-      "wave_id": "2026-06-21-critic3",
+      "wave_id": "2026-06-21-revisefix",
       "remediated_at": "2026-06-21",
       "in_progress_at": null,
       "last_brushup": null
@@ -524,7 +524,7 @@
     {
       "slug": "fishery-catch-aquaculture-shift",
       "lane": "must-fix",
-      "status": "in-progress",
+      "status": "done",
       "priority": 16,
       "combinedScore": 0.31,
       "gsc": {
@@ -549,8 +549,8 @@
           "warning: source-link 末尾集約 3個 — 各図直下へ分散"
         ]
       },
-      "wave_id": null,
-      "remediated_at": null,
+      "wave_id": "2026-06-21-revisefix",
+      "remediated_at": "2026-06-21",
       "in_progress_at": "2026-06-21",
       "last_brushup": "2026-05-25"
     },
@@ -687,7 +687,7 @@
     {
       "slug": "cc-estat-09-radar-prefecture",
       "lane": "must-fix",
-      "status": "in-progress",
+      "status": "done",
       "priority": 21,
       "combinedScore": 0.253,
       "gsc": {
@@ -711,15 +711,15 @@
           "blocker: 記事内関連セクション — ページ側コンポーネントが正典 (記事から削除)"
         ]
       },
-      "wave_id": null,
-      "remediated_at": null,
+      "wave_id": "2026-06-21-revisefix",
+      "remediated_at": "2026-06-21",
       "in_progress_at": "2026-06-21",
       "last_brushup": null
     },
     {
       "slug": "cc-estat-12-housing-treemap",
       "lane": "must-fix",
-      "status": "in-progress",
+      "status": "done",
       "priority": 22,
       "combinedScore": 0.253,
       "gsc": {
@@ -743,8 +743,8 @@
           "blocker: 記事内関連セクション — ページ側コンポーネントが正典 (記事から削除)"
         ]
       },
-      "wave_id": null,
-      "remediated_at": null,
+      "wave_id": "2026-06-21-revisefix",
+      "remediated_at": "2026-06-21",
       "in_progress_at": "2026-06-21",
       "last_brushup": null
     },
@@ -1211,7 +1211,7 @@
           "blocker: prose/図 302<350 (図はあるが薄い)"
         ]
       },
-      "wave_id": "2026-06-21-critic3",
+      "wave_id": "2026-06-21-revisefix",
       "remediated_at": "2026-06-21",
       "in_progress_at": null,
       "last_brushup": null
@@ -1242,7 +1242,7 @@
           "blocker: prose/図 319<350 (図はあるが薄い)"
         ]
       },
-      "wave_id": "2026-06-21-critic3",
+      "wave_id": "2026-06-21-revisefix",
       "remediated_at": "2026-06-21",
       "in_progress_at": null,
       "last_brushup": null
@@ -1273,7 +1273,7 @@
           "blocker: prose/図 339<350 (図はあるが薄い)"
         ]
       },
-      "wave_id": "2026-06-21-critic3",
+      "wave_id": "2026-06-21-revisefix",
       "remediated_at": "2026-06-21",
       "in_progress_at": null,
       "last_brushup": null
@@ -1341,7 +1341,7 @@
     {
       "slug": "farmland-crisis-abandoned-land",
       "lane": "must-fix",
-      "status": "in-progress",
+      "status": "done",
       "priority": 42,
       "combinedScore": 0.126,
       "gsc": {
@@ -1365,8 +1365,8 @@
           "warning: source-link 末尾集約 2個 — 各図直下へ分散"
         ]
       },
-      "wave_id": null,
-      "remediated_at": null,
+      "wave_id": "2026-06-21-revisefix",
+      "remediated_at": "2026-06-21",
       "in_progress_at": "2026-06-21",
       "last_brushup": null
     },
@@ -1455,7 +1455,7 @@
           "blocker: internalLinks 0<3"
         ]
       },
-      "wave_id": "2026-06-21-critic3",
+      "wave_id": "2026-06-21-revisefix",
       "remediated_at": "2026-06-21",
       "in_progress_at": null,
       "last_brushup": null
@@ -1672,7 +1672,7 @@
           "warning: prose/図 362<550 (図あたりやや薄い)"
         ]
       },
-      "wave_id": "2026-06-21-critic3",
+      "wave_id": "2026-06-21-revisefix",
       "remediated_at": "2026-06-21",
       "in_progress_at": null,
       "last_brushup": null
@@ -1710,7 +1710,7 @@
     {
       "slug": "commercial-land-price-trend",
       "lane": "must-fix",
-      "status": "in-progress",
+      "status": "done",
       "priority": 54,
       "combinedScore": 0.105,
       "gsc": {
@@ -1733,8 +1733,8 @@
           "warning: prose/図 430<550 (図あたりやや薄い)"
         ]
       },
-      "wave_id": null,
-      "remediated_at": null,
+      "wave_id": "2026-06-21-revisefix",
+      "remediated_at": "2026-06-21",
       "in_progress_at": "2026-06-21",
       "last_brushup": "2026-05-25"
     },
@@ -1896,7 +1896,7 @@
     {
       "slug": "waste-management-recycling-gap",
       "lane": "must-fix",
-      "status": "in-progress",
+      "status": "done",
       "priority": 60,
       "combinedScore": 0.105,
       "gsc": {
@@ -1919,8 +1919,8 @@
           "warning: prose/図 393<550 (図あたりやや薄い)"
         ]
       },
-      "wave_id": null,
-      "remediated_at": null,
+      "wave_id": "2026-06-21-revisefix",
+      "remediated_at": "2026-06-21",
       "in_progress_at": "2026-06-21",
       "last_brushup": null
     },
@@ -1949,7 +1949,7 @@
           "blocker: である調 文末 4箇所 [だ。] — ですます調に統一 (copula だけでなく動詞終止形も: である。→です。/だった。→でした。/〜する。→〜します。)。正規表現の copula 一括置換は不可 (動詞終止形が常体で残り崩壊) → article-writer で文単位変換"
         ]
       },
-      "wave_id": "2026-06-21-critic3",
+      "wave_id": "2026-06-21-revisefix",
       "remediated_at": "2026-06-21",
       "in_progress_at": null,
       "last_brushup": "2026-05-25"
@@ -1979,7 +1979,7 @@
           "warning: prose/図 419<550 (図あたりやや薄い)"
         ]
       },
-      "wave_id": "2026-06-21-critic3",
+      "wave_id": "2026-06-21-revisefix",
       "remediated_at": "2026-06-21",
       "in_progress_at": "2026-06-21",
       "last_brushup": null
@@ -2039,7 +2039,7 @@
           "blocker: である調 文末 1箇所 [だ。] — ですます調に統一 (copula だけでなく動詞終止形も: である。→です。/だった。→でした。/〜する。→〜します。)。正規表現の copula 一括置換は不可 (動詞終止形が常体で残り崩壊) → article-writer で文単位変換"
         ]
       },
-      "wave_id": "2026-06-21-critic3",
+      "wave_id": "2026-06-21-revisefix",
       "remediated_at": "2026-06-21",
       "in_progress_at": null,
       "last_brushup": null
@@ -2099,7 +2099,7 @@
           "warning: prose/図 517<550 (図あたりやや薄い)"
         ]
       },
-      "wave_id": "2026-06-21-critic3",
+      "wave_id": "2026-06-21-revisefix",
       "remediated_at": "2026-06-21",
       "in_progress_at": "2026-06-21",
       "last_brushup": null
@@ -2159,7 +2159,7 @@
           "blocker: prose/図 312<350 (図はあるが薄い)"
         ]
       },
-      "wave_id": "2026-06-21-critic3",
+      "wave_id": "2026-06-21-revisefix",
       "remediated_at": "2026-06-21",
       "in_progress_at": "2026-06-21",
       "last_brushup": null
@@ -2167,7 +2167,7 @@
     {
       "slug": "food-spending-pattern",
       "lane": "must-fix",
-      "status": "in-progress",
+      "status": "done",
       "priority": 69,
       "combinedScore": 0.084,
       "gsc": {
@@ -2189,8 +2189,8 @@
           "blocker: prose/図 337<350 (図はあるが薄い)"
         ]
       },
-      "wave_id": null,
-      "remediated_at": null,
+      "wave_id": "2026-06-21-revisefix",
+      "remediated_at": "2026-06-21",
       "in_progress_at": "2026-06-21",
       "last_brushup": null
     },
@@ -2309,7 +2309,7 @@
           "blocker: である調 文末 5箇所 [だ。] — ですます調に統一 (copula だけでなく動詞終止形も: である。→です。/だった。→でした。/〜する。→〜します。)。正規表現の copula 一括置換は不可 (動詞終止形が常体で残り崩壊) → article-writer で文単位変換"
         ]
       },
-      "wave_id": "2026-06-21-critic3",
+      "wave_id": "2026-06-21-revisefix",
       "remediated_at": "2026-06-21",
       "in_progress_at": "2026-06-21",
       "last_brushup": null
@@ -2339,7 +2339,7 @@
           "blocker: である調 文末 11箇所 [のだ。,だ。] — ですます調に統一 (copula だけでなく動詞終止形も: である。→です。/だった。→でした。/〜する。→〜します。)。正規表現の copula 一括置換は不可 (動詞終止形が常体で残り崩壊) → article-writer で文単位変換"
         ]
       },
-      "wave_id": "2026-06-21-critic3",
+      "wave_id": "2026-06-21-revisefix",
       "remediated_at": "2026-06-21",
       "in_progress_at": "2026-06-21",
       "last_brushup": null
@@ -2369,7 +2369,7 @@
           "blocker: である調 文末 8箇所 [ではない。,だろう。,だ。] — ですます調に統一 (copula だけでなく動詞終止形も: である。→です。/だった。→でした。/〜する。→〜します。)。正規表現の copula 一括置換は不可 (動詞終止形が常体で残り崩壊) → article-writer で文単位変換"
         ]
       },
-      "wave_id": "2026-06-21-critic3",
+      "wave_id": "2026-06-21-revisefix",
       "remediated_at": "2026-06-21",
       "in_progress_at": "2026-06-21",
       "last_brushup": null
@@ -2399,7 +2399,7 @@
           "blocker: である調 文末 3箇所 [だ。] — ですます調に統一 (copula だけでなく動詞終止形も: である。→です。/だった。→でした。/〜する。→〜します。)。正規表現の copula 一括置換は不可 (動詞終止形が常体で残り崩壊) → article-writer で文単位変換"
         ]
       },
-      "wave_id": "2026-06-21-critic3",
+      "wave_id": "2026-06-21-revisefix",
       "remediated_at": "2026-06-21",
       "in_progress_at": "2026-06-21",
       "last_brushup": null
@@ -2429,7 +2429,7 @@
           "blocker: である調 文末 1箇所 [だ。] — ですます調に統一 (copula だけでなく動詞終止形も: である。→です。/だった。→でした。/〜する。→〜します。)。正規表現の copula 一括置換は不可 (動詞終止形が常体で残り崩壊) → article-writer で文単位変換"
         ]
       },
-      "wave_id": "2026-06-21-critic3",
+      "wave_id": "2026-06-21-revisefix",
       "remediated_at": "2026-06-21",
       "in_progress_at": "2026-06-21",
       "last_brushup": null
@@ -2459,7 +2459,7 @@
           "blocker: である調 文末 6箇所 [ではない。,だ。] — ですます調に統一 (copula だけでなく動詞終止形も: である。→です。/だった。→でした。/〜する。→〜します。)。正規表現の copula 一括置換は不可 (動詞終止形が常体で残り崩壊) → article-writer で文単位変換"
         ]
       },
-      "wave_id": "2026-06-21-critic3",
+      "wave_id": "2026-06-21-revisefix",
       "remediated_at": "2026-06-21",
       "in_progress_at": "2026-06-21",
       "last_brushup": null
@@ -2489,7 +2489,7 @@
           "blocker: である調 文末 4箇所 [だ。] — ですます調に統一 (copula だけでなく動詞終止形も: である。→です。/だった。→でした。/〜する。→〜します。)。正規表現の copula 一括置換は不可 (動詞終止形が常体で残り崩壊) → article-writer で文単位変換"
         ]
       },
-      "wave_id": "2026-06-21-critic3",
+      "wave_id": "2026-06-21-revisefix",
       "remediated_at": "2026-06-21",
       "in_progress_at": "2026-06-21",
       "last_brushup": null
@@ -2519,7 +2519,7 @@
           "blocker: である調 文末 11箇所 [である。,ではない。,だ。] — ですます調に統一 (copula だけでなく動詞終止形も: である。→です。/だった。→でした。/〜する。→〜します。)。正規表現の copula 一括置換は不可 (動詞終止形が常体で残り崩壊) → article-writer で文単位変換"
         ]
       },
-      "wave_id": "2026-06-21-critic3",
+      "wave_id": "2026-06-21-revisefix",
       "remediated_at": "2026-06-21",
       "in_progress_at": "2026-06-21",
       "last_brushup": null
@@ -2549,7 +2549,7 @@
           "blocker: である調 文末 5箇所 [ではない。,だ。] — ですます調に統一 (copula だけでなく動詞終止形も: である。→です。/だった。→でした。/〜する。→〜します。)。正規表現の copula 一括置換は不可 (動詞終止形が常体で残り崩壊) → article-writer で文単位変換"
         ]
       },
-      "wave_id": "2026-06-21-critic3",
+      "wave_id": "2026-06-21-revisefix",
       "remediated_at": "2026-06-21",
       "in_progress_at": "2026-06-21",
       "last_brushup": null
@@ -2579,7 +2579,7 @@
           "blocker: である調 文末 7箇所 [である。,ではない。,だ。] — ですます調に統一 (copula だけでなく動詞終止形も: である。→です。/だった。→でした。/〜する。→〜します。)。正規表現の copula 一括置換は不可 (動詞終止形が常体で残り崩壊) → article-writer で文単位変換"
         ]
       },
-      "wave_id": "2026-06-21-critic3",
+      "wave_id": "2026-06-21-revisefix",
       "remediated_at": "2026-06-21",
       "in_progress_at": "2026-06-21",
       "last_brushup": null
@@ -2608,7 +2608,7 @@
           "blocker: internalLinks 1<3"
         ]
       },
-      "wave_id": "2026-06-21-critic3",
+      "wave_id": "2026-06-21-revisefix",
       "remediated_at": "2026-06-21",
       "in_progress_at": "2026-06-21",
       "last_brushup": "2026-06-10"
@@ -2724,7 +2724,7 @@
           "blocker: internalLinks 2<3"
         ]
       },
-      "wave_id": "2026-06-21-critic3",
+      "wave_id": "2026-06-21-revisefix",
       "remediated_at": "2026-06-21",
       "in_progress_at": "2026-06-21",
       "last_brushup": null
@@ -2753,7 +2753,7 @@
           "blocker: である調 文末 10箇所 [である。,だ。] — ですます調に統一 (copula だけでなく動詞終止形も: である。→です。/だった。→でした。/〜する。→〜します。)。正規表現の copula 一括置換は不可 (動詞終止形が常体で残り崩壊) → article-writer で文単位変換"
         ]
       },
-      "wave_id": "2026-06-21-critic3",
+      "wave_id": "2026-06-21-revisefix",
       "remediated_at": "2026-06-21",
       "in_progress_at": "2026-06-21",
       "last_brushup": "2026-05-29"
@@ -2811,7 +2811,7 @@
           "blocker: internalLinks 1<3"
         ]
       },
-      "wave_id": "2026-06-21-critic3",
+      "wave_id": "2026-06-21-revisefix",
       "remediated_at": "2026-06-21",
       "in_progress_at": "2026-06-21",
       "last_brushup": null
@@ -2840,7 +2840,7 @@
           "blocker: である調 文末 5箇所 [である。,だ。] — ですます調に統一 (copula だけでなく動詞終止形も: である。→です。/だった。→でした。/〜する。→〜します。)。正規表現の copula 一括置換は不可 (動詞終止形が常体で残り崩壊) → article-writer で文単位変換"
         ]
       },
-      "wave_id": "2026-06-21-critic3",
+      "wave_id": "2026-06-21-revisefix",
       "remediated_at": "2026-06-21",
       "in_progress_at": "2026-06-21",
       "last_brushup": null
@@ -2869,7 +2869,7 @@
           "blocker: である調 文末 6箇所 [だ。] — ですます調に統一 (copula だけでなく動詞終止形も: である。→です。/だった。→でした。/〜する。→〜します。)。正規表現の copula 一括置換は不可 (動詞終止形が常体で残り崩壊) → article-writer で文単位変換"
         ]
       },
-      "wave_id": "2026-06-21-critic3",
+      "wave_id": "2026-06-21-revisefix",
       "remediated_at": "2026-06-21",
       "in_progress_at": "2026-06-21",
       "last_brushup": null
@@ -2898,7 +2898,7 @@
           "blocker: internalLinks 1<3"
         ]
       },
-      "wave_id": "2026-06-21-critic3",
+      "wave_id": "2026-06-21-revisefix",
       "remediated_at": "2026-06-21",
       "in_progress_at": "2026-06-21",
       "last_brushup": null
@@ -2985,7 +2985,7 @@
           "blocker: 記事内関連セクション — ページ側コンポーネントが正典 (記事から削除)"
         ]
       },
-      "wave_id": "2026-06-21-critic3",
+      "wave_id": "2026-06-21-revisefix",
       "remediated_at": "2026-06-21",
       "in_progress_at": "2026-06-21",
       "last_brushup": null
@@ -3072,7 +3072,7 @@
           "blocker: である調 文末 8箇所 [ではない。,だ。] — ですます調に統一 (copula だけでなく動詞終止形も: である。→です。/だった。→でした。/〜する。→〜します。)。正規表現の copula 一括置換は不可 (動詞終止形が常体で残り崩壊) → article-writer で文単位変換"
         ]
       },
-      "wave_id": "2026-06-21-critic3",
+      "wave_id": "2026-06-21-revisefix",
       "remediated_at": "2026-06-21",
       "in_progress_at": "2026-06-21",
       "last_brushup": null
@@ -3101,7 +3101,7 @@
           "blocker: である調 文末 11箇所 [だった。,だろう。,のだ。,だ。] — ですます調に統一 (copula だけでなく動詞終止形も: である。→です。/だった。→でした。/〜する。→〜します。)。正規表現の copula 一括置換は不可 (動詞終止形が常体で残り崩壊) → article-writer で文単位変換"
         ]
       },
-      "wave_id": "2026-06-21-critic3",
+      "wave_id": "2026-06-21-revisefix",
       "remediated_at": "2026-06-21",
       "in_progress_at": "2026-06-21",
       "last_brushup": null
@@ -3130,7 +3130,7 @@
           "blocker: である調 文末 2箇所 [だ。] — ですます調に統一 (copula だけでなく動詞終止形も: である。→です。/だった。→でした。/〜する。→〜します。)。正規表現の copula 一括置換は不可 (動詞終止形が常体で残り崩壊) → article-writer で文単位変換"
         ]
       },
-      "wave_id": "2026-06-21-critic3",
+      "wave_id": "2026-06-21-revisefix",
       "remediated_at": "2026-06-21",
       "in_progress_at": "2026-06-21",
       "last_brushup": null
@@ -3159,7 +3159,7 @@
           "blocker: internalLinks 2<3"
         ]
       },
-      "wave_id": "2026-06-21-critic3",
+      "wave_id": "2026-06-21-revisefix",
       "remediated_at": "2026-06-21",
       "in_progress_at": "2026-06-21",
       "last_brushup": null
@@ -3188,7 +3188,7 @@
           "blocker: である調 文末 13箇所 [ではない。,のだ。,だ。] — ですます調に統一 (copula だけでなく動詞終止形も: である。→です。/だった。→でした。/〜する。→〜します。)。正規表現の copula 一括置換は不可 (動詞終止形が常体で残り崩壊) → article-writer で文単位変換"
         ]
       },
-      "wave_id": "2026-06-21-critic3",
+      "wave_id": "2026-06-21-revisefix",
       "remediated_at": "2026-06-21",
       "in_progress_at": "2026-06-21",
       "last_brushup": null
@@ -3217,7 +3217,7 @@
           "blocker: である調 文末 9箇所 [だった。,だ。] — ですます調に統一 (copula だけでなく動詞終止形も: である。→です。/だった。→でした。/〜する。→〜します。)。正規表現の copula 一括置換は不可 (動詞終止形が常体で残り崩壊) → article-writer で文単位変換"
         ]
       },
-      "wave_id": "2026-06-21-critic3",
+      "wave_id": "2026-06-21-revisefix",
       "remediated_at": "2026-06-21",
       "in_progress_at": "2026-06-21",
       "last_brushup": null
@@ -3246,7 +3246,7 @@
           "blocker: internalLinks 2<3"
         ]
       },
-      "wave_id": "2026-06-21-critic3",
+      "wave_id": "2026-06-21-revisefix",
       "remediated_at": "2026-06-21",
       "in_progress_at": "2026-06-21",
       "last_brushup": null
@@ -3254,7 +3254,7 @@
     {
       "slug": "pachinko-participation-prefecture-gap",
       "lane": "must-fix",
-      "status": "in-progress",
+      "status": "done",
       "priority": 106,
       "combinedScore": 0.063,
       "gsc": {
@@ -3275,8 +3275,8 @@
           "blocker: internalLinks 1<3"
         ]
       },
-      "wave_id": null,
-      "remediated_at": null,
+      "wave_id": "2026-06-21-revisefix",
+      "remediated_at": "2026-06-21",
       "in_progress_at": "2026-06-21",
       "last_brushup": "2026-06-10"
     },
@@ -3304,7 +3304,7 @@
           "blocker: internalLinks 2<3"
         ]
       },
-      "wave_id": "2026-06-21-critic3",
+      "wave_id": "2026-06-21-revisefix",
       "remediated_at": "2026-06-21",
       "in_progress_at": "2026-06-21",
       "last_brushup": "2026-06-10"
@@ -3333,7 +3333,7 @@
           "blocker: である調 文末 9箇所 [ではない。,だ。] — ですます調に統一 (copula だけでなく動詞終止形も: である。→です。/だった。→でした。/〜する。→〜します。)。正規表現の copula 一括置換は不可 (動詞終止形が常体で残り崩壊) → article-writer で文単位変換"
         ]
       },
-      "wave_id": "2026-06-21-critic3",
+      "wave_id": "2026-06-21-revisefix",
       "remediated_at": "2026-06-21",
       "in_progress_at": "2026-06-21",
       "last_brushup": null
@@ -3341,7 +3341,7 @@
     {
       "slug": "public-phone-prefecture-vanishing",
       "lane": "must-fix",
-      "status": "in-progress",
+      "status": "done",
       "priority": 109,
       "combinedScore": 0.063,
       "gsc": {
@@ -3362,8 +3362,8 @@
           "blocker: internalLinks 2<3"
         ]
       },
-      "wave_id": null,
-      "remediated_at": null,
+      "wave_id": "2026-06-21-revisefix",
+      "remediated_at": "2026-06-21",
       "in_progress_at": "2026-06-21",
       "last_brushup": null
     },
@@ -3391,7 +3391,7 @@
           "blocker: internalLinks 1<3"
         ]
       },
-      "wave_id": "2026-06-21-critic3",
+      "wave_id": "2026-06-21-revisefix",
       "remediated_at": "2026-06-21",
       "in_progress_at": "2026-06-21",
       "last_brushup": "2026-06-10"
@@ -3420,7 +3420,7 @@
           "blocker: である調 文末 7箇所 [だろう。,だ。] — ですます調に統一 (copula だけでなく動詞終止形も: である。→です。/だった。→でした。/〜する。→〜します。)。正規表現の copula 一括置換は不可 (動詞終止形が常体で残り崩壊) → article-writer で文単位変換"
         ]
       },
-      "wave_id": "2026-06-21-critic3",
+      "wave_id": "2026-06-21-revisefix",
       "remediated_at": "2026-06-21",
       "in_progress_at": "2026-06-21",
       "last_brushup": null
@@ -3449,7 +3449,7 @@
           "blocker: である調 文末 11箇所 [である。,のだ。,だ。] — ですます調に統一 (copula だけでなく動詞終止形も: である。→です。/だった。→でした。/〜する。→〜します。)。正規表現の copula 一括置換は不可 (動詞終止形が常体で残り崩壊) → article-writer で文単位変換"
         ]
       },
-      "wave_id": "2026-06-21-critic3",
+      "wave_id": "2026-06-21-revisefix",
       "remediated_at": "2026-06-21",
       "in_progress_at": "2026-06-21",
       "last_brushup": null
@@ -3478,7 +3478,7 @@
           "blocker: である調 文末 9箇所 [だった。,ではない。,のだ。,だ。] — ですます調に統一 (copula だけでなく動詞終止形も: である。→です。/だった。→でした。/〜する。→〜します。)。正規表現の copula 一括置換は不可 (動詞終止形が常体で残り崩壊) → article-writer で文単位変換"
         ]
       },
-      "wave_id": "2026-06-21-critic3",
+      "wave_id": "2026-06-21-revisefix",
       "remediated_at": "2026-06-21",
       "in_progress_at": "2026-06-21",
       "last_brushup": null
@@ -3507,7 +3507,7 @@
           "blocker: である調 文末 11箇所 [である。,だった。,だ。] — ですます調に統一 (copula だけでなく動詞終止形も: である。→です。/だった。→でした。/〜する。→〜します。)。正規表現の copula 一括置換は不可 (動詞終止形が常体で残り崩壊) → article-writer で文単位変換"
         ]
       },
-      "wave_id": "2026-06-21-critic3",
+      "wave_id": "2026-06-21-revisefix",
       "remediated_at": "2026-06-21",
       "in_progress_at": "2026-06-21",
       "last_brushup": null
@@ -3536,7 +3536,7 @@
           "blocker: internalLinks 2<3"
         ]
       },
-      "wave_id": "2026-06-21-critic3",
+      "wave_id": "2026-06-21-revisefix",
       "remediated_at": "2026-06-21",
       "in_progress_at": "2026-06-21",
       "last_brushup": "2026-06-10"

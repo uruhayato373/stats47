@@ -34,7 +34,6 @@ interface RelatedRankingsGridProps {
 export async function RelatedRankingsGrid({
   rankingKey,
   categoryKey,
-  areaType,
   limit = 8,
 }: RelatedRankingsGridProps) {
   if (!categoryKey) return null;

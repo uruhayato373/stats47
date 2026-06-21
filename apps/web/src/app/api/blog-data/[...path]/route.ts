@@ -5,24 +5,22 @@ const isDev = process.env.NODE_ENV === "development";
 /**
  * ブログ記事チャートデータ配信 API
  *
- * 開発環境: .local/r2/blog/ からローカルファイルを読み込み
+ * 開発環境: .local/r2/app/blog/ からローカルファイルを読み込み
  * 本番環境: R2 から fetchFromR2AsJson() で取得
  *
  * パス例: /api/blog-data/my-article/data/chart.json
- *       → R2 キー: blog/my-article/data/chart.json
+ *       → R2 キー: app/blog/my-article/data/chart.json
  */
 export async function GET(
   _req: NextRequest,
   { params }: { params: Promise<{ path: string[] }> }
 ) {
   const { path: segments } = await params;
+  const key = toBlogDataKey(segments);
 
-  // パストラバーサル防止: ".." を含むセグメントを拒否
-  if (segments.some((s) => s === ".." || s === ".")) {
+  if (!key) {
     return NextResponse.json({ error: "不正なパスです" }, { status: 400 });
   }
-
-  const key = `app/blog/${segments.join("/")}`;
 
   try {
     if (isDev) {
@@ -35,6 +33,18 @@ export async function GET(
       { status: 404 }
     );
   }
+}
+
+function toBlogDataKey(segments: string[]): string | null {
+  if (segments.length !== 3) return null;
+
+  const [slug, dir, file] = segments;
+  if (!/^[a-z0-9][a-z0-9-]*$/.test(slug)) return null;
+  if (dir !== "data") return null;
+  if (!/^[\w.-]+\.(?:json|svg)$/.test(file)) return null;
+  if (file.includes("..")) return null;
+
+  return `app/blog/${slug}/data/${file}`;
 }
 
 function getContentType(key: string): string {

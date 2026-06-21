@@ -22,8 +22,6 @@ import type { Metadata } from "next";
 
 export function generateRankingPageMetaData({
   rankingItem,
-  selectedYear,
-  areaType,
 }: {
   rankingItem: RankingItem;
   selectedYear?: string;

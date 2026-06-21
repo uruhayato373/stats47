@@ -27,6 +27,7 @@ export { RankingItemsSidebar } from "./components/RankingSidebar";
 export { RelatedRankingsGrid } from "./components/RelatedRankingsGrid/RelatedRankingsGrid";
 export { RankingPageCardsContainer } from "./components/RankingPageCards";
 export { RelatedArticlesCard } from "./components/RankingSidebar/RelatedArticlesCard";
+export * from "./components/RankingKeyPage/server";
 
 // Server components (sidebar cards)
 export { PortStatisticsMapCard } from "./components/RankingSidebar/PortStatisticsMapCard";

@@ -1,0 +1,10 @@
+{
+  "kind": "scatter",
+  "incomplete": true,
+  "note": "出自(rankingKey/derived)が data json に無い。fetch-ranking-data-r2 か backfill-source で SSOT を補完すること",
+  "generatedBy": "generate-article-charts.ts",
+  "chartType": "scatter",
+  "dataFile": "telework-job-change-scatter.json",
+  "year": "2022",
+  "label": "テレワーク率 × 転職率（47都道府県・2022年）"
+}

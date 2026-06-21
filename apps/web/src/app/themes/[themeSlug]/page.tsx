@@ -69,11 +69,7 @@ export default async function ThemeDynamicPage({ params }: PageProps) {
 
   const data = await loadThemeData(theme);
   if (!data) {
-    return (
-      <PageShell>
-        <p className="text-muted-foreground">データの取得に失敗しました。</p>
-      </PageShell>
-    );
+    throw new Error(`theme data unavailable: ${theme.themeKey}`);
   }
 
   return (

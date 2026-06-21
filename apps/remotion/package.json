@@ -8,7 +8,8 @@
     "prepare-data": "tsx scripts/export-d1-to-remotion-static.ts --feature all",
     "pipeline:sns": "tsx scripts/pipeline/render-sns-all.ts",
     "pipeline:bar-chart-race": "tsx scripts/pipeline/render-bar-chart-race.ts",
-    "pipeline:migration-flow": "tsx scripts/pipeline/render-migration-flow.ts"
+    "pipeline:migration-flow": "tsx scripts/pipeline/render-migration-flow.ts",
+    "type-check": "tsc --noEmit"
   },
   "dependencies": {
     "@google/generative-ai": "^0.24.1",
