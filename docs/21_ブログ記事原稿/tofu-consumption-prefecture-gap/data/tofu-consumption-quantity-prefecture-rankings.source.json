@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "tofu-consumption-quantity",
+  "year": "2024",
+  "unit": "丁",
+  "label": "豆腐消費量",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/tofu-consumption-quantity/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug tofu-consumption-prefecture-gap --keys tofu-consumption-quantity --data-name tofu-consumption-quantity-prefecture-rankings",
+  "fetchedAt": "2026-06-20T22:59:16.268Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

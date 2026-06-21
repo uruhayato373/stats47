@@ -1,0 +1,10 @@
+{
+  "kind": "estat",
+  "statsDataId": "000040199338",
+  "source": "宿泊旅行統計調査 2024 (e-Stat stat_infid=000040199338)",
+  "year": "2024",
+  "label": "台湾人宿泊者の全国シェア",
+  "unit": "%",
+  "transform": "国籍=台湾の県別延べ宿泊者数を全国シェア%に換算し47県choropleth (既存SVGから復元)",
+  "note": "国籍別宿泊は ranking 未公開のため estat 直 + 既存SVG値から backfill"
+}

@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "average-height-middle-school-second-grade-male",
+  "year": "2023",
+  "unit": "cm",
+  "label": "平均身長",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/average-height-middle-school-second-grade-male/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug middle-school-height-east-west-puzzle --keys average-height-middle-school-second-grade-male --data-name height-ranking",
+  "fetchedAt": "2026-06-20T22:54:18.581Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

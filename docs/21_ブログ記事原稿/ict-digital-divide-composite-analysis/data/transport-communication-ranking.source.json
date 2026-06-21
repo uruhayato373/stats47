@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "transport-communication-expenditure-ratio-multi-person-households",
+  "year": "2024",
+  "unit": "％",
+  "label": "交通・通信費割合",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/transport-communication-expenditure-ratio-multi-person-households/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug ict-digital-divide-composite-analysis --keys transport-communication-expenditure-ratio-multi-person-households --data-name transport-communication-ranking",
+  "fetchedAt": "2026-06-20T21:58:11.129Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

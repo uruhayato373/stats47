@@ -1,0 +1,43 @@
+<!-- data-source: crime-summary-findings.json | generated: 2026-06-20T22:20:52.024Z -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 504" width="960" height="504" font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" role="img" aria-label="この記事でわかったこと">
+  <style>
+    .svg-bg{fill:#ffffff}
+    .svg-plot{fill:#f9fafb}
+    .svg-plot-border{stroke:#d1d5db}
+    .svg-title{fill:#1f2937}
+    .svg-axis{fill:#374151}
+    .svg-tick{fill:#6b7280}
+    .svg-grid{stroke:#e5e7eb}
+    @media (prefers-color-scheme:dark){
+    .svg-bg{fill:#0f172a}
+    .svg-plot{fill:#1e293b}
+    .svg-plot-border{stroke:#334155}
+    .svg-title{fill:#e2e8f0}
+    .svg-axis{fill:#cbd5e1}
+    .svg-tick{fill:#94a3b8}
+    .svg-grid{stroke:#334155}
+    }
+  </style>
+  <rect width="960" height="504" class="svg-bg"/>
+  <text x="480" y="46" text-anchor="middle" font-size="26" font-weight="bold" class="svg-title">この記事でわかったこと</text>
+  <rect x="40" y="72" width="880" height="72" class="svg-plot" rx="8"/>
+  <circle cx="58" cy="108" r="18" fill="#dc2626"/>
+  <text x="58" y="114" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">1</text>
+  <text x="90" y="103.6" font-size="18" class="svg-title"><tspan x="90" dy="0">窃盗犯が最も多いのは大阪府6.65件/千人──全国平均3</tspan><tspan x="90" dy="22">.29件の約2倍、47位の長崎県1.68件の約4倍</tspan></text>
+  <rect x="40" y="154" width="880" height="72" class="svg-plot" rx="8"/>
+  <circle cx="58" cy="190" r="18" fill="#dc2626"/>
+  <text x="58" y="196" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">2</text>
+  <text x="90" y="185.6" font-size="18" class="svg-title"><tspan x="90" dy="0">検挙率は犯罪件数と逆相関──大阪26.7%が最低、島根7</tspan><tspan x="90" dy="22">2.7%が最高で約2.7倍の差</tspan></text>
+  <rect x="40" y="236" width="880" height="72" class="svg-plot" rx="8"/>
+  <circle cx="58" cy="272" r="18" fill="#dc2626"/>
+  <text x="58" y="278" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">3</text>
+  <text x="90" y="267.6" font-size="18" class="svg-title"><tspan x="90" dy="0">右下ゾーン（犯罪多×検挙率低）は大阪・茨城・栃木・群馬に</tspan><tspan x="90" dy="22">集中──最も警戒すべき組み合わせ</tspan></text>
+  <rect x="40" y="318" width="880" height="72" class="svg-plot" rx="8"/>
+  <circle cx="58" cy="354" r="18" fill="#dc2626"/>
+  <text x="58" y="360" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">4</text>
+  <text x="90" y="349.6" font-size="18" class="svg-title"><tspan x="90" dy="0">治安が良い県は東北・九州・山陰に偏在──長崎・岩手・秋田</tspan><tspan x="90" dy="22">など人口が少ない県が下位</tspan></text>
+  <rect x="40" y="400" width="880" height="72" class="svg-plot" rx="8"/>
+  <circle cx="58" cy="436" r="18" fill="#dc2626"/>
+  <text x="58" y="442" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">5</text>
+  <text x="90" y="431.6" font-size="18" class="svg-title"><tspan x="90" dy="0">窃盗犯は2002年の全国平均15.67件から2023年3</tspan><tspan x="90" dy="22">.29件まで約5分の1に減少</tspan></text>
+</svg>

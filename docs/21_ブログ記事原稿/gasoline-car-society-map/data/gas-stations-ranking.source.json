@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "gas-station-count-per-100km",
+  "year": "2023",
+  "unit": "箇所",
+  "label": "給油所密度（道路100kmあたり）",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)。値は道路100kmあたりの給油所数（密度）",
+  "note": "metric key は per-100km。title「給油所数」は密度指標の表示名。本文は密度として記述する（絶対数の捏造を避ける）",
+  "source": "r2:app/ranking/gas-station-count-per-100km/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug gasoline-car-society-map --keys gas-station-count-per-100km --data-name gas-stations-ranking",
+  "fetchedAt": "2026-06-20T22:20:30.888Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

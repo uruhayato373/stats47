@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "gasoline-sales-volume",
+  "year": "2023",
+  "unit": "ＫＬ",
+  "label": "ガソリン販売量",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/gasoline-sales-volume/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug gasoline-car-society-map --keys gasoline-sales-volume --data-name gasoline-ranking",
+  "fetchedAt": "2026-06-20T02:15:35.415Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "industrial-water-usage",
+  "year": "2015",
+  "unit": "ｍ3／日",
+  "label": "工業用水量",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/industrial-water-usage/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug industrial-water-manufacturing-nexus --keys industrial-water-usage --data-name chart1-bar",
+  "fetchedAt": "2026-06-20T22:34:25.136Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

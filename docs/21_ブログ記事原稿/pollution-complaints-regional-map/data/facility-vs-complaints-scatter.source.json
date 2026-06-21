@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "pollution-complaints-received-per-100k",
+  "secondaryKeys": "smoke-emission-facility-count+general-dust-emission-facility-count",
+  "year": "2023",
+  "unit": "件",
+  "label": "大気汚染施設数（ばい煙＋一般粉じん）× 公害苦情受付件数（10万人当たり）",
+  "transform": "x=ばい煙+一般粉じんの県別合計, y=10万人当たり公害苦情件数, 全47県の散布図",
+  "source": "r2:app/ranking/smoke-emission-facility-count/values.json + r2:app/ranking/general-dust-emission-facility-count/values.json + r2:app/ranking/pollution-complaints-received-per-100k/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "ばい煙+一般粉じんを x, 苦情件数を y にして 47 県を facility-vs-complaints-scatter.json に書き出す",
+  "generatedBy": "article-writer (manual aggregation)"
+}

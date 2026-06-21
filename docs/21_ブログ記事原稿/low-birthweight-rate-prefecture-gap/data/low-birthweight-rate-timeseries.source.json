@@ -1,0 +1,17 @@
+{
+  "kind": "derived",
+  "chartType": "line",
+  "dataFile": "low-birthweight-rate-timeseries.json",
+  "formula": "rankingKey=low-birthweight-rate-per-1000-births の全 partition から (1) 沖縄県(各年の全国1位)の値、(2) 47都道府県の単純平均(各 partition の values の算術平均) を年次系列として算出",
+  "rankingKey": "low-birthweight-rate-per-1000-births",
+  "year": "2023",
+  "years": "1993-2014,2023",
+  "unit": "‰",
+  "label": "低出生体重児率の推移(沖縄県と47都道府県平均)",
+  "source": "r2:app/ranking/low-birthweight-rate-per-1000-births/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat 人口動態統計 (statsDataId 0000010209) → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug low-birthweight-rate-prefecture-gap --keys low-birthweight-rate-per-1000-births --data-name low-birthweight-rate-timeseries (取得後 series=沖縄県+47県単純平均 に整形)",
+  "verifiedMatchRate": 100,
+  "generatedBy": "article-writer (SSOT照合: 沖縄1993=91.8/2013=113.7/2023=121, 平均1993=76.1/2010=96.2/2014=95.2/2023=96.2 が values.json と一致)",
+  "note": "2系列とも単一ランキングSSOTからの派生 (沖縄=全国1位県の年次値, 平均=47県の単純平均年次値)。2015-2022の年次はSSOTに欠落"
+}

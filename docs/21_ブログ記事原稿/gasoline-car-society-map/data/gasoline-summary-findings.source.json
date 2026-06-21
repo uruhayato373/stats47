@@ -1,0 +1,12 @@
+{
+  "kind": "derived",
+  "transform": "本記事の確定数値から要点を抽出 (findings card)",
+  "sources": [
+    "r2:app/ranking/gasoline-sales-volume/values.json (2023)",
+    "r2:app/ranking/gas-station-count-per-100km/values.json (2023)",
+    "r2:app/ranking/city-gas-sales-volume/values.json (2016)",
+    "r2:app/ranking/city-gas-supply-area-households/values.json (2016)"
+  ],
+  "note": "数値は各 ranking の SSOT 値と一致。要点カードは観測値ではないため factual-check / チャート生成の対象外",
+  "generatedBy": "manual (article-writer)"
+}

@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "total-overnight-guests",
+  "year": "2024",
+  "unit": "人泊",
+  "label": "延べ宿泊者数",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/total-overnight-guests/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug cc-estat-11-tourism-stacked --keys total-overnight-guests --data-name overnight-total-ranking",
+  "fetchedAt": "2026-06-20T21:46:57.010Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

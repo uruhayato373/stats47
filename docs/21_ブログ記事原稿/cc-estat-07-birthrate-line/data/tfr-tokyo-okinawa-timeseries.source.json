@@ -1,0 +1,11 @@
+{
+  "kind": "ranking",
+  "rankingKey": "total-fertility-rate",
+  "year": "1980-2023",
+  "unit": "",
+  "label": "合計特殊出生率（東京・沖縄の時系列）",
+  "transform": "areaCode 13000(東京)・47000(沖縄) を全年抽出し series 化",
+  "source": "r2:app/ranking/total-fertility-rate/values.json",
+  "upstream": "metric config → e-Stat 人口動態統計 → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug cc-estat-07-birthrate-line --keys total-fertility-rate --data-name tfr (then extract 13000/47000 timeseries)"
+}

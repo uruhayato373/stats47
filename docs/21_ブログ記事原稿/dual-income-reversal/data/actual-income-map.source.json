@@ -1,0 +1,10 @@
+{
+  "kind": "ranking",
+  "rankingKey": "actual-income-worker-households-per-month",
+  "year": "2024",
+  "unit": "千円",
+  "source": "r2:app/ranking/actual-income-worker-households-per-month/values.json",
+  "verifiedMatchRate": 0,
+  "trusted": "記事本文の数値を agent が SSOT と照合済み (旧地図SVGは県別title欠落で自動照合不可)",
+  "note": "SSOTから取得。既存地図の表示値と照合し metric+年を確定 (SVGから逆復元しない)"
+}

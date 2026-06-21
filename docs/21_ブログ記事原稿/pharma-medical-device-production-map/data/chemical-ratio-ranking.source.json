@@ -1,0 +1,12 @@
+{
+  "kind": "estat",
+  "statsDataId": "0003448099",
+  "params": { "derive": "化学工業出荷額 ÷ 製造品出荷額等 × 100" },
+  "year": "2021",
+  "unit": "％",
+  "label": "化学工業比率",
+  "transform": "都道府県47件を比率降順でランク付け (svg-builder が上位5+下位5を抽出)",
+  "source": "e-Stat 工業統計調査 https://www.e-stat.go.jp/dbview?sid=0003448099",
+  "chartType": "bar",
+  "dataFile": "chemical-ratio-ranking.json"
+}

@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "annual-sales-amount-per-establishment",
+  "year": "2022",
+  "unit": "百万円",
+  "label": "商業年間商品販売額",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/annual-sales-amount-per-establishment/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug commercial-sales-productivity-gap --keys annual-sales-amount-per-establishment --data-name annual-sales-amount-per-establishment-ranking",
+  "fetchedAt": "2026-06-20T22:05:37.964Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

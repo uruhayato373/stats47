@@ -1,0 +1,43 @@
+<!-- data-source: water-summary-findings.json | generated: 2026-06-20T22:26:40.728Z -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 570" width="960" height="570" font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" role="img" aria-label="この記事でわかったこと">
+  <style>
+    .svg-bg{fill:#ffffff}
+    .svg-plot{fill:#f9fafb}
+    .svg-plot-border{stroke:#d1d5db}
+    .svg-title{fill:#1f2937}
+    .svg-axis{fill:#374151}
+    .svg-tick{fill:#6b7280}
+    .svg-grid{stroke:#e5e7eb}
+    @media (prefers-color-scheme:dark){
+    .svg-bg{fill:#0f172a}
+    .svg-plot{fill:#1e293b}
+    .svg-plot-border{stroke:#334155}
+    .svg-title{fill:#e2e8f0}
+    .svg-axis{fill:#cbd5e1}
+    .svg-tick{fill:#94a3b8}
+    .svg-grid{stroke:#334155}
+    }
+  </style>
+  <rect width="960" height="570" class="svg-bg"/>
+  <text x="480" y="46" text-anchor="middle" font-size="26" font-weight="bold" class="svg-title">この記事でわかったこと</text>
+  <rect x="40" y="72" width="880" height="94" class="svg-plot" rx="8"/>
+  <circle cx="58" cy="119" r="18" fill="#dc2626"/>
+  <text x="58" y="125" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">1</text>
+  <text x="90" y="103.6" font-size="18" class="svg-title"><tspan x="90" dy="0">上水道給水人口は東京1,410万人が圧倒的1位。上位3都</tspan><tspan x="90" dy="22">府県で全国の約3割を占め、人口規模がそのまま給水基盤の差</tspan><tspan x="90" dy="22">になっています</tspan></text>
+  <rect x="40" y="176" width="880" height="94" class="svg-plot" rx="8"/>
+  <circle cx="58" cy="223" r="18" fill="#dc2626"/>
+  <text x="58" y="229" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">2</text>
+  <text x="90" y="207.6" font-size="18" class="svg-title"><tspan x="90" dy="0">年間給水量は東京1,550,325千m3で2位大阪を1.</tspan><tspan x="90" dy="22">5倍引き離し、1位と47位鳥取62,141千m3の差は約</tspan><tspan x="90" dy="22">25倍に達します</tspan></text>
+  <rect x="40" y="280" width="880" height="94" class="svg-plot" rx="8"/>
+  <circle cx="58" cy="327" r="18" fill="#dc2626"/>
+  <text x="58" y="333" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">3</text>
+  <text x="90" y="311.6" font-size="18" class="svg-title"><tspan x="90" dy="0">施設能力（最大供給力）も東京7,004,350m3/日が</tspan><tspan x="90" dy="22">突出。人口減少で実給水量が減っても能力は縮小しにくく、余</tspan><tspan x="90" dy="22">剰維持コストが経営を圧迫します</tspan></text>
+  <rect x="40" y="384" width="880" height="72" class="svg-plot" rx="8"/>
+  <circle cx="58" cy="420" r="18" fill="#dc2626"/>
+  <text x="58" y="426" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">4</text>
+  <text x="90" y="415.6" font-size="18" class="svg-title"><tspan x="90" dy="0">下水道排水区域人口は東京1,375万人に対し徳島16万人</tspan><tspan x="90" dy="22">と85倍差。整備の進度差が地域間で鮮明です</tspan></text>
+  <rect x="40" y="466" width="880" height="72" class="svg-plot" rx="8"/>
+  <circle cx="58" cy="502" r="18" fill="#dc2626"/>
+  <text x="58" y="508" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">5</text>
+  <text x="90" y="497.6" font-size="18" class="svg-title"><tspan x="90" dy="0">96%の水道事業者が2046年までに値上げが必要との試算</tspan><tspan x="90" dy="22">。老朽化・人口減・小規模分立の三重苦は全国共通の課題です</tspan></text>
+</svg>

@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "water-supply-annual-volume",
+  "year": "2022",
+  "unit": "千m3",
+  "label": "上水道年間給水量",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/water-supply-annual-volume/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug water-infrastructure-crisis --keys water-supply-annual-volume --data-name water-supply-volume-ranking",
+  "fetchedAt": "2026-06-20T22:26:09.761Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

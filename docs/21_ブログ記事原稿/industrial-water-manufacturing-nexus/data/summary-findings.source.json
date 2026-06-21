@@ -1,0 +1,8 @@
+{
+  "kind": "authored",
+  "note": "記事の要点カード。本文・SSOT(industrial-water-usage 2015 / manufacturing-shipment-amount 2023)から確定した事実のみ記載",
+  "inputs": [
+    {"kind":"ranking","rankingKey":"industrial-water-usage","year":"2015"},
+    {"kind":"ranking","rankingKey":"manufacturing-shipment-amount","year":"2023"}
+  ]
+}

@@ -1,0 +1,336 @@
+{
+  "label": "韓国人宿泊者の全国シェア",
+  "unit": "%",
+  "year": "2024",
+  "data": [
+    {
+      "areaName": "東京",
+      "rank": 1,
+      "value": 23.2,
+      "label": "韓国人宿泊者の全国シェア",
+      "unit": "%"
+    },
+    {
+      "areaName": "大阪",
+      "rank": 2,
+      "value": 21.4,
+      "label": "韓国人宿泊者の全国シェア",
+      "unit": "%"
+    },
+    {
+      "areaName": "福岡",
+      "rank": 3,
+      "value": 16,
+      "label": "韓国人宿泊者の全国シェア",
+      "unit": "%"
+    },
+    {
+      "areaName": "北海道",
+      "rank": 4,
+      "value": 11.9,
+      "label": "韓国人宿泊者の全国シェア",
+      "unit": "%"
+    },
+    {
+      "areaName": "京都",
+      "rank": 5,
+      "value": 4.3,
+      "label": "韓国人宿泊者の全国シェア",
+      "unit": "%"
+    },
+    {
+      "areaName": "沖縄",
+      "rank": 6,
+      "value": 4.3,
+      "label": "韓国人宿泊者の全国シェア",
+      "unit": "%"
+    },
+    {
+      "areaName": "大分",
+      "rank": 7,
+      "value": 2.6,
+      "label": "韓国人宿泊者の全国シェア",
+      "unit": "%"
+    },
+    {
+      "areaName": "愛知",
+      "rank": 8,
+      "value": 2.1,
+      "label": "韓国人宿泊者の全国シェア",
+      "unit": "%"
+    },
+    {
+      "areaName": "熊本",
+      "rank": 9,
+      "value": 2,
+      "label": "韓国人宿泊者の全国シェア",
+      "unit": "%"
+    },
+    {
+      "areaName": "千葉",
+      "rank": 10,
+      "value": 1.4,
+      "label": "韓国人宿泊者の全国シェア",
+      "unit": "%"
+    },
+    {
+      "areaName": "神奈川",
+      "rank": 11,
+      "value": 1.1,
+      "label": "韓国人宿泊者の全国シェア",
+      "unit": "%"
+    },
+    {
+      "areaName": "愛媛",
+      "rank": 12,
+      "value": 0.8,
+      "label": "韓国人宿泊者の全国シェア",
+      "unit": "%"
+    },
+    {
+      "areaName": "香川",
+      "rank": 13,
+      "value": 0.8,
+      "label": "韓国人宿泊者の全国シェア",
+      "unit": "%"
+    },
+    {
+      "areaName": "長崎",
+      "rank": 14,
+      "value": 0.8,
+      "label": "韓国人宿泊者の全国シェア",
+      "unit": "%"
+    },
+    {
+      "areaName": "兵庫",
+      "rank": 15,
+      "value": 0.7,
+      "label": "韓国人宿泊者の全国シェア",
+      "unit": "%"
+    },
+    {
+      "areaName": "広島",
+      "rank": 16,
+      "value": 0.7,
+      "label": "韓国人宿泊者の全国シェア",
+      "unit": "%"
+    },
+    {
+      "areaName": "鹿児島",
+      "rank": 17,
+      "value": 0.7,
+      "label": "韓国人宿泊者の全国シェア",
+      "unit": "%"
+    },
+    {
+      "areaName": "静岡",
+      "rank": 18,
+      "value": 0.6,
+      "label": "韓国人宿泊者の全国シェア",
+      "unit": "%"
+    },
+    {
+      "areaName": "岐阜",
+      "rank": 19,
+      "value": 0.5,
+      "label": "韓国人宿泊者の全国シェア",
+      "unit": "%"
+    },
+    {
+      "areaName": "佐賀",
+      "rank": 20,
+      "value": 0.4,
+      "label": "韓国人宿泊者の全国シェア",
+      "unit": "%"
+    },
+    {
+      "areaName": "宮崎",
+      "rank": 21,
+      "value": 0.4,
+      "label": "韓国人宿泊者の全国シェア",
+      "unit": "%"
+    },
+    {
+      "areaName": "山口",
+      "rank": 22,
+      "value": 0.3,
+      "label": "韓国人宿泊者の全国シェア",
+      "unit": "%"
+    },
+    {
+      "areaName": "青森",
+      "rank": 23,
+      "value": 0.2,
+      "label": "韓国人宿泊者の全国シェア",
+      "unit": "%"
+    },
+    {
+      "areaName": "宮城",
+      "rank": 24,
+      "value": 0.2,
+      "label": "韓国人宿泊者の全国シェア",
+      "unit": "%"
+    },
+    {
+      "areaName": "新潟",
+      "rank": 25,
+      "value": 0.2,
+      "label": "韓国人宿泊者の全国シェア",
+      "unit": "%"
+    },
+    {
+      "areaName": "石川",
+      "rank": 26,
+      "value": 0.2,
+      "label": "韓国人宿泊者の全国シェア",
+      "unit": "%"
+    },
+    {
+      "areaName": "長野",
+      "rank": 27,
+      "value": 0.2,
+      "label": "韓国人宿泊者の全国シェア",
+      "unit": "%"
+    },
+    {
+      "areaName": "茨城",
+      "rank": 28,
+      "value": 0.2,
+      "label": "韓国人宿泊者の全国シェア",
+      "unit": "%"
+    },
+    {
+      "areaName": "山梨",
+      "rank": 29,
+      "value": 0.2,
+      "label": "韓国人宿泊者の全国シェア",
+      "unit": "%"
+    },
+    {
+      "areaName": "滋賀",
+      "rank": 30,
+      "value": 0.2,
+      "label": "韓国人宿泊者の全国シェア",
+      "unit": "%"
+    },
+    {
+      "areaName": "和歌山",
+      "rank": 31,
+      "value": 0.2,
+      "label": "韓国人宿泊者の全国シェア",
+      "unit": "%"
+    },
+    {
+      "areaName": "岡山",
+      "rank": 32,
+      "value": 0.2,
+      "label": "韓国人宿泊者の全国シェア",
+      "unit": "%"
+    },
+    {
+      "areaName": "岩手",
+      "rank": 33,
+      "value": 0.1,
+      "label": "韓国人宿泊者の全国シェア",
+      "unit": "%"
+    },
+    {
+      "areaName": "富山",
+      "rank": 34,
+      "value": 0.1,
+      "label": "韓国人宿泊者の全国シェア",
+      "unit": "%"
+    },
+    {
+      "areaName": "群馬",
+      "rank": 35,
+      "value": 0.1,
+      "label": "韓国人宿泊者の全国シェア",
+      "unit": "%"
+    },
+    {
+      "areaName": "栃木",
+      "rank": 36,
+      "value": 0.1,
+      "label": "韓国人宿泊者の全国シェア",
+      "unit": "%"
+    },
+    {
+      "areaName": "埼玉",
+      "rank": 37,
+      "value": 0.1,
+      "label": "韓国人宿泊者の全国シェア",
+      "unit": "%"
+    },
+    {
+      "areaName": "三重",
+      "rank": 38,
+      "value": 0.1,
+      "label": "韓国人宿泊者の全国シェア",
+      "unit": "%"
+    },
+    {
+      "areaName": "奈良",
+      "rank": 39,
+      "value": 0.1,
+      "label": "韓国人宿泊者の全国シェア",
+      "unit": "%"
+    },
+    {
+      "areaName": "鳥取",
+      "rank": 40,
+      "value": 0.1,
+      "label": "韓国人宿泊者の全国シェア",
+      "unit": "%"
+    },
+    {
+      "areaName": "島根",
+      "rank": 41,
+      "value": 0.1,
+      "label": "韓国人宿泊者の全国シェア",
+      "unit": "%"
+    },
+    {
+      "areaName": "秋田",
+      "rank": 42,
+      "value": 0,
+      "label": "韓国人宿泊者の全国シェア",
+      "unit": "%"
+    },
+    {
+      "areaName": "山形",
+      "rank": 43,
+      "value": 0,
+      "label": "韓国人宿泊者の全国シェア",
+      "unit": "%"
+    },
+    {
+      "areaName": "福島",
+      "rank": 44,
+      "value": 0,
+      "label": "韓国人宿泊者の全国シェア",
+      "unit": "%"
+    },
+    {
+      "areaName": "福井",
+      "rank": 45,
+      "value": 0,
+      "label": "韓国人宿泊者の全国シェア",
+      "unit": "%"
+    },
+    {
+      "areaName": "高知",
+      "rank": 46,
+      "value": 0,
+      "label": "韓国人宿泊者の全国シェア",
+      "unit": "%"
+    },
+    {
+      "areaName": "徳島",
+      "rank": 47,
+      "value": 0,
+      "label": "韓国人宿泊者の全国シェア",
+      "unit": "%"
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "system-consultant-annual-income",
+  "year": "2023",
+  "unit": "万円",
+  "label": "システムコンサルタントの平均年収",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/system-consultant-annual-income/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug system-consultant-income-ranking --keys system-consultant-annual-income --data-name system-consultant-income-ranking-prefecture-rankings",
+  "fetchedAt": "2026-06-20T22:44:55.316Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "telework-rate",
+  "year": "2022",
+  "unit": "％",
+  "label": "テレワーク実施率",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/telework-rate/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug telework-gap-tokyo-6x --keys telework-rate --data-name telework-rate-ranking",
+  "fetchedAt": "2026-06-20T22:34:29.085Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

@@ -1,0 +1,25 @@
+{
+  "kind": "derived",
+  "chartType": "scatter",
+  "dataFile": "income-tax-scatter.json",
+  "label": "実収入 × 納税義務者割合（47都道府県・2024年）",
+  "year": "2024",
+  "derivedFrom": [
+    {
+      "axis": "x",
+      "rankingKey": "actual-income-worker-households-per-month",
+      "unit": "千円",
+      "source": "r2:app/ranking/actual-income-worker-households-per-month/values.json"
+    },
+    {
+      "axis": "y",
+      "rankingKey": "taxpayer-ratio-per-pref-resident",
+      "unit": "％",
+      "source": "r2:app/ranking/taxpayer-ratio-per-pref-resident/values.json"
+    }
+  ],
+  "transform": "47県の x=実収入, y=納税義務者割合 を areaCode で join（pearson r=0.737）",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node -e で actual-income-worker-households-per-month と taxpayer-ratio-per-pref-resident の最新 partition を areaCode で join",
+  "generatedBy": "article-writer (derived join)"
+}

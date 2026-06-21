@@ -1,0 +1,39 @@
+{
+  "kind": "scatter",
+  "xKey": "sewerage-penetration-rate-2012on",
+  "yKey": "water-supply-population-ratio-2012on",
+  "year": "x:2021/y:2022",
+  "xSource": "r2:app/ranking/sewerage-penetration-rate-2012on/values.json",
+  "ySource": "r2:app/ranking/water-supply-population-ratio-2012on/values.json",
+  "verifiedBy": "article-link+axis-range",
+  "note": "記事 /ranking/ リンク key を SSOT値域で x/y 軸に割当 (著者由来=信頼)。x/y は元SVGの軸目盛レンジ適合で決定。点値照合不可のため verifiedMatchRate なし。",
+  "rangeVerification": {
+    "x": {
+      "svgRange": [
+        22.3,
+        99.7
+      ],
+      "ssotRange": [
+        22.3,
+        99.7
+      ],
+      "scale": 1,
+      "cov": 1
+    },
+    "y": {
+      "svgRange": [
+        88.3,
+        101.6
+      ],
+      "ssotRange": [
+        88,
+        101.6
+      ],
+      "scale": 1,
+      "cov": 0.978
+    }
+  },
+  "restoredFrom": "restore-scatter-from-svg.mjs",
+  "restore": "node .claude/scripts/blog/restore-scatter-from-svg.mjs --base sewerage-water-supply-gap/sewerage-vs-water-scatter --apply",
+  "fetchedAt": "2026-06-20T22:22:37.505Z"
+}

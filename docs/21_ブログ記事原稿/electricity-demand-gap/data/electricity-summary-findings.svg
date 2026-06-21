@@ -1,0 +1,43 @@
+<!-- data-source: electricity-summary-findings.json | generated: 2026-06-20T21:56:15.406Z -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 548" width="960" height="548" font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" role="img" aria-label="この記事でわかったこと">
+  <style>
+    .svg-bg{fill:#ffffff}
+    .svg-plot{fill:#f9fafb}
+    .svg-plot-border{stroke:#d1d5db}
+    .svg-title{fill:#1f2937}
+    .svg-axis{fill:#374151}
+    .svg-tick{fill:#6b7280}
+    .svg-grid{stroke:#e5e7eb}
+    @media (prefers-color-scheme:dark){
+    .svg-bg{fill:#0f172a}
+    .svg-plot{fill:#1e293b}
+    .svg-plot-border{stroke:#334155}
+    .svg-title{fill:#e2e8f0}
+    .svg-axis{fill:#cbd5e1}
+    .svg-tick{fill:#94a3b8}
+    .svg-grid{stroke:#334155}
+    }
+  </style>
+  <rect width="960" height="548" class="svg-bg"/>
+  <text x="480" y="46" text-anchor="middle" font-size="26" font-weight="bold" class="svg-title">この記事でわかったこと</text>
+  <rect x="40" y="72" width="880" height="94" class="svg-plot" rx="8"/>
+  <circle cx="58" cy="119" r="18" fill="#dc2626"/>
+  <text x="58" y="125" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">1</text>
+  <text x="90" y="103.6" font-size="18" class="svg-title"><tspan x="90" dy="0">電力需要量1位は東京都75,521,853MWh、最下位</tspan><tspan x="90" dy="22">の鳥取県3,416,535MWhとは22.1倍の開きがあ</tspan><tspan x="90" dy="22">る</tspan></text>
+  <rect x="40" y="176" width="880" height="72" class="svg-plot" rx="8"/>
+  <circle cx="58" cy="212" r="18" fill="#dc2626"/>
+  <text x="58" y="218" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">2</text>
+  <text x="90" y="207.6" font-size="18" class="svg-title"><tspan x="90" dy="0">1人当たり最終エネルギー消費量では大分・山口・岡山など重</tspan><tspan x="90" dy="22">厚長大型の工業県が上位を占める</tspan></text>
+  <rect x="40" y="258" width="880" height="72" class="svg-plot" rx="8"/>
+  <circle cx="58" cy="294" r="18" fill="#dc2626"/>
+  <text x="58" y="300" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">3</text>
+  <text x="90" y="289.6" font-size="18" class="svg-title"><tspan x="90" dy="0">最下位は埼玉県63.32GJで、1位の大分県308.84</tspan><tspan x="90" dy="22">GJとは約4.9倍の差がつく</tspan></text>
+  <rect x="40" y="340" width="880" height="94" class="svg-plot" rx="8"/>
+  <circle cx="58" cy="387" r="18" fill="#dc2626"/>
+  <text x="58" y="393" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">4</text>
+  <text x="90" y="371.6" font-size="18" class="svg-title"><tspan x="90" dy="0">発電電力量1位は千葉県80,635,294MWhで、需要</tspan><tspan x="90" dy="22">量34,532,289MWhの約2.3倍を発電する電力輸</tspan><tspan x="90" dy="22">出県</tspan></text>
+  <rect x="40" y="444" width="880" height="72" class="svg-plot" rx="8"/>
+  <circle cx="58" cy="480" r="18" fill="#dc2626"/>
+  <text x="58" y="486" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">5</text>
+  <text x="90" y="475.6" font-size="18" class="svg-title"><tspan x="90" dy="0">東京都は需要1位ながら発電は5,734,852MWh(需</tspan><tspan x="90" dy="22">要の約8%)にとどまり、域外供給に大きく依存する</tspan></text>
+</svg>

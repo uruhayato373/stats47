@@ -1,0 +1,12 @@
+{
+  "kind": "ranking",
+  "rankingKey": "agricultural-employment-population+abandoned-cultivated-land-area",
+  "year": "2014",
+  "unit": "x=人 / y=ha",
+  "label": "農業就業人口 vs 耕作放棄地面積",
+  "transform": "2指標の都道府県別ペア (両方に存在する県のみ)",
+  "source": "r2:app/ranking/agricultural-employment-population/values.json + app/ranking/abandoned-cultivated-land-area/values.json",
+  "upstream": "metric config → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug farmland-crisis-abandoned-land --keys agricultural-employment-population,abandoned-cultivated-land-area",
+  "generatedBy": "manual (ranking.json 由来・散布図用)"
+}

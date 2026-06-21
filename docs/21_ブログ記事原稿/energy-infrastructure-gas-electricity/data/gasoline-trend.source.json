@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "gasoline-sales-volume",
+  "year": "1985-2023",
+  "unit": "万KL",
+  "label": "ガソリン販売量（全国合計）",
+  "transform": "全47都道府県の年次合計を全国値として算出 (万KL換算)。部分年で異常値となる2018年は除外。",
+  "source": "r2:app/ranking/gasoline-sales-volume/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug energy-infrastructure-gas-electricity --keys gasoline-sales-volume と R2 values.json の年次合計から再構築",
+  "fetchedAt": "2026-06-21T00:00:00.000Z",
+  "generatedBy": "national-total-from-r2-values"
+}

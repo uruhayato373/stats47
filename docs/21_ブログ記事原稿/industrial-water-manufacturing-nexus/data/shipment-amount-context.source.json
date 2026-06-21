@@ -1,0 +1,9 @@
+{
+  "kind": "ranking",
+  "rankingKey": "manufacturing-shipment-amount",
+  "year": "2023",
+  "unit": "百万円",
+  "source": "r2:app/ranking/manufacturing-shipment-amount/values.json",
+  "verifiedMatchRate": 100,
+  "note": "本文の rank/値 照合用 ground-truth。チャートは生成しない (散布図の派生入力)。SSOTから取得"
+}

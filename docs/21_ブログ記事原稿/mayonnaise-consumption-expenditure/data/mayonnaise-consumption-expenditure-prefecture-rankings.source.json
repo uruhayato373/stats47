@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "mayonnaise-consumption-expenditure",
+  "year": "2024",
+  "unit": "円",
+  "label": "マヨネーズ・マヨネーズ風調味料消費支出額",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/mayonnaise-consumption-expenditure/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug mayonnaise-consumption-expenditure --keys mayonnaise-consumption-expenditure --data-name mayonnaise-consumption-expenditure-prefecture-rankings",
+  "fetchedAt": "2026-06-20T22:53:21.563Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

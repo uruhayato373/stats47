@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "average-payment-amount-of-workers-compensation-insurance-benefits",
+  "year": "2023",
+  "unit": "千円",
+  "label": "労働者災害補償保険給付平均支給額",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/average-payment-amount-of-workers-compensation-insurance-benefits/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug workplace-accident-regional-map --keys average-payment-amount-of-workers-compensation-insurance-benefits --data-name avg-payment-ranking",
+  "fetchedAt": "2026-06-20T22:35:44.644Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

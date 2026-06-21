@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "solar-power-housing",
+  "year": "2023",
+  "unit": "戸",
+  "label": "太陽光を利用した発電機器のある住宅数",
+  "transform": "all47 choropleth (tile-grid map)",
+  "source": "r2:app/ranking/solar-power-housing/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "verifiedMatchRate": 100,
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug renewable-energy-regional-gap --keys solar-power-housing --data-name solar-power-housing-map",
+  "generatedBy": "manual (renamed from solar-panels-tilemap, SSOT verified)"
+}

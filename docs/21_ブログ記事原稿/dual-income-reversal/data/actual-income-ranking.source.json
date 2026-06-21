@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "actual-income-worker-households-per-month",
+  "year": "2024",
+  "unit": "千円",
+  "label": "実収入",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/actual-income-worker-households-per-month/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug dual-income-reversal --keys actual-income-worker-households-per-month --data-name actual-income-ranking",
+  "fetchedAt": "2026-06-20T22:05:11.866Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

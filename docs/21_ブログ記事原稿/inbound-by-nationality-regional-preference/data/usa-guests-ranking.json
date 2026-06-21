@@ -1,0 +1,147 @@
+{
+  "label": "米国人延べ宿泊者数",
+  "unit": "人泊",
+  "year": "2024",
+  "data": [
+    {
+      "areaName": "東京都",
+      "rank": 1,
+      "value": 7170000,
+      "label": "米国人延べ宿泊者数",
+      "unit": "人泊"
+    },
+    {
+      "areaName": "京都府",
+      "rank": 2,
+      "value": 2040000,
+      "label": "米国人延べ宿泊者数",
+      "unit": "人泊"
+    },
+    {
+      "areaName": "大阪府",
+      "rank": 3,
+      "value": 1430000,
+      "label": "米国人延べ宿泊者数",
+      "unit": "人泊"
+    },
+    {
+      "areaName": "神奈川県",
+      "rank": 4,
+      "value": 690000,
+      "label": "米国人延べ宿泊者数",
+      "unit": "人泊"
+    },
+    {
+      "areaName": "千葉県",
+      "rank": 5,
+      "value": 580000,
+      "label": "米国人延べ宿泊者数",
+      "unit": "人泊"
+    },
+    {
+      "areaName": "沖縄県",
+      "rank": 6,
+      "value": 570000,
+      "label": "米国人延べ宿泊者数",
+      "unit": "人泊"
+    },
+    {
+      "areaName": "北海道",
+      "rank": 7,
+      "value": 370000,
+      "label": "米国人延べ宿泊者数",
+      "unit": "人泊"
+    },
+    {
+      "areaName": "広島県",
+      "rank": 8,
+      "value": 210000,
+      "label": "米国人延べ宿泊者数",
+      "unit": "人泊"
+    },
+    {
+      "areaName": "石川県",
+      "rank": 9,
+      "value": 200000,
+      "label": "米国人延べ宿泊者数",
+      "unit": "人泊"
+    },
+    {
+      "areaName": "福岡県",
+      "rank": 10,
+      "value": 160000,
+      "label": "米国人延べ宿泊者数",
+      "unit": "人泊"
+    },
+    {
+      "areaName": "鳥取県",
+      "rank": 47,
+      "value": 2760,
+      "label": "米国人延べ宿泊者数",
+      "unit": "人泊"
+    },
+    {
+      "areaName": "福井県",
+      "rank": 46,
+      "value": 4200,
+      "label": "米国人延べ宿泊者数",
+      "unit": "人泊"
+    },
+    {
+      "areaName": "島根県",
+      "rank": 45,
+      "value": 4880,
+      "label": "米国人延べ宿泊者数",
+      "unit": "人泊"
+    },
+    {
+      "areaName": "宮崎県",
+      "rank": 44,
+      "value": 5730,
+      "label": "米国人延べ宿泊者数",
+      "unit": "人泊"
+    },
+    {
+      "areaName": "高知県",
+      "rank": 43,
+      "value": 6640,
+      "label": "米国人延べ宿泊者数",
+      "unit": "人泊"
+    },
+    {
+      "areaName": "秋田県",
+      "rank": 42,
+      "value": 7060,
+      "label": "米国人延べ宿泊者数",
+      "unit": "人泊"
+    },
+    {
+      "areaName": "福島県",
+      "rank": 41,
+      "value": 8390,
+      "label": "米国人延べ宿泊者数",
+      "unit": "人泊"
+    },
+    {
+      "areaName": "佐賀県",
+      "rank": 40,
+      "value": 8510,
+      "label": "米国人延べ宿泊者数",
+      "unit": "人泊"
+    },
+    {
+      "areaName": "山形県",
+      "rank": 39,
+      "value": 8660,
+      "label": "米国人延べ宿泊者数",
+      "unit": "人泊"
+    },
+    {
+      "areaName": "富山県",
+      "rank": 38,
+      "value": 8720,
+      "label": "米国人延べ宿泊者数",
+      "unit": "人泊"
+    }
+  ]
+}

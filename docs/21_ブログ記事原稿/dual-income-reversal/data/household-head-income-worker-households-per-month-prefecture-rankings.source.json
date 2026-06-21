@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "household-head-income-worker-households-per-month",
+  "year": "2024",
+  "unit": "千円",
+  "label": "世帯主収入 都道府県ランキング（2024年）",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/household-head-income-worker-households-per-month/values.json",
+  "upstream": "metric config → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug dual-income-reversal --keys household-head-income-worker-households-per-month --data-name household-head-income-worker-households-per-month-prefecture-rankings",
+  "verifiedMatchRate": 100,
+  "generatedBy": "backfill-source.mjs",
+  "note": "source-backfill: 既存jsonの値をSSOTと照合しrankingKey+年を確定(SVGから逆復元しない)"
+}

@@ -1,0 +1,13 @@
+{
+  "kind": "derived",
+  "formula": "foreign ÷ total × 100",
+  "constituents": {
+    "num": "total-overnight-guests-foreign",
+    "den": "total-overnight-guests"
+  },
+  "year": "2024",
+  "unit": "％",
+  "verifiedMatchRate": 0,
+  "trusted": "Derived計算。構成metricから算出し代表県を記事本文値と検算済み(SVGから逆復元しない)",
+  "note": "派生指標(比率/差/合成)。単一SSOTなし、構成metricから計算"
+}

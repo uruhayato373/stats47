@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "penal-code-offenses-recognized-per-1000",
+  "year": "2023",
+  "unit": "件",
+  "label": "刑法犯認知件数",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/penal-code-offenses-recognized-per-1000/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug cc-estat-15-crime-small-multiple --keys penal-code-offenses-recognized-per-1000 --data-name crime-per1000-ranking",
+  "fetchedAt": "2026-06-20T21:51:37.109Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

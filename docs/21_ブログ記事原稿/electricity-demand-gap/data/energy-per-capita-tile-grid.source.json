@@ -1,0 +1,10 @@
+{
+  "kind": "ranking",
+  "rankingKey": "final-energy-consumption-per-capita",
+  "year": "2022",
+  "unit": "GJ",
+  "label": "1人当たり最終エネルギー消費量",
+  "transform": "all47 (tile-grid choropleth)",
+  "source": "r2:app/ranking/final-energy-consumption-per-capita/values.json",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug electricity-demand-gap --keys final-energy-consumption-per-capita --data-name energy-per-capita-tile-grid"
+}

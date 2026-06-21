@@ -1,0 +1,9 @@
+{
+  "kind": "derived",
+  "transform": "join: gasoline-sales-volume(2023) x = ガソリン販売量, city-gas-sales-volume(2016) y = 都市ガス販売量 (areaName で内部結合, 47点)",
+  "xSource": "r2:app/ranking/gasoline-sales-volume/values.json (2023, kl)",
+  "ySource": "r2:app/ranking/city-gas-sales-volume/values.json (2016, 万MJ)",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "note": "年次が異なる (ガソリン2023 / 都市ガス2016)。両軸とも観測値の絶対量。SVGから逆復元せず SSOT から結合生成",
+  "generatedBy": "manual join (article-writer)"
+}

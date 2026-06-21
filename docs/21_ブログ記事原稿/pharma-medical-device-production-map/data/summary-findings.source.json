@@ -1,0 +1,8 @@
+{
+  "kind": "authored",
+  "label": "この記事でわかったこと",
+  "note": "本文の主要 findings を要約した要点カード。数値は chemical-shipment-ranking / chemical-ratio-ranking / manufacturing-shipment-timeseries に由来",
+  "source": "本記事内の e-Stat 由来データ (工業統計調査 0003448099 / 社会人口統計体系 0000010103)",
+  "chartType": "summary",
+  "dataFile": "summary-findings.json"
+}

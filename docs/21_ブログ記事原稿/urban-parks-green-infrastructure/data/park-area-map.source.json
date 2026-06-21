@@ -1,0 +1,12 @@
+{
+  "kind": "ranking",
+  "rankingKey": "urban-park-area-per-person",
+  "source": "r2:app/ranking/urban-park-area-per-person/values.json",
+  "upstream": "metric config → e-Stat → R2 app/ranking",
+  "generatedBy": "generate-article-charts.ts",
+  "chartType": "tile-grid",
+  "dataFile": "park-area-map.json",
+  "year": "2023",
+  "unit": "ｍ2",
+  "label": "都市公園面積"
+}

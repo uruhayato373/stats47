@@ -1,0 +1,10 @@
+{
+  "kind": "estat",
+  "statsDataId": "000040199338",
+  "source": "宿泊旅行統計調査 2024 (e-Stat stat_infid=000040199338)",
+  "year": "2024",
+  "label": "韓国人延べ宿泊者数",
+  "unit": "人泊",
+  "transform": "国籍=韓国の県別延べ宿泊者数の絶対値 (上位4県、既存SVG構成図から復元)",
+  "note": "本文の韓国人絶対値(東京417万/大阪386万/福岡289万)の ground truth。ranking 未公開のため estat 直"
+}

@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "maximum-temperature",
+  "year": "2024",
+  "unit": "℃",
+  "label": "最高気温",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/maximum-temperature/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug extreme-heat-days-prefecture --keys maximum-temperature --data-name extreme-heat-days-prefecture-prefecture-rankings",
+  "fetchedAt": "2026-06-20T10:27:13.695Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

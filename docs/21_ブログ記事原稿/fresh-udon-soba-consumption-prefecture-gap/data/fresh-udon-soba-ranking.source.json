@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "fresh-udon-soba-consumption-quantity",
+  "year": "2024",
+  "unit": "g",
+  "label": "生うどん・そば消費量",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/fresh-udon-soba-consumption-quantity/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug fresh-udon-soba-consumption-prefecture-gap --keys fresh-udon-soba-consumption-quantity --data-name fresh-udon-soba-ranking",
+  "fetchedAt": "2026-06-20T10:26:40.721Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

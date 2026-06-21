@@ -1,0 +1,8 @@
+{
+  "kind": "manual",
+  "label": "訪日比率",
+  "unit": "％",
+  "year": "2024",
+  "transform": "外国人延べ宿泊者数 ÷ 延べ宿泊者数合計 × 100 (編集部算出)",
+  "source": "e-Stat 宿泊旅行統計調査 (total-overnight-guests / total-overnight-guests-foreign)"
+}

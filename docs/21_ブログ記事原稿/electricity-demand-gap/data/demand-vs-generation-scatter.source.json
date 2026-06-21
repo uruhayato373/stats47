@@ -1,0 +1,10 @@
+{
+  "kind": "ranking",
+  "rankingKey": "electricity-demand",
+  "secondaryRankingKey": "electricity-generation-capacity",
+  "year": "2023",
+  "unit": "MWh",
+  "label": "電力需要量 vs 発電電力量",
+  "transform": "join(electricity-demand.x, electricity-generation-capacity.y) over 47 prefectures",
+  "source": "r2:app/ranking/electricity-demand/values.json + r2:app/ranking/electricity-generation-capacity/values.json"
+}

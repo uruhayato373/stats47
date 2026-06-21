@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "water-supply-capacity",
+  "year": "2022",
+  "unit": "m3/日",
+  "label": "上水道施設能力",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/water-supply-capacity/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug water-infrastructure-crisis --keys water-supply-capacity --data-name facility-capacity-ranking",
+  "fetchedAt": "2026-06-20T22:26:10.018Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

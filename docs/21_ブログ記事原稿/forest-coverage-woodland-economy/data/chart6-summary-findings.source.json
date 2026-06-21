@@ -1,0 +1,8 @@
+{
+  "kind": "manual",
+  "label": "この記事でわかったこと",
+  "transform": "findings card (本文の要点を要約)",
+  "source": "本記事内のデータ要約 (chart1-5 から導出)",
+  "note": "findings card は観測値ではなく本文要約。数値は chart1-5 の data/*.json に準拠",
+  "generatedBy": "manual (article-writer)"
+}

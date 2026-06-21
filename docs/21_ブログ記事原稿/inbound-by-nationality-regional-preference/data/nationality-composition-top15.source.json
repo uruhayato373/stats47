@@ -1,0 +1,10 @@
+{
+  "kind": "estat",
+  "statsDataId": "000040199338",
+  "source": "宿泊旅行統計調査 2024 (e-Stat stat_infid=000040199338)",
+  "year": "2024",
+  "label": "国籍別 外国人延べ宿泊者数（上位県）",
+  "unit": "人泊",
+  "transform": "上位県の韓国/中国/台湾/米国別延べ宿泊者数 (既存SVGから復元)",
+  "note": "国籍別宿泊は ranking 未公開のため estat 直 + 既存SVG値から backfill"
+}

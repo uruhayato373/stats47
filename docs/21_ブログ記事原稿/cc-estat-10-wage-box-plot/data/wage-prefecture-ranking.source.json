@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "regular-cash-salary-male",
+  "year": "2023",
+  "unit": "千円",
+  "label": "きまって支給する現金給与月額",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/regular-cash-salary-male/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug cc-estat-10-wage-box-plot --keys regular-cash-salary-male --data-name wage-prefecture",
+  "fetchedAt": "2026-06-20T22:02:43.679Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

@@ -1,0 +1,12 @@
+{
+  "kind": "estat",
+  "chartType": "line",
+  "dataFile": "software-engineer-income-national-trend.json",
+  "year": "2010-2023",
+  "unit": "万円",
+  "label": "ソフトウェア作成者の平均年収 全国平均の推移",
+  "transform": "全国平均年収 (きまって支給する現金給与額×12 + 年間賞与特別給与額) を 2010-2023 年で時系列化",
+  "source": "厚生労働省「賃金構造基本統計調査」(e-Stat)。ソフトウェア作成者・全国・企業規模10人以上",
+  "upstream": "e-Stat 賃金構造基本統計調査 → 全国平均年収を年次で集計",
+  "generatedBy": "generate-article-charts.ts"
+}

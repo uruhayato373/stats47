@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "per-capita-kenmin-shotoku-h27",
+  "year": "2020",
+  "unit": "千円",
+  "label": "１人当たり県民所得",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/per-capita-kenmin-shotoku-h27/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug prefectural-income-gdp-ranking --keys per-capita-kenmin-shotoku-h27 --data-name income-ranking",
+  "fetchedAt": "2026-06-20T22:52:32.324Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

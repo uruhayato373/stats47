@@ -1,0 +1,9 @@
+{
+  "kind": "ranking",
+  "rankingKey": "gasoline-sales-volume",
+  "year": "2023",
+  "unit": "ＫＬ",
+  "source": "r2:app/ranking/gasoline-sales-volume/values.json",
+  "verifiedMatchRate": 100,
+  "note": "SSOTから取得。既存地図の表示値と照合し metric+年を確定 (SVGから逆復元しない)"
+}

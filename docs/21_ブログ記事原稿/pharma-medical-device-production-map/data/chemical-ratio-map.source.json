@@ -1,0 +1,12 @@
+{
+  "kind": "estat",
+  "statsDataId": "0003448099",
+  "params": { "derive": "化学工業出荷額 ÷ 製造品出荷額等 × 100" },
+  "year": "2021",
+  "unit": "％",
+  "label": "化学工業比率",
+  "transform": "都道府県別に 化学工業出荷額 / 製造品出荷額等 の比率を算出しタイルグリッドマップ化",
+  "source": "e-Stat 工業統計調査 https://www.e-stat.go.jp/dbview?sid=0003448099",
+  "chartType": "tile-grid",
+  "dataFile": "chemical-ratio-map.json"
+}

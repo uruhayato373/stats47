@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "public-gymnasium-count-per-million",
+  "year": "2021",
+  "unit": "施設",
+  "label": "体育館数",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/public-gymnasium-count-per-million/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug sports-facility-regional-divide --keys public-gymnasium-count-per-million --data-name gymnasium-per-capita-ranking",
+  "fetchedAt": "2026-06-20T22:09:35.944Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

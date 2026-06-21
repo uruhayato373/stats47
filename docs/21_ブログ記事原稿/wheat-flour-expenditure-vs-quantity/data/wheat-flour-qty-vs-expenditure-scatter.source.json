@@ -1,0 +1,15 @@
+{
+  "kind": "scatter",
+  "derivedFrom": [
+    "wheat-flour-consumption-quantity",
+    "wheat-flour-consumption-expenditure"
+  ],
+  "year": "2024",
+  "xMetric": "wheat-flour-consumption-quantity (kg/年)",
+  "yMetric": "wheat-flour-consumption-expenditure (円/年)",
+  "source": "r2:app/ranking/wheat-flour-consumption-{quantity,expenditure}/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "transform": "join 47 prefectures by areaCode; x=quantity/1000(kg), y=expenditure(円)",
+  "fetchedAt": "2026-06-20T23:00:46.382Z",
+  "generatedBy": "article-writer (inline join)"
+}

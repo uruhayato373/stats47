@@ -1,0 +1,66 @@
+<!-- data-source: slope-structure-timeseries.json | generated: 2026-06-20T21:54:30.571Z -->
+<svg width="680" height="420" viewBox="0 0 680 420" xmlns="http://www.w3.org/2000/svg" font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" role="img" aria-label="Slope Graph の構造：2 点だけを直線で結ぶ（架空のサンプル順位）">
+  <title>Slope Graph の構造：2 点だけを直線で結ぶ（架空のサンプル順位）</title>
+  <desc>左＝始点の順位 / 右＝終点の順位。中間は補間しない直線のみ</desc>
+  <style>
+    .svg-bg{fill:#ffffff}
+    .svg-plot{fill:#f9fafb}
+    .svg-plot-border{stroke:#d1d5db}
+    .svg-title{fill:#1f2937}
+    .svg-axis{fill:#374151}
+    .svg-tick{fill:#6b7280}
+    .svg-grid{stroke:#e5e7eb}
+    @media (prefers-color-scheme:dark){
+    .svg-bg{fill:#0f172a}
+    .svg-plot{fill:#1e293b}
+    .svg-plot-border{stroke:#334155}
+    .svg-title{fill:#e2e8f0}
+    .svg-axis{fill:#cbd5e1}
+    .svg-tick{fill:#94a3b8}
+    .svg-grid{stroke:#334155}
+    }
+  </style>
+  <rect width="680" height="420" class="svg-bg"/>
+  <text x="340" y="22" text-anchor="middle" font-size="12.5" font-weight="bold" class="svg-title">Slope Graph の構造：2 点だけを直線で結ぶ（架空のサンプル順位）</text>
+  <text x="340" y="37" text-anchor="middle" font-size="9" class="svg-tick">左＝始点の順位 / 右＝終点の順位。中間は補間しない直線のみ</text>
+  <text x="55.0" y="52.0" font-size="8.5" class="svg-tick">(位)</text>
+  <!-- プロットエリア -->
+  <rect x="55.0" y="58.0" width="611.0" height="280.0" class="svg-plot svg-plot-border" stroke-width="1"/>
+  <!-- Y グリッド -->
+  <line x1="55.0" y1="338.0" x2="666.0" y2="338.0" class="svg-grid" stroke-width="1"/>
+  <text x="50.0" y="341.5" text-anchor="end" font-size="8.5" class="svg-tick">0</text>
+  <line x1="55.0" y1="282.0" x2="666.0" y2="282.0" class="svg-grid" stroke-width="1"/>
+  <text x="50.0" y="285.5" text-anchor="end" font-size="8.5" class="svg-tick">10</text>
+  <line x1="55.0" y1="226.0" x2="666.0" y2="226.0" class="svg-grid" stroke-width="1"/>
+  <text x="50.0" y="229.5" text-anchor="end" font-size="8.5" class="svg-tick">20</text>
+  <line x1="55.0" y1="170.0" x2="666.0" y2="170.0" class="svg-grid" stroke-width="1"/>
+  <text x="50.0" y="173.5" text-anchor="end" font-size="8.5" class="svg-tick">30</text>
+  <line x1="55.0" y1="114.0" x2="666.0" y2="114.0" class="svg-grid" stroke-width="1"/>
+  <text x="50.0" y="117.5" text-anchor="end" font-size="8.5" class="svg-tick">40</text>
+  <line x1="55.0" y1="58.0" x2="666.0" y2="58.0" class="svg-grid" stroke-width="1"/>
+  <text x="50.0" y="61.5" text-anchor="end" font-size="8.5" class="svg-tick">50</text>
+
+  <!-- X 軸ラベル -->
+  <text x="55.0" y="352.0" font-size="8.5" class="svg-tick" text-anchor="middle">始点</text>
+  <text x="666.0" y="352.0" font-size="8.5" class="svg-tick" text-anchor="middle">終点</text>
+  <!-- 系列 -->
+  <polyline points="55.0,102.8 666.0,198.0" fill="none" stroke="#1e88e5" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+  <circle cx="55.0" cy="102.8" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="666.0" cy="198.0" r="3.5" fill="#1e88e5" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <polyline points="55.0,293.2 666.0,237.2" fill="none" stroke="#e53935" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+  <circle cx="55.0" cy="293.2" r="3.5" fill="#e53935" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="666.0" cy="237.2" r="3.5" fill="#e53935" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <polyline points="55.0,321.2 666.0,326.8" fill="none" stroke="#43a047" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+  <circle cx="55.0" cy="321.2" r="3.5" fill="#43a047" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <circle cx="666.0" cy="326.8" r="3.5" fill="#43a047" fill-opacity="0.9" stroke="#fff" stroke-width="1.2"/>
+  <!-- 凡例 -->
+  <rect x="205.0" y="353.0" width="12" height="3" fill="#1e88e5" rx="1.5"/>
+  <text x="221.0" y="356.0" font-size="9" class="svg-axis">上昇イメージ（順位が上がる）</text>
+  <rect x="295.0" y="353.0" width="12" height="3" fill="#e53935" rx="1.5"/>
+  <text x="311.0" y="356.0" font-size="9" class="svg-axis">下降イメージ（順位が下がる）</text>
+  <rect x="385.0" y="353.0" width="12" height="3" fill="#43a047" rx="1.5"/>
+  <text x="401.0" y="356.0" font-size="9" class="svg-axis">据え置きイメージ（ほぼ変化なし）</text>
+  <!-- 軸ラベル -->
+
+  <text x="13" y="198.0" text-anchor="middle" font-size="10" class="svg-axis" transform="rotate(-90,13,198.0)">Slope Graph の構造：2 点だけを直線で結ぶ（架空のサンプル順位）（位）</text>
+</svg>

@@ -1,0 +1,10 @@
+{
+  "kind": "line",
+  "incomplete": true,
+  "note": "出自(rankingKey/derived)が data json に無い。fetch-ranking-data-r2 か backfill-source で SSOT を補完すること",
+  "generatedBy": "generate-article-charts.ts",
+  "chartType": "line",
+  "dataFile": "comm-cost-trend.json",
+  "unit": "％",
+  "label": "交通・通信費割合 47都道府県平均の推移"
+}

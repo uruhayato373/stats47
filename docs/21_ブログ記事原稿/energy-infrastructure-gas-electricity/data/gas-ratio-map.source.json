@@ -1,0 +1,9 @@
+{
+  "kind": "ranking",
+  "rankingKey": "city-gas-supply-area-household-ratio",
+  "year": "2016",
+  "unit": "％",
+  "source": "r2:app/ranking/city-gas-supply-area-household-ratio/values.json",
+  "verifiedMatchRate": 100,
+  "note": "SSOTから取得。既存地図の表示値と照合し metric+年を確定 (SVGから逆復元しない)"
+}

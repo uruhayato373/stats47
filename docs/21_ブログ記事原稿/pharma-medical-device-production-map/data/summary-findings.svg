@@ -1,0 +1,43 @@
+<!-- data-source: summary-findings.json | generated: 2026-06-20T22:37:12.958Z -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 570" width="960" height="570" font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" role="img" aria-label="この記事でわかったこと">
+  <style>
+    .svg-bg{fill:#ffffff}
+    .svg-plot{fill:#f9fafb}
+    .svg-plot-border{stroke:#d1d5db}
+    .svg-title{fill:#1f2937}
+    .svg-axis{fill:#374151}
+    .svg-tick{fill:#6b7280}
+    .svg-grid{stroke:#e5e7eb}
+    @media (prefers-color-scheme:dark){
+    .svg-bg{fill:#0f172a}
+    .svg-plot{fill:#1e293b}
+    .svg-plot-border{stroke:#334155}
+    .svg-title{fill:#e2e8f0}
+    .svg-axis{fill:#cbd5e1}
+    .svg-tick{fill:#94a3b8}
+    .svg-grid{stroke:#334155}
+    }
+  </style>
+  <rect width="960" height="570" class="svg-bg"/>
+  <text x="480" y="46" text-anchor="middle" font-size="26" font-weight="bold" class="svg-title">この記事でわかったこと</text>
+  <rect x="40" y="72" width="880" height="94" class="svg-plot" rx="8"/>
+  <circle cx="58" cy="119" r="18" fill="#dc2626"/>
+  <text x="58" y="125" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">1</text>
+  <text x="90" y="103.6" font-size="18" class="svg-title"><tspan x="90" dy="0">化学工業出荷額1位は千葉県（2.3兆円）。京葉工業地帯の</tspan><tspan x="90" dy="22">石油化学コンビナートが大きく寄与。2位・兵庫、3位・神奈</tspan><tspan x="90" dy="22">川が続く</tspan></text>
+  <rect x="40" y="176" width="880" height="72" class="svg-plot" rx="8"/>
+  <circle cx="58" cy="212" r="18" fill="#dc2626"/>
+  <text x="58" y="218" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">2</text>
+  <text x="90" y="207.6" font-size="18" class="svg-title"><tspan x="90" dy="0">化学工業の「比率」では徳島県が40.4%で断トツ。大塚製</tspan><tspan x="90" dy="22">薬グループの存在が県の産業構造を一変させている</tspan></text>
+  <rect x="40" y="258" width="880" height="94" class="svg-plot" rx="8"/>
+  <circle cx="58" cy="305" r="18" fill="#dc2626"/>
+  <text x="58" y="311" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">3</text>
+  <text x="90" y="289.6" font-size="18" class="svg-title"><tspan x="90" dy="0">「薬都・富山」は比率17.2%で4位、出荷額は17位。医</tspan><tspan x="90" dy="22">薬品配置販売の伝統は健在だが、規模では太平洋ベルトに及ば</tspan><tspan x="90" dy="22">ない</tspan></text>
+  <rect x="40" y="362" width="880" height="72" class="svg-plot" rx="8"/>
+  <circle cx="58" cy="398" r="18" fill="#dc2626"/>
+  <text x="58" y="404" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">4</text>
+  <text x="90" y="393.6" font-size="18" class="svg-title"><tspan x="90" dy="0">化学工業と輸送機械は産業構造の「二大軸」。愛知は輸送機械</tspan><tspan x="90" dy="22">特化、千葉・山口は化学特化。両方に強い兵庫・静岡が上位に</tspan></text>
+  <rect x="40" y="444" width="880" height="94" class="svg-plot" rx="8"/>
+  <circle cx="58" cy="491" r="18" fill="#dc2626"/>
+  <text x="58" y="497" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">5</text>
+  <text x="90" y="475.6" font-size="18" class="svg-title"><tspan x="90" dy="0">製造品出荷額は2023年に過去最高の37.3兆円。原材料</tspan><tspan x="90" dy="22">価格上昇・円安が出荷額を押し上げ。数量ベースでは横ばいと</tspan><tspan x="90" dy="22">の見方も</tspan></text>
+</svg>

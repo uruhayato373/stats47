@@ -1,0 +1,25 @@
+{
+  "kind": "derived",
+  "chartType": "scatter",
+  "dataFile": "freq-severity-scatter.json",
+  "label": "労災の頻度 × 重さ（47都道府県・2023年）",
+  "year": "2023",
+  "derivedFrom": [
+    {
+      "axis": "x",
+      "metric": "度数率",
+      "rankingKey": "frequency-of-occupational-accidents",
+      "source": "r2:app/ranking/frequency-of-occupational-accidents/values.json"
+    },
+    {
+      "axis": "y",
+      "metric": "強度率",
+      "rankingKey": "work-accident-severity",
+      "source": "r2:app/ranking/work-accident-severity/values.json"
+    }
+  ],
+  "transform": "frequency-ranking.json (x=度数率) と severity-ranking.json (y=強度率) を県名で join した 47点。SVGから逆復元せず両ランキング JSON から再構成",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "fetch-ranking-data-r2.mjs で frequency-ranking / severity-ranking を取得後、両 data json を areaName で join して points を作る",
+  "generatedBy": "article-writer (join of two SSOT rankings)"
+}

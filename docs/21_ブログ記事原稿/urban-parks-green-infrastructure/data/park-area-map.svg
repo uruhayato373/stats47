@@ -1,0 +1,420 @@
+<!-- data-source: park-area-map.json | generated: 2026-06-20T22:31:42.100Z -->
+<svg width="600" height="700" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 700" role="img" aria-label="都市公園面積">
+  <title>都市公園面積</title>
+  <desc>2023年</desc>
+  <style>
+    .svg-bg{fill:#ffffff}
+    .svg-plot{fill:#f9fafb}
+    .svg-plot-border{stroke:#d1d5db}
+    .svg-title{fill:#1f2937}
+    .svg-axis{fill:#374151}
+    .svg-tick{fill:#6b7280}
+    .svg-grid{stroke:#e5e7eb}
+    @media (prefers-color-scheme:dark){
+    .svg-bg{fill:#0f172a}
+    .svg-plot{fill:#1e293b}
+    .svg-plot-border{stroke:#334155}
+    .svg-title{fill:#e2e8f0}
+    .svg-axis{fill:#cbd5e1}
+    .svg-tick{fill:#94a3b8}
+    .svg-grid{stroke:#334155}
+    }
+  </style>
+  <rect width="600" height="700" class="svg-plot"/>
+  <text x="28" y="58" font-size="22" font-weight="bold" class="svg-title">都市公園面積</text>
+  <text x="28" y="92" font-size="15" class="svg-tick">2023年</text>
+  <g aria-label="群馬 13.9ｍ2">
+    <title>群馬：13.9ｍ2</title>
+    <rect x="453" y="312.5" width="36" height="36" rx="3" fill="rgb(148, 211, 145)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="471" y="330.0" font-size="9" font-weight="700">群馬</tspan>
+      <tspan x="471" y="339.0" font-size="7.5" font-weight="600">13.9ｍ2</tspan>
+    </text>
+  </g>
+  <g aria-label="埼玉 7.2ｍ2">
+    <title>埼玉：7.2ｍ2</title>
+    <rect x="491" y="350.5" width="36" height="36" rx="3" fill="rgb(227, 244, 223)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="509" y="368.0" font-size="9" font-weight="700">埼玉</tspan>
+      <tspan x="509" y="377.0" font-size="7.5" font-weight="600">7.2ｍ2</tspan>
+    </text>
+  </g>
+  <g aria-label="千葉 7ｍ2">
+    <title>千葉：7ｍ2</title>
+    <rect x="529" y="350.5" width="36" height="74" rx="3" fill="rgb(229, 245, 224)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="547" y="387.0" font-size="9" font-weight="700">千葉</tspan>
+      <tspan x="547" y="396.0" font-size="7.5" font-weight="600">7ｍ2</tspan>
+    </text>
+  </g>
+  <g aria-label="東京 4.3ｍ2">
+    <title>東京：4.3ｍ2</title>
+    <rect x="491" y="388.5" width="36" height="36" rx="3" fill="rgb(247, 252, 245)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="509" y="406.0" font-size="9" font-weight="700">東京</tspan>
+      <tspan x="509" y="415.0" font-size="7.5" font-weight="600">4.3ｍ2</tspan>
+    </text>
+  </g>
+  <g aria-label="神奈川 5.8ｍ2">
+    <title>神奈川：5.8ｍ2</title>
+    <rect x="491" y="427" width="36" height="36" rx="3" fill="rgb(238, 248, 234)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.3" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="509" y="444.5" font-size="7" font-weight="700">神奈川</tspan>
+      <tspan x="509" y="452.0" font-size="6.0" font-weight="600">5.8ｍ2</tspan>
+    </text>
+  </g>
+  <g aria-label="新潟 14.6ｍ2">
+    <title>新潟：14.6ｍ2</title>
+    <rect x="415" y="274" width="74" height="36" rx="3" fill="rgb(139, 207, 137)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="452" y="291.5" font-size="9" font-weight="700">新潟</tspan>
+      <tspan x="452" y="300.5" font-size="7.5" font-weight="600">14.6ｍ2</tspan>
+    </text>
+  </g>
+  <g aria-label="富山 16.4ｍ2">
+    <title>富山：16.4ｍ2</title>
+    <rect x="376" y="274" width="36" height="36" rx="3" fill="rgb(111, 193, 117)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="394" y="291.5" font-size="9" font-weight="700">富山</tspan>
+      <tspan x="394" y="300.5" font-size="7.5" font-weight="600">16.4ｍ2</tspan>
+    </text>
+  </g>
+  <g aria-label="石川 14.3ｍ2">
+    <title>石川：14.3ｍ2</title>
+    <rect x="338" y="274" width="36" height="36" rx="3" fill="rgb(144, 209, 141)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="356" y="291.5" font-size="9" font-weight="700">石川</tspan>
+      <tspan x="356" y="300.5" font-size="7.5" font-weight="600">14.3ｍ2</tspan>
+    </text>
+  </g>
+  <g aria-label="福井 16.1ｍ2">
+    <title>福井：16.1ｍ2</title>
+    <rect x="338" y="312.5" width="36" height="36" rx="3" fill="rgb(114, 195, 119)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="356" y="330.0" font-size="9" font-weight="700">福井</tspan>
+      <tspan x="356" y="339.0" font-size="7.5" font-weight="600">16.1ｍ2</tspan>
+    </text>
+  </g>
+  <g aria-label="山梨 10.2ｍ2">
+    <title>山梨：10.2ｍ2</title>
+    <rect x="453" y="350.5" width="36" height="36" rx="3" fill="rgb(198, 232, 191)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="471" y="368.0" font-size="9" font-weight="700">山梨</tspan>
+      <tspan x="471" y="377.0" font-size="7.5" font-weight="600">10.2ｍ2</tspan>
+    </text>
+  </g>
+  <g aria-label="長野 13.9ｍ2">
+    <title>長野：13.9ｍ2</title>
+    <rect x="415" y="312.5" width="36" height="74" rx="3" fill="rgb(149, 211, 146)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="433" y="349.0" font-size="9" font-weight="700">長野</tspan>
+      <tspan x="433" y="358.0" font-size="7.5" font-weight="600">13.9ｍ2</tspan>
+    </text>
+  </g>
+  <g aria-label="岐阜 10.7ｍ2">
+    <title>岐阜：10.7ｍ2</title>
+    <rect x="376" y="312.5" width="36" height="74" rx="3" fill="rgb(192, 230, 186)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="394" y="349.0" font-size="9" font-weight="700">岐阜</tspan>
+      <tspan x="394" y="358.0" font-size="7.5" font-weight="600">10.7ｍ2</tspan>
+    </text>
+  </g>
+  <g aria-label="静岡 9.2ｍ2">
+    <title>静岡：9.2ｍ2</title>
+    <rect x="415" y="388.5" width="74" height="36" rx="3" fill="rgb(209, 237, 203)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="452" y="406.0" font-size="9" font-weight="700">静岡</tspan>
+      <tspan x="452" y="415.0" font-size="7.5" font-weight="600">9.2ｍ2</tspan>
+    </text>
+  </g>
+  <g aria-label="愛知 8ｍ2">
+    <title>愛知：8ｍ2</title>
+    <rect x="376" y="388.5" width="36" height="36" rx="3" fill="rgb(221, 242, 215)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="394" y="406.0" font-size="9" font-weight="700">愛知</tspan>
+      <tspan x="394" y="415.0" font-size="7.5" font-weight="600">8ｍ2</tspan>
+    </text>
+  </g>
+  <g aria-label="三重 10.1ｍ2">
+    <title>三重：10.1ｍ2</title>
+    <rect x="338" y="388.5" width="36" height="74" rx="3" fill="rgb(199, 233, 192)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="356" y="425.0" font-size="9" font-weight="700">三重</tspan>
+      <tspan x="356" y="434.0" font-size="7.5" font-weight="600">10.1ｍ2</tspan>
+    </text>
+  </g>
+  <g aria-label="滋賀 9.3ｍ2">
+    <title>滋賀：9.3ｍ2</title>
+    <rect x="338" y="350.5" width="36" height="36" rx="3" fill="rgb(208, 237, 202)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="356" y="368.0" font-size="9" font-weight="700">滋賀</tspan>
+      <tspan x="356" y="377.0" font-size="7.5" font-weight="600">9.3ｍ2</tspan>
+    </text>
+  </g>
+  <g aria-label="京都 7.8ｍ2">
+    <title>京都：7.8ｍ2</title>
+    <rect x="262" y="350.5" width="74" height="36" rx="3" fill="rgb(223, 242, 217)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="299" y="368.0" font-size="9" font-weight="700">京都</tspan>
+      <tspan x="299" y="377.0" font-size="7.5" font-weight="600">7.8ｍ2</tspan>
+    </text>
+  </g>
+  <g aria-label="大阪 5.8ｍ2">
+    <title>大阪：5.8ｍ2</title>
+    <rect x="262" y="388.5" width="36" height="36" rx="3" fill="rgb(238, 248, 234)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="280" y="406.0" font-size="9" font-weight="700">大阪</tspan>
+      <tspan x="280" y="415.0" font-size="7.5" font-weight="600">5.8ｍ2</tspan>
+    </text>
+  </g>
+  <g aria-label="兵庫 13.3ｍ2">
+    <title>兵庫：13.3ｍ2</title>
+    <rect x="224" y="350.5" width="36" height="74" rx="3" fill="rgb(158, 215, 154)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="242" y="387.0" font-size="9" font-weight="700">兵庫</tspan>
+      <tspan x="242" y="396.0" font-size="7.5" font-weight="600">13.3ｍ2</tspan>
+    </text>
+  </g>
+  <g aria-label="奈良 14ｍ2">
+    <title>奈良：14ｍ2</title>
+    <rect x="300" y="388.5" width="36" height="36" rx="3" fill="rgb(148, 211, 144)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="318" y="406.0" font-size="9" font-weight="700">奈良</tspan>
+      <tspan x="318" y="415.0" font-size="7.5" font-weight="600">14ｍ2</tspan>
+    </text>
+  </g>
+  <g aria-label="和歌山 8.6ｍ2">
+    <title>和歌山：8.6ｍ2</title>
+    <rect x="262" y="427" width="74" height="36" rx="3" fill="rgb(215, 240, 210)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.3" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="299" y="444.5" font-size="7" font-weight="700">和歌山</tspan>
+      <tspan x="299" y="452.0" font-size="6.0" font-weight="600">8.6ｍ2</tspan>
+    </text>
+  </g>
+  <g aria-label="鳥取 12.1ｍ2">
+    <title>鳥取：12.1ｍ2</title>
+    <rect x="185" y="350.5" width="36" height="36" rx="3" fill="rgb(174, 222, 168)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="203" y="368.0" font-size="9" font-weight="700">鳥取</tspan>
+      <tspan x="203" y="377.0" font-size="7.5" font-weight="600">12.1ｍ2</tspan>
+    </text>
+  </g>
+  <g aria-label="島根 16.6ｍ2">
+    <title>島根：16.6ｍ2</title>
+    <rect x="147" y="350.5" width="36" height="36" rx="3" fill="rgb(107, 192, 115)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="165" y="368.0" font-size="9" font-weight="700">島根</tspan>
+      <tspan x="165" y="377.0" font-size="7.5" font-weight="600">16.6ｍ2</tspan>
+    </text>
+  </g>
+  <g aria-label="岡山 15.8ｍ2">
+    <title>岡山：15.8ｍ2</title>
+    <rect x="185" y="388.5" width="36" height="36" rx="3" fill="rgb(119, 197, 123)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="203" y="406.0" font-size="9" font-weight="700">岡山</tspan>
+      <tspan x="203" y="415.0" font-size="7.5" font-weight="600">15.8ｍ2</tspan>
+    </text>
+  </g>
+  <g aria-label="広島 10.9ｍ2">
+    <title>広島：10.9ｍ2</title>
+    <rect x="147" y="388.5" width="36" height="36" rx="3" fill="rgb(190, 229, 183)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="165" y="406.0" font-size="9" font-weight="700">広島</tspan>
+      <tspan x="165" y="415.0" font-size="7.5" font-weight="600">10.9ｍ2</tspan>
+    </text>
+  </g>
+  <g aria-label="山口 15.7ｍ2">
+    <title>山口：15.7ｍ2</title>
+    <rect x="109" y="350.5" width="36" height="74" rx="3" fill="rgb(122, 199, 125)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="127" y="387.0" font-size="9" font-weight="700">山口</tspan>
+      <tspan x="127" y="396.0" font-size="7.5" font-weight="600">15.7ｍ2</tspan>
+    </text>
+  </g>
+  <g aria-label="徳島 8ｍ2">
+    <title>徳島：8ｍ2</title>
+    <rect x="185" y="503" width="36" height="36" rx="3" fill="rgb(221, 242, 216)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="203" y="520.5" font-size="9" font-weight="700">徳島</tspan>
+      <tspan x="203" y="529.5" font-size="7.5" font-weight="600">8ｍ2</tspan>
+    </text>
+  </g>
+  <g aria-label="香川 17.2ｍ2">
+    <title>香川：17.2ｍ2</title>
+    <rect x="185" y="465" width="36" height="36" rx="3" fill="rgb(97, 186, 109)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="203" y="482.5" font-size="9" font-weight="700">香川</tspan>
+      <tspan x="203" y="491.5" font-size="7.5" font-weight="600">17.2ｍ2</tspan>
+    </text>
+  </g>
+  <g aria-label="愛媛 12ｍ2">
+    <title>愛媛：12ｍ2</title>
+    <rect x="147" y="465" width="36" height="36" rx="3" fill="rgb(175, 223, 169)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="165" y="482.5" font-size="9" font-weight="700">愛媛</tspan>
+      <tspan x="165" y="491.5" font-size="7.5" font-weight="600">12ｍ2</tspan>
+    </text>
+  </g>
+  <g aria-label="高知 11.3ｍ2">
+    <title>高知：11.3ｍ2</title>
+    <rect x="147" y="503" width="36" height="36" rx="3" fill="rgb(185, 227, 178)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="165" y="520.5" font-size="9" font-weight="700">高知</tspan>
+      <tspan x="165" y="529.5" font-size="7.5" font-weight="600">11.3ｍ2</tspan>
+    </text>
+  </g>
+  <g aria-label="福岡 9.4ｍ2">
+    <title>福岡：9.4ｍ2</title>
+    <rect x="71" y="427" width="36" height="36" rx="3" fill="rgb(207, 236, 201)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="89" y="444.5" font-size="9" font-weight="700">福岡</tspan>
+      <tspan x="89" y="453.5" font-size="7.5" font-weight="600">9.4ｍ2</tspan>
+    </text>
+  </g>
+  <g aria-label="佐賀 10.9ｍ2">
+    <title>佐賀：10.9ｍ2</title>
+    <rect x="33" y="427" width="36" height="36" rx="3" fill="rgb(190, 229, 183)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="51" y="444.5" font-size="9" font-weight="700">佐賀</tspan>
+      <tspan x="51" y="453.5" font-size="7.5" font-weight="600">10.9ｍ2</tspan>
+    </text>
+  </g>
+  <g aria-label="長崎 11.5ｍ2">
+    <title>長崎：11.5ｍ2</title>
+    <rect x="33" y="465" width="36" height="36" rx="3" fill="rgb(182, 226, 176)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="51" y="482.5" font-size="9" font-weight="700">長崎</tspan>
+      <tspan x="51" y="491.5" font-size="7.5" font-weight="600">11.5ｍ2</tspan>
+    </text>
+  </g>
+  <g aria-label="熊本 8.7ｍ2">
+    <title>熊本：8.7ｍ2</title>
+    <rect x="33" y="503" width="36" height="36" rx="3" fill="rgb(214, 239, 208)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="51" y="520.5" font-size="9" font-weight="700">熊本</tspan>
+      <tspan x="51" y="529.5" font-size="7.5" font-weight="600">8.7ｍ2</tspan>
+    </text>
+  </g>
+  <g aria-label="大分 11.2ｍ2">
+    <title>大分：11.2ｍ2</title>
+    <rect x="71" y="465" width="36" height="36" rx="3" fill="rgb(186, 227, 179)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="89" y="482.5" font-size="9" font-weight="700">大分</tspan>
+      <tspan x="89" y="491.5" font-size="7.5" font-weight="600">11.2ｍ2</tspan>
+    </text>
+  </g>
+  <g aria-label="宮崎 18.2ｍ2">
+    <title>宮崎：18.2ｍ2</title>
+    <rect x="71" y="503" width="36" height="36" rx="3" fill="rgb(81, 178, 100)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="89" y="520.5" font-size="9" font-weight="700">宮崎</tspan>
+      <tspan x="89" y="529.5" font-size="7.5" font-weight="600">18.2ｍ2</tspan>
+    </text>
+  </g>
+  <g aria-label="鹿児島 12.4ｍ2">
+    <title>鹿児島：12.4ｍ2</title>
+    <rect x="33" y="541.5" width="74" height="36" rx="3" fill="rgb(170, 221, 164)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.3" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="70" y="559.0" font-size="7" font-weight="700">鹿児島</tspan>
+      <tspan x="70" y="566.5" font-size="6.0" font-weight="600">12.4ｍ2</tspan>
+    </text>
+  </g>
+  <g aria-label="沖縄 10.5ｍ2">
+    <title>沖縄：10.5ｍ2</title>
+    <rect x="33" y="617.5" width="36" height="36" rx="3" fill="rgb(194, 231, 188)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="51" y="635.0" font-size="9" font-weight="700">沖縄</tspan>
+      <tspan x="51" y="644.0" font-size="7.5" font-weight="600">10.5ｍ2</tspan>
+    </text>
+  </g>
+  <g aria-label="北海道 27.8ｍ2">
+    <title>北海道：27.8ｍ2</title>
+    <rect x="491" y="45" width="74" height="74" rx="3" fill="rgb(0, 68, 27)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="2.0" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="528" y="81.5" font-size="11" font-weight="700">北海道</tspan>
+      <tspan x="528" y="92.5" font-size="9.5" font-weight="600">27.8ｍ2</tspan>
+    </text>
+  </g>
+  <g aria-label="青森 17.5ｍ2">
+    <title>青森：17.5ｍ2</title>
+    <rect x="491" y="159.5" width="74" height="36" rx="3" fill="rgb(91, 183, 106)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="528" y="177.0" font-size="9" font-weight="700">青森</tspan>
+      <tspan x="528" y="186.0" font-size="7.5" font-weight="600">17.5ｍ2</tspan>
+    </text>
+  </g>
+  <g aria-label="岩手 13.9ｍ2">
+    <title>岩手：13.9ｍ2</title>
+    <rect x="529" y="197.5" width="36" height="36" rx="3" fill="rgb(148, 211, 145)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="547" y="215.0" font-size="9" font-weight="700">岩手</tspan>
+      <tspan x="547" y="224.0" font-size="7.5" font-weight="600">13.9ｍ2</tspan>
+    </text>
+  </g>
+  <g aria-label="宮城 18.7ｍ2">
+    <title>宮城：18.7ｍ2</title>
+    <rect x="529" y="236" width="36" height="36" rx="3" fill="rgb(73, 173, 96)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="547" y="253.5" font-size="9" font-weight="700">宮城</tspan>
+      <tspan x="547" y="262.5" font-size="7.5" font-weight="600">18.7ｍ2</tspan>
+    </text>
+  </g>
+  <g aria-label="秋田 18.5ｍ2">
+    <title>秋田：18.5ｍ2</title>
+    <rect x="491" y="197.5" width="36" height="36" rx="3" fill="rgb(76, 175, 98)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="509" y="215.0" font-size="9" font-weight="700">秋田</tspan>
+      <tspan x="509" y="224.0" font-size="7.5" font-weight="600">18.5ｍ2</tspan>
+    </text>
+  </g>
+  <g aria-label="山形 19.8ｍ2">
+    <title>山形：19.8ｍ2</title>
+    <rect x="491" y="236" width="36" height="36" rx="3" fill="rgb(59, 163, 87)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="509" y="253.5" font-size="9" font-weight="700">山形</tspan>
+      <tspan x="509" y="262.5" font-size="7.5" font-weight="600">19.8ｍ2</tspan>
+    </text>
+  </g>
+  <g aria-label="福島 14ｍ2">
+    <title>福島：14ｍ2</title>
+    <rect x="491" y="274" width="74" height="36" rx="3" fill="rgb(147, 210, 144)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="528" y="291.5" font-size="9" font-weight="700">福島</tspan>
+      <tspan x="528" y="300.5" font-size="7.5" font-weight="600">14ｍ2</tspan>
+    </text>
+  </g>
+  <g aria-label="茨城 10.1ｍ2">
+    <title>茨城：10.1ｍ2</title>
+    <rect x="529" y="312.5" width="36" height="36" rx="3" fill="rgb(200, 233, 193)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="547" y="330.0" font-size="9" font-weight="700">茨城</tspan>
+      <tspan x="547" y="339.0" font-size="7.5" font-weight="600">10.1ｍ2</tspan>
+    </text>
+  </g>
+  <g aria-label="栃木 15ｍ2">
+    <title>栃木：15ｍ2</title>
+    <rect x="491" y="312.5" width="36" height="36" rx="3" fill="rgb(132, 204, 132)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="509" y="330.0" font-size="9" font-weight="700">栃木</tspan>
+      <tspan x="509" y="339.0" font-size="7.5" font-weight="600">15ｍ2</tspan>
+    </text>
+  </g>
+  <defs>
+    <linearGradient id="choropleth-lg" x1="0" x2="1">
+      <stop offset="0%"   stop-color="rgb(247, 252, 245)"/>
+      <stop offset="25%"   stop-color="rgb(198, 232, 191)"/>
+      <stop offset="50%"   stop-color="rgb(115, 195, 120)"/>
+      <stop offset="75%"   stop-color="rgb(34, 139, 69)"/>
+      <stop offset="100%"   stop-color="rgb(0, 68, 27)"/>
+    </linearGradient>
+    <filter id="txt-halo-dark" x="-40%" y="-40%" width="180%" height="180%">
+      <feDropShadow dx="0" dy="0" stdDeviation="1.3" flood-color="#000000" flood-opacity="0.7"/>
+    </filter>
+  </defs>
+  <text x="401" y="633" font-size="8" class="svg-tick" text-anchor="end">安全</text>
+  <rect x="405" y="625" width="140" height="10" rx="2" fill="url(#choropleth-lg)"/>
+  <text x="549" y="633" font-size="8" class="svg-tick">危険</text>
+  <text x="405" y="647" font-size="7.5" class="svg-tick">4.3ｍ2</text>
+  <text x="475" y="647" font-size="7.5" class="svg-tick" text-anchor="middle">16.1ｍ2</text>
+  <text x="545" y="647" font-size="7.5" class="svg-tick" text-anchor="end">27.8ｍ2</text>
+</svg>

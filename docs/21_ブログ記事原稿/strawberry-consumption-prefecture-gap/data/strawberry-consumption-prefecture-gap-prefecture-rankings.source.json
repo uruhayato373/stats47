@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "strawberry-consumption-quantity",
+  "year": "2024",
+  "unit": "g",
+  "label": "いちご消費量",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/strawberry-consumption-quantity/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug strawberry-consumption-prefecture-gap --keys strawberry-consumption-quantity --data-name strawberry-consumption-prefecture-gap-prefecture-rankings",
+  "fetchedAt": "2026-06-20T22:44:25.747Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "household-ratio-main-earner-employee-commute-90min",
+  "year": "2018",
+  "unit": "普通世帯千世帯対",
+  "label": "雇用者世帯の通勤時間",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/household-ratio-main-earner-employee-commute-90min/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug long-commute-telework-potential --keys household-ratio-main-earner-employee-commute-90min --data-name long-commute-telework-potential-prefecture-rankings",
+  "fetchedAt": "2026-06-20T22:42:21.607Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

@@ -1,0 +1,39 @@
+<!-- data-source: telework-summary-findings.json | generated: 2026-06-20T22:34:51.243Z -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 510" width="960" height="510" font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" role="img" aria-label="この記事でわかったこと">
+  <style>
+    .svg-bg{fill:#ffffff}
+    .svg-plot{fill:#f9fafb}
+    .svg-plot-border{stroke:#d1d5db}
+    .svg-title{fill:#1f2937}
+    .svg-axis{fill:#374151}
+    .svg-tick{fill:#6b7280}
+    .svg-grid{stroke:#e5e7eb}
+    @media (prefers-color-scheme:dark){
+    .svg-bg{fill:#0f172a}
+    .svg-plot{fill:#1e293b}
+    .svg-plot-border{stroke:#334155}
+    .svg-title{fill:#e2e8f0}
+    .svg-axis{fill:#cbd5e1}
+    .svg-tick{fill:#94a3b8}
+    .svg-grid{stroke:#334155}
+    }
+  </style>
+  <rect width="960" height="510" class="svg-bg"/>
+  <text x="480" y="46" text-anchor="middle" font-size="26" font-weight="bold" class="svg-title">この記事でわかったこと</text>
+  <rect x="40" y="72" width="880" height="94" class="svg-plot" rx="8"/>
+  <circle cx="58" cy="119" r="18" fill="#dc2626"/>
+  <text x="58" y="125" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">1</text>
+  <text x="90" y="103.6" font-size="18" class="svg-title"><tspan x="90" dy="0">東京39.8% vs 秋田6.4%──テレワーク率に6倍</tspan><tspan x="90" dy="22">超の格差。上位は首都圏・大都市圏が独占、下位は東北・四国</tspan><tspan x="90" dy="22">・山陰に集中</tspan></text>
+  <rect x="40" y="176" width="880" height="94" class="svg-plot" rx="8"/>
+  <circle cx="58" cy="223" r="18" fill="#dc2626"/>
+  <text x="58" y="229" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">2</text>
+  <text x="90" y="207.6" font-size="18" class="svg-title"><tspan x="90" dy="0">格差の主因は産業構造──情報通信業の集積が実施率を左右。</tspan><tspan x="90" dy="22">農林漁業・製造業・建設業が中心の地域は現場作業が不可欠で</tspan><tspan x="90" dy="22">テレワーク率が低い</tspan></text>
+  <rect x="40" y="280" width="880" height="94" class="svg-plot" rx="8"/>
+  <circle cx="58" cy="327" r="18" fill="#dc2626"/>
+  <text x="58" y="333" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">3</text>
+  <text x="90" y="311.6" font-size="18" class="svg-title"><tspan x="90" dy="0">テレワーク率が高い県は副業率・転職率も高い傾向。通勤時間</tspan><tspan x="90" dy="22">の節約と地理的制約の緩和が、働き方全体の柔軟性を高めてい</tspan><tspan x="90" dy="22">る</tspan></text>
+  <rect x="40" y="384" width="880" height="94" class="svg-plot" rx="8"/>
+  <circle cx="58" cy="431" r="18" fill="#dc2626"/>
+  <text x="58" y="437" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">4</text>
+  <text x="90" y="415.6" font-size="18" class="svg-title"><tspan x="90" dy="0">テレワーク格差はキャリア選択肢の格差に直結。地方では「こ</tspan><tspan x="90" dy="22">の地域で働ける仕事」が限られ、転職・副業の選択肢が狭まる</tspan><tspan x="90" dy="22">構造</tspan></text>
+</svg>

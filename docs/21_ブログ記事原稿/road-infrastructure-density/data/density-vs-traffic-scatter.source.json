@@ -1,0 +1,18 @@
+{
+  "kind": "composite",
+  "xMetric": {
+    "rankingKey": "road-length-per-km2",
+    "year": "2023",
+    "source": "r2:app/ranking/road-length-per-km2/values.json"
+  },
+  "yMetric": {
+    "rankingKey": "average-road-traffic-volume",
+    "year": "2020",
+    "source": "r2:app/ranking/average-road-traffic-volume/values.json"
+  },
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "note": "散布図 x=道路密度(2023) y=道路平均交通量(2020)。2軸とも SSOT R2 app/ranking から取得 (SVGから逆復元しない)。",
+  "restore": "node -e で /tmp の両 values.json から再構成 (本 source.json 参照)",
+  "fetchedAt": "2026-06-20T22:19:44.437Z",
+  "generatedBy": "article-writer (brushup)"
+}

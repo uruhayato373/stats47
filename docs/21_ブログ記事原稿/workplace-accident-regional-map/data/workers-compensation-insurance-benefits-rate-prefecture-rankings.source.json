@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "workers-compensation-insurance-benefits-rate",
+  "year": "2023",
+  "unit": "％",
+  "label": "労働者災害補償保険給付率 都道府県ランキング（2023年）",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/workers-compensation-insurance-benefits-rate/values.json",
+  "upstream": "metric config → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug workplace-accident-regional-map --keys workers-compensation-insurance-benefits-rate --data-name workers-compensation-insurance-benefits-rate-prefecture-rankings",
+  "verifiedMatchRate": 100,
+  "generatedBy": "backfill-source.mjs",
+  "note": "source-backfill: 既存jsonの値をSSOTと照合しrankingKey+年を確定(SVGから逆復元しない)"
+}

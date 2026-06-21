@@ -1,0 +1,12 @@
+{
+  "kind": "ranking",
+  "rankingKey": "smoke-emission-facility-count+general-dust-emission-facility-count+water-pollution-control-law-facility-count",
+  "year": "2023",
+  "unit": "件",
+  "label": "汚染施設数（ばい煙・一般粉じん・水質汚濁防止法特定事業場の合計）",
+  "transform": "3 ランキングの県別 value を合算し合計の多い上位15県を抽出（stacked bar）",
+  "source": "r2:app/ranking/smoke-emission-facility-count/values.json + r2:app/ranking/general-dust-emission-facility-count/values.json + r2:app/ranking/water-pollution-control-law-facility-count/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "3 ランキングの最新 partition (2023) を県別に合算して total 降順 top15 を facility-comparison.json に書き出す",
+  "generatedBy": "article-writer (manual aggregation)"
+}

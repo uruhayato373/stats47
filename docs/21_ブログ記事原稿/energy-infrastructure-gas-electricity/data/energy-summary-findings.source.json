@@ -1,0 +1,7 @@
+{
+  "kind": "manual",
+  "label": "記事内 findings の要約カード",
+  "note": "本記事本文の検証済み数値 (都市ガス比率=city-gas-supply-area-household-ratio, 発電=electricity-generation-capacity, 需要=electricity-demand, ガソリン=gasoline-sales-volume の R2 app/ranking SSOT) から構成。findings は観測値そのものではなく要約のため factual-check/quality-gate の ground truth 索引対象外。",
+  "source": "本記事の各 data/*.json (R2 app/ranking 由来) の要約",
+  "generatedBy": "article-writer"
+}

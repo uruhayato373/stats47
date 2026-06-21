@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "block-park-count-per-100km2",
+  "year": "2023",
+  "unit": "所",
+  "label": "街区公園数",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/block-park-count-per-100km2/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug park-green-space-gap --keys block-park-count-per-100km2 --data-name block-park-ranking",
+  "fetchedAt": "2026-06-20T22:00:19.114Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

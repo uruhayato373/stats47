@@ -1,0 +1,10 @@
+{
+  "kind": "ranking",
+  "rankingKey": "total-overnight-guests-foreign",
+  "year": "2024",
+  "unit": "人泊",
+  "label": "外国人延べ宿泊者数(全国籍合計)",
+  "transform": "上位15県を抽出 (本文導入の全国籍合計値の ground truth)",
+  "source": "r2:app/ranking/total-overnight-guests-foreign/values.json",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug inbound-by-nationality-regional-preference --keys total-overnight-guests-foreign --data-name total-foreign-aggregate"
+}

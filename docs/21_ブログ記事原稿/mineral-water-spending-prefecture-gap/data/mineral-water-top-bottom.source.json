@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "mineral-water-consumption-expenditure",
+  "year": "2024",
+  "unit": "円",
+  "label": "ミネラルウォーター消費支出額",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/mineral-water-consumption-expenditure/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug mineral-water-spending-prefecture-gap --keys mineral-water-consumption-expenditure --data-name mineral-water-top-bottom",
+  "fetchedAt": "2026-06-20T22:54:33.454Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

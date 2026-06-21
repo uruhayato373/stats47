@@ -1,0 +1,12 @@
+{
+  "kind": "ranking",
+  "rankingKey": "travel-participation-rate-overnight",
+  "source": "r2:app/ranking/travel-participation-rate-overnight/values.json",
+  "upstream": "metric config → e-Stat → R2 app/ranking",
+  "generatedBy": "generate-article-charts.ts",
+  "chartType": "tile-grid",
+  "dataFile": "travel-rate-map.json",
+  "year": "2021",
+  "unit": "％",
+  "label": "旅行行動者率の全国分布"
+}

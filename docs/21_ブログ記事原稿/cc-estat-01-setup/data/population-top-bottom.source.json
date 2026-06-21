@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "japanese-population",
+  "year": "2024",
+  "unit": "人",
+  "label": "日本人人口",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/japanese-population/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug cc-estat-01-setup --keys japanese-population --data-name population-top-bottom",
+  "fetchedAt": "2026-06-20T02:14:52.665Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "annual-sales-amount",
+  "year": "2022",
+  "unit": "百万円",
+  "label": "商業年間商品販売額",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/annual-sales-amount/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug cc-estat-16-commerce-bubble --keys annual-sales-amount --data-name commerce-sales-ranking",
+  "fetchedAt": "2026-06-20T21:41:37.923Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

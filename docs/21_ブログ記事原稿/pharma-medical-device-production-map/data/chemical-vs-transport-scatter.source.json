@@ -1,0 +1,12 @@
+{
+  "kind": "estat",
+  "statsDataId": "0003448099",
+  "params": { "x": "化学工業 製造品出荷額等", "y": "輸送用機械器具 製造品出荷額等" },
+  "year": "2021",
+  "unit": "百億円",
+  "label": "化学工業 vs 輸送用機械 出荷額",
+  "transform": "都道府県47件を (化学, 輸送) の2軸でプロット",
+  "source": "e-Stat 工業統計調査 https://www.e-stat.go.jp/dbview?sid=0003448099",
+  "chartType": "scatter",
+  "dataFile": "chemical-vs-transport-scatter.json"
+}

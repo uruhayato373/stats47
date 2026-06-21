@@ -1,0 +1,20 @@
+{
+  "kind": "derived",
+  "formula": "製造品出荷額(百万円) × 10000 ÷ 工業用水量(m3/日)",
+  "inputs": [
+    {
+      "kind": "ranking",
+      "rankingKey": "manufacturing-shipment-amount",
+      "year": "2023",
+      "source": "r2:app/ranking/manufacturing-shipment-amount/values.json"
+    },
+    {
+      "kind": "ranking",
+      "rankingKey": "industrial-water-usage",
+      "year": "2015",
+      "source": "r2:app/ranking/industrial-water-usage/values.json"
+    }
+  ],
+  "unit": "万円/(m3/日)",
+  "note": "水効率は SSOT 2 指標から算出した派生値。年度が異なるため参考値。SVGから逆復元しない"
+}
