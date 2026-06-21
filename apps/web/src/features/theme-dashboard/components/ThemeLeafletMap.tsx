@@ -14,13 +14,14 @@ const TileSwitcher = dynamic(
   { ssr: false }
 );
 
-import { useTheme } from "@/hooks/useTheme";
 import {
   filterMapDataPoints,
   getLeafletBorderColor,
   rankingItemToMapConfig,
 } from "@/features/map-visualization/utils/ranking-map-adapters";
 import { useThemedLeafletTile } from "@/features/map-visualization/utils/use-themed-leaflet-tile";
+
+import { useTheme } from "@/hooks/useTheme";
 
 import { fetchMunicipalityDrilldownAction } from "../actions";
 

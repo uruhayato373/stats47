@@ -4,8 +4,8 @@ import { notFound } from "next/navigation";
 import { isOk } from "@stats47/types";
 
 import { PageHeader, PageShell } from "@/components/layout";
-import { SurfaceSection } from "@/components/surface";
 import { readCityCategoryKeysFromR2 } from "@/components/stat-charts/server";
+import { SurfaceSection } from "@/components/surface";
 
 import {
   CategoryNavGrid,

@@ -8,6 +8,7 @@ import {
   getLeafletBorderColor,
 } from "@/features/map-visualization/utils/ranking-map-adapters";
 import { useThemedLeafletTile } from "@/features/map-visualization/utils/use-themed-leaflet-tile";
+
 import { useTheme } from "@/hooks/useTheme";
 
 import type { DepopulationMedicalPref } from "../lib/types";

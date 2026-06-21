@@ -1,6 +1,7 @@
+import { type ComponentPropsWithoutRef, type ReactNode } from "react";
+
 import Link from "next/link";
 
-import { type ComponentPropsWithoutRef, type ReactNode } from "react";
 
 import { cn } from "@stats47/components";
 
