@@ -1,19 +1,19 @@
 {
-  "generatedAt": "2026-06-21T09:35:59.702Z",
+  "generatedAt": "2026-06-21T09:52:26.438Z",
   "gscSnapshot": "2026-W24",
   "scope": "GSC流入のある /ranking/ ページ (SEO優先母集団)",
   "doneCriteria": "R2 の ai-content が auditRow を通る (blocker 0)",
   "summary": {
     "total": 924,
-    "done": 100,
-    "needsRegen": 824,
+    "done": 130,
+    "needsRegen": 794,
     "needsByReason": {
-      "incomplete": 769,
+      "incomplete": 740,
       "blocker": 18,
-      "missing": 37
+      "missing": 36
     },
-    "doneImpressions": 14629,
-    "needsImpressions": 10491
+    "doneImpressions": 16230,
+    "needsImpressions": 8890
   },
   "entries": [
     {
@@ -1008,52 +1008,48 @@
       "impressions": 67,
       "clicks": 4,
       "position": 8.19,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "missing-pref-commentary"
-      ]
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [],
+      "lastModified": "Sun, 21 Jun 2026 09:51:48 GMT",
+      "updatedAt": "2026-06-21T09:44:50.905Z"
     },
     {
       "rankingKey": "real-disposable-income",
       "impressions": 66,
       "clicks": 3,
       "position": 7.86,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
-      ]
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [],
+      "lastModified": "Sun, 21 Jun 2026 09:51:47 GMT",
+      "updatedAt": "2026-06-21T09:45:03.455Z"
     },
     {
       "rankingKey": "wine-consumption-quantity",
       "impressions": 65,
       "clicks": 5,
       "position": 6.28,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
-      ]
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [],
+      "lastModified": "Sun, 21 Jun 2026 09:51:48 GMT",
+      "updatedAt": "2026-06-21T09:45:44.395Z"
     },
     {
       "rankingKey": "apple-consumption-quantity",
       "impressions": 64,
       "clicks": 1,
       "position": 7.36,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
-      ]
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [],
+      "lastModified": "Sun, 21 Jun 2026 09:51:47 GMT",
+      "updatedAt": "2026-06-21T09:46:27.964Z"
     },
     {
       "rankingKey": "retail-store-count",
@@ -1073,158 +1069,148 @@
       "impressions": 62,
       "clicks": 3,
       "position": 7.24,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "missing-pref-commentary"
-      ]
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [],
+      "lastModified": "Sun, 21 Jun 2026 09:51:48 GMT",
+      "updatedAt": "2026-06-21T09:46:40.305Z"
     },
     {
       "rankingKey": "hobby-participation-rate-cinema",
       "impressions": 60,
       "clicks": 3,
       "position": 7.8,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
-      ]
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [
+        "pref-len"
+      ],
+      "lastModified": "Sun, 21 Jun 2026 09:51:47 GMT",
+      "updatedAt": "2026-06-21T09:46:17.291Z"
     },
     {
       "rankingKey": "sugar-consumption-quantity",
       "impressions": 60,
       "clicks": 2,
       "position": 7.38,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "missing-pref-commentary"
-      ]
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [],
+      "lastModified": "Sun, 21 Jun 2026 09:51:48 GMT",
+      "updatedAt": "2026-06-21T09:45:31.455Z"
     },
     {
       "rankingKey": "bonito-consumption-quantity",
       "impressions": 59,
       "clicks": 4,
       "position": 7.92,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
-      ]
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [],
+      "lastModified": "Sun, 21 Jun 2026 09:51:47 GMT",
+      "updatedAt": "2026-06-21T09:47:21.546Z"
     },
     {
       "rankingKey": "elementary-school-children-1-per",
       "impressions": 59,
       "clicks": 3,
       "position": 9.78,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
-      ]
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [],
+      "lastModified": "Sun, 21 Jun 2026 09:51:47 GMT",
+      "updatedAt": "2026-06-21T09:45:58.585Z"
     },
     {
       "rankingKey": "road-national-route-length",
       "impressions": 58,
       "clicks": 3,
       "position": 7.12,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
-      ]
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [],
+      "lastModified": "Sun, 21 Jun 2026 09:51:48 GMT",
+      "updatedAt": "2026-06-21T09:49:02.102Z"
     },
     {
       "rankingKey": "grilled-eel-consumption-expenditure",
       "impressions": 57,
       "clicks": 2,
       "position": 8.49,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
-      ]
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [],
+      "lastModified": "Sun, 21 Jun 2026 09:51:47 GMT",
+      "updatedAt": "2026-06-21T00:00:00.000Z"
     },
     {
       "rankingKey": "road-general-prefectural-length",
       "impressions": 56,
       "clicks": 1,
       "position": 8.25,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
-      ]
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [],
+      "lastModified": "Sun, 21 Jun 2026 09:51:48 GMT",
+      "updatedAt": "2026-06-21T09:45:52.975Z"
     },
     {
       "rankingKey": "future-population",
       "impressions": 55,
       "clicks": 2,
       "position": 7.6,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "missing-pref-commentary"
-      ]
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [
+        "pref-len"
+      ],
+      "lastModified": "Sun, 21 Jun 2026 09:51:47 GMT",
+      "updatedAt": "2026-06-21T00:00:00.000Z"
     },
     {
       "rankingKey": "coffee-consumption-expenditure",
       "impressions": 54,
       "clicks": 5,
       "position": 6.43,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
-      ]
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [],
+      "lastModified": "Sun, 21 Jun 2026 09:51:47 GMT",
+      "updatedAt": "2026-06-21T09:46:56.709Z"
     },
     {
       "rankingKey": "road-municipal-length",
       "impressions": 54,
       "clicks": 3,
       "position": 7.17,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
-      ]
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [],
+      "lastModified": "Sun, 21 Jun 2026 09:51:48 GMT",
+      "updatedAt": "2026-06-21T09:46:52Z"
     },
     {
       "rankingKey": "consumer-price-difference-index-overall-excl-rent",
       "impressions": 54,
       "clicks": 0,
       "position": 8.06,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
-      ]
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [],
+      "lastModified": "Sun, 21 Jun 2026 09:51:47 GMT",
+      "updatedAt": "2026-06-21T00:00:00.000Z"
     },
     {
       "rankingKey": "barber-beauty-salon-count",
@@ -1269,156 +1255,146 @@
       "impressions": 49,
       "clicks": 0,
       "position": 11,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
-      ]
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [],
+      "lastModified": "Sun, 21 Jun 2026 09:51:48 GMT",
+      "updatedAt": "2026-06-21T09:46:48.960Z"
     },
     {
       "rankingKey": "university-professor-annual-income",
       "impressions": 48,
       "clicks": 1,
       "position": 18.94,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "missing-pref-commentary"
-      ]
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [],
+      "lastModified": "Sun, 21 Jun 2026 09:51:48 GMT",
+      "updatedAt": "2026-06-21T09:48:06.324Z"
     },
     {
       "rankingKey": "junior-high-school-students-count",
       "impressions": 47,
       "clicks": 6,
       "position": 5.68,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
-      ]
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [],
+      "lastModified": "Sun, 21 Jun 2026 09:51:47 GMT",
+      "updatedAt": "2026-06-21T09:47:25.688Z"
     },
     {
       "rankingKey": "sauce-consumption-quantity",
       "impressions": 47,
       "clicks": 5,
       "position": 6.51,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
-      ]
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [],
+      "lastModified": "Sun, 21 Jun 2026 09:51:48 GMT",
+      "updatedAt": "2026-06-21T09:47:00.871Z"
     },
     {
       "rankingKey": "table-salt-consumption-quantity",
       "impressions": 47,
       "clicks": 2,
       "position": 6.96,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "missing-pref-commentary"
-      ]
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [],
+      "lastModified": "Sun, 21 Jun 2026 09:51:48 GMT",
+      "updatedAt": "2026-06-21T09:47:14.319Z"
     },
     {
       "rankingKey": "national-medical-expense-total",
       "impressions": 47,
       "clicks": 1,
       "position": 8.11,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "faq-speculation",
-        "paren-number",
-        "missing-pref-commentary"
-      ]
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [],
+      "lastModified": "Sun, 21 Jun 2026 09:51:47 GMT",
+      "updatedAt": "2026-06-21T09:47:19.490Z"
     },
     {
       "rankingKey": "onion-consumption-quantity",
       "impressions": 47,
       "clicks": 1,
       "position": 7.79,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
-      ]
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [],
+      "lastModified": "Sun, 21 Jun 2026 09:51:47 GMT",
+      "updatedAt": "2026-06-21T09:46:50.451Z"
     },
     {
       "rankingKey": "tofu-consumption-quantity",
       "impressions": 47,
       "clicks": 1,
       "position": 5.83,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "missing-pref-commentary"
-      ]
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [],
+      "lastModified": "Sun, 21 Jun 2026 09:51:48 GMT",
+      "updatedAt": "2026-06-21T09:47:48.397Z"
     },
     {
       "rankingKey": "sports-participation-rate-hiking",
       "impressions": 46,
       "clicks": 2,
       "position": 6.67,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "missing-pref-commentary"
-      ]
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [
+        "length-long"
+      ],
+      "lastModified": "Sun, 21 Jun 2026 09:51:48 GMT",
+      "updatedAt": "2026-06-21T00:00:00.000Z"
     },
     {
       "rankingKey": "eggplant-consumption-expenditure",
       "impressions": 46,
       "clicks": 1,
       "position": 7.04,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
-      ]
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [],
+      "lastModified": "Sun, 21 Jun 2026 09:51:47 GMT",
+      "updatedAt": "2026-06-21T09:47:59.938Z"
     },
     {
       "rankingKey": "potato-consumption-expenditure",
       "impressions": 46,
       "clicks": 0,
       "position": 7.78,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "missing-pref-commentary"
-      ]
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [],
+      "lastModified": "Sun, 21 Jun 2026 09:51:47 GMT",
+      "updatedAt": "2026-06-21T09:48:14.714Z"
     },
     {
       "rankingKey": "katsuobushi-consumption-quantity",
       "impressions": 45,
       "clicks": 3,
       "position": 6.18,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
-      ]
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [],
+      "lastModified": "Sun, 21 Jun 2026 09:51:47 GMT",
+      "updatedAt": "2026-06-21T09:49:08.930Z"
     },
     {
       "rankingKey": "wheat-flour-consumption-quantity",
@@ -1440,21 +1416,24 @@
       "impressions": 45,
       "clicks": 0,
       "position": 3.62,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "missing-pref-commentary"
-      ]
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [],
+      "lastModified": "Sun, 21 Jun 2026 09:51:48 GMT",
+      "updatedAt": "2026-06-21T09:48:51.950Z"
     },
     {
       "rankingKey": "non-regular-employment-rate",
       "impressions": 44,
       "clicks": 5,
       "position": 5.73,
-      "status": "needs-regen",
-      "reason": "missing",
-      "blockers": []
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [],
+      "lastModified": "Sun, 21 Jun 2026 09:51:47 GMT",
+      "updatedAt": "2026-06-21T09:47:41.810Z"
     },
     {
       "rankingKey": "bed-utilization-rate",
