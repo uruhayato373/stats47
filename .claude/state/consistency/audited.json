@@ -1,8 +1,5 @@
 {
-  "hash": "0a261cbdc59c712e5a4820e8c80adb721e77534202ecf9092c111dff6d1c1e14",
-  "audited_at": "2026-06-21T07:29:52",
-  "files": [
-    ".claude/scripts/blog/generate-article-charts.ts",
-    ".claude/skills/blog/trends-snapshots/trends-all-2026-06-21.md"
-  ]
+  "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "audited_at": "2026-06-21T09:15:09",
+  "files": []
 }
