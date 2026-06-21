@@ -80,6 +80,7 @@ CLAUDE.md 内に詳細を複製しない。状況に応じて参照する。
 | `evidence-based-judgment.md` | improvement / 判定系スキル (status: effect/* 更新時必読) |
 | `ui-components.md` | UI 実装 (shadcn / melta-ui / ブレイクポイント / page_components) |
 | `r2-storage-design.md` | snapshot 追加・変更 |
+| `gis-data.md` | 国土数値情報 (KSJ) GIS の取り込み・管理 (datasets.ts SSOT / 完全DBレス / gis-curator・gis-pipeline-runner) |
 | `estat-api.md` | e-Stat API 利用スキル |
 | `metric-config-standards.md` | metric config 作成・編集 (category 17 軸 / title・subtitle・note・description の役割 / validate:config) |
 | `branch-workflow.md` | PR・デプロイ作業・DB データ反映 |

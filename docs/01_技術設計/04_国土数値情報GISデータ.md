@@ -11,7 +11,14 @@ tags: [gis, mlit, data-source]
 - **ソース**: https://nlftp.mlit.go.jp/ksj/index.html
 - **スキル**: `/fetch-mlit-ksj`
 
-> **⚠️ 本ドキュメント中の「D1 gis_datasets」= ローカル使い捨て SQLite (`packages/database/.data/stats47.sqlite`) の `gis_datasets` テーブル**であり、Cloudflare の永続/リモート D1 サービスではない (完全DBレスで廃止済)。GIS パイプラインは DBレス移行の**既知スコープ例外**で、データセット定義の起点は git TS の `packages/gis/src/mlit-ksj/registry.ts`、`seed-from-registry.ts` がそれをローカル SQLite に seed し、`run-pipeline.ts` が読む (本番アプリは GIS スナップショットを R2 から読むのみで DB query しない)。正典: `docs/01_技術設計/12_完全DBレス設計.md` (§残 D1 依存) / `.claude/rules/data-sqlite-ssot.md`。
+> **⚠️ 完全DBレス (2026-06-21〜)**: 本ドキュメント中の「D1 gis_datasets」= ローカル使い捨て SQLite
+> (`packages/database/.data/stats47.sqlite`) の `gis_datasets` テーブルであり、Cloudflare 永続/リモート D1 ではない。
+> **メタの SSOT は git TS `packages/gis/src/mlit-ksj/datasets.ts`** (登録 42 件のメタ + ranking 定義)、
+> **技術設定は `registry.ts`** (KSJ_CODE_CONFIG)。`seed-from-registry.ts` が git TS を使い捨て SQLite に
+> 決定的に再構築し、`run-pipeline.ts` がそれを読む (SQLite を消しても git TS から再生成可)。本番アプリは
+> GIS スナップショットを R2 から読むのみで DB query しない。**下記データセット表は generate-docs.ts が生成する
+> スナップショット** (手編集禁止・真実源は datasets.ts)。規約: `.claude/rules/gis-data.md` / 管理 agent:
+> `gis-curator` (SSOT) + `gis-pipeline-runner` (実行)。正典: `docs/01_技術設計/12_完全DBレス設計.md`。
 
 ## 使い方
 
