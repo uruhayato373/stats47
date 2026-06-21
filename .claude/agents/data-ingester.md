@@ -14,7 +14,6 @@ Phase 6 (2026-05-27) の D1 → R2 移行後、本 agent は D1 stats_* テー�
 - TS-config 駆動の R2 観測値投入 (`/page-data-batch`)
 - metrics ビルドキャッシュの同期 (`/sync-metrics-cache`、TS registry が SSOT)
 - カバレッジ / FK 整合性検証 (`/verify-d1-integrity`、ビルドキャッシュ対象)
-- MLIT KSJ データ取得 (`/fetch-mlit-ksj`)
 
 > page_components は完全DBレス (doc12 Phase E) で **git TS SSOT** `apps/web/scripts/data/page-components/` に移行済。
 > D1 投入 (`/populate-component-data`) は廃止。編集は JSON 直編集 + `export-page-components-snapshot.ts`。
@@ -26,7 +25,6 @@ Phase 6 (2026-05-27) の D1 → R2 移行後、本 agent は D1 stats_* テー�
 | `/page-data-batch` | TS-config registry を walk → e-Stat → R2 直行 |
 | `/sync-metrics-cache` | TS-config → metrics ビルドキャッシュ差分 sync |
 | `/verify-d1-integrity` | FK / 47 県カバレッジ / migration_flow net 一致 |
-| `/fetch-mlit-ksj` | MLIT 国土数値情報の取得 |
 
 ## 担当外
 
@@ -34,6 +32,7 @@ Phase 6 (2026-05-27) の D1 → R2 移行後、本 agent は D1 stats_* テー�
 - スキーマ変更 / migration → `db-schema-manager` に委譲
 - R2 snapshot 派生 (D1 → snapshot) → `snapshot-exporter` に委譲
 - R2 push (`.local/r2/` → 本番 R2) → `r2-publisher` に委譲
+- **MLIT KSJ GIS データ (取得・メタ管理) → `gis-pipeline-runner` (実行) / `gis-curator` (SSOT) に委譲** (2026-06-21 分離)
 - AI コンテンツ生成 → 別 agent (現状未分割、暫定 article-writer / chart-author)
 
 ## 必読 rules

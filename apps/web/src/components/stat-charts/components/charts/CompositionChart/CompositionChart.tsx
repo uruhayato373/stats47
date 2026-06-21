@@ -3,7 +3,7 @@ import { logger } from "@stats47/logger";
 
 import { toCompositionChartData } from "../../../adapters/toCompositionChartData";
 import { fetchEstatData } from "../../../services";
-import { DashboardCard } from "../../shared/DashboardCard";
+import { LegacyDashboardCard } from "../../shared/DashboardCard";
 
 import { CompositionChartClient } from "./CompositionChartClient";
 
@@ -142,7 +142,7 @@ export const CompositionChartDashboard = async ({
 
     if (chartData.trendData.length === 0) {
       return (
-        <DashboardCard
+        <LegacyDashboardCard
           title={title}
           rankingLink={rankingLink}
           description={description}
@@ -156,12 +156,12 @@ export const CompositionChartDashboard = async ({
           empty
         >
           <div />
-        </DashboardCard>
+        </LegacyDashboardCard>
       );
     }
 
     return (
-      <DashboardCard
+      <LegacyDashboardCard
         title={title}
         rankingLink={rankingLink}
         description={description}
@@ -175,7 +175,7 @@ export const CompositionChartDashboard = async ({
         empty={false}
       >
         <CompositionChartClient chartData={chartData} defaultTab={defaultTab} />
-      </DashboardCard>
+      </LegacyDashboardCard>
     );
   } catch (err) {
     logger.error(

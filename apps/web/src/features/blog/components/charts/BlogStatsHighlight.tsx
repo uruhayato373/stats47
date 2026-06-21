@@ -2,8 +2,10 @@
 
 import { useMemo } from "react";
 
-import { Card, CardContent, CardHeader, CardTitle } from "@stats47/components/atoms/ui/card";
 import { TrendingUp, BarChart3 } from "lucide-react";
+
+import { ChartPanel } from "@/components/charts/ChartPanel";
+import { SurfaceCard } from "@/components/surface";
 
 import { RankingRankBadge } from "../../../ranking/components/RankingHighlights/RankingRankBadge";
 import { useChartData } from "../../hooks/useChartData";
@@ -85,8 +87,12 @@ export function BlogStatsHighlight(props: StatsHighlightConfig) {
   if (isLoading) {
     return (
       <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <Card className="border border-border shadow-sm rounded-sm h-32 animate-pulse" />
-        <Card className="border border-border shadow-sm rounded-sm h-32 animate-pulse" />
+        <SurfaceCard className="h-32 animate-pulse">
+          <span className="sr-only">読み込み中</span>
+        </SurfaceCard>
+        <SurfaceCard className="h-32 animate-pulse">
+          <span className="sr-only">読み込み中</span>
+        </SurfaceCard>
       </div>
     );
   }
@@ -95,13 +101,11 @@ export function BlogStatsHighlight(props: StatsHighlightConfig) {
 
   return (
     <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-6">
-      {/* Top 3 */}
-      <Card className="border border-border shadow-sm rounded-sm h-full">
-        <CardHeader>
-          <TrendingUp className="h-4 w-4 text-primary" />
-          <CardTitle>Top 3 都道府県</CardTitle>
-        </CardHeader>
-        <CardContent className="p-4">
+      <ChartPanel
+        title="Top 3 都道府県"
+        icon={<TrendingUp className="h-4 w-4 text-primary" />}
+        className="h-full"
+      >
           <div className="space-y-3">
             {top3.map((item) => (
               <div
@@ -125,16 +129,13 @@ export function BlogStatsHighlight(props: StatsHighlightConfig) {
               </div>
             ))}
           </div>
-        </CardContent>
-      </Card>
+      </ChartPanel>
 
-      {/* Stats Summary */}
-      <Card className="border border-border shadow-sm rounded-sm h-full">
-        <CardHeader>
-          <BarChart3 className="h-4 w-4 text-blue-500" />
-          <CardTitle>統計サマリー</CardTitle>
-        </CardHeader>
-        <CardContent className="p-4">
+      <ChartPanel
+        title="統計サマリー"
+        icon={<BarChart3 className="h-4 w-4 text-primary" />}
+        className="h-full"
+      >
           <div className="grid grid-cols-2 gap-x-4 gap-y-5">
             <div className="flex flex-col">
               <span className="text-xs text-muted-foreground font-medium mb-1">
@@ -224,8 +225,7 @@ export function BlogStatsHighlight(props: StatsHighlightConfig) {
               </span>
             </div>
           </div>
-        </CardContent>
-      </Card>
+      </ChartPanel>
     </div>
   );
 }

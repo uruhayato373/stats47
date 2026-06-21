@@ -1,9 +1,0 @@
-{
-  "kind": "derived",
-  "formula": "total-overnight-guests-foreign の全47都道府県を年別に合算（全国計）",
-  "generatedBy": "generate-article-charts.ts",
-  "chartType": "line",
-  "dataFile": "foreign-guests-trend.json",
-  "unit": "人泊",
-  "label": "外国人延べ宿泊者数の推移（全国）"
-}

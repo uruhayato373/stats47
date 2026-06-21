@@ -1,17 +1,20 @@
 /**
  * KSJ データセット コード設定レジストリ (slim 版)
  *
- * Phase 2 of GIS dataset management refactor (plan: stateless-stargazing-teapot):
- * 純メタデータ (name / category / license / latestVersion 等) は D1 gis_datasets に
- * 寄せた。本ファイルは pipeline 実行時のみ必要な「コードに残さざるを得ない設定」
+ * 本ファイルは pipeline 実行時のみ必要な「コードに残さざるを得ない技術設定」
  * (downloadUrlPattern / geojsonDirInZip / propertyMap / simplifyOptions) だけを持つ。
  *
- * 新規データセットを stats47 に取り込む場合:
- *   1. KSJ_CODE_CONFIG にエントリを追加 (本ファイル)
- *   2. D1 gis_datasets に行を INSERT (status='registered')
- *      または Phase 3 で seed 済みなら status='available' → 'registered' に UPDATE
- *   3. registry の純メタ (name 等) は D1 側で UPDATE
+ * 純メタデータ (name / category / geometryType / coverage / license / stats47Category /
+ * ranking 定義) は **`datasets.ts` (git TS SSOT)** が持つ (完全DBレス化・2026-06-21)。
+ * `seed-from-registry.ts` が datasets.ts を使い捨て SQLite に決定的に再構築する。
+ *
+ * 新規データセットを stats47 に取り込む場合 (ローカル SQLite への手動 INSERT は廃止):
+ *   1. `datasets.ts` の GIS_DATASETS にメタ + ranking 定義を追加
+ *   2. 本ファイル KSJ_CODE_CONFIG に技術設定 (downloadUrl 等) を追加
+ *   3. `npx tsx packages/gis/src/mlit-ksj/scripts/seed-from-registry.ts` で SQLite を再 seed
  *   4. `npx tsx packages/gis/src/mlit-ksj/scripts/run-pipeline.ts <ID>` を実行
+ *
+ * 正典: `.claude/rules/gis-data.md` / `docs/01_技術設計/04_国土数値情報GISデータ.md`
  */
 
 import type { KsjCodeConfig } from "./types";

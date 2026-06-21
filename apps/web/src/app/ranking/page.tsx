@@ -10,8 +10,6 @@
  * home = 注目ランキングの editorial 抜粋 / 本ページ = 全カテゴリの網羅索引）。
  * R2 非依存の純静的ページとして SSG する（home の FeaturedRankings build-empty 問題を避ける）。
  */
-import Link from "next/link";
-
 import { listCategories } from "@stats47/data-configs";
 import {
   Building2,
@@ -35,6 +33,7 @@ import {
 } from "lucide-react";
 
 import { PageShell, PageHeader } from "@/components/layout";
+import { SurfaceLinkCard } from "@/components/surface";
 
 import { AdSenseAd, RANKING_PAGE_FOOTER } from "@/lib/google-adsense";
 import { generateOGMetadata } from "@/lib/metadata/og-generator";
@@ -99,10 +98,10 @@ export default function RankingIndexPage() {
           {categories.map((c) => {
             const Icon = ICON_MAP[c.icon] ?? TrendingUp;
             return (
-              <Link
+              <SurfaceLinkCard
                 key={c.categoryKey}
                 href={`/category/${c.categoryKey}`}
-                className="group flex flex-col rounded-none border bg-card p-4 shadow-sm transition-colors hover:border-primary/40 hover:bg-accent/40 hover:shadow-md"
+                className="group flex flex-col"
               >
                 <div className="mb-2 flex items-center gap-2.5">
                   <span className="flex h-9 w-9 items-center justify-center rounded-full bg-primary/10 text-primary">
@@ -117,7 +116,7 @@ export default function RankingIndexPage() {
                     {c.description}
                   </p>
                 )}
-              </Link>
+              </SurfaceLinkCard>
             );
           })}
         </div>
@@ -127,33 +126,24 @@ export default function RankingIndexPage() {
       <section className="mb-12">
         <h2 className="mb-3 text-lg font-bold">他の探し方</h2>
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
-          <Link
-            href="/themes"
-            className="rounded-none border bg-card p-4 shadow-sm transition-colors hover:border-primary/40 hover:bg-accent/40 hover:shadow-md"
-          >
+          <SurfaceLinkCard href="/themes">
             <h3 className="text-sm font-semibold">テーマダッシュボード</h3>
             <p className="mt-1 text-xs text-muted-foreground">
               少子高齢化・労働・医療など主題で横断比較
             </p>
-          </Link>
-          <Link
-            href="/survey"
-            className="rounded-none border bg-card p-4 shadow-sm transition-colors hover:border-primary/40 hover:bg-accent/40 hover:shadow-md"
-          >
+          </SurfaceLinkCard>
+          <SurfaceLinkCard href="/survey">
             <h3 className="text-sm font-semibold">調査から探す</h3>
             <p className="mt-1 text-xs text-muted-foreground">
               出典の統計調査ごとにランキングを一覧
             </p>
-          </Link>
-          <Link
-            href="/areas"
-            className="rounded-none border bg-card p-4 shadow-sm transition-colors hover:border-primary/40 hover:bg-accent/40 hover:shadow-md"
-          >
+          </SurfaceLinkCard>
+          <SurfaceLinkCard href="/areas">
             <h3 className="text-sm font-semibold">都道府県から探す</h3>
             <p className="mt-1 text-xs text-muted-foreground">
               47 都道府県それぞれの特徴と順位
             </p>
-          </Link>
+          </SurfaceLinkCard>
         </div>
       </section>
 

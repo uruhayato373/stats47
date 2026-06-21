@@ -16,7 +16,7 @@ import {
   TableRow,
 } from "@stats47/components";
 
-import { DashboardCard } from "../../shared/DashboardCard";
+import { LegacyDashboardCard } from "../../shared/DashboardCard";
 
 import type { StatsTableRowData } from "../../../types/visualization";
 
@@ -47,7 +47,7 @@ export const StatsTableClient: React.FC<StatsTableClientProps> = ({
   const selectedYear = years.find((y) => y.yearCode === selectedYearCode);
 
   return (
-    <DashboardCard
+    <LegacyDashboardCard
       title={title}
       rankingLink={rankingLink}
       description={description}
@@ -104,6 +104,6 @@ export const StatsTableClient: React.FC<StatsTableClientProps> = ({
           ))}
         </TableBody>
       </Table>
-    </DashboardCard>
+    </LegacyDashboardCard>
   );
 };

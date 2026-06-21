@@ -4,9 +4,6 @@
  * `/survey` でアクセスされ、全調査の一覧を表示。
  */
 
-import Link from "next/link";
-
-
 import {
   readRankingItemsBySurveyFromR2,
   readSurveysFromR2,
@@ -14,6 +11,7 @@ import {
 import { isOk } from "@stats47/types";
 
 import { PageShell, PageHeader } from "@/components/layout";
+import { SurfaceLinkCard } from "@/components/surface";
 
 import { AdSenseAd, CONTENT_FOOTER } from "@/lib/google-adsense";
 import { generateOGMetadata } from "@/lib/metadata/og-generator";
@@ -67,10 +65,10 @@ export default async function SurveyIndexPage() {
         {sortedSurveys.map((survey) => {
           const count = countMap.get(survey.id) ?? 0;
           return (
-            <Link
+            <SurfaceLinkCard
               key={survey.id}
               href={`/survey/${survey.id}`}
-              className="block rounded-none border bg-card p-4 shadow-sm transition-colors hover:border-primary/30 hover:shadow-md"
+              className="block"
             >
               <div className="flex items-start justify-between">
                 <div className="min-w-0 flex-1">
@@ -90,7 +88,7 @@ export default async function SurveyIndexPage() {
                   {survey.description}
                 </p>
               )}
-            </Link>
+            </SurfaceLinkCard>
           );
         })}
       </div>

@@ -139,12 +139,12 @@ export function MigrationFlowPlayer({
         )}
 
         {loading && (
-          <div className="absolute inset-0 flex items-center justify-center text-sm text-slate-500">
+          <div className="absolute inset-0 flex items-center justify-center text-sm text-muted-foreground">
             読み込み中…
           </div>
         )}
         {errored && (
-          <div className="absolute inset-0 flex items-center justify-center text-sm text-slate-500">
+          <div className="absolute inset-0 flex items-center justify-center text-sm text-muted-foreground">
             データを読み込めませんでした。
           </div>
         )}

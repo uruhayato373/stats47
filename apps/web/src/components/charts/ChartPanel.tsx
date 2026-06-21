@@ -3,18 +3,21 @@
 import { type ReactNode } from "react";
 
 import { cn } from "@stats47/components";
-import { Card, CardContent, CardHeader, CardTitle } from "@stats47/components/atoms/ui/card";
+
+import { SurfaceCard } from "@/components/surface";
 
 export interface ChartPanelProps {
-  title: ReactNode;
+  title?: ReactNode;
   children: ReactNode;
   icon?: ReactNode;
   description?: ReactNode;
   action?: ReactNode;
+  footer?: ReactNode;
   className?: string;
   contentClassName?: string;
   headerClassName?: string;
   titleClassName?: string;
+  footerClassName?: string;
 }
 
 export function ChartPanel({
@@ -23,26 +26,41 @@ export function ChartPanel({
   icon,
   description,
   action,
+  footer,
   className,
   contentClassName,
   headerClassName,
   titleClassName,
+  footerClassName,
 }: ChartPanelProps) {
+  const hasHeader = title || description || action || icon;
+
   return (
-    <Card className={cn("border border-border shadow-sm", className)}>
-      <CardHeader className={cn("pb-2", headerClassName)}>
-        <div className="flex flex-wrap items-center justify-between gap-2">
-          <div className="flex min-w-0 items-center gap-2">
-            {icon}
-            <CardTitle className={cn("text-sm", titleClassName)}>{title}</CardTitle>
+    <SurfaceCard className={cn("w-full p-0", className)}>
+      {hasHeader && (
+        <div className={cn("border-b border-border px-4 py-3", headerClassName)}>
+          <div className="flex flex-wrap items-start justify-between gap-2">
+            <div className="flex min-w-0 items-center gap-2">
+              {icon}
+              {title && (
+                <h3 className={cn("text-sm font-semibold text-foreground", titleClassName)}>
+                  {title}
+                </h3>
+              )}
+            </div>
+            {action}
           </div>
-          {action}
+          {description && (
+            <div className="mt-1 text-xs text-muted-foreground">{description}</div>
+          )}
         </div>
-        {description && (
-          <div className="text-xs text-muted-foreground">{description}</div>
-        )}
-      </CardHeader>
-      <CardContent className={contentClassName}>{children}</CardContent>
-    </Card>
+      )}
+      <div className={cn("p-4", contentClassName)}>{children}</div>
+      {footer && (
+        <div className={cn("border-t border-border px-4 py-3 text-xs text-muted-foreground", footerClassName)}>
+          {footer}
+        </div>
+      )}
+    </SurfaceCard>
   );
 }

@@ -11,6 +11,8 @@ import { Badge } from "@stats47/components/atoms/ui/badge";
 import { Icon } from "@stats47/components/atoms/ui/icon";
 import { InfoIcon } from "lucide-react";
 
+import { SurfaceCard } from "@/components/surface";
+
 import { getDefinitionSet } from "../../data/definitions";
 
 import type { DashboardItemProps, DefinitionGroup } from "../../types";
@@ -133,7 +135,7 @@ export const DefinitionsCard: React.FC<DashboardItemProps<"definitions-card">> =
   const title = common.title || "統計の定義";
 
   return (
-    <div className="rounded-lg border bg-card shadow-sm">
+    <SurfaceCard className="p-0">
       <Accordion type="single" collapsible>
         <AccordionItem value="definitions" className="border-none">
           <AccordionTrigger className="px-6 py-4 hover:no-underline">
@@ -176,6 +178,6 @@ export const DefinitionsCard: React.FC<DashboardItemProps<"definitions-card">> =
           </AccordionContent>
         </AccordionItem>
       </Accordion>
-    </div>
+    </SurfaceCard>
   );
 };

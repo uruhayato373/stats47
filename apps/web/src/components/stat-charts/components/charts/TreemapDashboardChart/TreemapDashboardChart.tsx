@@ -2,7 +2,7 @@ import { logger } from "@stats47/logger";
 
 import { toTreemapData } from "../../../adapters";
 import { fetchEstatDataWithCategories } from "../../../services";
-import { DashboardCard } from "../../shared/DashboardCard";
+import { LegacyDashboardCard } from "../../shared/DashboardCard";
 import { ErrorDisplay } from "../../shared/ErrorDisplay";
 
 import { TreemapChartClient } from "./TreemapChartClient";
@@ -59,7 +59,7 @@ export const TreemapDashboardChart = async ({
   }
 
   return (
-    <DashboardCard
+    <LegacyDashboardCard
       title={title}
       rankingLink={rankingLink}
       description={description}
@@ -71,6 +71,6 @@ export const TreemapDashboardChart = async ({
       empty={false}
     >
       <TreemapChartClient data={data} />
-    </DashboardCard>
+    </LegacyDashboardCard>
   );
 };

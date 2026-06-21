@@ -4,6 +4,15 @@
 
 import type { ColorScaleOptions, VisualizationDataPoint } from "../types";
 import type { MapVisualizationConfig } from "../types/map-chart";
+import { normalizeColorScheme } from "./color-scale/normalize-color-scheme";
+
+function normalizeSequentialScheme(colorScheme: string | undefined): string {
+  return normalizeColorScheme(colorScheme || "interpolateBlues");
+}
+
+function normalizeDivergingScheme(colorScheme: string | undefined): string {
+  return normalizeColorScheme(colorScheme || "interpolateRdBu");
+}
 
 /**
  * 地図可視化設定をカラースケールオプションに変換
@@ -21,7 +30,7 @@ export function mapConfigToColorOptions(
       return {
         type: "sequential",
         data,
-        colorScheme: colorConfig.colorScheme || "interpolateBlues",
+        colorScheme: normalizeSequentialScheme(colorConfig.colorScheme),
         minValueType: colorConfig.minValueType,
         isReversed: colorConfig.isReversed,
         noDataColor: colorConfig.noDataColor || "#e0e0e0",
@@ -31,7 +40,7 @@ export function mapConfigToColorOptions(
       return {
         type: "diverging",
         data,
-        colorScheme: colorConfig.colorScheme || "interpolateBlues",
+        colorScheme: normalizeDivergingScheme(colorConfig.colorScheme),
         divergingMidpoint: colorConfig.divergingMidpoint || "zero",
         divergingMidpointValue: colorConfig.divergingMidpointValue,
         isSymmetrized: colorConfig.isSymmetrized,

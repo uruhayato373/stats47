@@ -46,7 +46,7 @@ export function CommuteFlowSectionClient({ initialData }: Props) {
 
   return (
     <section>
-      <h2 className="mb-3 text-xl font-bold text-slate-900">
+      <h2 className="mb-3 text-xl font-bold text-foreground">
         都道府県 通勤フロー（昼夜間人口）
       </h2>
       <p className="mb-3 text-sm text-muted-foreground">

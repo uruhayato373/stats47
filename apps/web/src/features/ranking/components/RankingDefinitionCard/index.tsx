@@ -4,6 +4,8 @@ import dynamic from "next/dynamic";
 
 import { ExternalLink } from "lucide-react";
 
+import { SurfaceCard } from "@/components/surface";
+
 import type { RankingItem } from "@stats47/ranking";
 
 const DefinitionWithMath = dynamic(
@@ -27,7 +29,7 @@ export function RankingDefinitionCard({
   itemDetail,
 }: RankingDefinitionCardProps) {
   return (
-    <div className="rounded-lg border bg-card p-6 shadow-sm">
+    <SurfaceCard className="p-6">
       <h3 className="text-lg font-semibold mb-3">統計の定義</h3>
 
       <DefinitionWithMath
@@ -50,6 +52,6 @@ export function RankingDefinitionCard({
           </a>
         </div>
       )}
-    </div>
+    </SurfaceCard>
   );
 }

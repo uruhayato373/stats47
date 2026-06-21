@@ -6,7 +6,7 @@ import {
 import { isOk } from "@stats47/types";
 
 import { toRadarChartData } from "../../../adapters";
-import { DashboardCard } from "../../shared/DashboardCard";
+import { LegacyDashboardCard } from "../../shared/DashboardCard";
 import { ErrorDisplay } from "../../shared/ErrorDisplay";
 
 import { RadarChartDashboardClient } from "./RadarChartDashboardClient";
@@ -95,7 +95,7 @@ export const RadarChartDashboard = async ({
   }
 
   return (
-    <DashboardCard
+    <LegacyDashboardCard
       title={title}
       rankingLink={rankingLink}
       description={description}
@@ -106,6 +106,6 @@ export const RadarChartDashboard = async ({
       empty={false}
     >
       <RadarChartDashboardClient chartData={chartData} />
-    </DashboardCard>
+    </LegacyDashboardCard>
   );
 };

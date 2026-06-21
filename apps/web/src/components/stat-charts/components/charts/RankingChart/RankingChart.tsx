@@ -10,7 +10,7 @@ import { toBarChartData } from "../../../adapters";
 import { toLineChartData } from "../../../adapters/toLineChartData";
 import { fetchEstatData } from "../../../services";
 import { computeYAxisDomain } from "../../../utils/computeYAxisDomain";
-import { DashboardCard } from "../../shared/DashboardCard";
+import { LegacyDashboardCard } from "../../shared/DashboardCard";
 import { ErrorDisplay } from "../../shared/ErrorDisplay";
 import { BarChartClient } from "../BarChart/BarChartClient";
 import { LineChartClient } from "../LineChart/LineChartClient";
@@ -182,7 +182,7 @@ export const RankingChartDashboard = async ({
       const chartData = toLineChartData(rawDataList, resolvedLabels);
 
       return (
-        <DashboardCard
+        <LegacyDashboardCard
           title={title}
           rankingLink={rankingLink}
           source={sourceName ?? undefined}
@@ -192,7 +192,7 @@ export const RankingChartDashboard = async ({
           empty={chartData.data.length === 0}
         >
           <LineChartClient chartData={chartData} yDomain={sharedDomain} />
-        </DashboardCard>
+        </LegacyDashboardCard>
       );
     }
 
@@ -201,7 +201,7 @@ export const RankingChartDashboard = async ({
     const barData = toBarChartData(rawDataList, resolvedLabels, barChartType);
 
     return (
-      <DashboardCard
+      <LegacyDashboardCard
         title={title}
         rankingLink={rankingLink}
         source={sourceName ?? undefined}
@@ -211,7 +211,7 @@ export const RankingChartDashboard = async ({
         empty={barData.data.length === 0}
       >
         <BarChartClient chartData={barData} chartType={barChartType} xDomain={sharedDomain} />
-      </DashboardCard>
+      </LegacyDashboardCard>
     );
   } catch (err) {
     logger.error({ error: err }, "RankingChartのデータ取得に失敗しました");

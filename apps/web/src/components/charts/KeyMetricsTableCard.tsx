@@ -5,8 +5,9 @@ import { type ReactNode } from "react";
 import Link from "next/link";
 
 import { cn } from "@stats47/components";
-import { Card, CardContent, CardHeader } from "@stats47/components/atoms/ui/card";
 import { Table, TableBody, TableCell, TableRow } from "@stats47/components/atoms/ui/table";
+
+import { SurfaceCard } from "@/components/surface";
 
 export interface KeyMetricsTableRow {
   label: ReactNode;
@@ -31,16 +32,16 @@ export function KeyMetricsTableCard({
   className,
 }: KeyMetricsTableCardProps) {
   return (
-    <Card className={cn("shadow-sm", className)}>
-      <CardHeader className="p-3 pb-1">
+    <SurfaceCard className={cn("p-0", className)}>
+      <div className="p-3 pb-1">
         <div className="min-w-0">
           <div className="truncate text-sm font-semibold text-foreground">{title}</div>
           {subtitle && (
             <div className="mt-0.5 text-[11px] text-muted-foreground">{subtitle}</div>
           )}
         </div>
-      </CardHeader>
-      <CardContent className="p-3 pt-1">
+      </div>
+      <div className="p-3 pt-1">
         <Table>
           <TableBody>
             {rows.map((row, index) => {
@@ -89,7 +90,7 @@ export function KeyMetricsTableCard({
         {footer && (
           <div className="mt-1 text-[10px] text-muted-foreground">{footer}</div>
         )}
-      </CardContent>
-    </Card>
+      </div>
+    </SurfaceCard>
   );
 }

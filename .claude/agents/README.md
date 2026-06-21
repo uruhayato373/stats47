@@ -22,16 +22,18 @@
 | `knowledge-curator` 🆕 | 失敗・学びの記録 + auto memory 整理 | strategy-advisor 分離 |
 | `improvement-triage` 🆕 | 改善バックログ整理 + status 更新 (`docs/02_実装計画/03_改善バックログ.md` 排他 append) | strategy-advisor 分離 |
 
-## Tier 2: Data / Infra (6 体)
+## Tier 2: Data / Infra (8 体)
 
 | agent | role | 派生元 |
 |---|---|---|
 | `estat-researcher` 🆕 | e-Stat / MLIT DPF 探索・メタ確認 (DB には触らない) | data-pipeline 分割 |
-| `data-ingester` 🆕 | metrics 登録 + stats_* 投入 + 47県カバレッジ検証 | data-pipeline + db-manager 分割 |
+| `data-ingester` 🆕 | metrics 登録 + stats_* 投入 + 47県カバレッジ検証 (GIS は gis-* に委譲) | data-pipeline + db-manager 分割 |
 | `db-schema-manager` 🆕 | スキーマ・migration・reset 専任 | db-manager 分割 |
 | `snapshot-exporter` 🆕 | D1 → R2 snapshot / Remotion 派生 JSON 生成 | db-manager 分割 |
 | `r2-publisher` 🆕 | R2 push / pull / du 専任 | db-manager 分割 |
 | `ranking-publisher` 🆕 | ranking 公開多段 (generate-ranking-items / KNOWN・SITEMAP・INDEXABLE 再生成 / deploy / purge / 本番実測) のオーケストレーション。観測値=data-ingester、push=r2-publisher、deploy=devops-runner に委譲 | 2026-06-21 新設 |
+| `gis-curator` 🆕 | KSJ GIS メタ SSOT (datasets.ts / registry.ts) 管理・dataset lifecycle・メタ整合。完全DBレス (git TS=SSOT)。pipeline は gis-pipeline-runner、push は r2-publisher に委譲 | 2026-06-21 新設 (GIS DBレス化) |
+| `gis-pipeline-runner` 🆕 | KSJ GIS パイプライン実行 (seed → download → TopoJSON → R2 → build state)。SSOT 編集は gis-curator、push は r2-publisher に委譲 | 2026-06-21 新設 (GIS DBレス化) |
 
 ## Tier 3: Content - Blog / Note / Ranking (9 体)
 

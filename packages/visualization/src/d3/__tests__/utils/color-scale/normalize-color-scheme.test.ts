@@ -14,8 +14,11 @@ describe("normalizeColorScheme", () => {
 
   it("should convert known aliases to their 'interpolate' form", () => {
     expect(normalizeColorScheme("Blues")).toBe("interpolateBlues");
+    expect(normalizeColorScheme("blues")).toBe("interpolateBlues");
     expect(normalizeColorScheme("Reds")).toBe("interpolateReds");
+    expect(normalizeColorScheme("reds")).toBe("interpolateReds");
     expect(normalizeColorScheme("RdBu")).toBe("interpolateRdBu");
+    expect(normalizeColorScheme("rdbu")).toBe("interpolateRdBu");
     expect(normalizeColorScheme("Viridis")).toBe("interpolateViridis");
     expect(normalizeColorScheme("Spectral")).toBe("interpolateSpectral");
   });

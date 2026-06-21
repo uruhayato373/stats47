@@ -1,4 +1,5 @@
-import { DashboardCard, LineChartClient, toLineChartData } from "@/components/stat-charts";
+import { ChartPanel } from "@/components/charts/ChartPanel";
+import { LineChartClient, toLineChartData } from "@/components/stat-charts";
 import { fetchEstatData, toKpiCardData } from "@/components/stat-charts/server";
 
 import type { StatsLineChartProps } from "../../types/ranking-page-card";
@@ -41,11 +42,22 @@ export async function StatsLineChartCard({
   const displayValue = statData?.value;
 
   return (
-    <DashboardCard
+    <ChartPanel
       title={title}
       description={description}
-      source="社会・人口統計体系"
-      sourceLink="https://www.e-stat.go.jp/"
+      footer={
+        <>
+          出典:{" "}
+          <a
+            href="https://www.e-stat.go.jp/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:underline"
+          >
+            社会・人口統計体系
+          </a>
+        </>
+      }
     >
       <div className="flex flex-col gap-4">
         {/* 統計値（インライン描画） */}
@@ -66,6 +78,6 @@ export async function StatsLineChartCard({
         {/* 折れ線チャート */}
         {chartData.data.length > 0 && <LineChartClient chartData={chartData} />}
       </div>
-    </DashboardCard>
+    </ChartPanel>
   );
 }

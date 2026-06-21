@@ -2,7 +2,7 @@ import { logger } from "@stats47/logger";
 
 import { toSunburstData } from "../../../adapters";
 import { fetchEstatDataWithCategories } from "../../../services";
-import { DashboardCard } from "../../shared/DashboardCard";
+import { LegacyDashboardCard } from "../../shared/DashboardCard";
 import { ErrorDisplay } from "../../shared/ErrorDisplay";
 
 import { SunburstChartClient } from "./SunburstChartClient";
@@ -55,7 +55,7 @@ export const SunburstDashboardChart = async ({
   }
 
   return (
-    <DashboardCard
+    <LegacyDashboardCard
       title={title}
       rankingLink={rankingLink}
       description={description}
@@ -67,6 +67,6 @@ export const SunburstDashboardChart = async ({
       empty={false}
     >
       <SunburstChartClient data={data} />
-    </DashboardCard>
+    </LegacyDashboardCard>
   );
 };

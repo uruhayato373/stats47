@@ -1,7 +1,6 @@
 
-import Link from "next/link";
-
 import { PageShell, PageHeader } from "@/components/layout";
+import { SurfaceLinkCard } from "@/components/surface";
 
 import { RightRailWidgets } from "@/features/redesign";
 import { ALL_THEMES } from "@/features/theme-dashboard/server";
@@ -41,10 +40,10 @@ export default function ThemesPage() {
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {ALL_THEMES.map((theme) => (
-          <Link
+          <SurfaceLinkCard
             key={theme.themeKey}
             href={`/themes/${theme.themeKey}`}
-            className="block rounded-none border bg-card p-4 shadow-sm transition-colors hover:bg-accent/50 hover:shadow-md"
+            className="block"
           >
             <h2 className="text-base font-semibold text-foreground">
               {theme.title}
@@ -55,7 +54,7 @@ export default function ThemesPage() {
             <p className="mt-2 text-xs text-muted-foreground">
               {theme.rankingKeys.length} 指標
             </p>
-          </Link>
+          </SurfaceLinkCard>
         ))}
       </div>
 

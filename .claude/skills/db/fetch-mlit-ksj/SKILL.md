@@ -2,10 +2,16 @@
 name: fetch-mlit-ksj
 description: 国土数値情報（MLIT KSJ）のデータセットをダウンロードし TopoJSON に変換して R2 に保存する。Use when user says "国土数値情報", "KSJデータ", "fetch-mlit-ksj". GIS レイヤーオーバーレイ用.
 disable-model-invocation: true
-primary_agent: data-ingester
+primary_agent: gis-pipeline-runner
 ---
 
 国土数値情報（MLIT KSJ）のデータセットをダウンロードし、TopoJSON に変換して R2 に保存する。
+
+> **★完全DBレス (2026-06-21)**: 登録データセットのメタ + ranking 定義の SSOT は git TS
+> `packages/gis/src/mlit-ksj/datasets.ts`、技術設定は `registry.ts`。ローカル SQLite `gis_datasets` は
+> git TS から再生成する使い捨てキャッシュ (手動 INSERT 廃止)。新規追加は datasets.ts/registry.ts 編集 →
+> `seed-from-registry.ts` で再 seed → 本スキル実行。規約: `.claude/rules/gis-data.md`。
+> 管理 agent: `gis-curator` (SSOT) / `gis-pipeline-runner` (本スキル実行)。
 
 ## 用途
 

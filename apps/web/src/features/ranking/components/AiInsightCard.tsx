@@ -2,6 +2,8 @@ import type { ReactNode } from "react";
 
 import { Sparkles } from "lucide-react";
 
+import { SurfaceCard } from "@/components/surface";
+
 interface AiInsightCardProps {
   /** カード見出し（例: "データの考察"） */
   title: string;
@@ -19,16 +21,16 @@ interface AiInsightCardProps {
  */
 export function AiInsightCard({ title, children, footer }: AiInsightCardProps) {
   return (
-    <div className="rounded-lg border border-border bg-card shadow-sm">
+    <SurfaceCard className="p-0">
       <div className="flex items-center justify-between gap-4 border-b border-border px-6 py-4">
         <div className="flex items-center gap-2">
-          <Sparkles className="h-4 w-4 text-teal-700" />
-          <h2 className="text-lg font-semibold text-slate-900">{title}</h2>
+          <Sparkles className="h-4 w-4 text-primary" />
+          <h2 className="text-lg font-semibold text-foreground">{title}</h2>
         </div>
         <span className="text-[11px] text-muted-foreground">AI生成</span>
       </div>
       <div className="px-6 py-4">{children}</div>
       {footer && <div className="border-t border-border">{footer}</div>}
-    </div>
+    </SurfaceCard>
   );
 }

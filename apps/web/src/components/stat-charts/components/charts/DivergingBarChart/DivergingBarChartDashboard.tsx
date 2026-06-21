@@ -3,7 +3,7 @@ import { logger } from "@stats47/logger";
 import { toStackedBarChartData } from "../../../adapters";
 import { fetchEstatData } from "../../../services";
 import { computeYAxisDomain } from "../../../utils/computeYAxisDomain";
-import { DashboardCard } from "../../shared/DashboardCard";
+import { LegacyDashboardCard } from "../../shared/DashboardCard";
 import { ErrorDisplay } from "../../shared/ErrorDisplay";
 
 import { DivergingBarChartClient } from "./DivergingBarChartClient";
@@ -92,7 +92,7 @@ export const DivergingBarChartDashboard = async ({
     }
 
     return (
-      <DashboardCard
+      <LegacyDashboardCard
         title={title}
         rankingLink={rankingLink}
         description={undefined}
@@ -129,7 +129,7 @@ export const DivergingBarChartDashboard = async ({
             negativeRateLabel,
           }}
         />
-      </DashboardCard>
+      </LegacyDashboardCard>
     );
   } catch (err) {
     logger.error(

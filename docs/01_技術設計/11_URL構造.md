@@ -43,9 +43,10 @@ stats47 (Next.js App Router on Cloudflare Pages) の URL 体系・301 マッピ�
 /blog/tags                              タグ一覧
 /tag/[tagKey]                           ブログタグ別記事 (blog 専用)
 
-/ports, /fishing-ports                  港湾・漁港
 /station-passengers, /station-passengers/[prefCode]   駅乗降客
 
+                                         ※ /ports・/fishing-ports は 2026-05-28 廃止 → /themes に統合 (301)
+                                         　 (/ports→/themes/ports / /fishing-ports→/themes/fishery-marine)
                                          ※ /gis-cross/* は 2026-05-29 廃止 → /themes に統合 (301)
                                          　 (migration-flow→population-dynamics / depopulation-medical→healthcare /
                                          　  sunshine-map→climate(新設) / hub→/themes。地図は各テーマ内 section に集約)

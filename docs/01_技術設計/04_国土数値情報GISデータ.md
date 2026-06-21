@@ -11,6 +11,15 @@ tags: [gis, mlit, data-source]
 - **ソース**: https://nlftp.mlit.go.jp/ksj/index.html
 - **スキル**: `/fetch-mlit-ksj`
 
+> **⚠️ 完全DBレス (2026-06-21〜)**: 本ドキュメント中の「D1 gis_datasets」= ローカル使い捨て SQLite
+> (`packages/database/.data/stats47.sqlite`) の `gis_datasets` テーブルであり、Cloudflare 永続/リモート D1 ではない。
+> **メタの SSOT は git TS `packages/gis/src/mlit-ksj/datasets.ts`** (登録 42 件のメタ + ranking 定義)、
+> **技術設定は `registry.ts`** (KSJ_CODE_CONFIG)。`seed-from-registry.ts` が git TS を使い捨て SQLite に
+> 決定的に再構築し、`run-pipeline.ts` がそれを読む (SQLite を消しても git TS から再生成可)。本番アプリは
+> GIS スナップショットを R2 から読むのみで DB query しない。**下記データセット表は generate-docs.ts が生成する
+> スナップショット** (手編集禁止・真実源は datasets.ts)。規約: `.claude/rules/gis-data.md` / 管理 agent:
+> `gis-curator` (SSOT) + `gis-pipeline-runner` (実行)。正典: `docs/01_技術設計/12_完全DBレス設計.md`。
+
 ## 使い方
 
 ```bash
@@ -299,8 +308,8 @@ MLIT zip ダウンロード → /tmp/ に保存
 ```
 packages/gis/src/mlit-ksj/
 ├── types.ts           # KsjCodeConfig, KsjResolvedDataset, KsjPipelineOptions 等の型定義
-├── registry.ts        # KSJ_CODE_CONFIG (downloadUrlPattern/propertyMap/simplifyOptions のみ)
-│                        # 純メタは D1 gis_datasets に集約 (Phase 2 で縮小)
+├── datasets.ts        # ★メタ SSOT (git TS): 登録データセットのメタ + ranking 定義 (完全DBレス・2026-06-21)
+├── registry.ts        # KSJ_CODE_CONFIG: 技術設定のみ (downloadUrlPattern/propertyMap/simplifyOptions)
 ├── property-map.ts    # KSJ 属性コード → 人間可読名マッピング（N02_001 → railwayType）
 ├── r2-path.ts         # R2 保存パス構築
 ├── downloader.ts      # zip ダウンロード・GeoJSON/Shapefile 抽出
@@ -310,12 +319,16 @@ packages/gis/src/mlit-ksj/
 ├── adapters/
 │   └── fetch-ksj-from-local.ts  # ローカル R2 から TopoJSON 読み込み
 └── scripts/
-    ├── run-pipeline.ts          # パイプライン CLI エントリポイント (D1 status='registered' 必須)
-    ├── list-datasets.ts         # gis_datasets テーブル一覧 CLI (status 集計付き)
-    ├── seed-from-registry.ts    # RANKINGS を D1 (is_ranking_target/ranking_config) に seed
-    ├── generate-docs.ts         # docs/01_技術設計/04_...md の自動セクションを D1 から生成
-    └── register-ksj-rankings.ts # is_ranking_target=1 から metrics/stats を生成
+    ├── run-pipeline.ts          # パイプライン CLI。使い捨て SQLite (status='registered'/'imported') を読む
+    ├── list-datasets.ts         # gis_datasets (使い捨て SQLite) 一覧 CLI (status 集計付き)
+    ├── seed-from-registry.ts    # ★datasets.ts (git TS SSOT) → 使い捨て SQLite を決定的に UPSERT 再構築
+    ├── seed-ksj-catalog.ts      # 候補 126 件 (ksj-catalog.json) を status='available' で SQLite に投入
+    ├── generate-docs.ts         # 本ドキュメントの自動セクションを SQLite (= datasets.ts 由来) から生成
+    └── register-ksj-rankings.ts # is_ranking_target=1 (SQLite) から metrics/stats を生成
 ```
+
+> SQLite (`packages/database/.data/stats47.sqlite`) は git TS から再生成可能な**使い捨てビルドキャッシュ**で
+> SSOT ではない。永続/リモート D1 ではない。SSOT は **datasets.ts (メタ) + registry.ts (技術設定) + R2 (配信)**。
 
 ## ジオメトリの目視確認
 
@@ -327,31 +340,31 @@ packages/gis/src/mlit-ksj/
 
 ## 新しいデータセットの追加方法
 
-Phase 2 以降は真実源を D1 gis_datasets に一本化しました。新規データセットは以下の順序で追加します。
+完全DBレス (2026-06-21〜): メタの真実源は **git TS `datasets.ts`**。ローカル SQLite への手動 INSERT は廃止。
+新規データセットは以下の順序で追加します (規約: `.claude/rules/gis-data.md` / 担当 agent: `gis-curator`)。
 
-1. **D1 gis_datasets に行を追加** (status='registered', 純メタを設定):
-   ```sql
-   INSERT INTO gis_datasets (
-     data_id, name, name_en, category, geometry_type, coverage,
-     license, latest_version, estimated_size, stats47_category,
-     attribution, status
-   ) VALUES (
-     'X99', '新データセット名', 'New Dataset', 'land', 'point', 'national',
-     'cc-by-4.0', '24', '~5MB', 'population',
-     '国土交通省国土数値情報ダウンロードサイト', 'registered'
-   );
+1. **`datasets.ts` の `GIS_DATASETS` にエントリを追加** (メタ + ranking 定義):
+   ```ts
+   { dataId: "X99", name: "新データセット名", category: "land", geometryType: "point",
+     coverage: "national", license: "cc-by-4.0", stats47Category: "population",
+     isRankingTarget: false /* ranking 化するなら true + rankingConfig:[...] */ },
    ```
-   - Phase 3 で seed-ksj-catalog.ts により status='available' で既に投入されている場合は
-     `UPDATE gis_datasets SET status='registered' WHERE data_id='X99'` のみで OK
+   - `name_en` は KSJ API 非提供のため不要 (seed が空でセット・display 専用)
+   - build state (r2_version / file_count 等) は書かない (pipeline 実行で SQLite に再生成)
 
-2. **registry.ts (`KSJ_CODE_CONFIG`) にコード設定を追加**:
+2. **registry.ts (`KSJ_CODE_CONFIG`) に技術設定を追加**:
    - `dataId`, `downloadUrlPattern`, `geojsonDirInZip`, `propertyMap`, `simplifyOptions` (省略可)
    - URL パターンは https://jpksj-api.kmproj.com/datasets/{ID}.json で確認可能
 
 3. **property-map.ts** にプロパティマッピングを追加(任意):
    - 属性定義の参照: https://nlftp.mlit.go.jp/ksj/gml/codelist/shape_property_table2.xlsx
 
-4. パイプライン実行 (D1 が自動 UPDATE され status='imported' に):
+4. **使い捨て SQLite を git TS から再 seed** (手動 INSERT の代替):
+   ```bash
+   npx tsx packages/gis/src/mlit-ksj/scripts/seed-from-registry.ts   # datasets.ts → SQLite に UPSERT
+   ```
+
+5. **パイプライン実行** (SQLite の build state が status='imported' に更新される):
    ```bash
    npx tsx packages/gis/src/mlit-ksj/scripts/run-pipeline.ts {新DATA_ID}
    ```

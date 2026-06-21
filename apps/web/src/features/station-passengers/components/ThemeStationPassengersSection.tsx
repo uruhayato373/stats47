@@ -43,7 +43,7 @@ export function ThemeStationPassengersSection({ initialPrefCode = "22" }: Props)
 
   return (
     <section ref={ref}>
-      <h2 className="mb-2 text-xl font-bold text-slate-900">
+      <h2 className="mb-2 text-xl font-bold text-foreground">
         駅別乗降客数マップ
       </h2>
       <p className="mb-3 text-sm text-muted-foreground">
@@ -55,7 +55,7 @@ export function ThemeStationPassengersSection({ initialPrefCode = "22" }: Props)
         <StationPassengersPlayer initialPrefCode={initialPrefCode} />
       ) : (
         <div
-          className="w-full rounded-md border bg-slate-100"
+          className="w-full rounded-md border bg-muted"
           style={{ aspectRatio: "16 / 9" }}
         />
       )}

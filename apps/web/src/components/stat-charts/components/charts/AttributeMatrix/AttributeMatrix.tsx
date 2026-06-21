@@ -1,7 +1,7 @@
 import { logger } from "@stats47/logger";
 
 import { fetchEstatDataWithCategories } from "../../../services";
-import { DashboardCard } from "../../shared/DashboardCard";
+import { LegacyDashboardCard } from "../../shared/DashboardCard";
 
 import { AttributeMatrixClient } from "./AttributeMatrixClient";
 
@@ -75,7 +75,7 @@ export const AttributeMatrixDashboard = async ({
   }
 
   return (
-    <DashboardCard
+    <LegacyDashboardCard
       title={title}
       rankingLink={rankingLink}
       description={description}
@@ -86,6 +86,6 @@ export const AttributeMatrixDashboard = async ({
       empty={matrixData.rows.length === 0}
     >
       <AttributeMatrixClient data={matrixData} />
-    </DashboardCard>
+    </LegacyDashboardCard>
   );
 };

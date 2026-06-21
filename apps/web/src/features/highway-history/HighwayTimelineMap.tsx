@@ -106,7 +106,7 @@ export async function HighwayTimelineMap({
   }
 
   return (
-    <div className="rounded-lg border border-slate-200 bg-slate-50 p-2">
+    <div className="rounded-lg border border-border bg-muted/50 p-2">
       <svg
         viewBox={`0 0 ${width} ${height}`}
         className="block w-full h-auto"
@@ -125,9 +125,9 @@ export async function HighwayTimelineMap({
         />
       </svg>
       {newCount > 0 && (
-        <p className="mt-2 text-xs text-slate-500">
+        <p className="mt-2 text-xs text-muted-foreground">
           {year}年 新規開通:{" "}
-          <span className="font-semibold text-amber-600">+{newCount} 区間</span>{" "}
+          <span className="font-semibold text-primary">+{newCount} 区間</span>{" "}
           (約{Math.round(newKm).toLocaleString("ja-JP")} km)
         </p>
       )}

@@ -8,8 +8,9 @@ import type { FinanceFlowData } from "../lib/types";
 
 /** 財政フロー Sankey: 左=歳入の財源 / 中央=一般会計 / 右=目的別歳出。幅=金額。 */
 
-const REV_COLOR = "#0ea5e9"; // 歳入 = 青
-const EXP_COLOR = "#f59e0b"; // 歳出 = 橙
+const REV_COLOR = "hsl(var(--chart-2))"; // 歳入
+const EXP_COLOR = "hsl(var(--chart-4))"; // 歳出
+const SUBTEXT_COLOR = "hsl(var(--muted-foreground))";
 
 /** 千円 → 兆円 / 億円 表記 */
 function yen(thousandYen: number): string {
@@ -37,7 +38,7 @@ export function FinanceSankey({ code, initialData }: Props) {
       subtitle="左: 歳入の財源 → 中央: 一般会計 → 右: 目的別歳出（幅=金額）"
       centerLabel="一般会計"
       centerSub={`歳入 ${yen(data.totals.revenue)} / 歳出 ${yen(data.totals.expenditure)}`}
-      centerSubColor="#64748b"
+      centerSubColor={SUBTEXT_COLOR}
       leftNodes={data.revenue}
       rightNodes={data.expenditure}
       leftColor={REV_COLOR}

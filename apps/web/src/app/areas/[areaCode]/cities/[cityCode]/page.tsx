@@ -5,6 +5,7 @@ import { isOk } from "@stats47/types";
 
 import { PageHeader, PageShell } from "@/components/layout";
 import { readCityCategoryKeysFromR2 } from "@/components/stat-charts/server";
+import { SurfaceSection } from "@/components/surface";
 
 import {
   CategoryNavGrid,
@@ -94,7 +95,7 @@ export default async function CityPage({ params }: PageProps) {
 
       <main className="min-w-0 space-y-10">
         {validStrengths.length > 0 ? (
-          <section className="rounded-lg border border-border bg-card p-6 shadow-sm">
+          <SurfaceSection className="p-6">
             <h2 className="text-lg font-bold text-foreground">
               {context.city.areaName}の強み (県内ランキング上位)
             </h2>
@@ -119,7 +120,7 @@ export default async function CityPage({ params }: PageProps) {
                 </li>
               ))}
             </ul>
-          </section>
+          </SurfaceSection>
         ) : null}
 
         <CategoryNavGrid

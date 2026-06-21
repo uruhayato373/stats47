@@ -6,6 +6,7 @@ import { Metadata } from "next";
 
 import { ThemeAwareImage } from "@/components/atoms/ThemeAwareImage";
 import { PageShell, PageHeader } from "@/components/layout";
+import { SurfaceLinkCard } from "@/components/surface";
 
 import { listLatestArticles } from "@/features/blog/server";
 import { FeaturedRankings } from "@/features/ranking/server";
@@ -180,10 +181,10 @@ export default async function HomePage() {
             {DISCOVERY_CARDS.map((card) => {
               const Icon = card.icon;
               return (
-                <Link
+                <SurfaceLinkCard
                   key={card.title}
                   href={card.href}
-                  className="group flex items-start gap-3 rounded-none border border-border bg-card p-4 shadow-sm transition-all hover:border-primary/40 hover:shadow-md"
+                  className="group flex items-start gap-3"
                 >
                   <div className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
                     <Icon className="h-5 w-5" />
@@ -196,7 +197,7 @@ export default async function HomePage() {
                       {card.description}
                     </p>
                   </div>
-                </Link>
+                </SurfaceLinkCard>
               );
             })}
           </div>

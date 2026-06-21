@@ -1,5 +1,7 @@
 import { Sparkles } from "lucide-react";
 
+import { SurfaceCard } from "@/components/surface";
+
 import { TrackedAffiliateLink } from "./tracked-affiliate-link";
 
 interface TechSchoolPromoCardProps {
@@ -23,15 +25,15 @@ export function TechSchoolPromoCard({ variant = "sidebar" }: TechSchoolPromoCard
 
   if (variant === "inline") {
     return (
-      <div className="my-6 rounded-none border border-slate-200 bg-card p-4 shadow-sm">
-        <div className="mb-1 flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider text-purple-700">
+      <SurfaceCard className="my-6">
+        <div className="mb-1 flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider text-primary">
           <Sparkles className="h-3 w-3" />
           AI スクール / 副業 PR
         </div>
-        <p className="text-sm font-bold text-slate-900">
+        <p className="text-sm font-bold text-foreground">
           Claude Code で副業を始める ─ 月 +10 万円を最短 3 ヶ月で
         </p>
-        <p className="mt-1 text-xs text-slate-600">
+        <p className="mt-1 text-xs text-muted-foreground">
           stats47 の自動化と同じ技術スタック (Claude Code / e-Stat API / TypeScript) を、未経験から学べる
           AI 副業講座。公務員・会社員に人気。
         </p>
@@ -40,12 +42,12 @@ export function TechSchoolPromoCard({ variant = "sidebar" }: TechSchoolPromoCard
           category="other"
           label="Claude Code 副業講座 (inline)"
           position="article-body"
-          className="mt-2 inline-flex items-center gap-1 text-xs font-bold text-purple-700 hover:underline"
+          className="mt-2 inline-flex items-center gap-1 text-xs font-bold text-primary hover:underline"
           {...(isExternal ? { target: "_blank", rel: "sponsored noopener" } : {})}
         >
           無料カウンセリングを予約 →
         </TrackedAffiliateLink>
-      </div>
+      </SurfaceCard>
     );
   }
 
