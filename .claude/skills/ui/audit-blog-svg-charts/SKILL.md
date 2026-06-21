@@ -145,8 +145,14 @@ find .local/r2/app/blog -name "*.json" -path "*/data/*" | \
 
 | ツール | 用途 |
 |---|---|
-| `.claude/scripts/lib/svg-lint.mjs` | viewBox/width/height/ダークモードの低レベル lint |
-| `.claude/scripts/blog/audit-chart-quality.mjs` | 全記事バッチ監査（本スキルよりも広範・パブリック R2 対応） |
+| `.claude/scripts/lib/svg-lint.mjs` | viewBox/width/height/ダークモードの低レベル lint + **`lintSvgSize`（カタログ別正規サイズ／アスペクト比統一・2026-06-21）** |
+| `.claude/scripts/blog/audit-chart-quality.mjs` | 全記事バッチ監査（内容 lint + **サイズ lint**）。本スキルよりも広範・パブリック R2 対応 |
+
+> **★アスペクト比統一 gate（2026-06-21）**: `lintSvgSize(filename, content)` が filename→chartType→正規 viewBox 幅
+> （bar 960/680・scatter 960・tile-grid 600・line/stacked 680・summary 960）を blocker で検査。`audit-chart-quality.mjs`
+> と `quality-gate.mjs`（pre-commit + publish-blog.yml）に配線済。正典 `blog-svg-chart-standards.md` §6。是正は
+> `rerender-ranking-columns.mts`（960×404）/ `rerender-scatter-canonical.mts`（960×624）。
+> **R2 反映は S3 API（diff-push-r2）で。`push-r2-wrangler` は flaky（Upload 完了表示でも未永続化）→ S3 GET で検証。**
 | `.claude/scripts/blog/build-svg-gallery.mjs` | 全 SVG の目視レビュー用 HTML ギャラリー生成（下記） |
 
 `/audit-blog-svg-charts` は **ソースコード（packages/svg-builder・scripts）の規約準拠** を見る。
