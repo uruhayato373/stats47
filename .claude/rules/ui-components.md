@@ -1,5 +1,8 @@
 # UI コンポーネント規約
 
+> デザインシステム全体の正典は `docs/01_技術設計/15_デザインシステムSSOT.md`。
+> このファイルは Claude Code 向けの実装時メモであり、食い違う場合は docs 側を優先する。
+
 ## レイアウト・フォント・角丸（2026-06〜 / 正典: `docs/01_技術設計/13_統一レイアウト設計.md`）
 
 - **横幅は `PageShell`（`@/components/layout`）経由で統一**。ページ内で `container mx-auto` や `max-w-[…]` を直書きしない（1700px / 右レール 360px / 左 TOC 280px、`variant="reading"` で本文 760px）。

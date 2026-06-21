@@ -3,7 +3,7 @@ import { logger } from "@stats47/logger";
 import { toStackedAreaData } from "../../../adapters";
 import { fetchEstatData } from "../../../services";
 import { computeYAxisDomain } from "../../../utils/computeYAxisDomain";
-import { DashboardCard } from "../../shared/DashboardCard";
+import { LegacyDashboardCard } from "../../shared/DashboardCard";
 import { ErrorDisplay } from "../../shared/ErrorDisplay";
 
 import { StackedAreaDashboardClient } from "./StackedAreaDashboardClient";
@@ -63,7 +63,7 @@ export const StackedAreaDashboard = async ({
   }
 
   return (
-    <DashboardCard
+    <LegacyDashboardCard
       title={title}
       rankingLink={rankingLink}
       description={description}
@@ -76,6 +76,6 @@ export const StackedAreaDashboard = async ({
       empty={chartData.data.length === 0}
     >
       <StackedAreaDashboardClient chartData={chartData} normalize={normalize} yDomain={yDomain} />
-    </DashboardCard>
+    </LegacyDashboardCard>
   );
 };

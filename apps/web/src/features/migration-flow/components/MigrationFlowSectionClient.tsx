@@ -71,7 +71,7 @@ export function MigrationFlowSectionClient({ initialData }: Props) {
 
   return (
     <section>
-      <h2 className="mb-3 text-xl font-bold text-slate-900">
+      <h2 className="mb-3 text-xl font-bold text-foreground">
         都道府県 人口移動フロー
       </h2>
       <p className="mb-3 text-sm text-muted-foreground">
@@ -97,13 +97,13 @@ export function MigrationFlowSectionClient({ initialData }: Props) {
       </div>
 
       {/* フロー図（Sankey）— 軽量・即時描画（着地ページの主役） */}
-      <h3 className="mb-2 text-sm font-semibold text-slate-700">
+      <h3 className="mb-2 text-sm font-semibold text-foreground">
         フロー図（Sankey）
       </h3>
       <MigrationSankey code={prefCode} initialData={initialData} />
 
       {/* アニメ地図 — 遅延ロード */}
-      <h3 className="mb-2 mt-8 text-sm font-semibold text-slate-700">
+      <h3 className="mb-2 mt-8 text-sm font-semibold text-foreground">
         アニメ地図
       </h3>
       <div ref={mapRef}>
@@ -111,7 +111,7 @@ export function MigrationFlowSectionClient({ initialData }: Props) {
           <MigrationFlowPlayer prefCode={prefCode} showSelector={false} />
         ) : (
           <div
-            className="w-full rounded-md border bg-slate-100"
+            className="w-full rounded-md border bg-muted"
             style={{ aspectRatio: "16 / 9" }}
           />
         )}

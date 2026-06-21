@@ -9,6 +9,8 @@ import {
   AccordionTrigger,
 } from "@stats47/components/atoms/ui/accordion";
 
+import { SurfaceCard } from "@/components/surface";
+
 interface AiContentAccordionProps {
   title: string;
   children: ReactNode;
@@ -36,5 +38,5 @@ export function AiContentAccordion({ title, children, bordered = true }: AiConte
 
   if (!bordered) return accordion;
 
-  return <div className="rounded-lg border bg-card shadow-sm">{accordion}</div>;
+  return <SurfaceCard className="p-0">{accordion}</SurfaceCard>;
 }

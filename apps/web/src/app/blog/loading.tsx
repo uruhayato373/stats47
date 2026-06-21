@@ -1,3 +1,5 @@
+import { SurfaceCard } from "@/components/surface";
+
 export default function BlogListLoading() {
     return (
         <div className="container mx-auto px-4 py-8">
@@ -10,11 +12,11 @@ export default function BlogListLoading() {
                 {/* 記事グリッド */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pt-4">
                     {Array.from({ length: 6 }).map((_, i) => (
-                        <div key={i} className="rounded-lg border bg-card p-5 space-y-3">
+                        <SurfaceCard key={i} className="space-y-3 p-5">
                             <div className="h-3 w-20 rounded bg-muted" />
                             <div className="h-5 w-3/4 rounded bg-muted" />
                             <div className="h-4 w-full rounded bg-muted" />
-                        </div>
+                        </SurfaceCard>
                     ))}
                 </div>
             </div>

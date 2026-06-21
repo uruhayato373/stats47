@@ -13,6 +13,8 @@ import {
   SelectValue,
 } from "@stats47/components";
 
+import { SurfaceCard } from "@/components/surface";
+
 import { REGION_A_COLOR, REGION_B_COLOR } from "../types";
 
 interface RegionSelectorProps {
@@ -85,7 +87,7 @@ export function RegionSelector({ selectedAreaCodes, categoryKey, startTransition
   const handleSelectB = (code: string) => updateUrl([codeA, code]);
 
   return (
-    <div className="rounded-none border bg-card px-4 py-3 shadow-sm">
+    <SurfaceCard className="px-4 py-3">
       <div className="grid grid-cols-1 items-center gap-3 sm:grid-cols-[1fr_auto_1fr]">
         {/* 地域A */}
         <PrefectureSelect
@@ -115,6 +117,6 @@ export function RegionSelector({ selectedAreaCodes, categoryKey, startTransition
           2つの都道府県を選択してください
         </p>
       )}
-    </div>
+    </SurfaceCard>
   );
 }

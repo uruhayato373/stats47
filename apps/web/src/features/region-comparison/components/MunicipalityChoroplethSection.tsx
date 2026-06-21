@@ -4,7 +4,7 @@ import { useMemo } from "react";
 
 import { DivergingChoroplethMap, type DivergingChoroplethValue } from "@stats47/visualization/d3/DivergingChoroplethMap";
 
-import { DashboardCard } from "@/components/stat-charts";
+import { ChartPanel } from "@/components/charts/ChartPanel";
 
 import type { ComparisonRegion } from "../types";
 import type { TopoJSONTopology } from "@stats47/types";
@@ -74,11 +74,10 @@ export function MunicipalityChoroplethSection({ regions, mapData }: Props) {
         {panels.map(
           (panel) =>
             panel && (
-              <DashboardCard
+              <ChartPanel
                 key={panel.region.areaCode}
                 title={panel.region.areaName}
-                accentColor={panel.region.color}
-                source="国立社会保障・人口問題研究所「日本の地域別将来推計人口（令和5年推計）」"
+                footer="出典: 国立社会保障・人口問題研究所「日本の地域別将来推計人口（令和5年推計）」"
               >
                 <PanelMap
                   topo={panel.topo}
@@ -87,7 +86,7 @@ export function MunicipalityChoroplethSection({ regions, mapData }: Props) {
                   colorClamp={maxAbs}
                   regionName={panel.region.areaName}
                 />
-              </DashboardCard>
+              </ChartPanel>
             ),
         )}
       </div>

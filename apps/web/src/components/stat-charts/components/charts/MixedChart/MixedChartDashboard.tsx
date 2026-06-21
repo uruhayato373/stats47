@@ -2,7 +2,7 @@ import { logger } from "@stats47/logger";
 
 import { toMixedChartData } from "../../../adapters";
 import { fetchEstatData } from "../../../services";
-import { DashboardCard } from "../../shared/DashboardCard";
+import { LegacyDashboardCard } from "../../shared/DashboardCard";
 import { ErrorDisplay } from "../../shared/ErrorDisplay";
 
 import { MixedChartClient } from "./MixedChartClient";
@@ -56,7 +56,7 @@ export const MixedChartDashboard = async ({
   }
 
   return (
-    <DashboardCard
+    <LegacyDashboardCard
       title={title}
       rankingLink={rankingLink}
       description={description}
@@ -67,6 +67,6 @@ export const MixedChartDashboard = async ({
       empty={chartData.data.length === 0}
     >
       <MixedChartClient chartData={chartData} />
-    </DashboardCard>
+    </LegacyDashboardCard>
   );
 };

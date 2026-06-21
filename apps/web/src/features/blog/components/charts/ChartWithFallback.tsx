@@ -15,8 +15,8 @@ interface ChartWithFallbackProps {
 function FallbackImage({ src, alt }: { src?: string; alt?: string }) {
     if (!src) {
         return (
-            <div className="flex h-64 w-full items-center justify-center rounded-lg bg-slate-100 dark:bg-slate-800">
-                <p className="text-slate-500 dark:text-slate-400">チャートを表示できません</p>
+            <div className="flex h-64 w-full items-center justify-center rounded-lg bg-muted">
+                <p className="text-muted-foreground">チャートを表示できません</p>
             </div>
         );
     }

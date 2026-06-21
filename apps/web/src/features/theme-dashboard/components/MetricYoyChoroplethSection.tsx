@@ -4,6 +4,8 @@ import { useEffect, useMemo, useState } from "react";
 
 import { TimelineChoroplethMap, type TimelineChoroplethFrame } from "@stats47/visualization/d3/TimelineChoroplethMap";
 
+import { SurfaceCard, SurfaceSection } from "@/components/surface";
+
 import type { Topology } from "topojson-specification";
 
 interface YoyRecord {
@@ -90,14 +92,14 @@ export function MetricYoyChoroplethSection({
 
   if (!topology || !timeseries) {
     return (
-      <div className="rounded-lg border border-border bg-card p-4 text-sm text-muted-foreground">
+      <SurfaceCard className="text-sm text-muted-foreground">
         {title}を読み込み中...
-      </div>
+      </SurfaceCard>
     );
   }
 
   return (
-    <section className="rounded-lg border border-border bg-card p-4 space-y-3">
+    <SurfaceSection className="space-y-3">
       <TimelineChoroplethMap
         topology={topology}
         frames={frames}
@@ -122,6 +124,6 @@ export function MetricYoyChoroplethSection({
         highlightLabel={highlightLabel}
         ariaLabel={`${title} コロプレス`}
       />
-    </section>
+    </SurfaceSection>
   );
 }

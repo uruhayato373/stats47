@@ -40,7 +40,14 @@ interface Props {
 
 const VALID_CODES = new Set(PREFECTURES.map((p) => p.code));
 const OKU = 1 / 100000; // 千円 → 億円
-const FUND_COLORS = ["#2563eb", "#38bdf8", "#bae6fd"];
+const FUND_COLORS = [
+  "hsl(var(--chart-1))",
+  "hsl(var(--chart-2))",
+  "hsl(var(--chart-3))",
+];
+const FINANCE_REVENUE_COLOR = "hsl(var(--chart-2))";
+const FINANCE_EXPENDITURE_COLOR = "hsl(var(--chart-4))";
+const FINANCE_SUBTEXT_COLOR = "hsl(var(--muted-foreground))";
 const PREF_ALL = "__pref__"; // 「県全体」を表すセンチネル
 
 function oku(thousandYen: number): string {
@@ -135,7 +142,7 @@ export function LocalFinanceDashboard({ cards, initialFinanceFlow }: Props) {
       {/* ヘッダー */}
       <div className="mb-5 flex flex-wrap items-center justify-between gap-3 border-b border-border pb-3">
         <div>
-          <h1 className="text-2xl font-bold text-slate-900">
+          <h1 className="text-2xl font-bold text-foreground">
             地方財政｜財政状況
             <span className="ml-2 text-base font-normal text-muted-foreground">{latestYear}年度</span>
           </h1>
@@ -234,7 +241,7 @@ export function LocalFinanceDashboard({ cards, initialFinanceFlow }: Props) {
 
       {/* Page 2: 歳入歳出の構成比 (市区町村は団体別 Sankey、県全体は都道府県 Sankey) */}
       <section>
-        <h2 className="mb-3 text-lg font-bold text-slate-900">歳入歳出の構成比</h2>
+        <h2 className="mb-3 text-lg font-bold text-foreground">歳入歳出の構成比</h2>
         <p className="mb-3 text-sm text-muted-foreground">
           歳入の財源（地方税・地方交付税・国庫支出金・地方債など）が一般会計を通じて
           目的別歳出（民生費・教育費・土木費など）へ流れる様子をフロー図で表します。
@@ -246,11 +253,11 @@ export function LocalFinanceDashboard({ cards, initialFinanceFlow }: Props) {
               subtitle="左: 歳入の財源 → 中央: 一般会計 → 右: 目的別歳出（幅=金額）"
               centerLabel="一般会計"
               centerSub={`歳入 ${oku(cityFlow.totals.revenue)} / 歳出 ${oku(cityFlow.totals.expenditure)}`}
-              centerSubColor="#64748b"
+              centerSubColor={FINANCE_SUBTEXT_COLOR}
               leftNodes={cityFlow.revenue}
               rightNodes={cityFlow.expenditure}
-              leftColor="#0ea5e9"
-              rightColor="#f59e0b"
+              leftColor={FINANCE_REVENUE_COLOR}
+              rightColor={FINANCE_EXPENDITURE_COLOR}
               formatValue={oku}
               footer={`出典: 地方財政状況調査 決算カード（${latestYear}年度）`}
               labelGutter={182}

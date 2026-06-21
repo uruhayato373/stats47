@@ -12,12 +12,12 @@ export async function ThemeHighwayTimelineSection() {
 
   return (
     <section className="mt-10">
-      <h2 className="mb-2 text-xl font-bold text-slate-900">
+      <h2 className="mb-2 text-xl font-bold text-foreground">
         高速道路ネットワークの広がり（{stats.yearStart}→{stats.yearEnd}）
       </h2>
       <p className="mb-4 text-sm text-muted-foreground">
         1962年の名神部分開通から{stats.yearEnd}年まで、日本の高速道路網は
-        <strong className="mx-1 text-amber-700">
+        <strong className="mx-1 text-primary">
           {stats.totalYears}年で{stats.totalKm.toLocaleString("ja-JP")} km
         </strong>
         （{stats.totalSections.toLocaleString("ja-JP")}区間）に広がりました。最新年時点のネットワークを地図で表示します。

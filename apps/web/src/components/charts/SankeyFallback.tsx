@@ -4,7 +4,7 @@
  */
 export function SankeyFallback({ message }: { message: string }) {
   return (
-    <div className="flex aspect-[100/73] w-full items-center justify-center rounded-md border bg-slate-50 text-sm text-slate-500 dark:bg-slate-900">
+    <div className="flex aspect-[100/73] w-full items-center justify-center rounded-md border bg-muted text-sm text-muted-foreground">
       {message}
     </div>
   );

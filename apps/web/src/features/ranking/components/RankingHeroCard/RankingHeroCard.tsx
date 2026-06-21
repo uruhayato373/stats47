@@ -179,7 +179,7 @@ export function RankingHeroCard({
               {categoryName}
             </p>
           )}
-          <h1 className="mt-0.5 text-2xl font-bold text-slate-900">
+          <h1 className="mt-0.5 text-2xl font-bold text-foreground">
             {title}
           </h1>
           {titleDetail && (

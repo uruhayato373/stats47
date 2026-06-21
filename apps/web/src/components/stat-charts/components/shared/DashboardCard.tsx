@@ -10,12 +10,17 @@ import {
 import { Loader2 } from "lucide-react";
 
 import { SourceAttribution } from "@/components/molecules/SourceAttribution";
+import { SurfaceCard } from "@/components/surface";
 
 import { parseTitle } from "../../utils/parseTitle";
 
 import type { SourceAttribution as SourceAttributionData } from "@stats47/data-configs";
 
-interface DashboardCardProps {
+/**
+ * @deprecated 新規実装では使用しない。通常チャート・地図は `ChartPanel`、KPI ミニカードは
+ * `ChartCard`、基本 surface は `SurfaceCard` を使う。既存 stat-charts の互換レイヤーとしてのみ残す。
+ */
+interface LegacyDashboardCardProps {
   title: string;
   rankingLink?: string | null;
   /** rankingLink のリンクラベル（未指定時は title を使用） */
@@ -41,7 +46,11 @@ interface DashboardCardProps {
   children: React.ReactNode;
 }
 
-export const DashboardCard: React.FC<DashboardCardProps> = ({
+/**
+ * @deprecated 新規実装では使用しない。通常チャート・地図は `ChartPanel`、KPI ミニカードは
+ * `ChartCard`、基本 surface は `SurfaceCard` を使う。既存 stat-charts の互換レイヤーとしてのみ残す。
+ */
+export const LegacyDashboardCard: React.FC<LegacyDashboardCardProps> = ({
   title,
   rankingLink,
   rankingLinkLabel,
@@ -65,9 +74,10 @@ export const DashboardCard: React.FC<DashboardCardProps> = ({
   ];
 
   return (
-  <div className={cn("@container bg-card border rounded-lg shadow-sm", className)}
-    style={accentColor ? { borderColor: `${accentColor}33` } : undefined}
-  >
+    <SurfaceCard
+      className={cn("@container p-0", className)}
+      style={accentColor ? { borderColor: `${accentColor}33` } : undefined}
+    >
       <div className="flex items-center justify-between px-4 py-3 border-b border-border">
         <h3 className="font-semibold text-base leading-none">
           {(() => {
@@ -149,6 +159,11 @@ export const DashboardCard: React.FC<DashboardCardProps> = ({
           </Accordion>
         )}
       </div>
-  </div>
+    </SurfaceCard>
   );
 };
+
+/**
+ * @deprecated 旧 stat-charts 互換のためだけに残す alias。新規実装では使用しない。
+ */
+export const DashboardCard = LegacyDashboardCard;

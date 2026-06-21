@@ -1,13 +1,12 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState, useTransition } from "react";
+import { useCallback, useMemo, useState, useTransition } from "react";
 
 import dynamic from "next/dynamic";
 
 
 import { lookupArea } from "@stats47/area";
 import { Skeleton } from "@stats47/components/atoms/ui/skeleton";
-import { TILE_OPTIONS_LIGHT, TILE_OPTIONS_DARK } from "@stats47/visualization/leaflet/constants/tile-providers";
 import { useTopoJsonToGeoJson } from "@stats47/visualization/leaflet/hooks/useTopoJsonToGeoJson";
 
 const TileSwitcher = dynamic(
@@ -16,12 +15,18 @@ const TileSwitcher = dynamic(
 );
 
 import { useTheme } from "@/hooks/useTheme";
+import {
+  filterMapDataPoints,
+  getLeafletBorderColor,
+  rankingItemToMapConfig,
+} from "@/features/map-visualization/utils/ranking-map-adapters";
+import { useThemedLeafletTile } from "@/features/map-visualization/utils/use-themed-leaflet-tile";
 
 import { fetchMunicipalityDrilldownAction } from "../actions";
 
 import type { RankingItem, RankingValue } from "@stats47/ranking";
 import type { TopoJSONTopology } from "@stats47/types";
-import type { MapVisualizationConfig, MapDataPoint } from "@stats47/visualization/d3";
+import type { MapDataPoint } from "@stats47/visualization/d3";
 
 
 const LeafletChoroplethMap = dynamic(
@@ -57,33 +62,13 @@ export function ThemeLeafletMap({
   yearCode,
 }: ThemeLeafletMapProps) {
   const { theme } = useTheme();
-  const isDark = theme === "dark";
-  const tileOptions = isDark ? TILE_OPTIONS_DARK : TILE_OPTIONS_LIGHT;
-  const [currentTile, setCurrentTile] = useState(tileOptions[0]);
-  // eslint-disable-next-line react-hooks/set-state-in-effect -- sync tile on theme change
-  useEffect(() => { setCurrentTile(tileOptions[0]); }, [isDark, tileOptions]);
+  const { currentTile, setCurrentTile, isDark } = useThemedLeafletTile(theme);
 
-  // RankingItem → MapVisualizationConfig 変換
-  const colorConfig: MapVisualizationConfig = useMemo(() => {
-    const vis = rankingItem.visualization;
-    if (!vis) {
-      return { colorScheme: "blues", colorSchemeType: "sequential" as const, isReversed: false, minValueType: "data-min" as const };
-    }
-    const base = { colorScheme: vis.colorScheme, isReversed: vis.isReversed };
-    if (vis.colorSchemeType === "diverging") {
-      return { ...base, colorSchemeType: "diverging" as const, divergingMidpoint: vis.divergingMidpoint, divergingMidpointValue: vis.divergingMidpointValue ?? undefined, isSymmetrized: vis.isSymmetrized };
-    }
-    if (vis.colorSchemeType === "categorical") {
-      return { ...base, colorSchemeType: "categorical" as const };
-    }
-    return { ...base, colorSchemeType: "sequential" as const, minValueType: vis.minValueType ?? "data-min" };
-  }, [rankingItem]);
+  const colorConfig = useMemo(() => rankingItemToMapConfig(rankingItem), [rankingItem]);
 
   // 全国合計・値なしを除外
   const data: MapDataPoint[] = useMemo(
-    () => rankingValues.filter(
-      (v): v is typeof v & { value: number } => v.areaCode !== "00000" && v.value !== null
-    ),
+    () => filterMapDataPoints(rankingValues),
     [rankingValues]
   );
 
@@ -96,9 +81,7 @@ export function ThemeLeafletMap({
   const municipalityGeojson = useTopoJsonToGeoJson(municipalityTopology);
 
   const municipalityData: MapDataPoint[] = useMemo(
-    () => municipalityValues.filter(
-      (v): v is typeof v & { value: number } => v.areaCode !== "00000" && v.value !== null
-    ),
+    () => filterMapDataPoints(municipalityValues),
     [municipalityValues]
   );
 
@@ -185,7 +168,7 @@ export function ThemeLeafletMap({
         municipalityGeojson={municipalityGeojson}
         municipalityData={municipalityData}
         municipalityColorConfig={colorConfig}
-        borderColor={isDark ? "#475569" : "#94a3b8"}
+        borderColor={getLeafletBorderColor(theme)}
         className="h-[400px] lg:h-[500px] rounded-md overflow-hidden"
       />
 

@@ -103,7 +103,25 @@ describe('mapConfigToColorOptions', () => {
       colorSchemeType: 'diverging',
     };
     const options = mapConfigToColorOptions(config, mockData);
-    expect(options.colorScheme).toBe('interpolateBlues'); // デフォルトはinterpolateBlues
+    expect(options.colorScheme).toBe('interpolateRdBu');
+  });
+
+  it('should normalize sequential color scheme aliases', () => {
+    const config: MapVisualizationConfig = {
+      colorSchemeType: 'sequential',
+      colorScheme: 'blues',
+    };
+    const options = mapConfigToColorOptions(config, mockData);
+    expect(options.colorScheme).toBe('interpolateBlues');
+  });
+
+  it('should normalize diverging color scheme aliases', () => {
+    const config: MapVisualizationConfig = {
+      colorSchemeType: 'diverging',
+      colorScheme: 'rdbu',
+    };
+    const options = mapConfigToColorOptions(config, mockData);
+    expect(options.colorScheme).toBe('interpolateRdBu');
   });
 
   it('should use default divergingMidpoint for diverging if not provided', () => {

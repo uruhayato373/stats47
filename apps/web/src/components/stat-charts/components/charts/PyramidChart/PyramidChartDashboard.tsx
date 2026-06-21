@@ -2,7 +2,7 @@ import { logger } from "@stats47/logger";
 
 import { toPyramidChartData } from "../../../adapters";
 import { fetchEstatData } from "../../../services";
-import { DashboardCard } from "../../shared/DashboardCard";
+import { LegacyDashboardCard } from "../../shared/DashboardCard";
 import { ErrorDisplay } from "../../shared/ErrorDisplay";
 
 import { PyramidChartClient } from "./PyramidChartClient";
@@ -60,7 +60,7 @@ export const PyramidChartDashboard = async ({
     const latestYear = latestMaleData?.[latestMaleData.length - 1]?.yearName;
 
     return (
-      <DashboardCard
+      <LegacyDashboardCard
         title={title}
         rankingLink={rankingLink}
         description={description}
@@ -74,7 +74,7 @@ export const PyramidChartDashboard = async ({
         empty={false}
       >
         <PyramidChartClient chartData={chartData} year={latestYear} />
-      </DashboardCard>
+      </LegacyDashboardCard>
     );
   } catch (err) {
     logger.error(

@@ -3,7 +3,7 @@ import { logger } from "@stats47/logger";
 import { toLineChartData } from "../../../adapters";
 import { fetchEstatData } from "../../../services";
 import { computeYAxisDomain } from "../../../utils/computeYAxisDomain";
-import { DashboardCard } from "../../shared/DashboardCard";
+import { LegacyDashboardCard } from "../../shared/DashboardCard";
 import { ErrorDisplay } from "../../shared/ErrorDisplay";
 
 import { LineChartClient } from "./LineChartClient";
@@ -64,7 +64,7 @@ export const LineChart = async ({
   }
 
   return (
-    <DashboardCard
+    <LegacyDashboardCard
       title={title}
       rankingLink={rankingLink}
       description={description}
@@ -77,6 +77,6 @@ export const LineChart = async ({
       empty={chartData.data.length === 0}
     >
       <LineChartClient chartData={chartData} yDomain={yDomain} showLatestValues={showLatestValues} />
-    </DashboardCard>
+    </LegacyDashboardCard>
   );
 };

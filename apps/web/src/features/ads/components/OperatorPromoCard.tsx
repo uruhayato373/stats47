@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 
 import Link from "next/link";
 
+import { SurfaceCard } from "@/components/surface";
+
 import { SIDEBAR_PROMO_BANNERS } from "../constants/sidebar-banners";
 
 import { BannerAd } from "./BannerAd";
@@ -86,7 +88,7 @@ export function OperatorPromoCard({ placement = "global" }: OperatorPromoCardPro
   if (axis === null) {
     return (
       <div className={wrapperClass} aria-hidden>
-        <div className="h-[320px] rounded-none border bg-card" />
+        <div className="h-[320px] rounded-none border border-border bg-card" />
       </div>
     );
   }
@@ -97,7 +99,7 @@ export function OperatorPromoCard({ placement = "global" }: OperatorPromoCardPro
 
   return (
     <div className={wrapperClass}>
-      <div className="rounded-none border bg-card p-4 shadow-sm">
+      <SurfaceCard>
         {/* 運営者ミニプロフィール */}
         <div className="flex items-center gap-3">
           <div className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full bg-primary/10">
@@ -148,7 +150,7 @@ export function OperatorPromoCard({ placement = "global" }: OperatorPromoCardPro
             />
           </div>
         )}
-      </div>
+      </SurfaceCard>
     </div>
   );
 }

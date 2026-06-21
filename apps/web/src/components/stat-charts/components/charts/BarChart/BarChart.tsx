@@ -3,7 +3,7 @@ import { logger } from "@stats47/logger";
 import { toBarChartData } from "../../../adapters";
 import { fetchEstatData } from "../../../services";
 import { computeYAxisDomain } from "../../../utils/computeYAxisDomain";
-import { DashboardCard } from "../../shared/DashboardCard";
+import { LegacyDashboardCard } from "../../shared/DashboardCard";
 import { ErrorDisplay } from "../../shared/ErrorDisplay";
 
 import { BarChartClient } from "./BarChartClient";
@@ -78,7 +78,7 @@ export const DashboardBarChart = async ({
   }
 
   return (
-    <DashboardCard
+    <LegacyDashboardCard
       title={title}
       rankingLink={rankingLink}
       description={undefined}
@@ -90,6 +90,6 @@ export const DashboardBarChart = async ({
       empty={chartData.data.length === 0}
     >
       <BarChartClient chartData={chartData} chartType={chartType} xDomain={xDomain} />
-    </DashboardCard>
+    </LegacyDashboardCard>
   );
 };
