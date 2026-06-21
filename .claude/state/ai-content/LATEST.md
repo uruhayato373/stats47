@@ -1,59 +1,59 @@
 # ranking ai-content 是正キュー (LATEST)
 
-- 生成: 2026-06-21T09:02:23.917Z
+- 生成: 2026-06-21T09:13:14.924Z
 - GSC snapshot: 2026-W24 / スコープ: GSC流入のある /ranking/ ページ (SEO優先母集団)
 - done 判定: R2 の ai-content が auditRow を通る (blocker 0)
 
 ## サマリ (GSC流入 /ranking/ ページ 924 件)
 
-- ✅ done: 40 件 (impressions 計 6270)
-- ⏳ needs-regen: 884 件 (impressions 計 18850)
-  - 内訳: incomplete 825 / missing 39 / blocker 20
+- ✅ done: 60 件 (impressions 計 10456)
+- ⏳ needs-regen: 864 件 (impressions 計 14664)
+  - 内訳: incomplete 807 / missing 38 / blocker 19
 
 ## いつ修正したか (done を R2 last-modified 降順・上位15)
 
 | R2 last-modified | key | impressions |
 |---|---|---|
-| Sun, 21 Jun 2026 08:48:18 GMT | mayonnaise-consumption-expenditure | 949 |
-| Sun, 21 Jun 2026 08:48:18 GMT | natto-consumption-expenditure | 889 |
-| Sun, 21 Jun 2026 08:48:18 GMT | fresh-udon-soba-consumption-quantity | 883 |
-| Sun, 21 Jun 2026 08:48:18 GMT | dairy-cattle-count | 881 |
-| Sun, 21 Jun 2026 08:48:18 GMT | beef-consumption-quantity | 398 |
-| Sun, 21 Jun 2026 08:48:18 GMT | chicken-consumption-quantity | 367 |
-| Sun, 21 Jun 2026 08:48:18 GMT | abortion-rate | 336 |
-| Sun, 21 Jun 2026 08:48:18 GMT | pasta-consumption-quantity | 305 |
-| Sun, 21 Jun 2026 08:48:18 GMT | sushi-dining-consumption-expenditure | 277 |
-| Sun, 21 Jun 2026 08:48:18 GMT | elementary-school-children-count | 270 |
-| Sun, 21 Jun 2026 08:18:28 GMT | annual-sunshine-duration | 86 |
-| Sun, 21 Jun 2026 08:18:28 GMT | adult-sandals-consumption-expenditure | 2 |
-| Sun, 21 Jun 2026 08:18:28 GMT | actual-income-worker-households-per-month | 2 |
-| Sun, 21 Jun 2026 08:18:28 GMT | assembly-expenses-prefecture | 2 |
-| Sun, 21 Jun 2026 08:18:28 GMT | accessories-consumption-expenditure | 1 |
+| Sun, 21 Jun 2026 09:12:52 GMT | tissue-paper-consumption-expenditure | 157 |
+| Sun, 21 Jun 2026 09:12:51 GMT | general-hospital-bed-occupancy-rate | 269 |
+| Sun, 21 Jun 2026 09:12:51 GMT | retail-establishments-by-prefecture | 255 |
+| Sun, 21 Jun 2026 09:12:51 GMT | soba-udon-dining-consumption-expenditure | 253 |
+| Sun, 21 Jun 2026 09:12:51 GMT | tuna-consumption-quantity | 252 |
+| Sun, 21 Jun 2026 09:12:51 GMT | school-teacher-annual-income | 245 |
+| Sun, 21 Jun 2026 09:12:51 GMT | konbu-consumption-quantity | 237 |
+| Sun, 21 Jun 2026 09:12:51 GMT | potato-consumption-quantity | 222 |
+| Sun, 21 Jun 2026 09:12:51 GMT | garbage-total-output | 218 |
+| Sun, 21 Jun 2026 09:12:51 GMT | pork-consumption-expenditure | 215 |
+| Sun, 21 Jun 2026 09:12:51 GMT | pork-consumption-quantity | 207 |
+| Sun, 21 Jun 2026 09:12:51 GMT | icecream-consumption-expenditure | 205 |
+| Sun, 21 Jun 2026 09:12:51 GMT | paved-road-total-length | 204 |
+| Sun, 21 Jun 2026 09:12:51 GMT | convenience-store-count-commercial | 191 |
+| Sun, 21 Jun 2026 09:12:51 GMT | avg-height-high-school-2nd-male | 187 |
 
 ## 次にやるべき上位20 (impressions 降順)
 
 | impressions | key | reason | blockers |
 |---|---|---|---|
 | 1292 | public-phone-count | incomplete | paren-number,paren-number,missing-pref-commentary |
-| 269 | general-hospital-bed-occupancy-rate | incomplete | paren-number,paren-number,faq-speculation,paren-number,missing-pref-commentary |
-| 255 | retail-establishments-by-prefecture | missing | - |
-| 253 | soba-udon-dining-consumption-expenditure | incomplete | paren-number,paren-number,missing-pref-commentary |
-| 252 | tuna-consumption-quantity | incomplete | paren-number,missing-pref-commentary |
-| 245 | school-teacher-annual-income | incomplete | paren-number,paren-number,missing-pref-commentary |
-| 237 | konbu-consumption-quantity | incomplete | paren-number,paren-number,faq-speculation,paren-number,missing-pref-commentary |
-| 222 | potato-consumption-quantity | incomplete | paren-number,paren-number,paren-number,missing-pref-commentary |
-| 218 | garbage-total-output | incomplete | paren-number,paren-number,paren-number,missing-pref-commentary |
-| 215 | pork-consumption-expenditure | incomplete | paren-number,paren-number,paren-number,missing-pref-commentary |
-| 207 | pork-consumption-quantity | incomplete | paren-number,paren-number,missing-pref-commentary |
-| 205 | icecream-consumption-expenditure | incomplete | paren-number,paren-number,paren-number,missing-pref-commentary |
-| 204 | paved-road-total-length | incomplete | paren-number,paren-number,missing-pref-commentary |
-| 191 | convenience-store-count-commercial | incomplete | paren-number,paren-number,missing-pref-commentary |
-| 187 | avg-height-high-school-2nd-male | incomplete | paren-number,paren-number,paren-number,missing-pref-commentary |
-| 186 | consumption-expenditure-multi-person-households-per-month | blocker | paren-number,paren-number |
-| 185 | fishery-species-catch-tuna | incomplete | paren-number,paren-number,paren-number,missing-pref-commentary |
-| 173 | squid-consumption-quantity | incomplete | paren-number,missing-pref-commentary |
-| 164 | banana-consumption-quantity | incomplete | paren-number,paren-number,paren-number,missing-pref-commentary |
-| 161 | other-bread-consumption-quantity | incomplete | paren-number,paren-number,missing-pref-commentary |
+| 150 | pickled-plum-consumption-quantity | incomplete | paren-number,paren-number,paren-number,missing-pref-commentary |
+| 150 | marine-fishery-aquaculture-output-value | incomplete | paren-number,paren-number,paren-number,missing-pref-commentary |
+| 149 | green-tea-consumption-quantity | incomplete | paren-number,paren-number,paren-number,missing-pref-commentary |
+| 148 | miso-consumption-quantity | incomplete | paren-number,paren-number,paren-number,missing-pref-commentary |
+| 145 | treatment-rate-mental-disorder-inpatient | incomplete | paren-number,missing-pref-commentary |
+| 142 | physical-disability-certificates-issued | incomplete | paren-number,missing-pref-commentary |
+| 142 | dam-count | incomplete | paren-number,missing-pref-commentary |
+| 138 | cake-consumption-expenditure | incomplete | paren-number,paren-number,paren-number,missing-pref-commentary |
+| 138 | gasoline-consumption-quantity | incomplete | paren-number,paren-number,paren-number,missing-pref-commentary |
+| 135 | air-conditioner-consumption-quantity | incomplete | paren-number,paren-number,paren-number,missing-pref-commentary |
+| 128 | cup-noodles-consumption-quantity | incomplete | paren-number,paren-number,paren-number,missing-pref-commentary |
+| 128 | convenience-store-sales-monthly | missing | - |
+| 119 | roadside-station-count | incomplete | paren-number,paren-number,missing-pref-commentary |
+| 114 | soy-sauce-consumption-expenditure | incomplete | paren-number,paren-number,paren-number,missing-pref-commentary |
+| 113 | konbu-consumption-expenditure | incomplete | paren-number,paren-number,paren-number,missing-pref-commentary |
+| 111 | fishery-species-catch-yellowtail | incomplete | paren-number,paren-number,paren-number,missing-pref-commentary |
+| 110 | total-fertility-rate | incomplete | missing-pref-commentary |
+| 108 | mochi-consumption-quantity | incomplete | paren-number,paren-number,paren-number,missing-pref-commentary |
+| 103 | sauce-consumption-expenditure | incomplete | paren-number,missing-pref-commentary |
 
 > 次バッチ: `node .claude/scripts/ai-content/build-ai-content-queue.mjs --next 10` で対象 key を取得 →
 > ranking-content-author を並列起動 → diff-push-r2 --prefix app/ranking → 本スクリプト再実行で done 反映。
