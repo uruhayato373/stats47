@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-06-21T11:54:46.849Z",
+  "generatedAt": "2026-06-21T23:29:00.389Z",
   "gscWeek": "2026-W25",
-  "auditGeneratedAt": "2026-06-21T11:54:46.829Z",
+  "auditGeneratedAt": "2026-06-21T23:29:00.370Z",
   "scoring": "combined = 0.6*norm(GSC expectedLift) + 0.4*norm(blockers*3+warnings); lane: must-fix > opportunity",
   "summary": {
     "total": 140,
@@ -42,7 +42,7 @@
           "blocker: 記事内関連セクション — ページ側コンポーネントが正典 (記事から削除)"
         ]
       },
-      "wave_id": "2026-06-21-revisefix",
+      "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
       "last_brushup": null
@@ -76,7 +76,7 @@
           "blocker: 記事内関連セクション — ページ側コンポーネントが正典 (記事から削除)"
         ]
       },
-      "wave_id": "2026-06-21-revisefix",
+      "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
       "last_brushup": null
@@ -110,7 +110,7 @@
           "blocker: 記事内関連セクション — ページ側コンポーネントが正典 (記事から削除)"
         ]
       },
-      "wave_id": "2026-06-21-revisefix",
+      "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
       "last_brushup": null
@@ -144,7 +144,7 @@
           "blocker: 記事内関連セクション — ページ側コンポーネントが正典 (記事から削除)"
         ]
       },
-      "wave_id": "2026-06-21-revisefix",
+      "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
       "last_brushup": null
@@ -178,7 +178,7 @@
           "blocker: 記事内関連セクション — ページ側コンポーネントが正典 (記事から削除)"
         ]
       },
-      "wave_id": "2026-06-21-revisefix",
+      "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
       "last_brushup": "2026-05-25"
@@ -212,7 +212,7 @@
           "blocker: 記事内関連セクション — ページ側コンポーネントが正典 (記事から削除)"
         ]
       },
-      "wave_id": "2026-06-21-revisefix",
+      "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
       "last_brushup": null
@@ -245,7 +245,7 @@
           "warning: source-link 末尾集約 3個 — 各図直下へ分散"
         ]
       },
-      "wave_id": "2026-06-21-revisefix",
+      "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
       "last_brushup": "2026-05-25"
@@ -277,7 +277,7 @@
           "blocker: 記事内関連セクション — ページ側コンポーネントが正典 (記事から削除)"
         ]
       },
-      "wave_id": "2026-06-21-revisefix",
+      "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
       "last_brushup": null
@@ -309,7 +309,7 @@
           "blocker: 記事内関連セクション — ページ側コンポーネントが正典 (記事から削除)"
         ]
       },
-      "wave_id": "2026-06-21-revisefix",
+      "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
       "last_brushup": null
@@ -340,7 +340,7 @@
           "blocker: prose/図 302<350 (図はあるが薄い)"
         ]
       },
-      "wave_id": "2026-06-21-revisefix",
+      "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
       "last_brushup": null
@@ -371,7 +371,7 @@
           "blocker: prose/図 319<350 (図はあるが薄い)"
         ]
       },
-      "wave_id": "2026-06-21-revisefix",
+      "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
       "last_brushup": null
@@ -402,7 +402,7 @@
           "blocker: prose/図 339<350 (図はあるが薄い)"
         ]
       },
-      "wave_id": "2026-06-21-revisefix",
+      "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
       "last_brushup": null
@@ -432,7 +432,7 @@
           "blocker: internalLinks 0<3"
         ]
       },
-      "wave_id": "2026-06-21-revisefix",
+      "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
       "last_brushup": null
@@ -464,7 +464,7 @@
           "warning: source-link 末尾集約 2個 — 各図直下へ分散"
         ]
       },
-      "wave_id": "2026-06-21-revisefix",
+      "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
       "last_brushup": null
@@ -495,7 +495,7 @@
           "warning: prose/図 362<550 (図あたりやや薄い)"
         ]
       },
-      "wave_id": "2026-06-21-revisefix",
+      "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
       "last_brushup": null
@@ -526,7 +526,7 @@
           "warning: prose/図 430<550 (図あたりやや薄い)"
         ]
       },
-      "wave_id": "2026-06-21-revisefix",
+      "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
       "last_brushup": "2026-05-25"
@@ -557,7 +557,7 @@
           "warning: prose/図 393<550 (図あたりやや薄い)"
         ]
       },
-      "wave_id": "2026-06-21-revisefix",
+      "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
       "last_brushup": null
@@ -587,7 +587,7 @@
           "blocker: である調 文末 1箇所 [だ。] — ですます調に統一 (copula だけでなく動詞終止形も: である。→です。/だった。→でした。/〜する。→〜します。)。正規表現の copula 一括置換は不可 (動詞終止形が常体で残り崩壊) → article-writer で文単位変換"
         ]
       },
-      "wave_id": "2026-06-21-revisefix",
+      "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
       "last_brushup": null
@@ -616,7 +616,7 @@
           "blocker: internalLinks 1<3"
         ]
       },
-      "wave_id": "2026-06-21-critic3",
+      "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
       "last_brushup": null
@@ -645,7 +645,7 @@
           "blocker: internalLinks 1<3"
         ]
       },
-      "wave_id": "2026-06-21-revisefix",
+      "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
       "last_brushup": "2026-06-10"
@@ -674,7 +674,7 @@
           "blocker: internalLinks 2<3"
         ]
       },
-      "wave_id": "2026-06-21-critic3",
+      "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
       "last_brushup": null
@@ -704,7 +704,7 @@
           "blocker: である調 文末 4箇所 [だ。] — ですます調に統一 (copula だけでなく動詞終止形も: である。→です。/だった。→でした。/〜する。→〜します。)。正規表現の copula 一括置換は不可 (動詞終止形が常体で残り崩壊) → article-writer で文単位変換"
         ]
       },
-      "wave_id": "2026-06-21-revisefix",
+      "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
       "last_brushup": "2026-05-25"
@@ -764,7 +764,7 @@
           "blocker: prose/図 337<350 (図はあるが薄い)"
         ]
       },
-      "wave_id": "2026-06-21-revisefix",
+      "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
       "last_brushup": null
@@ -793,7 +793,7 @@
           "blocker: internalLinks 1<3"
         ]
       },
-      "wave_id": "2026-06-21-critic3",
+      "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
       "last_brushup": null
@@ -822,7 +822,7 @@
           "blocker: internalLinks 0<3"
         ]
       },
-      "wave_id": "2026-06-21-critic3",
+      "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
       "last_brushup": null
@@ -851,7 +851,7 @@
           "blocker: internalLinks 1<3"
         ]
       },
-      "wave_id": "2026-06-21-critic3",
+      "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
       "last_brushup": null
@@ -880,7 +880,7 @@
           "blocker: internalLinks 1<3"
         ]
       },
-      "wave_id": "2026-06-21-critic3",
+      "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
       "last_brushup": null
@@ -909,7 +909,7 @@
           "blocker: internalLinks 2<3"
         ]
       },
-      "wave_id": "2026-06-21-revisefix",
+      "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
       "last_brushup": null
@@ -938,7 +938,7 @@
           "blocker: internalLinks 1<3"
         ]
       },
-      "wave_id": "2026-06-21-critic3",
+      "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
       "last_brushup": null
@@ -967,7 +967,7 @@
           "blocker: internalLinks 2<3"
         ]
       },
-      "wave_id": "2026-06-21-revisefix",
+      "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
       "last_brushup": null
@@ -996,7 +996,7 @@
           "blocker: internalLinks 1<3"
         ]
       },
-      "wave_id": "2026-06-21-revisefix",
+      "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
       "last_brushup": null
@@ -1025,7 +1025,7 @@
           "blocker: internalLinks 1<3"
         ]
       },
-      "wave_id": "2026-06-21-critic3",
+      "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
       "last_brushup": null
@@ -1054,7 +1054,7 @@
           "blocker: internalLinks 2<3"
         ]
       },
-      "wave_id": "2026-06-21-critic3",
+      "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
       "last_brushup": null
@@ -1083,7 +1083,7 @@
           "blocker: internalLinks 2<3"
         ]
       },
-      "wave_id": "2026-06-21-critic3",
+      "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
       "last_brushup": null
@@ -1112,7 +1112,7 @@
           "blocker: internalLinks 1<3"
         ]
       },
-      "wave_id": "2026-06-21-critic3",
+      "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
       "last_brushup": null
@@ -1141,7 +1141,7 @@
           "blocker: internalLinks 2<3"
         ]
       },
-      "wave_id": "2026-06-21-revisefix",
+      "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
       "last_brushup": null
@@ -1170,7 +1170,7 @@
           "blocker: internalLinks 2<3"
         ]
       },
-      "wave_id": "2026-06-21-critic3",
+      "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
       "last_brushup": null
@@ -1199,7 +1199,7 @@
           "blocker: internalLinks 1<3"
         ]
       },
-      "wave_id": "2026-06-21-critic3",
+      "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
       "last_brushup": "2026-06-10"
@@ -1228,7 +1228,7 @@
           "blocker: internalLinks 1<3"
         ]
       },
-      "wave_id": "2026-06-21-revisefix",
+      "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
       "last_brushup": null
@@ -1257,7 +1257,7 @@
           "blocker: internalLinks 2<3"
         ]
       },
-      "wave_id": "2026-06-21-revisefix",
+      "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
       "last_brushup": null
@@ -1286,7 +1286,7 @@
           "blocker: internalLinks 1<3"
         ]
       },
-      "wave_id": "2026-06-21-revisefix",
+      "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
       "last_brushup": "2026-06-10"
@@ -1315,7 +1315,7 @@
           "blocker: internalLinks 2<3"
         ]
       },
-      "wave_id": "2026-06-21-revisefix",
+      "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
       "last_brushup": "2026-06-10"
@@ -1344,7 +1344,7 @@
           "blocker: internalLinks 1<3"
         ]
       },
-      "wave_id": "2026-06-21-revisefix",
+      "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
       "last_brushup": "2026-06-10"
@@ -1373,7 +1373,7 @@
           "blocker: internalLinks 2<3"
         ]
       },
-      "wave_id": "2026-06-21-revisefix",
+      "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
       "last_brushup": "2026-06-10"
