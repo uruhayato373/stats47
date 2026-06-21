@@ -1,19 +1,19 @@
 {
-  "generatedAt": "2026-06-21T09:13:14.924Z",
+  "generatedAt": "2026-06-21T09:26:10.907Z",
   "gscSnapshot": "2026-W24",
   "scope": "GSC流入のある /ranking/ ページ (SEO優先母集団)",
   "doneCriteria": "R2 の ai-content が auditRow を通る (blocker 0)",
   "summary": {
     "total": 924,
-    "done": 60,
-    "needsRegen": 864,
+    "done": 80,
+    "needsRegen": 844,
     "needsByReason": {
-      "incomplete": 807,
-      "missing": 38,
-      "blocker": 19
+      "incomplete": 788,
+      "blocker": 19,
+      "missing": 37
     },
-    "doneImpressions": 10456,
-    "needsImpressions": 14664
+    "doneImpressions": 12985,
+    "needsImpressions": 12135
   },
   "entries": [
     {
@@ -400,68 +400,60 @@
       "impressions": 150,
       "clicks": 7,
       "position": 6.38,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
-      ]
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [],
+      "lastModified": "Sun, 21 Jun 2026 09:25:47 GMT",
+      "updatedAt": null
     },
     {
       "rankingKey": "marine-fishery-aquaculture-output-value",
       "impressions": 150,
       "clicks": 1,
       "position": 9.45,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
-      ]
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [],
+      "lastModified": "Sun, 21 Jun 2026 09:25:47 GMT",
+      "updatedAt": null
     },
     {
       "rankingKey": "green-tea-consumption-quantity",
       "impressions": 149,
       "clicks": 10,
       "position": 7.59,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
-      ]
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [],
+      "lastModified": "Sun, 21 Jun 2026 09:25:47 GMT",
+      "updatedAt": null
     },
     {
       "rankingKey": "miso-consumption-quantity",
       "impressions": 148,
       "clicks": 5,
       "position": 6.97,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
-      ]
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [],
+      "lastModified": "Sun, 21 Jun 2026 09:25:47 GMT",
+      "updatedAt": null
     },
     {
       "rankingKey": "treatment-rate-mental-disorder-inpatient",
       "impressions": 145,
       "clicks": 1,
       "position": 7.88,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "missing-pref-commentary"
-      ]
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [],
+      "lastModified": "Sun, 21 Jun 2026 09:25:48 GMT",
+      "updatedAt": null
     },
     {
       "rankingKey": "physical-disability-certificates-issued",
@@ -480,54 +472,48 @@
       "impressions": 142,
       "clicks": 1,
       "position": 7.18,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "missing-pref-commentary"
-      ]
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [],
+      "lastModified": "Sun, 21 Jun 2026 09:25:47 GMT",
+      "updatedAt": null
     },
     {
       "rankingKey": "cake-consumption-expenditure",
       "impressions": 138,
       "clicks": 7,
       "position": 7.42,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
-      ]
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [],
+      "lastModified": "Sun, 21 Jun 2026 09:25:47 GMT",
+      "updatedAt": null
     },
     {
       "rankingKey": "gasoline-consumption-quantity",
       "impressions": 138,
       "clicks": 4,
       "position": 7.06,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
-      ]
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [],
+      "lastModified": "Sun, 21 Jun 2026 09:25:47 GMT",
+      "updatedAt": null
     },
     {
       "rankingKey": "air-conditioner-consumption-quantity",
       "impressions": 135,
       "clicks": 2,
       "position": 4.37,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
-      ]
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [],
+      "lastModified": "Sun, 21 Jun 2026 09:25:47 GMT",
+      "updatedAt": null
     },
     {
       "rankingKey": "avg-salary-education-prefecture",
@@ -549,103 +535,98 @@
       "impressions": 128,
       "clicks": 10,
       "position": 6.13,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
-      ]
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [],
+      "lastModified": "Sun, 21 Jun 2026 09:25:47 GMT",
+      "updatedAt": null
     },
     {
       "rankingKey": "convenience-store-sales-monthly",
       "impressions": 128,
       "clicks": 8,
       "position": 6.93,
-      "status": "needs-regen",
-      "reason": "missing",
-      "blockers": []
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [],
+      "lastModified": "Sun, 21 Jun 2026 09:25:47 GMT",
+      "updatedAt": null
     },
     {
       "rankingKey": "roadside-station-count",
       "impressions": 119,
       "clicks": 1,
       "position": 9.29,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
-      ]
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [],
+      "lastModified": "Sun, 21 Jun 2026 09:25:47 GMT",
+      "updatedAt": null
     },
     {
       "rankingKey": "soy-sauce-consumption-expenditure",
       "impressions": 114,
       "clicks": 4,
       "position": 7.54,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
-      ]
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [],
+      "lastModified": "Sun, 21 Jun 2026 09:25:47 GMT",
+      "updatedAt": null
     },
     {
       "rankingKey": "konbu-consumption-expenditure",
       "impressions": 113,
       "clicks": 8,
       "position": 5.89,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
-      ]
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [],
+      "lastModified": "Sun, 21 Jun 2026 09:25:47 GMT",
+      "updatedAt": null
     },
     {
       "rankingKey": "fishery-species-catch-yellowtail",
       "impressions": 111,
       "clicks": 5,
       "position": 8.2,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
-      ]
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [
+        "pref-count"
+      ],
+      "lastModified": "Sun, 21 Jun 2026 09:25:47 GMT",
+      "updatedAt": null
     },
     {
       "rankingKey": "total-fertility-rate",
       "impressions": 110,
       "clicks": 1,
       "position": 10.23,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "missing-pref-commentary"
-      ]
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [],
+      "lastModified": "Sun, 21 Jun 2026 09:25:48 GMT",
+      "updatedAt": null
     },
     {
       "rankingKey": "mochi-consumption-quantity",
       "impressions": 108,
       "clicks": 6,
       "position": 6.93,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
-      ]
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [],
+      "lastModified": "Sun, 21 Jun 2026 09:25:47 GMT",
+      "updatedAt": null
     },
     {
       "rankingKey": "bean-sprouts-consumption-quantity",
@@ -668,40 +649,36 @@
       "impressions": 103,
       "clicks": 5,
       "position": 8.39,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "missing-pref-commentary"
-      ]
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [],
+      "lastModified": "Sun, 21 Jun 2026 09:25:47 GMT",
+      "updatedAt": null
     },
     {
       "rankingKey": "cod-roe-consumption-quantity",
       "impressions": 100,
       "clicks": 6,
       "position": 7.63,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
-      ]
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [],
+      "lastModified": "Sun, 21 Jun 2026 09:25:47 GMT",
+      "updatedAt": null
     },
     {
       "rankingKey": "beef-consumption-expenditure",
       "impressions": 100,
       "clicks": 1,
       "position": 10.08,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
-      ]
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [],
+      "lastModified": "Sun, 21 Jun 2026 09:25:47 GMT",
+      "updatedAt": null
     },
     {
       "rankingKey": "broccoli-consumption-quantity",
