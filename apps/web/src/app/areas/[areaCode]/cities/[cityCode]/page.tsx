@@ -13,7 +13,6 @@ import {
   CityPageFooter,
   getCityRouteContext,
 } from "@/features/area-profile";
-import { PHASE_1_SSG_CITIES } from "@/features/area-profile/constants/stage-1-cities";
 import { readCityProfile } from "@/features/area-profile/server";
 import { listCategories } from "@/features/category/server";
 
@@ -56,9 +55,16 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
-export function generateStaticParams() {
-  return PHASE_1_SSG_CITIES;
-}
+/**
+ * オンデマンド ISR（24時間）。
+ *
+ * generateStaticParams は付けない。付けると対象市区町村が `●` SSG 化され、ビルド時に R2 から
+ * city profile を読めず notFound として prerender される。この OpenNext 構成では ISR 再生成が
+ * 効かず「市区町村が見つかりません」が永久固着する（2026-06-22 障害）。generateStaticParams なし =
+ * `ƒ`（オンデマンド）でランタイムに R2 を読んで描画する（ranking / areas と同方式）。
+ * 詳細: .claude/rules/nextjs-ssg-preservation.md
+ */
+export const revalidate = 86400;
 
 export default async function CityPage({ params }: PageProps) {
   const { areaCode, cityCode } = await params;

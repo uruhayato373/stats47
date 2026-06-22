@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-import { fetchPrefectures } from "@stats47/area";
 import {
     Breadcrumb,
     BreadcrumbItem,
@@ -38,14 +37,16 @@ import { AdSenseAd, RANKING_SIDEBAR_TOP } from "@/lib/google-adsense";
 import type { Metadata } from "next";
 
 
-/** 24時間 ISR */
+/**
+ * オンデマンド ISR（24時間）。
+ *
+ * generateStaticParams は付けない。付けると 47 県が `●` SSG 化され、ビルド時に R2 から
+ * area profile を読めず notFound として prerender される。この OpenNext 構成では ISR 再生成が
+ * 効かず「地域の特徴が見つかりません」が永久固着する（2026-06-22 障害）。generateStaticParams
+ * なし = `ƒ`（オンデマンド）でランタイムに R2 を読んで描画する（ranking / areas/[themeSlug] と同方式）。
+ * 詳細: .claude/rules/nextjs-ssg-preservation.md
+ */
 export const revalidate = 86400;
-
-/** ビルド時に全47都道府県を事前生成 */
-export function generateStaticParams() {
-    const prefectures = fetchPrefectures();
-    return prefectures.map((p) => ({ areaCode: p.prefCode }));
-}
 
 interface PageProps {
     params: Promise<{ areaCode: string }>;
