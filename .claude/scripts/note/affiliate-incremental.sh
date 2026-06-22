@@ -9,6 +9,28 @@ BU(){ browser-use --headed --profile "Profile 5" "$@"; }
 AFF_PNG="/Users/minamidaisuke/stats47/.claude/assets/affiliate-banners/ai_agent_camp.png"
 AFF_URL="https://px.a8.net/svt/ejp?a8mat=4B3RUY+AG9Z3M+5VRC+5YZ75"
 
+# 記事間の遷移で出る「このページを離れますか？(変更が保存されていない可能性)」ダイアログ抑止。
+# 現在開いている note エディタの beforeunload を無効化してから次の URL へ遷移する。
+# これが無いと記事ごとに確認ダイアログが出てバッチが止まる(ユーザー報告 2026-06-22)。
+# note の beforeunload を無効化する。capture フェーズで先回りして note のリスナを止め、
+# returnValue を消す。※ beforeunload で preventDefault() を呼ぶと逆にダイアログが出るので呼ばない。
+_suppress_unload(){
+  BU eval "(function(){try{window.onbeforeunload=null;window.addEventListener('beforeunload',function(e){e.stopImmediatePropagation();delete e['returnValue'];e.returnValue=undefined;},true);}catch(_){};return 'ok';})();" >/dev/null 2>&1
+}
+# 全ネイティブダイアログ(confirm/alert/beforeunload)を現ページで自動承認する。
+# ★無料記事の「更新する」で出る confirm「全文が無料で表示される設定…公開してよろしいですか？」が
+#   CDP をブロックして daemon を固める真因(2026-06-23特定)。window.confirm を true 固定で出さなくする。
+#   ※「公開に進む」で /publish/ へ遷移し JS context がリセットされるため、遷移後に呼ぶこと。
+_suppress_dialogs(){
+  BU eval "(function(){try{window.confirm=function(){return true;};window.alert=function(){};window.onbeforeunload=null;}catch(_){};return 'ok';})();" >/dev/null 2>&1
+}
+# beforeunload を抑止してから open する遷移ラッパー(全ての記事遷移はこれを使う)。
+# browser-use は CDP 経由・各 CLI 呼び出しは別プロセスのため CDP ダイアログ handler は持続しない。
+# よって「ページの JS 状態を書き換える eval 抑止」が唯一持続する有効策(遷移直前に現ページへ適用)。
+BU_open(){ _suppress_unload; BU open "$1"; }
+# 互換: バッチドライバが呼ぶスタブ(実体の抑止は BU_open 内の _suppress_unload が担う)。
+_install_dialog_autoaccept(){ echo "via _suppress_unload (eval, per-navigation)"; }
+
 # アフィリエイトPR文（\n\n で段落分離・💡/▶ 装飾・bold記法は付けない）
 read -r -d '' AFF_TEXT << 'TXT'
 💡 この記事を書いた私から、Claude Code 学習でひとつだけご紹介させてください（PR）
@@ -40,7 +62,7 @@ _position_before_anchor(){
 
 insert_affiliate(){
   local NOTEID="$1" SLUG="$2"
-  BU open "https://editor.note.com/notes/$NOTEID/edit" >/dev/null 2>&1; sleep 10
+  BU_open "https://editor.note.com/notes/$NOTEID/edit" >/dev/null 2>&1; sleep 10
   # contenteditable が描画されるまで最大30秒待つ（ページ再読み込み後は遅い）
   local loaded=no
   for i in 1 2 3 4 5 6; do
@@ -140,6 +162,9 @@ publish_update(){
     if [ "$(_has_btn '更新する')" = "yes" ] || [ "$(_has_btn '試し読みエリアを設定')" = "yes" ] || [ "$(_has_btn '有料エリア設定')" = "yes" ]; then nav=yes; break; fi
     sleep 2
   done
+  # /publish/ へ遷移後、ネイティブ confirm/alert を無効化(無料記事の「公開してよろしいですか？」が
+  # CDP をブロックして固まるのを防ぐ)。遷移で context がリセットされるのでここで注入する。
+  _suppress_dialogs
   if [ "$nav" != "yes" ]; then
     echo "  [FAIL] 公開設定 not reached: $SLUG"
     BU eval "(function(){return JSON.stringify([...document.querySelectorAll('button')].filter(b=>b.offsetParent!==null&&b.innerText.trim()).map(b=>b.innerText.trim()).slice(0,15));})();" 2>&1 | tail -1
@@ -149,10 +174,17 @@ publish_update(){
   if [ "$(_has_btn '更新する')" = "yes" ]; then
     _click_btn '更新する' >/dev/null; sleep 6
   elif [ "$(_has_btn '試し読みエリアを設定')" = "yes" ]; then
-    # 無料記事フロー: 試し読みエリア→末尾ライン(全文無料)→更新する
+    # 無料記事フロー: 「試し読みエリアを設定」を押すと「更新する」が出現する。
+    # ※ ライン位置は既定のまま触らない(全文無料は元の境界が保持される)。
+    #    旧実装は「ラインをこの場所に変更」を挟んでいたが、それが原因で更新するを取りこぼしていた
+    #    (2026-06-23 修正: 直接 更新する を押すと公開成功・ライブに反映を確認)。
     _click_btn '試し読みエリアを設定' >/dev/null; sleep 3
-    BU eval "(function(){const bs=[...document.querySelectorAll('button')].filter(b=>b.offsetParent!==null&&b.innerText.trim()==='ラインをこの場所に変更');if(!bs.length)return 'nf';bs[bs.length-1].scrollIntoView({block:'center'});bs[bs.length-1].click();return 'ok';})();" >/dev/null 2>&1; sleep 2
-    if [ "$(_click_btn '更新する')" != "ok" ]; then echo "  [FAIL] 更新する(無料) not found: $SLUG"; return 1; fi
+    local upd=no
+    for k in 1 2 3; do
+      if [ "$(_click_btn '更新する')" = "ok" ]; then upd=yes; break; fi
+      sleep 2
+    done
+    if [ "$upd" != "yes" ]; then echo "  [FAIL] 更新する(無料) not found: $SLUG"; return 1; fi
     sleep 6
   elif [ "$(_has_btn '有料エリア設定')" = "yes" ]; then
     # 有料記事フロー: 有料エリア設定→ラインは動かさず(既存境界保持)→更新する
