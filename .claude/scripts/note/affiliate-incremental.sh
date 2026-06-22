@@ -31,6 +31,49 @@ BU_open(){ _suppress_unload; BU open "$1"; }
 # 互換: バッチドライバが呼ぶスタブ(実体の抑止は BU_open 内の _suppress_unload が担う)。
 _install_dialog_autoaccept(){ echo "via _suppress_unload (eval, per-navigation)"; }
 
+# バナー画像を「ネイティブのファイル選択ダイアログを開かずに」アップロードする(★堅牢化 2026-06-23)。
+# 原因: 「画像」ボタンのクリックが input.click() を呼び OS のファイル選択ダイアログを開く。これは
+#   ページ JS では抑止できず、残存すると次記事の自動化を完全にブロックしていた(ユーザー報告のジャム)。
+# 対策: CDP Page.setInterceptFileChooserDialog(enabled=true) でファイル選択をインターセプト
+#   → 「画像」をクリックしても OS ピッカーは開かず Page.fileChooserOpened が発火 → DOM.setFileInputFiles
+#   で backendNodeId にファイルを直接セット。全工程を1つの python 呼び出し内で完結させる。
+# 前提: 事前に +menu を開いて「画像」ボタンが可視であること。
+_upload_banner_cdp(){
+  BU python "
+import asyncio
+PNG='$AFF_PNG'
+async def _find_input(cc, sid):
+    doc = await cc.send.DOM.getDocument(params={'depth': -1, 'pierce': True}, session_id=sid)
+    root = doc['root']['nodeId']
+    res = await cc.send.DOM.querySelector(params={'nodeId': root, 'selector': 'input#note-editor-image-upload-input, input[id*=image-upload], input[type=file]'}, session_id=sid)
+    return res.get('nodeId') or 0
+async def _up():
+    cdp = await browser._session.get_or_create_cdp_session(target_id=None, focus=False)
+    cc, sid = cdp.cdp_client, cdp.session_id
+    await cc.send.Page.enable(session_id=sid)
+    await cc.send.DOM.enable(session_id=sid)
+    # ネイティブピッカーを開かせない保険(画像クリックが走っても OS ダイアログは出ない)
+    try: await cc.send.Page.setInterceptFileChooserDialog(params={'enabled': True}, session_id=sid)
+    except Exception: pass
+    # 方式A: 隠しファイル入力を直接探して setFileInputFiles(クリック不要=チューザ自体が出ない)
+    nid = await _find_input(cc, sid)
+    if not nid:
+        # 方式B: 入力が未生成なら「画像」をクリックして生成→再探索(ピッカーはインターセプト済)
+        await cc.send.Runtime.evaluate(params={'expression': \"(function(){var b=[].slice.call(document.querySelectorAll('button,[role=button],span,div')).find(function(x){return x.offsetParent&&x.textContent&&x.textContent.trim()==='画像'});if(b){b.click();return 1}return 0})()\", 'returnByValue': True}, session_id=sid)
+        await asyncio.sleep(1.5)
+        nid = await _find_input(cc, sid)
+    if not nid:
+        try: await cc.send.Page.setInterceptFileChooserDialog(params={'enabled': False}, session_id=sid)
+        except Exception: pass
+        return 'no-input'
+    await cc.send.DOM.setFileInputFiles(params={'files': [PNG], 'nodeId': nid}, session_id=sid)
+    try: await cc.send.Page.setInterceptFileChooserDialog(params={'enabled': False}, session_id=sid)
+    except Exception: pass
+    return 'uploaded'
+print(browser._run(_up()))
+" 2>&1 | grep -oiE "uploaded|no-input|Error" | head -1
+}
+
 # アフィリエイトPR文（\n\n で段落分離・💡/▶ 装飾・bold記法は付けない）
 read -r -d '' AFF_TEXT << 'TXT'
 💡 この記事を書いた私から、Claude Code 学習でひとつだけご紹介させてください（PR）
@@ -62,12 +105,17 @@ _position_before_anchor(){
 
 insert_affiliate(){
   local NOTEID="$1" SLUG="$2"
-  BU_open "https://editor.note.com/notes/$NOTEID/edit" >/dev/null 2>&1; sleep 10
-  # contenteditable が描画されるまで最大30秒待つ（ページ再読み込み後は遅い）
+  local EDURL="https://editor.note.com/notes/$NOTEID/edit"
+  # contenteditable が描画されるまで待つ。daemon 再起動直後は editor.note.com が login へ
+  # リダイレクトすることがある(redirectPath 経由で戻る)ので、login に居たら再オープンする。
   local loaded=no
-  for i in 1 2 3 4 5 6; do
+  BU_open "$EDURL" >/dev/null 2>&1; sleep 8
+  for i in 1 2 3 4 5 6 7 8; do
     BU state > /tmp/ns.txt 2>&1
     if grep -qE "contenteditable=true role=textbox" /tmp/ns.txt; then loaded=yes; break; fi
+    # login にリダイレクトされていたら再オープン(セッションは有効なので redirectPath で戻る)
+    local cur=$(BU eval "window.location.href" 2>&1 | tail -1)
+    if echo "$cur" | grep -q "/login"; then BU open "$EDURL" >/dev/null 2>&1; fi
     sleep 5
   done
   if [ "$loaded" != "yes" ]; then echo "  [FAIL] editor not loaded: $SLUG"; return 1; fi
@@ -96,12 +144,10 @@ insert_affiliate(){
   local MENU=$(grep -oE "\[[0-9]+\]<button aria-label=メニューを開く" /tmp/ns.txt | grep -oE "[0-9]+" | head -1)
   if [ -z "$MENU" ]; then echo "  [WARN] +menu not found for banner: $SLUG"; return 3; fi
   BU click "$MENU" >/dev/null 2>&1; sleep 1
-  BU state > /tmp/ns.txt 2>&1
-  local IB=$(awk '/^\t*\*?\[[0-9]+\]<button \/>/{i=$0} /^\t*画像\s*$/{print i; exit}' /tmp/ns.txt | grep -oE "[0-9]+" | head -1)
-  BU click "$IB" >/dev/null 2>&1; sleep 1.5
-  BU state > /tmp/ns.txt 2>&1
-  local UP=$(grep -oE "\[[0-9]+\]<input id=note-editor-image-upload-input" /tmp/ns.txt | grep -oE "[0-9]+" | head -1)
-  BU upload "$UP" "$AFF_PNG" 2>&1 | grep -iE "uploaded|error" | sed 's/^/  /'
+  # 「画像」クリック→OSファイル選択を CDP でインターセプトしてピッカーを開かずにアップロード
+  local UPRES=$(_upload_banner_cdp)
+  echo "  [UPLOAD] $SLUG: $UPRES"
+  if [ "$UPRES" != "uploaded" ]; then echo "  [WARN] banner upload failed ($UPRES): $SLUG"; fi
   sleep 5
   # リンク設定: バナーfigureを選択→ツールバー aria-label=リンク→textarea(placeholder=https://)→「適用」
   # (実機確認2026-06-22: 画像選択時ツールバーは aria-label=リンク。"リンクを設定"はテキスト選択時の別UI)
