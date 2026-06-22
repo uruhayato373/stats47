@@ -7,7 +7,8 @@
  * ## 責務
  * 1. **データ取得**: R2 snapshot からランキング定義（`rankingItem`）と統計値（`rankingValues`）を取得する。
  * 2. **SEO**: 動的メタデータ（タイトル・description）と構造化データ（JSON-LD）を生成する。
- * 3. **SSG + ISR**: `generateStaticParams` で全 rankingKey を事前生成し、24時間 ISR で再検証する。
+ * 3. **オンデマンド ISR**: `generateStaticParams` を持たず `ƒ`（オンデマンド）で描画し、
+ *    ランタイムに R2 を読んで 24時間 ISR キャッシュする（build 時 R2 不可で notFound 固着を回避）。
  *    年度切替はクライアント側で Server Action を呼び出し、ページ遷移なしで更新する。
  *
  * ## Composition Pattern
@@ -33,15 +34,21 @@ import {
   RankingPageClientShell,
   getRankingPageMetadata,
   RankingPageHeadAssets,
-  getRankingStaticParams,
   loadRankingPageModel,
 } from "@/features/ranking/server";
 
-/** 24時間 ISR */
+/**
+ * オンデマンド ISR（24時間）。
+ *
+ * generateStaticParams は付けない。付けると全 rankingKey が `●` SSG 化され、
+ * ビルド時に R2 (`app/ranking/<key>/item.json`) を読めず（readRankingItemFromR2 が
+ * build 時は ok(null) を返す）notFound として prerender される。この OpenNext 構成では
+ * ISR 再生成が効かず「ランキングが見つかりません」が永久固着する（2026-06-22 障害）。
+ * generateStaticParams なし = `ƒ`（オンデマンド）でランタイムに R2 を読んで描画し、
+ * 初回描画結果を ISR キャッシュする（category / areas/[areaCode]/[themeSlug] と同方式）。
+ * 詳細: .claude/rules/nextjs-ssg-preservation.md
+ */
 export const revalidate = 86400;
-
-/** ビルド時に全 rankingKey を事前生成（DB利用不可時はISRに委ねる） */
-export const generateStaticParams = getRankingStaticParams;
 
 /** ページコンポーネントの Props 型 */
 interface PageProps {

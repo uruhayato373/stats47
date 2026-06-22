@@ -90,19 +90,67 @@ dynamic な部分を別の child layout に切り出し、影響範囲を route 
 - [ ] SSG ページ（`generateStaticParams` 持ち page）の挙動を `next build` で確認したか？
 - [ ] Cloudflare Pages デプロイ前にローカル `next build` が `○ Static` として該当ページを出しているか確認したか？
 
+## 失敗事例: R2 依存ページに generateStaticParams を付けると notFound が永久固着 (2026-06-22)
+
+**R2 snapshot を読んで描画する動的 route に `generateStaticParams` を付けてはならない。** 付けると
+そのページは `● (SSG)` として **ビルド時に prerender** されるが、`next build` 時点では R2 を読めない
+(Worker binding が無い・S3 creds も公開 URL も build env に渡らない)。R2 read が null/throw に落ちると
+ページは **notFound として prerender** され、**この OpenNext 構成では ISR 再生成が効かない**ため
+(`x-nextjs-stale-time: 4294967294` = 実質無限)、再デプロイまで「〜が見つかりません」が**永久配信**される。
+
+### 症状 (本番で確認)
+
+- `/ranking/<key>` 全件が「ランキングが見つかりません」(HTTP 200・タイトルだけ fallback)
+- `/areas/<code>` が「地域の特徴が見つかりません」、`/areas/<code>/cities/<city>` が「市区町村が見つかりません」
+- レスポンスヘッダ: `x-nextjs-prerender: 1` / `x-nextjs-cache: STALE` / `x-nextjs-stale-time: 4294967294`
+- 一方 `/` (force-dynamic)・`/category/<key>`・`/areas/<code>/<themeSlug>` (generateStaticParams 無し=`ƒ`) は正常
+  → **ランタイムの R2 binding は正常**。問題は「ビルド時に焼かれた notFound が固着」しているページに限定
+
+### 原因の連鎖
+
+1. `generateStaticParams` が静的キー列 (`KNOWN_RANKING_KEYS` / 47県 / `PHASE_1_SSG_CITIES`) を返す → 全件 `● SSG`
+2. ビルド時のページ描画で R2 read (`readRankingItemFromR2` 等) が `ok(null)` を返す
+   (`isNextProductionBuild()` ガード or 空 miniflare R2) → `notFound()` で prerender
+3. ISR が効かないため、その notFound prerender が再デプロイまで配信され続ける
+
+### 正しいパターン (R2 依存の動的 route)
+
+**`generateStaticParams` を付けず `revalidate` だけ置く** → `ƒ`(オンデマンド ISR)。ランタイムに R2 を
+読んで初回描画 → 結果を ISR キャッシュ。`category` / `areas/[areaCode]/[themeSlug]` がこの方式で正常稼働。
+
+```typescript
+// ✅ R2 を読む動的 route: generateStaticParams を付けない
+export const revalidate = 86400;   // ƒ (オンデマンド) になり、ランタイムで R2 を読む
+// ❌ export const generateStaticParams = ...   // ● SSG 化 → build 時 R2 不可 → notFound 固着
+
+// 例外: blog/[slug]・survey/[surveyKey] は generateStaticParams を持つが、ビルド時に
+// R2 を読んで GOOD な内容を prerender できる (build ガードが無い) ため `● SSG` のままで正常。
+// 「build 時に実データを読めるか」で判定する。読めないなら ƒ にする。
+```
+
+> SSG にしたい (build 時に R2 を読んで静的化) 場合は、build env に R2 read 経路を与える必要があるが、
+> 全件 (例: ranking 2575 件) を build で読むと generateStaticParams が肥大化し build が重くなる (不採用)。
+> R2 依存ページは原則 `ƒ` オンデマンド ISR を採用する。
+
 ## 検証コマンド
 
 ```bash
 # ローカルで SSG / Dynamic 区分を確認
 cd apps/web && npm run build 2>&1 | grep -E "Route|○|ƒ|Static|Dynamic" | head -50
 
-# ranking/[rankingKey] が ○ Static (SSG) のままか確認
-# ƒ Dynamic に変わっていたら本ルール違反
+# R2 依存ページ (ranking/[rankingKey]・areas/[areaCode]・areas/[areaCode]/cities/[cityCode]) は
+# ƒ (Dynamic) であること。● (SSG) になっていたら generateStaticParams 混入 → notFound 固着の再発。
+#
+# 本番でデプロイ後に notFound 固着が無いか実測:
+curl -s -A "Mozilla/5.0 (compatible; Googlebot/2.1)" https://stats47.jp/ranking/annual-sunshine-duration \
+  | grep -o '<title>[^<]*</title>'   # 「ランキングが見つかりません」なら固着
 ```
 
-`next build` 出力で `○ (Static)` が `ƒ (Dynamic)` になっていれば、cookies()/headers() の流入経路が混入している。
+`next build` で R2 依存ページが `● (Static)` になっていれば、generateStaticParams の混入 = notFound 固着の再発。
+(逆に cookies()/headers() の混入は静的コンテンツページを `ƒ` 化する別事象 — 上の cookies ルールを参照)
 
 ## 関連
 
 - 失敗 commit: `ebad87c2 fix: revert EXP-004 layout async cookies() — ranking pages 500 fix` (2026-05-10)
-- auto memory: `feedback_nextjs_ssg_cookies.md`
+- 失敗事例 (本ファイル §generateStaticParams 固着): 2026-06-22 — ranking 全件 + areas/cities が notFound 固着
+- 関連 memory: `feedback_nextjs_ssg_cookies.md` / `feedback_cloudflare_workers_env_r2_skip.md` / `feedback_home_pure_ssg_r2_empty.md`
