@@ -149,23 +149,38 @@ curl -s -A "Mozilla/5.0 (compatible; Googlebot/2.1)" https://stats47.jp/ranking/
 `next build` で R2 依存ページが `● (Static)` になっていれば、generateStaticParams の混入 = notFound 固着の再発。
 (逆に cookies()/headers() の混入は静的コンテンツページを `ƒ` 化する別事象 — 上の cookies ルールを参照)
 
-### 多層検知 (デプロイ前 / デプロイ後)
+### 多層の機械検知 (3 層)
 
 「全ページを叩く」必要はない。障害は **per-route-template** で起きる (ある route の全ページが同時に死ぬ) ため、
-**route ごとに代表 1 件**を叩けば全インシデントを捕捉できる。notFound は HTTP **200** を返すので
+**route ごとに代表 1 件**で全インシデントを捕捉できる。notFound は HTTP **200** を返すので
 **status ではなく `<title>` の content** を見ること (status だけ見る warm-cache はすり抜けた)。
 
-| 層 | タイミング | ツール | 捕捉 |
+| 層 | タイミング | ツール | 性質 |
 |---|---|---|---|
-| 静的ガード (根本原因) | **PR / pre-commit (build 前)** | `node .claude/scripts/lib/check-r2-route-ssg.cjs` | R2 依存 route への generateStaticParams 再混入 |
-| スモークテスト (症状) | **deploy 後 (workflow gate)** | `bash .github/scripts/smoke-test-routes.sh [BASE_URL]` | 任意 route の notFound 固着 (200 だが「〜が見つかりません」) |
+| ① 静的ガード | PR / pre-commit (**build 前**) | `node .claude/scripts/lib/check-r2-route-ssg.cjs` | 既知 R2 route への generateStaticParams 再混入。env 非依存・即時。route リストは手動保守 |
+| ② **prerender scan (主)** | **deploy 前 (build 後)** | `bash .github/scripts/check-prerender-notfound.sh apps/web` | **最も汎用的・精密**。prerender HTML の `<title>` を直接走査。原因/route 非依存・新 route 自動カバー・誤検知ゼロ |
+| ③ スモークテスト | deploy 後 (workflow gate) | `bash .github/scripts/smoke-test-routes.sh [BASE_URL]` | 本番の live content を route 代表 1 件ずつ検査。runtime 障害も拾う |
 
-- 静的ガードは `apps/web/scripts/pre-commit-checks.sh` §2.1 に配線済。CI でも実行可。
-- スモークテストは `deploy-workers.yml` の warm-cache 後に gate として配線済 (失敗で workflow が赤くなる)。
-  preview URL を渡せばデプロイ前検証にも使える: `bash .github/scripts/smoke-test-routes.sh https://<preview>`
-- **ローカル build は再現しない**点に注意: `apps/web/.env.development` に `R2_PUBLIC_FETCH_URL` があり
-  build 時に R2 を読めて GOOD prerender になる。バグは **CI build (R2 不可)** でのみ顕在化する。
-  → ローカルの `next build` 出力 grep では検知できない。静的ガード (env 非依存) が最も確実。
+- **② が本命の機械チェック**。`deploy-workers.yml` の build 後・deploy 前に gate 配線済 → notFound prerender が
+  あれば deploy をブロック (broken 版を本番に出さない)。実証: 3472 prerender を走査し壊れた 52 件 (areas 47 +
+  ranking 5) だけ検知、blog/survey/正常 ranking は素通り (誤検知ゼロ)。
+- ① は build 不要で速いが route を手動保守。③ は deploy 後だが runtime 障害 (例: areaType 不一致) も拾える。
+- preview URL があれば ③ をデプロイ前にも使える: `bash .github/scripts/smoke-test-routes.sh https://<preview>`
+
+### なぜ ESLint (per-file lint) では精密に弾けないか
+
+「`generateStaticParams` + R2 reader import」を ESLint で弾く案は **誤検知する**。`blog/[slug]` `survey/[surveyKey]`
+も同じ表面パターン (generateStaticParams + R2 読み + `● SSG`) を持つが、**build 時に R2 を読めて GOOD title で
+prerender されるため安全**。安全/危険の差は「build 時 render が notFound を返すか」という**意味的差**で、
+per-file の静的解析では見えない。→ **ビルド産物の `<title>` を観測する ② が唯一精密**(GOOD title は素通り、
+notFound title だけ弾く)。lint で early feedback が欲しい範囲は ① (既知 route の手動リスト) で補う。
+
+### ローカル build での再現性
+
+- `areas/[areaCode]` 系は **getAreaProfileAction が build 時 null を返す**ため、ローカル build でも notFound
+  prerender される → ② はローカル `next build` 出力でも検知できる。
+- `ranking/[rankingKey]` 系は `apps/web/.env.development` の `R2_PUBLIC_FETCH_URL` で**ローカルは R2 を読めて
+  GOOD prerender** になり再現しない。**CI build (R2 不可)** でのみ全件 notFound 化する → ② を CI で走らせるのが要。
 
 ## 関連
 

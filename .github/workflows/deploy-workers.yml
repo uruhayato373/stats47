@@ -153,6 +153,14 @@ jobs:
 
           echo "✅ Build verification passed"
 
+      # デプロイ前ゲート: prerender された SSG ページの <title> を走査し、notFound 固着を deploy 前に弾く。
+      # 2026-06-22 障害 (ranking/areas/cities 全件 notFound 固着) の最も汎用的・精密な機械検知。
+      # CI build は R2 不可なので、generateStaticParams を持つ R2 依存 route が notFound prerender 化 →
+      # ここで検出して deploy をブロックする (broken 版を本番に出さない)。誤検知ゼロ (good title は素通り)。
+      # 正典: .claude/rules/nextjs-ssg-preservation.md §generateStaticParams 固着
+      - name: 🛡️ Pre-deploy gate — prerender notFound scan
+        run: bash .github/scripts/check-prerender-notfound.sh apps/web
+
       - name: 🔐 Set Secrets for Production
         working-directory: apps/web
         env:
