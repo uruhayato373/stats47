@@ -1,5 +1,6 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@stats47/components/atoms/ui/card";
 import { Database, ExternalLink } from "lucide-react";
+
+import { SurfaceCard } from "@/components/surface";
 
 /**
  * 地図データの出典情報（固定値）
@@ -35,12 +36,12 @@ export function RankingSourceCard({
   source,
 }: RankingSourceCardProps) {
   return (
-    <Card className="w-full mt-8 bg-card">
-      <CardHeader>
+    <SurfaceCard className="mt-8 w-full p-0">
+      <div className="flex items-center gap-2 border-b border-border px-4 py-4">
         <Database className="h-4 w-4 text-muted-foreground" />
-        <CardTitle>出典・データソース</CardTitle>
-      </CardHeader>
-      <CardContent className="p-4">
+        <h3 className="text-base font-semibold text-foreground">出典・データソース</h3>
+      </div>
+      <div className="p-4">
         {/* データ提供元 */}
         <div className="flex flex-col sm:flex-row sm:items-center gap-2 text-sm">
           <span className="text-muted-foreground min-w-fit">データ提供元:</span>
@@ -68,7 +69,7 @@ export function RankingSourceCard({
             <ExternalLink className="h-3 w-3" />
           </a>
         </div>
-      </CardContent>
-    </Card>
+      </div>
+    </SurfaceCard>
   );
 }

@@ -4,7 +4,6 @@ import "leaflet/dist/leaflet.css";
 
 import { useEffect, useMemo } from "react";
 
-import { TILE_OPTIONS_LIGHT } from "@stats47/visualization/leaflet/constants/tile-providers";
 import {
   CircleMarker,
   GeoJSON,
@@ -13,15 +12,14 @@ import {
   useMap,
 } from "react-leaflet";
 
+import { LEAFLET_MAP_COLORS } from "@/features/map-visualization/utils/map-palette";
+import { useThemedLeafletTile } from "@/features/map-visualization/utils/use-themed-leaflet-tile";
+
+import { useTheme } from "@/hooks/useTheme";
+
 import type { DepopulationMedicalPrefDetail } from "../lib/types";
 import type { GeoJsonObject } from "geojson";
 import type { LatLngBoundsExpression } from "leaflet";
-
-
-
-const COLOR_INSIDE = "#dc2626"; // 過疎地域内 = 赤
-const COLOR_OUTSIDE = "#94a3b8"; // 過疎地域外 = 灰
-const COLOR_AREA = "#f97316"; // 過疎ポリゴン = オレンジ
 
 interface Props {
   detail: DepopulationMedicalPrefDetail;
@@ -41,7 +39,9 @@ function FitBounds({ bounds }: { bounds: LatLngBoundsExpression | null }) {
  * 医療機関は過疎地域内=赤 / 外=灰 で色分け。25,000 点規模に備え preferCanvas。
  */
 export function PrefectureOverlayMap({ detail }: Props) {
-  const tile = TILE_OPTIONS_LIGHT[0];
+  const { theme } = useTheme();
+  const { currentTile } = useThemedLeafletTile(theme);
+  const colors = LEAFLET_MAP_COLORS.depopulationMedical;
 
   // facilities の lat/lon から fitBounds 用の範囲を算出
   const bounds: LatLngBoundsExpression | null = useMemo(() => {
@@ -72,15 +72,15 @@ export function PrefectureOverlayMap({ detail }: Props) {
       scrollWheelZoom
       className="h-[420px] lg:h-[520px] rounded-md overflow-hidden"
     >
-      <TileLayer url={tile.url} attribution={tile.attribution} />
+      <TileLayer url={currentTile.url} attribution={currentTile.attribution} />
 
       {/* 過疎地域ポリゴン */}
       <GeoJSON
         data={detail.depopulationAreas as unknown as GeoJsonObject}
         style={{
-          color: COLOR_AREA,
+          color: colors.areaPolygon,
           weight: 1,
-          fillColor: COLOR_AREA,
+          fillColor: colors.areaPolygon,
           fillOpacity: 0.18,
         }}
       />
@@ -92,8 +92,8 @@ export function PrefectureOverlayMap({ detail }: Props) {
           center={[f.lat, f.lon]}
           radius={3}
           pathOptions={{
-            color: f.inDepopulationArea ? COLOR_INSIDE : COLOR_OUTSIDE,
-            fillColor: f.inDepopulationArea ? COLOR_INSIDE : COLOR_OUTSIDE,
+            color: f.inDepopulationArea ? colors.insideArea : colors.outsideArea,
+            fillColor: f.inDepopulationArea ? colors.insideArea : colors.outsideArea,
             fillOpacity: f.inDepopulationArea ? 0.9 : 0.5,
             weight: 1,
           }}

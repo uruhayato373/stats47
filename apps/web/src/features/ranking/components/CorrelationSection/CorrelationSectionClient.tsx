@@ -2,12 +2,7 @@
 
 import Link from "next/link";
 
-import {
-    Card,
-    CardContent,
-    CardHeader,
-    CardTitle,
-} from "@stats47/components/atoms/ui/card";
+import { SurfaceCard } from "@/components/surface";
 
 interface CorrelatedItem {
     rankingKey: string;
@@ -48,13 +43,13 @@ export function CorrelationSectionClient({
     correlatedItems,
 }: CorrelationSectionClientProps) {
     return (
-        <Card>
-            <CardHeader className="py-3 px-4">
-                <CardTitle className="text-sm font-medium text-muted-foreground">
+        <SurfaceCard className="p-0">
+            <div className="border-b border-border px-4 py-3">
+                <h3 className="text-sm font-medium text-muted-foreground">
                     相関が高い指標
-                </CardTitle>
-            </CardHeader>
-            <CardContent className="px-4 pb-4 pt-2">
+                </h3>
+            </div>
+            <div className="px-4 pb-4 pt-2">
                 <nav className="flex flex-col">
                     {correlatedItems.map((item) => (
                         <Link
@@ -69,7 +64,7 @@ export function CorrelationSectionClient({
                         </Link>
                     ))}
                 </nav>
-            </CardContent>
-        </Card>
+            </div>
+        </SurfaceCard>
     );
 }

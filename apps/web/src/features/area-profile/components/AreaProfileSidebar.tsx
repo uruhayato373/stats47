@@ -1,18 +1,14 @@
 import Link from "next/link";
 
 import {
-    Card,
-    CardContent,
-    CardHeader,
-    CardTitle,
-} from "@stats47/components/atoms/ui/card";
-import {
     Tooltip,
     TooltipContent,
     TooltipProvider,
     TooltipTrigger,
 } from "@stats47/components/atoms/ui/tooltip";
 import { TrendingDown, TrendingUp } from "lucide-react";
+
+import { SurfaceCard } from "@/components/surface";
 
 import type { StrengthWeaknessItem } from "../types";
 
@@ -33,14 +29,14 @@ function RankingCard({
     if (items.length === 0) return null;
 
     return (
-        <Card className="border border-border shadow-sm overflow-hidden">
-            <CardHeader className="py-3 px-3">
-                <CardTitle className={`text-base flex items-center gap-1.5 ${titleClassName}`}>
+        <SurfaceCard className="overflow-hidden p-0">
+            <div className="border-b border-border px-3 py-3">
+                <h3 className={`text-base font-semibold flex items-center gap-1.5 ${titleClassName}`}>
                     {icon}
                     {title}（{items.length}件）
-                </CardTitle>
-            </CardHeader>
-            <CardContent className="px-3 pb-3 pt-3">
+                </h3>
+            </div>
+            <div className="px-3 pb-3 pt-3">
                 <TooltipProvider delayDuration={300}>
                     <nav className="flex flex-col gap-0.5 max-h-[40vh] overflow-y-auto">
                         {items.map((item) => (
@@ -74,8 +70,8 @@ function RankingCard({
                         ))}
                     </nav>
                 </TooltipProvider>
-            </CardContent>
-        </Card>
+            </div>
+        </SurfaceCard>
     );
 }
 
@@ -102,4 +98,3 @@ export function AreaProfileSidebar({ strengths, weaknesses }: AreaProfileSidebar
         </div>
     );
 }
-

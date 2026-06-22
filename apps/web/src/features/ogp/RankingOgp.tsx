@@ -1,4 +1,4 @@
-import { BRAND, FONT } from './brand';
+import { BRAND, FONT, OGP_MAP, OGP_SHADOW } from './brand';
 import { JapanMapSvg } from './JapanMapSvg';
 
 export interface RankingOgpData {
@@ -42,10 +42,9 @@ export function RankingOgp({ data }: Props) {
         <JapanMapSvg
           width={1000}
           height={700}
-          baseFill="#CBD5E1"
+          baseFill={OGP_MAP.baseFill}
           valueFn={(code) => ((code * 11) % 47) / 47}
-          palette={['#EFF6FF', '#DBEAFE', '#BFDBFE', '#93C5FD', '#60A5FA', '#3B82F6', '#1D4ED8']}
-          strokeColor="#fff"
+          strokeColor={OGP_MAP.stroke}
           strokeWidth={0.5}
         />
       </div>
@@ -106,9 +105,9 @@ export function RankingOgp({ data }: Props) {
         {/* TOP3 */}
         <div
           style={{
-            background: '#fff',
+            background: BRAND.white,
             padding: '18px 22px',
-            boxShadow: '0 10px 32px rgba(15,23,42,0.10)',
+            boxShadow: OGP_SHADOW.raisedCard,
             display: 'flex',
             flexDirection: 'column',
           }}
@@ -173,9 +172,9 @@ export function RankingOgp({ data }: Props) {
         {data.last && (
           <div
             style={{
-              background: '#fff',
+              background: BRAND.white,
               padding: '14px 22px',
-              boxShadow: '0 6px 20px rgba(15,23,42,0.06)',
+              boxShadow: OGP_SHADOW.subtleCard,
               display: 'flex',
               flexDirection: 'column',
             }}
@@ -243,7 +242,7 @@ export function RankingOgp({ data }: Props) {
               style={{
                 fontWeight: 900,
                 fontSize: 14,
-                color: '#fff',
+                color: BRAND.white,
                 background: BRAND.primary,
                 padding: '1px 5px',
                 fontFamily: FONT.sansJP,

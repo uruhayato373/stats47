@@ -4,13 +4,9 @@ import { useState } from "react";
 
 import Link from "next/link";
 
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@stats47/components/atoms/ui/card";
 import { FileText } from "lucide-react";
+
+import { SurfaceCard } from "@/components/surface";
 
 import { useBreakpoint } from "@/hooks/useBreakpoint";
 
@@ -37,14 +33,14 @@ export function SurveyCard({ surveys, currentSurveyId }: SurveyCardProps) {
   const hasMore = !isDesktop && surveys.length > MAX_COLLAPSED;
 
   return (
-    <Card>
-      <CardHeader className="py-3 px-4">
+    <SurfaceCard className="p-0">
+      <div className="flex items-center gap-2 border-b border-border px-4 py-3">
         <FileText className="h-4 w-4 text-muted-foreground" />
-        <CardTitle className="text-sm font-medium text-muted-foreground">
+        <h3 className="text-sm font-medium text-muted-foreground">
           調査から探す
-        </CardTitle>
-      </CardHeader>
-      <CardContent className="px-4 pb-4 pt-3">
+        </h3>
+      </div>
+      <div className="px-4 pb-4 pt-3">
         <nav className="flex flex-col gap-0.5">
           {displaySurveys.map((survey) => (
             <Link
@@ -71,7 +67,7 @@ export function SurveyCard({ surveys, currentSurveyId }: SurveyCardProps) {
               : `もっと見る（残り${surveys.length - MAX_COLLAPSED}件）`}
           </button>
         )}
-      </CardContent>
-    </Card>
+      </div>
+    </SurfaceCard>
   );
 }

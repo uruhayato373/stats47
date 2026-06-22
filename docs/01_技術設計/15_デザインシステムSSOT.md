@@ -45,12 +45,14 @@ stats47 の UI は、統計データを長時間読むための道具である�
 - ページ見出し: `PageHeader`
 - 記事・規約など読むページ: `PageShell variant="reading"`
 - TOC / 関連記事 / 広告などの補助列: `leftRail` / `rightRail`
+- ブログ詳細のように右 rail を lg+ で出すページ: `PageShell rightRailBreakpoint="lg"`。TOC は右 rail の先頭、lg 未満は記事冒頭に置く。
 - ページ内セクション: `section` + 短い `h2` + 必要な説明文
 
 ### 禁止
 
 - `page.tsx` 内で `container mx-auto` / `max-w-[1700px]` / 独自 2-3 カラム grid を直書きする。
-- ページごとに右レール幅を変える。
+- `leftRail` と `rightRail` を同時利用して 3 列レイアウトを作る。基本は本文 + 片側 rail の 2 列。
+- ページごとに右レール幅を変える。表示 breakpoint が違う場合も `PageShell` の props で表現する。
 - PC 常設左サイドバーを復活させる。
 - ページ上部に暗色グラデ hero や KPI タイルを安易に追加する。
 
@@ -91,7 +93,7 @@ stats47 の UI は、統計データを長時間読むための道具である�
 ### チャート色
 
 - 汎用チャートは `--chart-1` から `--chart-5`、または共有 chart constants を使う。
-- 男女、増減、危険/改善など意味が固定される色は、共有定義に寄せる。
+- 男女、増減、危険/改善、歳入/歳出、流入/流出など意味が固定される色は、`ChartPalette.ts` の用途別 semantic color に寄せる。
 - raw hex を使う場合は、チャート・地図・ブランドロゴなど、semantic token では意味が曖昧になる箇所に限定する。
 
 ### 禁止
@@ -109,21 +111,56 @@ stats47 の UI は、統計データを長時間読むための道具である�
 - 基本カード: `SurfaceCard`
 - ページ内の大きな情報枠: `SurfaceSection`
 - クリック可能な一覧カード: `SurfaceLinkCard`
+- `TrackedAffiliateLink` など Next `Link` 以外のクリック可能カード: `getSurfaceCardClassName({ interactive: true })`
+- rail / sidebar 内の見出し付きカード: `RailCard`
+- rail / sidebar 内の縦リンクリスト: `RailLinkList` / `RailLinkItem`
 - チャート・地図など可視化の外枠: `ChartPanel`
+- チャートの loading / empty / error 表示: `ChartLoading` / `ChartEmptyState` / `ChartErrorState` / `ChartLoadingCard` (`apps/web/src/components/charts/ChartState.tsx`)
+- チャートの出典・注記・関連リンク: `ChartFooter` (`apps/web/src/components/charts/ChartFooter.tsx`)
+- Web アプリ側のチャート色: `CHART_COLORS` / `getChartColor` / `getChartColors` / `FINANCE_CHART_COLORS` / `FLOW_CHART_COLORS` (`apps/web/src/components/charts/ChartPalette.ts`)
+- チャート凡例: `ChartLegend` (`apps/web/src/components/charts/ChartLegend.tsx`)
+- `@stats47/visualization` 内の D3 HTML 凡例: `D3ChartLegend` (`packages/visualization/src/d3/components/shared/D3ChartLegend.tsx`)
+- Leaflet タイル: `useThemedLeafletTile(theme)` (`apps/web/src/features/map-visualization/utils/use-themed-leaflet-tile.ts`)
+- 地図の semantic color: `LEAFLET_MAP_COLORS` / `getLeafletBorderColor` (`apps/web/src/features/map-visualization/utils/map-palette.ts`)
+- ranking map adapter: `rankingItemToMapConfig` / `filterMapDataPoints` (`apps/web/src/features/map-visualization/utils/ranking-map-adapters.ts`)
 - KPI ミニカード・指標表などの薄い用途別ラッパー: `ChartCard` / `KeyMetricsTableCard`。ただし外枠は `SurfaceCard` ベースにする。
-- 統計ダッシュボード既存資産: `DashboardCard` は deprecated。既存 stat-charts 内部では `LegacyDashboardCard` 名で隔離し、新規追加では使用しない。
+- 旧 `DashboardCard` / `LegacyDashboardCard` は削除済み。復活させず、通常チャート・地図は `ChartPanel`、KPI ミニカードは `ChartCard` を使う。
 - shadcn `Card` は低レベル primitive として扱い、アプリ feature からの直接利用は既存互換・特殊事情に限定する。
 - hover は `hover:shadow-md` まで。
 
 ### 禁止
 
 - `rounded-none border bg-card p-4 shadow-sm ...` を各ページで何度も直書きする。
+- sidebar / rail ごとに `SurfaceCard + border-b header + nav` を手組みする。
 - 地図専用・ブログ専用・ランキング専用など、外枠だけが違うカードコンポーネントを増やす。
 - `MapPanel` のような `ChartPanel` と責務が重なる可視化パネルを新設する。
-- `DashboardCard` を新規利用する。
+- `データがありません` / `読み込み中` / `チャートを表示できません` の空・読込・エラー状態を feature ごとに直書きする。
+- `--chart-*` token 配列や凡例のマーカー HTML を feature / chart component ごとに直書きする。Web アプリでは `ChartPalette` / `ChartLegend`、visualization package では `D3ChartLegend` を使う。
+- `TILE_OPTIONS_LIGHT[0]` など Leaflet タイルを feature component で直接固定する。
+- Leaflet 境界色、選択色、領域区分色を feature component ごとに raw hex で定義する。`map-palette.ts` に semantic name で追加する。
+- `DashboardCard` / `LegacyDashboardCard` を復活させる。
+- `LegacyChartFooter` を復活させる。
 - `shadow-lg` / `shadow-2xl` を通常カードに使う。
 - カード上端/左端の色付きバーで装飾する。
 - `CardContent` の `pt-0` を安易に使う。
+
+### 広告・PR の例外
+
+広告はブランド色や計測要件があるため、通常カードより例外を許す。ただし、例外は「広告であることの識別」「ブランド指定」「アフィリエイト計測」のために限定する。
+
+- PR 枠の外側は、ブランド背景やカテゴリ別背景を使ってよい。
+- 広告内のクリック可能な商品・テキストリンクは、可能な限り `getSurfaceCardClassName({ interactive: true })` で通常 surface と同じ枠線・shadow・hover に揃える。
+- `bg-white` は、ブランド CTA やロゴ可読性など明確な理由がある場合だけ残す。
+- 計測付きリンクを `SurfaceLinkCard` に無理に置き換えない。`TrackedAffiliateLink` に surface class helper を渡す。
+
+### OGP の例外
+
+OGP は SNS / search preview 向けの固定画像であり、通常 UI の light/dark theme token には追従しない。画像としての再現性、視認性、ブランド識別を優先する。
+
+- OGP の固定色、地図 palette、影、半透明 surface は `apps/web/src/features/ogp/brand.ts` に集約する。
+- OGP component 内で `#fff` / `#2563EB` / `rgba(...)` などを直接書かない。
+- OGP の色定義を通常 UI に持ち込まない。通常 UI は `ChartPalette` / `map-palette.ts` / theme token を使う。
+- `design-system:check` は `features/ogp/brand.ts` 以外の OGP raw color を検出する。
 
 ## Radius / Shadow
 
@@ -140,7 +177,7 @@ stats47 は 2026-06 以降、フラット方針。
 
 - 一覧、タグ、詳細の外側レイアウトは `PageShell` を使う。
 - 記事本文の可読幅は `variant="reading"` または記事用 content wrapper で制御する。
-- TOC、広告、関連記事は `leftRail` / `rightRail` に寄せる。
+- 詳細ページは本文 + 右 rail の 2 列に揃える。TOC、広告、関連記事は `rightRail` に寄せ、lg 未満では TOC を記事冒頭に置く。
 - 記事本文 typography は `.blog-article` または承認済み renderer に集約する。
 
 ### Ranking
@@ -173,6 +210,7 @@ UI 変更をするエージェントは、作業前にこの文書の該当節�
 
 ### 完了前チェック
 
+- `npm run design-system:check --workspace apps/web` が通るか。
 - `PageShell` / `PageHeader` を使うべき場所で使ったか。
 - `container mx-auto` / `max-w-[...]` を新規追加していないか。
 - `text-slate-*` / `bg-white` / raw hex を通常 UI に追加していないか。

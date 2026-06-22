@@ -1,12 +1,8 @@
 import Link from "next/link";
 
 import { fetchCities } from "@stats47/area";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@stats47/components/atoms/ui/card";
+
+import { SurfaceCard } from "@/components/surface";
 
 interface CitiesNavCardProps {
   areaCode: string;
@@ -32,16 +28,16 @@ export function CitiesNavCard({
   if (cities.length === 0) return null;
 
   return (
-    <Card>
-      <CardHeader className="px-4 py-3">
-        <CardTitle className="text-base">
+    <SurfaceCard className="p-0">
+      <div className="border-b border-border px-4 py-3">
+        <h3 className="text-base font-semibold">
           {areaName}の市区町村
           <span className="ml-2 text-xs font-normal text-muted-foreground">
             {cities.length} 件
           </span>
-        </CardTitle>
-      </CardHeader>
-      <CardContent className="px-4 pb-4">
+        </h3>
+      </div>
+      <div className="px-4 pb-4 pt-4">
         <nav
           className={`grid grid-cols-2 gap-x-2 gap-y-0.5 overflow-y-auto sm:grid-cols-3 md:grid-cols-4 ${maxHeightClassName}`}
         >
@@ -63,7 +59,7 @@ export function CitiesNavCard({
             );
           })}
         </nav>
-      </CardContent>
-    </Card>
+      </div>
+    </SurfaceCard>
   );
 }

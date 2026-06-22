@@ -2,8 +2,9 @@
 // 使い方: node .claude/scripts/note/prepare-article.cjs <slug>
 //   docs/31_note記事原稿/ から draft.md(優先)/note.md を解決し、frontmatter と本文を解析、
 //   /tmp/note-data-<slug>.json に { title, isPaid, priceJpy, segments, segmentsPaid,
-//   imgRefs(afterHeading付), urlCount, paidHead } を出力する。
+//   imgRefs(afterHeading付), affiliateBanners, urlCount, paidHead } を出力する。
 //   本文画像参照 ![..](./images/x.png) は除去し、imgRefs に「直前見出し」とともに控える（挿入位置決め用）。
+//   アフィリエイトバナープレースホルダー {{AFFILIATE_BANNER:X}} は affiliateBanners に控えて本文から除去。
 const fs = require("fs"), path = require("path");
 const slug = process.argv[2];
 const projectRoot = "/Users/minamidaisuke/stats47";
@@ -46,6 +47,22 @@ for (const l of raw.split("\n")) {
   const h = l.match(/^#{1,3}\s+(.+)/); if (h) lastH = h[1].trim();
   const im = l.match(/!\[.*?\]\(\.\/images\/([^)]+)\)/); if (im) imgRefs.push({ file: im[1], afterHeading: lastH });
 }
+// アフィリエイトバナープレースホルダー {{AFFILIATE_BANNER:X}} を抽出して除去
+const affiliateBanners = [];
+{
+  const bodyLines = body.split('\n');
+  const kept = [];
+  for (let i = 0; i < bodyLines.length; i++) {
+    const m = bodyLines[i].match(/^\{\{AFFILIATE_BANNER:([^}]+)\}\}$/);
+    if (m) {
+      const prevNonEmpty = kept.filter(l => l.trim()).slice(-1)[0] || '';
+      affiliateBanners.push({ id: m[1].trim(), anchor: prevNonEmpty.trim() });
+    } else {
+      kept.push(bodyLines[i]);
+    }
+  }
+  body = kept.join('\n');
+}
 body = body.replace(/<!--[\s\S]*?-->\n?/g, "").replace(/!\[.*?\]\(.*?\)\n?/g, "").replace(/^---$/gm, "");
 body = body.replace(/\n*^##\s*公開時にコピーするハッシュタグ[\s\S]*$/m, "").replace(/^#\s+.*\n+/, "").trim();
 let bodyPaid = "";
@@ -69,8 +86,9 @@ const segments = seg(body);
 const segmentsPaid = isPaid ? seg(bodyPaid) : [];
 const out = {
   slug, articleDir, articleFile, title, isPaid, priceJpy, segments, segmentsPaid, imgRefs,
+  affiliateBanners,
   urlCount: segments.filter((s) => s.type === "url").length,
   paidHead: isPaid && segmentsPaid[0] ? segmentsPaid[0].content.slice(0, 24) : "",
 };
 fs.writeFileSync("/tmp/note-data-" + slug + ".json", JSON.stringify(out, null, 2));
-console.log(JSON.stringify({ title: title.slice(0, 40), isPaid, priceJpy, segs: segments.length, urls: out.urlCount, imgs: imgRefs.map((r) => r.file), paidHead: out.paidHead, pipeTable: /\n\|.*\|.*\n\|[-: ]+\|/.test(body) }));
+console.log(JSON.stringify({ title: title.slice(0, 40), isPaid, priceJpy, segs: segments.length, urls: out.urlCount, imgs: imgRefs.map((r) => r.file), affiliates: affiliateBanners.map((a) => a.id), paidHead: out.paidHead, pipeTable: /\n\|.*\|.*\n\|[-: ]+\|/.test(body) }));

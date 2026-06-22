@@ -1,18 +1,19 @@
-import { Card, CardContent, CardHeader } from "@stats47/components/atoms/ui/card";
 import { Skeleton } from "@stats47/components/atoms/ui/skeleton";
+
+import { SurfaceCard } from "@/components/surface";
 
 export function RankingPageCardsSkeleton() {
   return (
     <div className="flex flex-col gap-6">
       {[...Array(2)].map((_, i) => (
-        <Card key={i}>
-          <CardHeader className="pb-2">
+        <SurfaceCard key={i} className="p-0">
+          <div className="border-b border-border px-4 py-3">
             <Skeleton className="h-5 w-1/3" />
-          </CardHeader>
-          <CardContent>
+          </div>
+          <div className="p-4">
             <Skeleton className="h-[250px] w-full rounded" />
-          </CardContent>
-        </Card>
+          </div>
+        </SurfaceCard>
       ))}
     </div>
   );

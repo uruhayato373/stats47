@@ -21,6 +21,8 @@ import {
 } from "@stats47/components/atoms/ui/tabs";
 import { Map as MapIcon, Table as TableIcon, BarChart3, MapPin } from "lucide-react";
 
+import { SurfaceLinkCard, getSurfaceCardClassName } from "@/components/surface";
+
 import { RankingYearSelector } from "@/features/ranking";
 
 import { useBreakpoint } from "@/hooks/useBreakpoint";
@@ -377,10 +379,10 @@ function IndicatorGrid({
               ? lookupArea(top1.areaCode)?.areaName
               : null;
             return (
-              <Link
+              <SurfaceLinkCard
                 key={key}
                 href={`/ranking/${key}`}
-                className="block p-3 rounded-lg border border-border hover:bg-muted/50 hover:shadow-md transition-all"
+                className="block p-3"
               >
                 <div className="text-sm font-medium mb-2 line-clamp-2">
                   {data.rankingItem.title}
@@ -393,7 +395,7 @@ function IndicatorGrid({
                     </span>
                   </div>
                 )}
-              </Link>
+              </SurfaceLinkCard>
             );
           })}
       </div>
@@ -412,7 +414,7 @@ function DeferredDetails({
 
   return (
     <details
-      className="rounded-md border border-border bg-card"
+      className={getSurfaceCardClassName({ className: "p-0" })}
       onToggle={(event) => {
         if (event.currentTarget.open) {
           setHasOpened(true);

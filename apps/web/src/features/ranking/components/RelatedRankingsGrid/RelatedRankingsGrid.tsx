@@ -1,13 +1,9 @@
 import Link from "next/link";
 
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@stats47/components/atoms/ui/card";
 import { isOk, type AreaType } from "@stats47/types";
 import { ArrowRight, ListOrdered } from "lucide-react";
+
+import { SurfaceCard, SurfaceLinkCard } from "@/components/surface";
 
 import { readRankingItemsByCategory } from "@/features/ranking/lib/cached-category-items";
 
@@ -49,11 +45,11 @@ export async function RelatedRankingsGrid({
   if (items.length === 0) return null;
 
   return (
-    <Card>
-      <CardHeader className="flex flex-row items-center justify-between gap-3 space-y-0 py-4 px-5">
+    <SurfaceCard className="p-0">
+      <div className="flex flex-row items-center justify-between gap-3 border-b border-border px-5 py-4">
         <div className="flex items-center gap-2">
           <ListOrdered className="h-4 w-4 text-muted-foreground" />
-          <CardTitle className="text-base">同カテゴリの関連ランキング</CardTitle>
+          <h3 className="text-base font-semibold text-foreground">同カテゴリの関連ランキング</h3>
         </div>
         {categoryKey && (
           <Link
@@ -64,8 +60,8 @@ export async function RelatedRankingsGrid({
             <ArrowRight className="h-3 w-3" />
           </Link>
         )}
-      </CardHeader>
-      <CardContent className="px-5 pb-5 pt-4">
+      </div>
+      <div className="px-5 pb-5 pt-4">
         <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
           {items.map((item) => {
             const title = item.subtitle
@@ -75,10 +71,10 @@ export async function RelatedRankingsGrid({
               .filter(Boolean)
               .join(" / ");
             return (
-              <Link
+              <SurfaceLinkCard
                 key={item.rankingKey}
                 href={`/ranking/${item.rankingKey}`}
-                className="group flex flex-col gap-1 rounded-md border border-border bg-card px-3 py-2.5 transition-colors hover:border-primary/40 hover:bg-accent/30"
+                className="group flex flex-col gap-1 px-3 py-2.5"
               >
                 <span className="line-clamp-2 text-sm font-medium leading-snug text-foreground group-hover:text-primary">
                   {title}
@@ -88,11 +84,11 @@ export async function RelatedRankingsGrid({
                     {subtitle}
                   </span>
                 )}
-              </Link>
+              </SurfaceLinkCard>
             );
           })}
         </div>
-      </CardContent>
-    </Card>
+      </div>
+    </SurfaceCard>
   );
 }

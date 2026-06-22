@@ -10,6 +10,8 @@ import {
   SelectValue,
 } from "@stats47/components/atoms/ui/select";
 
+import { ChartLegend } from "@/components/charts/ChartLegend";
+import { FINANCE_CHART_COLORS, getChartColors } from "@/components/charts/ChartPalette";
 import { HubSankey } from "@/components/charts/HubSankey";
 import { KeyMetricsTableCard } from "@/components/charts/KeyMetricsTableCard";
 import {
@@ -40,14 +42,12 @@ interface Props {
 
 const VALID_CODES = new Set(PREFECTURES.map((p) => p.code));
 const OKU = 1 / 100000; // 千円 → 億円
-const FUND_COLORS = [
-  "hsl(var(--chart-1))",
-  "hsl(var(--chart-2))",
-  "hsl(var(--chart-3))",
+const FUND_COLORS = getChartColors(3);
+const FUND_LEGEND_ITEMS = [
+  { label: "財政調整基金", color: FUND_COLORS[0] },
+  { label: "減債基金", color: FUND_COLORS[1] },
+  { label: "その他特定目的", color: FUND_COLORS[2] },
 ];
-const FINANCE_REVENUE_COLOR = "hsl(var(--chart-2))";
-const FINANCE_EXPENDITURE_COLOR = "hsl(var(--chart-4))";
-const FINANCE_SUBTEXT_COLOR = "hsl(var(--muted-foreground))";
 const PREF_ALL = "__pref__"; // 「県全体」を表すセンチネル
 
 function oku(thousandYen: number): string {
@@ -205,11 +205,7 @@ export function LocalFinanceDashboard({ cards, initialFinanceFlow }: Props) {
             chart={
               <div>
                 <MiniStackedBarChart points={fundStacks} colors={FUND_COLORS} />
-                <div className="mt-1 flex flex-wrap gap-x-3 gap-y-0.5 text-[10px] text-muted-foreground">
-                  <span className="flex items-center gap-1"><span className="inline-block h-2 w-2" style={{ background: FUND_COLORS[0] }} />財政調整基金</span>
-                  <span className="flex items-center gap-1"><span className="inline-block h-2 w-2" style={{ background: FUND_COLORS[1] }} />減債基金</span>
-                  <span className="flex items-center gap-1"><span className="inline-block h-2 w-2" style={{ background: FUND_COLORS[2] }} />その他特定目的</span>
-                </div>
+                <ChartLegend items={FUND_LEGEND_ITEMS} className="mt-1" />
               </div>
             }
           />
@@ -253,11 +249,11 @@ export function LocalFinanceDashboard({ cards, initialFinanceFlow }: Props) {
               subtitle="左: 歳入の財源 → 中央: 一般会計 → 右: 目的別歳出（幅=金額）"
               centerLabel="一般会計"
               centerSub={`歳入 ${oku(cityFlow.totals.revenue)} / 歳出 ${oku(cityFlow.totals.expenditure)}`}
-              centerSubColor={FINANCE_SUBTEXT_COLOR}
+              centerSubColor={FINANCE_CHART_COLORS.subtext}
               leftNodes={cityFlow.revenue}
               rightNodes={cityFlow.expenditure}
-              leftColor={FINANCE_REVENUE_COLOR}
-              rightColor={FINANCE_EXPENDITURE_COLOR}
+              leftColor={FINANCE_CHART_COLORS.revenue}
+              rightColor={FINANCE_CHART_COLORS.expenditure}
               formatValue={oku}
               footer={`出典: 地方財政状況調査 決算カード（${latestYear}年度）`}
               labelGutter={182}

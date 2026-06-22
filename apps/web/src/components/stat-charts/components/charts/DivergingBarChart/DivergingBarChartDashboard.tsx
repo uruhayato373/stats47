@@ -1,9 +1,11 @@
 import { logger } from "@stats47/logger";
 
+import { ChartFooter } from "@/components/charts/ChartFooter";
+import { ChartPanel } from "@/components/charts/ChartPanel";
+
 import { toStackedBarChartData } from "../../../adapters";
 import { fetchEstatData } from "../../../services";
 import { computeYAxisDomain } from "../../../utils/computeYAxisDomain";
-import { LegacyDashboardCard } from "../../shared/DashboardCard";
 import { ErrorDisplay } from "../../shared/ErrorDisplay";
 
 import { DivergingBarChartClient } from "./DivergingBarChartClient";
@@ -92,18 +94,19 @@ export const DivergingBarChartDashboard = async ({
     }
 
     return (
-      <LegacyDashboardCard
+      <ChartPanel
         title={title}
-        rankingLink={rankingLink}
         description={undefined}
-        source={sourceName ?? undefined}
-        sourceLink={sourceLink}
-        sourceDetail={unit}
-        annotation={annotation}
-        rankingLinks={rankingLinks}
-        loading={false}
-        error={null}
-        empty={false}
+        footer={
+          <ChartFooter
+            source={sourceName ?? undefined}
+            sourceLink={sourceLink}
+            sourceDetail={unit}
+            annotation={annotation}
+            rankingLink={rankingLink}
+            rankingLinks={rankingLinks}
+          />
+        }
       >
         <DivergingBarChartClient
           data={chartData.data}
@@ -129,7 +132,7 @@ export const DivergingBarChartDashboard = async ({
             negativeRateLabel,
           }}
         />
-      </LegacyDashboardCard>
+      </ChartPanel>
     );
   } catch (err) {
     logger.error(

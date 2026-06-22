@@ -6,6 +6,7 @@
     "dev": "turbo run dev",
     "dev:web": "turbo run dev --filter=web",
     "lint": "turbo run lint",
+    "design-system:check": "npm run design-system:check --workspace apps/web",
     "type-check": "NODE_OPTIONS=\"--max-old-space-size=4096\" turbo run type-check",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "knip": "knip",
@@ -46,6 +47,7 @@
   "packageManager": "npm@10.8.2",
   "dependencies": {
     "d3": "^7.9.0",
+    "d3-scale-chromatic": "^3.1.0",
     "http-proxy-agent": "^8.0.0",
     "https-proxy-agent": "^8.0.0",
     "topojson-client": "^3.1.0",

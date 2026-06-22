@@ -1,4 +1,4 @@
-import { BRAND } from './brand';
+import { BRAND, OGP_MAP } from './brand';
 
 const PREF_DATA: Array<{ code: number; pts: string }> = [
   { code: 1, pts: '68,3 92,6 96,14 92,24 82,26 70,22 66,14 68,8' },
@@ -55,7 +55,7 @@ interface JapanMapSvgProps {
   height?: number;
   valueFn?: (code: number) => number;
   highlight?: number[];
-  palette?: string[];
+  palette?: readonly string[];
   strokeColor?: string;
   strokeWidth?: number;
   baseFill?: string;
@@ -67,10 +67,10 @@ export function JapanMapSvg({
   height = 500,
   valueFn,
   highlight = [],
-  palette = ['#EFF6FF', '#DBEAFE', '#BFDBFE', '#93C5FD', '#60A5FA', '#3B82F6', '#1D4ED8'],
-  strokeColor = '#fff',
+  palette = OGP_MAP.bluePalette,
+  strokeColor = OGP_MAP.stroke,
   strokeWidth = 1,
-  baseFill = '#E2E8F0',
+  baseFill = OGP_MAP.baseFill,
   highlightColor = null,
 }: JapanMapSvgProps) {
   const lerp = (v: number): string => {

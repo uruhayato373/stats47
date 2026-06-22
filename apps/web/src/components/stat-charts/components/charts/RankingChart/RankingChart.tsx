@@ -6,11 +6,13 @@ import {
 } from "@stats47/ranking/server";
 import { isOk, type AreaType, type StatsSchema } from "@stats47/types";
 
+import { ChartFooter } from "@/components/charts/ChartFooter";
+import { ChartPanel } from "@/components/charts/ChartPanel";
+
 import { toBarChartData } from "../../../adapters";
 import { toLineChartData } from "../../../adapters/toLineChartData";
 import { fetchEstatData } from "../../../services";
 import { computeYAxisDomain } from "../../../utils/computeYAxisDomain";
-import { LegacyDashboardCard } from "../../shared/DashboardCard";
 import { ErrorDisplay } from "../../shared/ErrorDisplay";
 import { BarChartClient } from "../BarChart/BarChartClient";
 import { LineChartClient } from "../LineChart/LineChartClient";
@@ -182,17 +184,18 @@ export const RankingChartDashboard = async ({
       const chartData = toLineChartData(rawDataList, resolvedLabels);
 
       return (
-        <LegacyDashboardCard
+        <ChartPanel
           title={title}
-          rankingLink={rankingLink}
-          source={sourceName ?? undefined}
-          sourceLink={sourceLink}
-          loading={false}
-          error={null}
-          empty={chartData.data.length === 0}
+          footer={
+            <ChartFooter
+              source={sourceName ?? undefined}
+              sourceLink={sourceLink}
+              rankingLink={rankingLink}
+            />
+          }
         >
           <LineChartClient chartData={chartData} yDomain={sharedDomain} />
-        </LegacyDashboardCard>
+        </ChartPanel>
       );
     }
 
@@ -201,17 +204,18 @@ export const RankingChartDashboard = async ({
     const barData = toBarChartData(rawDataList, resolvedLabels, barChartType);
 
     return (
-      <LegacyDashboardCard
+      <ChartPanel
         title={title}
-        rankingLink={rankingLink}
-        source={sourceName ?? undefined}
-        sourceLink={sourceLink}
-        loading={false}
-        error={null}
-        empty={barData.data.length === 0}
+        footer={
+          <ChartFooter
+            source={sourceName ?? undefined}
+            sourceLink={sourceLink}
+            rankingLink={rankingLink}
+          />
+        }
       >
         <BarChartClient chartData={barData} chartType={barChartType} xDomain={sharedDomain} />
-      </LegacyDashboardCard>
+      </ChartPanel>
     );
   } catch (err) {
     logger.error({ error: err }, "RankingChartのデータ取得に失敗しました");

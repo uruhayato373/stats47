@@ -21,15 +21,15 @@ export const fiscalIndicatorsSlides: SlideData[] = [
           </p>
         </div>
         <div className="grid grid-cols-3 gap-4 text-center">
-          <div className="p-4 bg-white rounded-none border shadow-sm">
+          <div className="p-4 bg-card rounded-none border shadow-sm">
             <div className="text-blue-600 font-bold text-xl mb-1">可視化</div>
             <p className="text-xs text-muted-foreground">連結ベースの指標導入</p>
           </div>
-          <div className="p-4 bg-white rounded-none border shadow-sm">
+          <div className="p-4 bg-card rounded-none border shadow-sm">
             <div className="text-blue-600 font-bold text-xl mb-1">早期発見</div>
             <p className="text-xs text-muted-foreground">健全化基準の設定</p>
           </div>
-          <div className="p-4 bg-white rounded-none border shadow-sm">
+          <div className="p-4 bg-card rounded-none border shadow-sm">
             <div className="text-blue-600 font-bold text-xl mb-1">徹底公開</div>
             <p className="text-xs text-muted-foreground">住民への情報開示義務</p>
           </div>
@@ -52,7 +52,7 @@ export const fiscalIndicatorsSlides: SlideData[] = [
           { label: "将来負担比率", icon: <BarChart3 className="h-5 w-5" />, desc: "将来払う負債", color: "text-purple-500" },
         ].map((item) => (
           <div key={item.label} className="flex items-center gap-4 p-4 bg-muted rounded-none border border-border">
-            <div className={`${item.color} p-2 bg-white rounded-lg shadow-sm`}>{item.icon}</div>
+            <div className={`${item.color} p-2 bg-card rounded-lg shadow-sm`}>{item.icon}</div>
             <div>
               <div className="font-bold text-sm">{item.label}</div>
               <div className="text-[10px] text-muted-foreground">{item.desc}</div>

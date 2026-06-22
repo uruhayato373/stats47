@@ -5,8 +5,10 @@ import {
 } from "@stats47/ranking/server";
 import { isOk } from "@stats47/types";
 
+import { ChartFooter } from "@/components/charts/ChartFooter";
+import { ChartPanel } from "@/components/charts/ChartPanel";
+
 import { toRadarChartData } from "../../../adapters";
-import { LegacyDashboardCard } from "../../shared/DashboardCard";
 import { ErrorDisplay } from "../../shared/ErrorDisplay";
 
 import { RadarChartDashboardClient } from "./RadarChartDashboardClient";
@@ -95,17 +97,18 @@ export const RadarChartDashboard = async ({
   }
 
   return (
-    <LegacyDashboardCard
+    <ChartPanel
       title={title}
-      rankingLink={rankingLink}
       description={description}
-      source={sourceName ?? undefined}
-      sourceLink={sourceLink}
-      loading={false}
-      error={null}
-      empty={false}
+      footer={
+        <ChartFooter
+          source={sourceName ?? undefined}
+          sourceLink={sourceLink}
+          rankingLink={rankingLink}
+        />
+      }
     >
       <RadarChartDashboardClient chartData={chartData} />
-    </LegacyDashboardCard>
+    </ChartPanel>
   );
 };

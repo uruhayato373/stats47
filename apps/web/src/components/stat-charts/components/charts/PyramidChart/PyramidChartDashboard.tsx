@@ -1,8 +1,10 @@
 import { logger } from "@stats47/logger";
 
+import { ChartFooter } from "@/components/charts/ChartFooter";
+import { ChartPanel } from "@/components/charts/ChartPanel";
+
 import { toPyramidChartData } from "../../../adapters";
 import { fetchEstatData } from "../../../services";
-import { LegacyDashboardCard } from "../../shared/DashboardCard";
 import { ErrorDisplay } from "../../shared/ErrorDisplay";
 
 import { PyramidChartClient } from "./PyramidChartClient";
@@ -60,21 +62,22 @@ export const PyramidChartDashboard = async ({
     const latestYear = latestMaleData?.[latestMaleData.length - 1]?.yearName;
 
     return (
-      <LegacyDashboardCard
+      <ChartPanel
         title={title}
-        rankingLink={rankingLink}
         description={description}
-        source={sourceName ?? undefined}
-        sourceLink={sourceLink}
-        sourceDetail="人"
-        annotation={annotation}
-        rankingLinks={rankingLinks}
-        loading={false}
-        error={null}
-        empty={false}
+        footer={
+          <ChartFooter
+            source={sourceName ?? undefined}
+            sourceLink={sourceLink}
+            sourceDetail="人"
+            annotation={annotation}
+            rankingLink={rankingLink}
+            rankingLinks={rankingLinks}
+          />
+        }
       >
         <PyramidChartClient chartData={chartData} year={latestYear} />
-      </LegacyDashboardCard>
+      </ChartPanel>
     );
   } catch (err) {
     logger.error(

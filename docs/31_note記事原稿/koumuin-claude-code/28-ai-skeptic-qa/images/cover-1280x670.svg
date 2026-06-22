@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="670" viewBox="0 0 1280 670">
+  <defs>
+    <linearGradient id="grad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#422006"/>
+      <stop offset="100%" stop-color="#fef3c7"/>
+    </linearGradient>
+    <linearGradient id="accentBar" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#b45309" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#b45309" stop-opacity="0.6"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 背景 -->
+  <rect width="1280" height="670" fill="url(#grad)"/>
+
+  <!-- アクセントバー（左） -->
+  <rect x="0" y="0" width="8" height="670" fill="url(#accentBar)"/>
+
+  <!-- ラベルバッジ -->
+  <rect x="100" y="80" width="118" height="38" rx="4"
+    fill="#b45309" opacity="0.9"/>
+  <text x="120" y="106" font-size="18" font-weight="700" letter-spacing="2"
+    font-family="'Arial','Helvetica',sans-serif" fill="#ffffff">CAREER</text>
+
+  <!-- アイブロウ（カテゴリ・シリーズ説明） -->
+  <text x="100" y="160" font-size="22" font-weight="400"
+    font-family="'Noto Sans JP','Hiragino Kaku Gothic ProN',sans-serif"
+    fill="#fde68a" opacity="0.85">キャリア・働き方</text>
+
+  <!-- タイトル本文 -->
+  <text x="100" y="266" font-size="52" font-weight="700"
+      font-family="'Noto Sans JP','Hiragino Kaku Gothic ProN',sans-serif"
+      fill="#fffbeb" xml:space="preserve">AI 導入を渋る上席への対応 Q&amp;A 集</text>
+    <text x="100" y="334" font-size="52" font-weight="700"
+      font-family="'Noto Sans JP','Hiragino Kaku Gothic ProN',sans-serif"
+      fill="#fffbeb" xml:space="preserve">(現場感あり)</text>
+
+  <!-- 区切り線 -->
+  <line x1="100" y1="560" x2="1180" y2="560"
+    stroke="#b45309" stroke-width="1" opacity="0.4"/>
+
+  <!-- フッター -->
+  <text x="100" y="598" font-size="20" font-weight="400"
+    font-family="'Arial','Helvetica',sans-serif"
+    fill="#fde68a" opacity="0.7">公務員のためのClaude Code | stats47.jp</text>
+
+  <!-- 右下デコ（アクセントドット） -->
+  <circle cx="1200" cy="590" r="40" fill="#b45309" opacity="0.08"/>
+  <circle cx="1200" cy="590" r="20" fill="#b45309" opacity="0.12"/>
+</svg>

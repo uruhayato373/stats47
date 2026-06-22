@@ -235,7 +235,7 @@ export function RankingHeroCard({
             <div
               role="radiogroup"
               aria-label="計算方法"
-              className="hidden sm:inline-flex rounded-full border border-border bg-white p-1 shadow-sm"
+              className="hidden sm:inline-flex rounded-full border border-border bg-background p-1 shadow-sm"
             >
               {pills.map((p) => {
                 const active = normalizationValue === p.type;

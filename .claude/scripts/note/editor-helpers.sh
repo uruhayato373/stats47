@@ -45,6 +45,50 @@ ins_img(){
   echo "  [OK] $H <- $(basename "$IMG") (anchor=$ANCHOR)"
 }
 
+# ---- アフィリエイトバナーID → A8.net トラッキングURL マッピング ----
+get_affiliate_url(){
+  case "$1" in
+    ai_agent_camp) echo "https://px.a8.net/svt/ejp?a8mat=4B3RUY+AG9Z3M+5VRC+5YZ75" ;;
+    career_banner)  echo "https://px.a8.net/svt/ejp?a8mat=4AZCG4+9Z0EK2+5UK0+5YZ75" ;;
+    strategy_career) echo "https://px.a8.net/svt/ejp?a8mat=4B5LK5+5YC2K2+5P1E+5ZEMP" ;;
+    *) echo "" ;;
+  esac
+}
+
+# ---- 画像挿入 + リンク設定: ins_img の後に note.com フローティングツールバーでリンクを設定 ----
+# 使い方: ins_img_with_link <anchor_text> <img_path> <link_url>
+# 画像の挿入は ins_img と同じロジック。挿入後に画像をクリック→ツールバーのリンクボタン→URL入力→Enter。
+ins_img_with_link(){
+  local H="$1" IMG="$2" LINK_URL="$3"
+  ins_img "$H" "$IMG" || return 1
+  sleep 2
+  # 挿入した画像を最後のfigure要素として検出してクリック
+  BU state 2>&1 > /tmp/ns.txt
+  # まずフローティングツールバーのリンクボタンを探す（画像挿入直後は選択状態のことも）
+  local LINK_BTN=$(grep -oiE "\[[0-9]+\].*リンクを設定" /tmp/ns.txt | grep -oE "[0-9]+" | head -1)
+  if [ -z "$LINK_BTN" ]; then
+    # 最後のfigure要素をクリックしてツールバーを表示させる
+    local LAST_FIG=$(grep -oE "\[[0-9]+\]<figure" /tmp/ns.txt | tail -1 | grep -oE "[0-9]+" | head -1)
+    if [ -z "$LAST_FIG" ]; then echo "  [WARN] affiliate figure not found, skip link"; return 0; fi
+    BU click "$LAST_FIG" >/dev/null 2>&1; sleep 1.2
+    BU state 2>&1 > /tmp/ns.txt
+    LINK_BTN=$(grep -oiE "\[[0-9]+\].*リンクを設定" /tmp/ns.txt | grep -oE "[0-9]+" | head -1)
+  fi
+  if [ -z "$LINK_BTN" ]; then
+    # ツールバーなし: aria-label ベースで探す
+    LINK_BTN=$(grep -oiE "\[[0-9]+\]<button aria-label=リンク" /tmp/ns.txt | grep -oE "[0-9]+" | head -1)
+  fi
+  if [ -z "$LINK_BTN" ]; then echo "  [WARN] link button not found, banner inserted without link"; return 0; fi
+  BU click "$LINK_BTN" >/dev/null 2>&1; sleep 0.8
+  BU state 2>&1 > /tmp/ns.txt
+  # URL入力フィールドを探してタイプ（フィールドがあればクリック→タイプ、なければそのままタイプ）
+  local URL_INPUT=$(grep -oiE "\[[0-9]+\]<input[^>]*" /tmp/ns.txt | grep -iE "url|link|href" | grep -oE "[0-9]+" | head -1)
+  [ -n "$URL_INPUT" ] && BU click "$URL_INPUT" >/dev/null 2>&1 && sleep 0.3
+  BU type "$LINK_URL" >/dev/null 2>&1; sleep 0.3
+  BU keys Enter >/dev/null 2>&1; sleep 0.8
+  echo "  [LINK] $(basename "$IMG") -> $LINK_URL"
+}
+
 # ---- 有料境界: 公開に進む→有料エリア設定→paidHead 直前にラインを置く→screenshot ----
 # 空白・バッククォート(インラインコード)・先頭 # に非依存でマッチする（state とプレビューの差異を吸収）。
 paid_setline(){
@@ -147,6 +191,18 @@ process_article(){
     local FILE=$(jq -r ".imgRefs[$i].file" "$J" | sed 's/\.svg$/.png/')
     local HEAD=$(jq -r ".imgRefs[$i].afterHeading" "$J")
     ins_img "$HEAD" "$ADIR/$FILE"
+  done
+  # Phase 5.5: アフィリエイトバナー（画像+リンク）
+  local NAFF=$(jq -r '.affiliateBanners | length' "$J" 2>/dev/null || echo "0")
+  for i in $(seq 0 $((NAFF-1))); do
+    local AFF_ID=$(jq -r ".affiliateBanners[$i].id" "$J")
+    local AFF_ANCHOR=$(jq -r ".affiliateBanners[$i].anchor" "$J")
+    local AFF_PNG="/Users/minamidaisuke/stats47/.claude/assets/affiliate-banners/${AFF_ID}.png"
+    local AFF_URL
+    AFF_URL=$(get_affiliate_url "$AFF_ID")
+    if [ -z "$AFF_URL" ]; then echo "  [WARN] unknown affiliate id: $AFF_ID"; continue; fi
+    if [ ! -f "$AFF_PNG" ]; then echo "  [WARN] banner image missing: $AFF_PNG"; continue; fi
+    ins_img_with_link "$AFF_ANCHOR" "$AFF_PNG" "$AFF_URL"
   done
   local FULLHEAD=$(jq -r '.segmentsPaid[0].content' "$J" | head -1 | sed 's/^#* *//')
   paid_setline "$FULLHEAD" "/tmp/note-publish-$SLUG.png"

@@ -1,15 +1,9 @@
 "use client";
 
-import Link from "next/link";
-
 import { Badge } from "@stats47/components/atoms/ui/badge";
-import {
-    Card,
-    CardContent,
-    CardHeader,
-    CardTitle,
-} from "@stats47/components/atoms/ui/card";
 import { BarChart3, FileText } from "lucide-react";
+
+import { SurfaceLinkCard } from "@/components/surface";
 
 import type { ContentType, SearchResult } from "../types";
 
@@ -80,18 +74,17 @@ export function SearchResults({ results, query }: SearchResultsProps) {
  */
 function RankingResultCard({ result }: { result: SearchResult }) {
     return (
-        <Link href={result.url} className="block group">
-            <Card className="transition-colors hover:bg-muted/50">
-                <CardHeader className="pb-2 pt-4 px-4">
+        <SurfaceLinkCard href={result.url} className="block p-0 group hover:bg-muted/50">
+                <div className="pb-2 pt-4 px-4">
                     <div className="flex items-start justify-between gap-3">
                         <div className="flex items-start gap-2 min-w-0">
                             <div className="text-muted-foreground mt-0.5 shrink-0">
                                 {typeIcons[result.type]}
                             </div>
                             <div className="min-w-0">
-                                <CardTitle className="text-base group-hover:text-primary transition-colors leading-snug">
+                                <h3 className="text-base font-semibold group-hover:text-primary transition-colors leading-snug">
                                     {result.title}
-                                </CardTitle>
+                                </h3>
                                 {result.subtitle && (
                                     <p className="text-sm text-muted-foreground mt-0.5">
                                         {result.subtitle}
@@ -103,8 +96,8 @@ function RankingResultCard({ result }: { result: SearchResult }) {
                             {typeLabels[result.type]}
                         </Badge>
                     </div>
-                </CardHeader>
-                <CardContent className="pb-3 px-4 pt-3">
+                </div>
+                <div className="pb-3 px-4 pt-3">
                     <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-muted-foreground ml-6">
                         {result.latestYear && (
                             <span className="font-medium text-foreground">{result.latestYear}</span>
@@ -121,9 +114,8 @@ function RankingResultCard({ result }: { result: SearchResult }) {
                             </span>
                         )}
                     </div>
-                </CardContent>
-            </Card>
-        </Link>
+                </div>
+        </SurfaceLinkCard>
     );
 }
 
@@ -132,18 +124,17 @@ function RankingResultCard({ result }: { result: SearchResult }) {
  */
 function BlogResultCard({ result }: { result: SearchResult }) {
     return (
-        <Link href={result.url} className="block group">
-            <Card className="transition-colors hover:bg-muted/50">
-                <CardHeader className="pb-2 pt-4 px-4">
+        <SurfaceLinkCard href={result.url} className="block p-0 group hover:bg-muted/50">
+                <div className="pb-2 pt-4 px-4">
                     <div className="flex items-start justify-between gap-3">
                         <div className="flex items-start gap-2 min-w-0">
                             <div className="text-muted-foreground mt-0.5 shrink-0">
                                 {typeIcons[result.type]}
                             </div>
                             <div className="min-w-0">
-                                <CardTitle className="text-base group-hover:text-primary transition-colors leading-snug">
+                                <h3 className="text-base font-semibold group-hover:text-primary transition-colors leading-snug">
                                     {result.title}
-                                </CardTitle>
+                                </h3>
                                 {result.category && (
                                     <p className="text-xs text-muted-foreground mt-0.5">
                                         {result.category}
@@ -155,8 +146,8 @@ function BlogResultCard({ result }: { result: SearchResult }) {
                             {typeLabels[result.type]}
                         </Badge>
                     </div>
-                </CardHeader>
-                <CardContent className="pb-3 px-4 pt-3">
+                </div>
+                <div className="pb-3 px-4 pt-3">
                     <p className="text-sm text-muted-foreground ml-6 line-clamp-2">
                         {result.description}
                     </p>
@@ -174,8 +165,7 @@ function BlogResultCard({ result }: { result: SearchResult }) {
                             {result.publishedAt.slice(0, 10)}
                         </p>
                     )}
-                </CardContent>
-            </Card>
-        </Link>
+                </div>
+        </SurfaceLinkCard>
     );
 }

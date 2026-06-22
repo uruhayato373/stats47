@@ -1,9 +1,11 @@
 import { logger } from "@stats47/logger";
 
+import { ChartFooter } from "@/components/charts/ChartFooter";
+import { ChartPanel } from "@/components/charts/ChartPanel";
+
 import { toLineChartData } from "../../../adapters";
 import { fetchEstatData } from "../../../services";
 import { computeYAxisDomain } from "../../../utils/computeYAxisDomain";
-import { LegacyDashboardCard } from "../../shared/DashboardCard";
 import { ErrorDisplay } from "../../shared/ErrorDisplay";
 
 import { LineChartClient } from "./LineChartClient";
@@ -64,19 +66,20 @@ export const LineChart = async ({
   }
 
   return (
-    <LegacyDashboardCard
+    <ChartPanel
       title={title}
-      rankingLink={rankingLink}
       description={description}
-      source={sourceName ?? undefined}
-      sourceLink={sourceLink}
-      annotation={annotation}
-      rankingLinks={rankingLinks}
-      loading={false}
-      error={null}
-      empty={chartData.data.length === 0}
+      footer={
+        <ChartFooter
+          source={sourceName ?? undefined}
+          sourceLink={sourceLink}
+          annotation={annotation}
+          rankingLink={rankingLink}
+          rankingLinks={rankingLinks}
+        />
+      }
     >
       <LineChartClient chartData={chartData} yDomain={yDomain} showLatestValues={showLatestValues} />
-    </LegacyDashboardCard>
+    </ChartPanel>
   );
 };

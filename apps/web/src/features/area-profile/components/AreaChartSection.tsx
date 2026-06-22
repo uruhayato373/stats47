@@ -1,6 +1,6 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@stats47/components/atoms/ui/card";
 import { BarChart3 } from "lucide-react";
 
+import { ChartPanel } from "@/components/charts/ChartPanel";
 import { DashboardComponentRenderer, loadPageComponents, type PageComponent } from "@/components/stat-charts/server";
 
 interface Props {
@@ -35,11 +35,12 @@ export async function AreaChartSection({ areaCode, areaName }: Props) {
       </div>
 
       {Array.from(sections.entries()).map(([sectionName, sectionCharts]) => (
-        <Card key={sectionName} className="border border-border shadow-sm">
-          <CardHeader className="pb-2">
-            <CardTitle className="text-base">{sectionName}</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
+        <ChartPanel
+          key={sectionName}
+          title={sectionName}
+          titleClassName="text-base"
+          contentClassName="space-y-4"
+        >
             {sectionCharts.map((chart) => (
               <div key={chart.componentKey}>
                 <DashboardComponentRenderer
@@ -72,8 +73,7 @@ export async function AreaChartSection({ areaCode, areaName }: Props) {
                 )}
               </div>
             ))}
-          </CardContent>
-        </Card>
+        </ChartPanel>
       ))}
     </section>
   );

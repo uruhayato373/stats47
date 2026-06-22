@@ -2,6 +2,8 @@
 
 import React from "react";
 
+import { SurfaceCard } from "@/components/surface";
+
 interface StatResultItem {
   label: string;
   value: number | null;
@@ -33,7 +35,7 @@ export const MultiStatCardClient: React.FC<MultiStatCardClientProps> = ({
   const year = results[0]?.year ?? null;
 
   return (
-    <div className="bg-card border rounded-lg p-4 shadow-sm">
+    <SurfaceCard>
       <div className="flex items-center justify-between mb-2">
         <h3 className="font-semibold text-sm text-muted-foreground">{title}</h3>
         {rankingLink && (
@@ -89,6 +91,6 @@ export const MultiStatCardClient: React.FC<MultiStatCardClientProps> = ({
       {year && (
         <p className="text-xs text-muted-foreground mt-2">{year}時点</p>
       )}
-    </div>
+    </SurfaceCard>
   );
 };

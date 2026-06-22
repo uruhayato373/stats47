@@ -36,10 +36,13 @@ export async function compareWithGolden(
   const goldenPng = PNG.sync.read(readFileSync(goldenPath));
   const actualPng = PNG.sync.read(actualPngBuffer);
   
+  const actualPath = resolve(GOLDEN_DIR, `${name}-actual.png`);
+  const diffPath = resolve(GOLDEN_DIR, `${name}-diff.png`);
+
   if (goldenPng.width !== width || goldenPng.height !== height) {
      // サイズが違う場合は強制的に失敗させデバッグ用ファイルを出力
-     writeFileSync(resolve(GOLDEN_DIR, `${name}-actual.png`), actualBuffer);
-     throw new Error(`Dimension mismatch for ${name}: expected ${goldenPng.width}x${goldenPng.height}, got ${width}x${height}`);
+     writeFileSync(actualPath, actualPngBuffer);
+     throw new Error(`Dimension mismatch for ${name}: expected ${goldenPng.width}x${goldenPng.height}, got ${width}x${height}. Actual image: ${actualPath}`);
   }
 
   const diff = new PNG({ width, height });
@@ -54,9 +57,12 @@ export async function compareWithGolden(
 
   // 差分超過時はデバッグ用ファイルを出力
   if (numDiffPixels > maxDiffPixels) {
-    writeFileSync(resolve(GOLDEN_DIR, `${name}-actual.png`), actualBuffer);
-    writeFileSync(resolve(GOLDEN_DIR, `${name}-diff.png`), PNG.sync.write(diff));
+    writeFileSync(actualPath, actualPngBuffer);
+    writeFileSync(diffPath, PNG.sync.write(diff));
   }
 
-  expect(numDiffPixels, `Visual difference too large for ${name}: ${numDiffPixels}px diff`).toBeLessThanOrEqual(maxDiffPixels);
+  expect(
+    numDiffPixels,
+    `Visual difference too large for ${name}: ${numDiffPixels}px diff. Actual: ${actualPath}, diff: ${diffPath}`,
+  ).toBeLessThanOrEqual(maxDiffPixels);
 }

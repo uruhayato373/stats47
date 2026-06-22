@@ -1,5 +1,6 @@
 "use client";
 
+import { FLOW_CHART_COLORS } from "@/components/charts/ChartPalette";
 import { HubSankey } from "@/components/charts/HubSankey";
 import { topNWithOther } from "@/components/charts/sankey-helpers";
 import { SankeyFallback } from "@/components/charts/SankeyFallback";
@@ -10,8 +11,6 @@ import type { MigrationFlowData } from "@stats47/migration-flow";
 /** 焦点県 人口移動フロー Sankey: 左=流入元 / 中央=焦点県 / 右=流出先。幅=年間移動者数。 */
 
 const TOP_N = 10;
-const IN_COLOR = "#2563eb"; // 流入 = 青
-const OUT_COLOR = "#ea580c"; // 流出 = 橙
 
 const fmt = (n: number) => n.toLocaleString("ja-JP");
 
@@ -38,11 +37,11 @@ export function MigrationSankey({ code, initialData }: Props) {
       subtitle={`左: 流入元 → 中央: ${data.focusName} → 右: 流出先（幅=人数 / 上位${TOP_N}＋その他）`}
       centerLabel={data.focusName}
       centerSub={`純移動 ${net >= 0 ? "+" : ""}${fmt(net)}`}
-      centerSubColor={net >= 0 ? IN_COLOR : OUT_COLOR}
+      centerSubColor={net >= 0 ? FLOW_CHART_COLORS.inflow : FLOW_CHART_COLORS.outflow}
       leftNodes={topNWithOther(data.partners, (p) => p.inflow, TOP_N)}
       rightNodes={topNWithOther(data.partners, (p) => p.outflow, TOP_N)}
-      leftColor={IN_COLOR}
-      rightColor={OUT_COLOR}
+      leftColor={FLOW_CHART_COLORS.inflow}
+      rightColor={FLOW_CHART_COLORS.outflow}
       formatValue={fmt}
       footer={`総流入 ${fmt(totalIn)}／総流出 ${fmt(totalOut)}／純 ${net >= 0 ? "+" : ""}${fmt(net)}　出典: e-Stat 住民基本台帳人口移動報告（${data.year}）`}
     />

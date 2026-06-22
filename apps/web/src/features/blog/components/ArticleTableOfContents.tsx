@@ -1,10 +1,6 @@
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@stats47/components/atoms/ui/card";
 import { List } from "lucide-react";
+
+import { RailCard } from "@/components/surface";
 
 import { extractHeadings } from "../lib/heading-slug";
 
@@ -33,37 +29,34 @@ export function ArticleTableOfContents({
   if (headings.length < 2) return null;
 
   return (
-    <Card>
-      <CardHeader className={compact ? "py-3 px-4" : "py-4 px-4"}>
-        <CardTitle className="flex items-center gap-2 text-base">
-          <List className="h-4 w-4 text-muted-foreground" />
-          目次
-        </CardTitle>
-      </CardHeader>
-      <CardContent className="p-4 pt-3">
-        <nav aria-label="記事の目次">
-          <ol className="space-y-1.5 text-sm">
-            {headings.map((h, idx) => (
-              <li
-                key={`${h.id}-${idx}`}
-                className={h.level === 3 ? "pl-4" : ""}
+    <RailCard
+      title="目次"
+      icon={<List className="h-4 w-4 text-muted-foreground" />}
+      titleClassName={compact ? undefined : "text-base font-semibold text-foreground"}
+      bodyClassName="p-4 pt-3"
+    >
+      <nav aria-label="記事の目次">
+        <ol className="space-y-1.5 text-sm">
+          {headings.map((h, idx) => (
+            <li
+              key={`${h.id}-${idx}`}
+              className={h.level === 3 ? "pl-4" : ""}
+            >
+              <a
+                href={`#${h.id}`}
+                className={
+                  "block leading-snug transition-colors hover:text-primary " +
+                  (h.level === 2
+                    ? "font-medium text-foreground"
+                    : "text-xs text-muted-foreground")
+                }
               >
-                <a
-                  href={`#${h.id}`}
-                  className={
-                    "block leading-snug transition-colors hover:text-primary " +
-                    (h.level === 2
-                      ? "font-medium text-foreground"
-                      : "text-xs text-muted-foreground")
-                  }
-                >
-                  {h.text}
-                </a>
-              </li>
-            ))}
-          </ol>
-        </nav>
-      </CardContent>
-    </Card>
+                {h.text}
+              </a>
+            </li>
+          ))}
+        </ol>
+      </nav>
+    </RailCard>
   );
 }

@@ -1,6 +1,8 @@
 import { geoMercator, geoPath, geoLength } from "d3-geo";
 import { feature as topoFeature } from "topojson-client";
 
+import { SurfaceCard } from "@/components/surface";
+
 import type { GeometryCollection, Topology } from "topojson-specification";
 
 const R2_HIGHWAY_TOPOJSON =
@@ -106,7 +108,7 @@ export async function HighwayTimelineMap({
   }
 
   return (
-    <div className="rounded-lg border border-border bg-muted/50 p-2">
+    <SurfaceCard className="bg-muted/50 p-2">
       <svg
         viewBox={`0 0 ${width} ${height}`}
         className="block w-full h-auto"
@@ -131,6 +133,6 @@ export async function HighwayTimelineMap({
           (約{Math.round(newKm).toLocaleString("ja-JP")} km)
         </p>
       )}
-    </div>
+    </SurfaceCard>
   );
 }

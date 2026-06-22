@@ -1,9 +1,14 @@
 import { resolveAttribution } from "@stats47/data-configs";
 import { logger } from "@stats47/logger";
 
+import { ChartFooter } from "@/components/charts/ChartFooter";
+import { ChartPanel } from "@/components/charts/ChartPanel";
+import { ChartEmptyState } from "@/components/charts/ChartState";
+
 import { toCompositionChartData } from "../../../adapters/toCompositionChartData";
 import { fetchEstatData } from "../../../services";
-import { LegacyDashboardCard } from "../../shared/DashboardCard";
+import { ErrorDisplay } from "../../shared/ErrorDisplay";
+
 
 import { CompositionChartClient } from "./CompositionChartClient";
 
@@ -38,16 +43,7 @@ export const CompositionChartDashboard = async ({
   const cardAttribution = hasAttribution ? attribution : undefined;
 
   if (!segments?.length || (!config.statsDataId && !config.multipleStatsSources?.length)) {
-    return (
-      <div className="bg-card border rounded-lg p-4 shadow-sm">
-        <h3 className="font-semibold text-sm text-muted-foreground mb-2">
-          {title}
-        </h3>
-        <div className="text-destructive text-sm">
-          設定エラー: パラメータがありません
-        </div>
-      </div>
-    );
+    return <ErrorDisplay title={title} message="設定エラー: パラメータがありません" />;
   }
 
   const labels = segments.map((s) => s.label);
@@ -123,14 +119,7 @@ export const CompositionChartDashboard = async ({
 
       const firstError = segmentResponses.find((r) => "error" in r);
       if (firstError && "error" in firstError) {
-        return (
-          <div className="bg-card border rounded-lg p-4 shadow-sm">
-            <h3 className="font-semibold text-sm text-muted-foreground mb-2">
-              {title}
-            </h3>
-            <div className="text-destructive text-sm">{firstError.error}</div>
-          </div>
-        );
+        return <ErrorDisplay title={title} message={firstError.error} />;
       }
 
       rawDataList = segmentResponses.map((r) => ("data" in r ? r.data : []));
@@ -142,56 +131,49 @@ export const CompositionChartDashboard = async ({
 
     if (chartData.trendData.length === 0) {
       return (
-        <LegacyDashboardCard
+        <ChartPanel
           title={title}
-          rankingLink={rankingLink}
           description={description}
-          source={sourceName ?? undefined}
-          sourceLink={sourceLink}
-          attribution={cardAttribution}
-          annotation={annotation}
-          rankingLinks={rankingLinks}
-          loading={false}
-          error={null}
-          empty
-        >
-          <div />
-        </LegacyDashboardCard>
+          footer={
+            <ChartFooter
+              source={sourceName ?? undefined}
+              sourceLink={sourceLink}
+              attribution={cardAttribution}
+              annotation={annotation}
+              rankingLink={rankingLink}
+              rankingLinks={rankingLinks}
+            />
+        }
+      >
+          <ChartEmptyState message="データがありません" height={250} className="bg-muted/10" />
+        </ChartPanel>
       );
     }
 
     return (
-      <LegacyDashboardCard
+      <ChartPanel
         title={title}
-        rankingLink={rankingLink}
         description={description}
-        source={sourceName ?? undefined}
-        sourceLink={sourceLink}
-        attribution={cardAttribution}
-        annotation={annotation}
-        rankingLinks={rankingLinks}
-        loading={false}
-        error={null}
-        empty={false}
+        footer={
+          <ChartFooter
+            source={sourceName ?? undefined}
+            sourceLink={sourceLink}
+            attribution={cardAttribution}
+            annotation={annotation}
+            rankingLink={rankingLink}
+            rankingLinks={rankingLinks}
+          />
+        }
       >
         <CompositionChartClient chartData={chartData} defaultTab={defaultTab} />
-      </LegacyDashboardCard>
+      </ChartPanel>
     );
   } catch (err) {
     logger.error(
       { error: err },
       "CompositionChartのデータ取得に失敗しました",
     );
-    return (
-      <div className="bg-card border rounded-lg p-4 shadow-sm">
-        <h3 className="font-semibold text-sm text-muted-foreground mb-2">
-          {title}
-        </h3>
-        <div className="text-destructive text-sm">
-          データの取得に失敗しました
-        </div>
-      </div>
-    );
+    return <ErrorDisplay title={title} message="データの取得に失敗しました" />;
   }
    
 };

@@ -1,4 +1,4 @@
-import { Card, CardContent } from "@stats47/components/atoms/ui/card";
+import { SurfaceCard } from "@/components/surface";
 
 import { SIDEBAR_PROMO_BANNERS } from "../constants/sidebar-banners";
 
@@ -23,18 +23,16 @@ export function SidebarPromoBanner({
   const banner = SIDEBAR_PROMO_BANNERS[index % SIDEBAR_PROMO_BANNERS.length];
 
   return (
-    <Card>
-      <CardContent className="p-3">
-        <BannerAd
-          href={banner.href}
-          imageUrl={banner.imageUrl}
-          trackingPixelUrl={banner.trackingPixelUrl}
-          width={banner.width}
-          height={banner.height}
-          label={banner.label}
-          position={position}
-        />
-      </CardContent>
-    </Card>
+    <SurfaceCard className="p-3">
+      <BannerAd
+        href={banner.href}
+        imageUrl={banner.imageUrl}
+        trackingPixelUrl={banner.trackingPixelUrl}
+        width={banner.width}
+        height={banner.height}
+        label={banner.label}
+        position={position}
+      />
+    </SurfaceCard>
   );
 }

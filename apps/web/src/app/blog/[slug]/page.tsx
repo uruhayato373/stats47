@@ -9,9 +9,11 @@ import {
     BreadcrumbPage,
     BreadcrumbSeparator,
 } from "@stats47/components/atoms/ui/breadcrumb";
-import { Card, CardContent, CardHeader, CardTitle } from "@stats47/components/atoms/ui/card";
+import { Newspaper } from "lucide-react";
 
+import { PageShell } from "@/components/layout";
 import { ShareButtons } from "@/components/molecules/ShareButtons";
+import { RailCard, RailLinkItem, RailLinkList, SurfaceCard, SurfaceLinkCard } from "@/components/surface";
 
 import {
     SidebarPromoBanner,
@@ -30,7 +32,7 @@ import {
 } from "@/features/blog/server";
 
 import { getRequiredBaseUrl } from "@/lib/env";
-import { AdSenseAd, RANKING_SIDEBAR_TOP, RANKING_PAGE_SIDEBAR } from "@/lib/google-adsense";
+import { AdSenseAd, RANKING_PAGE_SIDEBAR } from "@/lib/google-adsense";
 import { buildPersonAsAuthor } from "@/lib/structured-data/person";
 import { buildPublisherOrganization } from "@/lib/structured-data/scripts";
 
@@ -160,6 +162,32 @@ export default async function BlogPostPage({ params }: PageProps) {
         publisher: buildPublisherOrganization(baseUrl),
     };
 
+    const rightRail = (
+        <aside className="flex flex-col gap-3">
+            <ArticleTableOfContents content={article.content} compact />
+
+            {/* 本文関連 widget（主役・上） */}
+            <RelatedRankingsSection tagKeys={tagKeys} compact />
+
+            <BlogRelatedArticlesSection articles={relatedArticles} currentSlug={slug} articleTagsMap={articleTagsMap} compact />
+
+            <hr className="my-1 border-t border-border" />
+
+            {/* promo / 広告（本文関連の下へ降格） */}
+            <SidebarPromoBanner index={0} position="sidebar-left" />
+            <SidebarPromoBanner index={1} position="sidebar-right" />
+
+            <RailCard title="広告" bodyClassName="flex justify-center overflow-hidden px-4 pb-4 pt-3">
+                <div className="flex justify-center overflow-hidden">
+                    <AdSenseAd format={RANKING_PAGE_SIDEBAR.format} slotId={RANKING_PAGE_SIDEBAR.slotId} showLabel={false} />
+                </div>
+            </RailCard>
+
+            {/* テキストリンク広告 (strategy career / 就職エージェントneo) */}
+            <BlogSidebarTextAds tagKeys={tagKeys} />
+        </aside>
+    );
+
     return (
         <>
             <script
@@ -167,7 +195,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
             />
             {/* パンくずナビゲーション */}
-            <div className="mx-auto max-w-[1700px] px-4 pt-4">
+            <PageShell className="pb-0 pt-4">
                 <Breadcrumb>
                     <BreadcrumbList>
                         <BreadcrumbItem>
@@ -187,127 +215,54 @@ export default async function BlogPostPage({ params }: PageProps) {
                         </BreadcrumbItem>
                     </BreadcrumbList>
                 </Breadcrumb>
-            </div>
+            </PageShell>
 
-            {/* メインコンテンツ
-                - xl+ (1280px〜): 3 カラム (左 280 + 本文 + 右 360)
-                - lg (1024〜1279px): 2 カラム (本文 + 右レール 360。左 TOC は記事冒頭へ積み下ろし)
-                - lg 未満: 1 カラム
-                container は max-w-[1700px] で 1920px+ 画面の余白を最小化 */}
-            <div className="mx-auto max-w-[1700px] px-4 py-6">
-                <div className="lg:grid lg:grid-cols-[minmax(0,1fr)_360px] lg:gap-8 lg:items-start xl:grid-cols-[280px_minmax(0,1fr)_360px]">
-
-                    {/* 左カラム (xl+): TOC + 高単価アフィリエイトバナー + 上部 AdSense (自然フロー) */}
-                    <aside className="hidden xl:flex xl:flex-col xl:gap-3">
-                        <ArticleTableOfContents content={article.content} compact />
-                        {/* A8.net バナー広告: STRATEGY CAREER (高単価・目次の下) */}
-                        <SidebarPromoBanner index={0} position="sidebar-left" />
-                        <Card>
-                            <CardHeader className="pb-2">
-                                <CardTitle className="text-sm font-medium text-muted-foreground">広告</CardTitle>
-                            </CardHeader>
-                            <CardContent className="flex justify-center overflow-hidden">
-                                <AdSenseAd format={RANKING_SIDEBAR_TOP.format} slotId={RANKING_SIDEBAR_TOP.slotId} showLabel={false} />
-                            </CardContent>
-                        </Card>
-                    </aside>
-
-                    {/* 中央カラム: 記事 + main 内 widget */}
-                    <main className="min-w-0 space-y-6">
-                        <Card>
-                            <CardContent className="p-6 sm:p-8 overflow-hidden">
-                                {/* 記事ヘッダー */}
-                                <header className="mb-8">
-                                    <h1 className="mb-4 border-b pb-3 text-2xl font-bold">{article.title}</h1>
-                                    {article.frontmatter.subtitle && (
-                                        <p className="mb-4 text-sm text-muted-foreground">{article.frontmatter.subtitle}</p>
+            <PageShell
+                className="py-6"
+                rightRail={rightRail}
+                rightRailBreakpoint="lg"
+            >
+                {/* 中央カラム: 記事 */}
+                <main className="min-w-0 space-y-6">
+                    <SurfaceCard className="p-0">
+                        <div className="overflow-hidden p-6 sm:p-8">
+                            {/* 記事ヘッダー */}
+                            <header className="mb-8">
+                                <h1 className="mb-4 border-b pb-3 text-2xl font-bold">{article.title}</h1>
+                                {article.frontmatter.subtitle && (
+                                    <p className="mb-4 text-sm text-muted-foreground">{article.frontmatter.subtitle}</p>
+                                )}
+                                <div className="flex flex-wrap items-center gap-2">
+                                    {articleTagData.map((t) => (
+                                        <TagBadge key={t.tagKey} tag={t.tagKey} tagKey={t.tagKey} />
+                                    ))}
+                                    {article.publishedAt && (
+                                        <time dateTime={article.publishedAt} className="text-xs text-muted-foreground">
+                                            {article.publishedAt.slice(0, 10)}
+                                        </time>
                                     )}
-                                    <div className="flex flex-wrap items-center gap-2">
-                                        {articleTagData.map((t) => (
-                                            <TagBadge key={t.tagKey} tag={t.tagKey} tagKey={t.tagKey} />
-                                        ))}
-                                        {article.publishedAt && (
-                                            <time dateTime={article.publishedAt} className="text-xs text-muted-foreground">
-                                                {article.publishedAt.slice(0, 10)}
-                                            </time>
-                                        )}
-                                        <div className="ml-auto">
-                                            <ShareButtons title={article.title} url={`/blog/${slug}`} variant="simple" platforms={["X (Twitter)", "LINE"]} />
-                                        </div>
+                                    <div className="ml-auto">
+                                        <ShareButtons title={article.title} url={`/blog/${slug}`} variant="simple" platforms={["X (Twitter)", "LINE"]} />
                                     </div>
-                                </header>
-
-                                {/* TOC (xl 未満で記事冒頭に表示。xl 以上は左カラムに表示) */}
-                                <div className="mb-8 xl:hidden">
-                                    <ArticleTableOfContents content={article.content} />
                                 </div>
+                            </header>
 
-                                {/* 記事本文 */}
-                                <ArticleRenderer article={article} slug={slug} relatedArticleTitles={relatedArticleTitles} affiliateBannersByCategory={affiliateBannersByCategory} />
+                            {/* TOC (lg 未満で記事冒頭に表示。lg 以上は右 rail に表示) */}
+                            <div className="mb-8 lg:hidden">
+                                <ArticleTableOfContents content={article.content} />
+                            </div>
 
-                                {/* SNSシェアボタン */}
-                                <div className="mt-8 pt-6 border-t flex justify-center">
-                                    <ShareButtons title={article.title} url={`/blog/${slug}`} variant="prominent" />
-                                </div>
-                            </CardContent>
-                        </Card>
+                            {/* 記事本文 */}
+                            <ArticleRenderer article={article} slug={slug} relatedArticleTitles={relatedArticleTitles} affiliateBannersByCategory={affiliateBannersByCategory} />
 
-                        {/* lg 未満で表示する各種関連 widget (lg+ では右カラムに集約) */}
-                        <div className="space-y-6 lg:hidden">
-                            <Card>
-                                <CardHeader className="pb-2">
-                                    <CardTitle className="text-sm font-medium text-muted-foreground">広告</CardTitle>
-                                </CardHeader>
-                                <CardContent className="flex justify-center overflow-hidden">
-                                    <AdSenseAd format={RANKING_SIDEBAR_TOP.format} slotId={RANKING_SIDEBAR_TOP.slotId} showLabel={false} />
-                                </CardContent>
-                            </Card>
-
-                            <RelatedRankingsSection tagKeys={tagKeys} />
-
-                            <BlogRelatedArticlesSection articles={relatedArticles} currentSlug={slug} articleTagsMap={articleTagsMap} />
-
-                            <Card>
-                                <CardHeader className="pb-2">
-                                    <CardTitle className="text-sm font-medium text-muted-foreground">広告</CardTitle>
-                                </CardHeader>
-                                <CardContent className="flex justify-center overflow-hidden">
-                                    <AdSenseAd format={RANKING_PAGE_SIDEBAR.format} slotId={RANKING_PAGE_SIDEBAR.slotId} showLabel={false} />
-                                </CardContent>
-                            </Card>
-
-                            {/* テキストリンク広告 (strategy career / 就職エージェントneo) */}
-                            <BlogSidebarTextAds tagKeys={tagKeys} />
+                            {/* SNSシェアボタン */}
+                            <div className="mt-8 pt-6 border-t flex justify-center">
+                                <ShareButtons title={article.title} url={`/blog/${slug}`} variant="prominent" />
+                            </div>
                         </div>
-                    </main>
-
-                    {/* 右カラム (lg+): 関連 widget(上) + 広告/promo(下) を自然フロー。lg=2カラム(本文+右)、xl=3カラム */}
-                    <aside className="hidden lg:flex lg:flex-col lg:gap-3">
-                        {/* 本文関連 widget（主役・上） */}
-                        <RelatedRankingsSection tagKeys={tagKeys} compact />
-
-                        <BlogRelatedArticlesSection articles={relatedArticles} currentSlug={slug} articleTagsMap={articleTagsMap} compact />
-
-                        <hr className="my-1 border-t border-border" />
-
-                        {/* promo / 広告（本文関連の下へ降格） */}
-                        <SidebarPromoBanner index={1} position="sidebar-right" />
-
-                        <Card>
-                            <CardHeader className="pb-2">
-                                <CardTitle className="text-sm font-medium text-muted-foreground">広告</CardTitle>
-                            </CardHeader>
-                            <CardContent className="flex justify-center overflow-hidden">
-                                <AdSenseAd format={RANKING_PAGE_SIDEBAR.format} slotId={RANKING_PAGE_SIDEBAR.slotId} showLabel={false} />
-                            </CardContent>
-                        </Card>
-
-                        {/* テキストリンク広告 (strategy career / 就職エージェントneo) */}
-                        <BlogSidebarTextAds tagKeys={tagKeys} />
-                    </aside>
-
-                </div>
-            </div>
+                    </SurfaceCard>
+                </main>
+            </PageShell>
         </>
     );
 }
@@ -327,17 +282,27 @@ function BlogRelatedArticlesSection({
     if (filtered.length === 0) return null;
 
     return (
-        <Card>
-            <CardHeader className="py-4 px-4">
-                <CardTitle className="text-base">関連記事</CardTitle>
-            </CardHeader>
-            <CardContent className="p-4 pt-3">
-                <div className={compact ? "grid grid-cols-1 gap-2" : "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3"}>
+        <RailCard
+            title="関連記事"
+            icon={<Newspaper className="h-4 w-4 text-muted-foreground" />}
+            titleClassName="text-base font-semibold text-foreground"
+            bodyClassName="p-4 pt-3"
+        >
+            {compact ? (
+                <RailLinkList>
                     {filtered.map((article) => (
-                        <Link
+                        <RailLinkItem key={article.slug} href={`/blog/${article.slug}`}>
+                            <span className="line-clamp-2 leading-snug">{article.title}</span>
+                        </RailLinkItem>
+                    ))}
+                </RailLinkList>
+            ) : (
+                <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                    {filtered.map((article) => (
+                        <SurfaceLinkCard
                             key={article.slug}
                             href={`/blog/${article.slug}`}
-                            className="block rounded-md border border-border p-3 transition-colors hover:border-primary hover:bg-accent/50"
+                            className="block p-3"
                         >
                             <p className="text-sm font-medium line-clamp-2">{article.title}</p>
                             {article.publishedAt && (
@@ -354,10 +319,10 @@ function BlogRelatedArticlesSection({
                                     </div>
                                 );
                             })()}
-                        </Link>
+                        </SurfaceLinkCard>
                     ))}
                 </div>
-            </CardContent>
-        </Card>
+            )}
+        </RailCard>
     );
 }

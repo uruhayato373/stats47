@@ -7,7 +7,6 @@ import { useMemo } from "react";
 import Link from "next/link";
 
 import { DataTable, cn } from "@stats47/components";
-import { Card, CardContent, CardHeader } from "@stats47/components/atoms/ui/card";
 import {
   rankByValue,
   computeRankingStats,
@@ -16,6 +15,9 @@ import {
   type RankingStats,
 } from "@stats47/ranking";
 import { ColumnDef } from "@tanstack/react-table";
+
+import { ChartPanel } from "@/components/charts/ChartPanel";
+import { ChartEmptyState } from "@/components/charts/ChartState";
 
 import type { StatsSchema } from "@stats47/types";
 
@@ -153,34 +155,31 @@ export function RankingDataTable({
 
   if (!rankingValues || processedData.length === 0) {
     return (
-      <div className="text-center py-8 text-muted-foreground">
-        データがありません
-      </div>
+      <ChartPanel className={cn("w-full", className)}>
+        <ChartEmptyState message="データがありません" height={128} />
+      </ChartPanel>
     );
   }
 
   return (
-    <Card className={cn("w-full", className)}>
-      <CardHeader>
-        {headerActions}
-      </CardHeader>
-      <CardContent className="p-4">
-        <DataTable
-          columns={columns}
-          data={processedData}
-          showIndex={false}
-          maxRows={10}
-          enableSorting={true}
-          showRowCount={false}
-          className="h-full flex flex-col"
-          getRowId={(row) => row.areaCode}
-          ariaLabel={`${rankingItem?.title ?? "ランキング"}の都道府県別データ表`}
-          caption={`${rankingItem?.title ?? "ランキング"}の47都道府県別ランキング表。順位・都道府県名・値・偏差値の列。`}
-        />
-      </CardContent>
-      {cardFooter && (
-        <div className="px-4 pb-3 text-xs text-muted-foreground">{cardFooter}</div>
-      )}
-    </Card>
+    <ChartPanel
+      title={undefined}
+      action={headerActions}
+      footer={cardFooter}
+      className={cn("w-full", className)}
+    >
+      <DataTable
+        columns={columns}
+        data={processedData}
+        showIndex={false}
+        maxRows={10}
+        enableSorting={true}
+        showRowCount={false}
+        className="h-full flex flex-col"
+        getRowId={(row) => row.areaCode}
+        ariaLabel={`${rankingItem?.title ?? "ランキング"}の都道府県別データ表`}
+        caption={`${rankingItem?.title ?? "ランキング"}の47都道府県別ランキング表。順位・都道府県名・値・偏差値の列。`}
+      />
+    </ChartPanel>
   );
 }

@@ -1,4 +1,4 @@
-import { BRAND, FONT } from './brand';
+import { BRAND, FONT, OGP_MAP, OGP_SHADOW } from './brand';
 import { JapanMapSvg } from './JapanMapSvg';
 
 export interface AreaOgpData {
@@ -45,10 +45,10 @@ export function AreaOgp({ data }: Props) {
         <JapanMapSvg
           width={1100}
           height={680}
-          baseFill="#CBD5E1"
+          baseFill={OGP_MAP.baseFill}
           highlight={[data.prefCode]}
           highlightColor={BRAND.vermilion}
-          strokeColor="#fff"
+          strokeColor={OGP_MAP.stroke}
           strokeWidth={0.6}
         />
       </div>
@@ -116,9 +116,9 @@ export function AreaOgp({ data }: Props) {
           <div
             style={{
               width: '100%',
-              background: '#fff',
+              background: BRAND.white,
               padding: 18,
-              boxShadow: '0 8px 28px rgba(15,23,42,0.1)',
+              boxShadow: OGP_SHADOW.softCard,
               display: 'flex',
               gap: 16,
             }}
@@ -213,7 +213,7 @@ export function AreaOgp({ data }: Props) {
             style={{
               fontWeight: 900,
               fontSize: 14,
-              color: '#fff',
+              color: BRAND.white,
               background: BRAND.primary,
               padding: '1px 5px',
               fontFamily: FONT.sansJP,

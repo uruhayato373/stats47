@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 480" font-family="'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Noto Sans JP', sans-serif">
+  <rect width="800" height="480" fill="#FAFAFA"/>
+  <text x="400" y="34" text-anchor="middle" font-size="20" font-weight="bold" fill="#1E293B">上席の渋り動機 4 分類 (典型質問例つき)</text>
+  <text x="400" y="54" text-anchor="middle" font-size="12" fill="#64748B">縦軸: 自己防衛 ↔ 組織防衛 / 横軸: 制度起点 ↔ 感情起点</text>
+
+  <!-- Axes -->
+  <line x1="400" y1="90" x2="400" y2="430" stroke="#94A3B8" stroke-width="1.5"/>
+  <line x1="80" y1="260" x2="720" y2="260" stroke="#94A3B8" stroke-width="1.5"/>
+
+  <!-- Axis labels -->
+  <text x="400" y="80" text-anchor="middle" font-size="11" fill="#64748B">自己防衛</text>
+  <text x="400" y="448" text-anchor="middle" font-size="11" fill="#64748B">組織防衛</text>
+  <text x="74" y="263" text-anchor="end" font-size="11" fill="#64748B">感情起点</text>
+  <text x="726" y="263" text-anchor="start" font-size="11" fill="#64748B">制度起点</text>
+
+  <!-- Q1: 上左 = 自己 × 感情 → 序列防衛 -->
+  <g>
+    <rect x="100" y="100" width="280" height="150" fill="#FCE7F3" stroke="#9D174D" stroke-width="1.5" rx="6"/>
+    <text x="240" y="125" text-anchor="middle" font-size="15" font-weight="bold" fill="#9D174D">序列防衛</text>
+    <text x="240" y="143" text-anchor="middle" font-size="11" fill="#475569">「部下に追い抜かれる不安」</text>
+    <line x1="115" y1="155" x2="365" y2="155" stroke="#9D174D" stroke-width="0.5"/>
+    <text x="240" y="178" text-anchor="middle" font-size="11" fill="#1E293B" font-weight="bold">典型質問</text>
+    <text x="240" y="198" text-anchor="middle" font-size="11" fill="#475569" font-style="italic">「自分で考える力が落ちないか」</text>
+    <text x="240" y="216" text-anchor="middle" font-size="11" fill="#475569" font-style="italic">「経験 30 年に勝てるのか」</text>
+    <text x="240" y="240" text-anchor="middle" font-size="10" fill="#9D174D">→ 「補助線」フレームで威信を傷つけない</text>
+  </g>
+
+  <!-- Q2: 上右 = 自己 × 制度 → 責任不安 -->
+  <g>
+    <rect x="420" y="100" width="280" height="150" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5" rx="6"/>
+    <text x="560" y="125" text-anchor="middle" font-size="15" font-weight="bold" fill="#7F1D1D">責任不安</text>
+    <text x="560" y="143" text-anchor="middle" font-size="11" fill="#475569">「事故ったら自分が責任を負う」</text>
+    <line x1="435" y1="155" x2="685" y2="155" stroke="#DC2626" stroke-width="0.5"/>
+    <text x="560" y="178" text-anchor="middle" font-size="11" fill="#1E293B" font-weight="bold">典型質問</text>
+    <text x="560" y="198" text-anchor="middle" font-size="11" fill="#475569" font-style="italic">「PII が流出したらどう責任とるの」</text>
+    <text x="560" y="216" text-anchor="middle" font-size="11" fill="#475569" font-style="italic">「他自治体で導入実績は」</text>
+    <text x="560" y="240" text-anchor="middle" font-size="10" fill="#7F1D1D">→ 責任 3 段階明示 + deny ルール実物提示</text>
+  </g>
+
+  <!-- Q3: 下左 = 組織 × 感情 → 世代格差不安 -->
+  <g>
+    <rect x="100" y="270" width="280" height="150" fill="#FEF3C7" stroke="#92400E" stroke-width="1.5" rx="6"/>
+    <text x="240" y="295" text-anchor="middle" font-size="15" font-weight="bold" fill="#92400E">世代格差不安</text>
+    <text x="240" y="313" text-anchor="middle" font-size="11" fill="#475569">「中堅以上が置いていかれる」</text>
+    <line x1="115" y1="325" x2="365" y2="325" stroke="#92400E" stroke-width="0.5"/>
+    <text x="240" y="348" text-anchor="middle" font-size="11" fill="#1E293B" font-weight="bold">典型質問</text>
+    <text x="240" y="368" text-anchor="middle" font-size="11" fill="#475569" font-style="italic">「ベテランの暗黙知が消える」</text>
+    <text x="240" y="386" text-anchor="middle" font-size="11" fill="#475569" font-style="italic">「若手だけ得をするのでは」</text>
+    <text x="240" y="410" text-anchor="middle" font-size="10" fill="#92400E">→ 議事録 30→5 分の数値で世代共通の価値</text>
+  </g>
+
+  <!-- Q4: 下右 = 組織 × 制度 → 横並び不安 -->
+  <g>
+    <rect x="420" y="270" width="280" height="150" fill="#DBEAFE" stroke="#1E3A8A" stroke-width="1.5" rx="6"/>
+    <text x="560" y="295" text-anchor="middle" font-size="15" font-weight="bold" fill="#1E3A8A">横並び不安</text>
+    <text x="560" y="313" text-anchor="middle" font-size="11" fill="#475569">「他自治体がやってから」</text>
+    <line x1="435" y1="325" x2="685" y2="325" stroke="#1E3A8A" stroke-width="0.5"/>
+    <text x="560" y="348" text-anchor="middle" font-size="11" fill="#1E293B" font-weight="bold">典型質問</text>
+    <text x="560" y="368" text-anchor="middle" font-size="11" fill="#475569" font-style="italic">「県内で導入してる市はあるの」</text>
+    <text x="560" y="386" text-anchor="middle" font-size="11" fill="#475569" font-style="italic">「国の通知は出てる?」</text>
+    <text x="560" y="410" text-anchor="middle" font-size="10" fill="#1E3A8A">→ デジ庁 / 先行自治体事例を引用</text>
+  </g>
+
+  <text x="400" y="468" text-anchor="middle" font-size="11" fill="#94A3B8">※ どの象限の渋りかを判定すれば、応答テンプレを動機別に切り替えられる</text>
+</svg>

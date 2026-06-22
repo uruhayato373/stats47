@@ -10,6 +10,7 @@ import {
 } from "../../../shared/layout";
 import { CHART_STYLES, compactAxisFormat } from "../../constants";
 import { useD3Tooltip } from "../../hooks/useD3Tooltip";
+import { D3ChartLegend } from "../shared/D3ChartLegend";
 import type { D3LineChartProps, TimeSeriesDataNode } from "./types";
 
 const DEFAULT_COLORS = schemeTableau10 as readonly string[];
@@ -73,6 +74,12 @@ export function LineChart({
   const legendSeries = isMultiSeries
     ? seriesConfig!
     : [{ dataKey: valueKey, name: valueKey, color: colors[0] ?? "#888" }];
+  const legendItems = legendSeries.map((s) => ({
+    key: s.dataKey,
+    label: s.name,
+    color: s.color,
+    marker: "line" as const,
+  }));
 
   useEffect(() => {
     if (!svgRef.current || !data.length) return;
@@ -297,16 +304,7 @@ export function LineChart({
       {title && (
         <h3 className="mb-2 self-start text-lg font-semibold">{title}</h3>
       )}
-      {showLegend && legendSeries.length > 0 && (
-        <div className="flex flex-wrap items-center justify-end gap-x-3 gap-y-1 mb-1">
-          {legendSeries.map((s) => (
-            <div key={s.dataKey} className="flex items-center gap-1 text-[10px] text-muted-foreground">
-              <span className="inline-block h-[3px] w-4 rounded-full" style={{ backgroundColor: s.color }} />
-              <span>{s.name}</span>
-            </div>
-          ))}
-        </div>
-      )}
+      {showLegend && <D3ChartLegend items={legendItems} />}
       <div className="relative w-full overflow-hidden">
         <svg
           ref={svgRef}

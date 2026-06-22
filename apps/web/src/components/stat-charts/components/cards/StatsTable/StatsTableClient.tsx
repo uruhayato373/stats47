@@ -16,7 +16,10 @@ import {
   TableRow,
 } from "@stats47/components";
 
-import { LegacyDashboardCard } from "../../shared/DashboardCard";
+import { ChartFooter } from "@/components/charts/ChartFooter";
+import { ChartPanel } from "@/components/charts/ChartPanel";
+import { ChartEmptyState } from "@/components/charts/ChartState";
+
 
 import type { StatsTableRowData } from "../../../types/visualization";
 
@@ -47,63 +50,70 @@ export const StatsTableClient: React.FC<StatsTableClientProps> = ({
   const selectedYear = years.find((y) => y.yearCode === selectedYearCode);
 
   return (
-    <LegacyDashboardCard
+    <ChartPanel
       title={title}
-      rankingLink={rankingLink}
       description={description}
-      source={sourceName ?? undefined}
-      sourceLink={sourceLink}
-      sourceDetail={selectedYear?.yearName ? `${selectedYear.yearName}時点` : undefined}
-      loading={false}
-      error={null}
-      empty={years.length === 0}
+      footer={
+        <ChartFooter
+          source={sourceName ?? undefined}
+          sourceLink={sourceLink}
+          sourceDetail={selectedYear?.yearName ? `${selectedYear.yearName}時点` : undefined}
+          rankingLink={rankingLink}
+        />
+      }
     >
-      {years.length > 1 && (
-        <div className="flex justify-end mb-2">
-          <Select value={selectedYearCode} onValueChange={setSelectedYearCode}>
-            <SelectTrigger className="h-8 w-[140px] text-sm">
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-              {years.map((y) => (
-                <SelectItem key={y.yearCode} value={y.yearCode}>
-                  {y.yearName}
-                </SelectItem>
+      {years.length === 0 ? (
+        <ChartEmptyState message="データがありません" height={250} className="bg-muted/10" />
+      ) : (
+        <>
+          {years.length > 1 && (
+            <div className="flex justify-end mb-2">
+              <Select value={selectedYearCode} onValueChange={setSelectedYearCode}>
+                <SelectTrigger className="h-8 w-[140px] text-sm">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  {years.map((y) => (
+                    <SelectItem key={y.yearCode} value={y.yearCode}>
+                      {y.yearName}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+          )}
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>指標名</TableHead>
+                <TableHead className="text-right">値</TableHead>
+                <TableHead>単位</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {rows.map((row, i) => (
+                <TableRow key={i}>
+                  <TableCell>
+                    {row.rankingLink ? (
+                      <a href={row.rankingLink} className="text-primary hover:underline">
+                        {row.label}
+                      </a>
+                    ) : (
+                      row.label
+                    )}
+                  </TableCell>
+                  <TableCell className="text-right font-semibold tabular-nums">
+                    {row.value !== null ? row.value.toLocaleString() : "---"}
+                  </TableCell>
+                  <TableCell className="text-muted-foreground">
+                    {row.unit ?? ""}
+                  </TableCell>
+                </TableRow>
               ))}
-            </SelectContent>
-          </Select>
-        </div>
+            </TableBody>
+          </Table>
+        </>
       )}
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHead>指標名</TableHead>
-            <TableHead className="text-right">値</TableHead>
-            <TableHead>単位</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {rows.map((row, i) => (
-            <TableRow key={i}>
-              <TableCell>
-                {row.rankingLink ? (
-                  <a href={row.rankingLink} className="text-primary hover:underline">
-                    {row.label}
-                  </a>
-                ) : (
-                  row.label
-                )}
-              </TableCell>
-              <TableCell className="text-right font-semibold tabular-nums">
-                {row.value !== null ? row.value.toLocaleString() : "---"}
-              </TableCell>
-              <TableCell className="text-muted-foreground">
-                {row.unit ?? ""}
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </LegacyDashboardCard>
+    </ChartPanel>
   );
 };

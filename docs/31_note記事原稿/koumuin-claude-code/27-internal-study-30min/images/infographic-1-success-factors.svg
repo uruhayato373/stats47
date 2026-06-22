@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 380" font-family="'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Noto Sans JP', sans-serif">
+  <rect width="900" height="380" fill="#FAFAFA"/>
+  <text x="450" y="34" text-anchor="middle" font-size="20" font-weight="bold" fill="#1E293B">「やってみた率」を上げる 5 要素 (寄与度)</text>
+  <text x="450" y="54" text-anchor="middle" font-size="12" fill="#64748B">体感値 / 中央線なし運用と比較した相対寄与</text>
+
+  <!-- Y axis label -->
+  <text x="40" y="200" font-size="11" fill="#64748B" transform="rotate(-90,40,200)">寄与度 (%pt)</text>
+
+  <!-- X axis -->
+  <line x1="80" y1="290" x2="870" y2="290" stroke="#475569" stroke-width="1.5"/>
+  <line x1="80" y1="100" x2="80" y2="290" stroke="#475569" stroke-width="1.5"/>
+
+  <!-- Y axis ticks -->
+  <line x1="76" y1="100" x2="84" y2="100" stroke="#475569" stroke-width="1"/>
+  <text x="72" y="104" text-anchor="end" font-size="10" fill="#64748B">25</text>
+  <line x1="76" y1="138" x2="84" y2="138" stroke="#475569" stroke-width="1"/>
+  <text x="72" y="142" text-anchor="end" font-size="10" fill="#64748B">20</text>
+  <line x1="76" y1="176" x2="84" y2="176" stroke="#475569" stroke-width="1"/>
+  <text x="72" y="180" text-anchor="end" font-size="10" fill="#64748B">15</text>
+  <line x1="76" y1="214" x2="84" y2="214" stroke="#475569" stroke-width="1"/>
+  <text x="72" y="218" text-anchor="end" font-size="10" fill="#64748B">10</text>
+  <line x1="76" y1="252" x2="84" y2="252" stroke="#475569" stroke-width="1"/>
+  <text x="72" y="256" text-anchor="end" font-size="10" fill="#64748B">5</text>
+  <text x="72" y="294" text-anchor="end" font-size="10" fill="#64748B">0</text>
+
+  <!-- Bars: 1px = approx 0.13 units, 25=190px / 1=7.6px -->
+  <!-- 事前サインアップ: 18 -->
+  <rect x="120" y="153" width="120" height="137" fill="#2563EB" stroke="#1E3A8A" stroke-width="1.5" rx="3"/>
+  <text x="180" y="148" text-anchor="middle" font-size="13" font-weight="bold" fill="#1E3A8A">+18</text>
+
+  <!-- 2 トラック並走: 12 -->
+  <rect x="270" y="199" width="120" height="91" fill="#059669" stroke="#0F766E" stroke-width="1.5" rx="3"/>
+  <text x="330" y="194" text-anchor="middle" font-size="13" font-weight="bold" fill="#0F766E">+12</text>
+
+  <!-- 議事録要約題材: 22 -->
+  <rect x="420" y="123" width="120" height="167" fill="#4338CA" stroke="#312E81" stroke-width="1.5" rx="3"/>
+  <text x="480" y="118" text-anchor="middle" font-size="13" font-weight="bold" fill="#312E81">+22</text>
+
+  <!-- 振り返り記入: 8 -->
+  <rect x="570" y="229" width="120" height="61" fill="#EA580C" stroke="#9A3412" stroke-width="1.5" rx="3"/>
+  <text x="630" y="224" text-anchor="middle" font-size="13" font-weight="bold" fill="#9A3412">+8</text>
+
+  <!-- 翌週フォロー: 15 -->
+  <rect x="720" y="176" width="120" height="114" fill="#9D174D" stroke="#831843" stroke-width="1.5" rx="3"/>
+  <text x="780" y="171" text-anchor="middle" font-size="13" font-weight="bold" fill="#831843">+15</text>
+
+  <!-- X axis labels -->
+  <text x="180" y="308" text-anchor="middle" font-size="11" fill="#1E293B" font-weight="bold">事前</text>
+  <text x="180" y="322" text-anchor="middle" font-size="11" fill="#1E293B">サインアップ</text>
+  <text x="180" y="336" text-anchor="middle" font-size="10" fill="#64748B">完了</text>
+
+  <text x="330" y="308" text-anchor="middle" font-size="11" fill="#1E293B" font-weight="bold">2 トラック</text>
+  <text x="330" y="322" text-anchor="middle" font-size="11" fill="#1E293B">並走</text>
+  <text x="330" y="336" text-anchor="middle" font-size="10" fill="#64748B">(参加 / 観察)</text>
+
+  <text x="480" y="308" text-anchor="middle" font-size="11" fill="#1E293B" font-weight="bold">議事録要約</text>
+  <text x="480" y="322" text-anchor="middle" font-size="11" fill="#1E293B">題材</text>
+  <text x="480" y="336" text-anchor="middle" font-size="10" fill="#64748B">(全員業務関連)</text>
+
+  <text x="630" y="308" text-anchor="middle" font-size="11" fill="#1E293B" font-weight="bold">振り返り</text>
+  <text x="630" y="322" text-anchor="middle" font-size="11" fill="#1E293B">記入</text>
+  <text x="630" y="336" text-anchor="middle" font-size="10" fill="#64748B">(その場で 3 分)</text>
+
+  <text x="780" y="308" text-anchor="middle" font-size="11" fill="#1E293B" font-weight="bold">翌週</text>
+  <text x="780" y="322" text-anchor="middle" font-size="11" fill="#1E293B">フォロー</text>
+  <text x="780" y="336" text-anchor="middle" font-size="10" fill="#64748B">(+7 日メール)</text>
+
+  <text x="450" y="370" text-anchor="middle" font-size="11" fill="#94A3B8">※ 体感値ベース。最も効くのは「議事録要約という業務直結題材」+「事前サインアップで前のめり化」</text>
+</svg>

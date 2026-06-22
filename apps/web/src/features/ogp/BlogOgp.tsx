@@ -1,4 +1,4 @@
-import { BRAND, FONT } from './brand';
+import { BRAND, FONT, OGP_SHADOW } from './brand';
 
 export interface BlogOgpData {
   title: string;
@@ -21,7 +21,7 @@ export function BlogOgp({ data }: Props) {
         width: 1200,
         height: 630,
         position: 'relative',
-        background: '#FFFFFF',
+        background: BRAND.white,
         display: 'flex',
         fontFamily: FONT.sansJP,
         overflow: 'hidden',
@@ -35,7 +35,7 @@ export function BlogOgp({ data }: Props) {
           top: 0,
           width: 285,
           height: 630,
-          background: `repeating-linear-gradient(135deg, ${BRAND.paper} 0 20px, #fff 20px 40px)`,
+          background: `repeating-linear-gradient(135deg, ${BRAND.paper} 0 20px, ${BRAND.white} 20px 40px)`,
         }}
       />
       <div
@@ -45,7 +45,7 @@ export function BlogOgp({ data }: Props) {
           top: 0,
           width: 285,
           height: 630,
-          background: `repeating-linear-gradient(135deg, ${BRAND.paper} 0 20px, #fff 20px 40px)`,
+          background: `repeating-linear-gradient(135deg, ${BRAND.paper} 0 20px, ${BRAND.white} 20px 40px)`,
         }}
       />
 
@@ -57,8 +57,8 @@ export function BlogOgp({ data }: Props) {
           top: 0,
           width: 630,
           height: 630,
-          background: '#fff',
-          boxShadow: '0 0 40px rgba(15,23,42,0.08)',
+          background: BRAND.white,
+          boxShadow: OGP_SHADOW.centerPanel,
         }}
       />
 
@@ -83,7 +83,7 @@ export function BlogOgp({ data }: Props) {
             style={{
               padding: '3px 10px',
               background: BRAND.primary,
-              color: '#fff',
+              color: BRAND.white,
               fontFamily: FONT.mono,
               fontSize: 10,
               fontWeight: 800,
@@ -158,7 +158,7 @@ export function BlogOgp({ data }: Props) {
               style={{
                 fontWeight: 900,
                 fontSize: 16,
-                color: '#fff',
+                color: BRAND.white,
                 background: BRAND.primary,
                 padding: '2px 6px',
                 fontFamily: FONT.sansJP,

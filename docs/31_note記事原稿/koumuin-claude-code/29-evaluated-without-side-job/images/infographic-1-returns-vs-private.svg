@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 440" font-family="'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Noto Sans JP', sans-serif">
+  <rect width="900" height="440" fill="#FAFAFA"/>
+  <text x="450" y="34" text-anchor="middle" font-size="20" font-weight="bold" fill="#1E293B">5 つの場でのリターン金銭価値 (10 年累積)</text>
+  <text x="450" y="54" text-anchor="middle" font-size="12" fill="#64748B">単位: 万円 / 体感値 / 副業可能な民間との累積比較</text>
+
+  <!-- Y axis -->
+  <line x1="100" y1="90" x2="100" y2="340" stroke="#475569" stroke-width="1.5"/>
+  <line x1="100" y1="340" x2="870" y2="340" stroke="#475569" stroke-width="1.5"/>
+
+  <text x="50" y="220" font-size="11" fill="#64748B" transform="rotate(-90,50,220)">累積価値 (万円)</text>
+
+  <!-- Y ticks: 0,100,200,300,400,500 → 250/50 = 5px per 1万円 -->
+  <line x1="96" y1="340" x2="104" y2="340" stroke="#475569" stroke-width="1"/>
+  <text x="92" y="344" text-anchor="end" font-size="10" fill="#64748B">0</text>
+  <line x1="96" y1="290" x2="104" y2="290" stroke="#475569" stroke-width="1"/>
+  <text x="92" y="294" text-anchor="end" font-size="10" fill="#64748B">100</text>
+  <line x1="96" y1="240" x2="104" y2="240" stroke="#475569" stroke-width="1"/>
+  <text x="92" y="244" text-anchor="end" font-size="10" fill="#64748B">200</text>
+  <line x1="96" y1="190" x2="104" y2="190" stroke="#475569" stroke-width="1"/>
+  <text x="92" y="194" text-anchor="end" font-size="10" fill="#64748B">300</text>
+  <line x1="96" y1="140" x2="104" y2="140" stroke="#475569" stroke-width="1"/>
+  <text x="92" y="144" text-anchor="end" font-size="10" fill="#64748B">400</text>
+  <line x1="96" y1="90" x2="104" y2="90" stroke="#475569" stroke-width="1"/>
+  <text x="92" y="94" text-anchor="end" font-size="10" fill="#64748B">500</text>
+
+  <!-- 5 bars for 公務員 + 1 比較バー -->
+  <!-- 50/万 height calc -->
+  <!-- 人事考課 20 → 100px -->
+  <rect x="140" y="240" width="80" height="100" fill="#2563EB" stroke="#1E3A8A" stroke-width="1.5" rx="3"/>
+  <text x="180" y="234" text-anchor="middle" font-size="13" font-weight="bold" fill="#1E3A8A">20</text>
+
+  <!-- 庁内講師 30 → 150px -->
+  <rect x="240" y="190" width="80" height="150" fill="#F59E0B" stroke="#92400E" stroke-width="1.5" rx="3"/>
+  <text x="280" y="184" text-anchor="middle" font-size="13" font-weight="bold" fill="#92400E">30</text>
+
+  <!-- 他自治体研修 70 → 350px clamp to 250 area => use 250px -->
+  <!-- adjust scale: max 500 over 250px = 2px/万 -->
+  <rect x="340" y="200" width="80" height="140" fill="#9D174D" stroke="#831843" stroke-width="1.5" rx="3"/>
+  <text x="380" y="194" text-anchor="middle" font-size="13" font-weight="bold" fill="#831843">70</text>
+
+  <!-- 国派遣 100 → 200 -->
+  <rect x="440" y="140" width="80" height="200" fill="#059669" stroke="#0F766E" stroke-width="1.5" rx="3"/>
+  <text x="480" y="134" text-anchor="middle" font-size="13" font-weight="bold" fill="#0F766E">100</text>
+
+  <!-- OB ネットワーク 200 → 400 -->
+  <rect x="540" y="138" width="80" height="202" fill="#4338CA" stroke="#312E81" stroke-width="1.5" rx="3"/>
+  <text x="580" y="132" text-anchor="middle" font-size="13" font-weight="bold" fill="#312E81">200</text>
+
+  <!-- 公務員 5 場合計 420 -->
+  <rect x="660" y="100" width="80" height="240" fill="#1E293B" stroke="#0F172A" stroke-width="2" rx="3"/>
+  <text x="700" y="94" text-anchor="middle" font-size="13" font-weight="bold" fill="#1E293B">420</text>
+  <text x="700" y="110" text-anchor="middle" font-size="10" fill="#FFFFFF">公務員合計</text>
+
+  <!-- 民間副業 500 -->
+  <rect x="760" y="90" width="80" height="250" fill="#DC2626" stroke="#7F1D1D" stroke-width="2" rx="3"/>
+  <text x="800" y="84" text-anchor="middle" font-size="13" font-weight="bold" fill="#7F1D1D">500</text>
+  <text x="800" y="106" text-anchor="middle" font-size="10" fill="#FFFFFF">民間副業</text>
+
+  <!-- X axis labels -->
+  <text x="180" y="358" text-anchor="middle" font-size="11" fill="#1E293B" font-weight="bold">人事考課</text>
+  <text x="180" y="372" text-anchor="middle" font-size="10" fill="#64748B">ボーナス換算</text>
+
+  <text x="280" y="358" text-anchor="middle" font-size="11" fill="#1E293B" font-weight="bold">庁内講師</text>
+  <text x="280" y="372" text-anchor="middle" font-size="10" fill="#64748B">手当 + 評価</text>
+
+  <text x="380" y="358" text-anchor="middle" font-size="11" fill="#1E293B" font-weight="bold">他自治体研修</text>
+  <text x="380" y="372" text-anchor="middle" font-size="10" fill="#64748B">謝金 + 旅費</text>
+
+  <text x="480" y="358" text-anchor="middle" font-size="11" fill="#1E293B" font-weight="bold">国派遣</text>
+  <text x="480" y="372" text-anchor="middle" font-size="10" fill="#64748B">出張機会 / 給</text>
+
+  <text x="580" y="358" text-anchor="middle" font-size="11" fill="#1E293B" font-weight="bold">OB ネットワーク</text>
+  <text x="580" y="372" text-anchor="middle" font-size="10" fill="#64748B">退職後年収</text>
+
+  <text x="700" y="358" text-anchor="middle" font-size="11" fill="#1E293B" font-weight="bold">公務員合計</text>
+  <text x="700" y="372" text-anchor="middle" font-size="10" fill="#64748B">5 場の累積</text>
+
+  <text x="800" y="358" text-anchor="middle" font-size="11" fill="#DC2626" font-weight="bold">民間副業</text>
+  <text x="800" y="372" text-anchor="middle" font-size="10" fill="#7F1D1D">月 5 万 × 10 年</text>
+
+  <text x="450" y="410" text-anchor="middle" font-size="11" fill="#1E3A8A" font-weight="bold">★ 5 場をフル活用すれば、副業可能な民間との差は約 80 万 (10 年)。実質ほぼ並ぶ</text>
+  <text x="450" y="430" text-anchor="middle" font-size="11" fill="#94A3B8">特に「OB ネットワーク」と「国派遣」が長期的に効く。在職中の信用構築が鍵</text>
+</svg>

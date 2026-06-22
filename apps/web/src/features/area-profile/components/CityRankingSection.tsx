@@ -9,16 +9,13 @@ import { useRouter } from "next/navigation";
 import {
   DataTable,
 } from "@stats47/components";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@stats47/components/atoms/ui/card";
 import { ToggleGroup, ToggleGroupItem } from "@stats47/components/atoms/ui/toggle-group";
 import { rankByValue } from "@stats47/ranking";
 import { computeDeviationScores } from "@stats47/utils";
 import { Loader2 } from "lucide-react";
+
+import { ChartPanel } from "@/components/charts/ChartPanel";
+import { ChartEmptyState } from "@/components/charts/ChartState";
 
 import type { TopoJSONTopology } from "@stats47/types";
 import type { ColumnDef } from "@tanstack/react-table";
@@ -215,56 +212,44 @@ export function CityRankingSection({
         <div className={`grid gap-4 ${topology ? "grid-cols-1 lg:grid-cols-2" : "grid-cols-1"}`}>
           {/* 地図カード */}
           {topology && (
-            <Card>
-              <CardHeader className="pb-2">
-                <CardTitle className="text-sm font-medium text-muted-foreground">
-                  {selectedItem?.title ?? "地図"}
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="pt-3">
-                <CityMapChart
-                  data={mapData}
-                  colorConfig={{ colorSchemeType: "sequential" }}
-                  topology={topology}
-                  unit={selectedItem?.unit ?? ""}
-                  onCityClick={(cityCode) => {
-                    router.push(`/areas/${areaCode}/cities/${cityCode}`);
-                  }}
-                />
-              </CardContent>
-            </Card>
+            <ChartPanel
+              title={selectedItem?.title ?? "地図"}
+              titleClassName="text-muted-foreground"
+            >
+              <CityMapChart
+                data={mapData}
+                colorConfig={{ colorSchemeType: "sequential" }}
+                topology={topology}
+                unit={selectedItem?.unit ?? ""}
+                onCityClick={(cityCode) => {
+                  router.push(`/areas/${areaCode}/cities/${cityCode}`);
+                }}
+              />
+            </ChartPanel>
           )}
 
           {/* テーブルカード */}
           {processedData.length > 0 ? (
-            <Card>
-              <CardHeader className="pb-2">
-                <CardTitle className="text-base">
-                  {selectedItem?.title ?? "ランキング"}
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="pt-3">
-                <DataTable
-                  columns={columns}
-                  data={processedData}
-                  showIndex={false}
-                  maxRows={10}
-                  enableFiltering={true}
-                  enableSorting={true}
-                />
-              </CardContent>
-            </Card>
+            <ChartPanel
+              title={selectedItem?.title ?? "ランキング"}
+              titleClassName="text-base"
+            >
+              <DataTable
+                columns={columns}
+                data={processedData}
+                showIndex={false}
+                maxRows={10}
+                enableFiltering={true}
+                enableSorting={true}
+              />
+            </ChartPanel>
           ) : (
-            <Card>
-              <CardHeader className="pb-2">
-                <CardTitle className="text-base">
-                  {selectedItem?.title ?? "ランキング"}
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="py-8 text-center text-muted-foreground">
-                データがありません
-              </CardContent>
-            </Card>
+            <ChartPanel
+              title={selectedItem?.title ?? "ランキング"}
+              titleClassName="text-base"
+            >
+              <ChartEmptyState message="データがありません" height={128} />
+            </ChartPanel>
           )}
         </div>
       </div>

@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 320" font-family="'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Noto Sans JP', sans-serif">
+  <rect width="900" height="320" fill="#FAFAFA"/>
+  <text x="450" y="34" text-anchor="middle" font-size="20" font-weight="bold" fill="#1E293B">庁内勉強会 4 フェーズタイムライン (告知 → 当日 → フォロー)</text>
+
+  <defs>
+    <marker id="arr27-1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#64748B"/>
+    </marker>
+  </defs>
+
+  <!-- Timeline base -->
+  <line x1="40" y1="170" x2="860" y2="170" stroke="#CBD5E1" stroke-width="2"/>
+
+  <!-- Phase 1: 告知 -->
+  <g>
+    <rect x="40" y="100" width="180" height="140" fill="#DBEAFE" stroke="#1E3A8A" stroke-width="1.5" rx="6"/>
+    <text x="130" y="125" text-anchor="middle" font-size="14" font-weight="bold" fill="#1E3A8A">① 告知</text>
+    <text x="130" y="143" text-anchor="middle" font-size="11" fill="#1E293B">1 週前</text>
+    <line x1="55" y1="153" x2="205" y2="153" stroke="#1E3A8A" stroke-width="0.5"/>
+    <text x="130" y="172" text-anchor="middle" font-size="11" fill="#1E293B">所要: 30 分</text>
+    <text x="130" y="195" text-anchor="middle" font-size="10" fill="#7F1D1D" font-weight="bold">離脱リスク: 中</text>
+    <text x="130" y="212" text-anchor="middle" font-size="10" fill="#475569">タイトルで興味薄なら</text>
+    <text x="130" y="226" text-anchor="middle" font-size="10" fill="#475569">サインアップせず</text>
+  </g>
+  <line x1="220" y1="170" x2="248" y2="170" stroke="#64748B" stroke-width="2" marker-end="url(#arr27-1)"/>
+
+  <!-- Phase 2: 事前案内メール 3 通 -->
+  <g>
+    <rect x="250" y="100" width="200" height="140" fill="#FEF3C7" stroke="#92400E" stroke-width="1.5" rx="6"/>
+    <text x="350" y="125" text-anchor="middle" font-size="14" font-weight="bold" fill="#92400E">② 事前案内メール 3 通</text>
+    <text x="350" y="143" text-anchor="middle" font-size="11" fill="#1E293B">3 日前 / 前日 / 当日朝</text>
+    <line x1="265" y1="153" x2="435" y2="153" stroke="#92400E" stroke-width="0.5"/>
+    <text x="350" y="172" text-anchor="middle" font-size="11" fill="#1E293B">所要: 各 5 分</text>
+    <text x="350" y="195" text-anchor="middle" font-size="10" fill="#DC2626" font-weight="bold">離脱リスク: 最大</text>
+    <text x="350" y="212" text-anchor="middle" font-size="10" fill="#475569">案内が 1 通だけだと</text>
+    <text x="350" y="226" text-anchor="middle" font-size="10" fill="#475569">参加率 50% 切る</text>
+  </g>
+  <line x1="450" y1="170" x2="478" y2="170" stroke="#64748B" stroke-width="2" marker-end="url(#arr27-1)"/>
+
+  <!-- Phase 3: 当日 30 分 (5+5+15+5) -->
+  <g>
+    <rect x="480" y="100" width="220" height="140" fill="#CCFBF1" stroke="#0F766E" stroke-width="2" rx="6"/>
+    <text x="590" y="125" text-anchor="middle" font-size="14" font-weight="bold" fill="#0F766E">③ 当日 30 分</text>
+    <text x="590" y="143" text-anchor="middle" font-size="11" fill="#1E293B">5+5+15+5 構成</text>
+    <line x1="495" y1="153" x2="685" y2="153" stroke="#0F766E" stroke-width="0.5"/>
+    <text x="590" y="172" text-anchor="middle" font-size="10" fill="#1E293B">導入 5 / デモ 5 / 手動かし 15 / 質疑 5</text>
+    <text x="590" y="195" text-anchor="middle" font-size="10" fill="#059669" font-weight="bold">離脱リスク: 小</text>
+    <text x="590" y="212" text-anchor="middle" font-size="10" fill="#475569">手を動かす 15 分で</text>
+    <text x="590" y="226" text-anchor="middle" font-size="10" fill="#475569">体感が定着する</text>
+  </g>
+  <line x1="700" y1="170" x2="728" y2="170" stroke="#64748B" stroke-width="2" marker-end="url(#arr27-1)"/>
+
+  <!-- Phase 4: 翌週フォロー -->
+  <g>
+    <rect x="730" y="100" width="160" height="140" fill="#FCE7F3" stroke="#9D174D" stroke-width="1.5" rx="6"/>
+    <text x="810" y="125" text-anchor="middle" font-size="14" font-weight="bold" fill="#9D174D">④ 翌週フォロー</text>
+    <text x="810" y="143" text-anchor="middle" font-size="11" fill="#1E293B">+7 日</text>
+    <line x1="745" y1="153" x2="875" y2="153" stroke="#9D174D" stroke-width="0.5"/>
+    <text x="810" y="172" text-anchor="middle" font-size="11" fill="#1E293B">所要: 1 時間</text>
+    <text x="810" y="195" text-anchor="middle" font-size="10" fill="#EA580C" font-weight="bold">離脱リスク: 中</text>
+    <text x="810" y="212" text-anchor="middle" font-size="10" fill="#475569">「やってみた?」を</text>
+    <text x="810" y="226" text-anchor="middle" font-size="10" fill="#475569">送らないと忘却</text>
+  </g>
+
+  <!-- Bottom note -->
+  <text x="450" y="285" text-anchor="middle" font-size="12" fill="#1E3A8A" font-weight="bold">★ フェーズ ② と ④ を端折ると「やってみた率」が大きく落ちる</text>
+  <text x="450" y="305" text-anchor="middle" font-size="11" fill="#64748B">告知 → 案内 → 当日 → フォローの 4 フェーズが揃って初めて定着する</text>
+</svg>

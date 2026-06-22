@@ -22,8 +22,8 @@ browser-use CLI（Chrome プロファイル経由）で note.com エディタを
 ### 公開済み記事
 **公開後は R2 (`note/<vertical>/<slug>/`) に同期し、docs/31 から削除する**（ローカル容量最適化）。
 
-- **同期トリガー**: note.com 公開後に `.claude/state/note-published-urls.json` を更新 → develop push → `sync-note-r2.yml` が自動で R2 push + docs/31 削除 + commit-back する
-- **公開状態の真実源**: `.claude/state/note-published-urls.json`（slug → url / is_paid / r2_path 等）
+- **同期トリガー**: note.com 公開後に R2 `draft.md` の frontmatter を更新（下記「Phase 8 後」手順）→ develop push → `sync-note-r2.yml` が自動で R2 push + docs/31 削除 + commit-back する
+- **公開状態の真実源**: **R2 `draft.md` の frontmatter**（`note_url` フィールド）。`note-published-urls.json` は `build-note-published-index.mjs` が再構築する派生インデックス
 - **更新 (update モード) の前に復元が必要**:
   ```bash
   bash .claude/scripts/note/restore-from-r2.sh <slug>
@@ -69,6 +69,25 @@ browser-use CLI（Chrome プロファイル経由）で note.com エディタを
 - Profile 5 は note 投稿専用。`stats47` 以外の note アカウントを後からログインさせない
 - **Phase 1 でアカウント照合ゲートを必ず通す**（下記 Phase 1 参照）。プロファイル分離だけでは「セッション切れ → 別アカウントで再ログイン」のドリフトを防げないため、実行時照合を保険として併用する
 - 過去事故: 2026-05-20 に Profile 1 から誤って `note.com/dobokunote` に 3 本公開した。この照合ゲートはその再発防止策
+
+## 前処理（ブラウザ操作より先に実行）
+
+投稿前に **カバー SVG** と **ハッシュタグ** を生成する。どちらも欠けたまま投稿しない。
+
+```bash
+# 1. ドラフトが docs/31 に無ければ R2 から復元
+bash .claude/scripts/note/restore-from-r2.sh <slug>
+
+# 2. カバー SVG を生成 (images/cover-1280x670.svg)
+node .claude/scripts/note/generate-note-covers.mjs --slug <slug>
+
+# 3. ハッシュタグ 90 個を生成 (hashtags.txt)
+node .claude/scripts/note/generate-note-hashtags.mjs --slug <slug>
+```
+
+- カバー SVG: `docs/31_note記事原稿/[vertical/]<slug>/images/cover-1280x670.svg`
+  既存の PNG アイキャッチ (`cover-1280x670.png`) がある場合はそちらを優先してよい。SVG のみの場合は Phase 2 で SVG ファイルをそのままアップロードする（note は SVG を受け付けない場合があるため、`rsvg-convert` または `inkscape` で PNG に変換してからアップロードする）。
+- ハッシュタグ: `docs/31_note記事原稿/[vertical/]<slug>/hashtags.txt` に 1 行 1 タグで 90 個。Phase 7 でタグ入力時に使う。
 
 ## 前提条件
 
@@ -191,24 +210,62 @@ browser-use --headed --profile "Profile 5" state 2>&1 > /tmp/note-acct.txt
 主なポイント:
 - **Phase 7-Pricing**: `is_paid=true` + `price_jpy>0` のときだけ実行。有料ラジオをクリック → Shadow DOM 内 `<input id=price>` に JS で価格を上書き（`type` 不可: 初期値 300 と連結される）
 - **Phase 7-Boundary（有料境界・自動・2026-06-16 実機確定）**: 「有料エリア設定」ボタン → 境界設定画面で **`segmentsPaid[0]` の先頭見出しを錨**に有料ラインを自動設定。✅ **境界画面 DOM は確定済（update 11 本 + 新規 2 本連続成功）**。⚠️ **誤露出防止で最終「投稿/更新」前に境界を screenshot で目視確認**してから押す（エージェントが Read で screenshot 検証後に押下して可）。詳細は [references/scheduling.md](references/scheduling.md) Phase 7-Boundary
-- 「公開に進む」→ ハッシュタグ入力（**1 個ずつ click→type→Enter**。まとめて type すると combobox の value に連結され失敗）→ マガジン追加 → 日時設定 → 投稿
+- **Phase 7-Tags**: ハッシュタグは `hashtags.txt` から読んで入力する（**1 個ずつ click→type→Enter**。まとめて type すると combobox の value に連結され失敗）。note は最大 99 タグまで設定可能。`hashtags.txt` に 90 個生成しているので全行を使う（99 未満に抑えてエラー回避）。
+  ```bash
+  cat docs/31_note記事原稿/[vertical/]<slug>/hashtags.txt
+  ```
+  `hashtags.txt` が無い場合は投稿を中断し `generate-note-hashtags.mjs` を先に実行する。
+- 「公開に進む」→ タグ入力（上記 Phase 7-Tags）→ マガジン追加 → 日時設定 → 投稿
 - ★**エディタ操作の実体は関数ライブラリ `.claude/scripts/note/editor-helpers.sh`**（`source` して `process_article`（update）/ `new_post_cover_title`+`ins_img`+`new_post_tags`+`new_post_magazine`+`paid_setline`（新規）/ `do_update`）。手書きせずこれを使う。詳細は [references/editor-operations.md](references/editor-operations.md)「実機検証済 update バッチ運用メモ」
 - 予約日時が指定されていない場合でも Phase 7 で**即時公開**が可能（「今すぐ公開」ボタンをクリック）。日時設定をスキップして直接「今すぐ公開」を選ぶ
 - 日時も即時公開も有料設定も不要な場合（下書き保存のみ）は Phase 7 全体をスキップ
 
-### Phase 8 後: 公開 URL の自動記録
+### Phase 8 後: 公開 URL をフロントマターに記録（★真実源への書き込み）
 
-記事を公開（即時公開 or 予約投稿）したら、その note 記事 URL を
-`.claude/state/note-published-urls.json` の `articles` に追記する。
+記事を公開（即時公開 or 予約投稿）したら、**R2 `draft.md` の frontmatter に `note_url` を追加**する。
+これが doboku-note と同じ方式の SSOT 管理。
 
-- 公開直後、ブラウザの URL バー（`note.com/stats47/n/<id>`）または Phase 8 の確認画面から URL を取得
-- `articles` に `"<slug>": { "vertical": "...", "title": "...", "url": "...", "is_paid": ..., "published_at": "YYYY-MM-DD" }` を追記
-- 既に同じ slug があれば URL を上書き更新（再公開時）
-- 下書き保存のみ（公開していない）の場合は記録しない
+```bash
+# 1. 公開 URL を取得（Phase 8 のブラウザ URL バー or 確認画面から）
+NOTE_URL="https://note.com/stats47/n/nXXXXX"
+SLUG="<slug>"
+
+# 2. docs/31 の draft.md が存在しない場合は R2 から復元
+bash .claude/scripts/note/restore-from-r2.sh "$SLUG"
+
+# 3. frontmatter に note_url / published / published_at を追加（migrate スクリプト転用）
+NOTE_URL="$NOTE_URL" DRY_RUN=false \
+  node .claude/scripts/note/migrate-note-frontmatter.mjs --slug "$SLUG"
+# ↑ note-published-urls.json に URL が入っていれば自動取得。
+#   新規公開で未登録の場合は下記の手動追記を先に行う。
+
+# 4. note-published-urls.json に追記（派生インデックスの仮登録）
+# → migrate 実行後に build-note-published-index.mjs で再構築する方が正確
+node .claude/scripts/note/build-note-published-index.mjs
+
+# 5. R2 に反映（S3 API 経由 or develop push → sync-note-r2.yml）
+# ローカルに S3 creds があれば:
+node .claude/scripts/note/sync-note-r2.mjs  # または develop push でCIに委ねる
+```
+
+**新規公開時の追加手順** (note-published-urls.json にまだ存在しない場合):
+```javascript
+// .claude/state/note-published-urls.json の articles に手動追記
+"<slug>": {
+  "vertical": "<vertical>",
+  "title": "<title>",
+  "url": "<NOTE_URL>",
+  "is_paid": false,
+  "published_at": "YYYY-MM-DD",
+  "r2_path": "note/<vertical>/<slug>",
+  "status": "r2_ready"
+}
+```
+追記後に `migrate-note-frontmatter.mjs --slug <slug>` → `build-note-published-index.mjs` を実行する。
+
+- **下書き保存のみ**（公開していない）の場合は上記不要
 - **ドラフト管理中だった場合**: `.claude/state/note-draft-index.json` の `drafts` から同 slug を削除する
-  （`note-published-urls.json` が真実源になるため、draft-index から除去して重複を防ぐ）
-
-この記録は、シリーズの公開状況の真実源であり、マガジンへの記事追加・将来のリンク修正の参照元になる。
+  （公開後は frontmatter の `note_url` が真実源になるため）
 
 - **ClipboardEvent 制約**: 最初の1セグメントのみ ClipboardEvent でペースト可能。2回目以降は `type` コマンドを使う
 - **URL カード変換待機**: URL 入力後は **4秒待機**必須。カード変換完了前に次の入力をするとレイアウトが壊れる

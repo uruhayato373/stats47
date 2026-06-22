@@ -29,7 +29,17 @@ WEB_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
 # fi
 echo -e "${YELLOW}⚠️  TypeScript型チェックは一時的に無効化されています${NC}"
 
-# 2. 一時ファイル自動クリーンアップ
+# 2. デザインシステムガード
+echo -e "${GREEN}🎨 デザインシステムチェック...${NC}"
+if ! (cd "$WEB_DIR" && npm run design-system:check > /dev/null 2>&1); then
+  echo -e "${RED}❌ デザインシステム違反が検出されました。${NC}"
+  echo -e "${YELLOW}💡 詳細を確認: npm run design-system:check${NC}"
+  ERROR_COUNT=$((ERROR_COUNT + 1))
+else
+  echo -e "${GREEN}✅ デザインシステムチェック成功${NC}"
+fi
+
+# 3. 一時ファイル自動クリーンアップ
 echo -e "${GREEN}🗑️  一時ファイルチェック...${NC}"
 PROJECT_ROOT="$(cd "$SCRIPT_DIR/../../.." && pwd)"
 
@@ -64,7 +74,7 @@ else
   echo -e "${GREEN}✅ 一時ファイルチェック成功${NC}"
 fi
 
-# 3. ファイルサイズチェック
+# 4. ファイルサイズチェック
 echo -e "${GREEN}📏 ファイルサイズチェック...${NC}"
 MAX_FILE_SIZE=1048576 # 1MB
 LARGE_FILES=$(git diff --cached --name-only --diff-filter=ACM | while read file; do
@@ -105,7 +115,7 @@ else
   echo -e "${GREEN}✅ ファイルサイズチェック成功${NC}"
 fi
 
-# 3. 命名規則チェック
+# 5. 命名規則チェック
 echo -e "${GREEN}📝 命名規則チェック...${NC}"
 INVALID_FILES=$(git diff --cached --name-only --diff-filter=ACM | grep -E '.*[A-Z].*\.(ts|tsx|js|jsx)$' | grep -v node_modules || true)
 
@@ -118,7 +128,7 @@ else
   echo -e "${GREEN}✅ 命名規則チェック成功${NC}"
 fi
 
-# 4. セキュリティチェック - 依存関係の脆弱性
+# 6. セキュリティチェック - 依存関係の脆弱性
 echo -e "${GREEN}🔒 依存関係の脆弱性チェック...${NC}"
 if (cd "$WEB_DIR" && npm audit --audit-level=moderate > /dev/null 2>&1); then
   echo -e "${GREEN}✅ 脆弱性チェック成功${NC}"
@@ -129,7 +139,7 @@ else
   # 警告のみで続行（エラーで止めない）
 fi
 
-# 5. シークレット漏洩チェック（簡易版）
+# 7. シークレット漏洩チェック（簡易版）
 echo -e "${GREEN}🔐 シークレット漏洩チェック...${NC}"
 STAGED_FILES=$(git diff --cached --name-only --diff-filter=ACM)
 SECRET_PATTERNS=(
@@ -186,7 +196,7 @@ if [ "$FOUND_SECRETS" = false ]; then
   echo -e "${GREEN}✅ シークレットチェック成功${NC}"
 fi
 
-# 6. ブログ記事の Factual cross-check (2026-05-25 追加)
+# 8. ブログ記事の Factual cross-check (2026-05-25 追加)
 echo -e "${GREEN}📊 ブログ記事 factual cross-check...${NC}"
 STAGED_ARTICLES=$(git diff --cached --name-only --diff-filter=ACM | grep -E "^docs/21_ブログ記事原稿/[^/]+/article\.md$" || true)
 
@@ -324,4 +334,3 @@ fi
 echo ""
 echo -e "${GREEN}✅ すべてのチェックが成功しました！${NC}"
 exit 0
-

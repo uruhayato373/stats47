@@ -2,9 +2,19 @@
   "week_id": "2026-W25",
   "year": 2026,
   "week": 25,
-  "generated_at": "2026-06-19T21:15:50.269Z",
+  "generated_at": "2026-06-21T11:54:37.237Z",
   "ranges": {
     "ga4": {
+      "this": {
+        "start": "2026-06-14",
+        "end": "2026-06-20"
+      },
+      "prev": {
+        "start": "2026-06-07",
+        "end": "2026-06-13"
+      }
+    },
+    "gsc": {
       "this": {
         "start": "2026-06-12",
         "end": "2026-06-18"
@@ -13,133 +23,130 @@
         "start": "2026-06-05",
         "end": "2026-06-11"
       }
-    },
-    "gsc": {
-      "this": {
-        "start": "2026-06-10",
-        "end": "2026-06-16"
-      },
-      "prev": {
-        "start": "2026-06-03",
-        "end": "2026-06-09"
-      }
     }
   },
   "ga4": {
     "channels": [
       {
         "channel": "Organic Search",
-        "thisUsers": 1301,
-        "prevUsers": 1374,
-        "userDelta": -73,
-        "userDeltaPct": -5.312954876273653,
-        "thisSessions": 1535,
-        "prevSessions": 1623,
-        "thisEngagedSessions": 1024,
-        "prevEngagedSessions": 1120,
-        "thisEngagementRate": 0.6671009771986971
+        "thisUsers": 1397,
+        "prevUsers": 1350,
+        "userDelta": 47,
+        "userDeltaPct": 3.4814814814814814,
+        "thisSessions": 1633,
+        "prevSessions": 1609,
+        "thisEngagedSessions": 1045,
+        "prevEngagedSessions": 1103,
+        "thisEngagementRate": 0.6399265156154317
       },
       {
         "channel": "Direct",
-        "thisUsers": 346,
-        "prevUsers": 425,
-        "userDelta": -79,
-        "userDeltaPct": -18.58823529411765,
-        "thisSessions": 378,
-        "prevSessions": 459,
-        "thisEngagedSessions": 89,
-        "prevEngagedSessions": 100,
-        "thisEngagementRate": 0.23544973544973544
+        "thisUsers": 311,
+        "prevUsers": 338,
+        "userDelta": -27,
+        "userDeltaPct": -7.988165680473373,
+        "thisSessions": 341,
+        "prevSessions": 368,
+        "thisEngagedSessions": 84,
+        "prevEngagedSessions": 83,
+        "thisEngagementRate": 0.24633431085043989
       },
       {
         "channel": "Referral",
-        "thisUsers": 282,
-        "prevUsers": 135,
-        "userDelta": 147,
-        "userDeltaPct": 108.88888888888889,
-        "thisSessions": 303,
-        "prevSessions": 171,
-        "thisEngagedSessions": 180,
-        "prevEngagedSessions": 108,
-        "thisEngagementRate": 0.594059405940594
-      },
-      {
-        "channel": "Organic Social",
-        "thisUsers": 117,
-        "prevUsers": 20,
-        "userDelta": 97,
-        "userDeltaPct": 484.99999999999994,
-        "thisSessions": 122,
-        "prevSessions": 25,
-        "thisEngagedSessions": 51,
-        "prevEngagedSessions": 14,
-        "thisEngagementRate": 0.4180327868852459
+        "thisUsers": 160,
+        "prevUsers": 251,
+        "userDelta": -91,
+        "userDeltaPct": -36.254980079681275,
+        "thisSessions": 178,
+        "prevSessions": 283,
+        "thisEngagedSessions": 109,
+        "prevEngagedSessions": 171,
+        "thisEngagementRate": 0.6123595505617978
       },
       {
         "channel": "AI Assistant",
-        "thisUsers": 101,
-        "prevUsers": 18,
-        "userDelta": 83,
-        "userDeltaPct": 461.1111111111111,
-        "thisSessions": 140,
-        "prevSessions": 21,
-        "thisEngagedSessions": 58,
-        "prevEngagedSessions": 9,
-        "thisEngagementRate": 0.4142857142857143
+        "thisUsers": 88,
+        "prevUsers": 46,
+        "userDelta": 42,
+        "userDeltaPct": 91.30434782608695,
+        "thisSessions": 122,
+        "prevSessions": 58,
+        "thisEngagedSessions": 53,
+        "prevEngagedSessions": 25,
+        "thisEngagementRate": 0.4344262295081967
       },
       {
         "channel": "Unassigned",
-        "thisUsers": 22,
-        "prevUsers": 46,
-        "userDelta": -24,
-        "userDeltaPct": -52.17391304347826,
-        "thisSessions": 27,
-        "prevSessions": 50,
-        "thisEngagedSessions": 16,
-        "prevEngagedSessions": 16,
-        "thisEngagementRate": 0.5925925925925926
+        "thisUsers": 64,
+        "prevUsers": 33,
+        "userDelta": 31,
+        "userDeltaPct": 93.93939393939394,
+        "thisSessions": 70,
+        "prevSessions": 36,
+        "thisEngagedSessions": 17,
+        "prevEngagedSessions": 12,
+        "thisEngagementRate": 0.24285714285714285
+      },
+      {
+        "channel": "Organic Social",
+        "thisUsers": 12,
+        "prevUsers": 124,
+        "userDelta": -112,
+        "userDeltaPct": -90.32258064516128,
+        "thisSessions": 13,
+        "prevSessions": 130,
+        "thisEngagedSessions": 5,
+        "prevEngagedSessions": 59,
+        "thisEngagementRate": 0.38461538461538464
       }
     ],
     "total": {
-      "thisUsers": 2169,
-      "prevUsers": 2018,
-      "thisSessions": 2505,
-      "prevSessions": 2349,
-      "thisEngagedSessions": 1418,
-      "prevEngagedSessions": 1367,
-      "userDelta": 151,
-      "userDeltaPct": 7.482656095143707,
-      "engagedSessionDelta": 51,
-      "engagedSessionDeltaPct": 3.730797366495977
+      "thisUsers": 2032,
+      "prevUsers": 2142,
+      "thisSessions": 2357,
+      "prevSessions": 2484,
+      "thisEngagedSessions": 1313,
+      "prevEngagedSessions": 1453,
+      "userDelta": -110,
+      "userDeltaPct": -5.135387488328664,
+      "engagedSessionDelta": -140,
+      "engagedSessionDeltaPct": -9.635237439779766
     },
     "organic": {
       "channel": "Organic Search",
-      "thisUsers": 1301,
-      "prevUsers": 1374,
-      "userDelta": -73,
-      "userDeltaPct": -5.312954876273653,
-      "thisSessions": 1535,
-      "prevSessions": 1623,
-      "thisEngagedSessions": 1024,
-      "prevEngagedSessions": 1120,
-      "thisEngagementRate": 0.6671009771986971
+      "thisUsers": 1397,
+      "prevUsers": 1350,
+      "userDelta": 47,
+      "userDeltaPct": 3.4814814814814814,
+      "thisSessions": 1633,
+      "prevSessions": 1609,
+      "thisEngagedSessions": 1045,
+      "prevEngagedSessions": 1103,
+      "thisEngagementRate": 0.6399265156154317
     }
   },
   "gsc": {
     "total": {
-      "thisClicks": 486,
-      "prevClicks": 452,
-      "clickDelta": 34,
-      "clickDeltaPct": 7.52212389380531,
-      "thisImpressions": 14919,
-      "prevImpressions": 14370,
-      "impressionDelta": 549,
-      "thisCtr": 0.032575909913533076,
-      "prevCtr": 0.031454418928322896,
-      "thisPosition": 10.032642938534755,
-      "prevPosition": 9.57348643006263
+      "thisClicks": 514,
+      "prevClicks": 491,
+      "clickDelta": 23,
+      "clickDeltaPct": 4.684317718940937,
+      "thisImpressions": 16100,
+      "prevImpressions": 14841,
+      "impressionDelta": 1259,
+      "thisCtr": 0.03192546583850932,
+      "prevCtr": 0.033084023987601914,
+      "thisPosition": 9.884782608695652,
+      "prevPosition": 9.62253217438178
     },
     "topQueries": [
+      {
+        "query": "マヨネーズ消費量 都道府県",
+        "clicks": 5,
+        "impressions": 62,
+        "ctr": 0.08064516129032258,
+        "position": 5.838709677419355
+      },
       {
         "query": "stats47",
         "clicks": 3,
@@ -148,67 +155,60 @@
         "position": 3.8
       },
       {
-        "query": "生活費 ランキング 都 道府県",
-        "clicks": 3,
-        "impressions": 14,
-        "ctr": 0.21428571428571427,
-        "position": 6.642857142857143
-      },
-      {
-        "query": "納豆 消費 量 ランキング 2026",
-        "clicks": 3,
-        "impressions": 12,
-        "ctr": 0.25,
-        "position": 2
-      },
-      {
         "query": "うどん 消費量 ランキング",
-        "clicks": 2,
-        "impressions": 33,
-        "ctr": 0.06060606060606061,
-        "position": 6.484848484848484
-      },
-      {
-        "query": "生活費ランキング 都道府県",
-        "clicks": 2,
-        "impressions": 3,
-        "ctr": 0.6666666666666666,
-        "position": 6
-      },
-      {
-        "query": "県債 ランキング",
-        "clicks": 2,
-        "impressions": 10,
-        "ctr": 0.2,
-        "position": 4.6
-      },
-      {
-        "query": "納豆 消費量 都道府県",
-        "clicks": 2,
+        "clicks": 3,
         "impressions": 34,
-        "ctr": 0.058823529411764705,
-        "position": 10.941176470588236
-      },
-      {
-        "query": "鶏肉 消費量 都道府県",
-        "clicks": 2,
-        "impressions": 11,
-        "ctr": 0.18181818181818182,
-        "position": 7
-      },
-      {
-        "query": "うどん消費量 都道府県",
-        "clicks": 1,
-        "impressions": 13,
-        "ctr": 0.07692307692307693,
-        "position": 2.8461538461538463
+        "ctr": 0.08823529411764706,
+        "position": 5.852941176470588
       },
       {
         "query": "アイス 消費量 都 道府県 最新",
-        "clicks": 1,
-        "impressions": 3,
-        "ctr": 0.3333333333333333,
-        "position": 7
+        "clicks": 3,
+        "impressions": 12,
+        "ctr": 0.25,
+        "position": 9.083333333333334
+      },
+      {
+        "query": "生活費ランキング 都道府県",
+        "clicks": 3,
+        "impressions": 6,
+        "ctr": 0.5,
+        "position": 6
+      },
+      {
+        "query": "子育てしやすい県ランキング",
+        "clicks": 2,
+        "impressions": 31,
+        "ctr": 0.06451612903225806,
+        "position": 6.903225806451613
+      },
+      {
+        "query": "子育てしやすい都道府県ランキング",
+        "clicks": 2,
+        "impressions": 16,
+        "ctr": 0.125,
+        "position": 5.5625
+      },
+      {
+        "query": "生活費 ランキング 都 道府県",
+        "clicks": 2,
+        "impressions": 9,
+        "ctr": 0.2222222222222222,
+        "position": 6.666666666666667
+      },
+      {
+        "query": "納豆 消費 量 ランキング 2026",
+        "clicks": 2,
+        "impressions": 10,
+        "ctr": 0.2,
+        "position": 2
+      },
+      {
+        "query": "鶏肉 消費量 ランキング 2025",
+        "clicks": 2,
+        "impressions": 13,
+        "ctr": 0.15384615384615385,
+        "position": 8.692307692307693
       }
     ]
   },
@@ -217,7 +217,7 @@
     "reason": "PSI_API_KEY 未設定"
   },
   "notes": [
-    "GSC データは 3 日遅延のため、直近期間は 2026-06-10 〜 2026-06-16 を採用",
+    "GSC データは 3 日遅延のため、直近期間は 2026-06-12 〜 2026-06-18 を採用",
     "NSM = 週間エンゲージドセッション数 (GA4 engagedSessions 全チャネル合計)",
     "NSM 定義: docs/04_レビュー/*-nsm.md"
   ]

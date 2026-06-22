@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 
-import { Card, CardContent } from "@stats47/components/atoms/ui/card";
+import { SurfaceCard } from "@/components/surface";
 
 import { SidebarPromoBanner, selectPromoBannerIndexForRanking } from "@/features/ads";
 import { AffiliateAdSlot } from "@/features/ads/server";
@@ -39,14 +39,12 @@ export function RankingPageSidebarSection({
 }: RankingPageSidebarSectionProps) {
   return (
     <Suspense fallback={<RankingPageSidebarSkeleton />}>
-      <Card>
-        <CardContent className="p-3">
-          <AdSenseAd
-            format={RANKING_SIDEBAR_TOP.format}
-            slotId={RANKING_SIDEBAR_TOP.slotId}
-          />
-        </CardContent>
-      </Card>
+      <SurfaceCard className="p-3">
+        <AdSenseAd
+          format={RANKING_SIDEBAR_TOP.format}
+          slotId={RANKING_SIDEBAR_TOP.slotId}
+        />
+      </SurfaceCard>
       <RankingItemsSidebar
         rankingKey={rankingKey}
         areaType={areaType}

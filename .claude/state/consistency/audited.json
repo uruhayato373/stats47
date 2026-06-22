@@ -1,5 +1,14 @@
 {
-  "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-  "audited_at": "2026-06-21T11:05:55",
-  "files": []
+  "hash": "ead8affbe2945dad4403066e74e2618c88bfda49728970aace5cb05a3e61f8af",
+  "audited_at": "2026-06-22T05:36:52",
+  "files": [
+    ".claude/scripts/note/affiliate-incremental.sh",
+    ".claude/scripts/note/download-affiliate-banners.mjs",
+    ".claude/scripts/note/editor-helpers.sh",
+    ".claude/scripts/note/expand-for-fix.mjs",
+    ".claude/scripts/note/inject-affiliate-blocks.mjs",
+    ".claude/scripts/note/prepare-article.cjs",
+    ".claude/scripts/note/push-fixed-articles.mjs",
+    ".claude/skills/blog/trends-snapshots/trends-all-2026-06-22.md"
+  ]
 }

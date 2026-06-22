@@ -1,17 +1,12 @@
 import type { RankingItem } from "@stats47/ranking";
 import type { MapDataPoint, MapVisualizationConfig } from "@stats47/visualization/d3";
 
+export { getLeafletBorderColor } from "./map-palette";
+
 type NullableMapValue = {
   areaCode: string;
   value: number | null;
 };
-
-export const LEAFLET_BORDER_COLOR_LIGHT = "#94a3b8";
-export const LEAFLET_BORDER_COLOR_DARK = "#475569";
-
-export function getLeafletBorderColor(theme: string | undefined): string {
-  return theme === "dark" ? LEAFLET_BORDER_COLOR_DARK : LEAFLET_BORDER_COLOR_LIGHT;
-}
 
 export function rankingItemToMapConfig(rankingItem: Pick<RankingItem, "visualization">): MapVisualizationConfig {
   const vis = rankingItem.visualization;

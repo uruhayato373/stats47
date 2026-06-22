@@ -1,4 +1,4 @@
-import { BRAND, FONT } from './brand';
+import { BRAND, FONT, OGP_SURFACE } from './brand';
 
 // TopMinimal A案: 47ドット背景 + 中央 stats47 ロゴ
 export function DefaultOgp() {
@@ -46,7 +46,7 @@ export function DefaultOgp() {
           top: 0,
           width: 630,
           height: 630,
-          background: 'rgba(248,250,252,0.92)',
+          background: OGP_SURFACE.paperOverlay,
           backdropFilter: 'blur(2px)',
           display: 'flex',
         }}
