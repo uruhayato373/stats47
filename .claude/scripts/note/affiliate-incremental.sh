@@ -243,10 +243,17 @@ publish_update(){
     BU eval "(function(){return JSON.stringify([...document.querySelectorAll('button')].filter(b=>b.offsetParent!==null&&b.innerText.trim()).map(b=>b.innerText.trim()).slice(0,15));})();" 2>&1 | tail -1
     return 1
   fi
+  # 「この記事が更新されたことを購入・購読したユーザーに通知しますか？」モーダルが出たら いいえ(通知しない)。
+  # 主に有料記事の 更新する 後に出る。これを押さないと公開が完了せずライブに反映されない(ユーザー方針: いいえ)。
+  for k in 1 2 3 4 5; do
+    if [ "$(_has_btn 'いいえ')" = "yes" ]; then _click_btn 'いいえ' >/dev/null; sleep 4; break; fi
+    sleep 1.5
+  done
+  sleep 2
   BU state > /tmp/ps.txt 2>&1
-  if grep -qE "記事が公開されました|シェア|おめでとう" /tmp/ps.txt; then
+  if grep -qE "記事が公開されました|シェア|おめでとう|更新しました|公開しました" /tmp/ps.txt; then
     echo "  [PUBLISHED] $SLUG"; return 0
   else
-    echo "  [?] $SLUG — publish modal unconfirmed"; grep -nE "エラー|error|必須" /tmp/ps.txt | head -3; return 1
+    echo "  [?] $SLUG — publish modal unconfirmed (要ライブ確認)"; grep -nE "エラー|error|必須" /tmp/ps.txt | head -3; return 1
   fi
 }
