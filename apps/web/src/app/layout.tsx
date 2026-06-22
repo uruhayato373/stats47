@@ -26,10 +26,21 @@
 
 import { Suspense } from "react";
 
-import NextTopLoader from "nextjs-toploader";
+import dynamic from "next/dynamic";
+
 import { Toaster } from "sonner";
 
 import "./globals.css";
+
+/**
+ * NextTopLoader はルート遷移時の進捗バー専用 (初回 LCP 時点では非表示)。
+ * 静的 import だとレイアウト共有チャンクに同梱され critical-path JS を肥大化させ、
+ * LCP 候補 (PageHeader description <p>) のペイントを遅延させる。
+ * dynamic + ssr:false で初回バンドルから切り離す (route 遷移時のみ chunk fetch)。
+ */
+const NextTopLoader = dynamic(() => import("nextjs-toploader"), {
+  ssr: false,
+});
 
 import { Footer } from "@/components/organisms/Footer/Footer";
 import Header from "@/components/organisms/Header";
