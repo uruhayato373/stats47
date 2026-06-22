@@ -149,6 +149,24 @@ curl -s -A "Mozilla/5.0 (compatible; Googlebot/2.1)" https://stats47.jp/ranking/
 `next build` で R2 依存ページが `● (Static)` になっていれば、generateStaticParams の混入 = notFound 固着の再発。
 (逆に cookies()/headers() の混入は静的コンテンツページを `ƒ` 化する別事象 — 上の cookies ルールを参照)
 
+### 多層検知 (デプロイ前 / デプロイ後)
+
+「全ページを叩く」必要はない。障害は **per-route-template** で起きる (ある route の全ページが同時に死ぬ) ため、
+**route ごとに代表 1 件**を叩けば全インシデントを捕捉できる。notFound は HTTP **200** を返すので
+**status ではなく `<title>` の content** を見ること (status だけ見る warm-cache はすり抜けた)。
+
+| 層 | タイミング | ツール | 捕捉 |
+|---|---|---|---|
+| 静的ガード (根本原因) | **PR / pre-commit (build 前)** | `node .claude/scripts/lib/check-r2-route-ssg.cjs` | R2 依存 route への generateStaticParams 再混入 |
+| スモークテスト (症状) | **deploy 後 (workflow gate)** | `bash .github/scripts/smoke-test-routes.sh [BASE_URL]` | 任意 route の notFound 固着 (200 だが「〜が見つかりません」) |
+
+- 静的ガードは `apps/web/scripts/pre-commit-checks.sh` §2.1 に配線済。CI でも実行可。
+- スモークテストは `deploy-workers.yml` の warm-cache 後に gate として配線済 (失敗で workflow が赤くなる)。
+  preview URL を渡せばデプロイ前検証にも使える: `bash .github/scripts/smoke-test-routes.sh https://<preview>`
+- **ローカル build は再現しない**点に注意: `apps/web/.env.development` に `R2_PUBLIC_FETCH_URL` があり
+  build 時に R2 を読めて GOOD prerender になる。バグは **CI build (R2 不可)** でのみ顕在化する。
+  → ローカルの `next build` 出力 grep では検知できない。静的ガード (env 非依存) が最も確実。
+
 ## 関連
 
 - 失敗 commit: `ebad87c2 fix: revert EXP-004 layout async cookies() — ranking pages 500 fix` (2026-05-10)

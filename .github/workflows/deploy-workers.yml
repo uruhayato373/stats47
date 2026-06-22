@@ -225,6 +225,15 @@ jobs:
           sleep 10
           bash .github/scripts/warm-cache.sh
 
+      # 各 route テンプレートの代表 URL を content で検査し、notFound 固着 (HTTP 200 だが
+      # 「〜が見つかりません」) を検知する。warm-cache は status しか見ないためすり抜ける。
+      # 2026-06-22: ranking/areas/cities 全件 notFound 固着がこのゲート不在で本番に出た。
+      # 失敗時はワークフローを赤にして即座に気付けるようにする (continue-on-error にしない)。
+      - name: 🔎 Smoke test (Production routes)
+        run: |
+          sleep 5
+          bash .github/scripts/smoke-test-routes.sh https://stats47.jp
+
       # commit message に施策 ID (EXP-NNN / T0-T3-XXX-NN) があれば improvement-log に stub を追記。
       # 詳細: .claude/scripts/lib/append-improvement-log.mjs / .claude/rules/evidence-based-judgment.md
       - name: 📝 Append improvement-log stub
