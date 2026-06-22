@@ -40,10 +40,14 @@ description: ランキングページ (/ranking/*) のページ UI 層の統一�
   on-demand fetch は `packages/ranking` の service 層 fallback であり、ページ層に持ち込まない。
 - **コメント・コピーに「D1」「地図(廃止文脈)」等の旧前提を残さない**（正典: 完全DBレス `docs/01_技術設計/12`）。
 
-### B. SSG / ISR 保全（★500 再発防止）
-- `generateStaticParams`（`readActiveRankingKeysFromR2("prefecture")`）+ `export const revalidate`（24h ISR）を維持。
+### B. レンダリング方式の保全（★notFound 固着 + 500 再発防止）
+- **`generateStaticParams` を付けない。`export const revalidate`（24h ISR）のみ＝`ƒ`（オンデマンド ISR）を維持。**
+  generateStaticParams を付けると全 rankingKey が `● SSG` 化し、CI build で R2 を読めず（`readRankingItemFromR2`
+  が build 時 `ok(null)`）notFound として prerender され、この OpenNext 構成では ISR 再生成が効かず
+  「ランキングが見つかりません」が永久固着する（2026-06-22 障害、commit `52d2910a`）。ランタイムに R2 を読んで
+  描画させること。必読: `.claude/rules/nextjs-ssg-preservation.md` §generateStaticParams 固着。
 - **`cookies()` / `headers()` / `draftMode()` を ranking ページ層・layout 配下で呼ばない**
-  （SSG が崩れ Cloudflare Workers で 500。必読: `.claude/rules/nextjs-ssg-preservation.md`）。
+  （SSG が崩れ Cloudflare Workers で 500。同ルールの cookies 節）。
 
 ### C. レイアウト・見出し（統一レイアウト規約）
 - 横幅は `PageShell` 経由（`container mx-auto` / `max-w-[…]` 直書き禁止）。
@@ -77,8 +81,10 @@ grep -rn "fetchFormattedStats\|getEstatCacheStorage" \
   apps/web/src/app/ranking apps/web/src/features/ranking/server.ts apps/web/src/features/ranking/lib
 # 3. SSG 破壊関数の混入 → 0 が正
 grep -rn "cookies()\|headers()\|draftMode()" apps/web/src/app/ranking
-# 4. generateStaticParams / revalidate 欠落 → 両方 hit が正
-grep -n "generateStaticParams\|export const revalidate" apps/web/src/app/ranking/[rankingKey]/page.tsx
+# 4. レンダリング方式 → revalidate のみ hit が正。generateStaticParams は実コードに無いのが正（ƒ 維持）。
+#    実 export があれば notFound 固着の再混入（コメント内の言及は guard が除外して判定）。
+node .claude/scripts/lib/check-r2-route-ssg.cjs
+grep -n "export const revalidate" apps/web/src/app/ranking/[rankingKey]/page.tsx
 # 5. JSON-LD 3 種が page.tsx に存在 → 3 種 hit が正
 grep -n "generateRankingPageStructuredData\|generateRankingBreadcrumbStructuredData\|generateRankingFAQStructuredData" \
   apps/web/src/app/ranking/[rankingKey]/page.tsx

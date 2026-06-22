@@ -39,6 +39,17 @@ else
   echo -e "${GREEN}✅ デザインシステムチェック成功${NC}"
 fi
 
+# 2.1 R2 依存 route の SSG ガード (2026-06-22 障害の再発防止)
+# ranking/areas/cities は generateStaticParams を持つと ● SSG 化 → build 時 R2 不可 →
+# notFound 永久固着。ƒ (オンデマンド ISR) を維持しているか検証する。
+echo -e "${GREEN}🛡️  R2 依存 route SSG ガード...${NC}"
+GUARD_ROOT="$(cd "$SCRIPT_DIR/../../.." && pwd)"
+if ! node "$GUARD_ROOT/.claude/scripts/lib/check-r2-route-ssg.cjs"; then
+  echo -e "${RED}❌ R2 依存 route に generateStaticParams が混入しています。${NC}"
+  echo -e "${YELLOW}💡 .claude/rules/nextjs-ssg-preservation.md §generateStaticParams 固着${NC}"
+  ERROR_COUNT=$((ERROR_COUNT + 1))
+fi
+
 # 3. 一時ファイル自動クリーンアップ
 echo -e "${GREEN}🗑️  一時ファイルチェック...${NC}"
 PROJECT_ROOT="$(cd "$SCRIPT_DIR/../../.." && pwd)"

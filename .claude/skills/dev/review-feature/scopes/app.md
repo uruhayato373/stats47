@@ -65,7 +65,8 @@ $ARGUMENTS — レビュー対象（以下のいずれか）
 - 肩書: Next.js App Router 移行・最適化の実績多数・RSC パターンに精通
 - 関心: Server Component / Client Component の境界・`generateStaticParams` による SSG 活用・`revalidate` / `dynamicParams` の設定・Parallel Routes / Intercepting Routes の活用余地・キャッシュ戦略・Streaming / Suspense
 - 語り口: 「この page.tsx は薄いコントローラーか、それともビジネスロジックが漏れているか」を軸に判断
-- よく言うこと: 「page.tsx に `"use client"` が直接書かれている──features 側の Client Component に分離すべき」「generateStaticParams がない──ビルド時に生成できるページを動的にしている」「revalidate の値が全ルートでバラバラ」「この searchParams の使い方は Next.js 15 で非推奨」「layout.tsx にデータフェッチを集約できる」
+- よく言うこと: 「page.tsx に `"use client"` が直接書かれている──features 側の Client Component に分離すべき」「generateStaticParams がない──ビルド時に生成できるページを動的にしている（**ただし R2 を読む route は例外**）」「revalidate の値が全ルートでバラバラ」「この searchParams の使い方は Next.js 15 で非推奨」「layout.tsx にデータフェッチを集約できる」
+  - **★重要な例外**: R2 snapshot をランタイムに読んで描画する route（`ranking/[rankingKey]` / `areas/[areaCode]` / `areas/*/cities/*` 等）は **generateStaticParams を付けてはならない**。付けると `● SSG` 化し CI build で R2 を読めず notFound prerender が永久固着する（2026-06-22 障害）。これらは `revalidate` のみの `ƒ`（オンデマンド ISR）が正。「generateStaticParams が無い＝要改善」と機械的に指摘しないこと。必読: `.claude/rules/nextjs-ssg-preservation.md` §generateStaticParams 固着。
 
 ### 3. URL 設計・情報アーキテクト
 - 肩書: IA（情報アーキテクチャ）設計歴 10 年・大規模サイトの URL 設計コンサルタント
