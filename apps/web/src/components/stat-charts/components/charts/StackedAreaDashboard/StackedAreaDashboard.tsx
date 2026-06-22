@@ -1,9 +1,11 @@
 import { logger } from "@stats47/logger";
 
+import { ChartFooter } from "@/components/charts/ChartFooter";
+import { ChartPanel } from "@/components/charts/ChartPanel";
+
 import { toStackedAreaData } from "../../../adapters";
 import { fetchEstatData } from "../../../services";
 import { computeYAxisDomain } from "../../../utils/computeYAxisDomain";
-import { LegacyDashboardCard } from "../../shared/DashboardCard";
 import { ErrorDisplay } from "../../shared/ErrorDisplay";
 
 import { StackedAreaDashboardClient } from "./StackedAreaDashboardClient";
@@ -63,19 +65,20 @@ export const StackedAreaDashboard = async ({
   }
 
   return (
-    <LegacyDashboardCard
+    <ChartPanel
       title={title}
-      rankingLink={rankingLink}
       description={description}
-      source={sourceName ?? undefined}
-      sourceLink={sourceLink}
-      annotation={annotation}
-      rankingLinks={rankingLinks}
-      loading={false}
-      error={null}
-      empty={chartData.data.length === 0}
+      footer={
+        <ChartFooter
+          source={sourceName ?? undefined}
+          sourceLink={sourceLink}
+          annotation={annotation}
+          rankingLink={rankingLink}
+          rankingLinks={rankingLinks}
+        />
+      }
     >
       <StackedAreaDashboardClient chartData={chartData} normalize={normalize} yDomain={yDomain} />
-    </LegacyDashboardCard>
+    </ChartPanel>
   );
 };

@@ -6,6 +6,8 @@ import Image from "next/image";
 
 import { ErrorBoundary } from "react-error-boundary";
 
+import { ChartErrorState } from "@/components/charts/ChartState";
+
 interface ChartWithFallbackProps {
     fallbackImage?: string;
     alt?: string;
@@ -14,13 +16,9 @@ interface ChartWithFallbackProps {
 
 function FallbackImage({ src, alt }: { src?: string; alt?: string }) {
     if (!src) {
-        return (
-            <div className="flex h-64 w-full items-center justify-center rounded-lg bg-muted">
-                <p className="text-muted-foreground">チャートを表示できません</p>
-            </div>
-        );
+        return <ChartErrorState message="チャートを表示できません" height={256} />;
     }
-    return <Image src={src} alt={alt || "チャート"} width={800} height={400} className="h-auto w-full max-w-full rounded-lg" />;
+    return <Image src={src} alt={alt || "チャート"} width={800} height={400} className="h-auto w-full max-w-full" />;
 }
 
 export function ChartWithFallback({

@@ -11,6 +11,7 @@ import {
 } from "../../../shared/layout";
 import { CHART_STYLES } from "../../constants";
 import { TOOLTIP_STYLES, clampTooltipPosition, useD3Tooltip } from "../../hooks/useD3Tooltip";
+import { D3ChartLegend } from "../shared/D3ChartLegend";
 import type { D3StackedAreaChartProps, StackedAreaDataNode } from "./types";
 
 const TOOLTIP_ID_STACKED = "stacked-area-tooltip";
@@ -79,6 +80,13 @@ export function StackedAreaChart({
     marginBottom,
   } = layout;
   const baseFontSize = computeFontSize(width, height, CHART_STYLES.font.sizeRatio);
+  const legendItems = series.map((s) => ({
+    key: s.key,
+    label: s.label,
+    color: s.color,
+    marker: "square" as const,
+    opacity: 0.7,
+  }));
 
   const defaultYFormat = normalize
     ? (v: number) => `${Math.round(v)}%`
@@ -309,14 +317,7 @@ export function StackedAreaChart({
         <h3 className="mb-2 self-start text-lg font-semibold">{title}</h3>
       )}
       {showLegend && series.length > 0 && (
-        <div className="flex flex-wrap items-center justify-end gap-x-3 gap-y-1 mb-1">
-          {series.map((s) => (
-            <div key={s.key} className="flex items-center gap-1 text-[10px] text-muted-foreground">
-              <span className="inline-block h-3 w-3 rounded-sm" style={{ backgroundColor: s.color, opacity: 0.7 }} />
-              <span>{s.label}</span>
-            </div>
-          ))}
-        </div>
+        <D3ChartLegend items={legendItems} />
       )}
       <div className="relative w-full overflow-hidden">
         <svg

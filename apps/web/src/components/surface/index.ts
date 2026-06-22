@@ -1,1 +1,9 @@
-export { SurfaceCard, SurfaceLinkCard, SurfaceSection } from "./SurfaceCard";
+export {
+  RailCard,
+  RailLinkItem,
+  RailLinkList,
+  SurfaceCard,
+  SurfaceLinkCard,
+  SurfaceSection,
+  getSurfaceCardClassName,
+} from "./SurfaceCard";

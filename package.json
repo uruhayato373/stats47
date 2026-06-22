@@ -6,6 +6,7 @@
     "dev": "turbo run dev",
     "dev:web": "turbo run dev --filter=web",
     "lint": "turbo run lint",
+    "design-system:check": "npm run design-system:check --workspace apps/web",
     "type-check": "NODE_OPTIONS=\"--max-old-space-size=4096\" turbo run type-check",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "knip": "knip",

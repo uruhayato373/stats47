@@ -1,8 +1,10 @@
 import { logger } from "@stats47/logger";
 
+import { ChartFooter } from "@/components/charts/ChartFooter";
+import { ChartPanel } from "@/components/charts/ChartPanel";
+
 import { toMixedChartData } from "../../../adapters";
 import { fetchEstatData } from "../../../services";
-import { LegacyDashboardCard } from "../../shared/DashboardCard";
 import { ErrorDisplay } from "../../shared/ErrorDisplay";
 
 import { MixedChartClient } from "./MixedChartClient";
@@ -56,17 +58,18 @@ export const MixedChartDashboard = async ({
   }
 
   return (
-    <LegacyDashboardCard
+    <ChartPanel
       title={title}
-      rankingLink={rankingLink}
       description={description}
-      source={sourceName ?? undefined}
-      sourceLink={sourceLink}
-      loading={false}
-      error={null}
-      empty={chartData.data.length === 0}
+      footer={
+        <ChartFooter
+          source={sourceName ?? undefined}
+          sourceLink={sourceLink}
+          rankingLink={rankingLink}
+        />
+      }
     >
       <MixedChartClient chartData={chartData} />
-    </LegacyDashboardCard>
+    </ChartPanel>
   );
 };

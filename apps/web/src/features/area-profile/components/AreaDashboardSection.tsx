@@ -2,6 +2,7 @@ import { Suspense } from "react";
 
 import { DashboardGridLayout, loadPageComponents, type PageComponent } from "@/components/stat-charts/server";
 import type { DashboardComponent } from "@/components/stat-charts/types";
+import { SurfaceSection } from "@/components/surface";
 
 
 import { CityRankingPreview } from "./CityRankingPreview";
@@ -66,11 +67,11 @@ export async function AreaDashboardSection({ area, categoryKey, selectedRankingK
         <DashboardGridLayout area={area} components={kpiComponents} />
       )}
       {dashboardComponents.length === 0 ? (
-        <div className="bg-muted/50 rounded-lg p-8 text-center">
+        <SurfaceSection className="bg-muted/50 p-8 text-center">
           <p className="text-muted-foreground">
             このカテゴリのデータはまだ準備中です。
           </p>
-        </div>
+        </SurfaceSection>
       ) : (
         <DashboardGridLayout area={area} components={dashboardComponents} />
       )}

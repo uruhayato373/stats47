@@ -2,16 +2,7 @@
 
 import { useMemo, useState } from "react";
 
-import Link from "next/link";
-
-import { cn } from "@stats47/components";
-import {
-    Card,
-    CardContent,
-    CardHeader,
-    CardTitle,
-} from "@stats47/components/atoms/ui/card";
-
+import { RailCard, RailLinkItem, RailLinkList } from "@/components/surface";
 
 import type { AreaType } from "@/features/area";
 import { CategoryIcon } from "@/features/category";
@@ -162,27 +153,21 @@ export function RankingSidebarClient({
     }
 
     return (
-        <Card className="h-full w-full overflow-hidden animate-in fade-in duration-300">
-            <CardHeader className="py-3 px-4">
-                {categoryIcon && (
-                    <CategoryIcon categoryKey={categoryKey ?? ""} lucideIconName={categoryIcon} className="h-4 w-4 text-muted-foreground" />
-                )}
-                <CardTitle className="text-sm font-medium text-muted-foreground">
-                    {categoryName ?? "同カテゴリ"}
-                </CardTitle>
-            </CardHeader>
-            <CardContent className="px-4 pb-4 pt-3 flex flex-col gap-0.5">
+        <RailCard
+            className="h-full w-full overflow-hidden animate-in fade-in duration-300"
+            title={categoryName ?? "同カテゴリ"}
+            icon={categoryIcon ? (
+                <CategoryIcon categoryKey={categoryKey ?? ""} lucideIconName={categoryIcon} className="h-4 w-4 text-muted-foreground" />
+            ) : undefined}
+            bodyClassName="flex flex-col gap-0.5 px-4 pb-4 pt-3"
+        >
                 {/* 関連ランキング: コンパクトリスト */}
-                <nav className="flex flex-col gap-0.5">
+                <RailLinkList>
                     {displayOthers.map((item) => (
-                        <Link
+                        <RailLinkItem
                             key={`${item.rankingKey}-${item.areaType}`}
                             href={`${linkPrefix}/${item.rankingKey}`}
                             title={item.title}
-                            className={cn(
-                                "group flex items-center py-1.5 transition-colors",
-                                "text-xs hover:text-primary"
-                            )}
                         >
                             <span className="line-clamp-1 leading-snug">
                                 {item.title}
@@ -197,9 +182,9 @@ export function RankingSidebarClient({
                                     ) : null;
                                 })()}
                             </span>
-                        </Link>
+                        </RailLinkItem>
                     ))}
-                </nav>
+                </RailLinkList>
 
                 {/* もっと見る / 折りたたむ */}
                 {hasMore && (
@@ -213,8 +198,6 @@ export function RankingSidebarClient({
                             : `もっと見る（残り${others.length - MAX_COLLAPSED_ITEMS}件）`}
                     </button>
                 )}
-
-            </CardContent>
-        </Card>
+        </RailCard>
     );
 }

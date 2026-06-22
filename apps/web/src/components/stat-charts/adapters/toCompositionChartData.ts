@@ -1,14 +1,6 @@
-import type { StatsSchema } from "@stats47/types";
+import { getChartColor } from "../constants";
 
-// カテゴリカルパレットは globals.css の --chart-1〜5 を循環使用する。
-// 5 系列を超える場合は循環し、はみ出しは呼び出し元が colors prop で上書きする。
-const DEFAULT_COLORS = [
-  "hsl(var(--chart-1))",
-  "hsl(var(--chart-2))",
-  "hsl(var(--chart-3))",
-  "hsl(var(--chart-4))",
-  "hsl(var(--chart-5))",
-];
+import type { StatsSchema } from "@stats47/types";
 
 export interface CompositionSegment {
   key: string;
@@ -89,7 +81,7 @@ export function toCompositionChartData(
   const series: CompositionSegment[] = labels.map((label, i) => ({
     key: label,
     label,
-    color: colors[i] ?? DEFAULT_COLORS[i % DEFAULT_COLORS.length],
+    color: colors[i] ?? getChartColor(i),
   }));
 
   if (hasTotalData) {

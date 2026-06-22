@@ -1,4 +1,4 @@
-import { Card, CardContent } from "@stats47/components/atoms/ui/card";
+import { SurfaceCard } from "@/components/surface";
 
 import {
   RANKING_PAGE_FOOTER,
@@ -71,20 +71,18 @@ export async function AffiliateAdSlot({
     const banner = banners[0];
     if (banner) {
       return (
-        <Card>
-          <CardContent className="p-3">
-            <BannerAd
-              href={banner.href}
-              imageUrl={banner.imageUrl}
-              trackingPixelUrl={banner.trackingPixelUrl}
-              width={banner.width}
-              height={banner.height}
-              category={affiliateCategory ?? "other"}
-              label={banner.title}
-              position="ranking-sidebar"
-            />
-          </CardContent>
-        </Card>
+        <SurfaceCard className="p-3">
+          <BannerAd
+            href={banner.href}
+            imageUrl={banner.imageUrl}
+            trackingPixelUrl={banner.trackingPixelUrl}
+            width={banner.width}
+            height={banner.height}
+            category={affiliateCategory ?? "other"}
+            label={banner.title}
+            position="ranking-sidebar"
+          />
+        </SurfaceCard>
       );
     }
   }
@@ -102,13 +100,11 @@ export async function AffiliateAdSlot({
     position === "footer" ? RANKING_PAGE_FOOTER : RANKING_PAGE_TABLE_SIDE;
 
   return (
-    <Card>
-      <CardContent className="p-3">
-        <AdSenseAdWrapper
-          format={adSlot.format}
-          slotId={adSlot.slotId}
-        />
-      </CardContent>
-    </Card>
+    <SurfaceCard className="p-3">
+      <AdSenseAdWrapper
+        format={adSlot.format}
+        slotId={adSlot.slotId}
+      />
+    </SurfaceCard>
   );
 }

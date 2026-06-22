@@ -1,14 +1,8 @@
-import Link from "next/link";
-
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@stats47/components/atoms/ui/card";
 import { readTagsForItemFromR2 } from "@stats47/ranking/server";
 import { isOk, type AreaType } from "@stats47/types";
 import { Newspaper } from "lucide-react";
+
+import { RailCard, RailLinkItem, RailLinkList } from "@/components/surface";
 
 import { listArticleSummariesByTagKey } from "@/features/blog/server";
 
@@ -46,28 +40,19 @@ export async function RelatedArticlesCard({
   if (relatedArticles.length === 0) return null;
 
   return (
-    <Card>
-      <CardHeader className="py-3 px-4">
-        <Newspaper className="h-4 w-4 text-muted-foreground" />
-        <CardTitle className="text-sm font-medium text-muted-foreground">
-          関連記事
-        </CardTitle>
-      </CardHeader>
-      <CardContent className="px-4 pb-4 pt-3">
-        <nav className="flex flex-col gap-0.5">
-          {relatedArticles.map((article) => (
-            <Link
-              key={article.slug}
-              href={`/blog/${article.slug}`}
-              className="group flex items-center py-1.5 transition-colors text-xs hover:text-primary"
-            >
-              <span className="line-clamp-2 leading-snug">
-                {article.title}
-              </span>
-            </Link>
-          ))}
-        </nav>
-      </CardContent>
-    </Card>
+    <RailCard
+      title="関連記事"
+      icon={<Newspaper className="h-4 w-4 text-muted-foreground" />}
+    >
+      <RailLinkList>
+        {relatedArticles.map((article) => (
+          <RailLinkItem key={article.slug} href={`/blog/${article.slug}`}>
+            <span className="line-clamp-2 leading-snug">
+              {article.title}
+            </span>
+          </RailLinkItem>
+        ))}
+      </RailLinkList>
+    </RailCard>
   );
 }

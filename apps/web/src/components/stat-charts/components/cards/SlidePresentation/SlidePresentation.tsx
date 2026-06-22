@@ -3,8 +3,9 @@
 import { useCallback, useEffect, useState } from "react";
 
 import { Button } from "@stats47/components/atoms/ui/button";
-import { Card, CardContent } from "@stats47/components/atoms/ui/card";
 import { ChevronLeft, ChevronRight, BookOpen } from "lucide-react";
+
+import { SurfaceCard } from "@/components/surface";
 
 import { getSlideSet } from "../../../data/slides";
 
@@ -17,11 +18,11 @@ export const SlidePresentation: React.FC<
 
   if (!slides || slides.length === 0) {
     return (
-      <Card>
-        <CardContent className="p-6 text-sm text-muted-foreground">
+      <SurfaceCard>
+        <div className="text-sm text-muted-foreground">
           スライドデータが見つかりません: {config.slideSetKey}
-        </CardContent>
-      </Card>
+        </div>
+      </SurfaceCard>
     );
   }
 
@@ -54,13 +55,13 @@ function SlidePlayer({ slides, aspectRatio }: { slides: SlideData[]; aspectRatio
   const slide = slides[currentSlide];
 
   return (
-    <Card className="overflow-hidden">
+    <SurfaceCard className="overflow-hidden p-0">
       {/* アクセントバー */}
       <div
         className={`h-1.5 ${slide.accent} transition-colors duration-300`}
       />
 
-      <CardContent className="p-0">
+      <div className="p-0">
         <div
           className="relative flex flex-col p-6 sm:p-10"
           style={{ aspectRatio: aspectRatio || DEFAULT_ASPECT_RATIO }}
@@ -108,7 +109,7 @@ function SlidePlayer({ slides, aspectRatio }: { slides: SlideData[]; aspectRatio
             variant="ghost"
             size="icon"
             onClick={prev}
-            className="absolute left-2 top-1/2 -translate-y-1/2 rounded-full bg-white/80 hover:bg-white shadow-md border border-border h-9 w-9"
+            className="absolute left-2 top-1/2 -translate-y-1/2 rounded-full bg-background/80 hover:bg-background shadow-md border border-border h-9 w-9"
           >
             <ChevronLeft className="h-4 w-4 text-muted-foreground" />
           </Button>
@@ -116,7 +117,7 @@ function SlidePlayer({ slides, aspectRatio }: { slides: SlideData[]; aspectRatio
             variant="ghost"
             size="icon"
             onClick={next}
-            className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full bg-white/80 hover:bg-white shadow-md border border-border h-9 w-9"
+            className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full bg-background/80 hover:bg-background shadow-md border border-border h-9 w-9"
           >
             <ChevronRight className="h-4 w-4 text-muted-foreground" />
           </Button>
@@ -137,7 +138,7 @@ function SlidePlayer({ slides, aspectRatio }: { slides: SlideData[]; aspectRatio
             />
           ))}
         </div>
-      </CardContent>
-    </Card>
+      </div>
+    </SurfaceCard>
   );
 }

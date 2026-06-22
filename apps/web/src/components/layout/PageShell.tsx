@@ -13,8 +13,14 @@ interface PageShellProps {
   variant?: "default" | "reading";
   /** xl+ で右に表示するサイドレール（関連 widget / 広告）。省略すると右レールなし */
   rightRail?: ReactNode;
-  /** xl+ で左に表示するサイドレール（記事 TOC 等、blog ページのみ想定） */
+  /** xl+ で左に表示するサイドレール（テーマナビ等）。省略すると左レールなし */
   leftRail?: ReactNode;
+  /**
+   * 右 rail の表示開始幅。
+   * - `xl`: 通常ページ。right rail は xl+ で表示
+   * - `lg`: ブログ詳細など。right rail は lg+ で表示
+   */
+  rightRailBreakpoint?: "xl" | "lg";
   /** 追加 className（外側コンテナに当てる） */
   className?: string;
 }
@@ -27,12 +33,13 @@ interface PageShellProps {
  *
  * 設計仕様: docs/01_技術設計/13_統一レイアウト設計.md
  *
- * グリッド（xl: 1280px 以上）:
+ * グリッド:
  * - レールなし     : 1700px 中央寄せ
  * - 右レールのみ   : [minmax(0,1fr) 360px]
- * - 左+右（blog）  : [280px minmax(0,1fr) 360px]
+ * - 左レールのみ   : [280px minmax(0,1fr)]
+ * - 右レール lg    : lg [minmax(0,1fr) 360px]
  *
- * xl 未満は常に 1 カラム。leftRail / rightRail は本文下に積み下ろす。
+ * 通常は xl 未満で 1 カラム。`rightRailBreakpoint="lg"` の場合、右 rail は lg+ で表示する。
  *
  * NOTE: grid-template-columns は Tailwind JIT のため静的クラス文字列で持つ
  * （動的 px 連結は purge されるため不可）。
@@ -42,18 +49,20 @@ export function PageShell({
   variant = "default",
   rightRail,
   leftRail,
+  rightRailBreakpoint = "xl",
   className,
 }: PageShellProps) {
   const hasRight = !!rightRail;
   const hasLeft = !!leftRail;
+  const showLeft = hasLeft && !hasRight;
 
   const gridClass =
-    hasLeft && hasRight
-      ? "xl:grid xl:grid-cols-[280px_minmax(0,1fr)_360px] xl:gap-8 xl:items-start"
-      : hasRight
-        ? "xl:grid xl:grid-cols-[minmax(0,1fr)_360px] xl:gap-8 xl:items-start"
-        : hasLeft
-          ? "xl:grid xl:grid-cols-[280px_minmax(0,1fr)] xl:gap-8 xl:items-start"
+    rightRailBreakpoint === "lg" && hasRight
+      ? "lg:grid lg:grid-cols-[minmax(0,1fr)_360px] lg:gap-8 lg:items-start"
+      : showLeft
+        ? "xl:grid xl:grid-cols-[280px_minmax(0,1fr)] xl:gap-8 xl:items-start"
+        : hasRight
+          ? "xl:grid xl:grid-cols-[minmax(0,1fr)_360px] xl:gap-8 xl:items-start"
           : "";
 
   // reading variant は本文カラムを可読幅に制限（レールが無い場合は中央寄せ）
@@ -67,14 +76,18 @@ export function PageShell({
       {hasRight || hasLeft ? (
         <>
           <div className={gridClass}>
-            {hasLeft && <div className="hidden xl:block">{leftRail}</div>}
+            {showLeft && <div className="hidden xl:block">{leftRail}</div>}
             <div className={mainClass}>{children}</div>
-            {hasRight && <div className="hidden xl:block">{rightRail}</div>}
+            {hasRight && (
+              <div className={rightRailBreakpoint === "lg" ? "hidden lg:block" : "hidden xl:block"}>
+                {rightRail}
+              </div>
+            )}
           </div>
           {/* xl 未満でレールを本文下に積み下ろす */}
-          <div className="mt-10 space-y-8 xl:hidden">
+          <div className={cn("mt-10 space-y-8", rightRailBreakpoint === "lg" ? "lg:hidden" : "xl:hidden")}>
             {hasRight && rightRail}
-            {hasLeft && leftRail}
+            {showLeft && leftRail}
           </div>
         </>
       ) : (

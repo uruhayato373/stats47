@@ -1,9 +1,6 @@
-import {
-    Card,
-    CardContent,
-    CardHeader,
-} from "@stats47/components/atoms/ui/card";
 import { Skeleton } from "@stats47/components/atoms/ui/skeleton";
+
+import { SurfaceCard } from "@/components/surface";
 
 /**
  * RankingSidebarSkeleton
@@ -12,11 +9,11 @@ import { Skeleton } from "@stats47/components/atoms/ui/skeleton";
  */
 export function RankingSidebarSkeleton() {
     return (
-        <Card className="h-full w-full overflow-hidden animate-in fade-in duration-300">
-            <CardHeader className="py-4 px-4">
+        <SurfaceCard className="h-full w-full overflow-hidden p-0 animate-in fade-in duration-300">
+            <div className="border-b border-border px-4 py-4">
                 <Skeleton className="h-5 w-32" />
-            </CardHeader>
-            <CardContent className="p-4 pt-3">
+            </div>
+            <div className="p-4 pt-3">
                 <div className="space-y-3">
                     {[...Array(5)].map((_, i) => (
                         <div
@@ -34,7 +31,7 @@ export function RankingSidebarSkeleton() {
                         </div>
                     ))}
                 </div>
-            </CardContent>
-        </Card>
+            </div>
+        </SurfaceCard>
     );
 }

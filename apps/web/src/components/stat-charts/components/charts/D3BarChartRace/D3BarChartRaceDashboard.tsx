@@ -1,9 +1,11 @@
 import { logger } from "@stats47/logger";
 
 
+import { ChartFooter } from "@/components/charts/ChartFooter";
+import { ChartPanel } from "@/components/charts/ChartPanel";
+
 import { toBarChartRaceData } from "../../../adapters";
 import { fetchEstatData } from "../../../services";
-import { LegacyDashboardCard } from "../../shared/DashboardCard";
 import { ErrorDisplay } from "../../shared/ErrorDisplay";
 
 import { D3BarChartRaceClient } from "./D3BarChartRaceClient";
@@ -41,17 +43,18 @@ export async function D3BarChartRaceDashboard({
   }
 
   return (
-    <LegacyDashboardCard
+    <ChartPanel
       title={common.title}
-      rankingLink={common.rankingLink}
       description={description}
-      source={common.sourceName ?? undefined}
-      sourceLink={common.sourceLink}
-      loading={false}
-      error={null}
-      empty={data.length === 0}
+      footer={
+        <ChartFooter
+          source={common.sourceName ?? undefined}
+          sourceLink={common.sourceLink}
+          rankingLink={common.rankingLink}
+        />
+      }
     >
       <D3BarChartRaceClient data={data} unit={unit} aspectRatio={aspectRatio} />
-    </LegacyDashboardCard>
+    </ChartPanel>
   );
 }

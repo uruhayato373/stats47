@@ -5,12 +5,8 @@ import {
     PREFECTURE_TO_REGION_MAP,
     REGIONS,
 } from "@stats47/area";
-import {
-    Card,
-    CardContent,
-    CardHeader,
-    CardTitle,
-} from "@stats47/components/atoms/ui/card";
+
+import { SurfaceCard } from "@/components/surface";
 
 interface Props {
     areaCode: string;
@@ -35,13 +31,13 @@ export function RelatedAreas({ areaCode }: Props) {
     if (relatedPrefs.length === 0) return null;
 
     return (
-        <Card className="border border-border shadow-sm overflow-hidden">
-            <CardHeader className="py-3 px-3">
-                <CardTitle className="text-base">
+        <SurfaceCard className="overflow-hidden p-0">
+            <div className="border-b border-border px-3 py-3">
+                <h3 className="text-base font-semibold">
                     {region.regionName}の都道府県
-                </CardTitle>
-            </CardHeader>
-            <CardContent className="px-3 pb-3 pt-3">
+                </h3>
+            </div>
+            <div className="px-3 pb-3 pt-3">
                 <nav className="flex flex-col gap-0.5">
                     {relatedPrefs.map((pref) => (
                         <Link
@@ -53,7 +49,7 @@ export function RelatedAreas({ areaCode }: Props) {
                         </Link>
                     ))}
                 </nav>
-            </CardContent>
-        </Card>
+            </div>
+        </SurfaceCard>
     );
 }

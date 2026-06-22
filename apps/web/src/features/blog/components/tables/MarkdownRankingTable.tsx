@@ -3,7 +3,9 @@
 import { useEffect, useMemo, useState } from "react";
 
 import { DataTable } from "@stats47/components";
-import { Card, CardContent, CardHeader, CardTitle } from "@stats47/components/atoms/ui/card";
+
+import { ChartPanel } from "@/components/charts/ChartPanel";
+import { ChartEmptyState, ChartLoading } from "@/components/charts/ChartState";
 
 import type { ColumnDef } from "@tanstack/react-table";
 
@@ -100,40 +102,31 @@ export function MarkdownRankingTable(props: MarkdownRankingTableProps) {
 
   if (isLoading) {
     return (
-      <Card className="w-full border border-border shadow-sm rounded-sm">
-        <CardContent className="p-4">
-          <div className="flex h-32 items-center justify-center text-muted-foreground">
-            読み込み中...
-          </div>
-        </CardContent>
-      </Card>
+      <ChartPanel>
+        <ChartLoading height={128} />
+      </ChartPanel>
     );
   }
 
   if (!rawData || processedData.length === 0) {
     return (
-      <div className="text-center py-8 text-muted-foreground">データがありません</div>
+      <ChartPanel>
+        <ChartEmptyState message="データがありません" height={128} />
+      </ChartPanel>
     );
   }
 
   return (
-    <Card className="w-full border border-border shadow-sm rounded-sm">
-      {props.title && (
-        <CardHeader>
-          <CardTitle>{props.title}</CardTitle>
-        </CardHeader>
-      )}
-      <CardContent className="p-4">
-        <DataTable
-          columns={columns}
-          data={processedData}
-          showIndex={false}
-          maxRows={props.paginated ? 10 : processedData.length}
-          enableFiltering={!!props.paginated}
-          enableSorting={false}
-          className="h-full flex flex-col"
-        />
-      </CardContent>
-    </Card>
+    <ChartPanel title={props.title}>
+      <DataTable
+        columns={columns}
+        data={processedData}
+        showIndex={false}
+        maxRows={props.paginated ? 10 : processedData.length}
+        enableFiltering={!!props.paginated}
+        enableSorting={false}
+        className="h-full flex flex-col"
+      />
+    </ChartPanel>
   );
 }

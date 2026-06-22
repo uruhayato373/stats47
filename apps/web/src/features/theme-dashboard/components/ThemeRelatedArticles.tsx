@@ -1,14 +1,8 @@
 import "server-only";
 
-import Link from "next/link";
-
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@stats47/components/atoms/ui/card";
 import { Newspaper } from "lucide-react";
+
+import { SurfaceCard, SurfaceLinkCard } from "@/components/surface";
 
 import { listArticleSummariesByTagKey } from "@/features/blog/server";
 
@@ -68,18 +62,18 @@ export async function ThemeRelatedArticles({
   const visible = articles;
 
   return (
-    <Card className="mt-8">
-      <CardHeader className="py-4 px-4 flex-row items-center gap-2 space-y-0">
+    <SurfaceCard className="mt-8 p-0">
+      <div className="flex items-center gap-2 border-b border-border px-4 py-4">
         <Newspaper className="h-4 w-4 text-muted-foreground" />
-        <CardTitle className="text-base">関連記事</CardTitle>
-      </CardHeader>
-      <CardContent className="p-4 pt-3">
+        <h3 className="text-base font-semibold text-foreground">関連記事</h3>
+      </div>
+      <div className="p-4 pt-3">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
           {visible.map((article) => (
-            <Link
+            <SurfaceLinkCard
               key={article.slug}
               href={`/blog/${article.slug}`}
-              className="block rounded-md border border-border p-3 transition-colors hover:border-primary hover:bg-accent/50"
+              className="block p-3"
             >
               <p className="text-sm font-medium line-clamp-2 leading-snug">
                 {article.title}
@@ -89,10 +83,10 @@ export async function ThemeRelatedArticles({
                   {article.description}
                 </p>
               )}
-            </Link>
+            </SurfaceLinkCard>
           ))}
         </div>
-      </CardContent>
-    </Card>
+      </div>
+    </SurfaceCard>
   );
 }

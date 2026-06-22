@@ -1,5 +1,7 @@
 import { ExternalLink } from "lucide-react";
 
+import { getSurfaceCardClassName } from "@/components/surface";
+
 import { AFFILIATE_THEME, type AffiliateCategory } from "../constants/affiliate-category";
 
 import { AdImpressionTracker } from "./AdImpressionTracker";
@@ -49,7 +51,10 @@ export function AffiliateTextAdList({
               category={affiliateCategory ?? "other"}
               label={ad.title}
               position={position}
-              className="flex items-center justify-between gap-3 rounded-lg bg-white px-4 py-3 shadow-sm transition-shadow hover:shadow-md"
+              className={getSurfaceCardClassName({
+                interactive: true,
+                className: "flex items-center justify-between gap-3 px-4 py-3",
+              })}
             >
               <p className="text-sm font-bold text-foreground">
                 {theme?.emoji ? `${theme.emoji} ` : ""}

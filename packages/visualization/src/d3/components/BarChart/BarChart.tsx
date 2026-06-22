@@ -6,6 +6,7 @@ import { cn } from "@stats47/components";
 import { computeChartLayout, computeFontSize, computeMarginsByRatio } from "../../../shared/layout";
 import { CHART_STYLES } from "../../constants";
 import { useD3Tooltip } from "../../hooks/useD3Tooltip";
+import { D3ChartLegend } from "../shared/D3ChartLegend";
 import type { ChartDataNode } from "../../types/base";
 import type { BarChartProps } from "./types";
 
@@ -55,6 +56,15 @@ export function BarChart({
     const baseFontSize = computeFontSize(width, height, CHART_STYLES.font.sizeRatio);
 
     const hasKeys = keys && keys.length > 0;
+    const legendItems =
+        hasKeys && keys
+            ? keys.map((key, i) => ({
+                key,
+                label: key,
+                color: (colors[i % colors.length] as string) ?? "#888",
+                marker: "square" as const,
+            }))
+            : [];
 
     useEffect(() => {
         if (!svgRef.current || data.length === 0) return;
@@ -266,16 +276,7 @@ export function BarChart({
     return (
         <div className={cn("relative flex flex-col w-full", className)}>
             {title && <h3 className="text-lg font-semibold mb-4 self-start">{title}</h3>}
-            {showLegend && hasKeys && keys && keys.length > 0 && (
-                <div className="flex flex-wrap items-center justify-end gap-x-3 gap-y-1 mb-1">
-                    {keys.map((key, i) => (
-                        <div key={key} className="flex items-center gap-1 text-[10px] text-muted-foreground">
-                            <span className="inline-block h-3 w-3 rounded-sm" style={{ backgroundColor: (colors[i % colors.length] as string) ?? "#888" }} />
-                            <span>{key}</span>
-                        </div>
-                    ))}
-                </div>
-            )}
+            {showLegend && <D3ChartLegend items={legendItems} />}
             <div className="relative w-full overflow-hidden">
                 <svg
                     ref={svgRef}

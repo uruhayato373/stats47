@@ -2,9 +2,11 @@
 
 import "leaflet/dist/leaflet.css";
 
-import { TILE_OPTIONS_LIGHT } from "@stats47/visualization/leaflet/constants/tile-providers";
 import { ImageOverlay, MapContainer, TileLayer } from "react-leaflet";
 
+import { useThemedLeafletTile } from "@/features/map-visualization/utils/use-themed-leaflet-tile";
+
+import { useTheme } from "@/hooks/useTheme";
 
 import { SUNSHINE_MAP_RASTER_PATH, type SunshineMapMeta } from "../lib/types";
 
@@ -17,7 +19,8 @@ interface Props {
 
 /** 1km メッシュ年日照時間のラスターを ImageOverlay で表示する地図本体。 */
 export function SunshineMapLeaflet({ meta }: Props) {
-  const tile = TILE_OPTIONS_LIGHT[0];
+  const { theme } = useTheme();
+  const { currentTile } = useThemedLeafletTile(theme);
   const rasterUrl = `${R2_PUBLIC_URL}/${SUNSHINE_MAP_RASTER_PATH}`;
 
   return (
@@ -29,7 +32,7 @@ export function SunshineMapLeaflet({ meta }: Props) {
       scrollWheelZoom
       className="h-[460px] lg:h-[600px] rounded-md overflow-hidden"
     >
-      <TileLayer url={tile.url} attribution={tile.attribution} />
+      <TileLayer url={currentTile.url} attribution={currentTile.attribution} />
       <ImageOverlay url={rasterUrl} bounds={meta.bounds} opacity={1} />
     </MapContainer>
   );

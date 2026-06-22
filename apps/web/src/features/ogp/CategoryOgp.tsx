@@ -1,4 +1,4 @@
-import { BRAND, FONT } from './brand';
+import { BRAND, FONT, OGP_SURFACE } from './brand';
 
 export interface CategoryOgpData {
   title: string;
@@ -33,7 +33,7 @@ export function CategoryOgp({ data }: Props) {
         width: 1200,
         height: 630,
         position: 'relative',
-        background: '#FFFFFF',
+        background: BRAND.white,
         display: 'flex',
         fontFamily: FONT.sansJP,
         overflow: 'hidden',
@@ -58,7 +58,7 @@ export function CategoryOgp({ data }: Props) {
           top: 0,
           width: 630,
           height: 630,
-          background: 'rgba(255,255,255,0.85)',
+          background: OGP_SURFACE.whiteOverlay,
           display: 'flex',
         }}
       />

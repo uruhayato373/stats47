@@ -4,14 +4,9 @@ import React from "react";
 
 import { cn } from "@stats47/components";
 import { Badge } from "@stats47/components/atoms/ui/badge";
-import {
-  Card,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@stats47/components/atoms/ui/card";
 import { TrendingDown, TrendingUp } from "lucide-react";
+
+import { SurfaceCard } from "@/components/surface";
 
 import { parseTitle } from "../../../utils/parseTitle";
 
@@ -53,26 +48,26 @@ export const KpiCardClient: React.FC<KpiCardClientProps> = ({
   const { main, sub } = parseTitle(title);
 
   return (
-    <Card className="@container/kpi">
-      <CardHeader className="border-b-0 pb-0">
-        <CardDescription className="min-w-0">
+    <SurfaceCard className="@container/kpi p-0">
+      <div className="px-4 pb-0 pt-4">
+        <p className="min-w-0 text-sm text-muted-foreground">
           {main}
           {sub && (
             <span className="block text-xs text-muted-foreground/70 mt-0.5">{sub}</span>
           )}
-        </CardDescription>
-      </CardHeader>
+        </p>
+      </div>
       <div className="px-4 pb-1.5">
-        <CardTitle className="text-lg @[200px]/kpi:text-xl tabular-nums">
+        <div className="text-lg font-semibold @[200px]/kpi:text-xl tabular-nums">
           {formattedValue}
           {unit && (
             <span className="text-sm font-normal text-muted-foreground ml-1">
               {unit}
             </span>
           )}
-        </CardTitle>
+        </div>
       </div>
-      <CardFooter className="px-4 pb-3 pt-0">
+      <div className="px-4 pb-3 pt-0">
         <div className="flex items-center gap-2">
           {year && (
             <Badge variant="outline" size="sm" className="shrink-0 whitespace-nowrap text-[9px] rounded-md">
@@ -86,7 +81,7 @@ export const KpiCardClient: React.FC<KpiCardClientProps> = ({
             </div>
           ) : null}
         </div>
-      </CardFooter>
-    </Card>
+      </div>
+    </SurfaceCard>
   );
 };

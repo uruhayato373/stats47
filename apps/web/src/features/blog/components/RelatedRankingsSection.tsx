@@ -1,14 +1,8 @@
-import Link from "next/link";
-
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@stats47/components/atoms/ui/card";
 import { readRankingItemsByTagFromR2, getRankingTitle } from "@stats47/ranking/server";
 import { isOk } from "@stats47/types";
 import { BarChart3 } from "lucide-react";
+
+import { RailCard, SurfaceLinkCard } from "@/components/surface";
 
 interface RelatedRankingsSectionProps {
   tagKeys: string[];
@@ -47,29 +41,28 @@ export async function RelatedRankingsSection({
   if (rankings.length === 0) return null;
 
   return (
-    <Card>
-      <CardHeader className="py-4 px-4">
-        <BarChart3 className="h-4 w-4 text-muted-foreground" />
-        <CardTitle className="text-base">関連ランキング</CardTitle>
-      </CardHeader>
-      <CardContent className="p-4 pt-3">
-        <div className={compact ? "grid grid-cols-1 gap-2" : "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3"}>
-          {rankings.map((ranking) => (
-            <Link
-              key={ranking.rankingKey}
-              href={`/ranking/${ranking.rankingKey}`}
-              className="block rounded-md border border-border p-3 transition-colors hover:border-primary hover:bg-accent/50"
-            >
-              <p className="text-sm font-medium line-clamp-2">
-                {ranking.title}
-              </p>
-              <p className="mt-1 text-xs text-muted-foreground">
-                都道府県別ランキング
-              </p>
-            </Link>
-          ))}
-        </div>
-      </CardContent>
-    </Card>
+    <RailCard
+      title="関連ランキング"
+      icon={<BarChart3 className="h-4 w-4 text-muted-foreground" />}
+      titleClassName="text-base font-semibold text-foreground"
+      bodyClassName="p-4 pt-3"
+    >
+      <div className={compact ? "grid grid-cols-1 gap-2" : "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3"}>
+        {rankings.map((ranking) => (
+          <SurfaceLinkCard
+            key={ranking.rankingKey}
+            href={`/ranking/${ranking.rankingKey}`}
+            className="block p-3"
+          >
+            <p className="text-sm font-medium line-clamp-2">
+              {ranking.title}
+            </p>
+            <p className="mt-1 text-xs text-muted-foreground">
+              都道府県別ランキング
+            </p>
+          </SurfaceLinkCard>
+        ))}
+      </div>
+    </RailCard>
   );
 }

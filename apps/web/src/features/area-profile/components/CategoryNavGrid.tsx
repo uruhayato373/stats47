@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { SurfaceLinkCard } from "@/components/surface";
 
 import { CategoryIcon, getCategoryColor } from "@/features/category";
 
@@ -41,10 +41,10 @@ export function CategoryNavGrid({ categories, areaCode }: Props) {
                         : `/category/${cat.categoryKey}`;
                     const color = getCategoryColor(cat.categoryKey);
                     return (
-                        <Link
+                        <SurfaceLinkCard
                             key={cat.categoryKey}
                             href={href}
-                            className="group flex items-center gap-3 p-3 rounded-lg border border-border hover:border-primary/50 hover:bg-accent/50 transition-all"
+                            className="group flex items-center gap-3 p-3"
                         >
                             <div className={`p-2 rounded-lg ${color.bg} ${color.text} ${color.hoverBg} ${color.hoverText} transition-colors shrink-0`}>
                                 <CategoryIcon
@@ -56,7 +56,7 @@ export function CategoryNavGrid({ categories, areaCode }: Props) {
                             <span className="text-sm font-medium truncate">
                                 {cat.categoryName}
                             </span>
-                        </Link>
+                        </SurfaceLinkCard>
                     );
                 })}
             </div>

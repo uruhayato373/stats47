@@ -1,5 +1,7 @@
 import { ExternalLink } from "lucide-react";
 
+import { getSurfaceCardClassName } from "@/components/surface";
+
 import { buildFurusatoNozeiUrl, getFurusatoNozeiLink } from "../constants/furusato-nozei";
 import { searchFurusatoItems } from "../lib/rakuten-api";
 
@@ -61,7 +63,10 @@ export async function FurusatoNozeiCard({ areaCode }: FurusatoNozeiCardProps) {
                 category="furusato"
                 label={item.itemName}
                 position="sidebar-item"
-                className="flex flex-col rounded-lg bg-white border border-red-50 overflow-hidden shadow-sm transition-shadow hover:shadow-md"
+                className={getSurfaceCardClassName({
+                  interactive: true,
+                  className: "flex flex-col overflow-hidden p-0",
+                })}
               >
                 {imageUrl && (
                   <div className="aspect-square bg-muted flex items-center justify-center overflow-hidden">
@@ -106,7 +111,10 @@ export async function FurusatoNozeiCard({ areaCode }: FurusatoNozeiCardProps) {
         category="furusato"
         label={`${link.prefName}のふるさと納税`}
         position="sidebar"
-        className="flex items-center justify-between gap-3 rounded-lg bg-white px-4 py-3 shadow-sm transition-shadow hover:shadow-md"
+        className={getSurfaceCardClassName({
+          interactive: true,
+          className: "flex items-center justify-between gap-3 px-4 py-3",
+        })}
       >
         <div>
           <p className="text-sm font-bold text-foreground">

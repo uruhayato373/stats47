@@ -2,11 +2,13 @@
 
 import Image from "next/image";
 
+import { SurfaceCard } from "@/components/surface";
+
 import { type AffiliateProduct } from "../types";
 
 export function AffiliateItem(props: AffiliateProduct) {
     return (
-        <div className="my-8 flex flex-col items-center rounded-lg border border-border bg-white p-6 shadow-sm md:flex-row md:gap-6">
+        <SurfaceCard className="my-8 flex flex-col items-center p-6 md:flex-row md:gap-6">
             {props.imageUrl && (
                 <div className="flex-shrink-0">
                     <Image
@@ -37,6 +39,6 @@ export function AffiliateItem(props: AffiliateProduct) {
                     </a>
                 </div>
             </div>
-        </div>
+        </SurfaceCard>
     );
 }

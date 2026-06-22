@@ -1,12 +1,8 @@
 import Link from "next/link";
 
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@stats47/components/atoms/ui/card";
 import { ArrowRight, TrendingDown, TrendingUp } from "lucide-react";
+
+import { SurfaceCard } from "@/components/surface";
 
 import type { AreaProfileData } from "../types";
 
@@ -37,13 +33,13 @@ export function AreaRelatedRankingsCard({
     <section className="grid grid-cols-1 gap-4 md:grid-cols-2">
       {/* TOP - 強み */}
       {strengths.length > 0 && (
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between gap-3 space-y-0 py-4 px-5">
+        <SurfaceCard className="p-0">
+          <div className="flex flex-row items-center justify-between gap-3 border-b border-border px-5 py-4">
             <div className="flex items-center gap-2">
               <TrendingUp className="h-4 w-4 text-emerald-600" />
-              <CardTitle className="text-base">
+              <h3 className="text-base font-semibold">
                 {profile.areaName}が上位
-              </CardTitle>
+              </h3>
             </div>
             <Link
               href="/themes"
@@ -52,8 +48,8 @@ export function AreaRelatedRankingsCard({
               テーマ一覧
               <ArrowRight className="h-3 w-3" />
             </Link>
-          </CardHeader>
-          <CardContent className="px-5 pb-5 pt-3">
+          </div>
+          <div className="px-5 pb-5 pt-3">
             <ol className="space-y-1.5">
               {strengths.map((item, idx) => (
                 <li
@@ -72,19 +68,19 @@ export function AreaRelatedRankingsCard({
                 </li>
               ))}
             </ol>
-          </CardContent>
-        </Card>
+          </div>
+        </SurfaceCard>
       )}
 
       {/* BOTTOM - 弱み */}
       {weaknesses.length > 0 && (
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between gap-3 space-y-0 py-4 px-5">
+        <SurfaceCard className="p-0">
+          <div className="flex flex-row items-center justify-between gap-3 border-b border-border px-5 py-4">
             <div className="flex items-center gap-2">
               <TrendingDown className="h-4 w-4 text-red-600" />
-              <CardTitle className="text-base">
+              <h3 className="text-base font-semibold">
                 {profile.areaName}が下位
-              </CardTitle>
+              </h3>
             </div>
             <Link
               href="/themes"
@@ -93,8 +89,8 @@ export function AreaRelatedRankingsCard({
               テーマ一覧
               <ArrowRight className="h-3 w-3" />
             </Link>
-          </CardHeader>
-          <CardContent className="px-5 pb-5 pt-3">
+          </div>
+          <div className="px-5 pb-5 pt-3">
             <ol className="space-y-1.5">
               {weaknesses.map((item, idx) => (
                 <li
@@ -113,8 +109,8 @@ export function AreaRelatedRankingsCard({
                 </li>
               ))}
             </ol>
-          </CardContent>
-        </Card>
+          </div>
+        </SurfaceCard>
       )}
     </section>
   );

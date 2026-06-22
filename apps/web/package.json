@@ -7,6 +7,7 @@
     "build": "npm run prebuild && npx tsx scripts/validate-env.ts && npx cross-env NODE_OPTIONS=\"--max-old-space-size=4096\" next build",
     "build:production": "npx tsx scripts/validate-env.ts && npx cross-env NODE_OPTIONS=\"--max-old-space-size=4096\" NODE_ENV=production NEXT_PUBLIC_ENV=production next build",
     "lint": "next lint",
+    "design-system:check": "node scripts/check-design-system.mjs",
     "knip": "cd ../.. && npm run knip -- --workspace apps/web",
     "worker:dev": "wrangler dev",
     "worker:deploy": "wrangler deploy",

@@ -1,8 +1,10 @@
 import { logger } from "@stats47/logger";
 
+import { ChartFooter } from "@/components/charts/ChartFooter";
+import { ChartPanel } from "@/components/charts/ChartPanel";
+
 import { toSunburstData } from "../../../adapters";
 import { fetchEstatDataWithCategories } from "../../../services";
-import { LegacyDashboardCard } from "../../shared/DashboardCard";
 import { ErrorDisplay } from "../../shared/ErrorDisplay";
 
 import { SunburstChartClient } from "./SunburstChartClient";
@@ -55,18 +57,19 @@ export const SunburstDashboardChart = async ({
   }
 
   return (
-    <LegacyDashboardCard
+    <ChartPanel
       title={title}
-      rankingLink={rankingLink}
       description={description}
-      source={sourceName ?? undefined}
-      sourceLink={sourceLink}
-      sourceDetail={statsDataId}
-      loading={false}
-      error={null}
-      empty={false}
+      footer={
+        <ChartFooter
+          source={sourceName ?? undefined}
+          sourceLink={sourceLink}
+          sourceDetail={statsDataId}
+          rankingLink={rankingLink}
+        />
+      }
     >
       <SunburstChartClient data={data} />
-    </LegacyDashboardCard>
+    </ChartPanel>
   );
 };

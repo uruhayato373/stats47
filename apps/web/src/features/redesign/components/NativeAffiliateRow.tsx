@@ -1,13 +1,9 @@
 import Image from "next/image";
 
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@stats47/components/atoms/ui/card";
 import { Sparkles } from "lucide-react";
 
+
+import { SurfaceCard, getSurfaceCardClassName } from "@/components/surface";
 
 import { TrackedAffiliateLink } from "@/features/ads/components/tracked-affiliate-link";
 import type { ResolvedAffiliateBanner } from "@/features/ads/services/resolve-affiliate-ad";
@@ -41,12 +37,12 @@ export function NativeAffiliateRow({
   if (banners.length === 0) return null;
 
   return (
-    <Card>
-      <CardHeader className="py-3 px-4">
+    <SurfaceCard className="p-0">
+      <div className="flex items-center gap-2 border-b border-border px-4 py-3">
         <Sparkles className="h-4 w-4 text-muted-foreground" />
-        <CardTitle className="text-sm font-medium text-muted-foreground">
+        <h3 className="text-sm font-medium text-muted-foreground">
           {title}
-        </CardTitle>
+        </h3>
         {moreHref && (
           <a
             href={moreHref}
@@ -55,13 +51,13 @@ export function NativeAffiliateRow({
             もっと見る ›
           </a>
         )}
-      </CardHeader>
+      </div>
       {description && (
         <p className="border-b border-border px-4 pb-2 text-xs text-muted-foreground">
           {description}
         </p>
       )}
-      <CardContent className="px-3 pb-3 pt-2">
+      <div className="px-3 pb-3 pt-2">
         <div className="grid grid-cols-2 gap-2 md:grid-cols-4">
           {banners.slice(0, 4).map((b) => (
             <TrackedAffiliateLink
@@ -70,7 +66,10 @@ export function NativeAffiliateRow({
               category={trackingCategory}
               label={b.title}
               position={position}
-              className="group flex flex-col gap-2 rounded-lg border border-border bg-card p-2 transition-shadow hover:shadow-md"
+              className={getSurfaceCardClassName({
+                interactive: true,
+                className: "group flex flex-col gap-2 p-2",
+              })}
             >
               <div className="relative aspect-[4/3] overflow-hidden rounded-md bg-muted">
                 <Image
@@ -98,7 +97,7 @@ export function NativeAffiliateRow({
             </TrackedAffiliateLink>
           ))}
         </div>
-      </CardContent>
-    </Card>
+      </div>
+    </SurfaceCard>
   );
 }

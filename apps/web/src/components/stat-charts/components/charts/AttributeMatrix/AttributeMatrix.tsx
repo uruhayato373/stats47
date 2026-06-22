@@ -1,7 +1,10 @@
 import { logger } from "@stats47/logger";
 
+import { ChartFooter } from "@/components/charts/ChartFooter";
+import { ChartPanel } from "@/components/charts/ChartPanel";
+
 import { fetchEstatDataWithCategories } from "../../../services";
-import { LegacyDashboardCard } from "../../shared/DashboardCard";
+import { ErrorDisplay } from "../../shared/ErrorDisplay";
 
 import { AttributeMatrixClient } from "./AttributeMatrixClient";
 
@@ -62,30 +65,22 @@ export const AttributeMatrixDashboard = async ({
   }
 
   if (errorMessage || !matrixData) {
-    return (
-      <div className="bg-card border rounded-lg p-4 shadow-sm">
-        <h3 className="font-semibold text-lg mb-3">{title}</h3>
-        <div className="h-[200px] flex items-center justify-center bg-muted/10 rounded">
-          <p className="text-destructive text-sm">
-            {errorMessage ?? "データがありません"}
-          </p>
-        </div>
-      </div>
-    );
+    return <ErrorDisplay title={title} message={errorMessage ?? "データがありません"} />;
   }
 
   return (
-    <LegacyDashboardCard
+    <ChartPanel
       title={title}
-      rankingLink={rankingLink}
       description={description}
-      source={sourceName ?? undefined}
-      sourceLink={sourceLink}
-      loading={false}
-      error={null}
-      empty={matrixData.rows.length === 0}
+      footer={
+        <ChartFooter
+          source={sourceName ?? undefined}
+          sourceLink={sourceLink}
+          rankingLink={rankingLink}
+        />
+      }
     >
       <AttributeMatrixClient data={matrixData} />
-    </LegacyDashboardCard>
+    </ChartPanel>
   );
 };

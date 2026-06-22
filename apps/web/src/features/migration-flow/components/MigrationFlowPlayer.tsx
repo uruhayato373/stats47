@@ -112,7 +112,7 @@ export function MigrationFlowPlayer({
       {/* プレイヤー（16:9・1920x1080 をスケール） */}
       <div
         ref={containerRef}
-        className="relative w-full overflow-hidden rounded-md border bg-white"
+        className="relative w-full overflow-hidden rounded-md border bg-card"
         style={{ aspectRatio: "16 / 9" }}
       >
         {bundle && (

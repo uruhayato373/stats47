@@ -1,8 +1,8 @@
-import Link from "next/link";
-
 import { readTagsForItemFromR2 } from "@stats47/ranking/server";
 import { isOk } from "@stats47/types";
 import { Newspaper } from "lucide-react";
+
+import { SurfaceLinkCard } from "@/components/surface";
 
 import { listArticleSummariesByTagKey } from "@/features/blog/server";
 
@@ -69,16 +69,16 @@ export async function AreaRelatedBlogArticles({ profile, limit = 5 }: Props) {
             </h2>
             <nav className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                 {articles.map((article) => (
-                    <Link
+                    <SurfaceLinkCard
                         key={article.slug}
                         href={`/blog/${article.slug}`}
-                        className="flex items-start gap-2 p-3 rounded-lg border border-border hover:border-primary/50 hover:bg-accent/50 transition-all group"
+                        className="group flex items-start gap-2 p-3"
                     >
                         <span className="mt-0.5 text-muted-foreground shrink-0 group-hover:text-primary transition-colors">›</span>
                         <span className="text-sm line-clamp-2 leading-snug">
                             {article.title}
                         </span>
-                    </Link>
+                    </SurfaceLinkCard>
                 ))}
             </nav>
         </section>

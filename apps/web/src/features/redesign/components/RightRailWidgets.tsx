@@ -1,11 +1,6 @@
 import { type ReactNode } from "react";
 
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@stats47/components/atoms/ui/card";
+import { SurfaceCard } from "@/components/surface";
 
 import { FurusatoNozeiCard, OperatorPromoCard, SidebarPromoBanner, TechSchoolPromoCard } from "@/features/ads";
 
@@ -99,37 +94,37 @@ export async function RightRailWidgets({
 
       {/* AdSense（収益枠は維持・最下部） */}
       {showTopAd && (
-        <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium text-muted-foreground">
+        <SurfaceCard className="p-0">
+          <div className="border-b border-border px-4 py-3">
+            <h3 className="text-sm font-medium text-muted-foreground">
               広告
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="flex justify-center overflow-hidden">
+            </h3>
+          </div>
+          <div className="flex justify-center overflow-hidden p-4">
             <AdSenseAd
               format={RANKING_SIDEBAR_TOP.format}
               slotId={RANKING_SIDEBAR_TOP.slotId}
               showLabel={false}
             />
-          </CardContent>
-        </Card>
+          </div>
+        </SurfaceCard>
       )}
 
       {showBottomAd && (
-        <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium text-muted-foreground">
+        <SurfaceCard className="p-0">
+          <div className="border-b border-border px-4 py-3">
+            <h3 className="text-sm font-medium text-muted-foreground">
               広告
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="flex justify-center overflow-hidden">
+            </h3>
+          </div>
+          <div className="flex justify-center overflow-hidden p-4">
             <AdSenseAd
               format={RANKING_PAGE_SIDEBAR.format}
               slotId={RANKING_PAGE_SIDEBAR.slotId}
               showLabel={false}
             />
-          </CardContent>
-        </Card>
+          </div>
+        </SurfaceCard>
       )}
     </div>
   );

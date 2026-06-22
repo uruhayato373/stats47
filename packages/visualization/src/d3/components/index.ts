@@ -13,6 +13,7 @@ export * from "./DivergingChoroplethMap";
 export * from "./TimelineChoroplethMap";
 
 // チャートコンポーネント
+export * from "./shared/D3ChartLegend";
 export * from "./BarChart";
 export * from "./BoxplotChart";
 export * from "./BarChartRace";
@@ -29,4 +30,3 @@ export * from "./Scatterplot";
 export * from "./StackedAreaChart";
 export * from "./SunburstChart";
 export * from "./TreemapChart";
-

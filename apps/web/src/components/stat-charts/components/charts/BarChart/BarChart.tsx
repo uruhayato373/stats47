@@ -1,9 +1,11 @@
 import { logger } from "@stats47/logger";
 
+import { ChartFooter } from "@/components/charts/ChartFooter";
+import { ChartPanel } from "@/components/charts/ChartPanel";
+
 import { toBarChartData } from "../../../adapters";
 import { fetchEstatData } from "../../../services";
 import { computeYAxisDomain } from "../../../utils/computeYAxisDomain";
-import { LegacyDashboardCard } from "../../shared/DashboardCard";
 import { ErrorDisplay } from "../../shared/ErrorDisplay";
 
 import { BarChartClient } from "./BarChartClient";
@@ -78,18 +80,19 @@ export const DashboardBarChart = async ({
   }
 
   return (
-    <LegacyDashboardCard
+    <ChartPanel
       title={title}
-      rankingLink={rankingLink}
       description={undefined}
-      source={sourceName ?? undefined}
-      sourceLink={sourceLink}
-      sourceDetail={unitProp}
-      loading={false}
-      error={null}
-      empty={chartData.data.length === 0}
+      footer={
+        <ChartFooter
+          source={sourceName ?? undefined}
+          sourceLink={sourceLink}
+          sourceDetail={unitProp}
+          rankingLink={rankingLink}
+        />
+      }
     >
       <BarChartClient chartData={chartData} chartType={chartType} xDomain={xDomain} />
-    </LegacyDashboardCard>
+    </ChartPanel>
   );
 };

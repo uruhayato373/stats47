@@ -4,7 +4,8 @@ import Link from "next/link";
 
 
 import { DataTable } from "@stats47/components";
-import { Card, CardContent, CardHeader, CardTitle } from "@stats47/components/atoms/ui/card";
+
+import { ChartPanel } from "@/components/charts/ChartPanel";
 
 import type { ColumnDef } from "@tanstack/react-table";
 
@@ -59,28 +60,27 @@ interface CategoryRankingTableProps {
 
 export function CategoryRankingTable({ items }: CategoryRankingTableProps) {
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>
+    <ChartPanel
+      title={
+        <>
           すべてのランキング
           <span className="ml-2 text-sm font-normal text-muted-foreground">
             {items.length}件
           </span>
-        </CardTitle>
-      </CardHeader>
-      <CardContent>
-        <DataTable
-          columns={columns}
-          data={items}
-          emptyMessage="該当するランキングがありません"
-          maxRows={20}
-          enableFiltering={true}
-          enableSorting={true}
-          showIndex={false}
-          showBorder={false}
-          getRowId={(row) => `${row.rankingKey}-${row.areaType}`}
-        />
-      </CardContent>
-    </Card>
+        </>
+      }
+    >
+      <DataTable
+        columns={columns}
+        data={items}
+        emptyMessage="該当するランキングがありません"
+        maxRows={20}
+        enableFiltering={true}
+        enableSorting={true}
+        showIndex={false}
+        showBorder={false}
+        getRowId={(row) => `${row.rankingKey}-${row.areaType}`}
+      />
+    </ChartPanel>
   );
 }
