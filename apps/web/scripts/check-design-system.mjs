@@ -2,12 +2,9 @@ import { readdirSync, readFileSync, statSync } from "node:fs";
 import path from "node:path";
 
 const cwd = process.cwd();
-// 既存ルールの既定スコープ。app は別途 appScanRoot で限定ルールのみ適用する。
-const scanRoots = ["src/components", "src/features"];
-// src/app は `app: true` のルールだけ適用する（page.tsx 幅ガード等の汎用ルール）。
-// 既存ルール (no-direct-shadcn-card / bg-white 等) を app 全体に一斉適用すると
-// 既存債務が大量に surface するため、段階導入とする（追従は別 issue / ロードマップ 0-6）。
-const appScanRoot = "src/app";
+// Phase 0-6 (2026-06-23) で src/app の既存債務 (Card 直 import / bg-white) を是正し、
+// app も全ルール対象に昇格。components / features / app を一律で検査する。
+const scanRoots = ["src/components", "src/features", "src/app"];
 const extensions = new Set([".ts", ".tsx"]);
 
 const rules = [
@@ -46,7 +43,11 @@ const rules = [
       "Avoid hardcoded surface card classes. Use SurfaceCard/SurfaceLinkCard/getSurfaceCardClassName/ChartPanel.",
     pattern:
       /rounded-none\s+border\s+bg-card\s+p-4\s+shadow-sm|bg-card\s+border\s+rounded|rounded-(?:lg|md)\s+border\s+border-border\s+bg-card|border\s+border-border\s+bg-card.*shadow-sm/,
-    allow: (relativePath) => relativePath === "src/components/surface/SurfaceCard.tsx",
+    // SurfaceCard 実装本体は許可。また rounded-full 要素はカードでなくピル/トグル/アバターなので除外
+    // (コンテンツカードは rounded-full にしない)。
+    allow: (relativePath, line) =>
+      relativePath === "src/components/surface/SurfaceCard.tsx" ||
+      /\brounded-full\b/.test(line),
   },
   {
     id: "no-map-panel",
@@ -88,14 +89,12 @@ const rules = [
     message:
       "Flat design (--radius:0). Do not hand-add rounded-xl/2xl/3xl. Use rounded-none, or rounded-full only for circular elements.",
     pattern: /\brounded-(?:xl|2xl|3xl)\b/,
-    app: true,
   },
   {
     id: "no-text-black",
     message:
       "Avoid text-black. Use text-foreground or text-slate-900 (see .claude/design-system/prohibited.md).",
     pattern: /\btext-black\b/,
-    app: true,
   },
   {
     // PageShell が幅・レール・余白の唯一の入口。page.tsx で container/max-w を直書きしない。
@@ -106,7 +105,6 @@ const rules = [
     pattern: /container\s+mx-auto|max-w-\[/,
     // page.tsx だけを対象にする（PageShell.tsx 等の正当な max-w 定義は許可）。
     allow: (relativePath) => !relativePath.endsWith("page.tsx"),
-    app: true,
   },
 ];
 
@@ -134,13 +132,13 @@ function listFiles(dir) {
   return files;
 }
 
-function checkFile(relativePath, applicableRules) {
+function checkFile(relativePath) {
   const text = readFileSync(path.join(cwd, relativePath), "utf8");
   const lines = text.split(/\r?\n/);
   const violations = [];
 
   lines.forEach((line, index) => {
-    for (const rule of applicableRules) {
+    for (const rule of rules) {
       rule.pattern.lastIndex = 0;
       if (!rule.pattern.test(line)) continue;
       if (rule.allow?.(relativePath, line)) continue;
@@ -157,13 +155,9 @@ function checkFile(relativePath, applicableRules) {
   return violations;
 }
 
-const appRules = rules.filter((rule) => rule.app);
-const violations = [
-  // components / features: 全ルール
-  ...scanRoots.flatMap((root) => listFiles(root)).flatMap((file) => checkFile(file, rules)),
-  // app: 汎用ルール (app:true) のみ。既存ルールの app 全適用は段階導入。
-  ...listFiles(appScanRoot).flatMap((file) => checkFile(file, appRules)),
-];
+const violations = scanRoots
+  .flatMap((root) => listFiles(root))
+  .flatMap((file) => checkFile(file));
 
 if (violations.length > 0) {
   console.error("Design system check failed:");

@@ -24,16 +24,11 @@ import { ReactNode } from "react";
 
 import { Badge } from "@stats47/components/atoms/ui/badge";
 import { Button } from "@stats47/components/atoms/ui/button";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@stats47/components/atoms/ui/card";
 import { Separator } from "@stats47/components/atoms/ui/separator";
 import { ExternalLink, Instagram, MapPin, Youtube } from "lucide-react";
 
 import { PageShell, PageHeader } from "@/components/layout";
+import { SurfaceCard } from "@/components/surface";
 
 interface LegalSectionProps {
   /** セクション番号（例: "1", "第1条"） */
@@ -54,12 +49,12 @@ function LegalSection({ number, title, children }: LegalSectionProps) {
   const displayTitle = number ? `${number}. ${title}` : title;
 
   return (
-    <Card className="shadow-sm h-full">
-      <CardHeader className="p-4 md:p-6">
-        <CardTitle className="text-lg md:text-xl">{displayTitle}</CardTitle>
-      </CardHeader>
-      <CardContent className="p-4 md:p-6 pt-3">{children}</CardContent>
-    </Card>
+    <SurfaceCard className="h-full">
+      <div className="p-4 md:p-6 flex flex-row items-center gap-2 space-y-0 border-b border-border">
+        <h2 className="text-base font-semibold leading-none text-lg md:text-xl">{displayTitle}</h2>
+      </div>
+      <div className="p-4 md:p-6 pt-3">{children}</div>
+    </SurfaceCard>
   );
 }
 
