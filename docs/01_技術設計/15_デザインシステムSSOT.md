@@ -111,6 +111,9 @@ stats47 の UI は、統計データを長時間読むための道具である�
 
 カードは「情報をまとめるための面」であり、装飾ではない。
 
+> **配置 tier**: どの層にコンポーネントを置くか（① プリミティブ=`@stats47/components` / ② 共有 composite=`@/components/{surface,charts,stat-charts,layout}` / ③ feature 固有）の判断は `.claude/rules/ui-components.md`「コンポーネント配置の 3 tier」が SSOT。
+> 下の採用/禁止は既に「feature 毎のカード再実装」を禁じているが、実コードには未追従の Card 重複が残る（24 亜種が散在）。**この是正は `docs/02_実装計画/13_UI統一ロードマップ.md` Phase 0-1（Card 集約）/ 0-5（lint 化）** で進める。新規は最初からこの規約に従う。
+
 ### 採用
 
 - 基本カード: `SurfaceCard`
