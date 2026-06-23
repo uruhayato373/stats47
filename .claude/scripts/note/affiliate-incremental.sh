@@ -97,10 +97,17 @@ _position_before_anchor(){
       ||heads.find(h=>h.innerText.includes('まとめ'))
       ||heads.find(h=>h.innerText.includes('関連記事'))
       ||heads.find(h=>h.innerText.includes('次に読む'));
-    if(!anchor)return 'no-anchor';
+    if(!anchor){
+      // まとめ等が無い記事は本文末尾(最後のブロックの末尾)にカーソルを置いて末尾追記にする
+      const blocks=[...e.children].filter(c=>c.innerText&&c.innerText.trim().length>0);
+      if(!blocks.length)return 'no-anchor';
+      const last=blocks[blocks.length-1];last.scrollIntoView({block:'center'});
+      const r=document.createRange();r.selectNodeContents(last);r.collapse(false);
+      const s=window.getSelection();s.removeAllRanges();s.addRange(r);e.focus();return 'at-end';
+    }
     anchor.scrollIntoView({block:'center'});
     const tn=anchor.firstChild||anchor;const r=document.createRange();r.setStart(tn,0);r.collapse(true);
-    const s=window.getSelection();s.removeAllRanges();s.addRange(r);e.focus();return 'at-anchor';})();" 2>&1 | grep -oiE "at-anchor|no-anchor|no-editor" | head -1
+    const s=window.getSelection();s.removeAllRanges();s.addRange(r);e.focus();return 'at-anchor';})();" 2>&1 | grep -oiE "at-anchor|at-end|no-anchor|no-editor" | head -1
 }
 
 insert_affiliate(){
@@ -125,11 +132,12 @@ insert_affiliate(){
   # 全ブロックをレンダリングさせる
   BU eval "window.scrollTo(0,document.body.scrollHeight);'b'" >/dev/null 2>&1; sleep 1
   BU eval "window.scrollTo(0,0);'t'" >/dev/null 2>&1; sleep 1
-  # 位置決め
+  # 位置決め: at-anchor(まとめ直前) または at-end(末尾追記)
   local POS=$(_position_before_anchor)
-  if [ "$POS" != "at-anchor" ]; then echo "  [WARN] anchor not found ($POS): $SLUG — needs special handling"; return 2; fi
+  if [ "$POS" != "at-anchor" ] && [ "$POS" != "at-end" ]; then echo "  [WARN] anchor not found ($POS): $SLUG — needs special handling"; return 2; fi
   BU keys Enter >/dev/null 2>&1; sleep 0.5
-  BU keys ArrowUp >/dev/null 2>&1; sleep 0.5
+  # at-anchor は新規空行へ ArrowUp で戻る。at-end は末尾の新規行にそのまま書く(ArrowUp しない)。
+  if [ "$POS" = "at-anchor" ]; then BU keys ArrowUp >/dev/null 2>&1; sleep 0.5; fi
   # PR文をペースト（\n\n で段落分離）。多言語文字列は一時ファイル経由で encodeURIComponent（インライン渡しは壊れる）
   printf '%s' "$AFF_TEXT" > /tmp/aff-text.txt
   local ENC=$(node -e "process.stdout.write(encodeURIComponent(require('fs').readFileSync('/tmp/aff-text.txt','utf8')))")
