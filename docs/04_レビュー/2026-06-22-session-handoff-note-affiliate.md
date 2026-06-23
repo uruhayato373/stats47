@@ -1,10 +1,15 @@
 ---
 type: session-handoff
 date: 2026-06-22
-status: in-progress
+status: completed
+completed_date: 2026-06-23
 ---
 
 # ハンドオフ: note アフィリエイトバナー挿入バッチ
+
+> **✅ 完了 (2026-06-23)**: 全36記事にアフィリエイトブロックを挿入＋公開済み
+> (26件は公開ページ反映確認、9件は有料=ペイウォール下に挿入済、1件 K:00 は CDN 反映待ち)。
+> 以下の「現状」は当時の中断時点の記録。下記「2026-06-23 完了記録」が最終状態。
 
 ## 目的
 
@@ -12,8 +17,33 @@ koumuin-claude-code (24記事) + koumuin-estat-claude-code (12記事) = 計36記
 AI Agent Camp (a8.net) のアフィリエイトブロックを挿入して再公開する。
 
 - **挿入内容**: 5段落PR文 + バナー画像 (`ai_agent_camp.png`) + a8リンク
-- **挿入位置**: `## まとめ` の直前（まとめが無い記事は別途対応）
+- **挿入位置**: `## まとめ` の直前（まとめが無い記事は本文末尾に追記）
 - **バナーURL**: `https://px.a8.net/svt/ejp?a8mat=4B3RUY+AG9Z3M+5VRC+5YZ75`
+
+---
+
+## 2026-06-23 完了記録
+
+`.claude/scripts/note/affiliate-incremental.sh` を全面堅牢化し全36記事を完走。
+ユーザー報告の「ブラウザを閉じる確認」は **5種類の別ダイアログ**だった。全て自動処理化:
+
+1. **`confirm()`「全文が無料で表示される設定…公開してよろしいですか？」**（無料記事の更新する）
+   → `_suppress_dialogs` が `window.confirm = ()=>true`（/publish/ 遷移後に注入）
+2. **OSのファイル選択ダイアログ**（バナーUP時の真のジャム原因。watchdog は JS ダイアログのみ accept、
+   fileChooser は対象外）→ `_upload_banner_cdp` が CDP で隠し input に `DOM.setFileInputFiles` 直接投入
+   （`#note-editor-image-upload-input` を querySelector、`setInterceptFileChooserDialog` 併用、クリック不要）
+3. **「購読者に通知しますか？」**（有料記事の更新する後）→ `publish_update` が **いいえ**（通知しない）をクリック
+4. **beforeunload**（記事間遷移）→ `BU_open`/`_suppress_unload` が capture フェーズで抑止
+5. **editor.note.com → login リダイレクト**（daemon 再起動後）→ `insert_affiliate` が login 検出時に再オープン
+6. **まとめ無し記事**（estat 08）→ `_position_before_anchor` の `at-end` フォールバックで本文末尾に追記
+
+無料記事の公開は「試し読みエリアを設定 → 更新する」（ライン変更は不要）。
+有料記事はアフィリエイトが**ペイウォール下**に入るため公開ページ HTML には出ないが、エディタには挿入済
+（E:01 エディタで確認済）。検証は公開ページ grep だけでなく**エディタ内容の確認**で行うこと。
+
+再実行する場合: `/tmp/note-update-targets.tsv`（slug→noteId、`.claude/state/note-published-urls.json`
+から再生成可）と `/tmp/note-batch.sh` を用意し `bash /tmp/note-batch.sh <slug...>`。冪等
+（a8リンク or PR文ありで SKIP→公開のみ）。
 
 ---
 
