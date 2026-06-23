@@ -22,7 +22,7 @@
  * "single" レイアウトのみ対応。
  */
 
-import { niceScale, formatTick } from "../shared/axis";
+import { niceScale, formatTick, formatValueLabel } from "../shared/axis";
 import { FONT_FAMILY, PALETTES, PaletteName, colorByIndex } from "../shared/color";
 import { svgThemeStyle } from "../shared/theme";
 
@@ -150,7 +150,7 @@ function renderCardColumn(
       const w = toBarW(d.value);
       const rank = d.rank ?? i + 1;
       const name = d.name ?? d.label;
-      const valStr = `${formatTick(d.value, 1)}${unit}`;
+      const valStr = `${formatValueLabel(d.value, 1)}${unit}`;
       return [
         `  <rect x="${colX}" y="${rowY}" width="${CARD_W}" height="${CARD_H}" rx="6" fill="${cardBg}"/>`,
         `  <circle cx="${colX + BADGE_DX}" cy="${cy}" r="${BADGE_R}" fill="${theme.header}"/>`,
@@ -265,7 +265,7 @@ function renderPortraitSection(
       const cardBg = i % 2 === 0 ? theme.cardAlt : "#ffffff";
       const rank = d.rank ?? i + 1;
       const name = d.name ?? d.label;
-      const valStr = `${formatTick(d.value, 1)}${unit}`;
+      const valStr = `${formatValueLabel(d.value, 1)}${unit}`;
       const badgeCx = x + 42;
       const badgeCy = y + 38;
       const w = toBarW(d.value);
@@ -431,7 +431,7 @@ export function generateBarChartSvg(items: BarItem[], options: BarChartOptions):
     const fill = getColor(idx);
     const midY = y + 13;
     const valX = LABEL_X + w + 4;
-    const valStr = formatTick(d.value, 1);
+    const valStr = formatValueLabel(d.value, 1);
     return [
       `  <rect x="${LABEL_X}" y="${y}" width="${w}" height="${BAR_H}" fill="${fill}" rx="2"/>`,
       `  <text x="${LABEL_X - 5}" y="${midY}" text-anchor="end" font-size="12" class="svg-axis">${d.label}</text>`,
