@@ -44,7 +44,12 @@ stats47 の UI は、統計データを長時間読むための道具である�
 - ページ外側の幅制御: `PageShell`
 - ページ見出し: `PageHeader`
 - 記事・規約など読むページ: `PageShell variant="reading"`
-- TOC / 関連記事 / 広告などの補助列: `leftRail` / `rightRail`
+- 補助列の左右セマンティクス（用途で side を固定する。見た目の左右非対称は意図的）:
+  - **`leftRail` = ナビゲーション**（テーマナビ等、ページ内を移動する目的）。例: `/themes/*`
+  - **`rightRail` = 関連 / 広告 / widget**（TOC・関連記事・関連ランキング・AdSense）。例: areas / tag / ranking 詳細 / blog 詳細
+  - どちらも本文 + 片側 1 列。同一ページで両 rail は使わない（3 列禁止）
+- パンくず: **単一 `PageShell` の先頭子**として `<Breadcrumb className="mb-4">` を置く（tag / areas / blog 共通）。breadcrumb 専用に別 `PageShell` を二重に積まない。
+- ランキング詳細 (`/ranking/*`) も他ページ同様 `PageShell` の `rightRail`（xl/360px・sticky）を使う。独自グリッド・独自幅レールは禁止（2026-06-23 統一）。
 - ブログ詳細のように右 rail を lg+ で出すページ: `PageShell rightRailBreakpoint="lg"`。TOC は右 rail の先頭、lg 未満は記事冒頭に置く。
 - ページ内セクション: `section` + 短い `h2` + 必要な説明文
 
