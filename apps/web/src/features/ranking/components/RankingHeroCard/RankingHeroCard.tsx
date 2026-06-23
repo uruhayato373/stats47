@@ -2,7 +2,6 @@
 
 import { useMemo, type ReactNode } from "react";
 
-import { PageHeader } from "@/components/layout";
 import {
   Select,
   SelectContent,
@@ -11,6 +10,8 @@ import {
   SelectValue,
 } from "@stats47/components/atoms/ui/select";
 import { Sigma, Users, LandPlot } from "lucide-react";
+
+import { PageHeader } from "@/components/layout";
 
 import { RankingHeroStat } from "./RankingHeroStat";
 

@@ -13,7 +13,7 @@ import {
 import { PageShell } from "@/components/layout";
 import { ShareButtons } from "@/components/molecules/ShareButtons";
 import { SourceAttribution } from "@/components/molecules/SourceAttribution";
-import { AdSenseAd, RANKING_PAGE_TABLE_SIDE } from "@/lib/google-adsense";
+
 
 import type { AreaType } from "@/features/area";
 import {
@@ -22,6 +22,8 @@ import {
     RankingHeroCard,
     classifyRankingSubtitle,
 } from "@/features/ranking";
+
+import { AdSenseAd, RANKING_PAGE_TABLE_SIDE } from "@/lib/google-adsense";
 
 import { RankingBasisSwitcher, type RankingBasisMember } from "./RankingBasisSwitcher";
 import { RankingPageContentSections, type RankingPageSections } from "./RankingPageContentSections";
