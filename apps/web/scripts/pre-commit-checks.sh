@@ -59,6 +59,25 @@ if ! node "$GUARD_ROOT/.claude/scripts/lib/check-card-census.cjs"; then
   ERROR_COUNT=$((ERROR_COUNT + 1))
 fi
 
+# 2.3 ESLint (staged の apps/web TS/TSX) — CI の next lint と同基準で import/order 等を事前に弾く
+# 背景: import/order は CI (Code Quality Check) でのみ検出され、ローカルで気付けず CI を1サイクル無駄にしていた
+# (2026-06-23 deploy 時に発生)。staged ファイルだけを next lint にかけて高速に事前検出する。
+echo -e "${GREEN}🧹 ESLint (staged ファイル)...${NC}"
+STAGED_WEB_TS=$(git diff --cached --name-only --diff-filter=ACM | grep -E '^apps/web/src/.*\.(ts|tsx)$' || true)
+if [ -n "$STAGED_WEB_TS" ]; then
+  LINT_ARGS=$(echo "$STAGED_WEB_TS" | sed 's#^apps/web/#--file #' | tr '\n' ' ')
+  if ! (cd "$WEB_DIR" && npx next lint $LINT_ARGS > /tmp/precommit-lint.out 2>&1); then
+    echo -e "${RED}❌ ESLint エラー (import/order 等) が検出されました。${NC}"
+    grep -E "Error:|\.tsx?$" /tmp/precommit-lint.out | head -20
+    echo -e "${YELLOW}💡 自動修正: cd apps/web && npx next lint --fix${NC}"
+    ERROR_COUNT=$((ERROR_COUNT + 1))
+  else
+    echo -e "${GREEN}✅ ESLint 成功${NC}"
+  fi
+else
+  echo -e "${GREEN}✅ 対象 staged ファイルなし${NC}"
+fi
+
 # 3. 一時ファイル自動クリーンアップ
 echo -e "${GREEN}🗑️  一時ファイルチェック...${NC}"
 PROJECT_ROOT="$(cd "$SCRIPT_DIR/../../.." && pwd)"
