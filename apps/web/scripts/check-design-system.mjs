@@ -2,7 +2,12 @@ import { readdirSync, readFileSync, statSync } from "node:fs";
 import path from "node:path";
 
 const cwd = process.cwd();
+// 既存ルールの既定スコープ。app は別途 appScanRoot で限定ルールのみ適用する。
 const scanRoots = ["src/components", "src/features"];
+// src/app は `app: true` のルールだけ適用する（page.tsx 幅ガード等の汎用ルール）。
+// 既存ルール (no-direct-shadcn-card / bg-white 等) を app 全体に一斉適用すると
+// 既存債務が大量に surface するため、段階導入とする（追従は別 issue / ロードマップ 0-6）。
+const appScanRoot = "src/app";
 const extensions = new Set([".ts", ".tsx"]);
 
 const rules = [
@@ -78,6 +83,31 @@ const rules = [
       "Avoid large shadows on normal cards. Use no shadow, shadow-sm, or shadow-md.",
     pattern: /\bshadow-(?:lg|2xl)\b/,
   },
+  {
+    id: "no-rounded-xl",
+    message:
+      "Flat design (--radius:0). Do not hand-add rounded-xl/2xl/3xl. Use rounded-none, or rounded-full only for circular elements.",
+    pattern: /\brounded-(?:xl|2xl|3xl)\b/,
+    app: true,
+  },
+  {
+    id: "no-text-black",
+    message:
+      "Avoid text-black. Use text-foreground or text-slate-900 (see .claude/design-system/prohibited.md).",
+    pattern: /\btext-black\b/,
+    app: true,
+  },
+  {
+    // PageShell が幅・レール・余白の唯一の入口。page.tsx で container/max-w を直書きしない。
+    // 正典: docs/01_技術設計/15_デザインシステムSSOT.md / 13_統一レイアウト設計.md
+    id: "no-direct-width-in-page",
+    message:
+      "page.tsx must not hardcode width. Use PageShell (sole width/rail/padding source). No container mx-auto / max-w-[…].",
+    pattern: /container\s+mx-auto|max-w-\[/,
+    // page.tsx だけを対象にする（PageShell.tsx 等の正当な max-w 定義は許可）。
+    allow: (relativePath) => !relativePath.endsWith("page.tsx"),
+    app: true,
+  },
 ];
 
 function listFiles(dir) {
@@ -104,13 +134,13 @@ function listFiles(dir) {
   return files;
 }
 
-function checkFile(relativePath) {
+function checkFile(relativePath, applicableRules) {
   const text = readFileSync(path.join(cwd, relativePath), "utf8");
   const lines = text.split(/\r?\n/);
   const violations = [];
 
   lines.forEach((line, index) => {
-    for (const rule of rules) {
+    for (const rule of applicableRules) {
       rule.pattern.lastIndex = 0;
       if (!rule.pattern.test(line)) continue;
       if (rule.allow?.(relativePath, line)) continue;
@@ -127,9 +157,13 @@ function checkFile(relativePath) {
   return violations;
 }
 
-const violations = scanRoots
-  .flatMap((root) => listFiles(root))
-  .flatMap((file) => checkFile(file));
+const appRules = rules.filter((rule) => rule.app);
+const violations = [
+  // components / features: 全ルール
+  ...scanRoots.flatMap((root) => listFiles(root)).flatMap((file) => checkFile(file, rules)),
+  // app: 汎用ルール (app:true) のみ。既存ルールの app 全適用は段階導入。
+  ...listFiles(appScanRoot).flatMap((file) => checkFile(file, appRules)),
+];
 
 if (violations.length > 0) {
   console.error("Design system check failed:");
