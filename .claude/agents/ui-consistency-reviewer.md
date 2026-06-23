@@ -19,6 +19,20 @@ stats47 内のページ横断 UI 一貫性をレビューする agent。 code-re
 - レスポンシブブレイクポイント (`lg:` vs `@lg:`) の正しい使い分け
 - `@stats47/components` (shadcn ベース) の優先利用チェック
 
+### 重複判定プロトコル (★表層類似 ≠ 重複・誤判定の再発防止)
+
+「A と B は重複だから統合すべき」と指摘する前に、**必ず次の 2 段で検証**する (どちらか欠けたら指摘しない):
+
+1. **カタログ照合 (先)**: `chart-component-standards.md` §2 (カードフレーム役割分担を含む) / `ui-components.md` 配置 3 tier を読む。
+   **カタログが別役割を定義していれば非重複**として扱う (例: `ChartPanel`=titled chart 枠 vs `StatsChartCard`=compact KPI は意図的 2 役割)。
+2. **実装精読 (後)**: 共有基盤 (`SurfaceCard`/`ChartState`/`ChartPanel`/`RailCard`/shadcn primitive) を既に使い、
+   presentation / データ源が文脈ごとに正当に異なるなら**非重複**。同一なら「共有 component でなく共有ロジック(fetcher/util)」への集約を提案。
+
+> 表層 (ファイル名・grep の見た目・"どれも Card") で重複と判定しない。
+> 過去に監査が「Card 24 亜種でスパゲッティ」「StatsChartCard↔ChartPanel 重複」と表層誤判定 → 精読で大半が正規パターンと判明
+> (2026-06-23, ロードマップ Phase 3)。**過剰統合 (leaky abstraction) を避けるのも成果**。
+> 新カード亜種の増殖そのものは `check-card-census.cjs` (pre-commit + CI) が機械的に抑止する (役割判定は本 agent が担う)。
+
 ## 担当スキル
 
 | スキル | 用途 |

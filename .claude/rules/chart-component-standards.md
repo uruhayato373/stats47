@@ -134,6 +134,21 @@ e-Stat連携・データ変換・ローディング状態を内包したフル�
 | `MiniStackedBarChart` | `@/components/charts/MiniCharts` | カード内積み上げ棒グラフ |
 | `HubSankey` | `@/components/charts/HubSankey` | 財政フローSankey図 |
 
+#### カードフレームの役割分担（★重複と誤判定しないこと）
+
+`@/components/charts` のカード枠は**基盤 `SurfaceCard` を共有しつつ、用途別に明確な役割を持つ**。
+表層が似ている（どれも `SurfaceCard` を p-0 でラップ）が**重複ではない**。マージは leaky abstraction を生むため禁止。
+（過去に監査が「StatsChartCard と ChartPanel は重複」と表層誤判定 → 精読で役割分担と判明: 2026-06-23）。
+
+| コンポーネント | 役割 | header の形 | 使い分け |
+|---|---|---|---|
+| `ChartPanel` | **タイトル付きチャート/マップ枠** | `title`+`description`+`icon`+`action`（border-b 付き）/ bordered footer | チャート・地図など「見出し付きパネル」 |
+| `StatsChartCard`（= `ChartCard` alias） | **compact KPI カード** | `label`+`value` を1行 baseline（border なし） | KPI（指標名+大きな数値）+ ミニチャート |
+| `KpiCard` | **KPI + badge/trend** | KPI 値 + バッジ/トレンド | 増減トレンド付き KPI |
+
+> `ChartCard.tsx` は **barrel（re-export 集約）** であり実体コンポーネントではない（`StatsChartCard` の alias を含む public API 窓口）。
+> 役割の正典はこの表 + `check-design-system.mjs` の `no-legacy-dashboard-card` メッセージ（"ChartPanel for charts/maps and ChartCard for compact KPI cards"）。
+
 ---
 
 ### 2-D. Feature-scoped（例外認定・移動不可）
