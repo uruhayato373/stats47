@@ -42,7 +42,10 @@ stats47 の UI は、統計データを長時間読むための道具である�
 ### 採用
 
 - ページ外側の幅制御: `PageShell`
-- ページ見出し: `PageHeader`
+- ページ見出し: `PageHeader`。**全 hero / header の唯一の基盤**。独自 hero コンポーネントを新設しない。差分は後方互換の任意 slot で表現する（2026-06-23 Phase 2 で統合）:
+  - `actions`（h1 右の CTA / セレクタ）— 例: `ThemeAreaHeader` が `PrefectureSelect` を注入
+  - `meta`（title 直下の出典/年度/更新の細い行）/ `controls`（header ブロック下の操作行）/ `aside`（右カラム。指定時のみ lg で 2 カラム grid 化）— 例: `RankingHeroCard` が `aside`（暗色 KPI 面 `RankingHeroStat`）+ `controls`（正規化ピル）を合成
+  - 全 slot 未指定時は標準ミニマル見出しと DOM 不変。`PageHeader` 本体には暗色背景/グラデを足さない（白基調）。暗色 KPI 面は `aside` に渡す presentational 子の意図的 `bg-slate-900` variant で表現する。
 - 記事・規約など読むページ: `PageShell variant="reading"`
 - 補助列の左右セマンティクス（用途で side を固定する。見た目の左右非対称は意図的）:
   - **`leftRail` = ナビゲーション**（テーマナビ等、ページ内を移動する目的）。例: `/themes/*`

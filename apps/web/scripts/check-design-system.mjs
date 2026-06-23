@@ -32,10 +32,9 @@ const rules = [
       "Avoid bg-white in normal UI. Use bg-card/bg-background, or document a brand/contrast exception in the allowlist.",
     pattern: /(?:^|\s)bg-white(?:[\/\s"`}]|$)/,
     allow: (relativePath) =>
-      [
-        "src/features/ads/components/TechSchoolPromoCard.tsx",
-        "src/features/ranking/components/RankingHeroCard/RankingHeroCard.tsx",
-      ].includes(relativePath),
+      ["src/features/ads/components/TechSchoolPromoCard.tsx"].includes(
+        relativePath,
+      ),
   },
   {
     id: "no-hardcoded-surface-card",
