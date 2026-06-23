@@ -18,16 +18,11 @@ import Link from "next/link";
 
 import { Badge } from "@stats47/components/atoms/ui/badge";
 import { Button } from "@stats47/components/atoms/ui/button";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@stats47/components/atoms/ui/card";
 import { Separator } from "@stats47/components/atoms/ui/separator";
 import { ExternalLink, Instagram, MapPin, Youtube, Briefcase, Target } from "lucide-react";
 
 import { PageShell, PageHeader } from "@/components/layout";
+import { SurfaceCard } from "@/components/surface";
 
 import { getRequiredBaseUrl } from "@/lib/env";
 import {
@@ -45,12 +40,12 @@ interface AboutSectionProps {
 
 function AboutSection({ title, children }: AboutSectionProps) {
   return (
-    <Card className="shadow-sm h-full">
-      <CardHeader className="p-4 md:p-6">
-        <CardTitle className="text-lg md:text-xl">{title}</CardTitle>
-      </CardHeader>
-      <CardContent className="p-4 md:p-6 pt-3">{children}</CardContent>
-    </Card>
+    <SurfaceCard className="h-full">
+      <div className="p-4 md:p-6 flex flex-row items-center gap-2 space-y-0 border-b border-border">
+        <h2 className="text-base font-semibold leading-none text-lg md:text-xl">{title}</h2>
+      </div>
+      <div className="p-4 md:p-6 pt-3">{children}</div>
+    </SurfaceCard>
   );
 }
 

@@ -35,11 +35,22 @@ CSS Grid (`lg:grid` + `items-start`) 内の `sticky` aside には **必ず `max-
 - `apps/web/src/features/redesign/components/RightRailWidgets.tsx` — `scrollClass`
 - 3カラムレイアウトを持つすべての新規ページ
 
-## チャートコンポーネント
+## コンポーネント配置の 3 tier（★新規コンポーネント追加前に必読・配置の SSOT）
 
-**チャート・グラフを追加するときは先に `.claude/rules/chart-component-standards.md` のカタログを確認する。**
-既存の `MiniLineChart` / `MiniBarChart` / `ChartCard` 等が使えるケースでは再実装しない。
-新規チャートが必要な場合は `chart-component-builder` agent に設計を依頼する。
+新規 UI を作るときは、まず**どの tier に置くか**を決める。下位 tier に既にあるものを feature 内に再実装しない
+（再実装が共通化を阻む最大要因。実測で feature 層の重複が散在 → 是正は `docs/02_実装計画/13_UI統一ロードマップ.md` Phase 0/2/3）。
+
+| tier | 置き場所 | import 元 | 中身 | 追加方法 |
+|---|---|---|---|---|
+| **① プリミティブ** | `packages/components/src/atoms/ui` | `@stats47/components` | shadcn/ui 由来の素部品（Button/Card/Select/Table/Tabs…30 個） | `cd packages/components && npx shadcn add`（`packages/components/README.md`）。app-local に置かない |
+| **② 共有 composite** | `apps/web/src/components/{surface,charts,stat-charts,layout,molecules}` | `@/components/...` | 複数 feature が使う合成部品（`SurfaceCard` / `ChartCard` / `PageShell` / `MiniCharts` / KPI カード等）。**これは正式な共有層**（実質 180+ import のハブ） | ① を組み合わせて作る。チャートは `chart-component-builder` agent |
+| **③ feature 固有** | `apps/web/src/features/<feature>/components` | feature 内 `index.ts` 経由 | その feature だけで使う UI。複数 feature で必要になったら ② へ昇格 | feature 内。**他 feature から直接 import しない**（app 層経由で合成） |
+
+判断フロー: 「① にあるか？ → ② にあるか？ → 無ければ作る（汎用なら ②、その feature 専用なら ③）」。
+
+- **`@stats47/components` の shadcn ベースコンポーネント（① プリミティブ）を最優先で使う。**
+  Table / Card / Accordion / Select / Button 等が揃っている。素の HTML 要素（`<table>`, `<select>`, `<button>` 等）で実装せず、まず `packages/components/src/` に該当コンポーネントがないか確認すること。
+- **Card は基底（① `Card` / ② `SurfaceCard`）から作る。** feature 内に独自カード枠を新規定義しない（Card 乱立の解消は Phase 0-1）。
 
 ## チャートコンポーネント（★新規追加前に必読）
 
@@ -47,11 +58,6 @@ CSS Grid (`lg:grid` + `items-start`) 内の `sticky` aside には **必ず `max-
 既存の `MiniLineChart` / `MiniBarChart` / `ChartCard` 等が使えるケースでは再実装しない。
 新規チャートが必要な場合は `chart-component-builder` agent に設計を依頼する。
 規約違反の検出は `/audit-chart-components` スキルで実行する。
-
-## コンポーネント選択
-
-- **`@stats47/components` の shadcn ベースコンポーネントを優先使用する。**
-  Table / Card / Accordion / Select / Button 等が揃っている。素の HTML 要素（`<table>`, `<select>`, `<button>` 等）で実装せず、まず `packages/components/src/` に該当コンポーネントがないか確認すること。
 
 - **ページ見出し（h1）は `text-2xl font-bold` に統一する。** `text-3xl` 以上は使わない。
   - **例外: hero バナー内の h1**（色付き `HeroShell` / hero セクション内のキャッチコピー）は `text-2xl sm:text-3xl`（home のみ `text-3xl sm:text-4xl lg:text-5xl`）のレスポンシブ大見出しを許容する。マーケ目的の意図的拡大であり、コンテンツ本文の h1（ranking/category 詳細・記事タイトル）とは役割が異なる。該当: `app/page.tsx`・`category/[categoryKey]`・`themes`・`survey/[surveyKey]`・`tag/[tagKey]`。本文コンテンツの h1 では `text-2xl` を厳守する。

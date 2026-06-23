@@ -1,21 +1,21 @@
 {
-  "generatedAt": "2026-06-21T23:29:00.389Z",
+  "generatedAt": "2026-06-22T23:29:46.765Z",
   "gscWeek": "2026-W25",
-  "auditGeneratedAt": "2026-06-21T23:29:00.370Z",
+  "auditGeneratedAt": "2026-06-22T23:29:46.746Z",
   "scoring": "combined = 0.6*norm(GSC expectedLift) + 0.4*norm(blockers*3+warnings); lane: must-fix > opportunity",
   "summary": {
     "total": 140,
-    "pending": 95,
+    "pending": 87,
     "inProgress": 1,
-    "done": 44,
-    "mustFixPending": 44,
+    "done": 52,
+    "mustFixPending": 36,
     "opportunityPending": 51
   },
   "queue": [
     {
       "slug": "smartphone-ownership-prefecture-gap",
       "lane": "must-fix",
-      "status": "pending",
+      "status": "done",
       "priority": 1,
       "combinedScore": 0.4,
       "gsc": {
@@ -42,15 +42,15 @@
           "blocker: 記事内関連セクション — ページ側コンポーネントが正典 (記事から削除)"
         ]
       },
-      "wave_id": null,
-      "remediated_at": null,
+      "wave_id": "2026-06-23-prose",
+      "remediated_at": "2026-06-23",
       "in_progress_at": null,
       "last_brushup": null
     },
     {
       "slug": "self-financing-ratio-prefecture-gap",
       "lane": "must-fix",
-      "status": "pending",
+      "status": "done",
       "priority": 2,
       "combinedScore": 0.379,
       "gsc": {
@@ -76,15 +76,15 @@
           "blocker: 記事内関連セクション — ページ側コンポーネントが正典 (記事から削除)"
         ]
       },
-      "wave_id": null,
-      "remediated_at": null,
+      "wave_id": "2026-06-23-prose",
+      "remediated_at": "2026-06-23",
       "in_progress_at": null,
       "last_brushup": null
     },
     {
       "slug": "outpatient-rate-prefecture-gap",
       "lane": "must-fix",
-      "status": "pending",
+      "status": "done",
       "priority": 3,
       "combinedScore": 0.364,
       "gsc": {
@@ -110,15 +110,15 @@
           "blocker: 記事内関連セクション — ページ側コンポーネントが正典 (記事から削除)"
         ]
       },
-      "wave_id": null,
-      "remediated_at": null,
+      "wave_id": "2026-06-23-prose",
+      "remediated_at": "2026-06-23",
       "in_progress_at": null,
       "last_brushup": null
     },
     {
       "slug": "inpatient-rate-prefecture-gap",
       "lane": "must-fix",
-      "status": "pending",
+      "status": "done",
       "priority": 4,
       "combinedScore": 0.344,
       "gsc": {
@@ -144,15 +144,15 @@
           "blocker: 記事内関連セクション — ページ側コンポーネントが正典 (記事から削除)"
         ]
       },
-      "wave_id": null,
-      "remediated_at": null,
+      "wave_id": "2026-06-23-prose",
+      "remediated_at": "2026-06-23",
       "in_progress_at": null,
       "last_brushup": null
     },
     {
       "slug": "prefectural-height-male-female-gap",
       "lane": "must-fix",
-      "status": "pending",
+      "status": "done",
       "priority": 5,
       "combinedScore": 0.337,
       "gsc": {
@@ -178,15 +178,15 @@
           "blocker: 記事内関連セクション — ページ側コンポーネントが正典 (記事から削除)"
         ]
       },
-      "wave_id": null,
-      "remediated_at": null,
+      "wave_id": "2026-06-23-prose",
+      "remediated_at": "2026-06-23",
       "in_progress_at": null,
       "last_brushup": "2026-05-25"
     },
     {
       "slug": "minimum-wage-increase-rate-prefecture-gap",
       "lane": "must-fix",
-      "status": "pending",
+      "status": "done",
       "priority": 6,
       "combinedScore": 0.337,
       "gsc": {
@@ -212,15 +212,15 @@
           "blocker: 記事内関連セクション — ページ側コンポーネントが正典 (記事から削除)"
         ]
       },
-      "wave_id": null,
-      "remediated_at": null,
+      "wave_id": "2026-06-23-prose",
+      "remediated_at": "2026-06-23",
       "in_progress_at": null,
       "last_brushup": null
     },
     {
       "slug": "fishery-catch-aquaculture-shift",
       "lane": "must-fix",
-      "status": "pending",
+      "status": "done",
       "priority": 7,
       "combinedScore": 0.3,
       "gsc": {
@@ -245,15 +245,15 @@
           "warning: source-link 末尾集約 3個 — 各図直下へ分散"
         ]
       },
-      "wave_id": null,
-      "remediated_at": null,
+      "wave_id": "2026-06-23-prose",
+      "remediated_at": "2026-06-23",
       "in_progress_at": null,
       "last_brushup": "2026-05-25"
     },
     {
       "slug": "cc-estat-09-radar-prefecture",
       "lane": "must-fix",
-      "status": "pending",
+      "status": "done",
       "priority": 8,
       "combinedScore": 0.26,
       "gsc": {
@@ -277,8 +277,8 @@
           "blocker: 記事内関連セクション — ページ側コンポーネントが正典 (記事から削除)"
         ]
       },
-      "wave_id": null,
-      "remediated_at": null,
+      "wave_id": "2026-06-23-prose",
+      "remediated_at": "2026-06-23",
       "in_progress_at": null,
       "last_brushup": null
     },

@@ -10,8 +10,10 @@ import {
     buildRankingDisplayInfo,
 } from "@stats47/ranking";
 
+import { PageShell } from "@/components/layout";
 import { ShareButtons } from "@/components/molecules/ShareButtons";
 import { SourceAttribution } from "@/components/molecules/SourceAttribution";
+
 
 import type { AreaType } from "@/features/area";
 import {
@@ -21,9 +23,10 @@ import {
     classifyRankingSubtitle,
 } from "@/features/ranking";
 
+import { AdSenseAd, RANKING_PAGE_TABLE_SIDE } from "@/lib/google-adsense";
+
 import { RankingBasisSwitcher, type RankingBasisMember } from "./RankingBasisSwitcher";
 import { RankingPageContentSections, type RankingPageSections } from "./RankingPageContentSections";
-import { RankingPageDesktopSidebar, RankingPageMobileSidebar } from "./RankingPageSidebarLayout";
 import { RankingVisualizationSection } from "./RankingVisualizationSection";
 import { useRankingPageState } from "./useRankingPageState";
 
@@ -188,8 +191,23 @@ export function RankingKeyPageClient({
         : null;
     const dataNote = configNote ?? subtitleNote;
 
+    // 右レール: PageShell 標準（xl+ で 360px・sticky）に統一。
+    // 旧 RankingPageDesktopSidebar の lg/300px 独自レールを廃止し RightRailWidgets と同じ
+    // sticky 仕様に揃える。サイド AdSense はデスクトップ限定 (hidden xl:block)。
+    const rightRail = sections.sidebar ? (
+        <div className="flex flex-col gap-4 xl:sticky xl:top-20 xl:max-h-[calc(100vh-5.5rem)] xl:overflow-y-auto xl:pr-1">
+            {sections.sidebar}
+            <div className="hidden xl:block">
+                <AdSenseAd
+                    format={RANKING_PAGE_TABLE_SIDE.format}
+                    slotId={RANKING_PAGE_TABLE_SIDE.slotId}
+                />
+            </div>
+        </div>
+    ) : undefined;
+
     return (
-        <div className="container mx-auto px-4 py-4">
+        <PageShell rightRail={rightRail}>
             {/* ヒーローカード（Option D）: タイトル + 単位ピル + メタ操作 + 暗色スタット */}
             <RankingHeroCard
                 categoryName={categoryName}
@@ -214,37 +232,29 @@ export function RankingKeyPageClient({
 
             <RankingBasisSwitcher rankingKey={rankingKey} members={groupMembers} />
 
-            {/* メインコンテンツ + 右サイドバー (CSS のみで切替: JS ハイドレーション由来の CLS を防ぐ) */}
-            <div className="mt-4 lg:flex lg:gap-4 lg:items-start">
-                <main className="flex flex-col gap-4 min-w-0 flex-1">
-                    <RankingVisualizationSection
-                        rankingItem={rankingItem}
-                        activeRankingItem={activeRankingItem}
-                        rankingValues={rankingValues}
-                        areaType={currentAreaType}
-                        topology={topology}
-                        headerActions={headerActions}
-                        cardFooter={cardFooter}
-                        isPending={isPending}
-                    />
+            <main className="mt-4 flex flex-col gap-4 min-w-0">
+                <RankingVisualizationSection
+                    rankingItem={rankingItem}
+                    activeRankingItem={activeRankingItem}
+                    rankingValues={rankingValues}
+                    areaType={currentAreaType}
+                    topology={topology}
+                    headerActions={headerActions}
+                    cardFooter={cardFooter}
+                    isPending={isPending}
+                />
 
-                    <RankingPageContentSections
-                        rankingKey={rankingKey}
-                        rankingItem={rankingItem}
-                        activeRankingItem={activeRankingItem}
-                        areaType={currentAreaType}
-                        displayInfo={displayInfo}
-                        normalizationType={normalizationType}
-                        dataNote={dataNote}
-                        sections={sections}
-                    />
-
-                </main>
-
-                <RankingPageDesktopSidebar sidebar={sections.sidebar} />
-            </div>
-
-            <RankingPageMobileSidebar sidebar={sections.sidebar} />
-        </div>
+                <RankingPageContentSections
+                    rankingKey={rankingKey}
+                    rankingItem={rankingItem}
+                    activeRankingItem={activeRankingItem}
+                    areaType={currentAreaType}
+                    displayInfo={displayInfo}
+                    normalizationType={normalizationType}
+                    dataNote={dataNote}
+                    sections={sections}
+                />
+            </main>
+        </PageShell>
     );
 }

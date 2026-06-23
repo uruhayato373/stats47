@@ -4,17 +4,17 @@
   "rsc": true,
   "tsx": true,
   "tailwind": {
-    "config": "tailwind.config.ts",
-    "css": "src/app/globals.css",
+    "config": "../../apps/web/tailwind.config.ts",
+    "css": "../../apps/web/src/app/globals.css",
     "baseColor": "blue",
     "cssVariables": true,
     "prefix": ""
   },
   "aliases": {
-    "components": "@/components",
-    "utils": "@/infrastructure/utils",
-    "ui": "@stats47/components/atoms/ui",
-    "lib": "@/infrastructure",
+    "components": "@/",
+    "ui": "@/atoms/ui",
+    "utils": "@/lib/cn",
+    "lib": "@/lib",
     "hooks": "@/hooks"
   }
 }

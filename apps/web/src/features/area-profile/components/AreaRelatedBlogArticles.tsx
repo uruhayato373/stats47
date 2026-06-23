@@ -4,7 +4,7 @@ import { Newspaper } from "lucide-react";
 
 import { SurfaceLinkCard } from "@/components/surface";
 
-import { listArticleSummariesByTagKey } from "@/features/blog/server";
+import { getRelatedArticleSummaries } from "@/features/blog/server";
 
 import type { AreaProfileData } from "../types";
 
@@ -42,22 +42,11 @@ export async function AreaRelatedBlogArticles({ profile, limit = 5 }: Props) {
 
     if (allTagKeys.length === 0) return null;
 
-    // タグから記事を並列取得、重複除去
-    const articleResults = await Promise.all(
-        allTagKeys.slice(0, 8).map((tagKey) => listArticleSummariesByTagKey(tagKey, 3))
-    );
-
-    const seenSlugs = new Set<string>();
-    const articles: { slug: string; title: string }[] = [];
-    for (const batch of articleResults) {
-        for (const a of batch) {
-            if (!seenSlugs.has(a.slug) && articles.length < limit) {
-                seenSlugs.add(a.slug);
-                articles.push({ slug: a.slug, title: a.title });
-            }
-        }
-        if (articles.length >= limit) break;
-    }
+    // タグから記事を集約（取得+重複除去は共有ロジック）
+    const articles = await getRelatedArticleSummaries(allTagKeys.slice(0, 8), {
+        limit,
+        perTag: 3,
+    });
 
     if (articles.length === 0) return null;
 

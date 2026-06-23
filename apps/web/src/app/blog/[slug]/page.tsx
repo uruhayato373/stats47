@@ -194,9 +194,9 @@ export default async function BlogPostPage({ params }: PageProps) {
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
             />
-            {/* パンくずナビゲーション */}
-            <PageShell className="pb-0 pt-4">
-                <Breadcrumb>
+            <PageShell rightRail={rightRail} rightRailBreakpoint="lg">
+                {/* パンくず (tag/areas と同じく単一 PageShell の先頭子として配置) */}
+                <Breadcrumb className="mb-4">
                     <BreadcrumbList>
                         <BreadcrumbItem>
                             <BreadcrumbLink asChild>
@@ -215,13 +215,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                         </BreadcrumbItem>
                     </BreadcrumbList>
                 </Breadcrumb>
-            </PageShell>
 
-            <PageShell
-                className="py-6"
-                rightRail={rightRail}
-                rightRailBreakpoint="lg"
-            >
                 {/* 中央カラム: 記事 */}
                 <main className="min-w-0 space-y-6">
                     <SurfaceCard className="p-0">

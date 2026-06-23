@@ -16,7 +16,7 @@
  */
 
 import { FONT_FAMILY } from "../shared/color";
-import { formatTick } from "../shared/axis";
+import { formatValueLabel } from "../shared/axis";
 import { svgThemeStyle } from "../shared/theme";
 // D3 カラースキーム (d3-scale-chromatic) を「生成時」に評価し、結果の rgb() を静的 SVG へ焼き込む。
 // （SVG 実行時に D3 は不要。）依存はモノレポ root に hoist 済（migration-flow / remotion が宣言）。
@@ -214,7 +214,7 @@ export function generateChoroplethSvg(
     ariaLabel = title,
     colorMin,
     colorMax,
-    formatValue = (v) => formatTick(v, 1),
+    formatValue = (v) => formatValueLabel(v, 1),
     colorStops = COLOR_STOPS,
     scheme,
     reverse = false,

@@ -9,6 +9,71 @@ BU(){ browser-use --headed --profile "Profile 5" "$@"; }
 AFF_PNG="/Users/minamidaisuke/stats47/.claude/assets/affiliate-banners/ai_agent_camp.png"
 AFF_URL="https://px.a8.net/svt/ejp?a8mat=4B3RUY+AG9Z3M+5VRC+5YZ75"
 
+# 記事間の遷移で出る「このページを離れますか？(変更が保存されていない可能性)」ダイアログ抑止。
+# 現在開いている note エディタの beforeunload を無効化してから次の URL へ遷移する。
+# これが無いと記事ごとに確認ダイアログが出てバッチが止まる(ユーザー報告 2026-06-22)。
+# note の beforeunload を無効化する。capture フェーズで先回りして note のリスナを止め、
+# returnValue を消す。※ beforeunload で preventDefault() を呼ぶと逆にダイアログが出るので呼ばない。
+_suppress_unload(){
+  BU eval "(function(){try{window.onbeforeunload=null;window.addEventListener('beforeunload',function(e){e.stopImmediatePropagation();delete e['returnValue'];e.returnValue=undefined;},true);}catch(_){};return 'ok';})();" >/dev/null 2>&1
+}
+# 全ネイティブダイアログ(confirm/alert/beforeunload)を現ページで自動承認する。
+# ★無料記事の「更新する」で出る confirm「全文が無料で表示される設定…公開してよろしいですか？」が
+#   CDP をブロックして daemon を固める真因(2026-06-23特定)。window.confirm を true 固定で出さなくする。
+#   ※「公開に進む」で /publish/ へ遷移し JS context がリセットされるため、遷移後に呼ぶこと。
+_suppress_dialogs(){
+  BU eval "(function(){try{window.confirm=function(){return true;};window.alert=function(){};window.onbeforeunload=null;}catch(_){};return 'ok';})();" >/dev/null 2>&1
+}
+# beforeunload を抑止してから open する遷移ラッパー(全ての記事遷移はこれを使う)。
+# browser-use は CDP 経由・各 CLI 呼び出しは別プロセスのため CDP ダイアログ handler は持続しない。
+# よって「ページの JS 状態を書き換える eval 抑止」が唯一持続する有効策(遷移直前に現ページへ適用)。
+BU_open(){ _suppress_unload; BU open "$1"; }
+# 互換: バッチドライバが呼ぶスタブ(実体の抑止は BU_open 内の _suppress_unload が担う)。
+_install_dialog_autoaccept(){ echo "via _suppress_unload (eval, per-navigation)"; }
+
+# バナー画像を「ネイティブのファイル選択ダイアログを開かずに」アップロードする(★堅牢化 2026-06-23)。
+# 原因: 「画像」ボタンのクリックが input.click() を呼び OS のファイル選択ダイアログを開く。これは
+#   ページ JS では抑止できず、残存すると次記事の自動化を完全にブロックしていた(ユーザー報告のジャム)。
+# 対策: CDP Page.setInterceptFileChooserDialog(enabled=true) でファイル選択をインターセプト
+#   → 「画像」をクリックしても OS ピッカーは開かず Page.fileChooserOpened が発火 → DOM.setFileInputFiles
+#   で backendNodeId にファイルを直接セット。全工程を1つの python 呼び出し内で完結させる。
+# 前提: 事前に +menu を開いて「画像」ボタンが可視であること。
+_upload_banner_cdp(){
+  BU python "
+import asyncio
+PNG='$AFF_PNG'
+async def _find_input(cc, sid):
+    doc = await cc.send.DOM.getDocument(params={'depth': -1, 'pierce': True}, session_id=sid)
+    root = doc['root']['nodeId']
+    res = await cc.send.DOM.querySelector(params={'nodeId': root, 'selector': 'input#note-editor-image-upload-input, input[id*=image-upload], input[type=file]'}, session_id=sid)
+    return res.get('nodeId') or 0
+async def _up():
+    cdp = await browser._session.get_or_create_cdp_session(target_id=None, focus=False)
+    cc, sid = cdp.cdp_client, cdp.session_id
+    await cc.send.Page.enable(session_id=sid)
+    await cc.send.DOM.enable(session_id=sid)
+    # ネイティブピッカーを開かせない保険(画像クリックが走っても OS ダイアログは出ない)
+    try: await cc.send.Page.setInterceptFileChooserDialog(params={'enabled': True}, session_id=sid)
+    except Exception: pass
+    # 方式A: 隠しファイル入力を直接探して setFileInputFiles(クリック不要=チューザ自体が出ない)
+    nid = await _find_input(cc, sid)
+    if not nid:
+        # 方式B: 入力が未生成なら「画像」をクリックして生成→再探索(ピッカーはインターセプト済)
+        await cc.send.Runtime.evaluate(params={'expression': \"(function(){var b=[].slice.call(document.querySelectorAll('button,[role=button],span,div')).find(function(x){return x.offsetParent&&x.textContent&&x.textContent.trim()==='画像'});if(b){b.click();return 1}return 0})()\", 'returnByValue': True}, session_id=sid)
+        await asyncio.sleep(1.5)
+        nid = await _find_input(cc, sid)
+    if not nid:
+        try: await cc.send.Page.setInterceptFileChooserDialog(params={'enabled': False}, session_id=sid)
+        except Exception: pass
+        return 'no-input'
+    await cc.send.DOM.setFileInputFiles(params={'files': [PNG], 'nodeId': nid}, session_id=sid)
+    try: await cc.send.Page.setInterceptFileChooserDialog(params={'enabled': False}, session_id=sid)
+    except Exception: pass
+    return 'uploaded'
+print(browser._run(_up()))
+" 2>&1 | grep -oiE "uploaded|no-input|Error" | head -1
+}
+
 # アフィリエイトPR文（\n\n で段落分離・💡/▶ 装飾・bold記法は付けない）
 read -r -d '' AFF_TEXT << 'TXT'
 💡 この記事を書いた私から、Claude Code 学習でひとつだけご紹介させてください（PR）
@@ -32,20 +97,32 @@ _position_before_anchor(){
       ||heads.find(h=>h.innerText.includes('まとめ'))
       ||heads.find(h=>h.innerText.includes('関連記事'))
       ||heads.find(h=>h.innerText.includes('次に読む'));
-    if(!anchor)return 'no-anchor';
+    if(!anchor){
+      // まとめ等が無い記事は本文末尾(最後のブロックの末尾)にカーソルを置いて末尾追記にする
+      const blocks=[...e.children].filter(c=>c.innerText&&c.innerText.trim().length>0);
+      if(!blocks.length)return 'no-anchor';
+      const last=blocks[blocks.length-1];last.scrollIntoView({block:'center'});
+      const r=document.createRange();r.selectNodeContents(last);r.collapse(false);
+      const s=window.getSelection();s.removeAllRanges();s.addRange(r);e.focus();return 'at-end';
+    }
     anchor.scrollIntoView({block:'center'});
     const tn=anchor.firstChild||anchor;const r=document.createRange();r.setStart(tn,0);r.collapse(true);
-    const s=window.getSelection();s.removeAllRanges();s.addRange(r);e.focus();return 'at-anchor';})();" 2>&1 | grep -oiE "at-anchor|no-anchor|no-editor" | head -1
+    const s=window.getSelection();s.removeAllRanges();s.addRange(r);e.focus();return 'at-anchor';})();" 2>&1 | grep -oiE "at-anchor|at-end|no-anchor|no-editor" | head -1
 }
 
 insert_affiliate(){
   local NOTEID="$1" SLUG="$2"
-  BU open "https://editor.note.com/notes/$NOTEID/edit" >/dev/null 2>&1; sleep 10
-  # contenteditable が描画されるまで最大30秒待つ（ページ再読み込み後は遅い）
+  local EDURL="https://editor.note.com/notes/$NOTEID/edit"
+  # contenteditable が描画されるまで待つ。daemon 再起動直後は editor.note.com が login へ
+  # リダイレクトすることがある(redirectPath 経由で戻る)ので、login に居たら再オープンする。
   local loaded=no
-  for i in 1 2 3 4 5 6; do
+  BU_open "$EDURL" >/dev/null 2>&1; sleep 8
+  for i in 1 2 3 4 5 6 7 8; do
     BU state > /tmp/ns.txt 2>&1
     if grep -qE "contenteditable=true role=textbox" /tmp/ns.txt; then loaded=yes; break; fi
+    # login にリダイレクトされていたら再オープン(セッションは有効なので redirectPath で戻る)
+    local cur=$(BU eval "window.location.href" 2>&1 | tail -1)
+    if echo "$cur" | grep -q "/login"; then BU open "$EDURL" >/dev/null 2>&1; fi
     sleep 5
   done
   if [ "$loaded" != "yes" ]; then echo "  [FAIL] editor not loaded: $SLUG"; return 1; fi
@@ -55,11 +132,12 @@ insert_affiliate(){
   # 全ブロックをレンダリングさせる
   BU eval "window.scrollTo(0,document.body.scrollHeight);'b'" >/dev/null 2>&1; sleep 1
   BU eval "window.scrollTo(0,0);'t'" >/dev/null 2>&1; sleep 1
-  # 位置決め
+  # 位置決め: at-anchor(まとめ直前) または at-end(末尾追記)
   local POS=$(_position_before_anchor)
-  if [ "$POS" != "at-anchor" ]; then echo "  [WARN] anchor not found ($POS): $SLUG — needs special handling"; return 2; fi
+  if [ "$POS" != "at-anchor" ] && [ "$POS" != "at-end" ]; then echo "  [WARN] anchor not found ($POS): $SLUG — needs special handling"; return 2; fi
   BU keys Enter >/dev/null 2>&1; sleep 0.5
-  BU keys ArrowUp >/dev/null 2>&1; sleep 0.5
+  # at-anchor は新規空行へ ArrowUp で戻る。at-end は末尾の新規行にそのまま書く(ArrowUp しない)。
+  if [ "$POS" = "at-anchor" ]; then BU keys ArrowUp >/dev/null 2>&1; sleep 0.5; fi
   # PR文をペースト（\n\n で段落分離）。多言語文字列は一時ファイル経由で encodeURIComponent（インライン渡しは壊れる）
   printf '%s' "$AFF_TEXT" > /tmp/aff-text.txt
   local ENC=$(node -e "process.stdout.write(encodeURIComponent(require('fs').readFileSync('/tmp/aff-text.txt','utf8')))")
@@ -74,12 +152,10 @@ insert_affiliate(){
   local MENU=$(grep -oE "\[[0-9]+\]<button aria-label=メニューを開く" /tmp/ns.txt | grep -oE "[0-9]+" | head -1)
   if [ -z "$MENU" ]; then echo "  [WARN] +menu not found for banner: $SLUG"; return 3; fi
   BU click "$MENU" >/dev/null 2>&1; sleep 1
-  BU state > /tmp/ns.txt 2>&1
-  local IB=$(awk '/^\t*\*?\[[0-9]+\]<button \/>/{i=$0} /^\t*画像\s*$/{print i; exit}' /tmp/ns.txt | grep -oE "[0-9]+" | head -1)
-  BU click "$IB" >/dev/null 2>&1; sleep 1.5
-  BU state > /tmp/ns.txt 2>&1
-  local UP=$(grep -oE "\[[0-9]+\]<input id=note-editor-image-upload-input" /tmp/ns.txt | grep -oE "[0-9]+" | head -1)
-  BU upload "$UP" "$AFF_PNG" 2>&1 | grep -iE "uploaded|error" | sed 's/^/  /'
+  # 「画像」クリック→OSファイル選択を CDP でインターセプトしてピッカーを開かずにアップロード
+  local UPRES=$(_upload_banner_cdp)
+  echo "  [UPLOAD] $SLUG: $UPRES"
+  if [ "$UPRES" != "uploaded" ]; then echo "  [WARN] banner upload failed ($UPRES): $SLUG"; fi
   sleep 5
   # リンク設定: バナーfigureを選択→ツールバー aria-label=リンク→textarea(placeholder=https://)→「適用」
   # (実機確認2026-06-22: 画像選択時ツールバーは aria-label=リンク。"リンクを設定"はテキスト選択時の別UI)
@@ -140,6 +216,9 @@ publish_update(){
     if [ "$(_has_btn '更新する')" = "yes" ] || [ "$(_has_btn '試し読みエリアを設定')" = "yes" ] || [ "$(_has_btn '有料エリア設定')" = "yes" ]; then nav=yes; break; fi
     sleep 2
   done
+  # /publish/ へ遷移後、ネイティブ confirm/alert を無効化(無料記事の「公開してよろしいですか？」が
+  # CDP をブロックして固まるのを防ぐ)。遷移で context がリセットされるのでここで注入する。
+  _suppress_dialogs
   if [ "$nav" != "yes" ]; then
     echo "  [FAIL] 公開設定 not reached: $SLUG"
     BU eval "(function(){return JSON.stringify([...document.querySelectorAll('button')].filter(b=>b.offsetParent!==null&&b.innerText.trim()).map(b=>b.innerText.trim()).slice(0,15));})();" 2>&1 | tail -1
@@ -149,10 +228,17 @@ publish_update(){
   if [ "$(_has_btn '更新する')" = "yes" ]; then
     _click_btn '更新する' >/dev/null; sleep 6
   elif [ "$(_has_btn '試し読みエリアを設定')" = "yes" ]; then
-    # 無料記事フロー: 試し読みエリア→末尾ライン(全文無料)→更新する
+    # 無料記事フロー: 「試し読みエリアを設定」を押すと「更新する」が出現する。
+    # ※ ライン位置は既定のまま触らない(全文無料は元の境界が保持される)。
+    #    旧実装は「ラインをこの場所に変更」を挟んでいたが、それが原因で更新するを取りこぼしていた
+    #    (2026-06-23 修正: 直接 更新する を押すと公開成功・ライブに反映を確認)。
     _click_btn '試し読みエリアを設定' >/dev/null; sleep 3
-    BU eval "(function(){const bs=[...document.querySelectorAll('button')].filter(b=>b.offsetParent!==null&&b.innerText.trim()==='ラインをこの場所に変更');if(!bs.length)return 'nf';bs[bs.length-1].scrollIntoView({block:'center'});bs[bs.length-1].click();return 'ok';})();" >/dev/null 2>&1; sleep 2
-    if [ "$(_click_btn '更新する')" != "ok" ]; then echo "  [FAIL] 更新する(無料) not found: $SLUG"; return 1; fi
+    local upd=no
+    for k in 1 2 3; do
+      if [ "$(_click_btn '更新する')" = "ok" ]; then upd=yes; break; fi
+      sleep 2
+    done
+    if [ "$upd" != "yes" ]; then echo "  [FAIL] 更新する(無料) not found: $SLUG"; return 1; fi
     sleep 6
   elif [ "$(_has_btn '有料エリア設定')" = "yes" ]; then
     # 有料記事フロー: 有料エリア設定→ラインは動かさず(既存境界保持)→更新する
@@ -165,10 +251,17 @@ publish_update(){
     BU eval "(function(){return JSON.stringify([...document.querySelectorAll('button')].filter(b=>b.offsetParent!==null&&b.innerText.trim()).map(b=>b.innerText.trim()).slice(0,15));})();" 2>&1 | tail -1
     return 1
   fi
+  # 「この記事が更新されたことを購入・購読したユーザーに通知しますか？」モーダルが出たら いいえ(通知しない)。
+  # 主に有料記事の 更新する 後に出る。これを押さないと公開が完了せずライブに反映されない(ユーザー方針: いいえ)。
+  for k in 1 2 3 4 5; do
+    if [ "$(_has_btn 'いいえ')" = "yes" ]; then _click_btn 'いいえ' >/dev/null; sleep 4; break; fi
+    sleep 1.5
+  done
+  sleep 2
   BU state > /tmp/ps.txt 2>&1
-  if grep -qE "記事が公開されました|シェア|おめでとう" /tmp/ps.txt; then
+  if grep -qE "記事が公開されました|シェア|おめでとう|更新しました|公開しました" /tmp/ps.txt; then
     echo "  [PUBLISHED] $SLUG"; return 0
   else
-    echo "  [?] $SLUG — publish modal unconfirmed"; grep -nE "エラー|error|必須" /tmp/ps.txt | head -3; return 1
+    echo "  [?] $SLUG — publish modal unconfirmed (要ライブ確認)"; grep -nE "エラー|error|必須" /tmp/ps.txt | head -3; return 1
   fi
 }

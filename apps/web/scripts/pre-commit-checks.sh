@@ -50,6 +50,15 @@ if ! node "$GUARD_ROOT/.claude/scripts/lib/check-r2-route-ssg.cjs"; then
   ERROR_COUNT=$((ERROR_COUNT + 1))
 fi
 
+# 2.2 カード系コンポーネントの増殖ガード (Phase 0-5 / スパゲッティ化の止血)
+# *Card のベースライン超過を弾く。新規カードは既存共有カードで表現できないか先に検討する。
+echo -e "${GREEN}🃏 カード census ガード...${NC}"
+if ! node "$GUARD_ROOT/.claude/scripts/lib/check-card-census.cjs"; then
+  echo -e "${RED}❌ ベースライン外の新規 *Card が追加されています。${NC}"
+  echo -e "${YELLOW}💡 docs/01_技術設計/15_デザインシステムSSOT.md / .claude/rules/ui-components.md${NC}"
+  ERROR_COUNT=$((ERROR_COUNT + 1))
+fi
+
 # 3. 一時ファイル自動クリーンアップ
 echo -e "${GREEN}🗑️  一時ファイルチェック...${NC}"
 PROJECT_ROOT="$(cd "$SCRIPT_DIR/../../.." && pwd)"

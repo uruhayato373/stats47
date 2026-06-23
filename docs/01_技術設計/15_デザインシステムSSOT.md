@@ -42,9 +42,17 @@ stats47 の UI は、統計データを長時間読むための道具である�
 ### 採用
 
 - ページ外側の幅制御: `PageShell`
-- ページ見出し: `PageHeader`
+- ページ見出し: `PageHeader`。**全 hero / header の唯一の基盤**。独自 hero コンポーネントを新設しない。差分は後方互換の任意 slot で表現する（2026-06-23 Phase 2 で統合）:
+  - `actions`（h1 右の CTA / セレクタ）— 例: `ThemeAreaHeader` が `PrefectureSelect` を注入
+  - `meta`（title 直下の出典/年度/更新の細い行）/ `controls`（header ブロック下の操作行）/ `aside`（右カラム。指定時のみ lg で 2 カラム grid 化）— 例: `RankingHeroCard` が `aside`（暗色 KPI 面 `RankingHeroStat`）+ `controls`（正規化ピル）を合成
+  - 全 slot 未指定時は標準ミニマル見出しと DOM 不変。`PageHeader` 本体には暗色背景/グラデを足さない（白基調）。暗色 KPI 面は `aside` に渡す presentational 子の意図的 `bg-slate-900` variant で表現する。
 - 記事・規約など読むページ: `PageShell variant="reading"`
-- TOC / 関連記事 / 広告などの補助列: `leftRail` / `rightRail`
+- 補助列の左右セマンティクス（用途で side を固定する。見た目の左右非対称は意図的）:
+  - **`leftRail` = ナビゲーション**（テーマナビ等、ページ内を移動する目的）。例: `/themes/*`
+  - **`rightRail` = 関連 / 広告 / widget**（TOC・関連記事・関連ランキング・AdSense）。例: areas / tag / ranking 詳細 / blog 詳細
+  - どちらも本文 + 片側 1 列。同一ページで両 rail は使わない（3 列禁止）
+- パンくず: **単一 `PageShell` の先頭子**として `<Breadcrumb className="mb-4">` を置く（tag / areas / blog 共通）。breadcrumb 専用に別 `PageShell` を二重に積まない。
+- ランキング詳細 (`/ranking/*`) も他ページ同様 `PageShell` の `rightRail`（xl/360px・sticky）を使う。独自グリッド・独自幅レールは禁止（2026-06-23 統一）。
 - ブログ詳細のように右 rail を lg+ で出すページ: `PageShell rightRailBreakpoint="lg"`。TOC は右 rail の先頭、lg 未満は記事冒頭に置く。
 - ページ内セクション: `section` + 短い `h2` + 必要な説明文
 
@@ -105,6 +113,9 @@ stats47 の UI は、統計データを長時間読むための道具である�
 ## Surface / Card
 
 カードは「情報をまとめるための面」であり、装飾ではない。
+
+> **配置 tier**: どの層にコンポーネントを置くか（① プリミティブ=`@stats47/components` / ② 共有 composite=`@/components/{surface,charts,stat-charts,layout}` / ③ feature 固有）の判断は `.claude/rules/ui-components.md`「コンポーネント配置の 3 tier」が SSOT。
+> 下の採用/禁止は既に「feature 毎のカード再実装」を禁じているが、実コードには未追従の Card 重複が残る（24 亜種が散在）。**この是正は `docs/02_実装計画/13_UI統一ロードマップ.md` Phase 0-1（Card 集約）/ 0-5（lint 化）** で進める。新規は最初からこの規約に従う。
 
 ### 採用
 
