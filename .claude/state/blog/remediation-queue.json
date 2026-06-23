@@ -5,10 +5,10 @@
   "scoring": "combined = 0.6*norm(GSC expectedLift) + 0.4*norm(blockers*3+warnings); lane: must-fix > opportunity",
   "summary": {
     "total": 140,
-    "pending": 89,
+    "pending": 87,
     "inProgress": 1,
-    "done": 50,
-    "mustFixPending": 38,
+    "done": 52,
+    "mustFixPending": 36,
     "opportunityPending": 51
   },
   "queue": [
@@ -220,7 +220,7 @@
     {
       "slug": "fishery-catch-aquaculture-shift",
       "lane": "must-fix",
-      "status": "pending",
+      "status": "done",
       "priority": 7,
       "combinedScore": 0.3,
       "gsc": {
@@ -245,15 +245,15 @@
           "warning: source-link 末尾集約 3個 — 各図直下へ分散"
         ]
       },
-      "wave_id": null,
-      "remediated_at": null,
+      "wave_id": "2026-06-23-prose",
+      "remediated_at": "2026-06-23",
       "in_progress_at": null,
       "last_brushup": "2026-05-25"
     },
     {
       "slug": "cc-estat-09-radar-prefecture",
       "lane": "must-fix",
-      "status": "pending",
+      "status": "done",
       "priority": 8,
       "combinedScore": 0.26,
       "gsc": {
@@ -277,8 +277,8 @@
           "blocker: 記事内関連セクション — ページ側コンポーネントが正典 (記事から削除)"
         ]
       },
-      "wave_id": null,
-      "remediated_at": null,
+      "wave_id": "2026-06-23-prose",
+      "remediated_at": "2026-06-23",
       "in_progress_at": null,
       "last_brushup": null
     },
