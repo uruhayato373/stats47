@@ -511,3 +511,27 @@ export async function GET() {
 - `.claude/scripts/estat/restore-from-r2-cache.cjs` (UPSERT 実例)
 - `docs/01_技術設計/06_自動化インベントリ.md` 手動運用ツールセクション
 - memory: `project_estat_backfill_lessons.md` (本件 + e-Stat 全年度取得規約)
+
+---
+
+## ブログ SVG データ系譜消失（209枚/34%）— 不変条件の後付けが生む grandfathered 負債
+
+**問題**: ブログ SVG 612 枚中 209 枚（34%）が元データ（`data/<name>.json` + `.source.json`）を失い「絵だけ」になり、再生成も出典追跡も不能になった。特に**派生（合成スコア・構成比・男女差・PPP調整）/ 非SSOT（家計調査の品目別・per-nationality）チャート 21 枚は永久損失**（元データが無いと、絵から値を読むのは捏造になり禁止のため復元不能）。
+
+**原因**:
+1. チャート生成が**記事ごとの散在インライン生成スクリプト**（+ `article.md` 内インライン `<svg>`）で行われ、各自が独自命名・出力。**「1画像=1データ+1出典」の不変条件が無かった**。
+2. 生成器が `source.json` を自動出力せず、`quality-gate` も 3 点セットを検査しなかった → データ永続化が「保証」でなく「偶然」。
+3. **チャートデータが git 上に住処を持たなかった**（`article.md` は git SSOT だが `data/*.json` は R2 派生物扱い）。生成時に書かれない / basename ドリフト / インライン生成器がメモリ内計算で SVG のみ吐出、で復元元が消えても git 履歴に残らない。
+4. **最深（体系）**: ガバナンス（不変条件・ゲート・ツール）が**後付け（2026-06-20）**で導入され、それ以前の生成物が全て grandfathered 負債化＝「**先に出荷し後でガバナンス**」。
+
+**対策**:
+1. **生成時ゲートで新規再発を停止（実装済）**: `quality-gate.mjs` が各 `data/*.svg` に `.json` + `.source.json` が揃わないと **blocker**（2026-06-20 昇格）。生成器 `generate-article-charts.ts` が SVG とセットで `source.json` を必ず出力（`writeChartSourceIfMissing`）。`build-lineage-queue.mjs` が系譜状態の真実源。
+2. **過去負債は既存ツールで計画消化**: `restore-{ranking,scatter,findings}-from-svg.mjs`（旧SVG表示値で指標を**特定**→SSOT を相対2%照合 ≥0.95→**SSOTから再生成**。絵から逆復元しない＝捏造防止）。手法 SSOT: `.claude/state/blog/neither-restore-method.md`（rank誤抽出・スケール差・派生・命名ドリフトの落とし穴も網羅）。所有: `chart-author` agent。
+3. **派生/非SSOT チャートは元データ永続が必須**（合成スコア等は失うと復元不能）。
+4. **教訓（横断パターン）**: component スパゲッティと同根＝**コードベースの進化速度 > ガードレールの整備速度**。対策は「ガバナンスを足す」でなく **①不変条件を機械ゲートで早期に固定する ②溜まった負債を既存ツールで計画消化する**。「作る前に既存（ツール・ゲート・ルール）を確認する」を徹底（本件でも復元ツールは既存だった）。
+
+**関連**:
+- `.claude/rules/blog-data-schema.md` §1.5/1.6/1.7（3点セット・復元キュー・再発防止の正典）
+- `.claude/scripts/blog/quality-gate.mjs`（系譜 gate L350-360）/ `generate-article-charts.ts`（source.json 自動出力）
+- `.claude/state/blog/{svg-lineage-queue.json,neither-restore-method.md}`
+- `docs/02_実装計画/13_UI統一ロードマップ.md` Phase 4
