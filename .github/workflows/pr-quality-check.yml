@@ -43,6 +43,11 @@ jobs:
         run: npm run design-system:check -w apps/web
         continue-on-error: false
 
+      - name: 🃏 Card Census Guard
+        # *Card の増殖を抑える (スパゲッティ化の止血)。ベースライン超過で失敗。
+        run: node .claude/scripts/lib/check-card-census.cjs
+        continue-on-error: false
+
       - name: 🚫 D1 Import Gate (Phase 7)
         run: |
           # apps/web から runtime D1 import (getDrizzle / @stats47/database/server) が
