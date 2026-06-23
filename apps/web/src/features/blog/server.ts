@@ -27,6 +27,10 @@ export {
 
 // サービス
 export { articleService } from "./services/article-service";
+export {
+  getRelatedArticleSummaries,
+  type RelatedArticleSummary,
+} from "./services/related-articles";
 
 // サーバーコンポーネント
 export { RelatedRankingsSection } from "./components/RelatedRankingsSection";
