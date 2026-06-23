@@ -150,13 +150,15 @@ function renderCardColumn(
       const w = toBarW(d.value);
       const rank = d.rank ?? i + 1;
       const name = d.name ?? d.label;
-      const valStr = `${formatValueLabel(d.value, 1)}${unit}`;
+      const valStr = unit
+        ? `${formatValueLabel(d.value, 1)} ${unit}`
+        : formatValueLabel(d.value, 1);
       return [
         `  <rect x="${colX}" y="${rowY}" width="${CARD_W}" height="${CARD_H}" rx="6" fill="${cardBg}"/>`,
         `  <circle cx="${colX + BADGE_DX}" cy="${cy}" r="${BADGE_R}" fill="${theme.header}"/>`,
         `  <text x="${colX + BADGE_DX}" y="${cy + 4.3}" text-anchor="middle" font-size="12" font-weight="bold" fill="#ffffff">${rank}</text>`,
         `  <text x="${colX + NAME_DX}" y="${cy + 4.7}" font-size="13" font-weight="bold" fill="#1f2937">${name}</text>`,
-        `  <text x="${colX + VALUE_DX}" y="${cy + 4.3}" text-anchor="end" font-size="12" font-weight="600" fill="${theme.badgeText}">${valStr}</text>`,
+        `  <text x="${colX + VALUE_DX}" y="${cy + 4.3}" text-anchor="end" font-size="14" font-weight="700" fill="${theme.badgeText}">${valStr}</text>`,
         `  <rect x="${colX + BAR_DX}" y="${rowY + 15}" width="${w}" height="${BAR_H_CARD}" rx="4" fill="${theme.bar}" opacity="0.8"/>`,
       ].join("\n");
     })
@@ -199,7 +201,7 @@ function renderColumnsLayout(
   const rightCol = renderCardColumn(bottomItems, COL_R_X, rightTheme, lowLabel, toBarW, unit);
 
   const titleText = subtitle
-    ? `${title}<tspan font-size="11" font-weight="normal" class="svg-tick">　${subtitle}</tspan>`
+    ? `${title}<tspan font-size="14" font-weight="normal" class="svg-tick">　${subtitle}</tspan>`
     : title;
 
   const sourceSvg = source
@@ -265,7 +267,9 @@ function renderPortraitSection(
       const cardBg = i % 2 === 0 ? theme.cardAlt : "#ffffff";
       const rank = d.rank ?? i + 1;
       const name = d.name ?? d.label;
-      const valStr = `${formatValueLabel(d.value, 1)}${unit}`;
+      const valStr = unit
+        ? `${formatValueLabel(d.value, 1)} ${unit}`
+        : formatValueLabel(d.value, 1);
       const badgeCx = x + 42;
       const badgeCy = y + 38;
       const w = toBarW(d.value);
