@@ -5,17 +5,17 @@
   "scoring": "combined = 0.6*norm(GSC expectedLift) + 0.4*norm(blockers*3+warnings); lane: must-fix > opportunity",
   "summary": {
     "total": 140,
-    "pending": 95,
+    "pending": 93,
     "inProgress": 1,
-    "done": 44,
-    "mustFixPending": 44,
+    "done": 46,
+    "mustFixPending": 42,
     "opportunityPending": 51
   },
   "queue": [
     {
       "slug": "smartphone-ownership-prefecture-gap",
       "lane": "must-fix",
-      "status": "pending",
+      "status": "done",
       "priority": 1,
       "combinedScore": 0.4,
       "gsc": {
@@ -42,15 +42,15 @@
           "blocker: 記事内関連セクション — ページ側コンポーネントが正典 (記事から削除)"
         ]
       },
-      "wave_id": null,
-      "remediated_at": null,
+      "wave_id": "2026-06-23-prose",
+      "remediated_at": "2026-06-23",
       "in_progress_at": null,
       "last_brushup": null
     },
     {
       "slug": "self-financing-ratio-prefecture-gap",
       "lane": "must-fix",
-      "status": "pending",
+      "status": "done",
       "priority": 2,
       "combinedScore": 0.379,
       "gsc": {
@@ -76,8 +76,8 @@
           "blocker: 記事内関連セクション — ページ側コンポーネントが正典 (記事から削除)"
         ]
       },
-      "wave_id": null,
-      "remediated_at": null,
+      "wave_id": "2026-06-23-prose",
+      "remediated_at": "2026-06-23",
       "in_progress_at": null,
       "last_brushup": null
     },
