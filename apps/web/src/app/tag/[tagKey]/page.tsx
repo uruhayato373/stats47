@@ -9,14 +9,8 @@ import {
     BreadcrumbPage,
     BreadcrumbSeparator,
 } from "@stats47/components/atoms/ui/breadcrumb";
-import {
-    Card,
-    CardDescription,
-    CardHeader,
-    CardTitle,
-} from "@stats47/components/atoms/ui/card";
-
 import { PageShell, PageHeader } from "@/components/layout";
+import { SurfaceCard } from "@/components/surface";
 
 import { resolveAffiliateBanners } from "@/features/ads/server";
 import {
@@ -128,8 +122,8 @@ export default async function TagArticlesPage({ params }: PageProps) {
                         href={`/blog/${article.slug}`}
                         className="group block h-full"
                     >
-                        <Card className="flex h-full flex-col rounded-none transition-colors hover:border-primary/50 hover:shadow-md">
-                            <CardHeader className="pb-3">
+                        <SurfaceCard className="flex h-full flex-col rounded-none transition-colors hover:border-primary/50 hover:shadow-md">
+                            <div className="py-3 px-4 pb-3 flex flex-col items-start gap-2 space-y-0 border-b border-border">
                                 <div className="mb-2 flex items-center gap-2">
                                     {article.description && (
                                         <span className="text-xs text-muted-foreground">
@@ -137,16 +131,16 @@ export default async function TagArticlesPage({ params }: PageProps) {
                                         </span>
                                     )}
                                 </div>
-                                <CardTitle className="text-lg transition-colors group-hover:text-primary">
+                                <h3 className="text-base font-semibold leading-none text-lg transition-colors group-hover:text-primary">
                                     {article.title}
-                                </CardTitle>
+                                </h3>
                                 {article.description && (
-                                    <CardDescription className="line-clamp-2">
+                                    <p className="text-sm text-muted-foreground line-clamp-2">
                                         {article.description}
-                                    </CardDescription>
+                                    </p>
                                 )}
-                            </CardHeader>
-                        </Card>
+                            </div>
+                        </SurfaceCard>
                     </Link>
                 ))}
             </div>

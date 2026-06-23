@@ -4,7 +4,7 @@ import { Newspaper } from "lucide-react";
 
 import { RailCard, RailLinkItem, RailLinkList } from "@/components/surface";
 
-import { listArticleSummariesByTagKey } from "@/features/blog/server";
+import { getRelatedArticleSummaries } from "@/features/blog/server";
 
 interface RelatedArticlesCardProps {
   rankingKey: string;
@@ -18,24 +18,11 @@ export async function RelatedArticlesCard({
   const tagsResult = await readTagsForItemFromR2(rankingKey, areaType);
   if (!isOk(tagsResult) || tagsResult.data.length === 0) return null;
 
-  const tagKeys = tagsResult.data;
-
-  // 全タグの記事を並列取得し、重複を除去して最大3件
-  const allResults = await Promise.all(
-    tagKeys.map((tagKey) => listArticleSummariesByTagKey(tagKey, 3))
-  );
-
-  const seen = new Set<string>();
-  const relatedArticles: { slug: string; title: string; description: string | null }[] = [];
-  for (const articles of allResults) {
-    for (const a of articles) {
-      if (!seen.has(a.slug) && relatedArticles.length < 3) {
-        seen.add(a.slug);
-        relatedArticles.push({ slug: a.slug, title: a.title, description: a.description });
-      }
-    }
-    if (relatedArticles.length >= 3) break;
-  }
+  // タグ群 → 関連記事を集約（取得+重複除去は共有ロジック、上限3件）
+  const relatedArticles = await getRelatedArticleSummaries(tagsResult.data, {
+    limit: 3,
+    perTag: 3,
+  });
 
   if (relatedArticles.length === 0) return null;
 

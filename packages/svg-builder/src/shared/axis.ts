@@ -66,3 +66,12 @@ export function formatTick(value: number, decimals = 2): string {
   if (value % 1 === 0) return String(value);
   return parseFloat(value.toFixed(decimals)).toString();
 }
+
+/**
+ * 値ラベル表示用フォーマット（整数部を 3 桁カンマ区切り）。
+ * 例: 110700 → "110,700" / 4.63 → "4.6" / 5 → "5"。
+ * 軸目盛り (formatTick) とは別。読み手向けの value 表示に使う。
+ */
+export function formatValueLabel(value: number, decimals = 1): string {
+  return value.toLocaleString("en-US", { maximumFractionDigits: decimals });
+}

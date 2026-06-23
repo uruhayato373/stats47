@@ -64,7 +64,7 @@ export default async function LocalFinanceThemePage() {
       {/* 都道府県 / 市区町村 切替 */}
       <nav
         aria-label="表示単位切替"
-        className="mb-4 inline-flex rounded-full border border-border bg-white p-1 shadow-sm text-xs"
+        className="mb-4 inline-flex rounded-full border border-border bg-card p-1 shadow-sm text-xs"
       >
         <span className="px-3 py-1 rounded-full bg-primary text-primary-foreground font-medium">
           都道府県

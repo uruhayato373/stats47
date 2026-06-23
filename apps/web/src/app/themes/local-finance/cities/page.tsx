@@ -54,7 +54,7 @@ export default async function LocalFinanceCityThemePage() {
       {/* 都道府県版へのナビゲーション */}
       <nav
         aria-label="表示単位切替"
-        className="mb-4 inline-flex rounded-full border border-border bg-white p-1 shadow-sm text-xs"
+        className="mb-4 inline-flex rounded-full border border-border bg-card p-1 shadow-sm text-xs"
       >
         <Link
           href="/themes/local-finance"

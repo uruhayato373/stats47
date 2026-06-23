@@ -2,7 +2,9 @@ import { readdirSync, readFileSync, statSync } from "node:fs";
 import path from "node:path";
 
 const cwd = process.cwd();
-const scanRoots = ["src/components", "src/features"];
+// Phase 0-6 (2026-06-23) で src/app の既存債務 (Card 直 import / bg-white) を是正し、
+// app も全ルール対象に昇格。components / features / app を一律で検査する。
+const scanRoots = ["src/components", "src/features", "src/app"];
 const extensions = new Set([".ts", ".tsx"]);
 
 const rules = [
@@ -30,10 +32,9 @@ const rules = [
       "Avoid bg-white in normal UI. Use bg-card/bg-background, or document a brand/contrast exception in the allowlist.",
     pattern: /(?:^|\s)bg-white(?:[\/\s"`}]|$)/,
     allow: (relativePath) =>
-      [
-        "src/features/ads/components/TechSchoolPromoCard.tsx",
-        "src/features/ranking/components/RankingHeroCard/RankingHeroCard.tsx",
-      ].includes(relativePath),
+      ["src/features/ads/components/TechSchoolPromoCard.tsx"].includes(
+        relativePath,
+      ),
   },
   {
     id: "no-hardcoded-surface-card",
@@ -41,7 +42,11 @@ const rules = [
       "Avoid hardcoded surface card classes. Use SurfaceCard/SurfaceLinkCard/getSurfaceCardClassName/ChartPanel.",
     pattern:
       /rounded-none\s+border\s+bg-card\s+p-4\s+shadow-sm|bg-card\s+border\s+rounded|rounded-(?:lg|md)\s+border\s+border-border\s+bg-card|border\s+border-border\s+bg-card.*shadow-sm/,
-    allow: (relativePath) => relativePath === "src/components/surface/SurfaceCard.tsx",
+    // SurfaceCard 実装本体は許可。また rounded-full 要素はカードでなくピル/トグル/アバターなので除外
+    // (コンテンツカードは rounded-full にしない)。
+    allow: (relativePath, line) =>
+      relativePath === "src/components/surface/SurfaceCard.tsx" ||
+      /\brounded-full\b/.test(line),
   },
   {
     id: "no-map-panel",
@@ -77,6 +82,28 @@ const rules = [
     message:
       "Avoid large shadows on normal cards. Use no shadow, shadow-sm, or shadow-md.",
     pattern: /\bshadow-(?:lg|2xl)\b/,
+  },
+  {
+    id: "no-rounded-xl",
+    message:
+      "Flat design (--radius:0). Do not hand-add rounded-xl/2xl/3xl. Use rounded-none, or rounded-full only for circular elements.",
+    pattern: /\brounded-(?:xl|2xl|3xl)\b/,
+  },
+  {
+    id: "no-text-black",
+    message:
+      "Avoid text-black. Use text-foreground or text-slate-900 (see .claude/design-system/prohibited.md).",
+    pattern: /\btext-black\b/,
+  },
+  {
+    // PageShell が幅・レール・余白の唯一の入口。page.tsx で container/max-w を直書きしない。
+    // 正典: docs/01_技術設計/15_デザインシステムSSOT.md / 13_統一レイアウト設計.md
+    id: "no-direct-width-in-page",
+    message:
+      "page.tsx must not hardcode width. Use PageShell (sole width/rail/padding source). No container mx-auto / max-w-[…].",
+    pattern: /container\s+mx-auto|max-w-\[/,
+    // page.tsx だけを対象にする（PageShell.tsx 等の正当な max-w 定義は許可）。
+    allow: (relativePath) => !relativePath.endsWith("page.tsx"),
   },
 ];
 
