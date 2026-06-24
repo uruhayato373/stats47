@@ -5,17 +5,17 @@
   "scoring": "combined = 0.6*norm(GSC expectedLift) + 0.4*norm(blockers*3+warnings); lane: must-fix > opportunity",
   "summary": {
     "total": 137,
-    "pending": 90,
+    "pending": 88,
     "inProgress": 1,
-    "done": 46,
-    "mustFixPending": 39,
+    "done": 48,
+    "mustFixPending": 37,
     "opportunityPending": 51
   },
   "queue": [
     {
       "slug": "cc-estat-12-housing-treemap",
       "lane": "must-fix",
-      "status": "pending",
+      "status": "done",
       "priority": 1,
       "combinedScore": 0.4,
       "gsc": {
@@ -39,15 +39,15 @@
           "blocker: 記事内関連セクション — ページ側コンポーネントが正典 (記事から削除)"
         ]
       },
-      "wave_id": null,
-      "remediated_at": null,
+      "wave_id": "2026-06-24-prose",
+      "remediated_at": "2026-06-24",
       "in_progress_at": null,
       "last_brushup": null
     },
     {
       "slug": "inbound-overnight-regional-gap",
       "lane": "must-fix",
-      "status": "pending",
+      "status": "done",
       "priority": 2,
       "combinedScore": 0.237,
       "gsc": {
@@ -70,8 +70,8 @@
           "blocker: prose/図 302<350 (図はあるが薄い)"
         ]
       },
-      "wave_id": null,
-      "remediated_at": null,
+      "wave_id": "2026-06-24-prose",
+      "remediated_at": "2026-06-24",
       "in_progress_at": null,
       "last_brushup": null
     },
