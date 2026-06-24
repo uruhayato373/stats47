@@ -38,6 +38,13 @@ metric 選定 (GSC ギャップ/トレンド/カテゴリ/ユーザー指示)
 
 **必須 field**: `areaName` / `rank` / `value` / `label` / `unit`
 
+**任意 field `chartType` (非canonical basename の復旧記事用・2026-06-24)**: `generate-article-charts.ts` の
+`detectChartType` は **filename suffix を最優先**で型判定する (`*-ranking.json`→bar 等、§4)。だが復旧記事は
+article.md が埋め込む basename (`data/library-per-capita.svg` 等) を変えられず canonical suffix にできない。
+この場合に限り JSON 先頭に `"chartType": "bar"|"tile-grid"|"line"|"scatter"|"stacked-bar"|"summary"` を持たせると、
+suffix で確定できないとき**だけ**これに fallback ディスパッチする (suffix 判定が成立する canonical 名では無視)。
+新規 canonical 記事では使わない (suffix で十分)。
+
 **現状 (Phase B 前) の 3 種共存** (探索結果より):
 
 | Schema 形式 | 構造例 | label 位置 | unit 位置 |
@@ -135,7 +142,9 @@ metric 選定 (GSC ギャップ/トレンド/カテゴリ/ユーザー指示)
 
 ### 再発防止 (新規記事で元データ消失を構造的に不可能にする)
 - **gate** (`quality-gate.mjs`): 各 `data/*.svg` に対応する `.json`+`.source.json` の欠落を検出 (§1.5 の3点セット)。
-  **段階導入** (当面 warning、復元完了後に blocker 昇格)。公開記事で3点セットを強制し、SVG だけ残る状態を止める。
+  **2026-06-20 に blocker へ昇格済** (当初は warning で段階導入したが復元体制が整い昇格)。公開記事で3点セットを強制し、
+  SVG だけ残る状態を止める。**既存負債を再公開する記事は SSOT から復元 (backfill/ssot-restore) してから公開すること**
+  (復元不能=SSOTに無いデータに依存する図は、図を外すか記事を再設計する。逆復元・捏造で gate を通さない)。
 - **生成保証 (実装済 2026-06-20・徹底の核心)**: `generate-article-charts.ts` が SVG を書くたびに `source.json` を
   **セット出力**する (`writeChartSourceIfMissing`、既存の確定版は尊重)。全チャート種 (bar/tile-grid/line/scatter/summary)
   で「**1画像=1設定ファイル**」を generator レベルで保証し、SVG だけ書いて source.json を書かない経路を構造的に塞ぐ。

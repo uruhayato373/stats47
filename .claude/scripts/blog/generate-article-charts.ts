@@ -114,7 +114,26 @@ const log = (msg) => console.log(msg);
 const warn = (msg) => console.warn(`[warn] ${msg}`);
 const err = (msg) => console.error(`[error] ${msg}`);
 
-function detectChartType(filename) {
+function detectChartType(filename, parsed) {
+  // filename suffix が曖昧で型を確定できないとき、JSON 内の明示 chartType を fallback に使う。
+  // (article.md の埋め込み basename を変えられない復旧記事で、canonical 命名にできない場合の逃げ道)
+  const fromName = detectChartTypeFromName(filename);
+  if (fromName) return fromName;
+  const explicit = parsed && typeof parsed === "object" ? parsed.chartType : null;
+  if (
+    explicit === "bar" ||
+    explicit === "tile-grid" ||
+    explicit === "line" ||
+    explicit === "scatter" ||
+    explicit === "stacked-bar" ||
+    explicit === "summary"
+  ) {
+    return explicit;
+  }
+  return null;
+}
+
+function detectChartTypeFromName(filename) {
   // canonical names
   if (filename.endsWith("-ranking.json")) return "bar";
   if (filename.endsWith("-map.json")) return "tile-grid";
@@ -441,7 +460,7 @@ for (const f of jsonFiles) {
   const fp = path.join(DATA_DIR, f);
   try {
     const parsed = JSON.parse(fs.readFileSync(fp, "utf8"));
-    const type = detectChartType(f);
+    const type = detectChartType(f, parsed);
     jsonMeta.push({ file: f, type, parsed });
     jsonOkCount++;
     log(`  [ok ] ${f}  type=${type || "unknown"}`);
