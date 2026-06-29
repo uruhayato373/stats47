@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-06-28T23:23:04.385Z",
+  "generatedAt": "2026-06-29T23:21:43.427Z",
   "gscWeek": "2026-W26",
-  "auditGeneratedAt": "2026-06-28T23:23:04.366Z",
+  "auditGeneratedAt": "2026-06-29T23:21:43.408Z",
   "scoring": "combined = 0.6*norm(GSC expectedLift) + 0.4*norm(blockers*3+warnings); lane: must-fix > opportunity",
   "summary": {
     "total": 138,
