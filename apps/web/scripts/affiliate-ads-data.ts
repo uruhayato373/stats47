@@ -534,6 +534,29 @@ export const AFFILIATE_ADS: AffiliateAd[] = [
     "createdAt": "2026-03-10 01:28:53",
     "updatedAt": "2026-03-10 01:28:53"
   },
+  // ── じゃらん 宿泊・旅行予約 (tourism / blog-bottom) ───────────────────────────
+  // priority 100 = tourism 最上位。旅行ランキング (例: travel-participation-rate-overnight,
+  // note からの #1 ファネル) の広告枠に旅行広告を確実に出すため (doc 14 付録A-4 打ち手 b)。
+  {
+    "id": "af_jalan_tourism_001",
+    "title": "じゃらん 宿泊・旅行予約",
+    "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B684D+B6H1PU+14CS+6FWRL",
+    "areaCode": null,
+    "categoryKey": "tourism",
+    "locationCode": "blog-bottom",
+    "isActive": true,
+    "priority": 100,
+    "startDate": null,
+    "endDate": null,
+    "targetCategories": null,
+    "adType": "banner",
+    "imageUrl": "https://www28.a8.net/svt/bgt?aid=260630941676&wid=001&eno=01&mid=s00000005230001082000&mc=1",
+    "trackingPixelUrl": "https://www14.a8.net/0.gif?a8mat=4B684D+B6H1PU+14CS+6FWRL",
+    "width": 250,
+    "height": 250,
+    "createdAt": "2026-06-30 00:00:00",
+    "updatedAt": "2026-06-30 00:00:00"
+  },
   // ── マッチングアプリ バナー 1 (population / blog-bottom) ──────────────────────
   {
     "id": "af_population_banner_001",
