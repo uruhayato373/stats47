@@ -2,7 +2,7 @@
 
 `.claude/agents/` に定義されたサブエージェント群。Agent tool の `subagent_type` または直接起動で利用する。
 
-**現在: Phase 1-5 完了 (37 体構成)**。並行運用最適化のため、ドメイン × フェーズで責務を細分化し、各 agent に「担当 skills / 必読 rules / 触る state」を明示している。旧 17 体のうち `data-pipeline` `db-manager` は Phase 6.7 整理で削除済 (-2)、新 18 agent 追加。差し引き 33 体。**2026-06-21 に ranking 系 4 体 (`ranking-ui-manager` / `ranking-publisher` / `ranking-content-author` / `ranking-content-critic`) を新設 (+4) → 37 体。**残る縮退 agent は新 agent に役割委譲済 (Session B で 4 件移動・24 件は責務上維持)。詳細は移行ステータス表。
+**現在: Phase 1-5 完了 (38 体構成)**。並行運用最適化のため、ドメイン × フェーズで責務を細分化し、各 agent に「担当 skills / 必読 rules / 触る state」を明示している。旧 17 体のうち `data-pipeline` `db-manager` は Phase 6.7 整理で削除済 (-2)、新 18 agent 追加。差し引き 33 体。**2026-06-21 に ranking 系 4 体 (`ranking-ui-manager` / `ranking-publisher` / `ranking-content-author` / `ranking-content-critic`) を新設 (+4) → 37 体。**残る縮退 agent は新 agent に役割委譲済 (Session B で 4 件移動・24 件は責務上維持)。詳細は移行ステータス表。
 
 ## 設計思想
 
@@ -59,14 +59,15 @@
 | `sns-renderer` | Remotion 全レンダリング (metrics 同期と画像生成は分離) | 既存縮退 |
 | `sns-metrics-sync` 🆕 | 全プラットフォーム メトリクス同期 (`state/metrics/{sns,youtube}/`) | sns-renderer + 各 strategist 分離 |
 
-## Tier 5: SEO / Analytics (4 体)
+## Tier 5: SEO / Analytics / Monetization (5 体)
 
 | agent | role | 派生元 |
 |---|---|---|
 | `gsc-analyst` 🆕 | GSC 専任 (fetch + inspect + improvement + indexing) | seo-auditor 分割 |
 | `ga4-analyst` 🆕 | GA4 専任 | seo-auditor 分割 |
 | `performance-auditor` 🆕 | PSI / Lighthouse / Cloudflare cost | seo-auditor 分割 |
-| `adsense-analyst` 🆕 | AdSense / アフィリエイト収益計測 | seo-auditor 分割 + new |
+| `adsense-analyst` 🆕 | AdSense 収益計測 + アフィ収益の計測協働 (在庫管理は affiliate-manager に移管) | seo-auditor 分割 + new |
+| `affiliate-manager` 🆕 | アフィリエイト一元管理 (SSOT=`affiliate-ads-data.ts` 在庫 CRUD / サイズ・プログラム規約 / priority 整合 / publish 段取り)。計測は adsense/ga4、effect は improvement-triage に委譲。必読 `.claude/rules/affiliate-ads-standards.md` | 2026-06-30 新設 (adsense-analyst 分離) |
 
 ## Tier 6: Theme / UI (6 体)
 

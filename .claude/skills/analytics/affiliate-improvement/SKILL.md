@@ -1,8 +1,8 @@
 ---
 name: affiliate-improvement
 description: アフィリエイト広告の impression / click / CTR を GA4 (ad_impression / affiliate_click) と在庫棚卸しで分析し、弱い枠を特定して改善施策を docs/02_実装計画/03_改善バックログ.md に記録するループ。在庫の管理画面 (単体 HTML) を開く機能も持つ。Use when user says "アフィリエイト改善", "アフィリエイト分析", "imp/click 増やす", "広告クリック改善", "アフィリエイト管理画面", "管理画面を開いて", "アフィリエイト一覧見せて", "在庫見せて".
-primary_agent: adsense-analyst
-co_agents: [improvement-triage]
+primary_agent: affiliate-manager
+co_agents: [improvement-triage, adsense-analyst]
 ---
 
 アフィリエイト広告の **impression / click / CTR を計測ベースで改善するループ**。
