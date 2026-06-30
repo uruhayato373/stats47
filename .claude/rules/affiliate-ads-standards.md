@@ -28,6 +28,7 @@ apps/web/scripts/affiliate-ads-data.ts (AFFILIATE_ADS = git TS SSOT)
 | 転職・年収 | STRATEGY CAREER / 就職エージェントneo / AI就労支援 | `laborwage` | ✅ | 年収・所得 ranking, 県民所得 |
 | 引越し・不動産・住まい | 不動産・住宅バナー / 引越し比較 (予定) | `construction` | 一部✅ | `/areas`, 住宅・地価 ranking |
 | ふるさと納税 | (未在庫) | ★要決定 (新規 or `administrativefinancial`) | 未提携 | 財政・地域系 ranking |
+| 健康・フィットネス | RIZAP (`af_rizap_socialsecurity_001`) / ClassPass / マカエンペラー / Repilates | `socialsecurity` | ✅ | 医療・社会保障・健康系 ranking |
 
 - `categoryKey` は `apps/web/src/features/ads/constants/affiliate-category.ts` の `CATEGORY_AFFILIATE_MAP` のキーと一致必須 (不一致は配信時に解決されず非表示)。
 - **ふるさと納税は対応 categoryKey 未確定**。提携取得時に (a) 既存 `administrativefinancial`/`economy` に載せる か (b) 新 `AffiliateCategory` を起こす かを `/register-affiliate-banner` Phase 2 で決める。

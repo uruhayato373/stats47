@@ -494,6 +494,29 @@ export const AFFILIATE_ADS: AffiliateAd[] = [
     "createdAt": "2026-06-30 00:00:00",
     "updatedAt": "2026-06-30 00:00:00"
   },
+  // ── RIZAP パーソナルジム (health=socialsecurity / blog-bottom) ───────────────
+  // priority 90 = socialsecurity の意図適合上位 (健康/ダイエット)。filler@25 を上回る
+  // (affiliate-ads-standards.md §2 健康・フィットネス / §4 priority)。
+  {
+    "id": "af_rizap_socialsecurity_001",
+    "title": "RIZAP パーソナルジム",
+    "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B684G+EDZ52Q+3D3Q+6ARKX",
+    "areaCode": null,
+    "categoryKey": "socialsecurity",
+    "locationCode": "blog-bottom",
+    "isActive": true,
+    "priority": 90,
+    "startDate": null,
+    "endDate": null,
+    "targetCategories": null,
+    "adType": "banner",
+    "imageUrl": "https://www24.a8.net/svt/bgt?aid=260630944870&wid=001&eno=01&mid=s00000015695001058000&mc=1",
+    "trackingPixelUrl": "https://www17.a8.net/0.gif?a8mat=4B684G+EDZ52Q+3D3Q+6ARKX",
+    "width": 300,
+    "height": 250,
+    "createdAt": "2026-06-30 00:00:00",
+    "updatedAt": "2026-06-30 00:00:00"
+  },
   // ── マカエンペラー (health=socialsecurity / blog-bottom) ─────────────────────
   {
     "id": "af_maca_emperor_001",
