@@ -494,6 +494,28 @@ export const AFFILIATE_ADS: AffiliateAd[] = [
     "createdAt": "2026-06-30 00:00:00",
     "updatedAt": "2026-06-30 00:00:00"
   },
+  // ── 転職エージェントナビ (laborwage / blog-bottom) ──────────────────────────
+  // priority 94 = laborwage 意図適合の転職広告帯 (汎用 Claude研修 90 より上、IT求人ナビ96/AI就労支援95 に次ぐ)。
+  {
+    "id": "af_tenshoku_agent_navi_laborwage_001",
+    "title": "転職エージェントナビ",
+    "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B5N41+6TW1MA+5BJK+5ZEMP",
+    "areaCode": null,
+    "categoryKey": "laborwage",
+    "locationCode": "blog-bottom",
+    "isActive": true,
+    "priority": 94,
+    "startDate": null,
+    "endDate": null,
+    "targetCategories": null,
+    "adType": "banner",
+    "imageUrl": "https://www22.a8.net/svt/bgt?aid=260603713413&wid=001&eno=01&mid=s00000024824001005000&mc=1",
+    "trackingPixelUrl": "https://www15.a8.net/0.gif?a8mat=4B5N41+6TW1MA+5BJK+5ZEMP",
+    "width": 300,
+    "height": 250,
+    "createdAt": "2026-06-30 00:00:00",
+    "updatedAt": "2026-06-30 00:00:00"
+  },
   // ── RIZAP パーソナルジム (health=socialsecurity / blog-bottom) ───────────────
   // priority 90 = socialsecurity の意図適合上位 (健康/ダイエット)。filler@25 を上回る
   // (affiliate-ads-standards.md §2 健康・フィットネス / §4 priority)。
