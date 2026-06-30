@@ -183,6 +183,29 @@ export const AFFILIATE_ADS: AffiliateAd[] = [
     "createdAt": "2026-03-10 01:30:07",
     "updatedAt": "2026-06-01 00:00:00"
   },
+  // ── FP無料相談 資産形成 (economy / blog-bottom) ──────────────────────────────
+  // priority 92 = economy の意図適合上位 (資産形成/NISA/iDeCo/保険)。汎用研修90より上
+  // (affiliate-ads-standards.md §2 投資・保険・お金 / §4 priority)。
+  {
+    "id": "af_fp_soudan_economy_001",
+    "title": "FP無料相談 資産形成",
+    "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B5LK5+6KYJJM+5MAS+5YZ75",
+    "areaCode": null,
+    "categoryKey": "economy",
+    "locationCode": "blog-bottom",
+    "isActive": true,
+    "priority": 92,
+    "startDate": null,
+    "endDate": null,
+    "targetCategories": null,
+    "adType": "banner",
+    "imageUrl": "https://www23.a8.net/svt/bgt?aid=260601701398&wid=001&eno=01&mid=s00000026218001003000&mc=1",
+    "trackingPixelUrl": "https://www17.a8.net/0.gif?a8mat=4B5LK5+6KYJJM+5MAS+5YZ75",
+    "width": 300,
+    "height": 250,
+    "createdAt": "2026-06-30 00:00:00",
+    "updatedAt": "2026-06-30 00:00:00"
+  },
   // ── NISA・証券 バナー 1 (economy / blog-bottom) ───────────────────────────────
   {
     "id": "af_economy_banner_001",
