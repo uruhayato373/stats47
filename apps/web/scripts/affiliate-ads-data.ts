@@ -408,6 +408,29 @@ export const AFFILIATE_ADS: AffiliateAd[] = [
     "createdAt": "2026-06-01 00:00:00",
     "updatedAt": "2026-06-01 00:00:00"
   },
+  // ── ビルドジョブ 施工管理転職 (construction / blog-bottom) ───────────────────
+  // priority 90 = construction の意図適合上位 (建設業転職)。建設業ランキングに最適・filler@25 を上回る
+  // (affiliate-ads-standards.md §2 建設・不動産 / §4 priority)。
+  {
+    "id": "af_buildjob_construction_001",
+    "title": "ビルドジョブ 施工管理転職",
+    "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B5OO5+FHBA2+5B0Y+NTZCH",
+    "areaCode": null,
+    "categoryKey": "construction",
+    "locationCode": "blog-bottom",
+    "isActive": true,
+    "priority": 90,
+    "startDate": null,
+    "endDate": null,
+    "targetCategories": null,
+    "adType": "banner",
+    "imageUrl": "https://www27.a8.net/svt/bgt?aid=260605733026&wid=002&eno=01&mid=s00000024757004003000&mc=1",
+    "trackingPixelUrl": "https://www17.a8.net/0.gif?a8mat=4B5OO5+FHBA2+5B0Y+NTZCH",
+    "width": 300,
+    "height": 250,
+    "createdAt": "2026-06-30 00:00:00",
+    "updatedAt": "2026-06-30 00:00:00"
+  },
   // ── 不動産・住宅 バナー 1 (housing=construction / blog-bottom) ─────────────────
   {
     "id": "af_housing_banner_001",

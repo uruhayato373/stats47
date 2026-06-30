@@ -26,7 +26,7 @@ apps/web/scripts/affiliate-ads-data.ts (AFFILIATE_ADS = git TS SSOT)
 |---|---|---|---|---|
 | 旅行・宿泊 | じゃらん (`af_jalan_tourism_001`) / 楽天トラベル / OZmall | `tourism` | じゃらん✅ / 楽天トラベル取得予定 | `/ranking` 観光系 (`travel-participation-rate-overnight` = note #1 ファネル) |
 | 転職・年収 | STRATEGY CAREER / 就職エージェントneo / AI就労支援 | `laborwage` | ✅ | 年収・所得 ranking, 県民所得 |
-| 引越し・不動産・住まい | 不動産・住宅バナー / 引越し比較 (予定) | `construction` | 一部✅ | `/areas`, 住宅・地価 ranking |
+| 引越し・不動産・住まい / 建設業 | 不動産・住宅バナー / 引越し比較 / ビルドジョブ(施工管理転職 `af_buildjob_construction_001`) | `construction` | 一部✅ | `/areas`, 住宅・地価・建設業 ranking |
 | ふるさと納税 | (未在庫) | ★要決定 (新規 or `administrativefinancial`) | 未提携 | 財政・地域系 ranking |
 | 健康・フィットネス | RIZAP (`af_rizap_socialsecurity_001`) / ClassPass / マカエンペラー / Repilates | `socialsecurity` | ✅ | 医療・社会保障・健康系 ranking |
 
