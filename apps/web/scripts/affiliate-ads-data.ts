@@ -471,6 +471,29 @@ export const AFFILIATE_ADS: AffiliateAd[] = [
     "createdAt": "2026-03-10 01:20:57",
     "updatedAt": "2026-06-01 00:00:00"
   },
+  // ── IT求人ナビ フリーエンジニア求人 (laborwage / blog-bottom) ────────────────
+  // priority 96 = laborwage banner 最上位。年収/所得/転職 ranking に意図適合の
+  // ITエンジニア求人を出すため (affiliate-ads-standards.md §2 転職・年収 / §4 priority)。
+  {
+    "id": "af_itkyujin_laborwage_001",
+    "title": "IT求人ナビ フリーエンジニア求人",
+    "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B684G+G2PCS2+4LXM+5ZMCH",
+    "areaCode": null,
+    "categoryKey": "laborwage",
+    "locationCode": "blog-bottom",
+    "isActive": true,
+    "priority": 96,
+    "startDate": null,
+    "endDate": null,
+    "targetCategories": null,
+    "adType": "banner",
+    "imageUrl": "https://www25.a8.net/svt/bgt?aid=260630944972&wid=001&eno=01&mid=s00000021505001006000&mc=1",
+    "trackingPixelUrl": "https://www18.a8.net/0.gif?a8mat=4B684G+G2PCS2+4LXM+5ZMCH",
+    "width": 300,
+    "height": 250,
+    "createdAt": "2026-06-30 00:00:00",
+    "updatedAt": "2026-06-30 00:00:00"
+  },
   // ── マカエンペラー (health=socialsecurity / blog-bottom) ─────────────────────
   {
     "id": "af_maca_emperor_001",
