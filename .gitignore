@@ -167,6 +167,9 @@ inspect-knip.js
 # セッションロック (session-guard.js のランタイム状態、マシン固有・コミット不要)
 .claude/state/session-locks/
 
+# SNS 指標発見索引 (git TS 由来の再生成キャッシュ = SSOT ではない。build-discovery-index.ts で再生成)
+.claude/state/sns/metric-discovery-index.json
+
 # git worktree (Agent isolation 用、リポジトリにコミットしない)
 .claude/worktrees/
 

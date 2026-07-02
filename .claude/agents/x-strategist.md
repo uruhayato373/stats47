@@ -18,6 +18,7 @@ X (Twitter) アカウント「統計で見る都道府県 | stats47」の投稿�
 | `/find-quote-rt` | バズツイート検索・stats47 データ照合・引用 RT 候補提示 |
 | `/post-sns-captions` | 全 SNS キャプション一括生成（X 部分） |
 | `/generate-all-sns` | X コンテンツ一括生成（data.json → キャプション → 画像） |
+| `/react-to-news` | **じじネタ→即SNS の瞬発力パイプライン**。トレンド語→指標発見（find-metrics・同義語辞書で語彙ギャップ吸収）→ 記事不要で X用PNG+caption 生成（quick-still）。トレンド連動投稿の主エンジン |
 
 ## browser-use CLI 設定
 
@@ -39,8 +40,9 @@ X の最大の武器は **即時性**。ニュースやトレンドに stats47 �
 | アクション | 方法 |
 |---|---|
 | トレンド検知 | `/discover-trends --source all` でクロスソース集計、または `--source yahoo` / `--source news` でニュース系を絞って収集 |
-| データマッチング | トレンドワードと ranking_items を照合し、関連する統計データを特定 |
-| 即時投稿 | `/post-x` でキャプション生成 → `/publish-x` で即座に投稿 |
+| データマッチング | `/react-to-news` → `find-metrics "<トレンド語>"`。同義語辞書が「移住→転入」「値上げ→物価」等の語彙ギャップを吸収（ranking_items 手動照合は不要になった） |
+| ビジュアル生成 | `/react-to-news` → `quick-still --key <key>` で X用PNG(横960)+caption を**記事不要で数秒**生成 |
+| 即時投稿 | `/publish-x <key> <date> --media .local/sns-quick/<key>/<key>.png --caption .local/sns-quick/<key>/caption.txt --dry-run`（必ず dry-run で予約モード確認→本番。安全ゲート維持） |
 
 **例**:
 - ニュース「〇〇県で大地震」→ 地震回数ランキング・建物耐震化率データを投稿

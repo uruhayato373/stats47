@@ -73,6 +73,10 @@ Phase 6 (2026-05-27) の D1 → R2 移行後、本 agent は D1 stats_* テー�
   `npm run validate:config --workspace=@stats47/data-configs` も実行**すること。
   規約: `.claude/rules/metric-config-standards.md` (フィールド役割: title=名前のみ / subtitle=区別子 /
   note=注釈 / description=定義。年・※を title に焼かない)
+- **SNS 発見索引の陳腐化 (下流整合)**: 新規 metric を追加すると `/react-to-news` の指標発見索引
+  (`.claude/state/sns/metric-discovery-index.json`) が古くなり、新指標が find-metrics で引けなくなる。
+  **量産・編集後は再生成すること**: `npx tsx .claude/scripts/sns/build-discovery-index.ts`
+  (索引は git TS 由来の再生成キャッシュ = SSOT ではない。find-metrics 側も registry.ts より古い索引を警告する)
 - **2026-05-27 marriages/divorces 2023-2024 喪失事故**: DELETE+INSERT で他ソース年度を一掃。UPSERT 必須化で再発防止 (詳細: auto memory `project_estat_backfill_lessons.md`)
 - **note_articles テーブル消失 (2026-03)**: schema delete + migration reset の合わせ技で消失。本 agent は schema 操作不可、 `db-schema-manager` 経由で行うこと
 - **isActive:true ≠ 本番公開 (2026-06-03)**: metric を `isActive:true` にしても ranking は本番公開されない。
