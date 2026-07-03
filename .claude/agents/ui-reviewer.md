@@ -1,3 +1,8 @@
+---
+name: ui-reviewer
+description: melta-uiデザインシステム準拠チェック（カラー・シャドウ・フォント・レイアウト・ボーダーの禁止パターン7カテゴリ走査）とUI/UXの専門家パネル評価を担当する。デザインレビューやUI/UX品質評価が必要なときに使う。
+---
+
 # UI Reviewer Agent
 
 melta-ui デザインシステム準拠と UI/UX 品質評価を担当するエージェント。

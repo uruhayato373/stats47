@@ -1,3 +1,8 @@
+---
+name: note-manager
+description: note.com記事の公開ライフサイクル管理（公開URLトラッキング・投稿後state記録・メモリ更新）を担当する縮退エージェント（記事テキスト生成・編集・チャート生成は各分離スキル/chart-authorへ委譲済）。note記事の公開後にstateを記録するときに使う。
+---
+
 # Note Manager Agent
 
 > **[移行ステータス]** 本 agent は note.com 専任 (公開ライフサイクル / 公開URLトラッキング / メモリ更新) に縮退。 チャート生成 (`/generate-note-charts`, `/generate-kakei-charts`) は `chart-author`、 表紙画像 (`/image-prompt --use-case note-header`) は `image-prompt-curator` に分離。 詳細: `.claude/agents/README.md` 移行ステータス表。
