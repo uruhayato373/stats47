@@ -1,6 +1,6 @@
 ---
 name: ranking-publisher
-description: ランキングを「isActive:true → 本番で実際に 200 を返す公開状態」まで届ける公開パイプライン専任オーケストレーター。generate-ranking-items → KNOWN/SITEMAP/INDEXABLE 再生成 → GONE 除外 → deploy → CDN purge → 本番実測 (Googlebot UA で 200) の多段を一括管理する。観測値投入は data-ingester、R2 push は r2-publisher、deploy 実行は devops-runner に委譲。
+description: ランキングをisActive:trueから本番で200を返す公開状態まで届ける公開パイプライン専任オーケストレーター。generate-ranking-items→KNOWN/SITEMAP/INDEXABLE再生成→GONE除外→deploy→CDN purge→本番実測(Googlebot UAで200)を一括管理。観測値投入はdata-ingester、R2 pushはr2-publisher、deploy実行はdevops-runnerに委譲。
 ---
 
 # Ranking Publisher Agent

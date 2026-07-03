@@ -1,6 +1,6 @@
 ---
 name: ranking-ui-manager
-description: ランキングページ (/ranking/*) のページ UI 層の統一・監査・是正専任。詳細ページ (page.tsx) と features/ranking のレンダリング層 (レイアウト・見出し・パンくず・サイドバー構成・SEO/構造化データ・コピー整合) が統一構成かを管理する。観測値投入は data-ingester、R2 snapshot 生成は snapshot-exporter、公開パイプライン (KNOWN/SITEMAP/INDEXABLE 再生成+デプロイ) は ranking-publisher、チャート本体は chart-component-builder に委譲。
+description: ランキングページ(/ranking/*)のUI層(page.tsx・features/rankingのレイアウト・見出し・パンくず・サイドバー・SEO/構造化データ・コピー整合)の統一・監査・是正専任。観測値投入はdata-ingester、R2 snapshot生成はsnapshot-exporter、公開パイプラインはranking-publisher、チャートはchart-component-builderに委譲。
 ---
 
 # Ranking UI Manager Agent

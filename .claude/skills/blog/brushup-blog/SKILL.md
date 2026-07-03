@@ -1,6 +1,6 @@
 ---
 name: brushup-blog
-description: ブログ記事の品質是正 (計画的な順次是正 / 1 記事リライト / ユーザー指示時の一括リライト)。★推奨は --target queue: 状態付き是正キュー (.claude/state/blog/remediation-queue.json、GSC×品質blocker統合スコア) の pending 上位を順に是正し article-writer(archetype+図あたり字数)→blog-critic PASS→publish。--target article <slug> で 1 記事リライト、--target batch でユーザー指示時の一括。仕組み正典 docs/02_実装計画/06_ブログ品質是正ループ.md。Use when user says "ブログ品質を上げる", "記事を順次直す", "ブログ改善", "どの記事を直す", "ブラッシュアップ", "記事を補強", "一括リライト", "brushup".
+description: ブログ記事の品質是正スキル。--target queueで状態付き是正キュー(GSC×品質blocker統合スコア)のpending上位をarticle-writer→blog-critic PASS→publishで順次是正、--target article <slug>で1記事リライト、--target batchでユーザー指示時の一括リライト。Use when user says "ブログ品質を上げる", "記事を順次直す", "ブラッシュアップ", "一括リライト".
 argument-hint: --target queue [--next 5] | --target article <slug> [--focus CTR-reframe|エキスパート視点追加|最新データ更新|CTA強化] | --target batch [--count 5] [--dry-run] | --target priority (legacy)
 primary_agent: article-writer
 ---

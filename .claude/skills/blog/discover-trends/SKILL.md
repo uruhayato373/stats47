@@ -1,6 +1,6 @@
 ---
 name: discover-trends
-description: 指定したソース（Google Trends / GSC / はてブ / Google News / Yahoo / note.com）から急上昇トピックを取得し、stats47 の統計データとマッチングしてブログ記事候補を提案する。--whitepaper 指定で NotebookLM 白書の切り口を当て、トレンド需要 × 白書 × データ の 3 軸ヒットを最優先化。--deep でデータ未整備の白書強アングル候補を e-Stat 取得 → 白書再照会の補完ループで救済。Use when user says "トレンド検索", "トレンド発見", "GSCトレンド", "はてブトレンド", "Yahooトレンド", "ニューストレンド", "noteトレンド", "トレンド全部", "白書トレンド". 検索急上昇・自サイト需要・ネット議論・ニュース報道・白書の切り口など複数視点で記事ネタを発見.
+description: 指定ソース（Google Trends/GSC/はてブ/Google News/Yahoo/note.com）から急上昇トピックを取得し、stats47の統計データとマッチングしてブログ記事候補を提案する。--whitepaperでNotebookLM白書の切り口、--deepでe-Stat取得による補完ループも可。Use when user says "トレンド検索", "トレンド発見", "GSCトレンド", "白書トレンド" など複数視点で記事ネタを発見したいとき.
 disable-model-invocation: true
 primary_agent: trend-scout
 co_agents: [theme-designer, blog-editor, data-ingester]
