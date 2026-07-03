@@ -1,0 +1,67 @@
+name: 🔗 Agent/Skill Consistency (weekly)
+
+# agent/skill/script/hook の整合性ドリフト (リンク切れ・参照先不在) を週次で機械検出する。
+# 従来は Stop hook (`check-consistency-on-stop.js`) のセッション内ゲートのみで、
+# セッション外の直接編集や複数セッションの合流によるドリフトは検出されなかった
+# (2026-07-03 運営総点検: zombie agent seo-auditor が README/skill 参照とズレたまま放置)。
+# error レベル検出時は auto-generated Issue を起票する。warn (orphan 候補) は起票しない。
+#
+# 正典: .claude/scripts/lib/check-agent-skill-consistency.cjs / .claude/skills/dev/audit-consistency/SKILL.md
+
+on:
+  schedule:
+    # 毎週月曜 JST 07:00 (= 日曜 22:00 UTC)。週初に棚卸しして週次計画に反映できるように。
+    - cron: "0 22 * * 0"
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  consistency-check:
+    name: Consistency Check
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: 🧰 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: 🔗 Run consistency check
+        id: check
+        run: |
+          set +e
+          node .claude/scripts/lib/check-agent-skill-consistency.cjs > /tmp/consistency-report.txt 2>&1
+          echo "exit_code=$?" >> "$GITHUB_OUTPUT"
+          cat /tmp/consistency-report.txt
+
+      - name: 🚨 Create issue on error-level drift
+        if: steps.check.outputs.exit_code == '1'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TITLE="[Consistency Alert] agent/skill 整合性ドリフト検出 ($(date +%Y-%m-%d))"
+          EXISTING=$(gh issue list --label "auto-generated" --state open \
+            --search "Consistency Alert in:title" --json number --jq '.[0].number // empty')
+          {
+            echo "週次整合性チェックで error レベルのドリフトを検出しました。"
+            echo ""
+            echo "対処: \`/audit-consistency\` スキルで機械チェック(床)+意味レビュー(天井)を実施してください。"
+            echo ""
+            echo '```'
+            grep -E "^✖|^⚠|^計" /tmp/consistency-report.txt | head -40
+            echo '```'
+          } > /tmp/issue-body.md
+          if [ -n "$EXISTING" ]; then
+            gh issue comment "$EXISTING" --body-file /tmp/issue-body.md
+          else
+            gh issue create \
+              --title "$TITLE" \
+              --label "auto-generated" \
+              --body-file /tmp/issue-body.md
+          fi

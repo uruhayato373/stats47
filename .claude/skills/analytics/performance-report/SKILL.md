@@ -4,7 +4,7 @@ description: パフォーマンス総合レポートを生成する（トレン�
 argument-hint: "[--period 7d|28d|3m] [--compare]"
 allowed-tools: Read, Bash, Grep
 primary_agent: performance-auditor
-co_agents: [seo-auditor]
+co_agents: [gsc-analyst]
 ---
 
 # /performance-report — CWV 総合レポート（PSI state ベース）

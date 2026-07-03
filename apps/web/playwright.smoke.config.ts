@@ -31,6 +31,31 @@ export default defineConfig({
     {
       name: "smoke-chromium",
       use: { ...devices["Desktop Chrome"] },
+      // responsive-layout は下の viewport 別 projects で実行する
+      testIgnore: /responsive-layout/,
+    },
+    // breakpoint 別レイアウト検証 (2026-07-03 運営総点検で追加)。
+    // PageShell の契約: lg=1024px で右レール表示。375/768 は 1 カラム。
+    // 対象 spec は tests/smoke/responsive-layout.spec.ts のみ (smoke 全体は 4x しない)。
+    {
+      name: "responsive-mobile-375",
+      use: { ...devices["Desktop Chrome"], viewport: { width: 375, height: 812 } },
+      testMatch: /responsive-layout/,
+    },
+    {
+      name: "responsive-tablet-768",
+      use: { ...devices["Desktop Chrome"], viewport: { width: 768, height: 1024 } },
+      testMatch: /responsive-layout/,
+    },
+    {
+      name: "responsive-lg-1024",
+      use: { ...devices["Desktop Chrome"], viewport: { width: 1024, height: 800 } },
+      testMatch: /responsive-layout/,
+    },
+    {
+      name: "responsive-xl-1280",
+      use: { ...devices["Desktop Chrome"], viewport: { width: 1280, height: 900 } },
+      testMatch: /responsive-layout/,
     },
   ],
 

@@ -78,6 +78,7 @@ const INTENTIONAL = new Set([
 // 優先度 (小さいほど先)。--next と LATEST の並び。
 const ACTION_PRIORITY = {
   "fix-5xx": 1,
+  "restore-gone-key": 1, // 410 なのに KNOWN∩isActive = 誤GONE (2026-07-03 の56件障害クラス)
   resubmit: 2,
   deactivate: 3, // データ無しで200を返す空ページ → isActive:false/GONE
   noindex: 4, // 空テンプレ/検索/重複 → robots noindex
@@ -215,6 +216,52 @@ async function probeAll(urls, limit) {
   return results;
 }
 
+// ── ranking キーの GONE 誤登録検出 (2026-07-03 の 56件 410 誤配信の再発防止) ──
+// 「410 = 削除済 → 放置 (resolved-by-design)」と即断せず、KNOWN_RANKING_KEYS +
+// metric config isActive:true と突合する。両方に該当する 410 は「誤って GONE 化された
+// 生きているランキング」であり、GONE_RANKING_KEYS からの復帰が必要 (action: restore-gone-key)。
+// 過去に COVERAGE-DEACT-01 (2026-06-16) がこの突合をせず births/marriages 等 56 件を
+// 誤 deactivate → 本チェックで二度と resolved-by-design 扱いにしない。
+const extractQuotedKeys = (filePath) => {
+  try {
+    const src = fs.readFileSync(filePath, "utf8");
+    return new Set([...src.matchAll(/^\s*"([^"]+)",?\s*$/gm)].map((m) => m[1]));
+  } catch {
+    return new Set();
+  }
+};
+const loadLiveRankingKeys = () => {
+  const known = extractQuotedKeys(
+    path.join(PROJECT_ROOT, "packages/ranking/src/config/known-ranking-keys.ts"),
+  );
+  // metric config の isActive:true キー (ファイル走査・~2200件で <1s)
+  const metricsDir = path.join(PROJECT_ROOT, "packages/data-configs/src/metrics");
+  const active = new Set();
+  try {
+    for (const f of fs.readdirSync(metricsDir)) {
+      if (!f.endsWith(".ts")) continue;
+      const src = fs.readFileSync(path.join(metricsDir, f), "utf8");
+      const key = src.match(/"key":\s*"([^"]+)"/) ?? src.match(/key:\s*['"]([^'"]+)['"]/);
+      if (key && /["']?isActive["']?\s*:\s*true/.test(src)) active.add(key[1]);
+    }
+  } catch {
+    /* metrics dir 不在時は KNOWN のみで判定 */
+  }
+  return { known, active };
+};
+const LIVE_RANKING = loadLiveRankingKeys();
+const rankingKeyFromUrl = (url) => {
+  const m = url.match(/\/ranking\/([a-z0-9-]+)\/?$/);
+  return m ? m[1] : null;
+};
+const isMisgoneRankingUrl = (url) => {
+  const key = rankingKeyFromUrl(url);
+  if (!key) return false;
+  if (!LIVE_RANKING.known.has(key)) return false;
+  // active 集合が取れている場合は isActive も要求、取れない場合は KNOWN のみで警告
+  return LIVE_RANKING.active.size === 0 || LIVE_RANKING.active.has(key);
+};
+
 // ── 分類 ───────────────────────────────────────────────────────
 function classify(category, http) {
   if (INTENTIONAL.has(category)) {
@@ -297,6 +344,13 @@ async function build() {
       : null; // intentional は未実測 (null)
     const cls = classify(r.category, http ?? -1);
     const old = prevByUrl.get(r.url);
+
+    // 410 の ranking URL が KNOWN∩isActive なら「誤GONE」— 放置 (now-gone) にせず復帰対象へ
+    if (http === 410 && isMisgoneRankingUrl(r.url)) {
+      cls.verdict = "gone-conflict";
+      cls.action = "restore-gone-key";
+      cls.design = false;
+    }
 
     // content-check の確定判定 (content_verdict) があれば action を上書きして保持
     const contentVerdict = old?.content_verdict ?? null;
