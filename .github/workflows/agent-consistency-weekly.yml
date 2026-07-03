@@ -65,3 +65,37 @@ jobs:
               --label "auto-generated" \
               --body-file /tmp/issue-body.md
           fi
+
+      - name: 📦 Check active ranking → R2 coverage (公開漏れ)
+        # 逆方向突合: isActive:true + KNOWN なのに R2 item.json が無い「公開漏れ」を検出。
+        # 順方向 (GONE なのに生きている) は ranking-key-consistency.test.ts が毎 PR で検証。
+        id: coverage
+        run: |
+          set +e
+          node .claude/scripts/ranking/check-active-r2-coverage.mjs > /tmp/coverage-report.txt 2>&1
+          echo "exit_code=$?" >> "$GITHUB_OUTPUT"
+          cat /tmp/coverage-report.txt
+
+      - name: 🚨 Create issue on missing R2 snapshots
+        if: steps.coverage.outputs.exit_code == '1'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TITLE="[Consistency Alert] active ranking の R2 snapshot 欠落 ($(date +%Y-%m-%d))"
+          EXISTING=$(gh issue list --label "auto-generated" --state open \
+            --search "R2 snapshot 欠落 in:title" --json number --jq '.[0].number // empty')
+          {
+            echo "isActive:true + KNOWN 登録済みなのに R2 \`app/ranking/<key>/item.json\` が無いキーを検出しました (本番 notFound の公開漏れ)。"
+            echo ""
+            echo '```'
+            head -60 /tmp/coverage-report.txt
+            echo '```'
+          } > /tmp/coverage-issue.md
+          if [ -n "$EXISTING" ]; then
+            gh issue comment "$EXISTING" --body-file /tmp/coverage-issue.md
+          else
+            gh issue create \
+              --title "$TITLE" \
+              --label "auto-generated" \
+              --body-file /tmp/coverage-issue.md
+          fi
