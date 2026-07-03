@@ -1,8 +1,8 @@
-# PSI Latest — 2026-06-23
+# PSI Latest — 2026-07-02
 
-生成時刻: 2026-06-23T17:55:33.574Z
+生成時刻: 2026-07-02T18:01:12.061Z
 
-**しきい値違反: error 47 / warning 32**
+**しきい値違反: error 65 / warning 31**
 
 矢印の見方: ▲ 改善 / ▼ 悪化 / · 変化なし（前回計測との比較）
 
@@ -10,49 +10,49 @@
 
 | URL | Perf | LCP | CLS | TBT | TTFB |
 |---|---|---|---|---|---|
-| / | ERROR | | | | |
-| /ranking 🚨 | 93 ▲ (+2) | 3151ms ▼ | 0.000 · | 48ms ▲ | 1ms ▲ |
-| /areas 🚨 | 83 ▲ (+16) | 4539ms ▲ | 0.037 · | 109ms ▲ | 1ms ▲ |
-| /themes 🚨 | 78 ▼ (-18) | 3452ms ▼ | 0.000 · | 412ms ▼ | 3ms ▼ |
-| /search 🚨 | 60 ▼ (-28) | 5448ms ▼ | 0.000 · | 533ms ▼ | 5ms ▲ |
-| /themes/population-dynamics 🚨 | 82 ▼ (-9) | 3301ms ▼ | 0.000 · | 252ms ▼ | 20ms ▲ |
-| /themes/local-economy 🚨 | 74 ▼ (-11) | 4126ms ▼ | 0.000 · | 287ms ▲ | 12ms ▲ |
-| /themes/labor-wages | 91 ▲ (+8) | 2401ms ▲ | 0.000 · | 109ms ▲ | 38ms ▲ |
-| /ranking/total-population 🚨 | 48 · | 5326ms ▲ | 0.002 · | 930ms ▼ | 1949ms ▼ |
-| /ranking/annual-sunshine-duration 🚨 | 41 ▼ (-18) | 7126ms ▼ | 0.002 · | 1002ms ▼ | 2046ms ▼ |
-| /ranking/future-population-change-rate-2050 🚨 | 55 ▲ (+12) | 5701ms ▲ | 0.021 · | 593ms ▲ | 1202ms ▲ |
-| /ranking/agricultural-output 🚨 | 39 ▼ (-15) | 7051ms ▼ | 0.013 · | 1452ms ▼ | 1475ms ▲ |
-| /areas/13000 🚨 | 38 ▼ (-2) | 6588ms ▼ | 0.163 · | 1705ms ▲ | 904ms ▼ |
-| /areas/27000 🚨 | 54 ▲ (+5) | 4427ms ▼ | 0.033 · | 1241ms ▼ | 2051ms ▼ |
-| /areas/01000 🚨 | 46 ▼ (-18) | 4051ms ▼ | 0.163 · | 2691ms ▼ | 618ms ▲ |
-| /areas/47000 🚨 | 49 ▼ (-19) | 5626ms ▼ | 0.163 · | 872ms ▼ | 680ms ▲ |
-| /blog 🚨 | 82 ▲ (+13) | 4351ms ▲ | 0.000 · | 85ms ▲ | 510ms ▲ |
-| /blog/telework-gap-tokyo-6x 🚨 | 80 ▼ (-10) | 3901ms ▼ | 0.000 · | 225ms ▼ | 5ms ▼ |
-| /about 🚨 | 89 · | 3152ms ▲ | 0.000 · | 226ms ▼ | 4ms ▼ |
+| / 🚨 | 72 | 3001ms | 0.391 | 60ms | 8ms |
+| /ranking 🚨 | 68 ▼ (-25) | 6028ms ▼ | 0.000 · | 94ms ▼ | 3ms ▼ |
+| /areas | ERROR | | | | |
+| /themes 🚨 | 69 ▼ (-9) | 5840ms ▼ | 0.000 · | 214ms ▲ | 4ms ▼ |
+| /search | ERROR | | | | |
+| /themes/population-dynamics 🚨 | 60 ▼ (-22) | 3677ms ▼ | 0.386 · | 275ms ▼ | 30ms ▼ |
+| /themes/local-economy 🚨 | 66 ▼ (-8) | 3526ms ▲ | 0.385 · | 138ms ▲ | 14ms ▼ |
+| /themes/labor-wages 🚨 | 62 ▼ (-29) | 2926ms ▼ | 0.386 · | 342ms ▼ | 26ms ▲ |
+| /ranking/total-population 🚨 | 37 ▼ (-11) | 6526ms ▼ | 0.355 · | 434ms ▲ | 1960ms ▼ |
+| /ranking/annual-sunshine-duration 🚨 | 33 ▼ (-8) | 8354ms ▼ | 0.013 · | 3819ms ▼ | 1646ms ▲ |
+| /ranking/future-population-change-rate-2050 🚨 | 24 ▼ (-31) | 7201ms ▼ | 0.341 · | 1188ms ▼ | 1561ms ▼ |
+| /ranking/agricultural-output 🚨 | 30 ▼ (-9) | 5251ms ▲ | 0.364 · | 960ms ▲ | 1818ms ▼ |
+| /areas/13000 🚨 | 23 ▼ (-15) | 5926ms ▲ | 0.413 · | 2640ms ▼ | 633ms ▲ |
+| /areas/27000 | ERROR | | | | |
+| /areas/01000 🚨 | 36 ▼ (-10) | 5251ms ▼ | 0.413 · | 839ms ▲ | 610ms ▲ |
+| /areas/47000 🚨 | 34 ▼ (-15) | 4351ms ▲ | 0.413 · | 1371ms ▼ | 813ms ▼ |
+| /blog 🚨 | 67 ▼ (-15) | 3153ms ▲ | 0.353 · | 253ms ▼ | 416ms ▲ |
+| /blog/telework-gap-tokyo-6x 🚨 | 70 ▼ (-10) | 2926ms ▲ | 0.226 · | 474ms ▼ | 6ms ▼ |
+| /about 🚨 | 70 ▼ (-19) | 3151ms · | 0.230 · | 436ms ▼ | 3ms ▲ |
 
 ## 💻 Desktop
 
 | URL | Perf | LCP | CLS | TBT | TTFB |
 |---|---|---|---|---|---|
-| / | 96 ▼ (-2) | 661ms · | 0.000 · | 4ms ▲ | 9ms ▼ |
-| /ranking | ERROR | | | | |
-| /areas | 97 ▲ (+6) | 1180ms ▲ | 0.000 · | 18ms ▲ | 3ms ▼ |
-| /themes | 97 ▼ (-2) | 1122ms ▼ | 0.000 · | 0ms ▲ | 2ms · |
-| /search 🚨 | 65 ▼ (-34) | 736ms ▼ | 0.000 · | 2190ms ▼ | 6ms ▲ |
-| /themes/population-dynamics | 93 ▼ (-2) | 822ms ▼ | 0.000 · | 165ms ▼ | 34ms ▲ |
-| /themes/local-economy ⚠️ | 90 ▼ (-4) | 681ms ▼ | 0.000 · | 219ms ▼ | 12ms ▲ |
-| /themes/labor-wages 🚨 | 88 ▼ (-2) | 721ms ▼ | 0.000 · | 185ms ▲ | 25ms ▲ |
-| /ranking/total-population 🚨 | 61 ▲ (+7) | 1583ms ▲ | 0.013 · | 771ms ▼ | 1567ms ▲ |
-| /ranking/annual-sunshine-duration 🚨 | 68 ▼ (-6) | 1826ms ▲ | 0.051 · | 348ms ▼ | 2025ms ▼ |
-| /ranking/future-population-change-rate-2050 🚨 | 74 ▲ (+27) | 1222ms ▲ | 0.061 · | 375ms ▲ | 1709ms ▲ |
-| /ranking/agricultural-output 🚨 | 59 ▼ (-6) | 1507ms ▲ | 0.059 · | 1026ms ▼ | 1609ms ▼ |
-| /areas/13000 🚨 | 45 ▲ (+1) | 1185ms ▼ | 0.341 · | 1559ms ▲ | 1354ms ▼ |
-| /areas/27000 🚨 | 54 ▲ (+4) | 884ms ▲ | 0.312 · | 695ms ▲ | 1082ms ▲ |
-| /areas/01000 🚨 | 55 ▼ (-12) | 1042ms ▼ | 0.312 · | 549ms ▼ | 928ms ▼ |
-| /areas/47000 🚨 | 49 ▲ (+7) | 1004ms ▲ | 0.341 · | 833ms ▲ | 968ms ▲ |
-| /blog | 99 ▲ (+17) | 641ms ▲ | 0.000 · | 48ms ▲ | 508ms ▼ |
-| /blog/telework-gap-tokyo-6x | 99 · | 862ms ▲ | 0.000 · | 32ms ▼ | 3ms ▲ |
-| /about ⚠️ | 91 ▼ (-8) | 615ms ▼ | 0.000 · | 236ms ▼ | 2ms · |
+| / | ERROR | | | | |
+| /ranking | 92 | 769ms | 0.000 | 179ms | 3ms |
+| /areas 🚨 | 87 ▼ (-10) | 1279ms ▼ | 0.013 · | 216ms ▼ | 3ms · |
+| /themes 🚨 | 80 ▼ (-17) | 721ms ▲ | 0.021 · | 432ms ▼ | 4ms ▼ |
+| /search | ERROR | | | | |
+| /themes/population-dynamics 🚨 | 85 ▼ (-8) | 481ms ▲ | 0.000 · | 304ms ▼ | 16ms ▲ |
+| /themes/local-economy 🚨 | 77 ▼ (-13) | 641ms ▲ | 0.000 · | 358ms ▼ | 25ms ▼ |
+| /themes/labor-wages | ERROR | | | | |
+| /ranking/total-population 🚨 | 80 ▲ (+19) | 1732ms ▼ | 0.023 · | 214ms ▲ | 1907ms ▼ |
+| /ranking/annual-sunshine-duration 🚨 | 80 ▲ (+12) | 1821ms ▲ | 0.051 · | 181ms ▲ | 1375ms ▲ |
+| /ranking/future-population-change-rate-2050 🚨 | 60 ▼ (-14) | 1557ms ▼ | 0.056 · | 850ms ▼ | 1425ms ▲ |
+| /ranking/agricultural-output 🚨 | 63 ▲ (+4) | 1415ms ▲ | 0.061 · | 700ms ▲ | 1576ms ▲ |
+| /areas/13000 | ERROR | | | | |
+| /areas/27000 | ERROR | | | | |
+| /areas/01000 🚨 | 51 ▼ (-4) | 985ms ▲ | 0.312 · | 850ms ▼ | 807ms ▲ |
+| /areas/47000 🚨 | 44 ▼ (-5) | 1313ms ▼ | 0.341 · | 1322ms ▼ | 608ms ▲ |
+| /blog | 96 ▼ (-3) | 722ms ▼ | 0.000 · | 139ms ▼ | 463ms ▲ |
+| /blog/telework-gap-tokyo-6x ⚠️ | 92 ▼ (-7) | 807ms ▲ | 0.000 · | 213ms ▼ | 6ms ▼ |
+| /about | 100 ▲ (+9) | 641ms ▼ | 0.000 · | 8ms ▲ | 3ms ▼ |
 
 ## 全履歴
 

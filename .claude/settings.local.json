@@ -150,7 +150,8 @@
       "Bash(sed -i 's/generate-article-charts\\\\.mjs/generate-article-charts.ts/g' \\\\ *)",
       "Bash(sed -n '/export function buildGroundTruth/,/^}/p' .claude/scripts/lib/article-factual-check.mjs)",
       "Bash(sed -n '/function checkRankClaims/,/^}/p' .claude/scripts/lib/article-factual-check.mjs)",
-      "Bash(cd /home/user/stats47 *)"
+      "Bash(cd /home/user/stats47 *)",
+      "mcp__Claude_Code_Remote__send_later"
     ],
     "defaultMode": "bypassPermissions"
   }
