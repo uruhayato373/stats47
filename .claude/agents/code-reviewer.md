@@ -1,3 +1,8 @@
+---
+name: code-reviewer
+description: feature/packages/型安全性/App Router層/セキュリティのコードレビューを担当する縮退エージェント（ページ横断UI一貫性レビューはui-consistency-reviewerへ分離済）。機能追加後・リファクタ後・広告機能変更後にコード品質を確認するときに使う。
+---
+
 # Code Reviewer Agent
 
 > **[移行ステータス]** 本 agent は feature / packages / types / app / security コード review を担当する縮退役割に変更。 ページ横断 UI 一貫性 review (`/review-feature --scope ui-consistency`) は `ui-consistency-reviewer` に分離。 詳細: `.claude/agents/README.md` 移行ステータス表。

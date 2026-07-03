@@ -118,3 +118,25 @@ _Auto-stub by `.claude/scripts/lib/append-improvement-log.mjs`_
 - **未確定 / 仮説**: 自動 stub。Append-only ルールに従い、後続で更新する場合は新エントリを追加
 
 _Auto-stub by `.claude/scripts/lib/append-improvement-log.mjs`_
+
+---
+
+### [CWV-RANKING-LCP-01] ranking mobile LCP — map tile preload を lg 以上に限定 (判定確定)
+
+- **デプロイ日**: 2026-06-02 頃 (commit 1b09ae45、バックログ記載。PSI 実測で 06-03 から改善開始)
+- **想定効果**: mobile で不要な map tile preload を排除し ranking 詳細の LCP 改善
+- **検証コマンド**: `awk -F',' '$2 ~ /ranking\// && $3=="mobile" {print $1,$2,$6}' .claude/state/metrics/psi/history.csv`
+- **実測 (2026-07-03 取得, `.claude/state/metrics/psi/history.csv`)**: ranking 詳細 4 URL mobile LCP 平均
+  10,252ms (2026-05-25〜06-02, n=30) → 6,898ms (06-03〜06-12, n=22) → 6,734ms (06-14〜06-23, n=28) → 6,833ms (07-02, n=4)
+- **判定**: `effect/partial` [根拠: -34% 改善が 4 週持続。ただし 06-13 の PERF-OPENNEXT-CACHE-01 / PERF-D3-BUNDLE-01 と後半交絡・good 閾値 2,500ms 未達]
+- **未確定 / 仮説**: **[仮説]** 残り ~4,300ms のギャップは LCP 要素自体 (チャート/画像) 由来。**検証コマンド**: PSI API で `lighthouseResult.audits['largest-contentful-paint-element']` を取得し要素特定。**検証期日**: 次回 PSI 深掘り施策の起票時
+
+### [CWV-THEMES-CLS-01] ThemeDashboardTabbed Suspense fallback CLS 除去 (判定確定)
+
+- **デプロイ日**: 2026-06-06
+- **検証コマンド**: `awk -F',' '$2 ~ /themes/ && $3=="mobile" {print $1,$2,$7}' .claude/state/metrics/psi/history.csv`
+- **実測 (2026-07-03 取得, `.claude/state/metrics/psi/history.csv`)**: themes 詳細 3 URL mobile CLS 0.263-0.288 (06-03/06-04) → **0.000 が 06-06〜06-23 の全日次計測で持続**
+- **判定**: `effect/full` [根拠: 安定 baseline (0.263-0.288) からの明確な改善が 17 日間持続。因果確定]
+- **未確定 / 仮説**: ★**新規回帰を検出**: 2026-07-02 計測で themes 詳細 mobile CLS 0.386 (06-23 は 0.000、06-24〜07-01 は PSI 欠測)。本施策後 17 日間 0 のため**別原因**。**[仮説]** 06-24〜07-02 のデプロイに CLS 要因が混入。**検証コマンド**: `git log --oneline --since=2026-06-24 --until=2026-07-02` の範囲を bisect + PSI 再計測。**検証期日**: 2026-07-10 (新規施策として起票)
+
+_Appended by improvement-triage 2026-07-03_

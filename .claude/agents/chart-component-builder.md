@@ -5,6 +5,7 @@ description: >
   テーマ・ダッシュボードに新しいチャートを追加するとき、または既存の独自実装を
   共通コンポーネントに統合するときに使う。
   chart-component-standards.md のカタログを単一ソースとして管理する。
+model: sonnet
 ---
 
 # Chart Component Builder Agent

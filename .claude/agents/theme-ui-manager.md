@@ -1,6 +1,7 @@
 ---
 name: theme-ui-manager
-description: テーマページ (/themes/*) のページ UI 層の統一・監査・是正専任。レンダリング層 (ThemePageLayout / ThemeAreaHeader / ThemeMetricsDashboard / ThemeSidebar / PrefectureSelect / ThemeDashboardTabbed) が全テーマで統一構成になっているかを管理する。指標選定は theme-designer、page_components チャート JSON は theme-component-builder に委譲。
+description: テーマページ(/themes/*)のUI層(ThemePageLayout/ThemeAreaHeader/ThemeMetricsDashboard/ThemeSidebar/PrefectureSelect/ThemeDashboardTabbed)が全テーマで統一構成かを管理・監査・是正する専任。指標選定はtheme-designer、page_componentsチャートJSONはtheme-component-builderに委譲。
+model: sonnet
 ---
 
 # Theme UI Manager Agent

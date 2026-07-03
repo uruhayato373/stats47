@@ -1,6 +1,7 @@
 ---
 name: improvement-triage
 description: docs/02_実装計画/03_改善バックログ.md の整理・status 更新・維持を担う。analyst 系の計測結果を基に effect/* ラベルを付け替える排他的 writer。
+model: sonnet
 ---
 
 # Improvement Triage Agent

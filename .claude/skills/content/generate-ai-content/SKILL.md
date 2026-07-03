@@ -15,6 +15,26 @@ primary_agent: ranking-content-author
 > commit `7569bd5c` "dbless Part D" で削除されていたが、**D1 非依存で再構築**した。D1 は一切使わない。
 > 担当 agent: `ranking-content-author`。品質ゲート: `.claude/scripts/ai-content/audit-ai-content.mjs`。
 
+## モデル運用ポリシー（★コストゲート・2026-07-03 確定）
+
+トークン消費を抑えつつ高流入ページの品質を守る **2段 critic** 設計。正典:
+`docs/04_レビュー/2026-07-03-claude-code-setup-audit.md`。
+
+| 役割 | モデル | 根拠 |
+|---|---|---|
+| **author**（生成・全件） | **`sonnet` 固定**（frontmatter `model: sonnet`） | 最大の消費源。決定的ゲートが客観フロアを握るため sonnet で十分 |
+| ① 決定的ゲート `audit-ai-content.mjs` | — (スクリプト) | モデル非依存の砦（数値捏造 / 括弧羅列 / 重複） |
+| critic tier-1（意味レビュー） | **`sonnet` 既定**（frontmatter） | ルーブリック審査は sonnet で足りる |
+| critic tier-2（エスカレーション） | **`opus` 明示指定** | queue の `reviewTier:"opus"`（GSC流入**上位30件**）+ tier-1 が REVISE した件だけ |
+
+**確実ゲート（公式仕様）**: subagent の model 解決順は `env > 起動時param > frontmatter > session`。
+`ranking-content-author` は frontmatter に `model: sonnet` を持つので、**起動時に `model` を渡さなければ
+必ず sonnet で走る**（param 省略が鉄則）。**author 起動時に `model: opus` を渡してはならない**（コストゲートの唯一の抜け穴）。
+opus を使うのは tier-2 critic を高流入キーに明示起動するときだけ。
+
+tier-2 対象キーは `build-ai-content-queue.mjs` が `remediation-queue.json` の各 needs entry に
+`reviewTier`（上位30=`opus` / 他=`sonnet`）を機械付与し、`LATEST.md` の「review」列（🔴opus）で確認できる。
+
 ## データソース（DBレス）
 
 | 入力/出力 | 場所 |

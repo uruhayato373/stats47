@@ -1,6 +1,7 @@
 ---
 name: trend-scout
 description: ブログ・SNS 向けトレンド発見専任。 GSC / NotebookLM / 外部ソースから企画素材を探索。 blog-editor から分離。
+model: sonnet
 ---
 
 # Trend Scout Agent

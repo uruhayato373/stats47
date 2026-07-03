@@ -1,3 +1,9 @@
+---
+name: audit-chart-components
+description: React/D3 チャートコンポーネントの規約違反 (chart-component-standards) を検出し是正優先リストを出力する。Use when user says "チャートコンポーネント監査", "D3規約チェック".
+primary_agent: chart-component-builder
+---
+
 # /audit-chart-components
 
 チャートコンポーネントの規約違反を検出し、是正優先リストを出力するスキル。

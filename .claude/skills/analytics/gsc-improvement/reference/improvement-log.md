@@ -13,6 +13,18 @@ GSC（Google Search Console）の継続的追跡と改善施策の記録。
 - **想定効果は必ず根拠を併記**（過去事例 / Google 公式ガイド / 計算式）
 - **実測値は取得コマンドへのリンク併記**
 
+## [TRIAGE-2026-07-03] 期日到達施策の effect/* 確定 (improvement-triage)
+
+期日到達済み施策をバックログ (`docs/02_実装計画/03_改善バックログ.md`) と同期して判定確定。実測ソースは各行に併記。
+
+- **BLOG-WAVE-2026-05-25-auto → effect/none 確定**: 実測 W21→W26 clicks 127→94 (-33) / imp -787 / CTR 1.12%→0.89% (下記 §BLOG-WAVE-2026-05-25-auto の 2026-06-28 自動計測)。同期間サイト全体 clicks +75% (1,110→1,947, `.claude/state/metrics/gsc/history.csv`) の中で対象 53 記事のみ減 = 想定リフト (+131 clicks/週) 未達。**[仮説]** title reframe が既得 query との整合を崩した (下落上位: temperature-extremes -31 / price-index -22 / child-height -10 clicks)。**検証コマンド**: 対象 slug を W22/W26 の `snapshots/*/queries.csv` で query 別 diff。**検証期日**: 2026-07-12 (weekly-review)
+- **BLOG-WAVE-2026-05-29-auto → effect/none 確定**: 実測 W21→W26 clicks 7→5 (-2) / imp 1,258→881 (-377)。position 4 記事全て悪化 (+0.5〜+1.7)。サイト全体 +75% 成長下で横ばい以下
+- **SEO-TITLE-FIX-01 → effect/partial 確定**: 対象 /areas/ 群 GSC clicks 4→50 / imp 671→5,249 (W21→W26, `snapshots/{2026-W21,2026-W26}/pages.csv` を `awk '$1 ~ /\/areas\//'` で集計、取得日 2026-07-03)。ただし area-category +705 URL index化 (W23)・AREA-PROFILE-FIX-01 解消と交絡し単独寄与は分離不能
+- **BLOG-CTR-05 → effect/none 確定**: 3 記事 (child-height/manufacturing-aichi/temperature-extremes) W22→W26 clicks 59→11 / imp 5,882→2,337。temperature-extremes は position 9.14→9.03 でほぼ不変なのに CTR 1.31%→0.38% と急落。/category は imp 89→281 (W23→W26) と増加だが clicks 5→6。**[仮説]** title 変更による CTR 悪化 (query mix 変化の交絡あり)。**検証期日**: 2026-07-12
+- **INDEXING-AUTO-01 → effect/pending 継続 (期日 2026-07-14 に再設定)**: cron 稼働は実測 (`resubmit-history.json` 累計 7,635 success・最終 2026-07-02) だが、判定基準の coverageState 遷移を測る URL Inspection が未実行 (`url-inspection/history.csv` 最終 2026-06-06)。**検証コマンド**: `node .claude/scripts/gsc/url-inspection-daily.cjs --limit 50`
+- **COVERAGE-LOOP-01 → effect/pending (期日 2026-07-14 に再設定)**: 件数減判定に必要な次週 GSC UI export が未取込 (`.claude/state/gsc/coverage-totals-history.csv` は 2026-W25 の 1 行のみ)。次: 人間 export → `ingest-gsc-export.py` + `build-coverage-queue.mjs`
+- **COVERAGE-DEACT-01 → effect/partial 確定**: 意図した空200→410 は本番実測で達成 — `curl -s -o /dev/null -w "%{http_code}" -A Googlebot https://stats47.jp/ranking/{marine-aquaculture-output,university-advancement}` → 410 (2026-07-03)。**副作用**: 同時の一括棚卸し (gone-ranking-keys.ts +398 キー, commit a179526) が実データ保有 56 キーを誤GONE化し本番 410 誤配信 → 2026-07-03 全復帰 (births/marriages/ratio-65-plus = 200 実測、同 curl)。再発防止は ranking-key-consistency.test.ts (GONE∩KNOWN=∅ / GONE∩isActive=∅ を CI 検証)。GSC soft404/404 減 + imp 回復は RANKING-GONE-RESTORE-01 (期日 2026-07-31) で追跡
+
 ## [BLOG-WAVE-2026-06-10-manual]
 
 - **status**: effect/pending (人間が 2-4 週連続観測で確定 / evidence-based-judgment.md)

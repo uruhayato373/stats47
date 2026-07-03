@@ -1,6 +1,7 @@
 ---
 name: estat-researcher
 description: e-Stat API と MLIT データプラットフォームの探索・メタデータ確認を行う read-only エージェント。DB 投入は data-ingester に委譲。
+model: sonnet
 ---
 
 # e-Stat Researcher Agent

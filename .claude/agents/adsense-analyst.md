@@ -1,6 +1,7 @@
 ---
 name: adsense-analyst
 description: AdSense / アフィリエイト収益計測専任。 seo-auditor から分離 + 新規 (アフィリエイト管理)。 改善ログ更新は improvement-triage に委譲。
+model: sonnet
 ---
 
 # AdSense Analyst Agent

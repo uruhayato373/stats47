@@ -54,3 +54,15 @@ agent 用詳細ログ。施策一覧 (簡易表) は `docs/02_実装計画/03_�
 - **未確定 / 仮説**:
   - **[仮説]** ranking で impression が発生し始める。ただし categoryKey と登録 banner の一致率次第 (AFF-01 でゼロ 8 軸が確認済)。
   - **[次アクション]** GA4 管理画面でカスタムディメンション `affiliate_category` / `link_position` を登録 → `affiliate-ga4-weekly.yml` dispatch → `hasCustomDimensions: true` で内訳確認。
+
+---
+
+## [TRIAGE-2026-07-03] AFF-02 / AFF-03 期日到達の判定 (improvement-triage)
+
+- **AFF-02 (広告ゼロ 8 軸の在庫補充) → pending 継続 (期日 2026-07-19 に再設定)**:
+  - **実測 (2026-07-03)**: `.claude/state/ads/inventory-2026-06-28.json` の `coverage.gapCategories` = 8 軸のまま (agriculture / miningindustry / commercial / educationsports / safetyenvironment / international / infrastructure / ict)。active 68 枠 / 9 軸カバーで AFF-01 baseline (2026-06-04: 72 枠 / 9 軸) からゼロ軸は不変
+  - 人間 (uruhayato373) の ASP 提携・banner 登録待ち
+- **AFF-03 (ランキングページのバナー枠) → effect/pending 継続 (期日 2026-06-28 → 2026-07-26 に再設定)**:
+  - **実測 (2026-07-03)**: `.claude/state/ads/ga4-affiliate-2026-06-28.json` = `dimensions: []`・`hasCategoryBreakdown: false` → GA4 custom dimension (`affiliate_category` / `link_position`) が**依然未登録**で ranking ページ帰属の実測不能
+  - 総計 (28 日): ad_impression 8,637 / affiliate_click 11 / CTR 0.13% (ページ・枠の内訳なし)
+  - **次アクション**: 人間が GA4 管理画面でイベントスコープ custom dimension 2 件を登録 → 翌週 `affiliate-ga4-weekly.yml` 実行で内訳確認 → ranking impression 発生を判定

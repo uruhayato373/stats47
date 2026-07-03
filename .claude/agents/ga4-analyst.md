@@ -1,6 +1,7 @@
 ---
 name: ga4-analyst
 description: GA4 専任 (fetch + improvement)。 seo-auditor から分離。 改善ログ更新は improvement-triage に委譲。
+model: sonnet
 ---
 
 # GA4 Analyst Agent

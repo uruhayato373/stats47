@@ -1,6 +1,7 @@
 ---
 name: gis-pipeline-runner
 description: KSJ GIS パイプライン実行専任 (seed → download → TopoJSON 変換 → R2 保存 → build state 更新)。SSOT 編集は gis-curator、R2 push は r2-publisher に委譲。完全DBレス: ローカル SQLite は git TS から再生成する使い捨てキャッシュ。
+model: sonnet
 ---
 
 # GIS Pipeline Runner Agent
