@@ -23,9 +23,8 @@
  *   - 本当に廃止したい → config を isActive:false にし、KNOWN を再生成
  *     (`apps/web/scripts/generate-known-ranking-keys.ts`) してから GONE に追加
  */
-import { describe, expect, it } from "vitest";
-
 import { listAllMetrics } from "@stats47/data-configs/registry";
+import { describe, expect, it } from "vitest";
 
 import { GONE_RANKING_KEYS } from "@/config/gone-ranking-keys";
 import { GONE_TAG_KEYS } from "@/config/gone-tag-keys";
