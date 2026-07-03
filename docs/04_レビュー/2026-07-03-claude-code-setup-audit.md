@@ -63,11 +63,11 @@ tags: [claude-code, settings, hooks, mcp, skills, agents, context, security]
 | 3 | **agent に `model:` 付与** (haiku 2 / sonnet 30 / inherit 8) | ✅ 完了 (4cc2bf4 他) |
 | 3 | commands 保留の実体確認 → 壊れた4本削除 (未実装 dangling) | ✅ 完了 (commands 0本) |
 | 3 | ~~critic に tools: で read-only 強制~~ | ✕ 機構不成立 (§3-2)・スキップ |
-| 3 | `.claude/state/` サイズ予算 CI (>15MB warn + 世代 prune) | ⬜ 未 (○ 肥大歯止め) |
-| 4 | PostToolUse formatter (Edit/Write 後 prettier/eslint --fix) | ⬜ 未 (△ 任意) |
-| 4 | memory prune 運用 (2026-04 以前の解決済 feedback を四半期アーカイブ) | ⬜ 未 (△ 任意) |
-| 4 | output-styles 新設 (出力トーンの定型化) | ⬜ 未 (△ 任意) |
-| — | `instagram-mf-day2.yml` / `.agent/` (廃止D1内容) 削除 | ⬜ 未 (○ 死骸) |
+| 3 | `.claude/state/` サイズ予算 CI (>15MB で WARN Issue・自動prune はしない) | ✅ 完了 (weekly wf に追加) |
+| 4 | PostToolUse formatter (Edit/Write 後 prettier/eslint --fix) | ⬜ 見送り (pre-commit が既にカバー・毎編集を重くする) |
+| 4 | memory prune 運用 (2026-04 以前の解決済 feedback を四半期アーカイブ) | ⬜ 見送り (△ 任意・恒常指示未特定) |
+| 4 | output-styles 新設 (出力トーンの定型化) | ⬜ 見送り (恒常的な出力指示が未特定・入力待ち) |
+| — | `instagram-mf-day2.yml` / `.agent/sync-d1-to-remote.md` (廃止内容) 削除 | ✅ 完了 |
 | — | APIキー履歴 purge (filter-repo) | ⬜ オーナー判断 (キー無効化が本質) |
 
 **Phase 0-3 中核は完了・push 済み** (settings 安全化 / frontmatter 16件 / commands 全廃 /

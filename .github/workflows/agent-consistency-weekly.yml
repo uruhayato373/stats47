@@ -99,3 +99,42 @@ jobs:
               --label "auto-generated" \
               --body-file /tmp/coverage-issue.md
           fi
+
+      - name: 📦 Check .claude/state size budget (肥大歯止め・WARN のみ)
+        # git 追跡下の .claude/state/ が肥大すると clone/checkout が重くなる (監査 2026-07-03: 13MB)。
+        # 予算 15MB 超で auto-generated Issue を起票し人間に prune 判断を促す。
+        # ★自動削除はしない: resubmit-history 等は GSC dedup が消費する履歴で、機械的な世代 prune は
+        #   誤爆リスクがある (どの世代が安全に落とせるかは意味判断)。WARN に留める。
+        id: statesize
+        run: |
+          SIZE_MB=$(du -sm .claude/state 2>/dev/null | cut -f1)
+          echo "state_mb=$SIZE_MB" >> "$GITHUB_OUTPUT"
+          echo ".claude/state = ${SIZE_MB}MB (予算 15MB)"
+          find .claude/state -type f -size +512k -exec du -h {} \; | sort -rh | head -15
+
+      - name: 🚨 Create issue on state bloat
+        if: ${{ steps.statesize.outputs.state_mb != '' && fromJSON(steps.statesize.outputs.state_mb) > 15 }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TITLE="[Consistency Alert] .claude/state が予算超過 (${{ steps.statesize.outputs.state_mb }}MB > 15MB)"
+          EXISTING=$(gh issue list --label "auto-generated" --state open \
+            --search "state が予算超過 in:title" --json number --jq '.[0].number // empty')
+          {
+            echo ".claude/state/ が予算 15MB を超えました (${{ steps.statesize.outputs.state_mb }}MB)。clone/checkout が重くなります。"
+            echo ""
+            echo "対処 (人間判断・自動削除しない): 古い世代 snapshot / history CSV のアーカイブ・間引きを検討。"
+            echo "消費側 (GSC dedup 等) が参照する履歴を消さないこと。"
+            echo ""
+            echo '```'
+            find .claude/state -type f -size +512k -exec du -h {} \; | sort -rh | head -20
+            echo '```'
+          } > /tmp/state-issue.md
+          if [ -n "$EXISTING" ]; then
+            gh issue comment "$EXISTING" --body-file /tmp/state-issue.md
+          else
+            gh issue create \
+              --title "$TITLE" \
+              --label "auto-generated" \
+              --body-file /tmp/state-issue.md
+          fi
