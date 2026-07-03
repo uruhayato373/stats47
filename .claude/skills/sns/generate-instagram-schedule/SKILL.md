@@ -66,7 +66,7 @@ node .claude/scripts/instagram/generate-schedule.cjs \
 
 3. 不足アセットがある場合:
    - ranking 画像: `/render-sns-stills` → `/push-r2 sns/ranking/<key>`
-   - bar-chart-race リール: `/render-bar-chart-race` → `/push-r2 sns/bar-chart-race/<key>`
+   - bar-chart-race リール: `/bar-chart-race --step render` → `/push-r2 sns/bar-chart-race/<key>`
 
 ## 参照スクリプト
 

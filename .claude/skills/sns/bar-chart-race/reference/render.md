@@ -1,10 +1,6 @@
----
-name: render-bar-chart-race
-description: Bar Chart Race 動画を一括レンダリングする（YouTube/X）。Use when user says "バーチャートレースレンダリング", "BCR レンダリング". Chrome 必須.
-disable-model-invocation: true
-primary_agent: youtube-strategist
-co_agents: [sns-renderer]
----
+# BCR reference: render (レンダリング)
+
+> `/bar-chart-race --step render` の詳細手順。スキル本体は `../SKILL.md`。Chrome 必須。
 
 `.local/r2/sns/bar-chart-race/` 配下の Bar Chart Race 動画を一括レンダリングする。
 

@@ -16,7 +16,7 @@ tags: [localfinance, sns]
 
 ## 地方財政テーマの SNS コンテンツ案
 
-### Ranking（静止画+ショート動画）— `/render-sns-stills` + `/post-sns-captions`
+### Ranking（静止画+ショート動画）— `/render-sns-stills` + `/post-x` / `/post-ig-6angles`
 
 既にDBにある指標から、SNS映えする順に生成・投稿する。
 
@@ -37,7 +37,7 @@ tags: [localfinance, sns]
 | S-13 | bonus-admin-prefecture | 公務員のボーナス | 問いかけ型 | 「公務員のボーナス、あなたの県は？」 |
 | S-14 | avg-salary-police-prefecture | 警察官 平均給与月額 | 衝撃事実型 | 「警察官の月給が最も高い県は？」 |
 
-### Bar Chart Race（時系列動画）— `/generate-bar-chart-race` + `/render-bar-chart-race`
+### Bar Chart Race（時系列動画）— `/bar-chart-race`（--step generate|render|captions）
 
 複数年度データがある指標で「変化」を見せる。
 

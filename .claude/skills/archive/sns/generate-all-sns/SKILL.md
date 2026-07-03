@@ -1,12 +1,14 @@
 ---
 name: generate-all-sns
-description: 指定ランキングキーの全 SNS コンテンツ（data.json → キャプション → 動画・画像）を一括生成する。Use when user says "SNS一括生成", "全SNS生成". data.json → キャプション → レンダリングをワンストップ実行.
+description: "[ARCHIVED 2026-07-04] 旧「全SNS一括生成」量産スキル。チャネル別戦略へ移行し退役。"
 disable-model-invocation: true
-argument-hint: <rankingKey> [--skip-render] [--skip-captions]
-user-invocable: true
+user-invocable: false
 primary_agent: instagram-strategist
-co_agents: [x-strategist]
 ---
+
+> **⚠️ ARCHIVED (2026-07-04)**: 量産時代の一括生成。正典は `.claude/rules/sns-content-standards.md`。
+> チャネル別に post-x / render-sns-stills / bar-chart-race を使い、週次運用は `/sns-weekly-plan`。
+> 復活する場合はこのバナーを外して skills/sns/ に戻す。
 
 指定したランキングキーの全 SNS コンテンツを一括生成する統合スキル。
 data.json 生成 → 全プラットフォームのキャプション生成 → 全動画・画像レンダリングをワンストップで実行する。

@@ -22,9 +22,9 @@ Instagram アカウント「統計で見る都道府県 | @stats47jp」の投稿
 |---|---|
 | `/post-instagram` | Graph API 経由で stats47jp に画像 / カルーセル / リールを自動投稿（即時投稿のみ） |
 | `/fetch-instagram-data` | Graph API から投稿一覧・アカウントインサイト・投稿別メトリクスを取得 |
-| `/update-sns-metrics --platform instagram` | Graph API で最新メトリクスを取得し D1 `sns_posts` + snapshots CSV に記録 |
-| `/post-sns-captions` | 全 SNS キャプション一括生成（Instagram 部分） |
-| `/generate-all-sns` | Instagram 用画像（正方形 1080×1080 / 縦長 1080×1350）・キャプション一括生成 |
+| `/update-sns-metrics --platform instagram` | Graph API で最新メトリクスを取得し posts.json + snapshots CSV に記録 |
+| `/generate-instagram-schedule` | 週次配信スケジュール生成（カルーセル2+リール1・重複防止内蔵）→ GHA cron が自動投稿 |
+| `/post-ig-6angles` | 6 角度フレームで IG カルーセル/画像を量産（角度別キャプション + スライドコピー） |
 | `/react-to-news` | **じじネタ→即SNS の瞬発力パイプライン**。トレンド語→指標発見→ IG縦長 1080×1350 PNG(`<key>-ig.png`)+caption を記事不要で数秒生成（quick-still）。投稿前に `/push-r2` で本番R2へ push（公開URL要求） |
 | `/mark-sns-posted` | 投稿済みステータスを DB に記録、ローカル R2 から削除 |
 | `/push-r2` | 投稿前に画像・動画をローカル R2 → 本番 R2（`storage.stats47.jp`）に push（API は公開 URL を要求） |
@@ -189,7 +189,7 @@ Slide 6: 出典・更新日 + 「保存してね」+ 「プロフィールから
 |---|---|
 | トレンド→Instagram 投稿 | `blog-editor`（discover-trends）→ `instagram-strategist`（/post-instagram） |
 | ランキング追加 → Instagram | `data-ingester`（TS-config 追加 + /page-data-batch）→ `sns-renderer`（/render-sns-stills）→ `instagram-strategist`（/push-r2 + /post-instagram） |
-| bar-chart-race → リール投稿 | `sns-renderer`（/render-bar-chart-race）→ `instagram-strategist`（/post-instagram --type reels） |
+| bar-chart-race → リール投稿 | `youtube-strategist`/`sns-renderer`（/bar-chart-race --step render）→ `instagram-strategist`（/post-instagram --type reels） |
 | 週次パフォーマンス振り返り | `instagram-strategist`（/fetch-instagram-data）→ `strategy-advisor`（/weekly-review） |
 
 ## 制約事項・注意点

@@ -30,7 +30,7 @@ X の UI は頻繁に変わるため、セレクタが壊れていると **予�
 
 ## 用途
 
-- `/post-x` または `/post-sns-captions` でキャプション生成済みのコンテンツを X に予約投稿したいとき
+- `/post-x` でキャプション生成済みのコンテンツを X に予約投稿したいとき
 - scheduled 状態のストックをまとめて消化したいとき
 
 ## 引数
@@ -79,7 +79,7 @@ npx tsx .claude/skills/sns/publish-x/publish-x.ts migration-flow-aichi \
    ```bash
    npx playwright install chromium
    ```
-2. **キャプション・画像が生成済み**（`/post-x` or `/post-sns-captions` で生成）:
+2. **キャプション・画像が生成済み**（`/post-x` で生成）:
    - `.local/r2/sns/<domain>/<contentKey>/x/caption.txt`
    - `.local/r2/sns/<domain>/<contentKey>/x/stills/*.png`
 3. **永続プロファイル**: `.local/playwright-x-profile/` に X ログインセッションが保存されている

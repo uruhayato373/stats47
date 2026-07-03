@@ -1,11 +1,10 @@
----
-name: post-compare-captions
-description: 2地域比較動画の全 SNS キャプションを一括生成しローカルに保存する。Use when user says "比較キャプション", "compare キャプション". versus/question テンプレート対応.
-disable-model-invocation: true
-primary_agent: sns-metrics-sync
----
+# Compare reference: captions (キャプション生成)
 
-2地域比較（Compare）動画の全 SNS キャプションを一括生成してローカルに保存する。
+> `/generate-compare --step captions` の詳細手順。スキル本体は `../SKILL.md`。
+> **TikTok は撤退済み** (`.claude/rules/sns-content-standards.md` §1) — 下記 TikTok セクションは生成しない。
+> 生成対象は X / Instagram / YouTube (月1) のみ。UTM は rules §4。
+
+2地域比較（Compare）動画の SNS キャプションを生成し posts.json に draft 登録する。
 
 ## 引数
 

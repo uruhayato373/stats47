@@ -61,7 +61,6 @@ $ARGUMENTS — [--type <name>] [type 固有の引数...]
 
 ## 関連スキル（実データ生成系）
 
-- `/generate-bar-chart-race` — Bar Chart Race の config + data 生成
-- `/generate-compare` — 比較データ生成
-- `/render-sns-stills` — SNS 静止画一括レンダリング
-- `/render-bar-chart-race` — Bar Chart Race 動画レンダリング
+- `/bar-chart-race` — Bar Chart Race の生成→レンダ→キャプション統合 (`--step generate|render|captions`)
+- `/generate-compare` — 比較データ生成 + キャプション (`--step data|captions`)
+- `/render-sns-stills` — SNS 静止画/動画一括レンダリング
