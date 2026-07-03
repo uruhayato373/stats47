@@ -178,3 +178,7 @@ inspect-knip.js
 
 # 再生成可能な D1 投入 SQL (seed-to-d1-sql.ts で生成)
 packages/database/seed/d1-seed.sql
+
+# マシンローカルの Claude Code 設定 (permissions 許可履歴・ローカルパス入り。git 共有しない)
+# 2026-07-03 セットアップ監査: API キー混入で追跡解除 (settings.json が共有側の正)
+.claude/settings.local.json

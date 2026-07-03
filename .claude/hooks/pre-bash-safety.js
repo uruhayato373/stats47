@@ -7,13 +7,14 @@
  * Claude Code の hooks.PreToolUse で実行される。
  *
  * 入力: stdin から JSON { tool_name, tool_input: { command } }
- * 出力: stdout に JSON { decision: "allow" | "block", reason? }
+ * 出力: block 時のみ stdout に hookSpecificOutput.permissionDecision="deny" を返す
+ *       (旧 { decision } 形式は deprecated のため 2026-07-03 に現行スキーマへ更新)
  */
 
 const DANGEROUS_PATTERNS = [
   // データ損失
   { pattern: /rm\s+-rf\s+[\/~]/, reason: "rm -rf でルートまたはホームを削除しようとしています" },
-  { pattern: /git\s+push\s+--force/, reason: "git push --force はリモート履歴を破壊します" },
+  { pattern: /git\s+push\s+--force(?!-with-lease)/, reason: "git push --force はリモート履歴を破壊します (--force-with-lease は許可)" },
   { pattern: /git\s+reset\s+--hard/, reason: "git reset --hard は未コミット変更を破棄します" },
   { pattern: /DROP\s+TABLE/i, reason: "DROP TABLE はデータを完全に削除します" },
   { pattern: /DROP\s+DATABASE/i, reason: "DROP DATABASE はデータベースを完全に削除します" },
@@ -38,15 +39,21 @@ async function main() {
 
     for (const { pattern, reason } of DANGEROUS_PATTERNS) {
       if (pattern.test(command)) {
-        console.log(JSON.stringify({ decision: "block", reason }));
+        console.log(
+          JSON.stringify({
+            hookSpecificOutput: {
+              hookEventName: "PreToolUse",
+              permissionDecision: "deny",
+              permissionDecisionReason: reason,
+            },
+          }),
+        );
         return;
       }
     }
-
-    console.log(JSON.stringify({ decision: "allow" }));
+    // pass: 何も出力しない (通常の permission フローに委ねる。auto-approve しない)
   } catch {
-    // パースエラー時は許可（フックがブロッカーにならないように）
-    console.log(JSON.stringify({ decision: "allow" }));
+    // パースエラー時は素通し（フックがブロッカーにならないように）
   }
 }
 
