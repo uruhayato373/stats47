@@ -37,9 +37,8 @@
 
 ### [ADSENSE-FOOTER-02] footer 低効率枠の Multiplex 化
 
-- **デプロイ日**: コード準備 2026-07-03 (multiplex format 追加)。差し替えは slot ID 受領後
-- **変更**: `types.ts` に `multiplex` format + AD_SIZES 追加、`AdSenseAd.tsx` に `data-ad-format="autorelaxed"` 描画分岐 (minHeight 300px 予約で CLS 防止)、`AdSensePlaceholder.tsx` flexible 扱い
-- **残タスク**: 【人間】AdSense 管理画面で Multiplex ユニット作成 → slot ID 共有 → `constants.ts` の `RANKING_PAGE_FOOTER` / `CONTENT_FOOTER` の format/slotId を差し替え (利用側 9 ページ無変更)
+- **デプロイ日**: 2026-07-03 (全て)
+- **変更**: `types.ts` に `multiplex` format + AD_SIZES 追加、`AdSenseAd.tsx` に `data-ad-format="autorelaxed"` 描画分岐 (minHeight 300px 予約で CLS 防止)、`AdSensePlaceholder.tsx` flexible 扱い、`constants.ts` の `RANKING_PAGE_FOOTER` / `CONTENT_FOOTER` を Multiplex (slot 6137206504・横長・レスポンシブ) に差し替え。両 footer は同一ページに同時表示されないため 1 slot 共用
 - **想定効果**: footer 系 viewability 49.1% / 26.2% → 60%+ [根拠: コンテンツ末尾は「読み終えた読者」が滞留する位置で、関連コンテンツ型グリッドは通常レクタングルより滞在・操作を誘発する形式 (定量根拠なし=仮説)]
 - **検証コマンド**: `cat snapshots/<week>/units.csv` — footer 系ユニット行の viewability / 収益を before (W26: content-footer ¥3/49.1%、stats47-ranking ¥2/26.2%) と比較
 - **判定**: pending (差し替えデプロイ後 4 週)
