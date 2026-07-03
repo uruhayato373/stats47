@@ -11,6 +11,12 @@
  *   stale prerender で 200 を返す空 ranking」32 件を特定し追加。Google が soft404 判定していた発生源。
  *   middleware 410 で stale ページより前段で短絡し即時除去を促す。将来データ投入時は本 Set から削除して復帰可。
  *   一覧の真実源: .claude/state/gsc/coverage-remediation-queue.json の content_verdict=deactivate）
+ * 更新日: 2026-07-03（誤検知 3 件を active 復帰で削除: marine-aquaculture-harvest /
+ *   marine-fishery-catch / marine-fishery-output-value。いずれも KNOWN_RANKING_KEYS 登録済・
+ *   config isActive:true・R2 item.json/values.json に実データあり（COVERAGE-DEACT-01 の
+ *   06-16 追加より前の生成日時）で、本番で /ranking/marine-aquaculture-harvest が 410 になる
+ *   不具合をユーザー報告で検知。marine-aquaculture-output は KNOWN でも isActive でもなく
+ *   正しく gone のため維持）
  */
 export const GONE_RANKING_KEYS = new Set([
   "actual-road-length",
@@ -215,10 +221,7 @@ export const GONE_RANKING_KEYS = new Set([
   "life-expectancy-at-60-male",
   "local-government-final-consumption-expenditure-nominal-h27",
   "local-government-final-consumption-expenditure-real-h27",
-  "marine-aquaculture-harvest",
   "marine-aquaculture-output",
-  "marine-fishery-catch",
-  "marine-fishery-output-value",
   "marriages",
   "medical-expenses-per-person",
   "mobile-phone-contracts",
