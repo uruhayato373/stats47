@@ -30,7 +30,7 @@ description: テーマページ (/themes/*) のページ UI 層の統一・監�
 
 ## 正典スペック（このとおりに統一されているかを管理する）
 
-正典の詳細は `docs/02_実装計画/10_テーマダッシュボード強化.md`。以下はその UI 層の要約 = 監査基準。
+正典の詳細は `apps/web/src/features/theme-dashboard/README.md` と `docs/01_技術設計/15_デザインシステムSSOT.md`。以下はその UI 層の要約 = 監査基準。
 
 ### A. 汎用テーマ（hideMap=true・既定で全テーマ）
 `app/themes/[themeSlug]/page.tsx`（`local-finance` 専用ページを除く全テーマ）:
@@ -86,7 +86,7 @@ grep -L 'dynamic = "force-dynamic"' apps/web/src/app/themes/[themeSlug]/page.tsx
 3. `npx tsc --noEmit -p apps/web/tsconfig.json` と `cd apps/web && npx next lint --file <変更ファイル>` で検証。
 4. **localhost (`npm run dev:web`) で確認**。デプロイはしない（`.claude/rules/branch-workflow.md` の
    デプロイ規律: 変更ごとに本番デプロイしない。明示指示か本番固有問題の検証時のみ）。
-5. スペック自体を変える場合は **本ファイルと `docs/02_実装計画/10` を先に更新**（drift 防止）。
+5. スペック自体を変える場合は **本ファイルと `apps/web/src/features/theme-dashboard/README.md` を先に更新**（drift 防止）。
 
 ## 再発防止: スペック変更時に同期する依存ドキュメント（★必ず一括更新）
 
@@ -96,7 +96,7 @@ grep -L 'dynamic = "force-dynamic"' apps/web/src/app/themes/[themeSlug]/page.tsx
 
 | 依存先 | 旧前提が残ると | 同期すべき内容 |
 |---|---|---|
-| `docs/02_実装計画/10_テーマダッシュボード強化.md` | 正典が古くなる | アーキ表・データソース・local-finance 例外 |
+| `apps/web/src/features/theme-dashboard/README.md` | 正典が古くなる | アーキ表・データソース・local-finance 例外 |
 | `.claude/agents/theme-designer.md` | 指標を旧 UI 前提で設計 | 配置先（チャート付きカード）・role の表示先・地図の有無 |
 | `.claude/skills/theme/audit-theme-components/SKILL.md` | 監査基準が旧 KPI 前提 | 本体 KPI=R2 ranking / page_components との役割分担 |
 | `.claude/skills/theme/optimize-themes/SKILL.md` | 最適化が旧前提 | データソース・カード構成 |
@@ -105,7 +105,7 @@ grep -L 'dynamic = "force-dynamic"' apps/web/src/app/themes/[themeSlug]/page.tsx
 検出 grep（旧前提の残骸を探す）:
 ```bash
 grep -rn "地図タブ\|KPI は e-Stat API ベース\|ranking_data ベースの KPI は廃止\|dashboard-1" \
-  .claude/agents/theme-*.md .claude/skills/theme/ docs/02_実装計画/10_テーマダッシュボード強化.md
+  .claude/agents/theme-*.md .claude/skills/theme/ apps/web/src/features/theme-dashboard/README.md
 #  → ヒット 0 が正。ヒットしたら旧前提が残存＝是正対象。
 ```
 
@@ -118,7 +118,7 @@ grep -rn "地図タブ\|KPI は e-Stat API ベース\|ranking_data ベースの 
 - Agent 実行は `mode: "bypassPermissions"`。デプロイは勝手に行わない。
 
 ## 関連
-- 正典: `docs/02_実装計画/10_テーマダッシュボード強化.md`
+- 正典: `apps/web/src/features/theme-dashboard/README.md`
 - レイアウト: `apps/web/src/features/theme-dashboard/components/{ThemePageLayout,ThemeAreaHeader,ThemeMetricsDashboard,ThemeSidebar,PrefectureSelect,ThemePrefectureContext,ThemeDashboardTabbed}.tsx`
 - データ: `apps/web/src/features/theme-dashboard/lib/load-theme-data.ts`
 - bespoke: `apps/web/src/features/local-finance-dashboard/`

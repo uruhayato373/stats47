@@ -1,6 +1,8 @@
+import { PageShell } from "@/components/layout";
+
 export default function AreasListLoading() {
     return (
-        <div className="container mx-auto px-4 py-8">
+        <PageShell>
             <div className="animate-pulse space-y-6">
                 {/* タイトル */}
                 <div className="h-8 w-40 rounded bg-muted" />
@@ -11,12 +13,12 @@ export default function AreasListLoading() {
                         <div className="h-6 w-24 rounded bg-muted" />
                         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
                             {Array.from({ length: 6 }).map((_, j) => (
-                                <div key={j} className="h-16 rounded-lg bg-muted" />
+                                <div key={j} className="h-16 rounded-none bg-muted" />
                             ))}
                         </div>
                     </div>
                 ))}
             </div>
-        </div>
+        </PageShell>
     );
 }

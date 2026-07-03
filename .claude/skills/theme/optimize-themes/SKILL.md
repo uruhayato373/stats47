@@ -14,7 +14,7 @@ primary_agent: theme-component-builder
 - **1データ1コンポーネント**: 同じ指標は1つの chart_key を areas / theme で共有
 - **既存コンポーネント再利用優先**: areas にあるチャートは page_components に同じ chart_key を別行 INSERT するだけ
 - **e-Stat API 起点（指標の発見・選定）**: DB にデータがなくても e-Stat API から取得可能なら追加候補（これは「どの指標を追加するか」のオーサリング判断であり、runtime のデータ取得ではない）
-- **ダッシュボード本体の指標値は R2 から読む（2026-06-20 統一）**: `loadThemeData` が `app/ranking/<key>/values.json`（全年）を読み、`ThemeMetricsDashboard` の KPI カード・上位県バー・トレンドを描画する。**e-Stat ライブ取得はしない**（Workers ランタイムで失敗するため。正典: `docs/02_実装計画/10_テーマダッシュボード強化.md`）。`kpiDataByArea`（e-Stat estatParams プリフェッチ）は page_components の `kpi-card` コンポーネント専用で、ダッシュボード本体の KPI とは別経路。
+- **ダッシュボード本体の指標値は R2 から読む（2026-06-20 統一）**: `loadThemeData` が `app/ranking/<key>/values.json`（全年）を読み、`ThemeMetricsDashboard` の KPI カード・上位県バー・トレンドを描画する。**e-Stat ライブ取得はしない**（Workers ランタイムで失敗するため。正典: `apps/web/src/features/theme-dashboard/README.md`）。`kpiDataByArea`（e-Stat estatParams プリフェッチ）は page_components の `kpi-card` コンポーネント専用で、ダッシュボード本体の KPI とは別経路。
 
 ## 引数
 

@@ -156,7 +156,8 @@ ls -t docs/04_レビュー/*.md | head -5
 
 ## 参照
 
-- `docs/02_実装計画/02_実装ロードマップ.md` — KPI・スプリント目標
+- `docs/02_実装計画/00_INDEX.md` — 実装計画の現在地
+- `docs/02_実装計画/01_収益化マスタープラン.md` — KPI・Phase 目標
 - D1 `sns_posts` / `sns_metrics` テーブル — SNS 投稿状況・メトリクス
 - `.claude/skills/management/weekly-plan/SKILL.md` — 週次計画
 - 原典: Ognjen Boskovic の Growth Loops フレームワーク

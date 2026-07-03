@@ -1,6 +1,8 @@
+import { PageShell } from "@/components/layout";
+
 export default function BlogPostLoading() {
     return (
-        <div className="container mx-auto px-4 py-8">
+        <PageShell variant="reading">
             <div className="animate-pulse space-y-6">
                 {/* パンくず */}
                 <div className="h-4 w-48 rounded bg-muted" />
@@ -15,6 +17,6 @@ export default function BlogPostLoading() {
                     </div>
                 </div>
             </div>
-        </div>
+        </PageShell>
     );
 }

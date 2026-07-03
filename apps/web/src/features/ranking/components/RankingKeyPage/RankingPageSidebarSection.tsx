@@ -25,8 +25,8 @@ interface RankingPageSidebarSectionProps {
 function RankingPageSidebarSkeleton() {
   return (
     <div className="space-y-4 animate-pulse">
-      <div className="h-64 bg-muted rounded-lg" />
-      <div className="h-32 bg-muted rounded-lg" />
+      <div className="h-64 rounded-none bg-muted" />
+      <div className="h-32 rounded-none bg-muted" />
     </div>
   );
 }

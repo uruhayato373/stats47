@@ -1,11 +1,23 @@
 {
-  "hash": "2427231f2771925d5418a11b2eba7c3dfa99459de55cb688450261ca397fcee5",
-  "audited_at": "2026-06-29T11:26:26",
+  "hash": "b1ef7738e882bc17fef24960472de41ad590193303e003abe5a092cf7a7c367a",
+  "audited_at": "2026-07-02T22:38:56",
   "files": [
-    ".claude/skills/blog/trends-snapshots/trends-all-2026-06-25.md",
-    ".claude/skills/blog/trends-snapshots/trends-all-2026-06-26.md",
-    ".claude/skills/blog/trends-snapshots/trends-all-2026-06-27.md",
-    ".claude/skills/blog/trends-snapshots/trends-all-2026-06-28.md",
-    ".claude/skills/blog/trends-snapshots/trends-all-2026-06-29.md"
+    ".claude/agents/theme-designer.md",
+    ".claude/agents/theme-ui-manager.md",
+    ".claude/agents/ui-consistency-reviewer.md",
+    ".claude/skills/blog/trends-snapshots/trends-all-2026-06-30.md",
+    ".claude/skills/blog/trends-snapshots/trends-all-2026-07-01.md",
+    ".claude/skills/blog/trends-snapshots/trends-all-2026-07-02.md",
+    ".claude/skills/blog/trends-snapshots/trends-all-2026-07-03.md",
+    ".claude/skills/image-prompt/reference/catalog.md",
+    ".claude/skills/management/growth-loops/SKILL.md",
+    ".claude/skills/management/knowledge/SKILL.md",
+    ".claude/skills/management/monetization-strategy/SKILL.md",
+    ".claude/skills/management/monthly-plan/SKILL.md",
+    ".claude/skills/management/north-star-metric/SKILL.md",
+    ".claude/skills/management/pre-mortem/SKILL.md",
+    ".claude/skills/management/weekly-plan/SKILL.md",
+    ".claude/skills/management/weekly-review/SKILL.md",
+    ".claude/skills/theme/optimize-themes/SKILL.md"
   ]
 }

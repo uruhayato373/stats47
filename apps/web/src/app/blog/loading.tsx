@@ -1,8 +1,9 @@
+import { PageShell } from "@/components/layout";
 import { SurfaceCard } from "@/components/surface";
 
 export default function BlogListLoading() {
     return (
-        <div className="container mx-auto px-4 py-8">
+        <PageShell>
             <div className="animate-pulse space-y-6">
                 {/* パンくず */}
                 <div className="h-4 w-32 rounded bg-muted" />
@@ -20,6 +21,6 @@ export default function BlogListLoading() {
                     ))}
                 </div>
             </div>
-        </div>
+        </PageShell>
     );
 }

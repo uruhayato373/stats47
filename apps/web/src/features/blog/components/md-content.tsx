@@ -386,7 +386,7 @@ export function MDContent({ source, slug, relatedArticleTitles, affiliateBanners
     );
     return (
         <article
-            className="prose prose-zinc max-w-none [--tw-prose-body:#27272a] prose-pre:my-4 prose-pre:bg-slate-900 prose-pre:text-slate-100 prose-pre:border prose-pre:border-slate-700 prose-pre:shadow-sm prose-pre:p-4 prose-code:before:content-none prose-code:after:content-none"
+            className="blog-news-article prose prose-zinc max-w-none [--tw-prose-body:#27272a] prose-pre:my-4 prose-pre:bg-slate-900 prose-pre:text-slate-100 prose-pre:border prose-pre:border-slate-700 prose-pre:shadow-sm prose-pre:p-4 prose-code:before:content-none prose-code:after:content-none"
             suppressHydrationWarning
         >
             <ReactMarkdown

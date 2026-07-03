@@ -188,7 +188,7 @@ packages/database/
 >
 > 旧 D1 テーブル `stats_prefecture` / `stats_city` / `stats_port` / `stats_migration_flow` / `correlations` は **全 DROP 済** (Phase 7, 2026-05-28 で schema ファイルも削除)。観測値の SSOT は R2 (`app/stats/<metric>/{values,cities,ports,migration-flow-<year>}.json`)、metric メタの SSOT は TS-config (`packages/data-configs/src/metrics/<key>.ts`)、D1 `metrics` テーブルは TS-config の cache。
 >
-> 詳細: `.claude/rules/data-sqlite-ssot.md` / `.claude/rules/r2-storage-design.md` / `docs/01_技術設計/archive/10_Phase6_deprecation_log.md`
+> 詳細: `docs/01_技術設計/12_完全DBレス設計.md` / `.claude/rules/r2-storage-design.md`
 
 旧 3 層モデル (Phase 5 以前): `sources` → `metrics` → `stats_*`。1 観測 = 1 行の正規形を維持。
 

@@ -6,7 +6,7 @@
 
 - テーマに最適な指標の発見・選定（DB 登録済み + e-Stat API 未登録の両方）
 - 指標の役割設計（primary / secondary / context）。配置先は**チャート付き stats-card のグリッド**
-  （地図・タブは廃止。UI 層の統一は theme-ui-manager が管理 → `docs/02_実装計画/10_テーマダッシュボード強化.md`）
+  （地図・タブは廃止。UI 層の統一は theme-ui-manager が管理 → `apps/web/src/features/theme-dashboard/README.md`）
 - `IndicatorSet` TypeScript 定義の生成
 - 未登録指標の登録指示
 

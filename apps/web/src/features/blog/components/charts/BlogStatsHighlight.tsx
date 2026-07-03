@@ -110,7 +110,7 @@ export function BlogStatsHighlight(props: StatsHighlightConfig) {
             {top3.map((item) => (
               <div
                 key={item.name}
-                className="flex items-center justify-between p-3 rounded-lg bg-muted/40"
+                className="flex items-center justify-between rounded-none bg-muted/40 p-3"
               >
                 <div className="flex items-center gap-3">
                   <RankingRankBadge rank={item.rank} />

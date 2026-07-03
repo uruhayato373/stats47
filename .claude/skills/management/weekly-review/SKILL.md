@@ -258,9 +258,9 @@ node .claude/scripts/snapshot-weekly-metrics.mjs [YYYY-Www]
 6. **数値変化**: 記事数・SNS指標の週次差分
 7. **NSM 実験進捗**: Agent E の出力から、measure 候補と継続作業を抜き出して Phase 3 へ引き渡す
 
-### Phase 2.5: ロードマップ実測値の更新
+### Phase 2.5: 実測値の反映先確認
 
-`docs/02_実装計画/02_実装ロードマップ.md` の「現在のステータス」テーブルを、DB の実測値で更新する。
+旧 `docs/02_実装計画/02_実装ロードマップ.md` は廃止済み。実測値は `docs/02_実装計画/01_収益化マスタープラン.md` の Phase / KPI と、`docs/02_実装計画/03_改善バックログ.md` の effect 判定に反映する。
 
 #### 取得するデータ
 
@@ -605,7 +605,8 @@ node .claude/scripts/blog/analyze-winning-patterns.mjs   # CTR×構造特徴→f
 - `.claude/skills/analytics/gsc-improvement/reference/snapshots/` — GSC 週次 snapshot CSV + budgets.json（施策・観測は GitHub Issues `gsc-*` ラベル側）
 - `.claude/skills/analytics/ga4-improvement/reference/snapshots/` — GA4 週次 snapshot CSV + budgets.json（施策・観測は GitHub Issues `ga4-*` ラベル側）
 - `.claude/skills/analytics/adsense-improvement/reference/snapshots/` — AdSense 週次 snapshot CSV + budgets.json（施策・観測は GitHub Issues `adsense-*` ラベル側）
-- `docs/02_実装計画/02_実装ロードマップ.md` — KPI・スプリント目標
+- `docs/02_実装計画/00_INDEX.md` — 実装計画の現在地
+- `docs/02_実装計画/01_収益化マスタープラン.md` — KPI・Phase 目標
 - DB `sns_posts` / `sns_metrics` テーブル — SNS コンテンツ状況・メトリクス
 - `.claude/skills/analytics/fetch-ga4-data/SKILL.md` — GA4 データ取得手順（snapshot モード）
 - `.claude/skills/analytics/fetch-gsc-data/SKILL.md` — GSC データ取得手順（snapshot モード）
