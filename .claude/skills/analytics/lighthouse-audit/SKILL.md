@@ -5,7 +5,7 @@ disable-model-invocation: true
 argument-hint: "[--strategy mobile|desktop] [--file urls.txt]"
 allowed-tools: Read, Bash, Grep
 primary_agent: performance-auditor
-co_agents: [seo-auditor]
+co_agents: [gsc-analyst]
 ---
 
 # /lighthouse-audit — CWV 計測（PSI に統合済）

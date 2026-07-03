@@ -28,8 +28,10 @@ import { describe, expect, it } from "vitest";
 import { listAllMetrics } from "@stats47/data-configs/registry";
 
 import { GONE_RANKING_KEYS } from "@/config/gone-ranking-keys";
+import { GONE_TAG_KEYS } from "@/config/gone-tag-keys";
 import { INDEXABLE_RANKING_KEYS } from "@/config/indexable-ranking-keys";
 import { KNOWN_RANKING_KEYS } from "@/config/known-ranking-keys";
+import { KNOWN_TAG_KEYS } from "@/config/known-tag-keys";
 import { SITEMAP_RANKING_KEYS } from "@/config/sitemap-ranking-keys";
 
 function intersection(a: ReadonlySet<string>, b: ReadonlySet<string>): string[] {
@@ -86,5 +88,16 @@ describe("ranking キーリスト集合整合性", () => {
     }
     // ベースライン 5 件 (2026-07-03) から大幅増加したら生成スクリプトの退行を疑う
     expect(polluted.length).toBeLessThanOrEqual(10);
+  });
+});
+
+describe("tag キーリスト集合整合性 (ranking と同型のドリフト防御)", () => {
+  it("GONE_TAG ∩ KNOWN_TAG = ∅（410 対象タグが配信中リストに存在しない）", () => {
+    const conflict = intersection(GONE_TAG_KEYS, KNOWN_TAG_KEYS);
+    expect(
+      conflict,
+      `GONE_TAG と KNOWN_TAG の両方に登録された矛盾キー ${conflict.length} 件。` +
+        `復活したタグは GONE_TAG_KEYS から削除すること。`,
+    ).toEqual([]);
   });
 });
