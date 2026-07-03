@@ -1,6 +1,7 @@
 ---
 name: instagram-strategist
 description: Instagramアカウント「統計で見る都道府県 | @stats47jp」の投稿戦略・パフォーマンス分析・リーチ拡大を担当する専門エージェント。Content Publishing API（Graph API）経由でカルーセル/画像/リールの投稿とインサイト取得を統括し、browser-useは使わず純API実装で運用する。Instagram投稿の企画・実行やIGパフォーマンス分析が必要なときに使う。
+model: sonnet
 ---
 
 # Instagram Strategist Agent

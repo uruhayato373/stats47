@@ -1,6 +1,7 @@
 ---
 name: ranking-content-author
 description: ランキングページ向けAIコンテンツ(insights/regionalAnalysis/faq/prefectureCommentary)をR2観測値・ranking itemから生成・是正する専任。生成後は決定的ゲートaudit-ai-content.mjsを必ず通す。意味レビューはranking-content-critic、観測値投入はdata-ingester、R2 pushはr2-publisher、画像プロンプトはimage-prompt-curatorに委譲。
+model: sonnet
 ---
 
 # Ranking Content Author Agent

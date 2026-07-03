@@ -1,6 +1,7 @@
 ---
 name: article-writer
 description: 1 つの metric を受け取って統計記事 1 本を完成させる専門エージェント。GSC 起点の量産フローで複数 metric を並列実行するための単位 agent。
+model: sonnet
 ---
 
 # Article Writer Agent

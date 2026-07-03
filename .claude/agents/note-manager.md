@@ -1,6 +1,7 @@
 ---
 name: note-manager
 description: note.com記事の公開ライフサイクル管理（公開URLトラッキング・投稿後state記録・メモリ更新）を担当する縮退エージェント（記事テキスト生成・編集・チャート生成は各分離スキル/chart-authorへ委譲済）。note記事の公開後にstateを記録するときに使う。
+model: sonnet
 ---
 
 # Note Manager Agent

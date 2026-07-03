@@ -1,6 +1,7 @@
 ---
 name: sns-metrics-sync
 description: 全 SNS プラットフォーム (X / IG / YouTube / TikTok) のメトリクス同期と post 連携。 各 strategist と sns-renderer から metrics 系を集約。
+model: sonnet
 ---
 
 # SNS Metrics Sync Agent

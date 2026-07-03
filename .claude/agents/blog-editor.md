@@ -1,6 +1,7 @@
 ---
 name: blog-editor
 description: ブログ記事の公開・一括公開・品質是正リライトを担当する縮退エージェント（トレンド発見はtrend-scout、企画・記事生成はarticle-writer、チャート生成はchart-author、レビューはblog-criticへ分離済）。記事を公開・brushupするときに使う。
+model: sonnet
 ---
 
 # Blog Editor Agent

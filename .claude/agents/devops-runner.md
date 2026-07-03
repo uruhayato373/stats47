@@ -1,6 +1,7 @@
 ---
 name: devops-runner
 description: ユニット/E2Eテスト実行、型チェック、feature→develop→mainのマージとデプロイ、Git履歴リセット、新規スキル作成ガイド、アフィリエイトバナー登録を担当する。デプロイ・テスト実行・Git整理が必要なときに使う。
+model: sonnet
 ---
 
 # DevOps Runner Agent

@@ -48,9 +48,13 @@ tags: [claude-code, settings, hooks, mcp, skills, agents, context, security]
 2. **`tools:` は read-only を保証できない**: critic は判定成果物 `review.md` を書くため Write が要る。
    「審査対象は読むだけ・書くのは review.md だけ」は**パス制約**であって tools:(ツール allowlist) では表現不能。
    → Phase 3 の「critic に tools: で read-only 強制」は機構不成立でスキップ。read-only 保証は prose + critic-review-protocol.md の運用規律で担保。
-3. **commands の orphan 判定は要再確認**: subagent が「skill 実在せず」と判定した6本 (expert-review /
-   fetch-youtube-data / post-tiktok / post-youtube / proofread-article / render-ranking-images) は、ハーネスの
-   利用可能 skill 一覧には**実在**する。パス解決の食い違い。→ 保留し実体確認後に追加削除を判断。
+3. **commands の orphan 判定は要再確認 → 決着**: 冗長な53本は削除。残った4本
+   (fetch-youtube-data / post-tiktok / post-youtube / render-ranking-images) は指す SKILL.md が
+   repo のどこにも**実在しない壊れたポインタ**だった (ハーネスの利用可能一覧に出るのは commands/ 自体が
+   slash 公開されるため。skill 実体ではない)。invoke するとエラーになるため削除。**この4機能は未実装** =
+   将来 YouTube/TikTok 投稿・YouTube データ取得・ランキング画像生成が必要なら skill を新規作成する
+   (`.claude/skills/{sns,analytics,ranking}/<name>/SKILL.md`)。expert-review / proofread-article は
+   blog-review の `--mode` に統合済みで別途対応不要。
 
 ## 4. 残タスク (Phase 3-4)
 

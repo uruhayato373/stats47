@@ -1,6 +1,7 @@
 ---
 name: sns-renderer
 description: Remotionを使ったSNS用動画・静止画のレンダリングとStudioプレビュー設定を担当する縮退エージェント（メトリクス同期・キャプション投稿はsns-metrics-sync、画像プロンプト生成はimage-prompt-curatorへ分離済）。SNS素材のレンダリングやプレビューが必要なときに使う。
+model: sonnet
 ---
 
 # SNS Renderer Agent
