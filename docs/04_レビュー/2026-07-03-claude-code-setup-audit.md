@@ -56,19 +56,22 @@ tags: [claude-code, settings, hooks, mcp, skills, agents, context, security]
    (`.claude/skills/{sns,analytics,ranking}/<name>/SKILL.md`)。expert-review / proofread-article は
    blog-review の `--mode` に統合済みで別途対応不要。
 
-## 4. 残タスク (Phase 3-4)
+## 4. Phase 3 実施結果 + 残タスク
 
-| Phase | タスク | 有効性 |
+| Phase | タスク | 状態 |
 |---|---|---|
-| 3 | **agent に `model:` 付与** (機械系 fetch/整形=haiku|sonnet / 設計・review・critic=opus 継承) | ○ 実効コストレバー |
-| 3 | commands 保留6本の実体確認 → 有効なら追加削除 | ○ |
-| 3 | `.claude/state/` サイズ予算 CI (>15MB warn + 世代 prune) | ○ 肥大歯止め |
-| 3 | ~~critic に tools: で read-only 強制~~ | ✕ 機構不成立 (§3-2) |
-| 4 | PostToolUse formatter (Edit/Write 後 prettier/eslint --fix) | △ 任意 |
-| 4 | memory prune 運用 (2026-04 以前の解決済 feedback を四半期アーカイブ) を knowledge-curator に追加 | △ 任意 |
-| 4 | output-styles 新設 (出力トーンの定型化) | △ 任意 |
-| — | `instagram-mf-day2.yml` / `.agent/` (廃止D1内容) 削除 | ○ 死骸 |
-| — | APIキー履歴 purge (filter-repo) | オーナー判断 (キー無効化が本質) |
+| 3 | **agent に `model:` 付与** (haiku 2 / sonnet 30 / inherit 8) | ✅ 完了 (4cc2bf4 他) |
+| 3 | commands 保留の実体確認 → 壊れた4本削除 (未実装 dangling) | ✅ 完了 (commands 0本) |
+| 3 | ~~critic に tools: で read-only 強制~~ | ✕ 機構不成立 (§3-2)・スキップ |
+| 3 | `.claude/state/` サイズ予算 CI (>15MB warn + 世代 prune) | ⬜ 未 (○ 肥大歯止め) |
+| 4 | PostToolUse formatter (Edit/Write 後 prettier/eslint --fix) | ⬜ 未 (△ 任意) |
+| 4 | memory prune 運用 (2026-04 以前の解決済 feedback を四半期アーカイブ) | ⬜ 未 (△ 任意) |
+| 4 | output-styles 新設 (出力トーンの定型化) | ⬜ 未 (△ 任意) |
+| — | `instagram-mf-day2.yml` / `.agent/` (廃止D1内容) 削除 | ⬜ 未 (○ 死骸) |
+| — | APIキー履歴 purge (filter-repo) | ⬜ オーナー判断 (キー無効化が本質) |
+
+**Phase 0-3 中核は完了・push 済み** (settings 安全化 / frontmatter 16件 / commands 全廃 /
+MCP 3社へ / description 短縮 / agent model: 分配)。残りは死骸削除と任意の運用高度化のみ。
 
 ## 5. 実PC 側で別途取得すべき情報 (ローカルセッションで)
 
