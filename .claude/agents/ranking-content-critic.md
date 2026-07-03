@@ -47,6 +47,7 @@ description: ランキングページ AI コンテンツ (考察 / 地域別の�
 - ページ UI 層 → **ranking-ui-manager**。SEO 効果計測 → **gsc-analyst**。
 
 ## 必読 rules
+- `.claude/rules/critic-review-protocol.md` — **全 critic 共通のレビュープロトコル (分離原則 / verdict / 重大度 / Output Contract の正典)**
 - `.claude/rules/evidence-based-judgment.md` — 「品質低そう」推測の禁止、定量・具体箇所で指摘
 - `packages/ai-content/src/services/prompts/ranking-content-prompt.ts`（生成ルールの正典＝審査基準）
 

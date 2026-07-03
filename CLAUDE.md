@@ -89,6 +89,7 @@ CLAUDE.md 内に詳細を複製しない。状況に応じて参照する。
 | `skill-code-placement.md` | スクリプト新規作成 |
 | `local-environment.md` | 環境セットアップ・モノレポ構成・頻用コマンド |
 | `agent-output-contract.md` | Agent tool 起動時の prompt 設計 |
+| `critic-review-protocol.md` | critic 系 agent のレビュー共通プロトコル (新 critic 作成・review 実行時) |
 | `browser-use-cleanup.md` | browser-use を使うスキル |
 
 ### コアドキュメント
