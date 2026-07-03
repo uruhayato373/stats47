@@ -1,11 +1,9 @@
 {
-  "hash": "2427231f2771925d5418a11b2eba7c3dfa99459de55cb688450261ca397fcee5",
-  "audited_at": "2026-06-29T11:26:26",
+  "hash": "7fad54143661f1e3c5fed36a5dec7010cd93bc926b3b7a13b65e075edc631725",
+  "audited_at": "2026-07-03T05:08:26",
   "files": [
-    ".claude/skills/blog/trends-snapshots/trends-all-2026-06-25.md",
-    ".claude/skills/blog/trends-snapshots/trends-all-2026-06-26.md",
-    ".claude/skills/blog/trends-snapshots/trends-all-2026-06-27.md",
-    ".claude/skills/blog/trends-snapshots/trends-all-2026-06-28.md",
-    ".claude/skills/blog/trends-snapshots/trends-all-2026-06-29.md"
+    ".claude/skills/analytics/affiliate-improvement/reference/improvement-log.md",
+    ".claude/skills/analytics/gsc-improvement/reference/improvement-log.md",
+    ".claude/skills/analytics/performance-improvement/reference/improvement-log.md"
   ]
 }
