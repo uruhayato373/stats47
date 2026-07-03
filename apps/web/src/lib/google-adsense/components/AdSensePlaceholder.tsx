@@ -28,8 +28,8 @@ export function AdSensePlaceholder({
 }: AdSensePlaceholderProps) {
   const size = AD_SIZES[format];
 
-  // インフィードと記事内広告はフレキシブルなので、固定サイズを使用
-  const isFlexible = format === "infeed" || format === "article";
+  // インフィード・記事内広告・Multiplex はフレキシブルなので、固定サイズを使用
+  const isFlexible = format === "infeed" || format === "article" || format === "multiplex";
   const width = isFlexible ? 300 : size.desktop.width;
   const height = isFlexible ? 250 : size.desktop.height;
 

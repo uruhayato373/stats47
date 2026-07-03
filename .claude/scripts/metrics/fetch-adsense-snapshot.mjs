@@ -86,9 +86,12 @@ async function main() {
     "ACTIVE_VIEW_VIEWABILITY",
   ];
 
+  // PAGE_URL breakdown はページ毎に最低インプレッション閾値があり、閾値未満のページは
+  // 行が返らない (https://support.google.com/adsense/answer/11988478 2026-07-03 参照)。
+  // 7日窓では全ページ閾値未満で 0 行だったため、pages のみ 30 日窓で取得する (ADSENSE-PAGES-DATA-01)。
   const jobs = [
     { name: "overview", dims: [], file: "overview.csv" },
-    { name: "pages", dims: ["PAGE_URL"], file: "pages.csv" },
+    { name: "pages", dims: ["PAGE_URL"], file: "pages.csv", days: 30 },
     { name: "units", dims: ["AD_UNIT_NAME"], file: "units.csv" },
     { name: "devices", dims: ["PLATFORM_TYPE_NAME"], file: "devices.csv" },
     { name: "daily", dims: ["DATE"], file: "daily.csv" },
@@ -97,7 +100,12 @@ async function main() {
   const summary = [];
   try {
     for (const job of jobs) {
-      const report = await fetchReport(adsense, account, job.dims, METRICS, startDate, endDate);
+      let jobStart = startDate;
+      if (job.days) {
+        jobStart = new Date(endDate);
+        jobStart.setDate(endDate.getDate() - (job.days - 1));
+      }
+      const report = await fetchReport(adsense, account, job.dims, METRICS, jobStart, endDate);
       const rows = flatten(report);
       const headers = [...job.dims, ...METRICS];
       writeFileSync(join(outDir, job.file), toCsv(rows, headers));

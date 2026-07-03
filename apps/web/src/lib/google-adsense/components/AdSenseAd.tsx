@@ -37,7 +37,7 @@ export function AdSenseAd({
   className = "",
   showLabel = true,
   lazyLoad = true,
-  rootMargin = 100,
+  rootMargin = 600,
 }: AdSlotProps) {
   const adRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(!lazyLoad);
@@ -120,9 +120,15 @@ export function AdSenseAd({
   }
 
   const isArticleFormat = format === "article";
+  const isMultiplexFormat = format === "multiplex";
   // article (fluid/in-article) は 0×0 フレキシブルで getReservedMinHeight が 250px fallback を返すが、
   // 記事内広告は高さが予測困難なため 120px を確保して CLS を抑制する（infeed と同水準）。
-  const reservedMinHeight = isArticleFormat ? 120 : getReservedMinHeight(format);
+  // multiplex (autorelaxed) はグリッド型で高さが出るため 300px を予約する。
+  const reservedMinHeight = isArticleFormat
+    ? 120
+    : isMultiplexFormat
+      ? 300
+      : getReservedMinHeight(format);
 
   return (
     <div
@@ -143,6 +149,19 @@ export function AdSenseAd({
             style={{ display: "block", textAlign: "center" }}
             data-ad-layout="in-article"
             data-ad-format="fluid"
+            data-ad-client={clientId}
+            data-ad-slot={slotId}
+          />
+        ) : isMultiplexFormat ? (
+          // Multiplex（関連コンテンツ型グリッド）: Google 推奨の autorelaxed 構成
+          <ins
+            className="adsbygoogle"
+            style={{
+              display: "block",
+              width: "100%",
+              minHeight: `${reservedMinHeight}px`,
+            }}
+            data-ad-format="autorelaxed"
             data-ad-client={clientId}
             data-ad-slot={slotId}
           />
