@@ -50,7 +50,7 @@ user-invocable: false
 | デプロイ | `/deploy` | 「デプロイして」 |
 | コードレビュー | `/review-feature` (`--scope` で対象指定) | 「このコードレビューして」 |
 
-### 分析系 → seo-auditor
+### 分析系 → gsc-analyst / ga4-analyst / performance-auditor / sns-metrics-sync
 
 | キーワード・文脈 | スキル | 例 |
 |---|---|---|
@@ -59,7 +59,7 @@ user-invocable: false
 | YouTube/Instagram 指標 | `/fetch-youtube-data` / `/fetch-instagram-data` | 「YouTube再生数教えて」 |
 | パフォーマンス | `/lighthouse-audit` / `/performance-report` | 「サイト速度計測して」 |
 
-### テーマダッシュボード系 → theme-designer / theme-enhancer
+### テーマダッシュボード系 → theme-designer / theme-component-builder
 
 | キーワード・文脈 | スキル | 例 |
 |---|---|---|

@@ -2,7 +2,7 @@
 
 `.claude/agents/` に定義されたサブエージェント群。Agent tool の `subagent_type` または直接起動で利用する。
 
-**現在: Phase 1-5 完了 (37 体構成)**。並行運用最適化のため、ドメイン × フェーズで責務を細分化し、各 agent に「担当 skills / 必読 rules / 触る state」を明示している。旧 17 体のうち `data-pipeline` `db-manager` は Phase 6.7 整理で削除済 (-2)、新 18 agent 追加。差し引き 33 体。**2026-06-21 に ranking 系 4 体 (`ranking-ui-manager` / `ranking-publisher` / `ranking-content-author` / `ranking-content-critic`) を新設 (+4) → 37 体。**残る縮退 agent は新 agent に役割委譲済 (Session B で 4 件移動・24 件は責務上維持)。詳細は移行ステータス表。
+**現在: Phase 1-5 完了 + 2026-07-03 整理 (40 体構成)**。並行運用最適化のため、ドメイン × フェーズで責務を細分化し、各 agent に「担当 skills / 必読 rules / 触る state」を明示している。旧 17 体のうち `data-pipeline` `db-manager` は Phase 6.7 整理で削除済 (-2)、新 18 agent 追加。差し引き 33 体。**2026-06-21 に ranking 系 4 体 (`ranking-ui-manager` / `ranking-publisher` / `ranking-content-author` / `ranking-content-critic`) を新設 (+4)。2026-07-03 運営総点検で zombie 化した `seo-auditor` を削除し、実ファイルベースで 40 体に整合。**残る縮退 agent は新 agent に役割委譲済 (Session B で 4 件移動・24 件は責務上維持)。詳細は移行ステータス表。
 
 ## 設計思想
 
@@ -68,7 +68,7 @@
 | `performance-auditor` 🆕 | PSI / Lighthouse / Cloudflare cost | seo-auditor 分割 |
 | `adsense-analyst` 🆕 | AdSense / アフィリエイト収益計測 | seo-auditor 分割 + new |
 
-## Tier 6: Theme / UI (6 体)
+## Tier 6: Theme / UI (7 体)
 
 | agent | role | 派生元 |
 |---|---|---|
@@ -76,6 +76,7 @@
 | `theme-component-builder` | page_components 監査・INSERT (旧 theme-enhancer) | リネーム |
 | `theme-ui-manager` 🆕 | テーマページ UI 層の統一・監査・是正 (レイアウト/見出し/セレクタ/カード構成/コピー)。重複セレクタ・古い「地図」コピー等のドリフトを管理 | 2026-06-20 新設 |
 | `ranking-ui-manager` 🆕 | ランキングページ (/ranking/*) UI 層の統一・監査・是正 (レイアウト/見出し/パンくず/サイドバー/SEO構造化データ/コピー)。theme-ui-manager の ranking 版。データ=data-ingester、公開=ranking-publisher に委譲 | 2026-06-21 新設 |
+| `chart-component-builder` | shadcn UI + D3.js チャートコンポーネント実装・カタログ管理 (chart-component-standards.md が SSoT)。静的 SVG の chart-author とは別物 (React/D3 実装専任) | 既存 (2026-07-03 Tier 表へ追記・棚卸し漏れ是正) |
 | `ui-reviewer` | melta-ui 準拠 + UI panel review | 既存 |
 | `image-prompt-curator` 🆕 | OGP / note 表紙 / SNS 静止素材プロンプト生成 | sns-renderer + note-manager 分離 |
 
@@ -130,9 +131,9 @@
 | `data-pipeline` | **削除済 (2026-05-28)** | `estat-researcher` + `data-ingester` |
 | `db-manager` | **削除済 (2026-05-28)** | `db-schema-manager` + `snapshot-exporter` + `r2-publisher` + `data-ingester` |
 | `blog-editor` | 縮退予定 (Phase 3、publish 系のみ保持) | + `trend-scout` + `chart-author` + `blog-critic` (企画は article-writer に統合) |
-| `seo-auditor` | 縮退予定 (Phase 3) | `gsc-analyst` + `ga4-analyst` + `performance-auditor` + `adsense-analyst` |
+| `seo-auditor` | **削除済 (2026-07-03)** | `gsc-analyst` + `ga4-analyst` + `performance-auditor` + `adsense-analyst` (skill 参照の差し替え完了) |
 | `sns-renderer` | 役割縮退 (render 専任) | `sns-metrics-sync`, `image-prompt-curator` に分離 |
-| `theme-enhancer` | リネーム予定 (Phase 3) | `theme-component-builder` |
+| `theme-enhancer` | **リネーム済** | `theme-component-builder` |
 | `code-reviewer` | 役割縮退 (review-feature / security 専任) | `ui-consistency-reviewer` 分離 |
 | `note-manager` | 役割縮退 (note.com 専任) | `chart-author` に chart 委譲 |
 | `strategy-advisor` | 役割縮退 (NSM / 週次専任) | `knowledge-curator`, `improvement-triage` 分離 |
