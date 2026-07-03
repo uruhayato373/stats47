@@ -10,7 +10,8 @@ export type AdFormat =
   | "banner" // バナー（728x90 → 320x50 on mobile）
   | "skyscraper" // スカイスクレイパー（160x600）
   | "infeed" // インフィード広告
-  | "article"; // 記事内広告
+  | "article" // 記事内広告
+  | "multiplex"; // Multiplex（関連コンテンツ型グリッド、コンテンツ末尾向け）
 
 /**
  * 広告スロットのプロパティ
@@ -45,7 +46,10 @@ export interface AdSlotProps {
 
   /**
    * 遅延ロードの閾値（ピクセル）
-   * @default 100
+   *
+   * ビューポート手前この距離で広告リクエストを開始する。100px では表示前に
+   * 離脱され imp/PV が低かった (W26 実測 0.71) ため 600px に前倒し (ADSENSE-LAZYLOAD-01)。
+   * @default 600
    */
   rootMargin?: number;
 
@@ -90,5 +94,10 @@ export const AD_SIZES: Record<
     desktop: { width: 0, height: 0 }, // フレキシブル
     mobile: { width: 0, height: 0 }, // フレキシブル
     description: "記事内広告",
+  },
+  multiplex: {
+    desktop: { width: 0, height: 0 }, // フレキシブル（autorelaxed グリッド）
+    mobile: { width: 0, height: 0 }, // フレキシブル
+    description: "Multiplex（関連コンテンツ型グリッド）",
   },
 };
