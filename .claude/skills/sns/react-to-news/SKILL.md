@@ -90,7 +90,7 @@ npx tsx .claude/skills/sns/publish-x/publish-x.ts <key> <YYYY-MM-DDTHH:MM> \
 ## やらないこと (意図的)
 
 - **投稿の全自動化はしない** — Step 5 の安全ゲート(dry-run / push-r2)は事故防止のため人手確認を残す。
-- **動画生成は含めない** — bar-chart-race は 10-20 分/本で瞬発力に合わない。動画は別途 `/generate-bar-chart-race`。
+- **動画生成は含めない** — bar-chart-race は 10-20 分/本で瞬発力に合わない。動画は別途 `/bar-chart-race`。
 - **指標データを DB に持たない** — 発見索引は git TS から、観測値は R2 から。永続 DB は使わない (完全DBレス)。
 
 ## 関連
@@ -98,5 +98,5 @@ npx tsx .claude/skills/sns/publish-x/publish-x.ts <key> <YYYY-MM-DDTHH:MM> \
 - 発見索引: `.claude/scripts/sns/{build-discovery-index.ts,find-metrics.mjs,news-synonyms.json}`
 - 生成: `.claude/scripts/sns/quick-still.ts` (svg-builder `generateBarChartSvg` 再利用 / sharp で PNG 化)
 - 投稿: `/publish-x` `/post-instagram` `/push-r2` `/mark-sns-posted`
-- ranking 一括の既存統合: `/generate-all-sns` (data.json→全プラットフォーム caption→render、記事前提の重い版)
+- 週次でまとめて回す運用: `/sns-weekly-plan` (企画→生成→予約→計測)
 - 図の規約: `.claude/rules/blog-svg-chart-standards.md` (横960 / 縦1080)

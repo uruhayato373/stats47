@@ -59,15 +59,15 @@ node .claude/scripts/snapshot-weekly-metrics.mjs [YYYY-Www]
 調査項目:
 - .local/r2/blog/ 配下の記事一覧と最終更新日
   → 今週新規作成・更新された記事を特定
-- DB（sns_posts テーブル）から投稿実績を集計:
-  DB: .local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite
-  ```sql
-  -- 今週の投稿数（プラットフォーム別）
-  SELECT domain, platform, COUNT(*) FROM sns_posts WHERE status='posted' AND posted_at >= '<monday>' GROUP BY domain, platform;
-  -- 投稿待ちコンテンツ数
-  SELECT domain, platform, COUNT(*) FROM sns_posts WHERE status IN ('draft', 'scheduled') GROUP BY domain, platform;
-  -- 全体ステータス概況
-  SELECT domain, platform, status, COUNT(*) FROM sns_posts GROUP BY domain, platform, status;
+- 投稿台帳 `.claude/state/sns/posts.json` から投稿実績を集計 (完全DBレス。旧 D1 sns_posts は廃止):
+  ```bash
+  # 今週の投稿数 / 投稿待ち / 全体概況 (<monday> は ISO 文字列)
+  node -e 'const s=require("./.claude/scripts/lib/sns-posts-store.cjs");const M="<monday>";
+    const posted=s.query(p=>p.status==="posted"&&(p.posted_at||"")>=M);
+    const pending=s.query(p=>p.status==="draft"||p.status==="scheduled");
+    const cnt=(a,f)=>{const o={};for(const p of a){const k=f(p);o[k]=(o[k]||0)+1}return o};
+    console.log(JSON.stringify({今週posted:cnt(posted,p=>p.platform),投稿待ち:cnt(pending,p=>p.platform),
+      概況:cnt(s.loadAll(),p=>p.platform+"/"+p.status)},null,2))'
   ```
 - .local/r2/sns/ 配下の新規生成コンテンツ
 
@@ -88,15 +88,14 @@ node .claude/scripts/snapshot-weekly-metrics.mjs [YYYY-Www]
    SELECT COUNT(*) FROM articles WHERE published = 1;
    ```
 
-2. SNS 投稿実績（DB `sns_posts` テーブルから集計）
-   ```sql
-   -- プラットフォーム別ステータス集計
-   SELECT domain, platform, status, COUNT(*) FROM sns_posts GROUP BY domain, platform, status;
-   -- 今週の投稿
-   SELECT domain, platform, COUNT(*) FROM sns_posts WHERE status='posted' AND posted_at >= '<monday>' GROUP BY domain, platform;
-   -- コンテンツ種別別の投稿率
-   SELECT domain, COUNT(*) as total, SUM(CASE WHEN status='posted' THEN 1 ELSE 0 END) as posted FROM sns_posts GROUP BY domain;
+2. SNS 投稿実績（投稿台帳 `.claude/state/sns/posts.json` から集計。旧 D1 sns_posts は廃止）
+   ```bash
+   node -e 'const s=require("./.claude/scripts/lib/sns-posts-store.cjs");const M="<monday>";
+     const cnt=(a,f)=>{const o={};for(const p of a){const k=f(p);o[k]=(o[k]||0)+1}return o};
+     console.log(JSON.stringify({概況:cnt(s.loadAll(),p=>p.platform+"/"+p.status),
+       今週posted:cnt(s.query(p=>p.status==="posted"&&(p.posted_at||"")>=M),p=>p.platform)},null,2))'
    ```
+   - **SNS 週次運用の入口は `/sns-weekly-plan`**、SNS 週報は `/sns-weekly-report`。正典 `.claude/rules/sns-content-standards.md`
 
 3. GA4 snapshot 取得 → snapshot Issue 作成
    `/fetch-ga4-data last28d snapshot <当週 YYYY-Www>` を実行する。
@@ -159,25 +158,16 @@ node .claude/scripts/snapshot-weekly-metrics.mjs [YYYY-Www]
    → 前週データがある場合は増減を算出
 
 6. SNS パフォーマンス指標
-   - **最新値（プラットフォーム別集計）** は D1 `sns_posts` テーブルのキャッシュカラム（`impressions / likes / reposts / replies / bookmarks / metrics_updated_at`）から取得:
-     ```sql
-     -- 最新更新日を確認
-     SELECT MAX(metrics_updated_at) FROM sns_posts;
-     -- プラットフォーム別集計
-     SELECT platform,
-            COUNT(*) FILTER (WHERE status='posted') as posted_count,
-            SUM(COALESCE(impressions, 0)) as total_impressions,
-            SUM(COALESCE(likes, 0)) as total_likes,
-            SUM(COALESCE(replies, 0)) as total_comments,
-            SUM(COALESCE(reposts, 0)) as total_reposts
-     FROM sns_posts
-     WHERE status = 'posted'
-     GROUP BY platform;
-     -- インプレッション上位投稿（X）
-     SELECT content_key, impressions, likes, reposts
-     FROM sns_posts
-     WHERE platform='x' AND status='posted'
-     ORDER BY COALESCE(impressions, 0) DESC LIMIT 5;
+   - **最新値（プラットフォーム別集計）** は投稿台帳 posts.json のキャッシュカラム（`impressions / likes / reposts / replies / bookmarks / metrics_updated_at`）から取得（旧 D1 sns_posts は廃止）:
+     ```bash
+     node -e 'const s=require("./.claude/scripts/lib/sns-posts-store.cjs");
+       const posted=s.query(p=>p.status==="posted");
+       const acc={};for(const p of posted){const a=acc[p.platform]||={posted:0,impressions:0,likes:0,comments:0,reposts:0};
+         a.posted++;a.impressions+=p.impressions||0;a.likes+=p.likes||0;a.comments+=p.replies||0;a.reposts+=p.reposts||0}
+       const topX=s.query(p=>p.platform==="x"&&p.status==="posted").sort((a,b)=>(b.impressions||0)-(a.impressions||0)).slice(0,5)
+         .map(p=>({content_key:p.content_key,impressions:p.impressions,likes:p.likes,reposts:p.reposts}));
+       const maxU=Math.max(0,...posted.map(p=>Date.parse(p.metrics_updated_at||0)||0));
+       console.log(JSON.stringify({最終更新:maxU?new Date(maxU).toISOString():null,platform別:acc,X上位:topX},null,2))'
      ```
    - **時系列履歴（週次トレンド）** は `.claude/skills/analytics/sns-metrics-improvement/snapshots/YYYY-MM-DD/metrics.csv` から:
      ```bash

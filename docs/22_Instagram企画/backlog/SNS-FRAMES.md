@@ -72,7 +72,7 @@ X 投稿 4 種類 = RankingX-Chart, ChoroplethMap, CompareX-Post, CorrelationX-S
 
 ## 注意事項
 
-- 投稿実体は `/post-sns-captions` で週次バッチ起動
+- 投稿実体は `/sns-weekly-plan` の週次ルーチンで起動（IG は `/generate-instagram-schedule` / `/post-ig-6angles`）
 - 個別投稿企画化はしない（テーマ × 既存ランキング × フォーマット枠で運用）
 
 ## 関連

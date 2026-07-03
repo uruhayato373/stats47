@@ -12,15 +12,17 @@ user-invocable: false
 
 | キーワード・文脈 | スキル | 例 |
 |---|---|---|
-| YouTube 通常動画を作りたい・投稿したい | `/publish-youtube-normal` | 「外国人のYouTube動画作って」 |
-| SNS 投稿を作りたい | `/generate-all-sns` → `/render-sns-stills` | 「ランキングのSNS作って」 |
+| SNS を今週まわしたい | `/sns-weekly-plan` | 「今週のSNS」「SNS運用まわして」 |
+| SNS 投稿を作りたい (X) | `/post-x` → `/publish-x` | 「ランキングのX投稿作って」 |
+| SNS 投稿を作りたい (IG) | `/generate-instagram-schedule` / `/post-ig-6angles` | 「Instagram作って」 |
+| YouTube 動画を作りたい・投稿したい | `/bar-chart-race` → `/post-youtube` (月1・ガード3点) | 「YouTube動画作って」 |
 | ブログ記事のネタ探し | `/discover-trends --source all` | 「トレンド調べて」 |
 | ブログ記事を書きたい | `/draft-from-trend` | 「記事の企画立てて」 |
 | 記事を公開したい | `/publish-article` | 「この記事公開して」 |
 | note 記事を作りたい | note-manager に委譲 | 「note書いて」 |
-| X/TikTok/IG に投稿したい | `/publish-x` / `/publish-tiktok` / `/publish-instagram` | 「Xに投稿して」 |
-| キャプション生成 | `/post-sns-captions` | 「キャプション作って」 |
-| 動画をレンダリング | `/render-sns-stills` | 「動画レンダリングして」 |
+| X/IG に投稿したい | `/publish-x` / `/post-instagram` | 「Xに投稿して」 |
+| SNS 競合を調べたい | `/competitor-scan` | 「競合調べて」 |
+| 動画/静止画をレンダリング | `/render-sns-stills` (BCR は `/bar-chart-race`) | 「動画レンダリングして」 |
 
 ### データ系 → data-ingester / snapshot-exporter / r2-publisher
 
@@ -73,7 +75,7 @@ user-invocable: false
 例: 「新しいランキングを登録してSNS投稿まで全部やって」
 1. data-ingester: TS-config 追加 + `/sync-metrics-cache --apply` + `/page-data-batch --metric <key>`
 2. snapshot-exporter + r2-publisher: `/sync-snapshots`
-3. sns-producer: `/generate-all-sns`
+3. SNS: X は `/post-x` → `/publish-x`、IG は `/generate-instagram-schedule`、動画は `/bar-chart-race` (週次は `/sns-weekly-plan`)
 4. sns-renderer: `/render-sns-stills`
 5. sns-producer: `/publish-youtube-normal`
 6. browser-publisher: `/publish-x`, `/publish-tiktok`

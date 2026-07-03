@@ -49,15 +49,20 @@
 | `ranking-content-author` 🆕 | ranking ページの ai-content (考察/地域傾向/FAQ/県別解説) 生成・是正 + 決定的ゲート (audit-ai-content.mjs)。生成は image-prompt-curator/data-ingester から移管 | 2026-06-21 新設 |
 | `ranking-content-critic` 🆕 | ranking ai-content の意味レビュー (重複/読者価値/トーン)。read-only、修正は author に委譲。blog-critic の ranking 版 | 2026-06-21 新設 |
 
-## Tier 4: SNS (5 体)
+## Tier 4: SNS (primary 5 体 + trend-scout / strategy-advisor が SNS 責務を兼務)
+
+> SNS 実行規約の正典は `.claude/rules/sns-content-standards.md` (チャネル戦略・頻度・雛形・投稿台帳)。
+> 現行チャネル: **IG (主力・10K)** / **X (自動化 1-2K)** / **YouTube (月1慎重再開)** / **note (衛星)**。TikTok は撤退恒久。
 
 | agent | role | 派生元 |
 |---|---|---|
-| `x-strategist` | X 投稿・キャプション・分析 | 既存 |
-| `instagram-strategist` | IG 投稿・カルーセル・リール | 既存 |
-| `youtube-strategist` | YouTube 企画 → 公開 → 分析 | 既存 |
-| `sns-renderer` | Remotion 全レンダリング (metrics 同期と画像生成は分離) | 既存縮退 |
-| `sns-metrics-sync` 🆕 | 全プラットフォーム メトリクス同期 (`state/metrics/{sns,youtube}/`) | sns-renderer + 各 strategist 分離 |
+| `x-strategist` | X 投稿・キャプション・引用RT・分析 (`/post-x` `/publish-x` `/find-quote-rt` `/react-to-news`) | 既存 |
+| `instagram-strategist` | IG 投稿・カルーセル・リール (主力。`/generate-instagram-schedule` `/post-ig-6angles` `/post-instagram`) | 既存 |
+| `youtube-strategist` | **月1慎重再開のガード役** (`/post-youtube` `/bar-chart-race`。budget/duplicate/shadowban ガード) | 縮退 (2026-07) |
+| `sns-renderer` | Remotion レンダリング入口 (静止画/動画=`/render-sns-stills`、BCR=`/bar-chart-race --step render`、`/preview-remotion`=プレビュー専用) | 既存縮退 |
+| `sns-metrics-sync` | メトリクス同期・posted 印付け・週次レポート (caption 生成は各 strategist に返上) | sns-renderer + 各 strategist 分離 |
+| `trend-scout` | SNS 競合の定点観測 (`/competitor-scan`) も担当 | 既存拡張 |
+| `strategy-advisor` | SNS 週次運用ルーチン (`/sns-weekly-plan`) の orchestrator | 既存拡張 |
 
 ## Tier 5: SEO / Analytics / Monetization (5 体)
 
@@ -118,8 +123,10 @@
 | GSC 中位クエリ → 量産 | gsc-analyst → trend-scout → article-writer × N (並列, metric→R2直執筆) → chart-author → blog-editor (publish) |
 | 週次 PDCA | strategy-advisor (orchestrator) → gsc/ga4/adsense-analyst (3 並列) → improvement-triage |
 | トレンド → ブログ記事 | trend-scout → article-writer (metric→R2直執筆) → chart-author → blog-critic → blog-editor (publish) |
-| トレンド → IG リール | trend-scout → sns-renderer (render-bar-chart-race) → instagram-strategist |
-| YouTube 動画制作 | youtube-strategist → sns-renderer → sns-metrics-sync (公開後) |
+| SNS 週次運用 | strategy-advisor (/sns-weekly-plan) → sns-metrics-sync (先週計測) → trend-scout (題材) → x/instagram-strategist (生成・予約) |
+| トレンド → IG リール | trend-scout → sns-renderer (/bar-chart-race --step render) → instagram-strategist |
+| YouTube 月1動画 | youtube-strategist (/bar-chart-race 企画) → sns-renderer (render) → youtube-strategist (/post-youtube ガード3点) → sns-metrics-sync (公開後) |
+| SNS 競合調査 | trend-scout (/competitor-scan) → docs/04_レビュー |
 | コード変更 → デプロイ | code-reviewer + ui-consistency-reviewer + tdd-guide (3 並列) → devops-runner |
 | テーマダッシュボード設計 | theme-designer → data-ingester → theme-component-builder → ui-reviewer |
 

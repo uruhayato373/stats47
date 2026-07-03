@@ -22,9 +22,8 @@ X (Twitter) アカウント「統計で見る都道府県 | stats47」の投稿�
 | `/publish-x` | browser-use CLI で X への自動投稿・予約投稿 |
 | `/fetch-x-data` | X API v2 からメトリクス取得（インプレッション・いいね・RT） |
 | `/find-quote-rt` | バズツイート検索・stats47 データ照合・引用 RT 候補提示 |
-| `/post-sns-captions` | 全 SNS キャプション一括生成（X 部分） |
-| `/generate-all-sns` | X コンテンツ一括生成（data.json → キャプション → 画像） |
 | `/react-to-news` | **じじネタ→即SNS の瞬発力パイプライン**。トレンド語→指標発見（find-metrics・同義語辞書で語彙ギャップ吸収）→ 記事不要で X用PNG+caption 生成（quick-still）。トレンド連動投稿の主エンジン |
+| `/sns-weekly-plan` | 週次運用ルーチンの一環として X 予約を生成（strategy-advisor 起点） |
 
 ## browser-use CLI 設定
 
@@ -171,7 +170,7 @@ X のエンゲージメントはタイムラインの流速に依存する。フ
 | 通常投稿 | x-strategist（テーマ選定）→ sns-producer（data.json + キャプション）→ sns-renderer（画像生成）→ browser-publisher（`/publish-x`） |
 | トレンド連動投稿 | x-strategist（トレンド検知 + データマッチング）→ `/post-x`（キャプション）→ `/publish-x`（即時投稿） |
 | 引用 RT | `/find-quote-rt`（候補検索 + 照合）→ x-strategist（候補選定）→ `/publish-x --quote-url`（引用 RT 投稿、opt-in 動画添付）→ sns-metrics-sync（記録は publish-x が INSERT、後日 metrics） |
-| 一括生成 | `/generate-all-sns`（X 部分）→ x-strategist（配信計画）→ `/publish-x`（予約投稿） |
+| 週次運用 | `/sns-weekly-plan`（strategy-advisor 起点）→ `/post-x`（キャプション）→ `/publish-x`（予約投稿） |
 | パフォーマンス分析 | `/update-sns-metrics` → `/fetch-x-data` → x-strategist（分析・方針更新） |
 | ストック消化 | x-strategist（ストック棚卸し + 優先度付け）→ `/publish-x`（予約投稿）→ `/mark-sns-posted`（投稿済み記録） |
 
