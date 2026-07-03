@@ -1,0 +1,161 @@
+name: 📤 AI Content Publish (develop → R2)
+
+# ranking ai-content の「公開ブリッジ」(AICONTENT-02 の残配線・2026-07-03)。
+# クラウド / web 実行環境は R2 S3 creds を持たない (CI 専用) ため、生成した
+# AiContentSnapshotRow を git outbox (data/ai-content-staging/<rankingKey>.json) に置いて
+# develop へ push するだけで、本 workflow が決定的ゲート → R2 push → CDN purge →
+# outbox 掃除まで完結させる。blog-auto-publish.yml と同型 (git as transport / R2 が正典)。
+#
+# 安全装置:
+#   - push 前に audit-ai-content.mjs (機械フロア) を再検証し、blocker 持ちはスキップ
+#     (R2 に到達させない)。生成側の自己検査に依存しない権威ゲート。
+#   - 1 回の実行で公開する上限 MAX_PUBLISH 件 (爆発半径の限定)
+#   - outbox は ephemeral: 公開成功分は git rm + commit-back で常に空へ
+#
+# 生成側の手順 (どのセッションからでも):
+#   1. node .claude/scripts/ai-content/build-ai-content-queue.mjs --next 10 で対象選定
+#   2. ranking-content-author (並列可) が生成 + 自己 audit → data/ai-content-staging/<key>.json
+#   3. develop へ push → 本 workflow が自動発火
+# 正典: docs/02_実装計画/09_ランキング品質改修.md §3 / 04_機能バックログ.md [AICONTENT-DBLESS-REBUILD]
+
+on:
+  workflow_dispatch:
+    inputs:
+      keys:
+        description: "公開する rankingKey (空白/カンマ区切り)。空なら outbox 全件"
+        required: false
+        type: string
+  push:
+    branches: [develop]
+    paths:
+      - "data/ai-content-staging/*.json"
+      - ".github/workflows/publish-ai-content.yml"
+
+permissions:
+  contents: write # 公開後に outbox を自動削除して commit-back するため
+
+concurrency:
+  group: publish-ai-content
+  cancel-in-progress: false
+
+env:
+  R2_S3_ENDPOINT: https://${{ secrets.CLOUDFLARE_ACCOUNT_ID }}.r2.cloudflarestorage.com
+  R2_ACCESS_KEY_ID: ${{ secrets.CLOUDFLARE_R2_ACCESS_KEY_ID }}
+  R2_SECRET_ACCESS_KEY: ${{ secrets.CLOUDFLARE_R2_SECRET_ACCESS_KEY }}
+  CLOUDFLARE_R2_BUCKET_NAME: stats47
+  R2_PUBLIC_FETCH_URL: https://storage.stats47.jp
+  MAX_PUBLISH: "40"
+  CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+  CLOUDFLARE_ZONE_ID: ${{ secrets.CLOUDFLARE_ZONE_ID }}
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: 🧰 Checkout develop
+        uses: actions/checkout@v4
+        with:
+          ref: develop
+          fetch-depth: 2
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 🔍 Resolve target keys
+        id: detect
+        run: |
+          INPUT_KEYS="${{ inputs.keys }}"
+          if [ -n "$INPUT_KEYS" ]; then
+            CANDIDATES=$(echo "$INPUT_KEYS" | tr ', ' '\n\n' | sed '/^$/d')
+          else
+            CHANGED=$(git -c core.quotepath=false diff --name-only --diff-filter=ACM "HEAD~1" "HEAD" \
+              | grep -E '^data/ai-content-staging/[a-z0-9-]+\.json$' || true)
+            CANDIDATES=""
+            for f in $CHANGED; do CANDIDATES="$CANDIDATES $(basename "$f" .json)"; done
+            # reconcile: 変更検出 0 なら outbox 残存全件を backfill (取りこぼし self-heal)
+            if [ -z "$(echo $CANDIDATES | xargs)" ] && [ -d data/ai-content-staging ]; then
+              echo "変更検出 0 → outbox 残存の backfill モード"
+              CANDIDATES=$(ls data/ai-content-staging/*.json 2>/dev/null | xargs -n1 basename 2>/dev/null | sed 's/\.json$//' || true)
+            fi
+          fi
+          KEYS=""
+          for key in $CANDIDATES; do
+            [ -f "data/ai-content-staging/$key.json" ] && KEYS="$KEYS $key" || echo "skip (file not found): $key"
+          done
+          KEYS=$(echo $KEYS | xargs -n1 2>/dev/null | head -n "${MAX_PUBLISH}" | xargs || true)
+          echo "keys=$KEYS" >> "$GITHUB_OUTPUT"
+          echo "公開対象 (上限 ${MAX_PUBLISH}): ${KEYS:-なし}"
+
+      - name: 🚪 Gate + Stage each key
+        if: ${{ steps.detect.outputs.keys != '' }}
+        run: |
+          set -e
+          PUBLISHED=""
+          SKIPPED=""
+          for KEY in ${{ steps.detect.outputs.keys }}; do
+            echo "::group::gate $KEY"
+            F="data/ai-content-staging/$KEY.json"
+            # rankingKey がファイル名と一致するか (取り違え防止)
+            INNER=$(node -e "console.log(JSON.parse(require('fs').readFileSync('$F','utf8')).rankingKey||'')")
+            if [ "$INNER" != "$KEY" ]; then
+              echo "❌ $KEY: rankingKey 不一致 ($INNER) → skip"; SKIPPED="$SKIPPED $KEY"; echo "::endgroup::"; continue
+            fi
+            # 決定的ゲート (blocker 1 件でも exit 1 → R2 に到達させない)
+            if ! node .claude/scripts/ai-content/audit-ai-content.mjs --file "$F"; then
+              echo "❌ $KEY: audit gate fail → skip"; SKIPPED="$SKIPPED $KEY"; echo "::endgroup::"; continue
+            fi
+            mkdir -p ".local/r2/app/ranking/$KEY"
+            cp "$F" ".local/r2/app/ranking/$KEY/ai-content.json"
+            PUBLISHED="$PUBLISHED $KEY"
+            echo "✅ $KEY staged"
+            echo "::endgroup::"
+          done
+          echo "PUBLISHED=$PUBLISHED" >> "$GITHUB_ENV"
+          echo "SKIPPED=$SKIPPED" >> "$GITHUB_ENV"
+
+      - name: 📤 Push staged ai-content to R2
+        if: ${{ env.PUBLISHED != '' }}
+        run: npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix app/ranking
+
+      - name: 🧹 Purge CDN (公開した ranking ページのみピンポイント)
+        if: ${{ env.PUBLISHED != '' }}
+        run: |
+          URLS=""
+          for KEY in $PUBLISHED; do URLS="$URLS https://stats47.jp/ranking/$KEY"; done
+          echo "purge: $URLS"
+          npx tsx packages/r2-storage/src/scripts/purge-cache.ts --urls $URLS || true
+
+      - name: 🧹 Remove published files from outbox (ephemeral)
+        if: ${{ env.PUBLISHED != '' && success() }}
+        run: |
+          REMOVED=""
+          for KEY in $PUBLISHED; do
+            if [ -f "data/ai-content-staging/$KEY.json" ]; then
+              git rm -q "data/ai-content-staging/$KEY.json" && REMOVED="$REMOVED $KEY"
+            fi
+          done
+          if git diff --cached --quiet; then
+            echo "削除対象なし"; exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -q -m "chore(ai-content): remove published staging from outbox [skip ci] -${REMOVED}"
+          for i in 1 2 3; do
+            if git pull --rebase --quiet origin develop && git push origin HEAD:develop; then
+              echo "✅ outbox cleanup pushed:${REMOVED}"; break
+            fi
+            echo "push retry $i"; sleep 3
+          done
+
+      - name: 📝 Summary
+        if: always()
+        run: |
+          echo "- ✅ 公開: ${PUBLISHED:-なし}" >> "$GITHUB_STEP_SUMMARY"
+          echo "- ⏭️ ゲート未達スキップ: ${SKIPPED:-なし}" >> "$GITHUB_STEP_SUMMARY"
