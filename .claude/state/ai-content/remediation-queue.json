@@ -1,19 +1,19 @@
 {
-  "generatedAt": "2026-07-03T05:00:51.983Z",
+  "generatedAt": "2026-07-03T07:18:59.031Z",
   "gscSnapshot": "2026-W26",
   "scope": "GSC流入のある /ranking/ ページ (SEO優先母集団)",
   "doneCriteria": "R2 の ai-content が auditRow を通る (blocker 0)",
   "summary": {
     "total": 1015,
-    "done": 130,
-    "needsRegen": 885,
+    "done": 140,
+    "needsRegen": 875,
     "needsByReason": {
-      "incomplete": 818,
-      "blocker": 18,
-      "missing": 49
+      "incomplete": 812,
+      "missing": 48,
+      "blocker": 15
     },
-    "doneImpressions": 17864,
-    "needsImpressions": 18728
+    "doneImpressions": 27308,
+    "needsImpressions": 9284
   },
   "entries": [
     {
@@ -21,14 +21,12 @@
       "impressions": 7904,
       "clicks": 16,
       "position": 8.93,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
-      ]
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [],
+      "lastModified": "Fri, 03 Jul 2026 05:11:16 GMT",
+      "updatedAt": "2026-07-03T05:06:45.000Z"
     },
     {
       "rankingKey": "pork-consumption-quantity",
@@ -85,11 +83,14 @@
       "impressions": 547,
       "clicks": 0,
       "position": 8.07,
-      "status": "needs-regen",
-      "reason": "blocker",
-      "blockers": [
-        "paren-number"
-      ]
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [
+        "pref-count"
+      ],
+      "lastModified": "Fri, 03 Jul 2026 05:11:15 GMT",
+      "updatedAt": "2026-07-03T05:06:42.000Z"
     },
     {
       "rankingKey": "mayonnaise-consumption-expenditure",
@@ -254,9 +255,12 @@
       "impressions": 264,
       "clicks": 0,
       "position": 9.17,
-      "status": "needs-regen",
-      "reason": "missing",
-      "blockers": []
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [],
+      "lastModified": "Fri, 03 Jul 2026 05:11:15 GMT",
+      "updatedAt": "2026-07-03T05:07:13.969Z"
     },
     {
       "rankingKey": "soba-udon-dining-consumption-expenditure",
@@ -325,14 +329,14 @@
       "impressions": 202,
       "clicks": 1,
       "position": 7.28,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
-      ]
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [
+        "pref-count"
+      ],
+      "lastModified": "Fri, 03 Jul 2026 05:11:15 GMT",
+      "updatedAt": "2026-07-03T05:06:50.919Z"
     },
     {
       "rankingKey": "convenience-store-count-commercial",
@@ -732,12 +736,12 @@
       "impressions": 104,
       "clicks": 2,
       "position": 5.49,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "missing-pref-commentary"
-      ]
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [],
+      "lastModified": "Fri, 03 Jul 2026 05:11:16 GMT",
+      "updatedAt": "2026-07-03T05:06:27.039Z"
     },
     {
       "rankingKey": "roadside-station-count",
@@ -783,24 +787,26 @@
       "impressions": 91,
       "clicks": 0,
       "position": 8.88,
-      "status": "needs-regen",
-      "reason": "blocker",
-      "blockers": [
-        "paren-number"
-      ]
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [
+        "pref-count"
+      ],
+      "lastModified": "Fri, 03 Jul 2026 05:11:15 GMT",
+      "updatedAt": "2026-07-03T05:07:03.817Z"
     },
     {
       "rankingKey": "governor-salary-prefecture",
       "impressions": 89,
       "clicks": 0,
       "position": 8.93,
-      "status": "needs-regen",
-      "reason": "blocker",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "paren-number"
-      ]
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [],
+      "lastModified": "Fri, 03 Jul 2026 05:11:15 GMT",
+      "updatedAt": "2026-07-03T05:08:07.783Z"
     },
     {
       "rankingKey": "fishery-species-catch-yellowtail",
@@ -821,28 +827,24 @@
       "impressions": 86,
       "clicks": 5,
       "position": 7.4,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
-      ]
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [],
+      "lastModified": "Fri, 03 Jul 2026 05:11:15 GMT",
+      "updatedAt": null
     },
     {
       "rankingKey": "cooking-oil-consumption-quantity",
       "impressions": 83,
       "clicks": 1,
       "position": 6.81,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
-      ]
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [],
+      "lastModified": "Fri, 03 Jul 2026 05:11:15 GMT",
+      "updatedAt": "2026-07-03T05:07:31.000Z"
     },
     {
       "rankingKey": "sauce-consumption-expenditure",
@@ -936,14 +938,12 @@
       "impressions": 74,
       "clicks": 8,
       "position": 6.78,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
-      ]
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [],
+      "lastModified": "Fri, 03 Jul 2026 05:11:15 GMT",
+      "updatedAt": "2026-07-03T05:07:52.000Z"
     },
     {
       "rankingKey": "treatment-rate-mood-disorder-outpatient",
