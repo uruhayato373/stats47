@@ -59,7 +59,10 @@ test.describe("breakpoint 別レイアウト", () => {
       const width = viewport?.width ?? 0;
 
       await page.goto(target.path, { waitUntil: "domcontentloaded" });
-      const main = page.locator("main").first();
+      // app/layout.tsx が全幅の外側 <main> を持つため、ページ内側の <main>
+      // (PageShell の grid カラム内・ranking/blog 双方に存在) を "main main" で選択する。
+      // .first() だと外側 main (常に 100% 幅) を掴み契約検証にならない (2026-07-03 初回 CI 実測)。
+      const main = page.locator("main main").first();
       await expect(main).toBeVisible({ timeout: 15_000 });
       const box = await main.boundingBox();
       expect(box, "main の boundingBox が取得できない").not.toBeNull();

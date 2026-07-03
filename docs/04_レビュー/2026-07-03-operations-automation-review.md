@@ -164,7 +164,12 @@ tags: [operations, automation, agents, ci-cd, design-system, seo, playwright]
 - [ ] build-coverage-queue の deactivate 判定に config/R2 突合を必須化 (G5)
 - [ ] seo-auditor 削除・README カウント整合・primary_agent 差し替え (§5)
 - [ ] check-agent-skill-consistency の週次 CI 化
-- [ ] 53件復帰の GSC 回復トラッキング (改善バックログにエントリ)
+- [x] 53件復帰の GSC 回復トラッキング (改善バックログ RANKING-GONE-RESTORE-01)
+- [ ] **post-deploy-smoke の慢性 failure 解消** (2026-06-22 以降の全デプロイで failure。実測で切り分け済:
+  ①`/ranking` が spec 期待の 301 でなく本番 200 を返す — spec か middleware どちらが正か要判定
+  ②`ランキング詳細（総人口）にテーブルが表示される` が timeout — SSR HTML に `<table>` は存在、
+  Desktop Chrome での可視性の問題。AREA-PROFILE-FIX-01 と合わせて smoke を green に戻さないと
+  「毎回赤 = 誰も見ない」でゲートとして死ぬ)
 
 ### Tier 3 — 四半期
 
