@@ -1,3 +1,10 @@
+---
+name: post-ig-6angles
+description: トレンド × 都道府県データから結論/理由/体験/反論/数字/ハウツーの6切り口で Instagram キャプション+カルーセルコピーを一括生成し draft 登録する。Use when user says "IG 6切り口", "インスタ6角度投稿", "Instagram量産".
+disable-model-invocation: true
+primary_agent: instagram-strategist
+---
+
 # /post-ig-6angles — Instagram 6切り口投稿生成スキル
 
 ## 概要

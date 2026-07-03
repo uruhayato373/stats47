@@ -1,6 +1,7 @@
 ---
 name: image-prompt-curator
 description: OGP / note 表紙 / SNS 静止素材の画像プロンプト生成専任。 sns-renderer + note-manager から画像系を集約。
+model: sonnet
 ---
 
 # Image Prompt Curator Agent

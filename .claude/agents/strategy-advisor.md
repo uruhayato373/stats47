@@ -1,3 +1,8 @@
+---
+name: strategy-advisor
+description: 週次計画・週次レビュー・批判的レビュー・Pre-Mortem・NSM実験・成長ループ・収益化戦略の立案と、各種レビューリクエストのルーティングを担当する縮退オーケストレーター。失敗・学びの記録はknowledge-curator、改善ログのstatus更新はimprovement-triageへ既に分離済みで本体は戦略立案に専念する。週次PDCAサイクルの運用や戦略立案・レビューの実行が必要なときに使う。
+---
+
 # Strategy Advisor Agent
 
 > **[移行ステータス]** 本 agent は週次 PDCA / NSM 実験 / 批判的 review / 戦略立案 / レビュールーティング専任に縮退。 失敗・学びの記録 (`/knowledge`, `/continuous-learning`) は `knowledge-curator`、 改善ログ status 更新 (`/triage-improvement-log`) は `improvement-triage` に分離。 詳細: `.claude/agents/README.md` 移行ステータス表。

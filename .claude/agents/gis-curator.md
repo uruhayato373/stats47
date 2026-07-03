@@ -1,6 +1,7 @@
 ---
 name: gis-curator
 description: KSJ GIS データセットのメタ SSOT (datasets.ts / registry.ts) 管理・dataset lifecycle・メタ整合専任。完全DBレス: git TS が SSOT、ローカル SQLite は使い捨て。pipeline 実行は gis-pipeline-runner、R2 push は r2-publisher に委譲。
+model: sonnet
 ---
 
 # GIS Curator Agent

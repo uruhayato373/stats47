@@ -51,6 +51,8 @@ description: ブログ記事の expert / panel review 専任。記事は read-on
 
 ## 必読 rules
 
+- `.claude/rules/critic-review-protocol.md` — **全 critic 共通のレビュープロトコル (分離原則 / verdict / 重大度 / Output Contract の正典)**
+
 - `.claude/rules/blog-quality-standards.md` — curiosity gap / callout / 内部リンク密度
 - `.claude/rules/blog-data-schema.md` — data/*.json schema (factual check 用)
 - `.claude/rules/evidence-based-judgment.md` — 「品質低そう」推測の禁止、 定量指標で指摘

@@ -49,10 +49,11 @@ test.describe("本番スモークテスト", () => {
     await expect(heading).toBeVisible({ timeout: 10_000 });
   });
 
-  test("/ranking 一覧は廃止 (2026-05-28) → / に 301 リダイレクト", async ({ page }) => {
+  test("/ranking 索引ハブが 200 で表示される (2026-06-15 再設置)", async ({ page }) => {
+    // 2026-05-28 に / へ 301 統合 → 2026-06-15 にカテゴリ網羅索引ハブとして再設置 (SSG)。
+    // 旧 spec は 301 を期待し続け post-deploy smoke が慢性 failure だった (2026-07-03 是正)。
     const response = await page.goto("/ranking", { waitUntil: "domcontentloaded" });
-    // Playwright が 301 後の遷移先 (/) を最終 response として返す
-    expect(response?.url()).toMatch(/\/$/);
+    expect(response?.status()).toBe(200);
     const heading = page.getByRole("heading", { level: 1 });
     await expect(heading).toBeVisible({ timeout: 10_000 });
   });
@@ -61,7 +62,9 @@ test.describe("本番スモークテスト", () => {
     await page.goto("/ranking/total-population", {
       waitUntil: "domcontentloaded",
     });
-    const table = page.locator("table").first();
+    // DOM 順で最初の <table> はモバイル用 (lg:hidden 内) のため Desktop viewport では
+    // 不可視。:visible で「実際に表示されている」テーブルを検証する (2026-07-03 是正)。
+    const table = page.locator("table:visible").first();
     await expect(table).toBeVisible({ timeout: 15_000 });
   });
 

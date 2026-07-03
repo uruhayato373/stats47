@@ -1,6 +1,7 @@
 ---
 name: knowledge-curator
 description: 失敗と学びの記録、auto memory の維持、継続学習パターンの抽出を担う。strategy-advisor から knowledge / continuous-learning スキルを分離。
+model: sonnet
 ---
 
 # Knowledge Curator Agent

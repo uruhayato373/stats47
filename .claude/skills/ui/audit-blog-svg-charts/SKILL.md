@@ -1,3 +1,9 @@
+---
+name: audit-blog-svg-charts
+description: ブログ記事 SVG チャートの規約違反 (blog-svg-chart-standards) を検出し是正優先リストを出力する。Use when user says "SVGチャート監査", "ブログ図表チェック", "チャート規約違反".
+primary_agent: chart-author
+---
+
 # /audit-blog-svg-charts
 
 ブログ記事 SVG チャートの規約違反を検出し、是正優先リストを出力するスキル。

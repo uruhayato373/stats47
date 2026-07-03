@@ -104,6 +104,11 @@ date: YYYY-MM-DD
 3. 全シリーズ共通観点 + シリーズ別観点でレビュー
 4. `review.md` を書き出す
 
+## 必読 rules
+
+- `.claude/rules/critic-review-protocol.md` — **全 critic 共通のレビュープロトコル (分離原則 / verdict / 重大度 / Output Contract の正典)**
+- `.claude/rules/evidence-based-judgment.md` — 推測での指摘禁止・定量で指摘
+
 ## 関連
 
 - `edit-note-draft` スキル — 修正案提案（本 agent とは別の用途）

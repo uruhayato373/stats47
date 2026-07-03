@@ -1,3 +1,10 @@
+---
+name: post-x-6angles
+description: トレンド × 都道府県データから結論/理由/体験/反論/数字/ハウツーの6切り口で X キャプションを一括生成し draft 登録する。Use when user says "X 6切り口", "6角度ツイート", "X量産投稿".
+disable-model-invocation: true
+primary_agent: x-strategist
+---
+
 # /post-x-6angles — X 6切り口投稿生成スキル
 
 ## 概要

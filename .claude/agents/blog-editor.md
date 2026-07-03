@@ -1,3 +1,9 @@
+---
+name: blog-editor
+description: ブログ記事の公開・一括公開・品質是正リライトを担当する縮退エージェント（トレンド発見はtrend-scout、企画・記事生成はarticle-writer、チャート生成はchart-author、レビューはblog-criticへ分離済）。記事を公開・brushupするときに使う。
+model: sonnet
+---
+
 # Blog Editor Agent
 
 > **[移行ステータス]** 本 agent は publish 系 (`/publish-article`, `/publish-bulk-articles`, `/brushup-blog`) を担当する縮退役割に変更。 トレンド発見は `trend-scout`、 企画は article-writer (draft-from-trend) に統合、チャート生成は `chart-author`、 レビュー (`/blog-review --mode expert`, `/panel-review`, `/blog-review --mode proofread`) は `blog-critic` に分離。 詳細: `.claude/agents/README.md` 移行ステータス表。

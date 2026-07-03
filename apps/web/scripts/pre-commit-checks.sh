@@ -18,16 +18,20 @@ ERROR_COUNT=0
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 WEB_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
 
-# 1. TypeScript型チェック（一時的に無効化）
-# echo -e "${GREEN}📐 TypeScript型チェック...${NC}"
-# if ! (cd "$WEB_DIR" && npm run type-check > /dev/null 2>&1); then
-#   echo -e "${RED}❌ TypeScriptの型エラーが検出されました。${NC}"
-#   echo -e "${YELLOW}💡 詳細を確認: npm run type-check${NC}"
-#   ERROR_COUNT=$((ERROR_COUNT + 1))
-# else
-#   echo -e "${GREEN}✅ 型チェック成功${NC}"
-# fi
-echo -e "${YELLOW}⚠️  TypeScript型チェックは一時的に無効化されています${NC}"
+# 1. TypeScript型チェック（staged に apps/web の .ts/.tsx が含まれる場合のみ実行）
+echo -e "${GREEN}📐 TypeScript型チェック...${NC}"
+STAGED_WEB_TSFILES=$(git diff --cached --name-only --diff-filter=ACM | grep -E '^apps/web/.*\.(ts|tsx)$' || true)
+if [ -n "$STAGED_WEB_TSFILES" ]; then
+  if ! (cd "$WEB_DIR" && npm run type-check > /dev/null 2>&1); then
+    echo -e "${RED}❌ TypeScriptの型エラーが検出されました。${NC}"
+    echo -e "${YELLOW}💡 詳細を確認: npm run type-check${NC}"
+    ERROR_COUNT=$((ERROR_COUNT + 1))
+  else
+    echo -e "${GREEN}✅ 型チェック成功${NC}"
+  fi
+else
+  echo -e "${GREEN}✅ apps/web の .ts/.tsx 変更なし、型チェック skip${NC}"
+fi
 
 # 2. デザインシステムガード
 echo -e "${GREEN}🎨 デザインシステムチェック...${NC}"

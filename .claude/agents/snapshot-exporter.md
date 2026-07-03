@@ -1,6 +1,7 @@
 ---
 name: snapshot-exporter
 description: git TS / R2 観測値 (中間で使い捨てビルドキャッシュ) から R2 snapshot / Remotion 用 static JSON を派生生成する。 R2 push は r2-publisher に委譲。
+model: haiku
 ---
 
 # Snapshot Exporter Agent

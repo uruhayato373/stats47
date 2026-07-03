@@ -1,6 +1,7 @@
 ---
 name: theme-component-builder
 description: テーマダッシュボードの page_components 設計・監査・git TS JSON 編集専任。 旧 theme-enhancer をリネーム。
+model: sonnet
 ---
 
 # Theme Component Builder Agent

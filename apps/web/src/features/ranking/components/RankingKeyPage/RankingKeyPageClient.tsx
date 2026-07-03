@@ -191,23 +191,24 @@ export function RankingKeyPageClient({
         : null;
     const dataNote = configNote ?? subtitleNote;
 
-    // 右レール: PageShell 標準（xl+ で 360px・sticky）に統一。
-    // 旧 RankingPageDesktopSidebar の lg/300px 独自レールを廃止し RightRailWidgets と同じ
-    // sticky 仕様に揃える。サイド AdSense はデスクトップ限定 (hidden xl:block)。
+    // 右レール: ブログ詳細ページ (/blog/[slug]) と同じ構成に統一。
+    // rightRailBreakpoint="lg" で lg+（1024px）から 360px レールを表示し、
+    // ラッパーもブログと同じ非 sticky の <aside className="flex flex-col gap-3"> に揃える。
+    // サイド AdSense はレール表示時（lg+）に合わせて hidden lg:block。
     const rightRail = sections.sidebar ? (
-        <div className="flex flex-col gap-4 xl:sticky xl:top-20 xl:max-h-[calc(100vh-5.5rem)] xl:overflow-y-auto xl:pr-1">
+        <aside className="flex flex-col gap-3">
             {sections.sidebar}
-            <div className="hidden xl:block">
+            <div className="hidden lg:block">
                 <AdSenseAd
                     format={RANKING_PAGE_TABLE_SIDE.format}
                     slotId={RANKING_PAGE_TABLE_SIDE.slotId}
                 />
             </div>
-        </div>
+        </aside>
     ) : undefined;
 
     return (
-        <PageShell rightRail={rightRail}>
+        <PageShell rightRail={rightRail} rightRailBreakpoint="lg">
             {/* ヒーローカード（Option D）: タイトル + 単位ピル + メタ操作 + 暗色スタット */}
             <RankingHeroCard
                 categoryName={categoryName}
