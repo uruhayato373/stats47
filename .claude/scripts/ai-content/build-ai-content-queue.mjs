@@ -154,6 +154,14 @@ async function buildQueue() {
   const needs = entries.filter((e) => e.status === "needs-regen");
   const byReason = needs.reduce((acc, e) => ((acc[e.reason] = (acc[e.reason] ?? 0) + 1), acc), {});
 
+  // 2段 critic の tier 割り当て (機械化): GSC 流入上位 N 件の needs-regen を tier-2 (opus critic)、
+  // 残りは tier-1 (sonnet critic + 決定的ゲート)。author は常に sonnet (frontmatter 固定)。
+  // 設計正典: .claude/skills/content/generate-ai-content/SKILL.md / docs/04_レビュー/2026-07-03-claude-code-setup-audit.md
+  const OPUS_REVIEW_TOP_N = 30;
+  needs.forEach((e, i) => {
+    e.reviewTier = i < OPUS_REVIEW_TOP_N ? "opus" : "sonnet";
+  });
+
   const queue = {
     generatedAt: new Date().toISOString(),
     gscSnapshot: gsc.week,
@@ -166,6 +174,7 @@ async function buildQueue() {
       needsByReason: byReason,
       doneImpressions: done.reduce((s, e) => s + e.impressions, 0),
       needsImpressions: needs.reduce((s, e) => s + e.impressions, 0),
+      opusReviewTier: needs.filter((e) => e.reviewTier === "opus").length,
     },
     entries,
   };
@@ -205,10 +214,13 @@ function writeLatestMd(queue) {
     ``,
     `## 次にやるべき上位20 (impressions 降順)`,
     ``,
-    `| impressions | key | reason | blockers |`,
-    `|---|---|---|---|`,
-    ...top.map((e) => `| ${e.impressions} | ${e.rankingKey} | ${e.reason} | ${(e.blockers || []).join(",") || "-"} |`),
+    `| impressions | key | reason | review | blockers |`,
+    `|---|---|---|---|---|`,
+    ...top.map((e) => `| ${e.impressions} | ${e.rankingKey} | ${e.reason} | ${e.reviewTier === "opus" ? "🔴opus" : "sonnet"} | ${(e.blockers || []).join(",") || "-"} |`),
     ``,
+    `> 生成 (author) は常に **sonnet** (frontmatter 固定・コストゲート)。critic は既定 **sonnet**、`,
+    `> \`review\` 列が 🔴opus の上位${queue.summary.opusReviewTier ?? 30}件 (高GSC流入) + tier-1 が REVISE した件だけ`,
+    `> \`model: opus\` を明示指定してエスカレーション審査 (2段 critic)。`,
     `> 次バッチ: \`node .claude/scripts/ai-content/build-ai-content-queue.mjs --next 10\` で対象 key を取得 →`,
     `> ranking-content-author を並列起動 → diff-push-r2 --prefix app/ranking → 本スクリプト再実行で done 反映。`,
   ];

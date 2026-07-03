@@ -1,6 +1,6 @@
 # ranking ai-content 是正キュー (LATEST)
 
-- 生成: 2026-07-03T07:18:59.031Z
+- 生成: 2026-07-03T08:31:04.174Z
 - GSC snapshot: 2026-W26 / スコープ: GSC流入のある /ranking/ ページ (SEO優先母集団)
 - done 判定: R2 の ai-content が auditRow を通る (blocker 0)
 
@@ -32,28 +32,31 @@
 
 ## 次にやるべき上位20 (impressions 降順)
 
-| impressions | key | reason | blockers |
-|---|---|---|---|
-| 166 | retail-store-count | incomplete | paren-number,paren-number,missing-pref-commentary |
-| 114 | retail-store-count-alt | incomplete | paren-number,paren-number,paren-number,missing-pref-commentary |
-| 78 | miscellaneous-school-count | incomplete | paren-number,paren-number,missing-pref-commentary |
-| 77 | physical-disability-certificates-issued | incomplete | paren-number,missing-pref-commentary |
-| 73 | treatment-rate-mood-disorder-outpatient | incomplete | paren-number,paren-number,missing-pref-commentary |
-| 72 | fishery-species-catch-scallop | incomplete | paren-number,paren-number,paren-number,missing-pref-commentary |
-| 72 | households-on-public-assistance | incomplete | missing-pref-commentary |
-| 71 | psychiatric-bed-count | incomplete | paren-number,paren-number,paren-number,missing-pref-commentary |
-| 67 | zoo-count | incomplete | missing-pref-commentary |
-| 66 | deaths-lifestyle-diseases | incomplete | missing-pref-commentary |
-| 65 | airport-count | incomplete | paren-number,missing-pref-commentary |
-| 64 | white-bread-consumption-quantity | incomplete | paren-number,paren-number,missing-pref-commentary |
-| 64 | serious-crime-per-100k | incomplete | paren-number,missing-pref-commentary |
-| 63 | psychiatric-hospital-count | incomplete | missing-insights,missing-pref-commentary |
-| 62 | cut-flowers-consumption-expenditure | incomplete | paren-number,paren-number,paren-number,missing-pref-commentary |
-| 61 | peach-consumption-quantity | incomplete | paren-number,paren-number,paren-number,missing-pref-commentary |
-| 60 | designated-difficult-disease | missing | - |
-| 59 | sea-bream-consumption-quantity | incomplete | paren-number,paren-number,paren-number,missing-pref-commentary |
-| 58 | tempura-fry-consumption-expenditure | incomplete | paren-number,paren-number,paren-number,missing-pref-commentary |
-| 58 | fishing-port-count-by-type | missing | - |
+| impressions | key | reason | review | blockers |
+|---|---|---|---|---|
+| 166 | retail-store-count | incomplete | 🔴opus | paren-number,paren-number,missing-pref-commentary |
+| 114 | retail-store-count-alt | incomplete | 🔴opus | paren-number,paren-number,paren-number,missing-pref-commentary |
+| 78 | miscellaneous-school-count | incomplete | 🔴opus | paren-number,paren-number,missing-pref-commentary |
+| 77 | physical-disability-certificates-issued | incomplete | 🔴opus | paren-number,missing-pref-commentary |
+| 73 | treatment-rate-mood-disorder-outpatient | incomplete | 🔴opus | paren-number,paren-number,missing-pref-commentary |
+| 72 | fishery-species-catch-scallop | incomplete | 🔴opus | paren-number,paren-number,paren-number,missing-pref-commentary |
+| 72 | households-on-public-assistance | incomplete | 🔴opus | missing-pref-commentary |
+| 71 | psychiatric-bed-count | incomplete | 🔴opus | paren-number,paren-number,paren-number,missing-pref-commentary |
+| 67 | zoo-count | incomplete | 🔴opus | missing-pref-commentary |
+| 66 | deaths-lifestyle-diseases | incomplete | 🔴opus | missing-pref-commentary |
+| 65 | airport-count | incomplete | 🔴opus | paren-number,missing-pref-commentary |
+| 64 | white-bread-consumption-quantity | incomplete | 🔴opus | paren-number,paren-number,missing-pref-commentary |
+| 64 | serious-crime-per-100k | incomplete | 🔴opus | paren-number,missing-pref-commentary |
+| 63 | psychiatric-hospital-count | incomplete | 🔴opus | missing-insights,missing-pref-commentary |
+| 62 | cut-flowers-consumption-expenditure | incomplete | 🔴opus | paren-number,paren-number,paren-number,missing-pref-commentary |
+| 61 | peach-consumption-quantity | incomplete | 🔴opus | paren-number,paren-number,paren-number,missing-pref-commentary |
+| 60 | designated-difficult-disease | missing | 🔴opus | - |
+| 59 | sea-bream-consumption-quantity | incomplete | 🔴opus | paren-number,paren-number,paren-number,missing-pref-commentary |
+| 58 | tempura-fry-consumption-expenditure | incomplete | 🔴opus | paren-number,paren-number,paren-number,missing-pref-commentary |
+| 58 | fishing-port-count-by-type | missing | 🔴opus | - |
 
+> 生成 (author) は常に **sonnet** (frontmatter 固定・コストゲート)。critic は既定 **sonnet**、
+> `review` 列が 🔴opus の上位30件 (高GSC流入) + tier-1 が REVISE した件だけ
+> `model: opus` を明示指定してエスカレーション審査 (2段 critic)。
 > 次バッチ: `node .claude/scripts/ai-content/build-ai-content-queue.mjs --next 10` で対象 key を取得 →
 > ranking-content-author を並列起動 → diff-push-r2 --prefix app/ranking → 本スクリプト再実行で done 反映。

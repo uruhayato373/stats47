@@ -73,6 +73,21 @@ tags: [claude-code, settings, hooks, mcp, skills, agents, context, security]
 **Phase 0-3 中核は完了・push 済み** (settings 安全化 / frontmatter 16件 / commands 全廃 /
 MCP 3社へ / description 短縮 / agent model: 分配)。残りは死骸削除と任意の運用高度化のみ。
 
+## 6. AICONTENT のモデル運用 (2段 critic・2026-07-03 追加)
+
+「opus で走らせない確実なゲート」+「品質を落とさない役割分担」の要望への回答。正典実装は
+`.claude/skills/content/generate-ai-content/SKILL.md` §モデル運用ポリシー。
+
+- **確実ゲート = frontmatter** (公式: model 解決順 `env > param > frontmatter > session`)。
+  `ranking-content-author` は `model: sonnet` 固定 → param 省略で必ず sonnet。**author に `model: opus` を渡さない**のが唯一の規約。
+  PreToolUse フックは Agent の tool_input に model が載るか公式未記載 (gap) で「効いてるつもり」risk のため**採用せず**、
+  frontmatter (documented) を正典ゲートとした。`CLAUDE_CODE_SUBAGENT_MODEL` は全 subagent 一律固定で tier-2 opus を潰すため不採用。
+- **2段 critic**: ① 決定的ゲート `audit-ai-content.mjs` (モデル非依存の客観フロア) → ② critic tier-1 `sonnet`
+  (全件の意味フロア) → ③ tier-2 `opus` 明示指定 (GSC流入**上位30件** + tier-1 REVISE 件のみ)。
+- **機械化**: `build-ai-content-queue.mjs` が needs entry に `reviewTier` (上位30=opus/他=sonnet) を付与、
+  `LATEST.md` の review 列 (🔴opus) で対象可視化。`ranking-content-critic` の frontmatter も `model: sonnet` に更新
+  (tier-1 既定)。→ agent model: 分布は haiku 2 / sonnet 31 / inherit 7。
+
 ## 5. 実PC 側で別途取得すべき情報 (ローカルセッションで)
 
 クラウドからは見えない user スコープ設定。ローカルで実行し貼付 → 差分診断を追補する。
