@@ -201,9 +201,7 @@ function SearchPageClientInner({
   // T2-CWV-04 / #79 Phase 1B。実ロードは `isSearching` 側で handle される。
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-lg font-bold mb-8">検索</h1>
-
+    <div className="mt-8">
       <div className="grid grid-cols-1 md:grid-cols-[1fr_240px] gap-8">
         {/* メインコンテンツ: 検索と結果 */}
         <div>
@@ -257,7 +255,7 @@ function SearchPageClientInner({
 
 function SearchPageSkeleton() {
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="mt-8">
       <Skeleton className="h-10 w-full mb-4" />
       <Skeleton className="h-20 w-full mb-4" />
       <Skeleton className="h-40 w-full" />

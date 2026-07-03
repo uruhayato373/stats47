@@ -113,7 +113,7 @@ Phase 2 の各シナリオに対して、**予防策（Prevention）** と **耐
 
 ### Phase 3.5: ロードマップの Sprint 進捗評価
 
-`docs/02_実装計画/02_実装ロードマップ.md` を読み込み、四半期の区切りとして以下を評価・更新する:
+`docs/02_実装計画/00_INDEX.md` と `docs/02_実装計画/01_収益化マスタープラン.md` を読み込み、四半期の区切りとして以下を評価・更新する:
 
 1. **「現在のステータス」テーブル**: Phase 1 で取得した実測値で更新（`/weekly-review` と同じ手順）
 2. **Sprint 完了判定**: 現在の Sprint の「完了条件」を実績データと照合。達成/未達を明記
@@ -242,5 +242,6 @@ critical-review / 週次レビュー / 改善ログ 各ドキュメントから�
 
 - `ls -t docs/04_レビュー/*-pre-mortem-*.md | head -5` — 過去の Pre-Mortem（トーンや構造の参考）
 - Read tool で個別ファイルを参照
-- `docs/02_実装計画/02_実装ロードマップ.md` — Sprint 進捗評価・実測値更新の対象
+- `docs/02_実装計画/00_INDEX.md` — 実装計画の現在地
+- `docs/02_実装計画/01_収益化マスタープラン.md` — Sprint / Phase 進捗評価・実測値更新の対象
 - `.claude/skills/management/critical-review/SKILL.md` — 批判的レビュー（計画書向け、対になるスキル）

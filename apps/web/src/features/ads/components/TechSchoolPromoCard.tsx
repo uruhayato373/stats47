@@ -52,15 +52,15 @@ export function TechSchoolPromoCard({ variant = "sidebar" }: TechSchoolPromoCard
   }
 
   return (
-    <div className="rounded-none bg-gradient-to-br from-purple-600 via-purple-500 to-blue-600 p-4 text-white shadow-md">
-      <div className="mb-1 flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider text-white/80">
+    <SurfaceCard className="border-primary/20 bg-primary/5">
+      <div className="mb-1 flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider text-primary">
         <Sparkles className="h-3 w-3" />
         PR
       </div>
-      <p className="text-sm font-bold leading-tight">
+      <p className="text-sm font-bold leading-tight text-foreground">
         Claude Code 副業講座
       </p>
-      <p className="mt-1 text-xs text-white/85 leading-snug">
+      <p className="mt-1 text-xs leading-snug text-muted-foreground">
         AI 副業で月 +10 万円。公務員・会社員 OK。未経験から最短 3 ヶ月。
       </p>
       <TrackedAffiliateLink
@@ -68,11 +68,11 @@ export function TechSchoolPromoCard({ variant = "sidebar" }: TechSchoolPromoCard
         category="other"
         label="Claude Code 副業講座 (sidebar)"
         position="sidebar"
-        className="mt-3 inline-flex items-center gap-1 rounded-full bg-white px-3 py-1.5 text-[11px] font-bold text-purple-700 hover:bg-purple-50 transition-colors"
+        className="mt-3 inline-flex items-center gap-1 rounded-none border border-primary/30 bg-card px-3 py-1.5 text-[11px] font-bold text-primary transition-colors hover:bg-primary/10"
         {...(isExternal ? { target: "_blank", rel: "sponsored noopener" } : {})}
       >
         無料カウンセリング →
       </TrackedAffiliateLink>
-    </div>
+    </SurfaceCard>
   );
 }

@@ -15,6 +15,6 @@ metadata:
 
 **How to apply**:
 - 本番 R2 読み skip を疑ったら `wrangler.toml [env.production.vars]` に `CLOUDFLARE_WORKERS = "true"` を入れる（fetchFromR2AsJson の binding 読み自体は env.isCloudflareWorkers ヒューリスティックで動くが、上位の shouldSkipRemoteR2Read ゲートは明示 env を見る）。
-- 関連: テーマダッシュボードは指標値を **R2 `app/ranking/<key>/values.json` のみ**から読む（e-Stat ライブ取得は Workers で失敗するため廃止。`loadThemeData` → `readAllYearsRankingValuesFromR2`）。全国行は R2 に無いので未選択時は県平均。正典 `docs/02_実装計画/10_テーマダッシュボード強化.md`。
+- 関連: テーマダッシュボードは指標値を **R2 `app/ranking/<key>/values.json` のみ**から読む（e-Stat ライブ取得は Workers で失敗するため廃止。`loadThemeData` → `readAllYearsRankingValuesFromR2`）。全国行は R2 に無いので未選択時は県平均。正典 `apps/web/src/features/theme-dashboard/README.md`。
 - テーマページは `force-dynamic` 必須（SSG だと build 時に R2 読めず error fallback が prerender に焼かれる。[[feedback_home_pure_ssg_r2_empty]] と同型）。
 - 関連: [[project_r2_writes_ci_only]]

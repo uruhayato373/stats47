@@ -51,7 +51,7 @@ stats47 内のページ横断 UI 一貫性をレビューする agent。 code-re
 
 - `docs/01_技術設計/15_デザインシステムSSOT.md` — **デザイン判断の正典 (本 agent が番人)**
 - `docs/01_技術設計/13_統一レイアウト設計.md` — 横幅 / レール / PageShell / PageHeader / ナビ
-- `docs/02_実装計画/13_UI統一ロードマップ.md` — 統一作業の Phase / 担当分担 / Codex 協調
+- `docs/01_技術設計/15_デザインシステムSSOT.md` — UI 判断ルール / 統一済みレイアウト・カード規約
 - `.claude/rules/ui-components.md` — コンポーネント選択 / ブレイクポイント / melta-ui 準拠
 - `.claude/rules/coding-standards.md` — TypeScript / React / Next.js 規約
 - `.claude/design-system/prohibited.md` — 禁止項目 (text-black / shadow-lg 等)

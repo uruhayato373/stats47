@@ -164,6 +164,102 @@
 
 /* ===== Blog Article Typography ===== */
 @layer components {
+  .font-news-article,
+  .blog-news-article {
+    font-family: -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+      "Hiragino Sans", "Yu Gothic UI", "Yu Gothic", YuGothic, Meiryo, "Segoe UI",
+      "Helvetica Neue", Arial, sans-serif;
+    font-feature-settings: "palt" 0;
+    letter-spacing: 0;
+  }
+
+  .blog-news-article {
+    font-size: 17px;
+    line-height: 2;
+  }
+
+  .blog-news-article p {
+    margin-top: 1.25rem;
+    margin-bottom: 1.25rem;
+    line-height: 2;
+  }
+
+  .blog-news-article h2 {
+    margin-top: 2.75rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.65rem;
+    border-bottom: 1px solid hsl(var(--border));
+    font-size: 1.45rem;
+    line-height: 1.55;
+    font-weight: 700;
+    letter-spacing: 0;
+  }
+
+  .blog-news-article h3 {
+    margin-top: 2.25rem;
+    margin-bottom: 0.75rem;
+    font-size: 1.2rem;
+    line-height: 1.6;
+    font-weight: 700;
+    letter-spacing: 0;
+  }
+
+  .blog-news-article ul,
+  .blog-news-article ol {
+    margin-top: 1.25rem;
+    margin-bottom: 1.25rem;
+    padding-left: 1.4rem;
+  }
+
+  .blog-news-article li {
+    margin-top: 0.35rem;
+    margin-bottom: 0.35rem;
+    line-height: 1.9;
+  }
+
+  .blog-news-article blockquote {
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-left: 3px solid hsl(var(--border));
+    padding-left: 1rem;
+    color: hsl(var(--muted-foreground));
+    font-style: normal;
+  }
+
+  .blog-news-article a {
+    text-underline-offset: 0.18em;
+  }
+
+  .blog-news-article .not-prose {
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+
+  @media (max-width: 639px) {
+    .blog-news-article {
+      font-size: 16.5px;
+      line-height: 1.95;
+    }
+
+    .blog-news-article p {
+      margin-top: 1.15rem;
+      margin-bottom: 1.15rem;
+      line-height: 1.95;
+    }
+
+    .blog-news-article h2 {
+      margin-top: 2.35rem;
+      font-size: 1.28rem;
+      line-height: 1.55;
+    }
+
+    .blog-news-article h3 {
+      margin-top: 2rem;
+      font-size: 1.1rem;
+      line-height: 1.6;
+    }
+  }
+
   .blog-article {
     @apply text-foreground leading-relaxed text-base;
   }

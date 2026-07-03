@@ -107,7 +107,7 @@ export const fiscalIndicatorsSlides: SlideData[] = [
     subtitle: "水道・病院などの「事業」を守る指標",
     content: (
       <div className="flex flex-col items-center justify-center h-full space-y-4">
-        <div className="w-full bg-cyan-600 text-white p-6 rounded-none shadow-xl text-center relative overflow-hidden">
+        <div className="w-full bg-cyan-600 text-white p-6 rounded-none shadow-sm text-center relative overflow-hidden">
           <div className="absolute top-0 right-0 p-2 opacity-20">
             <BarChart3 size={80} />
           </div>

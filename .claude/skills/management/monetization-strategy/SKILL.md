@@ -169,7 +169,8 @@ ls -t docs/04_レビュー/*.md | head -5
 
 ## 参照
 
-- `docs/02_実装計画/02_実装ロードマップ.md` — KPI・スプリント目標
+- `docs/02_実装計画/00_INDEX.md` — 実装計画の現在地
+- `docs/02_実装計画/01_収益化マスタープラン.md` — KPI・Phase 目標
 - `docs/00_プロジェクト管理/01_概要/` — プロジェクト概要
 - `.claude/skills/management/growth-loops/SKILL.md` — 成長ループ分析
 - 原典: Paweł Huryn の Monetization Strategy フレームワーク

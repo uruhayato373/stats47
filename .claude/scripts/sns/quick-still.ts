@@ -1,0 +1,273 @@
+#!/usr/bin/env tsx
+/**
+ * quick-still.ts
+ *
+ * 指標キー1つ → 投稿用静止画(SVG, 横長+縦長) + キャプション草稿 を、
+ * article.md / slug に一切依存せず一発生成するローカル CLI。
+ *
+ * 記事執筆パイプライン (fetch-ranking-data-r2.mjs → generate-article-charts.ts) は
+ * docs/21_ブログ記事原稿/<slug>/ を前提にしており「まず記事を書く」ことを要求する。
+ * これは SNS 投稿の瞬発力（数分で1枚出す）には重すぎるため、
+ * 同じ SSOT (R2 app/ranking/<key>) と同じ描画エンジン (@stats47/svg-builder) を再利用し、
+ * slug/記事を経由しない単発版として切り出す。
+ *
+ * Usage:
+ *   npx tsx .claude/scripts/sns/quick-still.ts --key <rankingKey> [--out <dir>] [--year <YYYY>]
+ *
+ * 出力 (既定 .local/sns-quick/<key>/):
+ *   <key>.svg        横長カード (960x404、ブログ本文/X 向け)
+ *   <key>-ig.svg      縦長カード (1080x1350、Instagram 向け)
+ *   <key>.png / <key>-ig.png  (sharp が使えれば PNG も出力)
+ *   source.json       出典 manifest (SSOT配慮: rankingKey のみ保持、生パラメータは複製しない)
+ *   caption.txt        投稿キャプション草稿
+ *
+ * exit: 0 = ok / 1 = 引数不正 / 2 = R2 取得失敗
+ */
+
+import fs from "node:fs";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+
+import { generateBarChartSvg, type BarItem } from "../../../packages/svg-builder/src/charts/bar-chart.ts";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const PROJECT_ROOT = path.resolve(__dirname, "..", "..", "..");
+
+const R2_BASE = process.env.R2_PUBLIC_FETCH_URL || "https://storage.stats47.jp";
+
+// ---------- CLI ----------
+const args = process.argv.slice(2);
+const getArg = (flag: string): string | null => {
+  const i = args.indexOf(flag);
+  return i >= 0 ? args[i + 1] : null;
+};
+const KEY = getArg("--key");
+const YEAR = getArg("--year");
+const OUT_DIR_ARG = getArg("--out");
+
+if (!KEY) {
+  console.error("usage: --key <rankingKey> [--out <dir>] [--year <YYYY>]");
+  process.exit(1);
+}
+
+const OUT_DIR = OUT_DIR_ARG
+  ? path.resolve(OUT_DIR_ARG)
+  : path.join(PROJECT_ROOT, ".local", "sns-quick", KEY);
+
+// ---------- 型 (values.json / item.json の実測 shape) ----------
+interface RankingValue {
+  areaCode: string;
+  areaName: string;
+  value: number;
+  unit?: string;
+}
+interface RankingPartition {
+  yearCode: string;
+  values: RankingValue[];
+}
+interface RankingValuesPayload {
+  rankingKey: string;
+  partitions: RankingPartition[];
+}
+interface RankingItemPayload {
+  item?: {
+    title?: string;
+    rankingName?: string;
+    unit?: string;
+    categoryKey?: string;
+    latestYear?: { yearCode: string; yearName?: string };
+    sourceConfig?: { name?: string };
+  };
+}
+
+async function getJson<T>(url: string): Promise<T> {
+  const res = await fetch(url);
+  if (!res.ok) throw new Error(`HTTP ${res.status} ${url}`);
+  return (await res.json()) as T;
+}
+
+// カテゴリの粗い「高い=悪い/良い」判定。判断できなければ orange 既定 (中立)。
+// 網羅は目的ではなく、明確なものだけ寄せる (誤判定より orange 既定を優先)。
+const BAD_HIGH_HINTS = [
+  "abandoned", "death", "crime", "accident", "unemployment", "poverty",
+  "divorce", "disaster", "vacant", "debt", "bankrupt",
+];
+const GOOD_HIGH_HINTS = [
+  "income", "salary", "wage", "life-expectancy", "birth-rate", "gdp",
+  "population", "employment-rate",
+];
+function choosePalette(key: string): "red" | "blue" | "orange" {
+  const k = key.toLowerCase();
+  if (BAD_HIGH_HINTS.some((h) => k.includes(h))) return "red";
+  if (GOOD_HIGH_HINTS.some((h) => k.includes(h))) return "blue";
+  return "orange";
+}
+
+async function main() {
+  const valuesUrl = `${R2_BASE}/app/ranking/${KEY}/values.json`;
+  const itemUrl = `${R2_BASE}/app/ranking/${KEY}/item.json`;
+
+  let values: RankingValuesPayload;
+  try {
+    values = await getJson<RankingValuesPayload>(valuesUrl);
+  } catch (e) {
+    console.error(`[error] failed to fetch values.json for key=${KEY}: ${(e as Error).message}`);
+    process.exit(2);
+  }
+
+  let item: RankingItemPayload["item"] = {};
+  try {
+    const it = await getJson<RankingItemPayload>(itemUrl);
+    item = it.item || {};
+  } catch {
+    // item は best-effort。無くても values だけで生成できる。
+  }
+
+  const parts = (values.partitions || []).slice().sort((a, b) => (a.yearCode > b.yearCode ? 1 : -1));
+  if (parts.length === 0) {
+    console.error(`[error] no partitions for key=${KEY}`);
+    process.exit(2);
+  }
+  const partition = YEAR
+    ? parts.find((p) => String(p.yearCode) === String(YEAR)) || parts[parts.length - 1]
+    : parts[parts.length - 1];
+
+  const sorted = partition.values.slice().sort((a, b) => b.value - a.value);
+  if (sorted.length === 0) {
+    console.error(`[error] empty values for key=${KEY} year=${partition.yearCode}`);
+    process.exit(2);
+  }
+
+  const unit = item?.unit || sorted[0]?.unit || "";
+  const title = item?.title || item?.rankingName || KEY;
+  const year = partition.yearCode;
+  const source = item?.sourceConfig?.name || "e-Stat（政府統計の総合窓口）";
+  const palette = choosePalette(KEY);
+  const rightPalette = palette === "red" ? "blue" : palette === "blue" ? "red" : "blue";
+
+  const N = Math.min(5, Math.floor(sorted.length / 2) || 1);
+  const top = sorted.slice(0, N);
+  const bottom = sorted.slice(-N);
+
+  const barItems: BarItem[] = [
+    ...top.map((v, i) => ({
+      label: `${i + 1}位 ${v.areaName}`,
+      name: v.areaName,
+      rank: i + 1,
+      value: v.value,
+    })),
+    { label: "…", value: 0, isSeparator: true },
+    ...bottom.map((v, i) => ({
+      label: `${sorted.length - N + i + 1}位 ${v.areaName}`,
+      name: v.areaName,
+      rank: sorted.length - N + i + 1,
+      value: v.value,
+    })),
+  ];
+
+  const baseOptions = {
+    title,
+    subtitle: `${year}年`,
+    source,
+    unit,
+    palette,
+    rightPalette,
+  } as const;
+
+  const svgColumns = generateBarChartSvg(barItems, { ...baseOptions, layout: "columns" });
+  const svgPortrait = generateBarChartSvg(barItems, { ...baseOptions, layout: "portrait" });
+
+  const provenance = (file: string) =>
+    `<!-- data-source: ${file} | generated: ${new Date().toISOString()} -->\n`;
+
+  fs.mkdirSync(OUT_DIR, { recursive: true });
+
+  const svgPath = path.join(OUT_DIR, `${KEY}.svg`);
+  const igSvgPath = path.join(OUT_DIR, `${KEY}-ig.svg`);
+  fs.writeFileSync(svgPath, provenance(`${KEY}.svg`) + svgColumns, "utf8");
+  fs.writeFileSync(igSvgPath, provenance(`${KEY}-ig.svg`) + svgPortrait, "utf8");
+
+  // 出典 manifest (SSOT配慮): rankingKey のみ保持。生パラメータは複製しない (blog-data-schema.md §1.5 準拠)。
+  const manifest = {
+    kind: "ranking",
+    rankingKey: KEY,
+    year,
+    unit,
+    label: title,
+    transform: "all47 (quick-still が上位5+下位5を抽出)",
+    source: `r2:app/ranking/${KEY}/values.json`,
+    upstream: "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+    restore: `npx tsx .claude/scripts/sns/quick-still.ts --key ${KEY} --year ${year}`,
+    fetchedAt: new Date().toISOString(),
+    generatedBy: "quick-still.ts",
+  };
+  fs.writeFileSync(path.join(OUT_DIR, "source.json"), JSON.stringify(manifest, null, 2));
+
+  // ---------- キャプション草稿 ----------
+  const fmt = (v: number) => v.toLocaleString("ja-JP");
+  const maxV = sorted[0];
+  const minV = sorted[sorted.length - 1];
+  const ratio = minV.value !== 0 ? (maxV.value / minV.value).toFixed(1) : "-";
+  const topLines = top.map((v, i) => `${i + 1}位 ${v.areaName} ${fmt(v.value)}${unit}`).join("\n");
+  const bottomLines = bottom
+    .map((v, i) => `${sorted.length - N + i + 1}位 ${v.areaName} ${fmt(v.value)}${unit}`)
+    .join("\n");
+
+  const caption = `${title}（${year}年）
+
+【上位】
+${topLines}
+
+【下位】
+${bottomLines}
+
+1位と最下位で${ratio}倍差。
+
+出典: ${source}（stats47.jp）
+
+#都道府県ランキング #統計 #stats47
+`;
+  fs.writeFileSync(path.join(OUT_DIR, "caption.txt"), caption, "utf8");
+
+  // ---------- PNG (best-effort: sharp が使えれば出力) ----------
+  const pngResults: { file: string; ok: boolean; reason?: string }[] = [];
+  try {
+    const sharpMod = await import("sharp");
+    const sharp = sharpMod.default;
+    for (const [svgFile, pngFile] of [
+      [svgPath, path.join(OUT_DIR, `${KEY}.png`)],
+      [igSvgPath, path.join(OUT_DIR, `${KEY}-ig.png`)],
+    ] as const) {
+      await sharp(svgFile).png().toFile(pngFile);
+      pngResults.push({ file: pngFile, ok: true });
+    }
+  } catch (e) {
+    pngResults.push({ file: "(sharp unavailable)", ok: false, reason: (e as Error).message });
+  }
+
+  const summary = {
+    key: KEY,
+    year,
+    unit,
+    title,
+    palette,
+    outDir: path.relative(PROJECT_ROOT, OUT_DIR),
+    files: {
+      svgColumns: path.relative(PROJECT_ROOT, svgPath),
+      svgPortrait: path.relative(PROJECT_ROOT, igSvgPath),
+      source: path.relative(PROJECT_ROOT, path.join(OUT_DIR, "source.json")),
+      caption: path.relative(PROJECT_ROOT, path.join(OUT_DIR, "caption.txt")),
+    },
+    png: pngResults,
+    top: top.map((v, i) => `${i + 1}位 ${v.areaName} ${fmt(v.value)}${unit}`),
+    bottom: bottom.map((v, i) => `${sorted.length - N + i + 1}位 ${v.areaName} ${fmt(v.value)}${unit}`),
+    ratioMaxMin: ratio,
+  };
+  console.log(JSON.stringify(summary, null, 2));
+}
+
+main().catch((e) => {
+  console.error(`[error] ${(e as Error).message}`);
+  process.exit(2);
+});

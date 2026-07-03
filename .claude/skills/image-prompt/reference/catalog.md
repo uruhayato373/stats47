@@ -562,7 +562,7 @@ A distant mountain range silhouette, heavily blurred and desaturated to a soft b
 ```
 
 ### stats47 での使い方
-**戦略・長期ビジョン系記事に最適**。`docs/02_実装計画/02_実装ロードマップ.md` 解説、週次レビュー note などに。
+**戦略・長期ビジョン系記事に最適**。`docs/02_実装計画/00_INDEX.md` / `01_収益化マスタープラン.md` 解説、週次レビュー note などに。
 
 ---
 

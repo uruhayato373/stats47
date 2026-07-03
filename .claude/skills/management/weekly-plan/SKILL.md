@@ -117,7 +117,7 @@ DB: .local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6
   cat "docs/03_週次運用/月次計画/${THIS_MONTH}.md" 2>/dev/null || echo "月次計画なし → /monthly-plan の実行を Should で提案"
   ```
   → 今週の Must は**今月の重点テーマの構成タスクから優先的に選ぶ**。重点外のタスクを Must に入れる場合は理由を明記。月次計画が無い場合は `/monthly-plan` 実行を提案。
-- docs/02_実装計画/02_実装ロードマップ.md の現在のスプリント・未完了タスク
+- docs/02_実装計画/00_INDEX.md の現在地と、03/04/05 の未完了タスク
 - 未着手の Issue 一覧（`gh issue list --state open --label enhancement`、PR で close される機能改修）+ docs/02_実装計画/04_機能バックログ.md の section ごとの `tier:` で優先度判定
 
 - 改善バックログ pending 一覧（**真実源**: `docs/02_実装計画/03_改善バックログ.md`）
@@ -366,7 +366,8 @@ tags: []
 
 ## 参照
 
-- `docs/02_実装計画/02_実装ロードマップ.md` — KPI・スプリント目標
+- `docs/02_実装計画/00_INDEX.md` — 実装計画の現在地
+- `docs/02_実装計画/01_収益化マスタープラン.md` — KPI・Phase 目標
 - `gh issue list --state open --label enhancement` — 未解決の機能改善 Issue（残存ラベル）
 - `ls -t docs/04_レビュー/*.md | head -5` — 過去の批判的指摘
 - `ls -t docs/03_週次運用/週次計画/*.md | head -5` / `ls -t docs/03_週次運用/週次レビュー/*.md | head -5` — 過去の週次計画・レビュー

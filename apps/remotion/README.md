@@ -83,6 +83,30 @@ npm run pipeline:bar-chart-race --workspace remotion
 > - ブログ OGP/サムネイル → `npx tsx apps/web/scripts/generate-blog-thumbnails.ts`（Satori）
 > - ランキング OGP → `apps/web/src/app/ranking/[rankingKey]/opengraph-image.tsx`（Next.js 動的生成）
 
+## Data SSOT
+
+Remotion 動画で使う統計データは **R2 `app/stats/<metric>/*.json` が SSOT**。Remotion は render 時に network / DB を直接読まず、事前 exporter で `apps/remotion/public/<feature>/` に派生 JSON を生成して `staticFile()` で読む。
+
+```
+e-Stat / MLIT
+  -> metric TS config (`packages/data-configs/src/metrics/<key>.ts`)
+  -> R2 `app/stats/<metric>/*.json`
+  -> apps/remotion/scripts/exporters/*
+  -> apps/remotion/public/<feature>/*.json
+  -> Remotion render
+```
+
+主な feature データ:
+
+| Feature | public output | R2 source |
+|---|---|---|
+| `migration-flow` | `public/migration-flow/pref-net-{year}.json`, `{NN}.json` | `app/stats/population-migration-inter-prefecture/migration-flow-<year>.json` |
+| `population-yoy-47` | `public/population-yoy-47/timeseries.json` | `app/stats/japanese-population/values.json` |
+| `station-passengers` | `public/station-passengers/index.json` | `app/stats/station-passengers-annual-total/values.json` |
+| `port-bubble` | feature-specific derived JSON | `app/stats/<port-metric>/ports.json` |
+
+新しい動画 feature を追加するときは、metric TS config を追加し、R2 に観測値を投入し、`apps/remotion/scripts/exporters/` に exporter を追加する。`public/` 配下の派生 JSON は再生成可能 snapshot として扱い、手編集しない。
+
 ## ソース構成
 
 ```

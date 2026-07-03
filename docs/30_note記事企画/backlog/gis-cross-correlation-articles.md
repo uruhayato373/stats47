@@ -7,7 +7,7 @@ created: 2026-05-20
 updated: 2026-05-20
 status: backlog
 tags: [content-plan, note-correlation, gis-cross]
-parent: docs/02_実装計画/11_GISコンテンツ戦略.md
+parent: docs/02_実装計画/04_機能バックログ.md#gis-cross-content-backlog
 ---
 
 # 掛け合わせ相関記事 note企画 (型B)

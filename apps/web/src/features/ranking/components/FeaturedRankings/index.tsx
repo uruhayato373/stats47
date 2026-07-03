@@ -111,8 +111,8 @@ export async function FeaturedRankings({ limit = 6, showHeader = true }: Feature
   }
 
   return (
-    <section className="py-8 px-4 sm:px-6 bg-muted/30">
-      <div className="max-w-[1700px] mx-auto">
+    <section className="bg-muted/30 px-4 py-8 sm:px-6">
+      <div>
         {showHeader && (
           <div className="flex items-center justify-between mb-8">
             <h2 className="text-lg font-bold">注目のランキング</h2>

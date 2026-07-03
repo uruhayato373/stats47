@@ -8,6 +8,7 @@ import {
   RANKING_PAGE_FOOTER,
   COMPARE_PAGE_SIDEBAR,
 } from "../constants";
+import { AD_SIZES } from "../types";
 
 describe("AdSense スロット定数", () => {
   const allSlots = [
@@ -27,7 +28,8 @@ describe("AdSense スロット定数", () => {
   });
 
   it("全スロットの format が有効な値", () => {
-    const validFormats = ["rectangle", "skyscraper", "leaderboard", "horizontal", "auto"];
+    // 型ソース (AD_SIZES) を単一ソースとして参照し、format リストのドリフトを防ぐ
+    const validFormats = Object.keys(AD_SIZES);
     for (const { config } of allSlots) {
       expect(validFormats).toContain(config.format);
     }

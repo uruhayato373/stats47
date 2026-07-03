@@ -163,7 +163,7 @@ export default async function BlogPostPage({ params }: PageProps) {
     };
 
     const rightRail = (
-        <aside className="flex flex-col gap-3">
+        <aside className="flex flex-col gap-3 lg:sticky lg:top-20">
             <ArticleTableOfContents content={article.content} compact />
 
             {/* 本文関連 widget（主役・上） */}
@@ -194,7 +194,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
             />
-            <PageShell rightRail={rightRail} rightRailBreakpoint="lg">
+            <PageShell rightRail={rightRail} rightRailBreakpoint="lg" variant="reading">
                 {/* パンくず (tag/areas と同じく単一 PageShell の先頭子として配置) */}
                 <Breadcrumb className="mb-4">
                     <BreadcrumbList>
@@ -218,23 +218,32 @@ export default async function BlogPostPage({ params }: PageProps) {
 
                 {/* 中央カラム: 記事 */}
                 <main className="min-w-0 space-y-6">
-                    <SurfaceCard className="p-0">
-                        <div className="overflow-hidden p-6 sm:p-8">
+                    <SurfaceCard className="overflow-hidden p-0">
+                        <div className="border-t-4 border-primary bg-card px-5 py-6 sm:p-8 lg:p-10">
                             {/* 記事ヘッダー */}
-                            <header className="mb-8">
-                                <h1 className="mb-4 border-b pb-3 text-2xl font-bold">{article.title}</h1>
+                            <header className="mb-8 border-b border-border pb-6 font-news-article">
+                                <div className="mb-4 flex flex-wrap items-center gap-x-2 gap-y-1 text-[12px] font-medium leading-6 text-muted-foreground">
+                                    <span className="text-primary">stats47 データジャーナル</span>
+                                    <span aria-hidden="true">/</span>
+                                    <span>統計で読む地域ニュース</span>
+                                    <span aria-hidden="true">/</span>
+                                    <span>PRを含む場合があります</span>
+                                </div>
+                                <h1 className="mb-4 text-[1.45rem] font-bold leading-[1.45] tracking-normal text-foreground sm:text-[2rem] sm:leading-[1.4]">{article.title}</h1>
                                 {article.frontmatter.subtitle && (
-                                    <p className="mb-4 text-sm text-muted-foreground">{article.frontmatter.subtitle}</p>
+                                    <p className="mb-5 text-[15px] leading-8 text-muted-foreground sm:text-base">{article.frontmatter.subtitle}</p>
                                 )}
-                                <div className="flex flex-wrap items-center gap-2">
-                                    {articleTagData.map((t) => (
-                                        <TagBadge key={t.tagKey} tag={t.tagKey} tagKey={t.tagKey} />
-                                    ))}
-                                    {article.publishedAt && (
-                                        <time dateTime={article.publishedAt} className="text-xs text-muted-foreground">
-                                            {article.publishedAt.slice(0, 10)}
-                                        </time>
-                                    )}
+                                <div className="flex flex-wrap items-center gap-3">
+                                    <div className="flex flex-wrap items-center gap-2">
+                                        {articleTagData.map((t) => (
+                                            <TagBadge key={t.tagKey} tag={t.tagKey} tagKey={t.tagKey} />
+                                        ))}
+                                        {article.publishedAt && (
+                                            <time dateTime={article.publishedAt} className="text-xs text-muted-foreground">
+                                                公開日 {article.publishedAt.slice(0, 10)}
+                                            </time>
+                                        )}
+                                    </div>
                                     <div className="ml-auto">
                                         <ShareButtons title={article.title} url={`/blog/${slug}`} variant="simple" platforms={["X (Twitter)", "LINE"]} />
                                     </div>
@@ -244,6 +253,11 @@ export default async function BlogPostPage({ params }: PageProps) {
                             {/* TOC (lg 未満で記事冒頭に表示。lg 以上は右 rail に表示) */}
                             <div className="mb-8 lg:hidden">
                                 <ArticleTableOfContents content={article.content} />
+                            </div>
+
+                            {/* モバイルでは右レールが本文下へ落ちるため、文脈一致アフィリエイトを1枠だけ早めに表示する。 */}
+                            <div className="mb-8 lg:hidden">
+                                <BlogSidebarTextAds tagKeys={tagKeys} limit={1} />
                             </div>
 
                             {/* 記事本文 */}

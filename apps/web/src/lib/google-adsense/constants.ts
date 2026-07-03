@@ -38,10 +38,15 @@ export const MAIN_SIDEBAR: AdSlotConfig = {
   format: "rectangle",
 };
 
-/** ランキングページ: メインコンテンツ最下部 */
+/**
+ * ランキングページ: メインコンテンツ最下部
+ * ADSENSE-FOOTER-02 (2026-07-03): 旧 rectangle (slot 2607536637・W26 viewability 26.2%) を
+ * Multiplex (関連コンテンツ型グリッド・横長) に差し替え。読了後の全幅フッターに適した形式。
+ * AdSense ユニット: stats47-content-footer-multiplex（Multiplex / autorelaxed）
+ */
 export const RANKING_PAGE_FOOTER: AdSlotConfig = {
-  slotId: "2607536637",
-  format: "rectangle",
+  slotId: "6137206504",
+  format: "multiplex",
 };
 
 /** ブログ記事内インライン広告（記事内 / fluid） */
@@ -83,9 +88,11 @@ export const THEMES_CONTENT: AdSlotConfig = {
  * コンテンツ / 一覧ページ共通フッター広告
  * 地域別カテゴリ・市区町村ページ・各一覧ページ（/blog, /survey, /ports 等）・/search の
  * メインコンテンツ最下部に配置する汎用スロット。
- * AdSense ユニット名: content-footer（ディスプレイ広告 / auto）
+ * ADSENSE-FOOTER-02 (2026-07-03): 旧 rectangle (slot 6635359989・W26 viewability 49.1%) を
+ * Multiplex に差し替え。RANKING_PAGE_FOOTER と同一 slot を共用（同一ページに同時表示されない）。
+ * AdSense ユニット: stats47-content-footer-multiplex（Multiplex / autorelaxed）
  */
 export const CONTENT_FOOTER: AdSlotConfig = {
-  slotId: "6635359989",
-  format: "rectangle",
+  slotId: "6137206504",
+  format: "multiplex",
 };
