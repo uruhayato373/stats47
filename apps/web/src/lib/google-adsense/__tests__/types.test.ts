@@ -3,13 +3,14 @@ import { describe, it, expect } from "vitest";
 import { AD_SIZES } from "../types";
 
 describe("AD_SIZES", () => {
-  it("全5フォーマットが定義されている", () => {
-    expect(Object.keys(AD_SIZES)).toHaveLength(5);
+  it("全6フォーマットが定義されている", () => {
+    expect(Object.keys(AD_SIZES)).toHaveLength(6);
     expect(AD_SIZES).toHaveProperty("rectangle");
     expect(AD_SIZES).toHaveProperty("banner");
     expect(AD_SIZES).toHaveProperty("skyscraper");
     expect(AD_SIZES).toHaveProperty("infeed");
     expect(AD_SIZES).toHaveProperty("article");
+    expect(AD_SIZES).toHaveProperty("multiplex");
   });
 
   it("各フォーマットが desktop/mobile サイズと description を持つ", () => {
