@@ -354,6 +354,32 @@ else
   echo -e "${GREEN}✅ metric config の変更なし${NC}"
 fi
 
+# 6.6 theme-catalog (指標×チャート SSOT) の整合 + 生成物鮮度チェック
+#     (.claude/rules/theme-catalog-standards.md)。カタログ TS または生成物が staged のとき発火。
+STAGED_CATALOG=$(git diff --cached --name-only --diff-filter=ACM | grep -E "^packages/data-configs/src/theme-catalog/.+\.ts$|^packages/types/src/indicator-sets/.+\.ts$|^apps/web/scripts/data/page-components/theme/.+\.json$" || true)
+
+if [ -n "$STAGED_CATALOG" ]; then
+  echo -e "${GREEN}📚 theme-catalog 整合チェック...${NC}"
+  if (cd "$PROJECT_ROOT" && npx tsx packages/data-configs/scripts/validate-theme-catalog.ts > /tmp/validate-catalog.log 2>&1); then
+    echo -e "${GREEN}✅ theme-catalog 整合チェック成功${NC}"
+    grep -E "warn 内訳" /tmp/validate-catalog.log || true
+  else
+    echo -e "${RED}❌ theme-catalog に整合 error があります。${NC}"
+    grep -E "^   |❌" /tmp/validate-catalog.log | head -10 || true
+    echo -e "${YELLOW}💡 規約: .claude/rules/theme-catalog-standards.md / 確認: npm run validate:catalog --workspace=@stats47/data-configs${NC}"
+    ERROR_COUNT=$((ERROR_COUNT + 1))
+  fi
+  # 生成物 (IndicatorSet TS / page-components JSON) が SSOT カタログと一致しているか
+  if (cd "$PROJECT_ROOT" && npx tsx packages/data-configs/scripts/generate-theme-catalog.ts --check > /tmp/catalog-check.log 2>&1); then
+    echo -e "${GREEN}✅ theme-catalog 生成物は最新${NC}"
+  else
+    echo -e "${RED}❌ theme-catalog 生成物が古い/手編集されています。${NC}"
+    grep -E "^   |❌" /tmp/catalog-check.log | head -10 || true
+    echo -e "${YELLOW}💡 再生成: npm run generate:catalog --workspace=@stats47/data-configs${NC}"
+    ERROR_COUNT=$((ERROR_COUNT + 1))
+  fi
+fi
+
 # 7. テストカバレッジチェック（オプション - 変更されたファイルに関連するテストのみ）
 echo -e "${GREEN}🧪 テストカバレッジチェック（オプション）...${NC}"
 STAGED_TS_FILES=$(git diff --cached --name-only --diff-filter=ACM | grep -E '\.(ts|tsx)$' | grep -v '\.test\.' | grep -v '\.stories\.' || true)

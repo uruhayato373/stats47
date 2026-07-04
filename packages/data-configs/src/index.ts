@@ -23,3 +23,13 @@ export {
   type ProvenanceSurvey,
   type SourceAttribution,
 } from "./provenance/resolve-metric-provenance";
+export {
+  THEME_CATALOGS,
+  listThemeCatalogs,
+  CATALOG_COMPONENT_TYPES,
+  type CatalogComponentType,
+  type ThemeCatalog,
+  type CatalogMetric,
+  type CatalogChart,
+  type MetricSelection,
+} from "./theme-catalog";
