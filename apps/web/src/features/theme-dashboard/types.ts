@@ -1,8 +1,5 @@
 import type { RankingItem, RankingValue } from "@stats47/ranking";
-import type {
-  IndicatorPanelTab,
-  TopoJSONTopology,
-} from "@stats47/types";
+import type { TopoJSONTopology } from "@stats47/types";
 
 // ============================================================================
 // テーマダッシュボード固有の型
@@ -39,15 +36,6 @@ export interface MarkdownSectionComponentProps {
   sources?: MarkdownSectionSource[];
 }
 
-/** 統計パネルのタブグルーピング設定 */
-export interface PanelTabGroup {
-  /** タブラベル */
-  label: string;
-  /** このタブに表示する rankingKey 一覧 */
-  rankingKeys: string[];
-  // チャートは chart_definitions テーブルで管理（Single Source of Truth）
-}
-
 /** テーマ設定 */
 export interface ThemeConfig {
   themeKey: string;
@@ -61,9 +49,7 @@ export interface ThemeConfig {
   keywords: string[];
   /** タブ型指標セレクタの設定 */
   tabIndicators: TabIndicatorConfig[];
-  // チャートは chart_definitions テーブルで管理（Single Source of Truth）
-  /** 統計パネルの KPI をタブでグルーピング（未指定時はフラット表示） */
-  panelTabs?: PanelTabGroup[];
+  // チャートは page_components (git TS) で管理（Single Source of Truth）
   /**
    * テーマに紐付く関連記事を取得するタグキー一覧。
    * 未指定 or 空配列の場合、ThemePageLayout は関連記事セクションを描画しない。
@@ -117,8 +103,3 @@ export interface ThemeDashboardClientProps {
   /** ハイライト対象の都道府県コード（5桁、/areas/[code]/[themeSlug] 経由時に設定） */
   highlightAreaCode?: string;
 }
-
-// PanelTabGroup と IndicatorPanelTab の互換性を型レベルで保証
-type _AssertAssignable<A, B> = A extends B ? B extends A ? true : never : never;
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-type _PanelTabCompat = _AssertAssignable<PanelTabGroup, IndicatorPanelTab>;

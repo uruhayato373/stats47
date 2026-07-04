@@ -9,7 +9,10 @@ import {
   loadFinanceCards,
 } from "@/features/local-finance-dashboard";
 import { ALL_THEMES } from "@/features/theme-dashboard/config/all-themes";
-import { ThemeSidebar } from "@/features/theme-dashboard/server";
+import {
+  ThemeIndicatorCatalogSection,
+  ThemeSidebar,
+} from "@/features/theme-dashboard/server";
 
 import { generateOGMetadata } from "@/lib/metadata/og-generator";
 
@@ -77,6 +80,7 @@ export default async function LocalFinanceThemePage() {
         </Link>
       </nav>
       <LocalFinanceDashboard cards={cards} initialFinanceFlow={initialFinanceFlow} />
+      <ThemeIndicatorCatalogSection themeKey="local-finance" />
     </PageShell>
   );
 }

@@ -19,6 +19,7 @@ export const LOCAL_FINANCE_CITY_THEME = toThemeConfig(LOCAL_FINANCE_CITY_SET);
 // Server Component
 export { ThemePageLayout } from "./components/ThemePageLayout";
 export { ThemeSidebar } from "./components/ThemeSidebar";
+export { ThemeIndicatorCatalogSection } from "./components/ThemeIndicatorCatalogSection";
 
 // Server-only loader
 export { loadThemeData } from "./lib/load-theme-data";

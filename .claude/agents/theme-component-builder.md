@@ -10,6 +10,12 @@ model: sonnet
 > `apps/web/scripts/data/page-components/<pageType>/<key>.json`。永続/リモート D1 への INSERT は廃止。
 > 追加 = JSON 配列を直接編集 → `export-page-components-snapshot.ts` で R2 生成 → `verify-page-components-snapshot.ts` で検証。
 > `page_component_assignments` テーブルは PR #216 で page_components に統合済 (廃止)。正典: `docs/01_技術設計/12_完全DBレス設計.md`。
+>
+> **★ ただし theme カタログ駆動テーマ (2026-07-04〜)**: `THEME_CATALOGS` 登録済みテーマ (現状 manufacturing) の
+> `page-components/theme/<key>.json` は **`packages/data-configs/src/theme-catalog/<key>.ts` からの生成物 (手編集禁止)**。
+> チャートの componentProps を変えるときは **JSON でなくカタログ TS の `charts[]` を編集** → `npm run generate:catalog`。
+> pre-commit/CI の Theme Catalog Gate が手編集を弾く。規約: `.claude/rules/theme-catalog-standards.md`。
+> legacy (未登録) テーマは従来どおり JSON を直接編集する。
 
 テーマダッシュボードの page_components を設計・追加する専門エージェント。既存テーマの可視化を強化する。
 

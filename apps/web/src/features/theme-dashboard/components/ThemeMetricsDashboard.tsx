@@ -7,6 +7,7 @@ import Link from "next/link";
 import { lookupArea } from "@stats47/area";
 import { ArrowRight, MapPin } from "lucide-react";
 
+import { ChartFooter } from "@/components/charts/ChartFooter";
 import { ChartPanel } from "@/components/charts/ChartPanel";
 import { MiniLineChart } from "@/components/charts/MiniCharts";
 import { ChartCard } from "@/components/charts/StatsChartCard";
@@ -208,7 +209,18 @@ export function ThemeMetricsDashboard({
       {chartComponents.length > 0 && (
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
           {chartComponents.map((chart) => (
-            <ChartPanel key={chart.componentKey} title={chart.title}>
+            <ChartPanel
+              key={chart.componentKey}
+              title={chart.title}
+              footer={
+                <ChartFooter
+                  source={chart.sourceName ?? undefined}
+                  sourceLink={chart.sourceLink}
+                  rankingLink={chart.rankingLink}
+                  rankingLabel="ランキングを見る"
+                />
+              }
+            >
               <ThemeDbChartRenderer
                 chart={chart}
                 prefCode={areaCode}

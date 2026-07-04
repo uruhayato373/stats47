@@ -73,13 +73,14 @@ const EMBEDDED_SECTIONS: Record<string, string[]> = {
 };
 
 /**
- * 2026-06-20 デザイン整理: 全テーマを一旦 hideMap (stats-card のみ) に統一。
- * 埋め込み GIS セクション (EMBEDDED_SECTIONS) も ThemePageLayout 側で
- * hideMap のとき一旦非表示にする (定義は残すので復活可能)。
+ * 2026-06-20 デザイン整理: 全テーマを hideMap (stats-card 主役) に統一。
+ * hideMap = ThemeDashboardTabbed の地図タブ UI (コロプレス/指標タブ/年度セレクタ) を
+ * 非表示にしカード主役にするフラグ。
  *
- * 地図/チャート/GIS を戻したいテーマは、その themeKey を MAP_VISIBLE_THEMES に
- * 追加する (既定は空 = 全テーマ非表示)。ThemeDashboardTabbed が hideMap: true を
- * 参照してカードのみレイアウトに分岐する。
+ * 地図タブ UI を戻したいテーマは themeKey を MAP_VISIBLE_THEMES に追加する (既定は空)。
+ *
+ * ※ 埋め込み GIS セクション (EMBEDDED_SECTIONS: 移動フロー/駅乗降/高速道路/過疎×医療/日照) は
+ *   hideMap とは独立に描画する (2026-07-04〜)。カード主役のまま主題深掘り GIS を出す。
  */
 const MAP_VISIBLE_THEMES = new Set<string>([]);
 
@@ -87,8 +88,6 @@ const MAP_VISIBLE_THEMES = new Set<string>([]);
 export const ALL_THEMES: ThemeConfig[] = THEME_SETS.map((set) => {
   const config = toThemeConfig(set);
   const embeddedSections = EMBEDDED_SECTIONS[config.themeKey];
-  // embeddedSections の定義は残す (どのテーマが GIS を使っていたか分かるように)。
-  // 実際の描画は ThemePageLayout が hideMap を見て一旦止める。
   const withEmbedded = embeddedSections ? { ...config, embeddedSections } : config;
   const hideMap = !MAP_VISIBLE_THEMES.has(config.themeKey);
   return hideMap ? { ...withEmbedded, hideMap: true } : withEmbedded;

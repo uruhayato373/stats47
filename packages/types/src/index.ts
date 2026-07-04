@@ -51,7 +51,6 @@ export type {
 export type {
   IndicatorSet,
   IndicatorEntry,
-  IndicatorPanelTab,
   IndicatorSetCategory,
   IndicatorSetUsage,
   ChartDefinition,

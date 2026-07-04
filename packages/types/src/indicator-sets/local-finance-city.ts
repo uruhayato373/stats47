@@ -35,20 +35,4 @@ export const LOCAL_FINANCE_CITY_SET: IndicatorSet = {
     { rankingKey: "real-balance-ratio-city", shortLabel: "実質収支比率", role: "secondary" },
     { rankingKey: "per-taxpayer-taxable-income", shortLabel: "課税所得", role: "secondary" },
   ],
-  panelTabs: [
-    {
-      label: "財政健全度",
-      rankingKeys: [
-        "fiscal-strength-index",
-        "current-balance-ratio-city",
-        "real-public-debt-service-ratio-city",
-        "future-burden-ratio-city",
-        "real-balance-ratio-city",
-      ],
-    },
-    {
-      label: "歳入・税収",
-      rankingKeys: ["per-taxpayer-taxable-income"],
-    },
-  ],
 };

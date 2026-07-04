@@ -8,6 +8,13 @@ model: sonnet
 
 テーマダッシュボードの設計を担当する専門エージェント。データ発見から `IndicatorSet` 生成までを一貫して行う。
 
+> **★ 統合カタログ SSOT (2026-07-04〜)**: カタログ駆動テーマ (`THEME_CATALOGS` 登録済み。現状 manufacturing) は
+> **`packages/data-configs/src/theme-catalog/<key>.ts` (`ThemeCatalog`) が唯一の SSOT**。IndicatorSet TS と
+> page-components JSON は**そこからの生成物 (手編集禁止)**。指標選定 + チャート割当 + 選定根拠 (selection) を
+> この 1 ファイルで編集し `npm run generate:catalog` → `validate:catalog` する。
+> 規約: `.claude/rules/theme-catalog-standards.md`。**未登録 (legacy) テーマは従来どおり IndicatorSet TS を直接編集**
+> (下記ワークフローが適用される)。調査・提案の前段は `theme-researcher` が担い、採択分を本 agent がカタログ化する。
+
 ## 担当範囲
 
 - テーマに最適な指標の発見・選定（DB 登録済み + e-Stat API 未登録の両方）
