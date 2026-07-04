@@ -1,5 +1,8 @@
 {
-  "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-  "audited_at": "2026-07-04T02:45:02",
-  "files": []
+  "hash": "c2c736cf8b43139a4714c76493b6f312400a0e7b65e345625c5b9a3168d68409",
+  "audited_at": "2026-07-04T07:11:40",
+  "files": [
+    ".claude/agents/theme-researcher.md",
+    ".claude/skills/theme/research-theme-catalog/SKILL.md"
+  ]
 }

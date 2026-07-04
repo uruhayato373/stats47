@@ -6,10 +6,16 @@ allowed-tools: Read, Grep, Glob, Bash, WebSearch, WebFetch, Agent
 
 # research-theme-catalog
 
-テーマの「何を、どのチャートで、なぜ載せるか」の**素材を調査して提案する**スキル。
+テーマの「何を、どのチャートで、なぜ載せるか」の**素材を実際に調査して検証済み提案を出す**スキル。
 採否判断・カタログ実装は行わない (theme-designer / theme-component-builder の責務)。
 
 > 正典規約: `.claude/rules/theme-catalog-standards.md` / 実行 agent: `.claude/agents/theme-researcher.md`
+
+## ★ 実証原則 (これを破った提案は呼び元が破棄する)
+
+以下の Stage は「説明」ではなく**実際に実行するアクション**。tool を 1 つも呼ばずに提案を出すのは失敗
+(2026-07-04 に 0-tool 捏造事故あり)。**未検証の候補・実行していない調査方法・推測 URL を書かない**
+(`.claude/rules/evidence-based-judgment.md`)。e-Stat 実在は必ず解決してから返す (「未確認」を残さない)。
 
 ## 使い方
 
@@ -61,25 +67,40 @@ grep -iE "<theme 関連キーワード>" \
   .claude/skills/analytics/gsc-improvement/reference/snapshots/*/queries.csv | sort -t',' -k3 -rn | head -20
 ```
 
-## Stage 2: 実在検証 (estat-researcher に委譲)
+## Stage 2: 実在確認 (必須・inline。estat-researcher サブ agent を spawn しない)
 
-Stage 1 で挙がった候補 rankingKey / 統計表を estat-researcher に渡し、
-**METRICS_REGISTRY 実在 + e-Stat 統計表の実在**を確認させる (AI 生成 key は実在と乖離しがち)。
+Stage 1 で挙がった候補を **自分で解決する**。estat-researcher を background で起動して待つと自分の turn が
+synthesize せず終わる事故が続いたため (2026-07-04)、**サブ agent 委譲は使わず inline に調べる**。
 
 ```bash
-# 既登録かの一次チェック (登録済みなら投入不要)
+# (a) 既登録かの一次チェック (登録済みなら投入不要)
 grep -c '"<candidate-key>":' packages/data-configs/src/registry.ts
+# (b) 既知 Gap は backlog に statsDataId 付きで documented なことがある (再利用可)
+grep -iE "<theme 関連語>" docs/02_実装計画/05_指標バックログ.md
 ```
 
-- 登録済み → そのまま採用候補
-- 未登録だが e-Stat に実在 → `要ingest` (採択時 data-ingester が投入)
-- e-Stat に不在 → 不採用 (rejectedCandidates 行き)
+- 登録済み (`✅登録済`) → そのまま採用候補
+- 未登録 → 自分で e-Stat を WebFetch/検索して **statsDataId + cdCat01 を突き止める**:
+  - 自分で確認できた (`✅e-Stat実在(自分で確認)`) → `要ingest` 採用候補 (statsDataId を明記)
+  - statsDataId は分かるが確信が持てない → `要呼び元検証(statsDataId=X)` (呼び元が最終確定)
+  - e-Stat に不在 / statsDataId すら不明 (`❌不在`) → **不採用** (rejectedCandidates 行き)
 
 ## Stage 3: 統合・提案 (05_指標バックログ.md へ append)
 
 `docs/02_実装計画/05_指標バックログ.md` にテーマ節を append (append-only)。フォーマットは
 `.claude/agents/theme-researcher.md` の「提案の出力先フォーマット」に従う。各候補に:
-`rankingKey / shortLabel / 推奨 role / 推奨チャート (componentType) / 出典 (proposedBy+URL) / e-Stat実在 / verdict`。
+`rankingKey / shortLabel / 推奨 role / 推奨チャート / statsDataId+cdCat01 / 出典 / e-Stat実在 / verdict`。
+
+## ★ 呼び元の受け入れ検証 (捏造を機械的に弾く・書き込み前に必須)
+
+theme-researcher を Agent tool で呼ぶ場合、**呼び元 (メインセッション) は返答を無条件で信じず**、
+backlog へ書く前に下記を確認する。1 つでも失格なら**破棄して再実行** (提案は保存しない)。
+
+1. **tool_uses メタ**: 完了通知の `tool_uses` が **0 なら即破棄** (何も調査していない = 捏造)。
+2. **self-audit 行**: `未検証候補=0` か。0 でなければ破棄。
+3. **statsDataId のスポット検証**: 未登録候補から 1〜2 件選び、その statsDataId が e-Stat に実在するか
+   呼び元が自分で確認する (`/inspect-estat-meta <statsDataId>` or `curl` e-Stat API)。実在しなければ破棄。
+4. 合格したら呼び元が backlog へ append (同一ファイルへの並列書込を避けるため、agent には返させ呼び元が書く)。
 
 ## 完了後の引き継ぎ (このスキルの外)
 
