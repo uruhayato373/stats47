@@ -1,60 +1,99 @@
+// AUTO-GENERATED — DO NOT EDIT.
+// Source of truth: packages/data-configs/src/theme-catalog/foreign-residents.ts
+// Regenerate: npm run generate:catalog --workspace=@stats47/data-configs
 import type { IndicatorSet } from "../indicator-set";
 
 export const FOREIGN_RESIDENTS_SET: IndicatorSet = {
-  key: "foreign-residents",
-  title: "外国人",
-  description:
-    "都道府県別の在留外国人数・外国人比率・国籍別人口をランキングとチャートで比較。47都道府県の外国人統計を一覧で確認できます。",
-  category: "demographics",
-  usage: "theme",
-  metrics: [
-    // 総数系（比率優先）
-    { rankingKey: "foreign-resident-count-per-100k", shortLabel: "外国人比率", role: "primary" },
-    { rankingKey: "foreign-resident-count", shortLabel: "外国人数", role: "secondary" },
-    { rankingKey: "resident-foreigner-population", shortLabel: "在留外国人", role: "context" },
-    // 国籍別（比率優先）
-    { rankingKey: "foreign-resident-count-china-per-100k", shortLabel: "中国(比率)", role: "secondary" },
-    { rankingKey: "foreign-resident-count-china", shortLabel: "中国(人数)", role: "context" },
-    { rankingKey: "foreign-resident-count-korea-per-100k", shortLabel: "韓国(比率)", role: "secondary" },
-    { rankingKey: "foreign-resident-count-korea", shortLabel: "韓国(人数)", role: "context" },
-    { rankingKey: "foreign-resident-count-usa-per-100k", shortLabel: "米国(比率)", role: "context" },
-    { rankingKey: "foreign-resident-count-usa", shortLabel: "米国(人数)", role: "context" },
-    // 観光
-    { rankingKey: "total-overnight-guests-foreign", shortLabel: "外国人宿泊", role: "secondary" },
-  ],
-  panelTabs: [
+  "key": "foreign-residents",
+  "title": "外国人",
+  "description": "都道府県別の在留外国人数・外国人比率・国籍別人口をランキングとチャートで比較。47都道府県の外国人統計を一覧で確認できます。",
+  "category": "demographics",
+  "usage": "theme",
+  "metrics": [
     {
-      label: "総数",
-      rankingKeys: [
-        "foreign-resident-count-per-100k",
-        "foreign-resident-count",
-        "resident-foreigner-population",
-      ],
+      "rankingKey": "foreign-resident-count-per-100k",
+      "shortLabel": "外国人比率",
+      "role": "primary"
     },
     {
-      label: "国籍別",
-      rankingKeys: [
+      "rankingKey": "foreign-resident-count",
+      "shortLabel": "外国人数",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "resident-foreigner-population",
+      "shortLabel": "在留外国人",
+      "role": "context"
+    },
+    {
+      "rankingKey": "foreign-resident-count-china-per-100k",
+      "shortLabel": "中国(比率)",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "foreign-resident-count-china",
+      "shortLabel": "中国(人数)",
+      "role": "context"
+    },
+    {
+      "rankingKey": "foreign-resident-count-korea-per-100k",
+      "shortLabel": "韓国(比率)",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "foreign-resident-count-korea",
+      "shortLabel": "韓国(人数)",
+      "role": "context"
+    },
+    {
+      "rankingKey": "foreign-resident-count-usa-per-100k",
+      "shortLabel": "米国(比率)",
+      "role": "context"
+    },
+    {
+      "rankingKey": "foreign-resident-count-usa",
+      "shortLabel": "米国(人数)",
+      "role": "context"
+    },
+    {
+      "rankingKey": "total-overnight-guests-foreign",
+      "shortLabel": "外国人宿泊",
+      "role": "secondary"
+    }
+  ],
+  "panelTabs": [
+    {
+      "label": "総数",
+      "rankingKeys": [
+        "foreign-resident-count-per-100k",
+        "foreign-resident-count",
+        "resident-foreigner-population"
+      ]
+    },
+    {
+      "label": "国籍別",
+      "rankingKeys": [
         "foreign-resident-count-china-per-100k",
         "foreign-resident-count-china",
         "foreign-resident-count-korea-per-100k",
         "foreign-resident-count-korea",
         "foreign-resident-count-usa-per-100k",
-        "foreign-resident-count-usa",
-      ],
+        "foreign-resident-count-usa"
+      ]
     },
     {
-      label: "観光",
-      rankingKeys: [
-        "total-overnight-guests-foreign",
-      ],
-    },
+      "label": "観光",
+      "rankingKeys": [
+        "total-overnight-guests-foreign"
+      ]
+    }
   ],
-  keywords: [
+  "keywords": [
     "外国人",
     "在留外国人",
     "外国人比率",
     "都道府県",
     "ランキング",
-    "統計",
-  ],
+    "統計"
+  ]
 };

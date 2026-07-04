@@ -1,12 +1,5 @@
 {
-  "hash": "afcb2a774e6de19a8c7ea7617c5633856163db09e099e3575b6336033ba13f70",
-  "audited_at": "2026-07-04T01:19:44",
-  "files": [
-    ".claude/agents/README.md",
-    ".claude/agents/theme-component-builder.md",
-    ".claude/agents/theme-designer.md",
-    ".claude/agents/theme-researcher.md",
-    ".claude/skills/theme/research-theme-catalog/SKILL.md",
-    ".claude/skills/theme/research-theme-catalog/reference/notebooks.md"
-  ]
+  "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "audited_at": "2026-07-04T01:47:10",
+  "files": []
 }

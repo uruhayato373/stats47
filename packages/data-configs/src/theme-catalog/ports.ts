@@ -1,0 +1,165 @@
+import type { ThemeCatalog } from "./types";
+
+// Migrated 2026-07-04 from IndicatorSet + page-components JSON (byte-exact round-trip verified).
+export const PORTS_CATALOG: ThemeCatalog = {
+  "key": "ports",
+  "title": "港湾",
+  "description": "都道府県別の港湾取扱貨物量・コンテナ個数・入港船舶・港湾旅客数をランキングとチャートで比較。貿易立国日本の玄関口がどの地域に集中するのか、輸出入貨物の偏在やフェリー・旅客船の地域交通機能を47都道府県のデータで可視化します。",
+  "category": "economy",
+  "usage": "theme",
+  "metrics": [
+    {
+      "rankingKey": "port-cargo-total",
+      "shortLabel": "海上出入貨物量",
+      "role": "primary"
+    },
+    {
+      "rankingKey": "port-cargo-export",
+      "shortLabel": "輸出貨物量",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "port-cargo-import",
+      "shortLabel": "輸入貨物量",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "port-container-count",
+      "shortLabel": "コンテナ個数",
+      "role": "primary"
+    },
+    {
+      "rankingKey": "maritime-import-export-cargo",
+      "shortLabel": "海上出入貨物(統計体系)",
+      "role": "context"
+    },
+    {
+      "rankingKey": "port-inbound-ships",
+      "shortLabel": "入港船舶隻数",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "port-ships-tonnage",
+      "shortLabel": "入港船舶総トン数",
+      "role": "secondary"
+    },
+    {
+      "rankingKey": "port-passengers-total",
+      "shortLabel": "港湾旅客数",
+      "role": "primary"
+    },
+    {
+      "rankingKey": "passenger-ship-transport",
+      "shortLabel": "旅客船輸送人員",
+      "role": "secondary"
+    }
+  ],
+  "charts": [
+    {
+      "componentKey": "ports-cargo-trend",
+      "componentType": "line-chart",
+      "title": "輸出入 海上貨物量の推移",
+      "componentProps": {
+        "estatParams": [
+          {
+            "statsDataId": "0003130738",
+            "cdCat01": "110"
+          },
+          {
+            "statsDataId": "0003130738",
+            "cdCat01": "120"
+          }
+        ],
+        "labels": [
+          "輸出",
+          "輸入"
+        ],
+        "seriesColors": [
+          "#3b82f6",
+          "#f59e0b"
+        ]
+      },
+      "sourceName": "港湾統計",
+      "sourceLink": "https://www.stat.go.jp/data/ssds/index.htm",
+      "rankingLink": "/ranking/port-cargo-total",
+      "gridColumnSpan": 12,
+      "gridColumnSpanTablet": null,
+      "gridColumnSpanSm": null,
+      "dataSource": "ranking",
+      "section": null,
+      "sortOrder": 10
+    },
+    {
+      "componentKey": "ports-container-trend",
+      "componentType": "line-chart",
+      "title": "コンテナ取扱個数の推移",
+      "componentProps": {
+        "estatParams": [
+          {
+            "statsDataId": "0003130688",
+            "cdCat01": "100"
+          }
+        ],
+        "labels": [
+          "コンテナ個数"
+        ],
+        "seriesColors": [
+          "#06b6d4"
+        ]
+      },
+      "sourceName": "港湾統計",
+      "sourceLink": "https://www.stat.go.jp/data/ssds/index.htm",
+      "rankingLink": "/ranking/port-container-count",
+      "gridColumnSpan": 12,
+      "gridColumnSpanTablet": null,
+      "gridColumnSpanSm": null,
+      "dataSource": "ranking",
+      "section": null,
+      "sortOrder": 20
+    },
+    {
+      "componentKey": "ports-passengers-trend",
+      "componentType": "line-chart",
+      "title": "港湾旅客数の推移",
+      "componentProps": {
+        "estatParams": [
+          {
+            "statsDataId": "0003130737",
+            "cdCat01": "100"
+          }
+        ],
+        "labels": [
+          "港湾旅客数"
+        ],
+        "seriesColors": [
+          "#22c55e"
+        ]
+      },
+      "sourceName": "港湾統計",
+      "sourceLink": "https://www.stat.go.jp/data/ssds/index.htm",
+      "rankingLink": "/ranking/port-passengers-total",
+      "gridColumnSpan": 12,
+      "gridColumnSpanTablet": null,
+      "gridColumnSpanSm": null,
+      "dataSource": "ranking",
+      "section": null,
+      "sortOrder": 30
+    }
+  ],
+  "keywords": [
+    "港湾",
+    "港",
+    "貿易",
+    "コンテナ",
+    "貨物",
+    "輸出入",
+    "フェリー",
+    "海運"
+  ],
+  "relatedArticleTagKeys": [
+    "港湾",
+    "貿易",
+    "物流",
+    "海運"
+  ]
+};

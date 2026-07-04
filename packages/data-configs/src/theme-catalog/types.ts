@@ -22,33 +22,29 @@ import type {
 } from "@stats47/types";
 
 /**
- * 有効な componentType の文字列 union。
+ * テーマページ (`/themes/*`) で有効な componentType の文字列 union。
  *
- * ⚠️ 正典は app 層の `DashboardConfigMap`
- * (`apps/web/src/components/stat-charts/types/index.ts`)。あちらは
- * `@stats47/estat-api/server` の型に依存するため packages へ移設できず、ここに
- * キーだけを複製する。両者の drift は app 側の型等価アサーション
- * (`Expect<Equal<DashboardComponentType, CatalogComponentType>>`) が type-check で検知する。
+ * ⚠️ テーマページは `ThemeDbChartRenderer`
+ * (`apps/web/src/features/theme-dashboard/`) で描画され、これは stat-charts の
+ * `DashboardComponentRenderer` (area 系) とは**別の renderer / 別の型集合**。
+ * チャート型の正典は `ThemeDbChartComponentProps`
+ * (`apps/web/src/features/theme-dashboard/actions/theme-chart-props.ts`、6 種) +
+ * 非チャート (`kpi-card` / `markdown-section` / `pyramid-chart`)。
+ * app 層へ import できないためここに複製し、drift は app 側の型アサーション
+ * (`catalog-drift-guard.ts`: ThemeDbChartComponentProps の型 ⊆ CatalogComponentType) が検知する。
  */
 export const CATALOG_COMPONENT_TYPES = [
-  "kpi-card",
+  // ThemeDbChartComponentProps (チャート 6 種)
   "line-chart",
-  "bar-chart",
-  "diverging-bar-chart",
   "mixed-chart",
-  "sunburst",
-  "treemap",
-  "bar-chart-race",
-  "multi-stats-card",
-  "definitions-card",
-  "slide-presentation",
-  "stats-table",
-  "stacked-area",
-  "radar-chart",
-  "attribute-matrix",
-  "ranking-chart",
-  "pyramid-chart",
   "composition-chart",
+  "donut-chart",
+  "cpi-profile",
+  "cpi-heatmap",
+  // 非チャート (ThemeMetricsDashboard で個別描画)
+  "kpi-card",
+  "markdown-section",
+  "pyramid-chart",
 ] as const;
 
 export type CatalogComponentType = (typeof CATALOG_COMPONENT_TYPES)[number];

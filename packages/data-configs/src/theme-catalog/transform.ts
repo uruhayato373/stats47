@@ -79,11 +79,11 @@ function chartToPageComponent(chart: CatalogChart): Record<string, unknown> {
 /**
  * カタログ → page-components JSON 文字列 (minified, 改行なし・末尾改行なし)。
  * export-page-components-snapshot.ts が R2 へ verbatim 転送するため、既存配信 byte と一致させる。
- * sortOrder 昇順で並べる (既存データの並び順に合わせる)。
+ *
+ * ⚠️ charts 配列の順序をそのまま出力する (sortOrder で再ソートしない)。既存 JSON には
+ * array 順 ≠ sortOrder 順のテーマ (local-economy 等・sortOrder 重複あり) があり、再ソートすると
+ * byte 不一致になる。表示順は描画側が sortOrder で決めるため、配列順は SSOT の見た目管理用。
  */
 export function catalogToPageComponentsJson(catalog: ThemeCatalog): string {
-  const rows = [...catalog.charts]
-    .sort((a, b) => a.sortOrder - b.sortOrder)
-    .map(chartToPageComponent);
-  return JSON.stringify(rows);
+  return JSON.stringify(catalog.charts.map(chartToPageComponent));
 }
