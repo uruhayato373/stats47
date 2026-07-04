@@ -26,6 +26,7 @@ import {
 
 import { ThemeAreaHeader } from "./ThemeAreaHeader";
 import { ThemeDashboardClient } from "./ThemeDashboardClient";
+import { ThemeIndicatorCatalogSection } from "./ThemeIndicatorCatalogSection";
 import { ThemePrefectureProvider } from "./ThemePrefectureContext";
 import { ThemeRelatedArticles } from "./ThemeRelatedArticles";
 
@@ -129,20 +130,22 @@ export async function ThemePageLayout({ theme, data, areaContext }: Props) {
 
       {/*
         埋め込み GIS セクション (人口移動 Sankey / 高速道路タイムライン / 駅乗降 /
-        過疎×医療 / 日照地図)。2026-06-20 デザイン整理中は hideMap テーマで一旦非表示。
-        どのテーマが GIS を使っていたかは all-themes.ts の EMBEDDED_SECTIONS に定義を
-        残してある (theme.embeddedSections として伝播)。復活は hideMap を外すだけ。
+        過疎×医療 / 日照地図)。定義は all-themes.ts の EMBEDDED_SECTIONS。
+        hideMap (地図タブ非表示) とは独立に描画する — カード主役レイアウトのまま
+        主題深掘りの GIS 可視化を復活 (2026-07-04)。
       */}
-      {!theme.hideMap &&
-        theme.embeddedSections?.map((sectionKey) => {
-          const Section = THEME_SECTION_REGISTRY[sectionKey];
-          if (!Section) return null;
-          return (
-            <div key={sectionKey} className="mt-8">
-              <Section />
-            </div>
-          );
-        })}
+      {theme.embeddedSections?.map((sectionKey) => {
+        const Section = THEME_SECTION_REGISTRY[sectionKey];
+        if (!Section) return null;
+        return (
+          <div key={sectionKey} className="mt-8">
+            <Section />
+          </div>
+        );
+      })}
+
+      {/* このテーマの全指標 (context 指標・選定根拠を含む完全一覧) */}
+      <ThemeIndicatorCatalogSection themeKey={theme.themeKey} />
 
       {/* 広告: ダッシュボード読了後・関連記事の前 */}
       <div className="mt-8">

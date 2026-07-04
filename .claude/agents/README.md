@@ -78,8 +78,9 @@
 
 | agent | role | 派生元 |
 |---|---|---|
-| `theme-designer` | テーマ → IndicatorSet 設計 (どの指標を載せるか) | 既存 |
-| `theme-component-builder` | page_components 監査・INSERT (旧 theme-enhancer) | リネーム |
+| `theme-researcher` 🆕 | テーマ指標×チャート候補を白書(NotebookLM)/Web/競合/GSC から調査し provenance 付き提案を 05_指標バックログ へ (read-only)。採択は theme-designer に委譲 | 2026-07-04 新設 |
+| `theme-designer` | テーマ → 統合カタログ (ThemeCatalog) 設計 (どの指標を載せるか)。カタログ駆動テーマは `packages/data-configs/src/theme-catalog/` が SSOT | 既存 |
+| `theme-component-builder` | page_components 監査・編集 (旧 theme-enhancer)。カタログ駆動テーマは catalog TS の charts[] を編集 | リネーム |
 | `theme-ui-manager` 🆕 | テーマページ UI 層の統一・監査・是正 (レイアウト/見出し/セレクタ/カード構成/コピー)。重複セレクタ・古い「地図」コピー等のドリフトを管理 | 2026-06-20 新設 |
 | `ranking-ui-manager` 🆕 | ランキングページ (/ranking/*) UI 層の統一・監査・是正 (レイアウト/見出し/パンくず/サイドバー/SEO構造化データ/コピー)。theme-ui-manager の ranking 版。データ=data-ingester、公開=ranking-publisher に委譲 | 2026-06-21 新設 |
 | `chart-component-builder` | shadcn UI + D3.js チャートコンポーネント実装・カタログ管理 (chart-component-standards.md が SSoT)。静的 SVG の chart-author とは別物 (React/D3 実装専任) | 既存 (2026-07-03 Tier 表へ追記・棚卸し漏れ是正) |

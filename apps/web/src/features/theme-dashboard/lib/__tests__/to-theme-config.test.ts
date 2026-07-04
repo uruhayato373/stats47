@@ -14,7 +14,6 @@ const makeIndicatorSet = (overrides: Partial<IndicatorSet> = {}): IndicatorSet =
     { rankingKey: "context-key", shortLabel: "コンテキスト", role: "context" },
   ],
   keywords: ["テスト", "テーマ"],
-  panelTabs: undefined,
   ...overrides,
 } as IndicatorSet);
 

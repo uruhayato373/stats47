@@ -100,6 +100,16 @@ jobs:
           npm run validate:config --workspace=@stats47/data-configs
         continue-on-error: false
 
+      - name: 📚 Theme Catalog Gate
+        run: |
+          # テーマ指標×チャート統合カタログ (SSOT) の整合と生成物の鮮度を担保。
+          # 生成物 (IndicatorSet TS / page-components JSON) が手編集・生成忘れで
+          # カタログから乖離するのを両方向で検知する。
+          # 規約: .claude/rules/theme-catalog-standards.md
+          npm run validate:catalog --workspace=@stats47/data-configs
+          npm run generate:catalog --workspace=@stats47/data-configs -- --check
+        continue-on-error: false
+
       - name: 🖼️ Blog Thumbnail Gate
         run: |
           # 公開R2 (storage.stats47.jp) で全ブログ記事の thumbnail-light.webp が

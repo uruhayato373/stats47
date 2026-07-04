@@ -52,26 +52,16 @@ interface SeedRow {
 }
 
 function buildThemeMetricRows(set: IndicatorSet): SeedRow[] {
-  const rows: SeedRow[] = [];
-  const panelTabByKey = new Map<string, { label: string; order: number }>();
-  for (const tab of set.panelTabs ?? []) {
-    tab.rankingKeys.forEach((rk, idx) => {
-      panelTabByKey.set(rk, { label: tab.label, order: idx });
-    });
-  }
-
-  for (const m of set.metrics) {
-    const panel = panelTabByKey.get(m.rankingKey);
-    rows.push({
-      themeKey: set.key,
-      metricKey: m.rankingKey,
-      panelLabel: panel?.label ?? null,
-      panelOrder: panel?.order ?? 0,
-      role: m.role ?? null,
-      shortLabel: m.shortLabel,
-    });
-  }
-  return rows;
+  // panelTabs は廃止済 (テーマ renderer 未使用)。panelLabel/panelOrder は既存カラム
+  // 互換のため null/0 で埋める (このスクリプトは使い捨てローカル DB seed 用)。
+  return set.metrics.map((m) => ({
+    themeKey: set.key,
+    metricKey: m.rankingKey,
+    panelLabel: null,
+    panelOrder: 0,
+    role: m.role ?? null,
+    shortLabel: m.shortLabel,
+  }));
 }
 
 async function main() {

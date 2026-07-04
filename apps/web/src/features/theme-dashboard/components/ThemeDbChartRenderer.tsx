@@ -65,7 +65,7 @@ export function ThemeDbChartRenderer({ chart, prefCode }: Props) {
     return <ChartLoading height={200} />;
   }
 
-  return <ThemeChartResultRenderer chart={chart} chartResult={chartResult} />;
+  return <ThemeChartResultRenderer chartResult={chartResult} />;
 }
 
 function parseMarkdownSectionComponentProps(
