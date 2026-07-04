@@ -58,16 +58,13 @@ panelTab の指標を分析:
 
 `#0ea5e9`, `#14b8a6`, `#a855f7`, `#f43f5e`, `#84cc16`, `#06b6d4`
 
-## section 完全一致ルール
+## section ルール (2026-07-04 訂正: テーマでは未使用)
 
-`page_component_assignments.section` は `IndicatorSet.panelTabs[].label` と完全一致必須。
-
-```typescript
-// PrefectureStatsPanel.tsx
-pageCharts?.filter((c) => c.section === tab.label)
-```
-
-`section === null` → タブ外のトップレベル表示。
+**⚠️ 旧「section = panelTabs[].label 完全一致必須」は誤り**。panelTabs は廃止済み、かつ現行の
+`ThemeMetricsDashboard` は `section` を参照せず、チャートを **componentType でフィルタし flat grid に
+`sortOrder` 順**で描画する。テーマページでの配置は「どのチャートを載せるか + `sortOrder` + `gridColumnSpan`」で決まる。
+`section` は残置フィールドで theme では効かない (area ページの `AreaChartSection` のみグループ見出しに使用)。
+正典: `.claude/rules/theme-catalog-standards.md`。
 
 ## estatParams の取得方法
 

@@ -9,6 +9,12 @@ primary_agent: theme-component-builder
 
 テーマダッシュボードに追加するチャートを設計する。既存コンポーネントの再利用を最優先し、不足分のみ新規設計する。
 
+> **★ カタログ駆動テーマ (2026-07-04〜)**: `THEME_CATALOGS` 登録テーマは
+> `packages/data-configs/src/theme-catalog/<key>.ts` が SSOT、page-components JSON は生成物 (手編集禁止)。
+> 正典 = `.claude/rules/theme-catalog-standards.md` (componentType 9 種・チャート選定文法)。
+> **panelTabs は廃止済み**・**section は theme renderer 未使用** (配置は componentType + `sortOrder` + `gridColumnSpan`)。
+> 以下の panelTab/section 記述は legacy テーマ向けの旧記述として読むこと。
+
 ## 設計原則
 
 1. **1データ1コンポーネント**: 同じ指標は1つの chart_key を areas / theme で共有する

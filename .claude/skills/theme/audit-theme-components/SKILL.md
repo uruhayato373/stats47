@@ -9,6 +9,11 @@ primary_agent: theme-component-builder
 
 テーマダッシュボードの page_components を監査し、設計原則との整合性を確認する。
 
+> **★ カタログ駆動テーマ (2026-07-04〜)**: `THEME_CATALOGS` 登録テーマは
+> `packages/data-configs/src/theme-catalog/<key>.ts` が SSOT。正典 = `.claude/rules/theme-catalog-standards.md`。
+> **panelTabs は廃止済み**・**section は theme renderer 未使用** (配置は componentType + `sortOrder`)。整合検証は
+> `npm run validate:catalog` / `generate:catalog --check` を使う。以下の panelTab/section 監査項目は legacy テーマ向けの旧記述。
+
 ## 設計原則（監査基準）
 
 1. **1データ1コンポーネント**: 同じ estatParams のコンポーネントが複数存在してはならない

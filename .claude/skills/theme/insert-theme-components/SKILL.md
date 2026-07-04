@@ -11,6 +11,11 @@ primary_agent: theme-component-builder
 
 > **完全DBレス (doc12 Phase E)**: page_components の SSOT は **git TS** `apps/web/scripts/data/page-components/`。
 > 永続/リモート D1 への INSERT は廃止。**JSON を直接編集 → generator で R2 反映 → verify** のフローに統一。
+>
+> **★ ただしカタログ駆動テーマ (2026-07-04〜)**: `THEME_CATALOGS` 登録テーマの `page-components/theme/<key>.json` は
+> **`packages/data-configs/src/theme-catalog/<key>.ts` からの生成物 (手編集禁止)**。反映は **カタログ TS を編集 →
+> `npm run generate:catalog` → `validate:catalog`** の順。JSON 直接編集は pre-commit/CI の Theme Catalog Gate が弾く。
+> legacy (未登録) テーマのみ下記の JSON 直接編集フロー。正典 = `.claude/rules/theme-catalog-standards.md`。
 
 ## SSOT の場所
 

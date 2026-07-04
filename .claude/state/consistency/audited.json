@@ -1,8 +1,12 @@
 {
-  "hash": "c2c736cf8b43139a4714c76493b6f312400a0e7b65e345625c5b9a3168d68409",
-  "audited_at": "2026-07-04T07:11:40",
+  "hash": "bcd3446000ec750c67c8a84298b4d5d842315b659b9b1ccd82de7d5aada7d47c",
+  "audited_at": "2026-07-04T07:48:19",
   "files": [
-    ".claude/agents/theme-researcher.md",
-    ".claude/skills/theme/research-theme-catalog/SKILL.md"
+    ".claude/agents/theme-component-builder.md",
+    ".claude/agents/theme-designer.md",
+    ".claude/skills/theme/audit-theme-components/SKILL.md",
+    ".claude/skills/theme/design-theme-charts/SKILL.md",
+    ".claude/skills/theme/design-theme-charts/reference/chart-patterns.md",
+    ".claude/skills/theme/insert-theme-components/SKILL.md"
   ]
 }
