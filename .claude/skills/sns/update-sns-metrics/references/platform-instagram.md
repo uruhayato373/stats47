@@ -126,48 +126,38 @@ JSEOF
 node /tmp/ig-fetch-insights.cjs
 ```
 
-### IG-4. DB マッチング + メトリクス記録
+### IG-4. 投稿台帳マッチング + メトリクス記録
 
-media の `permalink` から shortcode を抽出して `sns_posts.post_url` とマッチング。未マッチは `caption` 先頭一致 or `ranking_name` 含有でフォールバック。
+media の `permalink` から shortcode を抽出して投稿台帳 `posts.json` の `post_url` とマッチング。未マッチは `caption` 先頭一致 or `ranking_name` 含有でフォールバック。投稿台帳（`sns-posts-store.cjs`）と R2 ranking-items snapshot から読み、キャッシュ列は `updateById` で更新する（完全DBレス。旧 D1 sns_posts / indicators は廃止）。
 
 ```bash
 cat > /tmp/ig-match-db.cjs << 'JSEOF'
-const Database = require("better-sqlite3");
 const path = require("path");
 const fs = require("fs");
 
 const PROJECT_ROOT = process.cwd();
-const DB_PATH = path.join(
-  PROJECT_ROOT,
-  ".local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite"
-);
-const db = new Database(DB_PATH);
+const store = require(path.join(PROJECT_ROOT, ".claude/scripts/lib/sns-posts-store.cjs"));
 
+(async () => {
 const media = JSON.parse(fs.readFileSync("/tmp/ig-media.json", "utf8"));
 const insights = JSON.parse(fs.readFileSync("/tmp/ig-insights.json", "utf8"));
 const insightsById = Object.fromEntries(insights.map((i) => [i.id, i]));
 
-const posts = db
-  .prepare("SELECT id, content_key, caption, domain, post_type, post_url FROM sns_posts WHERE platform = ?")
-  .all("instagram");
-const rankings = db.prepare("SELECT ranking_key, ranking_name FROM indicators").all();
+const posts = store.query((p) => p.platform === "instagram");
+// ランキング名→キーは R2 ranking-items snapshot（旧 D1 indicators の DBレス版）
+const R2 = process.env.R2_PUBLIC_FETCH_URL || "https://storage.stats47.jp";
+const snap = await (await fetch(R2 + "/app/ranking-items/all.json")).json();
+const rankings = (snap.items || []).map((r) => ({ ranking_key: r.rankingKey, ranking_name: r.rankingName || r.title }));
 
 const snsStore = require(path.join(PROJECT_ROOT, ".claude/scripts/lib/sns-metrics-store.cjs"));
 const fetchedAt = new Date().toISOString();
 
-// sns_posts のキャッシュ列マッピング（IG のメトリクス → 既存カラム）:
+// 投稿台帳 posts.json のキャッシュ列マッピング（IG のメトリクス → レコード列）:
 //   likes       ← like_count
 //   replies     ← comments_count（X と同じ「返信」枠を流用）
 //   bookmarks   ← saves（保存数）
 //   reposts     ← shares（シェア数）
 //   impressions ← reach（ユニーク到達数。IG には厳密な impressions はないので reach で代用）
-const updCache = db.prepare(
-  "UPDATE sns_posts SET likes=?, replies=?, bookmarks=?, reposts=?, impressions=?, metrics_updated_at=? WHERE id=?"
-);
-const updUrl = db.prepare("UPDATE sns_posts SET post_url=? WHERE id=? AND (post_url IS NULL OR post_url = '')");
-const updCaption = db.prepare(
-  "UPDATE sns_posts SET caption=? WHERE id=? AND (caption IS NULL OR caption = '')"
-);
 
 function shortcodeFromPermalink(url) {
   const m = url?.match(/\/(?:p|reel)\/([A-Za-z0-9_-]+)/);
@@ -175,7 +165,7 @@ function shortcodeFromPermalink(url) {
 }
 
 let matched = 0, urlUp = 0, capUp = 0, unmatched = 0;
-const tx = db.transaction(() => {
+{
   for (const m of media) {
     const sc = shortcodeFromPermalink(m.permalink);
     const ins = insightsById[m.id] ?? {};
@@ -207,14 +197,18 @@ const tx = db.transaction(() => {
     }
     matched++;
 
-    if (sc) {
-      const r = updUrl.run(m.permalink, post.id);
-      if (r.changes > 0) urlUp++;
-    }
-    if (m.caption && m.caption.length > 10) {
-      const cr = updCaption.run(m.caption, post.id);
-      if (cr.changes > 0) capUp++;
-    }
+    // キャッシュ列を 1 回の updateById で更新（post_url / caption は空のときだけ backfill）
+    const patch = {
+      likes: m.like_count ?? 0,
+      replies: m.comments_count ?? 0,
+      bookmarks: ins.saves ?? null,
+      reposts: ins.shares ?? null,
+      impressions: ins.reach ?? null,
+      metrics_updated_at: fetchedAt,
+    };
+    if (sc && !post.post_url) { patch.post_url = m.permalink; urlUp++; }
+    if (!post.caption && m.caption && m.caption.length > 10) { patch.caption = m.caption; capUp++; }
+    store.updateById(post.id, patch);
 
     snsStore.upsertMetric({
       sns_post_id: post.id,
@@ -229,25 +223,14 @@ const tx = db.transaction(() => {
       saves: ins.saves ?? null,
       shares: ins.shares ?? null,
     });
-
-    updCache.run(
-      m.like_count ?? 0,
-      m.comments_count ?? 0,
-      ins.saves ?? null,
-      ins.shares ?? null,
-      ins.reach ?? null,
-      fetchedAt,
-      post.id
-    );
   }
-});
-tx();
+}
 
 console.log(
   `Matched: ${matched}, URLs updated: ${urlUp}, Captions backfilled: ${capUp}, Unmatched: ${unmatched}`
 );
 console.log(`sns-metrics snapshot rows: ${snsStore.countAll()}`);
-db.close();
+})();
 JSEOF
 
 node /tmp/ig-match-db.cjs
@@ -275,4 +258,4 @@ rm -f /tmp/ig-media.json /tmp/ig-insights.json /tmp/ig-fetch-media.cjs /tmp/ig-f
 
 ## sns-metrics-store.cjs の使用
 
-時系列履歴は `.claude/skills/analytics/sns-metrics-improvement/snapshots/YYYY-MM-DD/metrics.csv` に蓄積される（.claude/rules/data-storage.mdに従い `.claude/` 配下）。sns_posts のキャッシュ列（likes / replies / reach / views / metrics_updated_at）は D1 の運用データとして別途 UPDATE。
+時系列履歴は `.claude/skills/analytics/sns-metrics-improvement/snapshots/YYYY-MM-DD/metrics.csv` に蓄積される（.claude/rules/data-storage.mdに従い `.claude/` 配下）。最新値キャッシュ列（likes / replies / reach / views / metrics_updated_at）は投稿台帳 `posts.json` のレコードに `sns-posts-store.cjs` の `updateById` で別途書き込む（完全DBレス。旧 D1 sns_posts は廃止）。

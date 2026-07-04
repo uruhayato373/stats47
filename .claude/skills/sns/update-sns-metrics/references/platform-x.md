@@ -74,20 +74,22 @@ echo "=== Collected ==="
 node -e "console.log(JSON.parse(require('fs').readFileSync('/tmp/x-tweets-all.json','utf8')).length + ' tweets')"
 ```
 
-### X-4. DB マッチング + メトリクス記録
+### X-4. 投稿台帳マッチング + メトリクス記録
 
-Node.js スクリプトをファイルに書き出して実行する。
+Node.js スクリプトをファイルに書き出して実行する。投稿台帳 `posts.json`（`sns-posts-store.cjs`）と R2 ranking-items snapshot から読み、キャッシュ列は `updateById` で更新する（完全DBレス。旧 D1 sns_posts / indicators は廃止）。
 
 ```bash
-cat > /tmp/x-match-db.js << JSEOF
-const Database = require("${PROJECT_ROOT}/node_modules/better-sqlite3");
+cat > /tmp/x-match-db.js << 'JSEOF'
 const fs = require("fs");
-const DB_PATH = "${PROJECT_ROOT}/.local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite";
-const db = new Database(DB_PATH);
+const store = require("./.claude/scripts/lib/sns-posts-store.cjs");
 
+(async () => {
 const tweets = JSON.parse(fs.readFileSync("/tmp/x-tweets-all.json", "utf8"));
-const posts = db.prepare("SELECT id, content_key, caption, domain, post_type, post_url FROM sns_posts WHERE platform = ?").all("x");
-const rankings = db.prepare("SELECT ranking_key, ranking_name FROM indicators").all();
+const posts = store.query((p) => p.platform === "x");
+// ランキング名→キーは R2 ranking-items snapshot（旧 D1 indicators の DBレス版）
+const R2 = process.env.R2_PUBLIC_FETCH_URL || "https://storage.stats47.jp";
+const snap = await (await fetch(`${R2}/app/ranking-items/all.json`)).json();
+const rankings = (snap.items || []).map((r) => ({ ranking_key: r.rankingKey, ranking_name: r.rankingName || r.title }));
 
 function parseEng(label) {
   const m = { impressions: 0, replies: 0, reposts: 0, likes: 0, bookmarks: 0 };
@@ -103,16 +105,12 @@ function parseEng(label) {
 }
 
 // 時系列履歴は .claude/ 配下のファイルに蓄積（.claude/rules/data-storage.md）
-const snsStore = require("${PROJECT_ROOT}/.claude/scripts/lib/sns-metrics-store.cjs");
+const snsStore = require("./.claude/scripts/lib/sns-metrics-store.cjs");
 
 const fetchedAt = new Date().toISOString();
-// sns_posts のキャッシュカラムは運用データとして D1 に残す
-const updCache = db.prepare("UPDATE sns_posts SET impressions=?, likes=?, reposts=?, replies=?, bookmarks=?, metrics_updated_at=? WHERE id=?");
-const updUrl = db.prepare("UPDATE sns_posts SET post_url=? WHERE id=? AND (post_url IS NULL OR post_url = '')");
-const updCaption = db.prepare("UPDATE sns_posts SET caption=? WHERE id=? AND (caption IS NULL OR caption = '')");
-
+// 最新値キャッシュは投稿台帳 posts.json のレコード列に updateById で書く
 let matched = 0, urlUp = 0, capUp = 0, unmatched = 0;
-const tx = db.transaction(() => {
+{
   for (const tw of tweets) {
     let post = null;
 
@@ -149,14 +147,14 @@ const tx = db.transaction(() => {
     if (!post) { unmatched++; continue; }
     matched++;
     const eng = parseEng(tw.e);
-    const r = updUrl.run(tw.u, post.id);
-    if (r.changes > 0) urlUp++;
-
-    // ツイートテキストから caption を自動 backfill（NULL の場合のみ）
-    if (tw.t.length > 10) {
-      const cr = updCaption.run(tw.t, post.id);
-      if (cr.changes > 0) capUp++;
-    }
+    // post_url / caption は空のときだけ backfill、キャッシュ列は毎回更新（1 回の updateById にまとめる）
+    const patch = {
+      impressions: eng.impressions, likes: eng.likes, reposts: eng.reposts,
+      replies: eng.replies, bookmarks: eng.bookmarks, metrics_updated_at: fetchedAt,
+    };
+    if (!post.post_url && tw.u) { patch.post_url = tw.u; urlUp++; }
+    if (!post.caption && tw.t.length > 10) { patch.caption = tw.t; capUp++; }
+    store.updateById(post.id, patch);
 
     // X は likes / replies / reposts / bookmarks を計測。comments=replies, shares=reposts, saves=bookmarks にマップ
     snsStore.upsertMetric({
@@ -171,14 +169,12 @@ const tx = db.transaction(() => {
       shares: eng.reposts,
       saves: eng.bookmarks,
     });
-    updCache.run(eng.impressions, eng.likes, eng.reposts, eng.replies, eng.bookmarks, fetchedAt, post.id);
   }
-});
-tx();
+}
 
 console.log("Matched: " + matched + ", URLs updated: " + urlUp + ", Captions backfilled: " + capUp + ", Unmatched: " + unmatched);
 console.log("sns-metrics snapshot rows: " + snsStore.countAll());
-db.close();
+})();
 JSEOF
 
 node /tmp/x-match-db.js

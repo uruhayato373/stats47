@@ -67,7 +67,7 @@ stats47 の指標を継続的に拡充する。`docs/02_実装計画/05_指標�
 
 - `docs/02_実装計画/05_指標バックログ.md` が存在し、pending 候補が 1 件以上ある
 - `.env.local` に `NEXT_PUBLIC_ESTAT_APP_ID` 設定済
-- ローカル D1 (`.local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite`) アクセス可能
+- 完全DBレス: metric の SSOT は git TS (`packages/data-configs/src/metrics/<key>.ts`)、観測値は R2。永続/miniflare D1 は使わない。`/sync-metrics-cache` が触る使い捨てビルドキャッシュは `packages/database/.data/stats47.sqlite`（固定パスは `.claude/rules/local-environment.md`）で、不在でも git TS 編集 + R2 反映は可能
 - 既存スキル `/inspect-estat-meta` で recipe 雛形が作れる
 - (任意) `git status` がクリーン — rollback を容易にする
 

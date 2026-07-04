@@ -24,8 +24,12 @@ git TS 化し永続 D1 を全廃した。アプリが読む各データの真実
 
 ### Authored / 運用 (git TS 定義が SSOT → 生成スクリプトで R2 JSON)
 - `page_components` / `theme_metrics` / `categories` / `themes` / `surveys`
-- `affiliate_ads` / `sns_posts`
+- `affiliate_ads`
 - 横断整合性 (参照整合・キー重複・孤立参照) は **生成スクリプト内でビルド時に検証**する
+
+> **注**: `sns_posts` はここに置かない。投稿台帳は「書込専用の運用ログ」(投稿のたび append・指標を後から UPDATE) で
+> authored config と性質が違うため **`.claude/state/sns/posts.json` が SSOT** (下記「`.claude/` 配下」参照)。
+> git TS でも配信 R2 でもない。書込口は `.claude/scripts/lib/sns-posts-store.cjs` / `/mark-sns-posted` のみ。
 
 ### Reference (外部に真実源 → 再生成)
 - `articles` (article.md) / `estat_catalog` (e-Stat API) / `prefectures`・`cities` (JSON) / `ports`・`fishing_ports`・`gis_datasets`
@@ -84,6 +88,7 @@ git TS 化し永続 D1 を全廃した。アプリが読む各データの真実
 | PSI 日次計測（19 URL × mobile/desktop） | `.claude/state/metrics/psi/psi-batch-*.json`（GitHub Actions 日次 JST 02:00、閾値違反時 `[PSI Alert]` Issues 起票）/ URL リスト: `.claude/config/psi-urls.txt` / 閾値: `.claude/skills/analytics/performance-improvement/budgets.json` |
 | Cloudflare 月次 snapshot JSON + budget 閾値 | `.claude/skills/analytics/cloudflare-cost-improvement/reference/`（人間向け要約は `docs/04_レビュー/YYYY-MM-cloudflare-cost.md`、施策一覧は `docs/02_実装計画/03_改善バックログ.md`） |
 | Cloudflare 日次 usage（D1/Workers/R2） | `.claude/state/metrics/cloudflare/{snapshots/YYYY-MM-DD.json,history.csv,LATEST.md}`（GitHub Actions 日次 JST 02:30、閾値違反時 `[Cloudflare Alert]` Issues 起票）/ 閾値: `.claude/skills/analytics/cloudflare-cost-improvement/reference/budgets-daily.json` |
+| **SNS 投稿台帳 (投稿履歴の SSOT)** | `.claude/state/sns/posts.json`（書き込み: `.claude/scripts/lib/sns-posts-store.cjs` / `/mark-sns-posted` のみ。全 SNS 自動化スクリプトはこのストア経由。完全DBレス・永続 D1 なし） |
 | SNS 投稿メトリクス時系列 | `.claude/skills/analytics/sns-metrics-improvement/snapshots/YYYY-MM-DD/metrics.csv`（書き込み: `.claude/scripts/lib/sns-metrics-store.cjs`） |
 | アフィリエイト在庫棚卸し + GA4 実測 snapshot | `.claude/state/ads/{inventory-*.json,ga4-affiliate-*.json}`（`affiliate-dashboard-refresh.yml` / `affiliate-ga4-weekly.yml` が生成・commit-back、AFF-05） |
 | NSM 週次 JSON snapshot | `.claude/skills/management/nsm-experiment/reference/weekly-snapshots/YYYY-Www.json` |

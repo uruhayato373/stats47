@@ -203,12 +203,13 @@ $ARGUMENTS — [--mode <expert|proofread>] <記事パスまたは slug>
 - **`<source-link>` が末尾に集約されていないか** (インライン分散チェック)
   - 各 `<source-link>` は、 そのランキングデータを言及・分析しているセクションの末尾に配置すべき
   - 配置の正典: `.claude/rules/blog-quality-standards.md`「source-link の配置」。決定的検査: `node .claude/scripts/blog/audit-article-structure.mjs` (`/ranking/` の末尾集約 2 個以上を検出)
-- **リンク先の DB 存在確認**: `<source-link>` や `### 関連記事` のリンク先がローカル DB に存在するか確認
+- **リンク先の存在確認** (完全DBレス。旧 D1 indicators は廃止): `<source-link>` や `### 関連記事` のリンク先が実在・公開済みか R2 で確認
+  - ランキングは `curl -s -o /dev/null -w '%{http_code}' https://storage.stats47.jp/app/ranking/<key>/item.json` が 200 か
   - 存在しないキーが見つかった場合の **類似キー検索** (必須):
     1. リンクテキストからキーワードを抽出
-    2. `SELECT ranking_key, ranking_name FROM indicators WHERE ranking_name LIKE '%キーワード%' LIMIT 10`
+    2. `curl -s https://storage.stats47.jp/app/ranking-items/all.json | jq '.items[] | select(.title | test("キーワード")) | {ranking_key: .rankingKey, title}' | head`
     3. キーの一部でも部分一致検索
-    4. 候補があれば修正案を提示、 なければ TS-config 追加 + `/sync-metrics-cache --apply` + `/page-data-batch --metric <key>` でデータ登録を提案
+    4. 候補があれば修正案を提示、 なければ TS-config 追加 + `/page-data-batch --metric <key>` でデータ登録を提案
   - 登録・修正するかどうかはユーザーの判断に委ねる (自動修正しない)
 
 ### 手順 (proofread モード)
@@ -218,25 +219,24 @@ $ARGUMENTS — [--mode <expert|proofread>] <記事パスまたは slug>
 3. 各チェック項目を実行する
 4. 結果を下記フォーマットで出力する
 5. ❌ 項目がある場合、 修正内容を提示してユーザーの承認を得てから article.md を更新する
-6. 修正適用後、 ローカル D1 の `articles` テーブルに校正日時を記録する:
-   ```sql
-   UPDATE articles SET proofread_at = datetime('now') WHERE slug = '{slug}';
-   ```
-   - better-sqlite3 で直接実行する (`node -e "..."` ワンライナー)
-   - DB パス: `.local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite`
+6. 修正適用後、 校正日時を **article.md の frontmatter** に記録する (完全DBレス。記事 SSOT は article.md。旧 D1 `articles` テーブルは廃止):
+   - frontmatter に `proofreadAt: <ISO日時>` を追記/更新する (例: `proofreadAt: 2026-07-04T12:00:00Z`)
+   - 公開記事の article.md は R2 `app/blog/<slug>/article.md` が SSOT (作業は `/brushup-blog` の取得フロー経由)
 
 ### 未校正記事の一覧取得 (proofread モード)
 
-```sql
--- 未校正の公開記事 (古い順)
-SELECT slug, title, published_at FROM articles
-WHERE published = 1 AND proofread_at IS NULL
-ORDER BY published_at ASC;
+完全DBレス (旧 D1 `articles` テーブルは廃止。判定は article.md frontmatter):
 
--- 校正後に更新された記事 (再校正が必要)
-SELECT slug, title, proofread_at, updated_at FROM articles
-WHERE published = 1 AND proofread_at < updated_at
-ORDER BY updated_at DESC;
+```bash
+# 未校正の公開記事 (proofreadAt 未設定、古い順)。proofreadAt は article.md frontmatter → snapshot に export 済
+curl -s "https://storage.stats47.jp/app/blog/all.json" \
+  | jq -r '.articles | map(select(.published and (.proofreadAt == null))) | sort_by(.publishedAt) | .[] | [.slug, .title] | @tsv'
+
+# 校正後に本文更新された記事 (再校正要): proofreadAt < updatedAt
+curl -s "https://storage.stats47.jp/app/blog/all.json" \
+  | jq -r '.articles | map(select(.proofreadAt != null and .proofreadAt < .updatedAt)) | sort_by(.updatedAt) | reverse | .[] | [.slug, .proofreadAt, .updatedAt] | @tsv'
+
+# 作業中ドラフト (docs/21 outbox) は frontmatter を直接見る: grep -L "proofreadAt:" docs/21_ブログ記事原稿/*/article.md
 ```
 
 ### 出力フォーマット (proofread モード)

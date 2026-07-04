@@ -5,42 +5,19 @@ disable-model-invocation: true
 primary_agent: sns-metrics-sync
 ---
 
-SNS 投稿・note 記事で使用する stats47.jp リンクの UTM パラメータ生成ルール。
-各 `/post-*` スキルから参照される。
+UTM 生成ルールの正典は **`.claude/rules/sns-content-standards.md` §4 (UTM 規則)** に移管した。
+本スキルはそこを指す薄いエイリアス。各 `/post-*` スキルはこの名前で参照してよい。
 
-## SNS（X / YouTube）
+## 要約 (詳細は rules §4)
 
-### ベース URL
+- SNS リンクには UTM を付ける。**note は付けない** (素の URL)
+- `utm_source` = `x` / `instagram` / `youtube`、`utm_medium` = `social`
+- `utm_campaign` = ranking `<rankingKey>` / compare `compare-<A>-vs-<B>` / correlation `correlation-<X>--<Y>`
+- `utm_content` = `<template>` (例 `shock` / `paradox`)。YouTube pinned_comment は `<template>-pinned`
 
-| ドメイン | URL |
-|---|---|
-| ranking | `https://stats47.jp/ranking/<rankingKey>` |
-| compare | `https://stats47.jp/compare?areas=<areaA>,<areaB>&cat=<categoryKey>` |
-| correlation | `https://stats47.jp/correlation?x=<keyX>&y=<keyY>` |
-
-### UTM パラメータ
-
-| パラメータ | 値 |
-|---|---|
-| `utm_source` | `x` / `youtube` |
-| `utm_medium` | `social` |
-| `utm_campaign` | ranking: `<rankingKey>` / compare: `compare-<areaA>-vs-<areaB>` / correlation: `correlation-<keyX>--<keyY>` |
-| `utm_content` | `<template>`（例: `shock`, `paradox`）。YouTube pinned_comment では `<template>-pinned` |
-
-### 例
-
+例:
 ```
 https://stats47.jp/ranking/taxable-income-per-capita?utm_source=x&utm_medium=social&utm_campaign=taxable-income-per-capita&utm_content=shock
 ```
 
----
-
-## note
-
-note 記事の stats47.jp リンクには UTM パラメータを付けない。素の URL をそのまま記載する。
-
-### 例
-
-```
-https://stats47.jp/ranking/taxable-income-per-capita
-```
+正典 (ベース URL 表・全パラメータ・note の扱い): `.claude/rules/sns-content-standards.md` §4。

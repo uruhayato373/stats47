@@ -1,11 +1,10 @@
----
-name: generate-bar-chart-race
-description: D1 から Bar Chart Race 用 config.json と data.json を生成しローカル R2 に保存する。Use when user says "バーチャートレース生成", "bar chart race 作成". 全年度データを取得してフレーム化.
-disable-model-invocation: true
-primary_agent: youtube-strategist
----
+# BCR reference: generate (データ生成)
 
-D1 から Bar Chart Race 用の全年度データを取得し、`.local/r2/sns/bar-chart-race/<rankingKey>/` に config.json と data.json を保存する。
+> `/bar-chart-race --step generate` の詳細手順。スキル本体は `../SKILL.md`。
+> **DBレス**: 「D1 から」の記述は旧称。実際は **R2 観測値 `app/stats/<key>/values.json`** を読む
+> (`.claude/rules/data-sqlite-ssot.md`)。無ければ `/page-data-batch --metric <key>` で投入。
+
+R2 観測値から Bar Chart Race 用の全年度データを取得し、`.local/r2/sns/bar-chart-race/<rankingKey>/` に config.json と data.json を保存する。
 
 ## ディレクトリ構造
 
@@ -27,37 +26,33 @@ D1 から Bar Chart Race 用の全年度データを取得し、`.local/r2/sns/b
 
 ## 手順
 
-### Step 1: ローカル D1 からデータ取得
+### Step 1: R2 snapshot からデータ取得
 
-以下の SQL でデータを取得する:
+完全DBレス（Phase 6 で観測値を R2 に移行済。旧 D1/miniflare は廃止）。メタも観測値も R2 公開 URL から取得する（読み取りは認証不要）。
 
-```sql
-sqlite3 .local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite
+```bash
+R2="${R2_PUBLIC_FETCH_URL:-https://storage.stats47.jp}"
 ```
 
-Phase 6 (2026-05-27) で観測値ストアを R2 に移行済。データ取得は R2 `app/stats/<rankingKey>/values.json` から行う。
+#### 1a: メタデータ取得 (R2 ranking item.json。旧 D1 metrics cache は廃止)
 
-#### 1a: メタデータ取得 (D1 metrics cache)
-
-```sql
-SELECT title AS category_name, unit
-FROM metrics
-WHERE key = '<rankingKey>'
-LIMIT 1;
+```bash
+# title(=category_name) と unit を取得
+curl -s "$R2/app/ranking/<rankingKey>/item.json" | jq '.item | {category_name: .title, unit}'
 ```
 
 #### 1b: R2 観測値ファイル確認
 
 ```bash
-ls .local/r2/app/stats/<rankingKey>/values.json
-# なければ /page-data-batch --metric <rankingKey> で投入
+curl -s -o /dev/null -w "%{http_code}\n" "$R2/app/stats/<rankingKey>/values.json"
+# 404 なら /page-data-batch --metric <rankingKey> で投入 → /sync-snapshots で R2 反映
 ```
 
 #### 1c: 全年度・全都道府県データ取得 (R2 から JS で)
 
 ```javascript
-const fs = require('fs');
-const payload = JSON.parse(fs.readFileSync('.local/r2/app/stats/<rankingKey>/values.json', 'utf-8'));
+const R2 = process.env.R2_PUBLIC_FETCH_URL || 'https://storage.stats47.jp';
+const payload = await (await fetch(`${R2}/app/stats/<rankingKey>/values.json`)).json();
 
 // 47 都道府県 (全国・地域コードは除外)
 const filtered = payload.rows.filter(r => /^\d{2}000$/.test(r.areaCode) && Number(r.areaCode.slice(0,2)) <= 47);

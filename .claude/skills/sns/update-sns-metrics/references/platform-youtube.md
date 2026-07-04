@@ -6,16 +6,17 @@
 
 **注意:** `search.list` はショート動画を返さないことがある。必ず `playlistItems.list` を使うこと。
 
-### YT-1. API で全動画メトリクスを取得 + DB マッチング
+### YT-1. API で全動画メトリクスを取得 + 投稿台帳マッチング
+
+投稿台帳 `posts.json`（`sns-posts-store.cjs`）と R2 ranking-items snapshot から読み、キャッシュ列は `updateById` で更新する（完全DBレス。旧 D1 sns_posts / indicators は廃止）。
 
 ```bash
 cat > /tmp/yt-metrics.js << JSEOF
 const { google } = require('${PROJECT_ROOT}/node_modules/googleapis');
-const Database = require("${PROJECT_ROOT}/node_modules/better-sqlite3");
+const store = require("${PROJECT_ROOT}/.claude/scripts/lib/sns-posts-store.cjs");
 const fs = require("fs");
 const path = require("path");
 
-const DB_PATH = "${PROJECT_ROOT}/.local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite";
 const CHANNEL_ID = "UCdRiwDSX1aUd0dSd7Cs08Kg";
 const KEY_CANDIDATES = ['stats47-f6b5dae19196.json', 'stats47-31b18ee67144.json'];
 const keyFile = KEY_CANDIDATES.map(f => path.resolve('${PROJECT_ROOT}', f)).find(f => fs.existsSync(f));
@@ -59,22 +60,20 @@ async function main() {
     allVideos.push(...videos.data.items);
   }
 
-  // 3. DB マッチング + 記録
-  const db = new Database(DB_PATH);
-  const posts = db.prepare("SELECT id, content_key, caption, domain, post_type, post_url FROM sns_posts WHERE platform = ?").all("youtube");
-  const rankings = db.prepare("SELECT ranking_key, ranking_name FROM indicators").all();
+  // 3. 投稿台帳マッチング + 記録
+  const posts = store.query((p) => p.platform === "youtube");
+  // ランキング名→キーは R2 ranking-items snapshot（旧 D1 indicators の DBレス版）
+  const R2 = process.env.R2_PUBLIC_FETCH_URL || "https://storage.stats47.jp";
+  const snap = await (await fetch(R2 + "/app/ranking-items/all.json")).json();
+  const rankings = (snap.items || []).map((r) => ({ ranking_key: r.rankingKey, ranking_name: r.rankingName || r.title }));
 
   // 時系列履歴は .claude/ 配下のファイルに蓄積（.claude/rules/data-storage.md）
   const snsStore = require("${PROJECT_ROOT}/.claude/scripts/lib/sns-metrics-store.cjs");
 
   const fetchedAt = new Date().toISOString();
-  // sns_posts のキャッシュカラムは運用データとして D1 に残す
-  const updCache = db.prepare("UPDATE sns_posts SET impressions=?, likes=?, replies=?, metrics_updated_at=? WHERE id=?");
-  const updUrl = db.prepare("UPDATE sns_posts SET post_url=? WHERE id=? AND (post_url IS NULL OR post_url = '')");
-  const updCaption = db.prepare("UPDATE sns_posts SET caption=? WHERE id=? AND (caption IS NULL OR caption = '')");
-
+  // 最新値キャッシュは投稿台帳 posts.json のレコード列に updateById で書く
   let matched = 0, urlUp = 0, capUp = 0, unmatched = 0;
-  const tx = db.transaction(() => {
+  {
     for (const v of allVideos) {
       const videoId = v.id;
       const title = v.snippet.title;
@@ -106,14 +105,11 @@ async function main() {
 
       if (!post) { unmatched++; continue; }
       matched++;
-      const r = updUrl.run(ytUrl, post.id);
-      if (r.changes > 0) urlUp++;
-
-      // YouTube タイトルから caption を自動 backfill（NULL の場合のみ）
-      if (title.length > 5) {
-        const cr = updCaption.run(title, post.id);
-        if (cr.changes > 0) capUp++;
-      }
+      // 最新値キャッシュ列（impressions=views, replies=comments にマップ）を 1 回の updateById で更新
+      const patch = { impressions: views, likes: likes, replies: comments, metrics_updated_at: fetchedAt };
+      if (!post.post_url && ytUrl) { patch.post_url = ytUrl; urlUp++; }
+      if (!post.caption && title.length > 5) { patch.caption = title; capUp++; }
+      store.updateById(post.id, patch);
 
       snsStore.upsertMetric({
         sns_post_id: post.id,
@@ -125,14 +121,11 @@ async function main() {
         likes: likes,
         comments: comments,
       });
-      updCache.run(views, likes, comments, fetchedAt, post.id);
     }
-  });
-  tx();
+  }
 
   console.log("Matched: " + matched + ", URLs updated: " + urlUp + ", Captions backfilled: " + capUp + ", Unmatched: " + unmatched);
   console.log("sns-metrics snapshot rows: " + snsStore.countAll());
-  db.close();
 }
 
 main().catch(e => { console.error(e); process.exit(1); });

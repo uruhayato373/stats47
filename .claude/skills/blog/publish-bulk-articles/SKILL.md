@@ -28,8 +28,8 @@ $ARGUMENTS — <slug1> <slug2> ... [--no-sync] [--no-verify]
 
 ## 前提
 
-- 各 slug について `.local/r2/app/blog/<slug>/article.md` が frontmatter 付きで存在
-- ローカル D1 SQLite が `.local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite` にある
+- 各 slug について `.local/r2/app/blog/<slug>/article.md` が frontmatter 付きで存在（記事 SSOT は article.md）
+- 完全DBレス（旧 D1 SQLite は不要。公開は article.md → R2 snapshot 経由。公開済み一覧は `curl -s https://storage.stats47.jp/app/blog/all.json | jq -r '.articles[].slug'`）
 - frontmatter に少なくとも `title`, `seoTitle`, `description`, `category`, `tags`, `publishedAt` が記載
 
 ## 手順

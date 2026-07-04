@@ -1,10 +1,15 @@
 ---
 name: schedule-instagram-mbs
-description: Meta Business Suite UI 経由で Instagram に予約投稿する（API 予約非対応の代替）。Use when user says "Instagram予約投稿", "IG予約". Playwright + 永続プロファイルで自動化。**初回 or 1 週間以上空いた場合は --dry-run 必須**.
+description: "[ARCHIVED 2026-07-04] MBS UI 予約投稿。GHA cron (post-instagram-scheduled.yml) と二重で退役。"
 disable-model-invocation: true
-argument-hint: "<rankingKey> <YYYY-MM-DDTHH:MM> [<rankingKey> <date> ...] [--domain ranking|bar-chart-race] [--type image|reels] [--dry-run]"
+user-invocable: false
 primary_agent: instagram-strategist
 ---
+
+> **⚠️ ARCHIVED (2026-07-04)**: browser-use 経由の MBS 予約は GHA cron `post-instagram-scheduled.yml`
+> (`generate-instagram-schedule` → `post-from-schedule.cjs`) と二重で脆弱なため退役。IG 予約は
+> `/generate-instagram-schedule` で schedule を生成し GHA に投稿を委ねる。正典は
+> `.claude/rules/sns-content-standards.md`。復活する場合はこのバナーを外して skills/sns/ に戻す。
 
 Playwright（永続プロファイル）で Meta Business Suite (https://business.facebook.com) を自動操作し、Instagram の予約投稿を設定する。
 

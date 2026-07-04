@@ -397,7 +397,7 @@ jq '[.posts[] | select(.platform=="instagram" and .angle!=null)]' \
 |---|---|
 | `/post-instagram` | 本スキルで登録した draft を実際に投稿する下流スキル |
 | `/render-sns-stills` | `needs_text_cards: true` の場合にテキストカード画像を生成 |
-| `/render-bar-chart-race` | 数字切り口のリール動画がない場合に生成 |
+| `/bar-chart-race --step render` | 数字切り口のリール動画がない場合に生成 |
 | `/push-r2` | 投稿前に画像/動画を R2 公開 URL へ push（`/post-instagram` の前提）|
 | `/post-x-6angles` | 同じ切り口フレーム。scout/affinity ロジックを共有 |
 | `instagram-strategist` | 本スキルの呼び出し判断を担う戦略レイヤー |

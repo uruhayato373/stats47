@@ -436,7 +436,7 @@ export async function GET() {
 **問題**: 「IG にメディア投稿しよう」と思っても、`/post-instagram <key>` が即座に動くケースは少ない。実行直前に caption / 動画 / 静止画のいずれかが欠けていてエラー停止することが多い。
 
 **原因**: ranking と bar-chart-race で IG メディア生成パイプラインが**分離**しており、それぞれ別スキルでの事前生成が必要:
-- **bar-chart-race**: `/post-bar-chart-race-captions <key>` でキャプション生成（Claude prompt-based、CLI バッチ不可なので 1 件ずつ起動）→ `/render-bar-chart-race --key <key> --platform instagram` で reel.mp4 生成
+- **bar-chart-race**: `/bar-chart-race <key> --step captions` でキャプション生成（Claude prompt-based、CLI バッチ不可なので 1 件ずつ起動）→ `/bar-chart-race <key> --step render --platform instagram` で reel.mp4 生成
 - **ranking**: `instagram/caption.json` を別スキルで事前作成 → `apps/remotion/scripts/pipeline/render-sns-all.ts --key <key> --stills-only` で stills 生成
 - **両方とも**: 完成後に `/push-r2` で R2 にアップロードしないと `post-instagram.ts` が public URL を引けず container 作成に失敗
 
@@ -454,10 +454,10 @@ export async function GET() {
    ```bash
    curl "https://storage.stats47.jp/sns/bar-chart-race/<key>/instagram/caption.txt" -o .local/r2/sns/bar-chart-race/<key>/instagram/caption.txt
    ```
-3. 「7 件投稿したい」が「実は 3 件しか ready」というギャップは設計レベルで起きうる。事前に rendering catalog (`render-bar-chart-race --dry-run`) と caption の R2 存在を両方チェックする運用にする
+3. 「7 件投稿したい」が「実は 3 件しか ready」というギャップは設計レベルで起きうる。事前に rendering catalog (`/bar-chart-race --step render --dry-run`) と caption の R2 存在を両方チェックする運用にする
 
 **関連**:
-- `.claude/skills/sns/post-bar-chart-race-captions/SKILL.md`
+- `.claude/skills/sns/bar-chart-race/SKILL.md` (旧 generate/render/post-bar-chart-race-captions を統合)
 - `apps/remotion/scripts/pipeline/render-bar-chart-race.ts`
 - `apps/remotion/scripts/pipeline/render-sns-all.ts`
 - W18 Plan #127 のコメント (実例)

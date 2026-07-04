@@ -18,7 +18,7 @@ X の**直近3日以内**のバズツイートを全テーマ並列検索し、s
 テーマローテーションは**採用しない**。理由:
 - ローテで先にテーマを固定すると、その日の最強ツイートを逃すリスクが大きい
 - X のエンゲージは投稿後24〜48時間に9割発生するため、鮮度が最重要
-- テーマ別の反応分析は `sns_posts.content_key → ranking_items.category_key` の事後集計で十分取れる（観察データ）
+- テーマ別の反応分析は投稿台帳 `posts.json` の `content_key → ランキングの category_key` の事後集計で十分取れる（観察データ）
 - ただし毎回同じテーマに偏らないよう、**直近2件の category_key は避ける**という軽い多様性制約だけ残す
 
 ## 引数
@@ -153,34 +153,44 @@ score = engagement * (0.4 + 0.6 * freshness)  # 鮮度ボーナス 60%
 
 #### 4b. 多様性制約（直近2件の category_key を避ける）
 
-スコア順に候補を並べた後、以下のSQLで直近2件の category_key を取得:
+スコア順に候補を並べた後、投稿台帳 `posts.json` から直近2件の quote_rt の `content_key` を取得し（完全DBレス。旧 D1 sns_posts は廃止）、その category を解決する:
 
 ```bash
-sqlite3 .local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite \
-  "SELECT ri.category_key FROM sns_posts sp
-   LEFT JOIN indicators ri ON ri.ranking_key = sp.content_key
-   WHERE sp.post_type='quote_rt' AND sp.platform='x'
-   ORDER BY sp.posted_at DESC LIMIT 2"
+# 直近2件の quote_rt content_key（category は metric config の category から解決）
+node -e 'const s=require("./.claude/scripts/lib/sns-posts-store.cjs");
+  const recent=s.query(p=>p.post_type==="quote_rt"&&p.platform==="x")
+    .sort((a,b)=>(b.posted_at||"").localeCompare(a.posted_at||"")).slice(0,2)
+    .map(p=>p.content_key);
+  console.log(JSON.stringify(recent))'
 ```
+
+各 `content_key`（= ranking_key）の `category_key` は metric config（`packages/data-configs/src/metrics/<key>.ts` の `category`）または R2 `app/ranking/<key>/item.json` から解決する。
 
 候補マッチング(4c)で決まった `ranking_key` の `category_key` がこの直近2件に**含まれる場合は除外**する。ただしスコア上位が全て該当する場合は、多様性制約を緩めて最上位を採用する（鮮度優先）。
 
-#### 4c. ローカル DB（ranking_items）でデータ検索
+#### 4c. R2 ranking-items でデータ検索
 
-各候補のツイート内容からキーワードを抽出し、関連する ranking_items を D1 で検索:
+各候補のツイート内容からキーワードを抽出し、関連するランキングを R2 ranking-items snapshot（旧 D1 indicators の DBレス版）で検索:
 
 ```bash
-sqlite3 .local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite \
-  "SELECT ranking_key, ranking_name, category_key FROM indicators
-   WHERE area_type='prefecture' AND is_active=1
-   AND (ranking_name LIKE '%出生%' OR ranking_name LIKE '%少子%' OR ranking_name LIKE '%人口%')
-   ORDER BY ranking_name LIMIT 20"
+# キーワードで ranking を絞り込む（KW を書き換えて使う）
+KW="出生|少子|人口" node -e '
+const R2=process.env.R2_PUBLIC_FETCH_URL||"https://storage.stats47.jp";
+const re=new RegExp(process.env.KW);
+fetch(R2+"/app/ranking-items/all.json").then(r=>r.json()).then(s=>{
+  const hits=(s.items||[]).filter(i=>i.areaType==="prefecture"&&re.test(i.rankingName||i.title||""))
+    .slice(0,20).map(i=>({rankingKey:i.rankingKey,rankingName:i.rankingName||i.title,categoryKey:i.categoryKey}));
+  console.log(JSON.stringify(hits,null,2));
+})'
 ```
 
-キーワードはツイート内容に応じて動的に変更する。同一 `content_key` は過去7日以内に使用していれば除外:
+キーワードはツイート内容に応じて動的に変更する。同一 `content_key` は過去7日以内に使用していれば除外（投稿台帳 `posts.json` から。完全DBレス。旧 D1 sns_posts は廃止）:
 
 ```bash
-sqlite3 ... "SELECT content_key FROM sns_posts WHERE post_type='quote_rt' AND posted_at > datetime('now','-7 days')"
+node -e 'const s=require("./.claude/scripts/lib/sns-posts-store.cjs");
+  const cut=new Date(Date.now()-7*864e5).toISOString();
+  const used=s.query(p=>p.post_type==="quote_rt"&&(p.posted_at||"")>cut).map(p=>p.content_key);
+  console.log(JSON.stringify([...new Set(used)]))'
 ```
 
 #### 4d. 動画アセット照合（`--with-media` 指定時のみ）

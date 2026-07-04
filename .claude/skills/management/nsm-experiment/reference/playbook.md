@@ -254,8 +254,8 @@
 **計測指標**: `ga4_organic_social_engaged_sessions`（週次）
 
 **アクション**:
-1. `/post-x` で週 3 投稿のリズムを作る
-2. `/post-bar-chart-race-captions` / `/post-sns-captions` で一括生成
+1. `/sns-weekly-plan` で週次リズムを作る (X 週 2-3・IG 週 3 枠)
+2. X は `/post-x`、IG は `/generate-instagram-schedule` / `/post-ig-6angles`、BCR は `/bar-chart-race --step captions`
 3. UTM 付きリンクで流入計測
 4. 2-4 週継続
 

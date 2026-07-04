@@ -48,12 +48,12 @@ note 記事（B/C/D シリーズ）のアイデアを、書き始める前に需
 テーマに関連するランキング・ブログ記事を確認する:
 
 ```bash
-# 関連ランキングの検索 (Phase 5 以降: indicators → metrics リネーム)
-npx wrangler d1 execute stats47_static --local --persist-to .local/d1 --command \
-  "SELECT key AS ranking_key, title, category_key FROM metrics WHERE title LIKE '%キーワード%' AND is_active = 1 LIMIT 20"
+# 関連ランキングの検索 (完全DBレス: R2 ranking-items snapshot。旧 D1 metrics/miniflare は廃止)
+curl -s "https://storage.stats47.jp/app/ranking-items/all.json" \
+  | jq '.items[] | select(.title | test("キーワード")) | {ranking_key: .rankingKey, title, category_key: .categoryKey}' | head -40
 
-# 関連ブログ記事の検索
-ls .local/r2/blog/ | grep -i "キーワード"
+# 関連ブログ記事の検索 (R2 blog snapshot)
+curl -s "https://storage.stats47.jp/app/blog/all.json" | jq '.articles[] | select(.title | test("キーワード")) | {slug, title}'
 ```
 
 ### 3. stats47.jp リンクの実在確認
@@ -61,12 +61,13 @@ ls .local/r2/blog/ | grep -i "キーワード"
 リンク候補として挙がっている stats47.jp のページが実在するか確認する:
 
 ```bash
-# ブログ記事の存在確認
-ls .local/r2/blog/
+# ブログ記事の存在確認 (R2 blog snapshot の slug 一覧)
+curl -s "https://storage.stats47.jp/app/blog/all.json" | jq -r '.articles[].slug' | grep -i "候補slug"
 
-# ランキングページの存在確認
-npx wrangler d1 execute stats47_static --local --persist-to .local/d1 --command \
-  "SELECT key, title FROM metrics WHERE key IN ('候補1', '候補2') AND is_active = 1"
+# ランキングページの存在確認 (R2 item.json が 200 なら実在・公開済み)
+for key in 候補1 候補2; do
+  echo "$key: $(curl -s -o /dev/null -w '%{http_code}' "https://storage.stats47.jp/app/ranking/$key/item.json")"
+done
 ```
 
 存在しないリンク候補は記事から除外する。実在するリンクのみ使用すること。

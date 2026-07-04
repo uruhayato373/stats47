@@ -45,16 +45,22 @@
 
 ★ で現在のスキルの位置を示す。
 
-## DB 操作パターン
+## データ読み取りパターン（完全DBレス）
 
-ローカル D1 を操作するスキルの共通パターン:
+**新規スキルで D1/SQLite を開かない。** 本番アプリと同様、データは R2 公開 URL / git TS から読む（旧 D1/miniflare は廃止。正典 `docs/01_技術設計/12_完全DBレス設計.md`）:
 
 ```js
-const Database = require('better-sqlite3');
-const db = new Database('.local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite');
+// R2 公開 URL から fetch（認証不要）。読み取りは常にこの経路。
+const R2 = process.env.R2_PUBLIC_FETCH_URL || "https://storage.stats47.jp";
+const { item } = await (await fetch(`${R2}/app/ranking/<key>/item.json`)).json();     // ランキングメタ (.item)
+const values   = await (await fetch(`${R2}/app/stats/<key>/values.json`)).json();      // 観測値 (.rows)
+const items    = (await (await fetch(`${R2}/app/ranking-items/all.json`)).json()).items; // 全ランキング一覧
+const blog     = (await (await fetch(`${R2}/app/blog/all.json`)).json()).articles;      // 公開記事
 ```
 
-R2 スナップショットの更新は `/sync-snapshots` で行う。
+- Authored/運用エンティティ（page_components / themes / categories 等）の SSOT は **git TS**（例 `apps/web/scripts/data/page-components/<type>/<key>.json`）。skill はこれを直接 Read する。
+- R2 スナップショットの生成・更新は `/sync-snapshots`（生成スクリプトが git TS / R2 観測値から派生）。
+- e-Stat カタログは git-tracked `.claude/skills/estat/references/*.md` + e-Stat API。
 
 ## 一時スクリプトの扱い
 

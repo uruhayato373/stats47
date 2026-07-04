@@ -438,9 +438,10 @@ GSC（Google Search Console）の継続的追跡と改善施策の記録。
 
 - **検証コマンド**:
   ```bash
-  # 本番 D1 の現値確認
-  cd apps/web && npx wrangler d1 execute stats47_static --remote --env production --json -y \
-    --command "SELECT ranking_key, seo_title FROM indicators WHERE ranking_key IN ('starting-salary-highschool','inpatient-rate-per-100k','roadside-station-count') AND area_type = 'prefecture';"
+  # 現値確認 (R2 item.json の seoTitle。完全DBレス。旧 D1 indicators / 本番 D1 は廃止)
+  for key in starting-salary-highschool inpatient-rate-per-100k roadside-station-count; do
+    echo "$key: $(curl -s "https://storage.stats47.jp/app/ranking/$key/item.json" | jq -r '.item.seoTitle')"
+  done
   
   # 本番 origin の <title> 確認 (Googlebot UA)
   for url in https://stats47.jp/ranking/inpatient-rate-per-100k \

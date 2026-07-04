@@ -95,21 +95,32 @@ WebSearch: "site:news.google.com {テーマキーワード} 都道府県"
 
 6. areas ページに既にあるが、テーマに未割り当てのチャートを検索:
 
+完全DBレス: `page_components` の SSOT は git TS JSON（`apps/web/scripts/data/page-components/<type>/<pageKey>.json`。旧 D1/miniflare は廃止）。
+
 ```bash
 node -e "
-const Database = require('better-sqlite3');
-const db = new Database('.local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite', {readonly: true});
-const existing = db.prepare(\`
-  SELECT chart_key, title, component_type,
-         GROUP_CONCAT(DISTINCT page_type || '/' || page_key) as pages
-  FROM page_components
-  WHERE is_active = 1
-    AND chart_key NOT IN (
-      SELECT chart_key FROM page_components WHERE page_type = 'theme' AND page_key = ?
-    )
-  GROUP BY chart_key
-\`).all('THEME_KEY');
-// テーマ関連キーワードでフィルタして出力
+const fs = require('fs'), path = require('path');
+const ROOT = 'apps/web/scripts/data/page-components';
+const THEME_KEY = 'THEME_KEY';
+const byKey = new Map();
+for (const type of fs.readdirSync(ROOT)) {
+  const dir = path.join(ROOT, type);
+  if (!fs.statSync(dir).isDirectory()) continue;
+  for (const file of fs.readdirSync(dir).filter(f => f.endsWith('.json'))) {
+    const pageKey = file.replace(/\.json$/, '');
+    for (const c of JSON.parse(fs.readFileSync(path.join(dir, file), 'utf8'))) {
+      const e = byKey.get(c.componentKey) || { title: c.title, componentType: c.componentType, pages: new Set() };
+      e.pages.add(type + '/' + pageKey);
+      byKey.set(c.componentKey, e);
+    }
+  }
+}
+const onTheme = new Set([...byKey].filter(([, e]) => e.pages.has('theme/' + THEME_KEY)).map(([k]) => k));
+// テーマ未割り当ての既存チャート（テーマ関連キーワードでさらに絞り込む）
+for (const [key, e] of byKey) {
+  if (onTheme.has(key)) continue;
+  console.log(key, '|', e.title, '|', e.componentType, '|', [...e.pages].join(','));
+}
 "
 ```
 

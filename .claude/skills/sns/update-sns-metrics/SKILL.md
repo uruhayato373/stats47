@@ -1,17 +1,17 @@
 ---
 name: update-sns-metrics
-description: 各 SNS プラットフォームからメトリクスを一括取得し `.claude/skills/analytics/sns-metrics-improvement/snapshots/YYYY-MM-DD/metrics.csv` に記録する。Use when user says "メトリクス更新", "SNS数値取得". Instagram/YouTube は公式 API、X/TikTok は browser-use CLI.
+description: 各 SNS プラットフォームからメトリクスを一括取得し `.claude/skills/analytics/sns-metrics-improvement/snapshots/YYYY-MM-DD/metrics.csv` に記録する。Use when user says "メトリクス更新", "SNS数値取得". Instagram/YouTube は公式 API、X は browser-use CLI.
 disable-model-invocation: true
-argument-hint: [--platform x|instagram|youtube|tiktok|all]
+argument-hint: [--platform x|instagram|youtube|all]
 primary_agent: sns-metrics-sync
 co_agents: [x-strategist, youtube-strategist]
 ---
 
-各 SNS プラットフォームからメトリクスを取得し、時系列履歴は `.claude/skills/analytics/sns-metrics-improvement/snapshots/YYYY-MM-DD/metrics.csv` に、最新値キャッシュは D1 `sns_posts` テーブル（impressions / likes / reposts / replies / bookmarks / metrics_updated_at カラム）に記録する。Instagram は Graph API v21、YouTube は Data API v3、X/TikTok は browser-use CLI を使用する。
+各 SNS プラットフォームからメトリクスを取得し、時系列履歴は `.claude/skills/analytics/sns-metrics-improvement/snapshots/YYYY-MM-DD/metrics.csv` に、最新値キャッシュは投稿台帳 `.claude/state/sns/posts.json` の各レコード（impressions / likes / reposts / replies / bookmarks / metrics_updated_at カラム）に `sns-posts-store.cjs` の `updateById` で記録する。Instagram は Graph API v21、YouTube は Data API v3、X は browser-use CLI を使用する。
 
 **記録先の統一原則（.claude/rules/data-storage.md）**:
 - 時系列履歴 → `.claude/skills/analytics/sns-metrics-improvement/snapshots/YYYY-MM-DD/metrics.csv`（ヘルパ: `.claude/scripts/lib/sns-metrics-store.cjs`）
-- 運用データ（最新値キャッシュ） → D1 `sns_posts` の cache カラム
+- 運用データ（最新値キャッシュ） → 投稿台帳 `.claude/state/sns/posts.json` の cache カラム（`sns-posts-store.cjs` 経由。完全DBレス。旧 D1 sns_posts は廃止）
 - 旧 D1 `sns_metrics` テーブルは 2026-04-17 に廃止済み
 
 ### 期待カバレッジ
@@ -26,7 +26,7 @@ co_agents: [x-strategist, youtube-strategist]
 ## 引数
 
 ```
-/update-sns-metrics [--platform x|instagram|youtube|tiktok|all] [--skip-backfill]
+/update-sns-metrics [--platform x|instagram|youtube|all] [--skip-backfill]
 ```
 
 - `--platform`（任意）: 取得対象（デフォルト: `all`）
@@ -37,7 +37,7 @@ co_agents: [x-strategist, youtube-strategist]
 ```bash
 export PATH="$HOME/.browser-use-env/bin:$HOME/.browser-use/bin:$HOME/.local/bin:$PATH"
 PROJECT_ROOT="$(pwd)"
-DB_PATH="$PROJECT_ROOT/.local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite"
+# 投稿台帳は完全DBレス: 読み書きは `.claude/scripts/lib/sns-posts-store.cjs`（posts.json）経由。旧 D1/SQLite は使わない
 
 # 開始時: 残存プロセスをクリーンアップ
 bash .claude/scripts/cleanup-browser.sh --force 2>/dev/null
@@ -47,7 +47,7 @@ bash .claude/scripts/cleanup-browser.sh --force 2>/dev/null
 - `browser-use` コマンドは毎回フルで記述する（`$BU` 変数展開しない。zsh が解釈に失敗する）
 - JS はファイルに書き出してから `eval "$(cat /tmp/xxx.js)"` で渡す。インラインの複雑な JS はクォート問題で壊れる
 - Node.js スクリプトも `/tmp/*.js` にファイル書き出してから `node /tmp/xxx.js` で実行する
-- **Node.js の `require("better-sqlite3")` は `/tmp/` から実行すると解決に失敗する。** 絶対パス `require("${PROJECT_ROOT}/node_modules/better-sqlite3")` を使うこと。`googleapis` も同様
+- **投稿台帳ストア（`sns-posts-store.cjs`）は `PROJECT_ROOT` からの相対 `require("./.claude/scripts/lib/sns-posts-store.cjs")` で読む**（リポジトリルートで実行）。`/tmp/*.js` の heredoc で絶対パスを使う場合は `require("${PROJECT_ROOT}/.claude/scripts/lib/sns-posts-store.cjs")`。`googleapis`（YouTube）も同様に絶対パス `require("${PROJECT_ROOT}/node_modules/googleapis")` を使う
 
 ## マッチング優先順位（全プラットフォーム共通）
 
@@ -91,11 +91,6 @@ bash .claude/scripts/cleanup-browser.sh --force 2>/dev/null
 
 `references/platform-youtube.md` の手順に従って実行する。
 
----
-
-### TikTok
-
-`references/platform-tiktok.md` の手順に従って実行する。
 
 ---
 
@@ -103,34 +98,29 @@ bash .claude/scripts/cleanup-browser.sh --force 2>/dev/null
 
 処理完了後、以下のクエリで結果を出力:
 
+投稿台帳 `posts.json`（`sns-posts-store.cjs`）と sns-metrics snapshot（`sns-metrics-store.cjs`）から集計する（完全DBレス。旧 D1 sns_posts は廃止）:
+
 ```bash
-cat > /tmp/sns-report.js << JSEOF
-const Database = require("${PROJECT_ROOT}/node_modules/better-sqlite3");
-const snsStore = require("${PROJECT_ROOT}/.claude/scripts/lib/sns-metrics-store.cjs");
-const DB_PATH = "${PROJECT_ROOT}/.local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite";
-const db = new Database(DB_PATH);
-
-console.log("\n=== プラットフォーム別更新件数（直近1時間） ===");
-const updated = db.prepare("SELECT platform, COUNT(*) as cnt FROM sns_posts WHERE metrics_updated_at >= datetime('now', '-1 hour') GROUP BY platform").all();
-for (const r of updated) console.log(r.platform + ": " + r.cnt);
-
+node -e '
+const posts = require("./.claude/scripts/lib/sns-posts-store.cjs");
+const snsStore = require("./.claude/scripts/lib/sns-metrics-store.cjs");
+const all = posts.loadAll();
+const hourAgo = new Date(Date.now() - 3600e3).toISOString();
+const acc = {};
+const bump = (p, k) => { (acc[p] ||= { updated: 0, total: 0, with_url: 0, with_cap: 0 })[k]++; };
+for (const p of all) {
+  const pl = p.platform || "?";
+  bump(pl, "total");
+  if ((p.metrics_updated_at || "") >= hourAgo) bump(pl, "updated");
+  if (p.post_url) bump(pl, "with_url");
+  if (p.caption) bump(pl, "with_cap");
+}
+console.log("=== プラットフォーム別更新件数（直近1時間）/ post_url・caption 充足率 ===");
+for (const [pl, a] of Object.entries(acc))
+  console.log(`${pl}: updated ${a.updated}, post_url ${a.with_url}/${a.total}, caption ${a.with_cap}/${a.total}`);
 console.log("\n=== sns-metrics snapshot 総件数（全期間） ===");
-console.log(snsStore.countAll());
-console.log("最新 fetched_at: " + snsStore.maxFetchedAt());
-
-console.log("\n=== post_url 充足率 ===");
-const urlStats = db.prepare("SELECT platform, COUNT(*) as total, SUM(CASE WHEN post_url IS NOT NULL AND post_url != '' THEN 1 ELSE 0 END) as with_url FROM sns_posts GROUP BY platform").all();
-for (const r of urlStats) console.log(r.platform + ": " + r.with_url + "/" + r.total);
-
-console.log("\n=== caption 充足率 ===");
-const capStats = db.prepare("SELECT platform, COUNT(*) as total, SUM(CASE WHEN caption IS NOT NULL AND caption != '' THEN 1 ELSE 0 END) as with_cap FROM sns_posts GROUP BY platform").all();
-for (const r of capStats) console.log(r.platform + ": " + r.with_cap + "/" + r.total);
-
-db.close();
-JSEOF
-
-node /tmp/sns-report.js
-rm -f /tmp/sns-report.js
+console.log(snsStore.countAll(), "最新 fetched_at:", snsStore.maxFetchedAt());
+'
 ```
 
 | 項目 | 内容 |
@@ -155,9 +145,9 @@ bash .claude/scripts/cleanup-browser.sh 2>/dev/null
 - `references/platform-x.md` — X (Twitter) メトリクス取得手順（X-1〜X-5）
 - `references/platform-instagram.md` — Instagram メトリクス取得手順（IG-1〜IG-5）
 - `references/platform-youtube.md` — YouTube メトリクス取得手順（YT-1）
-- `references/platform-tiktok.md` — TikTok メトリクス取得手順（TT-1〜TT-4）
 - `.claude/scripts/lib/sns-metrics-store.cjs` — 時系列履歴書き込みヘルパ（CSV upsert）
 - `.claude/skills/analytics/sns-metrics-improvement/` — スナップショット蓄積先 + improvement-log
-- `packages/database/src/schema/sns_posts.ts` — sns_posts テーブル定義（キャッシュカラム含む運用データ）
+- `.claude/state/sns/posts.json`（`.claude/scripts/lib/sns-posts-store.cjs`）— 投稿台帳 SSOT。最新値キャッシュの書込先（完全DBレス。旧 D1 sns_posts は廃止）
+- `packages/database/src/schema/sns_posts.ts` — レコードの型ソース（カラム名の参照用。配信 R2・投稿台帳には影響しない残置）
 - `.claude/skills/analytics/fetch-youtube-data/SKILL.md` — YouTube API パターンの原典
 - `.claude/skills/sns/find-quote-rt/SKILL.md` — X タイムライン DOM 抽出パターンの原典

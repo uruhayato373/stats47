@@ -6,24 +6,21 @@
 
 `--skip-backfill` 指定時はスキップ。
 
+投稿台帳 `posts.json`（`sns-posts-store.cjs`）の caption 空レコードを走査し、`updateById` で埋める（完全DBレス。旧 D1 sns_posts は廃止）。
+
 ```bash
 cat > /tmp/caption-backfill.js << JSEOF
-const Database = require("${PROJECT_ROOT}/node_modules/better-sqlite3");
 const fs = require("fs");
 const path = require("path");
-const DB_PATH = "${PROJECT_ROOT}/.local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite";
-const db = new Database(DB_PATH);
+const store = require("${PROJECT_ROOT}/.claude/scripts/lib/sns-posts-store.cjs");
 
-// caption が NULL のレコードを取得
-const nullCaptions = db.prepare(
-  "SELECT id, platform, content_key, domain, post_type FROM sns_posts WHERE caption IS NULL OR caption = ''"
-).all();
+// caption が空のレコードを取得
+const nullCaptions = store.query((p) => !p.caption);
 console.log("Caption NULL records: " + nullCaptions.length);
 
-const updCaption = db.prepare("UPDATE sns_posts SET caption = ? WHERE id = ?");
 let filled = 0;
 
-const tx = db.transaction(() => {
+{
   for (const row of nullCaptions) {
     // platform → ディレクトリ名のマッピング
     const platformDir = row.platform === "youtube" && row.post_type === "short"
@@ -39,26 +36,26 @@ const tx = db.transaction(() => {
       if (fs.existsSync(capPath)) {
         const caption = fs.readFileSync(capPath, "utf8").trim();
         if (caption.length > 0) {
-          updCaption.run(caption, row.id);
+          store.updateById(row.id, { caption });
           filled++;
           break;
         }
       }
     }
   }
-});
-tx();
+}
 
 console.log("Backfilled: " + filled + " / " + nullCaptions.length);
 
-// 更新後の充足率を表示
-const capStats = db.prepare(
-  "SELECT platform, COUNT(*) as total, SUM(CASE WHEN caption IS NOT NULL AND caption != '' THEN 1 ELSE 0 END) as with_cap FROM sns_posts GROUP BY platform"
-).all();
+// 更新後の充足率を表示（投稿台帳 posts.json から集計）
+const capAcc = {};
+for (const p of store.loadAll()) {
+  const a = capAcc[p.platform] || (capAcc[p.platform] = { total: 0, with_cap: 0 });
+  a.total++;
+  if (p.caption) a.with_cap++;
+}
 console.log("\n=== Caption 充足率（backfill 後） ===");
-for (const r of capStats) console.log(r.platform + ": " + r.with_cap + "/" + r.total);
-
-db.close();
+for (const [pl, a] of Object.entries(capAcc)) console.log(pl + ": " + a.with_cap + "/" + a.total);
 JSEOF
 
 node /tmp/caption-backfill.js

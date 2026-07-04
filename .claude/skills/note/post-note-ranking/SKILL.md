@@ -43,17 +43,22 @@ docs/31_note記事原稿/a-<rankingKey>/
 
 ### Phase 1: データ取得
 
-Phase 6 (2026-05-27) で観測値ストアを R2 に移行済。メタは D1 metrics、観測値は R2 から取得する。
+完全DBレス（Phase 6 で観測値を R2 に移行済。旧 D1 metrics/miniflare は廃止）。メタも観測値も R2 公開 URL から取得する。
 
-1. ランキングメタデータを取得 (D1 `metrics` cache):
+1. ランキングメタデータを取得 (R2 `app/ranking/<key>/item.json`):
 
 ```bash
 cd /Users/minamidaisuke/stats47 && node -e "
-const Database = require('better-sqlite3');
-const db = new Database('.local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite');
-const item = db.prepare(\"SELECT key AS ranking_key, title, unit, category_key, demographic_attr, normalization_basis FROM metrics WHERE key = '<RANKING_KEY>' AND is_active = 1\").get();
-console.log(JSON.stringify(item, null, 2));
-db.close();
+const R2 = process.env.R2_PUBLIC_FETCH_URL || 'https://storage.stats47.jp';
+(async () => {
+  const { item } = await (await fetch(R2 + '/app/ranking/<RANKING_KEY>/item.json')).json();
+  // demographic_attr / normalization_basis は廃止列。正規化は calculation.normalizationOptions を使う
+  console.log(JSON.stringify({
+    ranking_key: item.rankingKey, title: item.title, unit: item.unit,
+    category_key: item.categoryKey, latest_year: item.latestYear,
+    normalization_options: item.calculation?.normalizationOptions ?? null,
+  }, null, 2));
+})();
 "
 ```
 
@@ -61,12 +66,13 @@ db.close();
 
 ```bash
 cd /Users/minamidaisuke/stats47 && node -e "
-const fs = require('fs');
+const R2 = process.env.R2_PUBLIC_FETCH_URL || 'https://storage.stats47.jp';
 const KEY = '<RANKING_KEY>';
 const YEAR = '<YEAR>';
-const path = '.local/r2/app/stats/' + KEY + '/values.json';
-if (!fs.existsSync(path)) { console.error('R2 missing, run: /page-data-batch --metric ' + KEY); process.exit(1); }
-const payload = JSON.parse(fs.readFileSync(path, 'utf-8'));
+(async () => {
+const res = await fetch(R2 + '/app/stats/' + KEY + '/values.json');
+if (!res.ok) { console.error('R2 missing (' + res.status + '), run: /page-data-batch --metric ' + KEY); process.exit(1); }
+const payload = await res.json();
 const rows = payload.rows
   .filter(r => String(r.yearCode) === String(YEAR) && r.value != null)
   .sort((a, b) => Number(b.value) - Number(a.value));
@@ -87,26 +93,28 @@ console.log('1位/47位 倍率:', Math.round((result[0].value / result[result.le
 console.log('');
 console.log('=== 全データ（順位・偏差値付き） ===');
 console.log(JSON.stringify(result, null, 2));
+})();
 "
 ```
 
 3. 関連するブログ記事・ランキングを検索:
 
 ```bash
-# 同カテゴリのランキング (D1 metrics + R2 stats 存在チェック)
+# 同カテゴリのランキング (R2 ranking-items snapshot。公開集合なので観測値は投入済み)
 cd /Users/minamidaisuke/stats47 && node -e "
-const Database = require('better-sqlite3');
-const fs = require('fs');
-const db = new Database('.local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite');
-const items = db.prepare(\"SELECT key AS ranking_key, title FROM metrics WHERE category_key = '<CATEGORY_KEY>' AND is_active = 1 AND key != '<RANKING_KEY>' LIMIT 30\").all();
-// R2 観測値がある metric のみ返す
-const filtered = items.filter(i => fs.existsSync('.local/r2/app/stats/' + i.ranking_key + '/values.json')).slice(0, 10);
-console.log(JSON.stringify(filtered, null, 2));
-db.close();
+const R2 = process.env.R2_PUBLIC_FETCH_URL || 'https://storage.stats47.jp';
+(async () => {
+  const snap = await (await fetch(R2 + '/app/ranking-items/all.json')).json();
+  const filtered = (snap.items || [])
+    .filter(i => i.categoryKey === '<CATEGORY_KEY>' && i.rankingKey !== '<RANKING_KEY>')
+    .slice(0, 10)
+    .map(i => ({ ranking_key: i.rankingKey, title: i.title }));
+  console.log(JSON.stringify(filtered, null, 2));
+})();
 "
 
-# 関連ブログ記事
-ls .local/r2/blog/ | grep -i '<キーワード>'
+# 関連ブログ記事 (R2 blog snapshot をキーワードで絞り込み)
+curl -s 'https://storage.stats47.jp/app/blog/all.json' | jq '.articles[] | select(.title | test(\"<キーワード>\")) | {slug, title}'
 ```
 
 ### Phase 1.5: chart-data.json の保存
@@ -372,18 +380,19 @@ stats47
 
 ```bash
 cd /Users/minamidaisuke/stats47 && node -e "
-const Database = require('better-sqlite3');
 const fs = require('fs');
-const db = new Database('.local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite');
+const R2 = process.env.R2_PUBLIC_FETCH_URL || 'https://storage.stats47.jp';
 
 const rankingKey = '<RANKING_KEY>';
 const YEAR = '<YEAR>';
-const item = db.prepare('SELECT title, unit, category_key, demographic_attr, normalization_basis FROM metrics WHERE key = ? AND is_active = 1').get(rankingKey);
+(async () => {
+// メタは R2 item.json（旧 D1 metrics は廃止。demographic_attr/normalization_basis は廃止列で undefined）
+const { item } = await (await fetch(R2 + '/app/ranking/' + rankingKey + '/item.json')).json();
 
-// 観測値は R2 から (Phase 6 で D1 stats_* DROP)
-const statsPath = '.local/r2/app/stats/' + rankingKey + '/values.json';
-if (!fs.existsSync(statsPath)) { console.error('R2 missing: ' + statsPath); process.exit(1); }
-const payload = JSON.parse(fs.readFileSync(statsPath, 'utf-8'));
+// 観測値は R2 公開 URL から (Phase 6 で D1 stats_* DROP)
+const res = await fetch(R2 + '/app/stats/' + rankingKey + '/values.json');
+if (!res.ok) { console.error('R2 missing (' + res.status + '): ' + rankingKey); process.exit(1); }
+const payload = await res.json();
 const rows = payload.rows
   .filter(r => String(r.yearCode) === String(YEAR) && r.value != null)
   .sort((a, b) => Number(b.value) - Number(a.value))
@@ -420,7 +429,7 @@ fs.writeFileSync(dir + '/ranking_items.json', JSON.stringify(itemMeta, null, 2))
 fs.writeFileSync(dir + '/instagram/caption.json', JSON.stringify({ hookText: '', displayTitle: item.title }));
 
 console.log('Data files generated for:', rankingKey);
-db.close();
+})();
 "
 ```
 

@@ -1,10 +1,14 @@
 ---
 name: post-sns-captions
-description: 全 SNS（X/YouTube）のキャプションを一括生成しローカルに保存する。Use when user says "キャプション一括生成", "全SNSキャプション". 各プラットフォーム別スキルに委譲.
+description: "[ARCHIVED 2026-07-04] 旧「全PF同時投稿」ラッパー。チャネル別戦略へ移行し退役。"
 disable-model-invocation: true
+user-invocable: false
 primary_agent: sns-metrics-sync
-co_agents: [instagram-strategist, x-strategist]
 ---
+
+> **⚠️ ARCHIVED (2026-07-04)**: 「全 SNS 同時投稿」モデル (TikTok/YouTube Shorts 量産前提) は撤退により廃止。
+> 正典は `.claude/rules/sns-content-standards.md`。チャネル別に post-x / generate-instagram-schedule /
+> bar-chart-race を使い、週次運用は `/sns-weekly-plan` で束ねる。復活する場合はこのバナーを外して skills/sns/ に戻す。
 
 全 SNS（X / YouTube）の投稿用キャプションを一括生成してローカルに保存する。
 各プラットフォームの個別スキルに委譲して順次実行する。

@@ -243,5 +243,6 @@ Remotion は `rankingKey` だけではデータを取得できない。必ず `-
 
 ## 参照
 
-- キャプション生成: `/post-sns-captions` / `/post-x` / `/post-youtube`
+- キャプション生成: `/post-x` / `/post-ig-6angles` / `/bar-chart-race --step captions`
+- Remotion レンダ入口の正典: 静止画/動画 = 本スキル、BCR = `/bar-chart-race`、プレビュー = `/preview-remotion` (`.claude/rules/sns-content-standards.md` §5)
 - Remotion 設定: `apps/remotion/remotion.config.js`

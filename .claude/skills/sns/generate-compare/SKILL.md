@@ -1,11 +1,21 @@
 ---
 name: generate-compare
-description: D1 から 2 地域比較の data.json を生成しローカル R2 に保存する。Use when user says "比較データ生成", "compare 生成", "2地域比較". テーマプリセット対応.
+description: 2 地域比較の data.json を生成し、キャプションまで作る (compare 統合スキル)。Use when user says "比較データ生成", "compare 生成", "2地域比較", "比較キャプション". --step data|captions|all。テーマプリセット対応.
 disable-model-invocation: true
+argument-hint: "<areaA> <areaB> [--step data|captions|all] [--theme fiscal|salary|spending|governor|debt]"
 primary_agent: sns-renderer
 ---
 
-D1 から 2 地域の比較データを取得し、`.local/r2/sns/compare/<areaA>-vs-<areaB>/` に data.json を保存する。
+R2 観測値から 2 地域の比較データを取得し、`.local/r2/sns/compare/<areaA>-vs-<areaB>/` に data.json を保存する。
+続けてキャプション生成 (`--step captions`) まで担う (旧 `post-compare-captions` を吸収、詳細 `reference/captions.md`)。
+
+## 工程 (--step)
+
+| step | 内容 | 詳細 |
+|---|---|---|
+| `data` | 比較 data.json 生成 (下記手順) | 本ファイル |
+| `captions` | X / IG / YouTube キャプション生成 (TikTok は撤退で対象外) | `reference/captions.md` |
+| `all` (既定) | data → captions | — |
 
 ## ディレクトリ構造
 
@@ -110,6 +120,6 @@ const latestRows = prefRows.filter(r => r.yearCode === latestYear).sort((a, b) =
 ## 参照
 
 - 比較テーマ定義: `docs/10_SNS戦略/04_地方財政テーマSNS展開.md`
-- キャプション生成: `/post-sns-captions --domain compare`
+- キャプション生成: `--step captions` (詳細 `reference/captions.md`)
 - Remotion プレビュー: `/preview-remotion --type comparison`
-- UTM ルール: `/generate-utm-url`
+- UTM ルール・チャネル規約: `.claude/rules/sns-content-standards.md` §4 / §1 (TikTok 撤退)

@@ -77,6 +77,7 @@ CLAUDE.md 内に詳細を複製しない。状況に応じて参照する。
 |---|---|
 | `coding-standards.md` | TypeScript / React / Next.js コード全般 |
 | `blog-quality-standards.md` | ブログ記事の新規作成 / brushup (タイトル curiosity gap パターン、CTR 改善基準) |
+| `sns-content-standards.md` | SNS 投稿 (X/IG/YouTube/note) の企画・生成・投稿・計測 (チャネル戦略・頻度リミット・投稿雛形・投稿台帳 posts.json・TikTok 撤退/YT 月1 の正典) |
 | `evidence-based-judgment.md` | improvement / 判定系スキル (status: effect/* 更新時必読) |
 | `ui-components.md` | UI 実装 (shadcn / melta-ui / ブレイクポイント / page_components) |
 | `r2-storage-design.md` | snapshot 追加・変更 |

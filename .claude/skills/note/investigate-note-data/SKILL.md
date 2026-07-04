@@ -9,18 +9,13 @@ note 記事（B/C/D シリーズ）のデータ調査・分析。相関分析・
 
 > **A シリーズ（ランキング記事・量産型）はこの4ステップワークフローの対象外です。** A シリーズは自動生成スキルで処理するため、validate → investigate → design → write → edit の手順は不要です。
 
-> ⚠️ **Phase 6/7 (2026-05-28) で D1 schema 大改修**
-> 旧 `indicators` / `observations` / `correlations` テーブルは廃止または DROP 済:
-> - `indicators` → `metrics` (テーブル名のみリネーム、key カラムは同名)
-> - `observations` → R2 `app/stats/<metric>/values.json` (Phase 6 で R2 移行)
-> - `correlations` → R2 `app/correlation/{top-pairs.json, stats.json, by-ranking-key/<key>.json}` (snapshot 配信)
+> ✅ **完全DBレス（本 SKILL.md の全コードブロックは R2 公開 URL fetch ベースに移行済）**
+> 旧 D1 `indicators` / `observations` / `correlations` は廃止。データソースは以下の R2 snapshot:
+> - メタ (`indicators`/`metrics`) → `app/ranking/<key>/item.json`（`.item.{title,unit,categoryKey,latestYear,availableYears}`）/ 一覧は `app/ranking-items/all.json`
+> - 観測値 (`observations`) → `app/stats/<key>/values.json`（`.rows[].{areaCode,areaName,yearCode,value,rank}`）
+> - 相関 (`correlations`) → `app/correlation/by-ranking-key/<key>.json`（`.pairs[]` = `CorrelatedItem`）/ 全体統計は `app/correlation/stats.json`
 >
-> 本 SKILL.md 内の SQL クエリの多くは旧 schema 前提のため、**実行時は下記の置換** を行うこと:
-> - `FROM indicators` → `FROM metrics` (カラム ranking_key → key)
-> - `FROM observations WHERE category_code = ?` → `fs.readFileSync('.local/r2/app/stats/<key>/values.json')` をパースして filter
-> - `FROM correlations` → `.local/r2/app/correlation/by-ranking-key/<key>.json` を fetch
->
-> Phase 8 で本 SKILL.md を R2 fetch ベースに全面 refactor 予定 ([04_機能バックログ.md](../../../../docs/02_実装計画/04_機能バックログ.md))。
+> 読み取りは認証不要（`R2_PUBLIC_FETCH_URL` 既定 `https://storage.stats47.jp`）。`subtitle` / `demographic_attr` / `normalization_basis` は R2 未 export の廃止列（正規化は `item.calculation.normalizationOptions` を使う）。
 
 ## 用途
 
@@ -43,55 +38,70 @@ note 記事（B/C/D シリーズ）のデータ調査・分析。相関分析・
 - **rankingKeys**: メインの指標（1〜3個）— 例: `total-fertility-rate`, `food-expenditure-per-month`
 - **relatedKeys**: 関連指標（任意）— ユーザー指定 or Phase 2 で自動検索
 
-## DB 接続
+## データソース (完全DBレス)
 
-全フェーズで以下のパスの SQLite を使用する:
+全フェーズで R2 公開 URL から fetch する（認証不要。旧 D1/miniflare は廃止）:
 
 ```js
-const Database = require('better-sqlite3');
-const db = new Database('.local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite');
+const R2 = process.env.R2_PUBLIC_FETCH_URL || 'https://storage.stats47.jp';
+// メタ: R2 + '/app/ranking/<key>/item.json' (.item) / 一覧: '/app/ranking-items/all.json' (.items)
+// 観測値: R2 + '/app/stats/<key>/values.json' (.rows)
+// 相関: R2 + '/app/correlation/by-ranking-key/<key>.json' (.pairs)
 ```
 
 ## 手順
 
 ### Phase 1: メインデータ収集
 
-1. `indicators` からメタデータを取得:
+1. メタデータを取得 (R2 `app/ranking/<key>/item.json`。旧 D1 indicators は廃止。subtitle は R2 未 export):
 
 ```bash
 cd /Users/minamidaisuke/stats47 && node -e "
-const Database = require('better-sqlite3');
-const db = new Database('.local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite');
-const items = db.prepare(\"SELECT ranking_key, title, subtitle, unit, category_key, latest_year, available_years FROM indicators WHERE ranking_key IN ('<KEY1>', '<KEY2>') AND area_type = 'prefecture'\").all();
-console.log(JSON.stringify(items, null, 2));
-db.close();
+const R2 = process.env.R2_PUBLIC_FETCH_URL || 'https://storage.stats47.jp';
+(async () => {
+  const items = [];
+  for (const k of ['<KEY1>', '<KEY2>']) {
+    const { item } = await (await fetch(R2 + '/app/ranking/' + k + '/item.json')).json();
+    items.push({ ranking_key: item.rankingKey, title: item.title, unit: item.unit,
+      category_key: item.categoryKey, latest_year: item.latestYear, available_years: item.availableYears });
+  }
+  console.log(JSON.stringify(items, null, 2));
+})();
 "
 ```
 
-2. `observations` から全47都道府県データを取得（最新年を使用）:
+2. R2 観測値から全47都道府県データを取得（最新年を使用）:
 
 ```bash
 cd /Users/minamidaisuke/stats47 && node -e "
-const Database = require('better-sqlite3');
-const db = new Database('.local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite');
-const rows = db.prepare(\"SELECT area_code, area_name, year_code, value, rank FROM observations WHERE category_code = '<RANKING_KEY>' AND area_type = 'prefecture' AND year_code = '<YEAR>' ORDER BY value DESC\").all();
-console.log(JSON.stringify(rows, null, 2));
-console.log('Count:', rows.length);
-db.close();
+const R2 = process.env.R2_PUBLIC_FETCH_URL || 'https://storage.stats47.jp';
+(async () => {
+  const payload = await (await fetch(R2 + '/app/stats/<RANKING_KEY>/values.json')).json();
+  const rows = payload.rows
+    .filter(r => String(r.yearCode) === '<YEAR>' && r.value != null)
+    .sort((a, b) => Number(b.value) - Number(a.value))
+    .map(r => ({ area_code: r.areaCode, area_name: r.areaName, year_code: r.yearCode, value: Number(r.value), rank: r.rank }));
+  console.log(JSON.stringify(rows, null, 2));
+  console.log('Count:', rows.length);
+})();
 "
 ```
 
-**注意**: `observations` テーブルでは `category_code` カラムが `ranking_key` に対応する。
+**注意**: R2 観測値は `app/stats/<rankingKey>/values.json`（旧 D1 observations の DBレス版。`category_code` = `ranking_key`）。
 
 3. 同カテゴリの関連ランキングを検索:
 
 ```bash
 cd /Users/minamidaisuke/stats47 && node -e "
-const Database = require('better-sqlite3');
-const db = new Database('.local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite');
-const related = db.prepare(\"SELECT ranking_key, title, unit, latest_year FROM indicators WHERE category_key = '<CATEGORY_KEY>' AND area_type = 'prefecture' AND is_active = 1 AND ranking_key != '<MAIN_KEY>' ORDER BY ranking_key LIMIT 30\").all();
-console.log(JSON.stringify(related, null, 2));
-db.close();
+const R2 = process.env.R2_PUBLIC_FETCH_URL || 'https://storage.stats47.jp';
+(async () => {
+  const snap = await (await fetch(R2 + '/app/ranking-items/all.json')).json();
+  const related = (snap.items || [])
+    .filter(i => i.categoryKey === '<CATEGORY_KEY>' && i.rankingKey !== '<MAIN_KEY>')
+    .sort((a, b) => a.rankingKey.localeCompare(b.rankingKey)).slice(0, 30)
+    .map(i => ({ ranking_key: i.rankingKey, title: i.title, unit: i.unit, latest_year: i.latestYear }));
+  console.log(JSON.stringify(related, null, 2));
+})();
 "
 ```
 
@@ -99,29 +109,34 @@ db.close();
 
 #### 2-1. 既存の相関データを確認
 
-`correlations` テーブル（82,000件超）に事前計算済みのピアソン相関係数がある。まず既存データを確認する:
+事前計算済みのピアソン相関は R2 `app/correlation/by-ranking-key/<key>.json` にある（旧 D1 correlations テーブルは廃止。エフェメラル計算 → R2）。まず既存データを確認する（空なら次の 2-2 で直接計算）:
 
 ```bash
 cd /Users/minamidaisuke/stats47 && node -e "
-const Database = require('better-sqlite3');
-const db = new Database('.local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite');
-// メインキーとの相関が強い指標を検索（|r| > 0.5）
-const corrs = db.prepare(\"SELECT ranking_key_x, ranking_key_y, year_x, year_y, pearson_r, partial_r_population, partial_r_area, partial_r_aging, partial_r_density FROM correlations WHERE (ranking_key_x = '<MAIN_KEY>' OR ranking_key_y = '<MAIN_KEY>') AND ABS(pearson_r) > 0.5 ORDER BY ABS(pearson_r) DESC LIMIT 30\").all();
-console.log(JSON.stringify(corrs, null, 2));
-console.log('Strong correlations found:', corrs.length);
-db.close();
+const R2 = process.env.R2_PUBLIC_FETCH_URL || 'https://storage.stats47.jp';
+(async () => {
+  const snap = await (await fetch(R2 + '/app/correlation/by-ranking-key/<MAIN_KEY>.json')).json();
+  // メインキーと相関が強い指標（|r| > 0.5）。pairs は CorrelatedItem[]
+  const corrs = (snap.pairs || [])
+    .filter(p => Math.abs(p.pearsonR) > 0.5)
+    .sort((a, b) => Math.abs(b.pearsonR) - Math.abs(a.pearsonR)).slice(0, 30)
+    .map(p => ({ ranking_key_y: p.rankingKey, title: p.title, pearson_r: p.pearsonR,
+      partial_r_population: p.partialRPopulation, partial_r_area: p.partialRArea,
+      partial_r_aging: p.partialRAging, partial_r_density: p.partialRDensity }));
+  console.log(JSON.stringify(corrs, null, 2));
+  console.log('Strong correlations found:', corrs.length);
+})();
 "
 ```
 
-`correlations` テーブルのカラム:
-- `ranking_key_x`, `ranking_key_y`: 2指標のランキングキー
-- `year_x`, `year_y`: 各指標のデータ年
-- `pearson_r`: ピアソン相関係数
-- `partial_r_population`: 人口で偏相関（人口の影響を除いた相関）
-- `partial_r_area`: 面積で偏相関
-- `partial_r_aging`: 高齢化率で偏相関
-- `partial_r_density`: 人口密度で偏相関
-- `scatter_data`: JSON 形式の散布図データ
+R2 `by-ranking-key/<key>.json` の `.pairs[]`（`CorrelatedItem`、`packages/correlation/src/types/snapshot.ts`）:
+- `rankingKey`: 相関相手の指標キー / `title`, `unit`
+- `pearsonR`: ピアソン相関係数
+- `partialRPopulation`: 人口で偏相関（人口の影響を除いた相関）
+- `partialRArea`: 面積で偏相関
+- `partialRAging`: 高齢化率で偏相関
+- `partialRDensity`: 人口密度で偏相関
+- `scatterData`: 散布図データ（`{areaCode, areaName, x, y}[]`）
 
 #### 2-2. DB にない組み合わせの相関を計算
 
@@ -129,9 +144,8 @@ db.close();
 
 ```bash
 cd /Users/minamidaisuke/stats47 && node -e "
-const Database = require('better-sqlite3');
-const db = new Database('.local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite');
-
+const R2 = process.env.R2_PUBLIC_FETCH_URL || 'https://storage.stats47.jp';
+(async () => {
 function pearsonCorrelation(x, y) {
   const n = x.length;
   const sumX = x.reduce((a, b) => a + b, 0);
@@ -144,14 +158,22 @@ function pearsonCorrelation(x, y) {
   return den === 0 ? 0 : num / den;
 }
 
+// R2 観測値から {area_code, value}[] を取得（旧 D1 observations の DBレス版）
+async function fetchObs(key, year) {
+  const payload = await (await fetch(R2 + '/app/stats/' + key + '/values.json')).json();
+  return payload.rows
+    .filter(r => String(r.yearCode) === String(year) && r.value != null)
+    .map(r => ({ area_code: r.areaCode, value: Number(r.value) }));
+}
+
 // 2指標の47都道府県データを取得
 const keyX = '<KEY_X>';
 const keyY = '<KEY_Y>';
 const yearX = '<YEAR_X>';
 const yearY = '<YEAR_Y>';
 
-const dataX = db.prepare('SELECT area_code, value FROM observations WHERE category_code = ? AND area_type = ? AND year_code = ?').all(keyX, 'prefecture', yearX);
-const dataY = db.prepare('SELECT area_code, value FROM observations WHERE category_code = ? AND area_type = ? AND year_code = ?').all(keyY, 'prefecture', yearY);
+const dataX = await fetchObs(keyX, yearX);
+const dataY = await fetchObs(keyY, yearY);
 
 // area_code でマッチング
 const mapY = new Map(dataY.map(r => [r.area_code, r.value]));
@@ -161,8 +183,7 @@ const x = paired.map(p => p.x);
 const y = paired.map(p => p.y);
 const r = pearsonCorrelation(x, y);
 console.log('Pearson r:', r.toFixed(4), '(n=' + paired.length + ')');
-
-db.close();
+})();
 "
 ```
 
@@ -201,9 +222,8 @@ db.close();
 
 ```bash
 cd /Users/minamidaisuke/stats47 && node -e "
-const Database = require('better-sqlite3');
-const db = new Database('.local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite');
-
+const R2 = process.env.R2_PUBLIC_FETCH_URL || 'https://storage.stats47.jp';
+(async () => {
 // 7地方区分マッピング（area_code → 地方名）
 const regionMap = {
   '01000': '北海道',
@@ -216,7 +236,10 @@ const regionMap = {
   '40000': '九州沖縄', '41000': '九州沖縄', '42000': '九州沖縄', '43000': '九州沖縄', '44000': '九州沖縄', '45000': '九州沖縄', '46000': '九州沖縄', '47000': '九州沖縄',
 };
 
-const rows = db.prepare(\"SELECT area_code, area_name, value FROM observations WHERE category_code = '<RANKING_KEY>' AND area_type = 'prefecture' AND year_code = '<YEAR>'\").all();
+const payload = await (await fetch(R2 + '/app/stats/<RANKING_KEY>/values.json')).json();
+const rows = payload.rows
+  .filter(r => String(r.yearCode) === '<YEAR>' && r.value != null)
+  .map(r => ({ area_code: r.areaCode, area_name: r.areaName, value: Number(r.value) }));
 
 // 地方別集計
 const regionStats = {};
@@ -242,8 +265,7 @@ for (const region of regionOrder) {
 const allValues = rows.map(r => r.value);
 const nationalAvg = allValues.reduce((a, b) => a + b, 0) / allValues.length;
 console.log('\\n全国平均:', nationalAvg.toFixed(2));
-
-db.close();
+})();
 "
 ```
 
@@ -262,16 +284,18 @@ D シリーズで特定の都道府県を深掘りする場合、複数指標の
 
 ```bash
 cd /Users/minamidaisuke/stats47 && node -e "
-const Database = require('better-sqlite3');
-const db = new Database('.local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite');
-
+const R2 = process.env.R2_PUBLIC_FETCH_URL || 'https://storage.stats47.jp';
+(async () => {
 const targetAreaCode = '<AREA_CODE>'; // 例: '13000'（東京都）
 const keys = ['<KEY1>', '<KEY2>', '<KEY3>', '<KEY4>', '<KEY5>'];
 const years = ['<YEAR1>', '<YEAR2>', '<YEAR3>', '<YEAR4>', '<YEAR5>'];
 
 const results = [];
 for (let i = 0; i < keys.length; i++) {
-  const rows = db.prepare('SELECT area_code, value FROM observations WHERE category_code = ? AND area_type = ? AND year_code = ?').all(keys[i], 'prefecture', years[i]);
+  const payload = await (await fetch(R2 + '/app/stats/' + keys[i] + '/values.json')).json();
+  const rows = payload.rows
+    .filter(r => String(r.yearCode) === String(years[i]) && r.value != null)
+    .map(r => ({ area_code: r.areaCode, value: Number(r.value) }));
   const values = rows.map(r => r.value);
   const n = values.length;
   const mean = values.reduce((a, b) => a + b, 0) / n;
@@ -281,7 +305,7 @@ for (let i = 0; i < keys.length; i++) {
   if (!target) { console.log(keys[i] + ': データなし'); continue; }
 
   const deviation = stddev === 0 ? 50 : 50 + 10 * (target.value - mean) / stddev;
-  const item = db.prepare('SELECT title, unit FROM indicators WHERE ranking_key = ? AND area_type = ?').get(keys[i], 'prefecture');
+  const { item } = await (await fetch(R2 + '/app/ranking/' + keys[i] + '/item.json')).json();
   results.push({ key: keys[i], title: item?.title || keys[i], value: target.value, unit: item?.unit || '', deviation: deviation.toFixed(1), rank: rows.sort((a, b) => b.value - a.value).findIndex(r => r.area_code === targetAreaCode) + 1 });
 }
 
@@ -291,8 +315,7 @@ console.log('\\n=== 強み（偏差値が高い指標） ===');
 results.filter(r => parseFloat(r.deviation) >= 55).forEach(r => console.log(r.title + ': 偏差値' + r.deviation + ' (値=' + r.value + r.unit + ', ' + r.rank + '位)'));
 console.log('\\n=== 弱み（偏差値が低い指標） ===');
 results.filter(r => parseFloat(r.deviation) <= 45).forEach(r => console.log(r.title + ': 偏差値' + r.deviation + ' (値=' + r.value + r.unit + ', ' + r.rank + '位)'));
-
-db.close();
+})();
 "
 ```
 

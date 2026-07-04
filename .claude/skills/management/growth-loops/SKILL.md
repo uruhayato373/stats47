@@ -43,7 +43,8 @@ stats47 は都道府県統計データの可視化サイト。以下の特性を
 
 #### Agent B: コンテンツ資産
 ```
-- D1 sns_posts テーブルから投稿状況（SELECT domain, platform, status, COUNT(*) FROM sns_posts GROUP BY domain, platform, status）
+- 投稿台帳 `.claude/state/sns/posts.json` から投稿状況を集計（完全DBレス。旧 D1 sns_posts は廃止）:
+  `node -e 'const s=require("./.claude/scripts/lib/sns-posts-store.cjs");const by={};for(const p of s.loadAll()){const k=(p.domain||"?")+"/"+(p.platform||"?")+"/"+(p.status||"?");by[k]=(by[k]||0)+1}console.log(JSON.stringify(by,null,2))'`
 - .local/r2/sns/ の生成済みコンテンツ
 - ブログ記事の企画状況（`gh issue list --label content/blog --state open`）
 ```
@@ -158,6 +159,6 @@ ls -t docs/04_レビュー/*.md | head -5
 
 - `docs/02_実装計画/00_INDEX.md` — 実装計画の現在地
 - `docs/02_実装計画/01_収益化マスタープラン.md` — KPI・Phase 目標
-- D1 `sns_posts` / `sns_metrics` テーブル — SNS 投稿状況・メトリクス
+- 投稿台帳 `.claude/state/sns/posts.json`（`sns-posts-store.cjs` 経由）— SNS 投稿状況・メトリクスキャッシュ
 - `.claude/skills/management/weekly-plan/SKILL.md` — 週次計画
 - 原典: Ognjen Boskovic の Growth Loops フレームワーク

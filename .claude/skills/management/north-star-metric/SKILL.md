@@ -64,11 +64,12 @@ stats47 はコンテンツメディアとして主に **Attention ゲーム** �
 以下を収集する:
 
 ```
-DB: .local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite
+完全DBレス: R2 snapshot / 投稿台帳から取得（旧 D1/miniflare は廃止）
 
-- 公開記事数: SELECT COUNT(*) FROM articles WHERE published = 1;
-- ランキング数: SELECT COUNT(*) FROM indicators;
-- SNS 指標（最新値）: SELECT platform, SUM(impressions), SUM(likes) FROM sns_posts WHERE status='posted' GROUP BY platform;
+- 公開記事数: `curl -s "https://storage.stats47.jp/app/blog/all.json" | jq '.articles | length'`
+- ランキング数: `curl -s "https://storage.stats47.jp/app/ranking-items/all.json" | jq '.count'`
+- SNS 指標（最新値）: 投稿台帳 `.claude/state/sns/posts.json` から集計（旧 D1 sns_posts は廃止）:
+  `node -e 'const s=require("./.claude/scripts/lib/sns-posts-store.cjs");const acc={};for(const p of s.query(x=>x.status==="posted")){const a=acc[p.platform]||={impressions:0,likes:0};a.impressions+=p.impressions||0;a.likes+=p.likes||0}console.log(JSON.stringify(acc,null,2))'`
 - SNS 指標（時系列）: `.claude/skills/analytics/sns-metrics-improvement/snapshots/YYYY-MM-DD/metrics.csv`（`sns-metrics-store.cjs` 経由）
 ```
 

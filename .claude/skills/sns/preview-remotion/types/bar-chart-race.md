@@ -8,7 +8,7 @@
 
 ## 前提
 
-`config.json` または `data.json` が存在しない場合は、先に `/generate-bar-chart-race` でデータを生成するよう案内する。
+`config.json` または `data.json` が存在しない場合は、先に `/bar-chart-race --step generate` でデータを生成するよう案内する。
 
 ## 手順
 

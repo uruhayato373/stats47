@@ -40,10 +40,9 @@ primary_agent: strategy-advisor
 
 ```
 調査項目:
-- DB `sns_posts` テーブルからステータス別集計:
-  DB: .local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite
-  ```sql
-  SELECT domain, platform, status, COUNT(*) FROM sns_posts GROUP BY domain, platform, status;
+- 投稿台帳 `.claude/state/sns/posts.json` からステータス別集計 (完全DBレス。旧 D1 sns_posts は廃止):
+  ```bash
+  node -e 'const s=require("./.claude/scripts/lib/sns-posts-store.cjs");const by={};for(const p of s.loadAll()){const k=(p.domain||"?")+"/"+(p.platform||"?")+"/"+(p.status||"?");by[k]=(by[k]||0)+1}console.log(JSON.stringify(by,null,2))'
   ```
 - .local/r2/blog/ 配下の記事数（公開済み / 下書き）
 - ブログ記事の未実行企画（`ls docs/22_YouTube企画/backlog/ docs/30_note記事企画/backlog/ 2>/dev/null | head -20` 件数）
@@ -55,30 +54,23 @@ primary_agent: strategy-advisor
 
 ```
 調査項目:
-DB: .local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite
+（完全DBレス。本番アプリは R2 snapshot / git TS のみ読む。旧 D1/miniflare は廃止）
 
-- articles テーブルの公開記事数
-  ```sql
-  SELECT COUNT(*) FROM articles WHERE published = 1;
+- 公開記事数（R2 blog snapshot から。export-blog-snapshot は published のみ出力）
+  ```bash
+  curl -s "https://storage.stats47.jp/app/blog/all.json" | jq '.articles | length'
   ```
 
-- SNS 投稿実績（DB `sns_posts` テーブルから集計）
-  ```sql
-  SELECT domain, platform, status, COUNT(*) FROM sns_posts GROUP BY domain, platform, status;
-  SELECT domain, COUNT(*) as total, SUM(CASE WHEN status='posted' THEN 1 ELSE 0 END) as posted FROM sns_posts GROUP BY domain;
+- SNS 投稿実績（投稿台帳 `.claude/state/sns/posts.json` から集計。旧 D1 sns_posts は廃止）
+  ```bash
+  node -e 'const s=require("./.claude/scripts/lib/sns-posts-store.cjs");const by={};for(const p of s.loadAll()){const k=(p.platform||"?")+"/"+(p.status||"?");by[k]=(by[k]||0)+1}console.log(JSON.stringify(by,null,2))'
   ```
+  - **SNS 週次運用の入口は `/sns-weekly-plan`**（先週計測→題材→IG/X 生成予約→消化チェック）。正典 `.claude/rules/sns-content-standards.md`
 
 - SNS パフォーマンス
-  - **最新値**: D1 `sns_posts` のキャッシュカラムから取得（`/update-sns-metrics` 実行後に更新済み）
-    ```sql
-    SELECT platform,
-           COUNT(*) FILTER (WHERE status='posted') as posted_count,
-           SUM(COALESCE(impressions, 0)) as impressions,
-           SUM(COALESCE(likes, 0)) as likes,
-           SUM(COALESCE(replies, 0)) as replies
-    FROM sns_posts
-    WHERE status = 'posted'
-    GROUP BY platform;
+  - **最新値**: 投稿台帳 posts.json の impressions/likes/replies キャッシュから集計（`/update-sns-metrics` 実行後に更新済み）
+    ```bash
+    node -e 'const s=require("./.claude/scripts/lib/sns-posts-store.cjs");const acc={};for(const p of s.query(x=>x.status==="posted")){const a=acc[p.platform]||={posted:0,impressions:0,likes:0,replies:0};a.posted++;a.impressions+=p.impressions||0;a.likes+=p.likes||0;a.replies+=p.replies||0}console.log(JSON.stringify(acc,null,2))'
     ```
   - **時系列履歴**: `.claude/skills/analytics/sns-metrics-improvement/snapshots/YYYY-MM-DD/metrics.csv`（`sns-metrics-store.cjs` の `readByRange` で集約）
 
@@ -98,9 +90,9 @@ DB: .local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6
 - NSM 週次 snapshot JSON（`.claude/skills/management/nsm-experiment/reference/weekly-snapshots/YYYY-Www.json`）
   → weekly-review の Phase 0 で生成されたサマリ。engagedSessions / clicks / position 等の前週比
 
-- SEO カバレッジ指標（DB `seo_tracking` テーブルから取得）
-  → `SELECT * FROM seo_tracking ORDER BY date DESC LIMIT 10` で直近の推移を確認
-  → `SELECT * FROM seo_actions WHERE status != 'done' ORDER BY priority` で未完了施策を確認
+- SEO カバレッジ指標（完全DBレス。旧 D1 `seo_tracking` / `seo_actions` テーブルは廃止）
+  → GSC カバレッジ推移: `.claude/state/gsc/LATEST.md`（`.claude/state/metrics/gsc/history.csv` で時系列）
+  → 未完了 SEO 施策: `docs/02_実装計画/03_改善バックログ.md`（status != done の行）
   → トレンド（改善中 / 悪化中 / 横ばい）を判定し計画に反映
 
 出力形式: 「直近のパフォーマンス概況」「成長/停滞の兆候」
@@ -371,6 +363,6 @@ tags: []
 - `gh issue list --state open --label enhancement` — 未解決の機能改善 Issue（残存ラベル）
 - `ls -t docs/04_レビュー/*.md | head -5` — 過去の批判的指摘
 - `ls -t docs/03_週次運用/週次計画/*.md | head -5` / `ls -t docs/03_週次運用/週次レビュー/*.md | head -5` — 過去の週次計画・レビュー
-- DB `sns_posts` / `sns_metrics` テーブル — SNS コンテンツ状況・メトリクス
+- 投稿台帳 `.claude/state/sns/posts.json`（`sns-posts-store.cjs` 経由）+ `.claude/skills/analytics/sns-metrics-improvement/snapshots/` — SNS コンテンツ状況・メトリクス
 - `.claude/skills/management/critical-review/SKILL.md` — 批判的レビューの精神
 - `.claude/skills/blog/discover-trends/SKILL.md` — フルトレンドスキャン（Agent E で不足時に提案、`--source all` で全 6 ソース統合）
