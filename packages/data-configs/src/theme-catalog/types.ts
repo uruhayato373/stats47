@@ -18,7 +18,6 @@
 import type {
   IndicatorSetCategory,
   IndicatorSetUsage,
-  IndicatorPanelTab,
 } from "@stats47/types";
 
 /**
@@ -90,7 +89,11 @@ export interface CatalogChart {
   gridColumnSpanTablet?: number | null;
   gridColumnSpanSm?: number | null;
   dataSource?: string | null;
-  /** panelTabs.label と対応 (null 許容 = タブ非依存) */
+  /**
+   * 視覚グループ見出し (null 許容)。
+   * 注: テーマ renderer (ThemeDbChartRenderer) は section を参照しない (flat grid 描画)。
+   * area ページの AreaChartSection はグループ見出しに使う。theme では現状メタデータ。
+   */
   section?: string | null;
   sortOrder: number;
 }
@@ -104,8 +107,6 @@ export interface ThemeCatalog {
   usage: IndicatorSetUsage;
   /** 含まれる指標 (表示順) */
   metrics: CatalogMetric[];
-  /** パネルタブ (指標のサブグループ) */
-  panelTabs?: IndicatorPanelTab[];
   /** チャート定義 (page-components に生成) */
   charts: CatalogChart[];
   /** SEO キーワード */

@@ -1,6 +1,5 @@
 import type { ThemeCatalog } from "./types";
 
-// Migrated 2026-07-04 from IndicatorSet + page-components JSON (byte-exact round-trip verified).
 export const AGING_SOCIETY_CATALOG: ThemeCatalog = {
   "key": "aging-society",
   "title": "少子高齢化",
@@ -57,37 +56,6 @@ export const AGING_SOCIETY_CATALOG: ThemeCatalog = {
       "rankingKey": "household-ratio-with-65plus",
       "shortLabel": "65歳以上世帯割合",
       "role": "context"
-    }
-  ],
-  "panelTabs": [
-    {
-      "label": "高齢化",
-      "rankingKeys": [
-        "ratio-65-plus",
-        "aging-index",
-        "dependent-population-index",
-        "household-ratio-with-65plus"
-      ]
-    },
-    {
-      "label": "出生・婚姻",
-      "rankingKeys": [
-        "total-fertility-rate",
-        "crude-birth-rate",
-        "average-age-of-first-marriage-wife"
-      ]
-    },
-    {
-      "label": "人口動態",
-      "rankingKeys": [
-        "population-growth-rate",
-        "natural-increase-rate",
-        "social-increase-rate"
-      ]
-    },
-    {
-      "label": "考察",
-      "rankingKeys": []
     }
   ],
   "charts": [

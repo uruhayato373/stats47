@@ -61,28 +61,6 @@ export const TOURISM_SET: IndicatorSet = {
       "role": "context"
     }
   ],
-  "panelTabs": [
-    {
-      "label": "宿泊",
-      "rankingKeys": [
-        "total-overnight-guests",
-        "total-overnight-guests-foreign",
-        "room-utilization-rate",
-        "number-of-simple-lodging-facilities"
-      ]
-    },
-    {
-      "label": "旅行・交通",
-      "rankingKeys": [
-        "travel-participation-rate-domestic-tourism",
-        "travel-participation-rate-overseas",
-        "travel-participation-rate-overnight",
-        "travel-participation-rate-day-trip",
-        "air-passenger-transport",
-        "jr-passenger-transport"
-      ]
-    }
-  ],
   "keywords": [
     "観光",
     "宿泊者数",

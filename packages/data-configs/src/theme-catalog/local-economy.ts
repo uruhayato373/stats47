@@ -1,6 +1,5 @@
 import type { ThemeCatalog } from "./types";
 
-// Migrated 2026-07-04 from IndicatorSet + page-components JSON (byte-exact round-trip verified).
 export const LOCAL_ECONOMY_CATALOG: ThemeCatalog = {
   "key": "local-economy",
   "title": "地域経済",
@@ -37,36 +36,6 @@ export const LOCAL_ECONOMY_CATALOG: ThemeCatalog = {
       "rankingKey": "fiscal-strength-index-prefecture",
       "shortLabel": "財政力指数",
       "role": "secondary"
-    }
-  ],
-  "panelTabs": [
-    {
-      "label": "GDP・所得",
-      "rankingKeys": [
-        "per-taxpayer-taxable-income",
-        "minimum-wage-by-region"
-      ]
-    },
-    {
-      "label": "雇用",
-      "rankingKeys": [
-        "active-job-opening-ratio",
-        "unemployment-rate"
-      ]
-    },
-    {
-      "label": "産業",
-      "rankingKeys": []
-    },
-    {
-      "label": "財政・地価",
-      "rankingKeys": [
-        "fiscal-strength-index-prefecture"
-      ]
-    },
-    {
-      "label": "考察",
-      "rankingKeys": []
     }
   ],
   "charts": [

@@ -41,36 +41,6 @@ export const LOCAL_ECONOMY_SET: IndicatorSet = {
       "role": "secondary"
     }
   ],
-  "panelTabs": [
-    {
-      "label": "GDP・所得",
-      "rankingKeys": [
-        "per-taxpayer-taxable-income",
-        "minimum-wage-by-region"
-      ]
-    },
-    {
-      "label": "雇用",
-      "rankingKeys": [
-        "active-job-opening-ratio",
-        "unemployment-rate"
-      ]
-    },
-    {
-      "label": "産業",
-      "rankingKeys": []
-    },
-    {
-      "label": "財政・地価",
-      "rankingKeys": [
-        "fiscal-strength-index-prefecture"
-      ]
-    },
-    {
-      "label": "考察",
-      "rankingKeys": []
-    }
-  ],
   "keywords": [
     "地域経済",
     "県内総生産",

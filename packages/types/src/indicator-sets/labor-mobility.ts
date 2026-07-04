@@ -51,35 +51,6 @@ export const LABOR_MOBILITY_SET: IndicatorSet = {
       "role": "context"
     }
   ],
-  "panelTabs": [
-    {
-      "label": "流動性",
-      "rankingKeys": [
-        "turnover-rate",
-        "job-change-rate"
-      ]
-    },
-    {
-      "label": "雇用環境",
-      "rankingKeys": [
-        "active-job-opening-ratio",
-        "unemployment-rate",
-        "employment-rate"
-      ]
-    },
-    {
-      "label": "働き方",
-      "rankingKeys": [
-        "telework-rate",
-        "side-job-rate",
-        "monthly-average-actual-working-hours-male"
-      ]
-    },
-    {
-      "label": "考察",
-      "rankingKeys": []
-    }
-  ],
   "keywords": [
     "離職率",
     "転職率",

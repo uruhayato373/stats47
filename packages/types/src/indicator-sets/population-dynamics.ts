@@ -66,38 +66,6 @@ export const POPULATION_DYNAMICS_SET: IndicatorSet = {
       "role": "context"
     }
   ],
-  "panelTabs": [
-    {
-      "label": "出生・死亡",
-      "rankingKeys": [
-        "crude-birth-rate",
-        "total-fertility-rate",
-        "crude-death-rate",
-        "natural-increase-rate"
-      ]
-    },
-    {
-      "label": "移動",
-      "rankingKeys": [
-        "social-increase-rate",
-        "moving-in-excess-rate",
-        "day-time-population-ratio"
-      ]
-    },
-    {
-      "label": "構造",
-      "rankingKeys": [
-        "ratio-65-plus",
-        "young-population-ratio",
-        "population-density-per-km2-inhabitable-area",
-        "total-population"
-      ]
-    },
-    {
-      "label": "考察",
-      "rankingKeys": []
-    }
-  ],
   "keywords": [
     "人口動態",
     "人口増減率",

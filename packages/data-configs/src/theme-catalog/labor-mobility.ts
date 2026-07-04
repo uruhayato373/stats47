@@ -1,6 +1,5 @@
 import type { ThemeCatalog } from "./types";
 
-// Migrated 2026-07-04 from IndicatorSet + page-components JSON (byte-exact round-trip verified).
 export const LABOR_MOBILITY_CATALOG: ThemeCatalog = {
   "key": "labor-mobility",
   "title": "人材流動性・雇用環境",
@@ -47,35 +46,6 @@ export const LABOR_MOBILITY_CATALOG: ThemeCatalog = {
       "rankingKey": "monthly-average-actual-working-hours-male",
       "shortLabel": "月間労働時間(男)",
       "role": "context"
-    }
-  ],
-  "panelTabs": [
-    {
-      "label": "流動性",
-      "rankingKeys": [
-        "turnover-rate",
-        "job-change-rate"
-      ]
-    },
-    {
-      "label": "雇用環境",
-      "rankingKeys": [
-        "active-job-opening-ratio",
-        "unemployment-rate",
-        "employment-rate"
-      ]
-    },
-    {
-      "label": "働き方",
-      "rankingKeys": [
-        "telework-rate",
-        "side-job-rate",
-        "monthly-average-actual-working-hours-male"
-      ]
-    },
-    {
-      "label": "考察",
-      "rankingKeys": []
     }
   ],
   "charts": [

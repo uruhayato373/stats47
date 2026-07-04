@@ -1,6 +1,5 @@
 import type { ThemeCatalog } from "./types";
 
-// Migrated 2026-07-04 from IndicatorSet + page-components JSON (byte-exact round-trip verified).
 export const EDUCATION_CULTURE_CATALOG: ThemeCatalog = {
   "key": "education-culture",
   "title": "教育・文化",
@@ -32,27 +31,6 @@ export const EDUCATION_CULTURE_CATALOG: ThemeCatalog = {
       "rankingKey": "public-hall-count-per-million",
       "shortLabel": "公民館",
       "role": "secondary"
-    }
-  ],
-  "panelTabs": [
-    {
-      "label": "学校",
-      "rankingKeys": [
-        "elementary-school-count-per-100km2-habitable",
-        "junior-high-school-count-per-100km2-habitable",
-        "high-school-count-per-100km2-habitable"
-      ]
-    },
-    {
-      "label": "文化施設",
-      "rankingKeys": [
-        "library-count-per-million",
-        "public-hall-count-per-million"
-      ]
-    },
-    {
-      "label": "考察",
-      "rankingKeys": []
     }
   ],
   "charts": [

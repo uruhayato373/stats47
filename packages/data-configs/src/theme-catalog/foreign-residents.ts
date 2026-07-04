@@ -1,6 +1,5 @@
 import type { ThemeCatalog } from "./types";
 
-// Migrated 2026-07-04 from IndicatorSet + page-components JSON (byte-exact round-trip verified).
 export const FOREIGN_RESIDENTS_CATALOG: ThemeCatalog = {
   "key": "foreign-residents",
   "title": "外国人",
@@ -57,33 +56,6 @@ export const FOREIGN_RESIDENTS_CATALOG: ThemeCatalog = {
       "rankingKey": "total-overnight-guests-foreign",
       "shortLabel": "外国人宿泊",
       "role": "secondary"
-    }
-  ],
-  "panelTabs": [
-    {
-      "label": "総数",
-      "rankingKeys": [
-        "foreign-resident-count-per-100k",
-        "foreign-resident-count",
-        "resident-foreigner-population"
-      ]
-    },
-    {
-      "label": "国籍別",
-      "rankingKeys": [
-        "foreign-resident-count-china-per-100k",
-        "foreign-resident-count-china",
-        "foreign-resident-count-korea-per-100k",
-        "foreign-resident-count-korea",
-        "foreign-resident-count-usa-per-100k",
-        "foreign-resident-count-usa"
-      ]
-    },
-    {
-      "label": "観光",
-      "rankingKeys": [
-        "total-overnight-guests-foreign"
-      ]
     }
   ],
   "charts": [

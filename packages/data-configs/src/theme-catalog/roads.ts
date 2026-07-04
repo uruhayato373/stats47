@@ -1,6 +1,5 @@
 import type { ThemeCatalog } from "./types";
 
-// Migrated 2026-07-04 from IndicatorSet + page-components JSON (byte-exact round-trip verified).
 export const ROADS_CATALOG: ThemeCatalog = {
   "key": "roads",
   "title": "道路",

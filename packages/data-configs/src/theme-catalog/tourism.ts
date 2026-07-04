@@ -1,6 +1,5 @@
 import type { ThemeCatalog } from "./types";
 
-// Migrated 2026-07-04 from IndicatorSet + page-components JSON (byte-exact round-trip verified).
 export const TOURISM_CATALOG: ThemeCatalog = {
   "key": "tourism",
   "title": "観光",
@@ -57,28 +56,6 @@ export const TOURISM_CATALOG: ThemeCatalog = {
       "rankingKey": "number-of-simple-lodging-facilities",
       "shortLabel": "簡易宿所数",
       "role": "context"
-    }
-  ],
-  "panelTabs": [
-    {
-      "label": "宿泊",
-      "rankingKeys": [
-        "total-overnight-guests",
-        "total-overnight-guests-foreign",
-        "room-utilization-rate",
-        "number-of-simple-lodging-facilities"
-      ]
-    },
-    {
-      "label": "旅行・交通",
-      "rankingKeys": [
-        "travel-participation-rate-domestic-tourism",
-        "travel-participation-rate-overseas",
-        "travel-participation-rate-overnight",
-        "travel-participation-rate-day-trip",
-        "air-passenger-transport",
-        "jr-passenger-transport"
-      ]
     }
   ],
   "charts": [

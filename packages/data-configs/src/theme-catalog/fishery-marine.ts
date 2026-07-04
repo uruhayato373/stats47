@@ -1,6 +1,5 @@
 import type { ThemeCatalog } from "./types";
 
-// Migrated 2026-07-04 from IndicatorSet + page-components JSON (byte-exact round-trip verified).
 export const FISHERY_MARINE_CATALOG: ThemeCatalog = {
   "key": "fishery-marine",
   "title": "漁業（水産業）",
@@ -127,64 +126,6 @@ export const FISHERY_MARINE_CATALOG: ThemeCatalog = {
       "rankingKey": "fishery-species-catch-sea-bream",
       "shortLabel": "タイ類",
       "role": "context"
-    }
-  ],
-  "panelTabs": [
-    {
-      "label": "漁獲",
-      "rankingKeys": [
-        "fish-catch",
-        "marine-fishery-catch",
-        "inland-fishery-catch",
-        "fishing-port-count",
-        "fishing-port-count-ksj"
-      ]
-    },
-    {
-      "label": "養殖",
-      "rankingKeys": [
-        "aquaculture-harvest",
-        "marine-aquaculture-harvest",
-        "inland-aquaculture-harvest"
-      ]
-    },
-    {
-      "label": "経済",
-      "rankingKeys": [
-        "marine-fishery-aquaculture-output-value",
-        "marine-fishery-output-value",
-        "fishery-output-value"
-      ]
-    },
-    {
-      "label": "雇用",
-      "rankingKeys": [
-        "fishery-workers"
-      ]
-    },
-    {
-      "label": "推移",
-      "rankingKeys": [
-        "fish-catch",
-        "fishery-workers"
-      ]
-    },
-    {
-      "label": "魚種別",
-      "rankingKeys": [
-        "fishery-species-catch-scallop",
-        "fishery-species-catch-japanese-squid",
-        "fishery-species-catch-tuna",
-        "fishery-species-catch-bonito",
-        "fishery-species-catch-mackerel",
-        "fishery-species-catch-pacific-saury",
-        "fishery-species-catch-yellowtail",
-        "fishery-species-catch-sardine",
-        "fishery-species-catch-pollock",
-        "fishery-species-catch-kelp",
-        "fishery-species-catch-snow-crab",
-        "fishery-species-catch-sea-bream"
-      ]
     }
   ],
   "charts": [

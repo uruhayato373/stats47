@@ -1,6 +1,5 @@
 import type { ThemeCatalog } from "./types";
 
-// Migrated 2026-07-04 from IndicatorSet + page-components JSON (byte-exact round-trip verified).
 export const LOCAL_FINANCE_CATALOG: ThemeCatalog = {
   "key": "local-finance",
   "title": "地方財政",
@@ -97,46 +96,6 @@ export const LOCAL_FINANCE_CATALOG: ThemeCatalog = {
       "rankingKey": "laspeyres-index-prefecture",
       "shortLabel": "ラスパイレス指数",
       "role": "secondary"
-    }
-  ],
-  "panelTabs": [
-    {
-      "label": "財政健全度",
-      "rankingKeys": [
-        "fiscal-strength-index-prefecture",
-        "current-balance-ratio",
-        "real-public-debt-service-ratio",
-        "future-burden-ratio",
-        "real-balance-ratio"
-      ]
-    },
-    {
-      "label": "歳入構造",
-      "rankingKeys": [
-        "local-tax-ratio-pref-finance",
-        "local-allocation-tax-ratio-pref-finance",
-        "national-treasury-disbursement-ratio-pref-finance",
-        "self-financing-ratio"
-      ]
-    },
-    {
-      "label": "歳出構造",
-      "rankingKeys": [
-        "per-capita-total-expenditure-pref-municipal",
-        "personnel-expenditure-ratio-pref-finance",
-        "welfare-expenditure-ratio-pref-finance",
-        "education-expenditure-ratio-pref-finance",
-        "public-works-expenditure-ratio-pref-finance"
-      ]
-    },
-    {
-      "label": "税収・所得",
-      "rankingKeys": [
-        "per-capita-inhabitant-tax-pref-municipal",
-        "per-taxpayer-taxable-income",
-        "taxpayer-ratio-per-pref-resident",
-        "laspeyres-index-prefecture"
-      ]
     }
   ],
   "charts": [

@@ -1,6 +1,5 @@
 import type { ThemeCatalog } from "./types";
 
-// Migrated 2026-07-04 from IndicatorSet + page-components JSON (byte-exact round-trip verified).
 export const OCCUPATION_SALARY_CATALOG: ThemeCatalog = {
   "key": "occupation-salary",
   "title": "職業別年収",
@@ -202,71 +201,6 @@ export const OCCUPATION_SALARY_CATALOG: ThemeCatalog = {
       "rankingKey": "dentist-annual-income",
       "shortLabel": "歯科医師",
       "role": "context"
-    }
-  ],
-  "panelTabs": [
-    {
-      "label": "医療・福祉",
-      "rankingKeys": [
-        "doctor-annual-income",
-        "nurse-annual-income",
-        "pharmacist-annual-income",
-        "care-worker-annual-income",
-        "nursery-teacher-annual-income",
-        "midwife-annual-income",
-        "practical-nurse-annual-income",
-        "dental-hygienist-annual-income",
-        "dietitian-annual-income",
-        "physical-therapist-annual-income",
-        "public-health-nurse-annual-income",
-        "nursing-assistant-annual-income",
-        "care-manager-annual-income",
-        "home-care-worker-annual-income"
-      ]
-    },
-    {
-      "label": "IT・専門",
-      "rankingKeys": [
-        "system-consultant-annual-income",
-        "software-engineer-annual-income",
-        "accountant-annual-income",
-        "designer-annual-income",
-        "researcher-annual-income",
-        "manager-annual-income"
-      ]
-    },
-    {
-      "label": "教育",
-      "rankingKeys": [
-        "school-teacher-annual-income",
-        "university-professor-annual-income",
-        "associate-professor-annual-income",
-        "high-school-teacher-annual-income",
-        "kindergarten-teacher-annual-income"
-      ]
-    },
-    {
-      "label": "運輸・建設",
-      "rankingKeys": [
-        "truck-driver-annual-income",
-        "taxi-driver-annual-income",
-        "bus-driver-annual-income",
-        "carpenter-annual-income",
-        "electrician-annual-income",
-        "architect-annual-income",
-        "pilot-annual-income",
-        "auto-mechanic-annual-income"
-      ]
-    },
-    {
-      "label": "サービス",
-      "rankingKeys": [
-        "cook-annual-income",
-        "barber-beautician-annual-income",
-        "security-guard-annual-income",
-        "sales-clerk-annual-income",
-        "cleaning-worker-annual-income"
-      ]
     }
   ],
   "charts": [

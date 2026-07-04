@@ -1,6 +1,5 @@
 import type { ThemeCatalog } from "./types";
 
-// Migrated 2026-07-04 from IndicatorSet + page-components JSON (byte-exact round-trip verified).
 export const CONSUMER_PRICES_CATALOG: ThemeCatalog = {
   "key": "consumer-prices",
   "title": "物価・消費",
@@ -67,39 +66,6 @@ export const CONSUMER_PRICES_CATALOG: ThemeCatalog = {
       "rankingKey": "consumer-price-difference-index-miscellaneous",
       "shortLabel": "諸雑費",
       "role": "context"
-    }
-  ],
-  "panelTabs": [
-    {
-      "label": "総合",
-      "rankingKeys": [
-        "consumer-price-difference-index-overall",
-        "consumer-price-difference-index-overall-excl-rent"
-      ]
-    },
-    {
-      "label": "生活費",
-      "rankingKeys": [
-        "consumer-price-difference-index-food",
-        "consumer-price-difference-index-housing",
-        "consumer-price-difference-index-utilities"
-      ]
-    },
-    {
-      "label": "その他",
-      "rankingKeys": [
-        "consumer-price-difference-index-education",
-        "consumer-price-difference-index-culture-recreation",
-        "consumer-price-difference-index-transport-communication",
-        "consumer-price-difference-index-healthcare",
-        "consumer-price-difference-index-clothing-footwear",
-        "consumer-price-difference-index-furniture-household",
-        "consumer-price-difference-index-miscellaneous"
-      ]
-    },
-    {
-      "label": "考察",
-      "rankingKeys": []
     }
   ],
   "charts": [

@@ -89,7 +89,7 @@ ThemeCatalog (SSOT, git TS)
 ### role
 | role | 意味 | 目安件数 | 基準 |
 |---|---|---|---|
-| `primary` | テーマのヘッドライン。先頭のチャート付きカード。**必ずチャート or panelTab に現れる** | 1〜3 | 地域差大・時系列変化が劇的・検索需要高 |
+| `primary` | テーマのヘッドライン。`tabIndicators` の先頭タブ + stat-card として描画 | 1〜3 | 地域差大・時系列変化が劇的・検索需要高 |
 | `secondary` | primary を補完する関連データ | 3〜8 | 別の切り口・相関がある |
 | `context` | 背景情報。カードには出さずランキングページで閲覧 | 制限なし | マニアックだが調べたい人に価値 |
 
@@ -117,9 +117,9 @@ ThemeCatalog (SSOT, git TS)
 
 | レベル | 検査 |
 |---|---|
-| **error** | metrics.rankingKey / relatedRankingKeys が METRICS_REGISTRY・metrics に不在 / componentType union 外 / componentKey **テーマ内**重複 / panelTabs.rankingKeys ⊄ metrics |
+| **error** | metrics.rankingKey / relatedRankingKeys が METRICS_REGISTRY・metrics に不在 / componentType union 外 / componentKey **テーマ内**重複 |
 | **error (鮮度)** | `generate:catalog --check` — 生成物と SSOT の diff (手編集・生成忘れの両方向) |
-| **warn** (`--strict` で error) | selection 未記入 / componentKey **横断**共有 (複数ページ再利用は設計上許容) / primary がチャート/panelTab 未使用 (metrics[] の stat-card で描画) / chart.section が panelTabs.label 不在 (視覚見出し用途あり) / sortOrder 重複 (描画は配列順で安定) |
+| **warn** (`--strict` で error) | selection 未記入 / componentKey **横断**共有 (複数ページ再利用は設計上許容) / primary がチャート未使用 (metrics[] の stat-card で描画) / sortOrder 重複 (描画は配列順で安定) |
 
 ---
 
@@ -140,7 +140,7 @@ ThemeCatalog (SSOT, git TS)
 | 工程 | 担当 |
 |---|---|
 | 指標×チャート候補の**調査・提案** (白書/Web/競合/GSC) | `theme-researcher` (read-only、提案を `docs/02_実装計画/05_指標バックログ.md` へ) |
-| 提案の**採否判断・カタログ設計** (role/panelTab 構成) | `theme-designer` (採択分を catalog TS 化) |
+| 提案の**採否判断・カタログ設計** (role/チャート構成) | `theme-designer` (採択分を catalog TS 化) |
 | チャート **componentProps 詳細化・監査** | `theme-component-builder` |
 | チャートコンポーネント自体の新設 | `chart-component-builder` (`chart-component-standards.md`) |
 | 観測値投入 (e-Stat → R2) | `data-ingester` |

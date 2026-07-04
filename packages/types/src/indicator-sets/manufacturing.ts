@@ -71,35 +71,6 @@ export const MANUFACTURING_SET: IndicatorSet = {
       "role": "context"
     }
   ],
-  "panelTabs": [
-    {
-      "label": "生産規模",
-      "rankingKeys": [
-        "manufacturing-shipment-amount",
-        "manufacturing-industry-added-value",
-        "manufacturing-sales-private",
-        "manufacturing-net-value-added-private"
-      ]
-    },
-    {
-      "label": "事業所・雇用",
-      "rankingKeys": [
-        "manufacturing-establishments",
-        "manufacturing-employees",
-        "manufacturing-establishment-site-area"
-      ]
-    },
-    {
-      "label": "生産性・土地",
-      "rankingKeys": [
-        "manufacturing-shipment-amount-per-employee",
-        "manufacturing-shipment-amount-per-establishment",
-        "industrial-land-price",
-        "industrial-land-price-change-rate",
-        "industrial-water-usage"
-      ]
-    }
-  ],
   "keywords": [
     "製造業",
     "製造品出荷額",

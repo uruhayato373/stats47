@@ -1,6 +1,5 @@
 import type { ThemeCatalog } from "./types";
 
-// Migrated 2026-07-04 from IndicatorSet + page-components JSON (byte-exact round-trip verified).
 export const POPULATION_DYNAMICS_CATALOG: ThemeCatalog = {
   "key": "population-dynamics",
   "title": "人口動態",
@@ -62,38 +61,6 @@ export const POPULATION_DYNAMICS_CATALOG: ThemeCatalog = {
       "rankingKey": "total-population",
       "shortLabel": "総人口",
       "role": "context"
-    }
-  ],
-  "panelTabs": [
-    {
-      "label": "出生・死亡",
-      "rankingKeys": [
-        "crude-birth-rate",
-        "total-fertility-rate",
-        "crude-death-rate",
-        "natural-increase-rate"
-      ]
-    },
-    {
-      "label": "移動",
-      "rankingKeys": [
-        "social-increase-rate",
-        "moving-in-excess-rate",
-        "day-time-population-ratio"
-      ]
-    },
-    {
-      "label": "構造",
-      "rankingKeys": [
-        "ratio-65-plus",
-        "young-population-ratio",
-        "population-density-per-km2-inhabitable-area",
-        "total-population"
-      ]
-    },
-    {
-      "label": "考察",
-      "rankingKeys": []
     }
   ],
   "charts": [

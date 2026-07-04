@@ -1,6 +1,5 @@
 import type { ThemeCatalog } from "./types";
 
-// Migrated 2026-07-04 from IndicatorSet + page-components JSON (byte-exact round-trip verified).
 export const HEALTHCARE_CATALOG: ThemeCatalog = {
   "key": "healthcare",
   "title": "医療・健康",
@@ -72,40 +71,6 @@ export const HEALTHCARE_CATALOG: ThemeCatalog = {
       "rankingKey": "treatment-rate-mood-disorder-outpatient",
       "shortLabel": "気分障害受療率",
       "role": "context"
-    }
-  ],
-  "panelTabs": [
-    {
-      "label": "医療供給",
-      "rankingKeys": [
-        "physicians-in-medical-facilities-per-100k",
-        "nurses-in-medical-facilities-per-100k",
-        "general-hospital-count-per-100k",
-        "general-hospital-bed-count-per-100k",
-        "pharmacy-count-per-100k"
-      ]
-    },
-    {
-      "label": "医療利用",
-      "rankingKeys": [
-        "national-medical-expense-per-person",
-        "general-hospital-avg-length-of-stay",
-        "general-hospital-bed-occupancy-rate"
-      ]
-    },
-    {
-      "label": "健康",
-      "rankingKeys": [
-        "deaths-lifestyle-diseases-per-100k",
-        "deaths-diabetes-per-100k",
-        "health-checkup-rate-lifestyle-diseases",
-        "psychiatric-hospital-count-per-100k",
-        "treatment-rate-mood-disorder-outpatient"
-      ]
-    },
-    {
-      "label": "考察",
-      "rankingKeys": []
     }
   ],
   "charts": [

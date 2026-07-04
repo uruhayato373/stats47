@@ -70,18 +70,6 @@ export interface IndicatorEntry {
 }
 
 // ============================================================================
-// パネルタブ（指標のグルーピング）
-// ============================================================================
-
-/** パネルタブグループ（テーマ内で指標をサブグループ化） */
-export interface IndicatorPanelTab {
-  label: string;
-  rankingKeys: string[];
-  // チャートは chart_definitions テーブルで管理（Single Source of Truth）
-  // page_chart_assignments.section でタブに割り当て
-}
-
-// ============================================================================
 // IndicatorSet 本体
 // ============================================================================
 
@@ -119,10 +107,8 @@ export interface IndicatorSet {
   usage: IndicatorSetUsage;
   /** 含まれる指標（表示順） */
   metrics: IndicatorEntry[];
-  // チャートは chart_definitions テーブルで管理（Single Source of Truth）
+  // チャートは page_components (git TS) で管理（Single Source of Truth）
   // IndicatorSet にはチャート定義を含めない
-  /** パネルタブ（指標をサブグループ化する場合） */
-  panelTabs?: IndicatorPanelTab[];
   /** SEO キーワード */
   keywords?: string[];
   /**

@@ -66,34 +66,6 @@ export const REAL_INCOME_SET: IndicatorSet = {
       "role": "context"
     }
   ],
-  "panelTabs": [
-    {
-      "label": "名目収入",
-      "rankingKeys": [
-        "disposable-income-worker-households",
-        "actual-income-worker-households-per-month",
-        "per-capita-prefectural-income-h27",
-        "annual-income-per-household"
-      ]
-    },
-    {
-      "label": "物価補正後",
-      "rankingKeys": [
-        "real-disposable-income",
-        "disposable-income-after-rent"
-      ]
-    },
-    {
-      "label": "物価・家賃",
-      "rankingKeys": [
-        "consumer-price-difference-index-overall",
-        "consumer-price-difference-index-overall-excl-rent",
-        "consumer-price-difference-index-housing",
-        "private-rental-housing-rent-per-3-3m2",
-        "private-rent-consumption-expenditure"
-      ]
-    }
-  ],
   "keywords": [
     "実質年収",
     "実質購買力",

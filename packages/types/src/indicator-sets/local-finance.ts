@@ -101,46 +101,6 @@ export const LOCAL_FINANCE_SET: IndicatorSet = {
       "role": "secondary"
     }
   ],
-  "panelTabs": [
-    {
-      "label": "財政健全度",
-      "rankingKeys": [
-        "fiscal-strength-index-prefecture",
-        "current-balance-ratio",
-        "real-public-debt-service-ratio",
-        "future-burden-ratio",
-        "real-balance-ratio"
-      ]
-    },
-    {
-      "label": "歳入構造",
-      "rankingKeys": [
-        "local-tax-ratio-pref-finance",
-        "local-allocation-tax-ratio-pref-finance",
-        "national-treasury-disbursement-ratio-pref-finance",
-        "self-financing-ratio"
-      ]
-    },
-    {
-      "label": "歳出構造",
-      "rankingKeys": [
-        "per-capita-total-expenditure-pref-municipal",
-        "personnel-expenditure-ratio-pref-finance",
-        "welfare-expenditure-ratio-pref-finance",
-        "education-expenditure-ratio-pref-finance",
-        "public-works-expenditure-ratio-pref-finance"
-      ]
-    },
-    {
-      "label": "税収・所得",
-      "rankingKeys": [
-        "per-capita-inhabitant-tax-pref-municipal",
-        "per-taxpayer-taxable-income",
-        "taxpayer-ratio-per-pref-resident",
-        "laspeyres-index-prefecture"
-      ]
-    }
-  ],
   "keywords": [
     "地方財政",
     "財政力指数",

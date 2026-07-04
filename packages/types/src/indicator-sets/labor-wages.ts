@@ -91,49 +91,6 @@ export const LABOR_WAGES_SET: IndicatorSet = {
       "role": "context"
     }
   ],
-  "panelTabs": [
-    {
-      "label": "賃金",
-      "rankingKeys": [
-        "minimum-wage-by-region",
-        "starting-salary-university",
-        "starting-salary-highschool",
-        "scheduled-salary-male",
-        "nurse-salary"
-      ]
-    },
-    {
-      "label": "男女格差",
-      "rankingKeys": [
-        "gender-wage-gap",
-        "scheduled-salary-male",
-        "male-part-time-hourly-wage",
-        "female-part-time-hourly-wage"
-      ]
-    },
-    {
-      "label": "雇用",
-      "rankingKeys": [
-        "active-job-opening-ratio",
-        "unemployment-rate",
-        "employment-rate",
-        "employed-people-ratio"
-      ]
-    },
-    {
-      "label": "働き方",
-      "rankingKeys": [
-        "telework-rate",
-        "side-job-rate",
-        "monthly-average-actual-working-hours-male",
-        "turnover-rate"
-      ]
-    },
-    {
-      "label": "考察",
-      "rankingKeys": []
-    }
-  ],
   "keywords": [
     "最低賃金",
     "初任給",

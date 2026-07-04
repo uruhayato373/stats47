@@ -1,6 +1,5 @@
 import type { ThemeCatalog } from "./types";
 
-// Migrated 2026-07-04 from IndicatorSet + page-components JSON (byte-exact round-trip verified).
 export const RAILWAY_CATALOG: ThemeCatalog = {
   "key": "railway",
   "title": "鉄道",

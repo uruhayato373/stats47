@@ -48,10 +48,6 @@ function main() {
 
   for (const c of catalogs) {
     const metricKeys = new Set(c.metrics.map((m) => m.rankingKey));
-    const tabLabels = new Set((c.panelTabs ?? []).map((t) => t.label));
-    const keysInTabs = new Set(
-      (c.panelTabs ?? []).flatMap((t) => t.rankingKeys),
-    );
 
     // metrics.rankingKey 実在
     for (const m of c.metrics) {
@@ -60,15 +56,6 @@ function main() {
       }
       if ((m.role === "primary" || m.role === "secondary") && !m.selection) {
         warns.push(`[no-selection] ${c.key}: ${m.role} 指標 "${m.rankingKey}" に selection (選定根拠) 未記入`);
-      }
-    }
-
-    // panelTabs.rankingKeys ⊂ metrics
-    for (const t of c.panelTabs ?? []) {
-      for (const k of t.rankingKeys) {
-        if (!metricKeys.has(k)) {
-          errors.push(`[tab-key] ${c.key}: panelTab "${t.label}" の "${k}" が metrics に不在`);
-        }
       }
     }
 
@@ -97,11 +84,7 @@ function main() {
         warns.push(`[dup-sortorder] ${c.key}/${ch.componentKey}: sortOrder ${ch.sortOrder} が重複`);
       }
       seenSortOrders.add(ch.sortOrder);
-      // section が tab に存在 (warn: section は panelTab 連動のほか視覚グループ見出しにも使われ、
-      //   panelTabs 非依存のテーマもある。非対応=非表示の懸念フラグとして warn)
-      if (ch.section != null && !tabLabels.has(ch.section)) {
-        warns.push(`[section] ${c.key}/${ch.componentKey}: section "${ch.section}" が panelTabs.label に不在`);
-      }
+      // (section はテーマ renderer 未使用 = free-form のため検査しない。area は AreaChartSection で使用)
       // relatedRankingKeys ⊂ metrics
       for (const k of ch.relatedRankingKeys ?? []) {
         if (!metricKeys.has(k)) {
@@ -112,11 +95,11 @@ function main() {
     }
 
     // primary 指標のカバレッジ (warn: primary は metrics[] 由来の stat-card として
-    //   チャート/タブと独立に描画されるため、チャート未使用でも正常。設計確認用に warn)
+    //   チャートと独立に描画されるため、チャート未使用でも正常。設計確認用に warn)
     for (const m of c.metrics) {
       if (m.role !== "primary") continue;
-      if (!keysInCharts.has(m.rankingKey) && !keysInTabs.has(m.rankingKey)) {
-        warns.push(`[primary-orphan] ${c.key}: primary 指標 "${m.rankingKey}" がチャート/panelTab 未使用 (card 描画)`);
+      if (!keysInCharts.has(m.rankingKey)) {
+        warns.push(`[primary-orphan] ${c.key}: primary 指標 "${m.rankingKey}" がチャート未使用 (card 描画)`);
       }
     }
   }

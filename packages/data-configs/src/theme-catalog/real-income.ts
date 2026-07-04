@@ -1,6 +1,5 @@
 import type { ThemeCatalog } from "./types";
 
-// Migrated 2026-07-04 from IndicatorSet + page-components JSON (byte-exact round-trip verified).
 export const REAL_INCOME_CATALOG: ThemeCatalog = {
   "key": "real-income",
   "title": "実質収入・購買力",
@@ -62,34 +61,6 @@ export const REAL_INCOME_CATALOG: ThemeCatalog = {
       "rankingKey": "private-rent-consumption-expenditure",
       "shortLabel": "家賃支出",
       "role": "context"
-    }
-  ],
-  "panelTabs": [
-    {
-      "label": "名目収入",
-      "rankingKeys": [
-        "disposable-income-worker-households",
-        "actual-income-worker-households-per-month",
-        "per-capita-prefectural-income-h27",
-        "annual-income-per-household"
-      ]
-    },
-    {
-      "label": "物価補正後",
-      "rankingKeys": [
-        "real-disposable-income",
-        "disposable-income-after-rent"
-      ]
-    },
-    {
-      "label": "物価・家賃",
-      "rankingKeys": [
-        "consumer-price-difference-index-overall",
-        "consumer-price-difference-index-overall-excl-rent",
-        "consumer-price-difference-index-housing",
-        "private-rental-housing-rent-per-3-3m2",
-        "private-rent-consumption-expenditure"
-      ]
     }
   ],
   "charts": [

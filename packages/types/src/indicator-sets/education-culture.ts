@@ -36,27 +36,6 @@ export const EDUCATION_CULTURE_SET: IndicatorSet = {
       "role": "secondary"
     }
   ],
-  "panelTabs": [
-    {
-      "label": "学校",
-      "rankingKeys": [
-        "elementary-school-count-per-100km2-habitable",
-        "junior-high-school-count-per-100km2-habitable",
-        "high-school-count-per-100km2-habitable"
-      ]
-    },
-    {
-      "label": "文化施設",
-      "rankingKeys": [
-        "library-count-per-million",
-        "public-hall-count-per-million"
-      ]
-    },
-    {
-      "label": "考察",
-      "rankingKeys": []
-    }
-  ],
   "keywords": [
     "学校数",
     "図書館",

@@ -32,7 +32,6 @@ export function catalogToIndicatorSet(catalog: ThemeCatalog): IndicatorSet {
       role: m.role,
     })),
   };
-  if (catalog.panelTabs !== undefined) set.panelTabs = catalog.panelTabs;
   if (catalog.keywords !== undefined) set.keywords = catalog.keywords;
   if (catalog.relatedArticleTagKeys !== undefined) {
     set.relatedArticleTagKeys = catalog.relatedArticleTagKeys;
