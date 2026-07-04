@@ -239,7 +239,9 @@ export function ThemeDashboardTabbed({
     />
   );
 
-  // フル幅ダッシュボード (KPI カード + 時系列チャート + 考察) — areas スタイル
+  // フル幅ダッシュボード (KPI カード + 時系列チャート + 考察) — areas スタイル。
+  // cardsOnly は付けない: hideMap テーマでも page-components チャート + 考察を出す
+  // = カタログ情報の完全ダッシュボード化 (2026-07-04)。mapless は地図ヒント抑制のため維持。
   const metricsDashboardSection = (
     <ThemeMetricsDashboard
       themeConfig={themeConfig}
@@ -247,13 +249,13 @@ export function ThemeDashboardTabbed({
       pageCharts={pageCharts}
       selectedPrefectureCode={selectedPrefectureCode}
       mapless={themeConfig.hideMap}
-      cardsOnly={themeConfig.hideMap}
     />
   );
 
   // --- レイアウト ---
 
-  // hideMap: 地図・選択タブ・チャートなし。チャート付き stats-card のみ。
+  // hideMap: 地図タブ UI (コロプレス/指標タブ/年度セレクタ) は出さず、KPI カード +
+  // page-components チャート + 考察のフル幅ダッシュボードを描画する。
   // 都道府県セレクタは H1 (ThemeAreaHeader の PageHeader actions) に 1 つだけ置く
   // (本体側 prefectureSelector を二重に出さない)。選択エリアは H1 に反映される。
   if (themeConfig.hideMap) {

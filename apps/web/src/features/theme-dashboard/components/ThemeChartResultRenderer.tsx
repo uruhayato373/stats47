@@ -2,8 +2,6 @@
 
 import dynamic from "next/dynamic";
 
-import type { PageComponent } from "@/components/stat-charts";
-
 import { ChartEmptyState, ChartLoading } from "./ChartState";
 
 import type { ThemeChartResult } from "./theme-chart-result";
@@ -53,12 +51,10 @@ const PyramidChartClient = dynamic(
 );
 
 interface ThemeChartResultRendererProps {
-  chart: PageComponent;
   chartResult: ThemeChartResult;
 }
 
 export function ThemeChartResultRenderer({
-  chart,
   chartResult,
 }: ThemeChartResultRendererProps) {
   if (!chartResult) {
@@ -67,39 +63,34 @@ export function ThemeChartResultRenderer({
 
   switch (chartResult.type) {
     case "line":
-      return <LineResultChart chart={chart} result={chartResult} />;
+      return <LineResultChart result={chartResult} />;
     case "mixed":
-      return <MixedResultChart chart={chart} result={chartResult} />;
+      return <MixedResultChart result={chartResult} />;
     case "donut":
-      return <DonutResultChart chart={chart} result={chartResult} />;
+      return <DonutResultChart result={chartResult} />;
     case "cpi-profile":
       return <CpiProfileResultChart result={chartResult} />;
     case "cpi-heatmap":
       return <CpiHeatmapResultChart result={chartResult} />;
     case "pyramid":
-      return <PyramidResultChart chart={chart} result={chartResult} />;
+      return <PyramidResultChart result={chartResult} />;
     case "composition":
-      return <CompositionResultChart chart={chart} result={chartResult} />;
+      return <CompositionResultChart result={chartResult} />;
     default:
       return null;
   }
 }
 
-function LineResultChart({ chart, result }: { chart: PageComponent; result: LineResult }) {
+function LineResultChart({ result }: { result: LineResult }) {
   const { data } = result;
   if (data.data.length <= 1) {
     return <ChartEmptyState message="時系列データがありません" />;
   }
 
-  return (
-    <>
-      <LineChartClient chartData={data} showLatestValues={result.showLatestValues === true} />
-      <ChartSourceNote sourceName={chart.sourceName} />
-    </>
-  );
+  return <LineChartClient chartData={data} showLatestValues={result.showLatestValues === true} />;
 }
 
-function MixedResultChart({ chart, result }: { chart: PageComponent; result: MixedResult }) {
+function MixedResultChart({ result }: { result: MixedResult }) {
   const { data } = result;
   if (data.data.length <= 1) {
     return <ChartEmptyState message="時系列データがありません" />;
@@ -117,12 +108,11 @@ function MixedResultChart({ chart, result }: { chart: PageComponent; result: Mix
           rightUnit={data.rightUnit ?? ""}
         />
       </div>
-      <ChartSourceNote sourceName={chart.sourceName} />
     </>
   );
 }
 
-function DonutResultChart({ chart, result }: { chart: PageComponent; result: DonutResult }) {
+function DonutResultChart({ result }: { result: DonutResult }) {
   const { data } = result;
   if (data.length === 0) {
     return <ChartEmptyState message="構成データがありません" />;
@@ -145,7 +135,6 @@ function DonutResultChart({ chart, result }: { chart: PageComponent; result: Don
           </div>
         ))}
       </div>
-      <ChartSourceNote sourceName={chart.sourceName} />
     </>
   );
 }
@@ -164,7 +153,7 @@ function CpiProfileResultChart({ result }: { result: CpiProfileResult }) {
         height={Math.max(250, data.length * 30 + 40)}
       />
       <p className="mt-1 text-[10px] text-muted-foreground">
-        全国平均=100 / 出典: 小売物価統計調査（構造編）
+        全国平均=100
       </p>
     </>
   );
@@ -186,43 +175,17 @@ function CpiHeatmapResultChart({ result }: { result: CpiHeatmapResult }) {
   );
 }
 
-function PyramidResultChart({ chart, result }: { chart: PageComponent; result: PyramidResult }) {
+function PyramidResultChart({ result }: { result: PyramidResult }) {
   const { data } = result;
   if (data.pyramidData.length === 0) {
     return <ChartEmptyState message="人口ピラミッドデータがありません" />;
   }
 
-  return (
-    <>
-      <PyramidChartClient chartData={data.pyramidData} year={data.yearName} />
-      <ChartSourceNote sourceName={chart.sourceName} />
-    </>
-  );
+  return <PyramidChartClient chartData={data.pyramidData} year={data.yearName} />;
 }
 
-function CompositionResultChart({
-  chart,
-  result,
-}: {
-  chart: PageComponent;
-  result: CompositionResult;
-}) {
+function CompositionResultChart({ result }: { result: CompositionResult }) {
   const { data } = result;
 
-  return (
-    <>
-      <CompositionChartClient chartData={data} defaultTab={result.defaultTab} />
-      <ChartSourceNote sourceName={chart.sourceName} />
-    </>
-  );
-}
-
-function ChartSourceNote({ sourceName }: { sourceName?: string | null }) {
-  if (!sourceName) return null;
-
-  return (
-    <p className="mt-1 text-right text-[10px] text-muted-foreground">
-      出典: {sourceName}
-    </p>
-  );
+  return <CompositionChartClient chartData={data} defaultTab={result.defaultTab} />;
 }

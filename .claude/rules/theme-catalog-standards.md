@@ -149,6 +149,30 @@ ThemeCatalog (SSOT, git TS)
 
 ---
 
+## 8. カタログ情報の UI 描画対応 (テーマページ)
+
+カタログの各情報がテーマページ (`/themes/*`) のどこに出るか (2026-07-04 完全描画化)。
+
+| カタログ情報 | UI 描画先 | 実装 |
+|---|---|---|
+| `metrics` (role≠context) | 指標タブ (`tabIndicators`、1 指標 1 タブ) + KPI stat-card | `to-theme-config.ts` → `ThemeMetricsDashboard` |
+| `metrics` (全 role・context 含む) + `selection` | **「このテーマの全指標」セクション** (role 別・`/ranking/<key>` リンク・選定根拠注記) | `ThemeIndicatorCatalogSection.tsx` |
+| `charts.componentProps` | チャート本体 (line/mixed/composition/donut/cpi/pyramid) | `ThemeDbChartRenderer` |
+| `charts.sourceName` / `sourceLink` / `rankingLink` | チャートカード footer (出典 + 「ランキングを見る」) | `ChartFooter` (ThemeMetricsDashboard の ChartPanel footer) |
+| `charts.section` | **テーマページでは未使用** (area ページの `AreaChartSection` のみ使用) | — |
+| `keywords` | `<meta>` / 構造化データ | theme utils |
+| `relatedArticleTagKeys` | 関連記事セクション + ネイティブアフィリ | `ThemeRelatedArticles` |
+| `rejectedCandidates` | UI 非表示 (再調査防止の記録のみ) | — |
+| (別途) EMBEDDED_SECTIONS | GIS 埋め込み (移動フロー/駅乗降/高速道路/過疎×医療/日照)。`hideMap` と独立に描画 | `THEME_SECTION_REGISTRY` |
+
+> `hideMap: true` (全テーマ既定) は地図タブ UI (コロプレス/指標タブ/年度セレクタ) を隠すだけ。
+> **page-components チャート・考察 (markdown)・GIS 埋め込み・全指標セクションは hideMap に関係なく描画する**
+> (2026-07-04 に `cardsOnly` を廃止し完全ダッシュボード化)。カタログ無しテーマ (climate / local-finance) は
+> IndicatorSet.metrics にフォールバック (selection なしで動く)。local-finance は bespoke ページ
+> (`app/themes/local-finance/page.tsx`) に全指標セクションを個別追加。
+
+---
+
 ## 関連
 
 - 型・SSOT: `packages/data-configs/src/theme-catalog/`
