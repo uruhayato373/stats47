@@ -119,34 +119,27 @@ grep -r "<img\|<Image" apps/web/src --include="*.tsx" -l | head -10
 #### Agent D: DB からコンテンツ規模の把握
 
 ```bash
-DB=".local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite"
-# 現行 schema (Phase 5/6/7 後): indicators→metrics (area_type 列なし),
-# subcategories/ai_content 廃止・統合, 観測値/correlations は R2 移行
-sqlite3 "$DB" "
-  SELECT '公開記事' as item, COUNT(*) as cnt FROM articles WHERE published = 1
-  UNION ALL SELECT '下書き記事', COUNT(*) FROM articles WHERE published = 0
-  UNION ALL SELECT 'メトリクス(全)', COUNT(*) FROM metrics
-  UNION ALL SELECT 'メトリクス(active)', COUNT(*) FROM metrics WHERE is_active=1
-  UNION ALL SELECT 'カテゴリ', COUNT(*) FROM categories
-  UNION ALL SELECT 'テーマ', COUNT(*) FROM themes
-  UNION ALL SELECT '地域プロファイル', COUNT(*) FROM area_profiles
-"
-# 観測値・相関は R2 (Phase 6 移行):
-ls .local/r2/app/stats/ 2>/dev/null | wc -l          # 観測値を持つ metric 数
-jq '.total' .local/r2/app/correlation/stats.json 2>/dev/null  # 相関ペア総数
+# 完全DBレス: R2 snapshot / git TS から集計。旧 D1/miniflare は廃止
+R2="https://storage.stats47.jp"
+echo "公開記事:            $(curl -s "$R2/app/blog/all.json" | jq '.articles | length')"
+echo "下書き記事:          $(ls docs/21_ブログ記事原稿/*/article.md 2>/dev/null | wc -l | tr -d ' ') (docs/21 outbox。公開分のみ R2)"
+echo "メトリクス(全定義):   $(ls packages/data-configs/src/metrics/*.ts 2>/dev/null | wc -l | tr -d ' ') (git TS)"
+echo "メトリクス(公開active): $(curl -s "$R2/app/ranking-items/all.json" | jq '.count')"
+echo "カテゴリ:            $(curl -s "$R2/app/categories/all.json" | jq '.count')"
+echo -n "テーマ:              "; npx tsx -e 'import {ALL_THEMES} from "./apps/web/src/features/theme-dashboard/config/all-themes.ts";console.log(ALL_THEMES.length)'
+echo "相関ペア総数:        $(curl -s "$R2/app/correlation/stats.json" | jq '.total')"
+# 地域プロファイルは Derived（R2 app/areas/<code>/profile.json、47 都道府県分）
 
-# metrics で R2 観測値が未投入のもの（Phase 6/7: observations は R2 へ移行）
-#   D1 では存在判定できないため R2 ファイル有無で確認
-for key in $(sqlite3 "$DB" "SELECT key FROM metrics WHERE is_active=1 LIMIT 200"); do
-  [ -f ".local/r2/app/stats/$key/values.json" ] || echo "未投入: $key"
+# 観測値 (values.json) 未投入のランキング（公開集合を R2 有無で判定）
+for key in $(curl -s "$R2/app/ranking-items/all.json" | jq -r '.items[].rankingKey' | head -200); do
+  [ "$(curl -s -o /dev/null -w '%{http_code}' "$R2/app/stats/$key/values.json")" = "200" ] || echo "未投入: $key"
 done | head -20
 
-# AI コンテンツ未生成のランキング (Phase 5: ai_content は metrics に統合、insights 列で判定)
-sqlite3 "$DB" "
-  SELECT key, title FROM metrics
-  WHERE is_active = 1 AND (insights IS NULL OR insights = '')
-  LIMIT 20;
-"
+# AI コンテンツ未生成のランキング（R2 ai-content.json の有無で判定。旧 metrics.insights 列は廃止）
+#   体系的な棚卸しは build-ai-content-queue.mjs（状態付きキュー、正典 memory project_ai_content_remediation_queue）を使う
+for key in $(curl -s "$R2/app/ranking-items/all.json" | jq -r '.items[].rankingKey' | head -50); do
+  [ "$(curl -s -o /dev/null -w '%{http_code}' "$R2/app/ranking/$key/ai-content.json")" = "200" ] || echo "AI未生成: $key"
+done | head -20
 ```
 
 出力形式:
@@ -161,8 +154,8 @@ Phase 1 のデータを統合し、以下の6観点で分析する。
 #### 2-1. インデックス状況とカバレッジ
 
 - **サイトマップ URL 数 vs GSC インデックス数の乖離**
-  - ランキングページ: DB の ranking_items 数 vs GSC で impressions > 0 のランキング URL 数
-  - ブログ記事: DB の公開記事数 vs GSC で impressions > 0 のブログ URL 数
+  - ランキングページ: R2 ranking-items 数（`app/ranking-items/all.json` の `.count`）vs GSC で impressions > 0 のランキング URL 数
+  - ブログ記事: R2 公開記事数（`app/blog/all.json` の `.articles | length`）vs GSC で impressions > 0 のブログ URL 数
   - 都道府県ページ: 47 × カテゴリ数 vs GSC データ
 - **インデックスされていないページの特定**: サイトマップに含まれるが GSC にデータがない URL パターン
 - **薄いコンテンツのリスク**: AI コンテンツ未生成のランキングページ（コンテンツが少なくインデックスされにくい）
@@ -402,29 +395,26 @@ focus: "all | technical | content | keywords | programmatic"
 - 主要指標の推移を記載（トラフィック・インデックス率・順位）
 - 前回 P0/P1 で未実行のアクションは今回も引き継ぐ
 
-## SEO トラッキング DB の活用
+## SEO トラッキングの活用（完全DBレス）
 
-DB `seo_tracking` テーブルと `seo_actions` テーブルを参照・更新する:
+> 旧 D1 `seo_tracking` / `seo_actions` テーブルは廃止（2026-04-15、schema にも存在しない）。
+> カバレッジ推移は GSC state、SEO 施策は改善バックログを真実源とする。
 
 ### データ参照
-```sql
--- カバレッジ指標の推移（直近10件）
-SELECT date, metric_key, value, note FROM seo_tracking ORDER BY date DESC LIMIT 10;
-
--- 未完了の改善施策
-SELECT id, title, status, priority, description FROM seo_actions WHERE status != 'done' ORDER BY priority;
+```bash
+# カバレッジ指標の推移（GSC state。旧 seo_tracking の代替）
+cat .claude/state/gsc/LATEST.md                                  # 最新サマリ
+cat .claude/state/metrics/gsc/history.csv | tail -10             # 時系列（直近10件）
+# 未完了の SEO 施策（改善バックログ。旧 seo_actions の代替）
+grep -nE "status:\s*(pending|in.progress)" docs/02_実装計画/03_改善バックログ.md
 ```
 
 ### レポート出力時
-- `seo_tracking` のトレンドをレポートの「インデックス状況」セクションに含める
-- `seo_actions` の未完了施策をアクションリストに反映（重複登録しない）
+- GSC state（`LATEST.md` / `history.csv`）のトレンドをレポートの「インデックス状況」セクションに含める
+- 改善バックログの未完了施策（status != done）をアクションリストに反映（重複登録しない）
 
 ### 新規施策の登録
-監査で新たに発見した改善施策は `seo_actions` に INSERT する:
-```sql
-INSERT INTO seo_actions (metric_key, title, description, status, priority, created_at, updated_at)
-VALUES ('crawled_not_indexed', '施策タイトル', '詳細', 'planned', N, datetime('now'), datetime('now'));
-```
+監査で新たに発見した改善施策は `docs/02_実装計画/03_改善バックログ.md` に追記する（`improvement-triage` が status を管理する唯一の writer）。frontmatter/簡易表の行として tier・期日・target_metric を記録する（規約: `.claude/rules/docs-vs-issues.md`）。
 
 ## トーンと姿勢
 
@@ -465,5 +455,5 @@ VALUES ('crawled_not_indexed', '施策タイトル', '詳細', 'planned', N, dat
 - `apps/web/src/middleware.ts` — リダイレクト設定
 - `apps/web/tests/e2e/seo/` — SEO 関連 E2E テスト
 - `docs/04_レビュー/` — 過去の監査レポート (`*-seo-audit.md`)
-- DB `seo_tracking` テーブル — SEO カバレッジ指標の数値推移
-- DB `seo_actions` テーブル — SEO 改善施策の管理（planned → in_progress → done）
+- `.claude/state/gsc/LATEST.md` / `.claude/state/metrics/gsc/history.csv` — SEO カバレッジ指標の数値推移（旧 D1 `seo_tracking` の代替）
+- `docs/02_実装計画/03_改善バックログ.md` — SEO 改善施策の管理（pending → in_progress → done。旧 D1 `seo_actions` の代替）

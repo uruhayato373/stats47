@@ -22,21 +22,25 @@ primary_agent: snapshot-exporter
 
 ### 1. データ取得
 
-ローカル D1（SQLite）から対象データを取得する:
+完全DBレス: R2 公開 URL から取得する（旧 D1 indicators/observations は廃止）:
 
-```sql
--- ランキングアイテムの確認
-SELECT ranking_key, title, unit, latest_year
-FROM indicators
-WHERE ranking_key = '<rankingKey>' AND is_active = 1;
+```bash
+cd /Users/minamidaisuke/stats47 && node -e "
+const R2 = process.env.R2_PUBLIC_FETCH_URL || 'https://storage.stats47.jp';
+(async () => {
+  // ランキングメタ (title/unit/latest_year)
+  const { item } = await (await fetch(R2 + '/app/ranking/<rankingKey>/item.json')).json();
+  console.log('meta:', JSON.stringify({ ranking_key: item.rankingKey, title: item.title, unit: item.unit, latest_year: item.latestYear }));
 
--- ランキングデータ取得（年度指定）
-SELECT rd.area_code, rd.area_name, rd.value, rd.unit, rd.year_code, rd.rank
-FROM observations rd
-WHERE rd.ranking_key = '<rankingKey>'
-  AND rd.year_code = '<yearCode>'
-  AND rd.area_type = 'prefecture'
-ORDER BY rd.rank ASC;
+  // ランキングデータ（年度指定・rank 昇順）
+  const payload = await (await fetch(R2 + '/app/stats/<rankingKey>/values.json')).json();
+  const rows = payload.rows
+    .filter(r => String(r.yearCode) === '<yearCode>' && r.value != null)
+    .sort((a, b) => (a.rank ?? 999) - (b.rank ?? 999))
+    .map(r => ({ area_code: r.areaCode, area_name: r.areaName, value: r.value, unit: r.unit, year_code: r.yearCode, rank: r.rank }));
+  console.log(JSON.stringify(rows, null, 2));
+})();
+"
 ```
 
 ### 2. CSV 生成

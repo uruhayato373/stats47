@@ -94,7 +94,7 @@ GSC の impressions × CTR と D1 の article メタデータを掛け合わせ�
 | データ | 場所 |
 |---|---|
 | GSC ページ別週次 | `.claude/skills/analytics/gsc-improvement/reference/snapshots/<最新週>/pages.csv` |
-| D1 articles テーブル | sqlite MCP (`.local/d1/v3/d1/miniflare-D1DatabaseObject/baffe5...sqlite`) |
+| ブログ記事 (公開) | R2 `app/blog/all.json` (`.articles`。旧 D1 articles テーブルは廃止) |
 
 ### 実行フロー (priority)
 
@@ -108,15 +108,13 @@ ls .claude/skills/analytics/gsc-improvement/reference/snapshots/ | sort | tail -
 `.claude/skills/analytics/gsc-improvement/reference/snapshots/<最新週>/pages.csv` を Read する。
 `/blog/` を含む行のみを抽出し、 slug を `https://stats47.jp/blog/` 以降の文字列として取得する。
 
-#### Step 2: D1 から記事メタデータ取得
+#### Step 2: R2 blog snapshot から記事メタデータ取得
 
-sqlite MCP で以下をクエリ:
+完全DBレス（旧 D1 articles テーブルは廃止。記事 SSOT は article.md → `app/blog/all.json`）:
 
-```sql
-SELECT slug, title, published_at, updated_at
-FROM articles
-WHERE slug IS NOT NULL
-ORDER BY updated_at ASC;
+```bash
+curl -s "https://storage.stats47.jp/app/blog/all.json" \
+  | jq -r '.articles | sort_by(.updatedAt) | .[] | [.slug, .title, .publishedAt, .updatedAt] | @tsv'
 ```
 
 #### Step 3: スコアリング
@@ -196,11 +194,11 @@ exit 1 なら修正 → 再 check して pass するまで繰り返す。 詳細
 
 #### C-1. 関連 metrics 探索 (面白い対比探し)
 
-D1 で同カテゴリの関連 metric を 3-5 個ピックアップ:
+R2 ranking-items snapshot から同カテゴリの関連 ranking を 3-5 個ピックアップ（完全DBレス。旧 D1 metrics は廃止）:
 
 ```bash
-sqlite3 ".local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite" \
-  "SELECT key, title FROM metrics WHERE category_key='<カテゴリ>' AND is_active=1 LIMIT 20;"
+curl -s "https://storage.stats47.jp/app/ranking-items/all.json" \
+  | jq '.items[] | select(.categoryKey=="<カテゴリ>") | {key: .rankingKey, title}' | head -40
 ```
 
 「面積 vs 効率」「平均 vs 中央値」「総量 vs 比率」「TOP1 単独 vs TOP10 集中度」等の **対比軸** を 1-2 個発見する。

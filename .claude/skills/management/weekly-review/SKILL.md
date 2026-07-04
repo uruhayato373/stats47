@@ -82,10 +82,9 @@ node .claude/scripts/snapshot-weekly-metrics.mjs [YYYY-Www]
 ```
 調査項目:
 
-1. DB からコンテンツ規模を取得
-   DB: .local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite
-   ```sql
-   SELECT COUNT(*) FROM articles WHERE published = 1;
+1. コンテンツ規模を取得（完全DBレス。R2 snapshot から。旧 D1/miniflare は廃止）
+   ```bash
+   curl -s "https://storage.stats47.jp/app/blog/all.json" | jq '.articles | length'   # 公開記事数
    ```
 
 2. SNS 投稿実績（投稿台帳 `.claude/state/sns/posts.json` から集計。旧 D1 sns_posts は廃止）
@@ -255,19 +254,14 @@ node .claude/scripts/snapshot-weekly-metrics.mjs [YYYY-Www]
 #### 取得するデータ
 
 ```bash
-DB=".local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite"
-# 現行 schema (Phase 5/6/7 後): indicators→metrics, ai_content→metrics 統合,
-# subcategories 廃止, 観測値/correlations は R2 へ移行
-sqlite3 "$DB" "
-  SELECT 'articles_published' as item, COUNT(*) as cnt FROM articles WHERE published = 1
-  UNION ALL SELECT 'metrics_active', COUNT(*) FROM metrics WHERE is_active=1
-  UNION ALL SELECT 'area_profiles', COUNT(*) FROM area_profiles
-  UNION ALL SELECT 'categories', COUNT(*) FROM categories
-  UNION ALL SELECT 'themes', COUNT(*) FROM themes
-"
-# 観測値・相関は R2 (Phase 6 移行):
-ls .local/r2/app/stats/ 2>/dev/null | wc -l          # 観測値を持つ metric 数
-jq '.total' .local/r2/app/correlation/stats.json 2>/dev/null  # 相関ペア総数
+# 完全DBレス: 本番アプリは R2 snapshot / git TS のみ読む。旧 D1/miniflare は廃止
+R2="https://storage.stats47.jp"
+echo "公開記事数:       $(curl -s "$R2/app/blog/all.json" | jq '.articles | length')"
+echo "ランキング(公開):  $(curl -s "$R2/app/ranking-items/all.json" | jq '.count')"   # 旧 metrics_active / 観測値を持つ metric 数の代理
+echo "カテゴリ数:       $(curl -s "$R2/app/categories/all.json" | jq '.count')"
+echo "相関ペア総数:     $(curl -s "$R2/app/correlation/stats.json" | jq '.total')"      # strong は .strong
+echo "テーマ数:         $(npx tsx -e 'import {ALL_THEMES} from "./apps/web/src/features/theme-dashboard/config/all-themes.ts";console.log(ALL_THEMES.length)')"
+# area_profiles は Derived（エフェメラル計算 → R2 app/areas/<code>/profile.json、47 都道府県分）
 ```
 
 - `.local/r2/sns/` 配下の画像・動画数（`find .local/r2/sns -name '*.png' -o -name '*.jpg' | wc -l` / `find .local/r2/sns -name '*.mp4' | wc -l`）
@@ -509,7 +503,7 @@ node .claude/scripts/blog/analyze-winning-patterns.mjs   # CTR×構造特徴→f
 
 ### SNS パフォーマンス
 
-※ 最新値は D1 `sns_posts` キャッシュカラムから、時系列履歴は `.claude/skills/analytics/sns-metrics-improvement/snapshots/YYYY-MM-DD/metrics.csv` から取得する（詳細は Phase 1 Agent C 参照）。
+※ 最新値は投稿台帳 `posts.json` のキャッシュカラムから（`sns-posts-store.cjs` 経由。完全DBレス。旧 D1 sns_posts は廃止）、時系列履歴は `.claude/skills/analytics/sns-metrics-improvement/snapshots/YYYY-MM-DD/metrics.csv` から取得する（詳細は Phase 1 Agent C 参照）。
 
 | プラットフォーム | 計測投稿数 | インプレッション / 再生数 | いいね |
 |---|---|---|---|

@@ -23,22 +23,20 @@ primary_agent: strategy-advisor
 
 以下を**すべて実際のソースから直接取得**する。計画書やロードマップの記載は信用しない。
 
-#### DB（ローカル D1 SQLite）
+#### コンテンツ規模（完全DBレス: R2 snapshot / git TS から。旧 D1/miniflare は廃止）
 
 ```bash
-DB=".local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite"
-# 現行 schema (Phase 5/6/7 後): indicators→metrics, ai_content→metrics 統合,
-# 観測値(observations)/correlations は D1 から R2 へ移行済 (下記は別途 R2 から)
-sqlite3 "$DB" "
-  SELECT 'metrics' as tbl, COUNT(*) as cnt FROM metrics
-  UNION ALL SELECT 'metrics_active', COUNT(*) FROM metrics WHERE is_active=1
-  UNION ALL SELECT 'articles', COUNT(*) FROM articles
-  UNION ALL SELECT 'area_profiles', COUNT(*) FROM area_profiles
-  UNION ALL SELECT 'sns_posts', COUNT(*) FROM sns_posts
-"
-# 観測値・相関は R2 (Phase 6 移行)。件数は snapshot から:
-ls .local/r2/app/stats/ 2>/dev/null | wc -l          # 観測値を持つ metric 数
-jq '.total' .local/r2/app/correlation/stats.json 2>/dev/null  # 相関ペア総数
+R2="https://storage.stats47.jp"
+# ランキング数（= 旧 metrics / metrics_active / 観測値を持つ metric 数の代理。公開 active 集合）
+echo "rankings(active): $(curl -s "$R2/app/ranking-items/all.json" | jq '.count')"
+# 公開記事数（export-blog-snapshot は published のみ出力）
+echo "articles:         $(curl -s "$R2/app/blog/all.json" | jq '.articles | length')"
+# 相関ペア総数
+echo "correlations:     $(curl -s "$R2/app/correlation/stats.json" | jq '.total')"
+# SNS 投稿件数は投稿台帳 posts.json から:
+node -e 'const s=require("./.claude/scripts/lib/sns-posts-store.cjs");console.log("sns_posts:",s.loadAll().length)'
+# area_profiles は Derived（エフェメラル計算 → R2 app/areas/<code>/profile.json、47 都道府県分）
+# 全 metric 定義（inactive 含む）を数えるなら git TS: ls packages/data-configs/src/metrics/*.ts | wc -l
 ```
 
 #### コンテンツ資産

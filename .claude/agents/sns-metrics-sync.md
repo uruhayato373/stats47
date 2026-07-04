@@ -1,6 +1,6 @@
 ---
 name: sns-metrics-sync
-description: 全 SNS プラットフォーム (X / IG / YouTube / TikTok) のメトリクス同期と post 連携。 各 strategist と sns-renderer から metrics 系を集約。
+description: 全 SNS プラットフォーム (X / IG / YouTube) のメトリクス同期と post 連携。 各 strategist と sns-renderer から metrics 系を集約。 (TikTok は撤退で対象外)
 model: sonnet
 ---
 

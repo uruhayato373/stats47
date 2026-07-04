@@ -35,7 +35,7 @@ stats47 は都道府県統計データの可視化サイト。以下の特性を
 
 以下を調査する:
 - 公開記事数・ランキングページ数（DB articles テーブル、ranking_items テーブル）
-- SNS フォロワー数・エンゲージメント（D1 `sns_posts` キャッシュカラム + `.claude/skills/analytics/sns-metrics-improvement/snapshots/`）
+- SNS フォロワー数・エンゲージメント（投稿台帳 `.claude/state/sns/posts.json` のキャッシュカラム〔`sns-posts-store.cjs` 経由〕 + `.claude/skills/analytics/sns-metrics-improvement/snapshots/`）
 - 直近のアクセス規模（既知のデータがあれば使用）
 
 ### Step 2: 候補戦略のブレインストーム

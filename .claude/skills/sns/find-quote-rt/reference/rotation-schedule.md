@@ -15,7 +15,7 @@
 - **スコア**: `engagement * (0.4 + 0.6 * freshness)`（詳細は SKILL.md Phase 4a）
 - **多様性制約**: 直近2件の category_key は避ける（ただし鮮度優先で緩めることあり）
 
-**なぜローテを捨てたか**: ローテで先にテーマを固定すると、その日の最強ツイートを逃す。テーマ別の反応データは `sns_posts.content_key → ranking_items.category_key` の事後集計で観察データとして取れるため、投稿時にバランスを強制する必要がない。
+**なぜローテを捨てたか**: ローテで先にテーマを固定すると、その日の最強ツイートを逃す。テーマ別の反応データは投稿台帳 `posts.json` の `content_key → ランキングの category_key` の事後集計で観察データとして取れるため、投稿時にバランスを強制する必要がない。
 
 ## テーマカタログ
 
@@ -53,28 +53,30 @@ done
 
 ## 多様性ソフト制約
 
-投稿記録から直近2件の category_key を取得し、同じ category_key の候補を避ける:
+投稿台帳 `posts.json` から直近2件の quote_rt の `content_key` を取得し、その category_key と同じ候補を避ける（完全DBレス。旧 D1 sns_posts は廃止）:
 
-```sql
-SELECT ri.category_key
-FROM sns_posts sp
-LEFT JOIN indicators ri ON ri.ranking_key = sp.content_key
-WHERE sp.post_type = 'quote_rt' AND sp.platform = 'x'
-ORDER BY sp.posted_at DESC
-LIMIT 2;
+```bash
+node -e 'const s=require("./.claude/scripts/lib/sns-posts-store.cjs");
+  const recent=s.query(p=>p.post_type==="quote_rt"&&p.platform==="x")
+    .sort((a,b)=>(b.posted_at||"").localeCompare(a.posted_at||"")).slice(0,2)
+    .map(p=>p.content_key);
+  console.log(JSON.stringify(recent))'
 ```
+
+各 `content_key`（= ranking_key）の category_key は metric config（`packages/data-configs/src/metrics/<key>.ts` の `category`）から解決する。
 
 - **避ける条件**: 候補の `content_key` の category_key が直近2件に含まれる
 - **緩和条件**: スコア上位3件が全て該当する場合は最上位を採用（鮮度優先）
 - **同一 content_key の7日制約**: 同じ ranking_key は7日以内に再利用しない
 
-```sql
-SELECT content_key FROM sns_posts
-WHERE post_type='quote_rt' AND posted_at > datetime('now','-7 days');
+```bash
+node -e 'const s=require("./.claude/scripts/lib/sns-posts-store.cjs");
+  const cut=new Date(Date.now()-7*864e5).toISOString();
+  console.log(JSON.stringify([...new Set(s.query(p=>p.post_type==="quote_rt"&&(p.posted_at||"")>cut).map(p=>p.content_key))]))'
 ```
 
 ## 運用メモ
 
 - テーマを追加する場合は「テーマカタログ」表と「並列検索フロー」の両方に追記
 - キーワードの鮮度管理: 季節性のあるキーワード(花粉・暖房費等)はカタログに入れず引数指定で使う
-- 反応分析は `sns_metrics` と `sns_posts` を category_key で集計して評価(`/sns-weekly-report` 対応予定)
+- 反応分析は投稿台帳 `posts.json` のメトリクスキャッシュを category_key で集計して評価(`/sns-weekly-report` 対応予定)

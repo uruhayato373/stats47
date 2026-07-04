@@ -109,64 +109,49 @@ $ARGUMENTS — [--source <name>] [--limit N] [--youtube] [--whitepaper]
    - **採用**: カテゴリ分類できたトレンド → Phase 3 へ
    - **除外**: 理由を簡潔に記録（Phase 6 のサマリーで報告）
 
-### Phase 3: DB マッチング
+### Phase 3: R2 / references マッチング（完全DBレス）
 
-4. 採用した各トレンドについて、ローカル D1 に対して以下のクエリを実行し関連データを検索する。
+4. 採用した各トレンドについて、R2 ranking-items snapshot と git-tracked references に対して関連データを検索する（旧 D1 indicators/tags/estat_metainfo は廃止）。
 
-**4a. indicator_tags + tags でタグ検索:**
+**4a. ranking-items のタグ検索:**
 
-```sql
-SELECT DISTINCT i.key AS ranking_key, i.title, i.unit, i.latest_year, t.tag_key, t.tag_name
-FROM indicator_tags it
-JOIN indicators i ON it.indicator_id = i.id
-JOIN tags t ON it.tag_key = t.tag_key
-WHERE (t.tag_key LIKE '%{keyword}%' OR t.tag_name LIKE '%{keyword}%')
-  AND i.area_type = 'prefecture'
-  AND i.is_active = 1
-ORDER BY i.latest_year DESC;
+```bash
+# tags はキーワードで絞り込む（※ ranking-items snapshot の tags バックフィルは進行中で現状は疎。
+#   当面は 4b のタイトル検索が主。backlog: 2211 件 tags 恒久バックフィル）
+curl -s "https://storage.stats47.jp/app/ranking-items/all.json" \
+  | jq '.items[] | select((.tags // []) | map(.tagKey) | any(test("{keyword}"))) | {ranking_key: .rankingKey, title, unit, latest_year: .latestYear}'
 ```
 
-※ キーワードは元のトレンドワードだけでなく、関連語・上位概念も含めて複数パターンで検索する。例: 「猛暑」→ `%猛暑%`, `%気温%`, `%熱中症%`
+※ キーワードは元のトレンドワードだけでなく、関連語・上位概念も含めて複数パターンで検索する。例: 「猛暑」→ `猛暑`, `気温`, `熱中症`
 
-**4b. indicators でタイトル検索:**
+**4b. ranking-items のタイトル検索:**
 
-```sql
-SELECT DISTINCT key AS ranking_key, title, unit, latest_year
-FROM indicators
-WHERE title LIKE '%{keyword}%'
-  AND area_type = 'prefecture'
-  AND is_active = 1
-ORDER BY latest_year DESC;
+```bash
+curl -s "https://storage.stats47.jp/app/ranking-items/all.json" \
+  | jq '.items[] | select(.title | test("{keyword}")) | {ranking_key: .rankingKey, title, unit, latest_year: .latestYear}'
 ```
 
-**4c. estat_metainfo で統計表カタログ検索 (registered + candidate):**
+**4c. e-Stat 統計表カタログ検索 (references + API):**
 
-```sql
-SELECT stats_data_id, title, gov_org, status, category_key, stats_field
-FROM estat_metainfo
-WHERE title LIKE '%{keyword}%'
-ORDER BY
-  CASE status WHEN 'registered' THEN 0 ELSE 1 END,
-  title;
-```
-
-- `status = 'registered'` → 既に indicators に登録済み (`indicators.source_id` で参照される運用マスタ)
-- `status = 'candidate'` → e-Stat 統計表カタログとして 8,399 件保持。未登録だが ID + メタは既知。新規ランキング候補として `/fetch-estat-data <statsDataId>` で取得 → TS-config (`packages/data-configs/src/metrics/<key>.ts`) 追加 + `/sync-metrics-cache --apply` + `/page-data-batch --metric <key>` で登録
+- まず git-tracked `.claude/skills/estat/references/*.md` を検索: `grep -rniE "{keyword}" .claude/skills/estat/references/*.md`
+- 見つからなければ `/search-estat`（e-Stat API 検索）。有用な統計表は `/inspect-estat-meta` で references に追記する（DBレスの恒久カタログ）
+- 新規ランキング候補は `/fetch-estat-data <statsDataId>` → TS-config (`packages/data-configs/src/metrics/<key>.ts`) 追加 + `/page-data-batch --metric <key>` で登録
+- （旧 D1 `estat_metainfo` の 8,399 件自動カタログは retired D1 由来で廃止）
 
 5. マッチ結果をもとに、各トレンドのマッチ度を判定:
 
 | マッチ度 | 基準 |
 |---|---|
-| ★★★ | indicators に直接関連するデータあり（記事すぐ書ける） |
-| ★★☆ | estat_metainfo (status='candidate') に候補あり、または indicators に間接的な関連データあり |
+| ★★★ | ranking-items に直接関連するランキングあり（記事すぐ書ける） |
+| ★★☆ | e-Stat references / API に候補あり、または ranking-items に間接的な関連データあり |
 | ★☆☆ | カテゴリ的に関連するが、直接マッチするデータなし（新規データ取得が必要） |
 
 ### Phase 4: 重複チェック
 
-6. 既存記事との重複を確認:
+6. 既存記事との重複を確認（R2 blog snapshot。旧 D1 articles は廃止）:
 
-```sql
-SELECT slug, title, tags FROM articles;
+```bash
+curl -s "https://storage.stats47.jp/app/blog/all.json" | jq '.articles[] | {slug, title, tags: [.tags[].tagKey]}'
 ```
 
 - 同じテーマ・切り口の既存記事がある場合、候補から除外するか「差別化ポイント」を明記する。

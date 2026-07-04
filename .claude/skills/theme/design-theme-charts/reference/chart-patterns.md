@@ -71,14 +71,11 @@ pageCharts?.filter((c) => c.section === tab.label)
 
 ## estatParams の取得方法
 
-ranking_items.source_config に格納されている JSON から statsDataId / cdCat01 を取得する:
+R2 `app/ranking/<key>/item.json` の `.item.sourceConfig` に格納されている JSON から statsDataId / cdCat01 を取得する（完全DBレス。旧 D1 indicators は廃止）:
 
-```sql
-SELECT ranking_key, source_config
-FROM indicators
-WHERE ranking_key = 'nurse-annual-income'
-  AND area_type = 'prefecture';
--- source_config: {"statsDataId":"0003445758","cdCat01":"...","cdCat02":"..."}
+```bash
+curl -s "https://storage.stats47.jp/app/ranking/nurse-annual-income/item.json" | jq '.item.sourceConfig'
+# => {"statsDataId":"0003445758","cdCat01":"...","cdCat02":"..."}
 ```
 
 **componentProps に転記する際は source_config の値をそのまま使う。手入力しない。**

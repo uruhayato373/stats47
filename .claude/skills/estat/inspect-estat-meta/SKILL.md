@@ -76,33 +76,11 @@ node scripts/temp-inspect-meta.mjs <statsDataId>
    - 各ディメンションの項目数と代表的な値
    - 都道府県ランキングデータを取得する場合の推奨パラメータ
 
-### Phase 3: class_inf を DB に書き戻し
+### Phase 3: よく使う表は references に記録（完全DBレス）
 
-4. 取得した CLASS_INF を `estat_metainfo.class_inf` に保存する（candidate でも registered でも可）:
+4. **CLASS_INF は e-Stat API (`getMetaInfo`) から毎回再取得できる**ため、永続キャッシュは不要。旧 D1 `estat_metainfo.class_inf` への書き戻しは廃止（8,000 行の自動カタログは retired D1 由来で git 再生成不可。DBレスの恒久カタログは **git-tracked `.claude/skills/estat/references/*.md` + e-Stat API**）。
 
-```ts
-// scripts/temp-save-class-inf.mts
-import BetterSqlite3 from "better-sqlite3";
-import { drizzle } from "drizzle-orm/better-sqlite3";
-import { eq } from "drizzle-orm";
-import * as schema from "../packages/database/src/schema";
-
-const DB_PATH = ".local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite";
-const sqlite = new BetterSqlite3(DB_PATH);
-const db = drizzle(sqlite, { schema });
-
-const statsDataId = "<STATS_DATA_ID>";
-const classInfJson = JSON.stringify(<CLASS_INF_OBJECT_FROM_API>);
-
-await db.update(schema.estatMetainfo)
-  .set({ classInf: classInfJson, updatedAt: new Date().toISOString() })
-  .where(eq(schema.estatMetainfo.statsDataId, statsDataId));
-
-console.log(`class_inf saved for ${statsDataId}`);
-sqlite.close();
-```
-
-これにより次回以降は API 不要で構造を確認できる（`class_inf` が NULL でなければ DB 参照のみで判断可能）。
+   **頻繁に使う統計表**だけ、把握した構造（ディメンション一覧・各項目数・都道府県ランキング取得の推奨パラメータ）を `.claude/skills/estat/references/<調査名>.md` に追記しておく。これが次回以降 API を叩かずに参照できる恒久カタログになる（`references/README.md` の索引にも 1 行追加する）。
 
 ### Phase 4: 後処理
 

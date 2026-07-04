@@ -29,7 +29,7 @@ X / YouTube / Instagram / TikTok の投稿パフォーマンス（impressions / 
 ## データソース
 
 - 時系列履歴: `.claude/skills/analytics/sns-metrics-improvement/snapshots/YYYY-MM-DD/metrics.csv`
-- 最新値（cache）: D1 `sns_posts` テーブルの `impressions / likes / reposts / replies / bookmarks / metrics_updated_at` カラム
+- 最新値（cache）: 投稿台帳 `.claude/state/sns/posts.json` のレコード列 `impressions / likes / reposts / replies / bookmarks / metrics_updated_at`（`sns-posts-store.cjs` 経由。完全DBレス。旧 D1 sns_posts は廃止）
 - 書き込みヘルパ: `.claude/scripts/lib/sns-metrics-store.cjs`
 - 取得スキル: `/update-sns-metrics`
 

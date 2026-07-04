@@ -33,27 +33,36 @@ primary_agent: theme-component-builder
 
 4. area-category の全カテゴリから、テーマに関連するチャートを検索:
 
+完全DBレス: `page_components` の SSOT は git TS JSON（`apps/web/scripts/data/page-components/<type>/<pageKey>.json`。旧 D1/miniflare は廃止）。全ページの JSON を読み、対象テーマに未割り当ての既存チャートを検索:
+
 ```bash
 node -e "
-const Database = require('better-sqlite3');
-const db = new Database('.local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite', {readonly: true});
-// テーマに未割り当ての既存チャートを検索
-const existing = db.prepare(\`
-  SELECT chart_key, title, component_type,
-         GROUP_CONCAT(DISTINCT page_type || '/' || page_key) as current_pages
-  FROM page_components
-  WHERE is_active = 1 AND component_type != 'kpi-card'
-    AND chart_key NOT IN (
-      SELECT chart_key FROM page_components WHERE page_type = 'theme' AND page_key = ?
-    )
-  GROUP BY chart_key
-\`).all('THEME_KEY');
-// キーワードでフィルタ
-existing.forEach(r => console.log(r.chart_key, '|', r.title, '|', r.component_type, '|', r.current_pages));
+const fs = require('fs'), path = require('path');
+const ROOT = 'apps/web/scripts/data/page-components';
+const THEME_KEY = 'THEME_KEY';
+const byKey = new Map();
+for (const type of fs.readdirSync(ROOT)) {
+  const dir = path.join(ROOT, type);
+  if (!fs.statSync(dir).isDirectory()) continue;
+  for (const file of fs.readdirSync(dir).filter(f => f.endsWith('.json'))) {
+    const pageKey = file.replace(/\.json$/, '');
+    for (const c of JSON.parse(fs.readFileSync(path.join(dir, file), 'utf8'))) {
+      if (c.componentType === 'kpi-card') continue;
+      const e = byKey.get(c.componentKey) || { title: c.title, componentType: c.componentType, pages: new Set() };
+      e.pages.add(type + '/' + pageKey);
+      byKey.set(c.componentKey, e);
+    }
+  }
+}
+const onTheme = new Set([...byKey].filter(([, e]) => e.pages.has('theme/' + THEME_KEY)).map(([k]) => k));
+for (const [key, e] of byKey) {
+  if (onTheme.has(key)) continue;
+  console.log(key, '|', e.title, '|', e.componentType, '|', [...e.pages].join(','));
+}
 "
 ```
 
-再利用可能なチャートは `page_components` に同じ chart_key + 別 (page_type, page_key) で新しい行を INSERT する。
+再利用可能なチャートは、対象テーマの git TS JSON（`apps/web/scripts/data/page-components/theme/<THEME_KEY>.json`）に同じ `componentKey` のエントリを追記する（別 pageKey で再利用）。反映は `/sync-snapshots`（生成スクリプトが git TS → R2）。
 
 ### Phase 3: e-Stat API データ調査
 

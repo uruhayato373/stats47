@@ -40,9 +40,10 @@ primary_agent: theme-component-builder
 
 ```bash
 node -e "
-const Database = require('better-sqlite3');
-const db = new Database('.local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite', {readonly: true});
-// テーマと areas で同じ estatParams だが異なる chart_key を検出
+const fs = require('fs'), path = require('path');
+const ROOT = 'apps/web/scripts/data/page-components';
+// 完全DBレス: 各 JSON の componentProps.estatParams を突合し、テーマと areas で同じ
+// estatParams だが異なる componentKey を検出する（旧 D1/miniflare は廃止）
 ..."
 ```
 
@@ -50,21 +51,26 @@ const db = new Database('.local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b01
 
 5. テーマのチャートのうち、areas ページでも使われているもの（共有済み）と、テーマ専用のものを分類:
 
+完全DBレス: `page_components` の SSOT は git TS JSON（旧 D1/miniflare は廃止）。
+
 ```bash
 node -e "
-const Database = require('better-sqlite3');
-const db = new Database('.local/d1/v3/d1/miniflare-D1DatabaseObject/baffe56c6b0173e34c63a5333065bcdb6642a01b4c2cfecd70ad3607b00c9972.sqlite', {readonly: true});
-const rows = db.prepare(\`
-  SELECT chart_key, title, component_type, section, sort_order
-  FROM page_components
-  WHERE page_type = 'theme' AND page_key = ?
-  ORDER BY section, sort_order
-\`).all('$ARGUMENTS');
-rows.forEach(r => {
-  const shared = db.prepare('SELECT COUNT(*) as cnt FROM page_components WHERE chart_key=? AND page_type != ?').get(r.chart_key, 'theme');
-  console.log((shared.cnt > 0 ? '[共有]' : '[専用]'), '[' + r.section + ']', r.chart_key, '|', r.component_type);
-});
-db.close();
+const fs = require('fs'), path = require('path');
+const ROOT = 'apps/web/scripts/data/page-components';
+const THEME_KEY = '$ARGUMENTS';
+// テーマのコンポーネント（section, sortOrder 順）
+const themeComps = JSON.parse(fs.readFileSync(path.join(ROOT, 'theme', THEME_KEY + '.json'), 'utf8'))
+  .sort((a, b) => (a.section || '').localeCompare(b.section || '') || (a.sortOrder || 0) - (b.sortOrder || 0));
+// 非テーマページの全 componentKey 集合（共有判定用）
+const nonTheme = new Set();
+for (const type of fs.readdirSync(ROOT)) {
+  if (type === 'theme') continue;
+  const dir = path.join(ROOT, type);
+  if (!fs.statSync(dir).isDirectory()) continue;
+  for (const file of fs.readdirSync(dir).filter(f => f.endsWith('.json')))
+    for (const c of JSON.parse(fs.readFileSync(path.join(dir, file), 'utf8'))) nonTheme.add(c.componentKey);
+}
+themeComps.forEach(c => console.log(nonTheme.has(c.componentKey) ? '[共有]' : '[専用]', '[' + c.section + ']', c.componentKey, '|', c.componentType));
 "
 ```
 
