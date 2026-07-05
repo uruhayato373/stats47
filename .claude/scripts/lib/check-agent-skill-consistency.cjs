@@ -113,7 +113,8 @@ function checkSkillAgentLinks(findings, scope) {
 function checkSkillScriptRefs(findings, scope) {
   let skillFiles = walk(path.join(ROOT, ".claude/skills"), ["SKILL.md"]);
   if (scope) skillFiles = skillFiles.filter((f) => scope.has(rel(f)));
-  const re = /\.claude\/(?:scripts|hooks)\/[A-Za-z0-9._/-]+\.(?:mjs|cjs|js|py|sh|ts)/g;
+  // 拡張子直後に \b を付け、`.json` 内の `.js` / `.tsx` 内の `.ts` への部分列誤マッチ (false E2) を防ぐ。
+  const re = /\.claude\/(?:scripts|hooks)\/[A-Za-z0-9._/-]+\.(?:mjs|cjs|js|py|sh|ts)\b/g;
   for (const sf of skillFiles) {
     const text = readSafe(sf);
     if (isDeadSkill(text)) continue;
