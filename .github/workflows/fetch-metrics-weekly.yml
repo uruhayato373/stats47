@@ -149,6 +149,14 @@ jobs:
         continue-on-error: true
         run: node .claude/scripts/blog/measure-gsc-impact.mjs --min-weeks 2
 
+      # 「次に何を書くか」(topic-queue) を再構築する。GSC クエリギャップ + R2 相関 snapshot を
+      # 入力にした新規記事ネタの状態付きキュー。生産・レビューはローカル/セッションで人が回す。
+      - name: 🆕 Rebuild article topic queue (next-to-write)
+        continue-on-error: true # R2/相関の取得失敗で週次計測本体を止めない
+        env:
+          R2_PUBLIC_FETCH_URL: https://storage.stats47.jp
+        run: node .claude/scripts/blog/build-topic-queue.mjs
+
       - name: 📤 Commit & push to develop
         run: |
           git add .claude/skills/analytics/gsc-improvement/reference/snapshots
@@ -158,6 +166,7 @@ jobs:
           git add .claude/skills/management/nsm-experiment/reference/weekly-snapshots
           # 是正ループの自動再構築物
           git add .claude/state/blog/remediation-queue.json 2>/dev/null || true
+          git add .claude/state/blog/topic-queue.json 2>/dev/null || true
           git add .claude/skills/analytics/gsc-improvement/reference/improvement-log.md 2>/dev/null || true
 
           if git diff --cached --quiet; then
