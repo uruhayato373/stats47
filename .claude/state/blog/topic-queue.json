@@ -4,16 +4,16 @@
   "scoring": "combined = 0.35*queryGap + 0.25*seasonality + 0.20*surprise + 0.20*competitionGap; lane: must-write (imp>=300) > opportunity",
   "summary": {
     "total": 165,
-    "pending": 165,
-    "inProgress": 0,
+    "pending": 163,
+    "inProgress": 2,
     "done": 0,
-    "mustWritePending": 29,
+    "mustWritePending": 28,
     "byArchetype": {
-      "B": 60,
+      "B": 59,
       "A": 40,
       "G": 15,
       "F": 15,
-      "D2": 35
+      "D2": 34
     }
   },
   "queue": [
@@ -545,8 +545,9 @@
       "suggestedTitle": "まぐろと国民健康保険診療費の意外な関係",
       "combinedScore": 0.546,
       "lane": "must-write",
-      "status": "pending",
-      "priority": 15
+      "status": "in-progress",
+      "priority": 15,
+      "in_progress_at": "2026-07-05"
     },
     {
       "topicKey": "corr-avg-height-high-school-2nd-male--fish-pickled-consumption-expenditure",
@@ -2744,8 +2745,9 @@
       "suggestedTitle": "みそ消費量 日本一はどこ",
       "combinedScore": 0.4,
       "lane": "opportunity",
-      "status": "pending",
-      "priority": 82
+      "status": "in-progress",
+      "priority": 82,
+      "in_progress_at": "2026-07-05"
     },
     {
       "topicKey": "migration-09000",

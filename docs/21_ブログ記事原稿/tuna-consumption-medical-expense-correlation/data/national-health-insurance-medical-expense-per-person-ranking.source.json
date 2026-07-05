@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "national-health-insurance-medical-expense-per-person",
+  "year": "2023",
+  "unit": "円",
+  "label": "国民健康保険診療費",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/national-health-insurance-medical-expense-per-person/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug tuna-consumption-medical-expense-correlation --keys national-health-insurance-medical-expense-per-person --data-name national-health-insurance-medical-expense-per-person-ranking",
+  "fetchedAt": "2026-07-05T21:15:57.211Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}
