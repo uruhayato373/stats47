@@ -32,10 +32,13 @@ import {
   type LucideIcon,
 } from "lucide-react";
 
-import { PageShell, PageHeader } from "@/components/layout";
+import { PageShell, PageHeader, Breadcrumbs } from "@/components/layout";
+import { SectionHeader } from "@/components/section";
 import { SurfaceLinkCard } from "@/components/surface";
 
-import { AdSenseAd, RANKING_PAGE_FOOTER } from "@/lib/google-adsense";
+import { InContentAdSlot, FooterAdSlot } from "@/features/ads";
+
+import { HUB_INCONTENT } from "@/lib/google-adsense";
 import { generateOGMetadata } from "@/lib/metadata/og-generator";
 
 import { KNOWN_RANKING_KEYS } from "@/config/known-ranking-keys";
@@ -81,6 +84,12 @@ export default function RankingIndexPage() {
 
   return (
     <PageShell>
+      <Breadcrumbs
+        items={[
+          { label: "ホーム", href: "/" },
+          { label: "ランキング" },
+        ]}
+      />
       <PageHeader
         eyebrow="ランキング"
         title="都道府県ランキング一覧"
@@ -90,10 +99,10 @@ export default function RankingIndexPage() {
 
       {/* カテゴリから探す（全ランキングの網羅ブラウズ） */}
       <section className="mb-12">
-        <h2 className="mb-1 text-lg font-bold">カテゴリから探す</h2>
-        <p className="mb-4 text-sm text-muted-foreground">
-          17 の分野から、見たいランキングのカテゴリを選べます。
-        </p>
+        <SectionHeader
+          title="カテゴリから探す"
+          description="17 の分野から、見たいランキングのカテゴリを選べます。"
+        />
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-3">
           {categories.map((c) => {
             const Icon = ICON_MAP[c.icon] ?? TrendingUp;
@@ -122,9 +131,12 @@ export default function RankingIndexPage() {
         </div>
       </section>
 
+      {/* 記事内広告（ページ 1 枠まで。slotId 未発行の間は非表示） */}
+      <InContentAdSlot slot={HUB_INCONTENT} />
+
       {/* 他の探し方 */}
       <section className="mb-12">
-        <h2 className="mb-3 text-lg font-bold">他の探し方</h2>
+        <SectionHeader title="他の探し方" />
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
           <SurfaceLinkCard href="/themes">
             <h3 className="text-sm font-semibold">テーマダッシュボード</h3>
@@ -147,10 +159,8 @@ export default function RankingIndexPage() {
         </div>
       </section>
 
-      <AdSenseAd
-        format={RANKING_PAGE_FOOTER.format}
-        slotId={RANKING_PAGE_FOOTER.slotId}
-      />
+      {/* コンテンツ末尾の全幅フッター広告 */}
+      <FooterAdSlot />
     </PageShell>
   );
 }

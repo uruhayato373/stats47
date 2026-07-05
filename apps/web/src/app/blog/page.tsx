@@ -1,20 +1,12 @@
 import Link from "next/link";
 
-import {
-    Breadcrumb,
-    BreadcrumbItem,
-    BreadcrumbLink,
-    BreadcrumbList,
-    BreadcrumbPage,
-    BreadcrumbSeparator,
-} from "@stats47/components/atoms/ui/breadcrumb";
+import { PageShell, PageHeader, Breadcrumbs } from "@/components/layout";
 
-import { PageShell, PageHeader } from "@/components/layout";
-
+import { InContentAdSlot, FooterAdSlot } from "@/features/ads";
 import { BlogArticleGrid } from "@/features/blog";
 import { listLatestArticles, readBlogSnapshotMetaFromR2 } from "@/features/blog/server";
 
-import { AdSenseAd, CONTENT_FOOTER } from "@/lib/google-adsense";
+import { HUB_INCONTENT } from "@/lib/google-adsense";
 
 import type { Metadata } from "next";
 
@@ -54,20 +46,12 @@ export default async function BlogIndexPage({ searchParams }: PageProps) {
 
     return (
         <PageShell>
-            {/* パンくずナビゲーション */}
-            <Breadcrumb className="mb-4">
-                <BreadcrumbList>
-                    <BreadcrumbItem>
-                        <BreadcrumbLink asChild>
-                            <Link href="/">ホーム</Link>
-                        </BreadcrumbLink>
-                    </BreadcrumbItem>
-                    <BreadcrumbSeparator />
-                    <BreadcrumbItem>
-                        <BreadcrumbPage>ブログ</BreadcrumbPage>
-                    </BreadcrumbItem>
-                </BreadcrumbList>
-            </Breadcrumb>
+            <Breadcrumbs
+                items={[
+                    { label: "ホーム", href: "/" },
+                    { label: "ブログ" },
+                ]}
+            />
 
             <PageHeader
                 eyebrow="統計ブログ"
@@ -88,6 +72,9 @@ export default async function BlogIndexPage({ searchParams }: PageProps) {
                 {currentPage > 1 ? `${currentPage} ページ目` : `全 ${meta ? "記事一覧" : "記事一覧"}`}
             </p>
             <BlogArticleGrid articles={articles} firstPagePriority={currentPage === 1} />
+
+            {/* 記事内広告（一覧グリッド後。slotId 未発行の間は非表示） */}
+            <InContentAdSlot slot={HUB_INCONTENT} />
 
             {/* ページネーション */}
             {(hasPrevPage || hasNextPage) && (
@@ -120,9 +107,8 @@ export default async function BlogIndexPage({ searchParams }: PageProps) {
                 </nav>
             )}
 
-            <div className="mt-8">
-                <AdSenseAd format={CONTENT_FOOTER.format} slotId={CONTENT_FOOTER.slotId} />
-            </div>
+            {/* コンテンツ末尾の全幅フッター広告 */}
+            <FooterAdSlot />
         </PageShell>
     );
 }

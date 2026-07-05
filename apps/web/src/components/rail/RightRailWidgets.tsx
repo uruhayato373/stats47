@@ -1,10 +1,14 @@
 import { type ReactNode } from "react";
 
-import { SurfaceCard } from "@/components/surface";
+import {
+  FurusatoNozeiCard,
+  OperatorPromoCard,
+  RailAdSlot,
+  SidebarPromoBanner,
+  TechSchoolPromoCard,
+} from "@/features/ads";
 
-import { FurusatoNozeiCard, OperatorPromoCard, SidebarPromoBanner, TechSchoolPromoCard } from "@/features/ads";
-
-import { AdSenseAd, RANKING_PAGE_SIDEBAR, RANKING_SIDEBAR_TOP } from "@/lib/google-adsense";
+import { RANKING_PAGE_SIDEBAR, RANKING_SIDEBAR_TOP } from "@/lib/google-adsense";
 
 interface RightRailWidgetsProps {
   /** ふるさと納税 widget の都道府県コード (省略時は表示しない) */
@@ -92,40 +96,9 @@ export async function RightRailWidgets({
       {showTechSchool && <TechSchoolPromoCard />}
       {showPromoBanner && <SidebarPromoBanner index={promoBannerIndex} />}
 
-      {/* AdSense（収益枠は維持・最下部） */}
-      {showTopAd && (
-        <SurfaceCard className="p-0">
-          <div className="border-b border-border px-4 py-3">
-            <h3 className="text-sm font-medium text-muted-foreground">
-              広告
-            </h3>
-          </div>
-          <div className="flex justify-center overflow-hidden p-4">
-            <AdSenseAd
-              format={RANKING_SIDEBAR_TOP.format}
-              slotId={RANKING_SIDEBAR_TOP.slotId}
-              showLabel={false}
-            />
-          </div>
-        </SurfaceCard>
-      )}
-
-      {showBottomAd && (
-        <SurfaceCard className="p-0">
-          <div className="border-b border-border px-4 py-3">
-            <h3 className="text-sm font-medium text-muted-foreground">
-              広告
-            </h3>
-          </div>
-          <div className="flex justify-center overflow-hidden p-4">
-            <AdSenseAd
-              format={RANKING_PAGE_SIDEBAR.format}
-              slotId={RANKING_PAGE_SIDEBAR.slotId}
-              showLabel={false}
-            />
-          </div>
-        </SurfaceCard>
-      )}
+      {/* AdSense（収益枠は維持・最下部）。RailAdSlot に統一 */}
+      {showTopAd && <RailAdSlot slot={RANKING_SIDEBAR_TOP} />}
+      {showBottomAd && <RailAdSlot slot={RANKING_PAGE_SIDEBAR} />}
     </div>
   );
 }

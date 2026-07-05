@@ -10,10 +10,12 @@ import {
 } from "@stats47/ranking/server";
 import { isOk } from "@stats47/types";
 
-import { PageShell, PageHeader } from "@/components/layout";
+import { PageShell, PageHeader, Breadcrumbs } from "@/components/layout";
 import { SurfaceLinkCard } from "@/components/surface";
 
-import { AdSenseAd, CONTENT_FOOTER } from "@/lib/google-adsense";
+import { InContentAdSlot, FooterAdSlot } from "@/features/ads";
+
+import { HUB_INCONTENT } from "@/lib/google-adsense";
 import { generateOGMetadata } from "@/lib/metadata/og-generator";
 
 import type { Metadata } from "next";
@@ -55,6 +57,12 @@ export default async function SurveyIndexPage() {
 
   return (
     <PageShell>
+      <Breadcrumbs
+        items={[
+          { label: "ホーム", href: "/" },
+          { label: "調査別ランキング" },
+        ]}
+      />
       <PageHeader
         eyebrow="政府統計"
         title="調査別ランキング一覧"
@@ -72,9 +80,9 @@ export default async function SurveyIndexPage() {
             >
               <div className="flex items-start justify-between">
                 <div className="min-w-0 flex-1">
-                  <h2 className="font-semibold text-base truncate">
+                  <h3 className="font-semibold text-base truncate">
                     {survey.name}
-                  </h2>
+                  </h3>
                   <p className="text-xs text-muted-foreground mt-1">
                     {survey.organization}
                   </p>
@@ -93,9 +101,11 @@ export default async function SurveyIndexPage() {
         })}
       </div>
 
-      <div className="mt-8">
-        <AdSenseAd format={CONTENT_FOOTER.format} slotId={CONTENT_FOOTER.slotId} />
-      </div>
+      {/* 記事内広告（ハブ面・ページ 1 枠まで。slotId 未発行の間は非表示） */}
+      <InContentAdSlot slot={HUB_INCONTENT} />
+
+      {/* コンテンツ末尾の全幅フッター広告 */}
+      <FooterAdSlot />
     </PageShell>
   );
 }

@@ -1,29 +1,22 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-import {
-    Breadcrumb,
-    BreadcrumbItem,
-    BreadcrumbLink,
-    BreadcrumbList,
-    BreadcrumbPage,
-    BreadcrumbSeparator,
-} from "@stats47/components/atoms/ui/breadcrumb";
-
-import { PageShell, PageHeader } from "@/components/layout";
+import { PageShell, PageHeader, Breadcrumbs } from "@/components/layout";
+import { RightRailWidgets } from "@/components/rail";
 import { SurfaceCard } from "@/components/surface";
 
+import {
+    InContentAdSlot,
+    FooterAdSlot,
+    NativeAffiliateRow,
+} from "@/features/ads";
 import { resolveAffiliateBanners } from "@/features/ads/server";
 import {
     listAllUniqueTags,
     listArticleSummariesByTagKey,
 } from "@/features/blog/server";
-import {
-    NativeAffiliateRow,
-    RightRailWidgets,
-} from "@/features/redesign";
 
-import { AdSenseAd, CONTENT_FOOTER } from "@/lib/google-adsense";
+import { HUB_INCONTENT } from "@/lib/google-adsense";
 
 import type { Metadata } from "next";
 
@@ -83,31 +76,14 @@ export default async function TagArticlesPage({ params }: PageProps) {
 
     return (
         <PageShell rightRail={<RightRailWidgets />}>
-            <Breadcrumb className="mb-4">
-                <BreadcrumbList>
-                    <BreadcrumbItem>
-                        <BreadcrumbLink asChild>
-                            <Link href="/">ホーム</Link>
-                        </BreadcrumbLink>
-                    </BreadcrumbItem>
-                    <BreadcrumbSeparator />
-                    <BreadcrumbItem>
-                        <BreadcrumbLink asChild>
-                            <Link href="/blog">ブログ</Link>
-                        </BreadcrumbLink>
-                    </BreadcrumbItem>
-                    <BreadcrumbSeparator />
-                    <BreadcrumbItem>
-                        <BreadcrumbLink asChild>
-                            <Link href="/blog/tags">タグ一覧</Link>
-                        </BreadcrumbLink>
-                    </BreadcrumbItem>
-                    <BreadcrumbSeparator />
-                    <BreadcrumbItem>
-                        <BreadcrumbPage>{tag}</BreadcrumbPage>
-                    </BreadcrumbItem>
-                </BreadcrumbList>
-            </Breadcrumb>
+            <Breadcrumbs
+                items={[
+                    { label: "ホーム", href: "/" },
+                    { label: "ブログ", href: "/blog" },
+                    { label: "タグ一覧", href: "/blog/tags" },
+                    { label: tag },
+                ]}
+            />
 
             <PageHeader
                 eyebrow="タグ"
@@ -146,6 +122,9 @@ export default async function TagArticlesPage({ params }: PageProps) {
                 ))}
             </div>
 
+            {/* 記事内広告（一覧グリッド後。slotId 未発行の間は非表示） */}
+            <InContentAdSlot slot={HUB_INCONTENT} />
+
             {/* ネイティブアフィリエイト (D Phase 4) */}
             {nativeBanners.length > 0 && (
                 <div className="mt-10">
@@ -158,9 +137,8 @@ export default async function TagArticlesPage({ params }: PageProps) {
                 </div>
             )}
 
-            <div className="mt-10">
-                <AdSenseAd format={CONTENT_FOOTER.format} slotId={CONTENT_FOOTER.slotId} />
-            </div>
+            {/* コンテンツ末尾の全幅フッター広告 */}
+            <FooterAdSlot />
         </PageShell>
     );
 }

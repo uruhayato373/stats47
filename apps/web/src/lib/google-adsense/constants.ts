@@ -7,8 +7,8 @@
 
 import type { AdFormat } from "./types";
 
-interface AdSlotConfig {
-  /** 広告スロットID（AdSense 管理画面で発行） */
+export interface AdSlotConfig {
+  /** 広告スロットID（AdSense 管理画面で発行）。空文字 = 未発行プレースホルダ（slot 部品は描画しない） */
   slotId: string;
   /** 広告フォーマット */
   format: AdFormat;
@@ -32,8 +32,14 @@ export const RANKING_PAGE_SIDEBAR: AdSlotConfig = {
   format: "skyscraper",
 };
 
-/** メインサイドバー: カテゴリ選択の下 */
-export const MAIN_SIDEBAR: AdSlotConfig = {
+/**
+ * 右レール共通のレクタングル枠（RailAdSlot 用）
+ * 旧 MAIN_SIDEBAR（未使用スロット 7716393084）を転用。category / areas の右レールに配置する。
+ * ADSENSE-SLOT-DEDUPE-01: 同一ページ内で slot を二重使用していた不具合
+ * （category は 6137206504 を rail+本文で重複、areas は 6180558947 を 3 回）を、
+ * 右レール専用の独立スロットに寄せて解消するためのユニット。
+ */
+export const RAIL_RECT: AdSlotConfig = {
   slotId: "7716393084",
   format: "rectangle",
 };
@@ -82,6 +88,20 @@ export const RANKING_INCONTENT_MOBILE: AdSlotConfig = {
 export const THEMES_CONTENT: AdSlotConfig = {
   slotId: "4317152551",
   format: "rectangle",
+};
+
+/**
+ * ハブ / 一覧ページ共通の記事内広告（fluid / in-article）
+ * top / category / theme / blog一覧 / survey / tag のセクション区切りに 1 枠だけ配置する。
+ * ADSENSE-HUB-INCONTENT-01: モバイル imp/PV（W26 実測 0.37）改善のためハブ面に in-content を新設。
+ * ranking 詳細の RANKING_INCONTENT_MOBILE とは別ユニットにして units.csv で効果を分離する。
+ *
+ * ★人間タスク: AdSense 管理画面で「stats47-hub-incontent」記事内/fluid ユニットを 1 件発行し
+ *   slotId を記入する。空文字の間は InContentAdSlot が描画されない（graceful degradation）。
+ */
+export const HUB_INCONTENT: AdSlotConfig = {
+  slotId: "",
+  format: "article",
 };
 
 /**
