@@ -215,7 +215,9 @@ export async function exportRankingItemsPerUrl(): Promise<ExportRankingItemsPerU
       groupKey: r.groupKey ?? null,
       isFeatured: r.isFeatured ?? false,
       // 出典 (原典調査)。UI が「出典: ◯◯調査」表示に使う。SSDS は複数原典あり。
-      originalSurveys: resolveItemOriginalSurveys(r).map((s) => s.id),
+      // builder 焼き込み済み surveyIds を優先し、stale item は従来解決 (SSDS のみ) にフォールバック。
+      originalSurveys:
+        r.surveyIds ?? resolveItemOriginalSurveys(r).map((s) => s.id),
     }));
 
     const body = JSON.stringify({

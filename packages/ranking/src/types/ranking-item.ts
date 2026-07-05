@@ -2,7 +2,7 @@
  * ランキング項目の型定義
  * 2026-01 設計見直しにより構造を階層化
  */
-import type { SourceAttribution } from "@stats47/data-configs";
+import type { ProvenanceSurvey, SourceAttribution } from "@stats47/data-configs";
 import type { AreaType } from "@stats47/types";
 import type {
     ColorSchemeType,
@@ -253,8 +253,20 @@ export interface RankingItem {
   calculation?: CalculationConfig | null;
 
   // === 外部参照 ===
-  /** 調査ID（surveys テーブルへの参照） */
+  /**
+   * 調査ID（surveys マスタへの主参照）。`config.surveyId ?? surveyIds[0] ?? null`。
+   * 後方互換の単数形。複数調査 (SSDS) は surveyIds を見る。
+   */
   surveyId?: string | null;
+  /**
+   * この統計が属する調査 id 群 (builder が config.source から決定的導出して焼き込む)。
+   * surveys.json に実在する id のみ (合成 id `ssds-src:`/`src:` は除外)。
+   * SSDS (二次統計) は複数原典を持ちうる。空配列 = 未分類 (UI は調査カード非表示)。
+   * 正典: .claude/rules/survey-linkage-standards.md
+   */
+  surveyIds?: string[];
+  /** surveyIds に対応する表示用 {id,name} (SurveyCard が追加 fetch なしで名前を出せる) */
+  originalSurveys?: ProvenanceSurvey[];
   /** データソースID */
   dataSourceId: string;
   /** データ取得設定 (e-Statパラメータ等) */

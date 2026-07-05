@@ -6,14 +6,22 @@
  * 年集合のみ。これにより「config を変えれば item.json が決まる」不変条件を保証し、
  * DBレス移行で壊れた「item.json が de-facto SSOT」状態を解消する。
  *
- * surveyId / tags は statsDataId から決定的導出不可な editorial データのため
- * MetricConfig.surveyId / MetricConfig.tags (backfill 済) を SSOT とする。
+ * tags は statsDataId から決定的導出不可な editorial データのため MetricConfig.tags を SSOT とする。
+ * survey 紐付け (surveyIds/originalSurveys) は config.source から provenance 辞書で**決定的導出**して
+ * 焼き込む (config.surveyId は手動オーバーライドとして優先)。正典: .claude/rules/survey-linkage-standards.md
  *
  * 関連: docs/01_技術設計/12_完全DBレス設計.md (metrics = Reference/再生成),
  *       コミット 67168f54 が残した follow-up の完成。
  */
-import type { MetricConfig } from "@stats47/data-configs";
+import {
+  resolveMetricProvenance,
+  type MetricConfig,
+  type MetricRegistry,
+  type ProvenanceSurvey,
+} from "@stats47/data-configs";
 import type { AreaType } from "@stats47/types";
+
+import surveysMaster from "../data/surveys.json";
 import type {
   ColorSchemeType,
   D3ColorScheme,
@@ -43,6 +51,38 @@ export interface BuildContext {
   now: string;
   /** 既存 item.json があれば createdAt を保持する (任意) */
   existing?: { createdAt?: string };
+  /** calculated metric の分子/分母から survey を辿るための registry (任意) */
+  registry?: MetricRegistry;
+}
+
+/** surveys.json に実在する id (合成 id や辞書の stale id を配信に出さないための照合集合) */
+const SURVEY_MASTER_IDS = new Set(
+  (surveysMaster as Array<{ id: string }>).map((s) => s.id),
+);
+
+/**
+ * config.source → surveys マスタ実在の調査群を決定的導出する。
+ * 優先順位: config.surveyId (手動オーバーライド) > provenance 辞書導出 > 空 (未分類)。
+ * 合成 id (`ssds-src:` / `src:`) とマスタ非実在 id は配信に出さない。
+ */
+export function resolveSurveyLinkage(
+  config: MetricConfig,
+  registry?: MetricRegistry,
+): { surveyIds: string[]; originalSurveys: ProvenanceSurvey[] } {
+  const resolved = resolveMetricProvenance(config, registry).filter((s) =>
+    SURVEY_MASTER_IDS.has(s.id),
+  );
+  if (config.surveyId && SURVEY_MASTER_IDS.has(config.surveyId)) {
+    // 手動オーバーライドを先頭にし、辞書導出の残り (SSDS 複数原典) を後続に保つ
+    const rest = resolved.filter((s) => s.id !== config.surveyId);
+    const master = (surveysMaster as Array<{ id: string; name: string }>).find(
+      (s) => s.id === config.surveyId,
+    );
+    const head: ProvenanceSurvey = { id: config.surveyId, name: master?.name ?? config.surveyId };
+    const originalSurveys = [head, ...rest];
+    return { surveyIds: originalSurveys.map((s) => s.id), originalSurveys };
+  }
+  return { surveyIds: resolved.map((s) => s.id), originalSurveys: resolved };
 }
 
 /** config.yearFormat に応じた yearName ("YYYY年度" / "YYYY年")。page-data-batch と同一規約 */
@@ -134,6 +174,7 @@ export function buildRankingItemFromMetric(
   ctx: BuildContext,
 ): RankingItem {
   const { latestYear, availableYears } = buildYears(config, ctx.values);
+  const { surveyIds, originalSurveys } = resolveSurveyLinkage(config, ctx.registry);
 
   return {
     rankingKey: config.key,
@@ -153,7 +194,9 @@ export function buildRankingItemFromMetric(
     valueDisplay: buildValueDisplay(config),
     visualization: buildVisualization(config),
     calculation: buildCalculation(config),
-    surveyId: config.surveyId ?? null,
+    surveyId: config.surveyId ?? surveyIds[0] ?? null,
+    surveyIds,
+    originalSurveys,
     dataSourceId: config.source?.kind ?? "estat",
     sourceConfig: buildSourceProvenance(config),
     seoTitle: config.seoTitle ?? null,
