@@ -1,0 +1,20 @@
+{
+  "generatedAt": "2026-07-05T13:34:13.936Z",
+  "date": "2026-07-05",
+  "days": 28,
+  "dimensions": [],
+  "hasCategoryBreakdown": false,
+  "hasVariantBreakdown": false,
+  "totals": {
+    "impressions": 8973,
+    "clicks": 10,
+    "ctr": 0.0011144544745347153
+  },
+  "rows": [
+    {
+      "impressions": 8973,
+      "clicks": 10,
+      "ctr": 0.0011144544745347153
+    }
+  ]
+}
