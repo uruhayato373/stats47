@@ -1,4 +1,5 @@
 import { SurfaceCard } from "@/components/surface";
+
 import { AdSenseAd, type AdSlotConfig } from "@/lib/google-adsense";
 
 interface RailAdSlotProps {

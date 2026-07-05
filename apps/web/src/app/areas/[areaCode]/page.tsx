@@ -14,6 +14,7 @@ import { isOk } from "@stats47/types";
 import { PageShell } from "@/components/layout";
 import { RightRailWidgets } from "@/components/rail";
 
+import { InContentAdSlot, RailAdSlot } from "@/features/ads";
 import {
     AreaProfilePageClient,
     AreaProfileSidebar,
@@ -27,7 +28,6 @@ import {
     generateAreaProfileBreadcrumbStructuredData,
     generateAreaProfileStructuredData,
 } from "@/features/area-profile";
-import { InContentAdSlot, RailAdSlot } from "@/features/ads";
 import { getAreaProfileAction } from "@/features/area-profile/server";
 import { listCategories } from "@/features/category/server";
 
