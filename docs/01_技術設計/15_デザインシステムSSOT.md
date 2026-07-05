@@ -70,10 +70,22 @@ stats47 の UI は、統計データを長時間読むための道具である�
 
 ### 採用
 
-- ページ h1: `PageHeader` 内の `text-2xl font-bold`
-- 本文: system font stack。Web フォント追加はしない。
-- 補助文: `text-muted-foreground`
-- 日本語本文で字間を詰めない。
+エディトリアル / データ誌風（白基調・罫線主導・sans の weight で階層を作る。serif は導入しない）。
+見出しは 6 段スケールに固定する:
+
+| Tier | ユーティリティ | 用途 |
+|---|---|---|
+| display | `text-2xl sm:text-3xl font-bold` | blog 記事タイトル（記事レンダラ）・home/hero の大見出しのみ |
+| h1 | `text-2xl font-bold leading-tight` | `PageHeader` 内の h1（ページ唯一の h1） |
+| h2 | `text-lg font-bold` | セクション見出し。**`SectionHeader`（`@/components/section`）経由のみ** |
+| h3 | `text-sm`〜`text-base font-semibold` | カード / 項目タイトル |
+| eyebrow | `text-[11px] font-semibold uppercase text-muted-foreground` | ラベル（PageHeader / SectionHeader の eyebrow） |
+| caption | `text-xs text-muted-foreground` | meta・出典・注記 |
+
+- ページ内のセクション見出し（h2）は `SectionHeader` を使う（eyebrow → h2 → description を `border-b` 罫線で締める）。生の `<h2>` を page.tsx に直書きしない。
+- 統計数値（順位・値・年度）は `tabular-nums`（ランキング系は `font-mono tabular-nums`）で桁を揃える。
+- 本文: system font stack。Web フォント追加はしない（日本語 serif も LCP 悪化のため不採用）。
+- 補助文: `text-muted-foreground`。日本語本文で字間を詰めない。
 
 ### 禁止
 
@@ -84,7 +96,8 @@ stats47 の UI は、統計データを長時間読むための道具である�
 
 ## 色
 
-アプリ UI は semantic token を優先する。
+アプリ UI は semantic token を優先する。地の背景 `--background` は純白（`0 0% 100%`）で、
+カードとの境界は色差ではなく `border`（罫線）が担う（エディトリアル / データ誌風）。
 
 ### 優先トークン
 
@@ -125,6 +138,10 @@ stats47 の UI は、統計データを長時間読むための道具である�
 - `TrackedAffiliateLink` など Next `Link` 以外のクリック可能カード: `getSurfaceCardClassName({ interactive: true })`
 - rail / sidebar 内の見出し付きカード: `RailCard`
 - rail / sidebar 内の縦リンクリスト: `RailLinkList` / `RailLinkItem`
+- セクション見出し（eyebrow → h2 → description + 罫線）: `SectionHeader` (`@/components/section`)
+- パンくず（視覚 UI + BreadcrumbList JSON-LD 一体）: `Breadcrumbs` (`@/components/layout`)。top 以外の content / hub / list ページで PageShell 直下の先頭に置く
+- 全ページ共通の右レール: `RightRailWidgets` (`@/components/rail`)。関連 widget は `topWidgets`、広告・promo は本コンポーネントが供給する
+- 標準広告スロット: 本文中 `InContentAdSlot` / コンテンツ末尾 `FooterAdSlot`（Multiplex 全幅）/ 右レール `RailAdSlot` (`@/features/ads`)。slotId 未発行（空文字）の間は描画しない（graceful degradation）
 - チャート・地図など可視化の外枠: `ChartPanel`
 - チャートの loading / empty / error 表示: `ChartLoading` / `ChartEmptyState` / `ChartErrorState` / `ChartLoadingCard` (`apps/web/src/components/charts/ChartState.tsx`)
 - チャートの出典・注記・関連リンク: `ChartFooter` (`apps/web/src/components/charts/ChartFooter.tsx`)
@@ -143,6 +160,10 @@ stats47 の UI は、統計データを長時間読むための道具である�
 
 - `rounded-none border bg-card p-4 shadow-sm ...` を各ページで何度も直書きする。
 - sidebar / rail ごとに `SurfaceCard + border-b header + nav` を手組みする。
+- page.tsx でセクション見出しを生の `<h2>` で書く（`SectionHeader` を使う）。
+- page.tsx で右レールを `div` 手組みする（`RightRailWidgets` を使う）。
+- 同一ページで同じ AdSense slot を複数箇所に置く（rail と本文で同じ slot 等）。用途別の別 slot を使う。
+- `features/redesign` を再作成・再 import する（解体済み。上記の正規配置を使う）。
 - 地図専用・ブログ専用・ランキング専用など、外枠だけが違うカードコンポーネントを増やす。
 - `MapPanel` のような `ChartPanel` と責務が重なる可視化パネルを新設する。
 - `データがありません` / `読み込み中` / `チャートを表示できません` の空・読込・エラー状態を feature ごとに直書きする。
@@ -184,6 +205,16 @@ stats47 は 2026-06 以降、フラット方針。
 
 ## ページ種別ごとのルール
 
+### 共通テンプレート（top 以外）
+
+`PageShell` → `Breadcrumbs`（top 以外必須） → `PageHeader` → `SectionHeader` 付きセクション列 → `rightRail`。
+
+- パンくずは content / hub / list ページで必須（top・法務・utility は除外）。theme 詳細・area×theme は `ThemePageLayout` 側が描画する（page.tsx に文字列が無くてもよい）。
+- セクション間の余白は `mt-12`（密なダッシュボード内は `mt-8`）。
+- 右レールを持つページは `RightRailWidgets` を使う。`rightRailBreakpoint="lg"` は読み物（blog 詳細）と ranking 詳細のみ、他は既定 xl。
+- home の `FeaturedRankings` 全幅バンドは PageShell 外に出す唯一の例外。
+- 広告は用途別スロット（`InContentAdSlot` / `FooterAdSlot` / `RailAdSlot`）で置き、同一 slot の同一ページ重複を作らない。ハブ面の記事内広告（fluid）はページ 1 枠まで。
+
 ### Blog
 
 - 一覧、タグ、詳細の外側レイアウトは `PageShell` を使う。
@@ -224,6 +255,8 @@ UI 変更をするエージェントは、作業前にこの文書の該当節�
 - `npm run design-system:check --workspace apps/web` が通るか。
 - `PageShell` / `PageHeader` を使うべき場所で使ったか。
 - `container mx-auto` / `max-w-[...]` を新規追加していないか。
+- セクション見出しを `SectionHeader`、page 見出しを `PageHeader` 経由にしたか（生 `<h2>` / `<h1>` を page.tsx に足していないか）。
+- top 以外の content / hub / list ページに `Breadcrumbs` を置いたか。
 - `text-slate-*` / `bg-white` / raw hex を通常 UI に追加していないか。
 - 同じカード class を複数箇所に直書きしていないか。
 - shadcn/Radix primitive を再実装していないか。
@@ -241,3 +274,7 @@ UI 変更をするエージェントは、作業前にこの文書の該当節�
 4. チャート色の raw hex を共有定義へ寄せる。
 
 大規模置換は、見た目の回帰確認ができる単位で分ける。
+
+## 変更履歴
+
+- 2026-07-05: サイト全体のデザイン統一（エディトリアル / データ誌風）。`--background` 純白化・`SectionHeader` / `Breadcrumbs` 新設・`features/redesign` 解体（`RightRailWidgets` → `@/components/rail` / `NativeAffiliateRow` → `@/features/ads`）・標準広告スロット（`InContentAdSlot` / `FooterAdSlot` / `RailAdSlot`）新設・同一 slot 重複 3 件是正（category / survey / areas）。`design-system:check` に `no-redesign-import` / `no-raw-h2-in-page` / `no-raw-h1-outside-header` を追加。

@@ -1,5 +1,5 @@
 import type { ResolvedAffiliateBanner } from "@/features/ads/services/resolve-affiliate-ad";
-import { NativeAffiliateRow } from "@/features/redesign";
+import { NativeAffiliateRow } from "@/features/ads";
 
 interface RankingPageNativeAffiliateSectionProps {
   banners: ResolvedAffiliateBanner[];

@@ -12,11 +12,14 @@ import {
 import { loadPageComponents } from "@/components/stat-charts/server";
 import { prefetchThemeKpiData } from "@/components/stat-charts/services/prefetch-theme-kpi";
 
-import { SidebarPromoBanner } from "@/features/ads";
+import {
+  InContentAdSlot,
+  NativeAffiliateRow,
+  SidebarPromoBanner,
+} from "@/features/ads";
 import { resolveAffiliateBanners } from "@/features/ads/server";
-import { NativeAffiliateRow } from "@/features/redesign";
 
-import { AdSenseAd, THEMES_CONTENT } from "@/lib/google-adsense";
+import { AdSenseAd, HUB_INCONTENT, THEMES_CONTENT } from "@/lib/google-adsense";
 
 import { THEME_SECTION_REGISTRY } from "../config/theme-section-registry";
 import {
@@ -127,6 +130,9 @@ export async function ThemePageLayout({ theme, data, areaContext }: Props) {
         kpiDataByArea={kpiDataByArea}
         highlightAreaCode={areaContext?.areaCode}
       />
+
+      {/* 記事内広告（ダッシュボード直後・ページ 1 枠まで。slotId 未発行の間は非表示） */}
+      <InContentAdSlot slot={HUB_INCONTENT} />
 
       {/*
         埋め込み GIS セクション (人口移動 Sankey / 高速道路タイムライン / 駅乗降 /

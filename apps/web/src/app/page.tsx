@@ -6,12 +6,15 @@ import { Metadata } from "next";
 
 import { ThemeAwareImage } from "@/components/atoms/ThemeAwareImage";
 import { PageShell, PageHeader } from "@/components/layout";
+import { SectionHeader } from "@/components/section";
 import { SurfaceLinkCard } from "@/components/surface";
 
+import { InContentAdSlot, FooterAdSlot, NativeAffiliateRow } from "@/features/ads";
+import { resolveAffiliateBanners } from "@/features/ads/server";
 import { listLatestArticles } from "@/features/blog/server";
 import { FeaturedRankings } from "@/features/ranking/server";
 
-import { AdSenseAd, RANKING_PAGE_FOOTER } from "@/lib/google-adsense";
+import { HUB_INCONTENT } from "@/lib/google-adsense";
 
 /**
  * 動的レンダリング（ランタイム SSR）を強制する。
@@ -134,7 +137,10 @@ const DISCOVERY_CARDS = [
 ];
 
 export default async function HomePage() {
-  const latestArticles = await listLatestArticles(4).catch(() => []);
+  const [latestArticles, nativeBanners] = await Promise.all([
+    listLatestArticles(4).catch(() => []),
+    resolveAffiliateBanners(["economy", "population", "labor"], 4).catch(() => []),
+  ]);
 
   return (
     <div className="w-full" suppressHydrationWarning>
@@ -170,13 +176,16 @@ export default async function HomePage() {
         />
       </PageShell>
 
-      {/* ② 注目のランキング（主役・全幅バンド） */}
+      {/* ② 注目のランキング（主役・全幅バンド。PageShell 外の唯一の全幅例外） */}
       <FeaturedRankings limit={8} />
 
       <PageShell>
+        {/* 記事内広告（注目ランキング後・ページ 1 枠まで。slotId 未発行の間は非表示） */}
+        <InContentAdSlot slot={HUB_INCONTENT} className="mt-0 mb-12" />
+
         {/* ③ データを探す（主要動線 3 枚） */}
         <section>
-          <h2 className="mb-4 text-lg font-bold">データを探す</h2>
+          <SectionHeader title="データを探す" />
           <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
             {DISCOVERY_CARDS.map((card) => {
               const Icon = card.icon;
@@ -206,15 +215,17 @@ export default async function HomePage() {
         {/* ④ 統計ブログ */}
         {latestArticles.length > 0 && (
           <section className="mt-12">
-            <div className="mb-4 flex items-center justify-between">
-              <h2 className="text-lg font-bold">統計ブログ</h2>
-              <Link
-                href="/blog"
-                className="text-sm font-semibold text-primary hover:underline"
-              >
-                すべての記事 →
-              </Link>
-            </div>
+            <SectionHeader
+              title="統計ブログ"
+              action={
+                <Link
+                  href="/blog"
+                  className="font-semibold text-primary hover:underline"
+                >
+                  すべての記事 →
+                </Link>
+              }
+            />
             <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
               {latestArticles.map((article) => {
                 const r2 =
@@ -249,13 +260,20 @@ export default async function HomePage() {
           </section>
         )}
 
-        {/* ⑤ AdSense (footer) */}
-        <div className="mt-12 flex justify-center">
-          <AdSenseAd
-            format={RANKING_PAGE_FOOTER.format}
-            slotId={RANKING_PAGE_FOOTER.slotId}
-          />
-        </div>
+        {/* ⑤ 関連書籍・商品（ネイティブアフィリエイト） */}
+        {nativeBanners.length > 0 && (
+          <div className="mt-12">
+            <NativeAffiliateRow
+              title="統計・データ分析の関連書籍"
+              banners={nativeBanners}
+              position="home-native"
+              trackingCategory="home"
+            />
+          </div>
+        )}
+
+        {/* ⑥ コンテンツ末尾の全幅フッター広告 */}
+        <FooterAdSlot />
       </PageShell>
     </div>
   );

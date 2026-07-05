@@ -1,11 +1,12 @@
 
-import { PageShell, PageHeader } from "@/components/layout";
+import { PageShell, PageHeader, Breadcrumbs } from "@/components/layout";
+import { RightRailWidgets } from "@/components/rail";
 import { SurfaceLinkCard } from "@/components/surface";
 
-import { RightRailWidgets } from "@/features/redesign";
+import { InContentAdSlot, FooterAdSlot } from "@/features/ads";
 import { ALL_THEMES } from "@/features/theme-dashboard/server";
 
-import { AdSenseAd, CONTENT_FOOTER } from "@/lib/google-adsense";
+import { HUB_INCONTENT } from "@/lib/google-adsense";
 import { generateOGMetadata } from "@/lib/metadata/og-generator";
 
 import type { Metadata } from "next";
@@ -31,6 +32,12 @@ export default function ThemesPage() {
 
   return (
     <PageShell rightRail={<RightRailWidgets />}>
+      <Breadcrumbs
+        items={[
+          { label: "ホーム", href: "/" },
+          { label: "テーマ" },
+        ]}
+      />
       <PageHeader
         eyebrow="ディスカバリー"
         title="テーマダッシュボード"
@@ -45,9 +52,9 @@ export default function ThemesPage() {
             href={`/themes/${theme.themeKey}`}
             className="block"
           >
-            <h2 className="text-base font-semibold text-foreground">
+            <h3 className="text-base font-semibold text-foreground">
               {theme.title}
-            </h2>
+            </h3>
             <p className="mt-1 text-sm text-muted-foreground line-clamp-2">
               {theme.description}
             </p>
@@ -58,9 +65,11 @@ export default function ThemesPage() {
         ))}
       </div>
 
-      <div className="mt-10">
-        <AdSenseAd format={CONTENT_FOOTER.format} slotId={CONTENT_FOOTER.slotId} />
-      </div>
+      {/* 記事内広告（一覧グリッド後。slotId 未発行の間は非表示） */}
+      <InContentAdSlot slot={HUB_INCONTENT} />
+
+      {/* コンテンツ末尾の全幅フッター広告 */}
+      <FooterAdSlot />
     </PageShell>
   );
 }

@@ -19,8 +19,15 @@ import { isOk } from "@stats47/types";
 import { generateMiniTileSvg } from "@stats47/visualization/server";
 
 import { ThemeAwareImage } from "@/components/atoms/ThemeAwareImage";
-import { PageShell, PageHeader } from "@/components/layout";
+import { PageShell, PageHeader, Breadcrumbs } from "@/components/layout";
+import { RightRailWidgets } from "@/components/rail";
+import { SectionHeader } from "@/components/section";
 
+import {
+  InContentAdSlot,
+  FooterAdSlot,
+  NativeAffiliateRow,
+} from "@/features/ads";
 import { resolveAffiliateBanners } from "@/features/ads/server";
 import { listLatestArticles } from "@/features/blog/server";
 import { findCategoryByKey } from "@/features/category/server";
@@ -32,13 +39,8 @@ import {
   type CategoryRankingListItem,
 } from "@/features/ranking";
 import { readRankingItemsByCategory } from "@/features/ranking/server";
-import {
-  NativeAffiliateRow,
-  SectionEyebrow,
-  InfeedAd,
-} from "@/features/redesign";
 
-import { AdSenseAd, RANKING_PAGE_FOOTER, CONTENT_FOOTER } from "@/lib/google-adsense";
+import { HUB_INCONTENT } from "@/lib/google-adsense";
 import { generateOGMetadata } from "@/lib/metadata/og-generator";
 
 import type { Metadata } from "next";
@@ -275,8 +277,9 @@ export default async function CategoryPage({ params }: PageProps) {
     .filter(Boolean)
     .join(" ・ ");
 
-  const rightRail = (
-    <div className="flex flex-col gap-4">
+  // 右レールの本文関連ウィジェット（新着記事 + 調査ナビ）。広告・promo は RightRailWidgets が供給する。
+  const railTopWidgets = (
+    <>
       {/* 新着記事 */}
       {latestArticles.length > 0 && (
         <div>
@@ -305,19 +308,19 @@ export default async function CategoryPage({ params }: PageProps) {
         </div>
       )}
 
-      {/* 広告 */}
-      <AdSenseAd
-        format={RANKING_PAGE_FOOTER.format}
-        slotId={RANKING_PAGE_FOOTER.slotId}
-      />
-
       {/* 調査から探す */}
       <SurveyCard surveys={surveysResult.map((s) => ({ id: s.id, name: s.name }))} />
-    </div>
+    </>
   );
 
   return (
-    <PageShell rightRail={rightRail}>
+    <PageShell rightRail={<RightRailWidgets topWidgets={railTopWidgets} />}>
+      <Breadcrumbs
+        items={[
+          { label: "ホーム", href: "/" },
+          { label: category.categoryName },
+        ]}
+      />
       <PageHeader
         eyebrow="カテゴリ"
         title={category.categoryName}
@@ -332,10 +335,11 @@ export default async function CategoryPage({ params }: PageProps) {
       <div className="min-w-0">
           {/* 注目ランキング */}
           {featuredItems.length > 0 && (
-            <section className="mb-8">
-              <SectionEyebrow number="1.">
-                {usingFallbackFeatured ? "主要なランキング" : "注目のランキング"}
-              </SectionEyebrow>
+            <section className="mb-12">
+              <SectionHeader
+                number="1"
+                title={usingFallbackFeatured ? "主要なランキング" : "注目のランキング"}
+              />
               <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
                 {featuredItems.map((item) => (
                   <FeaturedRankingCard
@@ -354,25 +358,21 @@ export default async function CategoryPage({ params }: PageProps) {
           )}
 
           {/* 全件テーブル */}
-          <section className="mb-8">
-            <SectionEyebrow number="2.">
-              全{rankingItems.length}件のランキング
-            </SectionEyebrow>
+          <section className="mb-12">
+            <SectionHeader
+              number="2"
+              title={`全${rankingItems.length}件のランキング`}
+            />
             <CategoryRankingTable items={allItems} />
           </section>
 
-          {/* In-feed AdSense */}
-          <div className="mb-8">
-            <InfeedAd
-              slotId={CONTENT_FOOTER.slotId}
-              format={CONTENT_FOOTER.format}
-            />
-          </div>
+          {/* 記事内広告（ハブ面・ページ 1 枠まで。slotId 未発行の間は非表示） */}
+          <InContentAdSlot slot={HUB_INCONTENT} />
 
           {/* ネイティブアフィリエイト */}
           {nativeBanners.length > 0 && (
-            <section className="mb-8">
-              <SectionEyebrow number="3.">このカテゴリで読む</SectionEyebrow>
+            <section className="mb-12">
+              <SectionHeader number="3" title="このカテゴリで読む" />
               <NativeAffiliateRow
                 title={`${category.categoryName}の関連書籍・商品`}
                 banners={nativeBanners}
@@ -383,13 +383,12 @@ export default async function CategoryPage({ params }: PageProps) {
           )}
 
           {/* 47都道府県から探す (category→area 内部リンク。回遊性 / クロール深度の改善) */}
-          <section className="mb-8" aria-labelledby="category-area-links">
-            <SectionEyebrow number={nativeBanners.length > 0 ? "4." : "3."}>
-              <span id="category-area-links">47都道府県から探す</span>
-            </SectionEyebrow>
-            <p className="mb-4 text-sm text-muted-foreground">
-              {category.categoryName}を含む各都道府県の統計プロファイルを見る
-            </p>
+          <section className="mb-12" aria-labelledby="category-area-links">
+            <SectionHeader
+              number={nativeBanners.length > 0 ? "4" : "3"}
+              title={<span id="category-area-links">47都道府県から探す</span>}
+              description={`${category.categoryName}を含む各都道府県の統計プロファイルを見る`}
+            />
             <div className="space-y-4">
               {REGIONS.map((region) => {
                 const regionPrefs = region.prefectures
@@ -420,6 +419,9 @@ export default async function CategoryPage({ params }: PageProps) {
               })}
             </div>
           </section>
+
+          {/* コンテンツ末尾の全幅フッター広告 */}
+          <FooterAdSlot />
       </div>
     </PageShell>
   );
