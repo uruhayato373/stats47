@@ -1,14 +1,15 @@
 /**
  * survey バケット解決ロジック (純粋関数)。exporter から呼ぶ。
  *
- * 背景: ranking item の baked `surveyId` (旧マスタ由来) は、SSDS (社会・人口統計体系=二次統計) 由来の
- * item で頻繁に誤分類されている (実測: SSDS item の 62.9% がミスバケット)。一方、非SSDS の一次統計
- * (国勢調査・家計調査 等) は baked surveyId が正しい (resolver 一致率 95.5%)。
+ * 2026-07 再設計 (正典: .claude/rules/survey-linkage-standards.md):
+ * 紐付けの正は builder (`build-ranking-item-from-metric.ts` の `resolveSurveyLinkage`) が
+ * config.source から決定的導出して item.json に焼き込む **`surveyIds`**。本モジュールは
+ * それを尊重してバケットするだけ。焼き込み前の stale item に対しては sourceConfig からの
+ * 再解決 (SSDS=cdCat01 / kakei=kind / 非SSDS=statsDataId 辞書) を安全網として持つ。
  *
- * よって **再分配は SSDS 由来 item に限定**する:
- *   - SSDS item  → sourceConfig.cdCat01 から resolveSourceProvenance で原典 survey を解決して再分配
- *                  (解決できなければ baked surveyId にフォールバック = 無regression)
- *   - 非SSDS item → baked surveyId をそのまま使う (変更なし)
+ * 旧背景: baked `surveyId` (旧 D1 マスタ由来) は SSDS item の 62.9% がミスバケットだった。
+ * また 2026-06-07 の item.json 再生成で surveyId が全 null 化し、非SSDS を baked 依存で
+ * バケットすると全滅する時限バグがあった (本再設計で解消)。
  *
  * 1 つの SSDS item が複数原典を持つ場合は複数バケットに入る (正しい挙動)。
  */
@@ -60,13 +61,26 @@ function isSyntheticSurveyId(id: string): boolean {
 
 /**
  * item を入れるべき survey バケット id の集合。
- *   - SSDS: 解決した原典 survey id 群 (マスタに無い合成 id は除外。残らなければ baked にフォールバック)
- *   - 非SSDS: baked surveyId のみ
+ *   1. baked `surveyIds` (builder が config から決定的導出して焼き込んだ正) があれば最優先
+ *   2. 無ければ (stale item.json への安全網) sourceConfig から再解決:
+ *      - SSDS: cdCat01 → 原典 survey 群 (合成 id 除外。残らなければ baked surveyId)
+ *      - kakei-chousa kind: 固定で kakei-chousa
+ *      - 非SSDS estat: statsDataId → survey 辞書
+ *      - それでも無ければ baked surveyId (旧マスタ由来) にフォールバック
+ * 正典: .claude/rules/survey-linkage-standards.md
  */
 export function surveyBucketsForItem(item: RankingItem): string[] {
+  // 1. builder 焼き込み済み (2026-07 以降の item.json)。空配列は「未分類が確定」なので尊重する
+  if (item.surveyIds !== undefined) {
+    return item.surveyIds.filter((id) => !isSyntheticSurveyId(id));
+  }
+  // 2. 安全網: 焼き込み前の stale item から従来解決
   const baked = item.surveyId ? [item.surveyId] : [];
-  if (!isSsdsItem(item)) return baked;
-  const resolved = resolveItemOriginalSurveys(item)
+  if (item.dataSourceId === "kakei-chousa") return ["kakei-chousa"];
+  const resolved = resolveProvenanceByParams(
+    item.sourceConfig?.statsDataId,
+    item.sourceConfig?.cdCat01,
+  )
     .map((s) => s.id)
     .filter((id) => !isSyntheticSurveyId(id));
   return resolved.length > 0 ? resolved : baked;

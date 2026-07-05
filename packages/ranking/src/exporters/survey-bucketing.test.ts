@@ -26,9 +26,35 @@ function item(partial: Partial<RankingItem>): RankingItem {
 }
 
 describe("survey-bucketing (param 統一)", () => {
-  it("非SSDS item は baked surveyId をそのまま使う", () => {
+  it("baked surveyIds (builder 焼き込み) があれば最優先", () => {
     const it1 = item({
-      surveyId: "wage-structure-survey",
+      surveyId: "census", // 旧 baked (誤り) が残っていても
+      surveyIds: ["kakei-chousa"], // 焼き込みが正
+      sourceConfig: { statsDataId: NON_SSDS } as never,
+    });
+    expect(surveyBucketsForItem(it1)).toEqual(["kakei-chousa"]);
+  });
+
+  it("baked surveyIds が空配列 = 未分類確定。baked surveyId にフォールバックしない", () => {
+    const it1 = item({
+      surveyId: "ssds",
+      surveyIds: [],
+      sourceConfig: { statsDataId: SSDS_TABLE, cdCat01: "ZZZ9999" } as never,
+    });
+    expect(surveyBucketsForItem(it1)).toEqual([]);
+  });
+
+  it("kakei-chousa kind は surveyIds 未焼き込みでも kakei-chousa に入る (stale 安全網)", () => {
+    const it1 = item({
+      surveyId: null,
+      dataSourceId: "kakei-chousa",
+    });
+    expect(surveyBucketsForItem(it1)).toEqual(["kakei-chousa"]);
+  });
+
+  it("非SSDS estat は surveyIds 未焼き込みなら statsDataId 辞書で解決 (stale 安全網)", () => {
+    const it1 = item({
+      surveyId: null, // 2026-06-07 再生成で null 化した stale item を想定
       sourceConfig: { statsDataId: NON_SSDS } as never,
     });
     expect(isSsdsItem(it1)).toBe(false);

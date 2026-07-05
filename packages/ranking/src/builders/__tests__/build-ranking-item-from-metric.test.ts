@@ -110,14 +110,37 @@ describe("buildRankingItemFromMetric", () => {
     expect(item.availableYears).toBeNull();
   });
 
-  it("surveyId/tags 省略時は null / [] にフォールバック", () => {
+  it("surveyId 省略時は source から決定的導出 (A1101=SSDS → census+population-estimates)", () => {
     const { surveyId: _s, tags: _t, ...noEditorial } = baseConfig;
     const item = buildRankingItemFromMetric(noEditorial as MetricConfig, {
       values: null,
       now: NOW,
     });
-    expect(item.surveyId).toBeNull();
+    // config.surveyId 無し → provenance 辞書導出が surveyIds/originalSurveys/surveyId を埋める
+    const ids = [...(item.surveyIds ?? [])];
+    expect([...ids].sort()).toEqual(["census", "population-estimates"]);
+    expect(item.surveyId).toBe(ids[0] ?? null); // 主参照は導出順の先頭
+    expect((item.originalSurveys ?? []).map((s) => s.id)).toEqual(ids);
     expect(item.tags).toEqual([]);
+  });
+
+  it("config.surveyId は手動オーバーライドとして先頭に来る", () => {
+    const item = buildRankingItemFromMetric(baseConfig, { values: null, now: NOW });
+    expect(item.surveyId).toBe("census");
+    expect(item.surveyIds?.[0]).toBe("census");
+  });
+
+  it("導出不能な source (external displayName なし相当) は surveyIds=[] (未分類)", () => {
+    const item = buildRankingItemFromMetric(
+      {
+        ...baseConfig,
+        surveyId: undefined,
+        source: { kind: "estat", statsDataId: "9999999999" },
+      } as MetricConfig,
+      { values: null, now: NOW },
+    );
+    expect(item.surveyIds).toEqual([]);
+    expect(item.surveyId).toBeNull();
   });
 
   it("isActive/isFeatured/featuredOrder の undefined は false/false/0 に正規化", () => {

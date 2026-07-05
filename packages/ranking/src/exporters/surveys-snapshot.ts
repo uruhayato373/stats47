@@ -34,6 +34,7 @@ export interface ExportSurveysSnapshotResult {
  */
 export async function exportSurveysSnapshot(
   validSurveyIds?: Iterable<string>,
+  itemCounts?: Record<string, number>,
 ): Promise<ExportSurveysSnapshotResult> {
   const startedAt = Date.now();
 
@@ -41,9 +42,13 @@ export async function exportSurveysSnapshot(
   const allSurveys = JSON.parse(fs.readFileSync(dataPath, "utf-8")) as Source[];
 
   const validSet = validSurveyIds ? new Set(validSurveyIds) : null;
-  const surveys = validSet
+  const surveys = (validSet
     ? allSurveys.filter((s) => validSet.has(s.id))
-    : allSurveys;
+    : allSurveys
+  ).map((s) =>
+    // itemCount を焼き込む (/survey 一覧が all.json 1 fetch で件数を出せる)
+    itemCounts?.[s.id] !== undefined ? { ...s, itemCount: itemCounts[s.id] } : s,
+  );
 
   const snapshot: SurveysSnapshot = {
     generatedAt: new Date().toISOString(),

@@ -57,6 +57,23 @@ interface Row {
   subtitle: string | null;
   unit: string | null;
   category: string | null;
+  surveyId: string | null;
+}
+
+/**
+ * surveys マスタ (packages/ranking/src/data/surveys.json) の id 集合。
+ * config.surveyId は survey 紐付けの手動オーバーライド (正典: .claude/rules/survey-linkage-standards.md)。
+ * 実在しない id は配信で orphan リンクになるため error で弾く。
+ * ※ ranking パッケージを import すると循環依存になるため file 読みする。
+ */
+function loadSurveyMasterIds(): Set<string> | null {
+  try {
+    const p = resolve(__dirname, "../../ranking/src/data/surveys.json");
+    const list = JSON.parse(readFileSync(p, "utf8")) as Array<{ id: string }>;
+    return new Set(list.map((s) => s.id));
+  } catch {
+    return null; // マスタが読めない環境では本チェックをスキップ (他の lint は継続)
+  }
 }
 
 function normalizeTitle(title: string): string {
@@ -89,6 +106,7 @@ function main() {
       subtitle: strField(text, "subtitle"),
       unit: strField(text, "unit"),
       category: strField(text, "category"),
+      surveyId: strField(text, "surveyId"),
     });
   }
 
@@ -99,6 +117,18 @@ function main() {
   for (const r of rows) {
     if (r.category && !VALID_CATEGORIES.has(r.category)) {
       errors.push(`[category] ${r.file}: 無効な category "${r.category}" (17 軸のいずれかにする)`);
+    }
+  }
+
+  // error: surveyId (手動オーバーライド) が surveys マスタに実在しない
+  const surveyMasterIds = loadSurveyMasterIds();
+  if (surveyMasterIds) {
+    for (const r of rows) {
+      if (r.surveyId && !surveyMasterIds.has(r.surveyId)) {
+        errors.push(
+          `[survey-id] ${r.file}: surveyId "${r.surveyId}" が surveys.json に実在しない (packages/ranking/src/data/surveys.json)`,
+        );
+      }
     }
   }
 
