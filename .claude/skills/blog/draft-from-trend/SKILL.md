@@ -24,20 +24,34 @@ primary_agent: article-writer
 
 ```
 /draft-from-trend <metricKey | trend-snapshot-path | 自然文テーマ>
+/draft-from-trend --from queue        # topic-queue の pending 先頭を 1 本
 ```
 
 - `metricKey`: `packages/data-configs/src/metrics/<key>.ts` に実在し `isActive:true` の key (例 `public-phone-count`)。**実在チェック必須** (`feedback_backlog_ranking_key_audit`: AI が実在しない key を捏造しがち)。
 - `trend-snapshot-path` / 自然文: そこから metric を 1 つ選定して slug を確定する
+- `--from queue`: **記事ネタ選定キュー起点**。`node .claude/scripts/blog/build-topic-queue.mjs --next 1` で
+  次の pending 候補を取得し、その `archetype` / `metricKeys` / `suggestedTitle` を Step 1 の入力に使う。
+  取得したら `--mark-in-progress <topicKey>`、公開まで進んだら `--mark-done <topicKey> --slug <slug>` で
+  キュー状態を更新する。ネタ選定の仕組みは `.claude/skills/blog/plan-article-queue/SKILL.md`。
 
 ## 手順
 
 ### Step 1: テーマと metric の確定
 
-1. 入力 (metric key / トレンド / GSC ギャップ / ユーザー指示) から **記事 1 本ぶんの metric を 1〜2 個**選ぶ。
-   - archetype B (相関・真因) を狙うなら相関させる 2 metric (例 空き家率 × 高齢化率)。
+1. 入力 (metric key / topic-queue / トレンド / GSC ギャップ / ユーザー指示) から **記事 1 本ぶんの metric を 1〜2 個**選ぶ。
+   - archetype B (相関・真因) を狙うなら相関させる 2 metric (例 空き家率 × 高齢化率)。`--from queue` なら候補が metricKeys を持つ。
 2. **metric key の実在を確認**: `ls packages/data-configs/src/metrics/<key>.ts` と R2 `curl -sI https://storage.stats47.jp/app/stats/<key>/values.json` が 200 か。無ければ別 key に。
 3. `slug` を curiosity-gap を意識して確定 (英小文字 kebab)。既存公開記事と重複しないか `curl -s https://storage.stats47.jp/app/blog/all.json` で確認 (カニバリ防止)。
-4. **archetype を決める** (`.claude/rules/blog-quality-standards.md` の A〜E)。決めた型の必須分析視点に沿って書く。
+4. **archetype を決める** (`.claude/rules/blog-quality-standards.md` の A/B/C/D/D2/E/F/G)。決めた型の必須分析視点・章構成に沿って書く。
+
+**型別のデータ源** (`--from queue` の archetype に対応):
+
+| 型 | データ源 | Step 2 で作る data JSON |
+|---|---|---|
+| A / D2 | R2 `app/stats/<key>/values.json` | `<name>-prefecture-rankings.json` (+ D2 は `-tile-grid.json`) |
+| B | R2 `app/correlation/by-ranking-key/<key>.json` の scatterData (2 metric) | `<name>-scatter.json` + 各 metric の `-prefecture-rankings.json` |
+| F | `apps/web/public/finance-cards/cities/<pref>.json` + `similar-averages.json` | 県内市町村の `-ranking.json` + 類似団体比較 `-bar` |
+| G | R2 `app/stats/population-migration-inter-prefecture/migration-flow-<year>.json` | 転出先/転入元の `-ranking.json` |
 
 ### Step 2: データ接地 (R2 直)
 
@@ -47,7 +61,19 @@ node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug <slug> --keys <metric
 
 - 出力: `docs/21_ブログ記事原稿/<slug>/data/<key>-prefecture-rankings.json` (R2 公開 URL から取得・value 降順で rank 再計算・統一スキーマ `{areaName,rank,value,unit,label}`)。
 - 時系列が必要なら R2 `values.json` の全年を集計して `<name>-timeseries.json` を作る (全国合計/平均は本文の主張と一致させる)。
-- 散布図 (archetype B) は 2 metric の最新年を areaCode で join し `<name>-scatter.json` (`{title,xLabel,xUnit,yLabel,yUnit,points:[{x,y,label}]}`) を作る。
+- **散布図 (archetype B) は専用ヘルパーで生成** (相関 snapshot の scatterData を変換、手 join 不要):
+
+  ```bash
+  node .claude/scripts/blog/fetch-correlation-scatter.mjs --slug <slug> --base <metricA> --pair <metricB>
+  ```
+
+  出力 `<A>--<B>-scatter.json` (+ `.source.json`) が `{title,xLabel,xUnit,yLabel,yUnit,points}` スキーマ。
+  partialPop が弱いと warn が出る → 本文で「見かけの相関」を必ず言及する (相関≠因果)。B 型は上記に加え
+  両 metric の `-prefecture-rankings.json` (fetch-ranking-data-r2) も作り、上位5+下位5 で県の並びを対比する。
+- **F型 (市区町村内格差)**: `apps/web/public/finance-cards/cities/<pref>.json` + `similar-averages.json` を読み、
+  県内市町村を value 降順で `<name>-ranking.json` (統一スキーマ) に整形する。**数値は finance-cards JSON のみ使う**。
+- **G型 (移動フロー)**: R2 `app/stats/population-migration-inter-prefecture/migration-flow-<year>.json` から
+  対象県の転出先/転入元を集計して `<name>-ranking.json` にする。
 - **本文の数値・rank はこの data の値のみ使う** (捏造防止)。e-Stat 規約は `.claude/rules/estat-api.md`。
 
 ### Step 3: article.md 生成 (docs/21 outbox)

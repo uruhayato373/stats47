@@ -20,15 +20,20 @@ ranking を本番公開するための派生物パイプライン (DBレス移�
 
 ## 残課題
 
-1. **`generate-ranking-items.ts` を sync-snapshots.yml に配線** → all.json + item.json の isActive を data-configs と同期 (P0-RANKING-INDEX)
-2. **SITEMAP_RANKING_KEYS への追加** → `build-sitemap-ranking-keys.cjs` は GSC 実績ベースのため、新規 128 metric は自然追加されるまで sitemap 未掲載。Indexing API で submit するか、INDEXABLE_RANKING_KEYS に手動追加する手もある。
+> **2026-07-05 更新 (RANKING-KEYS-SYNC-01 で恒久機構化・feature/blog-seo-expansion)**: 下記 1-2 の「未配線」は
+> 解消済み。`generate-ranking-items.ts` は元々 `.claude/skills/db/sync-snapshots/run.sh` の TASKS (line 37) に
+> **配線済み**だった (この memory の旧記述が stale)。真のギャップは **R2 push 後に git 側派生キー (known/sitemap) が
+> 再生成されない**こと。sync-snapshots.yml に `sync-ranking-keys` job を追加し、ranking-items push 後に
+> known + sitemap を再生成 → develop→main PR を自動作成 (自動マージなし=デプロイ規律) するようにした。sitemap は
+> 既に KNOWN 全キー掲載実装 (`build-sitemap-ranking-keys.cjs` の `knownRankingKeys()`) なので新キーは自動掲載
+> (`--include-new-keys` 不要)。1コマンド公開は `/publish-ranking` (ranking-publisher agent 起動口)。
 
 ## config → 本番公開の依存順
 
-1. R2 `app/ranking-items/all.json` + `app/ranking/<key>/item.json` → `packages/ranking/src/scripts/generate-ranking-items.ts` (**sync-snapshots 未配線**)
-2. ✅ `apps/web/src/config/known-ranking-keys.ts` → `apps/web/scripts/generate-known-ranking-keys.ts` (2026-06-06 修復済)
-3. `sitemap-ranking-keys.ts` → `node .claude/scripts/gsc/build-sitemap-ranking-keys.cjs`
-4. `indexable-ranking-keys.ts` → GSC pages.csv 依存
+1. R2 `app/ranking-items/all.json` + `app/ranking/<key>/item.json` → `packages/ranking/src/scripts/generate-ranking-items.ts` (✅ sync-snapshots run.sh TASKS に配線済。旧「未配線」は誤り)
+2. ✅ `packages/ranking/src/config/known-ranking-keys.ts` (SSOT・apps/web は re-export) → `apps/web/scripts/generate-known-ranking-keys.ts` (2026-07-05 から sync-ranking-keys job で自動再生成+PR)
+3. `sitemap-ranking-keys.ts` → `node .claude/scripts/gsc/build-sitemap-ranking-keys.cjs` (KNOWN 全キー掲載。sync-ranking-keys job で自動)
+4. `indexable-ranking-keys.ts` → legacy 安全弁 (専用生成器なし・sitemap builder が読むだけ)
 5. 再デプロイ → `gh workflow run purge-cdn.yml` で全パージ (7日キャッシュ)
 
 [[project_dbless_migration_2026_05_29]] [[feedback_check_why_removed_before_reviving]]

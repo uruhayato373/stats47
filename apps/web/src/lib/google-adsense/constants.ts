@@ -100,7 +100,7 @@ export const THEMES_CONTENT: AdSlotConfig = {
  *   slotId を記入する。空文字の間は InContentAdSlot が描画されない（graceful degradation）。
  */
 export const HUB_INCONTENT: AdSlotConfig = {
-  slotId: "",
+  slotId: "8185387982",
   format: "article",
 };
 

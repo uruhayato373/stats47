@@ -23,7 +23,8 @@ on:
         default: "false"
 
 permissions:
-  contents: read
+  contents: write
+  pull-requests: write
 
 concurrency:
   # data-refresh.yml の push と衝突しないよう直列化 (R2 push の二重実行防止)
@@ -74,3 +75,67 @@ jobs:
           [ "${{ inputs.dry_run }}" = "true" ] && ARGS="$ARGS --dry-run"
           echo "sync-snapshots/run.sh $ARGS"
           bash .claude/skills/db/sync-snapshots/run.sh $ARGS
+
+  # ranking-items を R2 に push した後、git 側の派生キー (known / sitemap) を再生成して
+  # develop に反映し PR を開く。これが無いと新規 metric の item.json は R2 にあっても
+  # KNOWN/SITEMAP に載らず、本番で 404 / sitemap 未掲載のままになる (P0-RANKING-INDEX の恒久機構化)。
+  sync-ranking-keys:
+    needs: sync
+    # dry_run では R2 に push していないので keys 再生成もしない。
+    # only 指定時は ranking-items か master (全 task) のときだけ (他 task は ranking に無関係)。
+    if: >-
+      inputs.dry_run != 'true' &&
+      (inputs.only == '' || inputs.only == 'ranking-items' || inputs.only == 'master')
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: 🧰 Checkout develop
+        uses: actions/checkout@v4
+        with:
+          ref: develop
+          fetch-depth: 0
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      # generate-known-ranking-keys: R2 item.json が 200 の isActive metric を KNOWN に登録。
+      # build-sitemap-ranking-keys: KNOWN 全キー + GSC 実績キーの和集合を SITEMAP に出力
+      # (新キーは KNOWN 経由で自動的に sitemap 掲載される。--include-new-keys は既定挙動なので不要)。
+      - name: 🔑 Regenerate known + sitemap ranking keys
+        env:
+          R2_PUBLIC_FETCH_URL: https://storage.stats47.jp
+          NODE_OPTIONS: "--conditions react-server"
+        run: |
+          (cd apps/web && npx tsx scripts/generate-known-ranking-keys.ts)
+          node .claude/scripts/gsc/build-sitemap-ranking-keys.cjs
+
+      - name: 🔀 Open PR if keys changed
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          KEY_FILES="packages/ranking/src/config/known-ranking-keys.ts apps/web/src/config/sitemap-ranking-keys.ts"
+          if git diff --quiet -- $KEY_FILES; then
+            echo "ranking keys 差分なし — PR 不要"
+            exit 0
+          fi
+          BRANCH="chore/ranking-keys-sync"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch -C "$BRANCH"
+          git add $KEY_FILES
+          git commit -m "chore(ranking): sync known + sitemap ranking keys from R2 [skip ci]"
+          git push -f origin "$BRANCH"
+          # 既存 PR があれば再利用、無ければ作成 (develop→main = 本番デプロイの最終ゲート)。
+          # ★自動マージしない: 人間がまとめてデプロイ承認する (デプロイ規律)。
+          if ! gh pr view "$BRANCH" --json number >/dev/null 2>&1; then
+            gh pr create --base main --head "$BRANCH" \
+              --title "chore(ranking): 新規 ranking キーを KNOWN/SITEMAP に同期" \
+              --body "sync-snapshots が R2 に push した item.json を KNOWN/SITEMAP に反映。新規 metric を本番公開 (200) + sitemap 掲載するための派生キー更新。**マージ = 本番デプロイ**なので、まとまったタイミングで承認してください。" \
+              --label enhancement || true
+          fi
