@@ -105,7 +105,57 @@ const rules = [
     // page.tsx だけを対象にする（PageShell.tsx 等の正当な max-w 定義は許可）。
     allow: (relativePath) => !relativePath.endsWith("page.tsx"),
   },
+  {
+    // features/redesign は 2026-07 に解体済み。再作成・再 import を禁止する。
+    // RightRailWidgets → @/components/rail、SectionHeader → @/components/section、
+    // InContentAdSlot/FooterAdSlot/RailAdSlot/NativeAffiliateRow → @/features/ads。
+    id: "no-redesign-import",
+    message:
+      "features/redesign was dissolved. Use @/components/rail (RightRailWidgets), @/components/section (SectionHeader), or @/features/ads (InContentAdSlot/FooterAdSlot/RailAdSlot/NativeAffiliateRow).",
+    pattern: /@\/features\/redesign/,
+  },
+  {
+    // page.tsx のセクション見出し（h2）は SectionHeader（@/components/section）経由にする。
+    // 生の <h2> はセクション見出しのドリフト（compare 型の独自ヘッダ・text-lg/base 混在）の温床。
+    // カード/項目タイトルは h3 以下にする。prose/法務ページと未移行の content ページは grandfather。
+    id: "no-raw-h2-in-page",
+    message:
+      "Section headings in page.tsx must use SectionHeader (@/components/section). Card/item titles should be h3 or lower.",
+    pattern: /<h2[\s>]/,
+    allow: (relativePath) =>
+      !relativePath.endsWith("page.tsx") ||
+      RAW_HEADING_GRANDFATHER_H2.has(relativePath),
+  },
+  {
+    // page.tsx の h1 は PageHeader が唯一の出所。記事レンダラ（blog/[slug]）と未移行の
+    // areas 索引だけ grandfather。compare 型の独自 <h1> ヘッダ再発を防ぐ。
+    id: "no-raw-h1-outside-header",
+    message:
+      "Page <h1> must come from PageHeader (@/components/layout). Article renderers are the only exception.",
+    pattern: /<h1[\s>]/,
+    allow: (relativePath) =>
+      !relativePath.endsWith("page.tsx") ||
+      RAW_HEADING_GRANDFATHER_H1.has(relativePath),
+  },
 ];
+
+/**
+ * 生の見出し許可リスト（grandfather）。
+ * prose/法務ページ（privacy/terms/about）は文書見出しとして <h2> を正当に使う。
+ * areas 索引・市区町村ページは未移行（将来 SectionHeader/PageHeader へ移行予定）。
+ * blog/[slug] は記事タイトル <h1>（記事レンダラ）。
+ */
+const RAW_HEADING_GRANDFATHER_H2 = new Set([
+  "src/app/privacy/page.tsx",
+  "src/app/terms/page.tsx",
+  "src/app/about/page.tsx",
+  "src/app/areas/page.tsx",
+  "src/app/areas/[areaCode]/cities/[cityCode]/page.tsx",
+]);
+const RAW_HEADING_GRANDFATHER_H1 = new Set([
+  "src/app/blog/[slug]/page.tsx",
+  "src/app/areas/page.tsx",
+]);
 
 function listFiles(dir) {
   const absoluteDir = path.join(cwd, dir);

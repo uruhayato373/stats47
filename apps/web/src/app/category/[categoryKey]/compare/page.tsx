@@ -4,8 +4,9 @@ import { fetchPrefectures } from "@stats47/area";
 import { unwrap } from "@stats47/types";
 import { type Metadata } from "next";
 
-import { PageShell } from "@/components/layout";
+import { PageShell, PageHeader, Breadcrumbs } from "@/components/layout";
 
+import { FooterAdSlot } from "@/features/ads";
 import { listCategories } from "@/features/category/server";
 import {
     CompareGridLayout,
@@ -16,7 +17,6 @@ import {
 } from "@/features/region-comparison";
 import { fetchChoroplethMapData } from "@/features/region-comparison/server";
 
-import { AdSenseAd, COMPARE_PAGE_SIDEBAR } from "@/lib/google-adsense";
 import { generateOGMetadata } from "@/lib/metadata/og-generator";
 
 
@@ -136,31 +136,33 @@ export default async function CompareCategoryPage({ params, searchParams }: Page
 
     return (
         <PageShell>
-            {/* Hero (軽量): 比較対象 + カテゴリ名 (noindex のため軽量に) */}
-            <header className="mb-5">
-                <p className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
-                    地域間比較
-                </p>
-                <h1 className="mt-1 text-2xl font-bold leading-tight text-foreground sm:text-3xl">
-                    {regions ? (
-                        <>
-                            {regions[0].areaName}
-                            <span className="mx-2 text-muted-foreground">vs</span>
-                            {regions[1].areaName}
-                        </>
-                    ) : (
-                        "都道府県を比較"
-                    )}
-                    {currentCategory && (
-                        <span className="ml-3 align-middle text-xs font-medium text-muted-foreground">
-                            {currentCategory.categoryName}
-                        </span>
-                    )}
-                </h1>
-                <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground">
-                    2 つの都道府県の{currentCategory?.categoryName ?? "統計データ"}を、KPI とチャートで横並びに比較できます。
-                </p>
-            </header>
+            <Breadcrumbs
+                items={[
+                    { label: "ホーム", href: "/" },
+                    ...(currentCategory
+                        ? [
+                              {
+                                  label: currentCategory.categoryName,
+                                  href: `/category/${categoryKey}`,
+                              },
+                          ]
+                        : []),
+                    { label: "地域間比較" },
+                ]}
+            />
+            <PageHeader
+                eyebrow={
+                    currentCategory
+                        ? `地域間比較 ・ ${currentCategory.categoryName}`
+                        : "地域間比較"
+                }
+                title={
+                    regions
+                        ? `${regions[0].areaName} vs ${regions[1].areaName}`
+                        : "都道府県を比較"
+                }
+                description={`2 つの都道府県の${currentCategory?.categoryName ?? "統計データ"}を、KPI とチャートで横並びに比較できます。`}
+            />
 
             <RegionComparisonClient
                 regions={regions}
@@ -173,11 +175,8 @@ export default async function CompareCategoryPage({ params, searchParams }: Page
                     <CompareGridLayout regions={regions} components={pageComponents} />
                 )}
             </RegionComparisonClient>
-            <AdSenseAd
-                format={COMPARE_PAGE_SIDEBAR.format}
-                slotId={COMPARE_PAGE_SIDEBAR.slotId}
-                className="mt-6"
-            />
+            {/* コンテンツ末尾の全幅フッター広告 */}
+            <FooterAdSlot />
         </PageShell>
     );
 }

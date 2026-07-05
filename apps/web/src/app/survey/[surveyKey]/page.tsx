@@ -15,8 +15,14 @@ import {
 } from "@stats47/ranking/server";
 import { isOk } from "@stats47/types";
 
-import { PageShell, PageHeader } from "@/components/layout";
+import { PageShell, PageHeader, Breadcrumbs } from "@/components/layout";
+import { SectionHeader } from "@/components/section";
 
+import {
+  InContentAdSlot,
+  FooterAdSlot,
+  NativeAffiliateRow,
+} from "@/features/ads";
 import { resolveAffiliateBanners } from "@/features/ads/server";
 import {
   FeaturedRankingCard,
@@ -24,13 +30,8 @@ import {
   isCaveatNote,
   type CategoryRankingListItem,
 } from "@/features/ranking";
-import {
-  NativeAffiliateRow,
-  SectionEyebrow,
-  InfeedAd,
-} from "@/features/redesign";
 
-import { AdSenseAd, RANKING_PAGE_FOOTER, CONTENT_FOOTER } from "@/lib/google-adsense";
+import { HUB_INCONTENT } from "@/lib/google-adsense";
 import { generateOGMetadata } from "@/lib/metadata/og-generator";
 
 import type { Metadata } from "next";
@@ -173,6 +174,13 @@ export default async function SurveyPage({ params }: PageProps) {
 
   return (
     <PageShell>
+      <Breadcrumbs
+        items={[
+          { label: "ホーム", href: "/" },
+          { label: "調査", href: "/survey" },
+          { label: survey.name },
+        ]}
+      />
       <PageHeader
         eyebrow="政府統計"
         title={survey.name}
@@ -202,8 +210,8 @@ export default async function SurveyPage({ params }: PageProps) {
       />
 
       {featuredItems.length > 0 && (
-        <section className="mb-8">
-          <SectionEyebrow number="1.">注目のランキング</SectionEyebrow>
+        <section className="mb-12">
+          <SectionHeader number="1" title="注目のランキング" />
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
             {featuredItems.map((item) => (
               <FeaturedRankingCard
@@ -221,25 +229,21 @@ export default async function SurveyPage({ params }: PageProps) {
         </section>
       )}
 
-      <section className="mb-8">
-        <SectionEyebrow number="2.">
-          全{rankingItems.length}件のランキング
-        </SectionEyebrow>
+      <section className="mb-12">
+        <SectionHeader
+          number="2"
+          title={`全${rankingItems.length}件のランキング`}
+        />
         <CategoryRankingTable items={allItems} />
       </section>
 
-      {/* AdSense */}
-      <div className="mb-8">
-        <InfeedAd
-          slotId={CONTENT_FOOTER.slotId}
-          format={CONTENT_FOOTER.format}
-        />
-      </div>
+      {/* 記事内広告（ハブ面・ページ 1 枠まで。slotId 未発行の間は非表示） */}
+      <InContentAdSlot slot={HUB_INCONTENT} />
 
       {/* ネイティブアフィリエイト */}
       {nativeBanners.length > 0 && (
-        <section className="mb-8">
-          <SectionEyebrow number="3.">関連書籍・データブック</SectionEyebrow>
+        <section className="mb-12">
+          <SectionHeader number="3" title="関連書籍・データブック" />
           <NativeAffiliateRow
             title={`${survey.name}に関連する書籍`}
             banners={nativeBanners}
@@ -249,11 +253,8 @@ export default async function SurveyPage({ params }: PageProps) {
         </section>
       )}
 
-      {/* AdSense (footer) */}
-      <AdSenseAd
-        format={RANKING_PAGE_FOOTER.format}
-        slotId={RANKING_PAGE_FOOTER.slotId}
-      />
+      {/* コンテンツ末尾の全幅フッター広告 */}
+      <FooterAdSlot />
     </PageShell>
   );
 }

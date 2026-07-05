@@ -31,17 +31,22 @@ model: sonnet
 
 ### 1. ThemeDbChartRenderer 対応タイプのみ使用
 
-line-chart, mixed-chart, donut-chart, cpi-profile, cpi-heatmap, pyramid-chart, composition-chart の7タイプ。これ以外はテーマページで描画されない。
+チャート: line-chart, mixed-chart, composition-chart, donut-chart, cpi-profile, cpi-heatmap。
+非チャート: kpi-card, markdown-section, pyramid-chart。合計 **9 種**のみ (theme componentType の正典 =
+`.claude/rules/theme-catalog-standards.md` §3)。これ以外はテーマページで描画されない。
 
 ### 2. estatParams は metric の git TS source から取得
 
 `packages/data-configs/src/metrics/<key>.ts` の `source`（statsDataId / cdCat01 等）を componentProps に転記する。手入力の推測値は禁止。
 
-### 3. panelTab.label = section（完全一致必須）
+### 3. section はテーマ renderer で未使用 (グループ化しない)
 
-JSON 要素の `section` フィールドが IndicatorSet.panelTabs[].label と1文字でも違うとチャートが表示されない。
+**⚠️ 旧「section = panelTab.label 完全一致必須」は誤り (2026-07-04 訂正)**。panelTabs は廃止済み、かつ
+`ThemeMetricsDashboard` は `section` を参照せず、チャートを **componentType でフィルタし flat grid に
+sortOrder 順**で並べる。配置は「どのチャートを載せるか + sortOrder + gridColumnSpan」で決まる。
+`section` は残置フィールドだが theme では効かない (area ページの `AreaChartSection` のみ使用)。
 
-### 4. 1セクション 1〜2 チャート
+### 4. 1テーマ 3〜9 チャート程度
 
 情報過多を避ける。チャートタイプは以下の決定木で選択:
 

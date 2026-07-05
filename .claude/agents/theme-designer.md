@@ -151,88 +151,69 @@ e-Stat API 未登録指標の探索:
 | 一般の理解しやすさ | 誰でもわかる | やや専門的でもOK | 専門的でもOK |
 | データ鮮度 | 直近5年以内必須 | 直近10年以内 | 問わない |
 
-### Step 5: panelTabs 設計
+### Step 5: チャート割当 (カタログ `charts[]`)
 
-テーマ内をサブトピックに分割:
-- 各タブ 3〜8 指標
-- タブラベルは2〜4文字（例: "犯罪", "交通", "火災"）
-- 最も重要なタブを先頭に
+カタログ駆動テーマは `charts[]` に page-components を割り当てる。**panelTabs は廃止済み**・**section は
+theme renderer 未使用**のため、配置は「どのチャートを載せるか + `sortOrder` + `gridColumnSpan`」で決まる
+(flat grid、componentType 順に描画)。1 テーマ 3〜9 チャート程度。
 
-### Step 6: チャート選定
+### Step 6: チャート型の選定 (theme componentType 9 種)
 
-各 panelTab に 0〜2 個のチャートを配置:
+データ形状 → componentType の対応は `.claude/rules/theme-catalog-standards.md` §3 が正典:
+時系列→`line-chart` / 棒+折れ線→`mixed-chart` / 構成比→`composition-chart` / 単年内訳→`donut-chart` /
+CPI→`cpi-profile`・`cpi-heatmap` / 年齢構造→`pyramid-chart` / 単一値→`kpi-card` / 考察→`markdown-section`。
+※ 旧 `dual-line` / `donut-action` / `scatter` 等はテーマ renderer では描画されない (使わない)。
 
-```typescript
-charts: [
-  {
-    type: "dual-line",
-    title: "犯罪率と検挙率の推移",
-    indicators: [
-      { rankingKey: "penal-code-offenses-recognized-per-1000", label: "犯罪率" },
-      { rankingKey: "criminal-arrest-rate", label: "検挙率" },
-    ],
-  },
-]
-```
+### Step 7: カタログ TS 生成 (SSOT)
 
-チャート選定の判断基準:
-- **時系列で変化が劇的** → dual-line
-- **構成比に意味がある** → donut-action
-- **2指標に相関がある** → scatter
-- **地域パターンが明確** → primary 指標のチャート付きカード（全国トレンド）に任せる
+カタログ駆動テーマは **`packages/data-configs/src/theme-catalog/<theme-key>.ts` (`ThemeCatalog`)** を編集し
+`npm run generate:catalog` で IndicatorSet TS + page-components JSON を再生成する (**生成物は手編集禁止**、
+pre-commit/CI の Theme Catalog Gate が弾く)。legacy (未登録) テーマのみ従来どおり IndicatorSet TS を直接編集。
+参考: `packages/data-configs/src/theme-catalog/manufacturing.ts`。規約: `.claude/rules/theme-catalog-standards.md`。
 
-### Step 7: IndicatorSet 生成
+### Step 8: 未登録指標の投入 (完全DBレス)
 
-`packages/types/src/indicator-sets/<theme-key>.ts` に TypeScript 定義を出力。
-
-参考実装: `population-dynamics.ts`（最も完成度が高いテーマ）
-
-### Step 8: 未登録指標の登録
-
-Step 2 で発見した未登録指標を以下のフローで登録する (Phase 6 後):
-
-1. `packages/data-configs/src/metrics/<new-key>.ts` を新規作成 (既存 `japanese-population.ts` をテンプレに)
-2. `npm run build:registry --workspace=packages/data-configs` で registry 再生成
-3. `/sync-metrics-cache --apply` で D1 `metrics` テーブルに反映
-4. `/page-data-batch --metric <new-key>` で e-Stat → R2 直行投入
-5. `/sync-snapshots` で派生 snapshot を更新
+Step 2 で発見した未登録指標:
+1. `packages/data-configs/src/metrics/<new-key>.ts` を新規作成
+2. `npm run validate:config` `validate:years` で構造検証
+3. `data-ingester` が `/page-data-batch --metric <new-key>` で e-Stat → R2 直行投入 (旧 D1 sync-metrics-cache は廃止)
+4. カタログの `metrics[]` / `charts[]` に追加 → `generate:catalog` → `validate:catalog`
 
 ## 担当スキル
 
 | スキル | 用途 |
 |---|---|
+| `/research-theme-catalog` | (theme-researcher) 指標×チャート候補の調査・提案 |
 | `/search-estat` | e-Stat API 統計表検索（未登録指標の発見） |
 | `/inspect-estat-meta` | メタデータ調査（cdCat01 等の特定） |
 | `/fetch-estat-data` | データ取得（指標の品質確認） |
-| `/page-data-batch` + `/sync-metrics-cache` | 未登録指標の TS-config → R2 投入 + D1 cache 同期 |
+| `/page-data-batch` | 未登録指標の TS-config → R2 投入 (data-ingester) |
 | `/fetch-gsc-data` | 検索需要の分析 |
-| `/discover-trends` | トレンドキーワードの確認 |
 
 ## 出力フォーマット
 
 ```typescript
-// packages/types/src/indicator-sets/<theme-key>.ts
-import type { IndicatorSet } from "../indicator-set";
+// packages/data-configs/src/theme-catalog/<theme-key>.ts  ← カタログ駆動テーマの SSOT (これを編集)
+import type { ThemeCatalog } from "./types";
 
-export const <THEME>_SET: IndicatorSet = {
-  key: "<theme-key>",
-  title: "<テーマ名>",
-  description: "<SEO用説明文>",
-  category: "<primary-category>",
-  usage: "theme",
-  indicators: [
-    { rankingKey: "...", shortLabel: "...", role: "primary" },
+export const <THEME>_CATALOG: ThemeCatalog = {
+  key: "<theme-key>", title: "<テーマ名>", description: "<SEO用説明文>",
+  category: "<primary-category>", usage: "theme",
+  metrics: [
+    { rankingKey: "...", shortLabel: "...", role: "primary",
+      selection: { proposedBy: "<白書/調査>", sourceUrl: "https://...", surveyedAt: "2026-..", rationale: "..." } },
     { rankingKey: "...", shortLabel: "...", role: "secondary" },
     { rankingKey: "...", shortLabel: "...", role: "context" },
   ],
-  panelTabs: [
-    {
-      label: "...",
-      rankingKeys: ["..."],
-      charts: [{ type: "dual-line", title: "...", indicators: [...] }],
-    },
+  charts: [
+    { componentKey: "...", componentType: "line-chart", title: "...",
+      componentProps: { estatParams: [/* metric source から転記 */], labels: ["..."], seriesColors: ["#3b82f6"] },
+      relatedRankingKeys: ["..."], sourceName: "...", rankingLink: "/ranking/...",
+      gridColumnSpan: 12, dataSource: "ranking", sortOrder: 0 },
   ],
+  keywords: ["..."],
 };
+// → npm run generate:catalog で indicator-sets/<key>.ts と page-components/theme/<key>.json を再生成
 ```
 
 ## 連携パターン

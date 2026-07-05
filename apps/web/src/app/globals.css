@@ -9,7 +9,7 @@
      * Core Colors - Indigo & Slate 
      * Using HSL values for Tailwind opacity support 
      */
-    --background: 210 40% 98%; /* Slate-50: #f8fafc */
+    --background: 0 0% 100%; /* Pure White — エディトリアル/データ誌風: 地は純白、カードとの差は border(罫線)が担う */
     --foreground: 222 47% 11%; /* Slate-900 */
     
     --card: 0 0% 100%; /* Pure White */

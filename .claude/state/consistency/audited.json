@@ -1,5 +1,12 @@
 {
-  "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-  "audited_at": "2026-07-04T02:45:02",
-  "files": []
+  "hash": "bcd3446000ec750c67c8a84298b4d5d842315b659b9b1ccd82de7d5aada7d47c",
+  "audited_at": "2026-07-04T07:48:19",
+  "files": [
+    ".claude/agents/theme-component-builder.md",
+    ".claude/agents/theme-designer.md",
+    ".claude/skills/theme/audit-theme-components/SKILL.md",
+    ".claude/skills/theme/design-theme-charts/SKILL.md",
+    ".claude/skills/theme/design-theme-charts/reference/chart-patterns.md",
+    ".claude/skills/theme/insert-theme-components/SKILL.md"
+  ]
 }

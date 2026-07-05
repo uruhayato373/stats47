@@ -12,7 +12,9 @@ import {
 import { isOk } from "@stats47/types";
 
 import { PageShell } from "@/components/layout";
+import { RightRailWidgets } from "@/components/rail";
 
+import { InContentAdSlot, RailAdSlot } from "@/features/ads";
 import {
     AreaProfilePageClient,
     AreaProfileSidebar,
@@ -28,10 +30,9 @@ import {
 } from "@/features/area-profile";
 import { getAreaProfileAction } from "@/features/area-profile/server";
 import { listCategories } from "@/features/category/server";
-import { RightRailWidgets } from "@/features/redesign";
 
 
-import { AdSenseAd, RANKING_SIDEBAR_TOP } from "@/lib/google-adsense";
+import { HUB_INCONTENT, RAIL_RECT } from "@/lib/google-adsense";
 
 
 import type { Metadata } from "next";
@@ -159,11 +160,8 @@ export default async function AreaProfilePage({ params }: PageProps) {
                         areaName={profile.areaName}
                     />
 
-                    {/* 広告①: チャート読了後 */}
-                    <AdSenseAd
-                        format={RANKING_SIDEBAR_TOP.format}
-                        slotId={RANKING_SIDEBAR_TOP.slotId}
-                    />
+                    {/* 広告①: チャート読了後（記事内・fluid。slotId 未発行の間は非表示） */}
+                    <InContentAdSlot slot={HUB_INCONTENT} />
 
                     {/* カテゴリナビゲーション */}
                     <CategoryNavGrid
@@ -183,11 +181,8 @@ export default async function AreaProfilePage({ params }: PageProps) {
                     {/* 市区町村ナビ (サイドバー閉じてもメインで見える) */}
                     <CitiesNavCard areaCode={areaCode} areaName={profile.areaName} />
 
-                    {/* 広告②: アフィリエイト直前 */}
-                    <AdSenseAd
-                        format={RANKING_SIDEBAR_TOP.format}
-                        slotId={RANKING_SIDEBAR_TOP.slotId}
-                    />
+                    {/* 広告②: アフィリエイト直前（独立スロットの rect で同一 slot 重複を解消） */}
+                    <RailAdSlot slot={RAIL_RECT} />
                 </main>
             </PageShell>
         </>
