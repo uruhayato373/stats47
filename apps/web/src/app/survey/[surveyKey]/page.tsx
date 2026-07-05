@@ -11,7 +11,6 @@ import { notFound } from "next/navigation";
 import {
   readRankingItemsBySurveyFromR2,
   readSurveyByIdFromR2,
-  readSurveysFromR2,
 } from "@stats47/ranking/server";
 import { isOk } from "@stats47/types";
 
@@ -52,12 +51,6 @@ function parseLatestYear(latestYear: unknown): string {
     /* fallback */
   }
   return "2024";
-}
-
-export async function generateStaticParams() {
-  const result = await readSurveysFromR2();
-  if (!isOk(result)) return [];
-  return result.data.map((s) => ({ surveyKey: s.id }));
 }
 
 export async function generateMetadata({

@@ -37,7 +37,8 @@ export function RankingPageClientShell({
             rankingKey={rankingKey}
             areaType={model.areaType}
             rankingItem={model.rankingItem}
-            surveys={model.allSurveys}
+            surveys={model.originalSurveys}
+            surveyRelatedItems={model.surveyRelatedItems}
           />
         ),
         correlation: <RankingPageCorrelationSection rankingKey={rankingKey} />,

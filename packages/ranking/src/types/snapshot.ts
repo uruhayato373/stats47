@@ -23,6 +23,11 @@ export interface Source {
   isActive: boolean | null;
   createdAt: string | null;
   updatedAt: string | null;
+  /**
+   * この調査に紐付く ranking item 件数 (master exporter が items.json 生成時に焼き込む)。
+   * /survey 一覧が per-survey items.json を N 並列 fetch せず all.json 1 fetch で描画するため。
+   */
+  itemCount?: number;
 }
 
 export const RANKING_ITEMS_SNAPSHOT_KEY = "app/ranking-items/all.json";

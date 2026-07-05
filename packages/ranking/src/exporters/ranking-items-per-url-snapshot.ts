@@ -37,6 +37,8 @@ export interface ExportRankingItemsPerUrlResult {
    * (詳細ページが notFound() になるリンクを出さない)。
    */
   surveyIds: string[];
+  /** survey id → 紐付く item 件数。surveys snapshot (all.json) の itemCount 焼き込みに使う */
+  surveyItemCounts: Record<string, number>;
   totalSizeBytes: number;
   durationMs: number;
 }
@@ -264,6 +266,9 @@ export async function exportRankingItemsPerUrl(): Promise<ExportRankingItemsPerU
     items: { count: items.length, files: itemsFiles },
     surveys: { count: surveysCount, files: surveysFiles },
     surveyIds: [...surveyIdSet],
+    surveyItemCounts: Object.fromEntries(
+      [...itemsBySurvey.entries()].map(([id, arr]) => [id, arr.length]),
+    ),
     totalSizeBytes,
     durationMs,
   };
