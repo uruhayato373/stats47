@@ -71,8 +71,19 @@ node .claude/scripts/snapshot-weekly-metrics.mjs [YYYY-Www]
   ```
 - .local/r2/sns/ 配下の新規生成コンテンツ
 
+- ブログ新規記事キュー（`.claude/state/blog/topic-queue.json`）の消化状況:
+  ```bash
+  # pending / must-write / in-progress の件数と型ミックス、今週 done になった件数
+  node -e 'const q=require("./.claude/state/blog/topic-queue.json");
+    const c=(f)=>q.queue.filter(f).length; const by=(s)=>{const o={};for(const e of q.queue.filter(x=>x.status===s))o[e.archetype]=(o[e.archetype]||0)+1;return o};
+    console.log(JSON.stringify({pending:c(x=>x.status==="pending"),must_write:c(x=>x.status==="pending"&&x.lane==="must-write"),in_progress:c(x=>x.status==="in-progress"),done:c(x=>x.status==="done"),pending型内訳:by("pending")},null,2))'
+  ```
+  → 今週 publish した新規記事があれば `build-topic-queue.mjs --mark-done <topicKey> --slug <slug>` で done 化する
+    (in-progress のまま残っている候補も確認)。
+
 出力形式:
-- 「今週公開した記事」
+- 「今週公開した記事」（新規キュー由来か是正キュー由来かを区別）
+- 「新規記事キューの pending / must-write / 型ミックス」（拡充ペースの追跡）
 - 「今週の SNS 投稿数」（プラットフォーム別）
 - 「投稿待ちコンテンツのストック数」
 ```
