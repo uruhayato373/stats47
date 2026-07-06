@@ -1,0 +1,70 @@
+name: 🧹 Cleanup posted SNS videos (R2)
+
+# 投稿後 30 日を過ぎた SNS 動画 (.mp4) を R2 から削除するコスト対策 cron。
+# サムネイル (.png) / caption.txt / posts.json の記録・メトリクスは保持する。
+# 正典: .claude/rules/sns-content-standards.md §R2 素材保持ポリシー
+#
+# 安全設計:
+# - 対象は posts.json の status=posted && posted_at <= now-30日 の content_key のみ
+# - draft / scheduled が残る content_key はスキップ (再投稿予定を守る)
+# - .mp4 のみ削除 (スクリプト側で enforce)
+# - 手動 dispatch では dry_run 可 (既定 true)。schedule 実行は実削除
+#   (実削除ロジックは 2026-07-07 にローカル dry-run で対象 13 本/112MB を検証済み)
+
+on:
+  schedule:
+    - cron: "0 19 * * 6" # JST 日曜 04:00 (UTC 土曜 19:00)
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "true: 削除せず対象一覧のみ"
+        required: false
+        default: "true"
+      retention_days:
+        description: "保持日数 (既定 30)"
+        required: false
+        default: "30"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: r2-write
+  cancel-in-progress: false
+
+env:
+  R2_S3_ENDPOINT: https://${{ secrets.CLOUDFLARE_ACCOUNT_ID }}.r2.cloudflarestorage.com
+  R2_ACCESS_KEY_ID: ${{ secrets.CLOUDFLARE_R2_ACCESS_KEY_ID }}
+  R2_SECRET_ACCESS_KEY: ${{ secrets.CLOUDFLARE_R2_SECRET_ACCESS_KEY }}
+  CLOUDFLARE_R2_BUCKET_NAME: stats47
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: 🧰 Checkout develop
+        uses: actions/checkout@v4
+        with:
+          ref: develop
+          fetch-depth: 1
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 🧹 Cleanup posted SNS videos
+        run: |
+          ARGS="--retention-days ${{ inputs.retention_days || '30' }}"
+          # schedule 実行 (inputs なし) は実削除、dispatch は dry_run 入力に従う
+          if [ "${{ github.event_name }}" = "schedule" ] || [ "${{ inputs.dry_run }}" = "false" ]; then
+            ARGS="$ARGS --execute"
+          fi
+          echo "cleanup-posted-sns-videos.ts $ARGS"
+          npx tsx packages/r2-storage/src/scripts/cleanup-posted-sns-videos.ts $ARGS 2>&1 \
+            | grep -vE '^\{"level"' | tee -a "$GITHUB_STEP_SUMMARY"

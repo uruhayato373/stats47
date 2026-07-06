@@ -103,7 +103,9 @@ function getById(id) {
  */
 function insert(record) {
   const data = read();
-  const id = data._meta.nextId || maxId(data.posts) + 1;
+  // _meta.nextId が stale (store 非経由の直接編集等) でも既存 id と衝突しないよう
+  // maxId+1 との大きい方を採番する (2026-07-07: nextId=575 固着で id 575 重複が実発生)
+  const id = Math.max(data._meta.nextId || 1, maxId(data.posts) + 1);
   const now = new Date().toISOString();
   const row = {
     id,
