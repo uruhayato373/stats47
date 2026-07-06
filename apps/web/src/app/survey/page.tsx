@@ -21,6 +21,14 @@ import { generateOGMetadata } from "@/lib/metadata/og-generator";
 import type { Metadata } from "next";
 
 
+/**
+ * R2 依存ページのため build 時 prerender を禁止する (force-dynamic)。
+ * 旧実装は静的 prerender で build 時に R2 を読めず「空の調査一覧」が永久固着した
+ * (x-nextjs-stale-time=4294967294、本 OpenNext 構成は ISR 再生成が効かない)。
+ * 正典: .claude/rules/nextjs-ssg-preservation.md / app/page.tsx (home) と同パターン。
+ */
+export const dynamic = "force-dynamic";
+
 export function generateMetadata(): Metadata {
   const title = "調査別ランキング一覧";
   const description =
@@ -38,18 +46,18 @@ export default async function SurveyIndexPage() {
   const surveysResult = await readSurveysFromR2();
   const surveys = isOk(surveysResult) ? surveysResult.data : [];
 
-  // 各調査の件数は per-survey items.json (app/survey/{id}/items.json) の length から取得する。
-  // 旧実装は全 ranking item を 1 件ずつ fetch して surveyId を数える N+1 だった (数千 fetch)。
-  // survey 単位の snapshot が既に存在するため、調査数 (~40) ぶんの並列 fetch で済む。
+  // 各調査の件数は all.json に焼き込まれた itemCount を使う (exporter が items.json 生成時に
+  // 埋める → 1 fetch で描画完了)。焼き込み前の古い all.json に対しては per-survey items.json の
+  // length にフォールバックする (調査数 ~40 の並列 fetch、移行期の安全網)。
   const counts = await Promise.all(
     surveys.map(async (s) => {
+      if (s.itemCount !== undefined) return [s.id, s.itemCount] as const;
       const result = await readRankingItemsBySurveyFromR2(s.id);
       return [s.id, isOk(result) ? result.data.length : 0] as const;
     }),
   );
   const countMap = new Map<string, number>(counts);
 
-  // ssds は件数が多いが実質「分類不明」なので末尾に移動
   const sortedSurveys = surveys.filter((s) => {
     const count = countMap.get(s.id) ?? 0;
     return count > 0;

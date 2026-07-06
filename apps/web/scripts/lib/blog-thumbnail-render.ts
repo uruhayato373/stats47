@@ -20,6 +20,8 @@ export interface OgpData {
   subtitle?: string | null;
   date?: string;
   category?: string;
+  /** フッターに表示するドメインパス (既定 "stats47.jp/blog")。ranking/areas 等で上書きする。 */
+  domainPath?: string;
 }
 
 export type SatoriFont = {
@@ -264,19 +266,26 @@ export function buildElement(data: OgpData, dark: boolean) {
               letterSpacing: 2,
             },
           },
-          "stats47.jp/blog",
+          data.domainPath ?? "stats47.jp/blog",
         ),
       ),
     ),
   );
 }
 
+export interface RenderSize {
+  width: number;
+  height: number;
+}
+const DEFAULT_SIZE: RenderSize = { width: 1200, height: 630 };
+
 export async function renderToWebP(
   element: ReturnType<typeof createElement>,
   fonts: SatoriFont[],
   outputPath: string,
+  size: RenderSize = DEFAULT_SIZE,
 ) {
-  const svg = await satori(element, { width: 1200, height: 630, fonts });
+  const svg = await satori(element, { ...size, fonts });
   await sharp(Buffer.from(svg)).webp({ quality: 90 }).toFile(outputPath);
 }
 
@@ -284,8 +293,9 @@ export async function renderToPng(
   element: ReturnType<typeof createElement>,
   fonts: SatoriFont[],
   outputPath: string,
+  size: RenderSize = DEFAULT_SIZE,
 ) {
-  const svg = await satori(element, { width: 1200, height: 630, fonts });
+  const svg = await satori(element, { ...size, fonts });
   await sharp(Buffer.from(svg)).png().toFile(outputPath);
 }
 

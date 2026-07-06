@@ -18,7 +18,12 @@
  *   ... --dry-run            # R2 に書かず件数のみ
  *   ... --only <key>[,<key>] # 一部 metric のみ (item.json のみ更新、all.json は全件)
  */
-import { listAllMetrics, type MetricConfig, type YearSpec } from "@stats47/data-configs";
+import {
+  listAllMetrics,
+  type MetricConfig,
+  type MetricRegistry,
+  type YearSpec,
+} from "@stats47/data-configs";
 import { assertR2WriteAllowed, saveToR2 } from "@stats47/r2-storage/server";
 import { readStatsValues } from "@stats47/stats-r2/readers";
 
@@ -93,7 +98,10 @@ async function main() {
 
   // 都道府県を持つ全 metric (active/inactive 問わず item.json を生成。
   // isActive の絞り込みは all.json reader / known-keys 側で行う)
-  const metrics = listAllMetrics().filter((c) => c.entities?.includes("prefecture"));
+  const allMetrics = listAllMetrics();
+  const metrics = allMetrics.filter((c) => c.entities?.includes("prefecture"));
+  // calculated metric の分子/分母から survey を辿るための registry (survey 紐付け導出用)
+  const registry: MetricRegistry = Object.fromEntries(allMetrics.map((m) => [m.key, m]));
   console.log(`prefecture metrics: ${metrics.length} (only=${args.only ? [...args.only].join(",") : "all"}, dryRun=${args.dryRun})`);
 
   if (!args.dryRun) {
@@ -106,6 +114,7 @@ async function main() {
     return buildRankingItemFromMetric(config, {
       values: yearCodes ? { yearCodes } : null,
       now,
+      registry,
     });
   });
 

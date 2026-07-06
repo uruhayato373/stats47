@@ -85,6 +85,7 @@ CLAUDE.md 内に詳細を複製しない。状況に応じて参照する。
 | `estat-api.md` | e-Stat API 利用スキル |
 | `metric-config-standards.md` | metric config 作成・編集 (category 17 軸 / title・subtitle・note・description の役割 / validate:config) |
 | `theme-catalog-standards.md` | テーマページの指標×チャート統合カタログ (ThemeCatalog SSOT / チャート選定文法 / selection provenance / generate:catalog・validate:catalog / theme-researcher・theme-designer) |
+| `survey-linkage-standards.md` | ranking↔統計調査の紐付け (surveys.json マスタ / provenance 辞書導出 / config.surveyId オーバーライド / 監査 /audit-survey-linkage / survey-curator) |
 | `branch-workflow.md` | PR・デプロイ作業・DB データ反映 |
 | `data-storage.md` | スキル設計時 (git TS / R2 vs `.claude/` vs `docs/` 判定。正典は `docs/01_技術設計/12_完全DBレス設計.md`) |
 | `docs-vs-issues.md` | docs/ と GitHub Issues の使い分け (新規スキル・新規記録時必読) |
@@ -138,6 +139,7 @@ Issues は「PR で close される機能改修・バグ」と「日次アラー
 - `auto-generated` — Bot 生成の自動アラート
 - `cloudflare-alert` — Cloudflare 日次 usage 閾値違反 (`cloudflare-usage-daily.yml`)
 - `psi-alert` — PSI 日次計測の閾値違反 (`psi-audit-daily.yml`)
+- `ogp-alert` — OGP/カード/note 画像の生成漏れが自動修復後も残存 (`ogp-image-audit-weekly.yml`)
 
 過去の移行履歴:
 - `docs/90_課題管理/` (2026-04 廃止) → GitHub Issues 経由 → `docs/50_Issues/` (2026-05) → `docs/02_実装計画/{feature-backlog,indicator-backlog}.md` (2026-06-07 統合)

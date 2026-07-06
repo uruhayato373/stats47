@@ -1,12 +1,8 @@
 {
-  "hash": "bcd3446000ec750c67c8a84298b4d5d842315b659b9b1ccd82de7d5aada7d47c",
-  "audited_at": "2026-07-04T07:48:19",
+  "hash": "f78385e732397203d13a490fbefd37df2d06a6609a0a277e8bb2ff069f49829d",
+  "audited_at": "2026-07-06T02:41:52",
   "files": [
-    ".claude/agents/theme-component-builder.md",
-    ".claude/agents/theme-designer.md",
-    ".claude/skills/theme/audit-theme-components/SKILL.md",
-    ".claude/skills/theme/design-theme-charts/SKILL.md",
-    ".claude/skills/theme/design-theme-charts/reference/chart-patterns.md",
-    ".claude/skills/theme/insert-theme-components/SKILL.md"
+    ".claude/scripts/ogp/build-image-gallery.mjs",
+    ".claude/skills/ui/audit-ogp-images/SKILL.md"
   ]
 }

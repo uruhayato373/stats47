@@ -1,0 +1,48 @@
+{
+  "generatedAt": "2026-07-06T02:41:34.784Z",
+  "site": "https://stats47.jp",
+  "r2": "https://storage.stats47.jp",
+  "sampled": true,
+  "types": [
+    {
+      "type": "ranking-ogp",
+      "source": "r2-static",
+      "aspect": "1.91:1",
+      "entries": 8,
+      "expected": 8,
+      "ok": 8,
+      "missing": [],
+      "r2KeyPattern": "app/ranking/<key>/ogp/ogp.png"
+    },
+    {
+      "type": "ranking-card",
+      "source": "r2-static",
+      "aspect": "16:9",
+      "entries": 8,
+      "expected": 16,
+      "ok": 16,
+      "missing": [],
+      "r2KeyPattern": "app/ranking/<key>/thumbnail-{light,dark}.webp"
+    },
+    {
+      "type": "note-cover",
+      "source": "r2-static",
+      "aspect": "1.91:1",
+      "entries": 8,
+      "expected": 8,
+      "ok": 8,
+      "missing": [],
+      "r2KeyPattern": "note/<vertical>/<slug>/images/cover-1280x670.png"
+    },
+    {
+      "type": "areas-ogp",
+      "source": "r2-static",
+      "aspect": "1.91:1",
+      "entries": 8,
+      "expected": 8,
+      "ok": 8,
+      "missing": [],
+      "r2KeyPattern": "app/areas/<code>/ogp/ogp.png"
+    }
+  ]
+}

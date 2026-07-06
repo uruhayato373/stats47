@@ -32,7 +32,7 @@ CSS Grid (`lg:grid` + `items-start`) 内の `sticky` aside には **必ず `max-
 適用箇所:
 - `apps/web/src/app/blog/[slug]/page.tsx` — 左・右 aside
 - `apps/web/src/app/category/[categoryKey]/page.tsx` — 右 aside
-- `apps/web/src/features/redesign/components/RightRailWidgets.tsx` — `scrollClass`
+- `apps/web/src/components/rail/RightRailWidgets.tsx` — `scrollClass`
 - 3カラムレイアウトを持つすべての新規ページ
 
 ## コンポーネント配置の 3 tier（★新規コンポーネント追加前に必読・配置の SSOT）

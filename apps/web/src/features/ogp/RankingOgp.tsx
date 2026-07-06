@@ -98,7 +98,7 @@ export function RankingOgp({ data }: Props) {
               marginTop: 6,
             }}
           >
-            ランキング（{data.unit}）
+            {`ランキング（${data.unit}）`}
           </div>
         </div>
 
@@ -145,7 +145,7 @@ export function RankingOgp({ data }: Props) {
                   minWidth: 48,
                 }}
               >
-                #{p.rank}
+                {`#${p.rank}`}
               </span>
               <span
                 style={{
@@ -159,7 +159,7 @@ export function RankingOgp({ data }: Props) {
                 {p.name}
               </span>
               <span
-                style={{ fontFamily: FONT.mono, fontSize: 22, fontWeight: 800, color: BRAND.ink }}
+                style={{ display: 'flex', alignItems: 'baseline', fontFamily: FONT.mono, fontSize: 22, fontWeight: 800, color: BRAND.ink }}
               >
                 {p.value}
                 <span style={{ fontSize: 11, color: BRAND.muted, marginLeft: 2 }}>{data.unit}</span>
@@ -202,7 +202,7 @@ export function RankingOgp({ data }: Props) {
                   minWidth: 48,
                 }}
               >
-                #{data.last.rank}
+                {`#${data.last.rank}`}
               </span>
               <span
                 style={{

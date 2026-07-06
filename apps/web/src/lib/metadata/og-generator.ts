@@ -4,11 +4,12 @@
  * Open Graph ProtocolとTwitter Cardsのメタデータを生成する共通関数を提供します。
  * 各ページのメタデータ生成で重複するOGP設定を一元化し、保守性を向上させます。
  *
- * OGP 画像の生成方式:
- * - 動的 OGP（記事ごとにタイトルが変わる）: Satori (next/og の ImageResponse)。
- *   実装は apps/web/src/app/(\*)/opengraph-image.tsx 配下
- * - 静的 OGP（デフォルト・凝ったビジュアル）: Remotion 静止画書き出し。
- *   実装と書き出し手順は apps/remotion/src/features/ogp/README.md
+ * OGP 画像の生成方式（正典: .claude/rules/ogp-image-standards.md）:
+ * - 事前生成した静的 OGP を R2 に保存し、配信時は静的 URL を参照する。
+ *   ランタイム next/og の ImageResponse は Cloudflare Worker で例外 (error 1101) になるため使わない。
+ *   生成: apps/web/scripts/generate-ogp-images.ts (ranking/areas) /
+ *         apps/web/scripts/generate-blog-thumbnails-cloud.ts (blog)。
+ *   URL 解決は apps/web/src/lib/metadata/ogp-image.ts (ogpImageUrl / ogpImageKeys)。
  * - 正方形クロップ対策（note.com 等）:
  *   apps/remotion/src/shared/components/layouts/OgpSafeZone.tsx の JSDoc 参照
  */

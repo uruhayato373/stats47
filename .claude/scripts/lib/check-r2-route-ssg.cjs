@@ -26,6 +26,9 @@ const R2_DEPENDENT_ROUTES = [
   "apps/web/src/app/ranking/[rankingKey]/page.tsx",
   "apps/web/src/app/areas/[areaCode]/page.tsx",
   "apps/web/src/app/areas/[areaCode]/cities/[cityCode]/page.tsx",
+  // 2026-07-06: /survey 一覧が build 時 R2 不可で空 prerender 固着した事故に伴い ƒ 化。
+  // [surveyKey] も generateStaticParams (build 時 [] を返すだけ) を撤去済 → 再混入禁止。
+  "apps/web/src/app/survey/[surveyKey]/page.tsx",
 ];
 
 let violations = 0;

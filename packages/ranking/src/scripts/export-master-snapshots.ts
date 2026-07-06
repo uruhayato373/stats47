@@ -30,7 +30,7 @@ async function main() {
     exportRankingItemsPerUrl(),
     exportCategoriesSnapshot(),
   ]);
-  const surveys = await exportSurveysSnapshot(itemsPerUrl.surveyIds);
+  const surveys = await exportSurveysSnapshot(itemsPerUrl.surveyIds, itemsPerUrl.surveyItemCounts);
 
   console.log(
     `✅ ranking_items_per_url: home=${itemsPerUrl.home.count} / categories=${itemsPerUrl.categories.files} files / items=${itemsPerUrl.items.files} files / surveys=${itemsPerUrl.surveys.files} files / ${itemsPerUrl.totalSizeBytes} bytes / ${itemsPerUrl.durationMs}ms`,

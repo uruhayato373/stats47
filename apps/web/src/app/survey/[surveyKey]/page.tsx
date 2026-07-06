@@ -11,7 +11,6 @@ import { notFound } from "next/navigation";
 import {
   readRankingItemsBySurveyFromR2,
   readSurveyByIdFromR2,
-  readSurveysFromR2,
 } from "@stats47/ranking/server";
 import { isOk } from "@stats47/types";
 
@@ -52,12 +51,6 @@ function parseLatestYear(latestYear: unknown): string {
     /* fallback */
   }
   return "2024";
-}
-
-export async function generateStaticParams() {
-  const result = await readSurveysFromR2();
-  if (!isOk(result)) return [];
-  return result.data.map((s) => ({ surveyKey: s.id }));
 }
 
 export async function generateMetadata({
@@ -155,7 +148,7 @@ export default async function SurveyPage({ params }: PageProps) {
         unit: item.unit,
         demographicAttr: item.demographicAttr,
         normalizationBasis: item.normalizationBasis,
-        baseThumbnailUrl: `${r2PublicUrl}/ranking/prefecture/${item.rankingKey}/${latestYear}/thumbnails/thumbnail`,
+        baseThumbnailUrl: `${r2PublicUrl}/app/ranking/${item.rankingKey}/thumbnail`,
       };
     });
 

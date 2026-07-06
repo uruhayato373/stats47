@@ -4,8 +4,9 @@
  * SEO対策のためのメタデータを生成。
  *
  * OG / Twitter Card:
- *   - 画像は ranking 別に動的生成される `/ranking/[rankingKey]/opengraph-image` を参照
- *   - `metadataBase` (root-metadata) により相対 URL → 絶対 URL に展開される
+ *   - 画像は事前生成した静的 OGP (R2 `app/ranking/<key>/ogp/ogp.png`) を参照。
+ *     ランタイム next/og は Cloudflare Worker で 500 になるため使わない
+ *     (正典: `.claude/rules/ogp-image-standards.md`)
  *
  * Freshness:
  *   - `article:modified_time` + `openGraph.modifiedTime` で OG/Article spec 上の更新日を表現
@@ -17,6 +18,8 @@ import {
 } from "@stats47/ranking";
 
 import type { AreaType } from "@/features/area";
+
+import { ogpImageKeys, ogpImageUrl } from "@/lib/metadata/ogp-image";
 
 import type { Metadata } from "next";
 
@@ -37,7 +40,7 @@ export function generateRankingPageMetaData({
   const title = rankingItem.seoTitle ?? rankingItem.title;
   const description = rankingItem.seoDescription ?? "";
   const path = `/ranking/${rankingItem.rankingKey}`;
-  const ogImagePath = `${path}/opengraph-image`;
+  const ogImagePath = ogpImageUrl(ogpImageKeys.ranking(rankingItem.rankingKey));
 
   return {
     title,

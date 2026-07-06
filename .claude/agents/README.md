@@ -22,7 +22,7 @@
 | `knowledge-curator` 🆕 | 失敗・学びの記録 + auto memory 整理 | strategy-advisor 分離 |
 | `improvement-triage` 🆕 | 改善バックログ整理 + status 更新 (`docs/02_実装計画/03_改善バックログ.md` 排他 append) | strategy-advisor 分離 |
 
-## Tier 2: Data / Infra (8 体)
+## Tier 2: Data / Infra (9 体)
 
 | agent | role | 派生元 |
 |---|---|---|
@@ -34,6 +34,7 @@
 | `ranking-publisher` 🆕 | ranking 公開多段 (generate-ranking-items / KNOWN・SITEMAP・INDEXABLE 再生成 / deploy / purge / 本番実測) のオーケストレーション。観測値=data-ingester、push=r2-publisher、deploy=devops-runner に委譲 | 2026-06-21 新設 |
 | `gis-curator` 🆕 | KSJ GIS メタ SSOT (datasets.ts / registry.ts) 管理・dataset lifecycle・メタ整合。完全DBレス (git TS=SSOT)。pipeline は gis-pipeline-runner、push は r2-publisher に委譲 | 2026-06-21 新設 (GIS DBレス化) |
 | `gis-pipeline-runner` 🆕 | KSJ GIS パイプライン実行 (seed → download → TopoJSON → R2 → build state)。SSOT 編集は gis-curator、push は r2-publisher に委譲 | 2026-06-21 新設 (GIS DBレス化) |
+| `survey-curator` 🆕 | ranking↔統計調査の紐付けメタ SSOT (surveys.json / provenance 辞書 / config.surveyId) 管理・監査 (/audit-survey-linkage)・未分類回収。正典 survey-linkage-standards.md。投入=data-ingester、push=r2-publisher、公開=ranking-publisher に委譲 | 2026-07-06 新設 (survey 紐付け再設計) |
 
 ## Tier 3: Content - Blog / Note / Ranking (9 体)
 
@@ -85,7 +86,7 @@
 | `ranking-ui-manager` 🆕 | ランキングページ (/ranking/*) UI 層の統一・監査・是正 (レイアウト/見出し/パンくず/サイドバー/SEO構造化データ/コピー)。theme-ui-manager の ranking 版。データ=data-ingester、公開=ranking-publisher に委譲 | 2026-06-21 新設 |
 | `chart-component-builder` | shadcn UI + D3.js チャートコンポーネント実装・カタログ管理 (chart-component-standards.md が SSoT)。静的 SVG の chart-author とは別物 (React/D3 実装専任) | 既存 (2026-07-03 Tier 表へ追記・棚卸し漏れ是正) |
 | `ui-reviewer` | melta-ui 準拠 + UI panel review | 既存 |
-| `image-prompt-curator` 🆕 | OGP / note 表紙 / SNS 静止素材プロンプト生成 | sns-renderer + note-manager 分離 |
+| `image-prompt-curator` 🆕 | OGP / note 表紙 / SNS 静止素材プロンプト生成 + 画像資産の棚卸し・ギャラリー監査 (`/audit-ogp-images`) | sns-renderer + note-manager 分離 |
 
 ## Tier 7: Code Quality / DevOps (4 体)
 

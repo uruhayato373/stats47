@@ -74,6 +74,11 @@ Phase 6 (2026-05-27) の D1 → R2 移行後、本 agent は D1 stats_* テー�
   `npm run validate:config --workspace=@stats47/data-configs` も実行**すること。
   規約: `.claude/rules/metric-config-standards.md` (フィールド役割: title=名前のみ / subtitle=区別子 /
   note=注釈 / description=定義。年・※を title に焼かない)
+- **survey 紐付けの確認 (下流整合)**: 新規 metric の調査紐付けは config.source から自動導出される
+  (`.claude/rules/survey-linkage-standards.md`)。量産後に
+  `npx tsx packages/ranking/src/scripts/audit-survey-linkage.ts` で新 metric が「未分類」に
+  落ちていないか確認し、未解決 (辞書未カバー statsDataId 等) は **survey-curator に委譲**する
+  (自分で辞書や surveys.json を編集しない)。
 - **SNS 発見索引の陳腐化 (下流整合)**: 新規 metric を追加すると `/react-to-news` の指標発見索引
   (`.claude/state/sns/metric-discovery-index.json`) が古くなり、新指標が find-metrics で引けなくなる。
   **量産・編集後は再生成すること**: `npx tsx .claude/scripts/sns/build-discovery-index.ts`

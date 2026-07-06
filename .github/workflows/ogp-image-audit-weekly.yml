@@ -1,0 +1,126 @@
+name: 🖼 OGP Image Audit (weekly self-heal)
+
+# OGP・リンクカード・note カバーの生成漏れを週次で機械チェックし、欠落を自動修復する。
+# 検知も生成もすべて決定的スクリプト (Node fetch + Satori、LLM 不使用)。費用は Actions
+# 分数 + R2 HEAD のみ (LLM API 課金ゼロ)。正典: .claude/rules/ogp-image-standards.md。
+#
+# 流れ: 各種別の欠落分だけ生成 (--max-generate で blast radius 制限) → R2 push →
+#       最終監査 (build-image-gallery --audit --all) → inventory を develop に commit-back →
+#       それでも欠落が残る/失敗したときだけ Issue 起票 (ogp-alert)。
+#
+# 新規 ranking 公開時は sync-snapshots.yml のフックが即生成するため、本 workflow は
+# セーフティネット (漏れ・note 新規・再生成漏れの回収)。
+
+on:
+  schedule:
+    - cron: "0 18 * * 6" # 土 18:00 UTC = 日 03:00 JST (既存 cron と非重複)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: ogp-image-audit
+  cancel-in-progress: false
+
+env:
+  R2_PUBLIC_FETCH_URL: https://storage.stats47.jp
+  SITE_ORIGIN: https://stats47.jp
+  CLOUDFLARE_R2_BUCKET_NAME: stats47
+  # S3 API 経由 R2 書き込み (diff-push-r2.ts)
+  R2_S3_ENDPOINT: https://${{ secrets.CLOUDFLARE_ACCOUNT_ID }}.r2.cloudflarestorage.com
+  R2_ACCESS_KEY_ID: ${{ secrets.CLOUDFLARE_R2_ACCESS_KEY_ID }}
+  R2_SECRET_ACCESS_KEY: ${{ secrets.CLOUDFLARE_R2_SECRET_ACCESS_KEY }}
+  # blog サムネ self-heal は wrangler put を使う
+  CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+  CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - name: 🧰 Checkout develop
+        uses: actions/checkout@v4
+        with:
+          ref: develop
+          fetch-depth: 0
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: ♻️ Self-heal missing images (欠落分のみ生成→R2)
+        continue-on-error: true # 修復失敗しても最終監査→Issue で拾う
+        run: |
+          TSC="apps/web/scripts/tsconfig.ogp.json"
+          SC="apps/web/scripts/generate-ogp-images.ts"
+          for TYPE in ranking ranking-cards areas note-covers; do
+            echo "=== self-heal $TYPE ==="
+            npx tsx --tsconfig $TSC $SC --type $TYPE --max-generate 500 || true
+          done
+          echo "=== push ==="
+          npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix app/ranking || true
+          npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix app/areas || true
+          npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix note || true
+
+      - name: 🖼 Self-heal blog thumbnails/OGP (既存スクリプト)
+        continue-on-error: true
+        run: npx tsx apps/web/scripts/generate-blog-thumbnails-cloud.ts --apply || true
+
+      - name: 🔍 Final audit (欠落判定)
+        id: check
+        run: |
+          set +e
+          node .claude/scripts/ogp/build-image-gallery.mjs --audit --all 2>&1 | tee /tmp/ogp-audit.log
+          echo "exit_code=${PIPESTATUS[0]}" >> "$GITHUB_OUTPUT"
+
+      - name: 📤 Commit inventory to develop
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .claude/state/ogp/inventory.json
+          if git diff --cached --quiet; then
+            echo "No inventory changes"
+            exit 0
+          fi
+          git commit -m "chore(ogp): weekly image audit inventory $(date -u +%Y-%m-%d) [skip ci]"
+          git push origin develop
+
+      - name: 🚨 Open issue on unresolved missing
+        if: steps.check.outputs.exit_code != '0'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          DATE=$(date -u +%Y-%m-%d)
+          TITLE="[OGP Alert] OGP画像の欠落 (自動修復後も残存)"
+          {
+            echo "## OGP画像 週次監査 ($DATE)"
+            echo ""
+            echo "自動修復 (欠落分の生成→R2 push) を試みた後も、R2 静的画像に欠落が残っています。"
+            echo "生成スクリプトが特定キーで失敗している可能性があります (データ取得不可・satori 例外等)。"
+            echo ""
+            echo '```'
+            grep -E "^\[missing\]|欠落|❌|missing" /tmp/ogp-audit.log | head -40
+            echo '```'
+            echo ""
+            echo "手動調査: \`OGP_DEBUG=1 npx tsx --tsconfig apps/web/scripts/tsconfig.ogp.json apps/web/scripts/generate-ogp-images.ts --type <type> --key <欠落key> --force\`"
+            echo "正典: .claude/rules/ogp-image-standards.md / skill: /audit-ogp-images"
+          } > /tmp/ogp-issue.md
+
+          # ラベル自己プロビジョニング (初回起票で label 不在エラーを避ける)
+          gh label create ogp-alert --description "OGP画像の生成漏れ (自動修復後も残存)" --color "d93f0b" --force 2>/dev/null || true
+
+          EXISTING=$(gh issue list --state open --label ogp-alert --search "\"[OGP Alert]\" in:title" --json number --jq '.[0].number // empty')
+          if [ -n "$EXISTING" ]; then
+            echo "Existing open issue #$EXISTING — appending comment"
+            gh issue comment "$EXISTING" --body-file /tmp/ogp-issue.md
+          else
+            gh issue create --title "$TITLE" --label "ogp-alert,auto-generated" --body-file /tmp/ogp-issue.md
+          fi

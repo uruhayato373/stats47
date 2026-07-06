@@ -57,6 +57,20 @@ const COMPETITION_GAP = { F: 1.0, G: 1.0, B: 0.8, D2: 0.6, A: 0.5 };
 // 型別上限で B 一色を防ぎ、型ポートフォリオ (15_ブログSEO拡充戦略.md §3) に沿った候補ミックスを保つ
 const MAX_PENDING_BY_ARCHETYPE = { B: 60, A: 40, D2: 40, F: 15, G: 15 };
 const MAX_PAIRS_PER_BASE = 2; // B型: 同一 base metric からの相関ペアは上位 2 件まで (near-duplicate 防止)
+// 倫理的にセンシティブな指標を B型「意外な関係」クリックベイトの軸にしない (ブランド毀損防止)。
+// 中絶・自殺・死因等を軽い相関ネタにするのは不適切。metric key の部分一致で B候補から除外する。
+// (A/D2/F/G の真面目な単体記事は別途可。ここでは B型の surprise 軸としての利用のみ弾く)
+const SENSITIVE_METRIC_PATTERNS = [
+  "abortion",
+  "suicide",
+  "death-rate",
+  "death-count",
+  "mortality",
+  "deaths-",
+  "-deaths",
+];
+const isSensitive = (key) =>
+  SENSITIVE_METRIC_PATTERNS.some((p) => key.includes(p));
 
 // ── 状態ヘルパ ──────────────────────────────────────────────────────────────
 function loadQueue() {
@@ -334,6 +348,8 @@ for (const { key: baseKey, json } of corrData) {
     const pairId = [baseKey, p.rankingKey].sort().join("--");
     if (seenPairs.has(pairId)) continue;
     seenPairs.add(pairId);
+    // センシティブ指標 (中絶/自殺/死因) を B型「意外な関係」の軸にしない (ブランド毀損防止)
+    if (isSensitive(baseKey) || isSensitive(p.rankingKey)) continue;
     const baseStem = stemOf(baseMetric.title);
     const pairStem = stemOf(pairMetric.title);
     if (baseStem === pairStem) continue; // 消費量 vs 支出額 のような自明ペア

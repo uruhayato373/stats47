@@ -121,7 +121,7 @@ primary_agent: strategy-advisor
   → Tier 1 は Must 優先、Tier 2 は Should 候補として計画に組み込む
   → due が今週以内のエントリを最優先
 
-- ブログ品質是正キュー（**計画的に順次品質向上**・真実源: `.claude/state/blog/remediation-queue.json`）
+- ブログ品質是正キュー（**既存記事を計画的に順次品質向上**・真実源: `.claude/state/blog/remediation-queue.json`）
   ```bash
   # 最新化 (audit fresh + GSC マージ、状態保持の upsert) → 次の 3 件を取り出す
   node .claude/scripts/blog/build-remediation-queue.mjs
@@ -130,6 +130,20 @@ primary_agent: strategy-advisor
   → pending 上位 3 件を「**ブログ品質是正 3 本**」として Phase 3 の **Must** に転載する (must-fix レーン優先)。
   → 実行は `/brushup-blog --target queue --next 3` (article-writer が archetype + 図あたり字数で是正 → blog-critic PASS → publish)。
   → これは毎週の**定常 Must**。少しずつ消化しキュー pending を減らす。仕組み: `docs/02_実装計画/06_ブログ品質是正ループ.md`。
+
+- ブログ新規記事キュー（**新規記事を継続拡充**・真実源: `.claude/state/blog/topic-queue.json`）
+  ```bash
+  # 週次 cron (fetch-metrics-weekly.yml) で再生成済だが、当日最新化して次の 4-5 件を取り出す
+  node .claude/scripts/blog/build-topic-queue.mjs
+  node .claude/scripts/blog/build-topic-queue.mjs --next 5
+  ```
+  → must-write レーン上位を「**新規記事 N 本**」として Phase 3 の **Must** に転載する（型ミックスを整える:
+    月次目標 B5/D2 4/A3-4/F3/G1-2、`docs/02_実装計画/15_ブログSEO拡充戦略.md` §3）。
+  → 実行は `/draft-from-trend --from queue`（1 本ずつ）→ generate-article-charts → **blog-critic PASS** → publish。
+  → ⚠️ **B 型は上位に擬似相関（人口交絡・自明ペア）が混じる**ので、`evidence.populationConfounded` と
+    「意外な関係が成立するか」を人手で吟味してから採用する（キューは候補生成であり最終決定ではない）。
+  → これも毎週の**定常 Must**。是正キュー（既存改善）と新規キュー（新規拡充）の両輪で回す。
+    仕組み: `.claude/skills/blog/plan-article-queue/SKILL.md`。
 
 - 直近の批判的レビュー・Pre-Mortem ドキュメント
   ls -t docs/04_レビュー/*.md | grep -v 'pre-mortem' | head -5

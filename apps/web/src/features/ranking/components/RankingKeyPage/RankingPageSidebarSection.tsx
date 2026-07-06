@@ -18,8 +18,11 @@ import type { RankingItem } from "@stats47/ranking";
 interface RankingPageSidebarSectionProps {
   rankingKey: string;
   areaType: AreaType;
-  rankingItem: Pick<RankingItem, "categoryKey" | "groupKey" | "surveyId">;
+  rankingItem: Pick<RankingItem, "categoryKey" | "groupKey">;
+  /** この統計の出典調査 (originalSurveys 焼き込み、1-2 件) */
   surveys: { id: string; name: string }[];
+  /** 同じ調査の関連ランキング (上位 5 件) */
+  surveyRelatedItems?: { rankingKey: string; title: string }[];
 }
 
 function RankingPageSidebarSkeleton() {
@@ -36,6 +39,7 @@ export function RankingPageSidebarSection({
   areaType,
   rankingItem,
   surveys,
+  surveyRelatedItems,
 }: RankingPageSidebarSectionProps) {
   return (
     <Suspense fallback={<RankingPageSidebarSkeleton />}>
@@ -59,7 +63,7 @@ export function RankingPageSidebarSection({
       />
       <SurveyCard
         surveys={surveys.map((survey) => ({ id: survey.id, name: survey.name }))}
-        currentSurveyId={rankingItem.surveyId ?? undefined}
+        relatedItems={surveyRelatedItems}
       />
       <PortStatisticsMapCard rankingKey={rankingKey} groupKey={rankingItem.groupKey} />
     </Suspense>
