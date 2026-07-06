@@ -78,6 +78,12 @@ npm run dev --workspace=apps/web   # turbo を介さず最速 (✓ Ready in 2s)
 # 型チェック（ワークスペース別）
 npx tsc --noEmit -p apps/web/tsconfig.json
 cd apps/remotion && npx tsc --noEmit
+
+# SNS 投稿ギャラリー管理画面（ローカル専用・依存ゼロ・127.0.0.1:4747）
+# X/IG/YouTube の素材を動画再生しながら確認 → 投稿/予約/caption 微調整/メトリクス閲覧。
+# 起動後にブラウザで http://127.0.0.1:4747/ を開く（file:// で直接開かない）。
+# 常駐プロセスなので run_in_background + Ready polling で起動する。skill: /sns-gallery
+npm run sns:gallery
 ```
 
 > 旧 `npm run backup:d1 --env production`（リモート D1 → R2 バックアップ）は **リモート D1 廃止により不要**。
