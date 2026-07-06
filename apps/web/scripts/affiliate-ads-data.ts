@@ -671,6 +671,28 @@ export const AFFILIATE_ADS: AffiliateAd[] = [
     "createdAt": "2026-06-30 00:00:00",
     "updatedAt": "2026-06-30 00:00:00"
   },
+  // ── 一休.com 宿泊予約 (travel / ValueCommerce・別ピクセル無し) ──────────────────
+  {
+    "id": "af_ikyu_travel_001",
+    "title": "一休.com 宿泊予約",
+    "htmlContent": "https://ck.jp.ap.valuecommerce.com/servlet/referral?sid=3751516&pid=892653250",
+    "areaCode": null,
+    "vertical": "travel",
+    "categoryKey": null,
+    "locationCode": "blog-bottom",
+    "isActive": true,
+    "priority": 90,
+    "startDate": null,
+    "endDate": null,
+    "targetCategories": null,
+    "adType": "banner",
+    "imageUrl": "https://ad.jp.ap.valuecommerce.com/servlet/gifbanner?sid=3751516&pid=892653250",
+    "trackingPixelUrl": null,
+    "width": 300,
+    "height": 250,
+    "createdAt": "2026-07-06 00:00:00",
+    "updatedAt": "2026-07-06 00:00:00"
+  },
   // ── マッチングアプリ バナー 1 (population / blog-bottom) ──────────────────────
   {
     "id": "af_population_banner_001",

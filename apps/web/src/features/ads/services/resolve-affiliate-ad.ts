@@ -22,7 +22,8 @@ export interface ResolvedAffiliateBanner {
   title: string;
   href: string;
   imageUrl: string;
-  trackingPixelUrl: string;
+  /** ASP のインプレッション計測ピクセル。A8 は 0.gif、ValueCommerce 等は無し (null) */
+  trackingPixelUrl: string | null;
   width: number;
   height: number;
 }
@@ -69,12 +70,13 @@ function toBanner(b: {
   width: number | null;
   height: number | null;
 }): ResolvedAffiliateBanner | null {
-  if (!b.imageUrl || !b.trackingPixelUrl) return null;
+  // imageUrl は必須。trackingPixelUrl は任意 (ValueCommerce 等は別ピクセルを持たない)。
+  if (!b.imageUrl) return null;
   return {
     title: b.title,
     href: b.htmlContent,
     imageUrl: b.imageUrl,
-    trackingPixelUrl: b.trackingPixelUrl,
+    trackingPixelUrl: b.trackingPixelUrl ?? null,
     width: b.width ?? 300,
     height: b.height ?? 250,
   };

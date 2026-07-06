@@ -102,7 +102,7 @@ describe("resolveAffiliateBanners", () => {
     });
   });
 
-  it("imageUrl または trackingPixelUrl がない広告は除外する", async () => {
+  it("imageUrl がない広告は除外する", async () => {
     mockFindBanners.mockResolvedValue([
       {
         id: "banner-no-image",
@@ -128,6 +128,37 @@ describe("resolveAffiliateBanners", () => {
 
     const result = await resolveAffiliateBanners(["economy"]);
     expect(result).toEqual([]);
+  });
+
+  it("trackingPixelUrl が無くても imageUrl があれば含める (ValueCommerce 等・別ピクセル無し)", async () => {
+    mockFindBanners.mockResolvedValue([
+      {
+        id: "banner-vc",
+        title: "一休.com",
+        htmlContent: "https://ck.jp.ap.valuecommerce.com/servlet/referral?sid=1&pid=2",
+        areaCode: null,
+        categoryKey: null,
+        vertical: "travel",
+        locationCode: "blog-bottom",
+        isActive: true,
+        priority: 90,
+        startDate: null,
+        endDate: null,
+        targetCategories: null,
+        adType: "banner",
+        imageUrl: "https://ad.jp.ap.valuecommerce.com/servlet/gifbanner?sid=1&pid=2",
+        trackingPixelUrl: null,
+        width: 300,
+        height: 250,
+        createdAt: "2026-07-06",
+        updatedAt: "2026-07-06",
+      },
+    ]);
+
+    const result = await resolveAffiliateBanners(["travel"]);
+    expect(result).toHaveLength(1);
+    expect(result[0].imageUrl).toContain("gifbanner");
+    expect(result[0].trackingPixelUrl).toBeNull();
   });
 
   it("width/height が null の場合はデフォルト値 300x250 を使う", async () => {
