@@ -23,13 +23,14 @@ interface RankingThumbnailProps {
  * ランキングのサムネイル画像を表示するクライアントコンポーネント。
  * ThemeAwareImage を利用して light/dark を CSS hidden ではなく
  * 1 枚だけ描画する（二重ダウンロード防止）。
- * baseSrc を指定すると -light.png / -dark.png を自動解決する。
+ * baseSrc を指定すると -light.webp / -dark.webp を自動解決する
+ * (事前生成した静的カード。正典: .claude/rules/ogp-image-standards.md)。
  */
 export function RankingThumbnail({ baseSrc, lightSrc, darkSrc, src, alt, className }: RankingThumbnailProps) {
     const [error, setError] = useState(false);
 
-    const resolvedLight = lightSrc || (baseSrc ? `${baseSrc}-light.png` : src);
-    const resolvedDark = darkSrc || (baseSrc ? `${baseSrc}-dark.png` : undefined);
+    const resolvedLight = lightSrc || (baseSrc ? `${baseSrc}-light.webp` : src);
+    const resolvedDark = darkSrc || (baseSrc ? `${baseSrc}-dark.webp` : undefined);
 
     if (error || (!resolvedLight && !resolvedDark)) {
         return (

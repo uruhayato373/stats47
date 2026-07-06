@@ -18,8 +18,8 @@ co_agents: [x-strategist, blog-editor, note-manager, sns-renderer]
 - ブランド素材・プロフィール画像
 
 **担当外（別ルート）**:
-- 記事別 OGP（動的タイトル差し込み） → Satori `apps/web/src/app/**/opengraph-image.tsx`
-- 固定 OGP（凝ったビジュアル） → Remotion `apps/remotion/src/features/ogp/`（手順は同ディレクトリ `README.md`）
+- 記事別 OGP（動的タイトル差し込み） → Satori `apps/web/src/app/**/opengraph-image.tsx`（種別カタログ・棚卸しは `.claude/rules/ogp-image-standards.md`）
+- OGP / カバー / リンクカード画像の目視確認・棚卸し → `/audit-ogp-images`（`.claude/scripts/ogp/build-image-gallery.mjs`）
 
 ## 引数
 
@@ -125,4 +125,5 @@ use-case に応じて以下の推奨パスを出力する:
 
 - `reference/catalog.md` — 全 43 テンプレートのカタログ
 - `reference/formats.md` — 用途別のサイズ・セーフエリア・制約
-- `apps/remotion/src/features/ogp/README.md` — Remotion 製 OGP の実装一覧と書き出し手順
+- `.claude/rules/ogp-image-standards.md` — OGP / カバー / リンクカード画像の種別カタログ SSOT・棚卸し・生成方式
+- `apps/web/src/features/ogp/` — Satori 製 OGP コンポーネント実体（`DefaultOgp` / `BlogOgp` / `RankingOgp` ほか）
