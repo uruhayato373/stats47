@@ -81,7 +81,7 @@ export function AreaOgp({ data }: Props) {
               marginBottom: 4,
             }}
           >
-            AREA #{String(data.prefCode).padStart(2, '0')}
+            {`AREA #${String(data.prefCode).padStart(2, '0')}`}
           </div>
           {data.reading && (
             <div
@@ -140,10 +140,12 @@ export function AreaOgp({ data }: Props) {
                 <div
                   key={s.indicator}
                   style={{
+                    display: 'flex',
+                    alignItems: 'baseline',
                     fontFamily: FONT.sansJP,
                     fontSize: 13,
                     paddingBottom: 3,
-                    borderBottom: `1px dotted ${BRAND.line}`,
+                    borderBottom: `1px dashed ${BRAND.line}`,
                     marginBottom: 3,
                   }}
                 >
@@ -156,7 +158,7 @@ export function AreaOgp({ data }: Props) {
                       fontSize: 11,
                     }}
                   >
-                    #{s.rank}
+                    {`#${s.rank}`}
                   </span>
                   {s.indicator}
                 </div>
@@ -179,10 +181,12 @@ export function AreaOgp({ data }: Props) {
                 <div
                   key={s.indicator}
                   style={{
+                    display: 'flex',
+                    alignItems: 'baseline',
                     fontFamily: FONT.sansJP,
                     fontSize: 13,
                     paddingBottom: 3,
-                    borderBottom: `1px dotted ${BRAND.line}`,
+                    borderBottom: `1px dashed ${BRAND.line}`,
                     marginBottom: 3,
                   }}
                 >
@@ -195,7 +199,7 @@ export function AreaOgp({ data }: Props) {
                       fontSize: 11,
                     }}
                   >
-                    #{s.rank}
+                    {`#${s.rank}`}
                   </span>
                   {s.indicator}
                 </div>

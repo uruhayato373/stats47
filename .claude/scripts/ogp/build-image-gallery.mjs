@@ -207,19 +207,20 @@ function readJsonSafe(p) {
  * スクレイピングを弾くため、公開済みは note.com のリンクを提示し人手で確認する。
  */
 function enumerateNoteCovers() {
-  const out = new Map(); // slug -> { slug, status, noteUrl }
+  const out = new Map(); // slug -> { slug, status, noteUrl, r2Path }
   const draft = readJsonSafe(
     path.join(PROJECT_ROOT, ".claude/state/note-draft-index.json"),
   );
   for (const [slug, v] of Object.entries(draft?.drafts || {})) {
-    out.set(slug, { slug, status: v?.status || "draft", noteUrl: null });
+    if (!v?.r2_path) continue;
+    out.set(slug, { slug, status: v?.status || "draft", noteUrl: null, r2Path: v.r2_path });
   }
   const pub = readJsonSafe(
     path.join(PROJECT_ROOT, ".claude/state/note-published-urls.json"),
   );
   for (const [slug, v] of Object.entries(pub?.articles || {})) {
-    if (slug.startsWith("_")) continue;
-    out.set(slug, { slug, status: "published", noteUrl: v?.url || null });
+    if (slug.startsWith("_") || !v?.r2_path) continue;
+    out.set(slug, { slug, status: "published", noteUrl: v?.url || null, r2Path: v.r2_path });
   }
   return [...out.values()].sort((a, b) => a.slug.localeCompare(b.slug));
 }
@@ -258,17 +259,27 @@ async function ogpEntries(pairs) {
   });
 }
 
+/** R2 静的 OGP (事前生成した ogp.png) を参照する単一画像 entry。 */
+function r2OgpEntry(key, r2Key, pageUrl) {
+  return {
+    key,
+    label: key,
+    pageUrl,
+    images: [{ variant: "single", url: `${R2}/${r2Key}` }],
+  };
+}
+
 async function buildTab(tab) {
   switch (tab) {
     case "blog-ogp": {
       let slugs = await enumerateBlogSlugs();
       if (LIMIT) slugs = slugs.slice(0, LIMIT);
       return {
-        source: "satori-route",
+        source: "r2-static",
         aspect: "1.91:1",
-        r2KeyPattern: `${SITE}/blog/<slug>/opengraph-image`,
-        entries: await ogpEntries(
-          slugs.map((s) => ({ key: s, pageUrl: `${SITE}/blog/${s}` })),
+        r2KeyPattern: `app/blog/<slug>/ogp/ogp.png`,
+        entries: slugs.map((s) =>
+          r2OgpEntry(s, `app/blog/${s}/ogp/ogp.png`, `${SITE}/blog/${s}`),
         ),
       };
     }
@@ -279,11 +290,11 @@ async function buildTab(tab) {
       if (LIMIT) keys = keys.slice(0, LIMIT);
       else if (!ALL) keys = sample(keys, RANKING_SAMPLE);
       return {
-        source: "satori-route",
+        source: "r2-static",
         aspect: "1.91:1",
-        r2KeyPattern: `${SITE}/ranking/<key>/opengraph-image`,
-        entries: await ogpEntries(
-          keys.map((k) => ({ key: k, pageUrl: `${SITE}/ranking/${k}` })),
+        r2KeyPattern: `app/ranking/<key>/ogp/ogp.png`,
+        entries: keys.map((k) =>
+          r2OgpEntry(k, `app/ranking/${k}/ogp/ogp.png`, `${SITE}/ranking/${k}`),
         ),
       };
     }
@@ -302,15 +313,19 @@ async function buildTab(tab) {
       };
     }
     case "category-ogp": {
+      // category は静的 og-image.jpg にフォールバック (Satori route は使わない)
       let keys = [...CATEGORY_KEYS];
       if (LIMIT) keys = keys.slice(0, LIMIT);
       return {
-        source: "satori-route",
+        source: "static",
         aspect: "1.91:1",
-        r2KeyPattern: `${SITE}/category/<key>/opengraph-image`,
-        entries: await ogpEntries(
-          keys.map((k) => ({ key: k, pageUrl: `${SITE}/category/${k}` })),
-        ),
+        r2KeyPattern: `${SITE}/og-image.jpg (共通静的)`,
+        entries: keys.map((k) => ({
+          key: k,
+          label: k,
+          pageUrl: `${SITE}/category/${k}`,
+          images: [{ variant: "single", url: `${SITE}/og-image.jpg` }],
+        })),
       };
     }
     case "areas-ogp": {
@@ -323,11 +338,11 @@ async function buildTab(tab) {
         );
       if (LIMIT) codes = codes.slice(0, LIMIT);
       return {
-        source: "satori-route",
+        source: "r2-static",
         aspect: "1.91:1",
-        r2KeyPattern: `${SITE}/areas/<code>/opengraph-image`,
-        entries: await ogpEntries(
-          codes.map((c) => ({ key: c, pageUrl: `${SITE}/areas/${c}` })),
+        r2KeyPattern: `app/areas/<code>/ogp/ogp.png`,
+        entries: codes.map((c) =>
+          r2OgpEntry(c, `app/areas/${c}/ogp/ogp.png`, `${SITE}/areas/${c}`),
         ),
       };
     }
@@ -355,52 +370,35 @@ async function buildTab(tab) {
       );
       if (LIMIT) keys = keys.slice(0, LIMIT);
       else if (!ALL) keys = sample(keys, RANKING_SAMPLE);
-      // 年 (latestYear.yearCode) は item.json 依存のため取得する
-      const entries = await pMap(keys, async (k) => {
-        let year = null;
-        let areaType = "prefecture";
-        try {
-          const item = JSON.parse(
-            await fetchText(`${R2}/app/ranking/${k}/item.json`),
-          );
-          year = item?.item?.latestYear?.yearCode ?? null;
-          areaType = item?.item?.areaType ?? "prefecture";
-        } catch {}
-        const base = year
-          ? `${R2}/ranking/${areaType}/${k}/${year}/thumbnails/thumbnail`
-          : null;
-        return {
-          key: k,
-          label: year ? `${k} (${year})` : `${k} (年不明)`,
-          pageUrl: `${SITE}/ranking/${k}`,
-          images: base
-            ? [
-                { variant: "light", url: `${base}-light.png` },
-                { variant: "dark", url: `${base}-dark.png` },
-              ]
-            : [],
-        };
-      });
       return {
-        source: "none",
+        source: "r2-static",
         aspect: "16:9",
-        r2KeyPattern: `ranking/<areaType>/<key>/<year>/thumbnails/thumbnail-{light,dark}.png`,
-        entries: entries.filter((e) => !e.error),
+        r2KeyPattern: `app/ranking/<key>/thumbnail-{light,dark}.webp`,
+        entries: keys.map((k) => ({
+          key: k,
+          label: k,
+          pageUrl: `${SITE}/ranking/${k}`,
+          images: [
+            { variant: "light", url: `${R2}/app/ranking/${k}/thumbnail-light.webp` },
+            { variant: "dark", url: `${R2}/app/ranking/${k}/thumbnail-dark.webp` },
+          ],
+        })),
       };
     }
     case "note-cover": {
       let covers = enumerateNoteCovers();
       if (LIMIT) covers = covers.slice(0, LIMIT);
       return {
-        source: "external-ephemeral",
+        source: "r2-static",
         aspect: "1.91:1",
-        r2KeyPattern: `note.com へ直接アップロード (R2 非archive)`,
+        r2KeyPattern: `note/<vertical>/<slug>/images/cover-1280x670.png`,
         entries: covers.map((c) => ({
           key: c.slug,
           label: `${c.slug} [${c.status}]`,
           pageUrl: c.noteUrl,
-          images: [],
-          external: true,
+          images: [
+            { variant: "single", url: `${R2}/${c.r2Path}/images/cover-1280x670.png` },
+          ],
         })),
       };
     }

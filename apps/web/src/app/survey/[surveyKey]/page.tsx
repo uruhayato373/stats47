@@ -148,7 +148,7 @@ export default async function SurveyPage({ params }: PageProps) {
         unit: item.unit,
         demographicAttr: item.demographicAttr,
         normalizationBasis: item.normalizationBasis,
-        baseThumbnailUrl: `${r2PublicUrl}/ranking/prefecture/${item.rankingKey}/${latestYear}/thumbnails/thumbnail`,
+        baseThumbnailUrl: `${r2PublicUrl}/app/ranking/${item.rankingKey}/thumbnail`,
       };
     });
 

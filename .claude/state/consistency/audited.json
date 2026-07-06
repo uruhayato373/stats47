@@ -1,7 +1,7 @@
 {
-  "hash": "a5f1f04b3892c82f8660b3a65fc6a579a956c7b18219336104b1785a838336de",
-  "audited_at": "2026-07-05T22:00:32",
+  "hash": "698b65dcceadd933e2cb1c40268b1da57864e5a2081ed5c2cc05d1d6bcaea446",
+  "audited_at": "2026-07-06T01:45:20",
   "files": [
-    ".claude/scripts/lib/check-docs-links.cjs"
+    ".claude/scripts/ogp/build-image-gallery.mjs"
   ]
 }

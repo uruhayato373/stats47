@@ -111,18 +111,31 @@ node .claude/scripts/ogp/build-image-gallery.mjs --audit
 **OGP は事前生成した静的画像を R2 に保存し、配信時は静的 URL を参照する。** サイト全体で統一
 (note カバーも同思想)。ランタイム next/og ImageResponse は Cloudflare Worker で例外 (1101) を投げるため使わない。
 
-- **レンダリングは Node/CI で** Satori (`apps/web/scripts/lib/blog-thumbnail-render.ts`、ローカル npm フォント
-  `@expo-google-fonts/noto-sans-jp` を使うため Worker と違い健全)。OGP コンポーネント JSX ではなく共有 render lib
-  の `buildElement({title, subtitle, category, domainPath})` を使う (blog/ranking/areas で共通デザイン・drift 防止)。
+- **レンダリングは Node/CI (またはクラウドセッション) で** Satori。ローカル npm フォント
+  `@expo-google-fonts/noto-sans-jp` を使うため Worker と違い健全。tsx は `--tsconfig apps/web/scripts/tsconfig.ogp.json`
+  (jsx: react-jsx) で起動する (既存 OGP コンポーネント JSX を automatic runtime で描画するため)。
+  - **ranking / areas OGP**: 既存 `RankingOgp` / `AreaOgp` コンポーネント (データ入り: TOP3/BOTTOM・強弱・地図) を
+    satori 描画。satori 非互換なら共有 render lib のタイトルカードにフォールバック。
+    ※ 両コンポーネントは satori-strict 対応済 (mixed text+式 → template literal 化、`dotted`→`dashed`、
+    複数子 span に `display:flex`)。この修正が無いと全件フォールバックする。
+  - **blog OGP / ranking カード / note カバー**: 共有 render lib `apps/web/scripts/lib/blog-thumbnail-render.ts`
+    の `buildElement({title, subtitle, category, domainPath})` (共通デザイン・drift 防止)。note は `size` 引数で 1280×670。
 - **配信 URL 解決は `apps/web/src/lib/metadata/ogp-image.ts`** の `ogpImageUrl(ogpImageKeys.<type>(id))`。
   各ページの `generateMetadata` が `openGraph.images` / `twitter.images` にこの静的 R2 URL を設定する。
-- **生成スクリプト**: blog=`generate-blog-thumbnails-cloud.ts` (既存、`ogp/ogp.png`) / ranking・areas=
-  `generate-ogp-images.ts --type <ranking|areas> --apply`。CI=`generate-ogp-images.yml` (手動 dispatch)。
-- **新規 ranking/area/blog を公開したら OGP も生成する** (`--apply`)。未生成だと og:image が 404 になる。
-- **note カバー**: 現状 R2 非archive・公開時に note.com へ直接アップロード (§1)。統一方針としては同様に
-  事前生成→R2 保存が望ましい。2 系統 (Remotion / SVG→PNG) の正系統確定は課題 (§3-2)。
-- **theme のみ例外**: `generateStaticParams` でビルド時 prerender され稼働するため、当面ランタイム route を残す
-  (静的 R2 生成に移すかは後日判断)。**home/category は既存の静的 `public/og-image.jpg`** を使う。
+- **生成スクリプト (クラウド/ローカルから直接実行)**:
+  - blog OGP = `generate-blog-thumbnails-cloud.ts` (既存、`app/blog/<slug>/ogp/ogp.png`)
+  - ranking OGP / areas OGP / ranking カード / note カバー = `generate-ogp-images.ts --type <ranking|areas|ranking-cards|note-covers>`
+    → `.local/r2/<key>` staging に書き出し → `diff-push-r2.ts --prefix <app/ranking|app/areas|note>` で S3 push。
+  - CI fallback = `generate-ogp-images.yml` (手動 dispatch。ただしクラウド連携トークンは actions:write 無しのため、
+    R2 creds のあるセッション/ローカルからの直接実行が主経路)。
+- **新規 ranking/area/blog/note を公開したら OGP/カバーも生成する**。未生成だと og:image が 404 になる。
+- **ranking リンクカード**は `app/ranking/<key>/thumbnail-{light,dark}.webp` (★新 canonical。旧
+  `ranking/prefecture/<key>/<year>/thumbnails/` は年入り・非 `app/` 名前空間で廃止)。`RankingThumbnail` / survey ページが参照。
+- **note カバー**: `note/<vertical>/<slug>/images/cover-1280x670.png` に事前生成 archive (Satori 統一デザイン)。
+  既存 SVG 系統 (`generate-note-covers.mjs` + `svg-to-png.js`) と Remotion `NoteCover` は **deprecate (削除しない)**。
+  ※ note.com 公開済みカバーの差し替えではなく R2 archive + 今後の正系統。
+- **theme のみ例外**: `generateStaticParams` でビルド時 prerender され稼働するため、当面ランタイム route を残す。
+  **home/category は既存の静的 `public/og-image.jpg`** を使う。
 
 ### 画像生成 AI (背景素材・Phase 2 予定)
 - テキスト・数値の重畳は上記 Satori が担う。動的タイトル差し込みは静的 PNG を事前生成することで実現する。
