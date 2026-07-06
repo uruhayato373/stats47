@@ -17,11 +17,15 @@ describe("generateBlogMetadata", () => {
     expect(result.alternates?.canonical).toBe(`/blog/${input.slug}`);
   });
 
-  it("openGraph.images を設定しない（opengraph-image.tsx に委ねる）", () => {
+  it("openGraph/twitter.images に事前生成した静的 OGP (R2) を設定すること", () => {
     const result = generateBlogMetadata(input);
+    const expectedUrl = `https://storage.stats47.jp/app/blog/${input.slug}/ogp/ogp.png`;
 
-    expect((result.openGraph as Record<string, unknown>)?.images).toBeUndefined();
-    expect((result.twitter as Record<string, unknown>)?.images).toBeUndefined();
+    const ogImages = (result.openGraph as Record<string, unknown>)?.images as
+      | Array<{ url: string }>
+      | undefined;
+    expect(ogImages?.[0]?.url).toBe(expectedUrl);
+    expect((result.twitter as Record<string, unknown>)?.images).toEqual([expectedUrl]);
   });
 
   it("twitter card が summary_large_image であること", () => {

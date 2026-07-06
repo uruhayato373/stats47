@@ -47,22 +47,24 @@ describe("generateRankingPageMetaData", () => {
         expect((result.twitter as Record<string, unknown>)?.card).toBe("summary_large_image");
     });
 
-    it("openGraph.images / twitter.images を ranking 別動的画像 URL で明示設定する", () => {
+    it("openGraph.images / twitter.images を事前生成した静的 OGP (R2) URL で明示設定する", () => {
         const result = generateRankingPageMetaData({
             rankingItem: mockItem as RankingItem,
             areaType: "prefecture",
         });
 
+        const expectedUrl =
+            "https://storage.stats47.jp/app/ranking/annual-sales-amount-per-employee/ogp/ogp.png";
         const og = result.openGraph as Record<string, unknown>;
         const ogImages = og.images as Array<Record<string, unknown>>;
         expect(ogImages).toHaveLength(1);
-        expect(ogImages[0].url).toBe("/ranking/annual-sales-amount-per-employee/opengraph-image");
+        expect(ogImages[0].url).toBe(expectedUrl);
         expect(ogImages[0].width).toBe(1200);
         expect(ogImages[0].height).toBe(630);
 
         const twitter = result.twitter as Record<string, unknown>;
         const twImages = twitter.images as string[];
-        expect(twImages).toEqual(["/ranking/annual-sales-amount-per-employee/opengraph-image"]);
+        expect(twImages).toEqual([expectedUrl]);
     });
 
     it("openGraph.url が canonical path を指すこと", () => {
