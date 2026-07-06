@@ -88,8 +88,20 @@ function chip(list, el, key){
   }
 }
 
+// サーバー経由 (http://127.0.0.1:4747/) でないと相対 fetch が解決できない。
+// file:// で直接開いた場合は API base を明示できないので、絶対 URL を組み立てる。
+const API_BASE = (location.protocol === "http:" || location.protocol === "https:")
+  ? location.origin
+  : "http://127.0.0.1:4747";
+const IS_FILE = location.protocol === "file:";
+
 async function api(path, opts){
-  const r = await fetch(path, opts);
+  let r;
+  try {
+    r = await fetch(API_BASE + path, opts);
+  } catch(e){
+    throw new Error(`サーバーに接続できません (${API_BASE})。\`npm run sns:gallery\` を起動し http://127.0.0.1:4747/ を開いてください`);
+  }
   const j = await r.json().catch(()=>({}));
   if(!r.ok) throw new Error(j.error || r.status);
   return j;
@@ -134,7 +146,8 @@ function mediaEl(cands){
     const el = document.createElement(isVideo?"video":"img");
     if(isVideo){ el.controls = true; el.preload = "metadata"; el.muted = true; }
     else el.loading = "lazy";
-    el.src = c.url;
+    // /media/... はサーバー相対。file:// でも表示できるよう API_BASE で絶対化
+    el.src = c.url.startsWith("/") ? API_BASE + c.url : c.url;
     el.onerror = ()=>{ i++; el.remove(); mount(); };
     const src = document.createElement("span"); src.className="src"; src.textContent = c.source;
     wrap.appendChild(el); wrap.appendChild(src);
@@ -282,6 +295,14 @@ async function render(){
 
 $("#q").addEventListener("input", (e)=>{ state.q = e.target.value.trim(); render(); });
 $("#refresh").onclick = ()=>{ render(); loadLimits(); loadConsistency(); };
+
+if(IS_FILE){
+  const bar = $("#warnbar");
+  bar.style.display = "block";
+  bar.style.background = "#7f1d1d"; bar.style.color = "#fecaca";
+  bar.innerHTML = 'file:// で直接開いています。API は <b>http://127.0.0.1:4747</b> に接続します。'
+    + 'サーバー未起動なら <code>npm run sns:gallery</code> を実行し、<b>http://127.0.0.1:4747/</b> を開いてください。';
+}
 render(); loadLimits(); loadConsistency();
 </script>
 </body>

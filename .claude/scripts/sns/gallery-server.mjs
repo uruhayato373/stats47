@@ -47,8 +47,15 @@ const LIMITS = {
 };
 
 // ─── util ───────────────────────────────────────────
+// localhost 専用ツール。file:// で開いた HTML (Origin: null) からの fetch を許すため
+// CORS を全許可する (127.0.0.1 bind なので外部からは届かない)。
+const CORS = {
+  "access-control-allow-origin": "*",
+  "access-control-allow-methods": "GET,POST,PATCH,OPTIONS",
+  "access-control-allow-headers": "content-type",
+};
 const json = (res, code, obj) => {
-  res.writeHead(code, { "content-type": "application/json; charset=utf-8" });
+  res.writeHead(code, { "content-type": "application/json; charset=utf-8", ...CORS });
   res.end(JSON.stringify(obj));
 };
 const readBody = (req) =>
@@ -311,10 +318,11 @@ function serveMedia(req, res, rel) {
       "content-length": end - start + 1,
       "content-range": `bytes ${start}-${end}/${stat.size}`,
       "accept-ranges": "bytes",
+      ...CORS,
     });
     fs.createReadStream(file, { start, end }).pipe(res);
   } else {
-    res.writeHead(200, { "content-type": type, "content-length": stat.size, "accept-ranges": "bytes" });
+    res.writeHead(200, { "content-type": type, "content-length": stat.size, "accept-ranges": "bytes", ...CORS });
     fs.createReadStream(file).pipe(res);
   }
 }
@@ -381,9 +389,14 @@ const server = http.createServer(async (req, res) => {
   const url = new URL(req.url, `http://${HOST}:${PORT}`);
   const p = url.pathname;
   try {
+    // ── CORS preflight (file:// からの fetch 用)
+    if (req.method === "OPTIONS") {
+      res.writeHead(204, CORS);
+      return res.end();
+    }
     // ── 静的
     if (req.method === "GET" && p === "/") {
-      res.writeHead(200, { "content-type": "text/html; charset=utf-8" });
+      res.writeHead(200, { "content-type": "text/html; charset=utf-8", ...CORS });
       return res.end(fs.readFileSync(HTML_PATH));
     }
     if (req.method === "GET" && p.startsWith("/media/")) {
