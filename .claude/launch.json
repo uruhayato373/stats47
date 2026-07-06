@@ -9,9 +9,9 @@
       "autoPort": false
     },
     {
-      "name": "sns-gallery",
+      "name": "gallery",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "sns:gallery"],
+      "runtimeArgs": ["run", "gallery"],
       "port": 4747,
       "autoPort": false
     }

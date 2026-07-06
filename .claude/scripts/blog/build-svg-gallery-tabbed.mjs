@@ -15,6 +15,8 @@
 
 import fs from "node:fs";
 
+import { CATALOGS, classify, inspectSvg } from "../lib/svg-classify.mjs";
+
 const R2_BASE = process.env.R2_PUBLIC_FETCH_URL || "https://storage.stats47.jp";
 const args = process.argv.slice(2);
 function flag(name, def) {
@@ -27,89 +29,7 @@ const LIMIT = flag("limit", null) ? Number(flag("limit", null)) : null;
 const OUT = flag("out", "/tmp/blog-svg-gallery-tabbed.html");
 const CONCURRENCY = 12;
 
-// ─── カタログ定義（svg-builder の関数に対応） ───────────
-const CATALOGS = [
-  { key: "bar-card", label: "カード型ランキング(横長)", desc: "generateBarChartSvg (columns・960×404・ブログ/X)" },
-  { key: "bar-ig", label: "カード型ランキング(縦長IG)", desc: "generateBarChartSvg (portrait・1080×1350・Instagram)" },
-  { key: "bar", label: "その他の棒", desc: "generateBarChartSvg (single) / 比較・grouped 棒" },
-  { key: "scatter", label: "散布図", desc: "generateScatterSvg" },
-  { key: "map", label: "タイルマップ", desc: "generateChoroplethSvg" },
-  { key: "line", label: "折れ線", desc: "generateLineSvg" },
-  { key: "stacked", label: "積み上げ棒", desc: "generateStackedBarSvg" },
-  { key: "findings", label: "要点カード", desc: "generateFindingsCardSvg" },
-  { key: "table", label: "テーブル", desc: "generateRankingTableSvg" },
-  { key: "unknown", label: "未分類", desc: "無意味名・型判別不能" },
-];
-
-/**
- * ファイル名 + SVG 内容からカタログを判定する。
- * §4 alias 表 + 内容ヒューリスティック。
- */
-function classify(file, svg) {
-  const f = file.toLowerCase().replace(/\.svg$/, "");
-  // 縦長カード(IG): -ig サフィックスは常に portrait ランキングカード
-  if (/-ig$/.test(f)) return "bar-ig";
-  // 無意味名 (inline-chart-N / chart-N) は型語を持たない限り unknown（§10 要 brushup）
-  if (/^(inline-)?chart[-_]?\d+$/.test(f) || /inline-chart/.test(f)) return "unknown";
-  // findings を先に（-summary-findings が -ranking より優先）
-  if (/findings|要点|わかったこと/.test(f)) return "findings";
-  if (/scatter|相関/.test(f)) return "scatter";
-  // 地理マップ: tilemap(ハイフン無し含む)/tile-grid/choropleth を name か寸法で判定。
-  // 地理 heatmap は寸法（600×~700 のタイル）で map に寄せる
-  if (/tile-?map|tile[-_]?grid|choropleth|地図|prefecture-map|-map$|-map-/.test(f) || isTileMapLike(svg))
-    return "map";
-  if (/timeseries|trend|推移|時系列|national-trend|line-chart|折れ線/.test(f)) return "line";
-  if (/stacked|breakdown|composition|内訳|構成/.test(f)) return "stacked";
-  // 6 カタログ外の特殊型（地理でない heatmap 含む）は unknown に出して要確認にする
-  if (/waterfall|radar|pyramid|sunburst|treemap|sankey|donut|pie|heatmap/.test(f)) return "unknown";
-  if (/ranking|rankings|top5|top10|top-bottom|bottom5|rate-ranking|income-ranking|格差|gap|-bar$|-bar-|comparison|比較/.test(f))
-    return barKind(svg);
-  // 内容ヒューリスティック（型語を持たない記述名）
-  if (/<polyline/.test(svg) && /<circle/.test(svg)) return "line";
-  if (svg.match(/<circle/g)?.length > 20 && /回帰|regression|dasharray="6 3"/.test(svg))
-    return "scatter";
-  // 横棒（rect 多数で polyline なし）
-  if (!/<polyline/.test(svg) && (svg.match(/<rect/g)?.length ?? 0) > 6) return barKind(svg);
-  return "unknown";
-}
-
-/**
- * 棒系を「カード型2列ランキング」と「その他の棒」に細分する。
- * columns レイアウト(generateBarChartSvg layout:"columns")は viewBox 幅 960 +
- * 順位バッジ <circle> を必ず持つ。960 幅でも circle 無しは grouped/comparison 棒。
- */
-function barKind(svg) {
-  const m = svg.match(/viewBox="0 0 (\d+) (\d+)"/);
-  const w = m ? +m[1] : 0;
-  const h = m ? +m[2] : 0;
-  // 縦長カード(IG portrait): 1080×1350 + 順位バッジ circle
-  if (w >= 1040 && w <= 1120 && h >= 1300 && /<circle/.test(svg)) return "bar-ig";
-  // 横長カード(columns): 960幅 + 順位バッジ circle
-  if (w >= 900 && w <= 1000 && /<circle/.test(svg)) return "bar-card";
-  return "bar";
-}
-
-/**
- * §5 標準 map=600×700。多数の rect タイル・polyline/path なしの地理タイルマップを
- * 寸法で検出する（ファイル名が tilemap/heatmap でなくても拾う）。
- */
-function isTileMapLike(svg) {
-  const vb = svg.match(/viewBox="0 0 (\d+(?:\.\d+)?) (\d+(?:\.\d+)?)"/);
-  if (!vb) return false;
-  const w = +vb[1];
-  const h = +vb[2];
-  const rects = svg.match(/<rect/g)?.length ?? 0;
-  return (
-    w >= 560 && w <= 620 && h >= 640 && h <= 720 && rects > 40 &&
-    !/<polyline/.test(svg) && !/<path/.test(svg)
-  );
-}
-
-function inspectSvg(svg) {
-  const viewBox = svg.match(/viewBox=["']([^"']+)["']/)?.[1] ?? null;
-  const hasTheme = /@media\s*\(prefers-color-scheme:\s*dark\)/.test(svg);
-  return { viewBox, hasTheme, hasViewBox: !!viewBox };
-}
+// カタログ定義・分類ロジックは共有 lib (../lib/svg-classify.mjs) に集約。
 
 async function fetchText(url) {
   const res = await fetch(url);

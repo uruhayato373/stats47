@@ -8,7 +8,9 @@
  * (https://storage.stats47.jp) を <img loading="lazy"> で直参照し、画像をローカルへ
  * 落とさない (read-only)。クラウドの Claude セッションでは生成 HTML を Artifact 化して閲覧する。
  *
- * 正典: .claude/rules/ogp-image-standards.md / skill: /audit-ogp-images
+ * 列挙 collector は .claude/scripts/lib/gallery-collectors.mjs に共有化 (統合メディア
+ * コンソール server.mjs と共用)。本スクリプトは CLI / HTML / 棚卸し / CI ゲート (exit code)
+ * を担う。正典: .claude/rules/ogp-image-standards.md / skill: /audit-ogp-images
  *
  * ## タブ (--tabs で絞り込み)
  *   blog-ogp ranking-ogp theme-ogp category-ogp areas-ogp  … Satori 動的 OGP
@@ -30,12 +32,12 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
+import { OGP_TABS, buildTab, esc, pMap, probe } from "../lib/gallery-collectors.mjs";
+
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(__dirname, "../../..");
 const SITE = process.env.SITE_ORIGIN || "https://stats47.jp";
 const R2 = process.env.R2_PUBLIC_FETCH_URL || "https://storage.stats47.jp";
-const CONCURRENCY = 12;
-const RANKING_SAMPLE = 30; // ranking 系タブの既定サンプル件数
 
 // ─── 引数 ─────────────────────────────────────────────
 const argv = process.argv.slice(2);
@@ -52,16 +54,7 @@ const LIMIT = flag("limit", null) ? Number(flag("limit", null)) : null;
 const OUT = flag("out", "/tmp/ogp-image-gallery.html");
 const INVENTORY_OUT = path.join(PROJECT_ROOT, ".claude/state/ogp/inventory.json");
 
-const ALL_TABS = [
-  "blog-ogp",
-  "ranking-ogp",
-  "theme-ogp",
-  "category-ogp",
-  "areas-ogp",
-  "blog-card",
-  "ranking-card",
-  "note-cover",
-];
+const ALL_TABS = OGP_TABS;
 const REQ_TABS = flag("tabs", null);
 const TABS =
   REQ_TABS && REQ_TABS !== true
@@ -72,340 +65,6 @@ const TABS =
     : AUDIT
       ? ALL_TABS
       : ALL_TABS;
-
-// ─── ユーティリティ ───────────────────────────────────
-async function pMap(items, fn, concurrency = CONCURRENCY) {
-  const results = [];
-  let idx = 0;
-  async function worker() {
-    while (idx < items.length) {
-      const i = idx++;
-      try {
-        results[i] = await fn(items[i], i);
-      } catch (err) {
-        results[i] = { error: String(err?.message || err) };
-      }
-    }
-  }
-  await Promise.all(
-    Array.from({ length: Math.min(concurrency, items.length) }, worker),
-  );
-  return results;
-}
-
-async function fetchText(url) {
-  const res = await fetch(url);
-  if (!res.ok) throw new Error(`HTTP ${res.status} ${url}`);
-  return res.text();
-}
-
-/** GET でステータス + content-type を確認 (本文はダウンロードしない) */
-async function probe(url) {
-  const ctrl = new AbortController();
-  const timer = setTimeout(() => ctrl.abort(), 15000);
-  try {
-    const res = await fetch(url, { signal: ctrl.signal });
-    const ct = res.headers.get("content-type") || "";
-    try {
-      await res.body?.cancel();
-    } catch {}
-    return { ok: res.ok && ct.startsWith("image"), status: res.status, ct };
-  } catch (err) {
-    return { ok: false, status: 0, ct: String(err?.name || err) };
-  } finally {
-    clearTimeout(timer);
-  }
-}
-
-/** 先頭 N + 等間隔でサンプリング (代表性を保つ) */
-function sample(list, n) {
-  if (list.length <= n) return list;
-  const head = Math.min(10, n);
-  const picked = list.slice(0, head);
-  const remaining = n - head;
-  if (remaining > 0) {
-    const step = (list.length - head) / remaining;
-    for (let i = 0; i < remaining; i++) {
-      picked.push(list[head + Math.floor(i * step)]);
-    }
-  }
-  return [...new Set(picked)];
-}
-
-function esc(s) {
-  return String(s ?? "").replace(
-    /[<>&"]/g,
-    (c) => ({ "<": "&lt;", ">": "&gt;", "&": "&amp;", '"': "&quot;" })[c],
-  );
-}
-
-// ─── 列挙元 ───────────────────────────────────────────
-/** sitemap から live な URL を全取得し、パターンで分類 */
-let _sitemapCache = null;
-async function loadSitemapLocs() {
-  if (_sitemapCache) return _sitemapCache;
-  const index = await fetchText(`${SITE}/sitemap.xml`);
-  const parts = [...index.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
-  const all = [];
-  await pMap(parts, async (u) => {
-    const xml = await fetchText(u);
-    for (const m of xml.matchAll(/<loc>([^<]+)<\/loc>/g)) all.push(m[1]);
-  });
-  _sitemapCache = all;
-  return all;
-}
-
-async function enumerateFromSitemap(re) {
-  const locs = await loadSitemapLocs();
-  const keys = new Set();
-  for (const loc of locs) {
-    const m = loc.match(re);
-    if (m) keys.add(m[1]);
-  }
-  return [...keys].sort();
-}
-
-async function enumerateBlogSlugs() {
-  const manifest = JSON.parse(await fetchText(`${R2}/app/blog/all.json`));
-  const arts = (manifest.articles || []).filter((a) => a.published !== false);
-  return arts.map((a) => a.slug).sort();
-}
-
-/** 17 category キー (SSOT: packages/data-configs/src/types.ts CATEGORY_KEYS) */
-const CATEGORY_KEYS = [
-  "landweather",
-  "population",
-  "laborwage",
-  "agriculture",
-  "miningindustry",
-  "commercial",
-  "economy",
-  "construction",
-  "energy",
-  "tourism",
-  "educationsports",
-  "administrativefinancial",
-  "safetyenvironment",
-  "socialsecurity",
-  "international",
-  "infrastructure",
-  "ict",
-];
-
-function readJsonSafe(p) {
-  try {
-    return JSON.parse(fs.readFileSync(p, "utf8"));
-  } catch {
-    return null;
-  }
-}
-
-/**
- * note カバー: state の draft-index + published-urls から集約。
- * 注: note カバーは R2 に archive されず、公開時に生成して note.com へ直接アップロードされる
- * ephemeral (2026-07-06 確認: r2_path に draft.md はあるが cover 画像は無い)。note.com は
- * スクレイピングを弾くため、公開済みは note.com のリンクを提示し人手で確認する。
- */
-function enumerateNoteCovers() {
-  const out = new Map(); // slug -> { slug, status, noteUrl, r2Path }
-  const draft = readJsonSafe(
-    path.join(PROJECT_ROOT, ".claude/state/note-draft-index.json"),
-  );
-  for (const [slug, v] of Object.entries(draft?.drafts || {})) {
-    if (!v?.r2_path) continue;
-    out.set(slug, { slug, status: v?.status || "draft", noteUrl: null, r2Path: v.r2_path });
-  }
-  const pub = readJsonSafe(
-    path.join(PROJECT_ROOT, ".claude/state/note-published-urls.json"),
-  );
-  for (const [slug, v] of Object.entries(pub?.articles || {})) {
-    if (slug.startsWith("_") || !v?.r2_path) continue;
-    out.set(slug, { slug, status: "published", noteUrl: v?.url || null, r2Path: v.r2_path });
-  }
-  return [...out.values()].sort((a, b) => a.slug.localeCompare(b.slug));
-}
-
-// ─── タブ定義 ─────────────────────────────────────────
-// 各タブ: entries[] = { key, label, pageUrl?, images: [{variant, url}] }
-// variant: "single" (OGP/note) | "light" | "dark" (カード)
-
-/**
- * ページ HTML の og:image meta から実際に配信されている OGP 画像 URL を解決する。
- * 静的フォールバック (home/category が `/og-image.jpg` を使う等) やハッシュ付き URL、
- * ランタイム 500 をそのまま反映する = 真実を映す監査。取得失敗時は素の route を仮定する。
- */
-async function resolveOgImage(pageUrl) {
-  try {
-    const html = await fetchText(pageUrl);
-    const m = html.match(
-      /<meta\s+property=["']og:image["']\s+content=["']([^"']+)["']/i,
-    );
-    if (m) return { url: m[1], resolved: true };
-  } catch {}
-  return { url: `${pageUrl}/opengraph-image`, resolved: false };
-}
-
-/** key/pageUrl のペア列から og:image を解決した OGP entry を並列生成 */
-async function ogpEntries(pairs) {
-  return pMap(pairs, async ({ key, pageUrl }) => {
-    const og = await resolveOgImage(pageUrl);
-    return {
-      key,
-      label: key,
-      pageUrl,
-      images: [{ variant: "single", url: og.url }],
-      ogResolved: og.resolved,
-    };
-  });
-}
-
-/** R2 静的 OGP (事前生成した ogp.png) を参照する単一画像 entry。 */
-function r2OgpEntry(key, r2Key, pageUrl) {
-  return {
-    key,
-    label: key,
-    pageUrl,
-    images: [{ variant: "single", url: `${R2}/${r2Key}` }],
-  };
-}
-
-async function buildTab(tab) {
-  switch (tab) {
-    case "blog-ogp": {
-      let slugs = await enumerateBlogSlugs();
-      if (LIMIT) slugs = slugs.slice(0, LIMIT);
-      return {
-        source: "r2-static",
-        aspect: "1.91:1",
-        r2KeyPattern: `app/blog/<slug>/ogp/ogp.png`,
-        entries: slugs.map((s) =>
-          r2OgpEntry(s, `app/blog/${s}/ogp/ogp.png`, `${SITE}/blog/${s}`),
-        ),
-      };
-    }
-    case "ranking-ogp": {
-      let keys = await enumerateFromSitemap(
-        /stats47\.jp\/ranking\/([a-z0-9-]+)$/,
-      );
-      if (LIMIT) keys = keys.slice(0, LIMIT);
-      else if (!ALL) keys = sample(keys, RANKING_SAMPLE);
-      return {
-        source: "r2-static",
-        aspect: "1.91:1",
-        r2KeyPattern: `app/ranking/<key>/ogp/ogp.png`,
-        entries: keys.map((k) =>
-          r2OgpEntry(k, `app/ranking/${k}/ogp/ogp.png`, `${SITE}/ranking/${k}`),
-        ),
-      };
-    }
-    case "theme-ogp": {
-      let slugs = await enumerateFromSitemap(
-        /stats47\.jp\/themes\/([a-z0-9-]+)$/,
-      );
-      if (LIMIT) slugs = slugs.slice(0, LIMIT);
-      return {
-        source: "satori-route",
-        aspect: "1.91:1",
-        r2KeyPattern: `${SITE}/themes/<slug>/opengraph-image`,
-        entries: await ogpEntries(
-          slugs.map((s) => ({ key: s, pageUrl: `${SITE}/themes/${s}` })),
-        ),
-      };
-    }
-    case "category-ogp": {
-      // category は静的 og-image.jpg にフォールバック (Satori route は使わない)
-      let keys = [...CATEGORY_KEYS];
-      if (LIMIT) keys = keys.slice(0, LIMIT);
-      return {
-        source: "static",
-        aspect: "1.91:1",
-        r2KeyPattern: `${SITE}/og-image.jpg (共通静的)`,
-        entries: keys.map((k) => ({
-          key: k,
-          label: k,
-          pageUrl: `${SITE}/category/${k}`,
-          images: [{ variant: "single", url: `${SITE}/og-image.jpg` }],
-        })),
-      };
-    }
-    case "areas-ogp": {
-      let codes = await enumerateFromSitemap(
-        /stats47\.jp\/areas\/([0-9]{5})$/,
-      );
-      if (codes.length === 0)
-        codes = Array.from({ length: 47 }, (_, i) =>
-          String(i + 1).padStart(2, "0") + "000",
-        );
-      if (LIMIT) codes = codes.slice(0, LIMIT);
-      return {
-        source: "r2-static",
-        aspect: "1.91:1",
-        r2KeyPattern: `app/areas/<code>/ogp/ogp.png`,
-        entries: codes.map((c) =>
-          r2OgpEntry(c, `app/areas/${c}/ogp/ogp.png`, `${SITE}/areas/${c}`),
-        ),
-      };
-    }
-    case "blog-card": {
-      let slugs = await enumerateBlogSlugs();
-      if (LIMIT) slugs = slugs.slice(0, LIMIT);
-      return {
-        source: "r2-static",
-        aspect: "16:9",
-        r2KeyPattern: `app/blog/<slug>/thumbnail-{light,dark}.webp`,
-        entries: slugs.map((s) => ({
-          key: s,
-          label: s,
-          pageUrl: `${SITE}/blog/${s}`,
-          images: [
-            { variant: "light", url: `${R2}/app/blog/${s}/thumbnail-light.webp` },
-            { variant: "dark", url: `${R2}/app/blog/${s}/thumbnail-dark.webp` },
-          ],
-        })),
-      };
-    }
-    case "ranking-card": {
-      let keys = await enumerateFromSitemap(
-        /stats47\.jp\/ranking\/([a-z0-9-]+)$/,
-      );
-      if (LIMIT) keys = keys.slice(0, LIMIT);
-      else if (!ALL) keys = sample(keys, RANKING_SAMPLE);
-      return {
-        source: "r2-static",
-        aspect: "16:9",
-        r2KeyPattern: `app/ranking/<key>/thumbnail-{light,dark}.webp`,
-        entries: keys.map((k) => ({
-          key: k,
-          label: k,
-          pageUrl: `${SITE}/ranking/${k}`,
-          images: [
-            { variant: "light", url: `${R2}/app/ranking/${k}/thumbnail-light.webp` },
-            { variant: "dark", url: `${R2}/app/ranking/${k}/thumbnail-dark.webp` },
-          ],
-        })),
-      };
-    }
-    case "note-cover": {
-      let covers = enumerateNoteCovers();
-      if (LIMIT) covers = covers.slice(0, LIMIT);
-      return {
-        source: "r2-static",
-        aspect: "1.91:1",
-        r2KeyPattern: `note/<vertical>/<slug>/images/cover-1280x670.png`,
-        entries: covers.map((c) => ({
-          key: c.slug,
-          label: `${c.slug} [${c.status}]`,
-          pageUrl: c.noteUrl,
-          images: [
-            { variant: "single", url: `${R2}/${c.r2Path}/images/cover-1280x670.png` },
-          ],
-        })),
-      };
-    }
-    default:
-      return { source: "none", aspect: "?", r2KeyPattern: "", entries: [] };
-  }
-}
 
 // ─── HTML 生成 ───────────────────────────────────────
 function imageBlock(img) {
@@ -667,7 +326,13 @@ function summarize(tabData, checkMap) {
   );
   const tabData = {};
   for (const tab of TABS) {
-    tabData[tab] = await buildTab(tab);
+    tabData[tab] = await buildTab(tab, {
+      limit: LIMIT,
+      all: ALL,
+      site: SITE,
+      r2: R2,
+      projectRoot: PROJECT_ROOT,
+    });
     console.error(
       `[ogp-gallery]   ${tab}: ${tabData[tab].entries.length} entries (${tabData[tab].source})`,
     );

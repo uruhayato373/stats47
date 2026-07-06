@@ -1,20 +1,29 @@
 #!/usr/bin/env node
 /**
- * SNS 投稿ギャラリー管理サーバー (ローカル専用・依存ゼロ)
+ * 統合メディア管理コンソール (ローカル専用・依存ゼロ)
  *
- * X / Instagram / YouTube の投稿素材 (動画・画像) をギャラリーで確認しながら
- * 投稿 / 予約投稿し、キャプション微調整・メトリクス閲覧を行う localhost UI。
+ * 全メディア資産 (SNS 投稿素材・OGP・リンクカード・note カバー/記事内画像・動画 master・
+ * ブログ SVG チャート) を 1 つの localhost UI で横断的に閲覧し、SNS は投稿/予約まで、
+ * 画像資産は再生成ジョブ起動まで行う。
  *
- * 設計 (正典: .claude/rules/sns-content-standards.md):
+ * 画面 (GET):
+ *   /        統合ホーム (各セクションへのナビ + 件数サマリ)
+ *   /sns     SNS 投稿ギャラリー (X/IG/YouTube・投稿/予約/caption/メトリクス)
+ *   /assets  画像資産 (OGP / リンクカード / note カバー / note 記事内画像 / 動画 master)
+ *   /svg     ブログ SVG カタログ (6 カタログ + table + unknown 分類)
+ *
+ * 設計 (正典: .claude/rules/sns-content-standards.md §5.5 / ogp-image-standards.md):
  * - 投稿台帳 SSOT は .claude/state/sns/posts.json。書込は sns-posts-store.cjs 経由のみ
- * - 依存追加ゼロ (node:http / node:fs / node:child_process)。127.0.0.1 bind 固定
+ * - 依存追加ゼロ (node:http / node:fs / node:child_process + 共有 lib)。127.0.0.1 bind 固定
  * - 投稿実行はハイブリッド:
  *     X  = publish-x.ts を spawn (dry-run / 予約 / 即時)
  *     IG = schedule JSON + posts.json への予約登録のみ (実投稿は GHA cron)
  *     YT = upload.js を spawn (月1 + 重複ガードは upload.js 内蔵)
- * - メディアはローカル (.local/r2/sns) 優先、無ければ R2 公開 URL 直参照
+ * - 資産列挙は R2 list 不可のため SSOT (sitemap / all.json / note state / archive-manifest)
+ *   起点。collector は .claude/scripts/lib/gallery-collectors.mjs を CI 静的ギャラリーと共用
+ * - 再生成は kind ホワイトリストのみ (任意コマンド実行を防ぐ)
  *
- * 起動: npm run sns:gallery  (= node .claude/scripts/sns/gallery-server.mjs)
+ * 起動: npm run gallery  (= node .claude/scripts/gallery/server.mjs)   [旧: npm run sns:gallery]
  * 停止: Ctrl-C
  */
 import http from "node:http";
@@ -24,6 +33,18 @@ import { spawn } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import { createRequire } from "node:module";
 
+import {
+  buildTab,
+  enumerateBlogSlugs,
+  enumerateNoteCovers,
+  enumerateNoteImages,
+  enumerateVideoMasters,
+  fetchText,
+  pMap,
+  probe,
+} from "../lib/gallery-collectors.mjs";
+import { CATALOGS, classify, inspectSvg } from "../lib/svg-classify.mjs";
+
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(__dirname, "../../..");
 const require = createRequire(import.meta.url);
@@ -31,13 +52,48 @@ const store = require(path.join(PROJECT_ROOT, ".claude/scripts/lib/sns-posts-sto
 
 const PORT = Number(process.env.PORT || 4747);
 const HOST = "127.0.0.1";
-const R2_BASE = process.env.SNS_R2_BASE || "https://storage.stats47.jp";
+const R2_BASE = process.env.SNS_R2_BASE || process.env.R2_PUBLIC_FETCH_URL || "https://storage.stats47.jp";
+const SITE = process.env.SITE_ORIGIN || "https://stats47.jp";
 const LOCAL_SNS_DIR = path.join(PROJECT_ROOT, ".local/r2/sns");
 const STATE_DIR = path.join(PROJECT_ROOT, ".claude/state");
-const HTML_PATH = path.join(__dirname, "gallery.html");
+const UI_DIR = __dirname; // gallery/ 直下に index.html / sns.html / assets.html / svg.html
 const GALLERY_STATE = path.join(PROJECT_ROOT, ".local/sns-gallery-state.json");
 const PUBLISH_X_SCRIPT = path.join(PROJECT_ROOT, ".claude/skills/sns/publish-x/publish-x.ts");
 const YT_UPLOAD_SCRIPT = path.join(PROJECT_ROOT, ".claude/scripts/youtube/upload.js");
+
+// ─── 資産タブ登録簿 (OGP は buildTab、note-image/video は専用 collector) ──────
+const ASSET_TABS = [
+  { id: "blog-ogp", label: "ブログ OGP", kind: "ogp" },
+  { id: "blog-card", label: "ブログ リンクカード", kind: "ogp" },
+  { id: "ranking-ogp", label: "ランキング OGP", kind: "ogp" },
+  { id: "ranking-card", label: "ランキング リンクカード", kind: "ogp" },
+  { id: "areas-ogp", label: "都道府県 OGP", kind: "ogp" },
+  { id: "theme-ogp", label: "テーマ OGP", kind: "ogp" },
+  { id: "category-ogp", label: "カテゴリ OGP", kind: "ogp" },
+  { id: "note-cover", label: "note カバー", kind: "ogp" },
+  { id: "note-image", label: "note 記事内画像", kind: "note-image" },
+  { id: "video-master", label: "動画 master", kind: "video" },
+];
+
+// ─── 再生成ホワイトリスト (kind → cmd/args。任意コマンド実行を防ぐ) ──────────
+function ogpRegen(type, keys) {
+  const prefix = type === "note-covers" ? "note" : type === "areas" ? "app/areas" : "app/ranking";
+  const keyArg = keys ? ` --key ${keys}` : "";
+  const gen = `npx tsx --tsconfig apps/web/scripts/tsconfig.ogp.json apps/web/scripts/generate-ogp-images.ts --type ${type}${keyArg}`;
+  const push = `npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix ${prefix}`;
+  // 生成 (→ .local/r2 staging) してから R2 push。push には S3 creds が要る (無ければ job ログで fail)
+  return { cmd: "sh", args: ["-c", `${gen} && ${push}`] };
+}
+const REGEN = {
+  "blog-thumbnails": (keys) => ({
+    cmd: "npx",
+    args: ["tsx", "apps/web/scripts/generate-blog-thumbnails-cloud.ts", "--apply", ...(keys ? ["--slug", keys] : [])],
+  }),
+  "ogp-ranking": (keys) => ogpRegen("ranking", keys),
+  "ogp-ranking-cards": (keys) => ogpRegen("ranking-cards", keys),
+  "ogp-areas": (keys) => ogpRegen("areas", keys),
+  "ogp-note-covers": (keys) => ogpRegen("note-covers", keys),
+};
 
 // ─── 頻度リミット (正典: sns-content-standards.md §1) ───────────────
 const LIMITS = {
@@ -384,6 +440,95 @@ function scheduleIg({ date, time = "09:00", type, domain, content_key, caption }
   return { file: path.basename(target), postId: row.id };
 }
 
+// ─── 統合資産 collector (OGP / カード / note / video) ────────────
+async function getAssetTab(tab, { limit = null, all = false } = {}) {
+  const meta = ASSET_TABS.find((t) => t.id === tab);
+  if (!meta) throw new Error(`unknown asset tab: ${tab}`);
+  const base = { limit, all, site: SITE, r2: R2_BASE, projectRoot: PROJECT_ROOT };
+  if (meta.kind === "ogp") return { tab, label: meta.label, ...(await buildTab(tab, base)) };
+  if (meta.kind === "note-image")
+    return { tab, label: meta.label, ...(await enumerateNoteImages(PROJECT_ROOT, R2_BASE, { limit })) };
+  if (meta.kind === "video") return { tab, label: meta.label, ...enumerateVideoMasters(PROJECT_ROOT, R2_BASE) };
+  throw new Error(`unhandled kind: ${meta.kind}`);
+}
+
+/** ホーム用の軽量サマリ (sitemap 走査を避け、即答できる件数だけ)。 */
+async function assetsSummary() {
+  const posts = store.loadAll().filter((p) => p.status !== "deleted");
+  let blogSlugs = 0;
+  try {
+    blogSlugs = (await enumerateBlogSlugs(R2_BASE)).length;
+  } catch {}
+  return {
+    sns: {
+      total: posts.length,
+      posted: posts.filter((p) => p.status === "posted").length,
+      scheduled: posts.filter((p) => p.status === "scheduled").length,
+      draft: posts.filter((p) => p.status === "draft").length,
+    },
+    blogArticles: blogSlugs, // blog-ogp / blog-card は 1 記事につき各 1 / 2 枚
+    noteCovers: enumerateNoteCovers(PROJECT_ROOT).length,
+    videoMasters: enumerateVideoMasters(PROJECT_ROOT, R2_BASE).entries.length,
+    assetTabs: ASSET_TABS.length,
+  };
+}
+
+// ─── ブログ SVG カタログ (R2 から fetch → 分類。TTL キャッシュ) ──────
+let _svgCache = null; // { at, key, data }
+async function svgCatalog({ limit = 30, all = false } = {}) {
+  const key = all ? "all" : String(limit ?? 30);
+  if (_svgCache && _svgCache.key === key && Date.now() - _svgCache.at < 10 * 60 * 1000) return _svgCache.data;
+  const manifest = JSON.parse(await fetchText(`${R2_BASE}/app/blog/all.json`));
+  let articles = (manifest.articles || []).filter((a) => a.hasCharts);
+  const cap = all ? articles.length : (limit ?? 30);
+  articles = articles.slice(0, cap);
+  const groups = await pMap(
+    articles,
+    async (a) => {
+      let md;
+      try {
+        md = await fetchText(`${R2_BASE}/app/blog/${a.slug}/article.md`);
+      } catch {
+        return [];
+      }
+      const refs = [...new Set([...md.matchAll(/\]\(data\/([^)]+\.svg)\)/g)].map((m) => m[1]))];
+      const charts = await pMap(
+        refs,
+        async (file) => {
+          try {
+            const svg = await fetchText(`${R2_BASE}/app/blog/${a.slug}/data/${file}`);
+            return {
+              slug: a.slug,
+              file,
+              cat: classify(file, svg),
+              url: `${R2_BASE}/app/blog/${a.slug}/data/${file}`,
+              ...inspectSvg(svg),
+            };
+          } catch {
+            return null;
+          }
+        },
+        6,
+      );
+      return charts.filter((c) => c && !c.error);
+    },
+    8,
+  );
+  const items = groups.filter((g) => Array.isArray(g)).flat();
+  const catalogs = CATALOGS.map((c) => ({ ...c, count: items.filter((i) => i.cat === c.key).length }));
+  const data = { catalogs, items, articleCount: articles.length };
+  _svgCache = { at: Date.now(), key, data };
+  return data;
+}
+
+// ─── 静的ページ配信 ──────────────────────────────────
+function servePage(res, file) {
+  const fp = path.join(UI_DIR, file);
+  if (!fs.existsSync(fp)) return json(res, 404, { error: `page not found: ${file}` });
+  res.writeHead(200, { "content-type": "text/html; charset=utf-8", ...CORS });
+  return res.end(fs.readFileSync(fp));
+}
+
 // ─── HTTP ハンドラ ────────────────────────────────────
 const server = http.createServer(async (req, res) => {
   const url = new URL(req.url, `http://${HOST}:${PORT}`);
@@ -394,11 +539,11 @@ const server = http.createServer(async (req, res) => {
       res.writeHead(204, CORS);
       return res.end();
     }
-    // ── 静的
-    if (req.method === "GET" && p === "/") {
-      res.writeHead(200, { "content-type": "text/html; charset=utf-8", ...CORS });
-      return res.end(fs.readFileSync(HTML_PATH));
-    }
+    // ── 静的ページ
+    if (req.method === "GET" && p === "/") return servePage(res, "index.html");
+    if (req.method === "GET" && p === "/sns") return servePage(res, "sns.html");
+    if (req.method === "GET" && p === "/assets") return servePage(res, "assets.html");
+    if (req.method === "GET" && p === "/svg") return servePage(res, "svg.html");
     if (req.method === "GET" && p.startsWith("/media/")) {
       return serveMedia(req, res, decodeURIComponent(p.slice("/media/".length)));
     }
@@ -416,9 +561,58 @@ const server = http.createServer(async (req, res) => {
     if (req.method === "GET" && p === "/api/inventory") return json(res, 200, buildInventory());
     if (req.method === "GET" && p === "/api/limits") return json(res, 200, { limits: computeLimits(), galleryState: loadGalleryState() });
     if (req.method === "GET" && p === "/api/ig-consistency") return json(res, 200, igConsistency());
+    if (req.method === "GET" && p === "/api/jobs") {
+      return json(res, 200, {
+        jobs: [...jobs.values()].map((j) => ({
+          id: j.id,
+          kind: j.kind,
+          status: j.status,
+          exitCode: j.exitCode ?? null,
+          startedAt: j.startedAt,
+          endedAt: j.endedAt ?? null,
+          tail: j.log.slice(-3),
+        })),
+      });
+    }
     if (req.method === "GET" && /^\/api\/jobs\/\d+$/.test(p)) {
       const job = jobs.get(Number(p.split("/").pop()));
       return job ? json(res, 200, job) : json(res, 404, { error: "job not found" });
+    }
+    // ── 統合資産 API (OGP / カード / note / video / SVG)
+    if (req.method === "GET" && p === "/api/assets/tabs") return json(res, 200, { tabs: ASSET_TABS });
+    if (req.method === "GET" && p === "/api/assets/summary") return json(res, 200, await assetsSummary());
+    if (req.method === "GET" && /^\/api\/assets\/tab\/[a-z-]+$/.test(p)) {
+      const tab = p.split("/").pop();
+      const limit = url.searchParams.get("limit") ? Number(url.searchParams.get("limit")) : null;
+      const all = url.searchParams.get("all") === "1";
+      try {
+        return json(res, 200, await getAssetTab(tab, { limit, all }));
+      } catch (e) {
+        return json(res, 400, { error: e.message });
+      }
+    }
+    if (req.method === "POST" && p === "/api/assets/check") {
+      const { tab, limit = null, all = false } = await readBody(req);
+      try {
+        const data = await getAssetTab(tab, { limit, all });
+        const urls = [...new Set(data.entries.flatMap((e) => e.images.map((im) => im.url)))];
+        const result = {};
+        await pMap(urls, async (u) => {
+          result[u] = await probe(u);
+        });
+        return json(res, 200, { checked: urls.length, result });
+      } catch (e) {
+        return json(res, 400, { error: e.message });
+      }
+    }
+    if (req.method === "GET" && p === "/api/svg/catalog") {
+      const limit = url.searchParams.get("limit") ? Number(url.searchParams.get("limit")) : 30;
+      const all = url.searchParams.get("all") === "1";
+      try {
+        return json(res, 200, await svgCatalog({ limit, all }));
+      } catch (e) {
+        return json(res, 500, { error: e.message });
+      }
     }
     // ── 書込 API
     if (req.method === "PATCH" && /^\/api\/posts\/\d+$/.test(p)) {
@@ -494,6 +688,18 @@ const server = http.createServer(async (req, res) => {
       const r = startJob("publish-yt", "node", args);
       return r.error ? json(res, 409, r) : json(res, 202, r);
     }
+    // ── 再生成 (画像資産。kind ホワイトリストのみ・任意コマンド実行を防ぐ)
+    if (req.method === "POST" && p === "/api/actions/regenerate") {
+      const body = await readBody(req);
+      const kind = body.kind;
+      const keys = body.keys ? String(body.keys).trim() : null;
+      if (!REGEN[kind]) return json(res, 400, { error: `kind は ${Object.keys(REGEN).join(" | ")} のいずれか` });
+      if (keys && !/^[a-z0-9,_-]+$/.test(keys))
+        return json(res, 400, { error: "keys は英数字・カンマ・ハイフンのみ (安全のため)" });
+      const { cmd, args } = REGEN[kind](keys);
+      const r = startJob(`regenerate:${kind}`, cmd, args);
+      return r.error ? json(res, 409, r) : json(res, 202, r);
+    }
     return json(res, 404, { error: `unknown route: ${req.method} ${p}` });
   } catch (e) {
     return json(res, 500, { error: e.message });
@@ -501,8 +707,9 @@ const server = http.createServer(async (req, res) => {
 });
 
 server.listen(PORT, HOST, () => {
-  console.log(`SNS gallery: http://${HOST}:${PORT}/  (Ctrl-C で停止)`);
+  console.log(`統合メディアコンソール: http://${HOST}:${PORT}/  (Ctrl-C で停止)`);
+  console.log(`- ホーム /  ·  SNS /sns  ·  画像資産 /assets  ·  SVG /svg`);
   console.log(`- 台帳: ${store.STORE_PATH}`);
   console.log(`- ローカル素材: ${LOCAL_SNS_DIR}`);
-  console.log(`- R2: ${R2_BASE}/sns/`);
+  console.log(`- R2: ${R2_BASE}  ·  SITE: ${SITE}`);
 });
