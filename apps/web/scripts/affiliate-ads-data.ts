@@ -693,6 +693,28 @@ export const AFFILIATE_ADS: AffiliateAd[] = [
     "createdAt": "2026-07-06 00:00:00",
     "updatedAt": "2026-07-06 00:00:00"
   },
+  // ── 楽天トラベル (travel / 楽天アフィリエイト・別ピクセル無し) ────────────────────
+  {
+    "id": "af_rakuten_travel_001",
+    "title": "楽天トラベル",
+    "htmlContent": "https://hb.afl.rakuten.co.jp/hsc/558a8581.c4895c68.5447808b.00360286/?link_type=pict&ut=eyJwYWdlIjoic2hvcCIsInR5cGUiOiJwaWN0IiwiY29sIjoxLCJjYXQiOiIxIiwiYmFuIjoyMTg4NjQ3LCJhbXAiOmZhbHNlfQ%3D%3D",
+    "areaCode": null,
+    "vertical": "travel",
+    "categoryKey": null,
+    "locationCode": "blog-bottom",
+    "isActive": true,
+    "priority": 95,
+    "startDate": null,
+    "endDate": null,
+    "targetCategories": null,
+    "adType": "banner",
+    "imageUrl": "https://hbb.afl.rakuten.co.jp/hsb/558a8581.c4895c68.5447808b.00360286/?me_id=2100001&me_adv_id=2188647&t=pict",
+    "trackingPixelUrl": null,
+    "width": 300,
+    "height": 250,
+    "createdAt": "2026-07-06 00:00:00",
+    "updatedAt": "2026-07-06 00:00:00"
+  },
   // ── マッチングアプリ バナー 1 (population / blog-bottom) ──────────────────────
   {
     "id": "af_population_banner_001",
