@@ -237,7 +237,7 @@ export default async function HomePage() {
                     href={`/blog/${article.slug}`}
                     className="group block overflow-hidden rounded-none border border-border bg-card transition-shadow hover:shadow-md"
                   >
-                    <div className="relative aspect-square w-full overflow-hidden bg-muted">
+                    <div className="relative aspect-[1200/630] w-full overflow-hidden bg-muted">
                       <ThemeAwareImage
                         lightSrc={`${r2}/app/blog/${article.slug}/thumbnail-light.webp`}
                         darkSrc={`${r2}/app/blog/${article.slug}/thumbnail-dark.webp`}
