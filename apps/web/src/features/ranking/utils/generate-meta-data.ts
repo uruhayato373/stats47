@@ -18,6 +18,7 @@ import {
 } from "@stats47/ranking";
 
 import type { AreaType } from "@/features/area";
+
 import { ogpImageKeys, ogpImageUrl } from "@/lib/metadata/ogp-image";
 
 import type { Metadata } from "next";
