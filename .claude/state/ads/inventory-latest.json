@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-07-06T05:34:19.555Z",
+  "generatedAt": "2026-07-06T05:36:55.622Z",
   "date": "2026-07-06",
   "totals": {
-    "entries": 77,
-    "active": 77,
-    "uniqueAdvertisers": 37
+    "entries": 78,
+    "active": 78,
+    "uniqueAdvertisers": 38
   },
   "byCategory": {
     "administrativefinancial": 7,
@@ -15,7 +15,7 @@
     "construction": 9,
     "laborwage": 9,
     "population": 7,
-    "(null)": 3,
+    "(null)": 4,
     "landweather": 2
   },
   "byVertical": {
@@ -26,17 +26,18 @@
     "economy": 14,
     "housing": 11,
     "labor": 9,
-    "population": 7
+    "population": 7,
+    "mobility": 1
   },
   "byLocation": {
-    "blog-bottom": 53,
+    "blog-bottom": 54,
     "sidebar-sticky": 2,
     "area-sidebar": 3,
     "sidebar-inline": 1,
     "sidebar-bottom": 18
   },
   "byAdType": {
-    "banner": 59,
+    "banner": 60,
     "text": 18
   },
   "coverage": {
@@ -55,13 +56,14 @@
     "thinCategories": [
       "landweather"
     ],
-    "verticalsCovered": 8,
+    "verticalsCovered": 9,
     "verticalsTotal": 10,
     "gapVerticals": [
-      "education",
-      "mobility"
+      "education"
     ],
-    "thinVerticals": []
+    "thinVerticals": [
+      "mobility"
+    ]
   },
   "sizeViolations": [
     {

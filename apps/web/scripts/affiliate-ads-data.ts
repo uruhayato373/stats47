@@ -737,6 +737,28 @@ export const AFFILIATE_ADS: AffiliateAd[] = [
     "createdAt": "2026-07-06 00:00:00",
     "updatedAt": "2026-07-06 00:00:00"
   },
+  // ── 保険スクエアbang! 自動車保険一括見積もり (mobility / A8.net) ────────────────
+  {
+    "id": "af_hokenbang_mobility_001",
+    "title": "保険スクエアbang! 自動車保険一括見積もり",
+    "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4AZ703+GI6MIA+3RU+C465T",
+    "areaCode": null,
+    "vertical": "mobility",
+    "categoryKey": null,
+    "locationCode": "blog-bottom",
+    "isActive": true,
+    "priority": 90,
+    "startDate": null,
+    "endDate": null,
+    "targetCategories": null,
+    "adType": "banner",
+    "imageUrl": "https://www26.a8.net/svt/bgt?aid=260302899998&wid=001&eno=01&mid=s00000000489002035000&mc=1",
+    "trackingPixelUrl": "https://www17.a8.net/0.gif?a8mat=4AZ703+GI6MIA+3RU+C465T",
+    "width": 300,
+    "height": 250,
+    "createdAt": "2026-07-06 00:00:00",
+    "updatedAt": "2026-07-06 00:00:00"
+  },
   // ── マッチングアプリ バナー 1 (population / blog-bottom) ──────────────────────
   {
     "id": "af_population_banner_001",
