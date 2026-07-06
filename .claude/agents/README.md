@@ -86,7 +86,7 @@
 | `ranking-ui-manager` 🆕 | ランキングページ (/ranking/*) UI 層の統一・監査・是正 (レイアウト/見出し/パンくず/サイドバー/SEO構造化データ/コピー)。theme-ui-manager の ranking 版。データ=data-ingester、公開=ranking-publisher に委譲 | 2026-06-21 新設 |
 | `chart-component-builder` | shadcn UI + D3.js チャートコンポーネント実装・カタログ管理 (chart-component-standards.md が SSoT)。静的 SVG の chart-author とは別物 (React/D3 実装専任) | 既存 (2026-07-03 Tier 表へ追記・棚卸し漏れ是正) |
 | `ui-reviewer` | melta-ui 準拠 + UI panel review | 既存 |
-| `image-prompt-curator` 🆕 | OGP / note 表紙 / SNS 静止素材プロンプト生成 | sns-renderer + note-manager 分離 |
+| `image-prompt-curator` 🆕 | OGP / note 表紙 / SNS 静止素材プロンプト生成 + 画像資産の棚卸し・ギャラリー監査 (`/audit-ogp-images`) | sns-renderer + note-manager 分離 |
 
 ## Tier 7: Code Quality / DevOps (4 体)
 
