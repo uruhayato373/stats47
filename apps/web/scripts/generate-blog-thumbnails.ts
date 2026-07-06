@@ -98,10 +98,10 @@ async function main() {
 
     process.stdout.write(`  ${slug} ... `);
 
-    await renderToWebP(buildElement(data, false), fonts, lightOut);
-    await renderToWebP(buildElement(data, true), fonts, darkOut);
+    await renderToWebP(buildElement(data, false, { background: true }), fonts, lightOut);
+    await renderToWebP(buildElement(data, true, { background: true }), fonts, darkOut);
     mkdirSync(ogpDir, { recursive: true });
-    await renderToPng(buildElement(data, false), fonts, ogpPng);
+    await renderToPng(buildElement(data, false, { background: true }), fonts, ogpPng);
 
     console.log("ok");
     generated++;

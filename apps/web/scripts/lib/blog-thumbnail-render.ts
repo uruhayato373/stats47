@@ -58,7 +58,31 @@ export function loadFonts(projectRoot: string): SatoriFont[] {
   ];
 }
 
-export function buildElement(data: OgpData, dark: boolean) {
+/**
+ * ブランド背景素材 (日本地図 + データ可視化) を data URI で返す。
+ * 背景オプション付き (blog OGP) のときだけ使う。module-level で 1 回だけ読む。
+ */
+let bgLightCache: string | null = null;
+let bgDarkCache: string | null = null;
+function brandBackground(dark: boolean): string {
+  if (dark) {
+    if (!bgDarkCache) bgDarkCache = readBrandBg("ogp-bg-brand-dark.jpg");
+    return bgDarkCache;
+  }
+  if (!bgLightCache) bgLightCache = readBrandBg("ogp-bg-brand-light.jpg");
+  return bgLightCache;
+}
+function readBrandBg(file: string): string {
+  const p = join(import.meta.dirname ?? __dirname, "assets", file);
+  return `data:image/jpeg;base64,${readFileSync(p).toString("base64")}`;
+}
+
+export interface BuildOptions {
+  /** true で日本地図ブランド背景 + 左寄せレイアウト (blog OGP 用)。既定は従来のストライプ枠。 */
+  background?: boolean;
+}
+
+export function buildElement(data: OgpData, dark: boolean, opts?: BuildOptions) {
   const category = data.category ?? "BLOG";
   const date = data.date ?? "";
 
@@ -70,6 +94,132 @@ export function buildElement(data: OgpData, dark: boolean) {
 
   const FONT_JP = '"Noto Sans JP", sans-serif';
   const FONT_MONO = '"JetBrains Mono", monospace';
+
+  // --- background variant (blog OGP): 日本地図ブランド背景 + 左寄せテキスト ---
+  if (opts?.background) {
+    return createElement(
+      "div",
+      {
+        style: {
+          width: 1200,
+          height: 630,
+          position: "relative",
+          display: "flex",
+          fontFamily: FONT_JP,
+          overflow: "hidden",
+        },
+      },
+      // full-bleed background image
+      createElement("img", {
+        src: brandBackground(dark),
+        width: 1200,
+        height: 630,
+        style: { position: "absolute", left: 0, top: 0, width: 1200, height: 630, objectFit: "cover" },
+      }),
+      // content column (left)
+      createElement(
+        "div",
+        {
+          style: {
+            position: "absolute",
+            left: 72,
+            top: 72,
+            width: 656,
+            height: 486,
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
+          },
+        },
+        // category badge
+        createElement(
+          "div",
+          { style: { display: "flex" } },
+          createElement(
+            "div",
+            {
+              style: {
+                padding: "4px 12px",
+                background: BRAND.primary,
+                color: "#fff",
+                fontFamily: FONT_JP,
+                fontSize: 12,
+                fontWeight: 800,
+                letterSpacing: 3,
+              },
+            },
+            category,
+          ),
+        ),
+        // title + accent line + subtitle
+        createElement(
+          "div",
+          { style: { display: "flex", flexDirection: "column" } },
+          createElement(
+            "div",
+            {
+              style: {
+                fontFamily: FONT_JP,
+                fontWeight: 900,
+                fontSize: 48,
+                color: titleColor,
+                lineHeight: 1.25,
+                letterSpacing: -1,
+              },
+            },
+            data.title,
+          ),
+          createElement("div", {
+            style: { width: 64, height: 4, background: BRAND.vermilion, marginTop: 20, marginBottom: 16 },
+          }),
+          data.subtitle
+            ? createElement(
+                "div",
+                {
+                  style: {
+                    fontFamily: FONT_JP,
+                    fontSize: 20,
+                    color: mutedColor,
+                    fontWeight: 500,
+                    lineHeight: 1.5,
+                  },
+                },
+                data.subtitle,
+              )
+            : null,
+        ),
+        // footer: logo + domain
+        createElement(
+          "div",
+          { style: { display: "flex", alignItems: "center", gap: 4 } },
+          createElement(
+            "span",
+            { style: { fontWeight: 900, fontSize: 18, color: titleColor, fontFamily: FONT_JP } },
+            "stats",
+          ),
+          createElement(
+            "span",
+            {
+              style: {
+                fontWeight: 900,
+                fontSize: 18,
+                color: "#fff",
+                background: BRAND.primary,
+                padding: "2px 7px",
+                fontFamily: FONT_JP,
+              },
+            },
+            "47",
+          ),
+          createElement(
+            "span",
+            { style: { fontFamily: FONT_JP, fontSize: 12, color: mutedColor, marginLeft: 10, letterSpacing: 1 } },
+            data.domainPath ?? "stats47.jp/blog",
+          ),
+        ),
+      ),
+    );
+  }
 
   const stripePattern = dark
     ? `repeating-linear-gradient(135deg, ${panel} 0 20px, ${bg} 20px 40px)`

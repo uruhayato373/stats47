@@ -174,9 +174,9 @@ async function main() {
     const ogpJsonOut = join(dir, "ogp", "ogp.json");
 
     process.stdout.write(`  ${slug} ... 生成`);
-    await renderToWebP(buildElement(data, false), fonts, lightOut);
-    await renderToWebP(buildElement(data, true), fonts, darkOut);
-    await renderToPng(buildElement(data, false), fonts, pngOut);
+    await renderToWebP(buildElement(data, false, { background: true }), fonts, lightOut);
+    await renderToWebP(buildElement(data, true, { background: true }), fonts, darkOut);
+    await renderToPng(buildElement(data, false, { background: true }), fonts, pngOut);
     writeFileSync(
       ogpJsonOut,
       JSON.stringify({ title: ogp.title, subtitle: ogp.subtitle ?? null }, null, 2) + "\n",
