@@ -1,16 +1,20 @@
 ---
 type: session-handoff
 date: 2026-07-06
-status: active
+status: completed
 topic: OGP 画像の背景を ChatGPT 生成の日本データビジュアライゼーション背景に刷新
 tags: [ogp, image, satori, r2, blog, handoff]
 ---
 
 # ハンドオフ: OGP 背景画像の刷新（背景画像合成）
 
-> **なぜこの handoff があるか**: クラウドセッションでは「ChatGPT で作った背景 PNG のファイル本体」を
+> ✅ **完了 (2026-07-07)** — ローカル PC で実装・本番反映済み。**このタスクは再実行不要**。
+> 実装内容は末尾「## 6. 実装結果」を参照。計画（本文 Step 1-5）とは差分あり（blog 限定 / light+dark /
+> カード比率統一 / wrangler push / アセットパス）。以降は履歴として残す。
+
+> **なぜこの handoff があったか**: クラウドセッションでは「ChatGPT で作った背景 PNG のファイル本体」を
 > 環境に渡せない（チャット貼付画像は視覚入力どまりでディスクに落ちない）。**ローカル PC で続行する**ため、
-> ローカルの新セッションがそのまま拾えるよう手順を固定する。
+> ローカルの新セッションがそのまま拾えるよう手順を固定した。
 
 ## 0. 前提: これまでに完了していること（本番反映済み）
 
@@ -100,3 +104,20 @@ npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix app/blog
 「`.claude/rules/ogp-image-standards.md` と本 handoff（`docs/04_レビュー/2026-07-06-session-handoff-ogp-background-image.md`）
 を読んで、`apps/web/public/ogp-backgrounds/stats47-base.png` を背景に OGP を刷新したい。まず blog 2 件で試作 →
 ギャラリー確認から」と伝えれば拾える。
+
+## 6. 実装結果 (2026-07-07 完了)
+
+正典は `.claude/rules/ogp-image-standards.md` §5「blog の背景合成」。計画（Step 1-5）からの主な差分:
+
+| 項目 | 計画 | 実装 |
+|---|---|---|
+| 適用範囲 | blog/ranking/areas/note **共通** | **blog 限定** (`buildElement` に `{ background: true }` オプションを足し blog スクリプトだけ渡す。ranking/areas/note は従来背景のまま) |
+| light/dark | OGP は単一画像で light/dark 不要 | **light/dark 両方**を用意 (リンクカードの dark テーマ表示に必要)。OGP は light を流用 |
+| 背景アセット | `apps/web/public/ogp-backgrounds/stats47-base.png` | `apps/web/scripts/lib/assets/ogp-bg-brand-{light,dark}.jpg` (1200×630・q82)。元 PNG は `scripts/lib/assets/source/stats-background-{light,dark}.png` (public 外=非配信) |
+| カード比率 | 記載なし | **全画面 1200×630 に統一** (`blog-article-grid`/home/category の `aspect-square` を撤去)。背景をクロップ無しでカード/OGP兼用 |
+| push | `diff-push-r2.ts` (S3 creds) | S3 creds 無 → `wrangler r2 object put` (per-file)。**BG タスク約20分寿命で途中 SIGKILL** → 記事並列6の高速ランナー + put リトライで完走 |
+
+- 反映: **284/290 記事を新背景で再生成・R2 push 済** (残り 6 は article.md 404 で生成対象外)。本番 URL で light/dark カード + OGP を実測確認。
+- コミット (develop): `75549af7` 背景適用 / `b38a2378` 新背景+比率統一 / `7680f4a7` push 堅牢化 / (本 doc・ルール更新)。
+- **未デプロイの残**: カード比率の CSS 変更は develop→main デプロイで初めて本番サイトに反映 (画像自体は R2 で反映済)。
+- **Phase 2 候補 (未着手)**: ranking/areas/note OGP への背景横展開、AI 動的背景生成。

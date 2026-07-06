@@ -130,6 +130,13 @@ node .claude/scripts/ogp/build-image-gallery.mjs --audit
     複数子 span に `display:flex`)。この修正が無いと全件フォールバックする。
   - **blog OGP / ranking カード / note カバー**: 共有 render lib `apps/web/scripts/lib/blog-thumbnail-render.ts`
     の `buildElement({title, subtitle, category, domainPath})` (共通デザイン・drift 防止)。note は `size` 引数で 1280×670。
+  - **blog の背景合成 (2026-07-07 実装)**: blog の OGP と**リンクカード** (`thumbnail-{light,dark}.webp`) は
+    `buildElement(data, dark, { background: true })` で日本地図ブランド背景を合成する。背景アセットはリポジトリ同梱の
+    `apps/web/scripts/lib/assets/ogp-bg-brand-{light,dark}.jpg` (元 PNG = `scripts/lib/assets/source/stats-background-{light,dark}.png`)。
+    **背景合成は blog 限定** — ranking/areas/note の OGP・ranking カードは `background` オプション未指定でデフォルト背景
+    (グラデ+ストライプ) のまま (意図的な非対称。横展開は Phase 2)。blog カードの**表示比率も全画面 1200×630 に統一**
+    (旧 PC 正方形 `md:aspect-square` を撤去。1 枚の背景をクロップ無しで OGP/カード兼用)。push が途中失敗で全ロスト
+    しないよう generate-blog-thumbnails-cloud.ts は put リトライ+記事単位 try/catch 済。
 - **配信 URL 解決は `apps/web/src/lib/metadata/ogp-image.ts`** の `ogpImageUrl(ogpImageKeys.<type>(id))`。
   各ページの `generateMetadata` が `openGraph.images` / `twitter.images` にこの静的 R2 URL を設定する。
 - **生成スクリプト (クラウド/ローカルから直接実行)**:
@@ -147,7 +154,9 @@ node .claude/scripts/ogp/build-image-gallery.mjs --audit
 - **theme のみ例外**: `generateStaticParams` でビルド時 prerender され稼働するため、当面ランタイム route を残す。
   **home/category は既存の静的 `public/og-image.jpg`** を使う。
 
-### 画像生成 AI (背景素材・Phase 2 予定)
+### 画像生成 AI (背景素材)
+- **実装済 (blog・2026-07-07)**: blog の OGP/リンクカードは静的ブランド背景 (`scripts/lib/assets/ogp-bg-brand-{light,dark}.jpg`)
+  を Satori で合成済 (§5「blog の背景合成」参照)。以下は ranking/areas/note への横展開・AI 動的生成の Phase 2 案。
 - テキスト・数値の重畳は上記 Satori が担う。動的タイトル差し込みは静的 PNG を事前生成することで実現する。
 - 背景素材の AI 生成: Cloudflare Workers AI SDXL (`apps/remotion/src/lib/ai-image.ts`、日次クォータ + sha256
   キャッシュ) を手本に Gemini API (`gemini-2.5-flash-image` 系) を導入予定。背景は R2
