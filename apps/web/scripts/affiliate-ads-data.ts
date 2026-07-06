@@ -759,6 +759,28 @@ export const AFFILIATE_ADS: AffiliateAd[] = [
     "createdAt": "2026-07-06 00:00:00",
     "updatedAt": "2026-07-06 00:00:00"
   },
+  // ── LEC東京リーガルマインド 資格試験講座 (education / A8.net) ─────────────────
+  {
+    "id": "af_lec_education_001",
+    "title": "LEC東京リーガルマインド 資格試験講座",
+    "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B7USX+9FYJ76+1G62+7MK9D",
+    "areaCode": null,
+    "vertical": "education",
+    "categoryKey": null,
+    "locationCode": "blog-bottom",
+    "isActive": true,
+    "priority": 90,
+    "startDate": null,
+    "endDate": null,
+    "targetCategories": null,
+    "adType": "banner",
+    "imageUrl": "https://www27.a8.net/svt/bgt?aid=260706993571&wid=001&eno=01&mid=s00000006761001281000&mc=1",
+    "trackingPixelUrl": "https://www16.a8.net/0.gif?a8mat=4B7USX+9FYJ76+1G62+7MK9D",
+    "width": 300,
+    "height": 250,
+    "createdAt": "2026-07-06 00:00:00",
+    "updatedAt": "2026-07-06 00:00:00"
+  },
   // ── マッチングアプリ バナー 1 (population / blog-bottom) ──────────────────────
   {
     "id": "af_population_banner_001",
