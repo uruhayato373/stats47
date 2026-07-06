@@ -47,6 +47,8 @@ export function AdImpressionTracker({
                 event_category: "affiliate",
                 event_label: label,
                 affiliate_category: category,
+                // 広告意図軸 (10 vertical) の canonical dimension。category に vertical 値が流れる。
+                affiliate_vertical: category,
                 link_position: position,
                 ...(experimentId ? { experiment_id: experimentId } : {}),
                 ...(variantId ? { variant_id: variantId } : {}),

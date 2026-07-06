@@ -4,13 +4,13 @@ import { describe, expect, it, vi, beforeEach } from "vitest";
 vi.mock("../repositories/affiliate-ad-snapshot");
 
 import {
-  readActiveAdByCategoryFromR2,
-  readActiveBannersByCategoryKeysFromR2,
+  readActiveTextAdByVerticalFromR2,
+  readActiveBannersByVerticalsFromR2,
 } from "../repositories/affiliate-ad-snapshot";
 import { resolveAffiliateAd, resolveAffiliateBanners } from "../services/resolve-affiliate-ad";
 
-const mockFindActiveAd = vi.mocked(readActiveAdByCategoryFromR2);
-const mockFindBanners = vi.mocked(readActiveBannersByCategoryKeysFromR2);
+const mockFindActiveAd = vi.mocked(readActiveTextAdByVerticalFromR2);
+const mockFindBanners = vi.mocked(readActiveBannersByVerticalsFromR2);
 
 beforeEach(() => {
   vi.clearAllMocks();
@@ -61,7 +61,7 @@ describe("resolveAffiliateBanners", () => {
     expect(mockFindBanners).not.toHaveBeenCalled();
   });
 
-  it("マッチするタグから categoryKey を収集し一括クエリする", async () => {
+  it("マッチするタグから vertical を収集し一括クエリする", async () => {
     mockFindBanners.mockResolvedValue([
       {
         id: "banner-1",
@@ -87,11 +87,10 @@ describe("resolveAffiliateBanners", () => {
 
     const result = await resolveAffiliateBanners(["wages", "employment"]);
 
-    // wages と employment は両方 "labor" → categoryKey "laborwage"
-    // 重複排除されるので categoryKey は ["laborwage"] の1つだけ
+    // wages と employment は両方 vertical "labor" → 重複排除で ["labor"] の1つだけ
     // rankingKey 未指定なので第3引数は undefined (非 ranking 文脈)
     expect(mockFindBanners).toHaveBeenCalledTimes(1);
-    expect(mockFindBanners).toHaveBeenCalledWith(["laborwage"], 2, undefined);
+    expect(mockFindBanners).toHaveBeenCalledWith(["labor"], 2, undefined);
     expect(result).toHaveLength(1);
     expect(result[0]).toEqual({
       title: "バナー1",
@@ -103,7 +102,7 @@ describe("resolveAffiliateBanners", () => {
     });
   });
 
-  it("imageUrl または trackingPixelUrl がない広告は除外する", async () => {
+  it("imageUrl がない広告は除外する", async () => {
     mockFindBanners.mockResolvedValue([
       {
         id: "banner-no-image",
@@ -129,6 +128,37 @@ describe("resolveAffiliateBanners", () => {
 
     const result = await resolveAffiliateBanners(["economy"]);
     expect(result).toEqual([]);
+  });
+
+  it("trackingPixelUrl が無くても imageUrl があれば含める (ValueCommerce 等・別ピクセル無し)", async () => {
+    mockFindBanners.mockResolvedValue([
+      {
+        id: "banner-vc",
+        title: "一休.com",
+        htmlContent: "https://ck.jp.ap.valuecommerce.com/servlet/referral?sid=1&pid=2",
+        areaCode: null,
+        categoryKey: null,
+        vertical: "travel",
+        locationCode: "blog-bottom",
+        isActive: true,
+        priority: 90,
+        startDate: null,
+        endDate: null,
+        targetCategories: null,
+        adType: "banner",
+        imageUrl: "https://ad.jp.ap.valuecommerce.com/servlet/gifbanner?sid=1&pid=2",
+        trackingPixelUrl: null,
+        width: 300,
+        height: 250,
+        createdAt: "2026-07-06",
+        updatedAt: "2026-07-06",
+      },
+    ]);
+
+    const result = await resolveAffiliateBanners(["travel"]);
+    expect(result).toHaveLength(1);
+    expect(result[0].imageUrl).toContain("gifbanner");
+    expect(result[0].trackingPixelUrl).toBeNull();
   });
 
   it("width/height が null の場合はデフォルト値 300x250 を使う", async () => {

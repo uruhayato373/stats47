@@ -29,11 +29,17 @@ export function trackCsvDownload(params: {
 /**
  * アフィリエイトリンクのクリックイベントを GA4 に送信する。
  * experimentId / variantId / creativeSize は A/B テスト (AFF-05) 用の任意属性。
+ *
+ * `affiliate_vertical` は広告意図軸 (10 vertical) の canonical dimension。
+ * `affiliate_category` は後方互換のため残す (旧 8 軸時代からの時系列連続性)。
+ * 値は原則同一 (category prop に vertical 値が流れる) だが、GA4 では別 dimension として登録する。
  */
 export function trackAffiliateClick(params: {
   category: string;
   label: string;
   position: string;
+  /** 広告意図軸 (10 vertical)。未指定なら category を流用 (後方互換) */
+  vertical?: string;
   experimentId?: string;
   variantId?: string;
   creativeSize?: string;
@@ -42,6 +48,7 @@ export function trackAffiliateClick(params: {
     event_category: "affiliate",
     event_label: params.label,
     affiliate_category: params.category,
+    affiliate_vertical: params.vertical ?? params.category,
     link_position: params.position,
     // 任意属性は値があるときだけ送る (未設定実験は従来どおりの payload)
     ...(params.experimentId ? { experiment_id: params.experimentId } : {}),

@@ -3,6 +3,8 @@ import "server-only";
 import { logger } from "@stats47/logger/server";
 import { createSnapshotReader } from "@stats47/r2-storage/server";
 
+import { adVertical, type AffiliateVertical } from "../constants/affiliate-category";
+
 import type { AffiliateAd, AffiliateLocationCode } from "../types";
 
 export type AffiliateAdRow = AffiliateAd;
@@ -63,37 +65,46 @@ async function getActive(): Promise<AffiliateAdRow[]> {
   }
 }
 
-export async function readActiveAdByCategoryFromR2(
-  categoryKey: string,
+/** 広告が指定 vertical 群のいずれかに属するか (vertical 正・categoryKey フォールバック)。 */
+function inVerticals(ad: AffiliateAdRow, set: Set<AffiliateVertical>): boolean {
+  const v = adVertical(ad);
+  return v != null && set.has(v);
+}
+
+/**
+ * vertical + locationCode の単一テキスト広告を priority 降順で 1 件取得する。
+ */
+export async function readActiveTextAdByVerticalFromR2(
+  vertical: AffiliateVertical,
   locationCode: AffiliateLocationCode = "sidebar-bottom",
 ): Promise<AffiliateAdRow | null> {
   const active = await getActive();
+  const set = new Set<AffiliateVertical>([vertical]);
   const matched = active
     .filter(
-      (a) =>
-        a.categoryKey === categoryKey &&
-        a.locationCode === locationCode &&
-        a.adType === "text",
+      (a) => inVerticals(a, set) && a.locationCode === locationCode && a.adType === "text",
     )
     .sort(compareByPriorityDesc);
   return matched[0] ?? null;
 }
 
 /**
- * categoryKey + locationCode のテキスト広告を priority 降順で複数取得する。
- * サイドバーに複数のテキストリンクを並べて表示する用途。
+ * 複数 vertical をまたいでテキスト広告を priority 降順で取得する。
+ * ページ→vertical→広告 の解決に使う。呼び出し側で id/title 等により dedupe する。
  */
-export async function readActiveTextAdsByCategoryFromR2(
-  categoryKey: string,
+export async function readActiveTextAdsByVerticalsFromR2(
+  verticals: AffiliateVertical[],
   locationCode: AffiliateLocationCode = "sidebar-bottom",
-  limit = 2,
+  limit = 20,
   rankingKey?: string,
 ): Promise<AffiliateAdRow[]> {
+  if (verticals.length === 0) return [];
   const active = await getActive();
+  const set = new Set(verticals);
   return active
     .filter(
       (a) =>
-        a.categoryKey === categoryKey &&
+        inVerticals(a, set) &&
         a.locationCode === locationCode &&
         a.adType === "text" &&
         matchesRankingTarget(a, rankingKey),
@@ -103,61 +114,36 @@ export async function readActiveTextAdsByCategoryFromR2(
 }
 
 /**
- * 複数 categoryKey をまたいでテキスト広告を取得する (tagKey ベースのブログ用)。
- * 同一広告が複数 categoryKey に登録されているため、呼び出し側で title 等により dedupe する。
+ * 複数 vertical をまたいでバナー広告を priority 降順で取得する。
  */
-export async function readActiveTextAdsByCategoryKeysFromR2(
-  categoryKeys: string[],
-  locationCode: AffiliateLocationCode = "sidebar-bottom",
-  limit = 20,
-): Promise<AffiliateAdRow[]> {
-  if (categoryKeys.length === 0) return [];
-  const active = await getActive();
-  const set = new Set(categoryKeys);
-  return active
-    .filter(
-      (a) =>
-        a.categoryKey != null &&
-        set.has(a.categoryKey) &&
-        a.locationCode === locationCode &&
-        a.adType === "text",
-    )
-    .sort(compareByPriorityDesc)
-    .slice(0, limit);
-}
-
-export async function readActiveBannersByCategoryKeysFromR2(
-  categoryKeys: string[],
+export async function readActiveBannersByVerticalsFromR2(
+  verticals: AffiliateVertical[],
   limit = 2,
   rankingKey?: string,
 ): Promise<AffiliateAdRow[]> {
-  if (categoryKeys.length === 0) return [];
+  if (verticals.length === 0) return [];
   const active = await getActive();
-  const set = new Set(categoryKeys);
+  const set = new Set(verticals);
   return active
     .filter(
-      (a) =>
-        a.categoryKey &&
-        set.has(a.categoryKey) &&
-        a.adType === "banner" &&
-        matchesRankingTarget(a, rankingKey),
+      (a) => inVerticals(a, set) && a.adType === "banner" && matchesRankingTarget(a, rankingKey),
     )
     .sort(compareByPriorityDesc)
     .slice(0, limit);
 }
 
 /**
- * A/B テスト (AFF-05) 用: categoryKey に紐づく experiment variant を全件取得する。
+ * A/B テスト (AFF-05) 用: vertical に紐づく experiment variant を全件取得する。
  * experimentId を持つ active エントリのみ (adType は banner/text 両方)。priority 降順。
- * experiment が無いカテゴリでは空配列を返す (呼び出し側は従来解決にフォールバック)。
+ * experiment が無い vertical では空配列を返す (呼び出し側は従来解決にフォールバック)。
  */
-export async function readActiveExperimentVariantsByCategoryFromR2(
-  categoryKey: string,
+export async function readActiveExperimentVariantsByVerticalFromR2(
+  vertical: AffiliateVertical,
 ): Promise<AffiliateAdRow[]> {
-  if (!categoryKey) return [];
   const active = await getActive();
+  const set = new Set<AffiliateVertical>([vertical]);
   return active
-    .filter((a) => a.categoryKey === categoryKey && !!a.experimentId && !!a.variantId)
+    .filter((a) => inVerticals(a, set) && !!a.experimentId && !!a.variantId)
     .sort(compareByPriorityDesc);
 }
 
