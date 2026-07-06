@@ -17,10 +17,44 @@ import { mkdirSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
+import {
+  AFFILIATE_VERTICALS,
+  adVertical,
+} from "../../../apps/web/src/features/ads/constants/affiliate-category";
 import { AFFILIATE_ADS } from "../../../apps/web/scripts/affiliate-ads-data";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = resolve(__dirname, "../../..");
+
+// canonical サイズ (affiliate-ads-standards.md §サイズ)。banner はこの 3 種のみ (text はサイズなし)。
+const CANONICAL_BANNER_SIZES = new Set(["300x250", "250x250", "320x100"]);
+// 既存一点物 (grandfathering)。新規はこれらも不可 (canonical に寄せる)。段階的に 0 へ。
+const KNOWN_LEGACY_SIZES = new Set([
+  "336x280",
+  "160x600",
+  "120x600",
+  "165x120",
+  "300x300",
+  "320x250",
+]);
+
+interface SizeViolation {
+  id: string;
+  size: string;
+  tier: "legacy" | "error";
+}
+
+/** banner のサイズ規約違反を検出する。legacy=既存許容 / error=新規混入 (canonical にも legacy にも無い)。 */
+function lintSizes(): SizeViolation[] {
+  const violations: SizeViolation[] = [];
+  for (const ad of AFFILIATE_ADS) {
+    if (!ad.isActive || ad.adType !== "banner") continue;
+    const size = `${ad.width ?? "?"}x${ad.height ?? "?"}`;
+    if (CANONICAL_BANNER_SIZES.has(size)) continue;
+    violations.push({ id: ad.id, size, tier: KNOWN_LEGACY_SIZES.has(size) ? "legacy" : "error" });
+  }
+  return violations;
+}
 
 // SSOT: packages/data-configs/src/types.ts の CATEGORY_KEYS (17 軸)。
 // e-Stat 機械分類の backbone。ここを直 import すると重い依存を引くため複製 (ズレたら lint で気付く)。
@@ -109,8 +143,10 @@ function main(): void {
       ? dateArg
       : new Date().toISOString().slice(0, 10);
 
+  const checkSize = args.includes("--check-size");
   const active = AFFILIATE_ADS.filter((a) => a.isActive);
   const byCategory = tally(active.map((a) => a.categoryKey ?? "(null)"));
+  const byVertical = tally(active.map((a) => adVertical(a) ?? "(unresolved)"));
   const byLocation = tally(active.map((a) => a.locationCode ?? "(null)"));
   const byAdType = tally(active.map((a) => a.adType ?? "(null)"));
   const uniqueTitles = new Set(active.map((a) => a.title)).size;
@@ -121,6 +157,16 @@ function main(): void {
     (k) => (byCategory[k] ?? 0) > 0 && (byCategory[k] ?? 0) <= 2,
   );
 
+  // 意図軸 (10 vertical) カバレッジ — 広告解決の実軸。ページ意図に合う在庫があるか。
+  const coveredVerticals = AFFILIATE_VERTICALS.filter((v) => (byVertical[v] ?? 0) > 0);
+  const gapVerticals = AFFILIATE_VERTICALS.filter((v) => !(byVertical[v] ?? 0));
+  const thinVerticals = AFFILIATE_VERTICALS.filter(
+    (v) => (byVertical[v] ?? 0) > 0 && (byVertical[v] ?? 0) <= 2,
+  );
+
+  const sizeViolations = lintSizes();
+  const sizeErrors = sizeViolations.filter((v) => v.tier === "error");
+
   const snapshot = {
     generatedAt: new Date().toISOString(),
     date,
@@ -130,6 +176,7 @@ function main(): void {
       uniqueAdvertisers: uniqueTitles,
     },
     byCategory,
+    byVertical,
     byLocation,
     byAdType,
     coverage: {
@@ -137,7 +184,12 @@ function main(): void {
       categoriesTotal: CATEGORY_KEYS.length,
       gapCategories,
       thinCategories,
+      verticalsCovered: coveredVerticals.length,
+      verticalsTotal: AFFILIATE_VERTICALS.length,
+      gapVerticals,
+      thinVerticals,
     },
+    sizeViolations,
   };
 
   // JSON snapshot を .claude/state/ads/ に書き出す (機械向け / ループの入力)
@@ -149,6 +201,7 @@ function main(): void {
 
   if (jsonOnly) {
     process.stdout.write(JSON.stringify(snapshot, null, 2) + "\n");
+    if (checkSize && sizeErrors.length > 0) process.exitCode = 1;
     return;
   }
 
@@ -180,6 +233,44 @@ function main(): void {
     );
     lines.push("");
   }
+
+  lines.push("## 意図軸 (10 vertical) カバレッジ ★広告解決の実軸");
+  lines.push("");
+  lines.push(`カバー **${coveredVerticals.length}/${AFFILIATE_VERTICALS.length}** 軸。`);
+  lines.push("");
+  lines.push("| vertical | 枠数 | 状態 |");
+  lines.push("|---|---|---|");
+  for (const v of AFFILIATE_VERTICALS) {
+    const n = byVertical[v] ?? 0;
+    const state = n === 0 ? "❌ ゼロ (機会損失)" : n <= 2 ? "⚠ 手薄" : "✅";
+    lines.push(`| ${v} | ${n} | ${state} |`);
+  }
+  lines.push("");
+  if (gapVerticals.length) {
+    lines.push(
+      `> **在庫ゼロの vertical (${gapVerticals.length})**: ${gapVerticals.join(", ")} — この意図のページ (ranking/theme/blog) に意図一致広告が出ない。/register-affiliate-banner propose の対象。`,
+    );
+    lines.push("");
+  }
+
+  lines.push("## サイズ規約 (canonical: 300x250 / 250x250 / 320x100 / text)");
+  lines.push("");
+  if (sizeViolations.length === 0) {
+    lines.push("✅ 全 banner が canonical サイズ。");
+  } else {
+    lines.push("| id | size | 判定 |");
+    lines.push("|---|---|---|");
+    for (const v of sizeViolations) {
+      lines.push(`| ${v.id} | ${v.size} | ${v.tier === "error" ? "❌ 非canonical (新規禁止)" : "⚠ legacy (段階移行)"} |`);
+    }
+    lines.push("");
+    if (sizeErrors.length) {
+      lines.push(
+        `> ❌ **canonical/legacy いずれにも無いサイズ ${sizeErrors.length} 件** — 新規混入。300x250 素材で再取得するか isActive:false にする (\`--check-size\` で exit 1)。`,
+      );
+    }
+  }
+  lines.push("");
 
   lines.push("## 配置 (locationCode) 別");
   lines.push("");
@@ -218,6 +309,14 @@ function main(): void {
   process.stderr.write(
     `\n[audit] JSON snapshot → .claude/state/ads/inventory-${date}.json (+ latest)\n`,
   );
+
+  // pre-commit / CI ゲート: --check-size 指定時は非 canonical・非 legacy サイズがあれば exit 1。
+  if (checkSize && sizeErrors.length > 0) {
+    process.stderr.write(
+      `\n[audit] ❌ サイズ規約違反 (新規混入) ${sizeErrors.length} 件: ${sizeErrors.map((v) => `${v.id}(${v.size})`).join(", ")}\n`,
+    );
+    process.exitCode = 1;
+  }
 }
 
 main();

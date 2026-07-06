@@ -15,8 +15,8 @@ vi.mock("@stats47/logger/server", () => ({
 }));
 
 import {
-  readActiveBannersByCategoryKeysFromR2,
-  readActiveTextAdsByCategoryFromR2,
+  readActiveBannersByVerticalsFromR2,
+  readActiveTextAdsByVerticalsFromR2,
 } from "../affiliate-ad-snapshot";
 
 import type { AffiliateAd } from "../../types";
@@ -61,10 +61,10 @@ beforeEach(() => {
   });
 });
 
-describe("readActiveBannersByCategoryKeysFromR2 — targetRankingKeys ターゲティング", () => {
+describe("readActiveBannersByVerticalsFromR2 — targetRankingKeys ターゲティング", () => {
   it("対象 rankingKey 一致時は、ターゲット広告と汎用広告の両方を返す", async () => {
-    const result = await readActiveBannersByCategoryKeysFromR2(
-      ["laborwage"],
+    const result = await readActiveBannersByVerticalsFromR2(
+      ["labor"],
       10,
       "software-engineer-annual-income",
     );
@@ -73,8 +73,8 @@ describe("readActiveBannersByCategoryKeysFromR2 — targetRankingKeys ターゲ�
 
   it("非対象 rankingKey ではターゲット広告を除外し、汎用広告のみ返す (文脈漏れ防止)", async () => {
     // 看護師年収ページにエンジニア転職広告が漏れていた本番事象の再発防止
-    const result = await readActiveBannersByCategoryKeysFromR2(
-      ["laborwage"],
+    const result = await readActiveBannersByVerticalsFromR2(
+      ["labor"],
       10,
       "nurse-annual-income",
     );
@@ -82,12 +82,12 @@ describe("readActiveBannersByCategoryKeysFromR2 — targetRankingKeys ターゲ�
   });
 
   it("rankingKey 未指定 (blog 等 非 ranking 文脈) ではターゲティングを適用せず両方返す (後方互換)", async () => {
-    const result = await readActiveBannersByCategoryKeysFromR2(["laborwage"], 10);
+    const result = await readActiveBannersByVerticalsFromR2(["labor"], 10);
     expect(result.map((a) => a.id).sort()).toEqual(["generic-tenshoku", "strategy-career"]);
   });
 });
 
-describe("readActiveTextAdsByCategoryFromR2 — targetRankingKeys ターゲティング (text 広告)", () => {
+describe("readActiveTextAdsByVerticalsFromR2 — targetRankingKeys ターゲティング (text 広告)", () => {
   const engineerText = banner({
     id: "strategy-career-text",
     adType: "text",
@@ -111,8 +111,8 @@ describe("readActiveTextAdsByCategoryFromR2 — targetRankingKeys ターゲテ�
   });
 
   it("対象 rankingKey 一致時は両方返す", async () => {
-    const r = await readActiveTextAdsByCategoryFromR2(
-      "laborwage",
+    const r = await readActiveTextAdsByVerticalsFromR2(
+      ["labor"],
       "sidebar-bottom",
       10,
       "software-engineer-annual-income",
@@ -121,8 +121,8 @@ describe("readActiveTextAdsByCategoryFromR2 — targetRankingKeys ターゲテ�
   });
 
   it("非対象 rankingKey ではエンジニア転職 text を除外し汎用のみ返す", async () => {
-    const r = await readActiveTextAdsByCategoryFromR2(
-      "laborwage",
+    const r = await readActiveTextAdsByVerticalsFromR2(
+      ["labor"],
       "sidebar-bottom",
       10,
       "nurse-annual-income",

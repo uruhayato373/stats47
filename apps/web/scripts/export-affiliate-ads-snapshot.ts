@@ -14,12 +14,39 @@ import dotenv from "dotenv";
 import { saveToR2 } from "@stats47/r2-storage/server";
 
 import {
+  AFFILIATE_VERTICALS,
+  adVertical,
+} from "../src/features/ads/constants/affiliate-category";
+import {
   AFFILIATE_ADS_SNAPSHOT_KEY,
   type AffiliateAdsSnapshot,
 } from "../src/features/ads/repositories/affiliate-ad-snapshot";
 import { AFFILIATE_ADS } from "./affiliate-ads-data";
 
 dotenv.config({ path: ".env.local" });
+
+/**
+ * vertical 整合性をビルド時に検証する (意図ハブの SSOT を担保)。
+ * - ad.vertical が設定済なら 10 軸のいずれかであること
+ * - vertical も categoryKey→写像も無い広告は配信されない → error (孤立在庫の検出)
+ */
+function validateVerticals(): void {
+  const valid = new Set<string>(AFFILIATE_VERTICALS);
+  const errors: string[] = [];
+  for (const ad of AFFILIATE_ADS) {
+    if (ad.vertical && !valid.has(ad.vertical)) {
+      errors.push(`${ad.id}: 不正な vertical "${ad.vertical}" (10 軸外)`);
+    }
+    if (!adVertical(ad)) {
+      errors.push(
+        `${ad.id}: vertical / categoryKey いずれからも vertical を解決できない (配信されない孤立在庫)`,
+      );
+    }
+  }
+  if (errors.length > 0) {
+    throw new Error(`affiliate vertical 検証エラー:\n - ${errors.join("\n - ")}`);
+  }
+}
 
 /**
  * A/B テスト (AFF-05) の整合性をビルド時に検証する (手編集 JSON を SSOT にしない原則)。
@@ -57,6 +84,7 @@ function validateExperiments(): void {
 
 async function main() {
   validateExperiments();
+  validateVerticals();
 
   const snapshot: AffiliateAdsSnapshot = {
     generatedAt: new Date().toISOString(),

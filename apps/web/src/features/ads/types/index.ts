@@ -1,3 +1,5 @@
+import type { AffiliateVertical } from "../constants/affiliate-category";
+
 /**
  * アフィリエイト広告の型。完全DBレス Phase F で D1 `affiliate_ads` schema ($inferSelect) から
  * relocate。配信は R2 app/affiliate-ads/all.json (register-affiliate-banner で生成)。
@@ -7,6 +9,15 @@ export interface AffiliateAd {
   title: string;
   htmlContent: string;
   areaCode: string | null;
+  /**
+   * 広告意図軸 (10 vertical)。ページ→vertical→広告 の解決に使う SSOT の正フィールド。
+   * 移行期は任意 (未設定なら categoryKey から写像。`adVertical()` 参照)。Step B で必須化予定。
+   */
+  vertical?: AffiliateVertical | null;
+  /**
+   * @deprecated e-Stat 17 軸の categoryKey。vertical へ移行中 (後方互換で残置)。
+   * マルチカテゴリ複製の元凶。解決は vertical ベースに切替済。
+   */
   categoryKey: string | null;
   locationCode: string;
   isActive: boolean | null;

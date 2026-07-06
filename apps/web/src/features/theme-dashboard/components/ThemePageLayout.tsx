@@ -17,7 +17,8 @@ import {
   NativeAffiliateRow,
   SidebarPromoBanner,
 } from "@/features/ads";
-import { resolveAffiliateBanners } from "@/features/ads/server";
+import { THEME_AFFILIATE_MAP } from "@/features/ads/constants/affiliate-category";
+import { resolveAffiliateBanners, resolveAffiliateBannersByVertical } from "@/features/ads/server";
 
 import { AdSenseAd, HUB_INCONTENT, THEMES_CONTENT } from "@/lib/google-adsense";
 
@@ -56,9 +57,17 @@ export async function ThemePageLayout({ theme, data, areaContext }: Props) {
   const pageData = generateThemePageStructuredData(theme);
 
   // D Phase 3: ネイティブアフィリエイト枠 (テーマ関連書籍/商品)
-  const nativeBanners = theme.relatedArticleTagKeys && theme.relatedArticleTagKeys.length > 0
+  // relatedArticleTagKeys で解決 → 空なら theme→vertical 写像 (THEME_AFFILIATE_MAP) でフォールバック。
+  // これにより relatedArticleTagKeys 未設定のテーマでも意図一致広告が出る (在庫機会損失の解消)。
+  let nativeBanners = theme.relatedArticleTagKeys && theme.relatedArticleTagKeys.length > 0
     ? await resolveAffiliateBanners(theme.relatedArticleTagKeys, 4).catch(() => [])
     : [];
+  if (nativeBanners.length === 0) {
+    const vertical = THEME_AFFILIATE_MAP[theme.themeKey];
+    if (vertical) {
+      nativeBanners = await resolveAffiliateBannersByVertical(vertical, 4).catch(() => []);
+    }
+  }
 
   return (
     <ThemePrefectureProvider

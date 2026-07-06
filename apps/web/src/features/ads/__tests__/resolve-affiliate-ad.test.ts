@@ -4,13 +4,13 @@ import { describe, expect, it, vi, beforeEach } from "vitest";
 vi.mock("../repositories/affiliate-ad-snapshot");
 
 import {
-  readActiveAdByCategoryFromR2,
-  readActiveBannersByCategoryKeysFromR2,
+  readActiveTextAdByVerticalFromR2,
+  readActiveBannersByVerticalsFromR2,
 } from "../repositories/affiliate-ad-snapshot";
 import { resolveAffiliateAd, resolveAffiliateBanners } from "../services/resolve-affiliate-ad";
 
-const mockFindActiveAd = vi.mocked(readActiveAdByCategoryFromR2);
-const mockFindBanners = vi.mocked(readActiveBannersByCategoryKeysFromR2);
+const mockFindActiveAd = vi.mocked(readActiveTextAdByVerticalFromR2);
+const mockFindBanners = vi.mocked(readActiveBannersByVerticalsFromR2);
 
 beforeEach(() => {
   vi.clearAllMocks();
@@ -61,7 +61,7 @@ describe("resolveAffiliateBanners", () => {
     expect(mockFindBanners).not.toHaveBeenCalled();
   });
 
-  it("マッチするタグから categoryKey を収集し一括クエリする", async () => {
+  it("マッチするタグから vertical を収集し一括クエリする", async () => {
     mockFindBanners.mockResolvedValue([
       {
         id: "banner-1",
@@ -87,11 +87,10 @@ describe("resolveAffiliateBanners", () => {
 
     const result = await resolveAffiliateBanners(["wages", "employment"]);
 
-    // wages と employment は両方 "labor" → categoryKey "laborwage"
-    // 重複排除されるので categoryKey は ["laborwage"] の1つだけ
+    // wages と employment は両方 vertical "labor" → 重複排除で ["labor"] の1つだけ
     // rankingKey 未指定なので第3引数は undefined (非 ranking 文脈)
     expect(mockFindBanners).toHaveBeenCalledTimes(1);
-    expect(mockFindBanners).toHaveBeenCalledWith(["laborwage"], 2, undefined);
+    expect(mockFindBanners).toHaveBeenCalledWith(["labor"], 2, undefined);
     expect(result).toHaveLength(1);
     expect(result[0]).toEqual({
       title: "バナー1",
