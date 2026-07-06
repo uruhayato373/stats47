@@ -1,66 +1,70 @@
 {
-  "generatedAt": "2026-07-06T05:57:20.757Z",
+  "generatedAt": "2026-07-06T08:05:56.368Z",
   "date": "2026-07-06",
   "totals": {
-    "entries": 80,
-    "active": 80,
+    "entries": 41,
+    "active": 41,
     "uniqueAdvertisers": 40
   },
   "byCategory": {
-    "administrativefinancial": 7,
-    "energy": 7,
-    "tourism": 10,
-    "socialsecurity": 9,
-    "economy": 14,
-    "construction": 9,
-    "laborwage": 9,
-    "population": 7,
-    "(null)": 6,
-    "landweather": 2
+    "(null)": 13,
+    "energy": 2,
+    "tourism": 5,
+    "socialsecurity": 4,
+    "economy": 8,
+    "construction": 4,
+    "laborwage": 3,
+    "population": 2
   },
   "byVertical": {
-    "furusato": 7,
-    "energy": 7,
-    "travel": 13,
-    "health": 9,
-    "economy": 14,
-    "housing": 11,
-    "labor": 9,
-    "population": 7,
+    "furusato": 2,
+    "energy": 2,
+    "travel": 8,
+    "health": 4,
+    "economy": 8,
+    "housing": 4,
+    "education": 2,
+    "labor": 7,
     "mobility": 2,
-    "education": 1
+    "population": 2
   },
   "byLocation": {
-    "blog-bottom": 56,
+    "blog-bottom": 35,
+    "area-sidebar": 1,
     "sidebar-sticky": 2,
-    "area-sidebar": 3,
     "sidebar-inline": 1,
-    "sidebar-bottom": 18
+    "sidebar-bottom": 2
   },
   "byAdType": {
-    "banner": 62,
-    "text": 18
+    "banner": 39,
+    "text": 2
   },
   "coverage": {
-    "categoriesCovered": 9,
+    "categoriesCovered": 7,
     "categoriesTotal": 17,
     "gapCategories": [
+      "landweather",
       "agriculture",
       "miningindustry",
       "commercial",
       "educationsports",
+      "administrativefinancial",
       "safetyenvironment",
       "international",
       "infrastructure",
       "ict"
     ],
     "thinCategories": [
-      "landweather"
+      "population",
+      "energy"
     ],
     "verticalsCovered": 10,
     "verticalsTotal": 10,
     "gapVerticals": [],
     "thinVerticals": [
+      "population",
+      "energy",
+      "furusato",
       "education",
       "mobility"
     ]
