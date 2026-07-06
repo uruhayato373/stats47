@@ -781,6 +781,28 @@ export const AFFILIATE_ADS: AffiliateAd[] = [
     "createdAt": "2026-07-06 00:00:00",
     "updatedAt": "2026-07-06 00:00:00"
   },
+  // ── ユーカーパック 車一括査定 (mobility / A8.net) ────────────────────────────
+  {
+    "id": "af_ucarpac_mobility_001",
+    "title": "ユーカーパック 車一括査定",
+    "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B7USX+98TBXU+3O80+64Z8X",
+    "areaCode": null,
+    "vertical": "mobility",
+    "categoryKey": null,
+    "locationCode": "blog-bottom",
+    "isActive": true,
+    "priority": 88,
+    "startDate": null,
+    "endDate": null,
+    "targetCategories": null,
+    "adType": "banner",
+    "imageUrl": "https://www26.a8.net/svt/bgt?aid=260706993559&wid=001&eno=01&mid=s00000017136001031000&mc=1",
+    "trackingPixelUrl": "https://www16.a8.net/0.gif?a8mat=4B7USX+98TBXU+3O80+64Z8X",
+    "width": 300,
+    "height": 250,
+    "createdAt": "2026-07-06 00:00:00",
+    "updatedAt": "2026-07-06 00:00:00"
+  },
   // ── マッチングアプリ バナー 1 (population / blog-bottom) ──────────────────────
   {
     "id": "af_population_banner_001",
