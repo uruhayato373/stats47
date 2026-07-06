@@ -63,6 +63,13 @@ Cell content: ≤ 10 words each.
 - 読み取り専用 (本番 URL・R2 公開 URL・state JSON の read のみ)。
 - 書き込みは自分の成果物のみ: 生成 HTML (`/tmp/`) と `.claude/state/ogp/inventory.json` (`--audit` 時)。
 
+## 自動化との関係
+
+生成漏れは **`ogp-image-audit-weekly.yml` (週次) が自動修復** し、`sync-snapshots.yml` の公開時フックが
+新規 ranking を即生成する (トークン消費ゼロ・決定的)。本スキルは**人手での目視レビュー / 臨時監査**用途
+(デザイン確認・特定種別の詳細確認)。決定的な欠落ゲートは `generate-ogp-images.ts --audit` /
+`build-image-gallery.mjs --audit --all` (欠落>0 で exit 1)。
+
 ## 関連
 
 - 基準 SSOT: `.claude/rules/ogp-image-standards.md`

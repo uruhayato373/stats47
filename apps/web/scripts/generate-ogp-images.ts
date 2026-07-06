@@ -41,8 +41,11 @@ type OgpType = "ranking" | "areas" | "ranking-cards" | "note-covers";
 interface CliOptions {
   type: OgpType;
   force: boolean;
+  audit: boolean;
   keys: string[] | null;
   limit: number | null;
+  maxGenerate: number | null;
+  source: "sitemap" | "known";
 }
 
 function parseArgs(): CliOptions {
@@ -58,11 +61,16 @@ function parseArgs(): CliOptions {
   }
   const rawKey = val("--key");
   const rawLimit = val("--limit");
+  const rawMax = val("--max-generate");
+  const rawSource = val("--source");
   return {
     type: rawType as OgpType,
     force: args.includes("--force"),
+    audit: args.includes("--audit"),
     keys: rawKey ? rawKey.split(",").map((s) => s.trim()).filter(Boolean) : null,
     limit: rawLimit ? Number(rawLimit) : null,
+    maxGenerate: rawMax ? Number(rawMax) : null,
+    source: rawSource === "known" ? "known" : "sitemap",
   };
 }
 
@@ -109,8 +117,26 @@ async function cloudOk(key: string): Promise<boolean> {
   }
 }
 
-/** 本番 sitemap から ranking キーを列挙。 */
-async function listRankingKeys(): Promise<string[]> {
+/**
+ * ranking キーを列挙。
+ * - source=sitemap (既定): 本番 sitemap (live で indexable なキー)。週次監査向け
+ * - source=known: git の KNOWN_RANKING_KEYS を parse。新規公開直後 (まだ sitemap 未反映) の
+ *   publish フック向け。`packages/ranking/src/config/known-ranking-keys.ts` を正規表現で読む
+ */
+async function listRankingKeys(source: "sitemap" | "known"): Promise<string[]> {
+  if (source === "known") {
+    const { readFileSync } = await import("node:fs");
+    try {
+      const src = readFileSync(
+        join(PROJECT_ROOT, "packages/ranking/src/config/known-ranking-keys.ts"),
+        "utf8",
+      );
+      const keys = [...src.matchAll(/"([a-z0-9][a-z0-9-]*)"/g)].map((m) => m[1]);
+      return [...new Set(keys)].sort();
+    } catch (e) {
+      console.error(`known-ranking-keys.ts 読み取り失敗、sitemap にフォールバック: ${String(e)}`);
+    }
+  }
   const index = (await fetchText(`${SITE}/sitemap.xml`)) ?? "";
   const parts = [...index.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
   const keys = new Set<string>();
@@ -239,18 +265,7 @@ async function main() {
   const opts = parseArgs();
   console.log(`type=${opts.type} 公開URL=${PUBLIC_URL} stage=${STAGE_ROOT}`);
 
-  // render lib は生成時のみ読み込む
-  const { buildElement, loadFonts, renderToPng, renderToWebP } = await import("./lib/blog-thumbnail-render");
-  const fonts = loadFonts(PROJECT_ROOT);
-
-  // 既存 OGP コンポーネント (satori 描画用)
-  let RankingOgp: unknown, AreaOgp: unknown;
-  if (opts.type === "ranking" || opts.type === "areas") {
-    RankingOgp = (await import("../src/features/ogp/RankingOgp")).RankingOgp;
-    AreaOgp = (await import("../src/features/ogp/AreaOgp")).AreaOgp;
-  }
-
-  // 対象列挙
+  // 対象列挙 (render lib 不要 = 監査は native binding なしで完結)
   let ids: string[];
   let noteEntries: NoteEntry[] = [];
   if (opts.type === "note-covers") {
@@ -259,7 +274,7 @@ async function main() {
   } else if (opts.type === "areas") {
     ids = listAreaCodes();
   } else {
-    ids = opts.keys ?? (await listRankingKeys());
+    ids = opts.keys ?? (await listRankingKeys(opts.source));
   }
   if (opts.keys) ids = ids.filter((id) => opts.keys!.includes(id));
   if (opts.limit) ids = ids.slice(0, opts.limit);
@@ -274,16 +289,42 @@ async function main() {
     return [`${n.r2Path}/images/cover-1280x670.png`];
   };
 
-  // 既存スキップ判定 (--force で無効化)
-  const targets: string[] = [];
-  if (opts.force) {
-    targets.push(...ids);
-  } else {
+  // 既存チェック (監査・self-heal 共通)。--force 時のみスキップ (全件再生成)
+  let missing: string[] = [];
+  if (opts.audit || !opts.force) {
     const checked = await pMap(ids, async (id) => ({ id, ok: await cloudOk(keyFor(id)[0]) }), 12);
-    for (const { id, ok } of checked) if (!ok) targets.push(id);
+    missing = checked.filter((c) => !c.ok).map((c) => c.id);
   }
-  console.log(`生成対象: ${targets.length} 件 (既存スキップ: ${ids.length - targets.length})`);
+
+  // --audit: 生成せず欠落を報告して exit (missing>0 で exit 1)
+  if (opts.audit) {
+    console.log(`\n監査: ${ids.length} 件中 欠落 ${missing.length} 件`);
+    if (missing.length > 0) {
+      console.log(`  欠落: ${missing.slice(0, 30).join(", ")}${missing.length > 30 ? ` … 他 ${missing.length - 30} 件` : ""}`);
+    }
+    process.exit(missing.length > 0 ? 1 : 0);
+  }
+
+  // 生成対象 (--force=全件 / 通常=欠落のみ)。--max-generate で1回あたりの blast radius を制限
+  let targets = opts.force ? [...ids] : missing;
+  const capped = opts.maxGenerate != null && targets.length > opts.maxGenerate;
+  if (capped) {
+    console.log(`⚠ 生成対象 ${targets.length} 件を上限 ${opts.maxGenerate} 件にクランプ (残りは次回実行)`);
+    targets = targets.slice(0, opts.maxGenerate!);
+  }
+  console.log(`生成対象: ${targets.length} 件 (既存スキップ: ${ids.length - (opts.force ? ids.length : missing.length)})`);
   if (targets.length === 0) return;
+
+  // render lib は生成時のみ読み込む (satori/sharp)
+  const { buildElement, loadFonts, renderToPng, renderToWebP } = await import("./lib/blog-thumbnail-render");
+  const fonts = loadFonts(PROJECT_ROOT);
+
+  // 既存 OGP コンポーネント (satori 描画用)
+  let RankingOgp: unknown, AreaOgp: unknown;
+  if (opts.type === "ranking" || opts.type === "areas") {
+    RankingOgp = (await import("../src/features/ogp/RankingOgp")).RankingOgp;
+    AreaOgp = (await import("../src/features/ogp/AreaOgp")).AreaOgp;
+  }
 
   let generated = 0;
   let fallback = 0;

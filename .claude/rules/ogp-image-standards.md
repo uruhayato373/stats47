@@ -61,6 +61,16 @@ node .claude/scripts/ogp/build-image-gallery.mjs --tabs ranking-card --check
 node .claude/scripts/ogp/build-image-gallery.mjs --audit
 ```
 
+### 自動化 (トークン消費ゼロ・決定的)
+- **週次自動監査+自動修復**: `.github/workflows/ogp-image-audit-weekly.yml` (日曜 03:00 JST)。全種別の欠落分だけ
+  Satori 生成→R2 push (self-heal) → 最終監査 → inventory を develop commit → 修復後も残れば `[OGP Alert]` Issue
+  (`ogp-alert,auto-generated`)。検知も生成も Node fetch + Satori のみ (LLM 不使用)。
+- **新規 ranking 公開時フック**: `sync-snapshots.yml` の `sync-ranking-keys` job が KNOWN keys 再生成直後に
+  `generate-ogp-images.ts --type ranking|ranking-cards --source known --max-generate 500` で新キー分を即生成→R2。
+  未生成による og:image 404 を公開時に先回りする。
+- **blog** は別途 `pr-quality-check.yml` の Blog Thumbnail Gate で PR ゲート済 (`generate-blog-thumbnails-cloud.ts --audit`)。
+- 手動監査は `/audit-ogp-images` (下記)。`generate-ogp-images.ts --audit` は欠落>0 で exit 1 (CI ゲート可)。
+
 - **サンプリング**: ranking 系タブは既定 30 件 (先頭 10 + 等間隔 20)、`--all` で全量。他タブは全量。`--audit` も既定はサンプリング (全量は `--audit --all`)。
 - **真実を映す**: OGP タブは各ページの `og:image` meta から**実際に配信されている URL**を解決する。静的フォールバック (home/category の `/og-image.jpg`)・ハッシュ付き URL・ランタイム 500 をそのまま反映する。
 - **欠落検出**: 常時 `img onerror` バッジ (目視) + `--check`/`--audit` 時に GET でステータス + content-type を確定 (機械)。

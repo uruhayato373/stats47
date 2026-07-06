@@ -1,7 +1,8 @@
 {
-  "hash": "698b65dcceadd933e2cb1c40268b1da57864e5a2081ed5c2cc05d1d6bcaea446",
-  "audited_at": "2026-07-06T01:45:20",
+  "hash": "f78385e732397203d13a490fbefd37df2d06a6609a0a277e8bb2ff069f49829d",
+  "audited_at": "2026-07-06T02:41:52",
   "files": [
-    ".claude/scripts/ogp/build-image-gallery.mjs"
+    ".claude/scripts/ogp/build-image-gallery.mjs",
+    ".claude/skills/ui/audit-ogp-images/SKILL.md"
   ]
 }

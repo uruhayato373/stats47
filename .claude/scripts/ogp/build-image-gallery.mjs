@@ -711,4 +711,16 @@ function summarize(tabData, checkMap) {
   fs.writeFileSync(OUT, html, "utf8");
   console.error(`[ogp-gallery] gallery: ${OUT}`);
   console.log(`\n${OUT}`);
+
+  // --audit は CI ゲート: 欠落合計 > 0 なら exit 1 (r2-static/none の実欠落のみ対象。
+  // satori-route/static は本番配信の生死であり本監査の対象外)
+  if (AUDIT && checkMap) {
+    const totalMissing = rows
+      .filter((r) => r.source === "r2-static")
+      .reduce((n, r) => n + (r.missing ? r.missing.length : 0), 0);
+    if (totalMissing > 0) {
+      console.error(`[ogp-gallery] ❌ r2-static 欠落 ${totalMissing} 件 → exit 1`);
+      process.exit(1);
+    }
+  }
 })();
