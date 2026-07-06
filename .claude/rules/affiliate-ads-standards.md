@@ -74,6 +74,10 @@ apps/web/scripts/affiliate-ads-data.ts (AFFILIATE_ADS = git TS SSOT・広告は 
 **legacy 一点物** (grandfathering・新規禁止・段階移行): `160×600` / `120×600` / `165×120` / `320×250` / `336×280` / `300×300`
 → 再取得時に 300×250 か text へ寄せる。`KNOWN_LEGACY_SIZES` (audit script) で許容中。**新規はこれらも不可** (canonical のみ)。
 
+- **サイズがコードに明記されない ASP** (ValueCommerce の gifbanner / 楽天の pict) は `inspect-banner.mjs` で
+  **画像を fetch して実測**する (2x 高解像度素材は表示サイズ=実寸/2)。A8 は `<img width/height>` で明記される。
+- **A8 以外は別インプレッションピクセルを持たない** → `trackingPixelUrl: null` (解決層は imageUrl のみ必須)。
+
 ## 4. 配置 & priority 規約
 
 ### 解決 (`resolve-affiliate-ad.ts`)
@@ -130,8 +134,10 @@ apps/web/scripts/affiliate-ads-data.ts (AFFILIATE_ADS = git TS SSOT・広告は 
 - **`propose`**: audit (`audit-affiliate-inventory.ts`) の vertical カバレッジ + GA4/GSC トラフィックを突合し、
   「在庫ゼロ/手薄 × 高トラフィック」の vertical を特定 → §2 表と照合し **次に提携すべき 1 プログラム**を根拠
   (想定 imp 機会・単価帯・送客ページ) つきで提示 → ユーザーが ASP (A8 等) で提携申請。**1 回 1 件**。
-- **`register`**: ユーザーが承認済みプログラムの HTML コードを貼付 → href/imageUrl/trackingPixelUrl/width/height 抽出
-  → **サイズ検証** (canonical 以外は登録拒否・正サイズ素材の再取得を案内) → **vertical 判定** (§2 表 + ユーザー確認)
+- **`register`**: ユーザーが承認済みプログラムの HTML コードを貼付 → ASP 別に href/imageUrl/pixel/size 抽出
+  (A8=pixel あり / **ValueCommerce・楽天アフィリエイトは別ピクセル無し → `trackingPixelUrl: null`**、サイズもコードに出ない)
+  → **`inspect-banner.mjs` で画像を fetch しサイズ実測 + canonical 判定 + Read で広告主目視判別**
+  (canonical 以外は登録拒否・正サイズ素材の再取得を案内) → **vertical 判定** (§2 表 + ユーザー確認)
   → `AFFILIATE_ADS[]` に **1 エントリ**追記 (categoryKey 複製しない) → tsc + audit + export dry-run
   → commit 準備 (push はユーザー判断・develop push で R2 反映) → 次の `propose` へループ。
 - **`status`**: §2 表の提携状況一覧 (提携済/申請中/要提携)。

@@ -34,7 +34,10 @@ function validateVerticals(): void {
   const valid = new Set<string>(AFFILIATE_VERTICALS);
   const errors: string[] = [];
   for (const ad of AFFILIATE_ADS) {
-    if (ad.vertical && !valid.has(ad.vertical)) {
+    // Step B 以降: vertical は必須 (categoryKey フォールバックは移行期のみ)
+    if (!ad.vertical) {
+      errors.push(`${ad.id}: vertical 未設定 (Step B 以降は必須)`);
+    } else if (!valid.has(ad.vertical)) {
       errors.push(`${ad.id}: 不正な vertical "${ad.vertical}" (10 軸外)`);
     }
     if (!adVertical(ad)) {

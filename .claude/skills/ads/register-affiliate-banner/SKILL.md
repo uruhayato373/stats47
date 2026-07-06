@@ -37,19 +37,32 @@ co_agents: [devops-runner]
 
 ユーザーが ASP で提携承認 → 広告コードを持っている前提。
 
-### Step 1: コード解析
-A8.net 等の HTML から抽出:
+### Step 1: コード解析 (ASP 別)
 
-| 項目 | 抽出元 |
-|---|---|
-| `htmlContent` (href) | `<a>` の `href` |
-| `imageUrl` | 1 つ目の `<img>` の `src` (banner のみ) |
-| `trackingPixelUrl` | 2 つ目の 1×1 `<img>` の `src` |
-| `width` / `height` | 1 つ目の `<img>` の `width`/`height` |
+| ASP | href (クリック) | imageUrl | 計測ピクセル | サイズ |
+|---|---|---|---|---|
+| **A8.net** | `<a href>` (`px.a8.net/...`) | 1つ目 `<img src>` (`www*.a8.net/svt/bgt`) | 2つ目 1×1 `<img src>` (`www*.a8.net/0.gif`) | `<img width/height>` に明記 |
+| **ValueCommerce** | noscript の `<a href>` (`ck.jp.ap.valuecommerce...referral`) | noscript の `<img src>` (`ad.jp.ap.valuecommerce...gifbanner`) | **無し → `null`** | **コードに無い → Step 2 で実測** |
+| **楽天アフィリエイト** | `<a href>` (`hb.afl.rakuten.co.jp/hsc/...`) | `<img src>` (`hbb.afl.rakuten.co.jp/hsb/...`) | **無し → `null`** | **コードに無い → Step 2 で実測** |
 
-### Step 2: サイズ検証 (canonical 以外は拒否)
-canonical 4 種 = **300×250 / 250×250 / 320×100 / text** のみ。これ以外なら **登録せず**、ASP で正サイズ
-素材の再取得を案内する (legacy 一点物も新規は不可。rules §3)。
+- ValueCommerce は JavaScript バナー。**`<noscript>` の静的形 (gifbanner img + referral link) を使う**(SSG を壊さない)。
+- **A8 以外 (ValueCommerce / 楽天) は別インプレッションピクセルを持たない** → `trackingPixelUrl: null`。
+  解決層は imageUrl のみ必須・pixel 任意に対応済 (`resolve-affiliate-ad.ts` の `toBanner`)。
+- protocol-relative (`//ad.jp...`) は `https:` を補う。
+
+### Step 2: 画像を fetch して サイズ + 広告主 を確定 (★A8 以外は必須)
+
+サイズがコードに無い (VC/楽天) / 広告主がコードから不明な場合は、**画像を実際に取得して判別**する:
+
+```bash
+node .claude/scripts/ads/inspect-banner.mjs "<imageUrl>" /tmp/banner.png
+# → {format, width, height, canonical, canonicalSize, savedTo} を JSON 出力
+```
+- 出力の `canonical` が **false なら登録しない** → ASP で 300×250 (canonical) 素材を選び直してもらう
+  (canonical 4 種 = **300×250 / 250×250 / 320×100 / text** のみ。legacy 一点物も新規不可・rules §3)。
+- `savedTo` の画像を **Read tool で開いて広告主を目視判別**し vertical を決める (例: LEC→education / ユーカーパック→mobility)。
+- **2x 高解像度素材** (例 GIF 600×500) は表示 300×250 として扱う (`canonicalSize` を width/height に採用)。
+- A8 は `<img width/height>` が明記されているので画像 fetch は任意 (広告主判別が要るときだけ)。
 
 ### Step 3: vertical 判定 (ユーザー確認)
 `rules §2 利用プログラム表` でプログラム → vertical を判定し、ユーザーに確認する。10 軸:
@@ -73,9 +86,9 @@ canonical 4 種 = **300×250 / 250×250 / 320×100 / text** のみ。これ以�
   priority: 90,                             // 大きいほど優先。意図適合プログラムを上位に
   startDate: null, endDate: null, targetCategories: null,
   adType: "banner",                         // "banner" | "text"
-  imageUrl: "https://www22.a8.net/svt/bgt?aid=...",   // banner のみ
-  trackingPixelUrl: "https://www12.a8.net/0.gif?a8mat=...",
-  width: 300, height: 250,                  // text は null/null
+  imageUrl: "https://www22.a8.net/svt/bgt?aid=...",   // banner のみ (VC=gifbanner / 楽天=hsb)
+  trackingPixelUrl: "https://www12.a8.net/0.gif?a8mat=...",  // A8=0.gif / VC・楽天は null
+  width: 300, height: 250,                  // 実測サイズ (2x 素材は canonicalSize)。text は null/null
   createdAt: "YYYY-MM-DD 00:00:00", updatedAt: "YYYY-MM-DD 00:00:00",
 }
 ```
@@ -116,6 +129,7 @@ outward-facing なので push はユーザーに確認。反映後、対象 vert
 | `.claude/rules/affiliate-ads-standards.md` | **★正典** (vertical ハブ・プログラム表・サイズ・GA4・登録フロー) |
 | `apps/web/scripts/affiliate-ads-data.ts` | **★広告 SSOT** (`AFFILIATE_ADS`、git TS) |
 | `apps/web/src/features/ads/constants/affiliate-category.ts` | 意図ハブ (`AffiliateVertical` / 3 map / `adVertical`) |
+| `.claude/scripts/ads/inspect-banner.mjs` | バナー画像を fetch → サイズ実測 + canonical 判定 + 目視用保存 (VC/楽天のサイズ確定・広告主判別) |
 | `.claude/scripts/ads/audit-affiliate-inventory.ts` | 在庫棚卸し (vertical カバレッジ + `--check-size`) |
 | `apps/web/scripts/export-affiliate-ads-snapshot.ts` | SSOT → R2 (vertical 検証) |
 | `.github/workflows/publish-affiliate-ads.yml` | develop push で R2 反映 |
