@@ -380,6 +380,22 @@ if [ -n "$STAGED_CATALOG" ]; then
   fi
 fi
 
+# 6.7 アフィリエイト広告のサイズ規約チェック (.claude/rules/affiliate-ads-standards.md §サイズ)
+#     affiliate-ads-data.ts が staged のとき、canonical/legacy 以外のサイズ混入を弾く。
+STAGED_AFFILIATE=$(git diff --cached --name-only --diff-filter=ACM | grep -E "^apps/web/scripts/affiliate-ads-data\.ts$" || true)
+
+if [ -n "$STAGED_AFFILIATE" ]; then
+  echo -e "${GREEN}📐 アフィリエイト サイズ規約チェック...${NC}"
+  if (cd "$PROJECT_ROOT" && npx tsx .claude/scripts/ads/audit-affiliate-inventory.ts --json --check-size > /tmp/affiliate-size.log 2>&1); then
+    echo -e "${GREEN}✅ 全 banner が canonical/legacy サイズ${NC}"
+  else
+    echo -e "${RED}❌ canonical(300x250/250x250/320x100)・legacy いずれにも無いサイズが混入しています。${NC}"
+    grep -E "サイズ規約違反|非canonical" /tmp/affiliate-size.log | head -5 || true
+    echo -e "${YELLOW}💡 300x250 素材で再取得するか isActive:false に。規約: .claude/rules/affiliate-ads-standards.md${NC}"
+    ERROR_COUNT=$((ERROR_COUNT + 1))
+  fi
+fi
+
 # 7. テストカバレッジチェック（オプション - 変更されたファイルに関連するテストのみ）
 echo -e "${GREEN}🧪 テストカバレッジチェック（オプション）...${NC}"
 STAGED_TS_FILES=$(git diff --cached --name-only --diff-filter=ACM | grep -E '\.(ts|tsx)$' | grep -v '\.test\.' | grep -v '\.stories\.' || true)

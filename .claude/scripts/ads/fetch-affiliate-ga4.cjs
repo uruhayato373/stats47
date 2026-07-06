@@ -59,11 +59,17 @@ async function runReport(analyticsdata, dimensions) {
 const DIM_TIERS = [
   [
     "eventName",
+    "customEvent:affiliate_vertical",
     "customEvent:affiliate_category",
     "customEvent:link_position",
     "customEvent:experiment_id",
     "customEvent:variant_id",
     "customEvent:creative_size",
+  ],
+  [
+    "eventName",
+    "customEvent:affiliate_vertical",
+    "customEvent:link_position",
   ],
   ["eventName", "customEvent:affiliate_category", "customEvent:link_position"],
   ["eventName"],
@@ -123,7 +129,9 @@ async function main() {
   if (!rows || !usedDims) throw new Error("GA4 取得失敗 (全 dimension tier)");
 
   const valueDimNames = usedDims.slice(1).map(shortName);
-  const hasCategoryDims = valueDimNames.includes("affiliate_category");
+  const hasVerticalDims = valueDimNames.includes("affiliate_vertical");
+  const hasCategoryDims =
+    hasVerticalDims || valueDimNames.includes("affiliate_category");
   const hasVariantDims = valueDimNames.includes("variant_id");
 
   const pivoted = pivot(rows, usedDims).sort((a, b) => b.impressions - a.impressions);
@@ -136,6 +144,7 @@ async function main() {
     date,
     days: Number(process.argv[2] || 28),
     dimensions: valueDimNames,
+    hasVerticalBreakdown: hasVerticalDims,
     hasCategoryBreakdown: hasCategoryDims,
     hasVariantBreakdown: hasVariantDims,
     totals: {
@@ -160,7 +169,12 @@ async function main() {
   out.push("");
   if (!hasCategoryDims) {
     out.push(
-      "> ⚠ custom dimension `affiliate_category` / `link_position` 未登録のため内訳なし (総数のみ)。GA4 管理画面で登録してください。",
+      "> ⚠ custom dimension `affiliate_vertical` / `affiliate_category` / `link_position` 未登録のため内訳なし (総数のみ)。GA4 管理画面で登録してください (手順: `.claude/rules/affiliate-ads-standards.md` §GA4計測)。",
+    );
+    out.push("");
+  } else if (!hasVerticalDims) {
+    out.push(
+      "> ⚠ canonical dimension `affiliate_vertical` (10 軸) 未登録。旧 `affiliate_category` で内訳表示中。GA4 管理画面で `affiliate_vertical` を登録すると意図軸で集計できます。",
     );
     out.push("");
   } else if (!hasVariantDims) {
@@ -176,6 +190,7 @@ async function main() {
 
   // 列順 (登録済みの dimension のみ)
   const COL_ORDER = [
+    "affiliate_vertical",
     "affiliate_category",
     "link_position",
     "experiment_id",

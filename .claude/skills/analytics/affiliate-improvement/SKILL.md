@@ -33,7 +33,7 @@ $ARGUMENTS — [mode]
              mode:
                - status (デフォルト) : 最新の在庫棚卸し + 進行中施策 (AFF-NN) を要約
                - dashboard         : 管理画面 (単体 HTML) を再生成して開く / ユーザーに渡す
-               - audit             : 在庫棚卸しのみ再実行 (17 軸ギャップ + 配置偏り)
+               - audit             : 在庫棚卸しのみ再実行 (vertical 10軸ギャップ + サイズ lint + 配置偏り)
                - observe           : GA4 imp/click を取得 → CTR 集計 → 弱枠特定 → 実測を追記
                - action            : 新しい施策 section (AFF-NN) を追加
                - next              : 次に着手すべき改善候補を提示
@@ -70,11 +70,14 @@ npx tsx .claude/scripts/ads/audit-affiliate-inventory.ts
 ```
 
 出力で確認すること:
-- **gapCategories** (広告ゼロ軸) — 該当 categoryKey のページは impression がゼロ → 在庫補充候補
-- **thinCategories** (枠 ≤ 2) — 補充候補
+- **gapVerticals** (在庫ゼロの意図軸・10 vertical) ★広告解決の実軸 — 現状 `education` / `mobility` がゼロ。
+  この意図のページ (ranking/theme/blog) に意図一致広告が出ない → `/register-affiliate-banner propose` の対象
+- **thinVerticals** (枠 ≤ 2) — 補充候補
+- **gapCategories / thinCategories** (17 軸 e-Stat 分類) — 参考 (backbone。実配信は vertical で解決)
+- **sizeViolations** — canonical(300×250/250×250/320×100/text) 以外。`error` tier は新規混入 (要是正)
 - **配置偏り** — blog-bottom に集中していないか、高トラフィック page type に枠があるか
 
-JSON は `.claude/state/ads/inventory-latest.json`。`--json` で stdout に JSON のみ。
+JSON は `.claude/state/ads/inventory-latest.json` (`byVertical` / `coverage.gapVerticals` / `sizeViolations` を含む)。`--json` で stdout に JSON のみ。`--check-size` で非 canonical・非 legacy があれば exit 1 (pre-commit ゲート)。
 
 ### Step 2: GA4 実績取得 (observe モードのみ)
 
@@ -84,8 +87,8 @@ JSON は `.claude/state/ads/inventory-latest.json`。`--json` で stdout に JSO
 node .claude/scripts/ads/fetch-affiliate-ga4.cjs 28   # 直近 28 日。snapshot → .claude/state/ads/ga4-affiliate-<date>.json
 ```
 
-- dimension: `eventName` + `customEvent:affiliate_category` + `customEvent:link_position`、metric: `eventCount`
-- impression / click を pivot し (category × position) ごとに `CTR = click / impression` を算出
+- dimension: `eventName` + `customEvent:affiliate_vertical` (★canonical 10軸) + `customEvent:affiliate_category` + `customEvent:link_position`、metric: `eventCount`
+- impression / click を pivot し (vertical × position) ごとに `CTR = click / impression` を算出。`hasVerticalBreakdown` が false なら `affiliate_vertical` 未登録 (rules §6 の手順で登録)
 
 > ⚠ **2 つの前提** (満たさないと内訳が取れない):
 > 1. **GA4 鍵**: `stats47-*.json` がリポジトリルートに必要。**クラウド / web 実行環境には鍵が無いため、
@@ -93,9 +96,10 @@ node .claude/scripts/ads/fetch-affiliate-ga4.cjs 28   # 直近 28 日。snapshot
 >    (週次 cron + `workflow_dispatch`)。シークレット `GOOGLE_SERVICE_ACCOUNT_KEY_JSON` を鍵ファイルに
 >    復元して `fetch-affiliate-ga4.cjs` を実行し、snapshot を develop に commit-back する。
 >    鍵のあるローカルなら直接 `node …` でも可。
-> 2. **custom dimension 登録**: `affiliate_category` / `link_position` を GA4 管理画面で
->    イベントスコープのカスタムディメンションとして登録済みでないと内訳が引けない。
->    未登録時はスクリプトが `eventName` 単位の総数にフォールバックする (内訳は登録後に再取得)。
+> 2. **custom dimension 登録**: `affiliate_vertical` / `affiliate_category` / `link_position` を GA4 管理画面で
+>    イベントスコープのカスタムディメンションとして登録済みでないと内訳が引けない (登録手順の正典:
+>    `.claude/rules/affiliate-ads-standards.md` §6)。未登録時はスクリプトが `eventName` 単位の総数に
+>    フォールバックする (内訳は登録後に再取得)。
 
 > 注: 外部連携トークンは `actions:write` を持たず `workflow_dispatch` を起動できない (403) ことがある。
 > その場合は週次 cron の自動実行を待つか、`gh` の使えるローカルから dispatch する
