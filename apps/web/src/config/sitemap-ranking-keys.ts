@@ -7,10 +7,10 @@
  * INDEXING-SITEMAP-02: 「コンテンツ実体のある URL」= isActive な全ランキングを sitemap に包含。
  * 2026-05-05 の単一週絞り込みによる大量インデックス削除を回避する設計 (詳細はスクリプト docstring)。
  *
- * 集計週: 2026-W16, 2026-W17, 2026-W18, 2026-W19, 2026-W20, 2026-W21, 2026-W22, 2026-W23
- *   週別 impressions>=1 キー数: 2026-W16: 314 / 2026-W17: 339 / 2026-W18: 621 / 2026-W19: 681 / 2026-W20: 798 / 2026-W21: 822 / 2026-W22: 842 / 2026-W23: 835
- * 和集合: 2126 キー (INDEXABLE +0 / KNOWN +1142 / INDEXABLE 総数 338 / KNOWN 総数 2121)
- * 生成日: 2026-06-13
+ * 集計週: 2026-W16, 2026-W17, 2026-W18, 2026-W19, 2026-W20, 2026-W21, 2026-W22, 2026-W23, 2026-W24, 2026-W25, 2026-W26, 2026-W27
+ *   週別 impressions>=1 キー数: 2026-W16: 314 / 2026-W17: 339 / 2026-W18: 621 / 2026-W19: 681 / 2026-W20: 798 / 2026-W21: 822 / 2026-W22: 842 / 2026-W23: 835 / 2026-W24: 924 / 2026-W25: 961 / 2026-W26: 1015 / 2026-W27: 1057
+ * 和集合: 2129 キー (INDEXABLE +0 / KNOWN +883 / INDEXABLE 総数 338 / KNOWN 総数 2123)
+ * 生成日: 2026-07-06
  *
  * 安全弁: url-policy.ts shouldIncludeInSitemap は本セットが空の場合 KNOWN 全件に
  *         フォールバックする (生成失敗時の大量削除を防ぐ)。
@@ -174,6 +174,7 @@ export const SITEMAP_RANKING_KEYS = new Set<string>([
   "bowling-alley-public",
   "boys-school-uniform-consumption-expenditure",
   "boys-school-uniform-consumption-quantity",
+  "bread-consumption-expenditure",
   "broccoli-consumption-expenditure",
   "broccoli-consumption-quantity",
   "building-fire-count",
@@ -1507,6 +1508,7 @@ export const SITEMAP_RANKING_KEYS = new Set<string>([
   "prefectural-general-administration-staff",
   "prefectural-income-growth-rate-h17",
   "prefectural-income-growth-rate-h23",
+  "prefectural-income-per-capita",
   "prefectural-natural-park-count",
   "prefectural-nature-park-area",
   "preschool-fee-consumption-expenditure",
@@ -1651,6 +1653,7 @@ export const SITEMAP_RANKING_KEYS = new Set<string>([
   "retail-store-count-per-1000-alt",
   "retail-stores-per",
   "retirement-allowance-admin-prefecture",
+  "rice-consumption-expenditure",
   "rice-cracker-consumption-expenditure",
   "rice-cultivated-area",
   "rice-harvest-volume",

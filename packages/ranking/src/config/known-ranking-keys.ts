@@ -14,8 +14,8 @@
  * 更新タイミング: ranking item 追加/有効化 + CI generate-ranking-items 実行後。
  *                 必ず git commit してからデプロイ。
  *
- * 最終生成日: 2026-06-12
- * 件数: 2121
+ * 最終生成日: 2026-07-06
+ * 件数: 2123
  */
 export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "abandoned-cultivated-land-area",
@@ -176,6 +176,7 @@ export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "bowling-alley-public",
   "boys-school-uniform-consumption-expenditure",
   "boys-school-uniform-consumption-quantity",
+  "bread-consumption-expenditure",
   "broccoli-consumption-expenditure",
   "broccoli-consumption-quantity",
   "building-fire-count",
@@ -1650,6 +1651,7 @@ export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "retail-store-count-per-1000",
   "retail-stores-per",
   "retirement-allowance-admin-prefecture",
+  "rice-consumption-expenditure",
   "rice-cracker-consumption-expenditure",
   "rice-cultivated-area",
   "rice-harvest-volume",
