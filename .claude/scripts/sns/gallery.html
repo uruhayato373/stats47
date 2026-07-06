@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SNS 投稿ギャラリー — stats47</title>
+<style>
+  :root { --bg:#0f172a; --card:#1e293b; --border:#334155; --text:#e2e8f0; --muted:#94a3b8; --accent:#38bdf8; --ok:#22c55e; --warn:#f59e0b; --danger:#ef4444; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:-apple-system,"Hiragino Kaku Gothic ProN",sans-serif; background:var(--bg); color:var(--text); }
+  header { position:sticky; top:0; z-index:10; background:rgba(15,23,42,.95); border-bottom:1px solid var(--border); padding:10px 16px; display:flex; flex-wrap:wrap; gap:10px; align-items:center; }
+  h1 { font-size:15px; margin:0 12px 0 0; }
+  .tabs, .chips { display:flex; gap:6px; }
+  .tab, .chip { border:1px solid var(--border); background:transparent; color:var(--muted); padding:4px 12px; border-radius:999px; cursor:pointer; font-size:12px; }
+  .tab.active, .chip.active { background:var(--accent); color:#0f172a; border-color:var(--accent); font-weight:600; }
+  .limits { margin-left:auto; display:flex; gap:8px; font-size:11px; }
+  .limit { border:1px solid var(--border); border-radius:6px; padding:3px 8px; color:var(--muted); }
+  .limit.over { border-color:var(--danger); color:var(--danger); font-weight:600; }
+  .warnbar { background:#78350f; color:#fde68a; padding:6px 16px; font-size:12px; display:none; }
+  main { padding:16px; display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); gap:14px; }
+  .card { background:var(--card); border:1px solid var(--border); border-radius:8px; overflow:hidden; display:flex; flex-direction:column; }
+  .media { position:relative; aspect-ratio:16/10; background:#000; display:flex; align-items:center; justify-content:center; }
+  .media video, .media img { width:100%; height:100%; object-fit:contain; }
+  .media .none { color:var(--muted); font-size:12px; }
+  .badge { position:absolute; top:6px; left:6px; font-size:10px; padding:2px 8px; border-radius:999px; background:rgba(0,0,0,.7); }
+  .badge.posted{color:var(--ok)} .badge.scheduled{color:var(--warn)} .badge.draft{color:var(--accent)} .badge.unregistered,.badge.scheduled-json-only{color:var(--muted)}
+  .src { position:absolute; top:6px; right:6px; font-size:9px; color:var(--muted); background:rgba(0,0,0,.6); padding:2px 6px; border-radius:4px; }
+  .body { padding:10px; display:flex; flex-direction:column; gap:8px; font-size:12px; flex:1; }
+  .key { font-weight:600; font-size:13px; word-break:break-all; }
+  .meta { color:var(--muted); display:flex; gap:8px; flex-wrap:wrap; }
+  .metrics { display:flex; gap:12px; color:var(--muted); }
+  .metrics b { color:var(--text); }
+  textarea { width:100%; min-height:64px; background:#0f172a; color:var(--text); border:1px solid var(--border); border-radius:6px; padding:6px; font-size:12px; resize:vertical; font-family:inherit; }
+  input[type=datetime-local] { background:#0f172a; color:var(--text); border:1px solid var(--border); border-radius:6px; padding:4px 6px; font-size:12px; }
+  .row { display:flex; gap:6px; align-items:center; flex-wrap:wrap; }
+  button { border:1px solid var(--border); background:#0f172a; color:var(--text); border-radius:6px; padding:5px 10px; font-size:12px; cursor:pointer; }
+  button:hover { border-color:var(--accent); }
+  button:disabled { opacity:.4; cursor:not-allowed; }
+  button.primary { background:var(--accent); color:#0f172a; border-color:var(--accent); font-weight:600; }
+  button.danger { border-color:var(--danger); color:var(--danger); }
+  a { color:var(--accent); }
+  dialog { background:var(--card); color:var(--text); border:1px solid var(--border); border-radius:10px; max-width:720px; width:90%; }
+  dialog::backdrop { background:rgba(0,0,0,.6); }
+  pre { background:#0f172a; padding:10px; border-radius:6px; font-size:11px; max-height:50vh; overflow:auto; white-space:pre-wrap; }
+  .toolbar { padding:8px 16px; display:flex; gap:8px; align-items:center; border-bottom:1px solid var(--border); font-size:12px; }
+  .toolbar input[type=text] { background:#0f172a; color:var(--text); border:1px solid var(--border); border-radius:6px; padding:5px 8px; font-size:12px; width:220px; }
+  .count { color:var(--muted); }
+</style>
+</head>
+<body>
+<header>
+  <h1>📮 SNS 投稿ギャラリー</h1>
+  <div class="tabs" id="platformTabs"></div>
+  <div class="chips" id="statusChips"></div>
+  <div class="limits" id="limits"></div>
+</header>
+<div class="warnbar" id="warnbar"></div>
+<div class="toolbar">
+  <input type="text" id="q" placeholder="content_key / caption 検索">
+  <button id="refresh">再読込</button>
+  <span class="count" id="count"></span>
+</div>
+<main id="grid"></main>
+
+<dialog id="jobDialog">
+  <h3 id="jobTitle" style="margin-top:0"></h3>
+  <pre id="jobLog"></pre>
+  <div class="row" style="justify-content:flex-end"><button onclick="jobDialog.close()">閉じる</button></div>
+</dialog>
+
+<script>
+const PLATFORMS = [["","All"],["x","X"],["instagram","Instagram"],["youtube","YouTube"]];
+const STATUSES = [["","All"],["draft","draft"],["scheduled","scheduled"],["posted","posted"]];
+let state = { platform:"", status:"", q:"" };
+let limitsCache = null;
+
+const $ = (s)=>document.querySelector(s);
+const grid = $("#grid"), jobDialog = $("#jobDialog");
+
+function chip(list, el, key){
+  el.innerHTML = "";
+  for (const [val,label] of list){
+    const b = document.createElement("button");
+    b.className = (el.id==="platformTabs"?"tab":"chip") + (state[key]===val?" active":"");
+    b.textContent = label;
+    b.onclick = ()=>{ state[key]=val; render(); };
+    el.appendChild(b);
+  }
+}
+
+async function api(path, opts){
+  const r = await fetch(path, opts);
+  const j = await r.json().catch(()=>({}));
+  if(!r.ok) throw new Error(j.error || r.status);
+  return j;
+}
+
+async function loadLimits(){
+  try{
+    limitsCache = await api("/api/limits");
+    const el = $("#limits"); el.innerHTML = "";
+    for (const [k,v] of Object.entries(limitsCache.limits)){
+      const d = document.createElement("span");
+      const over = v.used >= v.max;
+      d.className = "limit" + (over?" over":"");
+      d.title = v.window;
+      d.textContent = `${k}: ${v.used}/${v.max}`;
+      el.appendChild(d);
+    }
+  }catch(e){ console.warn(e); }
+}
+
+async function loadConsistency(){
+  try{
+    const c = await api("/api/ig-consistency");
+    const n = c.onlyInJson.length + c.onlyInPosts.length;
+    const bar = $("#warnbar");
+    if(n>0){
+      bar.style.display = "block";
+      bar.textContent = `⚠ IG 予約の不整合: schedule JSON のみ ${c.onlyInJson.length} 件 / posts.json のみ ${c.onlyInPosts.length} 件 — /api/ig-consistency で詳細`;
+    } else bar.style.display = "none";
+  }catch(e){}
+}
+
+function mediaEl(cands){
+  const wrap = document.createElement("div"); wrap.className = "media";
+  const urls = (cands||[]).filter(c=>c.url);
+  if(!urls.length){ wrap.innerHTML = '<span class="none">メディアなし</span>'; return wrap; }
+  let i = 0;
+  const mount = ()=>{
+    if(i >= urls.length){ wrap.innerHTML = '<span class="none">メディア取得失敗 (R2未存在?)</span>'; return; }
+    const c = urls[i];
+    const isVideo = c.url.endsWith(".mp4");
+    const el = document.createElement(isVideo?"video":"img");
+    if(isVideo){ el.controls = true; el.preload = "metadata"; el.muted = true; }
+    else el.loading = "lazy";
+    el.src = c.url;
+    el.onerror = ()=>{ i++; el.remove(); mount(); };
+    const src = document.createElement("span"); src.className="src"; src.textContent = c.source;
+    wrap.appendChild(el); wrap.appendChild(src);
+  };
+  mount();
+  return wrap;
+}
+
+function fmtDT(s){ return s ? s.replace("T"," ").slice(0,16) : ""; }
+
+function card(p){
+  const el = document.createElement("div"); el.className = "card";
+  const media = mediaEl(p.media_candidates);
+  const badge = document.createElement("span"); badge.className = `badge ${p.status||""}`; badge.textContent = p.status || "?";
+  media.appendChild(badge);
+  el.appendChild(media);
+
+  const body = document.createElement("div"); body.className = "body";
+  body.innerHTML = `
+    <div class="key">${p.content_key||"(no key)"} <span style="color:var(--muted);font-weight:400">#${p.id??"-"}</span></div>
+    <div class="meta"><span>${p.platform}</span><span>${p.domain||""}</span><span>${p.post_type||""}</span>${p._source?`<span>${p._source}</span>`:""}</div>`;
+
+  if(p.status === "posted"){
+    const m = document.createElement("div"); m.className = "metrics";
+    const eng = p.impressions ? (((p.likes||0)+(p.reposts||0)+(p.replies||0))/p.impressions*100).toFixed(1)+"%" : "-";
+    m.innerHTML = `<span>📅 <b>${p.posted_at||"-"}</b></span><span>👁 <b>${p.impressions??"-"}</b></span><span>❤️ <b>${p.likes??"-"}</b></span><span>eng <b>${eng}</b></span>`;
+    body.appendChild(m);
+    if(p.post_url){ const a=document.createElement("a"); a.href=p.post_url; a.target="_blank"; a.textContent="投稿を見る ↗"; body.appendChild(a); }
+    if(p.caption){ const d=document.createElement("details"); d.innerHTML=`<summary style="cursor:pointer;color:var(--muted)">caption</summary><div style="white-space:pre-wrap;margin-top:6px">${escapeHtml(p.caption)}</div>`; body.appendChild(d); }
+  } else if(p.id != null){
+    // draft / scheduled — 編集可能
+    const ta = document.createElement("textarea"); ta.value = p.caption || ""; ta.placeholder = "caption";
+    const save = document.createElement("button"); save.textContent = "caption 保存"; save.disabled = true;
+    ta.oninput = ()=>{ save.disabled = (ta.value === (p.caption||"")); };
+    save.onclick = async ()=>{ await api(`/api/posts/${p.id}`,{method:"PATCH",headers:{"content-type":"application/json"},body:JSON.stringify({caption:ta.value})}); save.disabled=true; p.caption=ta.value; toast("保存しました"); };
+    body.appendChild(ta);
+
+    const dtRow = document.createElement("div"); dtRow.className = "row";
+    const dt = document.createElement("input"); dt.type = "datetime-local";
+    if(p.scheduled_at) dt.value = p.scheduled_at.replace(" ","T").slice(0,16);
+    dtRow.appendChild(dt);
+    body.appendChild(dtRow);
+
+    const actions = document.createElement("div"); actions.className = "row";
+    if(p.platform === "x"){
+      actions.append(
+        btn("dry-run", ()=>publishX(p, dt.value, {dry_run:true})),
+        btn("予約投稿", ()=>publishX(p, dt.value, {}), "primary"),
+        btn("即時投稿", ()=>{ if(confirm(`即時投稿します: ${p.content_key}`)) publishX(p, null, {immediate:true}); }, "danger"),
+      );
+    } else if(p.platform === "instagram"){
+      actions.append(btn("IG 予約登録 (cron が投稿)", async ()=>{
+        const date = (dt.value||"").slice(0,10);
+        if(!date) return alert("予約日時を入力してください");
+        try{
+          const r = await api("/api/actions/schedule-ig",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({date,time:(dt.value||"").slice(11,16)||"09:00",type:p.post_type||"image",domain:p.domain,content_key:p.content_key,caption:p.caption})});
+          toast(`予約登録: ${r.file} + posts#${r.postId}`); render();
+        }catch(e){ alert(e.message); }
+      }, "primary"));
+    } else if(p.platform === "youtube"){
+      actions.append(btn("YT 投稿 (月1ガード)", async ()=>{
+        const video = prompt("動画ファイルの絶対パス:", p.media_path||"");
+        if(!video) return;
+        const title = prompt("動画タイトル (50字以内・重複不可):");
+        if(!title) return;
+        if(!confirm(`YouTube へアップロードします (月1運用)。よろしいですか?\n${title}`)) return;
+        try{
+          const r = await api("/api/actions/publish-yt",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({confirm:true,video_file:video,title,content_key:p.content_key})});
+          watchJob(r.id, `YT upload: ${title}`);
+        }catch(e){ alert(e.message); }
+      }, "danger"));
+    }
+    body.appendChild(actions);
+  } else {
+    // 未登録素材 (extras)
+    const reg = btn("draft 登録", async ()=>{
+      await api("/api/posts",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({platform:p.platform,domain:p.domain,content_key:p.content_key,post_type:p.post_type})});
+      toast("draft 登録しました"); render();
+    }, "primary");
+    body.appendChild(reg);
+  }
+  el.appendChild(body);
+  return el;
+}
+
+function btn(label, fn, cls){ const b=document.createElement("button"); b.textContent=label; if(cls)b.className=cls; b.onclick=fn; return b; }
+function escapeHtml(s){ return s.replace(/[&<>"']/g,(c)=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])); }
+function toast(msg){ const t=document.createElement("div"); t.textContent=msg; t.style.cssText="position:fixed;bottom:20px;right:20px;background:var(--ok);color:#0f172a;padding:8px 16px;border-radius:8px;font-size:13px;z-index:99"; document.body.appendChild(t); setTimeout(()=>t.remove(),2500); }
+
+async function publishX(p, datetime, opts){
+  try{
+    const body = { content_key:p.content_key, domain:p.domain||"ranking", ...opts };
+    if(datetime && !opts.immediate) body.datetime = datetime;
+    const r = await api("/api/actions/publish-x",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify(body)});
+    watchJob(r.id, `publish-x: ${p.content_key} ${opts.dry_run?"(dry-run)":""}`);
+  }catch(e){
+    if(String(e.message).includes("force:true")){
+      if(confirm(e.message + "\n\nそれでも実行しますか?")) {
+        const body = { content_key:p.content_key, domain:p.domain||"ranking", ...opts, force:true };
+        if(datetime && !opts.immediate) body.datetime = datetime;
+        const r = await api("/api/actions/publish-x",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify(body)});
+        watchJob(r.id, `publish-x: ${p.content_key}`);
+      }
+    } else alert(e.message);
+  }
+}
+
+let jobTimer = null;
+function watchJob(id, title){
+  $("#jobTitle").textContent = `Job #${id} — ${title}`;
+  $("#jobLog").textContent = "起動中...";
+  jobDialog.showModal();
+  clearInterval(jobTimer);
+  jobTimer = setInterval(async ()=>{
+    try{
+      const j = await api(`/api/jobs/${id}`);
+      $("#jobLog").textContent = j.log.join("\n") || "(ログなし)";
+      $("#jobLog").scrollTop = $("#jobLog").scrollHeight;
+      if(j.status !== "running"){
+        clearInterval(jobTimer);
+        $("#jobTitle").textContent += j.status === "success" ? " ✅" : " ❌";
+        loadLimits(); // 残枠更新
+      }
+    }catch(e){ clearInterval(jobTimer); }
+  }, 1500);
+}
+
+async function render(){
+  chip(PLATFORMS, $("#platformTabs"), "platform");
+  chip(STATUSES, $("#statusChips"), "status");
+  grid.innerHTML = '<span style="color:var(--muted)">読込中...</span>';
+  try{
+    const inv = await api("/api/inventory");
+    let items = [...inv.posts, ...inv.extras];
+    if(state.platform) items = items.filter(x=>x.platform===state.platform);
+    if(state.status) items = items.filter(x=>x.status===state.status);
+    if(state.q) items = items.filter(x=>(x.content_key||"").includes(state.q)||(x.caption||"").includes(state.q));
+    items.sort((a,b)=>String(b.posted_at||b.scheduled_at||b.created_at||"").localeCompare(String(a.posted_at||a.scheduled_at||a.created_at||"")));
+    $("#count").textContent = `${items.length} 件`;
+    grid.innerHTML = "";
+    for(const p of items.slice(0,200)) grid.appendChild(card(p));
+    if(items.length>200){ const d=document.createElement("div"); d.style.color="var(--muted)"; d.textContent=`+${items.length-200} 件 (フィルタで絞ってください)`; grid.appendChild(d); }
+  }catch(e){ grid.innerHTML = `<span style="color:var(--danger)">${e.message}</span>`; }
+}
+
+$("#q").addEventListener("input", (e)=>{ state.q = e.target.value.trim(); render(); });
+$("#refresh").onclick = ()=>{ render(); loadLimits(); loadConsistency(); };
+render(); loadLimits(); loadConsistency();
+</script>
+</body>
+</html>
