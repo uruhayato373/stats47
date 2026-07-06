@@ -17,7 +17,7 @@ A8.net 等アフィリエイト広告の **意図軸 (vertical)・在庫・配�
 ## 担当範囲
 
 - **意図ハブ保守** — `affiliate-category.ts` の `AffiliateVertical` (10 軸) と 3 map の整合。theme/category 追加時の写像更新。
-- **対話式登録** (`/register-affiliate-banner`) — `propose` (在庫ギャップ×トラフィックで次の提携先を 1 件提案) → ユーザーが ASP 提携 → `register` (コード解析・canonical サイズ検証・vertical 判定・1 エントリ追記)。
+- **対話式登録** (`/register-affiliate-banner`) — `propose` (在庫ギャップ×トラフィックで次の提携先を 1 件提案) → ユーザーが ASP 提携 → `register` (ASP 別コード解析 [A8/ValueCommerce/楽天]・`inspect-banner.mjs` で画像 fetch → サイズ実測+広告主目視判別・canonical 検証・vertical 判定・1 エントリ追記)。
 - **在庫整理・監査・dashboard** (`/affiliate-improvement`) — vertical カバレッジ / 在庫ゼロ軸 (現状 education・mobility) / サイズ逸脱 / 意図ミスマッチの検出と是正。
 - **規約 enforcement** — サイズ (`audit --check-size` + pre-commit) / vertical∈10軸 (export validation) / priority (意図適合) の遵守。legacy 一点物サイズの段階移行。
 - **計測ゲート** — GA4 custom dimension (`affiliate_vertical` 等) の登録手順をユーザーに案内し (rules §6)、`fetch-affiliate-ga4.cjs` で内訳が取れる状態を維持する。

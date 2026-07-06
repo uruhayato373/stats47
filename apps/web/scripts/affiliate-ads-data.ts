@@ -3,25 +3,22 @@ import type { AffiliateAd } from "../src/features/ads/types";
 /**
  * affiliate_ads SSOT (完全DBレス → docs/01_技術設計/12_完全DBレス設計.md)。
  *
- * 手動 A8.net バナー登録をここで管理する (git TS が単一 SSOT)。
+ * 手動 A8.net / ValueCommerce / 楽天 バナー登録をここで管理する (git TS が単一 SSOT)。
  * 反映: export-affiliate-ads-snapshot.ts が本配列 → R2 app/affiliate-ads/all.json を生成。
  *
- * ★ categoryKey は CATEGORY_AFFILIATE_MAP のキーと一致させること。
- *   resolveAffiliateBanners が「AffiliateCategory → CATEGORY_AFFILIATE_MAP のキー → bannerの categoryKey」と
- *   逆引きするため、AffiliateCategory 名 (labor/housing 等) ではなくマップキー (laborwage/construction 等) を使う。
- *   正引き: affiliate-category.ts CATEGORY_AFFILIATE_MAP
- *     laborwage→labor / construction→housing / landweather→housing
- *     socialsecurity→health / administrativefinancial→furusato
- *     population/economy/energy/tourism はキー=AffiliateCategory名で一致
+ * ★ 各エントリは vertical (AffiliateVertical 10軸) を必須で持つ。解決は「ページ→vertical→広告」。
+ *   同一プログラムを categoryKey ごとに複製しない (1案件=1エントリ・複数 placement のみ別エントリ)。
+ *   vertical 一覧・写像・登録手順: .claude/rules/affiliate-ads-standards.md
+ *   ピクセル無し ASP (ValueCommerce/楽天) は trackingPixelUrl: null。
  */
 export const AFFILIATE_ADS: AffiliateAd[] = [
-  // ── イオン九州オンライン (furusato / blog-bottom) ──────────────────────────────
   {
     "id": "af_aeon_kyushu_001",
     "title": "イオン九州オンライン",
     "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4AZA46+97MGQA+5I2U+60H7L",
     "areaCode": null,
-    "categoryKey": "administrativefinancial",
+    "vertical": "furusato",
+    "categoryKey": null,
     "locationCode": "blog-bottom",
     "isActive": true,
     "priority": 10,
@@ -36,12 +33,33 @@ export const AFFILIATE_ADS: AffiliateAd[] = [
     "createdAt": "2026-03-10 01:30:42",
     "updatedAt": "2026-06-01 00:00:00"
   },
-  // ── ahamo (energy / blog-bottom) ─────────────────────────────────────────────
+  {
+    "id": "af_aeon_kyushu_area_001",
+    "title": "イオン九州オンライン",
+    "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4AZA46+97MGQA+5I2U+60H7L",
+    "areaCode": null,
+    "vertical": "furusato",
+    "categoryKey": null,
+    "locationCode": "area-sidebar",
+    "isActive": true,
+    "priority": 20,
+    "startDate": null,
+    "endDate": null,
+    "targetCategories": null,
+    "adType": "banner",
+    "imageUrl": "https://www25.a8.net/svt/bgt?aid=260306934557&wid=001&eno=01&mid=s00000025671001010000&mc=1",
+    "trackingPixelUrl": "https://www17.a8.net/0.gif?a8mat=4AZA46+97MGQA+5I2U+60H7L",
+    "width": 300,
+    "height": 250,
+    "createdAt": "2026-03-26 09:01:57",
+    "updatedAt": "2026-06-01 00:00:00"
+  },
   {
     "id": "af_ahamo_001",
     "title": "ahamo (NTTドコモ)",
     "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4AZD81+AL1FXU+4TIO+61Z81",
     "areaCode": null,
+    "vertical": "energy",
     "categoryKey": "energy",
     "locationCode": "blog-bottom",
     "isActive": true,
@@ -57,12 +75,12 @@ export const AFFILIATE_ADS: AffiliateAd[] = [
     "createdAt": "2026-03-10 01:25:11",
     "updatedAt": "2026-03-10 01:25:11"
   },
-  // ── アルファー食品 (tourism / blog-bottom) ────────────────────────────────────
   {
     "id": "af_alpha_foods_001",
     "title": "孤高のキャンプ飯 アルファー食品",
     "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4AZD81+AFOJHU+50BY+NV1XD",
     "areaCode": null,
+    "vertical": "travel",
     "categoryKey": "tourism",
     "locationCode": "blog-bottom",
     "isActive": true,
@@ -78,12 +96,12 @@ export const AFFILIATE_ADS: AffiliateAd[] = [
     "createdAt": "2026-03-10 01:26:14",
     "updatedAt": "2026-03-10 01:26:14"
   },
-  // ── ClassPass (health=socialsecurity / blog-bottom) ───────────────────────────
   {
     "id": "af_classpass_001",
     "title": "ClassPass ジム・スパ予約アプリ",
     "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4AZD81+AI29WY+5S3O+5YZ75",
     "areaCode": null,
+    "vertical": "health",
     "categoryKey": "socialsecurity",
     "locationCode": "blog-bottom",
     "isActive": true,
@@ -99,12 +117,12 @@ export const AFFILIATE_ADS: AffiliateAd[] = [
     "createdAt": "2026-03-10 01:26:40",
     "updatedAt": "2026-06-01 00:00:00"
   },
-  // ── ConoHa AI Canvas (economy / blog-bottom) ──────────────────────────────────
   {
     "id": "af_conoha_ai_canvas_001",
     "title": "ConoHa AI Canvas AI画像生成",
     "htmlContent": "https://px.a8.net/svt/ejp?a8mat=45BQMW+CFPZOY+50+7S0L8H",
     "areaCode": null,
+    "vertical": "economy",
     "categoryKey": "economy",
     "locationCode": "blog-bottom",
     "isActive": true,
@@ -120,12 +138,12 @@ export const AFFILIATE_ADS: AffiliateAd[] = [
     "createdAt": "2026-03-10 01:31:44",
     "updatedAt": "2026-03-10 01:31:44"
   },
-  // ── ConoHa AI Canvas スカイスクレイパー (economy / sidebar-sticky) ─────────────
   {
     "id": "af_conoha_skyscraper_001",
     "title": "ConoHa AI Canvas スカイスクレイパー",
     "htmlContent": "https://px.a8.net/svt/ejp?a8mat=45BQMW+CFPZOY+50+7RY8CX",
     "areaCode": null,
+    "vertical": "economy",
     "categoryKey": "economy",
     "locationCode": "sidebar-sticky",
     "isActive": true,
@@ -141,12 +159,12 @@ export const AFFILIATE_ADS: AffiliateAd[] = [
     "createdAt": "2026-03-10 01:36:16",
     "updatedAt": "2026-03-10 01:36:16"
   },
-  // ── cyma 自転車 (tourism / blog-bottom) ──────────────────────────────────────
   {
     "id": "af_cyma_001",
     "title": "cyma 自転車通販サイト",
     "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4AZD81+AHGUB6+35F2+64Z8X",
     "areaCode": null,
+    "vertical": "travel",
     "categoryKey": "tourism",
     "locationCode": "blog-bottom",
     "isActive": true,
@@ -162,12 +180,12 @@ export const AFFILIATE_ADS: AffiliateAd[] = [
     "createdAt": "2026-03-10 01:25:48",
     "updatedAt": "2026-03-10 01:25:48"
   },
-  // ── ECOクリーン (housing=construction / blog-bottom) ─────────────────────────
   {
     "id": "af_ecoclean_001",
     "title": "ECOクリーン 不用品回収",
     "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4AZCG4+AABN1U+36X8+15P77L",
     "areaCode": null,
+    "vertical": "housing",
     "categoryKey": "construction",
     "locationCode": "blog-bottom",
     "isActive": true,
@@ -183,14 +201,12 @@ export const AFFILIATE_ADS: AffiliateAd[] = [
     "createdAt": "2026-03-10 01:30:07",
     "updatedAt": "2026-06-01 00:00:00"
   },
-  // ── FP無料相談 資産形成 (economy / blog-bottom) ──────────────────────────────
-  // priority 92 = economy の意図適合上位 (資産形成/NISA/iDeCo/保険)。汎用研修90より上
-  // (affiliate-ads-standards.md §2 投資・保険・お金 / §4 priority)。
   {
     "id": "af_fp_soudan_economy_001",
     "title": "FP無料相談 資産形成",
     "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B5LK5+6KYJJM+5MAS+5YZ75",
     "areaCode": null,
+    "vertical": "economy",
     "categoryKey": "economy",
     "locationCode": "blog-bottom",
     "isActive": true,
@@ -206,12 +222,12 @@ export const AFFILIATE_ADS: AffiliateAd[] = [
     "createdAt": "2026-06-30 00:00:00",
     "updatedAt": "2026-06-30 00:00:00"
   },
-  // ── NISA・証券 バナー 1 (economy / blog-bottom) ───────────────────────────────
   {
     "id": "af_economy_banner_001",
     "title": "NISA・証券 バナー 1",
     "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4AZCG4+8PRGKY+1WP2+1HPXWX",
     "areaCode": null,
+    "vertical": "economy",
     "categoryKey": "economy",
     "locationCode": "blog-bottom",
     "isActive": true,
@@ -227,12 +243,12 @@ export const AFFILIATE_ADS: AffiliateAd[] = [
     "createdAt": "2026-03-10 01:20:57",
     "updatedAt": "2026-03-10 01:20:57"
   },
-  // ── NISA・証券 バナー 2 (economy / blog-bottom) ───────────────────────────────
   {
     "id": "af_economy_banner_002",
     "title": "NISA・証券 バナー 2",
     "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4555ZY+AWCOFM+1WP2+6G4HD",
     "areaCode": null,
+    "vertical": "economy",
     "categoryKey": "economy",
     "locationCode": "blog-bottom",
     "isActive": true,
@@ -248,14 +264,13 @@ export const AFFILIATE_ADS: AffiliateAd[] = [
     "createdAt": "2026-03-10 01:20:57",
     "updatedAt": "2026-03-10 01:20:57"
   },
-  // ── AI Agent Camp — 全8カテゴリ blog-bottom (priority 90) + area-sidebar ─────
-  // Claude Code 特化型研修。カテゴリ横断で blog-bottom の最優先枠 (priority 90) として表示。
   {
     "id": "af_agent_camp_economy_001",
     "title": "AI Agent Camp（Claude Code研修）",
     "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B3RUY+AG9Z3M+5VRC+5YZ75",
     "areaCode": null,
-    "categoryKey": "economy",
+    "vertical": "education",
+    "categoryKey": null,
     "locationCode": "blog-bottom",
     "isActive": true,
     "priority": 90,
@@ -270,175 +285,12 @@ export const AFFILIATE_ADS: AffiliateAd[] = [
     "createdAt": "2026-06-01 00:00:00",
     "updatedAt": "2026-06-01 00:00:00"
   },
-  {
-    "id": "af_agent_camp_labor_001",
-    "title": "AI Agent Camp（Claude Code研修）",
-    "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B3RUY+AG9Z3M+5VRC+5YZ75",
-    "areaCode": null,
-    "categoryKey": "laborwage",
-    "locationCode": "blog-bottom",
-    "isActive": true,
-    "priority": 90,
-    "startDate": null,
-    "endDate": null,
-    "targetCategories": null,
-    "adType": "banner",
-    "imageUrl": "https://www23.a8.net/svt/bgt?aid=260516554632&wid=001&eno=01&mid=s00000027444001003000&mc=1",
-    "trackingPixelUrl": "https://www15.a8.net/0.gif?a8mat=4B3RUY+AG9Z3M+5VRC+5YZ75",
-    "width": 300,
-    "height": 250,
-    "createdAt": "2026-06-01 00:00:00",
-    "updatedAt": "2026-06-01 00:00:00"
-  },
-  {
-    "id": "af_agent_camp_population_001",
-    "title": "AI Agent Camp（Claude Code研修）",
-    "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B3RUY+AG9Z3M+5VRC+5YZ75",
-    "areaCode": null,
-    "categoryKey": "population",
-    "locationCode": "blog-bottom",
-    "isActive": true,
-    "priority": 25,
-    "startDate": null,
-    "endDate": null,
-    "targetCategories": null,
-    "adType": "banner",
-    "imageUrl": "https://www23.a8.net/svt/bgt?aid=260516554632&wid=001&eno=01&mid=s00000027444001003000&mc=1",
-    "trackingPixelUrl": "https://www15.a8.net/0.gif?a8mat=4B3RUY+AG9Z3M+5VRC+5YZ75",
-    "width": 300,
-    "height": 250,
-    "createdAt": "2026-06-01 00:00:00",
-    "updatedAt": "2026-06-01 00:00:00"
-  },
-  {
-    "id": "af_agent_camp_tourism_001",
-    "title": "AI Agent Camp（Claude Code研修）",
-    "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B3RUY+AG9Z3M+5VRC+5YZ75",
-    "areaCode": null,
-    "categoryKey": "tourism",
-    "locationCode": "blog-bottom",
-    "isActive": true,
-    "priority": 25,
-    "startDate": null,
-    "endDate": null,
-    "targetCategories": null,
-    "adType": "banner",
-    "imageUrl": "https://www23.a8.net/svt/bgt?aid=260516554632&wid=001&eno=01&mid=s00000027444001003000&mc=1",
-    "trackingPixelUrl": "https://www15.a8.net/0.gif?a8mat=4B3RUY+AG9Z3M+5VRC+5YZ75",
-    "width": 300,
-    "height": 250,
-    "createdAt": "2026-06-01 00:00:00",
-    "updatedAt": "2026-06-01 00:00:00"
-  },
-  {
-    "id": "af_agent_camp_housing_001",
-    "title": "AI Agent Camp（Claude Code研修）",
-    "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B3RUY+AG9Z3M+5VRC+5YZ75",
-    "areaCode": null,
-    "categoryKey": "construction",
-    "locationCode": "blog-bottom",
-    "isActive": true,
-    "priority": 25,
-    "startDate": null,
-    "endDate": null,
-    "targetCategories": null,
-    "adType": "banner",
-    "imageUrl": "https://www23.a8.net/svt/bgt?aid=260516554632&wid=001&eno=01&mid=s00000027444001003000&mc=1",
-    "trackingPixelUrl": "https://www15.a8.net/0.gif?a8mat=4B3RUY+AG9Z3M+5VRC+5YZ75",
-    "width": 300,
-    "height": 250,
-    "createdAt": "2026-06-01 00:00:00",
-    "updatedAt": "2026-06-01 00:00:00"
-  },
-  {
-    "id": "af_agent_camp_health_001",
-    "title": "AI Agent Camp（Claude Code研修）",
-    "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B3RUY+AG9Z3M+5VRC+5YZ75",
-    "areaCode": null,
-    "categoryKey": "socialsecurity",
-    "locationCode": "blog-bottom",
-    "isActive": true,
-    "priority": 25,
-    "startDate": null,
-    "endDate": null,
-    "targetCategories": null,
-    "adType": "banner",
-    "imageUrl": "https://www23.a8.net/svt/bgt?aid=260516554632&wid=001&eno=01&mid=s00000027444001003000&mc=1",
-    "trackingPixelUrl": "https://www15.a8.net/0.gif?a8mat=4B3RUY+AG9Z3M+5VRC+5YZ75",
-    "width": 300,
-    "height": 250,
-    "createdAt": "2026-06-01 00:00:00",
-    "updatedAt": "2026-06-01 00:00:00"
-  },
-  {
-    "id": "af_agent_camp_energy_001",
-    "title": "AI Agent Camp（Claude Code研修）",
-    "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B3RUY+AG9Z3M+5VRC+5YZ75",
-    "areaCode": null,
-    "categoryKey": "energy",
-    "locationCode": "blog-bottom",
-    "isActive": true,
-    "priority": 25,
-    "startDate": null,
-    "endDate": null,
-    "targetCategories": null,
-    "adType": "banner",
-    "imageUrl": "https://www23.a8.net/svt/bgt?aid=260516554632&wid=001&eno=01&mid=s00000027444001003000&mc=1",
-    "trackingPixelUrl": "https://www15.a8.net/0.gif?a8mat=4B3RUY+AG9Z3M+5VRC+5YZ75",
-    "width": 300,
-    "height": 250,
-    "createdAt": "2026-06-01 00:00:00",
-    "updatedAt": "2026-06-01 00:00:00"
-  },
-  {
-    "id": "af_agent_camp_furusato_001",
-    "title": "AI Agent Camp（Claude Code研修）",
-    "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B3RUY+AG9Z3M+5VRC+5YZ75",
-    "areaCode": null,
-    "categoryKey": "administrativefinancial",
-    "locationCode": "blog-bottom",
-    "isActive": true,
-    "priority": 25,
-    "startDate": null,
-    "endDate": null,
-    "targetCategories": null,
-    "adType": "banner",
-    "imageUrl": "https://www23.a8.net/svt/bgt?aid=260516554632&wid=001&eno=01&mid=s00000027444001003000&mc=1",
-    "trackingPixelUrl": "https://www15.a8.net/0.gif?a8mat=4B3RUY+AG9Z3M+5VRC+5YZ75",
-    "width": 300,
-    "height": 250,
-    "createdAt": "2026-06-01 00:00:00",
-    "updatedAt": "2026-06-01 00:00:00"
-  },
-  // ── AI Agent Camp (area-sidebar) priority 90 ─────────────────────────────────
-  {
-    "id": "af_agent_camp_area_001",
-    "title": "AI Agent Camp（Claude Code研修）",
-    "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B3RUY+AG9Z3M+5VRC+5YZ75",
-    "areaCode": null,
-    "categoryKey": "economy",
-    "locationCode": "area-sidebar",
-    "isActive": true,
-    "priority": 90,
-    "startDate": null,
-    "endDate": null,
-    "targetCategories": null,
-    "adType": "banner",
-    "imageUrl": "https://www23.a8.net/svt/bgt?aid=260516554632&wid=001&eno=01&mid=s00000027444001003000&mc=1",
-    "trackingPixelUrl": "https://www15.a8.net/0.gif?a8mat=4B3RUY+AG9Z3M+5VRC+5YZ75",
-    "width": 300,
-    "height": 250,
-    "createdAt": "2026-06-01 00:00:00",
-    "updatedAt": "2026-06-01 00:00:00"
-  },
-  // ── ビルドジョブ 施工管理転職 (construction / blog-bottom) ───────────────────
-  // priority 90 = construction の意図適合上位 (建設業転職)。建設業ランキングに最適・filler@25 を上回る
-  // (affiliate-ads-standards.md §2 建設・不動産 / §4 priority)。
   {
     "id": "af_buildjob_construction_001",
     "title": "ビルドジョブ 施工管理転職",
     "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B5OO5+FHBA2+5B0Y+NTZCH",
     "areaCode": null,
+    "vertical": "housing",
     "categoryKey": "construction",
     "locationCode": "blog-bottom",
     "isActive": true,
@@ -454,12 +306,12 @@ export const AFFILIATE_ADS: AffiliateAd[] = [
     "createdAt": "2026-06-30 00:00:00",
     "updatedAt": "2026-06-30 00:00:00"
   },
-  // ── 不動産・住宅 バナー 1 (housing=construction / blog-bottom) ─────────────────
   {
     "id": "af_housing_banner_001",
     "title": "不動産・住宅 バナー 1",
     "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4AZCG4+8S5702+36QK+NY1Y9",
     "areaCode": null,
+    "vertical": "housing",
     "categoryKey": "construction",
     "locationCode": "blog-bottom",
     "isActive": true,
@@ -475,12 +327,12 @@ export const AFFILIATE_ADS: AffiliateAd[] = [
     "createdAt": "2026-03-10 01:20:57",
     "updatedAt": "2026-06-01 00:00:00"
   },
-  // ── 不動産・住宅 バナー 2 (housing=construction / blog-bottom) ─────────────────
   {
     "id": "af_housing_banner_002",
     "title": "不動産・住宅 バナー 2",
     "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4AZCG4+A6R1F6+ZXM+I7NE9",
     "areaCode": null,
+    "vertical": "housing",
     "categoryKey": "construction",
     "locationCode": "blog-bottom",
     "isActive": true,
@@ -496,12 +348,12 @@ export const AFFILIATE_ADS: AffiliateAd[] = [
     "createdAt": "2026-03-10 01:20:57",
     "updatedAt": "2026-06-01 00:00:00"
   },
-  // ── 転職サイト バナー (labor=laborwage / blog-bottom) ─────────────────────────
   {
     "id": "af_labor_banner_001",
     "title": "転職サイト バナー",
     "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4AZCG4+9Z0EK2+5UK0+5YZ75",
     "areaCode": null,
+    "vertical": "labor",
     "categoryKey": "laborwage",
     "locationCode": "blog-bottom",
     "isActive": true,
@@ -517,14 +369,12 @@ export const AFFILIATE_ADS: AffiliateAd[] = [
     "createdAt": "2026-03-10 01:20:57",
     "updatedAt": "2026-06-01 00:00:00"
   },
-  // ── IT求人ナビ フリーエンジニア求人 (laborwage / blog-bottom) ────────────────
-  // priority 96 = laborwage banner 最上位。年収/所得/転職 ranking に意図適合の
-  // ITエンジニア求人を出すため (affiliate-ads-standards.md §2 転職・年収 / §4 priority)。
   {
     "id": "af_itkyujin_laborwage_001",
     "title": "IT求人ナビ フリーエンジニア求人",
     "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B684G+G2PCS2+4LXM+5ZMCH",
     "areaCode": null,
+    "vertical": "labor",
     "categoryKey": "laborwage",
     "locationCode": "blog-bottom",
     "isActive": true,
@@ -540,13 +390,12 @@ export const AFFILIATE_ADS: AffiliateAd[] = [
     "createdAt": "2026-06-30 00:00:00",
     "updatedAt": "2026-06-30 00:00:00"
   },
-  // ── 転職エージェントナビ (laborwage / blog-bottom) ──────────────────────────
-  // priority 94 = laborwage 意図適合の転職広告帯 (汎用 Claude研修 90 より上、IT求人ナビ96/AI就労支援95 に次ぐ)。
   {
     "id": "af_tenshoku_agent_navi_laborwage_001",
     "title": "転職エージェントナビ",
     "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B5N41+6TW1MA+5BJK+5ZEMP",
     "areaCode": null,
+    "vertical": "labor",
     "categoryKey": "laborwage",
     "locationCode": "blog-bottom",
     "isActive": true,
@@ -562,14 +411,12 @@ export const AFFILIATE_ADS: AffiliateAd[] = [
     "createdAt": "2026-06-30 00:00:00",
     "updatedAt": "2026-06-30 00:00:00"
   },
-  // ── RIZAP パーソナルジム (health=socialsecurity / blog-bottom) ───────────────
-  // priority 90 = socialsecurity の意図適合上位 (健康/ダイエット)。filler@25 を上回る
-  // (affiliate-ads-standards.md §2 健康・フィットネス / §4 priority)。
   {
     "id": "af_rizap_socialsecurity_001",
     "title": "RIZAP パーソナルジム",
     "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B684G+EDZ52Q+3D3Q+6ARKX",
     "areaCode": null,
+    "vertical": "health",
     "categoryKey": "socialsecurity",
     "locationCode": "blog-bottom",
     "isActive": true,
@@ -585,12 +432,12 @@ export const AFFILIATE_ADS: AffiliateAd[] = [
     "createdAt": "2026-06-30 00:00:00",
     "updatedAt": "2026-06-30 00:00:00"
   },
-  // ── マカエンペラー (health=socialsecurity / blog-bottom) ─────────────────────
   {
     "id": "af_maca_emperor_001",
     "title": "マカエンペラー 活力サプリ",
     "htmlContent": "https://px.a8.net/svt/ejp?a8mat=459VF2+BB99U+2UOE+TXOAP",
     "areaCode": null,
+    "vertical": "health",
     "categoryKey": "socialsecurity",
     "locationCode": "blog-bottom",
     "isActive": true,
@@ -606,12 +453,12 @@ export const AFFILIATE_ADS: AffiliateAd[] = [
     "createdAt": "2026-03-10 01:38:32",
     "updatedAt": "2026-06-01 00:00:00"
   },
-  // ── 未来保険 (economy / blog-bottom) ─────────────────────────────────────────
   {
     "id": "af_mirai_insurance_001",
     "title": "未来保険 フリート自動車保険",
     "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4AZ703+GGZRAQ+5TH4+609HT",
     "areaCode": null,
+    "vertical": "economy",
     "categoryKey": "economy",
     "locationCode": "blog-bottom",
     "isActive": true,
@@ -627,12 +474,12 @@ export const AFFILIATE_ADS: AffiliateAd[] = [
     "createdAt": "2026-03-10 01:31:17",
     "updatedAt": "2026-03-10 01:31:17"
   },
-  // ── OZmall (tourism / blog-bottom) ────────────────────────────────────────────
   {
     "id": "af_ozmall_001",
     "title": "OZmall ホテル・レストラン予約",
     "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4AZCG5+DHTQEQ+3UQG+60OXD",
     "areaCode": null,
+    "vertical": "travel",
     "categoryKey": "tourism",
     "locationCode": "blog-bottom",
     "isActive": true,
@@ -648,14 +495,12 @@ export const AFFILIATE_ADS: AffiliateAd[] = [
     "createdAt": "2026-03-10 01:28:53",
     "updatedAt": "2026-03-10 01:28:53"
   },
-  // ── じゃらん 宿泊・旅行予約 (tourism / blog-bottom) ───────────────────────────
-  // priority 100 = tourism 最上位。旅行ランキング (例: travel-participation-rate-overnight,
-  // note からの #1 ファネル) の広告枠に旅行広告を確実に出すため (doc 14 付録A-4 打ち手 b)。
   {
     "id": "af_jalan_tourism_001",
     "title": "じゃらん 宿泊・旅行予約",
     "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B684D+B6H1PU+14CS+6FWRL",
     "areaCode": null,
+    "vertical": "travel",
     "categoryKey": "tourism",
     "locationCode": "blog-bottom",
     "isActive": true,
@@ -671,7 +516,6 @@ export const AFFILIATE_ADS: AffiliateAd[] = [
     "createdAt": "2026-06-30 00:00:00",
     "updatedAt": "2026-06-30 00:00:00"
   },
-  // ── 一休.com 宿泊予約 (travel / ValueCommerce・別ピクセル無し) ──────────────────
   {
     "id": "af_ikyu_travel_001",
     "title": "一休.com 宿泊予約",
@@ -693,7 +537,6 @@ export const AFFILIATE_ADS: AffiliateAd[] = [
     "createdAt": "2026-07-06 00:00:00",
     "updatedAt": "2026-07-06 00:00:00"
   },
-  // ── 楽天トラベル (travel / 楽天アフィリエイト・別ピクセル無し) ────────────────────
   {
     "id": "af_rakuten_travel_001",
     "title": "楽天トラベル",
@@ -715,7 +558,6 @@ export const AFFILIATE_ADS: AffiliateAd[] = [
     "createdAt": "2026-07-06 00:00:00",
     "updatedAt": "2026-07-06 00:00:00"
   },
-  // ── Expedia (travel / ValueCommerce・別ピクセル無し) ──────────────────────────
   {
     "id": "af_expedia_travel_001",
     "title": "Expedia",
@@ -737,7 +579,6 @@ export const AFFILIATE_ADS: AffiliateAd[] = [
     "createdAt": "2026-07-06 00:00:00",
     "updatedAt": "2026-07-06 00:00:00"
   },
-  // ── 保険スクエアbang! 自動車保険一括見積もり (mobility / A8.net) ────────────────
   {
     "id": "af_hokenbang_mobility_001",
     "title": "保険スクエアbang! 自動車保険一括見積もり",
@@ -759,7 +600,6 @@ export const AFFILIATE_ADS: AffiliateAd[] = [
     "createdAt": "2026-07-06 00:00:00",
     "updatedAt": "2026-07-06 00:00:00"
   },
-  // ── LEC東京リーガルマインド 資格試験講座 (education / A8.net) ─────────────────
   {
     "id": "af_lec_education_001",
     "title": "LEC東京リーガルマインド 資格試験講座",
@@ -781,7 +621,6 @@ export const AFFILIATE_ADS: AffiliateAd[] = [
     "createdAt": "2026-07-06 00:00:00",
     "updatedAt": "2026-07-06 00:00:00"
   },
-  // ── ユーカーパック 車一括査定 (mobility / A8.net) ────────────────────────────
   {
     "id": "af_ucarpac_mobility_001",
     "title": "ユーカーパック 車一括査定",
@@ -803,12 +642,12 @@ export const AFFILIATE_ADS: AffiliateAd[] = [
     "createdAt": "2026-07-06 00:00:00",
     "updatedAt": "2026-07-06 00:00:00"
   },
-  // ── マッチングアプリ バナー 1 (population / blog-bottom) ──────────────────────
   {
     "id": "af_population_banner_001",
     "title": "マッチングアプリ バナー 1",
     "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4AZCG2+ADW8OI+1J1E+6IHCX",
     "areaCode": null,
+    "vertical": "population",
     "categoryKey": "population",
     "locationCode": "blog-bottom",
     "isActive": true,
@@ -824,12 +663,12 @@ export const AFFILIATE_ADS: AffiliateAd[] = [
     "createdAt": "2026-03-10 01:20:57",
     "updatedAt": "2026-03-10 01:20:57"
   },
-  // ── マッチングアプリ バナー 2 (population / blog-bottom) ──────────────────────
   {
     "id": "af_population_banner_002",
     "title": "マッチングアプリ バナー 2",
     "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4AZCG2+ACPDGY+22QA+NUES1",
     "areaCode": null,
+    "vertical": "population",
     "categoryKey": "population",
     "locationCode": "blog-bottom",
     "isActive": true,
@@ -845,12 +684,12 @@ export const AFFILIATE_ADS: AffiliateAd[] = [
     "createdAt": "2026-03-10 01:20:57",
     "updatedAt": "2026-03-10 01:20:57"
   },
-  // ── Repilates (health=socialsecurity / blog-bottom) ───────────────────────────
   {
     "id": "af_repilates_001",
     "title": "Repilates 女性専用マシンピラティス",
     "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4AZD81+AEHOAA+5FZU+601S1",
     "areaCode": null,
+    "vertical": "health",
     "categoryKey": "socialsecurity",
     "locationCode": "blog-bottom",
     "isActive": true,
@@ -866,12 +705,12 @@ export const AFFILIATE_ADS: AffiliateAd[] = [
     "createdAt": "2026-03-10 01:27:06",
     "updatedAt": "2026-06-01 00:00:00"
   },
-  // ── SBI証券 インライン (economy / sidebar-inline) ─────────────────────────────
   {
     "id": "af_sbi_inline_001",
     "title": "SBI証券 インライン",
     "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4555ZY+AWCOFM+1WP2+6F9M9",
     "areaCode": null,
+    "vertical": "economy",
     "categoryKey": "economy",
     "locationCode": "sidebar-inline",
     "isActive": true,
@@ -887,12 +726,12 @@ export const AFFILIATE_ADS: AffiliateAd[] = [
     "createdAt": "2026-03-10 01:36:16",
     "updatedAt": "2026-03-10 01:36:16"
   },
-  // ── SBI証券 スカイスクレイパー (economy / sidebar-sticky) ─────────────────────
   {
     "id": "af_sbi_skyscraper_001",
     "title": "SBI証券 スカイスクレイパー",
     "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4555ZY+AWCOFM+1WP2+5YZ75",
     "areaCode": null,
+    "vertical": "economy",
     "categoryKey": "economy",
     "locationCode": "sidebar-sticky",
     "isActive": true,
@@ -908,12 +747,12 @@ export const AFFILIATE_ADS: AffiliateAd[] = [
     "createdAt": "2026-03-10 01:36:16",
     "updatedAt": "2026-03-10 01:36:16"
   },
-  // ── SoftBank Air (energy / blog-bottom) ──────────────────────────────────────
   {
     "id": "af_softbank_air_001",
     "title": "SoftBank Air キャッシュバック",
     "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4AZD81+AM8B5E+348K+2NAN35",
     "areaCode": null,
+    "vertical": "energy",
     "categoryKey": "energy",
     "locationCode": "blog-bottom",
     "isActive": true,
@@ -929,12 +768,12 @@ export const AFFILIATE_ADS: AffiliateAd[] = [
     "createdAt": "2026-03-10 00:40:27",
     "updatedAt": "2026-03-10 00:40:27"
   },
-  // ── トラベルウエスト (tourism / blog-bottom) ──────────────────────────────────
   {
     "id": "af_travelwest_001",
     "title": "トラベルウエスト 海外航空券比較",
     "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4AZCG5+DN6MUQ+4R2M+NUMHT",
     "areaCode": null,
+    "vertical": "travel",
     "categoryKey": "tourism",
     "locationCode": "blog-bottom",
     "isActive": true,
@@ -950,439 +789,96 @@ export const AFFILIATE_ADS: AffiliateAd[] = [
     "createdAt": "2026-03-10 01:27:44",
     "updatedAt": "2026-03-10 01:27:44"
   },
-  // ── イオン九州オンライン (furusato=administrativefinancial / area-sidebar) ──────
-  {
-    "id": "af_aeon_kyushu_area_001",
-    "title": "イオン九州オンライン",
-    "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4AZA46+97MGQA+5I2U+60H7L",
-    "areaCode": null,
-    "categoryKey": "administrativefinancial",
-    "locationCode": "area-sidebar",
-    "isActive": true,
-    "priority": 20,
-    "startDate": null,
-    "endDate": null,
-    "targetCategories": null,
-    "adType": "banner",
-    "imageUrl": "https://www25.a8.net/svt/bgt?aid=260306934557&wid=001&eno=01&mid=s00000025671001010000&mc=1",
-    "trackingPixelUrl": "https://www17.a8.net/0.gif?a8mat=4AZA46+97MGQA+5I2U+60H7L",
-    "width": 300,
-    "height": 250,
-    "createdAt": "2026-03-26 09:01:57",
-    "updatedAt": "2026-06-01 00:00:00"
-  },
-  // ── STRATEGY CAREER 320×100バナー — 全8カテゴリ blog-bottom (priority 80) ────
-  // エンジニア転職（年収1000万以上・リモート・残業30h以下）
   {
     "id": "af_strategy_career_economy_001",
     "title": "STRATEGY CAREER｜エンジニア転職",
     "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B5LK5+5YC2K2+5P1E+5ZEMP",
-    "areaCode": null, "categoryKey": "economy", "locationCode": "blog-bottom",
-    "isActive": true, "priority": 80, "startDate": null, "endDate": null, "targetCategories": null, "targetRankingKeys": ["software-engineer-annual-income", "system-consultant-annual-income"],
+    "areaCode": null,
+    "vertical": "labor",
+    "categoryKey": null,
+    "locationCode": "blog-bottom",
+    "isActive": true,
+    "priority": 80,
+    "startDate": null,
+    "endDate": null,
+    "targetCategories": null,
+    "targetRankingKeys": [
+      "software-engineer-annual-income",
+      "system-consultant-annual-income"
+    ],
     "adType": "banner",
     "imageUrl": "https://www24.a8.net/svt/bgt?aid=260601701360&wid=001&eno=01&mid=s00000026573001005000&mc=1",
     "trackingPixelUrl": "https://www18.a8.net/0.gif?a8mat=4B5LK5+5YC2K2+5P1E+5ZEMP",
-    "width": 320, "height": 100,
-    "createdAt": "2026-06-01 00:00:00", "updatedAt": "2026-06-01 00:00:00"
+    "width": 320,
+    "height": 100,
+    "createdAt": "2026-06-01 00:00:00",
+    "updatedAt": "2026-06-01 00:00:00"
   },
-  {
-    "id": "af_strategy_career_labor_001",
-    "title": "STRATEGY CAREER｜エンジニア転職",
-    "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B5LK5+5YC2K2+5P1E+5ZEMP",
-    "areaCode": null, "categoryKey": "laborwage", "locationCode": "blog-bottom",
-    "isActive": true, "priority": 80, "startDate": null, "endDate": null, "targetCategories": null, "targetRankingKeys": ["software-engineer-annual-income", "system-consultant-annual-income"],
-    "adType": "banner",
-    "imageUrl": "https://www24.a8.net/svt/bgt?aid=260601701360&wid=001&eno=01&mid=s00000026573001005000&mc=1",
-    "trackingPixelUrl": "https://www18.a8.net/0.gif?a8mat=4B5LK5+5YC2K2+5P1E+5ZEMP",
-    "width": 320, "height": 100,
-    "createdAt": "2026-06-01 00:00:00", "updatedAt": "2026-06-01 00:00:00"
-  },
-  {
-    "id": "af_strategy_career_population_001",
-    "title": "STRATEGY CAREER｜エンジニア転職",
-    "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B5LK5+5YC2K2+5P1E+5ZEMP",
-    "areaCode": null, "categoryKey": "population", "locationCode": "blog-bottom",
-    "isActive": true, "priority": 25, "startDate": null, "endDate": null, "targetCategories": null, "targetRankingKeys": ["software-engineer-annual-income", "system-consultant-annual-income"],
-    "adType": "banner",
-    "imageUrl": "https://www24.a8.net/svt/bgt?aid=260601701360&wid=001&eno=01&mid=s00000026573001005000&mc=1",
-    "trackingPixelUrl": "https://www18.a8.net/0.gif?a8mat=4B5LK5+5YC2K2+5P1E+5ZEMP",
-    "width": 320, "height": 100,
-    "createdAt": "2026-06-01 00:00:00", "updatedAt": "2026-06-01 00:00:00"
-  },
-  {
-    "id": "af_strategy_career_tourism_001",
-    "title": "STRATEGY CAREER｜エンジニア転職",
-    "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B5LK5+5YC2K2+5P1E+5ZEMP",
-    "areaCode": null, "categoryKey": "tourism", "locationCode": "blog-bottom",
-    "isActive": true, "priority": 25, "startDate": null, "endDate": null, "targetCategories": null, "targetRankingKeys": ["software-engineer-annual-income", "system-consultant-annual-income"],
-    "adType": "banner",
-    "imageUrl": "https://www24.a8.net/svt/bgt?aid=260601701360&wid=001&eno=01&mid=s00000026573001005000&mc=1",
-    "trackingPixelUrl": "https://www18.a8.net/0.gif?a8mat=4B5LK5+5YC2K2+5P1E+5ZEMP",
-    "width": 320, "height": 100,
-    "createdAt": "2026-06-01 00:00:00", "updatedAt": "2026-06-01 00:00:00"
-  },
-  {
-    "id": "af_strategy_career_housing_001",
-    "title": "STRATEGY CAREER｜エンジニア転職",
-    "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B5LK5+5YC2K2+5P1E+5ZEMP",
-    "areaCode": null, "categoryKey": "construction", "locationCode": "blog-bottom",
-    "isActive": true, "priority": 25, "startDate": null, "endDate": null, "targetCategories": null, "targetRankingKeys": ["software-engineer-annual-income", "system-consultant-annual-income"],
-    "adType": "banner",
-    "imageUrl": "https://www24.a8.net/svt/bgt?aid=260601701360&wid=001&eno=01&mid=s00000026573001005000&mc=1",
-    "trackingPixelUrl": "https://www18.a8.net/0.gif?a8mat=4B5LK5+5YC2K2+5P1E+5ZEMP",
-    "width": 320, "height": 100,
-    "createdAt": "2026-06-01 00:00:00", "updatedAt": "2026-06-01 00:00:00"
-  },
-  {
-    "id": "af_strategy_career_health_001",
-    "title": "STRATEGY CAREER｜エンジニア転職",
-    "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B5LK5+5YC2K2+5P1E+5ZEMP",
-    "areaCode": null, "categoryKey": "socialsecurity", "locationCode": "blog-bottom",
-    "isActive": true, "priority": 25, "startDate": null, "endDate": null, "targetCategories": null, "targetRankingKeys": ["software-engineer-annual-income", "system-consultant-annual-income"],
-    "adType": "banner",
-    "imageUrl": "https://www24.a8.net/svt/bgt?aid=260601701360&wid=001&eno=01&mid=s00000026573001005000&mc=1",
-    "trackingPixelUrl": "https://www18.a8.net/0.gif?a8mat=4B5LK5+5YC2K2+5P1E+5ZEMP",
-    "width": 320, "height": 100,
-    "createdAt": "2026-06-01 00:00:00", "updatedAt": "2026-06-01 00:00:00"
-  },
-  {
-    "id": "af_strategy_career_energy_001",
-    "title": "STRATEGY CAREER｜エンジニア転職",
-    "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B5LK5+5YC2K2+5P1E+5ZEMP",
-    "areaCode": null, "categoryKey": "energy", "locationCode": "blog-bottom",
-    "isActive": true, "priority": 25, "startDate": null, "endDate": null, "targetCategories": null, "targetRankingKeys": ["software-engineer-annual-income", "system-consultant-annual-income"],
-    "adType": "banner",
-    "imageUrl": "https://www24.a8.net/svt/bgt?aid=260601701360&wid=001&eno=01&mid=s00000026573001005000&mc=1",
-    "trackingPixelUrl": "https://www18.a8.net/0.gif?a8mat=4B5LK5+5YC2K2+5P1E+5ZEMP",
-    "width": 320, "height": 100,
-    "createdAt": "2026-06-01 00:00:00", "updatedAt": "2026-06-01 00:00:00"
-  },
-  {
-    "id": "af_strategy_career_furusato_001",
-    "title": "STRATEGY CAREER｜エンジニア転職",
-    "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B5LK5+5YC2K2+5P1E+5ZEMP",
-    "areaCode": null, "categoryKey": "administrativefinancial", "locationCode": "blog-bottom",
-    "isActive": true, "priority": 25, "startDate": null, "endDate": null, "targetCategories": null, "targetRankingKeys": ["software-engineer-annual-income", "system-consultant-annual-income"],
-    "adType": "banner",
-    "imageUrl": "https://www24.a8.net/svt/bgt?aid=260601701360&wid=001&eno=01&mid=s00000026573001005000&mc=1",
-    "trackingPixelUrl": "https://www18.a8.net/0.gif?a8mat=4B5LK5+5YC2K2+5P1E+5ZEMP",
-    "width": 320, "height": 100,
-    "createdAt": "2026-06-01 00:00:00", "updatedAt": "2026-06-01 00:00:00"
-  },
-  // ── STRATEGY CAREER テキストリンク — 全カテゴリキー sidebar-bottom (priority 100) ─
-  // ランキングページサイドバー AffiliateAdSlot で表示。
-  // categoryKey は CATEGORY_AFFILIATE_MAP のキーと完全一致させる（9キー）。
   {
     "id": "af_strategy_career_text_economy",
     "title": "自分らしく働けるエンジニア転職を目指すなら【strategy career】",
     "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B5LK5+5YC2K2+5P1E+5YJRM",
-    "areaCode": null, "categoryKey": "economy", "locationCode": "sidebar-bottom",
-    "isActive": true, "priority": 100, "startDate": null, "endDate": null, "targetCategories": null, "targetRankingKeys": ["software-engineer-annual-income", "system-consultant-annual-income"],
-    "adType": "text", "imageUrl": null,
+    "areaCode": null,
+    "vertical": "labor",
+    "categoryKey": null,
+    "locationCode": "sidebar-bottom",
+    "isActive": true,
+    "priority": 100,
+    "startDate": null,
+    "endDate": null,
+    "targetCategories": null,
+    "targetRankingKeys": [
+      "software-engineer-annual-income",
+      "system-consultant-annual-income"
+    ],
+    "adType": "text",
+    "imageUrl": null,
     "trackingPixelUrl": "https://www13.a8.net/0.gif?a8mat=4B5LK5+5YC2K2+5P1E+5YJRM",
-    "width": null, "height": null,
-    "createdAt": "2026-06-01 00:00:00", "updatedAt": "2026-06-01 00:00:00"
+    "width": null,
+    "height": null,
+    "createdAt": "2026-06-01 00:00:00",
+    "updatedAt": "2026-06-01 00:00:00"
   },
-  {
-    "id": "af_strategy_career_text_laborwage",
-    "title": "自分らしく働けるエンジニア転職を目指すなら【strategy career】",
-    "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B5LK5+5YC2K2+5P1E+5YJRM",
-    "areaCode": null, "categoryKey": "laborwage", "locationCode": "sidebar-bottom",
-    "isActive": true, "priority": 100, "startDate": null, "endDate": null, "targetCategories": null, "targetRankingKeys": ["software-engineer-annual-income", "system-consultant-annual-income"],
-    "adType": "text", "imageUrl": null,
-    "trackingPixelUrl": "https://www13.a8.net/0.gif?a8mat=4B5LK5+5YC2K2+5P1E+5YJRM",
-    "width": null, "height": null,
-    "createdAt": "2026-06-01 00:00:00", "updatedAt": "2026-06-01 00:00:00"
-  },
-  {
-    "id": "af_strategy_career_text_population",
-    "title": "自分らしく働けるエンジニア転職を目指すなら【strategy career】",
-    "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B5LK5+5YC2K2+5P1E+5YJRM",
-    "areaCode": null, "categoryKey": "population", "locationCode": "sidebar-bottom",
-    "isActive": true, "priority": 25, "startDate": null, "endDate": null, "targetCategories": null, "targetRankingKeys": ["software-engineer-annual-income", "system-consultant-annual-income"],
-    "adType": "text", "imageUrl": null,
-    "trackingPixelUrl": "https://www13.a8.net/0.gif?a8mat=4B5LK5+5YC2K2+5P1E+5YJRM",
-    "width": null, "height": null,
-    "createdAt": "2026-06-01 00:00:00", "updatedAt": "2026-06-01 00:00:00"
-  },
-  {
-    "id": "af_strategy_career_text_tourism",
-    "title": "自分らしく働けるエンジニア転職を目指すなら【strategy career】",
-    "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B5LK5+5YC2K2+5P1E+5YJRM",
-    "areaCode": null, "categoryKey": "tourism", "locationCode": "sidebar-bottom",
-    "isActive": true, "priority": 25, "startDate": null, "endDate": null, "targetCategories": null, "targetRankingKeys": ["software-engineer-annual-income", "system-consultant-annual-income"],
-    "adType": "text", "imageUrl": null,
-    "trackingPixelUrl": "https://www13.a8.net/0.gif?a8mat=4B5LK5+5YC2K2+5P1E+5YJRM",
-    "width": null, "height": null,
-    "createdAt": "2026-06-01 00:00:00", "updatedAt": "2026-06-01 00:00:00"
-  },
-  {
-    "id": "af_strategy_career_text_construction",
-    "title": "自分らしく働けるエンジニア転職を目指すなら【strategy career】",
-    "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B5LK5+5YC2K2+5P1E+5YJRM",
-    "areaCode": null, "categoryKey": "construction", "locationCode": "sidebar-bottom",
-    "isActive": true, "priority": 25, "startDate": null, "endDate": null, "targetCategories": null, "targetRankingKeys": ["software-engineer-annual-income", "system-consultant-annual-income"],
-    "adType": "text", "imageUrl": null,
-    "trackingPixelUrl": "https://www13.a8.net/0.gif?a8mat=4B5LK5+5YC2K2+5P1E+5YJRM",
-    "width": null, "height": null,
-    "createdAt": "2026-06-01 00:00:00", "updatedAt": "2026-06-01 00:00:00"
-  },
-  {
-    "id": "af_strategy_career_text_socialsecurity",
-    "title": "自分らしく働けるエンジニア転職を目指すなら【strategy career】",
-    "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B5LK5+5YC2K2+5P1E+5YJRM",
-    "areaCode": null, "categoryKey": "socialsecurity", "locationCode": "sidebar-bottom",
-    "isActive": true, "priority": 25, "startDate": null, "endDate": null, "targetCategories": null, "targetRankingKeys": ["software-engineer-annual-income", "system-consultant-annual-income"],
-    "adType": "text", "imageUrl": null,
-    "trackingPixelUrl": "https://www13.a8.net/0.gif?a8mat=4B5LK5+5YC2K2+5P1E+5YJRM",
-    "width": null, "height": null,
-    "createdAt": "2026-06-01 00:00:00", "updatedAt": "2026-06-01 00:00:00"
-  },
-  {
-    "id": "af_strategy_career_text_energy",
-    "title": "自分らしく働けるエンジニア転職を目指すなら【strategy career】",
-    "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B5LK5+5YC2K2+5P1E+5YJRM",
-    "areaCode": null, "categoryKey": "energy", "locationCode": "sidebar-bottom",
-    "isActive": true, "priority": 25, "startDate": null, "endDate": null, "targetCategories": null, "targetRankingKeys": ["software-engineer-annual-income", "system-consultant-annual-income"],
-    "adType": "text", "imageUrl": null,
-    "trackingPixelUrl": "https://www13.a8.net/0.gif?a8mat=4B5LK5+5YC2K2+5P1E+5YJRM",
-    "width": null, "height": null,
-    "createdAt": "2026-06-01 00:00:00", "updatedAt": "2026-06-01 00:00:00"
-  },
-  {
-    "id": "af_strategy_career_text_administrativefinancial",
-    "title": "自分らしく働けるエンジニア転職を目指すなら【strategy career】",
-    "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B5LK5+5YC2K2+5P1E+5YJRM",
-    "areaCode": null, "categoryKey": "administrativefinancial", "locationCode": "sidebar-bottom",
-    "isActive": true, "priority": 25, "startDate": null, "endDate": null, "targetCategories": null, "targetRankingKeys": ["software-engineer-annual-income", "system-consultant-annual-income"],
-    "adType": "text", "imageUrl": null,
-    "trackingPixelUrl": "https://www13.a8.net/0.gif?a8mat=4B5LK5+5YC2K2+5P1E+5YJRM",
-    "width": null, "height": null,
-    "createdAt": "2026-06-01 00:00:00", "updatedAt": "2026-06-01 00:00:00"
-  },
-  {
-    "id": "af_strategy_career_text_landweather",
-    "title": "自分らしく働けるエンジニア転職を目指すなら【strategy career】",
-    "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B5LK5+5YC2K2+5P1E+5YJRM",
-    "areaCode": null, "categoryKey": "landweather", "locationCode": "sidebar-bottom",
-    "isActive": true, "priority": 100, "startDate": null, "endDate": null, "targetCategories": null, "targetRankingKeys": ["software-engineer-annual-income", "system-consultant-annual-income"],
-    "adType": "text", "imageUrl": null,
-    "trackingPixelUrl": "https://www13.a8.net/0.gif?a8mat=4B5LK5+5YC2K2+5P1E+5YJRM",
-    "width": null, "height": null,
-    "createdAt": "2026-06-01 00:00:00", "updatedAt": "2026-06-01 00:00:00"
-  },
-  // ── 就職エージェントneo (text / sidebar-bottom / 全カテゴリ) ───────────────────
-  // strategy_career と並べてランキング/ブログのサイドバーに 2 件表示する。
-  // priority 90: strategy_career (100) の次に表示される。
   {
     "id": "af_shukatsu_neo_text_economy",
     "title": "最短1日で内定獲得可能！就職エージェントneo",
     "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B5LK5+5YXI5U+3Y6M+BWVTE",
-    "areaCode": null, "categoryKey": "economy", "locationCode": "sidebar-bottom",
-    "isActive": true, "priority": 90, "startDate": null, "endDate": null, "targetCategories": null,
-    "adType": "text", "imageUrl": null,
+    "areaCode": null,
+    "vertical": "labor",
+    "categoryKey": null,
+    "locationCode": "sidebar-bottom",
+    "isActive": true,
+    "priority": 90,
+    "startDate": null,
+    "endDate": null,
+    "targetCategories": null,
+    "adType": "text",
+    "imageUrl": null,
     "trackingPixelUrl": "https://www17.a8.net/0.gif?a8mat=4B5LK5+5YXI5U+3Y6M+BWVTE",
-    "width": null, "height": null,
-    "createdAt": "2026-06-02 00:00:00", "updatedAt": "2026-06-02 00:00:00"
+    "width": null,
+    "height": null,
+    "createdAt": "2026-06-02 00:00:00",
+    "updatedAt": "2026-06-02 00:00:00"
   },
-  {
-    "id": "af_shukatsu_neo_text_laborwage",
-    "title": "最短1日で内定獲得可能！就職エージェントneo",
-    "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B5LK5+5YXI5U+3Y6M+BWVTE",
-    "areaCode": null, "categoryKey": "laborwage", "locationCode": "sidebar-bottom",
-    "isActive": true, "priority": 90, "startDate": null, "endDate": null, "targetCategories": null,
-    "adType": "text", "imageUrl": null,
-    "trackingPixelUrl": "https://www17.a8.net/0.gif?a8mat=4B5LK5+5YXI5U+3Y6M+BWVTE",
-    "width": null, "height": null,
-    "createdAt": "2026-06-02 00:00:00", "updatedAt": "2026-06-02 00:00:00"
-  },
-  {
-    "id": "af_shukatsu_neo_text_population",
-    "title": "最短1日で内定獲得可能！就職エージェントneo",
-    "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B5LK5+5YXI5U+3Y6M+BWVTE",
-    "areaCode": null, "categoryKey": "population", "locationCode": "sidebar-bottom",
-    "isActive": true, "priority": 25, "startDate": null, "endDate": null, "targetCategories": null,
-    "adType": "text", "imageUrl": null,
-    "trackingPixelUrl": "https://www17.a8.net/0.gif?a8mat=4B5LK5+5YXI5U+3Y6M+BWVTE",
-    "width": null, "height": null,
-    "createdAt": "2026-06-02 00:00:00", "updatedAt": "2026-06-02 00:00:00"
-  },
-  {
-    "id": "af_shukatsu_neo_text_tourism",
-    "title": "最短1日で内定獲得可能！就職エージェントneo",
-    "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B5LK5+5YXI5U+3Y6M+BWVTE",
-    "areaCode": null, "categoryKey": "tourism", "locationCode": "sidebar-bottom",
-    "isActive": true, "priority": 25, "startDate": null, "endDate": null, "targetCategories": null,
-    "adType": "text", "imageUrl": null,
-    "trackingPixelUrl": "https://www17.a8.net/0.gif?a8mat=4B5LK5+5YXI5U+3Y6M+BWVTE",
-    "width": null, "height": null,
-    "createdAt": "2026-06-02 00:00:00", "updatedAt": "2026-06-02 00:00:00"
-  },
-  {
-    "id": "af_shukatsu_neo_text_construction",
-    "title": "最短1日で内定獲得可能！就職エージェントneo",
-    "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B5LK5+5YXI5U+3Y6M+BWVTE",
-    "areaCode": null, "categoryKey": "construction", "locationCode": "sidebar-bottom",
-    "isActive": true, "priority": 25, "startDate": null, "endDate": null, "targetCategories": null,
-    "adType": "text", "imageUrl": null,
-    "trackingPixelUrl": "https://www17.a8.net/0.gif?a8mat=4B5LK5+5YXI5U+3Y6M+BWVTE",
-    "width": null, "height": null,
-    "createdAt": "2026-06-02 00:00:00", "updatedAt": "2026-06-02 00:00:00"
-  },
-  {
-    "id": "af_shukatsu_neo_text_socialsecurity",
-    "title": "最短1日で内定獲得可能！就職エージェントneo",
-    "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B5LK5+5YXI5U+3Y6M+BWVTE",
-    "areaCode": null, "categoryKey": "socialsecurity", "locationCode": "sidebar-bottom",
-    "isActive": true, "priority": 25, "startDate": null, "endDate": null, "targetCategories": null,
-    "adType": "text", "imageUrl": null,
-    "trackingPixelUrl": "https://www17.a8.net/0.gif?a8mat=4B5LK5+5YXI5U+3Y6M+BWVTE",
-    "width": null, "height": null,
-    "createdAt": "2026-06-02 00:00:00", "updatedAt": "2026-06-02 00:00:00"
-  },
-  {
-    "id": "af_shukatsu_neo_text_energy",
-    "title": "最短1日で内定獲得可能！就職エージェントneo",
-    "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B5LK5+5YXI5U+3Y6M+BWVTE",
-    "areaCode": null, "categoryKey": "energy", "locationCode": "sidebar-bottom",
-    "isActive": true, "priority": 25, "startDate": null, "endDate": null, "targetCategories": null,
-    "adType": "text", "imageUrl": null,
-    "trackingPixelUrl": "https://www17.a8.net/0.gif?a8mat=4B5LK5+5YXI5U+3Y6M+BWVTE",
-    "width": null, "height": null,
-    "createdAt": "2026-06-02 00:00:00", "updatedAt": "2026-06-02 00:00:00"
-  },
-  {
-    "id": "af_shukatsu_neo_text_administrativefinancial",
-    "title": "最短1日で内定獲得可能！就職エージェントneo",
-    "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B5LK5+5YXI5U+3Y6M+BWVTE",
-    "areaCode": null, "categoryKey": "administrativefinancial", "locationCode": "sidebar-bottom",
-    "isActive": true, "priority": 25, "startDate": null, "endDate": null, "targetCategories": null,
-    "adType": "text", "imageUrl": null,
-    "trackingPixelUrl": "https://www17.a8.net/0.gif?a8mat=4B5LK5+5YXI5U+3Y6M+BWVTE",
-    "width": null, "height": null,
-    "createdAt": "2026-06-02 00:00:00", "updatedAt": "2026-06-02 00:00:00"
-  },
-  {
-    "id": "af_shukatsu_neo_text_landweather",
-    "title": "最短1日で内定獲得可能！就職エージェントneo",
-    "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B5LK5+5YXI5U+3Y6M+BWVTE",
-    "areaCode": null, "categoryKey": "landweather", "locationCode": "sidebar-bottom",
-    "isActive": true, "priority": 90, "startDate": null, "endDate": null, "targetCategories": null,
-    "adType": "text", "imageUrl": null,
-    "trackingPixelUrl": "https://www17.a8.net/0.gif?a8mat=4B5LK5+5YXI5U+3Y6M+BWVTE",
-    "width": null, "height": null,
-    "createdAt": "2026-06-02 00:00:00", "updatedAt": "2026-06-02 00:00:00"
-  },
-  // ── AI就労支援 300×250バナー — 全8カテゴリ blog-bottom (priority 85) + area-sidebar (priority 95) ─
-  // AI を活用した就労支援サービス（転職・キャリア系）。広く全ページに露出させる。
-  // blog/ranking/category/tag/theme は categoryKey マッチで上位N件 (location 無関係)。
-  // area ページは locationCode=area-sidebar の banner を別枠で上位2件表示するため別エントリ。
   {
     "id": "af_ai_jobsupport_economy_001",
     "title": "AI就労支援",
     "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B5LK5+6PQ0DU+47GS+HVNAP",
-    "areaCode": null, "categoryKey": "economy", "locationCode": "blog-bottom",
-    "isActive": true, "priority": 85, "startDate": null, "endDate": null, "targetCategories": null,
+    "areaCode": null,
+    "vertical": "labor",
+    "categoryKey": null,
+    "locationCode": "blog-bottom",
+    "isActive": true,
+    "priority": 85,
+    "startDate": null,
+    "endDate": null,
+    "targetCategories": null,
     "adType": "banner",
     "imageUrl": "https://www22.a8.net/svt/bgt?aid=260601701406&wid=001&eno=01&mid=s00000019630003003000&mc=1",
     "trackingPixelUrl": "https://www12.a8.net/0.gif?a8mat=4B5LK5+6PQ0DU+47GS+HVNAP",
-    "width": 300, "height": 250,
-    "createdAt": "2026-06-02 00:00:00", "updatedAt": "2026-06-02 00:00:00"
-  },
-  {
-    "id": "af_ai_jobsupport_labor_001",
-    "title": "AI就労支援",
-    "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B5LK5+6PQ0DU+47GS+HVNAP",
-    "areaCode": null, "categoryKey": "laborwage", "locationCode": "blog-bottom",
-    "isActive": true, "priority": 85, "startDate": null, "endDate": null, "targetCategories": null,
-    "adType": "banner",
-    "imageUrl": "https://www22.a8.net/svt/bgt?aid=260601701406&wid=001&eno=01&mid=s00000019630003003000&mc=1",
-    "trackingPixelUrl": "https://www12.a8.net/0.gif?a8mat=4B5LK5+6PQ0DU+47GS+HVNAP",
-    "width": 300, "height": 250,
-    "createdAt": "2026-06-02 00:00:00", "updatedAt": "2026-06-02 00:00:00"
-  },
-  {
-    "id": "af_ai_jobsupport_population_001",
-    "title": "AI就労支援",
-    "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B5LK5+6PQ0DU+47GS+HVNAP",
-    "areaCode": null, "categoryKey": "population", "locationCode": "blog-bottom",
-    "isActive": true, "priority": 25, "startDate": null, "endDate": null, "targetCategories": null,
-    "adType": "banner",
-    "imageUrl": "https://www22.a8.net/svt/bgt?aid=260601701406&wid=001&eno=01&mid=s00000019630003003000&mc=1",
-    "trackingPixelUrl": "https://www12.a8.net/0.gif?a8mat=4B5LK5+6PQ0DU+47GS+HVNAP",
-    "width": 300, "height": 250,
-    "createdAt": "2026-06-02 00:00:00", "updatedAt": "2026-06-02 00:00:00"
-  },
-  {
-    "id": "af_ai_jobsupport_tourism_001",
-    "title": "AI就労支援",
-    "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B5LK5+6PQ0DU+47GS+HVNAP",
-    "areaCode": null, "categoryKey": "tourism", "locationCode": "blog-bottom",
-    "isActive": true, "priority": 25, "startDate": null, "endDate": null, "targetCategories": null,
-    "adType": "banner",
-    "imageUrl": "https://www22.a8.net/svt/bgt?aid=260601701406&wid=001&eno=01&mid=s00000019630003003000&mc=1",
-    "trackingPixelUrl": "https://www12.a8.net/0.gif?a8mat=4B5LK5+6PQ0DU+47GS+HVNAP",
-    "width": 300, "height": 250,
-    "createdAt": "2026-06-02 00:00:00", "updatedAt": "2026-06-02 00:00:00"
-  },
-  {
-    "id": "af_ai_jobsupport_construction_001",
-    "title": "AI就労支援",
-    "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B5LK5+6PQ0DU+47GS+HVNAP",
-    "areaCode": null, "categoryKey": "construction", "locationCode": "blog-bottom",
-    "isActive": true, "priority": 25, "startDate": null, "endDate": null, "targetCategories": null,
-    "adType": "banner",
-    "imageUrl": "https://www22.a8.net/svt/bgt?aid=260601701406&wid=001&eno=01&mid=s00000019630003003000&mc=1",
-    "trackingPixelUrl": "https://www12.a8.net/0.gif?a8mat=4B5LK5+6PQ0DU+47GS+HVNAP",
-    "width": 300, "height": 250,
-    "createdAt": "2026-06-02 00:00:00", "updatedAt": "2026-06-02 00:00:00"
-  },
-  {
-    "id": "af_ai_jobsupport_health_001",
-    "title": "AI就労支援",
-    "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B5LK5+6PQ0DU+47GS+HVNAP",
-    "areaCode": null, "categoryKey": "socialsecurity", "locationCode": "blog-bottom",
-    "isActive": true, "priority": 25, "startDate": null, "endDate": null, "targetCategories": null,
-    "adType": "banner",
-    "imageUrl": "https://www22.a8.net/svt/bgt?aid=260601701406&wid=001&eno=01&mid=s00000019630003003000&mc=1",
-    "trackingPixelUrl": "https://www12.a8.net/0.gif?a8mat=4B5LK5+6PQ0DU+47GS+HVNAP",
-    "width": 300, "height": 250,
-    "createdAt": "2026-06-02 00:00:00", "updatedAt": "2026-06-02 00:00:00"
-  },
-  {
-    "id": "af_ai_jobsupport_energy_001",
-    "title": "AI就労支援",
-    "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B5LK5+6PQ0DU+47GS+HVNAP",
-    "areaCode": null, "categoryKey": "energy", "locationCode": "blog-bottom",
-    "isActive": true, "priority": 25, "startDate": null, "endDate": null, "targetCategories": null,
-    "adType": "banner",
-    "imageUrl": "https://www22.a8.net/svt/bgt?aid=260601701406&wid=001&eno=01&mid=s00000019630003003000&mc=1",
-    "trackingPixelUrl": "https://www12.a8.net/0.gif?a8mat=4B5LK5+6PQ0DU+47GS+HVNAP",
-    "width": 300, "height": 250,
-    "createdAt": "2026-06-02 00:00:00", "updatedAt": "2026-06-02 00:00:00"
-  },
-  {
-    "id": "af_ai_jobsupport_furusato_001",
-    "title": "AI就労支援",
-    "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B5LK5+6PQ0DU+47GS+HVNAP",
-    "areaCode": null, "categoryKey": "administrativefinancial", "locationCode": "blog-bottom",
-    "isActive": true, "priority": 25, "startDate": null, "endDate": null, "targetCategories": null,
-    "adType": "banner",
-    "imageUrl": "https://www22.a8.net/svt/bgt?aid=260601701406&wid=001&eno=01&mid=s00000019630003003000&mc=1",
-    "trackingPixelUrl": "https://www12.a8.net/0.gif?a8mat=4B5LK5+6PQ0DU+47GS+HVNAP",
-    "width": 300, "height": 250,
-    "createdAt": "2026-06-02 00:00:00", "updatedAt": "2026-06-02 00:00:00"
-  },
-  {
-    "id": "af_ai_jobsupport_area_001",
-    "title": "AI就労支援",
-    "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B5LK5+6PQ0DU+47GS+HVNAP",
-    "areaCode": null, "categoryKey": "laborwage", "locationCode": "area-sidebar",
-    "isActive": true, "priority": 95, "startDate": null, "endDate": null, "targetCategories": null,
-    "adType": "banner",
-    "imageUrl": "https://www22.a8.net/svt/bgt?aid=260601701406&wid=001&eno=01&mid=s00000019630003003000&mc=1",
-    "trackingPixelUrl": "https://www12.a8.net/0.gif?a8mat=4B5LK5+6PQ0DU+47GS+HVNAP",
-    "width": 300, "height": 250,
-    "createdAt": "2026-06-02 00:00:00", "updatedAt": "2026-06-02 00:00:00"
+    "width": 300,
+    "height": 250,
+    "createdAt": "2026-06-02 00:00:00",
+    "updatedAt": "2026-06-02 00:00:00"
   },
 ];
