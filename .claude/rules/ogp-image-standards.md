@@ -9,20 +9,29 @@ stats47.jp の **OGP 画像 / note カバー画像 / サイト内リンクカー
 > ranking は「No Image」多発、note カバーは 2 系統併存、と種別ごとに生成方式・供給状態がバラバラで、
 > 全体を目視確認する手段が無かった。方式は `chart-component-standards.md` /
 > `blog-svg-chart-standards.md` と同じ「rules に規約カタログ 1 ファイル、skill/agent は参照のみ」。
+>
+> **★方針決定 (2026-07-06): OGP は「事前生成した静的画像を R2 配信」に統一する** (§5)。ランタイムの
+> next/og ImageResponse は Cloudflare Worker で例外 (error 1101) を投げ 500 になるため使わない。生成は
+> Node/CI で Satori レンダリング (ローカル npm フォントを使うため Worker と違い健全) → R2。完全DBレス /
+> R2 snapshot 思想に一致し、home/category の静的 og-image.jpg・blog サムネ (Satori→R2) と同じパターン。
 
 ---
 
 ## 1. 画像資産カタログ (全種別)
 
-| 種別 (tab) | サイズ・比率 | 生成方式 | URL / R2 キー | 表示コンポーネント | 担当 agent |
+> **正典の配信方式**: OGP は下表の「静的 R2 URL」を `openGraph.images` に設定する
+> (`apps/web/src/lib/metadata/ogp-image.ts` の `ogpImageUrl` / `ogpImageKeys`)。ランタイム
+> `opengraph-image.tsx` route は使わない (Worker 500)。theme のみビルド時 SSG prerender で例外的に稼働可。
+
+| 種別 (tab) | サイズ・比率 | 生成方式 (正典 = 事前生成 → R2) | 配信 URL / R2 キー | 生成スクリプト | 担当 agent |
 |---|---|---|---|---|---|
-| OGP: `/` (サイト共通) | 1200×630 (1.91:1) | Satori `apps/web/src/app/opengraph-image.tsx` (`DefaultOgp`) | `stats47.jp/opengraph-image` | (メタタグ) | image-prompt-curator |
-| OGP: blog | 1200×630 | Satori `blog/[slug]/opengraph-image.tsx` (`BlogOgp`、frontmatter) | `stats47.jp/blog/<slug>/opengraph-image` | (メタタグ) | blog-editor |
-| OGP: ranking | 1200×630 | Satori `ranking/[rankingKey]/opengraph-image.tsx` (`RankingOgp`、R2 values から top3/last) | `stats47.jp/ranking/<key>/opengraph-image` | (メタタグ) | ranking-ui-manager |
-| OGP: theme | 1200×630 | Satori `themes/[themeSlug]/opengraph-image.tsx` (インライン JSX、`generateStaticParams`) | `stats47.jp/themes/<slug>/opengraph-image` | (メタタグ) | theme-ui-manager |
-| OGP: category | 1200×630 | Satori `category/[categoryKey]/opengraph-image.tsx` (`CategoryOgp`) | `stats47.jp/category/<key>/opengraph-image` | (メタタグ) | ranking-ui-manager |
-| OGP: areas | 1200×630 | Satori `areas/[areaCode]/opengraph-image.tsx` (`AreaOgp`、strengths/weaknesses 上位2) | `stats47.jp/areas/<code>/opengraph-image` | (メタタグ) | ranking-ui-manager |
-| OGP: tag / survey / cities | — | **専用なし (供給ギャップ)** → 親 `/` の `DefaultOgp` に依存 | — | — | (未定・要否は §3) |
+| OGP: `/` (サイト共通) | 1200×630 (1.91:1) | 静的 (既存 `public/og-image.jpg`) | `stats47.jp/og-image.jpg` | (静的アセット) | image-prompt-curator |
+| OGP: blog | 1200×630 | Satori(Node) → R2 | `app/blog/<slug>/ogp/ogp.png` | `generate-blog-thumbnails-cloud.ts` | blog-editor |
+| OGP: ranking | 1200×630 | Satori(Node) → R2 | `app/ranking/<key>/ogp/ogp.png` | `generate-ogp-images.ts --type ranking` | ranking-ui-manager |
+| OGP: theme | 1200×630 | Satori SSG prerender (ビルド時、例外的に稼働) | `themes/<slug>/opengraph-image` (route) | (ビルド時 prerender) | theme-ui-manager |
+| OGP: category | 1200×630 | 静的フォールバック (`og-image.jpg`) | `stats47.jp/og-image.jpg` | (静的アセット) | ranking-ui-manager |
+| OGP: areas | 1200×630 | Satori(Node) → R2 | `app/areas/<code>/ogp/ogp.png` | `generate-ogp-images.ts --type areas` | ranking-ui-manager |
+| OGP: tag / survey / cities | — | 親 `/` の静的 `og-image.jpg` に依存 (専用なし) | — | — | (要否は §3) |
 | カード: blog (light/dark) | webp (16:9 相当) | `apps/web/scripts/generate-blog-thumbnails-cloud.ts` (Satori、`lib/blog-thumbnail-render.ts`) | R2 `app/blog/<slug>/thumbnail-{light,dark}.webp` | `ThemeAwareImage` (blog-article-grid) | blog-editor |
 | カード: ranking (light/dark) | png | **供給不完全 (既知課題)** | R2 `ranking/prefecture/<key>/<year>/thumbnails/thumbnail-{light,dark}.png` | `RankingThumbnail` (baseSrc 解決、無ければ "No Image") | ranking-publisher |
 | カード: theme / category | — | **なし (要否は §3 で判断)** | — | (共有 SVG タイルマップ or blog サムネ流用) | — |
@@ -64,17 +73,17 @@ node .claude/scripts/ogp/build-image-gallery.mjs --audit
 
 改善は inventory を見てから着手する。実行は種別ごとの既存 agent に委譲 (§4)。
 
-0. **★最重要: ランタイム生成 OGP が本番で 500 (Cloudflare Worker 例外 1101)** — 2026-07-06 監査で確定。
-   - **500 を返す**: `blog` / `ranking` / `areas` の OGP (ランタイム `ƒ` レンダリング)。SNS・Twitter・Slack の
-     カードが**全ページで表示されない**。R2 非依存の `/opengraph-image` (DefaultOgp) すら 500 のため、
-     R2 read ではなく**共通依存の `apps/web/src/features/ogp/font-loader.ts` (Google Fonts をランタイム fetch)**
-     が Worker で例外を投げている疑いが濃厚 (要 Worker ログで確定)。
-   - **200 を返す**: `theme` OGP (`generateStaticParams` で**ビルド時 prerender** されるため。ビルド時は
-     フォント fetch が成功する)。
-   - **静的フォールバック**: `home` / `category` は Satori route を使わず `/og-image.jpg` (静的) を参照するため
-     実害なし (ただし CategoryOgp は死んでいる)。
-   - → 是正はランタイムでのフォント埋め込み (ローカル同梱 TTF を `fs`/import で読む) 等。**別タスク** (本監査の
-     スコープ外・read-only)。検証: `curl -s -o /dev/null -w '%{http_code} %{content_type}' https://stats47.jp/ranking/<key>/opengraph-image`。
+0. **ランタイム生成 OGP が本番で 500 (Cloudflare Worker 例外 1101)** — 2026-07-06 監査で確定 → **静的 R2 方式へ移行 (§5)**。
+   - **500 を返していた**: `blog` / `ranking` / `areas` の OGP (ランタイム `ƒ` レンダリング)。SNS・Twitter・Slack の
+     カードが全ページで表示されなかった。R2 非依存の `/opengraph-image` (DefaultOgp) すら 500 で、next/og
+     (Satori + resvg-wasm) のランタイムレンダリング自体が Worker で例外を投げる (font-loader の Google Fonts
+     ランタイム fetch も同経路)。
+   - **200 を返す**: `theme` OGP (`generateStaticParams` で**ビルド時 prerender**)。
+   - **是正 (コード変更実施済・要デプロイ)**: メタデータを静的 R2 URL に切替 (§5、`ogp-image.ts`)。blog は既存
+     `app/blog/<slug>/ogp/ogp.png` が R2 にあり即修正。ranking/areas は生成後にデプロイ。
+   - **実行順**: (1) `generate-ogp-images.yml` (ranking/areas を `apply=true`) で R2 に ogp.png 生成 →
+     (2) develop→main デプロイ → (3) 本番 og:image を実測 (`curl -s <URL> | grep 'og:image'` が R2 URL・200)。
+     blog は (1) 不要。ランタイム `opengraph-image.tsx` route は参照されなくなる (dead、削除は後日清掃)。
 1. **ranking リンクカード供給不完全**: `RankingThumbnail` は `ranking/prefecture/<key>/<year>/thumbnails/thumbnail-{light,dark}.png` を期待するが大半 404 で「No Image」表示。→ `generate-blog-thumbnails-cloud.ts` パターンの Satori 一括生成で R2 供給し解消 (担当: ranking-publisher + snapshot-exporter)。
 2. **note カバー 2 系統併存**: Remotion `NoteCover.tsx` (→ `sns/`) と `generate-note-covers.mjs` (→ `note/`) がドリフト。→ ギャラリーで目視比較し正系統を本 rules に確定、他方は deprecate 記載 (削除しない)。
 3. **OGP 専用なし route**: `/tag/<key>` `/survey/<key>` `/areas/<code>/cities/<city>` は親 `/` の `DefaultOgp` を流用 (現状その `DefaultOgp` 自体が 500)。→ 課題 0 の解消後、流入が増えたら専用 opengraph-image を検討 (判定は improvement-triage 経由)。
@@ -97,11 +106,30 @@ node .claude/scripts/ogp/build-image-gallery.mjs --audit
 
 ---
 
-## 5. 画像生成 AI の方針
+## 5. OGP 画像の生成・配信方式 (正典)
 
-- **テキスト・数値の重畳は Satori** (`next/og` ImageResponse) が担う。動的タイトル差し込みが要る OGP を静的画像化しない (記事数分の再生成コストが破綻)。
-- **背景素材の AI 生成** (Phase 2 予定): Cloudflare Workers AI SDXL (`apps/remotion/src/lib/ai-image.ts`、日次クォータ + sha256 キャッシュ) を手本に Gemini API (`gemini-2.5-flash-image` 系) を導入予定。背景は R2 `brand/ogp-backgrounds/<use>/<name>-{light,dark}.png`、Satori 側は `brand.ts` の `OGP_BACKGROUNDS` レジストリで参照 (ビルド時 fetch → data URI)。
-- 外部 AI (Midjourney 等) 用プロンプトは `image-prompt` skill の catalog 43 種 (`.claude/skills/image-prompt/reference/catalog.md`)。
+**OGP は事前生成した静的画像を R2 に保存し、配信時は静的 URL を参照する。** サイト全体で統一
+(note カバーも同思想)。ランタイム next/og ImageResponse は Cloudflare Worker で例外 (1101) を投げるため使わない。
+
+- **レンダリングは Node/CI で** Satori (`apps/web/scripts/lib/blog-thumbnail-render.ts`、ローカル npm フォント
+  `@expo-google-fonts/noto-sans-jp` を使うため Worker と違い健全)。OGP コンポーネント JSX ではなく共有 render lib
+  の `buildElement({title, subtitle, category, domainPath})` を使う (blog/ranking/areas で共通デザイン・drift 防止)。
+- **配信 URL 解決は `apps/web/src/lib/metadata/ogp-image.ts`** の `ogpImageUrl(ogpImageKeys.<type>(id))`。
+  各ページの `generateMetadata` が `openGraph.images` / `twitter.images` にこの静的 R2 URL を設定する。
+- **生成スクリプト**: blog=`generate-blog-thumbnails-cloud.ts` (既存、`ogp/ogp.png`) / ranking・areas=
+  `generate-ogp-images.ts --type <ranking|areas> --apply`。CI=`generate-ogp-images.yml` (手動 dispatch)。
+- **新規 ranking/area/blog を公開したら OGP も生成する** (`--apply`)。未生成だと og:image が 404 になる。
+- **note カバー**: 現状 R2 非archive・公開時に note.com へ直接アップロード (§1)。統一方針としては同様に
+  事前生成→R2 保存が望ましい。2 系統 (Remotion / SVG→PNG) の正系統確定は課題 (§3-2)。
+- **theme のみ例外**: `generateStaticParams` でビルド時 prerender され稼働するため、当面ランタイム route を残す
+  (静的 R2 生成に移すかは後日判断)。**home/category は既存の静的 `public/og-image.jpg`** を使う。
+
+### 画像生成 AI (背景素材・Phase 2 予定)
+- テキスト・数値の重畳は上記 Satori が担う。動的タイトル差し込みは静的 PNG を事前生成することで実現する。
+- 背景素材の AI 生成: Cloudflare Workers AI SDXL (`apps/remotion/src/lib/ai-image.ts`、日次クォータ + sha256
+  キャッシュ) を手本に Gemini API (`gemini-2.5-flash-image` 系) を導入予定。背景は R2
+  `brand/ogp-backgrounds/<use>/<name>-{light,dark}.png`。
+- 外部 AI (Midjourney 等) 用プロンプトは `image-prompt` skill の catalog 43 種。
 
 ---
 

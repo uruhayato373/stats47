@@ -20,6 +20,8 @@ export interface OgpData {
   subtitle?: string | null;
   date?: string;
   category?: string;
+  /** フッターに表示するドメインパス (既定 "stats47.jp/blog")。ranking/areas 等で上書きする。 */
+  domainPath?: string;
 }
 
 export type SatoriFont = {
@@ -264,7 +266,7 @@ export function buildElement(data: OgpData, dark: boolean) {
               letterSpacing: 2,
             },
           },
-          "stats47.jp/blog",
+          data.domainPath ?? "stats47.jp/blog",
         ),
       ),
     ),
