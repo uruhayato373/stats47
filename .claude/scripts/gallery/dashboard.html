@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>プロジェクト現況 — stats47</title>
+<style>
+  :root { --bg:#0f172a; --card:#1e293b; --border:#334155; --text:#e2e8f0; --muted:#94a3b8; --accent:#38bdf8; --green:#4ade80; --amber:#fbbf24; --red:#f87171; --teal:#2dd4bf; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:-apple-system,"Hiragino Kaku Gothic ProN",system-ui,sans-serif; background:var(--bg); color:var(--text); }
+  main { padding:24px 20px; max-width:1200px; margin:0 auto; }
+  h1 { font-size:20px; margin:0; }
+  h2 { font-size:16px; margin:30px 0 12px; border-bottom:1px solid var(--border); padding-bottom:6px; }
+  .lead { color:var(--muted); font-size:12px; margin:4px 0 16px; }
+  .err { color:#fca5a5; font-size:13px; }
+  code { background:#0b1220; padding:1px 6px; border-radius:4px; font-size:12px; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(170px,1fr)); gap:10px; }
+  .grid-wide { display:grid; grid-template-columns:repeat(auto-fill,minmax(340px,1fr)); gap:12px; }
+  .stat { background:var(--card); border:1px solid var(--border); border-radius:8px; padding:12px 14px; }
+  .stat .n { font-size:22px; font-weight:700; }
+  .stat .l { font-size:11px; color:var(--muted); margin-top:2px; }
+  .stat .sub { font-size:11px; color:var(--muted); margin-top:4px; }
+  .stat svg { display:block; margin-top:6px; }
+  .up { color:var(--green); } .down { color:var(--red); }
+  .card { background:var(--card); border:1px solid var(--border); border-radius:10px; padding:14px 16px; }
+  .card h3 { font-size:13px; margin:0 0 8px; }
+  .bar { height:8px; background:#0b1220; border-radius:4px; overflow:hidden; display:flex; margin:6px 0 8px; }
+  .bar i { display:block; height:100%; }
+  table { width:100%; border-collapse:collapse; font-size:12px; }
+  th { text-align:left; color:var(--muted); font-weight:600; padding:4px 6px; border-bottom:1px solid var(--border); white-space:nowrap; }
+  td { padding:4px 6px; border-bottom:1px solid #24324a; vertical-align:top; }
+  .badge { display:inline-block; font-size:10px; padding:1px 7px; border-radius:9px; border:1px solid; white-space:nowrap; }
+  .b-green { color:var(--green); border-color:var(--green); }
+  .b-amber { color:var(--amber); border-color:var(--amber); }
+  .b-red { color:var(--red); border-color:var(--red); }
+  .b-blue { color:var(--accent); border-color:var(--accent); }
+  .b-teal { color:var(--teal); border-color:var(--teal); }
+  .b-mut { color:var(--muted); border-color:var(--border); }
+  .trunc { max-width:520px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  select { background:#0b1220; color:var(--text); border:1px solid var(--border); border-radius:6px; padding:4px 8px; font-size:12px; }
+  .filters { display:flex; gap:8px; margin:0 0 10px; flex-wrap:wrap; align-items:center; }
+  .statement { background:linear-gradient(135deg,#0b1220,#1e293b); border:1px solid var(--accent); border-radius:10px; padding:18px 20px; font-size:17px; font-weight:700; }
+  .statement small { display:block; font-weight:400; font-size:11px; color:var(--muted); margin-top:6px; }
+  .anchor-nav { display:flex; gap:6px; flex-wrap:wrap; margin:14px 0 0; }
+  .anchor-nav a { font-size:12px; color:#cbd5e1; text-decoration:none; border:1px solid var(--border); border-radius:6px; padding:3px 10px; }
+  .anchor-nav a:hover { border-color:var(--accent); }
+  .chips { display:flex; gap:6px; flex-wrap:wrap; margin-top:6px; }
+  .fresh { font-size:10px; color:var(--muted); }
+</style>
+</head>
+<body>
+<nav style="display:flex;gap:6px;align-items:center;flex-wrap:wrap;background:#0b1220;border-bottom:1px solid #334155;padding:8px 14px">
+  <span style="color:#38bdf8;font-weight:700;font-size:13px;margin-right:10px">🗂 メディアコンソール</span>
+  <a href="/" style="text-decoration:none;color:#cbd5e1;font-size:13px;padding:4px 12px;border-radius:6px;border:1px solid #334155">ホーム</a>
+  <a href="/sns" style="text-decoration:none;color:#cbd5e1;font-size:13px;padding:4px 12px;border-radius:6px;border:1px solid #334155">SNS投稿</a>
+  <a href="/assets" style="text-decoration:none;color:#cbd5e1;font-size:13px;padding:4px 12px;border-radius:6px;border:1px solid #334155">画像資産</a>
+  <a href="/svg" style="text-decoration:none;color:#cbd5e1;font-size:13px;padding:4px 12px;border-radius:6px;border:1px solid #334155">SVGカタログ</a>
+  <a href="/dashboard" style="text-decoration:none;color:#0f172a;background:#38bdf8;font-weight:600;font-size:13px;padding:4px 12px;border-radius:6px;border:1px solid #38bdf8">現況</a>
+</nav>
+<main>
+  <h1>プロジェクト現況</h1>
+  <p class="lead" id="meta">読込中…</p>
+  <div class="anchor-nav">
+    <a href="#metrics">メトリクス</a><a href="#queues">進捗キュー</a><a href="#todo">TODO</a><a href="#strategy">戦略</a>
+  </div>
+
+  <h2 id="metrics">メトリクス (週次)</h2>
+  <div class="grid" id="metricCards"><span class="lead">読込中…</span></div>
+
+  <h2 id="queues">進捗キュー</h2>
+  <div class="grid-wide" id="queueCards"></div>
+
+  <h2 id="todo">TODO — 改善バックログ</h2>
+  <p class="lead">真実源: <code>docs/02_実装計画/03_改善バックログ.md</code> (このテーブルは読み取り専用ミラー。編集は md 側で)</p>
+  <div class="filters">
+    <select id="fTier"><option value="">Tier: 全て</option></select>
+    <select id="fStatus"><option value="">Status: 全て</option></select>
+    <select id="fMetric"><option value="">Metric: 全て</option></select>
+    <span class="lead" id="fCount"></span>
+  </div>
+  <div style="overflow-x:auto"><table id="backlogTable"><thead><tr><th>Tier</th><th>ID</th><th>タイトル</th><th>Status</th><th>Due</th><th>Metric</th></tr></thead><tbody></tbody></table></div>
+
+  <h2 id="strategy">戦略 (STP)</h2>
+  <div id="strategyBox"></div>
+</main>
+<script>
+const API_BASE = (location.protocol === "http:" || location.protocol === "https:") ? location.origin : "http://127.0.0.1:4747";
+const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const num = (n) => (n ?? 0).toLocaleString("ja-JP");
+
+function spark(values, { w = 140, h = 30, color = "#38bdf8" } = {}) {
+  const v = values.filter((x) => typeof x === "number");
+  if (v.length < 2) return "";
+  const min = Math.min(...v), max = Math.max(...v), span = max - min || 1;
+  const pts = v.map((y, i) => `${(i / (v.length - 1)) * w},${h - 2 - ((y - min) / span) * (h - 4)}`).join(" ");
+  return `<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}"><polyline points="${pts}" fill="none" stroke="${color}" stroke-width="1.5"/></svg>`;
+}
+function wow(rows, key) {
+  if (!rows || rows.length < 2) return "";
+  const a = rows[rows.length - 2][key], b = rows[rows.length - 1][key];
+  if (typeof a !== "number" || typeof b !== "number" || a === 0) return "";
+  const pct = ((b - a) / a) * 100;
+  const cls = pct >= 0 ? "up" : "down";
+  return `<span class="${cls}">${pct >= 0 ? "▲" : "▼"} ${Math.abs(pct).toFixed(1)}%</span>`;
+}
+function statusBadge(s) {
+  const m = {
+    "effect/full": "b-green", "effect/partial": "b-teal", "effect/none": "b-red", "effect/adverse": "b-red",
+    "effect/pending": "b-blue", "effect/n-a": "b-mut", pending: "b-amber", done: "b-green", "in-progress": "b-blue", proposed: "b-amber",
+  };
+  return `<span class="badge ${m[s] || "b-mut"}">${esc(s)}</span>`;
+}
+function overdue(due) {
+  const m = String(due || "").match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  if (!m) return false;
+  return new Date(due) < new Date(new Date().toISOString().slice(0, 10));
+}
+const statCard = (n, l, extra = "") => `<div class="stat"><div class="n">${n}</div><div class="l">${esc(l)}</div>${extra}</div>`;
+
+function renderMetrics(d) {
+  const el = document.getElementById("metricCards");
+  const g = d.metrics?.gsc, a = d.metrics?.ga4, ad = d.metrics?.adsense;
+  const cards = [];
+  if (Array.isArray(g) && g.length) {
+    const last = g[g.length - 1];
+    cards.push(statCard(num(last.clicks), `GSC clicks/週 (${last.week}) ${wow(g, "clicks") ? "" : ""}`, `<div class="sub">${wow(g, "clicks")}</div>${spark(g.map((r) => r.clicks))}`));
+    cards.push(statCard(num(last.impressions), "GSC impressions/週", `<div class="sub">${wow(g, "impressions")}</div>${spark(g.map((r) => r.impressions))}`));
+    cards.push(statCard((last.ctr * 100).toFixed(2) + "%", "GSC CTR", spark(g.map((r) => r.ctr), { color: "#4ade80" })));
+    cards.push(statCard(last.position, "GSC 平均掲載順位", spark(g.map((r) => r.position), { color: "#fbbf24" })));
+  } else cards.push(statCard("—", "GSC (取得失敗)"));
+  if (Array.isArray(a) && a.length) {
+    const last = a[a.length - 1];
+    cards.push(statCard(num(last.active_users), `GA4 users/週 (${last.week})`, `<div class="sub">${wow(a, "active_users")}</div>${spark(a.map((r) => r.active_users))}`));
+    cards.push(statCard(num(last.pageviews), "GA4 PV/週", `<div class="sub">${wow(a, "pageviews")}</div>${spark(a.map((r) => r.pageviews))}`));
+  }
+  if (Array.isArray(ad) && ad.length) {
+    const last = ad[ad.length - 1];
+    cards.push(statCard("¥" + num(last.earnings), `AdSense/週 (${last.week})`, `<div class="sub">RPM ¥${last.rpm}</div>${spark(ad.map((r) => r.earnings), { color: "#4ade80" })}`));
+  }
+  if (d.psi && !d.psi.error) cards.push(statCard(`${d.psi.errors} / ${d.psi.warnings}`, `PSI 違反 error/warning (${d.psi.date})`));
+  if (d.coverage && !d.coverage.error) cards.push(statCard(num(d.coverage.pendingActionable), `GSC カバレッジ要対応 (追跡 ${num(d.coverage.tracked)}・${d.coverage.week})`));
+  el.innerHTML = cards.join("");
+}
+
+function progressBar(parts) {
+  // parts: [{n, color}]
+  const total = parts.reduce((s, p) => s + p.n, 0) || 1;
+  return `<div class="bar">${parts.map((p) => `<i style="width:${(p.n / total) * 100}%;background:${p.color}"></i>`).join("")}</div>`;
+}
+
+function renderQueues(d) {
+  const el = document.getElementById("queueCards");
+  const cards = [];
+  const bq = d.blogQueue;
+  if (bq && !bq.error) {
+    const s = bq.summary;
+    cards.push(`<div class="card"><h3>📝 ブログ品質是正キュー <span class="fresh">(${esc(bq.gscWeek)}・${esc((bq.generatedAt || "").slice(0, 10))})</span></h3>
+      ${progressBar([{ n: s.done, color: "var(--green)" }, { n: s.inProgress, color: "var(--accent)" }, { n: s.pending, color: "#475569" }])}
+      <div class="sub" style="font-size:12px;color:var(--muted)">done ${s.done} / in-progress ${s.inProgress} / pending ${s.pending} (must-fix 未着手 ${s.mustFixPending})</div>
+      <table style="margin-top:8px"><thead><tr><th>must-fix top</th><th>blocker</th><th>imp</th></tr></thead><tbody>
+      ${(bq.topMustFix || []).slice(0, 5).map((e) => `<tr><td class="trunc" style="max-width:220px">${esc(e.slug)}</td><td>${e.blockers}</td><td>${num(e.impressions)}</td></tr>`).join("")}
+      </tbody></table>
+      <div class="fresh" style="margin-top:6px">払い出し: <code>build-remediation-queue.mjs --next N</code> → <code>/brushup-blog --target queue</code></div></div>`);
+  }
+  const aq = d.aiContent;
+  if (aq && !aq.error) {
+    const s = aq.summary;
+    cards.push(`<div class="card"><h3>🤖 ランキング ai-content <span class="fresh">(${esc((aq.generatedAt || "").slice(0, 10))})</span></h3>
+      ${progressBar([{ n: s.done, color: "var(--green)" }, { n: s.needsRegen, color: "#475569" }])}
+      <div class="sub" style="font-size:12px;color:var(--muted)">done ${s.done} / needs-regen ${num(s.needsRegen)} (incomplete ${num(s.needsByReason?.incomplete)} / missing ${s.needsByReason?.missing} / blocker ${s.needsByReason?.blocker})・opus 査読 ${s.opusReviewTier}</div>
+      <table style="margin-top:8px"><thead><tr><th>needs-regen top (imp順)</th><th>imp</th><th>tier</th></tr></thead><tbody>
+      ${(aq.topNeeds || []).slice(0, 5).map((e) => `<tr><td class="trunc" style="max-width:220px">${esc(e.rankingKey)}</td><td>${num(e.impressions)}</td><td>${esc(e.reviewTier || "-")}</td></tr>`).join("")}
+      </tbody></table>
+      <div class="fresh" style="margin-top:6px">量産: ローカル <code>npm run ai:gen -- --model claude-haiku</code> (セッション外)</div></div>`);
+  }
+  const tq = d.topicQueue;
+  if (tq && !tq.error) {
+    const s = tq.summary;
+    const arch = Object.entries(s.byArchetype || {}).map(([k, v]) => `<span class="badge b-blue">${k}: ${v}</span>`).join(" ");
+    cards.push(`<div class="card"><h3>💡 記事ネタキュー <span class="fresh">(${esc((tq.generatedAt || "").slice(0, 10))})</span></h3>
+      <div class="sub" style="font-size:12px;color:var(--muted)">pending ${s.pending} / in-progress ${s.inProgress} (must-write ${s.mustWritePending})</div>
+      <div class="chips">${arch}</div>
+      <table style="margin-top:8px"><thead><tr><th>top</th><th>型</th></tr></thead><tbody>
+      ${(tq.topPending || []).slice(0, 5).map((e) => `<tr><td class="trunc" style="max-width:260px">${esc(e.label)}</td><td>${esc(e.archetype)}</td></tr>`).join("")}
+      </tbody></table></div>`);
+  }
+  const sns = d.sns;
+  if (sns && !sns.error) {
+    const plat = Object.entries(sns.byPlatform || {}).map(([k, v]) => `<span class="badge b-mut">${k}: ${v}</span>`).join(" ");
+    cards.push(`<div class="card"><h3>📮 SNS 投稿台帳</h3>
+      <div class="sub" style="font-size:12px;color:var(--muted)">posted ${sns.posted} / scheduled ${sns.scheduled} / draft ${sns.draft}・最終投稿 ${esc((sns.lastPosted || "—").slice(0, 10))}</div>
+      <div class="chips">${plat}</div>
+      ${sns.scheduled + sns.draft === 0 ? '<div class="sub" style="color:var(--amber);font-size:12px;margin-top:6px">⚠ 予約/draft が 0 — X 量産 (/post-x-batch) 未稼働</div>' : ""}</div>`);
+  }
+  const wp = d.winningPatterns;
+  if (wp && !wp.error) {
+    cards.push(`<div class="card"><h3>🏆 ブログ勝ちパターン <span class="fresh">(${esc(wp.gscWeek)})</span></h3>
+      <div class="sub" style="font-size:12px;color:var(--muted)">n=${wp.sample?.evaluated} (winner ${wp.sample?.winners} / loser ${wp.sample?.losers})<br>
+      winner CTR 中央値 <b>${((wp.winner?.medianCtr ?? 0) * 100).toFixed(2)}%</b> (pos ${wp.winner?.medianPosition}) vs loser ${((wp.loser?.medianCtr ?? 0) * 100).toFixed(2)}%</div></div>`);
+  }
+  const ex = d.experiments;
+  if (ex && !ex.error) {
+    cards.push(`<div class="card"><h3>🧪 実験 (PDCA)</h3>
+      <table><tbody>${(ex.experiments || []).map((e) => `<tr><td style="white-space:nowrap">${esc(e.id)}</td><td class="trunc" style="max-width:240px">${esc(e.title)}</td><td>${statusBadge(e.status)}</td></tr>`).join("")}</tbody></table></div>`);
+  }
+  el.innerHTML = cards.join("") || '<span class="err">進捗データの取得に失敗</span>';
+}
+
+let backlogRows = [];
+function renderBacklog() {
+  const tb = document.querySelector("#backlogTable tbody");
+  const ft = document.getElementById("fTier").value, fs = document.getElementById("fStatus").value, fm = document.getElementById("fMetric").value;
+  const rows = backlogRows.filter((r) => (!ft || r.tier === ft) && (!fs || r.status === fs) && (!fm || r.metric === fm));
+  document.getElementById("fCount").textContent = `${rows.length} / ${backlogRows.length} 件`;
+  tb.innerHTML = rows.map((r) => `<tr>
+    <td style="white-space:nowrap">${esc(r.tier.replace("Tier ", "T"))}</td>
+    <td style="white-space:nowrap"><b>${esc(r.id)}</b></td>
+    <td class="trunc" title="${esc(r.title)}">${esc(r.title)}</td>
+    <td>${statusBadge(r.status)}</td>
+    <td style="white-space:nowrap${overdue(r.due) && !r.status.startsWith("effect/f") ? ";color:var(--red)" : ""}">${esc(r.due)}${overdue(r.due) ? " ⚠" : ""}</td>
+    <td>${esc(r.metric)}</td></tr>`).join("");
+}
+function initBacklog(d) {
+  const b = d.backlog;
+  if (!b || b.error) { document.querySelector("#backlogTable tbody").innerHTML = `<tr><td colspan="6" class="err">取得失敗: ${esc(b?.error)}</td></tr>`; return; }
+  backlogRows = b.rows || [];
+  const fill = (id, values) => {
+    const sel = document.getElementById(id);
+    [...new Set(values)].sort().forEach((v) => { const o = document.createElement("option"); o.value = o.textContent = v; sel.appendChild(o); });
+    sel.addEventListener("change", renderBacklog);
+  };
+  fill("fTier", backlogRows.map((r) => r.tier));
+  fill("fStatus", backlogRows.map((r) => r.status));
+  fill("fMetric", backlogRows.map((r) => r.metric).filter(Boolean));
+  renderBacklog();
+}
+
+function renderStrategy(d) {
+  const el = document.getElementById("strategyBox");
+  const s = d.strategy;
+  if (!s || s.error) { el.innerHTML = `<span class="err">取得失敗: ${esc(s?.error)}</span>`; return; }
+  const seg = (s.segments || []).map((x) => `<tr><td style="white-space:nowrap">${esc(x.seg)}</td><td style="white-space:nowrap">${esc(x.verdict)}</td><td>${esc(x.role)}</td></tr>`).join("");
+  const tg = (s.teigen || []).map((x) => `<tr><td>${esc(x.n)}</td><td>${esc(x.title)}</td><td>${esc(x.state)}</td></tr>`).join("");
+  el.innerHTML = `
+    <div class="statement">「${esc(s.statement)}」<small>ポジショニング・ステートメント — 正典: docs/00_プロジェクト管理/03_マーケティング戦略.md</small></div>
+    <div class="grid-wide" style="margin-top:12px">
+      <div class="card"><h3>ターゲティング判定 (STP §4)</h3><table><thead><tr><th>セグメント</th><th>判定</th><th>役割</th></tr></thead><tbody>${seg}</tbody></table></div>
+      <div class="card"><h3>STP 提言の反映状況 (§6)</h3><table><thead><tr><th>#</th><th>提言</th><th>状況</th></tr></thead><tbody>${tg}</tbody></table>
+      <div class="fresh" style="margin-top:8px">SSOT: ${(s.sources || []).map((x) => `<code>${esc(x)}</code>`).join(" ")}</div></div>
+    </div>`;
+}
+
+async function load() {
+  try {
+    const r = await fetch(API_BASE + "/api/dashboard/summary");
+    const d = await r.json();
+    if (!r.ok) throw new Error(d.error || r.status);
+    document.getElementById("meta").innerHTML =
+      `state/md ライブ読みの読み取り専用ミラー (60秒キャッシュ)。取得: ${esc(d.generatedAt.replace("T", " ").slice(0, 19))} — 再読込で更新`;
+    renderMetrics(d);
+    renderQueues(d);
+    initBacklog(d);
+    renderStrategy(d);
+  } catch (e) {
+    document.getElementById("meta").innerHTML = `<span class="err">取得失敗: ${esc(e.message)}。<code>npm run gallery</code> を起動してください</span>`;
+  }
+}
+load();
+</script>
+</body>
+</html>

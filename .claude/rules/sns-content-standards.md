@@ -318,8 +318,10 @@ https://stats47.jp/ranking/taxable-income-per-capita
 **ローカル統合メディアコンソール** (`npm run gallery` → http://127.0.0.1:4747/) で行える
 (skill `.claude/skills/sns/sns-gallery/SKILL.md`、server `.claude/scripts/gallery/server.mjs`)。
 `npm run sns:gallery` は後方互換 alias。SNS 投稿は `/sns` セクション、OGP/リンクカード/note カバー・
-記事内画像/動画 master は `/assets`、ブログ SVG カタログは `/svg` で横断閲覧する
-(画像資産の列挙 collector は CI 静的ギャラリー `build-image-gallery.mjs` と `.claude/scripts/lib/gallery-collectors.mjs` を共用)。
+記事内画像/動画 master は `/assets`、ブログ SVG カタログは `/svg`、**プロジェクト現況 (メトリクス・進捗キュー・
+改善バックログ TODO・STP 戦略) は `/dashboard`** で横断閲覧する
+(画像資産の列挙 collector は CI 静的ギャラリー `build-image-gallery.mjs` と `.claude/scripts/lib/gallery-collectors.mjs` を共用。
+現況 collector は `.claude/scripts/gallery/dashboard-data.mjs`、state/md を読み取り専用ミラーでライブ読み)。
 
 - **ギャラリー経由の投稿も台帳規約は同一**: posts.json への書込は `sns-posts-store.cjs` 経由のみ
   (server も同経路)。§1 の頻度リミットは残枠バッジ + ガードで enforce される

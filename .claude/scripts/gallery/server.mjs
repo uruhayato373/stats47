@@ -11,6 +11,7 @@
  *   /sns     SNS 投稿ギャラリー (X/IG/YouTube・投稿/予約/caption/メトリクス)
  *   /assets  画像資産 (OGP / リンクカード / note カバー / note 記事内画像 / 動画 master)
  *   /svg     ブログ SVG カタログ (6 カタログ + table + unknown 分類)
+ *   /dashboard  プロジェクト現況 (メトリクス/進捗キュー/改善バックログTODO/戦略 — 読み取り専用ミラー)
  *
  * 設計 (正典: .claude/rules/sns-content-standards.md §5.5 / ogp-image-standards.md):
  * - 投稿台帳 SSOT は .claude/state/sns/posts.json。書込は sns-posts-store.cjs 経由のみ
@@ -43,6 +44,7 @@ import {
   pMap,
   probe,
 } from "../lib/gallery-collectors.mjs";
+import { collectDashboard } from "./dashboard-data.mjs";
 import { CATALOGS, classify, inspectSvg } from "../lib/svg-classify.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -521,6 +523,15 @@ async function svgCatalog({ limit = 30, all = false } = {}) {
   return data;
 }
 
+// ─── プロジェクト現況ダッシュボード (state/md ライブ読み・60 秒 TTL) ─────
+let _dashCache = null; // { at, data }
+function dashboardSummary() {
+  if (_dashCache && Date.now() - _dashCache.at < 60 * 1000) return _dashCache.data;
+  const data = collectDashboard(PROJECT_ROOT);
+  _dashCache = { at: Date.now(), data };
+  return data;
+}
+
 // ─── 静的ページ配信 ──────────────────────────────────
 function servePage(res, file) {
   const fp = path.join(UI_DIR, file);
@@ -544,6 +555,7 @@ const server = http.createServer(async (req, res) => {
     if (req.method === "GET" && p === "/sns") return servePage(res, "sns.html");
     if (req.method === "GET" && p === "/assets") return servePage(res, "assets.html");
     if (req.method === "GET" && p === "/svg") return servePage(res, "svg.html");
+    if (req.method === "GET" && p === "/dashboard") return servePage(res, "dashboard.html");
     if (req.method === "GET" && p.startsWith("/media/")) {
       return serveMedia(req, res, decodeURIComponent(p.slice("/media/".length)));
     }
@@ -559,6 +571,7 @@ const server = http.createServer(async (req, res) => {
       return json(res, 200, { count: posts.length, posts: posts.map(decorate) });
     }
     if (req.method === "GET" && p === "/api/inventory") return json(res, 200, buildInventory());
+    if (req.method === "GET" && p === "/api/dashboard/summary") return json(res, 200, dashboardSummary());
     if (req.method === "GET" && p === "/api/limits") return json(res, 200, { limits: computeLimits(), galleryState: loadGalleryState() });
     if (req.method === "GET" && p === "/api/ig-consistency") return json(res, 200, igConsistency());
     if (req.method === "GET" && p === "/api/jobs") {
