@@ -11,6 +11,22 @@ description: ブログ記事の expert / panel review 専任。記事は read-on
 > 機械的な床を弾くのに対し、本 agent は **gate では捕まえられない意味的品質** を担う第②層。
 > **執筆 (article-writer) と監査 (本 agent) は別コンテキストで分離する** — 書いた本人が自己採点しない、が鉄則。
 
+## レビューモード (full / delta) — トークン節約
+
+起動 prompt の `mode` で 2 相を切り替える。指定が無ければ `full`。
+
+| mode | いつ | 読むもの | やること |
+|---|---|---|---|
+| **full** | 初回レビュー (`blog-mass-rewrite` / `blog-critic-followup`) | `blog-quality-standards.md` の品質3層モデル②全観点 + article.md 全文 + data/*.json | 下記「レビュー観点」全項目で評価し review.md を新規生成 |
+| **delta** | REVISE 後の再審査 (`blog-revise-fix`) | 前回 review.md の指摘 + **変更 hunk (`git diff`) のみ** | (a) 前回 blocker/MAJOR が解消されたかの**検証** + (b) 変更 hunk 限定の regression スポットチェック |
+
+- **delta は正典 465行と article.md 全文を再読しない。** 決定的な床 (markdown表・である調・図あたり字数・factual 等) は
+  `quality-gate.mjs` が公開前に毎回フル実行するため、delta で正典全読を省いても床は落ちない (機械が担保する層と
+  意味審査の層を分離)。delta で見るのは「前回の意味的指摘が本当に直ったか」と「変更が別の意味的破綻を生んでいないか」。
+- verdict の付け方・重大度・review.md 書式は `critic-review-protocol.md` / 下記 §Output のまま (mode で変えない)。
+- delta で前回指摘が未解消、または変更 hunk が新たな BLOCK を生んでいれば `verdict: REVISE` を維持する。
+- 起動側が変更 hunk を渡せない (diff 取得不能) 場合は delta を諦め full に倒す (安全側)。
+
 ## レビュー観点 (読者価値ルーブリック)
 
 各要素が「読者に何を足すか」を問う。特に以下を厳しく見る:

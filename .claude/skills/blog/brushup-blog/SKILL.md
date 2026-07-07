@@ -80,6 +80,15 @@ node .claude/scripts/blog/build-remediation-queue.mjs --next 5   # pending 上�
 - **全自動ではなく人手ゲート** (critic PASS 必須)。auto-brushup の 13% FAIL リスクを避け、人がバッチ単位で確認しながら進める。
 - **★大量是正は 20-30 本/バッチに分割する** (2026-06-13 実証): 173 本を 1 Workflow (writer→critic→revise→critic) で全自動投入したら **14M token + session limit 到達**で critic 段が大量失敗した。writer は quality-gate 反復+SVG生成+全文書き換えで 1 本 ~10万 token と重く、critic が後追いで枠を食い潰す。`--next` の top-N を小バッチで回し、バッチ間で結果確認する。詳細: memory `project_blog_mass_rewrite_lessons`。
 
+### model 傾斜と delta 再審査 (トークン節約・2026-07-07 / TOKEN-CONTENT-01)
+
+critic 往復のコストを下げる 2 つの機構 (正典 `docs/02_実装計画/01_収益化マスタープラン.md` §7「Opus=blog 意味レビュー」):
+
+1. **model 傾斜**: `build-remediation-queue.mjs` が各 entry に `reviewTier` を付与する (GSC impressions 上位 30 = `opus` / 他 = `sonnet`。ai-content の `build-ai-content-queue.mjs` と同規則)。`blog-mass-rewrite.js` は tier2 (`reviewTier==='opus'`) の初回 critic を opus で起動し、他は既定 (sonnet)。author (rewrite) は常に sonnet 固定。総コストを floor に保ったまま流入上位の審査品質だけ引き上げる。
+2. **delta 再審査**: REVISE 後の再レビュー (`blog-revise-fix.js`) は blog-critic を **mode: delta** で起動する — 前回 review.md の指摘 + 変更 hunk のみを見て、正典 465行と記事全文を再読しない (機械的な床は `quality-gate.mjs` が公開前に毎回フル実行するため落ちない)。delta は読む量が少ないため opus で起動しても安価。
+
+> 効果は brushup バッチの token/記事を Workflow journal で実測し baseline (~217K/記事) と比較して判定する (TOKEN-CONTENT-01)。
+
 ---
 
 ## --target priority: ブログ改善優先度キュー生成 (legacy → `--target queue` に置換)

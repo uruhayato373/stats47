@@ -316,11 +316,23 @@ for (const r of raw) {
   });
 }
 
+// 2段 critic の tier 割り当て (ai-content build-ai-content-queue.mjs と同規則):
+// GSC 流入 (impressions) 上位 N 件を opus critic (tier2)、残りは sonnet (tier1)。author は常に sonnet。
+// workflow (blog-mass-rewrite.js) が entry.reviewTier を読んで critic の model を傾斜する。
+// 設計正典: docs/02_実装計画/01_収益化マスタープラン.md §7 / docs/04_レビュー/2026-07-03-claude-code-setup-audit.md §6
+const OPUS_REVIEW_TOP_N = 30;
+[...queue]
+  .sort((a, b) => (b.gsc?.impressions || 0) - (a.gsc?.impressions || 0))
+  .forEach((e, i) => {
+    e.reviewTier = i < OPUS_REVIEW_TOP_N ? "opus" : "sonnet";
+  });
+
 const result = {
   generatedAt: new Date().toISOString(),
   gscWeek: week || null,
   auditGeneratedAt: audit.generatedAt || null,
   scoring: "combined = 0.6*norm(GSC expectedLift) + 0.4*norm(blockers*3+warnings); lane: must-fix > opportunity",
+  reviewTier: `GSC impressions 上位 ${OPUS_REVIEW_TOP_N} 件 = opus critic (tier2), 他 = sonnet (tier1)`,
   summary: summarize(queue),
   queue,
 };

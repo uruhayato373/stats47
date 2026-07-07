@@ -14,7 +14,15 @@ if (typeof raw === 'string') {
 }
 if (!Array.isArray(raw)) raw = []
 const slugs = raw.filter((s) => typeof s === 'string' && s)
-log(`REVISE 修正 ${slugs.length} 件 (指摘点修正 → 再 critic)`)
+log(`REVISE 修正 ${slugs.length} 件 (指摘点修正 → 再 critic delta)`)
+
+// 行動契約 (凝縮版)。正典 .claude/rules/agent-output-contract.md「行動契約 (凝縮版)」。
+// subagent には output style が効かないため prompt 冒頭で振る舞いを固定する (前置き/過剰計画/捏造の抑制)。
+const BEHAVIOR = `BEHAVIOR CONTRACT (命令):
+- 即行動: 情報が揃ったら着手。前置き・採らない選択肢の陳列をしない。
+- 進捗の実証: 各主張をツール結果と突合。未検証は未検証と明言。捏造は最悪の失敗。
+- スコープ規律: 指摘点に絞る。要求以上のリライト・機能追加をしない。動く最小をやる。
+- 境界: 数値・順位は data/*.json と突合 (捏造禁止)。frontmatter published は触らない。commit/push しない。`
 
 const FIX_SCHEMA = {
   type: 'object',
@@ -39,7 +47,9 @@ const CRITIC_SCHEMA = {
 }
 
 function fixPrompt(slug) {
-  return `OUTPUT は StructuredOutput tool で返す (人間向けテキスト不要)。
+  return `${BEHAVIOR}
+
+OUTPUT は StructuredOutput tool で返す (人間向けテキスト不要)。
 
 あなたは article-writer。**既に rewrite 済みだが blog-critic が REVISE 判定**した記事を、指摘点に絞って修正する。
 記事: docs/21_ブログ記事原稿/${slug}/article.md
@@ -62,15 +72,24 @@ critic レビュー: docs/21_ブログ記事原稿/${slug}/review.md ← **ま�
 }
 
 function criticPrompt(slug) {
-  return `OUTPUT は StructuredOutput tool で返す。
+  return `${BEHAVIOR}
 
-あなたは blog-critic。**REVISE 後に修正された**記事を再レビューする。
-記事: docs/21_ブログ記事原稿/${slug}/article.md / 既存レビュー: docs/21_ブログ記事原稿/${slug}/review.md
+OUTPUT は StructuredOutput tool で返す。
 
-1. .claude/rules/blog-quality-standards.md の品質3層モデル② で再評価。前回の REVISE 指摘が解消されたか必ず確認。
-   数値・順位が data/*.json と一致するか、欠落図が追加されたか、SVG 系譜が揃ったかを点検。
-2. review.md を上書き更新 (frontmatter verdict + 指摘 + 判定理由)。
-3. StructuredOutput で verdict(PASS/REVISE) / blockers / summary(≤30字) を返す。指摘が解消され読者価値が十分なら PASS。`
+あなたは blog-critic。**REVISE 後に修正された**記事を **mode: delta** で再レビューする (トークン節約)。
+記事: docs/21_ブログ記事原稿/${slug}/article.md / 前回レビュー: docs/21_ブログ記事原稿/${slug}/review.md
+
+## delta モードの手順 (正典 465行と記事全文の再読はしない)
+1. **前回 review.md を読み、blocker/MAJOR 指摘を抽出する。これがあなたのチェックリスト**
+   (blog-quality-standards.md の全観点を再評価しない。決定的な床は quality-gate.mjs が公開前に毎回フル実行するため
+   delta では省いてよい。あなたが見るのは「前回の意味的指摘が直ったか」と「変更が新たな意味破綻を生んでいないか」)。
+2. **変更箇所を特定**: git diff docs/21_ブログ記事原稿/${slug}/article.md を試す。diff が取れなければ
+   前回指摘が指す該当セクションだけを読む (記事全文は読まない)。
+3. **検証**: 前回の各 blocker/MAJOR が解消されたか + 変更 hunk が別の BLOCK を生んでいないか (数値・順位が
+   data/*.json と一致するか、欠落図が追加されたか、SVG 系譜が揃ったか) をスポットチェック。
+4. review.md を上書き更新 (frontmatter verdict + 指摘 + 判定理由。書式は critic-review-protocol.md 準拠)。
+5. StructuredOutput で verdict(PASS/REVISE) / blockers / summary(≤30字) を返す。
+   前回指摘が解消され新たな BLOCK が無く読者価値が十分なら PASS、未解消 or 新規 BLOCK があれば REVISE。`
 }
 
 const results = await pipeline(
@@ -86,11 +105,14 @@ const results = await pipeline(
     if (!fix) return { slug, gatePassed: false, critic: null, error: 'fix-null' }
     const rb = typeof fix.remainingBlockers === 'number' ? fix.remainingBlockers : 99
     if (rb > 1) return { slug, gatePassed: false, remainingBlockers: rb, critic: null }
+    // model 傾斜: REVISE 再審査 (=2回目以降の難所) は opus critic で判定精度を上げる。
+    // delta モードで読む量が少ないため opus でも安価 (正典 docs/01 §7「Opus=blog 意味レビュー」)。
     return agent(criticPrompt(slug), {
       label: `recr:${slug}`,
       phase: 'ReCritic',
       schema: CRITIC_SCHEMA,
       agentType: 'blog-critic',
+      model: 'opus',
     }).then((c) => ({ slug, gatePassed: true, critic: c ? c.verdict : null, criticSummary: c ? c.summary : null }))
   },
 )

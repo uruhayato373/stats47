@@ -23,6 +23,7 @@ stats47.jp の `/blog/{slug}` 記事を新規作成または brushup する際�
 - **文字数 (prose) は「薄すぎ」を弾く床であって品質ではない。**表・markup・リンクでは稼げない (gate が prose のみ計測)。字数を満たしたいなら読者価値のある分析を書く。
 - **書いた本人が自分の記事を採点して公開してはならない。**必ず `blog-critic`(別 agent・別コンテキスト) の意味レビューを通す。執筆 (article-writer) と監査 (blog-critic) は分離する。
 - 機械 gate を pass しても「品質 OK」ではない。②③ を経て初めて品質が担保される。
+- **critic は full / delta の二相で起動する (トークン節約)**: 初回審査は `full` (正典全観点 + 記事全文)、REVISE 後の再審査は `delta` (前回指摘 + 変更 hunk のみ、正典 465行と記事全文を再読しない。床は `quality-gate.mjs` が毎回フル実行するため落ちない)。GSC 流入上位 30 記事の初回 critic は opus、他は sonnet に傾斜する (`build-remediation-queue.mjs` の `reviewTier`。正典 `docs/02_実装計画/01_収益化マスタープラン.md` §7)。
 
 > **既存記事を計画的に順次是正するには (★どのセッションからでも開始可)**: 「次にどの記事を直すか」は
 > 状態付き是正キュー `.claude/state/blog/remediation-queue.json` が真実源 (GSC流入×品質blockerの統合スコア)。
