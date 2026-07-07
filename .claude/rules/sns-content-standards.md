@@ -200,6 +200,37 @@ https://stats47.jp/ranking/taxable-income-per-capita
 
 ---
 
+## 5.5 統合メディアコンソール (`/sns-gallery`) と R2 素材保持ポリシー
+
+素材の目視確認 (動画再生)・caption 微調整・投稿/予約・メトリクス閲覧は
+**ローカル統合メディアコンソール** (`npm run gallery` → http://127.0.0.1:4747/) で行える
+(skill `.claude/skills/sns/sns-gallery/SKILL.md`、server `.claude/scripts/gallery/server.mjs`)。
+`npm run sns:gallery` は後方互換 alias。SNS 投稿は `/sns` セクション、OGP/リンクカード/note カバー・
+記事内画像/動画 master は `/assets`、ブログ SVG カタログは `/svg` で横断閲覧する
+(画像資産の列挙 collector は CI 静的ギャラリー `build-image-gallery.mjs` と `.claude/scripts/lib/gallery-collectors.mjs` を共用)。
+
+- **ギャラリー経由の投稿も台帳規約は同一**: posts.json への書込は `sns-posts-store.cjs` 経由のみ
+  (server も同経路)。§1 の頻度リミットは残枠バッジ + ガードで enforce される
+- **draft レコード運用**: 未投稿素材は `status=draft` で台帳に登録して管理する (新 manifest は作らない)。
+  R2 にあるが台帳に無い素材は画面の「R2 探索」(HEAD probe) → draft 登録で回収
+- **IG 予約の二重書込**: ギャラリーの「IG 予約登録」は schedule JSON + posts.json (scheduled) を
+  同一ハンドラで同時書込する。不整合は `GET /api/ig-consistency` が検出
+- **IG cron の schedule ファイルは自動選択** (2026-07-07〜): `post-from-schedule.cjs` は
+  `instagram-w*-schedule.json` から当日エントリを含む週ファイルを自動選択する。
+  旧実装は特定週固定で更新忘れ→ cron 空振り事故が実発生 (w20 期間に w19 を読み続け 1 ヶ月未投稿)
+
+### R2 素材保持ポリシー (★コスト対策)
+
+**投稿済み (posted) の動画 (.mp4) は投稿後 30 日で R2 から自動削除する**
+(`cleanup-posted-sns-videos.ts` + `.github/workflows/cleanup-r2-sns-videos.yml` weekly)。
+
+- サムネイル (.png) / caption.txt / posts.json の投稿記録・メトリクスは**永続**
+- draft / scheduled が残る content_key の素材は削除しない (再投稿予定を守る)
+- 削除済み動画を再投稿したい場合は **Remotion で再レンダー**する (素材は再生成可能な派生物)
+- 背景: R2 は無料枠 10GB を超過し課金中 (2026-07 時点 20.65GB)。動画の無制限保持は肥大の主因になる
+
+---
+
 ## 6. 関連
 
 - 人間向け戦略: `docs/10_SNS戦略/01_SNSコンテンツ設計.md` / `05_SNSプロフィール.md`

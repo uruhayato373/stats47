@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>画像資産 — メディアコンソール</title>
+<style>
+  :root { --bg:#0f172a; --card:#1e293b; --border:#334155; --text:#e2e8f0; --muted:#94a3b8; --accent:#38bdf8; --ok:#22c55e; --warn:#f59e0b; --danger:#ef4444; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:-apple-system,"Hiragino Kaku Gothic ProN",system-ui,sans-serif; background:var(--bg); color:var(--text); }
+  .tabbar { display:flex; gap:6px; flex-wrap:wrap; padding:10px 14px; border-bottom:1px solid var(--border); background:#0b1220; position:sticky; top:0; z-index:10; }
+  .tab { border:1px solid var(--border); background:transparent; color:var(--muted); padding:4px 12px; border-radius:999px; cursor:pointer; font-size:12px; }
+  .tab.active { background:var(--accent); color:#0f172a; border-color:var(--accent); font-weight:600; }
+  .toolbar { display:flex; gap:8px; align-items:center; flex-wrap:wrap; padding:8px 14px; border-bottom:1px solid var(--border); font-size:12px; }
+  .toolbar input[type=text]{ background:#0b1220; color:var(--text); border:1px solid var(--border); border-radius:6px; padding:5px 8px; width:200px; }
+  .toolbar input[type=number]{ background:#0b1220; color:var(--text); border:1px solid var(--border); border-radius:6px; padding:5px 8px; width:70px; }
+  button { border:1px solid var(--border); background:#0b1220; color:var(--text); border-radius:6px; padding:5px 10px; font-size:12px; cursor:pointer; }
+  button:hover { border-color:var(--accent); }
+  button.primary { background:var(--accent); color:#0f172a; border-color:var(--accent); font-weight:600; }
+  .meta { color:var(--muted); }
+  .panelmeta { font-size:12px; color:var(--muted); padding:8px 14px; }
+  .panelmeta code { background:#0b1220; padding:1px 5px; border-radius:4px; }
+  main { padding:14px; display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); gap:14px; }
+  .card { background:var(--card); border:1px solid var(--border); border-radius:8px; padding:8px; }
+  .card.missing { border-color:var(--warn); }
+  .imgs { display:flex; gap:6px; }
+  .cell { flex:1; border-radius:4px; overflow:hidden; position:relative; display:flex; align-items:center; justify-content:center; min-height:80px; background:var(--bg); }
+  .cell.light { background:#fff; } .cell.dark { background:#0f172a; }
+  .cell img, .cell video { width:100%; height:auto; display:block; }
+  .cell img.broken { opacity:.12; min-height:80px; }
+  .vtag { position:absolute; top:3px; left:3px; font-size:9px; padding:1px 5px; border-radius:3px; background:rgba(0,0,0,.6); color:#fff; }
+  figcaption { margin-top:7px; display:flex; gap:6px; align-items:center; flex-wrap:wrap; }
+  .fname { font-size:12px; word-break:break-all; }
+  .fname a { color:var(--accent); }
+  .badge { font-size:10px; padding:1px 6px; border-radius:4px; }
+  .badge.err{ background:#7f1d1d; color:#fecaca; } .badge.ok{ background:#14532d; color:#bbf7d0; } .badge.warn{ background:#78350f; color:#fde68a; }
+  .hidden { display:none !important; }
+  dialog { background:var(--card); color:var(--text); border:1px solid var(--border); border-radius:10px; max-width:760px; width:92%; }
+  dialog::backdrop { background:rgba(0,0,0,.6); }
+  pre { background:#0b1220; padding:10px; border-radius:6px; font-size:11px; max-height:52vh; overflow:auto; white-space:pre-wrap; }
+  .count { color:var(--muted); }
+</style>
+</head>
+<body>
+<nav style="display:flex;gap:6px;align-items:center;flex-wrap:wrap;background:#0b1220;border-bottom:1px solid #334155;padding:8px 14px">
+  <span style="color:#38bdf8;font-weight:700;font-size:13px;margin-right:10px">🗂 メディアコンソール</span>
+  <a href="/" style="text-decoration:none;color:#cbd5e1;font-size:13px;padding:4px 12px;border-radius:6px;border:1px solid #334155">ホーム</a>
+  <a href="/sns" style="text-decoration:none;color:#cbd5e1;font-size:13px;padding:4px 12px;border-radius:6px;border:1px solid #334155">SNS投稿</a>
+  <a href="/assets" style="text-decoration:none;color:#0f172a;background:#38bdf8;font-weight:600;font-size:13px;padding:4px 12px;border-radius:6px;border:1px solid #38bdf8">画像資産</a>
+  <a href="/svg" style="text-decoration:none;color:#cbd5e1;font-size:13px;padding:4px 12px;border-radius:6px;border:1px solid #334155">SVGカタログ</a>
+</nav>
+<div class="tabbar" id="tabbar"></div>
+<div class="toolbar">
+  <input type="text" id="q" placeholder="key / slug 検索">
+  <label class="meta">件数 <input type="number" id="limit" value="30" min="1"></label>
+  <label class="meta"><input type="checkbox" id="all"> 全件 (ranking等)</label>
+  <button id="reload">読込</button>
+  <button id="check">⚠ 欠落チェック</button>
+  <button id="regen" class="primary hidden">♻ 再生成</button>
+  <span class="count" id="count"></span>
+</div>
+<div class="panelmeta" id="panelmeta"></div>
+<main id="grid"></main>
+
+<dialog id="jobDialog">
+  <h3 id="jobTitle" style="margin-top:0"></h3>
+  <pre id="jobLog"></pre>
+  <div style="display:flex;justify-content:flex-end"><button onclick="jobDialog.close()">閉じる</button></div>
+</dialog>
+
+<script>
+const API_BASE = (location.protocol === "http:" || location.protocol === "https:") ? location.origin : "http://127.0.0.1:4747";
+const $ = (s)=>document.querySelector(s);
+const grid = $("#grid"), jobDialog = $("#jobDialog");
+let TABS = [], current = null, currentData = null;
+
+// タブ → 再生成 kind (無いタブは再生成ボタン非表示)
+const REGEN_KIND = {
+  "blog-ogp":"blog-thumbnails", "blog-card":"blog-thumbnails",
+  "ranking-ogp":"ogp-ranking", "ranking-card":"ogp-ranking-cards",
+  "areas-ogp":"ogp-areas", "note-cover":"ogp-note-covers",
+};
+
+async function api(path, opts){
+  let r;
+  try { r = await fetch(API_BASE + path, opts); }
+  catch(e){ throw new Error(`サーバー接続不可 (${API_BASE})。npm run gallery を起動`); }
+  const j = await r.json().catch(()=>({}));
+  if(!r.ok) throw new Error(j.error || r.status);
+  return j;
+}
+
+async function loadTabs(){
+  const { tabs } = await api("/api/assets/tabs");
+  TABS = tabs;
+  const bar = $("#tabbar"); bar.innerHTML = "";
+  for(const t of tabs){
+    const b = document.createElement("button");
+    b.className = "tab"; b.textContent = t.label; b.dataset.id = t.id;
+    b.onclick = ()=>selectTab(t.id);
+    bar.appendChild(b);
+  }
+  selectTab(tabs[0].id);
+}
+
+function mediaCell(img){
+  const cell = document.createElement("div");
+  cell.className = "cell " + (img.variant==="light"?"light":img.variant==="dark"?"dark":"");
+  if(img.variant !== "single" && img.variant !== "image"){
+    const v = document.createElement("span"); v.className="vtag"; v.textContent=img.variant; cell.appendChild(v);
+  }
+  const isVideo = img.variant === "video" || /\.(mp4|webm|mov)$/i.test(img.url);
+  const el = document.createElement(isVideo ? "video" : "img");
+  if(isVideo){ el.controls=true; el.preload="none"; el.muted=true; }
+  else { el.loading="lazy"; }
+  el.src = img.url;
+  el.dataset.url = img.url;
+  el.onerror = ()=>{ el.classList.add("broken"); cell.closest(".card").classList.add("missing"); };
+  cell.appendChild(el);
+  return cell;
+}
+
+function cardEl(entry){
+  const card = document.createElement("figure"); card.className = "card"; card.dataset.key = entry.key;
+  const imgs = document.createElement("div"); imgs.className = "imgs";
+  for(const im of entry.images) imgs.appendChild(mediaCell(im));
+  card.appendChild(imgs);
+  const cap = document.createElement("figcaption");
+  const link = entry.pageUrl ? ` <a href="${entry.pageUrl}" target="_blank" rel="noopener">↗</a>` : "";
+  cap.innerHTML = `<code class="fname">${escapeHtml(entry.label||entry.key)}${link}</code>`;
+  card.appendChild(cap);
+  return card;
+}
+
+async function selectTab(id){
+  current = id;
+  for(const b of document.querySelectorAll(".tab")) b.classList.toggle("active", b.dataset.id===id);
+  $("#regen").classList.toggle("hidden", !REGEN_KIND[id]);
+  grid.innerHTML = '<span class="meta">読込中...</span>';
+  $("#panelmeta").textContent = "";
+  try{
+    const limit = $("#all").checked ? "" : `&limit=${Number($("#limit").value)||30}`;
+    const allq = $("#all").checked ? "?all=1" : "?_=1";
+    const data = await api(`/api/assets/tab/${id}${allq}${limit}`);
+    currentData = data;
+    $("#panelmeta").innerHTML = `source: <b>${escapeHtml(data.source)}</b> · aspect: ${escapeHtml(data.aspect)} · <code>${escapeHtml(data.r2KeyPattern)}</code>`;
+    render();
+  }catch(e){ grid.innerHTML = `<span style="color:var(--danger)">${e.message}</span>`; }
+}
+
+function render(){
+  const term = $("#q").value.trim().toLowerCase();
+  grid.innerHTML = "";
+  const entries = (currentData?.entries||[]).filter(e=>!term || (e.key||"").toLowerCase().includes(term) || (e.label||"").toLowerCase().includes(term));
+  $("#count").textContent = `${entries.length} 件`;
+  if(entries.length===0){ grid.innerHTML='<span class="meta">エントリなし</span>'; return; }
+  for(const e of entries.slice(0,400)) grid.appendChild(cardEl(e));
+  if(entries.length>400){ const d=document.createElement("div"); d.className="meta"; d.textContent=`+${entries.length-400} 件 (絞り込んでください)`; grid.appendChild(d); }
+}
+
+async function checkMissing(){
+  if(!currentData) return;
+  const btn = $("#check"); btn.disabled=true; btn.textContent="チェック中...";
+  try{
+    const { result } = await api("/api/assets/check", { method:"POST", headers:{"content-type":"application/json"},
+      body: JSON.stringify({ tab: current, limit: $("#all").checked?null:(Number($("#limit").value)||30), all: $("#all").checked }) });
+    let bad=0;
+    for(const card of document.querySelectorAll(".card")){
+      let cardBad=false, cardOk=true;
+      for(const el of card.querySelectorAll("img,video")){
+        const r = result[el.dataset.url];
+        if(r && !r.ok){ cardBad=true; el.classList.add("broken"); }
+        if(!r || !r.ok) cardOk=false;
+      }
+      card.querySelectorAll(".badge").forEach(b=>b.remove());
+      const cap = card.querySelector("figcaption");
+      if(cardBad){ card.classList.add("missing"); cap.insertAdjacentHTML("beforeend",'<span class="badge err">✗ 欠落</span>'); bad++; }
+      else if(cardOk){ cap.insertAdjacentHTML("beforeend",'<span class="badge ok">✓</span>'); }
+    }
+    $("#count").textContent += ` · 欠落 ${bad} 件`;
+  }catch(e){ alert(e.message); }
+  finally{ btn.disabled=false; btn.textContent="⚠ 欠落チェック"; }
+}
+
+async function regenerate(){
+  const kind = REGEN_KIND[current];
+  if(!kind) return;
+  const keys = prompt(`再生成 (${kind})。\n特定 key のみなら入力 (カンマ区切り・英数字ハイフンのみ)。空欄で全件:`, "");
+  if(keys === null) return;
+  if(!confirm(`再生成ジョブを起動します: ${kind}${keys?` (key: ${keys})`:" (全件)"}\n生成 → R2 push まで実行します。よろしいですか?`)) return;
+  try{
+    const r = await api("/api/actions/regenerate", { method:"POST", headers:{"content-type":"application/json"},
+      body: JSON.stringify({ kind, keys: keys.trim()||null }) });
+    watchJob(r.id, `再生成: ${kind}`);
+  }catch(e){ alert(e.message); }
+}
+
+let jobTimer=null;
+function watchJob(id, title){
+  $("#jobTitle").textContent = `Job #${id} — ${title}`;
+  $("#jobLog").textContent = "起動中...";
+  jobDialog.showModal();
+  clearInterval(jobTimer);
+  jobTimer = setInterval(async ()=>{
+    try{
+      const j = await api(`/api/jobs/${id}`);
+      $("#jobLog").textContent = j.log.join("\n") || "(ログなし)";
+      $("#jobLog").scrollTop = $("#jobLog").scrollHeight;
+      if(j.status!=="running"){ clearInterval(jobTimer); $("#jobTitle").textContent += j.status==="success"?" ✅":" ❌"; }
+    }catch(e){ clearInterval(jobTimer); }
+  }, 1500);
+}
+
+function escapeHtml(s){ return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])); }
+
+$("#q").addEventListener("input", render);
+$("#reload").onclick = ()=>selectTab(current);
+$("#check").onclick = checkMissing;
+$("#regen").onclick = regenerate;
+$("#all").onchange = ()=>selectTab(current);
+loadTabs().catch(e=>{ $("#tabbar").innerHTML = `<span style="color:var(--danger)">${e.message}</span>`; });
+</script>
+</body>
+</html>

@@ -23,6 +23,8 @@ export interface RankingPageSections {
     insights?: ReactNode;
     regionalAnalysis?: ReactNode;
     faq?: ReactNode;
+    /** 統計→公務員AI ファネル CTA — 出典カードの直後・footer 広告の前に表示 */
+    funnelCta?: ReactNode;
     /** ネイティブアフィリエイト枠 (D Phase 2) — AI考察カードの直前に表示 */
     nativeAffiliate?: ReactNode;
     /** 同カテゴリ関連ランキング grid (内部リンク密度↑、GSC indexation 改善) */
@@ -101,6 +103,8 @@ export function RankingPageContentSections({
             {rankingItem?.source && (
                 <RankingSourceCard source={rankingItem.source} />
             )}
+
+            {sections.funnelCta}
 
             <AdSenseAd
                 format={RANKING_PAGE_FOOTER.format}

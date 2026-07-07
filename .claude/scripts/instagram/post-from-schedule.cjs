@@ -14,7 +14,8 @@
  *   INSTAGRAM_ACCESS_TOKEN
  *   INSTAGRAM_BUSINESS_ACCOUNT_ID
  *   IG_PUBLIC_R2_BASE (default: https://storage.stats47.jp)
- *   IG_SCHEDULE_FILE (default: .claude/state/instagram-w18-schedule.json)
+ *   IG_SCHEDULE_FILE (明示指定。未指定なら .claude/state/instagram-w*-schedule.json から
+ *                     当日エントリを含む週ファイルを自動選択 — 週替わりの手編集忘れ防止)
  *   IG_FORCE_DATE (test 用: JST 日付を強制指定 YYYY-MM-DD)
  */
 
@@ -24,13 +25,16 @@ const path = require("node:path");
 const TOKEN = process.env.INSTAGRAM_ACCESS_TOKEN;
 const IG_USER_ID = process.env.INSTAGRAM_BUSINESS_ACCOUNT_ID;
 const PUBLIC_R2_BASE = process.env.IG_PUBLIC_R2_BASE || "https://storage.stats47.jp";
-const SCHEDULE_FILE =
-  process.env.IG_SCHEDULE_FILE || ".claude/state/instagram-w19-schedule.json";
+const STATE_DIR = path.resolve(__dirname, "../../state");
 const FORCE_DATE = process.env.IG_FORCE_DATE; // YYYY-MM-DD
 
-if (!TOKEN || !IG_USER_ID) {
-  console.error("❌ INSTAGRAM_ACCESS_TOKEN または INSTAGRAM_BUSINESS_ACCOUNT_ID が未設定");
-  process.exit(1);
+// トークン検証は「当日エントリあり」確定後 (main 内) に行う。
+// エントリ無し日や IG_FORCE_DATE でのファイル解決テストはトークン不要で exit 0 できる。
+function assertToken() {
+  if (!TOKEN || !IG_USER_ID) {
+    console.error("❌ INSTAGRAM_ACCESS_TOKEN または INSTAGRAM_BUSINESS_ACCOUNT_ID が未設定");
+    process.exit(1);
+  }
 }
 
 function getJstDate() {
@@ -41,14 +45,47 @@ function getJstDate() {
   return jst.toISOString().slice(0, 10);
 }
 
-async function findTodayEntry() {
-  const file = path.resolve(SCHEDULE_FILE);
-  if (!fs.existsSync(file)) {
-    console.log(`[post-from-schedule] schedule file not found: ${file}`);
-    return null;
+/**
+ * スケジュールファイルの解決。
+ * - IG_SCHEDULE_FILE があればそれを使う (後方互換・テスト用)
+ * - 無ければ instagram-w*-schedule.json を全走査し、当日 (JST) のエントリを
+ *   含むファイルを自動選択する。旧実装はデフォルトが特定週 (w19 等) に固定され、
+ *   週が替わるたびに手編集が必要 = 更新忘れで cron が空振りする事故源だった
+ *   (実害: w20 期間中も w19 を読み続け 2026-06-08 以降の自動投稿が発火せず)。
+ */
+function resolveScheduleFile(today) {
+  if (process.env.IG_SCHEDULE_FILE) {
+    const f = path.resolve(process.env.IG_SCHEDULE_FILE);
+    console.log(`[post-from-schedule] schedule file (env 指定): ${f}`);
+    return fs.existsSync(f) ? f : null;
   }
+  const candidates = fs
+    .readdirSync(STATE_DIR)
+    .filter((f) => /^instagram-w\d+-schedule\.json$/.test(f))
+    .sort();
+  for (const name of candidates) {
+    const f = path.join(STATE_DIR, name);
+    try {
+      const entries = JSON.parse(fs.readFileSync(f, "utf-8"));
+      if (Array.isArray(entries) && entries.some((e) => e.date === today)) {
+        console.log(`[post-from-schedule] schedule file (自動選択): ${name}`);
+        return f;
+      }
+    } catch {
+      console.log(`[post-from-schedule] parse 失敗 skip: ${name}`);
+    }
+  }
+  console.log(
+    `[post-from-schedule] 当日 (${today}) を含む schedule ファイルなし (走査: ${candidates.join(", ") || "0件"})`,
+  );
+  return null;
+}
+
+async function findTodayEntry() {
   const today = getJstDate();
   console.log(`[post-from-schedule] today (JST): ${today}`);
+  const file = resolveScheduleFile(today);
+  if (!file) return null;
   const entries = JSON.parse(fs.readFileSync(file, "utf-8"));
   return entries.find((e) => e.date === today) || null;
 }
@@ -218,6 +255,7 @@ async function main() {
   }
 
   console.log(`[post-from-schedule] 投稿対象: ${JSON.stringify(entry)}`);
+  assertToken(); // 投稿実行が確定してからトークン検証 (エントリ無し日はトークン不要)
   // GHA が grep で取得できるよう構造化ログを出力
   console.log(`DOMAIN=${entry.domain}`);
 

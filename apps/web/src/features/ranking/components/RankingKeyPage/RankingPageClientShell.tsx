@@ -1,3 +1,6 @@
+import { shouldShowFunnelCta } from "../../funnel/funnel-cta-config";
+import { RankingFunnelCta } from "../../funnel/RankingFunnelCta";
+
 import { RankingKeyPageClient } from "./RankingKeyPageClient";
 import { RankingPageFaqSection, RankingPageInsightsSection } from "./RankingPageAiSections";
 import {
@@ -7,6 +10,7 @@ import {
 import { RankingPageNativeAffiliateSection } from "./RankingPageNativeAffiliateSection";
 import { RankingPageRelatedRankingsSection } from "./RankingPageRelatedRankingsSection";
 import { RankingPageSidebarSection } from "./RankingPageSidebarSection";
+
 
 import type { RankingPageModel } from "../../services/load-ranking-page-model";
 
@@ -43,6 +47,9 @@ export function RankingPageClientShell({
         ),
         correlation: <RankingPageCorrelationSection rankingKey={rankingKey} />,
         rankingPageCards: <RankingPageSupplementCardsSection rankingKey={rankingKey} />,
+        funnelCta: shouldShowFunnelCta(model.rankingItem.categoryKey) ? (
+          <RankingFunnelCta rankingKey={rankingKey} />
+        ) : null,
         nativeAffiliate: (
           <RankingPageNativeAffiliateSection
             banners={model.nativeBanners}

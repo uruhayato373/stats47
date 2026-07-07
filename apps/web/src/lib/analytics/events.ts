@@ -57,6 +57,30 @@ export function trackAffiliateClick(params: {
   });
 }
 
+// ─── CTA (ファネル導線) ─────────────────────────────────────
+
+/**
+ * サイト内 CTA (ファネル導線) のクリックイベント。
+ * 例: 統計ランキング → 公務員AI 買い切りガイド。
+ *
+ * アフィリエイトではない自社導線なので `affiliate_click` とは別イベントに分ける。
+ * `cta_id` / `link_position` を custom dimension に登録すれば枠別 CTR を追える。
+ */
+export function trackCtaClick(params: {
+  ctaId: string;
+  label: string;
+  position: string;
+  rankingKey?: string;
+}): void {
+  sendEvent("cta_click", {
+    event_category: "cta",
+    event_label: params.label,
+    cta_id: params.ctaId,
+    link_position: params.position,
+    ...(params.rankingKey ? { ranking_key: params.rankingKey } : {}),
+  });
+}
+
 // ─── ランキングページ ───────────────────────────────────────
 
 /**

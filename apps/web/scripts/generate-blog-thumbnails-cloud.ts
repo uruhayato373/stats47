@@ -92,21 +92,42 @@ async function fetchArticleMarkdown(slug: string): Promise<string | null> {
   return res.text();
 }
 
+/** 同期スリープ (execFileSync ベースの逐次処理内で使う)。 */
+function sleepSync(ms: number): void {
+  Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, ms);
+}
+
+/**
+ * R2 へ put。wrangler の一時的な `fetch failed` 等で 1 回落ちても
+ * バッチ全体を止めないよう、指数バックオフで最大 MAX_ATTEMPTS 回リトライする。
+ * 全リトライ失敗時のみ throw (呼び出し側で slug 単位に握って継続)。
+ */
 function putToR2(key: string, filePath: string, contentType: string): void {
-  execFileSync(
-    "npx",
-    [
-      "wrangler",
-      "r2",
-      "object",
-      "put",
-      `${BUCKET}/${key}`,
-      `--file=${filePath}`,
-      `--content-type=${contentType}`,
-      "--remote",
-    ],
-    { stdio: "inherit", cwd: PROJECT_ROOT },
-  );
+  const MAX_ATTEMPTS = 4;
+  for (let attempt = 1; attempt <= MAX_ATTEMPTS; attempt++) {
+    try {
+      execFileSync(
+        "npx",
+        [
+          "wrangler",
+          "r2",
+          "object",
+          "put",
+          `${BUCKET}/${key}`,
+          `--file=${filePath}`,
+          `--content-type=${contentType}`,
+          "--remote",
+        ],
+        { stdio: attempt === 1 ? "inherit" : "ignore", cwd: PROJECT_ROOT },
+      );
+      return;
+    } catch (e) {
+      if (attempt === MAX_ATTEMPTS) throw e;
+      const waitMs = 2000 * attempt; // 2s, 4s, 6s
+      console.log(`\n  [retry ${attempt}/${MAX_ATTEMPTS - 1}] ${key} (${waitMs}ms 後)`);
+      sleepSync(waitMs);
+    }
+  }
 }
 
 async function main() {
@@ -157,47 +178,57 @@ async function main() {
   const stage = mkdtempSync(join(tmpdir(), "blog-thumbs-"));
   let generated = 0;
   let pushed = 0;
+  const failed: string[] = [];
 
   for (const slug of targets) {
-    const md = await fetchArticleMarkdown(slug);
-    const ogp = md ? deriveOgpFromFrontmatter(parseFrontmatter(md)) : null;
-    if (!ogp) {
-      console.log(`  [skip] ${slug}: article.md / frontmatter title 取得不可`);
-      continue;
-    }
-    const data = { title: ogp.title, subtitle: ogp.subtitle ?? null, date: "", category: "BLOG" };
-    const dir = join(stage, slug);
-    mkdirSync(join(dir, "ogp"), { recursive: true });
-    const lightOut = join(dir, "thumbnail-light.webp");
-    const darkOut = join(dir, "thumbnail-dark.webp");
-    const pngOut = join(dir, "ogp", "ogp.png");
-    const ogpJsonOut = join(dir, "ogp", "ogp.json");
+    // 1 記事の失敗 (fetch failed 等) でバッチ全体を止めない。失敗は failed に積んで継続。
+    try {
+      const md = await fetchArticleMarkdown(slug);
+      const ogp = md ? deriveOgpFromFrontmatter(parseFrontmatter(md)) : null;
+      if (!ogp) {
+        console.log(`  [skip] ${slug}: article.md / frontmatter title 取得不可`);
+        continue;
+      }
+      const data = { title: ogp.title, subtitle: ogp.subtitle ?? null, date: "", category: "BLOG" };
+      const dir = join(stage, slug);
+      mkdirSync(join(dir, "ogp"), { recursive: true });
+      const lightOut = join(dir, "thumbnail-light.webp");
+      const darkOut = join(dir, "thumbnail-dark.webp");
+      const pngOut = join(dir, "ogp", "ogp.png");
+      const ogpJsonOut = join(dir, "ogp", "ogp.json");
 
-    process.stdout.write(`  ${slug} ... 生成`);
-    await renderToWebP(buildElement(data, false), fonts, lightOut);
-    await renderToWebP(buildElement(data, true), fonts, darkOut);
-    await renderToPng(buildElement(data, false), fonts, pngOut);
-    writeFileSync(
-      ogpJsonOut,
-      JSON.stringify({ title: ogp.title, subtitle: ogp.subtitle ?? null }, null, 2) + "\n",
-      "utf-8",
-    );
-    generated++;
+      process.stdout.write(`  ${slug} ... 生成`);
+      await renderToWebP(buildElement(data, false, { background: true }), fonts, lightOut);
+      await renderToWebP(buildElement(data, true, { background: true }), fonts, darkOut);
+      await renderToPng(buildElement(data, false, { background: true }), fonts, pngOut);
+      writeFileSync(
+        ogpJsonOut,
+        JSON.stringify({ title: ogp.title, subtitle: ogp.subtitle ?? null }, null, 2) + "\n",
+        "utf-8",
+      );
+      generated++;
 
-    if (opts.apply) {
-      process.stdout.write(" → push");
-      putToR2(`app/blog/${slug}/thumbnail-light.webp`, lightOut, "image/webp");
-      putToR2(`app/blog/${slug}/thumbnail-dark.webp`, darkOut, "image/webp");
-      putToR2(`app/blog/${slug}/ogp/ogp.png`, pngOut, "image/png");
-      putToR2(`app/blog/${slug}/ogp/ogp.json`, ogpJsonOut, "application/json");
-      pushed++;
-      console.log(" ✓");
-    } else {
-      console.log(` (dry-run, /tmp 出力のみ: ${dir})`);
+      if (opts.apply) {
+        process.stdout.write(" → push");
+        putToR2(`app/blog/${slug}/thumbnail-light.webp`, lightOut, "image/webp");
+        putToR2(`app/blog/${slug}/thumbnail-dark.webp`, darkOut, "image/webp");
+        putToR2(`app/blog/${slug}/ogp/ogp.png`, pngOut, "image/png");
+        putToR2(`app/blog/${slug}/ogp/ogp.json`, ogpJsonOut, "application/json");
+        pushed++;
+        console.log(" ✓");
+      } else {
+        console.log(` (dry-run, /tmp 出力のみ: ${dir})`);
+      }
+    } catch (err) {
+      failed.push(slug);
+      console.log(`\n  [fail] ${slug}: ${String((err as Error)?.message ?? err).slice(0, 120)}`);
     }
   }
 
-  console.log(`\n生成: ${generated} 件 / push: ${pushed} 件 (stage: ${stage})`);
+  console.log(`\n生成: ${generated} 件 / push: ${pushed} 件 / 失敗: ${failed.length} 件 (stage: ${stage})`);
+  if (failed.length > 0) {
+    console.log(`失敗 slug (再実行対象): ${failed.join(",")}`);
+  }
 
   if (opts.apply && pushed > 0) {
     console.log("\ncloud 反映確認 (公開URL、CDN キャッシュで遅延の可能性あり)...");

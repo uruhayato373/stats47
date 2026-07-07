@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SVGカタログ — メディアコンソール</title>
+<style>
+  :root { --bg:#0f172a; --card:#1e293b; --border:#334155; --text:#e2e8f0; --muted:#94a3b8; --accent:#38bdf8; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:-apple-system,"Hiragino Kaku Gothic ProN",system-ui,sans-serif; background:var(--bg); color:var(--text); }
+  .tabbar { display:flex; gap:6px; flex-wrap:wrap; padding:10px 14px; border-bottom:1px solid var(--border); background:#0b1220; position:sticky; top:0; z-index:10; }
+  .tab { border:1px solid var(--border); background:transparent; color:var(--muted); padding:4px 12px; border-radius:999px; cursor:pointer; font-size:12px; }
+  .tab.active { background:var(--accent); color:#0f172a; border-color:var(--accent); font-weight:600; }
+  .tab b { opacity:.7; }
+  .toolbar { display:flex; gap:8px; align-items:center; flex-wrap:wrap; padding:8px 14px; border-bottom:1px solid var(--border); font-size:12px; }
+  .toolbar input[type=text]{ background:#0b1220; color:var(--text); border:1px solid var(--border); border-radius:6px; padding:5px 8px; width:200px; }
+  .toolbar input[type=number]{ background:#0b1220; color:var(--text); border:1px solid var(--border); border-radius:6px; padding:5px 8px; width:70px; }
+  button { border:1px solid var(--border); background:#0b1220; color:var(--text); border-radius:6px; padding:5px 10px; font-size:12px; cursor:pointer; }
+  button:hover { border-color:var(--accent); }
+  .meta { color:var(--muted); }
+  .catdesc { color:var(--muted); font-size:12px; padding:8px 14px; }
+  .catdesc code { background:#0b1220; padding:1px 5px; border-radius:4px; }
+  main { padding:14px; display:grid; grid-template-columns:repeat(auto-fill,minmax(380px,1fr)); gap:16px; }
+  .card { background:#fff; border:1px solid var(--border); border-radius:8px; padding:8px; }
+  .card .wrap { background:#fff; border-radius:4px; overflow:hidden; }
+  .card img { width:100%; height:auto; display:block; }
+  figcaption { margin-top:6px; font-size:11px; color:#374151; word-break:break-all; }
+  .badge { display:inline-block; padding:1px 5px; border-radius:4px; font-size:10px; margin-left:4px; }
+  .badge.err{ background:#fee2e2; color:#b91c1c; } .badge.warn{ background:#fef3c7; color:#92400e; }
+  .count { color:var(--muted); }
+</style>
+</head>
+<body>
+<nav style="display:flex;gap:6px;align-items:center;flex-wrap:wrap;background:#0b1220;border-bottom:1px solid #334155;padding:8px 14px">
+  <span style="color:#38bdf8;font-weight:700;font-size:13px;margin-right:10px">🗂 メディアコンソール</span>
+  <a href="/" style="text-decoration:none;color:#cbd5e1;font-size:13px;padding:4px 12px;border-radius:6px;border:1px solid #334155">ホーム</a>
+  <a href="/sns" style="text-decoration:none;color:#cbd5e1;font-size:13px;padding:4px 12px;border-radius:6px;border:1px solid #334155">SNS投稿</a>
+  <a href="/assets" style="text-decoration:none;color:#cbd5e1;font-size:13px;padding:4px 12px;border-radius:6px;border:1px solid #334155">画像資産</a>
+  <a href="/svg" style="text-decoration:none;color:#0f172a;background:#38bdf8;font-weight:600;font-size:13px;padding:4px 12px;border-radius:6px;border:1px solid #38bdf8">SVGカタログ</a>
+</nav>
+<div class="toolbar">
+  <input type="text" id="q" placeholder="slug / file 検索">
+  <label class="meta">記事数 <input type="number" id="limit" value="30" min="1"></label>
+  <label class="meta"><input type="checkbox" id="all"> 全記事 (重い)</label>
+  <button id="reload">読込</button>
+  <span class="count" id="count"></span>
+  <span class="meta">※ SVG は img 参照 (dark 対応は静的ギャラリー build-svg-gallery-tabbed で確認)</span>
+</div>
+<div class="tabbar" id="tabbar"></div>
+<div class="catdesc" id="catdesc"></div>
+<main id="grid"></main>
+
+<script>
+const API_BASE = (location.protocol === "http:" || location.protocol === "https:") ? location.origin : "http://127.0.0.1:4747";
+const $ = (s)=>document.querySelector(s);
+const grid = $("#grid");
+let DATA = null, current = null;
+
+async function api(path){
+  let r;
+  try { r = await fetch(API_BASE + path); }
+  catch(e){ throw new Error(`サーバー接続不可 (${API_BASE})。npm run gallery を起動`); }
+  const j = await r.json().catch(()=>({}));
+  if(!r.ok) throw new Error(j.error || r.status);
+  return j;
+}
+
+async function load(){
+  $("#tabbar").innerHTML = '<span class="meta">読込中... (R2 から SVG を取得・分類)</span>';
+  grid.innerHTML = "";
+  try{
+    const all = $("#all").checked ? "&all=1" : "";
+    const limit = Number($("#limit").value)||30;
+    DATA = await api(`/api/svg/catalog?limit=${limit}${all}`);
+    const cats = DATA.catalogs.filter(c=>c.count>0);
+    const bar = $("#tabbar"); bar.innerHTML = "";
+    cats.forEach((c,i)=>{
+      const b = document.createElement("button");
+      b.className = "tab" + (i===0?" active":""); b.dataset.cat = c.key;
+      b.innerHTML = `${c.label} <b>${c.count}</b>`;
+      b.onclick = ()=>select(c.key);
+      bar.appendChild(b);
+    });
+    $("#count").textContent = `全 ${DATA.items.length} 枚 / ${DATA.articleCount} 記事`;
+    if(cats.length) select(cats[0].key);
+    else { $("#catdesc").textContent=""; grid.innerHTML='<span class="meta">SVG なし</span>'; }
+  }catch(e){ $("#tabbar").innerHTML = `<span style="color:#fca5a5">${e.message}</span>`; }
+}
+
+function select(cat){
+  current = cat;
+  for(const b of document.querySelectorAll(".tab")) b.classList.toggle("active", b.dataset.cat===cat);
+  const c = DATA.catalogs.find(x=>x.key===cat);
+  $("#catdesc").innerHTML = `<code>${c.desc}</code> — ${c.count} 枚`;
+  render();
+}
+
+function render(){
+  const term = $("#q").value.trim().toLowerCase();
+  const items = DATA.items.filter(i=>i.cat===current && (!term || (i.slug+"/"+i.file).toLowerCase().includes(term)));
+  grid.innerHTML = "";
+  if(!items.length){ grid.innerHTML='<span class="meta">該当なし</span>'; return; }
+  for(const it of items.slice(0,300)){
+    const badges = [];
+    if(!it.hasViewBox) badges.push('<span class="badge err">no viewBox</span>');
+    if(!it.hasTheme) badges.push('<span class="badge warn">no dark</span>');
+    const fig = document.createElement("figure"); fig.className="card"; fig.style.margin="0";
+    fig.innerHTML = `<div class="wrap"><img loading="lazy" src="${it.url}" alt="${it.file}"></div>
+      <figcaption><code>${escapeHtml(it.slug)}/${escapeHtml(it.file)}</code> <span class="meta">${it.viewBox||"?"}</span> ${badges.join(" ")}</figcaption>`;
+    grid.appendChild(fig);
+  }
+  if(items.length>300){ const d=document.createElement("div"); d.className="meta"; d.textContent=`+${items.length-300} 枚 (絞り込んでください)`; grid.appendChild(d); }
+}
+
+function escapeHtml(s){ return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])); }
+
+$("#q").addEventListener("input", ()=>{ if(current) render(); });
+$("#reload").onclick = load;
+load();
+</script>
+</body>
+</html>

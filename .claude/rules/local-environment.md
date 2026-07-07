@@ -78,6 +78,12 @@ npm run dev --workspace=apps/web   # turbo を介さず最速 (✓ Ready in 2s)
 # 型チェック（ワークスペース別）
 npx tsc --noEmit -p apps/web/tsconfig.json
 cd apps/remotion && npx tsc --noEmit
+
+# 統合メディア管理コンソール（ローカル専用・依存ゼロ・127.0.0.1:4747）
+# 1画面で: SNS素材(/sns 動画再生→投稿/予約/caption/メトリクス) + 画像資産(/assets OGP/カード/note/動画・欠落チェック/再生成)
+#         + ブログSVGカタログ(/svg)。起動後にブラウザで http://127.0.0.1:4747/（file:// で直接開かない）。
+# 常駐プロセスなので run_in_background + Ready polling で起動する。skill: /sns-gallery
+npm run gallery              # 旧 npm run sns:gallery は後方互換 alias
 ```
 
 > 旧 `npm run backup:d1 --env production`（リモート D1 → R2 バックアップ）は **リモート D1 廃止により不要**。
