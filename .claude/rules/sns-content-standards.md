@@ -35,21 +35,65 @@ SNS 投稿を企画・生成・投稿・計測する agent / skill / 人間は�
 | **TikTok に投稿しない** | 0 | 撤退恒久 |
 | **YouTube は月 1 本を超えない** | ≤ 1 / 月 | シャドウバン真因 = 68 本/月 の量産 + 同タイトル再投稿 28 本 (2026-04) |
 | **YouTube タイトル重複・再投稿の全面禁止** | — | 同上。`check-youtube-duplicate.cjs` (5 層) を必ず通す |
-| **X 引用RT は 1 日 3 本まで** | ≤ 3 / 日 | スパム判定回避 |
-| **X 予約は週 2-3 本** | 2-3 / 週 | 送客主目的、量産しない |
+| **X は 1 日 3 本まで** (`X_DAILY_MAX=3`) | ≤ 3 / 日 | スパム判定回避。予約 + 引用RT + ニュース連動の合算 |
+| **X 定型ストックは週 14-21 本** (`X_WEEKLY_TARGET_MIN=14` / `X_WEEKLY_TARGET_MAX=21`) | 14-21 / 週 | 2026-07 積極運用へ転換。ランキング定型を量産し流入を作る |
+| **X 引用RT は 1 日 3 本まで** | ≤ 3 / 日 | 上記 1 日上限の内数。スパム判定回避 |
 | **IG は Graph API 25 件/24h 上限** | ≤ 25 / 24h | Meta 制約 |
-| **同一内容の連投禁止 (全チャネル)** | — | インプレッション食い合い |
+| **同一内容の連投禁止 (全チャネル)** | — | インプレッション食い合い。X は `lint-x-captions.cjs` の類似度チェックで機械担保 |
 | **X 引用RT は 72h 以内のツイートのみ・炎上/政治回避** | — | ブランド毀損防止 |
 
-これらは skill 実行時にガードスクリプトが検証する (YouTube = `check-youtube-post-budget.cjs`)。
+これらは skill 実行時にガードスクリプトが検証する (YouTube = `check-youtube-post-budget.cjs` / X = `check-x-post-budget.cjs`)。
 新規投稿スキルを作る場合は本表を必ず参照し、上限を超える経路を作らない。
+
+> **機械参照 (★SSOT)**: 上表の `X_DAILY_MAX` / `X_WEEKLY_TARGET_MIN` / `X_WEEKLY_TARGET_MAX` は
+> `<!-- x-catalog:quota -->` ブロック (本節末) に構造化データとして持たせ、`.claude/scripts/lib/x-catalog.cjs`
+> がパースする。**値を変えるときは下記ブロックだけを編集**すれば guard / 候補選定数 / schedule 割付の全系に波及する。
+
+<!-- x-catalog:quota:start -->
+```
+X_DAILY_MAX=3
+X_WEEKLY_TARGET_MIN=14
+X_WEEKLY_TARGET_MAX=21
+```
+<!-- x-catalog:quota:end -->
 
 ---
 
 ## 2. 投稿雛形カタログ
 
 投稿本文は下記テンプレに従う。各 post 系スキルは「雛形は本カタログ参照」に統一する
-(スキル内にテンプレを重複させない = ドリフト防止)。
+(スキル内にテンプレを重複させない = ドリフト防止)。**post-x / post-x-batch / x-strategist は
+テンプレ本文を自前で持たず、必ず本節を参照する** (過去に 4 箇所へドリフトした反省)。
+
+### 2-0. X テンプレ機械カタログ (★SSOT・template id)
+
+X 投稿の「型」は下表を単一ソースとする。各投稿は `template` id を 1 つ持ち、posts.json の
+`template` 列に**必ず記録する** (勝ちパターン分析 `analyze-x-winning-patterns.mjs` の前提)。
+`.claude/scripts/lib/x-catalog.cjs` が下記アンカー内のテーブルをパースして
+`getTemplates()` / `getImageKinds()` を返す。文言・画像割当を変えるときは本表だけを編集する。
+
+- `structure` = キャプションの型 (LLM がこの枠で文章を書く)
+- `image_kind` = §2-9 の画像種 id (投稿添付画像)
+- `char_max` = URL・改行を除く本文の上限文字数
+- `best_time` = 推奨投稿時間帯 (scheduled_at 割付の既定。§2-8 の時間帯表と整合)
+
+<!-- x-catalog:templates:start -->
+| template | structure | image_kind | char_max | best_time | 用途 |
+|---|---|---|---|---|---|
+| `shock` | 衝撃の1事実→数値対比2行→サイト誘導 | ranking-card | 140 | weekday-07-09 | 意外な1位/最下位。スクロールを止める |
+| `versus` | 2者対決→数値→どっち派?問いかけ | ranking-card | 140 | weekday-12-13 | 東京 vs 地方等。賛否で引用RT誘発 |
+| `question` | なぜ〇〇なのか?→答えを一部先出し→続きはサイト | ranking-card | 140 | weekday-18-20 | 好奇心ギャップ。保存誘発 |
+| `paradox` | 通説提示→データは逆→驚いたら保存 | tile-map | 150 | weekday-10-12 | 逆説。知的刺激でブックマーク |
+| `number` | 数値3つ以上を冒頭列挙→最大格差強調→ランキングURL | ranking-card | 150 | weekday-07-09 | 数字の羅列で驚かせる。通勤帯で保存 |
+| `angle-experience` | もし〇〇県に住んでいたら→感情描写→あなたの県は? | ranking-card | 150 | weekday-21-23 | 個人化・感情移入。返信誘発 |
+| `angle-howto` | このデータを使う3ステップ→試して | ranking-card | 160 | weekend-09-11 | 実用価値。週末に保存・試行 |
+| `quote-rt` | 引用元の主張を統計で肯定/否定/深掘り1-2文 | none | 140 | any | 引用RT (find-quote-rt 経由。バッチ対象外) |
+<!-- x-catalog:templates:end -->
+
+- ハッシュタグは全 template 共通で **3-5 個**。URL は 1 本のみ (§4 の UTM 規則)。
+- `quote-rt` は瞬発系のため `/post-x-batch` の量産対象外 (find-quote-rt → publish-x で個別運用)。
+- template id と 6 角度 (§2-8) の対応: `angle-conclusion≈shock` / `angle-number≈number` /
+  `angle-rebuttal≈paradox` / `angle-reason≈question`。バッチは上表 id を使う (6 角度は相性判定の語彙)。
 
 ### 2-1. X ランキング投稿
 
@@ -136,6 +180,70 @@ SNS 投稿を企画・生成・投稿・計測する agent / skill / 人間は�
 - 本文中 2-4 箇所で stats47 リンク (§4 の通り note は素の URL)
 - 全文重複禁止。月 1-2 本
 
+### 2-8. 角度 × カテゴリ相性表 (★SSOT・旧 post-x-6angles/reference から吸収)
+
+ランキングの categoryKey (17 軸) ごとに、どの切り口が効くかの早見表。`select-candidates.cjs` が
+`.claude/scripts/lib/x-catalog.cjs` の `getAffinity()` 経由でこれを読み、§2-0 の template を割り付ける。
+`◎`=高相性 (ファーストピック) / `○`=第二候補 / `△`=弱い / `—`=不適。6 切り口 (結論/理由/体験/反論/数字/ハウツー)
+は §2-0 の template と対応する (結論≈shock, 理由≈question, 反論≈paradox, 数字≈number, 体験≈angle-experience,
+ハウツー≈angle-howto)。
+
+<!-- x-catalog:affinity:start -->
+| category | 結論 | 理由 | 体験 | 反論 | 数字 | ハウツー |
+|---|:---:|:---:|:---:|:---:|:---:|:---:|
+| laborwage | ◎ | ○ | ○ | ◎ | ◎ | ○ |
+| economy | ◎ | ○ | ○ | ◎ | ◎ | ○ |
+| population | ○ | ◎ | ◎ | ○ | ◎ | ○ |
+| socialsecurity | ○ | ◎ | ◎ | ◎ | ◎ | ◎ |
+| educationsports | ○ | ◎ | ◎ | ○ | ◎ | ◎ |
+| tourism | ◎ | ○ | ◎ | ◎ | ◎ | △ |
+| agriculture | ○ | ◎ | ◎ | ◎ | ◎ | ◎ |
+| landweather | ○ | ◎ | ◎ | ○ | ◎ | △ |
+| safetyenvironment | ○ | ◎ | ◎ | ○ | ◎ | ◎ |
+| commercial | ◎ | ○ | ◎ | ◎ | ◎ | ○ |
+| miningindustry | ○ | ◎ | △ | ◎ | ◎ | ○ |
+| construction | ○ | ◎ | ◎ | ○ | ◎ | ◎ |
+| infrastructure | ○ | ◎ | ◎ | ○ | ◎ | ◎ |
+| administrativefinancial | ◎ | ◎ | △ | ◎ | ◎ | ○ |
+| international | ○ | ◎ | ◎ | ◎ | ◎ | △ |
+| energy | ○ | ◎ | △ | ◎ | ◎ | ◎ |
+| ict | ○ | ◎ | △ | ◎ | ◎ | ◎ |
+<!-- x-catalog:affinity:end -->
+
+- ranking_key の特徴による微調整: 格差 2 倍以上→数字 ◎ 必須 / 通説と逆の順位→反論優先 /
+  生活直結→体験優先 / 政策含意→ハウツー / 「なぜ」が生じやすい→理由優先。
+- 文例集は旧 `post-x-6angles/reference/angle-templates.md` を本表の下位資料として保持しない
+  (LLM が §2-0 structure + §2-8 相性 + 勝ちパターンから執筆する)。
+
+### 2-9. X 画像カタログ (★SSOT・添付画像の種類)
+
+X 投稿に添付できる画像種を単一ソース化する。`.claude/scripts/lib/x-catalog.cjs` の `getImageKinds()`
+が下記アンカーをパースする。§2-0 の `image_kind` 列がここを参照する。**出力パスは publish-x が読む
+`.local/r2/sns/<domain>/<key>/x/stills/` に統一**する (旧 quick-still の `.local/sns-quick/` は使わない)。
+
+<!-- x-catalog:imagekinds:start -->
+| image_kind | size | generator | out_path | 備考 |
+|---|---|---|---|---|
+| ranking-card | 960x404 | `.claude/scripts/sns/quick-still.ts --key <key>` | `.local/r2/sns/ranking/<key>/x/stills/<key>.png` | 上位5+下位5 カード (横長)。X の既定 |
+| tile-map | 1080x1080 | Remotion `RankingX-ChoroplethMap` (render-sns-stills) | `.local/r2/sns/ranking/<key>/x/stills/choropleth-map-1200x630.png` | ★既知の不整合: ラベルは 1200x630 だが実 canvas 1080x1080。修正は別タスク |
+| scatter | 1200x630 | Remotion `CorrelationX-Scatter` (render-sns-stills) | `.local/r2/sns/correlation/<x>--<y>/x/stills/scatter-1200x630.png` | 相関散布図 (correlation domain のみ) |
+| compare | 1200x630 | Remotion `CompareX-Post` (render-sns-stills) | `.local/r2/sns/compare/<a>-vs-<b>/x/stills/comparison-1200x630.png` | 2地域比較 (compare domain のみ) |
+| none | — | — | — | 画像なし (quote-rt 等テキスト投稿) |
+<!-- x-catalog:imagekinds:end -->
+
+- **量産の既定は `ranking-card`** (quick-still.ts で決定的・数秒生成)。tile-map/scatter/compare は
+  Remotion レンダが要るため瞬発量産には重い (バッチは ranking-card を主軸に、多様性のため一部 tile-map)。
+- SVG→PNG 変換は `.claude/scripts/lib/svg-to-png.cjs` に一本化 (sharp 失敗時は exit≠0 で確実化)。
+
+### 2-10. カタログ改訂手順 (★人間承認ゲート)
+
+§2-0 / §2-8 / §2-9 / §1 quota の改訂は**実測と競合観測に基づく**こと (`evidence-based-judgment.md`)。
+
+1. `analyze-x-winning-patterns.mjs` の月次レビュー (`docs/04_レビュー/<date>-x-winning-patterns.md`) か
+   `/competitor-scan` の月次レビューを起点にする (思いつきで変えない)。
+2. x-strategist が「どの行をどう変えるか」の diff を提案として提示する。
+3. **人間が承認してから**本ファイルを編集する。編集後は `node .claude/scripts/lib/x-catalog.cjs --check` を通す。
+
 ---
 
 ## 3. 投稿台帳 (posts.json への記録は必須)
@@ -189,14 +297,18 @@ https://stats47.jp/ranking/taxable-income-per-capita
 
 | チャネル | 企画 | 生成 | 投稿 | 計測 |
 |---|---|---|---|---|
-| **X** | `post-x` / `find-quote-rt` / `react-to-news` | (キャプション) | `publish-x` → `mark-sns-posted` | `update-sns-metrics` |
+| **X (量産)** | `post-x-batch` (候補選定→画像→執筆→lint→draft 登録) | quick-still (ranking-card) | `publish-x --from-queue` (ローカル) → `mark-sns-posted` | `update-sns-metrics` → `analyze-x-winning-patterns` |
+| **X (瞬発)** | `find-quote-rt` / `react-to-news` | (キャプション) | `publish-x` → `mark-sns-posted` | `update-sns-metrics` |
 | **IG** | `generate-instagram-schedule` (+ `post-ig-6angles`) | `render-sns-stills` | `post-instagram` (GHA cron) → `mark-sns-posted` | `update-sns-metrics` |
 | **YouTube** | `bar-chart-race` (企画・生成・render) | (同) | `post-youtube` (月 1・ガード 3 点) → `mark-sns-posted` | `update-sns-metrics` |
 
+- **X 量産のライフサイクル**: `/post-x-batch` が posts.json に `status=draft` (`template`/`scheduled_at` 付き) で
+  N 本積む → ローカルで `publish-x --from-queue` が `check-x-post-budget.cjs` ガードを通して予約 → `status=scheduled` →
+  投稿時刻経過で `mark-sns-posted` が `posted` へ昇格。**template を必ず記録** (勝ちパターン分析の前提)。
 - **Remotion レンダ入口の正典**: 静止画/動画 = `render-sns-stills`、BCR = `bar-chart-race`、
   `preview-remotion` はプレビュー専用 (レンダしない)
 - 週次運用は `/sns-weekly-plan` が上記を 1 コマンドで束ねる
-- 競合の定点観測は `/competitor-scan`
+- 競合の定点観測は `/competitor-scan` (月次)。示唆は §2-10 の承認ゲート経由でカタログへ反映
 
 ---
 
@@ -235,8 +347,13 @@ https://stats47.jp/ranking/taxable-income-per-capita
 
 - 人間向け戦略: `docs/10_SNS戦略/01_SNSコンテンツ設計.md` / `05_SNSプロフィール.md`
 - 投稿台帳ストア: `.claude/scripts/lib/sns-posts-store.cjs`
+- **X 量産カタログ API**: `.claude/scripts/lib/x-catalog.cjs` (§1 quota / §2-0 templates / §2-8 affinity / §2-9 imagekinds をパース)
+- **X 量産スキル**: `.claude/skills/sns/post-x-batch/` (候補選定 `select-candidates.cjs` / lint `lint-x-captions.cjs` / 登録 `register-drafts.cjs`)
+- **X 頻度ガード**: `.claude/scripts/sns/check-x-post-budget.cjs`
+- **X 勝ちパターン**: `.claude/scripts/sns/analyze-x-winning-patterns.mjs` → `.claude/state/sns/x-winning-patterns.json`
+- **X 画像最短経路**: `.claude/scripts/sns/quick-still.ts` / SVG→PNG `.claude/scripts/lib/svg-to-png.cjs`
 - メトリクス時系列: `.claude/skills/analytics/sns-metrics-improvement/`
-- agent 責務: `.claude/agents/README.md` (Tier 4 SNS)
+- agent 責務: `.claude/agents/README.md` (Tier 4 SNS) / X オーナー `.claude/agents/x-strategist.md`
 - 収益化での SNS 位置づけ: `docs/02_実装計画/01_収益化マスタープラン.md` §6
 - 競合 memory: `project_competitor_riskmap_jp` / `feedback_sns_competitor_search` / `project_competitor_indicator_benchmark`
 - SNS 10K ロードマップ memory: `project_sns_10k_roadmap`

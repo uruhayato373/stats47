@@ -1,12 +1,17 @@
 # SNS 投稿ログ
 
 投稿済み全件。`posted_at` 降順。
-スクリプトで自動生成 — 手編集しない。
+スクリプトで自動生成 — 手編集しない (`sns-posts-store.cjs` が `insert()`/`updateById()` のたびに再生成)。
 
-**389 件** (最終更新: 2026-05-31)
+**394 件** (最終更新: 2026-06-07)
 
 | 日付 | 媒体 | コンテンツ | キャプション | URL |
 |---|---|---|---|---|
+| 2026-06-07 | 📸 Instagram | ranking/annual-precipitation | なぜ静岡が年間降水量1位（3,754mm）なのか。  答えは地理にある。静岡は太平洋に面し、黒潮の暖湿流が直撃。梅雨前線… | [🔗](https://www.instagram.com/p/DZR6zYgFOgn/) |
+| 2026-06-07 | 📸 Instagram | ranking/annual-precipitation | 「沖縄が一番雨が多い」と思っていませんか？  実際のデータを見ると、1位は静岡（3,754mm）で、沖縄は2位（3,06… | [🔗](https://www.instagram.com/p/DZR6zmJFNT9/) |
+| 2026-06-07 | 📸 Instagram | ranking/annual-precipitation | 年間降水量の格差（3.7倍）の答えは、「気候帯×地形」。  太平洋側は黒潮・梅雨・台風が重なり雨量が増える。日本海側は冬… | [🔗](https://www.instagram.com/p/DZR6z41lPOX/) |
+| 2026-06-07 | 📸 Instagram | ranking/annual-precipitation | 静岡の年間降水量、3,754mm。  最下位・宮城の1,028mmと比べると、その差3.7倍。 「同じ日本」とは思えない… | [🔗](https://www.instagram.com/p/DZR6ytvlela/) |
+| 2026-06-07 | 📸 Instagram | ranking/annual-precipitation | 静岡に住んだら、年間3,754mmの雨と共に生きることになる。  東京の約2倍。宮城（1,028mm）の約3.7倍。 同… | [🔗](https://www.instagram.com/p/DZR6feSHJP0/) |
 | 2026-05-31 | 𝕏 X | ranking/per-capita-kenmin-shotoku-h27 | 1人当たり県民所得、東京521万円で全国1位。沖縄217万円、その差約2.4倍の地域格差。  1位 東京都 521万円 … | — |
 | 2026-05-30 | 𝕏 X | ranking/manufacturing-shipment-amount | 製造品出荷額、愛知58兆円で2位の3倍。沖縄0.5兆円、地域格差は100倍超。  1位 愛知県 58兆円 2位 静岡県 … | — |
 | 2026-05-29 | 𝕏 X | ranking/annual-sunshine-duration | 年間日照時間、高知2309時間で1位。山形1626時間と683時間差。沖縄が下位5に入る意外。  1位 高知県 2309… | — |

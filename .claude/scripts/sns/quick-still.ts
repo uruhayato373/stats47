@@ -12,16 +12,21 @@
  * slug/記事を経由しない単発版として切り出す。
  *
  * Usage:
- *   npx tsx .claude/scripts/sns/quick-still.ts --key <rankingKey> [--out <dir>] [--year <YYYY>]
+ *   npx tsx .claude/scripts/sns/quick-still.ts --key <rankingKey> [--out <dir>] [--year <YYYY>] [--require-png]
  *
- * 出力 (既定 .local/sns-quick/<key>/):
- *   <key>.svg        横長カード (960x404、ブログ本文/X 向け)
- *   <key>-ig.svg      縦長カード (1080x1350、Instagram 向け)
- *   <key>.png / <key>-ig.png  (sharp が使えれば PNG も出力)
- *   source.json       出典 manifest (SSOT配慮: rankingKey のみ保持、生パラメータは複製しない)
- *   caption.txt        投稿キャプション草稿
+ * 出力 (既定 .local/r2/sns/ranking/<key>/x/ — publish-x が読む正典パス。§2-9 image catalog):
+ *   stills/<key>.png       横長カード PNG (960x404、X 添付の既定 = ranking-card)
+ *   stills/<key>.svg       横長カード SVG
+ *   stills/<key>-ig.svg     縦長カード SVG (1080x1350、Instagram 向け)
+ *   stills/<key>-ig.png     縦長カード PNG
+ *   source.json             出典 manifest (SSOT配慮: rankingKey のみ保持、生パラメータは複製しない)
+ *   caption.txt              投稿キャプション草稿 (publish-x が --caption なしで読む位置)
  *
- * exit: 0 = ok / 1 = 引数不正 / 2 = R2 取得失敗
+ * PNG 変換は共通 lib `.claude/scripts/lib/svg-to-png.cjs` に一本化。
+ *   - 既定: sharp が無ければ警告して SVG のみ出力 (クラウド生成フェーズ用。PNG は publish 時にローカル再生成)
+ *   - `--require-png`: sharp 不在/変換失敗を致命扱い (exit 2)。publish-x --from-queue がローカルで指定
+ *
+ * exit: 0 = ok / 1 = 引数不正 / 2 = R2 取得失敗 or (--require-png 時) PNG 生成失敗
  */
 
 import fs from "node:fs";
@@ -45,15 +50,19 @@ const getArg = (flag: string): string | null => {
 const KEY = getArg("--key");
 const YEAR = getArg("--year");
 const OUT_DIR_ARG = getArg("--out");
+const REQUIRE_PNG = args.includes("--require-png");
 
 if (!KEY) {
-  console.error("usage: --key <rankingKey> [--out <dir>] [--year <YYYY>]");
+  console.error("usage: --key <rankingKey> [--out <dir>] [--year <YYYY>] [--require-png]");
   process.exit(1);
 }
 
-const OUT_DIR = OUT_DIR_ARG
+// 既定は publish-x が読む正典パス `.local/r2/sns/ranking/<key>/x/`。
+// caption.txt / source.json はこの base、画像は base/stills/ に置く (§2-9 image catalog)。
+const BASE_DIR = OUT_DIR_ARG
   ? path.resolve(OUT_DIR_ARG)
-  : path.join(PROJECT_ROOT, ".local", "sns-quick", KEY);
+  : path.join(PROJECT_ROOT, ".local", "r2", "sns", "ranking", KEY, "x");
+const OUT_DIR = path.join(BASE_DIR, "stills");
 
 // ---------- 型 (values.json / item.json の実測 shape) ----------
 interface RankingValue {
@@ -202,7 +211,7 @@ async function main() {
     fetchedAt: new Date().toISOString(),
     generatedBy: "quick-still.ts",
   };
-  fs.writeFileSync(path.join(OUT_DIR, "source.json"), JSON.stringify(manifest, null, 2));
+  fs.writeFileSync(path.join(BASE_DIR, "source.json"), JSON.stringify(manifest, null, 2));
 
   // ---------- キャプション草稿 ----------
   const fmt = (v: number) => v.toLocaleString("ja-JP");
@@ -228,22 +237,28 @@ ${bottomLines}
 
 #都道府県ランキング #統計 #stats47
 `;
-  fs.writeFileSync(path.join(OUT_DIR, "caption.txt"), caption, "utf8");
+  fs.writeFileSync(path.join(BASE_DIR, "caption.txt"), caption, "utf8");
 
-  // ---------- PNG (best-effort: sharp が使えれば出力) ----------
+  // ---------- PNG (共通 lib svg-to-png.cjs に一本化) ----------
+  // 既定は sharp 不在なら警告して SVG のみ (クラウド生成用)。--require-png で致命化 (publish 時)。
   const pngResults: { file: string; ok: boolean; reason?: string }[] = [];
-  try {
-    const sharpMod = await import("sharp");
-    const sharp = sharpMod.default;
-    for (const [svgFile, pngFile] of [
-      [svgPath, path.join(OUT_DIR, `${KEY}.png`)],
-      [igSvgPath, path.join(OUT_DIR, `${KEY}-ig.png`)],
-    ] as const) {
-      await sharp(svgFile).png().toFile(pngFile);
-      pngResults.push({ file: pngFile, ok: true });
+  const svgToPngMod = await import("../lib/svg-to-png.cjs");
+  const svgToPng = (svgToPngMod as { svgToPng: (i: string, o: string) => Promise<{ width: number; height: number }> }).svgToPng;
+  for (const [svgFile, pngFile] of [
+    [svgPath, path.join(OUT_DIR, `${KEY}.png`)],
+    [igSvgPath, path.join(OUT_DIR, `${KEY}-ig.png`)],
+  ] as const) {
+    try {
+      await svgToPng(svgFile, pngFile);
+      pngResults.push({ file: path.relative(PROJECT_ROOT, pngFile), ok: true });
+    } catch (e) {
+      const reason = (e as Error).message;
+      pngResults.push({ file: path.relative(PROJECT_ROOT, pngFile), ok: false, reason });
+      if (REQUIRE_PNG) {
+        console.error(`[error] PNG 生成失敗 (--require-png): ${reason}`);
+        process.exit(2);
+      }
     }
-  } catch (e) {
-    pngResults.push({ file: "(sharp unavailable)", ok: false, reason: (e as Error).message });
   }
 
   const summary = {
@@ -252,13 +267,16 @@ ${bottomLines}
     unit,
     title,
     palette,
-    outDir: path.relative(PROJECT_ROOT, OUT_DIR),
+    outDir: path.relative(PROJECT_ROOT, BASE_DIR),
     files: {
       svgColumns: path.relative(PROJECT_ROOT, svgPath),
       svgPortrait: path.relative(PROJECT_ROOT, igSvgPath),
-      source: path.relative(PROJECT_ROOT, path.join(OUT_DIR, "source.json")),
-      caption: path.relative(PROJECT_ROOT, path.join(OUT_DIR, "caption.txt")),
+      source: path.relative(PROJECT_ROOT, path.join(BASE_DIR, "source.json")),
+      caption: path.relative(PROJECT_ROOT, path.join(BASE_DIR, "caption.txt")),
     },
+    // publish-x が --media に使う正典 PNG パス (§2-9 ranking-card の out_path)
+    mediaPath: path.relative(PROJECT_ROOT, path.join(OUT_DIR, `${KEY}.png`)),
+    captionPath: path.relative(PROJECT_ROOT, path.join(BASE_DIR, "caption.txt")),
     png: pngResults,
     top: top.map((v, i) => `${i + 1}位 ${v.areaName} ${fmt(v.value)}${unit}`),
     bottom: bottom.map((v, i) => `${sorted.length - N + i + 1}位 ${v.areaName} ${fmt(v.value)}${unit}`),

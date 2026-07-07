@@ -10,6 +10,12 @@
  *   --domain ranking|compare|correlation|blog (デフォルト: ranking)
  *   --immediate  予約ではなく即時投稿（⚠️ 明示指定が必要、デフォルトは予約）
  *   --dry-run    実投稿せずセレクタ検出まで確認（初回必須）
+ *   --from-queue [--limit N]
+ *                posts.json の X draft (status=draft, scheduled_at 付き) を scheduled_at 昇順で
+ *                読み込み予約投稿する。check-x-post-budget のハード上限を超える分はスキップ。
+ *                media 不在なら quick-still --require-png で決定的に再生成 (クラウド生成→ローカル
+ *                publish の受け渡しを posts.json のみに限定する設計)。予約成功で status=scheduled
+ *                (posted 昇格は投稿時刻経過後に mark-sns-posted)。
  *
  * 事故履歴（2026-04-18）:
  *   Sprint 1 Day 2-5 を予約投稿したつもりが 4 件全て即時投稿された。
@@ -21,8 +27,11 @@
 import { chromium, type BrowserContext, type Page } from "playwright";
 import * as path from "path";
 import * as fs from "fs";
+import { execFileSync } from "child_process";
 // 完全DBレス (doc12 Phase E): sns_posts は共有ストア (.claude/state/sns/posts.json) 経由で読み書きする。
 import store from "../../../scripts/lib/sns-posts-store.cjs";
+// X 頻度ガード (SSOT: sns-content-standards §1 quota)。--from-queue の予約が上限を超えないよう判定する。
+import budget from "../../../scripts/sns/check-x-post-budget.cjs";
 
 // ─── 設定 ──────────────────────────────────────────
 const PROJECT_ROOT = path.resolve(__dirname, "../../../..");
@@ -67,10 +76,16 @@ interface PostConfig {
   postType: "original" | "quote_rt";
   /** 引用元ツイート URL。設定時は caption 末尾に付与し X が引用カードを自動生成する */
   quoteUrl?: string;
+  /** --from-queue 時の元 draft レコード id。指定時は updateDb がこの id だけを更新する */
+  recordId?: number;
+  /** --from-queue 時: 予約成功で status を 'scheduled' にする (既定は 'posted')。 */
+  markScheduledOnly?: boolean;
+  /** --from-queue 時のメディア再生成用: quick-still で media が作れる ranking key か */
+  regenKey?: string;
 }
 
 // ─── 引数パース ────────────────────────────────────
-function parseArgs(): { posts: PostConfig[]; immediate: boolean } {
+function parseArgs(): { posts: PostConfig[]; immediate: boolean; fromQueue?: boolean } {
   const args = process.argv.slice(2);
   let domain = "ranking";
   let immediate = false;
@@ -78,6 +93,8 @@ function parseArgs(): { posts: PostConfig[]; immediate: boolean } {
   let customCaption: string | null = null;
   let skipDb = false;
   let quoteUrl: string | null = null;
+  let fromQueue = false;
+  let limit = Infinity;
   const pairs: { key: string; date: string | null }[] = [];
 
   let i = 0;
@@ -89,6 +106,10 @@ function parseArgs(): { posts: PostConfig[]; immediate: boolean } {
     } else if (args[i] === "--dry-run") {
       IS_DRY_RUN = true;
       console.log("🧪 DRY RUN モード: 実投稿はせず、セレクタ検出まで確認");
+    } else if (args[i] === "--from-queue") {
+      fromQueue = true;
+    } else if (args[i] === "--limit") {
+      limit = Number(args[++i]);
     } else if (args[i] === "--media") {
       customMedia = args[++i];
     } else if (args[i] === "--caption") {
@@ -107,6 +128,66 @@ function parseArgs(): { posts: PostConfig[]; immediate: boolean } {
       pairs.push({ key, date: dateStr });
     }
     i++;
+  }
+
+  // ── --from-queue モード: posts.json の X draft をキュー消化する ──
+  // 生成 (クラウド) と投稿 (ローカル) の受け渡しを posts.json だけに限定する設計。
+  // caption は store から一時ファイルに書き出し、media は無ければ後段 (main) で quick-still 再生成。
+  if (fromQueue) {
+    const drafts = store
+      .loadAll()
+      .filter(
+        (p: Record<string, unknown>) =>
+          p.platform === "x" &&
+          p.status === "draft" &&
+          p.post_type !== "quote_rt" &&
+          p.scheduled_at &&
+          !p.deleted_at,
+      )
+      .sort((a: Record<string, unknown>, b: Record<string, unknown>) =>
+        String(a.scheduled_at).localeCompare(String(b.scheduled_at)),
+      )
+      .slice(0, Number.isFinite(limit) ? limit : undefined);
+
+    if (drafts.length === 0) {
+      console.error("キュー (status=draft, scheduled_at 付きの X 投稿) が空です。");
+      process.exit(1);
+    }
+
+    const queueDir = path.join(PROJECT_ROOT, ".local/r2/sns/_queue");
+    fs.mkdirSync(queueDir, { recursive: true });
+
+    const posts: PostConfig[] = drafts.map((d: Record<string, unknown>) => {
+      const key = String(d.content_key);
+      const dom = String(d.domain || "ranking");
+      // caption は store の値を一時ファイルへ (レコード id 単位で衝突回避)
+      const captionPath = path.join(queueDir, `x-${d.id}.caption.txt`);
+      fs.writeFileSync(captionPath, String(d.caption || ""), "utf-8");
+      const mediaRel = d.media_path ? String(d.media_path) : "";
+      const mediaAbs = mediaRel
+        ? path.isAbsolute(mediaRel)
+          ? mediaRel
+          : path.join(PROJECT_ROOT, mediaRel)
+        : "";
+      const imagePaths = mediaAbs && fs.existsSync(mediaAbs) ? [mediaAbs] : [];
+      return {
+        contentKey: key,
+        domain: dom,
+        captionPath,
+        imagePaths,
+        isVideo: false,
+        scheduledDate: new Date(String(d.scheduled_at)),
+        postType: "original" as const,
+        recordId: Number(d.id),
+        markScheduledOnly: true,
+        // ranking domain のみ quick-still で media を再生成できる
+        regenKey: dom === "ranking" && !imagePaths.length ? key : undefined,
+      };
+    });
+    return { posts, immediate: false, fromQueue: true } as {
+      posts: PostConfig[];
+      immediate: boolean;
+    };
   }
 
   if (pairs.length === 0) {
@@ -685,7 +766,9 @@ function updateDb(
     return;
   }
 
-  const status = post.scheduledDate ? "posted" : "posted";
+  // --from-queue 予約は投稿時刻に X が自動投稿するため、台帳上は 'scheduled' (posted 昇格は
+  // 時刻経過後に mark-sns-posted)。既存の単発 original 投稿 (markScheduledOnly 無し) は従来どおり 'posted'。
+  const status = post.markScheduledOnly ? "scheduled" : "posted";
   // JST カレンダー日付で保存（toISOString だと UTC になり 23:00 JST 以降は前日になる）
   const formatJstDate = (d: Date): string => {
     const jst = new Date(d.getTime() + 9 * 60 * 60 * 1000);
@@ -700,6 +783,18 @@ function updateDb(
   const captionExcerpt = caption.substring(0, 100);
 
   try {
+    // --from-queue: 元 draft レコードだけを id 指定で更新する (content_key で一括更新しない。
+    // 同一 key で複数テンプレの draft が並ぶため、他の draft を巻き込まない)。
+    if (post.recordId != null) {
+      store.updateById(post.recordId, {
+        status, // 予約成功で 'scheduled'
+        scheduled_at: post.scheduledDate
+          ? post.scheduledDate.toISOString()
+          : undefined,
+      });
+      console.log(`📝 DB 更新 (queue id=${post.recordId}): ${post.contentKey} → ${status}`);
+      return;
+    }
     if (post.postType === "quote_rt") {
       // 引用RT: 事前行が無いため新規 INSERT で記録する（旧 INSERT INTO sns_posts 相当）。
       store.insert({
@@ -752,11 +847,46 @@ function updateDb(
   }
 }
 
+// JST カレンダー日付 ("YYYY-MM-DD")。頻度ガードの日次判定に使う。
+function jstDateStr(d: Date): string {
+  const jst = new Date(d.getTime() + 9 * 60 * 60 * 1000);
+  return jst.toISOString().slice(0, 10);
+}
+
+// --from-queue の media 不在時に quick-still で決定的に再生成する (ranking domain のみ)。
+async function ensureQueueMedia(post: PostConfig): Promise<void> {
+  if (!post.regenKey || post.imagePaths.length > 0) return;
+  console.log(`🖼  media 不在 → quick-still 再生成: ${post.regenKey}`);
+  try {
+    execFileSync(
+      "npx",
+      [
+        "tsx",
+        path.join(PROJECT_ROOT, ".claude/scripts/sns/quick-still.ts"),
+        "--key",
+        post.regenKey,
+        "--require-png",
+      ],
+      { stdio: "inherit" },
+    );
+  } catch (e) {
+    console.error(`⚠️  quick-still 再生成に失敗: ${(e as Error).message}`);
+  }
+  const mediaAbs = path.join(
+    PROJECT_ROOT,
+    ".local/r2/sns/ranking",
+    post.regenKey,
+    "x/stills",
+    `${post.regenKey}.png`,
+  );
+  if (fs.existsSync(mediaAbs)) post.imagePaths = [mediaAbs];
+}
+
 // ─── メイン ────────────────────────────────────────
 async function main() {
-  const { posts, immediate } = parseArgs();
+  const { posts, immediate, fromQueue } = parseArgs();
 
-  console.log(`🚀 X ${immediate ? "即時" : "予約"}投稿スクリプトを開始します`);
+  console.log(`🚀 X ${immediate ? "即時" : fromQueue ? "キュー予約" : "予約"}投稿スクリプトを開始します`);
   console.log(`   対象: ${posts.length} 件\n`);
 
   if (!fs.existsSync(PROFILE_DIR)) {
@@ -781,9 +911,25 @@ async function main() {
 
     const results: { key: string; success: boolean }[] = [];
     for (let i = 0; i < posts.length; i++) {
-      const success = await publishPost(page, posts[i], i, posts.length);
-      results.push({ key: posts[i].contentKey, success });
-      if (success) updateDb(posts[i], true);
+      const post = posts[i];
+      if (fromQueue && post.scheduledDate) {
+        // 頻度ガード: 予約日の日次・週次上限を超えるならスキップ (既に scheduled 済みの分は都度カウント)。
+        const check = budget.canSchedule(jstDateStr(post.scheduledDate));
+        if (!check.ok) {
+          console.log(`⏭  スキップ (${post.contentKey}): ${check.reason}`);
+          results.push({ key: post.contentKey, success: false });
+          continue;
+        }
+        await ensureQueueMedia(post);
+        if (post.imagePaths.length === 0) {
+          console.log(`⏭  スキップ (${post.contentKey}): media を用意できませんでした`);
+          results.push({ key: post.contentKey, success: false });
+          continue;
+        }
+      }
+      const success = await publishPost(page, post, i, posts.length);
+      results.push({ key: post.contentKey, success });
+      if (success) updateDb(post, true);
       if (i < posts.length - 1) await page.waitForTimeout(2000);
     }
 
