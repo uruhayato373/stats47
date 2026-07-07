@@ -50,6 +50,20 @@ T3 (30万・〜2027-12) → T4 (100万・2028〜) のゲート駆動。NSM は�
 ### ⑤ 行動契約の横展開
 critic-review-protocol.md (全 critic 共通) / ranking-content-author / note-manager に参照追加。
 
+### ⑥ STP ゼロベース分析 + 関連ドキュメント全反映 (2026-07-07 追記)
+競合分析 (とどラン/uub/statja/官製/riskmap + **AI Overviews を非対称競合として追加**) を踏まえ S/T/P を
+ゼロベースで再構築 → `docs/04_レビュー/2026-07-07-stp-analysis.md`。結論: Two-track の 8 割追認 + 新規 3 点
+(S2 生活意思決定層の明示昇格 / ポジショニング・ステートメント制定 / AI 引用最適化)。提言 5 件は全反映済み:
+
+- `docs/00_プロジェクト管理/03_マーケティング戦略.md` — **大改訂** (2026-03 stale 解消)。ステートメント
+  「**公的統計を、最速で、市区町村まで、見やすく。**」制定・競合マップ刷新・AI 検索環境節を新設・
+  旧 実行計画/KPI は doc16 へ移管明記
+- `docs/00_プロジェクト管理/04_ターゲットペルソナ.md` §0.5 — S2 (移住・引越し・子育て・転職の比較検討層) を
+  Axis A 内の攻めの主軸に昇格 (実行面は D2/F/G 型 + アフィリ vertical で先行済・新規開発不要)
+- `docs/02_実装計画/16_月間100万PVロードマップ.md` §4③ — 「AI 引用最適化」レバー追加
+- `docs/02_実装計画/03_改善バックログ.md` Tier 2 — **STP-AI-WATCH-01** (informational top クエリの CTR
+  四半期定点観測。baseline W27 CTR 2.77%、初回判定 2026-10-07)
+
 ---
 
 ## 2. 別 PC でやること (優先順)
@@ -83,6 +97,12 @@ draft のまま。CI green。マージすると develop に全成果物が乗る
 - TOKEN-CONTENT-01 / TOKEN-AICONTENT-01: **2026-08-04** — 次回バッチの token/記事・token/key を実測 vs baseline
   (blog 217K/記事、ai-content は per-key 起動+全文読)。品質は critic PASS 率で同等確認
 - X-BATCH-01: 4 週後に imp/フォロワー実測
+- STP-AI-WATCH-01: **2026-10-07** — S1 top クエリの CTR を W27 snapshot と比較 (AI 直答による侵食検知)
+
+### E. STP の残タスク (人間判断 or 指示があれば実施)
+ポジショニング・ステートメント「公的統計を、最速で、市区町村まで、見やすく。」の **SNS プロフィール・
+OGP・サイト説明文への文言展開**が未実施 (outward-facing のため文書制定で止めた)。展開する場合:
+X/IG プロフィール文・`apps/web` の site description メタ・note プロフィールを同文言系に揃える。
 
 ---
 
