@@ -90,6 +90,7 @@ node .claude/scripts/ai-content/audit-ai-content.mjs --file /tmp/ai-content-outp
 - 意味レビュー（採点）→ **ranking-content-critic**（自己採点しない）。
 
 ## 必読 rules
+- `.claude/rules/agent-output-contract.md` — Output Format の冒頭固定 + **行動契約 (凝縮版)**（結論先行・即行動・進捗の実証・スコープ規律・境界）。長文生成の前置き/過剰計画/スコープ逸脱を抑えトークンを節約する
 - `.claude/rules/evidence-based-judgment.md` — 推測 NG・未検証のまま「修正済み」と書かない
 - `.claude/rules/r2-storage-design.md` / `.claude/rules/data-sqlite-ssot.md` — ai-content は R2 `app/ranking/<key>/ai-content.json`
 - `.claude/rules/estat-api.md` — 年の 4 桁正規化（yearCode）

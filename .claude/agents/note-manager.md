@@ -141,6 +141,11 @@ note 記事の表紙画像（ヘッダー）は **`/image-prompt` スキル**で
 
 呼び出し時の標準出力形式。詳細は `CLAUDE.md` の「Agent 起動時の出力契約」を参照。
 
+**行動契約 (凝縮版)**: `.claude/rules/agent-output-contract.md`「行動契約 (凝縮版)」に従う — 結論先行 (最初の一文で結果)、
+即行動 (前置き・採らない選択肢の陳列をしない)、進捗の実証 (公開 URL・state 記録をツール結果と突合、未検証は明言)、
+境界 (状態変更・投稿の前に証拠を確認)。note 記事本文を生成する場面 (write-note-section 自走) では長文の前置き/
+過剰計画を抑えてトークンを節約する。
+
 通常: **Template A** (table-only)
 - 列: `Article | Step | Status | Notes`
 - Reason / Notes 列で 8 words 以内の根拠を許容
