@@ -13,6 +13,12 @@ if (!Array.isArray(raw)) raw = []
 const slugs = raw.filter((s) => typeof s === 'string' && s)
 log(`critic 追走 ${slugs.length} 件 (rewrite 済・critic のみ走らせる)`)
 
+// 行動契約 (凝縮版)。正典 .claude/rules/agent-output-contract.md「行動契約 (凝縮版)」。
+const BEHAVIOR = `BEHAVIOR CONTRACT (命令):
+- 即行動: 前置きせず評価に入る。採らない選択肢の陳列をしない。
+- 進捗の実証: 各指摘を記事本文・data/*.json と突合。「品質低そう」の推測禁止 (具体箇所・定量で指摘)。
+- 境界: article.md は read-only。書き込みは review.md のみ。commit/push しない。`
+
 const CRITIC_SCHEMA = {
   type: 'object',
   additionalProperties: false,
@@ -25,9 +31,11 @@ const CRITIC_SCHEMA = {
 }
 
 function criticPrompt(slug) {
-  return `OUTPUT は StructuredOutput tool で返す (人間向けテキスト不要)。
+  return `${BEHAVIOR}
 
-あなたは blog-critic。**既に rewrite 済み**の記事を読者価値の観点で意味レビューする。リライトは行わない。
+OUTPUT は StructuredOutput tool で返す (人間向けテキスト不要)。
+
+あなたは blog-critic。**既に rewrite 済み**の記事を読者価値の観点で **mode: full** で意味レビューする。リライトは行わない。
 記事: docs/21_ブログ記事原稿/${slug}/article.md
 
 1. 記事を読み、.claude/rules/blog-quality-standards.md の品質3層モデル②(意味レビュー)で評価する:

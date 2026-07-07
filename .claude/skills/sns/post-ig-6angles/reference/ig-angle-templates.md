@@ -1,6 +1,6 @@
 # Instagram 6切り口テンプレート集
 
-X 版（`post-x-6angles/reference/angle-templates.md`）と同じ 6 切り口を Instagram 向けに最適化。
+X 版（rules §2-0 template + §2-8 相性表）と同じ 6 切り口を Instagram 向けに最適化。
 違いは (1) キャプション 300-600 字、(2) ハッシュタグ 8-12 個、(3) URL なし→「プロフィールから」CTA、
 (4) **カルーセルのスライドコピーが必要**。
 

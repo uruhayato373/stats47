@@ -60,6 +60,11 @@ R2 読み取り env（認証不要）: `NODE_OPTIONS='--conditions react-server'
 > claude CLI サブプロセスは Claude Code の Bash 内で stdin が ~3KB 以上だと詰まる制限があるため、セッション内では
 > `--dry-run`（LLM を呼ばず prompt 長と staging パスだけ確認）で検証する。
 
+> **実行経路の既定 (★トークン規律・2026-07-07 / TOKEN-AICONTENT-01)**: 量産生成は**ローカル CLI
+> `npm run ai:gen` (haiku・セッション外) が既定**。セッション内の agent 生成は blocker 是正・少数 (≤5 key)
+> の例外に限る (1 key で prompt ~4.9K chars + 出力 ~13K chars がセッションに積まれるため)。
+> セッションの役割は「キュー管理 (`ai:list` / queue) + critic (batch) + 公開段取り」に限定する。
+
 ### 1. 対象把握
 
 ```bash
@@ -126,6 +131,18 @@ node .claude/scripts/ai-content/audit-ai-content.mjs --file /tmp/out-<key>.json
 
 `generate-parallel.ts` はゲートを内部で自動実行し、blocker 持ちを `[REJECT]` して staging に書かない。
 機械ゲート通過後の意味レビュー（重複・読者価値・トーン）は `ranking-content-critic` agent に依頼する。
+
+### critic の起動方法 (★batch + compact + delta・2026-07-07 / TOKEN-AICONTENT-01)
+
+per-key に critic agent を起動しない。以下の 3 点でセッション消費を抑える (正典: `.claude/agents/ranking-content-critic.md`):
+
+1. **batch 起動 (≤10 key / 1 agent)**: key リストを 1 度の Agent 起動で渡す (doc09 §5 の設計)。
+   起動 prompt 冒頭に OUTPUT FORMAT (Template A: `Key | Section | Issue | Severity | Recommendation`、
+   1 key 1 行以上) + BEHAVIOR CONTRACT (`agent-output-contract.md`「行動契約 (凝縮版)」) を固定する。
+2. **compact 読み**: critic は R2 JSON を生読みせず jq で実コンテンツのみ取得 (critic agent 定義に
+   コマンド記載。実測 -22%)。
+3. **REVISE 再審査は `mode: delta`**: author が指摘フィールドのみ外科修正 → critic に前回指摘 +
+   修正フィールドを渡して delta 起動 (全文・正典の再読なし)。tier-2 opus エスカレーションも delta で行う。
 
 ## エラーハンドリング
 

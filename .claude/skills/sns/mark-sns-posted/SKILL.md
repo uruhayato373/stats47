@@ -22,6 +22,19 @@ co_agents: [instagram-strategist, x-strategist]
 - `--platforms`（任意）: 投稿済みプラットフォームをカンマ区切りで指定。省略時はディレクトリ構成から自動判定
 - `--url`（任意）: 投稿 URL
 
+## X 予約キューの posted 昇格 (post-x-batch 連携)
+
+`/post-x-batch` → `publish-x --from-queue` で予約した X 投稿は `status=scheduled` になる
+(X 側が予約時刻に自動投稿する)。**予約時刻を過ぎた scheduled を posted へ昇格**するには:
+
+```bash
+node .claude/scripts/sns/promote-scheduled-x.cjs --dry-run   # 昇格対象を確認
+node .claude/scripts/sns/promote-scheduled-x.cjs --apply     # scheduled→posted (posted_at=予約日)
+```
+
+- `post_url` は自動取得できないため空のまま。必要なら後から `/mark-sns-posted <key> --url <postUrl>` で補完。
+- 週次運用で定期実行する (予約が実投稿に変わったことを台帳へ反映)。
+
 ## 手順
 
 ### 1. 対象ディレクトリの確認

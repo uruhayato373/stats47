@@ -1,4 +1,5 @@
 {
+  "outputStyle": "fable-like",
   "allowedTools": [
     "Task",
     "Bash",

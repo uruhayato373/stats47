@@ -31,6 +31,14 @@ const entries = raw.map((e) => (typeof e === 'string' ? { slug: e } : e)).filter
 log(`args 受信: type=${typeof args} / entries=${entries.length} 件`)
 log(`must-fix ブログ ${entries.length} 件をリライト (rewrite → gate → critic)`)
 
+// 行動契約 (凝縮版)。正典 .claude/rules/agent-output-contract.md「行動契約 (凝縮版)」。
+// subagent には output style が効かないため prompt 冒頭で振る舞いを固定する。
+const BEHAVIOR = `BEHAVIOR CONTRACT (命令):
+- 即行動: 情報が揃ったら着手。前置き・採らない選択肢の陳列をしない。
+- 進捗の実証: 各主張をツール結果 (quality-gate 出力等) と突合。未検証は未検証と明言。捏造は最悪の失敗。
+- スコープ規律: 検出された blocker の解消に絞る。要求以上のリファクタ・機能追加をしない。
+- 境界: 数値・順位は data/*.json と突合 (捏造禁止)。frontmatter published は触らない。commit/push しない。`
+
 const REWRITE_SCHEMA = {
   type: 'object',
   additionalProperties: false,
@@ -60,7 +68,9 @@ function rewritePrompt(e) {
   const hint = Array.isArray(e.blockers) && e.blockers.length
     ? `\n## 参考: キュー記録の blocker (要確認・最新は quality-gate で取得)\n${e.blockers.map((b) => '- ' + b).join('\n')}\n`
     : ''
-  return `OUTPUT は StructuredOutput tool で返す (人間向けテキスト不要)。
+  return `${BEHAVIOR}
+
+OUTPUT は StructuredOutput tool で返す (人間向けテキスト不要)。
 
 あなたは stats47 のブログ記事を品質基準に沿ってリライトする article-writer。対象 slug: ${e.slug}
 ${hint}
@@ -92,9 +102,11 @@ ${hint}
 }
 
 function criticPrompt(slug) {
-  return `OUTPUT は StructuredOutput tool で返す。
+  return `${BEHAVIOR}
 
-あなたは blog-critic。対象記事をリライト後の読者価値の観点でレビューする。
+OUTPUT は StructuredOutput tool で返す。
+
+あなたは blog-critic。対象記事をリライト後の読者価値の観点で **mode: full** でレビューする (初回審査)。
 記事: docs/21_ブログ記事原稿/${slug}/article.md
 
 1. 記事を読み、.claude/rules/blog-quality-standards.md の品質3層モデル②(意味レビュー)に従い評価:
@@ -121,11 +133,16 @@ const results = await pipeline(
     const rb = typeof rw.remainingBlockers === 'number' ? rw.remainingBlockers : 99
     if (rb > 1)
       return { slug: e.slug, realBlockersFixed: false, remainingBlockers: rb, blockerDetail: rw.blockerDetail, critic: null }
+    // model 傾斜 (ai-content パターン横展開・正典 docs/01 §7「Opus=blog 意味レビュー」):
+    // GSC 流入上位 (reviewTier==='opus') は opus critic、他は frontmatter 既定 (sonnet)。
+    // reviewTier は build-remediation-queue.mjs が付与 (--next の JSONL entry に含まれる)。
+    const criticModel = e.reviewTier === 'opus' ? 'opus' : undefined
     return agent(criticPrompt(e.slug), {
       label: `cr:${e.slug}`,
       phase: 'Critic',
       schema: CRITIC_SCHEMA,
       agentType: 'blog-critic',
+      ...(criticModel ? { model: criticModel } : {}),
     }).then((c) => ({
       slug: e.slug,
       realBlockersFixed: true,
