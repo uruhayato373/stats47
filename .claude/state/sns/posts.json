@@ -1,8 +1,8 @@
 {
   "_meta": {
     "description": "SNS 投稿台帳 (完全DBレス doc12 Phase E)。SQLite から移行。書込専用運用ログ。store: .claude/scripts/lib/sns-posts-store.cjs",
-    "count": 389,
-    "nextId": 575
+    "count": 394,
+    "nextId": 580
   },
   "posts": [
     {
@@ -27,10 +27,10 @@
       "bookmarks": null,
       "metrics_updated_at": null,
       "created_at": "2026-03-25 09:19:18",
-      "updated_at": "2026-03-25 09:19:18",
+      "updated_at": "2026-07-07T02:38:55.265Z",
       "thumbnail_path": null,
       "deleted_at": null,
-      "template": null,
+      "template": "quote-rt",
       "metric_keys": null
     },
     {
@@ -55,10 +55,10 @@
       "bookmarks": 0,
       "metrics_updated_at": "2026-04-03T23:52:40.787Z",
       "created_at": "2026-03-25 09:19:18",
-      "updated_at": "2026-03-25 09:19:18",
+      "updated_at": "2026-07-07T02:38:55.280Z",
       "thumbnail_path": null,
       "deleted_at": null,
-      "template": null,
+      "template": "quote-rt",
       "metric_keys": null
     },
     {
@@ -83,10 +83,10 @@
       "bookmarks": null,
       "metrics_updated_at": null,
       "created_at": "2026-03-25 09:19:18",
-      "updated_at": "2026-03-25 09:19:18",
+      "updated_at": "2026-07-07T02:38:55.287Z",
       "thumbnail_path": null,
       "deleted_at": null,
-      "template": null,
+      "template": "quote-rt",
       "metric_keys": null
     },
     {
@@ -111,10 +111,10 @@
       "bookmarks": 0,
       "metrics_updated_at": "2026-04-03T23:52:40.787Z",
       "created_at": "2026-03-25 09:19:18",
-      "updated_at": "2026-03-25 09:19:18",
+      "updated_at": "2026-07-07T02:38:55.293Z",
       "thumbnail_path": null,
       "deleted_at": null,
-      "template": null,
+      "template": "quote-rt",
       "metric_keys": null
     },
     {
@@ -139,11 +139,12 @@
       "bookmarks": 0,
       "metrics_updated_at": "2026-04-03T23:52:40.787Z",
       "created_at": "2026-03-25 09:19:18",
-      "updated_at": "2026-03-25 09:19:18",
+      "updated_at": "2026-07-07T02:38:55.299Z",
       "thumbnail_path": null,
       "deleted_at": null,
-      "template": null,
-      "metric_keys": null
+      "template": "number",
+      "metric_keys": null,
+      "template_inferred": true
     },
     {
       "id": 6,
@@ -503,11 +504,12 @@
       "bookmarks": 0,
       "metrics_updated_at": "2026-04-03T23:52:40.787Z",
       "created_at": "2026-03-25 10:43:46",
-      "updated_at": "2026-04-05 22:30:32",
+      "updated_at": "2026-07-07T02:38:55.305Z",
       "thumbnail_path": null,
       "deleted_at": null,
-      "template": null,
-      "metric_keys": null
+      "template": "number",
+      "metric_keys": null,
+      "template_inferred": true
     },
     {
       "id": 36,
@@ -643,11 +645,12 @@
       "bookmarks": 0,
       "metrics_updated_at": "2026-04-03T23:52:40.787Z",
       "created_at": "2026-03-25 10:46:14",
-      "updated_at": "2026-04-05 22:30:32",
+      "updated_at": "2026-07-07T02:38:55.311Z",
       "thumbnail_path": null,
       "deleted_at": null,
-      "template": null,
-      "metric_keys": null
+      "template": "number",
+      "metric_keys": null,
+      "template_inferred": true
     },
     {
       "id": 41,
@@ -671,11 +674,12 @@
       "bookmarks": 0,
       "metrics_updated_at": "2026-04-03T23:52:40.787Z",
       "created_at": "2026-03-25 10:46:44",
-      "updated_at": "2026-04-05 22:30:32",
+      "updated_at": "2026-07-07T02:38:55.317Z",
       "thumbnail_path": null,
       "deleted_at": null,
-      "template": null,
-      "metric_keys": null
+      "template": "number",
+      "metric_keys": null,
+      "template_inferred": true
     },
     {
       "id": 42,
@@ -699,11 +703,12 @@
       "bookmarks": 0,
       "metrics_updated_at": "2026-04-03T23:52:40.787Z",
       "created_at": "2026-03-25 10:47:13",
-      "updated_at": "2026-04-05 22:30:32",
+      "updated_at": "2026-07-07T02:38:55.324Z",
       "thumbnail_path": null,
       "deleted_at": null,
-      "template": null,
-      "metric_keys": null
+      "template": "number",
+      "metric_keys": null,
+      "template_inferred": true
     },
     {
       "id": 43,
@@ -727,11 +732,12 @@
       "bookmarks": 0,
       "metrics_updated_at": "2026-04-03T23:52:40.787Z",
       "created_at": "2026-03-25 10:47:44",
-      "updated_at": "2026-04-05 22:30:32",
+      "updated_at": "2026-07-07T02:38:55.330Z",
       "thumbnail_path": null,
       "deleted_at": null,
-      "template": null,
-      "metric_keys": null
+      "template": "number",
+      "metric_keys": null,
+      "template_inferred": true
     },
     {
       "id": 44,
@@ -811,11 +817,12 @@
       "bookmarks": 0,
       "metrics_updated_at": "2026-03-29T21:20:54.395Z",
       "created_at": "2026-03-29 04:09:09",
-      "updated_at": "2026-03-29 04:09:09",
+      "updated_at": "2026-07-07T02:38:55.336Z",
       "thumbnail_path": null,
       "deleted_at": null,
-      "template": null,
-      "metric_keys": null
+      "template": "number",
+      "metric_keys": null,
+      "template_inferred": true
     },
     {
       "id": 67,
@@ -951,11 +958,12 @@
       "bookmarks": 0,
       "metrics_updated_at": "2026-04-03T23:52:40.787Z",
       "created_at": "2026-03-29 04:09:09",
-      "updated_at": "2026-03-29 04:09:09",
+      "updated_at": "2026-07-07T02:38:55.341Z",
       "thumbnail_path": null,
       "deleted_at": null,
-      "template": null,
-      "metric_keys": null
+      "template": "number",
+      "metric_keys": null,
+      "template_inferred": true
     },
     {
       "id": 72,
@@ -1511,11 +1519,12 @@
       "bookmarks": 0,
       "metrics_updated_at": "2026-04-03T23:52:40.787Z",
       "created_at": "2026-03-29 04:09:09",
-      "updated_at": "2026-03-29 04:09:09",
+      "updated_at": "2026-07-07T02:38:55.347Z",
       "thumbnail_path": null,
       "deleted_at": null,
-      "template": null,
-      "metric_keys": null
+      "template": "number",
+      "metric_keys": null,
+      "template_inferred": true
     },
     {
       "id": 93,
@@ -1819,11 +1828,12 @@
       "bookmarks": 0,
       "metrics_updated_at": "2026-04-03T23:52:40.787Z",
       "created_at": "2026-03-29 04:09:09",
-      "updated_at": "2026-03-29 04:09:09",
+      "updated_at": "2026-07-07T02:38:55.353Z",
       "thumbnail_path": null,
       "deleted_at": null,
-      "template": null,
-      "metric_keys": null
+      "template": "number",
+      "metric_keys": null,
+      "template_inferred": true
     },
     {
       "id": 105,
@@ -1987,11 +1997,12 @@
       "bookmarks": 0,
       "metrics_updated_at": "2026-04-03T23:52:40.787Z",
       "created_at": "2026-03-29 04:09:09",
-      "updated_at": "2026-03-29 04:09:09",
+      "updated_at": "2026-07-07T02:38:55.358Z",
       "thumbnail_path": null,
       "deleted_at": null,
-      "template": null,
-      "metric_keys": null
+      "template": "number",
+      "metric_keys": null,
+      "template_inferred": true
     },
     {
       "id": 114,
@@ -2127,11 +2138,12 @@
       "bookmarks": 0,
       "metrics_updated_at": "2026-04-03T23:52:40.787Z",
       "created_at": "2026-03-29 04:09:09",
-      "updated_at": "2026-04-05 22:30:32",
+      "updated_at": "2026-07-07T02:38:55.364Z",
       "thumbnail_path": null,
       "deleted_at": null,
-      "template": null,
-      "metric_keys": null
+      "template": "number",
+      "metric_keys": null,
+      "template_inferred": true
     },
     {
       "id": 122,
@@ -2323,11 +2335,12 @@
       "bookmarks": 0,
       "metrics_updated_at": "2026-04-03T23:52:40.787Z",
       "created_at": "2026-03-29 04:09:09",
-      "updated_at": "2026-04-05 22:30:32",
+      "updated_at": "2026-07-07T02:38:55.370Z",
       "thumbnail_path": null,
       "deleted_at": null,
-      "template": null,
-      "metric_keys": null
+      "template": "number",
+      "metric_keys": null,
+      "template_inferred": true
     },
     {
       "id": 135,
@@ -2351,11 +2364,12 @@
       "bookmarks": 0,
       "metrics_updated_at": "2026-04-03T23:52:40.787Z",
       "created_at": "2026-03-29 04:09:09",
-      "updated_at": "2026-04-05 22:30:32",
+      "updated_at": "2026-07-07T02:38:55.375Z",
       "thumbnail_path": null,
       "deleted_at": null,
-      "template": null,
-      "metric_keys": null
+      "template": "number",
+      "metric_keys": null,
+      "template_inferred": true
     },
     {
       "id": 141,
@@ -2435,11 +2449,12 @@
       "bookmarks": 0,
       "metrics_updated_at": "2026-04-03T23:52:40.787Z",
       "created_at": "2026-03-29 04:09:09",
-      "updated_at": "2026-03-29 04:09:09",
+      "updated_at": "2026-07-07T02:38:55.381Z",
       "thumbnail_path": null,
       "deleted_at": null,
-      "template": null,
-      "metric_keys": null
+      "template": "shock",
+      "metric_keys": null,
+      "template_inferred": true
     },
     {
       "id": 146,
@@ -2855,11 +2870,12 @@
       "bookmarks": 0,
       "metrics_updated_at": "2026-04-03T23:52:40.787Z",
       "created_at": "2026-03-29 04:09:09",
-      "updated_at": "2026-04-05 22:30:32",
+      "updated_at": "2026-07-07T02:38:55.387Z",
       "thumbnail_path": null,
       "deleted_at": null,
-      "template": null,
-      "metric_keys": null
+      "template": "number",
+      "metric_keys": null,
+      "template_inferred": true
     },
     {
       "id": 170,
@@ -3527,11 +3543,12 @@
       "bookmarks": null,
       "metrics_updated_at": null,
       "created_at": "2026-03-29 04:09:09",
-      "updated_at": "2026-04-05 22:30:32",
+      "updated_at": "2026-07-07T02:38:55.393Z",
       "thumbnail_path": null,
       "deleted_at": null,
-      "template": null,
-      "metric_keys": null
+      "template": "number",
+      "metric_keys": null,
+      "template_inferred": true
     },
     {
       "id": 213,
@@ -3555,11 +3572,12 @@
       "bookmarks": 0,
       "metrics_updated_at": "2026-04-03T23:52:40.787Z",
       "created_at": "2026-03-29 04:09:09",
-      "updated_at": "2026-03-29 04:09:09",
+      "updated_at": "2026-07-07T02:38:55.399Z",
       "thumbnail_path": null,
       "deleted_at": null,
-      "template": null,
-      "metric_keys": null
+      "template": "number",
+      "metric_keys": null,
+      "template_inferred": true
     },
     {
       "id": 214,
@@ -3695,11 +3713,12 @@
       "bookmarks": null,
       "metrics_updated_at": null,
       "created_at": "2026-03-29 04:09:09",
-      "updated_at": "2026-04-05 22:30:32",
+      "updated_at": "2026-07-07T02:38:55.404Z",
       "thumbnail_path": null,
       "deleted_at": null,
-      "template": null,
-      "metric_keys": null
+      "template": "number",
+      "metric_keys": null,
+      "template_inferred": true
     },
     {
       "id": 228,
@@ -3751,11 +3770,12 @@
       "bookmarks": 0,
       "metrics_updated_at": "2026-04-03T23:52:40.787Z",
       "created_at": "2026-03-29 04:09:09",
-      "updated_at": "2026-03-29 04:09:09",
+      "updated_at": "2026-07-07T02:38:55.410Z",
       "thumbnail_path": null,
       "deleted_at": null,
-      "template": null,
-      "metric_keys": null
+      "template": "number",
+      "metric_keys": null,
+      "template_inferred": true
     },
     {
       "id": 232,
@@ -4143,11 +4163,12 @@
       "bookmarks": 0,
       "metrics_updated_at": "2026-04-03T23:52:40.787Z",
       "created_at": "2026-03-29 04:09:09",
-      "updated_at": "2026-03-29 04:09:09",
+      "updated_at": "2026-07-07T02:38:55.416Z",
       "thumbnail_path": null,
       "deleted_at": null,
-      "template": null,
-      "metric_keys": null
+      "template": "number",
+      "metric_keys": null,
+      "template_inferred": true
     },
     {
       "id": 255,
@@ -4283,11 +4304,12 @@
       "bookmarks": 0,
       "metrics_updated_at": "2026-04-03T23:52:40.787Z",
       "created_at": "2026-03-29 04:09:09",
-      "updated_at": "2026-03-29 04:09:09",
+      "updated_at": "2026-07-07T02:38:55.421Z",
       "thumbnail_path": null,
       "deleted_at": null,
-      "template": null,
-      "metric_keys": null
+      "template": "number",
+      "metric_keys": null,
+      "template_inferred": true
     },
     {
       "id": 260,
@@ -4423,11 +4445,12 @@
       "bookmarks": 0,
       "metrics_updated_at": "2026-04-03T23:52:40.787Z",
       "created_at": "2026-03-29 04:09:09",
-      "updated_at": "2026-03-29 04:09:09",
+      "updated_at": "2026-07-07T02:38:55.427Z",
       "thumbnail_path": null,
       "deleted_at": null,
-      "template": null,
-      "metric_keys": null
+      "template": "number",
+      "metric_keys": null,
+      "template_inferred": true
     },
     {
       "id": 265,
@@ -4563,11 +4586,12 @@
       "bookmarks": 0,
       "metrics_updated_at": "2026-04-03T23:52:40.787Z",
       "created_at": "2026-03-29 04:09:09",
-      "updated_at": "2026-03-29 04:09:09",
+      "updated_at": "2026-07-07T02:38:55.433Z",
       "thumbnail_path": null,
       "deleted_at": null,
-      "template": null,
-      "metric_keys": null
+      "template": "number",
+      "metric_keys": null,
+      "template_inferred": true
     },
     {
       "id": 270,
@@ -4703,11 +4727,12 @@
       "bookmarks": 0,
       "metrics_updated_at": "2026-04-03T23:52:40.787Z",
       "created_at": "2026-03-29 04:09:09",
-      "updated_at": "2026-03-29 04:09:09",
+      "updated_at": "2026-07-07T02:38:55.438Z",
       "thumbnail_path": null,
       "deleted_at": null,
-      "template": null,
-      "metric_keys": null
+      "template": "number",
+      "metric_keys": null,
+      "template_inferred": true
     },
     {
       "id": 275,
@@ -4983,11 +5008,12 @@
       "bookmarks": 0,
       "metrics_updated_at": "2026-04-03T23:52:40.787Z",
       "created_at": "2026-03-29 04:09:09",
-      "updated_at": "2026-04-05 22:30:32",
+      "updated_at": "2026-07-07T02:38:55.444Z",
       "thumbnail_path": null,
       "deleted_at": null,
-      "template": null,
-      "metric_keys": null
+      "template": "number",
+      "metric_keys": null,
+      "template_inferred": true
     },
     {
       "id": 288,
@@ -5123,11 +5149,12 @@
       "bookmarks": 0,
       "metrics_updated_at": "2026-04-03T23:52:40.787Z",
       "created_at": "2026-03-29 04:09:09",
-      "updated_at": "2026-03-29 04:09:09",
+      "updated_at": "2026-07-07T02:38:55.450Z",
       "thumbnail_path": null,
       "deleted_at": null,
-      "template": null,
-      "metric_keys": null
+      "template": "number",
+      "metric_keys": null,
+      "template_inferred": true
     },
     {
       "id": 293,
@@ -5403,11 +5430,12 @@
       "bookmarks": 0,
       "metrics_updated_at": "2026-04-03T23:52:40.787Z",
       "created_at": "2026-03-29 04:09:09",
-      "updated_at": "2026-03-29 04:09:09",
+      "updated_at": "2026-07-07T02:38:55.456Z",
       "thumbnail_path": null,
       "deleted_at": null,
-      "template": null,
-      "metric_keys": null
+      "template": "paradox",
+      "metric_keys": null,
+      "template_inferred": true
     },
     {
       "id": 312,
@@ -5543,11 +5571,12 @@
       "bookmarks": 0,
       "metrics_updated_at": "2026-04-03T23:52:40.787Z",
       "created_at": "2026-03-29 04:09:09",
-      "updated_at": "2026-03-29 04:09:09",
+      "updated_at": "2026-07-07T02:38:55.461Z",
       "thumbnail_path": null,
       "deleted_at": null,
-      "template": null,
-      "metric_keys": null
+      "template": "number",
+      "metric_keys": null,
+      "template_inferred": true
     },
     {
       "id": 320,
@@ -7699,11 +7728,12 @@
       "bookmarks": 0,
       "metrics_updated_at": "2026-04-03T23:52:40.787Z",
       "created_at": "2026-03-29 04:09:09",
-      "updated_at": "2026-03-29 04:09:09",
+      "updated_at": "2026-07-07T02:38:55.467Z",
       "thumbnail_path": null,
       "deleted_at": null,
-      "template": null,
-      "metric_keys": null
+      "template": "number",
+      "metric_keys": null,
+      "template_inferred": true
     },
     {
       "id": 400,
@@ -7923,11 +7953,12 @@
       "bookmarks": 0,
       "metrics_updated_at": "2026-04-03T23:52:40.787Z",
       "created_at": "2026-03-29 04:09:09",
-      "updated_at": "2026-03-29 04:09:09",
+      "updated_at": "2026-07-07T02:38:55.473Z",
       "thumbnail_path": null,
       "deleted_at": null,
-      "template": null,
-      "metric_keys": null
+      "template": "number",
+      "metric_keys": null,
+      "template_inferred": true
     },
     {
       "id": 408,
@@ -8595,10 +8626,10 @@
       "bookmarks": 0,
       "metrics_updated_at": "2026-04-03T23:52:40.787Z",
       "created_at": "2026-03-30 11:52:14",
-      "updated_at": "2026-03-30 11:52:14",
+      "updated_at": "2026-07-07T02:38:55.480Z",
       "thumbnail_path": null,
       "deleted_at": null,
-      "template": null,
+      "template": "quote-rt",
       "metric_keys": null
     },
     {
@@ -8623,11 +8654,12 @@
       "bookmarks": null,
       "metrics_updated_at": null,
       "created_at": "2026-04-09 10:40:15",
-      "updated_at": "2026-04-09 10:40:15",
+      "updated_at": "2026-07-07T02:38:55.485Z",
       "thumbnail_path": null,
       "deleted_at": null,
-      "template": null,
-      "metric_keys": null
+      "template": "number",
+      "metric_keys": null,
+      "template_inferred": true
     },
     {
       "id": 461,
@@ -8651,10 +8683,10 @@
       "bookmarks": null,
       "metrics_updated_at": null,
       "created_at": "2026-04-13 21:01:17",
-      "updated_at": "2026-04-13 21:01:17",
+      "updated_at": "2026-07-07T02:38:55.491Z",
       "thumbnail_path": null,
       "deleted_at": null,
-      "template": null,
+      "template": "quote-rt",
       "metric_keys": null
     },
     {
@@ -8679,10 +8711,10 @@
       "bookmarks": null,
       "metrics_updated_at": null,
       "created_at": "2026-04-13 21:06:06",
-      "updated_at": "2026-04-13 21:06:06",
+      "updated_at": "2026-07-07T02:38:55.497Z",
       "thumbnail_path": null,
       "deleted_at": null,
-      "template": null,
+      "template": "quote-rt",
       "metric_keys": null
     },
     {
@@ -8707,10 +8739,10 @@
       "bookmarks": null,
       "metrics_updated_at": null,
       "created_at": "2026-04-13 21:07:39",
-      "updated_at": "2026-04-13 21:07:39",
+      "updated_at": "2026-07-07T02:38:55.502Z",
       "thumbnail_path": null,
       "deleted_at": null,
-      "template": null,
+      "template": "quote-rt",
       "metric_keys": null
     },
     {
@@ -8875,11 +8907,12 @@
       "bookmarks": null,
       "metrics_updated_at": null,
       "created_at": "2026-05-17 01:15:28",
-      "updated_at": "2026-05-17 01:15:28",
+      "updated_at": "2026-07-07T02:38:55.508Z",
       "thumbnail_path": null,
       "deleted_at": null,
-      "template": null,
-      "metric_keys": null
+      "template": "number",
+      "metric_keys": null,
+      "template_inferred": true
     },
     {
       "id": 470,
@@ -8903,11 +8936,12 @@
       "bookmarks": null,
       "metrics_updated_at": null,
       "created_at": "2026-05-17 01:15:28",
-      "updated_at": "2026-05-17 01:15:28",
+      "updated_at": "2026-07-07T02:38:55.514Z",
       "thumbnail_path": null,
       "deleted_at": null,
-      "template": null,
-      "metric_keys": null
+      "template": "number",
+      "metric_keys": null,
+      "template_inferred": true
     },
     {
       "id": 471,
@@ -8931,11 +8965,12 @@
       "bookmarks": null,
       "metrics_updated_at": null,
       "created_at": "2026-05-17 01:15:28",
-      "updated_at": "2026-05-17 01:15:28",
+      "updated_at": "2026-07-07T02:38:55.520Z",
       "thumbnail_path": null,
       "deleted_at": null,
-      "template": null,
-      "metric_keys": null
+      "template": "paradox",
+      "metric_keys": null,
+      "template_inferred": true
     },
     {
       "id": 472,
@@ -8959,11 +8994,12 @@
       "bookmarks": null,
       "metrics_updated_at": null,
       "created_at": "2026-05-17 01:15:28",
-      "updated_at": "2026-05-17 01:15:28",
+      "updated_at": "2026-07-07T02:38:55.525Z",
       "thumbnail_path": null,
       "deleted_at": null,
-      "template": null,
-      "metric_keys": null
+      "template": "number",
+      "metric_keys": null,
+      "template_inferred": true
     },
     {
       "id": 473,
@@ -8987,11 +9023,12 @@
       "bookmarks": null,
       "metrics_updated_at": null,
       "created_at": "2026-05-17 01:15:28",
-      "updated_at": "2026-05-17 01:15:28",
+      "updated_at": "2026-07-07T02:38:55.531Z",
       "thumbnail_path": null,
       "deleted_at": null,
-      "template": null,
-      "metric_keys": null
+      "template": "paradox",
+      "metric_keys": null,
+      "template_inferred": true
     },
     {
       "id": 474,
@@ -9015,11 +9052,12 @@
       "bookmarks": null,
       "metrics_updated_at": null,
       "created_at": "2026-05-17 01:15:28",
-      "updated_at": "2026-05-17 01:15:28",
+      "updated_at": "2026-07-07T02:38:55.537Z",
       "thumbnail_path": null,
       "deleted_at": null,
-      "template": null,
-      "metric_keys": null
+      "template": "number",
+      "metric_keys": null,
+      "template_inferred": true
     },
     {
       "id": 475,
@@ -9043,11 +9081,12 @@
       "bookmarks": null,
       "metrics_updated_at": null,
       "created_at": "2026-05-17 01:15:28",
-      "updated_at": "2026-05-17 01:15:28",
+      "updated_at": "2026-07-07T02:38:55.542Z",
       "thumbnail_path": null,
       "deleted_at": null,
-      "template": null,
-      "metric_keys": null
+      "template": "number",
+      "metric_keys": null,
+      "template_inferred": true
     },
     {
       "id": 479,

@@ -81,7 +81,8 @@ cd apps/remotion && npx tsc --noEmit
 
 # 統合メディア管理コンソール（ローカル専用・依存ゼロ・127.0.0.1:4747）
 # 1画面で: SNS素材(/sns 動画再生→投稿/予約/caption/メトリクス) + 画像資産(/assets OGP/カード/note/動画・欠落チェック/再生成)
-#         + ブログSVGカタログ(/svg)。起動後にブラウザで http://127.0.0.1:4747/（file:// で直接開かない）。
+#         + ブログSVGカタログ(/svg) + プロジェクト現況(/dashboard メトリクス/進捗キュー/改善バックログTODO/STP戦略・読み取り専用ミラー)。
+#         起動後にブラウザで http://127.0.0.1:4747/（file:// で直接開かない）。
 # 常駐プロセスなので run_in_background + Ready polling で起動する。skill: /sns-gallery
 npm run gallery              # 旧 npm run sns:gallery は後方互換 alias
 ```

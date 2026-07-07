@@ -48,14 +48,21 @@ W19-W25 で 6 週連続投稿ゼロになった (計画外タスク優先で SNS
 生成した schedule は GHA `post-instagram-scheduled.yml` が毎日 09:03 に自動投稿する
 (state: `.claude/state/instagram-*-schedule.json`)。
 
-### Step 4: X — 予約 2-3 本 + 引用RT
+### Step 4: X — 定型ストック量産 (週 14-21 本) + 引用RT
 
 ```bash
-/post-x <rankingKey>            # キャプション生成 (雛形 rules §2-1)
-npx tsx .claude/skills/sns/publish-x/publish-x.ts <key> <YYYY-MM-DDTHH:MM> --dry-run   # 必ず dry-run 先行
-# dry-run OK なら --dry-run を外して予約
+# ① 量産 (クラウド可): 候補選定→画像→執筆→lint→draft 登録を 1 コマンドで
+/post-x-batch --count 14        # 頻度・型・画像は rules §1/§2 が SSOT
+# ② 投稿 (ローカル専用): draft キューを予約消化。必ず dry-run 先行
+node .claude/scripts/sns/check-x-post-budget.cjs                                  # 週次残枠を確認
+npx tsx .claude/skills/sns/publish-x/publish-x.ts --from-queue --dry-run          # 予約モード確認 (初回必須)
+npx tsx .claude/skills/sns/publish-x/publish-x.ts --from-queue                    # 予約 → status=scheduled
+node .claude/scripts/sns/promote-scheduled-x.cjs --apply                          # 予約時刻経過分を posted へ
 /find-quote-rt                 # トレンドがあれば引用RT (1日≤3・72h以内・炎上/政治回避)
 ```
+
+- 頻度上限は rules §1 quota (`X_DAILY_MAX=3` / 週 14-21) が SSOT。ガードは `check-x-post-budget.cjs`。
+- 単発だけ作るなら `/post-x --key <rankingKey>` (post-x-batch の N=1 版)。
 
 ### Step 5: 月初のみ — YouTube 月 1 本 + note
 
@@ -82,5 +89,5 @@ npx tsx .claude/skills/sns/publish-x/publish-x.ts <key> <YYYY-MM-DDTHH:MM> --dry
 
 - 正典: `.claude/rules/sns-content-standards.md` (頻度 §1 / 雛形 §2 / パイプライン §5)
 - 計測: `/sns-weekly-report` `/update-sns-metrics`
-- 生成・投稿: `/post-x` `/publish-x` `/find-quote-rt` `/generate-instagram-schedule` `/post-ig-6angles` `/render-sns-stills` `/bar-chart-race` `/post-youtube`
+- 生成・投稿: `/post-x-batch` (X 量産) `/post-x` (X 単発) `/publish-x` `/find-quote-rt` `/generate-instagram-schedule` `/post-ig-6angles` `/render-sns-stills` `/bar-chart-race` `/post-youtube`
 - 競合: `/competitor-scan`

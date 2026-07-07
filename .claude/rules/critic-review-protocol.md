@@ -33,6 +33,10 @@ blog-critic / note-critic / ranking-content-critic (および今後の critic �
   前置き文禁止 (`.claude/rules/agent-output-contract.md`)
 - 成果物ファイル (review.md 等・書式は各 agent 定義) が公開ゲートの必須入力になる場合、
   frontmatter に `reviewer` / `verdict` / `date` を必ず含める
+- **行動契約 (共通)**: 全 critic は `.claude/rules/agent-output-contract.md`「行動契約 (凝縮版)」に従う
+  — 結論先行 (最初の一文で verdict と最重要指摘)、進捗の実証 (「品質低そう」の推測禁止・具体箇所と定量で指摘)、
+  境界 (審査対象は read-only、書き込みは判定成果物のみ)。critic を Agent tool で起動する呼び元は、この
+  BEHAVIOR CONTRACT を起動 prompt 冒頭に併記する (subagent には output style が効かないため)。
 
 ## File Boundary (共通)
 

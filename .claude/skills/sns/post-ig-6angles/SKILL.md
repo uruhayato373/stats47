@@ -13,7 +13,7 @@ primary_agent: instagram-strategist
 6 切り口で Instagram キャプション + カルーセルスライドコピーを一括生成し、
 `.claude/state/sns/posts.json` に draft 登録する。
 
-X 版（`/post-x-6angles`）との主な差分:
+X 版（`/post-x-batch`。角度×カテゴリ相性は rules §2-8 に統合済）との主な差分:
 
 | 項目 | X | Instagram |
 |---|---|---|
@@ -58,7 +58,7 @@ X 版 `x-angles-scout` と同一ロジック。`angle-affinity.md` を参照し 
 **X 版との唯一の差分**: Instagram は体験・ハウツーもカルーセルで十分展開できるため、
 全切り口で affinity △ 以上を生成対象とする（X版は △ をスキップ）。
 
-出力 JSON は `post-x-6angles` の `x-angles-scout` と同形式（`candidates[]`）。
+出力 JSON は `candidates[]` 形式（X 版 `/post-x-batch` の select-candidates と同系統の候補配列）。
 
 ---
 
@@ -399,7 +399,7 @@ jq '[.posts[] | select(.platform=="instagram" and .angle!=null)]' \
 | `/render-sns-stills` | `needs_text_cards: true` の場合にテキストカード画像を生成 |
 | `/bar-chart-race --step render` | 数字切り口のリール動画がない場合に生成 |
 | `/push-r2` | 投稿前に画像/動画を R2 公開 URL へ push（`/post-instagram` の前提）|
-| `/post-x-6angles` | 同じ切り口フレーム。scout/affinity ロジックを共有 |
+| `/post-x-batch` | X 版の量産スキル。角度×カテゴリ相性は rules §2-8 で共用 |
 | `instagram-strategist` | 本スキルの呼び出し判断を担う戦略レイヤー |
 
 ---
@@ -409,7 +409,7 @@ jq '[.posts[] | select(.platform=="instagram" and .angle!=null)]' \
 | ファイル | 用途 |
 |---|---|
 | `.claude/skills/sns/post-ig-6angles/reference/ig-angle-templates.md` | IG 切り口別キャプション + スライドコピー文例集 |
-| `.claude/skills/sns/post-x-6angles/reference/angle-affinity.md` | カテゴリ × 切り口アフィニティマップ（X版と共用）|
+| `.claude/rules/sns-content-standards.md` §2-8 | カテゴリ × 切り口アフィニティマップ（X/IG 共用 SSOT。旧 post-x-6angles から統合）|
 | `.claude/state/sns/posts.json` | 投稿 registry（draft 追記先）|
 | `.claude/skills/blog/trends-snapshots/trends-all-<date>.md` | トレンドスナップショット |
 
@@ -418,5 +418,5 @@ jq '[.posts[] | select(.platform=="instagram" and .angle!=null)]' \
 ## 関連
 
 - `.claude/agents/instagram-strategist.md` — 戦略レイヤー（参照元）
-- `.claude/skills/sns/post-x-6angles/SKILL.md` — X 版（切り口フレーム共通）
+- `.claude/skills/sns/post-x-batch/SKILL.md` — X 版の量産スキル（角度×カテゴリ相性は rules §2-8 で共用）
 - `docs/02_実装計画/03_改善バックログ.md` — SNS-IG-01（Instagram リーチ拡大施策）

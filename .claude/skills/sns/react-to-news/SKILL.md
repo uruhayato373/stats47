@@ -46,11 +46,11 @@ node .claude/scripts/sns/find-metrics.mjs "少子化" --top 5
 
 ```bash
 npx tsx .claude/scripts/sns/quick-still.ts --key births
-# 出力: .local/sns-quick/<key>/
-#   <key>.svg / <key>.png            … 横長 960x404 (X / ブログ / note)
-#   <key>-ig.svg / <key>-ig.png      … 縦長 1080x1350 (Instagram フィード/リール)
-#   caption.txt                       … 上位5/下位5の実数値 + 倍率 + 出典 + ハッシュタグ雛形
-#   source.json                       … provenance (rankingKey / year)
+# 出力: .local/r2/sns/ranking/<key>/x/  (publish-x が読む §2-9 正典パス)
+#   stills/<key>.svg / stills/<key>.png       … 横長 960x404 (X / ブログ / note)
+#   stills/<key>-ig.svg / stills/<key>-ig.png … 縦長 1080x1350 (Instagram フィード/リール)
+#   caption.txt                                … 上位5/下位5の実数値 + 倍率 + 出典 + ハッシュタグ雛形
+#   source.json                                … provenance (rankingKey / year)
 ```
 
 ### Step 3. (任意) 相関で横展開ネタを足す
@@ -74,8 +74,8 @@ curl -s https://storage.stats47.jp/app/correlation/by-ranking-key/<key>.json | h
 ```bash
 # X: quick-still の横長PNG + caption をそのまま渡す。まず --dry-run
 npx tsx .claude/skills/sns/publish-x/publish-x.ts <key> <YYYY-MM-DDTHH:MM> \
-  --media  .local/sns-quick/<key>/<key>.png \
-  --caption .local/sns-quick/<key>/caption.txt \
+  --media  .local/r2/sns/ranking/<key>/x/stills/<key>.png \
+  --caption .local/r2/sns/ranking/<key>/x/caption.txt \
   --dry-run
 # dry-run で予約モード確認できたら --dry-run を外して本番予約
 ```
