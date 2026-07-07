@@ -1,3 +1,6 @@
+import { shouldShowFunnelCta } from "../../funnel/funnel-cta-config";
+import { RankingFunnelCta } from "../../funnel/RankingFunnelCta";
+
 import { RankingKeyPageClient } from "./RankingKeyPageClient";
 import { RankingPageFaqSection, RankingPageInsightsSection } from "./RankingPageAiSections";
 import {
@@ -8,8 +11,6 @@ import { RankingPageNativeAffiliateSection } from "./RankingPageNativeAffiliateS
 import { RankingPageRelatedRankingsSection } from "./RankingPageRelatedRankingsSection";
 import { RankingPageSidebarSection } from "./RankingPageSidebarSection";
 
-import { RankingFunnelCta } from "../../funnel/RankingFunnelCta";
-import { shouldShowFunnelCta } from "../../funnel/funnel-cta-config";
 
 import type { RankingPageModel } from "../../services/load-ranking-page-model";
 

@@ -3,6 +3,7 @@
 import { ArrowRight, Sparkles } from "lucide-react";
 
 import { SurfaceCard } from "@/components/surface";
+
 import { trackCtaClick } from "@/lib/analytics/events";
 
 import { buildKomuinAiGuideUrl } from "./funnel-cta-config";
@@ -42,7 +43,7 @@ export function RankingFunnelCta({ rankingKey }: RankingFunnelCtaProps) {
       <a
         href={href}
         target="_blank"
-        rel="noopener"
+        rel="noopener noreferrer"
         onClick={() =>
           trackCtaClick({
             ctaId: "ranking_to_komuin_ai_guide",
