@@ -81,6 +81,10 @@ node .claude/scripts/ai-content/audit-ai-content.mjs --file /tmp/ai-content-outp
 - **blocker が 1 件でもあれば是正してから保存/公開**（括弧数値挿入・NGワード・FAQ 推測・県別解説欠落）。
 - warn（字数・県別件数）は意味判断（market/port ランキングは 47 件でないのが正常）。
 - 機械ゲート通過後、**意味レビューは `ranking-content-critic` に依頼**（重複・読者価値）。
+- **critic REVISE 後の修正は指摘フィールドのみ外科修正する** (2026-07-07 / TOKEN-AICONTENT-01):
+  insights だけ指摘されたら insights だけ書き直し、非指摘フィールド (faq / prefectureCommentary 等) は
+  既存 JSON の値を保持してマージする。**全フィールドの再生成をしない** (出力 ~13K chars の大半が無駄になる)。
+  修正後は audit をフル再実行 (床は毎回機械が担保) → 再レビューは critic の **delta モード**に依頼する。
 
 ## 担当外（委譲）
 - 観測値投入（metric config → e-Stat → R2 `app/stats`）→ **data-ingester**。

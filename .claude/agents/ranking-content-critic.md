@@ -42,11 +42,34 @@ model: sonnet
 - ai-content の意味レビュー（read-only）と verdict 判定。
 - レビュー前に機械フロアを確認するため `audit-ai-content.mjs` を実行（blocker が残っていれば即 REVISE）。
 
+## レビューモード (full / delta) と起動粒度 — トークン節約 (2026-07-07 / TOKEN-AICONTENT-01)
+
+起動 prompt の `mode` で 2 相を切り替える。指定が無ければ `full`。blog-critic と同型。
+
+| mode | いつ | 読むもの | やること |
+|---|---|---|---|
+| **full** | 初回審査 | compact 読み (下記) の全コンテンツ + audit 結果 | 上記ルーブリック全観点で判定 |
+| **delta** | REVISE 後の再審査 | **前回指摘 (BLOCK/MAJOR) + 修正されたフィールドのみ** | (a) 前回指摘の解消検証 + (b) 修正フィールド限定のスポットチェック。全文と正典 prompt.ts の再読をしない (床は audit がフル実行) |
+
+- **batch 起動 (≤10 key / 1 agent) が既定** (doc09 §5 の設計)。呼び元は key リストを 1 度の起動で渡し、
+  本 agent は key ごとに audit → compact 読み → 判定を繰り返し、Template A で 1 key 1 行を返す。
+  per-key に agent を起動しない (bootstrap が key 数分積まれる)。
+- **compact 読み (JSON 生払い禁止)**: R2 JSON を Read で生読みせず、下記 jq で実コンテンツのみ取得する
+  (実測: 18,111 → 14,180 bytes、-22%。faq 5件・県別47件の欠落なしを検証済 2026-07-07):
+
+```bash
+# -f: ai-content 未存在 (404) は空出力で明示失敗させる (404 の HTML を誤読しない)。
+# 未存在は step 1 の audit が no-content blocker として先に検出する。
+curl -sf "https://storage.stats47.jp/app/ranking/<key>/ai-content.json" | jq -r \
+  '"# insights\n\(.insights)\n\n# regionalAnalysis\n\(.regionalAnalysis)\n\n# faq\n\(.faq | fromjson | .items | map("Q: \(.question)\nA: \(.answer)") | join("\n"))\n\n# prefectureCommentary\n\(.prefectureCommentary | fromjson | .items | map("\(.rank)位 \(.areaName) (\(.value)): \(.commentary)") | join("\n"))"'
+```
+
 ## レビュー手順
 1. **機械フロア確認**: `node .claude/scripts/ai-content/audit-ai-content.mjs <rankingKey>` を実行。
    blocker があれば自動で `verdict: REVISE`（意味審査の前に機械違反を潰させる）。
-2. **意味審査**: R2 `app/ranking/<key>/ai-content.json` を read-only で読み、上記ルーブリックで判定。
-3. **判定を返す**（下記 Output）。修正は **ranking-content-author** が行い、再レビューで PASS に更新。
+2. **意味審査**: 上記 compact 読みでコンテンツを取得し（read-only）、上記ルーブリックで判定。
+   delta モードでは前回指摘と修正フィールドのみ。
+3. **判定を返す**（下記 Output）。修正は **ranking-content-author** が行い、再レビュー (delta) で PASS に更新。
 
 ## 担当外（委譲）
 - ai-content の生成・修正 → **ranking-content-author**（本 agent は read-only、コンテンツを書き換えない）。
