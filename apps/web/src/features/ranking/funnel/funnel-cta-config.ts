@@ -7,17 +7,15 @@
 
 /**
  * 買い切りガイド (note マガジン) の遷移先 URL。
+ * 「自治体職員の e-Stat × Claude Code 完全ガイド」マガジン。
  *
- * ★人間が確認して差し込む: 「自治体職員の e-Stat × Claude Code 完全ガイド」
- * マガジンの正確な URL に差し替える。未確定の間は note プロフィール
- * (`https://note.com/stats47`) をフォールバックにしてリンク切れを防ぐ。
- *
+ * 差し替えるときはこの定数を編集する (UTM は buildKomuinAiGuideUrl が付与)。
  * 環境変数 `NEXT_PUBLIC_KOMUIN_AI_GUIDE_URL` があればそれを優先する
- * (Cloudflare 側で差し替えたい場合の逃げ道。通常は下の定数を直接編集する)。
+ * (Cloudflare 側で一時的に差し替えたい場合の逃げ道)。
  */
 const KOMUIN_AI_GUIDE_URL =
   process.env.NEXT_PUBLIC_KOMUIN_AI_GUIDE_URL?.trim() ||
-  "https://note.com/stats47";
+  "https://note.com/stats47/m/m1b836e4c8dce";
 
 /**
  * 遷移先 URL に UTM を付与して返す。
