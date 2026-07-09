@@ -6,10 +6,10 @@
   "reviewTier": "GSC impressions 上位 30 件 = opus critic (tier2), 他 = sonnet (tier1)",
   "summary": {
     "total": 140,
-    "pending": 100,
-    "inProgress": 1,
+    "pending": 99,
+    "inProgress": 2,
     "done": 39,
-    "mustFixPending": 37,
+    "mustFixPending": 36,
     "opportunityPending": 63
   },
   "queue": [
@@ -111,7 +111,7 @@
     {
       "slug": "farmland-crisis-abandoned-land",
       "lane": "must-fix",
-      "status": "pending",
+      "status": "in-progress",
       "priority": 4,
       "combinedScore": 0.343,
       "gsc": {
@@ -137,7 +137,7 @@
       },
       "wave_id": null,
       "remediated_at": null,
-      "in_progress_at": null,
+      "in_progress_at": "2026-07-09",
       "last_brushup": null,
       "reviewTier": "opus"
     },
