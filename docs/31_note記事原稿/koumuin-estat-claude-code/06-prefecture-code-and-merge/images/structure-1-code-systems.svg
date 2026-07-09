@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600" font-family="'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Noto Sans JP', sans-serif">
+  <rect width="1200" height="600" fill="#fafafa"/>
+  <text x="600" y="44" text-anchor="middle" font-size="22" font-weight="bold" fill="#1e293b">都道府県コード体系の対応表</text>
+  <text x="600" y="70" text-anchor="middle" font-size="13" fill="#64748b">結合キーは e-Stat 5 桁 (01000〜47000) に統一する</text>
+
+  <!-- Header row -->
+  <rect x="60" y="100" width="220" height="50" fill="#0891b2"/>
+  <rect x="280" y="100" width="220" height="50" fill="#475569"/>
+  <rect x="500" y="100" width="220" height="50" fill="#475569"/>
+  <rect x="720" y="100" width="220" height="50" fill="#475569"/>
+  <rect x="940" y="100" width="200" height="50" fill="#475569"/>
+  <text x="170" y="132" text-anchor="middle" font-size="15" font-weight="bold" fill="#ffffff">e-Stat 5 桁 (推奨)</text>
+  <text x="390" y="132" text-anchor="middle" font-size="15" font-weight="bold" fill="#ffffff">JIS X 0401 (2 桁)</text>
+  <text x="610" y="132" text-anchor="middle" font-size="15" font-weight="bold" fill="#ffffff">市区町村 (5 桁)</text>
+  <text x="830" y="132" text-anchor="middle" font-size="15" font-weight="bold" fill="#ffffff">総務省 6 桁</text>
+  <text x="1040" y="132" text-anchor="middle" font-size="15" font-weight="bold" fill="#ffffff">名称</text>
+
+  <!-- Row: 北海道 -->
+  <rect x="60" y="150" width="220" height="44" fill="#ffffff" stroke="#e2e8f0"/>
+  <rect x="280" y="150" width="220" height="44" fill="#ffffff" stroke="#e2e8f0"/>
+  <rect x="500" y="150" width="220" height="44" fill="#ffffff" stroke="#e2e8f0"/>
+  <rect x="720" y="150" width="220" height="44" fill="#ffffff" stroke="#e2e8f0"/>
+  <rect x="940" y="150" width="200" height="44" fill="#ffffff" stroke="#e2e8f0"/>
+  <text x="170" y="178" text-anchor="middle" font-size="16" font-weight="bold" fill="#0891b2">"01000"</text>
+  <text x="390" y="178" text-anchor="middle" font-size="14" fill="#64748b">1 / "01"</text>
+  <text x="610" y="178" text-anchor="middle" font-size="14" fill="#64748b">"01100" (札幌市)</text>
+  <text x="830" y="178" text-anchor="middle" font-size="14" fill="#64748b">"01000-9"</text>
+  <text x="1040" y="178" text-anchor="middle" font-size="14" fill="#1e293b">北海道</text>
+
+  <!-- Row: 東京都 -->
+  <rect x="60" y="194" width="220" height="44" fill="#f8fafc" stroke="#e2e8f0"/>
+  <rect x="280" y="194" width="220" height="44" fill="#f8fafc" stroke="#e2e8f0"/>
+  <rect x="500" y="194" width="220" height="44" fill="#f8fafc" stroke="#e2e8f0"/>
+  <rect x="720" y="194" width="220" height="44" fill="#f8fafc" stroke="#e2e8f0"/>
+  <rect x="940" y="194" width="200" height="44" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="170" y="222" text-anchor="middle" font-size="16" font-weight="bold" fill="#0891b2">"13000"</text>
+  <text x="390" y="222" text-anchor="middle" font-size="14" fill="#64748b">13 / "13"</text>
+  <text x="610" y="222" text-anchor="middle" font-size="14" fill="#64748b">"13101" (千代田区)</text>
+  <text x="830" y="222" text-anchor="middle" font-size="14" fill="#64748b">"13000-1"</text>
+  <text x="1040" y="222" text-anchor="middle" font-size="14" fill="#1e293b">東京都</text>
+
+  <!-- Row: 大阪府 -->
+  <rect x="60" y="238" width="220" height="44" fill="#ffffff" stroke="#e2e8f0"/>
+  <rect x="280" y="238" width="220" height="44" fill="#ffffff" stroke="#e2e8f0"/>
+  <rect x="500" y="238" width="220" height="44" fill="#ffffff" stroke="#e2e8f0"/>
+  <rect x="720" y="238" width="220" height="44" fill="#ffffff" stroke="#e2e8f0"/>
+  <rect x="940" y="238" width="200" height="44" fill="#ffffff" stroke="#e2e8f0"/>
+  <text x="170" y="266" text-anchor="middle" font-size="16" font-weight="bold" fill="#0891b2">"27000"</text>
+  <text x="390" y="266" text-anchor="middle" font-size="14" fill="#64748b">27 / "27"</text>
+  <text x="610" y="266" text-anchor="middle" font-size="14" fill="#64748b">"27100" (大阪市)</text>
+  <text x="830" y="266" text-anchor="middle" font-size="14" fill="#64748b">"27000-3"</text>
+  <text x="1040" y="266" text-anchor="middle" font-size="14" fill="#1e293b">大阪府</text>
+
+  <!-- Row: 沖縄県 -->
+  <rect x="60" y="282" width="220" height="44" fill="#f8fafc" stroke="#e2e8f0"/>
+  <rect x="280" y="282" width="220" height="44" fill="#f8fafc" stroke="#e2e8f0"/>
+  <rect x="500" y="282" width="220" height="44" fill="#f8fafc" stroke="#e2e8f0"/>
+  <rect x="720" y="282" width="220" height="44" fill="#f8fafc" stroke="#e2e8f0"/>
+  <rect x="940" y="282" width="200" height="44" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="170" y="310" text-anchor="middle" font-size="16" font-weight="bold" fill="#0891b2">"47000"</text>
+  <text x="390" y="310" text-anchor="middle" font-size="14" fill="#64748b">47 / "47"</text>
+  <text x="610" y="310" text-anchor="middle" font-size="14" fill="#64748b">"47201" (那覇市)</text>
+  <text x="830" y="310" text-anchor="middle" font-size="14" fill="#64748b">"47000-4"</text>
+  <text x="1040" y="310" text-anchor="middle" font-size="14" fill="#1e293b">沖縄県</text>
+
+  <!-- Conversion arrows -->
+  <text x="600" y="370" text-anchor="middle" font-size="16" font-weight="bold" fill="#1e293b">統一の方向</text>
+
+  <rect x="200" y="400" width="180" height="60" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5" rx="6"/>
+  <text x="290" y="425" text-anchor="middle" font-size="13" font-weight="bold" fill="#92400e">JIS X 0401 (1, 2, ...)</text>
+  <text x="290" y="445" text-anchor="middle" font-size="11" fill="#92400e">Excel が "01" を "1" 化</text>
+
+  <rect x="510" y="400" width="180" height="60" fill="#cffafe" stroke="#0891b2" stroke-width="2" rx="6"/>
+  <text x="600" y="425" text-anchor="middle" font-size="13" font-weight="bold" fill="#0e7490">e-Stat 5 桁文字列</text>
+  <text x="600" y="445" text-anchor="middle" font-size="11" fill="#0e7490">"01000" ... "47000"</text>
+
+  <rect x="820" y="400" width="180" height="60" fill="#ede9fe" stroke="#7c3aed" stroke-width="1.5" rx="6"/>
+  <text x="910" y="425" text-anchor="middle" font-size="13" font-weight="bold" fill="#5b21b6">市区町村 5 桁</text>
+  <text x="910" y="445" text-anchor="middle" font-size="11" fill="#5b21b6">上位 2 桁が県</text>
+
+  <defs>
+    <marker id="arrA" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#475569"/>
+    </marker>
+  </defs>
+  <line x1="380" y1="430" x2="508" y2="430" stroke="#475569" stroke-width="2" marker-end="url(#arrA)"/>
+  <line x1="820" y1="430" x2="692" y2="430" stroke="#475569" stroke-width="2" marker-end="url(#arrA)"/>
+  <text x="445" y="395" font-size="11" font-weight="bold" fill="#475569">f"{int(s):02d}000"</text>
+  <text x="755" y="395" font-size="11" font-weight="bold" fill="#475569">code[:2] + "000"</text>
+
+  <!-- Footnote -->
+  <rect x="60" y="510" width="1080" height="60" fill="#ffffff" stroke="#e2e8f0" stroke-width="1" rx="4"/>
+  <text x="80" y="535" font-size="13" font-weight="bold" fill="#1e293b">stats47.jp 設計規約 (CLAUDE.md より):</text>
+  <text x="80" y="555" font-size="12" fill="#64748b">「地域コードは 5 桁 (01000〜47000) に統一。2 桁→5 桁の正規化は不要な設計とする」</text>
+</svg>

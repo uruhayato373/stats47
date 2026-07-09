@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 420" font-family="'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Noto Sans JP', sans-serif">
+  <rect width="900" height="420" fill="#FAFAFA"/>
+  <text x="450" y="36" text-anchor="middle" font-size="22" font-weight="bold" fill="#1E293B">マスキングカバレッジ 5 段階の積み上げ</text>
+  <text x="450" y="58" text-anchor="middle" font-size="12" fill="#64748B">各層を重ねるごとに残存リスクが 1/5 〜 1/10 ずつ縮小</text>
+
+  <!-- Y axis -->
+  <line x1="120" y1="100" x2="120" y2="350" stroke="#475569" stroke-width="1.5"/>
+  <line x1="120" y1="350" x2="820" y2="350" stroke="#475569" stroke-width="1.5"/>
+
+  <!-- Y axis labels: 0%, 50%, 100% -->
+  <line x1="115" y1="350" x2="120" y2="350" stroke="#475569" stroke-width="1.5"/>
+  <text x="108" y="354" text-anchor="end" font-size="11" fill="#475569">0%</text>
+  <line x1="115" y1="225" x2="120" y2="225" stroke="#475569" stroke-width="1"/>
+  <text x="108" y="229" text-anchor="end" font-size="11" fill="#475569">50%</text>
+  <line x1="115" y1="100" x2="120" y2="100" stroke="#475569" stroke-width="1"/>
+  <text x="108" y="104" text-anchor="end" font-size="11" fill="#475569">100%</text>
+  <line x1="120" y1="100" x2="820" y2="100" stroke="#CBD5E1" stroke-width="0.5" stroke-dasharray="3,3"/>
+
+  <!-- Bars: scale 250px = 100% → 1% = 2.5px -->
+  <!-- Bar 1: 60% = 150px → y=200 -->
+  <rect x="160" y="200" width="100" height="150" fill="#DC2626" stroke="#7F1D1D" stroke-width="1.5" rx="3"/>
+  <text x="210" y="280" text-anchor="middle" font-size="20" font-weight="bold" fill="#FFFFFF">60%</text>
+  <text x="210" y="370" text-anchor="middle" font-size="12" font-weight="bold" fill="#1E293B">(1) 正規表現のみ</text>
+  <text x="210" y="386" text-anchor="middle" font-size="10" fill="#64748B">TEL / Mail / 〒</text>
+  <text x="210" y="400" text-anchor="middle" font-size="10" fill="#64748B">マイナンバー / 住所</text>
+
+  <!-- Bar 2: 92% = 230px → y=120 -->
+  <rect x="290" y="120" width="100" height="230" fill="#F59E0B" stroke="#92400E" stroke-width="1.5" rx="3"/>
+  <text x="340" y="240" text-anchor="middle" font-size="20" font-weight="bold" fill="#FFFFFF">92%</text>
+  <text x="340" y="370" text-anchor="middle" font-size="12" font-weight="bold" fill="#1E293B">(2) +苗字辞書</text>
+  <text x="340" y="386" text-anchor="middle" font-size="10" fill="#64748B">7 万件マッチ</text>
+  <text x="340" y="400" text-anchor="middle" font-size="10" fill="#64748B">前方最長一致</text>
+
+  <!-- Bar 3: 96% = 240px → y=110 -->
+  <rect x="420" y="110" width="100" height="240" fill="#059669" stroke="#0F766E" stroke-width="1.5" rx="3"/>
+  <text x="470" y="235" text-anchor="middle" font-size="20" font-weight="bold" fill="#FFFFFF">96%</text>
+  <text x="470" y="370" text-anchor="middle" font-size="12" font-weight="bold" fill="#1E293B">(3) +敬称マッチ</text>
+  <text x="470" y="386" text-anchor="middle" font-size="10" fill="#64748B">○○様 / 殿 / 氏</text>
+  <text x="470" y="400" text-anchor="middle" font-size="10" fill="#64748B">敬称付きの取りこぼし</text>
+
+  <!-- Bar 4: 99% = 247.5px → y=102.5 -->
+  <rect x="550" y="103" width="100" height="247" fill="#2563EB" stroke="#1E3A8A" stroke-width="1.5" rx="3"/>
+  <text x="600" y="230" text-anchor="middle" font-size="20" font-weight="bold" fill="#FFFFFF">99%</text>
+  <text x="600" y="370" text-anchor="middle" font-size="12" font-weight="bold" fill="#1E293B">(4) +生年月日</text>
+  <text x="600" y="386" text-anchor="middle" font-size="10" fill="#64748B">○○ 昭和55年生</text>
+  <text x="600" y="400" text-anchor="middle" font-size="10" fill="#64748B">検知時 exit 1</text>
+
+  <!-- Bar 5: 100% (95% auto + 5% human) -->
+  <rect x="680" y="115" width="100" height="235" fill="#4338CA" stroke="#312E81" stroke-width="1.5" rx="3"/>
+  <rect x="680" y="100" width="100" height="15" fill="#94A3B8" stroke="#475569" stroke-width="1.5" rx="3"/>
+  <text x="730" y="230" text-anchor="middle" font-size="18" font-weight="bold" fill="#FFFFFF">95%自動</text>
+  <text x="730" y="252" text-anchor="middle" font-size="12" fill="#E0E7FF">+5%人間</text>
+  <text x="730" y="370" text-anchor="middle" font-size="12" font-weight="bold" fill="#1E293B">(5) 残り1%人間確認</text>
+  <text x="730" y="386" text-anchor="middle" font-size="10" fill="#64748B">カタカナ氏名等</text>
+  <text x="730" y="400" text-anchor="middle" font-size="10" fill="#64748B">最終判断は人間</text>
+
+  <!-- Arrow showing progression -->
+  <text x="450" y="86" text-anchor="middle" font-size="13" fill="#1E3A8A" font-weight="bold">→ 多層防御で残存リスクを段階的に縮小</text>
+</svg>

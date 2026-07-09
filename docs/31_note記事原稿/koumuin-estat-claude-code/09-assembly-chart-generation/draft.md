@@ -1,0 +1,323 @@
+---
+type: note-draft
+vertical: koumuin-estat-claude-code
+category: output
+slug: assembly-chart-generation
+title: 議会答弁・県民向けチャートを Claude Code で生成 — D3 / Recharts / matplotlib 使い分け
+description: 議会答弁資料・県民広報で使うチャートを Claude Code に生成させる手順。matplotlib・D3・Recharts・Plotly の使い分け、PNG/SVG/PDF 出力、e-Stat 出典の自動挿入まで。
+created: 2026-05-26
+status: ready-to-publish
+is_paid: true
+price_jpy: 300
+target_chars: 9000
+mvp: false
+related_idea_no: 09
+quality_phase: rewrite-1
+tags: [koumuin, claude-code, estat, output]
+note_url: https://note.com/stats47/n/nce1681932f40
+published: true
+published_at: 2026-06-14
+
+---
+
+💡 **この記事を書いた私から、Claude Code 学習でひとつだけご紹介させてください（PR）**
+
+この記事を読んでいる方は、Claude Code を業務に取り入れようとしているか、すでに使い始めているのだと思います。
+
+独学でも十分に使えますが、「もっと体系的に学びたい」「詰まったときにすぐサポートを受けたい」という方には、Claude Code に特化した研修プログラムも選択肢のひとつです。
+
+このリンクから申し込んでいただくと、私に紹介料が入ります。それでもお伝えするのは、Claude Code を業務で使いこなしたいすべての方に本当に役立つと思っているからです。
+
+{{AFFILIATE_BANNER:ai_agent_camp}}
+
+▶ Claude Code 特化研修「AI Agent Camp」の詳細はこちら（無料相談あり）
+
+---
+
+---
+
+# 議会答弁・県民向けチャートを Claude Code で生成 — D3 / Recharts / matplotlib 使い分け
+
+## はじめに
+
+議会開会の 1 週間前、議会事務局や政策担当のもとに「答弁資料用の図表を 5 種類、明日までに」という依頼が下りてきます。元データは e-Stat と県の独自統計、出力先はパワーポイントと議員配布の PDF です。
+
+Excel のグラフ機能で 1 枚 30 分、5 枚で 2 時間半かかります。色も凡例も毎回ばらばらで、「前任者のデータが見つからない」で 1 時間消えます。
+
+Claude Code に e-Stat を任せると、この作業は「データの統計表 ID と『47 県の順位棒グラフを縦持ち CSV から作って』という頼み方」の組み合わせで 1 枚 5 分に置き換わります。
+
+出典表記・カラーアクセシビリティ・PowerPoint 貼り付け前提の解像度といった条件も、頼み方の中に書いておけば毎回守られます。
+
+**こんな方に向けた記事です**
+
+- 議会答弁資料や県民向け広報の図表を短期間で何枚も求められる議会事務局・政策担当の職員
+- Excel のグラフ機能で色や凡例が毎回ばらつき、作り直しに時間を取られている方
+- 出典表記やカラーアクセシビリティを毎回そろえた図表を作りたい方
+
+**この記事でわかること**
+
+- 棒グラフ・折れ線・コロプレス地図・表を Claude Code に生成させる具体的な頼み方
+- matplotlib・D3・Recharts・Plotly の使い分けと、PNG / SVG / PDF の出力の選び方
+- e-Stat 出典やカラーアクセシビリティを毎回自動で守らせる設定の入れ方
+
+> **📌 この記事の読み方** — 本記事にはコマンド・設定例・プロンプト例など、やや専門的な記述も出てきます。ですが Claude Code の本質は「それらを自分で覚えること」ではなく、「**やってほしいことを言葉で頼めば、専門的な部分は AI が代わりに用意してくれる**」点にあります。掲載するコマンドや設定は丸暗記の対象ではなく「こう頼めば、こういうものが返ってくる」という地図として読んでください。
+
+執筆者は元自治体職員です。Claude Code を使い、47 都道府県の統計サイト stats47.jp (約 2,000 のランキングを毎日自動更新) を個人で開発・運用しています。同サイトのチャート (棒グラフ・折れ線・コロプレス地図) は本記事と同じ仕組みで生成しています。
+
+人口 10-30 万人規模の自治体では、議会前 1 週間に図表作成だけで係長級 1 人が 6-12 時間を消費する事例が珍しくありません。本記事は、その時間を 1/10 に圧縮するための「ライブラリ選択と頼み方」のまとめです。
+
+![47 県データから棒グラフ・折れ線・コロプレス・表を生成するパイプライン](./images/flow-1-chart-pipeline.svg)
+<!-- SVG: flow | データ → Claude Code → SVG/PNG/PDF → 資料挿入 -->
+
+## 背景: なぜ自治体職員にこの課題があるか
+
+民間企業ではダッシュボードツール (Tableau・Looker Studio など) が広く使われており、データソースに接続すれば「ボタンひとつでチャート更新」が定着しています。一方、自治体でこれらが使いにくい理由が 3 つあります。
+
+- **ライセンス予算** — 議会事務局や政策担当だけのために BI ツールを導入する稟議は通りにくいです
+- **三層分離** — LGWAN 系と接続できるツールが限られています
+- **資料の最終形が PowerPoint / Word / PDF** — 議員に配るのは紙か PDF です。インタラクティブな Web ダッシュボードでは要件を満たせません
+
+結果、「Excel でグラフ → スクリーンショット → PowerPoint」というアナログなフローが残ります。
+
+Excel グラフは凡例の制御が弱く、書式が毎回ばらつき、47 県全部の順位を見せようとすると色が破綻します。
+
+e-Stat のデータは商用利用可で、出典明記が条件です (e-Stat 利用規約: <https://www.e-stat.go.jp/terms-of-use>、アクセス日 2026-05-26)。チャート右下に「政府統計の総合窓口 (e-Stat) より」と入れるだけで規約準拠になります。手書きで毎回書く必要はなく、後述のテンプレで自動挿入できます。
+
+## 手順 / 解説
+
+### Step 1: 4 種類のチャート種別と使い分け
+
+議会答弁・県民向け資料で実際に使うチャートは、4 種類に集約できます。
+
+![棒グラフ・折れ線・コロプレス・表の使い分け早見表](./images/structure-1-chart-types.svg)
+<!-- SVG: structure | 4 つのチャート種別と用途 -->
+
+チャートの使い分けは次の通りです。
+
+**棒グラフ (横棒)**: 順位提示 (1 位〜47 位を一気に見せる) が主な用途です。47 県データとの相性は「◎」で、縦に 47 行並ぶので可読性が高いです。
+
+**折れ線**: 経年推移・前年比の表示に使います。47 県データとの相性は「○」ですが、都道府県の絞り込みが必要です (3-5 県まで)。
+
+**コロプレス地図**: 地域分布 (北日本・西日本などの傾向把握) が主な用途です。47 県データとの相性は「◎」で、議員・住民の直感に刺さります。
+
+**表 (ランキング表)**: 詳細な数値を残したいときに使います。47 県データとの相性は「○」で、上位 10 + 下位 10 の構成が定型です。
+
+迷ったら **「順位の話 → 棒グラフ」「分布の話 → 地図」「変化の話 → 折れ線」「数字を残したい → 表」** が判断の目安です。質問者の発話を 1 単語で要約すると自然に決まります。
+
+### Step 2: ライブラリ選び — 4 候補の比較
+
+代表的なチャートライブラリは 4 つあります。それぞれ「速さ」「美しさ」「学習コスト」「Claude Code との相性」が違います。
+
+![matplotlib / D3 / Recharts / Plotly の比較表](./images/infographic-1-library-comparison.svg)
+<!-- SVG: infographic | 4 ライブラリの比較表 -->
+
+ライブラリの使い分けは以下の通りです。
+
+**matplotlib + pandas** (Python): 速い・コードが短い・Claude が一発で書けます。標準色が古いのが弱みです。議会前の急ぎ仕事に推奨します。
+
+**D3.js** (TypeScript): 美しい・SVG で印刷に強い・自由度が高いです。コード量が多いのが弱みです。県の広報物・印刷物に推奨します。
+
+**Recharts** (React): Web ダッシュボードに最適です。React 環境が前提になるのが弱みです。庁内ポータルに推奨します。
+
+**Plotly** (Python/JS): インタラクティブ (マウスホバー) に対応しています。静止画化の手間がかかるのが弱みです。課長級に触ってもらう用の提案デモに推奨します。
+
+判断の目安はこの 1 文に集約できます: **「議会の答弁資料 = matplotlib、県のパンフレット = D3、庁内 Web = Recharts、上司への提案デモ = Plotly」**。
+
+### Step 3: 一番速い頼み方 — matplotlib で 1 枚 5 分
+
+Claude Code に頼むとき、最初の 1 枚は次のような頼み方で十分通ります。
+
+```
+e-Stat の人口データ (統計表 ID 0003448237) を取得して、
+2023 年の総人口で 47 都道府県の横棒グラフを作って。
+
+要件:
+- 縦軸は都道府県名、横軸は人口 (万人単位)
+- 1 位の県の色は #0891b2、その他はグレー (#cbd5e1)
+- タイトル「都道府県別 総人口 (2023 年)」
+- 右下フッタに「出典: 政府統計の総合窓口 (e-Stat)」
+- 出力は PNG (300dpi) と SVG の両方
+- ファイル名: chart-population-2023.png / .svg
+- カラーアクセシビリティ: 赤緑色覚異常配慮 (赤と緑のみで区別しない)
+```
+
+ここで重要なのは **「1 位の色を変える」「フッタを入れる」「カラーアクセシビリティ」「PNG と SVG 両方」**を頼み方に書いておく点です。
+
+これらは Excel グラフだと毎回手作業になる部分で、答弁資料の品質差はこの 4 点に集中します。コマンドを暗記する必要はなく、こう頼めばこう返ってくると知っていれば十分です。
+
+### Step 4: PowerPoint / Word に綺麗に貼る
+
+紙の答弁資料 (A4 縦 / A3 横) に貼ることを前提にすると、解像度と縦横比に注意が必要です。
+
+- **PowerPoint 1 枚に 1 図**: 横幅 1200px × 縦幅 800px、PNG 300dpi
+- **PowerPoint 1 枚に 4 図**: 横幅 600px × 縦幅 400px、PNG 300dpi
+- **Word 縦置きに貼る**: SVG ベースが適しています。Word は SVG をベクタのまま保持します
+- **印刷物 (リーフレット)**: SVG または PDF が推奨です。ラスタライズすると粗くなります
+
+頼むときは「PowerPoint 1 枚に 4 図入れる前提で生成して」と書けば、サイズも自動で決まります。一度うまくいったサイズ感は記事 #10 の skill 化で固定すると、以降毎回同じ品質で出せます。
+
+### Step 5: e-Stat 出典の自動挿入
+
+e-Stat 利用規約は「出典の明記」を求めています。matplotlib なら 3 行の追記で済みます。
+
+```python
+plt.figtext(
+    0.99, 0.01,
+    "出典: 政府統計の総合窓口 (e-Stat) より作成",
+    ha="right", va="bottom",
+    fontsize=8, color="#64748b",
+)
+```
+
+これを毎回コピペするより、Claude Code への頼み方に **「右下フッタに『出典: 政府統計の総合窓口 (e-Stat) より作成』を入れて」** と書いておくのが現実的です。さらに skill 化すれば (記事 #10 参照)、すべてのチャートで自動的に同じフッタが入ります。出典漏れの監査指摘もこれで防げます。
+
+ここから先は有料部分:
+
+### Step 6: matplotlib 実装 — 47 県横棒グラフの完成形
+
+ここからは Claude Code が生成するコード例を、コピペで動く形で提示します。Python 3.10 以上、`pip install pandas matplotlib japanize-matplotlib requests` が前提です。
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+import japanize_matplotlib  # 日本語フォント自動設定
+import requests, os
+
+# --- データ取得 (e-Stat API) ---
+API_KEY = os.environ["ESTAT_API_KEY"]
+STATS_DATA_ID = "0003448237"  # 国勢調査・人口総数
+url = "https://api.e-stat.go.jp/rest/3.0/app/json/getStatsData"
+params = {
+    "appId": API_KEY,
+    "statsDataId": STATS_DATA_ID,
+    "lvArea": "2",       # 47 都道府県レベル (cdArea は使わない)
+    "metaGetFlg": "Y",
+}
+resp = requests.get(url, params=params, timeout=30).json()
+
+# --- DataFrame 化 ---
+values = resp["GET_STATS_DATA"]["STATISTICAL_DATA"]["DATA_INF"]["VALUE"]
+df = pd.DataFrame(values)
+df["value"] = pd.to_numeric(df["$"])
+df = df[df["@time"] == "2023000000"]  # 2023 年だけ抽出
+df = df.sort_values("value", ascending=True)
+
+# --- 描画 ---
+fig, ax = plt.subplots(figsize=(8, 12), dpi=300)
+colors = ["#cbd5e1"] * len(df)
+colors[-1] = "#0891b2"  # 1 位の色を変える
+
+ax.barh(df["@area"], df["value"] / 10000, color=colors)
+ax.set_xlabel("人口 (万人)")
+ax.set_title("都道府県別 総人口 (2023 年)", fontsize=14, pad=12)
+ax.grid(axis="x", linestyle="--", alpha=0.5)
+ax.spines["top"].set_visible(False)
+ax.spines["right"].set_visible(False)
+
+plt.figtext(
+    0.99, 0.01,
+    "出典: 政府統計の総合窓口 (e-Stat) より作成",
+    ha="right", va="bottom", fontsize=8, color="#64748b",
+)
+
+plt.tight_layout()
+plt.savefig("chart-population-2023.png", dpi=300, bbox_inches="tight")
+plt.savefig("chart-population-2023.svg", bbox_inches="tight")
+```
+
+このコードは Claude Code に「上記の頼み方で生成して」と頼めば 1 分以内に出てきます。読者は「こういうコードが返ってくる」と知っていれば十分で、暗記する必要はありません。
+
+`lvArea=2` で 47 都道府県を一括取得し、`cdArea` で個別指定しないのは e-Stat API のキャッシュ効率を上げる定石です (CLAUDE.md の e-Stat API 規約参照)。
+
+### Step 7: D3.js 実装 — 美しいコロプレス地図
+
+県の広報誌・パンフレットなど印刷物に強いのは D3.js の SVG 出力です。コードは長くなりますが、Claude Code が一発で書けます。
+
+頼み方のテンプレート:
+
+```
+TopoJSON 形式の都道府県境界データ (47-prefectures.topojson) と、
+都道府県別人口 CSV (prefecture, value の 2 列、47 行) を入力に、
+D3.js v7 でコロプレス地図 (chloropleth) の SVG を出力する HTML を作って。
+
+要件:
+- カラースケール: d3.scaleSequential(d3.interpolateBlues)
+- 凡例 (legend) を右下に配置
+- 都道府県名を北海道・本州・四国・九州・沖縄でそれぞれラベル表示
+- 出力: standalone HTML (CDN から d3 と topojson-client を読み込む)
+- 印刷を想定して背景白・線色 #475569
+- フッタに「出典: 政府統計の総合窓口 (e-Stat) より作成」
+```
+
+D3 は学習コストが高いですが、**Claude Code に書かせる前提なら問題になりません**。stats47.jp のコロプレス表示も同じテンプレで生成しています。
+
+TopoJSON ファイルは国土数値情報ダウンロードサービス (<https://nlftp.mlit.go.jp/ksj/>、アクセス日 2026-05-26) から県界データを取得して mapshaper で軽量化する流れが定番です。
+
+### Step 8: 出力フォーマットの選び方
+
+用途別の推奨フォーマットは次の通りです。
+
+**議会資料 (A4 紙配布)**: PNG 300dpi が適しています。印刷で安全で、貼り付けが速いためです。
+
+**県広報誌・パンフ**: SVG または PDF が推奨です。印刷拡大に強いためです。
+
+**庁内 Web (イントラ)**: SVG (`<img src=...>`) が適しています。ファイルサイズが小さいためです。
+
+**メール添付**: PNG (圧縮版) が安心です。受け手の環境を選ばないためです。
+
+**PowerPoint**: SVG (PowerPoint 2016 以降) が推奨です。サイズ変更しても綺麗に保てます。
+
+「とりあえず PNG と SVG の両方を生成して」と頼んでおくと、後工程で困りません。1 枚あたり 2 ファイルになりますが、Claude Code に任せている時点で手作業のコストはゼロです。
+
+### Step 9: カラーアクセシビリティ (赤緑色覚異常配慮)
+
+成人男性の約 5%、女性の約 0.2% に色覚異常があります (日本眼科医会、<https://www.gankaikai.or.jp/health/53/>、アクセス日 2026-05-26)。議員・住民への配布物では、**「赤と緑だけで意味を区別しない」** ことが品質基準として浸透しています。
+
+Claude Code への頼み方に 1 行入れます:
+
+```
+カラーアクセシビリティ配慮: 赤と緑だけで区別する配色は使わない。
+推奨パレット: #0891b2 (cyan), #f59e0b (amber), #7c3aed (violet), #64748b (slate)
+```
+
+このパレットは色覚異常シミュレータ (Color Blindness Simulator など) でも判別できる組み合わせで、stats47.jp のすべてのチャートでも採用しています。
+
+### Step 10: 頼み方を skill にして毎回同じ品質に
+
+ここまでの 6 ステップ (要件・カラー・出典・サイズ・PNG/SVG・カラーアクセシビリティ) を毎回書くのは現実的ではありません。
+
+`.claude/skills/assembly-chart/SKILL.md` に一度書いておけば、次回からは「人口データで議会答弁用チャート作って」だけで全部が適用されます。skill の作り方の全容は記事 #10 を参照してください。
+
+## よくあるつまずきと回避策
+
+- **⚠️ matplotlib で日本語が豆腐 (□) になります** → `japanize_matplotlib` を import します。または `matplotlib.font_manager` で Noto Sans CJK JP を指定します
+- **⚠️ PowerPoint に貼ったら粗いです** → PNG の dpi が足りません。`dpi=300` を明示します
+- **⚠️ Excel グラフから移行した直後、色がバラバラになります** → 頼み方に「カラーパレットは #0891b2 系で統一」と書きます。skill 化すれば永続化できます
+- **⚠️ e-Stat の出典忘れで監査指摘を受けます** → フッタを skill のテンプレに固定します。手作業の漏れをゼロにできます
+- **⚠️ コロプレス地図の北海道だけ大きすぎます** → 北海道だけ別レイヤーでスケールを 0.5 にする頼み方を skill に追加します
+
+## 応用 / 次に読むべき記事
+
+- [#08 ベンチマーク表 5 分作成](../08-benchmark-table-5min/draft.md) — 表形式の出力に特化した手順
+- [#10 月次集計を 1 コマンド化](../10-claude-skills-routinize/draft.md) — 本記事で説明した頼み方を skill にして永続化
+- [#03 47 都道府県データを 1 コマンドで取得](../03-fetch-prefecture-ranking/draft.md) — チャートの元データ取得
+
+stats47.jp の実例も併せてどうぞ。
+
+- 棒グラフの例: <https://stats47.jp/ranking/total-population>
+- コロプレス地図の例: <https://stats47.jp/ranking/total-population> (右パネル)
+- カテゴリ別ランキング: <https://stats47.jp/category/population>
+
+<!-- circulation-footer:v2 -->
+
+## このシリーズについて
+
+「公務員のための e-Stat × Claude Code 実務ガイド」全 12 本のシリーズ第 09 回。e-Stat 業務の効率化に関心がある方は、マガジン購読がお得です。
+
+▶️ マガジン: 公務員のための e-Stat × Claude Code 実務ガイド
+🔗 https://note.com/stats47/m/m1b836e4c8dce
+
+姉妹マガジン「公務員 × Claude Code 実務活用ガイド (全 33 本)」では議事録・議会答弁・条例レビューなど統計以外の業務効率化を扱っています。
+
+▶️ stats47.jp: 本記事で紹介した手順で運用している 47 都道府県統計サイト (約 2,000 のランキングを毎日自動更新)。動いている実例として参考にどうぞ。
+🔗 https://stats47.jp

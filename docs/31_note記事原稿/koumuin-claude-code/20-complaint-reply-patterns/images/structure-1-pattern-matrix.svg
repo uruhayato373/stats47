@@ -1,0 +1,136 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 420" font-family="'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Noto Sans JP', sans-serif">
+  <rect width="800" height="420" fill="#FAFAFA"/>
+  <text x="400" y="34" text-anchor="middle" font-size="20" font-weight="bold" fill="#1E293B">苦情返信 4 要素 × 5 パターンの重み配分</text>
+  <text x="400" y="54" text-anchor="middle" font-size="12" fill="#64748B">謝罪 / 説明 / 対応 / 再発防止 (+ 公務員立場) の比率</text>
+
+  <!-- Column headers -->
+  <g>
+    <rect x="180" y="80" width="100" height="36" fill="#FEE2E2" stroke="#7F1D1D" stroke-width="1.5" rx="4"/>
+    <text x="230" y="103" text-anchor="middle" font-size="12" font-weight="bold" fill="#7F1D1D">謝罪</text>
+  </g>
+  <g>
+    <rect x="285" y="80" width="100" height="36" fill="#DBEAFE" stroke="#1E3A8A" stroke-width="1.5" rx="4"/>
+    <text x="335" y="103" text-anchor="middle" font-size="12" font-weight="bold" fill="#1E3A8A">説明</text>
+  </g>
+  <g>
+    <rect x="390" y="80" width="100" height="36" fill="#CCFBF1" stroke="#0F766E" stroke-width="1.5" rx="4"/>
+    <text x="440" y="103" text-anchor="middle" font-size="12" font-weight="bold" fill="#0F766E">対応</text>
+  </g>
+  <g>
+    <rect x="495" y="80" width="100" height="36" fill="#FEF3C7" stroke="#92400E" stroke-width="1.5" rx="4"/>
+    <text x="545" y="103" text-anchor="middle" font-size="12" font-weight="bold" fill="#92400E">再発防止</text>
+  </g>
+  <g>
+    <rect x="600" y="80" width="120" height="36" fill="#E0E7FF" stroke="#4338CA" stroke-width="1.5" rx="4"/>
+    <text x="660" y="103" text-anchor="middle" font-size="12" font-weight="bold" fill="#4338CA">公務員立場</text>
+  </g>
+
+  <!-- Helper: bar drawing per row -->
+  <!-- Pattern 1: 全面謝罪型 60/20/10/10/0 -->
+  <g>
+    <rect x="30" y="130" width="140" height="44" fill="#F1F5F9" stroke="#475569" stroke-width="1.5" rx="4"/>
+    <text x="100" y="151" text-anchor="middle" font-size="12" font-weight="bold" fill="#1E293B">全面謝罪型</text>
+    <text x="100" y="167" text-anchor="middle" font-size="10" fill="#7F1D1D">職員態度クレーム</text>
+  </g>
+  <rect x="180" y="132" width="100" height="40" fill="#FEE2E2"/>
+  <rect x="180" y="132" width="60" height="40" fill="#DC2626"/>
+  <text x="210" y="158" text-anchor="middle" font-size="11" font-weight="bold" fill="#FFFFFF">60%</text>
+  <rect x="285" y="132" width="100" height="40" fill="#DBEAFE"/>
+  <rect x="285" y="132" width="20" height="40" fill="#2563EB"/>
+  <text x="335" y="158" text-anchor="middle" font-size="10" fill="#1E3A8A">20%</text>
+  <rect x="390" y="132" width="100" height="40" fill="#CCFBF1"/>
+  <rect x="390" y="132" width="10" height="40" fill="#059669"/>
+  <text x="440" y="158" text-anchor="middle" font-size="10" fill="#0F766E">10%</text>
+  <rect x="495" y="132" width="100" height="40" fill="#FEF3C7"/>
+  <rect x="495" y="132" width="10" height="40" fill="#D97706"/>
+  <text x="545" y="158" text-anchor="middle" font-size="10" fill="#92400E">10%</text>
+  <rect x="600" y="132" width="120" height="40" fill="none" stroke="#CBD5E1" stroke-width="1"/>
+  <text x="660" y="158" text-anchor="middle" font-size="10" fill="#94A3B8">−</text>
+
+  <!-- Pattern 2: 制度説明型 10/60/20/10/0 -->
+  <g>
+    <rect x="30" y="180" width="140" height="44" fill="#F1F5F9" stroke="#475569" stroke-width="1.5" rx="4"/>
+    <text x="100" y="201" text-anchor="middle" font-size="12" font-weight="bold" fill="#1E293B">制度説明型</text>
+    <text x="100" y="217" text-anchor="middle" font-size="10" fill="#1E40AF">制度不満・事実誤認</text>
+  </g>
+  <rect x="180" y="182" width="100" height="40" fill="#FEE2E2"/>
+  <rect x="180" y="182" width="10" height="40" fill="#DC2626"/>
+  <text x="230" y="208" text-anchor="middle" font-size="10" fill="#7F1D1D">10%</text>
+  <rect x="285" y="182" width="100" height="40" fill="#DBEAFE"/>
+  <rect x="285" y="182" width="60" height="40" fill="#2563EB"/>
+  <text x="315" y="208" text-anchor="middle" font-size="11" font-weight="bold" fill="#FFFFFF">60%</text>
+  <rect x="390" y="182" width="100" height="40" fill="#CCFBF1"/>
+  <rect x="390" y="182" width="20" height="40" fill="#059669"/>
+  <text x="440" y="208" text-anchor="middle" font-size="10" fill="#0F766E">20%</text>
+  <rect x="495" y="182" width="100" height="40" fill="#FEF3C7"/>
+  <rect x="495" y="182" width="10" height="40" fill="#D97706"/>
+  <text x="545" y="208" text-anchor="middle" font-size="10" fill="#92400E">10%</text>
+  <rect x="600" y="182" width="120" height="40" fill="none" stroke="#CBD5E1" stroke-width="1"/>
+  <text x="660" y="208" text-anchor="middle" font-size="10" fill="#94A3B8">−</text>
+
+  <!-- Pattern 3: 中庸型 25/35/25/15/0 -->
+  <g>
+    <rect x="30" y="230" width="140" height="44" fill="#F1F5F9" stroke="#475569" stroke-width="1.5" rx="4"/>
+    <text x="100" y="251" text-anchor="middle" font-size="12" font-weight="bold" fill="#1E293B">中庸型</text>
+    <text x="100" y="267" text-anchor="middle" font-size="10" fill="#475569">最も汎用的</text>
+  </g>
+  <rect x="180" y="232" width="100" height="40" fill="#FEE2E2"/>
+  <rect x="180" y="232" width="25" height="40" fill="#DC2626"/>
+  <text x="230" y="258" text-anchor="middle" font-size="10" fill="#7F1D1D">25%</text>
+  <rect x="285" y="232" width="100" height="40" fill="#DBEAFE"/>
+  <rect x="285" y="232" width="35" height="40" fill="#2563EB"/>
+  <text x="335" y="258" text-anchor="middle" font-size="11" font-weight="bold" fill="#1E3A8A">35%</text>
+  <rect x="390" y="232" width="100" height="40" fill="#CCFBF1"/>
+  <rect x="390" y="232" width="25" height="40" fill="#059669"/>
+  <text x="440" y="258" text-anchor="middle" font-size="10" fill="#0F766E">25%</text>
+  <rect x="495" y="232" width="100" height="40" fill="#FEF3C7"/>
+  <rect x="495" y="232" width="15" height="40" fill="#D97706"/>
+  <text x="545" y="258" text-anchor="middle" font-size="10" fill="#92400E">15%</text>
+  <rect x="600" y="232" width="120" height="40" fill="none" stroke="#CBD5E1" stroke-width="1"/>
+  <text x="660" y="258" text-anchor="middle" font-size="10" fill="#94A3B8">−</text>
+
+  <!-- Pattern 4: 部分受容型 30/30/30/10/0 -->
+  <g>
+    <rect x="30" y="280" width="140" height="44" fill="#F1F5F9" stroke="#475569" stroke-width="1.5" rx="4"/>
+    <text x="100" y="301" text-anchor="middle" font-size="12" font-weight="bold" fill="#1E293B">部分受容型</text>
+    <text x="100" y="317" text-anchor="middle" font-size="10" fill="#0F766E">個別救済要求</text>
+  </g>
+  <rect x="180" y="282" width="100" height="40" fill="#FEE2E2"/>
+  <rect x="180" y="282" width="30" height="40" fill="#DC2626"/>
+  <text x="230" y="308" text-anchor="middle" font-size="10" fill="#7F1D1D">30%</text>
+  <rect x="285" y="282" width="100" height="40" fill="#DBEAFE"/>
+  <rect x="285" y="282" width="30" height="40" fill="#2563EB"/>
+  <text x="335" y="308" text-anchor="middle" font-size="10" fill="#1E3A8A">30%</text>
+  <rect x="390" y="282" width="100" height="40" fill="#CCFBF1"/>
+  <rect x="390" y="282" width="30" height="40" fill="#059669"/>
+  <text x="440" y="308" text-anchor="middle" font-size="11" font-weight="bold" fill="#0F766E">30%</text>
+  <rect x="495" y="282" width="100" height="40" fill="#FEF3C7"/>
+  <rect x="495" y="282" width="10" height="40" fill="#D97706"/>
+  <text x="545" y="308" text-anchor="middle" font-size="10" fill="#92400E">10%</text>
+  <rect x="600" y="282" width="120" height="40" fill="none" stroke="#CBD5E1" stroke-width="1"/>
+  <text x="660" y="308" text-anchor="middle" font-size="10" fill="#94A3B8">−</text>
+
+  <!-- Pattern 5: 毅然型 5/50/5/5/35 -->
+  <g>
+    <rect x="30" y="330" width="140" height="44" fill="#F1F5F9" stroke="#475569" stroke-width="1.5" rx="4"/>
+    <text x="100" y="351" text-anchor="middle" font-size="12" font-weight="bold" fill="#1E293B">毅然型</text>
+    <text x="100" y="367" text-anchor="middle" font-size="10" fill="#4338CA">不当要求疑い</text>
+  </g>
+  <rect x="180" y="332" width="100" height="40" fill="#FEE2E2"/>
+  <rect x="180" y="332" width="5" height="40" fill="#DC2626"/>
+  <text x="230" y="358" text-anchor="middle" font-size="10" fill="#7F1D1D">5%</text>
+  <rect x="285" y="332" width="100" height="40" fill="#DBEAFE"/>
+  <rect x="285" y="332" width="50" height="40" fill="#2563EB"/>
+  <text x="315" y="358" text-anchor="middle" font-size="11" font-weight="bold" fill="#FFFFFF">50%</text>
+  <rect x="390" y="332" width="100" height="40" fill="#CCFBF1"/>
+  <rect x="390" y="332" width="5" height="40" fill="#059669"/>
+  <text x="440" y="358" text-anchor="middle" font-size="10" fill="#0F766E">5%</text>
+  <rect x="495" y="332" width="100" height="40" fill="#FEF3C7"/>
+  <rect x="495" y="332" width="5" height="40" fill="#D97706"/>
+  <text x="545" y="358" text-anchor="middle" font-size="10" fill="#92400E">5%</text>
+  <rect x="600" y="332" width="120" height="40" fill="#E0E7FF"/>
+  <rect x="600" y="332" width="42" height="40" fill="#4338CA"/>
+  <text x="660" y="358" text-anchor="middle" font-size="11" font-weight="bold" fill="#FFFFFF">35%</text>
+
+  <text x="400" y="400" text-anchor="middle" font-size="11" fill="#64748B">→ 苦情の主分類 A-E と温度感に応じて推奨パターンを 2-3 個選定</text>
+</svg>

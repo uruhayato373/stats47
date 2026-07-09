@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 354" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Noto Sans JP',sans-serif">
+  <rect width="760" height="354" rx="10" fill="#1e1e2e"/>
+  <rect width="760" height="38" rx="10" fill="#313244"/>
+  <rect y="20" width="760" height="18" fill="#313244"/>
+  <circle cx="26" cy="19" r="6" fill="#f38ba8"/>
+  <circle cx="48" cy="19" r="6" fill="#f9e2af"/>
+  <circle cx="70" cy="19" r="6" fill="#a6e3a1"/>
+  <text x="380" y="24" text-anchor="middle" font-size="12" fill="#9399b2">ターミナル</text>
+  <g font-family="'SFMono-Regular','Menlo','Consolas','Courier New',monospace" font-size="14">
+    <text x="24" y="76" fill="#89b4fa">$ <tspan fill="#cdd6f4">npm install -g @anthropic-ai/claude-code</tspan></text>
+    <text x="24" y="102" fill="#f38ba8">npm ERR! code E407</text>
+    <text x="24" y="126" fill="#f38ba8">npm ERR! 407 Proxy Authentication Required</text>
+    <text x="24" y="160" fill="#89b4fa">$ <tspan fill="#cdd6f4">claude</tspan></text>
+    <text x="24" y="186" fill="#f38ba8">Error: Authentication failed</text>
+    <text x="24" y="210" fill="#bac2de">  Invalid x-api-key. キー先頭末尾の空白を確認</text>
+    <text x="24" y="244" fill="#6c7086"># 対処: プロキシ認証情報を URL エンコード</text>
+    <text x="24" y="268" fill="#6c7086">#       API キーの空白混入を echo | wc -c で確認</text>
+  </g>
+  <rect x="0" y="314" width="760" height="40" fill="#181825"/>
+  <text x="24" y="339" font-size="13" fill="#bac2de">▲ よくあるエラー: E407 プロキシ認証 / Authentication failed</text>
+</svg>

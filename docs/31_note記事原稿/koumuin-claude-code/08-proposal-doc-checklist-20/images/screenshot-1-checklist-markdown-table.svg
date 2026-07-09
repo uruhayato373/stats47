@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 444" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Noto Sans JP',sans-serif">
+  <rect width="760" height="444" rx="10" fill="#1e1e2e"/>
+  <rect width="760" height="38" rx="10" fill="#313244"/>
+  <rect y="20" width="760" height="18" fill="#313244"/>
+  <circle cx="26" cy="19" r="6" fill="#f38ba8"/>
+  <circle cx="48" cy="19" r="6" fill="#f9e2af"/>
+  <circle cx="70" cy="19" r="6" fill="#a6e3a1"/>
+  <text x="380" y="24" text-anchor="middle" font-size="12" fill="#9399b2">Claude Code — proposal-review</text>
+  <g font-family="'SFMono-Regular','Menlo','Consolas','Courier New',monospace" font-size="14">
+    <text x="24" y="74" fill="#89b4fa">&gt; <tspan fill="#cdd6f4">/proposal-review @draft.txt</tspan></text>
+    <text x="24" y="104" fill="#6c7086"># 20 項目の査読結果</text>
+    <text x="24" y="132" fill="#bac2de">| # | 項目         | 判定   | 想定指摘者 | 想定指摘文           |</text>
+    <text x="24" y="156" fill="#585b70">|---|--------------|--------|-----------|----------------------|</text>
+    <text x="24" y="180" fill="#bac2de">| 1 | 件名の明確さ | <tspan fill="#a6e3a1">OK</tspan>     | 上席      | —                    |</text>
+    <text x="24" y="204" fill="#bac2de">| 3 | 合議経路     | <tspan fill="#f38ba8">欠落</tspan>   | 財政      | 財政課合議が漏れています |</text>
+    <text x="24" y="228" fill="#bac2de">| 10| 引用条文番号 | <tspan fill="#f9e2af">要確認</tspan> | 法務      | 条文番号は現行版ですか |</text>
+    <text x="24" y="252" fill="#bac2de">| 11| 予算科目残額 | <tspan fill="#f38ba8">欠落</tspan>   | 財政      | 節の残額根拠は?       |</text>
+    <text x="24" y="276" fill="#bac2de">| 14| 根拠条文明示 | <tspan fill="#f38ba8">欠落</tspan>   | 法務      | 根拠条文が未記載です  |</text>
+    <text x="24" y="300" fill="#bac2de">| 17| 公用文表記   | <tspan fill="#f9e2af">要確認</tspan> | 総務      | 送り仮名の揺れあり    |</text>
+    <text x="24" y="324" fill="#bac2de">| 18| 保存年限     | <tspan fill="#a6e3a1">OK</tspan>     | 総務      | —                    |</text>
+    <text x="24" y="348" fill="#585b70">…(全 20 行)</text>
+    <text x="24" y="380" fill="#a6e3a1">OK: 12 件、要確認: 4 件、欠落: 4 件。優先修正: # 3, 11, 14</text>
+  </g>
+  <rect x="0" y="404" width="760" height="40" fill="#181825"/>
+  <text x="24" y="429" font-size="13" fill="#bac2de">▲ 査読結果の markdown 表 (5 列 × 20 行 + 集計行)</text>
+</svg>
