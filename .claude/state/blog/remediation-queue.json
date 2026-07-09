@@ -7,8 +7,8 @@
   "summary": {
     "total": 140,
     "pending": 99,
-    "inProgress": 2,
-    "done": 39,
+    "inProgress": 1,
+    "done": 40,
     "mustFixPending": 36,
     "opportunityPending": 63
   },
@@ -111,7 +111,7 @@
     {
       "slug": "farmland-crisis-abandoned-land",
       "lane": "must-fix",
-      "status": "in-progress",
+      "status": "done",
       "priority": 4,
       "combinedScore": 0.343,
       "gsc": {
@@ -135,8 +135,8 @@
           "warning: source-link 末尾集約 2個 — 各図直下へ分散"
         ]
       },
-      "wave_id": null,
-      "remediated_at": null,
+      "wave_id": "2026-07-09-manual",
+      "remediated_at": "2026-07-09",
       "in_progress_at": "2026-07-09",
       "last_brushup": null,
       "reviewTier": "opus"
