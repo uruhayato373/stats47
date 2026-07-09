@@ -21,7 +21,7 @@
  * 制約:
  *   - 計算系 metric (source.kind === "calculated") は本バッチでは対応しない (別 skill)
  *   - mlit / external source も別 fetcher 必要
- *   - 現状サポート source: estat (prefecture + city) / kakei-chousa は未実装
+ *   - 現状サポート source: estat (prefecture + city) / kakei-chousa (prefecture、estat 経路に写像)
  *   - city は社会・人口統計体系 (00000101xx/00000102xx) のみ対応 (prefToCityStatsDataId 参照)
  */
 import { readFileSync, writeFileSync, mkdirSync, statSync, existsSync } from "node:fs";
@@ -121,6 +121,27 @@ function parseEstatValue(raw: string): number | null {
   }
   const n = Number(raw);
   return Number.isFinite(n) ? n : null;
+}
+
+/**
+ * 家計調査 (0003348235/0003348239) の @area は都道府県コードではなく
+ * 県庁所在市コード (原則 NN003、例外: 福岡市=40004。40003 は北九州市)。
+ * サイトの慣行 (既存 675 metric) に合わせ、県庁所在市の値を都道府県コード NN000 に写像する。
+ * 全国 (00000) と県庁所在市以外の大都市 (川崎/相模原/浜松/堺/北九州) は対象外として捨てる。
+ */
+const KAKEI_CITY_TO_PREF = new Map<string, string>();
+for (let i = 1; i <= 47; i++) {
+  const nn = String(i).padStart(2, "0");
+  KAKEI_CITY_TO_PREF.set(i === 40 ? "40004" : `${nn}003`, `${nn}000`);
+}
+function remapKakeiAreas(values: EstatValue[]): EstatValue[] {
+  const out: EstatValue[] = [];
+  for (const v of values) {
+    const pref = KAKEI_CITY_TO_PREF.get(v["@area"]);
+    if (!pref) continue;
+    out.push({ ...v, "@area": pref });
+  }
+  return out;
 }
 
 /** 5 桁エリアコード判定 (都道府県集計行 NN000) */
@@ -323,10 +344,27 @@ async function processOne(
   if (config.source.kind === "external" || config.source.kind === "mlit") {
     return { key: config.key, ok: false, message: `${config.source.kind} source skipped (fetcher not implemented yet)` };
   }
+  // kakei-chousa は e-Stat API の通常テーブル (statsDataId + cdCat01/cdCat02 filter)。
+  // filter に格納されたパラメータを estat source と同形に写して同一経路で fetch する。
+  let src: Extract<SourceConfig, { kind: "estat" }>;
   if (config.source.kind === "kakei-chousa") {
-    return { key: config.key, ok: false, message: "kakei-chousa skipped (fetcher not yet implemented)" };
+    const filter = (config.source.filter ?? {}) as {
+      statsDataId?: string;
+      cdCat01?: string;
+      cdCat02?: string;
+    };
+    if (!filter.statsDataId) {
+      return { key: config.key, ok: false, message: "kakei-chousa missing filter.statsDataId skipped" };
+    }
+    src = {
+      kind: "estat",
+      statsDataId: filter.statsDataId,
+      cdCat01: filter.cdCat01,
+      cdCat02: filter.cdCat02,
+    };
+  } else {
+    src = config.source;
   }
-  const src = config.source;
   const wantPref = config.entities.includes("prefecture");
   const wantCity = config.entities.includes("city");
   if (!wantPref && !wantCity) {
@@ -338,7 +376,8 @@ async function processOne(
     let totalRows = 0;
 
     if (wantPref) {
-      const values = await fetchEstatData(appId, src);
+      const raw = await fetchEstatData(appId, src);
+      const values = config.source.kind === "kakei-chousa" ? remapKakeiAreas(raw) : raw;
       const payload = shapeForPrefecture(config, values);
       if (!dryRun) {
         const outPath = resolve(R2_LOCAL, `app/stats/${config.key}/values.json`);

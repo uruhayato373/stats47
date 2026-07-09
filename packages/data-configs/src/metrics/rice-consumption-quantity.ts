@@ -1,10 +1,10 @@
 import type { MetricConfig } from "../types";
 
-export const riceConsumptionExpenditure: MetricConfig = {
-  "key": "rice-consumption-expenditure",
-  "title": "米消費支出額",
-  "subtitle": "都道府県庁所在市の二人以上世帯の年間米消費支出額",
-  "unit": "円",
+export const riceConsumptionQuantity: MetricConfig = {
+  "key": "rice-consumption-quantity",
+  "title": "米消費量",
+  "subtitle": "都道府県庁所在市の二人以上世帯の年間米消費量",
+  "unit": "kg",
   "category": "economy",
   "source": {
     "kind": "kakei-chousa",
@@ -13,7 +13,7 @@ export const riceConsumptionExpenditure: MetricConfig = {
         "name": "家計調査",
         "url": "https://www.e-stat.go.jp/stat-search/files?page=1&layout=datalist&toukei=00200561",
       },
-      "statsDataId": "0003348239",
+      "statsDataId": "0003348235",
       "cdCat01": "010110001",
       "cdCat02": "03",
     },
@@ -29,7 +29,7 @@ export const riceConsumptionExpenditure: MetricConfig = {
   },
   "yearFormat": "calendar",
   "visualization": {
-    "colorScheme": "interpolateOranges",
+    "colorScheme": "interpolateBlues",
     "colorSchemeType": "sequential",
     "minValueType": "zero",
   },
@@ -42,22 +42,20 @@ export const riceConsumptionExpenditure: MetricConfig = {
       {
         "type": "per_population",
         "label": "人口10万人あたり",
-        "unit": "円/10万人",
+        "unit": "kg/10万人",
         "scaleFactor": 100000,
         "decimalPlaces": 1,
       },
       {
         "type": "per_area",
         "label": "面積100km²あたり",
-        "unit": "円/100km²",
+        "unit": "kg/100km²",
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
     ],
     "isCalculated": false,
   },
-  "seoTitle": "米消費支出額ランキング都道府県【2024年】",
-  "seoDescription": "2024年の米消費支出額の都道府県別ランキング。家計調査（二人以上世帯・県庁所在市）の年間支出額を地図やグラフで47都道府県比較。",
   "isActive": true,
   "isFeatured": false,
   "featuredOrder": 0,
