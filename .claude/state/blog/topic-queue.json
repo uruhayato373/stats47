@@ -5,8 +5,8 @@
   "summary": {
     "total": 165,
     "pending": 160,
-    "inProgress": 5,
-    "done": 0,
+    "inProgress": 4,
+    "done": 1,
     "mustWritePending": 26,
     "byArchetype": {
       "B": 58,
@@ -194,9 +194,11 @@
       "suggestedTitle": "空き家と老年人口指の意外な関係",
       "combinedScore": 0.657,
       "lane": "must-write",
-      "status": "in-progress",
+      "status": "done",
       "priority": 5,
-      "in_progress_at": "2026-07-09"
+      "in_progress_at": "2026-07-09",
+      "done_at": "2026-07-09",
+      "published_slug": "vacant-housing-aging-correlation"
     },
     {
       "topicKey": "corr-elderly-household-detail--elementary-school-children-count",
@@ -402,7 +404,7 @@
       "suggestedTitle": "小中学校教員の平均年収が多い県はどこ",
       "combinedScore": 0.582,
       "lane": "must-write",
-      "status": "in-progress",
+      "status": "pending",
       "priority": 11,
       "in_progress_at": "2026-07-09"
     },
@@ -2645,7 +2647,7 @@
       "suggestedTitle": "日本そば消費量 日本一はどこ",
       "combinedScore": 0.415,
       "lane": "opportunity",
-      "status": "in-progress",
+      "status": "pending",
       "priority": 78,
       "in_progress_at": "2026-07-09"
     },
