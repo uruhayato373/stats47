@@ -1,0 +1,10 @@
+{
+  "kind": "derived",
+  "description": "婦人用洋服消費支出額 × 男性用洋服消費支出額の都道府県別散布図。2つのランキングデータを areaCode で JOIN したもの。",
+  "sources": [
+    { "kind": "ranking", "rankingKey": "womens-clothing-consumption-expenditure", "year": "2024", "file": "womens-clothing-expenditure-ranking-prefecture-rankings.json" },
+    { "kind": "ranking", "rankingKey": "mens-clothing-consumption-expenditure", "year": "2024", "file": "mens-clothing-ranking.json" }
+  ],
+  "transform": "areaCode で JOIN、x=男性用洋服支出額、y=婦人用洋服支出額",
+  "restore": "両 source ranking の data/*.json を areaCode で join し points を再構築"
+}

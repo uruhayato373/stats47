@@ -1,0 +1,23 @@
+[
+  {
+    "areaName": "青森県",
+    "rank": 45,
+    "value": 3131043,
+    "label": "消費支出総額",
+    "unit": "円"
+  },
+  {
+    "areaName": "東京都",
+    "rank": 2,
+    "value": 4211608,
+    "label": "消費支出総額",
+    "unit": "円"
+  },
+  {
+    "areaName": "大阪府",
+    "rank": 39,
+    "value": 3368838,
+    "label": "消費支出総額",
+    "unit": "円"
+  }
+]

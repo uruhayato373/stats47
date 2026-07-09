@@ -1,0 +1,10 @@
+{
+  "kind": "ranking",
+  "rankingKey": "consumption-expenditure-total",
+  "year": "2024",
+  "unit": "円",
+  "label": "消費支出総額",
+  "transform": "pick (青森/東京/大阪 のみ、参照用)",
+  "source": "r2:app/ranking/consumption-expenditure-total/values.json",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug dining-out-expenditure-ranking --keys consumption-expenditure-total --data-name consumption-total-ref"
+}

@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "accommodation-consumption-expenditure",
+  "year": "2019-2024",
+  "unit": "円",
+  "label": "宿泊料消費支出額の推移(東京都・47都道府県平均)",
+  "transform": "東京都は値をそのまま抽出。47都道府県平均は各年の全47県値の単純平均をスクリプトで算出",
+  "source": "r2:app/ranking/accommodation-consumption-expenditure/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "curl -s https://storage.stats47.jp/app/ranking/accommodation-consumption-expenditure/values.json で partitions[].values から東京都抽出+全47県平均を年ごとに再計算",
+  "fetchedAt": "2026-07-10T00:00:00.000Z",
+  "generatedBy": "manual (blog-revise-fix, R2 values.json partitions 2019-2024 集計)"
+}

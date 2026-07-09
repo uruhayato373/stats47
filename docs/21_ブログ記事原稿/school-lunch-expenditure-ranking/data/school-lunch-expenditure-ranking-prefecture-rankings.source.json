@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "school-lunch-consumption-expenditure",
+  "year": "2024",
+  "unit": "円",
+  "label": "学校給食消費支出額",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/school-lunch-consumption-expenditure/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug school-lunch-expenditure-ranking --keys school-lunch-consumption-expenditure --data-name school-lunch-expenditure-ranking-prefecture-rankings",
+  "fetchedAt": "2026-07-09T21:12:03.733Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}
