@@ -1,0 +1,11 @@
+{
+  "kind": "correlation",
+  "base": "vacant-housing-rate",
+  "pair": "old-population-index",
+  "pearsonR": 0.736832912341057,
+  "partialRPopulation": 0.561148541226605,
+  "unit": "％ × ‐",
+  "label": "空き家率 と 老年人口指数 の関係",
+  "source": "r2:app/correlation/by-ranking-key/vacant-housing-rate.json",
+  "restore": "node .claude/scripts/blog/fetch-correlation-scatter.mjs --slug vacant-housing-aging-correlation --base vacant-housing-rate --pair old-population-index --data-name vacant-housing-rate--old-population-index"
+}

@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "old-population-index",
+  "year": "2022",
+  "unit": "指数",
+  "label": "老年人口指数",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/old-population-index/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug vacant-housing-aging-correlation --keys old-population-index --data-name old-population-index-ranking",
+  "fetchedAt": "2026-07-09T07:14:18.668Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}
