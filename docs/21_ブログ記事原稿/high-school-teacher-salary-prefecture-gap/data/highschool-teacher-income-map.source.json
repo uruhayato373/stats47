@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "high-school-teacher-annual-income",
+  "year": "2023",
+  "unit": "万円",
+  "label": "高等学校教員の平均年収",
+  "transform": "all47 tile-grid choropleth",
+  "source": "r2:app/ranking/high-school-teacher-annual-income/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug high-school-teacher-salary-prefecture-gap --keys high-school-teacher-annual-income --data-name highschool-teacher-income-ranking",
+  "fetchedAt": "2026-07-09T07:16:12.533Z",
+  "generatedBy": "derived-from-ranking-fetch (same SSOT fetch, no new R2 call)"
+}
