@@ -1,0 +1,12 @@
+{
+  "kind": "ranking",
+  "rankingKey": "abandoned-cultivated-land-area",
+  "source": "r2:app/ranking/abandoned-cultivated-land-area/values.json",
+  "upstream": "metric config → e-Stat → R2 app/ranking",
+  "generatedBy": "generate-article-charts.ts",
+  "chartType": "bar",
+  "dataFile": "chart2-bar-abandoned.json",
+  "year": "2014",
+  "unit": "ｈａ",
+  "label": "耕地放棄面積"
+}
