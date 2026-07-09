@@ -61,7 +61,7 @@
   <h1>プロジェクト現況</h1>
   <p class="lead" id="meta">読込中…</p>
   <div class="anchor-nav">
-    <a href="#metrics">メトリクス</a><a href="#queues">進捗キュー</a><a href="#todo">TODO</a><a href="#strategy">戦略</a>
+    <a href="#metrics">メトリクス</a><a href="#queues">進捗キュー</a><a href="#todo">TODO</a><a href="#feature">機能バックログ</a><a href="#strategy">戦略</a>
   </div>
 
   <h2 id="metrics">メトリクス (週次)</h2>
@@ -78,7 +78,15 @@
     <select id="fMetric"><option value="">Metric: 全て</option></select>
     <span class="lead" id="fCount"></span>
   </div>
-  <div style="overflow-x:auto"><table id="backlogTable"><thead><tr><th>Tier</th><th>ID</th><th>タイトル</th><th>Status</th><th>Due</th><th>Metric</th></tr></thead><tbody></tbody></table></div>
+  <div style="overflow-x:auto"><table id="backlogTable"><thead><tr><th>Tier</th><th>ID</th><th>タイトル</th><th>Status</th><th>Due</th><th>Owner</th><th>Metric</th></tr></thead><tbody></tbody></table></div>
+
+  <h2 id="feature">機能バックログ</h2>
+  <p class="lead">真実源: <code>docs/02_実装計画/04_機能バックログ.md</code> (読み取り専用ミラー。編集は md 側で)</p>
+  <div class="filters">
+    <select id="ffSection"><option value="">区分: 全て</option></select>
+    <span class="lead" id="ffCount"></span>
+  </div>
+  <div style="overflow-x:auto"><table id="featureTable"><thead><tr><th>区分</th><th>ID</th><th>タイトル</th><th>tier</th><th>status</th><th>created</th></tr></thead><tbody></tbody></table></div>
 
   <h2 id="strategy">戦略 (STP)</h2>
   <div id="strategyBox"></div>
@@ -206,23 +214,56 @@ function renderQueues(d) {
   el.innerHTML = cards.join("") || '<span class="err">進捗データの取得に失敗</span>';
 }
 
+// Due の "2026-W28" (ISO週) はその週の月曜日に正規化して比較。空/不明は末尾。
+function dueKey(due) {
+  const s = String(due || "").trim();
+  if (/^\d{4}-\d{2}-\d{2}$/.test(s)) return s;
+  const w = s.match(/^(\d{4})-W(\d{2})$/);
+  if (w) {
+    const jan4 = new Date(Date.UTC(+w[1], 0, 4));
+    const mon = new Date(jan4);
+    mon.setUTCDate(jan4.getUTCDate() - (jan4.getUTCDay() || 7) + 1 + (+w[2] - 1) * 7);
+    return mon.toISOString().slice(0, 10);
+  }
+  return "9999-12-31";
+}
+// 判定確定済み status は末尾に沈める (次にやる順 = 未完了が上)
+const DONEISH = new Set(["effect/full", "effect/none", "effect/n-a", "effect/adverse", "done"]);
+function backlogSort(a, b) {
+  const d = (DONEISH.has(a.status) ? 1 : 0) - (DONEISH.has(b.status) ? 1 : 0);
+  if (d) return d;
+  const t = (parseInt(a.tier.replace(/\D/g, ""), 10) || 9) - (parseInt(b.tier.replace(/\D/g, ""), 10) || 9);
+  if (t) return t;
+  const k = dueKey(a.due).localeCompare(dueKey(b.due));
+  if (k) return k;
+  return a.id.localeCompare(b.id);
+}
+function ownerBadge(o) {
+  const s = String(o || "").trim();
+  if (!s) return "";
+  return s.startsWith("claude") ? `<span class="badge b-mut">${esc(s)}</span>` : `<span class="badge b-amber">👤 ${esc(s)}</span>`;
+}
 let backlogRows = [];
 function renderBacklog() {
   const tb = document.querySelector("#backlogTable tbody");
   const ft = document.getElementById("fTier").value, fs = document.getElementById("fStatus").value, fm = document.getElementById("fMetric").value;
-  const rows = backlogRows.filter((r) => (!ft || r.tier === ft) && (!fs || r.status === fs) && (!fm || r.metric === fm));
-  document.getElementById("fCount").textContent = `${rows.length} / ${backlogRows.length} 件`;
+  const rows = backlogRows
+    .filter((r) => (!ft || r.tier === ft) && (!fs || r.status === fs) && (!fm || r.metric === fm))
+    .slice()
+    .sort(backlogSort);
+  document.getElementById("fCount").textContent = `${rows.length} / ${backlogRows.length} 件 (未完了→Tier→期日 順)`;
   tb.innerHTML = rows.map((r) => `<tr>
     <td style="white-space:nowrap">${esc(r.tier.replace("Tier ", "T"))}</td>
     <td style="white-space:nowrap"><b>${esc(r.id)}</b></td>
     <td class="trunc" title="${esc(r.title)}">${esc(r.title)}</td>
     <td>${statusBadge(r.status)}</td>
     <td style="white-space:nowrap${overdue(r.due) && !r.status.startsWith("effect/f") ? ";color:var(--red)" : ""}">${esc(r.due)}${overdue(r.due) ? " ⚠" : ""}</td>
+    <td style="white-space:nowrap">${ownerBadge(r.owner)}</td>
     <td>${esc(r.metric)}</td></tr>`).join("");
 }
 function initBacklog(d) {
   const b = d.backlog;
-  if (!b || b.error) { document.querySelector("#backlogTable tbody").innerHTML = `<tr><td colspan="6" class="err">取得失敗: ${esc(b?.error)}</td></tr>`; return; }
+  if (!b || b.error) { document.querySelector("#backlogTable tbody").innerHTML = `<tr><td colspan="7" class="err">取得失敗: ${esc(b?.error)}</td></tr>`; return; }
   backlogRows = b.rows || [];
   const fill = (id, values) => {
     const sel = document.getElementById(id);
@@ -233,6 +274,40 @@ function initBacklog(d) {
   fill("fStatus", backlogRows.map((r) => r.status));
   fill("fMetric", backlogRows.map((r) => r.metric).filter(Boolean));
   renderBacklog();
+}
+
+// ─── 機能バックログ (04_機能バックログ.md ミラー) ───
+const SECTION_ORDER = { "今実装": 0, "将来・保留": 1, "DROP": 2 };
+let featureRows = [];
+function renderFeature() {
+  const tb = document.querySelector("#featureTable tbody");
+  const fsec = document.getElementById("ffSection").value;
+  const rows = featureRows
+    .filter((r) => !fsec || r.section === fsec)
+    .slice()
+    .sort((a, b) =>
+      (SECTION_ORDER[a.section] ?? 9) - (SECTION_ORDER[b.section] ?? 9) ||
+      (parseInt(a.tier, 10) || 9) - (parseInt(b.tier, 10) || 9) ||
+      a.id.localeCompare(b.id));
+  document.getElementById("ffCount").textContent = `${rows.length} / ${featureRows.length} 件`;
+  tb.innerHTML = rows.map((r) => `<tr>
+    <td style="white-space:nowrap">${esc(r.section)}</td>
+    <td style="white-space:nowrap"><b>${esc(r.id)}</b></td>
+    <td class="trunc" title="${esc(r.title)}">${esc(r.title)}</td>
+    <td>${esc(r.tier)}</td>
+    <td class="trunc" style="max-width:240px" title="${esc(r.status)}">${esc(r.status)}</td>
+    <td style="white-space:nowrap">${esc(r.created)}</td></tr>`).join("");
+}
+function initFeature(d) {
+  const f = d.featureBacklog;
+  if (!f || f.error) { document.querySelector("#featureTable tbody").innerHTML = `<tr><td colspan="6" class="err">取得失敗: ${esc(f?.error)}</td></tr>`; return; }
+  featureRows = f.rows || [];
+  const sel = document.getElementById("ffSection");
+  [...new Set(featureRows.map((r) => r.section))]
+    .sort((a, b) => (SECTION_ORDER[a] ?? 9) - (SECTION_ORDER[b] ?? 9))
+    .forEach((v) => { const o = document.createElement("option"); o.value = o.textContent = v; sel.appendChild(o); });
+  sel.addEventListener("change", renderFeature);
+  renderFeature();
 }
 
 function renderStrategy(d) {
@@ -260,6 +335,7 @@ async function load() {
     renderMetrics(d);
     renderQueues(d);
     initBacklog(d);
+    initFeature(d);
     renderStrategy(d);
   } catch (e) {
     document.getElementById("meta").innerHTML = `<span class="err">取得失敗: ${esc(e.message)}。<code>npm run gallery</code> を起動してください</span>`;
