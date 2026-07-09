@@ -1,0 +1,72 @@
+[
+  {
+    "areaName": "山形",
+    "rank": 1,
+    "value": 4166,
+    "label": "ほうれんそう消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "秋田",
+    "rank": 2,
+    "value": 4137,
+    "label": "ほうれんそう消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "岩手",
+    "rank": 3,
+    "value": 3629,
+    "label": "ほうれんそう消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "京",
+    "rank": 4,
+    "value": 3308,
+    "label": "ほうれんそう消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "富山",
+    "rank": 5,
+    "value": 3291,
+    "label": "ほうれんそう消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "福岡",
+    "rank": 43,
+    "value": 1802,
+    "label": "ほうれんそう消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "鹿児島",
+    "rank": 44,
+    "value": 1738,
+    "label": "ほうれんそう消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "香川",
+    "rank": 45,
+    "value": 1736,
+    "label": "ほうれんそう消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "熊本",
+    "rank": 46,
+    "value": 1679,
+    "label": "ほうれんそう消費量",
+    "unit": "g"
+  },
+  {
+    "areaName": "大分",
+    "rank": 47,
+    "value": 1458,
+    "label": "ほうれんそう消費量",
+    "unit": "g"
+  }
+]

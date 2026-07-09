@@ -1,0 +1,12 @@
+[
+{"areaName":"神奈川","rank":1,"value":1780,"label":"紅茶消費支出額","unit":"円"},
+{"areaName":"東京","rank":2,"value":1535,"label":"紅茶消費支出額","unit":"円"},
+{"areaName":"兵庫","rank":3,"value":1288,"label":"紅茶消費支出額","unit":"円"},
+{"areaName":"埼玉","rank":4,"value":1252,"label":"紅茶消費支出額","unit":"円"},
+{"areaName":"宮城","rank":5,"value":1202,"label":"紅茶消費支出額","unit":"円"},
+{"areaName":"鳥取","rank":43,"value":393,"label":"紅茶消費支出額","unit":"円"},
+{"areaName":"岩手","rank":44,"value":534,"label":"紅茶消費支出額","unit":"円"},
+{"areaName":"青森","rank":45,"value":525,"label":"紅茶消費支出額","unit":"円"},
+{"areaName":"島根","rank":46,"value":542,"label":"紅茶消費支出額","unit":"円"},
+{"areaName":"宮崎","rank":47,"value":391,"label":"紅茶消費支出額","unit":"円"}
+]
