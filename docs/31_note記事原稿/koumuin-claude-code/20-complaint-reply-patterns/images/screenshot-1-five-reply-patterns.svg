@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 530" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Noto Sans JP',sans-serif">
+  <rect width="760" height="530" rx="10" fill="#1e1e2e"/>
+  <rect width="760" height="38" rx="10" fill="#313244"/>
+  <rect y="20" width="760" height="18" fill="#313244"/>
+  <circle cx="26" cy="19" r="6" fill="#f38ba8"/>
+  <circle cx="48" cy="19" r="6" fill="#f9e2af"/>
+  <circle cx="70" cy="19" r="6" fill="#a6e3a1"/>
+  <text x="380" y="24" text-anchor="middle" font-size="12" fill="#9399b2">ターミナル — Claude Code</text>
+  <g font-family="'SFMono-Regular','Menlo','Consolas','Courier New',monospace" font-size="14">
+    <text x="24" y="74" fill="#89b4fa">&gt; <tspan fill="#cdd6f4">/complaint-reply case-001</tspan></text>
+    <text x="24" y="100" fill="#6c7086"># 苦情メールに対し 5 案を生成しました</text>
+
+    <text x="24" y="134" fill="#a6e3a1">■ 案1 全面謝罪型</text>
+    <text x="24" y="156" fill="#bac2de">この度はご不便をおかけし誠に申し訳ございません。早急に…（300-400字）</text>
+    <text x="24" y="176" fill="#6c7086">想定リスク: 過度な謝罪で再要求を招くリスクあり</text>
+
+    <text x="24" y="210" fill="#a6e3a1">■ 案2 制度説明型</text>
+    <text x="24" y="232" fill="#bac2de">〇〇市公園条例第N条に基づき、利用時間は…（300-400字）</text>
+    <text x="24" y="252" fill="#6c7086">想定リスク: 冷淡な印象を与えるリスク中</text>
+
+    <text x="24" y="286" fill="#a6e3a1">■ 案3 中庸型</text>
+    <text x="24" y="308" fill="#bac2de">ご指摘ありがとうございます。経緯を確認のうえ…（300-400字）</text>
+    <text x="24" y="328" fill="#6c7086">想定リスク: SNS拡散リスク低</text>
+
+    <text x="24" y="362" fill="#a6e3a1">■ 案4 部分受容型</text>
+    <text x="24" y="384" fill="#bac2de">ご意見のうち〇〇については改善を検討いたします…（300-400字）</text>
+    <text x="24" y="404" fill="#6c7086">想定リスク: 受容範囲の解釈ずれリスク中</text>
+
+    <text x="24" y="438" fill="#a6e3a1">■ 案5 毅然型</text>
+    <text x="24" y="460" fill="#bac2de">ご理解いただきますようお願い申し上げます…（300-400字）</text>
+    <text x="24" y="480" fill="#6c7086">想定リスク: 再投函のリスクあり</text>
+  </g>
+
+  <rect x="0" y="490" width="760" height="40" fill="#181825"/>
+  <text x="24" y="515" font-size="13" fill="#bac2de">▲ 苦情返信 5 案を並べた出力例（苦情内容は架空、自治体名はマスキング）</text>
+</svg>

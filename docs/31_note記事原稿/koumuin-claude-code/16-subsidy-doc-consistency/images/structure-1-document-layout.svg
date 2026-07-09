@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 380" font-family="'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Noto Sans JP', sans-serif">
+  <rect width="800" height="380" fill="#FAFAFA"/>
+  <text x="400" y="34" text-anchor="middle" font-size="20" font-weight="bold" fill="#1E293B">補助金書類の典型構成 (地方創生推進交付金の例)</text>
+  <text x="400" y="54" text-anchor="middle" font-size="12" fill="#64748B">本紙 + 別紙 + 添付の関係。事業費総額が 4 箇所に出現</text>
+
+  <defs>
+    <marker id="link" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#9D174D"/>
+    </marker>
+  </defs>
+
+  <!-- 本紙 -->
+  <g>
+    <rect x="60" y="90" width="220" height="100" fill="#DBEAFE" stroke="#1E3A8A" stroke-width="2" rx="6"/>
+    <text x="170" y="115" text-anchor="middle" font-size="14" font-weight="bold" fill="#1E3A8A">本紙</text>
+    <text x="80" y="138" font-size="11" fill="#1E293B">第1表 事業概要</text>
+    <text x="80" y="156" font-size="11" fill="#1E293B">第2表 事業費 (④事業費)</text>
+    <text x="80" y="174" font-size="11" fill="#1E293B">鑑文 (申請者名)</text>
+  </g>
+
+  <!-- 別紙 -->
+  <g>
+    <rect x="300" y="90" width="220" height="100" fill="#CCFBF1" stroke="#0F766E" stroke-width="2" rx="6"/>
+    <text x="410" y="115" text-anchor="middle" font-size="14" font-weight="bold" fill="#0F766E">別紙</text>
+    <text x="320" y="138" font-size="11" fill="#1E293B">第1号 経費明細 (合計欄)</text>
+    <text x="320" y="156" font-size="11" fill="#1E293B">実施計画書 (経費総額)</text>
+    <text x="320" y="174" font-size="11" fill="#1E293B">収支予算書 (歳出合計)</text>
+  </g>
+
+  <!-- 添付 -->
+  <g>
+    <rect x="540" y="90" width="200" height="100" fill="#FEF3C7" stroke="#92400E" stroke-width="2" rx="6"/>
+    <text x="640" y="115" text-anchor="middle" font-size="14" font-weight="bold" fill="#92400E">添付</text>
+    <text x="560" y="138" font-size="11" fill="#1E293B">議会議決書写し</text>
+    <text x="560" y="156" font-size="11" fill="#1E293B">首長調書</text>
+    <text x="560" y="174" font-size="11" fill="#1E293B">委任状 (申請者名)</text>
+  </g>
+
+  <!-- 整合性キー中央 -->
+  <g>
+    <rect x="200" y="240" width="400" height="80" fill="#FCE7F3" stroke="#9D174D" stroke-width="2" rx="8"/>
+    <text x="400" y="265" text-anchor="middle" font-size="14" font-weight="bold" fill="#9D174D">整合性キー (一致を強制する値)</text>
+    <text x="400" y="285" text-anchor="middle" font-size="11" fill="#1E293B">事業費総額 / 実施期間 / 補助率 / 申請者名</text>
+    <text x="400" y="303" text-anchor="middle" font-size="10" fill="#475569">tolerance: 1 円のズレも検知</text>
+  </g>
+
+  <!-- 連結線 (本紙→キー) -->
+  <line x1="170" y1="190" x2="280" y2="240" stroke="#9D174D" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#link)"/>
+  <line x1="410" y1="190" x2="400" y2="240" stroke="#9D174D" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#link)"/>
+  <line x1="640" y1="190" x2="520" y2="240" stroke="#9D174D" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#link)"/>
+
+  <!-- Bottom -->
+  <text x="400" y="355" text-anchor="middle" font-size="11" fill="#64748B">同じ値が 4 書類に分散 → 1 箇所修正で他 3 箇所追従が必要 → 人力ではミス必至</text>
+</svg>

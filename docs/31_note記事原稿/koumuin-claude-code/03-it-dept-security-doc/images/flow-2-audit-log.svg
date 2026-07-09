@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 290" font-family="'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Noto Sans JP', sans-serif">
+  <rect width="900" height="290" fill="#FAFAFA"/>
+  <text x="450" y="34" text-anchor="middle" font-size="20" font-weight="bold" fill="#1E293B">監査ログのフロー (hooks → audit.tsv → 部内共有 → 監査提出)</text>
+
+  <defs>
+    <marker id="arral" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#64748B"/>
+    </marker>
+  </defs>
+
+  <!-- 1: プロンプト送信 -->
+  <g>
+    <rect x="30" y="85" width="140" height="70" fill="#F1F5F9" stroke="#475569" stroke-width="1.5" rx="6"/>
+    <text x="100" y="112" text-anchor="middle" font-size="13" font-weight="bold" fill="#1E293B">プロンプト送信</text>
+    <text x="100" y="132" text-anchor="middle" font-size="11" fill="#64748B">claude CLI</text>
+    <text x="100" y="148" text-anchor="middle" font-size="10" fill="#94A3B8">職員が業務質問</text>
+  </g>
+  <line x1="170" y1="120" x2="200" y2="120" stroke="#64748B" stroke-width="2" marker-end="url(#arral)"/>
+
+  <!-- 2: hooks 発火 -->
+  <g>
+    <rect x="205" y="85" width="160" height="70" fill="#FEF3C7" stroke="#92400E" stroke-width="1.5" rx="6"/>
+    <text x="285" y="108" text-anchor="middle" font-size="13" font-weight="bold" fill="#1E293B">hooks 発火</text>
+    <text x="285" y="128" text-anchor="middle" font-size="11" fill="#92400E">PreToolUse</text>
+    <text x="285" y="145" text-anchor="middle" font-size="10" fill="#B45309">UserPromptSubmit</text>
+  </g>
+  <line x1="365" y1="120" x2="395" y2="120" stroke="#64748B" stroke-width="2" marker-end="url(#arral)"/>
+
+  <!-- 3: audit.tsv 追記 -->
+  <g>
+    <rect x="400" y="85" width="170" height="70" fill="#E0E7FF" stroke="#4338CA" stroke-width="1.5" rx="6"/>
+    <text x="485" y="108" text-anchor="middle" font-size="13" font-weight="bold" fill="#1E293B">audit.tsv 追記</text>
+    <text x="485" y="128" text-anchor="middle" font-size="11" fill="#4338CA">~/.claude/logs/</text>
+    <text x="485" y="145" text-anchor="middle" font-size="10" fill="#6366F1">date / tool / 文字数</text>
+  </g>
+  <line x1="570" y1="120" x2="600" y2="120" stroke="#64748B" stroke-width="2" marker-end="url(#arral)"/>
+
+  <!-- 4: 月次部内共有 -->
+  <g>
+    <rect x="605" y="85" width="140" height="70" fill="#CCFBF1" stroke="#0F766E" stroke-width="1.5" rx="6"/>
+    <text x="675" y="108" text-anchor="middle" font-size="13" font-weight="bold" fill="#1E293B">月次部内共有</text>
+    <text x="675" y="128" text-anchor="middle" font-size="11" fill="#0F766E">利用件数</text>
+    <text x="675" y="145" text-anchor="middle" font-size="10" fill="#14B8A6">主な用途 / 問題有無</text>
+  </g>
+  <line x1="745" y1="120" x2="775" y2="120" stroke="#64748B" stroke-width="2" marker-end="url(#arral)"/>
+
+  <!-- 5: 監査要請 -->
+  <g>
+    <rect x="780" y="85" width="100" height="70" fill="#FCE7F3" stroke="#9D174D" stroke-width="2" rx="6"/>
+    <text x="830" y="108" text-anchor="middle" font-size="12" font-weight="bold" fill="#1E293B">監査要請</text>
+    <text x="830" y="128" text-anchor="middle" font-size="11" fill="#9D174D">全期間</text>
+    <text x="830" y="145" text-anchor="middle" font-size="11" fill="#9D174D">CSV 提出</text>
+  </g>
+
+  <!-- Sample log -->
+  <rect x="40" y="190" width="820" height="80" fill="#1E293B" stroke="#0F172A" stroke-width="1" rx="4"/>
+  <text x="60" y="212" font-size="11" fill="#94A3B8" font-family="monospace">$ tail -4 ~/.claude/logs/audit.tsv</text>
+  <text x="60" y="232" font-size="11" fill="#DBEAFE" font-family="monospace">2026-05-18T01:23:45Z  Read   /Users/koumuin/work/meeting-notes</text>
+  <text x="60" y="248" font-size="11" fill="#DBEAFE" font-family="monospace">2026-05-18T01:24:01Z  PROMPT_SUBMITTED  342</text>
+  <text x="60" y="264" font-size="11" fill="#DBEAFE" font-family="monospace">2026-05-18T01:25:12Z  Bash   /Users/koumuin/work/meeting-notes</text>
+</svg>

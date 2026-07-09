@@ -219,6 +219,53 @@ export function parseBacklogMd(root) {
   });
 }
 
+// ─── TODO (機能バックログ md — `### [ID] タイトル` + `- **tier/status/created**:` 箇条書き) ──
+export function parseFeatureBacklogMd(root) {
+  return wrap(() => {
+    const md = fs.readFileSync(path.join(root, "docs/02_実装計画/04_機能バックログ.md"), "utf8");
+    const lines = md.split(/\r?\n/);
+    let section = null;
+    let cur = null;
+    const rows = [];
+    for (const l of lines) {
+      const h2 = l.match(/^## (.+)/);
+      if (h2) {
+        const t = h2[1];
+        section = t.includes("今実装") ? "今実装" : t.includes("将来") ? "将来・保留" : t.includes("DROP") ? "DROP" : null;
+        cur = null;
+        continue;
+      }
+      const h3 = l.match(/^### (.+)/);
+      if (h3) {
+        if (!section) {
+          cur = null;
+          continue;
+        }
+        const raw = h3[1];
+        const idM = raw.match(/^\[([^\]]+)\]\s*(.*)$/);
+        const hashM = raw.match(/^(#\d+)\s+(.*)$/);
+        const id = idM ? idM[1] : hashM ? hashM[1] : "";
+        let title = (idM ? idM[2] : hashM ? hashM[2] : raw).trim();
+        if (title.length > TITLE_TRUNC) title = `${title.slice(0, TITLE_TRUNC)}…`;
+        cur = { section, id, title, tier: "", status: "", created: "" };
+        rows.push(cur);
+        continue;
+      }
+      if (!cur) continue;
+      const b = l.match(/^- \*\*(tier|status|created)\*\*:\s*(.+)$/);
+      if (b && !cur[b[1]]) {
+        let v = b[2].replace(/\*\*/g, "").trim();
+        if (v.length > 80) v = `${v.slice(0, 80)}…`;
+        cur[b[1]] = v;
+      }
+    }
+    const bySection = {};
+    for (const r of rows) bySection[r.section] = (bySection[r.section] || 0) + 1;
+    const updated = md.match(/^updated: ([\d-]+)/m)?.[1] ?? null;
+    return { updated, total: rows.length, bySection, rows };
+  });
+}
+
 // ─── 戦略 (STP md をパース。md が SSOT、ここは表示ミラー) ─────────────
 export function parseStrategyDocs(root) {
   return wrap(() => {
@@ -260,6 +307,7 @@ export function collectDashboard(root) {
     psi: parsePsiLatest(root),
     coverage: readGscCoverage(root),
     backlog: parseBacklogMd(root),
+    featureBacklog: parseFeatureBacklogMd(root),
     strategy: parseStrategyDocs(root),
   };
 }

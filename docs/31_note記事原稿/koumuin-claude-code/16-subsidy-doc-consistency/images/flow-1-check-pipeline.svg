@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 280" font-family="'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Noto Sans JP', sans-serif">
+  <rect width="900" height="280" fill="#FAFAFA"/>
+  <text x="450" y="34" text-anchor="middle" font-size="20" font-weight="bold" fill="#1E293B">補助金申請書類の整合性チェックパイプライン</text>
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#64748B"/>
+    </marker>
+  </defs>
+
+  <!-- Step 1: 申請書類 -->
+  <g>
+    <rect x="20" y="100" width="130" height="70" fill="#F1F5F9" stroke="#475569" stroke-width="1.5" rx="6"/>
+    <text x="85" y="125" text-anchor="middle" font-size="13" font-weight="bold" fill="#1E293B">申請書類</text>
+    <text x="85" y="145" text-anchor="middle" font-size="11" fill="#64748B">10〜30 ファイル</text>
+    <text x="85" y="160" text-anchor="middle" font-size="10" fill="#64748B">xlsx/pdf/docx</text>
+  </g>
+  <line x1="150" y1="135" x2="178" y2="135" stroke="#64748B" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Step 2: 抽出 -->
+  <g>
+    <rect x="180" y="100" width="130" height="70" fill="#FEF3C7" stroke="#92400E" stroke-width="1.5" rx="6"/>
+    <text x="245" y="125" text-anchor="middle" font-size="13" font-weight="bold" fill="#1E293B">中間ファイル抽出</text>
+    <text x="245" y="145" text-anchor="middle" font-size="11" fill="#92400E">LGWAN 端末</text>
+    <text x="245" y="160" text-anchor="middle" font-size="10" fill="#92400E">extract.py</text>
+  </g>
+  <line x1="310" y1="135" x2="338" y2="135" stroke="#64748B" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Step 3: Claude -->
+  <g>
+    <rect x="340" y="100" width="150" height="70" fill="#CCFBF1" stroke="#0F766E" stroke-width="1.5" rx="6"/>
+    <text x="415" y="123" text-anchor="middle" font-size="13" font-weight="bold" fill="#1E293B">Claude Code</text>
+    <text x="415" y="142" text-anchor="middle" font-size="11" fill="#0F766E">/subsidy-check</text>
+    <text x="415" y="158" text-anchor="middle" font-size="10" fill="#14B8A6">consistency-keys.yml</text>
+  </g>
+  <line x1="490" y1="135" x2="518" y2="135" stroke="#64748B" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Step 4: 不一致レポート -->
+  <g>
+    <rect x="520" y="100" width="140" height="70" fill="#FEE2E2" stroke="#7F1D1D" stroke-width="1.5" rx="6"/>
+    <text x="590" y="125" text-anchor="middle" font-size="13" font-weight="bold" fill="#1E293B">不一致レポート</text>
+    <text x="590" y="145" text-anchor="middle" font-size="11" fill="#7F1D1D">差分表 + サマリ</text>
+    <text x="590" y="160" text-anchor="middle" font-size="10" fill="#DC2626">report-YYYY-MM-DD.md</text>
+  </g>
+  <line x1="660" y1="135" x2="688" y2="135" stroke="#64748B" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Step 5: 決裁回議 -->
+  <g>
+    <rect x="690" y="100" width="140" height="70" fill="#DBEAFE" stroke="#1E3A8A" stroke-width="1.5" rx="6"/>
+    <text x="760" y="125" text-anchor="middle" font-size="13" font-weight="bold" fill="#1E293B">決裁回議</text>
+    <text x="760" y="145" text-anchor="middle" font-size="11" fill="#1E3A8A">係長→課長→部長</text>
+    <text x="760" y="160" text-anchor="middle" font-size="10" fill="#1E40AF">人間最終確認</text>
+  </g>
+
+  <!-- Bottom note -->
+  <rect x="180" y="210" width="540" height="44" fill="#FFFFFF" stroke="#059669" stroke-width="2" rx="6"/>
+  <text x="450" y="232" text-anchor="middle" font-size="13" font-weight="bold" fill="#065F46">人力ダブルチェック → Claude でトリプル化 (差し戻し激減)</text>
+  <text x="450" y="248" text-anchor="middle" font-size="10" fill="#059669">事業費・実施期間・補助率・申請者名を 4 書類間で 1 円ズレまで検知</text>
+</svg>

@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 410" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Noto Sans JP',sans-serif">
+  <rect width="760" height="410" rx="10" fill="#1e1e2e"/>
+  <rect width="760" height="38" rx="10" fill="#313244"/>
+  <rect y="20" width="760" height="18" fill="#313244"/>
+  <circle cx="26" cy="19" r="6" fill="#f38ba8"/>
+  <circle cx="48" cy="19" r="6" fill="#f9e2af"/>
+  <circle cx="70" cy="19" r="6" fill="#a6e3a1"/>
+  <text x="380" y="24" text-anchor="middle" font-size="12" fill="#9399b2">ターミナル — claude</text>
+  <g font-family="'SFMono-Regular','Menlo','Consolas','Courier New',monospace" font-size="14">
+    <text x="24" y="76" fill="#89b4fa">&gt; <tspan fill="#cdd6f4">/format-minutes</tspan></text>
+    <text x="24" y="112" fill="#bac2de">議事録整形を開始します。</text>
+    <text x="24" y="148" fill="#a6e3a1">✓ <tspan fill="#bac2de">Read transcript.json (45,231 chars, 152 segments)</tspan></text>
+    <text x="24" y="176" fill="#a6e3a1">✓ <tspan fill="#bac2de">Read meta.yaml</tspan></text>
+    <text x="24" y="204" fill="#a6e3a1">✓ <tspan fill="#bac2de">Generate 議事録ドラフト (である調・1500-2500字)</tspan></text>
+    <text x="24" y="232" fill="#a6e3a1">✓ <tspan fill="#bac2de">Write drafts/2026-05-18-study-group.md</tspan></text>
+    <text x="24" y="268" fill="#cdd6f4">完了しました。</text>
+    <text x="24" y="296" fill="#bac2de">  ファイル: drafts/2026-05-18-study-group.md</text>
+    <text x="24" y="324" fill="#bac2de">  文字数: 1,847 chars</text>
+  </g>
+  <rect x="0" y="370" width="760" height="40" fill="#181825"/>
+  <text x="24" y="395" font-size="13" fill="#bac2de">▲ /format-minutes 実行直後 — Read → Generate → Write がステップ表示される</text>
+</svg>

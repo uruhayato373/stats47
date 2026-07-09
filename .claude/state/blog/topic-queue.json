@@ -4,16 +4,16 @@
   "scoring": "combined = 0.35*queryGap + 0.25*seasonality + 0.20*surprise + 0.20*competitionGap; lane: must-write (imp>=300) > opportunity",
   "summary": {
     "total": 165,
-    "pending": 163,
-    "inProgress": 2,
-    "done": 0,
-    "mustWritePending": 28,
+    "pending": 160,
+    "inProgress": 4,
+    "done": 1,
+    "mustWritePending": 26,
     "byArchetype": {
-      "B": 59,
-      "A": 40,
+      "B": 58,
+      "A": 39,
       "G": 15,
       "F": 15,
-      "D2": 34
+      "D2": 33
     }
   },
   "queue": [
@@ -194,8 +194,11 @@
       "suggestedTitle": "空き家と老年人口指の意外な関係",
       "combinedScore": 0.657,
       "lane": "must-write",
-      "status": "pending",
-      "priority": 5
+      "status": "done",
+      "priority": 5,
+      "in_progress_at": "2026-07-09",
+      "done_at": "2026-07-09",
+      "published_slug": "vacant-housing-aging-correlation"
     },
     {
       "topicKey": "corr-elderly-household-detail--elementary-school-children-count",
@@ -402,7 +405,8 @@
       "combinedScore": 0.582,
       "lane": "must-write",
       "status": "pending",
-      "priority": 11
+      "priority": 11,
+      "in_progress_at": "2026-07-09"
     },
     {
       "topicKey": "corr-average-weight-primary-school-fifth-grade-male--natto-consumption-expenditure",
@@ -2644,7 +2648,8 @@
       "combinedScore": 0.415,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 78
+      "priority": 78,
+      "in_progress_at": "2026-07-09"
     },
     {
       "topicKey": "migration-12000",

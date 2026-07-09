@@ -1,14 +1,15 @@
 {
-  "generatedAt": "2026-07-07T00:00:35.286Z",
+  "generatedAt": "2026-07-09T00:01:49.135Z",
   "gscWeek": "2026-W27",
-  "auditGeneratedAt": "2026-07-07T00:00:35.266Z",
+  "auditGeneratedAt": "2026-07-09T00:01:49.115Z",
   "scoring": "combined = 0.6*norm(GSC expectedLift) + 0.4*norm(blockers*3+warnings); lane: must-fix > opportunity",
+  "reviewTier": "GSC impressions 上位 30 件 = opus critic (tier2), 他 = sonnet (tier1)",
   "summary": {
     "total": 140,
-    "pending": 100,
+    "pending": 99,
     "inProgress": 1,
-    "done": 39,
-    "mustFixPending": 37,
+    "done": 40,
+    "mustFixPending": 36,
     "opportunityPending": 63
   },
   "queue": [
@@ -41,7 +42,8 @@
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": null
+      "last_brushup": null,
+      "reviewTier": "sonnet"
     },
     {
       "slug": "overseas-travel-gap",
@@ -72,7 +74,8 @@
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": null
+      "last_brushup": null,
+      "reviewTier": "sonnet"
     },
     {
       "slug": "koumuin-claude-code-estat-automation",
@@ -102,12 +105,13 @@
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": null
+      "last_brushup": null,
+      "reviewTier": "sonnet"
     },
     {
       "slug": "farmland-crisis-abandoned-land",
       "lane": "must-fix",
-      "status": "pending",
+      "status": "done",
       "priority": 4,
       "combinedScore": 0.343,
       "gsc": {
@@ -131,10 +135,11 @@
           "warning: source-link 末尾集約 2個 — 各図直下へ分散"
         ]
       },
-      "wave_id": null,
-      "remediated_at": null,
-      "in_progress_at": null,
-      "last_brushup": null
+      "wave_id": "2026-07-09-manual",
+      "remediated_at": "2026-07-09",
+      "in_progress_at": "2026-07-09",
+      "last_brushup": null,
+      "reviewTier": "opus"
     },
     {
       "slug": "inbound-overnight-stay-concentration",
@@ -165,7 +170,8 @@
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": null
+      "last_brushup": null,
+      "reviewTier": "sonnet"
     },
     {
       "slug": "commercial-land-price-trend",
@@ -196,7 +202,8 @@
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": "2026-05-25"
+      "last_brushup": "2026-05-25",
+      "reviewTier": "sonnet"
     },
     {
       "slug": "waste-management-recycling-gap",
@@ -227,7 +234,8 @@
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": null
+      "last_brushup": null,
+      "reviewTier": "sonnet"
     },
     {
       "slug": "natto-consumption-east-west-divide",
@@ -257,7 +265,8 @@
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": null
+      "last_brushup": null,
+      "reviewTier": "opus"
     },
     {
       "slug": "library-books-prefecture-gap",
@@ -286,7 +295,8 @@
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": "2026-06-10"
+      "last_brushup": "2026-06-10",
+      "reviewTier": "opus"
     },
     {
       "slug": "telework-gap-tokyo-6x",
@@ -316,7 +326,8 @@
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": "2026-06-21",
-      "last_brushup": null
+      "last_brushup": null,
+      "reviewTier": "sonnet"
     },
     {
       "slug": "food-spending-pattern",
@@ -346,7 +357,8 @@
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": null
+      "last_brushup": null,
+      "reviewTier": "sonnet"
     },
     {
       "slug": "konbu-consumption-prefecture-gap",
@@ -376,7 +388,8 @@
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": "2026-05-25"
+      "last_brushup": "2026-05-25",
+      "reviewTier": "sonnet"
     },
     {
       "slug": "cc-estat-20-publish",
@@ -405,7 +418,8 @@
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": null
+      "last_brushup": null,
+      "reviewTier": "sonnet"
     },
     {
       "slug": "cc-estat-02-search-skill",
@@ -434,7 +448,8 @@
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": null
+      "last_brushup": null,
+      "reviewTier": "sonnet"
     },
     {
       "slug": "cc-estat-19-skill-pipeline",
@@ -463,7 +478,8 @@
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": null
+      "last_brushup": null,
+      "reviewTier": "sonnet"
     },
     {
       "slug": "outpatient-rate-prefecture-gap",
@@ -492,7 +508,8 @@
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": null
+      "last_brushup": null,
+      "reviewTier": "sonnet"
     },
     {
       "slug": "future-burden-ratio-extreme-gap",
@@ -521,7 +538,8 @@
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": null
+      "last_brushup": null,
+      "reviewTier": "sonnet"
     },
     {
       "slug": "public-phone-prefecture-vanishing",
@@ -550,7 +568,8 @@
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": null
+      "last_brushup": null,
+      "reviewTier": "sonnet"
     },
     {
       "slug": "whisky-consumption-prefecture-gap",
@@ -579,7 +598,8 @@
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": null
+      "last_brushup": null,
+      "reviewTier": "sonnet"
     },
     {
       "slug": "cc-estat-01-setup",
@@ -608,7 +628,8 @@
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": null
+      "last_brushup": null,
+      "reviewTier": "opus"
     },
     {
       "slug": "cc-estat-08-bar-chart-race",
@@ -637,7 +658,8 @@
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": null
+      "last_brushup": null,
+      "reviewTier": "sonnet"
     },
     {
       "slug": "frozen-gyoza-spending-prefecture-gap",
@@ -666,7 +688,8 @@
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": "2026-06-10"
+      "last_brushup": "2026-06-10",
+      "reviewTier": "sonnet"
     },
     {
       "slug": "inpatient-rate-prefecture-gap",
@@ -695,7 +718,8 @@
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": null
+      "last_brushup": null,
+      "reviewTier": "sonnet"
     },
     {
       "slug": "mineral-water-spending-prefecture-gap",
@@ -724,7 +748,8 @@
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": null
+      "last_brushup": null,
+      "reviewTier": "sonnet"
     },
     {
       "slug": "ai-claude-code-pref-analysis",
@@ -753,7 +778,8 @@
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": null
+      "last_brushup": null,
+      "reviewTier": "sonnet"
     },
     {
       "slug": "cc-estat-11-tourism-stacked",
@@ -782,7 +808,8 @@
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": null
+      "last_brushup": null,
+      "reviewTier": "sonnet"
     },
     {
       "slug": "cc-estat-14-energy-area-chart",
@@ -811,7 +838,8 @@
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": null
+      "last_brushup": null,
+      "reviewTier": "sonnet"
     },
     {
       "slug": "minimum-wage-increase-rate-prefecture-gap",
@@ -840,7 +868,8 @@
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": null
+      "last_brushup": null,
+      "reviewTier": "sonnet"
     },
     {
       "slug": "tofu-consumption-prefecture-gap",
@@ -869,7 +898,8 @@
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": "2026-06-10"
+      "last_brushup": "2026-06-10",
+      "reviewTier": "sonnet"
     },
     {
       "slug": "train-commuters-prefecture-gap",
@@ -898,7 +928,8 @@
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": null
+      "last_brushup": null,
+      "reviewTier": "sonnet"
     },
     {
       "slug": "cc-estat-06-income-scatter",
@@ -927,7 +958,8 @@
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": null
+      "last_brushup": null,
+      "reviewTier": "sonnet"
     },
     {
       "slug": "cc-estat-17-edu-slope-graph",
@@ -956,7 +988,8 @@
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": null
+      "last_brushup": null,
+      "reviewTier": "sonnet"
     },
     {
       "slug": "inflow-population-ratio-prefecture-gap",
@@ -985,7 +1018,8 @@
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": null
+      "last_brushup": null,
+      "reviewTier": "sonnet"
     },
     {
       "slug": "low-birthweight-rate-prefecture-gap",
@@ -1014,7 +1048,8 @@
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": null
+      "last_brushup": null,
+      "reviewTier": "sonnet"
     },
     {
       "slug": "musical-instrument-expenditure-prefecture-gap",
@@ -1043,7 +1078,8 @@
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": null
+      "last_brushup": null,
+      "reviewTier": "sonnet"
     },
     {
       "slug": "pachinko-participation-prefecture-gap",
@@ -1072,7 +1108,8 @@
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": "2026-06-10"
+      "last_brushup": "2026-06-10",
+      "reviewTier": "sonnet"
     },
     {
       "slug": "pharmacist-income-prefecture-gap",
@@ -1101,7 +1138,8 @@
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": "2026-06-10"
+      "last_brushup": "2026-06-10",
+      "reviewTier": "sonnet"
     },
     {
       "slug": "yogurt-spending-prefecture-gap",
@@ -1130,7 +1168,8 @@
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": "2026-06-10"
+      "last_brushup": "2026-06-10",
+      "reviewTier": "sonnet"
     },
     {
       "slug": "habitable-area-land-use",
@@ -1159,7 +1198,8 @@
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": "2026-05-25"
+      "last_brushup": "2026-05-25",
+      "reviewTier": "opus"
     },
     {
       "slug": "bonito-catch-prefecture",
@@ -1186,7 +1226,8 @@
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": "2026-05-25"
+      "last_brushup": "2026-05-25",
+      "reviewTier": "opus"
     },
     {
       "slug": "vacant-house-crisis",
@@ -1213,7 +1254,8 @@
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": null
+      "last_brushup": null,
+      "reviewTier": "opus"
     },
     {
       "slug": "manufacturing-aichi-dominance",
@@ -1269,7 +1311,8 @@
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": "2026-05-25"
+      "last_brushup": "2026-05-25",
+      "reviewTier": "opus"
     },
     {
       "slug": "rice-harvest-volume-prefecture-gap",
@@ -1296,7 +1339,8 @@
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": null
+      "last_brushup": null,
+      "reviewTier": "opus"
     },
     {
       "slug": "garbage-total-output",
@@ -1323,7 +1367,8 @@
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": null
+      "last_brushup": null,
+      "reviewTier": "opus"
     },
     {
       "slug": "fiscal-self-reliance-gap",
@@ -1379,7 +1424,8 @@
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": "2026-05-25"
+      "last_brushup": "2026-05-25",
+      "reviewTier": "opus"
     },
     {
       "slug": "avg-height-high-school-2nd-male",
@@ -1406,7 +1452,8 @@
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": null
+      "last_brushup": null,
+      "reviewTier": "opus"
     },
     {
       "slug": "automotive-industry-transformation-map",
@@ -1462,7 +1509,8 @@
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": null
+      "last_brushup": null,
+      "reviewTier": "opus"
     },
     {
       "slug": "sunshine-pacific-vs-nihonkai",
@@ -1519,7 +1567,8 @@
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": null
+      "last_brushup": null,
+      "reviewTier": "sonnet"
     },
     {
       "slug": "fresh-udon-soba-consumption-prefecture-gap",
@@ -1573,7 +1622,8 @@
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": null
+      "last_brushup": null,
+      "reviewTier": "opus"
     },
     {
       "slug": "dairy-cattle-hokkaido-monopoly",
@@ -1602,7 +1652,8 @@
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": null
+      "last_brushup": null,
+      "reviewTier": "opus"
     },
     {
       "slug": "child-height-regional-gap",
@@ -1658,7 +1709,8 @@
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": null
+      "last_brushup": null,
+      "reviewTier": "opus"
     },
     {
       "slug": "water-sewage-crisis",
@@ -1687,7 +1739,8 @@
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": "2026-05-25"
+      "last_brushup": "2026-05-25",
+      "reviewTier": "sonnet"
     },
     {
       "slug": "dog-registration-prefecture-gap",
@@ -1716,7 +1769,8 @@
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": null
+      "last_brushup": null,
+      "reviewTier": "sonnet"
     },
     {
       "slug": "retail-establishments-by-prefecture",
@@ -1745,7 +1799,8 @@
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": null
+      "last_brushup": null,
+      "reviewTier": "sonnet"
     },
     {
       "slug": "abortion-rate-prefecture-gap",
@@ -1774,7 +1829,8 @@
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": null
+      "last_brushup": null,
+      "reviewTier": "sonnet"
     },
     {
       "slug": "pharmacy-count-prefecture-ranking",
@@ -1803,7 +1859,8 @@
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": "2026-05-25"
+      "last_brushup": "2026-05-25",
+      "reviewTier": "sonnet"
     },
     {
       "slug": "overnight-guests-inbound-recovery",
@@ -1861,7 +1918,8 @@
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": "2026-05-25"
+      "last_brushup": "2026-05-25",
+      "reviewTier": "sonnet"
     },
     {
       "slug": "inbound-overnight-regional-gap",
@@ -1917,7 +1975,8 @@
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": null
+      "last_brushup": null,
+      "reviewTier": "opus"
     },
     {
       "slug": "cc-estat-09-radar-prefecture",
@@ -1975,7 +2034,8 @@
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": null
+      "last_brushup": null,
+      "reviewTier": "sonnet"
     },
     {
       "slug": "birth-death-gap-decline",
@@ -2033,7 +2093,8 @@
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": null
+      "last_brushup": null,
+      "reviewTier": "sonnet"
     },
     {
       "slug": "sports-facility-regional-divide",
@@ -2116,7 +2177,8 @@
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": null
+      "last_brushup": null,
+      "reviewTier": "opus"
     },
     {
       "slug": "manufacturing-shipment-prefecture-ranking",
@@ -2143,7 +2205,8 @@
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": "2026-05-29"
+      "last_brushup": "2026-05-29",
+      "reviewTier": "opus"
     },
     {
       "slug": "konbu-consumption-quantity",
@@ -2170,7 +2233,8 @@
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": null
+      "last_brushup": null,
+      "reviewTier": "opus"
     },
     {
       "slug": "sugar-consumption-prefecture-gap",
@@ -2224,7 +2288,8 @@
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": null
+      "last_brushup": null,
+      "reviewTier": "opus"
     },
     {
       "slug": "fishery-catch-aquaculture-shift",
@@ -2440,7 +2505,8 @@
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": "2026-05-25"
+      "last_brushup": "2026-05-25",
+      "reviewTier": "opus"
     },
     {
       "slug": "prefectural-height-male-female-gap",
@@ -2494,7 +2560,8 @@
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": null
+      "last_brushup": null,
+      "reviewTier": "opus"
     },
     {
       "slug": "cc-estat-03-population-bar",
@@ -2521,7 +2588,8 @@
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": null
+      "last_brushup": null,
+      "reviewTier": "sonnet"
     },
     {
       "slug": "population-density-urbanization",
@@ -2548,7 +2616,8 @@
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": "2026-05-25"
+      "last_brushup": "2026-05-25",
+      "reviewTier": "opus"
     },
     {
       "slug": "banana-consumption-quantity",
@@ -2575,7 +2644,8 @@
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": null
+      "last_brushup": null,
+      "reviewTier": "sonnet"
     },
     {
       "slug": "green-tea-consumption-quantity",
@@ -2602,7 +2672,8 @@
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": null
+      "last_brushup": null,
+      "reviewTier": "opus"
     },
     {
       "slug": "highschool-starting-salary-gap",
@@ -2683,7 +2754,8 @@
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": null
+      "last_brushup": null,
+      "reviewTier": "sonnet"
     },
     {
       "slug": "aging-rate-akita-vs-okinawa",
@@ -2710,7 +2782,8 @@
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": "2026-05-25"
+      "last_brushup": "2026-05-25",
+      "reviewTier": "sonnet"
     },
     {
       "slug": "curry-roux-consumption-gap",
@@ -2764,7 +2837,8 @@
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": null
+      "last_brushup": null,
+      "reviewTier": "sonnet"
     },
     {
       "slug": "natto-consumption-expenditure",
@@ -2791,7 +2865,8 @@
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": null
+      "last_brushup": null,
+      "reviewTier": "sonnet"
     },
     {
       "slug": "wind-power-capacity-prefecture-gap",
@@ -2818,7 +2893,8 @@
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": null
+      "last_brushup": null,
+      "reviewTier": "opus"
     },
     {
       "slug": "electricity-demand-gap",
@@ -2845,7 +2921,8 @@
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": null
+      "last_brushup": null,
+      "reviewTier": "sonnet"
     },
     {
       "slug": "local-tax-regional-gap",
@@ -2899,7 +2976,8 @@
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": null
+      "last_brushup": null,
+      "reviewTier": "sonnet"
     },
     {
       "slug": "strawberry-consumption-prefecture-gap",
@@ -2953,7 +3031,8 @@
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": null
+      "last_brushup": null,
+      "reviewTier": "opus"
     },
     {
       "slug": "commercial-sales-productivity-gap",
@@ -3007,7 +3086,8 @@
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": null
+      "last_brushup": null,
+      "reviewTier": "sonnet"
     },
     {
       "slug": "foreign-residents-diversity-map",
@@ -3034,7 +3114,8 @@
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": null
+      "last_brushup": null,
+      "reviewTier": "opus"
     },
     {
       "slug": "carpenter-income-prefecture-gap",
@@ -3061,7 +3142,8 @@
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": null
+      "last_brushup": null,
+      "reviewTier": "sonnet"
     },
     {
       "slug": "cc-estat-05-medical-cost-choropleth",
@@ -3088,7 +3170,8 @@
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": null
+      "last_brushup": null,
+      "reviewTier": "sonnet"
     },
     {
       "slug": "cc-estat-16-commerce-bubble",
@@ -3142,7 +3225,8 @@
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": null
+      "last_brushup": null,
+      "reviewTier": "sonnet"
     },
     {
       "slug": "industrial-water-manufacturing-nexus",
@@ -3169,7 +3253,8 @@
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": null
+      "last_brushup": null,
+      "reviewTier": "sonnet"
     },
     {
       "slug": "wheat-flour-expenditure-vs-quantity",
@@ -3196,7 +3281,8 @@
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": null
+      "last_brushup": null,
+      "reviewTier": "sonnet"
     },
     {
       "slug": "bonito-catch-zero-prefectures-gap",
@@ -3223,7 +3309,8 @@
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": null
+      "last_brushup": null,
+      "reviewTier": "sonnet"
     },
     {
       "slug": "car-ownership-household-prefecture-gap",
@@ -3250,7 +3337,8 @@
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": null
+      "last_brushup": null,
+      "reviewTier": "sonnet"
     },
     {
       "slug": "cc-estat-07-birthrate-line",
@@ -3331,7 +3419,8 @@
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": null
+      "last_brushup": null,
+      "reviewTier": "sonnet"
     },
     {
       "slug": "public-phone-count-gap",
@@ -3358,7 +3447,8 @@
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": null
+      "last_brushup": null,
+      "reviewTier": "sonnet"
     },
     {
       "slug": "sunshine-solar-housing-correlation",
@@ -3385,7 +3475,8 @@
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": null
+      "last_brushup": null,
+      "reviewTier": "opus"
     },
     {
       "slug": "taxi-driver-income-prefecture-gap",
@@ -3466,7 +3557,8 @@
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": "2026-05-25"
+      "last_brushup": "2026-05-25",
+      "reviewTier": "opus"
     },
     {
       "slug": "sewerage-water-supply-gap",
@@ -3547,7 +3639,8 @@
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": null
+      "last_brushup": null,
+      "reviewTier": "sonnet"
     },
     {
       "slug": "cpi-change-regional-pattern",
@@ -3574,7 +3667,8 @@
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": "2026-05-25"
+      "last_brushup": "2026-05-25",
+      "reviewTier": "sonnet"
     },
     {
       "slug": "school-nonattendance-pattern",
@@ -3709,7 +3803,8 @@
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": null
+      "last_brushup": null,
+      "reviewTier": "sonnet"
     },
     {
       "slug": "purchasing-power-adjusted",
@@ -3736,7 +3831,8 @@
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": null
+      "last_brushup": null,
+      "reviewTier": "sonnet"
     },
     {
       "slug": "earthquake-insurance-prefecture-gap",
@@ -3763,7 +3859,8 @@
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": null
+      "last_brushup": null,
+      "reviewTier": "sonnet"
     },
     {
       "slug": "dentist-income-prefecture-gap",
@@ -3790,7 +3887,8 @@
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": null
+      "last_brushup": null,
+      "reviewTier": "sonnet"
     },
     {
       "slug": "golf-participation-prefecture-gap",
@@ -3817,7 +3915,8 @@
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": null
+      "last_brushup": null,
+      "reviewTier": "sonnet"
     },
     {
       "slug": "household-income-tokyo-okinawa",
@@ -3871,7 +3970,8 @@
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": null
+      "last_brushup": null,
+      "reviewTier": "sonnet"
     },
     {
       "slug": "ryokan-vs-hotel-overnight-shift",
@@ -3898,7 +3998,8 @@
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": null
+      "last_brushup": null,
+      "reviewTier": "sonnet"
     },
     {
       "slug": "school-teacher-annual-income",
@@ -3925,7 +4026,8 @@
       "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
-      "last_brushup": null
+      "last_brushup": null,
+      "reviewTier": "sonnet"
     }
   ]
 }

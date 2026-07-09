@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 290" font-family="'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Noto Sans JP', sans-serif">
+  <rect width="900" height="290" fill="#FAFAFA"/>
+  <text x="450" y="34" text-anchor="middle" font-size="20" font-weight="bold" fill="#1E293B">答弁案作成 スキル化フロー (6 ステップ)</text>
+  <text x="450" y="56" text-anchor="middle" font-size="12" fill="#64748B">質問テーマ入力 → /draft-3-options → /style-check → /anticipate-rebuttal → /integrity-check → 人間レビュー</text>
+
+  <defs>
+    <marker id="arrsk" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#64748B"/>
+    </marker>
+  </defs>
+
+  <!-- Step 1 -->
+  <g>
+    <rect x="20" y="100" width="120" height="70" fill="#F1F5F9" stroke="#475569" stroke-width="1.5" rx="6"/>
+    <text x="80" y="125" text-anchor="middle" font-size="12" font-weight="bold" fill="#1E293B">質問テーマ</text>
+    <text x="80" y="143" text-anchor="middle" font-size="10" fill="#64748B">入力 (模擬)</text>
+    <text x="80" y="158" text-anchor="middle" font-size="10" fill="#94A3B8">時間・会派指定</text>
+  </g>
+  <line x1="140" y1="135" x2="165" y2="135" stroke="#64748B" stroke-width="2" marker-end="url(#arrsk)"/>
+
+  <!-- Step 2 -->
+  <g>
+    <rect x="170" y="100" width="130" height="70" fill="#DBEAFE" stroke="#1E3A8A" stroke-width="1.5" rx="6"/>
+    <text x="235" y="123" text-anchor="middle" font-size="12" font-weight="bold" fill="#1E293B">/draft-3-options</text>
+    <text x="235" y="142" text-anchor="middle" font-size="10" fill="#1E40AF">攻め / 守り / 折衷</text>
+    <text x="235" y="158" text-anchor="middle" font-size="10" fill="#2563EB">3 案生成 (~20分)</text>
+  </g>
+  <line x1="300" y1="135" x2="325" y2="135" stroke="#64748B" stroke-width="2" marker-end="url(#arrsk)"/>
+
+  <!-- Step 3 -->
+  <g>
+    <rect x="330" y="100" width="130" height="70" fill="#FEF3C7" stroke="#92400E" stroke-width="1.5" rx="6"/>
+    <text x="395" y="123" text-anchor="middle" font-size="12" font-weight="bold" fill="#1E293B">/style-check</text>
+    <text x="395" y="142" text-anchor="middle" font-size="10" fill="#92400E">文体規約照合</text>
+    <text x="395" y="158" text-anchor="middle" font-size="10" fill="#B45309">主語 / 受動態 / 字数</text>
+  </g>
+  <line x1="460" y1="135" x2="485" y2="135" stroke="#64748B" stroke-width="2" marker-end="url(#arrsk)"/>
+
+  <!-- Step 4 -->
+  <g>
+    <rect x="490" y="100" width="160" height="70" fill="#E0E7FF" stroke="#4338CA" stroke-width="1.5" rx="6"/>
+    <text x="570" y="123" text-anchor="middle" font-size="12" font-weight="bold" fill="#1E293B">/anticipate-rebuttal</text>
+    <text x="570" y="142" text-anchor="middle" font-size="10" fill="#4338CA">Subagents 3 役</text>
+    <text x="570" y="158" text-anchor="middle" font-size="10" fill="#6366F1">再質問 9 問</text>
+  </g>
+  <line x1="650" y1="135" x2="675" y2="135" stroke="#64748B" stroke-width="2" marker-end="url(#arrsk)"/>
+
+  <!-- Step 5 -->
+  <g>
+    <rect x="680" y="100" width="130" height="70" fill="#CCFBF1" stroke="#0F766E" stroke-width="1.5" rx="6"/>
+    <text x="745" y="123" text-anchor="middle" font-size="12" font-weight="bold" fill="#1E293B">/integrity-check</text>
+    <text x="745" y="142" text-anchor="middle" font-size="10" fill="#0F766E">数字 / 固有名詞</text>
+    <text x="745" y="158" text-anchor="middle" font-size="10" fill="#14B8A6">一貫性確認</text>
+  </g>
+  <line x1="810" y1="135" x2="835" y2="135" stroke="#64748B" stroke-width="2" marker-end="url(#arrsk)"/>
+
+  <!-- Step 6 (loop back) -->
+  <g>
+    <rect x="840" y="100" width="50" height="70" fill="#FCE7F3" stroke="#9D174D" stroke-width="2" rx="6"/>
+    <text x="865" y="125" text-anchor="middle" font-size="12" font-weight="bold" fill="#1E293B">人間</text>
+    <text x="865" y="143" text-anchor="middle" font-size="10" fill="#9D174D">レビュー</text>
+    <text x="865" y="158" text-anchor="middle" font-size="10" fill="#BE185D">最終</text>
+  </g>
+
+  <!-- Output -->
+  <g>
+    <rect x="350" y="210" width="200" height="50" fill="#FFFFFF" stroke="#059669" stroke-width="2.5" rx="6"/>
+    <text x="450" y="232" text-anchor="middle" font-size="14" font-weight="bold" fill="#065F46">完成原稿 (磨いた 1 案)</text>
+    <text x="450" y="250" text-anchor="middle" font-size="11" fill="#059669">実作業 約 2 時間</text>
+  </g>
+  <line x1="865" y1="170" x2="865" y2="190" stroke="#64748B" stroke-width="2"/>
+  <line x1="865" y1="190" x2="555" y2="190" stroke="#64748B" stroke-width="2"/>
+  <line x1="555" y1="190" x2="555" y2="205" stroke="#64748B" stroke-width="2" marker-end="url(#arrsk)"/>
+</svg>
