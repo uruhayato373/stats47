@@ -1,0 +1,10 @@
+{
+  "kind": "ranking",
+  "rankingKey": "butter-consumption-expenditure",
+  "year": "2024",
+  "unit": "円",
+  "label": "バター消費支出額",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/butter-consumption-expenditure/values.json",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug butter-vs-margarine-expenditure --keys butter-consumption-expenditure --data-name butter-ranking"
+}
