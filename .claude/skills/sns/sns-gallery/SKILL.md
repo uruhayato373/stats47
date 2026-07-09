@@ -25,7 +25,7 @@ npm run sns:gallery          # 後方互換 alias (同一サーバー)
 | `/sns` | SNS 投稿ギャラリー | X/IG/YouTube 素材の動画再生・caption 編集・投稿/予約・メトリクス・残枠バッジ |
 | `/assets` | 画像資産 | OGP / リンクカード(light/dark) / note カバー / note 記事内画像 / 動画 master。欠落チェック + 再生成 |
 | `/svg` | ブログ SVG カタログ | 記事内 SVG を 6 カタログ + table + unknown に機械分類して一覧 |
-| `/dashboard` | プロジェクト現況 | メトリクス(GSC/GA4/AdSense/PSI/カバレッジ) + 進捗キュー(blog是正/ai-content/記事ネタ/SNS/実験) + 改善バックログTODO + 戦略(STP)。state JSON / md を**読み取り専用ミラー**でライブ表示 (60秒キャッシュ)。編集は各 SSOT 側で |
+| `/dashboard` | プロジェクト現況 | メトリクス(GSC/GA4/AdSense/PSI/カバレッジ) + 進捗キュー(blog是正/ai-content/記事ネタ/SNS/実験) + 改善バックログTODO(優先度ソート・Owner列) + 機能バックログ + 戦略(STP)。state JSON / md を**読み取り専用ミラー**でライブ表示 (60秒キャッシュ)。編集は各 SSOT 側で |
 
 ## API
 
