@@ -73,6 +73,39 @@ git 上の原稿はすべて直っているが、**公開記事は未反映**。
 1. **再投稿版 4 URL は復元不能**: `paid-n9f666946d105` / `recovered-nc18fa33ec65e` / `paid-n143a9f6a0050` / `recovered-n73a4d300e045`。R2 にその slug の manifest が無く復元できない（番号付き記事の再投稿版と推測、内容は番号付き記事の修正でカバー済み）。独立した別内容なら note URL を得て個別対応。
 2. **価格の食い違い（未変更）**: `strategy.md` の価格（#01=¥1,500 等）と実際の公開価格（`note-published-urls.json` では ¥300）がズレている。販売価格の変更は収益に直結する業務判断のため未着手。方針 doc を実価格に合わせるか、価格を上げるか、オーナー判断が要る。
 
+### C. マガジンへの記事追加（note.com 操作・未反映）★2026-07-09 追加
+
+note にはシリーズごとに**マガジンが 2 つ**あり、記事フッターがそれぞれ正しく参照している（リポジトリ側は正しい）。問題は note.com 側の**マガジンメンバーシップ**（記事がマガジンに追加されていない）で、これは note.com のマガジン管理 UI での操作。
+
+| マガジン | ID | 対象シリーズ | 現状 |
+|---|---|---|---|
+| 公務員のための e-Stat × Claude Code 実務ガイド | `m1b836e4c8dce`（https://note.com/stats47/m/m1b836e4c8dce ） | koumuin-estat-claude-code（全 12 本） | **1 本しか追加されていない → 残り 11 本を追加** |
+| 公務員 × Claude Code 実務活用ガイド | `m512ad7023815` | koumuin-claude-code（全 33 本） | 同様に全数追加されているか要確認 |
+
+**e-Stat マガジン（`m1b836e4c8dce`）に追加すべき 12 記事**（`.claude/state/note-published-urls.json` 由来。再投稿版 `paid-n143a9f6a0050` / `recovered-n73a4d300e045` は重複のため除外）:
+
+| # | slug | 区分 | note URL |
+|---|---|---|---|
+| 00 | estat-claude-code-intro | 無料 | https://note.com/stats47/n/n258277f96f88 |
+| 01 | estat-api-key-setup | 有料 | https://note.com/stats47/n/nc5a1358141a5 |
+| 02 | search-estat-statsdataid | 有料 | https://note.com/stats47/n/n7e4572d23a1b |
+| 03 | fetch-prefecture-ranking | 無料 | https://note.com/stats47/n/n914ee28ff773 |
+| 04 | excel-download-and-parse | 有料 | https://note.com/stats47/n/n23262330a5e5 |
+| 05 | pandas-duckdb-derived-metrics | 有料 | https://note.com/stats47/n/n0477d544669b |
+| 06 | prefecture-code-and-merge | 有料 | https://note.com/stats47/n/n7ba7ee560bbb |
+| 07 | year-on-year-diff | 有料 | https://note.com/stats47/n/n0bd95dda8588 |
+| 08 | benchmark-table-5min | 無料 | https://note.com/stats47/n/nd4afc48385a3 |
+| 09 | assembly-chart-generation | 有料 | https://note.com/stats47/n/nce1681932f40 |
+| 10 | claude-skills-routinize | 有料 | https://note.com/stats47/n/n53c16adaf2c7 |
+| 11 | mcp-sqlite-search | 有料 | https://note.com/stats47/n/n347f923606f1 |
+
+**note.com での追加手順**（ローカル・Profile 5 = note.com/stats47）:
+1. マガジン https://note.com/stats47/m/m1b836e4c8dce を開き「マガジンを管理」→「記事を追加」、または各記事の「…」メニュー →「マガジンに追加」から選ぶ
+2. 上表の 12 記事のうち未追加分を追加する（#00 → #11 の順が読者導線に沿う）
+3. 追加後、姉妹マガジン `m512ad7023815`（koumuin-claude-code 33 本）も同様に全数入っているか確認する
+
+> リポジトリ側の修正は不要（フッターの参照 URL は全記事で正しい）。マガジン ID の設定コピー・説明文は `.claude/skills/note/koumuin-estat-claude-code/MAGAZINE.md`（買い切り ¥1,480・全 12 本）を参照。**現状「マガジンに何本入っているか」を追跡する repo 側データは無い**（note.com 状態）。
+
 ## 次エージェント向けの前提知識（重要）
 
 - **記事の SSOT は R2 `note/<vertical>/<slug>/`**。`docs/31_note記事原稿/` は ephemeral outbox（公開後に自動削除）。作業は `bash .claude/scripts/note/restore-from-r2.sh <slug>` で R2 → docs/31 に復元してから行う。
