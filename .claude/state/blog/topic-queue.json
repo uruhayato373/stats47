@@ -1,19 +1,19 @@
 {
-  "generatedAt": "2026-07-05T21:11:49.800Z",
+  "generatedAt": "2026-07-09T20:59:18.439Z",
   "gscWeek": "2026-W27",
   "scoring": "combined = 0.35*queryGap + 0.25*seasonality + 0.20*surprise + 0.20*competitionGap; lane: must-write (imp>=300) > opportunity",
   "summary": {
-    "total": 165,
-    "pending": 160,
-    "inProgress": 4,
+    "total": 167,
+    "pending": 164,
+    "inProgress": 2,
     "done": 1,
-    "mustWritePending": 26,
+    "mustWritePending": 28,
     "byArchetype": {
-      "B": 58,
-      "A": 39,
+      "B": 60,
+      "A": 40,
       "G": 15,
       "F": 15,
-      "D2": 33
+      "D2": 34
     }
   },
   "queue": [
@@ -162,43 +162,40 @@
       "priority": 4
     },
     {
-      "topicKey": "corr-old-population-index--vacant-housing-rate",
+      "topicKey": "corr-vacant-housing-rate--welfare-commissioner-count-per-100k",
       "archetype": "B",
       "metricKeys": [
         "vacant-housing-rate",
-        "old-population-index"
+        "welfare-commissioner-count-per-100k"
       ],
-      "label": "空き家率 × 老年人口指数 (r=0.74)",
+      "label": "空き家率 × 民生委員数 (r=0.73)",
       "source": "correlation",
       "scores": {
         "queryGap": 1,
         "seasonality": 0,
-        "surprise": 0.737,
+        "surprise": 0.734,
         "competitionGap": 0.8
       },
       "evidence": {
-        "pearsonR": 0.737,
-        "partialRPopulation": 0.561,
+        "pearsonR": 0.734,
+        "partialRPopulation": 0.544,
         "populationConfounded": false,
         "crossCategory": true,
         "categories": [
           "construction",
-          "population"
+          "educationsports"
         ],
         "gscImp": 7898,
         "rankingUrls": [
           "/ranking/vacant-housing-rate",
-          "/ranking/old-population-index"
+          "/ranking/welfare-commissioner-count-per-100k"
         ]
       },
-      "suggestedTitle": "空き家と老年人口指の意外な関係",
+      "suggestedTitle": "空き家と民生委員の意外な関係",
       "combinedScore": 0.657,
       "lane": "must-write",
-      "status": "done",
-      "priority": 5,
-      "in_progress_at": "2026-07-09",
-      "done_at": "2026-07-09",
-      "published_slug": "vacant-housing-aging-correlation"
+      "status": "pending",
+      "priority": 5
     },
     {
       "topicKey": "corr-elderly-household-detail--elementary-school-children-count",
@@ -405,8 +402,7 @@
       "combinedScore": 0.582,
       "lane": "must-write",
       "status": "pending",
-      "priority": 11,
-      "in_progress_at": "2026-07-09"
+      "priority": 11
     },
     {
       "topicKey": "corr-average-weight-primary-school-fifth-grade-male--natto-consumption-expenditure",
@@ -550,7 +546,7 @@
       "combinedScore": 0.546,
       "lane": "must-write",
       "status": "in-progress",
-      "priority": 15,
+      "priority": null,
       "in_progress_at": "2026-07-05"
     },
     {
@@ -587,7 +583,7 @@
       "combinedScore": 0.543,
       "lane": "must-write",
       "status": "pending",
-      "priority": 16
+      "priority": 15
     },
     {
       "topicKey": "corr-avg-height-high-school-2nd-male--rice-cracker-consumption-expenditure",
@@ -623,7 +619,7 @@
       "combinedScore": 0.54,
       "lane": "must-write",
       "status": "pending",
-      "priority": 17
+      "priority": 16
     },
     {
       "topicKey": "corr-fishery-species-catch-mackerel--melon-consumption-expenditure",
@@ -659,7 +655,7 @@
       "combinedScore": 0.539,
       "lane": "must-write",
       "status": "pending",
-      "priority": 18
+      "priority": 17
     },
     {
       "topicKey": "corr-beef-consumption-quantity--municipal-road-paving-rate",
@@ -695,7 +691,7 @@
       "combinedScore": 0.537,
       "lane": "must-write",
       "status": "pending",
-      "priority": 19
+      "priority": 18
     },
     {
       "topicKey": "corr-consumption-expenditure-multi-person-households-per-month--taxpayer-ratio-per-pref-resident",
@@ -731,7 +727,7 @@
       "combinedScore": 0.537,
       "lane": "must-write",
       "status": "pending",
-      "priority": 20
+      "priority": 19
     },
     {
       "topicKey": "corr-sex-ratio-total--tuna-consumption-quantity",
@@ -767,7 +763,7 @@
       "combinedScore": 0.536,
       "lane": "must-write",
       "status": "pending",
-      "priority": 21
+      "priority": 20
     },
     {
       "topicKey": "corr-beef-consumption-quantity--unmarried-ratio-male-45-49",
@@ -803,7 +799,7 @@
       "combinedScore": 0.535,
       "lane": "must-write",
       "status": "pending",
-      "priority": 22
+      "priority": 21
     },
     {
       "topicKey": "corr-annual-income-per-household--consumption-expenditure-multi-person-households-per-month",
@@ -839,7 +835,7 @@
       "combinedScore": 0.53,
       "lane": "must-write",
       "status": "pending",
-      "priority": 23
+      "priority": 22
     },
     {
       "topicKey": "corr-chicken-consumption-quantity--study-participation-rate-nursing-care",
@@ -875,7 +871,7 @@
       "combinedScore": 0.515,
       "lane": "must-write",
       "status": "pending",
-      "priority": 24
+      "priority": 23
     },
     {
       "topicKey": "gap-abortion-rate",
@@ -902,7 +898,7 @@
       "combinedScore": 0.359,
       "lane": "must-write",
       "status": "pending",
-      "priority": 25
+      "priority": 24
     },
     {
       "topicKey": "gap-fishery-species-catch-mackerel",
@@ -929,7 +925,7 @@
       "combinedScore": 0.353,
       "lane": "must-write",
       "status": "pending",
-      "priority": 26
+      "priority": 25
     },
     {
       "topicKey": "gap-convenience-store-count-commercial",
@@ -956,7 +952,7 @@
       "combinedScore": 0.328,
       "lane": "must-write",
       "status": "pending",
-      "priority": 27
+      "priority": 26
     },
     {
       "topicKey": "gap-fishery-species-catch-sardine",
@@ -983,7 +979,7 @@
       "combinedScore": 0.328,
       "lane": "must-write",
       "status": "pending",
-      "priority": 28
+      "priority": 27
     },
     {
       "topicKey": "gap-retail-sales-amount-by-prefecture",
@@ -1010,7 +1006,7 @@
       "combinedScore": 0.327,
       "lane": "must-write",
       "status": "pending",
-      "priority": 29
+      "priority": 28
     },
     {
       "topicKey": "corr-disaster-relief-expenses-prefecture--peach-consumption-quantity",
@@ -1046,7 +1042,7 @@
       "combinedScore": 0.744,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 30
+      "priority": 29
     },
     {
       "topicKey": "corr-annual-sunshine-duration--new-graduate-scheduled-salary-highschool-male",
@@ -1082,7 +1078,7 @@
       "combinedScore": 0.743,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 31
+      "priority": 30
     },
     {
       "topicKey": "corr-dual-income-household-ratio--floor-area-per-dwelling-owner",
@@ -1118,7 +1114,7 @@
       "combinedScore": 0.601,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 32
+      "priority": 31
     },
     {
       "topicKey": "corr-commute-by-car--paved-road-total-length",
@@ -1154,7 +1150,7 @@
       "combinedScore": 0.593,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 33
+      "priority": 32
     },
     {
       "topicKey": "corr-bean-sprouts-consumption-quantity--public-general-hospital-ratio",
@@ -1190,7 +1186,7 @@
       "combinedScore": 0.578,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 34
+      "priority": 33
     },
     {
       "topicKey": "corr-beauty-salon-count--retail-store-count",
@@ -1226,7 +1222,7 @@
       "combinedScore": 0.574,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 35
+      "priority": 34
     },
     {
       "topicKey": "corr-retail-store-count--simple-life-insurance-contract-count",
@@ -1262,7 +1258,7 @@
       "combinedScore": 0.573,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 36
+      "priority": 35
     },
     {
       "topicKey": "corr-cheese-consumption-quantity--general-hospital-count-per-100k",
@@ -1298,7 +1294,7 @@
       "combinedScore": 0.571,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 37
+      "priority": 36
     },
     {
       "topicKey": "corr-miso-consumption-quantity--site-area-per-dwelling",
@@ -1334,7 +1330,7 @@
       "combinedScore": 0.569,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 38
+      "priority": 37
     },
     {
       "topicKey": "corr-fresh-udon-soba-consumption-quantity--hobby-participation-rate-flower-arrangement",
@@ -1370,7 +1366,7 @@
       "combinedScore": 0.562,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 39
+      "priority": 38
     },
     {
       "topicKey": "corr-fishery-species-catch-pollock--floor-covering-consumption-expenditure",
@@ -1406,7 +1402,7 @@
       "combinedScore": 0.561,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 40
+      "priority": 39
     },
     {
       "topicKey": "corr-fishery-species-catch-pollock--total-area-excluding-northern-territories-and-takeshima",
@@ -1442,7 +1438,7 @@
       "combinedScore": 0.559,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 41
+      "priority": 40
     },
     {
       "topicKey": "corr-convenience-store-sales-monthly--dental-clinic-count",
@@ -1478,7 +1474,7 @@
       "combinedScore": 0.552,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 42
+      "priority": 41
     },
     {
       "topicKey": "corr-building-fire-count--convenience-store-sales-monthly",
@@ -1514,7 +1510,7 @@
       "combinedScore": 0.552,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 43
+      "priority": 42
     },
     {
       "topicKey": "corr-dairy-cattle-count--floor-covering-consumption-expenditure",
@@ -1550,7 +1546,7 @@
       "combinedScore": 0.545,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 44
+      "priority": 43
     },
     {
       "topicKey": "corr-squid-consumption-quantity--tatami-per-dwelling-owner",
@@ -1586,7 +1582,7 @@
       "combinedScore": 0.545,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 45
+      "priority": 44
     },
     {
       "topicKey": "corr-dairy-cattle-count--total-area-excluding-northern-territories-and-takeshima",
@@ -1622,7 +1618,7 @@
       "combinedScore": 0.543,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 46
+      "priority": 45
     },
     {
       "topicKey": "corr-car-ownership-multi-person-households-per-1000--gasoline-consumption-quantity",
@@ -1658,7 +1654,7 @@
       "combinedScore": 0.537,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 47
+      "priority": 46
     },
     {
       "topicKey": "corr-post-office-count--swimming-pool-public",
@@ -1694,7 +1690,7 @@
       "combinedScore": 0.537,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 48
+      "priority": 47
     },
     {
       "topicKey": "corr-construction-contract-total--swimming-pool-public",
@@ -1730,7 +1726,7 @@
       "combinedScore": 0.537,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 49
+      "priority": 48
     },
     {
       "topicKey": "corr-fishery-species-catch-pacific-saury--golf-course-public",
@@ -1766,7 +1762,7 @@
       "combinedScore": 0.537,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 50
+      "priority": 49
     },
     {
       "topicKey": "corr-densely-inhabited-district-population-ratio--gasoline-consumption-quantity",
@@ -1802,7 +1798,7 @@
       "combinedScore": 0.531,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 51
+      "priority": 50
     },
     {
       "topicKey": "corr-fishery-species-catch-pacific-saury--habitable-area",
@@ -1838,7 +1834,7 @@
       "combinedScore": 0.53,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 52
+      "priority": 51
     },
     {
       "topicKey": "corr-future-population-change-rate-2050--sports-annual-participation-rate-10plus",
@@ -1874,7 +1870,7 @@
       "combinedScore": 0.528,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 53
+      "priority": 52
     },
     {
       "topicKey": "corr-aging-index--future-population-change-rate-2050",
@@ -1910,7 +1906,7 @@
       "combinedScore": 0.526,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 54
+      "priority": 53
     },
     {
       "topicKey": "gap-avg-salary-education-prefecture",
@@ -1937,7 +1933,7 @@
       "combinedScore": 0.525,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 55
+      "priority": 54
     },
     {
       "topicKey": "corr-lake-count--roadside-station-count",
@@ -1973,7 +1969,7 @@
       "combinedScore": 0.525,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 56
+      "priority": 55
     },
     {
       "topicKey": "corr-fishery-species-catch-kelp--roadside-station-count",
@@ -2009,7 +2005,7 @@
       "combinedScore": 0.523,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 57
+      "priority": 56
     },
     {
       "topicKey": "corr-dual-income-household-ratio--rooms-per-dwelling",
@@ -2045,7 +2041,7 @@
       "combinedScore": 0.521,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 58
+      "priority": 57
     },
     {
       "topicKey": "migration-03000",
@@ -2070,7 +2066,7 @@
       "combinedScore": 0.52,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 59
+      "priority": 58
     },
     {
       "topicKey": "corr-paved-road-total-length--sports-facility-count",
@@ -2106,7 +2102,7 @@
       "combinedScore": 0.517,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 60
+      "priority": 59
     },
     {
       "topicKey": "gap-avg-salary-police-prefecture",
@@ -2133,7 +2129,7 @@
       "combinedScore": 0.515,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 61
+      "priority": 60
     },
     {
       "topicKey": "corr-average-temperature--bean-sprouts-consumption-quantity",
@@ -2169,7 +2165,7 @@
       "combinedScore": 0.514,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 62
+      "priority": 61
     },
     {
       "topicKey": "corr-jr-freight-shipment--shumai-consumption-expenditure",
@@ -2205,7 +2201,7 @@
       "combinedScore": 0.509,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 63
+      "priority": 62
     },
     {
       "topicKey": "gap-designer-annual-income",
@@ -2232,7 +2228,7 @@
       "combinedScore": 0.508,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 64
+      "priority": 63
     },
     {
       "topicKey": "corr-annual-sunshine-duration--auto-liability-insurance-amount-received-per-payment",
@@ -2268,7 +2264,7 @@
       "combinedScore": 0.507,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 65
+      "priority": 64
     },
     {
       "topicKey": "corr-nurses-per-100k-population--shumai-consumption-expenditure",
@@ -2304,7 +2300,7 @@
       "combinedScore": 0.503,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 66
+      "priority": 65
     },
     {
       "topicKey": "corr-cup-noodles-consumption-quantity--sports-annual-participation-rate-10plus",
@@ -2340,7 +2336,7 @@
       "combinedScore": 0.498,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 67
+      "priority": 66
     },
     {
       "topicKey": "corr-average-weight-primary-school-fifth-grade-male--tissue-paper-consumption-expenditure",
@@ -2376,7 +2372,7 @@
       "combinedScore": 0.498,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 68
+      "priority": 67
     },
     {
       "topicKey": "corr-cod-roe-consumption-quantity--rice-harvest-volume",
@@ -2412,7 +2408,7 @@
       "combinedScore": 0.497,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 69
+      "priority": 68
     },
     {
       "topicKey": "corr-average-weight-high-school-second-grade-male--cup-noodles-consumption-quantity",
@@ -2445,6 +2441,42 @@
         ]
       },
       "suggestedTitle": "カップ麺と平均体重の意外な関係",
+      "combinedScore": 0.496,
+      "lane": "opportunity",
+      "status": "pending",
+      "priority": 69
+    },
+    {
+      "topicKey": "corr-cheese-consumption-quantity--treatment-rate-arthrosis-inpatient",
+      "archetype": "B",
+      "metricKeys": [
+        "cheese-consumption-quantity",
+        "treatment-rate-arthrosis-inpatient"
+      ],
+      "label": "チーズ消費量 × 関節症の受療率（入院） (r=-0.70)",
+      "source": "correlation",
+      "scores": {
+        "queryGap": 0.5634019302990675,
+        "seasonality": 0,
+        "surprise": 0.696,
+        "competitionGap": 0.8
+      },
+      "evidence": {
+        "pearsonR": -0.696,
+        "partialRPopulation": -0.619,
+        "populationConfounded": false,
+        "crossCategory": true,
+        "categories": [
+          "economy",
+          "socialsecurity"
+        ],
+        "gscImp": 156,
+        "rankingUrls": [
+          "/ranking/cheese-consumption-quantity",
+          "/ranking/treatment-rate-arthrosis-inpatient"
+        ]
+      },
+      "suggestedTitle": "チーズと関節症の受療の意外な関係",
       "combinedScore": 0.496,
       "lane": "opportunity",
       "status": "pending",
@@ -2648,8 +2680,7 @@
       "combinedScore": 0.415,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 78,
-      "in_progress_at": "2026-07-09"
+      "priority": 78
     },
     {
       "topicKey": "migration-12000",
@@ -2751,7 +2782,7 @@
       "combinedScore": 0.4,
       "lane": "opportunity",
       "status": "in-progress",
-      "priority": 82,
+      "priority": null,
       "in_progress_at": "2026-07-05"
     },
     {
@@ -2777,7 +2808,7 @@
       "combinedScore": 0.391,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 83
+      "priority": 82
     },
     {
       "topicKey": "finance-gap-21000",
@@ -2800,7 +2831,7 @@
       "combinedScore": 0.389,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 84
+      "priority": 83
     },
     {
       "topicKey": "finance-gap-16000",
@@ -2823,7 +2854,7 @@
       "combinedScore": 0.383,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 85
+      "priority": 84
     },
     {
       "topicKey": "migration-37000",
@@ -2848,7 +2879,7 @@
       "combinedScore": 0.383,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 86
+      "priority": 85
     },
     {
       "topicKey": "finance-gap-33000",
@@ -2871,7 +2902,7 @@
       "combinedScore": 0.381,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 87
+      "priority": 86
     },
     {
       "topicKey": "finance-gap-14000",
@@ -2894,7 +2925,7 @@
       "combinedScore": 0.374,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 88
+      "priority": 87
     },
     {
       "topicKey": "finance-gap-26000",
@@ -2917,7 +2948,7 @@
       "combinedScore": 0.374,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 89
+      "priority": 88
     },
     {
       "topicKey": "migration-44000",
@@ -2942,7 +2973,7 @@
       "combinedScore": 0.364,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 90
+      "priority": 89
     },
     {
       "topicKey": "gap-preschool-fee-consumption-expenditure",
@@ -2969,7 +3000,7 @@
       "combinedScore": 0.352,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 91
+      "priority": 90
     },
     {
       "topicKey": "migration-01000",
@@ -2994,7 +3025,7 @@
       "combinedScore": 0.352,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 92
+      "priority": 91
     },
     {
       "topicKey": "migration-36000",
@@ -3019,7 +3050,7 @@
       "combinedScore": 0.352,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 93
+      "priority": 92
     },
     {
       "topicKey": "finance-gap-17000",
@@ -3042,7 +3073,7 @@
       "combinedScore": 0.351,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 94
+      "priority": 93
     },
     {
       "topicKey": "finance-gap-12000",
@@ -3065,7 +3096,7 @@
       "combinedScore": 0.333,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 95
+      "priority": 94
     },
     {
       "topicKey": "gap-university-professor-annual-income",
@@ -3092,7 +3123,7 @@
       "combinedScore": 0.332,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 96
+      "priority": 95
     },
     {
       "topicKey": "gap-bean-sprouts-consumption-quantity",
@@ -3119,7 +3150,7 @@
       "combinedScore": 0.33,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 97
+      "priority": 96
     },
     {
       "topicKey": "gap-pickled-plum-consumption-quantity",
@@ -3146,7 +3177,7 @@
       "combinedScore": 0.329,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 98
+      "priority": 97
     },
     {
       "topicKey": "finance-gap-13000",
@@ -3169,7 +3200,7 @@
       "combinedScore": 0.328,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 99
+      "priority": 98
     },
     {
       "topicKey": "finance-gap-46000",
@@ -3192,7 +3223,7 @@
       "combinedScore": 0.328,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 100
+      "priority": 99
     },
     {
       "topicKey": "gap-cake-consumption-expenditure",
@@ -3219,7 +3250,7 @@
       "combinedScore": 0.327,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 101
+      "priority": 100
     },
     {
       "topicKey": "gap-tissue-paper-consumption-expenditure",
@@ -3246,7 +3277,7 @@
       "combinedScore": 0.325,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 102
+      "priority": 101
     },
     {
       "topicKey": "gap-cod-roe-consumption-quantity",
@@ -3273,7 +3304,7 @@
       "combinedScore": 0.323,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 103
+      "priority": 102
     },
     {
       "topicKey": "gap-fishery-species-catch-tuna",
@@ -3300,7 +3331,7 @@
       "combinedScore": 0.322,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 104
+      "priority": 103
     },
     {
       "topicKey": "gap-sauce-consumption-quantity",
@@ -3327,7 +3358,7 @@
       "combinedScore": 0.321,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 105
+      "priority": 104
     },
     {
       "topicKey": "gap-cheese-consumption-quantity",
@@ -3354,7 +3385,7 @@
       "combinedScore": 0.317,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 106
+      "priority": 105
     },
     {
       "topicKey": "gap-shumai-consumption-expenditure",
@@ -3381,7 +3412,7 @@
       "combinedScore": 0.316,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 107
+      "priority": 106
     },
     {
       "topicKey": "finance-gap-09000",
@@ -3404,7 +3435,7 @@
       "combinedScore": 0.316,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 108
+      "priority": 107
     },
     {
       "topicKey": "gap-retail-store-count",
@@ -3431,7 +3462,7 @@
       "combinedScore": 0.315,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 109
+      "priority": 108
     },
     {
       "topicKey": "gap-soy-sauce-consumption-expenditure",
@@ -3458,7 +3489,7 @@
       "combinedScore": 0.314,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 110
+      "priority": 109
     },
     {
       "topicKey": "gap-tomato-consumption-quantity",
@@ -3485,7 +3516,7 @@
       "combinedScore": 0.313,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 111
+      "priority": 110
     },
     {
       "topicKey": "gap-sports-spectating-consumption-expenditure",
@@ -3512,7 +3543,7 @@
       "combinedScore": 0.309,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 112
+      "priority": 111
     },
     {
       "topicKey": "gap-toilet-paper-consumption-expenditure",
@@ -3539,7 +3570,7 @@
       "combinedScore": 0.309,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 113
+      "priority": 112
     },
     {
       "topicKey": "finance-gap-37000",
@@ -3562,7 +3593,7 @@
       "combinedScore": 0.308,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 114
+      "priority": 113
     },
     {
       "topicKey": "gap-treatment-rate-mental-disorder-inpatient",
@@ -3589,7 +3620,7 @@
       "combinedScore": 0.306,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 115
+      "priority": 114
     },
     {
       "topicKey": "gap-fishery-species-catch-pollock",
@@ -3616,7 +3647,7 @@
       "combinedScore": 0.305,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 116
+      "priority": 115
     },
     {
       "topicKey": "gap-peach-consumption-quantity",
@@ -3643,7 +3674,7 @@
       "combinedScore": 0.304,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 117
+      "priority": 116
     },
     {
       "topicKey": "gap-annual-sunshine-duration",
@@ -3670,7 +3701,7 @@
       "combinedScore": 0.303,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 118
+      "priority": 117
     },
     {
       "topicKey": "gap-eggplant-consumption-expenditure",
@@ -3697,7 +3728,7 @@
       "combinedScore": 0.3,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 119
+      "priority": 118
     },
     {
       "topicKey": "gap-dam-count",
@@ -3724,7 +3755,7 @@
       "combinedScore": 0.299,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 120
+      "priority": 119
     },
     {
       "topicKey": "gap-chocolate-snack-consumption-expenditure",
@@ -3751,7 +3782,7 @@
       "combinedScore": 0.298,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 121
+      "priority": 120
     },
     {
       "topicKey": "gap-convenience-store-sales-monthly",
@@ -3778,7 +3809,7 @@
       "combinedScore": 0.293,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 122
+      "priority": 121
     },
     {
       "topicKey": "gap-swimming-pool-public",
@@ -3805,7 +3836,7 @@
       "combinedScore": 0.293,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 123
+      "priority": 122
     },
     {
       "topicKey": "gap-cooking-oil-consumption-quantity",
@@ -3832,7 +3863,7 @@
       "combinedScore": 0.293,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 124
+      "priority": 123
     },
     {
       "topicKey": "gap-cut-flowers-consumption-expenditure",
@@ -3859,7 +3890,7 @@
       "combinedScore": 0.292,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 125
+      "priority": 124
     },
     {
       "topicKey": "gap-bacon-consumption-expenditure",
@@ -3886,7 +3917,7 @@
       "combinedScore": 0.291,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 126
+      "priority": 125
     },
     {
       "topicKey": "gap-future-population-change-rate-2050",
@@ -3913,7 +3944,7 @@
       "combinedScore": 0.291,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 127
+      "priority": 126
     },
     {
       "topicKey": "gap-furikake-consumption-expenditure",
@@ -3940,7 +3971,7 @@
       "combinedScore": 0.29,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 128
+      "priority": 127
     },
     {
       "topicKey": "gap-table-salt-consumption-quantity",
@@ -3967,7 +3998,7 @@
       "combinedScore": 0.29,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 129
+      "priority": 128
     },
     {
       "topicKey": "gap-sauce-consumption-expenditure",
@@ -3994,7 +4025,7 @@
       "combinedScore": 0.289,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 130
+      "priority": 129
     },
     {
       "topicKey": "finance-gap-44000",
@@ -4017,7 +4048,7 @@
       "combinedScore": 0.289,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 131
+      "priority": 130
     },
     {
       "topicKey": "gap-broccoli-consumption-quantity",
@@ -4044,7 +4075,7 @@
       "combinedScore": 0.288,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 132
+      "priority": 131
     },
     {
       "topicKey": "gap-sports-participation-rate-swimming",
@@ -4071,7 +4102,7 @@
       "combinedScore": 0.288,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 133
+      "priority": 132
     },
     {
       "topicKey": "gap-designated-difficult-disease",
@@ -4098,7 +4129,7 @@
       "combinedScore": 0.287,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 134
+      "priority": 133
     },
     {
       "topicKey": "gap-white-bread-consumption-quantity",
@@ -4125,7 +4156,7 @@
       "combinedScore": 0.287,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 135
+      "priority": 134
     },
     {
       "topicKey": "gap-fishery-species-catch-pacific-saury",
@@ -4152,7 +4183,7 @@
       "combinedScore": 0.287,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 136
+      "priority": 135
     },
     {
       "topicKey": "gap-dual-income-household-ratio",
@@ -4179,7 +4210,7 @@
       "combinedScore": 0.286,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 137
+      "priority": 136
     },
     {
       "topicKey": "gap-tempura-fry-consumption-expenditure",
@@ -4206,7 +4237,7 @@
       "combinedScore": 0.286,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 138
+      "priority": 137
     },
     {
       "topicKey": "gap-grilled-eel-consumption-expenditure",
@@ -4233,7 +4264,7 @@
       "combinedScore": 0.285,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 139
+      "priority": 138
     },
     {
       "topicKey": "gap-pickled-plum-consumption-expenditure",
@@ -4260,7 +4291,7 @@
       "combinedScore": 0.285,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 140
+      "priority": 139
     },
     {
       "topicKey": "gap-leek-consumption-quantity",
@@ -4287,7 +4318,7 @@
       "combinedScore": 0.285,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 141
+      "priority": 140
     },
     {
       "topicKey": "gap-fishery-species-catch-yellowtail",
@@ -4314,7 +4345,7 @@
       "combinedScore": 0.283,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 142
+      "priority": 141
     },
     {
       "topicKey": "gap-rice-cracker-consumption-expenditure",
@@ -4341,7 +4372,7 @@
       "combinedScore": 0.283,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 143
+      "priority": 142
     },
     {
       "topicKey": "gap-retail-store-count-alt",
@@ -4368,7 +4399,7 @@
       "combinedScore": 0.282,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 144
+      "priority": 143
     },
     {
       "topicKey": "gap-fishery-species-catch-scallop",
@@ -4395,7 +4426,7 @@
       "combinedScore": 0.282,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 145
+      "priority": 144
     },
     {
       "topicKey": "gap-governor-salary-prefecture",
@@ -4422,7 +4453,7 @@
       "combinedScore": 0.282,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 146
+      "priority": 145
     },
     {
       "topicKey": "gap-apple-consumption-quantity",
@@ -4449,7 +4480,7 @@
       "combinedScore": 0.279,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 147
+      "priority": 146
     },
     {
       "topicKey": "gap-flavor-seasoning-consumption-expenditure",
@@ -4476,7 +4507,7 @@
       "combinedScore": 0.277,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 148
+      "priority": 147
     },
     {
       "topicKey": "gap-other-mushroom-consumption-quantity",
@@ -4503,7 +4534,7 @@
       "combinedScore": 0.277,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 149
+      "priority": 148
     },
     {
       "topicKey": "finance-gap-01000",
@@ -4526,7 +4557,7 @@
       "combinedScore": 0.277,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 150
+      "priority": 149
     },
     {
       "topicKey": "finance-gap-36000",
@@ -4549,7 +4580,7 @@
       "combinedScore": 0.277,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 151
+      "priority": 150
     },
     {
       "topicKey": "gap-wakame-consumption-quantity",
@@ -4576,7 +4607,7 @@
       "combinedScore": 0.276,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 152
+      "priority": 151
     },
     {
       "topicKey": "gap-airport-count",
@@ -4603,7 +4634,7 @@
       "combinedScore": 0.275,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 153
+      "priority": 152
     },
     {
       "topicKey": "gap-average-weight-middle-school-second-grade-male",
@@ -4630,7 +4661,7 @@
       "combinedScore": 0.273,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 154
+      "priority": 153
     },
     {
       "topicKey": "gap-psychiatric-bed-count",
@@ -4657,7 +4688,7 @@
       "combinedScore": 0.271,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 155
+      "priority": 154
     },
     {
       "topicKey": "gap-fishing-port-count-by-type",
@@ -4684,7 +4715,7 @@
       "combinedScore": 0.271,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 156
+      "priority": 155
     },
     {
       "topicKey": "gap-zoo-count",
@@ -4711,7 +4742,7 @@
       "combinedScore": 0.268,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 157
+      "priority": 156
     },
     {
       "topicKey": "gap-miscellaneous-school-count",
@@ -4738,7 +4769,7 @@
       "combinedScore": 0.268,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 158
+      "priority": 157
     },
     {
       "topicKey": "gap-deaths-lifestyle-diseases",
@@ -4765,7 +4796,7 @@
       "combinedScore": 0.267,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 159
+      "priority": 158
     },
     {
       "topicKey": "gap-treatment-rate-mood-disorder-outpatient",
@@ -4792,7 +4823,7 @@
       "combinedScore": 0.267,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 160
+      "priority": 159
     },
     {
       "topicKey": "gap-non-regular-employment-rate",
@@ -4819,7 +4850,7 @@
       "combinedScore": 0.266,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 161
+      "priority": 160
     },
     {
       "topicKey": "gap-households-on-public-assistance",
@@ -4846,7 +4877,7 @@
       "combinedScore": 0.265,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 162
+      "priority": 161
     },
     {
       "topicKey": "gap-geothermal-power-plant-count",
@@ -4873,7 +4904,7 @@
       "combinedScore": 0.262,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 163
+      "priority": 162
     },
     {
       "topicKey": "gap-hobby-participation-rate-reading",
@@ -4900,7 +4931,7 @@
       "combinedScore": 0.26,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 164
+      "priority": 163
     },
     {
       "topicKey": "gap-serious-crime-per-100k",
@@ -4927,7 +4958,46 @@
       "combinedScore": 0.26,
       "lane": "opportunity",
       "status": "pending",
-      "priority": 165
+      "priority": 164
+    },
+    {
+      "topicKey": "corr-old-population-index--vacant-housing-rate",
+      "archetype": "B",
+      "metricKeys": [
+        "vacant-housing-rate",
+        "old-population-index"
+      ],
+      "label": "空き家率 × 老年人口指数 (r=0.74)",
+      "source": "correlation",
+      "scores": {
+        "queryGap": 1,
+        "seasonality": 0,
+        "surprise": 0.737,
+        "competitionGap": 0.8
+      },
+      "evidence": {
+        "pearsonR": 0.737,
+        "partialRPopulation": 0.561,
+        "populationConfounded": false,
+        "crossCategory": true,
+        "categories": [
+          "construction",
+          "population"
+        ],
+        "gscImp": 7898,
+        "rankingUrls": [
+          "/ranking/vacant-housing-rate",
+          "/ranking/old-population-index"
+        ]
+      },
+      "suggestedTitle": "空き家と老年人口指の意外な関係",
+      "combinedScore": 0.657,
+      "lane": "must-write",
+      "status": "done",
+      "priority": null,
+      "in_progress_at": "2026-07-09",
+      "done_at": "2026-07-09",
+      "published_slug": "vacant-housing-aging-correlation"
     }
   ]
 }
