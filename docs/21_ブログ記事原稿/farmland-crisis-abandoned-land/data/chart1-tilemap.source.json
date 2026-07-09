@@ -1,9 +1,0 @@
-{
-  "kind": "ranking",
-  "rankingKey": "abandoned-cultivated-land-area",
-  "year": "2014",
-  "unit": "ｈａ",
-  "source": "r2:app/ranking/abandoned-cultivated-land-area/values.json",
-  "verifiedMatchRate": 100,
-  "note": "SSOTから取得。既存地図の表示値と照合し metric+年を確定 (SVGから逆復元しない)"
-}
