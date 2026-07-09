@@ -227,8 +227,9 @@ function dueKey(due) {
   }
   return "9999-12-31";
 }
-// 判定確定済み status は末尾に沈める (次にやる順 = 未完了が上)
-const DONEISH = new Set(["effect/full", "effect/none", "effect/n-a", "effect/adverse", "done"]);
+// 判定確定済み status は末尾に沈める (次にやる順 = 未完了が上)。
+// effect/partial も「判定完了・残ギャップは別施策で追う」の意味なので確定扱い
+const DONEISH = new Set(["effect/full", "effect/partial", "effect/none", "effect/n-a", "effect/adverse", "done"]);
 function backlogSort(a, b) {
   const d = (DONEISH.has(a.status) ? 1 : 0) - (DONEISH.has(b.status) ? 1 : 0);
   if (d) return d;
