@@ -1,9 +1,10 @@
 import type { MetricConfig } from "../types";
 
-export const riceConsumptionExpenditure: MetricConfig = {
-  "key": "rice-consumption-expenditure",
-  "title": "米消費支出額",
-  "subtitle": "都道府県庁所在市の二人以上世帯の年間米消費支出額",
+export const foodExpenditureTotal: MetricConfig = {
+  "key": "food-expenditure-total",
+  "title": "食料費",
+  "subtitle": "都道府県庁所在市の二人以上世帯の年間食料費（食料への支出総額）",
+  "description": "家計調査（二人以上世帯）における年間の食料への支出総額。外食・調理食品も含む食生活全体の支出規模を示す。",
   "unit": "円",
   "category": "economy",
   "source": {
@@ -14,7 +15,7 @@ export const riceConsumptionExpenditure: MetricConfig = {
         "url": "https://www.e-stat.go.jp/stat-search/files?page=1&layout=datalist&toukei=00200561",
       },
       "statsDataId": "0003348239",
-      "cdCat01": "010110001",
+      "cdCat01": "010000000",
       "cdCat02": "03",
     },
     "displayName": "家計調査",
@@ -29,7 +30,7 @@ export const riceConsumptionExpenditure: MetricConfig = {
   },
   "yearFormat": "calendar",
   "visualization": {
-    "colorScheme": "interpolateOranges",
+    "colorScheme": "interpolateBlues",
     "colorSchemeType": "sequential",
     "minValueType": "zero",
   },
@@ -56,8 +57,6 @@ export const riceConsumptionExpenditure: MetricConfig = {
     ],
     "isCalculated": false,
   },
-  "seoTitle": "米消費支出額ランキング都道府県【2024年】",
-  "seoDescription": "2024年の米消費支出額の都道府県別ランキング。家計調査（二人以上世帯・県庁所在市）の年間支出額を地図やグラフで47都道府県比較。",
   "isActive": true,
   "isFeatured": false,
   "featuredOrder": 0,
