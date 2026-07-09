@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 416" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Noto Sans JP',sans-serif">
+  <rect width="760" height="416" rx="10" fill="#1e1e2e"/>
+  <rect width="760" height="38" rx="10" fill="#313244"/>
+  <rect y="20" width="760" height="18" fill="#313244"/>
+  <circle cx="26" cy="19" r="6" fill="#f38ba8"/>
+  <circle cx="48" cy="19" r="6" fill="#f9e2af"/>
+  <circle cx="70" cy="19" r="6" fill="#a6e3a1"/>
+  <text x="380" y="24" text-anchor="middle" font-size="12" fill="#9399b2">ターミナル</text>
+  <g font-family="'SFMono-Regular','Menlo','Consolas','Courier New',monospace" font-size="15">
+    <text x="24" y="78" fill="#89b4fa">$ <tspan fill="#cdd6f4">cd ~/work/skill-sample</tspan></text>
+    <text x="24" y="106" fill="#89b4fa">$ <tspan fill="#cdd6f4">tree .claude/skills/official-doc-review/</tspan></text>
+    <text x="24" y="134" fill="#bac2de">.claude/skills/official-doc-review/</text>
+    <text x="24" y="162" fill="#89dceb">├── <tspan fill="#cdd6f4">SKILL.md</tspan></text>
+    <text x="24" y="190" fill="#89dceb">└── reference/</text>
+    <text x="24" y="218" fill="#89dceb">    ├── <tspan fill="#cdd6f4">koyobun-2022.txt</tspan></text>
+    <text x="24" y="246" fill="#89dceb">    ├── <tspan fill="#cdd6f4">jichitai-rules.txt</tspan></text>
+    <text x="24" y="274" fill="#89dceb">    ├── <tspan fill="#cdd6f4">common-mistakes.md</tspan></text>
+    <text x="24" y="302" fill="#89dceb">    └── examples/</text>
+    <text x="24" y="330" fill="#89dceb">        ├── <tspan fill="#cdd6f4">good-tsuuchi.txt</tspan></text>
+    <text x="24" y="358" fill="#89dceb">        └── <tspan fill="#cdd6f4">bad-tsuuchi.txt</tspan></text>
+  </g>
+  <rect x="0" y="376" width="760" height="40" fill="#181825"/>
+  <text x="24" y="401" font-size="13" fill="#bac2de">▲ SKILL.md と reference/ 配下のファイル構成 (tree 出力)</text>
+</svg>

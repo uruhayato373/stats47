@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 280" font-family="'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Noto Sans JP', sans-serif">
+  <rect width="900" height="280" fill="#FAFAFA"/>
+  <text x="450" y="34" text-anchor="middle" font-size="20" font-weight="bold" fill="#1E293B">よくあるつまずき 5 項目</text>
+
+  <!-- 1: 専門用語ブレ -->
+  <g>
+    <rect x="20" y="70" width="160" height="180" fill="#DBEAFE" stroke="#1E3A8A" stroke-width="1.5" rx="6"/>
+    <text x="100" y="100" text-anchor="middle" font-size="22" font-weight="bold" fill="#1E3A8A">1</text>
+    <text x="100" y="125" text-anchor="middle" font-size="10" fill="#1E40AF">「DX」「SDGs」</text>
+    <text x="100" y="140" text-anchor="middle" font-size="10" fill="#1E40AF">「介護認定」…</text>
+    <text x="100" y="170" text-anchor="middle" font-size="12" font-weight="bold" fill="#1E293B">用語ブレ</text>
+    <text x="100" y="195" text-anchor="middle" font-size="10" fill="#475569">custom_dict に</text>
+    <text x="100" y="210" text-anchor="middle" font-size="10" fill="#475569">自治体特有用語</text>
+    <text x="100" y="232" text-anchor="middle" font-size="10" fill="#1E40AF">年 1 回見直し</text>
+  </g>
+
+  <!-- 2: 役所らしさ例外 -->
+  <g>
+    <rect x="200" y="70" width="160" height="180" fill="#FCE7F3" stroke="#9D174D" stroke-width="1.5" rx="6"/>
+    <text x="280" y="100" text-anchor="middle" font-size="22" font-weight="bold" fill="#9D174D">2</text>
+    <text x="280" y="128" text-anchor="middle" font-size="10" fill="#9D174D">表彰・追悼・式辞</text>
+    <text x="280" y="143" text-anchor="middle" font-size="10" fill="#9D174D">は別基準</text>
+    <text x="280" y="170" text-anchor="middle" font-size="12" font-weight="bold" fill="#1E293B">役所らしさ例外</text>
+    <text x="280" y="195" text-anchor="middle" font-size="10" fill="#475569">scoring-formal.yml</text>
+    <text x="280" y="210" text-anchor="middle" font-size="10" fill="#475569">文長 60 字許容</text>
+    <text x="280" y="232" text-anchor="middle" font-size="10" fill="#9D174D">漢字 50% まで OK</text>
+  </g>
+
+  <!-- 3: 方言・固有名詞 -->
+  <g>
+    <rect x="380" y="70" width="160" height="180" fill="#CCFBF1" stroke="#0F766E" stroke-width="1.5" rx="6"/>
+    <text x="460" y="100" text-anchor="middle" font-size="22" font-weight="bold" fill="#0F766E">3</text>
+    <text x="460" y="128" text-anchor="middle" font-size="10" fill="#0F766E">地域固有名詞</text>
+    <text x="460" y="143" text-anchor="middle" font-size="10" fill="#0F766E">方言の扱い</text>
+    <text x="460" y="170" text-anchor="middle" font-size="12" font-weight="bold" fill="#1E293B">方言・固有名詞</text>
+    <text x="460" y="195" text-anchor="middle" font-size="10" fill="#475569">exclude フィールド</text>
+    <text x="460" y="210" text-anchor="middle" font-size="10" fill="#475569">で対象外指定</text>
+    <text x="460" y="232" text-anchor="middle" font-size="10" fill="#0F766E">用語カウント除外</text>
+  </g>
+
+  <!-- 4: 見出し意図 -->
+  <g>
+    <rect x="560" y="70" width="160" height="180" fill="#FEF3C7" stroke="#92400E" stroke-width="1.5" rx="6"/>
+    <text x="640" y="100" text-anchor="middle" font-size="22" font-weight="bold" fill="#92400E">4</text>
+    <rect x="600" y="115" width="80" height="20" fill="none" stroke="#92400E" stroke-width="1.5" rx="2"/>
+    <text x="640" y="130" text-anchor="middle" font-size="10" fill="#92400E">見出し 25 字</text>
+    <text x="640" y="170" text-anchor="middle" font-size="12" font-weight="bold" fill="#1E293B">見出し意図変化</text>
+    <text x="640" y="195" text-anchor="middle" font-size="10" fill="#475569">専用 Subagent</text>
+    <text x="640" y="210" text-anchor="middle" font-size="10" fill="#475569">koho-headline</text>
+    <text x="640" y="232" text-anchor="middle" font-size="10" fill="#92400E">元の意図保持優先</text>
+  </g>
+
+  <!-- 5: 校正記号 -->
+  <g>
+    <rect x="740" y="70" width="140" height="180" fill="#E0E7FF" stroke="#4338CA" stroke-width="1.5" rx="6"/>
+    <text x="810" y="100" text-anchor="middle" font-size="22" font-weight="bold" fill="#4338CA">5</text>
+    <text x="810" y="128" text-anchor="middle" font-size="10" fill="#4338CA">入稿後の校正</text>
+    <text x="810" y="143" text-anchor="middle" font-size="10" fill="#4338CA">は別レイヤー</text>
+    <text x="810" y="170" text-anchor="middle" font-size="12" font-weight="bold" fill="#1E293B">校正記号</text>
+    <text x="810" y="195" text-anchor="middle" font-size="10" fill="#475569">入稿前段階に限定</text>
+    <text x="810" y="210" text-anchor="middle" font-size="10" fill="#475569">最終校正後は</text>
+    <text x="810" y="232" text-anchor="middle" font-size="10" fill="#4338CA">触らない</text>
+  </g>
+</svg>

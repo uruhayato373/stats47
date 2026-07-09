@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 290" font-family="'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Noto Sans JP', sans-serif">
+  <rect width="900" height="290" fill="#FAFAFA"/>
+  <text x="450" y="34" text-anchor="middle" font-size="20" font-weight="bold" fill="#1E293B">FAQ 自動生成パイプライン (問い合わせ記録 → 公開)</text>
+
+  <defs>
+    <marker id="arr19" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#64748B"/>
+    </marker>
+  </defs>
+
+  <!-- Input: 3 channels grouped -->
+  <g>
+    <rect x="20" y="75" width="130" height="36" fill="#F1F5F9" stroke="#475569" stroke-width="1.5" rx="4"/>
+    <text x="85" y="98" text-anchor="middle" font-size="12" font-weight="bold" fill="#1E293B">窓口メモ</text>
+  </g>
+  <g>
+    <rect x="20" y="120" width="130" height="36" fill="#F1F5F9" stroke="#475569" stroke-width="1.5" rx="4"/>
+    <text x="85" y="143" text-anchor="middle" font-size="12" font-weight="bold" fill="#1E293B">電話メモ</text>
+  </g>
+  <g>
+    <rect x="20" y="165" width="130" height="36" fill="#F1F5F9" stroke="#475569" stroke-width="1.5" rx="4"/>
+    <text x="85" y="188" text-anchor="middle" font-size="12" font-weight="bold" fill="#1E293B">メール受信</text>
+  </g>
+
+  <!-- arrows to CSV -->
+  <line x1="150" y1="93" x2="208" y2="135" stroke="#64748B" stroke-width="1.5" marker-end="url(#arr19)"/>
+  <line x1="150" y1="138" x2="208" y2="138" stroke="#64748B" stroke-width="1.5" marker-end="url(#arr19)"/>
+  <line x1="150" y1="183" x2="208" y2="141" stroke="#64748B" stroke-width="1.5" marker-end="url(#arr19)"/>
+
+  <!-- Step: CSV -->
+  <g>
+    <rect x="210" y="115" width="120" height="50" fill="#FEF3C7" stroke="#92400E" stroke-width="1.5" rx="6"/>
+    <text x="270" y="138" text-anchor="middle" font-size="13" font-weight="bold" fill="#1E293B">CSV 化</text>
+    <text x="270" y="155" text-anchor="middle" font-size="10" fill="#92400E">PII マスキング後</text>
+  </g>
+  <line x1="330" y1="140" x2="358" y2="140" stroke="#64748B" stroke-width="2" marker-end="url(#arr19)"/>
+
+  <!-- Step: クラスタリング -->
+  <g>
+    <rect x="360" y="115" width="140" height="50" fill="#DBEAFE" stroke="#1E3A8A" stroke-width="1.5" rx="6"/>
+    <text x="430" y="135" text-anchor="middle" font-size="13" font-weight="bold" fill="#1E293B">意味クラスタリング</text>
+    <text x="430" y="153" text-anchor="middle" font-size="10" fill="#1E40AF">/faq-cluster</text>
+  </g>
+  <line x1="500" y1="140" x2="528" y2="140" stroke="#64748B" stroke-width="2" marker-end="url(#arr19)"/>
+
+  <!-- Step: FAQ 文生成 -->
+  <g>
+    <rect x="530" y="115" width="130" height="50" fill="#CCFBF1" stroke="#0F766E" stroke-width="1.5" rx="6"/>
+    <text x="595" y="135" text-anchor="middle" font-size="13" font-weight="bold" fill="#1E293B">FAQ 文生成</text>
+    <text x="595" y="153" text-anchor="middle" font-size="10" fill="#0F766E">根拠条文付き</text>
+  </g>
+  <line x1="660" y1="140" x2="688" y2="140" stroke="#64748B" stroke-width="2" marker-end="url(#arr19)"/>
+
+  <!-- Step: 優先度 -->
+  <g>
+    <rect x="690" y="115" width="130" height="50" fill="#E0E7FF" stroke="#4338CA" stroke-width="1.5" rx="6"/>
+    <text x="755" y="135" text-anchor="middle" font-size="13" font-weight="bold" fill="#1E293B">優先度ランキング</text>
+    <text x="755" y="153" text-anchor="middle" font-size="10" fill="#4338CA">上位 20 件公開</text>
+  </g>
+
+  <!-- Down arrow -->
+  <line x1="755" y1="165" x2="755" y2="205" stroke="#64748B" stroke-width="2" marker-end="url(#arr19)"/>
+
+  <!-- Final: ホームページ公開 -->
+  <g>
+    <rect x="630" y="210" width="250" height="50" fill="#FFFFFF" stroke="#059669" stroke-width="2.5" rx="6"/>
+    <text x="755" y="232" text-anchor="middle" font-size="13" font-weight="bold" fill="#065F46">ホームページ FAQ 公開</text>
+    <text x="755" y="250" text-anchor="middle" font-size="10" fill="#059669">所管課決裁後 / AI 補助を明示</text>
+  </g>
+
+  <!-- Bottom caption -->
+  <text x="450" y="278" text-anchor="middle" font-size="11" fill="#64748B">月 200〜500 件の母集団 → クラスタ化で 30-50 件の FAQ に集約 → 月次差分検出</text>
+</svg>

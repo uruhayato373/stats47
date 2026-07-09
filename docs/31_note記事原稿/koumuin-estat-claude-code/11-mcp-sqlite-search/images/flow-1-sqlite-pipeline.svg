@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 360">
+<style>
+  text { font-family: 'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Noto Sans JP', sans-serif; }
+</style>
+
+<rect width="1200" height="360" fill="#fafafa"/>
+
+<text x="600" y="40" text-anchor="middle" font-size="22" font-weight="bold" fill="#1e293b">e-Stat → SQLite → MCP → Claude Code の 5 ステップ</text>
+<line x1="380" y1="56" x2="820" y2="56" stroke="#0891b2" stroke-width="2" stroke-linecap="round"/>
+
+<!-- Step 1 -->
+<g transform="translate(20, 110)">
+  <rect width="200" height="80" rx="8" fill="#ffffff" stroke="#0891b2" stroke-width="2"/>
+  <text x="100" y="32" text-anchor="middle" font-size="13" font-weight="700" fill="#0891b2">1. 取得</text>
+  <text x="100" y="54" text-anchor="middle" font-size="12" fill="#475569">/fetch-estat-data</text>
+  <text x="100" y="72" text-anchor="middle" font-size="11" fill="#64748b">JSON 取得</text>
+</g>
+
+<path d="M 230 150 L 260 150" stroke="#0891b2" stroke-width="2" fill="none" marker-end="url(#arrow11)"/>
+
+<!-- Step 2 -->
+<g transform="translate(270, 110)">
+  <rect width="200" height="80" rx="8" fill="#ffffff" stroke="#0891b2" stroke-width="2"/>
+  <text x="100" y="32" text-anchor="middle" font-size="13" font-weight="700" fill="#0891b2">2. 整形</text>
+  <text x="100" y="54" text-anchor="middle" font-size="12" fill="#475569">JSON → CSV</text>
+  <text x="100" y="72" text-anchor="middle" font-size="11" fill="#64748b">縦持ち 4 列構造</text>
+</g>
+
+<path d="M 480 150 L 510 150" stroke="#0891b2" stroke-width="2" fill="none" marker-end="url(#arrow11)"/>
+
+<!-- Step 3 -->
+<g transform="translate(520, 110)">
+  <rect width="200" height="80" rx="8" fill="#cffafe" stroke="#0891b2" stroke-width="2"/>
+  <text x="100" y="32" text-anchor="middle" font-size="13" font-weight="700" fill="#0891b2">3. 投入</text>
+  <text x="100" y="54" text-anchor="middle" font-size="12" fill="#475569">SQLite に INSERT</text>
+  <text x="100" y="72" text-anchor="middle" font-size="11" fill="#64748b">sqlite3 / sqlite-utils</text>
+</g>
+
+<path d="M 730 150 L 760 150" stroke="#0891b2" stroke-width="2" fill="none" marker-end="url(#arrow11)"/>
+
+<!-- Step 4 -->
+<g transform="translate(770, 110)">
+  <rect width="200" height="80" rx="8" fill="#ffffff" stroke="#0891b2" stroke-width="2"/>
+  <text x="100" y="32" text-anchor="middle" font-size="13" font-weight="700" fill="#0891b2">4. MCP 接続</text>
+  <text x="100" y="54" text-anchor="middle" font-size="12" fill="#475569">.mcp.json 設定</text>
+  <text x="100" y="72" text-anchor="middle" font-size="11" fill="#64748b">--db-path 指定</text>
+</g>
+
+<path d="M 980 150 L 1010 150" stroke="#0891b2" stroke-width="2" fill="none" marker-end="url(#arrow11)"/>
+
+<!-- Step 5 -->
+<g transform="translate(1020, 110)">
+  <rect width="160" height="80" rx="8" fill="#d1fae5" stroke="#10b981" stroke-width="2"/>
+  <text x="80" y="32" text-anchor="middle" font-size="13" font-weight="700" fill="#10b981">5. 検索</text>
+  <text x="80" y="54" text-anchor="middle" font-size="12" fill="#475569">SQL で問い合わせ</text>
+  <text x="80" y="72" text-anchor="middle" font-size="11" fill="#64748b">Claude が自動生成</text>
+</g>
+
+<!-- Time comparison -->
+<rect x="40" y="230" width="1120" height="100" rx="8" fill="#fef3c7" stroke="#f59e0b" stroke-width="1"/>
+<text x="600" y="262" text-anchor="middle" font-size="16" font-weight="bold" fill="#92400e">依頼受領から回答まで: 30 分-1 時間 (Excel 手作業) → 1 分 (SQL 自動生成)</text>
+<text x="600" y="290" text-anchor="middle" font-size="13" fill="#475569">月 20 件の依頼で 10-20 時間 → 1-2 時間。年間 100-220 時間削減。</text>
+<text x="600" y="312" text-anchor="middle" font-size="11" fill="#64748b">出典: 政府統計の総合窓口 (e-Stat) — 商用利用可・出典明記必須</text>
+
+<defs>
+  <marker id="arrow11" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+    <path d="M0,0 L0,6 L9,3 z" fill="#0891b2"/>
+  </marker>
+</defs>
+</svg>

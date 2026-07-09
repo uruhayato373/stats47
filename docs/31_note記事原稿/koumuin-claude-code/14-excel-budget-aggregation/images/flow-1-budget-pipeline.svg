@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 320" font-family="'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Noto Sans JP', sans-serif">
+  <rect width="900" height="320" fill="#FAFAFA"/>
+  <text x="450" y="34" text-anchor="middle" font-size="20" font-weight="bold" fill="#1E293B">予算 Excel 集計パイプライン (各課 .xlsx → 月次レポート)</text>
+  <text x="450" y="54" text-anchor="middle" font-size="12" fill="#64748B">構造把握 → pandas 整形 → 統合 CSV → DuckDB 集計 → Markdown レポート</text>
+
+  <defs>
+    <marker id="arr14" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#64748B"/>
+    </marker>
+  </defs>
+
+  <!-- Step 1: inputs/ -->
+  <g>
+    <rect x="20" y="100" width="130" height="80" fill="#FEF3C7" stroke="#92400E" stroke-width="1.5" rx="6"/>
+    <text x="85" y="125" text-anchor="middle" font-size="13" font-weight="bold" fill="#1E293B">inputs/</text>
+    <text x="85" y="145" text-anchor="middle" font-size="11" fill="#92400E">各課提出 Excel</text>
+    <text x="85" y="160" text-anchor="middle" font-size="11" fill="#92400E">01_soumu.xlsx</text>
+    <text x="85" y="174" text-anchor="middle" font-size="10" fill="#92400E">... 47 ファイル</text>
+  </g>
+  <line x1="150" y1="140" x2="178" y2="140" stroke="#64748B" stroke-width="2" marker-end="url(#arr14)"/>
+
+  <!-- Step 2: Claude Code 構造把握 -->
+  <g>
+    <rect x="180" y="100" width="140" height="80" fill="#DBEAFE" stroke="#1E3A8A" stroke-width="1.5" rx="6"/>
+    <text x="250" y="125" text-anchor="middle" font-size="13" font-weight="bold" fill="#1E293B">Claude Code</text>
+    <text x="250" y="143" text-anchor="middle" font-size="11" fill="#1E40AF">構造把握</text>
+    <text x="250" y="158" text-anchor="middle" font-size="10" fill="#1E40AF">シート / skiprows</text>
+    <text x="250" y="172" text-anchor="middle" font-size="10" fill="#1E40AF">結合セル / 単位</text>
+  </g>
+  <line x1="320" y1="140" x2="348" y2="140" stroke="#64748B" stroke-width="2" marker-end="url(#arr14)"/>
+
+  <!-- Step 3: aggregate.py -->
+  <g>
+    <rect x="350" y="100" width="140" height="80" fill="#CCFBF1" stroke="#0F766E" stroke-width="1.5" rx="6"/>
+    <text x="420" y="125" text-anchor="middle" font-size="13" font-weight="bold" fill="#1E293B">aggregate.py</text>
+    <text x="420" y="143" text-anchor="middle" font-size="11" fill="#0F766E">pandas 整形</text>
+    <text x="420" y="158" text-anchor="middle" font-size="10" fill="#0F766E">ffill / 合計除外</text>
+    <text x="420" y="172" text-anchor="middle" font-size="10" fill="#0F766E">円単位に正規化</text>
+  </g>
+  <line x1="490" y1="140" x2="518" y2="140" stroke="#64748B" stroke-width="2" marker-end="url(#arr14)"/>
+
+  <!-- Step 4: aggregated.csv -->
+  <g>
+    <rect x="520" y="100" width="140" height="80" fill="#E0E7FF" stroke="#4338CA" stroke-width="1.5" rx="6"/>
+    <text x="590" y="125" text-anchor="middle" font-size="13" font-weight="bold" fill="#1E293B">output/</text>
+    <text x="590" y="143" text-anchor="middle" font-size="11" fill="#4338CA">aggregated.csv</text>
+    <text x="590" y="158" text-anchor="middle" font-size="10" fill="#6366F1">UTF-8 BOM</text>
+    <text x="590" y="172" text-anchor="middle" font-size="10" fill="#6366F1">課・節・事業 統合</text>
+  </g>
+  <line x1="660" y1="140" x2="688" y2="140" stroke="#64748B" stroke-width="2" marker-end="url(#arr14)"/>
+
+  <!-- Step 5: DuckDB -->
+  <g>
+    <rect x="690" y="100" width="180" height="80" fill="#FCE7F3" stroke="#9D174D" stroke-width="1.5" rx="6"/>
+    <text x="780" y="125" text-anchor="middle" font-size="13" font-weight="bold" fill="#1E293B">DuckDB</text>
+    <text x="780" y="143" text-anchor="middle" font-size="11" fill="#9D174D">SQL 集計</text>
+    <text x="780" y="158" text-anchor="middle" font-size="10" fill="#9D174D">課別 / 節別 / 事業別</text>
+    <text x="780" y="172" text-anchor="middle" font-size="10" fill="#9D174D">前年差・増減率</text>
+  </g>
+
+  <!-- Output Markdown report -->
+  <g>
+    <rect x="340" y="230" width="280" height="55" fill="#FFFFFF" stroke="#059669" stroke-width="2.5" rx="6"/>
+    <text x="480" y="253" text-anchor="middle" font-size="14" font-weight="bold" fill="#065F46">report-YYYY-MM.md</text>
+    <text x="480" y="272" text-anchor="middle" font-size="11" fill="#059669">月次レポート (議会答弁・財政課査定用)</text>
+  </g>
+  <line x1="780" y1="180" x2="780" y2="205" stroke="#64748B" stroke-width="2"/>
+  <line x1="780" y1="205" x2="620" y2="205" stroke="#64748B" stroke-width="2"/>
+  <line x1="620" y1="205" x2="620" y2="225" stroke="#64748B" stroke-width="2" marker-end="url(#arr14)"/>
+
+  <text x="450" y="305" text-anchor="middle" font-size="11" fill="#94A3B8">初回構築 2 時間 → 月次運用 3 分。/budget:monthly-aggregate の 1 コマンド化</text>
+</svg>
