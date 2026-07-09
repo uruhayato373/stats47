@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "tobacco-consumption-expenditure",
+  "year": "2024",
+  "unit": "円",
+  "label": "たばこ消費支出額",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/tobacco-consumption-expenditure/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug tobacco-expenditure-ranking --keys tobacco-consumption-expenditure --data-name tobacco-expenditure-ranking-prefecture-rankings",
+  "fetchedAt": "2026-07-09T21:10:38.768Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}
