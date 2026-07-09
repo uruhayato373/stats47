@@ -269,7 +269,17 @@ async function main() {
   let ids: string[];
   let noteEntries: NoteEntry[] = [];
   if (opts.type === "note-covers") {
-    noteEntries = await listNoteEntries();
+    // koumuin-claude-code / koumuin-estat-claude-code は bespoke カバーが正典
+    // (.claude/scripts/note/generate-koumuin-covers.cjs → docs/31 → note.com アップロード)。
+    // 汎用 Satori カバーで R2 に別デザインを焼くと二重 SSOT になるため除外する。
+    // 正典: .claude/rules/ogp-image-standards.md §5。koumuin-gis / stats47-note は対象のまま。
+    const BESPOKE_COVER_VERTICALS = new Set([
+      "koumuin-claude-code",
+      "koumuin-estat-claude-code",
+    ]);
+    noteEntries = (await listNoteEntries()).filter(
+      (n) => !BESPOKE_COVER_VERTICALS.has(n.vertical),
+    );
     ids = noteEntries.map((n) => n.slug);
   } else if (opts.type === "areas") {
     ids = listAreaCodes();
