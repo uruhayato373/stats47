@@ -1,0 +1,14 @@
+{
+  "kind": "estat",
+  "statsDataId": "0003348240",
+  "params": {
+    "cdCat01": "011010020",
+    "cdCat02": "03",
+    "cdCat03": "01,03,05"
+  },
+  "unit": "円",
+  "label": "紅茶",
+  "transform": "quintile timeseries (I/III/V)",
+  "fetchedAt": "2026-07-10T23:09:24.834Z",
+  "restore": "npx tsx .claude/scripts/blog/fetch-quintile-data.ts --mode line --slug income-quintile-beverage --name black-tea --item 011010020 --from 2010"
+}
