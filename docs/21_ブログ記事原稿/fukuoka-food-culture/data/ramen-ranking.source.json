@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "ramen-dining-consumption-expenditure",
+  "year": "2024",
+  "unit": "円",
+  "label": "中華そば消費支出額",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/ramen-dining-consumption-expenditure/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug fukuoka-food-culture --keys ramen-dining-consumption-expenditure --data-name ramen-ranking",
+  "fetchedAt": "2026-07-10T22:25:59.539Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}
