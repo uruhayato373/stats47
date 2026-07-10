@@ -1,0 +1,8 @@
+{
+  "kind": "ranking",
+  "rankingKey": "refrigerator-consumption-expenditure",
+  "year": "2024",
+  "transform": "all47 (choropleth)",
+  "source": "r2:app/ranking/refrigerator-consumption-expenditure/values.json",
+  "verifiedMatchRate": 1
+}

@@ -1,0 +1,9 @@
+{
+ "kind": "ranking",
+ "rankingKey": "high-school-advancement-rate",
+ "year": "2023",
+ "unit": "％",
+ "transform": "all47 (choropleth)",
+ "source": "r2:app/ranking/high-school-advancement-rate/values.json",
+ "verifiedMatchRate": 1
+}

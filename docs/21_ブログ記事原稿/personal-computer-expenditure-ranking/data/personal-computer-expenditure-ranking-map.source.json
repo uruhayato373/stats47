@@ -1,0 +1,8 @@
+{
+  "kind": "ranking",
+  "rankingKey": "personal-computer-consumption-expenditure",
+  "year": "2024",
+  "transform": "all47 (choropleth)",
+  "source": "r2:app/ranking/personal-computer-consumption-expenditure/values.json",
+  "verifiedMatchRate": 1
+}

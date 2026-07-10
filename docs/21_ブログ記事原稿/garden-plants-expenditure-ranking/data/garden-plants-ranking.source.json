@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "garden-plants-consumption-expenditure",
+  "year": "2024",
+  "unit": "円",
+  "label": "園芸用植物消費支出額",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/garden-plants-consumption-expenditure/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug garden-plants-expenditure-ranking --keys garden-plants-consumption-expenditure --data-name garden-plants-ranking",
+  "fetchedAt": "2026-07-10T09:02:22.685Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

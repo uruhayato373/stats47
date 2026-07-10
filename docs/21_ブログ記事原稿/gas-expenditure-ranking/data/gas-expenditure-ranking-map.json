@@ -1,0 +1,335 @@
+{
+  "data": [
+    {
+      "areaName": "大阪府",
+      "rank": 1,
+      "value": 76684,
+      "label": "ガス代",
+      "unit": "円"
+    },
+    {
+      "areaName": "高知県",
+      "rank": 2,
+      "value": 75236,
+      "label": "ガス代",
+      "unit": "円"
+    },
+    {
+      "areaName": "北海道",
+      "rank": 3,
+      "value": 74652,
+      "label": "ガス代",
+      "unit": "円"
+    },
+    {
+      "areaName": "愛知県",
+      "rank": 4,
+      "value": 74485,
+      "label": "ガス代",
+      "unit": "円"
+    },
+    {
+      "areaName": "静岡県",
+      "rank": 5,
+      "value": 72132,
+      "label": "ガス代",
+      "unit": "円"
+    },
+    {
+      "areaName": "新潟県",
+      "rank": 6,
+      "value": 71390,
+      "label": "ガス代",
+      "unit": "円"
+    },
+    {
+      "areaName": "奈良県",
+      "rank": 7,
+      "value": 71215,
+      "label": "ガス代",
+      "unit": "円"
+    },
+    {
+      "areaName": "京都府",
+      "rank": 8,
+      "value": 69318,
+      "label": "ガス代",
+      "unit": "円"
+    },
+    {
+      "areaName": "岐阜県",
+      "rank": 9,
+      "value": 68147,
+      "label": "ガス代",
+      "unit": "円"
+    },
+    {
+      "areaName": "兵庫県",
+      "rank": 10,
+      "value": 65192,
+      "label": "ガス代",
+      "unit": "円"
+    },
+    {
+      "areaName": "広島県",
+      "rank": 11,
+      "value": 64989,
+      "label": "ガス代",
+      "unit": "円"
+    },
+    {
+      "areaName": "神奈川県",
+      "rank": 12,
+      "value": 64357,
+      "label": "ガス代",
+      "unit": "円"
+    },
+    {
+      "areaName": "東京都",
+      "rank": 13,
+      "value": 64294,
+      "label": "ガス代",
+      "unit": "円"
+    },
+    {
+      "areaName": "長野県",
+      "rank": 14,
+      "value": 61368,
+      "label": "ガス代",
+      "unit": "円"
+    },
+    {
+      "areaName": "群馬県",
+      "rank": 15,
+      "value": 61238,
+      "label": "ガス代",
+      "unit": "円"
+    },
+    {
+      "areaName": "沖縄県",
+      "rank": 16,
+      "value": 61065,
+      "label": "ガス代",
+      "unit": "円"
+    },
+    {
+      "areaName": "岩手県",
+      "rank": 17,
+      "value": 60708,
+      "label": "ガス代",
+      "unit": "円"
+    },
+    {
+      "areaName": "長崎県",
+      "rank": 18,
+      "value": 60680,
+      "label": "ガス代",
+      "unit": "円"
+    },
+    {
+      "areaName": "埼玉県",
+      "rank": 19,
+      "value": 60381,
+      "label": "ガス代",
+      "unit": "円"
+    },
+    {
+      "areaName": "千葉県",
+      "rank": 20,
+      "value": 58566,
+      "label": "ガス代",
+      "unit": "円"
+    },
+    {
+      "areaName": "茨城県",
+      "rank": 21,
+      "value": 56419,
+      "label": "ガス代",
+      "unit": "円"
+    },
+    {
+      "areaName": "福岡県",
+      "rank": 22,
+      "value": 55685,
+      "label": "ガス代",
+      "unit": "円"
+    },
+    {
+      "areaName": "鹿児島県",
+      "rank": 23,
+      "value": 55081,
+      "label": "ガス代",
+      "unit": "円"
+    },
+    {
+      "areaName": "宮城県",
+      "rank": 24,
+      "value": 54956,
+      "label": "ガス代",
+      "unit": "円"
+    },
+    {
+      "areaName": "山梨県",
+      "rank": 25,
+      "value": 54827,
+      "label": "ガス代",
+      "unit": "円"
+    },
+    {
+      "areaName": "熊本県",
+      "rank": 26,
+      "value": 53692,
+      "label": "ガス代",
+      "unit": "円"
+    },
+    {
+      "areaName": "滋賀県",
+      "rank": 27,
+      "value": 53172,
+      "label": "ガス代",
+      "unit": "円"
+    },
+    {
+      "areaName": "三重県",
+      "rank": 28,
+      "value": 51998,
+      "label": "ガス代",
+      "unit": "円"
+    },
+    {
+      "areaName": "秋田県",
+      "rank": 29,
+      "value": 51079,
+      "label": "ガス代",
+      "unit": "円"
+    },
+    {
+      "areaName": "岡山県",
+      "rank": 30,
+      "value": 50839,
+      "label": "ガス代",
+      "unit": "円"
+    },
+    {
+      "areaName": "島根県",
+      "rank": 31,
+      "value": 50784,
+      "label": "ガス代",
+      "unit": "円"
+    },
+    {
+      "areaName": "山口県",
+      "rank": 32,
+      "value": 50627,
+      "label": "ガス代",
+      "unit": "円"
+    },
+    {
+      "areaName": "福島県",
+      "rank": 33,
+      "value": 49802,
+      "label": "ガス代",
+      "unit": "円"
+    },
+    {
+      "areaName": "山形県",
+      "rank": 34,
+      "value": 49057,
+      "label": "ガス代",
+      "unit": "円"
+    },
+    {
+      "areaName": "富山県",
+      "rank": 35,
+      "value": 46308,
+      "label": "ガス代",
+      "unit": "円"
+    },
+    {
+      "areaName": "栃木県",
+      "rank": 36,
+      "value": 45919,
+      "label": "ガス代",
+      "unit": "円"
+    },
+    {
+      "areaName": "大分県",
+      "rank": 37,
+      "value": 44858,
+      "label": "ガス代",
+      "unit": "円"
+    },
+    {
+      "areaName": "愛媛県",
+      "rank": 38,
+      "value": 43558,
+      "label": "ガス代",
+      "unit": "円"
+    },
+    {
+      "areaName": "和歌山県",
+      "rank": 39,
+      "value": 42840,
+      "label": "ガス代",
+      "unit": "円"
+    },
+    {
+      "areaName": "宮崎県",
+      "rank": 40,
+      "value": 41721,
+      "label": "ガス代",
+      "unit": "円"
+    },
+    {
+      "areaName": "福井県",
+      "rank": 41,
+      "value": 41320,
+      "label": "ガス代",
+      "unit": "円"
+    },
+    {
+      "areaName": "徳島県",
+      "rank": 42,
+      "value": 40518,
+      "label": "ガス代",
+      "unit": "円"
+    },
+    {
+      "areaName": "鳥取県",
+      "rank": 43,
+      "value": 39832,
+      "label": "ガス代",
+      "unit": "円"
+    },
+    {
+      "areaName": "佐賀県",
+      "rank": 44,
+      "value": 36612,
+      "label": "ガス代",
+      "unit": "円"
+    },
+    {
+      "areaName": "香川県",
+      "rank": 45,
+      "value": 35144,
+      "label": "ガス代",
+      "unit": "円"
+    },
+    {
+      "areaName": "青森県",
+      "rank": 46,
+      "value": 33773,
+      "label": "ガス代",
+      "unit": "円"
+    },
+    {
+      "areaName": "石川県",
+      "rank": 47,
+      "value": 29950,
+      "label": "ガス代",
+      "unit": "円"
+    }
+  ],
+  "scheme": "Oranges",
+  "showValue": false
+}
