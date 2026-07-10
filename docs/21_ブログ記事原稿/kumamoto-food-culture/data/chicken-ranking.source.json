@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "chicken-consumption-expenditure",
+  "year": "2024",
+  "unit": "円",
+  "label": "鶏肉消費支出額",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/chicken-consumption-expenditure/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug kumamoto-food-culture --keys chicken-consumption-expenditure --data-name chicken-ranking",
+  "fetchedAt": "2026-07-10T11:51:36.701Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}
