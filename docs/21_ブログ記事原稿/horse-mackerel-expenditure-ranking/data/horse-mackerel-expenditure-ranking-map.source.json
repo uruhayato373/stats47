@@ -1,0 +1,10 @@
+{
+ "kind": "ranking",
+ "rankingKey": "horse-mackerel-consumption-expenditure",
+ "year": "2024",
+ "unit": "円",
+ "label": "あじ消費支出額",
+ "transform": "all47 (choropleth)",
+ "source": "r2:app/ranking/horse-mackerel-consumption-expenditure/values.json",
+ "verifiedMatchRate": 1
+}

@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "mandarin-consumption-expenditure",
+  "year": "2024",
+  "unit": "円",
+  "label": "みかん消費支出額",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/mandarin-consumption-expenditure/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug mandarin-expenditure-ranking --keys mandarin-consumption-expenditure --data-name mandarin-ranking",
+  "fetchedAt": "2026-07-09T22:12:41.098Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

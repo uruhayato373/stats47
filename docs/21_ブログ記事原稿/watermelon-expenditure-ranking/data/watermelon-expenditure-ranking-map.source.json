@@ -1,0 +1,9 @@
+{
+ "kind": "ranking",
+ "rankingKey": "watermelon-consumption-expenditure",
+ "year": "2024",
+ "unit": "円",
+ "transform": "all47 (choropleth)",
+ "source": "r2:app/ranking/watermelon-consumption-expenditure/values.json",
+ "verifiedMatchRate": 1
+}
