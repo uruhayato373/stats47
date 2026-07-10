@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "squid-consumption-expenditure",
+  "year": "2024",
+  "unit": "円",
+  "label": "いか消費支出額",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/squid-consumption-expenditure/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug okinawa-food-culture --keys squid-consumption-expenditure --data-name squid-ranking",
+  "fetchedAt": "2026-07-10T10:50:27.175Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}
