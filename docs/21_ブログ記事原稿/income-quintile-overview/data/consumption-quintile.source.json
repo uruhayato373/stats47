@@ -1,0 +1,16 @@
+{
+  "kind": "estat",
+  "statsDataId": "0003348240",
+  "params": {
+    "cdCat01": "001100000",
+    "cdCat02": "03",
+    "cdCat03": "00,01,02,03,04,05",
+    "cdTime": "2024000000"
+  },
+  "year": "2024",
+  "unit": "円",
+  "label": "消費支出",
+  "transform": "quintile bars (平均+I〜V or I〜V)",
+  "fetchedAt": "2026-07-10T23:08:43.960Z",
+  "restore": "npx tsx .claude/scripts/blog/fetch-quintile-data.ts --slug income-quintile-overview --name consumption --item 001100000 --year 2024"
+}
