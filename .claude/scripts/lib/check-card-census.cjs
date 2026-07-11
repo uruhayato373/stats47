@@ -31,6 +31,9 @@ const SCAN_DIRS = ["apps/web/src/components", "apps/web/src/features"];
 const BASELINE = new Set([
   "AiInsightCard",
   "AreaRelatedRankingsCard",
+  // 記事系ページ (reading zone) の本文カード。角丸14px + 2層ソフトシャドウ +
+  // モバイルフルブリード。ArticleShell と対で使う (2026-07-11 Soft Editorial 移植)。
+  "ArticleCard",
   "ChartCard",
   "ChartLoadingCard",
   "CitiesNavCard",
