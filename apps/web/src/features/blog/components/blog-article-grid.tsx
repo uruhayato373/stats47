@@ -23,7 +23,11 @@ export function BlogArticleGrid({ articles, firstPagePriority = false }: BlogArt
     }
 
     return (
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        // 右レール有無で本文カラム幅が変動するため、列数はビューポートでなく
+        // コンテナクエリで決める (ui-components.md のカードグリッド規約)。
+        // @container は祖先要素にしか効かないため wrapper で包む
+        <div className="@container">
+        <div className="grid grid-cols-1 gap-4 @sm:grid-cols-2 @md:grid-cols-3">
             {articles.map((article, index) => {
                 // LCP 対象: page 1 の先頭画像に priority (preload + fetchpriority=high)。
                 // mobile(1列) は縦長で先頭行 ~4 枚が above-fold になり、その中の lazy 画像が
@@ -52,6 +56,7 @@ export function BlogArticleGrid({ articles, firstPagePriority = false }: BlogArt
                     </Link>
                 );
             })}
+        </div>
         </div>
     );
 }

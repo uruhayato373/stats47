@@ -19,7 +19,7 @@ interface ArticleShellProps {
  * 記事系ページ (blog 詳細 / ranking 詳細 / survey / terms / privacy) 専用の Shell。
  * doboku-note の Soft Editorial レイアウトを移植したもの。
  *
- * PageShell (1700px grid) との違い:
+ * PageShell (1280px grid・2026-07-11 に 1700px から統一) との違い:
  * - `.reading-zone` トークン (薄グレー地・--radius: 14px) を全幅で敷く
  * - コンテナ 1280px + flex で本文がレールに密着する
  *   (PageShell reading variant の「1fr 列内で本文 760px 制限 → ワイド画面で空白」を根治)

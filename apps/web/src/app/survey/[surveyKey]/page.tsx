@@ -5,35 +5,36 @@
  * 調査概要 + 関連ランキング一覧を表示。
  */
 
-import { notFound } from "next/navigation";
-
+import Link from 'next/link';
+import { notFound } from 'next/navigation';
 
 import {
   readRankingItemsBySurveyFromR2,
   readSurveyByIdFromR2,
-} from "@stats47/ranking/server";
-import { isOk } from "@stats47/types";
+} from '@stats47/ranking/server';
+import { isOk } from '@stats47/types';
 
-import { ArticleShell, PageHeader, Breadcrumbs } from "@/components/layout";
-import { SectionHeader } from "@/components/section";
+import { ArticleShell, PageHeader, Breadcrumbs } from '@/components/layout';
+import { SectionHeader } from '@/components/section';
 
 import {
   InContentAdSlot,
   FooterAdSlot,
   NativeAffiliateRow,
-} from "@/features/ads";
-import { resolveAffiliateBanners } from "@/features/ads/server";
+} from '@/features/ads';
+import { resolveAffiliateBanners } from '@/features/ads/server';
 import {
   FeaturedRankingCard,
   CategoryRankingTable,
   isCaveatNote,
   type CategoryRankingListItem,
-} from "@/features/ranking";
+} from '@/features/ranking';
+import { getSurveyEditorialContent } from '@/features/survey';
 
-import { HUB_INCONTENT } from "@/lib/google-adsense";
-import { generateOGMetadata } from "@/lib/metadata/og-generator";
+import { HUB_INCONTENT } from '@/lib/google-adsense';
+import { generateOGMetadata } from '@/lib/metadata/og-generator';
 
-import type { Metadata } from "next";
+import type { Metadata } from 'next';
 
 /** 24時間 ISR */
 export const revalidate = 86400;
@@ -45,12 +46,12 @@ interface PageProps {
 function parseLatestYear(latestYear: unknown): string {
   try {
     const parsed =
-      typeof latestYear === "string" ? JSON.parse(latestYear) : latestYear;
+      typeof latestYear === 'string' ? JSON.parse(latestYear) : latestYear;
     if (parsed?.yearCode) return parsed.yearCode;
   } catch {
     /* fallback */
   }
-  return "2024";
+  return '2024';
 }
 
 export async function generateMetadata({
@@ -63,11 +64,14 @@ export async function generateMetadata({
     const survey = isOk(result) ? result.data : null;
 
     if (!survey) {
-      return { title: "ページが見つかりません" };
+      return { title: 'ページが見つかりません' };
     }
 
     const title = `${survey.name}のランキング一覧`;
-    const description = `${survey.organization}「${survey.name}」に基づく都道府県別ランキング一覧。47都道府県を統計データで比較できます。`;
+    const editorial = getSurveyEditorialContent(surveyKey);
+    const description =
+      editorial?.summary ??
+      `${survey.organization}「${survey.name}」に基づく都道府県別ランキング一覧。47都道府県を統計データで比較できます。`;
 
     return {
       title,
@@ -75,10 +79,10 @@ export async function generateMetadata({
       alternates: {
         canonical: `/survey/${surveyKey}`,
       },
-      ...generateOGMetadata({ title, description, imageUrl: "/og-image.jpg" }),
+      ...generateOGMetadata({ title, description, imageUrl: '/og-image.jpg' }),
     };
   } catch {
-    return { title: "調査別ランキング一覧" };
+    return { title: '調査別ランキング一覧' };
   }
 }
 
@@ -95,26 +99,30 @@ export default async function SurveyPage({ params }: PageProps) {
   const [rankingResult, nativeBanners] = await Promise.all([
     readRankingItemsBySurveyFromR2(surveyKey),
     // 調査メタから推定可能な tag を渡す (fallback: economy / population)
-    resolveAffiliateBanners(["economy", "population", "labor"], 4).catch(() => []),
+    resolveAffiliateBanners(['economy', 'population', 'labor'], 4).catch(
+      () => []
+    ),
   ]);
   const rankingItems = isOk(rankingResult) ? rankingResult.data : [];
+  const editorial = getSurveyEditorialContent(surveyKey);
 
   // Hero KPI: 最新年, 注目件数, etc.
   const featuredCount = rankingItems.filter((i) => i.isFeatured).length;
-  const latestYear = rankingItems
-    .map((i) => parseLatestYear(i.latestYear))
-    .filter((y) => y && y.match(/^\d{4}$/))
-    .sort()
-    .pop() ?? "";
+  const latestYear =
+    rankingItems
+      .map((i) => parseLatestYear(i.latestYear))
+      .filter((y) => y && y.match(/^\d{4}$/))
+      .sort()
+      .pop() ?? '';
 
   const r2PublicUrl =
-    process.env.NEXT_PUBLIC_R2_PUBLIC_URL || "https://storage.stats47.jp";
+    process.env.NEXT_PUBLIC_R2_PUBLIC_URL || 'https://storage.stats47.jp';
 
   const allItems: CategoryRankingListItem[] = rankingItems.map((item) => {
     const latestYear = parseLatestYear(item.latestYear);
     return {
       rankingKey: item.rankingKey,
-      areaType: "prefecture",
+      areaType: 'prefecture',
       title:
         item.subtitle && !isCaveatNote(item.subtitle)
           ? `${item.title}（${item.subtitle}）`
@@ -160,18 +168,24 @@ export default async function SurveyPage({ params }: PageProps) {
     `全 ${rankingItems.length} ランキング`,
     featuredCount > 0 ? `注目 ${featuredCount} 件` : null,
     latestYear ? `最新 ${latestYear} 年` : null,
-    "47 都道府県",
+    '47 都道府県',
   ]
     .filter(Boolean)
-    .join(" ・ ");
+    .join(' ・ ');
+  const rankingKeys = new Set(rankingItems.map((item) => item.rankingKey));
+  const readerQuestions =
+    editorial?.readerQuestions.filter((item) =>
+      rankingKeys.has(item.rankingKey)
+    ) ?? [];
+  let sectionNumber = 1;
 
   return (
     <ArticleShell
       breadcrumb={
         <Breadcrumbs
           items={[
-            { label: "ホーム", href: "/" },
-            { label: "調査", href: "/survey" },
+            { label: 'ホーム', href: '/' },
+            { label: '調査', href: '/survey' },
             { label: survey.name },
           ]}
         />
@@ -205,9 +219,56 @@ export default async function SurveyPage({ params }: PageProps) {
         }
       />
 
+      {editorial && (
+        <section className="mb-12 space-y-8">
+          <div>
+            <SectionHeader
+              number={String(sectionNumber++)}
+              title="この調査で分かること"
+            />
+            <p className="mb-5 text-sm leading-7 text-muted-foreground">
+              {editorial.summary}
+            </p>
+            <ul className="grid gap-3 sm:grid-cols-2">
+              {editorial.whatYouCanLearn.map((item) => (
+                <li key={item} className="border bg-card p-4 text-sm leading-6">
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {readerQuestions.length > 0 && (
+            <div>
+              <SectionHeader
+                number={String(sectionNumber++)}
+                title="国勢調査から答えを探す"
+              />
+              <div className="grid gap-3 sm:grid-cols-2">
+                {readerQuestions.map((item) => (
+                  <Link
+                    key={item.rankingKey}
+                    href={`/ranking/${item.rankingKey}`}
+                    className="border bg-card p-4 text-sm font-medium leading-6 text-foreground transition-colors hover:bg-accent/50"
+                  >
+                    {item.question}
+                    <span className="ml-1 text-primary" aria-hidden="true">
+                      →
+                    </span>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          )}
+        </section>
+      )}
+
       {featuredItems.length > 0 && (
         <section className="mb-12">
-          <SectionHeader number="1" title="注目のランキング" />
+          <SectionHeader
+            number={String(sectionNumber++)}
+            title="注目のランキング"
+          />
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
             {featuredItems.map((item) => (
               <FeaturedRankingCard
@@ -227,7 +288,7 @@ export default async function SurveyPage({ params }: PageProps) {
 
       <section className="mb-12">
         <SectionHeader
-          number="2"
+          number={String(sectionNumber++)}
           title={`全${rankingItems.length}件のランキング`}
         />
         <CategoryRankingTable items={allItems} />
@@ -236,10 +297,27 @@ export default async function SurveyPage({ params }: PageProps) {
       {/* 記事内広告（ハブ面・ページ 1 枠まで。slotId 未発行の間は非表示） */}
       <InContentAdSlot slot={HUB_INCONTENT} />
 
+      {editorial && (
+        <section className="mb-12">
+          <SectionHeader
+            number={String(sectionNumber++)}
+            title="数字を読むときの注意"
+          />
+          <ul className="space-y-3 border bg-muted/30 p-5 text-sm leading-7 text-muted-foreground">
+            {editorial.caveats.map((caveat) => (
+              <li key={caveat}>・{caveat}</li>
+            ))}
+          </ul>
+        </section>
+      )}
+
       {/* ネイティブアフィリエイト */}
       {nativeBanners.length > 0 && (
         <section className="mb-12">
-          <SectionHeader number="3" title="関連書籍・データブック" />
+          <SectionHeader
+            number={String(sectionNumber++)}
+            title="関連書籍・データブック"
+          />
           <NativeAffiliateRow
             title={`${survey.name}に関連する書籍`}
             banners={nativeBanners}

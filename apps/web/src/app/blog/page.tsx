@@ -1,8 +1,9 @@
 import Link from "next/link";
 
 import { PageShell, PageHeader, Breadcrumbs } from "@/components/layout";
+import { RightRailWidgets } from "@/components/rail";
 
-import { InContentAdSlot, FooterAdSlot } from "@/features/ads";
+import { InContentAdSlot, FooterAdSlot, OperatorProfileCard } from "@/features/ads";
 import { BlogArticleGrid } from "@/features/blog";
 import { listLatestArticles, readBlogSnapshotMetaFromR2 } from "@/features/blog/server";
 
@@ -45,7 +46,22 @@ export default async function BlogIndexPage({ searchParams }: PageProps) {
     const hasPrevPage = currentPage > 1;
 
     return (
-        <PageShell>
+        // doboku-note スタイル: 左=記事カード一覧 / 右=共通サイドバー (運営者プロフィール + promo/広告)。
+        // 運営者は上部の OperatorProfileCard が担うため、RightRailWidgets 内蔵の promo 版は無効化する
+        <PageShell
+            rightRailBreakpoint="lg"
+            rightRail={
+                <RightRailWidgets
+                    // モバイルはフッター上のグローバルカードが運営者を担うため PC のみ表示
+                    topWidgets={
+                        <div className="hidden lg:block">
+                            <OperatorProfileCard />
+                        </div>
+                    }
+                    showOperatorCard={false}
+                />
+            }
+        >
             <Breadcrumbs
                 items={[
                     { label: "ホーム", href: "/" },

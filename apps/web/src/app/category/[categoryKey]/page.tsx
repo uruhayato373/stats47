@@ -240,7 +240,10 @@ export default async function CategoryPage({ params }: PageProps) {
     let tileMapSvg: string | undefined;
     if (isOk(valuesResult) && valuesResult.data.length > 0) {
       tileMapSvg = generateMiniTileSvg(
-        valuesResult.data.flatMap((v) => v.value !== null ? [{ areaCode: v.areaCode, value: v.value }] : []),
+        valuesResult.data.flatMap((v) => v.value !== null ? [{ areaCode: v.areaCode, value: v.value, rank: v.rank ?? undefined }] : []),
+        undefined,
+        undefined,
+        item.rankingKey,
       );
     }
     return {
