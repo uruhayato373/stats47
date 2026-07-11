@@ -6,6 +6,7 @@ import { Metadata } from "next";
 
 import { ThemeAwareImage } from "@/components/atoms/ThemeAwareImage";
 import { PageShell } from "@/components/layout";
+import { SHELL_WIDTH_CLASS } from "@/components/layout/PageShell";
 import { SectionHeader } from "@/components/section";
 import { SurfaceLinkCard } from "@/components/surface";
 
@@ -158,7 +159,7 @@ export default async function HomePage() {
           className="absolute inset-0 bg-gradient-to-r from-slate-950/85 via-slate-950/60 to-slate-950/20"
           aria-hidden="true"
         />
-        <div className="relative mx-auto w-full max-w-[1280px] px-4 py-14 sm:px-6 sm:py-20">
+        <div className={`relative ${SHELL_WIDTH_CLASS} py-14 sm:py-20`}>
           <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-300">
             stats47 ─ 47都道府県データ
           </p>

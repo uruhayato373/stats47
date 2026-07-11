@@ -178,6 +178,9 @@ const RAW_HEADING_GRANDFATHER_H2 = new Set([
 const RAW_HEADING_GRANDFATHER_H1 = new Set([
   "src/app/blog/[slug]/page.tsx",
   "src/app/areas/page.tsx",
+  // home の hero バナー内 h1 (色付き全幅バナーのキャッチコピー)。
+  // ui-components.md「例外: hero バナー内の h1（home のみ text-3xl sm:text-4xl lg:text-5xl）」に準拠。
+  "src/app/page.tsx",
 ]);
 
 function listFiles(dir) {
