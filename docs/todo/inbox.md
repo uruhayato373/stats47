@@ -32,6 +32,9 @@ tags: []
 
 | 日付 | 内容 | 種別(推定) | 状態 | 備考 |
 |---|---|---|---|---|
+| 2026-07-11 | デザイン改修着手前に DR-AUDIT-01 (d3 manifest)・02 (blog sticky max-h)・03 (design checker) の P1 3 件を先行実施 | 改善 | 未整理 | 正典 = `docs/04_レビュー/2026-07-11-design-readiness-codebase-audit.md` (P2/P3 と PR 分割構造も同 doc)。DESIGN-UNIFY-01 (改善バックログ) の前提ゲート |
+| 2026-07-11 | CI ガード機械化の残 4 件: G2 check-r2-route-ssg の pr-quality-check 配線 / G4 gone・known 整合テスト / G5 COVERAGE-DEACT 判定への R2 突合必須化 / G6 smoke-test-routes の対象拡大 | 機能 | 未整理 | 出典 = 2026-07-03-operations-automation-review (削除済・git 履歴)。Tier1 相当は ranking-key-consistency.test.ts で完了済 |
+| 2026-07-11 | git 履歴の API キー purge (filter-repo) を実施するかの判断 | ? | 未整理 | 出典 = `docs/04_レビュー/2026-07-03-claude-code-setup-audit.md` Phase 5。履歴書き換え = 破壊的操作のためオーナー判断待ち |
 | 2026-06-19 | データの型定義を統一し、各ページ/各コンポーネントでのデータ保有方法を整理 | 改善 | 未整理 | アーキテクチャ/型。`packages/types` を軸に共通型を統一。ページ vs コンポーネントのデータ保有責務（fetch境界・props設計）を整理。リファクタ寄り |
 | 2026-06-19 | ブログ一覧ページ (https://stats47.jp/blog) のデザイン改善 | 改善 | 未整理 | UI/デザイン。一覧ページのレイアウト改善（OGP 画像は 2026-07-07 の静的 R2 化 + ブランド背景合成で解決済み） |
 | 2026-06-19 | サイトデザインの改善 | 改善 | 未整理 | UI/デザイン全般。統一レイアウト (`13_統一レイアウト設計.md`) / melta-ui 準拠を軸に。範囲が広いので triage で具体化要 |
