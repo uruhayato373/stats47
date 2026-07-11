@@ -31,6 +31,15 @@ docs/04_レビュー/<YYYY-Www>-<topic-slug>.md        (週次。例: 2026-W22-s
 | [2026-07-03-claude-code-setup-audit.md](2026-07-03-claude-code-setup-audit.md) | Claude Code 環境監査。§6 モデル配分ポリシー | `build-remediation-queue.mjs` / `build-ai-content-queue.mjs` が §6 を正典参照 |
 | [2026-06-13-monetization-career.md](2026-06-13-monetization-career.md) | 転職アフィリエイト戦略 (医療クラスタ・§A 提携リスト) | 現役 handoff `handoffs/2026-06-13-monetization-affiliate.md` が §A を参照。handoff 消化時に一緒に削除 |
 | [2026-06-08-blog-winning-patterns.md](2026-06-08-blog-winning-patterns.md) | GSC 実測 × 構造特徴の勝ち要因分析 (順位交絡統制つき) | 天井ループの一次分析。定性裏取りの参照元 |
+| [2026-07-11-theme-population-dynamics.md](2026-07-11-theme-population-dynamics.md) | 人口動態テーマの指標・チャート提案 | 承認後のClaude Code実装と鮮度解決の正典 |
+| [2026-07-11-theme-aging-society.md](2026-07-11-theme-aging-society.md) | 少子高齢化テーマの指標・チャート提案 | 承認後のClaude Code実装、75歳以上指標、将来推計設計の正典 |
+| [2026-07-11-theme-healthcare.md](2026-07-11-theme-healthcare.md) | 医療・健康テーマの指標・チャート提案 | 承認後のClaude Code実装、需要/供給構造、chart拡張の正典 |
+| [2026-07-11-theme-living-housing.md](2026-07-11-theme-living-housing.md) | 暮らし・住まいテーマの指標・チャート提案 | 承認後のClaude Code実装、空き家定義、住居負担・安全指標の正典 |
+| [2026-07-11-theme-real-income.md](2026-07-11-theme-real-income.md) | 実質収入・購買力テーマの指標・チャート提案 | 派生指標の式・期間・母集団監査と、承認後のClaude Code実装の正典 |
+| [2026-07-11-theme-consumer-prices.md](2026-07-11-theme-consumer-prices.md) | 物価・消費テーマの指標・チャート提案 | 地域間物価水準とインフレ率を分離し、チャート名称と長文内容を是正する正典 |
+| [2026-07-11-theme-labor-wages.md](2026-07-11-theme-labor-wages.md) | 労働・賃金テーマの指標・チャート提案 | 賃金指標と労働市場指標を分離し、定義監査後に再構成する正典 |
+| [2026-07-11-theme-labor-mobility.md](2026-07-11-theme-labor-mobility.md) | 労働移動・雇用市場テーマの指標・チャート提案 | 雇用需給・人材移動・働き方を統合し、労働・賃金との境界を確定する正典 |
+| [2026-07-11-theme-occupation-salary.md](2026-07-11-theme-occupation-salary.md) | 職業別給与テーマの指標・チャート提案 | 年収式・職種分類・重複指標を監査し、職業群別に再構成する正典 |
 
 ## 2026-07-11 に削除したもの (残タスクは抽出済み・復元は git 履歴)
 
