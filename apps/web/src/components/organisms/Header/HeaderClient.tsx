@@ -27,6 +27,7 @@ import {
 } from "lucide-react";
 
 import { SHELL_WIDTH_CLASS } from "@/components/layout/PageShell";
+
 import { useTheme } from "@/hooks/useTheme";
 
 import { useSidebarStore } from "@/store/sidebar-store";

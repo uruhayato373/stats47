@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from "react";
 
-import { Button } from "@stats47/components/atoms/ui/button";
 import { cn } from "@stats47/components";
+import { Button } from "@stats47/components/atoms/ui/button";
 
 import { SHELL_WIDTH_CLASS } from "@/components/layout/PageShell";
 
