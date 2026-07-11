@@ -5,7 +5,8 @@ import { BarChart3, MapPin, Search, TrendingUp } from "lucide-react";
 import { Metadata } from "next";
 
 import { ThemeAwareImage } from "@/components/atoms/ThemeAwareImage";
-import { PageShell, PageHeader } from "@/components/layout";
+import { PageShell } from "@/components/layout";
+import { SHELL_WIDTH_CLASS } from "@/components/layout/PageShell";
 import { SectionHeader } from "@/components/section";
 import { SurfaceLinkCard } from "@/components/surface";
 
@@ -144,37 +145,64 @@ export default async function HomePage() {
 
   return (
     <div className="w-full" suppressHydrationWarning>
-      {/* ① 最小ヘッダー */}
-      <PageShell>
-        <PageHeader
-          eyebrow="stats47 ─ 47都道府県データ"
-          title="あなたの県は何位？"
-          description="年収・人口・消費量から教育・医療まで、1,800 以上の統計で 47 都道府県をランキング。地図・グラフ・CSV で自由に使えます。"
-          stats="1,800+ ランキング ・ 47 都道府県 ・ 250 万件超のデータ ・ 30 年分の時系列"
-          actions={
-            <>
-              <Button asChild>
-                <Link href="/ranking">
-                  <BarChart3 className="mr-1.5 h-4 w-4" />
-                  ランキングを見る
-                </Link>
-              </Button>
-              <Button asChild variant="outline">
-                <Link href="/search">
-                  <Search className="mr-1.5 h-4 w-4" />
-                  キーワード検索
-                </Link>
-              </Button>
-              <Button asChild variant="outline">
-                <Link href="/areas">
-                  <MapPin className="mr-1.5 h-4 w-4" />
-                  都道府県から探す
-                </Link>
-              </Button>
-            </>
-          }
+      {/* ① hero (doboku-note スタイル: 全幅の画像バンド + 1280px コンテンツ)
+          背景画像: public/images/hero-home.jpg (AI 生成・未配置の間は bg-slate-900 フォールバック) */}
+      <section className="relative w-full overflow-hidden bg-slate-900">
+        <img
+          src="/images/hero-home.jpg"
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-0 h-full w-full object-cover object-right"
         />
-      </PageShell>
+        {/* 可読性オーバーレイ: テキストの乗る左側を濃く */}
+        <div
+          className="absolute inset-0 bg-gradient-to-r from-slate-950/85 via-slate-950/60 to-slate-950/20"
+          aria-hidden="true"
+        />
+        <div className={`relative ${SHELL_WIDTH_CLASS} py-14 sm:py-20`}>
+          <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-300">
+            stats47 ─ 47都道府県データ
+          </p>
+          <h1 className="mt-2 text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-5xl">
+            あなたの県は何位？
+          </h1>
+          <p className="mt-4 max-w-2xl text-sm leading-relaxed text-slate-200 sm:text-base">
+            年収・人口・消費量から教育・医療まで、1,800 以上の統計で 47
+            都道府県をランキング。地図・グラフ・CSV で自由に使えます。
+          </p>
+          <p className="mt-3 text-xs text-slate-300 sm:text-sm">
+            1,800+ ランキング ・ 47 都道府県 ・ 250 万件超のデータ ・ 30 年分の時系列
+          </p>
+          <div className="mt-6 flex flex-wrap gap-2">
+            <Button asChild>
+              <Link href="/ranking">
+                <BarChart3 className="mr-1.5 h-4 w-4" />
+                ランキングを見る
+              </Link>
+            </Button>
+            <Button
+              asChild
+              variant="outline"
+              className="border-white/40 bg-transparent text-white hover:bg-white/10 hover:text-white"
+            >
+              <Link href="/search">
+                <Search className="mr-1.5 h-4 w-4" />
+                キーワード検索
+              </Link>
+            </Button>
+            <Button
+              asChild
+              variant="outline"
+              className="border-white/40 bg-transparent text-white hover:bg-white/10 hover:text-white"
+            >
+              <Link href="/areas">
+                <MapPin className="mr-1.5 h-4 w-4" />
+                都道府県から探す
+              </Link>
+            </Button>
+          </div>
+        </div>
+      </section>
 
       {/* ② 注目のランキング（主役・全幅バンド。PageShell 外の唯一の全幅例外） */}
       <FeaturedRankings limit={8} />

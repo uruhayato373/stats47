@@ -5,6 +5,8 @@ import { readRankingValuesFromR2 } from "@stats47/ranking/server";
 import { isOk } from "@stats47/types";
 import { generateMiniTileSvg } from "@stats47/visualization/server";
 
+import { SHELL_WIDTH_CLASS } from "@/components/layout/PageShell";
+
 import { logger } from "@/lib/logger";
 
 import { getFeaturedRankings } from "../../server";
@@ -77,9 +79,10 @@ export async function FeaturedRankings({ limit = 6, showHeader = true }: Feature
             topValue = top.value !== null ? top.value.toLocaleString("ja-JP") : undefined;
           }
           tileMapSvg = generateMiniTileSvg(
-            valuesResult.data.flatMap((v) => v.value !== null ? [{ areaCode: v.areaCode, value: v.value }] : []),
+            valuesResult.data.flatMap((v) => v.value !== null ? [{ areaCode: v.areaCode, value: v.value, rank: v.rank ?? undefined }] : []),
             item.visualization?.colorScheme,
             item.visualization?.isReversed,
+            item.rankingKey,
           );
         }
 
@@ -111,8 +114,9 @@ export async function FeaturedRankings({ limit = 6, showHeader = true }: Feature
   }
 
   return (
-    <section className="bg-muted/30 px-4 py-8 sm:px-6">
-      <div>
+    <section className="bg-muted/30 py-8">
+      {/* 背景バンドは全幅、コンテンツは shell 幅 (1280px) に整列 */}
+      <div className={SHELL_WIDTH_CLASS}>
         {showHeader && (
           <div className="flex items-center justify-between mb-8">
             <h2 className="text-lg font-bold">注目のランキング</h2>

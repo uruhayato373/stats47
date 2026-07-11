@@ -38,9 +38,11 @@ metadata:
 - 検証済み: `births` 29年(1995-2023, 全国-38.7%)・`japanese-population` 45年 = BCR 可。`aging-index`/初婚年齢/貯蓄率 = 単年で不可。youtube-strategist が当初出した `taxable-income-per-capita` は **R2 404 (未公開)** で使えなかった (isActive≠公開)。
 - 生成→レンダ: `.claude/skills/sns/bar-chart-race` の generate (config.json/data.json) → `apps/remotion/scripts/pipeline/render-bar-chart-race.ts --key <k> --platform youtube-normal` (長尺・約4分/29年)。出力 `.local/r2/sns/bar-chart-race/<k>/youtube-normal/video.mp4`。
 
-## 次にやること (初速計測)
-- **3TWSWlKDPbs の 24-48h 初速** (impressions/CTR/suggested露出) を測ってから量産判断。診断 verdict は投稿停止で汚染され判定不能なので、この1本の実測が唯一の実証。`youtube-shadowban-diagnose.yml` (CI) または youtube-daily-audit で観測。
-- 2本目以降: 新しい metric で BCR generate→render→Release アセット→request ファイル push、を繰り返すだけ (経路は完成)。タイトル重複ガード (`check-youtube-duplicate.cjs`) は維持。
+## 1ヶ月分の予約仕込み完了 (2026-07-11 深夜・ユーザー指示で初速判定を待たず先行)
+- **BCR 30本を仕込み済み** (publish 2026-07-12〜08-10 毎日19:00 JST・1日1本ガード整合)。テーマは婚姻半減/離婚1.5倍/固定電話盛衰/大学倍増/家計消費ほか (死亡系除外・全キー公開ranking へ UTM リンク)。
+- **経路**: 30本ローカル render (~2min/本) → Release `yt-bcr-2026-07` アセット → `.claude/state/youtube-upload-queue.json` (30 entries) → **`youtube-upload-queue.yml` (main・cron 17:30 JST) が pending を 5本/日** private+publish_at 予約アップロード (クォータ 1600units×5<10k/日)。初回5本は dispatch 済み (7/12,14,16,18,20 公開分)。失敗エントリは status=failed 隔離→pending に戻せば再試行。
+- **★ガードのバグを踏んで修正済み**: check-youtube-post-budget の日付判定が文字列比較で、`+09:00` 形式 scheduled_at が UTC 範囲文字列と辞書順比較され1日ズレ (初回バッチ5成功/4失敗の交互パターン)。エポック比較に修正 (2026-07-11)。**posts.json のタイムスタンプ形式は混在する前提で、範囲判定は必ず Date.parse で行う**。
+- 初速計測 (3TWSWlKDPbs の 24-48h) は事後観測に変更: 露出死亡が判明したら queue の pending 削除 + YouTube Studio で予約解除で即停止。
 
 ## How to apply (旧・参考)
 - 実験終了・本命運用に戻すなら `youtube-experiment.json` を削除。

@@ -109,9 +109,13 @@ export default function PrivacyPage() {
         <LegalSection number="1" title="運営者情報">
           {/* プロフィール */}
           <div className="flex items-center gap-4 mb-4">
-            <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
-              <span className="text-lg font-bold text-primary">K</span>
-            </div>
+            <img
+              src="/images/stats47-author-avatar-256.webp"
+              alt=""
+              width={48}
+              height={48}
+              className="w-12 h-12 rounded-full object-cover flex-shrink-0"
+            />
             <div>
               <p className="font-semibold text-sm md:text-base">KAZU</p>
               <div className="flex items-center gap-1 mt-1">

@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 import { SurfaceCard } from "@/components/surface";
 
@@ -68,6 +69,7 @@ interface OperatorPromoCardProps {
 export function OperatorPromoCard({ placement = "global" }: OperatorPromoCardProps) {
   // マウント後にランダムで軸を確定する (SSR では描画しない = 余計な impression を発火させない)
   const [axis, setAxis] = useState<Axis | null>(null);
+  const pathname = usePathname();
 
   useEffect(() => {
     // 初回マウント後にクライアント側でランダムに軸を確定する。
@@ -77,10 +79,17 @@ export function OperatorPromoCard({ placement = "global" }: OperatorPromoCardPro
     setAxis(Math.random() < 0.5 ? "tenshoku" : "ai");
   }, []);
 
-  const wrapperClass =
-    placement === "global"
-      ? "mx-auto w-full max-w-2xl px-4 py-8"
-      : "w-full";
+  // ブログ配下 (一覧・詳細) は PC では右レール最上部の OperatorProfileCard がプロフィールを
+  // 担うため、グローバル配置 (フッター上) は lg 以上で非表示にする (モバイルは従来どおり表示)
+  const hiddenOnDesktop =
+    placement === "global" && /^\/blog(\/|$)/.test(pathname ?? "");
+
+  const wrapperClass = [
+    placement === "global" ? "mx-auto w-full max-w-2xl px-4 py-8" : "w-full",
+    hiddenOnDesktop ? "lg:hidden" : "",
+  ]
+    .filter(Boolean)
+    .join(" ");
 
   // 確定前はレイアウトシフトを抑えるため、実コンテンツに近い高さのスケルトンを返す。
   // min-h で下限だけ確保していたが、height:320px の固定値にすることで
@@ -102,9 +111,13 @@ export function OperatorPromoCard({ placement = "global" }: OperatorPromoCardPro
       <SurfaceCard>
         {/* 運営者ミニプロフィール */}
         <div className="flex items-center gap-3">
-          <div className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full bg-primary/10">
-            <span className="text-lg font-bold text-primary">K</span>
-          </div>
+          <img
+            src="/images/stats47-author-avatar-256.webp"
+            alt=""
+            width={44}
+            height={44}
+            className="h-11 w-11 flex-shrink-0 rounded-full object-cover"
+          />
           <div className="min-w-0">
             <p className="text-sm font-semibold text-foreground">KAZU</p>
             <p className="text-xs text-muted-foreground">

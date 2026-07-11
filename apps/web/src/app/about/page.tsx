@@ -126,9 +126,13 @@ export default function AboutPage() {
         {/* 1. 運営者プロフィール */}
         <AboutSection title="運営者プロフィール">
           <div className="flex items-center gap-4 mb-4">
-            <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
-              <span className="text-xl font-bold text-primary">K</span>
-            </div>
+            <img
+              src="/images/stats47-author-avatar-256.webp"
+              alt=""
+              width={56}
+              height={56}
+              className="w-14 h-14 rounded-full object-cover flex-shrink-0"
+            />
             <div>
               <p className="font-semibold text-base">KAZU</p>
               <p className="text-xs text-muted-foreground">

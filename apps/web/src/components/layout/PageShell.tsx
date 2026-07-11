@@ -28,8 +28,11 @@ interface PageShellProps {
 /**
  * サイト chrome (Header / Footer / 固定バナー等) がページ本文と横幅を揃えるための
  * 共有トークン。page.tsx は PageShell を使い、これを直接使うのは chrome のみ。
+ *
+ * 2026-07-11: 1700px → 1280px に統一 (ArticleShell = blog/ranking 詳細と同一幅。
+ * doboku-note スタイルのサイト全体固定幅)。
  */
-export const SHELL_WIDTH_CLASS = "mx-auto w-full max-w-[1700px] px-4 sm:px-6";
+export const SHELL_WIDTH_CLASS = "mx-auto w-full max-w-[1280px] px-4 sm:px-6";
 
 /**
  * 全ページ共通の単一レイアウト Shell。
@@ -40,7 +43,7 @@ export const SHELL_WIDTH_CLASS = "mx-auto w-full max-w-[1700px] px-4 sm:px-6";
  * 設計仕様: docs/01_技術設計/13_統一レイアウト設計.md
  *
  * グリッド:
- * - レールなし     : 1700px 中央寄せ
+ * - レールなし     : 1280px 中央寄せ
  * - 右レールのみ   : [minmax(0,1fr) 360px]
  * - 左レールのみ   : [280px minmax(0,1fr)]
  * - 右レール lg    : lg [minmax(0,1fr) 360px]

@@ -40,6 +40,7 @@ docs/04_レビュー/<YYYY-Www>-<topic-slug>.md        (週次。例: 2026-W22-s
 | [2026-07-11-theme-labor-wages.md](2026-07-11-theme-labor-wages.md) | 労働・賃金テーマの指標・チャート提案 | 賃金指標と労働市場指標を分離し、定義監査後に再構成する正典 |
 | [2026-07-11-theme-labor-mobility.md](2026-07-11-theme-labor-mobility.md) | 労働移動・雇用市場テーマの指標・チャート提案 | 雇用需給・人材移動・働き方を統合し、労働・賃金との境界を確定する正典 |
 | [2026-07-11-theme-occupation-salary.md](2026-07-11-theme-occupation-salary.md) | 職業別給与テーマの指標・チャート提案 | 年収式・職種分類・重複指標を監査し、職業群別に再構成する正典 |
+| [2026-07-11-theme-local-economy.md](2026-07-11-theme-local-economy.md) | 地域経済テーマの指標・チャート提案 | GDP不在を解消し、経済規模・成長・産業構造・所得を分離する正典 |
 
 ## 2026-07-11 に削除したもの (残タスクは抽出済み・復元は git 履歴)
 

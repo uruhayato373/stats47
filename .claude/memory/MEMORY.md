@@ -1,5 +1,7 @@
 # Memory Index
 
+- [project_estat_expansion_pipeline_2026_07.md](project_estat_expansion_pipeline_2026_07.md) — e-Stat全展開の実スコープ(2026-07-11): collectArea=2=8,688生候補テーブル≒17万metric=物理的に不可能。本命はSSDS(社会・人口統計体系1,161既存・1cdCat01=1完成ランキングで機械的量産可)の未使用cdCat01列挙。生survey クロス集計はキュレーション重の二次。DBレス発見パイプライン再構築(discover-prefecture-candidates.mjs/fetch-estat-meta.mjs)。e-Stat APP_IDはCI専任→workflow_dispatchでなく専用ブランチ(estat-discovery-run/estat-meta-run)push トリガーで main デプロイ無し実行。投入=data-refresh.yml。需要ファースト(既存41%ゼロ表示)
+
 - [project_youtube_mass_experiment_2026_07.md](project_youtube_mass_experiment_2026_07.md) — YouTube 量産実験モード(2026-07-11〜)。stats47をBANリスク無しfamilyアカウントと位置づけ月1上限撤廃(選択肢A・★ペース=1日1本に確定、当初3本+案から変更)。2026-04撤退/07-04月1化を上書き。ガード緩和=youtube-experiment.json(dailyLimit:1/monthlyLimit:31 をguardが機械強制・削除で月1復帰)、重複/pauseガードは維持。診断はCI workflow youtube-shadowban-diagnose.yml(GOOGLE_OAUTH_*生存・ローカルは無)。★verdict likely-shadowbanは投稿停止2ヶ月の自然減で汚染=判定不能→1本出して24-48h初速で判断。★CI投稿経路完成・実証(2026-07-11): 第1本 3TWSWlKDPbs(出生数BCR,public)投稿成功。ローカルcreds無しで GitHub Releaseアセット→develop-push トリガー(youtube-upload-request.json)→CI が GOOGLE_OAUTH secretsで投稿(本番デプロイ不要)。BCRは app/stats(全年)を読む(app/rankingは単年で不可)。ハマり: metric-keysはJSON配列必須/台帳stepはadd→commit→rebase順。次=初速計測
 
 - [project_docs_reorg_todo_handoffs.md](project_docs_reorg_todo_handoffs.md) — docs/ 再編(2026-07-11・doboku-note式): TODO真実源は docs/todo/{inbox,01_改善,02_機能,03_指標バックログ}.md に固定(旧 02_実装計画/03-05)、セッション引き継ぎは docs/handoffs/YYYY-MM-DD-<topic>.md(消化したら抽出→削除・貯めない)。完了文書はアーカイブせず git rm(archive/ 禁止)。22_Instagram企画/コンテンツ企画マスター/W23以前の週次系は削除済
@@ -65,7 +67,7 @@
 - [feedback_d1_query_in_ci.md](feedback_d1_query_in_ci.md) — CI で D1 クエリは pull:d1 ではなく wrangler d1 execute --remote --json で直接
 - [feedback_d1_rest_api_size_limit.md](feedback_d1_rest_api_size_limit.md) — D1 REST API の SQL 文上限は約 100KB（SQLite 既定 1MB より厳しい）。バルク INSERT は 60-80KB に収める
 - [project_competitor_riskmap_jp.md](project_competitor_riskmap_jp.md) — SNS 直接競合 @riskmap.jp（治安/災害/心霊系の都道府県別 Reel/TikTok、1 本 1-2 万いいね）
-- [project_competitor_indicator_benchmark.md](project_competitor_indicator_benchmark.md) — Web 競合指標数ベンチマーク（todo-ran 1,501 / uub 1,843 / stats47 ~533、約 3 倍差）
+- [project_competitor_indicator_benchmark.md](project_competitor_indicator_benchmark.md) — Web 競合指標数ベンチマーク。★2026-07-11更新: stats47 は 2,141本で todo-ran(1,501)/uub(1,843) を超え「数の劣後」は解消。12週GSC実測で供給でなく需要+CTRがボトルネック(41%=877本が12週ゼロ表示・クリックは上位50本に49%集中)。e-Stat全展開は低ROI(限界click≒0+index bloat)。需要ファースト=CTR改修(RANKING-CTR-01)→需要ギャップ展開のみ
 - [feedback_sns_competitor_search.md](feedback_sns_competitor_search.md) — SNS 競合検索は「統計／ランキング」だけでなくテーマ別の名乗り（リスク／格差／ご当地）も併走必須
 - [feedback_sns_growth_emotion_themes.md](feedback_sns_growth_emotion_themes.md) — SNS 伸長は感情喚起テーマが主因。stats47 は信頼性 × 網羅性 × Web 送客で差別化（煽り合戦に入らない）
 - [reference_competitor_research_label.md](reference_competitor_research_label.md) — 競合調査は GitHub Issues の `competitor-research` ラベルに集約。Issue #143 が初回

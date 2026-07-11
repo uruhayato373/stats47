@@ -317,7 +317,7 @@ https://stats47.jp/ranking/taxable-income-per-capita
 | **X (量産)** | `post-x-batch` (候補選定→画像→執筆→lint→draft 登録) | quick-still (ranking-card) | `publish-x --from-queue` (ローカル) → `mark-sns-posted` | `update-sns-metrics` → `analyze-x-winning-patterns` |
 | **X (瞬発)** | `find-quote-rt` / `react-to-news` | (キャプション) | `publish-x` → `mark-sns-posted` | `update-sns-metrics` |
 | **IG** | `generate-instagram-schedule` (+ `post-ig-6angles`) | `render-sns-stills` | `post-instagram` (GHA cron) → `mark-sns-posted` | `update-sns-metrics` |
-| **YouTube** | `bar-chart-race` (企画・生成・render) | (同) | `post-youtube` (月 1・ガード 3 点) → `mark-sns-posted` | `update-sns-metrics` |
+| **YouTube** | `bar-chart-race` (企画・生成・render) | (同) | `post-youtube` (月 1・ガード 3 点) → `mark-sns-posted`。量産実験中の予約仕込みは `youtube-upload-queue.json` + `youtube-upload-queue.yml` (日次 cron 5本/日、§1 例外注記) | `update-sns-metrics` |
 
 - **X 量産のライフサイクル**: `/post-x-batch` が posts.json に `status=draft` (`template`/`scheduled_at` 付き) で
   N 本積む → ローカルで `publish-x --from-queue` が `check-x-post-budget.cjs` ガードを通して予約 → `status=scheduled` →

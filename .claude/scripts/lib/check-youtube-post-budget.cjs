@@ -114,12 +114,19 @@ function dayRangeJST(baseMs) {
 // posted_at が非 null ならそれ、null/未設定なら scheduled_at を採用。
 // どちらも null/未設定なら範囲比較は成立せずカウント対象外。
 function countYoutubePostsInRange(startUTC, endUTC) {
+  // ★エポック比較必須: 文字列比較だと "+09:00" 形式の scheduled_at が UTC 範囲文字列と
+  // 辞書順で比較され 1 日ズレる (2026-07-11 実害: 7/12 19:00 JST 予約が 7/13 枠と誤カウントされ
+  // キュー消化が 1 日おきに budget fail した)
+  const startMs = Date.parse(startUTC);
+  const endMs = Date.parse(endUTC);
   return store.query((p) => {
     if (p.platform !== "youtube") return false;
     if (p.status !== "posted" && p.status !== "scheduled") return false;
     const effective = p.posted_at ?? p.scheduled_at ?? null;
     if (effective == null) return false;
-    return effective >= startUTC && effective < endUTC;
+    const t = Date.parse(effective);
+    if (Number.isNaN(t)) return false;
+    return t >= startMs && t < endMs;
   }).length;
 }
 

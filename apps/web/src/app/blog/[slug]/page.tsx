@@ -16,6 +16,7 @@ import { ShareButtons } from "@/components/molecules/ShareButtons";
 import { ArticleCard, RailCard, RailLinkItem, RailLinkList, SurfaceLinkCard } from "@/components/surface";
 
 import {
+    OperatorProfileCard,
     SidebarPromoBanner,
 } from "@/features/ads";
 import { BlogSidebarTextAds, resolveAffiliateBannersByCategory } from "@/features/ads/server";
@@ -165,6 +166,11 @@ export default async function BlogPostPage({ params }: PageProps) {
     // レール上段 (非 sticky): 本文関連 widget + 広告。初期表示で見える位置に置き viewability を確保
     const rail = (
         <>
+            {/* 運営者プロフィール (PC のみ。モバイルは従来どおりフッター上のグローバルカードが担う) */}
+            <div className="hidden lg:block">
+                <OperatorProfileCard />
+            </div>
+
             <RelatedRankingsSection tagKeys={tagKeys} compact />
 
             <BlogRelatedArticlesSection articles={relatedArticles} currentSlug={slug} articleTagsMap={articleTagsMap} compact />
