@@ -11,7 +11,8 @@
     "metric_keys": [
       "japanese-population"
     ],
-    "status": "pending"
+    "status": "uploaded",
+    "uploaded_at": "2026-07-11T12:32:57Z"
   },
   {
     "key": "japanese-movers-in",
@@ -25,7 +26,8 @@
     "metric_keys": [
       "japanese-movers-in"
     ],
-    "status": "pending"
+    "status": "failed",
+    "error": "upload.js exit != 0"
   },
   {
     "key": "japanese-movers-out",
@@ -39,7 +41,8 @@
     "metric_keys": [
       "japanese-movers-out"
     ],
-    "status": "pending"
+    "status": "uploaded",
+    "uploaded_at": "2026-07-11T12:33:45Z"
   },
   {
     "key": "marriages",
@@ -53,7 +56,8 @@
     "metric_keys": [
       "marriages"
     ],
-    "status": "pending"
+    "status": "failed",
+    "error": "upload.js exit != 0"
   },
   {
     "key": "divorces",
@@ -67,7 +71,8 @@
     "metric_keys": [
       "divorces"
     ],
-    "status": "pending"
+    "status": "uploaded",
+    "uploaded_at": "2026-07-11T12:34:31Z"
   },
   {
     "key": "flush-toilet-population-ratio",
@@ -81,7 +86,8 @@
     "metric_keys": [
       "flush-toilet-population-ratio"
     ],
-    "status": "pending"
+    "status": "failed",
+    "error": "upload.js exit != 0"
   },
   {
     "key": "registered-foreigner-population",
@@ -95,7 +101,8 @@
     "metric_keys": [
       "registered-foreigner-population"
     ],
-    "status": "pending"
+    "status": "uploaded",
+    "uploaded_at": "2026-07-11T12:35:18Z"
   },
   {
     "key": "traffic-accident-count",
@@ -109,7 +116,8 @@
     "metric_keys": [
       "traffic-accident-count"
     ],
-    "status": "pending"
+    "status": "failed",
+    "error": "upload.js exit != 0"
   },
   {
     "key": "building-fire-count",
@@ -123,7 +131,8 @@
     "metric_keys": [
       "building-fire-count"
     ],
-    "status": "pending"
+    "status": "uploaded",
+    "uploaded_at": "2026-07-11T12:36:05Z"
   },
   {
     "key": "residential-telephone-subscription-count-per-1000",
