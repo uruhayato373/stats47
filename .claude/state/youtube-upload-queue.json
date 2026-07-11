@@ -26,8 +26,7 @@
     "metric_keys": [
       "japanese-movers-in"
     ],
-    "status": "failed",
-    "error": "upload.js exit != 0"
+    "status": "pending"
   },
   {
     "key": "japanese-movers-out",
@@ -56,8 +55,7 @@
     "metric_keys": [
       "marriages"
     ],
-    "status": "failed",
-    "error": "upload.js exit != 0"
+    "status": "pending"
   },
   {
     "key": "divorces",
@@ -86,8 +84,7 @@
     "metric_keys": [
       "flush-toilet-population-ratio"
     ],
-    "status": "failed",
-    "error": "upload.js exit != 0"
+    "status": "pending"
   },
   {
     "key": "registered-foreigner-population",
@@ -116,8 +113,7 @@
     "metric_keys": [
       "traffic-accident-count"
     ],
-    "status": "failed",
-    "error": "upload.js exit != 0"
+    "status": "pending"
   },
   {
     "key": "building-fire-count",
