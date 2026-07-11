@@ -2,7 +2,7 @@
 type: note-draft-index
 vertical: koumuin-claude-code
 created: 2026-05-18
-updated: 2026-05-21
+updated: 2026-07-09
 status: ready-to-publish-qa-passed
 total_drafts: 33
 total_chars: 340608
@@ -32,6 +32,8 @@ tags: [koumuin, claude-code, draft-index]
 2026-05-21 追加 (#00 ハブ統合): 導入記事 #00 が基礎編を案内していなかったため、ロードマップに「基礎編 (#31-#32)」ブロックを追加、MVP リストに #31/#32 を追記、本文の「全 30 本」表記を「全 33 本」に統一、ロードマップ infographic を基礎編入り (6 行構成) に再生成。
 
 2026-05-21 追加 (スクリーンショット脱プレースホルダー): 実画面キャプチャの代替だったスクリーンショット SVG 35 枚を整理。端末・コマンド出力・コード系 25 枚は内容を本文と一致させた「端末風図版」として確定 (本文マーカーを `screenshot`→`terminal` に変更)。第三者アプリ GUI 系 (Anthropic コンソール / VS Code / iPhone / Excel / 財務システム / 文書・スライド) 10 枚は実キャプチャ必須で代替不能のため削除し本文を調整。結果、**全 33 本がプレースホルダー画像ゼロ・壊れリンクゼロ・孤立ファイルゼロ**で投稿可能。**これに伴い下記『次のアクション』『Phase 5』のスクリーンショット撮影・撮影ガイド・SVG→PNG 変換に関する手順は無効** (撮影工程は廃止、画像は全て生成・変換済)。
+
+2026-07-09 追加 (読者ガイド + §8 是正 + R2 SSOT 再同期): 全記事に導入ブロック (「こんな方に向けた記事です」+「この記事でわかること」) を追加、`## TL;DR` セクションを削除 (公務員読者に英語ジャーゴンが不明瞭なため)。守秘・倫理ガード §8 違反 (著者一人称: 01/03、煽り表現: 07/08/25/27/28/30) を第三者視点へ是正。校正で 6 記事に外科的修正 (00 重複統合・02/32 である→ですます・06 重複語・15 太字・23 重複)。**編集後の draft.md 45 本 (koumuin-claude-code 33 + koumuin-estat-claude-code 12) を `push-fixed-articles.mjs` で R2 (`note/<vertical>/<slug>/draft.md`) に再同期済** — docs/31 は ephemeral outbox のため git 編集だけでは durable SSOT (R2) が stale になり、outbox prune / restore-from-r2 で編集が silent revert される。R2 への書き戻しで SSOT を一致させた (02 記事: R2 に導入ブロック反映確認、28 記事: R2↔docs/31 diff 0)。note.com への投稿はユーザーが別途 (browser-use)。
 
 ## 親計画
 
