@@ -200,6 +200,20 @@ sleep 3
 
 画像ファイルが存在しない場合はこの Phase をスキップする。
 
+### Phase 2-edit: 既存アイキャッチの差し替え（`--update` 時）
+
+新規投稿と違い、更新時は**既存カバーを削除してから**追加する。2026-07-10 の一括更新で確立
+（memory `project_note_update_mode_learnings`）。
+
+```bash
+# 1. 既存カバーの「削除」を押す（button の子 span に aria-label=削除）
+browser-use --headed --profile "Profile 5" state 2>&1 > /tmp/note-state.txt
+DEL_IDX=$(grep -oE '\[[0-9]+\]<span aria-label=削除' /tmp/note-state.txt | grep -oE '[0-9]+' | head -1)
+browser-use --headed --profile "Profile 5" click $DEL_IDX; sleep 2
+# 2. 以降は Phase 2 と同じ: 画像を追加 → 画像をアップロード →
+#    input#note-editor-eyecatch-input に upload → トリミング「保存」
+```
+
 ## Phase 3: タイトル入力
 
 ```bash

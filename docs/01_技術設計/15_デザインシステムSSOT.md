@@ -20,7 +20,7 @@ stats47 の UI 実装判断を一本化する正典。Claude Code / Codex / 人�
 | テーマトークン | `apps/web/src/app/globals.css` | CSS variables、light/dark、フォント、radius |
 | Tailwind 設定 | `apps/web/tailwind.config.ts` | semantic color、container、container query |
 | UI primitive | `packages/components/src` | shadcn/Radix ベースの共通部品 |
-| app 共通レイアウト | `apps/web/src/components/layout` | `PageShell` / `PageHeader` |
+| app 共通レイアウト | `apps/web/src/components/layout` | `PageShell` / `PageHeader` / `ArticleShell`（記事系 reading zone） |
 | chart/page component | `docs/01_技術設計/07_情報設計.md` + page-components 定義 | ページ責務と動的ダッシュボード配置 |
 
 `.claude/design-system/` は Claude 専用の正典ではない。古い入口・レビュー補助として残し、内容が食い違う場合は常に `docs/01_技術設計/15_デザインシステムSSOT.md` を優先する。
@@ -38,22 +38,22 @@ stats47 の UI は、統計データを長時間読むための道具である�
 ## レイアウト
 
 ページ幅、左右レール、ページ余白は `PageShell` が唯一の入口。
+**記事系ページ（blog 詳細 / ranking 詳細 / survey / terms / privacy）だけは `ArticleShell`（reading zone）**を使う（下記「例外: reading zone」/ 2026-07-11）。
 
 ### 採用
 
-- ページ外側の幅制御: `PageShell`
+- ページ外側の幅制御: `PageShell`（一般）/ **`ArticleShell`（記事系 = reading zone・1280px + flex 密着）**
 - ページ見出し: `PageHeader`。**全 hero / header の唯一の基盤**。独自 hero コンポーネントを新設しない。差分は後方互換の任意 slot で表現する（2026-06-23 Phase 2 で統合）:
   - `actions`（h1 右の CTA / セレクタ）— 例: `ThemeAreaHeader` が `PrefectureSelect` を注入
   - `meta`（title 直下の出典/年度/更新の細い行）/ `controls`（header ブロック下の操作行）/ `aside`（右カラム。指定時のみ lg で 2 カラム grid 化）— 例: `RankingHeroCard` が `aside`（暗色 KPI 面 `RankingHeroStat`）+ `controls`（正規化ピル）を合成
   - 全 slot 未指定時は標準ミニマル見出しと DOM 不変。`PageHeader` 本体には暗色背景/グラデを足さない（白基調）。暗色 KPI 面は `aside` に渡す presentational 子の意図的 `bg-slate-900` variant で表現する。
-- 記事・規約など読むページ: `PageShell variant="reading"`
+- 記事・規約など読むページ: **`ArticleShell`（reading zone）**。本文は `ArticleCard`。旧 `PageShell variant="reading"` は記事系から退役（レール無しの単純な読み物にのみ残存可）
 - 補助列の左右セマンティクス（用途で side を固定する。見た目の左右非対称は意図的）:
   - **`leftRail` = ナビゲーション**（テーマナビ等、ページ内を移動する目的）。例: `/themes/*`
   - **`rightRail` = 関連 / 広告 / widget**（TOC・関連記事・関連ランキング・AdSense）。例: areas / tag / ranking 詳細 / blog 詳細
   - どちらも本文 + 片側 1 列。同一ページで両 rail は使わない（3 列禁止）
-- パンくず: **単一 `PageShell` の先頭子**として `<Breadcrumb className="mb-4">` を置く（tag / areas / blog 共通）。breadcrumb 専用に別 `PageShell` を二重に積まない。
-- ランキング詳細 (`/ranking/*`) も他ページ同様 `PageShell` の `rightRail`（xl/360px・sticky）を使う。独自グリッド・独自幅レールは禁止（2026-06-23 統一）。
-- ブログ詳細のように右 rail を lg+ で出すページ: `PageShell rightRailBreakpoint="lg"`。TOC は右 rail の先頭、lg 未満は記事冒頭に置く。
+- パンくず: 一般ページは **単一 `PageShell` の先頭子**として `<Breadcrumb className="mb-4">`（tag / areas 等）。**記事系ページは `ArticleShell` の `breadcrumb` slot** に渡す（zone 内のコンテナ幅に揃える。別 shell を二重に積まない）。
+- **ランキング詳細 (`/ranking/*`) / ブログ詳細 (`/blog/*`) は `ArticleShell`**（reading zone・1280px + flex 密着レール 360px）。レールは `rail`（関連・広告 = 非 sticky 上段）+ `railSticky`（TOC = 末尾 sticky クラスタ）の 2 段構成。lg 未満はレールを本文下へ積み下ろす。旧「`PageShell rightRailBreakpoint="lg"`」から 2026-07-11 に移行。
 - ページ内セクション: `section` + 短い `h2` + 必要な説明文
 
 ### 禁止
@@ -203,6 +203,21 @@ stats47 は 2026-06 以降、フラット方針。
 - 円形の意味があるものだけ `rounded-full` を許容する。
 - shadow は `none` / `shadow-sm` / `shadow-md` / overlay 用 `shadow-xl` に限定する。
 
+### 例外: reading zone（記事系ページ・Soft Editorial・2026-07-11）
+
+記事系ページ（`/blog/[slug]` / `/ranking/[rankingKey]` / `/survey/[surveyKey]` / `/terms` / `/privacy`）は、
+doboku-note から移植した **Soft Editorial** デザインを採用する「reading zone」であり、上記フラット方針の**唯一の例外**。
+
+- `ArticleShell`（`@/components/layout`）が `.reading-zone` クラスを敷き、その内側だけ `--radius: 14px`・
+  薄グレー地（`--background: 220 20% 97%`）に scoped 上書きする（zone 内の shadcn 部品も自動で角丸化）。
+- 本文カードは `ArticleCard`（`@/components/surface`）= 角丸 14px + 2 層ソフトシャドウ（`.shadow-soft-content` /
+  `.shadow-soft-section`）+ モバイルフルブリード。
+- レイアウトは 1280px コンテナ + flex 密着（`PageShell` の 1700px grid で本文を 760px 制限すると生じる
+  「本文と右レールが離れる」問題を根治）。レールは「非 sticky 上段 + sticky TOC クラスタ末尾」の 2 段構成。
+- タイポグラフィ `.blog-news-article`（`globals.css`）= 本文 16px / 行間 1.8 / 字間 0.03em、H2 装飾なし・
+  **H3 アクセント左バー 4px**（バーは CSS 側で持つため `design-system:check` の `no-thick-accent-border` に非抵触）。
+- **home / category / themes / areas / 一覧ページはこの例外に含めない**（従来どおりフラット `PageShell`）。
+
 ## ページ種別ごとのルール
 
 ### 共通テンプレート（top 以外）
@@ -217,9 +232,9 @@ stats47 は 2026-06 以降、フラット方針。
 
 ### Blog
 
-- 一覧、タグ、詳細の外側レイアウトは `PageShell` を使う。
-- 記事本文の可読幅は `variant="reading"` または記事用 content wrapper で制御する。
-- 詳細ページは本文 + 右 rail の 2 列に揃える。TOC、広告、関連記事は `rightRail` に寄せ、lg 未満では TOC を記事冒頭に置く。
+- 一覧・タグの外側レイアウトは `PageShell` を使う（フラット）。
+- **記事詳細（`/blog/[slug]`）は `ArticleShell`（reading zone）**を使う（上記「例外: reading zone」）。
+  本文は `ArticleCard`、右レールは `rail`（関連・広告）+ `railSticky`（TOC）の 2 段構成。lg 未満ではレールを本文下へ積み下ろす。
 - 記事本文 typography は `.blog-article` または承認済み renderer に集約する。
 
 ### Ranking

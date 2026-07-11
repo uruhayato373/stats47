@@ -61,6 +61,9 @@ const THEMES = {
       footerText: '統計で見る都道府県 | stats47.jp',
     },
   },
+  // ★ koumuin-* の正典カバー生成は generate-koumuin-covers.cjs (共通背景+中央ボックスの新デザイン、
+  //   SVG+PNG を直接出力)。下記 koumuin テーマは旧・簡易ダーク版。koumuin を本ファイルで再生成すると
+  //   新デザインを上書きしてしまうため、koumuin は cjs を使うこと (publish-note SKILL.md も cjs 参照)。
   'koumuin-claude-code': {
     // カテゴリ別 (generate-koumuin-covers.cjs と色体系を合わせる)
     intro:        { bg: '#0f172a', accent: '#64748b', accentBg: '#f1f5f9', eyebrowColor: '#cbd5e1', titleColor: '#f8fafc', labelText: 'START HERE', footerText: '公務員のためのClaude Code | stats47.jp' },

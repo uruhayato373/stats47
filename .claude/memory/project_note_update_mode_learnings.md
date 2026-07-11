@@ -1,6 +1,6 @@
 ---
 name: project_note_update_mode_learnings
-description: note --update 実機の学び。do_update/paid_setline のバグ(eval-click要)・browser-use temp profile セッション管理・git-race並行(covers git show 取り出し)・WARN false negative。editor-helpers.sh に未backport
+description: note --update 実機の学び。do_update/paid_setline のバグ(eval-click要)・browser-use temp profile セッション管理・git-race並行(covers git show 取り出し)・WARN false negative。★2026-07-11 に editor-helpers.sh へ backport 済 (commit cbc0f1d2)・cover 生成器も develop merge 済 (c0b8f1f6)。実機 note 再テストは未
 metadata: 
   node_type: memory
   type: project
@@ -8,9 +8,13 @@ metadata:
 ---
 
 2026-07-10 に公務員 note 45本(実36本)を新カバー+本文で `/publish-note --update` 実機一括更新した際の学び。
-`editor-helpers.sh` の既存関数に**未修正のバグが2件**あり、/tmp の使い捨てドライバで回避したが**カノニカルに backport していない**（次回 publish-note --update で再発する）。
+`editor-helpers.sh` の既存関数に**未修正のバグが2件**あり、/tmp の使い捨てドライバで回避していた。
+**→ 2026-07-11 に全て canonical へ backport 済 (commit `cbc0f1d2`): do_update の eval-click / paid_setline の
+DOM fallback / WARN 緩和。edit 版アイキャッチ差替も editor-operations.md Phase 2-edit に追記。cover 生成器・
+背景アセット・カバー PNG も develop へ cherry-pick 済 (`c0b8f1f6`)。** 下記スニペットは今後の参照/再発時用に保持。
+**⚠️ 実機 (note ログイン) での再テストは未実施** — 次回 `/publish-note --update` で bug2 fallback を実証すること。
 
-## editor-helpers.sh の要 backport 修正 (★修正漏れ)
+## editor-helpers.sh の backport 修正 (★2026-07-11 反映済)
 
 1. **`do_update` の「更新する」クリックが a11y index では効かない**。ヘッダーの「更新する」「公開に進む」ボタンは browser-use の `state` で **[idx] が付かない**（プレーンテキストとして出る）。→ **Shadow-DOM 貫通 eval-click** が必要:
    ```js

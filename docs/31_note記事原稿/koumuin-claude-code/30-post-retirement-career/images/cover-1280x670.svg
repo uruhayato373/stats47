@@ -1,51 +1,45 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="1280" height="670" viewBox="0 0 1280 670">
   <defs>
-    <linearGradient id="grad" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#422006"/>
-      <stop offset="100%" stop-color="#fef3c7"/>
-    </linearGradient>
-    <linearGradient id="accentBar" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#b45309" stop-opacity="1"/>
-      <stop offset="100%" stop-color="#b45309" stop-opacity="0.6"/>
-    </linearGradient>
+    <radialGradient id="tone" cx="16%" cy="14%" r="60%">
+      <stop offset="0%" stop-color="#fbbf24" stop-opacity="0.32"/>
+      <stop offset="100%" stop-color="#fbbf24" stop-opacity="0"/>
+    </radialGradient>
   </defs>
 
-  <!-- 背景 -->
-  <rect width="1280" height="670" fill="url(#grad)"/>
+  <!-- コントラスト確保のスクリム (背景を暗く沈める) -->
+  <rect width="1280" height="670" fill="#060a13" opacity="0.44"/>
+  <!-- カテゴリトーン (左上グロー) -->
+  <rect width="1280" height="670" fill="url(#tone)"/>
+  <!-- 上下のアクセント極細ライン -->
+  <rect x="0" y="0" width="1280" height="5" fill="#fbbf24" opacity="0.9"/>
 
-  <!-- アクセントバー（左） -->
-  <rect x="0" y="0" width="8" height="670" fill="url(#accentBar)"/>
+  <!-- 中央ボックス -->
+  <rect x="150" y="125" width="980" height="420" rx="22"
+    fill="#0b1220" fill-opacity="0.62"
+    stroke="#fbbf24" stroke-opacity="0.55" stroke-width="1.5"/>
 
-  <!-- ラベルバッジ -->
-  <rect x="100" y="80" width="118" height="38" rx="4"
-    fill="#b45309" opacity="0.9"/>
-  <text x="120" y="106" font-size="18" font-weight="700" letter-spacing="2"
-    font-family="'Arial','Helvetica',sans-serif" fill="#ffffff">CAREER</text>
+  <!-- 上段左: 番号+カテゴリ -->
+  <rect x="190" y="165" width="161" height="40" rx="20"
+    fill="#fbbf24" fill-opacity="0.16"
+    stroke="#fbbf24" stroke-opacity="0.6" stroke-width="1"/>
+  <text x="270.5" y="192" text-anchor="middle"
+    font-size="17" font-weight="700" letter-spacing="1.5"
+    font-family="'Arial','Helvetica',sans-serif" fill="#fbbf24">#30  CAREER</text>
 
-  <!-- アイブロウ（カテゴリ・シリーズ説明） -->
-  <text x="100" y="160" font-size="22" font-weight="400"
-    font-family="'Noto Sans JP','Hiragino Kaku Gothic ProN',sans-serif"
-    fill="#fde68a" opacity="0.85">キャリア・働き方</text>
+  <!-- 上段右: 無料/有料 -->
+  <rect x="1012" y="165" width="78" height="40" rx="20" fill="#f59e0b"/>
+  <text x="1051" y="192" text-anchor="middle"
+    font-size="18" font-weight="800" fill="#0b1220">有料</text>
 
-  <!-- タイトル本文 -->
-  <text x="100" y="266" font-size="52" font-weight="700"
-      font-family="'Noto Sans JP','Hiragino Kaku Gothic ProN',sans-serif"
-      fill="#fffbeb" xml:space="preserve">退職後のキャリア: AI ×</text>
-    <text x="100" y="334" font-size="52" font-weight="700"
-      font-family="'Noto Sans JP','Hiragino Kaku Gothic ProN',sans-serif"
-      fill="#fffbeb" xml:space="preserve">公的セクター経験者の市場価値</text>
+  <!-- タイトル (中央) -->
+  <style>text{font-family:'Hiragino Kaku Gothic ProN','Yu Gothic','Noto Sans JP',sans-serif;}</style>
+  <text x="640" y="310" text-anchor="middle" font-size="50" font-weight="800" fill="#f8fafc">退職後のキャリア: AI × 公</text>
+  <text x="640" y="376" text-anchor="middle" font-size="50" font-weight="800" fill="#f8fafc">的セクター経験者の市場価値</text>
 
-  <!-- 区切り線 -->
-  <line x1="100" y1="560" x2="1180" y2="560"
-    stroke="#b45309" stroke-width="1" opacity="0.4"/>
+  <!-- アクセントディバイダ -->
+  <rect x="606" y="449" width="68" height="4" rx="2" fill="#fbbf24"/>
 
-  <!-- フッター -->
-  <text x="100" y="598" font-size="20" font-weight="400"
-    font-family="'Arial','Helvetica',sans-serif"
-    fill="#fde68a" opacity="0.7">公務員のためのClaude Code | stats47.jp</text>
-
-  <!-- 右下デコ（アクセントドット） -->
-  <circle cx="1200" cy="590" r="40" fill="#b45309" opacity="0.08"/>
-  <circle cx="1200" cy="590" r="20" fill="#b45309" opacity="0.12"/>
+  <!-- 下段: シリーズ + フッター -->
+  <text x="640" y="493" text-anchor="middle" font-size="19" font-weight="600" fill="#cbd5e1" opacity="0.92">公務員 × Claude Code 実務活用</text>
+  <text x="640" y="521" text-anchor="middle" font-size="15" font-weight="500" fill="#94a3b8" opacity="0.8">公務員のための Claude Code 活用術 ・ stats47.jp</text>
 </svg>

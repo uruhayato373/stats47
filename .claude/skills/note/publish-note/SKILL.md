@@ -78,15 +78,22 @@ browser-use CLI（Chrome プロファイル経由）で note.com エディタを
 # 1. ドラフトが docs/31 に無ければ R2 から復元
 bash .claude/scripts/note/restore-from-r2.sh <slug>
 
-# 2. カバー SVG を生成 (images/cover-1280x670.svg)
-node .claude/scripts/note/generate-note-covers.mjs --slug <slug>
+# 2. カバーを生成 (images/cover-1280x670.{svg,png})
+#    ★ koumuin-claude-code / koumuin-estat-claude-code シリーズは専用ジェネレータを使う
+#      (共通のキャッチー背景 + カテゴリトーン + 中央ボックス。SVG+PNG を直接出力し sharp で合成):
+node .claude/scripts/note/generate-koumuin-covers.cjs --slug <slug>
+#    それ以外 (stats47-note 等) は汎用版:
+# node .claude/scripts/note/generate-note-covers.mjs --slug <slug>
 
 # 3. ハッシュタグ 90 個を生成 (hashtags.txt)
 node .claude/scripts/note/generate-note-hashtags.mjs --slug <slug>
 ```
 
-- カバー SVG: `docs/31_note記事原稿/[vertical/]<slug>/images/cover-1280x670.svg`
-  既存の PNG アイキャッチ (`cover-1280x670.png`) がある場合はそちらを優先してよい。SVG のみの場合は Phase 2 で SVG ファイルをそのままアップロードする（note は SVG を受け付けない場合があるため、`rsvg-convert` または `inkscape` で PNG に変換してからアップロードする）。
+- カバー: `docs/31_note記事原稿/[vertical/]<slug>/images/cover-1280x670.{svg,png}`
+  **koumuin シリーズは `generate-koumuin-covers.cjs` が PNG まで生成する**（背景 bitmap は
+  `.claude/scripts/note/assets/koumuin-cover-bg.png`、無ければプログラム生成のダーク背景にフォールバック）。
+  アップロードは PNG を使う。汎用版 (`generate-note-covers.mjs`) は SVG のみなので、その場合は
+  `rsvg-convert`/`inkscape`/`svg-to-png.cjs` で PNG 化してからアップロードする（note は SVG を受け付けない場合がある）。
 - ハッシュタグ: `docs/31_note記事原稿/[vertical/]<slug>/hashtags.txt` に 1 行 1 タグで 90 個。Phase 7 でタグ入力時に使う。
 
 ## 前提条件

@@ -125,7 +125,18 @@ else:
     print('')
 PY
 )
-  if [ -z "$BTN" ]; then echo "  [WARN] line button not found for: $HEAD"; return 1; fi
+  if [ -z "$BTN" ]; then
+    # フォールバック: 有料境界見出しが inline link/code を含むと a11y state の単行テキスト照合が
+    # 外れる（2026-07-10 に #06/#07 で発生）。DOM 側で H1-4 を直接探し、その直前の
+    # 「ラインをこの場所に変更」ボタンを eval-click する（Shadow-DOM 貫通）。
+    local FB=$(BU eval "(function(){var norm=function(s){return (s||'').replace(/[\s　\140#]/g,'');};var target=norm(decodeURIComponent('$ESC'));var all=[];(function deep(r){r.querySelectorAll('*').forEach(function(e){all.push(e);if(e.shadowRoot)deep(e.shadowRoot);});})(document);var hidx=-1;for(var i=0;i<all.length;i++){var el=all[i];if(/^H[1-4]$/.test(el.tagName)&&norm(el.textContent).indexOf(target)>=0){hidx=i;break;}}if(hidx<0)return 'heading-nf';for(var j=hidx;j>=0&&j>hidx-200;j--){var b=all[j];if(b.tagName==='BUTTON'&&(b.textContent||'').trim()==='ラインをこの場所に変更'){b.click();return 'clicked';}}return 'btn-nf';})();" 2>&1)
+    if echo "$FB" | grep -q "clicked"; then
+      sleep 1.5; BU screenshot "$SHOT" >/dev/null 2>&1
+      echo "  [OK] line set before: $HEAD (DOM fallback) shot=$SHOT"
+      return 0
+    fi
+    echo "  [WARN] line button not found for: $HEAD (fallback=$FB)"; return 1
+  fi
   BU click "$BTN" >/dev/null 2>&1; sleep 1.5
   BU screenshot "$SHOT" >/dev/null 2>&1
   echo "  [OK] line set before: $HEAD (btn=$BTN) shot=$SHOT"
@@ -134,9 +145,17 @@ PY
 # ---- 更新確定: 「更新する」→「記事が公開されました」確認→ note-published-urls.json に updated_at 記録 ----
 do_update(){
   local SLUG="$1"
-  BU state 2>&1 > /tmp/ps.txt
-  local UPD=$(awk '/^\t*更新する\s*$/{print prev} {prev=$0}' /tmp/ps.txt | grep -oE "\[[0-9]+\]" | grep -oE "[0-9]+" | head -1)
-  BU click "$UPD" >/dev/null 2>&1; sleep 5
+  # ヘッダーの「更新する」ボタンは browser-use の a11y state で [idx] が付かない
+  # （プレーンテキストとして出る）ため index click が効かない。Shadow-DOM 貫通の
+  # eval-click で確実に押す（2026-07-10 実機で検証。詳細 memory project_note_update_mode_learnings）。
+  local CLICKED=$(BU eval "(function(){function deep(r,a){r.querySelectorAll('*').forEach(function(e){if(e.tagName==='BUTTON')a.push(e);if(e.shadowRoot)deep(e.shadowRoot,a);});return a;}var b=deep(document,[]).find(function(x){return (x.textContent||'').trim()==='更新する';});if(b){b.click();return 'clicked';}return 'nf';})();" 2>&1)
+  if ! echo "$CLICKED" | grep -q "clicked"; then
+    # フォールバック: 旧 a11y index click（環境により [idx] が付く場合がある）
+    BU state 2>&1 > /tmp/ps.txt
+    local UPD=$(awk '/^\t*更新する\s*$/{print prev} {prev=$0}' /tmp/ps.txt | grep -oE "\[[0-9]+\]" | grep -oE "[0-9]+" | head -1)
+    [ -n "$UPD" ] && BU click "$UPD" >/dev/null 2>&1
+  fi
+  sleep 5
   BU state 2>&1 > /tmp/ps.txt
   if grep -qE "記事が公開されました" /tmp/ps.txt; then
     SLUG="$SLUG" python3 - << 'PY'
@@ -152,7 +171,11 @@ else:
     print('  [PUBLISHED] %s  (not in state map!)'%slug)
 PY
   else
-    echo "  [FAIL] $SLUG — no publish modal (idx=$UPD)"; grep -nE "エラー|error|必須" /tmp/ps.txt | head -3
+    # WARN false negative: 「記事が公開されました」モーダルは timing で検出を外すことがあり、
+    # 更新自体は成功している場合がある（2026-07-10 に #13/estat01/estat11 で発生）。
+    # → 必ずエディタ再オープンでライブ確認してから FAIL 確定すること。
+    echo "  [WARN] $SLUG — publish モーダル未検出。更新は成功している可能性あり → エディタ再オープンでライブ確認"
+    grep -nE "エラー|error|必須" /tmp/ps.txt | head -3
   fi
 }
 

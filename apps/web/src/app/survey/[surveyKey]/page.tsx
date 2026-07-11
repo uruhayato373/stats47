@@ -14,7 +14,7 @@ import {
 } from "@stats47/ranking/server";
 import { isOk } from "@stats47/types";
 
-import { PageShell, PageHeader, Breadcrumbs } from "@/components/layout";
+import { ArticleShell, PageHeader, Breadcrumbs } from "@/components/layout";
 import { SectionHeader } from "@/components/section";
 
 import {
@@ -166,14 +166,17 @@ export default async function SurveyPage({ params }: PageProps) {
     .join(" ・ ");
 
   return (
-    <PageShell>
-      <Breadcrumbs
-        items={[
-          { label: "ホーム", href: "/" },
-          { label: "調査", href: "/survey" },
-          { label: survey.name },
-        ]}
-      />
+    <ArticleShell
+      breadcrumb={
+        <Breadcrumbs
+          items={[
+            { label: "ホーム", href: "/" },
+            { label: "調査", href: "/survey" },
+            { label: survey.name },
+          ]}
+        />
+      }
+    >
       <PageHeader
         eyebrow="政府統計"
         title={survey.name}
@@ -248,6 +251,6 @@ export default async function SurveyPage({ params }: PageProps) {
 
       {/* コンテンツ末尾の全幅フッター広告 */}
       <FooterAdSlot />
-    </PageShell>
+    </ArticleShell>
   );
 }

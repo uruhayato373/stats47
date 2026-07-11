@@ -7,7 +7,7 @@
 
 import { ReactNode } from "react";
 
-import { PageShell, PageHeader } from "@/components/layout";
+import { ArticleShell, PageHeader } from "@/components/layout";
 import { SurfaceCard } from "@/components/surface";
 
 import { generateOGMetadata } from "@/lib/metadata/og-generator";
@@ -51,7 +51,7 @@ export const metadata: Metadata = {
  */
 export default function TermsPage() {
   return (
-    <PageShell variant="reading">
+    <ArticleShell>
       <PageHeader
         title="利用規約"
         description="本規約は、統計で見る都道府県（stats47、以下「当サービス」）の提供するサービスの利用条件を定めるものです。利用者は、本規約に同意の上、当サービスを利用するものとします。"
@@ -273,6 +273,6 @@ export default function TermsPage() {
           </p>
         </TermsArticle>
       </div>
-    </PageShell>
+    </ArticleShell>
   );
 }

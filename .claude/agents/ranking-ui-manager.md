@@ -51,10 +51,14 @@ model: sonnet
   （SSG が崩れ Cloudflare Workers で 500。同ルールの cookies 節）。
 
 ### C. レイアウト・見出し（統一レイアウト規約）
-- 横幅は `PageShell` 経由（`container mx-auto` / `max-w-[…]` 直書き禁止）。
+- **`/ranking/[rankingKey]` は `ArticleShell`（reading zone）を使う**（2026-07-11 Soft Editorial 移植）。`PageShell` ではない。
+  `ArticleShell` が `.reading-zone`（`--radius:14px`・薄グレー地・1280px + flex 密着レール）を敷き、`max-w-[1280px]` は
+  この shell 内の正規実装なので違反ではない（`container mx-auto` / page.tsx での `max-w-[…]` 直書きは引き続き禁止）。
+  パンくずは `ArticleShell` の `breadcrumb` slot に渡す（`RankingPageBreadcrumbs` は shell 非依存・`RankingPageClientShell` が注入）。
+  正典: `docs/01_技術設計/15_デザインシステムSSOT.md`「例外: reading zone」/ `13_統一レイアウト設計.md`。
 - H1 は `getRankingTitle(rankingItem)`（名前のみ、年・注釈を焼かない）。本文 H1 は `text-2xl font-bold`（`text-3xl`+ 禁止）。
 - パンくず: ホーム → (category があれば) カテゴリ → ランキング名。
-- 角丸フラット（`rounded-xl`/`shadow-lg` 禁止）。
+- 角丸は reading zone 例外（`--radius:14px`・`shadow-soft-*`）。zone 外（他ページ）はフラット（`rounded-xl`/`shadow-lg` 禁止）。
 
 ### D. サイドバー構成（Composition Pattern）
 - 右サイドバーは Server Component を `page.tsx` で render し ReactNode 注入: AdSense / `RankingItemsSidebar` /
@@ -94,7 +98,8 @@ grep -rn "lg:sticky\|xl:sticky" apps/web/src/app/ranking apps/web/src/features/r
 # 7. 禁止スタイル (本文 h1 の text-3xl+ / shadow-lg / rounded-xl)
 grep -rn "text-3xl\|text-4xl\|shadow-lg\|shadow-2xl\|rounded-xl\|rounded-2xl" \
   apps/web/src/features/ranking apps/web/src/app/ranking
-# 8. 横幅直書き (PageShell を迂回)
+# 8. 横幅直書き (ArticleShell/PageShell を迂回)。ranking は ArticleShell 経由なので
+#    ranking 配下に直の max-w-[ は 0 が正（幅は ArticleShell が 1280px を持つ）。
 grep -rn "container mx-auto\|max-w-\[" apps/web/src/app/ranking apps/web/src/features/ranking
 ```
 

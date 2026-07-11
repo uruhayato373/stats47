@@ -11,9 +11,9 @@ import {
 } from "@stats47/components/atoms/ui/breadcrumb";
 import { Newspaper } from "lucide-react";
 
-import { PageShell } from "@/components/layout";
+import { ArticleShell } from "@/components/layout";
 import { ShareButtons } from "@/components/molecules/ShareButtons";
-import { RailCard, RailLinkItem, RailLinkList, SurfaceCard, SurfaceLinkCard } from "@/components/surface";
+import { ArticleCard, RailCard, RailLinkItem, RailLinkList, SurfaceLinkCard } from "@/components/surface";
 
 import {
     SidebarPromoBanner,
@@ -162,18 +162,15 @@ export default async function BlogPostPage({ params }: PageProps) {
         publisher: buildPublisherOrganization(baseUrl),
     };
 
-    const rightRail = (
-        <aside className="flex flex-col gap-3 lg:sticky lg:top-20 lg:max-h-[calc(100vh-5.5rem)] lg:overflow-y-auto lg:pr-1">
-            <ArticleTableOfContents content={article.content} compact />
-
-            {/* 本文関連 widget（主役・上） */}
+    // レール上段 (非 sticky): 本文関連 widget + 広告。初期表示で見える位置に置き viewability を確保
+    const rail = (
+        <>
             <RelatedRankingsSection tagKeys={tagKeys} compact />
 
             <BlogRelatedArticlesSection articles={relatedArticles} currentSlug={slug} articleTagsMap={articleTagsMap} compact />
 
             <hr className="my-1 border-t border-border" />
 
-            {/* promo / 広告（本文関連の下へ降格） */}
             <SidebarPromoBanner index={0} position="sidebar-left" />
             <SidebarPromoBanner index={1} position="sidebar-right" />
 
@@ -185,8 +182,11 @@ export default async function BlogPostPage({ params }: PageProps) {
 
             {/* テキストリンク広告 (strategy career / 就職エージェントneo) */}
             <BlogSidebarTextAds tagKeys={tagKeys} />
-        </aside>
+        </>
     );
+
+    // レール末尾の sticky クラスタ: TOC が読中に追従する (doboku-note パターン)
+    const railSticky = <ArticleTableOfContents content={article.content} compact />;
 
     return (
         <>
@@ -194,32 +194,33 @@ export default async function BlogPostPage({ params }: PageProps) {
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
             />
-            <PageShell rightRail={rightRail} rightRailBreakpoint="lg" variant="reading">
-                {/* パンくず (tag/areas と同じく単一 PageShell の先頭子として配置) */}
-                <Breadcrumb className="mb-4">
-                    <BreadcrumbList>
-                        <BreadcrumbItem>
-                            <BreadcrumbLink asChild>
-                                <Link href="/">ホーム</Link>
-                            </BreadcrumbLink>
-                        </BreadcrumbItem>
-                        <BreadcrumbSeparator />
-                        <BreadcrumbItem>
-                            <BreadcrumbLink asChild>
-                                <Link href="/blog">ブログ</Link>
-                            </BreadcrumbLink>
-                        </BreadcrumbItem>
-                        <BreadcrumbSeparator />
-                        <BreadcrumbItem>
-                            <BreadcrumbPage>{article.title}</BreadcrumbPage>
-                        </BreadcrumbItem>
-                    </BreadcrumbList>
-                </Breadcrumb>
-
-                {/* 中央カラム: 記事 */}
-                <main className="min-w-0 space-y-6">
-                    <SurfaceCard className="overflow-hidden p-0">
-                        <div className="bg-card px-5 py-6 sm:p-8 lg:p-10">
+            <ArticleShell
+                rail={rail}
+                railSticky={railSticky}
+                breadcrumb={
+                    <Breadcrumb className="mb-4">
+                        <BreadcrumbList>
+                            <BreadcrumbItem>
+                                <BreadcrumbLink asChild>
+                                    <Link href="/">ホーム</Link>
+                                </BreadcrumbLink>
+                            </BreadcrumbItem>
+                            <BreadcrumbSeparator />
+                            <BreadcrumbItem>
+                                <BreadcrumbLink asChild>
+                                    <Link href="/blog">ブログ</Link>
+                                </BreadcrumbLink>
+                            </BreadcrumbItem>
+                            <BreadcrumbSeparator />
+                            <BreadcrumbItem>
+                                <BreadcrumbPage>{article.title}</BreadcrumbPage>
+                            </BreadcrumbItem>
+                        </BreadcrumbList>
+                    </Breadcrumb>
+                }
+            >
+                <div className="space-y-6">
+                    <ArticleCard>
                             {/* 記事ヘッダー */}
                             <header className="mb-8 border-b border-border pb-6 font-news-article">
                                 <div className="mb-4 flex flex-wrap items-center gap-x-2 gap-y-1 text-[12px] font-medium leading-6 text-muted-foreground">
@@ -229,7 +230,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                                     <span aria-hidden="true">/</span>
                                     <span>PRを含む場合があります</span>
                                 </div>
-                                <h1 className="mb-4 text-[1.45rem] font-bold leading-[1.45] tracking-normal text-foreground sm:text-[2rem] sm:leading-[1.4]">{article.title}</h1>
+                                <h1 className="article-title mb-4 text-[1.45rem] font-bold text-foreground sm:text-[28px]">{article.title}</h1>
                                 {article.frontmatter.subtitle && (
                                     <p className="mb-5 text-[15px] leading-8 text-muted-foreground sm:text-base">{article.frontmatter.subtitle}</p>
                                 )}
@@ -267,10 +268,9 @@ export default async function BlogPostPage({ params }: PageProps) {
                             <div className="mt-8 pt-6 border-t flex justify-center">
                                 <ShareButtons title={article.title} url={`/blog/${slug}`} variant="prominent" />
                             </div>
-                        </div>
-                    </SurfaceCard>
-                </main>
-            </PageShell>
+                    </ArticleCard>
+                </div>
+            </ArticleShell>
         </>
     );
 }

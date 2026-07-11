@@ -54,14 +54,12 @@ interface ComponentProps {
 
 function makeMdComponents(slug?: string, affiliateBannersByCategory?: Record<string, AffiliateBannerData>): Record<string, React.ComponentType<ComponentProps>> {
     return {
+        // 見出し・リンクの見た目は globals.css の .blog-news-article が持つ (Soft Editorial)。
+        // コンポーネント側は id / scroll 位置などの構造のみ担当する。
         h2: ({ children, ...props }: ComponentProps) => {
             const id = buildHeadingSlug(extractTextFromChildren(children));
             return (
-                <h2
-                    id={id}
-                    className="mt-10 mb-4 scroll-mt-20 border-b border-border pb-2 text-2xl font-bold"
-                    {...props}
-                >
+                <h2 id={id} className="scroll-mt-20" {...props}>
                     {children}
                 </h2>
             );
@@ -69,11 +67,7 @@ function makeMdComponents(slug?: string, affiliateBannersByCategory?: Record<str
         h3: ({ children, ...props }: ComponentProps) => {
             const id = buildHeadingSlug(extractTextFromChildren(children));
             return (
-                <h3
-                    id={id}
-                    className="mt-9 mb-2 scroll-mt-20 text-xl font-bold"
-                    {...props}
-                >
+                <h3 id={id} className="scroll-mt-20" {...props}>
                     {children}
                 </h3>
             );
@@ -83,22 +77,13 @@ function makeMdComponents(slug?: string, affiliateBannersByCategory?: Record<str
             const isExternal = typeof href === "string" && href.startsWith("http");
             if (isExternal) {
                 return (
-                    <a
-                        href={href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-primary underline underline-offset-4 hover:text-primary/80"
-                        {...props}
-                    >
+                    <a href={href} target="_blank" rel="noopener noreferrer" {...props}>
                         {children}
                     </a>
                 );
             }
             return (
-                <Link
-                    href={typeof href === "string" ? href : "#"}
-                    className="text-primary underline underline-offset-4 hover:text-primary/80"
-                >
+                <Link href={typeof href === "string" ? href : "#"}>
                     {children}
                 </Link>
             );
@@ -114,7 +99,7 @@ function makeMdComponents(slug?: string, affiliateBannersByCategory?: Record<str
             const isSvg = resolvedSrc.endsWith(".svg");
             return (
                 <span
-                    className={`block mt-2 overflow-x-hidden not-prose ${isSvg ? "-mx-6 sm:-mx-8 md:mx-auto md:max-w-2xl" : "-mx-6 sm:-mx-8"}`}
+                    className={`block mt-2 overflow-x-hidden not-prose ${isSvg ? "-mx-5 sm:-mx-8 md:mx-auto md:max-w-2xl" : "-mx-5 sm:-mx-8"}`}
                 >
                     <Image
                         src={resolvedSrc}
@@ -386,7 +371,7 @@ export function MDContent({ source, slug, relatedArticleTitles, affiliateBanners
     );
     return (
         <article
-            className="blog-news-article prose prose-zinc max-w-none [--tw-prose-body:#27272a] prose-pre:my-4 prose-pre:bg-slate-900 prose-pre:text-slate-100 prose-pre:border prose-pre:border-slate-700 prose-pre:shadow-sm prose-pre:p-4 prose-code:before:content-none prose-code:after:content-none"
+            className="blog-news-article prose prose-zinc dark:prose-invert max-w-none prose-pre:my-4 prose-pre:bg-slate-900 prose-pre:text-slate-100 prose-pre:border prose-pre:border-slate-700 prose-pre:shadow-sm prose-pre:p-4 prose-code:before:content-none prose-code:after:content-none"
             suppressHydrationWarning
         >
             <ReactMarkdown

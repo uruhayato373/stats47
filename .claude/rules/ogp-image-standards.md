@@ -35,7 +35,7 @@ stats47.jp の **OGP 画像 / note カバー画像 / サイト内リンクカー
 | カード: blog (light/dark) | webp (16:9 相当) | `apps/web/scripts/generate-blog-thumbnails-cloud.ts` (Satori、`lib/blog-thumbnail-render.ts`) | R2 `app/blog/<slug>/thumbnail-{light,dark}.webp` | `ThemeAwareImage` (blog-article-grid) | blog-editor |
 | カード: ranking (light/dark) | png | **供給不完全 (既知課題)** | R2 `ranking/prefecture/<key>/<year>/thumbnails/thumbnail-{light,dark}.png` | `RankingThumbnail` (baseSrc 解決、無ければ "No Image") | ranking-publisher |
 | カード: theme / category | — | **なし (要否は §3 で判断)** | — | (共有 SVG タイルマップ or blog サムネ流用) | — |
-| note カバー | 1280×670 (≒1.91:1) | **2 系統併存 (既知課題)**: (A) Remotion `apps/remotion/src/features/ranking-note/NoteCover.tsx` → R2 `sns/` / (B) `.claude/scripts/note/generate-note-covers.mjs` (SVG→PNG) → R2 `note/<vertical>/<slug>/` | R2 `note/<vertical>/<slug>/header.png` 等 | note.com アップロード | note-manager |
+| note カバー | 1280×670 (≒1.91:1) | **系統併存 (既知課題)**: (A) Remotion `apps/remotion/src/features/ranking-note/NoteCover.tsx` → R2 `sns/` / (B) `.claude/scripts/note/generate-note-covers.mjs` (SVG→PNG、stats47-note 汎用) / **(C) `.claude/scripts/note/generate-koumuin-covers.cjs`** (koumuin-* 専用の正典。共通背景 `assets/koumuin-cover-bg.png` + カテゴリトーン + 中央ボックス、frontmatter 駆動、sharp で背景 bitmap に前景 SVG を合成し PNG 直出力。無ければダーク背景フォールバック) | docs/31 `images/cover-1280x670.png` → note.com アップロード | note-manager |
 
 ### OGP コンポーネントの実体
 `apps/web/src/features/ogp/`: `DefaultOgp` / `BlogOgp` / `RankingOgp` / `CategoryOgp` / `AreaOgp` /
@@ -151,6 +151,14 @@ node .claude/scripts/ogp/build-image-gallery.mjs --audit
 - **note カバー**: `note/<vertical>/<slug>/images/cover-1280x670.png` に事前生成 archive (Satori 統一デザイン)。
   既存 SVG 系統 (`generate-note-covers.mjs` + `svg-to-png.js`) と Remotion `NoteCover` は **deprecate (削除しない)**。
   ※ note.com 公開済みカバーの差し替えではなく R2 archive + 今後の正系統。
+  - **★koumuin-claude-code / koumuin-estat-claude-code は Satori 系の対象外 (二重 SSOT 回避・2026-07-09)**。
+    この 2 シリーズは bespoke カバーが正典 = `.claude/scripts/note/generate-koumuin-covers.cjs`
+    (共通背景 `assets/koumuin-cover-bg.png` + カテゴリトーン + 中央ボックス、frontmatter 駆動、sharp 合成)
+    → `docs/31 images/cover-1280x670.png` → publish-note が note.com へアップロード。
+    `generate-ogp-images.ts --type note-covers` はこの 2 vertical を `BESPOKE_COVER_VERTICALS` で除外する
+    (Satori で R2 に別デザインを焼かない)。**カバーは派生物**で SSOT 入力は
+    「frontmatter (title/is_paid/category) + 背景アセット + 生成器」= すべて git。docs/31・R2 のカバー PNG は再生成可能。
+    `koumuin-gis` / `stats47-note` は従来どおり Satori 系対象。
 - **theme のみ例外**: `generateStaticParams` でビルド時 prerender され稼働するため、当面ランタイム route を残す。
   **home/category は既存の静的 `public/og-image.jpg`** を使う。
 

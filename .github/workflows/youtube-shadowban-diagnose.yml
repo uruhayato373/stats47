@@ -1,0 +1,85 @@
+name: 🩺 YouTube Shadowban Diagnose
+
+# YouTube 慎重再開 (2026-07) の回復実測用。read-only (Data API list / Analytics reports.query のみ)。
+# CI シークレット GOOGLE_OAUTH_* を使い、ローカル再認証なしで verdict を取得する。
+# 手動 dispatch 専用。sns-content-standards.md §1 の月1上限を見直してよいかの判断材料にする。
+
+on:
+  workflow_dispatch:
+    inputs:
+      days:
+        description: "診断ウィンドウ日数 (recent / prior 各)"
+        default: "60"
+        required: false
+  # workflow_dispatch は main (default branch) に無いと gh から叩けない (404) ため、
+  # このファイル自身への develop push で 1 回発火させる経路も用意する。
+  # main に乗れば dispatch が使えるので push 経路は後で外してよい。
+  push:
+    branches: [develop]
+    paths:
+      - ".github/workflows/youtube-shadowban-diagnose.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: youtube-shadowban-diagnose
+  cancel-in-progress: false
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: 🧰 Checkout develop
+        uses: actions/checkout@v4
+        with:
+          ref: develop
+          fetch-depth: 1
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 🔐 Write .env.local from secrets
+        run: |
+          {
+            echo "GOOGLE_OAUTH_CLIENT_ID=${{ secrets.GOOGLE_OAUTH_CLIENT_ID }}"
+            echo "GOOGLE_OAUTH_CLIENT_SECRET=${{ secrets.GOOGLE_OAUTH_CLIENT_SECRET }}"
+            echo "GOOGLE_OAUTH_REFRESH_TOKEN=${{ secrets.GOOGLE_OAUTH_REFRESH_TOKEN }}"
+          } > .env.local
+
+      - name: 🩺 Diagnose (read-only)
+        run: |
+          node .claude/scripts/youtube/diagnose-shadowban.js \
+            --pretty --days "${{ github.event.inputs.days || '60' }}" | tee diag-output.txt
+
+      - name: 🧹 Remove secrets file
+        if: always()
+        run: rm -f .env.local
+
+      - name: 📄 Step Summary
+        if: always()
+        run: |
+          echo "# YouTube Shadowban Diagnose" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          if [ -s diag-output.txt ]; then
+            echo '```' >> $GITHUB_STEP_SUMMARY
+            cat diag-output.txt >> $GITHUB_STEP_SUMMARY
+            echo '```' >> $GITHUB_STEP_SUMMARY
+          else
+            echo "⚠️ 診断出力なし — 認証失敗の可能性 (refresh token 失効を確認)" >> $GITHUB_STEP_SUMMARY
+          fi
+
+      - name: 📦 Upload artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: youtube-diagnose
+          path: diag-output.txt
+          if-no-files-found: ignore

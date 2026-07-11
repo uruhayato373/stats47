@@ -39,6 +39,14 @@ note.com でマガジンを作成する際の設定値とコピー。Profile 5 (
 ## カバー画像
 
 専用カバー作成済み: `magazine-cover-1280x670.png` (このディレクトリ直下、1280×670)
+
+記事カバーと同デザイン言語 (中央ボックス) + 専用の別背景 (`assets/koumuin-magazine-bg.png`・flagship ゴールド)。再生成:
+
+```bash
+node .claude/scripts/note/generate-koumuin-covers.cjs --magazine
+```
+
+シリーズ名・本数・価格の SSOT は本 MAGAZINE.md。変更したら `MAGAZINES` 定義 (`generate-koumuin-covers.cjs`) を合わせて再生成する。
 note のマガジン作成画面でこの画像をアップロードする。
 
 ## 作成後の手順

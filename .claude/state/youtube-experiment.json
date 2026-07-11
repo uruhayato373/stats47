@@ -1,0 +1,8 @@
+{
+  "mode": "mass-experiment",
+  "monthlyLimit": 31,
+  "dailyLimit": 1,
+  "reason": "family アカウント (BAN リスク無し) での量産実験。1日1本ペースで投下し、シャドウバン下でも露出が回復するか実地検証する。2026-07-11 ユーザー判断 (当初の日次3本+案から 1日1本へ確定)。",
+  "decidedAt": "2026-07-11",
+  "note": "既定 (月1・シャドウバン再発防止) に戻すにはこのファイルを削除する。dailyLimit=1 / monthlyLimit=31 は check-youtube-post-budget.cjs が機械強制する 1日1本ペースの上限。タイトル重複ガード (check-youtube-duplicate.cjs) と pause ガードは実験中も有効。"
+}
