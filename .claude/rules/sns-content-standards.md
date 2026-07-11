@@ -54,6 +54,14 @@ SNS 投稿を企画・生成・投稿・計測する agent / skill / 人間は�
 > 全面禁止 (`check-youtube-duplicate.cjs`) と pause ガードは実験中も維持**する。実験の初速は
 > `youtube-shadowban-diagnose.yml` (CI) で測る。実装手順書: `docs/10_SNS戦略/07_YouTube量産実験.md`。
 
+> **例外: Instagram 量産実験 (2026-07-12〜2026-08-10)**。オーナー判断 (2026-07-11) で §0 の
+> 「カルーセル 2 + リール 1 / 週」を期間限定で停止し、**1 日 3 本** (既存予約リール 16 本 + ランキング
+> 画像 74 本 = 90 本、Graph API 25 件/24h の範囲内) を実地検証する。配信は
+> `post-instagram-scheduled.yml` の cron ×3 (08:03/12:03/19:03 JST) + `instagram-w29-schedule.json`
+> (エントリの `time` で枠指定、`ig-posted-log` で二重投稿防止)。効果は `/update-sns-metrics` +
+> sns-weekly-report でリーチ・保存率を計測し、**悪化が確認されたら w29 の残エントリ削除で即時停止**する。
+> 期間終了後は既定 (週 3 本) に戻る。
+
 > **機械参照 (★SSOT)**: 上表の `X_DAILY_MAX` / `X_WEEKLY_TARGET_MIN` / `X_WEEKLY_TARGET_MAX` は
 > `<!-- x-catalog:quota -->` ブロック (本節末) に構造化データとして持たせ、`.claude/scripts/lib/x-catalog.cjs`
 > がパースする。**値を変えるときは下記ブロックだけを編集**すれば guard / 候補選定数 / schedule 割付の全系に波及する。

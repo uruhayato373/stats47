@@ -3,10 +3,11 @@
 投稿済み全件。`posted_at` 降順。
 スクリプトで自動生成 — 手編集しない (`sns-posts-store.cjs` が `insert()`/`updateById()` のたびに再生成)。
 
-**394 件** (最終更新: 2026-06-07)
+**395 件** (最終更新: 2026-07-11)
 
 | 日付 | 媒体 | コンテンツ | キャプション | URL |
 |---|---|---|---|---|
+| 2026-07-11 | ▶️ YouTube | ranking/bcr-births-1995-2023 | 出生数はこの29年で4割減｜47都道府県ランキングの推移 1995→2023 | [🔗](https://www.youtube.com/watch?v=3TWSWlKDPbs) |
 | 2026-06-07 | 📸 Instagram | ranking/annual-precipitation | なぜ静岡が年間降水量1位（3,754mm）なのか。  答えは地理にある。静岡は太平洋に面し、黒潮の暖湿流が直撃。梅雨前線… | [🔗](https://www.instagram.com/p/DZR6zYgFOgn/) |
 | 2026-06-07 | 📸 Instagram | ranking/annual-precipitation | 「沖縄が一番雨が多い」と思っていませんか？  実際のデータを見ると、1位は静岡（3,754mm）で、沖縄は2位（3,06… | [🔗](https://www.instagram.com/p/DZR6zmJFNT9/) |
 | 2026-06-07 | 📸 Instagram | ranking/annual-precipitation | 年間降水量の格差（3.7倍）の答えは、「気候帯×地形」。  太平洋側は黒潮・梅雨・台風が重なり雨量が増える。日本海側は冬… | [🔗](https://www.instagram.com/p/DZR6z41lPOX/) |
