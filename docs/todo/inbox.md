@@ -42,6 +42,4 @@ tags: []
 | 2026-06-19 | `/themes/local-finance-city` をヘッダーの選択肢から選べないようにし、財政状況 (`local-finance`) に統合する | 改善 | 未整理 | ナビ/IA。ヘッダーのテーマ選択から除外 + コンテンツ統合（301検討） |
 | 2026-06-19 | `/themes/local-finance` の stat-card 内チャートが D3.js でインタラクティブ表示されない | バグ | 未整理 | テーマダッシュボード。D3 hydration / クライアント描画の不具合の可能性 |
 | 2026-06-19 | トップページ (https://stats47.jp/) のランキングカードのデザインをもっと練る | 改善 | 未整理 | UI/デザイン。home の featured ランキングカード |
-| 2026-07-11 | select-candidates.cjs にセンシティブ指標の除外リストを追加 (suicide-count / early-neonatal-deaths 等) | 改善 | 未整理 | X量産バッチ。2026-07-11 の90本バッチで手動差し替えした。除外機構が無く次回バッチで再選定される。キー一覧を rules §2 系 or スクリプト定数に置くかは x-strategist 提案→人間承認 (§2-10) |
-| 2026-07-11 | select-candidates.cjs の scheduled_at 割付が posts.json の既存 scheduled を見ない | 改善 | 未整理 | X量産バッチ。8/10 まで予約済みのため、次回実行は `--start 2026-08-11` を明示しないと満杯日に draft が積まれ publish 時ガードで弾かれる (無駄 draft)。恒久対応は既存 scheduled を読んで満杯日をスキップする改修 |
 | | | | | |

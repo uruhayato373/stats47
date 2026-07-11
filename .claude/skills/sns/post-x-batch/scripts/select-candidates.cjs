@@ -10,7 +10,9 @@
  *   - metric 索引: .claude/state/sns/metric-discovery-index.json (無ければ build-discovery-index.ts で生成)
  *   - 台帳 posts.json: dedup (同 key×template 90日除外 / 同 key 30日除外) と category ローテ
  *   - 季節性: 当月テーマ語 (本ファイル MONTH_THEMES) に一致する title/category を加点
- *   - 頻度上限: x-catalog の quota (§1) — 1 日 X_DAILY_MAX 本で scheduled_at を割り付け
+ *   - 頻度上限: x-catalog の quota (§1) — 1 日 X_DAILY_MAX 本で scheduled_at を割り付け。
+ *     台帳の既存予約 (scheduled_at) で満杯の日はスキップし、空き日から割り付ける
+ *   - センシティブ指標 (SENSITIVE_EXCLUDE_KEYS) は選定対象から除外
  *   - テンプレ割付: §2-8 相性表 (x-catalog getAffinity) の ◎/○ から §2-0 template を選ぶ
  *
  * 出力 (--out、既定 .local/r2/sns/_queue/candidates.json):
@@ -59,6 +61,14 @@ const MONTH_THEMES = {
   11: ["紅葉", "観光", "医療", "インフルエンザ", "文化", "教育"],
   12: ["移住", "積雪", "降雪", "年末", "医療", "消費", "小売"],
 };
+
+// センシティブ指標の除外 (SNS のカジュアルなランキング投稿に不適。炎上・ブランド毀損リスク)。
+// 2026-07-11 の 90 本バッチで suicide-count / early-neonatal-deaths を手動差し替えした再発防止。
+// 追加はキーを 1 行足すだけ。判断基準: 死亡・自殺など、ランキング形式の軽いトーンで扱えない指標。
+const SENSITIVE_EXCLUDE_KEYS = new Set([
+  "suicide-count",
+  "early-neonatal-deaths",
+]);
 
 // 相性表の角度 → §2-0 template id
 const ANGLE_TO_TEMPLATES = {
@@ -196,6 +206,7 @@ function main() {
   const scored = [];
   for (const e of index) {
     if (!known.has(e.key)) continue; // 公開済みのみ
+    if (SENSITIVE_EXCLUDE_KEYS.has(e.key)) continue; // センシティブ指標は選定しない
     const last = lastByKey.get(e.key) || 0;
     if (last && now - last < 30 * DAY) continue; // 同 key 30日以内は除外
     const text = `${e.title || ""} ${e.subtitle || ""} ${e.category || ""}`;
@@ -262,6 +273,21 @@ function main() {
     any: 12,
   };
   const perDay = new Map(); // "YYYY-MM-DD" -> 使用済み時刻(hour) セット
+  // 台帳の既存予約 (draft/scheduled/posted の scheduled_at) で埋まっている枠を先に予約済み扱いにする。
+  // これが無いと満杯日に draft を積んでしまい、publish 時の頻度ガードで弾かれて無駄 draft になる
+  // (2026-07-11 の月次 90 本バッチで顕在化。以後は --start 明示不要で空き日から自動割付)。
+  for (const p of xPosts) {
+    const raw = p.scheduled_at || "";
+    if (!raw) continue; // posted_at のみ (過去投稿) は未来の割付と重ならない
+    const d = new Date(raw);
+    if (isNaN(d.getTime())) continue;
+    const jst = new Date(d.getTime() + 9 * 3600 * 1000);
+    const dayKey = jst.toISOString().slice(0, 10);
+    if (dayKey < startDay) continue;
+    const used = perDay.get(dayKey) || new Set();
+    used.add(jst.getUTCHours());
+    perDay.set(dayKey, used);
+  }
   let dayCursor = new Date(`${startDay}T00:00:00+09:00`);
   const withSchedule = [];
   for (const c of selected) {
