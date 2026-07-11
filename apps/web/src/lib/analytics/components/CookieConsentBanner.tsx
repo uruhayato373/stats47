@@ -3,6 +3,9 @@
 import { useEffect, useState } from "react";
 
 import { Button } from "@stats47/components/atoms/ui/button";
+import { cn } from "@stats47/components";
+
+import { SHELL_WIDTH_CLASS } from "@/components/layout/PageShell";
 
 const CONSENT_COOKIE_NAME = "stats47_consent";
 const CONSENT_LS_KEY = "stats47_cookie_consent";
@@ -66,8 +69,8 @@ export function CookieConsentBanner() {
   if (!visible) return null;
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-50 p-3 bg-background/95 backdrop-blur-sm border-t shadow-sm">
-      <div className="container mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-muted-foreground">
+    <div className="fixed bottom-0 left-0 right-0 z-50 py-3 bg-background/95 backdrop-blur-sm border-t shadow-sm">
+      <div className={cn(SHELL_WIDTH_CLASS, "flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-muted-foreground")}>
         <p>
           当サイトでは、利用状況の分析のために Cookie を使用しています。
         </p>

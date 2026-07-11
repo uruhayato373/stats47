@@ -26,6 +26,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 
+import { SHELL_WIDTH_CLASS } from "@/components/layout/PageShell";
 import { useTheme } from "@/hooks/useTheme";
 
 import { useSidebarStore } from "@/store/sidebar-store";
@@ -92,7 +93,7 @@ export function HeaderClient({ themes }: HeaderClientProps) {
 
   return (
     <header className="h-16 glass sticky top-0 z-[200]" suppressHydrationWarning>
-      <div className="mx-auto flex h-full w-full max-w-[1700px] items-center justify-between px-4 sm:px-6">
+      <div className={cn(SHELL_WIDTH_CLASS, "flex h-full items-center justify-between")}>
         {/* 左: モバイルメニュー + ロゴ */}
         <div className="flex items-center gap-2">
           <button

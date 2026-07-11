@@ -163,7 +163,7 @@ export default async function BlogPostPage({ params }: PageProps) {
     };
 
     const rightRail = (
-        <aside className="flex flex-col gap-3 lg:sticky lg:top-20">
+        <aside className="flex flex-col gap-3 lg:sticky lg:top-20 lg:max-h-[calc(100vh-5.5rem)] lg:overflow-y-auto lg:pr-1">
             <ArticleTableOfContents content={article.content} compact />
 
             {/* 本文関連 widget（主役・上） */}
@@ -219,7 +219,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                 {/* 中央カラム: 記事 */}
                 <main className="min-w-0 space-y-6">
                     <SurfaceCard className="overflow-hidden p-0">
-                        <div className="border-t-4 border-primary bg-card px-5 py-6 sm:p-8 lg:p-10">
+                        <div className="bg-card px-5 py-6 sm:p-8 lg:p-10">
                             {/* 記事ヘッダー */}
                             <header className="mb-8 border-b border-border pb-6 font-news-article">
                                 <div className="mb-4 flex flex-wrap items-center gap-x-2 gap-y-1 text-[12px] font-medium leading-6 text-muted-foreground">

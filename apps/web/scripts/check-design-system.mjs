@@ -4,7 +4,8 @@ import path from "node:path";
 const cwd = process.cwd();
 // Phase 0-6 (2026-06-23) で src/app の既存債務 (Card 直 import / bg-white) を是正し、
 // app も全ルール対象に昇格。components / features / app を一律で検査する。
-const scanRoots = ["src/components", "src/features", "src/app"];
+// 2026-07-11 (DR-AUDIT-03): src/lib も走査対象に追加 (CookieConsentBanner 等のサイト chrome)。
+const scanRoots = ["src/components", "src/features", "src/app", "src/lib"];
 const extensions = new Set([".ts", ".tsx"]);
 
 const rules = [
@@ -100,10 +101,32 @@ const rules = [
     // 正典: docs/01_技術設計/15_デザインシステムSSOT.md / 13_統一レイアウト設計.md
     id: "no-direct-width-in-page",
     message:
-      "page.tsx must not hardcode width. Use PageShell (sole width/rail/padding source). No container mx-auto / max-w-[…].",
-    pattern: /container\s+mx-auto|max-w-\[/,
+      "page.tsx must not hardcode width. Use PageShell (sole width/rail/padding source). No max-w-[…]. (container mx-auto is covered by no-container-mx-auto)",
+    pattern: /max-w-\[/,
     // page.tsx だけを対象にする（PageShell.tsx 等の正当な max-w 定義は許可）。
     allow: (relativePath) => !relativePath.endsWith("page.tsx"),
+  },
+  {
+    // 4px アクセントバー (カラーバー) は melta-ui で禁止 (全周 border / 余白 / 背景差で表現する)。
+    // 例外は Markdown 散文中の引用/注記の左バーのみ (ブランドアクセントではなく typography)。
+    // 正典: .claude/design-system/prohibited.md
+    id: "no-thick-accent-border",
+    message:
+      "Do not hand-add 4px accent borders (border-t/l/r/b-4). Use SurfaceCard border or spacing/background contrast.",
+    pattern: /\bborder-[tlrb]-4\b/,
+    allow: (relativePath) =>
+      [
+        "src/features/blog/components/md-content.tsx", // blockquote 左バー = Markdown 引用の一般 typography
+        "src/features/blog/components/md-preprocessor.ts", // callout ([!NOTE] 等) の admonition 左バー
+      ].includes(relativePath),
+  },
+  {
+    // 横幅は PageShell (ページ) / SHELL_WIDTH_CLASS (Header/Footer/固定バナー等の chrome) が SSOT。
+    id: "no-container-mx-auto",
+    message:
+      "container mx-auto is prohibited. Width comes from PageShell (pages) or SHELL_WIDTH_CLASS (site chrome).",
+    pattern: /container\s+mx-auto/,
+    allow: (relativePath) => relativePath === "src/components/layout/PageShell.tsx",
   },
   {
     // features/redesign は 2026-07 に解体済み。再作成・再 import を禁止する。
@@ -168,10 +191,13 @@ function listFiles(dir) {
     const stats = statSync(absolutePath);
 
     if (stats.isDirectory()) {
-      if ([".next", "node_modules"].includes(entry)) continue;
+      if ([".next", "node_modules", "__tests__"].includes(entry)) continue;
       files.push(...listFiles(relativePath));
       continue;
     }
+
+    // テストはルール文字列を期待値として含むため除外 (knip.config.ts の ignore と同基準)
+    if (/\.test\.[jt]sx?$/.test(entry)) continue;
 
     if (stats.isFile() && extensions.has(path.extname(entry))) {
       files.push(relativePath);
