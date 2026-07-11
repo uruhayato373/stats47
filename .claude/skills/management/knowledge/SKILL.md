@@ -534,4 +534,4 @@ export async function GET() {
 - `.claude/rules/blog-data-schema.md` §1.5/1.6/1.7（3点セット・復元キュー・再発防止の正典）
 - `.claude/scripts/blog/quality-gate.mjs`（系譜 gate L350-360）/ `generate-article-charts.ts`（source.json 自動出力）
 - `.claude/state/blog/{svg-lineage-queue.json,neither-restore-method.md}`
-- `docs/01_技術設計/15_デザインシステムSSOT.md` と `docs/02_実装計画/04_機能バックログ.md` の `UI-CONSOLIDATION-RESIDUAL`
+- `docs/01_技術設計/15_デザインシステムSSOT.md` と `docs/todo/02_機能バックログ.md` の `UI-CONSOLIDATION-RESIDUAL`

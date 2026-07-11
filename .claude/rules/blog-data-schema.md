@@ -188,7 +188,7 @@ YYYY-MM-DD-<method>[-<batch>]
 
 | 場所 | 内容 |
 |---|---|
-| `docs/02_実装計画/03_改善バックログ.md` の section heading | `## [BLOG-WAVE-<wave_id>] <title> (legacy: <旧 BLOG-CTR-*>)` |
+| `docs/todo/01_改善バックログ.md` の section heading | `## [BLOG-WAVE-<wave_id>] <title> (legacy: <旧 BLOG-CTR-*>)` |
 | section frontmatter | `wave_id`, `legacy_section_ids`, `predecessor_wave`, `successor_wave` |
 | `.claude/state/blog/auto-brushup-history.json` | 各 entry に `wave_id` フィールド (2026-05-27 migration 済) |
 | commit message | 必須ではない (legacy refactoring を避けるため) |
@@ -221,10 +221,10 @@ YYYY-MM-DD-<method>[-<batch>]
 
 | Docs | 内容 | 更新トリガ |
 |---|---|---|
-| `docs/02_実装計画/03_改善バックログ.md` | wave section の真実源 (status / effect / 判定基準) | wave deploy 時 + effect 計測時 |
+| `docs/todo/01_改善バックログ.md` | wave section の真実源 (status / effect / 判定基準) | wave deploy 時 + effect 計測時 |
 | `docs/03_週次運用/週次計画/YYYY-Www.md` | 週次 TODO | 週次 (月曜) |
 | `docs/03_週次運用/週次レビュー/YYYY-Www.md` | 週次振り返り | 週次 (日曜) |
-| `docs/04_レビュー/YYYY-MM-DD-session-handoff-<x>.md` | 大規模 session 完了時のハンドオフ (フラット。種別絞り込みは frontmatter `type:`) | session 完了時 |
+| `docs/handoffs/YYYY-MM-DD-<x>.md` | 大規模 session 完了時のハンドオフ (フラット。種別絞り込みは frontmatter `type:`) | session 完了時 |
 
 ### Memory (auto memory)
 

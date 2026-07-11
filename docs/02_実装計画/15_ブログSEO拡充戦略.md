@@ -85,7 +85,7 @@ node .claude/scripts/blog/build-topic-queue.mjs --next 5   # 次に書く候補 
    (`build-sitemap-ranking-keys.cjs`) なので、KNOWN が更新されれば新キーも自動掲載される。`indexable-ranking-keys.ts`
    は sitemap の安全弁 (legacy 手動入力) で専用生成器なし。マージ = 本番デプロイなので**まとめて承認**する
 2. **1 コマンド公開**: `/publish-ranking <keys...>` → ranking-publisher agent (data 投入→ keys 整合→ deploy → 本番 200 実測)
-3. **月次 metric 拡充**: estat-researcher が候補プール 8,838 件から月 30-50 件審査 → `05_指標バックログ.md`、
+3. **月次 metric 拡充**: estat-researcher が候補プール 8,838 件から月 30-50 件審査 → `docs/todo/03_指標バックログ.md`、
    data-ingester が high 優先から週 5-10 metric を config 化 + R2 投入 → 月末に一括公開。12-18 ヶ月で 3,000 metric
 4. **AI コンテンツ**: 既存キュー (140/1,015 done) を週 25-40 件、高流入 incomplete 優先で継続 (~6 ヶ月で完了)
 

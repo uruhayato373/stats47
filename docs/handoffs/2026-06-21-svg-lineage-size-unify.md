@@ -53,7 +53,7 @@ svg-builder 生成器は固定サイズ（bar columns 960×404 / scatter 960×62
 - manual 76（無意味名 inline-chart-N・個別判断）
 - scatter 43（記事リンク値域不適合 = 未取込metric or 別指標。一部は **e-Stat 取り込み**が先）
 - ranking flagged 31（複数系列比較・派生<95%・held）/ line 31 / tilemap 15 / stacked 13
-- 副産物バグ: **marriages/divorces の SSOT値が誤り**（離婚キーに婚姻率の値）→ `docs/02_実装計画/05_指標バックログ.md §D`（estat-researcher→data-ingester で再取り込み）
+- 副産物バグ: **marriages/divorces の SSOT値が誤り**（離婚キーに婚姻率の値）→ `docs/todo/03_指標バックログ.md §D`（estat-researcher→data-ingester で再取り込み）
 
 ## 関連 commit（develop）
 `3dd2807a`〜`9e0f7cba`（backfill/resolver/restorer/rerender/size-gate/memory）。整合性監査は各節目で実施済（agent生成コードの捏造バグを3回捕捉・修正）。

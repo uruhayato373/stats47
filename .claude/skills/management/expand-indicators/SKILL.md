@@ -11,7 +11,7 @@ primary_agent: data-ingester
 
 > ⚠️ **DEPRECATED (Phase 7 — 2026-05-28 時点)**
 >
-> 本 skill の中核 `ingest-indicator.mjs` が削除済 `stats_prefecture` テーブルへ INSERT する設計のため、現状実行できない。Phase 8 で R2 直行投入版 (`packages/data-configs/scripts/page-data-batch.ts` 流用) に refactor 予定 ([04_機能バックログ.md](../../../../docs/02_実装計画/04_機能バックログ.md) の Phase 8 issue を参照)。
+> 本 skill の中核 `ingest-indicator.mjs` が削除済 `stats_prefecture` テーブルへ INSERT する設計のため、現状実行できない。Phase 8 で R2 直行投入版 (`packages/data-configs/scripts/page-data-batch.ts` 流用) に refactor 予定 ([02_機能バックログ.md](../../../../docs/todo/02_機能バックログ.md) の Phase 8 issue を参照)。
 >
 > **暫定運用** (1 metric ずつ手動):
 > 1. `packages/data-configs/src/metrics/<key>.ts` に TS-config を作成 (既存 `japanese-population.ts` をテンプレに)
@@ -22,10 +22,10 @@ primary_agent: data-ingester
 > 4. `npm run validate:config --workspace=@stats47/data-configs` で構造規約を検証 (**いずれも error=CI/pre-commit ブロック**: 無効 category / title 年・注釈(※)混入 / subtitle が注釈・title と冗長 / unit 空 / 重複 title に区別子なし。規約: `.claude/rules/metric-config-standards.md`)
 > 5. `/sync-metrics-cache --apply` で D1 metrics cache 同期
 > 6. `/page-data-batch --metric <key>` で e-Stat → R2 投入
-> 7. `docs/02_実装計画/05_指標バックログ.md` を手動編集 (status: pending → done)
-> 8. `docs/02_実装計画/03_改善バックログ.md` に batch entry append
+> 7. `docs/todo/03_指標バックログ.md` を手動編集 (status: pending → done)
+> 8. `docs/todo/01_改善バックログ.md` に batch entry append
 
-stats47 の指標を継続的に拡充する。`docs/02_実装計画/05_指標バックログ.md` の pending 候補から優先度上位 N 件を順次取得・登録し、backlog の status を更新、`docs/02_実装計画/03_改善バックログ.md` に施策バッチとして append する 1 コマンド型スキル (refactor 完了後)。
+stats47 の指標を継続的に拡充する。`docs/todo/03_指標バックログ.md` の pending 候補から優先度上位 N 件を順次取得・登録し、backlog の status を更新、`docs/todo/01_改善バックログ.md` に施策バッチとして append する 1 コマンド型スキル (refactor 完了後)。
 
 **現行 schema** (Phase 6/7 後):
 - TS-config (`packages/data-configs/src/metrics/<key>.ts`) — metric メタの SSOT
@@ -65,7 +65,7 @@ stats47 の指標を継続的に拡充する。`docs/02_実装計画/05_指標�
 
 ## 前提条件
 
-- `docs/02_実装計画/05_指標バックログ.md` が存在し、pending 候補が 1 件以上ある
+- `docs/todo/03_指標バックログ.md` が存在し、pending 候補が 1 件以上ある
 - `.env.local` に `NEXT_PUBLIC_ESTAT_APP_ID` 設定済
 - 完全DBレス: metric の SSOT は git TS (`packages/data-configs/src/metrics/<key>.ts`)、観測値は R2。永続/miniflare D1 は使わない。`/sync-metrics-cache` が触る使い捨てビルドキャッシュは `packages/database/.data/stats47.sqlite`（固定パスは `.claude/rules/local-environment.md`）で、不在でも git TS 編集 + R2 反映は可能
 - 既存スキル `/inspect-estat-meta` で recipe 雛形が作れる
@@ -78,7 +78,7 @@ stats47 の指標を継続的に拡充する。`docs/02_実装計画/05_指標�
 1. `parse-backlog.cjs` で backlog をパースし、`--priority` `--status=pending` で上位 N 件抽出:
    ```bash
    node .claude/scripts/management/parse-backlog.cjs \
-     --backlog docs/02_実装計画/05_指標バックログ.md \
+     --backlog docs/todo/03_指標バックログ.md \
      --priority "${PRIORITY:-high}" \
      --status pending \
      --limit "${TARGET:-10}"
@@ -164,7 +164,7 @@ recipe を `/tmp/expand-indicators/recipes-YYYY-MM-DD-NN.json` (配列) とし�
 
 ### Phase 5: 改善ログ append
 
-9. `docs/02_実装計画/03_改善バックログ.md` を Read し、`## 実行履歴` セクション末尾に下記テンプレで新 batch entry を Edit append:
+9. `docs/todo/01_改善バックログ.md` を Read し、`## 実行履歴` セクション末尾に下記テンプレで新 batch entry を Edit append:
    - section ID: `[BATCH-YYYY-MM-DD-NN]` (NN は当日 N 回目)
    - 追加リスト表 (slug / category / theme / estat_id / rows / latest_year)
    - 結果サマリ (成功 / 失敗 / skip / backlog 残)
@@ -180,7 +180,7 @@ recipe を `/tmp/expand-indicators/recipes-YYYY-MM-DD-NN.json` (配列) とし�
     [expand-indicators] 完了
       成功: 8 件 / 失敗: 1 件 / skip: 1 件
       backlog 残: pending=29 / failed=1 / done=8
-      改善ログ: docs/02_実装計画/03_改善バックログ.md#BATCH-2026-05-19-01
+      改善ログ: docs/todo/01_改善バックログ.md#BATCH-2026-05-19-01
 
     次のアクション候補:
       1. /generate-known-ranking-keys (新規 metric.key を middleware に登録)
@@ -192,8 +192,8 @@ recipe を `/tmp/expand-indicators/recipes-YYYY-MM-DD-NN.json` (配列) とし�
 
 | 更新対象 | 内容 |
 |---|---|
-| `docs/02_実装計画/05_指標バックログ.md` | 該当行 `status` 更新 + frontmatter `updated:` |
-| `docs/02_実装計画/03_改善バックログ.md` | 新 batch entry append + frontmatter `updated:` |
+| `docs/todo/03_指標バックログ.md` | 該当行 `status` 更新 + frontmatter `updated:` |
+| `docs/todo/01_改善バックログ.md` | 新 batch entry append + frontmatter `updated:` |
 | ローカル D1 | `metrics` + `stats_prefecture` + `sources` (upsert) + `estat_metainfo` (status='registered') |
 | `/tmp/expand-indicators/recipes-*.json` | recipe 入力 (ephemeral) |
 | `/tmp/expand-indicators/<slug>.debug.json` | 失敗時のみ debug ダンプ (ephemeral) |
@@ -230,8 +230,8 @@ recipe を `/tmp/expand-indicators/recipes-YYYY-MM-DD-NN.json` (配列) とし�
 
 ## 関連
 
-- backlog: [`docs/02_実装計画/05_指標バックログ.md`](../../../../docs/02_実装計画/05_指標バックログ.md)
-- 改善ログ: [`docs/02_実装計画/03_改善バックログ.md`](../../../../docs/02_実装計画/03_改善バックログ.md)
+- backlog: [`docs/todo/03_指標バックログ.md`](../../../../docs/todo/03_指標バックログ.md)
+- 改善ログ: [`docs/todo/01_改善バックログ.md`](../../../../docs/todo/01_改善バックログ.md)
 - パーサ: [`.claude/scripts/management/parse-backlog.cjs`](../../../scripts/management/parse-backlog.cjs)
 - orchestrator: [`.claude/scripts/management/ingest-indicator.mjs`](../../../scripts/management/ingest-indicator.mjs)
 - 連携スキル: `/inspect-estat-meta`, `/generate-known-ranking-keys`, `/sync-snapshots`

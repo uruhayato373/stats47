@@ -61,7 +61,7 @@ critic-review-protocol.md (全 critic 共通) / ranking-content-author / note-ma
 - `docs/00_プロジェクト管理/04_ターゲットペルソナ.md` §0.5 — S2 (移住・引越し・子育て・転職の比較検討層) を
   Axis A 内の攻めの主軸に昇格 (実行面は D2/F/G 型 + アフィリ vertical で先行済・新規開発不要)
 - `docs/02_実装計画/16_月間100万PVロードマップ.md` §4③ — 「AI 引用最適化」レバー追加
-- `docs/02_実装計画/03_改善バックログ.md` Tier 2 — **STP-AI-WATCH-01** (informational top クエリの CTR
+- `docs/todo/01_改善バックログ.md` Tier 2 — **STP-AI-WATCH-01** (informational top クエリの CTR
   四半期定点観測。baseline W27 CTR 2.77%、初回判定 2026-10-07)
 
 ---

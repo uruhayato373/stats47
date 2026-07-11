@@ -139,7 +139,7 @@ ThemeCatalog (SSOT, git TS)
 
 | 工程 | 担当 |
 |---|---|
-| 指標×チャート候補の**調査・提案** (白書/Web/競合/GSC) | `theme-researcher` (read-only、提案を `docs/02_実装計画/05_指標バックログ.md` へ) |
+| 指標×チャート候補の**調査・提案** (白書/Web/競合/GSC) | `theme-researcher` (read-only、提案を `docs/todo/03_指標バックログ.md` へ) |
 | 提案の**採否判断・カタログ設計** (role/チャート構成) | `theme-designer` (採択分を catalog TS 化) |
 | チャート **componentProps 詳細化・監査** | `theme-component-builder` |
 | チャートコンポーネント自体の新設 | `chart-component-builder` (`chart-component-standards.md`) |

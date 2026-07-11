@@ -18,7 +18,7 @@ import type { IndicatorSet } from "../indicator-set";
  * 都道府県版 local-finance.ts の 18 指標のうち、ratio 計算系 (歳出割合等) は
  * 市区町村版では分子・分母から計算が必要なため Phase 2 で追加。
  *
- * docs/50_Issues/04_機能バックログ.md #292+
+ * docs/50_Issues/02_機能バックログ.md #292+
  */
 export const LOCAL_FINANCE_CITY_SET: IndicatorSet = {
   key: "local-finance-city",

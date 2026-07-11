@@ -15,7 +15,7 @@ PSI 悪化の根本原因は **個別ページの実装ではなくインフラ�
 
 ## 実施状況 (2026-06-13 同日セッション・working tree、未デプロイ)
 
-4 並列エージェント (Opus×1 + Sonnet×3、ファイル領域を非重複に分割) で実装。apps/web 型チェック clean / 341 テスト green / packages/visualization 型チェック clean (golden PNG 8 件は機械依存の既存 flaky、変更前後で pixel diff 同一＝今回の d3 変更と因果なしを stash 比較で確認)。TODO 真実源は `docs/02_実装計画/03_改善バックログ.md` の PERF-* エントリ。
+4 並列エージェント (Opus×1 + Sonnet×3、ファイル領域を非重複に分割) で実装。apps/web 型チェック clean / 341 テスト green / packages/visualization 型チェック clean (golden PNG 8 件は機械依存の既存 flaky、変更前後で pixel diff 同一＝今回の d3 変更と因果なしを stash 比較で確認)。TODO 真実源は `docs/todo/01_改善バックログ.md` の PERF-* エントリ。
 
 | 監査項目 | 状態 | backlog ID |
 |---|---|---|

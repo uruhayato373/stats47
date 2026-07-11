@@ -2,7 +2,7 @@
 /**
  * SessionStart hook: ローカルビルド DB (SQLite) の存在チェック。
  *
- * 2026-05-29: データ層は「完全DBレス」が正典 (docs/01_技術設計/19_完全DBレス設計.md)。
+ * 2026-05-29: データ層は「完全DBレス」が正典 (docs/01_技術設計/12_完全DBレス設計.md)。
  * SSOT は git TS (設定・定義・運用エンティティ) と R2 (観測値・配信 snapshot) の二つだけ。
  * 永続/リモート D1 は廃止。本番アプリは R2 snapshot のみ読む。
  * Derived (area_profiles / correlations) はエフェメラル計算 (使い捨て :memory: SQLite / DuckDB が
@@ -34,7 +34,7 @@ if (exists) {
 
 const msg = [
   "ℹ️ ローカルビルド DB (SQLite) はありません — 完全DBレス設計では通常これが正常です。",
-  "   正典: docs/01_技術設計/19_完全DBレス設計.md",
+  "   正典: docs/01_技術設計/12_完全DBレス設計.md",
   "",
   "  - 本番アプリは R2 snapshot のみ読む (DB を一切 query しない)。",
   "  - SSOT は git TS (設定・定義・運用エンティティ) と R2 (観測値・配信) の二つだけ。",

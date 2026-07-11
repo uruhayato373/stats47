@@ -4,7 +4,7 @@ topic: monetization
 date: 2026-06-14
 status: active
 related_strategy: docs/02_実装計画/01_収益化マスタープラン.md
-related_backlog: docs/02_実装計画/03_改善バックログ.md
+related_backlog: docs/todo/01_改善バックログ.md
 tags: [session-handoff, 収益化, monetization, adsense, affiliate, GA4]
 ---
 

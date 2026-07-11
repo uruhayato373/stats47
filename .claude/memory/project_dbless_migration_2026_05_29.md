@@ -23,7 +23,7 @@ metadata:
 **多セッション衝突の教訓 (2026-05-30)**: 別セッション (claude/confident-cray) が同じ page_components git SSOT 移行を**別実装 (大きな TS 定義ファイル) + 新規22チャート**で並行実施。**だが衝突は実質ゼロだった**: confident-cray が cloud R2 に push 済み → 本セッションが cloud から reverse-extract したため、私の `data/page-components/` に既に彼らの内容が入っていた (materialize で byte 一致確認)。**教訓: R2 配信エンティティを2セッションが独立に git SSOT 化しても、一方が R2 push・他方が cloud 抽出なら内容は既に統一されている可能性。競合と決めつけず byte 等価を先に確認せよ。** SSOT 形式 (TS vs JSON) と app-src 改善のみ統合判断が要る。[[feedback_shared_working_copy_git_race]]
 
 **正典 / 計画**:
-- `docs/01_技術設計/19_完全DBレス設計.md` (正典, doc18 superseded)
+- `docs/01_技術設計/12_完全DBレス設計.md` (正典, doc18 superseded)
 - `docs/02_実装計画/dbless-rebuild-plan-2026-05-29.md` (Phase C 消費者の進捗表★)
 - `~/.claude/plans/quiet-forging-flurry.md` (SSD非依存化 3本柱プラン)
 

@@ -24,7 +24,7 @@
 - **エージェント実行モード**: Agent tool 起動時は `mode: "bypassPermissions"` をデフォルト
 - **Agent prompt 冒頭に Output Format を必ず指定** → `.claude/rules/agent-output-contract.md`
 - **一時ファイルは `/tmp/`**: プロジェクトルートに作らない (pre-commit が `tmp_*` 等を自動削除)
-- **計画・レビュー・改善ログは `docs/` 配下**: 週次計画・レビュー・批判的レビュー・pre-mortem・改善バックログ・コンテンツバックログはすべて `docs/03_週次運用/` `docs/04_レビュー/` `docs/02_実装計画/03_改善バックログ.md` `docs/02_実装計画/04_機能バックログ.md` 等に置く。Issues は (a) `enhancement`/`bug` ラベルの PR で close される機能改修、(b) `auto-generated` ラベルの日次アラート (PSI/Cloudflare) のみ → `.claude/rules/docs-vs-issues.md`
+- **計画・レビュー・改善ログは `docs/` 配下**: 週次計画・レビュー・批判的レビュー・pre-mortem・改善バックログ・コンテンツバックログはすべて `docs/03_週次運用/` `docs/04_レビュー/` `docs/todo/01_改善バックログ.md` `docs/todo/02_機能バックログ.md` 等に置く。Issues は (a) `enhancement`/`bug` ラベルの PR で close される機能改修、(b) `auto-generated` ラベルの日次アラート (PSI/Cloudflare) のみ → `.claude/rules/docs-vs-issues.md`
 - **完全 DB レスが正典** → `docs/01_技術設計/12_完全DBレス設計.md`（doc 18 ハイブリッドは 2026-05-29 同日に superseded）。永続/常駐 D1 を SSOT に持たない。SSOT は **git TS** と **R2** の二つだけ。本番アプリは R2 snapshot のみ読む:
   - **Authored / 設定** (低volume・人手・型/review: テーマのチャート定義等) → **git TS が SSOT** → 生成スクリプトで R2 反映
   - **Authored / 運用** (page_components / theme_metrics / sns_posts / affiliate_ads / categories/themes) → **git TS 定義が SSOT** → 生成スクリプトで R2 JSON（横断整合性はビルド時に検証）。手編集 JSON を SSOT にしない
@@ -55,15 +55,17 @@
 | 完了前検証 | `/verification-loop` (ビルド + 型チェック) |
 | バグ修正の教訓 | `/knowledge` |
 | 同じエラー 2 回目 | `/continuous-learning` でパターン化 |
-| **改善施策の TODO 真実源** (status / tier / 期日) | `docs/02_実装計画/03_改善バックログ.md` |
+| **改善施策の TODO 真実源** (status / tier / 期日) | `docs/todo/01_改善バックログ.md` |
 | 改善施策デプロイ (agent 用詳細) | `.claude/skills/analytics/{gsc,ga4,adsense,affiliate,sns-metrics,cloudflare-cost,performance}-improvement/reference/improvement-log.md` |
 | **月次の重点 1-2 テーマ** (今月どこに張るか・Pro 予算配分) | `docs/03_週次運用/月次計画/YYYY-MM.md` (`/monthly-plan` で月初生成。週次がこれを分割消化) |
 | 週次計画進捗 | `docs/03_週次運用/週次計画/YYYY-Www.md` の TODO チェックボックスを Edit |
 | 週次振り返り | `docs/03_週次運用/週次レビュー/YYYY-Www.md` |
 | 批判的レビュー / 事前検死 | `docs/04_レビュー/YYYY-MM-DD-<topic-slug>.md` (フラット。slug に種別を含める例 `-monetization` / `-pre-mortem-<x>`、種別は frontmatter `type:` で絞り込み) |
+| **セッション引き継ぎ (ハンドオフ)** | `docs/handoffs/YYYY-MM-DD-<topic>.md` (次セッションが消化したら抽出→削除・貯めない → `docs/handoffs/README.md`) |
+| 未分類の思いつき TODO | `docs/todo/inbox.md` に 1 行 append (triage で各バックログへ → `docs/todo/README.md`) |
 | YouTube 実験ログ | `docs/15_実験ログ/youtube/EXP-NNN.md` |
 | コンテンツ backlog | `docs/30_note記事企画/backlog/` |
-| 未着手の機能・自動化バックログ | `docs/02_実装計画/04_機能バックログ.md`（指標拡充候補は `docs/02_実装計画/05_指標バックログ.md`） |
+| 未着手の機能・自動化バックログ | `docs/todo/02_機能バックログ.md`（指標拡充候補は `docs/todo/03_指標バックログ.md`） |
 | 非自明な API 仕様・制約 | `/knowledge` (問題・原因・対策の 3 項目) |
 | プロジェクト固有の恒常事実 | auto memory → 正典は **repo 内 `.claude/memory/`**（git で複数 PC・クラウドと共有）。Claude Code のグローバルパス `~/.claude/projects/<hash>/memory/` は `.claude/memory/` への symlink。**新しいマシンで clone した直後に `bash .claude/scripts/setup-memory-symlink.sh` を 1 回実行**して symlink を張る |
 
@@ -103,7 +105,7 @@ CLAUDE.md 内に詳細を複製しない。状況に応じて参照する。
 | プロジェクト概要・要件 | `docs/00_プロジェクト管理/01_プロジェクト定義.md` |
 | 実装計画 INDEX / 現在地 | `docs/02_実装計画/00_INDEX.md` |
 | **収益化マスタープラン (収益化・チャネル・広告配置の SSOT)** ★収益関連の判断時必読 | `docs/02_実装計画/01_収益化マスタープラン.md` |
-| 改善バックログ (TODO 真実源) | `docs/02_実装計画/03_改善バックログ.md` ★施策追加時必読 |
+| 改善バックログ (TODO 真実源) | `docs/todo/01_改善バックログ.md` ★施策追加時必読 |
 | システム構成・技術スタック・モノレポ構造 | `docs/01_技術設計/01_システムアーキテクチャ.md` |
 | **データ層アーキテクチャ (完全DBレス・正典)** ★データ保存先判定時必読 | `docs/01_技術設計/12_完全DBレス設計.md` (doc 18 ハイブリッドは superseded) |
 | DDD ドメイン分類 | `docs/01_技術設計/01_システムアーキテクチャ.md` |
@@ -144,5 +146,5 @@ Issues は「PR で close される機能改修・バグ」と「日次アラー
 過去の移行履歴:
 - `docs/90_課題管理/` (2026-04 廃止) → GitHub Issues 経由 → `docs/50_Issues/` (2026-05) → `docs/02_実装計画/{feature-backlog,indicator-backlog}.md` (2026-06-07 統合)
 - `docs/03_レビュー/` (2026-04-21 廃止) → GitHub Issues 経由 → `docs/04_レビュー/` (2026-05)
-- `weekly-plan` / `weekly-review` / `critical-review` / `pre-mortem` / `*-improvement` 系ラベル (2026-05 廃止) → `docs/03_週次運用/` / `docs/04_レビュー/` / `docs/02_実装計画/03_改善バックログ.md`
-- `docs/05_改善ログ/` (2026-06 廃止) → `docs/02_実装計画/03_改善バックログ.md` (pending 移行) + `.claude/skills/analytics/*/reference/improvement-log.md` (詳細ログ)
+- `weekly-plan` / `weekly-review` / `critical-review` / `pre-mortem` / `*-improvement` 系ラベル (2026-05 廃止) → `docs/03_週次運用/` / `docs/04_レビュー/` / `docs/todo/01_改善バックログ.md`
+- `docs/05_改善ログ/` (2026-06 廃止) → `docs/todo/01_改善バックログ.md` (pending 移行) + `.claude/skills/analytics/*/reference/improvement-log.md` (詳細ログ)

@@ -62,4 +62,4 @@ tags: [note, koumuin, cover, redesign, publish, handoff]
 - ドライバ(使い捨て): `/tmp/note-drive.sh`(セッション限り)
 - memory: `project_note_update_mode_learnings`
 - 正典: `.claude/rules/ogp-image-standards.md` §5 / `.claude/rules/sns-content-standards.md`
-- 前回ハンドオフ(本文修正): `docs/04_レビュー/2026-07-09-session-handoff-note-koumuin-editing.md`
+- 前回ハンドオフ(本文修正): `docs/handoffs/2026-07-09-note-koumuin-editing.md`

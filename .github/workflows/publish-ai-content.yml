@@ -16,7 +16,7 @@ name: 📤 AI Content Publish (develop → R2)
 #   1. node .claude/scripts/ai-content/build-ai-content-queue.mjs --next 10 で対象選定
 #   2. ranking-content-author (並列可) が生成 + 自己 audit → data/ai-content-staging/<key>.json
 #   3. develop へ push → 本 workflow が自動発火
-# 正典: docs/02_実装計画/09_ランキング品質改修.md §3 / 04_機能バックログ.md [AICONTENT-DBLESS-REBUILD]
+# 正典: docs/02_実装計画/09_ランキング品質改修.md §3 / 02_機能バックログ.md [AICONTENT-DBLESS-REBUILD]
 
 on:
   workflow_dispatch:

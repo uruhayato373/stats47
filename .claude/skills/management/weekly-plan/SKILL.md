@@ -92,7 +92,7 @@ primary_agent: strategy-advisor
 
 - SEO カバレッジ指標（完全DBレス。旧 D1 `seo_tracking` / `seo_actions` テーブルは廃止）
   → GSC カバレッジ推移: `.claude/state/gsc/LATEST.md`（`.claude/state/metrics/gsc/history.csv` で時系列）
-  → 未完了 SEO 施策: `docs/02_実装計画/03_改善バックログ.md`（status != done の行）
+  → 未完了 SEO 施策: `docs/todo/01_改善バックログ.md`（status != done の行）
   → トレンド（改善中 / 悪化中 / 横ばい）を判定し計画に反映
 
 出力形式: 「直近のパフォーマンス概況」「成長/停滞の兆候」
@@ -110,13 +110,13 @@ primary_agent: strategy-advisor
   ```
   → 今週の Must は**今月の重点テーマの構成タスクから優先的に選ぶ**。重点外のタスクを Must に入れる場合は理由を明記。月次計画が無い場合は `/monthly-plan` 実行を提案。
 - docs/02_実装計画/00_INDEX.md の現在地と、03/04/05 の未完了タスク
-- 未着手の Issue 一覧（`gh issue list --state open --label enhancement`、PR で close される機能改修）+ docs/02_実装計画/04_機能バックログ.md の section ごとの `tier:` で優先度判定
+- 未着手の Issue 一覧（`gh issue list --state open --label enhancement`、PR で close される機能改修）+ docs/todo/02_機能バックログ.md の section ごとの `tier:` で優先度判定
 
-- 改善バックログ pending 一覧（**真実源**: `docs/02_実装計画/03_改善バックログ.md`）
+- 改善バックログ pending 一覧（**真実源**: `docs/todo/01_改善バックログ.md`）
   ```bash
   # Tier 1/2 の pending / in-progress を表示
   grep -E "^\| (AFF|INDEXING|SEO|BLOG|ADSENSE|GA4|PSI|CWV|P0|Q-|CTR|CONTENT|AICONTENT)" \
-    docs/02_実装計画/03_改善バックログ.md
+    docs/todo/01_改善バックログ.md
   ```
   → Tier 1 は Must 優先、Tier 2 は Should 候補として計画に組み込む
   → due が今週以内のエントリを最優先
@@ -321,8 +321,8 @@ tags: []
 
 ## 改善ログ pending (今週着手対象)
 
-<!-- docs/02_実装計画/03_改善バックログ.md から今週着手する Tier 1/2 エントリを転載。
-     真実源は 03_改善バックログ.md、当週ビューは週次計画。 -->
+<!-- docs/todo/01_改善バックログ.md から今週着手する Tier 1/2 エントリを転載。
+     真実源は 01_改善バックログ.md、当週ビューは週次計画。 -->
 | Tier | Metric | ID | Status | Due | Owner |
 |---|---|---|---|---|---|
 | 1 | gsc | T0-DECAY-01 | in-progress | 2026-06-14 | claude |

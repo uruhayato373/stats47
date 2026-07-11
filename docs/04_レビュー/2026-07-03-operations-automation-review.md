@@ -145,7 +145,7 @@ tags: [operations, automation, agents, ci-cd, design-system, seo, playwright]
 - **NSM との整合**: マスタープランは NSM を PV→週次収益に転換済み。オーナーの「20万PV」目標は
   P2 のトラフィック KPI として位置づけ、NSM (収益) と両立させる (PV はインプット指標、収益がアウトカム)。
 - SEO 的には今回の 53 件復帰は「インデックス再登録」まで数週間かかる。GSC の URL Inspection /
-  sitemap 再送で回復を追跡し、`docs/02_実装計画/03_改善バックログ.md` に効果測定エントリを置く。
+  sitemap 再送で回復を追跡し、`docs/todo/01_改善バックログ.md` に効果測定エントリを置く。
 
 ## 7. 優先順位付きロードマップ
 

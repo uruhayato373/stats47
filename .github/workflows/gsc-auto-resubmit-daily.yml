@@ -7,7 +7,7 @@ name: 🔁 GSC Auto-resubmit (daily)
 # - 履歴は .claude/state/metrics/gsc/resubmit-history.json に commit
 #
 # 関連:
-# - docs/02_実装計画/03_改善バックログ.md [INDEXING-AUTO-01, P0-RANKING-INDEX]
+# - docs/todo/01_改善バックログ.md [INDEXING-AUTO-01, P0-RANKING-INDEX]
 # - .claude/scripts/gsc/auto-resubmit.mjs
 
 on:

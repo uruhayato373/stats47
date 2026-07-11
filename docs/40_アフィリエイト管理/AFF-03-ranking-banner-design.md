@@ -3,7 +3,7 @@ type: design-proposal
 target: AFF-03
 status: proposal
 date: 2026-06-04
-related_log: docs/02_実装計画/03_改善バックログ.md#AFF-03
+related_log: docs/todo/01_改善バックログ.md#AFF-03
 ---
 
 # AFF-03 設計提案: ランキング詳細ページにバナー枠を追加
@@ -78,7 +78,7 @@ node .claude/scripts/ads/fetch-affiliate-ga4.cjs 28
 
 - **[仮説]** ranking のバナー impression は現在ゼロ → 枠追加で該当カテゴリ (banner 在庫のある9軸) の
   ranking PV に比例して impression が立つ。CTR は AFF-04 で評価。
-- 効果判定は実装後 1〜4 週の GA4 で before/after を比較し `docs/02_実装計画/03_改善バックログ.md` AFF-03 に記録。
+- 効果判定は実装後 1〜4 週の GA4 で before/after を比較し `docs/todo/01_改善バックログ.md` AFF-03 に記録。
   実証チェックリスト (`.claude/rules/evidence-based-judgment.md`) を通すまで effect/* を付けない。
 
 ## 未確定 / 承認が要る点

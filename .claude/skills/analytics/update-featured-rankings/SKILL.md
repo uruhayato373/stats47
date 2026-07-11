@@ -15,7 +15,7 @@ status: dead
 >
 > **GA4 PV→featured 自動選出を復活させたい場合の DBレス再実装**: GA4 PV 取得 → 上位 key 選定（カテゴリ分散）→
 > 該当 metric config TS の `isFeatured: true` / `featuredOrder: N` を書き換え → exporter 再実行 → `app/home/featured.json`
-> を R2 push。現状この writer は無い。backlog: `docs/02_実装計画/04_機能バックログ.md` `[DEAD-SKILL-DBLESS-TRIAGE]`。
+> を R2 push。現状この writer は無い。backlog: `docs/todo/02_機能バックログ.md` `[DEAD-SKILL-DBLESS-TRIAGE]`。
 > **以下は再実装時の参考として残す歴史的記述（そのまま実行しない）。**
 
 GA4 API からランキングページの日次 PV を取得し、PV 上位のランキングを注目ランキング（`indicators.is_featured`）として自動更新する。
