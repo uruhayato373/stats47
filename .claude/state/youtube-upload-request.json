@@ -6,6 +6,6 @@
   "privacy": "public",
   "publish_at": "",
   "content_key": "bcr-births-1995-2023",
-  "metric_keys": "births",
-  "note": "量産実験の初速テスト第1弾。BCR (births 1995-2023, 45.7s)。Release asset 473217696 経由で CI 投稿。"
+  "metric_keys": ["births"],
+  "note": "量産実験の初速テスト第1弾。BCR (births 1995-2023, 45.7s)。Release asset 473217696 経由で CI 投稿。metric_keys は JSON 配列 (upload.js 仕様)。"
 }
