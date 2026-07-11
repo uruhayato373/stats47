@@ -1,21 +1,10 @@
 {
-  "hash": "9f081ae31ddf31f0fe4a7c88e9caa9a87d8ba7307de42245ab4fff3f1193c940",
-  "audited_at": "2026-07-09T12:35:44",
+  "hash": "4c6995bd2ea976c70ef7d517d6a2f6af88421e70b0bbde40a73ac9c296ddcf90",
+  "audited_at": "2026-07-11T08:33:28",
   "files": [
-    ".claude/scripts/note/assets/BACKGROUND-BRIEF.md",
-    ".claude/scripts/note/assets/koumuin-cover-bg.png",
-    ".claude/scripts/note/assets/koumuin-magazine-bg.png",
-    ".claude/scripts/note/assets/source/build-koumuin-bg.mjs",
-    ".claude/scripts/note/assets/source/koumuin-cover-bg.svg",
-    ".claude/scripts/note/assets/source/koumuin-magazine-bg.svg",
-    ".claude/scripts/note/generate-koumuin-covers.cjs",
-    ".claude/scripts/note/generate-note-covers.mjs",
-    ".claude/skills/note/koumuin-claude-code/MAGAZINE.md",
-    ".claude/skills/note/koumuin-claude-code/magazine-cover-1280x670.png",
-    ".claude/skills/note/koumuin-claude-code/magazine-cover-1280x670.svg",
-    ".claude/skills/note/koumuin-estat-claude-code/MAGAZINE.md",
-    ".claude/skills/note/koumuin-estat-claude-code/magazine-cover-1280x670.png",
-    ".claude/skills/note/koumuin-estat-claude-code/magazine-cover-1280x670.svg",
-    ".claude/skills/note/publish-note/SKILL.md"
+    ".claude/agents/youtube-strategist.md",
+    ".claude/scripts/lib/check-youtube-post-budget.cjs",
+    ".claude/skills/sns/bar-chart-race/SKILL.md",
+    ".claude/skills/sns/post-youtube/SKILL.md"
   ]
 }
