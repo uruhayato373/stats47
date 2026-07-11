@@ -45,6 +45,13 @@ SNS 投稿を企画・生成・投稿・計測する agent / skill / 人間は�
 これらは skill 実行時にガードスクリプトが検証する (YouTube = `check-youtube-post-budget.cjs` / X = `check-x-post-budget.cjs`)。
 新規投稿スキルを作る場合は本表を必ず参照し、上限を超える経路を作らない。
 
+> **例外: YouTube 量産実験モード (2026-07-11〜)**。BAN リスクの無い family アカウントでは、上表の
+> 「月 1 本上限」を `.claude/state/youtube-experiment.json` (`monthlyLimit` を上書き) で緩和できる。
+> これは「量産して露出が押し切れるか」を実地検証する実験。**凍結の不可逆リスクが無い family アカウント
+> 限定**であり、本命チャンネルの既定は月 1 本のまま (ファイル削除で既定に戻る)。**タイトル重複・再投稿の
+> 全面禁止 (`check-youtube-duplicate.cjs`) と pause ガードは実験中も維持**する。実験の初速は
+> `youtube-shadowban-diagnose.yml` (CI) で測る。
+
 > **機械参照 (★SSOT)**: 上表の `X_DAILY_MAX` / `X_WEEKLY_TARGET_MIN` / `X_WEEKLY_TARGET_MAX` は
 > `<!-- x-catalog:quota -->` ブロック (本節末) に構造化データとして持たせ、`.claude/scripts/lib/x-catalog.cjs`
 > がパースする。**値を変えるときは下記ブロックだけを編集**すれば guard / 候補選定数 / schedule 割付の全系に波及する。

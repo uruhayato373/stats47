@@ -22,7 +22,25 @@ const store = require("./sns-posts-store.cjs");
 
 const PROJECT_ROOT = path.resolve(__dirname, "..", "..", "..");
 const PAUSE_FILE = path.join(PROJECT_ROOT, ".claude/state/youtube-pause.json");
-const MONTHLY_LIMIT = 1;
+const EXPERIMENT_FILE = path.join(PROJECT_ROOT, ".claude/state/youtube-experiment.json");
+
+// 月次上限。既定は 1 本 (シャドウバン再発防止 — sns-content-standards.md §1)。
+// .claude/state/youtube-experiment.json があれば monthlyLimit を上書きする (量産実験モード)。
+// 例: BAN リスクの無い family アカウントでの量産実験。ファイルを削除すれば既定 (月1) に戻る。
+function resolveMonthlyLimit() {
+  if (!fs.existsSync(EXPERIMENT_FILE)) return 1;
+  try {
+    const exp = JSON.parse(fs.readFileSync(EXPERIMENT_FILE, "utf-8"));
+    if (exp.until) {
+      const until = new Date(exp.until);
+      if (!Number.isNaN(until.getTime()) && until.getTime() <= Date.now()) return 1; // 期限切れ → 既定
+    }
+    if (Number.isFinite(exp.monthlyLimit) && exp.monthlyLimit > 0) return exp.monthlyLimit;
+  } catch {
+    /* 壊れていたら既定 (月1) に戻す */
+  }
+  return 1;
+}
 
 function fail(msg) {
   console.error(`[check-youtube-post-budget] ${msg}`);
@@ -65,6 +83,7 @@ function monthRangeJST() {
 }
 
 function checkBudget() {
+  const MONTHLY_LIMIT = resolveMonthlyLimit();
   const { startUTC, endUTC } = monthRangeJST();
   // COALESCE(posted_at, scheduled_at) を JS で等価再現。
   // posted_at が非 null ならそれ、null/未設定なら scheduled_at を採用。
