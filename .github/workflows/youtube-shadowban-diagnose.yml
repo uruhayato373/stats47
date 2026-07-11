@@ -11,6 +11,13 @@ on:
         description: "診断ウィンドウ日数 (recent / prior 各)"
         default: "60"
         required: false
+  # workflow_dispatch は main (default branch) に無いと gh から叩けない (404) ため、
+  # このファイル自身への develop push で 1 回発火させる経路も用意する。
+  # main に乗れば dispatch が使えるので push 経路は後で外してよい。
+  push:
+    branches: [develop]
+    paths:
+      - ".github/workflows/youtube-shadowban-diagnose.yml"
 
 permissions:
   contents: read
