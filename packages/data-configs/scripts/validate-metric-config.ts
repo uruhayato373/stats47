@@ -13,7 +13,7 @@
  *     ※ 旧 warn だった 5 系統 (title-year/title-note, subtitle-note/redundant, unit, dup-title) は
  *       Phase 3 のデータ是正で warn=0 を達成 (2026-06) → error に昇格済。これにより量産時の再混入を CI/pre-commit で阻止する。
  *       category は型 (CategoryKey union) でもコンパイル時にブロックされ、本 lint はその runtime backstop。
- *   - warn (exit 0 / 表示のみ): 現在は該当チェックなし。将来の段階的 cleanup 用に tier を温存する。
+ *   - warn (exit 0 / 表示のみ): placeholder-source (isActive:false の TODO- 系 source id)。
  *
  * 使い方:
  *   npx tsx packages/data-configs/scripts/validate-metric-config.ts
@@ -38,6 +38,11 @@ function strField(text: string, key: string): string | null {
   return m ? m[1] : null;
 }
 
+function boolField(text: string, key: string): boolean | null {
+  const m = text.match(new RegExp(`\\b${key}\\s*:\\s*(true|false)`));
+  return m ? m[1] === "true" : null;
+}
+
 /** データ注釈 (※系) かどうかを文面から判定する (UI の isCaveatNote と同基準)。 */
 function looksLikeNote(s: string): boolean {
   const t = s.trim();
@@ -58,6 +63,9 @@ interface Row {
   unit: string | null;
   category: string | null;
   surveyId: string | null;
+  resourceId: string | null;
+  statsDataId: string | null;
+  isActive: boolean | null;
 }
 
 /**
@@ -107,6 +115,9 @@ function main() {
       unit: strField(text, "unit"),
       category: strField(text, "category"),
       surveyId: strField(text, "surveyId"),
+      resourceId: strField(text, "resourceId"),
+      statsDataId: strField(text, "statsDataId"),
+      isActive: boolField(text, "isActive"),
     });
   }
 
@@ -160,6 +171,23 @@ function main() {
   for (const r of rows) {
     if (r.unit === null || r.unit.trim() === "" || r.unit.trim() === "‐" || r.unit.trim() === "-") {
       errors.push(`[unit] ${r.file}: unit が空/プレースホルダ ("${r.unit}")`);
+    }
+  }
+
+  // placeholder-source: resourceId/statsDataId が TODO- プレースホルダのまま
+  // isActive:true (本番配信対象) なら error / false なら warn (DR-AUDIT-08)
+  for (const r of rows) {
+    for (const [k, v] of [
+      ["resourceId", r.resourceId],
+      ["statsDataId", r.statsDataId],
+    ] as const) {
+      if (!v?.startsWith("TODO-")) continue;
+      const msg = `[placeholder-source] ${r.file}: ${k} "${v}" が TODO プレースホルダ`;
+      if (r.isActive) {
+        errors.push(`${msg} のまま isActive:true (本番配信対象)`);
+      } else {
+        warns.push(`${msg} (isActive:false のため warn)`);
+      }
     }
   }
 
