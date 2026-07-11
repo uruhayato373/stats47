@@ -100,3 +100,45 @@ describe("tag キーリスト集合整合性 (ranking と同型のドリフト�
     ).toEqual([]);
   });
 });
+
+describe("blog slug リスト集合整合性 (410/301/outbox の排他: G4-blog)", () => {
+  it("[F] GONE ∩ REDIRECT 元 = ∅（410 と 301 は排他）", async () => {
+    const { GONE_BLOG_SLUGS } = await import("@/config/gone-blog-slugs");
+    const { BLOG_SLUG_REDIRECTS } = await import("@/config/blog-redirects");
+    const conflict = [...GONE_BLOG_SLUGS].filter((s) => s in BLOG_SLUG_REDIRECTS);
+    expect(
+      conflict,
+      `同じ slug が 410 (GONE_BLOG_SLUGS) と 301 (BLOG_SLUG_REDIRECTS) の両方に登録: ${conflict.join(", ")}`,
+    ).toEqual([]);
+  });
+
+  it("[G] GONE ∩ REDIRECT 先 = ∅（301 の着地が 410 は矛盾）", async () => {
+    const { GONE_BLOG_SLUGS } = await import("@/config/gone-blog-slugs");
+    const { BLOG_SLUG_REDIRECTS } = await import("@/config/blog-redirects");
+    const targets = new Set(Object.values(BLOG_SLUG_REDIRECTS));
+    const conflict = [...GONE_BLOG_SLUGS].filter((s) => targets.has(s));
+    expect(
+      conflict,
+      `301 リダイレクトの着地先が 410 対象: ${conflict.join(", ")}`,
+    ).toEqual([]);
+  });
+
+  it("[H] GONE slug が docs/21 outbox に再出現しない（410 URL の再公開防止）", async () => {
+    const { GONE_BLOG_SLUGS } = await import("@/config/gone-blog-slugs");
+    const fs = await import("node:fs");
+    const path = await import("node:path");
+    // vitest の cwd は apps/web。outbox は publish 後に CI が自動削除する ephemeral のため不在は正常
+    const outbox = path.resolve(process.cwd(), "../../docs/21_ブログ記事原稿");
+    const drafts = fs.existsSync(outbox)
+      ? fs
+          .readdirSync(outbox, { withFileTypes: true })
+          .filter((d) => d.isDirectory())
+          .map((d) => d.name)
+      : [];
+    const conflict = drafts.filter((s) => GONE_BLOG_SLUGS.has(s));
+    expect(
+      conflict,
+      `410 (GONE_BLOG_SLUGS) 対象の slug が outbox に存在 — 公開すると 410 と衝突: ${conflict.join(", ")}`,
+    ).toEqual([]);
+  });
+});
