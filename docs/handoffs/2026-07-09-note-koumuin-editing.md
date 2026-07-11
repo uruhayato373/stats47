@@ -14,8 +14,8 @@ tags: [note, koumuin, editing, handoff]
 > **2026-07-10 追記**: 下記「note.com の公開記事はまだ変わっていない」は解消済み。別セッションが
 > `/publish-note --update` で **45 本中実 36 本をライブ反映済み** (残 9 本は更新差分なし)。
 > 本 handoff は **NOTE-KOUMUIN-MAG-01 (マガジン追加) の対象記事表・手順の参照用に保持**しており、
-> MAG-01 消化時に削除する。反映作業の学びは `docs/handoffs/2026-07-10-note-cover-redesign.md` と
-> memory `project_note_update_mode_learnings` を参照。
+> MAG-01 消化時に削除する。反映作業の学びは memory `project_note_update_mode_learnings` を参照
+> (editor-helpers.sh の backport とカバー生成器は 2026-07-11 に develop へ反映済 = commit cbc0f1d2 / c0b8f1f6)。
 
 ## 一言サマリ
 
