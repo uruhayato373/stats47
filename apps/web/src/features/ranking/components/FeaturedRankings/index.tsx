@@ -6,6 +6,7 @@ import { isOk } from "@stats47/types";
 import { generateMiniTileSvg } from "@stats47/visualization/server";
 
 import { SHELL_WIDTH_CLASS } from "@/components/layout/PageShell";
+
 import { logger } from "@/lib/logger";
 
 import { getFeaturedRankings } from "../../server";
