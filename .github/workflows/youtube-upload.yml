@@ -111,13 +111,14 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git fetch origin develop
-          git checkout develop
-          git pull --rebase origin develop
+          # upload.js が書いた posts.json を先に commit してから rebase する
+          # (未ステージのまま pull --rebase すると "unstaged changes" で exit 128 になる)
           git add .claude/state/sns/posts.json
           if git diff --cached --quiet; then
             echo "posts.json 変更なし、コミットをスキップ"
             exit 0
           fi
           git commit -m "chore(youtube): upload ledger update [skip ci]"
-          git push origin develop
+          git fetch origin develop
+          git rebase origin/develop
+          git push origin HEAD:develop
