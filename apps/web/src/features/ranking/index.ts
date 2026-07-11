@@ -15,16 +15,9 @@
 
 // export * from "./actions";
 
-// 値(関数・クラス)のエクスポート。
-// Web側のrepositoriesで同名関数(=Service相当)を定義しているため、
-// Packageからは衝突しないものだけを厳選してエクスポートする。
-export {
-    getRankingTitle,
-} from "@stats47/ranking";
-
-// クライアントコンポーネントのみをエクスポート
+// クライアントコンポーネントのみをエクスポート (feature 内部のみで使う component は
+// 相対 import に寄せ、barrel には app/ 他 feature から使われるものだけを置く: DR-AUDIT-07)
 export { RankingDataTable } from "./components/RankingDataTable";
-export { RankingKeyPageClient } from "./components/RankingKeyPage/RankingKeyPageClient";
 export { RankingMapChartClient } from "./components/RankingMapChart/RankingMapChartClient";
 export { RankingYearSelector } from "./components/RankingPageHeader/RankingYearSelector";
 export { RankingDefinitionCard } from "./components/RankingDefinitionCard";
@@ -32,22 +25,14 @@ export { RankingSourceCard } from "./components/RankingSourceCard";
 export { FeaturedRankingCard } from "./components/FeaturedRankingCard";
 export { CategoryRankingTable } from "./components/CategoryRankingList";
 export type { CategoryRankingListItem } from "./components/CategoryRankingList";
-export { AiContentAccordion } from "./components/AiContentAccordion";
-export { AiInsightCard } from "./components/AiInsightCard";
-export { AiMarkdownContent } from "./components/AiMarkdownContent";
 export { RankingHeroCard } from "./components/RankingHeroCard";
 export { DataUsageCard } from "./components/DataUsageCard";
-export { RankingFaqSection } from "./components/RankingFaqSection";
 
 // export * from "./repositories"; // Removed
 export * from "./utils";
 
 // Additional client components
 export { AreaTypeToggle } from "./components/AreaTypeToggle";
-
-// Skeleton components
-export { CorrelationSectionSkeleton } from "./components/CorrelationSection/CorrelationSectionSkeleton";
-export { RankingPageCardsSkeleton } from "./components/RankingPageCards/RankingPageCardsSkeleton";
 
 // Sidebar cards (client)
 export { SurveyCard } from "./components/RankingSidebar/SurveyCard";

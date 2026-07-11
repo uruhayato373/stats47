@@ -187,7 +187,7 @@ node .claude/scripts/snapshot-weekly-metrics.mjs [YYYY-Www]
 
 7. SNS メトリクスと YouTube のレビュー本文への埋め込み
    SNS / YouTube の週次ハイライトは本レビュードキュメント `docs/03_週次運用/週次レビュー/YYYY-Www.md` 本文に直接記載する。
-   GA4/GSC の詳細データは snapshot CSV (`.claude/skills/analytics/{gsc,ga4}-improvement/reference/snapshots/`) と改善ログ (`docs/02_実装計画/03_改善バックログ.md`) に分離済みなので、レビュー本文では「主要指標の前週差 + 改善ログ section 参照」のみに圧縮する。
+   GA4/GSC の詳細データは snapshot CSV (`.claude/skills/analytics/{gsc,ga4}-improvement/reference/snapshots/`) と改善ログ (`docs/todo/01_改善バックログ.md`) に分離済みなので、レビュー本文では「主要指標の前週差 + 改善ログ section 参照」のみに圧縮する。
 
 出力形式:
 - 「パフォーマンス概況」（overview.csv / GSC サマリー + AdSense + YouTube + SNS の主要指標を 1 行で明記）
@@ -260,7 +260,7 @@ node .claude/scripts/snapshot-weekly-metrics.mjs [YYYY-Www]
 
 ### Phase 2.5: 実測値の反映先確認
 
-旧 `docs/02_実装計画/02_実装ロードマップ.md` は廃止済み。実測値は `docs/02_実装計画/01_収益化マスタープラン.md` の Phase / KPI と、`docs/02_実装計画/03_改善バックログ.md` の effect 判定に反映する。
+旧 `docs/02_実装計画/02_実装ロードマップ.md` は廃止済み。実測値は `docs/02_実装計画/01_収益化マスタープラン.md` の Phase / KPI と、`docs/todo/01_改善バックログ.md` の effect 判定に反映する。
 
 #### 取得するデータ
 
@@ -456,7 +456,7 @@ pollution 監査（pollution-summary.csv, raw - clean の差分）:
 **GSC Alert**: `/gsc-improvement observe` のアラート判定結果を 1 行で記載（閾値非超過なら本節は省略）:
 - 登録済み ≤ -10% / 404 ≥ +5% / 5xx ≥ +20% のいずれか発火時、対象指標と対応方針を明記
 
-**施策効果サマリ** (`docs/02_実装計画/03_改善バックログ.md` を Read し `status: pending` 以外の行を抽出):
+**施策効果サマリ** (`docs/todo/01_改善バックログ.md` を Read し `status: pending` 以外の行を抽出):
 
 | Section | Tier | 経過日数 | ターゲット | status |
 |---|---|---|---|---|

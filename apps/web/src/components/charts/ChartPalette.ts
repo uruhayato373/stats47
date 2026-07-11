@@ -11,7 +11,7 @@ export const CHART_COLORS = [
   "hsl(var(--chart-5))",
 ] as const;
 
-export const CHART_MUTED_COLOR = "hsl(var(--muted-foreground))";
+const CHART_MUTED_COLOR = "hsl(var(--muted-foreground))";
 
 export const FINANCE_CHART_COLORS = {
   revenue: CHART_COLORS[1],

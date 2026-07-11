@@ -1,5 +1,4 @@
 export * from "./types";
-export * from "./utils/generate-dashboard-metadata";
 
 // Client-safe component exports
 export { ChartSkeleton } from "./components/shared/ChartSkeleton";

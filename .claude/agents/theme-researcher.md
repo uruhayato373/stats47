@@ -32,11 +32,11 @@ model: sonnet
 - テーマに載せるべき指標候補を **白書 (NotebookLM) / Web / 競合ダッシュボード / GSC 検索需要** から発見
 - 各候補に **推奨チャート (componentType)** と **選定根拠 (provenance)** を付与
 - 候補の **e-Stat 実在検証を estat-researcher に委譲**し、実装可能性を確認
-- 提案を `docs/02_実装計画/05_指標バックログ.md` のテーマ節に append
+- 提案を `docs/todo/03_指標バックログ.md` のテーマ節に append
 
 ## File Boundary (read-only 原則)
 
-- **書き込み可**: `docs/02_実装計画/05_指標バックログ.md` (提案の append) と
+- **書き込み可**: `docs/todo/03_指標バックログ.md` (提案の append) と
   NotebookLM 台帳 `.claude/skills/theme/research-theme-catalog/reference/notebooks.md` (ノートブック追加時) のみ
 - **書き込み禁止**: カタログ TS (`packages/data-configs/src/theme-catalog/`)・IndicatorSet・page-components JSON・
   metric config。これらは採択後に theme-designer / theme-component-builder / data-ingester が編集する
@@ -65,10 +65,10 @@ Stage 2: 実在確認 — **自分で inline に調べる** (estat-researcher �
      WebFetch/検索して **statsDataId+cdCat01 を突き止める**。突き止めた statsDataId は提案に必ず明記し、
      自信が持てないものは `要呼び元検証(statsDataId=X)` とマーク → **呼び元 (メインセッション) が最終確定**する。
      (AI 生成 key は実在 metric と乖離しがち。memory: feedback_backlog_ranking_key_audit)
-Stage 3: 統合 — 指標×チャート提案 (selection 付き) を 05_指標バックログ.md へ append
+Stage 3: 統合 — 指標×チャート提案 (selection 付き) を 03_指標バックログ.md へ append
 ```
 
-## 提案の出力先フォーマット (05_指標バックログ.md への append)
+## 提案の出力先フォーマット (03_指標バックログ.md への append)
 
 テーマごとに 1 節を追記する (append-only)。既存節があれば追補として日付付きで足す。
 
@@ -98,7 +98,7 @@ Stage 3: 統合 — 指標×チャート提案 (selection 付き) を 05_指標�
 
 - **Template A** (table-only): `候補 | 推奨チャート | statsDataId | 出典 | e-Stat実在 | verdict`
 - verdict は「採用推奨 / 要判断 / 不採用」。Reason 列は 8 words 以内
-- prose / section header / 前置き文は禁止。詳細は 05_指標バックログ.md に書き chat には出さない
+- prose / section header / 前置き文は禁止。詳細は 03_指標バックログ.md に書き chat には出さない
 - **返答末尾に self-audit 行を必ず付ける** (呼び元が tool_uses メタと突合して捏造検知):
   `self-audit: Read×N Grep×N WebFetch×N estat-researcher×N / GSC=<週 or 無> / 未検証候補=0`
   — ここで `未検証候補` が 0 でない、または全 tool が 0 の提案は**呼び元が破棄する**

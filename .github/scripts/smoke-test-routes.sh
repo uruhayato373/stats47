@@ -45,6 +45,22 @@ URLS+=( "$(pick '/areas/[0-9]+/cities/' || echo "${BASE_URL}/areas/14000/cities/
 URLS+=( "$(pick '/blog/[a-z]' || echo "${BASE_URL}/blog/banana-consumption-quantity")" )
 URLS+=( "$(pick '/themes/[a-z]' || echo "${BASE_URL}/themes/aging-society")" )
 
+# G6 (2026-07-11): 直近 push (≒ merge された PR) で追加された ranking キーを smoke 対象に追加。
+# 新規公開キーは代表 1 件方式では検査されないため、deploy-workers.yml が DIFF_BASE
+# (= github.event.before) を渡したときだけ known-ranking-keys.ts の追加行から抽出する。
+# force-push / 初回 push で before が zero-SHA の場合は git cat-file guard で従来動作に degrade。
+KNOWN_KEYS_FILE="packages/ranking/src/config/known-ranking-keys.ts"
+if [ -n "${DIFF_BASE:-}" ] && git cat-file -e "${DIFF_BASE}^{commit}" 2>/dev/null; then
+  NEW_KEYS="$(git diff "${DIFF_BASE}..HEAD" -- "$KNOWN_KEYS_FILE" 2>/dev/null \
+    | grep -E '^\+[[:space:]]*"[a-z0-9-]+",?[[:space:]]*$' | sed -E 's/^\+[[:space:]]*"([a-z0-9-]+)".*$/\1/' | head -10)"
+  if [ -n "$NEW_KEYS" ]; then
+    echo "➕ diff 由来の新規 ranking キーを smoke 対象に追加: $(echo "$NEW_KEYS" | tr '\n' ' ')"
+    while IFS= read -r k; do
+      [ -n "$k" ] && URLS+=( "${BASE_URL}/ranking/${k}" )
+    done <<< "$NEW_KEYS"
+  fi
+fi
+
 echo "🔎 Route smoke test against ${BASE_URL}"
 echo ""
 for url in "${URLS[@]}"; do

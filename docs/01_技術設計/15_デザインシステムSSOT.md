@@ -128,7 +128,7 @@ stats47 の UI は、統計データを長時間読むための道具である�
 カードは「情報をまとめるための面」であり、装飾ではない。
 
 > **配置 tier**: どの層にコンポーネントを置くか（① プリミティブ=`@stats47/components` / ② 共有 composite=`@/components/{surface,charts,stat-charts,layout}` / ③ feature 固有）の判断は `.claude/rules/ui-components.md`「コンポーネント配置の 3 tier」が SSOT。
-> 2026-06-23 の UI 統一ロードマップ Phase 0-3 で主要な PageShell / PageHeader / rail / card ガバナンスは完了済み。残タスクは `docs/02_実装計画/04_機能バックログ.md` の `UI-CONSOLIDATION-RESIDUAL` で追う。
+> 2026-06-23 の UI 統一ロードマップ Phase 0-3 で主要な PageShell / PageHeader / rail / card ガバナンスは完了済み。残タスクは `docs/todo/02_機能バックログ.md` の `UI-CONSOLIDATION-RESIDUAL` で追う。
 
 ### 採用
 

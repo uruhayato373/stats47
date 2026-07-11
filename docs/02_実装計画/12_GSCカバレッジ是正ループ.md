@@ -91,7 +91,7 @@ actionable カテゴリ (404/soft404/5xx/crawled/discovered) の URL を本番�
 | 取り込み済 drilldown / 集計 / 推移 | `.claude/state/metrics/gsc/coverage-drilldown/<週>/` |
 | curated 再送信入力 (auto-resubmit が読む) | `…/coverage-drilldown/<週>/coverage-live-resubmit-urls.csv` |
 | agent 用詳細ログ | `.claude/skills/analytics/gsc-improvement/reference/improvement-log.md` `[COVERAGE-LOOP-01]` |
-| TODO 真実源 | `docs/02_実装計画/03_改善バックログ.md` `COVERAGE-LOOP-01` |
+| TODO 真実源 | `docs/todo/01_改善バックログ.md` `COVERAGE-LOOP-01` |
 
 ## 命名規約 (auto-resubmit との安全な統合)
 

@@ -1,6 +1,6 @@
 ---
 name: project_note_publish_flow_2026_06
-description: note.com 公開フロー確立+R2 ephemeral化完了(2026-06-19)。docs/31 完全削除、全記事 R2 SSOT。cloud Claude Code でコンテンツ編集可能
+description: note.com 公開フロー確立+R2 ephemeral化(2026-06-19)。※2026-07 現在 docs/31 は公務員シリーズ (koumuin-claude-code/estat) の git 管理 SSOT として現役 (680ファイル)。R2 ephemeral 運用は旧 vertical のみ
 metadata: 
   node_type: memory
   type: project
@@ -11,7 +11,9 @@ note.com 記事公開の現行像（2026-06-16 確立、2026-06-19 R2 ephemeral 
 
 **完全DBレス**: note に D1 `note_articles` テーブルは無い（廃止済）。
 
-**ストレージ設計 (2026-06-19 完成: docs/31 完全削除)**:
+**ストレージ設計 (2026-06-19 時点: docs/31 完全削除)**:
+
+> ⚠️ **2026-07-11 訂正**: docs/31 は「完全削除」ではない。公務員向けシリーズ (koumuin-claude-code / koumuin-estat、106 記事 + カバー画像) は **git 管理の SSOT として docs/31 に現役で存在**する (docs/INDEX.md「note 記事ソースの単一管理・公開しても移動しない」)。下記の R2 ephemeral 運用は旧 vertical (A-D シリーズ等) にのみ適用。
 - **全記事 (公開済み + ドラフト)** → R2 `note/<vertical>/<slug>/` が SSOT
   - 公開済み: `.claude/state/note-published-urls.json` (slug→url/r2_path/is_paid)
   - ドラフト: `.claude/state/note-draft-index.json` (slug→vertical/r2_path)

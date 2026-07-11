@@ -188,7 +188,7 @@ export function readGscCoverage(root) {
 // ─── TODO (改善バックログ md — 6 列 pipe テーブルが安定していることを実測確認済) ──
 export function parseBacklogMd(root) {
   return wrap(() => {
-    const md = fs.readFileSync(path.join(root, "docs/02_実装計画/03_改善バックログ.md"), "utf8");
+    const md = fs.readFileSync(path.join(root, "docs/todo/01_改善バックログ.md"), "utf8");
     const lines = md.split(/\r?\n/);
     let tier = null;
     const rows = [];
@@ -222,7 +222,7 @@ export function parseBacklogMd(root) {
 // ─── TODO (機能バックログ md — `### [ID] タイトル` + `- **tier/status/created**:` 箇条書き) ──
 export function parseFeatureBacklogMd(root) {
   return wrap(() => {
-    const md = fs.readFileSync(path.join(root, "docs/02_実装計画/04_機能バックログ.md"), "utf8");
+    const md = fs.readFileSync(path.join(root, "docs/todo/02_機能バックログ.md"), "utf8");
     const lines = md.split(/\r?\n/);
     let section = null;
     let cur = null;

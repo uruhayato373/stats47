@@ -40,4 +40,3 @@ C-1（家計調査）は完了済み（[note記事URL]参照）。
 ## 関連
 - 既存完了: C-1 家計調査ガイド
 - 関連 D 系: [D-education-cost-gap-53x.md](./D-education-cost-gap-53x.md)
-- [マスターINDEX](../../00_プロジェクト管理/05_コンテンツ企画マスター.md)

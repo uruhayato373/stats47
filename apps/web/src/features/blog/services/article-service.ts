@@ -11,7 +11,18 @@ function resolveR2Key(slug: string, format: string): string {
   return `app/blog/${slug}/${filename}`;
 }
 
+type R2StringFetcher = (key: string) => Promise<string | null>;
+
+// dynamic import はこの default fetcher 内に温存する (Workers bundle 挙動を変えない)。
+// テストは constructor に stub を注入して R2 経路を決定的にする。
+async function defaultFetchR2String(key: string): Promise<string | null> {
+  const { fetchFromR2AsString } = await import("@stats47/r2-storage/server");
+  return fetchFromR2AsString(key);
+}
+
 export class ArticleService {
+  constructor(private readonly fetchR2String: R2StringFetcher = defaultFetchR2String) {}
+
   protected get isDev(): boolean {
     return process.env.NODE_ENV === "development";
   }
@@ -57,9 +68,8 @@ export class ArticleService {
 
   private async readFromR2(slug: string, format: string): Promise<string> {
     try {
-      const { fetchFromR2AsString } = await import("@stats47/r2-storage/server");
       const key = resolveR2Key(slug, format);
-      const content = await fetchFromR2AsString(key);
+      const content = await this.fetchR2String(key);
       if (!content) {
         return "";
       }

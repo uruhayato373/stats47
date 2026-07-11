@@ -19,10 +19,12 @@ Obsidian で振り返り・思考整理する習慣を支えるため、ファ�
 | 週次計画・週次レビュー | `docs/03_週次運用/週次{計画,レビュー}/YYYY-Www.md` |
 | 週次メトリクス自動生成 | `docs/03_週次運用/メトリクス/YYYY-Www.md` |
 | 批判的レビュー・事前検死・SEO 監査・SNS 週報・パフォーマンスレポート・コスト月報 | `docs/04_レビュー/{YYYY-MM-DD,YYYY-Www,YYYY-MM}-<topic-slug>.md`（フラット。日付先頭・slug に種別を含める例 `-monetization` / `-pre-mortem-<x>` / `-sns-weekly` / `-performance-report` / `-cloudflare-cost`。種別絞り込みは frontmatter `type:`） |
-| 改善施策の一覧・TODO (gsc / ga4 / adsense / psi / affiliate / cloudflare-cost 等) | `docs/02_実装計画/03_改善バックログ.md` |
+| 改善施策の一覧・TODO (gsc / ga4 / adsense / psi / affiliate / cloudflare-cost 等) | `docs/todo/01_改善バックログ.md` |
+| 未分類の思いつき TODO (受信箱) | `docs/todo/inbox.md` (triage で各バックログへ → `docs/todo/README.md`) |
+| セッション引き継ぎ (ハンドオフ) | `docs/handoffs/YYYY-MM-DD-<topic>.md` (消化したら抽出→削除 → `docs/handoffs/README.md`) |
 | YouTube 実験・回復 | `docs/15_実験ログ/youtube/EXP-NNN.md` / `recovery-YYYY-MM-DD.md` |
 | ブログ / note コンテンツ backlog | `docs/30_note記事企画/backlog/` |
-| 機能 / 自動化 backlog (未着手) | `docs/02_実装計画/04_機能バックログ.md`（指標拡充候補は `docs/02_実装計画/05_指標バックログ.md`） |
+| 機能 / 自動化 backlog (未着手) | `docs/todo/02_機能バックログ.md`（指標拡充候補は `docs/todo/03_指標バックログ.md`） |
 
 ### GitHub Issues に置くもの
 
@@ -53,10 +55,10 @@ improvement 系スキル (gsc / ga4 / adsense / affiliate / cloudflare-cost / ps
 
 | 場所 | 内容 |
 |---|---|
-| `docs/02_実装計画/03_改善バックログ.md` | 全施策の一覧 (簡易表)。status (pending / effect/full / effect/partial / effect/none / effect/adverse) + Tier + 期日を管理。**TODO 真実源** |
+| `docs/todo/01_改善バックログ.md` | 全施策の一覧 (簡易表)。status (pending / effect/full / effect/partial / effect/none / effect/adverse) + Tier + 期日を管理。**TODO 真実源** |
 | `.claude/skills/analytics/<metric>-improvement/reference/improvement-log.md` | agent 用詳細ログ。検証コマンド・仮説・期日・URL inspection 結果など、agent が深掘り参照する詳細 |
 
-人間は `docs/02_実装計画/03_改善バックログ.md` を読み、agent (*-improvement / weekly-review) は両方を読む。
+人間は `docs/todo/01_改善バックログ.md` を読み、agent (*-improvement / weekly-review) は両方を読む。
 
 ## frontmatter 規約
 
@@ -79,7 +81,7 @@ tags: []
 
 PR で機能改修を行う場合、関連する docs/ ファイル (改善ログ等) を同 PR で更新する規約:
 
-- PR 本文に「対応: `docs/02_実装計画/03_改善バックログ.md#T1-PSI-LCP-02`」のような相対リンクを貼る
+- PR 本文に「対応: `docs/todo/01_改善バックログ.md#T1-PSI-LCP-02`」のような相対リンクを貼る
 - improvement-log の section の `deployed_at` / `verification_command` を PR 内で更新
 - Issue ベースの `Closes #N` フローは `enhancement` ラベルの Issue でのみ使用
 
@@ -88,5 +90,5 @@ PR で機能改修を行う場合、関連する docs/ ファイル (改善ロ�
 - 2026-04: `docs/90_課題管理/` 廃止 → GitHub Issues (`enhancement` ラベル)
 - 2026-04-21: `docs/03_レビュー/` 廃止 → GitHub Issues (`critical-review` 等ラベル)
 - 2026-05-16: GitHub Issues 集約 → `docs/03_週次運用/` `docs/04_レビュー/` `docs/50_Issues/` に移行。`weekly-plan` / `weekly-review` / `critical-review` / `pre-mortem` / `*-improvement` / `cost-snapshot` / `tier-*` / `effect/*` / `metric/*` / `content/*` 等のラベルを廃止 ([Phase A-E 詳細](../../plans/issu-close-cryptic-rabin.md))
-- 2026-06-06: `docs/05_改善ログ/` 廃止 → `docs/02_実装計画/03_改善バックログ.md` に統合 (1 層構造化)
-- 2026-06-07: `docs/50_Issues/` 廃止 → `docs/02_実装計画/04_機能バックログ.md`（機能+自動化）/ `05_指標バックログ.md`（指標拡充）に統合。ui-improvements は対応済みで削除
+- 2026-06-06: `docs/05_改善ログ/` 廃止 → `docs/todo/01_改善バックログ.md` に統合 (1 層構造化)
+- 2026-06-07: `docs/50_Issues/` 廃止 → `docs/todo/02_機能バックログ.md`（機能+自動化）/ `03_指標バックログ.md`（指標拡充）に統合。ui-improvements は対応済みで削除

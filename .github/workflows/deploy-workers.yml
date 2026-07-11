@@ -237,7 +237,11 @@ jobs:
       # 「〜が見つかりません」) を検知する。warm-cache は status しか見ないためすり抜ける。
       # 2026-06-22: ranking/areas/cities 全件 notFound 固着がこのゲート不在で本番に出た。
       # 失敗時はワークフローを赤にして即座に気付けるようにする (continue-on-error にしない)。
+      # DIFF_BASE (直前 main HEAD) を渡すと、この push で追加された ranking キーも smoke 対象に
+      # 加わる (G6・新規公開キーの初回 notFound 検知。squash merge なら before..HEAD = PR diff)
       - name: 🔎 Smoke test (Production routes)
+        env:
+          DIFF_BASE: ${{ github.event.before }}
         run: |
           sleep 5
           bash .github/scripts/smoke-test-routes.sh https://stats47.jp

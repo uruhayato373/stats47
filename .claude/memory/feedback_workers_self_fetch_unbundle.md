@@ -26,4 +26,4 @@ OpenNext on Cloudflare Workers で、サーバーバンドルに焼き込まれ�
 - **検証は型チェックだけでは不十分**。この種の runtime 変更は必ずデプロイ後にスモーク
   (`curl` で実コンテンツを確認) する。日本語クエリは URL エンコードしないと 400 になる点も注意。
 - search-index/provenance(648KB) の Worker 同梱解除 (audit T2-2) は未完。proper には上記
-  ASSETS binding か R2 移行が要る。関連: docs/04_レビュー/2026-06-13-code-audit.md
+  ASSETS binding か R2 移行が要る。関連: docs/04_レビュー/2026-06-13-code-audit.md (削除済・git 履歴参照)

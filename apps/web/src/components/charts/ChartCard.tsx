@@ -1,24 +1,42 @@
-export { ChartCard, StatsChartCard } from "./StatsChartCard";
-export type { StatsChartCardProps } from "./StatsChartCard";
-export { ChartPanel } from "./ChartPanel";
-export type { ChartPanelProps } from "./ChartPanel";
-export { ChartFooter } from "./ChartFooter";
-export type { ChartFooterLink, ChartFooterProps } from "./ChartFooter";
-export { ChartLegend } from "./ChartLegend";
-export type { ChartLegendItem } from "./ChartLegend";
-export {
-  CHART_COLORS,
-  CHART_MUTED_COLOR,
-  FINANCE_CHART_COLORS,
-  FLOW_CHART_COLORS,
-  getChartColor,
-  getChartColors,
-} from "./ChartPalette";
-export { KeyMetricsTableCard } from "./KeyMetricsTableCard";
-export type { KeyMetricsTableCardProps, KeyMetricsTableRow } from "./KeyMetricsTableCard";
-export {
-  ChartEmptyState,
-  ChartErrorState,
-  ChartLoading,
-  ChartLoadingCard,
-} from "./ChartState";
+"use client";
+
+import { type ReactNode } from "react";
+
+import { cn } from "@stats47/components";
+
+import { SurfaceCard } from "@/components/surface";
+
+interface ChartCardProps {
+  label: string;
+  value: string;
+  chart: ReactNode;
+  footer?: ReactNode;
+  className?: string;
+}
+
+export function ChartCard({
+  label,
+  value,
+  chart,
+  footer,
+  className,
+}: ChartCardProps) {
+  return (
+    <SurfaceCard className={cn("p-0", className)}>
+      <div className="p-3 pb-1">
+        <div className="flex items-baseline justify-between gap-2">
+          <span className="text-sm font-medium text-muted-foreground">{label}</span>
+          <span className="text-xl font-bold text-foreground">{value}</span>
+        </div>
+      </div>
+      <div className="p-3 pt-1">
+        {chart}
+        {footer && (
+          <div className="mt-0.5 flex items-center justify-end gap-1 text-[10px] text-muted-foreground">
+            {footer}
+          </div>
+        )}
+      </div>
+    </SurfaceCard>
+  );
+}

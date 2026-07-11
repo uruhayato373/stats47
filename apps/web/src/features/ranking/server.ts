@@ -5,8 +5,6 @@ import { err, type Result } from "@stats47/types";
 
 import type { RankingItem } from "@stats47/ranking";
 
-export { cachedFindRankingItem } from "./lib/cached-ranking-item";
-
 /**
  * おすすめランキングを取得する
  *
@@ -20,20 +18,15 @@ export async function getFeaturedRankings(limit: number = 20): Promise<Result<Ra
   }
 }
 
-// サーバーコンポーネントの再エクスポート
+// サーバーコンポーネントの再エクスポート (app/ から使われるものだけ個別に。
+// RankingKeyPage の他 section は RankingPageClientShell が相対 import で直接使う)
 export { FeaturedRankings } from "./components/FeaturedRankings";
-export { CorrelationSectionContainer } from "./components/CorrelationSection";
-export { RankingItemsSidebar } from "./components/RankingSidebar";
-export { RelatedRankingsGrid } from "./components/RelatedRankingsGrid/RelatedRankingsGrid";
-export { RankingPageCardsContainer } from "./components/RankingPageCards";
-export { RelatedArticlesCard } from "./components/RankingSidebar/RelatedArticlesCard";
-export * from "./components/RankingKeyPage/server";
-
-// Server components (sidebar cards)
-export { PortStatisticsMapCard } from "./components/RankingSidebar/PortStatisticsMapCard";
+export { RankingPageBreadcrumbs } from "./components/RankingKeyPage/RankingPageBreadcrumbs";
+export { RankingPageClientShell } from "./components/RankingKeyPage/RankingPageClientShell";
+export { RankingPageHeadAssets } from "./components/RankingKeyPage/RankingPageHeadAssets";
 
 // Cached category items reader (R2) — server-only を server entry に閉じ込め、app/ から index 経由でなく server から参照させる
 export { readRankingItemsByCategory } from "./lib/cached-category-items";
 
 export { loadRankingPageModel } from "./services/load-ranking-page-model";
-export { getRankingPageMetadata, getRankingStaticParams } from "./services/ranking-page-route";
+export { getRankingPageMetadata } from "./services/ranking-page-route";

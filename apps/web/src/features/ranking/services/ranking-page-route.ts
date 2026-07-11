@@ -1,6 +1,5 @@
 import "server-only";
 
-import { readActiveRankingKeysFromR2 } from "@stats47/ranking/server";
 import { isOk } from "@stats47/types";
 
 import { logger } from "@/lib/logger";
@@ -10,17 +9,10 @@ import { generateRankingPageMetaData } from "../utils";
 
 const AREA_TYPE = "prefecture" as const;
 
-export async function getRankingStaticParams() {
-  try {
-    const result = await readActiveRankingKeysFromR2(AREA_TYPE);
-    if (!isOk(result)) return [];
-
-    return result.data.map(({ rankingKey }) => ({ rankingKey }));
-  } catch {
-    // CI ビルド時など R2 が読めない場合は事前生成をスキップし、ISR で再生成
-    return [];
-  }
-}
+// NOTE: getRankingStaticParams は 2026-07-11 (DR-AUDIT-07) に削除した。
+// R2 依存の動的 route に generateStaticParams を付けると build 時 R2 不可で
+// notFound prerender が永久固着する (.claude/rules/nextjs-ssg-preservation.md)。
+// ranking は ƒ オンデマンド ISR (revalidate のみ) が正。
 
 export async function getRankingPageMetadata(rankingKey: string) {
   try {

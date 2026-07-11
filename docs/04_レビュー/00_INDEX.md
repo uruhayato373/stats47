@@ -1,12 +1,16 @@
 ---
 type: index
-updated: 2026-06-13
+updated: 2026-07-11
 ---
 
 # 04_レビュー — レビュー・監査・週報
 
 批判的レビュー / 事前検死 / コード監査 / パフォーマンス / 収益化分析 / SEO 監査 / SNS 週報 / コスト月報 を置く。
-人間が振り返り・思考整理に使う文書。**サブディレクトリは廃止し、フラット構成**にした (2026-06-13)。
+人間が振り返り・思考整理に使う文書。**サブディレクトリは廃止し、フラット構成** (2026-06-13)。
+
+> **保持ポリシー (2026-07-11)**: レビューは書きっぱなしで溜めない。未対応の提言・TODO は `docs/todo/` に抽出し、
+> 抽出済みで被参照のないレビューは git rm する (復元は git 履歴)。残すのは (a) コード/バックログ/現役 handoff が
+> 参照する正典、(b) 一次分析として振り返り価値が高いもの。セッション引き継ぎは `docs/handoffs/` へ (ここには置かない)。
 
 ## 命名規則 (フラット)
 
@@ -19,23 +23,27 @@ docs/04_レビュー/<YYYY-Www>-<topic-slug>.md        (週次。例: 2026-W22-s
 - `<topic-slug>` でカテゴリ/主題がわかるようにする (例: `-monetization` / `-code-audit` / `-pre-mortem-<x>` / `-sns-weekly` / `-blog-quality-<x>` / `-performance-report` / `-cloudflare-cost`)。
 - 機械的な絞り込みは frontmatter の `type:` (critical-review / performance-report / pre-mortem / sns-weekly-report / blog-winning-patterns 等) で行う (Obsidian Bases / Dataview)。
 
-## 現在の文書 (カテゴリ別)
+## 現在の文書 (残す理由つき)
 
-### 批判的レビュー (`type: critical-review`)
-- [2026-06-13-monetization-career.md](2026-06-13-monetization-career.md) — 収益化戦略分析。転職アフィリエイト特化・ユニットエコノミクス
-- [2026-06-01-codebase-optimization.md](2026-06-01-codebase-optimization.md) — スケール前のコード負債棚卸し (重複/SSOT散逸/DBレス取り残し)。deferred リファクタの生きた backlog
+| ファイル | 内容 | 残す理由 |
+|---|---|---|
+| [2026-07-07-stp-analysis.md](2026-07-07-stp-analysis.md) | STP ゼロベース分析 (S1 雑学 / S2 生活意思決定) | gallery `/dashboard` (dashboard-data.mjs) が STP 戦略として読む正典 |
+| [2026-07-03-claude-code-setup-audit.md](2026-07-03-claude-code-setup-audit.md) | Claude Code 環境監査。§6 モデル配分ポリシー | `build-remediation-queue.mjs` / `build-ai-content-queue.mjs` が §6 を正典参照 |
+| [2026-06-13-monetization-career.md](2026-06-13-monetization-career.md) | 転職アフィリエイト戦略 (医療クラスタ・§A 提携リスト) | 現役 handoff `handoffs/2026-06-13-monetization-affiliate.md` が §A を参照。handoff 消化時に一緒に削除 |
+| [2026-06-08-blog-winning-patterns.md](2026-06-08-blog-winning-patterns.md) | GSC 実測 × 構造特徴の勝ち要因分析 (順位交絡統制つき) | 天井ループの一次分析。定性裏取りの参照元 |
 
-### パフォーマンス / コード監査 (`type: performance-report`)
-- [2026-06-13-code-audit.md](2026-06-13-code-audit.md) — 全コード監査 (PSI悪化要因→是正)。実施状況つき。**TODO 真実源は `docs/02_実装計画/03_改善バックログ.md` PERF-***
+## 2026-07-11 に削除したもの (残タスクは抽出済み・復元は git 履歴)
 
-### ブログ品質 (`type: blog-quality / blog-winning-patterns`)
-- [2026-06-08-blog-winning-patterns.md](2026-06-08-blog-winning-patterns.md) — GSC 実測 × 構造特徴の勝ち要因分析 (順位交絡統制つき)
-
-### SNS 週報 (`type: sns-weekly-report`)
-- [2026-W22-sns-weekly.md](2026-W22-sns-weekly.md) — SNS 週次メトリクス (2026-05-25〜31)
+- codebase-optimization (06-01) / code-audit (06-13) — deferred は改善バックログ PERF-AUDIT-DEFER と機能バックログで追跡
+- theme-chart-management (06-19) — ThemeCatalog SSOT 化 (rules/theme-catalog-standards.md) で解決済
+- r2-storage-audit (06-21) — incremental-cache 17 世代 17.38GB 削除を実施済
+- operations-automation-review (07-03) — G2-G6 の機械化残を実装済 (G4-blog テスト + G6 smoke 動的キー。G2/G5 は実装済みだった)
+- sns-weekly W22〜W26 — 自動生成の派生物 (生データ正典は `.claude/skills/analytics/sns-metrics-improvement/snapshots/`、再生成可)
+- design-readiness-codebase-audit (07-11) — P1-P3 を全て実装して消化 (DR-AUDIT-01〜05/07/08。any 除去ポリシーは改善バックログ DESIGN-UNIFY-01 行へ転記)
 
 ## 関連
 
 - 記録先の判定: `.claude/rules/docs-vs-issues.md` / `.claude/rules/data-storage.md`
-- 改善施策の TODO 真実源: `docs/02_実装計画/03_改善バックログ.md`
+- 改善施策の TODO 真実源: `docs/todo/01_改善バックログ.md`
+- セッション引き継ぎ: `docs/handoffs/`
 - 週次計画・レビュー: `docs/03_週次運用/`
