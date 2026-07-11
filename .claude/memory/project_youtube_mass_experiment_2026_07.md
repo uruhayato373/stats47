@@ -10,11 +10,11 @@ metadata:
 2026-07-11 にオーナー判断で **stats47 チャンネル (`UCdRiwDSX1aUd0dSd7Cs08Kg`) を「BAN リスクの無い family アカウント」と位置づけ、月1上限を撤廃して量産実験する**方針に転換した。これは [[project_youtube_shadowban_recovery_2026_04]] の「2026-05-29 撤退・回復施策は再開しない」と [[project_sns_reorg_2026_07]] の「月1化」を上書きする最新方針。
 
 ## 決定内容
-- 投稿先は **stats47 本命チャンネル**そのもの (= diagnose 対象と同一)。ユーザーは「family アカウントなので BAN されても構わない」と明言。選択肢A「いきなり量産して様子見」を採用 (日次3本以上を投下)。
+- 投稿先は **stats47 本命チャンネル**そのもの (= diagnose 対象と同一)。ユーザーは「family アカウントなので BAN されても構わない」と明言。選択肢A「いきなり量産して様子見」を採用。**ペースは当初の日次3本+案から「1日1本」に確定** (2026-07-11 同日中にユーザー指示で変更)。
 - **BAN ≠ シャドウバン**の区別が論点だった。BAN (アカウント削除) リスクは無いが、シャドウバン (露出抑制) は起きうる → 量産しても伸びなければ失うのは「制作労力」。この費用対効果リスクをユーザーは許容した。
 
 ## ガード緩和 (可逆設計)
-- `.claude/scripts/lib/check-youtube-post-budget.cjs` を改修: `.claude/state/youtube-experiment.json` があれば `monthlyLimit` を上書き (既定は月1 = シャドウバン再発防止)。現在 `monthlyLimit: 200` (暴走ストッパー、完全無制限にはしない)。**このファイルを削除すれば既定の月1に戻る**。
+- `.claude/scripts/lib/check-youtube-post-budget.cjs` を改修: `.claude/state/youtube-experiment.json` があれば `monthlyLimit` / `dailyLimit` を上書き (既定は月1・日次制限なし = シャドウバン再発防止)。現在 **`dailyLimit: 1` / `monthlyLimit: 31` = 1日1本ペースを機械強制** (JST 日/月単位で posted+scheduled をカウント)。**このファイルを削除すれば既定の月1に戻る**。
 - **維持するガード**: タイトル重複・再投稿の全面禁止 (`check-youtube-duplicate.cjs` 5層) と pause (`youtube-pause.json`) は実験中も有効。重複はシャドウバン真因なので緩めない。
 - `sns-content-standards.md` §1 に「YouTube 量産実験モード」の例外注記を追記済。
 

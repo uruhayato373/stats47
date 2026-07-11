@@ -2,12 +2,14 @@
 /**
  * YouTube 投稿ガード。
  *
- * 2 つの check を exit 1 で強制する:
+ * 3 つの check を exit 1 で強制する:
  *   1. Pause check — `.claude/state/youtube-pause.json` の `until` が未来なら投稿停止中
- *   2. Monthly budget — 今月（JST）の platform='youtube' で posted + scheduled 合計 >= 1 なら停止
+ *   2. Monthly budget — 今月（JST）の platform='youtube' で posted + scheduled 合計 >= 上限なら停止
+ *   3. Daily budget — 今日（JST）の合計 >= dailyLimit なら停止 (experiment.json に dailyLimit がある時のみ)
  *
- * 2026-07 の慎重再開方針で「月 1 本」に変更 (旧: 週 3 本)。シャドウバン真因 = 68 本/月 の量産の
- * 再発防止 (`.claude/rules/sns-content-standards.md` §1)。
+ * 既定は「月 1 本・日次制限なし」(2026-07 慎重再開方針。シャドウバン真因 = 68 本/月 の量産の再発防止、
+ * `.claude/rules/sns-content-standards.md` §1)。量産実験モード (`youtube-experiment.json`) 中は
+ * monthlyLimit / dailyLimit で上書き (2026-07-11〜: 1日1本ペース = dailyLimit:1 / monthlyLimit:31)。
  *
  * 呼び出し元:
  *   - .claude/scripts/youtube/upload.js main() の先頭
@@ -24,22 +26,27 @@ const PROJECT_ROOT = path.resolve(__dirname, "..", "..", "..");
 const PAUSE_FILE = path.join(PROJECT_ROOT, ".claude/state/youtube-pause.json");
 const EXPERIMENT_FILE = path.join(PROJECT_ROOT, ".claude/state/youtube-experiment.json");
 
-// 月次上限。既定は 1 本 (シャドウバン再発防止 — sns-content-standards.md §1)。
-// .claude/state/youtube-experiment.json があれば monthlyLimit を上書きする (量産実験モード)。
-// 例: BAN リスクの無い family アカウントでの量産実験。ファイルを削除すれば既定 (月1) に戻る。
-function resolveMonthlyLimit() {
-  if (!fs.existsSync(EXPERIMENT_FILE)) return 1;
+// 上限の解決。既定は 月1 本・日次制限なし (シャドウバン再発防止 — sns-content-standards.md §1)。
+// .claude/state/youtube-experiment.json があれば monthlyLimit / dailyLimit を上書きする (量産実験モード)。
+// 例: BAN リスクの無い family アカウントでの量産実験 (1日1本ペース = dailyLimit:1 / monthlyLimit:31)。
+// ファイルを削除すれば既定 (月1) に戻る。
+function resolveLimits() {
+  const DEFAULTS = { monthly: 1, daily: Infinity };
+  if (!fs.existsSync(EXPERIMENT_FILE)) return DEFAULTS;
   try {
     const exp = JSON.parse(fs.readFileSync(EXPERIMENT_FILE, "utf-8"));
     if (exp.until) {
       const until = new Date(exp.until);
-      if (!Number.isNaN(until.getTime()) && until.getTime() <= Date.now()) return 1; // 期限切れ → 既定
+      if (!Number.isNaN(until.getTime()) && until.getTime() <= Date.now()) return DEFAULTS; // 期限切れ → 既定
     }
-    if (Number.isFinite(exp.monthlyLimit) && exp.monthlyLimit > 0) return exp.monthlyLimit;
+    return {
+      monthly: Number.isFinite(exp.monthlyLimit) && exp.monthlyLimit > 0 ? exp.monthlyLimit : DEFAULTS.monthly,
+      daily: Number.isFinite(exp.dailyLimit) && exp.dailyLimit > 0 ? exp.dailyLimit : DEFAULTS.daily,
+    };
   } catch {
     /* 壊れていたら既定 (月1) に戻す */
   }
-  return 1;
+  return DEFAULTS;
 }
 
 function fail(msg) {
@@ -82,21 +89,44 @@ function monthRangeJST() {
   return { startUTC: toUTC(firstJST), endUTC: toUTC(nextMonthJST) };
 }
 
-function checkBudget() {
-  const MONTHLY_LIMIT = resolveMonthlyLimit();
-  const { startUTC, endUTC } = monthRangeJST();
-  // COALESCE(posted_at, scheduled_at) を JS で等価再現。
-  // posted_at が非 null ならそれ、null/未設定なら scheduled_at を採用。
-  // どちらも null/未設定なら範囲比較は成立せずカウント対象外。
-  const count = store.query((p) => {
+function dayRangeJST() {
+  const nowJST = new Date(Date.now() + 9 * 60 * 60 * 1000);
+  const dayStartJST = new Date(nowJST);
+  dayStartJST.setUTCHours(0, 0, 0, 0);
+  const nextDayJST = new Date(dayStartJST);
+  nextDayJST.setUTCDate(dayStartJST.getUTCDate() + 1);
+  const toUTC = (d) => new Date(d.getTime() - 9 * 60 * 60 * 1000).toISOString();
+  return { startUTC: toUTC(dayStartJST), endUTC: toUTC(nextDayJST) };
+}
+
+// COALESCE(posted_at, scheduled_at) を JS で等価再現。
+// posted_at が非 null ならそれ、null/未設定なら scheduled_at を採用。
+// どちらも null/未設定なら範囲比較は成立せずカウント対象外。
+function countYoutubePostsInRange(startUTC, endUTC) {
+  return store.query((p) => {
     if (p.platform !== "youtube") return false;
     if (p.status !== "posted" && p.status !== "scheduled") return false;
     const effective = p.posted_at ?? p.scheduled_at ?? null;
     if (effective == null) return false;
     return effective >= startUTC && effective < endUTC;
   }).length;
-  if (count >= MONTHLY_LIMIT) {
-    fail(`今月の YouTube 投稿数が上限 ${MONTHLY_LIMIT} 本に達しています (現在 ${count} 本、月 ${startUTC.slice(0, 7)})。月1運用の再開方針 — .claude/rules/sns-content-standards.md §1`);
+}
+
+function checkBudget() {
+  const limits = resolveLimits();
+
+  const month = monthRangeJST();
+  const monthCount = countYoutubePostsInRange(month.startUTC, month.endUTC);
+  if (monthCount >= limits.monthly) {
+    fail(`今月の YouTube 投稿数が上限 ${limits.monthly} 本に達しています (現在 ${monthCount} 本、月 ${month.startUTC.slice(0, 7)})。上限の正典 — .claude/rules/sns-content-standards.md §1 / .claude/state/youtube-experiment.json`);
+  }
+
+  if (Number.isFinite(limits.daily)) {
+    const day = dayRangeJST();
+    const dayCount = countYoutubePostsInRange(day.startUTC, day.endUTC);
+    if (dayCount >= limits.daily) {
+      fail(`今日 (JST) の YouTube 投稿数が上限 ${limits.daily} 本に達しています (現在 ${dayCount} 本)。1日1本ペースの量産実験 — .claude/state/youtube-experiment.json (dailyLimit)`);
+    }
   }
 }
 

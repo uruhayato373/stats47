@@ -53,7 +53,7 @@ tags: [youtube, sns, shadowban, experiment]
 ### できること / ブロッカー
 | 要素 | 状態 | ブロッカーか |
 |---|---|---|
-| 月次上限ガード | 実験モードで緩和済（monthlyLimit=200、今月 1 本） | ✅ 通る |
+| 投稿ペースガード | **1日1本を機械強制**（dailyLimit=1 / monthlyLimit=31。今日 1 本消化済なら guard が翌日 JST まで停止） | ✅ 1日1本ペースで通る |
 | 動画生成 | Remotion（`apps/remotion`）+ `bar-chart-race` skill あり。births BCR を 3.8 分で render 実証 | ✅ 実証済 |
 | 投稿スクリプト | `.claude/scripts/youtube/upload.js`（予約投稿 `--publish-at` 対応） | ✅ ある |
 | OAuth（ローカル） | `.env.local` に `GOOGLE_OAUTH_*` が **0/3**（値なし。secrets は複製不可） | ✅ CI 経路で不要に |
@@ -75,9 +75,10 @@ tags: [youtube, sns, shadowban, experiment]
 
 ## 3. 実装済み（2026-07-11 このセッションで整備）
 
-1. **月次上限ガードを可逆的に緩和** — `.claude/scripts/lib/check-youtube-post-budget.cjs` が
-   `.claude/state/youtube-experiment.json` の `monthlyLimit` を読んで上書き（既定は月 1）。
-   現在 `monthlyLimit: 200`（暴走ストッパー、完全無制限にはしない）。**ファイル削除で月 1 に復帰**。
+1. **投稿ペースガードを可逆的に緩和** — `.claude/scripts/lib/check-youtube-post-budget.cjs` が
+   `.claude/state/youtube-experiment.json` の `monthlyLimit` / `dailyLimit` を読んで上書き（既定は月 1・日次制限なし）。
+   現在 **`dailyLimit: 1` / `monthlyLimit: 31` = 「1日1本」ペースを JST 日/月単位で機械強制**
+   （当初の日次3本+案から 2026-07-11 ユーザー指示で 1日1本に確定）。**ファイル削除で月 1 に復帰**。
 2. **重複ガード・pause ガードは維持** — `check-youtube-duplicate.cjs`（5 層）と `youtube-pause.json` は実験中も有効。
 3. **ルールに例外を明記** — `sns-content-standards.md` §1 に「YouTube 量産実験モード」注記。
 4. **診断 workflow を新設** — `.github/workflows/youtube-shadowban-diagnose.yml`。CI シークレットで
@@ -102,7 +103,8 @@ tags: [youtube, sns, shadowban, experiment]
 - ~~OAuth ローカル再認証~~（CI 経路の確立で不要になった。ローカル投稿したい場合のみ §5.1）
 
 ### Phase 2: 判定 → 量産の可否
-- 初速が健全 → 週 1-2 本に増やす → 再測定 → さらに増やす（段階緩和）。
+- 初速が健全 → **1日1本ペースで量産継続**（dailyLimit=1 が機械強制。増枠したい場合は
+  `youtube-experiment.json` の `dailyLimit` をユーザー判断で変更）。
 - 初速が死んでいる → 量産しても埋もれるので、テーマ/フォーマット/投稿時間を変えて再テスト。
 
 ### Phase 3: 自動化（CI 投稿経路）
@@ -220,7 +222,7 @@ recent=投稿停止期の比較）。**投稿停止期には verdict は無効**
 ## 8. 関連ファイル
 
 - ガード: `.claude/scripts/lib/check-youtube-post-budget.cjs` / `check-youtube-duplicate.cjs`
-- 実験フラグ: `.claude/state/youtube-experiment.json`（削除で月 1 復帰）
+- 実験フラグ: `.claude/state/youtube-experiment.json`（dailyLimit=1 / monthlyLimit=31。削除で月 1 復帰）
 - 認証: `.claude/scripts/youtube/oauth-setup.js`
 - 投稿: `.claude/scripts/youtube/upload.js` / **CI 経路: `.github/workflows/youtube-upload.yml` +
   `.claude/state/youtube-upload-request.json`（リクエストファイル）**
