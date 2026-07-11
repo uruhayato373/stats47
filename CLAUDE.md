@@ -61,6 +61,8 @@
 | 週次計画進捗 | `docs/03_週次運用/週次計画/YYYY-Www.md` の TODO チェックボックスを Edit |
 | 週次振り返り | `docs/03_週次運用/週次レビュー/YYYY-Www.md` |
 | 批判的レビュー / 事前検死 | `docs/04_レビュー/YYYY-MM-DD-<topic-slug>.md` (フラット。slug に種別を含める例 `-monetization` / `-pre-mortem-<x>`、種別は frontmatter `type:` で絞り込み) |
+| **セッション引き継ぎ (ハンドオフ)** | `docs/handoffs/YYYY-MM-DD-<topic>.md` (次セッションが消化したら抽出→削除・貯めない → `docs/handoffs/README.md`) |
+| 未分類の思いつき TODO | `docs/todo/inbox.md` に 1 行 append (triage で各バックログへ → `docs/todo/README.md`) |
 | YouTube 実験ログ | `docs/15_実験ログ/youtube/EXP-NNN.md` |
 | コンテンツ backlog | `docs/30_note記事企画/backlog/` |
 | 未着手の機能・自動化バックログ | `docs/todo/02_機能バックログ.md`（指標拡充候補は `docs/todo/03_指標バックログ.md`） |

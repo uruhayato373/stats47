@@ -20,6 +20,8 @@ Obsidian で振り返り・思考整理する習慣を支えるため、ファ�
 | 週次メトリクス自動生成 | `docs/03_週次運用/メトリクス/YYYY-Www.md` |
 | 批判的レビュー・事前検死・SEO 監査・SNS 週報・パフォーマンスレポート・コスト月報 | `docs/04_レビュー/{YYYY-MM-DD,YYYY-Www,YYYY-MM}-<topic-slug>.md`（フラット。日付先頭・slug に種別を含める例 `-monetization` / `-pre-mortem-<x>` / `-sns-weekly` / `-performance-report` / `-cloudflare-cost`。種別絞り込みは frontmatter `type:`） |
 | 改善施策の一覧・TODO (gsc / ga4 / adsense / psi / affiliate / cloudflare-cost 等) | `docs/todo/01_改善バックログ.md` |
+| 未分類の思いつき TODO (受信箱) | `docs/todo/inbox.md` (triage で各バックログへ → `docs/todo/README.md`) |
+| セッション引き継ぎ (ハンドオフ) | `docs/handoffs/YYYY-MM-DD-<topic>.md` (消化したら抽出→削除 → `docs/handoffs/README.md`) |
 | YouTube 実験・回復 | `docs/15_実験ログ/youtube/EXP-NNN.md` / `recovery-YYYY-MM-DD.md` |
 | ブログ / note コンテンツ backlog | `docs/30_note記事企画/backlog/` |
 | 機能 / 自動化 backlog (未着手) | `docs/todo/02_機能バックログ.md`（指標拡充候補は `docs/todo/03_指標バックログ.md`） |

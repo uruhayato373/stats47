@@ -1,5 +1,6 @@
 # Memory Index
 
+- [project_docs_reorg_todo_handoffs.md](project_docs_reorg_todo_handoffs.md) — docs/ 再編(2026-07-11・doboku-note式): TODO真実源は docs/todo/{inbox,01_改善,02_機能,03_指標バックログ}.md に固定(旧 02_実装計画/03-05)、セッション引き継ぎは docs/handoffs/YYYY-MM-DD-<topic>.md(消化したら抽出→削除・貯めない)。完了文書はアーカイブせず git rm(archive/ 禁止)。22_Instagram企画/コンテンツ企画マスター/W23以前の週次系は削除済
 - [project_kakei_expansion_pipeline_gotchas.md](project_kakei_expansion_pipeline_gotchas.md) — 家計調査拡充(2026-07-10)の公開パイプライン罠3つ: kakei @area=県庁所在市コード(NN003・福岡のみ40004)をNN000写像 / master exportはdev環境でローカルstaging listに縮み survey all.jsonが壊れる(NODE_ENV=production必須) / saveToR2はローカルstagingのみ=remote反映はdiff-push-r2
 
 - [project_sns_gallery_and_ig_cron_fix.md](project_sns_gallery_and_ig_cron_fix.md) — 統合メディアコンソール(`npm run gallery`→localhost:4747、旧sns:gallery alias、依存ゼロnode:http)。2026-07-07にSNS単機能→全メディア横断に拡張: /sns(投稿/予約/caption)・/assets(OGP/カード/note/動画・欠落チェック・再生成)・/svg(SVGカタログ)。server=.claude/scripts/gallery/、共有collector=lib/gallery-collectors.mjs+svg-classify.mjs(CI build-image-galleryと共用)。★IG自動投稿が約1ヶ月空振りcronバグ修正(schedule週ファイル固定→当日含む週を自動選択)。R2動画は投稿後30日で自動削除。正典sns-content-standards.md §5.5
@@ -45,7 +46,7 @@
 - [feedback_bypass_permissions.md](feedback_bypass_permissions.md) — Agent は bypassPermissions モード、確認なしで最後まで処理
 - [feedback_autonomous_execution.md](feedback_autonomous_execution.md) — スキル実行時は確認不要で自動処理。Sonnet でも実行可能な精度のスキル記述を維持
 - [feedback_note_publish_automation.md](feedback_note_publish_automation.md) — note.com 自動投稿は「全本文を 1 回 ClipboardEvent paste」が唯一の確定動作。type は markdown 変換しない。Profile 1 + browser-use cleanup 必須
-- [project_note_publish_flow_2026_06.md](project_note_publish_flow_2026_06.md) — note公開フロー確立+R2 ephemeral化完了(2026-06-19)。docs/31 完全削除。全74記事(公開37+ドラフト37)→R2 SSOT。編集: restore-from-r2.sh→push→CI削除。cloud Claude Code でコンテンツ編集可能。note.com 投稿はローカル browser-use のみ
+- [project_note_publish_flow_2026_06.md](project_note_publish_flow_2026_06.md) — note公開フロー確立+R2 ephemeral化完了(2026-06-19)。R2 ephemeral化は旧verticalのみ・docs/31 は公務員シリーズのgit SSOTとして現役(2026-07-11訂正)。編集: restore-from-r2.sh→push→CI削除。cloud Claude Code でコンテンツ編集可能。note.com 投稿はローカル browser-use のみ
 - [project_port_ranking_2023.md](project_port_ranking_2023.md) — 入港船舶総トン数ランキング分析（40県、1位神奈川・124倍格差）
 - [project_d1_time_travel.md](project_d1_time_travel.md) — ロールバックは D1 Time Travel（30日PITR）で賄う設計。R2 バックアップは sync フローから除外
 - [project_note_cover_overlap_validator.md](project_note_cover_overlap_validator.md) — note 記事 cover SVG の CJK テキスト重なり検証スクリプト（生成・編集後は必ず通す）

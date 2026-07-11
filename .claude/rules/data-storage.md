@@ -68,6 +68,8 @@ git TS 化し永続 D1 を全廃した。アプリが読む各データの真実
 | 週次メトリクスサマリ（自動生成） | `docs/03_週次運用/メトリクス/YYYY-Www.md` |
 | 批判的レビュー・事前検死・SEO 監査・SNS 週報・パフォーマンス・コスト月報 | `docs/04_レビュー/{YYYY-MM-DD,YYYY-Www,YYYY-MM}-<topic-slug>.md`（フラット。日付先頭・slug に種別を含める例 `-monetization` / `-pre-mortem-<x>` / `-sns-weekly` / `-cloudflare-cost`。種別絞り込みは frontmatter `type:`） |
 | 改善施策の一覧・TODO | `docs/todo/01_改善バックログ.md` |
+| 未分類の思いつき TODO (受信箱) | `docs/todo/inbox.md` |
+| セッション引き継ぎ (ハンドオフ) | `docs/handoffs/YYYY-MM-DD-<topic>.md`（消化したら抽出→削除） |
 | YouTube 実験 (1 実験 1 ファイル) | `docs/15_実験ログ/youtube/EXP-NNN.md` |
 | コンテンツ backlog | `docs/30_note記事企画/backlog/` |
 | 未着手の機能・自動化 backlog | `docs/todo/02_機能バックログ.md`（指標拡充候補は `docs/todo/03_指標バックログ.md`） |
