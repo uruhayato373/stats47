@@ -23,7 +23,7 @@ synthesize せず終わる。resume しても再度 spawn してループ。
 1. main が対象テーマの既載指標 (`packages/data-configs/src/theme-catalog/<theme>.ts`) と backlog の Gap 分析を読み、gap 候補概念を列挙。
 2. **estat-researcher を `subagent_type: estat-researcher` で並列 (3テーマ同時) 背景起動**。各に候補概念 + statsDataId ヒント + 既載指標 (重複回避) を渡す。Output は表 (候補|statsDataId|cdCat01|都道府県別可否|直近年|重複|verdict)。
 3. **受け入れ検証** (main が実施): 完了通知の `tool_uses>0` か / 提案に `⚠️未確認` が残っていないか / statsDataId が実在するか。失格なら破棄。
-4. 合格分を `docs/02_実装計画/05_指標バックログ.md` の `## [theme-catalog] <theme>` 節に追記 (main が書く。並列書込競合を避ける)。
+4. 合格分を `docs/todo/03_指標バックログ.md` の `## [theme-catalog] <theme>` 節に追記 (main が書く。並列書込競合を避ける)。
 5. 進捗は同ファイル冒頭の「進捗トラッカー」で 済/残 を管理。採用は theme-designer が catalog TS 化 → data-ingester 投入。
 
 正典: `.claude/agents/theme-researcher.md` の「★実証ゲート」/ `.claude/skills/theme/research-theme-catalog/SKILL.md` の

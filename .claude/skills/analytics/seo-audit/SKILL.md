@@ -406,7 +406,7 @@ focus: "all | technical | content | keywords | programmatic"
 cat .claude/state/gsc/LATEST.md                                  # 最新サマリ
 cat .claude/state/metrics/gsc/history.csv | tail -10             # 時系列（直近10件）
 # 未完了の SEO 施策（改善バックログ。旧 seo_actions の代替）
-grep -nE "status:\s*(pending|in.progress)" docs/02_実装計画/03_改善バックログ.md
+grep -nE "status:\s*(pending|in.progress)" docs/todo/01_改善バックログ.md
 ```
 
 ### レポート出力時
@@ -414,7 +414,7 @@ grep -nE "status:\s*(pending|in.progress)" docs/02_実装計画/03_改善バッ�
 - 改善バックログの未完了施策（status != done）をアクションリストに反映（重複登録しない）
 
 ### 新規施策の登録
-監査で新たに発見した改善施策は `docs/02_実装計画/03_改善バックログ.md` に追記する（`improvement-triage` が status を管理する唯一の writer）。frontmatter/簡易表の行として tier・期日・target_metric を記録する（規約: `.claude/rules/docs-vs-issues.md`）。
+監査で新たに発見した改善施策は `docs/todo/01_改善バックログ.md` に追記する（`improvement-triage` が status を管理する唯一の writer）。frontmatter/簡易表の行として tier・期日・target_metric を記録する（規約: `.claude/rules/docs-vs-issues.md`）。
 
 ## トーンと姿勢
 
@@ -456,4 +456,4 @@ grep -nE "status:\s*(pending|in.progress)" docs/02_実装計画/03_改善バッ�
 - `apps/web/tests/e2e/seo/` — SEO 関連 E2E テスト
 - `docs/04_レビュー/` — 過去の監査レポート (`*-seo-audit.md`)
 - `.claude/state/gsc/LATEST.md` / `.claude/state/metrics/gsc/history.csv` — SEO カバレッジ指標の数値推移（旧 D1 `seo_tracking` の代替）
-- `docs/02_実装計画/03_改善バックログ.md` — SEO 改善施策の管理（pending → in_progress → done。旧 D1 `seo_actions` の代替）
+- `docs/todo/01_改善バックログ.md` — SEO 改善施策の管理（pending → in_progress → done。旧 D1 `seo_actions` の代替）

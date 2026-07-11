@@ -71,7 +71,7 @@
   <div class="grid-wide" id="queueCards"></div>
 
   <h2 id="todo">TODO — 改善バックログ</h2>
-  <p class="lead">真実源: <code>docs/02_実装計画/03_改善バックログ.md</code> (このテーブルは読み取り専用ミラー。編集は md 側で)</p>
+  <p class="lead">真実源: <code>docs/todo/01_改善バックログ.md</code> (このテーブルは読み取り専用ミラー。編集は md 側で)</p>
   <div class="filters">
     <select id="fTier"><option value="">Tier: 全て</option></select>
     <select id="fStatus"><option value="">Status: 全て</option></select>
@@ -81,7 +81,7 @@
   <div style="overflow-x:auto"><table id="backlogTable"><thead><tr><th>Tier</th><th>ID</th><th>タイトル</th><th>Status</th><th>Due</th><th>Owner</th><th>Metric</th></tr></thead><tbody></tbody></table></div>
 
   <h2 id="feature">機能バックログ</h2>
-  <p class="lead">真実源: <code>docs/02_実装計画/04_機能バックログ.md</code> (読み取り専用ミラー。編集は md 側で)</p>
+  <p class="lead">真実源: <code>docs/todo/02_機能バックログ.md</code> (読み取り専用ミラー。編集は md 側で)</p>
   <div class="filters">
     <select id="ffSection"><option value="">区分: 全て</option></select>
     <span class="lead" id="ffCount"></span>
@@ -277,7 +277,7 @@ function initBacklog(d) {
   renderBacklog();
 }
 
-// ─── 機能バックログ (04_機能バックログ.md ミラー) ───
+// ─── 機能バックログ (02_機能バックログ.md ミラー) ───
 const SECTION_ORDER = { "今実装": 0, "将来・保留": 1, "DROP": 2 };
 let featureRows = [];
 function renderFeature() {

@@ -45,7 +45,7 @@ tags: [theme-dashboard, dbless, architecture, page-components]
 
 ## 次アクション（triage 時の判断材料）
 - まず **B（誤コメント修正）と未使用 `ChartDefinition` の扱い**は低コストで即着手可（混乱の元を除去）。
-- **A/C の本格整理**は設計判断（選択肢 1 vs 2）が必要 → 機能バックログ `04_機能バックログ.md` の section 化候補。`theme-component-builder` agent / `chart-component-standards.md` / doc 12 と整合させる。
+- **A/C の本格整理**は設計判断（選択肢 1 vs 2）が必要 → 機能バックログ `02_機能バックログ.md` の section 化候補。`theme-component-builder` agent / `chart-component-standards.md` / doc 12 と整合させる。
 - 規模が大きいため、月次の重点テーマ候補（ただし収益直結度は中。ブログ/ランキング品質より優先度は下）。
 
 ## 参照

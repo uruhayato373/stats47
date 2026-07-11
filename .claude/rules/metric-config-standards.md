@@ -79,7 +79,7 @@ npm run validate:config --workspace=@stats47/data-configs   # 構造規約 (cate
 ranking は異なる）。いずれにせよ **200 にはならない**ので、`GONE_RANKING_KEYS` から外すだけでなく下記を整合させる必要がある。
 
 公開には config(isActive) を起点に以下を整合再生成する（依存順・詳細手順は memory
-`project_ranking_publish_pipeline_gap` / `docs/02_実装計画/04_機能バックログ.md`「122 metric の本番公開」）:
+`project_ranking_publish_pipeline_gap` / `docs/todo/02_機能バックログ.md`「122 metric の本番公開」）:
 
 1. R2 `app/ranking-items/all.json` + `app/ranking/<key>/item.json` 再生成（`packages/ranking/src/scripts/generate-ranking-items.ts`。※ 2026-06 時点で sync-snapshots 未配線）
 2. `KNOWN_RANKING_KEYS` 再生成（`apps/web/scripts/generate-known-ranking-keys.ts`）

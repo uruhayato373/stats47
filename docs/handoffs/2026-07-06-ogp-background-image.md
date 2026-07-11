@@ -101,7 +101,7 @@ npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix app/blog
 
 ## 5. ローカル新セッションへの一言
 
-「`.claude/rules/ogp-image-standards.md` と本 handoff（`docs/04_レビュー/2026-07-06-session-handoff-ogp-background-image.md`）
+「`.claude/rules/ogp-image-standards.md` と本 handoff（`docs/handoffs/2026-07-06-ogp-background-image.md`）
 を読んで、`apps/web/public/ogp-backgrounds/stats47-base.png` を背景に OGP を刷新したい。まず blog 2 件で試作 →
 ギャラリー確認から」と伝えれば拾える。
 

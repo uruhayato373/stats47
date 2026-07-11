@@ -157,4 +157,4 @@ per-key に critic agent を起動しない。以下の 3 点でセッション�
 - 決定的ゲート: `.claude/scripts/ai-content/audit-ai-content.mjs`
 - 型定義: `packages/ai-content/src/types/snapshot.ts`（`AiContentSnapshotRow`）
 - 担当 agent: `.claude/agents/ranking-content-author.md` / 意味レビュー: `ranking-content-critic`
-- backlog: `docs/02_実装計画/04_機能バックログ.md` `[AICONTENT-DBLESS-REBUILD]`
+- backlog: `docs/todo/02_機能バックログ.md` `[AICONTENT-DBLESS-REBUILD]`

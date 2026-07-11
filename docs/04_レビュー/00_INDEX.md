@@ -26,7 +26,7 @@ docs/04_レビュー/<YYYY-Www>-<topic-slug>.md        (週次。例: 2026-W22-s
 - [2026-06-01-codebase-optimization.md](2026-06-01-codebase-optimization.md) — スケール前のコード負債棚卸し (重複/SSOT散逸/DBレス取り残し)。deferred リファクタの生きた backlog
 
 ### パフォーマンス / コード監査 (`type: performance-report`)
-- [2026-06-13-code-audit.md](2026-06-13-code-audit.md) — 全コード監査 (PSI悪化要因→是正)。実施状況つき。**TODO 真実源は `docs/02_実装計画/03_改善バックログ.md` PERF-***
+- [2026-06-13-code-audit.md](2026-06-13-code-audit.md) — 全コード監査 (PSI悪化要因→是正)。実施状況つき。**TODO 真実源は `docs/todo/01_改善バックログ.md` PERF-***
 
 ### ブログ品質 (`type: blog-quality / blog-winning-patterns`)
 - [2026-06-08-blog-winning-patterns.md](2026-06-08-blog-winning-patterns.md) — GSC 実測 × 構造特徴の勝ち要因分析 (順位交絡統制つき)
@@ -37,5 +37,5 @@ docs/04_レビュー/<YYYY-Www>-<topic-slug>.md        (週次。例: 2026-W22-s
 ## 関連
 
 - 記録先の判定: `.claude/rules/docs-vs-issues.md` / `.claude/rules/data-storage.md`
-- 改善施策の TODO 真実源: `docs/02_実装計画/03_改善バックログ.md`
+- 改善施策の TODO 真実源: `docs/todo/01_改善バックログ.md`
 - 週次計画・レビュー: `docs/03_週次運用/`

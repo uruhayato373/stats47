@@ -46,4 +46,4 @@ Production reflection should go through CI / snapshot workflows. Local R2 writes
 
 ## Backlog
 
-Implementation backlog lives in `docs/02_実装計画/04_機能バックログ.md`. Keep this README for architecture and local feature conventions only.
+Implementation backlog lives in `docs/todo/02_機能バックログ.md`. Keep this README for architecture and local feature conventions only.
