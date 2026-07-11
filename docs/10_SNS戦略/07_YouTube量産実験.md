@@ -55,7 +55,7 @@ tags: [youtube, sns, shadowban, experiment]
 |---|---|---|
 | 投稿ペースガード | **1日1本を機械強制**（dailyLimit=1 / monthlyLimit=31。今日 1 本消化済なら guard が翌日 JST まで停止） | ✅ 1日1本ペースで通る |
 | 動画生成 | Remotion（`apps/remotion`）+ `bar-chart-race` skill あり。births BCR を 3.8 分で render 実証 | ✅ 実証済 |
-| 投稿スクリプト | `.claude/scripts/youtube/upload.js`（予約投稿 `--publish-at` 対応） | ✅ ある |
+| 投稿スクリプト | `.claude/scripts/youtube/upload.js`（予約投稿 `--schedule` 対応 (※`--publish-at` は未知フラグとして黙殺されるので使わない)） | ✅ ある |
 | OAuth（ローカル） | `.env.local` に `GOOGLE_OAUTH_*` が **0/3**（値なし。secrets は複製不可） | ✅ CI 経路で不要に |
 | **CI 投稿経路** | **構築済・実証済** — `youtube-upload.yml`（リクエストファイル駆動、§5.3A）で第 1 号 `3TWSWlKDPbs` を public 投稿成功 | ✅ **解消（主経路）** |
 | OAuth（CI） | シークレット `GOOGLE_OAUTH_*` は**生存**（2026-07-11 診断+投稿成功で実証、refresh token 2026-05-10） | ✅ 流用中 |
@@ -168,12 +168,12 @@ tags: [youtube, sns, shadowban, experiment]
 node .claude/scripts/youtube/upload.js <video.mp4> \
   --title "…（50字以内・curiosity gap 1要素・過去と重複なし）" \
   --description "…" --tags "都道府県,ランキング,…" \
-  --privacy private --publish-at "2026-07-12T20:00:00+09:00" \
+  --privacy private --schedule "2026-07-12T20:00:00+09:00" \
   --thumbnail <thumb.png> --content-key "<uniq>" \
   --post-type long --domain ranking --template <composition> --metric-keys '["<key>"]'
 ```
 - 投稿時に `check-youtube-post-budget.cjs`（実験モードで通る）と `check-youtube-duplicate.cjs`（5 層）が走る。
-- 予約投稿は `--privacy private` + `--publish-at`（JST 明示）。**`--metric-keys` は JSON 配列文字列**。
+- 予約投稿は `--privacy private` + `--schedule`（JST 明示。ガードは公開予定日の枠で判定）。**`--metric-keys` は JSON 配列文字列**。
 
 ### 5.4 初速測定（診断 workflow・CI）
 `gh workflow run` は workflow が **main（default branch）に無いと 404**。当面は develop への push トリガーで発火:

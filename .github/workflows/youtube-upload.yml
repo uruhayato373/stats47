@@ -97,7 +97,8 @@ jobs:
             --privacy "$PRIVACY"
             --content-key "$CKEY"
             --post-type long --domain ranking --template bcr)
-          if [ -n "$PUBAT" ] && [ "$PUBAT" != "null" ]; then ARGS+=(--publish-at "$PUBAT"); fi
+          # upload.js の予約フラグは --schedule (--publish-at は未知フラグとして黙殺され即時公開になる)
+          if [ -n "$PUBAT" ] && [ "$PUBAT" != "null" ]; then ARGS+=(--schedule "$PUBAT"); fi
           if [ -f thumb.png ]; then ARGS+=(--thumbnail thumb.png); fi
           if [ -n "$MKEYS" ] && [ "$MKEYS" != "null" ]; then ARGS+=(--metric-keys "$MKEYS"); fi
           node .claude/scripts/youtube/upload.js "${ARGS[@]}"

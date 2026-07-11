@@ -78,9 +78,20 @@ function checkPause() {
   fail(`YouTube 投稿停止中 — until ${untilDate}${issue}${reason}. 停止解除は .claude/state/youtube-pause.json を削除`);
 }
 
-function monthRangeJST() {
-  const nowJST = new Date(Date.now() + 9 * 60 * 60 * 1000);
-  const firstJST = new Date(nowJST);
+// 予約投稿 (--schedule) は「公開予定日」の枠で判定する。今日 1 本消化済みでも明日分の予約仕込みは通す。
+// 引数が無い/不正なら現在時刻 (即時投稿) を基準にする。
+function budgetBaseMs() {
+  const i = process.argv.indexOf("--schedule");
+  if (i !== -1) {
+    const d = new Date(process.argv[i + 1] ?? "");
+    if (!Number.isNaN(d.getTime())) return d.getTime();
+  }
+  return Date.now();
+}
+
+function monthRangeJST(baseMs) {
+  const baseJST = new Date(baseMs + 9 * 60 * 60 * 1000);
+  const firstJST = new Date(baseJST);
   firstJST.setUTCDate(1);
   firstJST.setUTCHours(0, 0, 0, 0);
   const nextMonthJST = new Date(firstJST);
@@ -89,9 +100,9 @@ function monthRangeJST() {
   return { startUTC: toUTC(firstJST), endUTC: toUTC(nextMonthJST) };
 }
 
-function dayRangeJST() {
-  const nowJST = new Date(Date.now() + 9 * 60 * 60 * 1000);
-  const dayStartJST = new Date(nowJST);
+function dayRangeJST(baseMs) {
+  const baseJST = new Date(baseMs + 9 * 60 * 60 * 1000);
+  const dayStartJST = new Date(baseJST);
   dayStartJST.setUTCHours(0, 0, 0, 0);
   const nextDayJST = new Date(dayStartJST);
   nextDayJST.setUTCDate(dayStartJST.getUTCDate() + 1);
@@ -114,18 +125,20 @@ function countYoutubePostsInRange(startUTC, endUTC) {
 
 function checkBudget() {
   const limits = resolveLimits();
+  const baseMs = budgetBaseMs(); // 即時投稿=今 / --schedule 予約=公開予定日の枠で判定
 
-  const month = monthRangeJST();
+  const month = monthRangeJST(baseMs);
   const monthCount = countYoutubePostsInRange(month.startUTC, month.endUTC);
   if (monthCount >= limits.monthly) {
-    fail(`今月の YouTube 投稿数が上限 ${limits.monthly} 本に達しています (現在 ${monthCount} 本、月 ${month.startUTC.slice(0, 7)})。上限の正典 — .claude/rules/sns-content-standards.md §1 / .claude/state/youtube-experiment.json`);
+    fail(`対象月の YouTube 投稿数が上限 ${limits.monthly} 本に達しています (現在 ${monthCount} 本)。上限の正典 — .claude/rules/sns-content-standards.md §1 / .claude/state/youtube-experiment.json`);
   }
 
   if (Number.isFinite(limits.daily)) {
-    const day = dayRangeJST();
+    const day = dayRangeJST(baseMs);
     const dayCount = countYoutubePostsInRange(day.startUTC, day.endUTC);
     if (dayCount >= limits.daily) {
-      fail(`今日 (JST) の YouTube 投稿数が上限 ${limits.daily} 本に達しています (現在 ${dayCount} 本)。1日1本ペースの量産実験 — .claude/state/youtube-experiment.json (dailyLimit)`);
+      const jstDate = new Date(baseMs + 9 * 60 * 60 * 1000).toISOString().slice(0, 10);
+      fail(`対象日 (JST ${jstDate}) の YouTube 投稿数が上限 ${limits.daily} 本に達しています (現在 ${dayCount} 本)。1日1本ペースの量産実験 — .claude/state/youtube-experiment.json (dailyLimit)。別の日に --schedule するか翌日に投稿`);
     }
   }
 }
