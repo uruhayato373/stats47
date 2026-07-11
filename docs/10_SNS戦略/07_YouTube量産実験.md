@@ -110,7 +110,13 @@ tags: [youtube, sns, shadowban, experiment]
 ### Phase 3: 自動化（CI 投稿経路）
 - [x] upload workflow 新設（`youtube-upload.yml`。CI シークレットの OAuth 流用、認証手間ゼロ）
 - [x] 動画の受け渡し設計（ローカル render → **GitHub Release アセット** → CI fetch。R2 creds 不要）
-- [ ] 日次 N 本のスケジューリング（量産 go 判定後: リクエストファイルの一括仕込み or cron 化）
+- [x] **日次 N 本のスケジューリング（2026-07-11 実装・ユーザー指示で初速判定を待たず仕込み開始）**:
+  `.claude/state/youtube-upload-queue.json`（30 本の仕込みキュー: title/description/tags/publish_at/
+  video_url=Release アセット）+ `.github/workflows/youtube-upload-queue.yml`（cron 17:30 JST =
+  クォータ日次リセット直後。pending を 1 日最大 5 本 upload.js で予約アップロード
+  (privacy=private + `--schedule` publish_at)、YouTube 側が publish_at に自動公開。
+  クォータ videos.insert=1600units×5=8,000 < 10,000/日。失敗エントリは status=failed で隔離）。
+  publish_at は 2026-07-12〜08-10 の毎日 19:00 JST（1日1本ガードと整合）
 - **注意**: 日次量産は必ず `check-youtube-duplicate.cjs` を通し、テーマ/タイトルを毎回変える
   （2026-04 の再発防止）。
 
@@ -225,7 +231,10 @@ recent=投稿停止期の比較）。**投稿停止期には verdict は無効**
 - 実験フラグ: `.claude/state/youtube-experiment.json`（dailyLimit=1 / monthlyLimit=31。削除で月 1 復帰）
 - 認証: `.claude/scripts/youtube/oauth-setup.js`
 - 投稿: `.claude/scripts/youtube/upload.js` / **CI 経路: `.github/workflows/youtube-upload.yml` +
-  `.claude/state/youtube-upload-request.json`（リクエストファイル）**
+  `.claude/state/youtube-upload-request.json`（リクエストファイル・単発用）**
+- **予約仕込みキュー（1ヶ月分の量産予約・2026-07-11〜）**: `.claude/state/youtube-upload-queue.json` +
+  `.github/workflows/youtube-upload-queue.yml`（日次 cron 17:30 JST が pending を 5 本/日消化 →
+  private + publish_at 予約。動画は Release `yt-bcr-2026-07` のアセット）
 - 診断: `.claude/scripts/youtube/diagnose-shadowban.js` / `.github/workflows/youtube-shadowban-diagnose.yml`
 - 動画: `apps/remotion` / `bar-chart-race` skill
 - 投稿台帳（SSOT）: `.claude/state/sns/posts.json`
