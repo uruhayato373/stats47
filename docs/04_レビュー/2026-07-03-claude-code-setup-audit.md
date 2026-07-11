@@ -102,5 +102,5 @@ ls ~/Downloads | wc -l; tree -L 2 -d ~ | head # ホームの散らかり
 ## 関連
 
 - 実行プラン (ephemeral): `~/.claude/plans/humming-gliding-treehouse.md`
-- 姉妹 doc (サイト運営観点): `docs/04_レビュー/2026-07-03-operations-automation-review.md`
+- 姉妹 doc (サイト運営観点): `docs/04_レビュー/2026-07-03-operations-automation-review.md (削除済・git 履歴参照)`
 - critic 運用規律: `.claude/rules/critic-review-protocol.md`
