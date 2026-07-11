@@ -30,7 +30,6 @@
 import { notFound } from "next/navigation";
 
 import {
-  RankingPageBreadcrumbs,
   RankingPageClientShell,
   getRankingPageMetadata,
   RankingPageHeadAssets,
@@ -90,10 +89,6 @@ export default async function RankingKeyPage({
         breadcrumbStructuredData={model.breadcrumbStructuredData}
         faqStructuredData={model.faqStructuredData}
         initialTileUrls={model.initialTileUrls}
-      />
-      <RankingPageBreadcrumbs
-        rankingName={model.rankingName}
-        category={model.breadcrumbCategory}
       />
       <RankingPageClientShell
         rankingKey={rankingKey}

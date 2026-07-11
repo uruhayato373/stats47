@@ -203,6 +203,21 @@ stats47 は 2026-06 以降、フラット方針。
 - 円形の意味があるものだけ `rounded-full` を許容する。
 - shadow は `none` / `shadow-sm` / `shadow-md` / overlay 用 `shadow-xl` に限定する。
 
+### 例外: reading zone（記事系ページ・Soft Editorial・2026-07-11）
+
+記事系ページ（`/blog/[slug]` / `/ranking/[rankingKey]` / `/survey/[surveyKey]` / `/terms` / `/privacy`）は、
+doboku-note から移植した **Soft Editorial** デザインを採用する「reading zone」であり、上記フラット方針の**唯一の例外**。
+
+- `ArticleShell`（`@/components/layout`）が `.reading-zone` クラスを敷き、その内側だけ `--radius: 14px`・
+  薄グレー地（`--background: 220 20% 97%`）に scoped 上書きする（zone 内の shadcn 部品も自動で角丸化）。
+- 本文カードは `ArticleCard`（`@/components/surface`）= 角丸 14px + 2 層ソフトシャドウ（`.shadow-soft-content` /
+  `.shadow-soft-section`）+ モバイルフルブリード。
+- レイアウトは 1280px コンテナ + flex 密着（`PageShell` の 1700px grid で本文を 760px 制限すると生じる
+  「本文と右レールが離れる」問題を根治）。レールは「非 sticky 上段 + sticky TOC クラスタ末尾」の 2 段構成。
+- タイポグラフィ `.blog-news-article`（`globals.css`）= 本文 16px / 行間 1.8 / 字間 0.03em、H2 装飾なし・
+  **H3 アクセント左バー 4px**（バーは CSS 側で持つため `design-system:check` の `no-thick-accent-border` に非抵触）。
+- **home / category / themes / areas / 一覧ページはこの例外に含めない**（従来どおりフラット `PageShell`）。
+
 ## ページ種別ごとのルール
 
 ### 共通テンプレート（top 以外）
@@ -217,9 +232,9 @@ stats47 は 2026-06 以降、フラット方針。
 
 ### Blog
 
-- 一覧、タグ、詳細の外側レイアウトは `PageShell` を使う。
-- 記事本文の可読幅は `variant="reading"` または記事用 content wrapper で制御する。
-- 詳細ページは本文 + 右 rail の 2 列に揃える。TOC、広告、関連記事は `rightRail` に寄せ、lg 未満では TOC を記事冒頭に置く。
+- 一覧・タグの外側レイアウトは `PageShell` を使う（フラット）。
+- **記事詳細（`/blog/[slug]`）は `ArticleShell`（reading zone）**を使う（上記「例外: reading zone」）。
+  本文は `ArticleCard`、右レールは `rail`（関連・広告）+ `railSticky`（TOC）の 2 段構成。lg 未満ではレールを本文下へ積み下ろす。
 - 記事本文 typography は `.blog-article` または承認済み renderer に集約する。
 
 ### Ranking

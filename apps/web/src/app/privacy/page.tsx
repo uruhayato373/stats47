@@ -27,7 +27,7 @@ import { Button } from "@stats47/components/atoms/ui/button";
 import { Separator } from "@stats47/components/atoms/ui/separator";
 import { ExternalLink, Instagram, MapPin, Youtube } from "lucide-react";
 
-import { PageShell, PageHeader } from "@/components/layout";
+import { ArticleShell, PageHeader } from "@/components/layout";
 import { SurfaceCard } from "@/components/surface";
 
 interface LegalSectionProps {
@@ -96,7 +96,7 @@ export const metadata = {
  */
 export default function PrivacyPage() {
   return (
-    <PageShell>
+    <ArticleShell>
       <PageHeader
         title="プライバシーポリシー"
         description="統計で見る都道府県（以下「当サービス」）は、ユーザーの個人情報の保護を重要視しています。本プライバシーポリシーは、当サービスがどのように個人情報を収集、使用、保護するかについて説明します。"
@@ -392,6 +392,6 @@ export default function PrivacyPage() {
       <footer className="text-xs text-muted-foreground border-t border-border pt-6 mt-8">
         <p>最終更新日: {LAST_UPDATED_DATE.toLocaleDateString("ja-JP")}</p>
       </footer>
-    </PageShell>
+    </ArticleShell>
   );
 }

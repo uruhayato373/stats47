@@ -10,7 +10,7 @@ import {
     buildRankingDisplayInfo,
 } from "@stats47/ranking";
 
-import { PageShell } from "@/components/layout";
+import { ArticleShell } from "@/components/layout";
 import { ShareButtons } from "@/components/molecules/ShareButtons";
 import { SourceAttribution } from "@/components/molecules/SourceAttribution";
 
@@ -52,6 +52,8 @@ interface RankingKeyPageClientProps {
     categoryName?: string;
     /** グループメンバー（normalization_basis トグル用） */
     groupMembers?: RankingBasisMember[];
+    /** ArticleShell の breadcrumb slot に描画するパンくず */
+    breadcrumb?: React.ReactNode;
 }
 
 export function RankingKeyPageClient({
@@ -67,6 +69,7 @@ export function RankingKeyPageClient({
     surveyName,
     categoryName,
     groupMembers = [],
+    breadcrumb,
 }: RankingKeyPageClientProps) {
     const {
         activeRankingItem,
@@ -195,8 +198,8 @@ export function RankingKeyPageClient({
     // rightRailBreakpoint="lg" で lg+（1024px）から 360px レールを表示し、
     // ラッパーもブログと同じ非 sticky の <aside className="flex flex-col gap-3"> に揃える。
     // サイド AdSense はレール表示時（lg+）に合わせて hidden lg:block。
-    const rightRail = sections.sidebar ? (
-        <aside className="flex flex-col gap-3">
+    const rail = sections.sidebar ? (
+        <>
             {sections.sidebar}
             <div className="hidden lg:block">
                 <AdSenseAd
@@ -204,11 +207,11 @@ export function RankingKeyPageClient({
                     slotId={RANKING_PAGE_TABLE_SIDE.slotId}
                 />
             </div>
-        </aside>
+        </>
     ) : undefined;
 
     return (
-        <PageShell rightRail={rightRail} rightRailBreakpoint="lg">
+        <ArticleShell rail={rail} breadcrumb={breadcrumb}>
             {/* ヒーローカード（Option D）: タイトル + 単位ピル + メタ操作 + 暗色スタット */}
             <RankingHeroCard
                 categoryName={categoryName}
@@ -233,7 +236,8 @@ export function RankingKeyPageClient({
 
             <RankingBasisSwitcher rankingKey={rankingKey} members={groupMembers} />
 
-            <main className="mt-4 flex flex-col gap-4 min-w-0">
+            {/* ArticleShell が既に <main> を持つため、ここは div (main 二重を避ける) */}
+            <div className="mt-4 flex flex-col gap-4 min-w-0">
                 <RankingVisualizationSection
                     rankingItem={rankingItem}
                     activeRankingItem={activeRankingItem}
@@ -255,7 +259,7 @@ export function RankingKeyPageClient({
                     dataNote={dataNote}
                     sections={sections}
                 />
-            </main>
-        </PageShell>
+            </div>
+        </ArticleShell>
     );
 }

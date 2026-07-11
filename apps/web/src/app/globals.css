@@ -127,6 +127,27 @@
   color-scheme: dark;
 }
 
+/*
+ * ===== Reading Zone (Soft Editorial) =====
+ * 記事系ページ (blog 詳細 / ranking 詳細 / survey / terms / privacy) 専用の scoped トークン。
+ * サイト全体のフラット規約 (--radius: 0) の例外ゾーン。doboku-note の Soft Editorial を移植。
+ * 正典: docs/01_技術設計/15_デザインシステムSSOT.md「reading zone 例外」
+ * .dark と同じく @layer 外に置き、zone 内の shadcn 部品へ変数を波及させる。
+ */
+.reading-zone {
+  --background: 220 20% 97%; /* 薄グレー地 (#f6f7f9 相当)。白カードとの対比で紙面感を出す */
+  --radius: 14px; /* rounded-lg=14 / md=12 / sm=10 (tailwind.config の var 参照経由) */
+  --article-accent: var(--primary);
+  --article-accent-fill: 214 45% 96%; /* callout / 表ヘッダの淡色地 */
+}
+
+.dark .reading-zone {
+  --background: 220 8% 8%; /* #121316 相当 */
+  --card: 220 6% 12%; /* paper #1b1d21 相当 */
+  --border: 220 8% 19%; /* rule-soft #2b2e35 相当 */
+  --article-accent-fill: 214 30% 16%;
+}
+
 @layer base {
   * {
     @apply border-border;
@@ -162,59 +183,108 @@
   }
 }
 
-/* ===== Blog Article Typography ===== */
+/* ===== Blog Article Typography (Soft Editorial — doboku-note 移植) =====
+ * 本文 16px / 行間 1.8 / 字間 0.03em、見出しは palt 詰め + 0.02em。
+ * H2 装飾なし・H3 アクセント左バー 4px・H4 グレー左バー 2px (バーは CSS 側で持つ)。 */
 @layer components {
   .font-news-article,
   .blog-news-article {
     font-family: -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
       "Hiragino Sans", "Yu Gothic UI", "Yu Gothic", YuGothic, Meiryo, "Segoe UI",
       "Helvetica Neue", Arial, sans-serif;
-    font-feature-settings: "palt" 0;
-    letter-spacing: 0;
   }
 
   .blog-news-article {
-    font-size: 17px;
-    line-height: 2;
+    font-size: 16px;
+    line-height: 1.8;
+    letter-spacing: 0.03em;
+  }
+
+  /* 記事ページタイトル (h1): palt 詰め + ゆるいトラッキング (doboku H1 仕様) */
+  .article-title {
+    font-feature-settings: "palt" 1;
+    letter-spacing: 0.02em;
+    line-height: 1.4;
+  }
+
+  /* コード・数式はトラッキングをリセット (等幅・記号の整列を崩さない) */
+  .blog-news-article :not(pre) > code,
+  .blog-news-article pre,
+  .blog-news-article pre code {
+    letter-spacing: normal;
   }
 
   .blog-news-article p {
-    margin-top: 1.25rem;
-    margin-bottom: 1.25rem;
-    line-height: 2;
+    margin-top: 1.25em;
+    margin-bottom: 1.25em;
+    line-height: 1.8;
+  }
+
+  .blog-news-article p + p {
+    margin-top: 1.5em;
+  }
+
+  .blog-news-article h2,
+  .blog-news-article h3,
+  .blog-news-article h4 {
+    font-feature-settings: "palt" 1;
+    letter-spacing: 0.02em;
+    line-height: 1.4;
   }
 
   .blog-news-article h2 {
-    margin-top: 2.75rem;
-    margin-bottom: 1rem;
-    padding-bottom: 0.65rem;
-    border-bottom: 1px solid hsl(var(--border));
-    font-size: 1.45rem;
-    line-height: 1.55;
+    margin: 2.8em 0 0.8em;
+    font-size: 22px;
     font-weight: 700;
-    letter-spacing: 0;
   }
 
   .blog-news-article h3 {
-    margin-top: 2.25rem;
-    margin-bottom: 0.75rem;
-    font-size: 1.2rem;
-    line-height: 1.6;
+    margin: 3rem 0 1rem;
+    padding: 0.25rem 0 0.25rem 1rem;
+    border-left: 4px solid hsl(var(--article-accent, var(--primary)));
+    font-size: 19px;
     font-weight: 700;
-    letter-spacing: 0;
+  }
+
+  .blog-news-article h4 {
+    margin: 2rem 0 0.75rem;
+    padding-left: 0.75rem;
+    border-left: 2px solid hsl(var(--border));
+    font-size: 17px;
+    font-weight: 600;
+  }
+
+  /* 見出し直後の段落はほぼ密着させる */
+  .blog-news-article h2 + p,
+  .blog-news-article h3 + p,
+  .blog-news-article h4 + p {
+    margin-top: 0.3em;
   }
 
   .blog-news-article ul,
   .blog-news-article ol {
-    margin-top: 1.25rem;
-    margin-bottom: 1.25rem;
-    padding-left: 1.4rem;
+    margin: 1.4rem 0;
+    line-height: 1.7;
+  }
+
+  .blog-news-article ul {
+    padding-left: 1.8em;
+  }
+
+  .blog-news-article ol {
+    padding-left: 1.7em;
   }
 
   .blog-news-article li {
-    margin-top: 0.35rem;
-    margin-bottom: 0.35rem;
-    line-height: 1.9;
+    margin: 0.4rem 0;
+    line-height: 1.7;
+  }
+
+  .blog-news-article ul ul,
+  .blog-news-article ul ol,
+  .blog-news-article ol ul,
+  .blog-news-article ol ol {
+    margin: 0.2em 0;
   }
 
   .blog-news-article blockquote {
@@ -226,8 +296,48 @@
     font-style: normal;
   }
 
+  /* リンク: editorial アンダーライン (半透明 accent + offset 4px、hover で濃く) */
   .blog-news-article a {
-    text-underline-offset: 0.18em;
+    color: hsl(var(--article-accent, var(--primary)));
+    text-decoration: underline;
+    text-decoration-color: hsl(var(--article-accent, var(--primary)) / 0.38);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 4px;
+  }
+
+  .blog-news-article a:hover {
+    text-decoration-color: hsl(var(--article-accent, var(--primary)));
+  }
+
+  /* 表: soft border + 淡色 thead (ranking AI コンテンツ等で使用。blog 本文は表禁止) */
+  .blog-news-article table {
+    margin: 1.5rem 0;
+    width: 100%;
+    overflow: hidden;
+    border: 1px solid hsl(var(--border));
+    border-radius: 10px;
+    font-size: 0.875rem;
+  }
+
+  .blog-news-article thead {
+    background: hsl(var(--article-accent-fill, var(--muted)));
+  }
+
+  .blog-news-article thead th {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid hsl(var(--border));
+    color: hsl(var(--article-accent, var(--primary)));
+    font-weight: 600;
+    text-align: left;
+  }
+
+  .blog-news-article tbody td {
+    padding: 0.625rem 1rem;
+    border-bottom: 1px solid hsl(var(--border));
+  }
+
+  .blog-news-article tbody tr:last-child td {
+    border-bottom: none;
   }
 
   .blog-news-article .not-prose {
@@ -236,27 +346,13 @@
   }
 
   @media (max-width: 639px) {
-    .blog-news-article {
-      font-size: 16.5px;
-      line-height: 1.95;
-    }
-
-    .blog-news-article p {
-      margin-top: 1.15rem;
-      margin-bottom: 1.15rem;
-      line-height: 1.95;
-    }
-
     .blog-news-article h2 {
-      margin-top: 2.35rem;
-      font-size: 1.28rem;
-      line-height: 1.55;
+      font-size: 20px;
     }
 
     .blog-news-article h3 {
-      margin-top: 2rem;
-      font-size: 1.1rem;
-      line-height: 1.6;
+      margin-top: 2.25rem;
+      font-size: 18px;
     }
   }
 
@@ -352,6 +448,13 @@
   /* Soft Shadows */
   .shadow-soft-sm {
     box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  }
+  /* Soft Editorial 2 層シャドウ (reading zone のカード用。doboku-note 値) */
+  .shadow-soft-content {
+    box-shadow: 0 1px 2px rgb(15 23 42 / 0.04), 0 2px 8px rgb(15 23 42 / 0.05);
+  }
+  .shadow-soft-section {
+    box-shadow: 0 1px 3px rgb(15 23 42 / 0.04), 0 6px 20px rgb(15 23 42 / 0.06);
   }
   .shadow-soft-md {
     box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);

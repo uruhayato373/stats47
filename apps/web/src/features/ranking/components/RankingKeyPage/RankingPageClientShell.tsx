@@ -7,6 +7,7 @@ import {
   RankingPageCorrelationSection,
   RankingPageSupplementCardsSection,
 } from "./RankingPageAsyncSections";
+import { RankingPageBreadcrumbs } from "./RankingPageBreadcrumbs";
 import { RankingPageNativeAffiliateSection } from "./RankingPageNativeAffiliateSection";
 import { RankingPageRelatedRankingsSection } from "./RankingPageRelatedRankingsSection";
 import { RankingPageSidebarSection } from "./RankingPageSidebarSection";
@@ -35,6 +36,12 @@ export function RankingPageClientShell({
       surveyName={model.surveyName ?? undefined}
       categoryName={model.breadcrumbCategory?.name}
       groupMembers={model.groupMembers}
+      breadcrumb={
+        <RankingPageBreadcrumbs
+          rankingName={model.rankingName}
+          category={model.breadcrumbCategory}
+        />
+      }
       sections={{
         sidebar: (
           <RankingPageSidebarSection

@@ -56,6 +56,11 @@
 > サイト全体を**フラット化**（`--radius: 0`）。角丸は統一トークン任せで 0、円形（アイコン背景・ピル・アバター）のみ `rounded-full`。
 > 横幅・レール・余白は `PageShell`（`@/components/layout`）経由で統一（1700px / 右レール 360px）。
 > PC の常設左サイドバーは廃止し、ナビはヘッダー（カテゴリはメガメニュー）＋モバイルドロワーに集約。
+>
+> **例外: reading zone（記事系ページ・2026-07-11）**: 記事系ページ（blog 詳細 / ranking 詳細 / survey /
+> terms / privacy）は `ArticleShell` の `.reading-zone` 内でのみ Soft Editorial（`--radius: 14px`・薄グレー地・
+> 2 層ソフトシャドウ）を採用する。これは上記フラット方針の**唯一の例外**（`ArticleCard` / `.blog-news-article`）。
+> home/category/themes/areas/一覧はフラットのまま。正典: `docs/01_技術設計/15_デザインシステムSSOT.md`「例外: reading zone」。
 
 | 禁止 | 理由 | 代替 |
 |------|------|------|
