@@ -50,18 +50,16 @@ node .claude/scripts/instagram/generate-schedule.cjs \
 
 ## 生成後の手順
 
-1. 出力された schedule JSON を確認し、`post-from-schedule.cjs` のデフォルトパスを更新:
-   - `.claude/scripts/instagram/post-from-schedule.cjs` の `IG_SCHEDULE_FILE` デフォルト値
-   - `.github/workflows/post-instagram-scheduled.yml` のコメント
+1. 出力された schedule JSON を確認する。**スクリプト側の編集は不要**
+   (2026-07-07〜 `post-from-schedule.cjs` が当日エントリを含む週ファイルを自動選択する。
+   エントリに `time` "HH:MM" JST を持たせると 08:03/12:03/19:03 の該当 cron 枠で配信、
+   未指定は 08:00 扱い。同一日に複数エントリ可 — 各 cron 実行が未投稿の最早 1 件を消化)。
 
-2. 変更を commit → main merge:
+2. schedule JSON を commit → **main へ反映** (cron は main checkout で動くため):
    ```bash
-   git checkout -b feature/instagram-wXX-schedule
-   git add .claude/state/instagram-wXX-schedule.json \
-            .claude/scripts/instagram/post-from-schedule.cjs \
-            .github/workflows/post-instagram-scheduled.yml
+   git add .claude/state/instagram-wXX-schedule.json
    git commit -m "feat(instagram): WXX スケジュール追加"
-   gh pr create --base develop ...
+   # develop 経由で develop→main PR (通常デプロイフローに同乗)
    ```
 
 3. 不足アセットがある場合:

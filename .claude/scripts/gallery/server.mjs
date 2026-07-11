@@ -281,7 +281,7 @@ function buildInventory() {
         domain: e.domain,
         content_key: e.content_key,
         post_type: e.type,
-        scheduled_at: `${e.date} ${e.time || "09:00"}`,
+        scheduled_at: `${e.date} ${e.time || "08:00"}`,
         _source: `ig-schedule (${e._file})`,
         status: "scheduled-json-only",
       });
@@ -405,7 +405,7 @@ async function probeR2(domain, contentKey) {
 }
 
 // ─── IG 予約登録 (schedule JSON + posts.json 同時) ─────────────
-function scheduleIg({ date, time = "09:00", type, domain, content_key, caption }) {
+function scheduleIg({ date, time = "08:00", type, domain, content_key, caption }) {
   if (!date || !type || !domain || !content_key) throw new Error("date/type/domain/content_key は必須");
   if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) throw new Error("date は YYYY-MM-DD");
   if (date < jstDateStr()) throw new Error("過去日は指定不可");

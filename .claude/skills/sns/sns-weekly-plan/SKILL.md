@@ -45,8 +45,9 @@ W19-W25 で 6 週連続投稿ゼロになった (計画外タスク優先で SNS
 /generate-instagram-schedule    # 今週枠のスケジュール生成 (重複防止内蔵)
 # 角度量産が要れば /post-ig-6angles、静止画/リール素材は /render-sns-stills
 ```
-生成した schedule は GHA `post-instagram-scheduled.yml` が毎日 09:03 に自動投稿する
-(state: `.claude/state/instagram-*-schedule.json`)。
+生成した schedule は GHA `post-instagram-scheduled.yml` (cron 08:03/12:03/19:03 JST の 3 回) が
+自動投稿する。各実行はエントリの `time` (JST、未指定は 08:00 扱い) が現在時刻以前で未投稿の最早 1 件
+だけを投稿する (state: `.claude/state/instagram-*-schedule.json`、二重投稿は ig-posted-log で防止)。
 
 ### Step 4: X — 定型ストック量産 (週 14-21 本) + 引用RT
 

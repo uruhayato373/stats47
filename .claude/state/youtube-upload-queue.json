@@ -1,0 +1,422 @@
+[
+  {
+    "key": "japanese-population",
+    "video_url": "https://api.github.com/repos/uruhayato373/stats47/releases/assets/473480927",
+    "title": "日本人人口、東京一極はいつ加速した？｜47都道府県の推移 1980→2024",
+    "description": "47都道府県の日本人人口45年分をバーチャートレースで可視化。東京一極集中の進み方が一目でわかります。\n\n▼ 最新年の全47都道府県ランキングはこちら\nhttps://stats47.jp/ranking/japanese-population?utm_source=youtube&utm_medium=social&utm_campaign=japanese-population&utm_content=bcr\n\n出典: 政府統計 (e-Stat ほか) を stats47.jp が加工・可視化\n#都道府県 #ランキング #統計 #人口",
+    "tags": "都道府県,ランキング,統計,推移,バーチャートレース,人口",
+    "privacy": "private",
+    "publish_at": "2026-07-12T19:00:00+09:00",
+    "content_key": "bcr-japanese-population-1980-2024",
+    "metric_keys": [
+      "japanese-population"
+    ],
+    "status": "pending"
+  },
+  {
+    "key": "japanese-movers-in",
+    "video_url": "https://api.github.com/repos/uruhayato373/stats47/releases/assets/473480923",
+    "title": "転入者数は全国で4割減った｜47都道府県ランキングの推移 1977→2024",
+    "description": "都道府県別の転入者数48年分の推移。人の移動が細る中でも首都圏の吸引力は健在です。\n\n▼ 最新年の全47都道府県ランキングはこちら\nhttps://stats47.jp/ranking/japanese-movers-in?utm_source=youtube&utm_medium=social&utm_campaign=japanese-movers-in&utm_content=bcr\n\n出典: 政府統計 (e-Stat ほか) を stats47.jp が加工・可視化\n#都道府県 #ランキング #統計 #転入",
+    "tags": "都道府県,ランキング,統計,推移,バーチャートレース,転入,人口移動",
+    "privacy": "private",
+    "publish_at": "2026-07-13T19:00:00+09:00",
+    "content_key": "bcr-japanese-movers-in-1977-2024",
+    "metric_keys": [
+      "japanese-movers-in"
+    ],
+    "status": "pending"
+  },
+  {
+    "key": "japanese-movers-out",
+    "video_url": "https://api.github.com/repos/uruhayato373/stats47/releases/assets/473480926",
+    "title": "転出者数が最も多い県はどこ？｜47都道府県の推移 1975→2024",
+    "description": "都道府県別の転出者数50年分の推移。地方から都市への流れの変遷を追えます。\n\n▼ 最新年の全47都道府県ランキングはこちら\nhttps://stats47.jp/ranking/japanese-movers-out?utm_source=youtube&utm_medium=social&utm_campaign=japanese-movers-out&utm_content=bcr\n\n出典: 政府統計 (e-Stat ほか) を stats47.jp が加工・可視化\n#都道府県 #ランキング #統計 #転出",
+    "tags": "都道府県,ランキング,統計,推移,バーチャートレース,転出,人口移動",
+    "privacy": "private",
+    "publish_at": "2026-07-14T19:00:00+09:00",
+    "content_key": "bcr-japanese-movers-out-1975-2024",
+    "metric_keys": [
+      "japanese-movers-out"
+    ],
+    "status": "pending"
+  },
+  {
+    "key": "marriages",
+    "video_url": "https://api.github.com/repos/uruhayato373/stats47/releases/assets/473480932",
+    "title": "婚姻件数はこの49年で半減した｜47都道府県ランキングの推移 1975→2023",
+    "description": "都道府県別の婚姻件数49年分の推移。全国で半減という大きな変化を可視化しました。\n\n▼ 最新年の全47都道府県ランキングはこちら\nhttps://stats47.jp/ranking/marriages?utm_source=youtube&utm_medium=social&utm_campaign=marriages&utm_content=bcr\n\n出典: 政府統計 (e-Stat ほか) を stats47.jp が加工・可視化\n#都道府県 #ランキング #統計 #婚姻",
+    "tags": "都道府県,ランキング,統計,推移,バーチャートレース,婚姻,結婚",
+    "privacy": "private",
+    "publish_at": "2026-07-15T19:00:00+09:00",
+    "content_key": "bcr-marriages-1975-2023",
+    "metric_keys": [
+      "marriages"
+    ],
+    "status": "pending"
+  },
+  {
+    "key": "divorces",
+    "video_url": "https://api.github.com/repos/uruhayato373/stats47/releases/assets/473480907",
+    "title": "離婚件数は1.5倍に増えた｜47都道府県ランキングの推移 1975→2023",
+    "description": "都道府県別の離婚件数49年分の推移。増加のピークと近年の落ち着きまで見えます。\n\n▼ 最新年の全47都道府県ランキングはこちら\nhttps://stats47.jp/ranking/divorces?utm_source=youtube&utm_medium=social&utm_campaign=divorces&utm_content=bcr\n\n出典: 政府統計 (e-Stat ほか) を stats47.jp が加工・可視化\n#都道府県 #ランキング #統計 #離婚",
+    "tags": "都道府県,ランキング,統計,推移,バーチャートレース,離婚",
+    "privacy": "private",
+    "publish_at": "2026-07-16T19:00:00+09:00",
+    "content_key": "bcr-divorces-1975-2023",
+    "metric_keys": [
+      "divorces"
+    ],
+    "status": "pending"
+  },
+  {
+    "key": "flush-toilet-population-ratio",
+    "video_url": "https://api.github.com/repos/uruhayato373/stats47/releases/assets/473480911",
+    "title": "水洗トイレはこうして全国に広がった｜水洗化率の推移 1975→2021",
+    "description": "水洗化人口比率37年分の推移。生活インフラが全国に行き渡る過程をランキングで辿ります。\n\n▼ 最新年の全47都道府県ランキングはこちら\nhttps://stats47.jp/ranking/flush-toilet-population-ratio?utm_source=youtube&utm_medium=social&utm_campaign=flush-toilet-population-ratio&utm_content=bcr\n\n出典: 政府統計 (e-Stat ほか) を stats47.jp が加工・可視化\n#都道府県 #ランキング #統計 #水洗化",
+    "tags": "都道府県,ランキング,統計,推移,バーチャートレース,水洗化,生活インフラ",
+    "privacy": "private",
+    "publish_at": "2026-07-17T19:00:00+09:00",
+    "content_key": "bcr-flush-toilet-population-ratio-1975-2021",
+    "metric_keys": [
+      "flush-toilet-population-ratio"
+    ],
+    "status": "pending"
+  },
+  {
+    "key": "registered-foreigner-population",
+    "video_url": "https://api.github.com/repos/uruhayato373/stats47/releases/assets/473480956",
+    "title": "外国人登録人口は2.4倍に増えた｜47都道府県の推移 1986→2011",
+    "description": "外国人登録人口の推移(1986-2011)。バブル期から震災前夜までの国際化の歩みです。\n\n▼ 最新年の全47都道府県ランキングはこちら\nhttps://stats47.jp/ranking/registered-foreigner-population?utm_source=youtube&utm_medium=social&utm_campaign=registered-foreigner-population&utm_content=bcr\n\n出典: 政府統計 (e-Stat ほか) を stats47.jp が加工・可視化\n#都道府県 #ランキング #統計 #外国人",
+    "tags": "都道府県,ランキング,統計,推移,バーチャートレース,外国人,国際化",
+    "privacy": "private",
+    "publish_at": "2026-07-18T19:00:00+09:00",
+    "content_key": "bcr-registered-foreigner-population-1986-2011",
+    "metric_keys": [
+      "registered-foreigner-population"
+    ],
+    "status": "pending"
+  },
+  {
+    "key": "traffic-accident-count",
+    "video_url": "https://api.github.com/repos/uruhayato373/stats47/releases/assets/473480962",
+    "title": "交通事故はこの50年で4割減った｜47都道府県ランキングの推移 1975→2024",
+    "description": "都道府県別の交通事故発生件数50年分。ピーク時からの減少がどの県でも進んでいます。\n\n▼ 最新年の全47都道府県ランキングはこちら\nhttps://stats47.jp/ranking/traffic-accident-count?utm_source=youtube&utm_medium=social&utm_campaign=traffic-accident-count&utm_content=bcr\n\n出典: 政府統計 (e-Stat ほか) を stats47.jp が加工・可視化\n#都道府県 #ランキング #統計 #交通事故",
+    "tags": "都道府県,ランキング,統計,推移,バーチャートレース,交通事故,交通安全",
+    "privacy": "private",
+    "publish_at": "2026-07-19T19:00:00+09:00",
+    "content_key": "bcr-traffic-accident-count-1975-2024",
+    "metric_keys": [
+      "traffic-accident-count"
+    ],
+    "status": "pending"
+  },
+  {
+    "key": "building-fire-count",
+    "video_url": "https://api.github.com/repos/uruhayato373/stats47/releases/assets/473480892",
+    "title": "建物火災は半分近くまで減った｜47都道府県ランキングの推移 1975→2023",
+    "description": "都道府県別の建物火災出火件数49年分の推移。防火対策の進歩が数字に表れています。\n\n▼ 最新年の全47都道府県ランキングはこちら\nhttps://stats47.jp/ranking/building-fire-count?utm_source=youtube&utm_medium=social&utm_campaign=building-fire-count&utm_content=bcr\n\n出典: 政府統計 (e-Stat ほか) を stats47.jp が加工・可視化\n#都道府県 #ランキング #統計 #火災",
+    "tags": "都道府県,ランキング,統計,推移,バーチャートレース,火災,防災",
+    "privacy": "private",
+    "publish_at": "2026-07-20T19:00:00+09:00",
+    "content_key": "bcr-building-fire-count-1975-2023",
+    "metric_keys": [
+      "building-fire-count"
+    ],
+    "status": "pending"
+  },
+  {
+    "key": "residential-telephone-subscription-count-per-1000",
+    "video_url": "https://api.github.com/repos/uruhayato373/stats47/releases/assets/473480957",
+    "title": "固定電話の栄枯盛衰｜住宅用電話加入数の推移 1975→2024",
+    "description": "人口千人あたり住宅用電話加入数の推移。普及から携帯への置き換わりまで、一つの時代の記録です。\n\n▼ 最新年の全47都道府県ランキングはこちら\nhttps://stats47.jp/ranking/residential-telephone-subscription-count-per-1000?utm_source=youtube&utm_medium=social&utm_campaign=residential-telephone-subscription-count-per-1000&utm_content=bcr\n\n出典: 政府統計 (e-Stat ほか) を stats47.jp が加工・可視化\n#都道府県 #ランキング #統計 #固定電話",
+    "tags": "都道府県,ランキング,統計,推移,バーチャートレース,固定電話,通信",
+    "privacy": "private",
+    "publish_at": "2026-07-21T19:00:00+09:00",
+    "content_key": "bcr-residential-telephone-subscription-count-per-1000-1975-2024",
+    "metric_keys": [
+      "residential-telephone-subscription-count-per-1000"
+    ],
+    "status": "pending"
+  },
+  {
+    "key": "university-count",
+    "video_url": "https://api.github.com/repos/uruhayato373/stats47/releases/assets/473480965",
+    "title": "大学の数はこの50年で倍増した｜47都道府県ランキングの推移 1975→2024",
+    "description": "都道府県別の大学数50年分の推移。大学が増え続けた50年を可視化しました。\n\n▼ 最新年の全47都道府県ランキングはこちら\nhttps://stats47.jp/ranking/university-count?utm_source=youtube&utm_medium=social&utm_campaign=university-count&utm_content=bcr\n\n出典: 政府統計 (e-Stat ほか) を stats47.jp が加工・可視化\n#都道府県 #ランキング #統計 #大学",
+    "tags": "都道府県,ランキング,統計,推移,バーチャートレース,大学,教育",
+    "privacy": "private",
+    "publish_at": "2026-07-22T19:00:00+09:00",
+    "content_key": "bcr-university-count-1975-2024",
+    "metric_keys": [
+      "university-count"
+    ],
+    "status": "pending"
+  },
+  {
+    "key": "junior-college-count",
+    "video_url": "https://api.github.com/repos/uruhayato373/stats47/releases/assets/473480929",
+    "title": "短大は4割が消えた｜短期大学数の推移 1975→2024",
+    "description": "都道府県別の短期大学数50年分の推移。ピーク時から4割減という構造変化が見えます。\n\n▼ 最新年の全47都道府県ランキングはこちら\nhttps://stats47.jp/ranking/junior-college-count?utm_source=youtube&utm_medium=social&utm_campaign=junior-college-count&utm_content=bcr\n\n出典: 政府統計 (e-Stat ほか) を stats47.jp が加工・可視化\n#都道府県 #ランキング #統計 #短大",
+    "tags": "都道府県,ランキング,統計,推移,バーチャートレース,短大,教育",
+    "privacy": "private",
+    "publish_at": "2026-07-23T19:00:00+09:00",
+    "content_key": "bcr-junior-college-count-1975-2024",
+    "metric_keys": [
+      "junior-college-count"
+    ],
+    "status": "pending"
+  },
+  {
+    "key": "new-graduate-starting-salary-university-male",
+    "video_url": "https://api.github.com/repos/uruhayato373/stats47/releases/assets/473480938",
+    "title": "大卒初任給はどれだけ上がった？｜47都道府県の推移 1981→2019",
+    "description": "都道府県別の大卒初任給(男性)の推移。昭和から平成にかけての伸びと地域差を追えます。\n\n▼ 最新年の全47都道府県ランキングはこちら\nhttps://stats47.jp/ranking/new-graduate-starting-salary-university-male?utm_source=youtube&utm_medium=social&utm_campaign=new-graduate-starting-salary-university-male&utm_content=bcr\n\n出典: 政府統計 (e-Stat ほか) を stats47.jp が加工・可視化\n#都道府県 #ランキング #統計 #初任給",
+    "tags": "都道府県,ランキング,統計,推移,バーチャートレース,初任給,給与",
+    "privacy": "private",
+    "publish_at": "2026-07-24T19:00:00+09:00",
+    "content_key": "bcr-new-graduate-starting-salary-university-male-1981-2019",
+    "metric_keys": [
+      "new-graduate-starting-salary-university-male"
+    ],
+    "status": "pending"
+  },
+  {
+    "key": "new-graduate-starting-salary-highschool-male",
+    "video_url": "https://api.github.com/repos/uruhayato373/stats47/releases/assets/473480934",
+    "title": "高卒初任給、昭和から平成の40年｜47都道府県の推移 1980→2019",
+    "description": "都道府県別の高卒初任給(男性)40年分の推移。85%増の中身を県別に見られます。\n\n▼ 最新年の全47都道府県ランキングはこちら\nhttps://stats47.jp/ranking/new-graduate-starting-salary-highschool-male?utm_source=youtube&utm_medium=social&utm_campaign=new-graduate-starting-salary-highschool-male&utm_content=bcr\n\n出典: 政府統計 (e-Stat ほか) を stats47.jp が加工・可視化\n#都道府県 #ランキング #統計 #初任給",
+    "tags": "都道府県,ランキング,統計,推移,バーチャートレース,初任給,給与",
+    "privacy": "private",
+    "publish_at": "2026-07-25T19:00:00+09:00",
+    "content_key": "bcr-new-graduate-starting-salary-highschool-male-1980-2019",
+    "metric_keys": [
+      "new-graduate-starting-salary-highschool-male"
+    ],
+    "status": "pending"
+  },
+  {
+    "key": "physicians-in-medical-facilities",
+    "video_url": "https://api.github.com/repos/uruhayato373/stats47/releases/assets/473480955",
+    "title": "医師数は2.6倍に増えた｜47都道府県ランキングの推移 1975→2022",
+    "description": "都道府県別の医療施設従事医師数の推移。医療体制の拡充と地域差の変遷です。\n\n▼ 最新年の全47都道府県ランキングはこちら\nhttps://stats47.jp/ranking/physicians-in-medical-facilities?utm_source=youtube&utm_medium=social&utm_campaign=physicians-in-medical-facilities&utm_content=bcr\n\n出典: 政府統計 (e-Stat ほか) を stats47.jp が加工・可視化\n#都道府県 #ランキング #統計 #医師",
+    "tags": "都道府県,ランキング,統計,推移,バーチャートレース,医師,医療",
+    "privacy": "private",
+    "publish_at": "2026-07-26T19:00:00+09:00",
+    "content_key": "bcr-physicians-in-medical-facilities-1975-2022",
+    "metric_keys": [
+      "physicians-in-medical-facilities"
+    ],
+    "status": "pending"
+  },
+  {
+    "key": "general-hospital-bed-count",
+    "video_url": "https://api.github.com/repos/uruhayato373/stats47/releases/assets/473480914",
+    "title": "一般病院のベッド数はどう変わった？｜47都道府県の推移 1975→2023",
+    "description": "都道府県別の一般病院病床数49年分の推移。増加から適正化への転換が見えます。\n\n▼ 最新年の全47都道府県ランキングはこちら\nhttps://stats47.jp/ranking/general-hospital-bed-count?utm_source=youtube&utm_medium=social&utm_campaign=general-hospital-bed-count&utm_content=bcr\n\n出典: 政府統計 (e-Stat ほか) を stats47.jp が加工・可視化\n#都道府県 #ランキング #統計 #病床",
+    "tags": "都道府県,ランキング,統計,推移,バーチャートレース,病床,医療",
+    "privacy": "private",
+    "publish_at": "2026-07-27T19:00:00+09:00",
+    "content_key": "bcr-general-hospital-bed-count-1975-2023",
+    "metric_keys": [
+      "general-hospital-bed-count"
+    ],
+    "status": "pending"
+  },
+  {
+    "key": "pharmacy-count-per-100k",
+    "video_url": "https://api.github.com/repos/uruhayato373/stats47/releases/assets/473480953",
+    "title": "薬局は人口比で倍増した｜47都道府県ランキングの推移 1981→2023",
+    "description": "人口10万人あたり薬局数の推移。医薬分業の進展で薬局が身近になった42年です。\n\n▼ 最新年の全47都道府県ランキングはこちら\nhttps://stats47.jp/ranking/pharmacy-count-per-100k?utm_source=youtube&utm_medium=social&utm_campaign=pharmacy-count-per-100k&utm_content=bcr\n\n出典: 政府統計 (e-Stat ほか) を stats47.jp が加工・可視化\n#都道府県 #ランキング #統計 #薬局",
+    "tags": "都道府県,ランキング,統計,推移,バーチャートレース,薬局,医療",
+    "privacy": "private",
+    "publish_at": "2026-07-28T19:00:00+09:00",
+    "content_key": "bcr-pharmacy-count-per-100k-1981-2023",
+    "metric_keys": [
+      "pharmacy-count-per-100k"
+    ],
+    "status": "pending"
+  },
+  {
+    "key": "floor-area-new-owner-dwelling",
+    "video_url": "https://api.github.com/repos/uruhayato373/stats47/releases/assets/473480909",
+    "title": "新築持ち家は1割狭くなった｜床面積の推移 1981→2024",
+    "description": "着工新設持ち家住宅の床面積の推移。家の広さの地域差と縮小トレンドを可視化しました。\n\n▼ 最新年の全47都道府県ランキングはこちら\nhttps://stats47.jp/ranking/floor-area-new-owner-dwelling?utm_source=youtube&utm_medium=social&utm_campaign=floor-area-new-owner-dwelling&utm_content=bcr\n\n出典: 政府統計 (e-Stat ほか) を stats47.jp が加工・可視化\n#都道府県 #ランキング #統計 #住宅",
+    "tags": "都道府県,ランキング,統計,推移,バーチャートレース,住宅,持ち家",
+    "privacy": "private",
+    "publish_at": "2026-07-29T19:00:00+09:00",
+    "content_key": "bcr-floor-area-new-owner-dwelling-1981-2024",
+    "metric_keys": [
+      "floor-area-new-owner-dwelling"
+    ],
+    "status": "pending"
+  },
+  {
+    "key": "new-owner-occupied-housing-ratio",
+    "video_url": "https://api.github.com/repos/uruhayato373/stats47/releases/assets/473480941",
+    "title": "持ち家離れは本当か？｜着工新設持ち家比率の推移 1977→2024",
+    "description": "着工新設に占める持ち家比率48年分の推移。持ち家志向の変化を県別に追えます。\n\n▼ 最新年の全47都道府県ランキングはこちら\nhttps://stats47.jp/ranking/new-owner-occupied-housing-ratio?utm_source=youtube&utm_medium=social&utm_campaign=new-owner-occupied-housing-ratio&utm_content=bcr\n\n出典: 政府統計 (e-Stat ほか) を stats47.jp が加工・可視化\n#都道府県 #ランキング #統計 #住宅",
+    "tags": "都道府県,ランキング,統計,推移,バーチャートレース,住宅,持ち家",
+    "privacy": "private",
+    "publish_at": "2026-07-30T19:00:00+09:00",
+    "content_key": "bcr-new-owner-occupied-housing-ratio-1977-2024",
+    "metric_keys": [
+      "new-owner-occupied-housing-ratio"
+    ],
+    "status": "pending"
+  },
+  {
+    "key": "per-taxpayer-taxable-income",
+    "video_url": "https://api.github.com/repos/uruhayato373/stats47/releases/assets/473480942",
+    "title": "課税対象所得、東京の独走はいつから？｜47都道府県の推移 1985→2024",
+    "description": "納税者1人あたり課税対象所得40年分の推移。バブル・失われた30年・近年の回復まで。\n\n▼ 最新年の全47都道府県ランキングはこちら\nhttps://stats47.jp/ranking/per-taxpayer-taxable-income?utm_source=youtube&utm_medium=social&utm_campaign=per-taxpayer-taxable-income&utm_content=bcr\n\n出典: 政府統計 (e-Stat ほか) を stats47.jp が加工・可視化\n#都道府県 #ランキング #統計 #所得",
+    "tags": "都道府県,ランキング,統計,推移,バーチャートレース,所得,年収",
+    "privacy": "private",
+    "publish_at": "2026-07-31T19:00:00+09:00",
+    "content_key": "bcr-per-taxpayer-taxable-income-1985-2024",
+    "metric_keys": [
+      "per-taxpayer-taxable-income"
+    ],
+    "status": "pending"
+  },
+  {
+    "key": "household-head-income-worker-households-per-month",
+    "video_url": "https://api.github.com/repos/uruhayato373/stats47/releases/assets/473480915",
+    "title": "世帯主の月収は2.2倍になった｜47都道府県の推移 1975→2024",
+    "description": "勤労者世帯の世帯主収入(月額)の推移。50年でどの県がどれだけ伸びたかが見えます。\n\n▼ 最新年の全47都道府県ランキングはこちら\nhttps://stats47.jp/ranking/household-head-income-worker-households-per-month?utm_source=youtube&utm_medium=social&utm_campaign=household-head-income-worker-households-per-month&utm_content=bcr\n\n出典: 政府統計 (e-Stat ほか) を stats47.jp が加工・可視化\n#都道府県 #ランキング #統計 #収入",
+    "tags": "都道府県,ランキング,統計,推移,バーチャートレース,収入,家計",
+    "privacy": "private",
+    "publish_at": "2026-08-01T19:00:00+09:00",
+    "content_key": "bcr-household-head-income-worker-households-per-month-1975-2024",
+    "metric_keys": [
+      "household-head-income-worker-households-per-month"
+    ],
+    "status": "pending"
+  },
+  {
+    "key": "lowest-temperature",
+    "video_url": "https://api.github.com/repos/uruhayato373/stats47/releases/assets/473480930",
+    "title": "最も冷え込む県はどこ？｜最低気温ランキングの推移 1984→2024",
+    "description": "都道府県別の最低気温の推移。年ごとの寒波と温暖化のせめぎ合いをランキングで。\n\n▼ 最新年の全47都道府県ランキングはこちら\nhttps://stats47.jp/ranking/lowest-temperature?utm_source=youtube&utm_medium=social&utm_campaign=lowest-temperature&utm_content=bcr\n\n出典: 政府統計 (e-Stat ほか) を stats47.jp が加工・可視化\n#都道府県 #ランキング #統計 #気温",
+    "tags": "都道府県,ランキング,統計,推移,バーチャートレース,気温,気象",
+    "privacy": "private",
+    "publish_at": "2026-08-02T19:00:00+09:00",
+    "content_key": "bcr-lowest-temperature-1984-2024",
+    "metric_keys": [
+      "lowest-temperature"
+    ],
+    "status": "pending"
+  },
+  {
+    "key": "coffee-consumption-quantity",
+    "video_url": "https://api.github.com/repos/uruhayato373/stats47/releases/assets/473480891",
+    "title": "コーヒー消費量1位は意外なあの県｜47都道府県の推移 2007→2024",
+    "description": "都道府県別のコーヒー消費量18年分の推移。1位の顔ぶれに驚くはず…ではなく実データでご確認を。\n\n▼ 最新年の全47都道府県ランキングはこちら\nhttps://stats47.jp/ranking/coffee-consumption-quantity?utm_source=youtube&utm_medium=social&utm_campaign=coffee-consumption-quantity&utm_content=bcr\n\n出典: 政府統計 (e-Stat ほか) を stats47.jp が加工・可視化\n#都道府県 #ランキング #統計 #コーヒー",
+    "tags": "都道府県,ランキング,統計,推移,バーチャートレース,コーヒー,家計調査",
+    "privacy": "private",
+    "publish_at": "2026-08-03T19:00:00+09:00",
+    "content_key": "bcr-coffee-consumption-quantity-2007-2024",
+    "metric_keys": [
+      "coffee-consumption-quantity"
+    ],
+    "status": "pending"
+  },
+  {
+    "key": "beer-consumption-quantity",
+    "video_url": "https://api.github.com/repos/uruhayato373/stats47/releases/assets/473480893",
+    "title": "ビール離れは地方から？｜消費量ランキングの推移 2007→2024",
+    "description": "都道府県別のビール消費量18年分の推移。2割減の中で強い県・弱い県が分かれます。\n\n▼ 最新年の全47都道府県ランキングはこちら\nhttps://stats47.jp/ranking/beer-consumption-quantity?utm_source=youtube&utm_medium=social&utm_campaign=beer-consumption-quantity&utm_content=bcr\n\n出典: 政府統計 (e-Stat ほか) を stats47.jp が加工・可視化\n#都道府県 #ランキング #統計 #ビール",
+    "tags": "都道府県,ランキング,統計,推移,バーチャートレース,ビール,家計調査",
+    "privacy": "private",
+    "publish_at": "2026-08-04T19:00:00+09:00",
+    "content_key": "bcr-beer-consumption-quantity-2007-2024",
+    "metric_keys": [
+      "beer-consumption-quantity"
+    ],
+    "status": "pending"
+  },
+  {
+    "key": "sake-consumption-quantity",
+    "video_url": "https://api.github.com/repos/uruhayato373/stats47/releases/assets/473480959",
+    "title": "日本酒をいちばん飲む県はどこ？｜消費量の推移 2007→2024",
+    "description": "都道府県別の清酒消費量18年分の推移。酒どころの意地と全国的な日本酒離れが同居しています。\n\n▼ 最新年の全47都道府県ランキングはこちら\nhttps://stats47.jp/ranking/sake-consumption-quantity?utm_source=youtube&utm_medium=social&utm_campaign=sake-consumption-quantity&utm_content=bcr\n\n出典: 政府統計 (e-Stat ほか) を stats47.jp が加工・可視化\n#都道府県 #ランキング #統計 #日本酒",
+    "tags": "都道府県,ランキング,統計,推移,バーチャートレース,日本酒,家計調査",
+    "privacy": "private",
+    "publish_at": "2026-08-05T19:00:00+09:00",
+    "content_key": "bcr-sake-consumption-quantity-2007-2024",
+    "metric_keys": [
+      "sake-consumption-quantity"
+    ],
+    "status": "pending"
+  },
+  {
+    "key": "beef-consumption-quantity",
+    "video_url": "https://api.github.com/repos/uruhayato373/stats47/releases/assets/473480889",
+    "title": "牛肉を最も食べるのは西日本？｜消費量ランキングの推移 2007→2024",
+    "description": "都道府県別の牛肉消費量18年分の推移。東西の食文化差がはっきり出るテーマです。\n\n▼ 最新年の全47都道府県ランキングはこちら\nhttps://stats47.jp/ranking/beef-consumption-quantity?utm_source=youtube&utm_medium=social&utm_campaign=beef-consumption-quantity&utm_content=bcr\n\n出典: 政府統計 (e-Stat ほか) を stats47.jp が加工・可視化\n#都道府県 #ランキング #統計 #牛肉",
+    "tags": "都道府県,ランキング,統計,推移,バーチャートレース,牛肉,食文化",
+    "privacy": "private",
+    "publish_at": "2026-08-06T19:00:00+09:00",
+    "content_key": "bcr-beef-consumption-quantity-2007-2024",
+    "metric_keys": [
+      "beef-consumption-quantity"
+    ],
+    "status": "pending"
+  },
+  {
+    "key": "chicken-consumption-quantity",
+    "video_url": "https://api.github.com/repos/uruhayato373/stats47/releases/assets/473480890",
+    "title": "鶏肉消費は1.5倍に伸びた｜47都道府県ランキングの推移 2007→2024",
+    "description": "都道府県別の鶏肉消費量18年分の推移。健康志向の追い風で全国的に増えています。\n\n▼ 最新年の全47都道府県ランキングはこちら\nhttps://stats47.jp/ranking/chicken-consumption-quantity?utm_source=youtube&utm_medium=social&utm_campaign=chicken-consumption-quantity&utm_content=bcr\n\n出典: 政府統計 (e-Stat ほか) を stats47.jp が加工・可視化\n#都道府県 #ランキング #統計 #鶏肉",
+    "tags": "都道府県,ランキング,統計,推移,バーチャートレース,鶏肉,食文化",
+    "privacy": "private",
+    "publish_at": "2026-08-07T19:00:00+09:00",
+    "content_key": "bcr-chicken-consumption-quantity-2007-2024",
+    "metric_keys": [
+      "chicken-consumption-quantity"
+    ],
+    "status": "pending"
+  },
+  {
+    "key": "white-bread-consumption-quantity",
+    "video_url": "https://api.github.com/repos/uruhayato373/stats47/releases/assets/473480973",
+    "title": "食パン王国は入れ替わった｜消費量ランキングの推移 2007→2024",
+    "description": "都道府県別の食パン消費量18年分の推移。関西の強さと首位交代のドラマが見どころです。\n\n▼ 最新年の全47都道府県ランキングはこちら\nhttps://stats47.jp/ranking/white-bread-consumption-quantity?utm_source=youtube&utm_medium=social&utm_campaign=white-bread-consumption-quantity&utm_content=bcr\n\n出典: 政府統計 (e-Stat ほか) を stats47.jp が加工・可視化\n#都道府県 #ランキング #統計 #食パン",
+    "tags": "都道府県,ランキング,統計,推移,バーチャートレース,食パン,家計調査",
+    "privacy": "private",
+    "publish_at": "2026-08-08T19:00:00+09:00",
+    "content_key": "bcr-white-bread-consumption-quantity-2007-2024",
+    "metric_keys": [
+      "white-bread-consumption-quantity"
+    ],
+    "status": "pending"
+  },
+  {
+    "key": "train-fare-consumption-expenditure",
+    "video_url": "https://api.github.com/repos/uruhayato373/stats47/releases/assets/473480964",
+    "title": "電車にお金をかける県はどこ？｜鉄道運賃支出の推移 2007→2024",
+    "description": "都道府県別の鉄道運賃支出18年分の推移。首都圏と地方の移動スタイルの差が数字に出ます。\n\n▼ 最新年の全47都道府県ランキングはこちら\nhttps://stats47.jp/ranking/train-fare-consumption-expenditure?utm_source=youtube&utm_medium=social&utm_campaign=train-fare-consumption-expenditure&utm_content=bcr\n\n出典: 政府統計 (e-Stat ほか) を stats47.jp が加工・可視化\n#都道府県 #ランキング #統計 #鉄道",
+    "tags": "都道府県,ランキング,統計,推移,バーチャートレース,鉄道,交通費",
+    "privacy": "private",
+    "publish_at": "2026-08-09T19:00:00+09:00",
+    "content_key": "bcr-train-fare-consumption-expenditure-2007-2024",
+    "metric_keys": [
+      "train-fare-consumption-expenditure"
+    ],
+    "status": "pending"
+  },
+  {
+    "key": "vet-fee-consumption-expenditure",
+    "video_url": "https://api.github.com/repos/uruhayato373/stats47/releases/assets/473480966",
+    "title": "ペットの医療費は倍増した｜動物病院代支出の推移 2007→2024",
+    "description": "都道府県別の動物病院代支出18年分の推移。ペットの家族化で支出は倍増しています。\n\n▼ 最新年の全47都道府県ランキングはこちら\nhttps://stats47.jp/ranking/vet-fee-consumption-expenditure?utm_source=youtube&utm_medium=social&utm_campaign=vet-fee-consumption-expenditure&utm_content=bcr\n\n出典: 政府統計 (e-Stat ほか) を stats47.jp が加工・可視化\n#都道府県 #ランキング #統計 #ペット",
+    "tags": "都道府県,ランキング,統計,推移,バーチャートレース,ペット,動物病院",
+    "privacy": "private",
+    "publish_at": "2026-08-10T19:00:00+09:00",
+    "content_key": "bcr-vet-fee-consumption-expenditure-2007-2024",
+    "metric_keys": [
+      "vet-fee-consumption-expenditure"
+    ],
+    "status": "pending"
+  }
+]

@@ -110,7 +110,7 @@ function loadPostedSet() {
 }
 
 /**
- * 当日エントリのうち「time (JST, 既定 "09:00") が現在時刻以前」かつ「未投稿
+ * 当日エントリのうち「time (JST, 既定 "08:00") が現在時刻以前」かつ「未投稿
  * (ig-posted-log に無い)」の最早 1 件を返す。
  * 1 日複数本対応: cron を 1 日複数回発火させ、各実行が 1 件だけ消化する。
  * 既投稿分は workflow が commit する ig-posted-log で除外されるため二重投稿しない。
@@ -125,7 +125,7 @@ async function findTodayEntry() {
   const posted = loadPostedSet();
   const due = JSON.parse(fs.readFileSync(file, "utf-8"))
     .filter((e) => e.date === today)
-    .map((e) => ({ ...e, time: e.time || "09:00" }))
+    .map((e) => ({ ...e, time: e.time || "08:00" })) // time 無しの旧形式は朝枠 (08:03 cron) で配信
     .sort((a, b) => a.time.localeCompare(b.time))
     .filter((e) => !posted.has(`${e.date}|${e.content_key}`));
   if (!due.length) return null;
