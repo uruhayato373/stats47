@@ -161,15 +161,11 @@ jobs:
                 const functions = total.functions.pct.toFixed(2);
                 const branches = total.branches.pct.toFixed(2);
                 
-                // 閾値チェック用の絵文字とバッジ
-                const threshold = 100;
-                const getEmoji = (value) => value >= threshold ? '✅' : '⚠️';
-                const getBadge = (value) => {
-                  if (value >= 80) return '🟢';
-                  if (value >= 50) return '🟡';
-                  if (value >= threshold) return '🟠';
-                  return '🔴';
-                };
+                // 回帰防止 floor (単一ソース coverage-thresholds.json を vitest と共有)。目標値ではない。
+                const ct = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'apps/web', 'coverage-thresholds.json'), 'utf8'));
+                const floor = { lines: ct.lines, statements: ct.statements, functions: ct.functions, branches: ct.branches };
+                // floor 以上=🟢 / floor-10pt 以内=🟡 / 未満=🔴
+                const getBadge = (value, f) => value >= f ? '🟢' : value >= f - 10 ? '🟡' : '🔴';
                 
                 // ファイル別のカバレッジ（上位10件、低カバレッジ優先）
                 const fileCoverage = Object.entries(summary)
@@ -184,8 +180,8 @@ jobs:
                   .sort((a, b) => a.lines - b.lines) // 低い順にソート
                   .slice(0, 10);
                 
-                const lowCoverageFiles = fileCoverage.filter(f => f.lines < threshold);
-                const highCoverageFiles = fileCoverage.filter(f => f.lines >= threshold);
+                const lowCoverageFiles = fileCoverage.filter(f => f.lines < floor.lines);
+                const highCoverageFiles = fileCoverage.filter(f => f.lines >= floor.lines);
                 
                 let fileList = '';
                 if (lowCoverageFiles.length > 0) {
@@ -207,12 +203,12 @@ jobs:
                 
                 | Metric | Coverage | Status |
                 |--------|----------|--------|
-                | Lines | ${lines}% | ${getBadge(parseFloat(lines))} ${getEmoji(parseFloat(lines))} |
-                | Statements | ${statements}% | ${getBadge(parseFloat(statements))} ${getEmoji(parseFloat(statements))} |
-                | Functions | ${functions}% | ${getBadge(parseFloat(functions))} ${getEmoji(parseFloat(functions))} |
-                | Branches | ${branches}% | ${getBadge(parseFloat(branches))} ${getEmoji(parseFloat(branches))} |
-                
-                **Target:** ${threshold}% (minimum threshold)
+                | Lines | ${lines}% | ${getBadge(parseFloat(lines), floor.lines)} |
+                | Statements | ${statements}% | ${getBadge(parseFloat(statements), floor.statements)} |
+                | Functions | ${functions}% | ${getBadge(parseFloat(functions), floor.functions)} |
+                | Branches | ${branches}% | ${getBadge(parseFloat(branches), floor.branches)} |
+
+                **Floor (回帰防止線・目標ではありません):** Lines ${floor.lines}% / Statements ${floor.statements}% / Functions ${floor.functions}% / Branches ${floor.branches}% — vitest が enforce (未達で CI 失敗)。分母はロジック層のみ (src/app 等 E2E 担当は除外)。
                 
                 📥 [Download full coverage report](${workflowUrl})${fileList}
                 
@@ -238,38 +234,9 @@ jobs:
               console.error('Failed to generate coverage comment:', error);
             }
 
-      - name: 📈 Check coverage thresholds
-        run: |
-          node -e "
-            const fs = require('fs');
-            const summary = JSON.parse(fs.readFileSync('apps/web/coverage/coverage-summary.json', 'utf8'));
-            const total = summary.total;
-            const threshold = 10;
-
-            const metrics = {
-              lines: total.lines.pct,
-              statements: total.statements.pct,
-              functions: total.functions.pct,
-              branches: total.branches.pct
-            };
-            
-            const failed = Object.entries(metrics).filter(([_, value]) => value < threshold);
-            
-            if (failed.length > 0) {
-              console.error('❌ Coverage thresholds not met:');
-              failed.forEach(([metric, value]) => {
-                console.error(\`  \${metric}: \${value.toFixed(2)}% < \${threshold}%\`);
-              });
-              process.exit(1);
-            } else {
-              console.log('✅ All coverage thresholds met!');
-              Object.entries(metrics).forEach(([metric, value]) => {
-                const status = value >= threshold ? '✅' : '⚠️';
-                console.log(\`  \${status} \${metric}: \${value.toFixed(2)}%\`);
-              });
-            }
-          "
-        continue-on-error: false # カバレッジ閾値100%を必須とする
+      # 注: カバレッジ閾値の enforce は上の「Run Unit Tests with Coverage」step に一本化。
+      # vitest.config.ts が coverage-thresholds.json (単一ソース) を読み floor 未達で exit 1 する。
+      # 旧「Check coverage thresholds」step (閾値リテラル 10 を再ハードコード) は重複のため削除。
 
       - name: 🏗️ Build Check
         run: npm run build -w apps/web

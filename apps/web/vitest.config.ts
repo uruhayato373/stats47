@@ -1,7 +1,14 @@
+import { readFileSync } from "fs";
 import path from "path";
 
 import react from "@vitejs/plugin-react";
 import { coverageConfigDefaults, defineConfig } from "vitest/config";
+
+// カバレッジ閾値 (回帰防止 floor) の単一ソース。pr-quality-check.yml のコメント step も
+// 同ファイルを読むため、ここと CI で値がドリフトしない。
+const coverageThresholds = JSON.parse(
+  readFileSync(path.resolve(__dirname, "./coverage-thresholds.json"), "utf8"),
+) as { lines: number; statements: number; functions: number; branches: number };
 
 export default defineConfig({
   plugins: [react()],
@@ -52,13 +59,20 @@ export default defineConfig({
         "**/scripts/**",
         "**/.local/**",
         "**/public/**",
+        // App Router の結線コード (page/layout/route/OGP/sitemap) は SSG/ISR/R2 依存で
+        // unit テスト非対象。ページ遷移・API・SEO は E2E (Playwright) 担当 (tests/README.md)。
+        "src/app/**",
+        "src/middleware.ts",
+        "src/providers/**",
+        "src/store/**",
       ],
       include: ["src/**/*.{ts,tsx}"],
+      // 閾値は coverage-thresholds.json が単一ソース (回帰防止 floor)。未達で vitest が exit 1。
       thresholds: {
-        lines: 10,
-        functions: 10,
-        branches: 10,
-        statements: 10,
+        lines: coverageThresholds.lines,
+        statements: coverageThresholds.statements,
+        functions: coverageThresholds.functions,
+        branches: coverageThresholds.branches,
       },
     },
   },
