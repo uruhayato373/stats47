@@ -25,6 +25,12 @@ vi.mock("../repositories/blog-snapshot-reader", () => ({
 }));
 
 class TestArticleService extends ArticleService {
+  constructor() {
+    // R2 fetcher に stub を注入し、dynamic import (@stats47/r2-storage/server) を
+    // 一切実行しない決定的テストにする (coverage 環境の flaky 根治)
+    super(async () => null);
+  }
+
   protected get isDev(): boolean {
     return true;
   }
@@ -69,9 +75,7 @@ describe("ArticleService", () => {
       );
     });
 
-    // TODO: CI (vitest --coverage) 環境で R2 fallback ルートが走り fail する。
-    // local では pass。後日 R2 client を mock するか、isDev getter 経路を見直す。
-    it.skip("should handle missing file gracefully (CI flaky)", async () => {
+    it("should handle missing file gracefully", async () => {
       const mockArticle = {
         slug: "slug",
         format: "md",

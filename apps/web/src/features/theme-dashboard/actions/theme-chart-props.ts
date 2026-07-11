@@ -37,7 +37,7 @@ export interface CpiChartComponentProps {
   year?: string;
 }
 
-export type ThemeDbChartComponentProps =
+type ThemeDbChartComponentProps =
   | { componentType: "line-chart"; props: LineChartComponentProps }
   | { componentType: "mixed-chart"; props: MixedChartComponentProps }
   | { componentType: "composition-chart"; props: CompositionChartComponentProps }
@@ -214,3 +214,23 @@ function parseOptionalString(value: unknown): string | undefined {
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && value !== null && !Array.isArray(value);
 }
+
+/**
+ * componentType drift ガード (type-check 時のみ・runtime 実体なし)。
+ *
+ * このファイルのチャート型 SSOT `ThemeDbChartComponentProps` の componentType が、
+ * packages 側の `CatalogComponentType` (`@stats47/data-configs`、ThemeCatalog が使う複製 union) に
+ * **すべて含まれる**ことを型レベルで保証する。テーマ renderer にチャート型を追加したのに
+ * カタログ union へ足し忘れると `tsc --noEmit` が失敗する。
+ *
+ * 注: 非チャート型 (kpi-card / markdown-section / pyramid-chart) は
+ * ThemeDbChartComponentProps に含まれず ThemeMetricsDashboard 側で個別描画されるため対象外。
+ * export しない (knip の unused export 検出を避け、常に import される本ファイルで生存させる)。
+ */
+type Expect<T extends true> = T;
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+type _ThemeChartTypeDriftGuard = Expect<
+  ThemeDbChartComponentProps["componentType"] extends import("@stats47/data-configs").CatalogComponentType
+    ? true
+    : false
+>;

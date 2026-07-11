@@ -8,7 +8,6 @@ export { NativeAffiliateRow } from "./components/NativeAffiliateRow";
 
 // 標準広告スロット部品（エディトリアル文法の統一枠）
 export {
-  AdSlotLabel,
   InContentAdSlot,
   FooterAdSlot,
   RailAdSlot,

@@ -26,6 +26,12 @@ interface PageShellProps {
 }
 
 /**
+ * サイト chrome (Header / Footer / 固定バナー等) がページ本文と横幅を揃えるための
+ * 共有トークン。page.tsx は PageShell を使い、これを直接使うのは chrome のみ。
+ */
+export const SHELL_WIDTH_CLASS = "mx-auto w-full max-w-[1700px] px-4 sm:px-6";
+
+/**
  * 全ページ共通の単一レイアウト Shell。
  *
  * 横幅・サイドレール・余白の SSOT。各 page.tsx は `container mx-auto` や
@@ -72,7 +78,7 @@ export function PageShell({
   );
 
   return (
-    <div className={cn("mx-auto w-full max-w-[1700px] px-4 py-8 sm:px-6", className)}>
+    <div className={cn(SHELL_WIDTH_CLASS, "py-8", className)}>
       {hasRight || hasLeft ? (
         <>
           <div className={gridClass}>

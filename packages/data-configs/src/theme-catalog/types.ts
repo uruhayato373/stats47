@@ -30,7 +30,7 @@ import type {
  * (`apps/web/src/features/theme-dashboard/actions/theme-chart-props.ts`、6 種) +
  * 非チャート (`kpi-card` / `markdown-section` / `pyramid-chart`)。
  * app 層へ import できないためここに複製し、drift は app 側の型アサーション
- * (`catalog-drift-guard.ts`: ThemeDbChartComponentProps の型 ⊆ CatalogComponentType) が検知する。
+ * (`theme-chart-props.ts` 末尾の `_ThemeChartTypeDriftGuard`: ThemeDbChartComponentProps の型 ⊆ CatalogComponentType) が検知する。
  */
 export const CATALOG_COMPONENT_TYPES = [
   // ThemeDbChartComponentProps (チャート 6 種)

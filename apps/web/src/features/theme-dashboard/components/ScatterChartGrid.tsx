@@ -58,25 +58,6 @@ export function ScatterChartGrid({
   );
 }
 
-export function ScatterChartStack({
-  items,
-  chartHeight = 240,
-  noteParentheses = "ascii",
-}: Omit<ScatterChartGridProps, "gridClassName" | "panelClassName">) {
-  return (
-    <>
-      {items.map((item) => (
-        <ScatterChartBody
-          key={item.id}
-          item={item}
-          height={chartHeight}
-          noteParentheses={noteParentheses}
-        />
-      ))}
-    </>
-  );
-}
-
 function ScatterChartPanel({
   item,
   height,

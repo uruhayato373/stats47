@@ -7,10 +7,10 @@ import Link from "next/link";
 import { lookupArea } from "@stats47/area";
 import { ArrowRight, MapPin } from "lucide-react";
 
+import { ChartCard } from "@/components/charts/ChartCard";
 import { ChartFooter } from "@/components/charts/ChartFooter";
 import { ChartPanel } from "@/components/charts/ChartPanel";
 import { MiniLineChart } from "@/components/charts/MiniCharts";
-import { ChartCard } from "@/components/charts/StatsChartCard";
 import type { PageComponent } from "@/components/stat-charts";
 
 import { ChartEmptyState } from "./ChartState";

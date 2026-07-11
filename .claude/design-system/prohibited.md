@@ -84,6 +84,11 @@
 | カード上部/左部のカラーバー（`border-t-4` や色付き `div`） | AI生成UIの典型パターン。装飾過剰で汎用性が低い | ボーダー（`border border-slate-200`）のみでカードを構成する |
 | 左端/上端のカラーストライプ（`border-l-4 border-*-500`） | Alert含め全コンポーネントで禁止 | `border border-*-200 rounded-lg` で全周ボーダー |
 
+> **正式例外 (2026-07-11・機械検査 `no-thick-accent-border` の allowlist と同期)**: Markdown 散文中の
+> **blockquote 引用バー** (`md-content.tsx`) と **callout admonition の左バー** (`md-preprocessor.ts`) のみ
+> `border-l-4` を許容する。これらはカードのブランドアクセントではなく引用/注記の一般 typography であり、
+> 減衰色 (`border-primary/30` 等) で使う。カード・パネル・Alert への適用は引き続き禁止。
+
 ---
 
 ## コンポーネント

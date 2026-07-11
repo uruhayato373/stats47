@@ -45,7 +45,7 @@ export function buildKomuinAiGuideUrl(rankingKey: string): string {
  * 例 (公務員・データ業務が濃い面に絞る場合):
  *   ["population", "laborwage", "economy", "administrativefinancial", "socialsecurity"]
  */
-export const FUNNEL_CTA_TARGET_CATEGORIES: readonly string[] | null = null;
+const FUNNEL_CTA_TARGET_CATEGORIES: readonly string[] | null = null;
 
 /**
  * 指定カテゴリで CTA を表示すべきか判定する。

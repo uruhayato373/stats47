@@ -27,7 +27,6 @@ docs/04_レビュー/<YYYY-Www>-<topic-slug>.md        (週次。例: 2026-W22-s
 
 | ファイル | 内容 | 残す理由 |
 |---|---|---|
-| [2026-07-11-design-readiness-codebase-audit.md](2026-07-11-design-readiness-codebase-audit.md) | デザイン改修前の全体監査。課題・修正方針・完了条件・PR 分割 | **現役**。改修着手前の必須ゲート (todo/inbox.md に DR-AUDIT 転記済) |
 | [2026-07-07-stp-analysis.md](2026-07-07-stp-analysis.md) | STP ゼロベース分析 (S1 雑学 / S2 生活意思決定) | gallery `/dashboard` (dashboard-data.mjs) が STP 戦略として読む正典 |
 | [2026-07-03-claude-code-setup-audit.md](2026-07-03-claude-code-setup-audit.md) | Claude Code 環境監査。§6 モデル配分ポリシー | `build-remediation-queue.mjs` / `build-ai-content-queue.mjs` が §6 を正典参照 |
 | [2026-06-13-monetization-career.md](2026-06-13-monetization-career.md) | 転職アフィリエイト戦略 (医療クラスタ・§A 提携リスト) | 現役 handoff `handoffs/2026-06-13-monetization-affiliate.md` が §A を参照。handoff 消化時に一緒に削除 |
@@ -38,8 +37,9 @@ docs/04_レビュー/<YYYY-Www>-<topic-slug>.md        (週次。例: 2026-W22-s
 - codebase-optimization (06-01) / code-audit (06-13) — deferred は改善バックログ PERF-AUDIT-DEFER と機能バックログで追跡
 - theme-chart-management (06-19) — ThemeCatalog SSOT 化 (rules/theme-catalog-standards.md) で解決済
 - r2-storage-audit (06-21) — incremental-cache 17 世代 17.38GB 削除を実施済
-- operations-automation-review (07-03) — G2-G6 の機械化残を todo/inbox.md に転記
+- operations-automation-review (07-03) — G2-G6 の機械化残を実装済 (G4-blog テスト + G6 smoke 動的キー。G2/G5 は実装済みだった)
 - sns-weekly W22〜W26 — 自動生成の派生物 (生データ正典は `.claude/skills/analytics/sns-metrics-improvement/snapshots/`、再生成可)
+- design-readiness-codebase-audit (07-11) — P1-P3 を全て実装して消化 (DR-AUDIT-01〜05/07/08。any 除去ポリシーは改善バックログ DESIGN-UNIFY-01 行へ転記)
 
 ## 関連
 
