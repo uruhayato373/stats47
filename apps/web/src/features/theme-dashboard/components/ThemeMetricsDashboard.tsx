@@ -10,7 +10,7 @@ import { ArrowRight, MapPin } from "lucide-react";
 import { ChartFooter } from "@/components/charts/ChartFooter";
 import { ChartPanel } from "@/components/charts/ChartPanel";
 import { MiniLineChart } from "@/components/charts/MiniCharts";
-import { ChartCard } from "@/components/charts/StatsChartCard";
+import { ChartCard } from "@/components/charts/ChartCard";
 import type { PageComponent } from "@/components/stat-charts";
 
 import { ChartEmptyState } from "./ChartState";

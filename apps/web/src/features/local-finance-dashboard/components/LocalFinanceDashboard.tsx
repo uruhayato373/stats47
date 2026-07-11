@@ -22,7 +22,7 @@ import {
   type StackPoint,
 } from "@/components/charts/MiniCharts";
 import { SankeyFallback } from "@/components/charts/SankeyFallback";
-import { ChartCard } from "@/components/charts/StatsChartCard";
+import { ChartCard } from "@/components/charts/ChartCard";
 
 import { FinanceSankey } from "@/features/finance-flow/components/FinanceSankey";
 import type { FinanceFlowData } from "@/features/finance-flow/lib/types";

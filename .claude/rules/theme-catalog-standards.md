@@ -62,7 +62,7 @@ ThemeCatalog (SSOT, git TS)
 (area 系ページ) とは**別 renderer・別型集合**なので注意 (area の bar-chart/sunburst/radar 等は
 テーマページでは描画されない)。テーマで有効な componentType は下表の 9 種のみ。チャート型の正典は
 `ThemeDbChartComponentProps` (`theme-chart-props.ts`) + 非チャート 3 種。drift は
-`apps/web/src/features/theme-dashboard/catalog-drift-guard.ts` が type-check で検知する。
+`theme-chart-props.ts` 末尾の drift guard 型 (`_ThemeChartTypeDriftGuard`) が type-check で検知する。
 
 | 見せたいこと (データ形状) | componentType | 補足 |
 |---|---|---|
@@ -178,7 +178,7 @@ ThemeCatalog (SSOT, git TS)
 - 型・SSOT: `packages/data-configs/src/theme-catalog/`
 - generator: `packages/data-configs/scripts/generate-theme-catalog.ts`
 - validator: `packages/data-configs/scripts/validate-theme-catalog.ts`
-- drift guard: `apps/web/src/features/theme-dashboard/catalog-drift-guard.ts`
+- drift guard: `apps/web/src/features/theme-dashboard/actions/theme-chart-props.ts` 末尾 (`_ThemeChartTypeDriftGuard`)
 - 調査スキル: `.claude/skills/theme/research-theme-catalog/SKILL.md`
 - 調査 agent: `.claude/agents/theme-researcher.md`
 - チャートコンポーネント: `.claude/rules/chart-component-standards.md`
