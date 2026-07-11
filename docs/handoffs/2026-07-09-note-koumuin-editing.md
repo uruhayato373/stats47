@@ -10,6 +10,13 @@ tags: [note, koumuin, editing, handoff]
 
 # セッションハンドオフ: 公務員 note シリーズ（Claude Code / e-Stat）全記事の原稿修正
 
+> [!done]
+> **2026-07-10 追記**: 下記「note.com の公開記事はまだ変わっていない」は解消済み。別セッションが
+> `/publish-note --update` で **45 本中実 36 本をライブ反映済み** (残 9 本は更新差分なし)。
+> 本 handoff は **NOTE-KOUMUIN-MAG-01 (マガジン追加) の対象記事表・手順の参照用に保持**しており、
+> MAG-01 消化時に削除する。反映作業の学びは `docs/handoffs/2026-07-10-note-cover-redesign.md` と
+> memory `project_note_update_mode_learnings` を参照。
+
 ## 一言サマリ
 
 公務員向け note 2 シリーズ（`koumuin-claude-code` 33 本 + `koumuin-estat-claude-code` 12 本 = 計 45 本）の原稿を、R2 から復元して 3 層で修正し、指定ブランチ `claude/note-article-editing-6gvhyx`（PR #552）に 4 コミットで反映した。**git 上の原稿はすべて修正済みだが、note.com の公開記事はまだ変わっていない**（反映は別途 `/publish-note --update` をローカルで実行する必要がある）。
