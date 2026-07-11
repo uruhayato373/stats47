@@ -37,7 +37,7 @@ export interface CpiChartComponentProps {
   year?: string;
 }
 
-export type ThemeDbChartComponentProps =
+type ThemeDbChartComponentProps =
   | { componentType: "line-chart"; props: LineChartComponentProps }
   | { componentType: "mixed-chart"; props: MixedChartComponentProps }
   | { componentType: "composition-chart"; props: CompositionChartComponentProps }

@@ -1,1 +1,1 @@
-export { CHART_COLORS, getChartColor, getChartColors } from "@/components/charts/ChartPalette";
+export { CHART_COLORS, getChartColor } from "@/components/charts/ChartPalette";

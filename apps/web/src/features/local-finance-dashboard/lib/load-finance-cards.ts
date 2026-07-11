@@ -27,12 +27,12 @@ export interface PrefCard {
   years: Record<string, YearRecord>;
 }
 
-export interface FlowNode {
+interface FlowNode {
   name: string;
   value: number;
 }
 
-export interface CityFlow {
+interface CityFlow {
   revenue: FlowNode[];
   expenditure: FlowNode[];
   totals: { revenue: number; expenditure: number };

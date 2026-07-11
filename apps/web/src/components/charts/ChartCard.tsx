@@ -6,7 +6,7 @@ import { cn } from "@stats47/components";
 
 import { SurfaceCard } from "@/components/surface";
 
-export interface ChartCardProps {
+interface ChartCardProps {
   label: string;
   value: string;
   chart: ReactNode;
