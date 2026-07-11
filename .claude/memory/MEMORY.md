@@ -1,5 +1,7 @@
 # Memory Index
 
+- [project_youtube_mass_experiment_2026_07.md](project_youtube_mass_experiment_2026_07.md) — YouTube 量産実験モード(2026-07-11〜)。stats47をBANリスク無しfamilyアカウントと位置づけ月1上限撤廃(選択肢A・日次3本+)。2026-04撤退/07-04月1化を上書き。ガード緩和=youtube-experiment.json(monthlyLimit上書き・削除で月1復帰)、重複/pauseガードは維持。診断はCI workflow youtube-shadowban-diagnose.yml(GOOGLE_OAUTH_*生存・ローカルは無)。★verdict likely-shadowbanは投稿停止2ヶ月の自然減で汚染=判定不能→1本出して24-48h初速で判断。★CI投稿経路完成・実証(2026-07-11): 第1本 3TWSWlKDPbs(出生数BCR,public)投稿成功。ローカルcreds無しで GitHub Releaseアセット→develop-push トリガー(youtube-upload-request.json)→CI が GOOGLE_OAUTH secretsで投稿(本番デプロイ不要)。BCRは app/stats(全年)を読む(app/rankingは単年で不可)。ハマり: metric-keysはJSON配列必須/台帳stepはadd→commit→rebase順。次=初速計測
+
 - [project_docs_reorg_todo_handoffs.md](project_docs_reorg_todo_handoffs.md) — docs/ 再編(2026-07-11・doboku-note式): TODO真実源は docs/todo/{inbox,01_改善,02_機能,03_指標バックログ}.md に固定(旧 02_実装計画/03-05)、セッション引き継ぎは docs/handoffs/YYYY-MM-DD-<topic>.md(消化したら抽出→削除・貯めない)。完了文書はアーカイブせず git rm(archive/ 禁止)。22_Instagram企画/コンテンツ企画マスター/W23以前の週次系は削除済
 - [project_kakei_expansion_pipeline_gotchas.md](project_kakei_expansion_pipeline_gotchas.md) — 家計調査拡充(2026-07-10)の公開パイプライン罠3つ: kakei @area=県庁所在市コード(NN003・福岡のみ40004)をNN000写像 / master exportはdev環境でローカルstaging listに縮み survey all.jsonが壊れる(NODE_ENV=production必須) / saveToR2はローカルstagingのみ=remote反映はdiff-push-r2
 
