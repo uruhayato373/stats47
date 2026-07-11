@@ -17,6 +17,12 @@
  *   IG_SCHEDULE_FILE (明示指定。未指定なら .claude/state/instagram-w*-schedule.json から
  *                     当日エントリを含む週ファイルを自動選択 — 週替わりの手編集忘れ防止)
  *   IG_FORCE_DATE (test 用: JST 日付を強制指定 YYYY-MM-DD)
+ *   IG_FORCE_TIME (test 用: JST 時刻を強制指定 HH:MM)
+ *   IG_DRY_RUN   (test 用: entry 解決 + caption/media 到達確認まで行い実投稿しない)
+ *
+ * 1 日複数本 (2026-07-11〜): エントリに time ("HH:MM" JST) を持たせ、cron を
+ * 1 日複数回発火させる。各実行は「time <= 現在時刻 かつ ig-posted-log に無い」
+ * 最早の 1 件だけを投稿する (二重投稿は posted-log で防止)。
  */
 
 const fs = require("node:fs");
@@ -81,13 +87,56 @@ function resolveScheduleFile(today) {
   return null;
 }
 
+function getJstTime() {
+  if (process.env.IG_FORCE_TIME) return process.env.IG_FORCE_TIME; // test 用 "HH:MM"
+  const jst = new Date(Date.now() + 9 * 60 * 60 * 1000);
+  return jst.toISOString().slice(11, 16); // "HH:MM"
+}
+
+/** ig-posted-log.jsonl から投稿済み (date|content_key) セットを作る (同日多重投稿の防止)。 */
+function loadPostedSet() {
+  const logPath = path.join(STATE_DIR, "ig-posted-log.jsonl");
+  const set = new Set();
+  if (!fs.existsSync(logPath)) return set;
+  for (const line of fs.readFileSync(logPath, "utf-8").trim().split("\n")) {
+    try {
+      const j = JSON.parse(line);
+      if (j.date && j.content_key) set.add(`${j.date}|${j.content_key}`);
+    } catch {
+      /* 壊れた行は無視 */
+    }
+  }
+  return set;
+}
+
+/**
+ * 当日エントリのうち「time (JST, 既定 "09:00") が現在時刻以前」かつ「未投稿
+ * (ig-posted-log に無い)」の最早 1 件を返す。
+ * 1 日複数本対応: cron を 1 日複数回発火させ、各実行が 1 件だけ消化する。
+ * 既投稿分は workflow が commit する ig-posted-log で除外されるため二重投稿しない。
+ * 失敗した枠は次の cron 実行が繰り上げて消化する (同日中のみ)。
+ */
 async function findTodayEntry() {
   const today = getJstDate();
-  console.log(`[post-from-schedule] today (JST): ${today}`);
+  const nowTime = getJstTime();
+  console.log(`[post-from-schedule] today (JST): ${today} ${nowTime}`);
   const file = resolveScheduleFile(today);
   if (!file) return null;
-  const entries = JSON.parse(fs.readFileSync(file, "utf-8"));
-  return entries.find((e) => e.date === today) || null;
+  const posted = loadPostedSet();
+  const due = JSON.parse(fs.readFileSync(file, "utf-8"))
+    .filter((e) => e.date === today)
+    .map((e) => ({ ...e, time: e.time || "09:00" }))
+    .sort((a, b) => a.time.localeCompare(b.time))
+    .filter((e) => !posted.has(`${e.date}|${e.content_key}`));
+  if (!due.length) return null;
+  const next = due.find((e) => e.time <= nowTime);
+  if (!next) {
+    console.log(
+      `[post-from-schedule] 未投稿 ${due.length} 件はすべて time > ${nowTime} (次: ${due[0].time})、skip`,
+    );
+    return null;
+  }
+  return next;
 }
 
 async function fetchCaption(domain, contentKey) {
@@ -255,7 +304,9 @@ async function main() {
   }
 
   console.log(`[post-from-schedule] 投稿対象: ${JSON.stringify(entry)}`);
-  assertToken(); // 投稿実行が確定してからトークン検証 (エントリ無し日はトークン不要)
+  if (!process.env.IG_DRY_RUN) {
+    assertToken(); // 投稿実行が確定してからトークン検証 (エントリ無し日はトークン不要)
+  }
   // GHA が grep で取得できるよう構造化ログを出力
   console.log(`DOMAIN=${entry.domain}`);
 
@@ -269,6 +320,13 @@ async function main() {
     throw new Error(`media URL 到達不能 (${headRes.status}): ${mediaUrl}`);
   }
   console.log(`✅ media URL OK: ${mediaUrl}`);
+
+  if (process.env.IG_DRY_RUN) {
+    console.log(
+      `🧪 IG_DRY_RUN=1: caption/media 検証まで実施、実投稿せず終了 (${entry.content_key} time=${entry.time})`,
+    );
+    return;
+  }
 
   if (entry.type === "reels") {
     await postReels({ contentKey: entry.content_key, caption, videoUrl: mediaUrl, domain: entry.domain });

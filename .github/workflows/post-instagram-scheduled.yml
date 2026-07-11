@@ -1,14 +1,17 @@
 name: 📸 Instagram scheduled post (daily)
 
 # Phase 9 後続 (2026-04-26): IG Graph API は scheduled_publish_time 非対応のため、
-# GitHub Actions cron で post-instagram (即時 API) を毎朝発火する形で予約投稿を代替。
-# 投稿対象は .claude/state/instagram-w19-schedule.json の today (JST) エントリのみ、
-# 該当なしなら exit 0 で何もしない。
-# 投稿成功時は #127 (W18 Plan) に結果コメント投稿。
+# GitHub Actions cron で post-instagram (即時 API) を発火する形で予約投稿を代替。
+# 投稿対象は .claude/state/instagram-w*-schedule.json (当日を含む週ファイルを自動選択) の
+# today (JST) エントリ。1 日複数本対応 (2026-07-11〜): cron を 3 回発火し、各実行が
+# 「time <= 現在時刻 かつ未投稿」の最早 1 件だけを投稿する (ig-posted-log で二重投稿防止)。
+# 該当なしなら exit 0 で何もしない。投稿成功時は #127 に結果コメント投稿。
 
 on:
   schedule:
-    - cron: "3 0 * * *" # 09:03 JST (UTC 00:03)
+    - cron: "3 23 * * *" # 08:03 JST (UTC 前日 23:03)
+    - cron: "3 3 * * *" # 12:03 JST (UTC 03:03)
+    - cron: "3 10 * * *" # 19:03 JST (UTC 10:03)
   workflow_dispatch:
     inputs:
       force_date:
