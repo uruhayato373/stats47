@@ -12,10 +12,14 @@ co_agents: [sns-renderer]
 Bar Chart Race (全年度推移の順位変動アニメ動画) を 1 本の線で作る。旧 `generate-bar-chart-race` /
 `render-bar-chart-race` / `post-bar-chart-race-captions` の 3 スキルを統合した (詳細手順は `reference/` に温存)。
 
-> **位置づけ**: BCR は **YouTube 月 1 本**の主フォーマット (`.claude/rules/sns-content-standards.md` §0)。
-> レンダは 1 本 10-20 分かかるため瞬発力トラック (react-to-news) からは外す。X への短尺流用も可。
-> 投稿は本スキルではなく `/post-youtube` (月 1・ガード 3 点通過) が担う。**Remotion BCR レンダの正典入口は本スキル**
-> (静止画/動画一般は `/render-sns-stills`、プレビューは `/preview-remotion`)。
+> **位置づけ**: BCR は **YouTube の主フォーマット** (`.claude/rules/sns-content-standards.md` §0。既定=月1本、
+> 量産実験モード中は §1 例外注記で上限緩和)。レンダは 1 本 4-20 分かかるため瞬発力トラック (react-to-news) からは外す。
+> X への短尺流用も可。投稿は本スキルではなく `/post-youtube` (ガード 3 点通過。CI 経路あり) が担う。
+> **Remotion BCR レンダの正典入口は本スキル** (静止画/動画一般は `/render-sns-stills`、プレビューは `/preview-remotion`)。
+>
+> **★データ前提**: BCR は全年時系列が必要 → `app/stats/<metric>/values.json` (全年 rows) を読む。
+> `app/ranking/<key>/values.json` は**単年 snapshot なので BCR には使えない** (2026-07-11 実測: aging-index 等は
+> 1 年分のみで不可、births=29年 / japanese-population=45年 は可)。metric 選定時に年数を先に確認すること。
 
 ## 工程 (--step)
 
