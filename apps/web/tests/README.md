@@ -16,6 +16,14 @@ npm run test:coverage # カバレッジ付き実行
 - テストファイル: `src/**/*.test.ts(x)`, `src/**/__tests__/**`
 - CI: `.github/workflows/pr-quality-check.yml`
 
+### カバレッジ方針（回帰防止 floor・単一ソース）
+
+カバレッジは「目標 100%」ではなく **「下げない floor（回帰防止線）」** で運用します。
+
+- **単一ソース**: `apps/web/coverage-thresholds.json`（lines/statements/functions/branches）。`vitest.config.ts` がこれを読んで enforce（未達で `test:coverage` が exit 1）し、CI のカバレッジコメントも同ファイルを表示する。**閾値を他の場所にハードコードしない**（過去に CI と vitest で 100/10 に分裂した反省）。
+- **分母はロジック層のみ**: `src/app/**`（page/layout/route/OGP/sitemap）・`src/middleware.ts`・`src/providers`・`src/store` は SSG/ISR/R2 依存の結線コードで **E2E 担当**のため `coverage.exclude` で除外。unit の分母に入れない。
+- **floor の bump**: floor は自動追随しない。カバレッジが十分上がったら、四半期または大型 PR の節目に `coverage-thresholds.json` を手動で引き上げる（放置すると形骸化する）。緑=十分ではなく「floor を割っていない」だけ。
+
 ## 2. E2E テスト（Playwright）
 
 Next.js 開発サーバーを起動し、実際のブラウザでページ遷移・操作・表示を検証します。
