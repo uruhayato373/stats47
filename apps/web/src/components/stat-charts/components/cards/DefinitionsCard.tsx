@@ -85,7 +85,7 @@ const GroupCard: React.FC<{ group: DefinitionGroup }> = ({ group }) => {
   const iconName = group.icon ? ICON_NAME_MAP[group.icon] || group.icon : undefined;
 
   return (
-    <div className={`rounded-lg border ${colors.border} ${colors.bg} overflow-hidden`}>
+    <SurfaceCard className={`overflow-hidden p-0 shadow-none ${colors.border} ${colors.bg}`}>
       {/* ヘッダー */}
       <div className={`flex items-center gap-2 px-4 py-3 border-b ${colors.border}`}>
         {iconName && <Icon name={iconName} className={`h-4 w-4 ${colors.icon}`} />}
@@ -114,7 +114,7 @@ const GroupCard: React.FC<{ group: DefinitionGroup }> = ({ group }) => {
           </TableBody>
         </Table>
       </div>
-    </div>
+    </SurfaceCard>
   );
 };
 

@@ -49,6 +49,13 @@ export function generateRootMetadata(): Metadata {
     authors: [{ name: "統計で見る都道府県" }],
     creator: "統計で見る都道府県",
     publisher: "統計で見る都道府県",
+    icons: {
+      icon: [
+        { url: "/favicon.svg", type: "image/svg+xml" },
+        { url: "/favicon.ico", sizes: "16x16 32x32 48x48" },
+      ],
+      apple: [{ url: "/apple-touch-icon.png", sizes: "180x180" }],
+    },
     formatDetection: {
       email: false,
       address: false,

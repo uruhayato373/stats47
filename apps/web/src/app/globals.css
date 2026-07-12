@@ -130,13 +130,13 @@
 /*
  * ===== Reading Zone (Soft Editorial) =====
  * 記事系ページ (blog 詳細 / ranking 詳細 / survey / terms / privacy) 専用の scoped トークン。
- * サイト全体のフラット規約 (--radius: 0) の例外ゾーン。doboku-note の Soft Editorial を移植。
- * 正典: docs/01_技術設計/15_デザインシステムSSOT.md「reading zone 例外」
+ * doboku-note の Soft Editorial を移植した記事ゾーン。角丸はサイト共通のフラット規約に従う。
+ * 正典: docs/01_技術設計/15_デザインシステムSSOT.md「reading zone」
  * .dark と同じく @layer 外に置き、zone 内の shadcn 部品へ変数を波及させる。
  */
 .reading-zone {
   --background: 220 20% 97%; /* 薄グレー地 (#f6f7f9 相当)。白カードとの対比で紙面感を出す */
-  --radius: 14px; /* rounded-lg=14 / md=12 / sm=10 (tailwind.config の var 参照経由) */
+  --radius: 0px; /* カードは記事ページを含めサイト全体で角丸なし */
   --article-accent: var(--primary);
   --article-accent-fill: 214 45% 96%; /* callout / 表ヘッダの淡色地 */
 }
@@ -315,7 +315,7 @@
     width: 100%;
     overflow: hidden;
     border: 1px solid hsl(var(--border));
-    border-radius: 10px;
+    border-radius: 0;
     font-size: 0.875rem;
   }
 
@@ -448,13 +448,6 @@
   /* Soft Shadows */
   .shadow-soft-sm {
     box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  }
-  /* Soft Editorial 2 層シャドウ (reading zone のカード用。doboku-note 値) */
-  .shadow-soft-content {
-    box-shadow: 0 1px 2px rgb(15 23 42 / 0.04), 0 2px 8px rgb(15 23 42 / 0.05);
-  }
-  .shadow-soft-section {
-    box-shadow: 0 1px 3px rgb(15 23 42 / 0.04), 0 6px 20px rgb(15 23 42 / 0.06);
   }
   .shadow-soft-md {
     box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);

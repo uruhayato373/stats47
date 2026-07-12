@@ -5,10 +5,9 @@ import Link from "next/link";
 
 import { cn } from "@stats47/components";
 
-/* rounded-lg は var(--radius) 参照: 通常ページでは 0 (フラット規約)、
-   .reading-zone 内では 14px (Soft Editorial) に自動追従する */
+/* カード外枠はトークン解決に依存せず、サイト全体で明示的に角丸なし。 */
 const surfaceCardClass =
-  "rounded-lg border bg-card p-4 shadow-sm transition-colors";
+  "rounded-none border bg-card p-4 shadow-sm transition-colors";
 
 const interactiveSurfaceClass =
   "hover:border-primary/40 hover:bg-accent/40 hover:shadow-md";
@@ -78,7 +77,7 @@ export function SurfaceLinkCard({
 
 /**
  * 記事本文を包むカード (reading zone 専用・Soft Editorial)。
- * 角丸 14px + 2 層ソフトシャドウ、モバイル (sm 未満) では画面端までフルブリード。
+ * 角丸なし + 通常カードと同じ shadow-sm。モバイル (sm 未満) では画面端までフルブリード。
  * ArticleShell のコンテナ px-4 を負マージンで打ち消して端まで届かせる。
  */
 export function ArticleCard({
@@ -89,7 +88,7 @@ export function ArticleCard({
   return (
     <div
       className={cn(
-        "rounded-lg border bg-card shadow-soft-section",
+        "rounded-none border bg-card shadow-sm",
         "px-5 py-8 sm:px-8 sm:py-10 lg:px-12 lg:py-12",
         "max-sm:-mx-4 max-sm:rounded-none max-sm:border-x-0",
         className,

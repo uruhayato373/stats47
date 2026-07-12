@@ -1,0 +1,43 @@
+<!-- data-source: summary-findings.json | generated: 2026-07-12T07:40:00.840Z -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 416" width="960" height="416" font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" role="img" aria-label="この記事でわかったこと">
+  <style>
+    .svg-bg{fill:#ffffff}
+    .svg-plot{fill:#f9fafb}
+    .svg-plot-border{stroke:#d1d5db}
+    .svg-title{fill:#1f2937}
+    .svg-axis{fill:#374151}
+    .svg-tick{fill:#6b7280}
+    .svg-grid{stroke:#e5e7eb}
+    @media (prefers-color-scheme:dark){
+    .svg-bg{fill:#0f172a}
+    .svg-plot{fill:#1e293b}
+    .svg-plot-border{stroke:#334155}
+    .svg-title{fill:#e2e8f0}
+    .svg-axis{fill:#cbd5e1}
+    .svg-tick{fill:#94a3b8}
+    .svg-grid{stroke:#334155}
+    }
+  </style>
+  <rect width="960" height="416" class="svg-bg"/>
+  <text x="480" y="46" text-anchor="middle" font-size="26" font-weight="bold" class="svg-title">この記事でわかったこと</text>
+  <rect x="40" y="72" width="880" height="50" class="svg-plot" rx="8"/>
+  <circle cx="58" cy="97" r="18" fill="#dc2626"/>
+  <text x="58" y="103" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">1</text>
+  <text x="90" y="103.6" font-size="18" class="svg-title"><tspan x="90" dy="0">上位は山梨県（6.70）、下位は神奈川県（0.92）</tspan></text>
+  <rect x="40" y="132" width="880" height="72" class="svg-plot" rx="8"/>
+  <circle cx="58" cy="168" r="18" fill="#dc2626"/>
+  <text x="58" y="174" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">2</text>
+  <text x="90" y="163.6" font-size="18" class="svg-title"><tspan x="90" dy="0">1人あたり貸出冊数が多い県は図書館の利用文化が根付いてい</tspan><tspan x="90" dy="22">る</tspan></text>
+  <rect x="40" y="214" width="880" height="50" class="svg-plot" rx="8"/>
+  <circle cx="58" cy="239" r="18" fill="#dc2626"/>
+  <text x="58" y="245" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">3</text>
+  <text x="90" y="245.6" font-size="18" class="svg-title"><tspan x="90" dy="0">歴史的文化資源の蓄積と観光需要が施設数に反映</tspan></text>
+  <rect x="40" y="274" width="880" height="50" class="svg-plot" rx="8"/>
+  <circle cx="58" cy="299" r="18" fill="#dc2626"/>
+  <text x="58" y="305" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">4</text>
+  <text x="90" y="305.6" font-size="18" class="svg-title"><tspan x="90" dy="0">図書館数と趣味・娯楽行動者率の相関は明確ではない</tspan></text>
+  <rect x="40" y="334" width="880" height="50" class="svg-plot" rx="8"/>
+  <circle cx="58" cy="359" r="18" fill="#dc2626"/>
+  <text x="58" y="365" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">5</text>
+  <text x="90" y="365.6" font-size="18" class="svg-title"><tspan x="90" dy="0">舞台芸術のインフラは人口集積地に依存する構造</tspan></text>
+</svg>

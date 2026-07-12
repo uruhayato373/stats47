@@ -91,6 +91,12 @@ const rules = [
     pattern: /\brounded-(?:xl|2xl|3xl)\b/,
   },
   {
+    id: "no-arbitrary-radius",
+    message:
+      "Do not add arbitrary rounded-[…] values. Cards and panels use rounded-none; circular UI uses rounded-full.",
+    pattern: /\brounded-\[[^\]]+\]/,
+  },
+  {
     id: "no-text-black",
     message:
       "Avoid text-black. Use text-foreground or text-slate-900 (see .claude/design-system/prohibited.md).",
@@ -236,6 +242,65 @@ function checkFile(relativePath) {
 const violations = scanRoots
   .flatMap((root) => listFiles(root))
   .flatMap((file) => checkFile(file));
+
+// カード角丸の SSOT は globals.css の --radius: 0。
+// 通常領域・reading-zone のどちらかへ非ゼロ値が再導入された場合、見た目がページ種別で
+// ドリフトするため、class 名の静的検査とは別にトークン自体を決定的に検査する。
+const globalsPath = "src/app/globals.css";
+const globalsText = readFileSync(path.join(cwd, globalsPath), "utf8");
+const radiusPattern = /--radius:\s*([^;]+);/g;
+for (const match of globalsText.matchAll(radiusPattern)) {
+  const value = match[1].trim();
+  if (/^0(?:px|rem)?$/.test(value)) continue;
+  const lineNumber = globalsText.slice(0, match.index).split(/\r?\n/).length;
+  violations.push({
+    ruleId: "no-nonzero-radius-token",
+    message:
+      "Card radius is globally flat. Keep every --radius token at 0; circular UI must use rounded-full explicitly.",
+    file: globalsPath,
+    lineNumber,
+    line: match[0],
+  });
+}
+
+// CSS の固定 border-radius は Tailwind token を迂回するため別検査にする。
+// スクロールバー thumb はカード/パネルではなく、形状として円形が必要な唯一のCSS例外。
+const cssBorderRadiusPattern = /border-radius:\s*([^;]+);/g;
+for (const match of globalsText.matchAll(cssBorderRadiusPattern)) {
+  const value = match[1].trim();
+  const lineNumber = globalsText.slice(0, match.index).split(/\r?\n/).length;
+  const isZero = /^0(?:px|rem)?$/.test(value);
+  const isScrollbarThumb =
+    value === "9999px" &&
+    globalsText.slice(Math.max(0, match.index - 180), match.index).includes("::-webkit-scrollbar-thumb");
+  if (isZero || isScrollbarThumb) continue;
+  violations.push({
+    ruleId: "no-fixed-css-border-radius",
+    message:
+      "Do not bypass the flat-card policy with a fixed CSS border-radius. Use 0; circular controls must use an explicit reviewed exception.",
+    file: globalsPath,
+    lineNumber,
+    line: match[0],
+  });
+}
+
+// ArticleCard は本文カードの正典。CSS token に加えて明示的 rounded-none を要求し、
+// reading-zone のみ角丸へ戻る再発を二重に防ぐ。
+const surfacePath = "src/components/surface/SurfaceCard.tsx";
+const surfaceText = readFileSync(path.join(cwd, surfacePath), "utf8");
+const articleCardBody = surfaceText.match(
+  /export function ArticleCard[\s\S]*?(?=\nexport function RailCard)/,
+)?.[0];
+if (!articleCardBody?.includes('"rounded-none border bg-card shadow-sm"')) {
+  violations.push({
+    ruleId: "article-card-must-be-square",
+    message:
+      "ArticleCard must explicitly use rounded-none so article pages follow the site-wide square-card policy.",
+    file: surfacePath,
+    lineNumber: 1,
+    line: "ArticleCard",
+  });
+}
 
 if (violations.length > 0) {
   console.error("Design system check failed:");

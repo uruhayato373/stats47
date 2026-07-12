@@ -1,0 +1,371 @@
+<!-- data-source: library-lending-tilemap.json | generated: 2026-07-12T07:40:00.838Z -->
+<svg width="600" height="700" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 700" role="img" aria-label="1人あたり図書館貸出冊数">
+  <title>1人あたり図書館貸出冊数</title>
+  <desc>2020年度(貸出)÷2021年(人口)</desc>
+  <style>
+    .svg-bg{fill:#ffffff}
+    .svg-plot{fill:#f9fafb}
+    .svg-plot-border{stroke:#d1d5db}
+    .svg-title{fill:#1f2937}
+    .svg-axis{fill:#374151}
+    .svg-tick{fill:#6b7280}
+    .svg-grid{stroke:#e5e7eb}
+    @media (prefers-color-scheme:dark){
+    .svg-bg{fill:#0f172a}
+    .svg-plot{fill:#1e293b}
+    .svg-plot-border{stroke:#334155}
+    .svg-title{fill:#e2e8f0}
+    .svg-axis{fill:#cbd5e1}
+    .svg-tick{fill:#94a3b8}
+    .svg-grid{stroke:#334155}
+    }
+  </style>
+  <rect width="600" height="700" class="svg-plot"/>
+  <text x="28" y="58" font-size="22" font-weight="bold" class="svg-title">1人あたり図書館貸出冊数</text>
+  <text x="28" y="92" font-size="15" class="svg-tick">2020年度(貸出)÷2021年(人口)</text>
+  <g aria-label="群馬 3.8冊">
+    <title>群馬：3.8冊</title>
+    <rect x="453" y="312.5" width="36" height="36" rx="3" fill="rgb(252,164,141)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="471" y="333.9" font-size="9" font-weight="700">群馬</tspan>
+    </text>
+  </g>
+  <g aria-label="埼玉 3.9冊">
+    <title>埼玉：3.9冊</title>
+    <rect x="491" y="350.5" width="36" height="36" rx="3" fill="rgb(252,156,132)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="509" y="371.9" font-size="9" font-weight="700">埼玉</tspan>
+    </text>
+  </g>
+  <g aria-label="千葉 3.6冊">
+    <title>千葉：3.6冊</title>
+    <rect x="529" y="350.5" width="36" height="74" rx="3" fill="rgb(253,176,155)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="547" y="390.9" font-size="9" font-weight="700">千葉</tspan>
+    </text>
+  </g>
+  <g aria-label="東京 6.3冊">
+    <title>東京：6.3冊</title>
+    <rect x="491" y="388.5" width="36" height="36" rx="3" fill="rgb(194,46,39)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="509" y="409.9" font-size="9" font-weight="700">東京</tspan>
+    </text>
+  </g>
+  <g aria-label="神奈川 2.8冊">
+    <title>神奈川：2.8冊</title>
+    <rect x="491" y="427" width="36" height="36" rx="3" fill="rgb(254,217,203)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.3" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="509" y="447.7" font-size="7" font-weight="700">神奈川</tspan>
+    </text>
+  </g>
+  <g aria-label="新潟 4.3冊">
+    <title>新潟：4.3冊</title>
+    <rect x="415" y="274" width="74" height="36" rx="3" fill="rgb(252,136,109)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="452" y="295.4" font-size="9" font-weight="700">新潟</tspan>
+    </text>
+  </g>
+  <g aria-label="富山 4.4冊">
+    <title>富山：4.4冊</title>
+    <rect x="376" y="274" width="36" height="36" rx="3" fill="rgb(252,131,103)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="394" y="295.4" font-size="9" font-weight="700">富山</tspan>
+    </text>
+  </g>
+  <g aria-label="石川 4.5冊">
+    <title>石川：4.5冊</title>
+    <rect x="338" y="274" width="36" height="36" rx="3" fill="rgb(251,126,97)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="356" y="295.4" font-size="9" font-weight="700">石川</tspan>
+    </text>
+  </g>
+  <g aria-label="福井 5.6冊">
+    <title>福井：5.6冊</title>
+    <rect x="338" y="312.5" width="36" height="36" rx="3" fill="rgb(223,77,57)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="356" y="333.9" font-size="9" font-weight="700">福井</tspan>
+    </text>
+  </g>
+  <g aria-label="山梨 4冊">
+    <title>山梨：4冊</title>
+    <rect x="453" y="350.5" width="36" height="36" rx="3" fill="rgb(252,151,126)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="471" y="371.9" font-size="9" font-weight="700">山梨</tspan>
+    </text>
+  </g>
+  <g aria-label="長野 5.1冊">
+    <title>長野：5.1冊</title>
+    <rect x="415" y="312.5" width="36" height="74" rx="3" fill="rgb(241,96,68)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="433" y="352.9" font-size="9" font-weight="700">長野</tspan>
+    </text>
+  </g>
+  <g aria-label="岐阜 4.2冊">
+    <title>岐阜：4.2冊</title>
+    <rect x="376" y="312.5" width="36" height="74" rx="3" fill="rgb(252,145,119)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="394" y="352.9" font-size="9" font-weight="700">岐阜</tspan>
+    </text>
+  </g>
+  <g aria-label="静岡 5冊">
+    <title>静岡：5冊</title>
+    <rect x="415" y="388.5" width="74" height="36" rx="3" fill="rgb(244,98,69)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="452" y="409.9" font-size="9" font-weight="700">静岡</tspan>
+    </text>
+  </g>
+  <g aria-label="愛知 4.5冊">
+    <title>愛知：4.5冊</title>
+    <rect x="376" y="388.5" width="36" height="36" rx="3" fill="rgb(252,127,98)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="394" y="409.9" font-size="9" font-weight="700">愛知</tspan>
+    </text>
+  </g>
+  <g aria-label="三重 4.2冊">
+    <title>三重：4.2冊</title>
+    <rect x="338" y="388.5" width="36" height="74" rx="3" fill="rgb(252,141,115)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="356" y="428.9" font-size="9" font-weight="700">三重</tspan>
+    </text>
+  </g>
+  <g aria-label="滋賀 7.1冊">
+    <title>滋賀：7.1冊</title>
+    <rect x="338" y="350.5" width="36" height="36" rx="3" fill="rgb(165,15,21)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="356" y="371.9" font-size="9" font-weight="700">滋賀</tspan>
+    </text>
+  </g>
+  <g aria-label="京都 4.7冊">
+    <title>京都：4.7冊</title>
+    <rect x="262" y="350.5" width="74" height="36" rx="3" fill="rgb(251,116,86)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="299" y="371.9" font-size="9" font-weight="700">京都</tspan>
+    </text>
+  </g>
+  <g aria-label="大阪 4.7冊">
+    <title>大阪：4.7冊</title>
+    <rect x="262" y="388.5" width="36" height="36" rx="3" fill="rgb(251,117,87)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="280" y="409.9" font-size="9" font-weight="700">大阪</tspan>
+    </text>
+  </g>
+  <g aria-label="兵庫 4.8冊">
+    <title>兵庫：4.8冊</title>
+    <rect x="224" y="350.5" width="36" height="74" rx="3" fill="rgb(251,111,80)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="242" y="390.9" font-size="9" font-weight="700">兵庫</tspan>
+    </text>
+  </g>
+  <g aria-label="奈良 4.3冊">
+    <title>奈良：4.3冊</title>
+    <rect x="300" y="388.5" width="36" height="36" rx="3" fill="rgb(252,134,107)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="318" y="409.9" font-size="9" font-weight="700">奈良</tspan>
+    </text>
+  </g>
+  <g aria-label="和歌山 4.1冊">
+    <title>和歌山：4.1冊</title>
+    <rect x="262" y="427" width="74" height="36" rx="3" fill="rgb(252,145,120)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.3" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="299" y="447.7" font-size="7" font-weight="700">和歌山</tspan>
+    </text>
+  </g>
+  <g aria-label="鳥取 5.7冊">
+    <title>鳥取：5.7冊</title>
+    <rect x="185" y="350.5" width="36" height="36" rx="3" fill="rgb(217,70,53)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="203" y="371.9" font-size="9" font-weight="700">鳥取</tspan>
+    </text>
+  </g>
+  <g aria-label="島根 4.5冊">
+    <title>島根：4.5冊</title>
+    <rect x="147" y="350.5" width="36" height="36" rx="3" fill="rgb(251,123,94)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="165" y="371.9" font-size="9" font-weight="700">島根</tspan>
+    </text>
+  </g>
+  <g aria-label="岡山 5.8冊">
+    <title>岡山：5.8冊</title>
+    <rect x="185" y="388.5" width="36" height="36" rx="3" fill="rgb(215,68,52)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="203" y="409.9" font-size="9" font-weight="700">岡山</tspan>
+    </text>
+  </g>
+  <g aria-label="広島 4.2冊">
+    <title>広島：4.2冊</title>
+    <rect x="147" y="388.5" width="36" height="36" rx="3" fill="rgb(252,141,115)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="165" y="409.9" font-size="9" font-weight="700">広島</tspan>
+    </text>
+  </g>
+  <g aria-label="山口 5.5冊">
+    <title>山口：5.5冊</title>
+    <rect x="109" y="350.5" width="36" height="74" rx="3" fill="rgb(225,79,58)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="127" y="390.9" font-size="9" font-weight="700">山口</tspan>
+    </text>
+  </g>
+  <g aria-label="徳島 4.9冊">
+    <title>徳島：4.9冊</title>
+    <rect x="185" y="503" width="36" height="36" rx="3" fill="rgb(249,104,73)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="203" y="524.4" font-size="9" font-weight="700">徳島</tspan>
+    </text>
+  </g>
+  <g aria-label="香川 5.8冊">
+    <title>香川：5.8冊</title>
+    <rect x="185" y="465" width="36" height="36" rx="3" fill="rgb(213,66,51)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="203" y="486.4" font-size="9" font-weight="700">香川</tspan>
+    </text>
+  </g>
+  <g aria-label="愛媛 4.3冊">
+    <title>愛媛：4.3冊</title>
+    <rect x="147" y="465" width="36" height="36" rx="3" fill="rgb(252,135,108)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="165" y="486.4" font-size="9" font-weight="700">愛媛</tspan>
+    </text>
+  </g>
+  <g aria-label="高知 6.3冊">
+    <title>高知：6.3冊</title>
+    <rect x="147" y="503" width="36" height="36" rx="3" fill="rgb(195,47,40)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="165" y="524.4" font-size="9" font-weight="700">高知</tspan>
+    </text>
+  </g>
+  <g aria-label="福岡 3.6冊">
+    <title>福岡：3.6冊</title>
+    <rect x="71" y="427" width="36" height="36" rx="3" fill="rgb(253,178,157)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="89" y="448.4" font-size="9" font-weight="700">福岡</tspan>
+    </text>
+  </g>
+  <g aria-label="佐賀 5.3冊">
+    <title>佐賀：5.3冊</title>
+    <rect x="33" y="427" width="36" height="36" rx="3" fill="rgb(232,86,63)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="51" y="448.4" font-size="9" font-weight="700">佐賀</tspan>
+    </text>
+  </g>
+  <g aria-label="長崎 4.9冊">
+    <title>長崎：4.9冊</title>
+    <rect x="33" y="465" width="36" height="36" rx="3" fill="rgb(248,103,72)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="51" y="486.4" font-size="9" font-weight="700">長崎</tspan>
+    </text>
+  </g>
+  <g aria-label="熊本 2.8冊">
+    <title>熊本：2.8冊</title>
+    <rect x="33" y="503" width="36" height="36" rx="3" fill="rgb(254,218,204)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="51" y="524.4" font-size="9" font-weight="700">熊本</tspan>
+    </text>
+  </g>
+  <g aria-label="大分 3.1冊">
+    <title>大分：3.1冊</title>
+    <rect x="71" y="465" width="36" height="36" rx="3" fill="rgb(253,205,189)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="89" y="486.4" font-size="9" font-weight="700">大分</tspan>
+    </text>
+  </g>
+  <g aria-label="宮崎 2.8冊">
+    <title>宮崎：2.8冊</title>
+    <rect x="71" y="503" width="36" height="36" rx="3" fill="rgb(254,222,209)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="89" y="524.4" font-size="9" font-weight="700">宮崎</tspan>
+    </text>
+  </g>
+  <g aria-label="鹿児島 3.5冊">
+    <title>鹿児島：3.5冊</title>
+    <rect x="33" y="541.5" width="74" height="36" rx="3" fill="rgb(253,179,159)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.3" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="70" y="562.2" font-size="7" font-weight="700">鹿児島</tspan>
+    </text>
+  </g>
+  <g aria-label="沖縄 2.8冊">
+    <title>沖縄：2.8冊</title>
+    <rect x="33" y="617.5" width="36" height="36" rx="3" fill="rgb(254,221,208)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="51" y="638.9" font-size="9" font-weight="700">沖縄</tspan>
+    </text>
+  </g>
+  <g aria-label="北海道 3.1冊">
+    <title>北海道：3.1冊</title>
+    <rect x="491" y="45" width="74" height="74" rx="3" fill="rgb(253,204,188)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="2.0" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="528" y="86.2" font-size="11" font-weight="700">北海道</tspan>
+    </text>
+  </g>
+  <g aria-label="青森 2.6冊">
+    <title>青森：2.6冊</title>
+    <rect x="491" y="159.5" width="74" height="36" rx="3" fill="rgb(254,228,216)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="528" y="180.9" font-size="9" font-weight="700">青森</tspan>
+    </text>
+  </g>
+  <g aria-label="岩手 3.7冊">
+    <title>岩手：3.7冊</title>
+    <rect x="529" y="197.5" width="36" height="36" rx="3" fill="rgb(253,169,147)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="547" y="218.9" font-size="9" font-weight="700">岩手</tspan>
+    </text>
+  </g>
+  <g aria-label="宮城 3.4冊">
+    <title>宮城：3.4冊</title>
+    <rect x="529" y="236" width="36" height="36" rx="3" fill="rgb(253,184,165)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="547" y="257.4" font-size="9" font-weight="700">宮城</tspan>
+    </text>
+  </g>
+  <g aria-label="秋田 2.6冊">
+    <title>秋田：2.6冊</title>
+    <rect x="491" y="197.5" width="36" height="36" rx="3" fill="rgb(254,229,217)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="509" y="218.9" font-size="9" font-weight="700">秋田</tspan>
+    </text>
+  </g>
+  <g aria-label="山形 3.5冊">
+    <title>山形：3.5冊</title>
+    <rect x="491" y="236" width="36" height="36" rx="3" fill="rgb(253,182,162)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="509" y="257.4" font-size="9" font-weight="700">山形</tspan>
+    </text>
+  </g>
+  <g aria-label="福島 3.1冊">
+    <title>福島：3.1冊</title>
+    <rect x="491" y="274" width="74" height="36" rx="3" fill="rgb(253,204,188)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="528" y="295.4" font-size="9" font-weight="700">福島</tspan>
+    </text>
+  </g>
+  <g aria-label="茨城 4冊">
+    <title>茨城：4冊</title>
+    <rect x="529" y="312.5" width="36" height="36" rx="3" fill="rgb(252,155,130)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="547" y="333.9" font-size="9" font-weight="700">茨城</tspan>
+    </text>
+  </g>
+  <g aria-label="栃木 4.3冊">
+    <title>栃木：4.3冊</title>
+    <rect x="491" y="312.5" width="36" height="36" rx="3" fill="rgb(252,138,111)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="509" y="333.9" font-size="9" font-weight="700">栃木</tspan>
+    </text>
+  </g>
+  <defs>
+    <linearGradient id="choropleth-lg" x1="0" x2="1">
+      <stop offset="0%"   stop-color="#fee5d9"/>
+      <stop offset="50%"   stop-color="#fb6a4a"/>
+      <stop offset="100%"   stop-color="#a50f15"/>
+    </linearGradient>
+    <filter id="txt-halo-dark" x="-40%" y="-40%" width="180%" height="180%">
+      <feDropShadow dx="0" dy="0" stdDeviation="1.3" flood-color="#000000" flood-opacity="0.7"/>
+    </filter>
+  </defs>
+  <text x="401" y="633" font-size="8" class="svg-tick" text-anchor="end">安全</text>
+  <rect x="405" y="625" width="140" height="10" rx="2" fill="url(#choropleth-lg)"/>
+  <text x="549" y="633" font-size="8" class="svg-tick">危険</text>
+  <text x="405" y="647" font-size="7.5" class="svg-tick">2.6冊</text>
+  <text x="475" y="647" font-size="7.5" class="svg-tick" text-anchor="middle">4.9冊</text>
+  <text x="545" y="647" font-size="7.5" class="svg-tick" text-anchor="end">7.1冊</text>
+</svg>

@@ -117,6 +117,15 @@ else
   echo -e "${GREEN}✅ 一時ファイルチェック成功${NC}"
 fi
 
+# 3.1 tracked/staged リポジトリ衛生ガード
+# 既存findingはbaselineで許容し、新規悪化だけをブロックする。
+# 全tracked pathを見ることで staged path と既存pathの case/Unicode衝突も検出する。
+echo -e "${GREEN}🧹 リポジトリ衛生回帰チェック...${NC}"
+if ! node "$PROJECT_ROOT/.claude/scripts/lib/check-repo-hygiene.cjs" --baseline; then
+  echo -e "${RED}❌ 新規の一時出力・大容量ファイル・path衝突が検出されました。${NC}"
+  ERROR_COUNT=$((ERROR_COUNT + 1))
+fi
+
 # 4. ファイルサイズチェック
 echo -e "${GREEN}📏 ファイルサイズチェック...${NC}"
 MAX_FILE_SIZE=1048576 # 1MB
