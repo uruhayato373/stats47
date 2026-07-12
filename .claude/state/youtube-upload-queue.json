@@ -26,7 +26,8 @@
     "metric_keys": [
       "japanese-movers-in"
     ],
-    "status": "pending"
+    "status": "uploaded",
+    "uploaded_at": "2026-07-12T10:05:38Z"
   },
   {
     "key": "japanese-movers-out",
@@ -55,7 +56,8 @@
     "metric_keys": [
       "marriages"
     ],
-    "status": "pending"
+    "status": "uploaded",
+    "uploaded_at": "2026-07-12T10:06:03Z"
   },
   {
     "key": "divorces",
@@ -84,7 +86,8 @@
     "metric_keys": [
       "flush-toilet-population-ratio"
     ],
-    "status": "pending"
+    "status": "uploaded",
+    "uploaded_at": "2026-07-12T10:06:29Z"
   },
   {
     "key": "registered-foreigner-population",
@@ -113,7 +116,8 @@
     "metric_keys": [
       "traffic-accident-count"
     ],
-    "status": "pending"
+    "status": "uploaded",
+    "uploaded_at": "2026-07-12T10:06:53Z"
   },
   {
     "key": "building-fire-count",
@@ -142,7 +146,8 @@
     "metric_keys": [
       "residential-telephone-subscription-count-per-1000"
     ],
-    "status": "pending"
+    "status": "uploaded",
+    "uploaded_at": "2026-07-12T10:07:17Z"
   },
   {
     "key": "university-count",
