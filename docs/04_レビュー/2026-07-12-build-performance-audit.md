@@ -102,4 +102,45 @@ CI / R2 URL ありの prebuild はランキングとブログ snapshot を R2 �
 
 - webpack profile / bundle analyzer によるモジュール別コンパイル時間は未取得。現状キャッシュの異常を切り分けてから実施する。
 - `workers:build` のローカル完走は未実施。本番用出力と R2 認証を伴うため、今回は直近 CI の成功計測を根拠とした。
-- キャッシュ削除後の計測は、監査から実装へ進む次フェーズで行う。
+- ~~キャッシュ削除後の計測は、監査から実装へ進む次フェーズで行う。~~ → 下記「Phase 1 実装後の実測」で完了。
+
+## Phase 1 実装後の実測 (2026-07-12)
+
+feature ブランチ `feature/build-perf-phase1`、macOS ローカル (load avg ~5、uTorrent が別途 CPU を消費)。
+`/usr/bin/time -lp npm run build --workspace apps/web` で計測。
+
+### 変更
+
+- `apps/web/package.json` の `build` から重複していた `npm run prebuild &&` を削除。
+  `prebuild` は npm lifecycle が `build` の直前に1回だけ自動実行する (スクリプト本体は残置)。
+
+### before / after (ローカル `npm run build`)
+
+| 指標 | before (監査時) | after (Phase 1) |
+|---|---|---|
+| `prebuild` 起動回数 / build | 2 回 | **1 回** (clean/warm とも実測1) |
+| ローカル build 所要 | 11分超で中断 (高負荷 + 肥大 cache) | **clean 76.23s / warm 56.17s** (warm < clean) |
+| `.next/cache/webpack` | 2.7 GB (stale pack 蓄積) | 削除 → build 2回後 **993 MB** (健全) |
+| peak RSS (clean) | 未計測 | 1.93 GB |
+
+- clean = `.next/cache/webpack` を削除した直後の build。warm = その直後の2回目 (cache 再利用)。
+- 11分超は高 CPU 負荷 (並行セッション) + 2.7 GB cache の pack マージ + 二重 prebuild の複合。
+  主因はローカル cache 肥大。負荷が下がり cache を初期化した状態では clean でも 76 秒で完走した。
+
+### 不変性・検証ゲート
+
+- `public/search-index.json` / `search-index-meta.json` の sha256 は前後で完全一致
+  (`889b5b1b…` / `0722d0c9…`)。ローカル prebuild は R2 不在時に既存 index を保持する no-op のため。
+- type-check (apps/web) 0 error / web unit tests 67 files・372 tests 全通過。
+- `git status` の変更は `apps/web/package.json` の1行のみ (他セッションの変更・生成物の混入なし)。
+- route 種別 (`○`/`●`/`ƒ`) は build 出力で従来どおり。prebuild 回数の変更は route 生成に影響しない。
+
+### 見送り・未実施 (理由付き)
+
+- **`build:clean-cache` コマンド (Phase 1-3) は追加しない。** 追加条件は「1-2 でキャッシュ肥大が再現した場合」
+  だが、build 2回後の cache は 993 MB で 2.7 GB の再現には至らず (肥大は多数回 build の stale pack 蓄積)。
+  効果を確認できない変更は残さない方針に従い、肥大が再発したときの follow-up とする。
+- **`workers:build` はローカル未実行。** 本 Phase の変更は `build` スクリプトのみで、`workers:build`
+  (`workers:prebuild` = `rimraf .next .open-next` → `opennextjs-cloudflare build`) は別経路であり
+  `npm run prebuild` を元々呼ばないため影響を受けない。ローカル実行は R2/env 制約で失敗しうる上に
+  `.next` を rimraf して本計測を破棄するため見送り、CI の `workers:build` ゲートを権威とする。
