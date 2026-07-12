@@ -10,8 +10,7 @@ import { SHELL_WIDTH_CLASS } from "@/components/layout/PageShell";
 import { SectionHeader } from "@/components/section";
 import { SurfaceLinkCard } from "@/components/surface";
 
-import { InContentAdSlot, FooterAdSlot, NativeAffiliateRow } from "@/features/ads";
-import { resolveAffiliateBanners } from "@/features/ads/server";
+import { InContentAdSlot, FooterAdSlot } from "@/features/ads";
 import { listLatestArticles } from "@/features/blog/server";
 import { FeaturedRankings } from "@/features/ranking/server";
 
@@ -138,10 +137,7 @@ const DISCOVERY_CARDS = [
 ];
 
 export default async function HomePage() {
-  const [latestArticles, nativeBanners] = await Promise.all([
-    listLatestArticles(4).catch(() => []),
-    resolveAffiliateBanners(["economy", "population", "labor"], 4).catch(() => []),
-  ]);
+  const latestArticles = await listLatestArticles(4).catch(() => []);
 
   return (
     <div className="w-full" suppressHydrationWarning>
@@ -288,19 +284,7 @@ export default async function HomePage() {
           </section>
         )}
 
-        {/* ⑤ 関連書籍・商品（ネイティブアフィリエイト） */}
-        {nativeBanners.length > 0 && (
-          <div className="mt-12">
-            <NativeAffiliateRow
-              title="統計・データ分析の関連書籍"
-              banners={nativeBanners}
-              position="home-native"
-              trackingCategory="home"
-            />
-          </div>
-        )}
-
-        {/* ⑥ コンテンツ末尾の全幅フッター広告 */}
+        {/* ⑤ コンテンツ末尾の全幅フッター広告 */}
         <FooterAdSlot />
       </PageShell>
     </div>

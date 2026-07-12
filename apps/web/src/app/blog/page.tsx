@@ -52,13 +52,12 @@ export default async function BlogIndexPage({ searchParams }: PageProps) {
             rightRailBreakpoint="lg"
             rightRail={
                 <RightRailWidgets
-                    // モバイルはフッター上のグローバルカードが運営者を担うため PC のみ表示
+                    // 運営者プロフィール (E-E-A-T) は右レールに PC のみ表示
                     topWidgets={
                         <div className="hidden lg:block">
                             <OperatorProfileCard />
                         </div>
                     }
-                    showOperatorCard={false}
                 />
             }
         >

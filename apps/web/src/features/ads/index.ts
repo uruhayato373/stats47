@@ -2,7 +2,6 @@
 export { BannerAd } from "./components/BannerAd";
 export { FurusatoNozeiCard } from "./components/FurusatoNozeiCard";
 export { OperatorProfileCard } from "./components/OperatorProfileCard";
-export { OperatorPromoCard } from "./components/OperatorPromoCard";
 export { SidebarPromoBanner } from "./components/SidebarPromoBanner";
 export { TechSchoolPromoCard } from "./components/TechSchoolPromoCard";
 export { NativeAffiliateRow } from "./components/NativeAffiliateRow";

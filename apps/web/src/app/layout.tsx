@@ -34,8 +34,6 @@ import { Footer } from "@/components/organisms/Footer/Footer";
 import Header from "@/components/organisms/Header";
 import { MobileNavDrawer } from "@/components/organisms/MobileNavDrawer";
 
-import { OperatorPromoCard } from "@/features/ads";
-
 import { A8LinkManager } from "@/lib/a8net/A8LinkManager";
 import { CookieConsentBanner } from "@/lib/analytics/components/CookieConsentBanner";
 import { PageViewTracker } from "@/lib/analytics/components/PageViewTracker";
@@ -159,8 +157,6 @@ export default function RootLayout({
             <main className="min-w-0 flex-1">
               {children}
             </main>
-            {/* 運営者カード（全ページ共通・転職/AI学習の2軸をランダム表示） */}
-            <OperatorPromoCard placement="global" />
             {/* フッター（全ページ共通） */}
             <Footer />
           </div>
