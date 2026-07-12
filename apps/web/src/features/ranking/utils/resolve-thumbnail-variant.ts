@@ -6,7 +6,7 @@ import type { RankingThumbnailVariant } from "@stats47/data-configs";
  * A = 地図型 ("map") = 後方互換の標準 (47 都道府県タイル地図)。
  * B = 数値型 ("number") = 代表値を強調 (1 位の値にニュース性がある指標)。
  *
- * 正典: docs/02_実装計画/21_ランキングサムネイルAB表示仕様.md
+ * 正典(A/B解決規則): このファイル (resolve-thumbnail-variant.ts) が SSOT
  *
  * 純関数 (副作用なし)。UI からも generate-ogp-images からも同じ規則で解決できるように
  * 表示ロジックから分離する。完全未設定・データ欠損・値が長すぎる場合は必ず "map" に戻す。

@@ -168,7 +168,7 @@ export type CategoryKey = (typeof CATEGORY_KEYS)[number];
 /**
  * ランキングリンクカードのサムネイル表示バリアント。
  * "map" = 地図型 (タイル地図) / "number" = 数値型 (代表値強調)。
- * 正典: docs/02_実装計画/21_ランキングサムネイルAB表示仕様.md
+ * 正典(A/B解決規則): apps/web/src/features/ranking/utils/resolve-thumbnail-variant.ts
  */
 export type RankingThumbnailVariant = "map" | "number";
 
@@ -211,7 +211,7 @@ export interface MetricConfig {
    * ランキングリンクカードのサムネイル表示バリアント (A/B)。
    * "map" = 地図型 (47 都道府県タイル地図・後方互換の標準) / "number" = 数値型 (代表値を強調)。
    * 未設定は解決規則で最終的に "map" になる (完全未設定は必ず A 型)。
-   * 正典: docs/02_実装計画/21_ランキングサムネイルAB表示仕様.md
+   * 正典(A/B解決規則): apps/web/src/features/ranking/utils/resolve-thumbnail-variant.ts
    */
   thumbnailVariant?: RankingThumbnailVariant;
   calculation?: CalculationOptions;

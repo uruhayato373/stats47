@@ -23,7 +23,7 @@ interface FeaturedRankingCardProps {
   /**
    * サムネイル表示バリアント。"map"=地図型(既定・後方互換) / "number"=数値型(代表値強調)。
    * 解決は resolveRankingThumbnailVariant に一本化し、ここでは解決済み値を受け取る。
-   * 正典: docs/02_実装計画/21_ランキングサムネイルAB表示仕様.md
+   * 正典(A/B解決規則): apps/web/src/features/ranking/utils/resolve-thumbnail-variant.ts
    */
   variant?: RankingThumbnailVariant;
 }

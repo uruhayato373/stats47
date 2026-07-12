@@ -25,7 +25,7 @@ interface FeaturedRankingsProps {
   /**
    * この表示場所のサムネイル既定バリアント。home 注目ランキングは "number"（数値型）。
    * metric config の thumbnailVariant がある指標はそちらが優先される。
-   * 正典: docs/02_実装計画/21_ランキングサムネイルAB表示仕様.md
+   * 正典(A/B解決規則): apps/web/src/features/ranking/utils/resolve-thumbnail-variant.ts
    */
   thumbnailVariantDefault?: RankingThumbnailVariant;
 }
