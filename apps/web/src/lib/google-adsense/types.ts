@@ -47,9 +47,12 @@ export interface AdSlotProps {
   /**
    * 遅延ロードの閾値（ピクセル）
    *
-   * ビューポート手前この距離で広告リクエストを開始する。100px では表示前に
-   * 離脱され imp/PV が低かった (W26 実測 0.71) ため 600px に前倒し (ADSENSE-LAZYLOAD-01)。
-   * @default 600
+   * ビューポート手前この距離で広告リクエストを開始する。100px では表示前に離脱され
+   * imp/PV が低かった (W26 実測 0.71) ため 600px に前倒し (ADSENSE-LAZYLOAD-01)。
+   * ただしモバイルでは先読みしすぎて viewability が落ちた (W27 39.1%) ため、未指定時は
+   * デバイス別デフォルト（desktop 600 / mobile 250）を使う (ADSENSE-LAZYLOAD-02)。
+   * 数値を明示した場合はデバイスに依らずその値を使う。
+   * @default undefined — device-aware: desktop 600px / mobile 250px
    */
   rootMargin?: number;
 

@@ -29,6 +29,18 @@ function getReservedMinHeight(format: AdFormat): number {
 }
 
 /**
+ * lazy-load 発火閾値のデバイス別デフォルト（ADSENSE-LAZYLOAD-02, 2026-07-12）
+ *
+ * ADSENSE-LAZYLOAD-01 (2026-07-03) で全デバイス一律 600px に前倒ししたが、モバイルでは
+ * 「読み込んだが画面に来ない」imp を量産し、viewability が W26 57.3% → W27 39.1% に半減した
+ * （`snapshots/2026-W27/devices.csv`、モバイル imp 337→724 に倍増したのに収益は ¥27→¥29）。
+ * モバイルは 250px に戻し、viewable-CPM を回復させる。desktop は 600px を維持する。
+ */
+const DESKTOP_ROOT_MARGIN_PX = 600;
+const MOBILE_ROOT_MARGIN_PX = 250;
+const MOBILE_MEDIA_QUERY = "(max-width: 767px)";
+
+/**
  * AdSense広告コンポーネント
  */
 export function AdSenseAd({
@@ -37,7 +49,7 @@ export function AdSenseAd({
   className = "",
   showLabel = true,
   lazyLoad = true,
-  rootMargin = 600,
+  rootMargin,
 }: AdSlotProps) {
   const adRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(!lazyLoad);
@@ -51,6 +63,14 @@ export function AdSenseAd({
   useEffect(() => {
     if (!isEnabled || !clientId || !lazyLoad || !adRef.current) return;
 
+    // rootMargin の明示指定が無ければデバイス別デフォルトを採用する。
+    // モバイルの先読みしすぎ（読み込んだが画面に来ない = viewability 低下）を防ぐ。
+    const isMobile =
+      typeof window !== "undefined" &&
+      window.matchMedia(MOBILE_MEDIA_QUERY).matches;
+    const effectiveRootMargin =
+      rootMargin ?? (isMobile ? MOBILE_ROOT_MARGIN_PX : DESKTOP_ROOT_MARGIN_PX);
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -59,7 +79,7 @@ export function AdSenseAd({
         }
       },
       {
-        rootMargin: `${rootMargin}px`,
+        rootMargin: `${effectiveRootMargin}px`,
       }
     );
 

@@ -1,7 +1,10 @@
 {
-  "hash": "a4479769344f91fdf22aae59fcb6fee5e833af2dec5e1c3049d715cdf125ecee",
-  "audited_at": "2026-07-11T10:57:46",
+  "hash": "a77447c1d17dccf4e5418b767ec94984b37992fdce1f0db83d92f2b9904aeb95",
+  "audited_at": "2026-07-12T00:46:45",
   "files": [
-    ".claude/scripts/instagram/post-from-schedule.cjs"
+    ".claude/agents/adsense-analyst.md",
+    ".claude/scripts/metrics/measure-adsense-impact.mjs",
+    ".claude/scripts/metrics/update-history-csv.mjs",
+    ".claude/skills/analytics/adsense-improvement/reference/improvement-log.md"
   ]
 }

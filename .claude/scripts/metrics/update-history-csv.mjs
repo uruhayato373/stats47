@@ -228,11 +228,18 @@ function markdownGa4(history, latest) {
 
 // ── AdSense 集約 ──
 
+// history-devices.csv の列。RPM の分解レバー（CPC / imp_per_pv / viewability）を
+// デバイス別に時系列追跡する。アカウント合算だけでは見えないモバイル退行を surface するため。
+const ADSENSE_DEVICE_FIELDS = [
+  "week", "platform", "earnings", "page_views", "rpm",
+  "impressions", "clicks", "ctr", "viewability", "cpc", "imp_per_pv",
+];
+
 function aggregateAdsense(snapDir, week) {
   const overview = readCsv(join(snapDir, "overview.csv"));
   if (!overview || overview.rows.length === 0) return null;
   const r = overview.rows[0];
-  return {
+  const latest = {
     week,
     earnings: num(r.ESTIMATED_EARNINGS).toFixed(2),
     page_views: num(r.PAGE_VIEWS),
@@ -242,9 +249,52 @@ function aggregateAdsense(snapDir, week) {
     ctr: num(r.IMPRESSIONS_CTR).toFixed(4),
     viewability: num(r.ACTIVE_VIEW_VIEWABILITY).toFixed(4),
   };
+  // デバイス別内訳（history-devices.csv 用）。toCsv は headerFields のみ拾うため、
+  // latest._devices は account の history.csv には出力されない（別 CSV に分離）。
+  const devices = readCsv(join(snapDir, "devices.csv"));
+  if (devices && devices.rows.length > 0) {
+    latest._devices = devices.rows.map((d) => {
+      const earnings = num(d.ESTIMATED_EARNINGS);
+      const pv = num(d.PAGE_VIEWS);
+      const imp = num(d.IMPRESSIONS);
+      const clicks = num(d.CLICKS);
+      return {
+        week,
+        platform: d.PLATFORM_TYPE_NAME || "unknown",
+        earnings: earnings.toFixed(2),
+        page_views: pv,
+        rpm: num(d.PAGE_VIEWS_RPM).toFixed(2),
+        impressions: imp,
+        clicks,
+        ctr: num(d.IMPRESSIONS_CTR).toFixed(4),
+        viewability: num(d.ACTIVE_VIEW_VIEWABILITY).toFixed(4),
+        // CPC = 収益/click。viewable-CPM のレバーで、モバイルの click 無価値化を検知する
+        cpc: clicks > 0 ? (earnings / clicks).toFixed(2) : "0.00",
+        // imp_per_pv = 広告表示率。1 に近いほど枠が埋まっている
+        imp_per_pv: pv > 0 ? (imp / pv).toFixed(3) : "0.000",
+      };
+    });
+  }
+  return latest;
 }
 
-function markdownAdsense(history, latest) {
+/** history-devices.csv を week 単位で dedupe して書き、全履歴（配列）を返す（AdSense 専用） */
+function writeAdsenseDeviceHistory(stateDir, week, deviceRows) {
+  const path = join(stateDir, "history-devices.csv");
+  let rows = [];
+  if (existsSync(path)) {
+    rows = readCsv(path)?.rows ?? [];
+  }
+  rows = rows.filter((r) => r.week !== week);
+  rows.push(...deviceRows);
+  rows.sort((a, b) =>
+    a.week !== b.week ? (a.week < b.week ? -1 : 1) : a.platform < b.platform ? -1 : 1
+  );
+  writeFileSync(path, toCsv(rows, ADSENSE_DEVICE_FIELDS), "utf-8");
+  return rows;
+}
+
+function markdownAdsense(history, latest, deviceHistory) {
   const prev = history.length >= 2 ? history[history.length - 2] : null;
   const arrow = (cur, prv, betterLow) => {
     if (!prv) return "";
@@ -275,7 +325,56 @@ function markdownAdsense(history, latest) {
   lines.push(`| CTR | ${(num(latest.ctr) * 100).toFixed(2)}%${arrow(latest.ctr, prev?.ctr, false)} | |`);
   lines.push(`| Viewability | ${(num(latest.viewability) * 100).toFixed(1)}%${arrow(latest.viewability, prev?.viewability, false)} | |`);
   lines.push("");
-  lines.push("履歴: [`history.csv`](./history.csv)");
+
+  // デバイス別内訳。アカウント合算だけでは見えない「モバイル viewability 半減」等を
+  // 前週比つきで surface する（RPM のレバー = viewability / CPC / imp_per_pv をデバイス別に表示）。
+  if (deviceHistory && deviceHistory.length > 0) {
+    const weeks = [...new Set(deviceHistory.map((r) => r.week))].sort();
+    const prevWeek = weeks.filter((w) => w < latest.week).pop() || null;
+    const cur = deviceHistory.filter((r) => r.week === latest.week);
+    const prevByPlatform = new Map(
+      deviceHistory.filter((r) => r.week === prevWeek).map((r) => [r.platform, r])
+    );
+    const shortName = (p) =>
+      /desktop/i.test(p) ? "Desktop"
+        : /mobile/i.test(p) ? "Mobile"
+          : /tablet/i.test(p) ? "Tablet"
+            : p;
+    const alerts = [];
+    lines.push("## デバイス別（今週 / 前週比）");
+    lines.push("");
+    lines.push("| Platform | RPM | Viewability | CPC | imp/PV | Earnings |");
+    lines.push("|---|---|---|---|---|---|");
+    for (const d of cur) {
+      const p = prevByPlatform.get(d.platform);
+      const viewCur = num(d.viewability) * 100;
+      const viewPrev = p ? num(p.viewability) * 100 : null;
+      const viewPp = viewPrev != null ? viewCur - viewPrev : null;
+      const viewPpStr =
+        viewPp != null && Math.abs(viewPp) >= 3
+          ? ` ${viewPp >= 0 ? "+" : ""}${viewPp.toFixed(1)}pp`
+          : "";
+      lines.push(
+        `| ${shortName(d.platform)} | ¥${d.rpm}${arrow(d.rpm, p?.rpm, false)} | ` +
+          `${viewCur.toFixed(1)}%${arrow(d.viewability, p?.viewability, false)}${viewPpStr} | ` +
+          `¥${d.cpc} | ${d.imp_per_pv} | ¥${d.earnings}${pct(d.earnings, p?.earnings)} |`
+      );
+      // 8pp 以上の viewability 低下は「要確認の退行」として明示する（今回のモバイル退行を自動で赤くする）。
+      // ただし imp が少ない面（例: Tablet 数十 imp）は統計的ノイズなので閾値 200imp 未満は警告しない。
+      if (viewPp != null && viewPp <= -8 && num(d.impressions) >= 200) {
+        alerts.push(
+          `${shortName(d.platform)} viewability ${viewPp.toFixed(1)}pp（${viewPrev.toFixed(1)}%→${viewCur.toFixed(1)}%）`
+        );
+      }
+    }
+    lines.push("");
+    if (alerts.length > 0) {
+      lines.push(`> ⚠️ **要確認の退行**: ${alerts.join(" / ")}`);
+      lines.push("");
+    }
+  }
+
+  lines.push("履歴: [`history.csv`](./history.csv) / デバイス別: [`history-devices.csv`](./history-devices.csv)");
   lines.push("");
   return lines.join("\n");
 }
@@ -314,10 +413,19 @@ function updateOne(key, week) {
   const csv = toCsv(history, cfg.headerFields);
   writeFileSync(histPath, csv, "utf-8");
 
-  const md = cfg.markdown(history, latest);
+  // AdSense のみ: デバイス別 history を書き出し、markdown にも渡す
+  let deviceHistory = null;
+  if (latest._devices) {
+    deviceHistory = writeAdsenseDeviceHistory(stateDir, week, latest._devices);
+  }
+
+  const md = cfg.markdown(history, latest, deviceHistory);
   writeFileSync(latestPath, md, "utf-8");
 
-  console.log(`[${key}] updated history.csv (${history.length} weeks) and LATEST.md`);
+  console.log(
+    `[${key}] updated history.csv (${history.length} weeks) and LATEST.md` +
+      (deviceHistory ? ` + history-devices.csv (${deviceHistory.length} rows)` : "")
+  );
 }
 
 function main() {
