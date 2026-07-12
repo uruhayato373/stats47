@@ -162,14 +162,46 @@ node .claude/scripts/ogp/build-image-gallery.mjs --audit
 - **theme のみ例外**: `generateStaticParams` でビルド時 prerender され稼働するため、当面ランタイム route を残す。
   **home/category は既存の静的 `public/og-image.jpg`** を使う。
 
-### 画像生成 AI (背景素材)
-- **実装済 (blog・2026-07-07)**: blog の OGP/リンクカードは静的ブランド背景 (`scripts/lib/assets/ogp-bg-brand-{light,dark}.jpg`)
-  を Satori で合成済 (§5「blog の背景合成」参照)。以下は ranking/areas/note への横展開・AI 動的生成の Phase 2 案。
-- テキスト・数値の重畳は上記 Satori が担う。動的タイトル差し込みは静的 PNG を事前生成することで実現する。
-- 背景素材の AI 生成: Cloudflare Workers AI SDXL (`apps/remotion/src/lib/ai-image.ts`、日次クォータ + sha256
-  キャッシュ) を手本に Gemini API (`gemini-2.5-flash-image` 系) を導入予定。背景は R2
-  `brand/ogp-backgrounds/<use>/<name>-{light,dark}.png`。
-- 外部 AI (Midjourney 等) 用プロンプトは `image-prompt` skill の catalog 43 種。
+### 画像生成 AI: ブログ OGP の記事別背景 (実装済・正典)
+
+**blog OGP は記事ごとに Gemini で「文字なしの背景だけ」を生成し、タイトル・ブランドは既存 Satori/Sharp が
+合成する** (2026-07-12 実装、高流入 top100 記事は本番 live)。旧 `docs/02_実装計画/23_ブログOGP生成AIパイプライン仕様.md`
+の恒久運用スペックを本節に統合 (doc は削除・git 履歴に残る)。
+
+- **コード SSOT (機械的)**: `apps/web/scripts/data/blog-ogp-visual-catalog.ts`
+  — 6 系統 (map / people / economy / industry / timeline / comparison) × motif・固定スタイル `OGP_STYLE_PREFIX`
+  (light / editorial / flat / 落ち着いた藍・**文字/数字/ロゴ/実顔/精密な地図境界を禁止**・左 1/3 をタイトル安全域として空ける)・
+  category(17) / archetype(A-G) / tags → visualType の**決定的**対応表・model / 価格 / promptVersion 定数。
+- **決定的分類 (モデルに分類させない)**: frontmatter `ogpVisualType` > `category` > `archetype` > `tags` > 既定
+  (`map` / `prefecture-comparison`)。motif は有効な `ogpMotif` > visualType の既定 motif。解決 / hash の実装は
+  `apps/web/scripts/lib/blog-ogp-visual.ts` (`resolveOgpVisual` / `computePromptHash` / frontmatter parser)。
+- **パイプライン**: Gemini (`gemini-2.5-flash-image`) が背景 1 枚 → `normalizeAiBackground` (`blog-thumbnail-render.ts`)
+  で 1200×630 cover + dark 処理 + 左タイトルスクリム (**satori 互換の JPEG**。webp は satori が解析不能で不可) →
+  `buildElement(backgroundImage)` で合成 → R2。最終 4 キー (`thumbnail-{light,dark}.webp` / `ogp/ogp.png` /
+  `ogp/ogp.json`) は不変、`ogp/background.jpg` (AI 背景) と `ogp.json.background` メタを追加。
+  **別ジェネレーターは作らず `generate-blog-thumbnails-cloud.ts` を拡張**する。
+- **改善は共通カタログ/スタイルのみ (個別プロンプト禁止)**: 品質不足は `OGP_STYLE_PREFIX` か
+  `OGP_VISUAL_CATALOG` を直して同じ `--out-dir` へ再生成する。記事ごとの自由入力プロンプトは持たせない。
+- **費用・安全弁**: ~$0.039/枚。`--budget-usd` 上限、`promptHash` 一致で再生成スキップ (キャッシュ)、
+  生成失敗 / 予算切れ / キー無しは**ブランド背景へ fallback** (`ogp.json.background.source = "brand-fallback"`)。
+- **クライアント**: `apps/web/scripts/lib/gemini-image-client.ts` — `x-goog-api-key`・30s timeout・
+  429/5xx/timeout/network のみ指数バックオフ再試行・4xx 非再試行・**API キー/レスポンス本文をログ/エラーに出さない**。
+  `GEMINI_API_KEY` は `.env.local` から自己ロード (値非表示、CI では no-op)。
+- **生成コマンド**:
+  ```
+  # 純粋監査 (API を呼ばない・生成予定/最大費用のみ)
+  npx tsx apps/web/scripts/generate-blog-thumbnails-cloud.ts --ai-background --limit N
+  # ローカル目視 (R2 非書込・gallery /assets「ブログ OGP パイロット (local)」タブで確認)
+  npx tsx apps/web/scripts/generate-blog-thumbnails-cloud.ts --ai-background --slug a,b --out-dir .local/ogp-pilot
+  # 本番反映 (R2 push)
+  npx tsx apps/web/scripts/generate-blog-thumbnails-cloud.ts --ai-background --slug <slugs> --apply
+  ```
+- **役割分担**: カタログ/スタイル SSOT の維持・品質監査 = `image-prompt-curator`、生成実行・記事公開連動 = `blog-editor`、
+  effect 判定 = `improvement-triage`。R2 push は `--apply` (wrangler)。
+- **展開状況**: 高流入 top100 = 本番 live (2026-07-12・GSC imp 上位)。残り記事は従来のブランド背景
+  (`ogp-bg-brand-{light,dark}.jpg`) のまま。効果 (SNS カード・回遊) 観測後に段階展開。
+  **ranking / areas / note の AI 背景は未実装 (Phase 2)**。外部 AI (Midjourney 等) 用プロンプトは
+  `image-prompt` skill の catalog 43 種。
 
 ---
 
@@ -178,6 +210,10 @@ node .claude/scripts/ogp/build-image-gallery.mjs --audit
 - ギャラリー生成: `.claude/scripts/ogp/build-image-gallery.mjs`
 - 監査スキル: `.claude/skills/ui/audit-ogp-images/SKILL.md`
 - 棚卸し state: `.claude/state/ogp/inventory.json`
+- **ブログ OGP AI 背景 (§5)**: カタログ SSOT `apps/web/scripts/data/blog-ogp-visual-catalog.ts` / 解決・hash
+  `apps/web/scripts/lib/blog-ogp-visual.ts` / Gemini クライアント `apps/web/scripts/lib/gemini-image-client.ts` /
+  合成 `apps/web/scripts/lib/blog-thumbnail-render.ts` (`normalizeAiBackground`) / 生成 `apps/web/scripts/generate-blog-thumbnails-cloud.ts`
+  (`--ai-background`) / 目視 `npm run gallery` → /assets「ブログ OGP パイロット (local)」タブ
 - 画像プロンプト: `.claude/skills/image-prompt/SKILL.md` / `reference/catalog.md`
 - OGP コンポーネント: `apps/web/src/features/ogp/`
 - R2 キー設計: `.claude/rules/r2-storage-design.md`
