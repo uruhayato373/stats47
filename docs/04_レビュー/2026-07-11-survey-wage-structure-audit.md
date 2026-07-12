@@ -65,7 +65,7 @@ page合計447 impressionsの一部であり、残りは匿名化されている�
 
 ### 直接重複
 
-- `docs/21_ブログ記事原稿/prefecture-salary-gap-career/article.md`
+- `prefecture-salary-gap-career (公開済み → stats47.jp/blog/prefecture-salary-gap-career)`
   - ソフトウェア作成者を中心に、職種×都道府県の年収差を詳説済み
   - `/ranking/software-engineer-annual-income` への導線あり
   - surveyハブから関連記事として接続する候補。ソフトウェア職の新規記事は作らない

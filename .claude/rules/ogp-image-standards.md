@@ -165,7 +165,7 @@ node .claude/scripts/ogp/build-image-gallery.mjs --audit
 ### 画像生成 AI: ブログ OGP の記事別背景 (実装済・正典)
 
 **blog OGP は記事ごとに Gemini で「文字なしの背景だけ」を生成し、タイトル・ブランドは既存 Satori/Sharp が
-合成する** (2026-07-12 実装、高流入 top100 記事は本番 live)。旧 `docs/02_実装計画/23_ブログOGP生成AIパイプライン仕様.md`
+合成する** (2026-07-12 実装、高流入 top100 記事は本番 live)。旧 doc `23_ブログOGP生成AIパイプライン仕様.md` (docs/02_実装計画・削除)
 の恒久運用スペックを本節に統合 (doc は削除・git 履歴に残る)。
 
 - **コード SSOT (機械的)**: `apps/web/scripts/data/blog-ogp-visual-catalog.ts`
