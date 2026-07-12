@@ -22,7 +22,7 @@
  *   → `npx tsx packages/gis/src/mlit-ksj/scripts/seed-from-registry.ts` で再 seed。
  *   (ローカル SQLite への手動 INSERT は廃止)
  *
- * 正典: `.claude/rules/gis-data.md` / `docs/01_技術設計/04_国土数値情報GISデータ.md`
+ * 正典: `.claude/rules/gis-data.md` / `packages/gis/src/mlit-ksj/README.md`
  */
 
 import type { KsjCategory, KsjCoverage, KsjGeometryType, KsjLicense } from "./types";
@@ -59,8 +59,8 @@ export interface GisDatasetMeta {
 
 /**
  * 登録済み 42 データセット (status='registered')。
- * メタは docs/01_技術設計/04_国土数値情報GISデータ.md の生成表 (generate-docs.ts が
- * 旧 SQLite から生成した git 追跡スナップショット) を真実源として転記。
+ * 本ファイル (datasets.ts) が git TS メタ SSOT (完全DBレス)。
+ * 旧 doc 04 の生成表 (generate-docs.ts) は datasets.ts と重複するため 2026-07-12 廃止。
  * ranking 定義は旧 RANKINGS (seed-from-registry.ts) を統合。
  */
 export const GIS_DATASETS: GisDatasetMeta[] = [

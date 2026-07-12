@@ -14,7 +14,7 @@
  *   3. `npx tsx packages/gis/src/mlit-ksj/scripts/seed-from-registry.ts` で SQLite を再 seed
  *   4. `npx tsx packages/gis/src/mlit-ksj/scripts/run-pipeline.ts <ID>` を実行
  *
- * 正典: `.claude/rules/gis-data.md` / `docs/01_技術設計/04_国土数値情報GISデータ.md`
+ * 正典: `.claude/rules/gis-data.md` / `packages/gis/src/mlit-ksj/README.md`
  */
 
 import type { KsjCodeConfig } from "./types";

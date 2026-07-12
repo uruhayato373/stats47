@@ -26,7 +26,7 @@ Cell content: ≤ 12 words each. No prose before/after.
 - `packages/gis/src/mlit-ksj/registry.ts` の `KSJ_CODE_CONFIG` 編集 (技術設定)
 - dataset lifecycle: 新規 register (datasets.ts + registry.ts 追加) / deprecate (status 設計)
 - メタ整合: category 17 軸 (stats47Category) / geometryType / coverage / license の妥当性、ranking yearCode 4 桁
-- `.claude/rules/gis-data.md` と `docs/01_技術設計/04_国土数値情報GISデータ.md` の維持 (規約・データセット表)
+- `.claude/rules/gis-data.md` と `packages/gis/src/mlit-ksj/README.md` の維持 (規約・モジュール設計/使い方)
 
 ## 検証 (必須)
 
@@ -55,4 +55,4 @@ npx tsc --noEmit -p packages/gis/tsconfig.json                              # �
 - **ローカル SQLite に手動 INSERT しない**。メタは必ず `datasets.ts` を編集して再 seed で反映する。
 - build state (r2_version / file_count / converted_at 等) は SSOT に持たない (pipeline が再生成)。
 - `name_en` は KSJ API 非提供のため空でよい (display 専用)。
-- doc 04 の生成表は `generate-docs.ts` が再生成する成果物。手編集して真実源にしない。
+- 登録データセット一覧は `datasets.ts` (git TS) が真実源。手編集の生成表を SSOT にしない (旧 doc 04/generate-docs は 2026-07-12 廃止)。

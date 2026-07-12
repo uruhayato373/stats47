@@ -55,7 +55,7 @@ R2 gis/mlit-ksj/{dataId}/{version}/  →  本番アプリ / Remotion が fetch (
 | 永続/リモート D1 を GIS の SSOT として復活させる | git TS (datasets.ts/registry.ts) + R2 |
 | build state (r2_version 等) を git TS に焼き込む | pipeline 実行で SQLite に再生成 |
 | 本番アプリから gis_datasets を query | R2 `gis/mlit-ksj/...` を fetch |
-| doc 04 の生成表を手編集して真実源にする | `generate-docs.ts` が datasets.ts/SQLite から再生成 |
+| 手編集の生成表を真実源にする | 登録一覧は `datasets.ts` (git TS) が真実源 (旧 doc 04/generate-docs は 2026-07-12 廃止) |
 
 ## 検証
 
@@ -70,7 +70,7 @@ npx tsc --noEmit -p packages/gis/tsconfig.json
 
 | agent | 責務 |
 |---|---|
-| `gis-curator` | datasets.ts / registry.ts の SSOT 管理、データセット lifecycle (register/deprecate)、メタ整合、本ルール・doc 04 の維持 |
+| `gis-curator` | datasets.ts / registry.ts の SSOT 管理、データセット lifecycle (register/deprecate)、メタ整合、本ルール・`packages/gis/src/mlit-ksj/README.md` (モジュール設計) の維持 |
 | `gis-pipeline-runner` | seed + run-pipeline (download→TopoJSON→R2)、build state、KSJ fetch。R2 push は `r2-publisher` に委譲 |
 
 観測値投入 (e-Stat) は `data-ingester`、R2 push は `r2-publisher`、snapshot 派生は `snapshot-exporter` に委譲する。
@@ -83,5 +83,5 @@ npx tsc --noEmit -p packages/gis/tsconfig.json
 - seed: `packages/gis/src/mlit-ksj/scripts/{seed-from-registry,seed-ksj-catalog}.ts`
 - pipeline: `packages/gis/src/mlit-ksj/scripts/run-pipeline.ts`
 - スキル: `.claude/skills/db/fetch-mlit-ksj/SKILL.md`
-- 詳細・データセット表: `docs/01_技術設計/04_国土数値情報GISデータ.md`
+- モジュール設計・使い方: `packages/gis/src/mlit-ksj/README.md` / 登録一覧の真実源: `datasets.ts`
 - データ層: `docs/01_技術設計/12_完全DBレス設計.md` / `.claude/rules/data-sqlite-ssot.md`

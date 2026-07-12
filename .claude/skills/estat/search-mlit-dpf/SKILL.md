@@ -14,6 +14,9 @@ primary_agent: estat-researcher
 MCP サーバー: `.mcp.json` の `mlit-dpf-mcp`
 API ドキュメント: `/Users/minamidaisuke/mlit-dpf-mcp/README.md`
 
+> **全カタログ (36) / 全 MCP ツール (18) / 属性フィルタ / `/fetch-mlit-ksj` との関係の詳細**は
+> `reference/mlit-dpf-catalog.md` (旧 docs/01_技術設計/05 を統合)。以下は主要カタログの要約。
+
 ## 利用可能なカタログ（36カタログ）
 
 ### stats47 と親和性の高いカタログ
@@ -173,4 +176,4 @@ asyncio.run(main())
 - MCP 設定: `.mcp.json` の `mlit-dpf-mcp`
 - API キー: `.mcp.json` 内にハードコード
 - 国土交通データプラットフォーム: https://data-platform.mlit.go.jp/
-- GIS パイプライン: `docs/01_技術設計/04_国土数値情報GISデータ.md`
+- GIS パイプライン: `packages/gis/src/mlit-ksj/README.md`

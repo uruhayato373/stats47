@@ -7,6 +7,18 @@ export interface AffiliateProduct {
   buttonText?: string;
 }
 
+/**
+ * ブログ OGP 背景 (AI 生成) のビジュアル系統。6 値固定。
+ * 正典: docs/02_実装計画/23_ブログOGP生成AIパイプライン仕様.md / apps/web/scripts/data/blog-ogp-visual-catalog.ts
+ */
+export type OgpVisualType =
+  | "map"
+  | "people"
+  | "economy"
+  | "industry"
+  | "timeline"
+  | "comparison";
+
 export interface ArticleFrontmatter {
   title: string;
   seoTitle?: string;
@@ -22,4 +34,11 @@ export interface ArticleFrontmatter {
   author?: string;
   /** 校閲者。Article JSON-LD の reviewedBy Person.name に使われる（任意） */
   reviewedBy?: string;
+  /**
+   * OGP AI 背景のビジュアル系統 (任意)。6 値のみ。未指定時は category/archetype/tags から決定的に導出。
+   * 正典: docs/02_実装計画/23_ブログOGP生成AIパイプライン仕様.md
+   */
+  ogpVisualType?: OgpVisualType;
+  /** OGP AI 背景の motif (任意)。カタログ登録済み識別子のみ許可。自由プロンプトは不可。 */
+  ogpMotif?: string;
 }
