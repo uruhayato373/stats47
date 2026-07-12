@@ -13,7 +13,7 @@ primary_agent: trend-scout
 
 - 入力はすべて既存の R2 / GSC snapshot / git TS を突合するエフェメラル計算 (永続 DB なし)。
 - スコア: `combined = 0.35*queryGap + 0.25*seasonality + 0.20*surprise + 0.20*competitionGap`。
-  型ポートフォリオ・スコアの意味は `docs/02_実装計画/15_ブログSEO拡充戦略.md` §3-4、型定義は
+  型ポートフォリオ・スコアの意味は `.claude/agents/blog-seo-strategist.md` §戦略コンテキスト、型定義は
   `.claude/rules/blog-quality-standards.md` §記事アーキタイプ。
 
 ## 用途
@@ -72,7 +72,7 @@ node .claude/scripts/blog/build-topic-queue.mjs --mark-done <topicKey> --slug <p
 - スコアラ: `.claude/scripts/blog/build-topic-queue.mjs`
 - 真実源: `.claude/state/blog/topic-queue.json`
 - 季節性テーブル: `.claude/scripts/blog/data/seasonality-table.json` (品目×月・手動保守)
-- 戦略正典: `docs/02_実装計画/15_ブログSEO拡充戦略.md`
+- 戦略正典: `.claude/agents/blog-seo-strategist.md` §戦略コンテキスト
 - 型定義: `.claude/rules/blog-quality-standards.md` §記事アーキタイプ
 - 生産: `.claude/skills/blog/draft-from-trend/SKILL.md`
 - 姉妹キュー (是正): `.claude/scripts/blog/build-remediation-queue.mjs`

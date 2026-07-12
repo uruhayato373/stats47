@@ -138,7 +138,7 @@ primary_agent: strategy-advisor
   node .claude/scripts/blog/build-topic-queue.mjs --next 5
   ```
   → must-write レーン上位を「**新規記事 N 本**」として Phase 3 の **Must** に転載する（型ミックスを整える:
-    月次目標 B5/D2 4/A3-4/F3/G1-2、`docs/02_実装計画/15_ブログSEO拡充戦略.md` §3）。
+    月次目標 B5/D2 4/A3-4/F3/G1-2、`.claude/agents/blog-seo-strategist.md` §戦略コンテキスト）。
   → 実行は `/draft-from-trend --from queue`（1 本ずつ）→ generate-article-charts → **blog-critic PASS** → publish。
   → ⚠️ **B 型は上位に擬似相関（人口交絡・自明ペア）が混じる**ので、`evidence.populationConfounded` と
     「意外な関係が成立するか」を人手で吟味してから採用する（キューは候補生成であり最終決定ではない）。

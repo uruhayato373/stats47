@@ -6,7 +6,8 @@ metadata:
 ---
 
 新規記事の SEO 拡充システム (feature/blog-seo-expansion, 2026-07-05, develop merge 済)。戦略正典 =
-`docs/02_実装計画/15_ブログSEO拡充戦略.md`。既存記事の是正 (remediation-queue) とは別系統の**新規記事**版。
+`.claude/agents/blog-seo-strategist.md` §戦略コンテキスト + `.claude/state/blog/seo-strategy.json` (2026-07-12 に
+旧 docs/02_実装計画/15 を統合し SSOT を .claude に一本化)。既存記事の是正 (remediation-queue) とは別系統の**新規記事**版。
 
 ## 「次に何を書くか」の真実源
 - **`.claude/state/blog/topic-queue.json`** (`build-topic-queue.mjs` が生成)。remediation-queue と同型の

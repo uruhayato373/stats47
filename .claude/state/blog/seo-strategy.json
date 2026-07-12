@@ -1,0 +1,106 @@
+{
+  "updatedAt": "2026-07-12",
+  "owner": "blog-seo-strategist",
+  "strategyDoc": ".claude/agents/blog-seo-strategist.md#戦略コンテキスト",
+  "note": "ブログSEO拡充戦略の SSOT (構造化)。旧 docs/02_実装計画/15_ブログSEO拡充戦略.md を廃止し SSOT を .claude に一本化 (2026-07-12)。戦略の全文は blog-seo-strategist.md §戦略コンテキスト、構造化値 (done/todo・typeMix・KPI・midTermTodos) は本ファイルが真実源。個別記事は topic-queue.json、個別ランキングは estat/expansion-queue.json、effect ラベルは docs/todo/01_改善バックログ.md (improvement-triage 所有) が真実源で、ここは束ねるオーケストレーション層 (effect は read で再導出)。",
+  "delegatesTo": {
+    "articleProduction": "trend-scout + article-writer + blog-editor (.claude/state/blog/topic-queue.json)",
+    "rankingExpansion": "ranking-expander (.claude/state/estat/expansion-queue.json)",
+    "kpiMeasurement": "gsc-analyst (.claude/state/metrics/gsc/LATEST.md)",
+    "effectLabels": "improvement-triage (docs/todo/01_改善バックログ.md — 書込は triage のみ)"
+  },
+  "quarterTarget": {
+    "startedAt": "2026-07-05",
+    "reviewDue": "2026-10-05",
+    "baseline_2026W26": { "weeklyClicks": 1947, "weeklyImp": 73661, "ctr": 0.0264, "position": 9.14 },
+    "target_1Q": { "weeklyClicks": 2500, "monthlyArticles": "15-20" },
+    "kpis": [
+      "新規記事の4週後 clicks 中央値 (新型 vs 既存A型)",
+      "topic-queue must-write レーン消化率",
+      "/ranking インデックス率 43% → 70%",
+      "B型(相関)記事の position"
+    ]
+  },
+  "typeMix": {
+    "note": "今月の型配分 SSOT。blog-quality-standards.md の型定義を前提に、winning-patterns 実測と4週後clicks中央値で四半期ごとに見直す。",
+    "revisedAt": "2026-07-05",
+    "perMonth": { "B": 5, "D2": 4, "A": "3-4", "F": 3, "G": "1-2", "C_E": "1-2" },
+    "seasonalAdjust": "1-3月は G を +1 (引越し・移住シーズン)。E ハブは隔月1本まで",
+    "rationale": "winning-patterns robust (hasMap/hasScatter +15.4%) + 勝ちクラスタ D2 系 CTR 7-17%"
+  },
+  "competitorBenchmark": {
+    "note": "競合実測の詳細は memory project_competitor_indicator_benchmark / project_competitor_riskmap_jp",
+    "rivals": [
+      { "name": "todo-ran.com", "metrics": 1501, "weakness": "自動生成の淡白ページ・相関見かけ止まり・図解貧弱・市区町村なし" },
+      { "name": "uub.jp", "metrics": 1843, "weakness": "UI 古い・記事型コンテンツなし・モバイル弱い" },
+      { "name": "@riskmap.jp (SNS)", "metrics": null, "weakness": "Web 送客なし・信頼性欠如 (煽り路線に入らない)" }
+    ],
+    "differentiationAxes": [
+      "相関×散布図の分析記事 (相関 snapshot ~200万ペア = stats47 のみ・B 型調達コストゼロ)",
+      "市区町村粒度 (決算カード + 類似団体平均・競合は県止まり)",
+      "図解ファースト (tile-grid 地図/散布図/カード型 SVG・winning-patterns robust +15.4%)",
+      "移動フロー (県間 O-D の方向性分析)"
+    ]
+  },
+  "midTermTodos": [
+    { "id": "SEO-DATA-R2-CORR-INCREMENTAL", "todo": "相関 O(n²) の R2 肥大対策: metric 3,000 到達前に build-correlation-snapshot.ts を incremental 化 (新規×既存のみ再計算)", "owner": "data-ingester / snapshot-exporter", "status": "todo" },
+    { "id": "SEO-DATA-NON-ESTAT-ADAPTER", "todo": "非 e-Stat 取り込み規約: source adapter = packages/data-configs/src/sources/<provider>.ts、出力は app/stats/<metric>/values.json 同一スキーマ、validate:config に provider/URL/license/取得日 の必須メタ lint 追加", "owner": "data-ingester", "status": "todo" }
+  ],
+  "initiatives": [
+    {
+      "id": "BLOG-SEO-TYPES-01",
+      "lane": "done",
+      "title": "型ポートフォリオ改訂 (D2/F/G 新設 + タイトル実測補正)",
+      "deployedAt": "2026-07-05",
+      "status": "deployed",
+      "effect": "pending",
+      "due": "2026-08-02",
+      "owner": "blog-seo-strategist",
+      "backlogRef": "docs/todo/01_改善バックログ.md#BLOG-SEO-TYPES-01",
+      "verify": "新型記事の4週後 clicks 中央値 vs 既存A型 (measure-gsc-impact)"
+    },
+    {
+      "id": "BLOG-SEO-QUEUE-01",
+      "lane": "done",
+      "title": "topic-queue 構築 (+ /plan-article-queue + 週次 cron)",
+      "deployedAt": "2026-07-05",
+      "status": "deployed",
+      "effect": "pending",
+      "due": "2026-08-02",
+      "owner": "trend-scout",
+      "backlogRef": "docs/todo/01_改善バックログ.md#BLOG-SEO-QUEUE-01",
+      "verify": "node .claude/scripts/blog/build-topic-queue.mjs --next 5"
+    },
+    {
+      "id": "RANKING-KEYS-SYNC-01",
+      "lane": "done",
+      "title": "ranking git 派生キーの自動同期 (sync-ranking-keys job)",
+      "deployedAt": "2026-07-05",
+      "status": "deployed",
+      "effect": "pending",
+      "due": "2026-08-02",
+      "owner": "ranking-publisher",
+      "backlogRef": "docs/todo/01_改善バックログ.md#RANKING-KEYS-SYNC-01",
+      "verify": "GSC カバレッジで ranking インデックス数を4週後比較"
+    },
+    {
+      "id": "BLOG-SEO-PACE-01",
+      "lane": "doing",
+      "title": "記事生産 月 15-20 本化 (小バッチ・critic PASS 必須)",
+      "status": "pending",
+      "effect": null,
+      "due": "2026-08-31",
+      "owner": "blog-seo-strategist",
+      "backlogRef": "docs/todo/01_改善バックログ.md#BLOG-SEO-PACE-01",
+      "verify": "2026-08 月間公開本数 ≥15 かつ 新規記事4週後 clicks 中央値 ≥ 既存中央値",
+      "nextAction": "週2セッション×2-3本を topic-queue must-write から払い出し (/plan-article-queue → trend-scout → article-writer)"
+    }
+  ],
+  "next": [
+    { "todo": "型配分に沿って今月分の記事を払い出す (B5/D2 4/A 3-4/F 3/G 1-2)", "owner": "blog-seo-strategist → trend-scout/article-writer", "trigger": "週次" },
+    { "todo": "topic-queue を最新化し must-write 上位を確認", "owner": "trend-scout", "trigger": "node build-topic-queue.mjs --next 5 (週次 cron でも自動)" },
+    { "todo": "F/G 型のデータ変換テンプレ整備 (決算カード / migration-flow を記事化しやすく)", "owner": "chart-author + data-ingester", "trigger": "第2月本格投入の前提" },
+    { "todo": "2026-08-02 到達で BLOG-SEO-TYPES/QUEUE/RANKING-KEYS の effect 実測を improvement-triage に依頼", "owner": "gsc-analyst → improvement-triage", "trigger": "期日 2026-08-02" },
+    { "todo": "四半期 KPI レビュー (目標 vs 実測 → 型配分/スコア重み改訂案)", "owner": "blog-seo-strategist", "trigger": "reviewDue 2026-10-05" }
+  ]
+}

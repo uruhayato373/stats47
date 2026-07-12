@@ -3,7 +3,7 @@
  * build-topic-queue.mjs — 新規ブログ記事「次に何を書くか」の状態付きキューを構築/更新する。
  *
  * remediation-queue (既存記事の是正) の姉妹スクリプト。是正ではなく **新規記事のネタ選定** が責務。
- * 正典: docs/02_実装計画/15_ブログSEO拡充戦略.md §4 / 型定義: .claude/rules/blog-quality-standards.md
+ * 正典: .claude/agents/blog-seo-strategist.md §戦略コンテキスト / 型定義: .claude/rules/blog-quality-standards.md
  *
  * スコア (エフェメラル計算 → 状態付きキュー JSON。永続 DB は作らない):
  *   combined = 0.35*queryGap + 0.25*seasonality + 0.20*surprise + 0.20*competitionGap
@@ -54,7 +54,7 @@ const CORR_MIN_R = 0.6;
 const WEIGHTS = { queryGap: 0.35, seasonality: 0.25, surprise: 0.2, competitionGap: 0.2 };
 const COMPETITION_GAP = { F: 1.0, G: 1.0, B: 0.8, D2: 0.6, A: 0.5 };
 // pending はスコア上位のみ保持 (肥大防止。in-progress/done は無条件保持)。
-// 型別上限で B 一色を防ぎ、型ポートフォリオ (15_ブログSEO拡充戦略.md §3) に沿った候補ミックスを保つ
+// 型別上限で B 一色を防ぎ、型ポートフォリオ (blog-seo-strategist.md §戦略コンテキスト) に沿った候補ミックスを保つ
 const MAX_PENDING_BY_ARCHETYPE = { B: 60, A: 40, D2: 40, F: 15, G: 15 };
 const MAX_PAIRS_PER_BASE = 2; // B型: 同一 base metric からの相関ペアは上位 2 件まで (near-duplicate 防止)
 // 倫理的にセンシティブな指標を B型「意外な関係」クリックベイトの軸にしない (ブランド毀損防止)。

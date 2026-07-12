@@ -1,5 +1,12 @@
 {
-  "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-  "audited_at": "2026-07-12T01:45:10",
-  "files": []
+  "hash": "c3c4deb13cee469a668adb6df590ddd9609d8dc4c108fc68f30835c971a84f8b",
+  "audited_at": "2026-07-12T04:32:01",
+  "files": [
+    ".claude/agents/README.md",
+    ".claude/agents/blog-seo-strategist.md",
+    ".claude/scripts/blog/build-topic-queue.mjs",
+    ".claude/skills/blog/plan-article-queue/SKILL.md",
+    ".claude/skills/db/publish-ranking/SKILL.md",
+    ".claude/skills/management/weekly-plan/SKILL.md"
+  ]
 }
