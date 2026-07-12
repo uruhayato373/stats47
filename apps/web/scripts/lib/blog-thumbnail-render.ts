@@ -470,7 +470,9 @@ function leftScrimSvg(w: number, h: number, rgb: string, opacity: number): Buffe
  * - 1200×630 に cover リサイズ
  * - dark 版は明度・彩度を落とし藍色オーバーレイを重ねる (API を再度呼ばない)
  * - 左タイトルセーフゾーンに半透明スクリムを重ね可読性を確保 (§10)
- * 返り値は buildElement の backgroundImage に渡す webp data URI。
+ * 返り値は buildElement の backgroundImage に渡す JPEG data URI。
+ * ※ satori の <img> 画像サイズ解析は webp 非対応 (u is not iterable で throw) のため
+ *   JPEG で返す (ブランド背景も JPEG で実績あり)。
  */
 export async function normalizeAiBackground(input: Buffer, dark: boolean): Promise<string> {
   const W = 1200;
@@ -489,8 +491,8 @@ export async function normalizeAiBackground(input: Buffer, dark: boolean): Promi
   } else {
     overlays.push({ input: leftScrimSvg(W, H, "255,255,255", 0.72) });
   }
-  const out = await pipeline.composite(overlays).webp({ quality: 88 }).toBuffer();
-  return `data:image/webp;base64,${out.toString("base64")}`;
+  const out = await pipeline.composite(overlays).jpeg({ quality: 88 }).toBuffer();
+  return `data:image/jpeg;base64,${out.toString("base64")}`;
 }
 
 /**

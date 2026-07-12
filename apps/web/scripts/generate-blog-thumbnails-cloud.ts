@@ -22,6 +22,11 @@
  *   # cloud に既にあっても強制再生成
  *   npx tsx apps/web/scripts/generate-blog-thumbnails-cloud.ts --slug a --force --apply
  *
+ *   # AI 背景パイロット (docs/23)。ローカル固定出力・R2 非書込。gallery /assets の
+ *   # 「ブログ OGP パイロット (local)」タブで目視できる (--out-dir .local/ogp-pilot)
+ *   npx tsx apps/web/scripts/generate-blog-thumbnails-cloud.ts \
+ *     --ai-background --slug a,b,c --out-dir .local/ogp-pilot --budget-usd 2
+ *
  * push 後に公開 URL が 404 をキャッシュしている場合は CDN purge が要る
  * (storage.stats47.jp/app/blog/<slug>/* を purge)。
  */
@@ -29,7 +34,13 @@
 import { execFileSync } from "node:child_process";
 import { mkdirSync, mkdtempSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
-import { join } from "node:path";
+import { join, resolve } from "node:path";
+
+import dotenv from "dotenv";
+
+// GEMINI_API_KEY 等をローカル実行時に .env.local から自己ロード (no-override)。
+// CI では .env.local 不在で no-op。値はログに出さない。
+dotenv.config({ path: ".env.local" });
 
 // render lib (satori / sharp / react) は生成時のみ動的 import する。
 // --audit モード (CI ゲート) は fetch だけで完結させ native binding に依存させない。
@@ -50,6 +61,8 @@ interface CliOptions {
   budgetUsd: number;
   forceBackground: boolean;
   visualTypeOverride: string | null;
+  /** ローカル生成物の固定出力先 (未指定は mkdtemp)。パイロット目視・再生成に使う。 */
+  outDir: string | null;
 }
 
 function numArg(args: string[], flag: string, def: number): number {
@@ -79,6 +92,7 @@ function parseArgs(): CliOptions {
     budgetUsd: numArg(args, "--budget-usd", 2),
     forceBackground: args.includes("--force-background"),
     visualTypeOverride: strArg(args, "--visual-type"),
+    outDir: strArg(args, "--out-dir"),
   };
 }
 
@@ -165,7 +179,7 @@ async function bgCacheHit(slug: string, promptHash: string): Promise<boolean> {
     if (!res.ok) return false;
     const json = (await res.json()) as { background?: { promptHash?: string } };
     if (json.background?.promptHash !== promptHash) return false;
-    const bg = await fetch(`${PUBLIC_URL}/app/blog/${slug}/ogp/background.webp`, {
+    const bg = await fetch(`${PUBLIC_URL}/app/blog/${slug}/ogp/background.jpg`, {
       method: "HEAD",
     });
     return bg.ok && (bg.headers.get("content-type") ?? "").includes("image");
@@ -287,7 +301,14 @@ async function main() {
   console.log("\nフォント読み込み中...");
   const fonts = loadFonts(PROJECT_ROOT);
 
-  const stage = mkdtempSync(join(tmpdir(), "blog-thumbs-"));
+  // --out-dir 指定時は固定ディレクトリに出す (パイロット目視・再実行で同じ場所を上書き)。
+  let stage: string;
+  if (opts.outDir) {
+    stage = resolve(PROJECT_ROOT, opts.outDir);
+    mkdirSync(stage, { recursive: true });
+  } else {
+    stage = mkdtempSync(join(tmpdir(), "blog-thumbs-"));
+  }
   let generated = 0;
   let pushed = 0;
   const failed: string[] = [];
@@ -307,7 +328,7 @@ async function main() {
       const lightOut = join(dir, "thumbnail-light.webp");
       const darkOut = join(dir, "thumbnail-dark.webp");
       const pngOut = join(dir, "ogp", "ogp.png");
-      const bgOut = join(dir, "ogp", "background.webp");
+      const bgOut = join(dir, "ogp", "background.jpg");
       const ogpJsonOut = join(dir, "ogp", "ogp.json");
 
       // --- AI 背景解決 (aiBackground 時のみ。失敗・予算切れ・key 無しはブランド背景へ) ---
@@ -363,8 +384,8 @@ async function main() {
       await renderToWebP(buildElement(data, true, { background: true, backgroundImage: bgDark }), fonts, darkOut);
       await renderToPng(buildElement(data, false, { background: true, backgroundImage: bgLight }), fonts, pngOut);
       if (bgBuffer && bgLight) {
-        // AI 背景 (light 正規化版) を派生成果物として保存
-        writeFileSync(bgOut, Buffer.from(bgLight.replace(/^data:image\/webp;base64,/, ""), "base64"));
+        // AI 背景 (light 正規化版) を派生成果物として保存 (satori 互換の JPEG)
+        writeFileSync(bgOut, Buffer.from(bgLight.replace(/^data:image\/jpeg;base64,/, ""), "base64"));
       }
       writeFileSync(
         ogpJsonOut,
@@ -383,7 +404,7 @@ async function main() {
         putToR2(`app/blog/${slug}/thumbnail-dark.webp`, darkOut, "image/webp");
         putToR2(`app/blog/${slug}/ogp/ogp.png`, pngOut, "image/png");
         putToR2(`app/blog/${slug}/ogp/ogp.json`, ogpJsonOut, "application/json");
-        if (bgBuffer) putToR2(`app/blog/${slug}/ogp/background.webp`, bgOut, "image/webp");
+        if (bgBuffer) putToR2(`app/blog/${slug}/ogp/background.jpg`, bgOut, "image/jpeg");
         pushed++;
         console.log(" ✓");
       } else {
