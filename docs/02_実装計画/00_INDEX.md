@@ -25,7 +25,7 @@ tags: [実装計画]
 | ファイル                                 | 内容                                                                                           |
 | ---------------------------------------- | ---------------------------------------------------------------------------------------------- |
 | ~~`06_ブログ品質是正ループ.md`~~ (廃止) | 2026-07-12 に運用正典を .claude へ一本化 → `.claude/rules/blog-remediation-loop.md` |
-| `09_ランキング品質改修.md`               | ランキングページの層別診断・コンテンツ仕様・Wave R1-R3                                         |
+| ~~`09_ランキング品質改修.md`~~ (廃止) | 2026-07-12 に運用スペックを .claude へ抽出 → `.claude/rules/ranking-content-standards.md` (戦略は 01・Wave 進捗は ai-content 是正キュー) |
 | ~~`12_GSCカバレッジ是正ループ.md`~~ (廃止) | 2026-07-12 に運用正典を .claude へ一本化 → `.claude/skills/analytics/gsc-coverage-remediation/SKILL.md` |
 | `14_収益化実装方針.md`                   | 収益化の実装詳細（広告配置・計測）                                                             |
 | ~~`15_ブログSEO拡充戦略.md`~~ (廃止)     | 2026-07-12 に SSOT を .claude へ一本化 → `.claude/agents/blog-seo-strategist.md` §戦略コンテキスト |
