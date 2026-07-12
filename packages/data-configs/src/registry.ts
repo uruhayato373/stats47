@@ -1252,8 +1252,8 @@ import { nonCarVehicleMaintenanceConsumptionExpenditure } from "./metrics/non-ca
 import { nonCarVehiclePurchaseConsumptionExpenditure } from "./metrics/non-car-vehicle-purchase-consumption-expenditure";
 import { nonRegularEmploymentRate } from "./metrics/non-regular-employment-rate";
 import { notebooksPaperConsumptionExpenditure } from "./metrics/notebooks-paper-consumption-expenditure";
+import { nuclearFamilyHouseholdCount } from "./metrics/nuclear-family-household-count";
 import { nuclearFamilyHouseholdsRatio } from "./metrics/nuclear-family-households-ratio";
-import { nuclearFamilyHouseholds } from "./metrics/nuclear-family-households";
 import { nuclearPowerPlantCount } from "./metrics/nuclear-power-plant-count";
 import { numberOfCommercialEmployeesWholesaleRetail } from "./metrics/number-of-commercial-employees-wholesale-retail";
 import { numberOfConstructedBuildings } from "./metrics/number-of-constructed-buildings";
@@ -3492,8 +3492,8 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "non-car-vehicle-purchase-consumption-expenditure": nonCarVehiclePurchaseConsumptionExpenditure,
   "non-regular-employment-rate": nonRegularEmploymentRate,
   "notebooks-paper-consumption-expenditure": notebooksPaperConsumptionExpenditure,
+  "nuclear-family-household-count": nuclearFamilyHouseholdCount,
   "nuclear-family-households-ratio": nuclearFamilyHouseholdsRatio,
-  "nuclear-family-households": nuclearFamilyHouseholds,
   "nuclear-power-plant-count": nuclearPowerPlantCount,
   "number-of-commercial-employees-wholesale-retail": numberOfCommercialEmployeesWholesaleRetail,
   "number-of-constructed-buildings": numberOfConstructedBuildings,

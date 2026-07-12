@@ -1,7 +1,7 @@
 import type { MetricConfig } from "../types";
 
-export const nuclearFamilyHouseholds: MetricConfig = {
-  "key": "nuclear-family-households",
+export const nuclearFamilyHouseholdCount: MetricConfig = {
+  "key": "nuclear-family-household-count",
   "title": "核家族世帯数",
   "unit": "世帯",
   "category": "population",
