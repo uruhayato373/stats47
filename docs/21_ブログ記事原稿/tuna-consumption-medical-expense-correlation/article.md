@@ -15,7 +15,7 @@ tags:
   - 地域差
 publishedAt: 2026-07-06
 updatedAt: 2026-07-06
-published: false
+published: true
 ogImage: /blog/tuna-consumption-medical-expense-correlation/og.png
 ---
 

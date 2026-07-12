@@ -14,7 +14,7 @@ tags:
   - 都道府県ランキング
 publishedAt: 2026-06-15
 updatedAt: 2026-06-15
-published: false
+published: true
 ogImage: /blog/prefecture-salary-gap-career/ogp/ogp.png
 ---
 

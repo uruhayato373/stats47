@@ -14,7 +14,7 @@ tags:
   - 発酵食品
 publishedAt: 2026-07-06
 updatedAt: 2026-07-06
-published: false
+published: true
 ogImage: /blog/miso-consumption-quantity-prefecture-gap/og.png
 ---
 
