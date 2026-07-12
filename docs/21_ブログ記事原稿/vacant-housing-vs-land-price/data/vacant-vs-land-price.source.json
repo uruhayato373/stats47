@@ -1,0 +1,12 @@
+{
+  "kind": "ranking",
+  "rankingKey": "standard-price-change-rate-commercial",
+  "year": "2024 (x軸=空き家率2023, y軸=商業地変動率2024)",
+  "unit": "x:％ / y:％",
+  "label": "空き家率 × 商業地価変動率 散布図",
+  "transform": "scatter (47都道府県, r2 correlation snapshot)",
+  "source": "r2:app/correlation/by-ranking-key/vacant-housing-rate.json (pairs[].rankingKey=standard-price-change-rate-commercial)",
+  "pearsonR": -0.7443713864879575,
+  "partialRPopulation": -0.5661193565570918,
+  "restore": "node .claude/scripts/blog/fetch-correlation-scatter.mjs --slug vacant-housing-vs-land-price --base vacant-housing-rate --other standard-price-change-rate-commercial"
+}

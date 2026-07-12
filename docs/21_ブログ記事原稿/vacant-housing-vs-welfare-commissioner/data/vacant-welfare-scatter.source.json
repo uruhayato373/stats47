@@ -1,0 +1,9 @@
+{
+  "kind": "ranking",
+  "rankingKey": "vacant-housing-rate",
+  "secondaryRankingKey": "welfare-commissioner-count-per-100k",
+  "year": "2023",
+  "transform": "47都道府県をareaCodeでJOIN、x=空き家率(％)、y=民生委員数(人口10万人あたり、人)。ピアソン相関係数r=0.7337を自前算出（R2 app/ranking/{vacant-housing-rate,welfare-commissioner-count-per-100k}/values.jsonの2023年値から計算、topic-queue記載値0.734と一致）",
+  "source": "r2:app/ranking/vacant-housing-rate/values.json + r2:app/ranking/welfare-commissioner-count-per-100k/values.json",
+  "restore": "両ranking keyのvalues.jsonをareaCodeでJOINしx,yペアを再構築（fetch-ranking-data-r2.mjs --keys vacant-housing-rate,welfare-commissioner-count-per-100k の上で手動join）"
+}
