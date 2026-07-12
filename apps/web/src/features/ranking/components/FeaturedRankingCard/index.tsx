@@ -1,6 +1,8 @@
 // Server Component — 静的コンテンツのみ（Link / SVG 描画）。Client hydration 不要でバンドル削減。
 import Link from "next/link";
 
+import type { RankingThumbnailVariant } from "@stats47/data-configs";
+
 import { RankingThumbnail } from "../FeaturedRankings/RankingThumbnail";
 
 interface FeaturedRankingCardProps {
@@ -18,6 +20,12 @@ interface FeaturedRankingCardProps {
   normalizationBasis?: string | null;
   /** サーバー生成のミニタイルマップSVG */
   tileMapSvg?: string;
+  /**
+   * サムネイル表示バリアント。"map"=地図型(既定・後方互換) / "number"=数値型(代表値強調)。
+   * 解決は resolveRankingThumbnailVariant に一本化し、ここでは解決済み値を受け取る。
+   * 正典: docs/02_実装計画/21_ランキングサムネイルAB表示仕様.md
+   */
+  variant?: RankingThumbnailVariant;
 }
 
 /**
@@ -37,8 +45,44 @@ export function FeaturedRankingCard({
   demographicAttr,
   normalizationBasis,
   tileMapSvg,
+  variant = "map",
 }: FeaturedRankingCardProps) {
-  // トップページ用: 1位データ表示モード
+  // トップページ用 B: 数値型（代表値を最大要素にし、地図は薄い装飾背景）。
+  // variant=number でも 1位名/値が欠損していれば下の A（地図型）へフォールバックする。
+  if (topAreaName && topValue && variant === "number") {
+    return (
+      <Link
+        href={`/ranking/${rankingKey}`}
+        title={title}
+        className="group relative flex flex-col overflow-hidden rounded-none border border-border transition-all hover:border-primary/50 hover:shadow-md"
+      >
+        {tileMapSvg && (
+          <div
+            className="pointer-events-none absolute inset-0 opacity-[0.08] [&>svg]:h-full [&>svg]:w-full"
+            aria-hidden="true"
+            dangerouslySetInnerHTML={{ __html: tileMapSvg }}
+          />
+        )}
+        <div className="relative flex flex-1 flex-col gap-2 p-3">
+          <span className="text-sm font-medium leading-tight line-clamp-2 transition-colors group-hover:text-primary">
+            {title}
+          </span>
+          <div className="mt-auto flex items-baseline gap-1">
+            <span className="font-mono text-3xl font-bold leading-none tabular-nums text-primary">
+              {topValue}
+            </span>
+            <span className="text-sm font-medium text-muted-foreground">{unit}</span>
+          </div>
+          <div className="flex items-baseline gap-1.5">
+            <span className="text-xs text-muted-foreground">1位</span>
+            <span className="text-sm font-semibold text-foreground">{topAreaName}</span>
+          </div>
+        </div>
+      </Link>
+    );
+  }
+
+  // トップページ用 A: 1位データ表示モード（地図型・後方互換の標準）
   if (topAreaName) {
     return (
       <Link

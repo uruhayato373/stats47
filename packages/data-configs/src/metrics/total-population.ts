@@ -2,6 +2,7 @@ import type { MetricConfig } from "../types";
 
 export const totalPopulation: MetricConfig = {
   "key": "total-population",
+  "thumbnailVariant": "number",
   "title": "総人口",
   "subtitle": "総数",
   "unit": "人",

@@ -2,6 +2,7 @@ import type { MetricConfig } from "../types";
 
 export const fiscalStrengthIndexPrefecture: MetricConfig = {
   "key": "fiscal-strength-index-prefecture",
+  "thumbnailVariant": "number",
   "title": "財政力指数",
   "subtitle": "都道府県財政",
   "unit": "指数",

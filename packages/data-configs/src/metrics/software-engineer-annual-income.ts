@@ -2,6 +2,7 @@ import type { MetricConfig } from "../types";
 
 export const softwareEngineerAnnualIncome: MetricConfig = {
   "key": "software-engineer-annual-income",
+  "thumbnailVariant": "number",
   "title": "ソフトウェア作成者の平均年収",
   "unit": "万円",
   "category": "laborwage",
