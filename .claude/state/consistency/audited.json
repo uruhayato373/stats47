@@ -1,14 +1,15 @@
 {
-  "hash": "18fb0da74cffda7b7ac36bf10a0461ed6a226910fb5b07112d6cda0441388cca",
-  "audited_at": "2026-07-12T04:47:33",
+  "hash": "ec794628cdd0d4d645dc61b80c93e8ca3cedf44a2adbb8a620cc17da9e6c7468",
+  "audited_at": "2026-07-12T04:57:55",
   "files": [
-    ".claude/agents/gsc-analyst.md",
-    ".claude/scripts/gsc/auto-resubmit.mjs",
-    ".claude/scripts/gsc/build-coverage-queue.mjs",
-    ".claude/scripts/gsc/ingest-gsc-export.py",
+    ".claude/agents/blog-seo-strategist.md",
+    ".claude/scripts/blog/analyze-winning-patterns.mjs",
+    ".claude/scripts/blog/compose-daily-rewrite-issue.mjs",
+    ".claude/scripts/blog/measure-gsc-impact.mjs",
     ".claude/skills/analytics/gsc-coverage-remediation/SKILL.md",
-    ".claude/skills/analytics/gsc-improvement/reference/USER_EXPORT_GUIDE.md",
-    ".claude/skills/analytics/gsc-improvement/reference/improvement-log.md",
+    ".claude/skills/blog/brushup-blog/SKILL.md",
+    ".claude/skills/management/expand-rankings/SKILL.md",
+    ".claude/skills/management/weekly-plan/SKILL.md",
     ".claude/skills/management/weekly-review/SKILL.md"
   ]
 }

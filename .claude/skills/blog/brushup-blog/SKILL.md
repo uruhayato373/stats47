@@ -31,7 +31,7 @@ primary_agent: article-writer
 `build-remediation-queue.mjs` が作る**状態付き是正キュー** (`.claude/state/blog/remediation-queue.json`) を消費し、
 pending 上位 N 件を順に是正する。GSC 流入 (expectedLift) × 品質 blocker severity を**統合スコア**で序列化し、
 publish-blocker を持つ記事 (**must-fix レーン**) を最上位に置く。「次に何を直すか」「何本消化したか」「効いたか」を
-キューが追跡するので、**週次で少しずつ品質を底上げ**できる。正典: `docs/02_実装計画/06_ブログ品質是正ループ.md`。
+キューが追跡するので、**週次で少しずつ品質を底上げ**できる。正典: `.claude/rules/blog-remediation-loop.md`。
 
 ### Step 1: キューを最新化
 

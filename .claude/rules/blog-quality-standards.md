@@ -31,7 +31,7 @@ stats47.jp の `/blog/{slug}` 記事を新規作成または brushup する際�
 > node .claude/scripts/blog/build-remediation-queue.mjs   # コミット済み履歴+公開R2+GSCから再構築 (どこでも可)
 > ```
 > で最新化し `/brushup-blog --target queue --next 3` で週次バッチ是正する。仕組みの正典:
-> **`docs/02_実装計画/06_ブログ品質是正ループ.md`**。新規記事を書くときの型は本ファイルの「記事アーキタイプ」節。
+> **`.claude/rules/blog-remediation-loop.md`**。新規記事を書くときの型は本ファイルの「記事アーキタイプ」節。
 
 ### critic レビュー成果物 `review.md` (公開の必須条件)
 
@@ -458,7 +458,7 @@ node .claude/scripts/blog/audit-published-blog.mjs
 
 - **継続品質ループ (床 × 天井): 本ファイル §継続品質ループ** ★床と天井の全体像
 - **新規記事の戦略 (型ポートフォリオ・ネタ選定・KPI): `.claude/agents/blog-seo-strategist.md` §戦略コンテキスト** ★何を書くかはまずこれ
-- **是正ループの正典 (計画的に順次品質向上): `docs/02_実装計画/06_ブログ品質是正ループ.md`** ★既存記事を直すときはまずこれ
+- **是正ループの正典 (計画的に順次品質向上): `.claude/rules/blog-remediation-loop.md`** ★既存記事を直すときはまずこれ
 - 勝ち要因分析スキル: `.claude/skills/blog/analyze-winning-patterns/SKILL.md`
 - 親方針: `docs/02_実装計画/01_収益化マスタープラン.md` Phase 0 (CTR 改修)
 - 実測判定ルール: `.claude/rules/evidence-based-judgment.md`

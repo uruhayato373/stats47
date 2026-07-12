@@ -6,7 +6,7 @@ co_agents: [improvement-triage]
 ---
 
 GSC のインデックスカバレッジ問題 (404 / soft404 / 5xx / crawled-not-indexed) を **週次で計画的に順次是正**する閉ループ。
-ブログ品質是正ループ (`docs/02_実装計画/06_ブログ品質是正ループ.md`) と同型。「次に何を直すか・何をやったか・効いたか」を
+ブログ品質是正ループ (`.claude/rules/blog-remediation-loop.md`) と同型。「次に何を直すか・何をやったか・効いたか」を
 **1 つの状態付きキュー**で追える。
 
 > **本 SKILL がこのループの運用正典 (runbook)**。2026-07-12 に旧 `docs/02_実装計画/12` を統合し .claude に一本化。
@@ -152,7 +152,7 @@ TASK: 以下の soft404→現在200 の URL 群が「薄い/空」か判定。R2
 
 ## 関連
 - 運用正典: 本 SKILL (2026-07-12 に旧 `docs/02_実装計画/12_GSCカバレッジ是正ループ.md` を統合)
-- 同型: `docs/02_実装計画/06_ブログ品質是正ループ.md` (ブログ品質是正ループ)
+- 同型: `.claude/rules/blog-remediation-loop.md` (ブログ品質是正ループ)
 - 実測判定: `.claude/rules/evidence-based-judgment.md`
 - export 手順: `.claude/skills/analytics/gsc-improvement/reference/USER_EXPORT_GUIDE.md`
 - agent: `gsc-analyst` (実行) / `improvement-triage` (status 更新)
