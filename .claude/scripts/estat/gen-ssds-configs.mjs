@@ -23,6 +23,13 @@ for (const f of fs.readdirSync(DIR)) {
   const ti = t.match(/"title":\s*"([^"]+)"/); if (ti) existTitles.add(ti[1]);
 }
 
+// GONE キー (410対象)。isActive:true で被ると ranking-key-consistency test が fail するので除外。
+const goneKeys = new Set();
+try {
+  const gone = fs.readFileSync("apps/web/src/config/gone-ranking-keys.ts", "utf8");
+  for (const m of gone.matchAll(/"([a-z0-9][a-z0-9-]*)"/g)) goneKeys.add(m[1]);
+} catch { /* ファイル無しは無視 */ }
+
 const COLOR = {
   agriculture: "interpolateGreens", population: "interpolateBlues",
   economy: "interpolatePurples", laborwage: "interpolateOranges",
@@ -69,7 +76,9 @@ function emit(s) {
 const BATCH = JSON.parse(fs.readFileSync(process.argv[2], "utf8"));
 let written = 0, skipped = [];
 for (const s of BATCH) {
-  if (existKeys.has(s.key) || existTitles.has(s.title)) { skipped.push(s.key); continue; }
+  if (existKeys.has(s.key) || existTitles.has(s.title) || goneKeys.has(s.key)) {
+    skipped.push(goneKeys.has(s.key) ? `${s.key}(GONE)` : s.key); continue;
+  }
   emit(s); written++;
   console.log(`  + ${s.key}  (${s.title})`);
 }
