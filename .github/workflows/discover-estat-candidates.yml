@@ -1,0 +1,68 @@
+name: 🔎 Discover e-Stat Prefecture Candidates
+
+# e-Stat 都道府県レベル統計表を列挙し、既存 metric config と突合して「未カバー candidate」を
+# 洗い出す (完全DBレス・Phase 1 発見)。R2 も D1 も書かない read-only ジョブ。
+#
+# e-Stat APP_ID は CI 専任 (secrets.NEXT_PUBLIC_ESTAT_APP_ID)。ローカルには無い。
+# 結果は artifact (prefecture-candidates.json / summary) + workflow ログに出す。
+# サマリでスコープ (本当に増やせる件数) を確定してから Phase 2 (config 一括生成) を設計する。
+
+on:
+  workflow_dispatch:
+    inputs:
+      limit:
+        description: "最初の N テーブルで停止 (0=全件、動作確認は例 5000)"
+        required: false
+        default: "0"
+  # workflow_dispatch は default ブランチ (main) にある workflow しか叩けないため、
+  # main デプロイ無しで実行できるよう専用ブランチ estat-discovery-run への push でも発火させる。
+  # このブランチへ push すると発見ジョブが走る (read-only・R2/D1 非書込)。
+  push:
+    branches: [estat-discovery-run]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: estat-discover
+  cancel-in-progress: true
+
+env:
+  NEXT_PUBLIC_ESTAT_APP_ID: ${{ secrets.NEXT_PUBLIC_ESTAT_APP_ID }}
+
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: 🧰 Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: 📦 Install deps
+        run: npm ci
+
+      - name: 🔎 Discover prefecture-level candidates
+        run: |
+          LIMIT="${{ github.event.inputs.limit }}"
+          if [ "$LIMIT" != "0" ] && [ -n "$LIMIT" ]; then
+            node .claude/scripts/estat/discover-prefecture-candidates.mjs --limit "$LIMIT"
+          else
+            node .claude/scripts/estat/discover-prefecture-candidates.mjs
+          fi
+
+      - name: 📤 Upload candidate list + summary
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: estat-prefecture-candidates
+          path: .claude/state/estat/prefecture-candidates*.json
+          retention-days: 30
+          if-no-files-found: warn
