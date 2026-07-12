@@ -2,7 +2,6 @@ import { type ReactNode } from "react";
 
 import {
   FurusatoNozeiCard,
-  OperatorPromoCard,
   RailAdSlot,
   SidebarPromoBanner,
   TechSchoolPromoCard,
@@ -27,8 +26,6 @@ interface RightRailWidgetsProps {
   showTechSchool?: boolean;
   /** 高単価アフィリエイトバナーを表示するか (default: true) */
   showPromoBanner?: boolean;
-  /** 運営者カード (転職/AI学習ランダム) を表示するか (default: true) */
-  showOperatorCard?: boolean;
   /** 表示する SIDEBAR_PROMO_BANNERS の index (default: 0 = STRATEGY CAREER) */
   promoBannerIndex?: number;
   /**
@@ -61,7 +58,6 @@ export async function RightRailWidgets({
   showTopAd = true,
   showTechSchool = true,
   showPromoBanner = true,
-  showOperatorCard = true,
   promoBannerIndex = 0,
   stickyScroll = false,
 }: RightRailWidgetsProps) {
@@ -72,11 +68,7 @@ export async function RightRailWidgets({
   const hasContent =
     !!topWidgets || !!midWidgets || !!bottomWidgets || !!furusatoAreaCode;
   const hasPromoOrAds =
-    showOperatorCard ||
-    showTechSchool ||
-    showPromoBanner ||
-    showTopAd ||
-    showBottomAd;
+    showTechSchool || showPromoBanner || showTopAd || showBottomAd;
 
   return (
     <div className={`flex flex-col gap-3 ${scrollClass}`}>
@@ -92,7 +84,6 @@ export async function RightRailWidgets({
       )}
 
       {/* promo 群（本文関連の下へ降格） */}
-      {showOperatorCard && <OperatorPromoCard placement="sidebar" />}
       {showTechSchool && <TechSchoolPromoCard />}
       {showPromoBanner && <SidebarPromoBanner index={promoBannerIndex} />}
 

@@ -48,4 +48,4 @@ primary_agent: ranking-publisher
 - keys 自動同期: `.github/workflows/sync-snapshots.yml` (sync-ranking-keys job)
 - 公開判定の正典: `.claude/rules/metric-config-standards.md` §isActive:true ≠ 本番公開
 - SSG 保全: `.claude/rules/nextjs-ssg-preservation.md` (R2 依存 route に generateStaticParams を付けない)
-- 月次 metric 拡充の全体像: `docs/02_実装計画/15_ブログSEO拡充戦略.md` §5
+- 月次 metric 拡充の全体像: `.claude/agents/ranking-expander.md` (+ ブログSEO戦略は `.claude/agents/blog-seo-strategist.md` §戦略コンテキスト)

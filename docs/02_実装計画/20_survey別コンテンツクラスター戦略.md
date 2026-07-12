@@ -212,7 +212,7 @@ census 1件で実証し、他surveyは現行表示へフォールバックさせ
 
 - `docs/01_技術設計/07_情報設計.md`
 - `docs/01_技術設計/12_完全DBレス設計.md`
-- `docs/02_実装計画/15_ブログSEO拡充戦略.md`
+- `.claude/agents/blog-seo-strategist.md` §戦略コンテキスト (ブログSEO拡充戦略・旧 docs/02 doc 15)
 - `docs/02_実装計画/16_月間100万PVロードマップ.md`
 - `docs/02_実装計画/17_家計調査論点カタログ.md`
 - `.claude/rules/survey-linkage-standards.md`
