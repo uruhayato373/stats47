@@ -176,4 +176,4 @@ asyncio.run(main())
 - MCP 設定: `.mcp.json` の `mlit-dpf-mcp`
 - API キー: `.mcp.json` 内にハードコード
 - 国土交通データプラットフォーム: https://data-platform.mlit.go.jp/
-- GIS パイプライン: `docs/01_技術設計/04_国土数値情報GISデータ.md`
+- GIS パイプライン: `packages/gis/src/mlit-ksj/README.md`

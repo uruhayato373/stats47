@@ -1,9 +1,9 @@
 {
-  "hash": "7531c709b6bfcc6bc5961f499fe877f342d04faf66dab63ed165f4c5c5cff308",
-  "audited_at": "2026-07-12T08:52:58",
+  "hash": "1ab78683903d3a4cfc1f024d4504cd53ba18cbd1ec28b3759dbff49aefdeaa31",
+  "audited_at": "2026-07-12T09:02:14",
   "files": [
+    ".claude/agents/gis-curator.md",
     ".claude/scripts/lib/check-card-census.cjs",
-    ".claude/skills/estat/search-mlit-dpf/SKILL.md",
-    ".claude/skills/estat/search-mlit-dpf/reference/mlit-dpf-catalog.md"
+    ".claude/skills/estat/search-mlit-dpf/SKILL.md"
   ]
 }
