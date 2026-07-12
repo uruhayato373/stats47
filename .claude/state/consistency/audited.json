@@ -1,10 +1,5 @@
 {
-  "hash": "a77447c1d17dccf4e5418b767ec94984b37992fdce1f0db83d92f2b9904aeb95",
-  "audited_at": "2026-07-12T00:46:45",
-  "files": [
-    ".claude/agents/adsense-analyst.md",
-    ".claude/scripts/metrics/measure-adsense-impact.mjs",
-    ".claude/scripts/metrics/update-history-csv.mjs",
-    ".claude/skills/analytics/adsense-improvement/reference/improvement-log.md"
-  ]
+  "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "audited_at": "2026-07-12T01:45:10",
+  "files": []
 }
