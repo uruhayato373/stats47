@@ -64,7 +64,7 @@ jobs:
 
       - name: 📅 Resolve date
         id: date
-        run: echo "date=$(date -u +%Y-%m-%d)" >> $GITHUB_OUTPUT
+        run: echo "date=$(date -u +%Y-%m-%d)" >> "$GITHUB_OUTPUT"
 
       - name: 💾 Commit history
         run: |
@@ -82,7 +82,7 @@ jobs:
         if: always()
         run: |
           if [ -f .claude/state/metrics/gsc/resubmit-history.json ]; then
-            cat <<EOF >> $GITHUB_STEP_SUMMARY
+            cat <<EOF >> "$GITHUB_STEP_SUMMARY"
           ## GSC Auto-resubmit ${{ steps.date.outputs.date }}
 
           $(node -e "

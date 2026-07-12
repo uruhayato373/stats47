@@ -47,9 +47,10 @@ jobs:
         if: always()
         run: |
           REPORT_DIR="docs/04_レビュー"
+          # shellcheck disable=SC2012  # 最新レポートを mtime 順で取得
           LATEST=$(ls -t "$REPORT_DIR"/*-sns-weekly.md 2>/dev/null | head -1)
           if [ -n "$LATEST" ]; then
-            cat "$LATEST" >> $GITHUB_STEP_SUMMARY
+            cat "$LATEST" >> "$GITHUB_STEP_SUMMARY"
           fi
 
       - name: 💾 Commit report

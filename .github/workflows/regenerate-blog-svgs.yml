@@ -86,7 +86,7 @@ jobs:
             ')
           fi
           echo "list=$SLUGS" >> "$GITHUB_OUTPUT"
-          echo "対象 slug 数: $(echo $SLUGS | wc -w)"
+          echo "対象 slug 数: $(echo "$SLUGS" | wc -w)"
 
       - name: 🎨 Regenerate SVGs via svg-builder
         run: |
@@ -125,10 +125,12 @@ jobs:
 
       - name: 📝 Summary
         run: |
-          echo "### 🎨 Regenerate Blog SVGs" >> $GITHUB_STEP_SUMMARY
-          echo "- dry_run: \`${{ github.event.inputs.dry_run }}\`" >> $GITHUB_STEP_SUMMARY
-          echo "- 対象 slug: \`${{ github.event.inputs.slugs || 'all' }}\`" >> $GITHUB_STEP_SUMMARY
-          echo "- ギャラリー: artifact \`blog-svg-gallery\` をダウンロードして視覚確認" >> $GITHUB_STEP_SUMMARY
+          {
+            echo "### 🎨 Regenerate Blog SVGs"
+            echo "- dry_run: \`${{ github.event.inputs.dry_run }}\`"
+            echo "- 対象 slug: \`${{ github.event.inputs.slugs || 'all' }}\`"
+            echo "- ギャラリー: artifact \`blog-svg-gallery\` をダウンロードして視覚確認"
+          } >> "$GITHUB_STEP_SUMMARY"
           if [ "${{ github.event.inputs.dry_run }}" != "false" ]; then
-            echo "- ⚠️ dry-run のため R2 へは push していません" >> $GITHUB_STEP_SUMMARY
+            echo "- ⚠️ dry-run のため R2 へは push していません" >> "$GITHUB_STEP_SUMMARY"
           fi

@@ -46,7 +46,7 @@ jobs:
             echo "::error::jpksj-api response invalid (count=${NEW_COUNT})"
             exit 1
           fi
-          echo "new_count=${NEW_COUNT}" >> $GITHUB_OUTPUT
+          echo "new_count=${NEW_COUNT}" >> "$GITHUB_OUTPUT"
           cp /tmp/ksj/new.json packages/database/seed/ksj-catalog.json
 
       - name: 🔍 Diff old vs new
@@ -56,30 +56,38 @@ jobs:
           NEW_IDS=$(jq -r '.[].id' /tmp/ksj/new.json | sort -u)
           ADDED=$(comm -13 <(echo "$OLD_IDS") <(echo "$NEW_IDS") | wc -l | tr -d ' ')
           REMOVED=$(comm -23 <(echo "$OLD_IDS") <(echo "$NEW_IDS") | wc -l | tr -d ' ')
-          echo "added=${ADDED}" >> $GITHUB_OUTPUT
-          echo "removed=${REMOVED}" >> $GITHUB_OUTPUT
-          echo "## KSJ Catalog Diff" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "- Total: ${{ steps.fetch.outputs.new_count }} datasets" >> $GITHUB_STEP_SUMMARY
-          echo "- 追加: ${ADDED} 件" >> $GITHUB_STEP_SUMMARY
-          echo "- 削除: ${REMOVED} 件" >> $GITHUB_STEP_SUMMARY
+          {
+            echo "added=${ADDED}"
+            echo "removed=${REMOVED}"
+          } >> "$GITHUB_OUTPUT"
+          {
+            echo "## KSJ Catalog Diff"
+            echo ""
+            echo "- Total: ${{ steps.fetch.outputs.new_count }} datasets"
+            echo "- 追加: ${ADDED} 件"
+            echo "- 削除: ${REMOVED} 件"
+          } >> "$GITHUB_STEP_SUMMARY"
           if [ "${ADDED}" -gt 0 ]; then
-            echo "" >> $GITHUB_STEP_SUMMARY
-            echo "### 新規追加データセット" >> $GITHUB_STEP_SUMMARY
-            comm -13 <(echo "$OLD_IDS") <(echo "$NEW_IDS") | while read ID; do
+            {
+              echo ""
+              echo "### 新規追加データセット"
+            } >> "$GITHUB_STEP_SUMMARY"
+            comm -13 <(echo "$OLD_IDS") <(echo "$NEW_IDS") | while read -r ID; do
               NAME=$(jq -r ".[] | select(.id == \"$ID\") | \"\\(.id) | \\(.name) | \\(.category1_name)\"" /tmp/ksj/new.json)
-              echo "- ${NAME}" >> $GITHUB_STEP_SUMMARY
+              echo "- ${NAME}" >> "$GITHUB_STEP_SUMMARY"
             done
           fi
           if [ "${REMOVED}" -gt 0 ]; then
-            echo "" >> $GITHUB_STEP_SUMMARY
-            echo "### 削除されたデータセット" >> $GITHUB_STEP_SUMMARY
-            comm -23 <(echo "$OLD_IDS") <(echo "$NEW_IDS") | while read ID; do
-              echo "- ${ID}" >> $GITHUB_STEP_SUMMARY
+            {
+              echo ""
+              echo "### 削除されたデータセット"
+            } >> "$GITHUB_STEP_SUMMARY"
+            comm -23 <(echo "$OLD_IDS") <(echo "$NEW_IDS") | while read -r ID; do
+              echo "- ${ID}" >> "$GITHUB_STEP_SUMMARY"
             done
           fi
           # 後段の Issue 作成用に diff body を保存
-          cp $GITHUB_STEP_SUMMARY /tmp/ksj/summary.md
+          cp "$GITHUB_STEP_SUMMARY" /tmp/ksj/summary.md
 
       - name: 📤 Commit updated snapshot
         if: steps.diff.outputs.added != '0' || steps.diff.outputs.removed != '0'

@@ -272,7 +272,7 @@ jobs:
 
           # main ブランチに居る — 改変を退避して develop に切り替え
           mkdir -p /tmp/improvement-log-stash
-          git diff --name-only .claude/skills/analytics/ | while read f; do
+          git diff --name-only .claude/skills/analytics/ | while read -r f; do
             mkdir -p "/tmp/improvement-log-stash/$(dirname "$f")"
             cp "$f" "/tmp/improvement-log-stash/$f"
           done

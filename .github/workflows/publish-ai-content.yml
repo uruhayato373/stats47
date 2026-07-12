@@ -73,23 +73,23 @@ jobs:
         run: |
           INPUT_KEYS="${{ inputs.keys }}"
           if [ -n "$INPUT_KEYS" ]; then
-            CANDIDATES=$(echo "$INPUT_KEYS" | tr ', ' '\n\n' | sed '/^$/d')
+            CANDIDATES=$(echo "$INPUT_KEYS" | tr ', ' '\n' | sed '/^$/d')
           else
             CHANGED=$(git -c core.quotepath=false diff --name-only --diff-filter=ACM "HEAD~1" "HEAD" \
               | grep -E '^data/ai-content-staging/[a-z0-9-]+\.json$' || true)
             CANDIDATES=""
             for f in $CHANGED; do CANDIDATES="$CANDIDATES $(basename "$f" .json)"; done
             # reconcile: 変更検出 0 なら outbox 残存全件を backfill (取りこぼし self-heal)
-            if [ -z "$(echo $CANDIDATES | xargs)" ] && [ -d data/ai-content-staging ]; then
+            if [ -z "$(echo "$CANDIDATES" | xargs)" ] && [ -d data/ai-content-staging ]; then
               echo "変更検出 0 → outbox 残存の backfill モード"
-              CANDIDATES=$(ls data/ai-content-staging/*.json 2>/dev/null | xargs -n1 basename 2>/dev/null | sed 's/\.json$//' || true)
+              CANDIDATES=$(find data/ai-content-staging -maxdepth 1 -name '*.json' -exec basename {} .json \; || true)
             fi
           fi
           KEYS=""
           for key in $CANDIDATES; do
             [ -f "data/ai-content-staging/$key.json" ] && KEYS="$KEYS $key" || echo "skip (file not found): $key"
           done
-          KEYS=$(echo $KEYS | xargs -n1 2>/dev/null | head -n "${MAX_PUBLISH}" | xargs || true)
+          KEYS=$(echo "$KEYS" | xargs -n1 2>/dev/null | head -n "${MAX_PUBLISH}" | xargs || true)
           echo "keys=$KEYS" >> "$GITHUB_OUTPUT"
           echo "公開対象 (上限 ${MAX_PUBLISH}): ${KEYS:-なし}"
 
@@ -117,8 +117,10 @@ jobs:
             echo "✅ $KEY staged"
             echo "::endgroup::"
           done
-          echo "PUBLISHED=$PUBLISHED" >> "$GITHUB_ENV"
-          echo "SKIPPED=$SKIPPED" >> "$GITHUB_ENV"
+          {
+            echo "PUBLISHED=$PUBLISHED"
+            echo "SKIPPED=$SKIPPED"
+          } >> "$GITHUB_ENV"
 
       - name: 📤 Push staged ai-content to R2
         if: ${{ env.PUBLISHED != '' }}
@@ -130,7 +132,7 @@ jobs:
           URLS=""
           for KEY in $PUBLISHED; do URLS="$URLS https://stats47.jp/ranking/$KEY"; done
           echo "purge: $URLS"
-          npx tsx packages/r2-storage/src/scripts/purge-cache.ts --urls $URLS || true
+          npx tsx packages/r2-storage/src/scripts/purge-cache.ts --urls "$URLS" || true
 
       - name: 🧹 Remove published files from outbox (ephemeral)
         if: ${{ env.PUBLISHED != '' && success() }}
@@ -157,5 +159,7 @@ jobs:
       - name: 📝 Summary
         if: always()
         run: |
-          echo "- ✅ 公開: ${PUBLISHED:-なし}" >> "$GITHUB_STEP_SUMMARY"
-          echo "- ⏭️ ゲート未達スキップ: ${SKIPPED:-なし}" >> "$GITHUB_STEP_SUMMARY"
+          {
+            echo "- ✅ 公開: ${PUBLISHED:-なし}"
+            echo "- ⏭️ ゲート未達スキップ: ${SKIPPED:-なし}"
+          } >> "$GITHUB_STEP_SUMMARY"

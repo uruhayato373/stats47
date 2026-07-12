@@ -66,5 +66,5 @@ jobs:
             ARGS="$ARGS --execute"
           fi
           echo "cleanup-posted-sns-videos.ts $ARGS"
-          npx tsx packages/r2-storage/src/scripts/cleanup-posted-sns-videos.ts $ARGS 2>&1 \
+          npx tsx packages/r2-storage/src/scripts/cleanup-posted-sns-videos.ts "$ARGS" 2>&1 \
             | grep -vE '^\{"level"' | tee -a "$GITHUB_STEP_SUMMARY"

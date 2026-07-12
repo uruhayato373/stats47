@@ -66,14 +66,18 @@ jobs:
       - name: 📄 Step Summary
         if: always()
         run: |
-          echo "# YouTube Shadowban Diagnose" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
+          {
+            echo "# YouTube Shadowban Diagnose"
+            echo ""
+          } >> "$GITHUB_STEP_SUMMARY"
           if [ -s diag-output.txt ]; then
-            echo '```' >> $GITHUB_STEP_SUMMARY
-            cat diag-output.txt >> $GITHUB_STEP_SUMMARY
-            echo '```' >> $GITHUB_STEP_SUMMARY
+            {
+              echo '```'
+              cat diag-output.txt
+              echo '```'
+            } >> "$GITHUB_STEP_SUMMARY"
           else
-            echo "⚠️ 診断出力なし — 認証失敗の可能性 (refresh token 失効を確認)" >> $GITHUB_STEP_SUMMARY
+            echo "⚠️ 診断出力なし — 認証失敗の可能性 (refresh token 失効を確認)" >> "$GITHUB_STEP_SUMMARY"
           fi
 
       - name: 📦 Upload artifact

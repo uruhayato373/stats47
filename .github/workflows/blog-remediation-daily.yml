@@ -69,16 +69,16 @@ jobs:
           node .claude/scripts/blog/compose-daily-rewrite-issue.mjs --next "$NEXT" \
             > /tmp/blog-remediation/issue.md
           if head -1 /tmp/blog-remediation/issue.md | grep -q "^skip:"; then
-            echo "skipped=true" >> $GITHUB_OUTPUT
+            echo "skipped=true" >> "$GITHUB_OUTPUT"
             echo "--- skipped ---"; cat /tmp/blog-remediation/issue.md
           else
-            echo "skipped=false" >> $GITHUB_OUTPUT
+            echo "skipped=false" >> "$GITHUB_OUTPUT"
             head -20 /tmp/blog-remediation/issue.md
           fi
 
       - name: 📄 Write GitHub Step Summary
         if: steps.compose.outputs.skipped == 'false'
-        run: cat /tmp/blog-remediation/issue.md >> $GITHUB_STEP_SUMMARY
+        run: cat /tmp/blog-remediation/issue.md >> "$GITHUB_STEP_SUMMARY"
 
       - name: 🔔 Open or update daily rewrite issue
         if: steps.compose.outputs.skipped == 'false'

@@ -52,7 +52,7 @@ jobs:
           if [ "${{ inputs.no_issue }}" = "true" ]; then
             FLAGS="$FLAGS --no-issue"
           fi
-          node .claude/scripts/cloudflare/monthly-snapshot.mjs $FLAGS
+          node .claude/scripts/cloudflare/monthly-snapshot.mjs "$FLAGS"
 
       - name: 💾 Commit snapshot to develop
         run: |

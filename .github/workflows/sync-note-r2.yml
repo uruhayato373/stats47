@@ -175,7 +175,9 @@ jobs:
 
       - name: 📋 Summary
         run: |
-          echo "### Note R2 Sync" >> $GITHUB_STEP_SUMMARY
-          echo "- pending: ${{ steps.check.outputs.pending_count }} 件" >> $GITHUB_STEP_SUMMARY
-          echo "- dry_run: ${{ github.event.inputs.dry_run || 'false (push trigger)' }}" >> $GITHUB_STEP_SUMMARY
-          echo "- 復元: \`bash .claude/scripts/note/restore-from-r2.sh <slug>\`" >> $GITHUB_STEP_SUMMARY
+          {
+            echo "### Note R2 Sync"
+            echo "- pending: ${{ steps.check.outputs.pending_count }} 件"
+            echo "- dry_run: ${{ github.event.inputs.dry_run || 'false (push trigger)' }}"
+            echo "- 復元: \`bash .claude/scripts/note/restore-from-r2.sh <slug>\`"
+          } >> "$GITHUB_STEP_SUMMARY"

@@ -71,7 +71,7 @@ jobs:
           FLAGS="--type ${{ github.event.inputs.type }} --force"
           if [ -n "${{ github.event.inputs.limit }}" ]; then FLAGS="$FLAGS --limit ${{ github.event.inputs.limit }}"; fi
           echo "Running: generate-ogp-images.ts $FLAGS"
-          npx tsx --tsconfig apps/web/scripts/tsconfig.ogp.json apps/web/scripts/generate-ogp-images.ts $FLAGS
+          npx tsx --tsconfig apps/web/scripts/tsconfig.ogp.json apps/web/scripts/generate-ogp-images.ts "$FLAGS"
 
       - name: ☁️ Push to R2 (S3 diff)
         if: github.event.inputs.apply == 'true'

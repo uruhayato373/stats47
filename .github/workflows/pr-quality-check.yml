@@ -50,10 +50,8 @@ jobs:
       - name: ⚙️ GitHub Actions Syntax Guard
         # actionlint v1.7.7 を固定版 + 公開SHA-256検証付きで実行。
         # YAML / expressions / reusable workflow / shellcheck連携可能部分の構文回帰をPRで止める。
-        # shellcheck の info/style レベル指摘 (SC2086 等) では PR を落とさない (ガードの目的は構文/式回帰の検出)。
-        # 既存 workflow の style nit は別途 style 課題として扱う。
-        env:
-          SHELLCHECK_OPTS: "--exclude=SC2011,SC2012,SC2016,SC2020,SC2034,SC2086,SC2129,SC2162"
+        # shellcheck 指摘は例外 (SHELLCHECK_OPTS 除外) を使わず全て実修正済み
+        # (SC2086 変数引用 / SC2129 redirect グループ化 / SC2162 read -r / SC2016 は node -e で inline disable)。
         run: |
           ACTIONLINT_VERSION="1.7.7"
           ACTIONLINT_ARCHIVE="actionlint_${ACTIONLINT_VERSION}_linux_amd64.tar.gz"

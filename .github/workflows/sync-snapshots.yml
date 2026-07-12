@@ -74,7 +74,7 @@ jobs:
           [ -n "${{ inputs.only }}" ] && ARGS="$ARGS --only ${{ inputs.only }}"
           [ "${{ inputs.dry_run }}" = "true" ] && ARGS="$ARGS --dry-run"
           echo "sync-snapshots/run.sh $ARGS"
-          bash .claude/skills/db/sync-snapshots/run.sh $ARGS
+          bash .claude/skills/db/sync-snapshots/run.sh "$ARGS"
 
   # ranking-items を R2 に push した後、git 側の派生キー (known / sitemap) を再生成して
   # develop に反映し PR を開く。これが無いと新規 metric の item.json は R2 にあっても
@@ -139,7 +139,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           KEY_FILES="packages/ranking/src/config/known-ranking-keys.ts apps/web/src/config/sitemap-ranking-keys.ts"
-          if git diff --quiet -- $KEY_FILES; then
+          if git diff --quiet -- "$KEY_FILES"; then
             echo "ranking keys 差分なし — PR 不要"
             exit 0
           fi
@@ -147,7 +147,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git switch -C "$BRANCH"
-          git add $KEY_FILES
+          git add "$KEY_FILES"
           git commit -m "chore(ranking): sync known + sitemap ranking keys from R2 [skip ci]"
           git push -f origin "$BRANCH"
           # 既存 PR があれば再利用、無ければ作成 (develop→main = 本番デプロイの最終ゲート)。

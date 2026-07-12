@@ -74,8 +74,10 @@ jobs:
             [43]=kumamoto [44]=oita [45]=miyazaki [46]=kagoshima [47]=okinawa
           )
           SLUG="${SLUG_MAP[$PREF_CODE]}"
-          echo "pref_code=$PREF_CODE" >> $GITHUB_OUTPUT
-          echo "slug=$SLUG" >> $GITHUB_OUTPUT
+          {
+            echo "pref_code=$PREF_CODE"
+            echo "slug=$SLUG"
+          } >> "$GITHUB_OUTPUT"
           echo "Picked: $SLUG ($PREF_CODE) for week $WEEK_OF_YEAR"
 
       # TODO Phase 4: 既投稿チェック (週単位 idempotency)
@@ -88,9 +90,9 @@ jobs:
           TAG="weekly-${YEAR}-W${WEEK_OF_YEAR}-${{ steps.pick.outputs.slug }}"
           if [ -f "$LOG" ] && grep -q ",${TAG}," "$LOG"; then
             echo "[skip] ${TAG} already posted"
-            echo "skip=true" >> $GITHUB_OUTPUT
+            echo "skip=true" >> "$GITHUB_OUTPUT"
           else
-            echo "skip=false" >> $GITHUB_OUTPUT
+            echo "skip=false" >> "$GITHUB_OUTPUT"
           fi
 
       - name: 📱 Post to Instagram + X

@@ -50,16 +50,16 @@ jobs:
           npm run psi-audit:check -- --output /tmp/psi-report/report.md
           EXIT_CODE=$?
           set -e
-          echo "exit_code=${EXIT_CODE}" >> $GITHUB_OUTPUT
+          echo "exit_code=${EXIT_CODE}" >> "$GITHUB_OUTPUT"
           echo "Threshold check exit code: ${EXIT_CODE}"
 
       - name: 📄 Write GitHub Step Summary
         if: always()
         run: |
           if [ -f /tmp/psi-report/report.md ]; then
-            cat /tmp/psi-report/report.md >> $GITHUB_STEP_SUMMARY
+            cat /tmp/psi-report/report.md >> "$GITHUB_STEP_SUMMARY"
           else
-            echo "PSI report not generated" >> $GITHUB_STEP_SUMMARY
+            echo "PSI report not generated" >> "$GITHUB_STEP_SUMMARY"
           fi
 
       - name: 📦 Stage metrics outputs
@@ -114,15 +114,17 @@ jobs:
           done <<< "$URLS"
 
           echo "" > /tmp/psi-report/candidates.md
-          echo "---" >> /tmp/psi-report/candidates.md
-          echo "" >> /tmp/psi-report/candidates.md
-          echo "## 🔧 修正候補 component (自動提案)" >> /tmp/psi-report/candidates.md
-          echo "" >> /tmp/psi-report/candidates.md
-          echo "違反 URL ごとに \`apps/web/src/{app,features}/\` から候補ファイルを抽出 + git blame + 過去施策 hint。" >> /tmp/psi-report/candidates.md
-          echo "詳細: \`.claude/scripts/psi/suggest-cwv-candidates.mjs\`" >> /tmp/psi-report/candidates.md
-          echo "" >> /tmp/psi-report/candidates.md
+          {
+            echo "---"
+            echo ""
+            echo "## 🔧 修正候補 component (自動提案)"
+            echo ""
+            echo "違反 URL ごとに \`apps/web/src/{app,features}/\` から候補ファイルを抽出 + git blame + 過去施策 hint。"
+            echo "詳細: \`.claude/scripts/psi/suggest-cwv-candidates.mjs\`"
+            echo ""
+          } >> /tmp/psi-report/candidates.md
 
-          node .claude/scripts/psi/suggest-cwv-candidates.mjs $URL_ARGS --max 5 --format markdown \
+          node .claude/scripts/psi/suggest-cwv-candidates.mjs "$URL_ARGS" --max 5 --format markdown \
             >> /tmp/psi-report/candidates.md 2>&1 || echo "_(candidate suggestion failed, see logs)_" >> /tmp/psi-report/candidates.md
 
           echo "=== candidates preview ==="

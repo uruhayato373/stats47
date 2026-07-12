@@ -52,7 +52,7 @@ jobs:
           else
             npx tsx packages/data-configs/scripts/ingest-commute-flow.ts
             echo "--- 生成数 ---"
-            ls .local/r2/app/commute-flow/*.json | wc -l
+            find .local/r2/app/commute-flow -maxdepth 1 -name '*.json' | wc -l
           fi
 
       - name: ☁️ Push to R2 (app/commute-flow)

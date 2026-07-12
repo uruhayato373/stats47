@@ -68,15 +68,19 @@ jobs:
         run: |
           DATE=$(date -u +%Y-%m-%d)
           SNAPSHOT=".claude/skills/analytics/sns-metrics-improvement/snapshots/${DATE}/metrics.csv"
-          echo "# SNS Metrics Weekly — ${DATE}" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
+          {
+            echo "# SNS Metrics Weekly — ${DATE}"
+            echo ""
+          } >> "$GITHUB_STEP_SUMMARY"
           if [ -f "$SNAPSHOT" ]; then
             COUNT=$(wc -l < "$SNAPSHOT")
-            echo "- 記録件数: $((COUNT - 1)) 行" >> $GITHUB_STEP_SUMMARY
-            echo "" >> $GITHUB_STEP_SUMMARY
-            echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
-            head -6 "$SNAPSHOT" >> $GITHUB_STEP_SUMMARY
-            echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+            {
+              echo "- 記録件数: $((COUNT - 1)) 行"
+              echo ""
+              echo "\`\`\`"
+              head -6 "$SNAPSHOT"
+              echo "\`\`\`"
+            } >> "$GITHUB_STEP_SUMMARY"
           else
-            echo "スナップショットファイルが見つかりません" >> $GITHUB_STEP_SUMMARY
+            echo "スナップショットファイルが見つかりません" >> "$GITHUB_STEP_SUMMARY"
           fi
