@@ -58,7 +58,7 @@ export function FeaturedRankingCard({
       >
         {tileMapSvg && (
           <div
-            className="pointer-events-none absolute inset-0 opacity-[0.08] [&>svg]:h-full [&>svg]:w-full"
+            className="pointer-events-none absolute inset-0 opacity-[0.15] [&>svg]:h-full [&>svg]:w-full"
             aria-hidden="true"
             dangerouslySetInnerHTML={{ __html: tileMapSvg }}
           />
