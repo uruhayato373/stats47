@@ -2,6 +2,7 @@ import type { MetricConfig } from "../types";
 
 export const annualSunshineDuration: MetricConfig = {
   "key": "annual-sunshine-duration",
+  "thumbnailVariant": "number",
   "title": "年間日照時間",
   "unit": "時間",
   "category": "landweather",

@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { getMetricConfig, type RankingThumbnailVariant } from "@stats47/data-configs";
 import { buildRankingDisplayInfo } from "@stats47/ranking";
 import { readRankingValuesFromR2 } from "@stats47/ranking/server";
 import { isOk } from "@stats47/types";
@@ -10,6 +11,7 @@ import { SHELL_WIDTH_CLASS } from "@/components/layout/PageShell";
 import { logger } from "@/lib/logger";
 
 import { getFeaturedRankings } from "../../server";
+import { resolveRankingThumbnailVariant } from "../../utils/resolve-thumbnail-variant";
 import { FeaturedRankingCard } from "../FeaturedRankingCard";
 
 /**
@@ -20,6 +22,12 @@ interface FeaturedRankingsProps {
   limit?: number;
   /** ヘッダー（見出し+もっと見るリンク）を表示するか（デフォルト: true） */
   showHeader?: boolean;
+  /**
+   * この表示場所のサムネイル既定バリアント。home 注目ランキングは "number"（数値型）。
+   * metric config の thumbnailVariant がある指標はそちらが優先される。
+   * 正典(A/B解決規則): apps/web/src/features/ranking/utils/resolve-thumbnail-variant.ts
+   */
+  thumbnailVariantDefault?: RankingThumbnailVariant;
 }
 
 /**
@@ -32,7 +40,11 @@ interface FeaturedRankingsProps {
  * 各ランキングで1回だけ fetch し rank=1 を自前で抽出する（旧実装は
  * readTopRankingValuesBatchFromR2 で内部的に同じ fetch を重複させていた）。
  */
-export async function FeaturedRankings({ limit = 6, showHeader = true }: FeaturedRankingsProps) {
+export async function FeaturedRankings({
+  limit = 6,
+  showHeader = true,
+  thumbnailVariantDefault = "number",
+}: FeaturedRankingsProps) {
   let items: {
     rankingKey: string;
     title: string;
@@ -43,6 +55,7 @@ export async function FeaturedRankings({ limit = 6, showHeader = true }: Feature
     demographicAttr?: string;
     normalizationBasis?: string;
     tileMapSvg?: string;
+    variant?: RankingThumbnailVariant;
   }[] = [];
 
   try {
@@ -101,6 +114,14 @@ export async function FeaturedRankings({ limit = 6, showHeader = true }: Feature
           }
         }
 
+        // A/B バリアント解決 (config > 表示場所既定 > map、データ欠損/長すぎは A へ戻す)。
+        const variant = resolveRankingThumbnailVariant({
+          configVariant: getMetricConfig(item.rankingKey)?.thumbnailVariant,
+          locationDefault: thumbnailVariantDefault,
+          topAreaName,
+          topValue,
+        });
+
         return {
           rankingKey: item.rankingKey,
           title: displayInfo.title,
@@ -111,6 +132,7 @@ export async function FeaturedRankings({ limit = 6, showHeader = true }: Feature
           demographicAttr: displayInfo.demographicAttr || undefined,
           normalizationBasis: displayInfo.normalizationBasis || undefined,
           tileMapSvg,
+          variant,
         };
       });
     }
@@ -153,6 +175,7 @@ export async function FeaturedRankings({ limit = 6, showHeader = true }: Feature
               demographicAttr={item.demographicAttr}
               normalizationBasis={item.normalizationBasis}
               tileMapSvg={item.tileMapSvg}
+              variant={item.variant}
             />
           ))}
         </div>
