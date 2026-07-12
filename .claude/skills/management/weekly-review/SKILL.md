@@ -145,7 +145,7 @@ node .claude/scripts/snapshot-weekly-metrics.mjs [YYYY-Www]
 
    **GSC カバレッジ是正ループ（COVERAGE-LOOP-01、2026-06-16〜）**:
    ユーザーが GSC UI から「ページ」export を取得していれば（API では取れない総件数・未把握 URL を含む）、是正ループを回す。
-   正典: `docs/02_実装計画/12_GSCカバレッジ是正ループ.md` / 実行: `/gsc-coverage-remediation`。
+   正典: `.claude/skills/analytics/gsc-coverage-remediation/SKILL.md` / 実行: `/gsc-coverage-remediation`。
    - 取り込み: `python3 .claude/scripts/gsc/ingest-gsc-export.py`（~/Downloads の cp932 zip を自動正規化 → `coverage-drilldown/YYYY-Www/{category}-drilldown.csv`）
    - 構築: `node .claude/scripts/gsc/build-coverage-queue.mjs`（本番 HTTP 実測で A/B 分類）
    - レビューに埋め込む: **`.claude/state/gsc/LATEST.md`**（要対応 action 別件数・カテゴリ総件数）と

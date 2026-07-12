@@ -1,6 +1,6 @@
 # GSC カバレッジ是正 — 2026-W25 (2026-06-16)
 
-> SSOT: `.claude/state/gsc/coverage-remediation-queue.json` / 正典: `docs/02_実装計画/12_GSCカバレッジ是正ループ.md`
+> SSOT: `.claude/state/gsc/coverage-remediation-queue.json` / 正典: `.claude/skills/analytics/gsc-coverage-remediation/SKILL.md`
 
 ## GSC カテゴリ別総件数 (UI export)
 

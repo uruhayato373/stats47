@@ -12,7 +12,7 @@ GSC UI (インデックス作成 > ページ) の export は:
   python3 .claude/scripts/gsc/ingest-gsc-export.py --src ~/Downloads  # 取り込み元ディレクトリ指定
   python3 .claude/scripts/gsc/ingest-gsc-export.py --week 2026-W25    # 週を明示 (既定: 今日の ISO 週)
 
-正典: docs/02_実装計画/12_GSCカバレッジ是正ループ.md
+正典: .claude/skills/analytics/gsc-coverage-remediation/SKILL.md
 """
 import argparse
 import datetime as dt
