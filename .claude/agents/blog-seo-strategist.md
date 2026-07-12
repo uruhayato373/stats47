@@ -58,7 +58,7 @@ model: sonnet
 ## 戦略コンテキスト (旧 docs/02 doc 15 統合・正典)
 
 新規記事「何を・どの型で・どのデータから書くか」の戦略。品質基準 (どう書くか) は `.claude/rules/blog-quality-standards.md`、
-既存記事の是正は `docs/02_実装計画/06_ブログ品質是正ループ.md`。構造化値の SSOT は seo-strategy.json。
+既存記事の是正は `.claude/rules/blog-remediation-loop.md`。構造化値の SSOT は seo-strategy.json。
 
 ### 現在地と目標 (2026-07-05 起点)
 - 実測 (2026-W26): 週 1,947 clicks / 73,661 imp / CTR 2.64% / position 9.14 (11 週で clicks +450%・公開 290 記事)

@@ -239,7 +239,7 @@ YYYY-MM-DD-<method>[-<batch>]
 
 | State | 内容 | 書き込み箇所 |
 |---|---|---|
-| `.claude/state/blog/remediation-queue.json` | **品質是正キュー (状態付き)**。「次に何を直すか」の真実源。pending/in-progress/done + wave_id。GSC×品質 blocker の統合スコア。**正典: `docs/02_実装計画/06_ブログ品質是正ループ.md`** | `build-remediation-queue.mjs` (build / --mark-* / --next) |
+| `.claude/state/blog/remediation-queue.json` | **品質是正キュー (状態付き)**。「次に何を直すか」の真実源。pending/in-progress/done + wave_id。GSC×品質 blocker の統合スコア。**正典: `.claude/rules/blog-remediation-loop.md`** | `build-remediation-queue.mjs` (build / --mark-* / --next) |
 | `.claude/state/blog/winning-patterns.json` | **勝ち要因 (天井ループ)**。featureSignals (confidence付) + 順位交絡統制 (robust/confounded) + 記事別 conformance。build-remediation-queue が conformance を tiebreaker に読む。概念: `.claude/rules/blog-quality-standards.md` §継続品質ループ | `analyze-winning-patterns.mjs` |
 | `.claude/state/blog/auto-brushup-history.json` | wave_id 駆動 source of truth (effect 計測の入力 + 是正キューの done シード) | `/brushup-blog --target batch\|queue` 実行時 |
 | `.claude/state/blog/auto-brushup-skipped.log` | dedup でスキップした slug ログ | 同上 |
@@ -266,4 +266,4 @@ YYYY-MM-DD-<method>[-<batch>]
 - 親 plan: `~/.claude/plans/recursive-purring-planet.md`
 - Phase B (data schema 統一) で実装予定の migrate script: `.claude/scripts/blog/migrate-data-schema.mjs` (未着手)
 - Phase C で実装予定の value detector: `.claude/scripts/lib/article-factual-check.mjs` の `checkValueClaims` (未実装、Phase B 前提)
-- Phase D (wave 効果計測): `measure-gsc-impact.mjs` を wave_id 駆動化し `fetch-metrics-weekly.yml` cron に配線済 (2026-06-08)。SKILL 化はせず週次 cron で自動実行。正典: `docs/02_実装計画/06_ブログ品質是正ループ.md` Phase 2
+- Phase D (wave 効果計測): `measure-gsc-impact.mjs` を wave_id 駆動化し `fetch-metrics-weekly.yml` cron に配線済 (2026-06-08)。SKILL 化はせず週次 cron で自動実行。正典: `.claude/rules/blog-remediation-loop.md`

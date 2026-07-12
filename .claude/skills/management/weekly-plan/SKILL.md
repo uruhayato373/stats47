@@ -129,7 +129,7 @@ primary_agent: strategy-advisor
   ```
   → pending 上位 3 件を「**ブログ品質是正 3 本**」として Phase 3 の **Must** に転載する (must-fix レーン優先)。
   → 実行は `/brushup-blog --target queue --next 3` (article-writer が archetype + 図あたり字数で是正 → blog-critic PASS → publish)。
-  → これは毎週の**定常 Must**。少しずつ消化しキュー pending を減らす。仕組み: `docs/02_実装計画/06_ブログ品質是正ループ.md`。
+  → これは毎週の**定常 Must**。少しずつ消化しキュー pending を減らす。仕組み: `.claude/rules/blog-remediation-loop.md`。
 
 - ブログ新規記事キュー（**新規記事を継続拡充**・真実源: `.claude/state/blog/topic-queue.json`）
   ```bash

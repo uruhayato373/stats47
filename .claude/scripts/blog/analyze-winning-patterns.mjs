@@ -484,7 +484,7 @@ ${confounders.robustSignals.map((r) => `| ${r.feature} | ${r.rawEffect > 0 ? "+"
 
 ## 関連
 - 仕組み正典: \`.claude/rules/blog-quality-standards.md §継続品質ループ\`
-- 床を上げる側: \`docs/02_実装計画/06_ブログ品質是正ループ.md\` (\`build-remediation-queue.mjs\`)
+- 床を上げる側: \`.claude/rules/blog-remediation-loop.md\` (\`build-remediation-queue.mjs\`)
 - 品質基準(書き戻し先): \`.claude/rules/blog-quality-standards.md\`
 `;
   fs.writeFileSync(reportPath, md);

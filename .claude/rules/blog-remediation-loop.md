@@ -1,17 +1,12 @@
----
-type: implementation-plan
-date: 2026-06-13
-status: active
-tags: [blog, quality, remediation, gsc]
----
+# ブログ品質 是正ループ (運用正典)
 
-# ブログ品質 是正ループ (計画的に順次品質向上する仕組み)
-
-公開済みブログ 252 記事の品質を**週次で少しずつ底上げ**するための閉ループ。「SVG はあるが文章が薄い」「callout が
-定型で不自然」という品質課題 (2026-06-06 診断) を、新規記事だけでなく**既存記事も順次是正**して解消する。
+公開済みブログ記事の品質を**週次で少しずつ底上げ**するための閉ループの**運用正典**。「SVG はあるが文章が薄い」
+「callout が定型で不自然」という品質課題を、新規記事だけでなく**既存記事も順次是正**して解消する。
+2026-07-12 に旧 `docs/02_実装計画/06_ブログ品質是正ループ.md` を本ルールへ統合し、運用 SSOT を .claude に一本化した。
 
 > **正典の役割分担**: 品質基準 (アーキタイプ / 図あたり字数 / callout) は `.claude/rules/blog-quality-standards.md`。
-> 本ファイルは**是正を回す運用ループ**の正典。wave 命名規則は `.claude/rules/blog-data-schema.md`。
+> 本ルールは**是正を回す運用ループ**の正典。wave 命名規則は `.claude/rules/blog-data-schema.md`。
+> 実行スキルは `/brushup-blog --target queue`、オーナー agent は `article-writer` (是正) / `blog-critic` (審査)。
 
 ## クイックスタート (★どのセッション・どの環境からでも)
 
@@ -184,3 +179,4 @@ node .claude/scripts/blog/sync-rewrite-progress.mjs --wave-id <date>-criticN  # 
 - 実証ベース判定: `.claude/rules/evidence-based-judgment.md`
 - スキル: `/brushup-blog --target queue` / weekly-plan / weekly-review
 - agent: article-writer (archetype 対応) / blog-critic (型別必須分析視点を審査)
+- 同型ループ: GSC カバレッジ是正 = `.claude/skills/analytics/gsc-coverage-remediation/SKILL.md`
