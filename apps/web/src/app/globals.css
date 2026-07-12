@@ -9,37 +9,37 @@
      * Core Colors - Indigo & Slate 
      * Using HSL values for Tailwind opacity support 
      */
-    --background: 0 0% 100%; /* Pure White — エディトリアル/データ誌風: 地は純白、カードとの差は border(罫線)が担う */
-    --foreground: 222 47% 11%; /* Slate-900 */
+    --background: 225 33% 99%; /* わずかに青みを含む白 */
+    --foreground: 224 48% 12%; /* Ink navy */
     
     --card: 0 0% 100%; /* Pure White */
-    --card-foreground: 222 47% 11%;
+    --card-foreground: 224 48% 12%;
     
     --popover: 0 0% 100%;
-    --popover-foreground: 222 47% 11%;
+    --popover-foreground: 224 48% 12%;
     
     /* Primary: Indigo-600 */
-    --primary: 226 70% 55%; 
-    --primary-foreground: 210 40% 98%;
+    --primary: 232 63% 48%;
+    --primary-foreground: 0 0% 100%;
     
     /* Secondary: Slate-100 */
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 228 38% 96%;
+    --secondary-foreground: 224 48% 12%;
     
     /* Muted: Slate-100 */
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 226 32% 96%;
+    --muted-foreground: 220 14% 42%;
     
     /* Accent: Slate-100 */
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 230 45% 95%;
+    --accent-foreground: 232 63% 38%;
     
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
     
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 226 70% 55%; /* Indigo-600 */
+    --border: 225 24% 88%;
+    --input: 225 24% 88%;
+    --ring: 232 63% 48%;
     
     --radius: 0px; /* フラットデザイン: 角丸なし (rounded-sm/md/lg はすべて 0) */
 
@@ -58,19 +58,19 @@
     /* Sidebar variables */
     --sidebar-background: 0 0% 100%; /* White in light mode for cleaner look */
     --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 226 70% 55%;
+    --sidebar-primary: 232 63% 48%;
     --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 210 40% 96.1%;
+    --sidebar-accent: 230 45% 95%;
     --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 226 70% 55%;
+    --sidebar-border: 225 24% 88%;
+    --sidebar-ring: 232 63% 48%;
 
     /* Chart colors - Vibrant yet sophisticated */
-    --chart-1: 226 70% 55%;  /* Indigo */
-    --chart-2: 173 58% 39%;  /* Teal */
-    --chart-3: 197 37% 24%;  /* Slate Blue */
-    --chart-4: 43 96% 64%;   /* Amber */
-    --chart-5: 25 95% 53%;   /* Orange */
+    --chart-1: 232 63% 48%;  /* Indigo */
+    --chart-2: 181 55% 35%;  /* Teal */
+    --chart-3: 208 55% 40%;  /* Data blue */
+    --chart-4: 38 88% 53%;   /* Amber */
+    --chart-5: 9 68% 53%;    /* Coral */
   }
 }
 
@@ -90,7 +90,7 @@
   --popover: 217 33% 17%;
   --popover-foreground: 210 40% 98%;
 
-  --primary: 226 70% 65%;
+  --primary: 232 72% 68%;
   --primary-foreground: 222 47% 11%;
 
   --secondary: 217 33% 17.5%;
@@ -107,22 +107,22 @@
 
   --border: 217 33% 17.5%;
   --input: 217 33% 17.5%;
-  --ring: 224.3 76.3% 48%;
+  --ring: 232 72% 68%;
 
   --sidebar-background: 222 47% 11%;
   --sidebar-foreground: 240 4.8% 95.9%;
-  --sidebar-primary: 226 70% 65%;
+  --sidebar-primary: 232 72% 68%;
   --sidebar-primary-foreground: 0 0% 100%;
   --sidebar-accent: 240 3.7% 15.9%;
   --sidebar-accent-foreground: 240 4.8% 95.9%;
   --sidebar-border: 240 3.7% 15.9%;
-  --sidebar-ring: 226 70% 65%;
+  --sidebar-ring: 232 72% 68%;
 
-  --chart-1: 226 70% 65%;
-  --chart-2: 173 58% 49%;
-  --chart-3: 197 37% 34%;
-  --chart-4: 43 96% 74%;
-  --chart-5: 25 95% 63%;
+  --chart-1: 232 72% 68%;
+  --chart-2: 181 55% 49%;
+  --chart-3: 208 65% 62%;
+  --chart-4: 38 88% 64%;
+  --chart-5: 9 72% 65%;
 
   color-scheme: dark;
 }
