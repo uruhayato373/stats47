@@ -53,5 +53,12 @@ metadata:
 - 生成器: `.claude/scripts/estat/gen-ssds-configs.mjs`(spec JSON→config、subtitle自動分離・dup/GONE/norm-dup skip)。spec は scratchpad ssds-c1/c2.json
 - ★chunk-1教訓: hand-pick「高価値」31本中19本が既存の正規化重複だった(認知指標は既存済)。真に新規は財政費目/教育の細分に寄る
 
+## ★拡充ループ構築済 (2026-07-12) — 継続運用の型
+ブログ是正ループと同型の4点セット。**計測ゲート付き需要ファースト**(闇雲に増やさず公開→GSC実測→流入カテゴリのみ深掘り=thin-content回避):
+- 状態SSOT `.claude/state/estat/expansion-queue.json`(`build-expansion-queue.mjs`。candidate/generated/published/measured + categoryTraffic。現状 generated46/pending2,462)。候補プール `.claude/state/estat/ssds-candidates.json`(4,114)
+- スキル `/expand-rankings`(`.claude/skills/management/expand-rankings/`。旧expand-indicators再構築)
+- エージェント `ranking-expander`(`.claude/agents/`。キュレーション判断オーナー。投入=data-ingester/公開=ranking-publisher/計測=gsc-analyst委譲)
+- 計測 `measure-expansion-impact.mjs`(公開4週後GSC流入→キュー反映→build再実行でcategoryTraffic更新)
+
 ## 次: 公開サイクル (最後に1デプロイ)
 develop の ~39本 + main の 7本を **一括投入(e-Stat→R2 values.json)→ generate-ranking-items(item.json)→ KNOWN/SITEMAP再生成 → 最後に1デプロイ → 本番200実測**。ingestは data-refresh(main checkout・--metric単一)なので、1デプロイ実現には develop読みの push-trigger投入workflow が要る(未実装)。GSC実測は公開4週後。関連: [[project_competitor_indicator_benchmark]] / docs/todo/03_指標バックログ.md

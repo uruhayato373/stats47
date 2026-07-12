@@ -38,6 +38,14 @@ tags: [ranking-expansion, ssds, estat, handoff]
 - **DBレス発見**: `.claude/scripts/estat/{discover-prefecture-candidates,fetch-estat-meta,enumerate-ssds-indicators}.mjs` + CI `discover-estat-candidates.yml`/`estat-fetch-meta.yml`/`estat-ssds-enum.yml` (専用ブランチ push で発火・main デプロイ不要)。
 - **config 生成器**: `.claude/scripts/estat/gen-ssds-configs.mjs` (spec JSON→config.ts、**subtitle 自動分離**・dup-title/GONE/正規化重複を skip)。spec 例は scratchpad の ssds-c1/c2.json (次回は spec を docs か repo に置くと良い)。
 
+### ★拡充ループ (2026-07-12 構築・継続運用の型)
+「繰り返し + 継続計測 + アクセスアップ」用に、ブログ是正ループと同型の 4 点セットを構築済:
+- **状態SSOT** `.claude/state/estat/expansion-queue.json` (`build-expansion-queue.mjs` が構築。candidate/generated/published/measured + categoryTraffic)。候補プールは `.claude/state/estat/ssds-candidates.json` (4,114件)
+- **スキル** `/expand-rankings` (`.claude/skills/management/expand-rankings/SKILL.md`。旧 expand-indicators 再構築)
+- **エージェント** `ranking-expander` (`.claude/agents/ranking-expander.md`。キュレーション判断のオーナー)
+- **計測** `measure-expansion-impact.mjs` (公開4週後の GSC 流入をキューに反映 → 流入カテゴリの pending を優先)
+- ★**計測ゲート**: 闇雲に増やさず「公開→実測→流入が付いたカテゴリのみ深掘り」。現状 generated 46・pending 2,462。**まず ~46 本の公開・計測が先**。
+
 ## 4. 知見 (次セッションが同じ壁を踏まないために)
 
 - **「e-Stat 全展開」= 8,688生テーブル≒17万metric = 物理的に不可能**。生 survey クロス集計は多次元でキュレーション重の二次ソース。本命は SSDS。
