@@ -144,3 +144,50 @@ feature ブランチ `feature/build-perf-phase1`、macOS ローカル (load avg 
   (`workers:prebuild` = `rimraf .next .open-next` → `opennextjs-cloudflare build`) は別経路であり
   `npm run prebuild` を元々呼ばないため影響を受けない。ローカル実行は R2/env 制約で失敗しうる上に
   `.next` を rimraf して本計測を破棄するため見送り、CI の `workers:build` ゲートを権威とする。
+
+## Phase 2 実装後 (2026-07-12): PR CI ジョブ並列化
+
+`.github/workflows/pr-quality-check.yml` の単一 `quality-check` job (18 step 直列) を
+**5 並列 job + 集約 job** に分割。検査内容 (各 step の run/env/continue-on-error:false) は不変。
+
+### 変更
+
+| 新 job (name) | 内容 | secret |
+|---|---|---|
+| `static-gates` | lint / design-system / card census / R2 route SSG / D1 import / metric years・config・catalog | なし |
+| `type-check` | 全 workspace 型検査 | なし |
+| `test` | web unit tests + coverage artifact + PR coverage comment | なし |
+| `build` | web build | **NEXT_PUBLIC_ESTAT_APP_ID (この job のみ)** |
+| `remote-asset-audit` | Blog Thumbnail Gate (全件監査のまま) | なし |
+| `quality-check` (name: **Code Quality Check**) | 上記5 job を needs + if:always() で集約。failure/cancelled/skipped があれば明示 fail | — |
+
+- 集約 job 名を旧 job 名 "Code Quality Check" に維持 → branch protection の必須チェック名がそのまま満たされ再設定不要。
+- concurrency / cancel-in-progress・トリガー (PR→main) は不変。Blog Thumbnail の全件→変更分・CI cache は本 Phase に含めない。
+
+### 想定クリティカルパス (推定・実測は PR 起動が必要)
+
+監査の per-gate 実測 + 各 job の固定オーバーヘッド (checkout + setup-node + `npm ci` ≈ 55–65s) で試算:
+
+| job | 固定 + 作業 (監査値) | job 合計 |
+|---|---|---|
+| build | 60 + 113–150s | **~170–215s** ← 最長 |
+| remote-asset-audit | 60 + 83–152s | ~140–215s |
+| type-check | 60 + 71–101s | ~130–165s |
+| static-gates | 60 + 約60–100s | ~120–165s |
+| test | 60 + ~46s | ~105s |
+| quality-check (集約) | 全 job 完了後 ~10–20s | +~15s |
+
+**想定クリティカルパス ≈ 3.0〜3.9 分** (= build か thumbnail の長い方 + 集約)。現状の単一 job **約 7:38〜8:28** から概ね半減。
+トレードオフ: `npm ci` が 5 並列で走るため runner-minutes は増加 (壁時間は短縮)。
+
+### 検証
+
+- 検査コマンドを旧 HEAD と突合し完全一致 (弱体化なし)。continue-on-error は全 step `false` のまま。
+- **actionlint 1.7.12: 問題なし** (YAML 構造 + Actions 式 `contains(needs.*.result,…)` + action 参照 + bash shellcheck)。
+- js-yaml パース成功・secret は build job のみ・全 work job に `npm ci`・集約 job が 5 job を needs。
+- **実測 (壁時間) は未取得** — 確定には PR を 1 回起動して全 job を計測する必要があるが、PR 作成は禁止指示のため未実施。
+
+### 残 Phase
+
+- Phase 3 (CI cache 実験)・Phase 4 (Next build 型検査重複解消・依存/transpile 縮小) は
+  `docs/todo/02_機能バックログ.md` の `[BUILD-PERF-PHASE34]` に抽出。根拠は本レポートの P1/P2 検出事項。
