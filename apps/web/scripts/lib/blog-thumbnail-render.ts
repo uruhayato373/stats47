@@ -80,6 +80,11 @@ function readBrandBg(file: string): string {
 export interface BuildOptions {
   /** true で日本地図ブランド背景 + 左寄せレイアウト (blog OGP 用)。既定は従来のストライプ枠。 */
   background?: boolean;
+  /**
+   * AI 生成背景の data URI (blog OGP AI パイプライン)。指定時は brandBackground の代わりに使う。
+   * 未指定なら従来どおりブランド背景 (回帰なし)。正典: docs/02_実装計画/23。
+   */
+  backgroundImage?: string;
 }
 
 export function buildElement(data: OgpData, dark: boolean, opts?: BuildOptions) {
@@ -109,9 +114,9 @@ export function buildElement(data: OgpData, dark: boolean, opts?: BuildOptions) 
           overflow: "hidden",
         },
       },
-      // full-bleed background image
+      // full-bleed background image (AI 背景が指定されればそれを、無ければブランド背景)
       createElement("img", {
-        src: brandBackground(dark),
+        src: opts?.backgroundImage ?? brandBackground(dark),
         width: 1200,
         height: 630,
         style: { position: "absolute", left: 0, top: 0, width: 1200, height: 630, objectFit: "cover" },
@@ -447,6 +452,45 @@ export async function renderToPng(
 ) {
   const svg = await satori(element, { ...size, fonts });
   await sharp(Buffer.from(svg)).png().toFile(outputPath);
+}
+
+/** 左タイトルセーフゾーン用の半透明スクリム (左→透明のグラデ)。 */
+function leftScrimSvg(w: number, h: number, rgb: string, opacity: number): Buffer {
+  return Buffer.from(
+    `<svg width="${w}" height="${h}"><defs>` +
+      `<linearGradient id="g" x1="0" y1="0" x2="1" y2="0">` +
+      `<stop offset="0" stop-color="rgb(${rgb})" stop-opacity="${opacity}"/>` +
+      `<stop offset="0.55" stop-color="rgb(${rgb})" stop-opacity="0"/>` +
+      `</linearGradient></defs><rect width="${w}" height="${h}" fill="url(#g)"/></svg>`,
+  );
+}
+
+/**
+ * AI 生成背景を OGP 合成用に決定的に正規化する。
+ * - 1200×630 に cover リサイズ
+ * - dark 版は明度・彩度を落とし藍色オーバーレイを重ねる (API を再度呼ばない)
+ * - 左タイトルセーフゾーンに半透明スクリムを重ね可読性を確保 (§10)
+ * 返り値は buildElement の backgroundImage に渡す webp data URI。
+ */
+export async function normalizeAiBackground(input: Buffer, dark: boolean): Promise<string> {
+  const W = 1200;
+  const H = 630;
+  const overlays: sharp.OverlayOptions[] = [];
+  let pipeline = sharp(input).resize(W, H, { fit: "cover", position: "centre" });
+  if (dark) {
+    pipeline = pipeline.modulate({ brightness: 0.72, saturation: 0.75 });
+    // 全面の藍色オーバーレイ + 左スクリム (濃紺)
+    overlays.push({
+      input: Buffer.from(
+        `<svg width="${W}" height="${H}"><rect width="${W}" height="${H}" fill="rgba(23,32,66,0.42)"/></svg>`,
+      ),
+    });
+    overlays.push({ input: leftScrimSvg(W, H, "15,23,42", 0.7) });
+  } else {
+    overlays.push({ input: leftScrimSvg(W, H, "255,255,255", 0.72) });
+  }
+  const out = await pipeline.composite(overlays).webp({ quality: 88 }).toBuffer();
+  return `data:image/webp;base64,${out.toString("base64")}`;
 }
 
 /**
