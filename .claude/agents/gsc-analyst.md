@@ -29,7 +29,7 @@ Google Search Console の専任 agent。 fetch (週次 snapshot)、 inspect (URL
 | `/auto-resubmit-url` | 自動 URL 再送信 |
 | `/indexing-api-submit` | Indexing API 即時送信 |
 | `/submit-sitemap` | sitemap 提出 |
-| `/gsc-coverage-remediation` | GSC カバレッジ是正ループ (404/soft404/5xx の ingest→本番実測 A/B 分類→是正→経過観測)。content-check の薄さ/描画判定を担当。正典 `docs/02_実装計画/12_GSCカバレッジ是正ループ.md`。co: improvement-triage |
+| `/gsc-coverage-remediation` | GSC カバレッジ是正ループ (404/soft404/5xx の ingest→本番実測 A/B 分類→是正→経過観測)。content-check の薄さ/描画判定を担当。正典 `.claude/skills/analytics/gsc-coverage-remediation/SKILL.md`。co: improvement-triage |
 | `/analyze-winning-patterns` | ブログ勝ち要因分析 (CTR×構造特徴→featureSignals、順位交絡統制付き)。co: blog-critic / trend-scout |
 
 ## 担当外

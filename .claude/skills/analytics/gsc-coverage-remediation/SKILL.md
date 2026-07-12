@@ -6,11 +6,12 @@ co_agents: [improvement-triage]
 ---
 
 GSC のインデックスカバレッジ問題 (404 / soft404 / 5xx / crawled-not-indexed) を **週次で計画的に順次是正**する閉ループ。
-ブログ品質是正ループ (`docs/02_実装計画/06_ブログ品質是正ループ.md`) と同型。「次に何を直すか・何をやったか・効いたか」を
+ブログ品質是正ループ (`.claude/rules/blog-remediation-loop.md`) と同型。「次に何を直すか・何をやったか・効いたか」を
 **1 つの状態付きキュー**で追える。
 
-> **正典**: `docs/02_実装計画/12_GSCカバレッジ是正ループ.md`。
+> **本 SKILL がこのループの運用正典 (runbook)**。2026-07-12 に旧 `docs/02_実装計画/12` を統合し .claude に一本化。
 > **SSOT (機械)**: `.claude/state/gsc/coverage-remediation-queue.json`。**人間向け要約**: `.claude/state/gsc/LATEST.md`。
+> オーナー agent: `gsc-analyst` / status 更新: `improvement-triage`。
 
 ## 前提となる事実 (これを取り違えない)
 
@@ -40,6 +41,31 @@ GSC のインデックスカバレッジ問題 (404 / soft404 / 5xx / crawled-no
        ↓
 [6] 経過観測  次週 export → ingest+build で件数減 (8378↓) と登録済↑ を totals-history で追う
 ```
+
+## A/B 分類ロジック (build-coverage-queue.mjs)
+
+actionable カテゴリ (404 / soft404 / 5xx / crawled / discovered) の URL を本番実測し、現在の HTTP で分類する:
+
+| 現在 HTTP | 元カテゴリ | verdict | action |
+|---|---|---|---|
+| 200 | soft404 | live-soft404 | **content-check** |
+| 200 | 404 / 5xx / crawled / discovered | live-misflagged | **resubmit** |
+| 410 | * | now-gone | none (放置・発生源修正済) |
+| 3xx | * | now-redirect | none (放置) |
+| 5xx | * | still-5xx | **fix-5xx** (最優先) |
+| 404 | * | still-404 | **verify-intent** (旧URL/公開漏れ判別) |
+| 0 | * | recheck | recheck |
+
+意図的カテゴリ (redirect / robots / noindex / alt-canonical / duplicate) は実測せず `resolved-by-design` で放置。
+
+## 命名規約 (auto-resubmit との安全な統合)
+
+`auto-resubmit.mjs` は `coverage-drilldown/**/*-urls.csv` を**全て未INDEXED**として Indexing API 送信する。
+GSC UI export には死んだ URL (404=8,378) が含まれるため、そのまま `-urls.csv` に置くと **quota (200/日) を死んだ URL に浪費**する。
+
+- **生 drilldown は `<category>-drilldown.csv`** (auto-resubmit は拾わない)。
+- build が本番実測で live を選別し **`coverage-live-resubmit-urls.csv`** (= `-urls.csv`・curated) に書き出す → これだけ送信される。
+- `content-check` (soft404) は **resubmit に格上げするまで送らない** (薄いまま再送信すると再フラグされる)。
 
 ## 実行手順
 
@@ -125,8 +151,8 @@ TASK: 以下の soft404→現在200 の URL 群が「薄い/空」か判定。R2
   本スキルの週次手動アームは「UI export でしか取れない総件数・未把握URL」を補う (API は自サイト視点のみ)。
 
 ## 関連
-- 正典: `docs/02_実装計画/12_GSCカバレッジ是正ループ.md`
-- 同型: `docs/02_実装計画/06_ブログ品質是正ループ.md`
+- 運用正典: 本 SKILL (2026-07-12 に旧 `docs/02_実装計画/12_GSCカバレッジ是正ループ.md` を統合)
+- 同型: `.claude/rules/blog-remediation-loop.md` (ブログ品質是正ループ)
 - 実測判定: `.claude/rules/evidence-based-judgment.md`
 - export 手順: `.claude/skills/analytics/gsc-improvement/reference/USER_EXPORT_GUIDE.md`
 - agent: `gsc-analyst` (実行) / `improvement-triage` (status 更新)

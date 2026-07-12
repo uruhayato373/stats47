@@ -590,7 +590,7 @@ GSC（Google Search Console）の継続的追跡と改善施策の記録。
 
 ### [COVERAGE-LOOP-01] GSC カバレッジ是正ループ構築 + 初回サイクル
 
-- **構築日**: 2026-06-16 / 正典: `docs/02_実装計画/12_GSCカバレッジ是正ループ.md` / スキル: `/gsc-coverage-remediation`
+- **構築日**: 2026-06-16 / 正典: `.claude/skills/analytics/gsc-coverage-remediation/SKILL.md` (旧 docs/02 doc 12 を 2026-07-12 統合) / スキル: `/gsc-coverage-remediation`
 - **背景**: GSC「ページ」未登録 ~17,900 件 (登録済 ~2,600)。実 URL で精査すると **大半は意図的削除・旧URL・設計ブロックで是正対象外**。「sitemap が参照しているのに 404/soft404/5xx = 生きてるのに誤登録」だけが真の actionable と判明。これを週次で順次是正する閉ループを構築。
 - **構築物**:
   - `ingest-gsc-export.py` — GSC UI export (cp932 zip) を正規化 → `coverage-drilldown/<週>/<category>-drilldown.csv` + `category-totals.json` + `coverage-trend.csv`

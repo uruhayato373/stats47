@@ -31,7 +31,7 @@ stats47.jp の `/blog/{slug}` 記事を新規作成または brushup する際�
 > node .claude/scripts/blog/build-remediation-queue.mjs   # コミット済み履歴+公開R2+GSCから再構築 (どこでも可)
 > ```
 > で最新化し `/brushup-blog --target queue --next 3` で週次バッチ是正する。仕組みの正典:
-> **`docs/02_実装計画/06_ブログ品質是正ループ.md`**。新規記事を書くときの型は本ファイルの「記事アーキタイプ」節。
+> **`.claude/rules/blog-remediation-loop.md`**。新規記事を書くときの型は本ファイルの「記事アーキタイプ」節。
 
 ### critic レビュー成果物 `review.md` (公開の必須条件)
 
@@ -311,11 +311,11 @@ date: YYYY-MM-DD
 
 ### 型ポートフォリオ (月次ミックス・2026-07-05 改訂)
 
-月 15-20 本ペースでの型配分。戦略の正典 = `docs/02_実装計画/15_ブログSEO拡充戦略.md`。
-比率の根拠は winning-patterns 実測 (hasMap/hasScatter +15.4% robust) と勝ちクラスタ (D2 系 CTR 7-17%):
+月 15-20 本ペースでの型配分。**配分比率の SSOT は `.claude/state/blog/seo-strategy.json` の `typeMix`**
+(blog-seo-strategist が winning-patterns 実測で四半期ごとに見直す)。人間向け戦略・入力データは
+`.claude/agents/blog-seo-strategist.md` §戦略コンテキスト。**比率の数値はここに再掲しない** (二重管理=ドリフトの元)。
+このルールは各型の「どう書くか」(下記の記事アーキタイプ) を持ち、「何本ずつ張るか」は上記 SSOT が持つ。
 
-- **B 相関 5 本 / D2 食品・家計 4 本 / A 深掘り 3-4 本 / F 市区町村 3 本 / G 移動 1-2 本 / C・E 1-2 本**
-- 1-3 月は G を +1 (引越し・移住シーズン)。E ハブは隔月 1 本まで
 - どの記事を書くかは topic-queue (`.claude/state/blog/topic-queue.json`、`build-topic-queue.mjs` が生成) の
   pending 上位から払い出す (`/plan-article-queue`)
 
@@ -457,8 +457,8 @@ node .claude/scripts/blog/audit-published-blog.mjs
 ## 関連ドキュメント
 
 - **継続品質ループ (床 × 天井): 本ファイル §継続品質ループ** ★床と天井の全体像
-- **新規記事の戦略 (型ポートフォリオ・ネタ選定・KPI): `docs/02_実装計画/15_ブログSEO拡充戦略.md`** ★何を書くかはまずこれ
-- **是正ループの正典 (計画的に順次品質向上): `docs/02_実装計画/06_ブログ品質是正ループ.md`** ★既存記事を直すときはまずこれ
+- **新規記事の戦略 (型ポートフォリオ・ネタ選定・KPI): `.claude/agents/blog-seo-strategist.md` §戦略コンテキスト** ★何を書くかはまずこれ
+- **是正ループの正典 (計画的に順次品質向上): `.claude/rules/blog-remediation-loop.md`** ★既存記事を直すときはまずこれ
 - 勝ち要因分析スキル: `.claude/skills/blog/analyze-winning-patterns/SKILL.md`
 - 親方針: `docs/02_実装計画/01_収益化マスタープラン.md` Phase 0 (CTR 改修)
 - 実測判定ルール: `.claude/rules/evidence-based-judgment.md`

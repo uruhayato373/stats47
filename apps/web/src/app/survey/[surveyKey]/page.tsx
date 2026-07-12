@@ -10,9 +10,11 @@ import { notFound } from 'next/navigation';
 
 import {
   readRankingItemsBySurveyFromR2,
+  readRankingValuesFromR2,
   readSurveyByIdFromR2,
 } from '@stats47/ranking/server';
 import { isOk } from '@stats47/types';
+import { generateMiniTileSvg } from '@stats47/visualization/server';
 
 import { ArticleShell, PageHeader, Breadcrumbs } from '@/components/layout';
 import { SectionHeader } from '@/components/section';
@@ -115,9 +117,6 @@ export default async function SurveyPage({ params }: PageProps) {
       .sort()
       .pop() ?? '';
 
-  const r2PublicUrl =
-    process.env.NEXT_PUBLIC_R2_PUBLIC_URL || 'https://storage.stats47.jp';
-
   const allItems: CategoryRankingListItem[] = rankingItems.map((item) => {
     const latestYear = parseLatestYear(item.latestYear);
     return {
@@ -137,28 +136,63 @@ export default async function SurveyPage({ params }: PageProps) {
   });
 
   const seenKeys = new Set<string>();
-  const featuredItems = rankingItems
-    .filter((item) => {
-      if (!item.isFeatured) return false;
-      if (seenKeys.has(item.rankingKey)) return false;
-      seenKeys.add(item.rankingKey);
-      return true;
-    })
-    .map((item) => {
-      const latestYear = parseLatestYear(item.latestYear);
-      return {
-        rankingKey: item.rankingKey,
-        title:
-          item.subtitle && !isCaveatNote(item.subtitle)
-            ? `${item.title}（${item.subtitle}）`
-            : item.title,
-        latestYear,
-        unit: item.unit,
-        demographicAttr: item.demographicAttr,
-        normalizationBasis: item.normalizationBasis,
-        baseThumbnailUrl: `${r2PublicUrl}/app/ranking/${item.rankingKey}/thumbnail`,
-      };
-    });
+  const featuredRaw = rankingItems.filter((item) => {
+    if (!item.isFeatured) return false;
+    if (seenKeys.has(item.rankingKey)) return false;
+    seenKeys.add(item.rankingKey);
+    return true;
+  });
+  // A型カード用に 47 県データを一括取得し rank1 抽出 + ミニタイルマップ生成 (category と同方式)。
+  // survey は A 型既定 (variant 未指定) で home/category と表示を統一する
+  // (旧: baseThumbnailUrl の画像サムネイル → No Image 混在を廃止)。
+  const featuredValues = await Promise.all(
+    featuredRaw.map((item) =>
+      readRankingValuesFromR2(
+        item.rankingKey,
+        'prefecture',
+        parseLatestYear(item.latestYear),
+      ),
+    ),
+  );
+  const featuredItems = featuredRaw.map((item, idx) => {
+    const latestYear = parseLatestYear(item.latestYear);
+    const valuesResult = featuredValues[idx];
+    let topAreaName: string | undefined;
+    let topValue: string | undefined;
+    let tileMapSvg: string | undefined;
+    if (isOk(valuesResult) && valuesResult.data.length > 0) {
+      const top = valuesResult.data.find((v) => v.rank === 1);
+      if (top) {
+        topAreaName = top.areaName;
+        topValue =
+          top.value !== null ? top.value.toLocaleString('ja-JP') : undefined;
+      }
+      tileMapSvg = generateMiniTileSvg(
+        valuesResult.data.flatMap((v) =>
+          v.value !== null
+            ? [{ areaCode: v.areaCode, value: v.value, rank: v.rank ?? undefined }]
+            : [],
+        ),
+        undefined,
+        undefined,
+        item.rankingKey,
+      );
+    }
+    return {
+      rankingKey: item.rankingKey,
+      title:
+        item.subtitle && !isCaveatNote(item.subtitle)
+          ? `${item.title}（${item.subtitle}）`
+          : item.title,
+      latestYear,
+      unit: item.unit,
+      demographicAttr: item.demographicAttr,
+      normalizationBasis: item.normalizationBasis,
+      topAreaName,
+      topValue,
+      tileMapSvg,
+    };
+  });
 
   if (rankingItems.length === 0) {
     notFound();
@@ -275,7 +309,9 @@ export default async function SurveyPage({ params }: PageProps) {
                 key={item.rankingKey}
                 rankingKey={item.rankingKey}
                 title={item.title}
-                baseThumbnailUrl={item.baseThumbnailUrl}
+                topAreaName={item.topAreaName}
+                topValue={item.topValue}
+                tileMapSvg={item.tileMapSvg}
                 latestYear={item.latestYear}
                 unit={item.unit}
                 demographicAttr={item.demographicAttr}

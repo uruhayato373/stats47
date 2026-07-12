@@ -28,7 +28,7 @@
  *   node .claude/scripts/gsc/build-coverage-queue.mjs --mark-in-progress <url>
  *   node .claude/scripts/gsc/build-coverage-queue.mjs --mark-done <url> [--wave-id 2026-06-16-coverage]
  *
- * 正典: docs/02_実装計画/12_GSCカバレッジ是正ループ.md
+ * 正典: .claude/skills/analytics/gsc-coverage-remediation/SKILL.md
  */
 import fs from "node:fs";
 import path from "node:path";
@@ -496,7 +496,7 @@ function writeLatest(out, resubmitCount) {
   const L = [];
   L.push(`# GSC カバレッジ是正 — ${out.week} (${out.generated_at})`);
   L.push("");
-  L.push("> SSOT: `.claude/state/gsc/coverage-remediation-queue.json` / 正典: `docs/02_実装計画/12_GSCカバレッジ是正ループ.md`");
+  L.push("> SSOT: `.claude/state/gsc/coverage-remediation-queue.json` / 正典: `.claude/skills/analytics/gsc-coverage-remediation/SKILL.md`");
   L.push("");
   if (t) {
     L.push("## GSC カテゴリ別総件数 (UI export)");

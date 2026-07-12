@@ -22,7 +22,7 @@
  *   npx tsx packages/gis/src/mlit-ksj/scripts/seed-from-registry.ts
  *   npx tsx packages/gis/src/mlit-ksj/scripts/seed-from-registry.ts --dry-run
  *
- * 正典: `.claude/rules/gis-data.md` / `docs/01_技術設計/04_国土数値情報GISデータ.md`
+ * 正典: `.claude/rules/gis-data.md` / `packages/gis/src/mlit-ksj/README.md`
  */
 
 import * as fs from "node:fs";

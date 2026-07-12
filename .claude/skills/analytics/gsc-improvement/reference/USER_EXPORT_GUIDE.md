@@ -46,7 +46,7 @@ export 対象（優先度順）:
 > `python3 .claude/scripts/gsc/ingest-gsc-export.py` を実行すれば、cp932 ファイル名を自動復元し、各カテゴリを
 > `coverage-drilldown/YYYY-Www/{category}-drilldown.csv`（+ `category-totals.json` / `coverage-trend.csv`）に正規化する。
 > 続けて `node .claude/scripts/gsc/build-coverage-queue.mjs` で本番 HTTP 実測 → A/B 分類 → 是正キューを生成する。
-> これが **GSC カバレッジ是正ループ** (`/gsc-coverage-remediation`)。正典: `docs/02_実装計画/12_GSCカバレッジ是正ループ.md`。
+> これが **GSC カバレッジ是正ループ** (`/gsc-coverage-remediation`)。正典: `.claude/skills/analytics/gsc-coverage-remediation/SKILL.md`。
 > Step 3 の手動リネーム配置は、旧 `/weekly-review` 取り込みフロー（下記 Step 4）用の後方互換手順。
 
 ## Step 4: 自動取り込みを起動

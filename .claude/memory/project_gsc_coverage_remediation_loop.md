@@ -7,7 +7,7 @@ metadata:
   originSessionId: d2a38335-b56d-47a7-bbcc-1ff5b5c95ffb
 ---
 
-GSC「ページ」インデックスカバレッジ (404/soft404/5xx/crawled-not-indexed) を週次で順次是正する閉ループを 2026-06-16 構築。正典 `docs/02_実装計画/12_GSCカバレッジ是正ループ.md`、実行 `/gsc-coverage-remediation` skill、関連 [[project_ranking_publish_pipeline_gap]]。
+GSC「ページ」インデックスカバレッジ (404/soft404/5xx/crawled-not-indexed) を週次で順次是正する閉ループを 2026-06-16 構築。正典 `.claude/skills/analytics/gsc-coverage-remediation/SKILL.md` (2026-07-12 に旧 doc 12 を統合)、実行 `/gsc-coverage-remediation` skill、関連 [[project_ranking_publish_pipeline_gap]]。
 
 **最重要の前提 (取り違え注意)**: GSC の未登録 ~17,900件 / 404=8,378 / redirect=1,277 / robots=2,651 / noindex=1,434 の**大半は意図的削除・旧URL・設計上のブロックで是正対象ではない**。GSC は 410 も「404」に束ね、Google の再クロールは週〜月単位。**0 件にはできないし目標でもない**。実際に直すべきは「サイトが参照しているのに 404/soft404/5xx = 生きてるのに誤登録された URL」だけ。2026-06-16 本番実測では actionable は **190件のみ** (resubmit 85=404/5xx→現在200 / content-check 97=soft404→現在200 / fix-5xx 1 / verify-intent 7=`/tmp/*.json`等の旧内部パスで404維持が正)。
 

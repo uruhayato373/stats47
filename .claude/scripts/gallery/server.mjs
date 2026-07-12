@@ -43,6 +43,7 @@ import {
   fetchText,
   pMap,
   probe,
+  readJsonSafe,
 } from "../lib/gallery-collectors.mjs";
 import { collectDashboard } from "./dashboard-data.mjs";
 import { CATALOGS, classify, inspectSvg } from "../lib/svg-classify.mjs";
@@ -57,6 +58,8 @@ const HOST = "127.0.0.1";
 const R2_BASE = process.env.SNS_R2_BASE || process.env.R2_PUBLIC_FETCH_URL || "https://storage.stats47.jp";
 const SITE = process.env.SITE_ORIGIN || "https://stats47.jp";
 const LOCAL_SNS_DIR = path.join(PROJECT_ROOT, ".local/r2/sns");
+// ブログ OGP AI パイロットのローカル出力先 (docs/23)。R2 非公開の目視レビュー専用 (read-only)。
+const LOCAL_PILOT_DIR = path.join(PROJECT_ROOT, ".local/ogp-pilot");
 const STATE_DIR = path.join(PROJECT_ROOT, ".claude/state");
 const UI_DIR = __dirname; // gallery/ 直下に index.html / sns.html / assets.html / svg.html
 const GALLERY_STATE = path.join(PROJECT_ROOT, ".local/sns-gallery-state.json");
@@ -65,6 +68,7 @@ const YT_UPLOAD_SCRIPT = path.join(PROJECT_ROOT, ".claude/scripts/youtube/upload
 
 // ─── 資産タブ登録簿 (OGP は buildTab、note-image/video は専用 collector) ──────
 const ASSET_TABS = [
+  { id: "blog-ogp-pilot", label: "ブログ OGP パイロット (local)", kind: "local-pilot" },
   { id: "blog-ogp", label: "ブログ OGP", kind: "ogp" },
   { id: "blog-card", label: "ブログ リンクカード", kind: "ogp" },
   { id: "ranking-ogp", label: "ランキング OGP", kind: "ogp" },
@@ -385,6 +389,53 @@ function serveMedia(req, res, rel) {
   }
 }
 
+// ─── /pilot 静的配信 (ブログ OGP パイロット・LOCAL_PILOT_DIR 限定) ─────────────
+function servePilot(req, res, rel) {
+  const file = path.resolve(LOCAL_PILOT_DIR, rel);
+  if (!file.startsWith(LOCAL_PILOT_DIR + path.sep)) return json(res, 403, { error: "forbidden" }); // traversal 防止
+  if (!fs.existsSync(file) || !fs.statSync(file).isFile()) return json(res, 404, { error: "not found" });
+  const type = MIME[path.extname(file).toLowerCase()] || "application/octet-stream";
+  res.writeHead(200, { "content-type": type, "content-length": fs.statSync(file).size, ...CORS });
+  fs.createReadStream(file).pipe(res);
+}
+
+// ─── ブログ OGP パイロット collector (local・R2 非公開の目視レビュー用) ───────
+// generate-blog-thumbnails-cloud.ts --ai-background --out-dir .local/ogp-pilot の出力を読む。
+function enumeratePilot() {
+  const base = {
+    source: "local (.local/ogp-pilot)",
+    aspect: "1.91:1",
+    r2KeyPattern: ".local/ogp-pilot/<slug>/ogp/ogp.png (R2 非書込・パイロット目視専用)",
+  };
+  if (!fs.existsSync(LOCAL_PILOT_DIR)) return { ...base, entries: [] };
+  const entries = [];
+  for (const slug of fs.readdirSync(LOCAL_PILOT_DIR).sort()) {
+    const dir = path.join(LOCAL_PILOT_DIR, slug);
+    if (!fs.statSync(dir).isDirectory()) continue;
+    const meta = readJsonSafe(path.join(dir, "ogp", "ogp.json")) || {};
+    const bg = meta.background || {};
+    const images = [];
+    const add = (variant, rel) => {
+      if (fs.existsSync(path.join(dir, rel)))
+        images.push({ variant, url: `/pilot/${encodeURIComponent(slug)}/${rel}` });
+    };
+    add("ogp", "ogp/ogp.png"); // 最終合成 (実際に配信される OGP)
+    add("bg", "ogp/background.jpg"); // AI 背景 (light 正規化) — 品質判定用
+    add("light", "thumbnail-light.webp");
+    add("dark", "thumbnail-dark.webp");
+    if (images.length === 0) continue;
+    const tag = [bg.visualType, bg.motif].filter(Boolean).join("/");
+    const src = bg.source ? ` · ${bg.source}` : "";
+    entries.push({
+      key: slug,
+      label: `${slug}${tag ? ` [${tag}${src}]` : ""}`,
+      pageUrl: `${SITE}/blog/${slug}`,
+      images,
+    });
+  }
+  return { ...base, entries };
+}
+
 // ─── R2 探索 (HEAD probe — list 不可の代替) ─────────────
 async function probeR2(domain, contentKey) {
   const rels = [
@@ -447,6 +498,7 @@ async function getAssetTab(tab, { limit = null, all = false } = {}) {
   const meta = ASSET_TABS.find((t) => t.id === tab);
   if (!meta) throw new Error(`unknown asset tab: ${tab}`);
   const base = { limit, all, site: SITE, r2: R2_BASE, projectRoot: PROJECT_ROOT };
+  if (meta.kind === "local-pilot") return { tab, label: meta.label, ...enumeratePilot() };
   if (meta.kind === "ogp") return { tab, label: meta.label, ...(await buildTab(tab, base)) };
   if (meta.kind === "note-image")
     return { tab, label: meta.label, ...(await enumerateNoteImages(PROJECT_ROOT, R2_BASE, { limit })) };
@@ -558,6 +610,9 @@ const server = http.createServer(async (req, res) => {
     if (req.method === "GET" && p === "/dashboard") return servePage(res, "dashboard.html");
     if (req.method === "GET" && p.startsWith("/media/")) {
       return serveMedia(req, res, decodeURIComponent(p.slice("/media/".length)));
+    }
+    if (req.method === "GET" && p.startsWith("/pilot/")) {
+      return servePilot(req, res, decodeURIComponent(p.slice("/pilot/".length)));
     }
     // ── 読取 API
     if (req.method === "GET" && p === "/api/posts") {

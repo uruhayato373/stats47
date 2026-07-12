@@ -145,7 +145,7 @@ node .claude/scripts/snapshot-weekly-metrics.mjs [YYYY-Www]
 
    **GSC カバレッジ是正ループ（COVERAGE-LOOP-01、2026-06-16〜）**:
    ユーザーが GSC UI から「ページ」export を取得していれば（API では取れない総件数・未把握 URL を含む）、是正ループを回す。
-   正典: `docs/02_実装計画/12_GSCカバレッジ是正ループ.md` / 実行: `/gsc-coverage-remediation`。
+   正典: `.claude/skills/analytics/gsc-coverage-remediation/SKILL.md` / 実行: `/gsc-coverage-remediation`。
    - 取り込み: `python3 .claude/scripts/gsc/ingest-gsc-export.py`（~/Downloads の cp932 zip を自動正規化 → `coverage-drilldown/YYYY-Www/{category}-drilldown.csv`）
    - 構築: `node .claude/scripts/gsc/build-coverage-queue.mjs`（本番 HTTP 実測で A/B 分類）
    - レビューに埋め込む: **`.claude/state/gsc/LATEST.md`**（要対応 action 別件数・カテゴリ総件数）と
@@ -475,7 +475,7 @@ node -e 'const q=require("./.claude/state/blog/remediation-queue.json");console.
 - 「pending N (must-fix M) / done D」を 1 行で記載し、**前週比で pending がいくつ減ったか**を明記する (順次品質向上の進捗指標)。
 - この週に remediated_at が付いた記事 (= 今週是正した wave) を抽出し、対応する `## [BLOG-WAVE-<wave_id>]` (gsc.md) の効果を判定する。
   due (デプロイ +28 日) を過ぎた BLOG-WAVE は GSC clicks/CTR の before/after で effect 判定 → gsc.md の `status:` を更新 (`.claude/rules/evidence-based-judgment.md` 準拠、実測コマンド併記)。
-- 仕組み全体 (床): `docs/02_実装計画/06_ブログ品質是正ループ.md`。
+- 仕組み全体 (床): `.claude/rules/blog-remediation-loop.md`。
 
 **ブログ勝ち要因 (天井ループ・GSC 更新後に実行)**:
 

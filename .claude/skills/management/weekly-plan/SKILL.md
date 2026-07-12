@@ -129,7 +129,7 @@ primary_agent: strategy-advisor
   ```
   → pending 上位 3 件を「**ブログ品質是正 3 本**」として Phase 3 の **Must** に転載する (must-fix レーン優先)。
   → 実行は `/brushup-blog --target queue --next 3` (article-writer が archetype + 図あたり字数で是正 → blog-critic PASS → publish)。
-  → これは毎週の**定常 Must**。少しずつ消化しキュー pending を減らす。仕組み: `docs/02_実装計画/06_ブログ品質是正ループ.md`。
+  → これは毎週の**定常 Must**。少しずつ消化しキュー pending を減らす。仕組み: `.claude/rules/blog-remediation-loop.md`。
 
 - ブログ新規記事キュー（**新規記事を継続拡充**・真実源: `.claude/state/blog/topic-queue.json`）
   ```bash
@@ -138,7 +138,7 @@ primary_agent: strategy-advisor
   node .claude/scripts/blog/build-topic-queue.mjs --next 5
   ```
   → must-write レーン上位を「**新規記事 N 本**」として Phase 3 の **Must** に転載する（型ミックスを整える:
-    月次目標 B5/D2 4/A3-4/F3/G1-2、`docs/02_実装計画/15_ブログSEO拡充戦略.md` §3）。
+    月次目標 B5/D2 4/A3-4/F3/G1-2、`.claude/agents/blog-seo-strategist.md` §戦略コンテキスト）。
   → 実行は `/draft-from-trend --from queue`（1 本ずつ）→ generate-article-charts → **blog-critic PASS** → publish。
   → ⚠️ **B 型は上位に擬似相関（人口交絡・自明ペア）が混じる**ので、`evidence.populationConfounded` と
     「意外な関係が成立するか」を人手で吟味してから採用する（キューは候補生成であり最終決定ではない）。

@@ -114,8 +114,8 @@ CLAUDE.md 内に詳細を複製しない。状況に応じて参照する。
 | URL 構造・301 マッピング・canonical 戦略 ★新規ページ作成時必読 | `docs/01_技術設計/11_URL構造.md` |
 | **情報設計 (ページ責務・3タクソノミー・ファネル役割)** ★page_components配置/分類軸追加/ページKPI判定時必読 | `docs/01_技術設計/07_情報設計.md` |
 | 統一レイアウト (横幅/レール/フラット/フォント/ナビ) ★UI実装時必読 | `docs/01_技術設計/13_統一レイアウト設計.md` |
-| 国土数値情報 GIS データ | `docs/01_技術設計/04_国土数値情報GISデータ.md` |
-| 国土交通データプラットフォーム | `docs/01_技術設計/05_国土交通データプラットフォーム.md` |
+| 国土数値情報 GIS データ | `.claude/rules/gis-data.md` / `packages/gis/src/mlit-ksj/README.md` |
+| 国土交通データプラットフォーム | `.claude/skills/estat/search-mlit-dpf/` (SKILL + `reference/mlit-dpf-catalog.md`・旧 docs/01/05) |
 | Pre-commit フック | `.husky/README.md` |
 | CI/CD・デプロイ | `.github/workflows/README.md` |
 | テスト構成・追加指針 | `apps/web/tests/README.md` |

@@ -165,6 +165,13 @@ export const CATEGORY_KEYS = [
 
 export type CategoryKey = (typeof CATEGORY_KEYS)[number];
 
+/**
+ * ランキングリンクカードのサムネイル表示バリアント。
+ * "map" = 地図型 (タイル地図) / "number" = 数値型 (代表値強調)。
+ * 正典(A/B解決規則): apps/web/src/features/ranking/utils/resolve-thumbnail-variant.ts
+ */
+export type RankingThumbnailVariant = "map" | "number";
+
 /** Metric 1 つ分の全データ要件 */
 export interface MetricConfig {
   /** kebab-case の一意キー。ファイル名と一致 */
@@ -200,6 +207,13 @@ export interface MetricConfig {
   yearFormat?: "fiscal" | "calendar" | "plain";
   visualization?: VisualizationConfig;
   display?: DisplayConfig;
+  /**
+   * ランキングリンクカードのサムネイル表示バリアント (A/B)。
+   * "map" = 地図型 (47 都道府県タイル地図・後方互換の標準) / "number" = 数値型 (代表値を強調)。
+   * 未設定は解決規則で最終的に "map" になる (完全未設定は必ず A 型)。
+   * 正典(A/B解決規則): apps/web/src/features/ranking/utils/resolve-thumbnail-variant.ts
+   */
+  thumbnailVariant?: RankingThumbnailVariant;
   calculation?: CalculationOptions;
   /** sub-property tags (旧 additional_categories) */
   additionalCategories?: string[];
