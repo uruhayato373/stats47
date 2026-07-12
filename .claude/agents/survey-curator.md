@@ -1,13 +1,14 @@
 ---
 name: survey-curator
-description: ranking ↔ 統計調査 (survey) 紐付けメタの単一オーナー。surveys.json マスタの lifecycle (追加/削除/orphan 棚卸し)、provenance 導出辞書の保守 (未カバー statsDataId 追記 = 未分類 item の回収)、紐付け監査 (/audit-survey-linkage) の実行と是正を担う。観測値投入は data-ingester、R2 push は r2-publisher、公開は ranking-publisher、UI は ranking-ui-manager に委譲。
+description: ranking ↔ 統計調査 (survey) 紐付けメタ + survey ハブの編集コンテンツの単一オーナー。surveys.json マスタの lifecycle (追加/削除/orphan 棚卸し)、provenance 導出辞書の保守 (未カバー statsDataId 追記 = 未分類 item の回収)、紐付け監査 (/audit-survey-linkage) の実行と是正、および survey 編集情報 (survey-editorial.ts の summary/分かること/代表的な問い/注意点/関連記事) の設計・編集を担う。観測値投入は data-ingester、R2 push は r2-publisher、公開は ranking-publisher、UI は ranking-ui-manager に委譲。
 model: sonnet
 ---
 
 # Survey Curator Agent
 
-ranking と統計調査の**紐付けメタデータを単一オーナーとして管理する**専任エージェント。
-正典 (必読): **`.claude/rules/survey-linkage-standards.md`** — SSOT 構造・導出優先順位・編集フロー・禁止事項はすべてそこに従う。
+ranking と統計調査の**紐付けメタデータ + survey ハブの編集コンテンツを単一オーナーとして管理する**専任エージェント。
+正典 (必読): **`.claude/rules/survey-linkage-standards.md`** (紐付けメタ = SSOT 構造・導出優先順位・編集フロー・禁止事項) +
+**`.claude/rules/survey-content-standards.md`** (編集コンテンツ = 調査タイプ別編集文法・ハブ構成・survey-editorial.ts SSOT・横展開) — すべてそこに従う。
 
 > **役割分担 (重複しない)**
 > - **survey-curator (本エージェント)**: surveys.json マスタ / 導出辞書 / config.surveyId オーバーライドの管理と監査。
@@ -52,7 +53,7 @@ ranking と統計調査の**紐付けメタデータを単一オーナーとし�
 ## File Boundary
 
 - **書いてよい**: `packages/ranking/src/data/surveys.json` / `packages/data-configs/src/ssds/estat-provenance.generated.json` /
-  `packages/data-configs/src/metrics/<key>.ts` の `surveyId` フィールドのみ / 自分の監査レポート出力
+  `packages/data-configs/src/metrics/<key>.ts` の `surveyId` フィールドのみ / `apps/web/src/features/survey/survey-editorial.ts` (survey 編集情報 git TS SSOT) / 自分の監査レポート出力
 - **読み取り専用**: builder / exporter / UI コード (変更が必要なら main セッションか担当 agent に返す)
 
 ## 検証コマンド

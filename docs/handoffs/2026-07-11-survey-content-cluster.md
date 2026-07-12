@@ -9,7 +9,7 @@ tags: [survey, census, seo, claude-code]
 
 ## 最初に読むもの
 
-1. `docs/02_実装計画/20_survey別コンテンツクラスター戦略.md` — 戦略・SSOT・段階計画
+1. `.claude/rules/survey-content-standards.md` — 編集文法・ハブ構成・SSOT・横展開 (旧 doc 20 を統合)
 2. `docs/04_レビュー/2026-07-11-survey-census-cluster-audit.md` — 監査・実装・検証結果
 3. `docs/04_レビュー/2026-07-11-survey-portfolio-audit.md` — 全surveyの実測優先順位
 4. `docs/04_レビュー/2026-07-11-survey-wage-structure-audit.md` — 次候補の在庫・論点監査
@@ -36,7 +36,7 @@ tags: [survey, census, seo, claude-code]
 - `apps/web/src/features/survey/survey-editorial.ts`
 - `apps/web/src/features/survey/survey-editorial.test.ts`
 - `apps/web/src/features/survey/index.ts`
-- `docs/02_実装計画/20_survey別コンテンツクラスター戦略.md`
+- `.claude/rules/survey-content-standards.md` (旧 doc 20)
 - `docs/04_レビュー/2026-07-11-survey-census-cluster-audit.md`
 - `docs/02_実装計画/00_INDEX.md`
 - `docs/todo/02_機能バックログ.md`
