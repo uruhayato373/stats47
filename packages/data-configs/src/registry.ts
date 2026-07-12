@@ -256,6 +256,7 @@ import { cityGasSalesVolume } from "./metrics/city-gas-sales-volume";
 import { cityGasSupplyAreaHouseholdRatio } from "./metrics/city-gas-supply-area-household-ratio";
 import { cityGasSupplyAreaHouseholds } from "./metrics/city-gas-supply-area-households";
 import { cityWardAssemblyMembers } from "./metrics/city-ward-assembly-members";
+import { civilEngineeringExpenseMunicipal } from "./metrics/civil-engineering-expense-municipal";
 import { clamConsumptionExpenditure } from "./metrics/clam-consumption-expenditure";
 import { clamConsumptionQuantity } from "./metrics/clam-consumption-quantity";
 import { cleaningExpensesPrefecture } from "./metrics/cleaning-expenses-prefecture";
@@ -489,9 +490,11 @@ import { earlyNeonatalDeaths } from "./metrics/early-neonatal-deaths";
 import { earmarkedTaxLocal } from "./metrics/earmarked-tax-local";
 import { earthquakeRenovationRate } from "./metrics/earthquake-renovation-rate";
 import { earthquakeRetrofitHousing } from "./metrics/earthquake-retrofit-housing";
+import { educationCostAllHouseholds } from "./metrics/education-cost-all-households";
 import { educationDepartmentStaff } from "./metrics/education-department-staff";
 import { educationExpenditureRatioMultiPersonHouseholds } from "./metrics/education-expenditure-ratio-multi-person-households";
 import { educationExpenditureRatioPrefFinance } from "./metrics/education-expenditure-ratio-pref-finance";
+import { educationExpenseMunicipal } from "./metrics/education-expense-municipal";
 import { educationExpensesPrefecture } from "./metrics/education-expenses-prefecture";
 import { eggplantConsumptionExpenditure } from "./metrics/eggplant-consumption-expenditure";
 import { eggplantConsumptionQuantity } from "./metrics/eggplant-consumption-quantity";
@@ -759,6 +762,11 @@ import { goodsServicesNetExportsImportsNominalH27 } from "./metrics/goods-servic
 import { governorSalaryPrefecture } from "./metrics/governor-salary-prefecture";
 import { govtHealthInsuranceVisitExpenseDependentsPerPerson } from "./metrics/govt-health-insurance-visit-expense-dependents-per-person";
 import { govtHealthInsuranceVisitExpenseInsuredPerPerson } from "./metrics/govt-health-insurance-visit-expense-insured-per-person";
+import { gppAgriculture } from "./metrics/gpp-agriculture";
+import { gppEducationSector } from "./metrics/gpp-education-sector";
+import { gppForestry } from "./metrics/gpp-forestry";
+import { gppManufacturing } from "./metrics/gpp-manufacturing";
+import { gppPublicService } from "./metrics/gpp-public-service";
 import { gradeSeparatedPedestrianCrossingsPer1000Km } from "./metrics/grade-separated-pedestrian-crossings-per-1000-km";
 import { grapeConsumptionExpenditure } from "./metrics/grape-consumption-expenditure";
 import { grapeConsumptionQuantity } from "./metrics/grape-consumption-quantity";
@@ -1188,6 +1196,7 @@ import { movingInRateJapanese } from "./metrics/moving-in-rate-japanese";
 import { movingInRate } from "./metrics/moving-in-rate";
 import { movingOutRateJapanese } from "./metrics/moving-out-rate-japanese";
 import { movingOutRate } from "./metrics/moving-out-rate";
+import { municipalBondsOutstanding } from "./metrics/municipal-bonds-outstanding";
 import { municipalGeneralAdministrationStaff } from "./metrics/municipal-general-administration-staff";
 import { municipalIntellectualDisabilityConsultationsPer100k } from "./metrics/municipal-intellectual-disability-consultations-per-100k";
 import { municipalIntellectualDisabilityConsultations } from "./metrics/municipal-intellectual-disability-consultations";
@@ -1639,6 +1648,7 @@ import { psychiatricInpatientsPerNursePerDay } from "./metrics/psychiatric-inpat
 import { psychiatricOutpatientsPerFulltimePhysicianPerDay } from "./metrics/psychiatric-outpatients-per-fulltime-physician-per-day";
 import { publicAssistanceEducationBeneficiariesPer1000 } from "./metrics/public-assistance-education-beneficiaries-per-1000";
 import { publicAssistanceExpenditureRatioPrefFinance } from "./metrics/public-assistance-expenditure-ratio-pref-finance";
+import { publicAssistanceExpenseMunicipal } from "./metrics/public-assistance-expense-municipal";
 import { publicAssistanceExpensesPrefecture } from "./metrics/public-assistance-expenses-prefecture";
 import { publicAssistanceFacilityCapacityPer1000 } from "./metrics/public-assistance-facility-capacity-per-1000";
 import { publicAssistanceFacilityResidentsPer1000 } from "./metrics/public-assistance-facility-residents-per-1000";
@@ -1779,6 +1789,7 @@ import { salmonConsumptionQuantity } from "./metrics/salmon-consumption-quantity
 import { saltedSalmonConsumptionExpenditure } from "./metrics/salted-salmon-consumption-expenditure";
 import { saltedSalmonConsumptionQuantity } from "./metrics/salted-salmon-consumption-quantity";
 import { sanitationExpenditureRatioPrefFinance } from "./metrics/sanitation-expenditure-ratio-pref-finance";
+import { sanitationExpenseMunicipal } from "./metrics/sanitation-expense-municipal";
 import { sanitationExpensesPrefecture } from "./metrics/sanitation-expenses-prefecture";
 import { sardineConsumptionExpenditure } from "./metrics/sardine-consumption-expenditure";
 import { sardineConsumptionQuantity } from "./metrics/sardine-consumption-quantity";
@@ -2161,6 +2172,9 @@ import { vinegarConsumptionQuantity } from "./metrics/vinegar-consumption-quanti
 import { violentCrimePer100k } from "./metrics/violent-crime-per-100k";
 import { vocationalSchoolConsumptionExpenditure } from "./metrics/vocational-school-consumption-expenditure";
 import { vocationalTrainingExpensesPrefecture } from "./metrics/vocational-training-expenses-prefecture";
+import { voluntaryCarInsuranceRateBodilyInjury } from "./metrics/voluntary-car-insurance-rate-bodily-injury";
+import { voluntaryCarInsuranceRateProperty } from "./metrics/voluntary-car-insurance-rate-property";
+import { voluntaryCarInsuranceRateVehicle } from "./metrics/voluntary-car-insurance-rate-vehicle";
 import { volunteerActivityAnnualParticipationRate10plus } from "./metrics/volunteer-activity-annual-participation-rate-10plus";
 import { volunteerActivityAnnualParticipationRate15plus } from "./metrics/volunteer-activity-annual-participation-rate-15plus";
 import { voterListRegistrants } from "./metrics/voter-list-registrants";
@@ -2192,6 +2206,7 @@ import { welfareCommissionerConsultationsPerPerson } from "./metrics/welfare-com
 import { welfareCommissionerCountPer100k } from "./metrics/welfare-commissioner-count-per-100k";
 import { welfareExpenditureRatioPrefFinance } from "./metrics/welfare-expenditure-ratio-pref-finance";
 import { welfareExpenditure } from "./metrics/welfare-expenditure";
+import { welfareExpenseMunicipal } from "./metrics/welfare-expense-municipal";
 import { welfareExpensesPrefecture } from "./metrics/welfare-expenses-prefecture";
 import { welfareFacilitiesCountPer100kOnAssistance } from "./metrics/welfare-facilities-count-per-100k-on-assistance";
 import { welfareFacilityStaffPer1000OnAssistance } from "./metrics/welfare-facility-staff-per-1000-on-assistance";
@@ -2508,6 +2523,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "city-gas-supply-area-household-ratio": cityGasSupplyAreaHouseholdRatio,
   "city-gas-supply-area-households": cityGasSupplyAreaHouseholds,
   "city-ward-assembly-members": cityWardAssemblyMembers,
+  "civil-engineering-expense-municipal": civilEngineeringExpenseMunicipal,
   "clam-consumption-expenditure": clamConsumptionExpenditure,
   "clam-consumption-quantity": clamConsumptionQuantity,
   "cleaning-expenses-prefecture": cleaningExpensesPrefecture,
@@ -2741,9 +2757,11 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "earmarked-tax-local": earmarkedTaxLocal,
   "earthquake-renovation-rate": earthquakeRenovationRate,
   "earthquake-retrofit-housing": earthquakeRetrofitHousing,
+  "education-cost-all-households": educationCostAllHouseholds,
   "education-department-staff": educationDepartmentStaff,
   "education-expenditure-ratio-multi-person-households": educationExpenditureRatioMultiPersonHouseholds,
   "education-expenditure-ratio-pref-finance": educationExpenditureRatioPrefFinance,
+  "education-expense-municipal": educationExpenseMunicipal,
   "education-expenses-prefecture": educationExpensesPrefecture,
   "eggplant-consumption-expenditure": eggplantConsumptionExpenditure,
   "eggplant-consumption-quantity": eggplantConsumptionQuantity,
@@ -3011,6 +3029,11 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "governor-salary-prefecture": governorSalaryPrefecture,
   "govt-health-insurance-visit-expense-dependents-per-person": govtHealthInsuranceVisitExpenseDependentsPerPerson,
   "govt-health-insurance-visit-expense-insured-per-person": govtHealthInsuranceVisitExpenseInsuredPerPerson,
+  "gpp-agriculture": gppAgriculture,
+  "gpp-education-sector": gppEducationSector,
+  "gpp-forestry": gppForestry,
+  "gpp-manufacturing": gppManufacturing,
+  "gpp-public-service": gppPublicService,
   "grade-separated-pedestrian-crossings-per-1000-km": gradeSeparatedPedestrianCrossingsPer1000Km,
   "grape-consumption-expenditure": grapeConsumptionExpenditure,
   "grape-consumption-quantity": grapeConsumptionQuantity,
@@ -3440,6 +3463,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "moving-in-rate": movingInRate,
   "moving-out-rate-japanese": movingOutRateJapanese,
   "moving-out-rate": movingOutRate,
+  "municipal-bonds-outstanding": municipalBondsOutstanding,
   "municipal-general-administration-staff": municipalGeneralAdministrationStaff,
   "municipal-intellectual-disability-consultations-per-100k": municipalIntellectualDisabilityConsultationsPer100k,
   "municipal-intellectual-disability-consultations": municipalIntellectualDisabilityConsultations,
@@ -3891,6 +3915,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "psychiatric-outpatients-per-fulltime-physician-per-day": psychiatricOutpatientsPerFulltimePhysicianPerDay,
   "public-assistance-education-beneficiaries-per-1000": publicAssistanceEducationBeneficiariesPer1000,
   "public-assistance-expenditure-ratio-pref-finance": publicAssistanceExpenditureRatioPrefFinance,
+  "public-assistance-expense-municipal": publicAssistanceExpenseMunicipal,
   "public-assistance-expenses-prefecture": publicAssistanceExpensesPrefecture,
   "public-assistance-facility-capacity-per-1000": publicAssistanceFacilityCapacityPer1000,
   "public-assistance-facility-residents-per-1000": publicAssistanceFacilityResidentsPer1000,
@@ -4031,6 +4056,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "salted-salmon-consumption-expenditure": saltedSalmonConsumptionExpenditure,
   "salted-salmon-consumption-quantity": saltedSalmonConsumptionQuantity,
   "sanitation-expenditure-ratio-pref-finance": sanitationExpenditureRatioPrefFinance,
+  "sanitation-expense-municipal": sanitationExpenseMunicipal,
   "sanitation-expenses-prefecture": sanitationExpensesPrefecture,
   "sardine-consumption-expenditure": sardineConsumptionExpenditure,
   "sardine-consumption-quantity": sardineConsumptionQuantity,
@@ -4413,6 +4439,9 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "violent-crime-per-100k": violentCrimePer100k,
   "vocational-school-consumption-expenditure": vocationalSchoolConsumptionExpenditure,
   "vocational-training-expenses-prefecture": vocationalTrainingExpensesPrefecture,
+  "voluntary-car-insurance-rate-bodily-injury": voluntaryCarInsuranceRateBodilyInjury,
+  "voluntary-car-insurance-rate-property": voluntaryCarInsuranceRateProperty,
+  "voluntary-car-insurance-rate-vehicle": voluntaryCarInsuranceRateVehicle,
   "volunteer-activity-annual-participation-rate-10plus": volunteerActivityAnnualParticipationRate10plus,
   "volunteer-activity-annual-participation-rate-15plus": volunteerActivityAnnualParticipationRate15plus,
   "voter-list-registrants": voterListRegistrants,
@@ -4444,6 +4473,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "welfare-commissioner-count-per-100k": welfareCommissionerCountPer100k,
   "welfare-expenditure-ratio-pref-finance": welfareExpenditureRatioPrefFinance,
   "welfare-expenditure": welfareExpenditure,
+  "welfare-expense-municipal": welfareExpenseMunicipal,
   "welfare-expenses-prefecture": welfareExpensesPrefecture,
   "welfare-facilities-count-per-100k-on-assistance": welfareFacilitiesCountPer100kOnAssistance,
   "welfare-facility-staff-per-1000-on-assistance": welfareFacilityStaffPer1000OnAssistance,
