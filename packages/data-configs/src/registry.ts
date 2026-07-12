@@ -501,6 +501,7 @@ import { elderlyGeneralWorkerOldPopulationRatio } from "./metrics/elderly-genera
 import { elderlyHouseholdDetail } from "./metrics/elderly-household-detail";
 import { elderlyOnPublicAssistancePer100065plus } from "./metrics/elderly-on-public-assistance-per-1000-65plus";
 import { elderlyPopulationRatio } from "./metrics/elderly-population-ratio";
+import { elderlySinglePersonHouseholds } from "./metrics/elderly-single-person-households";
 import { elderlyWelfareExpenditureRatioPrefFinance } from "./metrics/elderly-welfare-expenditure-ratio-pref-finance";
 import { elderlyWelfareExpensesPrefecture } from "./metrics/elderly-welfare-expenses-prefecture";
 import { elderlyWorkersRatio } from "./metrics/elderly-workers-ratio";
@@ -657,6 +658,7 @@ import { foodExpenditureTotal } from "./metrics/food-expenditure-total";
 import { foodRetailStoreCountPer1000Alt } from "./metrics/food-retail-store-count-per-1000-alt";
 import { foodRetailStoreCountPer1000 } from "./metrics/food-retail-store-count-per-1000";
 import { foodSanitationInspection } from "./metrics/food-sanitation-inspection";
+import { foodSelfSufficiencyRateCalorie } from "./metrics/food-self-sufficiency-rate-calorie";
 import { foreignPopulationPer100k } from "./metrics/foreign-population-per-100k";
 import { foreignResidentCountChinaPer100k } from "./metrics/foreign-resident-count-china-per-100k";
 import { foreignResidentCountChina } from "./metrics/foreign-resident-count-china";
@@ -666,6 +668,7 @@ import { foreignResidentCountPer100k } from "./metrics/foreign-resident-count-pe
 import { foreignResidentCountUsaPer100k } from "./metrics/foreign-resident-count-usa-per-100k";
 import { foreignResidentCountUsa } from "./metrics/foreign-resident-count-usa";
 import { foreignResidentCount } from "./metrics/foreign-resident-count";
+import { foreignResidentPopulation } from "./metrics/foreign-resident-population";
 import { forestAreaRatio } from "./metrics/forest-area-ratio";
 import { forestArea } from "./metrics/forest-area";
 import { forestRoadLength } from "./metrics/forest-road-length";
@@ -900,6 +903,7 @@ import { householdRatioWith65plus } from "./metrics/household-ratio-with-65plus"
 import { householdTypesByArea } from "./metrics/household-types-by-area";
 import { householdsOnPublicAssistancePer1000 } from "./metrics/households-on-public-assistance-per-1000";
 import { householdsOnPublicAssistance } from "./metrics/households-on-public-assistance";
+import { householdsWithElderlyMembers } from "./metrics/households-with-elderly-members";
 import { households } from "./metrics/households";
 import { housekeepingServiceConsumptionExpenditure } from "./metrics/housekeeping-service-consumption-expenditure";
 import { housingChargesConsumptionExpenditure } from "./metrics/housing-charges-consumption-expenditure";
@@ -1248,6 +1252,7 @@ import { nonCarVehicleMaintenanceConsumptionExpenditure } from "./metrics/non-ca
 import { nonCarVehiclePurchaseConsumptionExpenditure } from "./metrics/non-car-vehicle-purchase-consumption-expenditure";
 import { nonRegularEmploymentRate } from "./metrics/non-regular-employment-rate";
 import { notebooksPaperConsumptionExpenditure } from "./metrics/notebooks-paper-consumption-expenditure";
+import { nuclearFamilyHouseholdCount } from "./metrics/nuclear-family-household-count";
 import { nuclearFamilyHouseholdsRatio } from "./metrics/nuclear-family-households-ratio";
 import { nuclearPowerPlantCount } from "./metrics/nuclear-power-plant-count";
 import { numberOfCommercialEmployeesWholesaleRetail } from "./metrics/number-of-commercial-employees-wholesale-retail";
@@ -1410,6 +1415,7 @@ import { otherWomensClothingConsumptionExpenditure } from "./metrics/other-women
 import { otherWomensShirtConsumptionExpenditure } from "./metrics/other-womens-shirt-consumption-expenditure";
 import { otherWomensShirtConsumptionQuantity } from "./metrics/other-womens-shirt-consumption-quantity";
 import { otherWomensUnderwearConsumptionExpenditure } from "./metrics/other-womens-underwear-consumption-expenditure";
+import { outflowCommuterStudentPopulation } from "./metrics/outflow-commuter-student-population";
 import { outflowPopulationRatio } from "./metrics/outflow-population-ratio";
 import { outpatientCount } from "./metrics/outpatient-count";
 import { outpatientRatePer1000 } from "./metrics/outpatient-rate-per-1000";
@@ -1837,6 +1843,7 @@ import { singleFatherHouseholds } from "./metrics/single-father-households";
 import { singleMotherHouseholds } from "./metrics/single-mother-households";
 import { singlePersonHouseholdOldPopulationRatio } from "./metrics/single-person-household-old-population-ratio";
 import { singlePersonHouseholdRatio } from "./metrics/single-person-household-ratio";
+import { singlePersonHouseholds } from "./metrics/single-person-households";
 import { siteAreaPerDwelling } from "./metrics/site-area-per-dwelling";
 import { skinLotionConsumptionExpenditure } from "./metrics/skin-lotion-consumption-expenditure";
 import { skinMedicineConsumptionExpenditure } from "./metrics/skin-medicine-consumption-expenditure";
@@ -2734,6 +2741,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "elderly-household-detail": elderlyHouseholdDetail,
   "elderly-on-public-assistance-per-1000-65plus": elderlyOnPublicAssistancePer100065plus,
   "elderly-population-ratio": elderlyPopulationRatio,
+  "elderly-single-person-households": elderlySinglePersonHouseholds,
   "elderly-welfare-expenditure-ratio-pref-finance": elderlyWelfareExpenditureRatioPrefFinance,
   "elderly-welfare-expenses-prefecture": elderlyWelfareExpensesPrefecture,
   "elderly-workers-ratio": elderlyWorkersRatio,
@@ -2890,6 +2898,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "food-retail-store-count-per-1000-alt": foodRetailStoreCountPer1000Alt,
   "food-retail-store-count-per-1000": foodRetailStoreCountPer1000,
   "food-sanitation-inspection": foodSanitationInspection,
+  "food-self-sufficiency-rate-calorie": foodSelfSufficiencyRateCalorie,
   "foreign-population-per-100k": foreignPopulationPer100k,
   "foreign-resident-count-china-per-100k": foreignResidentCountChinaPer100k,
   "foreign-resident-count-china": foreignResidentCountChina,
@@ -2899,6 +2908,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "foreign-resident-count-usa-per-100k": foreignResidentCountUsaPer100k,
   "foreign-resident-count-usa": foreignResidentCountUsa,
   "foreign-resident-count": foreignResidentCount,
+  "foreign-resident-population": foreignResidentPopulation,
   "forest-area-ratio": forestAreaRatio,
   "forest-area": forestArea,
   "forest-road-length": forestRoadLength,
@@ -3133,6 +3143,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "household-types-by-area": householdTypesByArea,
   "households-on-public-assistance-per-1000": householdsOnPublicAssistancePer1000,
   "households-on-public-assistance": householdsOnPublicAssistance,
+  "households-with-elderly-members": householdsWithElderlyMembers,
   "households": households,
   "housekeeping-service-consumption-expenditure": housekeepingServiceConsumptionExpenditure,
   "housing-charges-consumption-expenditure": housingChargesConsumptionExpenditure,
@@ -3481,6 +3492,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "non-car-vehicle-purchase-consumption-expenditure": nonCarVehiclePurchaseConsumptionExpenditure,
   "non-regular-employment-rate": nonRegularEmploymentRate,
   "notebooks-paper-consumption-expenditure": notebooksPaperConsumptionExpenditure,
+  "nuclear-family-household-count": nuclearFamilyHouseholdCount,
   "nuclear-family-households-ratio": nuclearFamilyHouseholdsRatio,
   "nuclear-power-plant-count": nuclearPowerPlantCount,
   "number-of-commercial-employees-wholesale-retail": numberOfCommercialEmployeesWholesaleRetail,
@@ -3643,6 +3655,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "other-womens-shirt-consumption-expenditure": otherWomensShirtConsumptionExpenditure,
   "other-womens-shirt-consumption-quantity": otherWomensShirtConsumptionQuantity,
   "other-womens-underwear-consumption-expenditure": otherWomensUnderwearConsumptionExpenditure,
+  "outflow-commuter-student-population": outflowCommuterStudentPopulation,
   "outflow-population-ratio": outflowPopulationRatio,
   "outpatient-count": outpatientCount,
   "outpatient-rate-per-1000": outpatientRatePer1000,
@@ -4070,6 +4083,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "single-mother-households": singleMotherHouseholds,
   "single-person-household-old-population-ratio": singlePersonHouseholdOldPopulationRatio,
   "single-person-household-ratio": singlePersonHouseholdRatio,
+  "single-person-households": singlePersonHouseholds,
   "site-area-per-dwelling": siteAreaPerDwelling,
   "skin-lotion-consumption-expenditure": skinLotionConsumptionExpenditure,
   "skin-medicine-consumption-expenditure": skinMedicineConsumptionExpenditure,
