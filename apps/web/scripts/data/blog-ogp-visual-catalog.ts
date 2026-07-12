@@ -4,7 +4,7 @@
  * 記事ごとの自由入力プロンプトは持たせず、ここに登録した 6 系統 × motif から決定的に選ぶ。
  * 画風は全系統で「ライト・編集的・フラット・落ち着いた藍色・十分な余白・文字なし」に統一する。
  *
- * 正典: docs/02_実装計画/23_ブログOGP生成AIパイプライン仕様.md
+ * 正典: .claude/rules/ogp-image-standards.md §5 (画像生成 AI: ブログ OGP の記事別背景)
  * 関連: apps/web/scripts/lib/blog-ogp-visual.ts (解決 + hash) / generate-blog-thumbnails-cloud.ts (統合)
  */
 

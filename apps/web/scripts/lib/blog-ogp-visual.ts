@@ -4,7 +4,7 @@
  * frontmatter から visualType / motif を決定的に導き (モデルに分類させない)、
  * 固定スタイル + カタログ + タイトルからプロンプトを組み立て、promptHash を計算する。
  *
- * 正典: docs/02_実装計画/23_ブログOGP生成AIパイプライン仕様.md
+ * 正典: .claude/rules/ogp-image-standards.md §5 (画像生成 AI: ブログ OGP の記事別背景)
  */
 
 import { createHash } from "node:crypto";
