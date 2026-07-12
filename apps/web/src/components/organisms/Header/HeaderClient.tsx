@@ -93,13 +93,21 @@ export function HeaderClient({ themes }: HeaderClientProps) {
   const themesActive = pathname.startsWith("/themes");
 
   return (
-    <header className="h-16 glass sticky top-0 z-[200]" suppressHydrationWarning>
-      <div className={cn(SHELL_WIDTH_CLASS, "flex h-full items-center justify-between")}>
+    <header
+      className="sticky top-0 z-[200] h-16 border-b bg-background/95 shadow-sm backdrop-blur-xl supports-[backdrop-filter]:bg-background/85"
+      suppressHydrationWarning
+    >
+      <div
+        className={cn(
+          SHELL_WIDTH_CLASS,
+          "flex h-full items-center justify-between gap-4",
+        )}
+      >
         {/* 左: モバイルメニュー + ロゴ */}
         <div className="flex items-center gap-2">
           <button
             onClick={toggleDrawer}
-            className="flex min-h-[44px] min-w-[44px] items-center justify-center rounded-md text-muted-foreground hover:bg-accent hover:text-foreground lg:hidden"
+            className="flex min-h-[44px] min-w-[44px] items-center justify-center text-muted-foreground transition-colors hover:bg-accent hover:text-foreground lg:hidden"
             aria-label="メニューを開く"
             suppressHydrationWarning
           >
@@ -108,18 +116,25 @@ export function HeaderClient({ themes }: HeaderClientProps) {
 
           <Link
             href="/"
-            className="flex items-center gap-2 text-[15px] font-bold"
+            className="group flex items-center gap-2.5"
+            aria-label="stats47 ホーム"
           >
-            <span className="rounded-md bg-primary p-1 text-primary-foreground">
-              <BarChart3 className="h-3.5 w-3.5" />
+            <span className="flex h-9 w-9 items-center justify-center bg-primary text-primary-foreground shadow-sm transition-transform group-hover:-translate-y-0.5">
+              <BarChart3 className="h-[18px] w-[18px]" />
             </span>
-            <span className="hidden sm:inline">統計で見る都道府県</span>
-            <span className="sm:hidden">統計47</span>
+            <span className="flex flex-col leading-none">
+              <span className="text-[17px] font-bold text-foreground">
+                stats<span className="text-primary">47</span>
+              </span>
+              <span className="mt-1 hidden text-[10px] font-medium text-muted-foreground sm:block">
+                統計で見る都道府県
+              </span>
+            </span>
           </Link>
         </div>
 
         {/* 中央: デスクトップナビ */}
-        <nav className="hidden items-center gap-1 lg:flex">
+        <nav className="hidden h-full items-center gap-1 lg:flex">
           {NAV_ITEMS.map(({ href, label, icon: Icon, match }) => {
             const isActive = match(pathname);
             return (
@@ -127,10 +142,10 @@ export function HeaderClient({ themes }: HeaderClientProps) {
                 key={href}
                 href={href}
                 className={cn(
-                  "flex items-center gap-1.5 rounded-md px-3 py-2 text-sm font-medium transition-colors",
+                  "relative flex h-full items-center gap-1.5 border-b-2 px-3 text-sm font-medium transition-colors",
                   isActive
-                    ? "bg-accent text-foreground"
-                    : "text-muted-foreground hover:bg-accent/60 hover:text-foreground",
+                    ? "border-primary text-foreground"
+                    : "border-transparent text-muted-foreground hover:text-foreground",
                 )}
               >
                 <Icon className="h-4 w-4" />
@@ -145,10 +160,10 @@ export function HeaderClient({ themes }: HeaderClientProps) {
               <DropdownMenuTrigger asChild>
                 <button
                   className={cn(
-                    "flex items-center gap-1.5 rounded-md px-3 py-2 text-sm font-medium transition-colors outline-none focus-visible:ring-2 focus-visible:ring-primary/50",
+                    "flex h-16 items-center gap-1.5 border-b-2 px-3 text-sm font-medium transition-colors outline-none focus-visible:ring-2 focus-visible:ring-primary/50",
                     themesActive
-                      ? "bg-accent text-foreground"
-                      : "text-muted-foreground hover:bg-accent/60 hover:text-foreground",
+                      ? "border-primary text-foreground"
+                      : "border-transparent text-muted-foreground hover:text-foreground",
                   )}
                   aria-label="テーマ一覧"
                 >
@@ -203,26 +218,27 @@ export function HeaderClient({ themes }: HeaderClientProps) {
                 type="search"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="検索..."
-                className="w-56 pl-10"
+                placeholder="統計を検索"
+                aria-label="統計を検索"
+                className="h-10 w-60 border-border/80 bg-muted/50 pl-10 transition-colors focus-visible:bg-background"
               />
             </div>
           </form>
 
           <Link
             href="/search"
-            className="flex min-h-[44px] min-w-[44px] items-center justify-center rounded-md text-muted-foreground hover:bg-accent hover:text-foreground lg:hidden"
+            className="flex min-h-[44px] min-w-[44px] items-center justify-center text-muted-foreground transition-colors hover:bg-accent hover:text-foreground lg:hidden"
             aria-label="検索"
           >
             <Search className="h-5 w-5" />
           </Link>
 
           <Button
-            variant="outline"
+            variant="ghost"
             size="icon"
             onClick={toggleTheme}
             aria-label="テーマの切り替え"
-            className="relative overflow-hidden"
+            className="relative overflow-hidden text-muted-foreground hover:text-foreground"
             suppressHydrationWarning
           >
             <span className="relative flex h-full w-full items-center justify-center">

@@ -32,6 +32,7 @@
 | `snapshot-exporter` 🆕 | D1 → R2 snapshot / Remotion 派生 JSON 生成 | db-manager 分割 |
 | `r2-publisher` 🆕 | R2 push / pull / du 専任 | db-manager 分割 |
 | `ranking-publisher` 🆕 | ranking 公開多段 (generate-ranking-items / KNOWN・SITEMAP・INDEXABLE 再生成 / deploy / purge / 本番実測) のオーケストレーション。観測値=data-ingester、push=r2-publisher、deploy=devops-runner に委譲 | 2026-06-21 新設 |
+| `ranking-expander` 🆕 | SSDS ランキング拡充ループ (計測ゲート付き需要ファースト): 候補キュレーション + config 生成 (gen-ssds-configs) + キュー状態管理 (build-expansion-queue)。投入=data-ingester、公開=ranking-publisher、計測=gsc-analyst に委譲。skill `/expand-rankings`。旧 expand-indicators 再構築 | 2026-07-12 新設 |
 | `gis-curator` 🆕 | KSJ GIS メタ SSOT (datasets.ts / registry.ts) 管理・dataset lifecycle・メタ整合。完全DBレス (git TS=SSOT)。pipeline は gis-pipeline-runner、push は r2-publisher に委譲 | 2026-06-21 新設 (GIS DBレス化) |
 | `gis-pipeline-runner` 🆕 | KSJ GIS パイプライン実行 (seed → download → TopoJSON → R2 → build state)。SSOT 編集は gis-curator、push は r2-publisher に委譲 | 2026-06-21 新設 (GIS DBレス化) |
 | `survey-curator` 🆕 | ranking↔統計調査の紐付けメタ SSOT (surveys.json / provenance 辞書 / config.surveyId) 管理・監査 (/audit-survey-linkage)・未分類回収。正典 survey-linkage-standards.md。投入=data-ingester、push=r2-publisher、公開=ranking-publisher に委譲 | 2026-07-06 新設 (survey 紐付け再設計) |

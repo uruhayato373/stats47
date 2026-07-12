@@ -15,6 +15,15 @@ AdSense の収益計測・改善施策計画を専任する agent。 seo-auditor
 - 収益計測の RPM / CPC / Earnings 分析 (AdSense + アフィリエイト成果額)
 - アフィリエイト imp/click/CTR の**計測協働** (`/affiliate-improvement` の measurement 部分に co_agent として参加。在庫/dashboard 管理は affiliate-manager)
 
+### 週次レビューで必ず見る計器 (RPM のレバー分解)
+
+RPM は `(imp/PV) × CTR × CPC` の掛け算。アカウント合算 (`LATEST.md` / `history.csv`) だけでは
+デバイス別の退行 (例: モバイル viewability 半減) を見落とす。以下をレバーとして見る:
+
+- **`.claude/state/metrics/adsense/LATEST.md`** — 週次で自動更新。account 表 + **デバイス別表** (RPM / viewability / CPC / imp/PV) + **⚠️ 要確認の退行アラート** (imp≥200 の面で viewability が -8pp 以上落ちたら自動で赤くなる)。
+- **`.claude/state/metrics/adsense/history-devices.csv`** — デバイス別 (Desktop/Mobile/Tablet) の RPM/viewability/CPC/imp_per_pv 時系列。account の `history.csv` の姉妹。
+- **`.claude/state/metrics/adsense/impact-LATEST.md`** — deploy 済み施策ごとの before/after を自動 surface (交絡/汚染を明示)。`npm run metrics:adsense-impact` で再生成。**判定 (effect/* 付与) はしない = improvement-triage の責務**。「まだ計測不能」「⚠交絡」と出た施策を単独判定しないこと。
+
 ## 担当スキル
 
 | スキル | 用途 |
@@ -37,7 +46,8 @@ AdSense の収益計測・改善施策計画を専任する agent。 seo-auditor
 
 ## 触る state / files
 
-- `.claude/state/metrics/adsense/` — AdSense 週次 history (CRUD)
+- `.claude/state/metrics/adsense/` — AdSense 週次 history (CRUD)。`history.csv` (account) / `history-devices.csv` (デバイス別・`metrics:digest` が生成) / `LATEST.md` (デバイス表+退行アラート) / `impact-LATEST.md` (施策 before/after・`metrics:adsense-impact` が生成)
+- `.claude/scripts/metrics/{update-history-csv,measure-adsense-impact}.mjs` — 計測パイプライン (run)。cron `fetch-metrics-weekly.yml` が週次で両方実行
 - `.claude/skills/analytics/adsense-improvement/reference/` — agent 用詳細層 (CRUD)
 - `docs/todo/01_改善バックログ.md` — read only (improvement-triage 経由)
 - `docs/40_アフィリエイト管理/` — アフィリエイト管理文書 + 生成物 `affiliate-dashboard.html` (CRUD)

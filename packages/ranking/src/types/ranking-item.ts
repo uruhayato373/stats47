@@ -304,6 +304,22 @@ export interface RankingItem {
 }
 
 /**
+ * home/featured.json 用に、ビルド時 (exporter) で「1 位」表示とミニタイルマップ SVG を
+ * 焼き込んだ RankingItem。トップページ (`<FeaturedRankings>`) はこれを読むだけでよく、
+ * ランタイムで各カードごとに values.json をフェッチして generateMiniTileSvg する必要がない
+ * (force-dynamic のままフェッチ ~11 回 + SVG 生成 8 枚を 1 フェッチに削減 = TTFB 改善)。
+ * Derived (計算で作れる派生値) を R2 snapshot に焼く完全DBレス方針に沿う。
+ * 焼き込み前の旧 featured.json との後方互換のため両フィールドとも optional
+ * (未焼き込み item はコンポーネント側がランタイム生成にフォールバックする)。
+ */
+export interface FeaturedRankingItem extends RankingItem {
+  /** ビルド時に焼き込む「1 位」表示 (都道府県名 + ロケール整形済み値文字列)。null = 値なし */
+  featuredTop?: { areaName: string; value: string | null } | null;
+  /** ビルド時に焼き込むミニタイルマップ SVG 文字列 */
+  tileMapSvg?: string | null;
+}
+
+/**
  * カテゴリ/調査ページ等の一覧表示用に絞った ranking item の軽量ビュー。
  * (旧 find-ranking-items-by-category.ts から完全DBレス Phase F で types へ relocate)
  */

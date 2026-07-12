@@ -51,3 +51,18 @@
 - **検証コマンド**: 次回週次 cron (`fetch-metrics-weekly.yml`、日曜 JST 20:00) 後に `wc -l .claude/skills/analytics/adsense-improvement/reference/snapshots/<week>/pages.csv` — 行数 > 1 (ヘッダのみ=1) を確認
 - **判定**: effect/pending (2026-07-12)
 - **未確定 / 仮説**: [仮説] 30 日窓でも 0 行なら現在のトラフィック規模で閾値未達が確定。その場合はページ別最適化は units.csv (テンプレート別) を代理指標として継続し、トラフィック増後に再確認
+
+---
+
+### [ADSENSE-LAZYLOAD-02] lazy-load 発火閾値のデバイス別化 (LAZYLOAD-01 の部分ロールバック)
+
+- **デプロイ日**: 未 (実装 2026-07-12・feature ブランチ、未デプロイ)
+- **背景 (実証済)**: ADSENSE-LAZYLOAD-01 で rootMargin を全デバイス一律 600px にしたが、W26→W27 実測 (`snapshots/2026-W27/devices.csv`) で逆効果が確定:
+  - モバイル: imp 337→724 (+115%)・viewability 57.3%→39.1%・earnings ¥27→¥29 (+7%) = 倍増した imp はほぼ無価値
+  - 全体: imp 1856→2675 (+44%)・earnings ¥139→¥128 (-8%)・RPM ¥53→¥45・viewability 67.7%→60.9% = impression dilution
+  - デスクトップ: RPM ¥66→¥50・earnings ¥110→¥95 (imp は 1502→1844 に増えたのに収益減)
+- **変更**: `apps/web/src/lib/google-adsense/components/AdSenseAd.tsx` — rootMargin 未指定時にデバイス別デフォルト (`DESKTOP_ROOT_MARGIN_PX=600` / `MOBILE_ROOT_MARGIN_PX=250`、判定は effect 内で `window.matchMedia("(max-width:767px)")`)。明示指定時はその値を優先。`types.ts` JSDoc 更新。呼び出し元で rootMargin を明示している箇所は無い (全 AdSense ユニットが対象)
+- **想定効果**: モバイル viewability 39.1% → 55%+ [根拠: 250px は LAZYLOAD-01 前の閾値で、当時 (W25/W26) モバイル viewability は 57.3%]。viewable-CPM 回復で全体 RPM の下げ止まり〜W24 ピーク (¥55) 復帰
+- **検証コマンド**: デプロイ 2 週後に `cat .claude/skills/analytics/adsense-improvement/reference/snapshots/<week>/devices.csv` — High-end mobile 行の viewability を W27 (39.1%) と比較。全体は `overview.csv` の viewability を W27 (60.9%) と比較。imp/PV が下がりすぎ (< 0.7) ていないかも監視
+- **判定**: pending (モバイル系統一括で 2026-08-02。本施策は LAZYLOAD-01 の部分ロールバックのため交絡群に含める)
+- **未確定 / 仮説**: [仮説] viewability 回復で CPM が戻り earnings が改善する。2026-08-02 に viewability が W27 の 39% から回復していなければ、モバイルのアンカー広告 (ANCHOR-01) との共食いを units.csv で確認する

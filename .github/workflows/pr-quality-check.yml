@@ -11,11 +11,22 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number }}
   cancel-in-progress: true
 
+# ─────────────────────────────────────────────────────────────────────────────
+# Phase 2 並列化 (2026-07-12): 旧「単一 quality-check job で全 step を直列」を
+# 独立 job へ分割し、依存インストール後の gate/type-check/test/build/thumbnail を
+# 並列実行してクリティカルパスを短縮する。
+#   - 各 step の run / env / continue-on-error は不変 (検査内容を弱めない)。
+#   - 集約 job `quality-check` (name: Code Quality Check) が全 job を needs + if:always() で
+#     検証し、単一の required status check を維持する (branch protection の再設定を不要にする)。
+#   - R2 secret / build env は build job だけに渡す (Thumbnail は公開 URL のみで secret 不要)。
+#   - Blog Thumbnail Gate の「全件→変更分」仕様変更・CI cache 導入は本 PR に含めない (別 Phase)。
+# ─────────────────────────────────────────────────────────────────────────────
+
 jobs:
-  quality-check:
-    name: Code Quality Check
+  static-gates:
+    name: Static Gates
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 15
 
     steps:
       - name: 🧰 Checkout repository
@@ -110,25 +121,51 @@ jobs:
           npm run generate:catalog --workspace=@stats47/data-configs -- --check
         continue-on-error: false
 
-      - name: 🖼️ Blog Thumbnail Gate
-        run: |
-          # 公開R2 (storage.stats47.jp) で全ブログ記事の thumbnail-light.webp が
-          # 200 画像配信されているか監査。欠落があれば fail し、デプロイ前に検出する。
-          # 背景: ogp.json 未作成の記事は thumbnail が生成されず R2 404 になり、
-          #   Post-Deploy Smoke Test (デプロイ後) が落ちる。それを前倒しで検出する。
-          # 修正はコード変更不要 — 以下を実行して thumbnail を生成+cloud push してから再実行:
-          #   npx tsx apps/web/scripts/generate-blog-thumbnails-cloud.ts --apply
-          if ! npx tsx apps/web/scripts/generate-blog-thumbnails-cloud.ts --audit; then
-            echo "::error::ブログ thumbnail が欠落しています。generate-blog-thumbnails-cloud.ts --apply で生成+push してから再実行してください。"
-            exit 1
-          fi
-        continue-on-error: false
+  type-check:
+    name: Type Check
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: 🧰 Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # 全履歴取得（差分チェック用）
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: 📦 Install dependencies
+        run: npm ci
 
       - name: 📐 Type Check
         run: npm run type-check
         env:
           NODE_OPTIONS: "--max-old-space-size=4096"
         continue-on-error: false # 型エラーで失敗させる
+
+  test:
+    name: Unit Tests & Coverage
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: 🧰 Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # 全履歴取得（差分チェック用）
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: 📦 Install dependencies
+        run: npm ci
 
       - name: 🧪 Run Unit Tests with Coverage
         run: npm run test:coverage -w apps/web
@@ -154,19 +191,19 @@ jobs:
               if (fs.existsSync(coverageSummaryPath)) {
                 const summary = JSON.parse(fs.readFileSync(coverageSummaryPath, 'utf8'));
                 const total = summary.total;
-                
+
                 // メトリクス計算
                 const lines = total.lines.pct.toFixed(2);
                 const statements = total.statements.pct.toFixed(2);
                 const functions = total.functions.pct.toFixed(2);
                 const branches = total.branches.pct.toFixed(2);
-                
+
                 // 回帰防止 floor (単一ソース coverage-thresholds.json を vitest と共有)。目標値ではない。
                 const ct = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'apps/web', 'coverage-thresholds.json'), 'utf8'));
                 const floor = { lines: ct.lines, statements: ct.statements, functions: ct.functions, branches: ct.branches };
                 // floor 以上=🟢 / floor-10pt 以内=🟡 / 未満=🔴
                 const getBadge = (value, f) => value >= f ? '🟢' : value >= f - 10 ? '🟡' : '🔴';
-                
+
                 // ファイル別のカバレッジ（上位10件、低カバレッジ優先）
                 const fileCoverage = Object.entries(summary)
                   .filter(([key]) => key !== 'total')
@@ -179,28 +216,28 @@ jobs:
                   }))
                   .sort((a, b) => a.lines - b.lines) // 低い順にソート
                   .slice(0, 10);
-                
+
                 const lowCoverageFiles = fileCoverage.filter(f => f.lines < floor.lines);
                 const highCoverageFiles = fileCoverage.filter(f => f.lines >= floor.lines);
-                
+
                 let fileList = '';
                 if (lowCoverageFiles.length > 0) {
                   fileList += '\n\n**⚠️ 低カバレッジファイル（改善推奨）:**\n';
-                  fileList += lowCoverageFiles.map(f => 
+                  fileList += lowCoverageFiles.map(f =>
                     `- \`${f.file}\`: ${f.lines.toFixed(1)}% (Lines)`
                   ).join('\n');
                 }
                 if (highCoverageFiles.length > 0 && lowCoverageFiles.length < 10) {
                   fileList += '\n\n**✅ 高カバレッジファイル（参考）:**\n';
-                  fileList += highCoverageFiles.slice(0, 5).map(f => 
+                  fileList += highCoverageFiles.slice(0, 5).map(f =>
                     `- \`${f.file}\`: ${f.lines.toFixed(1)}% (Lines)`
                   ).join('\n');
                 }
-                
+
                 const workflowUrl = `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
-                
+
                 const comment = `## 📊 Test Coverage Report
-                
+
                 | Metric | Coverage | Status |
                 |--------|----------|--------|
                 | Lines | ${lines}% | ${getBadge(parseFloat(lines), floor.lines)} |
@@ -209,20 +246,20 @@ jobs:
                 | Branches | ${branches}% | ${getBadge(parseFloat(branches), floor.branches)} |
 
                 **Floor (回帰防止線・目標ではありません):** Lines ${floor.lines}% / Statements ${floor.statements}% / Functions ${floor.functions}% / Branches ${floor.branches}% — vitest が enforce (未達で CI 失敗)。分母はロジック層のみ (src/app 等 E2E 担当は除外)。
-                
+
                 📥 [Download full coverage report](${workflowUrl})${fileList}
-                
+
                 <details>
                 <summary>📋 Coverage Details</summary>
-                
+
                 Full HTML report is available in the workflow artifacts. Download the \`coverage-report\` artifact and open \`coverage/index.html\` in your browser.
-                
+
                 **How to view:**
                 1. Go to the [workflow run](${workflowUrl})
                 2. Download the \`coverage-report\` artifact
                 3. Extract and open \`coverage/index.html\` in your browser
                 </details>`;
-                
+
                 github.rest.issues.createComment({
                   issue_number: context.issue.number,
                   owner: context.repo.owner,
@@ -238,6 +275,26 @@ jobs:
       # vitest.config.ts が coverage-thresholds.json (単一ソース) を読み floor 未達で exit 1 する。
       # 旧「Check coverage thresholds」step (閾値リテラル 10 を再ハードコード) は重複のため削除。
 
+  build:
+    name: Build Check
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: 🧰 Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # 全履歴取得（差分チェック用）
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
       - name: 🏗️ Build Check
         run: npm run build -w apps/web
         env:
@@ -246,7 +303,65 @@ jobs:
           NEXT_PUBLIC_BASE_URL: https://stats47.jp
           NEXT_PUBLIC_ESTAT_APP_ID: ${{ secrets.NEXT_PUBLIC_ESTAT_APP_ID }}
           NODE_OPTIONS: "--max-old-space-size=4096"
+          # Phase 4(a): この build job だけ next build 内の型検査をスキップ (Phase 4 / next.config.ts の
+          # ignoreBuildErrors env ゲート)。並列で走る必須 type-check job (npm run type-check = 全 workspace)
+          # がカバーし、集約 job quality-check が type-check を needs するため型検査の必須性は維持される。
+          # localhost / deploy(workers:build) は env 未設定で従来どおり型検査する。
+          NEXT_SKIP_BUILD_TYPECHECK: "true"
         continue-on-error: false # ビルドエラーで失敗させる
+
+  remote-asset-audit:
+    name: Blog Thumbnail Gate
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: 🧰 Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # 全履歴取得（差分チェック用）
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 🖼️ Blog Thumbnail Gate
+        run: |
+          # 公開R2 (storage.stats47.jp) で全ブログ記事の thumbnail-light.webp が
+          # 200 画像配信されているか監査。欠落があれば fail し、デプロイ前に検出する。
+          # 背景: ogp.json 未作成の記事は thumbnail が生成されず R2 404 になり、
+          #   Post-Deploy Smoke Test (デプロイ後) が落ちる。それを前倒しで検出する。
+          # 修正はコード変更不要 — 以下を実行して thumbnail を生成+cloud push してから再実行:
+          #   npx tsx apps/web/scripts/generate-blog-thumbnails-cloud.ts --apply
+          if ! npx tsx apps/web/scripts/generate-blog-thumbnails-cloud.ts --audit; then
+            echo "::error::ブログ thumbnail が欠落しています。generate-blog-thumbnails-cloud.ts --apply で生成+push してから再実行してください。"
+            exit 1
+          fi
+        continue-on-error: false
+
+  # 集約 job: 上記 5 job を全て needs し、単一の required status check
+  # (branch protection が要求する "Code Quality Check") を維持する。
+  # if:always() で常に実行し、いずれかが failure/cancelled/skipped なら明示的に失敗させる
+  # (needs のいずれかが失敗すると本 job は skip されうるため、結果を明示チェックする)。
+  quality-check:
+    name: Code Quality Check
+    needs: [static-gates, type-check, test, build, remote-asset-audit]
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: 🧮 Verify all required checks passed
+        if: ${{ contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled') || contains(needs.*.result, 'skipped') }}
+        run: |
+          echo "::error::One or more required checks did not pass."
+          echo "static-gates=${{ needs.static-gates.result }} type-check=${{ needs.type-check.result }} test=${{ needs.test.result }} build=${{ needs.build.result }} remote-asset-audit=${{ needs.remote-asset-audit.result }}"
+          exit 1
 
       - name: ✅ All Checks Passed
         run: echo "✅ All quality checks passed!"

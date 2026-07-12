@@ -149,6 +149,13 @@ jobs:
         continue-on-error: true
         run: node .claude/scripts/blog/measure-gsc-impact.mjs --min-weeks 2
 
+      # AdSense 施策の before/after を surface する（判定はせず improvement-triage に委ねる）。
+      # deploy 済み施策ごとに history.csv + history-devices.csv で差分を出し、交絡/汚染を明示する。
+      # 結果は .claude/state/metrics/adsense/impact-LATEST.md に書かれ、下の git add で commit される。
+      - name: 📐 Surface AdSense 施策 impact (before/after)
+        continue-on-error: true
+        run: node .claude/scripts/metrics/measure-adsense-impact.mjs --out .claude/state/metrics/adsense/impact-LATEST.md
+
       # 「次に何を書くか」(topic-queue) を再構築する。GSC クエリギャップ + R2 相関 snapshot を
       # 入力にした新規記事ネタの状態付きキュー。生産・レビューはローカル/セッションで人が回す。
       - name: 🆕 Rebuild article topic queue (next-to-write)

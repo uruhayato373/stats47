@@ -14,6 +14,7 @@
 | `/growth-loops` | 成長ループ（フライホイール）の設計・評価 | 四半期ごと |
 | `/monetization-strategy` | 収益化戦略のブレインストーム | 四半期ごと |
 | `/north-star-metric` | North Star Metric と Input Metrics の定義 | 初回 + 見直し時 |
+| `/expand-rankings` | SSDS ランキング拡充ループ（計測ゲート付き需要ファースト・旧 expand-indicators 再構築） | 公開→計測→深掘りの反復 |
 
 ## 推奨ワークフロー
 
