@@ -2,10 +2,12 @@ import "server-only";
 
 import { logger } from "@stats47/logger/server";
 import { saveToR2 } from "@stats47/r2-storage/server";
+import { generateMiniTileSvg } from "@stats47/visualization/server";
 
 import { listRankingItemsWithTagsFromR2 } from "../repositories/ranking-item";
+import { readRankingValuesFromR2 } from "../repositories/ranking-value";
 import type { CategoryRankingItem } from "../types/ranking-item";
-import type { RankingItem } from "../types/ranking-item";
+import type { FeaturedRankingItem, RankingItem } from "../types/ranking-item";
 import {
   categoryItemsKeyPath,
   homeFeaturedKeyPath,
@@ -106,10 +108,49 @@ export async function exportRankingItemsPerUrl(): Promise<ExportRankingItemsPerU
     .filter((it) => it.isFeatured && it.isActive && it.areaType === "prefecture")
     .sort((a, b) => (a.featuredOrder ?? 0) - (b.featuredOrder ?? 0));
 
+  // 各 featured item に「1 位」表示とミニタイルマップ SVG を焼き込む。
+  // トップページ (`<FeaturedRankings>`) がランタイムで values.json を都度フェッチして
+  // SVG を生成する代わりに、ここ (ビルド時・1 回) で計算して snapshot に載せる
+  // (Derived → R2 snapshot の完全DBレス方針。値なし item はフィールド未設定のまま返し、
+  //  コンポーネント側の後方互換フォールバックに委ねる)。
+  const featuredBaked: FeaturedRankingItem[] = await Promise.all(
+    featuredItems.map(async (item): Promise<FeaturedRankingItem> => {
+      const yearCode =
+        item.availableYears?.[0]?.yearCode || item.latestYear?.yearCode || "2024";
+      const valuesResult = await readRankingValuesFromR2(
+        item.rankingKey,
+        "prefecture",
+        yearCode,
+      );
+      if (!valuesResult.success || valuesResult.data.length === 0) {
+        return { ...item };
+      }
+      const values = valuesResult.data;
+      const top = values.find((v) => v.rank === 1);
+      const featuredTop = top
+        ? {
+            areaName: top.areaName,
+            value: top.value !== null ? top.value.toLocaleString("ja-JP") : null,
+          }
+        : null;
+      const tileMapSvg = generateMiniTileSvg(
+        values.flatMap((v) =>
+          v.value !== null
+            ? [{ areaCode: v.areaCode, value: v.value, rank: v.rank ?? undefined }]
+            : [],
+        ),
+        item.visualization?.colorScheme,
+        item.visualization?.isReversed,
+        item.rankingKey,
+      );
+      return { ...item, featuredTop, tileMapSvg };
+    }),
+  );
+
   const featuredBody = JSON.stringify({
     generatedAt,
-    count: featuredItems.length,
-    items: featuredItems,
+    count: featuredBaked.length,
+    items: featuredBaked,
   });
   uploads.push(
     saveToR2(homeFeaturedKeyPath(), featuredBody, {

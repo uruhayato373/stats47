@@ -3,14 +3,14 @@ import "server-only";
 import { readFeaturedRankingItemsFromR2 } from "@stats47/ranking/server";
 import { err, type Result } from "@stats47/types";
 
-import type { RankingItem } from "@stats47/ranking";
+import type { FeaturedRankingItem } from "@stats47/ranking";
 
 /**
  * おすすめランキングを取得する
  *
  * @param limit 取得件数
  */
-export async function getFeaturedRankings(limit: number = 20): Promise<Result<RankingItem[], Error>> {
+export async function getFeaturedRankings(limit: number = 20): Promise<Result<FeaturedRankingItem[], Error>> {
   try {
     return await readFeaturedRankingItemsFromR2(limit);
   } catch (error) {

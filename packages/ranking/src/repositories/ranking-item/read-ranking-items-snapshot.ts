@@ -10,7 +10,7 @@ import type { AreaType } from "@stats47/types";
 import { err, ok, type Result } from "@stats47/types";
 
 import { KNOWN_RANKING_KEYS } from "../../config/known-ranking-keys";
-import type { RankingItem } from "../../types/ranking-item";
+import type { FeaturedRankingItem, RankingItem } from "../../types/ranking-item";
 import type { RankingItemWithTags } from "../../types/ranking-item-with-tags";
 import {
   categoryItemsKeyPath,
@@ -50,7 +50,8 @@ function isNextProductionBuild(): boolean {
 interface HomeFeaturedSnapshot {
   generatedAt: string;
   count: number;
-  items: RankingItem[];
+  /** exporter が「1 位」表示とミニタイルマップ SVG を焼き込んだ featured item 群。 */
+  items: FeaturedRankingItem[];
 }
 
 interface CategoryItemsSnapshot {
@@ -74,7 +75,7 @@ interface SurveyItemsSnapshot {
 
 export async function readFeaturedRankingItemsFromR2(
   limit = 20,
-): Promise<Result<RankingItem[], Error>> {
+): Promise<Result<FeaturedRankingItem[], Error>> {
   try {
     const snapshot = await fetchFromR2AsJson<HomeFeaturedSnapshot>(
       homeFeaturedKeyPath(),

@@ -55,35 +55,50 @@ export async function FeaturedRankings({ limit = 6, showHeader = true }: Feature
         return true;
       });
 
-      // 全47行データを並列で一括取得（rank=1 抽出 + tile map 生成の両用途を1フェッチで賄う）
-      const allValuesResults = await Promise.all(
-        uniqueItems.map((item) => {
-          const yearCode = item.availableYears?.[0]?.yearCode || item.latestYear?.yearCode || "2024";
-          return readRankingValuesFromR2(item.rankingKey, "prefecture", yearCode);
-        }),
-      );
+      // 通常は exporter が featured.json に「1位」表示とタイルマップ SVG を焼き込み済み
+      // (item.tileMapSvg あり) なので、ここでの values.json フェッチ・SVG 生成は 0 回。
+      // 旧 featured.json (未焼き込み) の item だけランタイム生成にフォールバックする。
+      const unbakedItems = uniqueItems.filter((item) => item.tileMapSvg == null);
+      const fallbackValues = new Map<string, Awaited<ReturnType<typeof readRankingValuesFromR2>>>();
+      if (unbakedItems.length > 0) {
+        const results = await Promise.all(
+          unbakedItems.map((item) => {
+            const yearCode = item.availableYears?.[0]?.yearCode || item.latestYear?.yearCode || "2024";
+            return readRankingValuesFromR2(item.rankingKey, "prefecture", yearCode);
+          }),
+        );
+        unbakedItems.forEach((item, idx) => fallbackValues.set(item.rankingKey, results[idx]));
+      }
 
-      items = uniqueItems.map((item, idx) => {
+      items = uniqueItems.map((item) => {
         const latestYear = item.availableYears?.[0]?.yearCode || item.latestYear?.yearCode || "2024";
         const displayInfo = buildRankingDisplayInfo(item);
-        const valuesResult = allValuesResults[idx];
 
         let topAreaName: string | undefined;
         let topValue: string | undefined;
         let tileMapSvg: string | undefined;
 
-        if (isOk(valuesResult) && valuesResult.data.length > 0) {
-          const top = valuesResult.data.find((v) => v.rank === 1);
-          if (top) {
-            topAreaName = top.areaName;
-            topValue = top.value !== null ? top.value.toLocaleString("ja-JP") : undefined;
+        if (item.tileMapSvg != null) {
+          // ビルド時に焼き込み済み: ランタイムフェッチ・SVG 生成なし
+          topAreaName = item.featuredTop?.areaName;
+          topValue = item.featuredTop?.value ?? undefined;
+          tileMapSvg = item.tileMapSvg;
+        } else {
+          // 後方互換フォールバック: 旧 featured.json はランタイムで生成
+          const valuesResult = fallbackValues.get(item.rankingKey);
+          if (valuesResult && isOk(valuesResult) && valuesResult.data.length > 0) {
+            const top = valuesResult.data.find((v) => v.rank === 1);
+            if (top) {
+              topAreaName = top.areaName;
+              topValue = top.value !== null ? top.value.toLocaleString("ja-JP") : undefined;
+            }
+            tileMapSvg = generateMiniTileSvg(
+              valuesResult.data.flatMap((v) => v.value !== null ? [{ areaCode: v.areaCode, value: v.value, rank: v.rank ?? undefined }] : []),
+              item.visualization?.colorScheme,
+              item.visualization?.isReversed,
+              item.rankingKey,
+            );
           }
-          tileMapSvg = generateMiniTileSvg(
-            valuesResult.data.flatMap((v) => v.value !== null ? [{ areaCode: v.areaCode, value: v.value, rank: v.rank ?? undefined }] : []),
-            item.visualization?.colorScheme,
-            item.visualization?.isReversed,
-            item.rankingKey,
-          );
         }
 
         return {
