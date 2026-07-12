@@ -10,6 +10,8 @@ import ReactMarkdown from "react-markdown";
 import rehypeRaw from "rehype-raw";
 import remarkGfm from "remark-gfm";
 
+import { SurfaceLinkCard, SurfaceSection } from "@/components/surface";
+
 import { BannerAd } from "@/features/ads";
 
 import { AdSenseAd, BLOG_ARTICLE_INLINE } from "@/lib/google-adsense";
@@ -237,15 +239,15 @@ function makeMdComponents(slug?: string, affiliateBannersByCategory?: Record<str
 
         "source-link": ({ href, children }: ComponentProps & { href?: string }) => (
             <span className="my-4 block not-prose">
-                <Link
+                <SurfaceLinkCard
                     href={href ?? "#"}
-                    className="flex items-center justify-between rounded-lg border border-primary/20 bg-primary/5 px-4 py-3 text-sm font-medium text-primary transition-colors hover:bg-primary/10"
+                    className="flex items-center justify-between border-primary/20 bg-primary/5 px-4 py-3 text-sm font-medium text-primary hover:bg-primary/10"
                 >
                     <span className="flex items-center gap-2">
                         {children}
                     </span>
                     <ArrowRight className="h-4 w-4 shrink-0" />
-                </Link>
+                </SurfaceLinkCard>
             </span>
         ),
 
@@ -282,12 +284,12 @@ function makeMdComponents(slug?: string, affiliateBannersByCategory?: Record<str
         },
 
         "related-articles": ({ children }: ComponentProps) => (
-            <div className="my-8 not-prose overflow-hidden rounded-lg border-2 border-primary/30">
+            <SurfaceSection className="my-8 overflow-hidden border-primary/30 p-0">
                 <div className="bg-primary/10 px-4 py-2.5">
                     <span className="text-sm font-bold text-primary">関連記事</span>
                 </div>
                 <div className="divide-y divide-border">{children}</div>
-            </div>
+            </SurfaceSection>
         ),
 
         "related-article-link": ({ href, children }: ComponentProps & { href?: string }) => (
@@ -321,13 +323,13 @@ function makeMdComponents(slug?: string, affiliateBannersByCategory?: Record<str
             if (!category) return null;
             return (
                 <div className="my-6 not-prose">
-                    <Link
+                    <SurfaceLinkCard
                         href={`/category/${category}`}
-                        className="flex items-center justify-between rounded-lg border border-primary/20 bg-primary/5 px-4 py-3 text-sm font-medium text-primary transition-colors hover:bg-primary/10"
+                        className="flex items-center justify-between border-primary/20 bg-primary/5 px-4 py-3 text-sm font-medium text-primary hover:bg-primary/10"
                     >
                         <span>このカテゴリの全ランキングを見る</span>
                         <ArrowRight className="h-4 w-4 shrink-0" />
-                    </Link>
+                    </SurfaceLinkCard>
                 </div>
             );
         },

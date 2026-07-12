@@ -1,9 +1,13 @@
 {
-  "hash": "1ab78683903d3a4cfc1f024d4504cd53ba18cbd1ec28b3759dbff49aefdeaa31",
-  "audited_at": "2026-07-12T09:02:14",
+  "hash": "8d7ebf74f58c5f53bc0f69045535923b27b732292d04e16ae898f5bdf61fcd20",
+  "audited_at": "2026-07-12T09:14:47",
   "files": [
-    ".claude/agents/gis-curator.md",
+    ".claude/scripts/lib/__tests__/check-docs-links.test.cjs",
+    ".claude/scripts/lib/__tests__/check-repo-hygiene.test.cjs",
+    ".claude/scripts/lib/__tests__/check-static-assets.test.cjs",
     ".claude/scripts/lib/check-card-census.cjs",
-    ".claude/skills/estat/search-mlit-dpf/SKILL.md"
+    ".claude/scripts/lib/check-docs-links.cjs",
+    ".claude/scripts/lib/check-repo-hygiene.cjs",
+    ".claude/scripts/lib/check-static-assets.cjs"
   ]
 }

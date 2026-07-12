@@ -11,6 +11,10 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number }}
   cancel-in-progress: true
 
+permissions:
+  contents: read
+  pull-requests: write
+
 # ─────────────────────────────────────────────────────────────────────────────
 # Phase 2 並列化 (2026-07-12): 旧「単一 quality-check job で全 step を直列」を
 # 独立 job へ分割し、依存インストール後の gate/type-check/test/build/thumbnail を
@@ -30,18 +34,41 @@ jobs:
 
     steps:
       - name: 🧰 Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         with:
           fetch-depth: 0 # 全履歴取得（差分チェック用）
 
       - name: 🟢 Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: "20"
           cache: "npm"
 
       - name: 📦 Install dependencies
         run: npm ci
+
+      - name: ⚙️ GitHub Actions Syntax Guard
+        # actionlint v1.7.7 を固定版 + 公開SHA-256検証付きで実行。
+        # YAML / expressions / reusable workflow / shellcheck連携可能部分の構文回帰をPRで止める。
+        run: |
+          ACTIONLINT_VERSION="1.7.7"
+          ACTIONLINT_ARCHIVE="actionlint_${ACTIONLINT_VERSION}_linux_amd64.tar.gz"
+          ACTIONLINT_SHA256="023070a287cd8cccd71515fedc843f1985bf96c436b7effaecce67290e7e0757"
+          curl --fail --silent --show-error --location \
+            "https://github.com/rhysd/actionlint/releases/download/v${ACTIONLINT_VERSION}/${ACTIONLINT_ARCHIVE}" \
+            --output "/tmp/${ACTIONLINT_ARCHIVE}"
+          echo "${ACTIONLINT_SHA256}  /tmp/${ACTIONLINT_ARCHIVE}" | sha256sum --check --strict
+          mkdir -p /tmp/actionlint
+          tar -xzf "/tmp/${ACTIONLINT_ARCHIVE}" -C /tmp/actionlint actionlint
+          find .github/workflows -maxdepth 1 -type f \( -name '*.yml' -o -name '*.yaml' \) -print0 \
+            | xargs -0 /tmp/actionlint/actionlint
+        continue-on-error: false
+
+      - name: 🛡️ GitHub Actions Policy Audit
+        # permissions / timeout / schedule concurrency / action SHA pin を必須化。
+        # actionは `@40桁commit SHA # vN`で固定し、サプライチェーン回帰を止める。
+        run: node .claude/scripts/lib/audit-workflow-policy.cjs --strict
+        continue-on-error: false
 
       - name: 📝 ESLint Check
         run: npm run lint
@@ -64,6 +91,30 @@ jobs:
         # pre-commit と同一だが --no-verify 素通り対策で CI でも実行する。
         # 正典: .claude/rules/nextjs-ssg-preservation.md
         run: node .claude/scripts/lib/check-r2-route-ssg.cjs
+        continue-on-error: false
+
+      - name: 🔗 Docs Link Regression Guard
+        # 既存 broken は baseline で許容し、新規の ref/referrer だけをブロックする。
+        # docs 再編時に skill / agent / rule からの参照を黙って壊さないための後方互換ゲート。
+        run: node .claude/scripts/lib/check-docs-links.cjs --baseline
+        continue-on-error: false
+
+      - name: 📱 Static Asset Contract Guard
+        # manifest / metadata の icon 参照、PNG実寸、SVG安全性、ICO/PWA必須setを検査。
+        # TypeScriptでは検出できない「存在しない public asset 参照」をPRで止める。
+        run: node .claude/scripts/lib/check-static-assets.cjs
+        continue-on-error: false
+
+      - name: 🧹 Repository Hygiene Regression Guard
+        # origin/develop 由来の既存findingはbaselineで許容し、一時出力・大容量・
+        # case/Unicode衝突の新規悪化だけをブロックする。
+        run: node .claude/scripts/lib/check-repo-hygiene.cjs --baseline
+        continue-on-error: false
+
+      - name: 🧩 Checker Wiring Regression Guard
+        # check/audit/validate/verify/lint/guard 系scriptの新規未配線を検出。
+        # 既存の未配線候補はbaselineで許容し、新規悪化だけを止める。
+        run: node .claude/scripts/lib/check-checker-wiring.cjs --baseline
         continue-on-error: false
 
       - name: 🚫 D1 Import Gate (Phase 7)
@@ -128,12 +179,12 @@ jobs:
 
     steps:
       - name: 🧰 Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         with:
           fetch-depth: 0 # 全履歴取得（差分チェック用）
 
       - name: 🟢 Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: "20"
           cache: "npm"
@@ -154,12 +205,12 @@ jobs:
 
     steps:
       - name: 🧰 Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         with:
           fetch-depth: 0 # 全履歴取得（差分チェック用）
 
       - name: 🟢 Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: "20"
           cache: "npm"
@@ -172,7 +223,7 @@ jobs:
         continue-on-error: false # テスト失敗で止める
 
       - name: 📊 Upload coverage to artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: coverage-report
           path: apps/web/coverage/
@@ -180,7 +231,7 @@ jobs:
 
       - name: 💬 Comment PR with coverage summary
         if: github.event_name == 'pull_request'
-        uses: actions/github-script@v7
+        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7
         with:
           script: |
             const fs = require('fs');
@@ -282,12 +333,12 @@ jobs:
 
     steps:
       - name: 🧰 Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         with:
           fetch-depth: 0 # 全履歴取得（差分チェック用）
 
       - name: 🟢 Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: "20"
           cache: "npm"
@@ -317,12 +368,12 @@ jobs:
 
     steps:
       - name: 🧰 Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         with:
           fetch-depth: 0 # 全履歴取得（差分チェック用）
 
       - name: 🟢 Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: "20"
           cache: "npm"

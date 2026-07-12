@@ -9,6 +9,7 @@ import {
   BreadcrumbSeparator,
 } from "@stats47/components/atoms/ui/breadcrumb";
 
+import { THEME_HEROES } from "@/components/layout/page-heroes";
 import { loadPageComponents } from "@/components/stat-charts/server";
 import { prefetchThemeKpiData } from "@/components/stat-charts/services/prefetch-theme-kpi";
 
@@ -30,6 +31,7 @@ import {
 
 import { ThemeAreaHeader } from "./ThemeAreaHeader";
 import { ThemeDashboardClient } from "./ThemeDashboardClient";
+import { ThemeHero } from "./ThemeHero";
 import { ThemeIndicatorCatalogSection } from "./ThemeIndicatorCatalogSection";
 import { ThemePrefectureProvider } from "./ThemePrefectureContext";
 import { ThemeRelatedArticles } from "./ThemeRelatedArticles";
@@ -128,8 +130,13 @@ export async function ThemePageLayout({ theme, data, areaContext }: Props) {
         </div>
       )}
 
-      {/* エリア連動の H1 + 都道府県セレクタ（全国デフォルト・client-side、SSG 不変） */}
-      <ThemeAreaHeader themeTitle={theme.title} description={theme.description} />
+      {/* エリア連動の H1 + 都道府県セレクタ（全国デフォルト・client-side、SSG 不変）。
+          hero 画像を持つテーマ (THEME_HEROES) は画像付きの ThemeHero に差し替える。 */}
+      {THEME_HEROES[theme.themeKey] ? (
+        <ThemeHero themeTitle={theme.title} hero={THEME_HEROES[theme.themeKey]} />
+      ) : (
+        <ThemeAreaHeader themeTitle={theme.title} description={theme.description} />
+      )}
 
       <ThemeDashboardClient
         themeConfig={theme}

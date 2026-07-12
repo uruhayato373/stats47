@@ -32,13 +32,13 @@ jobs:
     timeout-minutes: 15
     steps:
       - name: 🧰 Checkout main
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         with:
           ref: main
           fetch-depth: 1
 
       - name: 🟢 Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: "20"
 
@@ -79,7 +79,7 @@ jobs:
 
       - name: 💬 Comment posting result on issue #127
         if: success() && steps.post.outputs.permalink != ''
-        uses: actions/github-script@v7
+        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7
         with:
           script: |
             const date = "${{ steps.post.outputs.post_date }}";
@@ -99,7 +99,7 @@ jobs:
 
       - name: 💬 Comment failure on issue #127
         if: failure()
-        uses: actions/github-script@v7
+        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7
         with:
           script: |
             const date = process.env.IG_FORCE_DATE || new Date(Date.now() + 9*3600*1000).toISOString().slice(0, 10);

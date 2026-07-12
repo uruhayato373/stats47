@@ -18,6 +18,10 @@ permissions:
   contents: read
   issues: write
 
+concurrency:
+  group: agent-consistency-weekly
+  cancel-in-progress: false
+
 jobs:
   consistency-check:
     name: Consistency Check
@@ -25,10 +29,10 @@ jobs:
     timeout-minutes: 10
     steps:
       - name: 🧰 Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
 
       - name: 🟢 Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: 22
 
@@ -39,6 +43,35 @@ jobs:
           node .claude/scripts/lib/check-agent-skill-consistency.cjs > /tmp/consistency-report.txt 2>&1
           echo "exit_code=$?" >> "$GITHUB_OUTPUT"
           cat /tmp/consistency-report.txt
+
+      - name: 🧩 Check checker wiring
+        id: checker_wiring
+        run: |
+          set +e
+          node .claude/scripts/lib/check-checker-wiring.cjs --baseline > /tmp/checker-wiring-report.txt 2>&1
+          echo "exit_code=$?" >> "$GITHUB_OUTPUT"
+          cat /tmp/checker-wiring-report.txt
+
+      - name: 🚨 Create issue on unwired checker regression
+        if: steps.checker_wiring.outputs.exit_code == '1'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TITLE="[Consistency Alert] 新規未配線 checker 検出 ($(date +%Y-%m-%d))"
+          EXISTING=$(gh issue list --label "auto-generated" --state open \
+            --search "新規未配線 checker in:title" --json number --jq '.[0].number // empty')
+          {
+            echo "check/audit/validate/verify/lint/guard 系scriptがどこからも参照されていません。"
+            echo ""
+            echo '```'
+            head -60 /tmp/checker-wiring-report.txt
+            echo '```'
+          } > /tmp/checker-wiring-issue.md
+          if [ -n "$EXISTING" ]; then
+            gh issue comment "$EXISTING" --body-file /tmp/checker-wiring-issue.md
+          else
+            gh issue create --title "$TITLE" --label "auto-generated" --body-file /tmp/checker-wiring-issue.md
+          fi
 
       - name: 🚨 Create issue on error-level drift
         if: steps.check.outputs.exit_code == '1'

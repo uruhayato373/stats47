@@ -82,7 +82,7 @@ R2 app/survey/<id>/items.json
 - 定義欠落 survey は現行 UI へフォールバックさせる (1 survey ずつ編集ハブ化・他は壊さない)。
 - 実装前に確認: survey page.tsx の exports・取得境界 / article repository・`related-articles.ts` の再利用可否 /
   既存 page_components・SectionHeader・ArticleShell / rules `coding-standards.md`・`ui-components.md`・`survey-linkage-standards.md` /
-  docs `07_情報設計.md`・`13_統一レイアウト設計.md`・`12_完全DBレス設計.md`・(URL/metadata/構造化データを触るなら)`11_URL構造.md`。
+  docs `07_情報設計.md`・`13_統一レイアウト設計.md`・`12_完全DBレス設計.md`・(URL/metadata/構造化データを触るなら) コード `apps/web/src/lib/url-policy.ts` + `middleware.ts`。
 
 ## 横展開の進め方 (小さく実証してから)
 

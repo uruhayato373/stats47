@@ -111,7 +111,7 @@ CLAUDE.md 内に詳細を複製しない。状況に応じて参照する。
 | DDD ドメイン分類 | `docs/01_技術設計/01_システムアーキテクチャ.md` |
 | エラーハンドリング規約 | `docs/01_技術設計/03_エラーハンドリング規約.md` |
 | 自動化インベントリ ★追加・削除時は必ず更新 | `docs/01_技術設計/06_自動化インベントリ.md` |
-| URL 構造・301 マッピング・canonical 戦略 ★新規ページ作成時必読 | `docs/01_技術設計/11_URL構造.md` |
+| URL 構造・301/410・canonical 戦略 ★新規ページ作成時必読 | コード SSOT: `apps/web/src/lib/url-policy.ts` + `config/{blog-redirects,legacy-category-keys,redirect-tag-keys}.ts` + `middleware.ts` / `sitemap.ts`。機械検証: `src/__tests__/middleware.test.ts` / `.github/scripts/smoke-test-routes.sh`。新規ページ手順は `.claude/rules/coding-standards.md` |
 | **情報設計 (ページ責務・3タクソノミー・ファネル役割)** ★page_components配置/分類軸追加/ページKPI判定時必読 | `docs/01_技術設計/07_情報設計.md` |
 | 統一レイアウト (横幅/レール/フラット/フォント/ナビ) ★UI実装時必読 | `docs/01_技術設計/13_統一レイアウト設計.md` |
 | 国土数値情報 GIS データ | `.claude/rules/gis-data.md` / `packages/gis/src/mlit-ksj/README.md` |

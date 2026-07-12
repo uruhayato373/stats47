@@ -5,9 +5,9 @@
 
 ## レイアウト・フォント・角丸（2026-06〜 / 正典: `docs/01_技術設計/13_統一レイアウト設計.md`）
 
-- **横幅は `PageShell`（`@/components/layout`）経由で統一**。ページ内で `container mx-auto` や `max-w-[…]` を直書きしない（1700px / 右レール 360px / 左 TOC 280px）。**記事系ページ（blog 詳細 / ranking 詳細 / survey / terms / privacy）は `ArticleShell`**（1280px + flex 密着・reading zone）を使う（下記フラット例外を参照）。
+- **横幅は `PageShell`（`@/components/layout`）経由で統一**。ページ内で `container mx-auto` や `max-w-[…]` を直書きしない（1700px / 右レール 360px / 左 TOC 280px）。**記事系ページ（blog 詳細 / ranking 詳細 / survey / terms / privacy）は `ArticleShell`**（1280px + flex 密着・reading zone）を使う。
 - **PC 常設左サイドバーは廃止**。ナビはヘッダー（カテゴリは**メガメニュー**）に集約し、モバイルは `MobileNavDrawer`（Sheet）。
-- **角丸はサイト全体でフラット（`--radius: 0`）**。`rounded-xl`/`rounded-2xl` の手動付与は禁止（`rounded-none`）。**円形のみ `rounded-full`**（アイコン背景・ピル・アバター）。**例外: 記事系ページ（`ArticleShell` の `.reading-zone` 内）は Soft Editorial で `--radius: 14px`・薄グレー地・2 層ソフトシャドウを採用する**（正典: `docs/01_技術設計/15_デザインシステムSSOT.md`「例外: reading zone」）。home/category/themes/areas/一覧はフラットのまま。
+- **角丸は記事系ページを含むサイト全体でフラット（`--radius: 0`）**。カードやパネルへの `rounded-xl`/`rounded-2xl` の手動付与は禁止し、外枠は `rounded-none` とする。**円形のみ `rounded-full`**（アイコン背景・ピル・アバター）。`ArticleShell` の `.reading-zone` は薄グレー地を維持するが、角丸と影は通常カード（`rounded-none`・`shadow-sm`）に揃える。
 - **本文フォントは system スタック**（游ゴシック/Hiragino、Web フォント非依存）。Inter/Noto Sans JP は読み込まない（コードのみ Geist Mono）。
 
 ## Sticky aside の max-h 必須ルール（★削除禁止・2026-06-06）

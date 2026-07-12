@@ -36,6 +36,8 @@ tags: [実装計画]
 | ~~`20_survey別コンテンツクラスター戦略.md`~~ (廃止) | 2026-07-12 に運用スペックを .claude へ抽出 → `.claude/rules/survey-content-standards.md` (survey-curator 所有・実装は survey-editorial.ts) |
 | `21_ランキングサムネイルAB表示仕様.md`  | ランキングリンクカードの地図型A・数値型Bを使い分けるSSOT、実装手順、受入条件                  |
 | `22_運営者カード・ホーム広告整理仕様.md` | 全ページ共通の運営者プロモとホーム汎用アフィを撤去し、プロフィールと文脈広告を整理する仕様     |
+| `23_ブログOGP生成AIパイプライン仕様.md`  | Geminiで記事別の文字なし背景を生成し、既存Satori合成・R2配信へ安全に統合するClaude Code実装仕様 |
+| `24_テーマ分類再編成方針.md`             | 22テーマを固定せず、全レビュー後にkeep/split/merge/parent-hubで再編する分類・URL移行方針         |
 
 ## 関連（このフォルダ外の正典）
 

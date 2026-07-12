@@ -205,6 +205,29 @@ node .claude/scripts/ogp/build-image-gallery.mjs --audit
 
 ---
 
+## 5.6 ページ hero 画像 (page hero) — テーマ / カテゴリ
+
+OGP・カード・note カバーとは別の種別で、**ページ本文の先頭に表示する装飾 hero バナー**の画像。
+テーマページ (`/themes/*`) とカテゴリページ (`/category/*`) のうち、hero を用意したページだけが
+`HeroBanner` (画像 + 実 DOM テキストの見出し・タグライン) を描画する (全ページ既定は `PageHeader`)。
+
+| 項目 | 内容 |
+|---|---|
+| **SSOT (設定 + プロベナンス)** | `apps/web/src/components/layout/page-heroes.ts` (`THEME_HEROES` / `CATEGORY_HEROES` = git TS)。型は `PageHeroDef` / 画像は `HeroImageAsset` (1 枚を複数ページで参照共有可) |
+| 配信画像 | `apps/web/public/images/<name>.webp` (静的アセット。R2 ではない) |
+| 元画像 | `docs/assets/<name>.png` (外部 AI 生成の PNG。再生成の入力) |
+| サイズ・比率 | 生成 **3:2 (1536×1024)** → `HeroBanner` が左=テキスト / 右=画像の side-by-side で表示 (画像は object-cover) |
+| 生成方式 | 外部 AI 画像生成 (Codex / Imagen 等) で **文字なし背景**を生成 → Sharp で webp 化。見出し・タグラインは**実 DOM テキスト**で重ねる (OGP と同じ家ルール: AI 画像に日本語・数字を焼き込まない) |
+| プロベナンス | 各 `HeroImageAsset` に `prompt` / `aspectRatio` / `regenerate` (webp 再生成コマンド) / `sourceImage` を記録。タグラインの数値は `taglineFacts` に出典 (R2 + 年度) を明記 (`evidence-based-judgment.md`) |
+| 改善 | プロンプトは `page-heroes.ts` の `HeroImageAsset.prompt` を直す (記事ごとの自由入力プロンプトは持たせない = OGP と同じ方針) |
+
+**監査・ギャラリー・agent 所有は現時点で意図的に未整備** (hero は実質 1 枚のため過剰投資を避ける、`最小SSOT整備` 判断)。
+hero が数枚に増えたら: (a) gallery `/assets` に「ページ hero」タブ追加 (`ASSET_TABS` + collector)、
+(b) `/audit-ogp-images` に欠落検知を配線、(c) `image-prompt-curator` の守備範囲に page hero を追加、を行う。
+それまでは page-heroes.ts の git TS SSOT + プロベナンスで管理する (欠落検知は type-check + 手動確認)。
+
+---
+
 ## 6. 関連
 
 - ギャラリー生成: `.claude/scripts/ogp/build-image-gallery.mjs`
@@ -214,6 +237,8 @@ node .claude/scripts/ogp/build-image-gallery.mjs --audit
   `apps/web/scripts/lib/blog-ogp-visual.ts` / Gemini クライアント `apps/web/scripts/lib/gemini-image-client.ts` /
   合成 `apps/web/scripts/lib/blog-thumbnail-render.ts` (`normalizeAiBackground`) / 生成 `apps/web/scripts/generate-blog-thumbnails-cloud.ts`
   (`--ai-background`) / 目視 `npm run gallery` → /assets「ブログ OGP パイロット (local)」タブ
+- **ページ hero (§5.6)**: SSOT `apps/web/src/components/layout/page-heroes.ts` (`THEME_HEROES` / `CATEGORY_HEROES` + プロベナンス) /
+  描画 `apps/web/src/components/layout/HeroBanner.tsx` / テーマ差し替え `features/theme-dashboard/components/ThemeHero.tsx`
 - 画像プロンプト: `.claude/skills/image-prompt/SKILL.md` / `reference/catalog.md`
 - OGP コンポーネント: `apps/web/src/features/ogp/`
 - R2 キー設計: `.claude/rules/r2-storage-design.md`

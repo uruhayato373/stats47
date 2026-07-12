@@ -8,8 +8,8 @@
  * - アプリケーション名と説明
  * - スタートURL（/）
  * - 表示モード（standalone: アプリとして表示）
- * - テーマカラー（#4f46e5: Indigo-600）
- * - アイコン（favicon.ico, icon-192.png, icon-512.png）
+ * - テーマカラー（ブランドブルー #2563EB）
+ * - アイコン（favicon.svg/ico, PWA standard/maskable）
  * - カテゴリ（statistics, data, visualization）
  *
  * アーキテクチャ:
@@ -33,21 +33,33 @@ export default function manifest(): MetadataRoute.Manifest {
     start_url: "/",
     display: "standalone",
     background_color: "#ffffff",
-    theme_color: "#4f46e5", // Indigo-600 (Tailwind)
+    theme_color: "#2563EB",
     icons: [
       {
-        src: "/favicon.ico",
+        src: "/favicon.svg",
         sizes: "any",
-        type: "image/x-icon",
+        type: "image/svg+xml",
       },
       {
         src: "/icon-192.png",
         sizes: "192x192",
         type: "image/png",
-        purpose: "maskable",
+        purpose: "any",
       },
       {
         src: "/icon-512.png",
+        sizes: "512x512",
+        type: "image/png",
+        purpose: "any",
+      },
+      {
+        src: "/icon-maskable-192.png",
+        sizes: "192x192",
+        type: "image/png",
+        purpose: "maskable",
+      },
+      {
+        src: "/icon-maskable-512.png",
         sizes: "512x512",
         type: "image/png",
         purpose: "maskable",

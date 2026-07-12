@@ -38,7 +38,7 @@ stats47 の UI は、統計データを長時間読むための道具である�
 ## レイアウト
 
 ページ幅、左右レール、ページ余白は `PageShell` が唯一の入口。
-**記事系ページ（blog 詳細 / ranking 詳細 / survey / terms / privacy）だけは `ArticleShell`（reading zone）**を使う（下記「例外: reading zone」/ 2026-07-11）。
+**記事系ページ（blog 詳細 / ranking 詳細 / survey / terms / privacy）だけは `ArticleShell`（reading zone）**を使う（下記「reading zone」/ 2026-07-11）。
 
 ### 採用
 
@@ -203,15 +203,15 @@ stats47 は 2026-06 以降、フラット方針。
 - 円形の意味があるものだけ `rounded-full` を許容する。
 - shadow は `none` / `shadow-sm` / `shadow-md` / overlay 用 `shadow-xl` に限定する。
 
-### 例外: reading zone（記事系ページ・Soft Editorial・2026-07-11）
+### reading zone（記事系ページ・Soft Editorial・2026-07-11、角丸例外は2026-07-12廃止）
 
 記事系ページ（`/blog/[slug]` / `/ranking/[rankingKey]` / `/survey/[surveyKey]` / `/terms` / `/privacy`）は、
-doboku-note から移植した **Soft Editorial** デザインを採用する「reading zone」であり、上記フラット方針の**唯一の例外**。
+doboku-note から移植した **Soft Editorial** デザインを採用する「reading zone」。薄グレー地と紙面調の余白は
+維持するが、角丸と影はサイト全体のフラット方針（角丸なし・`shadow-sm`）に統一する。
 
-- `ArticleShell`（`@/components/layout`）が `.reading-zone` クラスを敷き、その内側だけ `--radius: 14px`・
-  薄グレー地（`--background: 220 20% 97%`）に scoped 上書きする（zone 内の shadcn 部品も自動で角丸化）。
-- 本文カードは `ArticleCard`（`@/components/surface`）= 角丸 14px + 2 層ソフトシャドウ（`.shadow-soft-content` /
-  `.shadow-soft-section`）+ モバイルフルブリード。
+- `ArticleShell`（`@/components/layout`）が `.reading-zone` クラスを敷き、薄グレー地
+  （`--background: 220 20% 97%`）をscoped上書きする。`--radius` は `0` のまま維持する。
+- 本文カードは `ArticleCard`（`@/components/surface`）= 角丸なし + `shadow-sm` + モバイルフルブリード。
 - レイアウトは 1280px コンテナ + flex 密着（`PageShell` の 1700px grid で本文を 760px 制限すると生じる
   「本文と右レールが離れる」問題を根治）。レールは「非 sticky 上段 + sticky TOC クラスタ末尾」の 2 段構成。
 - タイポグラフィ `.blog-news-article`（`globals.css`）= 本文 16px / 行間 1.8 / 字間 0.03em、H2 装飾なし・
@@ -233,7 +233,7 @@ doboku-note から移植した **Soft Editorial** デザインを採用する「
 ### Blog
 
 - 一覧・タグの外側レイアウトは `PageShell` を使う（フラット）。
-- **記事詳細（`/blog/[slug]`）は `ArticleShell`（reading zone）**を使う（上記「例外: reading zone」）。
+- **記事詳細（`/blog/[slug]`）は `ArticleShell`（reading zone）**を使う（上記「reading zone」）。
   本文は `ArticleCard`、右レールは `rail`（関連・広告）+ `railSticky`（TOC）の 2 段構成。lg 未満ではレールを本文下へ積み下ろす。
 - 記事本文 typography は `.blog-article` または承認済み renderer に集約する。
 
