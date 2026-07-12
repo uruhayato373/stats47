@@ -30,7 +30,7 @@ tags: [実装計画]
 | `14_収益化実装方針.md`                   | 収益化の実装詳細（広告配置・計測）                                                             |
 | ~~`15_ブログSEO拡充戦略.md`~~ (廃止)     | 2026-07-12 に SSOT を .claude へ一本化 → `.claude/agents/blog-seo-strategist.md` §戦略コンテキスト |
 | `16_月間100万PVロードマップ.md`          | トラフィック層の長期計画（T1-T4 フェーズ・レバー別施策カタログ）。PV は先行指標で NSM ではない |
-| `17_家計調査論点カタログ.md`             | 家計調査コンテンツ拡充の論点・品目カタログ                                                     |
+| ~~`17_家計調査論点カタログ.md`~~ (移設) | 2026-07-12 に .claude reference へ → `.claude/skills/blog/draft-from-trend/reference/kakei-topic-catalog.md` |
 | `18_テーマ指標チャート改善運用.md`       | ThemeCatalog の指標選定・チャート提案・Claude Code 実装・検証を1テーマずつ回す運用             |
 | `19_テーマ定義・注意事項カード仕様.md`   | テーマページの定義・誤読防止カード共通仕様と4テーマ分の文靠・Claude Code実装指示               |
 | ~~`20_survey別コンテンツクラスター戦略.md`~~ (廃止) | 2026-07-12 に運用スペックを .claude へ抽出 → `.claude/rules/survey-content-standards.md` (survey-curator 所有・実装は survey-editorial.ts) |
