@@ -1,15 +1,5 @@
 {
-  "hash": "ec794628cdd0d4d645dc61b80c93e8ca3cedf44a2adbb8a620cc17da9e6c7468",
-  "audited_at": "2026-07-12T04:57:55",
-  "files": [
-    ".claude/agents/blog-seo-strategist.md",
-    ".claude/scripts/blog/analyze-winning-patterns.mjs",
-    ".claude/scripts/blog/compose-daily-rewrite-issue.mjs",
-    ".claude/scripts/blog/measure-gsc-impact.mjs",
-    ".claude/skills/analytics/gsc-coverage-remediation/SKILL.md",
-    ".claude/skills/blog/brushup-blog/SKILL.md",
-    ".claude/skills/management/expand-rankings/SKILL.md",
-    ".claude/skills/management/weekly-plan/SKILL.md",
-    ".claude/skills/management/weekly-review/SKILL.md"
-  ]
+  "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "audited_at": "2026-07-12T05:18:23",
+  "files": []
 }
