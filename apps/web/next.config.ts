@@ -49,8 +49,12 @@ const nextConfig: NextConfig = {
   // trailing slash を統一（/ranking/ → /ranking にリダイレクト）
   trailingSlash: false,
   typescript: {
-    // ビルド時にTypeScriptエラーチェックを実行する
-    ignoreBuildErrors: false,
+    // ビルド時の TypeScript 型検査。既定 (ローカル / deploy=workers:build) は実行する。
+    // PR CI の build job だけ NEXT_SKIP_BUILD_TYPECHECK=true を渡してスキップし、
+    // 並列で走る独立の必須 type-check job (pr-quality-check.yml) に一本化して重複を解消する
+    // (集約 job quality-check が type-check job を needs するため、型検査の必須性は維持)。
+    // 本番 deploy (CLOUDFLARE_WORKERS=true・env 未設定) と localhost では従来どおり型検査する。
+    ignoreBuildErrors: process.env.NEXT_SKIP_BUILD_TYPECHECK === "true",
   },
   eslint: {
     // ビルド時にESLintエラーを無視する（警告は表示される）

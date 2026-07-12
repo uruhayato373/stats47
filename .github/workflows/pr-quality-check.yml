@@ -303,6 +303,11 @@ jobs:
           NEXT_PUBLIC_BASE_URL: https://stats47.jp
           NEXT_PUBLIC_ESTAT_APP_ID: ${{ secrets.NEXT_PUBLIC_ESTAT_APP_ID }}
           NODE_OPTIONS: "--max-old-space-size=4096"
+          # Phase 4(a): この build job だけ next build 内の型検査をスキップ (Phase 4 / next.config.ts の
+          # ignoreBuildErrors env ゲート)。並列で走る必須 type-check job (npm run type-check = 全 workspace)
+          # がカバーし、集約 job quality-check が type-check を needs するため型検査の必須性は維持される。
+          # localhost / deploy(workers:build) は env 未設定で従来どおり型検査する。
+          NEXT_SKIP_BUILD_TYPECHECK: "true"
         continue-on-error: false # ビルドエラーで失敗させる
 
   remote-asset-audit:
