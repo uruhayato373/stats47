@@ -81,7 +81,7 @@ jobs:
 
       - name: 💬 Comment posting result on issue #127
         if: success() && steps.post.outputs.permalink != ''
-        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         with:
           script: |
             const date = "${{ steps.post.outputs.post_date }}";
@@ -101,7 +101,7 @@ jobs:
 
       - name: 💬 Comment failure on issue #127
         if: failure()
-        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         with:
           script: |
             const date = process.env.IG_FORCE_DATE || new Date(Date.now() + 9*3600*1000).toISOString().slice(0, 10);
