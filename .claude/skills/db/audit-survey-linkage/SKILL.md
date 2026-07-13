@@ -24,10 +24,16 @@ ranking↔survey 紐付けの監査・是正スキル。**正典: `.claude/rules
 npx tsx packages/ranking/src/scripts/audit-survey-linkage.ts               # 人間向けテーブル
 npx tsx packages/ranking/src/scripts/audit-survey-linkage.ts --json        # 機械向け
 npx tsx packages/ranking/src/scripts/audit-survey-linkage.ts --unresolved  # 未分類の全キー列挙
+npx tsx packages/ranking/src/scripts/audit-survey-linkage.ts --compare-r2  # R2 焼き込み突合 (live item.json vs git 導出。--sample N で間引き)
 ```
 
 レポート: 解決済/未分類 (内訳: ssds-synthetic-only / estat-uncovered / external / calculated) /
-辞書未カバー statsDataId 一覧 / orphan survey / config.surveyId 不正 / survey 別件数。
+辞書未カバー statsDataId 一覧 / orphan survey / config.surveyId 不正 / survey 別件数
+(**perSurvey = 総数、perSurveyActive = isActive のみ = 配信されるべき数**)。
+
+> **active/total を混同しない** (正典 §監査の 2 層): R2 all.json は active のみ配信するため、
+> 全在庫が未公開の調査 (inactive-only) が R2 に無いのは正常。stale (r2-drift) と誤診して
+> sync・公開を要求しない。焼き込みの実測は `--compare-r2` (月次ポートフォリオ監査で実行)。
 
 ### Step 2: 是正 (survey-curator の責務)
 

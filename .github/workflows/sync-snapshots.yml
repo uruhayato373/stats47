@@ -14,7 +14,7 @@ on:
   workflow_dispatch:
     inputs:
       only:
-        description: "対象 task (空=全 task)。例: page-components / blog / master / area-profile / port-statistics / station-passengers"
+        description: "対象 task (空=全 task)。正典は run.sh の TASKS 配列 (.claude/skills/db/sync-snapshots/run.sh)。例: ranking-items / master / page-components / blog / area-profile"
         required: false
         default: ""
       dry_run:
@@ -69,12 +69,14 @@ jobs:
 
       # snapshot 再生成 → R2 push。CI では CI=true が立つため run.sh の push が実行される。
       - name: 🗂️ Regenerate snapshots + push to R2
+        # ARGS は配列で組む: 文字列連結 + "$ARGS" だと全体が 1 引数になり run.sh が
+        # "Unknown arg" で落ちる (2026-07-14 実発生。SC2086 対応 quote で word splitting が消えた regression)
         run: |
-          ARGS=""
-          [ -n "${{ inputs.only }}" ] && ARGS="$ARGS --only ${{ inputs.only }}"
-          [ "${{ inputs.dry_run }}" = "true" ] && ARGS="$ARGS --dry-run"
-          echo "sync-snapshots/run.sh $ARGS"
-          bash .claude/skills/db/sync-snapshots/run.sh "$ARGS"
+          ARGS=()
+          [ -n "${{ inputs.only }}" ] && ARGS+=(--only "${{ inputs.only }}")
+          [ "${{ inputs.dry_run }}" = "true" ] && ARGS+=(--dry-run)
+          echo "sync-snapshots/run.sh ${ARGS[*]}"
+          bash .claude/skills/db/sync-snapshots/run.sh "${ARGS[@]}"
 
       - name: ✅ Verify published git-TS snapshots
         if: inputs.dry_run != 'true'

@@ -176,15 +176,16 @@ jobs:
         if: ${{ steps.detect.outputs.slugs != '' }}
         run: |
           # 公開された記事だけをピンポイントパージ (全ゾーンパージは避ける)。
-          URLS=""
-          for SLUG in $PUBLISHED; do URLS="$URLS https://stats47.jp/blog/$SLUG"; done
-          if [ -z "$(echo "$URLS" | xargs)" ]; then
+          # URLS は配列で組む ("$URLS" 単一引数渡しは purge-cache の URL filter が 0 件になり fail — ARG_VECTOR_QUOTED)
+          URLS=()
+          for SLUG in $PUBLISHED; do URLS+=("https://stats47.jp/blog/$SLUG"); done
+          if [ ${#URLS[@]} -eq 0 ]; then
             echo "公開0件のため purge skip"; exit 0
           fi
           # 記事追加で内容が変わる索引系もパージ
-          URLS="$URLS https://stats47.jp/blog https://stats47.jp/ https://stats47.jp/sitemap.xml"
-          echo "purge: $URLS"
-          npx tsx packages/r2-storage/src/scripts/purge-cache.ts --urls "$URLS"
+          URLS+=(https://stats47.jp/blog https://stats47.jp/ https://stats47.jp/sitemap.xml)
+          echo "purge: ${URLS[*]}"
+          npx tsx packages/r2-storage/src/scripts/purge-cache.ts --urls "${URLS[@]}"
 
       # docs/21 は ephemeral outbox: 公開に成功した slug のドラフトを R2 反映後に削除し、
       # commit-back する。これで docs/21 は常に空 (未公開ドラフトのみ) に保たれ、R2(正典)と

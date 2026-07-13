@@ -50,7 +50,7 @@ const EDITORIAL = new Set([
   "fallback", "candidate", "audit-ready", "implemented", "measuring", "validated", "rejected",
 ]);
 const EDITORIAL_IMPLEMENTED = new Set(["implemented", "measuring", "validated"]);
-const LINKAGE_STATUS = new Set(["ok", "r2-drift", "orphan", "unknown"]);
+const LINKAGE_STATUS = new Set(["ok", "r2-drift", "inactive-only", "orphan", "unknown"]);
 const METRIC_STATUS = new Set(["measured", "measured-low", "insufficient-data", "not-instrumented"]);
 // measured-low で保存を許可するカウント値 (比率値は標本不足でノイズ支配のため保存禁止 — README §判定規律)
 const MEASURED_LOW_COUNT_FIELDS: Record<string, Set<string>> = {
@@ -154,15 +154,21 @@ function validatePortfolio(pf: any) {
       }
     }
 
-    // S6: orphan の整合
+    // S6: orphan / inactive-only / r2-drift の整合 (未公開を stale と混同した誤診の防止 — 2026-07-14 教訓)
     if (s.orphanStatus === true && s.linkageStatus !== "orphan")
       v("S6", `${id}: orphanStatus=true なのに linkageStatus=${s.linkageStatus}`);
     if (s.itemCount === 0 && s.orphanStatus !== true)
       v("S6", `${id}: itemCount=0 なのに orphanStatus=${s.orphanStatus}`);
+    if (s.linkageStatus === "inactive-only" && !(s.activeItemCount === 0 && s.itemCount > 0))
+      v("S6", `${id}: inactive-only なのに activeItemCount=${s.activeItemCount} / itemCount=${s.itemCount} (定義: active 0 かつ在庫 > 0)`);
+    if (s.linkageStatus === "r2-drift" && !(typeof s.activeItemCount === "number" && s.activeItemCount > 0))
+      v("S6", `${id}: r2-drift は activeItemCount > 0 が前提 (active 0 なら inactive-only = R2 不在は正常)`);
     if (s.orphanStatus === true)
       w("S6", `${id}: orphan (item 0 件) — surveys.json からの物理削除を survey-curator が判断`);
     if (s.linkageStatus === "r2-drift")
-      w("S6", `${id}: R2 app/survey/all.json に不在 (master snapshot が stale) — sync-snapshots (ranking-items → master) を CI へ委譲`);
+      w("S6", `${id}: active item があるのに R2 all.json に不在 (真の stale) — sync-snapshots (ranking-items → master) を CI へ委譲`);
+    if (s.linkageStatus === "inactive-only")
+      w("S6", `${id}: 在庫 ${s.itemCount} 件すべて未公開 (isActive:false) — 公開判断は ranking-publisher / expansion queue (R2 不在は正常)`);
   }
   // マスタ側の取りこぼし (双方向一致)
   for (const id of masterIds) if (!ids.has(id)) v("S1", `surveys.json の ${id} が portfolio に無い (build を再実行)`);

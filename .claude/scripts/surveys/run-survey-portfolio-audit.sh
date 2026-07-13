@@ -9,19 +9,22 @@
 set -euo pipefail
 cd "$(dirname "$0")/../../.."
 
-echo "── 1/5 build (機械項目の再導出: 紐付け監査 + R2 + editorial) ──"
+echo "── 1/6 build (機械項目の再導出: 紐付け監査 + R2 + editorial) ──"
 npx tsx .claude/scripts/surveys/build-survey-portfolio.ts
 
-echo "── 2/5 aggregate (56d 実測: GSC/GA4 非重複 2 窓) ──"
+echo "── 2/6 compare-r2 (R2 焼き込み突合: live item.json vs git 導出) ──"
+npx tsx packages/ranking/src/scripts/audit-survey-linkage.ts --compare-r2 | tail -8
+
+echo "── 3/6 aggregate (56d 実測: GSC/GA4 非重複 2 窓) ──"
 npx tsx .claude/scripts/surveys/aggregate-survey-metrics.ts
 
-echo "── 3/5 validate (判定規律 + editorial drift) ──"
+echo "── 4/6 validate (判定規律 + editorial drift) ──"
 npx tsx .claude/scripts/surveys/validate-survey-portfolio.ts
 
-echo "── 4/5 実験期日チェック ──"
+echo "── 5/6 実験期日チェック ──"
 node .claude/scripts/surveys/evaluate-survey-experiments.mjs --check
 
-echo "── 5/5 drift (git HEAD との差分) ──"
+echo "── 6/6 drift (git HEAD との差分) ──"
 node --input-type=module <<'EOF'
 import { execFileSync } from "node:child_process";
 import fs from "node:fs";

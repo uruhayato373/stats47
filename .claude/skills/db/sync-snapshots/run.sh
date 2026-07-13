@@ -68,6 +68,7 @@ run_task() {
 }
 
 FAILED=()
+MATCHED=0
 for task in "${TASKS[@]}"; do
   label="${task%|*}"
   script="${task##*|}"
@@ -75,11 +76,21 @@ for task in "${TASKS[@]}"; do
   if [ -n "$ONLY" ] && [ "$ONLY" != "$label" ]; then
     continue
   fi
+  MATCHED=$((MATCHED + 1))
 
   if ! run_task "$label" "$script"; then
     FAILED+=("$label")
   fi
 done
+
+# ★silent no-op ガード (2026-07-14): --only の typo / 未登録 task 名だと 0 件実行のまま
+# 「✅ 完了」で exit 0 になり、呼び元 (CI dispatch) が成功と誤認する事故が実発生した。
+# 1 件もマッチしなければ有効な task 名を提示して fail する。
+if [ -n "$ONLY" ] && [ "$MATCHED" -eq 0 ]; then
+  echo "❌ --only '$ONLY' に一致する task がありません。有効な task:"
+  for task in "${TASKS[@]}"; do echo "  - ${task%|*}"; done
+  exit 1
+fi
 
 echo ""
 echo "════════════════════════════════════════"

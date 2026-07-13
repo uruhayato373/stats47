@@ -60,11 +60,12 @@ jobs:
 
       - name: 🧹 Cleanup posted SNS videos
         run: |
-          ARGS="--retention-days ${{ inputs.retention_days || '30' }}"
+          # ARGS は配列で組む ("$ARGS" 単一引数渡しは 1 トークン化する — ARG_VECTOR_QUOTED)
+          ARGS=(--retention-days "${{ inputs.retention_days || '30' }}")
           # schedule 実行 (inputs なし) は実削除、dispatch は dry_run 入力に従う
           if [ "${{ github.event_name }}" = "schedule" ] || [ "${{ inputs.dry_run }}" = "false" ]; then
-            ARGS="$ARGS --execute"
+            ARGS+=(--execute)
           fi
-          echo "cleanup-posted-sns-videos.ts $ARGS"
-          npx tsx packages/r2-storage/src/scripts/cleanup-posted-sns-videos.ts "$ARGS" 2>&1 \
+          echo "cleanup-posted-sns-videos.ts ${ARGS[*]}"
+          npx tsx packages/r2-storage/src/scripts/cleanup-posted-sns-videos.ts "${ARGS[@]}" 2>&1 \
             | grep -vE '^\{"level"' | tee -a "$GITHUB_STEP_SUMMARY"

@@ -45,14 +45,15 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          FLAGS=""
+          # FLAGS は配列で組む ("$FLAGS" 単一引数渡しは 1 トークン化する — ARG_VECTOR_QUOTED)
+          FLAGS=()
           if [ -n "${{ inputs.cycle }}" ]; then
-            FLAGS="$FLAGS --cycle ${{ inputs.cycle }}"
+            FLAGS+=(--cycle "${{ inputs.cycle }}")
           fi
           if [ "${{ inputs.no_issue }}" = "true" ]; then
-            FLAGS="$FLAGS --no-issue"
+            FLAGS+=(--no-issue)
           fi
-          node .claude/scripts/cloudflare/monthly-snapshot.mjs "$FLAGS"
+          node .claude/scripts/cloudflare/monthly-snapshot.mjs "${FLAGS[@]}"
 
       - name: 💾 Commit snapshot to develop
         run: |

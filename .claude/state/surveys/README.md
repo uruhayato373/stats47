@@ -42,10 +42,15 @@
       "name": "国勢調査",                   // surveys.json から転記 (drift 検知用)
       "organization": "総務省統計局",
       "lifecycleStatus": "improve",         // 下記 enum (意味項目)
-      "linkageStatus": "ok",                // "ok" | "r2-drift" (R2 master に不在) | "orphan" | "unknown" (R2 未取得)
+      "linkageStatus": "ok",                // "ok" | "r2-drift" (active があるのに R2 不在 = 真の stale) |
+                                            // "inactive-only" (在庫全て未公開 = R2 不在は正常・公開判断は publisher) |
+                                            // "orphan" | "unknown" (R2 未取得)
       "editorialStatus": "measuring",       // 下記 enum (意味項目。ただし exists との整合を validator が検査)
-      "itemCount": 312,                     // 監査スクリプト perSurvey (git 導出 = 次回配信値)
-      "activeItemCount": 300,               // R2 app/survey/all.json の itemCount (本番配信中)
+      "itemCount": 312,                     // 監査 perSurvey = git 導出の総数 (inactive 含む「登録済み在庫」)
+      "activeItemCount": 300,               // 監査 perSurveyActive = git 導出 × isActive (= 配信されるべき数)
+      "liveItemCount": 300,                 // R2 app/survey/all.json の itemCount (本番配信中)。
+                                            // ※ live は非 prefecture areaType (市区町村等) も含むため
+                                            //   activeItemCount (prefecture のみ) より大きくなり得る (件数比較は目安)
       "latestDataYear": null,               // R2 values 実測から。集計 script では埋めない (survey→items→values の多段 fetch が重い) — editorial 候補の個別事前監査で記入。未確認は null
       "unresolvedItemCount": null,          // 原則 null (未分類は survey 帰属不能 → linkage が正)。個別調査で確定した場合のみ数値
       "orphanStatus": false,                // itemCount === 0
@@ -167,3 +172,4 @@
 | 期間重複 snapshot の合算・非開示 query の推測補完 | 非重複窓のみ合算・開示分のみ記録 |
 | `docs/todo/01_改善バックログ.md` へ直接書く | improvement-triage へ引き渡す |
 | 紐付けの別ロジックで itemCount を数える | audit-survey-linkage の実測値を転記 |
+| 未公開 (inactive-only) を stale (r2-drift) と混同して sync/公開を要求 | active/total の区別で判定 (2026-07-14 教訓)。焼き込みの実測突合は `audit-survey-linkage.ts --compare-r2` |

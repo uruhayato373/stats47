@@ -86,12 +86,13 @@ jobs:
       # e-Stat → .local/r2/app/stats (観測値 R2 直書き)。dry_run=true なら fetch のみ。
       - name: 📊 page-data-batch (e-Stat fetch)
         run: |
-          ARGS=""
-          [ -n "${{ inputs.metric }}" ] && ARGS="$ARGS --metric ${{ inputs.metric }}"
-          [ -n "${{ inputs.since }}" ] && ARGS="$ARGS --since ${{ inputs.since }}"
-          [ "${{ inputs.dry_run }}" = "true" ] && ARGS="$ARGS --dry-run"
-          echo "page-data-batch.ts $ARGS"
-          npx tsx packages/data-configs/scripts/page-data-batch.ts "$ARGS"
+          # ARGS は配列で組む ("$ARGS" 単一引数渡しは 1 トークン化する — ARG_VECTOR_QUOTED)
+          ARGS=()
+          [ -n "${{ inputs.metric }}" ] && ARGS+=(--metric "${{ inputs.metric }}")
+          [ -n "${{ inputs.since }}" ] && ARGS+=(--since "${{ inputs.since }}")
+          [ "${{ inputs.dry_run }}" = "true" ] && ARGS+=(--dry-run)
+          echo "page-data-batch.ts ${ARGS[*]}"
+          npx tsx packages/data-configs/scripts/page-data-batch.ts "${ARGS[@]}"
 
       # 観測値を R2 に push (app/stats)。schedule 実行 (inputs.dry_run='') では push される。
       - name: ☁️ Push observations to R2 (app/stats)
