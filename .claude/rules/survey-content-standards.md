@@ -9,7 +9,8 @@ agent (`survey-curator`) / 人間はこれに従う。2026-07-12 に旧 `docs/02
 > (`summary` / `whatYouCanLearn[]` / `readerQuestions[]{question,rankingKey}` / `caveats[]` / `relatedArticleSlugs[]`)。
 > **紐付け (ranking↔survey) の正典は別**: `.claude/rules/survey-linkage-standards.md` (surveys.json / provenance)。
 > 本 rule は**編集コンテンツ**、linkage-standards は**紐付けメタ**。両方 survey-curator が所有する。
-> 横展開の進捗・census 実験の計測は handoff `docs/handoffs/2026-07-11-survey-content-cluster.md` + 機能バックログが追跡。
+> 横展開の進捗・census 実験の計測は `.claude/state/surveys/{portfolio,experiments}.json`
+> (survey-curator / skill `/manage-survey-portfolio`) が追跡 (2026-07-13 に handoff から移行)。
 
 ## ファネル役割 (維持する・混ぜない)
 
@@ -106,7 +107,7 @@ R2 app/survey/<id>/items.json
 
 - 紐付けメタ (別正典): `.claude/rules/survey-linkage-standards.md`
 - 実装 SSOT: `apps/web/src/features/survey/survey-editorial.ts`
-- 横展開・census 実験の進捗: `docs/handoffs/2026-07-11-survey-content-cluster.md`
+- 横展開・census 実験の進捗: `.claude/state/surveys/{portfolio,experiments}.json` (skill `/manage-survey-portfolio`・schema は `.claude/state/surveys/README.md`)
 - 情報設計 (ファネル役割): `docs/01_技術設計/07_情報設計.md`
 - 品質基準 (blog 側): `.claude/rules/blog-quality-standards.md` / 実証判定: `.claude/rules/evidence-based-judgment.md`
 - agent: `survey-curator` (編集コンテンツ + 紐付け) / 生成は article-writer / 監査は `/audit-survey-linkage`

@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "experiments": [
+    {
+      "experimentId": "SURVEY-EXP-001",
+      "surveyId": "census",
+      "hypothesis": "調査固有の編集ハブ (この調査で分かること / 実在 ranking への問い 5 件 / 母数・周期・因果の注意 / census 固有 metadata description) により、/survey/census の impressions と検索意図一致が改善する",
+      "changeType": "editorial-hub",
+      "baselinePeriod": {
+        "from": "2026-06-12",
+        "to": "2026-07-09"
+      },
+      "startedAt": "2026-07-12",
+      "evaluateAt7d": "2026-07-19",
+      "evaluateAt28d": "2026-08-09",
+      "evaluateAt56d": "2026-09-06",
+      "primaryKpi": "gsc.impressions",
+      "guardrailKpis": [
+        "gsc.averagePosition",
+        "gsc.ctr"
+      ],
+      "baseline": {
+        "gsc.impressions": 23,
+        "gsc.clicks": 0,
+        "gsc.ctr": 0,
+        "gsc.averagePosition": 25.43
+      },
+      "observations": {
+        "d7": null,
+        "d28": null,
+        "d56": null
+      },
+      "verdict": "pending",
+      "notes": "baseline は GSC W27 snapshot (last-28d 窓 ≒ 2026-06-12〜2026-07-09)。impressions 23 (<100) のため CTR 効果は確定不可になり得る (insufficient-data を許容)。開示 query は 7 impressions 分のみで『国勢調査を使った都道府県人口』の一般探索が中心 (非開示分を推測補完しない)。d7 はインデックス/canonical/404/計測異常の検知のみ。判定時はサイト全体の imp 変動を併記する",
+      "evidenceRefs": [
+        ".claude/skills/survey/manage-survey-portfolio/reference/reviews/2026-07-11-survey-census.md"
+      ],
+      "implementationRef": "apps/web/src/features/survey/survey-editorial.ts (commit fc1fbb49 / develop→main PR #567 merge 2026-07-12・本番 live を 2026-07-13 curl 実測)"
+    }
+  ]
+}
