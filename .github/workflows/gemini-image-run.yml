@@ -140,7 +140,7 @@ jobs:
           git rm -q data/gemini-image-requests.json
           git commit -q -m "chore(gemini): consume image request [skip ci]"
           # 他 workflow の push と競合しても落ちないよう rebase してから push (最大3回)
-          for i in 1 2 3; do
+          for _ in 1 2 3; do
             if git push origin develop; then break; fi
             git pull --rebase origin develop
           done
