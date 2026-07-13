@@ -474,6 +474,11 @@ jobs:
         run: npx playwright install --with-deps chromium
 
       - name: ♿ Run representative axe checks
+        # webServer (next dev) が validate-env.ts の必須 env を要求するため build job と同じ値を渡す
+        # (Phase 2 並列分割で env が build job のみになり dev server が起動不能だった是正)。
+        env:
+          NEXT_PUBLIC_BASE_URL: https://stats47.jp
+          NEXT_PUBLIC_ESTAT_APP_ID: ${{ secrets.NEXT_PUBLIC_ESTAT_APP_ID }}
         run: npx playwright test tests/e2e/accessibility/representative-routes.spec.ts --project=e2e-chromium
         working-directory: apps/web
 

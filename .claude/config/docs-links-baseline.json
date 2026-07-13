@@ -67,6 +67,10 @@
       "referrer": ".claude/rules/survey-content-standards.md"
     },
     {
+      "ref": "docs/02_実装計画/20_survey別コンテンツクラスター戦略.md",
+      "referrer": ".claude/skills/survey/manage-survey-portfolio/reference/surveyポートフォリオ運用.md"
+    },
+    {
       "ref": "docs/02_実装計画/archive/goal-skill-design.md",
       "referrer": ".claude/skills/management/goal/SKILL.md"
     },
@@ -155,6 +159,14 @@
       "referrer": "docs/04_レビュー/2026-07-03-claude-code-setup-audit.md"
     },
     {
+      "ref": "docs/04_レビュー/2026-07-11-survey-census-cluster-audit.md",
+      "referrer": ".claude/skills/survey/manage-survey-portfolio/reference/reviews/2026-07-11-survey-census.md"
+    },
+    {
+      "ref": "docs/04_レビュー/2026-07-11-survey-wage-structure-audit.md",
+      "referrer": ".claude/skills/survey/manage-survey-portfolio/reference/reviews/2026-07-11-survey-wage-structure-survey.md"
+    },
+    {
       "ref": "docs/04_レビュー/2026-07-12-build-performance-audit.md",
       "referrer": "docs/todo/02_機能バックログ.md"
     },
@@ -225,6 +237,10 @@
     {
       "ref": "docs/handoffs/2026-07-10-note-cover-redesign.md",
       "referrer": "docs/todo/01_改善バックログ.md"
+    },
+    {
+      "ref": "docs/handoffs/2026-07-11-survey-content-cluster.md",
+      "referrer": ".claude/skills/survey/manage-survey-portfolio/reference/audits/2026-07-13-survey-portfolio-audit.md"
     },
     {
       "ref": "docs/rules/CLAUDE.md",
