@@ -59,7 +59,7 @@
       ]
     },
     {
-      "name": "CHECK_RUNTIME_CONFIG",
+      "name": "CATALOG_INDEX",
       "visibility": "server",
       "contexts": [
         "process"
@@ -67,6 +67,13 @@
     },
     {
       "name": "CHECKER_WIRING_BASELINE",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "CHECK_RUNTIME_CONFIG",
       "visibility": "server",
       "contexts": [
         "process"
@@ -317,14 +324,14 @@
       ]
     },
     {
-      "name": "HTTP_PROXY",
+      "name": "HTTPS_PROXY",
       "visibility": "server",
       "contexts": [
         "process"
       ]
     },
     {
-      "name": "HTTPS_PROXY",
+      "name": "HTTP_PROXY",
       "visibility": "server",
       "contexts": [
         "process"
@@ -573,14 +580,14 @@
       ]
     },
     {
-      "name": "NO_PROXY",
+      "name": "NODE_ENV",
       "visibility": "server",
       "contexts": [
         "process"
       ]
     },
     {
-      "name": "NODE_ENV",
+      "name": "NO_PROXY",
       "visibility": "server",
       "contexts": [
         "process"
@@ -694,6 +701,20 @@
     },
     {
       "name": "SNS_R2_BASE",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "STATE_DIR",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "SURVEYS_JSON",
       "visibility": "server",
       "contexts": [
         "process"
