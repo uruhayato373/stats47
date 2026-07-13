@@ -10,9 +10,12 @@
  *   P1 themeKey 一意 / 必須フィールド / enum 値
  *   P2 catalogStatus が ThemeCatalog 登録状況 (theme-catalog/index.ts) と一致
  *   P3 merge/split/rename/retire 候補は evidenceRefs >= 2
- *   P4 merge/retire 候補は metrics.gsc.status === "measured" かつ windowDays >= 56
- *      (データ不足を需要不足と混同した廃止判定の禁止)
- *   P5 metrics.*.status が measured 以外のとき数値フィールドを持たない (推測値の混入防止)
+ *   P4 merge/retire 候補は GSC/GA4 両方が集計済み (measured | measured-low) かつ windowDays >= 56
+ *      (データ不足 = 未集計を需要不足と混同した廃止判定の禁止。需要不足の証拠は
+ *       measured-low のカウント値で示す — 2026-07-13 改訂、根拠は state README §判定規律 2)
+ *   P5 metrics.*.status ごとの許可数値フィールド (推測値・標本不足比率の混入防止):
+ *      measured = 制限なし / measured-low = カウント値のみ (gsc: clicks,impressions / ga4: pageViews)
+ *      insufficient-data・not-instrumented = windowDays のみ
  *   E1 experimentId 一意
  *   E2 同一 themeKey × changeType の pending 実験は 1 件まで (重複実験防止)
  *   E3 baseline 必須 / verdict enum / verdict 確定時は result + evidenceRefs 必須
@@ -42,7 +45,12 @@ const LIFECYCLE = new Set([
 ]);
 const REVIEW_STATUS = new Set(["reviewed", "review-missing", "stale"]);
 const CATALOG_STATUS = new Set(["catalog", "legacy"]);
-const METRIC_STATUS = new Set(["measured", "insufficient-data", "not-instrumented"]);
+const METRIC_STATUS = new Set(["measured", "measured-low", "insufficient-data", "not-instrumented"]);
+// measured-low で保存を許可するカウント値 (比率値は標本不足でノイズ支配のため禁止 — README §判定規律)
+const MEASURED_LOW_COUNT_FIELDS = {
+  gsc: new Set(["clicks", "impressions"]),
+  ga4: new Set(["pageViews"]),
+};
 const VERDICT = new Set([
   "pending", "effect-full", "effect-partial", "effect-none",
   "effect-adverse", "insufficient-data", "aborted",
@@ -110,23 +118,28 @@ function validatePortfolio(pf) {
         v("P3", `${k}: ${t.lifecycleStatus} には evidenceRefs >= 2 が必須 (現在 ${refs.length})`);
     }
 
-    // P4: merge/retire は 56 日以上の measured GSC が必須
+    // P4: merge/retire は GSC/GA4 両方が「集計済み」(measured | measured-low) かつ 56 日以上が必須
     if (HARD_CANDIDATES.has(t.lifecycleStatus)) {
-      const gsc = t.metrics?.gsc;
-      if (!gsc || gsc.status !== "measured" || !(gsc.windowDays >= 56)) {
-        v("P4", `${k}: ${t.lifecycleStatus} には metrics.gsc.status=measured かつ windowDays>=56 が必須` +
-          ` (データ不足を需要不足と混同した廃止判定の禁止)`);
+      const aggregated = (m) => m && (m.status === "measured" || m.status === "measured-low") && m.windowDays >= 56;
+      if (!aggregated(t.metrics?.gsc) || !aggregated(t.metrics?.ga4)) {
+        v("P4", `${k}: ${t.lifecycleStatus} には GSC/GA4 両方の集計済み (measured|measured-low) かつ windowDays>=56 が必須` +
+          ` (未集計=データ不足を需要不足と混同した廃止判定の禁止)`);
       }
     }
 
-    // P5: 非 measured の metrics に数値を持たせない (推測値の混入防止)
+    // P5: status ごとの許可数値フィールド (推測値・標本不足比率の混入防止)
     for (const [name, m] of Object.entries(t.metrics ?? {})) {
       if (!m || typeof m !== "object") continue;
       if (!METRIC_STATUS.has(m.status)) { v("P5", `${k}: metrics.${name}.status 不正 (${m.status})`); continue; }
-      if (m.status !== "measured") {
-        const numeric = Object.entries(m).filter(([kk, vv]) => kk !== "windowDays" && typeof vv === "number");
-        if (numeric.length > 0)
-          v("P5", `${k}: metrics.${name} は ${m.status} なのに数値 (${numeric.map(([kk]) => kk).join(",")}) を持つ — 推測値を保存しない`);
+      if (m.status === "measured") continue; // 制限なし
+      const numeric = Object.entries(m).filter(([kk, vv]) => kk !== "windowDays" && typeof vv === "number");
+      if (m.status === "measured-low") {
+        const allowed = MEASURED_LOW_COUNT_FIELDS[name] ?? new Set();
+        const banned = numeric.filter(([kk]) => !allowed.has(kk));
+        if (banned.length > 0)
+          v("P5", `${k}: metrics.${name} は measured-low なのに比率/非カウント値 (${banned.map(([kk]) => kk).join(",")}) を持つ — 標本不足の比率値は保存禁止`);
+      } else if (numeric.length > 0) {
+        v("P5", `${k}: metrics.${name} は ${m.status} なのに数値 (${numeric.map(([kk]) => kk).join(",")}) を持つ — 推測値を保存しない`);
       }
     }
 

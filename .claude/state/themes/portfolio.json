@@ -20,20 +20,23 @@
       "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
       "metrics": {
         "gsc": {
-          "status": "insufficient-data",
+          "status": "measured-low",
           "windowDays": 56,
           "weeks": [
             "2026-W24",
             "2026-W28"
-          ]
+          ],
+          "clicks": 0,
+          "impressions": 75
         },
         "ga4": {
-          "status": "insufficient-data",
+          "status": "measured-low",
           "windowDays": 56,
           "weeks": [
             "2026-W24",
             "2026-W28"
-          ]
+          ],
+          "pageViews": 76
         },
         "internalNav": {
           "status": "not-instrumented"
@@ -73,20 +76,23 @@
       "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
       "metrics": {
         "gsc": {
-          "status": "insufficient-data",
+          "status": "measured-low",
           "windowDays": 56,
           "weeks": [
             "2026-W24",
             "2026-W28"
-          ]
+          ],
+          "clicks": 0,
+          "impressions": 23
         },
         "ga4": {
-          "status": "insufficient-data",
+          "status": "measured-low",
           "windowDays": 56,
           "weeks": [
             "2026-W24",
             "2026-W28"
-          ]
+          ],
+          "pageViews": 62
         },
         "internalNav": {
           "status": "not-instrumented"
@@ -126,20 +132,23 @@
       "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
       "metrics": {
         "gsc": {
-          "status": "insufficient-data",
+          "status": "measured-low",
           "windowDays": 56,
           "weeks": [
             "2026-W24",
             "2026-W28"
-          ]
+          ],
+          "clicks": 2,
+          "impressions": 43
         },
         "ga4": {
-          "status": "insufficient-data",
+          "status": "measured-low",
           "windowDays": 56,
           "weeks": [
             "2026-W24",
             "2026-W28"
-          ]
+          ],
+          "pageViews": 56
         },
         "internalNav": {
           "status": "not-instrumented"
@@ -179,20 +188,23 @@
       "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
       "metrics": {
         "gsc": {
-          "status": "insufficient-data",
+          "status": "measured-low",
           "windowDays": 56,
           "weeks": [
             "2026-W24",
             "2026-W28"
-          ]
+          ],
+          "clicks": 0,
+          "impressions": 16
         },
         "ga4": {
-          "status": "insufficient-data",
+          "status": "measured-low",
           "windowDays": 56,
           "weeks": [
             "2026-W24",
             "2026-W28"
-          ]
+          ],
+          "pageViews": 38
         },
         "internalNav": {
           "status": "not-instrumented"
@@ -233,20 +245,23 @@
       "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
       "metrics": {
         "gsc": {
-          "status": "insufficient-data",
+          "status": "measured-low",
           "windowDays": 56,
           "weeks": [
             "2026-W24",
             "2026-W28"
-          ]
+          ],
+          "clicks": 2,
+          "impressions": 158
         },
         "ga4": {
-          "status": "insufficient-data",
+          "status": "measured-low",
           "windowDays": 56,
           "weeks": [
             "2026-W24",
             "2026-W28"
-          ]
+          ],
+          "pageViews": 93
         },
         "internalNav": {
           "status": "not-instrumented"
@@ -286,20 +301,23 @@
       "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
       "metrics": {
         "gsc": {
-          "status": "insufficient-data",
+          "status": "measured-low",
           "windowDays": 56,
           "weeks": [
             "2026-W24",
             "2026-W28"
-          ]
+          ],
+          "clicks": 1,
+          "impressions": 10
         },
         "ga4": {
-          "status": "insufficient-data",
+          "status": "measured-low",
           "windowDays": 56,
           "weeks": [
             "2026-W24",
             "2026-W28"
-          ]
+          ],
+          "pageViews": 28
         },
         "internalNav": {
           "status": "not-instrumented"
@@ -339,20 +357,23 @@
       "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
       "metrics": {
         "gsc": {
-          "status": "insufficient-data",
+          "status": "measured-low",
           "windowDays": 56,
           "weeks": [
             "2026-W24",
             "2026-W28"
-          ]
+          ],
+          "clicks": 1,
+          "impressions": 22
         },
         "ga4": {
-          "status": "insufficient-data",
+          "status": "measured-low",
           "windowDays": 56,
           "weeks": [
             "2026-W24",
             "2026-W28"
-          ]
+          ],
+          "pageViews": 88
         },
         "internalNav": {
           "status": "not-instrumented"
@@ -392,20 +413,23 @@
       "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
       "metrics": {
         "gsc": {
-          "status": "insufficient-data",
+          "status": "measured-low",
           "windowDays": 56,
           "weeks": [
             "2026-W24",
             "2026-W28"
-          ]
+          ],
+          "clicks": 1,
+          "impressions": 25
         },
         "ga4": {
-          "status": "insufficient-data",
+          "status": "measured-low",
           "windowDays": 56,
           "weeks": [
             "2026-W24",
             "2026-W28"
-          ]
+          ],
+          "pageViews": 30
         },
         "internalNav": {
           "status": "not-instrumented"
@@ -445,20 +469,23 @@
       "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
       "metrics": {
         "gsc": {
-          "status": "insufficient-data",
+          "status": "measured-low",
           "windowDays": 56,
           "weeks": [
             "2026-W24",
             "2026-W28"
-          ]
+          ],
+          "clicks": 0,
+          "impressions": 7
         },
         "ga4": {
-          "status": "insufficient-data",
+          "status": "measured-low",
           "windowDays": 56,
           "weeks": [
             "2026-W24",
             "2026-W28"
-          ]
+          ],
+          "pageViews": 28
         },
         "internalNav": {
           "status": "not-instrumented"
@@ -498,20 +525,23 @@
       "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
       "metrics": {
         "gsc": {
-          "status": "insufficient-data",
+          "status": "measured-low",
           "windowDays": 56,
           "weeks": [
             "2026-W24",
             "2026-W28"
-          ]
+          ],
+          "clicks": 0,
+          "impressions": 16
         },
         "ga4": {
-          "status": "insufficient-data",
+          "status": "measured-low",
           "windowDays": 56,
           "weeks": [
             "2026-W24",
             "2026-W28"
-          ]
+          ],
+          "pageViews": 76
         },
         "internalNav": {
           "status": "not-instrumented"
@@ -553,20 +583,23 @@
       "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
       "metrics": {
         "gsc": {
-          "status": "insufficient-data",
+          "status": "measured-low",
           "windowDays": 56,
           "weeks": [
             "2026-W24",
             "2026-W28"
-          ]
+          ],
+          "clicks": 1,
+          "impressions": 20
         },
         "ga4": {
-          "status": "insufficient-data",
+          "status": "measured-low",
           "windowDays": 56,
           "weeks": [
             "2026-W24",
             "2026-W28"
-          ]
+          ],
+          "pageViews": 44
         },
         "internalNav": {
           "status": "not-instrumented"
@@ -606,12 +639,14 @@
       "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
       "metrics": {
         "gsc": {
-          "status": "insufficient-data",
+          "status": "measured-low",
           "windowDays": 56,
           "weeks": [
             "2026-W24",
             "2026-W28"
-          ]
+          ],
+          "clicks": 0,
+          "impressions": 36
         },
         "ga4": {
           "status": "measured",
@@ -663,20 +698,23 @@
       "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
       "metrics": {
         "gsc": {
-          "status": "insufficient-data",
+          "status": "measured-low",
           "windowDays": 56,
           "weeks": [
             "2026-W24",
             "2026-W28"
-          ]
+          ],
+          "clicks": 0,
+          "impressions": 0
         },
         "ga4": {
-          "status": "insufficient-data",
+          "status": "measured-low",
           "windowDays": 56,
           "weeks": [
             "2026-W24",
             "2026-W28"
-          ]
+          ],
+          "pageViews": 2
         },
         "internalNav": {
           "status": "not-instrumented"
@@ -716,20 +754,23 @@
       "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
       "metrics": {
         "gsc": {
-          "status": "insufficient-data",
+          "status": "measured-low",
           "windowDays": 56,
           "weeks": [
             "2026-W24",
             "2026-W28"
-          ]
+          ],
+          "clicks": 1,
+          "impressions": 22
         },
         "ga4": {
-          "status": "insufficient-data",
+          "status": "measured-low",
           "windowDays": 56,
           "weeks": [
             "2026-W24",
             "2026-W28"
-          ]
+          ],
+          "pageViews": 24
         },
         "internalNav": {
           "status": "not-instrumented"
@@ -774,20 +815,23 @@
       "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
       "metrics": {
         "gsc": {
-          "status": "insufficient-data",
+          "status": "measured-low",
           "windowDays": 56,
           "weeks": [
             "2026-W24",
             "2026-W28"
-          ]
+          ],
+          "clicks": 0,
+          "impressions": 3
         },
         "ga4": {
-          "status": "insufficient-data",
+          "status": "measured-low",
           "windowDays": 56,
           "weeks": [
             "2026-W24",
             "2026-W28"
-          ]
+          ],
+          "pageViews": 20
         },
         "internalNav": {
           "status": "not-instrumented"
@@ -827,12 +871,14 @@
       "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
       "metrics": {
         "gsc": {
-          "status": "insufficient-data",
+          "status": "measured-low",
           "windowDays": 56,
           "weeks": [
             "2026-W24",
             "2026-W28"
-          ]
+          ],
+          "clicks": 2,
+          "impressions": 100
         },
         "ga4": {
           "status": "measured",
@@ -884,20 +930,23 @@
       "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
       "metrics": {
         "gsc": {
-          "status": "insufficient-data",
+          "status": "measured-low",
           "windowDays": 56,
           "weeks": [
             "2026-W24",
             "2026-W28"
-          ]
+          ],
+          "clicks": 0,
+          "impressions": 1
         },
         "ga4": {
-          "status": "insufficient-data",
+          "status": "measured-low",
           "windowDays": 56,
           "weeks": [
             "2026-W24",
             "2026-W28"
-          ]
+          ],
+          "pageViews": 10
         },
         "internalNav": {
           "status": "not-instrumented"
@@ -937,20 +986,23 @@
       "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
       "metrics": {
         "gsc": {
-          "status": "insufficient-data",
+          "status": "measured-low",
           "windowDays": 56,
           "weeks": [
             "2026-W24",
             "2026-W28"
-          ]
+          ],
+          "clicks": 1,
+          "impressions": 32
         },
         "ga4": {
-          "status": "insufficient-data",
+          "status": "measured-low",
           "windowDays": 56,
           "weeks": [
             "2026-W24",
             "2026-W28"
-          ]
+          ],
+          "pageViews": 46
         },
         "internalNav": {
           "status": "not-instrumented"
@@ -990,20 +1042,23 @@
       "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
       "metrics": {
         "gsc": {
-          "status": "insufficient-data",
+          "status": "measured-low",
           "windowDays": 56,
           "weeks": [
             "2026-W24",
             "2026-W28"
-          ]
+          ],
+          "clicks": 0,
+          "impressions": 10
         },
         "ga4": {
-          "status": "insufficient-data",
+          "status": "measured-low",
           "windowDays": 56,
           "weeks": [
             "2026-W24",
             "2026-W28"
-          ]
+          ],
+          "pageViews": 29
         },
         "internalNav": {
           "status": "not-instrumented"
@@ -1043,20 +1098,23 @@
       "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
       "metrics": {
         "gsc": {
-          "status": "insufficient-data",
+          "status": "measured-low",
           "windowDays": 56,
           "weeks": [
             "2026-W24",
             "2026-W28"
-          ]
+          ],
+          "clicks": 1,
+          "impressions": 20
         },
         "ga4": {
-          "status": "insufficient-data",
+          "status": "measured-low",
           "windowDays": 56,
           "weeks": [
             "2026-W24",
             "2026-W28"
-          ]
+          ],
+          "pageViews": 23
         },
         "internalNav": {
           "status": "not-instrumented"
@@ -1096,20 +1154,23 @@
       "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
       "metrics": {
         "gsc": {
-          "status": "insufficient-data",
+          "status": "measured-low",
           "windowDays": 56,
           "weeks": [
             "2026-W24",
             "2026-W28"
-          ]
+          ],
+          "clicks": 0,
+          "impressions": 21
         },
         "ga4": {
-          "status": "insufficient-data",
+          "status": "measured-low",
           "windowDays": 56,
           "weeks": [
             "2026-W24",
             "2026-W28"
-          ]
+          ],
+          "pageViews": 12
         },
         "internalNav": {
           "status": "not-instrumented"
@@ -1150,20 +1211,23 @@
       "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
       "metrics": {
         "gsc": {
-          "status": "insufficient-data",
+          "status": "measured-low",
           "windowDays": 56,
           "weeks": [
             "2026-W24",
             "2026-W28"
-          ]
+          ],
+          "clicks": 1,
+          "impressions": 72
         },
         "ga4": {
-          "status": "insufficient-data",
+          "status": "measured-low",
           "windowDays": 56,
           "weeks": [
             "2026-W24",
             "2026-W28"
-          ]
+          ],
+          "pageViews": 97
         },
         "internalNav": {
           "status": "not-instrumented"

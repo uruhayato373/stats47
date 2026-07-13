@@ -113,6 +113,15 @@ jobs:
         run: node .claude/scripts/lib/check-asset-policy.cjs --baseline
         continue-on-error: false
 
+      - name: 🗂️ Theme Portfolio State Guard
+        # テーマポートフォリオ state の schema + 判定規律 (根拠なし merge/retire 禁止・
+        # 重複実験防止・推測値/標本不足比率の混入防止・THEME_CATALOGS 整合) を検証。
+        # 読み取り専用で破壊的変更なし。正典: .claude/state/themes/README.md
+        run: |
+          node .claude/scripts/themes/validate-theme-state.mjs
+          node --test .claude/scripts/themes/__tests__/
+        continue-on-error: false
+
       - name: 🧹 Repository Hygiene Regression Guard
         # origin/develop 由来の既存findingはbaselineで許容し、一時出力・大容量・
         # case/Unicode衝突の新規悪化だけをブロックする。

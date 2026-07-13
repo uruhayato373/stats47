@@ -35,6 +35,22 @@ schema・判定規律の正典: `.claude/state/themes/README.md`。
 5. **差分レポート**: 前回との lifecycle 変更・stale 検知・insufficient-data の一覧を agent の
    OUTPUT FORMAT で報告。四半期監査時は `docs/04_レビュー/YYYY-MM-DD-theme-portfolio-audit.md` に保存。
 
+## コマンド (PR-4 で確定)
+
+```bash
+# ★継続監査の入口 (月次推奨・四半期必須): build → aggregate → validate → 実験期日 → drift
+bash .claude/scripts/themes/run-theme-portfolio-audit.sh
+
+# 個別実行
+npx tsx .claude/scripts/themes/build-theme-portfolio.ts        # 機械項目の再導出 (upsert)
+npx tsx .claude/scripts/themes/build-theme-portfolio.ts --set <key> --lifecycle <status> --add-evidence <ref>
+npx tsx .claude/scripts/themes/aggregate-theme-metrics.ts      # 56d 実測 (非重複 2 窓合算)
+node .claude/scripts/themes/evaluate-theme-experiments.mjs --check          # 実験期日到達分に実測を記録
+node .claude/scripts/themes/evaluate-theme-experiments.mjs --verdict <id> <verdict> --evidence <ref>
+```
+
+- cadence: **月次で run-theme-portfolio-audit.sh、四半期で監査レポート** (`docs/04_レビュー/YYYY-MM-DD-theme-portfolio-audit.md`) を必須とする。CI (`pr-quality-check.yml` の Theme Portfolio State Guard) は schema/規律の検証のみで破壊的変更をしない。
+
 ## 検証 (毎回必須)
 
 ```bash

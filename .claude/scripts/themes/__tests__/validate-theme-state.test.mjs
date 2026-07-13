@@ -94,6 +94,61 @@ test("THEME_CATALOGS との不一致を弾く (P2: 欠落 + catalogStatus 齟齬
   assert.match(out, /tourism が portfolio に無い/);
 });
 
+test("measured-low はカウント値のみ許可・比率値は弾く (P5)", (t) => {
+  const f = fixture({
+    portfolio: { schemaVersion: 1, themes: [
+      theme({ metrics: { gsc: { status: "measured-low", windowDays: 56, clicks: 2, impressions: 158 } } }), // カウントのみ → OK
+      theme({ themeKey: "tourism",
+              metrics: { gsc: { status: "measured-low", windowDays: 56, clicks: 1, impressions: 72, ctr: 0.014 } } }), // 比率混入 → NG
+    ] },
+  });
+  t.after(() => fs.rmSync(f.root, { recursive: true, force: true }));
+  const r = run(f);
+  assert.equal(r.status, 1);
+  const out = JSON.parse(r.stdout).violations;
+  assert.equal(out.filter((x) => x.includes("aging-society")).length, 0); // カウントのみは無違反
+  assert.match(out.join("\n"), /tourism.*measured-low なのに比率\/非カウント値 \(ctr\)/);
+});
+
+test("retire-candidate は measured-low 両輪 (GSC+GA4 56d) + 根拠 2 で成立する (P4 改訂)", (t) => {
+  const f = fixture({
+    portfolio: { schemaVersion: 1, themes: [
+      theme({
+        lifecycleStatus: "retire-candidate",
+        evidenceRefs: ["docs/04_レビュー/x.md", "56d 実測: imp 23 / pv 12 (measured-low)"],
+        metrics: {
+          gsc: { status: "measured-low", windowDays: 56, clicks: 0, impressions: 23 },
+          ga4: { status: "measured-low", windowDays: 56, pageViews: 12 },
+        },
+      }),
+      theme({ themeKey: "tourism" }),
+    ] },
+  });
+  t.after(() => fs.rmSync(f.root, { recursive: true, force: true }));
+  const r = run(f);
+  assert.equal(r.status, 0, r.stdout); // 集計済み低カウント = 需要不足の証拠として退役候補を許可
+});
+
+test("retire-candidate は GA4 未集計だと弾く (P4 は GSC/GA4 両輪)", (t) => {
+  const f = fixture({
+    portfolio: { schemaVersion: 1, themes: [
+      theme({
+        lifecycleStatus: "retire-candidate",
+        evidenceRefs: ["a", "b"],
+        metrics: {
+          gsc: { status: "measured", windowDays: 56, clicks: 10, impressions: 500 },
+          ga4: { status: "insufficient-data", windowDays: 56 },
+        },
+      }),
+      theme({ themeKey: "tourism" }),
+    ] },
+  });
+  t.after(() => fs.rmSync(f.root, { recursive: true, force: true }));
+  const r = run(f);
+  assert.equal(r.status, 1);
+  assert.match(JSON.parse(r.stdout).violations.join("\n"), /\[P4\].*GSC\/GA4 両方/);
+});
+
 test("同一 theme×changeType の pending 重複実験を弾く (E2)", (t) => {
   const f = fixture({
     portfolio: { schemaVersion: 1, themes: [theme(), theme({ themeKey: "tourism" })] },

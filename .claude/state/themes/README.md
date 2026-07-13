@@ -41,15 +41,25 @@
       "metrics": {                        // 実測の集計コピー。取れない値は status で明示し推測値を入れない
         // ★集計の基礎 (aggregate-theme-metrics.ts): GSC/GA4 の週次 snapshot は各週 last-28d 窓のため、
         //   56d = 非重複 2 窓 (最新週 + 4 週前) の合算。weeks に使用した 2 窓を記録する。
-        "gsc": { "status": "measured",    // "measured" | "insufficient-data" | "not-instrumented"
+        // ★status の 4 値 (2026-07-13 PR-4 改訂・統計的根拠):
+        //   - "measured":        集計済みで最低標本数以上。カウント値も比率値も解釈可
+        //   - "measured-low":    集計済みだが最低標本数未満。**カウント値 (clicks/impressions/pageViews)
+        //                        のみ保存・解釈可** — 56d 窓での低カウントはそれ自体が「需要が低い」証拠
+        //                        (計数統計)。**比率値 (ctr/avgPosition/engagementRate/滞在) は標本不足で
+        //                        ノイズが支配するため保存禁止** (比率統計)。PR-3 で GSC 0/22 measured
+        //                        となり merge/retire が構造的に不可能化した問題への、閾値を下げずに
+        //                        カウント/比率を区別する是正
+        //   - "insufficient-data": 集計自体が未実施・取得不能 (数値を持たない)
+        //   - "not-instrumented":  計装が存在しない (数値を持たない)
+        "gsc": { "status": "measured",
                  "windowDays": 56, "weeks": ["2026-W24", "2026-W28"],
-                 "clicks": 120, "impressions": 4300,
-                 "ctr": 0.028,             // 合算 clicks / 合算 impressions
-                 "avgPosition": 12.4 },    // impressions 加重平均
+                 "clicks": 120, "impressions": 4300,   // measured-low はここまで (カウント値)
+                 "ctr": 0.028,             // 合算 clicks / 合算 impressions (measured のみ)
+                 "avgPosition": 12.4 },    // impressions 加重平均 (measured のみ)
         "ga4": { "status": "measured", "windowDays": 56, "weeks": ["2026-W24", "2026-W28"],
-                 "pageViews": 800,                     // 2 窓合算 (加算可能)
-                 "activeUsersLast28d": 500,            // ユーザー数は週横断加算不能 → 最新窓のみ
-                 "engagementRatePvWeighted": 0.61,     // pageViews 加重平均 (近似・名前で明示)
+                 "pageViews": 800,                     // 2 窓合算 (加算可能・measured-low もここまで)
+                 "activeUsersLast28d": 500,            // ユーザー数は週横断加算不能 → 最新窓のみ (measured のみ)
+                 "engagementRatePvWeighted": 0.61,     // pageViews 加重平均 (近似・名前で明示・measured のみ)
                  "avgSessionDurationSecPvWeighted": 74 },
         "internalNav": { "status": "not-instrumented" }  // theme→ranking/blog 遷移・指標クリック。GA4 未計装 (25_テーマポートフォリオ運用 §1.3)
       },
@@ -79,12 +89,17 @@
 
 1. `merge-candidate` / `split-candidate` / `rename-candidate` / `retire-candidate` は
    **`evidenceRefs` ≥ 2 が必須** (レビュー文書 + 実測 or 実験)。
-2. `merge-candidate` / `retire-candidate` はさらに **`metrics.gsc.status === "measured"` かつ
-   `metrics.gsc.windowDays ≥ 56` が必須** — 「データ不足」(insufficient-data/not-instrumented) を
-   「需要不足」と混同して廃止判定することを機械的に禁止する。標本不足なら lifecycleStatus 自体を
-   `insufficient-data` にする。
-3. 最低標本数 (これ未満は `insufficient-data`): GSC impressions **200/観測期間**・GA4 pageViews
-   **100/観測期間** (初期値。改訂は本 README を更新)。
+2. `merge-candidate` / `retire-candidate` はさらに **GSC と GA4 の両方が「集計済み」
+   (`status` ∈ {measured, measured-low}) かつ `windowDays ≥ 56` が必須** —
+   「データ不足」(insufficient-data = 未集計/取得不能) を「需要不足」と混同して廃止判定する
+   ことを機械的に禁止する。需要不足の証拠は **measured-low のカウント値** (56d 窓での低
+   clicks/impressions/pageViews) で示す。
+   > 2026-07-13 改訂の根拠: 旧規律は `gsc.status === "measured"` (imp ≥ 200) を要求したが、
+   > PR-3 実測で全 22 テーマが imp < 200/56d と判明し、merge/retire が構造的に不可能だった。
+   > カウント統計 (量) は低値そのものが証拠になる一方、比率統計 (CTR/順位/engagement) は
+   > 標本不足でノイズが支配する — この区別を measured-low として機械化し、**閾値は下げない**。
+3. 最低標本数 (これ未満は `measured-low` = 比率値の保存禁止): GSC impressions **200/観測期間**・
+   GA4 pageViews **100/観測期間** (初期値。改訂は本 README を更新)。
 4. 観測期間の使い分け: 7 日 = 異常検知のみ (判定に使わない) / 28 日 = 暫定判定 / **56 日 = 基本判定**。
 5. 季節性・検索順位変動・サイト全体変動が疑われる場合は experiments.json の `notes` に注記必須。
 

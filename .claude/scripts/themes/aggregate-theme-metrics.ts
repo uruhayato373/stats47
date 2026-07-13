@@ -174,7 +174,7 @@ async function main() {
 
   for (const t of pf.themes) {
     const p = `/themes/${t.themeKey}`;
-    // ── GSC ──
+    // ── GSC ── (measured-low: 集計済みだが標本不足 → カウント値のみ保存・比率値は保存禁止)
     const g = gsc.get(p);
     if (g && g.impressions >= MIN_GSC_IMPRESSIONS) {
       t.metrics.gsc = {
@@ -184,7 +184,10 @@ async function main() {
         avgPosition: round(g.posWeighted / g.impressions, 2),
       };
     } else {
-      t.metrics.gsc = { status: "insufficient-data", windowDays: 56, weeks: [...weeks].sort() };
+      t.metrics.gsc = {
+        status: "measured-low", windowDays: 56, weeks: [...weeks].sort(),
+        clicks: g?.clicks ?? 0, impressions: g?.impressions ?? 0,
+      };
     }
     // ── GA4 ──
     const a = ga4.get(p);
@@ -197,7 +200,10 @@ async function main() {
         avgSessionDurationSecPvWeighted: round(a.durWeighted / a.pageViews, 1),
       };
     } else {
-      t.metrics.ga4 = { status: "insufficient-data", windowDays: 56, weeks: [...weeks].sort() };
+      t.metrics.ga4 = {
+        status: "measured-low", windowDays: 56, weeks: [...weeks].sort(),
+        pageViews: a?.pageViews ?? 0,
+      };
     }
     t.gscSnapshotRef = `.claude/skills/analytics/gsc-improvement/reference/snapshots/${weeks[0]}/pages.csv`;
     t.ga4SnapshotRef = `.claude/skills/analytics/ga4-improvement/reference/snapshots/${weeks[0]}/pages.csv`;
@@ -223,8 +229,8 @@ async function main() {
 
     rows.push([
       t.themeKey.padEnd(22),
-      t.metrics.gsc.status === "measured" ? `imp ${t.metrics.gsc.impressions}` : "GSC 標本不足",
-      t.metrics.ga4.status === "measured" ? `pv ${t.metrics.ga4.pageViews}` : "GA4 標本不足",
+      `imp ${t.metrics.gsc.impressions}${t.metrics.gsc.status === "measured-low" ? " (low)" : ""}`,
+      `pv ${t.metrics.ga4.pageViews}${t.metrics.ga4.status === "measured-low" ? " (low)" : ""}`,
       `年 ${latest ?? "—"}`, t.dataQualityStatus,
       missing.length ? `欠 ${missing.length}/${keys.length}` : "",
     ].join(" | "));

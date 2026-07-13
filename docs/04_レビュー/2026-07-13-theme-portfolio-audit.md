@@ -120,13 +120,39 @@ merge/retire 候補は 0 (56 日 measured 実測が無い現段階では validat
 | 内部遷移 (theme→ranking/blog) | not-instrumented (GA4 未計装) | 計装施策を triage へ提案後 |
 | 関連記事数 | null | 後続 |
 
+## PR-4: 継続運用の確定 + 判定設計改訂 (2026-07-13 追記)
+
+### 判定設計の改訂 (measured-low の新設・根拠つき)
+
+PR-3 の「GSC measured 0/22 → merge/retire が構造的に不可能」への是正。**閾値は下げない**。
+統計的性質の区別で解決する:
+
+- **カウント統計** (clicks / impressions / pageViews): 56d 窓での低カウントは**それ自体が
+  「需要が低い」証拠**になる (量の観測)。→ 新 status `measured-low` = 集計済み標本不足として
+  **カウント値のみ保存・解釈可**。
+- **比率統計** (CTR / 平均順位 / engagementRate / 滞在): 標本不足ではノイズが支配し解釈不能。
+  → measured-low では**保存自体を禁止** (validator P5 が enforce)。
+- **P4 改訂**: merge/retire 候補は「GSC/GA4 **両輪**が集計済み (measured | measured-low) かつ
+  56d」を要求。insufficient-data (未集計) では引き続き不可 = データ不足と需要不足の区別を維持。
+
+### 確定した継続運用
+
+| 部品 | 内容 |
+|---|---|
+| `run-theme-portfolio-audit.sh` | 月次推奨/四半期必須の一括監査 (build→aggregate→validate→実験期日→drift git HEAD 比較)。破壊的変更なし |
+| `evaluate-theme-experiments.mjs` | 実験の d7/d28/d56 期日到達分に現在実測を記録 (`--check`)、verdict 確定 (`--verdict`・d7 では effect/* 確定不可) |
+| CI (pr-quality-check.yml「Theme Portfolio State Guard」) | schema + 判定規律 + fixture テストの検証のみ (読み取り専用) |
+| triage 引き渡し形式 | agent 定義 §引き渡し形式 (THEME-<KEY>-NN・根拠/検証/期日/実験 ID 必須) |
+
+E2E スモーク: 監査コマンド通し実行で drift 検出 (insufficient-data → measured-low の遷移 44 件) を
+正しく報告することを確認。validator fixture 10/10 green。
+
 ## 次アクション
 
-1. **PR-4**: 継続監査コマンド・実験 7/28/56 日判定・triage 引き渡し形式・CI schema 検証。
-   あわせて「回遊面 KPI」への判定設計見直し (GSC 閾値の再設計は根拠つきで)
-2. gaps 5 キー (living-housing 1 / manufacturing 4) を improvement-triage へ引き渡し
-3. proposal-ready 4 テーマの設計依頼を theme-designer へ (blocked 4 は監査を先行)
-4. 内部遷移計装 (GA4 カスタムイベント) を improvement-triage へ改善候補として引き渡し
+1. gaps 5 キー (living-housing 1 / manufacturing 4) を improvement-triage へ引き渡し
+2. proposal-ready 4 テーマの設計依頼を theme-designer へ (blocked 4 は監査を先行)
+3. 内部遷移計装 (GA4 カスタムイベント) を improvement-triage へ改善候補として引き渡し
+4. 次回定期監査: 2026-08 月次 (`run-theme-portfolio-audit.sh`) / 2026-10 四半期レポート
 
 ## 関連
 
