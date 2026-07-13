@@ -42,3 +42,36 @@ test("baselineは既存findingを許容する", async (t) => {
   assert.equal(run(f, ["--write-baseline"]).status, 0);
   assert.equal(run(f, ["--baseline"]).status, 0);
 });
+
+test("形式と拡張子の不一致 (中身png・拡張子gif) を検出する", async (t) => {
+  const f = await fixture(); t.after(() => fs.rmSync(f.root, { recursive: true, force: true }));
+  const png = await sharp({ create: { width: 8, height: 8, channels: 3, background: "red" } }).png().toBuffer();
+  fs.writeFileSync(path.join(f.root, "apps/web/public/mislabeled.gif"), png);
+  const codes = JSON.parse(run(f).stdout).newFindings.map((x) => x.code);
+  assert.ok(codes.includes("FORMAT_MISMATCH"));
+});
+
+test("SHA-256完全同一の重複画像を検出する", async (t) => {
+  const f = await fixture(); t.after(() => fs.rmSync(f.root, { recursive: true, force: true }));
+  const png = await sharp({ create: { width: 8, height: 8, channels: 3, background: "blue" } }).png().toBuffer();
+  fs.writeFileSync(path.join(f.root, "apps/web/public/dup-a.png"), png);
+  fs.writeFileSync(path.join(f.root, "apps/web/public/dup-b.png"), png);
+  const codes = JSON.parse(run(f).stdout).newFindings.map((x) => x.code);
+  assert.ok(codes.includes("DUPLICATE_IMAGE"));
+});
+
+test("未参照画像はwarningでblockしない", async (t) => {
+  const f = await fixture(); t.after(() => fs.rmSync(f.root, { recursive: true, force: true }));
+  fs.mkdirSync(path.join(f.root, "docs/assets"), { recursive: true });
+  await sharp({ create: { width: 8, height: 8, channels: 3, background: "green" } }).png().toFile(path.join(f.root, "docs/assets/orphan-xyz.png"));
+  const parsed = JSON.parse(run(f).stdout);
+  assert.equal(parsed.newFindings.filter((x) => x.file.includes("orphan-xyz")).length, 0);
+  assert.ok(parsed.warnings.some((w) => w.code === "UNREFERENCED_IMAGE" && w.file.includes("orphan-xyz")));
+});
+
+test("/public絶対参照の欠落を検出する", async (t) => {
+  const f = await fixture(); t.after(() => fs.rmSync(f.root, { recursive: true, force: true }));
+  fs.writeFileSync(path.join(f.root, "apps/web/public/style.css"), ".x{background:url('/images/missing-abs.png')}\n");
+  const codes = JSON.parse(run(f).stdout).newFindings.map((x) => x.code);
+  assert.ok(codes.includes("MISSING_REFERENCE"));
+});

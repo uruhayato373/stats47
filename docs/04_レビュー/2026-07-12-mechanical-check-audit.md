@@ -296,7 +296,7 @@ Next App Router の新規 `page.tsx` / route 追加時に以下を検査する�
 
 ### MC-14: image / SVG contract
 
-実装状況（2026-07-13）: 第1段階を実装済み。`check-asset-policy.cjs --baseline` を PR Static Gates に接続し、public画像のデコード・容量・OGP preset、SVG安全性、記事Markdownの相対画像参照（存在・case）について新規悪化を block する。既存findingは `.claude/config/asset-policy-baseline.json` に固定した。text overlap / font fallback / alpha・color profileの用途別制約は、誤検知を避けるため既存の専用lintを維持し、第2段階でpreset SSOTへ統合する。
+実装状況（2026-07-13）: 第2段階を実装済み。`check-asset-policy.cjs --baseline` を PR Static Gates に接続。**git 管理対象の画像を repo 全体（787枚: raster 440 / svg 347、CI checkout と同一 scope）で棚卸し**し、デコード・pixel寸法・容量・**形式↔拡張子の一致（FORMAT_MISMATCH）**・SVG 安全性（viewBox / script・foreignObject / 外部URL / malformed）・**SHA-256 完全同一の重複（DUPLICATE_IMAGE）**・**MD / HTML / CSS / TS(X) のローカル画像参照解決（存在・case-sensitive・/public 絶対＋相対）**について新規悪化を block する。**未参照画像（423件）は非ブロックの UNREFERENCED_IMAGE warning** として report する。既存 finding 50件は `.claude/config/asset-policy-baseline.json` に固定（baseline 識別子は `CODE:relpath:message` で絶対パス / mtime 非依存）。OGP は 1200×630 preset のみ確定適用し、favicon / PWA は `check-static-assets.cjs` を正典として重複させない。text overlap / font fallback / alpha・color profile の用途別制約は誤検知回避のため既存の専用 lint（svg-lint.mjs 等）を維持する。runtime 788ms / 10000ms（suite 合計 4017 / 30000ms）。単体テスト 7件。
 
 - 画像の pixel 寸法、aspect ratio、ファイル容量、alpha / color profile
 - OGP 1200×630、note cover、SNS、favicon / icon 種別の preset

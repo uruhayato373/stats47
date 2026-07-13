@@ -1,6 +1,12 @@
 {
   "version": 1,
   "findings": [
+    "DUPLICATE_IMAGE:apps/remotion/public/images/site-intro/06-area-charts.png:same bytes as apps/remotion/public/images/site-intro/05-area-profile.png",
+    "DUPLICATE_IMAGE:packages/visualization/src/shared/__tests__/__golden__/recharts-linechart-landscape.png:same bytes as packages/visualization/src/shared/__tests__/__golden__/recharts-areachart-landscape.png",
+    "DUPLICATE_IMAGE:packages/visualization/src/shared/__tests__/__golden__/tilegridmap-standard.png:same bytes as packages/visualization/src/shared/__tests__/__golden__/prefecturemapchart-standard.png",
+    "FORMAT_MISMATCH:.claude/assets/affiliate-banners/ai_agent_camp.gif:format=jpeg ext=.gif",
+    "FORMAT_MISMATCH:.claude/assets/affiliate-banners/career_banner.gif:format=png ext=.gif",
+    "FORMAT_MISMATCH:apps/web/public/logo.png:format=jpeg ext=.png",
     "MISSING_REFERENCE:docs/21_ブログ記事原稿/library-museum-cultural-capital/article.md:data/cultural-facility-stacked.svg",
     "MISSING_REFERENCE:docs/21_ブログ記事原稿/library-museum-cultural-capital/article.md:data/library-vs-hobby-scatter.svg",
     "MISSING_REFERENCE:docs/21_ブログ記事原稿/library-museum-cultural-capital/article.md:data/museum-ranking.svg",
