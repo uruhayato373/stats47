@@ -61,3 +61,6 @@ CI: `gh workflow run sync-snapshots.yml -f only=ranking-items` → 完了後 `-f
 - 正典: `.claude/rules/survey-linkage-standards.md`
 - 監査スクリプト: `packages/ranking/src/scripts/audit-survey-linkage.ts`
 - agent: `.claude/agents/survey-curator.md`
+- **役割分離**: 本スキル = 紐付け層の監査・是正の実行エンジン。監査結果を台帳化し需要・編集品質と
+  合わせて評価する層は `/manage-survey-portfolio` (`.claude/state/surveys/portfolio.json` へ転記。
+  紐付けロジック・是正手順は本スキルにのみ置き、そちらへ再定義しない)

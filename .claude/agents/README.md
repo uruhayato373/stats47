@@ -37,7 +37,7 @@
 | `ranking-expander` 🆕 | SSDS ランキング拡充ループ (計測ゲート付き需要ファースト): 候補キュレーション + config 生成 (gen-ssds-configs) + キュー状態管理 (build-expansion-queue)。投入=data-ingester、公開=ranking-publisher、計測=gsc-analyst に委譲。skill `/expand-rankings`。旧 expand-indicators 再構築 | 2026-07-12 新設 |
 | `gis-curator` 🆕 | KSJ GIS メタ SSOT (datasets.ts / registry.ts) 管理・dataset lifecycle・メタ整合。完全DBレス (git TS=SSOT)。pipeline は gis-pipeline-runner、push は r2-publisher に委譲 | 2026-06-21 新設 (GIS DBレス化) |
 | `gis-pipeline-runner` 🆕 | KSJ GIS パイプライン実行 (seed → download → TopoJSON → R2 → build state)。SSOT 編集は gis-curator、push は r2-publisher に委譲 | 2026-06-21 新設 (GIS DBレス化) |
-| `survey-curator` 🆕 | ranking↔統計調査の紐付けメタ SSOT (surveys.json / provenance 辞書 / config.surveyId) 管理・監査 (/audit-survey-linkage)・未分類回収。正典 survey-linkage-standards.md。投入=data-ingester、push=r2-publisher、公開=ranking-publisher に委譲 | 2026-07-06 新設 (survey 紐付け再設計) |
+| `survey-curator` 🆕 | ranking↔統計調査の紐付けメタ SSOT (surveys.json / provenance 辞書 / config.surveyId) 管理・監査 (/audit-survey-linkage)・未分類回収 + survey 編集情報 (survey-editorial.ts) + **survey ポートフォリオ管理** (75 survey の需要/在庫/編集品質評価・編集ハブ化の優先順位・実験台帳。真実源 `.claude/state/surveys/{portfolio,experiments}.json`、validator `.claude/scripts/surveys/validate-survey-portfolio.ts`、skill `/manage-survey-portfolio`)。正典 survey-linkage-standards.md + survey-content-standards.md + surveyポートフォリオ運用.md。投入=data-ingester、push=r2-publisher、公開=ranking-publisher、計測=gsc/ga4-analyst、effect=improvement-triage に委譲 | 2026-07-06 新設 → 2026-07-13 ポートフォリオ管理へ拡張 |
 
 ## Tier 3: Content - Blog / Note / Ranking (9 体)
 
