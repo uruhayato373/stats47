@@ -276,6 +276,8 @@ Next App Router の新規 `page.tsx` / route 追加時に以下を検査する�
 
 ### MC-13: accessibility
 
+実装状況（2026-07-13）: 静的AST回帰ガードに加え、`@axe-core/playwright` で home / ranking一覧 / area一覧 / blog一覧 / privacy の代表5 routeをWCAG 2 A/AA・2.1 A/AA対象で検査する独立CI jobを実装。critical/serious違反をblockし、ホーム先頭の「本文へスキップ」キーボード導線も検証する。導入時に検出した広告リンク名、2箇所のcontrast、skip link欠落は修正済み。
+
 静的:
 
 - image alt、form label、button accessible name
@@ -294,6 +296,8 @@ Next App Router の新規 `page.tsx` / route 追加時に以下を検査する�
 
 ### MC-14: image / SVG contract
 
+実装状況（2026-07-13）: 第1段階を実装済み。`check-asset-policy.cjs --baseline` を PR Static Gates に接続し、public画像のデコード・容量・OGP preset、SVG安全性、記事Markdownの相対画像参照（存在・case）について新規悪化を block する。既存findingは `.claude/config/asset-policy-baseline.json` に固定した。text overlap / font fallback / alpha・color profileの用途別制約は、誤検知を避けるため既存の専用lintを維持し、第2段階でpreset SSOTへ統合する。
+
 - 画像の pixel 寸法、aspect ratio、ファイル容量、alpha / color profile
 - OGP 1200×630、note cover、SNS、favicon / icon 種別の preset
 - SVG の text overlap、viewBox、font fallback、external URL / script
@@ -303,6 +307,8 @@ Next App Router の新規 `page.tsx` / route 追加時に以下を検査する�
 既存 `svg-lint.mjs`, note cover overlap, OGP audit, golden image test を共通の asset policy から呼び分ける。
 
 ### MC-15: TODO / deprecated / legacy budget
+
+実装状況（2026-07-13）: `check-maintenance-debt.cjs --baseline` をPR Static Gatesへ接続済み。apps / packages / .claude / .github の5,100超ファイルを対象に、無根拠TODO/FIXME/HACK、削除条件のないlegacy表現、永続D1 runtime操作候補の新規増加をblockする。
 
 TODO 自体を禁止すると誤検知が多い。以下の新規増加だけを検査する。
 
@@ -314,6 +320,8 @@ TODO 自体を禁止すると誤検知が多い。以下の新規増加だけを
 既存数の上限 baseline で新規増加を警告し、減少は常に許可する。
 
 ### MC-16: チェック実行時間予算
+
+実装状況（2026-07-13）: `check-runtime-budget.cjs` と `.claude/config/check-runtime-budgets.json` を追加。主要な決定的checkerを個別予算・合計30秒予算で実測し、p50/p95と各結果をGitHub Step Summaryへ出力する。ローカル初回実測は合計約3.8秒、p95約1.8秒（マシン依存のためCI値を正とする）。
 
 機械チェックを増やし続けるとフィードバックが遅くなり、`--no-verify` と CI 回避を招く。
 

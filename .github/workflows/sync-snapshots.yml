@@ -76,6 +76,17 @@ jobs:
           echo "sync-snapshots/run.sh $ARGS"
           bash .claude/skills/db/sync-snapshots/run.sh "$ARGS"
 
+      - name: ✅ Verify published git-TS snapshots
+        if: inputs.dry_run != 'true'
+        run: |
+          ONLY="${{ inputs.only }}"
+          if [ -z "$ONLY" ] || [ "$ONLY" = "page-components" ] || [ "$ONLY" = "ranking-page-cards" ]; then
+            npx tsx apps/web/scripts/verify-page-components-snapshot.ts
+          fi
+          if [ -z "$ONLY" ] || [ "$ONLY" = "affiliate-ads" ]; then
+            npx tsx apps/web/scripts/verify-affiliate-ads-snapshot.ts
+          fi
+
   # ranking-items を R2 に push した後、git 側の派生キー (known / sitemap) を再生成して
   # develop に反映し PR を開く。これが無いと新規 metric の item.json は R2 にあっても
   # KNOWN/SITEMAP に載らず、本番で 404 / sitemap 未掲載のままになる (P0-RANKING-INDEX の恒久機構化)。

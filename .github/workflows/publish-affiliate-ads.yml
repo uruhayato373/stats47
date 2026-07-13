@@ -62,3 +62,7 @@ jobs:
 
       - name: 🧹 Purge CDN (全ゾーン — バナーは全ページ埋め込みのため)
         run: npx tsx packages/r2-storage/src/scripts/purge-cache.ts
+
+      - name: ✅ Verify published affiliate-ads post-condition
+        # CDN purge後の公開URLをgit TS SSOTとsemantic compare。不一致なら公開成功とみなさない。
+        run: npx tsx apps/web/scripts/verify-affiliate-ads-snapshot.ts

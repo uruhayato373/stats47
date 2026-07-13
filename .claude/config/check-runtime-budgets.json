@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "suiteBudgetMs": 30000,
+  "checks": [
+    { "name": "docs-links", "budgetMs": 5000, "command": ["node", ".claude/scripts/lib/check-docs-links.cjs", "--baseline"] },
+    { "name": "static-assets", "budgetMs": 3000, "command": ["node", ".claude/scripts/lib/check-static-assets.cjs"] },
+    { "name": "asset-policy", "budgetMs": 10000, "command": ["node", ".claude/scripts/lib/check-asset-policy.cjs", "--baseline"] },
+    { "name": "workspace-contract", "budgetMs": 5000, "command": ["node", ".claude/scripts/lib/check-workspace-contract.cjs"] },
+    { "name": "env-registry", "budgetMs": 5000, "command": ["node", ".claude/scripts/lib/check-env-registry.cjs"] },
+    { "name": "route-contract", "budgetMs": 5000, "command": ["node", ".claude/scripts/lib/check-route-contract.cjs", "--baseline"] },
+    { "name": "accessibility-static", "budgetMs": 10000, "command": ["node", ".claude/scripts/lib/check-accessibility-static.cjs", "--baseline"] },
+    { "name": "maintenance-debt", "budgetMs": 10000, "command": ["node", ".claude/scripts/lib/check-maintenance-debt.cjs", "--baseline"] }
+  ]
+}

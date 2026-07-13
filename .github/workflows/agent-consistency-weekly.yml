@@ -35,6 +35,10 @@ jobs:
         uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: 22
+          cache: npm
+
+      - name: 📦 Install dependencies
+        run: npm ci
 
       - name: 🔗 Run consistency check
         id: check
@@ -71,6 +75,44 @@ jobs:
             gh issue comment "$EXISTING" --body-file /tmp/checker-wiring-issue.md
           else
             gh issue create --title "$TITLE" --label "auto-generated" --body-file /tmp/checker-wiring-issue.md
+          fi
+
+      - name: 🔍 Verify public snapshots
+        id: snapshots
+        run: |
+          set +e
+          npx tsx apps/web/scripts/verify-page-components-snapshot.ts > /tmp/page-components-verify.txt 2>&1
+          PAGE_EXIT=$?
+          npx tsx apps/web/scripts/verify-affiliate-ads-snapshot.ts > /tmp/affiliate-ads-verify.txt 2>&1
+          AFFILIATE_EXIT=$?
+          cat /tmp/page-components-verify.txt
+          cat /tmp/affiliate-ads-verify.txt
+          if [ "$PAGE_EXIT" -ne 0 ] || [ "$AFFILIATE_EXIT" -ne 0 ]; then
+            echo "exit_code=1" >> "$GITHUB_OUTPUT"
+          else
+            echo "exit_code=0" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: 🚨 Create issue on snapshot drift
+        if: steps.snapshots.outputs.exit_code == '1'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TITLE="[Consistency Alert] git TS と公開R2 snapshotのドリフト ($(date +%Y-%m-%d))"
+          EXISTING=$(gh issue list --label "auto-generated" --state open \
+            --search "公開R2 snapshotのドリフト in:title" --json number --jq '.[0].number // empty')
+          {
+            echo "git TS SSOT と公開R2 snapshotに不一致があります。"
+            echo ""
+            echo '```'
+            head -40 /tmp/page-components-verify.txt
+            head -40 /tmp/affiliate-ads-verify.txt
+            echo '```'
+          } > /tmp/snapshot-drift-issue.md
+          if [ -n "$EXISTING" ]; then
+            gh issue comment "$EXISTING" --body-file /tmp/snapshot-drift-issue.md
+          else
+            gh issue create --title "$TITLE" --label "auto-generated" --body-file /tmp/snapshot-drift-issue.md
           fi
 
       - name: 🚨 Create issue on error-level drift

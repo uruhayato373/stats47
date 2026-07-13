@@ -14,6 +14,7 @@ import { resolve } from "node:path";
 const PUBLIC_URL = process.env.R2_PUBLIC_FETCH_URL ?? "https://storage.stats47.jp";
 const DATA_ROOT = resolve(__dirname, "data/page-components");
 const CONCURRENCY = 24;
+const VERIFY_TOKEN = Date.now();
 
 const PAGE_TYPES = ["area", "area-category", "city-category", "theme"] as const;
 
@@ -73,7 +74,8 @@ async function main() {
       batch.map(async (c) => {
         let res: Response;
         try {
-          res = await fetch(c.url);
+          // publish直後のCDN旧キャッシュを読まないよう検証用queryを付与。
+          res = await fetch(`${c.url}?verify=${VERIFY_TOKEN}`);
         } catch (e) {
           mismatches.push(`${c.label}: fetch error ${String(e)}`);
           return;

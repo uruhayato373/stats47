@@ -107,6 +107,12 @@ jobs:
         run: node .claude/scripts/lib/check-static-assets.cjs
         continue-on-error: false
 
+      - name: 🖼️ Image and SVG Policy Regression Guard
+        # public画像のデコード/容量/OGP寸法/SVG安全性と、記事内相対画像参照を検査。
+        # 既存findingはbaselineで許容し、新規の欠落・肥大化だけをブロックする。
+        run: node .claude/scripts/lib/check-asset-policy.cjs --baseline
+        continue-on-error: false
+
       - name: 🧹 Repository Hygiene Regression Guard
         # origin/develop 由来の既存findingはbaselineで許容し、一時出力・大容量・
         # case/Unicode衝突の新規悪化だけをブロックする。
@@ -117,6 +123,37 @@ jobs:
         # check/audit/validate/verify/lint/guard 系scriptの新規未配線を検出。
         # 既存の未配線候補はbaselineで許容し、新規悪化だけを止める。
         run: node .claude/scripts/lib/check-checker-wiring.cjs --baseline
+        continue-on-error: false
+
+      - name: 📦 Workspace Contract Guard
+        # package entrypoint/exports、internal dependency、runtime循環、package-lock登録を検査。
+        run: node .claude/scripts/lib/check-workspace-contract.cjs
+        continue-on-error: false
+
+      - name: 🔐 Environment Registry Guard
+        # 値は読まず、コード/workflowが参照するenv名と公開区分だけを検査。
+        # 新規envは `.claude/config/env-registry.json` への登録を必須にする。
+        run: node .claude/scripts/lib/check-env-registry.cjs
+        continue-on-error: false
+
+      - name: 🧭 Route and SEO Contract Guard
+        # page metadata、literal canonical、静的route重複、noindex↔sitemap矛盾の新規悪化を検出。
+        run: node .claude/scripts/lib/check-route-contract.cjs --baseline
+        continue-on-error: false
+
+      - name: ♿ Static Accessibility Regression Guard
+        # TypeScript ASTでalt、blank link、click-only非interactive要素、form識別名を検査。
+        run: node .claude/scripts/lib/check-accessibility-static.cjs --baseline
+        continue-on-error: false
+
+      - name: 🧭 Maintenance Debt Regression Guard
+        # 無根拠TODO/FIXME/HACK、削除条件のないlegacy、永続D1 runtime復活の新規増加を止める。
+        run: node .claude/scripts/lib/check-maintenance-debt.cjs --baseline
+        continue-on-error: false
+
+      - name: ⏱️ Static Checker Runtime Budget
+        # 決定的checkerの実測時間をStep Summaryへ記録し、個別/合計予算の悪化を止める。
+        run: node .claude/scripts/lib/check-runtime-budget.cjs
         continue-on-error: false
 
       - name: 🚫 D1 Import Gate (Phase 7)
@@ -162,6 +199,7 @@ jobs:
           # warn (title年・※subtitle・冗長・重複) は表示のみで非ブロック (Phase 3 で是正)。
           # 規約: .claude/rules/metric-config-standards.md
           npm run validate:config --workspace=@stats47/data-configs
+          npm run build:registry --workspace=@stats47/data-configs -- --check
         continue-on-error: false
 
       - name: 📚 Theme Catalog Gate
@@ -397,13 +435,38 @@ jobs:
           fi
         continue-on-error: false
 
-  # 集約 job: 上記 5 job を全て needs し、単一の required status check
+  accessibility-e2e:
+    name: Accessibility E2E
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: 🧰 Checkout repository
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 🌐 Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: ♿ Run representative axe checks
+        run: npx playwright test tests/e2e/accessibility/representative-routes.spec.ts --project=e2e-chromium
+        working-directory: apps/web
+
+  # 集約 job: 上記 job を全て needs し、単一の required status check
   # (branch protection が要求する "Code Quality Check") を維持する。
   # if:always() で常に実行し、いずれかが failure/cancelled/skipped なら明示的に失敗させる
   # (needs のいずれかが失敗すると本 job は skip されうるため、結果を明示チェックする)。
   quality-check:
     name: Code Quality Check
-    needs: [static-gates, type-check, test, build, remote-asset-audit]
+    needs: [static-gates, type-check, test, build, remote-asset-audit, accessibility-e2e]
     if: always()
     runs-on: ubuntu-latest
     timeout-minutes: 5
@@ -413,7 +476,7 @@ jobs:
         if: ${{ contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled') || contains(needs.*.result, 'skipped') }}
         run: |
           echo "::error::One or more required checks did not pass."
-          echo "static-gates=${{ needs.static-gates.result }} type-check=${{ needs.type-check.result }} test=${{ needs.test.result }} build=${{ needs.build.result }} remote-asset-audit=${{ needs.remote-asset-audit.result }}"
+          echo "static-gates=${{ needs.static-gates.result }} type-check=${{ needs.type-check.result }} test=${{ needs.test.result }} build=${{ needs.build.result }} remote-asset-audit=${{ needs.remote-asset-audit.result }} accessibility-e2e=${{ needs.accessibility-e2e.result }}"
           exit 1
 
       - name: ✅ All Checks Passed

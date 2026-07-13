@@ -16,7 +16,8 @@ const PUBLIC_URL =
 const KEY = "app/affiliate-ads/all.json";
 
 async function main() {
-  const res = await fetch(`${PUBLIC_URL}/${KEY}`);
+  // publish直後のCDN旧キャッシュを読まないよう検証用queryを付与。
+  const res = await fetch(`${PUBLIC_URL}/${KEY}?verify=${Date.now()}`);
   if (!res.ok) {
     console.error(`❌ cloud fetch 失敗: HTTP ${res.status} ${KEY}`);
     process.exit(1);
