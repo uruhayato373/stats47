@@ -1,0 +1,121 @@
+# .claude/state/themes/ — テーマポートフォリオ state (schema 正典)
+
+`theme-portfolio-manager` agent が管理する**テーマ別評価・実験台帳の決定的 JSON**。
+テーマ定義の SSOT は ThemeCatalog (`packages/data-configs/src/theme-catalog/`) であり、
+**ここには変動値 (GSC/GA4/品質評価) だけを置く。ThemeCatalog に計測値を書かない**。
+
+- **書き込み口**: `theme-portfolio-manager` (build スクリプト経由) のみ。手編集しない。
+- **再構築可能**: ThemeCatalog (git TS) + 計測 snapshot (`.claude/state/metrics/` /
+  `.claude/skills/analytics/{gsc,ga4}-improvement/reference/snapshots/`) + レビュー文書
+  (`docs/04_レビュー/*-theme-*.md`) から常に再導出できる派生物 (blog remediation-queue と同思想)。
+- **検証**: `node .claude/scripts/themes/validate-theme-state.mjs` (決定的 lint。schema +
+  下記の判定規律を enforce。pre-commit/CI 配線は PR-4)。
+- 運用設計の正典: `docs/02_実装計画/25_テーマポートフォリオ運用.md`。判定基準の正典:
+  `docs/02_実装計画/24_テーマ分類再編成方針.md`。
+
+## portfolio.json
+
+```jsonc
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-07-13",          // 生成日 (YYYY-MM-DD)
+  "themes": [
+    {
+      "themeKey": "aging-society",       // 必須・一意。THEME_CATALOGS または legacy キー
+      "catalogStatus": "catalog",        // "catalog" (THEME_CATALOGS 登録) | "legacy" (IndicatorSet のみ)
+      "lifecycleStatus": "keep",         // 下記 enum
+      "reviewStatus": "reviewed",        // "reviewed" | "review-missing" | "stale" (レビュー後にカタログが大きく変わった)
+      "reviewDocRef": "docs/04_レビュー/2026-07-11-theme-aging-society.md",
+      "latestDataYear": "2023",          // R2 values 実測から (未集計は null)
+      "primaryMetricCount": 1,           // ThemeCatalog から決定的に導出
+      "secondaryMetricCount": 6,
+      "contextMetricCount": 3,
+      "selectionMissingCount": 7,        // primary/secondary で selection 未記入の数
+      "chartCount": 15,
+      "officialSourceReviewedAt": "2026-07-11", // selection.surveyedAt の最新 or レビュー日 (無ければ null)
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
+      "metrics": {                        // 実測の集計コピー。取れない値は status で明示し推測値を入れない
+        "gsc": { "status": "measured",    // "measured" | "insufficient-data" | "not-instrumented"
+                 "windowDays": 56, "clicks": 120, "impressions": 4300,
+                 "ctr": 0.028, "avgPosition": 12.4 },
+        "ga4": { "status": "measured", "windowDays": 56,
+                 "pageViews": 800, "activeUsers": 500,
+                 "engagementRate": 0.61, "avgSessionDurationSec": 74 },
+        "internalNav": { "status": "not-instrumented" }  // theme→ranking/blog 遷移・指標クリック。GA4 未計装 (25_テーマポートフォリオ運用 §1.3)
+      },
+      "contentCoverage": { "relatedArticles": 4 },   // 関連記事数 (未集計は null)
+      "dataQualityStatus": "ok",         // "ok" | "stale-data" (最新年が古い) | "gaps" (欠測あり) | "unknown"
+      "currentHypothesis": "支え手比率の主問化で滞在が伸びる", // 無ければ null
+      "nextReviewAt": "2026-10-01",
+      "evidenceRefs": [                   // レビュー文書・実測・実験 ID への参照
+        "docs/04_レビュー/2026-07-11-theme-aging-society.md"
+      ]
+    }
+  ]
+}
+```
+
+### lifecycleStatus enum
+
+`keep` / `improve` / `merge-candidate` / `split-candidate` / `rename-candidate` /
+`retire-candidate` / `insufficient-data`
+
+### 判定規律 (validator が enforce・根拠なし判定の禁止)
+
+1. `merge-candidate` / `split-candidate` / `rename-candidate` / `retire-candidate` は
+   **`evidenceRefs` ≥ 2 が必須** (レビュー文書 + 実測 or 実験)。
+2. `merge-candidate` / `retire-candidate` はさらに **`metrics.gsc.status === "measured"` かつ
+   `metrics.gsc.windowDays ≥ 56` が必須** — 「データ不足」(insufficient-data/not-instrumented) を
+   「需要不足」と混同して廃止判定することを機械的に禁止する。標本不足なら lifecycleStatus 自体を
+   `insufficient-data` にする。
+3. 最低標本数 (これ未満は `insufficient-data`): GSC impressions **200/観測期間**・GA4 pageViews
+   **100/観測期間** (初期値。改訂は本 README を更新)。
+4. 観測期間の使い分け: 7 日 = 異常検知のみ (判定に使わない) / 28 日 = 暫定判定 / **56 日 = 基本判定**。
+5. 季節性・検索順位変動・サイト全体変動が疑われる場合は experiments.json の `notes` に注記必須。
+
+## experiments.json
+
+```jsonc
+{
+  "schemaVersion": 1,
+  "experiments": [
+    {
+      "experimentId": "THEME-EXP-001",   // 必須・一意
+      "themeKey": "aging-society",
+      "hypothesis": "primary を老年化指数に変更すると CTR が改善する",
+      "changeType": "catalog-metrics",   // "catalog-metrics" | "catalog-charts" | "copy" | "structure" | "merge" | "split" | "rename" | "retire"
+      "baselinePeriod": { "from": "2026-05-18", "to": "2026-07-12" },
+      "startedAt": "2026-07-13",
+      "evaluateAt": { "d7": "2026-07-20", "d28": "2026-08-10", "d56": "2026-09-07" },
+      "primaryKpi": "gsc.clicks",
+      "guardrailKpis": ["gsc.avgPosition", "ga4.engagementRate"],
+      "baseline": { "gsc.clicks": 120, "gsc.avgPosition": 12.4, "ga4.engagementRate": 0.61 },
+      "result": null,                     // 判定時に {d7:{...}, d28:{...}, d56:{...}} を記録
+      "verdict": "pending",               // "pending" | "effect-full" | "effect-partial" | "effect-none" | "effect-adverse" | "insufficient-data" | "aborted"
+      "notes": null,                      // 季節性・順位変動・サイト全体変動の注記
+      "evidenceRefs": []
+    }
+  ]
+}
+```
+
+### 実験規律 (validator が enforce)
+
+1. `experimentId` は一意。
+2. **同一 `themeKey` × `changeType` で verdict が `pending` の実験は 1 件まで** (重複実験の防止)。
+3. `verdict` の確定は d7 では不可 (d7 は異常検知のみ)。d28 = 暫定 / d56 = 基本判定。
+4. `baseline` の無い実験は登録不可 (効果測定不能な実験を作らない)。
+5. verdict 確定時は `result` と `evidenceRefs` (実測 snapshot への参照) が必須。
+6. effect/* の**バックログ status への反映は improvement-triage に依頼する** (本 state は判定材料と
+   実験履歴の台帳であり、`docs/todo/01_改善バックログ.md` へは書かない)。
+
+## 禁止事項
+
+| NG | OK |
+|---|---|
+| portfolio/experiments を手編集 | build スクリプト経由で再生成・更新 |
+| ThemeCatalog に GSC/GA4 等の変動値を書く | 変動値は本 state のみ。カタログは定義のみ |
+| 推測値・代替値を measured として保存 | 取れない値は insufficient-data / not-instrumented |
+| 根拠 (evidenceRefs/56日測定) なしの merge/retire | validator が error で弾く |
+| `docs/todo/01_改善バックログ.md` へ直接書く | improvement-triage へ引き渡す |

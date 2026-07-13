@@ -14,7 +14,7 @@
 
 `task-router` は agent ファイルではなく **skill** (`.claude/skills/management/task-router/SKILL.md`)。 Claude が内部参照 (`user-invocable: false`) で agent / skill 選択に利用。 全 agent から呼ばれる dispatcher なので Tier 0 として明示する。
 
-## Tier 1: Strategy / Planning (4 体)
+## Tier 1: Strategy / Planning (5 体)
 
 | agent | role | 派生元 |
 |---|---|---|
@@ -22,6 +22,7 @@
 | `knowledge-curator` 🆕 | 失敗・学びの記録 + auto memory 整理 | strategy-advisor 分離 |
 | `improvement-triage` 🆕 | 改善バックログ整理 + status 更新 (`docs/todo/01_改善バックログ.md` 排他 append) | strategy-advisor 分離 |
 | `blog-seo-strategist` 🆕 | ブログSEO拡充戦略の戦略ハブ (施策 done/todo 台帳 + 型配分 + 四半期再学習)。真実源 `.claude/state/blog/seo-strategy.json`。実行は trend-scout(記事)/ranking-expander(ランキング)/gsc-analyst(KPI)/improvement-triage(effect) に委譲。戦略全文は本 agent §戦略コンテキスト (旧 docs/02 doc 15 を統合し SSOT を .claude に一本化) | 2026-07-12 新設 |
+| `theme-portfolio-manager` 🆕 | テーマ群 (22) のポートフォリオ管理ハブ (blog-seo-strategist のテーマ版)。テーマ別 GSC/GA4/データ品質を評価し keep/improve/merge/split/rename/retire を実測根拠つきで判定、実験 baseline/効果測定を台帳管理。真実源 `.claude/state/themes/{portfolio,experiments}.json` (validator: `.claude/scripts/themes/validate-theme-state.mjs`)。実行は theme-researcher(調査)/theme-designer(カタログ設計)/improvement-triage(effect ラベル・排他 writer) に委譲。判定基準の正典 = `docs/02_実装計画/24_テーマ分類再編成方針.md`、運用設計 = `docs/02_実装計画/25_テーマポートフォリオ運用.md` | 2026-07-13 新設 |
 
 ## Tier 2: Data / Infra (9 体)
 
