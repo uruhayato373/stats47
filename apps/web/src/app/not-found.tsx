@@ -4,6 +4,7 @@ import { Button } from "@stats47/components";
 import { LayoutDashboard, Home, MapPin, Search } from "lucide-react";
 
 import { PageShell } from "@/components/layout";
+import { SurfaceLinkCard } from "@/components/surface";
 
 import { NotFoundTracker } from "@/lib/analytics/components/NotFoundTracker";
 
@@ -35,16 +36,16 @@ export default function NotFound() {
           {NOT_FOUND_LINKS.map((link) => {
             const Icon = link.icon;
             return (
-              <Link
+              <SurfaceLinkCard
                 key={link.href}
                 href={link.href}
-                className="group flex flex-col items-center gap-1.5 rounded-none border border-border bg-card px-3 py-4 transition-colors hover:border-primary/40 hover:bg-accent/30"
+                className="group flex flex-col items-center gap-1.5 px-3 py-4"
               >
                 <Icon className="h-5 w-5 text-muted-foreground group-hover:text-primary" />
                 <span className="text-xs font-semibold text-foreground">
                   {link.label}
                 </span>
-              </Link>
+              </SurfaceLinkCard>
             );
           })}
         </div>

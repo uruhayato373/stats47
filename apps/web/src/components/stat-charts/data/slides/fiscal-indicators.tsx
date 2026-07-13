@@ -5,6 +5,8 @@ import {
   TrendingDown,
 } from "lucide-react";
 
+import { SurfaceCard } from "@/components/surface";
+
 import type { SlideData } from "../../types";
 
 export const fiscalIndicatorsSlides: SlideData[] = [
@@ -21,18 +23,18 @@ export const fiscalIndicatorsSlides: SlideData[] = [
           </p>
         </div>
         <div className="grid grid-cols-3 gap-4 text-center">
-          <div className="p-4 bg-card rounded-none border shadow-sm">
+          <SurfaceCard className="text-center">
             <div className="text-blue-600 font-bold text-xl mb-1">可視化</div>
             <p className="text-xs text-muted-foreground">連結ベースの指標導入</p>
-          </div>
-          <div className="p-4 bg-card rounded-none border shadow-sm">
+          </SurfaceCard>
+          <SurfaceCard className="text-center">
             <div className="text-blue-600 font-bold text-xl mb-1">早期発見</div>
             <p className="text-xs text-muted-foreground">健全化基準の設定</p>
-          </div>
-          <div className="p-4 bg-card rounded-none border shadow-sm">
+          </SurfaceCard>
+          <SurfaceCard className="text-center">
             <div className="text-blue-600 font-bold text-xl mb-1">徹底公開</div>
             <p className="text-xs text-muted-foreground">住民への情報開示義務</p>
-          </div>
+          </SurfaceCard>
         </div>
       </div>
     ),

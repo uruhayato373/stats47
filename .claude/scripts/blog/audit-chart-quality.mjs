@@ -32,7 +32,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { lintSvgContent, extractInlineSvgs, lintSvgSize } from "../lib/svg-lint.mjs";
+import { lintSvgContent, extractInlineSvgs, lintSvgSize, lintChoroplethLegend, lintFindingsParity } from "../lib/svg-lint.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -88,13 +88,24 @@ function auditArticle(slug) {
     }
   };
 
-  // data/*.svg (内容 lint + カタログ別サイズ統一 lint)
+  // data/*.svg (内容 lint + カタログ別サイズ統一 lint + json ペア検査)
   if (fs.existsSync(dataDir)) {
     for (const f of fs.readdirSync(dataDir).filter((x) => x.endsWith(".svg"))) {
       const svg = fs.readFileSync(path.join(dataDir, f), "utf8");
       const a = lintSvgContent(svg);
       const b = lintSvgSize(f, svg); // 非正規 viewBox 幅 (アスペクト比統一・再発防止)
-      consume(`data/${f}`, { errors: [...a.errors, ...b.errors], warnings: [...a.warnings, ...b.warnings] });
+      // ペア検査 (json があるときのみ): 凡例の意味的ラベル誤用 / findings の内容パリティ
+      let jsonData;
+      const jsonPath = path.join(dataDir, f.replace(/\.svg$/, ".json"));
+      if (fs.existsSync(jsonPath)) {
+        try { jsonData = JSON.parse(fs.readFileSync(jsonPath, "utf8")); } catch { /* 壊れた json は系譜 gate が捕捉 */ }
+      }
+      const c = lintChoroplethLegend(f, svg, jsonData);
+      const d = jsonData !== undefined ? lintFindingsParity(f, svg, jsonData) : { errors: [], warnings: [] };
+      consume(`data/${f}`, {
+        errors: [...a.errors, ...b.errors, ...c.errors, ...d.errors],
+        warnings: [...a.warnings, ...b.warnings, ...c.warnings, ...d.warnings],
+      });
     }
   }
   // article.md インライン <svg>

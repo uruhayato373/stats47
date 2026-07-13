@@ -7,7 +7,7 @@ tags: [data-source, mlit, gis]
 # 国土交通データプラットフォーム カタログ・ツール reference
 
 > `/search-mlit-dpf` skill の参照データ (カタログ一覧 / MCP ツール / 属性フィルタ)。
-> 2026-07-12 に旧 `docs/01_技術設計/05_国土交通データプラットフォーム.md` を skill reference へ移設 (SSOT を .claude に一本化)。
+> 2026-07-12 に旧 doc `05_国土交通データプラットフォーム.md` (docs/01_技術設計・削除) を本 skill reference へ移設 (SSOT を .claude に一本化)。
 
 国土交通省が運営するデータプラットフォーム（https://data-platform.mlit.go.jp/）から GIS・統計・インフラデータを検索・取得する。
 

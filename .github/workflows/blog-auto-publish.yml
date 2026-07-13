@@ -61,13 +61,13 @@ jobs:
     timeout-minutes: 40
     steps:
       - name: 🧰 Checkout develop
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         with:
           ref: develop
           fetch-depth: 2 # 差分検出フォールバック (HEAD~1..HEAD) のため
 
       - name: 🟢 Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: "20"
           cache: "npm"
@@ -81,7 +81,7 @@ jobs:
           INPUT_SLUGS="${{ inputs.slugs }}"
           if [ -n "$INPUT_SLUGS" ]; then
             # 明示指定: そのまま採用 (存在 + published:true は次ステップのゲートで担保)
-            CANDIDATES=$(echo "$INPUT_SLUGS" | tr ', ' '\n\n' | sed '/^$/d')
+            CANDIDATES=$(echo "$INPUT_SLUGS" | tr ', ' '\n' | sed '/^$/d')
           else
             # フォールバック: develop 最新コミットで変更された article.md を検出。
             # ★ core.quotepath=false で日本語パスをエスケープせず出力 (既定 true だと
@@ -92,9 +92,10 @@ jobs:
             for f in $CHANGED; do CANDIDATES="$CANDIDATES $(basename "$(dirname "$f")")"; done
             # reconcile: 変更検出が空なら、published:true なのに配信 all.json に未掲載の記事を backfill。
             # (workflow 自身の変更で発火したケースや、過去の取りこぼしを self-heal する)
-            if [ -z "$(echo $CANDIDATES | xargs)" ]; then
+            if [ -z "$(echo "$CANDIDATES" | xargs)" ]; then
               echo "変更検出 0 → 未公開 backfill (reconcile) モード"
               curl -fsS "${R2_PUBLIC_FETCH_URL}/app/blog/all.json" -o /tmp/live-all.json 2>/dev/null || echo '{"articles":[]}' > /tmp/live-all.json
+              # shellcheck disable=SC2016  # node -e 内の ${...} は JS。shell 展開させない
               CANDIDATES=$(node -e '
                 const fs=require("fs");
                 let live=new Set();
@@ -120,7 +121,7 @@ jobs:
               echo "skip (not found / published!=true): $slug"
             fi
           done
-          SLUGS=$(echo $SLUGS | xargs -n1 2>/dev/null | head -n "${MAX_PUBLISH}" | xargs || true)
+          SLUGS=$(echo "$SLUGS" | xargs -n1 2>/dev/null | head -n "${MAX_PUBLISH}" | xargs || true)
           echo "slugs=$SLUGS" >> "$GITHUB_OUTPUT"
           echo "検出: ${COUNT} 件 (上限 ${MAX_PUBLISH} に丸め) → ${SLUGS:-なし}"
           {
@@ -160,8 +161,10 @@ jobs:
             echo "✅ $SLUG published"
             echo "::endgroup::"
           done
-          echo "PUBLISHED=$PUBLISHED" >> "$GITHUB_ENV"
-          echo "SKIPPED=$SKIPPED" >> "$GITHUB_ENV"
+          {
+            echo "PUBLISHED=$PUBLISHED"
+            echo "SKIPPED=$SKIPPED"
+          } >> "$GITHUB_ENV"
 
       - name: 🧮 Regenerate blog index (all.json) + push
         if: ${{ steps.detect.outputs.slugs != '' }}
@@ -175,13 +178,13 @@ jobs:
           # 公開された記事だけをピンポイントパージ (全ゾーンパージは避ける)。
           URLS=""
           for SLUG in $PUBLISHED; do URLS="$URLS https://stats47.jp/blog/$SLUG"; done
-          if [ -z "$(echo $URLS | xargs)" ]; then
+          if [ -z "$(echo "$URLS" | xargs)" ]; then
             echo "公開0件のため purge skip"; exit 0
           fi
           # 記事追加で内容が変わる索引系もパージ
           URLS="$URLS https://stats47.jp/blog https://stats47.jp/ https://stats47.jp/sitemap.xml"
           echo "purge: $URLS"
-          npx tsx packages/r2-storage/src/scripts/purge-cache.ts --urls $URLS
+          npx tsx packages/r2-storage/src/scripts/purge-cache.ts --urls "$URLS"
 
       # docs/21 は ephemeral outbox: 公開に成功した slug のドラフトを R2 反映後に削除し、
       # commit-back する。これで docs/21 は常に空 (未公開ドラフトのみ) に保たれ、R2(正典)と
@@ -212,6 +215,8 @@ jobs:
       - name: 📝 Summary
         if: always()
         run: |
-          echo "- ✅ 公開: ${PUBLISHED:-なし}" >> "$GITHUB_STEP_SUMMARY"
-          echo "- ⏭️ ゲート未達でスキップ: ${SKIPPED:-なし}" >> "$GITHUB_STEP_SUMMARY"
-          echo "- 🧹 docs/21 outbox: 公開済みドラフトを削除済 (ephemeral)" >> "$GITHUB_STEP_SUMMARY"
+          {
+            echo "- ✅ 公開: ${PUBLISHED:-なし}"
+            echo "- ⏭️ ゲート未達でスキップ: ${SKIPPED:-なし}"
+            echo "- 🧹 docs/21 outbox: 公開済みドラフトを削除済 (ephemeral)"
+          } >> "$GITHUB_STEP_SUMMARY"

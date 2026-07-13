@@ -1,0 +1,51 @@
+name: 🧮 Enumerate SSDS Indicators
+
+# SSDS (社会・人口統計体系) 都道府県テーブルの全 cat01 を列挙し、既存 config と突合して
+# 未使用 cdCat01 = クリーンに追加できるランキング候補を洗い出す。read-only。
+# e-Stat APP_ID は CI 専任。専用ブランチ estat-ssds-run への push で発火 (main デプロイ不要)。
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [estat-ssds-run]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: estat-ssds
+  cancel-in-progress: true
+
+env:
+  NEXT_PUBLIC_ESTAT_APP_ID: ${{ secrets.NEXT_PUBLIC_ESTAT_APP_ID }}
+
+jobs:
+  enumerate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: 🧰 Checkout
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          fetch-depth: 1
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: 📦 Install deps
+        run: npm ci
+
+      - name: 🧮 Enumerate SSDS cdCat01
+        run: node .claude/scripts/estat/enumerate-ssds-indicators.mjs
+
+      - name: 📤 Upload candidates
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: ssds-candidates
+          path: .claude/state/estat/ssds-candidates*.json
+          retention-days: 30
+          if-no-files-found: warn

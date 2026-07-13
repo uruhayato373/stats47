@@ -1,0 +1,745 @@
+{
+  "version": 1,
+  "description": "Environment variable names and exposure classes. Values must never be stored here.",
+  "variables": [
+    {
+      "name": "ACCESSIBILITY_BASELINE",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "ANALYZE",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "ANGLE",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "ANTHROPIC_API_KEY",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "ASSET_POLICY_BASELINE",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "AUTH_SECRET",
+      "visibility": "secret",
+      "contexts": [
+        "secret"
+      ]
+    },
+    {
+      "name": "BASE_URL",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "BLOG_DIR",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "CATALOG_INDEX",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "CHECKER_WIRING_BASELINE",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "CHECK_RUNTIME_CONFIG",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "CI",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "CLAUDE_PROJECT_DIR",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "CLAUDE_SESSION_ID",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "CLOUDFLARE_ACCOUNT_ID",
+      "visibility": "secret",
+      "contexts": [
+        "process",
+        "secret"
+      ]
+    },
+    {
+      "name": "CLOUDFLARE_API_TOKEN",
+      "visibility": "secret",
+      "contexts": [
+        "process",
+        "secret"
+      ]
+    },
+    {
+      "name": "CLOUDFLARE_R2_ACCESS_KEY_ID",
+      "visibility": "secret",
+      "contexts": [
+        "secret"
+      ]
+    },
+    {
+      "name": "CLOUDFLARE_R2_BUCKET_NAME",
+      "visibility": "secret",
+      "contexts": [
+        "process",
+        "secret"
+      ]
+    },
+    {
+      "name": "CLOUDFLARE_R2_SECRET_ACCESS_KEY",
+      "visibility": "secret",
+      "contexts": [
+        "secret"
+      ]
+    },
+    {
+      "name": "CLOUDFLARE_WORKERS",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "CLOUDFLARE_ZONE_ID",
+      "visibility": "secret",
+      "contexts": [
+        "process",
+        "secret"
+      ]
+    },
+    {
+      "name": "CONTENT_KEY",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "D1_DATABASE_ID",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "DB_LOCAL",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "DOCS_LINKS_BASELINE",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "DRY_RUN",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "ENV_REGISTRY_PATH",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "EXPANSION_QUEUE_NOW",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "GA4_PROPERTY_ID",
+      "visibility": "secret",
+      "contexts": [
+        "process",
+        "secret"
+      ]
+    },
+    {
+      "name": "GEMINI_API_KEY",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "GH_SECRETS_PAT",
+      "visibility": "secret",
+      "contexts": [
+        "secret"
+      ]
+    },
+    {
+      "name": "GITHUB_ACTIONS",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "GITHUB_OUTPUT",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "GITHUB_RUN_ID",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "GITHUB_STEP_SUMMARY",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "GITHUB_TOKEN",
+      "visibility": "secret",
+      "contexts": [
+        "secret"
+      ]
+    },
+    {
+      "name": "GOOGLE_ADSENSE_ACCOUNT_ID",
+      "visibility": "secret",
+      "contexts": [
+        "secret"
+      ]
+    },
+    {
+      "name": "GOOGLE_ADSENSE_CLIENT_ID",
+      "visibility": "secret",
+      "contexts": [
+        "secret"
+      ]
+    },
+    {
+      "name": "GOOGLE_ADSENSE_CLIENT_SECRET",
+      "visibility": "secret",
+      "contexts": [
+        "secret"
+      ]
+    },
+    {
+      "name": "GOOGLE_ADSENSE_REFRESH_TOKEN",
+      "visibility": "secret",
+      "contexts": [
+        "secret"
+      ]
+    },
+    {
+      "name": "GOOGLE_API_KEY",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "GOOGLE_OAUTH_CLIENT_ID",
+      "visibility": "secret",
+      "contexts": [
+        "secret"
+      ]
+    },
+    {
+      "name": "GOOGLE_OAUTH_CLIENT_SECRET",
+      "visibility": "secret",
+      "contexts": [
+        "secret"
+      ]
+    },
+    {
+      "name": "GOOGLE_OAUTH_REFRESH_TOKEN",
+      "visibility": "secret",
+      "contexts": [
+        "secret"
+      ]
+    },
+    {
+      "name": "GOOGLE_SERVICE_ACCOUNT_KEY_JSON",
+      "visibility": "secret",
+      "contexts": [
+        "process",
+        "secret"
+      ]
+    },
+    {
+      "name": "HTTPS_PROXY",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "HTTP_PROXY",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "IG_DRY_RUN",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "IG_FORCE_DATE",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "IG_FORCE_TIME",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "IG_PUBLIC_R2_BASE",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "IG_SCHEDULE_FILE",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "IG_TOKEN_OUT",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "INSTAGRAM_ACCESS_TOKEN",
+      "visibility": "secret",
+      "contexts": [
+        "process",
+        "secret"
+      ]
+    },
+    {
+      "name": "INSTAGRAM_BUSINESS_ACCOUNT_ID",
+      "visibility": "secret",
+      "contexts": [
+        "process",
+        "secret"
+      ]
+    },
+    {
+      "name": "LOCAL_DB_PATH",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "LOCAL_DB_ROOT",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "LOG_LEVEL",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "MAINTENANCE_DEBT_BASELINE",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "META_PAGE_ACCESS_TOKEN",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "MLIT_API_KEY",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "NEXT_PHASE",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "NEXT_PUBLIC_AMAZON_ASSOCIATE_TAG",
+      "visibility": "public",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "NEXT_PUBLIC_BASE_URL",
+      "visibility": "public",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "NEXT_PUBLIC_BASE_URL_PRODUCTION",
+      "visibility": "public",
+      "contexts": [
+        "secret"
+      ]
+    },
+    {
+      "name": "NEXT_PUBLIC_ENV",
+      "visibility": "public",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "NEXT_PUBLIC_ESTAT_APP_ID",
+      "visibility": "public",
+      "contexts": [
+        "process",
+        "secret"
+      ]
+    },
+    {
+      "name": "NEXT_PUBLIC_ESTAT_MAX_RETRIES",
+      "visibility": "public",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "NEXT_PUBLIC_ESTAT_RATE_LIMIT_PER_MINUTE",
+      "visibility": "public",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "NEXT_PUBLIC_ESTAT_REQUEST_TIMEOUT_MS",
+      "visibility": "public",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "NEXT_PUBLIC_ESTAT_RETRY_DELAY_MS",
+      "visibility": "public",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "NEXT_PUBLIC_GA_MEASUREMENT_ID",
+      "visibility": "public",
+      "contexts": [
+        "process",
+        "secret"
+      ]
+    },
+    {
+      "name": "NEXT_PUBLIC_GOOGLE_ADSENSE_CLIENT_ID",
+      "visibility": "public",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "NEXT_PUBLIC_GOOGLE_ADSENSE_ENABLED",
+      "visibility": "public",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "NEXT_PUBLIC_KOMUIN_AI_GUIDE_URL",
+      "visibility": "public",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "NEXT_PUBLIC_R2_GEOSHAPE_URL",
+      "visibility": "public",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "NEXT_PUBLIC_R2_PUBLIC_URL",
+      "visibility": "public",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "NEXT_PUBLIC_RAKUTEN_AFFILIATE_ID",
+      "visibility": "public",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "NEXT_PUBLIC_TECH_SCHOOL_AFFILIATE_URL",
+      "visibility": "public",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "NEXT_RUNTIME",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "NEXT_SKIP_BUILD_TYPECHECK",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "NODE_ENV",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "NO_PROXY",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "OGP_DEBUG",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "PLAYWRIGHT_TEST_BASE_URL",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "PORT",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "POST_ID",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "PSI_API_KEY",
+      "visibility": "secret",
+      "contexts": [
+        "process",
+        "secret"
+      ]
+    },
+    {
+      "name": "R2_ACCESS_KEY_ID",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "R2_PUBLIC_FETCH_URL",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "R2_S3_ENDPOINT",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "R2_SECRET_ACCESS_KEY",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "RAKUTEN_APP_ID",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "REPO_HYGIENE_BASELINE",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "REPO_HYGIENE_MAX_BYTES",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "ROUTE_CONTRACT_BASELINE",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "SITE_ORIGIN",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "SNS_METRICS_REPO_ROOT",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "SNS_R2_BASE",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "STATE_DIR",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "SURVEYS_JSON",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "USER",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "VITEST",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "XXX",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    }
+  ]
+}

@@ -24,13 +24,13 @@ jobs:
     timeout-minutes: 5
     steps:
       - name: 🧰 Checkout develop
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         with:
           ref: develop
           fetch-depth: 1
 
       - name: 🟢 Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: "20"
 
@@ -38,7 +38,7 @@ jobs:
         id: month
         run: |
           MONTH=$(date -u +%Y-%m)
-          echo "month=$MONTH" >> $GITHUB_OUTPUT
+          echo "month=$MONTH" >> "$GITHUB_OUTPUT"
 
       - name: 🔎 Extract low-CTR queries
         id: extract
@@ -50,11 +50,11 @@ jobs:
             --max "$MAX" > /tmp/ctr/body.md
 
           if grep -q "^skip:" /tmp/ctr/body.md; then
-            echo "skipped=true" >> $GITHUB_OUTPUT
+            echo "skipped=true" >> "$GITHUB_OUTPUT"
             echo "--- skipped ---"
             cat /tmp/ctr/body.md
           else
-            echo "skipped=false" >> $GITHUB_OUTPUT
+            echo "skipped=false" >> "$GITHUB_OUTPUT"
             echo "--- preview ---"
             head -40 /tmp/ctr/body.md
           fi
@@ -78,7 +78,7 @@ jobs:
 
       - name: 📄 Write GitHub Step Summary
         if: steps.extract.outputs.skipped == 'false'
-        run: cat /tmp/ctr/issue.md >> $GITHUB_STEP_SUMMARY
+        run: cat /tmp/ctr/issue.md >> "$GITHUB_STEP_SUMMARY"
 
       - name: 🚨 Open or update monthly issue
         if: steps.extract.outputs.skipped == 'false'

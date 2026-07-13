@@ -53,13 +53,13 @@ jobs:
     timeout-minutes: 45
     steps:
       - name: 🧰 Checkout develop
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         with:
           ref: develop
           fetch-depth: 1
 
       - name: 🟢 Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: "20"
           cache: "npm"
@@ -86,7 +86,7 @@ jobs:
             ')
           fi
           echo "list=$SLUGS" >> "$GITHUB_OUTPUT"
-          echo "対象 slug 数: $(echo $SLUGS | wc -w)"
+          echo "対象 slug 数: $(echo "$SLUGS" | wc -w)"
 
       - name: 🎨 Regenerate SVGs via svg-builder
         run: |
@@ -111,7 +111,7 @@ jobs:
             --out /tmp/blog-svg-gallery.html || true
 
       - name: 📤 Upload gallery artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: blog-svg-gallery
           path: /tmp/blog-svg-gallery.html
@@ -125,10 +125,12 @@ jobs:
 
       - name: 📝 Summary
         run: |
-          echo "### 🎨 Regenerate Blog SVGs" >> $GITHUB_STEP_SUMMARY
-          echo "- dry_run: \`${{ github.event.inputs.dry_run }}\`" >> $GITHUB_STEP_SUMMARY
-          echo "- 対象 slug: \`${{ github.event.inputs.slugs || 'all' }}\`" >> $GITHUB_STEP_SUMMARY
-          echo "- ギャラリー: artifact \`blog-svg-gallery\` をダウンロードして視覚確認" >> $GITHUB_STEP_SUMMARY
+          {
+            echo "### 🎨 Regenerate Blog SVGs"
+            echo "- dry_run: \`${{ github.event.inputs.dry_run }}\`"
+            echo "- 対象 slug: \`${{ github.event.inputs.slugs || 'all' }}\`"
+            echo "- ギャラリー: artifact \`blog-svg-gallery\` をダウンロードして視覚確認"
+          } >> "$GITHUB_STEP_SUMMARY"
           if [ "${{ github.event.inputs.dry_run }}" != "false" ]; then
-            echo "- ⚠️ dry-run のため R2 へは push していません" >> $GITHUB_STEP_SUMMARY
+            echo "- ⚠️ dry-run のため R2 へは push していません" >> "$GITHUB_STEP_SUMMARY"
           fi

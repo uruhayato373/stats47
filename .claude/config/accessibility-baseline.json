@@ -1,0 +1,5 @@
+{
+  "version": 1,
+  "description": "Known static accessibility findings. New code/file/line tuples fail --baseline.",
+  "findings": []
+}

@@ -86,7 +86,7 @@ export async function CompareGridLayout({ regions, components }: CompareGridLayo
           {regions.map((region) => (
             <div
               key={`${comp.componentKey}-${region.areaCode}`}
-              className="overflow-hidden rounded-lg border"
+              className="overflow-hidden rounded-none border"
               style={{ borderColor: `${region.color}33` }}
             >
                 <Suspense fallback={<ChartSkeleton />}>

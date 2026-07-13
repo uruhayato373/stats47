@@ -1,9 +1,9 @@
 {
-  "hash": "1ab78683903d3a4cfc1f024d4504cd53ba18cbd1ec28b3759dbff49aefdeaa31",
-  "audited_at": "2026-07-12T09:02:14",
+  "hash": "7308afe55c8ca1fefc43c0ef3f0f7606cc4c016809c9769d0a0a3d1db230b224",
+  "audited_at": "2026-07-13T18:15:18",
   "files": [
-    ".claude/agents/gis-curator.md",
-    ".claude/scripts/lib/check-card-census.cjs",
-    ".claude/skills/estat/search-mlit-dpf/SKILL.md"
+    ".claude/hooks/check-weekly-cadence-on-stop.js",
+    ".claude/scripts/management/check-weekly-cadence.mjs",
+    ".claude/settings.json"
   ]
 }

@@ -34,13 +34,13 @@ jobs:
     timeout-minutes: 15
     steps:
       - name: 🧰 Checkout develop
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         with:
           ref: develop
           fetch-depth: 1
 
       - name: 🟢 Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: "20"
 
@@ -69,16 +69,16 @@ jobs:
           node .claude/scripts/blog/compose-daily-rewrite-issue.mjs --next "$NEXT" \
             > /tmp/blog-remediation/issue.md
           if head -1 /tmp/blog-remediation/issue.md | grep -q "^skip:"; then
-            echo "skipped=true" >> $GITHUB_OUTPUT
+            echo "skipped=true" >> "$GITHUB_OUTPUT"
             echo "--- skipped ---"; cat /tmp/blog-remediation/issue.md
           else
-            echo "skipped=false" >> $GITHUB_OUTPUT
+            echo "skipped=false" >> "$GITHUB_OUTPUT"
             head -20 /tmp/blog-remediation/issue.md
           fi
 
       - name: 📄 Write GitHub Step Summary
         if: steps.compose.outputs.skipped == 'false'
-        run: cat /tmp/blog-remediation/issue.md >> $GITHUB_STEP_SUMMARY
+        run: cat /tmp/blog-remediation/issue.md >> "$GITHUB_STEP_SUMMARY"
 
       - name: 🔔 Open or update daily rewrite issue
         if: steps.compose.outputs.skipped == 'false'

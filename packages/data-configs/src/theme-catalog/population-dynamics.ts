@@ -8,9 +8,37 @@ export const POPULATION_DYNAMICS_CATALOG: ThemeCatalog = {
   "usage": "theme",
   "metrics": [
     {
+      "rankingKey": "population-growth-rate",
+      "shortLabel": "人口増減率",
+      "role": "primary",
+      "selection": {
+        "proposedBy": "総務省統計局「人口推計（2024年10月1日現在）」",
+        "sourceUrl": "https://www.stat.go.jp/data/jinsui/2024np/index.html",
+        "surveyedAt": "2026-07-11",
+        "rationale": "テーマの主問「人口がなぜ増減しているか」の結果を直接表す指標。2024年・47都道府県で取得可能"
+      }
+    },
+    {
+      "rankingKey": "natural-increase-rate",
+      "shortLabel": "自然増減率",
+      "role": "primary",
+      "selection": {
+        "proposedBy": "総務省統計局「人口推計（2024年10月1日現在）」",
+        "sourceUrl": "https://www.stat.go.jp/data/jinsui/2024np/index.html",
+        "surveyedAt": "2026-07-11",
+        "rationale": "公式統計は人口増減率を自然増減率と社会増減率に分解して説明しており、出生・死亡による要因分解の中心指標。2024年まで利用可"
+      }
+    },
+    {
       "rankingKey": "crude-birth-rate",
       "shortLabel": "粗出生率",
-      "role": "primary"
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "厚生労働省「人口動態調査」",
+        "sourceUrl": "https://www.mhlw.go.jp/toukei/list/81-1.html",
+        "surveyedAt": "2026-07-11",
+        "rationale": "自然増減の内訳（出生側）。主問への直接回答ではなく要因分解の補助指標として整理"
+      }
     },
     {
       "rankingKey": "total-fertility-rate",
@@ -20,17 +48,24 @@ export const POPULATION_DYNAMICS_CATALOG: ThemeCatalog = {
     {
       "rankingKey": "crude-death-rate",
       "shortLabel": "死亡率",
-      "role": "secondary"
-    },
-    {
-      "rankingKey": "natural-increase-rate",
-      "shortLabel": "自然増減率",
-      "role": "secondary"
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "厚生労働省「人口動態調査」",
+        "sourceUrl": "https://www.mhlw.go.jp/toukei/list/81-1.html",
+        "surveyedAt": "2026-07-11",
+        "rationale": "自然増減の内訳（死亡側）。natural-increase-rateの構成要素"
+      }
     },
     {
       "rankingKey": "social-increase-rate",
       "shortLabel": "社会増減率",
-      "role": "secondary"
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "総務省統計局「人口推計（2024年10月1日現在）」",
+        "sourceUrl": "https://www.stat.go.jp/data/jinsui/2024np/index.html",
+        "surveyedAt": "2026-07-11",
+        "rationale": "転入・転出による要因分解の中心指標。ただし現行MetricConfigは2018-2019年までのため、primaryへの昇格はPR-2（鮮度解決）まで保留し secondary に留める"
+      }
     },
     {
       "rankingKey": "moving-in-excess-rate",
@@ -48,18 +83,24 @@ export const POPULATION_DYNAMICS_CATALOG: ThemeCatalog = {
       "role": "secondary"
     },
     {
+      "rankingKey": "total-population",
+      "shortLabel": "総人口",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "総務省統計局「人口推計（2024年10月1日現在）」",
+        "sourceUrl": "https://www.stat.go.jp/data/jinsui/2024np/index.html",
+        "surveyedAt": "2026-07-11",
+        "rationale": "人口増減率の母数・規模を把握するために必要な基礎指標"
+      }
+    },
+    {
       "rankingKey": "population-density-per-km2-inhabitable-area",
       "shortLabel": "人口密度",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "day-time-population-ratio",
       "shortLabel": "昼夜間人口比率",
-      "role": "secondary"
-    },
-    {
-      "rankingKey": "total-population",
-      "shortLabel": "総人口",
       "role": "context"
     }
   ],
@@ -90,7 +131,7 @@ export const POPULATION_DYNAMICS_CATALOG: ThemeCatalog = {
       },
       "sourceName": "人口動態統計",
       "sourceLink": null,
-      "rankingLink": null,
+      "rankingLink": "/ranking/crude-birth-rate",
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,
@@ -124,7 +165,7 @@ export const POPULATION_DYNAMICS_CATALOG: ThemeCatalog = {
       },
       "sourceName": "人口統計",
       "sourceLink": null,
-      "rankingLink": null,
+      "rankingLink": "/ranking/natural-increase-rate",
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,
@@ -159,7 +200,7 @@ export const POPULATION_DYNAMICS_CATALOG: ThemeCatalog = {
       },
       "sourceName": "社会・人口統計体系",
       "sourceLink": null,
-      "rankingLink": null,
+      "rankingLink": "/ranking/ratio-65-plus",
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,
@@ -174,7 +215,7 @@ export const POPULATION_DYNAMICS_CATALOG: ThemeCatalog = {
       "componentProps": {},
       "sourceName": "社会・人口統計体系",
       "sourceLink": null,
-      "rankingLink": null,
+      "rankingLink": "/ranking/total-population",
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,
@@ -206,9 +247,9 @@ export const POPULATION_DYNAMICS_CATALOG: ThemeCatalog = {
           "#f59e0b"
         ]
       },
-      "sourceName": "社会・人口統計体系",
+      "sourceName": "社会・人口統計体系（2019年時点までのデータ。natural-increase-rate等の2024年値と同一年ではない点に注意）",
       "sourceLink": null,
-      "rankingLink": null,
+      "rankingLink": "/ranking/moving-in-excess-rate",
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,

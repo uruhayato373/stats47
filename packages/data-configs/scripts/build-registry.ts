@@ -3,6 +3,7 @@
  *
  * 使い方:
  *   tsx packages/data-configs/scripts/build-registry.ts
+ *   tsx packages/data-configs/scripts/build-registry.ts --check
  */
 import { readFileSync, readdirSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
@@ -14,6 +15,7 @@ const REGISTRY_START = "// AUTOGEN_REGISTRY_START";
 const REGISTRY_END = "// AUTOGEN_REGISTRY_END";
 
 function main() {
+  const check = process.argv.includes("--check");
   const files = readdirSync(METRICS_DIR)
     .filter((f) => f.endsWith(".ts") && !f.endsWith(".d.ts"))
     .sort();
@@ -48,6 +50,16 @@ function main() {
       new RegExp(`${REGISTRY_START}[\\s\\S]*?${REGISTRY_END}`),
       `${REGISTRY_START}\nexport const METRICS_REGISTRY: MetricRegistry = {\n${registryLines}\n};\n${REGISTRY_END}`,
     );
+
+  if (check) {
+    if (newContent !== oldContent) {
+      console.error(`[registry] stale: ${entries.length} metric files do not match registry.ts`);
+      console.error("[registry] fix: npm run build:registry --workspace=@stats47/data-configs");
+      process.exit(1);
+    }
+    console.log(`[registry] fresh: ${entries.length} metrics`);
+    return;
+  }
 
   writeFileSync(REGISTRY_FILE, newContent);
   console.log(`[registry] built with ${entries.length} metrics`);

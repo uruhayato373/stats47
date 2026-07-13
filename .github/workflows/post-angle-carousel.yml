@@ -30,13 +30,13 @@ jobs:
     timeout-minutes: 10
     steps:
       - name: 🧰 Checkout develop
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         with:
           ref: develop
           fetch-depth: 1
 
       - name: 🟢 Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: "20"
 
@@ -54,9 +54,11 @@ jobs:
           PERMALINK=$(grep -oE 'PERMALINK=https?://[^ ]+' /tmp/post-output.log | head -1 | cut -d= -f2- || echo "")
           MEDIA_ID=$(grep -oE 'MEDIA_ID=[0-9]+' /tmp/post-output.log | head -1 | cut -d= -f2 || echo "")
           if [ -n "${PERMALINK}" ]; then POSTED=true; else POSTED=false; fi
-          echo "permalink=${PERMALINK}" >> "$GITHUB_OUTPUT"
-          echo "media_id=${MEDIA_ID}" >> "$GITHUB_OUTPUT"
-          echo "posted=${POSTED}" >> "$GITHUB_OUTPUT"
+          {
+            echo "permalink=${PERMALINK}"
+            echo "media_id=${MEDIA_ID}"
+            echo "posted=${POSTED}"
+          } >> "$GITHUB_OUTPUT"
 
       - name: 💾 Commit posts.json update
         if: steps.post.outputs.posted == 'true'
@@ -72,9 +74,11 @@ jobs:
         if: always()
         run: |
           if [ "${{ steps.post.outputs.posted }}" = "true" ]; then
-            echo "## ✅ 投稿完了" >> $GITHUB_STEP_SUMMARY
-            echo "- **permalink**: ${{ steps.post.outputs.permalink }}" >> $GITHUB_STEP_SUMMARY
-            echo "- **media_id**: ${{ steps.post.outputs.media_id }}" >> $GITHUB_STEP_SUMMARY
+            {
+              echo "## ✅ 投稿完了"
+              echo "- **permalink**: ${{ steps.post.outputs.permalink }}"
+              echo "- **media_id**: ${{ steps.post.outputs.media_id }}"
+            } >> "$GITHUB_STEP_SUMMARY"
           else
-            echo "## ⏭️ 投稿スキップ (該当エントリなし)" >> $GITHUB_STEP_SUMMARY
+            echo "## ⏭️ 投稿スキップ (該当エントリなし)" >> "$GITHUB_STEP_SUMMARY"
           fi

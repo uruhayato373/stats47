@@ -42,4 +42,5 @@ tags: []
 | 2026-06-19 | `/themes/local-finance-city` をヘッダーの選択肢から選べないようにし、財政状況 (`local-finance`) に統合する | 改善 | 未整理 | ナビ/IA。ヘッダーのテーマ選択から除外 + コンテンツ統合（301検討） |
 | 2026-06-19 | `/themes/local-finance` の stat-card 内チャートが D3.js でインタラクティブ表示されない | バグ | 未整理 | テーマダッシュボード。D3 hydration / クライアント描画の不具合の可能性 |
 | 2026-06-19 | トップページ (https://stats47.jp/) のランキングカードのデザインをもっと練る | 改善 | 未整理 | UI/デザイン。home の featured ランキングカード |
+| 2026-07-13 | `check-weekly-cadence.mjs` (別セッション産・git 未追跡) が動作するが未配線 orphan — 週次レビュー/計画の欠落検知スクリプト (実行すると W27/W29 計画欠落を正しく検出)。どの workflow/skill/hook からも参照されず「cadence 検知器自身が cadence を持たない」状態。fetch-metrics-weekly.yml か /weekly-plan への配線 + commit、or 破棄を判断 | 自動化 | 未整理 | 整合性監査 (Stop hook) で発見。read-only で無害 |
 | | | | | |

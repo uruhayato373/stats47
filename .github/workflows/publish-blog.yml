@@ -50,13 +50,13 @@ jobs:
     timeout-minutes: 30
     steps:
       - name: 🧰 Checkout develop
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         with:
           ref: develop
           fetch-depth: 1
 
       - name: 🟢 Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: "20"
           cache: "npm"
@@ -163,7 +163,9 @@ jobs:
 
       - name: 📝 Summary
         run: |
-          echo "### Publish Blog: ${{ github.event.inputs.slug }}" >> $GITHUB_STEP_SUMMARY
-          echo "- dry_run: ${{ github.event.inputs.dry_run }}" >> $GITHUB_STEP_SUMMARY
-          echo "- factual gate: passed" >> $GITHUB_STEP_SUMMARY
-          echo "- 🧹 docs/21 outbox: 公開後にドラフトを自動削除 (ephemeral)" >> $GITHUB_STEP_SUMMARY
+          {
+            echo "### Publish Blog: ${{ github.event.inputs.slug }}"
+            echo "- dry_run: ${{ github.event.inputs.dry_run }}"
+            echo "- factual gate: passed"
+            echo "- 🧹 docs/21 outbox: 公開後にドラフトを自動削除 (ephemeral)"
+          } >> "$GITHUB_STEP_SUMMARY"

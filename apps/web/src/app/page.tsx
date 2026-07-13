@@ -256,10 +256,10 @@ export default async function HomePage() {
                   process.env.NEXT_PUBLIC_R2_PUBLIC_URL ||
                   "https://storage.stats47.jp";
                 return (
-                  <Link
+                  <SurfaceLinkCard
                     key={article.slug}
                     href={`/blog/${article.slug}`}
-                    className="group block overflow-hidden rounded-none border border-border bg-card transition-shadow hover:shadow-md"
+                    className="group block overflow-hidden p-0"
                   >
                     <div className="relative aspect-[1200/630] w-full overflow-hidden bg-muted">
                       <ThemeAwareImage
@@ -277,7 +277,7 @@ export default async function HomePage() {
                         {article.title}
                       </p>
                     </div>
-                  </Link>
+                  </SurfaceLinkCard>
                 );
               })}
             </div>

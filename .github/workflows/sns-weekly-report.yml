@@ -25,13 +25,13 @@ jobs:
     timeout-minutes: 10
     steps:
       - name: 🧰 Checkout develop (latest snapshots)
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         with:
           ref: develop
           fetch-depth: 1
 
       - name: 🟢 Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: "20"
 
@@ -47,9 +47,10 @@ jobs:
         if: always()
         run: |
           REPORT_DIR="docs/04_レビュー"
+          # shellcheck disable=SC2012  # 最新レポートを mtime 順で取得
           LATEST=$(ls -t "$REPORT_DIR"/*-sns-weekly.md 2>/dev/null | head -1)
           if [ -n "$LATEST" ]; then
-            cat "$LATEST" >> $GITHUB_STEP_SUMMARY
+            cat "$LATEST" >> "$GITHUB_STEP_SUMMARY"
           fi
 
       - name: 💾 Commit report

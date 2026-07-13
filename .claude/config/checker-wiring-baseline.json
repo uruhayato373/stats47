@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "description": "Known unwired checker scripts. New code/path pairs fail --baseline.",
+  "findings": [
+    {
+      "code": "UNWIRED_CHECKER",
+      "file": ".claude/scripts/audit/page-components-audit.cjs",
+      "message": "no workflow/hook/package/skill/agent/script reference found"
+    },
+    {
+      "code": "UNWIRED_CHECKER",
+      "file": ".claude/scripts/estat/audit-time-coverage.cjs",
+      "message": "no workflow/hook/package/skill/agent/script reference found"
+    },
+    {
+      "code": "UNWIRED_CHECKER",
+      "file": ".claude/scripts/lib/check-docs-links.cjs",
+      "message": "no workflow/hook/package/skill/agent/script reference found"
+    },
+    {
+      "code": "UNWIRED_CHECKER",
+      "file": "apps/web/scripts/verify-affiliate-ads-snapshot.ts",
+      "message": "no workflow/hook/package/skill/agent/script reference found"
+    },
+    {
+      "code": "UNWIRED_CHECKER",
+      "file": "packages/data-configs/scripts/ssds/validate-survey-master-coverage.ts",
+      "message": "no workflow/hook/package/skill/agent/script reference found"
+    },
+    {
+      "code": "UNWIRED_CHECKER",
+      "file": "packages/ranking/scripts/verify-calculated-rankings.ts",
+      "message": "no workflow/hook/package/skill/agent/script reference found"
+    }
+  ]
+}

@@ -172,7 +172,7 @@ export default function AboutPage() {
           <div className="flex flex-col gap-2">
             <a href={EXTERNAL_LINKS.noteProfile} target="_blank" rel="noopener noreferrer">
               <Button variant="outline" size="sm" className="w-full gap-2">
-                <span className="font-bold text-[#41c9b4]">note</span>
+                <span className="font-bold text-[#147d6f] dark:text-[#65d7c5]">note</span>
                 <span className="text-xs">統計の読み方を解説</span>
                 <ExternalLink className="h-3 w-3 ml-auto" />
               </Button>

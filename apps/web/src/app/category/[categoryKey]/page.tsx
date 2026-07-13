@@ -19,7 +19,8 @@ import { isOk } from "@stats47/types";
 import { generateMiniTileSvg } from "@stats47/visualization/server";
 
 import { ThemeAwareImage } from "@/components/atoms/ThemeAwareImage";
-import { PageShell, PageHeader, Breadcrumbs } from "@/components/layout";
+import { PageShell, PageHeader, HeroBanner, Breadcrumbs } from "@/components/layout";
+import { CATEGORY_HEROES } from "@/components/layout/page-heroes";
 import { RightRailWidgets } from "@/components/rail";
 import { SectionHeader } from "@/components/section";
 
@@ -177,14 +178,6 @@ export default async function CategoryPage({ params }: PageProps) {
   ]);
   const rankingItems = isOk(rankingResult) ? rankingResult.data : [];
 
-  // Hero KPI 算出
-  const featuredCount = rankingItems.filter((i) => i.isFeatured).length;
-  const latestYear = rankingItems
-    .map((i) => parseLatestYear(i.latestYear))
-    .filter((y) => y && y.match(/^\d{4}$/))
-    .sort()
-    .pop() ?? "";
-
   // テーブル用データ
   const allItems: CategoryRankingListItem[] = rankingItems.map((item) => {
     const latestYear = parseLatestYear(item.latestYear);
@@ -271,14 +264,9 @@ export default async function CategoryPage({ params }: PageProps) {
   }
 
   const categoryDescription = getCategoryDescription(categoryKey);
-  const statsText = [
-    `全 ${rankingItems.length} ランキング`,
-    `${usingFallbackFeatured ? "主要" : "注目"} ${usingFallbackFeatured ? featuredRaw.length : featuredCount} 件`,
-    latestYear ? `最新 ${latestYear} 年` : null,
-    surveysResult.length > 0 ? `関連調査 ${surveysResult.length} 件` : null,
-  ]
-    .filter(Boolean)
-    .join(" ・ ");
+
+  // hero 画像を持つカテゴリ (CATEGORY_HEROES) は画像付きの HeroBanner に差し替える。
+  const categoryHero = CATEGORY_HEROES[categoryKey];
 
   // 右レールの本文関連ウィジェット（新着記事 + 調査ナビ）。広告・promo は RightRailWidgets が供給する。
   const railTopWidgets = (
@@ -324,15 +312,28 @@ export default async function CategoryPage({ params }: PageProps) {
           { label: category.categoryName },
         ]}
       />
-      <PageHeader
-        eyebrow="カテゴリ"
-        title={category.categoryName}
-        description={
-          categoryDescription ??
-          `${category.categoryName}分野の都道府県別ランキング ${rankingItems.length} 件を、地図・グラフ・テーブルで比較できます。`
-        }
-        stats={statsText}
-      />
+      {categoryHero ? (
+        <HeroBanner
+          eyebrow="カテゴリ"
+          title={category.categoryName}
+          tagline={
+            categoryHero.tagline ??
+            categoryDescription ??
+            `${category.categoryName}分野の都道府県別ランキング ${rankingItems.length} 件を、地図・グラフ・テーブルで比較できます。`
+          }
+          imageSrc={categoryHero.image.src}
+          imageAlt={categoryHero.imageAlt}
+        />
+      ) : (
+        <PageHeader
+          eyebrow="カテゴリ"
+          title={category.categoryName}
+          description={
+            categoryDescription ??
+            `${category.categoryName}分野の都道府県別ランキング ${rankingItems.length} 件を、地図・グラフ・テーブルで比較できます。`
+          }
+        />
+      )}
 
       {/* メインコンテンツ */}
       <div className="min-w-0">

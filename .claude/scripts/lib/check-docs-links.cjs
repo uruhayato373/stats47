@@ -9,6 +9,9 @@
  *   node .claude/scripts/lib/check-docs-links.cjs            # broken 参照検出 (壊れていれば exit 1)
  *   node .claude/scripts/lib/check-docs-links.cjs --orphans  # どこからも参照されない docs を列挙 (advisory, exit 0)
  *   node .claude/scripts/lib/check-docs-links.cjs --json     # 機械可読出力
+ *   node .claude/scripts/lib/check-docs-links.cjs --baseline # 既存 broken を許容し、新規悪化のみ exit 1
+ *   node .claude/scripts/lib/check-docs-links.cjs --write-baseline [path]
+ *                                                          # 現在値を baseline JSON に書く
  *
  * 検出対象: ルート相対 `docs/<...>.md` 参照 (agent が読む主要な参照形式)。
  *           日本語ディレクトリ名 (01_技術設計 等) に対応。#anchor は除いてファイル存在を見る。
@@ -20,6 +23,14 @@ const path = require("path");
 const ROOT = process.env.CLAUDE_PROJECT_DIR || path.resolve(__dirname, "..", "..", "..");
 const args = process.argv.slice(2);
 const has = (f) => args.includes(f);
+const writeBaselineIndex = args.indexOf("--write-baseline");
+const baselineArg = writeBaselineIndex === -1 ? null : args[writeBaselineIndex + 1];
+const BASELINE_PATH = path.resolve(
+  ROOT,
+  baselineArg && !baselineArg.startsWith("--")
+    ? baselineArg
+    : (process.env.DOCS_LINKS_BASELINE ?? ".claude/config/docs-links-baseline.json"),
+);
 
 // 参照を集める走査対象 (これらの中の `docs/...md` 言及を検証する)。
 const SCAN_ROOTS = [".claude", "docs"];
@@ -83,8 +94,16 @@ const isPlaceholder = (p) =>
   p.includes("NNN");
 // 自己 (このチェッカーの regex 例) は走査対象から外す。
 const SELF = rel(__filename);
+const BASELINE_REL = rel(BASELINE_PATH);
 for (const f of scanFiles) {
-  if (rel(f) === SELF) continue;
+  const relativePath = rel(f);
+  if (
+    relativePath === SELF ||
+    relativePath === BASELINE_REL ||
+    relativePath.split("/").includes("__tests__")
+  ) {
+    continue;
+  }
   const text = readSafe(f);
   const matches = text.match(DOCS_REF_RE);
   if (!matches) continue;
@@ -106,6 +125,63 @@ for (const [ref, referrers] of refMap) {
 }
 broken.sort((a, b) => a.ref.localeCompare(b.ref));
 
+// baseline は missing path だけでなく referrer 単位で持つ。
+// 既存 missing path へ別ファイルから新規参照を追加した悪化も検出するため。
+function flattenBroken(items) {
+  return items.flatMap((item) =>
+    item.referrers.map((referrer) => ({ ref: item.ref, referrer })),
+  );
+}
+
+function findingKey(item) {
+  return `${item.ref}\u0000${item.referrer}`;
+}
+
+function readBaseline() {
+  let parsed;
+  try {
+    parsed = JSON.parse(fs.readFileSync(BASELINE_PATH, "utf8"));
+  } catch (error) {
+    console.error(`✗ docs link baseline を読めない: ${rel(BASELINE_PATH)} (${String(error)})`);
+    process.exit(2);
+  }
+  if (!parsed || parsed.version !== 1 || !Array.isArray(parsed.findings)) {
+    console.error(`✗ docs link baseline 形式が不正: ${rel(BASELINE_PATH)}`);
+    process.exit(2);
+  }
+  return parsed;
+}
+
+function writeBaseline() {
+  const findings = flattenBroken(broken).sort((a, b) =>
+    findingKey(a).localeCompare(findingKey(b)),
+  );
+  const output = {
+    version: 1,
+    description: "Known broken docs references. New ref/referrer pairs fail --baseline.",
+    findings,
+  };
+  fs.mkdirSync(path.dirname(BASELINE_PATH), { recursive: true });
+  fs.writeFileSync(BASELINE_PATH, `${JSON.stringify(output, null, 2)}\n`, "utf8");
+  console.log(`✓ docs link baseline 更新: ${rel(BASELINE_PATH)} (${findings.length} findings)`);
+}
+
+if (writeBaselineIndex !== -1) {
+  writeBaseline();
+  process.exit(0);
+}
+
+let regressions = [];
+let resolved = [];
+if (has("--baseline")) {
+  const baseline = readBaseline();
+  const current = flattenBroken(broken);
+  const baselineKeys = new Set(baseline.findings.map(findingKey));
+  const currentKeys = new Set(current.map(findingKey));
+  regressions = current.filter((item) => !baselineKeys.has(findingKey(item)));
+  resolved = baseline.findings.filter((item) => !currentKeys.has(findingKey(item)));
+}
+
 // ── orphan 列挙 (--orphans) ───────────────────────────────────
 function listOrphans() {
   const allDocs = walk(path.join(ROOT, "docs"))
@@ -126,14 +202,21 @@ function listOrphans() {
 
 // ── 出力 ──────────────────────────────────────────────────────
 if (has("--json")) {
-  const out = { broken, refCount: refMap.size, scanned: scanFiles.length };
+  const out = {
+    broken,
+    regressions,
+    resolved,
+    baseline: has("--baseline") ? rel(BASELINE_PATH) : null,
+    refCount: refMap.size,
+    scanned: scanFiles.length,
+  };
   if (has("--orphans")) {
     const { orphans, total } = listOrphans();
     out.orphans = orphans;
     out.docTotal = total;
   }
   console.log(JSON.stringify(out, null, 2));
-  process.exit(broken.length > 0 ? 1 : 0);
+  process.exit((has("--baseline") ? regressions.length : broken.length) > 0 ? 1 : 0);
 }
 
 if (has("--orphans")) {
@@ -144,6 +227,21 @@ if (has("--orphans")) {
     console.log(`  ${dir}/  — ${files.length} 件`);
   }
   console.log(`\n(個別一覧は --json で。参照されている docs は整理時に参照更新が必須)`);
+}
+
+if (has("--baseline")) {
+  if (regressions.length === 0) {
+    console.log(
+      `✓ docs リンク悪化なし — known ${flattenBroken(broken).length} / resolved ${resolved.length} / new 0`,
+    );
+    process.exit(0);
+  }
+  console.error(`✗ docs リンクの新規 broken: ${regressions.length} 件`);
+  for (const item of regressions) {
+    console.error(`  [NEW] ${item.ref} ← ${item.referrer}`);
+  }
+  console.error(`\nbaseline: ${rel(BASELINE_PATH)}`);
+  process.exit(1);
 }
 
 if (broken.length === 0) {

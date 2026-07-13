@@ -1,0 +1,250 @@
+{
+  "version": 1,
+  "description": "Known broken docs references. New ref/referrer pairs fail --baseline.",
+  "findings": [
+    {
+      "ref": "docs/01_技術設計/09_動画データSSOT.md",
+      "referrer": ".claude/skills/db/export-d1-to-remotion-static/SKILL.md"
+    },
+    {
+      "ref": "docs/01_技術設計/archive/10_Phase6_deprecation_log.md",
+      "referrer": ".claude/rules/data-sqlite-ssot.md"
+    },
+    {
+      "ref": "docs/01_技術設計/archive/10_Phase6_deprecation_log.md",
+      "referrer": ".claude/skills/db/verify-d1-integrity/SKILL.md"
+    },
+    {
+      "ref": "docs/01_技術設計/archive/18_データ層ハイブリッド設計.md",
+      "referrer": ".claude/rules/data-sqlite-ssot.md"
+    },
+    {
+      "ref": "docs/02_実装計画/02_実装ロードマップ.md",
+      "referrer": ".claude/skills/management/weekly-review/SKILL.md"
+    },
+    {
+      "ref": "docs/02_実装計画/06_ブログ品質是正ループ.md",
+      "referrer": ".claude/rules/blog-remediation-loop.md"
+    },
+    {
+      "ref": "docs/02_実装計画/06_ブログ品質是正ループ.md",
+      "referrer": ".claude/workflows/blog-mass-rewrite.js"
+    },
+    {
+      "ref": "docs/02_実装計画/08_ブログ自動化設計.md",
+      "referrer": ".claude/state/triggers.json"
+    },
+    {
+      "ref": "docs/02_実装計画/09_ランキング品質改修.md",
+      "referrer": ".claude/rules/ranking-content-standards.md"
+    },
+    {
+      "ref": "docs/02_実装計画/12_GSCカバレッジ是正ループ.md",
+      "referrer": ".claude/skills/analytics/gsc-coverage-remediation/SKILL.md"
+    },
+    {
+      "ref": "docs/02_実装計画/13_UI統一ロードマップ.md",
+      "referrer": ".claude/scripts/lib/check-card-census.cjs"
+    },
+    {
+      "ref": "docs/02_実装計画/15_ブログSEO拡充戦略.md",
+      "referrer": ".claude/agents/blog-seo-strategist.md"
+    },
+    {
+      "ref": "docs/02_実装計画/15_ブログSEO拡充戦略.md",
+      "referrer": ".claude/state/blog/seo-strategy.json"
+    },
+    {
+      "ref": "docs/02_実装計画/15_ブログSEO拡充戦略.md",
+      "referrer": "docs/03_週次運用/月次計画/2026-07.md"
+    },
+    {
+      "ref": "docs/02_実装計画/17_家計調査論点カタログ.md",
+      "referrer": ".claude/skills/blog/draft-from-trend/reference/kakei-topic-catalog.md"
+    },
+    {
+      "ref": "docs/02_実装計画/20_survey別コンテンツクラスター戦略.md",
+      "referrer": ".claude/rules/survey-content-standards.md"
+    },
+    {
+      "ref": "docs/02_実装計画/20_survey別コンテンツクラスター戦略.md",
+      "referrer": ".claude/skills/survey/manage-survey-portfolio/reference/surveyポートフォリオ運用.md"
+    },
+    {
+      "ref": "docs/02_実装計画/archive/goal-skill-design.md",
+      "referrer": ".claude/skills/management/goal/SKILL.md"
+    },
+    {
+      "ref": "docs/02_実装計画/blog-remediation-loop.md",
+      "referrer": ".claude/memory/project_blog_brushup_dbless_scaffold.md"
+    },
+    {
+      "ref": "docs/02_実装計画/blog-remediation-loop.md",
+      "referrer": ".claude/memory/project_blog_remediation_loop.md"
+    },
+    {
+      "ref": "docs/02_実装計画/cities-revival-plan.md",
+      "referrer": ".claude/scripts/gsc/inspect-cities-sample.cjs"
+    },
+    {
+      "ref": "docs/02_実装計画/cities-revival-plan.md",
+      "referrer": ".claude/scripts/gsc/submit-cities-indexing.mjs"
+    },
+    {
+      "ref": "docs/02_実装計画/dbless-rebuild-plan-2026-05-29.md",
+      "referrer": ".claude/memory/project_dbless_migration_2026_05_29.md"
+    },
+    {
+      "ref": "docs/02_実装計画/dbless-spec-2026-05-29.md",
+      "referrer": ".claude/memory/project_r2_s3_token_expired_2026_05_29.md"
+    },
+    {
+      "ref": "docs/02_実装計画/seo-todo-unify-phase-1-3.md",
+      "referrer": ".claude/memory/feedback_improvement_log_as_source_of_truth.md"
+    },
+    {
+      "ref": "docs/02_実装計画/seo-todo-unify-phase-1-3.md",
+      "referrer": ".claude/memory/project_seo_todo_unify_phase_1.md"
+    },
+    {
+      "ref": "docs/02_実装計画/seo-todo-unify-phase-1-3.md",
+      "referrer": ".claude/memory/reference_scan_pending_improvements.md"
+    },
+    {
+      "ref": "docs/03_レビュー/critical/north-star-metric.md",
+      "referrer": ".claude/skills/management/nsm-experiment/reference/weekly-snapshots/2026-W16.json"
+    },
+    {
+      "ref": "docs/03_週次運用/blog-brushup-plan.md",
+      "referrer": ".claude/scripts/blog/generate-brushup-plan.mjs"
+    },
+    {
+      "ref": "docs/03_週次運用/TODOインボックス.md",
+      "referrer": ".claude/memory/project_docs_reorg_todo_handoffs.md"
+    },
+    {
+      "ref": "docs/04_レビュー/2026-05-16-critical-review-ga4-bot-pollution.md",
+      "referrer": ".claude/skills/analytics/fetch-ga4-data/SKILL.md"
+    },
+    {
+      "ref": "docs/04_レビュー/2026-05-16-ga4-bot-pollution.md",
+      "referrer": ".claude/skills/management/weekly-review/SKILL.md"
+    },
+    {
+      "ref": "docs/04_レビュー/2026-05-16-performance-report.md",
+      "referrer": ".claude/skills/management/goal/scripts/create-goal.cjs"
+    },
+    {
+      "ref": "docs/04_レビュー/2026-06-01-codebase-optimization.md",
+      "referrer": "docs/todo/02_機能バックログ.md"
+    },
+    {
+      "ref": "docs/04_レビュー/2026-06-13-code-audit.md",
+      "referrer": ".claude/memory/feedback_workers_self_fetch_unbundle.md"
+    },
+    {
+      "ref": "docs/04_レビュー/2026-06-note-koumuin-estat-mvp.md",
+      "referrer": "docs/30_note記事企画/koumuin-estat-claude-code/strategy.md"
+    },
+    {
+      "ref": "docs/04_レビュー/2026-06-note-koumuin-mvp.md",
+      "referrer": ".claude/skills/note/koumuin-claude-code/INDEX.md"
+    },
+    {
+      "ref": "docs/04_レビュー/2026-06-note-koumuin-mvp.md",
+      "referrer": "docs/30_note記事企画/koumuin-claude-code/strategy.md"
+    },
+    {
+      "ref": "docs/04_レビュー/2026-07-03-operations-automation-review.md",
+      "referrer": "docs/04_レビュー/2026-07-03-claude-code-setup-audit.md"
+    },
+    {
+      "ref": "docs/04_レビュー/2026-07-11-survey-census-cluster-audit.md",
+      "referrer": ".claude/skills/survey/manage-survey-portfolio/reference/reviews/2026-07-11-survey-census.md"
+    },
+    {
+      "ref": "docs/04_レビュー/2026-07-11-survey-wage-structure-audit.md",
+      "referrer": ".claude/skills/survey/manage-survey-portfolio/reference/reviews/2026-07-11-survey-wage-structure-survey.md"
+    },
+    {
+      "ref": "docs/04_レビュー/2026-07-12-build-performance-audit.md",
+      "referrer": "docs/todo/02_機能バックログ.md"
+    },
+    {
+      "ref": "docs/04_レビュー/critical-review/2026-05-16-ga4-bot-pollution.md",
+      "referrer": ".claude/memory/feedback_ga4_history_unreliable_wow.md"
+    },
+    {
+      "ref": "docs/04_レビュー/critical-review/2026-05-21-monetization.md",
+      "referrer": ".claude/memory/feedback_ga4_history_unreliable_wow.md"
+    },
+    {
+      "ref": "docs/04_レビュー/goals/psi-mobile-lcp-2500-2026-05-15.md",
+      "referrer": ".claude/state/goals/psi-mobile-lcp-2500/meta.json"
+    },
+    {
+      "ref": "docs/05_改善ログ/ga4.md",
+      "referrer": ".claude/memory/project_seo_todo_unify_phase_1.md"
+    },
+    {
+      "ref": "docs/05_改善ログ/INDEX.md",
+      "referrer": ".claude/memory/feedback_improvement_log_as_source_of_truth.md"
+    },
+    {
+      "ref": "docs/05_改善ログ/INDEX.md",
+      "referrer": ".claude/memory/reference_scan_pending_improvements.md"
+    },
+    {
+      "ref": "docs/10_SNS戦略/06_YouTube運用Playbook.md",
+      "referrer": ".claude/memory/project_env_local_ci_consolidation.md"
+    },
+    {
+      "ref": "docs/10_SNS戦略/06_YouTube運用Playbook.md",
+      "referrer": ".claude/memory/project_youtube_shadowban_recovery_2026_04.md"
+    },
+    {
+      "ref": "docs/10_SNS戦略/06_YouTube運用Playbook.md",
+      "referrer": "docs/01_技術設計/06_自動化インベントリ.md"
+    },
+    {
+      "ref": "docs/10_SNS戦略/07_Facebook_Page_Token_Setup.md",
+      "referrer": ".claude/scripts/sns/delete-ig-via-fb-graph.cjs"
+    },
+    {
+      "ref": "docs/21_ブログ記事原稿/commute-time-ranking/article.md",
+      "referrer": ".claude/skills/blog/panel-review/SKILL.md"
+    },
+    {
+      "ref": "docs/30_note記事企画/地方財政テーマ企画_202603.md",
+      "referrer": "docs/30_note記事企画/backlog/A-localfinance-theme.md"
+    },
+    {
+      "ref": "docs/31_note記事原稿/koumuin-claude-code/INDEX.md",
+      "referrer": "docs/30_note記事企画/koumuin-claude-code/strategy.md"
+    },
+    {
+      "ref": "docs/31_note記事原稿/koumuin-estat-claude-code/INDEX.md",
+      "referrer": "docs/30_note記事企画/koumuin-estat-claude-code/strategy.md"
+    },
+    {
+      "ref": "docs/31_note記事原稿/sunshine-solar-housing/note.md",
+      "referrer": "docs/30_note記事企画/backlog/gis-cross-correlation-articles.md"
+    },
+    {
+      "ref": "docs/90_課題管理/アフィリエイト戦略.md",
+      "referrer": ".claude/memory/affiliate-strategy.md"
+    },
+    {
+      "ref": "docs/handoffs/2026-07-10-note-cover-redesign.md",
+      "referrer": "docs/todo/01_改善バックログ.md"
+    },
+    {
+      "ref": "docs/handoffs/2026-07-11-survey-content-cluster.md",
+      "referrer": ".claude/skills/survey/manage-survey-portfolio/reference/audits/2026-07-13-survey-portfolio-audit.md"
+    },
+    {
+      "ref": "docs/rules/CLAUDE.md",
+      "referrer": "docs/01_技術設計/12_完全DBレス設計.md"
+    }
+  ]
+}

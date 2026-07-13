@@ -68,6 +68,14 @@
             "command": "node \"$CLAUDE_PROJECT_DIR\"/.claude/hooks/session-guard.js"
           }
         ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$CLAUDE_PROJECT_DIR\"/.claude/hooks/check-weekly-cadence-on-stop.js"
+          }
+        ]
       }
     ]
   }

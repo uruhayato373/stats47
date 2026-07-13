@@ -32,13 +32,13 @@ jobs:
     timeout-minutes: 15
     steps:
       - name: 🧰 Checkout main
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         with:
           ref: main
           fetch-depth: 1
 
       - name: 🟢 Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: "20"
 
@@ -59,11 +59,13 @@ jobs:
           # grep -c で日本語パターンを使うと Ubuntu runner (C locale) でマルチライン出力になり
           # GITHUB_OUTPUT に bare '0' が書き込まれて Invalid format エラーになる。
           if [ -n "${PERMALINK}" ]; then SKIP=0; else SKIP=1; fi
-          echo "permalink=${PERMALINK}" >> "$GITHUB_OUTPUT"
-          echo "content_key=${KEY}" >> "$GITHUB_OUTPUT"
-          echo "post_date=${DATE}" >> "$GITHUB_OUTPUT"
-          echo "domain=${DOMAIN}" >> "$GITHUB_OUTPUT"
-          echo "skipped=${SKIP}" >> "$GITHUB_OUTPUT"
+          {
+            echo "permalink=${PERMALINK}"
+            echo "content_key=${KEY}"
+            echo "post_date=${DATE}"
+            echo "domain=${DOMAIN}"
+            echo "skipped=${SKIP}"
+          } >> "$GITHUB_OUTPUT"
 
       - name: 📝 Append to ig-posted-log
         if: success() && steps.post.outputs.permalink != ''
@@ -79,7 +81,7 @@ jobs:
 
       - name: 💬 Comment posting result on issue #127
         if: success() && steps.post.outputs.permalink != ''
-        uses: actions/github-script@v7
+        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7
         with:
           script: |
             const date = "${{ steps.post.outputs.post_date }}";
@@ -99,7 +101,7 @@ jobs:
 
       - name: 💬 Comment failure on issue #127
         if: failure()
-        uses: actions/github-script@v7
+        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7
         with:
           script: |
             const date = process.env.IG_FORCE_DATE || new Date(Date.now() + 9*3600*1000).toISOString().slice(0, 10);
@@ -116,8 +118,10 @@ jobs:
       - name: 📄 Step Summary
         if: always()
         run: |
-          echo "# Instagram Scheduled Post — $(TZ=Asia/Tokyo date +%Y-%m-%d)" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "- content_key: ${{ steps.post.outputs.content_key }}" >> $GITHUB_STEP_SUMMARY
-          echo "- permalink: ${{ steps.post.outputs.permalink }}" >> $GITHUB_STEP_SUMMARY
-          echo "- skipped: ${{ steps.post.outputs.skipped }}" >> $GITHUB_STEP_SUMMARY
+          {
+            echo "# Instagram Scheduled Post — $(TZ=Asia/Tokyo date +%Y-%m-%d)"
+            echo ""
+            echo "- content_key: ${{ steps.post.outputs.content_key }}"
+            echo "- permalink: ${{ steps.post.outputs.permalink }}"
+            echo "- skipped: ${{ steps.post.outputs.skipped }}"
+          } >> "$GITHUB_STEP_SUMMARY"

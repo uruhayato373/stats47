@@ -23,14 +23,14 @@ jobs:
     timeout-minutes: 10
     steps:
       - name: 🧰 Checkout develop (latest metrics data)
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         with:
           ref: develop
           fetch-depth: 1
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: 🟢 Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: "20"
 
@@ -39,11 +39,11 @@ jobs:
         run: |
           INPUT_WEEK="${{ inputs.week }}"
           if [ -n "$INPUT_WEEK" ]; then
-            echo "week=$INPUT_WEEK" >> $GITHUB_OUTPUT
+            echo "week=$INPUT_WEEK" >> "$GITHUB_OUTPUT"
           else
             # 月曜朝に回すと「昨日 = 前週の日曜」でその ISO 週を取る
             WEEK=$(date -u -d "1 day ago" +%G-W%V)
-            echo "week=$WEEK" >> $GITHUB_OUTPUT
+            echo "week=$WEEK" >> "$GITHUB_OUTPUT"
           fi
 
       - name: 📝 Generate weekly metrics markdown
@@ -68,12 +68,12 @@ jobs:
             node .claude/scripts/metrics/generate-weekly-metrics-issue.mjs --week "${WEEK}"
           } > "$OUT_FILE"
 
-          echo "out_file=$OUT_FILE" >> $GITHUB_OUTPUT
+          echo "out_file=$OUT_FILE" >> "$GITHUB_OUTPUT"
           echo "--- preview ---"
           head -30 "$OUT_FILE"
 
       - name: 📄 Copy to GitHub Step Summary
-        run: cat "${{ steps.body.outputs.out_file }}" >> $GITHUB_STEP_SUMMARY
+        run: cat "${{ steps.body.outputs.out_file }}" >> "$GITHUB_STEP_SUMMARY"
 
       - name: 🚦 Skip if unchanged
         id: dup
@@ -82,12 +82,12 @@ jobs:
             # ファイルが既に commit 済みで変更なし → skip
             if [ -z "$(git status --porcelain ${{ steps.body.outputs.out_file }})" ]; then
               echo "No changes — skipping commit"
-              echo "skip=true" >> $GITHUB_OUTPUT
+              echo "skip=true" >> "$GITHUB_OUTPUT"
             else
-              echo "skip=false" >> $GITHUB_OUTPUT
+              echo "skip=false" >> "$GITHUB_OUTPUT"
             fi
           else
-            echo "skip=false" >> $GITHUB_OUTPUT
+            echo "skip=false" >> "$GITHUB_OUTPUT"
           fi
 
       - name: 🆕 Commit & push weekly metrics markdown

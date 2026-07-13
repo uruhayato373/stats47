@@ -26,7 +26,8 @@
     "metric_keys": [
       "japanese-movers-in"
     ],
-    "status": "pending"
+    "status": "uploaded",
+    "uploaded_at": "2026-07-12T10:05:38Z"
   },
   {
     "key": "japanese-movers-out",
@@ -55,7 +56,8 @@
     "metric_keys": [
       "marriages"
     ],
-    "status": "pending"
+    "status": "uploaded",
+    "uploaded_at": "2026-07-12T10:06:03Z"
   },
   {
     "key": "divorces",
@@ -84,7 +86,8 @@
     "metric_keys": [
       "flush-toilet-population-ratio"
     ],
-    "status": "pending"
+    "status": "uploaded",
+    "uploaded_at": "2026-07-12T10:06:29Z"
   },
   {
     "key": "registered-foreigner-population",
@@ -113,7 +116,8 @@
     "metric_keys": [
       "traffic-accident-count"
     ],
-    "status": "pending"
+    "status": "uploaded",
+    "uploaded_at": "2026-07-12T10:06:53Z"
   },
   {
     "key": "building-fire-count",
@@ -142,7 +146,8 @@
     "metric_keys": [
       "residential-telephone-subscription-count-per-1000"
     ],
-    "status": "pending"
+    "status": "uploaded",
+    "uploaded_at": "2026-07-12T10:07:17Z"
   },
   {
     "key": "university-count",
@@ -156,7 +161,8 @@
     "metric_keys": [
       "university-count"
     ],
-    "status": "pending"
+    "status": "uploaded",
+    "uploaded_at": "2026-07-13T11:35:36Z"
   },
   {
     "key": "junior-college-count",
@@ -170,7 +176,8 @@
     "metric_keys": [
       "junior-college-count"
     ],
-    "status": "pending"
+    "status": "uploaded",
+    "uploaded_at": "2026-07-13T11:36:01Z"
   },
   {
     "key": "new-graduate-starting-salary-university-male",
@@ -184,7 +191,8 @@
     "metric_keys": [
       "new-graduate-starting-salary-university-male"
     ],
-    "status": "pending"
+    "status": "uploaded",
+    "uploaded_at": "2026-07-13T11:36:26Z"
   },
   {
     "key": "new-graduate-starting-salary-highschool-male",
@@ -198,7 +206,8 @@
     "metric_keys": [
       "new-graduate-starting-salary-highschool-male"
     ],
-    "status": "pending"
+    "status": "uploaded",
+    "uploaded_at": "2026-07-13T11:36:51Z"
   },
   {
     "key": "physicians-in-medical-facilities",
@@ -212,7 +221,8 @@
     "metric_keys": [
       "physicians-in-medical-facilities"
     ],
-    "status": "pending"
+    "status": "uploaded",
+    "uploaded_at": "2026-07-13T11:37:17Z"
   },
   {
     "key": "general-hospital-bed-count",

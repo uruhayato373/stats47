@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "findings": [
+    "DUPLICATE_IMAGE:apps/remotion/public/images/site-intro/06-area-charts.png:same bytes as apps/remotion/public/images/site-intro/05-area-profile.png",
+    "DUPLICATE_IMAGE:packages/visualization/src/shared/__tests__/__golden__/recharts-linechart-landscape.png:same bytes as packages/visualization/src/shared/__tests__/__golden__/recharts-areachart-landscape.png",
+    "DUPLICATE_IMAGE:packages/visualization/src/shared/__tests__/__golden__/tilegridmap-standard.png:same bytes as packages/visualization/src/shared/__tests__/__golden__/prefecturemapchart-standard.png",
+    "FORMAT_MISMATCH:.claude/assets/affiliate-banners/ai_agent_camp.gif:format=jpeg ext=.gif",
+    "FORMAT_MISMATCH:.claude/assets/affiliate-banners/career_banner.gif:format=png ext=.gif",
+    "FORMAT_MISMATCH:apps/web/public/logo.png:format=jpeg ext=.png",
+    "OVERSIZED_PUBLIC_ASSET:apps/web/public/images/brand-civil-2-square.png:2057339 bytes > 1048576 bytes",
+    "OVERSIZED_PUBLIC_ASSET:apps/web/public/images/brand-civil-2-wide.png:2077040 bytes > 1048576 bytes",
+    "OVERSIZED_PUBLIC_ASSET:apps/web/public/images/brand-concrete-chief-square.png:2184436 bytes > 1048576 bytes",
+    "OVERSIZED_PUBLIC_ASSET:apps/web/public/images/brand-concrete-chief-wide.png:1947327 bytes > 1048576 bytes",
+    "OVERSIZED_PUBLIC_ASSET:apps/web/public/images/brand-concrete-diagnosis-square.png:2508688 bytes > 1048576 bytes",
+    "OVERSIZED_PUBLIC_ASSET:apps/web/public/images/brand-concrete-diagnosis-wide.png:2100477 bytes > 1048576 bytes",
+    "OVERSIZED_PUBLIC_ASSET:apps/web/public/images/brand-pe-comprehensive-square.png:2056248 bytes > 1048576 bytes",
+    "OVERSIZED_PUBLIC_ASSET:apps/web/public/images/brand-pe-comprehensive-wide.png:2030632 bytes > 1048576 bytes",
+    "OVERSIZED_PUBLIC_ASSET:apps/web/public/images/brand-pe-construction-square.png:1873531 bytes > 1048576 bytes",
+    "OVERSIZED_PUBLIC_ASSET:apps/web/public/images/brand-pe-construction-wide.png:1718555 bytes > 1048576 bytes",
+    "OVERSIZED_PUBLIC_ASSET:apps/web/public/images/civil-engineering-concrete-rebar-card-accent.png:2163357 bytes > 1048576 bytes",
+    "OVERSIZED_PUBLIC_ASSET:apps/web/public/images/civil-engineering-crane-pier-brand-square.png:1884295 bytes > 1048576 bytes",
+    "OVERSIZED_PUBLIC_ASSET:apps/web/public/images/civil-engineering-exam-hero.png:1682404 bytes > 1048576 bytes",
+    "OVERSIZED_PUBLIC_ASSET:apps/web/public/images/civil-engineering-foundation-study-card-accent.png:1817494 bytes > 1048576 bytes",
+    "OVERSIZED_PUBLIC_ASSET:apps/web/public/images/civil-engineering-integrated-infrastructure-card-accent.png:2103059 bytes > 1048576 bytes",
+    "OVERSIZED_PUBLIC_ASSET:apps/web/public/images/civil-engineering-local-works-card-accent.png:1989234 bytes > 1048576 bytes",
+    "OVERSIZED_PUBLIC_ASSET:apps/web/public/images/civil-engineering-signature-infrastructure-card-accent.png:1784634 bytes > 1048576 bytes",
+    "OVERSIZED_PUBLIC_ASSET:apps/web/public/images/civil-engineering-site-brand-wide.png:1982300 bytes > 1048576 bytes",
+    "OVERSIZED_PUBLIC_ASSET:apps/web/public/images/civil-engineering-site-card-accent.png:2051862 bytes > 1048576 bytes",
+    "OVERSIZED_PUBLIC_ASSET:apps/web/public/images/ogp/ranking-dark-background.png:1453079 bytes > 1048576 bytes",
+    "OVERSIZED_PUBLIC_ASSET:apps/web/public/images/stats47-author-avatar.png:1313603 bytes > 1048576 bytes"
+  ]
+}

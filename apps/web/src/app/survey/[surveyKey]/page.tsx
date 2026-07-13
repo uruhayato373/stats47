@@ -5,7 +5,6 @@
  * 調査概要 + 関連ランキング一覧を表示。
  */
 
-import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
 import {
@@ -18,6 +17,7 @@ import { generateMiniTileSvg } from '@stats47/visualization/server';
 
 import { ArticleShell, PageHeader, Breadcrumbs } from '@/components/layout';
 import { SectionHeader } from '@/components/section';
+import { SurfaceLinkCard, getSurfaceCardClassName } from '@/components/surface';
 
 import {
   InContentAdSlot,
@@ -265,7 +265,7 @@ export default async function SurveyPage({ params }: PageProps) {
             </p>
             <ul className="grid gap-3 sm:grid-cols-2">
               {editorial.whatYouCanLearn.map((item) => (
-                <li key={item} className="border bg-card p-4 text-sm leading-6">
+                <li key={item} className={getSurfaceCardClassName({ className: "text-sm leading-6" })}>
                   {item}
                 </li>
               ))}
@@ -276,20 +276,20 @@ export default async function SurveyPage({ params }: PageProps) {
             <div>
               <SectionHeader
                 number={String(sectionNumber++)}
-                title="国勢調査から答えを探す"
+                title={`${survey.name}から答えを探す`}
               />
               <div className="grid gap-3 sm:grid-cols-2">
                 {readerQuestions.map((item) => (
-                  <Link
+                  <SurfaceLinkCard
                     key={item.rankingKey}
                     href={`/ranking/${item.rankingKey}`}
-                    className="border bg-card p-4 text-sm font-medium leading-6 text-foreground transition-colors hover:bg-accent/50"
+                    className="text-sm font-medium leading-6 text-foreground hover:bg-accent/50"
                   >
                     {item.question}
                     <span className="ml-1 text-primary" aria-hidden="true">
                       →
                     </span>
-                  </Link>
+                  </SurfaceLinkCard>
                 ))}
               </div>
             </div>

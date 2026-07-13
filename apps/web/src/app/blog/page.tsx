@@ -102,7 +102,7 @@ export default async function BlogIndexPage({ searchParams }: PageProps) {
                             ← 前のページ
                         </Link>
                     ) : (
-                        <span className="rounded-none border border-border px-4 py-2 text-sm font-medium text-muted-foreground opacity-50 cursor-not-allowed">
+                        <span className="rounded-none border border-border px-4 py-2 text-sm font-medium text-muted-foreground cursor-not-allowed" aria-disabled="true">
                             ← 前のページ
                         </span>
                     )}

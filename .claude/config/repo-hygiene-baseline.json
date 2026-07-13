@@ -1,0 +1,202 @@
+{
+  "version": 1,
+  "description": "Known repository hygiene findings. New code/path pairs fail --baseline.",
+  "maxFileSize": 1048576,
+  "findings": [
+    {
+      "code": "FORBIDDEN_ARTIFACT",
+      "file": ".claude/state/blog/auto-brushup-skipped.log",
+      "message": "temporary/build/database artifact is tracked"
+    },
+    {
+      "code": "FORBIDDEN_ARTIFACT",
+      "file": "packages/ranking/type-check-output.txt",
+      "message": "temporary/build/database artifact is tracked"
+    },
+    {
+      "code": "LARGE_FILE",
+      "file": ".claude/state/estat/expansion-queue.json",
+      "message": "1383608 bytes exceeds 1048576 bytes"
+    },
+    {
+      "code": "LARGE_FILE",
+      "file": ".claude/state/gsc/coverage-remediation-queue.json",
+      "message": "1748703 bytes exceeds 1048576 bytes"
+    },
+    {
+      "code": "LARGE_FILE",
+      "file": ".claude/state/metrics/gsc/resubmit-history.json",
+      "message": "1885574 bytes exceeds 1048576 bytes"
+    },
+    {
+      "code": "LARGE_FILE",
+      "file": "apps/remotion/public/migration-flow/cities/01.topojson",
+      "message": "1493740 bytes exceeds 1048576 bytes"
+    },
+    {
+      "code": "LARGE_FILE",
+      "file": "apps/remotion/public/music/bgm.mp3",
+      "message": "7840430 bytes exceeds 1048576 bytes"
+    },
+    {
+      "code": "LARGE_FILE",
+      "file": "apps/remotion/public/music/Morning.mp3",
+      "message": "6611648 bytes exceeds 1048576 bytes"
+    },
+    {
+      "code": "LARGE_FILE",
+      "file": "apps/remotion/public/music/パステルハウス BGM.mp3",
+      "message": "5125888 bytes exceeds 1048576 bytes"
+    },
+    {
+      "code": "LARGE_FILE",
+      "file": "apps/remotion/public/music/野良猫は宇宙を目指した.mp3",
+      "message": "4949611 bytes exceeds 1048576 bytes"
+    },
+    {
+      "code": "LARGE_FILE",
+      "file": "apps/web/public/images/brand-civil-2-square.png",
+      "message": "2057339 bytes exceeds 1048576 bytes"
+    },
+    {
+      "code": "LARGE_FILE",
+      "file": "apps/web/public/images/brand-civil-2-wide.png",
+      "message": "2077040 bytes exceeds 1048576 bytes"
+    },
+    {
+      "code": "LARGE_FILE",
+      "file": "apps/web/public/images/brand-concrete-chief-square.png",
+      "message": "2184436 bytes exceeds 1048576 bytes"
+    },
+    {
+      "code": "LARGE_FILE",
+      "file": "apps/web/public/images/brand-concrete-chief-wide.png",
+      "message": "1947327 bytes exceeds 1048576 bytes"
+    },
+    {
+      "code": "LARGE_FILE",
+      "file": "apps/web/public/images/brand-concrete-diagnosis-square.png",
+      "message": "2508688 bytes exceeds 1048576 bytes"
+    },
+    {
+      "code": "LARGE_FILE",
+      "file": "apps/web/public/images/brand-concrete-diagnosis-wide.png",
+      "message": "2100477 bytes exceeds 1048576 bytes"
+    },
+    {
+      "code": "LARGE_FILE",
+      "file": "apps/web/public/images/brand-pe-comprehensive-square.png",
+      "message": "2056248 bytes exceeds 1048576 bytes"
+    },
+    {
+      "code": "LARGE_FILE",
+      "file": "apps/web/public/images/brand-pe-comprehensive-wide.png",
+      "message": "2030632 bytes exceeds 1048576 bytes"
+    },
+    {
+      "code": "LARGE_FILE",
+      "file": "apps/web/public/images/brand-pe-construction-square.png",
+      "message": "1873531 bytes exceeds 1048576 bytes"
+    },
+    {
+      "code": "LARGE_FILE",
+      "file": "apps/web/public/images/brand-pe-construction-wide.png",
+      "message": "1718555 bytes exceeds 1048576 bytes"
+    },
+    {
+      "code": "LARGE_FILE",
+      "file": "apps/web/public/images/civil-engineering-concrete-rebar-card-accent.png",
+      "message": "2163357 bytes exceeds 1048576 bytes"
+    },
+    {
+      "code": "LARGE_FILE",
+      "file": "apps/web/public/images/civil-engineering-crane-pier-brand-square.png",
+      "message": "1884295 bytes exceeds 1048576 bytes"
+    },
+    {
+      "code": "LARGE_FILE",
+      "file": "apps/web/public/images/civil-engineering-exam-hero.png",
+      "message": "1682404 bytes exceeds 1048576 bytes"
+    },
+    {
+      "code": "LARGE_FILE",
+      "file": "apps/web/public/images/civil-engineering-foundation-study-card-accent.png",
+      "message": "1817494 bytes exceeds 1048576 bytes"
+    },
+    {
+      "code": "LARGE_FILE",
+      "file": "apps/web/public/images/civil-engineering-integrated-infrastructure-card-accent.png",
+      "message": "2103059 bytes exceeds 1048576 bytes"
+    },
+    {
+      "code": "LARGE_FILE",
+      "file": "apps/web/public/images/civil-engineering-local-works-card-accent.png",
+      "message": "1989234 bytes exceeds 1048576 bytes"
+    },
+    {
+      "code": "LARGE_FILE",
+      "file": "apps/web/public/images/civil-engineering-signature-infrastructure-card-accent.png",
+      "message": "1784634 bytes exceeds 1048576 bytes"
+    },
+    {
+      "code": "LARGE_FILE",
+      "file": "apps/web/public/images/civil-engineering-site-brand-wide.png",
+      "message": "1982300 bytes exceeds 1048576 bytes"
+    },
+    {
+      "code": "LARGE_FILE",
+      "file": "apps/web/public/images/civil-engineering-site-card-accent.png",
+      "message": "2051862 bytes exceeds 1048576 bytes"
+    },
+    {
+      "code": "LARGE_FILE",
+      "file": "apps/web/public/images/ogp/ranking-dark-background.png",
+      "message": "1453079 bytes exceeds 1048576 bytes"
+    },
+    {
+      "code": "LARGE_FILE",
+      "file": "apps/web/public/images/stats47-author-avatar.png",
+      "message": "1313603 bytes exceeds 1048576 bytes"
+    },
+    {
+      "code": "LARGE_FILE",
+      "file": "apps/web/public/search-index.json",
+      "message": "1348156 bytes exceeds 1048576 bytes"
+    },
+    {
+      "code": "LARGE_FILE",
+      "file": "apps/web/scripts/lib/assets/source/stats-background-dark.png",
+      "message": "1393405 bytes exceeds 1048576 bytes"
+    },
+    {
+      "code": "LARGE_FILE",
+      "file": "apps/web/scripts/lib/assets/source/stats-background-light.png",
+      "message": "1175712 bytes exceeds 1048576 bytes"
+    },
+    {
+      "code": "LARGE_FILE",
+      "file": "docs/assets/ranking-thumbnail-ab-proposal.png",
+      "message": "1236655 bytes exceeds 1048576 bytes"
+    },
+    {
+      "code": "LARGE_FILE",
+      "file": "package-lock.json",
+      "message": "1101805 bytes exceeds 1048576 bytes"
+    },
+    {
+      "code": "LARGE_FILE",
+      "file": "packages/estat-api/src/stats-data/__tests__/fixtures/0000010101.json",
+      "message": "20616523 bytes exceeds 1048576 bytes"
+    },
+    {
+      "code": "LARGE_FILE",
+      "file": "packages/gis/data/geoshape/prefecture.topojson",
+      "message": "1917623 bytes exceeds 1048576 bytes"
+    },
+    {
+      "code": "LARGE_FILE",
+      "file": "packages/visualization/src/d3/__tests__/fixtures/jp-prefectures.json",
+      "message": "1917623 bytes exceeds 1048576 bytes"
+    }
+  ]
+}

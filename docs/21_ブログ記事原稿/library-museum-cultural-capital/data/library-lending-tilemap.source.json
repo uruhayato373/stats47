@@ -1,0 +1,19 @@
+{
+  "kind": "ranking",
+  "rankingKey": "library-lending-books",
+  "year": "2020",
+  "unit": "冊",
+  "label": "1人あたり図書館貸出冊数",
+  "transform": "library-lending-books(2020年度, 冊) ÷ japanese-population(2021年, 人) の県別除算で1人あたり貸出冊数を算出 (2つの独立SSOTの計算合成。SVGの絵からの逆算ではない)",
+  "source": "r2:app/ranking/library-lending-books/values.json + r2:app/ranking/japanese-population/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking (library-lending-books と japanese-population の2ランキング)",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug library-museum-cultural-capital --keys library-lending-books --year 2020 --data-name library-lending-raw && node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug library-museum-cultural-capital --keys japanese-population --year 2021 --data-name population-raw (取得後に areaCode で除算)",
+  "fetchedAt": "2026-07-12T00:00:00.000Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs (x2) + manual per-capita division",
+  "verifiedMatchRate": 92,
+  "svgVerification": {
+    "matchedPrefs": 47,
+    "method": "計算値 vs 旧SVG表示値(滋賀6.95→計算7.08, 東京6.00→計算6.32, 高知6.53→計算6.30, 沖縄2.73→計算2.75 等)を相対誤差で照合。人口年度(2021)を複数候補(2019-2022)から平均誤差最小で確定",
+    "note": "旧タイルマップSVGは県別title欠落ではなく値付きtitleを保持していたため、47件全数を照合できた"
+  }
+}

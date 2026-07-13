@@ -10,6 +10,9 @@
  * home = 注目ランキングの editorial 抜粋 / 本ページ = 全カテゴリの網羅索引）。
  * R2 非依存の純静的ページとして SSG する（home の FeaturedRankings build-empty 問題を避ける）。
  */
+import { existsSync } from "node:fs";
+import path from "node:path";
+
 import { listCategories } from "@stats47/data-configs";
 import {
   Building2,
@@ -106,16 +109,35 @@ export default function RankingIndexPage() {
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-3">
           {categories.map((c) => {
             const Icon = ICON_MAP[c.icon] ?? TrendingUp;
+            // カテゴリ装飾画像 (Gemini 生成・public/images/categories/<key>.webp)。
+            // 未生成の間はアイコンカードにフォールバックする (段階導入・欠落で崩れない)。
+            const hasImage = existsSync(
+              path.join(process.cwd(), "public/images/categories", `${c.categoryKey}.webp`),
+            );
             return (
               <SurfaceLinkCard
                 key={c.categoryKey}
                 href={`/category/${c.categoryKey}`}
-                className="group flex flex-col"
+                className="group flex flex-col overflow-hidden"
               >
+                {hasImage && (
+                  <div className="-mx-4 -mt-4 mb-3 aspect-[3/2] overflow-hidden border-b border-border bg-muted/30">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={`/images/categories/${c.categoryKey}.webp`}
+                      alt=""
+                      aria-hidden="true"
+                      loading="lazy"
+                      className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                    />
+                  </div>
+                )}
                 <div className="mb-2 flex items-center gap-2.5">
-                  <span className="flex h-9 w-9 items-center justify-center rounded-full bg-primary/10 text-primary">
-                    <Icon className="h-4 w-4" />
-                  </span>
+                  {!hasImage && (
+                    <span className="flex h-9 w-9 items-center justify-center rounded-full bg-primary/10 text-primary">
+                      <Icon className="h-4 w-4" />
+                    </span>
+                  )}
                   <h3 className="text-base font-semibold group-hover:text-primary">
                     {c.categoryName}
                   </h3>

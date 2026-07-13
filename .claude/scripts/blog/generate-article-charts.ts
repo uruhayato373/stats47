@@ -149,6 +149,7 @@ function detectChartTypeFromName(filename) {
   if (filename.endsWith("-rate-ranking.json")) return "bar";
   if (filename.endsWith("-income-ranking.json")) return "bar";
   if (filename.endsWith("-tile-grid.json")) return "tile-grid";
+  if (filename.endsWith("-tilemap.json")) return "tile-grid"; // 頻出 alias (gas-ratio-tilemap / chart1-tilemap 等 20+ 枚)
   if (filename.endsWith("-income-map.json")) return "tile-grid";
   if (filename.endsWith("-ratio-map.json")) return "tile-grid";
   if (filename.endsWith("-trend.json")) return "line";

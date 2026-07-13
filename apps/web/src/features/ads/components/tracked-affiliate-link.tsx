@@ -34,6 +34,7 @@ export function TrackedAffiliateLink({
   return (
     <a
       href={href}
+      aria-label={label}
       target="_blank"
       rel="noopener noreferrer sponsored"
       className={className}

@@ -1,0 +1,67 @@
+{
+  "generatedAt": "2026-07-12T14:26:17.947Z",
+  "date": "2026-07-12",
+  "days": 28,
+  "dimensions": [
+    "affiliate_vertical",
+    "affiliate_category",
+    "link_position",
+    "experiment_id",
+    "variant_id",
+    "creative_size"
+  ],
+  "hasVerticalBreakdown": true,
+  "hasCategoryBreakdown": true,
+  "hasVariantBreakdown": true,
+  "totals": {
+    "impressions": 10122,
+    "clicks": 10,
+    "ctr": 0.0009879470460383323
+  },
+  "rows": [
+    {
+      "affiliate_vertical": "(not set)",
+      "affiliate_category": "(not set)",
+      "link_position": "(not set)",
+      "experiment_id": "(not set)",
+      "variant_id": "(not set)",
+      "creative_size": "(not set)",
+      "impressions": 9871,
+      "clicks": 8,
+      "ctr": 0.0008104548677945497
+    },
+    {
+      "affiliate_vertical": "(unset)",
+      "affiliate_category": "(unset)",
+      "link_position": "(unset)",
+      "experiment_id": "(unset)",
+      "variant_id": "(unset)",
+      "creative_size": "(unset)",
+      "impressions": 251,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "affiliate_vertical": "other",
+      "affiliate_category": "other",
+      "link_position": "sidebar",
+      "experiment_id": "(not set)",
+      "variant_id": "(not set)",
+      "creative_size": "(not set)",
+      "impressions": 0,
+      "clicks": 1,
+      "ctr": null
+    },
+    {
+      "affiliate_vertical": "other",
+      "affiliate_category": "other",
+      "link_position": "sidebar-left",
+      "experiment_id": "(not set)",
+      "variant_id": "(not set)",
+      "creative_size": "(not set)",
+      "impressions": 0,
+      "clicks": 1,
+      "ctr": null
+    }
+  ]
+}

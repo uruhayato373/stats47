@@ -63,13 +63,13 @@ jobs:
     timeout-minutes: 60
     steps:
       - name: 🧰 Checkout main
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         with:
           ref: main
           fetch-depth: 1
 
       - name: 🟢 Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: "20"
           cache: "npm"
@@ -91,7 +91,7 @@ jobs:
           [ -n "${{ inputs.since }}" ] && ARGS="$ARGS --since ${{ inputs.since }}"
           [ "${{ inputs.dry_run }}" = "true" ] && ARGS="$ARGS --dry-run"
           echo "page-data-batch.ts $ARGS"
-          npx tsx packages/data-configs/scripts/page-data-batch.ts $ARGS
+          npx tsx packages/data-configs/scripts/page-data-batch.ts "$ARGS"
 
       # 観測値を R2 に push (app/stats)。schedule 実行 (inputs.dry_run='') では push される。
       - name: ☁️ Push observations to R2 (app/stats)

@@ -43,13 +43,13 @@ jobs:
     timeout-minutes: 20
     steps:
       - name: 🧰 Checkout develop
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         with:
           ref: develop
           fetch-depth: 1
 
       - name: 🟢 Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: "20"
           cache: "npm"
@@ -62,3 +62,7 @@ jobs:
 
       - name: 🧹 Purge CDN (全ゾーン — バナーは全ページ埋め込みのため)
         run: npx tsx packages/r2-storage/src/scripts/purge-cache.ts
+
+      - name: ✅ Verify published affiliate-ads post-condition
+        # CDN purge後の公開URLをgit TS SSOTとsemantic compare。不一致なら公開成功とみなさない。
+        run: npx tsx apps/web/scripts/verify-affiliate-ads-snapshot.ts

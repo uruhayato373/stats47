@@ -47,13 +47,13 @@ jobs:
     timeout-minutes: 45
     steps:
       - name: 🧰 Checkout main
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         with:
           ref: main
           fetch-depth: 1
 
       - name: 🟢 Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: "20"
           cache: "npm"
@@ -74,7 +74,18 @@ jobs:
           [ -n "${{ inputs.only }}" ] && ARGS="$ARGS --only ${{ inputs.only }}"
           [ "${{ inputs.dry_run }}" = "true" ] && ARGS="$ARGS --dry-run"
           echo "sync-snapshots/run.sh $ARGS"
-          bash .claude/skills/db/sync-snapshots/run.sh $ARGS
+          bash .claude/skills/db/sync-snapshots/run.sh "$ARGS"
+
+      - name: ✅ Verify published git-TS snapshots
+        if: inputs.dry_run != 'true'
+        run: |
+          ONLY="${{ inputs.only }}"
+          if [ -z "$ONLY" ] || [ "$ONLY" = "page-components" ] || [ "$ONLY" = "ranking-page-cards" ]; then
+            npx tsx apps/web/scripts/verify-page-components-snapshot.ts
+          fi
+          if [ -z "$ONLY" ] || [ "$ONLY" = "affiliate-ads" ]; then
+            npx tsx apps/web/scripts/verify-affiliate-ads-snapshot.ts
+          fi
 
   # ranking-items を R2 に push した後、git 側の派生キー (known / sitemap) を再生成して
   # develop に反映し PR を開く。これが無いと新規 metric の item.json は R2 にあっても
@@ -90,13 +101,13 @@ jobs:
     timeout-minutes: 20
     steps:
       - name: 🧰 Checkout develop
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         with:
           ref: develop
           fetch-depth: 0
 
       - name: 🟢 Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: "20"
           cache: "npm"
@@ -139,7 +150,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           KEY_FILES="packages/ranking/src/config/known-ranking-keys.ts apps/web/src/config/sitemap-ranking-keys.ts"
-          if git diff --quiet -- $KEY_FILES; then
+          if git diff --quiet -- "$KEY_FILES"; then
             echo "ranking keys 差分なし — PR 不要"
             exit 0
           fi
@@ -147,7 +158,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git switch -C "$BRANCH"
-          git add $KEY_FILES
+          git add "$KEY_FILES"
           git commit -m "chore(ranking): sync known + sitemap ranking keys from R2 [skip ci]"
           git push -f origin "$BRANCH"
           # 既存 PR があれば再利用、無ければ作成 (develop→main = 本番デプロイの最終ゲート)。

@@ -107,7 +107,7 @@ const SIZE_ENFORCED = new Set(["bar", "tile-grid", "summary", "scatter", "line",
 export function classifyChartTypeFromName(filename) {
   const f = String(filename).replace(/\.svg$/i, "").toLowerCase();
   if (/(?:-prefecture-rankings|-top5-bottom5|-top-bottom|-rate-ranking|-income-ranking|-ranking|-rankings)$/.test(f)) return "bar";
-  if (/(?:-tile-grid|-income-map|-ratio-map|-map)$/.test(f)) return "tile-grid";
+  if (/(?:-tile-grid|-tilemap|-income-map|-ratio-map|-map)$/.test(f)) return "tile-grid";
   if (/(?:-national-trend|-timeseries|-trend)$/.test(f)) return "line";
   if (/-scatter$/.test(f)) return "scatter";
   if (/-stacked$/.test(f)) return "stacked-bar";
@@ -147,4 +147,87 @@ function path_base(p) { const s = String(p).split("/"); return s[s.length - 1]; 
 export function extractInlineSvgs(md) {
   const matches = md.match(/<svg[\s\S]*?<\/svg>/g);
   return matches ?? [];
+}
+
+/** SVG 文字列 → 表示テキスト (タグ除去 + XML エンティティ復元 + 空白正規化) */
+function svgPlainText(svgContent) {
+  return String(svgContent)
+    .replace(/<!--[\s\S]*?-->/g, "")
+    .replace(/<[^>]+>/g, "")
+    .replace(/&amp;/g, "&")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&quot;/g, '"')
+    .replace(/&apos;/g, "'")
+    .replace(/\s+/g, "");
+}
+
+/**
+ * choropleth (tile-grid) の凡例 意味的ラベル誤用を検査する (SVG × data json のペア検査)。
+ *
+ * 背景 (2026-07-13): 旧デフォルト ["安全","危険"] (交通事故マップ由来) が消費支出額等の
+ * 中立指標マップ全数に焼き込まれていた。現デフォルトは ["低い","高い"] で、意味的ラベルは
+ * json の legendLabels 明示時のみ許可する (blog-svg-chart-standards.md §2-A choropleth)。
+ *
+ * @param {string} filename - SVG ファイル名 (chartType 推定)
+ * @param {string} svgContent - SVG 文字列
+ * @param {object|undefined} jsonData - 対応する data/<name>.json のパース結果 (無ければ undefined)
+ * @returns {{ errors: string[], warnings: string[] }}
+ */
+export function lintChoroplethLegend(filename, svgContent, jsonData) {
+  const errors = [];
+  const warnings = [];
+  const ct = jsonData?.chartType === "tile-grid" ? "tile-grid" : classifyChartTypeFromName(filename);
+  if (ct !== "tile-grid") return { errors, warnings };
+  const svg = String(svgContent);
+  const hasExplicit = Array.isArray(jsonData?.legendLabels) && jsonData.legendLabels.length === 2;
+  const semantic = svg.match(/<text[^>]*>(安全|危険|良い|悪い)<\/text>/);
+  if (semantic && !hasExplicit) {
+    errors.push(
+      `凡例に意味的ラベル「${semantic[1]}」が json の legendLabels 明示なしに焼き込まれている` +
+      ` (既定は 低い/高い。意味的ラベルは指標の意味が確実な場合のみ json に legendLabels を明示する)`
+    );
+  }
+  if (!semantic && !hasExplicit && !/<text[^>]*>低い</.test(svg)) {
+    warnings.push("凡例ラベル (低い/高い) が見つからない — 旧デザインの可能性。svg-builder で再生成して統一する");
+  }
+  return { errors, warnings };
+}
+
+/**
+ * findings カードの json ↔ SVG 内容パリティを検査する (SVG × data json のペア検査)。
+ *
+ * 背景 (2026-07-13): renderer が json の {heading, text} 構造の heading (太字見出し) を捨てて
+ * text だけ描画する退行バグが発生し、本番 1 記事で heading 4/4 が欠落した。json の全 heading/text
+ * が SVG に描画されていることを決定的に担保する。
+ *
+ * @param {string} filename - SVG ファイル名 (chartType 推定)
+ * @param {string} svgContent - SVG 文字列
+ * @param {object|Array|undefined} jsonData - 対応する data/<name>.json のパース結果
+ * @returns {{ errors: string[], warnings: string[] }}
+ */
+export function lintFindingsParity(filename, svgContent, jsonData) {
+  const errors = [];
+  const warnings = [];
+  const ct = jsonData?.chartType === "summary" ? "summary" : classifyChartTypeFromName(filename);
+  if (ct !== "summary") return { errors, warnings };
+  const items = Array.isArray(jsonData) ? jsonData : jsonData?.findings;
+  if (!Array.isArray(items) || items.length === 0) return { errors, warnings };
+  const plain = svgPlainText(svgContent);
+  const expected = [];
+  for (const it of items) {
+    if (typeof it === "string") expected.push(it);
+    else if (it && typeof it === "object") {
+      if (it.heading) expected.push(it.heading);
+      if (it.text) expected.push(it.text);
+    }
+  }
+  const missing = expected.filter((t) => t && !plain.includes(String(t).replace(/\s+/g, "")));
+  if (missing.length > 0) {
+    errors.push(
+      `findings の内容欠落 ${missing.length}/${expected.length} 件 — json の heading/text が SVG に描画されていない` +
+      ` (例: "${String(missing[0]).slice(0, 30)}")。generate-article-charts で再生成が必要 (過去に renderer の heading 脱落バグで発生)`
+    );
+  }
+  return { errors, warnings };
 }

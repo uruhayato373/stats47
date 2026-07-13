@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "experiments": [
+    {
+      "guardrailKpis": [
+        "gsc.impressions",
+        "ga4.engagementRatePvWeighted"
+      ],
+      "baselinePeriod": {
+        "from": "2026-05-18",
+        "to": "2026-07-12"
+      },
+      "startedAt": null,
+      "evaluateAt": null,
+      "result": null,
+      "notes": "本番反映 (デプロイ) 後に startedAt/evaluateAt(d7/d28/d56) を設定する。d28: pv 合算 baseline比 +15% 未満なら暫定 no-effect / d56: +20% 以上かつ GSC imp>=200 到達で effect-partial 以上を検討。W25 一過性流入ピーク (166pv/週) との混同に注意 (deep-dive 2026-07-13)",
+      "evidenceRefs": [
+        ".claude/skills/theme/manage-theme-portfolio/reference/audits/2026-07-13-theme-deepdive-population-dynamics.md"
+      ],
+      "experimentId": "THEME-EXP-001",
+      "themeKey": "population-dynamics",
+      "hypothesis": "primary を人口増減率/自然増減率に再編し内部導線(rankingLink 8件)を補完すると、主問への直接回答性が上がり回遊 (GA4 pv) が伸びる",
+      "changeType": "catalog-metrics",
+      "primaryKpi": "ga4.pageViews",
+      "baseline": {
+        "ga4.pageViews": 206,
+        "gsc.impressions": 100,
+        "ga4.engagementRatePvWeighted": 0.578
+      },
+      "verdict": "pending"
+    }
+  ]
+}

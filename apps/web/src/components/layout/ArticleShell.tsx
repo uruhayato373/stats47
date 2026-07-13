@@ -20,13 +20,13 @@ interface ArticleShellProps {
  * doboku-note の Soft Editorial レイアウトを移植したもの。
  *
  * PageShell (1280px grid・2026-07-11 に 1700px から統一) との違い:
- * - `.reading-zone` トークン (薄グレー地・--radius: 14px) を全幅で敷く
+ * - `.reading-zone` トークン（薄グレー地・--radius: 0）を全幅で敷く
  * - コンテナ 1280px + flex で本文がレールに密着する
  *   (PageShell reading variant の「1fr 列内で本文 760px 制限 → ワイド画面で空白」を根治)
  * - レールは「非 sticky 上段 + sticky TOC クラスタ末尾」の 2 段構成
  *
  * 設計仕様: docs/01_技術設計/13_統一レイアウト設計.md /
- * docs/01_技術設計/15_デザインシステムSSOT.md「reading zone 例外」
+ * docs/01_技術設計/15_デザインシステムSSOT.md「reading zone」
  */
 export function ArticleShell({
   children,

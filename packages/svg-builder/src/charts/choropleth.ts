@@ -60,7 +60,11 @@ export interface ChoroplethOptions {
   reverse?: boolean;
   /** 各タイルに県名の下へ値も表示する（省略時: false = 県名のみ）。 */
   showValue?: boolean;
-  /** 凡例の端ラベル [左端, 右端]（省略時: ["安全", "危険"]） */
+  /**
+   * 凡例の端ラベル [左端, 右端]（省略時: ["低い", "高い"]）。
+   * 意味的ラベル（"安全"/"危険" 等）は指標の意味が確実な場合のみ呼び元で明示指定する
+   * （旧デフォルトの 安全/危険 は消費支出額マップ等で不適切だった）。
+   */
   legendLabels?: [string, string];
 }
 
@@ -191,11 +195,12 @@ function fitTitleFont(text: string, availW: number, maxF: number, minF: number):
 
 const W = 600;
 const TOTAL_H = 700; // §5 タイルマップ標準 600×700（既存資産の最頻 viewBox と一致）
-// 凡例：右寄せ（バー右端 x=545、SVG 右端 600 から 55px 余白）
-const BAR_RIGHT = 545; // グラデーションバー右端 x
-const BAR_W     = 140; // バー幅（コンパクト）
-const BAR_X     = BAR_RIGHT - BAR_W; // = 405
-const BAR_Y     = 625; // バー y（沖縄右側の空白に配置）
+// 凡例：タイトル直下の左上余白に配置（日本のタイル配置で x<491,y<350 が空く。
+// 旧: 右下 y=625 の 8px は小さく目立たなかった + 左上が遊休だった）
+const BAR_X     = 64;  // グラデーションバー左端 x（左ラベル "低い" の余白を確保）
+const BAR_W     = 150; // バー幅
+const BAR_RIGHT = BAR_X + BAR_W; // = 214（最上段の左タイル x=491 まで余裕）
+const BAR_Y     = 120; // バー y（タイトル 58 + 年行 ~92 の直下）
 const BAR_H     = 10;  // バー高さ
 
 // ─── 公開関数 ────────────────────────────────────────────────────
@@ -219,7 +224,7 @@ export function generateChoroplethSvg(
     scheme,
     reverse = false,
     showValue = false,
-    legendLabels = ["安全", "危険"],
+    legendLabels = ["低い", "高い"],
   } = options;
 
   // 色の解決: scheme（D3）指定時は interpolator、無ければ colorStops。reverse で反転。
@@ -310,12 +315,12 @@ export function generateChoroplethSvg(
     `      <feDropShadow dx="0" dy="0" stdDeviation="1.3" flood-color="#000000" flood-opacity="0.7"/>`,
     `    </filter>`,
     `  </defs>`,
-    `  <text x="${BAR_X - 4}" y="${BAR_Y + 8}" font-size="8" class="svg-tick" text-anchor="end">${legendLabels[0]}</text>`,
+    `  <text x="${BAR_X - 6}" y="${BAR_Y + 9}" font-size="10" class="svg-tick" text-anchor="end">${legendLabels[0]}</text>`,
     `  <rect x="${BAR_X}" y="${BAR_Y}" width="${BAR_W}" height="${BAR_H}" rx="2" fill="url(#choropleth-lg)"/>`,
-    `  <text x="${BAR_RIGHT + 4}" y="${BAR_Y + 8}" font-size="8" class="svg-tick">${legendLabels[1]}</text>`,
-    `  <text x="${BAR_X}" y="${BAR_Y + 22}" font-size="7.5" class="svg-tick">${loStr}${unit}</text>`,
-    `  <text x="${BAR_X + Math.round(BAR_W / 2)}" y="${BAR_Y + 22}" font-size="7.5" class="svg-tick" text-anchor="middle">${midStr}${unit}</text>`,
-    `  <text x="${BAR_RIGHT}" y="${BAR_Y + 22}" font-size="7.5" class="svg-tick" text-anchor="end">${hiStr}${unit}</text>`,
+    `  <text x="${BAR_RIGHT + 6}" y="${BAR_Y + 9}" font-size="10" class="svg-tick">${legendLabels[1]}</text>`,
+    `  <text x="${BAR_X}" y="${BAR_Y + 25}" font-size="9" class="svg-tick">${loStr}${unit}</text>`,
+    `  <text x="${BAR_X + Math.round(BAR_W / 2)}" y="${BAR_Y + 25}" font-size="9" class="svg-tick" text-anchor="middle">${midStr}${unit}</text>`,
+    `  <text x="${BAR_RIGHT}" y="${BAR_Y + 25}" font-size="9" class="svg-tick" text-anchor="end">${hiStr}${unit}</text>`,
   ];
 
   return `<svg width="${W}" height="${TOTAL_H}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${TOTAL_H}" role="img" aria-label="${ariaLabel}">

@@ -9,7 +9,8 @@ agent (`survey-curator`) / 人間はこれに従う。2026-07-12 に旧 `docs/02
 > (`summary` / `whatYouCanLearn[]` / `readerQuestions[]{question,rankingKey}` / `caveats[]` / `relatedArticleSlugs[]`)。
 > **紐付け (ranking↔survey) の正典は別**: `.claude/rules/survey-linkage-standards.md` (surveys.json / provenance)。
 > 本 rule は**編集コンテンツ**、linkage-standards は**紐付けメタ**。両方 survey-curator が所有する。
-> 横展開の進捗・census 実験の計測は handoff `docs/handoffs/2026-07-11-survey-content-cluster.md` + 機能バックログが追跡。
+> 横展開の進捗・census 実験の計測は `.claude/state/surveys/{portfolio,experiments}.json`
+> (survey-curator / skill `/manage-survey-portfolio`) が追跡 (2026-07-13 に handoff から移行)。
 
 ## ファネル役割 (維持する・混ぜない)
 
@@ -82,12 +83,13 @@ R2 app/survey/<id>/items.json
 - 定義欠落 survey は現行 UI へフォールバックさせる (1 survey ずつ編集ハブ化・他は壊さない)。
 - 実装前に確認: survey page.tsx の exports・取得境界 / article repository・`related-articles.ts` の再利用可否 /
   既存 page_components・SectionHeader・ArticleShell / rules `coding-standards.md`・`ui-components.md`・`survey-linkage-standards.md` /
-  docs `07_情報設計.md`・`13_統一レイアウト設計.md`・`12_完全DBレス設計.md`・(URL/metadata/構造化データを触るなら)`11_URL構造.md`。
+  docs `07_情報設計.md`・`13_統一レイアウト設計.md`・`12_完全DBレス設計.md`・(URL/metadata/構造化データを触るなら) コード `apps/web/src/lib/url-policy.ts` + `middleware.ts`。
 
 ## 横展開の進め方 (小さく実証してから)
 
 - 75 調査を一括で長文化せず、**1 survey (census) で実証 → GSC 実測が基準を満たした場合だけ横展開**する。
-- 横展開順は推測で固定せず、`docs/04_レビュー/2026-07-11-survey-portfolio-audit.md` の GSC 実測を使う。
+- 横展開順は推測で固定せず、`.claude/state/surveys/portfolio.json` (editorial-candidate の優先順位) の GSC 実測を使う
+  (初回監査の証跡: `.claude/skills/survey/manage-survey-portfolio/reference/audits/2026-07-11-survey-portfolio-audit.md`)。
 - 判定 (デプロイ4〜8週後・baseline 比): CTR +30% 以上かつ impressions 100 以上 / クラスター clicks +20% 以上 /
   平均順位 2 以上改善 or 11-20位→Top10 / 内部遷移 GA4 で発生 / 品質 (誤出典・数値不一致・soft404・重複canonical) 0。
   母数不足なら `effect/none` と断定せず計測期間を延長する。
@@ -105,7 +107,7 @@ R2 app/survey/<id>/items.json
 
 - 紐付けメタ (別正典): `.claude/rules/survey-linkage-standards.md`
 - 実装 SSOT: `apps/web/src/features/survey/survey-editorial.ts`
-- 横展開・census 実験の進捗: `docs/handoffs/2026-07-11-survey-content-cluster.md`
+- 横展開・census 実験の進捗: `.claude/state/surveys/{portfolio,experiments}.json` (skill `/manage-survey-portfolio`・schema は `.claude/state/surveys/README.md`)
 - 情報設計 (ファネル役割): `docs/01_技術設計/07_情報設計.md`
 - 品質基準 (blog 側): `.claude/rules/blog-quality-standards.md` / 実証判定: `.claude/rules/evidence-based-judgment.md`
 - agent: `survey-curator` (編集コンテンツ + 紐付け) / 生成は article-writer / 監査は `/audit-survey-linkage`
