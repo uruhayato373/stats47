@@ -24,11 +24,30 @@ function hasSchedule(onValue) {
 function auditFile(file) {
   const relative = path.relative(ROOT, file).split(path.sep).join("/");
   const findings = [];
+  const raw = fs.readFileSync(file, "utf8");
   let workflow;
   try {
-    workflow = YAML.parse(fs.readFileSync(file, "utf8"));
+    workflow = YAML.parse(raw);
   } catch (error) {
     return [{ code: "YAML_PARSE", file: relative, message: String(error) }];
+  }
+
+  // ARG_VECTOR_QUOTED: 文字列連結で組んだ引数列 (VAR="$VAR --x" / VAR="--x y" 初期化) を
+  // コマンドに "$VAR" と quote 渡しすると全体が 1 トークン化して実行時に壊れる。
+  // SC2086 対応の quote 一括追加で発生した実regression (2026-07-14 sync-snapshots)。
+  // 可変引数列は bash 配列 (VAR+=(...) と "${VAR[@]}") で組むこと。
+  const argVectorVars = new Set();
+  // 行頭に限定しない ([ -n ... ] && VAR="$VAR --x" の形を取りこぼさない)
+  for (const m of raw.matchAll(/\b([A-Z_][A-Z0-9_]*)="\$\1 /g)) argVectorVars.add(m[1]);
+  for (const m of raw.matchAll(/\b([A-Z_][A-Z0-9_]*)="--\S+ /g)) argVectorVars.add(m[1]);
+  for (const name of argVectorVars) {
+    if (new RegExp(`(?:^|\\s)(?:bash|sh|node|npx)\\b[^\\n]*"\\$${name}"(?=\\s|$)`, "m").test(raw)) {
+      findings.push({
+        code: "ARG_VECTOR_QUOTED",
+        file: relative,
+        message: `${name} は連結で組んだ引数列だが "$${name}" と単一引数で渡している (1トークン化) — bash 配列 ${name}+=(...) と "\${${name}[@]}" に変える`,
+      });
+    }
   }
   const jobs = workflow?.jobs && typeof workflow.jobs === "object" ? workflow.jobs : {};
   const workflowPermissions = workflow?.permissions;

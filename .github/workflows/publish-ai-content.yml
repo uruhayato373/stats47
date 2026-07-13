@@ -129,10 +129,11 @@ jobs:
       - name: 🧹 Purge CDN (公開した ranking ページのみピンポイント)
         if: ${{ env.PUBLISHED != '' }}
         run: |
-          URLS=""
-          for KEY in $PUBLISHED; do URLS="$URLS https://stats47.jp/ranking/$KEY"; done
-          echo "purge: $URLS"
-          npx tsx packages/r2-storage/src/scripts/purge-cache.ts --urls "$URLS" || true
+          # URLS は配列で組む ("$URLS" 単一引数渡しは purge-cache の URL filter が 0 件になる — ARG_VECTOR_QUOTED)
+          URLS=()
+          for KEY in $PUBLISHED; do URLS+=("https://stats47.jp/ranking/$KEY"); done
+          echo "purge: ${URLS[*]}"
+          npx tsx packages/r2-storage/src/scripts/purge-cache.ts --urls "${URLS[@]}" || true
 
       - name: 🧹 Remove published files from outbox (ephemeral)
         if: ${{ env.PUBLISHED != '' && success() }}
