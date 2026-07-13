@@ -32,7 +32,7 @@ function run(f) {
 
 const theme = (over = {}) => ({
   themeKey: "aging-society", catalogStatus: "catalog", lifecycleStatus: "keep",
-  reviewStatus: "reviewed", evidenceRefs: ["docs/04_レビュー/2026-07-11-theme-aging-society.md"],
+  reviewStatus: "reviewed", evidenceRefs: [".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-11-theme-aging-society.md"],
   metrics: { gsc: { status: "measured", windowDays: 56, clicks: 120, impressions: 4300 } },
   ...over,
 });

@@ -7,7 +7,7 @@ tags: [theme, portfolio, inventory]
 
 # 初回テーマポートフォリオ監査 (PR-2)
 
-`theme-portfolio-manager` 運用 (正典: `docs/02_実装計画/25_テーマポートフォリオ運用.md`) の初回監査。
+`theme-portfolio-manager` 運用 (正典: `.claude/skills/theme/manage-theme-portfolio/reference/テーマポートフォリオ運用.md`) の初回監査。
 22 テーマ全件を `.claude/state/themes/portfolio.json` に登録し、ThemeCatalog 登録状況・レビュー文書
 (22/22)・doc 24 再編案と対応付けた。**計測値 (GSC/GA4) は未集計 (PR-3) のため全テーマ
 `insufficient-data`、内部遷移は GA4 未計装のため `not-instrumented`** — 推測値は保存していない。
@@ -157,6 +157,6 @@ E2E スモーク: 監査コマンド通し実行で drift 検出 (insufficient-d
 ## 関連
 
 - state: `.claude/state/themes/{portfolio,experiments}.json` (schema: 同 dir README.md)
-- 運用設計: `docs/02_実装計画/25_テーマポートフォリオ運用.md`
+- 運用設計: `.claude/skills/theme/manage-theme-portfolio/reference/テーマポートフォリオ運用.md`
 - 判定基準: `docs/02_実装計画/24_テーマ分類再編成方針.md`
 - builder: `.claude/scripts/themes/build-theme-portfolio.ts` / validator: `validate-theme-state.mjs`

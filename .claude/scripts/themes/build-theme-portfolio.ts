@@ -8,7 +8,7 @@
  * 意味項目の変更も本スクリプトの --set 経由で行う (portfolio.json の手編集禁止)。
  *
  * schema・判定規律の正典: .claude/state/themes/README.md
- * 運用設計: docs/02_実装計画/25_テーマポートフォリオ運用.md
+ * 運用設計: .claude/skills/theme/manage-theme-portfolio/reference/テーマポートフォリオ運用.md
  *
  * Usage:
  *   npx tsx .claude/scripts/themes/build-theme-portfolio.ts                 # 機械項目の再導出 (upsert)
@@ -27,7 +27,7 @@ import { CLIMATE_SET, LOCAL_FINANCE_CITY_SET } from "../../../packages/types/src
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(__dirname, "../../..");
 const STATE_DIR = path.join(PROJECT_ROOT, ".claude/state/themes");
-const REVIEW_DIR = path.join(PROJECT_ROOT, "docs/04_レビュー");
+const REVIEW_DIR = path.join(PROJECT_ROOT, ".claude/skills/theme/manage-theme-portfolio/reference/reviews");
 const PORTFOLIO = path.join(STATE_DIR, "portfolio.json");
 const EXPERIMENTS = path.join(STATE_DIR, "experiments.json");
 
@@ -72,7 +72,7 @@ function findReviewDoc(themeKey: string): { ref: string; date: string | null; ga
   const src = fs.readFileSync(path.join(REVIEW_DIR, f), "utf8");
   const date = src.match(/^date:\s*(\S+)/m)?.[1] ?? null;
   const gate = src.match(/^status:\s*(\S+)/m)?.[1] ?? null;
-  return { ref: `docs/04_レビュー/${f}`, date, gate };
+  return { ref: `.claude/skills/theme/manage-theme-portfolio/reference/reviews/${f}`, date, gate };
 }
 
 function deriveMechanical(themeKey: string): Partial<ThemeEntry> {

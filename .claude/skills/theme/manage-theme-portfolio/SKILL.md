@@ -8,7 +8,7 @@ primary_agent: theme-portfolio-manager
 # manage-theme-portfolio
 
 テーマポートフォリオ (`.claude/state/themes/`) の継続評価サイクルを回す。
-運用設計の正典: `docs/02_実装計画/25_テーマポートフォリオ運用.md`。
+運用設計の正典: `.claude/skills/theme/manage-theme-portfolio/reference/テーマポートフォリオ運用.md`。
 schema・判定規律の正典: `.claude/state/themes/README.md`。
 
 ## モード
@@ -25,7 +25,7 @@ schema・判定規律の正典: `.claude/state/themes/README.md`。
 1. **インベントリ導出 (決定的)**: `npx tsx` で `THEME_CATALOGS` から themeKey / role 別指標数 /
    selectionMissing / chartCount を導出。legacy (`climate` / `local-finance-city`) は IndicatorSet
    (`packages/types/src/indicator-sets/`) から。catalogStatus を付与。
-2. **レビュー対応付け**: `docs/04_レビュー/*-theme-<key>.md` を glob し `reviewDocRef` /
+2. **レビュー対応付け**: `.claude/skills/theme/manage-theme-portfolio/reference/reviews/*-theme-<key>.md` を glob し `reviewDocRef` /
    `officialSourceReviewedAt` を更新。レビュー後にカタログの primary 構成が変わっていれば
    `reviewStatus: "stale"`。
 3. **実測集計**: 最新週の GSC / GA4 pages.csv から `/themes/<key>` 行を集計 (56d 窓 = 直近 8 週分の
@@ -33,7 +33,7 @@ schema・判定規律の正典: `.claude/state/themes/README.md`。
    not-instrumented として保存し推測値を入れない**。
 4. **portfolio.json 更新** → `node .claude/scripts/themes/validate-theme-state.mjs` が green であること。
 5. **差分レポート**: 前回との lifecycle 変更・stale 検知・insufficient-data の一覧を agent の
-   OUTPUT FORMAT で報告。四半期監査時は `docs/04_レビュー/YYYY-MM-DD-theme-portfolio-audit.md` に保存。
+   OUTPUT FORMAT で報告。四半期監査時は `.claude/skills/theme/manage-theme-portfolio/reference/audits/YYYY-MM-DD-theme-portfolio-audit.md` に保存。
 
 ## コマンド (PR-4 で確定)
 
@@ -49,7 +49,7 @@ node .claude/scripts/themes/evaluate-theme-experiments.mjs --check          # �
 node .claude/scripts/themes/evaluate-theme-experiments.mjs --verdict <id> <verdict> --evidence <ref>
 ```
 
-- cadence: **月次で run-theme-portfolio-audit.sh、四半期で監査レポート** (`docs/04_レビュー/YYYY-MM-DD-theme-portfolio-audit.md`) を必須とする。CI (`pr-quality-check.yml` の Theme Portfolio State Guard) は schema/規律の検証のみで破壊的変更をしない。
+- cadence: **月次で run-theme-portfolio-audit.sh、四半期で監査レポート** (`.claude/skills/theme/manage-theme-portfolio/reference/audits/YYYY-MM-DD-theme-portfolio-audit.md`) を必須とする。CI (`pr-quality-check.yml` の Theme Portfolio State Guard) は schema/規律の検証のみで破壊的変更をしない。
 
 ## 検証 (毎回必須)
 

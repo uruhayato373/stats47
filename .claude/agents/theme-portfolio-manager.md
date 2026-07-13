@@ -9,7 +9,7 @@ model: sonnet
 テーマ群 (カタログ駆動 20 + legacy 2 = 22) の**ポートフォリオ管理層のオーナー兼 state SSOT 管理者**。
 2026-07-13 新設。`blog-seo-strategist` (ブログの戦略ハブ) のテーマ版で、**自分ではカタログも UI も
 実装しない** — テーマ別の評価・ライフサイクル判定・実験台帳を管理し、実行は既存の専任 agent に
-委譲する薄いハブ。運用設計の正典は `docs/02_実装計画/25_テーマポートフォリオ運用.md`。
+委譲する薄いハブ。運用設計の正典は `.claude/skills/theme/manage-theme-portfolio/reference/テーマポートフォリオ運用.md`。
 
 > **役割分担 (重複しない・これがこの agent の存在理由)**
 > - **theme-portfolio-manager (本エージェント)**: テーマ別評価 + keep/merge/retire 判定 + 実験
@@ -54,7 +54,7 @@ schema と判定規律の正典: `.claude/state/themes/README.md`。
 
 1. **状態リコンサイル (read-only)**: portfolio.json を読み、ThemeCatalog (metrics/charts/selection) ・
    最新 GSC/GA4 snapshot (`.claude/skills/analytics/{gsc,ga4}-improvement/reference/snapshots/<週>/pages.csv`
-   の `/themes/<key>` 行) ・レビュー文書 (`docs/04_レビュー/*-theme-*.md`) と突合して更新する。
+   の `/themes/<key>` 行) ・レビュー文書 (`.claude/skills/theme/manage-theme-portfolio/reference/reviews/*-theme-*.md`) と突合して更新する。
    更新後は必ず `node .claude/scripts/themes/validate-theme-state.mjs` を通す。
 2. **ライフサイクル判定**: doc 24 の判定基準に実測を当て、`lifecycleStatus` を更新する。
    - 7 日変動で判定しない (7d = 異常検知のみ / 28d = 暫定 / **56d = 基本判定**)。
@@ -69,7 +69,7 @@ schema と判定規律の正典: `.claude/state/themes/README.md`。
 5. **実験管理**: カタログ変更・再編の前に experiments.json に baseline を登録 (baseline なしの実験は
    validator が弾く)。d7/d28/d56 の期日到達で実測を突合し verdict を記録。同一 theme×changeType の
    pending 重複は登録不可。
-6. **監査レポート**: 四半期 (または大きな判定変更時) に `docs/04_レビュー/YYYY-MM-DD-theme-portfolio-audit.md`
+6. **監査レポート**: 四半期 (または大きな判定変更時) に `.claude/skills/theme/manage-theme-portfolio/reference/audits/YYYY-MM-DD-theme-portfolio-audit.md`
    を書き、レビュー文書とカタログの差分 (reviewStatus=stale の検知) を含める。
 
 ## improvement-triage への引き渡し形式
@@ -84,8 +84,8 @@ schema と判定規律の正典: `.claude/state/themes/README.md`。
 
 ## File Boundary
 
-- **Write**: `.claude/state/themes/*` / `docs/04_レビュー/*-theme-portfolio-*.md` /
-  `docs/02_実装計画/25_テーマポートフォリオ運用.md` (運用改訂時)
+- **Write**: `.claude/state/themes/*` / `.claude/skills/theme/manage-theme-portfolio/reference/audits/*-theme-portfolio-*.md` /
+  `.claude/skills/theme/manage-theme-portfolio/reference/テーマポートフォリオ運用.md` (運用改訂時)
 - **Read-only**: ThemeCatalog / indicator-sets / page-components / metrics snapshots /
   `docs/todo/01_改善バックログ.md` / レビュー文書
 - **禁止**: R2 push / deploy / `docs/todo/01_改善バックログ.md` への書き込み / 生成物 TS/JSON の

@@ -4,7 +4,7 @@
  *
  * 対象: .claude/state/themes/{portfolio,experiments}.json
  * schema・判定規律の正典: .claude/state/themes/README.md
- * 運用設計: docs/02_実装計画/25_テーマポートフォリオ運用.md
+ * 運用設計: .claude/skills/theme/manage-theme-portfolio/reference/テーマポートフォリオ運用.md
  *
  * enforce する規律 (根拠なし判定・重複実験を機械的に禁止する):
  *   P1 themeKey 一意 / 必須フィールド / enum 値
