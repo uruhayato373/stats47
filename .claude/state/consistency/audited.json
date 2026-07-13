@@ -1,9 +1,7 @@
 {
-  "hash": "7308afe55c8ca1fefc43c0ef3f0f7606cc4c016809c9769d0a0a3d1db230b224",
-  "audited_at": "2026-07-13T18:15:18",
+  "hash": "fb019cec5e4513b6a6cfbe49908d7d237796fb4e432775e4f4110b93688be2f5",
+  "audited_at": "2026-07-13T18:57:38",
   "files": [
-    ".claude/hooks/check-weekly-cadence-on-stop.js",
-    ".claude/scripts/management/check-weekly-cadence.mjs",
-    ".claude/settings.json"
+    ".claude/scripts/lib/audit-workflow-policy.cjs"
   ]
 }
