@@ -7,6 +7,10 @@ tags: [survey, census, seo, content-cluster]
 
 # 国勢調査コンテンツクラスター監査・実装結果
 
+> 2026-07-13 に `docs/04_レビュー/2026-07-11-survey-census-cluster-audit.md` から移設・改名
+> (survey ポートフォリオ運用の .claude 一本化)。本書は監査日付時点の証跡であり、最新状態の SSOT は
+> `.claude/state/surveys/portfolio.json`、census 実験の台帳は `.claude/state/surveys/experiments.json`。
+
 ## 結論
 
 `/survey/census` を初回実証対象に確定し、調査固有の編集情報とランキング導線を実装した。
@@ -61,4 +65,4 @@ page filter付きGSC API（2026-06-12〜2026-07-09）で開示されたqueryは7
 検索意図は未婚率ではなく、現状は「国勢調査を使った都道府県人口」の一般探索が中心。開示queryは総impressionsの
 一部に限られるため、残りを推測で補完しない。
 
-全surveyの相対優先順位は `2026-07-11-survey-portfolio-audit.md` を参照する。
+全surveyの相対優先順位は `../audits/2026-07-11-survey-portfolio-audit.md` を参照する。

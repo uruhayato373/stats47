@@ -7,6 +7,9 @@ tags: [survey, seo, gsc, portfolio]
 
 # surveyポートフォリオ監査
 
+> 2026-07-13 に `docs/04_レビュー/` から移設 (survey ポートフォリオ運用の .claude 一本化)。
+> 本書は監査日付時点の証跡であり、**最新状態の SSOT は `.claude/state/surveys/portfolio.json`**。
+
 ## 監査範囲
 
 - R2 `app/survey/all.json` の公開survey全件

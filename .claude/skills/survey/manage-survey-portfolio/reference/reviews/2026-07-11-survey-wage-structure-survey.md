@@ -7,6 +7,10 @@ tags: [survey, wage, seo, content-cluster]
 
 # 賃金構造基本統計調査クラスター事前監査
 
+> 2026-07-13 に `docs/04_レビュー/2026-07-11-survey-wage-structure-audit.md` から移設・改名
+> (survey ポートフォリオ運用の .claude 一本化)。本書は監査日付時点の証跡 + 実装時の受入条件であり、
+> 最新状態の SSOT は `.claude/state/surveys/portfolio.json`。
+
 ## 結論
 
 `/survey/wage-structure-survey` はGSC W27の直近28日で447 impressions、1 click、CTR 0.22%、平均順位10.38。
