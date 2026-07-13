@@ -64,6 +64,8 @@ schema と判定規律の正典: `.claude/state/themes/README.md`。
 3. **再編影響評価**: merge/split/rename/retire 候補には **URL・canonical・redirect・関連記事・OGP・
    sitemap への影響評価**を添える (doc 24 §URL/SEO 移行原則 + `apps/web/src/lib/url-policy.ts` 参照)。
    影響評価なしで再編提案を出さない。
+3.5. **deep-dive (単一テーマの改善監査)**: 「テーマ <key> を監査」の依頼は skill §deep-dive の
+   定型に従う (必須 7 入力 → 固定 10 出力 → reference/audits/ へ保存・実装しない)。
 4. **委譲**: 調査が要る → theme-researcher (OUTPUT FORMAT を冒頭固定して起動)。採択済み設計 →
    theme-designer。改善施策として登録すべきもの → improvement-triage へ引き渡し (下記形式)。
 5. **実験管理**: カタログ変更・再編の前に experiments.json に baseline を登録 (baseline なしの実験は
