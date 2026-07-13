@@ -161,7 +161,8 @@
     "metric_keys": [
       "university-count"
     ],
-    "status": "pending"
+    "status": "uploaded",
+    "uploaded_at": "2026-07-13T11:35:36Z"
   },
   {
     "key": "junior-college-count",
@@ -175,7 +176,8 @@
     "metric_keys": [
       "junior-college-count"
     ],
-    "status": "pending"
+    "status": "uploaded",
+    "uploaded_at": "2026-07-13T11:36:01Z"
   },
   {
     "key": "new-graduate-starting-salary-university-male",
@@ -189,7 +191,8 @@
     "metric_keys": [
       "new-graduate-starting-salary-university-male"
     ],
-    "status": "pending"
+    "status": "uploaded",
+    "uploaded_at": "2026-07-13T11:36:26Z"
   },
   {
     "key": "new-graduate-starting-salary-highschool-male",
@@ -203,7 +206,8 @@
     "metric_keys": [
       "new-graduate-starting-salary-highschool-male"
     ],
-    "status": "pending"
+    "status": "uploaded",
+    "uploaded_at": "2026-07-13T11:36:51Z"
   },
   {
     "key": "physicians-in-medical-facilities",
@@ -217,7 +221,8 @@
     "metric_keys": [
       "physicians-in-medical-facilities"
     ],
-    "status": "pending"
+    "status": "uploaded",
+    "uploaded_at": "2026-07-13T11:37:17Z"
   },
   {
     "key": "general-hospital-bed-count",
