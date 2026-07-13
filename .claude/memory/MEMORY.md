@@ -1,5 +1,6 @@
 # Memory Index
 
+- [feedback_exit_code_not_via_pipe.md](feedback_exit_code_not_via_pipe.md) — 検証の exit code を `| tail` 越しに測ると常に 0 で全 PASS に見える (PR #569 で 2 回実発生)。ガード検証は直接実行 or PIPESTATUS。「全 PASS」が出たら 1 件壊して検証器自体を検証する
 - [feedback_workflow_arg_vector_quoted.md](feedback_workflow_arg_vector_quoted.md) — CI workflow の可変引数列は bash 配列 (ARGS+=() / "${ARGS[@]}") で組む。文字列連結+"$VAR" 単一渡しは 1 トークン化 (SC2086 一括 quote で 6 workflow 実 regression 2026-07-14、CDN purge 含む)。ガード=ARG_VECTOR_QUOTED (audit-workflow-policy)。lint sweep 後は代表 dispatch smoke 必須
 - [project_estat_expansion_pipeline_2026_07.md](project_estat_expansion_pipeline_2026_07.md) — e-Stat全展開の実スコープ(2026-07-11): collectArea=2=8,688生候補テーブル≒17万metric=物理的に不可能。本命はSSDS(社会・人口統計体系1,161既存・1cdCat01=1完成ランキングで機械的量産可)の未使用cdCat01列挙。生survey クロス集計はキュレーション重の二次。DBレス発見パイプライン再構築(discover-prefecture-candidates.mjs/fetch-estat-meta.mjs)。e-Stat APP_IDはCI専任→workflow_dispatchでなく専用ブランチ(estat-discovery-run/estat-meta-run)push トリガーで main デプロイ無し実行。投入=data-refresh.yml。需要ファースト(既存41%ゼロ表示)
 
