@@ -1,3 +1,4 @@
+<!-- data-source: overseas-travel-map.json | generated: 2026-07-13T10:34:24.295Z -->
 <svg width="600" height="700" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 700" role="img" aria-label="海外旅行の年間行動者率">
   <title>海外旅行の年間行動者率</title>
   <desc>2001年</desc>
@@ -288,11 +289,11 @@
       <tspan x="51" y="638.9" font-size="9" font-weight="700">沖縄</tspan>
     </text>
   </g>
-  <g aria-label="北海 8.3％">
-    <title>北海：8.3％</title>
+  <g aria-label="北海道 8.3％">
+    <title>北海道：8.3％</title>
     <rect x="491" y="45" width="74" height="74" rx="3" fill="rgb(253,168,146)" stroke="#ffffff" stroke-width="1"/>
     <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="2.0" stroke-linejoin="round" filter="url(#txt-halo-dark)">
-      <tspan x="528" y="86.2" font-size="11" font-weight="700">北海</tspan>
+      <tspan x="528" y="86.2" font-size="11" font-weight="700">北海道</tspan>
     </text>
   </g>
   <g aria-label="青森 5.2％">
@@ -361,10 +362,10 @@
       <feDropShadow dx="0" dy="0" stdDeviation="1.3" flood-color="#000000" flood-opacity="0.7"/>
     </filter>
   </defs>
-  <text x="401" y="633" font-size="8" class="svg-tick" text-anchor="end">安全</text>
-  <rect x="405" y="625" width="140" height="10" rx="2" fill="url(#choropleth-lg)"/>
-  <text x="549" y="633" font-size="8" class="svg-tick">危険</text>
-  <text x="405" y="647" font-size="7.5" class="svg-tick">5％</text>
-  <text x="475" y="647" font-size="7.5" class="svg-tick" text-anchor="middle">11.6％</text>
-  <text x="545" y="647" font-size="7.5" class="svg-tick" text-anchor="end">18.2％</text>
+  <text x="58" y="129" font-size="10" class="svg-tick" text-anchor="end">低い</text>
+  <rect x="64" y="120" width="150" height="10" rx="2" fill="url(#choropleth-lg)"/>
+  <text x="220" y="129" font-size="10" class="svg-tick">高い</text>
+  <text x="64" y="145" font-size="9" class="svg-tick">5％</text>
+  <text x="139" y="145" font-size="9" class="svg-tick" text-anchor="middle">11.6％</text>
+  <text x="214" y="145" font-size="9" class="svg-tick" text-anchor="end">18.2％</text>
 </svg>

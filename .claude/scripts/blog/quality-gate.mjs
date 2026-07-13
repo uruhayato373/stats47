@@ -32,7 +32,7 @@ import { fileURLToPath } from "node:url";
 
 import { checkArticleFactual } from "../lib/article-factual-check.mjs";
 import { lintSourceLinkPlacement } from "../lib/article-structure-lint.mjs";
-import { lintSvgSize } from "../lib/svg-lint.mjs";
+import { lintSvgSize, lintChoroplethLegend, lintFindingsParity } from "../lib/svg-lint.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -392,6 +392,29 @@ if (sizeBlockers.length > 0) {
       `${sizeBlockers.slice(0, 2).join(" / ")}${sizeBlockers.length > 2 ? " 他" : ""}`,
   );
 }
+
+// SVG × json ペア gate (2026-07-13 追加・再発防止): ①choropleth 凡例の意味的ラベル
+// (安全/危険 等) が json の legendLabels 明示なしに焼き込まれていないか ②findings カードの
+// json heading/text が SVG に全て描画されているか (renderer の heading 脱落バグの再発防止)。
+const pairBlockers = [];
+for (const base of svgRefs) {
+  const svgFile = path.join(dataDir, `${base}.svg`);
+  const jsonFile = path.join(dataDir, `${base}.json`);
+  if (!fs.existsSync(svgFile) || !fs.existsSync(jsonFile)) continue; // 欠落は lineage gate が捕捉
+  let jsonData;
+  try { jsonData = JSON.parse(fs.readFileSync(jsonFile, "utf8")); } catch { continue; }
+  const svg = fs.readFileSync(svgFile, "utf8");
+  pairBlockers.push(...lintChoroplethLegend(`${base}.svg`, svg, jsonData).errors);
+  pairBlockers.push(...lintFindingsParity(`${base}.svg`, svg, jsonData).errors);
+}
+checks.svgPairViolations = pairBlockers.length;
+if (pairBlockers.length > 0) {
+  blockers.push(
+    `SVG×json ペア検査 ${pairBlockers.length} 件: ` +
+      `${pairBlockers.slice(0, 2).join(" / ")}${pairBlockers.length > 2 ? " 他" : ""}`,
+  );
+}
+
 if (sizeWarnings.length > 0) {
   warnings.push(
     `SVG 非正規サイズ ${sizeWarnings.length} 件 (未統一カタログ): ` +

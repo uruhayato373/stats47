@@ -37,7 +37,7 @@ CLI 内にインライン生成ロジックを書かない（重複・ドリフ�
 |---|---|---|---|---|---|
 | `generateBarChartSvg` | `bar-chart.ts` | `BarItem[]` + `BarChartOptions` | `*-ranking.json` / `*-top5-bottom5.json` | ~239 | ランキングはカード型のみ・**上位5+下位5固定**（10件廃止）。`layout:"columns"`=横長2列カード（左=上位/右=下位、`960×404`、ブログ本文+X 用）/ `layout:"portrait"`=縦長スタックカード（上位5↓下位5、`1080×1350` 4:5、Instagram 用 `-ig.svg`）/ `layout:"single"`=縦1列+「…中略…」(680幅)。`generate-article-charts.ts` が `*-ranking.json` から columns(`<name>.svg`)+portrait(`<name>-ig.svg`)を自動両出力 |
 | `generateScatterSvg` | `scatter.ts` | `ScatterPoint[]` + `ScatterOptions` | `*-scatter.json` | ~166 | 散布図（全都道府県・相関可視化） |
-| `generateChoroplethSvg` | `choropleth.ts` | `ChoroplethItem[]` + `ChoroplethOptions` | `*-map.json` / `*-tile-grid.json` | ~84 | タイルグリッド47都道府県マップ。**600×700固定・全テキスト白+縁取り・タイトル左上・年15px**。色は **D3カラースキーム** `scheme`(`Blues`/`Viridis`/`RdYlGn`/`RdBu`/`Spectral`/`YlOrRd`…d3-scale-chromatic、未指定時 Reds)、`reverse`/`showValue` 可。データは SSOT(R2 app/ranking)。一括再生成: `regenerate-tile-maps.ts`。正典 `blog-data-schema.md` §1.6 |
+| `generateChoroplethSvg` | `choropleth.ts` | `ChoroplethItem[]` + `ChoroplethOptions` | `*-map.json` / `*-tile-grid.json` | ~84 | タイルグリッド47都道府県マップ。**600×700固定・全テキスト白+縁取り・タイトル左上・年15px・凡例=タイトル直下左上（既定ラベル 低い/高い + 実数値スケール。安全/危険 等の意味的ラベルは json `legendLabels` 明示時のみ＝2026-07-13 是正）**。色は **D3カラースキーム** `scheme`(`Blues`/`Viridis`/`RdYlGn`/`RdBu`/`Spectral`/`YlOrRd`…d3-scale-chromatic、未指定時 Reds)、`reverse`/`showValue` 可。データは SSOT(R2 app/ranking)。一括再生成: `regenerate-tile-maps.ts`。正典 `blog-data-schema.md` §1.6 |
 | `generateLineSvg` | `line.ts` | `StatsSchema[]` + `LineOptions` | `*-timeseries.json` / `*-trend.json` | ~39 | 多系列折れ線（時系列・年齢階級）|
 | `generateStackedBarSvg` | `stacked-bar.ts` | `StackedData` + `StackedBarOptions` | `*-stacked.json` / `*-breakdown.json` | ~5 | 積み上げ棒グラフ（構成比）|
 | `generateFindingsCardSvg` | `findings-card.ts` | `FindingsCardData`（`{ findings: string[] \| FindingsCardItem[], title?: string }`） | `*-summary-findings.json` / `*-findings.json` | ~54 | 「この記事でわかったこと」要点カード（番号付き circle + テキスト行） |
@@ -130,7 +130,7 @@ svg += svgThemeStyle();
 |---|---|---|
 | `*-ranking.json` | `*-prefecture-rankings` / `*-top5-bottom5` / `*-top-bottom` / `*-rate-ranking` / `*-income-ranking` 等 | `generateBarChartSvg` |
 | `*-scatter.json` | `*-rate-scatter` 等 | `generateScatterSvg` |
-| `*-map.json` | `*-tile-grid` / `*-income-map` / `*-ratio-map` 等 | `generateChoroplethSvg` |
+| `*-map.json` | `*-tile-grid` / `*-tilemap` / `*-income-map` / `*-ratio-map` 等 | `generateChoroplethSvg` |
 | `*-timeseries.json` | `*-trend` / `*-national-trend` 等 | `generateLineSvg` |
 | `*-stacked.json` | `*-breakdown` / `*-composition` 等 | `generateStackedBarSvg` |
 | `*-summary-findings.json` | `*-findings` 等 | `generateFindingsCardSvg` ★ |
@@ -187,6 +187,7 @@ svg += svgThemeStyle();
 |---|---|
 | **error** | viewBox 未設定 / width・height 属性なし / 閉じタグなし / **カタログ別 非正規サイズ（統一済みカタログ）** |
 | **warning** | ダークモード非準拠（`svgThemeStyle()` なし） / テーマ色のインライン指定 / **カタログ別 非正規サイズ（未統一カタログ）** |
+| **error (json ペア検査)** | **choropleth 凡例の意味的ラベル誤用**（安全/危険 等が json `legendLabels` 明示なしに焼き込み）/ **findings の内容パリティ**（json の heading/text が SVG に未描画 = renderer の heading 脱落バグ再発防止）— `lintChoroplethLegend` / `lintFindingsParity`（2026-07-13 追加）。配線先 = `quality-gate.mjs`（公開前 blocker）+ `audit-chart-quality.mjs`（バッチ） |
 
 ### カタログ別サイズ統一 gate（`lintSvgSize` / 2026-06-21 追加・★再発防止）
 
