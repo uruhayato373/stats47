@@ -205,8 +205,9 @@ function validateExperiments(ex: any) {
       if (refs.length < 1) v("E3", `${id}: verdict 確定には evidenceRefs >= 1 が必須`);
 
       // E4: CTR 効果は impressions >= 100 が無いと確定しない
+      // (observations.dNN の形は evaluate-survey-experiments.mjs が書く {observedAt, window, values})
       if (e.primaryKpi === "gsc.ctr") {
-        const imp = deciding?.["gsc.impressions"];
+        const imp = deciding?.values?.["gsc.impressions"]?.value;
         if (typeof imp !== "number" || imp < MIN_CTR_IMPRESSIONS)
           v("E4", `${id}: primaryKpi=gsc.ctr の effect-* 確定には判定観測の gsc.impressions >= ${MIN_CTR_IMPRESSIONS} が必須 (現在 ${imp ?? "無記録"}) — insufficient-data とする`);
       }

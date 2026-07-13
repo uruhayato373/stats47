@@ -22,8 +22,27 @@ schema・判定規律の正典: `.claude/state/surveys/README.md`。
 |---|---|
 | `audit` (既定) | portfolio.json を surveys.json + 紐付け監査 + R2 all.json + survey-editorial.ts + レビュー文書と突合して再構築 → validator → 差分レポート |
 | `evaluate` | lifecycle / editorial 判定の見直し (56d 実測ベース)。判定変更は根拠つきで `--set` 経由 |
-| `experiment` | 実験の登録 (baseline 必須・`--add-experiment`) / 期日到達分の d7/d28/d56 判定 (判定スクリプトは PR-4) |
+| `experiment` | 実験の登録 (baseline 必須・`--add-experiment`) / 期日到達分の d7/d28/d56 判定 (`evaluate-survey-experiments.mjs`) |
 | `handoff` | 改善候補を improvement-triage へ引き渡し (agent 定義 §引き渡し形式) |
+
+## コマンド (PR-4 で確定)
+
+```bash
+# ★継続監査の入口 (月次推奨・四半期必須): build → aggregate → validate → 実験期日 → drift
+bash .claude/scripts/surveys/run-survey-portfolio-audit.sh
+
+# 個別実行
+npx tsx .claude/scripts/surveys/build-survey-portfolio.ts        # 機械項目の再導出 (upsert)
+npx tsx .claude/scripts/surveys/build-survey-portfolio.ts --set <surveyId> --lifecycle <status> --add-evidence <ref>
+npx tsx .claude/scripts/surveys/aggregate-survey-metrics.ts      # 56d 実測 (非重複 2 窓合算)
+npx tsx .claude/scripts/surveys/build-survey-portfolio.ts --add-experiment <file.json>
+node .claude/scripts/surveys/evaluate-survey-experiments.mjs --check          # 実験期日到達分に実測を記録
+node .claude/scripts/surveys/evaluate-survey-experiments.mjs --verdict <id> <verdict> --evidence <ref>
+```
+
+- cadence: **月次で run-survey-portfolio-audit.sh、四半期で監査レポート**
+  (`reference/audits/YYYY-MM-DD-survey-portfolio-audit.md`) を必須とする。CI (`pr-quality-check.yml` の
+  Survey Portfolio State Guard) は schema/drift/orphan/linkage の検証のみで、本文生成・R2 push・deploy をしない。
 
 ## 手順 (audit)
 
@@ -35,9 +54,10 @@ schema・判定規律の正典: `.claude/state/surveys/README.md`。
    # survey-editorial.ts import (editorialContentExists / readerQuestionCount) +
    # reference/reviews/YYYY-MM-DD-survey-<surveyId>.md 対応付け (lastReviewedAt / evidenceRefs)
    ```
-2. **実測集計 (PR-3)**: 最新週の GSC / GA4 pages.csv から `/survey/<id>` 行を集計 (56d 窓 =
-   非重複 2 窓の合算)。**行が無い・標本不足は insufficient-data / measured-low、未計装
-   (survey→ranking 内部遷移) は not-instrumented として保存し推測値を入れない**。
+2. **実測集計**: `npx tsx .claude/scripts/surveys/aggregate-survey-metrics.ts` — GSC / GA4 pages.csv
+   の `/survey/<id>` 行を 56d (非重複 2 窓) で合算。**行が無い = 表示 0 の実測として measured-low の
+   カウント 0、標本不足 (imp<100) は measured-low (比率値保存禁止)、未計装 (survey→ranking 内部遷移)
+   は not-instrumented として保存し推測値を入れない**。
 3. **検証**: `npx tsx .claude/scripts/surveys/validate-survey-portfolio.ts` が green であること
    (drift・根拠なし判定・重複実験は validator が弾く)。
 4. **差分レポート**: lifecycle/editorial の変更・r2-drift・orphan・insufficient-data の一覧を

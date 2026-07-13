@@ -122,6 +122,14 @@ jobs:
           node --test .claude/scripts/themes/__tests__/
         continue-on-error: false
 
+      - name: 📋 Survey Portfolio State Guard
+        # survey ポートフォリオ state の schema + 判定規律 (surveys.json 双方向一致・
+        # survey-editorial.ts との drift・orphan/linkage 整合・根拠なし merge/retire 禁止・
+        # 重複実験防止・推測値混入防止) を検証。読み取り専用で破壊的変更なし
+        # (本文生成・R2 push・deploy は行わない)。正典: .claude/state/surveys/README.md
+        run: npx tsx .claude/scripts/surveys/validate-survey-portfolio.ts
+        continue-on-error: false
+
       - name: 🧹 Repository Hygiene Regression Guard
         # origin/develop 由来の既存findingはbaselineで許容し、一時出力・大容量・
         # case/Unicode衝突の新規悪化だけをブロックする。

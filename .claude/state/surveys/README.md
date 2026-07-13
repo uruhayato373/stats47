@@ -46,7 +46,7 @@
       "editorialStatus": "measuring",       // 下記 enum (意味項目。ただし exists との整合を validator が検査)
       "itemCount": 312,                     // 監査スクリプト perSurvey (git 導出 = 次回配信値)
       "activeItemCount": 300,               // R2 app/survey/all.json の itemCount (本番配信中)
-      "latestDataYear": null,               // R2 values 実測から (PR-3。未集計は null)
+      "latestDataYear": null,               // R2 values 実測から。集計 script では埋めない (survey→items→values の多段 fetch が重い) — editorial 候補の個別事前監査で記入。未確認は null
       "unresolvedItemCount": null,          // 原則 null (未分類は survey 帰属不能 → linkage が正)。個別調査で確定した場合のみ数値
       "orphanStatus": false,                // itemCount === 0
       "editorialContentExists": true,       // survey-editorial.ts から決定的に導出
@@ -132,7 +132,8 @@
       "primaryKpi": "gsc.impressions",
       "guardrailKpis": ["gsc.averagePosition", "gsc.ctr"],
       "baseline": { "gsc.impressions": 23, "gsc.clicks": 0, "gsc.ctr": 0, "gsc.averagePosition": 25.43 },
-      "observations": { "d7": null, "d28": null, "d56": null },  // 期日到達時に実測を記録
+      "observations": { "d7": null, "d28": null, "d56": null },  // 期日到達時に evaluate-survey-experiments.mjs --check が
+                                           // {observedAt, window (56d 2窓), values: {"<kpi>": {value,status}}} を記録 (手書きしない)
       "verdict": "pending",                // "pending" | "effect-full" | "effect-partial" | "effect-none" | "effect-adverse" | "insufficient-data" | "aborted"
       "notes": null,                       // 季節性・順位変動・サイト全体変動の注記
       "evidenceRefs": [],

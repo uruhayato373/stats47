@@ -170,8 +170,8 @@ orphan survey / linkage 未解決が多い / ranking 在庫がほぼない (item
 | PR-0 | 既存監査・重複判定・全 survey 機械取得・docs/04 棚卸し・本設計書 | ✅ 本書 (2026-07-13) |
 | PR-1 | survey-curator 拡張 / skill `manage-survey-portfolio` / state README + schema / builder + validator / agents README・自動化インベントリ更新 / audit-survey-linkage との役割分離明記 | ✅ 2026-07-13 |
 | PR-2 | 75 survey の初期 portfolio.json 生成 (surveys.json × 監査 × R2 × editorial の決定的突合)・census 実験の experiments.json 登録・handoff 消化・初回監査 (reference/audits/2026-07-13) | ✅ 2026-07-13 |
-| PR-3 | GSC/GA4 snapshot の /survey/* 集計 → baseline 保存 (非重複窓・不足は insufficient-data)・editorial 候補の根拠付き選定 | 未着手 |
-| PR-4 | 月次監査コマンド・実験 7/28/56 日判定・四半期ポートフォリオ監査・triage 引き渡し・CI (schema/drift/orphan/linkage のみ検証。本文生成・R2 push・deploy はしない) | 未着手 |
+| PR-3 | GSC/GA4 snapshot の /survey/* 集計 → baseline 保存 (非重複窓・不足は insufficient-data)・editorial 候補の根拠付き選定 | ✅ 2026-07-14 (`aggregate-survey-metrics.ts`。★56d = 非重複 2 窓 W24+W28。結果: 表示/流入あり 47/75。GSC measured 3/75 = wage-structure-survey 809imp / kakei-chousa 142 / natural-park-area 112、GA4 measured 0/75 (最大 kakei 90pv)。survey は現状ロングテールの入口面であることが実測で裏付き。natural-park-area は 2026-07-11 監査に無かった新シグナル → query 実測 (gsc-analyst) 後に candidate 判断) |
+| PR-4 | 月次監査コマンド・実験 7/28/56 日判定・四半期ポートフォリオ監査・triage 引き渡し・CI (schema/drift/orphan/linkage のみ検証。本文生成・R2 push・deploy はしない) | ✅ 2026-07-14 (`run-survey-portfolio-audit.sh` = build→aggregate→validate→実験期日→drift / `evaluate-survey-experiments.mjs` (--check で期日到達分に 56d 実測を記録・--verdict で確定。d7 は異常検知のみ) / CI: pr-quality-check.yml **Survey Portfolio State Guard** = validator のみ実行) |
 
 ## 7. 成功条件
 
