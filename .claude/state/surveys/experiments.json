@@ -36,6 +36,43 @@
         ".claude/skills/survey/manage-survey-portfolio/reference/reviews/2026-07-11-survey-census.md"
       ],
       "implementationRef": "apps/web/src/features/survey/survey-editorial.ts (commit fc1fbb49 / develop→main PR #567 merge 2026-07-12・本番 live を 2026-07-13 curl 実測)"
+    },
+    {
+      "experimentId": "SURVEY-EXP-002",
+      "surveyId": "wage-structure-survey",
+      "hypothesis": "職種別年収の指名検索意図 (大工/ソフトウェア作成者/理学療法士等/公認会計士・税理士/管理職) に、調査固有の編集ハブ (分かること / 代表 5 導線 / 年収概念・旧系列の注意) で応えると、CTR 0.12% (56d) と表示が改善する",
+      "changeType": "editorial-hub",
+      "baselinePeriod": {
+        "from": "2026-05-16",
+        "to": "2026-07-10"
+      },
+      "startedAt": null,
+      "evaluateAt7d": null,
+      "evaluateAt28d": null,
+      "evaluateAt56d": null,
+      "primaryKpi": "gsc.clicks",
+      "guardrailKpis": [
+        "gsc.impressions",
+        "gsc.averagePosition",
+        "gsc.ctr"
+      ],
+      "baseline": {
+        "gsc.impressions": 809,
+        "gsc.clicks": 1,
+        "gsc.ctr": 0.0012,
+        "gsc.averagePosition": 10.16
+      },
+      "observations": {
+        "d7": null,
+        "d28": null,
+        "d56": null
+      },
+      "verdict": "pending",
+      "notes": "baseline は 56d 非重複 2 窓 (2026-W24: 05-16〜06-12 + 2026-W28: 06-13〜07-10、daily.csv で日付実測)。impressions 809 >= 100 のため CTR 判定可。ローカル実装済み (2026-07-14)・未デプロイ — startedAt/evaluateAt はデプロイ確定時に記入する。転職・就活の季節性 (年度替わり・賞与後) を判定時に注記すること",
+      "evidenceRefs": [
+        ".claude/skills/survey/manage-survey-portfolio/reference/reviews/2026-07-11-survey-wage-structure-survey.md"
+      ],
+      "implementationRef": "apps/web/src/features/survey/survey-editorial.ts (wage-structure-survey エントリ・2026-07-14 ローカル実装)"
     }
   ]
 }

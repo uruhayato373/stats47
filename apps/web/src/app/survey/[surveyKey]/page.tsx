@@ -276,7 +276,7 @@ export default async function SurveyPage({ params }: PageProps) {
             <div>
               <SectionHeader
                 number={String(sectionNumber++)}
-                title="国勢調査から答えを探す"
+                title={`${survey.name}から答えを探す`}
               />
               <div className="grid gap-3 sm:grid-cols-2">
                 {readerQuestions.map((item) => (
