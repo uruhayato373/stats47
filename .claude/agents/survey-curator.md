@@ -49,6 +49,9 @@ ranking と統計調査の**紐付けメタデータ + survey ハブの編集コ
 
 1. **監査**: `npx tsx packages/ranking/src/scripts/audit-survey-linkage.ts` (詳細は skill `/audit-survey-linkage`)。
    本番生成 (generate-ranking-items) と同一の導出コードを使うため、監査結果 = 配信結果。
+   **active/total を区別する** (`perSurveyActive` = 配信されるべき数)。R2 は active のみ配信するため、
+   全在庫未公開の調査 (inactive-only) が R2 に無いのは正常 — stale (r2-drift) と誤診しない (2026-07-14 教訓)。
+   焼き込みの実測突合は `--compare-r2` (item 単位で live surveyIds vs git 導出。月次監査に配線済)。
 2. **未分類 item の回収** (最重要の定常運用): レポートの「辞書未カバー statsDataId」を e-Stat で調査名確認 →
    `packages/data-configs/src/ssds/estat-provenance.generated.json` の `statsDataIdToSurvey` に追記 →
    再監査で回収件数を実測。**出典 (e-Stat URL + アクセス日) なしで調査名を書かない** (evidence-based-judgment)。
@@ -74,7 +77,8 @@ ranking と統計調査の**紐付けメタデータ + survey ハブの編集コ
    merge/retire は evidenceRefs ≥ 2 + GSC/GA4 両輪 56d 集計済みが必須 (validator が弾く)。
 9. **編集ハブ化の優先順位決定**: 候補条件・除外条件 (運用設計 §4) に実測を当て、editorial-candidate を
    根拠付きで選別。YMYL (医療系) は品質監査完了まで候補にしない。
-10. **実験管理**: 編集ハブ等の本番反映前後で `--add-experiment` により baseline を登録。d7/d28/d56 の
+10. **実験管理**: 編集ハブ等の本番反映前後で `--add-experiment` により baseline を登録。デプロイ確定時に
+    `evaluate-survey-experiments.mjs --schedule <id> <デプロイ日>` で startedAt + d7/d28/d56 期日を機械算出。
     期日到達で実測を突合し verdict を記録。同一 surveyId × changeType の pending 重複は登録不可。
 11. **四半期監査レポート**: `reference/audits/YYYY-MM-DD-survey-portfolio-audit.md` に保存
     (docs/04_レビュー は履歴・証跡であり最新状態の SSOT にしない)。
@@ -114,7 +118,8 @@ ranking と統計調査の**紐付けメタデータ + survey ハブの編集コ
 
 ```bash
 npx tsx packages/ranking/src/scripts/audit-survey-linkage.ts          # 紐付け監査 (人間向け)
-npx tsx packages/ranking/src/scripts/audit-survey-linkage.ts --json   # 機械向け
+npx tsx packages/ranking/src/scripts/audit-survey-linkage.ts --json   # 機械向け (perSurvey/perSurveyActive)
+npx tsx packages/ranking/src/scripts/audit-survey-linkage.ts --compare-r2  # R2 焼き込み突合 (item 単位)
 npm run validate:config --workspace=@stats47/data-configs             # surveyId 実在 lint
 npx tsx .claude/scripts/surveys/build-survey-portfolio.ts             # portfolio 再導出 (upsert)
 npx tsx .claude/scripts/surveys/validate-survey-portfolio.ts          # schema + 判定規律 + drift

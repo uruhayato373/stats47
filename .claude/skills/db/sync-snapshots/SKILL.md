@@ -13,6 +13,11 @@ co_agents: [article-writer, theme-designer, note-manager]
 
 本スキルは **全 snapshot を順次 export** する。各 export はべき等なので何度実行しても安全。
 
+> **★CI dispatch は main のコードで実行される** (`sync-snapshots.yml` の checkout は `ref: main` 固定 =
+> デプロイ済みコードで snapshot を作る設計)。**exporter を変更した場合、develop へ push しただけでは
+> dispatch に反映されない** — develop→main のデプロイ後に dispatch すること (2026-07-14 に merge 前
+> dispatch で旧コードが黙って走る事故が実発生。`--ref develop` は workflow 定義の選択であり checkout には効かない)。
+
 ## R2 キーパス構造
 
 全 Web アプリデータは `app/` 名前空間に統一されている。詳細は `.claude/rules/r2-storage-design.md` を参照。

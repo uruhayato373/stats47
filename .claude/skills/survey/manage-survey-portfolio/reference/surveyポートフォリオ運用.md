@@ -59,6 +59,10 @@ tags: [survey, portfolio, agent, governance]
   `population-projection` (監査導出で item 7 件) が R2 に無い。**= R2 master snapshot が stale**
   (surveys.json 追加後に `export-master-snapshots` 未実行)。是正は CI `sync-snapshots`
   (`ranking-items` → `master` の順) へ委譲 (本運用は R2 push をしない)。
+  > **訂正 (2026-07-14)**: 上記「stale」は誤診。実態は 7 指標すべて isActive:false (未公開) で、
+  > R2 は active のみ配信するため不在は**正常 (inactive-only)**。根治として監査に active/total 区別
+  > (`perSurveyActive`) + `--compare-r2` (焼き込み実測突合) を追加、linkageStatus を 4 値化した。
+  > 正典: `survey-linkage-standards.md` §監査の 2 層。
 - **紐付け監査** (`audit-survey-linkage.ts --json`, 2026-07-13): metrics **2,235** / resolved **1,984
   (88.8%)** / unresolved **251** (estat-uncovered 56 / ssds-synthetic-only 134 / external 61)。
   辞書未カバー statsDataId **50** 件。**orphan 0 / config.surveyId 不正 0**。

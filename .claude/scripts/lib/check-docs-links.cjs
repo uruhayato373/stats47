@@ -54,6 +54,9 @@ function walk(dir, out = []) {
       if (e.name === "node_modules" || e.name === ".git" || e.name === ".next") continue;
       walk(p, out);
     } else {
+      // ガードの baseline ファイル群は「finding 行内容の引用」であってリンク参照元ではない
+      // (maintenance-debt baseline v2 が行内容に旧 docs パス文字列を含み誤検知 — 2026-07-14)
+      if (/-baseline\.json$/.test(e.name)) continue;
       out.push(p);
     }
   }

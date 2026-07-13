@@ -196,6 +196,13 @@ node .claude/scripts/ogp/build-image-gallery.mjs --audit
   # 本番反映 (R2 push)
   npx tsx apps/web/scripts/generate-blog-thumbnails-cloud.ts --ai-background --slug <slugs> --apply
   ```
+- **★cloud Claude Code / ローカル env なしの CI 経路 (2026-07-14〜)**: `GEMINI_API_KEY` は
+  **GitHub Secrets 専任** (ローカル .env.local 管理は不要)。cloud セッションは
+  `data/gemini-image-requests.json` に `{ "task": "blog-ogp", "slugs": [...], "budgetUsd": 0.5,
+  "apply": true|false }` を書いて develop へ push すると `gemini-image-run.yml` が生成する
+  (apply=false は artifact で目視検証・true は R2 反映。request は CI が commit-back で消費)。
+  cloud は workflow_dispatch 不可 (actions:write 無し) のため push トリガー方式。
+  ローカルからは dispatch でも可。
 - **役割分担**: カタログ/スタイル SSOT の維持・品質監査 = `image-prompt-curator`、生成実行・記事公開連動 = `blog-editor`、
   effect 判定 = `improvement-triage`。R2 push は `--apply` (wrangler)。
 - **展開状況**: 高流入 top100 = 本番 live (2026-07-12・GSC imp 上位)。残り記事は従来のブランド背景

@@ -1,0 +1,146 @@
+name: 🎨 Gemini Image Run (request-file)
+
+# cloud Claude Code から Gemini API を使うための CI 実行経路 (2026-07-14 新設)。
+# GEMINI_API_KEY は GitHub Secrets 専任 (ローカル .env.local 管理を不要にする)。
+#
+# 発火経路は 2 つ:
+#   1. push (主経路・cloud 用): develop に data/gemini-image-requests.json を commit/push
+#      → 本 workflow が生成 → 消費した request を git rm で commit-back [skip ci]。
+#      cloud セッションは actions:write が無く workflow_dispatch 不可 (403) のため、
+#      youtube-upload-request / estat-discovery-run と同じ push トリガー方式を採る。
+#   2. workflow_dispatch (ローカル fallback): slugs/budget を入力して手動実行。
+#
+# request file 形式 (data/gemini-image-requests.json):
+#   { "task": "blog-ogp", "slugs": ["slug-a", "slug-b"], "budgetUsd": 0.5, "apply": false }
+#   - task: 現状 "blog-ogp" のみ (blog OGP の AI 背景生成 → ogp-image-standards.md §5)
+#   - apply: true = R2 へ push (本番反映) / false = artifact 出力のみ (目視検証用)
+#   - budgetUsd: 上限 2 USD (それ以上は拒否。~$0.039/枚)
+
+on:
+  push:
+    branches: [develop]
+    paths: ["data/gemini-image-requests.json"]
+  workflow_dispatch:
+    inputs:
+      slugs:
+        description: "対象 slug (カンマ区切り)"
+        required: true
+      budget_usd:
+        description: "費用上限 USD (<=2)"
+        required: false
+        default: "0.5"
+      apply:
+        description: "true: R2 へ push / false: artifact のみ"
+        required: false
+        default: "false"
+
+permissions:
+  contents: write
+
+concurrency:
+  # Gemini 課金と R2 書き込みの二重実行防止 (直列化)
+  group: gemini-image-run
+  cancel-in-progress: false
+
+env:
+  CLOUDFLARE_R2_BUCKET_NAME: stats47
+  R2_S3_ENDPOINT: https://${{ secrets.CLOUDFLARE_ACCOUNT_ID }}.r2.cloudflarestorage.com
+  R2_ACCESS_KEY_ID: ${{ secrets.CLOUDFLARE_R2_ACCESS_KEY_ID }}
+  R2_SECRET_ACCESS_KEY: ${{ secrets.CLOUDFLARE_R2_SECRET_ACCESS_KEY }}
+  # generator の R2 push は wrangler put 経由 (ogp-image-audit-weekly と同じ)
+  CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+  CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+  GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+
+    steps:
+      - name: 🧰 Checkout develop
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          ref: develop
+          fetch-depth: 1
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 📋 Resolve request (dispatch 入力 or request file)
+        id: req
+        env:
+          IN_SLUGS: ${{ inputs.slugs }}
+          IN_BUDGET: ${{ inputs.budget_usd }}
+          IN_APPLY: ${{ inputs.apply }}
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            {
+              echo "slugs=${IN_SLUGS}"
+              echo "budget=${IN_BUDGET:-0.5}"
+              echo "apply=${IN_APPLY:-false}"
+            } >> "$GITHUB_OUTPUT"
+          else
+            node -e '
+              const fs = require("fs");
+              const r = JSON.parse(fs.readFileSync("data/gemini-image-requests.json", "utf8"));
+              if (r.task !== "blog-ogp") { console.error("✗ task は blog-ogp のみ:", r.task); process.exit(1); }
+              const slugs = (r.slugs || []).filter((s) => /^[a-z0-9-]+$/.test(s));
+              if (slugs.length === 0) { console.error("✗ slugs が空/不正"); process.exit(1); }
+              const budget = Number(r.budgetUsd ?? 0.5);
+              if (!(budget > 0 && budget <= 2)) { console.error("✗ budgetUsd は 0<x<=2:", r.budgetUsd); process.exit(1); }
+              fs.appendFileSync(process.env.GITHUB_OUTPUT,
+                "slugs=" + slugs.join(",") + "\nbudget=" + budget + "\napply=" + (r.apply === true) + "\n");
+              console.log("request:", slugs.length, "slugs / budget $" + budget + " / apply=" + (r.apply === true));
+            '
+          fi
+
+      - name: 🎨 Generate blog OGP AI backgrounds (Gemini)
+        env:
+          SLUGS: ${{ steps.req.outputs.slugs }}
+          BUDGET: ${{ steps.req.outputs.budget }}
+          APPLY: ${{ steps.req.outputs.apply }}
+        run: |
+          # ARGS は配列で組む (ARG_VECTOR_QUOTED)。--slug の値は CSV 1 引数が正 (フラグ値)
+          ARGS=(--ai-background --slug "$SLUGS" --budget-usd "$BUDGET")
+          if [ "$APPLY" = "true" ]; then
+            ARGS+=(--apply)
+          else
+            ARGS+=(--out-dir .local/gemini-verify)
+          fi
+          echo "generate-blog-thumbnails-cloud.ts ${ARGS[*]}"
+          set -o pipefail
+          npx tsx apps/web/scripts/generate-blog-thumbnails-cloud.ts "${ARGS[@]}" 2>&1 | tee /tmp/gemini-run.log
+          # generator は per-slug 失敗を exit 0 で報告する (記事単位 try/catch) — silent green を防ぐ
+          if grep -qE "失敗: [1-9]" /tmp/gemini-run.log; then
+            echo "::error::generator が失敗 slug を報告 (上記ログの [fail] を参照)"
+            exit 1
+          fi
+
+      - name: 📤 Upload verify artifact (apply=false のみ)
+        if: steps.req.outputs.apply != 'true'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: gemini-verify
+          path: .local/gemini-verify
+          retention-days: 7
+          if-no-files-found: warn
+
+      - name: 🧹 Consume request file (push イベント時のみ・commit-back)
+        if: github.event_name == 'push'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git rm -q data/gemini-image-requests.json
+          git commit -q -m "chore(gemini): consume image request [skip ci]"
+          # 他 workflow の push と競合しても落ちないよう rebase してから push (最大3回)
+          for _ in 1 2 3; do
+            if git push origin develop; then break; fi
+            git pull --rebase origin develop
+          done
