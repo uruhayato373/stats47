@@ -7,7 +7,7 @@
  * (blog-ogp-visual-catalog.ts と同じ方針)。
  *
  * 出力: `npx tsx apps/web/scripts/print-category-hero-prompts.ts [--category <key>|--all]`
- * 生成した画像 (Codex/Imagen 等) は `docs/assets/category-<key>-hero.png` に保存 → webp 化 →
+ * 生成した画像 (Codex/Imagen 等) は `docs/assets/category-<key>-hero.jpg` に保存 → webp 化 →
  * `apps/web/src/components/layout/page-heroes.ts` (SSOT) に配線する。
  *
  * 正典: `.claude/rules/ogp-image-standards.md` §5.6 (ページ hero)

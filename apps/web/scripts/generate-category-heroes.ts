@@ -61,7 +61,7 @@ console.log(`GEMINI_API_KEY present: ${keyPresent ? "yes" : "no"}`);
 console.log(`targets (${targets.length}): ${targets.join(", ")}`);
 console.log(`max cost: $${maxCost.toFixed(3)} (${targets.length} × $${OGP_PRICE_PER_IMAGE_USD})`);
 console.log(`budget cap: $${budgetUsd.toFixed(2)}`);
-console.log(`output: docs/assets/category-<key>-hero.png + apps/web/public/images/category-<key>-hero.webp`);
+console.log(`output: docs/assets/category-<key>-hero.jpg + apps/web/public/images/category-<key>-hero.webp`);
 
 if (!apply) {
   console.log("\n[dry-run] --apply を付けると生成します (API 課金あり)。");
@@ -81,7 +81,7 @@ async function main() {
   const results: { key: string; status: string }[] = [];
 
   for (const key of targets) {
-    const pngPath = resolve(ASSETS_DIR, `category-${key}-hero.png`);
+    const jpgPath = resolve(ASSETS_DIR, `category-${key}-hero.jpg`);
     const webpPath = resolve(PUBLIC_IMAGES_DIR, `category-${key}-hero.webp`);
 
     if (!force && existsSync(webpPath)) {
@@ -101,7 +101,8 @@ async function main() {
         apiKey: process.env.GEMINI_API_KEY as string,
       });
       spent += OGP_PRICE_PER_IMAGE_USD;
-      writeFileSync(pngPath, buffer);
+      // 元画像アーカイブは JPEG q90 (Gemini の生 PNG は 1.2-1.9MB で repo hygiene の 1MB 上限超過のため)
+      await sharp(buffer).jpeg({ quality: 90 }).toFile(jpgPath);
       const info = await sharp(buffer)
         .resize({ width: 1536, withoutEnlargement: true })
         .webp({ quality: 78 })
