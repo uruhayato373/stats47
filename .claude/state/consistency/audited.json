@@ -1,13 +1,9 @@
 {
-  "hash": "8d7ebf74f58c5f53bc0f69045535923b27b732292d04e16ae898f5bdf61fcd20",
-  "audited_at": "2026-07-12T09:14:47",
+  "hash": "7308afe55c8ca1fefc43c0ef3f0f7606cc4c016809c9769d0a0a3d1db230b224",
+  "audited_at": "2026-07-13T18:15:18",
   "files": [
-    ".claude/scripts/lib/__tests__/check-docs-links.test.cjs",
-    ".claude/scripts/lib/__tests__/check-repo-hygiene.test.cjs",
-    ".claude/scripts/lib/__tests__/check-static-assets.test.cjs",
-    ".claude/scripts/lib/check-card-census.cjs",
-    ".claude/scripts/lib/check-docs-links.cjs",
-    ".claude/scripts/lib/check-repo-hygiene.cjs",
-    ".claude/scripts/lib/check-static-assets.cjs"
+    ".claude/hooks/check-weekly-cadence-on-stop.js",
+    ".claude/scripts/management/check-weekly-cadence.mjs",
+    ".claude/settings.json"
   ]
 }
