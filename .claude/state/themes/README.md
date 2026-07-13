@@ -7,6 +7,7 @@
 - **書き込み口**: `theme-portfolio-manager` が **builder スクリプト経由**で行う。手編集しない。
   - 機械項目の再導出 (upsert): `npx tsx .claude/scripts/themes/build-theme-portfolio.ts`
   - 意味項目 (lifecycle/hypothesis/evidence) の更新: 同スクリプト `--set <themeKey> --lifecycle ... --add-evidence ...`
+  - 実験の登録/期日記録/verdict: `node .claude/scripts/themes/evaluate-theme-experiments.mjs --register '<json>'` / `--check` / `--verdict`
 - **再構築可能**: ThemeCatalog (git TS) + 計測 snapshot (`.claude/state/metrics/` /
   `.claude/skills/analytics/{gsc,ga4}-improvement/reference/snapshots/`) + レビュー文書
   (`.claude/skills/theme/manage-theme-portfolio/reference/reviews/*-theme-*.md`) から常に再導出できる派生物 (blog remediation-queue と同思想)。

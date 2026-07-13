@@ -15,6 +15,9 @@
  *     # 期日到達分に現在実測を記録し、判定待ち一覧を表示
  *   node .claude/scripts/themes/evaluate-theme-experiments.mjs \
  *     --verdict THEME-EXP-001 effect-partial --evidence <ref> [--note "<季節性等の注記>"]
+ *   node .claude/scripts/themes/evaluate-theme-experiments.mjs --register '<json>'
+ *     # 実験を登録する (手編集禁止の書き込み口)。json は README schema のエントリ 1 件。
+ *     # verdict は "pending" 固定で付与。evaluateAt 未設定 (デプロイ待ち) も許容 (--check は発火しない)。
  */
 import fs from "node:fs";
 import path from "node:path";
@@ -47,6 +50,35 @@ function main() {
   const pf = load(PORTFOLIO);
   const byTheme = new Map(pf.themes.map((t) => [t.themeKey, t]));
   const today = new Date().toISOString().slice(0, 10);
+
+  const rIdx = args.indexOf("--register");
+  if (rIdx >= 0) {
+    // ── 実験登録モード ──
+    let spec;
+    try { spec = JSON.parse(args[rIdx + 1]); } catch (e) {
+      console.error(`✗ --register の JSON が不正: ${String(e.message).split("\n")[0]}`);
+      process.exit(1);
+    }
+    for (const req of ["experimentId", "themeKey", "changeType", "hypothesis", "primaryKpi", "baseline"]) {
+      if (!spec[req]) { console.error(`✗ 必須フィールド欠落: ${req}`); process.exit(1); }
+    }
+    if (!byTheme.has(spec.themeKey)) { console.error(`✗ themeKey 不明: ${spec.themeKey}`); process.exit(1); }
+    if (ex.experiments.some((x) => x.experimentId === spec.experimentId)) {
+      console.error(`✗ experimentId 重複: ${spec.experimentId}`); process.exit(1);
+    }
+    const entry = {
+      guardrailKpis: [], baselinePeriod: null, startedAt: null, evaluateAt: null,
+      result: null, notes: null, evidenceRefs: [],
+      ...spec,
+      verdict: "pending",
+    };
+    ex.experiments.push(entry);
+    fs.writeFileSync(EXPERIMENTS, JSON.stringify(ex, null, 2) + "\n");
+    console.log(`登録: ${entry.experimentId} (${entry.themeKey} / ${entry.changeType})` +
+      (entry.evaluateAt ? "" : " — evaluateAt 未設定 (デプロイ後に設定するまで --check は発火しない)"));
+    console.log("→ validate-theme-state.mjs で E 規律 (重複/baseline) を確認すること");
+    return;
+  }
 
   const vIdx = args.indexOf("--verdict");
   if (vIdx >= 0) {

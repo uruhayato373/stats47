@@ -11,9 +11,19 @@ export const POPULATION_DYNAMICS_SET: IndicatorSet = {
   "usage": "theme",
   "metrics": [
     {
+      "rankingKey": "population-growth-rate",
+      "shortLabel": "人口増減率",
+      "role": "primary"
+    },
+    {
+      "rankingKey": "natural-increase-rate",
+      "shortLabel": "自然増減率",
+      "role": "primary"
+    },
+    {
       "rankingKey": "crude-birth-rate",
       "shortLabel": "粗出生率",
-      "role": "primary"
+      "role": "secondary"
     },
     {
       "rankingKey": "total-fertility-rate",
@@ -23,11 +33,6 @@ export const POPULATION_DYNAMICS_SET: IndicatorSet = {
     {
       "rankingKey": "crude-death-rate",
       "shortLabel": "死亡率",
-      "role": "secondary"
-    },
-    {
-      "rankingKey": "natural-increase-rate",
-      "shortLabel": "自然増減率",
       "role": "secondary"
     },
     {
@@ -51,18 +56,18 @@ export const POPULATION_DYNAMICS_SET: IndicatorSet = {
       "role": "secondary"
     },
     {
+      "rankingKey": "total-population",
+      "shortLabel": "総人口",
+      "role": "secondary"
+    },
+    {
       "rankingKey": "population-density-per-km2-inhabitable-area",
       "shortLabel": "人口密度",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "day-time-population-ratio",
       "shortLabel": "昼夜間人口比率",
-      "role": "secondary"
-    },
-    {
-      "rankingKey": "total-population",
-      "shortLabel": "総人口",
       "role": "context"
     }
   ],
