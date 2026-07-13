@@ -18,6 +18,8 @@ function walk(dir) {
     // ガードの baseline ファイル群は「debt の引用」であって debt ではない (自己参照検知の防止)
     if (!entry.isDirectory() && /-baseline\.json$/.test(entry.name)) return [];
     const file = path.join(dir, entry.name);
+    // 本 checker 自身も除外 (ルール定義・メッセージ文言がパターン語を含むのは仕様でありメタ言及)
+    if (!entry.isDirectory() && file === __filename) return [];
     return entry.isDirectory() ? walk(file) : TEXT_EXT.test(entry.name) ? [file] : [];
   });
 }
@@ -53,7 +55,12 @@ function inspect(file) {
       results.push(finding("UNTRACKED_DEBT", file, number, `${debt[1].toUpperCase()} に issue/backlog/削除条件がない`, line));
 
     const legacy = line.match(/\b(legacy|deprecated|temporary|remove after)\b/i);
-    if (legacy && !/(?:#\d+|https?:\/\/|\b(?:MC|AFF|EXP|TODO)-?\d+\b|remove(?:d)?\s+(?:when|after|by)|until\b|期限|削除条件|互換|compat|superseded)/i.test(line))
+    // 除外 2 群: (a) 期限・条件・追跡が明示されたもの (b) domain 用語 — theme の catalogStatus
+    // enum 値「legacy」(catalog|legacy) とその日本語プローズ (legacy テーマ / カタログ駆動 20 + legacy 2 等)。
+    // 負債の「legacy コード」とは別概念 (2026-07-14 ルール精緻化で誤検知 30+ 件を baseline から実削減)
+    if (legacy &&
+        !/(?:#\d+|https?:\/\/|\b(?:MC|AFF|EXP|TODO)-?\d+\b|remove(?:d)?\s+(?:when|after|by)|until\b|期限|削除条件|互換|compat|superseded)/i.test(line) &&
+        !/catalogStatus|LEGACY_SETS|IndicatorSet|indicator-sets|ThemeCatalog|THEME_CATALOGS|legacy ?テーマ|legacy ?\(未登録\)|未登録 ?\(legacy\)|\(legacy\) ?テーマ|カタログ駆動|legacy 2\b/.test(line))
       results.push(finding("UNBOUNDED_LEGACY", file, number, `${legacy[1]} に期限・削除条件がない`, line));
 
     if (!isTest && !relative.startsWith(".github/workflows/") && !relative.endsWith("CLAUDE.md") && !relative.endsWith("AGENTS.md") &&
@@ -73,22 +80,22 @@ function main() {
   const counts = countByKey(result.findings);
 
   if (process.argv.includes("--write-baseline")) {
-    // ratchet 規律: 再生成で findings を「増やす」には --allow-growth の明示が必要。
-    // 内容キー (v2) では無関係な編集による行ズレ churn が起きないため、通常の再生成は
-    // 減る一方 (実修正 / ファイル削除)。増える = 本当に新しい debt を黙認しようとしている。
-    // 原則はルール修正 or 実修正が先。吸収するならコミットメッセージに理由を書く。
+    // ratchet 不変条項: baseline は「縮む一方」。増やすコードパスは存在しない。
+    // 新しい debt が出たら (a) 実修正 (期限・削除条件を書く / TODO を backlog 化) か
+    // (b) 誤検知ならルール修正、のどちらかで解消する。baseline への吸収は不可。
+    // CI 側でも --ratchet-check が origin/main との比較で手編集による増加を拒否する。
     const prev = loadBaselineV2();
     if (prev) {
       const added = Object.entries(counts).filter(([k, n]) => n > (prev[k] ?? 0));
       const removed = Object.keys(prev).filter((k) => !(counts[k] > 0)).length;
-      if (added.length && !process.argv.includes("--allow-growth")) {
-        console.error(`✗ baseline への追加 ${added.length} 件を拒否 — 吸収には --allow-growth を明示し、コミットメッセージに理由を書く (原則は実修正/ルール修正が先):`);
+      if (added.length) {
+        console.error(`✗ baseline は縮小専用 — 追加 ${added.length} 件を拒否。実修正 (期限/削除条件/backlog 化) かルール修正 (誤検知の除外) で解消する:`);
         added.slice(0, 20).forEach(([k, n]) => console.error(`  + ${k.slice(0, 160)} (${prev[k] ?? 0}→${n})`));
         if (added.length > 20) console.error(`  … 他 ${added.length - 20} 件`);
         process.exitCode = 1;
         return;
       }
-      console.log(`baseline diff: +${added.length} / -${removed}`);
+      console.log(`baseline diff: +0 / -${removed}`);
     } else {
       console.log("baseline v1 (行番号キー) → v2 (内容キー) へ移行 — 行ズレ churn を根絶");
     }
@@ -96,6 +103,36 @@ function main() {
     fs.mkdirSync(path.dirname(BASELINE), { recursive: true });
     fs.writeFileSync(BASELINE, `${JSON.stringify({ version: 2, findings: sorted }, null, 2)}\n`);
     console.log(`✓ maintenance debt baseline 更新: ${rel(BASELINE)} (${result.findings.length} findings)`);
+    return;
+  }
+
+  if (process.argv.includes("--ratchet-check")) {
+    // CI 用: baseline の手編集・すり替えによる「増加」を origin/main との比較で拒否する。
+    // (縮小 = 品質改善は歓迎。origin/main に baseline が無い初回は skip)
+    const { execFileSync } = require("node:child_process");
+    let mainRaw = null;
+    try {
+      mainRaw = execFileSync("git", ["show", `origin/main:${rel(BASELINE)}`], { cwd: ROOT, encoding: "utf8" });
+    } catch {
+      console.log("ratchet-check: origin/main に baseline 無し — skip");
+      return;
+    }
+    let mainFindings = {};
+    try {
+      const parsed = JSON.parse(mainRaw);
+      if (parsed.version === 2 && parsed.findings && !Array.isArray(parsed.findings)) mainFindings = parsed.findings;
+      else { console.log("ratchet-check: origin/main は v1 baseline — 移行コミットのため skip"); return; }
+    } catch { console.log("ratchet-check: origin/main baseline parse 不可 — skip"); return; }
+    const cur = loadBaselineV2() ?? {};
+    const grown = Object.entries(cur).filter(([k, n]) => n > (mainFindings[k] ?? 0));
+    if (grown.length) {
+      console.error(`✗ ratchet 違反: baseline が origin/main より ${grown.length} 件増えている (縮小専用。実修正かルール修正で解消する):`);
+      grown.slice(0, 20).forEach(([k, n]) => console.error(`  + ${k.slice(0, 160)} (${mainFindings[k] ?? 0}→${n})`));
+      process.exitCode = 1;
+      return;
+    }
+    const shrunk = Object.keys(mainFindings).filter((k) => !(cur[k] > 0)).length;
+    console.log(`✓ ratchet OK: baseline は origin/main 比 +0 / -${shrunk}`);
     return;
   }
 

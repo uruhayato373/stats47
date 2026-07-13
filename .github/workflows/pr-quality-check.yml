@@ -165,7 +165,10 @@ jobs:
 
       - name: 🧭 Maintenance Debt Regression Guard
         # 無根拠TODO/FIXME/HACK、削除条件のないlegacy、永続D1 runtime復活の新規増加を止める。
-        run: node .claude/scripts/lib/check-maintenance-debt.cjs --baseline
+        # ratchet-check: baseline は縮小専用 (origin/main 比で増加したら手編集/すり替えとして拒否)。
+        run: |
+          node .claude/scripts/lib/check-maintenance-debt.cjs --baseline
+          node .claude/scripts/lib/check-maintenance-debt.cjs --ratchet-check
         continue-on-error: false
 
       - name: ⏱️ Static Checker Runtime Budget
