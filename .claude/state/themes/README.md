@@ -4,7 +4,9 @@
 テーマ定義の SSOT は ThemeCatalog (`packages/data-configs/src/theme-catalog/`) であり、
 **ここには変動値 (GSC/GA4/品質評価) だけを置く。ThemeCatalog に計測値を書かない**。
 
-- **書き込み口**: `theme-portfolio-manager` (build スクリプト経由) のみ。手編集しない。
+- **書き込み口**: `theme-portfolio-manager` が **builder スクリプト経由**で行う。手編集しない。
+  - 機械項目の再導出 (upsert): `npx tsx .claude/scripts/themes/build-theme-portfolio.ts`
+  - 意味項目 (lifecycle/hypothesis/evidence) の更新: 同スクリプト `--set <themeKey> --lifecycle ... --add-evidence ...`
 - **再構築可能**: ThemeCatalog (git TS) + 計測 snapshot (`.claude/state/metrics/` /
   `.claude/skills/analytics/{gsc,ga4}-improvement/reference/snapshots/`) + レビュー文書
   (`docs/04_レビュー/*-theme-*.md`) から常に再導出できる派生物 (blog remediation-queue と同思想)。
@@ -25,6 +27,7 @@
       "catalogStatus": "catalog",        // "catalog" (THEME_CATALOGS 登録) | "legacy" (IndicatorSet のみ)
       "lifecycleStatus": "keep",         // 下記 enum
       "reviewStatus": "reviewed",        // "reviewed" | "review-missing" | "stale" (レビュー後にカタログが大きく変わった)
+      "reviewGate": "proposal-ready",    // レビュー文書 frontmatter の status をそのまま転記 (proposal-ready / ready-after-*-audit / blocked-*)。次アクションの優先度判断に使う
       "reviewDocRef": "docs/04_レビュー/2026-07-11-theme-aging-society.md",
       "latestDataYear": "2023",          // R2 values 実測から (未集計は null)
       "primaryMetricCount": 1,           // ThemeCatalog から決定的に導出
