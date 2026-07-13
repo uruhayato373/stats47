@@ -36,6 +36,7 @@ npx tsx .claude/scripts/surveys/build-survey-portfolio.ts        # 機械項目�
 npx tsx .claude/scripts/surveys/build-survey-portfolio.ts --set <surveyId> --lifecycle <status> --add-evidence <ref>
 npx tsx .claude/scripts/surveys/aggregate-survey-metrics.ts      # 56d 実測 (非重複 2 窓合算)
 npx tsx .claude/scripts/surveys/build-survey-portfolio.ts --add-experiment <file.json>
+node .claude/scripts/surveys/evaluate-survey-experiments.mjs --schedule <id> <デプロイ日>  # startedAt + d7/28/56 期日を機械算出
 node .claude/scripts/surveys/evaluate-survey-experiments.mjs --check          # 実験期日到達分に実測を記録
 node .claude/scripts/surveys/evaluate-survey-experiments.mjs --verdict <id> <verdict> --evidence <ref>
 ```

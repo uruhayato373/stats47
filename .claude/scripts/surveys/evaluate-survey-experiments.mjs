@@ -21,6 +21,9 @@
  *     # 期日到達分に現在実測を記録し、判定待ち一覧を表示
  *   node .claude/scripts/surveys/evaluate-survey-experiments.mjs \
  *     --verdict SURVEY-EXP-001 effect-partial --evidence <ref> [--note "<季節性等の注記>"]
+ *   node .claude/scripts/surveys/evaluate-survey-experiments.mjs --schedule <id> <YYYY-MM-DD>
+ *     # デプロイ日を startedAt に設定し evaluateAt7d/28d/56d (+7/+28/+56 日) を機械算出する
+ *     # (デプロイ待ちで登録した実験の期日入れ。手編集禁止の書き込み口)
  */
 import fs from "node:fs";
 import path from "node:path";
@@ -58,6 +61,28 @@ function main() {
   const pf = load(PORTFOLIO);
   const bySurvey = new Map(pf.surveys.map((s) => [s.surveyId, s]));
   const today = new Date().toISOString().slice(0, 10);
+
+  const sIdx = args.indexOf("--schedule");
+  if (sIdx >= 0) {
+    // ── 期日設定モード (デプロイ日 → startedAt + evaluateAt7d/28d/56d を機械算出) ──
+    const id = args[sIdx + 1];
+    const start = args[sIdx + 2];
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(start ?? "")) { console.error("✗ 日付は YYYY-MM-DD"); process.exit(1); }
+    const e = ex.experiments.find((x) => x.experimentId === id);
+    if (!e) { console.error(`✗ ${id} が experiments.json に無い`); process.exit(1); }
+    const plus = (days) => {
+      const d = new Date(start + "T00:00:00Z");
+      d.setUTCDate(d.getUTCDate() + days);
+      return d.toISOString().slice(0, 10);
+    };
+    e.startedAt = start;
+    e.evaluateAt7d = plus(7);
+    e.evaluateAt28d = plus(28);
+    e.evaluateAt56d = plus(56);
+    fs.writeFileSync(EXPERIMENTS, JSON.stringify(ex, null, 2) + "\n");
+    console.log(`schedule: ${id} startedAt=${start} d7=${e.evaluateAt7d} d28=${e.evaluateAt28d} d56=${e.evaluateAt56d}`);
+    return;
+  }
 
   const vIdx = args.indexOf("--verdict");
   if (vIdx >= 0) {
