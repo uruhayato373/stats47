@@ -48,7 +48,7 @@ export interface PageHeroDef {
 /** 地域経済 / 企業・家計・経済 で共有する hero 画像 (家計・消費・企業の主題)。 */
 const LOCAL_ECONOMY_IMAGE: HeroImageAsset = {
   src: "/images/theme-local-economy-hero.webp",
-  sourceImage: "docs/assets/theme-local-economy-hero.png",
+  sourceImage: "docs/assets/theme-local-economy-hero.jpg",
   aspectRatio: "3:2 (1536×1024)",
   prompt:
     "Light, editorial, flat vector illustration for the hero banner of a Japanese prefectural-statistics website. " +
@@ -62,7 +62,7 @@ const LOCAL_ECONOMY_IMAGE: HeroImageAsset = {
     "so the top and bottom can be safely cropped. Strictly no text, no letters, no numbers, no kanji, no logos, " +
     "no watermarks, no real human faces, no precise administrative map borders, no charts with real values.",
   regenerate:
-    "node -e \"require('sharp')('docs/assets/theme-local-economy-hero.png').resize({width:1536,withoutEnlargement:true}).webp({quality:78}).toFile('apps/web/public/images/theme-local-economy-hero.webp')\"",
+    "node -e \"require('sharp')('docs/assets/theme-local-economy-hero.jpg').resize({width:1536,withoutEnlargement:true}).webp({quality:78}).toFile('apps/web/public/images/theme-local-economy-hero.webp')\"",
 };
 
 /** themeKey → hero 定義。hero を用意したテーマだけ登録する。 */
@@ -84,7 +84,7 @@ export const THEME_HEROES: Record<string, PageHeroDef> = {
 function categoryHeroImage(categoryKey: string): HeroImageAsset {
   return {
     src: `/images/category-${categoryKey}-hero.webp`,
-    sourceImage: `docs/assets/category-${categoryKey}-hero.png`,
+    sourceImage: `docs/assets/category-${categoryKey}-hero.jpg`,
     aspectRatio: "3:2 (1536×1024)",
     prompt: `apps/web/scripts/data/category-hero-catalog.ts → buildCategoryHeroPrompt("${categoryKey}")`,
     regenerate: `npx tsx apps/web/scripts/generate-category-heroes.ts --apply --only ${categoryKey} --force`,
