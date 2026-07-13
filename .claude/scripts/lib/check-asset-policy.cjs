@@ -100,13 +100,32 @@ function resolveRef(file, target) {
 }
 
 // ファイル種別ごとにローカル画像参照を抽出する。
+// markdown のフェンスドコードブロック (```/~~~) とインラインコードスパン (`…`) を除去する。
+// これらの中の `![alt](path)` は「こう書け」という手順例・命名規則の説明であり、レンダリングされる
+// 実埋め込みではない (例: note の screenshot-guide.md)。参照解決の対象から外して誤検出を防ぐ。
+function stripMarkdownCode(source) {
+  const out = [];
+  let fenceChar = null;
+  for (const line of source.split("\n")) {
+    const m = line.match(/^\s*(`{3,}|~{3,})/);
+    if (fenceChar) {
+      if (m && m[1][0] === fenceChar) fenceChar = null; // フェンス閉じ
+      continue; // フェンス内は破棄
+    }
+    if (m) { fenceChar = m[1][0]; continue; } // フェンス開始
+    out.push(line.replace(/`[^`\n]*`/g, "")); // インラインコードスパンを除去
+  }
+  return out.join("\n");
+}
+
 function extractRefs(file, source) {
   const refs = [];
   const push = (t) => { if (t) refs.push(t); };
   const ext = path.extname(file).toLowerCase();
   if (/\.(?:md|mdx)$/i.test(ext)) {
-    for (const m of source.matchAll(/!\[[^\]]*\]\(([^)\s]+)(?:\s+["'][^"']*["'])?\)/g)) push(m[1]);
-    for (const m of source.matchAll(/<img\b[^>]*\bsrc\s*=\s*["']([^"']+)["']/gi)) push(m[1]);
+    const cleaned = stripMarkdownCode(source);
+    for (const m of cleaned.matchAll(/!\[[^\]]*\]\(([^)\s]+)(?:\s+["'][^"']*["'])?\)/g)) push(m[1]);
+    for (const m of cleaned.matchAll(/<img\b[^>]*\bsrc\s*=\s*["']([^"']+)["']/gi)) push(m[1]);
   } else if (/\.(?:html?)$/i.test(ext)) {
     for (const m of source.matchAll(/<img\b[^>]*\bsrc\s*=\s*["']([^"']+)["']/gi)) push(m[1]);
     for (const m of source.matchAll(/url\(\s*['"]?([^'")]+?)['"]?\s*\)/gi)) push(m[1]);

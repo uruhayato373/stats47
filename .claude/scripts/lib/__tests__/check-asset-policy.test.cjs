@@ -75,3 +75,12 @@ test("/public絶対参照の欠落を検出する", async (t) => {
   const codes = JSON.parse(run(f).stdout).newFindings.map((x) => x.code);
   assert.ok(codes.includes("MISSING_REFERENCE"));
 });
+
+test("コードスパン/コードブロック内の画像記法は参照とみなさない (手順例の誤検出防止)", async (t) => {
+  const f = await fixture(); t.after(() => fs.rmSync(f.root, { recursive: true, force: true }));
+  // インラインコードスパンとフェンスドブロック内の ![](…) は「こう書け」という例示で実埋め込みではない。
+  fs.writeFileSync(path.join(f.root, "docs/21_ブログ記事原稿/sample/guide.md"),
+    "マーカーを `![alt](./images/screenshot-N-xxx.png)` に置換する。\n\n```md\n![例](data/nonexistent-in-fence.png)\n```\n");
+  const parsed = JSON.parse(run(f).stdout);
+  assert.equal(parsed.newFindings.filter((x) => x.code === "MISSING_REFERENCE" && x.file.includes("guide.md")).length, 0);
+});
