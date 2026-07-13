@@ -69,6 +69,7 @@ npx tsx .claude/scripts/themes/aggregate-theme-metrics.ts      # 56d 実測 (非
 node .claude/scripts/themes/evaluate-theme-experiments.mjs --check          # 実験期日到達分に実測を記録
 node .claude/scripts/themes/evaluate-theme-experiments.mjs --verdict <id> <verdict> --evidence <ref>
 node .claude/scripts/themes/evaluate-theme-experiments.mjs --register '<json>'   # 実験登録 (手編集禁止の書き込み口。デプロイ前は evaluateAt 未設定で登録可)
+node .claude/scripts/themes/evaluate-theme-experiments.mjs --schedule <id> <デプロイ日>  # startedAt + evaluateAt(d7/28/56) を機械算出
 ```
 
 - cadence: **月次で run-theme-portfolio-audit.sh、四半期で監査レポート** (`.claude/skills/theme/manage-theme-portfolio/reference/audits/YYYY-MM-DD-theme-portfolio-audit.md`) を必須とする。CI (`pr-quality-check.yml` の Theme Portfolio State Guard) は schema/規律の検証のみで破壊的変更をしない。
