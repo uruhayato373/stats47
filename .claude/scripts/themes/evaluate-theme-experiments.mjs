@@ -18,6 +18,8 @@
  *   node .claude/scripts/themes/evaluate-theme-experiments.mjs --register '<json>'
  *     # 実験を登録する (手編集禁止の書き込み口)。json は README schema のエントリ 1 件。
  *     # verdict は "pending" 固定で付与。evaluateAt 未設定 (デプロイ待ち) も許容 (--check は発火しない)。
+ *   node .claude/scripts/themes/evaluate-theme-experiments.mjs --schedule <id> <YYYY-MM-DD>
+ *     # デプロイ日を startedAt に設定し evaluateAt (d7/d28/d56 = +7/+28/+56 日) を機械算出する。
  */
 import fs from "node:fs";
 import path from "node:path";
@@ -77,6 +79,26 @@ function main() {
     console.log(`登録: ${entry.experimentId} (${entry.themeKey} / ${entry.changeType})` +
       (entry.evaluateAt ? "" : " — evaluateAt 未設定 (デプロイ後に設定するまで --check は発火しない)"));
     console.log("→ validate-theme-state.mjs で E 規律 (重複/baseline) を確認すること");
+    return;
+  }
+
+  const sIdx = args.indexOf("--schedule");
+  if (sIdx >= 0) {
+    // ── 期日設定モード (デプロイ日 → startedAt + evaluateAt を機械算出) ──
+    const id = args[sIdx + 1];
+    const start = args[sIdx + 2];
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(start ?? "")) { console.error("✗ 日付は YYYY-MM-DD"); process.exit(1); }
+    const e = ex.experiments.find((x) => x.experimentId === id);
+    if (!e) { console.error(`✗ ${id} が experiments.json に無い`); process.exit(1); }
+    const plus = (days) => {
+      const d = new Date(start + "T00:00:00Z");
+      d.setUTCDate(d.getUTCDate() + days);
+      return d.toISOString().slice(0, 10);
+    };
+    e.startedAt = start;
+    e.evaluateAt = { d7: plus(7), d28: plus(28), d56: plus(56) };
+    fs.writeFileSync(EXPERIMENTS, JSON.stringify(ex, null, 2) + "\n");
+    console.log(`schedule: ${id} startedAt=${start} d7=${e.evaluateAt.d7} d28=${e.evaluateAt.d28} d56=${e.evaluateAt.d56}`);
     return;
   }
 
