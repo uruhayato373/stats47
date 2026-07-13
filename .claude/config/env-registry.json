@@ -214,7 +214,8 @@
       "name": "GEMINI_API_KEY",
       "visibility": "server",
       "contexts": [
-        "process"
+        "process",
+        "secret"
       ]
     },
     {
