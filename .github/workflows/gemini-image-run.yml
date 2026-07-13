@@ -47,6 +47,9 @@ env:
   R2_S3_ENDPOINT: https://${{ secrets.CLOUDFLARE_ACCOUNT_ID }}.r2.cloudflarestorage.com
   R2_ACCESS_KEY_ID: ${{ secrets.CLOUDFLARE_R2_ACCESS_KEY_ID }}
   R2_SECRET_ACCESS_KEY: ${{ secrets.CLOUDFLARE_R2_SECRET_ACCESS_KEY }}
+  # generator の R2 push は wrangler put 経由 (ogp-image-audit-weekly と同じ)
+  CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+  CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
   GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
 
 jobs:
@@ -112,7 +115,13 @@ jobs:
             ARGS+=(--out-dir .local/gemini-verify)
           fi
           echo "generate-blog-thumbnails-cloud.ts ${ARGS[*]}"
-          npx tsx apps/web/scripts/generate-blog-thumbnails-cloud.ts "${ARGS[@]}"
+          set -o pipefail
+          npx tsx apps/web/scripts/generate-blog-thumbnails-cloud.ts "${ARGS[@]}" 2>&1 | tee /tmp/gemini-run.log
+          # generator は per-slug 失敗を exit 0 で報告する (記事単位 try/catch) — silent green を防ぐ
+          if grep -qE "失敗: [1-9]" /tmp/gemini-run.log; then
+            echo "::error::generator が失敗 slug を報告 (上記ログの [fail] を参照)"
+            exit 1
+          fi
 
       - name: 📤 Upload verify artifact (apply=false のみ)
         if: steps.req.outputs.apply != 'true'
