@@ -81,20 +81,52 @@ merge/retire 候補は 0 (56 日 measured 実測が無い現段階では validat
 - occupation-salary の context 28 件・aging-society の charts 15 件など、レビューが指摘した
   「主線の希釈」が数値でも確認できる。
 
-## 未計測 (正直な空白)
+## PR-3: 56 日 baseline 集計結果 (2026-07-13 追記)
+
+`aggregate-theme-metrics.ts` で GSC/GA4 を集計し baseline を保存した。
+**★集計の落とし穴を実装で回避**: 週次 snapshot は各週 last-28d 窓 (`fetch-{gsc,ga4}-snapshot.mjs`
+が endDate-27 で取得) のため、週の単純合算は最大 4 倍の二重計上になる。56d = **非重複 2 窓
+(W28 + W24) の合算**で構成した。
+
+### 最重要の実測結果: テーマページは検索集客面ではない
+
+- **GSC: measured 0/22** — 全テーマが 56 日で impressions < 200 (最大 fishery-marine 158・
+  全 22 テーマ合算でも 732 imp/56d)。`07_情報設計` が定義する「テーマ = 回遊・深掘り面」の
+  ファネル役割が実測で裏付けられた。
+- **GA4: measured 2/22** — local-finance (213 pv / 56d)・population-dynamics (206 pv)。
+  次点は tourism 97 / fishery-marine 93 (閾値 100 の直下)。
+- **含意**: merge/retire 判定の主 KPI を GSC (検索需要) に置くと全テーマが構造的に
+  insufficient-data のままになる。**回遊面としての価値 (GA4 内部流入・将来の内部遷移計装) を
+  主 KPI とする判定設計が必要** → 閾値・KPI 設計の見直しは PR-4 で根拠つきで行う
+  (実測を見た直後に閾値を下げて "measured" を作り出す調整はしない)。
+
+### データ品質の実測 (R2 values.json 全キー走査)
+
+- **gaps 2 テーマ (実欠測 5 キー)**:
+  - living-housing: `housing-floor-area` (1/13)
+  - manufacturing: `manufacturing-sales-private` / `manufacturing-net-value-added-private` /
+    `industrial-land-price` / `industrial-land-price-change-rate` (4/12)
+  - → カタログが参照する rankingKey の values.json が R2 に無い = テーマページのチャート欠損の
+    可能性。improvement-triage への引き渡し候補 (データ投入 or カタログからの除外判断)。
+- latestDataYear: 2023 (fishery-marine / healthcare / occupation-salary / ports / roads /
+  local-finance-city) 〜 2025 (local-finance)。stale-data (5 年超) は 0。
+
+## 未計測 (正直な空白・PR-3 後)
 
 | 項目 | 状態 | 埋まる時期 |
 |---|---|---|
-| GSC/GA4 テーマ別 56d 集計 | insufficient-data (未集計) | PR-3 |
-| latestDataYear / 欠測率 | null (R2 values 未集計) | PR-3 |
+| GSC テーマ別 56d | 全 22 テーマ insufficient-data (imp<200・実測済みの標本不足) | 閾値/KPI 設計は PR-4 |
+| GA4 テーマ別 56d | 20/22 insufficient-data (pv<100) | 同上 |
 | 内部遷移 (theme→ranking/blog) | not-instrumented (GA4 未計装) | 計装施策を triage へ提案後 |
-| 関連記事数 | null | PR-3 |
+| 関連記事数 | null | 後続 |
 
 ## 次アクション
 
-1. **PR-3**: GSC/GA4 snapshot (直近 8 週) を `/themes/<key>` 単位に集計し baseline 保存
-2. proposal-ready 4 テーマの設計依頼を theme-designer へ (blocked 4 は監査を先行)
-3. 内部遷移計装 (GA4 カスタムイベント) を improvement-triage へ改善候補として引き渡し
+1. **PR-4**: 継続監査コマンド・実験 7/28/56 日判定・triage 引き渡し形式・CI schema 検証。
+   あわせて「回遊面 KPI」への判定設計見直し (GSC 閾値の再設計は根拠つきで)
+2. gaps 5 キー (living-housing 1 / manufacturing 4) を improvement-triage へ引き渡し
+3. proposal-ready 4 テーマの設計依頼を theme-designer へ (blocked 4 は監査を先行)
+4. 内部遷移計装 (GA4 カスタムイベント) を improvement-triage へ改善候補として引き渡し
 
 ## 関連
 

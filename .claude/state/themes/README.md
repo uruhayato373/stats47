@@ -39,16 +39,27 @@
       "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv",
       "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
       "metrics": {                        // 実測の集計コピー。取れない値は status で明示し推測値を入れない
+        // ★集計の基礎 (aggregate-theme-metrics.ts): GSC/GA4 の週次 snapshot は各週 last-28d 窓のため、
+        //   56d = 非重複 2 窓 (最新週 + 4 週前) の合算。weeks に使用した 2 窓を記録する。
         "gsc": { "status": "measured",    // "measured" | "insufficient-data" | "not-instrumented"
-                 "windowDays": 56, "clicks": 120, "impressions": 4300,
-                 "ctr": 0.028, "avgPosition": 12.4 },
-        "ga4": { "status": "measured", "windowDays": 56,
-                 "pageViews": 800, "activeUsers": 500,
-                 "engagementRate": 0.61, "avgSessionDurationSec": 74 },
+                 "windowDays": 56, "weeks": ["2026-W24", "2026-W28"],
+                 "clicks": 120, "impressions": 4300,
+                 "ctr": 0.028,             // 合算 clicks / 合算 impressions
+                 "avgPosition": 12.4 },    // impressions 加重平均
+        "ga4": { "status": "measured", "windowDays": 56, "weeks": ["2026-W24", "2026-W28"],
+                 "pageViews": 800,                     // 2 窓合算 (加算可能)
+                 "activeUsersLast28d": 500,            // ユーザー数は週横断加算不能 → 最新窓のみ
+                 "engagementRatePvWeighted": 0.61,     // pageViews 加重平均 (近似・名前で明示)
+                 "avgSessionDurationSecPvWeighted": 74 },
         "internalNav": { "status": "not-instrumented" }  // theme→ranking/blog 遷移・指標クリック。GA4 未計装 (25_テーマポートフォリオ運用 §1.3)
       },
       "contentCoverage": { "relatedArticles": 4 },   // 関連記事数 (未集計は null)
-      "dataQualityStatus": "ok",         // "ok" | "stale-data" (最新年が古い) | "gaps" (欠測あり) | "unknown"
+      "dataQuality": {                    // R2 app/ranking/<key>/values.json の実測 (aggregate-theme-metrics.ts)
+        "keysChecked": 10, "missingKeys": 0,
+        "missingKeyList": [],             // 404/空だった rankingKey (先頭 10 件)
+        "latestYearPrefCoverageMin": 47   // 最新年の都道府県カバレッジ最小値 (prefecture 行が無い指標は対象外)
+      },
+      "dataQualityStatus": "ok",         // "ok" | "stale-data" (latestDataYear が 5 年超前) | "gaps" (values.json 欠測あり) | "unknown"
       "currentHypothesis": "支え手比率の主問化で滞在が伸びる", // 無ければ null
       "nextReviewAt": "2026-10-01",
       "evidenceRefs": [                   // レビュー文書・実測・実験 ID への参照

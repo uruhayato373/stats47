@@ -9,23 +9,31 @@
       "reviewStatus": "reviewed",
       "reviewGate": "proposal-ready",
       "reviewDocRef": "docs/04_レビュー/2026-07-11-theme-aging-society.md",
-      "latestDataYear": null,
+      "latestDataYear": "2024",
       "primaryMetricCount": 1,
       "secondaryMetricCount": 6,
       "contextMetricCount": 3,
       "selectionMissingCount": 7,
       "chartCount": 15,
       "officialSourceReviewedAt": "2026-07-11",
-      "gscSnapshotRef": null,
-      "ga4SnapshotRef": null,
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
       "metrics": {
         "gsc": {
           "status": "insufficient-data",
-          "windowDays": 0
+          "windowDays": 56,
+          "weeks": [
+            "2026-W24",
+            "2026-W28"
+          ]
         },
         "ga4": {
           "status": "insufficient-data",
-          "windowDays": 0
+          "windowDays": 56,
+          "weeks": [
+            "2026-W24",
+            "2026-W28"
+          ]
         },
         "internalNav": {
           "status": "not-instrumented"
@@ -34,12 +42,18 @@
       "contentCoverage": {
         "relatedArticles": null
       },
-      "dataQualityStatus": "unknown",
+      "dataQualityStatus": "ok",
       "currentHypothesis": null,
       "nextReviewAt": "2026-10-01",
       "evidenceRefs": [
         "docs/04_レビュー/2026-07-11-theme-aging-society.md"
-      ]
+      ],
+      "dataQuality": {
+        "keysChecked": 10,
+        "missingKeys": 0,
+        "missingKeyList": [],
+        "latestYearPrefCoverageMin": 47
+      }
     },
     {
       "themeKey": "climate",
@@ -48,23 +62,31 @@
       "reviewStatus": "reviewed",
       "reviewGate": "ready-after-station-normal-and-observation-method-audit",
       "reviewDocRef": "docs/04_レビュー/2026-07-13-theme-climate.md",
-      "latestDataYear": null,
+      "latestDataYear": "2024",
       "primaryMetricCount": 2,
       "secondaryMetricCount": 3,
       "contextMetricCount": 3,
       "selectionMissingCount": null,
       "chartCount": null,
       "officialSourceReviewedAt": "2026-07-13",
-      "gscSnapshotRef": null,
-      "ga4SnapshotRef": null,
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
       "metrics": {
         "gsc": {
           "status": "insufficient-data",
-          "windowDays": 0
+          "windowDays": 56,
+          "weeks": [
+            "2026-W24",
+            "2026-W28"
+          ]
         },
         "ga4": {
           "status": "insufficient-data",
-          "windowDays": 0
+          "windowDays": 56,
+          "weeks": [
+            "2026-W24",
+            "2026-W28"
+          ]
         },
         "internalNav": {
           "status": "not-instrumented"
@@ -73,12 +95,18 @@
       "contentCoverage": {
         "relatedArticles": null
       },
-      "dataQualityStatus": "unknown",
+      "dataQualityStatus": "ok",
       "currentHypothesis": null,
       "nextReviewAt": "2026-10-01",
       "evidenceRefs": [
         "docs/04_レビュー/2026-07-13-theme-climate.md"
-      ]
+      ],
+      "dataQuality": {
+        "keysChecked": 8,
+        "missingKeys": 0,
+        "missingKeyList": [],
+        "latestYearPrefCoverageMin": 47
+      }
     },
     {
       "themeKey": "consumer-prices",
@@ -87,23 +115,31 @@
       "reviewStatus": "reviewed",
       "reviewGate": "ready-after-content-audit",
       "reviewDocRef": "docs/04_レビュー/2026-07-11-theme-consumer-prices.md",
-      "latestDataYear": null,
+      "latestDataYear": "2024",
       "primaryMetricCount": 1,
       "secondaryMetricCount": 4,
       "contextMetricCount": 7,
       "selectionMissingCount": 5,
       "chartCount": 6,
       "officialSourceReviewedAt": "2026-07-11",
-      "gscSnapshotRef": null,
-      "ga4SnapshotRef": null,
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
       "metrics": {
         "gsc": {
           "status": "insufficient-data",
-          "windowDays": 0
+          "windowDays": 56,
+          "weeks": [
+            "2026-W24",
+            "2026-W28"
+          ]
         },
         "ga4": {
           "status": "insufficient-data",
-          "windowDays": 0
+          "windowDays": 56,
+          "weeks": [
+            "2026-W24",
+            "2026-W28"
+          ]
         },
         "internalNav": {
           "status": "not-instrumented"
@@ -112,12 +148,18 @@
       "contentCoverage": {
         "relatedArticles": null
       },
-      "dataQualityStatus": "unknown",
+      "dataQualityStatus": "ok",
       "currentHypothesis": null,
       "nextReviewAt": "2026-10-01",
       "evidenceRefs": [
         "docs/04_レビュー/2026-07-11-theme-consumer-prices.md"
-      ]
+      ],
+      "dataQuality": {
+        "keysChecked": 12,
+        "missingKeys": 0,
+        "missingKeyList": [],
+        "latestYearPrefCoverageMin": 47
+      }
     },
     {
       "themeKey": "education-culture",
@@ -126,23 +168,31 @@
       "reviewStatus": "reviewed",
       "reviewGate": "ready-after-source-and-denominator-audit",
       "reviewDocRef": "docs/04_レビュー/2026-07-12-theme-education-culture.md",
-      "latestDataYear": null,
+      "latestDataYear": "2024",
       "primaryMetricCount": 1,
       "secondaryMetricCount": 4,
       "contextMetricCount": 0,
       "selectionMissingCount": 5,
       "chartCount": 5,
       "officialSourceReviewedAt": "2026-07-12",
-      "gscSnapshotRef": null,
-      "ga4SnapshotRef": null,
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
       "metrics": {
         "gsc": {
           "status": "insufficient-data",
-          "windowDays": 0
+          "windowDays": 56,
+          "weeks": [
+            "2026-W24",
+            "2026-W28"
+          ]
         },
         "ga4": {
           "status": "insufficient-data",
-          "windowDays": 0
+          "windowDays": 56,
+          "weeks": [
+            "2026-W24",
+            "2026-W28"
+          ]
         },
         "internalNav": {
           "status": "not-instrumented"
@@ -151,13 +201,19 @@
       "contentCoverage": {
         "relatedArticles": null
       },
-      "dataQualityStatus": "unknown",
+      "dataQualityStatus": "ok",
       "currentHypothesis": "学校教育/高等教育/社会教育の主問が複数同居。分割 + parent-hub 化 (doc 24)",
       "nextReviewAt": "2026-10-01",
       "evidenceRefs": [
         "docs/04_レビュー/2026-07-12-theme-education-culture.md",
         "docs/02_実装計画/24_テーマ分類再編成方針.md#education-culture-split--parent-hub候補"
-      ]
+      ],
+      "dataQuality": {
+        "keysChecked": 5,
+        "missingKeys": 0,
+        "missingKeyList": [],
+        "latestYearPrefCoverageMin": 47
+      }
     },
     {
       "themeKey": "fishery-marine",
@@ -166,23 +222,31 @@
       "reviewStatus": "reviewed",
       "reviewGate": "ready-after-scope-series-and-coverage-audit",
       "reviewDocRef": "docs/04_レビュー/2026-07-13-theme-fishery-marine.md",
-      "latestDataYear": null,
+      "latestDataYear": "2023",
       "primaryMetricCount": 3,
       "secondaryMetricCount": 10,
       "contextMetricCount": 11,
       "selectionMissingCount": 13,
       "chartCount": 6,
       "officialSourceReviewedAt": "2026-07-13",
-      "gscSnapshotRef": null,
-      "ga4SnapshotRef": null,
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
       "metrics": {
         "gsc": {
           "status": "insufficient-data",
-          "windowDays": 0
+          "windowDays": 56,
+          "weeks": [
+            "2026-W24",
+            "2026-W28"
+          ]
         },
         "ga4": {
           "status": "insufficient-data",
-          "windowDays": 0
+          "windowDays": 56,
+          "weeks": [
+            "2026-W24",
+            "2026-W28"
+          ]
         },
         "internalNav": {
           "status": "not-instrumented"
@@ -191,12 +255,18 @@
       "contentCoverage": {
         "relatedArticles": null
       },
-      "dataQualityStatus": "unknown",
+      "dataQualityStatus": "ok",
       "currentHypothesis": null,
       "nextReviewAt": "2026-10-01",
       "evidenceRefs": [
         "docs/04_レビュー/2026-07-13-theme-fishery-marine.md"
-      ]
+      ],
+      "dataQuality": {
+        "keysChecked": 24,
+        "missingKeys": 0,
+        "missingKeyList": [],
+        "latestYearPrefCoverageMin": 39
+      }
     },
     {
       "themeKey": "foreign-residents",
@@ -205,23 +275,31 @@
       "reviewStatus": "reviewed",
       "reviewGate": "ready-after-definition-and-source-audit",
       "reviewDocRef": "docs/04_レビュー/2026-07-13-theme-foreign-residents.md",
-      "latestDataYear": null,
+      "latestDataYear": "2024",
       "primaryMetricCount": 1,
       "secondaryMetricCount": 4,
       "contextMetricCount": 5,
       "selectionMissingCount": 5,
       "chartCount": 3,
       "officialSourceReviewedAt": "2026-07-13",
-      "gscSnapshotRef": null,
-      "ga4SnapshotRef": null,
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
       "metrics": {
         "gsc": {
           "status": "insufficient-data",
-          "windowDays": 0
+          "windowDays": 56,
+          "weeks": [
+            "2026-W24",
+            "2026-W28"
+          ]
         },
         "ga4": {
           "status": "insufficient-data",
-          "windowDays": 0
+          "windowDays": 56,
+          "weeks": [
+            "2026-W24",
+            "2026-W28"
+          ]
         },
         "internalNav": {
           "status": "not-instrumented"
@@ -230,12 +308,18 @@
       "contentCoverage": {
         "relatedArticles": null
       },
-      "dataQualityStatus": "unknown",
+      "dataQualityStatus": "ok",
       "currentHypothesis": null,
       "nextReviewAt": "2026-10-01",
       "evidenceRefs": [
         "docs/04_レビュー/2026-07-13-theme-foreign-residents.md"
-      ]
+      ],
+      "dataQuality": {
+        "keysChecked": 10,
+        "missingKeys": 0,
+        "missingKeyList": [],
+        "latestYearPrefCoverageMin": 47
+      }
     },
     {
       "themeKey": "healthcare",
@@ -244,23 +328,31 @@
       "reviewStatus": "reviewed",
       "reviewGate": "proposal-ready",
       "reviewDocRef": "docs/04_レビュー/2026-07-11-theme-healthcare.md",
-      "latestDataYear": null,
+      "latestDataYear": "2023",
       "primaryMetricCount": 1,
       "secondaryMetricCount": 5,
       "contextMetricCount": 7,
       "selectionMissingCount": 6,
       "chartCount": 8,
       "officialSourceReviewedAt": "2026-07-11",
-      "gscSnapshotRef": null,
-      "ga4SnapshotRef": null,
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
       "metrics": {
         "gsc": {
           "status": "insufficient-data",
-          "windowDays": 0
+          "windowDays": 56,
+          "weeks": [
+            "2026-W24",
+            "2026-W28"
+          ]
         },
         "ga4": {
           "status": "insufficient-data",
-          "windowDays": 0
+          "windowDays": 56,
+          "weeks": [
+            "2026-W24",
+            "2026-W28"
+          ]
         },
         "internalNav": {
           "status": "not-instrumented"
@@ -269,12 +361,18 @@
       "contentCoverage": {
         "relatedArticles": null
       },
-      "dataQualityStatus": "unknown",
+      "dataQualityStatus": "ok",
       "currentHypothesis": null,
       "nextReviewAt": "2026-10-01",
       "evidenceRefs": [
         "docs/04_レビュー/2026-07-11-theme-healthcare.md"
-      ]
+      ],
+      "dataQuality": {
+        "keysChecked": 13,
+        "missingKeys": 0,
+        "missingKeyList": [],
+        "latestYearPrefCoverageMin": 47
+      }
     },
     {
       "themeKey": "labor-mobility",
@@ -283,23 +381,31 @@
       "reviewStatus": "reviewed",
       "reviewGate": "ready-after-definition-audit",
       "reviewDocRef": "docs/04_レビュー/2026-07-11-theme-labor-mobility.md",
-      "latestDataYear": null,
+      "latestDataYear": "2024",
       "primaryMetricCount": 1,
       "secondaryMetricCount": 4,
       "contextMetricCount": 3,
       "selectionMissingCount": 5,
       "chartCount": 6,
       "officialSourceReviewedAt": "2026-07-11",
-      "gscSnapshotRef": null,
-      "ga4SnapshotRef": null,
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
       "metrics": {
         "gsc": {
           "status": "insufficient-data",
-          "windowDays": 0
+          "windowDays": 56,
+          "weeks": [
+            "2026-W24",
+            "2026-W28"
+          ]
         },
         "ga4": {
           "status": "insufficient-data",
-          "windowDays": 0
+          "windowDays": 56,
+          "weeks": [
+            "2026-W24",
+            "2026-W28"
+          ]
         },
         "internalNav": {
           "status": "not-instrumented"
@@ -308,12 +414,18 @@
       "contentCoverage": {
         "relatedArticles": null
       },
-      "dataQualityStatus": "unknown",
+      "dataQualityStatus": "ok",
       "currentHypothesis": null,
       "nextReviewAt": "2026-10-01",
       "evidenceRefs": [
         "docs/04_レビュー/2026-07-11-theme-labor-mobility.md"
-      ]
+      ],
+      "dataQuality": {
+        "keysChecked": 8,
+        "missingKeys": 0,
+        "missingKeyList": [],
+        "latestYearPrefCoverageMin": 47
+      }
     },
     {
       "themeKey": "labor-wages",
@@ -322,23 +434,31 @@
       "reviewStatus": "reviewed",
       "reviewGate": "ready-after-definition-audit",
       "reviewDocRef": "docs/04_レビュー/2026-07-11-theme-labor-wages.md",
-      "latestDataYear": null,
+      "latestDataYear": "2024",
       "primaryMetricCount": 1,
       "secondaryMetricCount": 6,
       "contextMetricCount": 9,
       "selectionMissingCount": 7,
       "chartCount": 7,
       "officialSourceReviewedAt": "2026-07-11",
-      "gscSnapshotRef": null,
-      "ga4SnapshotRef": null,
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
       "metrics": {
         "gsc": {
           "status": "insufficient-data",
-          "windowDays": 0
+          "windowDays": 56,
+          "weeks": [
+            "2026-W24",
+            "2026-W28"
+          ]
         },
         "ga4": {
           "status": "insufficient-data",
-          "windowDays": 0
+          "windowDays": 56,
+          "weeks": [
+            "2026-W24",
+            "2026-W28"
+          ]
         },
         "internalNav": {
           "status": "not-instrumented"
@@ -347,12 +467,18 @@
       "contentCoverage": {
         "relatedArticles": null
       },
-      "dataQualityStatus": "unknown",
+      "dataQualityStatus": "ok",
       "currentHypothesis": null,
       "nextReviewAt": "2026-10-01",
       "evidenceRefs": [
         "docs/04_レビュー/2026-07-11-theme-labor-wages.md"
-      ]
+      ],
+      "dataQuality": {
+        "keysChecked": 16,
+        "missingKeys": 0,
+        "missingKeyList": [],
+        "latestYearPrefCoverageMin": 40
+      }
     },
     {
       "themeKey": "living-housing",
@@ -361,23 +487,31 @@
       "reviewStatus": "reviewed",
       "reviewGate": "proposal-ready",
       "reviewDocRef": "docs/04_レビュー/2026-07-11-theme-living-housing.md",
-      "latestDataYear": null,
+      "latestDataYear": "2024",
       "primaryMetricCount": 1,
       "secondaryMetricCount": 5,
       "contextMetricCount": 7,
       "selectionMissingCount": 6,
       "chartCount": 9,
       "officialSourceReviewedAt": "2026-07-11",
-      "gscSnapshotRef": null,
-      "ga4SnapshotRef": null,
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
       "metrics": {
         "gsc": {
           "status": "insufficient-data",
-          "windowDays": 0
+          "windowDays": 56,
+          "weeks": [
+            "2026-W24",
+            "2026-W28"
+          ]
         },
         "ga4": {
           "status": "insufficient-data",
-          "windowDays": 0
+          "windowDays": 56,
+          "weeks": [
+            "2026-W24",
+            "2026-W28"
+          ]
         },
         "internalNav": {
           "status": "not-instrumented"
@@ -386,12 +520,20 @@
       "contentCoverage": {
         "relatedArticles": null
       },
-      "dataQualityStatus": "unknown",
+      "dataQualityStatus": "gaps",
       "currentHypothesis": null,
       "nextReviewAt": "2026-10-01",
       "evidenceRefs": [
         "docs/04_レビュー/2026-07-11-theme-living-housing.md"
-      ]
+      ],
+      "dataQuality": {
+        "keysChecked": 13,
+        "missingKeys": 1,
+        "missingKeyList": [
+          "housing-floor-area"
+        ],
+        "latestYearPrefCoverageMin": 47
+      }
     },
     {
       "themeKey": "local-economy",
@@ -400,23 +542,31 @@
       "reviewStatus": "reviewed",
       "reviewGate": "blocked-by-core-metric-audit",
       "reviewDocRef": "docs/04_レビュー/2026-07-11-theme-local-economy.md",
-      "latestDataYear": null,
+      "latestDataYear": "2024",
       "primaryMetricCount": 1,
       "secondaryMetricCount": 5,
       "contextMetricCount": 0,
       "selectionMissingCount": 6,
       "chartCount": 7,
       "officialSourceReviewedAt": "2026-07-11",
-      "gscSnapshotRef": null,
-      "ga4SnapshotRef": null,
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
       "metrics": {
         "gsc": {
           "status": "insufficient-data",
-          "windowDays": 0
+          "windowDays": 56,
+          "weeks": [
+            "2026-W24",
+            "2026-W28"
+          ]
         },
         "ga4": {
           "status": "insufficient-data",
-          "windowDays": 0
+          "windowDays": 56,
+          "weeks": [
+            "2026-W24",
+            "2026-W28"
+          ]
         },
         "internalNav": {
           "status": "not-instrumented"
@@ -425,12 +575,18 @@
       "contentCoverage": {
         "relatedArticles": null
       },
-      "dataQualityStatus": "unknown",
+      "dataQualityStatus": "ok",
       "currentHypothesis": null,
       "nextReviewAt": "2026-10-01",
       "evidenceRefs": [
         "docs/04_レビュー/2026-07-11-theme-local-economy.md"
-      ]
+      ],
+      "dataQuality": {
+        "keysChecked": 6,
+        "missingKeys": 0,
+        "missingKeyList": [],
+        "latestYearPrefCoverageMin": 47
+      }
     },
     {
       "themeKey": "local-finance",
@@ -439,23 +595,35 @@
       "reviewStatus": "reviewed",
       "reviewGate": "ready-after-scope-composition-and-threshold-audit",
       "reviewDocRef": "docs/04_レビュー/2026-07-13-theme-local-finance.md",
-      "latestDataYear": null,
+      "latestDataYear": "2025",
       "primaryMetricCount": 1,
       "secondaryMetricCount": 17,
       "contextMetricCount": 0,
       "selectionMissingCount": 18,
       "chartCount": 13,
       "officialSourceReviewedAt": "2026-07-13",
-      "gscSnapshotRef": null,
-      "ga4SnapshotRef": null,
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
       "metrics": {
         "gsc": {
           "status": "insufficient-data",
-          "windowDays": 0
+          "windowDays": 56,
+          "weeks": [
+            "2026-W24",
+            "2026-W28"
+          ]
         },
         "ga4": {
-          "status": "insufficient-data",
-          "windowDays": 0
+          "status": "measured",
+          "windowDays": 56,
+          "weeks": [
+            "2026-W24",
+            "2026-W28"
+          ],
+          "pageViews": 213,
+          "activeUsersLast28d": 103,
+          "engagementRatePvWeighted": 0.2525,
+          "avgSessionDurationSecPvWeighted": 48.2
         },
         "internalNav": {
           "status": "not-instrumented"
@@ -464,12 +632,18 @@
       "contentCoverage": {
         "relatedArticles": null
       },
-      "dataQualityStatus": "unknown",
+      "dataQualityStatus": "ok",
       "currentHypothesis": null,
       "nextReviewAt": "2026-10-01",
       "evidenceRefs": [
         "docs/04_レビュー/2026-07-13-theme-local-finance.md"
-      ]
+      ],
+      "dataQuality": {
+        "keysChecked": 18,
+        "missingKeys": 0,
+        "missingKeyList": [],
+        "latestYearPrefCoverageMin": 47
+      }
     },
     {
       "themeKey": "local-finance-city",
@@ -478,23 +652,31 @@
       "reviewStatus": "reviewed",
       "reviewGate": "blocked-until-fiscal-entity-scope-and-latest-year-audit",
       "reviewDocRef": "docs/04_レビュー/2026-07-13-theme-local-finance-city.md",
-      "latestDataYear": null,
+      "latestDataYear": "2023",
       "primaryMetricCount": 1,
       "secondaryMetricCount": 5,
       "contextMetricCount": 0,
       "selectionMissingCount": null,
       "chartCount": null,
       "officialSourceReviewedAt": "2026-07-13",
-      "gscSnapshotRef": null,
-      "ga4SnapshotRef": null,
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
       "metrics": {
         "gsc": {
           "status": "insufficient-data",
-          "windowDays": 0
+          "windowDays": 56,
+          "weeks": [
+            "2026-W24",
+            "2026-W28"
+          ]
         },
         "ga4": {
           "status": "insufficient-data",
-          "windowDays": 0
+          "windowDays": 56,
+          "weeks": [
+            "2026-W24",
+            "2026-W28"
+          ]
         },
         "internalNav": {
           "status": "not-instrumented"
@@ -503,12 +685,18 @@
       "contentCoverage": {
         "relatedArticles": null
       },
-      "dataQualityStatus": "unknown",
+      "dataQualityStatus": "ok",
       "currentHypothesis": null,
       "nextReviewAt": "2026-10-01",
       "evidenceRefs": [
         "docs/04_レビュー/2026-07-13-theme-local-finance-city.md"
-      ]
+      ],
+      "dataQuality": {
+        "keysChecked": 6,
+        "missingKeys": 0,
+        "missingKeyList": [],
+        "latestYearPrefCoverageMin": null
+      }
     },
     {
       "themeKey": "manufacturing",
@@ -517,23 +705,31 @@
       "reviewStatus": "reviewed",
       "reviewGate": "ready-after-series-and-definition-audit",
       "reviewDocRef": "docs/04_レビュー/2026-07-12-theme-manufacturing.md",
-      "latestDataYear": null,
+      "latestDataYear": "2024",
       "primaryMetricCount": 1,
       "secondaryMetricCount": 5,
       "contextMetricCount": 6,
       "selectionMissingCount": 6,
       "chartCount": 3,
       "officialSourceReviewedAt": "2026-07-12",
-      "gscSnapshotRef": null,
-      "ga4SnapshotRef": null,
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
       "metrics": {
         "gsc": {
           "status": "insufficient-data",
-          "windowDays": 0
+          "windowDays": 56,
+          "weeks": [
+            "2026-W24",
+            "2026-W28"
+          ]
         },
         "ga4": {
           "status": "insufficient-data",
-          "windowDays": 0
+          "windowDays": 56,
+          "weeks": [
+            "2026-W24",
+            "2026-W28"
+          ]
         },
         "internalNav": {
           "status": "not-instrumented"
@@ -542,12 +738,23 @@
       "contentCoverage": {
         "relatedArticles": null
       },
-      "dataQualityStatus": "unknown",
+      "dataQualityStatus": "gaps",
       "currentHypothesis": null,
       "nextReviewAt": "2026-10-01",
       "evidenceRefs": [
         "docs/04_レビュー/2026-07-12-theme-manufacturing.md"
-      ]
+      ],
+      "dataQuality": {
+        "keysChecked": 12,
+        "missingKeys": 4,
+        "missingKeyList": [
+          "manufacturing-sales-private",
+          "manufacturing-net-value-added-private",
+          "industrial-land-price",
+          "industrial-land-price-change-rate"
+        ],
+        "latestYearPrefCoverageMin": 47
+      }
     },
     {
       "themeKey": "occupation-salary",
@@ -556,23 +763,31 @@
       "reviewStatus": "reviewed",
       "reviewGate": "blocked-by-series-audit",
       "reviewDocRef": "docs/04_レビュー/2026-07-11-theme-occupation-salary.md",
-      "latestDataYear": null,
+      "latestDataYear": "2023",
       "primaryMetricCount": 1,
       "secondaryMetricCount": 10,
       "contextMetricCount": 28,
       "selectionMissingCount": 11,
       "chartCount": 5,
       "officialSourceReviewedAt": "2026-07-11",
-      "gscSnapshotRef": null,
-      "ga4SnapshotRef": null,
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
       "metrics": {
         "gsc": {
           "status": "insufficient-data",
-          "windowDays": 0
+          "windowDays": 56,
+          "weeks": [
+            "2026-W24",
+            "2026-W28"
+          ]
         },
         "ga4": {
           "status": "insufficient-data",
-          "windowDays": 0
+          "windowDays": 56,
+          "weeks": [
+            "2026-W24",
+            "2026-W28"
+          ]
         },
         "internalNav": {
           "status": "not-instrumented"
@@ -581,12 +796,18 @@
       "contentCoverage": {
         "relatedArticles": null
       },
-      "dataQualityStatus": "unknown",
+      "dataQualityStatus": "ok",
       "currentHypothesis": null,
       "nextReviewAt": "2026-10-01",
       "evidenceRefs": [
         "docs/04_レビュー/2026-07-11-theme-occupation-salary.md"
-      ]
+      ],
+      "dataQuality": {
+        "keysChecked": 39,
+        "missingKeys": 0,
+        "missingKeyList": [],
+        "latestYearPrefCoverageMin": 16
+      }
     },
     {
       "themeKey": "population-dynamics",
@@ -595,23 +816,35 @@
       "reviewStatus": "reviewed",
       "reviewGate": "proposal-ready",
       "reviewDocRef": "docs/04_レビュー/2026-07-11-theme-population-dynamics.md",
-      "latestDataYear": null,
+      "latestDataYear": "2024",
       "primaryMetricCount": 1,
       "secondaryMetricCount": 9,
       "contextMetricCount": 1,
       "selectionMissingCount": 10,
       "chartCount": 10,
       "officialSourceReviewedAt": "2026-07-11",
-      "gscSnapshotRef": null,
-      "ga4SnapshotRef": null,
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
       "metrics": {
         "gsc": {
           "status": "insufficient-data",
-          "windowDays": 0
+          "windowDays": 56,
+          "weeks": [
+            "2026-W24",
+            "2026-W28"
+          ]
         },
         "ga4": {
-          "status": "insufficient-data",
-          "windowDays": 0
+          "status": "measured",
+          "windowDays": 56,
+          "weeks": [
+            "2026-W24",
+            "2026-W28"
+          ],
+          "pageViews": 206,
+          "activeUsersLast28d": 26,
+          "engagementRatePvWeighted": 0.5782,
+          "avgSessionDurationSecPvWeighted": 83.5
         },
         "internalNav": {
           "status": "not-instrumented"
@@ -620,12 +853,18 @@
       "contentCoverage": {
         "relatedArticles": null
       },
-      "dataQualityStatus": "unknown",
+      "dataQualityStatus": "ok",
       "currentHypothesis": null,
       "nextReviewAt": "2026-10-01",
       "evidenceRefs": [
         "docs/04_レビュー/2026-07-11-theme-population-dynamics.md"
-      ]
+      ],
+      "dataQuality": {
+        "keysChecked": 11,
+        "missingKeys": 0,
+        "missingKeyList": [],
+        "latestYearPrefCoverageMin": 47
+      }
     },
     {
       "themeKey": "ports",
@@ -634,23 +873,31 @@
       "reviewStatus": "reviewed",
       "reviewGate": "ready-after-table-dimension-scope-and-unit-audit",
       "reviewDocRef": "docs/04_レビュー/2026-07-13-theme-ports.md",
-      "latestDataYear": null,
+      "latestDataYear": "2023",
       "primaryMetricCount": 3,
       "secondaryMetricCount": 5,
       "contextMetricCount": 1,
       "selectionMissingCount": 8,
       "chartCount": 3,
       "officialSourceReviewedAt": "2026-07-13",
-      "gscSnapshotRef": null,
-      "ga4SnapshotRef": null,
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
       "metrics": {
         "gsc": {
           "status": "insufficient-data",
-          "windowDays": 0
+          "windowDays": 56,
+          "weeks": [
+            "2026-W24",
+            "2026-W28"
+          ]
         },
         "ga4": {
           "status": "insufficient-data",
-          "windowDays": 0
+          "windowDays": 56,
+          "weeks": [
+            "2026-W24",
+            "2026-W28"
+          ]
         },
         "internalNav": {
           "status": "not-instrumented"
@@ -659,12 +906,18 @@
       "contentCoverage": {
         "relatedArticles": null
       },
-      "dataQualityStatus": "unknown",
+      "dataQualityStatus": "ok",
       "currentHypothesis": null,
       "nextReviewAt": "2026-10-01",
       "evidenceRefs": [
         "docs/04_レビュー/2026-07-13-theme-ports.md"
-      ]
+      ],
+      "dataQuality": {
+        "keysChecked": 9,
+        "missingKeys": 0,
+        "missingKeyList": [],
+        "latestYearPrefCoverageMin": 26
+      }
     },
     {
       "themeKey": "railway",
@@ -673,23 +926,31 @@
       "reviewStatus": "reviewed",
       "reviewGate": "ready-after-geography-coverage-and-series-audit",
       "reviewDocRef": "docs/04_レビュー/2026-07-13-theme-railway.md",
-      "latestDataYear": null,
+      "latestDataYear": "2024",
       "primaryMetricCount": 2,
       "secondaryMetricCount": 2,
       "contextMetricCount": 1,
       "selectionMissingCount": 4,
       "chartCount": 2,
       "officialSourceReviewedAt": "2026-07-13",
-      "gscSnapshotRef": null,
-      "ga4SnapshotRef": null,
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
       "metrics": {
         "gsc": {
           "status": "insufficient-data",
-          "windowDays": 0
+          "windowDays": 56,
+          "weeks": [
+            "2026-W24",
+            "2026-W28"
+          ]
         },
         "ga4": {
           "status": "insufficient-data",
-          "windowDays": 0
+          "windowDays": 56,
+          "weeks": [
+            "2026-W24",
+            "2026-W28"
+          ]
         },
         "internalNav": {
           "status": "not-instrumented"
@@ -698,12 +959,18 @@
       "contentCoverage": {
         "relatedArticles": null
       },
-      "dataQualityStatus": "unknown",
+      "dataQualityStatus": "ok",
       "currentHypothesis": null,
       "nextReviewAt": "2026-10-01",
       "evidenceRefs": [
         "docs/04_レビュー/2026-07-13-theme-railway.md"
-      ]
+      ],
+      "dataQuality": {
+        "keysChecked": 5,
+        "missingKeys": 0,
+        "missingKeyList": [],
+        "latestYearPrefCoverageMin": 47
+      }
     },
     {
       "themeKey": "real-income",
@@ -712,23 +979,31 @@
       "reviewStatus": "reviewed",
       "reviewGate": "blocked-by-derived-metric-audit",
       "reviewDocRef": "docs/04_レビュー/2026-07-11-theme-real-income.md",
-      "latestDataYear": null,
+      "latestDataYear": "2024",
       "primaryMetricCount": 2,
       "secondaryMetricCount": 3,
       "contextMetricCount": 6,
       "selectionMissingCount": 5,
       "chartCount": 4,
       "officialSourceReviewedAt": "2026-07-11",
-      "gscSnapshotRef": null,
-      "ga4SnapshotRef": null,
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
       "metrics": {
         "gsc": {
           "status": "insufficient-data",
-          "windowDays": 0
+          "windowDays": 56,
+          "weeks": [
+            "2026-W24",
+            "2026-W28"
+          ]
         },
         "ga4": {
           "status": "insufficient-data",
-          "windowDays": 0
+          "windowDays": 56,
+          "weeks": [
+            "2026-W24",
+            "2026-W28"
+          ]
         },
         "internalNav": {
           "status": "not-instrumented"
@@ -737,12 +1012,18 @@
       "contentCoverage": {
         "relatedArticles": null
       },
-      "dataQualityStatus": "unknown",
+      "dataQualityStatus": "ok",
       "currentHypothesis": null,
       "nextReviewAt": "2026-10-01",
       "evidenceRefs": [
         "docs/04_レビュー/2026-07-11-theme-real-income.md"
-      ]
+      ],
+      "dataQuality": {
+        "keysChecked": 11,
+        "missingKeys": 0,
+        "missingKeyList": [],
+        "latestYearPrefCoverageMin": 47
+      }
     },
     {
       "themeKey": "roads",
@@ -751,23 +1032,31 @@
       "reviewStatus": "reviewed",
       "reviewGate": "ready-after-definition-additivity-and-survey-year-audit",
       "reviewDocRef": "docs/04_レビュー/2026-07-13-theme-roads.md",
-      "latestDataYear": null,
+      "latestDataYear": "2023",
       "primaryMetricCount": 2,
       "secondaryMetricCount": 6,
       "contextMetricCount": 2,
       "selectionMissingCount": 8,
       "chartCount": 3,
       "officialSourceReviewedAt": "2026-07-13",
-      "gscSnapshotRef": null,
-      "ga4SnapshotRef": null,
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
       "metrics": {
         "gsc": {
           "status": "insufficient-data",
-          "windowDays": 0
+          "windowDays": 56,
+          "weeks": [
+            "2026-W24",
+            "2026-W28"
+          ]
         },
         "ga4": {
           "status": "insufficient-data",
-          "windowDays": 0
+          "windowDays": 56,
+          "weeks": [
+            "2026-W24",
+            "2026-W28"
+          ]
         },
         "internalNav": {
           "status": "not-instrumented"
@@ -776,12 +1065,18 @@
       "contentCoverage": {
         "relatedArticles": null
       },
-      "dataQualityStatus": "unknown",
+      "dataQualityStatus": "ok",
       "currentHypothesis": null,
       "nextReviewAt": "2026-10-01",
       "evidenceRefs": [
         "docs/04_レビュー/2026-07-13-theme-roads.md"
-      ]
+      ],
+      "dataQuality": {
+        "keysChecked": 10,
+        "missingKeys": 0,
+        "missingKeyList": [],
+        "latestYearPrefCoverageMin": 47
+      }
     },
     {
       "themeKey": "safety",
@@ -790,23 +1085,31 @@
       "reviewStatus": "reviewed",
       "reviewGate": "ready-after-denominator-and-provenance-audit",
       "reviewDocRef": "docs/04_レビュー/2026-07-12-theme-safety.md",
-      "latestDataYear": null,
+      "latestDataYear": "2024",
       "primaryMetricCount": 3,
       "secondaryMetricCount": 11,
       "contextMetricCount": 11,
       "selectionMissingCount": 14,
       "chartCount": 6,
       "officialSourceReviewedAt": "2026-07-12",
-      "gscSnapshotRef": null,
-      "ga4SnapshotRef": null,
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
       "metrics": {
         "gsc": {
           "status": "insufficient-data",
-          "windowDays": 0
+          "windowDays": 56,
+          "weeks": [
+            "2026-W24",
+            "2026-W28"
+          ]
         },
         "ga4": {
           "status": "insufficient-data",
-          "windowDays": 0
+          "windowDays": 56,
+          "weeks": [
+            "2026-W24",
+            "2026-W28"
+          ]
         },
         "internalNav": {
           "status": "not-instrumented"
@@ -815,13 +1118,19 @@
       "contentCoverage": {
         "relatedArticles": null
       },
-      "dataQualityStatus": "unknown",
+      "dataQualityStatus": "ok",
       "currentHypothesis": "治安/交通/火災の主問が複数同居。crime-safety/traffic-safety/fire-emergency への分割 + parent-hub 化 (doc 24)",
       "nextReviewAt": "2026-10-01",
       "evidenceRefs": [
         "docs/04_レビュー/2026-07-12-theme-safety.md",
         "docs/02_実装計画/24_テーマ分類再編成方針.md#safety-split--parent-hub候補"
-      ]
+      ],
+      "dataQuality": {
+        "keysChecked": 25,
+        "missingKeys": 0,
+        "missingKeyList": [],
+        "latestYearPrefCoverageMin": 47
+      }
     },
     {
       "themeKey": "tourism",
@@ -830,23 +1139,31 @@
       "reviewStatus": "reviewed",
       "reviewGate": "ready-after-scope-and-series-audit",
       "reviewDocRef": "docs/04_レビュー/2026-07-12-theme-tourism.md",
-      "latestDataYear": null,
+      "latestDataYear": "2024",
       "primaryMetricCount": 1,
       "secondaryMetricCount": 4,
       "contextMetricCount": 5,
       "selectionMissingCount": 5,
       "chartCount": 4,
       "officialSourceReviewedAt": "2026-07-12",
-      "gscSnapshotRef": null,
-      "ga4SnapshotRef": null,
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv",
+      "ga4SnapshotRef": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W28/pages.csv",
       "metrics": {
         "gsc": {
           "status": "insufficient-data",
-          "windowDays": 0
+          "windowDays": 56,
+          "weeks": [
+            "2026-W24",
+            "2026-W28"
+          ]
         },
         "ga4": {
           "status": "insufficient-data",
-          "windowDays": 0
+          "windowDays": 56,
+          "weeks": [
+            "2026-W24",
+            "2026-W28"
+          ]
         },
         "internalNav": {
           "status": "not-instrumented"
@@ -855,12 +1172,18 @@
       "contentCoverage": {
         "relatedArticles": null
       },
-      "dataQualityStatus": "unknown",
+      "dataQualityStatus": "ok",
       "currentHypothesis": null,
       "nextReviewAt": "2026-10-01",
       "evidenceRefs": [
         "docs/04_レビュー/2026-07-12-theme-tourism.md"
-      ]
+      ],
+      "dataQuality": {
+        "keysChecked": 10,
+        "missingKeys": 0,
+        "missingKeyList": [],
+        "latestYearPrefCoverageMin": 47
+      }
     }
   ]
 }
