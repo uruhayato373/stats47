@@ -61,7 +61,8 @@
       "currentHypothesis": null,
       "evidenceRefs": [],
       "lastReviewedAt": null,
-      "nextReviewAt": "2026-10-01"
+      "nextReviewAt": "2026-10-01",
+      "liveItemCount": 3
     },
     {
       "surveyId": "administrative-investment-report",
@@ -107,7 +108,8 @@
       "currentHypothesis": null,
       "evidenceRefs": [],
       "lastReviewedAt": null,
-      "nextReviewAt": "2026-10-01"
+      "nextReviewAt": "2026-10-01",
+      "liveItemCount": 13
     },
     {
       "surveyId": "agriculture-forestry-census",
@@ -117,7 +119,7 @@
       "linkageStatus": "ok",
       "editorialStatus": "fallback",
       "itemCount": 12,
-      "activeItemCount": 9,
+      "activeItemCount": 11,
       "latestDataYear": null,
       "unresolvedItemCount": null,
       "orphanStatus": false,
@@ -153,7 +155,8 @@
       "currentHypothesis": null,
       "evidenceRefs": [],
       "lastReviewedAt": null,
-      "nextReviewAt": "2026-10-01"
+      "nextReviewAt": "2026-10-01",
+      "liveItemCount": 9
     },
     {
       "surveyId": "agriculture-management-survey",
@@ -199,7 +202,8 @@
       "currentHypothesis": null,
       "evidenceRefs": [],
       "lastReviewedAt": null,
-      "nextReviewAt": "2026-10-01"
+      "nextReviewAt": "2026-10-01",
+      "liveItemCount": 5
     },
     {
       "surveyId": "area-survey",
@@ -209,7 +213,7 @@
       "linkageStatus": "ok",
       "editorialStatus": "fallback",
       "itemCount": 30,
-      "activeItemCount": 32,
+      "activeItemCount": 30,
       "latestDataYear": null,
       "unresolvedItemCount": null,
       "orphanStatus": false,
@@ -245,7 +249,8 @@
       "currentHypothesis": null,
       "evidenceRefs": [],
       "lastReviewedAt": null,
-      "nextReviewAt": "2026-10-01"
+      "nextReviewAt": "2026-10-01",
+      "liveItemCount": 32
     },
     {
       "surveyId": "boj-statistics",
@@ -291,7 +296,8 @@
       "currentHypothesis": null,
       "evidenceRefs": [],
       "lastReviewedAt": null,
-      "nextReviewAt": "2026-10-01"
+      "nextReviewAt": "2026-10-01",
+      "liveItemCount": 5
     },
     {
       "surveyId": "care-service-facility-survey",
@@ -337,7 +343,8 @@
       "currentHypothesis": null,
       "evidenceRefs": [],
       "lastReviewedAt": null,
-      "nextReviewAt": "2026-10-01"
+      "nextReviewAt": "2026-10-01",
+      "liveItemCount": 7
     },
     {
       "surveyId": "census",
@@ -347,7 +354,7 @@
       "linkageStatus": "ok",
       "editorialStatus": "measuring",
       "itemCount": 312,
-      "activeItemCount": 300,
+      "activeItemCount": 297,
       "latestDataYear": null,
       "unresolvedItemCount": null,
       "orphanStatus": false,
@@ -385,7 +392,8 @@
         ".claude/skills/survey/manage-survey-portfolio/reference/reviews/2026-07-11-survey-census.md"
       ],
       "lastReviewedAt": "2026-07-11",
-      "nextReviewAt": "2026-08-09"
+      "nextReviewAt": "2026-08-09",
+      "liveItemCount": 300
     },
     {
       "surveyId": "city-planning-survey",
@@ -431,7 +439,8 @@
       "currentHypothesis": null,
       "evidenceRefs": [],
       "lastReviewedAt": null,
-      "nextReviewAt": "2026-10-01"
+      "nextReviewAt": "2026-10-01",
+      "liveItemCount": 8
     },
     {
       "surveyId": "commercial-dynamics-survey",
@@ -477,7 +486,8 @@
       "currentHypothesis": null,
       "evidenceRefs": [],
       "lastReviewedAt": null,
-      "nextReviewAt": "2026-10-01"
+      "nextReviewAt": "2026-10-01",
+      "liveItemCount": 4
     },
     {
       "surveyId": "commercial-statistics",
@@ -487,7 +497,7 @@
       "linkageStatus": "ok",
       "editorialStatus": "fallback",
       "itemCount": 4,
-      "activeItemCount": 3,
+      "activeItemCount": 4,
       "latestDataYear": null,
       "unresolvedItemCount": null,
       "orphanStatus": false,
@@ -523,7 +533,8 @@
       "currentHypothesis": null,
       "evidenceRefs": [],
       "lastReviewedAt": null,
-      "nextReviewAt": "2026-10-01"
+      "nextReviewAt": "2026-10-01",
+      "liveItemCount": 3
     },
     {
       "surveyId": "comprehensive-living-conditions-survey",
@@ -569,7 +580,8 @@
       "currentHypothesis": null,
       "evidenceRefs": [],
       "lastReviewedAt": null,
-      "nextReviewAt": "2026-10-01"
+      "nextReviewAt": "2026-10-01",
+      "liveItemCount": 4
     },
     {
       "surveyId": "construction-orders-statistics",
@@ -615,7 +627,8 @@
       "currentHypothesis": null,
       "evidenceRefs": [],
       "lastReviewedAt": null,
-      "nextReviewAt": "2026-10-01"
+      "nextReviewAt": "2026-10-01",
+      "liveItemCount": 8
     },
     {
       "surveyId": "construction-work-statistics",
@@ -661,7 +674,8 @@
       "currentHypothesis": null,
       "evidenceRefs": [],
       "lastReviewedAt": null,
-      "nextReviewAt": "2026-10-01"
+      "nextReviewAt": "2026-10-01",
+      "liveItemCount": 4
     },
     {
       "surveyId": "cpi-annual",
@@ -707,7 +721,8 @@
       "currentHypothesis": null,
       "evidenceRefs": [],
       "lastReviewedAt": null,
-      "nextReviewAt": "2026-10-01"
+      "nextReviewAt": "2026-10-01",
+      "liveItemCount": 15
     },
     {
       "surveyId": "crop-statistics",
@@ -753,7 +768,8 @@
       "currentHypothesis": null,
       "evidenceRefs": [],
       "lastReviewedAt": null,
-      "nextReviewAt": "2026-10-01"
+      "nextReviewAt": "2026-10-01",
+      "liveItemCount": 3
     },
     {
       "surveyId": "economic-census-activity",
@@ -763,7 +779,7 @@
       "linkageStatus": "ok",
       "editorialStatus": "fallback",
       "itemCount": 39,
-      "activeItemCount": 35,
+      "activeItemCount": 34,
       "latestDataYear": null,
       "unresolvedItemCount": null,
       "orphanStatus": false,
@@ -799,7 +815,8 @@
       "currentHypothesis": null,
       "evidenceRefs": [],
       "lastReviewedAt": null,
-      "nextReviewAt": "2026-10-01"
+      "nextReviewAt": "2026-10-01",
+      "liveItemCount": 35
     },
     {
       "surveyId": "economic-census-basic",
@@ -809,7 +826,7 @@
       "linkageStatus": "ok",
       "editorialStatus": "fallback",
       "itemCount": 19,
-      "activeItemCount": 18,
+      "activeItemCount": 19,
       "latestDataYear": null,
       "unresolvedItemCount": null,
       "orphanStatus": false,
@@ -845,7 +862,8 @@
       "currentHypothesis": null,
       "evidenceRefs": [],
       "lastReviewedAt": null,
-      "nextReviewAt": "2026-10-01"
+      "nextReviewAt": "2026-10-01",
+      "liveItemCount": 18
     },
     {
       "surveyId": "employment-structure-survey",
@@ -891,7 +909,8 @@
       "currentHypothesis": null,
       "evidenceRefs": [],
       "lastReviewedAt": null,
-      "nextReviewAt": "2026-10-01"
+      "nextReviewAt": "2026-10-01",
+      "liveItemCount": 10
     },
     {
       "surveyId": "establishment-enterprise-census",
@@ -901,7 +920,7 @@
       "linkageStatus": "ok",
       "editorialStatus": "fallback",
       "itemCount": 11,
-      "activeItemCount": 12,
+      "activeItemCount": 11,
       "latestDataYear": null,
       "unresolvedItemCount": null,
       "orphanStatus": false,
@@ -937,7 +956,8 @@
       "currentHypothesis": null,
       "evidenceRefs": [],
       "lastReviewedAt": null,
-      "nextReviewAt": "2026-10-01"
+      "nextReviewAt": "2026-10-01",
+      "liveItemCount": 12
     },
     {
       "surveyId": "factory-location-survey",
@@ -983,7 +1003,8 @@
       "currentHypothesis": null,
       "evidenceRefs": [],
       "lastReviewedAt": null,
-      "nextReviewAt": "2026-10-01"
+      "nextReviewAt": "2026-10-01",
+      "liveItemCount": 1
     },
     {
       "surveyId": "fire-annual-report",
@@ -1029,7 +1050,8 @@
       "currentHypothesis": null,
       "evidenceRefs": [],
       "lastReviewedAt": null,
-      "nextReviewAt": "2026-10-01"
+      "nextReviewAt": "2026-10-01",
+      "liveItemCount": 8
     },
     {
       "surveyId": "fishery-aquaculture-production",
@@ -1075,7 +1097,8 @@
       "currentHypothesis": null,
       "evidenceRefs": [],
       "lastReviewedAt": null,
-      "nextReviewAt": "2026-10-01"
+      "nextReviewAt": "2026-10-01",
+      "liveItemCount": 21
     },
     {
       "surveyId": "flood-statistics",
@@ -1121,7 +1144,8 @@
       "currentHypothesis": null,
       "evidenceRefs": [],
       "lastReviewedAt": null,
-      "nextReviewAt": "2026-10-01"
+      "nextReviewAt": "2026-10-01",
+      "liveItemCount": 9
     },
     {
       "surveyId": "foreign-residents-statistics",
@@ -1167,7 +1191,8 @@
       "currentHypothesis": null,
       "evidenceRefs": [],
       "lastReviewedAt": null,
-      "nextReviewAt": "2026-10-01"
+      "nextReviewAt": "2026-10-01",
+      "liveItemCount": 7
     },
     {
       "surveyId": "health-admin-report",
@@ -1213,7 +1238,8 @@
       "currentHypothesis": null,
       "evidenceRefs": [],
       "lastReviewedAt": null,
-      "nextReviewAt": "2026-10-01"
+      "nextReviewAt": "2026-10-01",
+      "liveItemCount": 35
     },
     {
       "surveyId": "hospital-report",
@@ -1259,7 +1285,8 @@
       "currentHypothesis": null,
       "evidenceRefs": [],
       "lastReviewedAt": null,
-      "nextReviewAt": "2026-10-01"
+      "nextReviewAt": "2026-10-01",
+      "liveItemCount": 2
     },
     {
       "surveyId": "household-survey",
@@ -1269,7 +1296,7 @@
       "linkageStatus": "ok",
       "editorialStatus": "fallback",
       "itemCount": 23,
-      "activeItemCount": 19,
+      "activeItemCount": 23,
       "latestDataYear": null,
       "unresolvedItemCount": null,
       "orphanStatus": false,
@@ -1305,7 +1332,8 @@
       "currentHypothesis": null,
       "evidenceRefs": [],
       "lastReviewedAt": null,
-      "nextReviewAt": "2026-10-01"
+      "nextReviewAt": "2026-10-01",
+      "liveItemCount": 19
     },
     {
       "surveyId": "housing-land-survey",
@@ -1315,7 +1343,7 @@
       "linkageStatus": "ok",
       "editorialStatus": "fallback",
       "itemCount": 32,
-      "activeItemCount": 33,
+      "activeItemCount": 32,
       "latestDataYear": null,
       "unresolvedItemCount": null,
       "orphanStatus": false,
@@ -1351,7 +1379,8 @@
       "currentHypothesis": null,
       "evidenceRefs": [],
       "lastReviewedAt": null,
-      "nextReviewAt": "2026-10-01"
+      "nextReviewAt": "2026-10-01",
+      "liveItemCount": 33
     },
     {
       "surveyId": "housing-starts-statistics",
@@ -1397,7 +1426,8 @@
       "currentHypothesis": null,
       "evidenceRefs": [],
       "lastReviewedAt": null,
-      "nextReviewAt": "2026-10-01"
+      "nextReviewAt": "2026-10-01",
+      "liveItemCount": 10
     },
     {
       "surveyId": "industrial-statistics",
@@ -1443,7 +1473,8 @@
       "currentHypothesis": null,
       "evidenceRefs": [],
       "lastReviewedAt": null,
-      "nextReviewAt": "2026-10-01"
+      "nextReviewAt": "2026-10-01",
+      "liveItemCount": 1
     },
     {
       "surveyId": "insurance-rate-org-statistics",
@@ -1453,7 +1484,7 @@
       "linkageStatus": "ok",
       "editorialStatus": "fallback",
       "itemCount": 13,
-      "activeItemCount": 5,
+      "activeItemCount": 8,
       "latestDataYear": null,
       "unresolvedItemCount": null,
       "orphanStatus": false,
@@ -1489,7 +1520,8 @@
       "currentHypothesis": null,
       "evidenceRefs": [],
       "lastReviewedAt": null,
-      "nextReviewAt": "2026-10-01"
+      "nextReviewAt": "2026-10-01",
+      "liveItemCount": 5
     },
     {
       "surveyId": "japan-post-statistics",
@@ -1535,7 +1567,8 @@
       "currentHypothesis": null,
       "evidenceRefs": [],
       "lastReviewedAt": null,
-      "nextReviewAt": "2026-10-01"
+      "nextReviewAt": "2026-10-01",
+      "liveItemCount": 3
     },
     {
       "surveyId": "job-placement-statistics",
@@ -1581,7 +1614,8 @@
       "currentHypothesis": null,
       "evidenceRefs": [],
       "lastReviewedAt": null,
-      "nextReviewAt": "2026-10-01"
+      "nextReviewAt": "2026-10-01",
+      "liveItemCount": 8
     },
     {
       "surveyId": "kakei-chousa",
@@ -1631,7 +1665,8 @@
         ".claude/skills/survey/manage-survey-portfolio/reference/audits/2026-07-11-survey-portfolio-audit.md"
       ],
       "lastReviewedAt": null,
-      "nextReviewAt": "2026-10-01"
+      "nextReviewAt": "2026-10-01",
+      "liveItemCount": 694
     },
     {
       "surveyId": "labor-market-annual",
@@ -1677,7 +1712,8 @@
       "currentHypothesis": null,
       "evidenceRefs": [],
       "lastReviewedAt": null,
-      "nextReviewAt": "2026-10-01"
+      "nextReviewAt": "2026-10-01",
+      "liveItemCount": 9
     },
     {
       "surveyId": "livestock-statistics",
@@ -1723,7 +1759,8 @@
       "currentHypothesis": null,
       "evidenceRefs": [],
       "lastReviewedAt": null,
-      "nextReviewAt": "2026-10-01"
+      "nextReviewAt": "2026-10-01",
+      "liveItemCount": 1
     },
     {
       "surveyId": "local-education-expense-survey",
@@ -1769,7 +1806,8 @@
       "currentHypothesis": null,
       "evidenceRefs": [],
       "lastReviewedAt": null,
-      "nextReviewAt": "2026-10-01"
+      "nextReviewAt": "2026-10-01",
+      "liveItemCount": 5
     },
     {
       "surveyId": "local-finance",
@@ -1779,7 +1817,7 @@
       "linkageStatus": "ok",
       "editorialStatus": "candidate",
       "itemCount": 133,
-      "activeItemCount": 129,
+      "activeItemCount": 133,
       "latestDataYear": null,
       "unresolvedItemCount": null,
       "orphanStatus": false,
@@ -1817,7 +1855,8 @@
         ".claude/skills/survey/manage-survey-portfolio/reference/audits/2026-07-11-survey-portfolio-audit.md"
       ],
       "lastReviewedAt": null,
-      "nextReviewAt": "2026-10-01"
+      "nextReviewAt": "2026-10-01",
+      "liveItemCount": 129
     },
     {
       "surveyId": "local-gov-staffing-survey",
@@ -1863,7 +1902,8 @@
       "currentHypothesis": null,
       "evidenceRefs": [],
       "lastReviewedAt": null,
-      "nextReviewAt": "2026-10-01"
+      "nextReviewAt": "2026-10-01",
+      "liveItemCount": 8
     },
     {
       "surveyId": "local-tax",
@@ -1873,7 +1913,7 @@
       "linkageStatus": "ok",
       "editorialStatus": "fallback",
       "itemCount": 7,
-      "activeItemCount": 8,
+      "activeItemCount": 7,
       "latestDataYear": null,
       "unresolvedItemCount": null,
       "orphanStatus": false,
@@ -1909,7 +1949,8 @@
       "currentHypothesis": null,
       "evidenceRefs": [],
       "lastReviewedAt": null,
-      "nextReviewAt": "2026-10-01"
+      "nextReviewAt": "2026-10-01",
+      "liveItemCount": 8
     },
     {
       "surveyId": "medical-facility-survey",
@@ -1919,7 +1960,7 @@
       "linkageStatus": "ok",
       "editorialStatus": "fallback",
       "itemCount": 40,
-      "activeItemCount": 41,
+      "activeItemCount": 40,
       "latestDataYear": null,
       "unresolvedItemCount": null,
       "orphanStatus": false,
@@ -1955,7 +1996,8 @@
       "currentHypothesis": null,
       "evidenceRefs": [],
       "lastReviewedAt": null,
-      "nextReviewAt": "2026-10-01"
+      "nextReviewAt": "2026-10-01",
+      "liveItemCount": 41
     },
     {
       "surveyId": "minimum-wage",
@@ -2001,7 +2043,8 @@
       "currentHypothesis": null,
       "evidenceRefs": [],
       "lastReviewedAt": null,
-      "nextReviewAt": "2026-10-01"
+      "nextReviewAt": "2026-10-01",
+      "liveItemCount": 1
     },
     {
       "surveyId": "municipal-settlement-survey",
@@ -2011,7 +2054,7 @@
       "linkageStatus": "ok",
       "editorialStatus": "fallback",
       "itemCount": 29,
-      "activeItemCount": 22,
+      "activeItemCount": 29,
       "latestDataYear": null,
       "unresolvedItemCount": null,
       "orphanStatus": false,
@@ -2047,7 +2090,8 @@
       "currentHypothesis": null,
       "evidenceRefs": [],
       "lastReviewedAt": null,
-      "nextReviewAt": "2026-10-01"
+      "nextReviewAt": "2026-10-01",
+      "liveItemCount": 22
     },
     {
       "surveyId": "national-household-survey",
@@ -2093,7 +2137,8 @@
       "currentHypothesis": null,
       "evidenceRefs": [],
       "lastReviewedAt": null,
-      "nextReviewAt": "2026-10-01"
+      "nextReviewAt": "2026-10-01",
+      "liveItemCount": 21
     },
     {
       "surveyId": "natural-park-area",
@@ -2141,7 +2186,8 @@
       "currentHypothesis": null,
       "evidenceRefs": [],
       "lastReviewedAt": null,
-      "nextReviewAt": "2026-10-01"
+      "nextReviewAt": "2026-10-01",
+      "liveItemCount": 6
     },
     {
       "surveyId": "passenger-regional-flow-survey",
@@ -2187,7 +2233,8 @@
       "currentHypothesis": null,
       "evidenceRefs": [],
       "lastReviewedAt": null,
-      "nextReviewAt": "2026-10-01"
+      "nextReviewAt": "2026-10-01",
+      "liveItemCount": 4
     },
     {
       "surveyId": "patient-survey",
@@ -2233,7 +2280,8 @@
       "currentHypothesis": null,
       "evidenceRefs": [],
       "lastReviewedAt": null,
-      "nextReviewAt": "2026-10-01"
+      "nextReviewAt": "2026-10-01",
+      "liveItemCount": 3
     },
     {
       "surveyId": "physician-survey",
@@ -2279,7 +2327,8 @@
       "currentHypothesis": null,
       "evidenceRefs": [],
       "lastReviewedAt": null,
-      "nextReviewAt": "2026-10-01"
+      "nextReviewAt": "2026-10-01",
+      "liveItemCount": 5
     },
     {
       "surveyId": "police-statistics",
@@ -2289,7 +2338,7 @@
       "linkageStatus": "ok",
       "editorialStatus": "fallback",
       "itemCount": 21,
-      "activeItemCount": 22,
+      "activeItemCount": 21,
       "latestDataYear": null,
       "unresolvedItemCount": null,
       "orphanStatus": false,
@@ -2325,7 +2374,8 @@
       "currentHypothesis": null,
       "evidenceRefs": [],
       "lastReviewedAt": null,
-      "nextReviewAt": "2026-10-01"
+      "nextReviewAt": "2026-10-01",
+      "liveItemCount": 22
     },
     {
       "surveyId": "population-estimates",
@@ -2335,7 +2385,7 @@
       "linkageStatus": "ok",
       "editorialStatus": "fallback",
       "itemCount": 219,
-      "activeItemCount": 216,
+      "activeItemCount": 210,
       "latestDataYear": null,
       "unresolvedItemCount": null,
       "orphanStatus": false,
@@ -2371,17 +2421,18 @@
       "currentHypothesis": null,
       "evidenceRefs": [],
       "lastReviewedAt": null,
-      "nextReviewAt": "2026-10-01"
+      "nextReviewAt": "2026-10-01",
+      "liveItemCount": 216
     },
     {
       "surveyId": "population-projection",
       "name": "日本の将来推計人口",
       "organization": "国立社会保障・人口問題研究所",
-      "lifecycleStatus": "linkage-fix-required",
-      "linkageStatus": "r2-drift",
+      "lifecycleStatus": "observe",
+      "linkageStatus": "inactive-only",
       "editorialStatus": "fallback",
       "itemCount": 7,
-      "activeItemCount": null,
+      "activeItemCount": 0,
       "latestDataYear": null,
       "unresolvedItemCount": null,
       "orphanStatus": false,
@@ -2414,12 +2465,13 @@
           "status": "not-instrumented"
         }
       },
-      "currentHypothesis": "R2 master snapshot が stale (surveys.json 追加後に export-master-snapshots 未実行)。sync-snapshots (ranking-items→master) で解消",
+      "currentHypothesis": "7指標 (projected-population-2020..2050) すべて isActive:false = 未公開在庫。R2 不在は正常 (inactive-only)。公開判断は ranking-expander の需要ファーストキュー",
       "evidenceRefs": [
         ".claude/skills/survey/manage-survey-portfolio/reference/audits/2026-07-13-survey-portfolio-audit.md"
       ],
       "lastReviewedAt": null,
-      "nextReviewAt": "2026-10-01"
+      "nextReviewAt": "2026-10-01",
+      "liveItemCount": null
     },
     {
       "surveyId": "prefectural-accounts",
@@ -2429,7 +2481,7 @@
       "linkageStatus": "ok",
       "editorialStatus": "fallback",
       "itemCount": 60,
-      "activeItemCount": 11,
+      "activeItemCount": 16,
       "latestDataYear": null,
       "unresolvedItemCount": null,
       "orphanStatus": false,
@@ -2465,7 +2517,8 @@
       "currentHypothesis": null,
       "evidenceRefs": [],
       "lastReviewedAt": null,
-      "nextReviewAt": "2026-10-01"
+      "nextReviewAt": "2026-10-01",
+      "liveItemCount": 11
     },
     {
       "surveyId": "prefectural-land-price-survey",
@@ -2475,7 +2528,7 @@
       "linkageStatus": "ok",
       "editorialStatus": "fallback",
       "itemCount": 5,
-      "activeItemCount": 6,
+      "activeItemCount": 5,
       "latestDataYear": null,
       "unresolvedItemCount": null,
       "orphanStatus": false,
@@ -2511,7 +2564,8 @@
       "currentHypothesis": null,
       "evidenceRefs": [],
       "lastReviewedAt": null,
-      "nextReviewAt": "2026-10-01"
+      "nextReviewAt": "2026-10-01",
+      "liveItemCount": 6
     },
     {
       "surveyId": "prefectural-settlement-survey",
@@ -2557,7 +2611,8 @@
       "currentHypothesis": null,
       "evidenceRefs": [],
       "lastReviewedAt": null,
-      "nextReviewAt": "2026-10-01"
+      "nextReviewAt": "2026-10-01",
+      "liveItemCount": 122
     },
     {
       "surveyId": "public-assistance-survey",
@@ -2603,7 +2658,8 @@
       "currentHypothesis": null,
       "evidenceRefs": [],
       "lastReviewedAt": null,
-      "nextReviewAt": "2026-10-01"
+      "nextReviewAt": "2026-10-01",
+      "liveItemCount": 15
     },
     {
       "surveyId": "retail-price-survey",
@@ -2649,7 +2705,8 @@
       "currentHypothesis": null,
       "evidenceRefs": [],
       "lastReviewedAt": null,
-      "nextReviewAt": "2026-10-01"
+      "nextReviewAt": "2026-10-01",
+      "liveItemCount": 12
     },
     {
       "surveyId": "road-statistics",
@@ -2695,7 +2752,8 @@
       "currentHypothesis": null,
       "evidenceRefs": [],
       "lastReviewedAt": null,
-      "nextReviewAt": "2026-10-01"
+      "nextReviewAt": "2026-10-01",
+      "liveItemCount": 17
     },
     {
       "surveyId": "school-basic-survey",
@@ -2705,7 +2763,7 @@
       "linkageStatus": "ok",
       "editorialStatus": "fallback",
       "itemCount": 74,
-      "activeItemCount": 68,
+      "activeItemCount": 74,
       "latestDataYear": null,
       "unresolvedItemCount": null,
       "orphanStatus": false,
@@ -2741,7 +2799,8 @@
       "currentHypothesis": null,
       "evidenceRefs": [],
       "lastReviewedAt": null,
-      "nextReviewAt": "2026-10-01"
+      "nextReviewAt": "2026-10-01",
+      "liveItemCount": 68
     },
     {
       "surveyId": "school-health-survey",
@@ -2787,7 +2846,8 @@
       "currentHypothesis": null,
       "evidenceRefs": [],
       "lastReviewedAt": null,
-      "nextReviewAt": "2026-10-01"
+      "nextReviewAt": "2026-10-01",
+      "liveItemCount": 12
     },
     {
       "surveyId": "sewerage-statistics",
@@ -2833,7 +2893,8 @@
       "currentHypothesis": null,
       "evidenceRefs": [],
       "lastReviewedAt": null,
-      "nextReviewAt": "2026-10-01"
+      "nextReviewAt": "2026-10-01",
+      "liveItemCount": 5
     },
     {
       "surveyId": "social-education-survey",
@@ -2879,7 +2940,8 @@
       "currentHypothesis": null,
       "evidenceRefs": [],
       "lastReviewedAt": null,
-      "nextReviewAt": "2026-10-01"
+      "nextReviewAt": "2026-10-01",
+      "liveItemCount": 36
     },
     {
       "surveyId": "social-life-basic-survey",
@@ -2927,7 +2989,8 @@
         ".claude/skills/survey/manage-survey-portfolio/reference/audits/2026-07-11-survey-portfolio-audit.md"
       ],
       "lastReviewedAt": null,
-      "nextReviewAt": "2026-10-01"
+      "nextReviewAt": "2026-10-01",
+      "liveItemCount": 99
     },
     {
       "surveyId": "social-welfare-facility-survey",
@@ -2973,7 +3036,8 @@
       "currentHypothesis": null,
       "evidenceRefs": [],
       "lastReviewedAt": null,
-      "nextReviewAt": "2026-10-01"
+      "nextReviewAt": "2026-10-01",
+      "liveItemCount": 35
     },
     {
       "surveyId": "sole-proprietor-survey",
@@ -3019,7 +3083,8 @@
       "currentHypothesis": null,
       "evidenceRefs": [],
       "lastReviewedAt": null,
-      "nextReviewAt": "2026-10-01"
+      "nextReviewAt": "2026-10-01",
+      "liveItemCount": 3
     },
     {
       "surveyId": "traffic-accident-statistics",
@@ -3065,7 +3130,8 @@
       "currentHypothesis": null,
       "evidenceRefs": [],
       "lastReviewedAt": null,
-      "nextReviewAt": "2026-10-01"
+      "nextReviewAt": "2026-10-01",
+      "liveItemCount": 1
     },
     {
       "surveyId": "urban-park-survey",
@@ -3111,7 +3177,8 @@
       "currentHypothesis": null,
       "evidenceRefs": [],
       "lastReviewedAt": null,
-      "nextReviewAt": "2026-10-01"
+      "nextReviewAt": "2026-10-01",
+      "liveItemCount": 10
     },
     {
       "surveyId": "vital-statistics",
@@ -3157,7 +3224,8 @@
       "currentHypothesis": null,
       "evidenceRefs": [],
       "lastReviewedAt": null,
-      "nextReviewAt": "2026-10-01"
+      "nextReviewAt": "2026-10-01",
+      "liveItemCount": 46
     },
     {
       "surveyId": "wage-structure-survey",
@@ -3165,7 +3233,7 @@
       "organization": "厚生労働省",
       "lifecycleStatus": "improve",
       "linkageStatus": "ok",
-      "editorialStatus": "implemented",
+      "editorialStatus": "measuring",
       "itemCount": 76,
       "activeItemCount": 76,
       "latestDataYear": null,
@@ -3208,7 +3276,8 @@
         ".claude/skills/survey/manage-survey-portfolio/reference/audits/2026-07-11-survey-portfolio-audit.md"
       ],
       "lastReviewedAt": "2026-07-11",
-      "nextReviewAt": "2026-10-01"
+      "nextReviewAt": "2026-10-01",
+      "liveItemCount": 76
     },
     {
       "surveyId": "waste-management-survey",
@@ -3254,7 +3323,8 @@
       "currentHypothesis": null,
       "evidenceRefs": [],
       "lastReviewedAt": null,
-      "nextReviewAt": "2026-10-01"
+      "nextReviewAt": "2026-10-01",
+      "liveItemCount": 7
     },
     {
       "surveyId": "water-pollution-survey",
@@ -3300,7 +3370,8 @@
       "currentHypothesis": null,
       "evidenceRefs": [],
       "lastReviewedAt": null,
-      "nextReviewAt": "2026-10-01"
+      "nextReviewAt": "2026-10-01",
+      "liveItemCount": 2
     },
     {
       "surveyId": "waterworks-statistics",
@@ -3346,7 +3417,8 @@
       "currentHypothesis": null,
       "evidenceRefs": [],
       "lastReviewedAt": null,
-      "nextReviewAt": "2026-10-01"
+      "nextReviewAt": "2026-10-01",
+      "liveItemCount": 5
     },
     {
       "surveyId": "weather-statistics",
@@ -3392,7 +3464,8 @@
       "currentHypothesis": null,
       "evidenceRefs": [],
       "lastReviewedAt": null,
-      "nextReviewAt": "2026-10-01"
+      "nextReviewAt": "2026-10-01",
+      "liveItemCount": 9
     },
     {
       "surveyId": "welfare-admin-report",
@@ -3438,7 +3511,8 @@
       "currentHypothesis": null,
       "evidenceRefs": [],
       "lastReviewedAt": null,
-      "nextReviewAt": "2026-10-01"
+      "nextReviewAt": "2026-10-01",
+      "liveItemCount": 10
     },
     {
       "surveyId": "workplace-accident-survey",
@@ -3484,7 +3558,8 @@
       "currentHypothesis": null,
       "evidenceRefs": [],
       "lastReviewedAt": null,
-      "nextReviewAt": "2026-10-01"
+      "nextReviewAt": "2026-10-01",
+      "liveItemCount": 2
     }
   ]
 }

@@ -4,6 +4,7 @@ import { logger } from "@stats47/logger/server";
 import { saveToR2 } from "@stats47/r2-storage/server";
 import { generateMiniTileSvg } from "@stats47/visualization/server";
 
+import surveysMaster from "../data/surveys.json";
 import { listRankingItemsWithTagsFromR2 } from "../repositories/ranking-item";
 import { readRankingValuesFromR2 } from "../repositories/ranking-value";
 import type { CategoryRankingItem } from "../types/ranking-item";
@@ -159,6 +160,13 @@ export async function exportRankingItemsPerUrl(): Promise<ExportRankingItemsPerU
   );
 
   // ── category/{categoryKey}/items.json ────────────────────────────────────────
+  // カテゴリページのサイドバー「この統計の出典調査」用に、そのカテゴリの active item の
+  // 出典調査 (survey バケットと同じ導出・マスタ実在のみ) を集計して焼き込む。
+  // 旧実装はページ側が全調査リスト (app/survey/all.json) を表示しており、無関係な調査が
+  // 並んでいた (2026-07-14 是正。正典: survey-linkage-standards.md §2)。
+  const surveyNameById = new Map(
+    (surveysMaster as Array<{ id: string; name: string }>).map((s) => [s.id, s.name]),
+  );
   for (const categoryKey of categoryKeySet) {
     const matched = items
       .filter((it) => {
@@ -191,11 +199,23 @@ export async function exportRankingItemsPerUrl(): Promise<ExportRankingItemsPerU
       isFeatured: r.isFeatured ?? false,
     }));
 
+    const sourceSurveyCounts = new Map<string, number>();
+    for (const it of matched) {
+      for (const surveyId of surveyBucketsForItem(it)) {
+        if (!surveyNameById.has(surveyId)) continue; // マスタ非実在 (合成 id 等) はリンクを出さない
+        sourceSurveyCounts.set(surveyId, (sourceSurveyCounts.get(surveyId) ?? 0) + 1);
+      }
+    }
+    const sourceSurveys = [...sourceSurveyCounts.entries()]
+      .sort((a, b) => b[1] - a[1])
+      .map(([id, itemCount]) => ({ id, name: surveyNameById.get(id)!, itemCount }));
+
     const body = JSON.stringify({
       generatedAt,
       categoryKey,
       count: categoryItems.length,
       items: categoryItems,
+      sourceSurveys,
     });
     uploads.push(
       saveToR2(categoryItemsKeyPath(categoryKey), body, {

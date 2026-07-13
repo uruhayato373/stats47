@@ -52,12 +52,14 @@ interface SurveyMaster {
 
 interface AuditJson {
   generatedAt: string;
-  totals: { metrics: number; resolved: number; unresolved: number; coverage: number };
+  totals: { metrics: number; activeMetrics?: number; resolved: number; unresolved: number; coverage: number };
   unresolvedByReason: Record<string, number>;
   uncoveredStatsDataIds: string[];
   orphanSurveys: string[];
   badOverrides: unknown[];
   perSurvey: Record<string, number>;
+  /** git 導出 × isActive (= 配信されるべき数)。2026-07-14 追加 — 無い旧 audit file は null 扱い */
+  perSurveyActive?: Record<string, number>;
 }
 
 interface SurveyEntry {
@@ -65,10 +67,11 @@ interface SurveyEntry {
   name: string;
   organization: string | null;
   lifecycleStatus: string;
-  linkageStatus: "ok" | "r2-drift" | "orphan" | "unknown";
+  linkageStatus: "ok" | "r2-drift" | "inactive-only" | "orphan" | "unknown";
   editorialStatus: string;
   itemCount: number;
   activeItemCount: number | null;
+  liveItemCount: number | null;
   latestDataYear: string | null;
   unresolvedItemCount: number | null;
   orphanStatus: boolean;
@@ -148,22 +151,30 @@ function deriveMechanical(
   r2: Map<string, number> | null,
   existing: SurveyEntry | undefined,
 ): Partial<SurveyEntry> {
-  const itemCount = audit.perSurvey[master.id] ?? 0;
+  const itemCount = audit.perSurvey[master.id] ?? 0; // git 導出の総数 (inactive 含む)
+  const activeItemCount = audit.perSurveyActive
+    ? (audit.perSurveyActive[master.id] ?? 0) // git 導出 × isActive (= 配信されるべき数)
+    : null; // 旧 audit file (perSurveyActive なし) は判定不能
   const orphanStatus = itemCount === 0;
   const editorial = getSurveyEditorialContent(master.id);
   const review = findReviewDoc(master.id);
 
+  // linkageStatus (4+1 値):
+  //   orphan        = git 導出でも item 0 (マスタから物理削除の候補)
+  //   inactive-only = 在庫はあるが全て未公開 (isActive:false)。R2 不在は正常 — 公開判断は
+  //                   ranking-publisher / expansion queue (r2-drift と混同しない: 2026-07-14 教訓)
+  //   r2-drift      = active item があるのに R2 all.json に調査が無い (真の stale。要 sync)
+  //   ok / unknown
+  const liveItemCount = r2 ? (r2.get(master.id) ?? null) : (existing?.liveItemCount ?? null);
   let linkageStatus: SurveyEntry["linkageStatus"];
-  let activeItemCount: number | null;
   if (orphanStatus) {
     linkageStatus = "orphan";
-    activeItemCount = r2?.get(master.id) ?? existing?.activeItemCount ?? null;
+  } else if (activeItemCount === 0) {
+    linkageStatus = "inactive-only";
   } else if (r2) {
     linkageStatus = r2.has(master.id) ? "ok" : "r2-drift";
-    activeItemCount = r2.get(master.id) ?? null;
   } else {
     linkageStatus = existing?.linkageStatus ?? "unknown";
-    activeItemCount = existing?.activeItemCount ?? null;
   }
 
   return {
@@ -173,6 +184,7 @@ function deriveMechanical(
     linkageStatus,
     itemCount,
     activeItemCount,
+    liveItemCount,
     orphanStatus,
     editorialContentExists: Boolean(editorial),
     readerQuestionCount: editorial ? editorial.readerQuestions.length : null,
@@ -193,6 +205,7 @@ function defaults(mech: Partial<SurveyEntry>, reviewRef: string | null): SurveyE
     editorialStatus: mech.editorialContentExists ? "implemented" : "fallback",
     itemCount: 0,
     activeItemCount: null,
+    liveItemCount: null,
     latestDataYear: null, // PR-3 (R2 集計) で埋める
     unresolvedItemCount: null, // 未分類は survey 帰属不能 (グローバル linkage が正)
     orphanStatus: false,

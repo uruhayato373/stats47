@@ -45,6 +45,7 @@ config.surveyId (手動オーバーライド・先頭固定)
 | 場所 | 表示 | データ源 |
 |---|---|---|
 | ranking サイドバー `SurveyCard` | 「**この統計の出典調査**」(1-2件) + 同調査の関連ランキング5件 | item.json の `originalSurveys` (追加 fetch なし) |
+| `/category/<key>` サイドバー `SurveyCard` | そのカテゴリの active item の出典調査のみ | `app/category/<key>/items.json` の `sourceSurveys` 焼き込み (exporter が survey バケットと同じ導出で集計。**全調査リストを出さない** — 旧実装が all.json 全件を無関係に表示していた 2026-07-14 是正) |
 | `/survey` 一覧 | 調査カード + 件数 | all.json (`itemCount` 焼き込み、force-dynamic) |
 | `/survey/<id>` | 調査ハブ + 関連ランキング一覧 | `app/survey/<id>/items.json` (ƒ オンデマンド ISR) |
 
@@ -52,6 +53,18 @@ config.surveyId (手動オーバーライド・先頭固定)
   ガード: `.claude/scripts/lib/check-r2-route-ssg.cjs`、正典: `nextjs-ssg-preservation.md`)。
 
 ## 3. 編集フロー
+
+### 監査の 2 層 (導出 × 焼き込み) と active/total の区別 ★誤診防止 (2026-07-14)
+
+- **導出層** (git): `audit-survey-linkage.ts` が本番と同一コードで全 metric を集計。`perSurvey` =
+  総数 (inactive 含む在庫)、`perSurveyActive` = isActive のみ (= 配信されるべき数)。
+  **R2 all.json は active のみ配信する** (exporter が `!item.isActive` を除外) ため、
+  「在庫はあるが全て未公開」の調査が all.json に無いのは正常 (**inactive-only**)。これを
+  「snapshot が stale (r2-drift)」と混同して sync や公開を要求しない (実例: population-projection)。
+- **焼き込み層** (R2 live): `audit-survey-linkage.ts --compare-r2 [--sample N]` が active 全 item の
+  live item.json `surveyIds` を git 導出と item 単位で突合 + 調査集合 (all.json vs git-active) を照合。
+  月次のポートフォリオ監査 (`/manage-survey-portfolio`) で実行する (ネットワーク必須のため PR CI には
+  入れない)。初回全件実測 2026-07-14: active 2,159 件 一致 100%・欠落 0・調査集合一致。
 
 ### 新しい調査を追加する
 1. `packages/ranking/src/data/surveys.json` にエントリ追加 (id は kebab-case)

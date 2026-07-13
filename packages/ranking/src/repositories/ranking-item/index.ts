@@ -5,6 +5,7 @@ export {
   listRankingItemsWithTagsFromR2,
   readActiveKeysForSitemapFromR2,
   readActiveRankingKeysFromR2,
+  readCategorySourceSurveysFromR2,
   readFeaturedRankingItemsFromR2,
   readFirstKeyByTagFromR2,
   readLatestYearForAreaTypeFromR2,
@@ -18,4 +19,4 @@ export {
   readRankingItemsByTagFromR2,
   readTagsForItemFromR2,
 } from "./read-ranking-items-snapshot";
-export type { GroupRankingItem } from "./read-ranking-items-snapshot";
+export type { CategorySourceSurvey, GroupRankingItem } from "./read-ranking-items-snapshot";

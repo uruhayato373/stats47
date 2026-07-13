@@ -54,11 +54,20 @@ interface HomeFeaturedSnapshot {
   items: FeaturedRankingItem[];
 }
 
+/** カテゴリ内 active item の出典調査 (exporter が survey バケットと同じ導出で焼き込み) */
+export interface CategorySourceSurvey {
+  id: string;
+  name: string;
+  itemCount: number;
+}
+
 interface CategoryItemsSnapshot {
   generatedAt: string;
   categoryKey: string;
   count: number;
   items: (CategoryRankingItem & { areaType: string })[];
+  /** 2026-07-14 追加。旧 snapshot には無い (その場合ページは出典調査カードを出さない) */
+  sourceSurveys?: CategorySourceSurvey[];
 }
 
 interface RankingItemSnapshot {
@@ -111,6 +120,25 @@ export async function readRankingItemsByCategoryFromR2(
     return ok(snapshot.items);
   } catch (error) {
     logger.error({ error, categoryKey }, "readRankingItemsByCategoryFromR2: failed");
+    return err(error instanceof Error ? error : new Error(String(error)));
+  }
+}
+
+/**
+ * カテゴリ内 active item の出典調査 (焼き込み済みサマリ) を読む。
+ * 旧 snapshot (sourceSurveys 未焼き込み) は空配列 → 呼び元はカードを出さない。
+ * 全調査リスト (app/survey/all.json) をカテゴリページに出す旧挙動の代替 (2026-07-14)。
+ */
+export async function readCategorySourceSurveysFromR2(
+  categoryKey: string,
+): Promise<Result<CategorySourceSurvey[], Error>> {
+  try {
+    const snapshot = await fetchFromR2AsJson<CategoryItemsSnapshot>(
+      categoryItemsKeyPath(categoryKey),
+    );
+    return ok(snapshot?.sourceSurveys ?? []);
+  } catch (error) {
+    logger.error({ error, categoryKey }, "readCategorySourceSurveysFromR2: failed");
     return err(error instanceof Error ? error : new Error(String(error)));
   }
 }

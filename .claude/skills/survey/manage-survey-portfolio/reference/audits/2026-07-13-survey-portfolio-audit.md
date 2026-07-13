@@ -50,6 +50,12 @@ GSC・GA4 2026-W28 snapshot 行数)。最新状態の SSOT は portfolio.json �
 1. **population-projection の R2 反映** (r2-drift): surveys.json 追加後に master export 未実行。
    → CI `sync-snapshots` を **`ranking-items` → `master` の順**で実行 (r2-publisher / CI へ委譲。
    本運用からは R2 push しない)。実行後に build 再実行で ok へ戻ることを確認する。
+   > **訂正 (2026-07-14)**: 上記は誤診だった。実態は該当 7 指標 (projected-population-20XX) が
+   > **すべて isActive:false (未公開)** で、R2 all.json は active のみ配信するため不在は**正常**。
+   > 「stale」ではなく **inactive-only** (公開待ち・公開判断は ranking-publisher / expansion queue)。
+   > 誤診の根因 = 監査が active/total を区別していなかったこと → audit-survey-linkage に
+   > `perSurveyActive` と `--compare-r2` (焼き込み実測突合) を追加し、linkageStatus を 4 値化して根治。
+   > 初回全件突合 (2026-07-14): active 2,159 item 一致 100%・欠落 0・調査集合一致。
 2. **PR-3**: GSC/GA4 snapshot の /survey/* 集計 (非重複 2 窓 56d) → baseline 保存・gscSnapshotRef 記入。
    素材は確認済み (GSC W28 に /survey/ 41 行・GA4 W28 に 30 行)。
 3. **PR-4**: 月次監査コマンド・実験期日判定スクリプト・CI 配線 (schema/drift/orphan/linkage のみ)。

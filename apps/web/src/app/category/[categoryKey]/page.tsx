@@ -11,9 +11,9 @@ import { notFound } from "next/navigation";
 import { fetchPrefectures, REGIONS } from "@stats47/area";
 import { getCategoryDescription } from "@stats47/data-configs";
 import {
+  readCategorySourceSurveysFromR2,
   readRankingValuesFromR2,
   readTopRankingValuesBatchFromR2,
-  readSurveysFromR2,
 } from "@stats47/ranking/server";
 import { isOk } from "@stats47/types";
 import { generateMiniTileSvg } from "@stats47/visualization/server";
@@ -168,10 +168,12 @@ export default async function CategoryPage({ params }: PageProps) {
 
   const fallbackTags = CATEGORY_FALLBACK_TAGS[categoryKey] ?? [];
 
-  const [rankingResult, latestArticles, surveysResult, nativeBanners] = await Promise.all([
+  const [rankingResult, latestArticles, sourceSurveys, nativeBanners] = await Promise.all([
     readRankingItemsByCategory(categoryKey),
     listLatestArticles(4).catch(() => []),
-    readSurveysFromR2().then((r) => isOk(r) ? r.data : []).catch(() => []),
+    // このカテゴリの active item の出典調査 (焼き込みサマリ)。全調査リストを出さない
+    // (旧実装は readSurveysFromR2 = 全 74 調査を無関係に表示していた。2026-07-14 是正)
+    readCategorySourceSurveysFromR2(categoryKey).then((r) => (isOk(r) ? r.data : [])).catch(() => []),
     fallbackTags.length > 0
       ? resolveAffiliateBanners(fallbackTags, 4).catch(() => [])
       : Promise.resolve([]),
@@ -299,8 +301,8 @@ export default async function CategoryPage({ params }: PageProps) {
         </div>
       )}
 
-      {/* 調査から探す */}
-      <SurveyCard surveys={surveysResult.map((s) => ({ id: s.id, name: s.name }))} />
+      {/* この統計の出典調査 (このカテゴリの item の出典のみ。空ならカード非表示) */}
+      <SurveyCard surveys={sourceSurveys.map((s) => ({ id: s.id, name: s.name }))} />
     </>
   );
 
