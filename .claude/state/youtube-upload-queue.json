@@ -236,7 +236,8 @@
     "metric_keys": [
       "general-hospital-bed-count"
     ],
-    "status": "pending"
+    "status": "uploaded",
+    "uploaded_at": "2026-07-14T10:14:43Z"
   },
   {
     "key": "pharmacy-count-per-100k",
@@ -250,7 +251,8 @@
     "metric_keys": [
       "pharmacy-count-per-100k"
     ],
-    "status": "pending"
+    "status": "uploaded",
+    "uploaded_at": "2026-07-14T10:15:09Z"
   },
   {
     "key": "floor-area-new-owner-dwelling",
@@ -264,7 +266,8 @@
     "metric_keys": [
       "floor-area-new-owner-dwelling"
     ],
-    "status": "pending"
+    "status": "uploaded",
+    "uploaded_at": "2026-07-14T10:15:34Z"
   },
   {
     "key": "new-owner-occupied-housing-ratio",
@@ -278,7 +281,8 @@
     "metric_keys": [
       "new-owner-occupied-housing-ratio"
     ],
-    "status": "pending"
+    "status": "uploaded",
+    "uploaded_at": "2026-07-14T10:15:59Z"
   },
   {
     "key": "per-taxpayer-taxable-income",
@@ -292,7 +296,8 @@
     "metric_keys": [
       "per-taxpayer-taxable-income"
     ],
-    "status": "pending"
+    "status": "uploaded",
+    "uploaded_at": "2026-07-14T10:16:24Z"
   },
   {
     "key": "household-head-income-worker-households-per-month",
