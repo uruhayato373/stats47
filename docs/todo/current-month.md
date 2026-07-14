@@ -46,21 +46,21 @@ tags: []
 - **なぜ今月これか**: GSC 12週実測で「供給は制約でない、需要とCTRがボトルネック」と判明（competitor benchmark memory）。是正（床上げ）は W25 で一段落し、7 月は **需要ギャップを新規記事で埋める天井上げ**フェーズ。GSC clicks は上昇基調（+15.3%/W27）でブログが主エンジン。真実源 = BLOG-SEO-PACE-01（Tier1・due 2026-08-31）。
 - **今月のゴール（月末に検証可能）**: ① topic-queue から **月 15-20 本**を公開（型配分 B 5 / D2 4 / A 3-4 / F 3 / G 1-2）、② remediation must-fix pending を **週 3 本ペース**で消化し月内 +12 本 done、③ BLOG-SEO-TYPES-01 の新型記事 4 週後 clicks を既存 A 型と比較（due 2026-08-02）。
 - **構成タスク**:
-  - [ ] 新規記事 週 4-5 本 ×4-5 週 [M×週] — `/plan-article-queue` で払い出し → article-writer → factual/quality-gate → blog-critic PASS → publish
-  - [ ] ブログ品質是正 週 3 本 [M×週] — `/brushup-blog --target queue --next 3` → critic PASS → publish
-  - [ ] 型ポートフォリオが B 偏重にならないよう D2/F/G を混ぜる [S]（topic-queue は型別上限で偏重防止済だが払い出し時に確認）
+  - 新規記事 週 4-5 本 ×4-5 週 [M×週] — `/plan-article-queue` で払い出し → article-writer → factual/quality-gate → blog-critic PASS → publish
+  - ブログ品質是正 週 3 本 [M×週] — `/brushup-blog --target queue --next 3` → critic PASS → publish
+  - 型ポートフォリオが B 偏重にならないよう D2/F/G を混ぜる [S]（topic-queue は型別上限で偏重防止済だが払い出し時に確認）
 - **依存・ブロッカー**: なし（トレンド発見 trend-scout / 記事生成 article-writer / チャート chart-author が分業で稼働）。
-- **真実源リンク**: `docs/todo/01_改善バックログ.md#BLOG-SEO-PACE-01` / `docs/02_実装計画/15_ブログSEO拡充戦略.md` / `.claude/state/blog/topic-queue.json`
+- **真実源リンク**: `01_改善バックログ.md#BLOG-SEO-PACE-01` / `.claude/agents/blog-seo-strategist.md` / `.claude/state/blog/topic-queue.json`
 
 ### 重点2: ai-content 生成完走 + CTR 改修の効果実測
 - **なぜ今月これか**: AICONTENT-DBLESS-REBUILD は done 130 / 残 794 で、ランキングページ（全体 PV の大半）の品質を底上げする最大レバー。かつ RANKING-CTR-01（第1バッチ 13本適用済・未公開）と BLOG-WAVE effect/none の教訓を活かした CTR 改修の効果実測が 7-8 月に集中する。生成だけで止めず「公開→実測」まで回す。
 - **今月のゴール**: ① ai-content 完走を **週 15-30 件**進め done 130→250+、② RANKING-CTR-01 第1バッチ公開 → GSC 2-4 週後に対象13本の CTR before/after 実測（due 2026-08-08）、③ effect/pending の期日到来分（COVERAGE-LOOP-01 / INDEXING-AUTO-01 due 2026-07-14 等）を weekly-review で判定。
 - **構成タスク**:
-  - [ ] ai-content 完走バッチ [M×週] — `build-ai-content-queue.mjs --next 15` → `ai:verify` → ranking-content-author 並列 → diff-push-r2 → 再構築
-  - [ ] RANKING-CTR-01 第1バッチ公開 + GSC 計測段取り [S]（reflect は R2→CDN purge、UI デプロイと独立）
-  - [ ] effect/pending 判定（期日到来分）[S] — improvement-triage が effect/* を確定
+  - ai-content 完走バッチ [M×週] — `build-ai-content-queue.mjs --next 15` → `ai:verify` → ranking-content-author 並列 → diff-push-r2 → 再構築
+  - RANKING-CTR-01 第1バッチ公開 + GSC 計測段取り [S]（reflect は R2→CDN purge、UI デプロイと独立）
+  - effect/pending 判定（期日到来分）[S] — improvement-triage が effect/* を確定
 - **依存・ブロッカー**: 生成はローカル CLI `npm run ai:gen`（haiku 既定・TOKEN-AICONTENT-01）。R2 push は publish-ai-content.yml 配線済。
-- **真実源リンク**: `docs/todo/02_機能バックログ.md#AICONTENT-DBLESS-REBUILD` / `docs/todo/01_改善バックログ.md#RANKING-CTR-01` / `.claude/rules/ranking-content-standards.md`
+- **真実源リンク**: `02_機能バックログ.md#AICONTENT-DBLESS-REBUILD` / `01_改善バックログ.md#RANKING-CTR-01` / `.claude/rules/ranking-content-standards.md`
 
 ## 今月やらないこと（予算のため意図的に見送る）
 - **NSM 実験の本格起票・運用** — 4 週以上 propose すら空だが、SEO 拡充の効果が指標に出るまで experiments.json は空で許容。running 化は 8 月候補（Could で propose のみ可）。
@@ -91,10 +91,9 @@ tags: []
 | NSM 実験起票（4週空）| experiments.json は EXP-005 proposed のまま空 | 意図的に見送り（Could で propose のみ可）|
 
 ## 関連ドキュメント
-- 収益化マスタープラン: `../../02_実装計画/01_収益化マスタープラン.md`
-- ブログSEO拡充戦略: `../../02_実装計画/15_ブログSEO拡充戦略.md`
-- 改善バックログ: `../../todo/01_改善バックログ.md`
-- 機能バックログ: `../../todo/02_機能バックログ.md`
-- 指標バックログ: `../../todo/03_指標バックログ.md`
-- 今月の週次計画: `../週次計画/2026-W28.md`
-- 前月計画: `2026-06.md`
+- 収益化マスタープラン: `../02_実装計画/01_収益化マスタープラン.md`
+- ブログSEO戦略: `../../.claude/agents/blog-seo-strategist.md`
+- 改善バックログ: `01_改善バックログ.md`
+- 機能バックログ: `02_機能バックログ.md`
+- 指標バックログ: `03_指標バックログ.md`
+- 今週の計画: `current-week.md`

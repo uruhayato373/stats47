@@ -1,4 +1,4 @@
-name: 📦 Weekly Metrics Commit
+name: 📊 Weekly Metrics Summary
 
 on:
   schedule:
@@ -11,14 +11,14 @@ on:
         default: ""
 
 permissions:
-  contents: write
+  contents: read
 
 concurrency:
-  group: weekly-metrics-commit
+  group: weekly-metrics-summary
   cancel-in-progress: false
 
 jobs:
-  commit:
+  summarize:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -46,57 +46,13 @@ jobs:
             echo "week=$WEEK" >> "$GITHUB_OUTPUT"
           fi
 
-      - name: 📝 Generate weekly metrics markdown
-        id: body
+      - name: 📝 Generate weekly metrics summary
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           WEEK="${{ steps.week.outputs.week }}"
-          OUT_DIR="docs/03_週次運用/メトリクス"
-          OUT_FILE="$OUT_DIR/${WEEK}.md"
-          mkdir -p "$OUT_DIR"
-
-          # frontmatter
-          {
-            echo "---"
-            echo "type: weekly-metrics"
-            echo "week: ${WEEK}"
-            echo "date: $(date -u +%Y-%m-%d)"
-            echo "status: auto-generated"
-            echo "---"
-            echo
-            node .claude/scripts/metrics/generate-weekly-metrics-issue.mjs --week "${WEEK}"
-          } > "$OUT_FILE"
-
-          echo "out_file=$OUT_FILE" >> "$GITHUB_OUTPUT"
+          OUT_FILE="/tmp/weekly-metrics-${WEEK}.md"
+          node .claude/scripts/metrics/generate-weekly-metrics-issue.mjs --week "${WEEK}" > "$OUT_FILE"
           echo "--- preview ---"
           head -30 "$OUT_FILE"
-
-      - name: 📄 Copy to GitHub Step Summary
-        run: cat "${{ steps.body.outputs.out_file }}" >> "$GITHUB_STEP_SUMMARY"
-
-      - name: 🚦 Skip if unchanged
-        id: dup
-        run: |
-          if git diff --quiet "${{ steps.body.outputs.out_file }}" 2>/dev/null; then
-            # ファイルが既に commit 済みで変更なし → skip
-            if [ -z "$(git status --porcelain ${{ steps.body.outputs.out_file }})" ]; then
-              echo "No changes — skipping commit"
-              echo "skip=true" >> "$GITHUB_OUTPUT"
-            else
-              echo "skip=false" >> "$GITHUB_OUTPUT"
-            fi
-          else
-            echo "skip=false" >> "$GITHUB_OUTPUT"
-          fi
-
-      - name: 🆕 Commit & push weekly metrics markdown
-        if: steps.dup.outputs.skip == 'false'
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add "${{ steps.body.outputs.out_file }}"
-          git commit -m "metrics: weekly snapshot ${{ steps.week.outputs.week }} (auto-generated)"
-          git push origin develop
+          cat "$OUT_FILE" >> "$GITHUB_STEP_SUMMARY"

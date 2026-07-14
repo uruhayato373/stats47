@@ -59,5 +59,5 @@ node .claude/scripts/estat/measure-expansion-impact.mjs [--week YYYY-Www]
 - エージェント: `.claude/agents/ranking-expander.md` (キュレーション判断のオーナー)
 - スクリプト: `.claude/scripts/estat/{build-expansion-queue,gen-ssds-configs,measure-expansion-impact,enumerate-ssds-indicators,discover-prefecture-candidates,fetch-estat-meta}.mjs`
 - 知見/引き継ぎ: memory `project_estat_expansion_pipeline_2026_07` / `docs/handoffs/2026-07-12-ssds-ranking-expansion.md`
-- 正典: `.claude/rules/metric-config-standards.md` / `.claude/rules/estat-api.md` / 週次は `docs/03_週次運用/`
+- 正典: `.claude/rules/metric-config-standards.md` / `.claude/rules/estat-api.md` / 現在計画は `docs/todo/current-week.md`
 - 対比: `.claude/rules/blog-remediation-loop.md` (同型の型)

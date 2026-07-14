@@ -15,7 +15,7 @@ stats47 の **改善施策 TODO の真実源は `docs/05_改善ログ/<metric>.m
 - 新規施策を提案するときは、**該当 metric の改善ログに section 追加**を最初に提案する (Issue ではない、週次計画でもない)
 - section frontmatter は `- **status**:` `- **tier**:` `- **target_metric**:` `- **deployed_at**:` `- **due**:` `- **owner**:` `- **verification_command**:` `- **related_pr**:` のリスト形式
 - 既存 5 metric (`gsc / ga4 / psi / adsense / cloudflare-cost`) + 新設 3 metric (`content / indexing / ga4`) の計 7 metric。INDEX は `docs/05_改善ログ/INDEX.md`
-- `docs/03_週次運用/週次計画/YYYY-Www.md` は改善ログから抽出した「当週ビュー」 (`/weekly-plan` が自動生成)
+- `docs/todo/current-week.md` は改善ログから抽出した「当週ビュー」 (`/weekly-plan` が上書き)
 - `docs/50_Issues/{feature,automation,ui-improvements}-backlog.md` は **未着手アイデア倉庫** (Tier 未確定段階)。Tier 確定したら改善ログに移行・section 削除
 - GitHub Issues は `enhancement`/`bug`/`auto-generated` のみ (PR で close されるチケットと日次アラート)
 - 効果判定 (effect/full / effect/partial / effect/none / effect/adverse) は **実証ベース判定ルール** (`.claude/rules/evidence-based-judgment.md`) に従い、検証コマンド実測値必須

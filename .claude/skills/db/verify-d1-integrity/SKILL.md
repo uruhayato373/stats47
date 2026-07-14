@@ -89,7 +89,7 @@ exit code: 0 (clean), 1 (warning only), 2 (error)。`--strict` では warning �
 - `/sync-snapshots` 実行前 (R2 に壊れたデータを push しないため)
 - `/export-d1-to-remotion-static` 実行前 (動画用 JSON に欠損データを書かないため)
 - `/page-data-batch` などで大量投入後の確認
-- 週次レビュー時 (`docs/03_週次運用/週次レビュー/`)
+- 週次レビュー時 (`.claude/skills/management/weekly-review/reference/reviews/`)
 
 ## 参照
 

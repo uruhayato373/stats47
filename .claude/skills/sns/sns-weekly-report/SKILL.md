@@ -79,7 +79,7 @@ status: active
 ---
 ```
 
-同週の Weekly Review ファイル（`docs/03_週次運用/weekly-review/{YYYY-Www}.md` 等）が既にある場合、本文の冒頭で相対リンクし、Weekly Review 側にも SNS レポートへのリンクを追記して相互参照する。
+同週の Weekly Review（`.claude/skills/management/weekly-review/reference/reviews/{YYYY-Www}.md`）がある場合、対象週を相互に明記する。
 
 過去のレポートは `ls -t docs/04_レビュー/*-sns-weekly.md | head -5` で参照できる。
 

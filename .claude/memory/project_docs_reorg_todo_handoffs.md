@@ -8,11 +8,11 @@ metadata:
 docs/ を doboku-note プロジェクトのパターンに倣って再編した (2026-07-11、feature/docs-todo-handoffs-reorg)。
 
 **TODO の単一の入口 = `docs/todo/`** (4 ファイル固定・新規ファイル追加禁止):
-- `inbox.md` — 未分類の思いつき受信箱 (旧 `docs/03_週次運用/TODOインボックス.md`)。triage で行削除
+- `inbox.md` — 未分類の思いつき受信箱。triage で行削除
 - `01_改善バックログ.md` (旧 `02_実装計画/03_改善バックログ.md`) — scan-pending-improvements.mjs / gallery dashboard がパース
 - `02_機能バックログ.md` (旧 `02_実装計画/04_機能バックログ.md`)
 - `03_指標バックログ.md` (旧 `02_実装計画/05_指標バックログ.md`) — parse-backlog.cjs がパース
-- 運用ルール正典: `docs/todo/README.md`。pull 式: inbox → backlog → 月次計画 → 週次計画 (03_週次運用 は現行維持)
+- 運用ルール正典: `docs/todo/README.md`。pull 式: inbox → backlog → current-month → current-week
 
 **セッション引き継ぎ = `docs/handoffs/YYYY-MM-DD-<topic>.md`** (旧 `docs/04_レビュー/*-session-handoff-*`):
 - ライフサイクルは一方向: 書く → 次セッションが消化 → 抽出 (残タスク→todo / 知見→memory / 手順→rules) → git rm

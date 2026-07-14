@@ -64,8 +64,9 @@ git TS 化し永続 D1 を全廃した。アプリが読む各データの真実
 |---|---|
 | プロジェクト戦略・要件・ペルソナ | `docs/00_プロジェクト管理/` (4 ファイル固定) |
 | 技術設計・アーキテクチャ | `docs/01_技術設計/` |
-| 週次計画・週次レビュー | `docs/03_週次運用/週次{計画,レビュー}/YYYY-Www.md` |
-| 週次メトリクスサマリ（自動生成） | `docs/03_週次運用/メトリクス/YYYY-Www.md` |
+| 現在の月次・週次計画 | `docs/todo/current-{month,week}.md` |
+| agent用週次レビュー | `.claude/skills/management/weekly-review/reference/reviews/YYYY-Www.md` |
+| 週次メトリクス | `.claude/state/metrics/`（既存history/LATESTを読む） |
 | 批判的レビュー・事前検死・SEO 監査・SNS 週報・パフォーマンス・コスト月報 | `docs/04_レビュー/{YYYY-MM-DD,YYYY-Www,YYYY-MM}-<topic-slug>.md`（フラット。日付先頭・slug に種別を含める例 `-monetization` / `-pre-mortem-<x>` / `-sns-weekly` / `-cloudflare-cost`。種別絞り込みは frontmatter `type:`） |
 | 改善施策の一覧・TODO | `docs/todo/01_改善バックログ.md` |
 | 未分類の思いつき TODO (受信箱) | `docs/todo/inbox.md` |
@@ -93,7 +94,7 @@ git TS 化し永続 D1 を全廃した。アプリが読む各データの真実
 | Cloudflare 日次 usage（D1/Workers/R2） | `.claude/state/metrics/cloudflare/{snapshots/YYYY-MM-DD.json,history.csv,LATEST.md}`（GitHub Actions 日次 JST 02:30、閾値違反時 `[Cloudflare Alert]` Issues 起票）/ 閾値: `.claude/skills/analytics/cloudflare-cost-improvement/reference/budgets-daily.json` |
 | **SNS 投稿台帳 (投稿履歴の SSOT)** | `.claude/state/sns/posts.json`（書き込み: `.claude/scripts/lib/sns-posts-store.cjs` / `/mark-sns-posted` のみ。全 SNS 自動化スクリプトはこのストア経由。完全DBレス・永続 D1 なし） |
 | SNS 投稿メトリクス時系列 | `.claude/skills/analytics/sns-metrics-improvement/snapshots/YYYY-MM-DD/metrics.csv`（書き込み: `.claude/scripts/lib/sns-metrics-store.cjs`） |
-| アフィリエイト在庫棚卸し + GA4 実測 snapshot | `.claude/state/ads/{inventory-*.json,ga4-affiliate-*.json}`（`affiliate-dashboard-refresh.yml` / `affiliate-ga4-weekly.yml` が生成・commit-back、AFF-05） |
+| アフィリエイト運用 state (在庫棚卸し / GA4 実測 / compliance / 実験 registry / **集約状態**) | `.claude/state/ads/{inventory-*.json,ga4-affiliate-*.json,compliance-latest.json,experiments.json,affiliate-operations-latest.json}`（`affiliate-dashboard-refresh.yml` / `affiliate-ga4-weekly.yml` が生成・commit-back。実験 registry の書込は `/manage-affiliate-experiment` のみ。dashboard HTML は `/tmp` 生成の派生物で git 管理しない） |
 | NSM 週次 JSON snapshot | `.claude/skills/management/nsm-experiment/reference/weekly-snapshots/YYYY-Www.json` |
 | 実験 state（PDCA） | `.claude/state/experiments.json` |
 | RemoteTrigger 記録 | `.claude/state/triggers.json` |

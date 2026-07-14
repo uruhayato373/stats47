@@ -103,10 +103,9 @@ primary_agent: strategy-advisor
 
 ```
 調査項目:
-- **今月の月次計画（重点テーマ）**: `docs/03_週次運用/月次計画/YYYY-MM.md` の frontmatter `focus_themes` と「構成タスク」を Read
+- **今月の月次計画（重点テーマ）**: `docs/todo/current-month.md` の frontmatter `focus_themes` と「構成タスク」を Read
   ```bash
-  THIS_MONTH=$(date -u +%Y-%m)
-  cat "docs/03_週次運用/月次計画/${THIS_MONTH}.md" 2>/dev/null || echo "月次計画なし → /monthly-plan の実行を Should で提案"
+  cat docs/todo/current-month.md 2>/dev/null || echo "月次計画なし → /monthly-plan の実行を Should で提案"
   ```
   → 今週の Must は**今月の重点テーマの構成タスクから優先的に選ぶ**。重点外のタスクを Must に入れる場合は理由を明記。月次計画が無い場合は `/monthly-plan` 実行を提案。
 - docs/02_実装計画/00_INDEX.md の現在地と、03/04/05 の未完了タスク
@@ -150,16 +149,14 @@ primary_agent: strategy-advisor
   ls -t docs/04_レビュー/*-pre-mortem-*.md | head -3
   → 繰り返し指摘されているパターンを抽出（Read tool または `cat docs/04_レビュー/<file>.md` で本文確認）
 
-- 前週の計画・レビュー ドキュメント + 残タスク自動抽出
-  ls -t docs/03_週次運用/週次計画/*.md | head -2
-  ls -t docs/03_週次運用/週次レビュー/*.md | head -1
-  → 前週 docs/03_週次運用/週次計画/YYYY-W(n-1).md と docs/03_週次運用/週次レビュー/YYYY-W(n-1).md を Read tool で取得
+- 前週のレビュー + 現在計画の残タスク自動抽出
+  cat docs/todo/current-week.md 2>/dev/null
+  ls -t .claude/skills/management/weekly-review/reference/reviews/*.md 2>/dev/null | head -1
+  → 上書き前の current-week と前週レビューを取得
   → 計画 vs 実績の差分と「来週への申し送り」を抽出
   → **前週計画の `- [ ] xxx` (未チェック) を抽出** し、Phase 3 の「前週からの持ち越し」セクションに自動転載:
     ```bash
-    PREV_WEEK=$(date -u -d "8 days ago" +%G-W%V 2>/dev/null || \
-                python3 -c "from datetime import date,timedelta; print((date.today()-timedelta(days=7)).strftime('%G-W%V'))")
-    grep -E "^- \[ \]" "docs/03_週次運用/週次計画/${PREV_WEEK}.md" 2>/dev/null || true
+    grep -E "^- \[ \]" docs/todo/current-week.md 2>/dev/null || true
     ```
   → 持ち越しが 3 件以上なら Phase 4 で「工数見積もりが楽観的すぎないか」を厳しく検証
 
@@ -239,7 +236,7 @@ Phase 3 の提案を以下の3つの視点で攻撃する:
    - 「自動化」「リファクタ」が手段の目的化になっていないか
 
 2. **「先週と同じ失敗を繰り返してないか？」**
-   - 前週の計画ドキュメント（`docs/03_週次運用/週次計画/YYYY-W(n-1).md` を Read tool で取得）と照合
+   - 上書き前の `docs/todo/current-week.md` と前週レビューを照合
    - 毎週 Must に入りながら未達のタスクは、分割するか優先度を上げる
    - 工数見積もりが楽観的でないか
 
@@ -251,7 +248,7 @@ Phase 3 の提案を以下の3つの視点で攻撃する:
 
 ### Phase 5: 出力
 
-Write tool で `docs/03_週次運用/週次計画/YYYY-Www.md` を作成する。frontmatter を必ず含めること。
+Write tool で `docs/todo/current-week.md` を上書きする。frontmatter を必ず含めること。
 
 ```yaml
 ---
@@ -263,7 +260,7 @@ tags: []
 ---
 ```
 
-作成後、ファイルパスを報告する。前週 `docs/03_週次運用/週次レビュー/YYYY-W(n-1).md` の「来週への申し送り」から引用した内容がある場合は、本文の「前週の申し送り」に相対リンク（`../週次レビュー/YYYY-W(n-1).md`）形式で参照を含める。
+作成後、ファイルパスを報告する。前週のskill referenceレビューから引用した場合は、本文に対象週を明記する。
 
 ## 出力フォーマット（ファイル本文）
 
@@ -284,11 +281,11 @@ tags: []
 - **Sprint**: Sprint N (Week X/Y)
 
 ## 前週の申し送り
-<!-- `docs/03_週次運用/週次レビュー/YYYY-W(n-1).md` の「来週への申し送り」から引用（相対リンク付き） -->
+<!-- skill referenceの前週レビュー「来週への申し送り」から引用 -->
 
 ## 今月の重点（月次計画より）
-<!-- `../月次計画/YYYY-MM.md` の focus_themes を転載。今週の Must はこの重点の構成タスクから優先選択する。 -->
-- **重点テーマ**: <テーマ1> / <テーマ2>（→ `../月次計画/YYYY-MM.md`）
+<!-- `current-month.md` の focus_themes を参照。今週の Must はこの重点から優先選択する。 -->
+- **重点テーマ**: <テーマ1> / <テーマ2>（→ `current-month.md`）
 - **今週この重点で進めること**: <構成タスクのうち今週分>
 
 ## 前週の振り返り (W-1)
@@ -317,7 +314,7 @@ tags: []
 
 <!-- Agent D が抽出した前週計画の未チェック `- [ ]` を転載。元 task の優先度に応じて
      今週 Must/Should/Could に再分類する場合は、ここに残しつつ下記タスク欄にも追加して二重リンク。 -->
-- [ ] **持ち越しタスク名** — 元: `../週次計画/YYYY-W(n-1).md` [元 Must/Should/Could]
+- [ ] **持ち越しタスク名** — 元: 前週レビュー [元 Must/Should/Could]
 
 ## 改善ログ pending (今週着手対象)
 
@@ -346,7 +343,7 @@ tags: []
 ## 関連ドキュメント・Issue
 
 <!-- 施策 Issue（enhancement ラベル）、Pre-Mortem、NSM 実験、snapshot Issue 等を列挙 -->
-- 前週レビュー: `../週次レビュー/YYYY-W(n-1).md`
+- 前週レビュー: `.claude/skills/management/weekly-review/reference/reviews/YYYY-W(n-1).md`
 - 前月 Pre-Mortem: `../../04_レビュー/YYYY-MM-DD-pre-mortem-{topic}.md`（該当あれば）
 - 関連施策 Issue: #NNN（enhancement / auto-generated ラベル）
 
@@ -358,15 +355,15 @@ tags: []
 ## 運用ルール
 
 - **毎週月曜に実行**する想定。ユーザーが `/weekly-plan` を実行するだけで完結
-- 前週の計画ドキュメントが存在する場合、**自動で振り返りを生成**する
+- 前週レビューが存在する場合、その申し送りを現在計画と照合する
 - 前週の計画で未達のタスクは、自動的に今週の Must 候補に昇格させて検討する
 - 計画ドキュメントのタスク状態（完了/未達）は、**週中にユーザーが checkbox を docs ファイルで編集**して更新する（Edit tool or エディタ）
-- 計画ドキュメントは蓄積する（`status: active` → `archived` への切り替えは `/weekly-review` が翌週実行時に担当）。過去の計画は傾向分析に使用
+- 計画ドキュメントは蓄積せず毎週上書きする。過去の結果は週次レビューと git 履歴に残す
 
 ## 保存先
 
-- 本スキル出力: `docs/03_週次運用/週次計画/YYYY-Www.md`
-- ペアの週次レビュー: `docs/03_週次運用/週次レビュー/YYYY-Www.md`
+- 本スキル出力: `docs/todo/current-week.md`
+- ペアの週次レビュー: `.claude/skills/management/weekly-review/reference/reviews/YYYY-Www.md`
 - Phase 4 で参照する批判的レビュー: `docs/04_レビュー/*.md` (type: critical-review)
 - Phase 4 で参照する事前検死: `docs/04_レビュー/*-pre-mortem-*.md`
 
@@ -376,7 +373,7 @@ tags: []
 - `docs/02_実装計画/01_収益化マスタープラン.md` — KPI・Phase 目標
 - `gh issue list --state open --label enhancement` — 未解決の機能改善 Issue（残存ラベル）
 - `ls -t docs/04_レビュー/*.md | head -5` — 過去の批判的指摘
-- `ls -t docs/03_週次運用/週次計画/*.md | head -5` / `ls -t docs/03_週次運用/週次レビュー/*.md | head -5` — 過去の週次計画・レビュー
+- `docs/todo/current-week.md` / `.claude/skills/management/weekly-review/reference/reviews/` — 現在計画と過去レビュー
 - 投稿台帳 `.claude/state/sns/posts.json`（`sns-posts-store.cjs` 経由）+ `.claude/skills/analytics/sns-metrics-improvement/snapshots/` — SNS コンテンツ状況・メトリクス
 - `.claude/skills/management/critical-review/SKILL.md` — 批判的レビューの精神
 - `.claude/skills/blog/discover-trends/SKILL.md` — フルトレンドスキャン（Agent E で不足時に提案、`--source all` で全 6 ソース統合）

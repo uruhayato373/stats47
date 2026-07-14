@@ -186,7 +186,7 @@ node .claude/scripts/snapshot-weekly-metrics.mjs [YYYY-Www]
      ```
 
 7. SNS メトリクスと YouTube のレビュー本文への埋め込み
-   SNS / YouTube の週次ハイライトは本レビュードキュメント `docs/03_週次運用/週次レビュー/YYYY-Www.md` 本文に直接記載する。
+   SNS / YouTube の週次ハイライトは本レビュードキュメントの本文に直接記載する。
    GA4/GSC の詳細データは snapshot CSV (`.claude/skills/analytics/{gsc,ga4}-improvement/reference/snapshots/`) と改善ログ (`docs/todo/01_改善バックログ.md`) に分離済みなので、レビュー本文では「主要指標の前週差 + 改善ログ section 参照」のみに圧縮する。
 
 出力形式:
@@ -227,9 +227,8 @@ node .claude/scripts/snapshot-weekly-metrics.mjs [YYYY-Www]
 
 ```
 調査項目:
-- 当週の計画ドキュメントを取得
-  ls -t docs/03_週次運用/週次計画/*.md | head -5
-  → ファイル名から当週の ISO 週番号を含むファイル（YYYY-Www.md）を特定
+- 当週の計画ドキュメント `docs/todo/current-week.md` を取得
+  → frontmatter の `week` が対象週と一致することを確認
   → Read tool で本文を取得し、計画されていたタスク（Must / Should / Could のチェックボックス）の一覧を抽出
   → git log と照合して完了/未達を判定
 - 今週 close された Issue（`gh issue list --state closed --search "closed:>=<today-7d>"`、enhancement / auto-generated ラベル等）
@@ -238,7 +237,7 @@ node .claude/scripts/snapshot-weekly-metrics.mjs [YYYY-Www]
   ls -t docs/04_レビュー/*-pre-mortem-*.md | head -3
   → ファイル名の日付（YYYY-MM-DD-{topic}.md）で当週分を抽出
 
-「前週からの引き継ぎ」: 前週計画 `docs/03_週次運用/週次計画/YYYY-W(n-1).md` の Must / Should / Could 未達チェックボックスを Read tool で取得し、本レビューの「計画 vs 実績」セクションで「継続」「持ち越し」と判定する。
+「前週からの引き継ぎ」: 直前の週次レビューの申し送りと `docs/todo/current-week.md` を照合し、本レビューの「計画 vs 実績」で「継続」「持ち越し」と判定する。
 
 出力形式:
 - 「計画タスク vs 実績」の対照表
@@ -297,7 +296,7 @@ echo "テーマ数:         $(npx tsx -e 'import {ALL_THEMES} from "./apps/web/s
 
 ### Phase 4: 出力
 
-Write tool で `docs/03_週次運用/週次レビュー/YYYY-Www.md` を作成する。frontmatter を必ず含めること。
+Write tool で `.claude/skills/management/weekly-review/reference/reviews/YYYY-Www.md` を作成する。frontmatter を必ず含めること。
 
 ```yaml
 ---
@@ -311,14 +310,9 @@ tags: []
 
 作成後、ファイルパスを報告する。関連する各種 snapshot Issue（GA4/GSC/AdSense）や施策 Issue は本文の「関連 Issue」セクションに `#番号` で参照を含める（auto-generated / enhancement / cloudflare-alert / psi-alert ラベルは存続）。
 
-### Phase 4.5: 当週の計画ドキュメントを archived 化
+### Phase 4.5: 現在計画を維持
 
-レビュードキュメント作成完了後、ペアとなる同週の `docs/03_週次運用/週次計画/YYYY-Www.md` の frontmatter を `status: archived` に書き換える。
-
-```
-Edit tool で対象ファイルを開き、frontmatter の "status: active" を "status: archived" に変更する。
-末尾に「対応する週次レビュー: ../週次レビュー/YYYY-Www.md で振り返り完了」を追記する。
-```
+レビュードキュメント作成後も `docs/todo/current-week.md` は変更しない。次回 `/weekly-plan` が上書きする。
 
 対象ファイルが見つからない場合（稀）はスキップし、報告に明記する。
 
@@ -346,7 +340,7 @@ tags: []
 ## 週
 - **ISO Week**: YYYY-Www
 - **期間**: YYYY-MM-DD 〜 YYYY-MM-DD
-- **計画ドキュメント**: `../週次計画/YYYY-Www.md`
+- **計画ドキュメント**: `../../todo/current-week.md`（レビュー生成時点）
 
 ## サマリー
 
@@ -543,7 +537,7 @@ node .claude/scripts/blog/analyze-winning-patterns.mjs   # CTR×構造特徴→f
 
 - 未達タスクの引き継ぎ
 - 来週注意すべきこと
-<!-- 来週の docs/03_週次運用/週次計画/YYYY-W(n+1).md に引き継がれる -->
+<!-- 次回 /weekly-plan が docs/todo/current-week.md に引き継ぐ -->
 
 ## 関連ドキュメント・Issue
 
@@ -554,14 +548,14 @@ node .claude/scripts/blog/analyze-winning-patterns.mjs   # CTR×構造特徴→f
 ## 運用ルール
 
 - **毎週日曜〜月曜に実行**する想定（レビュー完了後に自動で `/weekly-plan` が実行される）
-- 当週の計画ドキュメント `docs/03_週次運用/週次計画/YYYY-Www.md` が存在しない場合でも、git log ベースで実績を収集する
+- `docs/todo/current-week.md` が存在しない、または対象週と異なる場合でも、git log ベースで実績を収集する
 - レビュードキュメントは蓄積する（`status: active` のままでもよい。古い週は傾向分析に使用）
-- `/weekly-plan` の Phase 1 Agent D が前週の `docs/03_週次運用/週次レビュー/YYYY-W(n-1).md` を参照する
+- `/weekly-plan` の Phase 1 Agent D が前週のskill referenceレビューを参照する
 
 ## 保存先 / Issue ラベル
 
-- 本スキル出力: `docs/03_週次運用/週次レビュー/YYYY-Www.md`
-- ペアの週次計画: `docs/03_週次運用/週次計画/YYYY-Www.md`（Phase 4.5 で `status: archived` に書き換え）
+- 本スキル出力: `.claude/skills/management/weekly-review/reference/reviews/YYYY-Www.md`
+- 計画: `docs/todo/current-week.md`（レビューでは変更しない）
 - `gsc-snapshot` / `ga4-snapshot` / `adsense-snapshot` — Phase 1 Agent C が observe モードで作成する snapshot Issue（auto-generated 系として存続）
 - `gsc-improvement` / `ga4-improvement` / `adsense-improvement` — 施策 Issue（enhancement ラベルで存続、effect 判定は各 observe が担当）
 - 当週分の critical-review: `docs/04_レビュー/YYYY-MM-DD-*.md` (type: critical-review)
@@ -596,7 +590,7 @@ node .claude/scripts/blog/analyze-winning-patterns.mjs   # CTR×構造特徴→f
 
 ## 参照
 
-- `ls -t docs/03_週次運用/週次レビュー/*.md | head -5` / `ls -t docs/03_週次運用/週次計画/*.md | head -5` — 週次計画・レビューの蓄積先
+- `.claude/skills/management/weekly-review/reference/reviews/` / `docs/todo/current-week.md` — 過去レビューと現在計画
 - `.claude/skills/analytics/gsc-improvement/reference/snapshots/` — GSC 週次 snapshot CSV + budgets.json（施策・観測は GitHub Issues `gsc-*` ラベル側）
 - `.claude/skills/analytics/ga4-improvement/reference/snapshots/` — GA4 週次 snapshot CSV + budgets.json（施策・観測は GitHub Issues `ga4-*` ラベル側）
 - `.claude/skills/analytics/adsense-improvement/reference/snapshots/` — AdSense 週次 snapshot CSV + budgets.json（施策・観測は GitHub Issues `adsense-*` ラベル側）
@@ -616,4 +610,4 @@ node .claude/scripts/blog/analyze-winning-patterns.mjs   # CTR×構造特徴→f
 - `docs/60_運用ログ/weekly-metrics/` — snapshot CSV で代替（2026-04-17 削除）
 - DB `seo_tracking` / `seo_actions` テーブル — GitHub Issues で代替（2026-04-15）
 - `.claude/skills/analytics/{gsc,ga4}-improvement/reference/improvement-log.md` — GitHub Issues に移行（2026-04-21、過去ログは `reference/archive/`）
-- GitHub Issues `weekly-plan` / `weekly-review` ラベル — `docs/03_週次運用/` に再移行（2026-05-16）。過去 Issue は close + 本ディレクトリへ転記済み
+- GitHub Issues `weekly-plan` / `weekly-review` ラベル — ファイル運用へ移行済み。計画は `docs/todo/`、レビューは本skill reference

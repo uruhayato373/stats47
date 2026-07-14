@@ -1,6 +1,6 @@
 /**
  * 週次統合メトリクス Markdown 本文を生成する
- * (docs/03_週次運用/メトリクス/YYYY-Www.md に書き込む workflow 側で利用)
+ * (GitHub Step Summary に表示する再生成可能な週次サマリ)
  *
  * 引数:
  *   --week YYYY-Www (省略時は今日の 1 日前の ISO 週 = 月曜朝に回すと先週)

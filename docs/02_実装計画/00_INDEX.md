@@ -38,6 +38,7 @@ tags: [実装計画]
 | `22_運営者カード・ホーム広告整理仕様.md` | 全ページ共通の運営者プロモとホーム汎用アフィを撤去し、プロフィールと文脈広告を整理する仕様     |
 | `23_ブログOGP生成AIパイプライン仕様.md`  | Geminiで記事別の文字なし背景を生成し、既存Satori合成・R2配信へ安全に統合するClaude Code実装仕様 |
 | `24_テーマ分類再編成方針.md`             | 22テーマを固定せず、全レビュー後にkeep/split/merge/parent-hubで再編する分類・URL移行方針         |
+| `25_アフィリエイト運用SSOT移行仕様.md`   | docs/40 の運用資料を affiliate-manager / skills / state / 型付き git TS へ移し、週次計測・改善ループを一本化する Claude Code 実装仕様 |
 
 ## 関連（このフォルダ外の正典）
 
@@ -47,6 +48,6 @@ tags: [実装計画]
 - 統一レイアウト設計: `docs/01_技術設計/13_統一レイアウト設計.md`
 - デザインシステム: `docs/01_技術設計/15_デザインシステムSSOT.md`
 - theme-dashboard feature README: `apps/web/src/features/theme-dashboard/README.md`
-- 週次計画・レビュー: `docs/03_週次運用/`
+- 現在計画: `docs/todo/current-{month,week}.md` / agent用週次レビュー: `.claude/skills/management/weekly-review/reference/reviews/`
 - 批判的レビュー・パフォーマンス・コスト月報: `docs/04_レビュー/`
 - 白書チャート逆引き inventory（ドーマント・skill 専用に移設）: `.claude/skills/analytics/whitepaper-chart-inventory/reference/inventory/`
