@@ -122,6 +122,15 @@ jobs:
           node --test .claude/scripts/themes/__tests__/
         continue-on-error: false
 
+      - name: 📊 Affiliate Compliance / Operations Guard
+        # 直接配置台帳の構造検証 + compliance/operations 判定コアの fixture テスト。
+        # ネットワーク・R2 には触れない (本文突合 --live は週次 workflow が担当)。
+        # 正典: .claude/rules/affiliate-ads-standards.md / skill /audit-affiliate-compliance
+        run: |
+          npx tsx .claude/scripts/ads/audit-affiliate-compliance.ts --check
+          node --test .claude/scripts/ads/__tests__/
+        continue-on-error: false
+
       - name: 📋 Survey Portfolio State Guard
         # survey ポートフォリオ state の schema + 判定規律 (surveys.json 双方向一致・
         # survey-editorial.ts との drift・orphan/linkage 整合・根拠なし merge/retire 禁止・

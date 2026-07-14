@@ -76,7 +76,7 @@
 | `ga4-analyst` 🆕 | GA4 専任 | seo-auditor 分割 |
 | `performance-auditor` 🆕 | PSI / Lighthouse / Cloudflare cost | seo-auditor 分割 |
 | `adsense-analyst` 🆕 | AdSense 収益計測 + アフィ収益の計測協働 (在庫管理は affiliate-manager に移管) | seo-auditor 分割 + new |
-| `affiliate-manager` 🆕 | アフィリエイト一元管理 (SSOT=`affiliate-ads-data.ts` 在庫 CRUD / サイズ・プログラム規約 / priority 整合 / publish 段取り)。計測は adsense/ga4、effect は improvement-triage に委譲。必読 `.claude/rules/affiliate-ads-standards.md` | 2026-06-30 新設 (adsense-analyst 分離) |
+| `affiliate-manager` 🆕 | アフィリエイト一元管理 (SSOT=`affiliate-{ads,direct-placements}-data.ts` 在庫 CRUD / サイズ・プログラム規約 / priority 整合 / compliance 監査 `/audit-affiliate-compliance` / 実験 `/manage-affiliate-experiment` / 集約 state `affiliate-operations-latest.json` / publish 段取り)。計測は adsense/ga4、effect は improvement-triage に委譲。必読 `.claude/rules/affiliate-ads-standards.md` | 2026-06-30 新設 (adsense-analyst 分離)・2026-07-15 運用 SSOT 移行で拡張 |
 
 ## Tier 6: Theme / UI (7 体)
 

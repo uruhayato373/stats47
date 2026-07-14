@@ -21,7 +21,14 @@ co_agents: [improvement-triage, adsense-analyst]
 |---|---|---|
 | 施策一覧 | `docs/todo/01_改善バックログ.md` | AFF-NN 行の追加・status 更新 |
 | agent 用詳細 | `.claude/skills/analytics/affiliate-improvement/reference/improvement-log.md` | 検証コマンド・仮説・実測値・GA4 クエリ結果 |
+| **集約状態 (機械・★入口)** | `.claude/state/ads/affiliate-operations-latest.json` | 計測ゲート・freshness・coverage・直接配置・実験・推奨アクションの現在地 (`build-affiliate-operations-state.ts` が生成、週次 CI 自動更新) |
 | 在庫 snapshot (機械) | `.claude/state/ads/inventory-*.json` | audit script が生成、ループの入力 |
+| compliance snapshot (機械) | `.claude/state/ads/compliance-latest.json` | 直接配置の孤立・PR 表記監査 (`/audit-affiliate-compliance`) |
+
+> **status モードはまず集約状態を読む**: `affiliate-operations-latest.json` の `measurementGate` /
+> `coverage` / `recommendedActions` が現在地。**在庫ゼロ軸や gap は SKILL に固定記載しない** — 必ず
+> state から読む (値は変動する)。stale (freshness > 10d) なら
+> `npx tsx .claude/scripts/ads/build-affiliate-operations-state.ts` で再生成する。
 
 > **effect/* を付ける前に必ず** `.claude/rules/evidence-based-judgment.md` の実証チェックリストを通す。
 > 想定値 / 実測値 / 取得コマンド / 経過日数なしに effect/full・effect/partial を付けない。
@@ -50,15 +57,16 @@ $ARGUMENTS — [mode]
 
 ```bash
 npx tsx .claude/scripts/ads/build-affiliate-dashboard.ts
-# → docs/40_アフィリエイト管理/affiliate-dashboard.html (依存なし・自己完結)
+# → /tmp/stats47-affiliate-dashboard.html (依存なし・自己完結の派生物。git 管理しない)
 ```
 
 「開く」の意味は実行環境で分岐する (`.claude/rules/branch-workflow.md` の実行環境判定と同じ):
 
 | 環境 | 開き方 |
 |---|---|
-| ローカル (GUI あり) | 生成後 `open docs/40_アフィリエイト管理/affiliate-dashboard.html` (macOS) / `xdg-open …` (Linux) でブラウザ起動 |
+| ローカル (GUI あり) | 生成後 `open /tmp/stats47-affiliate-dashboard.html` (macOS) / `xdg-open …` (Linux) でブラウザ起動 |
 | Claude Code on the web / クラウド (GUI なし) | 生成後 **SendUserFile でユーザーに HTML を渡す** (ブラウザは手元で開いてもらう) |
+| CI (週次 `affiliate-dashboard-refresh.yml`) | workflow artifact `affiliate-dashboard` として保存 (commit しない) |
 
 - 管理画面は read-only (確認用)。バナーの追加・変更は `/register-affiliate-banner` に委譲する。
 - 在庫を更新した直後に開く場合は、先に `/register-affiliate-banner` で SSOT を更新 → 本モードで再生成。
@@ -70,8 +78,8 @@ npx tsx .claude/scripts/ads/audit-affiliate-inventory.ts
 ```
 
 出力で確認すること:
-- **gapVerticals** (在庫ゼロの意図軸・10 vertical) ★広告解決の実軸 — 現状 `education` / `mobility` がゼロ。
-  この意図のページ (ranking/theme/blog) に意図一致広告が出ない → `/register-affiliate-banner propose` の対象
+- **gapVerticals** (在庫ゼロの意図軸・10 vertical) ★広告解決の実軸 — ゼロ軸は audit 出力から読む (固定値を
+  持たない)。この意図のページ (ranking/theme/blog) に意図一致広告が出ない → `/register-affiliate-banner propose` の対象
 - **thinVerticals** (枠 ≤ 2) — 補充候補
 - **gapCategories / thinCategories** (17 軸 e-Stat 分類) — 参考 (backbone。実配信は vertical で解決)
 - **sizeViolations** — canonical(300×250/250×250/320×100/text) 以外。`error` tier は新規混入 (要是正)

@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-07-14T22:36:00.712Z",
+  "inventorySnapshot": ".claude/state/ads/inventory-latest.json",
+  "ga4Snapshot": ".claude/state/ads/ga4-affiliate-2026-07-12.json",
+  "freshness": {
+    "inventoryDays": 0,
+    "ga4Days": 2
+  },
+  "measurementGate": {
+    "status": "ready",
+    "reasons": []
+  },
+  "coverage": {
+    "gapVerticals": [],
+    "thinVerticals": [
+      "population",
+      "energy",
+      "furusato",
+      "education",
+      "mobility"
+    ]
+  },
+  "directPlacements": {
+    "total": 2,
+    "orphaned": [],
+    "missingDisclosure": [
+      {
+        "id": "moshimo-ai-onikanri-93995",
+        "target": "blog:koumuin-claude-code-estat-automation",
+        "missing": [
+          "head-pr-declaration"
+        ]
+      },
+      {
+        "id": "a8-strategy-career-koumuin-ai-tenshoku-260601701360",
+        "target": "blog:prefecture-salary-gap-career",
+        "missing": [
+          "head-pr-declaration",
+          "inline-pr-prefix"
+        ]
+      }
+    ]
+  },
+  "experiments": {
+    "active": [],
+    "readyToDecide": [],
+    "invalid": [],
+    "inconclusive": [],
+    "closed": []
+  },
+  "recommendedActions": [
+    {
+      "id": "fix-direct-placements",
+      "reason": "orphaned=0 missingDisclosure=2",
+      "command": "/audit-affiliate-compliance"
+    }
+  ],
+  "ga4Totals": {
+    "impressions": 10122,
+    "clicks": 10,
+    "ctr": 0.0009879470460383323
+  }
+}

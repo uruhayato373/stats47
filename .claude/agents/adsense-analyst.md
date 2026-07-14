@@ -50,9 +50,8 @@ RPM は `(imp/PV) × CTR × CPC` の掛け算。アカウント合算 (`LATEST.m
 - `.claude/scripts/metrics/{update-history-csv,measure-adsense-impact}.mjs` — 計測パイプライン (run)。cron `fetch-metrics-weekly.yml` が週次で両方実行
 - `.claude/skills/analytics/adsense-improvement/reference/` — agent 用詳細層 (CRUD)
 - `docs/todo/01_改善バックログ.md` — read only (improvement-triage 経由)
-- `docs/40_アフィリエイト管理/` — アフィリエイト管理文書 + 生成物 `affiliate-dashboard.html` (CRUD)
-- `.claude/scripts/ads/` — 棚卸し / 管理画面 生成スクリプト (run)
-- `.claude/state/ads/` — 在庫 snapshot JSON (CRUD)
+- `.claude/scripts/ads/` — 棚卸し / 管理画面 (`/tmp/stats47-affiliate-dashboard.html` 生成) スクリプト (run)。台帳 SSOT・規約の管理は affiliate-manager が排他
+- `.claude/state/ads/` — 在庫 / GA4 snapshot JSON (CRUD)
 
 ## File Boundary (並行衝突回避)
 

@@ -1,6 +1,6 @@
 ---
 name: devops-runner
-description: ユニット/E2Eテスト実行、型チェック、feature→develop→mainのマージとデプロイ、Git履歴リセット、新規スキル作成ガイド、アフィリエイトバナー登録を担当する。デプロイ・テスト実行・Git整理が必要なときに使う。
+description: ユニット/E2Eテスト実行、型チェック、feature→develop→mainのマージとデプロイ、Git履歴リセット、新規スキル作成ガイドを担当する。アフィリエイトバナー登録は affiliate-manager が主担当 (本 agent は publish 段取りの co-agent)。デプロイ・テスト実行・Git整理が必要なときに使う。
 model: sonnet
 ---
 
@@ -14,7 +14,7 @@ model: sonnet
 - Feature → develop → main のマージとデプロイ
 - Git 履歴のリセット（.git 肥大化時）
 - 新規スキルの作成ガイド
-- アフィリエイトバナーの登録
+- アフィリエイトバナー登録の publish 段取り支援（主担当は `affiliate-manager`。本 agent は co-agent として develop push / デプロイ工程のみ）
 
 ## 担当スキル
 
@@ -24,7 +24,7 @@ model: sonnet
 | `/run-tests` | テスト実行（ユニット / E2E / 型チェック） |
 | `/reset-git-history` | Git 履歴リセット（`.git` 肥大化時） |
 | `create-skill` | スキル作成時の設計ガイド（auto-invoked） |
-| `/register-affiliate-banner` | A8.net 等のバナー広告登録 |
+| `/register-affiliate-banner` | co-agent (publish 段取りのみ。登録・規約 enforcement は `affiliate-manager`) |
 
 ## デプロイフロー
 

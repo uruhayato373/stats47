@@ -17,10 +17,13 @@ A8.net 等アフィリエイト広告の **意図軸 (vertical)・在庫・配�
 ## 担当範囲
 
 - **意図ハブ保守** — `affiliate-category.ts` の `AffiliateVertical` (10 軸) と 3 map の整合。theme/category 追加時の写像更新。
-- **対話式登録** (`/register-affiliate-banner`) — `propose` (在庫ギャップ×トラフィックで次の提携先を 1 件提案) → ユーザーが ASP 提携 → `register` (ASP 別コード解析 [A8/ValueCommerce/楽天]・`inspect-banner.mjs` で画像 fetch → サイズ実測+広告主目視判別・canonical 検証・vertical 判定・1 エントリ追記)。
-- **在庫整理・監査・dashboard** (`/affiliate-improvement`) — vertical カバレッジ / 在庫ゼロ軸 (現状 education・mobility) / サイズ逸脱 / 意図ミスマッチの検出と是正。
+- **対話式登録** (`/register-affiliate-banner`) — `propose` (在庫ギャップ×トラフィックで次の提携先を 1 件提案) → ユーザーが ASP 提携 → `register` (ASP 別コード解析 [A8/ValueCommerce/楽天]・`inspect-banner.mjs` で画像 fetch → サイズ実測+広告主目視判別・canonical 検証・vertical 判定・1 エントリ追記)。`direct` = 直接属性方式の台帳登録。
+- **直接配置の inventory ownership** — 直接属性方式 (`<affiliate-banner>` / note 生 HTML) の台帳 SSOT `apps/web/scripts/affiliate-direct-placements-data.ts` を単一所有。配置と台帳登録をセットで守らせる。
+- **compliance 監査** (`/audit-affiliate-compliance`) — 孤立配置・本文タグ不一致・PR 表記 (景表法) 漏れ・台帳未登録タグ・canonical サイズを決定的スクリプトで監査。記事本文の是正は blog-editor / article-writer に委譲。
+- **在庫整理・監査・dashboard** (`/affiliate-improvement`) — vertical カバレッジ / 在庫ゼロ軸 / サイズ逸脱 / 意図ミスマッチの検出と是正。ゼロ/手薄軸は `.claude/state/ads/inventory-latest.json` の `coverage` から読む (固定値を持たない)。
 - **規約 enforcement** — サイズ (`audit --check-size` + pre-commit) / vertical∈10軸 (export validation) / priority (意図適合) の遵守。legacy 一点物サイズの段階移行。
-- **計測ゲート** — GA4 custom dimension (`affiliate_vertical` 等) の登録手順をユーザーに案内し (rules §6)、`fetch-affiliate-ga4.cjs` で内訳が取れる状態を維持する。
+- **計測ゲート・運用状態** — 集約 state `.claude/state/ads/affiliate-operations-latest.json` (`build-affiliate-operations-state.ts` が生成、週次 CI 自動更新) をアフィリエイト運用の現在地の入口にする。`measurementGate` (GA4 snapshot 鮮度 / custom dimension 有無) が blocked なら rules §6 の登録手順をユーザーに案内。freshness・coverage・推奨アクションはすべて決定的スクリプトが判定する (モデルは routing・期限計算をしない)。
+- **実験管理** (`/manage-affiliate-experiment`) — クリエイティブ A/B の plan/start/observe/decide/close。registry (`.claude/state/ads/experiments.json`) に停止条件を事前固定し、判定 (collecting / ready-to-decide / inconclusive / invalid) はスクリプトに委ねる。**勝者の自動反映は禁止** (decide は人間へ提示まで)。
 - **SSOT vertical 移行** — Step A (infra: 解決を vertical 化・完了) → **Step B (本番確認後: 全広告に真の vertical を付与し複製を削除、74→約40件)** を段取る。
 - **publish 段取り** — develop push で `publish-affiliate-ads.yml` を発火させる手順管理 (実行可否はユーザー確認)。
 
@@ -28,8 +31,10 @@ A8.net 等アフィリエイト広告の **意図軸 (vertical)・在庫・配�
 
 | skill | 用途 |
 |---|---|
-| `/register-affiliate-banner` | A8 バナー登録・配置設計 (SSOT 追加) |
+| `/register-affiliate-banner` | バナー登録・配置設計 (自動配置 SSOT 追加 + `direct` 直接配置台帳) |
 | `/affiliate-improvement` | 在庫管理・dashboard・imp/click/CTR 改善ループ |
+| `/audit-affiliate-compliance` | PR 表記・孤立配置・リンク整合・canonical サイズの決定的監査 |
+| `/manage-affiliate-experiment` | クリエイティブ A/B 実験の plan/start/observe/decide/close |
 
 ## 担当外 (委譲)
 
@@ -51,6 +56,7 @@ A8.net 等アフィリエイト広告の **意図軸 (vertical)・在庫・配�
 ## 参照
 
 - **ルール (SSOT)**: `.claude/rules/affiliate-ads-standards.md`
-- データ: `apps/web/scripts/affiliate-ads-data.ts`
+- データ: `apps/web/scripts/affiliate-ads-data.ts` (自動配置) / `apps/web/scripts/affiliate-direct-placements-data.ts` (直接配置)
+- 機械状態: `.claude/state/ads/{affiliate-operations-latest,inventory-latest,compliance-latest,experiments}.json`
 - 配信: `apps/web/src/features/ads/`
-- 実装計画: `docs/02_実装計画/14_収益化実装方針.md` §3・付録A / 戦略: `docs/02_実装計画/01_収益化マスタープラン.md` §5-6
+- 実装計画: `docs/02_実装計画/14_収益化実装方針.md` §3・付録A / 戦略: `docs/02_実装計画/01_収益化マスタープラン.md` §5-6 / 移行仕様: `docs/02_実装計画/25_アフィリエイト運用SSOT移行仕様.md`
