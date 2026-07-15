@@ -60,6 +60,13 @@ export interface NoteArticle {
   /** R2 上の格納パス (draft.md / images はこの下) */
   r2Path: string;
   /**
+   * R2 に記事本体 (draft.md / 画像) が実在するか。
+   * false = note.com 上にのみ存在する回収スタブ (recovered-* / paid-*)。r2Path は
+   * note ID から機械生成しただけで実体が無く 404 になる。省略時は true とみなす。
+   * 本文復元 (note.com → R2) 後に true へ更新する。
+   */
+  r2Body?: boolean;
+  /**
    * 送客先 stats47 パス (例: "/ranking/annual-sunshine-duration")。
    * ranking キーの実在を validate-note-catalog.ts が検証する。
    */

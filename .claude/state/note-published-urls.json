@@ -1,21 +1,11 @@
 {
   "_meta": {
-    "generated_by": "build-note-published-index.mjs",
-    "generated_at": "2026-06-21",
-    "source": "R2 draft.md frontmatter (note_url + published: true)",
-    "note": "このファイルは派生インデックス。真実源は R2 draft.md の frontmatter。"
+    "generated_by": "generate-note-catalog.ts",
+    "generated_at": "2026-07-15",
+    "source": "note-catalog git TS SSOT (.claude/scripts/note/catalog/)",
+    "note": "このファイルは派生インデックス。真実源は note-catalog の data/*.ts。手編集しない。"
   },
   "articles": {
-    "_comment_batch1": "2026-05-21 batch1 update: #01-#05 を update モードで再更新 (カバー差し替え・本文再ペースト・画像再挿入・有料境界再設定・マガジン追加)",
-    "koumuin-gis-01-depopulation-medical": {
-      "vertical": "koumuin-gis",
-      "title": "自治体職員のためのGIS入門 — 無料の国土数値情報で「過疎地域×医療機関」を可視化する",
-      "url": "https://note.com/stats47/n686dcc017bbe",
-      "is_paid": false,
-      "published_at": "2026-06-06",
-      "r2_path": "note/koumuin-gis/koumuin-gis-01-depopulation-medical",
-      "status": "r2_ready"
-    },
     "00-claude-code-intro-for-public-servants": {
       "vertical": "koumuin-claude-code",
       "title": "Claude Code とは何か — ターミナル未経験の公務員のための導入ガイド",
@@ -23,6 +13,17 @@
       "is_paid": false,
       "published_at": "2026-05-20",
       "r2_path": "note/koumuin-claude-code/00-claude-code-intro-for-public-servants",
+      "r2_body": true,
+      "status": "r2_ready"
+    },
+    "00-estat-claude-code-intro": {
+      "vertical": "koumuin-estat-claude-code",
+      "title": "e-Stat × Claude Code とは — 自治体職員のための統計データ業務効率化ガイド",
+      "url": "https://note.com/stats47/n/n258277f96f88",
+      "is_paid": false,
+      "published_at": "2026-06-14",
+      "r2_path": "note/koumuin-estat-claude-code/00-estat-claude-code-intro",
+      "r2_body": true,
       "status": "r2_ready"
     },
     "01-claude-code-setup-complete": {
@@ -32,6 +33,18 @@
       "is_paid": true,
       "published_at": "2026-05-21",
       "r2_path": "note/koumuin-claude-code/01-claude-code-setup-complete",
+      "r2_body": true,
+      "status": "r2_ready",
+      "price_jpy": 300
+    },
+    "01-estat-api-key-setup": {
+      "vertical": "koumuin-estat-claude-code",
+      "title": "e-Stat API キー取得から Claude Code 連携まで — 30 分で完了する初期設定",
+      "url": "https://note.com/stats47/n/nc5a1358141a5",
+      "is_paid": true,
+      "published_at": "2026-06-14",
+      "r2_path": "note/koumuin-estat-claude-code/01-estat-api-key-setup",
+      "r2_body": true,
       "status": "r2_ready",
       "price_jpy": 300
     },
@@ -42,200 +55,8 @@
       "is_paid": false,
       "published_at": "2026-05-21",
       "r2_path": "note/koumuin-claude-code/02-internal-network-workarounds",
+      "r2_body": true,
       "status": "r2_ready"
-    },
-    "03-it-dept-security-doc": {
-      "vertical": "koumuin-claude-code",
-      "title": "自治体 IT 担当に渡せる Claude Code セキュリティ説明資料",
-      "url": "https://note.com/stats47/n/nedcf6ded5c36",
-      "is_paid": true,
-      "published_at": "2026-05-21",
-      "r2_path": "note/koumuin-claude-code/03-it-dept-security-doc",
-      "status": "r2_ready",
-      "price_jpy": 300
-    },
-    "04-meeting-minutes-30min-to-5min": {
-      "vertical": "koumuin-claude-code",
-      "title": "議事録 30 分 → 5 分にした手順 (録音 mp3 → Claude Code 要約)",
-      "url": "https://note.com/stats47/n/n967644e00ad9",
-      "is_paid": false,
-      "published_at": "2026-05-21",
-      "r2_path": "note/koumuin-claude-code/04-meeting-minutes-30min-to-5min",
-      "status": "r2_ready"
-    },
-    "05-assembly-answer-prompts": {
-      "vertical": "koumuin-claude-code",
-      "title": "議会答弁原稿を Claude Code で 3 案出す prompt 集",
-      "url": "https://note.com/stats47/n/ne4e746d2b0cf",
-      "is_paid": true,
-      "published_at": "2026-05-21",
-      "r2_path": "note/koumuin-claude-code/05-assembly-answer-prompts",
-      "status": "r2_ready",
-      "price_jpy": 300
-    },
-    "06-ordinance-revision-review": {
-      "vertical": "koumuin-claude-code",
-      "title": "条例改正案を Claude Code でレビュー: 矛盾検出 + 文体統一",
-      "url": "https://note.com/stats47/n/ne23e18ce9289",
-      "is_paid": true,
-      "published_at": "2026-05-21",
-      "r2_path": "note/koumuin-claude-code/06-ordinance-revision-review",
-      "status": "r2_ready",
-      "price_jpy": 300
-    },
-    "31-claude-code-how-to-ask": {
-      "vertical": "koumuin-claude-code",
-      "title": "Claude Code への頼み方 — 公務員業務で「欲しいもの」を引き出すプロンプトの型",
-      "url": "https://note.com/stats47/n/n159230eb514c",
-      "is_paid": false,
-      "published_at": "2026-05-21",
-      "r2_path": "note/koumuin-claude-code/31-claude-code-how-to-ask",
-      "status": "r2_ready"
-    },
-    "32-claude-skills-getting-started": {
-      "vertical": "koumuin-claude-code",
-      "title": ".claude/skills 入門 — 一度うまくいった頼み方を職場の資産にする",
-      "url": "https://note.com/stats47/n/nac5e44284865",
-      "is_paid": false,
-      "published_at": "2026-05-21",
-      "r2_path": "note/koumuin-claude-code/32-claude-skills-getting-started",
-      "status": "r2_ready"
-    },
-    "07-official-doc-skills": {
-      "vertical": "koumuin-claude-code",
-      "title": "公文書ライティングを校正させる .claude/skills 完全版",
-      "url": "https://note.com/stats47/n/n1c78ab40901f",
-      "is_paid": true,
-      "published_at": "2026-05-21",
-      "r2_path": "note/koumuin-claude-code/07-official-doc-skills",
-      "status": "r2_ready",
-      "price_jpy": 300
-    },
-    "08-proposal-doc-checklist-20": {
-      "vertical": "koumuin-claude-code",
-      "title": "起案文・決裁文の AI 査読チェックリスト 20 項目",
-      "url": "https://note.com/stats47/n/n59c27bbc973e",
-      "is_paid": true,
-      "published_at": "2026-05-21",
-      "r2_path": "note/koumuin-claude-code/08-proposal-doc-checklist-20",
-      "status": "r2_ready",
-      "price_jpy": 300
-    },
-    "09-assembly-question-points": {
-      "vertical": "koumuin-claude-code",
-      "title": "議会一般質問の論点整理を 1 時間 → 10 分にする方法",
-      "url": "https://note.com/stats47/n/nc276079a5317",
-      "is_paid": false,
-      "published_at": "2026-05-21",
-      "r2_path": "note/koumuin-claude-code/09-assembly-question-points",
-      "status": "r2_ready"
-    },
-    "10-ai-without-personal-info": {
-      "vertical": "koumuin-claude-code",
-      "title": "個人情報を Claude に送らずに AI 活用する 3 つの設定",
-      "url": "https://note.com/stats47/n/n9b2109c9f964",
-      "is_paid": false,
-      "published_at": "2026-05-21",
-      "r2_path": "note/koumuin-claude-code/10-ai-without-personal-info",
-      "status": "r2_ready"
-    },
-    "11-hooks-personal-info-masking": {
-      "vertical": "koumuin-claude-code",
-      "title": "Claude Code Hooks で個人情報マスキングを自動化する",
-      "url": "https://note.com/stats47/n/ne54920337944",
-      "is_paid": true,
-      "published_at": "2026-05-21",
-      "r2_path": "note/koumuin-claude-code/11-hooks-personal-info-masking",
-      "status": "r2_ready",
-      "price_jpy": 300
-    },
-    "12-audit-ready-settings": {
-      "vertical": "koumuin-claude-code",
-      "title": "監査に耐える AI 活用ログを残す .claude/settings.json",
-      "url": "https://note.com/stats47/n/nc53fa60114f8",
-      "is_paid": true,
-      "published_at": "2026-05-21",
-      "r2_path": "note/koumuin-claude-code/12-audit-ready-settings",
-      "status": "r2_ready",
-      "price_jpy": 300
-    },
-    "13-ollama-offline-local-llm": {
-      "vertical": "koumuin-claude-code",
-      "title": "ローカル LLM (Ollama) × Claude Code で完全オフライン業務",
-      "url": "https://note.com/stats47/n/n1e72ba0b4a43",
-      "is_paid": true,
-      "published_at": "2026-05-22",
-      "r2_path": "note/koumuin-claude-code/13-ollama-offline-local-llm",
-      "status": "r2_ready",
-      "price_jpy": 300
-    },
-    "14-excel-budget-aggregation": {
-      "vertical": "koumuin-claude-code",
-      "title": "Excel 予算ファイルを Claude Code で集計 (pandas / DuckDB 経由)",
-      "url": "https://note.com/stats47/n/nc6e02fbe6073",
-      "is_paid": false,
-      "published_at": "2026-05-22",
-      "r2_path": "note/koumuin-claude-code/14-excel-budget-aggregation",
-      "status": "r2_ready"
-    },
-    "15-data-preprocessing-intro": {
-      "vertical": "koumuin-claude-code",
-      "title": "統計データ加工: 公務員のための Claude Code × データ前処理入門",
-      "url": "https://note.com/stats47/n/naf04e81afb7b",
-      "is_paid": true,
-      "published_at": "2026-05-22",
-      "r2_path": "note/koumuin-claude-code/15-data-preprocessing-intro",
-      "status": "r2_ready",
-      "price_jpy": 300
-    },
-    "16-subsidy-doc-consistency": {
-      "vertical": "koumuin-claude-code",
-      "title": "補助金申請書類の整合性チェックを Claude Code で",
-      "url": "https://note.com/stats47/n/nb62db0d2826f",
-      "is_paid": true,
-      "published_at": "2026-05-22",
-      "r2_path": "note/koumuin-claude-code/16-subsidy-doc-consistency",
-      "status": "r2_ready",
-      "price_jpy": 300
-    },
-    "17-year-on-year-analysis": {
-      "vertical": "koumuin-claude-code",
-      "title": "決算書類の前年比較分析を 5 分で出す手順",
-      "url": "https://note.com/stats47/n/n5afa58e8e1e4",
-      "is_paid": true,
-      "published_at": "2026-05-22",
-      "r2_path": "note/koumuin-claude-code/17-year-on-year-analysis",
-      "status": "r2_ready",
-      "price_jpy": 300
-    },
-    "18-pr-magazine-rewrite": {
-      "vertical": "koumuin-claude-code",
-      "title": "広報誌の原稿を Claude Code でリライト: 読みやすさスコア化",
-      "url": "https://note.com/stats47/n/nef4df902db37",
-      "is_paid": true,
-      "published_at": "2026-05-22",
-      "r2_path": "note/koumuin-claude-code/18-pr-magazine-rewrite",
-      "status": "r2_ready",
-      "price_jpy": 300
-    },
-    "00-estat-claude-code-intro": {
-      "vertical": "koumuin-estat-claude-code",
-      "title": "e-Stat × Claude Code とは — 自治体職員のための統計データ業務効率化ガイド",
-      "url": "https://note.com/stats47/n/n258277f96f88",
-      "is_paid": false,
-      "published_at": "2026-06-14",
-      "r2_path": "note/koumuin-estat-claude-code/00-estat-claude-code-intro",
-      "status": "r2_ready"
-    },
-    "01-estat-api-key-setup": {
-      "vertical": "koumuin-estat-claude-code",
-      "title": "e-Stat API キー取得から Claude Code 連携まで — 30 分で完了する初期設定",
-      "url": "https://note.com/stats47/n/nc5a1358141a5",
-      "is_paid": true,
-      "published_at": "2026-06-14",
-      "r2_path": "note/koumuin-estat-claude-code/01-estat-api-key-setup",
-      "status": "r2_ready",
-      "price_jpy": 300
     },
     "02-search-estat-statsdataid": {
       "vertical": "koumuin-estat-claude-code",
@@ -244,6 +65,7 @@
       "is_paid": true,
       "published_at": "2026-06-14",
       "r2_path": "note/koumuin-estat-claude-code/02-search-estat-statsdataid",
+      "r2_body": true,
       "status": "r2_ready",
       "price_jpy": 300
     },
@@ -254,7 +76,19 @@
       "is_paid": false,
       "published_at": "2026-06-14",
       "r2_path": "note/koumuin-estat-claude-code/03-fetch-prefecture-ranking",
+      "r2_body": true,
       "status": "r2_ready"
+    },
+    "03-it-dept-security-doc": {
+      "vertical": "koumuin-claude-code",
+      "title": "自治体 IT 担当に渡せる Claude Code セキュリティ説明資料",
+      "url": "https://note.com/stats47/n/nedcf6ded5c36",
+      "is_paid": true,
+      "published_at": "2026-05-21",
+      "r2_path": "note/koumuin-claude-code/03-it-dept-security-doc",
+      "r2_body": true,
+      "status": "r2_ready",
+      "price_jpy": 300
     },
     "04-excel-download-and-parse": {
       "vertical": "koumuin-estat-claude-code",
@@ -263,6 +97,28 @@
       "is_paid": true,
       "published_at": "2026-06-14",
       "r2_path": "note/koumuin-estat-claude-code/04-excel-download-and-parse",
+      "r2_body": true,
+      "status": "r2_ready",
+      "price_jpy": 300
+    },
+    "04-meeting-minutes-30min-to-5min": {
+      "vertical": "koumuin-claude-code",
+      "title": "議事録 30 分 → 5 分にした手順 (録音 mp3 → Claude Code 要約)",
+      "url": "https://note.com/stats47/n/n967644e00ad9",
+      "is_paid": false,
+      "published_at": "2026-05-21",
+      "r2_path": "note/koumuin-claude-code/04-meeting-minutes-30min-to-5min",
+      "r2_body": true,
+      "status": "r2_ready"
+    },
+    "05-assembly-answer-prompts": {
+      "vertical": "koumuin-claude-code",
+      "title": "議会答弁原稿を Claude Code で 3 案出す prompt 集",
+      "url": "https://note.com/stats47/n/ne4e746d2b0cf",
+      "is_paid": true,
+      "published_at": "2026-05-21",
+      "r2_path": "note/koumuin-claude-code/05-assembly-answer-prompts",
+      "r2_body": true,
       "status": "r2_ready",
       "price_jpy": 300
     },
@@ -273,6 +129,18 @@
       "is_paid": true,
       "published_at": "2026-06-14",
       "r2_path": "note/koumuin-estat-claude-code/05-pandas-duckdb-derived-metrics",
+      "r2_body": true,
+      "status": "r2_ready",
+      "price_jpy": 300
+    },
+    "06-ordinance-revision-review": {
+      "vertical": "koumuin-claude-code",
+      "title": "条例改正案を Claude Code でレビュー: 矛盾検出 + 文体統一",
+      "url": "https://note.com/stats47/n/ne23e18ce9289",
+      "is_paid": true,
+      "published_at": "2026-05-21",
+      "r2_path": "note/koumuin-claude-code/06-ordinance-revision-review",
+      "r2_body": true,
       "status": "r2_ready",
       "price_jpy": 300
     },
@@ -283,6 +151,18 @@
       "is_paid": true,
       "published_at": "2026-06-14",
       "r2_path": "note/koumuin-estat-claude-code/06-prefecture-code-and-merge",
+      "r2_body": true,
+      "status": "r2_ready",
+      "price_jpy": 300
+    },
+    "07-official-doc-skills": {
+      "vertical": "koumuin-claude-code",
+      "title": "公文書ライティングを校正させる .claude/skills 完全版",
+      "url": "https://note.com/stats47/n/n1c78ab40901f",
+      "is_paid": true,
+      "published_at": "2026-05-21",
+      "r2_path": "note/koumuin-claude-code/07-official-doc-skills",
+      "r2_body": true,
       "status": "r2_ready",
       "price_jpy": 300
     },
@@ -293,6 +173,7 @@
       "is_paid": true,
       "published_at": "2026-06-14",
       "r2_path": "note/koumuin-estat-claude-code/07-year-on-year-diff",
+      "r2_body": true,
       "status": "r2_ready",
       "price_jpy": 300
     },
@@ -303,7 +184,19 @@
       "is_paid": false,
       "published_at": "2026-06-14",
       "r2_path": "note/koumuin-estat-claude-code/08-benchmark-table-5min",
+      "r2_body": true,
       "status": "r2_ready"
+    },
+    "08-proposal-doc-checklist-20": {
+      "vertical": "koumuin-claude-code",
+      "title": "起案文・決裁文の AI 査読チェックリスト 20 項目",
+      "url": "https://note.com/stats47/n/n59c27bbc973e",
+      "is_paid": true,
+      "published_at": "2026-05-21",
+      "r2_path": "note/koumuin-claude-code/08-proposal-doc-checklist-20",
+      "r2_body": true,
+      "status": "r2_ready",
+      "price_jpy": 300
     },
     "09-assembly-chart-generation": {
       "vertical": "koumuin-estat-claude-code",
@@ -312,8 +205,29 @@
       "is_paid": true,
       "published_at": "2026-06-14",
       "r2_path": "note/koumuin-estat-claude-code/09-assembly-chart-generation",
+      "r2_body": true,
       "status": "r2_ready",
       "price_jpy": 300
+    },
+    "09-assembly-question-points": {
+      "vertical": "koumuin-claude-code",
+      "title": "議会一般質問の論点整理を 1 時間 → 10 分にする方法",
+      "url": "https://note.com/stats47/n/nc276079a5317",
+      "is_paid": false,
+      "published_at": "2026-05-21",
+      "r2_path": "note/koumuin-claude-code/09-assembly-question-points",
+      "r2_body": true,
+      "status": "r2_ready"
+    },
+    "10-ai-without-personal-info": {
+      "vertical": "koumuin-claude-code",
+      "title": "個人情報を Claude に送らずに AI 活用する 3 つの設定",
+      "url": "https://note.com/stats47/n/n9b2109c9f964",
+      "is_paid": false,
+      "published_at": "2026-05-21",
+      "r2_path": "note/koumuin-claude-code/10-ai-without-personal-info",
+      "r2_body": true,
+      "status": "r2_ready"
     },
     "10-claude-skills-routinize": {
       "vertical": "koumuin-estat-claude-code",
@@ -322,6 +236,18 @@
       "is_paid": true,
       "published_at": "2026-06-14",
       "r2_path": "note/koumuin-estat-claude-code/10-claude-skills-routinize",
+      "r2_body": true,
+      "status": "r2_ready",
+      "price_jpy": 300
+    },
+    "11-hooks-personal-info-masking": {
+      "vertical": "koumuin-claude-code",
+      "title": "Claude Code Hooks で個人情報マスキングを自動化する",
+      "url": "https://note.com/stats47/n/ne54920337944",
+      "is_paid": true,
+      "published_at": "2026-05-21",
+      "r2_path": "note/koumuin-claude-code/11-hooks-personal-info-masking",
+      "r2_body": true,
       "status": "r2_ready",
       "price_jpy": 300
     },
@@ -332,6 +258,83 @@
       "is_paid": true,
       "published_at": "2026-06-14",
       "r2_path": "note/koumuin-estat-claude-code/11-mcp-sqlite-search",
+      "r2_body": true,
+      "status": "r2_ready",
+      "price_jpy": 300
+    },
+    "12-audit-ready-settings": {
+      "vertical": "koumuin-claude-code",
+      "title": "監査に耐える AI 活用ログを残す .claude/settings.json",
+      "url": "https://note.com/stats47/n/nc53fa60114f8",
+      "is_paid": true,
+      "published_at": "2026-05-21",
+      "r2_path": "note/koumuin-claude-code/12-audit-ready-settings",
+      "r2_body": true,
+      "status": "r2_ready",
+      "price_jpy": 300
+    },
+    "13-ollama-offline-local-llm": {
+      "vertical": "koumuin-claude-code",
+      "title": "ローカル LLM (Ollama) × Claude Code で完全オフライン業務",
+      "url": "https://note.com/stats47/n/n1e72ba0b4a43",
+      "is_paid": true,
+      "published_at": "2026-05-22",
+      "r2_path": "note/koumuin-claude-code/13-ollama-offline-local-llm",
+      "r2_body": true,
+      "status": "r2_ready",
+      "price_jpy": 300
+    },
+    "14-excel-budget-aggregation": {
+      "vertical": "koumuin-claude-code",
+      "title": "Excel 予算ファイルを Claude Code で集計 (pandas / DuckDB 経由)",
+      "url": "https://note.com/stats47/n/nc6e02fbe6073",
+      "is_paid": false,
+      "published_at": "2026-05-22",
+      "r2_path": "note/koumuin-claude-code/14-excel-budget-aggregation",
+      "r2_body": true,
+      "status": "r2_ready"
+    },
+    "15-data-preprocessing-intro": {
+      "vertical": "koumuin-claude-code",
+      "title": "統計データ加工: 公務員のための Claude Code × データ前処理入門",
+      "url": "https://note.com/stats47/n/naf04e81afb7b",
+      "is_paid": true,
+      "published_at": "2026-05-22",
+      "r2_path": "note/koumuin-claude-code/15-data-preprocessing-intro",
+      "r2_body": true,
+      "status": "r2_ready",
+      "price_jpy": 300
+    },
+    "16-subsidy-doc-consistency": {
+      "vertical": "koumuin-claude-code",
+      "title": "補助金申請書類の整合性チェックを Claude Code で",
+      "url": "https://note.com/stats47/n/nb62db0d2826f",
+      "is_paid": true,
+      "published_at": "2026-05-22",
+      "r2_path": "note/koumuin-claude-code/16-subsidy-doc-consistency",
+      "r2_body": true,
+      "status": "r2_ready",
+      "price_jpy": 300
+    },
+    "17-year-on-year-analysis": {
+      "vertical": "koumuin-claude-code",
+      "title": "決算書類の前年比較分析を 5 分で出す手順",
+      "url": "https://note.com/stats47/n/n5afa58e8e1e4",
+      "is_paid": true,
+      "published_at": "2026-05-22",
+      "r2_path": "note/koumuin-claude-code/17-year-on-year-analysis",
+      "r2_body": true,
+      "status": "r2_ready",
+      "price_jpy": 300
+    },
+    "18-pr-magazine-rewrite": {
+      "vertical": "koumuin-claude-code",
+      "title": "広報誌の原稿を Claude Code でリライト: 読みやすさスコア化",
+      "url": "https://note.com/stats47/n/nef4df902db37",
+      "is_paid": true,
+      "published_at": "2026-05-22",
+      "r2_path": "note/koumuin-claude-code/18-pr-magazine-rewrite",
+      "r2_body": true,
       "status": "r2_ready",
       "price_jpy": 300
     },
@@ -342,6 +345,7 @@
       "is_paid": false,
       "published_at": "2026-06-16",
       "r2_path": "note/koumuin-claude-code/19-faq-auto-generation",
+      "r2_body": true,
       "status": "r2_ready"
     },
     "20-complaint-reply-patterns": {
@@ -351,6 +355,7 @@
       "is_paid": true,
       "published_at": "2026-06-16",
       "r2_path": "note/koumuin-claude-code/20-complaint-reply-patterns",
+      "r2_body": true,
       "status": "r2_ready",
       "price_jpy": 300
     },
@@ -361,1154 +366,49 @@
       "is_paid": true,
       "published_at": "2026-06-16",
       "r2_path": "note/koumuin-claude-code/21-disaster-sns-multilang",
+      "r2_body": true,
       "status": "r2_ready",
       "price_jpy": 300
     },
-    "recovered-n73a4d300e045": {
-      "vertical": "koumuin-estat-claude-code",
-      "title": "47 都道府県データを 1 コマンドで取得する — fetch-estat-data スキルの使い方",
-      "url": "https://note.com/stats47/n/n73a4d300e045",
-      "is_paid": false,
-      "published_at": "2026-06-14",
-      "r2_path": "note/koumuin-estat-claude-code/n73a4d300e045",
-      "status": "r2_ready"
-    },
-    "recovered-n827191af8c1c": {
-      "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「海外旅行の年間行動者率」ランキング（10歳以上）｜コロナ禍で全国平均0.34％、1位は意外にも京都府",
-      "url": "https://note.com/stats47/n/n827191af8c1c",
-      "is_paid": false,
-      "published_at": "2026-05-10",
-      "r2_path": "note/stats47-note/n827191af8c1c",
-      "status": "r2_ready"
-    },
-    "recovered-nf5b4ced7a736": {
-      "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「ボランティア活動の年間行動者率」ランキング（10歳以上）｜子どもを含めても島根県が不動の1位",
-      "url": "https://note.com/stats47/n/nf5b4ced7a736",
-      "is_paid": false,
-      "published_at": "2026-05-10",
-      "r2_path": "note/stats47-note/nf5b4ced7a736",
-      "status": "r2_ready"
-    },
-    "recovered-n863f429319ca": {
-      "vertical": "stats47-note",
-      "title": "【2024年版】都道府県「最高気温」ランキング｜猛暑日の常連は九州・東海",
-      "url": "https://note.com/stats47/n/n863f429319ca",
-      "is_paid": false,
-      "published_at": "2026-05-10",
-      "r2_path": "note/stats47-note/n863f429319ca",
-      "status": "r2_ready"
-    },
-    "recovered-nbf1373427ca3": {
-      "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「パソコンなどの情報処理の行動者率」ランキング｜東京23.2％、岩手10.3％の格差",
-      "url": "https://note.com/stats47/n/nbf1373427ca3",
-      "is_paid": false,
-      "published_at": "2026-04-13",
-      "r2_path": "note/stats47-note/nbf1373427ca3",
-      "status": "r2_ready"
-    },
-    "recovered-n578b6e871067": {
-      "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「商業実務・ビジネス関係の行動者率」ランキング｜東京は青森の2.3倍",
-      "url": "https://note.com/stats47/n/n578b6e871067",
-      "is_paid": false,
-      "published_at": "2026-04-13",
-      "r2_path": "note/stats47-note/n578b6e871067",
-      "status": "r2_ready"
-    },
-    "recovered-n04c2737daf2c": {
-      "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「ヨガの行動者率」ランキング｜東京と青森で3倍の差",
-      "url": "https://note.com/stats47/n/n04c2737daf2c",
-      "is_paid": false,
-      "published_at": "2026-04-13",
-      "r2_path": "note/stats47-note/n04c2737daf2c",
-      "status": "r2_ready"
-    },
-    "recovered-n765fc88c67ef": {
-      "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「芸術・文化の行動者率」ランキング｜東京17.3％が圧倒、神奈川・京都が同率2位",
-      "url": "https://note.com/stats47/n/n765fc88c67ef",
-      "is_paid": false,
-      "published_at": "2026-04-12",
-      "r2_path": "note/stats47-note/n765fc88c67ef",
-      "status": "r2_ready"
-    },
-    "recovered-n724eab276711": {
-      "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「人文・社会・自然科学の行動者率」ランキング｜東京14.6％、宮崎5.7％の知的格差",
-      "url": "https://note.com/stats47/n/n724eab276711",
-      "is_paid": false,
-      "published_at": "2026-04-12",
-      "r2_path": "note/stats47-note/n724eab276711",
-      "status": "r2_ready"
-    },
-    "recovered-nb16c0b751d01": {
-      "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「ウォーキング・軽い体操の行動者率」ランキング｜青森県は東京都の6割にとどまる",
-      "url": "https://note.com/stats47/n/nb16c0b751d01",
-      "is_paid": false,
-      "published_at": "2026-04-12",
-      "r2_path": "note/stats47-note/nb16c0b751d01",
-      "status": "r2_ready"
-    },
-    "recovered-n026bb22ad4eb": {
-      "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「バレーボールの行動者率」ランキング｜宮崎県が偏差値83.2で圧倒的1位、富山県は最下位",
-      "url": "https://note.com/stats47/n/n026bb22ad4eb",
-      "is_paid": false,
-      "published_at": "2026-04-12",
-      "r2_path": "note/stats47-note/n026bb22ad4eb",
-      "status": "r2_ready"
-    },
-    "recovered-n5867882dd7ab": {
-      "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「詩・和歌・俳句・小説などの創作の行動者率」ランキング｜東京と秋田で約3倍の差",
-      "url": "https://note.com/stats47/n/n5867882dd7ab",
-      "is_paid": false,
-      "published_at": "2026-04-12",
-      "r2_path": "note/stats47-note/n5867882dd7ab",
-      "status": "r2_ready"
-    },
-    "recovered-nafc693255794": {
-      "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「洋舞・社交ダンスの行動者率」ランキング｜東京都が1.7％で断トツ1位",
-      "url": "https://note.com/stats47/n/nafc693255794",
-      "is_paid": false,
-      "published_at": "2026-04-11",
-      "r2_path": "note/stats47-note/nafc693255794",
-      "status": "r2_ready"
-    },
-    "recovered-n991a75be91ce": {
-      "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「ゲームの行動者率」ランキング｜愛知が東京を僅差で抑えて1位",
-      "url": "https://note.com/stats47/n/n991a75be91ce",
-      "is_paid": false,
-      "published_at": "2026-04-11",
-      "r2_path": "note/stats47-note/n991a75be91ce",
-      "status": "r2_ready"
-    },
-    "recovered-n51f946877627": {
-      "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「遊園地・動植物園・水族館の行動者率」ランキング｜愛知県が東京を抜いて1位",
-      "url": "https://note.com/stats47/n/n51f946877627",
-      "is_paid": false,
-      "published_at": "2026-04-11",
-      "r2_path": "note/stats47-note/n51f946877627",
-      "status": "r2_ready"
-    },
-    "recovered-n36624f1c4134": {
-      "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「演芸・演劇・舞踊鑑賞の行動者率」ランキング｜東京は青森の約4倍",
-      "url": "https://note.com/stats47/n/n36624f1c4134",
-      "is_paid": false,
-      "published_at": "2026-04-11",
-      "r2_path": "note/stats47-note/n36624f1c4134",
-      "status": "r2_ready"
-    },
-    "recovered-nfa4057b9b8de": {
-      "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「茶道の行動者率」ランキング｜1位は京都ではなく富山県",
-      "url": "https://note.com/stats47/n/nfa4057b9b8de",
-      "is_paid": false,
-      "published_at": "2026-04-10",
-      "r2_path": "note/stats47-note/nfa4057b9b8de",
-      "status": "r2_ready"
-    },
-    "recovered-ne85980349fda": {
-      "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「スポーツ観覧の行動者率」ランキング｜広島県が偏差値92で圧倒的1位",
-      "url": "https://note.com/stats47/n/ne85980349fda",
-      "is_paid": false,
-      "published_at": "2026-04-10",
-      "r2_path": "note/stats47-note/ne85980349fda",
-      "status": "r2_ready"
-    },
-    "recovered-n27cb4242cb67": {
-      "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「将棋の行動者率」ランキング｜1位は香川県、秋田県との差は2.7倍",
-      "url": "https://note.com/stats47/n/n27cb4242cb67",
-      "is_paid": false,
-      "published_at": "2026-04-10",
-      "r2_path": "note/stats47-note/n27cb4242cb67",
-      "status": "r2_ready"
-    },
-    "recovered-n598a096ecbff": {
-      "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「和裁・洋裁の行動者率」ランキング｜神奈川県が6.3％で全国1位",
-      "url": "https://note.com/stats47/n/n598a096ecbff",
-      "is_paid": false,
-      "published_at": "2026-04-10",
-      "r2_path": "note/stats47-note/n598a096ecbff",
-      "status": "r2_ready"
-    },
-    "recovered-n28943c36410a": {
-      "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「趣味としての読書の行動者率」ランキング｜東京43％、青森23％の読書格差",
-      "url": "https://note.com/stats47/n/n28943c36410a",
-      "is_paid": false,
-      "published_at": "2026-04-09",
-      "r2_path": "note/stats47-note/n28943c36410a",
-      "status": "r2_ready"
-    },
-    "recovered-nbedecc99f3a3": {
-      "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「陶芸・工芸の行動者率」ランキング｜福井県と滋賀県が東京都と並んで1位",
-      "url": "https://note.com/stats47/n/nbedecc99f3a3",
-      "is_paid": false,
-      "published_at": "2026-04-09",
-      "r2_path": "note/stats47-note/nbedecc99f3a3",
-      "status": "r2_ready"
-    },
-    "recovered-nf1a5abab3d5e": {
-      "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「ポピュラー音楽鑑賞の行動者率」ランキング｜沖縄県が最下位の意外",
-      "url": "https://note.com/stats47/n/nf1a5abab3d5e",
-      "is_paid": false,
-      "published_at": "2026-04-09",
-      "r2_path": "note/stats47-note/nf1a5abab3d5e",
-      "status": "r2_ready"
-    },
-    "recovered-na25ccb15a6cb": {
-      "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「写真の撮影・プリントの行動者率」ランキング｜青森と東京で約2倍の差",
-      "url": "https://note.com/stats47/n/na25ccb15a6cb",
-      "is_paid": false,
-      "published_at": "2026-04-09",
-      "r2_path": "note/stats47-note/na25ccb15a6cb",
-      "status": "r2_ready"
-    },
-    "recovered-n9dcb0680cea6": {
-      "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「絵画・彫刻の制作の行動者率」ランキング｜京都府が東京都に肉薄して2位",
-      "url": "https://note.com/stats47/n/n9dcb0680cea6",
-      "is_paid": false,
-      "published_at": "2026-04-08",
-      "r2_path": "note/stats47-note/n9dcb0680cea6",
-      "status": "r2_ready"
-    },
-    "recovered-nead586305cdb": {
-      "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「パチンコの行動者率」ランキング｜九州勢が上位独占、東京は46位",
-      "url": "https://note.com/stats47/n/nead586305cdb",
-      "is_paid": false,
-      "published_at": "2026-04-08",
-      "r2_path": "note/stats47-note/nead586305cdb",
-      "status": "r2_ready"
-    },
-    "recovered-n285e0ba282d0": {
-      "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「CD・スマートフォンなどによる音楽鑑賞の行動者率」ランキング｜東京64％と青森43％の21ポイント差",
-      "url": "https://note.com/stats47/n/n285e0ba282d0",
-      "is_paid": false,
-      "published_at": "2026-04-08",
-      "r2_path": "note/stats47-note/n285e0ba282d0",
-      "status": "r2_ready"
-    },
-    "recovered-ne4a6ec30706a": {
-      "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「マンガを読む行動者率」ランキング｜全国平均34％、3人に1人がマンガ読者",
-      "url": "https://note.com/stats47/n/ne4a6ec30706a",
-      "is_paid": false,
-      "published_at": "2026-04-08",
-      "r2_path": "note/stats47-note/ne4a6ec30706a",
-      "status": "r2_ready"
-    },
-    "recovered-n4d38db115f82": {
-      "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「編み物・手芸の行動者率」ランキング｜北海道が10.7％で圧倒的1位",
-      "url": "https://note.com/stats47/n/n4d38db115f82",
-      "is_paid": false,
-      "published_at": "2026-04-07",
-      "r2_path": "note/stats47-note/n4d38db115f82",
-      "status": "r2_ready"
-    },
-    "recovered-n1b943c7d414d": {
-      "vertical": "stats47-note",
-      "title": "【2023年版】都道府県「薬局数」ランキング｜1位は意外にも佐賀県",
-      "url": "https://note.com/stats47/n/n1b943c7d414d",
-      "is_paid": false,
-      "published_at": "2026-04-07",
-      "r2_path": "note/stats47-note/n1b943c7d414d",
-      "status": "r2_ready"
-    },
-    "recovered-n0654ddf27920": {
-      "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「カラオケの行動者率」ランキング｜1位は東京都、2位に鹿児島県が浮上",
-      "url": "https://note.com/stats47/n/n0654ddf27920",
-      "is_paid": false,
-      "published_at": "2026-04-07",
-      "r2_path": "note/stats47-note/n0654ddf27920",
-      "status": "r2_ready"
-    },
-    "recovered-n55cd6de6a733": {
-      "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「テニスの行動者率」ランキング｜神奈川が首位、テニス不毛地帯は意外にも雪国",
-      "url": "https://note.com/stats47/n/n55cd6de6a733",
-      "is_paid": false,
-      "published_at": "2026-04-02",
-      "r2_path": "note/stats47-note/n55cd6de6a733",
-      "status": "r2_ready"
-    },
-    "recovered-n361a963fb079": {
-      "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「邦楽の行動者率」ランキング｜沖縄県が偏差値97で圧倒的1位",
-      "url": "https://note.com/stats47/n/n361a963fb079",
-      "is_paid": false,
-      "published_at": "2026-04-02",
-      "r2_path": "note/stats47-note/n361a963fb079",
-      "status": "r2_ready"
-    },
-    "recovered-n6305d990f2d2": {
-      "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「邦舞・おどりの行動者率」ランキング｜鹿児島県が東京都と並んで1位",
-      "url": "https://note.com/stats47/n/n6305d990f2d2",
-      "is_paid": false,
-      "published_at": "2026-04-01",
-      "r2_path": "note/stats47-note/n6305d990f2d2",
-      "status": "r2_ready"
-    },
-    "recovered-n1649910097fb": {
-      "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「楽器の演奏の行動者率」ランキング｜沖縄8位・三線文化の力",
-      "url": "https://note.com/stats47/n/n1649910097fb",
-      "is_paid": false,
-      "published_at": "2026-04-01",
-      "r2_path": "note/stats47-note/n1649910097fb",
-      "status": "r2_ready"
-    },
-    "recovered-nfbdfd99fee1b": {
-      "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「映画館以外での映画鑑賞の行動者率」ランキング｜東京は6割超、青森は4割台",
-      "url": "https://note.com/stats47/n/nfbdfd99fee1b",
-      "is_paid": false,
-      "published_at": "2026-04-01",
-      "r2_path": "note/stats47-note/nfbdfd99fee1b",
-      "status": "r2_ready"
-    },
-    "recovered-ne5b9d2b01255": {
-      "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「囲碁の行動者率」ランキング｜1位は意外にも長崎県",
-      "url": "https://note.com/stats47/n/ne5b9d2b01255",
-      "is_paid": false,
-      "published_at": "2026-04-01",
-      "r2_path": "note/stats47-note/ne5b9d2b01255",
-      "status": "r2_ready"
-    },
-    "recovered-n3e67c2f80ec1": {
-      "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「園芸・ガーデニングの行動者率」ランキング｜群馬県が32.8％で1位、大阪は最下位",
-      "url": "https://note.com/stats47/n/n3e67c2f80ec1",
-      "is_paid": false,
-      "published_at": "2026-03-31",
-      "r2_path": "note/stats47-note/n3e67c2f80ec1",
-      "status": "r2_ready"
-    },
-    "recovered-n583a06d171e1": {
-      "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「華道の行動者率」ランキング｜島根県が2.1％でトップ、都市部は低迷",
-      "url": "https://note.com/stats47/n/n583a06d171e1",
-      "is_paid": false,
-      "published_at": "2026-03-30",
-      "r2_path": "note/stats47-note/n583a06d171e1",
-      "status": "r2_ready"
-    },
-    "recovered-nd5f8b5072cdb": {
-      "vertical": "stats47-note",
-      "title": "【2024年版】都道府県「人口密度」ランキング｜東京と北海道で100倍の差",
-      "url": "https://note.com/stats47/n/nd5f8b5072cdb",
-      "is_paid": false,
-      "published_at": "2026-03-30",
-      "r2_path": "note/stats47-note/nd5f8b5072cdb",
-      "status": "r2_ready"
-    },
-    "recovered-n581a1409b2c9": {
-      "vertical": "stats47-note",
-      "title": "【2024年版】都道府県「大学数」ランキング｜京都が東京を抑えて1位の理由",
-      "url": "https://note.com/stats47/n/n581a1409b2c9",
-      "is_paid": false,
-      "published_at": "2026-03-29",
-      "r2_path": "note/stats47-note/n581a1409b2c9",
-      "status": "r2_ready"
-    },
-    "recovered-nb2d65c42c28b": {
-      "vertical": "stats47-note",
-      "title": "【2024年版】都道府県「最高気温」ランキング｜猛暑日の常連は九州・東海",
-      "url": "https://note.com/stats47/n/nb2d65c42c28b",
-      "is_paid": false,
-      "published_at": "2026-03-29",
-      "r2_path": "note/stats47-note/nb2d65c42c28b",
-      "status": "r2_ready"
-    },
-    "recovered-ned30a382334d": {
-      "vertical": "stats47-note",
-      "title": "【2024年版】都道府県「大学数」ランキング｜京都が東京を抑えて1位の理由",
-      "url": "https://note.com/stats47/n/ned30a382334d",
-      "is_paid": false,
-      "published_at": "2026-03-29",
-      "r2_path": "note/stats47-note/ned30a382334d",
-      "status": "r2_ready"
-    },
-    "recovered-n6f8a367906d1": {
-      "vertical": "stats47-note",
-      "title": "【2024年版】都道府県「最高気温」ランキング｜猛暑日の常連は九州・東海",
-      "url": "https://note.com/stats47/n/n6f8a367906d1",
-      "is_paid": false,
-      "published_at": "2026-03-29",
-      "r2_path": "note/stats47-note/n6f8a367906d1",
-      "status": "r2_ready"
-    },
-    "recovered-ncaddeaf3e2ff": {
-      "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「卓球の行動者率」ランキング｜東京都が6.2％で1位、卓球人気の地域差は意外に大きい",
-      "url": "https://note.com/stats47/n/ncaddeaf3e2ff",
-      "is_paid": false,
-      "published_at": "2026-03-29",
-      "r2_path": "note/stats47-note/ncaddeaf3e2ff",
-      "status": "r2_ready"
-    },
-    "recovered-ncf6086199c7d": {
-      "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「趣味としての料理・菓子作りの行動者率」ランキング｜東京都が21.9％で1位",
-      "url": "https://note.com/stats47/n/ncf6086199c7d",
-      "is_paid": false,
-      "published_at": "2026-03-29",
-      "r2_path": "note/stats47-note/ncf6086199c7d",
-      "status": "r2_ready"
-    },
-    "recovered-nf0fc2a7eb326": {
-      "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「家政・家事の行動者率」ランキング｜京都府が1位、青森県との差は1.8倍",
-      "url": "https://note.com/stats47/n/nf0fc2a7eb326",
-      "is_paid": false,
-      "published_at": "2026-03-28",
-      "r2_path": "note/stats47-note/nf0fc2a7eb326",
-      "status": "r2_ready"
-    },
-    "recovered-nf0c533293f5b": {
-      "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「クラシック音楽鑑賞の行動者率」ランキング｜福井県3位・山形県9位の意外な結果",
-      "url": "https://note.com/stats47/n/nf0c533293f5b",
-      "is_paid": false,
-      "published_at": "2026-03-28",
-      "r2_path": "note/stats47-note/nf0c533293f5b",
-      "status": "r2_ready"
-    },
-    "recovered-ne3cdb7819c41": {
-      "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「国内観光旅行の行動者率」ランキング｜東京34.2％で1位、徳島は11.4％",
-      "url": "https://note.com/stats47/n/ne3cdb7819c41",
-      "is_paid": false,
-      "published_at": "2026-03-27",
-      "r2_path": "note/stats47-note/ne3cdb7819c41",
-      "status": "r2_ready"
-    },
-    "recovered-nb90f2342ebd8": {
-      "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「映画館での映画鑑賞の行動者率」ランキング｜福井県7位の意外な映画好き県",
-      "url": "https://note.com/stats47/n/nb90f2342ebd8",
-      "is_paid": false,
-      "published_at": "2026-03-27",
-      "r2_path": "note/stats47-note/nb90f2342ebd8",
-      "status": "r2_ready"
-    },
-    "recovered-nc60f702445f8": {
-      "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「国内旅行の行動者率」ランキング｜東京都41.7％、徳島県は16.3％",
-      "url": "https://note.com/stats47/n/nc60f702445f8",
-      "is_paid": false,
-      "published_at": "2026-03-26",
-      "r2_path": "note/stats47-note/nc60f702445f8",
-      "status": "r2_ready"
-    },
-    "recovered-n14f716fcd76d": {
-      "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「水泳の行動者率」ランキング｜東京が偏差値83で圧倒、青森は半分以下",
-      "url": "https://note.com/stats47/n/n14f716fcd76d",
-      "is_paid": false,
-      "published_at": "2026-03-26",
-      "r2_path": "note/stats47-note/n14f716fcd76d",
-      "status": "r2_ready"
-    },
-    "recovered-n08eb33492a93": {
-      "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「コーラス・声楽の行動者率」ランキング｜1位は神奈川県、東北の岩手県も上位に",
-      "url": "https://note.com/stats47/n/n08eb33492a93",
-      "is_paid": false,
-      "published_at": "2026-03-26",
-      "r2_path": "note/stats47-note/n08eb33492a93",
-      "status": "r2_ready"
-    },
-    "recovered-n8df3cf170cf4": {
-      "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「ソフトボールの行動者率」ランキング｜山口県が3.0％で圧倒的1位、1位と最下位の差は5倍",
-      "url": "https://note.com/stats47/n/n8df3cf170cf4",
-      "is_paid": false,
-      "published_at": "2026-03-26",
-      "r2_path": "note/stats47-note/n8df3cf170cf4",
-      "status": "r2_ready"
-    },
-    "recovered-nda04ec118c93": {
-      "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「行楽（日帰り）の行動者率」ランキング｜愛知県が1位、沖縄県は半分以下",
-      "url": "https://note.com/stats47/n/nda04ec118c93",
-      "is_paid": false,
-      "published_at": "2026-03-25",
-      "r2_path": "note/stats47-note/nda04ec118c93",
-      "status": "r2_ready"
-    },
-    "recovered-na2720854b1d9": {
-      "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「キャンプの行動者率」ランキング｜北海道が9.1％でダントツ1位",
-      "url": "https://note.com/stats47/n/na2720854b1d9",
-      "is_paid": false,
-      "published_at": "2026-03-25",
-      "r2_path": "note/stats47-note/na2720854b1d9",
-      "status": "r2_ready"
-    },
-    "recovered-n0b7373c9648a": {
-      "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「サッカーの行動者率」ランキング｜1位は愛知県、最下位の岐阜県とは隣県で2倍以上の差",
-      "url": "https://note.com/stats47/n/n0b7373c9648a",
-      "is_paid": false,
-      "published_at": "2026-03-25",
-      "r2_path": "note/stats47-note/n0b7373c9648a",
-      "status": "r2_ready"
-    },
-    "recovered-n7ea3a816d39b": {
-      "vertical": "stats47-note",
-      "title": "【2001年版】都道府県「旅行・行楽の年間行動者率」ランキング（15歳以上）｜1位は埼玉県、沖縄県は59％で断トツ最下位",
-      "url": "https://note.com/stats47/n/n7ea3a816d39b",
-      "is_paid": false,
-      "published_at": "2026-03-24",
-      "r2_path": "note/stats47-note/n7ea3a816d39b",
-      "status": "r2_ready"
-    },
-    "recovered-n250b7aab145f": {
-      "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「スキー・スノーボードの行動者率」ランキング｜北海道が首位、沖縄との差は41.5倍",
-      "url": "https://note.com/stats47/n/n250b7aab145f",
-      "is_paid": false,
-      "published_at": "2026-03-24",
-      "r2_path": "note/stats47-note/n250b7aab145f",
-      "status": "r2_ready"
-    },
-    "recovered-n5ddcfb6bf233": {
-      "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「書道の行動者率」ランキング｜佐賀県が4.5％で全国1位",
-      "url": "https://note.com/stats47/n/n5ddcfb6bf233",
-      "is_paid": false,
-      "published_at": "2026-03-24",
-      "r2_path": "note/stats47-note/n5ddcfb6bf233",
-      "status": "r2_ready"
-    },
-    "recovered-na21015ac366d": {
-      "vertical": "koumuin-gis",
-      "title": "【2021年版】都道府県「剣道の行動者率」ランキング｜山形と長野が同率首位、意外な武道地図",
-      "url": "https://note.com/stats47/n/na21015ac366d",
-      "is_paid": false,
-      "published_at": "2026-03-24",
-      "r2_path": "note/koumuin-gis/na21015ac366d",
-      "status": "r2_ready"
-    },
-    "recovered-n88d2a55a9e36": {
-      "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「柔道の行動者率」ランキング｜山口県が偏差値91で圧倒的1位",
-      "url": "https://note.com/stats47/n/n88d2a55a9e36",
-      "is_paid": false,
-      "published_at": "2026-03-24",
-      "r2_path": "note/stats47-note/n88d2a55a9e36",
-      "status": "r2_ready"
-    },
-    "recovered-ne62fa955bcff": {
-      "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「旅行・行楽の年間行動者率」ランキング（10歳以上）｜コロナ禍で半数以下に急落、愛知県がトップ",
-      "url": "https://note.com/stats47/n/ne62fa955bcff",
-      "is_paid": false,
-      "published_at": "2026-03-23",
-      "r2_path": "note/stats47-note/ne62fa955bcff",
-      "status": "r2_ready"
-    },
-    "recovered-nabd65a1c893d": {
-      "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「美術鑑賞の行動者率」ランキング｜福井・石川・富山の北陸勢が上位に集結",
-      "url": "https://note.com/stats47/n/nabd65a1c893d",
-      "is_paid": false,
-      "published_at": "2026-03-23",
-      "r2_path": "note/stats47-note/nabd65a1c893d",
-      "status": "r2_ready"
-    },
-    "recovered-n7ff099157abd": {
-      "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「ジョギング・マラソンの行動者率」ランキング｜東京が首位、岐阜は半分",
-      "url": "https://note.com/stats47/n/n7ff099157abd",
-      "is_paid": false,
-      "published_at": "2026-03-23",
-      "r2_path": "note/stats47-note/n7ff099157abd",
-      "status": "r2_ready"
-    },
-    "recovered-nc0e7474b34e1": {
-      "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「登山・ハイキングの行動者率」ランキング｜東京と兵庫が同率首位、沖縄は4分の1",
-      "url": "https://note.com/stats47/n/nc0e7474b34e1",
-      "is_paid": false,
-      "published_at": "2026-03-23",
-      "r2_path": "note/stats47-note/nc0e7474b34e1",
-      "status": "r2_ready"
-    },
-    "recovered-n4e1e67f70686": {
-      "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「器具を使ったトレーニングの行動者率」ランキング｜沖縄6位の意外な筋トレ県",
-      "url": "https://note.com/stats47/n/n4e1e67f70686",
-      "is_paid": false,
-      "published_at": "2026-03-22",
-      "r2_path": "note/stats47-note/n4e1e67f70686",
-      "status": "r2_ready"
-    },
-    "recovered-n3a94353f31aa": {
-      "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「グラウンドゴルフの行動者率」ランキング｜鹿児島が首位、格差は8.5倍",
-      "url": "https://note.com/stats47/n/n3a94353f31aa",
-      "is_paid": false,
-      "published_at": "2026-03-22",
-      "r2_path": "note/stats47-note/n3a94353f31aa",
-      "status": "r2_ready"
-    },
-    "recovered-n5ced125edb74": {
-      "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「ゴルフの行動者率」ランキング｜愛知が首位、青森は愛知の3分の1",
-      "url": "https://note.com/stats47/n/n5ced125edb74",
-      "is_paid": false,
-      "published_at": "2026-03-21",
-      "r2_path": "note/stats47-note/n5ced125edb74",
-      "status": "r2_ready"
-    },
-    "recovered-naa474d085c7b": {
-      "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「つりの行動者率」ランキング｜広島が首位、海なし県の東京が最下位",
-      "url": "https://note.com/stats47/n/naa474d085c7b",
-      "is_paid": false,
-      "published_at": "2026-03-21",
-      "r2_path": "note/stats47-note/naa474d085c7b",
-      "status": "r2_ready"
-    },
-    "recovered-n279776fbbbb1": {
-      "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「サイクリングの行動者率」ランキング｜東京が偏差値91で独走、長崎は5分の1",
-      "url": "https://note.com/stats47/n/n279776fbbbb1",
-      "is_paid": false,
-      "published_at": "2026-03-20",
-      "r2_path": "note/stats47-note/n279776fbbbb1",
-      "status": "r2_ready"
-    },
-    "recovered-n97bd102186c6": {
-      "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「ボウリングの行動者率」ランキング｜沖縄が全国トップ、秋田は半分以下",
-      "url": "https://note.com/stats47/n/n97bd102186c6",
-      "is_paid": false,
-      "published_at": "2026-03-20",
-      "r2_path": "note/stats47-note/n97bd102186c6",
-      "status": "r2_ready"
-    },
-    "recovered-n3e69a23bb946": {
-      "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「バスケットボールの行動者率」ランキング｜バスケの本場・秋田県が1位、東京都はまさかの42位",
-      "url": "https://note.com/stats47/n/n3e69a23bb946",
-      "is_paid": false,
-      "published_at": "2026-03-19",
-      "r2_path": "note/stats47-note/n3e69a23bb946",
-      "status": "r2_ready"
-    },
-    "recovered-n523b6fbeabdf": {
-      "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「野球の行動者率」ランキング｜1位はカープの街・広島県、プロ野球の影響色濃く",
-      "url": "https://note.com/stats47/n/n523b6fbeabdf",
-      "is_paid": false,
-      "published_at": "2026-03-19",
-      "r2_path": "note/stats47-note/n523b6fbeabdf",
-      "status": "r2_ready"
-    },
-    "recovered-n67729e8be7c4": {
-      "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「バドミントンの行動者率」ランキング｜宮城が首位、長崎は全国の半分",
-      "url": "https://note.com/stats47/n/n67729e8be7c4",
-      "is_paid": false,
-      "published_at": "2026-03-19",
-      "r2_path": "note/stats47-note/n67729e8be7c4",
-      "status": "r2_ready"
-    },
-    "recovered-nefd814b49c5d": {
-      "vertical": "stats47-note",
-      "title": "【2021年版】都道府県「スポーツの年間行動者率」ランキング（10歳以上）｜東京都が圧倒的1位、青森県との差は22ポイント超",
-      "url": "https://note.com/stats47/n/nefd814b49c5d",
-      "is_paid": false,
-      "published_at": "2026-03-19",
-      "r2_path": "note/stats47-note/nefd814b49c5d",
-      "status": "r2_ready"
-    },
-    "recovered-n68f5e09c8d62": {
-      "vertical": "stats47-note",
-      "title": "690品目で丸裸にする「47都道府県の家計」── 家計調査が暴く、あなたの県の消費グセ",
-      "url": "https://note.com/stats47/n/n68f5e09c8d62",
-      "is_paid": false,
-      "published_at": "2026-03-18",
-      "r2_path": "note/stats47-note/n68f5e09c8d62",
-      "status": "r2_ready"
-    },
-    "recovered-n03844512d58a": {
-      "vertical": "stats47-note",
-      "title": "エンゲル係数で見る所得格差 ── 低所得層33%、高所得層25%。食費の中身はもっと違う",
-      "url": "https://note.com/stats47/n/n03844512d58a",
-      "is_paid": false,
-      "published_at": "2026-03-18",
-      "r2_path": "note/stats47-note/n03844512d58a",
-      "status": "r2_ready"
-    },
-    "recovered-n3908e5981967": {
-      "vertical": "stats47-note",
-      "title": "家計調査でわかること — 47都道府県の「お金の使い方」が丸見えになる統計",
-      "url": "https://note.com/stats47/n/n3908e5981967",
-      "is_paid": false,
-      "published_at": "2026-03-18",
-      "r2_path": "note/stats47-note/n3908e5981967",
-      "status": "r2_ready"
-    },
-    "recovered-n144d350fc14e": {
-      "vertical": "stats47-note",
-      "title": "なぜ沖縄の出生率は高いのか — 東京との差1.6倍を生む「見えない力」",
-      "url": "https://note.com/stats47/n/n144d350fc14e",
-      "is_paid": false,
-      "published_at": "2026-03-18",
-      "r2_path": "note/stats47-note/n144d350fc14e",
-      "status": "r2_ready"
-    },
-    "recovered-n21cb13582fe6": {
-      "vertical": "stats47-note",
-      "title": "【2023年版】都道府県「りんご消費量」ランキング｜産地・青森を抑えて長野が1位、京都8位の意外",
-      "url": "https://note.com/stats47/n/n21cb13582fe6",
-      "is_paid": false,
-      "published_at": "2026-03-17",
-      "r2_path": "note/stats47-note/n21cb13582fe6",
-      "status": "r2_ready"
-    },
-    "recovered-n023501038bd5": {
-      "vertical": "stats47-note",
-      "title": "なぜ埼玉が「日照時間日本一」なのか — 意外な答えは地形にあった",
-      "url": "https://note.com/stats47/n/n023501038bd5",
-      "is_paid": false,
-      "published_at": "2026-03-13",
-      "r2_path": "note/stats47-note/n023501038bd5",
-      "status": "r2_ready"
-    },
-    "recovered-nded2d34fc978": {
-      "vertical": "stats47-note",
-      "title": "財政力7位なのに借金1位？都道府県「稼ぐ力」と「借金」のギャップを可視化してみた",
-      "url": "https://note.com/stats47/n/nded2d34fc978",
-      "is_paid": false,
-      "published_at": "2026-03-13",
-      "r2_path": "note/stats47-note/nded2d34fc978",
-      "status": "r2_ready"
-    },
-    "recovered-n04d95ae14bc1": {
-      "vertical": "stats47-note",
-      "title": "【2022年度】都道府県「実質公債費比率」ランキング｜北海道18.9%で47位、東京都はわずか1.2%",
-      "url": "https://note.com/stats47/n/n04d95ae14bc1",
-      "is_paid": false,
-      "published_at": "2026-03-12",
-      "r2_path": "note/stats47-note/n04d95ae14bc1",
-      "status": "r2_ready"
-    },
-    "recovered-n567416b632f6": {
-      "vertical": "stats47-note",
-      "title": "【2022年度】都道府県「実質収支比率」ランキング｜島根県7.5%でトップ、長崎県0.3%で余裕なし",
-      "url": "https://note.com/stats47/n/n567416b632f6",
-      "is_paid": false,
-      "published_at": "2026-03-12",
-      "r2_path": "note/stats47-note/n567416b632f6",
-      "status": "r2_ready"
-    },
-    "recovered-n5f183fcf5b97": {
-      "vertical": "stats47-note",
-      "title": "【2022年度】都道府県「将来負担比率」ランキング｜兵庫県330.8%で断トツ、東京都はわずか17.3%",
-      "url": "https://note.com/stats47/n/n5f183fcf5b97",
-      "is_paid": false,
-      "published_at": "2026-03-12",
-      "r2_path": "note/stats47-note/n5f183fcf5b97",
-      "status": "r2_ready"
-    },
-    "recovered-ne31a2574e231": {
-      "vertical": "stats47-note",
-      "title": "【2022年度】都道府県「経常収支比率」ランキング｜100%超えの大阪府、東京都は全国最低の79.5%",
-      "url": "https://note.com/stats47/n/ne31a2574e231",
-      "is_paid": false,
-      "published_at": "2026-03-12",
-      "r2_path": "note/stats47-note/ne31a2574e231",
-      "status": "r2_ready"
-    },
-    "recovered-n46a8eb03072b": {
-      "vertical": "stats47-note",
-      "title": "高等学校卒業者の進学率ランキング｜47都道府県の教育格差を徹底分析",
-      "url": "https://note.com/stats47/n/n46a8eb03072b",
-      "is_paid": false,
-      "published_at": "2026-03-11",
-      "r2_path": "note/stats47-note/n46a8eb03072b",
-      "status": "r2_ready"
-    },
-    "recovered-ne0d53bfef7ed": {
-      "vertical": "stats47-note",
-      "title": "【都道府県ランキング】持ち家比率1位は秋田県77.1％｜47位の沖縄県と1.8倍の格差",
-      "url": "https://note.com/stats47/n/ne0d53bfef7ed",
-      "is_paid": false,
-      "published_at": "2026-03-11",
-      "r2_path": "note/stats47-note/ne0d53bfef7ed",
-      "status": "r2_ready"
-    },
-    "recovered-n80e58a01f660": {
-      "vertical": "stats47-note",
-      "title": "【都道府県ランキング】1人当たり県民所得1位は東京都5,214千円｜47位の沖縄県と2.4倍の格差",
-      "url": "https://note.com/stats47/n/n80e58a01f660",
-      "is_paid": false,
-      "published_at": "2026-03-11",
-      "r2_path": "note/stats47-note/n80e58a01f660",
-      "status": "r2_ready"
-    },
-    "recovered-n93a6656b2096": {
-      "vertical": "stats47-note",
-      "title": "【都道府県ランキング】合計特殊出生率1位は沖縄県1.70｜47位の東京都と1.6倍の格差",
-      "url": "https://note.com/stats47/n/n93a6656b2096",
-      "is_paid": false,
-      "published_at": "2026-03-04",
-      "r2_path": "note/stats47-note/n93a6656b2096",
-      "status": "r2_ready"
-    },
-    "recovered-n3a4efa70c02a": {
-      "vertical": "stats47-note",
-      "title": "【2023年】交通事故発生件数ランキング｜人口10万人当たりで比較する47都道府県",
-      "url": "https://note.com/stats47/n/n3a4efa70c02a",
-      "is_paid": false,
-      "published_at": "2026-03-04",
-      "r2_path": "note/stats47-note/n3a4efa70c02a",
-      "status": "r2_ready"
-    },
-    "recovered-n48dff1df249f": {
-      "vertical": "stats47-note",
-      "title": "【都道府県ランキング】日曜大工をする人が多い県1位は滋賀県｜東京は45位、格差1.5倍の実態",
-      "url": "https://note.com/stats47/n/n48dff1df249f",
-      "is_paid": false,
-      "published_at": "2026-03-02",
-      "r2_path": "note/stats47-note/n48dff1df249f",
-      "status": "r2_ready"
-    },
-    "recovered-n99f53e7a1f33": {
-      "vertical": "stats47-note",
-      "title": "救急車を最も呼ぶのは大阪府！福井県との差は1.7倍。あなたの街の救急医療は大丈夫？",
-      "url": "https://note.com/stats47/n/n99f53e7a1f33",
-      "is_paid": false,
-      "published_at": "2026-02-10",
-      "r2_path": "note/stats47-note/n99f53e7a1f33",
-      "status": "r2_ready"
-    },
-    "recovered-n5158c5766a07": {
-      "vertical": "stats47-note",
-      "title": "生命保険格差1.6倍！鹿児島県が偏差値65でトップ、東京は最下位。あなたの地域の備えは？",
-      "url": "https://note.com/stats47/n/n5158c5766a07",
-      "is_paid": false,
-      "published_at": "2026-02-10",
-      "r2_path": "note/stats47-note/n5158c5766a07",
-      "status": "r2_ready"
-    },
-    "recovered-nfe69996fb5c9": {
-      "vertical": "stats47-note",
-      "title": "家計を圧迫する光熱・水道費！2023年、青森が最下位大分の1.7倍超えで全国1位に",
-      "url": "https://note.com/stats47/n/nfe69996fb5c9",
-      "is_paid": false,
-      "published_at": "2026-02-09",
-      "r2_path": "note/stats47-note/nfe69996fb5c9",
-      "status": "r2_ready"
-    },
-    "recovered-n391d3ef70d29": {
-      "vertical": "stats47-note",
-      "title": "警察官の数が示す地域格差！2023年、東京が埼玉の約1.96倍でトップに",
-      "url": "https://note.com/stats47/n/n391d3ef70d29",
-      "is_paid": false,
-      "published_at": "2026-02-09",
-      "r2_path": "note/stats47-note/n391d3ef70d29",
-      "status": "r2_ready"
-    },
-    "recovered-ndc600ddb7c44": {
-      "vertical": "stats47-note",
-      "title": "エアコン普及率、徳島vs北海道で11倍格差！あなたの地域は本当に「普通」？",
-      "url": "https://note.com/stats47/n/ndc600ddb7c44",
-      "is_paid": false,
-      "published_at": "2026-02-02",
-      "r2_path": "note/stats47-note/ndc600ddb7c44",
-      "status": "r2_ready"
-    },
-    "recovered-n24b5000d587f": {
-      "vertical": "stats47-note",
-      "title": "女性のメディア時間、地域格差1.38倍！1位富山、最下位長野に見るライフスタイルの違い",
-      "url": "https://note.com/stats47/n/n24b5000d587f",
-      "is_paid": false,
-      "published_at": "2026-02-02",
-      "r2_path": "note/stats47-note/n24b5000d587f",
-      "status": "r2_ready"
-    },
-    "recovered-n1e63abcfba72": {
-      "vertical": "stats47-note",
-      "title": "あなたの県は大丈夫？メディア接触時間、地域格差1.38倍！2021年無職男性の過ごし方",
-      "url": "https://note.com/stats47/n/n1e63abcfba72",
-      "is_paid": false,
-      "published_at": "2026-02-02",
-      "r2_path": "note/stats47-note/n1e63abcfba72",
-      "status": "r2_ready"
-    },
-    "recovered-n3f65c01be9a8": {
-      "vertical": "stats47-note",
-      "title": "【14.7倍差】一般粉じん発生施設数ランキング！あなたの街は大丈夫？愛知がワースト1位の衝撃",
-      "url": "https://note.com/stats47/n/n3f65c01be9a8",
-      "is_paid": false,
-      "published_at": "2026-01-26",
-      "r2_path": "note/stats47-note/n3f65c01be9a8",
-      "status": "r2_ready"
-    },
-    "recovered-n218588ef2f67": {
-      "vertical": "stats47-note",
-      "title": "犯罪率3.3倍の衝撃！2022年特別法犯検挙件数ランキング、あなたの街の治安は？",
-      "url": "https://note.com/stats47/n/n218588ef2f67",
-      "is_paid": false,
-      "published_at": "2026-01-22",
-      "r2_path": "note/stats47-note/n218588ef2f67",
-      "status": "r2_ready"
-    },
-    "recovered-n15ee88b5169d": {
-      "vertical": "stats47-note",
-      "title": "医療費格差1.5倍！2022年国民健康保険診療費ランキング、あなたの県は健康？",
-      "url": "https://note.com/stats47/n/n15ee88b5169d",
-      "is_paid": false,
-      "published_at": "2026-01-22",
-      "r2_path": "note/stats47-note/n15ee88b5169d",
-      "status": "r2_ready"
-    },
-    "recovered-n4dae901ea3e8": {
-      "vertical": "stats47-note",
-      "title": "貯蓄格差1.98倍！福井県が偏差値70で1位、あなたの県は？【2023年平均貯蓄率】",
-      "url": "https://note.com/stats47/n/n4dae901ea3e8",
-      "is_paid": false,
-      "published_at": "2026-01-21",
-      "r2_path": "note/stats47-note/n4dae901ea3e8",
-      "status": "r2_ready"
-    },
-    "recovered-n0e8fd0068d4e": {
-      "vertical": "stats47-note",
-      "title": "妊産婦支援に2.4倍の地域格差！広島県が偏差値86でトップ、あなたの県は？【2022年】",
-      "url": "https://note.com/stats47/n/n0e8fd0068d4e",
-      "is_paid": false,
-      "published_at": "2026-01-21",
-      "r2_path": "note/stats47-note/n0e8fd0068d4e",
-      "status": "r2_ready"
-    },
-    "recovered-n99561600d4fe": {
-      "vertical": "stats47-note",
-      "title": "【1.9倍格差】リタイア後の女性、趣味を一番楽しむのは宮城県！あなたの地域は？",
-      "url": "https://note.com/stats47/n/n99561600d4fe",
-      "is_paid": false,
-      "published_at": "2026-01-20",
-      "r2_path": "note/stats47-note/n99561600d4fe",
-      "status": "r2_ready"
-    },
-    "recovered-n2b4298e9ac07": {
-      "vertical": "stats47-note",
-      "title": "【2.1倍格差】リタイア後の趣味時間、東京が圧勝！あなたの老後は大丈夫？",
-      "url": "https://note.com/stats47/n/n2b4298e9ac07",
-      "is_paid": false,
-      "published_at": "2026-01-20",
-      "r2_path": "note/stats47-note/n2b4298e9ac07",
-      "status": "r2_ready"
-    },
-    "recovered-ne82a6c83ed45": {
-      "vertical": "stats47-note",
-      "title": "【2022年度】都道府県「地方債現在高比率」ランキング｜なぜ財政力7位の静岡が借金ワースト？大阪41位の意外",
-      "url": "https://note.com/stats47/n/ne82a6c83ed45",
-      "is_paid": false,
-      "published_at": "2025-12-19",
-      "r2_path": "note/stats47-note/ne82a6c83ed45",
-      "status": "r2_ready"
-    },
-    "recovered-n16950238dfd8": {
-      "vertical": "stats47-note",
-      "title": "【2022年度】都道府県「財政力指数」ランキング｜唯一の1.0超え東京都、茨城8位の意外",
-      "url": "https://note.com/stats47/n/n16950238dfd8",
-      "is_paid": false,
-      "published_at": "2025-12-19",
-      "r2_path": "note/stats47-note/n16950238dfd8",
-      "status": "r2_ready"
-    },
-    "recovered-ncbed56eb7c3d": {
-      "vertical": "stats47-note",
-      "title": "都道府県別総人口・人口密度ランキング2023：格差26倍の現実",
-      "url": "https://note.com/stats47/n/ncbed56eb7c3d",
-      "is_paid": false,
-      "published_at": "2025-12-11",
-      "r2_path": "note/stats47-note/ncbed56eb7c3d",
-      "status": "r2_ready"
-    },
-    "recovered-nf962c6702b93": {
-      "vertical": "stats47-note",
-      "title": "【2023年版】都道府県「年間日照時間」ランキング！1位埼玉と最下位青森に「1.4倍」の差",
-      "url": "https://note.com/stats47/n/nf962c6702b93",
-      "is_paid": false,
-      "published_at": "2025-12-09",
-      "r2_path": "note/stats47-note/nf962c6702b93",
-      "status": "r2_ready"
-    },
-    "recovered-n03e45e40d3a7": {
-      "vertical": "stats47-note",
-      "title": "【保存版】GoogleマップでKMLファイルを利用する方法",
-      "url": "https://note.com/stats47/n/n03e45e40d3a7",
-      "is_paid": false,
-      "published_at": "2025-12-05",
-      "r2_path": "note/stats47-note/n03e45e40d3a7",
-      "status": "r2_ready"
-    },
-    "recovered-n91e82ac3b13c": {
-      "vertical": "stats47-note",
-      "title": "【2017年版】都道府県「ホテル客室数」ランキング｜東京は2位の大阪に1.6倍の大差",
-      "url": "https://note.com/stats47/n/n91e82ac3b13c",
-      "is_paid": false,
-      "published_at": "",
-      "r2_path": "note/stats47-note/n91e82ac3b13c",
-      "status": "r2_ready"
-    },
-    "paid-n143a9f6a0050": {
-      "vertical": "koumuin-estat-claude-code",
-      "title": "e-Stat 統計の前年比較・5 年トレンド・増減ランキングを自動化する",
-      "url": "https://note.com/stats47/n/n143a9f6a0050",
-      "is_paid": true,
-      "published_at": "2026-06-14",
-      "r2_path": "note/koumuin-estat-claude-code/n143a9f6a0050",
-      "status": "r2_ready",
-      "price_jpy": 300
-    },
-    "paid-n8558c1a6503a": {
-      "vertical": "stats47-note",
-      "title": "退職後のキャリア: AI × 公的セクター経験者の市場価値",
-      "url": "https://note.com/stats47/n/n8558c1a6503a",
-      "is_paid": true,
-      "published_at": "2026-05-22",
-      "r2_path": "note/stats47-note/n8558c1a6503a",
-      "status": "r2_ready",
-      "price_jpy": 300
-    },
-    "paid-ncab0d7b04228": {
-      "vertical": "stats47-note",
-      "title": "AI 導入を渋る上席への対応 Q&A 集 (現場感あり)",
-      "url": "https://note.com/stats47/n/ncab0d7b04228",
-      "is_paid": true,
-      "published_at": "2026-05-22",
-      "r2_path": "note/stats47-note/ncab0d7b04228",
-      "status": "r2_ready",
-      "price_jpy": 300
-    },
-    "paid-n9f666946d105": {
+    "31-claude-code-how-to-ask": {
       "vertical": "koumuin-claude-code",
-      "title": "庁内勉強会の進め方: 30 分で職員を Claude Code 入門させる",
-      "url": "https://note.com/stats47/n/n9f666946d105",
-      "is_paid": true,
-      "published_at": "2026-05-22",
-      "r2_path": "note/koumuin-claude-code/n9f666946d105",
-      "status": "r2_ready",
-      "price_jpy": 300
+      "title": "Claude Code への頼み方 — 公務員業務で「欲しいもの」を引き出すプロンプトの型",
+      "url": "https://note.com/stats47/n/n159230eb514c",
+      "is_paid": false,
+      "published_at": "2026-05-21",
+      "r2_path": "note/koumuin-claude-code/31-claude-code-how-to-ask",
+      "r2_body": true,
+      "status": "r2_ready"
     },
-    "paid-n2c2df066e865": {
-      "vertical": "stats47-note",
-      "title": "上司に Claude Code 導入を承認させた説明資料 (実例加工)",
-      "url": "https://note.com/stats47/n/n2c2df066e865",
-      "is_paid": true,
-      "published_at": "2026-05-22",
-      "r2_path": "note/stats47-note/n2c2df066e865",
-      "status": "r2_ready",
-      "price_jpy": 300
+    "32-claude-skills-getting-started": {
+      "vertical": "koumuin-claude-code",
+      "title": ".claude/skills 入門 — 一度うまくいった頼み方を職場の資産にする",
+      "url": "https://note.com/stats47/n/nac5e44284865",
+      "is_paid": false,
+      "published_at": "2026-05-21",
+      "r2_path": "note/koumuin-claude-code/32-claude-skills-getting-started",
+      "r2_body": true,
+      "status": "r2_ready"
     },
-    "paid-nfd3ab8213e1f": {
-      "vertical": "stats47-note",
-      "title": "既存の Excel マクロを Claude Code で Python 移植する",
-      "url": "https://note.com/stats47/n/nfd3ab8213e1f",
-      "is_paid": true,
-      "published_at": "2026-05-22",
-      "r2_path": "note/stats47-note/nfd3ab8213e1f",
-      "status": "r2_ready",
-      "price_jpy": 300
+    "koumuin-gis-01-depopulation-medical": {
+      "vertical": "koumuin-gis",
+      "title": "自治体職員のためのGIS入門 — 無料の国土数値情報で「過疎地域×医療機関」を可視化する",
+      "url": "https://note.com/stats47/n686dcc017bbe",
+      "is_paid": false,
+      "published_at": "2026-06-06",
+      "r2_path": "note/koumuin-gis/koumuin-gis-01-depopulation-medical",
+      "r2_body": true,
+      "status": "r2_ready"
     },
-    "paid-n68eafab07946": {
+    "paid-n0135c75ca76c": {
       "vertical": "stats47-note",
-      "title": "Subagents で「複数案件の並行調査」を回す",
-      "url": "https://note.com/stats47/n/n68eafab07946",
+      "title": "高校2年の体重格差、最大5.6kg！男女とも青森がトップ、岐阜が最下位",
+      "url": "https://note.com/stats47/n/n0135c75ca76c",
       "is_paid": true,
-      "published_at": "2026-05-22",
-      "r2_path": "note/stats47-note/n68eafab07946",
-      "status": "r2_ready",
-      "price_jpy": 300
-    },
-    "paid-nbead1fe772c7": {
-      "vertical": "stats47-note",
-      "title": "MCP server を庁内システムにつなぐ実験 (架空 LGWAN 想定)",
-      "url": "https://note.com/stats47/n/nbead1fe772c7",
-      "is_paid": true,
-      "published_at": "2026-05-22",
-      "r2_path": "note/stats47-note/nbead1fe772c7",
-      "status": "r2_ready",
-      "price_jpy": 300
-    },
-    "paid-n2207f3039fd3": {
-      "vertical": "stats47-note",
-      "title": ".claude/skills で「毎月の定型業務」を 1 コマンド化する",
-      "url": "https://note.com/stats47/n/n2207f3039fd3",
-      "is_paid": true,
-      "published_at": "2026-05-22",
-      "r2_path": "note/stats47-note/n2207f3039fd3",
-      "status": "r2_ready",
-      "price_jpy": 300
-    },
-    "paid-naf942acdbe59": {
-      "vertical": "stats47-note",
-      "title": "災害時の SNS 発信文を Claude Code で多言語化",
-      "url": "https://note.com/stats47/n/naf942acdbe59",
-      "is_paid": true,
-      "published_at": "2026-05-22",
-      "r2_path": "note/stats47-note/naf942acdbe59",
-      "status": "r2_ready",
-      "price_jpy": 300
-    },
-    "paid-n823d76c5cbac": {
-      "vertical": "stats47-note",
-      "title": "【第6章・完結】特典・付録：全98種 D3.jsカラーパレット辞書 & 実装チートシート",
-      "url": "https://note.com/stats47/n/n823d76c5cbac",
-      "is_paid": true,
-      "published_at": "2025-12-17",
-      "r2_path": "note/stats47-note/n823d76c5cbac",
-      "status": "r2_ready",
-      "price_jpy": 200
-    },
-    "paid-n66ffb10aa41b": {
-      "vertical": "stats47-note",
-      "title": "【第5章】実践テクニック編：凡例（Legend）とアクセシビリティ",
-      "url": "https://note.com/stats47/n/n66ffb10aa41b",
-      "is_paid": true,
-      "published_at": "2025-12-17",
-      "r2_path": "note/stats47-note/n66ffb10aa41b",
-      "status": "r2_ready",
-      "price_jpy": 200
-    },
-    "paid-n79fefdbd4d4c": {
-      "vertical": "stats47-note",
-      "title": "【第4章】カテゴリ・循環データ編：定性データの分類と特殊用途（全28種）",
-      "url": "https://note.com/stats47/n/n79fefdbd4d4c",
-      "is_paid": true,
-      "published_at": "2025-12-17",
-      "r2_path": "note/stats47-note/n79fefdbd4d4c",
-      "status": "r2_ready",
+      "published_at": "2025-12-16",
+      "r2_path": "note/stats47-note/n0135c75ca76c",
+      "r2_body": false,
+      "status": "note_only",
       "price_jpy": 200
     },
     "paid-n02da130aae01": {
@@ -1518,227 +418,8 @@
       "is_paid": true,
       "published_at": "2025-12-17",
       "r2_path": "note/stats47-note/n02da130aae01",
-      "status": "r2_ready",
-      "price_jpy": 200
-    },
-    "paid-nfe2c65e669a8": {
-      "vertical": "stats47-note",
-      "title": "【第2章】順序データの配色カタログ40選＆TypeScript実装レシピ",
-      "url": "https://note.com/stats47/n/nfe2c65e669a8",
-      "is_paid": true,
-      "published_at": "2025-12-17",
-      "r2_path": "note/stats47-note/nfe2c65e669a8",
-      "status": "r2_ready",
-      "price_jpy": 200
-    },
-    "paid-nf80da34b28c3": {
-      "vertical": "koumuin-gis",
-      "title": "【D3.js×Next.js】ダサい地図から脱却するデータ可視化の配色理論。AIへの的確な指示にも使える全98種コード付き",
-      "url": "https://note.com/stats47/n/nf80da34b28c3",
-      "is_paid": true,
-      "published_at": "2025-12-16",
-      "r2_path": "note/koumuin-gis/nf80da34b28c3",
-      "status": "r2_ready",
-      "price_jpy": 200
-    },
-    "paid-nf0c82ce9cee0": {
-      "vertical": "stats47-note",
-      "title": "苦情メール返信案を 5 パターン出す prompt",
-      "url": "https://note.com/stats47/n/nf0c82ce9cee0",
-      "is_paid": true,
-      "published_at": "2026-05-22",
-      "r2_path": "note/stats47-note/nf0c82ce9cee0",
-      "status": "r2_ready",
-      "price_jpy": 300
-    },
-    "paid-n92b846280d1a": {
-      "vertical": "stats47-note",
-      "title": "年収で「塾代」は56倍違う──家計調査 五分位階級別 159品目×25年分CSVデータセット",
-      "url": "https://note.com/stats47/n/n92b846280d1a",
-      "is_paid": true,
-      "published_at": "2026-03-13",
-      "r2_path": "note/stats47-note/n92b846280d1a",
-      "status": "r2_ready",
-      "price_jpy": 500
-    },
-    "paid-n2ed31d721531": {
-      "vertical": "stats47-note",
-      "title": "財政健全化法の4指標で見る都道府県ランキング｜赤字比率は全県クリア、差がつくのは借金の重さ",
-      "url": "https://note.com/stats47/n/n2ed31d721531",
-      "is_paid": true,
-      "published_at": "2026-03-13",
-      "r2_path": "note/stats47-note/n2ed31d721531",
-      "status": "r2_ready",
-      "price_jpy": 200
-    },
-    "paid-nd5edff320928": {
-      "vertical": "stats47-note",
-      "title": "【格差1.9倍】働く女性の「自分の時間」ランキング！1位神奈川、最下位は岩手。あなたの県は？",
-      "url": "https://note.com/stats47/n/nd5edff320928",
-      "is_paid": true,
-      "published_at": "2026-01-20",
-      "r2_path": "note/stats47-note/nd5edff320928",
-      "status": "r2_ready",
-      "price_jpy": 200
-    },
-    "paid-n67de9d45c426": {
-      "vertical": "stats47-note",
-      "title": "【2021年】趣味・娯楽時間ランキング！1位は茨城・大阪、最下位は沖縄・鹿児島で1.4倍の格差",
-      "url": "https://note.com/stats47/n/n67de9d45c426",
-      "is_paid": true,
-      "published_at": "2026-01-20",
-      "r2_path": "note/stats47-note/n67de9d45c426",
-      "status": "r2_ready",
-      "price_jpy": 200
-    },
-    "paid-nb3c79a94e53a": {
-      "vertical": "stats47-note",
-      "title": "自動車保有率、東京と山形で3.2倍の格差！2014年データで見る日本の「くるま社会」の現実",
-      "url": "https://note.com/stats47/n/nb3c79a94e53a",
-      "is_paid": true,
-      "published_at": "2026-01-15",
-      "r2_path": "note/stats47-note/nb3c79a94e53a",
-      "status": "r2_ready",
-      "price_jpy": 200
-    },
-    "paid-n066d8687ef00": {
-      "vertical": "stats47-note",
-      "title": "歯科健診の受診率に最大3.2倍の地域格差！2020年都道府県ランキングで見る日本のオーラルケア意識",
-      "url": "https://note.com/stats47/n/n066d8687ef00",
-      "is_paid": true,
-      "published_at": "2026-01-15",
-      "r2_path": "note/stats47-note/n066d8687ef00",
-      "status": "r2_ready",
-      "price_jpy": 200
-    },
-    "paid-n82a4168eaa19": {
-      "vertical": "stats47-note",
-      "title": "中学2年女子の平均体重、地域差は3.1kg！2022年都道府県ランキング",
-      "url": "https://note.com/stats47/n/n82a4168eaa19",
-      "is_paid": true,
-      "published_at": "2026-01-14",
-      "r2_path": "note/stats47-note/n82a4168eaa19",
-      "status": "r2_ready",
-      "price_jpy": 200
-    },
-    "paid-naa6eba6efec2": {
-      "vertical": "stats47-note",
-      "title": "脳血管疾患死亡率、最大2.6倍の地域格差！2022年都道府県ランキングから見る日本の健康課題",
-      "url": "https://note.com/stats47/n/naa6eba6efec2",
-      "is_paid": true,
-      "published_at": "2026-01-14",
-      "r2_path": "note/stats47-note/naa6eba6efec2",
-      "status": "r2_ready",
-      "price_jpy": 200
-    },
-    "paid-ncf695ba6eb35": {
-      "vertical": "stats47-note",
-      "title": "教育費、和歌山は富山の1.57倍！あなたの街の教育コストは？【2023年版】",
-      "url": "https://note.com/stats47/n/ncf695ba6eb35",
-      "is_paid": true,
-      "published_at": "2026-01-13",
-      "r2_path": "note/stats47-note/ncf695ba6eb35",
-      "status": "r2_ready",
-      "price_jpy": 200
-    },
-    "paid-nead1c21768b5": {
-      "vertical": "stats47-note",
-      "title": "【2023年】趣味や遊びの費用、東京は宮崎の1.16倍！エンタメ費用の地域格差を大解剖",
-      "url": "https://note.com/stats47/n/nead1c21768b5",
-      "is_paid": true,
-      "published_at": "2026-01-13",
-      "r2_path": "note/stats47-note/nead1c21768b5",
-      "status": "r2_ready",
-      "price_jpy": 200
-    },
-    "paid-n317c673b1e81": {
-      "vertical": "stats47-note",
-      "title": "【2023年】服や靴の価格、地域で1.27倍の格差！石川県は高く、鹿児島県は安い？",
-      "url": "https://note.com/stats47/n/n317c673b1e81",
-      "is_paid": true,
-      "published_at": "2026-01-13",
-      "r2_path": "note/stats47-note/n317c673b1e81",
-      "status": "r2_ready",
-      "price_jpy": 200
-    },
-    "paid-nd2fd5adb4bed": {
-      "vertical": "stats47-note",
-      "title": "収入格差1.65倍！2023年、日本の世帯収入ランキング。あなたの県は？",
-      "url": "https://note.com/stats47/n/nd2fd5adb4bed",
-      "is_paid": true,
-      "published_at": "2026-01-08",
-      "r2_path": "note/stats47-note/nd2fd5adb4bed",
-      "status": "r2_ready",
-      "price_jpy": 200
-    },
-    "paid-nefecfbe76bd2": {
-      "vertical": "stats47-note",
-      "title": "【2021年】都道府県の未来への投資力に6倍の格差！投資的経費の割合ランキング、あなたの県は？",
-      "url": "https://note.com/stats47/n/nefecfbe76bd2",
-      "is_paid": true,
-      "published_at": "2025-12-22",
-      "r2_path": "note/stats47-note/nefecfbe76bd2",
-      "status": "r2_ready",
-      "price_jpy": 200
-    },
-    "paid-nb8f3e05d244b": {
-      "vertical": "stats47-note",
-      "title": "財政の余裕は最大1.25倍の格差！2021年経常収支比率ランキング",
-      "url": "https://note.com/stats47/n/nb8f3e05d244b",
-      "is_paid": true,
-      "published_at": "2025-12-22",
-      "r2_path": "note/stats47-note/nb8f3e05d244b",
-      "status": "r2_ready",
-      "price_jpy": 200
-    },
-    "paid-n4b8346d9c17b": {
-      "vertical": "stats47-note",
-      "title": "【2021年度】自主財源比率ランキング！東京76%、高知24.1%で格差3.15倍の衝撃",
-      "url": "https://note.com/stats47/n/n4b8346d9c17b",
-      "is_paid": true,
-      "published_at": "2025-12-19",
-      "r2_path": "note/stats47-note/n4b8346d9c17b",
-      "status": "r2_ready",
-      "price_jpy": 200
-    },
-    "paid-na16afa534c77": {
-      "vertical": "stats47-note",
-      "title": "【格差41倍】都道府県「実質収支比率」ランキング｜東京8.2％、長崎0.2％の財政格差",
-      "url": "https://note.com/stats47/n/na16afa534c77",
-      "is_paid": true,
-      "published_at": "2025-12-19",
-      "r2_path": "note/stats47-note/na16afa534c77",
-      "status": "r2_ready",
-      "price_jpy": 200
-    },
-    "paid-n2406ded99484": {
-      "vertical": "stats47-note",
-      "title": "【格差7.3倍】都道府県「一般行政部門職員数」ランキング｜東京2万人超、地方は3千人以下",
-      "url": "https://note.com/stats47/n/n2406ded99484",
-      "is_paid": true,
-      "published_at": "2025-12-19",
-      "r2_path": "note/stats47-note/n2406ded99484",
-      "status": "r2_ready",
-      "price_jpy": 200
-    },
-    "paid-n44bedb732274": {
-      "vertical": "stats47-note",
-      "title": "都道府県別農業産出額ランキング2022：北海道が圧倒的1位、生産性も全国トップ",
-      "url": "https://note.com/stats47/n/n44bedb732274",
-      "is_paid": true,
-      "published_at": "2025-12-18",
-      "r2_path": "note/stats47-note/n44bedb732274",
-      "status": "r2_ready",
-      "price_jpy": 200
-    },
-    "paid-nd54b2958dc0e": {
-      "vertical": "stats47-note",
-      "title": "農地の転用面積の都道府県格差は9.8倍！偏差値76.4の北海道と偏差値37.6の福井県の驚きの差",
-      "url": "https://note.com/stats47/n/nd54b2958dc0e",
-      "is_paid": true,
-      "published_at": "2025-12-18",
-      "r2_path": "note/stats47-note/nd54b2958dc0e",
-      "status": "r2_ready",
+      "r2_body": false,
+      "status": "note_only",
       "price_jpy": 200
     },
     "paid-n0642ad7f7fdd": {
@@ -1748,68 +429,64 @@
       "is_paid": true,
       "published_at": "2025-12-18",
       "r2_path": "note/stats47-note/n0642ad7f7fdd",
-      "status": "r2_ready",
+      "r2_body": false,
+      "status": "note_only",
       "price_jpy": 200
     },
-    "paid-n772ff041af18": {
+    "paid-n066d8687ef00": {
       "vertical": "stats47-note",
-      "title": "農家数の都道府県格差は9.4倍！偏差値81.0の長野県と偏差値33.7の東京都の驚きの差",
-      "url": "https://note.com/stats47/n/n772ff041af18",
+      "title": "歯科健診の受診率に最大3.2倍の地域格差！2020年都道府県ランキングで見る日本のオーラルケア意識",
+      "url": "https://note.com/stats47/n/n066d8687ef00",
       "is_paid": true,
-      "published_at": "2025-12-18",
-      "r2_path": "note/stats47-note/n772ff041af18",
-      "status": "r2_ready",
+      "published_at": "2026-01-15",
+      "r2_path": "note/stats47-note/n066d8687ef00",
+      "r2_body": false,
+      "status": "note_only",
       "price_jpy": 200
     },
-    "paid-na76caacd17c3": {
-      "vertical": "stats47-note",
-      "title": "充足率の都道府県格差、最大3.7倍！長崎7.0%、東京1.9%の地域差",
-      "url": "https://note.com/stats47/n/na76caacd17c3",
+    "paid-n143a9f6a0050": {
+      "vertical": "koumuin-estat-claude-code",
+      "title": "e-Stat 統計の前年比較・5 年トレンド・増減ランキングを自動化する",
+      "url": "https://note.com/stats47/n/n143a9f6a0050",
       "is_paid": true,
-      "published_at": "2025-12-17",
-      "r2_path": "note/stats47-note/na76caacd17c3",
-      "status": "r2_ready",
+      "published_at": "2026-06-14",
+      "r2_path": "note/koumuin-estat-claude-code/n143a9f6a0050",
+      "r2_body": false,
+      "status": "note_only",
+      "price_jpy": 300
+    },
+    "paid-n2207f3039fd3": {
+      "vertical": "stats47-note",
+      "title": ".claude/skills で「毎月の定型業務」を 1 コマンド化する",
+      "url": "https://note.com/stats47/n/n2207f3039fd3",
+      "is_paid": true,
+      "published_at": "2026-05-22",
+      "r2_path": "note/stats47-note/n2207f3039fd3",
+      "r2_body": false,
+      "status": "note_only",
+      "price_jpy": 300
+    },
+    "paid-n2406ded99484": {
+      "vertical": "stats47-note",
+      "title": "【格差7.3倍】都道府県「一般行政部門職員数」ランキング｜東京2万人超、地方は3千人以下",
+      "url": "https://note.com/stats47/n/n2406ded99484",
+      "is_paid": true,
+      "published_at": "2025-12-19",
+      "r2_path": "note/stats47-note/n2406ded99484",
+      "r2_body": false,
+      "status": "note_only",
       "price_jpy": 200
     },
-    "paid-n7290144784d4": {
+    "paid-n2c2df066e865": {
       "vertical": "stats47-note",
-      "title": "あなたの街は火事に強い？2022年火災死傷者数ランキング、鳥取と神奈川で2.5倍の格差",
-      "url": "https://note.com/stats47/n/n7290144784d4",
+      "title": "上司に Claude Code 導入を承認させた説明資料 (実例加工)",
+      "url": "https://note.com/stats47/n/n2c2df066e865",
       "is_paid": true,
-      "published_at": "2025-12-17",
-      "r2_path": "note/stats47-note/n7290144784d4",
-      "status": "r2_ready",
-      "price_jpy": 200
-    },
-    "paid-nb17d039bc1aa": {
-      "vertical": "stats47-note",
-      "title": "火災死傷者数ランキング2022：鳥取と滋賀で約1.9倍の格差！あなたの街の火災リスクは？",
-      "url": "https://note.com/stats47/n/nb17d039bc1aa",
-      "is_paid": true,
-      "published_at": "2025-12-17",
-      "r2_path": "note/stats47-note/nb17d039bc1aa",
-      "status": "r2_ready",
-      "price_jpy": 200
-    },
-    "paid-n0135c75ca76c": {
-      "vertical": "stats47-note",
-      "title": "高校2年の体重格差、最大5.6kg！男女とも青森がトップ、岐阜が最下位",
-      "url": "https://note.com/stats47/n/n0135c75ca76c",
-      "is_paid": true,
-      "published_at": "2025-12-16",
-      "r2_path": "note/stats47-note/n0135c75ca76c",
-      "status": "r2_ready",
-      "price_jpy": 200
-    },
-    "paid-n925aa92c4ee4": {
-      "vertical": "stats47-note",
-      "title": "中学2年の体重格差、最大4.3kg！男子は青森53.6kg、女子は愛知46.7kgが最軽量",
-      "url": "https://note.com/stats47/n/n925aa92c4ee4",
-      "is_paid": true,
-      "published_at": "2025-12-16",
-      "r2_path": "note/stats47-note/n925aa92c4ee4",
-      "status": "r2_ready",
-      "price_jpy": 200
+      "published_at": "2026-05-22",
+      "r2_path": "note/stats47-note/n2c2df066e865",
+      "r2_body": false,
+      "status": "note_only",
+      "price_jpy": 300
     },
     "paid-n2d43e8cd6054": {
       "vertical": "stats47-note",
@@ -1818,47 +495,41 @@
       "is_paid": true,
       "published_at": "2025-12-16",
       "r2_path": "note/stats47-note/n2d43e8cd6054",
-      "status": "r2_ready",
+      "r2_body": false,
+      "status": "note_only",
       "price_jpy": 200
     },
-    "paid-nef7e875ba364": {
+    "paid-n2ed31d721531": {
       "vertical": "stats47-note",
-      "title": "あなたの県は大丈夫？2024年年少人口割合、沖縄と秋田で1.8倍の衝撃格差",
-      "url": "https://note.com/stats47/n/nef7e875ba364",
+      "title": "財政健全化法の4指標で見る都道府県ランキング｜赤字比率は全県クリア、差がつくのは借金の重さ",
+      "url": "https://note.com/stats47/n/n2ed31d721531",
       "is_paid": true,
-      "published_at": "2025-12-16",
-      "r2_path": "note/stats47-note/nef7e875ba364",
-      "status": "r2_ready",
+      "published_at": "2026-03-13",
+      "r2_path": "note/stats47-note/n2ed31d721531",
+      "r2_body": false,
+      "status": "note_only",
       "price_jpy": 200
     },
-    "paid-nafcc04dcd988": {
+    "paid-n317c673b1e81": {
       "vertical": "stats47-note",
-      "title": "都道府県別年少人口指数ランキング2022：沖縄県が27.1で圧倒的1位、東京都との差は1.6倍",
-      "url": "https://note.com/stats47/n/nafcc04dcd988",
+      "title": "【2023年】服や靴の価格、地域で1.27倍の格差！石川県は高く、鹿児島県は安い？",
+      "url": "https://note.com/stats47/n/n317c673b1e81",
       "is_paid": true,
-      "published_at": "2025-12-16",
-      "r2_path": "note/stats47-note/nafcc04dcd988",
-      "status": "r2_ready",
+      "published_at": "2026-01-13",
+      "r2_path": "note/stats47-note/n317c673b1e81",
+      "r2_body": false,
+      "status": "note_only",
       "price_jpy": 200
     },
-    "paid-neecba2a1752d": {
+    "paid-n44bedb732274": {
       "vertical": "stats47-note",
-      "title": "有効求人倍率、1位福井県と最下位神奈川県で2.2倍の格差！偏差値で見る雇用環境の地域差",
-      "url": "https://note.com/stats47/n/neecba2a1752d",
+      "title": "都道府県別農業産出額ランキング2022：北海道が圧倒的1位、生産性も全国トップ",
+      "url": "https://note.com/stats47/n/n44bedb732274",
       "is_paid": true,
-      "published_at": "2025-12-15",
-      "r2_path": "note/stats47-note/neecba2a1752d",
-      "status": "r2_ready",
-      "price_jpy": 200
-    },
-    "paid-nba8bf272cc2b": {
-      "vertical": "stats47-note",
-      "title": "【格差2.5歳】都道府県「初婚年齢（夫・妻）」ランキング2022：東京と山口の「2.5歳」の差と性別による違い",
-      "url": "https://note.com/stats47/n/nba8bf272cc2b",
-      "is_paid": true,
-      "published_at": "2025-12-11",
-      "r2_path": "note/stats47-note/nba8bf272cc2b",
-      "status": "r2_ready",
+      "published_at": "2025-12-18",
+      "r2_path": "note/stats47-note/n44bedb732274",
+      "r2_body": false,
+      "status": "note_only",
       "price_jpy": 200
     },
     "paid-n48a11cea7b31": {
@@ -1868,7 +539,217 @@
       "is_paid": true,
       "published_at": "2025-12-10",
       "r2_path": "note/stats47-note/n48a11cea7b31",
-      "status": "r2_ready",
+      "r2_body": false,
+      "status": "note_only",
+      "price_jpy": 200
+    },
+    "paid-n4b8346d9c17b": {
+      "vertical": "stats47-note",
+      "title": "【2021年度】自主財源比率ランキング！東京76%、高知24.1%で格差3.15倍の衝撃",
+      "url": "https://note.com/stats47/n/n4b8346d9c17b",
+      "is_paid": true,
+      "published_at": "2025-12-19",
+      "r2_path": "note/stats47-note/n4b8346d9c17b",
+      "r2_body": false,
+      "status": "note_only",
+      "price_jpy": 200
+    },
+    "paid-n66ffb10aa41b": {
+      "vertical": "stats47-note",
+      "title": "【第5章】実践テクニック編：凡例（Legend）とアクセシビリティ",
+      "url": "https://note.com/stats47/n/n66ffb10aa41b",
+      "is_paid": true,
+      "published_at": "2025-12-17",
+      "r2_path": "note/stats47-note/n66ffb10aa41b",
+      "r2_body": false,
+      "status": "note_only",
+      "price_jpy": 200
+    },
+    "paid-n67de9d45c426": {
+      "vertical": "stats47-note",
+      "title": "【2021年】趣味・娯楽時間ランキング！1位は茨城・大阪、最下位は沖縄・鹿児島で1.4倍の格差",
+      "url": "https://note.com/stats47/n/n67de9d45c426",
+      "is_paid": true,
+      "published_at": "2026-01-20",
+      "r2_path": "note/stats47-note/n67de9d45c426",
+      "r2_body": false,
+      "status": "note_only",
+      "price_jpy": 200
+    },
+    "paid-n68eafab07946": {
+      "vertical": "stats47-note",
+      "title": "Subagents で「複数案件の並行調査」を回す",
+      "url": "https://note.com/stats47/n/n68eafab07946",
+      "is_paid": true,
+      "published_at": "2026-05-22",
+      "r2_path": "note/stats47-note/n68eafab07946",
+      "r2_body": false,
+      "status": "note_only",
+      "price_jpy": 300
+    },
+    "paid-n7290144784d4": {
+      "vertical": "stats47-note",
+      "title": "あなたの街は火事に強い？2022年火災死傷者数ランキング、鳥取と神奈川で2.5倍の格差",
+      "url": "https://note.com/stats47/n/n7290144784d4",
+      "is_paid": true,
+      "published_at": "2025-12-17",
+      "r2_path": "note/stats47-note/n7290144784d4",
+      "r2_body": false,
+      "status": "note_only",
+      "price_jpy": 200
+    },
+    "paid-n772ff041af18": {
+      "vertical": "stats47-note",
+      "title": "農家数の都道府県格差は9.4倍！偏差値81.0の長野県と偏差値33.7の東京都の驚きの差",
+      "url": "https://note.com/stats47/n/n772ff041af18",
+      "is_paid": true,
+      "published_at": "2025-12-18",
+      "r2_path": "note/stats47-note/n772ff041af18",
+      "r2_body": false,
+      "status": "note_only",
+      "price_jpy": 200
+    },
+    "paid-n79fefdbd4d4c": {
+      "vertical": "stats47-note",
+      "title": "【第4章】カテゴリ・循環データ編：定性データの分類と特殊用途（全28種）",
+      "url": "https://note.com/stats47/n/n79fefdbd4d4c",
+      "is_paid": true,
+      "published_at": "2025-12-17",
+      "r2_path": "note/stats47-note/n79fefdbd4d4c",
+      "r2_body": false,
+      "status": "note_only",
+      "price_jpy": 200
+    },
+    "paid-n823d76c5cbac": {
+      "vertical": "stats47-note",
+      "title": "【第6章・完結】特典・付録：全98種 D3.jsカラーパレット辞書 & 実装チートシート",
+      "url": "https://note.com/stats47/n/n823d76c5cbac",
+      "is_paid": true,
+      "published_at": "2025-12-17",
+      "r2_path": "note/stats47-note/n823d76c5cbac",
+      "r2_body": false,
+      "status": "note_only",
+      "price_jpy": 200
+    },
+    "paid-n82a4168eaa19": {
+      "vertical": "stats47-note",
+      "title": "中学2年女子の平均体重、地域差は3.1kg！2022年都道府県ランキング",
+      "url": "https://note.com/stats47/n/n82a4168eaa19",
+      "is_paid": true,
+      "published_at": "2026-01-14",
+      "r2_path": "note/stats47-note/n82a4168eaa19",
+      "r2_body": false,
+      "status": "note_only",
+      "price_jpy": 200
+    },
+    "paid-n8558c1a6503a": {
+      "vertical": "stats47-note",
+      "title": "退職後のキャリア: AI × 公的セクター経験者の市場価値",
+      "url": "https://note.com/stats47/n/n8558c1a6503a",
+      "is_paid": true,
+      "published_at": "2026-05-22",
+      "r2_path": "note/stats47-note/n8558c1a6503a",
+      "r2_body": false,
+      "status": "note_only",
+      "price_jpy": 300
+    },
+    "paid-n925aa92c4ee4": {
+      "vertical": "stats47-note",
+      "title": "中学2年の体重格差、最大4.3kg！男子は青森53.6kg、女子は愛知46.7kgが最軽量",
+      "url": "https://note.com/stats47/n/n925aa92c4ee4",
+      "is_paid": true,
+      "published_at": "2025-12-16",
+      "r2_path": "note/stats47-note/n925aa92c4ee4",
+      "r2_body": false,
+      "status": "note_only",
+      "price_jpy": 200
+    },
+    "paid-n92b846280d1a": {
+      "vertical": "stats47-note",
+      "title": "年収で「塾代」は56倍違う──家計調査 五分位階級別 159品目×25年分CSVデータセット",
+      "url": "https://note.com/stats47/n/n92b846280d1a",
+      "is_paid": true,
+      "published_at": "2026-03-13",
+      "r2_path": "note/stats47-note/n92b846280d1a",
+      "r2_body": false,
+      "status": "note_only",
+      "price_jpy": 500
+    },
+    "paid-n9f666946d105": {
+      "vertical": "koumuin-claude-code",
+      "title": "庁内勉強会の進め方: 30 分で職員を Claude Code 入門させる",
+      "url": "https://note.com/stats47/n/n9f666946d105",
+      "is_paid": true,
+      "published_at": "2026-05-22",
+      "r2_path": "note/koumuin-claude-code/n9f666946d105",
+      "r2_body": false,
+      "status": "note_only",
+      "price_jpy": 300
+    },
+    "paid-na16afa534c77": {
+      "vertical": "stats47-note",
+      "title": "【格差41倍】都道府県「実質収支比率」ランキング｜東京8.2％、長崎0.2％の財政格差",
+      "url": "https://note.com/stats47/n/na16afa534c77",
+      "is_paid": true,
+      "published_at": "2025-12-19",
+      "r2_path": "note/stats47-note/na16afa534c77",
+      "r2_body": false,
+      "status": "note_only",
+      "price_jpy": 200
+    },
+    "paid-na76caacd17c3": {
+      "vertical": "stats47-note",
+      "title": "充足率の都道府県格差、最大3.7倍！長崎7.0%、東京1.9%の地域差",
+      "url": "https://note.com/stats47/n/na76caacd17c3",
+      "is_paid": true,
+      "published_at": "2025-12-17",
+      "r2_path": "note/stats47-note/na76caacd17c3",
+      "r2_body": false,
+      "status": "note_only",
+      "price_jpy": 200
+    },
+    "paid-naa6eba6efec2": {
+      "vertical": "stats47-note",
+      "title": "脳血管疾患死亡率、最大2.6倍の地域格差！2022年都道府県ランキングから見る日本の健康課題",
+      "url": "https://note.com/stats47/n/naa6eba6efec2",
+      "is_paid": true,
+      "published_at": "2026-01-14",
+      "r2_path": "note/stats47-note/naa6eba6efec2",
+      "r2_body": false,
+      "status": "note_only",
+      "price_jpy": 200
+    },
+    "paid-naf942acdbe59": {
+      "vertical": "stats47-note",
+      "title": "災害時の SNS 発信文を Claude Code で多言語化",
+      "url": "https://note.com/stats47/n/naf942acdbe59",
+      "is_paid": true,
+      "published_at": "2026-05-22",
+      "r2_path": "note/stats47-note/naf942acdbe59",
+      "r2_body": false,
+      "status": "note_only",
+      "price_jpy": 300
+    },
+    "paid-nafcc04dcd988": {
+      "vertical": "stats47-note",
+      "title": "都道府県別年少人口指数ランキング2022：沖縄県が27.1で圧倒的1位、東京都との差は1.6倍",
+      "url": "https://note.com/stats47/n/nafcc04dcd988",
+      "is_paid": true,
+      "published_at": "2025-12-16",
+      "r2_path": "note/stats47-note/nafcc04dcd988",
+      "r2_body": false,
+      "status": "note_only",
+      "price_jpy": 200
+    },
+    "paid-nb17d039bc1aa": {
+      "vertical": "stats47-note",
+      "title": "火災死傷者数ランキング2022：鳥取と滋賀で約1.9倍の格差！あなたの街の火災リスクは？",
+      "url": "https://note.com/stats47/n/nb17d039bc1aa",
+      "is_paid": true,
+      "published_at": "2025-12-17",
+      "r2_path": "note/stats47-note/nb17d039bc1aa",
+      "r2_body": false,
+      "status": "note_only",
       "price_jpy": 200
     },
     "paid-nb216c5776aab": {
@@ -1878,8 +759,1056 @@
       "is_paid": true,
       "published_at": "2025-12-09",
       "r2_path": "note/stats47-note/nb216c5776aab",
-      "status": "r2_ready",
+      "r2_body": false,
+      "status": "note_only",
       "price_jpy": 200
+    },
+    "paid-nb3c79a94e53a": {
+      "vertical": "stats47-note",
+      "title": "自動車保有率、東京と山形で3.2倍の格差！2014年データで見る日本の「くるま社会」の現実",
+      "url": "https://note.com/stats47/n/nb3c79a94e53a",
+      "is_paid": true,
+      "published_at": "2026-01-15",
+      "r2_path": "note/stats47-note/nb3c79a94e53a",
+      "r2_body": false,
+      "status": "note_only",
+      "price_jpy": 200
+    },
+    "paid-nb8f3e05d244b": {
+      "vertical": "stats47-note",
+      "title": "財政の余裕は最大1.25倍の格差！2021年経常収支比率ランキング",
+      "url": "https://note.com/stats47/n/nb8f3e05d244b",
+      "is_paid": true,
+      "published_at": "2025-12-22",
+      "r2_path": "note/stats47-note/nb8f3e05d244b",
+      "r2_body": false,
+      "status": "note_only",
+      "price_jpy": 200
+    },
+    "paid-nba8bf272cc2b": {
+      "vertical": "stats47-note",
+      "title": "【格差2.5歳】都道府県「初婚年齢（夫・妻）」ランキング2022：東京と山口の「2.5歳」の差と性別による違い",
+      "url": "https://note.com/stats47/n/nba8bf272cc2b",
+      "is_paid": true,
+      "published_at": "2025-12-11",
+      "r2_path": "note/stats47-note/nba8bf272cc2b",
+      "r2_body": false,
+      "status": "note_only",
+      "price_jpy": 200
+    },
+    "paid-nbead1fe772c7": {
+      "vertical": "stats47-note",
+      "title": "MCP server を庁内システムにつなぐ実験 (架空 LGWAN 想定)",
+      "url": "https://note.com/stats47/n/nbead1fe772c7",
+      "is_paid": true,
+      "published_at": "2026-05-22",
+      "r2_path": "note/stats47-note/nbead1fe772c7",
+      "r2_body": false,
+      "status": "note_only",
+      "price_jpy": 300
+    },
+    "paid-ncab0d7b04228": {
+      "vertical": "stats47-note",
+      "title": "AI 導入を渋る上席への対応 Q&A 集 (現場感あり)",
+      "url": "https://note.com/stats47/n/ncab0d7b04228",
+      "is_paid": true,
+      "published_at": "2026-05-22",
+      "r2_path": "note/stats47-note/ncab0d7b04228",
+      "r2_body": false,
+      "status": "note_only",
+      "price_jpy": 300
+    },
+    "paid-ncf695ba6eb35": {
+      "vertical": "stats47-note",
+      "title": "教育費、和歌山は富山の1.57倍！あなたの街の教育コストは？【2023年版】",
+      "url": "https://note.com/stats47/n/ncf695ba6eb35",
+      "is_paid": true,
+      "published_at": "2026-01-13",
+      "r2_path": "note/stats47-note/ncf695ba6eb35",
+      "r2_body": false,
+      "status": "note_only",
+      "price_jpy": 200
+    },
+    "paid-nd2fd5adb4bed": {
+      "vertical": "stats47-note",
+      "title": "収入格差1.65倍！2023年、日本の世帯収入ランキング。あなたの県は？",
+      "url": "https://note.com/stats47/n/nd2fd5adb4bed",
+      "is_paid": true,
+      "published_at": "2026-01-08",
+      "r2_path": "note/stats47-note/nd2fd5adb4bed",
+      "r2_body": false,
+      "status": "note_only",
+      "price_jpy": 200
+    },
+    "paid-nd54b2958dc0e": {
+      "vertical": "stats47-note",
+      "title": "農地の転用面積の都道府県格差は9.8倍！偏差値76.4の北海道と偏差値37.6の福井県の驚きの差",
+      "url": "https://note.com/stats47/n/nd54b2958dc0e",
+      "is_paid": true,
+      "published_at": "2025-12-18",
+      "r2_path": "note/stats47-note/nd54b2958dc0e",
+      "r2_body": false,
+      "status": "note_only",
+      "price_jpy": 200
+    },
+    "paid-nd5edff320928": {
+      "vertical": "stats47-note",
+      "title": "【格差1.9倍】働く女性の「自分の時間」ランキング！1位神奈川、最下位は岩手。あなたの県は？",
+      "url": "https://note.com/stats47/n/nd5edff320928",
+      "is_paid": true,
+      "published_at": "2026-01-20",
+      "r2_path": "note/stats47-note/nd5edff320928",
+      "r2_body": false,
+      "status": "note_only",
+      "price_jpy": 200
+    },
+    "paid-nead1c21768b5": {
+      "vertical": "stats47-note",
+      "title": "【2023年】趣味や遊びの費用、東京は宮崎の1.16倍！エンタメ費用の地域格差を大解剖",
+      "url": "https://note.com/stats47/n/nead1c21768b5",
+      "is_paid": true,
+      "published_at": "2026-01-13",
+      "r2_path": "note/stats47-note/nead1c21768b5",
+      "r2_body": false,
+      "status": "note_only",
+      "price_jpy": 200
+    },
+    "paid-neecba2a1752d": {
+      "vertical": "stats47-note",
+      "title": "有効求人倍率、1位福井県と最下位神奈川県で2.2倍の格差！偏差値で見る雇用環境の地域差",
+      "url": "https://note.com/stats47/n/neecba2a1752d",
+      "is_paid": true,
+      "published_at": "2025-12-15",
+      "r2_path": "note/stats47-note/neecba2a1752d",
+      "r2_body": false,
+      "status": "note_only",
+      "price_jpy": 200
+    },
+    "paid-nef7e875ba364": {
+      "vertical": "stats47-note",
+      "title": "あなたの県は大丈夫？2024年年少人口割合、沖縄と秋田で1.8倍の衝撃格差",
+      "url": "https://note.com/stats47/n/nef7e875ba364",
+      "is_paid": true,
+      "published_at": "2025-12-16",
+      "r2_path": "note/stats47-note/nef7e875ba364",
+      "r2_body": false,
+      "status": "note_only",
+      "price_jpy": 200
+    },
+    "paid-nefecfbe76bd2": {
+      "vertical": "stats47-note",
+      "title": "【2021年】都道府県の未来への投資力に6倍の格差！投資的経費の割合ランキング、あなたの県は？",
+      "url": "https://note.com/stats47/n/nefecfbe76bd2",
+      "is_paid": true,
+      "published_at": "2025-12-22",
+      "r2_path": "note/stats47-note/nefecfbe76bd2",
+      "r2_body": false,
+      "status": "note_only",
+      "price_jpy": 200
+    },
+    "paid-nf0c82ce9cee0": {
+      "vertical": "stats47-note",
+      "title": "苦情メール返信案を 5 パターン出す prompt",
+      "url": "https://note.com/stats47/n/nf0c82ce9cee0",
+      "is_paid": true,
+      "published_at": "2026-05-22",
+      "r2_path": "note/stats47-note/nf0c82ce9cee0",
+      "r2_body": false,
+      "status": "note_only",
+      "price_jpy": 300
+    },
+    "paid-nf80da34b28c3": {
+      "vertical": "koumuin-gis",
+      "title": "【D3.js×Next.js】ダサい地図から脱却するデータ可視化の配色理論。AIへの的確な指示にも使える全98種コード付き",
+      "url": "https://note.com/stats47/n/nf80da34b28c3",
+      "is_paid": true,
+      "published_at": "2025-12-16",
+      "r2_path": "note/koumuin-gis/nf80da34b28c3",
+      "r2_body": false,
+      "status": "note_only",
+      "price_jpy": 200
+    },
+    "paid-nfd3ab8213e1f": {
+      "vertical": "stats47-note",
+      "title": "既存の Excel マクロを Claude Code で Python 移植する",
+      "url": "https://note.com/stats47/n/nfd3ab8213e1f",
+      "is_paid": true,
+      "published_at": "2026-05-22",
+      "r2_path": "note/stats47-note/nfd3ab8213e1f",
+      "r2_body": false,
+      "status": "note_only",
+      "price_jpy": 300
+    },
+    "paid-nfe2c65e669a8": {
+      "vertical": "stats47-note",
+      "title": "【第2章】順序データの配色カタログ40選＆TypeScript実装レシピ",
+      "url": "https://note.com/stats47/n/nfe2c65e669a8",
+      "is_paid": true,
+      "published_at": "2025-12-17",
+      "r2_path": "note/stats47-note/nfe2c65e669a8",
+      "r2_body": false,
+      "status": "note_only",
+      "price_jpy": 200
+    },
+    "recovered-n023501038bd5": {
+      "vertical": "stats47-note",
+      "title": "なぜ埼玉が「日照時間日本一」なのか — 意外な答えは地形にあった",
+      "url": "https://note.com/stats47/n/n023501038bd5",
+      "is_paid": false,
+      "published_at": "2026-03-13",
+      "r2_path": "note/stats47-note/n023501038bd5",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-n026bb22ad4eb": {
+      "vertical": "stats47-note",
+      "title": "【2021年版】都道府県「バレーボールの行動者率」ランキング｜宮崎県が偏差値83.2で圧倒的1位、富山県は最下位",
+      "url": "https://note.com/stats47/n/n026bb22ad4eb",
+      "is_paid": false,
+      "published_at": "2026-04-12",
+      "r2_path": "note/stats47-note/n026bb22ad4eb",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-n03844512d58a": {
+      "vertical": "stats47-note",
+      "title": "エンゲル係数で見る所得格差 ── 低所得層33%、高所得層25%。食費の中身はもっと違う",
+      "url": "https://note.com/stats47/n/n03844512d58a",
+      "is_paid": false,
+      "published_at": "2026-03-18",
+      "r2_path": "note/stats47-note/n03844512d58a",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-n03e45e40d3a7": {
+      "vertical": "stats47-note",
+      "title": "【保存版】GoogleマップでKMLファイルを利用する方法",
+      "url": "https://note.com/stats47/n/n03e45e40d3a7",
+      "is_paid": false,
+      "published_at": "2025-12-05",
+      "r2_path": "note/stats47-note/n03e45e40d3a7",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-n04c2737daf2c": {
+      "vertical": "stats47-note",
+      "title": "【2021年版】都道府県「ヨガの行動者率」ランキング｜東京と青森で3倍の差",
+      "url": "https://note.com/stats47/n/n04c2737daf2c",
+      "is_paid": false,
+      "published_at": "2026-04-13",
+      "r2_path": "note/stats47-note/n04c2737daf2c",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-n04d95ae14bc1": {
+      "vertical": "stats47-note",
+      "title": "【2022年度】都道府県「実質公債費比率」ランキング｜北海道18.9%で47位、東京都はわずか1.2%",
+      "url": "https://note.com/stats47/n/n04d95ae14bc1",
+      "is_paid": false,
+      "published_at": "2026-03-12",
+      "r2_path": "note/stats47-note/n04d95ae14bc1",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-n0654ddf27920": {
+      "vertical": "stats47-note",
+      "title": "【2021年版】都道府県「カラオケの行動者率」ランキング｜1位は東京都、2位に鹿児島県が浮上",
+      "url": "https://note.com/stats47/n/n0654ddf27920",
+      "is_paid": false,
+      "published_at": "2026-04-07",
+      "r2_path": "note/stats47-note/n0654ddf27920",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-n08eb33492a93": {
+      "vertical": "stats47-note",
+      "title": "【2021年版】都道府県「コーラス・声楽の行動者率」ランキング｜1位は神奈川県、東北の岩手県も上位に",
+      "url": "https://note.com/stats47/n/n08eb33492a93",
+      "is_paid": false,
+      "published_at": "2026-03-26",
+      "r2_path": "note/stats47-note/n08eb33492a93",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-n0b7373c9648a": {
+      "vertical": "stats47-note",
+      "title": "【2021年版】都道府県「サッカーの行動者率」ランキング｜1位は愛知県、最下位の岐阜県とは隣県で2倍以上の差",
+      "url": "https://note.com/stats47/n/n0b7373c9648a",
+      "is_paid": false,
+      "published_at": "2026-03-25",
+      "r2_path": "note/stats47-note/n0b7373c9648a",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-n0e8fd0068d4e": {
+      "vertical": "stats47-note",
+      "title": "妊産婦支援に2.4倍の地域格差！広島県が偏差値86でトップ、あなたの県は？【2022年】",
+      "url": "https://note.com/stats47/n/n0e8fd0068d4e",
+      "is_paid": false,
+      "published_at": "2026-01-21",
+      "r2_path": "note/stats47-note/n0e8fd0068d4e",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-n144d350fc14e": {
+      "vertical": "stats47-note",
+      "title": "なぜ沖縄の出生率は高いのか — 東京との差1.6倍を生む「見えない力」",
+      "url": "https://note.com/stats47/n/n144d350fc14e",
+      "is_paid": false,
+      "published_at": "2026-03-18",
+      "r2_path": "note/stats47-note/n144d350fc14e",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-n14f716fcd76d": {
+      "vertical": "stats47-note",
+      "title": "【2021年版】都道府県「水泳の行動者率」ランキング｜東京が偏差値83で圧倒、青森は半分以下",
+      "url": "https://note.com/stats47/n/n14f716fcd76d",
+      "is_paid": false,
+      "published_at": "2026-03-26",
+      "r2_path": "note/stats47-note/n14f716fcd76d",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-n15ee88b5169d": {
+      "vertical": "stats47-note",
+      "title": "医療費格差1.5倍！2022年国民健康保険診療費ランキング、あなたの県は健康？",
+      "url": "https://note.com/stats47/n/n15ee88b5169d",
+      "is_paid": false,
+      "published_at": "2026-01-22",
+      "r2_path": "note/stats47-note/n15ee88b5169d",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-n1649910097fb": {
+      "vertical": "stats47-note",
+      "title": "【2021年版】都道府県「楽器の演奏の行動者率」ランキング｜沖縄8位・三線文化の力",
+      "url": "https://note.com/stats47/n/n1649910097fb",
+      "is_paid": false,
+      "published_at": "2026-04-01",
+      "r2_path": "note/stats47-note/n1649910097fb",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-n16950238dfd8": {
+      "vertical": "stats47-note",
+      "title": "【2022年度】都道府県「財政力指数」ランキング｜唯一の1.0超え東京都、茨城8位の意外",
+      "url": "https://note.com/stats47/n/n16950238dfd8",
+      "is_paid": false,
+      "published_at": "2025-12-19",
+      "r2_path": "note/stats47-note/n16950238dfd8",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-n1b943c7d414d": {
+      "vertical": "stats47-note",
+      "title": "【2023年版】都道府県「薬局数」ランキング｜1位は意外にも佐賀県",
+      "url": "https://note.com/stats47/n/n1b943c7d414d",
+      "is_paid": false,
+      "published_at": "2026-04-07",
+      "r2_path": "note/stats47-note/n1b943c7d414d",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-n1e63abcfba72": {
+      "vertical": "stats47-note",
+      "title": "あなたの県は大丈夫？メディア接触時間、地域格差1.38倍！2021年無職男性の過ごし方",
+      "url": "https://note.com/stats47/n/n1e63abcfba72",
+      "is_paid": false,
+      "published_at": "2026-02-02",
+      "r2_path": "note/stats47-note/n1e63abcfba72",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-n218588ef2f67": {
+      "vertical": "stats47-note",
+      "title": "犯罪率3.3倍の衝撃！2022年特別法犯検挙件数ランキング、あなたの街の治安は？",
+      "url": "https://note.com/stats47/n/n218588ef2f67",
+      "is_paid": false,
+      "published_at": "2026-01-22",
+      "r2_path": "note/stats47-note/n218588ef2f67",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-n21cb13582fe6": {
+      "vertical": "stats47-note",
+      "title": "【2023年版】都道府県「りんご消費量」ランキング｜産地・青森を抑えて長野が1位、京都8位の意外",
+      "url": "https://note.com/stats47/n/n21cb13582fe6",
+      "is_paid": false,
+      "published_at": "2026-03-17",
+      "r2_path": "note/stats47-note/n21cb13582fe6",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-n24b5000d587f": {
+      "vertical": "stats47-note",
+      "title": "女性のメディア時間、地域格差1.38倍！1位富山、最下位長野に見るライフスタイルの違い",
+      "url": "https://note.com/stats47/n/n24b5000d587f",
+      "is_paid": false,
+      "published_at": "2026-02-02",
+      "r2_path": "note/stats47-note/n24b5000d587f",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-n250b7aab145f": {
+      "vertical": "stats47-note",
+      "title": "【2021年版】都道府県「スキー・スノーボードの行動者率」ランキング｜北海道が首位、沖縄との差は41.5倍",
+      "url": "https://note.com/stats47/n/n250b7aab145f",
+      "is_paid": false,
+      "published_at": "2026-03-24",
+      "r2_path": "note/stats47-note/n250b7aab145f",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-n279776fbbbb1": {
+      "vertical": "stats47-note",
+      "title": "【2021年版】都道府県「サイクリングの行動者率」ランキング｜東京が偏差値91で独走、長崎は5分の1",
+      "url": "https://note.com/stats47/n/n279776fbbbb1",
+      "is_paid": false,
+      "published_at": "2026-03-20",
+      "r2_path": "note/stats47-note/n279776fbbbb1",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-n27cb4242cb67": {
+      "vertical": "stats47-note",
+      "title": "【2021年版】都道府県「将棋の行動者率」ランキング｜1位は香川県、秋田県との差は2.7倍",
+      "url": "https://note.com/stats47/n/n27cb4242cb67",
+      "is_paid": false,
+      "published_at": "2026-04-10",
+      "r2_path": "note/stats47-note/n27cb4242cb67",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-n285e0ba282d0": {
+      "vertical": "stats47-note",
+      "title": "【2021年版】都道府県「CD・スマートフォンなどによる音楽鑑賞の行動者率」ランキング｜東京64％と青森43％の21ポイント差",
+      "url": "https://note.com/stats47/n/n285e0ba282d0",
+      "is_paid": false,
+      "published_at": "2026-04-08",
+      "r2_path": "note/stats47-note/n285e0ba282d0",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-n28943c36410a": {
+      "vertical": "stats47-note",
+      "title": "【2021年版】都道府県「趣味としての読書の行動者率」ランキング｜東京43％、青森23％の読書格差",
+      "url": "https://note.com/stats47/n/n28943c36410a",
+      "is_paid": false,
+      "published_at": "2026-04-09",
+      "r2_path": "note/stats47-note/n28943c36410a",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-n2b4298e9ac07": {
+      "vertical": "stats47-note",
+      "title": "【2.1倍格差】リタイア後の趣味時間、東京が圧勝！あなたの老後は大丈夫？",
+      "url": "https://note.com/stats47/n/n2b4298e9ac07",
+      "is_paid": false,
+      "published_at": "2026-01-20",
+      "r2_path": "note/stats47-note/n2b4298e9ac07",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-n361a963fb079": {
+      "vertical": "stats47-note",
+      "title": "【2021年版】都道府県「邦楽の行動者率」ランキング｜沖縄県が偏差値97で圧倒的1位",
+      "url": "https://note.com/stats47/n/n361a963fb079",
+      "is_paid": false,
+      "published_at": "2026-04-02",
+      "r2_path": "note/stats47-note/n361a963fb079",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-n36624f1c4134": {
+      "vertical": "stats47-note",
+      "title": "【2021年版】都道府県「演芸・演劇・舞踊鑑賞の行動者率」ランキング｜東京は青森の約4倍",
+      "url": "https://note.com/stats47/n/n36624f1c4134",
+      "is_paid": false,
+      "published_at": "2026-04-11",
+      "r2_path": "note/stats47-note/n36624f1c4134",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-n3908e5981967": {
+      "vertical": "stats47-note",
+      "title": "家計調査でわかること — 47都道府県の「お金の使い方」が丸見えになる統計",
+      "url": "https://note.com/stats47/n/n3908e5981967",
+      "is_paid": false,
+      "published_at": "2026-03-18",
+      "r2_path": "note/stats47-note/n3908e5981967",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-n391d3ef70d29": {
+      "vertical": "stats47-note",
+      "title": "警察官の数が示す地域格差！2023年、東京が埼玉の約1.96倍でトップに",
+      "url": "https://note.com/stats47/n/n391d3ef70d29",
+      "is_paid": false,
+      "published_at": "2026-02-09",
+      "r2_path": "note/stats47-note/n391d3ef70d29",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-n3a4efa70c02a": {
+      "vertical": "stats47-note",
+      "title": "【2023年】交通事故発生件数ランキング｜人口10万人当たりで比較する47都道府県",
+      "url": "https://note.com/stats47/n/n3a4efa70c02a",
+      "is_paid": false,
+      "published_at": "2026-03-04",
+      "r2_path": "note/stats47-note/n3a4efa70c02a",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-n3a94353f31aa": {
+      "vertical": "stats47-note",
+      "title": "【2021年版】都道府県「グラウンドゴルフの行動者率」ランキング｜鹿児島が首位、格差は8.5倍",
+      "url": "https://note.com/stats47/n/n3a94353f31aa",
+      "is_paid": false,
+      "published_at": "2026-03-22",
+      "r2_path": "note/stats47-note/n3a94353f31aa",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-n3e67c2f80ec1": {
+      "vertical": "stats47-note",
+      "title": "【2021年版】都道府県「園芸・ガーデニングの行動者率」ランキング｜群馬県が32.8％で1位、大阪は最下位",
+      "url": "https://note.com/stats47/n/n3e67c2f80ec1",
+      "is_paid": false,
+      "published_at": "2026-03-31",
+      "r2_path": "note/stats47-note/n3e67c2f80ec1",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-n3e69a23bb946": {
+      "vertical": "stats47-note",
+      "title": "【2021年版】都道府県「バスケットボールの行動者率」ランキング｜バスケの本場・秋田県が1位、東京都はまさかの42位",
+      "url": "https://note.com/stats47/n/n3e69a23bb946",
+      "is_paid": false,
+      "published_at": "2026-03-19",
+      "r2_path": "note/stats47-note/n3e69a23bb946",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-n3f65c01be9a8": {
+      "vertical": "stats47-note",
+      "title": "【14.7倍差】一般粉じん発生施設数ランキング！あなたの街は大丈夫？愛知がワースト1位の衝撃",
+      "url": "https://note.com/stats47/n/n3f65c01be9a8",
+      "is_paid": false,
+      "published_at": "2026-01-26",
+      "r2_path": "note/stats47-note/n3f65c01be9a8",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-n46a8eb03072b": {
+      "vertical": "stats47-note",
+      "title": "高等学校卒業者の進学率ランキング｜47都道府県の教育格差を徹底分析",
+      "url": "https://note.com/stats47/n/n46a8eb03072b",
+      "is_paid": false,
+      "published_at": "2026-03-11",
+      "r2_path": "note/stats47-note/n46a8eb03072b",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-n48dff1df249f": {
+      "vertical": "stats47-note",
+      "title": "【都道府県ランキング】日曜大工をする人が多い県1位は滋賀県｜東京は45位、格差1.5倍の実態",
+      "url": "https://note.com/stats47/n/n48dff1df249f",
+      "is_paid": false,
+      "published_at": "2026-03-02",
+      "r2_path": "note/stats47-note/n48dff1df249f",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-n4d38db115f82": {
+      "vertical": "stats47-note",
+      "title": "【2021年版】都道府県「編み物・手芸の行動者率」ランキング｜北海道が10.7％で圧倒的1位",
+      "url": "https://note.com/stats47/n/n4d38db115f82",
+      "is_paid": false,
+      "published_at": "2026-04-07",
+      "r2_path": "note/stats47-note/n4d38db115f82",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-n4dae901ea3e8": {
+      "vertical": "stats47-note",
+      "title": "貯蓄格差1.98倍！福井県が偏差値70で1位、あなたの県は？【2023年平均貯蓄率】",
+      "url": "https://note.com/stats47/n/n4dae901ea3e8",
+      "is_paid": false,
+      "published_at": "2026-01-21",
+      "r2_path": "note/stats47-note/n4dae901ea3e8",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-n4e1e67f70686": {
+      "vertical": "stats47-note",
+      "title": "【2021年版】都道府県「器具を使ったトレーニングの行動者率」ランキング｜沖縄6位の意外な筋トレ県",
+      "url": "https://note.com/stats47/n/n4e1e67f70686",
+      "is_paid": false,
+      "published_at": "2026-03-22",
+      "r2_path": "note/stats47-note/n4e1e67f70686",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-n5158c5766a07": {
+      "vertical": "stats47-note",
+      "title": "生命保険格差1.6倍！鹿児島県が偏差値65でトップ、東京は最下位。あなたの地域の備えは？",
+      "url": "https://note.com/stats47/n/n5158c5766a07",
+      "is_paid": false,
+      "published_at": "2026-02-10",
+      "r2_path": "note/stats47-note/n5158c5766a07",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-n51f946877627": {
+      "vertical": "stats47-note",
+      "title": "【2021年版】都道府県「遊園地・動植物園・水族館の行動者率」ランキング｜愛知県が東京を抜いて1位",
+      "url": "https://note.com/stats47/n/n51f946877627",
+      "is_paid": false,
+      "published_at": "2026-04-11",
+      "r2_path": "note/stats47-note/n51f946877627",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-n523b6fbeabdf": {
+      "vertical": "stats47-note",
+      "title": "【2021年版】都道府県「野球の行動者率」ランキング｜1位はカープの街・広島県、プロ野球の影響色濃く",
+      "url": "https://note.com/stats47/n/n523b6fbeabdf",
+      "is_paid": false,
+      "published_at": "2026-03-19",
+      "r2_path": "note/stats47-note/n523b6fbeabdf",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-n55cd6de6a733": {
+      "vertical": "stats47-note",
+      "title": "【2021年版】都道府県「テニスの行動者率」ランキング｜神奈川が首位、テニス不毛地帯は意外にも雪国",
+      "url": "https://note.com/stats47/n/n55cd6de6a733",
+      "is_paid": false,
+      "published_at": "2026-04-02",
+      "r2_path": "note/stats47-note/n55cd6de6a733",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-n567416b632f6": {
+      "vertical": "stats47-note",
+      "title": "【2022年度】都道府県「実質収支比率」ランキング｜島根県7.5%でトップ、長崎県0.3%で余裕なし",
+      "url": "https://note.com/stats47/n/n567416b632f6",
+      "is_paid": false,
+      "published_at": "2026-03-12",
+      "r2_path": "note/stats47-note/n567416b632f6",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-n578b6e871067": {
+      "vertical": "stats47-note",
+      "title": "【2021年版】都道府県「商業実務・ビジネス関係の行動者率」ランキング｜東京は青森の2.3倍",
+      "url": "https://note.com/stats47/n/n578b6e871067",
+      "is_paid": false,
+      "published_at": "2026-04-13",
+      "r2_path": "note/stats47-note/n578b6e871067",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-n581a1409b2c9": {
+      "vertical": "stats47-note",
+      "title": "【2024年版】都道府県「大学数」ランキング｜京都が東京を抑えて1位の理由",
+      "url": "https://note.com/stats47/n/n581a1409b2c9",
+      "is_paid": false,
+      "published_at": "2026-03-29",
+      "r2_path": "note/stats47-note/n581a1409b2c9",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-n583a06d171e1": {
+      "vertical": "stats47-note",
+      "title": "【2021年版】都道府県「華道の行動者率」ランキング｜島根県が2.1％でトップ、都市部は低迷",
+      "url": "https://note.com/stats47/n/n583a06d171e1",
+      "is_paid": false,
+      "published_at": "2026-03-30",
+      "r2_path": "note/stats47-note/n583a06d171e1",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-n5867882dd7ab": {
+      "vertical": "stats47-note",
+      "title": "【2021年版】都道府県「詩・和歌・俳句・小説などの創作の行動者率」ランキング｜東京と秋田で約3倍の差",
+      "url": "https://note.com/stats47/n/n5867882dd7ab",
+      "is_paid": false,
+      "published_at": "2026-04-12",
+      "r2_path": "note/stats47-note/n5867882dd7ab",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-n598a096ecbff": {
+      "vertical": "stats47-note",
+      "title": "【2021年版】都道府県「和裁・洋裁の行動者率」ランキング｜神奈川県が6.3％で全国1位",
+      "url": "https://note.com/stats47/n/n598a096ecbff",
+      "is_paid": false,
+      "published_at": "2026-04-10",
+      "r2_path": "note/stats47-note/n598a096ecbff",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-n5ced125edb74": {
+      "vertical": "stats47-note",
+      "title": "【2021年版】都道府県「ゴルフの行動者率」ランキング｜愛知が首位、青森は愛知の3分の1",
+      "url": "https://note.com/stats47/n/n5ced125edb74",
+      "is_paid": false,
+      "published_at": "2026-03-21",
+      "r2_path": "note/stats47-note/n5ced125edb74",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-n5ddcfb6bf233": {
+      "vertical": "stats47-note",
+      "title": "【2021年版】都道府県「書道の行動者率」ランキング｜佐賀県が4.5％で全国1位",
+      "url": "https://note.com/stats47/n/n5ddcfb6bf233",
+      "is_paid": false,
+      "published_at": "2026-03-24",
+      "r2_path": "note/stats47-note/n5ddcfb6bf233",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-n5f183fcf5b97": {
+      "vertical": "stats47-note",
+      "title": "【2022年度】都道府県「将来負担比率」ランキング｜兵庫県330.8%で断トツ、東京都はわずか17.3%",
+      "url": "https://note.com/stats47/n/n5f183fcf5b97",
+      "is_paid": false,
+      "published_at": "2026-03-12",
+      "r2_path": "note/stats47-note/n5f183fcf5b97",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-n6305d990f2d2": {
+      "vertical": "stats47-note",
+      "title": "【2021年版】都道府県「邦舞・おどりの行動者率」ランキング｜鹿児島県が東京都と並んで1位",
+      "url": "https://note.com/stats47/n/n6305d990f2d2",
+      "is_paid": false,
+      "published_at": "2026-04-01",
+      "r2_path": "note/stats47-note/n6305d990f2d2",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-n67729e8be7c4": {
+      "vertical": "stats47-note",
+      "title": "【2021年版】都道府県「バドミントンの行動者率」ランキング｜宮城が首位、長崎は全国の半分",
+      "url": "https://note.com/stats47/n/n67729e8be7c4",
+      "is_paid": false,
+      "published_at": "2026-03-19",
+      "r2_path": "note/stats47-note/n67729e8be7c4",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-n68f5e09c8d62": {
+      "vertical": "stats47-note",
+      "title": "690品目で丸裸にする「47都道府県の家計」── 家計調査が暴く、あなたの県の消費グセ",
+      "url": "https://note.com/stats47/n/n68f5e09c8d62",
+      "is_paid": false,
+      "published_at": "2026-03-18",
+      "r2_path": "note/stats47-note/n68f5e09c8d62",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-n6f8a367906d1": {
+      "vertical": "stats47-note",
+      "title": "【2024年版】都道府県「最高気温」ランキング｜猛暑日の常連は九州・東海",
+      "url": "https://note.com/stats47/n/n6f8a367906d1",
+      "is_paid": false,
+      "published_at": "2026-03-29",
+      "r2_path": "note/stats47-note/n6f8a367906d1",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-n724eab276711": {
+      "vertical": "stats47-note",
+      "title": "【2021年版】都道府県「人文・社会・自然科学の行動者率」ランキング｜東京14.6％、宮崎5.7％の知的格差",
+      "url": "https://note.com/stats47/n/n724eab276711",
+      "is_paid": false,
+      "published_at": "2026-04-12",
+      "r2_path": "note/stats47-note/n724eab276711",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-n73a4d300e045": {
+      "vertical": "koumuin-estat-claude-code",
+      "title": "47 都道府県データを 1 コマンドで取得する — fetch-estat-data スキルの使い方",
+      "url": "https://note.com/stats47/n/n73a4d300e045",
+      "is_paid": false,
+      "published_at": "2026-06-14",
+      "r2_path": "note/koumuin-estat-claude-code/n73a4d300e045",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-n765fc88c67ef": {
+      "vertical": "stats47-note",
+      "title": "【2021年版】都道府県「芸術・文化の行動者率」ランキング｜東京17.3％が圧倒、神奈川・京都が同率2位",
+      "url": "https://note.com/stats47/n/n765fc88c67ef",
+      "is_paid": false,
+      "published_at": "2026-04-12",
+      "r2_path": "note/stats47-note/n765fc88c67ef",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-n7ea3a816d39b": {
+      "vertical": "stats47-note",
+      "title": "【2001年版】都道府県「旅行・行楽の年間行動者率」ランキング（15歳以上）｜1位は埼玉県、沖縄県は59％で断トツ最下位",
+      "url": "https://note.com/stats47/n/n7ea3a816d39b",
+      "is_paid": false,
+      "published_at": "2026-03-24",
+      "r2_path": "note/stats47-note/n7ea3a816d39b",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-n7ff099157abd": {
+      "vertical": "stats47-note",
+      "title": "【2021年版】都道府県「ジョギング・マラソンの行動者率」ランキング｜東京が首位、岐阜は半分",
+      "url": "https://note.com/stats47/n/n7ff099157abd",
+      "is_paid": false,
+      "published_at": "2026-03-23",
+      "r2_path": "note/stats47-note/n7ff099157abd",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-n80e58a01f660": {
+      "vertical": "stats47-note",
+      "title": "【都道府県ランキング】1人当たり県民所得1位は東京都5,214千円｜47位の沖縄県と2.4倍の格差",
+      "url": "https://note.com/stats47/n/n80e58a01f660",
+      "is_paid": false,
+      "published_at": "2026-03-11",
+      "r2_path": "note/stats47-note/n80e58a01f660",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-n827191af8c1c": {
+      "vertical": "stats47-note",
+      "title": "【2021年版】都道府県「海外旅行の年間行動者率」ランキング（10歳以上）｜コロナ禍で全国平均0.34％、1位は意外にも京都府",
+      "url": "https://note.com/stats47/n/n827191af8c1c",
+      "is_paid": false,
+      "published_at": "2026-05-10",
+      "r2_path": "note/stats47-note/n827191af8c1c",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-n863f429319ca": {
+      "vertical": "stats47-note",
+      "title": "【2024年版】都道府県「最高気温」ランキング｜猛暑日の常連は九州・東海",
+      "url": "https://note.com/stats47/n/n863f429319ca",
+      "is_paid": false,
+      "published_at": "2026-05-10",
+      "r2_path": "note/stats47-note/n863f429319ca",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-n88d2a55a9e36": {
+      "vertical": "stats47-note",
+      "title": "【2021年版】都道府県「柔道の行動者率」ランキング｜山口県が偏差値91で圧倒的1位",
+      "url": "https://note.com/stats47/n/n88d2a55a9e36",
+      "is_paid": false,
+      "published_at": "2026-03-24",
+      "r2_path": "note/stats47-note/n88d2a55a9e36",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-n8df3cf170cf4": {
+      "vertical": "stats47-note",
+      "title": "【2021年版】都道府県「ソフトボールの行動者率」ランキング｜山口県が3.0％で圧倒的1位、1位と最下位の差は5倍",
+      "url": "https://note.com/stats47/n/n8df3cf170cf4",
+      "is_paid": false,
+      "published_at": "2026-03-26",
+      "r2_path": "note/stats47-note/n8df3cf170cf4",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-n91e82ac3b13c": {
+      "vertical": "stats47-note",
+      "title": "【2017年版】都道府県「ホテル客室数」ランキング｜東京は2位の大阪に1.6倍の大差",
+      "url": "https://note.com/stats47/n/n91e82ac3b13c",
+      "is_paid": false,
+      "published_at": "",
+      "r2_path": "note/stats47-note/n91e82ac3b13c",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-n93a6656b2096": {
+      "vertical": "stats47-note",
+      "title": "【都道府県ランキング】合計特殊出生率1位は沖縄県1.70｜47位の東京都と1.6倍の格差",
+      "url": "https://note.com/stats47/n/n93a6656b2096",
+      "is_paid": false,
+      "published_at": "2026-03-04",
+      "r2_path": "note/stats47-note/n93a6656b2096",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-n97bd102186c6": {
+      "vertical": "stats47-note",
+      "title": "【2021年版】都道府県「ボウリングの行動者率」ランキング｜沖縄が全国トップ、秋田は半分以下",
+      "url": "https://note.com/stats47/n/n97bd102186c6",
+      "is_paid": false,
+      "published_at": "2026-03-20",
+      "r2_path": "note/stats47-note/n97bd102186c6",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-n991a75be91ce": {
+      "vertical": "stats47-note",
+      "title": "【2021年版】都道府県「ゲームの行動者率」ランキング｜愛知が東京を僅差で抑えて1位",
+      "url": "https://note.com/stats47/n/n991a75be91ce",
+      "is_paid": false,
+      "published_at": "2026-04-11",
+      "r2_path": "note/stats47-note/n991a75be91ce",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-n99561600d4fe": {
+      "vertical": "stats47-note",
+      "title": "【1.9倍格差】リタイア後の女性、趣味を一番楽しむのは宮城県！あなたの地域は？",
+      "url": "https://note.com/stats47/n/n99561600d4fe",
+      "is_paid": false,
+      "published_at": "2026-01-20",
+      "r2_path": "note/stats47-note/n99561600d4fe",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-n99f53e7a1f33": {
+      "vertical": "stats47-note",
+      "title": "救急車を最も呼ぶのは大阪府！福井県との差は1.7倍。あなたの街の救急医療は大丈夫？",
+      "url": "https://note.com/stats47/n/n99f53e7a1f33",
+      "is_paid": false,
+      "published_at": "2026-02-10",
+      "r2_path": "note/stats47-note/n99f53e7a1f33",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-n9dcb0680cea6": {
+      "vertical": "stats47-note",
+      "title": "【2021年版】都道府県「絵画・彫刻の制作の行動者率」ランキング｜京都府が東京都に肉薄して2位",
+      "url": "https://note.com/stats47/n/n9dcb0680cea6",
+      "is_paid": false,
+      "published_at": "2026-04-08",
+      "r2_path": "note/stats47-note/n9dcb0680cea6",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-na21015ac366d": {
+      "vertical": "koumuin-gis",
+      "title": "【2021年版】都道府県「剣道の行動者率」ランキング｜山形と長野が同率首位、意外な武道地図",
+      "url": "https://note.com/stats47/n/na21015ac366d",
+      "is_paid": false,
+      "published_at": "2026-03-24",
+      "r2_path": "note/koumuin-gis/na21015ac366d",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-na25ccb15a6cb": {
+      "vertical": "stats47-note",
+      "title": "【2021年版】都道府県「写真の撮影・プリントの行動者率」ランキング｜青森と東京で約2倍の差",
+      "url": "https://note.com/stats47/n/na25ccb15a6cb",
+      "is_paid": false,
+      "published_at": "2026-04-09",
+      "r2_path": "note/stats47-note/na25ccb15a6cb",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-na2720854b1d9": {
+      "vertical": "stats47-note",
+      "title": "【2021年版】都道府県「キャンプの行動者率」ランキング｜北海道が9.1％でダントツ1位",
+      "url": "https://note.com/stats47/n/na2720854b1d9",
+      "is_paid": false,
+      "published_at": "2026-03-25",
+      "r2_path": "note/stats47-note/na2720854b1d9",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-naa474d085c7b": {
+      "vertical": "stats47-note",
+      "title": "【2021年版】都道府県「つりの行動者率」ランキング｜広島が首位、海なし県の東京が最下位",
+      "url": "https://note.com/stats47/n/naa474d085c7b",
+      "is_paid": false,
+      "published_at": "2026-03-21",
+      "r2_path": "note/stats47-note/naa474d085c7b",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-nabd65a1c893d": {
+      "vertical": "stats47-note",
+      "title": "【2021年版】都道府県「美術鑑賞の行動者率」ランキング｜福井・石川・富山の北陸勢が上位に集結",
+      "url": "https://note.com/stats47/n/nabd65a1c893d",
+      "is_paid": false,
+      "published_at": "2026-03-23",
+      "r2_path": "note/stats47-note/nabd65a1c893d",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-nafc693255794": {
+      "vertical": "stats47-note",
+      "title": "【2021年版】都道府県「洋舞・社交ダンスの行動者率」ランキング｜東京都が1.7％で断トツ1位",
+      "url": "https://note.com/stats47/n/nafc693255794",
+      "is_paid": false,
+      "published_at": "2026-04-11",
+      "r2_path": "note/stats47-note/nafc693255794",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-nb16c0b751d01": {
+      "vertical": "stats47-note",
+      "title": "【2021年版】都道府県「ウォーキング・軽い体操の行動者率」ランキング｜青森県は東京都の6割にとどまる",
+      "url": "https://note.com/stats47/n/nb16c0b751d01",
+      "is_paid": false,
+      "published_at": "2026-04-12",
+      "r2_path": "note/stats47-note/nb16c0b751d01",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-nb2d65c42c28b": {
+      "vertical": "stats47-note",
+      "title": "【2024年版】都道府県「最高気温」ランキング｜猛暑日の常連は九州・東海",
+      "url": "https://note.com/stats47/n/nb2d65c42c28b",
+      "is_paid": false,
+      "published_at": "2026-03-29",
+      "r2_path": "note/stats47-note/nb2d65c42c28b",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-nb90f2342ebd8": {
+      "vertical": "stats47-note",
+      "title": "【2021年版】都道府県「映画館での映画鑑賞の行動者率」ランキング｜福井県7位の意外な映画好き県",
+      "url": "https://note.com/stats47/n/nb90f2342ebd8",
+      "is_paid": false,
+      "published_at": "2026-03-27",
+      "r2_path": "note/stats47-note/nb90f2342ebd8",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-nbedecc99f3a3": {
+      "vertical": "stats47-note",
+      "title": "【2021年版】都道府県「陶芸・工芸の行動者率」ランキング｜福井県と滋賀県が東京都と並んで1位",
+      "url": "https://note.com/stats47/n/nbedecc99f3a3",
+      "is_paid": false,
+      "published_at": "2026-04-09",
+      "r2_path": "note/stats47-note/nbedecc99f3a3",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-nbf1373427ca3": {
+      "vertical": "stats47-note",
+      "title": "【2021年版】都道府県「パソコンなどの情報処理の行動者率」ランキング｜東京23.2％、岩手10.3％の格差",
+      "url": "https://note.com/stats47/n/nbf1373427ca3",
+      "is_paid": false,
+      "published_at": "2026-04-13",
+      "r2_path": "note/stats47-note/nbf1373427ca3",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-nc0e7474b34e1": {
+      "vertical": "stats47-note",
+      "title": "【2021年版】都道府県「登山・ハイキングの行動者率」ランキング｜東京と兵庫が同率首位、沖縄は4分の1",
+      "url": "https://note.com/stats47/n/nc0e7474b34e1",
+      "is_paid": false,
+      "published_at": "2026-03-23",
+      "r2_path": "note/stats47-note/nc0e7474b34e1",
+      "r2_body": false,
+      "status": "note_only"
     },
     "recovered-nc18fa33ec65e": {
       "vertical": "koumuin-claude-code",
@@ -1888,7 +1817,78 @@
       "is_paid": false,
       "published_at": "2026-05-22",
       "r2_path": "note/koumuin-claude-code/nc18fa33ec65e",
-      "status": "r2_ready"
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-nc60f702445f8": {
+      "vertical": "stats47-note",
+      "title": "【2021年版】都道府県「国内旅行の行動者率」ランキング｜東京都41.7％、徳島県は16.3％",
+      "url": "https://note.com/stats47/n/nc60f702445f8",
+      "is_paid": false,
+      "published_at": "2026-03-26",
+      "r2_path": "note/stats47-note/nc60f702445f8",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-ncaddeaf3e2ff": {
+      "vertical": "stats47-note",
+      "title": "【2021年版】都道府県「卓球の行動者率」ランキング｜東京都が6.2％で1位、卓球人気の地域差は意外に大きい",
+      "url": "https://note.com/stats47/n/ncaddeaf3e2ff",
+      "is_paid": false,
+      "published_at": "2026-03-29",
+      "r2_path": "note/stats47-note/ncaddeaf3e2ff",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-ncbed56eb7c3d": {
+      "vertical": "stats47-note",
+      "title": "都道府県別総人口・人口密度ランキング2023：格差26倍の現実",
+      "url": "https://note.com/stats47/n/ncbed56eb7c3d",
+      "is_paid": false,
+      "published_at": "2025-12-11",
+      "r2_path": "note/stats47-note/ncbed56eb7c3d",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-ncf6086199c7d": {
+      "vertical": "stats47-note",
+      "title": "【2021年版】都道府県「趣味としての料理・菓子作りの行動者率」ランキング｜東京都が21.9％で1位",
+      "url": "https://note.com/stats47/n/ncf6086199c7d",
+      "is_paid": false,
+      "published_at": "2026-03-29",
+      "r2_path": "note/stats47-note/ncf6086199c7d",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-nd5f8b5072cdb": {
+      "vertical": "stats47-note",
+      "title": "【2024年版】都道府県「人口密度」ランキング｜東京と北海道で100倍の差",
+      "url": "https://note.com/stats47/n/nd5f8b5072cdb",
+      "is_paid": false,
+      "published_at": "2026-03-30",
+      "r2_path": "note/stats47-note/nd5f8b5072cdb",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-nda04ec118c93": {
+      "vertical": "stats47-note",
+      "title": "【2021年版】都道府県「行楽（日帰り）の行動者率」ランキング｜愛知県が1位、沖縄県は半分以下",
+      "url": "https://note.com/stats47/n/nda04ec118c93",
+      "is_paid": false,
+      "published_at": "2026-03-25",
+      "r2_path": "note/stats47-note/nda04ec118c93",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-ndc600ddb7c44": {
+      "vertical": "stats47-note",
+      "title": "エアコン普及率、徳島vs北海道で11倍格差！あなたの地域は本当に「普通」？",
+      "url": "https://note.com/stats47/n/ndc600ddb7c44",
+      "is_paid": false,
+      "published_at": "2026-02-02",
+      "r2_path": "note/stats47-note/ndc600ddb7c44",
+      "r2_body": false,
+      "status": "note_only"
     },
     "recovered-nddd927386fce": {
       "vertical": "stats47-note",
@@ -1897,16 +1897,208 @@
       "is_paid": false,
       "published_at": "2026-05-22",
       "r2_path": "note/stats47-note/nddd927386fce",
-      "status": "r2_ready"
+      "r2_body": false,
+      "status": "note_only"
     },
-    "recovered-n686dcc017bbe": {
-      "vertical": "koumuin-gis",
-      "title": "自治体職員のためのGIS入門 — 無料の国土数値情報で「過疎地域×医療機関」を可視化する",
-      "url": "https://note.com/stats47/n/n686dcc017bbe",
+    "recovered-nded2d34fc978": {
+      "vertical": "stats47-note",
+      "title": "財政力7位なのに借金1位？都道府県「稼ぐ力」と「借金」のギャップを可視化してみた",
+      "url": "https://note.com/stats47/n/nded2d34fc978",
       "is_paid": false,
-      "published_at": "",
-      "r2_path": "note/koumuin-gis/n686dcc017bbe",
-      "status": "r2_ready"
+      "published_at": "2026-03-13",
+      "r2_path": "note/stats47-note/nded2d34fc978",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-ne0d53bfef7ed": {
+      "vertical": "stats47-note",
+      "title": "【都道府県ランキング】持ち家比率1位は秋田県77.1％｜47位の沖縄県と1.8倍の格差",
+      "url": "https://note.com/stats47/n/ne0d53bfef7ed",
+      "is_paid": false,
+      "published_at": "2026-03-11",
+      "r2_path": "note/stats47-note/ne0d53bfef7ed",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-ne31a2574e231": {
+      "vertical": "stats47-note",
+      "title": "【2022年度】都道府県「経常収支比率」ランキング｜100%超えの大阪府、東京都は全国最低の79.5%",
+      "url": "https://note.com/stats47/n/ne31a2574e231",
+      "is_paid": false,
+      "published_at": "2026-03-12",
+      "r2_path": "note/stats47-note/ne31a2574e231",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-ne3cdb7819c41": {
+      "vertical": "stats47-note",
+      "title": "【2021年版】都道府県「国内観光旅行の行動者率」ランキング｜東京34.2％で1位、徳島は11.4％",
+      "url": "https://note.com/stats47/n/ne3cdb7819c41",
+      "is_paid": false,
+      "published_at": "2026-03-27",
+      "r2_path": "note/stats47-note/ne3cdb7819c41",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-ne4a6ec30706a": {
+      "vertical": "stats47-note",
+      "title": "【2021年版】都道府県「マンガを読む行動者率」ランキング｜全国平均34％、3人に1人がマンガ読者",
+      "url": "https://note.com/stats47/n/ne4a6ec30706a",
+      "is_paid": false,
+      "published_at": "2026-04-08",
+      "r2_path": "note/stats47-note/ne4a6ec30706a",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-ne5b9d2b01255": {
+      "vertical": "stats47-note",
+      "title": "【2021年版】都道府県「囲碁の行動者率」ランキング｜1位は意外にも長崎県",
+      "url": "https://note.com/stats47/n/ne5b9d2b01255",
+      "is_paid": false,
+      "published_at": "2026-04-01",
+      "r2_path": "note/stats47-note/ne5b9d2b01255",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-ne62fa955bcff": {
+      "vertical": "stats47-note",
+      "title": "【2021年版】都道府県「旅行・行楽の年間行動者率」ランキング（10歳以上）｜コロナ禍で半数以下に急落、愛知県がトップ",
+      "url": "https://note.com/stats47/n/ne62fa955bcff",
+      "is_paid": false,
+      "published_at": "2026-03-23",
+      "r2_path": "note/stats47-note/ne62fa955bcff",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-ne82a6c83ed45": {
+      "vertical": "stats47-note",
+      "title": "【2022年度】都道府県「地方債現在高比率」ランキング｜なぜ財政力7位の静岡が借金ワースト？大阪41位の意外",
+      "url": "https://note.com/stats47/n/ne82a6c83ed45",
+      "is_paid": false,
+      "published_at": "2025-12-19",
+      "r2_path": "note/stats47-note/ne82a6c83ed45",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-ne85980349fda": {
+      "vertical": "stats47-note",
+      "title": "【2021年版】都道府県「スポーツ観覧の行動者率」ランキング｜広島県が偏差値92で圧倒的1位",
+      "url": "https://note.com/stats47/n/ne85980349fda",
+      "is_paid": false,
+      "published_at": "2026-04-10",
+      "r2_path": "note/stats47-note/ne85980349fda",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-nead586305cdb": {
+      "vertical": "stats47-note",
+      "title": "【2021年版】都道府県「パチンコの行動者率」ランキング｜九州勢が上位独占、東京は46位",
+      "url": "https://note.com/stats47/n/nead586305cdb",
+      "is_paid": false,
+      "published_at": "2026-04-08",
+      "r2_path": "note/stats47-note/nead586305cdb",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-ned30a382334d": {
+      "vertical": "stats47-note",
+      "title": "【2024年版】都道府県「大学数」ランキング｜京都が東京を抑えて1位の理由",
+      "url": "https://note.com/stats47/n/ned30a382334d",
+      "is_paid": false,
+      "published_at": "2026-03-29",
+      "r2_path": "note/stats47-note/ned30a382334d",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-nefd814b49c5d": {
+      "vertical": "stats47-note",
+      "title": "【2021年版】都道府県「スポーツの年間行動者率」ランキング（10歳以上）｜東京都が圧倒的1位、青森県との差は22ポイント超",
+      "url": "https://note.com/stats47/n/nefd814b49c5d",
+      "is_paid": false,
+      "published_at": "2026-03-19",
+      "r2_path": "note/stats47-note/nefd814b49c5d",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-nf0c533293f5b": {
+      "vertical": "stats47-note",
+      "title": "【2021年版】都道府県「クラシック音楽鑑賞の行動者率」ランキング｜福井県3位・山形県9位の意外な結果",
+      "url": "https://note.com/stats47/n/nf0c533293f5b",
+      "is_paid": false,
+      "published_at": "2026-03-28",
+      "r2_path": "note/stats47-note/nf0c533293f5b",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-nf0fc2a7eb326": {
+      "vertical": "stats47-note",
+      "title": "【2021年版】都道府県「家政・家事の行動者率」ランキング｜京都府が1位、青森県との差は1.8倍",
+      "url": "https://note.com/stats47/n/nf0fc2a7eb326",
+      "is_paid": false,
+      "published_at": "2026-03-28",
+      "r2_path": "note/stats47-note/nf0fc2a7eb326",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-nf1a5abab3d5e": {
+      "vertical": "stats47-note",
+      "title": "【2021年版】都道府県「ポピュラー音楽鑑賞の行動者率」ランキング｜沖縄県が最下位の意外",
+      "url": "https://note.com/stats47/n/nf1a5abab3d5e",
+      "is_paid": false,
+      "published_at": "2026-04-09",
+      "r2_path": "note/stats47-note/nf1a5abab3d5e",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-nf5b4ced7a736": {
+      "vertical": "stats47-note",
+      "title": "【2021年版】都道府県「ボランティア活動の年間行動者率」ランキング（10歳以上）｜子どもを含めても島根県が不動の1位",
+      "url": "https://note.com/stats47/n/nf5b4ced7a736",
+      "is_paid": false,
+      "published_at": "2026-05-10",
+      "r2_path": "note/stats47-note/nf5b4ced7a736",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-nf962c6702b93": {
+      "vertical": "stats47-note",
+      "title": "【2023年版】都道府県「年間日照時間」ランキング！1位埼玉と最下位青森に「1.4倍」の差",
+      "url": "https://note.com/stats47/n/nf962c6702b93",
+      "is_paid": false,
+      "published_at": "2025-12-09",
+      "r2_path": "note/stats47-note/nf962c6702b93",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-nfa4057b9b8de": {
+      "vertical": "stats47-note",
+      "title": "【2021年版】都道府県「茶道の行動者率」ランキング｜1位は京都ではなく富山県",
+      "url": "https://note.com/stats47/n/nfa4057b9b8de",
+      "is_paid": false,
+      "published_at": "2026-04-10",
+      "r2_path": "note/stats47-note/nfa4057b9b8de",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-nfbdfd99fee1b": {
+      "vertical": "stats47-note",
+      "title": "【2021年版】都道府県「映画館以外での映画鑑賞の行動者率」ランキング｜東京は6割超、青森は4割台",
+      "url": "https://note.com/stats47/n/nfbdfd99fee1b",
+      "is_paid": false,
+      "published_at": "2026-04-01",
+      "r2_path": "note/stats47-note/nfbdfd99fee1b",
+      "r2_body": false,
+      "status": "note_only"
+    },
+    "recovered-nfe69996fb5c9": {
+      "vertical": "stats47-note",
+      "title": "家計を圧迫する光熱・水道費！2023年、青森が最下位大分の1.7倍超えで全国1位に",
+      "url": "https://note.com/stats47/n/nfe69996fb5c9",
+      "is_paid": false,
+      "published_at": "2026-02-09",
+      "r2_path": "note/stats47-note/nfe69996fb5c9",
+      "r2_body": false,
+      "status": "note_only"
     }
   }
 }

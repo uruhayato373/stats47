@@ -12,7 +12,7 @@ note コーパス全体 (公開済み + ドラフト) の **editorial メタの�
 | データ | SSOT | 派生 (手編集しない) |
 |---|---|---|
 | 記事本文・画像 | R2 `note/<vertical>/<slug>/` | — |
-| editorial メタ (vertical/series/**magazine**/isPaid/priceJpy/status/noteUrl/publishedAt/r2Path/**stats47Targets**) | **`catalog/data/<vertical>.ts`** | — |
+| editorial メタ (vertical/series/**magazine**/isPaid/priceJpy/status/noteUrl/publishedAt/r2Path/**r2Body**/**stats47Targets**) | **`catalog/data/<vertical>.ts`** | — |
 | マガジン定義 (名称/有料無料/束ねる vertical/URL) | **`catalog/magazines.ts`** | — |
 | 公開済みインデックス | (派生) | `.claude/state/note-published-urls.json` ← `generate-note-catalog.ts` |
 
@@ -62,6 +62,23 @@ npx tsx .claude/scripts/note/catalog/generate-note-catalog.ts [--apply]
 | `note-published-urls.json` を手編集して真実源化 | `data/*.ts` を編集 → `generate` で再生成 |
 | 記事本文を git に長期保持 (docs/31 は ephemeral outbox) | 本文は R2、メタはカタログ |
 | マガジンキーを data/*.ts に直書きで増やす | `magazines.ts` に登録してから参照 |
+
+## R2 未保存の回収スタブ (`r2Body: false`) — 要本文復元
+
+`recovered-*` / `paid-*` エントリは **note.com に公開済みだが R2 に記事本体 (draft.md/画像) が無い**
+回収スタブ。r2Path は note ID から機械生成しただけで実体が無く **404 になる** (docs/31 にもローカル本文なし)。
+これらを `r2Body: false` で正直にマークする (省略時 = `true` = R2 に本体あり)。
+
+- **派生インデックス `note-published-urls.json`** は `r2Body===false` を `status: "note_only"` +
+  `r2_body: false` で出力する。R2 に本体があるものだけ `status: "r2_ready"`
+  (旧 `generate-note-catalog.ts` は全公開記事を無条件 `r2_ready` にし、404 の r2Path を「保存済み」と偽っていた)。
+- **一覧 (要本文復元)**: `.claude/state/note/r2-missing-inventory.md` (カタログから再生成する派生物)。
+  実測 2026-07-15: 165 件 (stats47-note 159 / koumuin 6, 有料 50)。
+- **復元手順**: note.com からの本文取得は browser-use + note ログイン (有料は所有者アカウント) が必要で、
+  creds/ブラウザを持つローカルセッションで実施する。復元 (note.com → R2 push) 後に該当エントリを
+  `r2Body: true` へ更新 → `generate-note-catalog.ts --apply` で再生成する。
+- **title 重複 warn** (`validate` が surface): proper (R2 本体あり) と recovered/paid スタブが同題の場合は
+  同一記事の再投稿疑い。noteUrl が異なるため機械では断定できない → 本文照合の上で統廃合 (次段)。
 
 ## データ復元マニフェスト (data-provenance.json) — リライト系譜
 
