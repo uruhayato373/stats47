@@ -1,7 +1,10 @@
 # note 戦略（note.com）
 
-> 更新: 2026-05-27
-> **このファイルが note 関連の SSOT（Single Source of Truth）**。他ドキュメントからはリンク参照のみ。
+> 更新: 2026-07-15
+> **このファイルは note の戦略・シリーズ設計の SSOT**。ただし記事メタ（vertical/series/**magazine**/
+> 有料無料/送客先/公開URL）の機械的な真実源は **note-catalog (git TS)** = `.claude/scripts/note/catalog/`
+> に移管した（2026-07-15）。本ファイルの A/B/C/D 進捗テーブルは戦略的な読み物として残すが、各記事の
+> 正確な状態はカタログを見る。正典: `.claude/scripts/note/catalog/README.md`。管理者: note-manager agent。
 >
 > **関連戦略 (2026-05-27 追加)**: [メンバーシップ収益化戦略](./membership-strategy.md) — AI を制作エンジンに据えた有料収益化ライン (本ドキュメントの送客ファネルと並行運用)。
 
