@@ -12,10 +12,16 @@ note.com 記事のライフサイクル管理を担当する専門エージェ�
 記事の公開・公開済み URL のトラッキング・メモリ更新を一貫して管理する。
 
 > **★完全DBレス + ephemeral outbox（2026-06-19 正典）**: note 記事に **D1 `note_articles` テーブルは使わない**（廃止済）。
-> 記事の SSOT は **R2 `note/<vertical>/<slug>/`**。**`docs/31_note記事原稿/` は ephemeral outbox**（編集時のみ存在、push 後 CI が自動削除）。
-> - 公開済み URL 対応表の真実源: **`.claude/state/note-published-urls.json`**（slug → url / is_paid / r2_path 等）
-> - ドラフトの真実源: **`.claude/state/note-draft-index.json`**（slug → vertical / r2_path）
+> 記事本文の SSOT は **R2 `note/<vertical>/<slug>/`**。**`docs/31_note記事原稿/` は ephemeral outbox**（編集時のみ存在、push 後 CI が自動削除）。
+> - **editorial メタの SSOT は note-catalog (git TS)**: `.claude/scripts/note/catalog/`（vertical/series/**magazine**/isPaid/noteUrl/publishedAt/r2Path/**stats47Targets**）。正典: `catalog/README.md`。
+> - **`.claude/state/note-published-urls.json` は派生インデックス**（カタログから `generate-note-catalog.ts` で再生成。手編集しない）
+> - ドラフト一覧: **`.claude/state/note-draft-index.json`**（slug → vertical / r2_path。カタログ status=draft と対応）
 > - 編集前に復元: `bash .claude/scripts/note/restore-from-r2.sh <slug>` → docs/31 に展開。push 後 CI が R2 再同期 + docs/31 削除。
+
+> **note-catalog SSOT の保守は note-manager の担当（2026-07-15〜）**: note コーパス全体の editorial メタと
+> マガジン設計を `.claude/scripts/note/catalog/` の git TS で一元管理する。編集フロー: `data/<vertical>.ts` /
+> `magazines.ts` を編集 → `npx tsx .../validate-note-catalog.ts` で整合確認 → `generate-note-catalog.ts --apply`
+> で派生インデックス反映。マガジン化（類似記事の束ね）は記事の `magazine` フィールド設定で行う。
 
 ## 担当範囲
 
