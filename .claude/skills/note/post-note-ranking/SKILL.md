@@ -493,6 +493,27 @@ mkdir -p "$ARTICLE_DIR"
 cp .local/r2/sns/ranking/<RANKING_KEY>/note/images/*.png "$ARTICLE_DIR/"
 ```
 
+7.5. **データ復元マニフェスト (data-provenance.json) を書く** ← リライト時に元データを辿るための系譜。
+     データ本体はコピーせず stats47 R2 の観測値 SSOT を指す (blog の source.json の note 版・
+     `.claude/scripts/note/catalog/README.md`)。記事ディレクトリに置けば既存 sync で R2 に載る。
+
+```bash
+cat > "docs/31_note記事原稿/a-<RANKING_KEY>/data-provenance.json" <<JSON
+{
+  "slug": "a-<RANKING_KEY>",
+  "vertical": "stats47-note",
+  "kind": "ranking",
+  "rankingKey": "<RANKING_KEY>",
+  "year": "<YEAR>",
+  "charts": ["images/choropleth-map-1080x1080.png", "images/chart-x-1200x630.png", "images/boxplot-1200x630.png"],
+  "source": "r2:app/ranking/<RANKING_KEY>/values.json",
+  "restore": "curl -sf https://storage.stats47.jp/app/ranking/<RANKING_KEY>/values.json",
+  "generatedBy": "post-note-ranking",
+  "note": "データ本体は stats47 R2 が SSOT。本ファイルは復元マニフェスト (コピーではない)。"
+}
+JSON
+```
+
 ### Phase 4: 確認
 
 8. 生成物を確認:
@@ -502,6 +523,7 @@ cp .local/r2/sns/ranking/<RANKING_KEY>/note/images/*.png "$ARTICLE_DIR/"
 - リンクパスが `/ranking/`（`/rankings/` ではない）であること
 - 偏差値が正しく算出されていること（Phase 1 の統計量と一致）
 - 画像が4枚生成されていること
+- `data-provenance.json` が記事ディレクトリに生成されていること（rankingKey + year + charts + source。リライト系譜）
 
 ## 品質チェックリスト
 

@@ -63,6 +63,25 @@ npx tsx .claude/scripts/note/catalog/generate-note-catalog.ts [--apply]
 | 記事本文を git に長期保持 (docs/31 は ephemeral outbox) | 本文は R2、メタはカタログ |
 | マガジンキーを data/*.ts に直書きで増やす | `magazines.ts` に登録してから参照 |
 
+## データ復元マニフェスト (data-provenance.json) — リライト系譜
+
+note ランキング記事の**リライトを楽にする**ため、記事ごとに元データの系譜を残す
+(blog の `source.json` の note 版)。**データ本体はコピーしない** — stats47 R2 の観測値 SSOT
+(`app/ranking/<key>/values.json`) を指すマニフェストだけを R2 の記事ディレクトリに置く
+(二重 SSOT を作らない / 完全DBレス準拠)。リライト時に「どの ranking の何年か」を辿って
+チャート再生成・数値検算ができる。
+
+- **新規記事**: `post-note-ranking` の Step 7.5 が `data-provenance.json` を生成 → 既存 sync で R2 へ。
+- **既存記事の backfill**: `node .claude/scripts/note/catalog/backfill-note-data-provenance.mjs`
+  - slug (`a-<key>`) + draft.md の `stats47.jp/ranking/<key>` リンク + values.json の rank1/47 値照合で
+    rankingKey/年を**決定的に導出** (捏造しない)。`.local/r2/note/<vertical>/<slug>/data-provenance.json` に staging。
+  - 分類: `confirmed` (rank1+47 一致) / `partial` (D 系など一部不一致・要目視) / `no-chart` / `no-r2`。
+  - **実測 (2026-07-15)**: stats47-note 187 件中 confirmed 8 / partial 4 / no-chart 16 / **no-r2 159**。
+    no-r2 159 は `recovered-*` = note.com URL 回収スタブで **R2 記事本体が無く provenance を貼れない**
+    (published index の実態。カタログ+backfill で初めて可視化)。実 backfill 対象は R2 本体を持つ生成記事。
+- **R2 反映**: staging (`.local/r2/note/**`) → S3 push は **creds を持つ CI / セッション**で
+  `npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix note` (R2 書き込みは CI 専任)。
+
 ## 次段 (downstream 移行・今回スコープ外)
 
 - `build-note-published-index.mjs` (R2 fetch 版) を `generate-note-catalog.ts` に置換
