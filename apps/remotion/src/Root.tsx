@@ -20,6 +20,13 @@ import { PortraitPreview } from './features/layouts/previews/PortraitPreview';
 // ranking-instagram
 import { CarouselPreview } from './features/ranking-instagram/previews/CarouselPreview';
 import { RankingTableSlidePreview } from './features/ranking-instagram/previews/RankingTableSlidePreview';
+// buzz-map (バズ地図カード)
+import { BuzzMapStillPreview } from './features/buzz-map/previews/BuzzMapStillPreview';
+import {
+  BuzzMapReelPreview,
+  calculateBuzzMapReelMetadata,
+} from './features/buzz-map/previews/BuzzMapReelPreview';
+import { BUZZ_MAP_RATIOS, BUZZ_MAP_REEL_DEFAULTS } from './features/buzz-map/tokens';
 // ranking-x
 import { ChoroplethMapStillPreview } from './features/ranking-x/previews/ChoroplethMapStillPreview';
 import { RankingBoxplotPreview } from './features/ranking-x/previews/RankingBoxplotPreview';
@@ -1101,6 +1108,72 @@ export const RemotionRoot: React.FC = () => {
             showGuides: false,
             showSafeAreas: false,
           }}
+        />
+      </Folder>
+
+      {/* ===== buzz-map (バズ地図カード。規約: .claude/rules/buzz-map-standards.md) ===== */}
+      <Folder name="buzz-map">
+        {/* 型A 静止画 (4:5 = X/IG フィード標準) */}
+        <Composition
+          id="BuzzMap-Still-45"
+          component={BuzzMapStillPreview}
+          width={BUZZ_MAP_RATIOS['45'].width}
+          height={BUZZ_MAP_RATIOS['45'].height}
+          fps={1}
+          durationInFrames={1}
+          defaultProps={{ ratio: '45' as const }}
+        />
+        {/* 型A 静止画 (1:1) */}
+        <Composition
+          id="BuzzMap-Still-11"
+          component={BuzzMapStillPreview}
+          width={BUZZ_MAP_RATIOS['11'].width}
+          height={BUZZ_MAP_RATIOS['11'].height}
+          fps={1}
+          durationInFrames={1}
+          defaultProps={{ ratio: '11' as const }}
+        />
+        {/* 型A 静止画 (16:9 OGP/YouTube。本土トリム・沖縄インセットなし) */}
+        <Composition
+          id="BuzzMap-Still-169"
+          component={BuzzMapStillPreview}
+          width={BUZZ_MAP_RATIOS['169'].width}
+          height={BUZZ_MAP_RATIOS['169'].height}
+          fps={1}
+          durationInFrames={1}
+          defaultProps={{ ratio: '169' as const }}
+        />
+        {/* 型A 静止画 (9:16 リール表紙等) */}
+        <Composition
+          id="BuzzMap-Still-916"
+          component={BuzzMapStillPreview}
+          width={BUZZ_MAP_RATIOS['916'].width}
+          height={BUZZ_MAP_RATIOS['916'].height}
+          fps={1}
+          durationInFrames={1}
+          defaultProps={{ ratio: '916' as const }}
+        />
+        {/* 型B 時系列アニメ (1:1 = X 動画)。尺は spec の speed/hold から自動算出 */}
+        <Composition
+          id="BuzzMap-Reel-11"
+          component={BuzzMapReelPreview}
+          width={BUZZ_MAP_RATIOS['11'].width}
+          height={BUZZ_MAP_RATIOS['11'].height}
+          fps={BUZZ_MAP_REEL_DEFAULTS.fps}
+          durationInFrames={900}
+          calculateMetadata={calculateBuzzMapReelMetadata}
+          defaultProps={{ ratio: '11' as const }}
+        />
+        {/* 型B 時系列アニメ (9:16 = IG リール/TikTok) */}
+        <Composition
+          id="BuzzMap-Reel-916"
+          component={BuzzMapReelPreview}
+          width={BUZZ_MAP_RATIOS['916'].width}
+          height={BUZZ_MAP_RATIOS['916'].height}
+          fps={BUZZ_MAP_REEL_DEFAULTS.fps}
+          durationInFrames={900}
+          calculateMetadata={calculateBuzzMapReelMetadata}
+          defaultProps={{ ratio: '916' as const }}
         />
       </Folder>
 
