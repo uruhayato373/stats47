@@ -24,6 +24,10 @@ const published = NOTE_ARTICLES.filter(
 
 const articles: Record<string, unknown> = {};
 for (const a of published) {
+  // 本体が R2 に無い回収スタブ (r2Body===false) は "note_only"。
+  // R2 に本体が実在するものだけ "r2_ready" と正直に記録する
+  // (旧実装は全件無条件 "r2_ready" で 404 の r2_path を「保存済み」と偽っていた)。
+  const hasBody = a.r2Body !== false;
   const entry: Record<string, unknown> = {
     vertical: a.vertical,
     title: a.title,
@@ -31,7 +35,8 @@ for (const a of published) {
     is_paid: a.isPaid,
     published_at: a.publishedAt || "",
     r2_path: a.r2Path,
-    status: "r2_ready",
+    r2_body: hasBody,
+    status: hasBody ? "r2_ready" : "note_only",
   };
   if (a.priceJpy && a.priceJpy > 0) entry.price_jpy = a.priceJpy;
   articles[a.key] = entry;
