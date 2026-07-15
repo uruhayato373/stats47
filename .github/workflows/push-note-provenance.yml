@@ -1,0 +1,71 @@
+name: 📎 Push Note Data Provenance to R2
+
+# note ランキング記事の data-provenance.json (リライト復元マニフェスト) を R2 に反映する。
+#
+# backfill-note-data-provenance.mjs が committed indices + 公開 R2 から決定的に再生成し
+# (.local/r2/note/** に staging)、diff-push-r2 --prefix note が S3 で PUT する。
+# diff-push-r2 は PUT のみ (削除しない) なので既存の draft.md / images は安全。
+#
+# 反映されるのは R2 本体を持つ生成記事のみ (recovered-* スタブは対象外)。
+#
+# トリガー:
+#   - develop への push で backfill スクリプト or カタログ data が更新されたとき
+#   - 手動 (dry_run 選択可)
+
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "true: R2 push なし (検証のみ) / false: 本番 push"
+        required: false
+        default: "false"
+  push:
+    branches: [develop]
+    paths:
+      - ".claude/scripts/note/catalog/backfill-note-data-provenance.mjs"
+      - ".claude/scripts/note/catalog/data/**"
+
+env:
+  R2_S3_ENDPOINT: https://${{ secrets.CLOUDFLARE_ACCOUNT_ID }}.r2.cloudflarestorage.com
+  R2_ACCESS_KEY_ID: ${{ secrets.CLOUDFLARE_R2_ACCESS_KEY_ID }}
+  R2_SECRET_ACCESS_KEY: ${{ secrets.CLOUDFLARE_R2_SECRET_ACCESS_KEY }}
+  CLOUDFLARE_R2_BUCKET_NAME: stats47
+  R2_PUBLIC_FETCH_URL: https://storage.stats47.jp
+
+permissions:
+  contents: read
+
+concurrency:
+  group: push-note-provenance
+  cancel-in-progress: false
+
+jobs:
+  push:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: 🧰 Checkout develop
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        with:
+          ref: develop
+          fetch-depth: 1
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 🧬 Regenerate provenance manifests (staging)
+        run: node .claude/scripts/note/catalog/backfill-note-data-provenance.mjs
+
+      - name: 📤 Push provenance to R2 (diff-push, PUT-only)
+        run: |
+          if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then
+            npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix note --dry-run
+          else
+            npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix note
+          fi

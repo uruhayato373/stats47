@@ -24,16 +24,13 @@
 import { readFileSync, writeFileSync, mkdirSync } from "fs";
 import { resolve, join, dirname } from "path";
 import { fileURLToPath } from "url";
+import { tmpdir } from "os";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, "../../../..");
 const R2 = "https://storage.stats47.jp";
 const STAGE = join(ROOT, ".local/r2");
-const REPORT = join(
-  process.env.SCRATCHPAD ||
-    "/tmp/claude-0/-home-user-stats47/accde802-2b3c-52e9-b434-3061736191b8/scratchpad",
-  "note-provenance-backfill.json",
-);
+const REPORT = join(process.env.SCRATCHPAD || tmpdir(), "note-provenance-backfill.json");
 
 const argv = process.argv.slice(2);
 const LIMIT = argv.includes("--limit") ? Number(argv[argv.indexOf("--limit") + 1]) : Infinity;
