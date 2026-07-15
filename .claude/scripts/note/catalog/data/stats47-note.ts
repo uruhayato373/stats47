@@ -949,7 +949,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n023501038bd5",
     publishedAt: "2026-03-13",
     r2Path: "note/stats47-note/n023501038bd5",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-n026bb22ad4eb",
@@ -962,7 +962,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n026bb22ad4eb",
     publishedAt: "2026-04-12",
     r2Path: "note/stats47-note/n026bb22ad4eb",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-n03844512d58a",
@@ -975,7 +975,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n03844512d58a",
     publishedAt: "2026-03-18",
     r2Path: "note/stats47-note/n03844512d58a",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-n03e45e40d3a7",
@@ -988,7 +988,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n03e45e40d3a7",
     publishedAt: "2025-12-05",
     r2Path: "note/stats47-note/n03e45e40d3a7",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-n04c2737daf2c",
@@ -1001,7 +1001,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n04c2737daf2c",
     publishedAt: "2026-04-13",
     r2Path: "note/stats47-note/n04c2737daf2c",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-n04d95ae14bc1",
@@ -1014,7 +1014,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n04d95ae14bc1",
     publishedAt: "2026-03-12",
     r2Path: "note/stats47-note/n04d95ae14bc1",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-n0654ddf27920",
@@ -1027,7 +1027,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n0654ddf27920",
     publishedAt: "2026-04-07",
     r2Path: "note/stats47-note/n0654ddf27920",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-n08eb33492a93",
@@ -1040,7 +1040,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n08eb33492a93",
     publishedAt: "2026-03-26",
     r2Path: "note/stats47-note/n08eb33492a93",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-n0b7373c9648a",
@@ -1053,7 +1053,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n0b7373c9648a",
     publishedAt: "2026-03-25",
     r2Path: "note/stats47-note/n0b7373c9648a",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-n0e8fd0068d4e",
@@ -1066,7 +1066,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n0e8fd0068d4e",
     publishedAt: "2026-01-21",
     r2Path: "note/stats47-note/n0e8fd0068d4e",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-n144d350fc14e",
@@ -1079,7 +1079,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n144d350fc14e",
     publishedAt: "2026-03-18",
     r2Path: "note/stats47-note/n144d350fc14e",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-n14f716fcd76d",
@@ -1092,7 +1092,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n14f716fcd76d",
     publishedAt: "2026-03-26",
     r2Path: "note/stats47-note/n14f716fcd76d",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-n15ee88b5169d",
@@ -1105,7 +1105,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n15ee88b5169d",
     publishedAt: "2026-01-22",
     r2Path: "note/stats47-note/n15ee88b5169d",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-n1649910097fb",
@@ -1118,7 +1118,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n1649910097fb",
     publishedAt: "2026-04-01",
     r2Path: "note/stats47-note/n1649910097fb",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-n16950238dfd8",
@@ -1131,7 +1131,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n16950238dfd8",
     publishedAt: "2025-12-19",
     r2Path: "note/stats47-note/n16950238dfd8",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-n1b943c7d414d",
@@ -1144,7 +1144,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n1b943c7d414d",
     publishedAt: "2026-04-07",
     r2Path: "note/stats47-note/n1b943c7d414d",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-n1e63abcfba72",
@@ -1157,7 +1157,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n1e63abcfba72",
     publishedAt: "2026-02-02",
     r2Path: "note/stats47-note/n1e63abcfba72",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-n218588ef2f67",
@@ -1170,7 +1170,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n218588ef2f67",
     publishedAt: "2026-01-22",
     r2Path: "note/stats47-note/n218588ef2f67",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-n21cb13582fe6",
@@ -1183,7 +1183,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n21cb13582fe6",
     publishedAt: "2026-03-17",
     r2Path: "note/stats47-note/n21cb13582fe6",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-n24b5000d587f",
@@ -1196,7 +1196,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n24b5000d587f",
     publishedAt: "2026-02-02",
     r2Path: "note/stats47-note/n24b5000d587f",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-n250b7aab145f",
@@ -1209,7 +1209,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n250b7aab145f",
     publishedAt: "2026-03-24",
     r2Path: "note/stats47-note/n250b7aab145f",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-n279776fbbbb1",
@@ -1222,7 +1222,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n279776fbbbb1",
     publishedAt: "2026-03-20",
     r2Path: "note/stats47-note/n279776fbbbb1",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-n27cb4242cb67",
@@ -1235,7 +1235,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n27cb4242cb67",
     publishedAt: "2026-04-10",
     r2Path: "note/stats47-note/n27cb4242cb67",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-n285e0ba282d0",
@@ -1248,7 +1248,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n285e0ba282d0",
     publishedAt: "2026-04-08",
     r2Path: "note/stats47-note/n285e0ba282d0",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-n28943c36410a",
@@ -1261,7 +1261,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n28943c36410a",
     publishedAt: "2026-04-09",
     r2Path: "note/stats47-note/n28943c36410a",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-n2b4298e9ac07",
@@ -1274,7 +1274,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n2b4298e9ac07",
     publishedAt: "2026-01-20",
     r2Path: "note/stats47-note/n2b4298e9ac07",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-n361a963fb079",
@@ -1287,7 +1287,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n361a963fb079",
     publishedAt: "2026-04-02",
     r2Path: "note/stats47-note/n361a963fb079",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-n36624f1c4134",
@@ -1300,7 +1300,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n36624f1c4134",
     publishedAt: "2026-04-11",
     r2Path: "note/stats47-note/n36624f1c4134",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-n3908e5981967",
@@ -1313,7 +1313,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n3908e5981967",
     publishedAt: "2026-03-18",
     r2Path: "note/stats47-note/n3908e5981967",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-n391d3ef70d29",
@@ -1326,7 +1326,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n391d3ef70d29",
     publishedAt: "2026-02-09",
     r2Path: "note/stats47-note/n391d3ef70d29",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-n3a4efa70c02a",
@@ -1339,7 +1339,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n3a4efa70c02a",
     publishedAt: "2026-03-04",
     r2Path: "note/stats47-note/n3a4efa70c02a",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-n3a94353f31aa",
@@ -1352,7 +1352,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n3a94353f31aa",
     publishedAt: "2026-03-22",
     r2Path: "note/stats47-note/n3a94353f31aa",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-n3e67c2f80ec1",
@@ -1365,7 +1365,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n3e67c2f80ec1",
     publishedAt: "2026-03-31",
     r2Path: "note/stats47-note/n3e67c2f80ec1",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-n3e69a23bb946",
@@ -1378,7 +1378,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n3e69a23bb946",
     publishedAt: "2026-03-19",
     r2Path: "note/stats47-note/n3e69a23bb946",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-n3f65c01be9a8",
@@ -1391,7 +1391,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n3f65c01be9a8",
     publishedAt: "2026-01-26",
     r2Path: "note/stats47-note/n3f65c01be9a8",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-n46a8eb03072b",
@@ -1404,7 +1404,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n46a8eb03072b",
     publishedAt: "2026-03-11",
     r2Path: "note/stats47-note/n46a8eb03072b",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-n48dff1df249f",
@@ -1417,7 +1417,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n48dff1df249f",
     publishedAt: "2026-03-02",
     r2Path: "note/stats47-note/n48dff1df249f",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-n4d38db115f82",
@@ -1430,7 +1430,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n4d38db115f82",
     publishedAt: "2026-04-07",
     r2Path: "note/stats47-note/n4d38db115f82",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-n4dae901ea3e8",
@@ -1443,7 +1443,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n4dae901ea3e8",
     publishedAt: "2026-01-21",
     r2Path: "note/stats47-note/n4dae901ea3e8",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-n4e1e67f70686",
@@ -1456,7 +1456,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n4e1e67f70686",
     publishedAt: "2026-03-22",
     r2Path: "note/stats47-note/n4e1e67f70686",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-n5158c5766a07",
@@ -1469,7 +1469,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n5158c5766a07",
     publishedAt: "2026-02-10",
     r2Path: "note/stats47-note/n5158c5766a07",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-n51f946877627",
@@ -1482,7 +1482,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n51f946877627",
     publishedAt: "2026-04-11",
     r2Path: "note/stats47-note/n51f946877627",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-n523b6fbeabdf",
@@ -1495,7 +1495,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n523b6fbeabdf",
     publishedAt: "2026-03-19",
     r2Path: "note/stats47-note/n523b6fbeabdf",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-n55cd6de6a733",
@@ -1508,7 +1508,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n55cd6de6a733",
     publishedAt: "2026-04-02",
     r2Path: "note/stats47-note/n55cd6de6a733",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-n567416b632f6",
@@ -1521,7 +1521,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n567416b632f6",
     publishedAt: "2026-03-12",
     r2Path: "note/stats47-note/n567416b632f6",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-n578b6e871067",
@@ -1534,7 +1534,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n578b6e871067",
     publishedAt: "2026-04-13",
     r2Path: "note/stats47-note/n578b6e871067",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-n581a1409b2c9",
@@ -1547,7 +1547,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n581a1409b2c9",
     publishedAt: "2026-03-29",
     r2Path: "note/stats47-note/n581a1409b2c9",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-n583a06d171e1",
@@ -1560,7 +1560,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n583a06d171e1",
     publishedAt: "2026-03-30",
     r2Path: "note/stats47-note/n583a06d171e1",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-n5867882dd7ab",
@@ -1573,7 +1573,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n5867882dd7ab",
     publishedAt: "2026-04-12",
     r2Path: "note/stats47-note/n5867882dd7ab",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-n598a096ecbff",
@@ -1586,7 +1586,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n598a096ecbff",
     publishedAt: "2026-04-10",
     r2Path: "note/stats47-note/n598a096ecbff",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-n5ced125edb74",
@@ -1599,7 +1599,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n5ced125edb74",
     publishedAt: "2026-03-21",
     r2Path: "note/stats47-note/n5ced125edb74",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-n5ddcfb6bf233",
@@ -1612,7 +1612,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n5ddcfb6bf233",
     publishedAt: "2026-03-24",
     r2Path: "note/stats47-note/n5ddcfb6bf233",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-n5f183fcf5b97",
@@ -1625,7 +1625,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n5f183fcf5b97",
     publishedAt: "2026-03-12",
     r2Path: "note/stats47-note/n5f183fcf5b97",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-n6305d990f2d2",
@@ -1638,7 +1638,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n6305d990f2d2",
     publishedAt: "2026-04-01",
     r2Path: "note/stats47-note/n6305d990f2d2",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-n67729e8be7c4",
@@ -1651,7 +1651,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n67729e8be7c4",
     publishedAt: "2026-03-19",
     r2Path: "note/stats47-note/n67729e8be7c4",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-n68f5e09c8d62",
@@ -1664,7 +1664,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n68f5e09c8d62",
     publishedAt: "2026-03-18",
     r2Path: "note/stats47-note/n68f5e09c8d62",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-n6f8a367906d1",
@@ -1677,7 +1677,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n6f8a367906d1",
     publishedAt: "2026-03-29",
     r2Path: "note/stats47-note/n6f8a367906d1",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-n724eab276711",
@@ -1690,7 +1690,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n724eab276711",
     publishedAt: "2026-04-12",
     r2Path: "note/stats47-note/n724eab276711",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-n765fc88c67ef",
@@ -1703,7 +1703,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n765fc88c67ef",
     publishedAt: "2026-04-12",
     r2Path: "note/stats47-note/n765fc88c67ef",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-n7ea3a816d39b",
@@ -1716,7 +1716,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n7ea3a816d39b",
     publishedAt: "2026-03-24",
     r2Path: "note/stats47-note/n7ea3a816d39b",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-n7ff099157abd",
@@ -1729,7 +1729,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n7ff099157abd",
     publishedAt: "2026-03-23",
     r2Path: "note/stats47-note/n7ff099157abd",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-n80e58a01f660",
@@ -1742,7 +1742,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n80e58a01f660",
     publishedAt: "2026-03-11",
     r2Path: "note/stats47-note/n80e58a01f660",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-n827191af8c1c",
@@ -1755,7 +1755,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n827191af8c1c",
     publishedAt: "2026-05-10",
     r2Path: "note/stats47-note/n827191af8c1c",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-n863f429319ca",
@@ -1768,7 +1768,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n863f429319ca",
     publishedAt: "2026-05-10",
     r2Path: "note/stats47-note/n863f429319ca",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-n88d2a55a9e36",
@@ -1781,7 +1781,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n88d2a55a9e36",
     publishedAt: "2026-03-24",
     r2Path: "note/stats47-note/n88d2a55a9e36",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-n8df3cf170cf4",
@@ -1794,7 +1794,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n8df3cf170cf4",
     publishedAt: "2026-03-26",
     r2Path: "note/stats47-note/n8df3cf170cf4",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-n91e82ac3b13c",
@@ -1806,7 +1806,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     status: "published",
     noteUrl: "https://note.com/stats47/n/n91e82ac3b13c",
     r2Path: "note/stats47-note/n91e82ac3b13c",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-n93a6656b2096",
@@ -1819,7 +1819,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n93a6656b2096",
     publishedAt: "2026-03-04",
     r2Path: "note/stats47-note/n93a6656b2096",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-n97bd102186c6",
@@ -1832,7 +1832,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n97bd102186c6",
     publishedAt: "2026-03-20",
     r2Path: "note/stats47-note/n97bd102186c6",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-n991a75be91ce",
@@ -1845,7 +1845,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n991a75be91ce",
     publishedAt: "2026-04-11",
     r2Path: "note/stats47-note/n991a75be91ce",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-n99561600d4fe",
@@ -1858,7 +1858,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n99561600d4fe",
     publishedAt: "2026-01-20",
     r2Path: "note/stats47-note/n99561600d4fe",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-n99f53e7a1f33",
@@ -1871,7 +1871,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n99f53e7a1f33",
     publishedAt: "2026-02-10",
     r2Path: "note/stats47-note/n99f53e7a1f33",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-n9dcb0680cea6",
@@ -1884,7 +1884,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n9dcb0680cea6",
     publishedAt: "2026-04-08",
     r2Path: "note/stats47-note/n9dcb0680cea6",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-na25ccb15a6cb",
@@ -1897,7 +1897,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/na25ccb15a6cb",
     publishedAt: "2026-04-09",
     r2Path: "note/stats47-note/na25ccb15a6cb",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-na2720854b1d9",
@@ -1910,7 +1910,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/na2720854b1d9",
     publishedAt: "2026-03-25",
     r2Path: "note/stats47-note/na2720854b1d9",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-naa474d085c7b",
@@ -1923,7 +1923,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/naa474d085c7b",
     publishedAt: "2026-03-21",
     r2Path: "note/stats47-note/naa474d085c7b",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-nabd65a1c893d",
@@ -1936,7 +1936,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/nabd65a1c893d",
     publishedAt: "2026-03-23",
     r2Path: "note/stats47-note/nabd65a1c893d",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-nafc693255794",
@@ -1949,7 +1949,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/nafc693255794",
     publishedAt: "2026-04-11",
     r2Path: "note/stats47-note/nafc693255794",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-nb16c0b751d01",
@@ -1962,7 +1962,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/nb16c0b751d01",
     publishedAt: "2026-04-12",
     r2Path: "note/stats47-note/nb16c0b751d01",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-nb2d65c42c28b",
@@ -1975,7 +1975,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/nb2d65c42c28b",
     publishedAt: "2026-03-29",
     r2Path: "note/stats47-note/nb2d65c42c28b",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-nb90f2342ebd8",
@@ -1988,7 +1988,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/nb90f2342ebd8",
     publishedAt: "2026-03-27",
     r2Path: "note/stats47-note/nb90f2342ebd8",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-nbedecc99f3a3",
@@ -2001,7 +2001,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/nbedecc99f3a3",
     publishedAt: "2026-04-09",
     r2Path: "note/stats47-note/nbedecc99f3a3",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-nbf1373427ca3",
@@ -2014,7 +2014,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/nbf1373427ca3",
     publishedAt: "2026-04-13",
     r2Path: "note/stats47-note/nbf1373427ca3",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-nc0e7474b34e1",
@@ -2027,7 +2027,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/nc0e7474b34e1",
     publishedAt: "2026-03-23",
     r2Path: "note/stats47-note/nc0e7474b34e1",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-nc60f702445f8",
@@ -2040,7 +2040,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/nc60f702445f8",
     publishedAt: "2026-03-26",
     r2Path: "note/stats47-note/nc60f702445f8",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-ncaddeaf3e2ff",
@@ -2053,7 +2053,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/ncaddeaf3e2ff",
     publishedAt: "2026-03-29",
     r2Path: "note/stats47-note/ncaddeaf3e2ff",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-ncbed56eb7c3d",
@@ -2066,7 +2066,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/ncbed56eb7c3d",
     publishedAt: "2025-12-11",
     r2Path: "note/stats47-note/ncbed56eb7c3d",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-ncf6086199c7d",
@@ -2079,7 +2079,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/ncf6086199c7d",
     publishedAt: "2026-03-29",
     r2Path: "note/stats47-note/ncf6086199c7d",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-nd5f8b5072cdb",
@@ -2092,7 +2092,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/nd5f8b5072cdb",
     publishedAt: "2026-03-30",
     r2Path: "note/stats47-note/nd5f8b5072cdb",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-nda04ec118c93",
@@ -2105,7 +2105,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/nda04ec118c93",
     publishedAt: "2026-03-25",
     r2Path: "note/stats47-note/nda04ec118c93",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-ndc600ddb7c44",
@@ -2118,7 +2118,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/ndc600ddb7c44",
     publishedAt: "2026-02-02",
     r2Path: "note/stats47-note/ndc600ddb7c44",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-nddd927386fce",
@@ -2131,7 +2131,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/nddd927386fce",
     publishedAt: "2026-05-22",
     r2Path: "note/stats47-note/nddd927386fce",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-nded2d34fc978",
@@ -2144,7 +2144,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/nded2d34fc978",
     publishedAt: "2026-03-13",
     r2Path: "note/stats47-note/nded2d34fc978",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-ne0d53bfef7ed",
@@ -2157,7 +2157,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/ne0d53bfef7ed",
     publishedAt: "2026-03-11",
     r2Path: "note/stats47-note/ne0d53bfef7ed",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-ne31a2574e231",
@@ -2170,7 +2170,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/ne31a2574e231",
     publishedAt: "2026-03-12",
     r2Path: "note/stats47-note/ne31a2574e231",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-ne3cdb7819c41",
@@ -2183,7 +2183,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/ne3cdb7819c41",
     publishedAt: "2026-03-27",
     r2Path: "note/stats47-note/ne3cdb7819c41",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-ne4a6ec30706a",
@@ -2196,7 +2196,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/ne4a6ec30706a",
     publishedAt: "2026-04-08",
     r2Path: "note/stats47-note/ne4a6ec30706a",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-ne5b9d2b01255",
@@ -2209,7 +2209,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/ne5b9d2b01255",
     publishedAt: "2026-04-01",
     r2Path: "note/stats47-note/ne5b9d2b01255",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-ne62fa955bcff",
@@ -2222,7 +2222,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/ne62fa955bcff",
     publishedAt: "2026-03-23",
     r2Path: "note/stats47-note/ne62fa955bcff",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-ne82a6c83ed45",
@@ -2235,7 +2235,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/ne82a6c83ed45",
     publishedAt: "2025-12-19",
     r2Path: "note/stats47-note/ne82a6c83ed45",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-ne85980349fda",
@@ -2248,7 +2248,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/ne85980349fda",
     publishedAt: "2026-04-10",
     r2Path: "note/stats47-note/ne85980349fda",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-nead586305cdb",
@@ -2261,7 +2261,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/nead586305cdb",
     publishedAt: "2026-04-08",
     r2Path: "note/stats47-note/nead586305cdb",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-ned30a382334d",
@@ -2274,7 +2274,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/ned30a382334d",
     publishedAt: "2026-03-29",
     r2Path: "note/stats47-note/ned30a382334d",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-nefd814b49c5d",
@@ -2287,7 +2287,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/nefd814b49c5d",
     publishedAt: "2026-03-19",
     r2Path: "note/stats47-note/nefd814b49c5d",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-nf0c533293f5b",
@@ -2300,7 +2300,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/nf0c533293f5b",
     publishedAt: "2026-03-28",
     r2Path: "note/stats47-note/nf0c533293f5b",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-nf0fc2a7eb326",
@@ -2313,7 +2313,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/nf0fc2a7eb326",
     publishedAt: "2026-03-28",
     r2Path: "note/stats47-note/nf0fc2a7eb326",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-nf1a5abab3d5e",
@@ -2326,7 +2326,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/nf1a5abab3d5e",
     publishedAt: "2026-04-09",
     r2Path: "note/stats47-note/nf1a5abab3d5e",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-nf5b4ced7a736",
@@ -2339,7 +2339,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/nf5b4ced7a736",
     publishedAt: "2026-05-10",
     r2Path: "note/stats47-note/nf5b4ced7a736",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-nf962c6702b93",
@@ -2352,7 +2352,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/nf962c6702b93",
     publishedAt: "2025-12-09",
     r2Path: "note/stats47-note/nf962c6702b93",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-nfa4057b9b8de",
@@ -2365,7 +2365,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/nfa4057b9b8de",
     publishedAt: "2026-04-10",
     r2Path: "note/stats47-note/nfa4057b9b8de",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-nfbdfd99fee1b",
@@ -2378,7 +2378,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/nfbdfd99fee1b",
     publishedAt: "2026-04-01",
     r2Path: "note/stats47-note/nfbdfd99fee1b",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-nfe69996fb5c9",
@@ -2391,7 +2391,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/nfe69996fb5c9",
     publishedAt: "2026-02-09",
     r2Path: "note/stats47-note/nfe69996fb5c9",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "sunshine-solar-housing",

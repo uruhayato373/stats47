@@ -8,7 +8,15 @@ tags: [note, r2, catalog, handoff]
 
 # ハンドオフ: note の「R2 未保存記事」是正 (2026-07-15)
 
-「note で R2 に保存できていない記事がある」の調査・是正。データ整合の修正まで完了、**本文復元は未着手**（クラウドセッションでは実行不可）。
+「note で R2 に保存できていない記事がある」の調査・是正。データ整合の修正 (PR #583) に続き、**無料 115 件の本文復元・R2 反映・`r2Body: true` 化までローカルセッションで完了** (2026-07-15)。**残るは有料 50 件のみ** — 所有者 (stats47) アカウントでの note ログインが要る。
+
+> [!done]
+> **2026-07-15 追記 (ローカルセッション)**: 無料 (recovered-*) 115 件を復元完了。
+> - 復元スクリプト新規: `.claude/scripts/note/catalog/restore-from-notecom.py` (note API v3 → HTML→md 変換 + 画像 DL → `.local/r2/<r2_path>/` staging)。
+> - R2 反映: `diff-push-r2.ts --prefix note` で 550 オブジェクト (draft.md 115 + 画像 435) push・全件成功。旧 404 → 200 を実測確認。
+> - カタログ更新: 該当 115 エントリを `r2Body: true` 化 → `generate-note-catalog.ts --apply` 再生成。**r2_ready 37→152 / note_only 165→50**。
+> - inventory `r2-missing-inventory.md` を残 50 件 (全て有料) に更新。
+> **残タスクは有料 50 件のみ** (下記「残タスク」1 を参照)。有料は所有者ログイン後に同スクリプトを `--include-paid` で実行する。
 
 ## 背景 / 判明したこと
 
@@ -35,11 +43,16 @@ tags: [note, r2, catalog, handoff]
 
 ## 残タスク ★次セッションの核心（ローカル/creds 必須）
 
-1. **本文復元 (165 件・note.com → R2)**: browser-use + note ログイン（有料 50 件は所有者アカウント）が必要 = **creds/ブラウザを持つローカルセッションで実施**。一覧は `.claude/state/note/r2-missing-inventory.md`。復元 → `diff-push-r2.ts --prefix note` → 該当カタログエントリを `r2Body: true` に更新 → `generate-note-catalog.ts --apply`。
+1. **本文復元 (残 有料 50 件・note.com → R2)**: 無料 115 件は完了済み。残る 50 件は**すべて有料**で、本文取得に**所有者 (stats47) アカウントの note ログインが必要**。**現状どの Chrome プロファイルも stats47 でログインしていない** (Profile 1/7 は `dobokunote`、Profile 5 は `_note_session_v5` が失効し認証エラー)。手順:
+   1. Chrome のいずれかのプロファイルで note.com に stats47 としてログインする (パスワードは所有者のみ)。
+   2. `restore-from-notecom.py --include-paid` を実行する。スクリプトが Chrome から stats47 の cookie を自動抽出し (`get_cookie_from_chrome` が `urlname==stats47` を検証)、`can_read=true` の有料本文を取得する。cookie を明示するなら `--cookie <_note_session_v5値>`。
+   3. `diff-push-r2.ts --prefix note` で R2 反映 → 該当 50 エントリの `r2Body: false` を `true` に (無料分と同じ python 一括置換) → `generate-note-catalog.ts --apply` 再生成 → inventory 再生成。
+   - 一覧は `.claude/state/note/r2-missing-inventory.md` (残 50 件・全有料)。
 2. **title 重複の統廃合（次段）**: `validate` の warn 7 が surface する proper と recovered/paid の同題ペアは noteUrl が異なり機械で断定できない。note.com 本文照合の上で人手統廃合（README「次段」）。
-3. **PR #583 の develop マージ**（レビュー後）。
 
 ## 次セッションへの注意
 
-- 165 件は「push し忘れ」ではなく本文がローカルに一切無い。安易に空 push しない。復元は必ず note.com 本文取得を伴う。
-- 真実源はカタログ `catalog/data/*.ts` の `r2Body`。`note-published-urls.json` は派生（手編集しない）。
+- 残 50 件は「push し忘れ」ではなく本文がローカルに一切無い。安易に空 push しない。復元は必ず note.com 本文取得を伴う。
+- 有料本文は `price` があっても `can_read=false` なら無料エリアしか取れない。`restore-from-notecom.py` は can_read=false を skip する (偽の本文を保存しない)。
+- 真実源はカタログ `catalog/data/*.ts` の `r2Body`。`note-published-urls.json` と `r2-missing-inventory.md` は派生（手編集しない）。
+- 復元本文の frontmatter は `restored_from: note.com` / `restored_at` を持つ (生成記事と区別できる)。画像は note assets から DL し `images/image-NN.png` に相対参照化済み (R2 自己完結)。

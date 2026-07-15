@@ -44,6 +44,6 @@ export const koumuinGisArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/na21015ac366d",
     publishedAt: "2026-03-24",
     r2Path: "note/koumuin-gis/na21015ac366d",
-    r2Body: false,
+    r2Body: true,
   },
 ];

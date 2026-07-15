@@ -174,6 +174,6 @@ export const koumuinEstatClaudeCodeArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n73a4d300e045",
     publishedAt: "2026-06-14",
     r2Path: "note/koumuin-estat-claude-code/n73a4d300e045",
-    r2Body: false,
+    r2Body: true,
   },
 ];
