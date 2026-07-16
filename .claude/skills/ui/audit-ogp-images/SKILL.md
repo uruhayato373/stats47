@@ -28,8 +28,10 @@ node .claude/scripts/ogp/build-image-gallery.mjs --tabs ranking-card --check
 node .claude/scripts/ogp/build-image-gallery.mjs --audit
 ```
 
-タブ: `blog-ogp` `ranking-ogp` `theme-ogp` `category-ogp` `areas-ogp` (Satori 動的 OGP) /
-`blog-card` `ranking-card` (リンクカード light/dark) / `note-cover` (note カバー)。
+タブ (真実源は `gallery-collectors.mjs` の `OGP_TABS`): `blog-ogp` `ranking-ogp` `theme-ogp`
+`category-ogp` `areas-ogp` (静的 R2・**県シルエットカード** ogp-image-standards.md §5.7) /
+`blog-card` `ranking-card` (リンクカード light/dark) / `note-cover` (note カバー) /
+`pref-silhouette` (県シルエット SNS 素材 5比率×blue/dark)。
 
 - OGP タブは各ページの `og:image` meta から**実際に配信されている URL**を解決する (静的フォールバック・
   ランタイム 500 をそのまま反映 = 真実を映す監査)。

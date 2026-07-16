@@ -6,7 +6,7 @@ model: sonnet
 
 # SNS Renderer Agent
 
-> **[移行ステータス]** 本 agent は render 系 (Remotion レンダリング・プレビュー) を担当する縮退役割。 メトリクス同期・posted 印付け (`/update-sns-metrics`, `/mark-sns-posted`) は `sns-metrics-sync`、 caption 生成は各チャネル strategist、 画像プロンプト生成 (`/image-prompt`) は `image-prompt-curator` に分離。 **Remotion レンダの正典入口は本 agent の `/render-sns-stills` (静止画/動画一般) と `/bar-chart-race --step render` (BCR)。 `/preview-remotion` はプレビュー専用**。 詳細: `.claude/agents/README.md`。
+> **[移行ステータス]** 本 agent は render 系 (Remotion レンダリング・プレビュー) を担当する縮退役割。 メトリクス同期・posted 印付け (`/update-sns-metrics`, `/mark-sns-posted`) は `sns-metrics-sync`、 caption 生成は各チャネル strategist、 画像プロンプト生成 (`/image-prompt`) は `image-prompt-curator` に分離。 **Remotion レンダの正典入口は本 agent の `/render-sns-stills` (静止画/動画一般)、`/bar-chart-race --step render` (BCR)、`/buzz-map` (日本地図×統計のバズカード)。 `/preview-remotion` はプレビュー専用**。 詳細: `.claude/agents/README.md`。
 
 Remotion を使った SNS 用動画・静止画のレンダリングとプレビューを担当するエージェント。
 
@@ -22,6 +22,7 @@ Remotion を使った SNS 用動画・静止画のレンダリングとプレビ
 |---|---|
 | `/render-sns-stills` | SNS 用静止画・動画を Remotion で生成（静止画/動画一般の正典入口） |
 | `/bar-chart-race --step render` | BCR 動画を一括レンダリング（YouTube/Instagram）。BCR の正典入口 |
+| `/buzz-map` | 日本地図×統計のバズカード（型A=静止画 / 型B=時系列アニメ）を spec 駆動で生成→目視→改善。buzz-map ドメインの正典入口。規約: `.claude/rules/buzz-map-standards.md`。co-agent: 投稿=x-strategist、ジオデータ=gis-curator |
 | `/preview-remotion` | プレビューデータを Remotion Studio に設定。`--type` で対象を選択（ranking / bar-chart-race / comparison / correlation / area-profile / blog）。**プレビュー専用（レンダしない）** |
 
 ## 前提条件
