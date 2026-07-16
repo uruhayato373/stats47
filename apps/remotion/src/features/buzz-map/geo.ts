@@ -84,12 +84,14 @@ export function buzzMapLayout(ratio: BuzzMapRatio, type: "A" | "B" | "C" | "D" |
       x1: (1 - padRight) * W,
       y1: (1 - botPad) * H,
     } as Box,
-    // 沖縄インセットは視認性優先でやや大きめ（2026-07-16 拡大: 幅30%→38%・高さ15%→20%）
+    // 沖縄インセットは本土が空ける左上の海域いっぱいに大きく取る
+    // （2026-07-16 拡大: 30%×15% → 46%×32%。本家の地名プロット系レイアウト=左上海域を使い切る構成を参考。
+    //   ラベルは枠内バッジ (BuzzMapCard)。大東諸島は fit から除外して弧を目一杯フィット）
     insetBox: {
       x: 0.05 * W,
-      y: (topPad + 0.05) * H,
-      width: 0.38 * W,
-      height: ratio === "916" ? 0.14 * H : 0.2 * H,
+      y: (topPad + 0.03) * H,
+      width: 0.46 * W,
+      height: ratio === "916" ? 0.2 * H : 0.32 * H,
     },
   };
 }
@@ -120,6 +122,15 @@ function nameOf(f: Feature): string {
 
 function isOkinawa(code: string): boolean {
   return code === "47" || code.startsWith("47");
+}
+
+/**
+ * 沖縄インセットの描画ドメイン（先島諸島〜沖縄本島の弧）。
+ * 大東諸島（東に ~300km 離れた飛び地）を含めると fit が横に間延びして島が極小になるため
+ * v1 では非描画（本土 bbox 外の小笠原と同じ扱い。正典: buzz-map-standards §3）
+ */
+function inInsetDomain(lon: number, lat: number): boolean {
+  return lon >= 122 && lon <= 129.5 && lat >= 23.5 && lat <= 28.7;
 }
 
 /** 本土 bbox 内に重心があるか（小笠原・大東諸島等を落とす） */
@@ -216,7 +227,11 @@ export function computeBuzzMapGeo(
   }
 
   const mainFeatures = features.filter((f) => !isOkinawa(codeOf(f)) && inMainland(f));
-  const okinawaFeatures = features.filter((f) => isOkinawa(codeOf(f)));
+  const okinawaFeatures = features.filter((f) => {
+    if (!isOkinawa(codeOf(f))) return false;
+    const [lon, lat] = geoCentroid(f);
+    return inInsetDomain(lon, lat);
+  });
 
   const frame = bboxPolygon();
   const mainland = fitAndRender(mainFeatures, frame, region);
@@ -276,13 +291,16 @@ export function computeBuzzMapGeo(
       lat >= MAINLAND_BBOX.south &&
       lat <= MAINLAND_BBOX.north;
 
-    // 型C: 点を振り分け投影
+    // 型C: 点を振り分け投影（本土 bbox → main / インセットドメイン → inset / どちらでもない
+    // 飛び地=大東・小笠原等は非描画。inset が無い比率=16:9 は本土投影で枠外に流す）
     if (opts.points) {
       points = [];
       for (const [key, coords] of Object.entries(opts.points)) {
         for (const [lon, lat] of coords) {
-          // 沖縄・南西諸島は inset へ（inset が無い比率=16:9 は本土投影で枠外に流す）
-          const proj = inMainland2(lon, lat) ? mainProj : (insetProj ?? mainProj);
+          let proj: ReturnType<typeof geoMercator> | null = null;
+          if (inMainland2(lon, lat)) proj = mainProj;
+          else if (inInsetDomain(lon, lat)) proj = insetProj ?? mainProj;
+          if (!proj) continue;
           const xy = proj([lon, lat]);
           if (xy && Number.isFinite(xy[0]) && Number.isFinite(xy[1])) {
             points.push({ x: xy[0], y: xy[1], key });
@@ -291,15 +309,18 @@ export function computeBuzzMapGeo(
       }
     }
 
-    // 型D: 線を centroid で振り分け、geoPath で d を生成
+    // 型D: 線を centroid で振り分け、geoPath で d を生成（振り分けは点と同じ 3 区分）
     if (opts.lineFeatures) {
       const mainPath = geoPath(mainProj);
       const insetPath = insetProj ? geoPath(insetProj) : null;
       lines = [];
       for (const f of opts.lineFeatures) {
         const c = geoCentroid(f);
-        const useInset = !(c && inMainland2(c[0], c[1]));
-        const pathGen = useInset ? (insetPath ?? mainPath) : mainPath;
+        if (!c) continue;
+        let pathGen: ReturnType<typeof geoPath> | null = null;
+        if (inMainland2(c[0], c[1])) pathGen = mainPath;
+        else if (inInsetDomain(c[0], c[1])) pathGen = insetPath ?? mainPath;
+        if (!pathGen) continue;
         const d = pathGen(f);
         if (!d) continue;
         const raw = opts.lineYearProp ? Number(f.properties?.[opts.lineYearProp]) : NaN;

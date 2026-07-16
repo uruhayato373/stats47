@@ -94,17 +94,18 @@ export const BuzzMapCard: React.FC<BuzzMapCardProps> = ({
           <>
             <rect
               x={geo.insetBox.x - 6 * s}
-              y={geo.insetBox.y - 34 * s}
+              y={geo.insetBox.y - 6 * s}
               width={geo.insetBox.width + 12 * s}
-              height={geo.insetBox.height + 42 * s}
+              height={geo.insetBox.height + 12 * s}
               rx={12 * s}
               fill="none"
               stroke={C.landLine}
               strokeWidth={1.5 * s}
             />
+            {/* ラベルは枠内バッジ（左上）。枠を大きく取っても外にはみ出さない */}
             <text
-              x={geo.insetBox.x + 4 * s}
-              y={geo.insetBox.y - 10 * s}
+              x={geo.insetBox.x + 14 * s}
+              y={geo.insetBox.y + 26 * s}
               fontSize={22 * s}
               fill={C.ink2}
             >
