@@ -166,6 +166,8 @@ builder が `renderClass`（KSJ/DPF）または `lane`（e-Stat）から機械�
 | population-growth-muni | 人口が増えている街はどこか | A | muni | e-Stat 社会・人口統計体系 `population-growth-rate`（2020・人口増116自治体） | specs/population-growth-muni.json | 生成済・IG draft登録（id 701） |
 | vacant-housing-muni | 空き家が多い街はどこか | A | muni | e-Stat 社会・人口統計体系 `vacant-housing-ratio`（2023・20%以上214自治体） | specs/vacant-housing-muni.json | 生成済・IG draft登録（id 702） |
 | no-station-muni | 鉄道駅が1つも無い街はどこか | A | muni | 国土数値情報 S12 駅別乗降客数（令和4年度・点→自治体invert・駅なし611自治体） | specs/no-station-muni.json | 生成済・IG draft登録（id 703） |
+| shuku-place-names | 「宿」のつく地名はどこか | C | pref | 国土地理院 地名情報（居住地名1,533＋自然地名52・gsi レーン実証） | specs/shuku-place-names.json | 生成済（gsi 実証。本家と同題材のため投稿は差別化テーマを優先） |
+| onsen-place-names | 「温泉」のつく地名はどこか | C | pref | 国土地理院 地名情報（行政338＋自然607・dark テーマ・gsi レーン） | specs/onsen-place-names.json | 生成済（差別化テーマ・自然地名が主役。投稿候補） |
 | sakura-bloom-50y | さくら開花日の50年 | B | pref | 気象庁 生物季節観測（issue [#538](https://github.com/uruhayato373/stats47/issues/538)） | — | 案（第1弾候補。交通インフラ系は本家と被るため回避） |
 | female-majority-muni | 女性が男性より多い市区町村 | A | muni | 国勢調査（e-Stat） | — | 案（まちの計量舎の令和2年版に対し最新調査で差別化） |
 <!-- buzz-map:catalog:end -->
