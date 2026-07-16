@@ -22,10 +22,12 @@ interface BuzzMapCardProps {
   ratio: BuzzMapRatio;
   /** code → fill色。未定義コードは land */
   fillFor: (code: string) => string;
-  /** 型B: 年カウンター表示（例 "1998年"） */
+  /** 型B/D: 年カウンター表示（例 "1998年"） */
   yearLabel?: string;
   /** 型B: ラスト静止のサマリー行 */
   summary?: BuzzMapSummaryEntry[];
+  /** 型D: この年以下の線のみ描画（未指定=全線）。静止画の年指定にも使う */
+  year?: number;
 }
 
 const C = BUZZ_MAP_COLORS;
@@ -44,6 +46,7 @@ export const BuzzMapCard: React.FC<BuzzMapCardProps> = ({
   fillFor,
   yearLabel,
   summary,
+  year,
 }) => {
   const { width: W, height: H } = geo;
   // 1080 基準のフォントスケール
@@ -133,6 +136,20 @@ export const BuzzMapCard: React.FC<BuzzMapCardProps> = ({
             strokeWidth={0.6 * s}
           />
         ))}
+        {/* 型D: 線ネットワーク（白地図の上に accent 色の線）。year 指定時はその年以下のみ */}
+        {geo.lines
+          ?.filter((ln) => year === undefined || ln.year === null || ln.year <= year)
+          .map((ln, i) => (
+            <path
+              key={`l-${i}`}
+              d={ln.d}
+              fill="none"
+              stroke={resolveFill("accent", spec)}
+              strokeWidth={(spec.lineWidth ?? 2) * s}
+              strokeLinejoin="round"
+              strokeLinecap="round"
+            />
+          ))}
       </svg>
 
       {/* ① タイトルブロック（左上） */}
@@ -186,8 +203,8 @@ export const BuzzMapCard: React.FC<BuzzMapCardProps> = ({
         ))}
       </div>
 
-      {/* 型B: 年カウンター（右の海域）。サマリー表示中は上へ避ける */}
-      {spec.type === "B" && yearLabel && (
+      {/* 型B/D: 年カウンター（右の海域）。サマリー表示中は上へ避ける */}
+      {(spec.type === "B" || spec.type === "D") && yearLabel && (
         <div
           style={{
             position: "absolute",
@@ -271,7 +288,7 @@ export const BuzzMapCard: React.FC<BuzzMapCardProps> = ({
           {spec.type === "B" && spec.ramp ? spec.ramp.legendTitle : spec.legend.title}
         </div>
 
-        {(spec.type === "A" || spec.type === "C") &&
+        {(spec.type === "A" || spec.type === "C" || spec.type === "D") &&
           spec.legend.rows?.map((row) => (
             <div
               key={row.key}
@@ -286,9 +303,9 @@ export const BuzzMapCard: React.FC<BuzzMapCardProps> = ({
               <span
                 style={{
                   width: 22 * s,
-                  height: 22 * s,
-                  // 型C は点なので凡例マーカーも円
-                  borderRadius: spec.type === "C" ? "50%" : 6 * s,
+                  // 型C=点(円) / 型D=線(横バー) / 型A=区分(四角)
+                  height: (spec.type === "D" ? 7 : 22) * s,
+                  borderRadius: spec.type === "C" ? "50%" : (spec.type === "D" ? 3 : 6) * s,
                   flex: "none",
                   border: `1px solid rgba(13,54,107,.18)`,
                   backgroundColor: resolveFill(row.fill, spec),

@@ -26,8 +26,11 @@ export interface BuzzMapSpeedSegment {
 export interface BuzzMapSpec {
   /** 出力ファイル名等に使う識別子（kebab-case） */
   id: string;
-  /** A=静止画二値/少区分, B=時系列アニメ, C=点プロット（白地図＋accent 点） */
-  type: "A" | "B" | "C";
+  /**
+   * A=静止画二値/少区分, B=時系列アニメ（塗り）, C=点プロット（白地図＋accent 点）,
+   * D=線ネットワーク（白地図＋accent 線。years+lineYearProp 併用で時系列リール可）
+   */
+  type: "A" | "B" | "C" | "D";
   /** "pref" | "muni" | "muni:NN"（NN=都道府県コード2桁で県トリム） */
   level: string;
   title: string;
@@ -53,11 +56,17 @@ export interface BuzzMapSpec {
     series?: Record<string, Record<string, number>>;
     /** 型C: 凡例 rowKey → 点の [経度, 緯度] 配列 */
     points?: Record<string, [number, number][]>;
+    /** 型D: 線データの staticFile パス（topojson or GeoJSON。例 buzz-map/assets/highway-network.topojson） */
+    linesAsset?: string;
     /** code → 表示名（型Bサマリーの最大・最小ラベル用。省略時はコードを表示） */
     names?: Record<string, string>;
   };
   /** 型C のみ。点の半径（@1080 基準 px。省略時 4） */
   pointRadius?: number;
+  /** 型D のみ。線フィーチャの「年」属性名（例 N06_002）。指定時は years と併せ時系列リール可 */
+  lineYearProp?: string;
+  /** 型D のみ。線の太さ（@1080 基準 px。省略時 2） */
+  lineWidth?: number;
   /** 型Bのみ */
   years?: { from: number; to: number };
   /** 型Bのみ。省略時は全区間 2年/秒 */

@@ -53,7 +53,7 @@ npx remotion render src/index.ts BuzzMap-Reel-11 \
   --props=src/features/buzz-map/specs/<id>.json
 ```
 
-比率は composition id で選ぶ: `BuzzMap-Still-{45,11,169,916}` / `BuzzMap-Reel-{11,916}`。型C 点プロットは型A と同じ `BuzzMap-Still-*`。
+比率は composition id で選ぶ: `BuzzMap-Still-{45,11,169,916}` / `BuzzMap-Reel-{11,916}`。型C 点プロット・型D 線ネットワークは型A と同じ `BuzzMap-Still-*`（型D 時系列リールは `BuzzMap-Reel-*`）。
 
 ### spec 自動生成（step 1 のデータ接地）
 
@@ -71,6 +71,12 @@ npx tsx .claude/scripts/sns/build-buzz-map-spec-ksj.ts --data-id S12 --version 2
 # 点→自治体二値（型A・◯◯がある/ない自治体。--invert で無い側）
 npx tsx .claude/scripts/sns/build-buzz-map-spec-ksj.ts --data-id S12 --version 24 \
   --mode point-muni --invert --id <id> --title "..." --accent infra --label-hit "駅なし" --label-miss "駅あり"
+
+# 型D 線ネットワーク＋時系列（供用開始年で伸びる網図）
+npx tsx .claude/scripts/sns/build-buzz-map-spec-ksj.ts --mode line-network \
+  --r2-key app/highway-history/highway-sections.topojson --id <id> --year-prop N06_002 \
+  --title "..." --accent infra --label-hit "高速道路 総延長km" --data-year "1962-2020"
+#   → 静止画 BuzzMap-Still-45（最新年全網図） / 時系列 BuzzMap-Reel-11（--frames=0-89 --scale=0.5 で試写）
 
 # DPF（GraphQL 取得した GeoJSON を投入）
 npx tsx .claude/scripts/sns/build-buzz-map-spec-ksj.ts --geojson /tmp/dpf.geojson --mode point-plot --id <id> ...

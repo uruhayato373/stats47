@@ -33,7 +33,9 @@ export const BuzzMapReel: React.FC<BuzzMapReelProps> = ({ spec, ratio }) => {
 
   const series = spec.data.series ?? {};
   const domain = spec.ramp?.domain ?? [0, 1];
+  // 型D は白地図（線は Card 内で year フィルタ描画）。型B は連続量ランプ塗り
   const fillFor = (code: string) => {
+    if (spec.type === "D") return BUZZ_MAP_COLORS.land;
     const v = series[code] ? valueAtYear(series[code], t) : undefined;
     return v === undefined ? BUZZ_MAP_COLORS.land : rampColor(v, domain);
   };
@@ -45,7 +47,8 @@ export const BuzzMapReel: React.FC<BuzzMapReelProps> = ({ spec, ratio }) => {
       ratio={ratio}
       fillFor={fillFor}
       yearLabel={`${Math.floor(t)}年`}
-      summary={inHold ? buildSummary(spec, t) : undefined}
+      summary={spec.type === "D" ? undefined : inHold ? buildSummary(spec, t) : undefined}
+      year={spec.type === "D" ? Math.floor(t) : undefined}
     />
   );
 };

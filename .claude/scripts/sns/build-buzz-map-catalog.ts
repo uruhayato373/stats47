@@ -63,8 +63,9 @@ type RenderClass =
   | "point-plot" // 型C 点プロット
   | "point-muni" // 型A 点→自治体 PIP
   | "muni-binary" // 型A 自治体指定型 polygon
+  | "line-timeline" // 型D 線ネットワーク時系列リール (供用開始年属性あり)
+  | "line-network" // 型D 線ネットワーク静止画 (年属性なし)
   | "polygon-overlay" // polygon (面積比等・型未対応)
-  | "line" // line (型未対応)
   | "mesh" // mesh (型未対応)
   | "flow" // OD/流動 (型未対応)
   | "unknown";
@@ -208,10 +209,23 @@ const KSJ_MUNI_BINARY_IDS = new Set([
   "A38", // 医療圏
 ]);
 
+/** 供用開始・開業年など時系列属性を持つ線データ (→ 型D line-timeline) */
+const KSJ_LINE_TIMELINE_IDS = new Set([
+  "N06", // 高速道路時系列 (供用開始年 N06_002)
+  "N05", // 鉄道時系列 (開業・廃止年)
+]);
+
+/** ksj-catalog.json の未登録候補で、内容から renderClass が明らかなもの (手動格上げ) */
+const KSJ_CANDIDATE_RENDERCLASS: Record<string, RenderClass> = {
+  N05: "line-timeline", // 鉄道時系列 (開業年で伸びる鉄道網リール)
+  N08: "point-plot", // 空港時系列 (開港年つき点)
+};
+
 function ksjRenderClass(dataId: string, geom: string): RenderClass {
   if (geom === "point") return "point-plot"; // point-muni も可 (両対応)
   if (geom === "polygon") return KSJ_MUNI_BINARY_IDS.has(dataId) ? "muni-binary" : "polygon-overlay";
-  if (geom === "line") return "line";
+  if (geom === "line")
+    return KSJ_LINE_TIMELINE_IDS.has(dataId) ? "line-timeline" : "line-network";
   if (geom === "mesh") return "mesh";
   return "unknown";
 }
@@ -219,9 +233,10 @@ function ksjRenderClass(dataId: string, geom: string): RenderClass {
 const RENDER_PRIORITY: Record<RenderClass, number> = {
   "point-plot": 1.0,
   "point-muni": 1.0,
+  "line-timeline": 0.95,
   "muni-binary": 0.9,
+  "line-network": 0.85,
   "polygon-overlay": 0.4,
-  line: 0.3,
   mesh: 0.1,
   flow: 0.1,
   unknown: 0.2,
@@ -239,15 +254,27 @@ const AVAIL_PRIORITY: Record<Availability, number> = {
  * latestVersion フィールドが無くても R2 に実在するケース (S12 等) を r2 に昇格する。
  */
 const KSJ_R2_VERIFIED: Record<string, string> = {
-  S12: "24", // 実証で HEAD 200 確認 (2026-07-16)
+  S12: "24", // 駅別乗降客数。実証で HEAD 200 確認 (2026-07-16)
 };
 
-/** availability を判定 (verified 実測 > latestVersion 楽観 > registered)。 */
+/**
+ * gis/mlit-ksj 規約パス外だが R2 に加工済み派生がある dataId → note。
+ * ヘルパーは --r2-key でこのキーを直接読める (line-network 実証で確認)。
+ */
+const KSJ_R2_ALT_KEY: Record<string, { key: string; note: string }> = {
+  N06: {
+    key: "app/highway-history/highway-sections.topojson",
+    note: "R2 実在 (highway-history 派生・供用開始年 N06_002・1962-2020)。--r2-key で読む",
+  },
+};
+
+/** availability を判定 (verified 実測 > alt-key 派生 > latestVersion 楽観 > registered)。 */
 function ksjAvailability(dataId: string, latestVersion: string): {
   availability: Availability;
   version: string;
 } {
   if (KSJ_R2_VERIFIED[dataId]) return { availability: "r2", version: KSJ_R2_VERIFIED[dataId] };
+  if (KSJ_R2_ALT_KEY[dataId]) return { availability: "r2", version: "alt" };
   if (latestVersion) return { availability: "r2", version: latestVersion };
   return { availability: "registered", version: "" };
 }
@@ -285,19 +312,22 @@ function buildKsjEntries(prevByKey: Map<string, CatalogEntry>): CatalogEntry[] {
       license: (d as { license?: string }).license,
       status: prev?.status ?? "candidate",
       themeId: prev?.themeId ?? null,
-      note:
-        prev?.note ??
-        (availability === "r2"
-          ? `version=${version} (national.topojson 実在)`
-          : "登録済・R2 未変換 (要 pipeline)"),
+      // alt-key を持つデータは「取得方法」が機械事実なので prev より優先。他は運用メモ prev を尊重
+      note: KSJ_R2_ALT_KEY[d.dataId]
+        ? KSJ_R2_ALT_KEY[d.dataId].note
+        : (prev?.note ??
+          (availability === "r2"
+            ? `version=${version} (national.topojson 実在)`
+            : "登録済・R2 未変換 (要 pipeline)")),
     });
   }
 
-  // 2) 未登録候補 (geometry 不明 = renderClass unknown・availability candidate)
+  // 2) 未登録候補 (geometry 不明。時系列/点が明らかなものは手動格上げ)
   for (const c of catalogRaw) {
     if (seen.has(c.id) || registered.has(c.id)) continue;
     seen.add(c.id);
-    const score = 0.5 * RENDER_PRIORITY.unknown + 0.5 * AVAIL_PRIORITY.candidate;
+    const renderClass = KSJ_CANDIDATE_RENDERCLASS[c.id] ?? "unknown";
+    const score = 0.5 * RENDER_PRIORITY[renderClass] + 0.5 * AVAIL_PRIORITY.candidate;
     const key = `ksj:${c.id}`;
     const prev = prevByKey.get(key);
     entries.push({
@@ -307,7 +337,7 @@ function buildKsjEntries(prevByKey: Map<string, CatalogEntry>): CatalogEntry[] {
       title: c.name,
       score: Math.round(score * 1000) / 1000,
       dataId: c.id,
-      renderClass: "unknown",
+      renderClass,
       availability: "candidate",
       status: prev?.status ?? "candidate",
       themeId: prev?.themeId ?? null,

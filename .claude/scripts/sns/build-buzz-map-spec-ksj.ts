@@ -38,7 +38,7 @@
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { join } from "node:path";
 
-import { geoCentroid } from "d3-geo";
+import { geoCentroid, geoLength } from "d3-geo";
 import type { Feature, Geometry, Position } from "geojson";
 import { feature } from "topojson-client";
 import type { Topology, GeometryCollection } from "topojson-specification";
@@ -46,6 +46,7 @@ import type { Topology, GeometryCollection } from "topojson-specification";
 const PROJECT_ROOT = join(import.meta.dirname ?? __dirname, "../../..");
 const PUBLIC_URL = process.env.R2_PUBLIC_FETCH_URL ?? "https://storage.stats47.jp";
 const SPECS_DIR = join(PROJECT_ROOT, "apps/remotion/src/features/buzz-map/specs");
+const ASSETS_DIR = join(PROJECT_ROOT, "apps/remotion/public/buzz-map/assets");
 const MUNI_TOPOJSON = join(PROJECT_ROOT, "apps/remotion/public/buzz-map/municipalities.topojson");
 
 // KSJ dataId → 出典名 (datasets.ts の name を静的転記。ネットワーク非依存)
@@ -53,6 +54,7 @@ const KSJ_NAMES: Record<string, string> = {
   S12: "駅別乗降客数", W01: "ダム", P35: "道の駅", C28: "空港", P03: "発電施設",
   P12: "観光資源", P04: "医療機関", P05: "市町村役場", L01: "地価公示", C09: "漁港",
   C02: "港湾", P13: "都市公園", P29: "学校", W09: "湖沼",
+  N02: "鉄道", N06: "高速道路時系列", W05: "河川", C23: "海岸線", N07: "バスルート",
 };
 
 function parseArgs() {
@@ -72,10 +74,13 @@ function parseArgs() {
   return {
     dataId: val("--data-id"),
     version: val("--version"),
+    r2Key: val("--r2-key"), // 任意 R2 キー (例 app/highway-history/highway-sections.topojson)
     geojson: val("--geojson"),
-    mode: (val("--mode") ?? "point-plot") as "point-plot" | "point-muni",
+    mode: (val("--mode") ?? "point-plot") as "point-plot" | "point-muni" | "line-network",
     filter: val("--filter"),
     invert: a.includes("--invert"),
+    yearProp: val("--year-prop"), // 型D: 線の年属性 (例 N06_002)
+    lineWidth: val("--line-width") ? Number(val("--line-width")) : null,
     id: req("--id"),
     title: req("--title"),
     subtitle: val("--subtitle"),
@@ -165,23 +170,38 @@ function muniOfPoint(lon: number, lat: number, polys: MuniPoly[]): string | null
   return null;
 }
 
-// ─── フィーチャ列挙 ───
-async function loadFeatures(opts: ReturnType<typeof parseArgs>): Promise<Feature[]> {
+// ─── フィーチャ列挙 (raw = topology/GeoJSON 原文も返す。line-network の asset コピー用) ───
+interface LoadResult {
+  features: Feature[];
+  /** 型D で public assets へコピーする原データ (topojson or GeoJSON) */
+  raw: unknown;
+  rawIsTopology: boolean;
+}
+
+async function loadFeatures(opts: ReturnType<typeof parseArgs>): Promise<LoadResult> {
   if (opts.geojson) {
     const gj = JSON.parse(readFileSync(opts.geojson, "utf8")) as {
       type: string;
       features?: Feature[];
     };
-    if (gj.type === "FeatureCollection" && gj.features) return gj.features;
-    if (gj.type === "Feature") return [gj as unknown as Feature];
+    if (gj.type === "FeatureCollection" && gj.features)
+      return { features: gj.features, raw: gj, rawIsTopology: false };
+    if (gj.type === "Feature")
+      return { features: [gj as unknown as Feature], raw: gj, rawIsTopology: false };
     console.error("✗ --geojson は FeatureCollection か Feature である必要があります");
     process.exit(1);
   }
-  if (!opts.dataId || !opts.version) {
-    console.error("✗ R2 入力には --data-id と --version が必須です (または --geojson)");
-    process.exit(1);
+  // R2 キー: --r2-key (任意) 優先、無ければ gis/mlit-ksj 規約パス
+  let url: string;
+  if (opts.r2Key) {
+    url = `${PUBLIC_URL}/${opts.r2Key}`;
+  } else {
+    if (!opts.dataId || !opts.version) {
+      console.error("✗ R2 入力には --r2-key、または --data-id と --version が必須です (または --geojson)");
+      process.exit(1);
+    }
+    url = `${PUBLIC_URL}/gis/mlit-ksj/${opts.dataId}/${opts.version}/national.topojson`;
   }
-  const url = `${PUBLIC_URL}/gis/mlit-ksj/${opts.dataId}/${opts.version}/national.topojson`;
   const res = await fetch(url);
   if (!res.ok) {
     console.error(`✗ R2 topojson が取得できません (${res.status}): ${url}`);
@@ -191,7 +211,7 @@ async function loadFeatures(opts: ReturnType<typeof parseArgs>): Promise<Feature
   const topo = (await res.json()) as Topology;
   const key = Object.keys(topo.objects)[0];
   const fc = feature(topo, topo.objects[key] as GeometryCollection);
-  return fc.features;
+  return { features: fc.features, raw: topo, rawIsTopology: true };
 }
 
 function centroidOf(f: Feature): [number, number] | null {
@@ -202,7 +222,7 @@ function centroidOf(f: Feature): [number, number] | null {
 
 async function main() {
   const opts = parseArgs();
-  const features = await loadFeatures(opts);
+  const { features, raw, rawIsTopology } = await loadFeatures(opts);
   console.log(`フィーチャ ${features.length} 件を読み込み`);
 
   // フィルタ適用
@@ -222,6 +242,62 @@ async function main() {
     [yearLabel, "全国"].filter(Boolean).join(" / "),
     "stats47.jp",
   ];
+
+  // ─── 型D: 線ネットワーク (asset 配置 + years 自動導出 + km 集計) ───
+  if (opts.mode === "line-network") {
+    mkdirSync(ASSETS_DIR, { recursive: true });
+    const assetRel = `buzz-map/assets/${opts.id}.topojson`;
+    // topojson 原文をそのまま asset に配置 (GeoJSON 入力時も .topojson 拡張で保存=中身は FC)
+    writeFileSync(join(ASSETS_DIR, `${opts.id}.topojson`), JSON.stringify(raw));
+
+    // 年範囲の自動導出 (--year-prop があれば)
+    let years: { from: number; to: number } | undefined;
+    if (opts.yearProp) {
+      const ys = hit
+        .map((f) => Number(f.properties?.[opts.yearProp as keyof typeof f.properties]))
+        .filter((y) => Number.isFinite(y) && y > 1900 && y < 2100);
+      if (ys.length > 0) years = { from: Math.min(...ys), to: Math.max(...ys) };
+    }
+
+    // 総延長 km (geoLength は球面ラジアン → ×6371)
+    let totalKm = 0;
+    for (const f of hit) totalKm += geoLength(f as Feature<Geometry>) * 6371;
+    const kmRounded = Math.round(totalKm);
+
+    const spec: Record<string, unknown> = {
+      id: opts.id,
+      type: "D",
+      level: "pref",
+      title: opts.title,
+      ...(opts.titleLines ? { titleLines: opts.titleLines.split("|") } : {}),
+      subtitle: opts.subtitle ?? "",
+      source,
+      accent: opts.accent,
+      ...(opts.lineWidth ? { lineWidth: opts.lineWidth } : {}),
+      ...(opts.yearProp ? { lineYearProp: opts.yearProp } : {}),
+      ...(years ? { years, holdSeconds: 2, summary: { max: false, min: false } } : {}),
+      legend: {
+        title: "区分（総延長）",
+        rows: [{ key: "hit", label: opts.labelHit, fill: "accent", count: kmRounded }],
+      },
+      data: { linesAsset: assetRel },
+    };
+
+    writeFileSync(join(SPECS_DIR, `${opts.id}.json`), JSON.stringify({ spec }, null, 2) + "\n");
+    console.log(`✓ spec 生成: ${join(SPECS_DIR, `${opts.id}.json`)}`);
+    console.log(`  asset: apps/remotion/public/${assetRel} (${rawIsTopology ? "topojson" : "geojson"})`);
+    console.log(`  線 ${hit.length} 本 / 総延長 ${kmRounded}km${years ? ` / 年 ${years.from}-${years.to}` : ""}`);
+    console.log(`\nレンダ (静止画=最新年の全網図):`);
+    console.log(`  cd apps/remotion && npx remotion still src/index.ts BuzzMap-Still-45 \\`);
+    console.log(`    ../../.local/r2/sns/buzz-map/${opts.id}/x/stills/${opts.id}-45.png \\`);
+    console.log(`    --props=src/features/buzz-map/specs/${opts.id}.json`);
+    if (years) {
+      console.log(`\nレンダ (時系列リール試写):`);
+      console.log(`  npx remotion render src/index.ts BuzzMap-Reel-11 /tmp/${opts.id}-preview.mp4 \\`);
+      console.log(`    --props=src/features/buzz-map/specs/${opts.id}.json --frames=0-89 --scale=0.5`);
+    }
+    return;
+  }
 
   let spec: Record<string, unknown>;
 

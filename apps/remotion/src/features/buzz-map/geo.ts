@@ -29,6 +29,12 @@ export interface BuzzMapProjectedPoint {
   key: string;
 }
 
+/** 型D: 投影済みの線（SVG path d + 年。年は line-timeline のフィルタ用） */
+export interface BuzzMapProjectedLine {
+  d: string;
+  year: number | null;
+}
+
 export interface BuzzMapGeo {
   width: number;
   height: number;
@@ -40,6 +46,8 @@ export interface BuzzMapGeo {
   insetBox: { x: number; y: number; width: number; height: number } | null;
   /** 型C: 投影済み点（本土・沖縄インセット両方を含む） */
   points: BuzzMapProjectedPoint[] | null;
+  /** 型D: 投影済み線（本土・沖縄インセット両方を含む） */
+  lines: BuzzMapProjectedLine[] | null;
 }
 
 interface Box {
@@ -50,10 +58,10 @@ interface Box {
 }
 
 /** 比率×型ごとの地図フィット領域・インセット枠（キャンバス比率で定義） */
-export function buzzMapLayout(ratio: BuzzMapRatio, type: "A" | "B" | "C") {
+export function buzzMapLayout(ratio: BuzzMapRatio, type: "A" | "B" | "C" | "D") {
   const { width: W, height: H } = BUZZ_MAP_RATIOS[ratio];
-  // 型B は右に年カウンター用の海域を空ける
-  const padRight = type === "B" ? 0.22 : 0.06;
+  // 型B/D は右に年カウンター用の海域を空ける（時系列リールの年表示）
+  const padRight = type === "B" || type === "D" ? 0.22 : 0.06;
 
   if (ratio === "169") {
     // 本土トリム: 左 62% に地図、右はタイトル外の余白と凡例
@@ -176,9 +184,12 @@ export function computeBuzzMapGeo(
   opts: {
     level: string;
     ratio: BuzzMapRatio;
-    type: "A" | "B" | "C";
+    type: "A" | "B" | "C" | "D";
     /** 型C: 凡例 rowKey → [lon, lat][] */
     points?: Record<string, [number, number][]>;
+    /** 型D: 線フィーチャ（LineString/MultiLineString）と年属性名 */
+    lineFeatures?: Feature[];
+    lineYearProp?: string;
   }
 ): BuzzMapGeo {
   const { level, ratio, type } = opts;
@@ -199,6 +210,7 @@ export function computeBuzzMapGeo(
       inset: null,
       insetBox: null,
       points: null,
+      lines: null,
     };
   }
 
@@ -232,9 +244,10 @@ export function computeBuzzMapGeo(
     });
   }
 
-  // 型C: 点を本土 / 沖縄インセットに振り分けて投影
+  // 型C 点 / 型D 線は本土・沖縄インセットの 2 投影を共用する
   let points: BuzzMapProjectedPoint[] | null = null;
-  if (opts.points) {
+  let lines: BuzzMapProjectedLine[] | null = null;
+  if (opts.points || opts.lineFeatures) {
     const mainProj = geoMercator().fitExtent(
       [
         [region.x0, region.y0],
@@ -256,20 +269,40 @@ export function computeBuzzMapGeo(
         okiFc
       );
     }
-    points = [];
-    for (const [key, coords] of Object.entries(opts.points)) {
-      for (const [lon, lat] of coords) {
-        const inMain =
-          lon >= MAINLAND_BBOX.west &&
-          lon <= MAINLAND_BBOX.east &&
-          lat >= MAINLAND_BBOX.south &&
-          lat <= MAINLAND_BBOX.north;
-        // 沖縄・南西諸島は inset へ（inset が無い比率=16:9 は本土投影で枠外に流す）
-        const proj = inMain ? mainProj : (insetProj ?? mainProj);
-        const xy = proj([lon, lat]);
-        if (xy && Number.isFinite(xy[0]) && Number.isFinite(xy[1])) {
-          points.push({ x: xy[0], y: xy[1], key });
+    const inMainland2 = (lon: number, lat: number) =>
+      lon >= MAINLAND_BBOX.west &&
+      lon <= MAINLAND_BBOX.east &&
+      lat >= MAINLAND_BBOX.south &&
+      lat <= MAINLAND_BBOX.north;
+
+    // 型C: 点を振り分け投影
+    if (opts.points) {
+      points = [];
+      for (const [key, coords] of Object.entries(opts.points)) {
+        for (const [lon, lat] of coords) {
+          // 沖縄・南西諸島は inset へ（inset が無い比率=16:9 は本土投影で枠外に流す）
+          const proj = inMainland2(lon, lat) ? mainProj : (insetProj ?? mainProj);
+          const xy = proj([lon, lat]);
+          if (xy && Number.isFinite(xy[0]) && Number.isFinite(xy[1])) {
+            points.push({ x: xy[0], y: xy[1], key });
+          }
         }
+      }
+    }
+
+    // 型D: 線を centroid で振り分け、geoPath で d を生成
+    if (opts.lineFeatures) {
+      const mainPath = geoPath(mainProj);
+      const insetPath = insetProj ? geoPath(insetProj) : null;
+      lines = [];
+      for (const f of opts.lineFeatures) {
+        const c = geoCentroid(f);
+        const useInset = !(c && inMainland2(c[0], c[1]));
+        const pathGen = useInset ? (insetPath ?? mainPath) : mainPath;
+        const d = pathGen(f);
+        if (!d) continue;
+        const raw = opts.lineYearProp ? Number(f.properties?.[opts.lineYearProp]) : NaN;
+        lines.push({ d, year: Number.isFinite(raw) ? raw : null });
       }
     }
   }
@@ -282,5 +315,6 @@ export function computeBuzzMapGeo(
     inset,
     insetBox: inset ? insetBox : null,
     points,
+    lines,
   };
 }

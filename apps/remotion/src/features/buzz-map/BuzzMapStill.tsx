@@ -44,6 +44,21 @@ export const BuzzMapStill: React.FC<BuzzMapStillProps> = ({
     return <BuzzMapCard spec={specWithCounts} geo={geo} ratio={ratio} fillFor={fillFor} />;
   }
 
+  // 型C（点）/ 型D（線）: 白地図ベース。geo.points / geo.lines は Card 内で描画。
+  // 型D は year 指定でその年以下の線のみ（未指定=全網図）。年カウンターは静止画では出さない。
+  if (spec.type === "C" || spec.type === "D") {
+    const fillFor = () => BUZZ_MAP_COLORS.land;
+    return (
+      <BuzzMapCard
+        spec={spec}
+        geo={geo}
+        ratio={ratio}
+        fillFor={fillFor}
+        year={spec.type === "D" ? year : undefined}
+      />
+    );
+  }
+
   // 型B の静止画（最終年 or 指定年）
   const t = year ?? spec.years?.to ?? 0;
   const series = spec.data.series ?? {};
