@@ -61,7 +61,7 @@ jobs:
         run: |
           TSC="apps/web/scripts/tsconfig.ogp.json"
           SC="apps/web/scripts/generate-ogp-images.ts"
-          for TYPE in ranking ranking-cards areas note-covers; do
+          for TYPE in ranking ranking-cards areas note-covers pref-silhouette; do
             echo "=== self-heal $TYPE ==="
             npx tsx --tsconfig $TSC $SC --type $TYPE --max-generate 500 || true
           done
@@ -69,6 +69,7 @@ jobs:
           npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix app/ranking || true
           npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix app/areas || true
           npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix note || true
+          npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix sns/pref-silhouette || true
 
       - name: 🖼 Self-heal blog thumbnails/OGP (既存スクリプト)
         continue-on-error: true

@@ -18,7 +18,7 @@ import path from "node:path";
 export const DEFAULT_CONCURRENCY = 12;
 export const RANKING_SAMPLE = 30;
 
-/** OGP / カード / note カバー タブ (build-image-gallery.mjs の従来 8 タブ)。 */
+/** OGP / カード / note カバー タブ (build-image-gallery.mjs の従来 8 タブ + pref-silhouette)。 */
 export const OGP_TABS = [
   "blog-ogp",
   "ranking-ogp",
@@ -28,6 +28,21 @@ export const OGP_TABS = [
   "blog-card",
   "ranking-card",
   "note-cover",
+  "pref-silhouette",
+];
+
+/** 県シルエットカードの R2 variant (5比率 × blue/dark)。SSOT: apps/web/scripts/data/pref-silhouette-tokens.ts */
+export const PREF_SILHOUETTE_VARIANTS = [
+  "ogp-blue",
+  "45-blue",
+  "11-blue",
+  "916-blue",
+  "169-blue",
+  "ogp-dark",
+  "45-dark",
+  "11-dark",
+  "916-dark",
+  "169-dark",
 ];
 
 /** 17 category キー (SSOT: packages/data-configs/src/types.ts CATEGORY_KEYS)。 */
@@ -301,6 +316,25 @@ export async function buildTab(tab, opts) {
             { variant: "light", url: `${r2}/app/ranking/${k}/thumbnail-light.webp` },
             { variant: "dark", url: `${r2}/app/ranking/${k}/thumbnail-dark.webp` },
           ],
+        })),
+      };
+    }
+    case "pref-silhouette": {
+      // 県シルエットカード素材 (47県 × 5比率 × blue/dark)。areas OGP と同デザイン系。
+      let codes = Array.from({ length: 47 }, (_, i) => String(i + 1).padStart(2, "0"));
+      if (limit) codes = codes.slice(0, limit);
+      return {
+        source: "r2-static",
+        aspect: "multi (ogp/4:5/1:1/9:16/16:9)",
+        r2KeyPattern: `sns/pref-silhouette/<code2>/card-<ratio>-<theme>.png`,
+        entries: codes.map((c) => ({
+          key: c,
+          label: c,
+          pageUrl: `${site}/areas/${c}000`,
+          images: PREF_SILHOUETTE_VARIANTS.map((v) => ({
+            variant: v,
+            url: `${r2}/sns/pref-silhouette/${c}/card-${v}.png`,
+          })),
         })),
       };
     }
