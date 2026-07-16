@@ -81,7 +81,9 @@ status: `案` → `spec作成` → `生成済` → `投稿済`（投稿記録の
 > - `ksj` … 国土数値情報 127（登録 42 + 候補 superset）。`renderClass`（point-plot=型C /
 >   line-timeline=型D 時系列リール / muni-binary=型A / line-network=型D 静止画 / point-muni=型A PIP /
 >   mesh・polygon-overlay・flow=型未対応）と `availability`（r2=即spec化 / registered=要 pipeline /
->   candidate=要登録）付き
+>   candidate=要登録）付き。**未登録候補の形状（点/線/面）は KSJ 公式ページから機械抽出した対照表**
+>   `.claude/scripts/sns/data/ksj-geometry.generated.json`（再生成: `build-ksj-geometry-map.ts`）で確定
+>   （公式ページに型表記が無い 9 件のみ unknown 残置）
 > - `mlit-dpf` … 国土交通データプラットフォーム 31（`nlni_ksj`/`dpf_area_data`/`dpf_statistical_data` は
 >   KSJ/N03/e-Stat と重複するため除外）。availability=api（GraphQL 取得 → `--geojson` でヘルパーに投入）
 >

@@ -226,6 +226,33 @@ const KSJ_CANDIDATE_RENDERCLASS: Record<string, RenderClass> = {
   N08: "point-plot", // 空港時系列 (開港年つき点)
 };
 
+/**
+ * KSJ 形状対照表 (build-ksj-geometry-map.ts が公式ページから機械抽出・git tracked)。
+ * 未登録候補の geometry (点/線/面/メッシュ) はこれで確定する。
+ */
+interface KsjGeometryMap {
+  entries: Record<string, { shapes: string[]; name: string }>;
+}
+function loadKsjGeometryMap(): KsjGeometryMap["entries"] {
+  try {
+    const p = join(PROJECT_ROOT, ".claude/scripts/sns/data/ksj-geometry.generated.json");
+    return (JSON.parse(readFileSync(p, "utf8")) as KsjGeometryMap).entries;
+  } catch {
+    return {};
+  }
+}
+
+/** shapes (複数可) → renderClass。バズ地図で使いやすい順に point > line > polygon > mesh。 */
+function renderClassFromShapes(dataId: string, shapes: string[]): RenderClass {
+  if (shapes.includes("point")) return "point-plot";
+  if (shapes.includes("line"))
+    return KSJ_LINE_TIMELINE_IDS.has(dataId) ? "line-timeline" : "line-network";
+  if (shapes.includes("polygon"))
+    return KSJ_MUNI_BINARY_IDS.has(dataId) ? "muni-binary" : "polygon-overlay";
+  if (shapes.includes("mesh")) return "mesh";
+  return "unknown";
+}
+
 function ksjRenderClass(dataId: string, geom: string): RenderClass {
   if (geom === "point") return "point-plot"; // point-muni も可 (両対応)
   if (geom === "polygon") return KSJ_MUNI_BINARY_IDS.has(dataId) ? "muni-binary" : "polygon-overlay";
@@ -327,11 +354,14 @@ function buildKsjEntries(prevByKey: Map<string, CatalogEntry>): CatalogEntry[] {
     });
   }
 
-  // 2) 未登録候補 (geometry 不明。時系列/点が明らかなものは手動格上げ)
+  // 2) 未登録候補 — geometry は KSJ 形状対照表 (公式ページから機械抽出) で確定
+  const geoMap = loadKsjGeometryMap();
   for (const c of catalogRaw) {
     if (seen.has(c.id) || registered.has(c.id)) continue;
     seen.add(c.id);
-    const renderClass = KSJ_CANDIDATE_RENDERCLASS[c.id] ?? "unknown";
+    const shapes = geoMap[c.id]?.shapes ?? [];
+    const renderClass =
+      KSJ_CANDIDATE_RENDERCLASS[c.id] ?? renderClassFromShapes(c.id, shapes);
     const score = 0.5 * RENDER_PRIORITY[renderClass] + 0.5 * AVAIL_PRIORITY.candidate;
     const key = `ksj:${c.id}`;
     const prev = prevByKey.get(key);
@@ -342,6 +372,7 @@ function buildKsjEntries(prevByKey: Map<string, CatalogEntry>): CatalogEntry[] {
       title: c.name,
       score: Math.round(score * 1000) / 1000,
       dataId: c.id,
+      geometryType: shapes.length > 0 ? shapes.join("+") : undefined,
       renderClass,
       availability: "candidate",
       status: prev?.status ?? "candidate",

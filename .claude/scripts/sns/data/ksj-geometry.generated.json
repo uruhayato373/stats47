@@ -1,0 +1,1779 @@
+{
+  "generatedAt": "2026-07-16T04:58:07.529Z",
+  "entries": {
+    "C23": {
+      "name": "海岸線",
+      "shapes": [
+        "line"
+      ],
+      "evidence": {
+        "point": 0,
+        "line": 2,
+        "polygon": 0,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-C23.html",
+      "fetchedAt": "2026-07-16T04:56:44.005Z"
+    },
+    "P23": {
+      "name": "海岸保全施設",
+      "shapes": [
+        "point",
+        "line",
+        "polygon"
+      ],
+      "evidence": {
+        "point": 3,
+        "line": 2,
+        "polygon": 1,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P23.html",
+      "fetchedAt": "2026-07-16T04:56:44.557Z"
+    },
+    "W09": {
+      "name": "湖沼",
+      "shapes": [
+        "polygon"
+      ],
+      "evidence": {
+        "point": 0,
+        "line": 0,
+        "polygon": 2,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-W09-2005.html",
+      "fetchedAt": "2026-07-16T04:56:45.483Z"
+    },
+    "W07": {
+      "name": "流域メッシュ",
+      "shapes": [
+        "mesh"
+      ],
+      "evidence": {
+        "point": 0,
+        "line": 0,
+        "polygon": 1,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-W07.html",
+      "fetchedAt": "2026-07-16T04:56:45.939Z"
+    },
+    "W01": {
+      "name": "ダム",
+      "shapes": [
+        "point"
+      ],
+      "evidence": {
+        "point": 2,
+        "line": 0,
+        "polygon": 0,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-W01.html",
+      "fetchedAt": "2026-07-16T04:58:05.911Z"
+    },
+    "W05": {
+      "name": "河川",
+      "shapes": [
+        "point",
+        "line"
+      ],
+      "evidence": {
+        "point": 2,
+        "line": 2,
+        "polygon": 0,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-W05.html",
+      "fetchedAt": "2026-07-16T04:56:47.177Z"
+    },
+    "G04-a": {
+      "name": "標高・傾斜度3次メッシュ",
+      "shapes": [
+        "mesh"
+      ],
+      "evidence": {
+        "point": 0,
+        "line": 0,
+        "polygon": 0,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-G04-a.html",
+      "fetchedAt": "2026-07-16T04:56:48.112Z"
+    },
+    "G04-c": {
+      "name": "標高・傾斜度4次メッシュ",
+      "shapes": [
+        "mesh"
+      ],
+      "evidence": {
+        "point": 0,
+        "line": 0,
+        "polygon": 0,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-G04-c.html",
+      "fetchedAt": "2026-07-16T04:56:48.544Z"
+    },
+    "G04-d": {
+      "name": "標高・傾斜度5次メッシュ",
+      "shapes": [
+        "mesh"
+      ],
+      "evidence": {
+        "point": 0,
+        "line": 0,
+        "polygon": 0,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-G04-d.html",
+      "fetchedAt": "2026-07-16T04:56:48.977Z"
+    },
+    "G08": {
+      "name": "低位地帯",
+      "shapes": [],
+      "evidence": {
+        "point": 0,
+        "line": 0,
+        "polygon": 0,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-G08-2015.html",
+      "fetchedAt": "2026-07-16T04:56:49.400Z"
+    },
+    "A54": {
+      "name": "大規模盛土造成地",
+      "shapes": [
+        "line",
+        "polygon"
+      ],
+      "evidence": {
+        "point": 0,
+        "line": 1,
+        "polygon": 1,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A54-2023.html",
+      "fetchedAt": "2026-07-16T04:56:49.828Z"
+    },
+    "L03-a": {
+      "name": "土地利用3次メッシュ",
+      "shapes": [
+        "mesh"
+      ],
+      "evidence": {
+        "point": 0,
+        "line": 0,
+        "polygon": 0,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-L03-a-2021.html",
+      "fetchedAt": "2026-07-16T04:56:50.485Z"
+    },
+    "L03-b": {
+      "name": "土地利用細分メッシュ",
+      "shapes": [
+        "mesh"
+      ],
+      "evidence": {
+        "point": 0,
+        "line": 0,
+        "polygon": 0,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-L03-b-2021.html",
+      "fetchedAt": "2026-07-16T04:56:51.115Z"
+    },
+    "L03-b-u": {
+      "name": "都市地域土地利用細分メッシュ",
+      "shapes": [
+        "mesh"
+      ],
+      "evidence": {
+        "point": 0,
+        "line": 0,
+        "polygon": 0,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-L03-b-u-2021.html",
+      "fetchedAt": "2026-07-16T04:56:51.585Z"
+    },
+    "L03-b-c": {
+      "name": "土地利用詳細メッシュ",
+      "shapes": [
+        "mesh"
+      ],
+      "evidence": {
+        "point": 0,
+        "line": 0,
+        "polygon": 0,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-L03-b-c-2021.html",
+      "fetchedAt": "2026-07-16T04:56:52.028Z"
+    },
+    "A13": {
+      "name": "森林地域",
+      "shapes": [
+        "polygon"
+      ],
+      "evidence": {
+        "point": 0,
+        "line": 0,
+        "polygon": 2,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A13-2015.html",
+      "fetchedAt": "2026-07-16T04:56:52.452Z"
+    },
+    "A45": {
+      "name": "国有林野",
+      "shapes": [
+        "polygon"
+      ],
+      "evidence": {
+        "point": 0,
+        "line": 0,
+        "polygon": 2,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A45.html",
+      "fetchedAt": "2026-07-16T04:56:52.879Z"
+    },
+    "A12": {
+      "name": "農業地域",
+      "shapes": [
+        "polygon"
+      ],
+      "evidence": {
+        "point": 0,
+        "line": 0,
+        "polygon": 2,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A12.html",
+      "fetchedAt": "2026-07-16T04:56:53.301Z"
+    },
+    "L01": {
+      "name": "地価公示",
+      "shapes": [
+        "point"
+      ],
+      "evidence": {
+        "point": 2,
+        "line": 0,
+        "polygon": 0,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-L01-2025.html",
+      "fetchedAt": "2026-07-16T04:56:53.957Z"
+    },
+    "L02": {
+      "name": "都道府県地価調査",
+      "shapes": [
+        "point"
+      ],
+      "evidence": {
+        "point": 2,
+        "line": 0,
+        "polygon": 0,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-L02-2024.html",
+      "fetchedAt": "2026-07-16T04:56:54.583Z"
+    },
+    "N03": {
+      "name": "行政区域",
+      "shapes": [
+        "polygon"
+      ],
+      "evidence": {
+        "point": 0,
+        "line": 0,
+        "polygon": 1,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N03-2025.html",
+      "fetchedAt": "2026-07-16T04:56:55.053Z"
+    },
+    "A16": {
+      "name": "DID人口集中地区",
+      "shapes": [
+        "polygon"
+      ],
+      "evidence": {
+        "point": 0,
+        "line": 0,
+        "polygon": 2,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A16-2020.html",
+      "fetchedAt": "2026-07-16T04:56:55.489Z"
+    },
+    "A32": {
+      "name": "中学校区",
+      "shapes": [
+        "polygon"
+      ],
+      "evidence": {
+        "point": 0,
+        "line": 0,
+        "polygon": 2,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A32-2023.html",
+      "fetchedAt": "2026-07-16T04:56:55.916Z"
+    },
+    "A27": {
+      "name": "小学校区",
+      "shapes": [
+        "polygon"
+      ],
+      "evidence": {
+        "point": 0,
+        "line": 0,
+        "polygon": 2,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A27-2023.html",
+      "fetchedAt": "2026-07-16T04:56:56.347Z"
+    },
+    "A38": {
+      "name": "医療圏",
+      "shapes": [
+        "polygon"
+      ],
+      "evidence": {
+        "point": 0,
+        "line": 0,
+        "polygon": 8,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A38-2020.html",
+      "fetchedAt": "2026-07-16T04:56:56.772Z"
+    },
+    "A35a": {
+      "name": "景観計画区域",
+      "shapes": [
+        "point",
+        "polygon"
+      ],
+      "evidence": {
+        "point": 2,
+        "line": 0,
+        "polygon": 4,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A35a.html",
+      "fetchedAt": "2026-07-16T04:56:57.196Z"
+    },
+    "A35b": {
+      "name": "景観地区・準景観地区",
+      "shapes": [
+        "point",
+        "polygon"
+      ],
+      "evidence": {
+        "point": 2,
+        "line": 0,
+        "polygon": 4,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A35b.html",
+      "fetchedAt": "2026-07-16T04:56:57.649Z"
+    },
+    "A35c": {
+      "name": "景観重要建造物・樹木",
+      "shapes": [
+        "point"
+      ],
+      "evidence": {
+        "point": 4,
+        "line": 0,
+        "polygon": 0,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A35c.html",
+      "fetchedAt": "2026-07-16T04:56:58.081Z"
+    },
+    "A43": {
+      "name": "伝統的建造物群保存地区",
+      "shapes": [
+        "polygon"
+      ],
+      "evidence": {
+        "point": 0,
+        "line": 0,
+        "polygon": 2,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A43.html",
+      "fetchedAt": "2026-07-16T04:56:58.503Z"
+    },
+    "A44": {
+      "name": "歴史的風致維持向上計画の重点地区",
+      "shapes": [
+        "polygon"
+      ],
+      "evidence": {
+        "point": 0,
+        "line": 0,
+        "polygon": 2,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A44.html",
+      "fetchedAt": "2026-07-16T04:56:58.923Z"
+    },
+    "A55": {
+      "name": "都市計画決定情報",
+      "shapes": [
+        "line",
+        "polygon"
+      ],
+      "evidence": {
+        "point": 0,
+        "line": 1,
+        "polygon": 2,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A55-2022.html",
+      "fetchedAt": "2026-07-16T04:56:59.347Z"
+    },
+    "A09": {
+      "name": "都市地域",
+      "shapes": [
+        "polygon"
+      ],
+      "evidence": {
+        "point": 0,
+        "line": 0,
+        "polygon": 4,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A09.html",
+      "fetchedAt": "2026-07-16T04:57:00.440Z"
+    },
+    "A29": {
+      "name": "用途地域",
+      "shapes": [
+        "polygon"
+      ],
+      "evidence": {
+        "point": 0,
+        "line": 0,
+        "polygon": 2,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A29-2019.html",
+      "fetchedAt": "2026-07-16T04:57:00.868Z"
+    },
+    "A50": {
+      "name": "立地適正化計画区域",
+      "shapes": [
+        "polygon"
+      ],
+      "evidence": {
+        "point": 0,
+        "line": 0,
+        "polygon": 2,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A50-2020.html",
+      "fetchedAt": "2026-07-16T04:57:01.288Z"
+    },
+    "A42": {
+      "name": "歴史的風土保存区域",
+      "shapes": [
+        "polygon"
+      ],
+      "evidence": {
+        "point": 0,
+        "line": 0,
+        "polygon": 4,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A42.html",
+      "fetchedAt": "2026-07-16T04:57:01.711Z"
+    },
+    "P13": {
+      "name": "都市公園",
+      "shapes": [
+        "point"
+      ],
+      "evidence": {
+        "point": 2,
+        "line": 0,
+        "polygon": 0,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P13.html",
+      "fetchedAt": "2026-07-16T04:57:02.132Z"
+    },
+    "A03": {
+      "name": "三大都市圏計画区域",
+      "shapes": [
+        "polygon"
+      ],
+      "evidence": {
+        "point": 0,
+        "line": 0,
+        "polygon": 2,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A03.html",
+      "fetchedAt": "2026-07-16T04:57:02.881Z"
+    },
+    "A17": {
+      "name": "過疎地域",
+      "shapes": [
+        "polygon"
+      ],
+      "evidence": {
+        "point": 0,
+        "line": 0,
+        "polygon": 2,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A17-2017.html",
+      "fetchedAt": "2026-07-16T04:57:03.329Z"
+    },
+    "A24": {
+      "name": "振興山村",
+      "shapes": [
+        "polygon"
+      ],
+      "evidence": {
+        "point": 0,
+        "line": 0,
+        "polygon": 2,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A24-2016.html",
+      "fetchedAt": "2026-07-16T04:57:03.762Z"
+    },
+    "A25": {
+      "name": "特定農山村地域",
+      "shapes": [
+        "polygon"
+      ],
+      "evidence": {
+        "point": 0,
+        "line": 0,
+        "polygon": 2,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A25-2016.html",
+      "fetchedAt": "2026-07-16T04:57:04.527Z"
+    },
+    "A19": {
+      "name": "離島振興対策実施地域",
+      "shapes": [
+        "polygon"
+      ],
+      "evidence": {
+        "point": 0,
+        "line": 0,
+        "polygon": 2,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A19-2017.html",
+      "fetchedAt": "2026-07-16T04:57:04.956Z"
+    },
+    "A19s": {
+      "name": "離島振興対策実施地域統計情報",
+      "shapes": [],
+      "evidence": {
+        "point": 0,
+        "line": 0,
+        "polygon": 0,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A19s.html",
+      "fetchedAt": "2026-07-16T04:57:05.418Z"
+    },
+    "A21": {
+      "name": "小笠原諸島",
+      "shapes": [
+        "polygon"
+      ],
+      "evidence": {
+        "point": 0,
+        "line": 0,
+        "polygon": 2,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A21.html",
+      "fetchedAt": "2026-07-16T04:57:05.836Z"
+    },
+    "A21s": {
+      "name": "小笠原諸島統計情報",
+      "shapes": [],
+      "evidence": {
+        "point": 0,
+        "line": 0,
+        "polygon": 0,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A21s.html",
+      "fetchedAt": "2026-07-16T04:57:06.258Z"
+    },
+    "A20": {
+      "name": "奄美群島",
+      "shapes": [
+        "polygon"
+      ],
+      "evidence": {
+        "point": 0,
+        "line": 0,
+        "polygon": 2,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A20.html",
+      "fetchedAt": "2026-07-16T04:57:06.972Z"
+    },
+    "A20s": {
+      "name": "奄美群島統計情報",
+      "shapes": [],
+      "evidence": {
+        "point": 0,
+        "line": 0,
+        "polygon": 0,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A20s.html",
+      "fetchedAt": "2026-07-16T04:57:07.398Z"
+    },
+    "A18": {
+      "name": "半島振興対策実施地域",
+      "shapes": [
+        "polygon"
+      ],
+      "evidence": {
+        "point": 0,
+        "line": 0,
+        "polygon": 2,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A18-2016.html",
+      "fetchedAt": "2026-07-16T04:57:08.565Z"
+    },
+    "A18s-a": {
+      "name": "半島振興対策実施地域統計情報",
+      "shapes": [],
+      "evidence": {
+        "point": 0,
+        "line": 0,
+        "polygon": 0,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A18s-a.html",
+      "fetchedAt": "2026-07-16T04:57:08.988Z"
+    },
+    "A37": {
+      "name": "半島循環道路",
+      "shapes": [
+        "line",
+        "polygon"
+      ],
+      "evidence": {
+        "point": 0,
+        "line": 6,
+        "polygon": 2,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A37.html",
+      "fetchedAt": "2026-07-16T04:57:09.406Z"
+    },
+    "A22": {
+      "name": "豪雪地帯",
+      "shapes": [
+        "polygon"
+      ],
+      "evidence": {
+        "point": 0,
+        "line": 0,
+        "polygon": 2,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A22-2016.html",
+      "fetchedAt": "2026-07-16T04:57:09.833Z"
+    },
+    "A22-m": {
+      "name": "豪雪地帯（気象データ）",
+      "shapes": [
+        "point",
+        "polygon"
+      ],
+      "evidence": {
+        "point": 2,
+        "line": 0,
+        "polygon": 2,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A22-m.html",
+      "fetchedAt": "2026-07-16T04:57:10.254Z"
+    },
+    "A22s": {
+      "name": "豪雪地帯統計情報",
+      "shapes": [],
+      "evidence": {
+        "point": 0,
+        "line": 0,
+        "polygon": 0,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A22s.html",
+      "fetchedAt": "2026-07-16T04:57:10.675Z"
+    },
+    "A23": {
+      "name": "特殊土壌地帯",
+      "shapes": [
+        "polygon"
+      ],
+      "evidence": {
+        "point": 0,
+        "line": 0,
+        "polygon": 2,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A23-2016.html",
+      "fetchedAt": "2026-07-16T04:57:11.432Z"
+    },
+    "A39": {
+      "name": "密集市街地",
+      "shapes": [
+        "polygon"
+      ],
+      "evidence": {
+        "point": 0,
+        "line": 0,
+        "polygon": 1,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A39-2015.html",
+      "fetchedAt": "2026-07-16T04:57:11.848Z"
+    },
+    "A31b": {
+      "name": "洪水浸水想定区域（1次メッシュ単位）",
+      "shapes": [
+        "mesh"
+      ],
+      "evidence": {
+        "point": 0,
+        "line": 0,
+        "polygon": 5,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A31b-2024.html",
+      "fetchedAt": "2026-07-16T04:57:12.315Z"
+    },
+    "A31a": {
+      "name": "洪水浸水想定区域（河川単位）",
+      "shapes": [
+        "polygon"
+      ],
+      "evidence": {
+        "point": 0,
+        "line": 0,
+        "polygon": 5,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A31a-2024.html",
+      "fetchedAt": "2026-07-16T04:57:12.764Z"
+    },
+    "P20": {
+      "name": "避難施設",
+      "shapes": [],
+      "evidence": {
+        "point": 0,
+        "line": 0,
+        "polygon": 0,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P20.html",
+      "fetchedAt": "2026-07-16T04:57:13.187Z"
+    },
+    "G02": {
+      "name": "平年値（気候）メッシュ",
+      "shapes": [
+        "mesh"
+      ],
+      "evidence": {
+        "point": 0,
+        "line": 0,
+        "polygon": 1,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-G02-2022.html",
+      "fetchedAt": "2026-07-16T04:57:13.618Z"
+    },
+    "A30b": {
+      "name": "竜巻等の突風",
+      "shapes": [
+        "point"
+      ],
+      "evidence": {
+        "point": 2,
+        "line": 0,
+        "polygon": 0,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A30b.html",
+      "fetchedAt": "2026-07-16T04:57:14.036Z"
+    },
+    "A30a5": {
+      "name": "土砂災害・雪崩メッシュ",
+      "shapes": [
+        "mesh"
+      ],
+      "evidence": {
+        "point": 0,
+        "line": 0,
+        "polygon": 0,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A30a5.html",
+      "fetchedAt": "2026-07-16T04:57:14.508Z"
+    },
+    "A33": {
+      "name": "土砂災害警戒区域",
+      "shapes": [
+        "line",
+        "polygon"
+      ],
+      "evidence": {
+        "point": 0,
+        "line": 2,
+        "polygon": 2,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A33-2024.html",
+      "fetchedAt": "2026-07-16T04:57:14.953Z"
+    },
+    "A46": {
+      "name": "地すべり防止区域",
+      "shapes": [
+        "point",
+        "polygon"
+      ],
+      "evidence": {
+        "point": 2,
+        "line": 0,
+        "polygon": 6,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A46-2021.html",
+      "fetchedAt": "2026-07-16T04:57:15.377Z"
+    },
+    "A47": {
+      "name": "急傾斜地崩壊危険区域",
+      "shapes": [
+        "point",
+        "polygon"
+      ],
+      "evidence": {
+        "point": 2,
+        "line": 0,
+        "polygon": 2,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A47-2021.html",
+      "fetchedAt": "2026-07-16T04:57:15.801Z"
+    },
+    "A40": {
+      "name": "津波浸水想定",
+      "shapes": [
+        "polygon"
+      ],
+      "evidence": {
+        "point": 0,
+        "line": 0,
+        "polygon": 2,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A40-2024.html",
+      "fetchedAt": "2026-07-16T04:57:16.220Z"
+    },
+    "A49": {
+      "name": "高潮浸水想定区域",
+      "shapes": [
+        "polygon"
+      ],
+      "evidence": {
+        "point": 0,
+        "line": 0,
+        "polygon": 2,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A49-2024.html",
+      "fetchedAt": "2026-07-16T04:57:16.675Z"
+    },
+    "A48": {
+      "name": "災害危険区域",
+      "shapes": [
+        "point",
+        "polygon"
+      ],
+      "evidence": {
+        "point": 2,
+        "line": 0,
+        "polygon": 2,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A48-2021.html",
+      "fetchedAt": "2026-07-16T04:57:17.095Z"
+    },
+    "A52": {
+      "name": "砂防指定地",
+      "shapes": [
+        "line",
+        "polygon"
+      ],
+      "evidence": {
+        "point": 0,
+        "line": 2,
+        "polygon": 2,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A52-2023.html",
+      "fetchedAt": "2026-07-16T04:57:17.545Z"
+    },
+    "A53": {
+      "name": "多段階浸水想定",
+      "shapes": [
+        "polygon"
+      ],
+      "evidence": {
+        "point": 0,
+        "line": 0,
+        "polygon": 12,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A53-2024.html",
+      "fetchedAt": "2026-07-16T04:57:17.966Z"
+    },
+    "A51": {
+      "name": "雨水出水（内水）浸水想定区域",
+      "shapes": [
+        "polygon"
+      ],
+      "evidence": {
+        "point": 0,
+        "line": 0,
+        "polygon": 2,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A51-2024.html",
+      "fetchedAt": "2026-07-16T04:57:18.385Z"
+    },
+    "P28": {
+      "name": "国・都道府県の機関",
+      "shapes": [
+        "point"
+      ],
+      "evidence": {
+        "point": 1,
+        "line": 0,
+        "polygon": 0,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P28-2022.html",
+      "fetchedAt": "2026-07-16T04:57:18.804Z"
+    },
+    "P05": {
+      "name": "市町村役場等及び公的集会施設",
+      "shapes": [
+        "point"
+      ],
+      "evidence": {
+        "point": 2,
+        "line": 0,
+        "polygon": 0,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P05-2022.html",
+      "fetchedAt": "2026-07-16T04:57:19.276Z"
+    },
+    "P34": {
+      "name": "市区町村役場",
+      "shapes": [
+        "point"
+      ],
+      "evidence": {
+        "point": 2,
+        "line": 0,
+        "polygon": 0,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P34.html",
+      "fetchedAt": "2026-07-16T04:57:19.696Z"
+    },
+    "P02": {
+      "name": "公共施設",
+      "shapes": [],
+      "evidence": {
+        "point": 0,
+        "line": 0,
+        "polygon": 0,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P02-2006.html",
+      "fetchedAt": "2026-07-16T04:57:20.119Z"
+    },
+    "P18": {
+      "name": "警察署",
+      "shapes": [
+        "point",
+        "polygon"
+      ],
+      "evidence": {
+        "point": 2,
+        "line": 0,
+        "polygon": 2,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P18.html",
+      "fetchedAt": "2026-07-16T04:57:20.542Z"
+    },
+    "P17": {
+      "name": "消防署",
+      "shapes": [
+        "point",
+        "polygon"
+      ],
+      "evidence": {
+        "point": 2,
+        "line": 0,
+        "polygon": 2,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P17.html",
+      "fetchedAt": "2026-07-16T04:57:21.302Z"
+    },
+    "P30": {
+      "name": "郵便局",
+      "shapes": [
+        "point"
+      ],
+      "evidence": {
+        "point": 1,
+        "line": 0,
+        "polygon": 0,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P30.html",
+      "fetchedAt": "2026-07-16T04:57:21.732Z"
+    },
+    "P04": {
+      "name": "医療機関",
+      "shapes": [
+        "point"
+      ],
+      "evidence": {
+        "point": 2,
+        "line": 0,
+        "polygon": 0,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P04-2020.html",
+      "fetchedAt": "2026-07-16T04:58:06.832Z"
+    },
+    "P14": {
+      "name": "福祉施設",
+      "shapes": [
+        "point"
+      ],
+      "evidence": {
+        "point": 2,
+        "line": 0,
+        "polygon": 0,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P14-2023.html",
+      "fetchedAt": "2026-07-16T04:57:22.531Z"
+    },
+    "P27": {
+      "name": "文化施設",
+      "shapes": [
+        "point"
+      ],
+      "evidence": {
+        "point": 1,
+        "line": 0,
+        "polygon": 0,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P27.html",
+      "fetchedAt": "2026-07-16T04:57:22.949Z"
+    },
+    "P29": {
+      "name": "学校",
+      "shapes": [
+        "point"
+      ],
+      "evidence": {
+        "point": 1,
+        "line": 0,
+        "polygon": 0,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P29-2023.html",
+      "fetchedAt": "2026-07-16T04:57:23.386Z"
+    },
+    "P21": {
+      "name": "上水道関連施設",
+      "shapes": [
+        "point",
+        "polygon"
+      ],
+      "evidence": {
+        "point": 1,
+        "line": 0,
+        "polygon": 2,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P21.html",
+      "fetchedAt": "2026-07-16T04:57:23.850Z"
+    },
+    "P22": {
+      "name": "下水道関連施設",
+      "shapes": [
+        "point"
+      ],
+      "evidence": {
+        "point": 2,
+        "line": 0,
+        "polygon": 0,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P22.html",
+      "fetchedAt": "2026-07-16T04:57:24.270Z"
+    },
+    "P15": {
+      "name": "廃棄物処理施設",
+      "shapes": [
+        "point"
+      ],
+      "evidence": {
+        "point": 4,
+        "line": 0,
+        "polygon": 0,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P15.html",
+      "fetchedAt": "2026-07-16T04:57:24.695Z"
+    },
+    "P03": {
+      "name": "発電施設",
+      "shapes": [
+        "point"
+      ],
+      "evidence": {
+        "point": 2,
+        "line": 0,
+        "polygon": 0,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P03.html",
+      "fetchedAt": "2026-07-16T04:57:25.120Z"
+    },
+    "P07": {
+      "name": "燃料給油所",
+      "shapes": [
+        "point"
+      ],
+      "evidence": {
+        "point": 2,
+        "line": 0,
+        "polygon": 0,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P07-2016.html",
+      "fetchedAt": "2026-07-16T04:57:25.574Z"
+    },
+    "P26": {
+      "name": "ニュータウン",
+      "shapes": [
+        "point"
+      ],
+      "evidence": {
+        "point": 1,
+        "line": 0,
+        "polygon": 0,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P26.html",
+      "fetchedAt": "2026-07-16T04:57:26.331Z"
+    },
+    "L05": {
+      "name": "工業用地",
+      "shapes": [
+        "polygon"
+      ],
+      "evidence": {
+        "point": 0,
+        "line": 0,
+        "polygon": 2,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-L05.html",
+      "fetchedAt": "2026-07-16T04:57:26.791Z"
+    },
+    "P16": {
+      "name": "研究機関",
+      "shapes": [
+        "point"
+      ],
+      "evidence": {
+        "point": 2,
+        "line": 0,
+        "polygon": 0,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P16.html",
+      "fetchedAt": "2026-07-16T04:57:27.230Z"
+    },
+    "P24": {
+      "name": "地場産業関連施設",
+      "shapes": [
+        "point"
+      ],
+      "evidence": {
+        "point": 1,
+        "line": 0,
+        "polygon": 0,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P24.html",
+      "fetchedAt": "2026-07-16T04:57:27.666Z"
+    },
+    "P31": {
+      "name": "物流拠点",
+      "shapes": [
+        "point"
+      ],
+      "evidence": {
+        "point": 2,
+        "line": 0,
+        "polygon": 0,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P31.html",
+      "fetchedAt": "2026-07-16T04:57:28.088Z"
+    },
+    "P33": {
+      "name": "集客施設",
+      "shapes": [
+        "point"
+      ],
+      "evidence": {
+        "point": 2,
+        "line": 0,
+        "polygon": 0,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P33.html",
+      "fetchedAt": "2026-07-16T04:57:28.537Z"
+    },
+    "P35": {
+      "name": "道の駅",
+      "shapes": [
+        "point"
+      ],
+      "evidence": {
+        "point": 2,
+        "line": 0,
+        "polygon": 0,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P35.html",
+      "fetchedAt": "2026-07-16T04:57:28.959Z"
+    },
+    "P32": {
+      "name": "都道府県指定文化財",
+      "shapes": [
+        "point"
+      ],
+      "evidence": {
+        "point": 2,
+        "line": 0,
+        "polygon": 0,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P32.html",
+      "fetchedAt": "2026-07-16T04:57:29.383Z"
+    },
+    "A34": {
+      "name": "世界文化遺産",
+      "shapes": [
+        "point",
+        "line",
+        "polygon"
+      ],
+      "evidence": {
+        "point": 8,
+        "line": 2,
+        "polygon": 4,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A34-2022.html",
+      "fetchedAt": "2026-07-16T04:57:29.802Z"
+    },
+    "A28": {
+      "name": "世界自然遺産",
+      "shapes": [
+        "polygon"
+      ],
+      "evidence": {
+        "point": 0,
+        "line": 0,
+        "polygon": 2,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A28.html",
+      "fetchedAt": "2026-07-16T04:57:30.226Z"
+    },
+    "P12": {
+      "name": "観光資源",
+      "shapes": [
+        "point",
+        "line",
+        "polygon"
+      ],
+      "evidence": {
+        "point": 2,
+        "line": 2,
+        "polygon": 2,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P12-2014.html",
+      "fetchedAt": "2026-07-16T04:57:30.649Z"
+    },
+    "P09": {
+      "name": "宿泊容量メッシュ",
+      "shapes": [
+        "mesh"
+      ],
+      "evidence": {
+        "point": 0,
+        "line": 0,
+        "polygon": 0,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P09.html",
+      "fetchedAt": "2026-07-16T04:57:31.072Z"
+    },
+    "P19": {
+      "name": "地域資源",
+      "shapes": [
+        "point"
+      ],
+      "evidence": {
+        "point": 2,
+        "line": 0,
+        "polygon": 0,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P19.html",
+      "fetchedAt": "2026-07-16T04:57:31.497Z"
+    },
+    "A10": {
+      "name": "自然公園地域",
+      "shapes": [
+        "polygon"
+      ],
+      "evidence": {
+        "point": 0,
+        "line": 0,
+        "polygon": 2,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A10-2015.html",
+      "fetchedAt": "2026-07-16T04:57:32.425Z"
+    },
+    "A11": {
+      "name": "自然保全地域",
+      "shapes": [
+        "polygon"
+      ],
+      "evidence": {
+        "point": 0,
+        "line": 0,
+        "polygon": 2,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A11.html",
+      "fetchedAt": "2026-07-16T04:57:32.849Z"
+    },
+    "A15": {
+      "name": "鳥獣保護区",
+      "shapes": [
+        "polygon"
+      ],
+      "evidence": {
+        "point": 0,
+        "line": 0,
+        "polygon": 2,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A15.html",
+      "fetchedAt": "2026-07-16T04:57:33.296Z"
+    },
+    "N06": {
+      "name": "高速道路時系列",
+      "shapes": [
+        "point",
+        "line"
+      ],
+      "evidence": {
+        "point": 2,
+        "line": 2,
+        "polygon": 0,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N06-2024.html",
+      "fetchedAt": "2026-07-16T04:57:33.715Z"
+    },
+    "N10": {
+      "name": "緊急輸送道路",
+      "shapes": [
+        "line"
+      ],
+      "evidence": {
+        "point": 0,
+        "line": 2,
+        "polygon": 0,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N10-2024.html",
+      "fetchedAt": "2026-07-16T04:57:34.141Z"
+    },
+    "N12": {
+      "name": "重要物流道路",
+      "shapes": [
+        "line"
+      ],
+      "evidence": {
+        "point": 0,
+        "line": 2,
+        "polygon": 0,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N12-2021.html",
+      "fetchedAt": "2026-07-16T04:57:34.567Z"
+    },
+    "N04": {
+      "name": "道路密度・道路延長メッシュ",
+      "shapes": [
+        "mesh"
+      ],
+      "evidence": {
+        "point": 0,
+        "line": 0,
+        "polygon": 0,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N04.html",
+      "fetchedAt": "2026-07-16T04:57:35.009Z"
+    },
+    "P36": {
+      "name": "高速バス停留所",
+      "shapes": [
+        "point"
+      ],
+      "evidence": {
+        "point": 2,
+        "line": 0,
+        "polygon": 0,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P36-2023.html",
+      "fetchedAt": "2026-07-16T04:57:35.432Z"
+    },
+    "P11": {
+      "name": "バス停留所",
+      "shapes": [
+        "point"
+      ],
+      "evidence": {
+        "point": 4,
+        "line": 0,
+        "polygon": 0,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P11-2022.html",
+      "fetchedAt": "2026-07-16T04:57:35.855Z"
+    },
+    "N07": {
+      "name": "バスルート",
+      "shapes": [
+        "line"
+      ],
+      "evidence": {
+        "point": 0,
+        "line": 2,
+        "polygon": 0,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N07-2022.html",
+      "fetchedAt": "2026-07-16T04:57:36.277Z"
+    },
+    "N02": {
+      "name": "鉄道",
+      "shapes": [],
+      "evidence": {
+        "point": 0,
+        "line": 0,
+        "polygon": 0,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N02-2024.html",
+      "fetchedAt": "2026-07-16T04:57:37.106Z"
+    },
+    "N05": {
+      "name": "鉄道時系列",
+      "shapes": [
+        "point",
+        "line"
+      ],
+      "evidence": {
+        "point": 2,
+        "line": 2,
+        "polygon": 0,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N05-2024.html",
+      "fetchedAt": "2026-07-16T04:57:37.526Z"
+    },
+    "S12": {
+      "name": "駅別乗降客数",
+      "shapes": [
+        "line"
+      ],
+      "evidence": {
+        "point": 0,
+        "line": 2,
+        "polygon": 0,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-S12-2023.html",
+      "fetchedAt": "2026-07-16T04:57:37.946Z"
+    },
+    "S05-c": {
+      "name": "交通流動量_駅別乗降数",
+      "shapes": [],
+      "evidence": {
+        "point": 0,
+        "line": 0,
+        "polygon": 0,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-S05-c.html",
+      "fetchedAt": "2026-07-16T04:57:38.361Z"
+    },
+    "C28": {
+      "name": "空港",
+      "shapes": [
+        "polygon"
+      ],
+      "evidence": {
+        "point": 0,
+        "line": 0,
+        "polygon": 2,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-C28-2021.html",
+      "fetchedAt": "2026-07-16T04:57:38.779Z"
+    },
+    "N08": {
+      "name": "空港時系列",
+      "shapes": [
+        "point",
+        "polygon"
+      ],
+      "evidence": {
+        "point": 2,
+        "line": 0,
+        "polygon": 2,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N08-2021.html",
+      "fetchedAt": "2026-07-16T04:57:39.198Z"
+    },
+    "S10b": {
+      "name": "空港間流通量",
+      "shapes": [
+        "line",
+        "polygon"
+      ],
+      "evidence": {
+        "point": 0,
+        "line": 1,
+        "polygon": 1,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-S10b-2014.html",
+      "fetchedAt": "2026-07-16T04:57:39.614Z"
+    },
+    "N11": {
+      "name": "ヘリポート",
+      "shapes": [
+        "point"
+      ],
+      "evidence": {
+        "point": 2,
+        "line": 0,
+        "polygon": 0,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N11.html",
+      "fetchedAt": "2026-07-16T04:57:40.033Z"
+    },
+    "C02": {
+      "name": "港湾",
+      "shapes": [
+        "point",
+        "line"
+      ],
+      "evidence": {
+        "point": 2,
+        "line": 4,
+        "polygon": 0,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-C02-2014.html",
+      "fetchedAt": "2026-07-16T04:57:40.473Z"
+    },
+    "C09": {
+      "name": "漁港",
+      "shapes": [
+        "point",
+        "line"
+      ],
+      "evidence": {
+        "point": 2,
+        "line": 2,
+        "polygon": 0,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-C09.html",
+      "fetchedAt": "2026-07-16T04:57:41.221Z"
+    },
+    "S10a": {
+      "name": "港湾間流通量・海上経路",
+      "shapes": [
+        "line",
+        "polygon"
+      ],
+      "evidence": {
+        "point": 0,
+        "line": 2,
+        "polygon": 2,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-S10a-2016.html",
+      "fetchedAt": "2026-07-16T04:57:41.636Z"
+    },
+    "N09": {
+      "name": "定期旅客航路",
+      "shapes": [
+        "point",
+        "line"
+      ],
+      "evidence": {
+        "point": 1,
+        "line": 1,
+        "polygon": 0,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N09.html",
+      "fetchedAt": "2026-07-16T04:57:42.052Z"
+    },
+    "S05-a": {
+      "name": "発生・集中量",
+      "shapes": [
+        "polygon"
+      ],
+      "evidence": {
+        "point": 0,
+        "line": 0,
+        "polygon": 1,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-S05-a-2013.html",
+      "fetchedAt": "2026-07-16T04:57:42.470Z"
+    },
+    "S05-b": {
+      "name": "ＯＤ量",
+      "shapes": [
+        "line",
+        "polygon"
+      ],
+      "evidence": {
+        "point": 0,
+        "line": 1,
+        "polygon": 1,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-S05-b-2013.html",
+      "fetchedAt": "2026-07-16T04:57:42.917Z"
+    },
+    "S05-d": {
+      "name": "貨物旅客地域流動量",
+      "shapes": [
+        "line"
+      ],
+      "evidence": {
+        "point": 0,
+        "line": 1,
+        "polygon": 0,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-S05-d-2018.html",
+      "fetchedAt": "2026-07-16T04:57:43.351Z"
+    },
+    "m1kr6": {
+      "name": "1kmメッシュ別将来推計人口（R6国政局推計）",
+      "shapes": [
+        "mesh"
+      ],
+      "evidence": {
+        "point": 0,
+        "line": 0,
+        "polygon": 2,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-mesh1000r6.html",
+      "fetchedAt": "2026-07-16T04:57:43.886Z"
+    },
+    "m500r6": {
+      "name": "500mメッシュ別将来推計人口（R6国政局推計）",
+      "shapes": [
+        "mesh"
+      ],
+      "evidence": {
+        "point": 0,
+        "line": 0,
+        "polygon": 2,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-mesh500r6.html",
+      "fetchedAt": "2026-07-16T04:57:44.317Z"
+    },
+    "m250r6": {
+      "name": "250mメッシュ別将来推計人口（R6国政局推計）",
+      "shapes": [
+        "mesh"
+      ],
+      "evidence": {
+        "point": 0,
+        "line": 0,
+        "polygon": 2,
+        "mesh": 0
+      },
+      "sourceUrl": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-mesh250r6.html",
+      "fetchedAt": "2026-07-16T04:58:07.328Z"
+    }
+  }
+}
