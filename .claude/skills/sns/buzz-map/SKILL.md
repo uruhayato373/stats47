@@ -22,7 +22,7 @@ co_agents: [x-strategist, instagram-strategist, gis-curator]
 
 | step | 内容 | 出力 |
 |---|---|---|
-| 1. spec | **候補カタログ `build-buzz-map-catalog.ts --next N --lane muni\|pref\|ksj\|mlit-dpf`**（単品・真実源 = `buzz-map-catalog.json`・4 レーン）または **`build-buzz-map-combo-catalog.ts --next N --feasible-only`**（掛け合わせ・型E）から選ぶ。型A(e-Stat)=`build-buzz-map-spec.ts`、型C/D(KSJ)=`build-buzz-map-spec-ksj.ts`、型E 合成=`merge-buzz-map-specs.ts` で生成 | `specs/<id>.json` |
+| 1. spec | **候補カタログ `build-buzz-map-catalog.ts --next N --lane muni\|pref\|ksj\|mlit-dpf\|gsi`**（単品・真実源 = `buzz-map-catalog.json`・5 レーン）または **`build-buzz-map-combo-catalog.ts --next N --feasible-only`**（掛け合わせ・型E）から選ぶ。型A(e-Stat)=`build-buzz-map-spec.ts`、型C/D(KSJ)=`build-buzz-map-spec-ksj.ts`、型C(GSI 地名)=`build-buzz-map-spec-gsi.ts`、型E 合成=`merge-buzz-map-specs.ts` で生成 | `specs/<id>.json` |
 | 2. still | 静止画レンダ（型Bも先に最終年静止画で構図確認） | `.local/r2/sns/buzz-map/<id>/x/stills/` |
 | 3. 目視 | 生成 PNG を Read で開きチェックリスト判定（下記） | — |
 | 4. 改善 | 崩れは spec 修正を優先して再レンダ。カードCSS/tokens の変更は standards §6 決定ログとセット | — |

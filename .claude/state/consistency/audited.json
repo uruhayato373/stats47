@@ -1,5 +1,11 @@
 {
-  "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-  "audited_at": "2026-07-16T08:16:28",
-  "files": []
+  "hash": "a58b85514f3b372bff7cd96db80a4c7d9a3fa3ba7236320a41ef3e4281bf573e",
+  "audited_at": "2026-07-16T10:53:03",
+  "files": [
+    ".claude/agents/gis-curator.md",
+    ".claude/agents/sns-renderer.md",
+    ".claude/scripts/sns/build-buzz-map-catalog.ts",
+    ".claude/scripts/sns/build-buzz-map-spec-gsi.ts",
+    ".claude/skills/sns/buzz-map/SKILL.md"
+  ]
 }

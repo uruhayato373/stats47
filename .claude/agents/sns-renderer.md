@@ -22,7 +22,7 @@ Remotion を使った SNS 用動画・静止画のレンダリングとプレビ
 |---|---|
 | `/render-sns-stills` | SNS 用静止画・動画を Remotion で生成（静止画/動画一般の正典入口） |
 | `/bar-chart-race --step render` | BCR 動画を一括レンダリング（YouTube/Instagram）。BCR の正典入口 |
-| `/buzz-map` | 日本地図×統計のバズカードを spec 駆動で生成→目視→改善。buzz-map ドメインの正典入口。**型 (A〜E) の一覧・仕様は再列挙せず `.claude/rules/buzz-map-standards.md` §1 を SSOT とする**（型A二値/型B時系列/型C点/型D線ネットワーク/型E合成）。co-agent: X 配信=x-strategist、IG 配信=instagram-strategist、ジオデータ (KSJ 点/線)=gis-curator |
+| `/buzz-map` | 日本地図×統計のバズカードを spec 駆動で生成→目視→改善。buzz-map ドメインの正典入口。**型 (A〜E) の一覧・仕様は再列挙せず `.claude/rules/buzz-map-standards.md` §1 を SSOT とする**（型A二値/型B時系列/型C点/型D線ネットワーク/型E合成）。データ源=5 レーン（e-Stat muni/pref、KSJ、DPF、**GSI 地名情報**）。spec ヘルパー: e-Stat=`build-buzz-map-spec.ts` / KSJ・DPF=`build-buzz-map-spec-ksj.ts` / **GSI 地名=`build-buzz-map-spec-gsi.ts`（全国地名点は `fetch-gsi-place-names.ts` で R2 `gis/gsi-pni/` に取得済・以後は再取得不要）** / 型E 合成=`merge-buzz-map-specs.ts`。co-agent: X 配信=x-strategist、IG 配信=instagram-strategist、ジオデータ (KSJ 点/線)=gis-curator |
 | `/preview-remotion` | プレビューデータを Remotion Studio に設定。`--type` で対象を選択（ranking / bar-chart-race / comparison / correlation / area-profile / blog）。**プレビュー専用（レンダしない）** |
 
 ## 前提条件

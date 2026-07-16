@@ -25,6 +25,9 @@ import { join } from "node:path";
 const PROJECT_ROOT = join(import.meta.dirname ?? __dirname, "../../..");
 const SPECS_DIR = join(PROJECT_ROOT, "apps/remotion/src/features/buzz-map/specs");
 const DEFAULT_INPUT = join(PROJECT_ROOT, ".local/gsi-pni/points.json");
+// ローカル未取得のセッション (クラウド等) でも量産できるよう R2 公開データにフォールバック
+const PUBLIC_URL = process.env.R2_PUBLIC_FETCH_URL ?? "https://storage.stats47.jp";
+const R2_FALLBACK = `${PUBLIC_URL}/gis/gsi-pni/points.json`;
 
 interface PlacePoint {
   name: string;
@@ -81,8 +84,12 @@ async function loadPoints(input: string): Promise<PointsFile> {
     return (await res.json()) as PointsFile;
   }
   if (!existsSync(input)) {
+    if (input === DEFAULT_INPUT) {
+      console.log(`ローカル points が無いため R2 公開データを使用: ${R2_FALLBACK}`);
+      return loadPoints(R2_FALLBACK);
+    }
     console.error(`✗ points ファイルがありません: ${input}`);
-    console.error("  先に fetch-gsi-place-names.ts で取得してください (--all)");
+    console.error("  先に fetch-gsi-place-names.ts で取得 (--all) するか --input に R2 公開 URL を指定してください");
     process.exit(1);
   }
   return JSON.parse(readFileSync(input, "utf8")) as PointsFile;

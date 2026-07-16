@@ -502,7 +502,8 @@ function buildGsiEntries(prevByKey: Map<string, CatalogEntry>): CatalogEntry[] {
       availability: "api" as const,
       status: prev?.status ?? "candidate",
       themeId: prev?.themeId ?? null,
-      note: prev?.note ?? `${c.note} (pattern: ${c.pattern})・build-buzz-map-spec-gsi.ts --pattern "${c.pattern}" で spec 化`,
+      // note は候補定義から機械導出するため upsert 保持せず常に再生成 (コマンド案内のドリフト防止)
+      note: `${c.note} (pattern: ${c.pattern})・build-buzz-map-spec-gsi.ts --pattern "${c.pattern}" で spec 化`,
     };
   }).sort((a, b) => b.score - a.score);
 }

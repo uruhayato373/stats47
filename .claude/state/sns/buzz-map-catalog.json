@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-16T08:13:37.783Z",
+  "generatedAt": "2026-07-16T10:52:45.128Z",
   "weights": {
     "affinity": 0.35,
     "freshness": 0.25,
@@ -15818,7 +15818,7 @@
       "availability": "api",
       "status": "spec",
       "themeId": "shuku-place-names",
-      "note": "宿場町の名残 (pattern: 宿)・GSI 地名 API 取得 → --geojson で投入"
+      "note": "宿場町の名残 (pattern: 宿)・build-buzz-map-spec-gsi.ts --pattern \"宿\" で spec 化"
     },
     {
       "metricKey": "gsi:onsen",
@@ -15832,7 +15832,7 @@
       "availability": "api",
       "status": "spec",
       "themeId": "onsen-place-names",
-      "note": "温泉地の分布 (pattern: 温泉)・GSI 地名 API 取得 → --geojson で投入"
+      "note": "温泉地の分布 (pattern: 温泉)・build-buzz-map-spec-gsi.ts --pattern \"温泉\" で spec 化"
     },
     {
       "metricKey": "gsi:tani",
@@ -15846,7 +15846,7 @@
       "availability": "api",
       "status": "candidate",
       "themeId": null,
-      "note": "地形由来 (pattern: 谷)・GSI 地名 API 取得 → --geojson で投入"
+      "note": "地形由来 (pattern: 谷)・build-buzz-map-spec-gsi.ts --pattern \"谷\" で spec 化"
     },
     {
       "metricKey": "gsi:sawa",
@@ -15860,7 +15860,7 @@
       "availability": "api",
       "status": "candidate",
       "themeId": null,
-      "note": "地形由来 (pattern: 沢|澤)・GSI 地名 API 取得 → --geojson で投入"
+      "note": "地形由来 (pattern: 沢|澤)・build-buzz-map-spec-gsi.ts --pattern \"沢|澤\" で spec 化"
     },
     {
       "metricKey": "gsi:shinden",
@@ -15874,7 +15874,7 @@
       "availability": "api",
       "status": "candidate",
       "themeId": null,
-      "note": "近世の開発地 (pattern: 新田)・GSI 地名 API 取得 → --geojson で投入"
+      "note": "近世の開発地 (pattern: 新田)・build-buzz-map-spec-gsi.ts --pattern \"新田\" で spec 化"
     },
     {
       "metricKey": "gsi:shima",
@@ -15888,7 +15888,7 @@
       "availability": "api",
       "status": "candidate",
       "themeId": null,
-      "note": "島嶼・旧島名 (pattern: 島)・GSI 地名 API 取得 → --geojson で投入"
+      "note": "島嶼・旧島名 (pattern: 島)・build-buzz-map-spec-gsi.ts --pattern \"島\" で spec 化"
     },
     {
       "metricKey": "gsi:dai",
@@ -15902,7 +15902,7 @@
       "availability": "api",
       "status": "candidate",
       "themeId": null,
-      "note": "造成地・団地 (pattern: 台)・GSI 地名 API 取得 → --geojson で投入"
+      "note": "造成地・団地 (pattern: 台)・build-buzz-map-spec-gsi.ts --pattern \"台\" で spec 化"
     },
     {
       "metricKey": "gsi:number",
@@ -15916,7 +15916,7 @@
       "availability": "api",
       "status": "candidate",
       "themeId": null,
-      "note": "数字地名 (pattern: [0-9一二三四五六七八九十百千])・GSI 地名 API 取得 → --geojson で投入"
+      "note": "数字地名 (pattern: [0-9一二三四五六七八九十百千])・build-buzz-map-spec-gsi.ts --pattern \"[0-9一二三四五六七八九十百千]\" で spec 化"
     },
     {
       "metricKey": "gsi:uma",
@@ -15930,7 +15930,7 @@
       "availability": "api",
       "status": "candidate",
       "themeId": null,
-      "note": "馬産・交通由来 (pattern: 馬)・GSI 地名 API 取得 → --geojson で投入"
+      "note": "馬産・交通由来 (pattern: 馬)・build-buzz-map-spec-gsi.ts --pattern \"馬\" で spec 化"
     },
     {
       "metricKey": "gsi:yato",
@@ -15944,7 +15944,7 @@
       "availability": "api",
       "status": "candidate",
       "themeId": null,
-      "note": "台地の谷地形 (pattern: 谷戸|谷津)・GSI 地名 API 取得 → --geojson で投入"
+      "note": "台地の谷地形 (pattern: 谷戸|谷津)・build-buzz-map-spec-gsi.ts --pattern \"谷戸|谷津\" で spec 化"
     }
   ]
 }
