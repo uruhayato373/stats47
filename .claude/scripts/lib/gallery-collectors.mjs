@@ -31,7 +31,13 @@ export const OGP_TABS = [
   "pref-silhouette",
 ];
 
-/** 県シルエットカードの R2 variant (5比率 × blue/dark)。SSOT: apps/web/scripts/data/pref-silhouette-tokens.ts */
+/**
+ * 県シルエットカードの R2 variant (5比率 × blue/dark)。
+ * SSOT は apps/web/scripts/data/pref-silhouette-tokens.ts の
+ * PREF_CARD_RATIO_KEYS × PREF_CARD_PUSH_THEMES。本ファイルは node 実行 (.mjs) で TS を
+ * import できないため派生を手書きする (buzz-map collector 等と同じ割り切り)。比率/push テーマを
+ * 変えたら両方を更新する (変更頻度は低い)。
+ */
 export const PREF_SILHOUETTE_VARIANTS = [
   "ogp-blue",
   "45-blue",

@@ -13,7 +13,7 @@ model: sonnet
 - 画像プロンプト生成 (`generate-ai-content` の画像系派生)
 - 画像プロンプト catalog の維持 (`.claude/skills/image-prompt/reference/catalog.md`、 43 種)
 - OGP / note 表紙 / SNS 静止素材の用途別プロンプト選定
-- **画像資産の棚卸し・ギャラリー監査 (read-only)** (`/audit-ogp-images`、`.claude/rules/ogp-image-standards.md` の SSOT 維持)。デザイン妥当性の目視評価は `ui-reviewer`、供給是正の実行は種別ごとの既存 agent (blog=blog-editor / ranking=ranking-publisher / note=note-manager) に委譲し、curator は監査と提案に留める
+- **画像資産の棚卸し・ギャラリー監査 (read-only)** (`/audit-ogp-images`、`.claude/rules/ogp-image-standards.md` の SSOT 維持)。デザイン妥当性の目視評価は `ui-reviewer`、供給是正の実行は種別ごとの既存 agent (blog=blog-editor / ranking=ranking-publisher / note=note-manager / areas OGP・県シルエットカード=ranking-ui-manager、生成は generate-ogp-images.ts / CI) に委譲し、curator は監査と提案に留める
 
 ## 担当スキル
 
