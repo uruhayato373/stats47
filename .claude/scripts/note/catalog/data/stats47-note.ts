@@ -282,7 +282,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n0135c75ca76c",
     publishedAt: "2025-12-16",
     r2Path: "note/stats47-note/n0135c75ca76c",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "paid-n02da130aae01",
@@ -296,7 +296,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n02da130aae01",
     publishedAt: "2025-12-17",
     r2Path: "note/stats47-note/n02da130aae01",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "paid-n0642ad7f7fdd",
@@ -310,7 +310,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n0642ad7f7fdd",
     publishedAt: "2025-12-18",
     r2Path: "note/stats47-note/n0642ad7f7fdd",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "paid-n066d8687ef00",
@@ -324,7 +324,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n066d8687ef00",
     publishedAt: "2026-01-15",
     r2Path: "note/stats47-note/n066d8687ef00",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "paid-n2207f3039fd3",
@@ -338,7 +338,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n2207f3039fd3",
     publishedAt: "2026-05-22",
     r2Path: "note/stats47-note/n2207f3039fd3",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "paid-n2406ded99484",
@@ -352,7 +352,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n2406ded99484",
     publishedAt: "2025-12-19",
     r2Path: "note/stats47-note/n2406ded99484",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "paid-n2c2df066e865",
@@ -366,7 +366,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n2c2df066e865",
     publishedAt: "2026-05-22",
     r2Path: "note/stats47-note/n2c2df066e865",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "paid-n2d43e8cd6054",
@@ -380,7 +380,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n2d43e8cd6054",
     publishedAt: "2025-12-16",
     r2Path: "note/stats47-note/n2d43e8cd6054",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "paid-n2ed31d721531",
@@ -394,7 +394,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n2ed31d721531",
     publishedAt: "2026-03-13",
     r2Path: "note/stats47-note/n2ed31d721531",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "paid-n317c673b1e81",
@@ -408,7 +408,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n317c673b1e81",
     publishedAt: "2026-01-13",
     r2Path: "note/stats47-note/n317c673b1e81",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "paid-n44bedb732274",
@@ -422,7 +422,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n44bedb732274",
     publishedAt: "2025-12-18",
     r2Path: "note/stats47-note/n44bedb732274",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "paid-n48a11cea7b31",
@@ -436,7 +436,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n48a11cea7b31",
     publishedAt: "2025-12-10",
     r2Path: "note/stats47-note/n48a11cea7b31",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "paid-n4b8346d9c17b",
@@ -450,7 +450,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n4b8346d9c17b",
     publishedAt: "2025-12-19",
     r2Path: "note/stats47-note/n4b8346d9c17b",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "paid-n66ffb10aa41b",
@@ -464,7 +464,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n66ffb10aa41b",
     publishedAt: "2025-12-17",
     r2Path: "note/stats47-note/n66ffb10aa41b",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "paid-n67de9d45c426",
@@ -478,7 +478,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n67de9d45c426",
     publishedAt: "2026-01-20",
     r2Path: "note/stats47-note/n67de9d45c426",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "paid-n68eafab07946",
@@ -492,7 +492,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n68eafab07946",
     publishedAt: "2026-05-22",
     r2Path: "note/stats47-note/n68eafab07946",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "paid-n7290144784d4",
@@ -506,7 +506,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n7290144784d4",
     publishedAt: "2025-12-17",
     r2Path: "note/stats47-note/n7290144784d4",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "paid-n772ff041af18",
@@ -520,7 +520,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n772ff041af18",
     publishedAt: "2025-12-18",
     r2Path: "note/stats47-note/n772ff041af18",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "paid-n79fefdbd4d4c",
@@ -534,7 +534,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n79fefdbd4d4c",
     publishedAt: "2025-12-17",
     r2Path: "note/stats47-note/n79fefdbd4d4c",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "paid-n823d76c5cbac",
@@ -548,7 +548,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n823d76c5cbac",
     publishedAt: "2025-12-17",
     r2Path: "note/stats47-note/n823d76c5cbac",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "paid-n82a4168eaa19",
@@ -562,7 +562,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n82a4168eaa19",
     publishedAt: "2026-01-14",
     r2Path: "note/stats47-note/n82a4168eaa19",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "paid-n8558c1a6503a",
@@ -576,7 +576,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n8558c1a6503a",
     publishedAt: "2026-05-22",
     r2Path: "note/stats47-note/n8558c1a6503a",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "paid-n925aa92c4ee4",
@@ -590,7 +590,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n925aa92c4ee4",
     publishedAt: "2025-12-16",
     r2Path: "note/stats47-note/n925aa92c4ee4",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "paid-n92b846280d1a",
@@ -604,7 +604,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n92b846280d1a",
     publishedAt: "2026-03-13",
     r2Path: "note/stats47-note/n92b846280d1a",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "paid-na16afa534c77",
@@ -618,7 +618,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/na16afa534c77",
     publishedAt: "2025-12-19",
     r2Path: "note/stats47-note/na16afa534c77",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "paid-na76caacd17c3",
@@ -632,7 +632,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/na76caacd17c3",
     publishedAt: "2025-12-17",
     r2Path: "note/stats47-note/na76caacd17c3",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "paid-naa6eba6efec2",
@@ -646,7 +646,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/naa6eba6efec2",
     publishedAt: "2026-01-14",
     r2Path: "note/stats47-note/naa6eba6efec2",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "paid-naf942acdbe59",
@@ -660,7 +660,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/naf942acdbe59",
     publishedAt: "2026-05-22",
     r2Path: "note/stats47-note/naf942acdbe59",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "paid-nafcc04dcd988",
@@ -674,7 +674,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/nafcc04dcd988",
     publishedAt: "2025-12-16",
     r2Path: "note/stats47-note/nafcc04dcd988",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "paid-nb17d039bc1aa",
@@ -688,7 +688,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/nb17d039bc1aa",
     publishedAt: "2025-12-17",
     r2Path: "note/stats47-note/nb17d039bc1aa",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "paid-nb216c5776aab",
@@ -702,7 +702,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/nb216c5776aab",
     publishedAt: "2025-12-09",
     r2Path: "note/stats47-note/nb216c5776aab",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "paid-nb3c79a94e53a",
@@ -716,7 +716,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/nb3c79a94e53a",
     publishedAt: "2026-01-15",
     r2Path: "note/stats47-note/nb3c79a94e53a",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "paid-nb8f3e05d244b",
@@ -730,7 +730,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/nb8f3e05d244b",
     publishedAt: "2025-12-22",
     r2Path: "note/stats47-note/nb8f3e05d244b",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "paid-nba8bf272cc2b",
@@ -744,7 +744,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/nba8bf272cc2b",
     publishedAt: "2025-12-11",
     r2Path: "note/stats47-note/nba8bf272cc2b",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "paid-nbead1fe772c7",
@@ -758,7 +758,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/nbead1fe772c7",
     publishedAt: "2026-05-22",
     r2Path: "note/stats47-note/nbead1fe772c7",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "paid-ncab0d7b04228",
@@ -772,7 +772,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/ncab0d7b04228",
     publishedAt: "2026-05-22",
     r2Path: "note/stats47-note/ncab0d7b04228",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "paid-ncf695ba6eb35",
@@ -786,7 +786,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/ncf695ba6eb35",
     publishedAt: "2026-01-13",
     r2Path: "note/stats47-note/ncf695ba6eb35",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "paid-nd2fd5adb4bed",
@@ -800,7 +800,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/nd2fd5adb4bed",
     publishedAt: "2026-01-08",
     r2Path: "note/stats47-note/nd2fd5adb4bed",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "paid-nd54b2958dc0e",
@@ -814,7 +814,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/nd54b2958dc0e",
     publishedAt: "2025-12-18",
     r2Path: "note/stats47-note/nd54b2958dc0e",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "paid-nd5edff320928",
@@ -828,7 +828,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/nd5edff320928",
     publishedAt: "2026-01-20",
     r2Path: "note/stats47-note/nd5edff320928",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "paid-nead1c21768b5",
@@ -842,7 +842,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/nead1c21768b5",
     publishedAt: "2026-01-13",
     r2Path: "note/stats47-note/nead1c21768b5",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "paid-neecba2a1752d",
@@ -856,7 +856,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/neecba2a1752d",
     publishedAt: "2025-12-15",
     r2Path: "note/stats47-note/neecba2a1752d",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "paid-nef7e875ba364",
@@ -870,7 +870,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/nef7e875ba364",
     publishedAt: "2025-12-16",
     r2Path: "note/stats47-note/nef7e875ba364",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "paid-nefecfbe76bd2",
@@ -884,7 +884,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/nefecfbe76bd2",
     publishedAt: "2025-12-22",
     r2Path: "note/stats47-note/nefecfbe76bd2",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "paid-nf0c82ce9cee0",
@@ -898,7 +898,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/nf0c82ce9cee0",
     publishedAt: "2026-05-22",
     r2Path: "note/stats47-note/nf0c82ce9cee0",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "paid-nfd3ab8213e1f",
@@ -912,7 +912,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/nfd3ab8213e1f",
     publishedAt: "2026-05-22",
     r2Path: "note/stats47-note/nfd3ab8213e1f",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "paid-nfe2c65e669a8",
@@ -926,7 +926,7 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/nfe2c65e669a8",
     publishedAt: "2025-12-17",
     r2Path: "note/stats47-note/nfe2c65e669a8",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "pinned-intro",

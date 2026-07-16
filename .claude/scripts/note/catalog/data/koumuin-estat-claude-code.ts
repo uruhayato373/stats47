@@ -162,7 +162,7 @@ export const koumuinEstatClaudeCodeArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n143a9f6a0050",
     publishedAt: "2026-06-14",
     r2Path: "note/koumuin-estat-claude-code/n143a9f6a0050",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-n73a4d300e045",

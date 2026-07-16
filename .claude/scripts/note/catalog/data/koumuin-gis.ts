@@ -32,7 +32,7 @@ export const koumuinGisArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/nf80da34b28c3",
     publishedAt: "2025-12-16",
     r2Path: "note/koumuin-gis/nf80da34b28c3",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-na21015ac366d",

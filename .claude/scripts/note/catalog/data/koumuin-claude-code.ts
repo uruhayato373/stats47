@@ -381,7 +381,7 @@ export const koumuinClaudeCodeArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n9f666946d105",
     publishedAt: "2026-05-22",
     r2Path: "note/koumuin-claude-code/n9f666946d105",
-    r2Body: false,
+    r2Body: true,
   },
   {
     key: "recovered-nc18fa33ec65e",

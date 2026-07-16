@@ -1,7 +1,7 @@
 {
   "_meta": {
     "generated_by": "generate-note-catalog.ts",
-    "generated_at": "2026-07-15",
+    "generated_at": "2026-07-16",
     "source": "note-catalog git TS SSOT (.claude/scripts/note/catalog/)",
     "note": "このファイルは派生インデックス。真実源は note-catalog の data/*.ts。手編集しない。"
   },
@@ -407,8 +407,8 @@
       "is_paid": true,
       "published_at": "2025-12-16",
       "r2_path": "note/stats47-note/n0135c75ca76c",
-      "r2_body": false,
-      "status": "note_only",
+      "r2_body": true,
+      "status": "r2_ready",
       "price_jpy": 200
     },
     "paid-n02da130aae01": {
@@ -418,8 +418,8 @@
       "is_paid": true,
       "published_at": "2025-12-17",
       "r2_path": "note/stats47-note/n02da130aae01",
-      "r2_body": false,
-      "status": "note_only",
+      "r2_body": true,
+      "status": "r2_ready",
       "price_jpy": 200
     },
     "paid-n0642ad7f7fdd": {
@@ -429,8 +429,8 @@
       "is_paid": true,
       "published_at": "2025-12-18",
       "r2_path": "note/stats47-note/n0642ad7f7fdd",
-      "r2_body": false,
-      "status": "note_only",
+      "r2_body": true,
+      "status": "r2_ready",
       "price_jpy": 200
     },
     "paid-n066d8687ef00": {
@@ -440,8 +440,8 @@
       "is_paid": true,
       "published_at": "2026-01-15",
       "r2_path": "note/stats47-note/n066d8687ef00",
-      "r2_body": false,
-      "status": "note_only",
+      "r2_body": true,
+      "status": "r2_ready",
       "price_jpy": 200
     },
     "paid-n143a9f6a0050": {
@@ -451,8 +451,8 @@
       "is_paid": true,
       "published_at": "2026-06-14",
       "r2_path": "note/koumuin-estat-claude-code/n143a9f6a0050",
-      "r2_body": false,
-      "status": "note_only",
+      "r2_body": true,
+      "status": "r2_ready",
       "price_jpy": 300
     },
     "paid-n2207f3039fd3": {
@@ -462,8 +462,8 @@
       "is_paid": true,
       "published_at": "2026-05-22",
       "r2_path": "note/stats47-note/n2207f3039fd3",
-      "r2_body": false,
-      "status": "note_only",
+      "r2_body": true,
+      "status": "r2_ready",
       "price_jpy": 300
     },
     "paid-n2406ded99484": {
@@ -473,8 +473,8 @@
       "is_paid": true,
       "published_at": "2025-12-19",
       "r2_path": "note/stats47-note/n2406ded99484",
-      "r2_body": false,
-      "status": "note_only",
+      "r2_body": true,
+      "status": "r2_ready",
       "price_jpy": 200
     },
     "paid-n2c2df066e865": {
@@ -484,8 +484,8 @@
       "is_paid": true,
       "published_at": "2026-05-22",
       "r2_path": "note/stats47-note/n2c2df066e865",
-      "r2_body": false,
-      "status": "note_only",
+      "r2_body": true,
+      "status": "r2_ready",
       "price_jpy": 300
     },
     "paid-n2d43e8cd6054": {
@@ -495,8 +495,8 @@
       "is_paid": true,
       "published_at": "2025-12-16",
       "r2_path": "note/stats47-note/n2d43e8cd6054",
-      "r2_body": false,
-      "status": "note_only",
+      "r2_body": true,
+      "status": "r2_ready",
       "price_jpy": 200
     },
     "paid-n2ed31d721531": {
@@ -506,8 +506,8 @@
       "is_paid": true,
       "published_at": "2026-03-13",
       "r2_path": "note/stats47-note/n2ed31d721531",
-      "r2_body": false,
-      "status": "note_only",
+      "r2_body": true,
+      "status": "r2_ready",
       "price_jpy": 200
     },
     "paid-n317c673b1e81": {
@@ -517,8 +517,8 @@
       "is_paid": true,
       "published_at": "2026-01-13",
       "r2_path": "note/stats47-note/n317c673b1e81",
-      "r2_body": false,
-      "status": "note_only",
+      "r2_body": true,
+      "status": "r2_ready",
       "price_jpy": 200
     },
     "paid-n44bedb732274": {
@@ -528,8 +528,8 @@
       "is_paid": true,
       "published_at": "2025-12-18",
       "r2_path": "note/stats47-note/n44bedb732274",
-      "r2_body": false,
-      "status": "note_only",
+      "r2_body": true,
+      "status": "r2_ready",
       "price_jpy": 200
     },
     "paid-n48a11cea7b31": {
@@ -539,8 +539,8 @@
       "is_paid": true,
       "published_at": "2025-12-10",
       "r2_path": "note/stats47-note/n48a11cea7b31",
-      "r2_body": false,
-      "status": "note_only",
+      "r2_body": true,
+      "status": "r2_ready",
       "price_jpy": 200
     },
     "paid-n4b8346d9c17b": {
@@ -550,8 +550,8 @@
       "is_paid": true,
       "published_at": "2025-12-19",
       "r2_path": "note/stats47-note/n4b8346d9c17b",
-      "r2_body": false,
-      "status": "note_only",
+      "r2_body": true,
+      "status": "r2_ready",
       "price_jpy": 200
     },
     "paid-n66ffb10aa41b": {
@@ -561,8 +561,8 @@
       "is_paid": true,
       "published_at": "2025-12-17",
       "r2_path": "note/stats47-note/n66ffb10aa41b",
-      "r2_body": false,
-      "status": "note_only",
+      "r2_body": true,
+      "status": "r2_ready",
       "price_jpy": 200
     },
     "paid-n67de9d45c426": {
@@ -572,8 +572,8 @@
       "is_paid": true,
       "published_at": "2026-01-20",
       "r2_path": "note/stats47-note/n67de9d45c426",
-      "r2_body": false,
-      "status": "note_only",
+      "r2_body": true,
+      "status": "r2_ready",
       "price_jpy": 200
     },
     "paid-n68eafab07946": {
@@ -583,8 +583,8 @@
       "is_paid": true,
       "published_at": "2026-05-22",
       "r2_path": "note/stats47-note/n68eafab07946",
-      "r2_body": false,
-      "status": "note_only",
+      "r2_body": true,
+      "status": "r2_ready",
       "price_jpy": 300
     },
     "paid-n7290144784d4": {
@@ -594,8 +594,8 @@
       "is_paid": true,
       "published_at": "2025-12-17",
       "r2_path": "note/stats47-note/n7290144784d4",
-      "r2_body": false,
-      "status": "note_only",
+      "r2_body": true,
+      "status": "r2_ready",
       "price_jpy": 200
     },
     "paid-n772ff041af18": {
@@ -605,8 +605,8 @@
       "is_paid": true,
       "published_at": "2025-12-18",
       "r2_path": "note/stats47-note/n772ff041af18",
-      "r2_body": false,
-      "status": "note_only",
+      "r2_body": true,
+      "status": "r2_ready",
       "price_jpy": 200
     },
     "paid-n79fefdbd4d4c": {
@@ -616,8 +616,8 @@
       "is_paid": true,
       "published_at": "2025-12-17",
       "r2_path": "note/stats47-note/n79fefdbd4d4c",
-      "r2_body": false,
-      "status": "note_only",
+      "r2_body": true,
+      "status": "r2_ready",
       "price_jpy": 200
     },
     "paid-n823d76c5cbac": {
@@ -627,8 +627,8 @@
       "is_paid": true,
       "published_at": "2025-12-17",
       "r2_path": "note/stats47-note/n823d76c5cbac",
-      "r2_body": false,
-      "status": "note_only",
+      "r2_body": true,
+      "status": "r2_ready",
       "price_jpy": 200
     },
     "paid-n82a4168eaa19": {
@@ -638,8 +638,8 @@
       "is_paid": true,
       "published_at": "2026-01-14",
       "r2_path": "note/stats47-note/n82a4168eaa19",
-      "r2_body": false,
-      "status": "note_only",
+      "r2_body": true,
+      "status": "r2_ready",
       "price_jpy": 200
     },
     "paid-n8558c1a6503a": {
@@ -649,8 +649,8 @@
       "is_paid": true,
       "published_at": "2026-05-22",
       "r2_path": "note/stats47-note/n8558c1a6503a",
-      "r2_body": false,
-      "status": "note_only",
+      "r2_body": true,
+      "status": "r2_ready",
       "price_jpy": 300
     },
     "paid-n925aa92c4ee4": {
@@ -660,8 +660,8 @@
       "is_paid": true,
       "published_at": "2025-12-16",
       "r2_path": "note/stats47-note/n925aa92c4ee4",
-      "r2_body": false,
-      "status": "note_only",
+      "r2_body": true,
+      "status": "r2_ready",
       "price_jpy": 200
     },
     "paid-n92b846280d1a": {
@@ -671,8 +671,8 @@
       "is_paid": true,
       "published_at": "2026-03-13",
       "r2_path": "note/stats47-note/n92b846280d1a",
-      "r2_body": false,
-      "status": "note_only",
+      "r2_body": true,
+      "status": "r2_ready",
       "price_jpy": 500
     },
     "paid-n9f666946d105": {
@@ -682,8 +682,8 @@
       "is_paid": true,
       "published_at": "2026-05-22",
       "r2_path": "note/koumuin-claude-code/n9f666946d105",
-      "r2_body": false,
-      "status": "note_only",
+      "r2_body": true,
+      "status": "r2_ready",
       "price_jpy": 300
     },
     "paid-na16afa534c77": {
@@ -693,8 +693,8 @@
       "is_paid": true,
       "published_at": "2025-12-19",
       "r2_path": "note/stats47-note/na16afa534c77",
-      "r2_body": false,
-      "status": "note_only",
+      "r2_body": true,
+      "status": "r2_ready",
       "price_jpy": 200
     },
     "paid-na76caacd17c3": {
@@ -704,8 +704,8 @@
       "is_paid": true,
       "published_at": "2025-12-17",
       "r2_path": "note/stats47-note/na76caacd17c3",
-      "r2_body": false,
-      "status": "note_only",
+      "r2_body": true,
+      "status": "r2_ready",
       "price_jpy": 200
     },
     "paid-naa6eba6efec2": {
@@ -715,8 +715,8 @@
       "is_paid": true,
       "published_at": "2026-01-14",
       "r2_path": "note/stats47-note/naa6eba6efec2",
-      "r2_body": false,
-      "status": "note_only",
+      "r2_body": true,
+      "status": "r2_ready",
       "price_jpy": 200
     },
     "paid-naf942acdbe59": {
@@ -726,8 +726,8 @@
       "is_paid": true,
       "published_at": "2026-05-22",
       "r2_path": "note/stats47-note/naf942acdbe59",
-      "r2_body": false,
-      "status": "note_only",
+      "r2_body": true,
+      "status": "r2_ready",
       "price_jpy": 300
     },
     "paid-nafcc04dcd988": {
@@ -737,8 +737,8 @@
       "is_paid": true,
       "published_at": "2025-12-16",
       "r2_path": "note/stats47-note/nafcc04dcd988",
-      "r2_body": false,
-      "status": "note_only",
+      "r2_body": true,
+      "status": "r2_ready",
       "price_jpy": 200
     },
     "paid-nb17d039bc1aa": {
@@ -748,8 +748,8 @@
       "is_paid": true,
       "published_at": "2025-12-17",
       "r2_path": "note/stats47-note/nb17d039bc1aa",
-      "r2_body": false,
-      "status": "note_only",
+      "r2_body": true,
+      "status": "r2_ready",
       "price_jpy": 200
     },
     "paid-nb216c5776aab": {
@@ -759,8 +759,8 @@
       "is_paid": true,
       "published_at": "2025-12-09",
       "r2_path": "note/stats47-note/nb216c5776aab",
-      "r2_body": false,
-      "status": "note_only",
+      "r2_body": true,
+      "status": "r2_ready",
       "price_jpy": 200
     },
     "paid-nb3c79a94e53a": {
@@ -770,8 +770,8 @@
       "is_paid": true,
       "published_at": "2026-01-15",
       "r2_path": "note/stats47-note/nb3c79a94e53a",
-      "r2_body": false,
-      "status": "note_only",
+      "r2_body": true,
+      "status": "r2_ready",
       "price_jpy": 200
     },
     "paid-nb8f3e05d244b": {
@@ -781,8 +781,8 @@
       "is_paid": true,
       "published_at": "2025-12-22",
       "r2_path": "note/stats47-note/nb8f3e05d244b",
-      "r2_body": false,
-      "status": "note_only",
+      "r2_body": true,
+      "status": "r2_ready",
       "price_jpy": 200
     },
     "paid-nba8bf272cc2b": {
@@ -792,8 +792,8 @@
       "is_paid": true,
       "published_at": "2025-12-11",
       "r2_path": "note/stats47-note/nba8bf272cc2b",
-      "r2_body": false,
-      "status": "note_only",
+      "r2_body": true,
+      "status": "r2_ready",
       "price_jpy": 200
     },
     "paid-nbead1fe772c7": {
@@ -803,8 +803,8 @@
       "is_paid": true,
       "published_at": "2026-05-22",
       "r2_path": "note/stats47-note/nbead1fe772c7",
-      "r2_body": false,
-      "status": "note_only",
+      "r2_body": true,
+      "status": "r2_ready",
       "price_jpy": 300
     },
     "paid-ncab0d7b04228": {
@@ -814,8 +814,8 @@
       "is_paid": true,
       "published_at": "2026-05-22",
       "r2_path": "note/stats47-note/ncab0d7b04228",
-      "r2_body": false,
-      "status": "note_only",
+      "r2_body": true,
+      "status": "r2_ready",
       "price_jpy": 300
     },
     "paid-ncf695ba6eb35": {
@@ -825,8 +825,8 @@
       "is_paid": true,
       "published_at": "2026-01-13",
       "r2_path": "note/stats47-note/ncf695ba6eb35",
-      "r2_body": false,
-      "status": "note_only",
+      "r2_body": true,
+      "status": "r2_ready",
       "price_jpy": 200
     },
     "paid-nd2fd5adb4bed": {
@@ -836,8 +836,8 @@
       "is_paid": true,
       "published_at": "2026-01-08",
       "r2_path": "note/stats47-note/nd2fd5adb4bed",
-      "r2_body": false,
-      "status": "note_only",
+      "r2_body": true,
+      "status": "r2_ready",
       "price_jpy": 200
     },
     "paid-nd54b2958dc0e": {
@@ -847,8 +847,8 @@
       "is_paid": true,
       "published_at": "2025-12-18",
       "r2_path": "note/stats47-note/nd54b2958dc0e",
-      "r2_body": false,
-      "status": "note_only",
+      "r2_body": true,
+      "status": "r2_ready",
       "price_jpy": 200
     },
     "paid-nd5edff320928": {
@@ -858,8 +858,8 @@
       "is_paid": true,
       "published_at": "2026-01-20",
       "r2_path": "note/stats47-note/nd5edff320928",
-      "r2_body": false,
-      "status": "note_only",
+      "r2_body": true,
+      "status": "r2_ready",
       "price_jpy": 200
     },
     "paid-nead1c21768b5": {
@@ -869,8 +869,8 @@
       "is_paid": true,
       "published_at": "2026-01-13",
       "r2_path": "note/stats47-note/nead1c21768b5",
-      "r2_body": false,
-      "status": "note_only",
+      "r2_body": true,
+      "status": "r2_ready",
       "price_jpy": 200
     },
     "paid-neecba2a1752d": {
@@ -880,8 +880,8 @@
       "is_paid": true,
       "published_at": "2025-12-15",
       "r2_path": "note/stats47-note/neecba2a1752d",
-      "r2_body": false,
-      "status": "note_only",
+      "r2_body": true,
+      "status": "r2_ready",
       "price_jpy": 200
     },
     "paid-nef7e875ba364": {
@@ -891,8 +891,8 @@
       "is_paid": true,
       "published_at": "2025-12-16",
       "r2_path": "note/stats47-note/nef7e875ba364",
-      "r2_body": false,
-      "status": "note_only",
+      "r2_body": true,
+      "status": "r2_ready",
       "price_jpy": 200
     },
     "paid-nefecfbe76bd2": {
@@ -902,8 +902,8 @@
       "is_paid": true,
       "published_at": "2025-12-22",
       "r2_path": "note/stats47-note/nefecfbe76bd2",
-      "r2_body": false,
-      "status": "note_only",
+      "r2_body": true,
+      "status": "r2_ready",
       "price_jpy": 200
     },
     "paid-nf0c82ce9cee0": {
@@ -913,8 +913,8 @@
       "is_paid": true,
       "published_at": "2026-05-22",
       "r2_path": "note/stats47-note/nf0c82ce9cee0",
-      "r2_body": false,
-      "status": "note_only",
+      "r2_body": true,
+      "status": "r2_ready",
       "price_jpy": 300
     },
     "paid-nf80da34b28c3": {
@@ -924,8 +924,8 @@
       "is_paid": true,
       "published_at": "2025-12-16",
       "r2_path": "note/koumuin-gis/nf80da34b28c3",
-      "r2_body": false,
-      "status": "note_only",
+      "r2_body": true,
+      "status": "r2_ready",
       "price_jpy": 200
     },
     "paid-nfd3ab8213e1f": {
@@ -935,8 +935,8 @@
       "is_paid": true,
       "published_at": "2026-05-22",
       "r2_path": "note/stats47-note/nfd3ab8213e1f",
-      "r2_body": false,
-      "status": "note_only",
+      "r2_body": true,
+      "status": "r2_ready",
       "price_jpy": 300
     },
     "paid-nfe2c65e669a8": {
@@ -946,8 +946,8 @@
       "is_paid": true,
       "published_at": "2025-12-17",
       "r2_path": "note/stats47-note/nfe2c65e669a8",
-      "r2_body": false,
-      "status": "note_only",
+      "r2_body": true,
+      "status": "r2_ready",
       "price_jpy": 200
     },
     "recovered-n023501038bd5": {
