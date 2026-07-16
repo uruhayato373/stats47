@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-16T04:22:32.778Z",
+  "generatedAt": "2026-07-16T04:43:20.604Z",
   "weights": {
     "affinity": 0.35,
     "freshness": 0.25,
@@ -14767,6 +14767,19 @@
       "note": "7 DS・地域限定・GraphQL 取得 → --geojson でヘルパーに投入"
     },
     {
+      "metricKey": "dpf:nvpf",
+      "source": "mlit-dpf",
+      "lane": "mlit-dpf",
+      "title": "歩行空間ナビゲーション",
+      "score": 0.7,
+      "dataId": "nvpf",
+      "renderClass": "line-network",
+      "availability": "api",
+      "status": "candidate",
+      "themeId": null,
+      "note": "1 DS・GraphQL 取得 → --geojson でヘルパーに投入"
+    },
+    {
       "metricKey": "dpf:qol",
       "source": "mlit-dpf",
       "lane": "mlit-dpf",
@@ -14934,19 +14947,6 @@
       "status": "candidate",
       "themeId": null,
       "note": "2 DS・地域限定・GraphQL 取得 → --geojson でヘルパーに投入"
-    },
-    {
-      "metricKey": "dpf:nvpf",
-      "source": "mlit-dpf",
-      "lane": "mlit-dpf",
-      "title": "歩行空間ナビゲーション",
-      "score": null,
-      "dataId": "nvpf",
-      "renderClass": "line",
-      "availability": "api",
-      "status": "candidate",
-      "themeId": null,
-      "note": "1 DS・GraphQL 取得 → --geojson でヘルパーに投入"
     },
     {
       "metricKey": "dpf:mms",

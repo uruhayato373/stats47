@@ -184,7 +184,12 @@ function loadState(): CatalogFile {
       /* fresh */
     }
   }
-  return { generatedAt: null, weights: {}, counts: { muni: 0, pref: 0 }, entries: [] };
+  return {
+    generatedAt: null,
+    weights: {},
+    counts: { muni: 0, pref: 0, ksj: 0, "mlit-dpf": 0 },
+    entries: [],
+  };
 }
 
 function saveState(state: CatalogFile) {
@@ -376,7 +381,7 @@ const DPF_CATALOGS: { id: string; name: string; renderClass: RenderClass; note: 
   { id: "ntrack", name: "航空機騒音監視測定", renderClass: "point-plot", note: "9 DS" },
   { id: "psc", name: "災害緊急撮影 (斜め写真)", renderClass: "unknown", note: "2 DS" },
   { id: "crtc", name: "工事実績情報 (コリンズ)", renderClass: "point-plot", note: "1 DS" },
-  { id: "nvpf", name: "歩行空間ナビゲーション", renderClass: "line", note: "1 DS" },
+  { id: "nvpf", name: "歩行空間ナビゲーション", renderClass: "line-network", note: "1 DS" },
   { id: "mms", name: "MMS三次元点群", renderClass: "mesh", note: "1 DS" },
   { id: "imm", name: "インフラみらいマップ", renderClass: "point-plot", note: "1 DS" },
   { id: "jyubunpc", name: "重要文化財点群", renderClass: "point-plot", note: "1 DS" },
