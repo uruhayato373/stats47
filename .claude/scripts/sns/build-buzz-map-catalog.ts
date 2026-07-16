@@ -56,7 +56,7 @@ const GSC_SNAPSHOTS = join(
   ".claude/skills/analytics/gsc-improvement/reference/snapshots",
 );
 
-type Lane = "muni" | "pref" | "ksj" | "mlit-dpf";
+type Lane = "muni" | "pref" | "ksj" | "mlit-dpf" | "gsi";
 type Status = "candidate" | "spec" | "generated" | "posted" | "rejected";
 /** 型に落とせるか (どのヘルパー/レンダラーで作れるか) */
 type RenderClass =
@@ -75,7 +75,7 @@ type Availability = "r2" | "registered" | "candidate" | "api";
 interface CatalogEntry {
   /** 主キー。estat=metricKey / ksj="ksj:<dataId>" / dpf="dpf:<catalogId>" */
   metricKey: string;
-  source: "estat" | "ksj" | "mlit-dpf";
+  source: "estat" | "ksj" | "mlit-dpf" | "gsi";
   lane: Lane;
   title: string;
   score: number;
@@ -115,7 +115,7 @@ const CAPABILITY: Record<RenderClass, string> = {
 interface CatalogFile {
   generatedAt: string | null;
   weights: Record<string, number>;
-  counts: { muni: number; pref: number; ksj: number; "mlit-dpf": number };
+  counts: { muni: number; pref: number; ksj: number; "mlit-dpf": number; gsi: number };
   entries: CatalogEntry[];
 }
 
@@ -202,7 +202,7 @@ function loadState(): CatalogFile {
   return {
     generatedAt: null,
     weights: {},
-    counts: { muni: 0, pref: 0, ksj: 0, "mlit-dpf": 0 },
+    counts: { muni: 0, pref: 0, ksj: 0, "mlit-dpf": 0, gsi: 0 },
     entries: [],
   };
 }
@@ -466,6 +466,47 @@ function buildDpfEntries(prevByKey: Map<string, CatalogEntry>): CatalogEntry[] {
   }).sort((a, b) => b.score - a.score);
 }
 
+/**
+ * 国土地理院 地名情報 (GSI) レーン (静的キュレーション)。
+ * 地名の漢字パターン → 該当地点を点プロット (型C)。GSI タイル API から取得するため
+ * R2 dataset は未生成 (availability=api)。renderClass は point-plot (型C)。
+ */
+const GSI_CANDIDATES: { slug: string; pattern: string; title: string; note: string }[] = [
+  { slug: "shuku", pattern: "宿", title: "「宿」のつく地名", note: "宿場町の名残" },
+  { slug: "onsen", pattern: "温泉", title: "「温泉」のつく地名", note: "温泉地の分布" },
+  { slug: "tani", pattern: "谷", title: "「谷」のつく地名", note: "地形由来" },
+  { slug: "sawa", pattern: "沢|澤", title: "「沢・澤」のつく地名", note: "地形由来" },
+  { slug: "shinden", pattern: "新田", title: "「新田」のつく地名", note: "近世の開発地" },
+  { slug: "shima", pattern: "島", title: "「島」のつく地名", note: "島嶼・旧島名" },
+  { slug: "dai", pattern: "台", title: "「台」のつく地名 (ニュータウン)", note: "造成地・団地" },
+  { slug: "number", pattern: "[0-9一二三四五六七八九十百千]", title: "数字を含む地名", note: "数字地名" },
+  { slug: "uma", pattern: "馬", title: "「馬」のつく地名", note: "馬産・交通由来" },
+  { slug: "yato", pattern: "谷戸|谷津", title: "「谷戸・谷津」のつく地名", note: "台地の谷地形" },
+];
+
+function buildGsiEntries(prevByKey: Map<string, CatalogEntry>): CatalogEntry[] {
+  const renderClass: RenderClass = "point-plot";
+  return GSI_CANDIDATES.map((c) => {
+    const score = 0.5 * RENDER_PRIORITY[renderClass] + 0.5 * AVAIL_PRIORITY.api;
+    const key = `gsi:${c.slug}`;
+    const prev = prevByKey.get(key);
+    return {
+      metricKey: key,
+      source: "gsi" as const,
+      lane: "gsi" as const,
+      title: c.title,
+      score: Math.round(score * 1000) / 1000,
+      dataId: c.slug,
+      renderClass,
+      capability: CAPABILITY[renderClass],
+      availability: "api" as const,
+      status: prev?.status ?? "candidate",
+      themeId: prev?.themeId ?? null,
+      note: prev?.note ?? `${c.note} (pattern: ${c.pattern})・build-buzz-map-spec-gsi.ts --pattern "${c.pattern}" で spec 化`,
+    };
+  }).sort((a, b) => b.score - a.score);
+}
+
 function rebuild(prefCap: number): CatalogFile {
   const prev = loadState();
   // 既存 status を metricKey で引けるように (upsert 保持)
@@ -537,12 +578,19 @@ function rebuild(prefCap: number): CatalogFile {
 
   const ksj = buildKsjEntries(prevByKey);
   const dpf = buildDpfEntries(prevByKey);
+  const gsi = buildGsiEntries(prevByKey);
 
-  const entries = [...muni, ...pref, ...ksj, ...dpf];
+  const entries = [...muni, ...pref, ...ksj, ...dpf, ...gsi];
   const state: CatalogFile = {
     generatedAt: new Date().toISOString(),
     weights: WEIGHTS,
-    counts: { muni: muni.length, pref: pref.length, ksj: ksj.length, "mlit-dpf": dpf.length },
+    counts: {
+      muni: muni.length,
+      pref: pref.length,
+      ksj: ksj.length,
+      "mlit-dpf": dpf.length,
+      gsi: gsi.length,
+    },
     entries,
   };
   saveState(state);
@@ -552,7 +600,7 @@ function rebuild(prefCap: number): CatalogFile {
 function printTop(state: CatalogFile, lane: Lane, n = 20) {
   const rows = state.entries.filter((e) => e.lane === lane && e.status === "candidate").slice(0, n);
   console.log(`\n=== ${lane} レーン top${n} (status=candidate) ===`);
-  if (lane === "ksj" || lane === "mlit-dpf") {
+  if (lane === "ksj" || lane === "mlit-dpf" || lane === "gsi") {
     console.log("score  renderClass      avail       key / title");
     for (const e of rows) {
       console.log(
@@ -610,13 +658,14 @@ function main() {
   const state = rebuild(opts.prefCap);
   console.log(
     `カタログ再構築: muni ${state.counts.muni} / pref ${state.counts.pref} (上限 ${opts.prefCap}) / ` +
-      `ksj ${state.counts.ksj} / mlit-dpf ${state.counts["mlit-dpf"]}`,
+      `ksj ${state.counts.ksj} / mlit-dpf ${state.counts["mlit-dpf"]} / gsi ${state.counts.gsi}`,
   );
   console.log(`SSOT: ${STATE_PATH}`);
   printTop(state, "muni");
   printTop(state, "pref");
   printTop(state, "ksj");
   printTop(state, "mlit-dpf");
+  printTop(state, "gsi");
 }
 
 main();

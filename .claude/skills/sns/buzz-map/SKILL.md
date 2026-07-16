@@ -111,6 +111,14 @@ npx tsx .claude/scripts/sns/build-buzz-map-spec-ksj.ts --mode line-network \
 # DPF（GraphQL 取得した GeoJSON を投入）
 npx tsx .claude/scripts/sns/build-buzz-map-spec-ksj.ts --geojson /tmp/dpf.geojson --mode point-plot --id <id> ...
 
+# 型C 地名系（国土地理院 地名情報）。全国点データは一度だけ取得して R2 に永続化 → 以後は再取得不要
+npx tsx .claude/scripts/sns/fetch-gsi-place-names.ts --all               # 初回のみ (居住地名+自然地名 z15・約42万タイル)
+#   → .local/gsi-pni/points.json を R2 へ: diff-push-r2.ts --prefix gis/gsi-pni
+npx tsx .claude/scripts/sns/build-buzz-map-spec-gsi.ts --pattern "宿" --id shuku-place-names \
+  --title "「宿」のつく地名はどこか" --accent social \
+  --label-admin "字・町名（行政地名）" --label-nature "自然地名" [--theme dark]
+#   → 居住地名=accent・自然地名=accent2 の 2 色型C。候補は catalog --lane gsi で払い出す
+
 # 型E 掛け合わせ（既存 spec 2 つをマージ: 塗り × 点/線）
 npx tsx .claude/scripts/sns/merge-buzz-map-specs.ts \
   --base <塗りspec> --overlay <点or線spec> --id <id> --title "..." --subtitle "..."

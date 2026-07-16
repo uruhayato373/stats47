@@ -72,9 +72,11 @@
 |---|---|---|
 | pref | `apps/remotion/public/prefecture.topojson`（既存共用） | N03_007 2桁 / N03_001 |
 | muni | `apps/remotion/public/buzz-map/municipalities.topojson` | smartnews-smri/japan-topography s0010（1.5MB・2021-01-01 時点 1,906 自治体=政令市区含む）。再取得URL はファイル履歴と §6 参照 |
+| 地名点（gsi レーン） | R2 `gis/gsi-pni/points.json`（`fetch-gsi-place-names.ts` が生成） | 国土地理院 電子国土基本図（地名情報）ベクトルタイル z15（居住地名=`experimental_nrpt`・admCode あり / 自然地名=`experimental_nnfpt`・峠/山/川 等）。全国点データ `[{name,kana,kind:admin\|nature,featureType,lon,lat,pref}]`。**PDL1.0 準拠・出典明記で商用/SNS 可**（`gsi.go.jp/kikakuchousei/kikakuchousei40182.html`）。取得は一度きり、以後は R2 を読む分析基盤 |
 
 - 本土は固定フレーム（`MAINLAND_BBOX`）に投影。**小笠原・大東諸島等の外れ島は v1 では非描画**（沖縄・先島はインセットに集約。大東諸島はインセットの fit からも除外 = `inInsetDomain`）
 - 市区町村の合併・境界改定でデータ年次と地図年次がずれる場合は topojson の年次を明記して差し替える（gis-curator 相談）
+- **地名点は居住地名に `admCode`（県コード）が入る**ため県別集計が空間 join なしで可能（「◯◯地名が多い県」等のブログ/ランキング素材化）。自然地名は行政コードを持たない（県別集計は空間 join が要る＝将来拡張）
 
 ## 4. テーマカタログ（★企画の台帳）
 
@@ -120,6 +122,7 @@ builder が `renderClass`（KSJ/DPF）または `lane`（e-Stat）から機械�
 | 型C 点プロット（KSJ/DPF point-plot） | C | ✅ 実装済 | 62 |
 | 型D 線ネットワーク静止画（KSJ line-network） | D | ✅ 実装済 | 15 |
 | 型D 線ネットワーク・時系列リール（KSJ line-timeline） | D | ✅ 実装済 | 2 |
+| 型C 点プロット（GSI 地名情報・gsi レーン） | C | ✅ 実装済 | 10 |
 | 型A 面塗り（KSJ polygon-overlay） | A 流用 | 🟡 要 pipeline（R2 未変換） | 34 |
 | 型F メッシュ塗り（KSJ/DPF mesh） | F | 🔴 未実装（標高/将来推計人口/土地利用マップ） | 18 |
 | OD/流動矢印（DPF flow） | — | 🔴 未実装（通勤流動・訪日外国人流動） | 3 |
@@ -141,11 +144,13 @@ builder が `renderClass`（KSJ/DPF）または `lane`（e-Stat）から機械�
 | **通勤流動 OD・訪日外国人流動・幹線旅客純流動** | e-Stat 従業地/通学地集計・DPF ffd/rdpf/lpfs | flow（capability=OD/流動矢印） | 🔴 **データあり・OD 描画未実装**（e-Stat OD は未取得） |
 | 平均年齢マップ | e-Stat 年齢階級別人口（算出可） | 型A（要 metric 化） | 🟡 e-Stat から算出可・metric 未登録 |
 | 人口重心の移動 | （e-Stat メッシュ人口から算出）| — | 🔴 未カバー（重心算出ロジック未実装） |
-| 数字地名・難読地名 | 系統外（OSM/地名辞書） | — | ⚪ e-Stat/KSJ 系統外（対象外） |
+| **地名系（宿のつく地名・数字地名・難読地名）** | **国土地理院 地名情報（gsi レーン）** | 型C | ✅ **実装済**（`build-buzz-map-spec-gsi.ts`。居住地名＋自然地名を 2 色プロット） |
 
 > **拡張の優先順**: 「データあり・未実装」の型F メッシュ（18 件）と OD 流動（3 件）が最大の伸びしろ。
 > 本家がメッシュ標高・OD 流動を主力にしている領域で、stats47 は現状 型A-E のみ。型F・flow の
-> レンダラー追加は計測後の次フェーズ（§6 決定ログに起票してから着手）。地名系は系統外のため非対象。
+> レンダラー追加は計測後の次フェーズ（§6 決定ログに起票してから着手）。
+> **地名系は当初 OSM 系統外＝対象外としていたが、一次ソース＝国土地理院 地名情報（PDL1.0・型C で描画可）と判明し
+> gsi レーンとして解禁済**（2026-07-16・§6 決定ログ）。地名辞書 OSM は不採用（GSI が権威一次ソース）。
 
 <!-- buzz-map:catalog:start -->
 | theme_id | テーマ（固有名） | 型 | level | データ源 | spec | status |
@@ -191,6 +196,11 @@ builder が `renderClass`（KSJ/DPF）または `lane`（e-Stat）から機械�
   [--point-fill accent2] [--line-stroke accent2]`（既存 spec 2 つを型E にマージ。base の塗り＋
   overlay の点/線を 1 枚に。色は塗り=accent・overlay=accent2 で自動分離、凡例に marker 付与、出典マージ）。
   組み合わせネタは combo カタログ `build-buzz-map-combo-catalog.ts --next N --feasible-only` から選ぶ
+- **地名系（型C）は GSI 地名情報レーン**: まず全国点データを一度取得して R2 に永続化
+  （`fetch-gsi-place-names.ts --all` → `.local/gsi-pni/points.json` → `diff-push-r2.ts --prefix gis/gsi-pni`）。
+  以後は spec を `build-buzz-map-spec-gsi.ts --pattern "宿" --id <id> --title "..." --accent social
+  [--label-admin "..." --label-nature "..."] [--theme dark]` で生成（正規表現で地名フィルタ →
+  居住地名＝accent・自然地名＝accent2 の 2 色型C）。候補は `--lane gsi` で払い出す。データ再取得は不要
 - **生成の入口は `/buzz-map` スキル**（`.claude/skills/sns/buzz-map/SKILL.md`）。レンダ実行は sns-renderer の担当領域
 - **改善ループ**: 生成 PNG を Read で目視 → 崩れは **spec 側の修正を優先**。カード CSS/レイアウト
   （`BuzzMapCard.tsx`）や tokens.ts を触る変更は **§6 決定ログ追記とセット**（勝手に型を漂流させない）
@@ -276,3 +286,16 @@ builder が `renderClass`（KSJ/DPF）または `lane`（e-Stat）から機械�
   （lon 122-129.5 / lat 23.5-28.7）で fit・点・線の振り分けから除外（本土 bbox 外の小笠原と同じ v1 非描画）。
   ドメイン外の点/線は inset へ誤投影せず落とす（従来は「本土外=全部 inset」で大東の点が枠外に漂った）。
   muni 塗り・点プロット・916 リール・1:1 の 4 ケースで本土と干渉しないことを目視確認。
+- **2026-07-16 GSI 地名情報レーン（地名系の解禁）**: まちの計量舎の「◯◯のつく地名」系の一次ソースが
+  OSM ではなく**国土地理院 電子国土基本図（地名情報）**（PDL1.0・出典明記で商用/SNS 可）と判明したため、
+  §4 カバレッジ表の「地名系＝系統外・対象外」を撤回し **gsi レーン**として解禁した。実装:
+  (1) `fetch-gsi-place-names.ts` — 実験ベクトルタイル z15（居住地名 `experimental_nrpt`＝admCode あり /
+  自然地名 `experimental_nnfpt`）を、mokuroku 目録が無いため municipalities.topojson の陸域ポリゴンを
+  scanline ラスタライズして「陸タイルだけ」約 42 万を走査（resumable キャッシュ・並列 32・90 tiles/s）。
+  統合点 JSON `[{name,kana,kind:admin|nature,featureType,lon,lat,pref}]` を R2 `gis/gsi-pni/` に永続化
+  （raw ~50MB/gzip 10-20MB・完全DBレスの「一度取得→以後 R2 を読む分析基盤」）。居住地名は admCode で県別集計可。
+  (2) `build-buzz-map-spec-gsi.ts` — 正規表現で地名フィルタ → 居住地名=accent・自然地名=accent2 の 2 色型C spec。
+  (3) レンダラー小改修: `BuzzMapCard.tsx` の点描画を `pt.key`→凡例 row.fill 解決に変更（型C 2区分の色分け対応。
+  単一キー型C＝station-5k-plot は再レンダで非回帰確認済＝挙動不変）。
+  (4) catalog に gsi レーン + 10 候補（宿/温泉/谷/沢/新田/島/台/数字/馬/谷戸）を追加（既存レーン件数不変）。
+  地名辞書 OSM は不採用（GSI が権威一次ソース）。自然地名は行政コード非提供のため県別集計は空間 join が必要（将来拡張）。

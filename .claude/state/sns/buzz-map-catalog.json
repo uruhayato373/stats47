@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-16T05:35:22.435Z",
+  "generatedAt": "2026-07-16T08:13:37.783Z",
   "weights": {
     "affinity": 0.35,
     "freshness": 0.25,
@@ -10,7 +10,8 @@
     "muni": 210,
     "pref": 400,
     "ksj": 127,
-    "mlit-dpf": 31
+    "mlit-dpf": 31,
+    "gsi": 10
   },
   "entries": [
     {
@@ -15804,6 +15805,146 @@
       "status": "candidate",
       "themeId": null,
       "note": "1 DS・GraphQL 取得 → --geojson でヘルパーに投入"
+    },
+    {
+      "metricKey": "gsi:shuku",
+      "source": "gsi",
+      "lane": "gsi",
+      "title": "「宿」のつく地名",
+      "score": 0.775,
+      "dataId": "shuku",
+      "renderClass": "point-plot",
+      "capability": "型C 点プロット (実装済)",
+      "availability": "api",
+      "status": "candidate",
+      "themeId": null,
+      "note": "宿場町の名残 (pattern: 宿)・GSI 地名 API 取得 → --geojson で投入"
+    },
+    {
+      "metricKey": "gsi:onsen",
+      "source": "gsi",
+      "lane": "gsi",
+      "title": "「温泉」のつく地名",
+      "score": 0.775,
+      "dataId": "onsen",
+      "renderClass": "point-plot",
+      "capability": "型C 点プロット (実装済)",
+      "availability": "api",
+      "status": "candidate",
+      "themeId": null,
+      "note": "温泉地の分布 (pattern: 温泉)・GSI 地名 API 取得 → --geojson で投入"
+    },
+    {
+      "metricKey": "gsi:tani",
+      "source": "gsi",
+      "lane": "gsi",
+      "title": "「谷」のつく地名",
+      "score": 0.775,
+      "dataId": "tani",
+      "renderClass": "point-plot",
+      "capability": "型C 点プロット (実装済)",
+      "availability": "api",
+      "status": "candidate",
+      "themeId": null,
+      "note": "地形由来 (pattern: 谷)・GSI 地名 API 取得 → --geojson で投入"
+    },
+    {
+      "metricKey": "gsi:sawa",
+      "source": "gsi",
+      "lane": "gsi",
+      "title": "「沢・澤」のつく地名",
+      "score": 0.775,
+      "dataId": "sawa",
+      "renderClass": "point-plot",
+      "capability": "型C 点プロット (実装済)",
+      "availability": "api",
+      "status": "candidate",
+      "themeId": null,
+      "note": "地形由来 (pattern: 沢|澤)・GSI 地名 API 取得 → --geojson で投入"
+    },
+    {
+      "metricKey": "gsi:shinden",
+      "source": "gsi",
+      "lane": "gsi",
+      "title": "「新田」のつく地名",
+      "score": 0.775,
+      "dataId": "shinden",
+      "renderClass": "point-plot",
+      "capability": "型C 点プロット (実装済)",
+      "availability": "api",
+      "status": "candidate",
+      "themeId": null,
+      "note": "近世の開発地 (pattern: 新田)・GSI 地名 API 取得 → --geojson で投入"
+    },
+    {
+      "metricKey": "gsi:shima",
+      "source": "gsi",
+      "lane": "gsi",
+      "title": "「島」のつく地名",
+      "score": 0.775,
+      "dataId": "shima",
+      "renderClass": "point-plot",
+      "capability": "型C 点プロット (実装済)",
+      "availability": "api",
+      "status": "candidate",
+      "themeId": null,
+      "note": "島嶼・旧島名 (pattern: 島)・GSI 地名 API 取得 → --geojson で投入"
+    },
+    {
+      "metricKey": "gsi:dai",
+      "source": "gsi",
+      "lane": "gsi",
+      "title": "「台」のつく地名 (ニュータウン)",
+      "score": 0.775,
+      "dataId": "dai",
+      "renderClass": "point-plot",
+      "capability": "型C 点プロット (実装済)",
+      "availability": "api",
+      "status": "candidate",
+      "themeId": null,
+      "note": "造成地・団地 (pattern: 台)・GSI 地名 API 取得 → --geojson で投入"
+    },
+    {
+      "metricKey": "gsi:number",
+      "source": "gsi",
+      "lane": "gsi",
+      "title": "数字を含む地名",
+      "score": 0.775,
+      "dataId": "number",
+      "renderClass": "point-plot",
+      "capability": "型C 点プロット (実装済)",
+      "availability": "api",
+      "status": "candidate",
+      "themeId": null,
+      "note": "数字地名 (pattern: [0-9一二三四五六七八九十百千])・GSI 地名 API 取得 → --geojson で投入"
+    },
+    {
+      "metricKey": "gsi:uma",
+      "source": "gsi",
+      "lane": "gsi",
+      "title": "「馬」のつく地名",
+      "score": 0.775,
+      "dataId": "uma",
+      "renderClass": "point-plot",
+      "capability": "型C 点プロット (実装済)",
+      "availability": "api",
+      "status": "candidate",
+      "themeId": null,
+      "note": "馬産・交通由来 (pattern: 馬)・GSI 地名 API 取得 → --geojson で投入"
+    },
+    {
+      "metricKey": "gsi:yato",
+      "source": "gsi",
+      "lane": "gsi",
+      "title": "「谷戸・谷津」のつく地名",
+      "score": 0.775,
+      "dataId": "yato",
+      "renderClass": "point-plot",
+      "capability": "型C 点プロット (実装済)",
+      "availability": "api",
+      "status": "candidate",
+      "themeId": null,
+      "note": "台地の谷地形 (pattern: 谷戸|谷津)・GSI 地名 API 取得 → --geojson で投入"
     }
   ]
 }

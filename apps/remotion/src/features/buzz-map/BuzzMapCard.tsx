@@ -55,6 +55,16 @@ export const BuzzMapCard: React.FC<BuzzMapCardProps> = ({
 
   const titleLines = spec.titleLines?.length ? spec.titleLines : [spec.title];
 
+  // 点の色は key ごとに凡例 row の fill で解決する（型C 2区分＝行政地名/自然地名 等の色分け用）。
+  // key が凡例に無い場合は従来どおり spec.pointFill ?? "accent" の単一色にフォールバック。
+  const pointFillByKey = new Map<string, string>();
+  for (const row of spec.legend.rows ?? []) {
+    if ((row.marker ?? (spec.type === "C" ? "point" : undefined)) === "point" || spec.type === "C") {
+      pointFillByKey.set(row.key, resolveFill(row.fill, spec));
+    }
+  }
+  const fallbackPointFill = resolveFill(spec.pointFill ?? "accent", spec);
+
   return (
     <AbsoluteFill
       style={{
@@ -130,7 +140,7 @@ export const BuzzMapCard: React.FC<BuzzMapCardProps> = ({
             cx={pt.x}
             cy={pt.y}
             r={(spec.pointRadius ?? 4) * s}
-            fill={resolveFill(spec.pointFill ?? "accent", spec)}
+            fill={pointFillByKey.get(pt.key) ?? fallbackPointFill}
             fillOpacity={0.82}
             stroke={C.sea}
             strokeWidth={0.6 * s}
