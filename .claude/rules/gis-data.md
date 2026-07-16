@@ -83,5 +83,6 @@ npx tsc --noEmit -p packages/gis/tsconfig.json
 - seed: `packages/gis/src/mlit-ksj/scripts/{seed-from-registry,seed-ksj-catalog}.ts`
 - pipeline: `packages/gis/src/mlit-ksj/scripts/run-pipeline.ts`
 - スキル: `.claude/skills/db/fetch-mlit-ksj/SKILL.md`
+- SNS バズ地図での消費 (KSJ topojson → 点プロット/点→自治体カード): `.claude/rules/buzz-map-standards.md` §4 `ksj`/`mlit-dpf` レーン
 - モジュール設計・使い方: `packages/gis/src/mlit-ksj/README.md` / 登録一覧の真実源: `datasets.ts`
 - データ層: `docs/01_技術設計/12_完全DBレス設計.md` / `.claude/rules/data-sqlite-ssot.md`

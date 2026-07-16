@@ -1,0 +1,43 @@
+{
+  "spec": {
+    "id": "highway-network-growth",
+    "type": "D",
+    "level": "pref",
+    "title": "高速道路網はこの60年でどう伸びたか",
+    "titleLines": [
+      "高速道路網は",
+      "この60年でどう伸びたか"
+    ],
+    "subtitle": "1962年の名神高速から、開通年ごとに伸びる全国網。",
+    "source": [
+      "出典: 国土交通省 各種GISデータを加工して作成",
+      "1962-2020 / 全国",
+      "stats47.jp"
+    ],
+    "accent": "infra",
+    "lineYearProp": "N06_002",
+    "years": {
+      "from": 1962,
+      "to": 2020
+    },
+    "holdSeconds": 2,
+    "summary": {
+      "max": false,
+      "min": false
+    },
+    "legend": {
+      "title": "区分（総延長）",
+      "rows": [
+        {
+          "key": "hit",
+          "label": "高速道路 総延長km",
+          "fill": "accent",
+          "count": 14805
+        }
+      ]
+    },
+    "data": {
+      "linesAsset": "buzz-map/assets/highway-network-growth.topojson"
+    }
+  }
+}

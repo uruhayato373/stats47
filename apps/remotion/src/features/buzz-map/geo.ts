@@ -22,6 +22,19 @@ export interface BuzzMapPathInfo {
   d: string;
 }
 
+/** 型C: 投影済みの描画点（キャンバス座標 + 凡例 rowKey） */
+export interface BuzzMapProjectedPoint {
+  x: number;
+  y: number;
+  key: string;
+}
+
+/** 型D: 投影済みの線（SVG path d + 年。年は line-timeline のフィルタ用） */
+export interface BuzzMapProjectedLine {
+  d: string;
+  year: number | null;
+}
+
 export interface BuzzMapGeo {
   width: number;
   height: number;
@@ -31,6 +44,10 @@ export interface BuzzMapGeo {
   inset: BuzzMapPathInfo[] | null;
   /** インセット枠の描画位置（キャンバス座標） */
   insetBox: { x: number; y: number; width: number; height: number } | null;
+  /** 型C: 投影済み点（本土・沖縄インセット両方を含む） */
+  points: BuzzMapProjectedPoint[] | null;
+  /** 型D: 投影済み線（本土・沖縄インセット両方を含む） */
+  lines: BuzzMapProjectedLine[] | null;
 }
 
 interface Box {
@@ -41,10 +58,10 @@ interface Box {
 }
 
 /** 比率×型ごとの地図フィット領域・インセット枠（キャンバス比率で定義） */
-export function buzzMapLayout(ratio: BuzzMapRatio, type: "A" | "B") {
+export function buzzMapLayout(ratio: BuzzMapRatio, type: "A" | "B" | "C" | "D" | "E") {
   const { width: W, height: H } = BUZZ_MAP_RATIOS[ratio];
-  // 型B は右に年カウンター用の海域を空ける
-  const padRight = type === "B" ? 0.22 : 0.06;
+  // 型B/D は右に年カウンター用の海域を空ける（時系列リールの年表示）
+  const padRight = type === "B" || type === "D" ? 0.22 : 0.06;
 
   if (ratio === "169") {
     // 本土トリム: 左 62% に地図、右はタイトル外の余白と凡例
@@ -67,11 +84,14 @@ export function buzzMapLayout(ratio: BuzzMapRatio, type: "A" | "B") {
       x1: (1 - padRight) * W,
       y1: (1 - botPad) * H,
     } as Box,
+    // 沖縄インセットは本土が空ける左上の海域いっぱいに大きく取る
+    // （2026-07-16 拡大: 30%×15% → 46%×32%。本家の地名プロット系レイアウト=左上海域を使い切る構成を参考。
+    //   ラベルは枠内バッジ (BuzzMapCard)。大東諸島は fit から除外して弧を目一杯フィット）
     insetBox: {
       x: 0.05 * W,
-      y: (topPad + 0.06) * H,
-      width: 0.3 * W,
-      height: ratio === "916" ? 0.11 * H : 0.15 * H,
+      y: (topPad + 0.03) * H,
+      width: 0.46 * W,
+      height: ratio === "916" ? 0.2 * H : 0.32 * H,
     },
   };
 }
@@ -102,6 +122,15 @@ function nameOf(f: Feature): string {
 
 function isOkinawa(code: string): boolean {
   return code === "47" || code.startsWith("47");
+}
+
+/**
+ * 沖縄インセットの描画ドメイン（先島諸島〜沖縄本島の弧）。
+ * 大東諸島（東に ~300km 離れた飛び地）を含めると fit が横に間延びして島が極小になるため
+ * v1 では非描画（本土 bbox 外の小笠原と同じ扱い。正典: buzz-map-standards §3）
+ */
+function inInsetDomain(lon: number, lat: number): boolean {
+  return lon >= 122 && lon <= 129.5 && lat >= 23.5 && lat <= 28.7;
 }
 
 /** 本土 bbox 内に重心があるか（小笠原・大東諸島等を落とす） */
@@ -164,7 +193,16 @@ function fitAndRender(
 export function computeBuzzMapGeo(
   topology: Topology,
   prefTopology: Topology | null,
-  opts: { level: string; ratio: BuzzMapRatio; type: "A" | "B" }
+  opts: {
+    level: string;
+    ratio: BuzzMapRatio;
+    type: "A" | "B" | "C" | "D" | "E";
+    /** 型C: 凡例 rowKey → [lon, lat][] */
+    points?: Record<string, [number, number][]>;
+    /** 型D: 線フィーチャ（LineString/MultiLineString）と年属性名 */
+    lineFeatures?: Feature[];
+    lineYearProp?: string;
+  }
 ): BuzzMapGeo {
   const { level, ratio, type } = opts;
   const { W, H, region, insetBox } = buzzMapLayout(ratio, type);
@@ -183,11 +221,17 @@ export function computeBuzzMapGeo(
       prefBorders: null,
       inset: null,
       insetBox: null,
+      points: null,
+      lines: null,
     };
   }
 
   const mainFeatures = features.filter((f) => !isOkinawa(codeOf(f)) && inMainland(f));
-  const okinawaFeatures = features.filter((f) => isOkinawa(codeOf(f)));
+  const okinawaFeatures = features.filter((f) => {
+    if (!isOkinawa(codeOf(f))) return false;
+    const [lon, lat] = geoCentroid(f);
+    return inInsetDomain(lon, lat);
+  });
 
   const frame = bboxPolygon();
   const mainland = fitAndRender(mainFeatures, frame, region);
@@ -216,6 +260,75 @@ export function computeBuzzMapGeo(
     });
   }
 
+  // 型C 点 / 型D 線は本土・沖縄インセットの 2 投影を共用する
+  let points: BuzzMapProjectedPoint[] | null = null;
+  let lines: BuzzMapProjectedLine[] | null = null;
+  if (opts.points || opts.lineFeatures) {
+    const mainProj = geoMercator().fitExtent(
+      [
+        [region.x0, region.y0],
+        [region.x1, region.y1],
+      ],
+      frame
+    );
+    let insetProj: ReturnType<typeof geoMercator> | null = null;
+    if (insetBox && okinawaFeatures.length > 0) {
+      const okiFc: FeatureCollection = {
+        type: "FeatureCollection",
+        features: okinawaFeatures,
+      };
+      insetProj = geoMercator().fitExtent(
+        [
+          [insetBox.x + 12, insetBox.y + 12],
+          [insetBox.x + insetBox.width - 12, insetBox.y + insetBox.height - 12],
+        ],
+        okiFc
+      );
+    }
+    const inMainland2 = (lon: number, lat: number) =>
+      lon >= MAINLAND_BBOX.west &&
+      lon <= MAINLAND_BBOX.east &&
+      lat >= MAINLAND_BBOX.south &&
+      lat <= MAINLAND_BBOX.north;
+
+    // 型C: 点を振り分け投影（本土 bbox → main / インセットドメイン → inset / どちらでもない
+    // 飛び地=大東・小笠原等は非描画。inset が無い比率=16:9 は本土投影で枠外に流す）
+    if (opts.points) {
+      points = [];
+      for (const [key, coords] of Object.entries(opts.points)) {
+        for (const [lon, lat] of coords) {
+          let proj: ReturnType<typeof geoMercator> | null = null;
+          if (inMainland2(lon, lat)) proj = mainProj;
+          else if (inInsetDomain(lon, lat)) proj = insetProj ?? mainProj;
+          if (!proj) continue;
+          const xy = proj([lon, lat]);
+          if (xy && Number.isFinite(xy[0]) && Number.isFinite(xy[1])) {
+            points.push({ x: xy[0], y: xy[1], key });
+          }
+        }
+      }
+    }
+
+    // 型D: 線を centroid で振り分け、geoPath で d を生成（振り分けは点と同じ 3 区分）
+    if (opts.lineFeatures) {
+      const mainPath = geoPath(mainProj);
+      const insetPath = insetProj ? geoPath(insetProj) : null;
+      lines = [];
+      for (const f of opts.lineFeatures) {
+        const c = geoCentroid(f);
+        if (!c) continue;
+        let pathGen: ReturnType<typeof geoPath> | null = null;
+        if (inMainland2(c[0], c[1])) pathGen = mainPath;
+        else if (inInsetDomain(c[0], c[1])) pathGen = insetPath ?? mainPath;
+        if (!pathGen) continue;
+        const d = pathGen(f);
+        if (!d) continue;
+        const raw = opts.lineYearProp ? Number(f.properties?.[opts.lineYearProp]) : NaN;
+        lines.push({ d, year: Number.isFinite(raw) ? raw : null });
+      }
+    }
+  }
+
   return {
     width: W,
     height: H,
@@ -223,5 +336,7 @@ export function computeBuzzMapGeo(
     prefBorders,
     inset,
     insetBox: inset ? insetBox : null,
+    points,
+    lines,
   };
 }

@@ -184,6 +184,7 @@ category → template の割付は §2-8 相性表。post-x-batch の select-can
 
 - **X 投稿のデータ画像（ランキング・比較・BCR）** → sns-renderer の Remotion レンダリング
 - **X バナー・プロフィール固定画像・ブランド素材** → `/image-prompt` スキル（`--use-case x-banner` で 3:1 自動適用）
+- **バズ地図カード（日本地図×統計）** → sns-renderer の `/buzz-map` が生成（型・仕様の SSOT は `.claude/rules/buzz-map-standards.md`）。本エージェントは co-owner として X 配信を担うが、**buzz-map を X 画像カタログ (§2-9 image_kind) に載せる改訂は §2-10 の人間承認ゲート経由**（未実施。現状 buzz-map は IG draft 在庫のみ）
 - **stats47 サイトの OGP** → 本エージェントは触らない（blog-editor / seo-auditor の領分）
 
 テンプレ一覧は `.claude/skills/image-prompt/reference/catalog.md`。Remotion 製 OGP / 動画素材の手順は `apps/remotion/src/features/ogp/README.md` を参照。

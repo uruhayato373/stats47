@@ -2,7 +2,7 @@
  * buzz-map 純粋ロジック（時間→年の変換・値補間・ランプ配色）
  */
 
-import { BUZZ_MAP_RAMP, BUZZ_MAP_REEL_DEFAULTS } from "./tokens";
+import { BUZZ_MAP_REEL_DEFAULTS, buzzMapRamp, type BuzzMapTheme } from "./tokens";
 import type { BuzzMapSpec, BuzzMapSpeedSegment } from "./types";
 
 /** speed 未指定時の既定（全区間 2年/秒） */
@@ -73,15 +73,17 @@ export function valueAtYear(
   return series[String(lo)];
 }
 
-/** 連続量 → ランプ7段の離散色（domain 外はクランプ） */
-export function rampColor(value: number, domain: [number, number]): string {
+/** 連続量 → ランプ7段の離散色（domain 外はクランプ）。theme 未指定は blue */
+export function rampColor(
+  value: number,
+  domain: [number, number],
+  theme?: BuzzMapTheme
+): string {
+  const ramp = buzzMapRamp(theme);
   const [min, max] = domain;
   const r = max > min ? (value - min) / (max - min) : 0;
-  const i = Math.max(
-    0,
-    Math.min(BUZZ_MAP_RAMP.length - 1, Math.floor(r * BUZZ_MAP_RAMP.length))
-  );
-  return BUZZ_MAP_RAMP[i];
+  const i = Math.max(0, Math.min(ramp.length - 1, Math.floor(r * ramp.length)));
+  return ramp[i];
 }
 
 /** 型A: 凡例 rows の count 未指定分を data.values から自動集計した rows を返す */

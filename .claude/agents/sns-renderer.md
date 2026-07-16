@@ -22,12 +22,13 @@ Remotion を使った SNS 用動画・静止画のレンダリングとプレビ
 |---|---|
 | `/render-sns-stills` | SNS 用静止画・動画を Remotion で生成（静止画/動画一般の正典入口） |
 | `/bar-chart-race --step render` | BCR 動画を一括レンダリング（YouTube/Instagram）。BCR の正典入口 |
-| `/buzz-map` | 日本地図×統計のバズカード（型A=静止画 / 型B=時系列アニメ）を spec 駆動で生成→目視→改善。buzz-map ドメインの正典入口。規約: `.claude/rules/buzz-map-standards.md`。co-agent: 投稿=x-strategist、ジオデータ=gis-curator |
+| `/buzz-map` | 日本地図×統計のバズカードを spec 駆動で生成→目視→改善。buzz-map ドメインの正典入口。**型 (A〜E) の一覧・仕様は再列挙せず `.claude/rules/buzz-map-standards.md` §1 を SSOT とする**（型A二値/型B時系列/型C点/型D線ネットワーク/型E合成）。データ源=5 レーン（e-Stat muni/pref、KSJ、DPF、**GSI 地名情報**）。spec ヘルパー: e-Stat=`build-buzz-map-spec.ts` / KSJ・DPF=`build-buzz-map-spec-ksj.ts` / **GSI 地名=`build-buzz-map-spec-gsi.ts`（全国地名点は `fetch-gsi-place-names.ts` で R2 `gis/gsi-pni/` に取得済・以後は再取得不要）** / 型E 合成=`merge-buzz-map-specs.ts`。co-agent: X 配信=x-strategist、IG 配信=instagram-strategist、ジオデータ (KSJ 点/線)=gis-curator |
 | `/preview-remotion` | プレビューデータを Remotion Studio に設定。`--type` で対象を選択（ranking / bar-chart-race / comparison / correlation / area-profile / blog）。**プレビュー専用（レンダしない）** |
 
 ## 前提条件
 
 - Chrome がインストールされていること（Remotion の Puppeteer 依存）
+  - **リモート実行環境の注意**: 新 chromium (`/opt/pw-browsers/chromium-1194/chrome-linux/chrome`) は旧 headless モードを廃止し起動失敗する。`--browser-executable=/opt/pw-browsers/chromium_headless_shell-1194/chrome-linux/headless_shell` を渡す（"Old Headless mode has been removed" が出たらこれ）
 - `apps/remotion/` の Remotion プロジェクトがビルド可能であること
 - props JSON（sns-producer が生成）が `.local/r2/sns/` に存在すること
 
@@ -40,6 +41,7 @@ Remotion を使った SNS 用動画・静止画のレンダリングとプレビ
 ## 出力先
 
 - `.local/r2/sns/ranking/<rankingKey>/{youtube-short/,tiktok/,instagram/,x/}` — レンダリング済みメディア
+- buzz-map: `.local/r2/sns/buzz-map/<id>/instagram/{stills/slide-1-cover-1080x1350.png,reel.mp4,caption.txt}`（IG は R2 公開 URL 前提。`BuzzMap-Still-45`=4:5 静止画 / `BuzzMap-Reel-916`=9:16 リール）→ `diff-push-r2 --prefix sns/buzz-map` → posts.json draft 登録。X は従来どおり `x/stills/`
 
 ## OGP・画像生成の役割分担
 
