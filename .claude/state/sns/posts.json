@@ -1,8 +1,8 @@
 {
   "_meta": {
     "description": "SNS 投稿台帳 (完全DBレス doc12 Phase E)。SQLite から移行。書込専用運用ログ。store: .claude/scripts/lib/sns-posts-store.cjs",
-    "count": 518,
-    "nextId": 704
+    "count": 519,
+    "nextId": 705
   },
   "posts": [
     {
@@ -13285,6 +13285,19 @@
       "media_path": "sns/buzz-map/no-station-muni/instagram/stills/slide-1-cover-1080x1350.png",
       "has_link": 0,
       "template": "buzzmap-A"
+    },
+    {
+      "id": 704,
+      "status": "draft",
+      "created_at": "2026-07-16T10:58:49.316Z",
+      "updated_at": "2026-07-16T10:58:49.316Z",
+      "platform": "instagram",
+      "post_type": "image",
+      "domain": "buzz-map",
+      "content_key": "onsen-place-names",
+      "caption": "【日本地図で見る】「温泉」のつく地名はどこか♨️\n\n全国の地名から「温泉」を含むものを地図にプロットしました。\n\n📍 自然地名（温泉地）: 607箇所\n📍 字・町名（行政地名）: 338箇所\n\n意外なのは、住所になっている「温泉」より、山あいの温泉地名のほうが圧倒的に多いこと。北海道・東北・中部の火山帯に沿ってびっしり並ぶ一方、関東平野や近畿の平野部にはほとんどありません。\n\nあなたの県の「温泉」地名、いくつ見つけられますか？\n\n保存して温泉旅の参考にしてね📌\nプロフィールのリンクから47都道府県の統計が見られます\n\n出典: 国土地理院 電子国土基本図（地名情報）を加工して作成\n\n#温泉 #温泉旅行 #地図 #日本地図 #地名 #雑学 #地理 #都道府県 #統計 #温泉巡り #旅行好きな人と繋がりたい\n",
+      "media_path": "sns/buzz-map/onsen-place-names/instagram/stills/slide-1-cover-1080x1350.png",
+      "template": "buzzmap-c"
     }
   ],
   "nextId": 580,

@@ -15830,7 +15830,7 @@
       "renderClass": "point-plot",
       "capability": "型C 点プロット (実装済)",
       "availability": "api",
-      "status": "spec",
+      "status": "generated",
       "themeId": "onsen-place-names",
       "note": "温泉地の分布 (pattern: 温泉)・build-buzz-map-spec-gsi.ts --pattern \"温泉\" で spec 化"
     },
