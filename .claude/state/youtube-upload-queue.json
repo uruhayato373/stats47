@@ -386,7 +386,8 @@
     "metric_keys": [
       "beef-consumption-quantity"
     ],
-    "status": "pending"
+    "status": "uploaded",
+    "uploaded_at": "2026-07-16T10:24:17Z"
   },
   {
     "key": "chicken-consumption-quantity",
@@ -400,7 +401,8 @@
     "metric_keys": [
       "chicken-consumption-quantity"
     ],
-    "status": "pending"
+    "status": "uploaded",
+    "uploaded_at": "2026-07-16T10:24:42Z"
   },
   {
     "key": "white-bread-consumption-quantity",
@@ -414,7 +416,8 @@
     "metric_keys": [
       "white-bread-consumption-quantity"
     ],
-    "status": "pending"
+    "status": "uploaded",
+    "uploaded_at": "2026-07-16T10:25:07Z"
   },
   {
     "key": "train-fare-consumption-expenditure",
@@ -428,7 +431,8 @@
     "metric_keys": [
       "train-fare-consumption-expenditure"
     ],
-    "status": "pending"
+    "status": "uploaded",
+    "uploaded_at": "2026-07-16T10:25:31Z"
   },
   {
     "key": "vet-fee-consumption-expenditure",
@@ -442,6 +446,7 @@
     "metric_keys": [
       "vet-fee-consumption-expenditure"
     ],
-    "status": "pending"
+    "status": "uploaded",
+    "uploaded_at": "2026-07-16T10:25:57Z"
   }
 ]
