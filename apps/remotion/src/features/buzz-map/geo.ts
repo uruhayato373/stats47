@@ -84,11 +84,12 @@ export function buzzMapLayout(ratio: BuzzMapRatio, type: "A" | "B" | "C" | "D" |
       x1: (1 - padRight) * W,
       y1: (1 - botPad) * H,
     } as Box,
+    // 沖縄インセットは視認性優先でやや大きめ（2026-07-16 拡大: 幅30%→38%・高さ15%→20%）
     insetBox: {
       x: 0.05 * W,
-      y: (topPad + 0.06) * H,
-      width: 0.3 * W,
-      height: ratio === "916" ? 0.11 * H : 0.15 * H,
+      y: (topPad + 0.05) * H,
+      width: 0.38 * W,
+      height: ratio === "916" ? 0.14 * H : 0.2 * H,
     },
   };
 }

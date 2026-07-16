@@ -4,7 +4,7 @@ import { useCurrentFrame, useVideoConfig } from "remotion";
 import { BuzzMapCard } from "./BuzzMapCard";
 import { buildSummary } from "./BuzzMapStill";
 import { animSeconds, rampColor, valueAtYear, yearAtSeconds } from "./lib";
-import { BUZZ_MAP_COLORS, type BuzzMapRatio } from "./tokens";
+import { buzzMapColors, type BuzzMapRatio } from "./tokens";
 import type { BuzzMapSpec } from "./types";
 import { useBuzzMapFonts } from "./useBuzzMapFonts";
 import { useBuzzMapGeo } from "./useBuzzMapGeo";
@@ -35,9 +35,9 @@ export const BuzzMapReel: React.FC<BuzzMapReelProps> = ({ spec, ratio }) => {
   const domain = spec.ramp?.domain ?? [0, 1];
   // 型D は白地図（線は Card 内で year フィルタ描画）。型B は連続量ランプ塗り
   const fillFor = (code: string) => {
-    if (spec.type === "D") return BUZZ_MAP_COLORS.land;
+    if (spec.type === "D") return buzzMapColors(spec.theme).land;
     const v = series[code] ? valueAtYear(series[code], t) : undefined;
-    return v === undefined ? BUZZ_MAP_COLORS.land : rampColor(v, domain);
+    return v === undefined ? buzzMapColors(spec.theme).land : rampColor(v, domain, spec.theme);
   };
 
   return (

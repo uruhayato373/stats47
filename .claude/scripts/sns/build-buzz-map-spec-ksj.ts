@@ -86,6 +86,7 @@ function parseArgs() {
     subtitle: val("--subtitle"),
     titleLines: val("--title-lines"),
     accent: (val("--accent") ?? "infra") as "social" | "infra",
+    theme: val("--theme") as "blue" | "dark" | "paper" | null,
     labelHit: val("--label-hit") ?? "該当",
     labelMiss: val("--label-miss") ?? "非該当",
     dataYear: val("--data-year"),
@@ -273,6 +274,7 @@ async function main() {
       subtitle: opts.subtitle ?? "",
       source,
       accent: opts.accent,
+      ...(opts.theme ? { theme: opts.theme } : {}),
       ...(opts.lineWidth ? { lineWidth: opts.lineWidth } : {}),
       ...(opts.yearProp ? { lineYearProp: opts.yearProp } : {}),
       ...(years ? { years, holdSeconds: 2, summary: { max: false, min: false } } : {}),
@@ -318,6 +320,7 @@ async function main() {
       subtitle: opts.subtitle ?? "",
       source,
       accent: opts.accent,
+      ...(opts.theme ? { theme: opts.theme } : {}),
       ...(opts.pointRadius ? { pointRadius: opts.pointRadius } : {}),
       legend: {
         title: "区分（件数）",
@@ -357,6 +360,7 @@ async function main() {
       subtitle: opts.subtitle ?? "",
       source,
       accent: opts.accent,
+      ...(opts.theme ? { theme: opts.theme } : {}),
       legend: {
         title: "区分（自治体数）",
         rows: [

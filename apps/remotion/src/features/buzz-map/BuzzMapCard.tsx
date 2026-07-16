@@ -3,9 +3,9 @@ import { AbsoluteFill } from "remotion";
 
 import type { BuzzMapGeo } from "./geo";
 import {
-  BUZZ_MAP_COLORS,
   BUZZ_MAP_FONT,
-  BUZZ_MAP_RAMP,
+  buzzMapColors,
+  buzzMapRamp,
   type BuzzMapRatio,
 } from "./tokens";
 import type { BuzzMapSpec } from "./types";
@@ -30,8 +30,6 @@ interface BuzzMapCardProps {
   year?: number;
 }
 
-const C = BUZZ_MAP_COLORS;
-
 /**
  * バズ地図カードの共通レイアウト
  *
@@ -48,6 +46,7 @@ export const BuzzMapCard: React.FC<BuzzMapCardProps> = ({
   summary,
   year,
 }) => {
+  const C = buzzMapColors(spec.theme);
   const { width: W, height: H } = geo;
   // 1080 基準のフォントスケール
   const s = Math.min(W, H) / 1080;
@@ -311,7 +310,7 @@ export const BuzzMapCard: React.FC<BuzzMapCardProps> = ({
                   height: (shape === "line" ? 7 : 22) * s,
                   borderRadius: shape === "point" ? "50%" : (shape === "line" ? 3 : 6) * s,
                   flex: "none",
-                  border: `1px solid rgba(13,54,107,.18)`,
+                  border: `1px solid ${C.legendBorder}`,
                   backgroundColor: resolveFill(row.fill, spec),
                 }}
               />
@@ -336,8 +335,8 @@ export const BuzzMapCard: React.FC<BuzzMapCardProps> = ({
               style={{
                 height: 18 * s,
                 borderRadius: 9 * s,
-                border: `1px solid rgba(13,54,107,.18)`,
-                background: `linear-gradient(90deg, ${BUZZ_MAP_RAMP.join(",")})`,
+                border: `1px solid ${C.legendBorder}`,
+                background: `linear-gradient(90deg, ${buzzMapRamp(spec.theme).join(",")})`,
                 marginBottom: 6 * s,
               }}
             />
@@ -379,8 +378,9 @@ export const BuzzMapCard: React.FC<BuzzMapCardProps> = ({
   );
 };
 
-/** 凡例・データの fill トークン（accent / accent2 / land / 生hex）を解決する */
+/** 凡例・データの fill トークン（accent / accent2 / land / 生hex）を spec.theme のパレットで解決する */
 export function resolveFill(token: string, spec: BuzzMapSpec): string {
+  const C = buzzMapColors(spec.theme);
   if (token === "accent") {
     return spec.accent === "infra" ? C.accentInfra : C.accentSocial;
   }

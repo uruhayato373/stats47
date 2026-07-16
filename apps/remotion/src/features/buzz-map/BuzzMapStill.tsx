@@ -2,7 +2,7 @@ import React from "react";
 
 import { BuzzMapCard, resolveFill, type BuzzMapSummaryEntry } from "./BuzzMapCard";
 import { legendRowsWithCounts, rampColor, valueAtYear } from "./lib";
-import { BUZZ_MAP_COLORS, type BuzzMapRatio } from "./tokens";
+import { buzzMapColors, type BuzzMapRatio } from "./tokens";
 import type { BuzzMapSpec } from "./types";
 import { useBuzzMapFonts } from "./useBuzzMapFonts";
 import { useBuzzMapGeo } from "./useBuzzMapGeo";
@@ -35,7 +35,7 @@ export const BuzzMapStill: React.FC<BuzzMapStillProps> = ({
     const values = spec.data.values ?? {};
     const fillFor = (code: string) => {
       const key = values[code];
-      return (key && fillByKey.get(key)) || BUZZ_MAP_COLORS.land;
+      return (key && fillByKey.get(key)) || buzzMapColors(spec.theme).land;
     };
     const specWithCounts: BuzzMapSpec = {
       ...spec,
@@ -47,7 +47,7 @@ export const BuzzMapStill: React.FC<BuzzMapStillProps> = ({
   // 型C（点）/ 型D（線）: 白地図ベース。geo.points / geo.lines は Card 内で描画。
   // 型D は year 指定でその年以下の線のみ（未指定=全網図）。年カウンターは静止画では出さない。
   if (spec.type === "C" || spec.type === "D") {
-    const fillFor = () => BUZZ_MAP_COLORS.land;
+    const fillFor = () => buzzMapColors(spec.theme).land;
     return (
       <BuzzMapCard
         spec={spec}
@@ -67,7 +67,7 @@ export const BuzzMapStill: React.FC<BuzzMapStillProps> = ({
     const values = spec.data.values ?? {};
     const fillFor = (code: string) => {
       const key = values[code];
-      return (key && fillByKey.get(key)) || BUZZ_MAP_COLORS.land;
+      return (key && fillByKey.get(key)) || buzzMapColors(spec.theme).land;
     };
     const specWithCounts: BuzzMapSpec = {
       ...spec,
@@ -90,7 +90,7 @@ export const BuzzMapStill: React.FC<BuzzMapStillProps> = ({
   const domain = spec.ramp?.domain ?? [0, 1];
   const fillFor = (code: string) => {
     const v = series[code] ? valueAtYear(series[code], t) : undefined;
-    return v === undefined ? BUZZ_MAP_COLORS.land : rampColor(v, domain);
+    return v === undefined ? buzzMapColors(spec.theme).land : rampColor(v, domain, spec.theme);
   };
 
   let summary: BuzzMapSummaryEntry[] | undefined;

@@ -30,11 +30,16 @@
    コントラスト 2.98:1 のための必須要件）。型B はブルー単色ランプ＋目盛
 5. **ブランド行（左下）**: `stats47.jp 統計で見る都道府県`（全カード共通・固定位置）
 
-### 配色規則
+### 配色規則（3テーマ制・2026-07-16〜）
 
-- 海色はシリーズの「顔」＝**不変**。強調色は **social（人口・社会系）/ infra（インフラ・経済系）の2択固定**で
-  シリーズ認知を作る。連続量は**ブルー単色ランプ（虹色禁止）**、増減の分岐が要る場合は blue↔red＋中立グレー（未実装・要決定ログ）
-- 配色は dataviz 検証器で検証済み（social×infra: CVD ΔE 13.4）。**トークン変更時は再検証**する
+- **カード全体の配色は 3 テーマから選ぶ**（`spec.theme`・既定 `blue`。パレットの機械正本は `tokens.ts` の `BUZZ_MAP_THEMES`）:
+  - `blue` … 淡青の海＋白い陸（初期ルック・既定）
+  - `dark` … ダークネイビー「夜の日本」。ネオンピンク/シアン強調。IG フィードでの停止力・本家（淡色系）との差別化に最適
+  - `paper` … 生成り紙アトラス。朱×深緑のヴィンテージ地図帳
+- **テーマ内の色は固定**（テーマ＝シリーズの顔）。テーマの追加・パレット変更は tokens.ts 編集 + §6 決定ログとセット
+- 強調色は **social（人口・社会系）/ infra（インフラ・経済系）の2択固定**でシリーズ認知を作る（実色はテーマごと）。
+  連続量は**テーマごとの単色ランプ（`BUZZ_MAP_RAMPS`・虹色禁止）**、増減の分岐が要る場合は blue↔red＋中立グレー（未実装・要決定ログ）
+- blue は dataviz 検証器で検証済み（social×infra: CVD ΔE 13.4）。**トークン変更時・dark/paper を投稿主力にする前に再検証**する
 
 ### アスペクト比
 
@@ -58,6 +63,7 @@
 - 置き場: `apps/remotion/src/features/buzz-map/specs/<id>.json`（**`{"spec": {...}}` の形で保存** ＝ そのまま `--props` に渡せる）
 - コード体系: 都道府県=2桁（"01"〜"47"）/ 市区町村=N03_007 5桁
 - `level`: `pref` / `muni`（全国市区町村）/ `muni:NN`（県トリム）。muni は県境オーバーレイが自動で乗る
+- `theme`: `blue`（既定・省略可）/ `dark` / `paper`（§1 配色規則）。ヘルパーは `--theme` で指定可
 - **ダミーデータのカードは `title` に【サンプル】、出典に「実データではありません」を必ず明記**（sample-anim が例）
 
 ## 3. ジオデータ
@@ -255,3 +261,12 @@ builder が `renderClass`（KSJ/DPF）または `lane`（e-Stat）から機械�
   ため `chromium_headless_shell-1194/chrome-linux/headless_shell` を `--browser-executable` に使う。
   出典は metric config SSOT に合わせ社会・人口統計体系と明記 (特定調査名の過剰主張を回避)。
   既知の未解決: リールの R2 content-type が `application/octet-stream` (投稿時に video/mp4 化が要るか要確認)。
+- **2026-07-16 3テーマ制 + 沖縄インセット拡大**: 「本家 (@machi_measure) の淡色ルックに似すぎ」という
+  オーナー指摘を受け、旧「海色不変」を撤回し **3 テーマ制** (`spec.theme`: `blue`=初期ルック既定 /
+  `dark`=夜の日本・ネオン強調 / `paper`=生成り紙アトラス・朱×深緑) に変更。パレット+単色ランプは
+  `tokens.ts` の `BUZZ_MAP_THEMES`/`BUZZ_MAP_RAMPS` (旧 `BUZZ_MAP_COLORS`/`BUZZ_MAP_RAMP` は blue への
+  deprecated alias)。Card/Still/Reel/lib を `buzzMapColors(spec.theme)` 経由に統一し、凡例スウォッチ枠の
+  ハードコード rgba も legendBorder へ寄せた。spec 生成ヘルパー 3 本に `--theme` を追加 (merge は
+  `--theme > base > overlay` の順で継承)。**沖縄インセットを拡大** (幅 30%→38%・高さ 15%→20%、916 は
+  11%→14%・全テーマ共通)。blue の非回帰は同一 spec の再レンダで目視確認 (差分は沖縄拡大と凡例枠色
+  .18→.14 の不可視差のみ)。dark/paper を投稿主力にする場合は dataviz 再検証を先に行う (§1)。

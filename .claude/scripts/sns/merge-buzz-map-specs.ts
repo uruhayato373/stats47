@@ -47,6 +47,7 @@ interface BuzzSpec {
   subtitle: string;
   source: string[];
   accent?: string;
+  theme?: string;
   legend: { title: string; rows?: LegendRow[] };
   data: {
     values?: Record<string, string>;
@@ -82,6 +83,7 @@ function parseArgs() {
     subtitle: val("--subtitle"),
     pointFill: val("--point-fill") ?? "accent2",
     lineStroke: val("--line-stroke") ?? "accent2",
+    theme: val("--theme"),
   };
 }
 
@@ -142,6 +144,9 @@ function main() {
     subtitle: opts.subtitle ?? "",
     source: srcLines,
     accent: base?.accent ?? overlay.accent ?? "social",
+    ...(opts.theme ?? base?.theme ?? overlay.theme
+      ? { theme: (opts.theme ?? base?.theme ?? overlay.theme) as BuzzSpec["theme"] }
+      : {}),
     ...(hasPoints ? { pointFill: opts.pointFill } : {}),
     ...(hasLines ? { lineStroke: opts.lineStroke } : {}),
     ...(overlay.pointRadius ? { pointRadius: overlay.pointRadius } : {}),

@@ -88,10 +88,10 @@ curl -s -o /dev/null -w "%{http_code}\n" https://storage.stats47.jp/sns/buzz-map
 ### spec 自動生成（step 1 のデータ接地）
 
 ```bash
-# 型A（e-Stat 観測値 → 二値化）
+# 型A（e-Stat 観測値 → 二値化）。--theme blue|dark|paper で配色テーマ選択（省略=blue。§1 配色規則）
 npx tsx .claude/scripts/sns/build-buzz-map-spec.ts --metric <key> --id <id> \
   --level muni|pref --mode threshold --op gte --value N --title "..." --accent social|infra \
-  --label-hit "..." --label-miss "..."
+  [--theme dark] --label-hit "..." --label-miss "..."
 
 # 型C 点プロット（KSJ topojson → 属性フィルタ → 代表点）
 npx tsx .claude/scripts/sns/build-buzz-map-spec-ksj.ts --data-id S12 --version 24 \
@@ -115,6 +115,7 @@ npx tsx .claude/scripts/sns/build-buzz-map-spec-ksj.ts --geojson /tmp/dpf.geojso
 npx tsx .claude/scripts/sns/merge-buzz-map-specs.ts \
   --base <塗りspec> --overlay <点or線spec> --id <id> --title "..." --subtitle "..."
 #   → 塗り=accent・overlay=accent2 で色分離。組み合わせネタは combo カタログの候補から選ぶ
+#   ※ --theme は 3 ヘルパー共通（merge は --theme > base > overlay の順で継承）
 ```
 
 ## 目視チェックリスト（step 3）

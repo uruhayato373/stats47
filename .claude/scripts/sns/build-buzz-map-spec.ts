@@ -63,6 +63,7 @@ function parseArgs() {
     subtitle: val("--subtitle"),
     titleLines: val("--title-lines"),
     accent: (val("--accent") ?? "infra") as "social" | "infra",
+    theme: val("--theme") as "blue" | "dark" | "paper" | null,
     labelHit: val("--label-hit") ?? "該当",
     labelMiss: val("--label-miss") ?? "非該当",
   };
@@ -202,6 +203,7 @@ function main() {
       subtitle: opts.subtitle ?? config.subtitle ?? "",
       source,
       accent: opts.accent,
+      ...(opts.theme ? { theme: opts.theme } : {}),
       legend: {
         title: "区分（自治体数）",
         rows: [

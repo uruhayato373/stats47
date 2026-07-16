@@ -45,8 +45,14 @@ export interface BuzzMapSpec {
   subtitle: string;
   /** 出典行（複数行）。最終行はサイトドメイン */
   source: string[];
-  /** 強調色テーマ: social=#d55181（人口・社会系） / infra=#2a78d6（インフラ・経済系） */
+  /** 強調色テーマ: social（人口・社会系） / infra（インフラ・経済系）。実色は theme のパレットで決まる */
   accent?: "social" | "infra";
+  /**
+   * カード全体の配色テーマ（シリーズの顔）。既定 blue。
+   * blue=淡青の海＋白い陸 / dark=夜の日本（ネオン強調） / paper=生成り紙アトラス。
+   * パレットの機械正本は tokens.ts の BUZZ_MAP_THEMES。
+   */
+  theme?: "blue" | "dark" | "paper";
   legend: {
     title: string;
     /** 型A: 区分行。型B: 省略（ランプ凡例を自動描画） */
