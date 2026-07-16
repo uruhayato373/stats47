@@ -18,6 +18,7 @@
 | **型B** | 時系列アニメ・連続量マップ | `BuzzMap-Reel-{11,916}`（静止画化は `BuzzMap-Still-*` に `year`/`showSummary` props） | 長期トレンドの実感系（例: さくら開花日の50年）。30〜60秒 |
 | **型C** | 静止画・点プロット（白地図＋accent 点） | `BuzzMap-Still-{45,11,169,916}`（`data.points`＝凡例 rowKey → `[lon,lat][]`。`spec.pointRadius` 任意） | 「◯◯をプロット」系（例: 乗降5千人以上の駅、ダム、道の駅）。点は本土＋沖縄インセットに自動振り分け投影 |
 | **型D** | 線ネットワーク（白地図＋accent 線）。静止画＋時系列リール | `BuzzMap-Still-*`（静止画・全網図 or `year` prop で特定年）／ `BuzzMap-Reel-{11,916}`（`lineYearProp`＋`years` で供用開始年ごとに伸びる時系列） | 「◯◯網はどう伸びたか」系（例: 高速道路網 N06、鉄道網 N02）。`data.linesAsset`＝staticFile パス（topojson/GeoJSON）。線は本土/沖縄インセットに centroid で自動振り分け。`spec.lineWidth` 任意 |
+| **型E** | レイヤー合成（塗り＋点＋線を1枚に重ねる・静止画） | `BuzzMap-Still-{45,11,169,916}`（`data.values`＋`data.points`＋`data.linesAsset` の任意組。`pointFill`/`lineStroke` で塗りと色分離、凡例 row の `marker`＝fill/point/line） | 「◯◯（塗り）×△△（点/線）」の掛け合わせ系（例: 転入超過×高速道路網、過疎×医療機関）。e-Stat 塗り × 国土数値情報 点/線 のクロスが主戦場。合成は `merge-buzz-map-specs.ts` で既存 spec 2 つをマージ |
 
 ### 共通レイアウト（全カード固定・5要素）
 
@@ -92,6 +93,14 @@ status: `案` → `spec作成` → `生成済` → `投稿済`（投稿記録の
 > builder の `--mark-*` で更新し、台帳表にも 1 行足す。型A spec は `build-buzz-map-spec.ts`（e-Stat）、
 > 型C/点→自治体 spec は `build-buzz-map-spec-ksj.ts`（KSJ/DPF）で自動生成する。
 
+> **組み合わせ（掛け合わせ・型E）は別カタログ** `.claude/state/sns/buzz-map-combo-catalog.json`
+> （builder `build-buzz-map-combo-catalog.ts`）。単品カタログのエントリを部品 (`parts`) に参照し、
+> 「ベース塗り × オーバーレイ（点/線）」を 2 層で列挙する: **signature combos**（物語つき定番・
+> `story` 必須・~8 本）＋ **機械候補**（e-Stat塗り×KSJ線 / e-Stat塗り×KSJ点 / KSJ指定地域×KSJ点 を
+> パターン別に ≤120 件 cap）。`feasibility`（now=全 parts 即マージ可 / needs-pipeline=KSJ塗りが要変換）。
+> `--next N [--feasible-only]` で払い出し。合成 spec は `merge-buzz-map-specs.ts` が既存 spec 2 つを
+> 型E にマージ（塗り=accent・overlay=accent2 で色分離、凡例に marker 自動付与、出典マージ）。
+
 <!-- buzz-map:catalog:start -->
 | theme_id | テーマ（固有名） | 型 | level | データ源 | spec | status |
 |---|---|---|---|---|---|---|
@@ -101,6 +110,7 @@ status: `案` → `spec作成` → `生成済` → `投稿済`（投稿記録の
 | migration-inflow-muni | 人が集まっている市区町村はどこか | A | muni | e-Stat 転入超過率 `moving-in-excess-rate`（2020） | specs/migration-inflow-muni.json | 生成済（カタログ実証・未投稿） |
 | station-5k-plot | 1日5千人以上が乗り降りする駅はどこか | C | pref | 国土数値情報 S12 駅別乗降客数（令和4年度・2,858駅） | specs/station-5k-plot.json | 生成済（型C 実証・未投稿） |
 | highway-network-growth | 高速道路網はこの60年でどう伸びたか | D | pref | 国土数値情報 N06 高速道路時系列（供用開始年 N06_002・1962-2020・14,805km） | specs/highway-network-growth.json | 生成済（型D 実証・静止画＋時系列リール・未投稿） |
+| migration-x-highway | 高速道路が通っても人は集まるのか | E | muni | e-Stat 転入超過率（塗り）× 国土数値情報 N06 高速道路網（線） | specs/migration-x-highway.json | 生成済（型E 合成実証・未投稿） |
 | sakura-bloom-50y | さくら開花日の50年 | B | pref | 気象庁 生物季節観測（issue [#538](https://github.com/uruhayato373/stats47/issues/538)） | — | 案（第1弾候補。交通インフラ系は本家と被るため回避） |
 | female-majority-muni | 女性が男性より多い市区町村 | A | muni | 国勢調査（e-Stat） | — | 案（まちの計量舎の令和2年版に対し最新調査で差別化） |
 <!-- buzz-map:catalog:end -->
@@ -126,6 +136,11 @@ status: `案` → `spec作成` → `生成済` → `投稿済`（投稿記録の
   に配置 → `--year-prop` から `years{from,to}` を自動導出＋総延長 km を geoLength で集計し凡例に焼き込み）。
   `--year-prop` があれば時系列リール可（静止画は最新年の全網図、`year` prop で特定年）。`--r2-key`（任意キー）と
   `--data-id/--version`（gis/mlit-ksj 規約パス）の両対応。線 asset は git commit（spec は座標を焼かず参照）
+- **型E 合成（掛け合わせ）は `merge-buzz-map-specs.ts`**:
+  `--base <塗りspec id> --overlay <点/線spec id> --id <id> --title "..." [--subtitle "..."]
+  [--point-fill accent2] [--line-stroke accent2]`（既存 spec 2 つを型E にマージ。base の塗り＋
+  overlay の点/線を 1 枚に。色は塗り=accent・overlay=accent2 で自動分離、凡例に marker 付与、出典マージ）。
+  組み合わせネタは combo カタログ `build-buzz-map-combo-catalog.ts --next N --feasible-only` から選ぶ
 - **生成の入口は `/buzz-map` スキル**（`.claude/skills/sns/buzz-map/SKILL.md`）。レンダ実行は sns-renderer の担当領域
 - **改善ループ**: 生成 PNG を Read で目視 → 崩れは **spec 側の修正を優先**。カード CSS/レイアウト
   （`BuzzMapCard.tsx`）や tokens.ts を触る変更は **§6 決定ログ追記とセット**（勝手に型を漂流させない）
@@ -167,3 +182,12 @@ status: `案` → `spec作成` → `生成済` → `投稿済`（投稿記録の
   格上げ。実証 = `highway-network-growth`（N06 高速道路・1962-2020・14,805km、静止画＋リール、1970年=東名/名神のみ
   →2020年=全国網を年フィルタで確認）。N06 は highway-history 派生の R2 asset を `--r2-key` で読む（gis/mlit-ksj
   規約パスには未変換）。鉄道網 N02 の全国 1 枚化は素材 14MB の間引きが要るため次ステップ
+- **2026-07-16 型E レイヤー合成 + 組み合わせカタログ**: 「掛け合わせ地図」(e-Stat 塗り × 国土数値情報
+  点/線) に対応するため **型E**（塗り data.values ＋ 点 data.points ＋ 線 data.linesAsset を 1 枚に重ねる。
+  `pointFill`/`lineStroke` で色分離、凡例 row `marker`＝fill/point/line）を `types.ts`/`useBuzzMapGeo.ts`
+  （データ在れば読込）/`BuzzMapStill.tsx`（型E 分岐）/`BuzzMapCard.tsx`（点/線の色分離・凡例マーカー行単位）
+  に追加（型A/B/C/D 非回帰確認済）。合成は既存 spec 2 つをマージする `merge-buzz-map-specs.ts` で行う
+  （新規データを組まず検証済み spec を部品再利用）。**組み合わせは別カタログ**
+  `build-buzz-map-combo-catalog.ts` → `buzz-map-combo-catalog.json`（signature 8 + 機械候補 120 = 128 件、
+  即マージ可 124 件、単品カタログを parts 参照・status upsert）。実証 = `migration-x-highway`（転入超過の
+  塗り × 高速道路網の線）。KSJ 指定地域塗り（過疎 A17 等）を使う combo は feasibility=needs-pipeline で記録

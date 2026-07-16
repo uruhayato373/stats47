@@ -58,7 +58,7 @@ interface Box {
 }
 
 /** 比率×型ごとの地図フィット領域・インセット枠（キャンバス比率で定義） */
-export function buzzMapLayout(ratio: BuzzMapRatio, type: "A" | "B" | "C" | "D") {
+export function buzzMapLayout(ratio: BuzzMapRatio, type: "A" | "B" | "C" | "D" | "E") {
   const { width: W, height: H } = BUZZ_MAP_RATIOS[ratio];
   // 型B/D は右に年カウンター用の海域を空ける（時系列リールの年表示）
   const padRight = type === "B" || type === "D" ? 0.22 : 0.06;
@@ -184,7 +184,7 @@ export function computeBuzzMapGeo(
   opts: {
     level: string;
     ratio: BuzzMapRatio;
-    type: "A" | "B" | "C" | "D";
+    type: "A" | "B" | "C" | "D" | "E";
     /** 型C: 凡例 rowKey → [lon, lat][] */
     points?: Record<string, [number, number][]>;
     /** 型D: 線フィーチャ（LineString/MultiLineString）と年属性名 */

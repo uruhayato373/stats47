@@ -22,7 +22,7 @@ co_agents: [x-strategist, gis-curator]
 
 | step | 内容 | 出力 |
 |---|---|---|
-| 1. spec | **候補カタログ `build-buzz-map-catalog.ts --next N --lane muni\|pref\|ksj\|mlit-dpf`** から選ぶ（真実源 = `.claude/state/sns/buzz-map-catalog.json`・4 レーン）。型A(e-Stat)=`build-buzz-map-spec.ts`、型C 点プロット/点→自治体(KSJ・DPF)=`build-buzz-map-spec-ksj.ts` で自動生成、型B/新規はカタログ§4 を見て手作成 | `specs/<id>.json` |
+| 1. spec | **候補カタログ `build-buzz-map-catalog.ts --next N --lane muni\|pref\|ksj\|mlit-dpf`**（単品・真実源 = `buzz-map-catalog.json`・4 レーン）または **`build-buzz-map-combo-catalog.ts --next N --feasible-only`**（掛け合わせ・型E）から選ぶ。型A(e-Stat)=`build-buzz-map-spec.ts`、型C/D(KSJ)=`build-buzz-map-spec-ksj.ts`、型E 合成=`merge-buzz-map-specs.ts` で生成 | `specs/<id>.json` |
 | 2. still | 静止画レンダ（型Bも先に最終年静止画で構図確認） | `.local/r2/sns/buzz-map/<id>/x/stills/` |
 | 3. 目視 | 生成 PNG を Read で開きチェックリスト判定（下記） | — |
 | 4. 改善 | 崩れは spec 修正を優先して再レンダ。カードCSS/tokens の変更は standards §6 決定ログとセット | — |
@@ -80,6 +80,11 @@ npx tsx .claude/scripts/sns/build-buzz-map-spec-ksj.ts --mode line-network \
 
 # DPF（GraphQL 取得した GeoJSON を投入）
 npx tsx .claude/scripts/sns/build-buzz-map-spec-ksj.ts --geojson /tmp/dpf.geojson --mode point-plot --id <id> ...
+
+# 型E 掛け合わせ（既存 spec 2 つをマージ: 塗り × 点/線）
+npx tsx .claude/scripts/sns/merge-buzz-map-specs.ts \
+  --base <塗りspec> --overlay <点or線spec> --id <id> --title "..." --subtitle "..."
+#   → 塗り=accent・overlay=accent2 で色分離。組み合わせネタは combo カタログの候補から選ぶ
 ```
 
 ## 目視チェックリスト（step 3）

@@ -36,9 +36,9 @@ export function useBuzzMapGeo(spec: BuzzMapSpec, ratio: BuzzMapRatio): BuzzMapGe
           ).json()) as Topology;
         }
 
-        // 型D: 線 asset (topojson or GeoJSON) を Feature[] に展開
+        // 型D/E: 線 asset (topojson or GeoJSON) を Feature[] に展開
         let lineFeatures: Feature[] | undefined;
-        if (spec.type === "D" && spec.data.linesAsset) {
+        if ((spec.type === "D" || spec.type === "E") && spec.data.linesAsset) {
           const raw = (await (await fetch(staticFile(spec.data.linesAsset))).json()) as
             | Topology
             | { type: "FeatureCollection"; features: Feature[] };
@@ -56,7 +56,8 @@ export function useBuzzMapGeo(spec: BuzzMapSpec, ratio: BuzzMapRatio): BuzzMapGe
             level: spec.level,
             ratio,
             type: spec.type,
-            points: spec.type === "C" ? spec.data.points : undefined,
+            // 型C/E は点、型D/E は線を読む
+            points: spec.type === "C" || spec.type === "E" ? spec.data.points : undefined,
             lineFeatures,
             lineYearProp: spec.lineYearProp,
           })

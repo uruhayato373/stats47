@@ -123,20 +123,20 @@ export const BuzzMapCard: React.FC<BuzzMapCardProps> = ({
             strokeLinejoin="round"
           />
         ))}
-        {/* 型C: 点プロット（白地図の上に accent 色の点） */}
+        {/* 型C/E: 点プロット（白地図の上に点）。型E は pointFill で塗りと色を分ける */}
         {geo.points?.map((pt, i) => (
           <circle
             key={`p-${i}`}
             cx={pt.x}
             cy={pt.y}
             r={(spec.pointRadius ?? 4) * s}
-            fill={resolveFill("accent", spec)}
+            fill={resolveFill(spec.pointFill ?? "accent", spec)}
             fillOpacity={0.82}
             stroke={C.sea}
             strokeWidth={0.6 * s}
           />
         ))}
-        {/* 型D: 線ネットワーク（白地図の上に accent 色の線）。year 指定時はその年以下のみ */}
+        {/* 型D/E: 線ネットワーク。year 指定時はその年以下のみ。型E は lineStroke で塗りと色を分ける */}
         {geo.lines
           ?.filter((ln) => year === undefined || ln.year === null || ln.year <= year)
           .map((ln, i) => (
@@ -144,7 +144,7 @@ export const BuzzMapCard: React.FC<BuzzMapCardProps> = ({
               key={`l-${i}`}
               d={ln.d}
               fill="none"
-              stroke={resolveFill("accent", spec)}
+              stroke={resolveFill(spec.lineStroke ?? "accent", spec)}
               strokeWidth={(spec.lineWidth ?? 2) * s}
               strokeLinejoin="round"
               strokeLinecap="round"
@@ -288,8 +288,12 @@ export const BuzzMapCard: React.FC<BuzzMapCardProps> = ({
           {spec.type === "B" && spec.ramp ? spec.ramp.legendTitle : spec.legend.title}
         </div>
 
-        {(spec.type === "A" || spec.type === "C" || spec.type === "D") &&
-          spec.legend.rows?.map((row) => (
+        {(spec.type === "A" || spec.type === "C" || spec.type === "D" || spec.type === "E") &&
+          spec.legend.rows?.map((row) => {
+            // マーカー形状: row.marker 明示 > spec.type から導出（A/E=四角, C=円, D=バー）
+            const shape =
+              row.marker ?? (spec.type === "C" ? "point" : spec.type === "D" ? "line" : "fill");
+            return (
             <div
               key={row.key}
               style={{
@@ -303,9 +307,9 @@ export const BuzzMapCard: React.FC<BuzzMapCardProps> = ({
               <span
                 style={{
                   width: 22 * s,
-                  // 型C=点(円) / 型D=線(横バー) / 型A=区分(四角)
-                  height: (spec.type === "D" ? 7 : 22) * s,
-                  borderRadius: spec.type === "C" ? "50%" : (spec.type === "D" ? 3 : 6) * s,
+                  // point=円 / line=横バー / fill=四角
+                  height: (shape === "line" ? 7 : 22) * s,
+                  borderRadius: shape === "point" ? "50%" : (shape === "line" ? 3 : 6) * s,
                   flex: "none",
                   border: `1px solid rgba(13,54,107,.18)`,
                   backgroundColor: resolveFill(row.fill, spec),
@@ -323,7 +327,8 @@ export const BuzzMapCard: React.FC<BuzzMapCardProps> = ({
                 {row.count}
               </span>
             </div>
-          ))}
+            );
+          })}
 
         {spec.type === "B" && spec.ramp && (
           <>

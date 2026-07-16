@@ -14,6 +14,11 @@ export interface BuzzMapLegendRow {
   fill: string;
   /** 件数（色だけに頼らないための必須ラベル。省略時は data から自動集計） */
   count?: number;
+  /**
+   * 凡例マーカーの形状（型E 合成カードで塗り/点/線が混在するとき行単位で指定）。
+   * 省略時は spec.type から従来どおり導出（A/E=四角, C=円, D=バー）。
+   */
+  marker?: "fill" | "point" | "line";
 }
 
 export interface BuzzMapSpeedSegment {
@@ -28,9 +33,10 @@ export interface BuzzMapSpec {
   id: string;
   /**
    * A=静止画二値/少区分, B=時系列アニメ（塗り）, C=点プロット（白地図＋accent 点）,
-   * D=線ネットワーク（白地図＋accent 線。years+lineYearProp 併用で時系列リール可）
+   * D=線ネットワーク（白地図＋accent 線。years+lineYearProp 併用で時系列リール可）,
+   * E=レイヤー合成（塗り data.values ＋ 点 data.points ＋ 線 data.linesAsset の任意組・静止画）
    */
-  type: "A" | "B" | "C" | "D";
+  type: "A" | "B" | "C" | "D" | "E";
   /** "pref" | "muni" | "muni:NN"（NN=都道府県コード2桁で県トリム） */
   level: string;
   title: string;
@@ -61,12 +67,16 @@ export interface BuzzMapSpec {
     /** code → 表示名（型Bサマリーの最大・最小ラベル用。省略時はコードを表示） */
     names?: Record<string, string>;
   };
-  /** 型C のみ。点の半径（@1080 基準 px。省略時 4） */
+  /** 型C/E のみ。点の半径（@1080 基準 px。省略時 4） */
   pointRadius?: number;
   /** 型D のみ。線フィーチャの「年」属性名（例 N06_002）。指定時は years と併せ時系列リール可 */
   lineYearProp?: string;
-  /** 型D のみ。線の太さ（@1080 基準 px。省略時 2） */
+  /** 型D/E のみ。線の太さ（@1080 基準 px。省略時 2） */
   lineWidth?: number;
+  /** 型E のみ。点レイヤーの色トークン（"accent"|"accent2"|生hex。省略時 accent）。塗りと色を分ける */
+  pointFill?: string;
+  /** 型E のみ。線レイヤーの色トークン（同上）。塗り=accent と分けるため既定は overlay 側で accent2 推奨 */
+  lineStroke?: string;
   /** 型Bのみ */
   years?: { from: number; to: number };
   /** 型Bのみ。省略時は全区間 2年/秒 */

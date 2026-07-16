@@ -59,6 +59,31 @@ export const BuzzMapStill: React.FC<BuzzMapStillProps> = ({
     );
   }
 
+  // 型E（レイヤー合成）: 塗り（data.values があれば型A と同じ塗り分け・無ければ白地図）＋
+  // 点（geo.points）＋線（geo.lines）を重ねる。Card が全レイヤーを同一 SVG に描画。
+  if (spec.type === "E") {
+    const rows = legendRowsWithCounts(spec);
+    const fillByKey = new Map(rows.map((r) => [r.key, resolveFill(r.fill, spec)]));
+    const values = spec.data.values ?? {};
+    const fillFor = (code: string) => {
+      const key = values[code];
+      return (key && fillByKey.get(key)) || BUZZ_MAP_COLORS.land;
+    };
+    const specWithCounts: BuzzMapSpec = {
+      ...spec,
+      legend: { ...spec.legend, rows },
+    };
+    return (
+      <BuzzMapCard
+        spec={specWithCounts}
+        geo={geo}
+        ratio={ratio}
+        fillFor={fillFor}
+        year={year}
+      />
+    );
+  }
+
   // 型B の静止画（最終年 or 指定年）
   const t = year ?? spec.years?.to ?? 0;
   const series = spec.data.series ?? {};
