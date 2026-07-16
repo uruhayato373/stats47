@@ -147,10 +147,14 @@ builder が `renderClass`（KSJ/DPF）または `lane`（e-Stat）から機械�
 | sample-landlocked | 海に面していない都道府県 | A | pref | 地理的事実（検証済み内陸8県） | specs/sample-landlocked.json | 生成済（検証用サンプル） |
 | sample-anim | 【サンプル】◯◯率の推移 | B | pref | ダミー値（実データではない） | specs/sample-anim.json | 生成済（検証用サンプル） |
 | sample-towns-villages | いまも「町」と「村」の自治体 | A | muni | 国土数値情報（行政区域） | specs/sample-towns-villages.json | 生成済（検証用サンプル） |
-| migration-inflow-muni | 人が集まっている市区町村はどこか | A | muni | e-Stat 転入超過率 `moving-in-excess-rate`（2020） | specs/migration-inflow-muni.json | 生成済（カタログ実証・未投稿） |
-| station-5k-plot | 1日5千人以上が乗り降りする駅はどこか | C | pref | 国土数値情報 S12 駅別乗降客数（令和4年度・2,858駅） | specs/station-5k-plot.json | 生成済（型C 実証・未投稿） |
-| highway-network-growth | 高速道路網はこの60年でどう伸びたか | D | pref | 国土数値情報 N06 高速道路時系列（供用開始年 N06_002・1962-2020・14,805km） | specs/highway-network-growth.json | 生成済（型D 実証・静止画＋時系列リール・未投稿） |
-| migration-x-highway | 高速道路が通っても人は集まるのか | E | muni | e-Stat 転入超過率（塗り）× 国土数値情報 N06 高速道路網（線） | specs/migration-x-highway.json | 生成済（型E 合成実証・未投稿） |
+| migration-inflow-muni | 人が集まっている市区町村はどこか | A | muni | e-Stat 転入超過率 `moving-in-excess-rate`（2020・566自治体） | specs/migration-inflow-muni.json | 生成済・IG draft登録（id 696） |
+| station-5k-plot | 1日5千人以上が乗り降りする駅はどこか | C | pref | 国土数値情報 S12 駅別乗降客数（令和4年度・2,858駅） | specs/station-5k-plot.json | 生成済・IG draft登録（id 697） |
+| highway-network-growth | 高速道路網はこの60年でどう伸びたか | D | pref | 国土数値情報 N06 高速道路時系列（供用開始年 N06_002・1962-2020・14,805km） | specs/highway-network-growth.json | 生成済・IG draft登録（id 698・31秒リール916） |
+| migration-x-highway | 高速道路が通っても人は集まるのか | E | muni | e-Stat 転入超過率（塗り）× 国土数値情報 N06 高速道路網（線） | specs/migration-x-highway.json | 生成済・IG draft登録（id 699） |
+| towns-villages | いまも「町」と「村」の自治体はどこか | A | muni | 国土数値情報 行政区域（2021-01・町村932 vs 市974） | specs/towns-villages.json | 生成済・IG draft登録（id 700・sample を本番化） |
+| population-growth-muni | 人口が増えている街はどこか | A | muni | e-Stat 社会・人口統計体系 `population-growth-rate`（2020・人口増116自治体） | specs/population-growth-muni.json | 生成済・IG draft登録（id 701） |
+| vacant-housing-muni | 空き家が多い街はどこか | A | muni | e-Stat 社会・人口統計体系 `vacant-housing-ratio`（2023・20%以上214自治体） | specs/vacant-housing-muni.json | 生成済・IG draft登録（id 702） |
+| no-station-muni | 鉄道駅が1つも無い街はどこか | A | muni | 国土数値情報 S12 駅別乗降客数（令和4年度・点→自治体invert・駅なし611自治体） | specs/no-station-muni.json | 生成済・IG draft登録（id 703） |
 | sakura-bloom-50y | さくら開花日の50年 | B | pref | 気象庁 生物季節観測（issue [#538](https://github.com/uruhayato373/stats47/issues/538)） | — | 案（第1弾候補。交通インフラ系は本家と被るため回避） |
 | female-majority-muni | 女性が男性より多い市区町村 | A | muni | 国勢調査（e-Stat） | — | 案（まちの計量舎の令和2年版に対し最新調査で差別化） |
 <!-- buzz-map:catalog:end -->
@@ -239,3 +243,15 @@ builder が `renderClass`（KSJ/DPF）または `lane`（e-Stat）から機械�
   訪日外国人/幹線旅客）、系統外 = 地名系（OSM）。KSJ 未登録候補で公式ページから形状抽出できなかった施設系
   P02（公共施設）/P20（避難施設）/S05-c（駅別乗降数）を内容から point-plot に手動格上げ（unknown 9→6、
   残 6 は属性表/統計情報で地図化不能）
+- **2026-07-16 IG 投稿バッチ第1弾 (8本・素材+R2+draft)**: まちの計量舎の勝ちタイプに対応する 8 本を
+  Instagram 用に量産 (型A 6 + 型C 1 + 型D リール 1 + 型E 1)。新規 spec 3 本 (`population-growth-muni`
+  人口増116自治体 / `vacant-housing-muni` 空き家率20%以上214自治体 / `no-station-muni` 駅なし611自治体・
+  S12 point-muni invert)、`sample-towns-villages` を本番化 (`towns-villages`)、既存 4 本を IG レイアウトで
+  再レンダ。**IG は Graph API が R2 公開 URL を要求**するため、`BuzzMap-Still-45` (1080×1350 4:5) を
+  `sns/buzz-map/<id>/instagram/stills/slide-1-cover-1080x1350.png`、highway リールは `BuzzMap-Reel-916`
+  (1080×1920・31秒) を `instagram/reel.mp4`、caption を `instagram/caption.txt` に配置 → `diff-push-r2`
+  で push (公開 URL 全 8 本 HTTP 200 実測) → posts.json に draft 登録 (id 696-703・`template=buzzmap-<型>`)。
+  **予約/投稿はせず draft 止まり** (投稿タイミングは人間判断)。レンダは新 chromium が旧 headless を廃止した
+  ため `chromium_headless_shell-1194/chrome-linux/headless_shell` を `--browser-executable` に使う。
+  出典は metric config SSOT に合わせ社会・人口統計体系と明記 (特定調査名の過剰主張を回避)。
+  既知の未解決: リールの R2 content-type が `application/octet-stream` (投稿時に video/mp4 化が要るか要確認)。

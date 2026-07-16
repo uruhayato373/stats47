@@ -53,8 +53,8 @@
         "gscImp": 0
       },
       "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
-      "status": "candidate",
-      "themeId": null,
+      "status": "generated",
+      "themeId": "population-growth-muni",
       "note": null
     },
     {
@@ -537,8 +537,8 @@
         "gscImp": 0
       },
       "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
-      "status": "candidate",
-      "themeId": null,
+      "status": "generated",
+      "themeId": "vacant-housing-muni",
       "note": null
     },
     {
