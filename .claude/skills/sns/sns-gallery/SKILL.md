@@ -5,14 +5,14 @@ primary_agent: sns-metrics-sync
 ---
 
 全メディア資産を 1 つの localhost 画面で横断管理するローカルコンソール。SNS は投稿・予約まで、
-画像資産は再生成ジョブ起動まで。依存追加ゼロ (node:http + 共有 lib)・127.0.0.1 bind 固定。
+画像資産は再生成ジョブ起動まで。実装は独立 Next.js アプリ **`apps/gallery`** (App Router・127.0.0.1 bind 固定。
+2026-07-16 に旧 node:http 実装から完全移管)。
 
 ## 起動 / 停止
 
 ```bash
 npm run gallery              # http://127.0.0.1:4747/ (Ctrl-C で停止)
 PORT=5000 npm run gallery    # ポート変更
-npm run sns:gallery          # 後方互換 alias (同一サーバー)
 ```
 
 - **ローカル専用** (127.0.0.1 bind)。デプロイしない。エージェント起動時は `run_in_background: true` + Ready polling。
@@ -75,7 +75,7 @@ npm run sns:gallery          # 後方互換 alias (同一サーバー)
 
 ## 関連
 
-- server: `.claude/scripts/gallery/server.mjs` / UI: `.claude/scripts/gallery/{index,sns,assets,svg}.html`
+- 実装: `apps/gallery/` (Next.js App Router。app/=5画面+API、lib/server/=ドメイン層、README に構成・ガード詳細)
 - 共有 collector: `.claude/scripts/lib/gallery-collectors.mjs` / SVG 分類: `.claude/scripts/lib/svg-classify.mjs`
 - CI 静的ギャラリー (collector 共用): `.claude/scripts/ogp/build-image-gallery.mjs` (`--audit` 週次ゲート)
 - 台帳ストア: `.claude/scripts/lib/sns-posts-store.cjs`

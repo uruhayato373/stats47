@@ -39,6 +39,7 @@ tags: [実装計画]
 | `23_ブログOGP生成AIパイプライン仕様.md`  | Geminiで記事別の文字なし背景を生成し、既存Satori合成・R2配信へ安全に統合するClaude Code実装仕様 |
 | `24_テーマ分類再編成方針.md`             | 22テーマを固定せず、全レビュー後にkeep/split/merge/parent-hubで再編する分類・URL移行方針         |
 | `25_アフィリエイト運用SSOT移行仕様.md`   | docs/40 の運用資料を affiliate-manager / skills / state / 型付き git TS へ移し、週次計測・改善ループを一本化する Claude Code 実装仕様 |
+| `26_統合メディアコンソールNextjs移行仕様.md` | localhost:4747 の統合メディアコンソールを、機能・安全ガード互換のまま独立 `apps/gallery` へ移す実装仕様（**実装済 2026-07-16**） |
 
 ## 関連（このフォルダ外の正典）
 

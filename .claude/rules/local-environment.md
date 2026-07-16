@@ -84,7 +84,9 @@ cd apps/remotion && npx tsc --noEmit
 #         + ブログSVGカタログ(/svg) + プロジェクト現況(/dashboard メトリクス/進捗キュー/改善バックログTODO/STP戦略・読み取り専用ミラー)。
 #         起動後にブラウザで http://127.0.0.1:4747/（file:// で直接開かない）。
 # 常駐プロセスなので run_in_background + Ready polling で起動する。skill: /sns-gallery
-npm run gallery              # 旧 npm run sns:gallery は後方互換 alias
+# 実装は独立 Next.js アプリ apps/gallery (localhost 専用・127.0.0.1 bind 固定・PORT= で上書き可)。
+# 旧 node:http 実装 (.claude/scripts/gallery/) と sns:gallery alias は 2026-07-16 に廃止。
+npm run gallery
 ```
 
 > 旧 `npm run backup:d1 --env production`（リモート D1 → R2 バックアップ）は **リモート D1 廃止により不要**。
