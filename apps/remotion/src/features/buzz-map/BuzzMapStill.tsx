@@ -2,7 +2,7 @@ import React from "react";
 
 import { BuzzMapCard, resolveFill, type BuzzMapSummaryEntry } from "./BuzzMapCard";
 import { legendRowsWithCounts, rampColor, valueAtYear } from "./lib";
-import { BUZZ_MAP_COLORS, type BuzzMapRatio } from "./tokens";
+import { buzzMapColors, type BuzzMapRatio } from "./tokens";
 import type { BuzzMapSpec } from "./types";
 import { useBuzzMapFonts } from "./useBuzzMapFonts";
 import { useBuzzMapGeo } from "./useBuzzMapGeo";
@@ -35,7 +35,7 @@ export const BuzzMapStill: React.FC<BuzzMapStillProps> = ({
     const values = spec.data.values ?? {};
     const fillFor = (code: string) => {
       const key = values[code];
-      return (key && fillByKey.get(key)) || BUZZ_MAP_COLORS.land;
+      return (key && fillByKey.get(key)) || buzzMapColors(spec.theme).land;
     };
     const specWithCounts: BuzzMapSpec = {
       ...spec,
@@ -44,13 +44,53 @@ export const BuzzMapStill: React.FC<BuzzMapStillProps> = ({
     return <BuzzMapCard spec={specWithCounts} geo={geo} ratio={ratio} fillFor={fillFor} />;
   }
 
+  // 型C（点）/ 型D（線）: 白地図ベース。geo.points / geo.lines は Card 内で描画。
+  // 型D は year 指定でその年以下の線のみ（未指定=全網図）。年カウンターは静止画では出さない。
+  if (spec.type === "C" || spec.type === "D") {
+    const fillFor = () => buzzMapColors(spec.theme).land;
+    return (
+      <BuzzMapCard
+        spec={spec}
+        geo={geo}
+        ratio={ratio}
+        fillFor={fillFor}
+        year={spec.type === "D" ? year : undefined}
+      />
+    );
+  }
+
+  // 型E（レイヤー合成）: 塗り（data.values があれば型A と同じ塗り分け・無ければ白地図）＋
+  // 点（geo.points）＋線（geo.lines）を重ねる。Card が全レイヤーを同一 SVG に描画。
+  if (spec.type === "E") {
+    const rows = legendRowsWithCounts(spec);
+    const fillByKey = new Map(rows.map((r) => [r.key, resolveFill(r.fill, spec)]));
+    const values = spec.data.values ?? {};
+    const fillFor = (code: string) => {
+      const key = values[code];
+      return (key && fillByKey.get(key)) || buzzMapColors(spec.theme).land;
+    };
+    const specWithCounts: BuzzMapSpec = {
+      ...spec,
+      legend: { ...spec.legend, rows },
+    };
+    return (
+      <BuzzMapCard
+        spec={specWithCounts}
+        geo={geo}
+        ratio={ratio}
+        fillFor={fillFor}
+        year={year}
+      />
+    );
+  }
+
   // 型B の静止画（最終年 or 指定年）
   const t = year ?? spec.years?.to ?? 0;
   const series = spec.data.series ?? {};
   const domain = spec.ramp?.domain ?? [0, 1];
   const fillFor = (code: string) => {
     const v = series[code] ? valueAtYear(series[code], t) : undefined;
-    return v === undefined ? BUZZ_MAP_COLORS.land : rampColor(v, domain);
+    return v === undefined ? buzzMapColors(spec.theme).land : rampColor(v, domain, spec.theme);
   };
 
   let summary: BuzzMapSummaryEntry[] | undefined;

@@ -130,6 +130,7 @@
 | トレンド → ブログ記事 | trend-scout → article-writer (metric→R2直執筆) → chart-author → blog-critic → blog-editor (publish) |
 | SNS 週次運用 | strategy-advisor (/sns-weekly-plan) → sns-metrics-sync (先週計測) → trend-scout (題材) → x/instagram-strategist (生成・予約) |
 | トレンド → IG リール | trend-scout → sns-renderer (/bar-chart-race --step render) → instagram-strategist |
+| バズ地図 → SNS | gis-curator (KSJ geometryType) / data-ingester (e-Stat 観測値) → sns-renderer (/buzz-map 型A〜E 生成+R2) → x/instagram-strategist (配信。draft 止まりが既定) |
 | YouTube 月1動画 | youtube-strategist (/bar-chart-race 企画) → sns-renderer (render) → youtube-strategist (/post-youtube ガード3点) → sns-metrics-sync (公開後) |
 | SNS 競合調査 | trend-scout (/competitor-scan) → docs/04_レビュー |
 | コード変更 → デプロイ | code-reviewer + ui-consistency-reviewer + tdd-guide (3 並列) → devops-runner |

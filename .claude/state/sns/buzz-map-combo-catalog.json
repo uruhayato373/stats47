@@ -1,0 +1,1929 @@
+{
+  "generatedAt": "2026-07-16T05:16:25.601Z",
+  "counts": {
+    "signature": 8,
+    "machine": 120
+  },
+  "entries": [
+    {
+      "comboKey": "michinoeki-x-highway",
+      "title": "道の駅は高速道路網とどう補い合うか",
+      "parts": [
+        "ksj:P35",
+        "ksj:N06"
+      ],
+      "pattern": "signature",
+      "story": "道の駅(点)と高速道路網(線)。高速が通らない地域を道の駅が埋めているか",
+      "score": 0.72,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "income-x-highway",
+      "title": "所得の高い街と高速道路網",
+      "parts": [
+        "per-taxpayer-income",
+        "ksj:N06"
+      ],
+      "pattern": "signature",
+      "story": "課税所得(塗り)と高速道路網(線)。経済力とインフラの地理的一致",
+      "score": 0.698,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "migration-x-station",
+      "title": "人が集まる街と駅の関係",
+      "parts": [
+        "moving-in-excess-rate",
+        "ksj:S12"
+      ],
+      "pattern": "signature",
+      "story": "転入超過の市区町村(塗り)に鉄道駅(点)が集まっているか。駅と人口流入の相関",
+      "score": 0.697,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "migration-x-highway",
+      "title": "高速道路が通っても人は集まるのか",
+      "parts": [
+        "moving-in-excess-rate",
+        "ksj:N06"
+      ],
+      "pattern": "signature",
+      "story": "高速道路網の整備と人口の転入超過が地理的に一致するか。インフラと人の流れの関係",
+      "score": 0.695,
+      "feasibility": "now",
+      "status": "generated",
+      "themeId": "migration-x-highway",
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "elementary-school-children-count__ksj-W01",
+      "title": "小学校児童数 × ダム",
+      "parts": [
+        "elementary-school-children-count",
+        "ksj:W01"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.497,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "elementary-school-children-count__ksj-P03",
+      "title": "小学校児童数 × 発電施設",
+      "parts": [
+        "elementary-school-children-count",
+        "ksj:P03"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.497,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "elementary-school-children-count__ksj-P12",
+      "title": "小学校児童数 × 観光資源",
+      "parts": [
+        "elementary-school-children-count",
+        "ksj:P12"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.497,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "elementary-school-children-count__ksj-P35",
+      "title": "小学校児童数 × 道の駅",
+      "parts": [
+        "elementary-school-children-count",
+        "ksj:P35"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.497,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "elementary-school-children-count__ksj-C09",
+      "title": "小学校児童数 × 漁港",
+      "parts": [
+        "elementary-school-children-count",
+        "ksj:C09"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.497,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "elementary-school-children-count__ksj-C28",
+      "title": "小学校児童数 × 空港",
+      "parts": [
+        "elementary-school-children-count",
+        "ksj:C28"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.497,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "elementary-school-children-count__ksj-S12",
+      "title": "小学校児童数 × 駅別乗降客数",
+      "parts": [
+        "elementary-school-children-count",
+        "ksj:S12"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.497,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "population-growth-rate__ksj-W01",
+      "title": "人口増減率 × ダム",
+      "parts": [
+        "population-growth-rate",
+        "ksj:W01"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.496,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "population-growth-rate__ksj-P03",
+      "title": "人口増減率 × 発電施設",
+      "parts": [
+        "population-growth-rate",
+        "ksj:P03"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.496,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "population-growth-rate__ksj-P12",
+      "title": "人口増減率 × 観光資源",
+      "parts": [
+        "population-growth-rate",
+        "ksj:P12"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.496,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "population-growth-rate__ksj-P35",
+      "title": "人口増減率 × 道の駅",
+      "parts": [
+        "population-growth-rate",
+        "ksj:P35"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.496,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "population-growth-rate__ksj-C09",
+      "title": "人口増減率 × 漁港",
+      "parts": [
+        "population-growth-rate",
+        "ksj:C09"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.496,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "population-growth-rate__ksj-C28",
+      "title": "人口増減率 × 空港",
+      "parts": [
+        "population-growth-rate",
+        "ksj:C28"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.496,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "population-growth-rate__ksj-S12",
+      "title": "人口増減率 × 駅別乗降客数",
+      "parts": [
+        "population-growth-rate",
+        "ksj:S12"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.496,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "elementary-school-children-count__ksj-N06",
+      "title": "小学校児童数 × 高速道路時系列",
+      "parts": [
+        "elementary-school-children-count",
+        "ksj:N06"
+      ],
+      "pattern": "estat-fill×ksj-line",
+      "story": null,
+      "score": 0.495,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "garbage-total-output__ksj-W01",
+      "title": "ごみ総排出量 × ダム",
+      "parts": [
+        "garbage-total-output",
+        "ksj:W01"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.495,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "garbage-total-output__ksj-P03",
+      "title": "ごみ総排出量 × 発電施設",
+      "parts": [
+        "garbage-total-output",
+        "ksj:P03"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.495,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "garbage-total-output__ksj-P12",
+      "title": "ごみ総排出量 × 観光資源",
+      "parts": [
+        "garbage-total-output",
+        "ksj:P12"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.495,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "garbage-total-output__ksj-P35",
+      "title": "ごみ総排出量 × 道の駅",
+      "parts": [
+        "garbage-total-output",
+        "ksj:P35"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.495,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "garbage-total-output__ksj-C09",
+      "title": "ごみ総排出量 × 漁港",
+      "parts": [
+        "garbage-total-output",
+        "ksj:C09"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.495,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "garbage-total-output__ksj-C28",
+      "title": "ごみ総排出量 × 空港",
+      "parts": [
+        "garbage-total-output",
+        "ksj:C28"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.495,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "garbage-total-output__ksj-S12",
+      "title": "ごみ総排出量 × 駅別乗降客数",
+      "parts": [
+        "garbage-total-output",
+        "ksj:S12"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.495,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "population-growth-rate__ksj-N06",
+      "title": "人口増減率 × 高速道路時系列",
+      "parts": [
+        "population-growth-rate",
+        "ksj:N06"
+      ],
+      "pattern": "estat-fill×ksj-line",
+      "story": null,
+      "score": 0.494,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "garbage-total-output__ksj-N06",
+      "title": "ごみ総排出量 × 高速道路時系列",
+      "parts": [
+        "garbage-total-output",
+        "ksj:N06"
+      ],
+      "pattern": "estat-fill×ksj-line",
+      "story": null,
+      "score": 0.494,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "general-hospital-count__ksj-W01",
+      "title": "一般病院数 × ダム",
+      "parts": [
+        "general-hospital-count",
+        "ksj:W01"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.494,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "general-hospital-count__ksj-P03",
+      "title": "一般病院数 × 発電施設",
+      "parts": [
+        "general-hospital-count",
+        "ksj:P03"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.494,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "general-hospital-count__ksj-P12",
+      "title": "一般病院数 × 観光資源",
+      "parts": [
+        "general-hospital-count",
+        "ksj:P12"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.494,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "general-hospital-count__ksj-P35",
+      "title": "一般病院数 × 道の駅",
+      "parts": [
+        "general-hospital-count",
+        "ksj:P35"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.494,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "general-hospital-count__ksj-C09",
+      "title": "一般病院数 × 漁港",
+      "parts": [
+        "general-hospital-count",
+        "ksj:C09"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.494,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "general-hospital-count__ksj-C28",
+      "title": "一般病院数 × 空港",
+      "parts": [
+        "general-hospital-count",
+        "ksj:C28"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.494,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "general-hospital-count__ksj-S12",
+      "title": "一般病院数 × 駅別乗降客数",
+      "parts": [
+        "general-hospital-count",
+        "ksj:S12"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.494,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "per-taxpayer-income__ksj-W01",
+      "title": "納税義務者1人当たり課税所得 × ダム",
+      "parts": [
+        "per-taxpayer-income",
+        "ksj:W01"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.494,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "per-taxpayer-income__ksj-P03",
+      "title": "納税義務者1人当たり課税所得 × 発電施設",
+      "parts": [
+        "per-taxpayer-income",
+        "ksj:P03"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.494,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "per-taxpayer-income__ksj-P12",
+      "title": "納税義務者1人当たり課税所得 × 観光資源",
+      "parts": [
+        "per-taxpayer-income",
+        "ksj:P12"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.494,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "per-taxpayer-income__ksj-P35",
+      "title": "納税義務者1人当たり課税所得 × 道の駅",
+      "parts": [
+        "per-taxpayer-income",
+        "ksj:P35"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.494,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "per-taxpayer-income__ksj-C09",
+      "title": "納税義務者1人当たり課税所得 × 漁港",
+      "parts": [
+        "per-taxpayer-income",
+        "ksj:C09"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.494,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "per-taxpayer-income__ksj-C28",
+      "title": "納税義務者1人当たり課税所得 × 空港",
+      "parts": [
+        "per-taxpayer-income",
+        "ksj:C28"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.494,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "per-taxpayer-income__ksj-S12",
+      "title": "納税義務者1人当たり課税所得 × 駅別乗降客数",
+      "parts": [
+        "per-taxpayer-income",
+        "ksj:S12"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.494,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "psychiatric-hospital-count__ksj-W01",
+      "title": "精神科病院数 × ダム",
+      "parts": [
+        "psychiatric-hospital-count",
+        "ksj:W01"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.494,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "psychiatric-hospital-count__ksj-P03",
+      "title": "精神科病院数 × 発電施設",
+      "parts": [
+        "psychiatric-hospital-count",
+        "ksj:P03"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.494,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "psychiatric-hospital-count__ksj-P12",
+      "title": "精神科病院数 × 観光資源",
+      "parts": [
+        "psychiatric-hospital-count",
+        "ksj:P12"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.494,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "psychiatric-hospital-count__ksj-P35",
+      "title": "精神科病院数 × 道の駅",
+      "parts": [
+        "psychiatric-hospital-count",
+        "ksj:P35"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.494,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "psychiatric-hospital-count__ksj-C09",
+      "title": "精神科病院数 × 漁港",
+      "parts": [
+        "psychiatric-hospital-count",
+        "ksj:C09"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.494,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "psychiatric-hospital-count__ksj-C28",
+      "title": "精神科病院数 × 空港",
+      "parts": [
+        "psychiatric-hospital-count",
+        "ksj:C28"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.494,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "psychiatric-hospital-count__ksj-S12",
+      "title": "精神科病院数 × 駅別乗降客数",
+      "parts": [
+        "psychiatric-hospital-count",
+        "ksj:S12"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.494,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "moped-count__ksj-W01",
+      "title": "原動機付自転車台数 × ダム",
+      "parts": [
+        "moped-count",
+        "ksj:W01"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.494,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "moped-count__ksj-P03",
+      "title": "原動機付自転車台数 × 発電施設",
+      "parts": [
+        "moped-count",
+        "ksj:P03"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.494,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "moped-count__ksj-P12",
+      "title": "原動機付自転車台数 × 観光資源",
+      "parts": [
+        "moped-count",
+        "ksj:P12"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.494,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "moped-count__ksj-P35",
+      "title": "原動機付自転車台数 × 道の駅",
+      "parts": [
+        "moped-count",
+        "ksj:P35"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.494,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "moped-count__ksj-C09",
+      "title": "原動機付自転車台数 × 漁港",
+      "parts": [
+        "moped-count",
+        "ksj:C09"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.494,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "moped-count__ksj-C28",
+      "title": "原動機付自転車台数 × 空港",
+      "parts": [
+        "moped-count",
+        "ksj:C28"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.494,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "moped-count__ksj-S12",
+      "title": "原動機付自転車台数 × 駅別乗降客数",
+      "parts": [
+        "moped-count",
+        "ksj:S12"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.494,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "landprice-x-station",
+      "title": "地価の高い場所と駅",
+      "parts": [
+        "ksj:L01",
+        "ksj:S12"
+      ],
+      "pattern": "signature",
+      "story": "地価公示(点)と駅(点)。駅からの距離と地価の関係を全国で見る",
+      "score": 0.493,
+      "feasibility": "needs-pipeline",
+      "status": "candidate",
+      "themeId": null,
+      "note": "KSJ塗りが要 pipeline"
+    },
+    {
+      "comboKey": "general-hospital-count__ksj-N06",
+      "title": "一般病院数 × 高速道路時系列",
+      "parts": [
+        "general-hospital-count",
+        "ksj:N06"
+      ],
+      "pattern": "estat-fill×ksj-line",
+      "story": null,
+      "score": 0.493,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "per-taxpayer-income__ksj-N06",
+      "title": "納税義務者1人当たり課税所得 × 高速道路時系列",
+      "parts": [
+        "per-taxpayer-income",
+        "ksj:N06"
+      ],
+      "pattern": "estat-fill×ksj-line",
+      "story": null,
+      "score": 0.493,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "psychiatric-hospital-count__ksj-N06",
+      "title": "精神科病院数 × 高速道路時系列",
+      "parts": [
+        "psychiatric-hospital-count",
+        "ksj:N06"
+      ],
+      "pattern": "estat-fill×ksj-line",
+      "story": null,
+      "score": 0.493,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "dental-clinic-count__ksj-W01",
+      "title": "歯科診療所数 × ダム",
+      "parts": [
+        "dental-clinic-count",
+        "ksj:W01"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.493,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "dental-clinic-count__ksj-P03",
+      "title": "歯科診療所数 × 発電施設",
+      "parts": [
+        "dental-clinic-count",
+        "ksj:P03"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.493,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "dental-clinic-count__ksj-P12",
+      "title": "歯科診療所数 × 観光資源",
+      "parts": [
+        "dental-clinic-count",
+        "ksj:P12"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.493,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "dental-clinic-count__ksj-P35",
+      "title": "歯科診療所数 × 道の駅",
+      "parts": [
+        "dental-clinic-count",
+        "ksj:P35"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.493,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "dental-clinic-count__ksj-C09",
+      "title": "歯科診療所数 × 漁港",
+      "parts": [
+        "dental-clinic-count",
+        "ksj:C09"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.493,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "dental-clinic-count__ksj-C28",
+      "title": "歯科診療所数 × 空港",
+      "parts": [
+        "dental-clinic-count",
+        "ksj:C28"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.493,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "dental-clinic-count__ksj-S12",
+      "title": "歯科診療所数 × 駅別乗降客数",
+      "parts": [
+        "dental-clinic-count",
+        "ksj:S12"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.493,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "garbage-final-disposal__ksj-W01",
+      "title": "ごみ最終処分量 × ダム",
+      "parts": [
+        "garbage-final-disposal",
+        "ksj:W01"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.493,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "garbage-final-disposal__ksj-P03",
+      "title": "ごみ最終処分量 × 発電施設",
+      "parts": [
+        "garbage-final-disposal",
+        "ksj:P03"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.493,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "garbage-final-disposal__ksj-P12",
+      "title": "ごみ最終処分量 × 観光資源",
+      "parts": [
+        "garbage-final-disposal",
+        "ksj:P12"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.493,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "garbage-final-disposal__ksj-P35",
+      "title": "ごみ最終処分量 × 道の駅",
+      "parts": [
+        "garbage-final-disposal",
+        "ksj:P35"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.493,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "garbage-final-disposal__ksj-C09",
+      "title": "ごみ最終処分量 × 漁港",
+      "parts": [
+        "garbage-final-disposal",
+        "ksj:C09"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.493,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "garbage-final-disposal__ksj-C28",
+      "title": "ごみ最終処分量 × 空港",
+      "parts": [
+        "garbage-final-disposal",
+        "ksj:C28"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.493,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "garbage-final-disposal__ksj-S12",
+      "title": "ごみ最終処分量 × 駅別乗降客数",
+      "parts": [
+        "garbage-final-disposal",
+        "ksj:S12"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.493,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "nursing-welfare-facility-count-per-100k-65plus__ksj-W01",
+      "title": "介護老人福祉施設数 × ダム",
+      "parts": [
+        "nursing-welfare-facility-count-per-100k-65plus",
+        "ksj:W01"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.493,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "nursing-welfare-facility-count-per-100k-65plus__ksj-P03",
+      "title": "介護老人福祉施設数 × 発電施設",
+      "parts": [
+        "nursing-welfare-facility-count-per-100k-65plus",
+        "ksj:P03"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.493,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "nursing-welfare-facility-count-per-100k-65plus__ksj-P12",
+      "title": "介護老人福祉施設数 × 観光資源",
+      "parts": [
+        "nursing-welfare-facility-count-per-100k-65plus",
+        "ksj:P12"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.493,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "nursing-welfare-facility-count-per-100k-65plus__ksj-P35",
+      "title": "介護老人福祉施設数 × 道の駅",
+      "parts": [
+        "nursing-welfare-facility-count-per-100k-65plus",
+        "ksj:P35"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.493,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "nursing-welfare-facility-count-per-100k-65plus__ksj-C09",
+      "title": "介護老人福祉施設数 × 漁港",
+      "parts": [
+        "nursing-welfare-facility-count-per-100k-65plus",
+        "ksj:C09"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.493,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "nursing-welfare-facility-count-per-100k-65plus__ksj-C28",
+      "title": "介護老人福祉施設数 × 空港",
+      "parts": [
+        "nursing-welfare-facility-count-per-100k-65plus",
+        "ksj:C28"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.493,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "nursing-welfare-facility-count-per-100k-65plus__ksj-S12",
+      "title": "介護老人福祉施設数 × 駅別乗降客数",
+      "parts": [
+        "nursing-welfare-facility-count-per-100k-65plus",
+        "ksj:S12"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.493,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "elementary-school-children-count__ksj-N02",
+      "title": "小学校児童数 × 鉄道",
+      "parts": [
+        "elementary-school-children-count",
+        "ksj:N02"
+      ],
+      "pattern": "estat-fill×ksj-line",
+      "story": null,
+      "score": 0.492,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "moped-count__ksj-N06",
+      "title": "原動機付自転車台数 × 高速道路時系列",
+      "parts": [
+        "moped-count",
+        "ksj:N06"
+      ],
+      "pattern": "estat-fill×ksj-line",
+      "story": null,
+      "score": 0.492,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "dental-clinic-count__ksj-N06",
+      "title": "歯科診療所数 × 高速道路時系列",
+      "parts": [
+        "dental-clinic-count",
+        "ksj:N06"
+      ],
+      "pattern": "estat-fill×ksj-line",
+      "story": null,
+      "score": 0.492,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "habitable-area-ratio__ksj-W01",
+      "title": "可住地面積割合 × ダム",
+      "parts": [
+        "habitable-area-ratio",
+        "ksj:W01"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.492,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "habitable-area-ratio__ksj-P03",
+      "title": "可住地面積割合 × 発電施設",
+      "parts": [
+        "habitable-area-ratio",
+        "ksj:P03"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.492,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "habitable-area-ratio__ksj-P12",
+      "title": "可住地面積割合 × 観光資源",
+      "parts": [
+        "habitable-area-ratio",
+        "ksj:P12"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.492,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "habitable-area-ratio__ksj-P35",
+      "title": "可住地面積割合 × 道の駅",
+      "parts": [
+        "habitable-area-ratio",
+        "ksj:P35"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.492,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "habitable-area-ratio__ksj-C09",
+      "title": "可住地面積割合 × 漁港",
+      "parts": [
+        "habitable-area-ratio",
+        "ksj:C09"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.492,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "habitable-area-ratio__ksj-C28",
+      "title": "可住地面積割合 × 空港",
+      "parts": [
+        "habitable-area-ratio",
+        "ksj:C28"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.492,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "habitable-area-ratio__ksj-S12",
+      "title": "可住地面積割合 × 駅別乗降客数",
+      "parts": [
+        "habitable-area-ratio",
+        "ksj:S12"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.492,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "housing-floor-area__ksj-W01",
+      "title": "1住宅当たり延べ面積 × ダム",
+      "parts": [
+        "housing-floor-area",
+        "ksj:W01"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.492,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "housing-floor-area__ksj-P03",
+      "title": "1住宅当たり延べ面積 × 発電施設",
+      "parts": [
+        "housing-floor-area",
+        "ksj:P03"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.492,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "housing-floor-area__ksj-P12",
+      "title": "1住宅当たり延べ面積 × 観光資源",
+      "parts": [
+        "housing-floor-area",
+        "ksj:P12"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.492,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "housing-floor-area__ksj-P35",
+      "title": "1住宅当たり延べ面積 × 道の駅",
+      "parts": [
+        "housing-floor-area",
+        "ksj:P35"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.492,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "housing-floor-area__ksj-C09",
+      "title": "1住宅当たり延べ面積 × 漁港",
+      "parts": [
+        "housing-floor-area",
+        "ksj:C09"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.492,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "housing-floor-area__ksj-C28",
+      "title": "1住宅当たり延べ面積 × 空港",
+      "parts": [
+        "housing-floor-area",
+        "ksj:C28"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.492,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "housing-floor-area__ksj-S12",
+      "title": "1住宅当たり延べ面積 × 駅別乗降客数",
+      "parts": [
+        "housing-floor-area",
+        "ksj:S12"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.492,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "moving-in-excess-rate-japanese__ksj-W01",
+      "title": "転入超過率 × ダム",
+      "parts": [
+        "moving-in-excess-rate-japanese",
+        "ksj:W01"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.492,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "moving-in-excess-rate-japanese__ksj-P03",
+      "title": "転入超過率 × 発電施設",
+      "parts": [
+        "moving-in-excess-rate-japanese",
+        "ksj:P03"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.492,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "moving-in-excess-rate-japanese__ksj-P12",
+      "title": "転入超過率 × 観光資源",
+      "parts": [
+        "moving-in-excess-rate-japanese",
+        "ksj:P12"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.492,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "moving-in-excess-rate-japanese__ksj-P35",
+      "title": "転入超過率 × 道の駅",
+      "parts": [
+        "moving-in-excess-rate-japanese",
+        "ksj:P35"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.492,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "moving-in-excess-rate-japanese__ksj-C09",
+      "title": "転入超過率 × 漁港",
+      "parts": [
+        "moving-in-excess-rate-japanese",
+        "ksj:C09"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.492,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "moving-in-excess-rate-japanese__ksj-C28",
+      "title": "転入超過率 × 空港",
+      "parts": [
+        "moving-in-excess-rate-japanese",
+        "ksj:C28"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.492,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "moving-in-excess-rate-japanese__ksj-S12",
+      "title": "転入超過率 × 駅別乗降客数",
+      "parts": [
+        "moving-in-excess-rate-japanese",
+        "ksj:S12"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.492,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "moving-in-excess-rate__ksj-W01",
+      "title": "転入超過率 × ダム",
+      "parts": [
+        "moving-in-excess-rate",
+        "ksj:W01"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.492,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "moving-in-excess-rate__ksj-P03",
+      "title": "転入超過率 × 発電施設",
+      "parts": [
+        "moving-in-excess-rate",
+        "ksj:P03"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.492,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "moving-in-excess-rate__ksj-P12",
+      "title": "転入超過率 × 観光資源",
+      "parts": [
+        "moving-in-excess-rate",
+        "ksj:P12"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.492,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "moving-in-excess-rate__ksj-P35",
+      "title": "転入超過率 × 道の駅",
+      "parts": [
+        "moving-in-excess-rate",
+        "ksj:P35"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.492,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "moving-in-excess-rate__ksj-C09",
+      "title": "転入超過率 × 漁港",
+      "parts": [
+        "moving-in-excess-rate",
+        "ksj:C09"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.492,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "moving-in-excess-rate__ksj-C28",
+      "title": "転入超過率 × 空港",
+      "parts": [
+        "moving-in-excess-rate",
+        "ksj:C28"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.492,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "moving-in-excess-rate__ksj-S12",
+      "title": "転入超過率 × 駅別乗降客数",
+      "parts": [
+        "moving-in-excess-rate",
+        "ksj:S12"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.492,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "moving-in-rate-japanese__ksj-W01",
+      "title": "転入率 × ダム",
+      "parts": [
+        "moving-in-rate-japanese",
+        "ksj:W01"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.492,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "moving-in-rate-japanese__ksj-P03",
+      "title": "転入率 × 発電施設",
+      "parts": [
+        "moving-in-rate-japanese",
+        "ksj:P03"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.492,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "moving-in-rate-japanese__ksj-P12",
+      "title": "転入率 × 観光資源",
+      "parts": [
+        "moving-in-rate-japanese",
+        "ksj:P12"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.492,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "moving-in-rate-japanese__ksj-P35",
+      "title": "転入率 × 道の駅",
+      "parts": [
+        "moving-in-rate-japanese",
+        "ksj:P35"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.492,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "moving-in-rate-japanese__ksj-C09",
+      "title": "転入率 × 漁港",
+      "parts": [
+        "moving-in-rate-japanese",
+        "ksj:C09"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.492,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "moving-in-rate-japanese__ksj-C28",
+      "title": "転入率 × 空港",
+      "parts": [
+        "moving-in-rate-japanese",
+        "ksj:C28"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.492,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "moving-in-rate-japanese__ksj-S12",
+      "title": "転入率 × 駅別乗降客数",
+      "parts": [
+        "moving-in-rate-japanese",
+        "ksj:S12"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.492,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "moving-in-rate__ksj-W01",
+      "title": "転入率 × ダム",
+      "parts": [
+        "moving-in-rate",
+        "ksj:W01"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.492,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "moving-in-rate__ksj-P03",
+      "title": "転入率 × 発電施設",
+      "parts": [
+        "moving-in-rate",
+        "ksj:P03"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.492,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "moving-in-rate__ksj-P12",
+      "title": "転入率 × 観光資源",
+      "parts": [
+        "moving-in-rate",
+        "ksj:P12"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.492,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "moving-in-rate__ksj-P35",
+      "title": "転入率 × 道の駅",
+      "parts": [
+        "moving-in-rate",
+        "ksj:P35"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.492,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "moving-in-rate__ksj-C09",
+      "title": "転入率 × 漁港",
+      "parts": [
+        "moving-in-rate",
+        "ksj:C09"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.492,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "moving-in-rate__ksj-C28",
+      "title": "転入率 × 空港",
+      "parts": [
+        "moving-in-rate",
+        "ksj:C28"
+      ],
+      "pattern": "estat-fill×ksj-point",
+      "story": null,
+      "score": 0.492,
+      "feasibility": "now",
+      "status": "candidate",
+      "themeId": null,
+      "note": "両レイヤー即マージ可"
+    },
+    {
+      "comboKey": "depopulation-x-hospital",
+      "title": "過疎地域に病院はあるか",
+      "parts": [
+        "ksj:A17",
+        "ksj:P04"
+      ],
+      "pattern": "signature",
+      "story": "過疎地域(塗り)に医療機関(点)がどれだけあるか。無医地区の可視化。web 前例 depopulation-medical",
+      "score": 0.472,
+      "feasibility": "needs-pipeline",
+      "status": "candidate",
+      "themeId": null,
+      "note": "KSJ塗りが要 pipeline"
+    },
+    {
+      "comboKey": "aging-x-hospital",
+      "title": "高齢化が進む街に医療は足りているか",
+      "parts": [
+        "elderly-population-ratio",
+        "ksj:P04"
+      ],
+      "pattern": "signature",
+      "story": "高齢者割合(塗り)と医療機関(点)。高齢化と医療アクセスのミスマッチ",
+      "score": 0.459,
+      "feasibility": "needs-pipeline",
+      "status": "candidate",
+      "themeId": null,
+      "note": "KSJ塗りが要 pipeline"
+    },
+    {
+      "comboKey": "snow-x-aging",
+      "title": "豪雪地帯と高齢化",
+      "parts": [
+        "ksj:A22",
+        "elderly-population-ratio"
+      ],
+      "pattern": "signature",
+      "story": "豪雪地帯(塗り)と高齢者割合。雪かきが重荷になる地域はどこか",
+      "score": 0.455,
+      "feasibility": "needs-pipeline",
+      "status": "candidate",
+      "themeId": null,
+      "note": "KSJ塗りが要 pipeline"
+    }
+  ]
+}

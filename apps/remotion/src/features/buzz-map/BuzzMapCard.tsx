@@ -3,9 +3,9 @@ import { AbsoluteFill } from "remotion";
 
 import type { BuzzMapGeo } from "./geo";
 import {
-  BUZZ_MAP_COLORS,
   BUZZ_MAP_FONT,
-  BUZZ_MAP_RAMP,
+  buzzMapColors,
+  buzzMapRamp,
   type BuzzMapRatio,
 } from "./tokens";
 import type { BuzzMapSpec } from "./types";
@@ -22,13 +22,13 @@ interface BuzzMapCardProps {
   ratio: BuzzMapRatio;
   /** code → fill色。未定義コードは land */
   fillFor: (code: string) => string;
-  /** 型B: 年カウンター表示（例 "1998年"） */
+  /** 型B/D: 年カウンター表示（例 "1998年"） */
   yearLabel?: string;
   /** 型B: ラスト静止のサマリー行 */
   summary?: BuzzMapSummaryEntry[];
+  /** 型D: この年以下の線のみ描画（未指定=全線）。静止画の年指定にも使う */
+  year?: number;
 }
-
-const C = BUZZ_MAP_COLORS;
 
 /**
  * バズ地図カードの共通レイアウト
@@ -44,7 +44,9 @@ export const BuzzMapCard: React.FC<BuzzMapCardProps> = ({
   fillFor,
   yearLabel,
   summary,
+  year,
 }) => {
+  const C = buzzMapColors(spec.theme);
   const { width: W, height: H } = geo;
   // 1080 基準のフォントスケール
   const s = Math.min(W, H) / 1080;
@@ -52,6 +54,16 @@ export const BuzzMapCard: React.FC<BuzzMapCardProps> = ({
   const strokeWidth = isMuni ? 0.4 * s : 1.1 * s;
 
   const titleLines = spec.titleLines?.length ? spec.titleLines : [spec.title];
+
+  // 点の色は key ごとに凡例 row の fill で解決する（型C 2区分＝行政地名/自然地名 等の色分け用）。
+  // key が凡例に無い場合は従来どおり spec.pointFill ?? "accent" の単一色にフォールバック。
+  const pointFillByKey = new Map<string, string>();
+  for (const row of spec.legend.rows ?? []) {
+    if ((row.marker ?? (spec.type === "C" ? "point" : undefined)) === "point" || spec.type === "C") {
+      pointFillByKey.set(row.key, resolveFill(row.fill, spec));
+    }
+  }
+  const fallbackPointFill = resolveFill(spec.pointFill ?? "accent", spec);
 
   return (
     <AbsoluteFill
@@ -92,17 +104,18 @@ export const BuzzMapCard: React.FC<BuzzMapCardProps> = ({
           <>
             <rect
               x={geo.insetBox.x - 6 * s}
-              y={geo.insetBox.y - 34 * s}
+              y={geo.insetBox.y - 6 * s}
               width={geo.insetBox.width + 12 * s}
-              height={geo.insetBox.height + 42 * s}
+              height={geo.insetBox.height + 12 * s}
               rx={12 * s}
               fill="none"
               stroke={C.landLine}
               strokeWidth={1.5 * s}
             />
+            {/* ラベルは枠内バッジ（左上）。枠を大きく取っても外にはみ出さない */}
             <text
-              x={geo.insetBox.x + 4 * s}
-              y={geo.insetBox.y - 10 * s}
+              x={geo.insetBox.x + 14 * s}
+              y={geo.insetBox.y + 26 * s}
               fontSize={22 * s}
               fill={C.ink2}
             >
@@ -120,6 +133,33 @@ export const BuzzMapCard: React.FC<BuzzMapCardProps> = ({
             strokeLinejoin="round"
           />
         ))}
+        {/* 型C/E: 点プロット（白地図の上に点）。型E は pointFill で塗りと色を分ける */}
+        {geo.points?.map((pt, i) => (
+          <circle
+            key={`p-${i}`}
+            cx={pt.x}
+            cy={pt.y}
+            r={(spec.pointRadius ?? 4) * s}
+            fill={pointFillByKey.get(pt.key) ?? fallbackPointFill}
+            fillOpacity={0.82}
+            stroke={C.sea}
+            strokeWidth={0.6 * s}
+          />
+        ))}
+        {/* 型D/E: 線ネットワーク。year 指定時はその年以下のみ。型E は lineStroke で塗りと色を分ける */}
+        {geo.lines
+          ?.filter((ln) => year === undefined || ln.year === null || ln.year <= year)
+          .map((ln, i) => (
+            <path
+              key={`l-${i}`}
+              d={ln.d}
+              fill="none"
+              stroke={resolveFill(spec.lineStroke ?? "accent", spec)}
+              strokeWidth={(spec.lineWidth ?? 2) * s}
+              strokeLinejoin="round"
+              strokeLinecap="round"
+            />
+          ))}
       </svg>
 
       {/* ① タイトルブロック（左上） */}
@@ -173,8 +213,8 @@ export const BuzzMapCard: React.FC<BuzzMapCardProps> = ({
         ))}
       </div>
 
-      {/* 型B: 年カウンター（右の海域）。サマリー表示中は上へ避ける */}
-      {yearLabel && (
+      {/* 型B/D: 年カウンター（右の海域）。サマリー表示中は上へ避ける */}
+      {(spec.type === "B" || spec.type === "D") && yearLabel && (
         <div
           style={{
             position: "absolute",
@@ -258,8 +298,12 @@ export const BuzzMapCard: React.FC<BuzzMapCardProps> = ({
           {spec.type === "B" && spec.ramp ? spec.ramp.legendTitle : spec.legend.title}
         </div>
 
-        {spec.type === "A" &&
-          spec.legend.rows?.map((row) => (
+        {(spec.type === "A" || spec.type === "C" || spec.type === "D" || spec.type === "E") &&
+          spec.legend.rows?.map((row) => {
+            // マーカー形状: row.marker 明示 > spec.type から導出（A/E=四角, C=円, D=バー）
+            const shape =
+              row.marker ?? (spec.type === "C" ? "point" : spec.type === "D" ? "line" : "fill");
+            return (
             <div
               key={row.key}
               style={{
@@ -273,10 +317,11 @@ export const BuzzMapCard: React.FC<BuzzMapCardProps> = ({
               <span
                 style={{
                   width: 22 * s,
-                  height: 22 * s,
-                  borderRadius: 6 * s,
+                  // point=円 / line=横バー / fill=四角
+                  height: (shape === "line" ? 7 : 22) * s,
+                  borderRadius: shape === "point" ? "50%" : (shape === "line" ? 3 : 6) * s,
                   flex: "none",
-                  border: `1px solid rgba(13,54,107,.18)`,
+                  border: `1px solid ${C.legendBorder}`,
                   backgroundColor: resolveFill(row.fill, spec),
                 }}
               />
@@ -292,7 +337,8 @@ export const BuzzMapCard: React.FC<BuzzMapCardProps> = ({
                 {row.count}
               </span>
             </div>
-          ))}
+            );
+          })}
 
         {spec.type === "B" && spec.ramp && (
           <>
@@ -300,8 +346,8 @@ export const BuzzMapCard: React.FC<BuzzMapCardProps> = ({
               style={{
                 height: 18 * s,
                 borderRadius: 9 * s,
-                border: `1px solid rgba(13,54,107,.18)`,
-                background: `linear-gradient(90deg, ${BUZZ_MAP_RAMP.join(",")})`,
+                border: `1px solid ${C.legendBorder}`,
+                background: `linear-gradient(90deg, ${buzzMapRamp(spec.theme).join(",")})`,
                 marginBottom: 6 * s,
               }}
             />
@@ -343,8 +389,9 @@ export const BuzzMapCard: React.FC<BuzzMapCardProps> = ({
   );
 };
 
-/** 凡例・データの fill トークン（accent / accent2 / land / 生hex）を解決する */
+/** 凡例・データの fill トークン（accent / accent2 / land / 生hex）を spec.theme のパレットで解決する */
 export function resolveFill(token: string, spec: BuzzMapSpec): string {
+  const C = buzzMapColors(spec.theme);
   if (token === "accent") {
     return spec.accent === "infra" ? C.accentInfra : C.accentSocial;
   }

@@ -1,18 +1,11 @@
 {
-  "hash": "3a6c3804b69958eba7db16b8a7ffa5333171aa8efde5e3f88e159cd497a868ff",
-  "audited_at": "2026-07-15T23:19:19",
+  "hash": "a58b85514f3b372bff7cd96db80a4c7d9a3fa3ba7236320a41ef3e4281bf573e",
+  "audited_at": "2026-07-16T10:53:03",
   "files": [
-    ".claude/scripts/gallery/assets.html",
-    ".claude/scripts/gallery/dashboard-data.mjs",
-    ".claude/scripts/gallery/dashboard.html",
-    ".claude/scripts/gallery/index.html",
-    ".claude/scripts/gallery/server.mjs",
-    ".claude/scripts/gallery/sns.html",
-    ".claude/scripts/gallery/svg.html",
-    ".claude/scripts/lib/gallery-collectors.mjs",
-    ".claude/scripts/lib/svg-classify.mjs",
-    ".claude/scripts/note/catalog/login-note-playwright.py",
-    ".claude/scripts/note/catalog/restore-from-notecom.py",
-    ".claude/skills/sns/sns-gallery/SKILL.md"
+    ".claude/agents/gis-curator.md",
+    ".claude/agents/sns-renderer.md",
+    ".claude/scripts/sns/build-buzz-map-catalog.ts",
+    ".claude/scripts/sns/build-buzz-map-spec-gsi.ts",
+    ".claude/skills/sns/buzz-map/SKILL.md"
   ]
 }
