@@ -27,6 +27,7 @@ Cell content: ≤ 12 words each. No prose before/after.
 - dataset lifecycle: 新規 register (datasets.ts + registry.ts 追加) / deprecate (status 設計)
 - メタ整合: category 17 軸 (stats47Category) / geometryType / coverage / license の妥当性、ranking yearCode 4 桁
 - `.claude/rules/gis-data.md` と `packages/gis/src/mlit-ksj/README.md` の維持 (規約・モジュール設計/使い方)
+- **buzz-map (SNS 日本地図カード) への供給**: `datasets.ts` の `geometryType` (point/line/polygon/mesh) が buzz-map カタログの `renderClass`/`capability` 導出の入力になる (point→型C 点プロット / line→型D 線ネットワーク / polygon→型A 面塗り)。geometryType を正しく保つことが buzz-map の型分類の精度を決める。消費側の正典・カバレッジ表は `.claude/rules/buzz-map-standards.md` §4 (型 SSOT は §1)。KSJ 点/線データの spec 化は sns-renderer の `build-buzz-map-spec-ksj.ts`
 
 ## 検証 (必須)
 

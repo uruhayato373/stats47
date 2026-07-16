@@ -323,8 +323,9 @@ https://stats47.jp/ranking/taxable-income-per-capita
   N 本積む → ローカルで `publish-x --from-queue` が `check-x-post-budget.cjs` ガードを通して予約 → `status=scheduled` →
   投稿時刻経過で `mark-sns-posted` が `posted` へ昇格。**template を必ず記録** (勝ちパターン分析の前提)。
 - **Remotion レンダ入口の正典**: 静止画/動画 = `render-sns-stills`、BCR = `bar-chart-race`、
-  日本地図×統計のバズカード = `buzz-map` (型A静止画/型B時系列アニメ、正典 `.claude/rules/buzz-map-standards.md`)、
-  `preview-remotion` はプレビュー専用 (レンダしない)
+  日本地図×統計のバズカード = `buzz-map` (型A〜E: 二値/時系列/点/線ネットワーク/合成。型一覧・仕様の正典は
+  `.claude/rules/buzz-map-standards.md` §1。IG 配信は `instagram/stills/slide-1-cover-1080x1350.png`+`reel.mp4`+
+  `caption.txt` を R2 push → posts.json draft `template=buzzmap-<型>`)、`preview-remotion` はプレビュー専用 (レンダしない)
 - 週次運用は `/sns-weekly-plan` が上記を 1 コマンドで束ねる
 - 競合の定点観測は `/competitor-scan` (月次)。示唆は §2-10 の承認ゲート経由でカタログへ反映
 
@@ -372,7 +373,7 @@ https://stats47.jp/ranking/taxable-income-per-capita
 - **X 頻度ガード**: `.claude/scripts/sns/check-x-post-budget.cjs`
 - **X 勝ちパターン**: `.claude/scripts/sns/analyze-x-winning-patterns.mjs` → `.claude/state/sns/x-winning-patterns.json`
 - **X 画像最短経路**: `.claude/scripts/sns/quick-still.ts` / SVG→PNG `.claude/scripts/lib/svg-to-png.cjs`
-- **バズ地図カード (日本地図×統計)**: 規約 `.claude/rules/buzz-map-standards.md` / スキル `.claude/skills/sns/buzz-map/SKILL.md` / Remotion feature `apps/remotion/src/features/buzz-map/` (owner: sns-renderer、co: x-strategist/gis-curator)
+- **バズ地図カード (日本地図×統計)**: 規約 `.claude/rules/buzz-map-standards.md` / スキル `.claude/skills/sns/buzz-map/SKILL.md` / Remotion feature `apps/remotion/src/features/buzz-map/` (owner: sns-renderer、co: X配信=x-strategist / IG配信=instagram-strategist / 地理データ=gis-curator)
 - メトリクス時系列: `.claude/skills/analytics/sns-metrics-improvement/`
 - agent 責務: `.claude/agents/README.md` (Tier 4 SNS) / X オーナー `.claude/agents/x-strategist.md`
 - 収益化での SNS 位置づけ: `docs/02_実装計画/01_収益化マスタープラン.md` §6

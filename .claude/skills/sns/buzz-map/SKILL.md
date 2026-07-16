@@ -2,15 +2,15 @@
 name: buzz-map
 description: バズ地図カード（まちの計量舎系の日本地図×統計）の静止画PNG・動画MP4を「spec作成 → レンダ → 目視 → 改善」の反復で作る統合スキル。Use when user says "バズ地図", "buzz-map", "地図カード作成", "地図動画". 型・トークン・テーマカタログの正典は .claude/rules/buzz-map-standards.md。
 disable-model-invocation: true
-argument-hint: "<theme_id|specパス> [--type A|B] [--ratio 45|11|169|916] [--video] [--preview] [--year N --summary]"
+argument-hint: "<theme_id|specパス> [--ratio 45|11|169|916] [--video] [--preview] [--year N --summary]"
 primary_agent: sns-renderer
-co_agents: [x-strategist, gis-curator]
+co_agents: [x-strategist, instagram-strategist, gis-curator]
 ---
 
 # /buzz-map — バズ地図カードの生成→目視→改善ループ
 
-日本地図×統計の SNS カード（型A=静止画二値 / 型B=時系列アニメ）を 1 本の線で作る。
-**規約・レイアウト5要素・配色・テーマカタログはすべて [`buzz-map-standards.md`](../../../rules/buzz-map-standards.md) が正典**。本スキルは手順のみ。
+日本地図×統計の SNS カード（型A〜E）を 1 本の線で作る。**型・レンダラーは spec の `type` で決まる**（描く型の一覧・仕様は再列挙せず [`buzz-map-standards.md`](../../../rules/buzz-map-standards.md) §1 が SSOT: 型A 二値 / 型B 時系列アニメ / 型C 点プロット / 型D 線ネットワーク・時系列リール / 型E レイヤー合成）。
+**規約・レイアウト5要素・配色・テーマカタログ・カバレッジ表はすべて buzz-map-standards.md が正典**。本スキルは手順のみ。
 
 ## 前提
 
@@ -30,6 +30,10 @@ co_agents: [x-strategist, gis-curator]
 | 6. 台帳 | カタログ status を `build-buzz-map-catalog.ts --mark-spec\|--mark-generated\|--mark-posted <metricKey> --theme-id <id>` で更新 + standards §4 テーマ台帳に 1 行追加。投稿は既存フロー（posts.json draft、§2-9 登録は §2-10 ゲート）へ | — |
 
 ## 実行コマンド（apps/remotion で実行）
+
+> リモート環境では `--browser-executable` が必須。新 chromium は旧 headless を廃止したため
+> `export CHROME=/opt/pw-browsers/chromium_headless_shell-1194/chrome-linux/headless_shell` を設定し
+> 各 `remotion still|render` に `--browser-executable=$CHROME` を付ける（下の IG 節も同様）。
 
 ```bash
 cd apps/remotion
@@ -54,6 +58,32 @@ npx remotion render src/index.ts BuzzMap-Reel-11 \
 ```
 
 比率は composition id で選ぶ: `BuzzMap-Still-{45,11,169,916}` / `BuzzMap-Reel-{11,916}`。型C 点プロット・型D 線ネットワークは型A と同じ `BuzzMap-Still-*`（型D 時系列リールは `BuzzMap-Reel-*`）。
+
+### Instagram 配信レイアウト（素材生成 → R2 → draft 登録）
+
+IG Graph API は **R2 公開 URL** を要求するため、IG 配信は専用パスに出力して push する。静止画は `BuzzMap-Still-45`（1080×1350 4:5）、リールは `BuzzMap-Reel-916`（1080×1920 9:16）。
+
+```bash
+# 静止画 (型A/C/E)
+npx remotion still src/index.ts BuzzMap-Still-45 \
+  ../../.local/r2/sns/buzz-map/<id>/instagram/stills/slide-1-cover-1080x1350.png \
+  --props=src/features/buzz-map/specs/<id>.json --browser-executable=$CHROME
+# リール (型D・尺は spec 駆動)
+npx remotion render src/index.ts BuzzMap-Reel-916 \
+  ../../.local/r2/sns/buzz-map/<id>/instagram/reel.mp4 \
+  --props=src/features/buzz-map/specs/<id>.json --browser-executable=$CHROME
+# caption を同ディレクトリに (sns-content-standards §2-3 準拠。出典は metric config SSOT に合わせる)
+#   → .local/r2/sns/buzz-map/<id>/instagram/caption.txt
+```
+
+```bash
+# R2 push (公開 URL 200 を実測確認してから draft 登録)
+ALLOW_LOCAL_R2_WRITE=1 npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix sns/buzz-map
+curl -s -o /dev/null -w "%{http_code}\n" https://storage.stats47.jp/sns/buzz-map/<id>/instagram/stills/slide-1-cover-1080x1350.png
+```
+
+- draft 登録は `.claude/scripts/lib/sns-posts-store.cjs` の `insert()`（platform=instagram / domain=buzz-map / content_key=<id> / media_path=R2キー / caption / `template=buzzmap-<型>` / status=draft）。**予約/投稿はせず draft 止まり**が既定（投稿タイミングは instagram-strategist / 人間が判断）。
+- リールの content-type が `application/octet-stream` になる場合、IG Reels API が弾く可能性があるため投稿前に確認する。
 
 ### spec 自動生成（step 1 のデータ接地）
 
@@ -100,7 +130,7 @@ npx tsx .claude/scripts/sns/merge-buzz-map-specs.ts \
 
 | 症状 | 対処 |
 |---|---|
-| Chrome が見つからない/DLできない | リモート実行環境では `--browser-executable` で既存 Chromium（例: `/opt/pw-browsers/chromium-*/chrome-linux/chrome`）を指定。Mac はローカル Chrome を自動検出 |
+| Chrome が見つからない/DLできない | リモート実行環境では `--browser-executable` で既存バイナリを指定。**新 chromium (`chromium-1194/chrome-linux/chrome`) は旧 headless モードを廃止し起動失敗する → `/opt/pw-browsers/chromium_headless_shell-1194/chrome-linux/headless_shell` を使う**（"Old Headless mode has been removed" が出たらこれ）。Mac はローカル Chrome を自動検出 |
 | 日本語が豆腐・書体が違う | `public/buzz-map/fonts/` の woff2 がコミットされているか確認（フォントは同梱が正。OS フォント依存にしない） |
 | 尺が想定と違う | spec の `speed`（年/秒）と `holdSeconds` を確認。尺 = Σ(区間年数/yearsPerSec) + hold |
 | muni で外れ島が消えている | 仕様（standards §3: 小笠原等は v1 非描画）。必要になったら決定ログを起こして拡張 |
