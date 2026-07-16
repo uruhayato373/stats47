@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-16T04:59:38.807Z",
+  "generatedAt": "2026-07-16T05:35:22.435Z",
   "weights": {
     "affinity": 0.35,
     "freshness": 0.25,
@@ -30,6 +30,7 @@
         "binaryFram": 0.3,
         "gscImp": 0.75
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -51,6 +52,7 @@
         "binaryFram": 1,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -72,6 +74,7 @@
         "binaryFram": 0.3,
         "gscImp": 0.66
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -93,6 +96,7 @@
         "binaryFram": 0.3,
         "gscImp": 0.4
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -114,6 +118,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -135,6 +140,7 @@
         "binaryFram": 0.3,
         "gscImp": 0.39
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -156,6 +162,7 @@
         "binaryFram": 0.3,
         "gscImp": 0.34
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -177,6 +184,7 @@
         "binaryFram": 0.3,
         "gscImp": 0.3
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -198,6 +206,7 @@
         "binaryFram": 0.3,
         "gscImp": 0.45
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -219,6 +228,7 @@
         "binaryFram": 0.3,
         "gscImp": 0.26
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -240,6 +250,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -261,6 +272,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -282,6 +294,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -303,6 +316,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "generated",
       "themeId": "migration-inflow-muni",
       "note": null
@@ -324,6 +338,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -345,6 +360,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -366,6 +382,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -387,6 +404,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -408,6 +426,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -429,6 +448,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -450,6 +470,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -471,6 +492,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -492,6 +514,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -513,6 +536,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -534,6 +558,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -555,6 +580,7 @@
         "binaryFram": 0.3,
         "gscImp": 0.38
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -576,6 +602,7 @@
         "binaryFram": 0.3,
         "gscImp": 0.38
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -597,6 +624,7 @@
         "binaryFram": 0.3,
         "gscImp": 0.2
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -618,6 +646,7 @@
         "binaryFram": 0.3,
         "gscImp": 0.38
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -639,6 +668,7 @@
         "binaryFram": 0.3,
         "gscImp": 0.34
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -660,6 +690,7 @@
         "binaryFram": 0.3,
         "gscImp": 0.66
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -681,6 +712,7 @@
         "binaryFram": 0.3,
         "gscImp": 0.15
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -702,6 +734,7 @@
         "binaryFram": 0.3,
         "gscImp": 0.29
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -723,6 +756,7 @@
         "binaryFram": 0.3,
         "gscImp": 0.08
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -744,6 +778,7 @@
         "binaryFram": 0.3,
         "gscImp": 0.08
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -765,6 +800,7 @@
         "binaryFram": 0.3,
         "gscImp": 0.53
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -786,6 +822,7 @@
         "binaryFram": 0.3,
         "gscImp": 0.2
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -807,6 +844,7 @@
         "binaryFram": 0.3,
         "gscImp": 0.18
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -828,6 +866,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -849,6 +888,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -870,6 +910,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -891,6 +932,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -912,6 +954,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -933,6 +976,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -954,6 +998,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -975,6 +1020,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -996,6 +1042,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -1017,6 +1064,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -1038,6 +1086,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -1059,6 +1108,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -1080,6 +1130,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -1101,6 +1152,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -1122,6 +1174,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -1143,6 +1196,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -1164,6 +1218,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -1185,6 +1240,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -1206,6 +1262,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -1227,6 +1284,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -1248,6 +1306,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -1269,6 +1328,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -1290,6 +1350,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -1311,6 +1372,7 @@
         "binaryFram": 0.3,
         "gscImp": 0.15
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -1332,6 +1394,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.08
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -1353,6 +1416,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -1374,6 +1438,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -1395,6 +1460,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -1416,6 +1482,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -1437,6 +1504,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -1458,6 +1526,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -1479,6 +1548,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -1500,6 +1570,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -1521,6 +1592,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -1542,6 +1614,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -1563,6 +1636,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -1584,6 +1658,7 @@
         "binaryFram": 0.3,
         "gscImp": 0.08
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -1605,6 +1680,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -1626,6 +1702,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -1647,6 +1724,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -1668,6 +1746,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -1689,6 +1768,7 @@
         "binaryFram": 0.3,
         "gscImp": 0.33
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -1710,6 +1790,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -1731,6 +1812,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -1752,6 +1834,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -1773,6 +1856,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -1794,6 +1878,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -1815,6 +1900,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -1836,6 +1922,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -1857,6 +1944,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -1878,6 +1966,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -1899,6 +1988,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -1920,6 +2010,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -1941,6 +2032,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -1962,6 +2054,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -1983,6 +2076,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -2004,6 +2098,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -2025,6 +2120,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -2046,6 +2142,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -2067,6 +2164,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -2088,6 +2186,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -2109,6 +2208,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -2130,6 +2230,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -2151,6 +2252,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -2172,6 +2274,7 @@
         "binaryFram": 0.3,
         "gscImp": 0.31
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -2193,6 +2296,7 @@
         "binaryFram": 0.3,
         "gscImp": 0.29
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -2214,6 +2318,7 @@
         "binaryFram": 0.3,
         "gscImp": 0.41
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -2235,6 +2340,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -2256,6 +2362,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -2277,6 +2384,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -2298,6 +2406,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -2319,6 +2428,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -2340,6 +2450,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -2361,6 +2472,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -2382,6 +2494,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -2403,6 +2516,7 @@
         "binaryFram": 0.3,
         "gscImp": 0.22
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -2424,6 +2538,7 @@
         "binaryFram": 0.3,
         "gscImp": 0.15
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -2445,6 +2560,7 @@
         "binaryFram": 0.3,
         "gscImp": 0.12
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -2466,6 +2582,7 @@
         "binaryFram": 0.3,
         "gscImp": 0.12
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -2487,6 +2604,7 @@
         "binaryFram": 0.3,
         "gscImp": 0.22
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -2508,6 +2626,7 @@
         "binaryFram": 0.3,
         "gscImp": 0.18
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -2529,6 +2648,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -2550,6 +2670,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -2571,6 +2692,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -2592,6 +2714,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -2613,6 +2736,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -2634,6 +2758,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -2655,6 +2780,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -2676,6 +2802,7 @@
         "binaryFram": 0.3,
         "gscImp": 0.46
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -2697,6 +2824,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -2718,6 +2846,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -2739,6 +2868,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -2760,6 +2890,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -2781,6 +2912,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -2802,6 +2934,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -2823,6 +2956,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -2844,6 +2978,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -2865,6 +3000,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -2886,6 +3022,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -2907,6 +3044,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -2928,6 +3066,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -2949,6 +3088,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.08
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -2970,6 +3110,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -2991,6 +3132,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -3012,6 +3154,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -3033,6 +3176,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -3054,6 +3198,7 @@
         "binaryFram": 0.3,
         "gscImp": 0.15
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -3075,6 +3220,7 @@
         "binaryFram": 0.3,
         "gscImp": 0.12
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -3096,6 +3242,7 @@
         "binaryFram": 0.3,
         "gscImp": 0.08
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -3117,6 +3264,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -3138,6 +3286,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -3159,6 +3308,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -3180,6 +3330,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -3201,6 +3352,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -3222,6 +3374,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -3243,6 +3396,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -3264,6 +3418,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -3285,6 +3440,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -3306,6 +3462,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -3327,6 +3484,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -3348,6 +3506,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -3369,6 +3528,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -3390,6 +3550,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -3411,6 +3572,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -3432,6 +3594,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -3453,6 +3616,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -3474,6 +3638,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -3495,6 +3660,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -3516,6 +3682,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -3537,6 +3704,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -3558,6 +3726,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -3579,6 +3748,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -3600,6 +3770,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -3621,6 +3792,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -3642,6 +3814,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -3663,6 +3836,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -3684,6 +3858,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -3705,6 +3880,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -3726,6 +3902,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -3747,6 +3924,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -3768,6 +3946,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -3789,6 +3968,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -3810,6 +3990,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -3831,6 +4012,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -3852,6 +4034,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -3873,6 +4056,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -3894,6 +4078,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -3915,6 +4100,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -3936,6 +4122,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -3957,6 +4144,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -3978,6 +4166,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -3999,6 +4188,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -4020,6 +4210,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -4041,6 +4232,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -4062,6 +4254,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -4083,6 +4276,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -4104,6 +4298,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -4125,6 +4320,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -4146,6 +4342,7 @@
         "binaryFram": 0.3,
         "gscImp": 0.08
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -4167,6 +4364,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -4188,6 +4386,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -4209,6 +4408,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -4230,6 +4430,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -4251,6 +4452,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -4272,6 +4474,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -4293,6 +4496,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -4314,6 +4518,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -4335,6 +4540,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -4356,6 +4562,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -4377,6 +4584,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -4398,6 +4606,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -4419,6 +4628,7 @@
         "binaryFram": 0.3,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ + 型E 合成の塗りベース (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -4440,6 +4650,7 @@
         "binaryFram": 0.7,
         "gscImp": 1
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -4461,6 +4672,7 @@
         "binaryFram": 1,
         "gscImp": 0.52
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -4482,6 +4694,7 @@
         "binaryFram": 1,
         "gscImp": 0.31
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -4503,6 +4716,7 @@
         "binaryFram": 1,
         "gscImp": 0.3
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -4524,6 +4738,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.6
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -4545,6 +4760,7 @@
         "binaryFram": 1,
         "gscImp": 0.72
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -4566,6 +4782,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.52
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -4587,6 +4804,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.51
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -4608,6 +4826,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.48
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -4629,6 +4848,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.45
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -4650,6 +4870,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.45
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -4671,6 +4892,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.44
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -4692,6 +4914,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.41
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -4713,6 +4936,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.59
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -4734,6 +4958,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.42
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -4755,6 +4980,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.39
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -4776,6 +5002,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.38
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -4797,6 +5024,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.53
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -4818,6 +5046,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.34
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -4839,6 +5068,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.51
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -4860,6 +5090,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.32
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -4881,6 +5112,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.32
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -4902,6 +5134,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.3
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -4923,6 +5156,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.29
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -4944,6 +5178,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.28
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -4965,6 +5200,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.28
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -4986,6 +5222,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.44
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -5007,6 +5244,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.27
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -5028,6 +5266,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.26
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -5049,6 +5288,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.26
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -5070,6 +5310,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.24
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -5091,6 +5332,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.23
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -5112,6 +5354,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.23
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -5133,6 +5376,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.23
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -5154,6 +5398,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.23
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -5175,6 +5420,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.22
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -5196,6 +5442,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.39
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -5217,6 +5464,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.2
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -5238,6 +5486,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.2
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -5259,6 +5508,7 @@
         "binaryFram": 1,
         "gscImp": 0.08
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -5280,6 +5530,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.2
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -5301,6 +5552,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.37
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -5322,6 +5574,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.35
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -5343,6 +5596,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.18
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -5364,6 +5618,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.18
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -5385,6 +5640,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.18
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -5406,6 +5662,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.18
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -5427,6 +5684,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.18
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -5448,6 +5706,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.35
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -5469,6 +5728,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.15
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -5490,6 +5750,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.15
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -5511,6 +5772,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.15
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -5532,6 +5794,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.15
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -5553,6 +5816,7 @@
         "binaryFram": 1,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -5574,6 +5838,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.12
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -5595,6 +5860,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.12
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -5616,6 +5882,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.12
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -5637,6 +5904,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.12
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -5658,6 +5926,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.12
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -5679,6 +5948,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.12
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -5700,6 +5970,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.12
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -5721,6 +5992,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.12
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -5742,6 +6014,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.12
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -5763,6 +6036,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.12
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -5784,6 +6058,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.29
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -5805,6 +6080,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.27
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -5826,6 +6102,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.27
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -5847,6 +6124,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.26
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -5868,6 +6146,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.26
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -5889,6 +6168,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.08
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -5910,6 +6190,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.08
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -5931,6 +6212,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.08
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -5952,6 +6234,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.08
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -5973,6 +6256,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.08
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -5994,6 +6278,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.08
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -6015,6 +6300,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.08
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -6036,6 +6322,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.08
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -6057,6 +6344,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.08
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -6078,6 +6366,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.08
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -6099,6 +6388,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.22
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -6120,6 +6410,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.22
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -6141,6 +6432,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.2
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -6162,6 +6454,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.2
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -6183,6 +6476,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.2
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -6204,6 +6498,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.18
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -6225,6 +6520,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.18
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -6246,6 +6542,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -6267,6 +6564,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -6288,6 +6586,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -6309,6 +6608,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -6330,6 +6630,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -6351,6 +6652,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -6372,6 +6674,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -6393,6 +6696,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -6414,6 +6718,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -6435,6 +6740,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -6456,6 +6762,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -6477,6 +6784,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -6498,6 +6806,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -6519,6 +6828,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -6540,6 +6850,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -6561,6 +6872,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -6582,6 +6894,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -6603,6 +6916,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -6624,6 +6938,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -6645,6 +6960,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -6666,6 +6982,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -6687,6 +7004,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -6708,6 +7026,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -6729,6 +7048,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -6750,6 +7070,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -6771,6 +7092,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -6792,6 +7114,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -6813,6 +7136,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -6834,6 +7158,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -6855,6 +7180,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -6876,6 +7202,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -6897,6 +7224,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -6918,6 +7246,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -6939,6 +7268,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -6960,6 +7290,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -6981,6 +7312,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -7002,6 +7334,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -7023,6 +7356,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -7044,6 +7378,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -7065,6 +7400,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -7086,6 +7422,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -7107,6 +7444,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -7128,6 +7466,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -7149,6 +7488,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -7170,6 +7510,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -7191,6 +7532,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -7212,6 +7554,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -7233,6 +7576,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -7254,6 +7598,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -7275,6 +7620,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -7296,6 +7642,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -7317,6 +7664,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -7338,6 +7686,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -7359,6 +7708,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -7380,6 +7730,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -7401,6 +7752,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -7422,6 +7774,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -7443,6 +7796,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -7464,6 +7818,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -7485,6 +7840,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -7506,6 +7862,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -7527,6 +7884,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -7548,6 +7906,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -7569,6 +7928,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -7590,6 +7950,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -7611,6 +7972,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -7632,6 +7994,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -7653,6 +8016,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -7674,6 +8038,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -7695,6 +8060,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -7716,6 +8082,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -7737,6 +8104,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -7758,6 +8126,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -7779,6 +8148,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -7800,6 +8170,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -7821,6 +8192,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -7842,6 +8214,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -7863,6 +8236,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -7884,6 +8258,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -7905,6 +8280,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -7926,6 +8302,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -7947,6 +8324,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -7968,6 +8346,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -7989,6 +8368,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.15
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -8010,6 +8390,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.15
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -8031,6 +8412,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.15
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -8052,6 +8434,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.15
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -8073,6 +8456,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.12
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -8094,6 +8478,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.12
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -8115,6 +8500,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.12
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -8136,6 +8522,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.12
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -8157,6 +8544,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.12
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -8178,6 +8566,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.12
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -8199,6 +8588,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.6
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -8220,6 +8610,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.59
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -8241,6 +8632,7 @@
         "binaryFram": 1,
         "gscImp": 0.28
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -8262,6 +8654,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.08
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -8283,6 +8676,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.08
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -8304,6 +8698,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.36
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -8325,6 +8720,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -8346,6 +8742,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -8367,6 +8764,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -8388,6 +8786,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -8409,6 +8808,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -8430,6 +8830,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -8451,6 +8852,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -8472,6 +8874,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -8493,6 +8896,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -8514,6 +8918,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -8535,6 +8940,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -8556,6 +8962,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -8577,6 +8984,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -8598,6 +9006,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -8619,6 +9028,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -8640,6 +9050,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -8661,6 +9072,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -8682,6 +9094,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -8703,6 +9116,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -8724,6 +9138,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -8745,6 +9160,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -8766,6 +9182,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -8787,6 +9204,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -8808,6 +9226,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -8829,6 +9248,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -8850,6 +9270,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -8871,6 +9292,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -8892,6 +9314,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -8913,6 +9336,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -8934,6 +9358,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -8955,6 +9380,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -8976,6 +9402,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -8997,6 +9424,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -9018,6 +9446,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -9039,6 +9468,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -9060,6 +9490,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -9081,6 +9512,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -9102,6 +9534,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -9123,6 +9556,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -9144,6 +9578,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -9165,6 +9600,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -9186,6 +9622,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -9207,6 +9644,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -9228,6 +9666,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -9249,6 +9688,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -9270,6 +9710,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -9291,6 +9732,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -9312,6 +9754,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -9333,6 +9776,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -9354,6 +9798,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -9375,6 +9820,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -9396,6 +9842,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -9417,6 +9864,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -9438,6 +9886,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -9459,6 +9908,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -9480,6 +9930,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -9501,6 +9952,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -9522,6 +9974,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -9543,6 +9996,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -9564,6 +10018,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -9585,6 +10040,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -9606,6 +10062,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -9627,6 +10084,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -9648,6 +10106,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -9669,6 +10128,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.49
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -9690,6 +10150,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.46
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -9711,6 +10172,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.28
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -9732,6 +10194,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.28
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -9753,6 +10216,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.44
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -9774,6 +10238,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.27
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -9795,6 +10260,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.26
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -9816,6 +10282,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.43
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -9837,6 +10304,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.26
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -9858,6 +10326,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.42
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -9879,6 +10348,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.41
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -9900,6 +10370,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.42
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -9921,6 +10392,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.41
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -9942,6 +10414,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.4
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -9963,6 +10436,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.22
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -9984,6 +10458,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.39
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -10005,6 +10480,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.39
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -10026,6 +10502,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.38
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -10047,6 +10524,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.2
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -10068,6 +10546,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.36
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -10089,6 +10568,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.35
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -10110,6 +10590,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.35
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -10131,6 +10612,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.35
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -10152,6 +10634,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.34
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -10173,6 +10656,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.34
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -10194,6 +10678,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.34
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -10215,6 +10700,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.33
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -10236,6 +10722,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.33
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -10257,6 +10744,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.15
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -10278,6 +10766,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.15
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -10299,6 +10788,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.15
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -10320,6 +10810,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.15
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -10341,6 +10832,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.15
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -10362,6 +10854,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.33
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -10383,6 +10876,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.33
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -10404,6 +10898,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.15
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -10425,6 +10920,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.15
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -10446,6 +10942,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.32
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -10467,6 +10964,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.32
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -10488,6 +10986,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.32
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -10509,6 +11008,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.32
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -10530,6 +11030,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.32
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -10551,6 +11052,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.31
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -10572,6 +11074,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.31
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -10593,6 +11096,7 @@
         "binaryFram": 1,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -10614,6 +11118,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.3
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -10635,6 +11140,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.3
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -10656,6 +11162,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.3
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -10677,6 +11184,7 @@
         "binaryFram": 1,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -10698,6 +11206,7 @@
         "binaryFram": 1,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -10719,6 +11228,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.3
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -10740,6 +11250,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.12
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -10761,6 +11272,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.29
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -10782,6 +11294,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.12
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -10803,6 +11316,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.26
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -10824,6 +11338,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.08
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -10845,6 +11360,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.08
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -10866,6 +11382,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.08
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -10887,6 +11404,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.08
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -10908,6 +11426,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.08
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -10929,6 +11448,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.08
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -10950,6 +11470,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.08
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -10971,6 +11492,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.08
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -10992,6 +11514,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.08
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -11013,6 +11536,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.24
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -11034,6 +11558,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.24
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -11055,6 +11580,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.24
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -11076,6 +11602,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.24
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -11097,6 +11624,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.23
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -11118,6 +11646,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.22
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -11139,6 +11668,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.22
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -11160,6 +11690,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.22
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -11181,6 +11712,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.22
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -11202,6 +11734,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.2
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -11223,6 +11756,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.2
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -11244,6 +11778,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.2
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -11265,6 +11800,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.18
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -11286,6 +11822,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.18
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -11307,6 +11844,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.18
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -11328,6 +11866,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.18
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -11349,6 +11888,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -11370,6 +11910,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -11391,6 +11932,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -11412,6 +11954,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -11433,6 +11976,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -11454,6 +11998,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -11475,6 +12020,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -11496,6 +12042,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -11517,6 +12064,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -11538,6 +12086,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -11559,6 +12108,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -11580,6 +12130,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -11601,6 +12152,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -11622,6 +12174,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -11643,6 +12196,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -11664,6 +12218,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -11685,6 +12240,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -11706,6 +12262,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -11727,6 +12284,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -11748,6 +12306,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -11769,6 +12328,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -11790,6 +12350,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -11811,6 +12372,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -11832,6 +12394,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -11853,6 +12416,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -11874,6 +12438,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.15
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -11895,6 +12460,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.15
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -11916,6 +12482,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.15
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -11937,6 +12504,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.15
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -11958,6 +12526,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.15
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -11979,6 +12548,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.15
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -12000,6 +12570,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.12
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -12021,6 +12592,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.12
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -12042,6 +12614,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.12
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -12063,6 +12636,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.12
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -12084,6 +12658,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.12
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -12105,6 +12680,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.08
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -12126,6 +12702,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.08
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -12147,6 +12724,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.08
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -12168,6 +12746,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.08
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -12189,6 +12768,7 @@
         "binaryFram": 0.7,
         "gscImp": 0.08
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -12210,6 +12790,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -12231,6 +12812,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -12252,6 +12834,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -12273,6 +12856,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -12294,6 +12878,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -12315,6 +12900,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -12336,6 +12922,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -12357,6 +12944,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -12378,6 +12966,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -12399,6 +12988,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -12420,6 +13010,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -12441,6 +13032,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -12462,6 +13054,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -12483,6 +13076,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -12504,6 +13098,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -12525,6 +13120,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -12546,6 +13142,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -12567,6 +13164,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -12588,6 +13186,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -12609,6 +13208,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -12630,6 +13230,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -12651,6 +13252,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -12672,6 +13274,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -12693,6 +13296,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -12714,6 +13318,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -12735,6 +13340,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -12756,6 +13362,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -12777,6 +13384,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -12798,6 +13406,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -12819,6 +13428,7 @@
         "binaryFram": 0.7,
         "gscImp": 0
       },
+      "capability": "型A 二値マップ (実装済)",
       "status": "candidate",
       "themeId": null,
       "note": null
@@ -12832,6 +13442,7 @@
       "dataId": "W01",
       "geometryType": "point",
       "renderClass": "point-plot",
+      "capability": "型C 点プロット (実装済)",
       "availability": "r2",
       "license": "non-commercial",
       "status": "candidate",
@@ -12847,6 +13458,7 @@
       "dataId": "P03",
       "geometryType": "point",
       "renderClass": "point-plot",
+      "capability": "型C 点プロット (実装済)",
       "availability": "r2",
       "license": "non-commercial",
       "status": "candidate",
@@ -12862,6 +13474,7 @@
       "dataId": "P12",
       "geometryType": "point",
       "renderClass": "point-plot",
+      "capability": "型C 点プロット (実装済)",
       "availability": "r2",
       "license": "non-commercial",
       "status": "candidate",
@@ -12877,6 +13490,7 @@
       "dataId": "P35",
       "geometryType": "point",
       "renderClass": "point-plot",
+      "capability": "型C 点プロット (実装済)",
       "availability": "r2",
       "license": "non-commercial",
       "status": "candidate",
@@ -12892,6 +13506,7 @@
       "dataId": "C09",
       "geometryType": "point",
       "renderClass": "point-plot",
+      "capability": "型C 点プロット (実装済)",
       "availability": "r2",
       "license": "non-commercial",
       "status": "candidate",
@@ -12907,6 +13522,7 @@
       "dataId": "C28",
       "geometryType": "point",
       "renderClass": "point-plot",
+      "capability": "型C 点プロット (実装済)",
       "availability": "r2",
       "license": "commercial-ok",
       "status": "candidate",
@@ -12922,6 +13538,7 @@
       "dataId": "S12",
       "geometryType": "point",
       "renderClass": "point-plot",
+      "capability": "型C 点プロット (実装済)",
       "availability": "r2",
       "license": "cc-by-4.0",
       "status": "generated",
@@ -12937,6 +13554,7 @@
       "dataId": "N06",
       "geometryType": "line",
       "renderClass": "line-timeline",
+      "capability": "型D 線ネットワーク・時系列リール (実装済)",
       "availability": "r2",
       "license": "cc-by-4.0-partial",
       "status": "generated",
@@ -12952,6 +13570,7 @@
       "dataId": "N02",
       "geometryType": "line",
       "renderClass": "line-network",
+      "capability": "型D 線ネットワーク静止画 (実装済)",
       "availability": "r2",
       "license": "cc-by-4.0",
       "status": "candidate",
@@ -12967,6 +13586,7 @@
       "dataId": "L01",
       "geometryType": "point",
       "renderClass": "point-plot",
+      "capability": "型C 点プロット (実装済)",
       "availability": "registered",
       "license": "cc-by-4.0",
       "status": "candidate",
@@ -12982,6 +13602,7 @@
       "dataId": "L02",
       "geometryType": "point",
       "renderClass": "point-plot",
+      "capability": "型C 点プロット (実装済)",
       "availability": "registered",
       "license": "cc-by-4.0",
       "status": "candidate",
@@ -12997,6 +13618,7 @@
       "dataId": "P04",
       "geometryType": "point",
       "renderClass": "point-plot",
+      "capability": "型C 点プロット (実装済)",
       "availability": "registered",
       "license": "cc-by-4.0",
       "status": "candidate",
@@ -13012,6 +13634,7 @@
       "dataId": "P05",
       "geometryType": "point",
       "renderClass": "point-plot",
+      "capability": "型C 点プロット (実装済)",
       "availability": "registered",
       "license": "cc-by-4.0",
       "status": "candidate",
@@ -13027,6 +13650,7 @@
       "dataId": "P11",
       "geometryType": "point",
       "renderClass": "point-plot",
+      "capability": "型C 点プロット (実装済)",
       "availability": "registered",
       "license": "cc-by-4.0",
       "status": "candidate",
@@ -13042,6 +13666,7 @@
       "dataId": "P14",
       "geometryType": "point",
       "renderClass": "point-plot",
+      "capability": "型C 点プロット (実装済)",
       "availability": "registered",
       "license": "cc-by-4.0-partial",
       "status": "candidate",
@@ -13057,6 +13682,7 @@
       "dataId": "P17",
       "geometryType": "point",
       "renderClass": "point-plot",
+      "capability": "型C 点プロット (実装済)",
       "availability": "registered",
       "license": "non-commercial",
       "status": "candidate",
@@ -13072,6 +13698,7 @@
       "dataId": "P18",
       "geometryType": "point",
       "renderClass": "point-plot",
+      "capability": "型C 点プロット (実装済)",
       "availability": "registered",
       "license": "non-commercial",
       "status": "candidate",
@@ -13087,6 +13714,7 @@
       "dataId": "P29",
       "geometryType": "point",
       "renderClass": "point-plot",
+      "capability": "型C 点プロット (実装済)",
       "availability": "registered",
       "license": "cc-by-4.0",
       "status": "candidate",
@@ -13102,6 +13730,7 @@
       "dataId": "P36",
       "geometryType": "point",
       "renderClass": "point-plot",
+      "capability": "型C 点プロット (実装済)",
       "availability": "registered",
       "license": "cc-by-4.0",
       "status": "candidate",
@@ -13117,6 +13746,7 @@
       "dataId": "C02",
       "geometryType": "point",
       "renderClass": "point-plot",
+      "capability": "型C 点プロット (実装済)",
       "availability": "registered",
       "license": "non-commercial",
       "status": "candidate",
@@ -13132,6 +13762,7 @@
       "dataId": "A10",
       "geometryType": "polygon",
       "renderClass": "muni-binary",
+      "capability": "型A 二値マップ (実装済)",
       "availability": "registered",
       "license": "cc-by-4.0-partial",
       "status": "candidate",
@@ -13147,6 +13778,7 @@
       "dataId": "A16",
       "geometryType": "polygon",
       "renderClass": "muni-binary",
+      "capability": "型A 二値マップ (実装済)",
       "availability": "registered",
       "license": "commercial-ok",
       "status": "candidate",
@@ -13162,6 +13794,7 @@
       "dataId": "A17",
       "geometryType": "polygon",
       "renderClass": "muni-binary",
+      "capability": "型A 二値マップ (実装済)",
       "availability": "registered",
       "license": "commercial-ok",
       "status": "candidate",
@@ -13177,6 +13810,7 @@
       "dataId": "A22",
       "geometryType": "polygon",
       "renderClass": "muni-binary",
+      "capability": "型A 二値マップ (実装済)",
       "availability": "registered",
       "license": "commercial-ok",
       "status": "candidate",
@@ -13192,6 +13826,7 @@
       "dataId": "A38",
       "geometryType": "polygon",
       "renderClass": "muni-binary",
+      "capability": "型A 二値マップ (実装済)",
       "availability": "registered",
       "license": "cc-by-4.0",
       "status": "candidate",
@@ -13207,6 +13842,7 @@
       "dataId": "C23",
       "geometryType": "line",
       "renderClass": "line-network",
+      "capability": "型D 線ネットワーク静止画 (実装済)",
       "availability": "registered",
       "license": "non-commercial",
       "status": "candidate",
@@ -13222,6 +13858,7 @@
       "dataId": "W05",
       "geometryType": "line",
       "renderClass": "line-network",
+      "capability": "型D 線ネットワーク静止画 (実装済)",
       "availability": "registered",
       "license": "non-commercial",
       "status": "candidate",
@@ -13237,6 +13874,7 @@
       "dataId": "N07",
       "geometryType": "line",
       "renderClass": "line-network",
+      "capability": "型D 線ネットワーク静止画 (実装済)",
       "availability": "registered",
       "license": "cc-by-4.0",
       "status": "candidate",
@@ -13252,6 +13890,7 @@
       "dataId": "W09",
       "geometryType": "polygon",
       "renderClass": "polygon-overlay",
+      "capability": "型A 面塗り (型A流用・要 pipeline)",
       "availability": "r2",
       "license": "commercial-ok",
       "status": "candidate",
@@ -13267,6 +13906,7 @@
       "dataId": "P23",
       "geometryType": "point+line+polygon",
       "renderClass": "point-plot",
+      "capability": "型C 点プロット (実装済)",
       "availability": "candidate",
       "status": "candidate",
       "themeId": null,
@@ -13281,6 +13921,7 @@
       "dataId": "A35a",
       "geometryType": "point+polygon",
       "renderClass": "point-plot",
+      "capability": "型C 点プロット (実装済)",
       "availability": "candidate",
       "status": "candidate",
       "themeId": null,
@@ -13295,6 +13936,7 @@
       "dataId": "A35b",
       "geometryType": "point+polygon",
       "renderClass": "point-plot",
+      "capability": "型C 点プロット (実装済)",
       "availability": "candidate",
       "status": "candidate",
       "themeId": null,
@@ -13309,6 +13951,7 @@
       "dataId": "A35c",
       "geometryType": "point",
       "renderClass": "point-plot",
+      "capability": "型C 点プロット (実装済)",
       "availability": "candidate",
       "status": "candidate",
       "themeId": null,
@@ -13323,6 +13966,21 @@
       "dataId": "A22-m",
       "geometryType": "point+polygon",
       "renderClass": "point-plot",
+      "capability": "型C 点プロット (実装済)",
+      "availability": "candidate",
+      "status": "candidate",
+      "themeId": null,
+      "note": "未登録候補 (要 datasets.ts 登録 → pipeline)"
+    },
+    {
+      "metricKey": "ksj:P20",
+      "source": "ksj",
+      "lane": "ksj",
+      "title": "避難施設",
+      "score": 0.65,
+      "dataId": "P20",
+      "renderClass": "point-plot",
+      "capability": "型C 点プロット (実装済)",
       "availability": "candidate",
       "status": "candidate",
       "themeId": null,
@@ -13337,6 +13995,7 @@
       "dataId": "A30b",
       "geometryType": "point",
       "renderClass": "point-plot",
+      "capability": "型C 点プロット (実装済)",
       "availability": "candidate",
       "status": "candidate",
       "themeId": null,
@@ -13351,6 +14010,7 @@
       "dataId": "A46",
       "geometryType": "point+polygon",
       "renderClass": "point-plot",
+      "capability": "型C 点プロット (実装済)",
       "availability": "candidate",
       "status": "candidate",
       "themeId": null,
@@ -13365,6 +14025,7 @@
       "dataId": "A47",
       "geometryType": "point+polygon",
       "renderClass": "point-plot",
+      "capability": "型C 点プロット (実装済)",
       "availability": "candidate",
       "status": "candidate",
       "themeId": null,
@@ -13379,6 +14040,7 @@
       "dataId": "A48",
       "geometryType": "point+polygon",
       "renderClass": "point-plot",
+      "capability": "型C 点プロット (実装済)",
       "availability": "candidate",
       "status": "candidate",
       "themeId": null,
@@ -13393,6 +14055,7 @@
       "dataId": "P28",
       "geometryType": "point",
       "renderClass": "point-plot",
+      "capability": "型C 点プロット (実装済)",
       "availability": "candidate",
       "status": "candidate",
       "themeId": null,
@@ -13407,6 +14070,21 @@
       "dataId": "P34",
       "geometryType": "point",
       "renderClass": "point-plot",
+      "capability": "型C 点プロット (実装済)",
+      "availability": "candidate",
+      "status": "candidate",
+      "themeId": null,
+      "note": "未登録候補 (要 datasets.ts 登録 → pipeline)"
+    },
+    {
+      "metricKey": "ksj:P02",
+      "source": "ksj",
+      "lane": "ksj",
+      "title": "公共施設",
+      "score": 0.65,
+      "dataId": "P02",
+      "renderClass": "point-plot",
+      "capability": "型C 点プロット (実装済)",
       "availability": "candidate",
       "status": "candidate",
       "themeId": null,
@@ -13421,6 +14099,7 @@
       "dataId": "P30",
       "geometryType": "point",
       "renderClass": "point-plot",
+      "capability": "型C 点プロット (実装済)",
       "availability": "candidate",
       "status": "candidate",
       "themeId": null,
@@ -13435,6 +14114,7 @@
       "dataId": "P27",
       "geometryType": "point",
       "renderClass": "point-plot",
+      "capability": "型C 点プロット (実装済)",
       "availability": "candidate",
       "status": "candidate",
       "themeId": null,
@@ -13449,6 +14129,7 @@
       "dataId": "P21",
       "geometryType": "point+polygon",
       "renderClass": "point-plot",
+      "capability": "型C 点プロット (実装済)",
       "availability": "candidate",
       "status": "candidate",
       "themeId": null,
@@ -13463,6 +14144,7 @@
       "dataId": "P22",
       "geometryType": "point",
       "renderClass": "point-plot",
+      "capability": "型C 点プロット (実装済)",
       "availability": "candidate",
       "status": "candidate",
       "themeId": null,
@@ -13477,6 +14159,7 @@
       "dataId": "P15",
       "geometryType": "point",
       "renderClass": "point-plot",
+      "capability": "型C 点プロット (実装済)",
       "availability": "candidate",
       "status": "candidate",
       "themeId": null,
@@ -13491,6 +14174,7 @@
       "dataId": "P07",
       "geometryType": "point",
       "renderClass": "point-plot",
+      "capability": "型C 点プロット (実装済)",
       "availability": "candidate",
       "status": "candidate",
       "themeId": null,
@@ -13505,6 +14189,7 @@
       "dataId": "P26",
       "geometryType": "point",
       "renderClass": "point-plot",
+      "capability": "型C 点プロット (実装済)",
       "availability": "candidate",
       "status": "candidate",
       "themeId": null,
@@ -13519,6 +14204,7 @@
       "dataId": "P16",
       "geometryType": "point",
       "renderClass": "point-plot",
+      "capability": "型C 点プロット (実装済)",
       "availability": "candidate",
       "status": "candidate",
       "themeId": null,
@@ -13533,6 +14219,7 @@
       "dataId": "P24",
       "geometryType": "point",
       "renderClass": "point-plot",
+      "capability": "型C 点プロット (実装済)",
       "availability": "candidate",
       "status": "candidate",
       "themeId": null,
@@ -13547,6 +14234,7 @@
       "dataId": "P31",
       "geometryType": "point",
       "renderClass": "point-plot",
+      "capability": "型C 点プロット (実装済)",
       "availability": "candidate",
       "status": "candidate",
       "themeId": null,
@@ -13561,6 +14249,7 @@
       "dataId": "P33",
       "geometryType": "point",
       "renderClass": "point-plot",
+      "capability": "型C 点プロット (実装済)",
       "availability": "candidate",
       "status": "candidate",
       "themeId": null,
@@ -13575,6 +14264,7 @@
       "dataId": "P32",
       "geometryType": "point",
       "renderClass": "point-plot",
+      "capability": "型C 点プロット (実装済)",
       "availability": "candidate",
       "status": "candidate",
       "themeId": null,
@@ -13589,6 +14279,7 @@
       "dataId": "A34",
       "geometryType": "point+line+polygon",
       "renderClass": "point-plot",
+      "capability": "型C 点プロット (実装済)",
       "availability": "candidate",
       "status": "candidate",
       "themeId": null,
@@ -13603,6 +14294,21 @@
       "dataId": "P19",
       "geometryType": "point",
       "renderClass": "point-plot",
+      "capability": "型C 点プロット (実装済)",
+      "availability": "candidate",
+      "status": "candidate",
+      "themeId": null,
+      "note": "未登録候補 (要 datasets.ts 登録 → pipeline)"
+    },
+    {
+      "metricKey": "ksj:S05-c",
+      "source": "ksj",
+      "lane": "ksj",
+      "title": "交通流動量_駅別乗降数",
+      "score": 0.65,
+      "dataId": "S05-c",
+      "renderClass": "point-plot",
+      "capability": "型C 点プロット (実装済)",
       "availability": "candidate",
       "status": "candidate",
       "themeId": null,
@@ -13617,6 +14323,7 @@
       "dataId": "N08",
       "geometryType": "point+polygon",
       "renderClass": "point-plot",
+      "capability": "型C 点プロット (実装済)",
       "availability": "candidate",
       "status": "candidate",
       "themeId": null,
@@ -13631,6 +14338,7 @@
       "dataId": "N11",
       "geometryType": "point",
       "renderClass": "point-plot",
+      "capability": "型C 点プロット (実装済)",
       "availability": "candidate",
       "status": "candidate",
       "themeId": null,
@@ -13645,6 +14353,7 @@
       "dataId": "N09",
       "geometryType": "point+line",
       "renderClass": "point-plot",
+      "capability": "型C 点プロット (実装済)",
       "availability": "candidate",
       "status": "candidate",
       "themeId": null,
@@ -13659,6 +14368,7 @@
       "dataId": "N05",
       "geometryType": "point+line",
       "renderClass": "line-timeline",
+      "capability": "型D 線ネットワーク・時系列リール (実装済)",
       "availability": "candidate",
       "status": "candidate",
       "themeId": null,
@@ -13673,6 +14383,7 @@
       "dataId": "A24",
       "geometryType": "polygon",
       "renderClass": "muni-binary",
+      "capability": "型A 二値マップ (実装済)",
       "availability": "candidate",
       "status": "candidate",
       "themeId": null,
@@ -13687,6 +14398,7 @@
       "dataId": "A25",
       "geometryType": "polygon",
       "renderClass": "muni-binary",
+      "capability": "型A 二値マップ (実装済)",
       "availability": "candidate",
       "status": "candidate",
       "themeId": null,
@@ -13701,6 +14413,7 @@
       "dataId": "A19",
       "geometryType": "polygon",
       "renderClass": "muni-binary",
+      "capability": "型A 二値マップ (実装済)",
       "availability": "candidate",
       "status": "candidate",
       "themeId": null,
@@ -13715,6 +14428,7 @@
       "dataId": "A18",
       "geometryType": "polygon",
       "renderClass": "muni-binary",
+      "capability": "型A 二値マップ (実装済)",
       "availability": "candidate",
       "status": "candidate",
       "themeId": null,
@@ -13729,6 +14443,7 @@
       "dataId": "A54",
       "geometryType": "line+polygon",
       "renderClass": "line-network",
+      "capability": "型D 線ネットワーク静止画 (実装済)",
       "availability": "candidate",
       "status": "candidate",
       "themeId": null,
@@ -13743,6 +14458,7 @@
       "dataId": "A55",
       "geometryType": "line+polygon",
       "renderClass": "line-network",
+      "capability": "型D 線ネットワーク静止画 (実装済)",
       "availability": "candidate",
       "status": "candidate",
       "themeId": null,
@@ -13757,6 +14473,7 @@
       "dataId": "A37",
       "geometryType": "line+polygon",
       "renderClass": "line-network",
+      "capability": "型D 線ネットワーク静止画 (実装済)",
       "availability": "candidate",
       "status": "candidate",
       "themeId": null,
@@ -13771,6 +14488,7 @@
       "dataId": "A52",
       "geometryType": "line+polygon",
       "renderClass": "line-network",
+      "capability": "型D 線ネットワーク静止画 (実装済)",
       "availability": "candidate",
       "status": "candidate",
       "themeId": null,
@@ -13785,6 +14503,7 @@
       "dataId": "N10",
       "geometryType": "line",
       "renderClass": "line-network",
+      "capability": "型D 線ネットワーク静止画 (実装済)",
       "availability": "candidate",
       "status": "candidate",
       "themeId": null,
@@ -13799,6 +14518,7 @@
       "dataId": "N12",
       "geometryType": "line",
       "renderClass": "line-network",
+      "capability": "型D 線ネットワーク静止画 (実装済)",
       "availability": "candidate",
       "status": "candidate",
       "themeId": null,
@@ -13813,6 +14533,7 @@
       "dataId": "S10b",
       "geometryType": "line+polygon",
       "renderClass": "line-network",
+      "capability": "型D 線ネットワーク静止画 (実装済)",
       "availability": "candidate",
       "status": "candidate",
       "themeId": null,
@@ -13827,6 +14548,7 @@
       "dataId": "S10a",
       "geometryType": "line+polygon",
       "renderClass": "line-network",
+      "capability": "型D 線ネットワーク静止画 (実装済)",
       "availability": "candidate",
       "status": "candidate",
       "themeId": null,
@@ -13841,6 +14563,7 @@
       "dataId": "S05-b",
       "geometryType": "line+polygon",
       "renderClass": "line-network",
+      "capability": "型D 線ネットワーク静止画 (実装済)",
       "availability": "candidate",
       "status": "candidate",
       "themeId": null,
@@ -13855,6 +14578,7 @@
       "dataId": "S05-d",
       "geometryType": "line",
       "renderClass": "line-network",
+      "capability": "型D 線ネットワーク静止画 (実装済)",
       "availability": "candidate",
       "status": "candidate",
       "themeId": null,
@@ -13869,6 +14593,7 @@
       "dataId": "A12",
       "geometryType": "polygon",
       "renderClass": "polygon-overlay",
+      "capability": "型A 面塗り (型A流用・要 pipeline)",
       "availability": "registered",
       "license": "cc-by-4.0-partial",
       "status": "candidate",
@@ -13884,6 +14609,7 @@
       "dataId": "A13",
       "geometryType": "polygon",
       "renderClass": "polygon-overlay",
+      "capability": "型A 面塗り (型A流用・要 pipeline)",
       "availability": "registered",
       "license": "cc-by-4.0-partial",
       "status": "candidate",
@@ -13899,6 +14625,7 @@
       "dataId": "A27",
       "geometryType": "polygon",
       "renderClass": "polygon-overlay",
+      "capability": "型A 面塗り (型A流用・要 pipeline)",
       "availability": "registered",
       "license": "cc-by-4.0-partial",
       "status": "candidate",
@@ -13914,6 +14641,7 @@
       "dataId": "A29",
       "geometryType": "polygon",
       "renderClass": "polygon-overlay",
+      "capability": "型A 面塗り (型A流用・要 pipeline)",
       "availability": "registered",
       "license": "cc-by-4.0-partial",
       "status": "candidate",
@@ -13929,6 +14657,7 @@
       "dataId": "A31b",
       "geometryType": "polygon",
       "renderClass": "polygon-overlay",
+      "capability": "型A 面塗り (型A流用・要 pipeline)",
       "availability": "registered",
       "license": "cc-by-4.0",
       "status": "candidate",
@@ -13944,6 +14673,7 @@
       "dataId": "A32",
       "geometryType": "polygon",
       "renderClass": "polygon-overlay",
+      "capability": "型A 面塗り (型A流用・要 pipeline)",
       "availability": "registered",
       "license": "cc-by-4.0-partial",
       "status": "candidate",
@@ -13959,6 +14689,7 @@
       "dataId": "A33",
       "geometryType": "polygon",
       "renderClass": "polygon-overlay",
+      "capability": "型A 面塗り (型A流用・要 pipeline)",
       "availability": "registered",
       "license": "cc-by-4.0-partial",
       "status": "candidate",
@@ -13974,6 +14705,7 @@
       "dataId": "A40",
       "geometryType": "polygon",
       "renderClass": "polygon-overlay",
+      "capability": "型A 面塗り (型A流用・要 pipeline)",
       "availability": "registered",
       "license": "cc-by-4.0-partial",
       "status": "candidate",
@@ -13989,6 +14721,7 @@
       "dataId": "N03",
       "geometryType": "polygon",
       "renderClass": "polygon-overlay",
+      "capability": "型A 面塗り (型A流用・要 pipeline)",
       "availability": "registered",
       "license": "cc-by-4.0",
       "status": "candidate",
@@ -14004,6 +14737,7 @@
       "dataId": "P13",
       "geometryType": "polygon",
       "renderClass": "polygon-overlay",
+      "capability": "型A 面塗り (型A流用・要 pipeline)",
       "availability": "registered",
       "license": "non-commercial",
       "status": "candidate",
@@ -14019,6 +14753,7 @@
       "dataId": "G04-a",
       "geometryType": "mesh",
       "renderClass": "mesh",
+      "capability": "型F メッシュ塗り (未実装。標高/将来推計人口/土地利用マップ)",
       "availability": "registered",
       "license": "commercial-ok",
       "status": "candidate",
@@ -14034,6 +14769,7 @@
       "dataId": "L03-a",
       "geometryType": "mesh",
       "renderClass": "mesh",
+      "capability": "型F メッシュ塗り (未実装。標高/将来推計人口/土地利用マップ)",
       "availability": "registered",
       "license": "cc-by-4.0",
       "status": "candidate",
@@ -14049,6 +14785,7 @@
       "dataId": "mesh1000r6",
       "geometryType": "mesh",
       "renderClass": "mesh",
+      "capability": "型F メッシュ塗り (未実装。標高/将来推計人口/土地利用マップ)",
       "availability": "registered",
       "license": "cc-by-4.0",
       "status": "candidate",
@@ -14064,6 +14801,7 @@
       "dataId": "A45",
       "geometryType": "polygon",
       "renderClass": "polygon-overlay",
+      "capability": "型A 面塗り (型A流用・要 pipeline)",
       "availability": "candidate",
       "status": "candidate",
       "themeId": null,
@@ -14078,6 +14816,7 @@
       "dataId": "A43",
       "geometryType": "polygon",
       "renderClass": "polygon-overlay",
+      "capability": "型A 面塗り (型A流用・要 pipeline)",
       "availability": "candidate",
       "status": "candidate",
       "themeId": null,
@@ -14092,6 +14831,7 @@
       "dataId": "A44",
       "geometryType": "polygon",
       "renderClass": "polygon-overlay",
+      "capability": "型A 面塗り (型A流用・要 pipeline)",
       "availability": "candidate",
       "status": "candidate",
       "themeId": null,
@@ -14106,6 +14846,7 @@
       "dataId": "A09",
       "geometryType": "polygon",
       "renderClass": "polygon-overlay",
+      "capability": "型A 面塗り (型A流用・要 pipeline)",
       "availability": "candidate",
       "status": "candidate",
       "themeId": null,
@@ -14120,6 +14861,7 @@
       "dataId": "A50",
       "geometryType": "polygon",
       "renderClass": "polygon-overlay",
+      "capability": "型A 面塗り (型A流用・要 pipeline)",
       "availability": "candidate",
       "status": "candidate",
       "themeId": null,
@@ -14134,6 +14876,7 @@
       "dataId": "A42",
       "geometryType": "polygon",
       "renderClass": "polygon-overlay",
+      "capability": "型A 面塗り (型A流用・要 pipeline)",
       "availability": "candidate",
       "status": "candidate",
       "themeId": null,
@@ -14148,6 +14891,7 @@
       "dataId": "A03",
       "geometryType": "polygon",
       "renderClass": "polygon-overlay",
+      "capability": "型A 面塗り (型A流用・要 pipeline)",
       "availability": "candidate",
       "status": "candidate",
       "themeId": null,
@@ -14162,6 +14906,7 @@
       "dataId": "A21",
       "geometryType": "polygon",
       "renderClass": "polygon-overlay",
+      "capability": "型A 面塗り (型A流用・要 pipeline)",
       "availability": "candidate",
       "status": "candidate",
       "themeId": null,
@@ -14176,6 +14921,7 @@
       "dataId": "A20",
       "geometryType": "polygon",
       "renderClass": "polygon-overlay",
+      "capability": "型A 面塗り (型A流用・要 pipeline)",
       "availability": "candidate",
       "status": "candidate",
       "themeId": null,
@@ -14190,6 +14936,7 @@
       "dataId": "A23",
       "geometryType": "polygon",
       "renderClass": "polygon-overlay",
+      "capability": "型A 面塗り (型A流用・要 pipeline)",
       "availability": "candidate",
       "status": "candidate",
       "themeId": null,
@@ -14204,6 +14951,7 @@
       "dataId": "A39",
       "geometryType": "polygon",
       "renderClass": "polygon-overlay",
+      "capability": "型A 面塗り (型A流用・要 pipeline)",
       "availability": "candidate",
       "status": "candidate",
       "themeId": null,
@@ -14218,6 +14966,7 @@
       "dataId": "A31a",
       "geometryType": "polygon",
       "renderClass": "polygon-overlay",
+      "capability": "型A 面塗り (型A流用・要 pipeline)",
       "availability": "candidate",
       "status": "candidate",
       "themeId": null,
@@ -14232,6 +14981,7 @@
       "dataId": "A49",
       "geometryType": "polygon",
       "renderClass": "polygon-overlay",
+      "capability": "型A 面塗り (型A流用・要 pipeline)",
       "availability": "candidate",
       "status": "candidate",
       "themeId": null,
@@ -14246,6 +14996,7 @@
       "dataId": "A53",
       "geometryType": "polygon",
       "renderClass": "polygon-overlay",
+      "capability": "型A 面塗り (型A流用・要 pipeline)",
       "availability": "candidate",
       "status": "candidate",
       "themeId": null,
@@ -14260,6 +15011,7 @@
       "dataId": "A51",
       "geometryType": "polygon",
       "renderClass": "polygon-overlay",
+      "capability": "型A 面塗り (型A流用・要 pipeline)",
       "availability": "candidate",
       "status": "candidate",
       "themeId": null,
@@ -14274,6 +15026,7 @@
       "dataId": "L05",
       "geometryType": "polygon",
       "renderClass": "polygon-overlay",
+      "capability": "型A 面塗り (型A流用・要 pipeline)",
       "availability": "candidate",
       "status": "candidate",
       "themeId": null,
@@ -14288,6 +15041,7 @@
       "dataId": "A28",
       "geometryType": "polygon",
       "renderClass": "polygon-overlay",
+      "capability": "型A 面塗り (型A流用・要 pipeline)",
       "availability": "candidate",
       "status": "candidate",
       "themeId": null,
@@ -14302,6 +15056,7 @@
       "dataId": "A11",
       "geometryType": "polygon",
       "renderClass": "polygon-overlay",
+      "capability": "型A 面塗り (型A流用・要 pipeline)",
       "availability": "candidate",
       "status": "candidate",
       "themeId": null,
@@ -14316,6 +15071,7 @@
       "dataId": "A15",
       "geometryType": "polygon",
       "renderClass": "polygon-overlay",
+      "capability": "型A 面塗り (型A流用・要 pipeline)",
       "availability": "candidate",
       "status": "candidate",
       "themeId": null,
@@ -14330,6 +15086,7 @@
       "dataId": "S05-a",
       "geometryType": "polygon",
       "renderClass": "polygon-overlay",
+      "capability": "型A 面塗り (型A流用・要 pipeline)",
       "availability": "candidate",
       "status": "candidate",
       "themeId": null,
@@ -14343,6 +15100,7 @@
       "score": 0.25,
       "dataId": "G08",
       "renderClass": "unknown",
+      "capability": "形状未確定 (要 datasets.ts 登録で型確定)",
       "availability": "candidate",
       "status": "candidate",
       "themeId": null,
@@ -14356,6 +15114,7 @@
       "score": 0.25,
       "dataId": "A19s",
       "renderClass": "unknown",
+      "capability": "形状未確定 (要 datasets.ts 登録で型確定)",
       "availability": "candidate",
       "status": "candidate",
       "themeId": null,
@@ -14369,6 +15128,7 @@
       "score": 0.25,
       "dataId": "A21s",
       "renderClass": "unknown",
+      "capability": "形状未確定 (要 datasets.ts 登録で型確定)",
       "availability": "candidate",
       "status": "candidate",
       "themeId": null,
@@ -14382,6 +15142,7 @@
       "score": 0.25,
       "dataId": "A20s",
       "renderClass": "unknown",
+      "capability": "形状未確定 (要 datasets.ts 登録で型確定)",
       "availability": "candidate",
       "status": "candidate",
       "themeId": null,
@@ -14395,6 +15156,7 @@
       "score": 0.25,
       "dataId": "A18s-a",
       "renderClass": "unknown",
+      "capability": "形状未確定 (要 datasets.ts 登録で型確定)",
       "availability": "candidate",
       "status": "candidate",
       "themeId": null,
@@ -14408,45 +15170,7 @@
       "score": 0.25,
       "dataId": "A22s",
       "renderClass": "unknown",
-      "availability": "candidate",
-      "status": "candidate",
-      "themeId": null,
-      "note": "未登録候補 (要 datasets.ts 登録 → pipeline)"
-    },
-    {
-      "metricKey": "ksj:P20",
-      "source": "ksj",
-      "lane": "ksj",
-      "title": "避難施設",
-      "score": 0.25,
-      "dataId": "P20",
-      "renderClass": "unknown",
-      "availability": "candidate",
-      "status": "candidate",
-      "themeId": null,
-      "note": "未登録候補 (要 datasets.ts 登録 → pipeline)"
-    },
-    {
-      "metricKey": "ksj:P02",
-      "source": "ksj",
-      "lane": "ksj",
-      "title": "公共施設",
-      "score": 0.25,
-      "dataId": "P02",
-      "renderClass": "unknown",
-      "availability": "candidate",
-      "status": "candidate",
-      "themeId": null,
-      "note": "未登録候補 (要 datasets.ts 登録 → pipeline)"
-    },
-    {
-      "metricKey": "ksj:S05-c",
-      "source": "ksj",
-      "lane": "ksj",
-      "title": "交通流動量_駅別乗降数",
-      "score": 0.25,
-      "dataId": "S05-c",
-      "renderClass": "unknown",
+      "capability": "形状未確定 (要 datasets.ts 登録で型確定)",
       "availability": "candidate",
       "status": "candidate",
       "themeId": null,
@@ -14461,6 +15185,7 @@
       "dataId": "W07",
       "geometryType": "mesh",
       "renderClass": "mesh",
+      "capability": "型F メッシュ塗り (未実装。標高/将来推計人口/土地利用マップ)",
       "availability": "candidate",
       "status": "candidate",
       "themeId": null,
@@ -14475,6 +15200,7 @@
       "dataId": "G04-c",
       "geometryType": "mesh",
       "renderClass": "mesh",
+      "capability": "型F メッシュ塗り (未実装。標高/将来推計人口/土地利用マップ)",
       "availability": "candidate",
       "status": "candidate",
       "themeId": null,
@@ -14489,6 +15215,7 @@
       "dataId": "G04-d",
       "geometryType": "mesh",
       "renderClass": "mesh",
+      "capability": "型F メッシュ塗り (未実装。標高/将来推計人口/土地利用マップ)",
       "availability": "candidate",
       "status": "candidate",
       "themeId": null,
@@ -14503,6 +15230,7 @@
       "dataId": "L03-b",
       "geometryType": "mesh",
       "renderClass": "mesh",
+      "capability": "型F メッシュ塗り (未実装。標高/将来推計人口/土地利用マップ)",
       "availability": "candidate",
       "status": "candidate",
       "themeId": null,
@@ -14517,6 +15245,7 @@
       "dataId": "L03-b-u",
       "geometryType": "mesh",
       "renderClass": "mesh",
+      "capability": "型F メッシュ塗り (未実装。標高/将来推計人口/土地利用マップ)",
       "availability": "candidate",
       "status": "candidate",
       "themeId": null,
@@ -14531,6 +15260,7 @@
       "dataId": "L03-b-c",
       "geometryType": "mesh",
       "renderClass": "mesh",
+      "capability": "型F メッシュ塗り (未実装。標高/将来推計人口/土地利用マップ)",
       "availability": "candidate",
       "status": "candidate",
       "themeId": null,
@@ -14545,6 +15275,7 @@
       "dataId": "G02",
       "geometryType": "mesh",
       "renderClass": "mesh",
+      "capability": "型F メッシュ塗り (未実装。標高/将来推計人口/土地利用マップ)",
       "availability": "candidate",
       "status": "candidate",
       "themeId": null,
@@ -14559,6 +15290,7 @@
       "dataId": "A30a5",
       "geometryType": "mesh",
       "renderClass": "mesh",
+      "capability": "型F メッシュ塗り (未実装。標高/将来推計人口/土地利用マップ)",
       "availability": "candidate",
       "status": "candidate",
       "themeId": null,
@@ -14573,6 +15305,7 @@
       "dataId": "P09",
       "geometryType": "mesh",
       "renderClass": "mesh",
+      "capability": "型F メッシュ塗り (未実装。標高/将来推計人口/土地利用マップ)",
       "availability": "candidate",
       "status": "candidate",
       "themeId": null,
@@ -14587,6 +15320,7 @@
       "dataId": "N04",
       "geometryType": "mesh",
       "renderClass": "mesh",
+      "capability": "型F メッシュ塗り (未実装。標高/将来推計人口/土地利用マップ)",
       "availability": "candidate",
       "status": "candidate",
       "themeId": null,
@@ -14601,6 +15335,7 @@
       "dataId": "m1kr6",
       "geometryType": "mesh",
       "renderClass": "mesh",
+      "capability": "型F メッシュ塗り (未実装。標高/将来推計人口/土地利用マップ)",
       "availability": "candidate",
       "status": "candidate",
       "themeId": null,
@@ -14615,6 +15350,7 @@
       "dataId": "m500r6",
       "geometryType": "mesh",
       "renderClass": "mesh",
+      "capability": "型F メッシュ塗り (未実装。標高/将来推計人口/土地利用マップ)",
       "availability": "candidate",
       "status": "candidate",
       "themeId": null,
@@ -14629,6 +15365,7 @@
       "dataId": "m250r6",
       "geometryType": "mesh",
       "renderClass": "mesh",
+      "capability": "型F メッシュ塗り (未実装。標高/将来推計人口/土地利用マップ)",
       "availability": "candidate",
       "status": "candidate",
       "themeId": null,
@@ -14642,6 +15379,7 @@
       "score": 0.775,
       "dataId": "ipf",
       "renderClass": "point-plot",
+      "capability": "型C 点プロット (実装済)",
       "availability": "api",
       "status": "candidate",
       "themeId": null,
@@ -14655,6 +15393,7 @@
       "score": 0.775,
       "dataId": "msil",
       "renderClass": "point-plot",
+      "capability": "型C 点プロット (実装済)",
       "availability": "api",
       "status": "candidate",
       "themeId": null,
@@ -14668,6 +15407,7 @@
       "score": 0.775,
       "dataId": "dhb",
       "renderClass": "point-plot",
+      "capability": "型C 点プロット (実装済)",
       "availability": "api",
       "status": "candidate",
       "themeId": null,
@@ -14681,6 +15421,7 @@
       "score": 0.775,
       "dataId": "hwq",
       "renderClass": "point-plot",
+      "capability": "型C 点プロット (実装済)",
       "availability": "api",
       "status": "candidate",
       "themeId": null,
@@ -14694,6 +15435,7 @@
       "score": 0.775,
       "dataId": "gtfs",
       "renderClass": "point-plot",
+      "capability": "型C 点プロット (実装済)",
       "availability": "api",
       "status": "candidate",
       "themeId": null,
@@ -14707,6 +15449,7 @@
       "score": 0.775,
       "dataId": "rsdb",
       "renderClass": "point-plot",
+      "capability": "型C 点プロット (実装済)",
       "availability": "api",
       "status": "candidate",
       "themeId": null,
@@ -14720,6 +15463,7 @@
       "score": 0.775,
       "dataId": "rtc",
       "renderClass": "point-plot",
+      "capability": "型C 点プロット (実装済)",
       "availability": "api",
       "status": "candidate",
       "themeId": null,
@@ -14733,6 +15477,7 @@
       "score": 0.775,
       "dataId": "ngi",
       "renderClass": "point-plot",
+      "capability": "型C 点プロット (実装済)",
       "availability": "api",
       "status": "candidate",
       "themeId": null,
@@ -14746,6 +15491,7 @@
       "score": 0.775,
       "dataId": "ndm",
       "renderClass": "point-plot",
+      "capability": "型C 点プロット (実装済)",
       "availability": "api",
       "status": "candidate",
       "themeId": null,
@@ -14759,6 +15505,7 @@
       "score": 0.775,
       "dataId": "cyport",
       "renderClass": "point-plot",
+      "capability": "型C 点プロット (実装済)",
       "availability": "api",
       "status": "candidate",
       "themeId": null,
@@ -14772,6 +15519,7 @@
       "score": 0.775,
       "dataId": "mcc",
       "renderClass": "point-plot",
+      "capability": "型C 点プロット (実装済)",
       "availability": "api",
       "status": "candidate",
       "themeId": null,
@@ -14785,6 +15533,7 @@
       "score": 0.775,
       "dataId": "ntrack",
       "renderClass": "point-plot",
+      "capability": "型C 点プロット (実装済)",
       "availability": "api",
       "status": "candidate",
       "themeId": null,
@@ -14798,6 +15547,7 @@
       "score": 0.775,
       "dataId": "crtc",
       "renderClass": "point-plot",
+      "capability": "型C 点プロット (実装済)",
       "availability": "api",
       "status": "candidate",
       "themeId": null,
@@ -14811,6 +15561,7 @@
       "score": 0.775,
       "dataId": "imm",
       "renderClass": "point-plot",
+      "capability": "型C 点プロット (実装済)",
       "availability": "api",
       "status": "candidate",
       "themeId": null,
@@ -14824,6 +15575,7 @@
       "score": 0.775,
       "dataId": "jyubunpc",
       "renderClass": "point-plot",
+      "capability": "型C 点プロット (実装済)",
       "availability": "api",
       "status": "candidate",
       "themeId": null,
@@ -14837,6 +15589,7 @@
       "score": 0.775,
       "dataId": "kkd",
       "renderClass": "point-plot",
+      "capability": "型C 点プロット (実装済)",
       "availability": "api",
       "status": "candidate",
       "themeId": null,
@@ -14850,6 +15603,7 @@
       "score": 0.7,
       "dataId": "nvpf",
       "renderClass": "line-network",
+      "capability": "型D 線ネットワーク静止画 (実装済)",
       "availability": "api",
       "status": "candidate",
       "themeId": null,
@@ -14863,6 +15617,7 @@
       "score": 0.475,
       "dataId": "qol",
       "renderClass": "polygon-overlay",
+      "capability": "型A 面塗り (型A流用・要 pipeline)",
       "availability": "api",
       "status": "candidate",
       "themeId": null,
@@ -14876,6 +15631,7 @@
       "score": 0.475,
       "dataId": "mlit_plateau",
       "renderClass": "polygon-overlay",
+      "capability": "型A 面塗り (型A流用・要 pipeline)",
       "availability": "api",
       "status": "candidate",
       "themeId": null,
@@ -14889,6 +15645,7 @@
       "score": 0.475,
       "dataId": "dimaps",
       "renderClass": "polygon-overlay",
+      "capability": "型A 面塗り (型A流用・要 pipeline)",
       "availability": "api",
       "status": "candidate",
       "themeId": null,
@@ -14902,6 +15659,7 @@
       "score": 0.375,
       "dataId": "karte",
       "renderClass": "unknown",
+      "capability": "形状未確定 (要 datasets.ts 登録で型確定)",
       "availability": "api",
       "status": "candidate",
       "themeId": null,
@@ -14915,6 +15673,7 @@
       "score": 0.375,
       "dataId": "psc",
       "renderClass": "unknown",
+      "capability": "形状未確定 (要 datasets.ts 登録で型確定)",
       "availability": "api",
       "status": "candidate",
       "themeId": null,
@@ -14928,6 +15687,7 @@
       "score": 0.375,
       "dataId": "nxc",
       "renderClass": "unknown",
+      "capability": "形状未確定 (要 datasets.ts 登録で型確定)",
       "availability": "api",
       "status": "candidate",
       "themeId": null,
@@ -14941,6 +15701,7 @@
       "score": 0.375,
       "dataId": "tcd",
       "renderClass": "unknown",
+      "capability": "形状未確定 (要 datasets.ts 登録で型確定)",
       "availability": "api",
       "status": "candidate",
       "themeId": null,
@@ -14954,6 +15715,7 @@
       "score": 0.375,
       "dataId": "cals_fukushima",
       "renderClass": "unknown",
+      "capability": "形状未確定 (要 datasets.ts 登録で型確定)",
       "availability": "api",
       "status": "candidate",
       "themeId": null,
@@ -14967,6 +15729,7 @@
       "score": 0.375,
       "dataId": "dobox",
       "renderClass": "unknown",
+      "capability": "形状未確定 (要 datasets.ts 登録で型確定)",
       "availability": "api",
       "status": "candidate",
       "themeId": null,
@@ -14980,6 +15743,7 @@
       "score": 0.325,
       "dataId": "ffd",
       "renderClass": "flow",
+      "capability": "OD/流動矢印 (未実装。通勤流動・訪日外国人流動)",
       "availability": "api",
       "status": "candidate",
       "themeId": null,
@@ -14993,6 +15757,7 @@
       "score": 0.325,
       "dataId": "rdpf",
       "renderClass": "flow",
+      "capability": "OD/流動矢印 (未実装。通勤流動・訪日外国人流動)",
       "availability": "api",
       "status": "candidate",
       "themeId": null,
@@ -15006,6 +15771,7 @@
       "score": 0.325,
       "dataId": "lpfs",
       "renderClass": "flow",
+      "capability": "OD/流動矢印 (未実装。通勤流動・訪日外国人流動)",
       "availability": "api",
       "status": "candidate",
       "themeId": null,
@@ -15019,6 +15785,7 @@
       "score": 0.325,
       "dataId": "alpc",
       "renderClass": "mesh",
+      "capability": "型F メッシュ塗り (未実装。標高/将来推計人口/土地利用マップ)",
       "availability": "api",
       "status": "candidate",
       "themeId": null,
@@ -15032,6 +15799,7 @@
       "score": 0.325,
       "dataId": "mms",
       "renderClass": "mesh",
+      "capability": "型F メッシュ塗り (未実装。標高/将来推計人口/土地利用マップ)",
       "availability": "api",
       "status": "candidate",
       "themeId": null,

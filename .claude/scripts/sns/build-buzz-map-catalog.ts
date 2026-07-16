@@ -95,7 +95,22 @@ interface CatalogEntry {
   renderClass?: RenderClass;
   availability?: Availability;
   license?: string;
+  /** このデータで「何が作れるか」(型と実装状況)。renderClass/lane から機械導出 */
+  capability?: string;
 }
+
+/** renderClass → 作れる地図表現と実装状況 (まちの計量舎の各分析タイプに対応)。 */
+const CAPABILITY: Record<RenderClass, string> = {
+  "point-plot": "型C 点プロット (実装済)",
+  "point-muni": "型A 点→自治体二値 (実装済)",
+  "muni-binary": "型A 二値マップ (実装済)",
+  "line-timeline": "型D 線ネットワーク・時系列リール (実装済)",
+  "line-network": "型D 線ネットワーク静止画 (実装済)",
+  "polygon-overlay": "型A 面塗り (型A流用・要 pipeline)",
+  mesh: "型F メッシュ塗り (未実装。標高/将来推計人口/土地利用マップ)",
+  flow: "OD/流動矢印 (未実装。通勤流動・訪日外国人流動)",
+  unknown: "形状未確定 (要 datasets.ts 登録で型確定)",
+};
 
 interface CatalogFile {
   generatedAt: string | null;
@@ -224,6 +239,10 @@ const KSJ_LINE_TIMELINE_IDS = new Set([
 const KSJ_CANDIDATE_RENDERCLASS: Record<string, RenderClass> = {
   N05: "line-timeline", // 鉄道時系列 (開業年で伸びる鉄道網リール)
   N08: "point-plot", // 空港時系列 (開港年つき点)
+  // 公式ページから JPGIS 形状が機械抽出できなかったが、内容から点形状が明らかな施設系
+  P02: "point-plot", // 公共施設 (施設点)
+  P20: "point-plot", // 避難施設 (施設点)
+  "S05-c": "point-plot", // 交通流動量_駅別乗降数 (駅点)
 };
 
 /**
@@ -340,6 +359,7 @@ function buildKsjEntries(prevByKey: Map<string, CatalogEntry>): CatalogEntry[] {
       dataId: d.dataId,
       geometryType: d.geometryType,
       renderClass,
+      capability: CAPABILITY[renderClass],
       availability,
       license: (d as { license?: string }).license,
       status: prev?.status ?? "candidate",
@@ -374,6 +394,7 @@ function buildKsjEntries(prevByKey: Map<string, CatalogEntry>): CatalogEntry[] {
       dataId: c.id,
       geometryType: shapes.length > 0 ? shapes.join("+") : undefined,
       renderClass,
+      capability: CAPABILITY[renderClass],
       availability: "candidate",
       status: prev?.status ?? "candidate",
       themeId: prev?.themeId ?? null,
@@ -436,6 +457,7 @@ function buildDpfEntries(prevByKey: Map<string, CatalogEntry>): CatalogEntry[] {
       score: Math.round(score * 1000) / 1000,
       dataId: c.id,
       renderClass: c.renderClass,
+      capability: CAPABILITY[c.renderClass],
       availability: "api" as const,
       status: prev?.status ?? "candidate",
       themeId: prev?.themeId ?? null,
@@ -486,6 +508,11 @@ function rebuild(prefCap: number): CatalogFile {
         binaryFram: b.binaryFram,
         gscImp: Math.round(b.gscImp * 100) / 100,
       },
+      // e-Stat 観測値は二値マップ (型A) が基本。muni は塗りベースとして型E 合成にも使える
+      capability:
+        lane === "muni"
+          ? "型A 二値マップ + 型E 合成の塗りベース (実装済)"
+          : "型A 二値マップ (実装済)",
       // status/themeId/note は前回を保持 (rejected/posted を再構築で消さない)
       status: prevEntry?.status ?? "candidate",
       themeId: prevEntry?.themeId ?? null,

@@ -84,7 +84,7 @@ status: `案` → `spec作成` → `生成済` → `投稿済`（投稿記録の
 >   mesh・polygon-overlay・flow=型未対応）と `availability`（r2=即spec化 / registered=要 pipeline /
 >   candidate=要登録）付き。**未登録候補の形状（点/線/面）は KSJ 公式ページから機械抽出した対照表**
 >   `.claude/scripts/sns/data/ksj-geometry.generated.json`（再生成: `build-ksj-geometry-map.ts`）で確定
->   （公式ページに型表記が無い 9 件のみ unknown 残置）
+>   （公式ページに型表記が無く内容からも点/線/面が確定できない属性表・統計情報 6 件のみ unknown 残置）
 > - `mlit-dpf` … 国土交通データプラットフォーム 31（`nlni_ksj`/`dpf_area_data`/`dpf_statistical_data` は
 >   KSJ/N03/e-Stat と重複するため除外）。availability=api（GraphQL 取得 → `--geojson` でヘルパーに投入）
 >
@@ -100,6 +100,46 @@ status: `案` → `spec作成` → `生成済` → `投稿済`（投稿記録の
 > パターン別に ≤120 件 cap）。`feasibility`（now=全 parts 即マージ可 / needs-pipeline=KSJ塗りが要変換）。
 > `--next N [--feasible-only]` で払い出し。合成 spec は `merge-buzz-map-specs.ts` が既存 spec 2 つを
 > 型E にマージ（塗り=accent・overlay=accent2 で色分離、凡例に marker 自動付与、出典マージ）。
+
+### カバレッジ表（★何が作れて何が未実装か・全カタログエントリの `capability` の意味）
+
+各カタログエントリは `capability` フィールドで「そのデータから何が作れるか（型と実装状況）」を持つ。
+builder が `renderClass`（KSJ/DPF）または `lane`（e-Stat）から機械導出するので、**「地図にできるが未実装」を
+取りこぼさず追える**。下表が capability 文言の正典（件数は 2026-07-16 rebuild 実測）。
+
+| capability（renderClass / lane 由来） | 対応する型 | 実装状況 | 件数 |
+|---|---|---|---|
+| 型A 二値マップ（e-Stat pref） | A | ✅ 実装済 | 409 |
+| 型A 二値マップ + 型E 合成の塗りベース（e-Stat muni） | A / E | ✅ 実装済 | 210 |
+| 型C 点プロット（KSJ/DPF point-plot） | C | ✅ 実装済 | 62 |
+| 型D 線ネットワーク静止画（KSJ line-network） | D | ✅ 実装済 | 15 |
+| 型D 線ネットワーク・時系列リール（KSJ line-timeline） | D | ✅ 実装済 | 2 |
+| 型A 面塗り（KSJ polygon-overlay） | A 流用 | 🟡 要 pipeline（R2 未変換） | 34 |
+| 型F メッシュ塗り（KSJ/DPF mesh） | F | 🔴 未実装（標高/将来推計人口/土地利用マップ） | 18 |
+| OD/流動矢印（DPF flow） | — | 🔴 未実装（通勤流動・訪日外国人流動） | 3 |
+| 形状未確定（unknown） | — | ⚪ 属性表/文書で地図化不能 or 要 datasets.ts 登録 | 15 |
+
+### まちの計量舎の分析タイプ → stats47 カバレッジ（差別化の地図）
+
+本家（@machi_measure）が出す分析タイプを stats47 の型に対照し、**利用できるデータ源と実装状況**を明示する。
+「データはあるが未実装」（型F メッシュ・OD 流動）が次の拡張候補。
+
+| 分析タイプ（本家例） | stats47 のデータ源 | 型 / capability | 状況 |
+|---|---|---|---|
+| 二値/少区分マップ（内陸県・町村） | e-Stat muni/pref 610 指標 | 型A | ✅ 実装済 |
+| 時系列塗り（開花日 50 年） | e-Stat（全年観測値） | 型B | ✅ 実装済（sample-anim で実証） |
+| 点プロット（乗降 5 千人駅・ダム・道の駅） | KSJ S12/W01/P35 等 62 点データ | 型C | ✅ 実装済（station-5k-plot 実証） |
+| 線ネットワーク＋時系列（高速道路網 60 年） | KSJ N06/N05 | 型D | ✅ 実装済（highway-network-growth 実証） |
+| 掛け合わせ（過疎の塗り × 医療機関の点） | e-Stat 塗り × KSJ 点/線 | 型E | ✅ 実装済（migration-x-highway 実証・combo カタログ） |
+| **標高/傾斜メッシュ・将来推計人口メッシュ・土地利用メッシュ** | KSJ G04/mesh1000r6/L03 等 18 メッシュ | 型F（capability=メッシュ塗り） | 🔴 **データあり・型F 未実装**（次の拡張候補） |
+| **通勤流動 OD・訪日外国人流動・幹線旅客純流動** | e-Stat 従業地/通学地集計・DPF ffd/rdpf/lpfs | flow（capability=OD/流動矢印） | 🔴 **データあり・OD 描画未実装**（e-Stat OD は未取得） |
+| 平均年齢マップ | e-Stat 年齢階級別人口（算出可） | 型A（要 metric 化） | 🟡 e-Stat から算出可・metric 未登録 |
+| 人口重心の移動 | （e-Stat メッシュ人口から算出）| — | 🔴 未カバー（重心算出ロジック未実装） |
+| 数字地名・難読地名 | 系統外（OSM/地名辞書） | — | ⚪ e-Stat/KSJ 系統外（対象外） |
+
+> **拡張の優先順**: 「データあり・未実装」の型F メッシュ（18 件）と OD 流動（3 件）が最大の伸びしろ。
+> 本家がメッシュ標高・OD 流動を主力にしている領域で、stats47 は現状 型A-E のみ。型F・flow の
+> レンダラー追加は計測後の次フェーズ（§6 決定ログに起票してから着手）。地名系は系統外のため非対象。
 
 <!-- buzz-map:catalog:start -->
 | theme_id | テーマ（固有名） | 型 | level | データ源 | spec | status |
@@ -191,3 +231,11 @@ status: `案` → `spec作成` → `生成済` → `投稿済`（投稿記録の
   `build-buzz-map-combo-catalog.ts` → `buzz-map-combo-catalog.json`（signature 8 + 機械候補 120 = 128 件、
   即マージ可 124 件、単品カタログを parts 参照・status upsert）。実証 = `migration-x-highway`（転入超過の
   塗り × 高速道路網の線）。KSJ 指定地域塗り（過疎 A17 等）を使う combo は feasibility=needs-pipeline で記録
+- **2026-07-16 capability フィールド + カバレッジ表**: 「そのデータで何が作れるか（型と実装状況）」を全 768
+  カタログエントリに `capability` として付与（builder が `renderClass`/`lane` から機械導出、欠落 0）。これで
+  「地図にできるが未実装」（型F メッシュ 18・OD 流動 3）を取りこぼさず追える。§4 に**カバレッジ表**（capability
+  文言の正典 + まちの計量舎の分析タイプ → stats47 実装状況の対照）を追加。実装済 = 型A-E（e-Stat 塗り 619・
+  KSJ 点 62・線 17・型E 合成）、データあり未実装 = 型F メッシュ（標高/将来推計人口/土地利用）・OD 流動（通勤/
+  訪日外国人/幹線旅客）、系統外 = 地名系（OSM）。KSJ 未登録候補で公式ページから形状抽出できなかった施設系
+  P02（公共施設）/P20（避難施設）/S05-c（駅別乗降数）を内容から point-plot に手動格上げ（unknown 9→6、
+  残 6 は属性表/統計情報で地図化不能）
