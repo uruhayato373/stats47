@@ -22,12 +22,12 @@ co_agents: [x-strategist, gis-curator]
 
 | step | 内容 | 出力 |
 |---|---|---|
-| 1. spec | テーマカタログ（standards §4）から選ぶ or 新規作成。データを `data.values`（型A）/ `data.series`（型B）へ | `specs/<id>.json` |
+| 1. spec | **候補カタログ `build-buzz-map-catalog.ts --next N --lane muni\|pref`** から選ぶ（真実源 = `.claude/state/sns/buzz-map-catalog.json`）。型A は **`build-buzz-map-spec.ts` で R2 観測値から自動生成**、型B/新規はカタログ§4 を見て手作成 | `specs/<id>.json` |
 | 2. still | 静止画レンダ（型Bも先に最終年静止画で構図確認） | `.local/r2/sns/buzz-map/<id>/x/stills/` |
 | 3. 目視 | 生成 PNG を Read で開きチェックリスト判定（下記） | — |
 | 4. 改善 | 崩れは spec 修正を優先して再レンダ。カードCSS/tokens の変更は standards §6 決定ログとセット | — |
 | 5. video | 型B: `--preview`（先頭90フレーム・半解像度）で試写 → OK なら本尺 MP4 | `.local/r2/sns/buzz-map/<id>/x/` |
-| 6. 台帳 | standards §4 テーマカタログの status 更新。投稿する場合は既存フロー（posts.json draft、§2-9 登録は §2-10 ゲート）へ | — |
+| 6. 台帳 | カタログ status を `build-buzz-map-catalog.ts --mark-spec\|--mark-generated\|--mark-posted <metricKey> --theme-id <id>` で更新 + standards §4 テーマ台帳に 1 行追加。投稿は既存フロー（posts.json draft、§2-9 登録は §2-10 ゲート）へ | — |
 
 ## 実行コマンド（apps/remotion で実行）
 
