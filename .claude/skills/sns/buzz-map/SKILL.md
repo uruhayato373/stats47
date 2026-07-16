@@ -22,7 +22,7 @@ co_agents: [x-strategist, gis-curator]
 
 | step | 内容 | 出力 |
 |---|---|---|
-| 1. spec | **候補カタログ `build-buzz-map-catalog.ts --next N --lane muni\|pref`** から選ぶ（真実源 = `.claude/state/sns/buzz-map-catalog.json`）。型A は **`build-buzz-map-spec.ts` で R2 観測値から自動生成**、型B/新規はカタログ§4 を見て手作成 | `specs/<id>.json` |
+| 1. spec | **候補カタログ `build-buzz-map-catalog.ts --next N --lane muni\|pref\|ksj\|mlit-dpf`** から選ぶ（真実源 = `.claude/state/sns/buzz-map-catalog.json`・4 レーン）。型A(e-Stat)=`build-buzz-map-spec.ts`、型C 点プロット/点→自治体(KSJ・DPF)=`build-buzz-map-spec-ksj.ts` で自動生成、型B/新規はカタログ§4 を見て手作成 | `specs/<id>.json` |
 | 2. still | 静止画レンダ（型Bも先に最終年静止画で構図確認） | `.local/r2/sns/buzz-map/<id>/x/stills/` |
 | 3. 目視 | 生成 PNG を Read で開きチェックリスト判定（下記） | — |
 | 4. 改善 | 崩れは spec 修正を優先して再レンダ。カードCSS/tokens の変更は standards §6 決定ログとセット | — |
@@ -53,7 +53,28 @@ npx remotion render src/index.ts BuzzMap-Reel-11 \
   --props=src/features/buzz-map/specs/<id>.json
 ```
 
-比率は composition id で選ぶ: `BuzzMap-Still-{45,11,169,916}` / `BuzzMap-Reel-{11,916}`。
+比率は composition id で選ぶ: `BuzzMap-Still-{45,11,169,916}` / `BuzzMap-Reel-{11,916}`。型C 点プロットは型A と同じ `BuzzMap-Still-*`。
+
+### spec 自動生成（step 1 のデータ接地）
+
+```bash
+# 型A（e-Stat 観測値 → 二値化）
+npx tsx .claude/scripts/sns/build-buzz-map-spec.ts --metric <key> --id <id> \
+  --level muni|pref --mode threshold --op gte --value N --title "..." --accent social|infra \
+  --label-hit "..." --label-miss "..."
+
+# 型C 点プロット（KSJ topojson → 属性フィルタ → 代表点）
+npx tsx .claude/scripts/sns/build-buzz-map-spec-ksj.ts --data-id S12 --version 24 \
+  --mode point-plot --filter "S12_057>=5000" --id <id> --title "..." --accent social \
+  --label-hit "..." --data-year "令和4年度"
+
+# 点→自治体二値（型A・◯◯がある/ない自治体。--invert で無い側）
+npx tsx .claude/scripts/sns/build-buzz-map-spec-ksj.ts --data-id S12 --version 24 \
+  --mode point-muni --invert --id <id> --title "..." --accent infra --label-hit "駅なし" --label-miss "駅あり"
+
+# DPF（GraphQL 取得した GeoJSON を投入）
+npx tsx .claude/scripts/sns/build-buzz-map-spec-ksj.ts --geojson /tmp/dpf.geojson --mode point-plot --id <id> ...
+```
 
 ## 目視チェックリスト（step 3）
 

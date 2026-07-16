@@ -16,6 +16,7 @@
 |---|---|---|---|
 | **型A** | 静止画・二値/少区分マップ | `BuzzMap-Still-{45,11,169,916}` | 「該当する自治体はどこ?」の意外な事実系（例: 内陸8県、女性>男性） |
 | **型B** | 時系列アニメ・連続量マップ | `BuzzMap-Reel-{11,916}`（静止画化は `BuzzMap-Still-*` に `year`/`showSummary` props） | 長期トレンドの実感系（例: さくら開花日の50年）。30〜60秒 |
+| **型C** | 静止画・点プロット（白地図＋accent 点） | `BuzzMap-Still-{45,11,169,916}`（`data.points`＝凡例 rowKey → `[lon,lat][]`。`spec.pointRadius` 任意） | 「◯◯をプロット」系（例: 乗降5千人以上の駅、ダム、道の駅）。点は本土＋沖縄インセットに自動振り分け投影 |
 
 ### 共通レイアウト（全カード固定・5要素）
 
@@ -72,11 +73,20 @@
 status: `案` → `spec作成` → `生成済` → `投稿済`（投稿記録の正本は posts.json。ここは企画側の一覧）。
 
 > **候補の供給源（棚卸しの真実源）は `.claude/state/sns/buzz-map-catalog.json`**
-> （builder `.claude/scripts/sns/build-buzz-map-catalog.ts` が e-Stat 由来 metric registry から
-> muni 全量 + pref 機械フィルタでスコアリング・status upsert 保持）。**「次に何を作るか」はこのキューの
-> `candidate` から選ぶ**（`--next N --lane muni|pref`）。下の表は spec 作成以降に進んだ**固有テーマの台帳**で、
-> 全候補を列挙する場所ではない。カタログの status（spec/generated/posted）は builder の `--mark-*` で更新し、
-> 台帳表にも 1 行足す。型A spec はヘルパー `build-buzz-map-spec.ts` で R2 観測値から自動生成する。
+> （builder `.claude/scripts/sns/build-buzz-map-catalog.ts` が全供給源をスコアリング・status upsert 保持）。
+> **4 レーン**で「利用できるものすべて」を採録する:
+> - `muni` … e-Stat 市区町村指標 210 全量（型A 二値マップ）
+> - `pref` … e-Stat 都道府県指標を機械フィルタ ≤400（型A 二値マップ）
+> - `ksj` … 国土数値情報 127（登録 42 + 候補 superset）。`renderClass`（point-plot=型C / muni-binary=型A /
+>   point-muni=型A PIP / line・mesh・polygon-overlay=型未対応）と `availability`（r2=即spec化 / registered=要 pipeline /
+>   candidate=要登録）付き
+> - `mlit-dpf` … 国土交通データプラットフォーム 31（`nlni_ksj`/`dpf_area_data`/`dpf_statistical_data` は
+>   KSJ/N03/e-Stat と重複するため除外）。availability=api（GraphQL 取得 → `--geojson` でヘルパーに投入）
+>
+> **「次に何を作るか」はこのキューの `candidate` から選ぶ**（`--next N --lane muni|pref|ksj|mlit-dpf`）。
+> 下の表は spec 作成以降に進んだ**固有テーマの台帳**で、全候補を列挙する場所ではない。status（spec/generated/posted）は
+> builder の `--mark-*` で更新し、台帳表にも 1 行足す。型A spec は `build-buzz-map-spec.ts`（e-Stat）、
+> 型C/点→自治体 spec は `build-buzz-map-spec-ksj.ts`（KSJ/DPF）で自動生成する。
 
 <!-- buzz-map:catalog:start -->
 | theme_id | テーマ（固有名） | 型 | level | データ源 | spec | status |
@@ -85,6 +95,7 @@ status: `案` → `spec作成` → `生成済` → `投稿済`（投稿記録の
 | sample-anim | 【サンプル】◯◯率の推移 | B | pref | ダミー値（実データではない） | specs/sample-anim.json | 生成済（検証用サンプル） |
 | sample-towns-villages | いまも「町」と「村」の自治体 | A | muni | 国土数値情報（行政区域） | specs/sample-towns-villages.json | 生成済（検証用サンプル） |
 | migration-inflow-muni | 人が集まっている市区町村はどこか | A | muni | e-Stat 転入超過率 `moving-in-excess-rate`（2020） | specs/migration-inflow-muni.json | 生成済（カタログ実証・未投稿） |
+| station-5k-plot | 1日5千人以上が乗り降りする駅はどこか | C | pref | 国土数値情報 S12 駅別乗降客数（令和4年度・2,858駅） | specs/station-5k-plot.json | 生成済（型C 実証・未投稿） |
 | sakura-bloom-50y | さくら開花日の50年 | B | pref | 気象庁 生物季節観測（issue [#538](https://github.com/uruhayato373/stats47/issues/538)） | — | 案（第1弾候補。交通インフラ系は本家と被るため回避） |
 | female-majority-muni | 女性が男性より多い市区町村 | A | muni | 国勢調査（e-Stat） | — | 案（まちの計量舎の令和2年版に対し最新調査で差別化） |
 <!-- buzz-map:catalog:end -->
@@ -95,10 +106,15 @@ status: `案` → `spec作成` → `生成済` → `投稿済`（投稿記録の
 
 - **ネタ選定の入口はカタログ builder**: `npx tsx .claude/scripts/sns/build-buzz-map-catalog.ts`
   で候補を再構築 → `--next N --lane muni|pref` で `candidate` 上位を払い出す（真実源 §4 の注記）
-- **型A spec はヘルパーで自動生成**: `npx tsx .claude/scripts/sns/build-buzz-map-spec.ts --metric <key>
+- **型A spec（e-Stat）はヘルパーで自動生成**: `npx tsx .claude/scripts/sns/build-buzz-map-spec.ts --metric <key>
   --id <theme_id> --level muni|pref --mode threshold --op gte --value N --title "..." --accent social|infra
   --label-hit "..." --label-miss "..."`（R2 観測値 → 二値化 → `specs/<id>.json`。muni は topojson コード集合と
   join し unmatched を報告）。生成後に `build-buzz-map-catalog.ts --mark-spec <key> --theme-id <id>`
+- **型C 点プロット / 点→自治体（KSJ・DPF）は `build-buzz-map-spec-ksj.ts`**:
+  `--data-id S12 --version 24 --mode point-plot --filter "S12_057>=5000" --id <id> --title "..." --accent social
+  --label-hit "..." [--data-year "令和4年度"]`（R2 KSJ topojson → 属性フィルタ → 代表点 geoCentroid → 型C spec）。
+  `--mode point-muni [--invert]` で「◯◯がある/ない自治体」の型A に。DPF は GraphQL 取得した GeoJSON を `--geojson <path>` で投入。
+  ライセンスが `non-commercial` のデータセット（W01 ダム・P35 道の駅・C02 港湾 等）の SNS 利用可否は人間が判断する（S12 駅乗降は cc-by-4.0 で商用可）
 - **生成の入口は `/buzz-map` スキル**（`.claude/skills/sns/buzz-map/SKILL.md`）。レンダ実行は sns-renderer の担当領域
 - **改善ループ**: 生成 PNG を Read で目視 → 崩れは **spec 側の修正を優先**。カード CSS/レイアウト
   （`BuzzMapCard.tsx`）や tokens.ts を触る変更は **§6 決定ログ追記とセット**（勝手に型を漂流させない）
@@ -123,4 +139,10 @@ status: `案` → `spec作成` → `生成済` → `投稿済`（投稿記録の
   した候補カタログ（`build-buzz-map-catalog.ts` → `.claude/state/sns/buzz-map-catalog.json`、muni 210 全量 +
   pref 機械フィルタ ≤400、status upsert 保持）と型A spec 自動生成ヘルパー（`build-buzz-map-spec.ts`、R2 観測値
   → 二値化 → spec、muni は topojson N03_007 集合と join）を新設。実証 = `migration-inflow-muni`（転入超過率）。
-  点情報（駅・KSJ 連携）は型A/B に無い新フォーマットのため次ステップ（本カタログ未対応）
+- **2026-07-16 型C 点プロット + KSJ/DPF レーン**: まちの計量舎の駅プロット系に対応するため **型C**（白地図＋点。
+  `data.points`＝rowKey → `[lon,lat][]`、点は本土/沖縄インセットに自動振り分け投影）を `types.ts`/`geo.ts`/
+  `BuzzMapCard.tsx` に追加（型A/B 非回帰確認済）。カタログ builder に `ksj`（国土数値情報 127＝登録 42+候補、
+  renderClass/availability 付き）と `mlit-dpf`（国土交通データPF 31、KSJ/N03/e-Stat と重複する 3 カタログは除外）
+  レーンを追加。KSJ/DPF 変換ヘルパー `build-buzz-map-spec-ksj.ts`（point-plot=型C / point-muni=型A PIP /
+  `--geojson` で DPF GeoJSON 投入）を新設。実証 = `station-5k-plot`（S12 駅別乗降客数・令和4年度・乗降5千人以上 2,858 駅）。
+  MLIT MCP はローカル Mac 依存のため builder は非依存（GraphQL 直＋静的表）。DPF 実データ取得は次ステップ

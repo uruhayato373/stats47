@@ -39,6 +39,9 @@ import { dirname, join } from "node:path";
 import { listAllMetrics, getMetricMeta } from "@stats47/data-configs";
 import type { MetricConfig } from "@stats47/data-configs";
 
+// KSJ データセットは workspace exports 制約のため相対パスで import
+import { GIS_DATASETS } from "../../../packages/gis/src/mlit-ksj/datasets";
+
 // x-catalog は .cjs (require)
 import { createRequire } from "node:module";
 const require = createRequire(import.meta.url);
@@ -53,29 +56,50 @@ const GSC_SNAPSHOTS = join(
   ".claude/skills/analytics/gsc-improvement/reference/snapshots",
 );
 
-type Lane = "muni" | "pref";
+type Lane = "muni" | "pref" | "ksj" | "mlit-dpf";
 type Status = "candidate" | "spec" | "generated" | "posted" | "rejected";
+/** 型に落とせるか (どのヘルパー/レンダラーで作れるか) */
+type RenderClass =
+  | "point-plot" // 型C 点プロット
+  | "point-muni" // 型A 点→自治体 PIP
+  | "muni-binary" // 型A 自治体指定型 polygon
+  | "polygon-overlay" // polygon (面積比等・型未対応)
+  | "line" // line (型未対応)
+  | "mesh" // mesh (型未対応)
+  | "flow" // OD/流動 (型未対応)
+  | "unknown";
+/** R2/API での取得可能性 */
+type Availability = "r2" | "registered" | "candidate" | "api";
 
 interface CatalogEntry {
+  /** 主キー。estat=metricKey / ksj="ksj:<dataId>" / dpf="dpf:<catalogId>" */
   metricKey: string;
+  source: "estat" | "ksj" | "mlit-dpf";
   lane: Lane;
   title: string;
-  subtitle: string | null;
-  category: string;
-  unit: string;
-  latestYear: string | null;
-  yearCount: number;
   score: number;
-  breakdown: { affinity: number; freshness: number; binaryFram: number; gscImp: number };
   status: Status;
   themeId: string | null;
   note: string | null;
+  // ── e-Stat 固有 (任意) ──
+  subtitle?: string | null;
+  category?: string;
+  unit?: string;
+  latestYear?: string | null;
+  yearCount?: number;
+  breakdown?: Record<string, number>;
+  // ── GIS (KSJ/DPF) 固有 (任意) ──
+  dataId?: string;
+  geometryType?: string;
+  renderClass?: RenderClass;
+  availability?: Availability;
+  license?: string;
 }
 
 interface CatalogFile {
   generatedAt: string | null;
   weights: Record<string, number>;
-  counts: { muni: number; pref: number };
+  counts: { muni: number; pref: number; ksj: number; "mlit-dpf": number };
   entries: CatalogEntry[];
 }
 
@@ -169,6 +193,191 @@ function saveState(state: CatalogFile) {
 
 const WEIGHTS = { affinity: 0.35, freshness: 0.25, binaryFram: 0.2, gscImp: 0.2 };
 
+// ─── KSJ / DPF 分類 ───
+
+/** 自治体指定型 polygon (地域指定・圏域) → 型A muni-binary で描ける dataId */
+const KSJ_MUNI_BINARY_IDS = new Set([
+  "A17", // 過疎地域
+  "A22", // 豪雪地帯
+  "A16", // DID (人口集中地区)
+  "A10", // 自然公園
+  "A24", // 振興山村
+  "A25", // 特定農山村
+  "A18", // 半島振興
+  "A19", // 離島振興
+  "A38", // 医療圏
+]);
+
+function ksjRenderClass(dataId: string, geom: string): RenderClass {
+  if (geom === "point") return "point-plot"; // point-muni も可 (両対応)
+  if (geom === "polygon") return KSJ_MUNI_BINARY_IDS.has(dataId) ? "muni-binary" : "polygon-overlay";
+  if (geom === "line") return "line";
+  if (geom === "mesh") return "mesh";
+  return "unknown";
+}
+
+const RENDER_PRIORITY: Record<RenderClass, number> = {
+  "point-plot": 1.0,
+  "point-muni": 1.0,
+  "muni-binary": 0.9,
+  "polygon-overlay": 0.4,
+  line: 0.3,
+  mesh: 0.1,
+  flow: 0.1,
+  unknown: 0.2,
+};
+const AVAIL_PRIORITY: Record<Availability, number> = {
+  r2: 1.0,
+  api: 0.55,
+  registered: 0.6,
+  candidate: 0.3,
+};
+
+/**
+ * R2 に national.topojson の実在を実測確認済みのデータセット (dataId → version)。
+ * ここは「実際に HEAD 200 を確認した」記録 (evidence-based)。実証・pipeline 実行で増やす。
+ * latestVersion フィールドが無くても R2 に実在するケース (S12 等) を r2 に昇格する。
+ */
+const KSJ_R2_VERIFIED: Record<string, string> = {
+  S12: "24", // 実証で HEAD 200 確認 (2026-07-16)
+};
+
+/** availability を判定 (verified 実測 > latestVersion 楽観 > registered)。 */
+function ksjAvailability(dataId: string, latestVersion: string): {
+  availability: Availability;
+  version: string;
+} {
+  if (KSJ_R2_VERIFIED[dataId]) return { availability: "r2", version: KSJ_R2_VERIFIED[dataId] };
+  if (latestVersion) return { availability: "r2", version: latestVersion };
+  return { availability: "registered", version: "" };
+}
+
+function buildKsjEntries(prevByKey: Map<string, CatalogEntry>): CatalogEntry[] {
+  // 登録済み 42 件 + 候補 superset (ksj-catalog.json 126 件、dataId 重複は登録優先)
+  const catalogRaw = JSON.parse(
+    readFileSync(join(PROJECT_ROOT, "packages/database/seed/ksj-catalog.json"), "utf8"),
+  ) as { id: string; name: string; category2_name?: string }[];
+  const registered = new Map(GIS_DATASETS.map((d) => [d.dataId, d]));
+
+  const entries: CatalogEntry[] = [];
+  const seen = new Set<string>();
+
+  // 1) 登録済み (geometryType が判る = renderClass 確定)
+  for (const d of GIS_DATASETS) {
+    seen.add(d.dataId);
+    const renderClass = ksjRenderClass(d.dataId, d.geometryType);
+    const latestVersion = (d as { latestVersion?: string }).latestVersion ?? "";
+    const { availability, version } = ksjAvailability(d.dataId, latestVersion);
+    const score =
+      0.5 * RENDER_PRIORITY[renderClass] + 0.5 * AVAIL_PRIORITY[availability];
+    const key = `ksj:${d.dataId}`;
+    const prev = prevByKey.get(key);
+    entries.push({
+      metricKey: key,
+      source: "ksj",
+      lane: "ksj",
+      title: d.name,
+      score: Math.round(score * 1000) / 1000,
+      dataId: d.dataId,
+      geometryType: d.geometryType,
+      renderClass,
+      availability,
+      license: (d as { license?: string }).license,
+      status: prev?.status ?? "candidate",
+      themeId: prev?.themeId ?? null,
+      note:
+        prev?.note ??
+        (availability === "r2"
+          ? `version=${version} (national.topojson 実在)`
+          : "登録済・R2 未変換 (要 pipeline)"),
+    });
+  }
+
+  // 2) 未登録候補 (geometry 不明 = renderClass unknown・availability candidate)
+  for (const c of catalogRaw) {
+    if (seen.has(c.id) || registered.has(c.id)) continue;
+    seen.add(c.id);
+    const score = 0.5 * RENDER_PRIORITY.unknown + 0.5 * AVAIL_PRIORITY.candidate;
+    const key = `ksj:${c.id}`;
+    const prev = prevByKey.get(key);
+    entries.push({
+      metricKey: key,
+      source: "ksj",
+      lane: "ksj",
+      title: c.name,
+      score: Math.round(score * 1000) / 1000,
+      dataId: c.id,
+      renderClass: "unknown",
+      availability: "candidate",
+      status: prev?.status ?? "candidate",
+      themeId: prev?.themeId ?? null,
+      note: prev?.note ?? "未登録候補 (要 datasets.ts 登録 → pipeline)",
+    });
+  }
+
+  return entries.sort((a, b) => b.score - a.score);
+}
+
+/**
+ * MLIT DPF カタログ (静的表。reference/mlit-dpf-catalog.md 転記)。
+ * nlni_ksj / dpf_area_data / dpf_statistical_data は KSJ/N03/e-Stat と重複 → 除外。
+ * renderClass は内容から手書き。availability は全て api (GraphQL 取得が要る)。
+ */
+const DPF_CATALOGS: { id: string; name: string; renderClass: RenderClass; note: string }[] = [
+  { id: "ipf", name: "社会資本情報 (空港/公園/ダム/砂防)", renderClass: "point-plot", note: "10 DS" },
+  { id: "msil", name: "海しる (港湾/漁港/灯台)", renderClass: "point-plot", note: "5 DS" },
+  { id: "dhb", name: "ダム便覧", renderClass: "point-plot", note: "1 DS" },
+  { id: "hwq", name: "水文水質データベース (雨量/水位)", renderClass: "point-plot", note: "2 DS" },
+  { id: "ffd", name: "訪日外国人流動データ", renderClass: "flow", note: "8 DS" },
+  { id: "qol", name: "都市QOLデータ", renderClass: "polygon-overlay", note: "2 DS" },
+  { id: "gtfs", name: "GTFS (公共交通時刻表)", renderClass: "point-plot", note: "1 DS・停留所点" },
+  { id: "rdpf", name: "道路データPF (県間OD交通量)", renderClass: "flow", note: "2 DS" },
+  { id: "rsdb", name: "全国道路施設点検DB (橋梁/トンネル)", renderClass: "point-plot", note: "7 DS" },
+  { id: "mlit_plateau", name: "3D都市モデル PLATEAU", renderClass: "polygon-overlay", note: "6 DS" },
+  { id: "rtc", name: "道路交通センサス", renderClass: "point-plot", note: "2 DS" },
+  { id: "ngi", name: "国土地盤情報DB", renderClass: "point-plot", note: "1 DS" },
+  { id: "ndm", name: "自然災害伝承碑", renderClass: "point-plot", note: "1 DS・災害記録点" },
+  { id: "cyport", name: "サイバーポート (港湾インフラ)", renderClass: "point-plot", note: "1 DS" },
+  { id: "karte", name: "事業評価カルテ", renderClass: "unknown", note: "2 DS" },
+  { id: "mcc", name: "地方公共団体の工事データ", renderClass: "point-plot", note: "1 DS" },
+  { id: "lpfs", name: "全国幹線旅客純流動調査", renderClass: "flow", note: "12 DS" },
+  { id: "dimaps", name: "DiMAPS (災害情報)", renderClass: "polygon-overlay", note: "4 DS" },
+  { id: "alpc", name: "静岡県航空レーザ点群", renderClass: "mesh", note: "2 DS・地域限定" },
+  { id: "ntrack", name: "航空機騒音監視測定", renderClass: "point-plot", note: "9 DS" },
+  { id: "psc", name: "災害緊急撮影 (斜め写真)", renderClass: "unknown", note: "2 DS" },
+  { id: "crtc", name: "工事実績情報 (コリンズ)", renderClass: "point-plot", note: "1 DS" },
+  { id: "nvpf", name: "歩行空間ナビゲーション", renderClass: "line", note: "1 DS" },
+  { id: "mms", name: "MMS三次元点群", renderClass: "mesh", note: "1 DS" },
+  { id: "imm", name: "インフラみらいマップ", renderClass: "point-plot", note: "1 DS" },
+  { id: "jyubunpc", name: "重要文化財点群", renderClass: "point-plot", note: "1 DS" },
+  { id: "kkd", name: "熊本県施設管理DB", renderClass: "point-plot", note: "7 DS・地域限定" },
+  { id: "nxc", name: "高速道路会社の工事図面", renderClass: "unknown", note: "1 DS" },
+  { id: "tcd", name: "東京都ICT活用工事", renderClass: "unknown", note: "1 DS・地域限定" },
+  { id: "cals_fukushima", name: "福島県電子納品保管管理", renderClass: "unknown", note: "2 DS・地域限定" },
+  { id: "dobox", name: "広島県インフラマネジメント基盤", renderClass: "unknown", note: "1 DS・地域限定" },
+];
+
+function buildDpfEntries(prevByKey: Map<string, CatalogEntry>): CatalogEntry[] {
+  return DPF_CATALOGS.map((c) => {
+    const score = 0.5 * RENDER_PRIORITY[c.renderClass] + 0.5 * AVAIL_PRIORITY.api;
+    const key = `dpf:${c.id}`;
+    const prev = prevByKey.get(key);
+    return {
+      metricKey: key,
+      source: "mlit-dpf" as const,
+      lane: "mlit-dpf" as const,
+      title: c.name,
+      score: Math.round(score * 1000) / 1000,
+      dataId: c.id,
+      renderClass: c.renderClass,
+      availability: "api" as const,
+      status: prev?.status ?? "candidate",
+      themeId: prev?.themeId ?? null,
+      note: prev?.note ?? `${c.note}・GraphQL 取得 → --geojson でヘルパーに投入`,
+    };
+  }).sort((a, b) => b.score - a.score);
+}
+
 function rebuild(prefCap: number): CatalogFile {
   const prev = loadState();
   // 既存 status を metricKey で引けるように (upsert 保持)
@@ -196,6 +405,7 @@ function rebuild(prefCap: number): CatalogFile {
     const prevEntry = prevByKey.get(config.key);
     return {
       metricKey: config.key,
+      source: "estat",
       lane,
       title: config.title,
       subtitle: config.subtitle ?? null,
@@ -228,15 +438,18 @@ function rebuild(prefCap: number): CatalogFile {
     .filter((c) => !c.entities.includes("city"))
     .map((c) => scoreOf(c, "pref"))
     // 二値化しにくい・古すぎるノイズを落とす
-    .filter((e) => e.breakdown.binaryFram >= 0.7 && e.breakdown.freshness >= 0.6)
+    .filter((e) => (e.breakdown?.binaryFram ?? 0) >= 0.7 && (e.breakdown?.freshness ?? 0) >= 0.6)
     .sort((a, b) => b.score - a.score);
   const pref = prefAll.slice(0, prefCap);
 
-  const entries = [...muni, ...pref];
+  const ksj = buildKsjEntries(prevByKey);
+  const dpf = buildDpfEntries(prevByKey);
+
+  const entries = [...muni, ...pref, ...ksj, ...dpf];
   const state: CatalogFile = {
     generatedAt: new Date().toISOString(),
     weights: WEIGHTS,
-    counts: { muni: muni.length, pref: pref.length },
+    counts: { muni: muni.length, pref: pref.length, ksj: ksj.length, "mlit-dpf": dpf.length },
     entries,
   };
   saveState(state);
@@ -246,10 +459,19 @@ function rebuild(prefCap: number): CatalogFile {
 function printTop(state: CatalogFile, lane: Lane, n = 20) {
   const rows = state.entries.filter((e) => e.lane === lane && e.status === "candidate").slice(0, n);
   console.log(`\n=== ${lane} レーン top${n} (status=candidate) ===`);
+  if (lane === "ksj" || lane === "mlit-dpf") {
+    console.log("score  renderClass      avail       key / title");
+    for (const e of rows) {
+      console.log(
+        `${e.score.toFixed(3)}  ${(e.renderClass ?? "-").padEnd(15)} ${(e.availability ?? "-").padEnd(11)} ${e.metricKey}  「${e.title}」`,
+      );
+    }
+    return;
+  }
   console.log("score  cat                 latestY  metricKey / title");
   for (const e of rows) {
     console.log(
-      `${e.score.toFixed(3)}  ${e.category.padEnd(18)} ${(e.latestYear ?? "-").padEnd(7)} ${e.metricKey}  「${e.title}」`,
+      `${e.score.toFixed(3)}  ${(e.category ?? "").padEnd(18)} ${(e.latestYear ?? "-").padEnd(7)} ${e.metricKey}  「${e.title}」`,
     );
   }
 }
@@ -294,11 +516,14 @@ function main() {
 
   const state = rebuild(opts.prefCap);
   console.log(
-    `カタログ再構築: muni ${state.counts.muni} 件 / pref ${state.counts.pref} 件 (上限 ${opts.prefCap})`,
+    `カタログ再構築: muni ${state.counts.muni} / pref ${state.counts.pref} (上限 ${opts.prefCap}) / ` +
+      `ksj ${state.counts.ksj} / mlit-dpf ${state.counts["mlit-dpf"]}`,
   );
   console.log(`SSOT: ${STATE_PATH}`);
   printTop(state, "muni");
   printTop(state, "pref");
+  printTop(state, "ksj");
+  printTop(state, "mlit-dpf");
 }
 
 main();

@@ -35,7 +35,12 @@ export function useBuzzMapGeo(spec: BuzzMapSpec, ratio: BuzzMapRatio): BuzzMapGe
         }
         if (cancelled) return;
         setGeo(
-          computeBuzzMapGeo(main, pref, { level: spec.level, ratio, type: spec.type })
+          computeBuzzMapGeo(main, pref, {
+            level: spec.level,
+            ratio,
+            type: spec.type,
+            points: spec.type === "C" ? spec.data.points : undefined,
+          })
         );
         continueRender(handle);
       } catch (err) {

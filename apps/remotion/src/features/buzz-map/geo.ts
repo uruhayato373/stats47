@@ -22,6 +22,13 @@ export interface BuzzMapPathInfo {
   d: string;
 }
 
+/** 型C: 投影済みの描画点（キャンバス座標 + 凡例 rowKey） */
+export interface BuzzMapProjectedPoint {
+  x: number;
+  y: number;
+  key: string;
+}
+
 export interface BuzzMapGeo {
   width: number;
   height: number;
@@ -31,6 +38,8 @@ export interface BuzzMapGeo {
   inset: BuzzMapPathInfo[] | null;
   /** インセット枠の描画位置（キャンバス座標） */
   insetBox: { x: number; y: number; width: number; height: number } | null;
+  /** 型C: 投影済み点（本土・沖縄インセット両方を含む） */
+  points: BuzzMapProjectedPoint[] | null;
 }
 
 interface Box {
@@ -41,7 +50,7 @@ interface Box {
 }
 
 /** 比率×型ごとの地図フィット領域・インセット枠（キャンバス比率で定義） */
-export function buzzMapLayout(ratio: BuzzMapRatio, type: "A" | "B") {
+export function buzzMapLayout(ratio: BuzzMapRatio, type: "A" | "B" | "C") {
   const { width: W, height: H } = BUZZ_MAP_RATIOS[ratio];
   // 型B は右に年カウンター用の海域を空ける
   const padRight = type === "B" ? 0.22 : 0.06;
@@ -164,7 +173,13 @@ function fitAndRender(
 export function computeBuzzMapGeo(
   topology: Topology,
   prefTopology: Topology | null,
-  opts: { level: string; ratio: BuzzMapRatio; type: "A" | "B" }
+  opts: {
+    level: string;
+    ratio: BuzzMapRatio;
+    type: "A" | "B" | "C";
+    /** 型C: 凡例 rowKey → [lon, lat][] */
+    points?: Record<string, [number, number][]>;
+  }
 ): BuzzMapGeo {
   const { level, ratio, type } = opts;
   const { W, H, region, insetBox } = buzzMapLayout(ratio, type);
@@ -183,6 +198,7 @@ export function computeBuzzMapGeo(
       prefBorders: null,
       inset: null,
       insetBox: null,
+      points: null,
     };
   }
 
@@ -216,6 +232,48 @@ export function computeBuzzMapGeo(
     });
   }
 
+  // 型C: 点を本土 / 沖縄インセットに振り分けて投影
+  let points: BuzzMapProjectedPoint[] | null = null;
+  if (opts.points) {
+    const mainProj = geoMercator().fitExtent(
+      [
+        [region.x0, region.y0],
+        [region.x1, region.y1],
+      ],
+      frame
+    );
+    let insetProj: ReturnType<typeof geoMercator> | null = null;
+    if (insetBox && okinawaFeatures.length > 0) {
+      const okiFc: FeatureCollection = {
+        type: "FeatureCollection",
+        features: okinawaFeatures,
+      };
+      insetProj = geoMercator().fitExtent(
+        [
+          [insetBox.x + 12, insetBox.y + 12],
+          [insetBox.x + insetBox.width - 12, insetBox.y + insetBox.height - 12],
+        ],
+        okiFc
+      );
+    }
+    points = [];
+    for (const [key, coords] of Object.entries(opts.points)) {
+      for (const [lon, lat] of coords) {
+        const inMain =
+          lon >= MAINLAND_BBOX.west &&
+          lon <= MAINLAND_BBOX.east &&
+          lat >= MAINLAND_BBOX.south &&
+          lat <= MAINLAND_BBOX.north;
+        // 沖縄・南西諸島は inset へ（inset が無い比率=16:9 は本土投影で枠外に流す）
+        const proj = inMain ? mainProj : (insetProj ?? mainProj);
+        const xy = proj([lon, lat]);
+        if (xy && Number.isFinite(xy[0]) && Number.isFinite(xy[1])) {
+          points.push({ x: xy[0], y: xy[1], key });
+        }
+      }
+    }
+  }
+
   return {
     width: W,
     height: H,
@@ -223,5 +281,6 @@ export function computeBuzzMapGeo(
     prefBorders,
     inset,
     insetBox: inset ? insetBox : null,
+    points,
   };
 }

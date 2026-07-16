@@ -120,6 +120,19 @@ export const BuzzMapCard: React.FC<BuzzMapCardProps> = ({
             strokeLinejoin="round"
           />
         ))}
+        {/* 型C: 点プロット（白地図の上に accent 色の点） */}
+        {geo.points?.map((pt, i) => (
+          <circle
+            key={`p-${i}`}
+            cx={pt.x}
+            cy={pt.y}
+            r={(spec.pointRadius ?? 4) * s}
+            fill={resolveFill("accent", spec)}
+            fillOpacity={0.82}
+            stroke={C.sea}
+            strokeWidth={0.6 * s}
+          />
+        ))}
       </svg>
 
       {/* ① タイトルブロック（左上） */}
@@ -174,7 +187,7 @@ export const BuzzMapCard: React.FC<BuzzMapCardProps> = ({
       </div>
 
       {/* 型B: 年カウンター（右の海域）。サマリー表示中は上へ避ける */}
-      {yearLabel && (
+      {spec.type === "B" && yearLabel && (
         <div
           style={{
             position: "absolute",
@@ -258,7 +271,7 @@ export const BuzzMapCard: React.FC<BuzzMapCardProps> = ({
           {spec.type === "B" && spec.ramp ? spec.ramp.legendTitle : spec.legend.title}
         </div>
 
-        {spec.type === "A" &&
+        {(spec.type === "A" || spec.type === "C") &&
           spec.legend.rows?.map((row) => (
             <div
               key={row.key}
@@ -274,7 +287,8 @@ export const BuzzMapCard: React.FC<BuzzMapCardProps> = ({
                 style={{
                   width: 22 * s,
                   height: 22 * s,
-                  borderRadius: 6 * s,
+                  // 型C は点なので凡例マーカーも円
+                  borderRadius: spec.type === "C" ? "50%" : 6 * s,
                   flex: "none",
                   border: `1px solid rgba(13,54,107,.18)`,
                   backgroundColor: resolveFill(row.fill, spec),

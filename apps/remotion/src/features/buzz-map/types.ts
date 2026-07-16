@@ -26,8 +26,8 @@ export interface BuzzMapSpeedSegment {
 export interface BuzzMapSpec {
   /** 出力ファイル名等に使う識別子（kebab-case） */
   id: string;
-  /** A=静止画二値/少区分, B=時系列アニメ */
-  type: "A" | "B";
+  /** A=静止画二値/少区分, B=時系列アニメ, C=点プロット（白地図＋accent 点） */
+  type: "A" | "B" | "C";
   /** "pref" | "muni" | "muni:NN"（NN=都道府県コード2桁で県トリム） */
   level: string;
   title: string;
@@ -44,15 +44,20 @@ export interface BuzzMapSpec {
     rows?: BuzzMapLegendRow[];
   };
   /**
-   * データ。型A: code → 凡例 row の key。型B: code → { year: value }
+   * データ。型A: code → 凡例 row の key。型B: code → { year: value }。
+   * 型C: 凡例 row の key → [lon, lat][]（プロットする点の経緯度列）。
    * code は 都道府県=2桁 / 市区町村=N03_007 5桁
    */
   data: {
     values?: Record<string, string>;
     series?: Record<string, Record<string, number>>;
+    /** 型C: 凡例 rowKey → 点の [経度, 緯度] 配列 */
+    points?: Record<string, [number, number][]>;
     /** code → 表示名（型Bサマリーの最大・最小ラベル用。省略時はコードを表示） */
     names?: Record<string, string>;
   };
+  /** 型C のみ。点の半径（@1080 基準 px。省略時 4） */
+  pointRadius?: number;
   /** 型Bのみ */
   years?: { from: number; to: number };
   /** 型Bのみ。省略時は全区間 2年/秒 */
