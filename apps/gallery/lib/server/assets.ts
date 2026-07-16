@@ -35,6 +35,8 @@ export const ASSET_TABS: AssetTab[] = [
   { id: "ranking-ogp", label: "ランキング OGP", kind: "ogp" },
   { id: "ranking-card", label: "ランキング リンクカード", kind: "ogp" },
   { id: "areas-ogp", label: "都道府県 OGP", kind: "ogp" },
+  // 2026-07-15 に他ブランチが collectors へ追加した新タブ (buildTab が dispatch)。merge 統合で追随
+  { id: "pref-silhouette", label: "県シルエットカード (SNS)", kind: "ogp" },
   { id: "theme-ogp", label: "テーマ OGP", kind: "ogp" },
   { id: "category-ogp", label: "カテゴリ OGP", kind: "ogp" },
   { id: "note-cover", label: "note カバー", kind: "ogp" },
