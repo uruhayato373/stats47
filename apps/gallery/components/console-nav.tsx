@@ -3,6 +3,7 @@ import { ConsoleNavLinks } from "./console-nav-links";
 const NAV_ITEMS = [
   { href: "/", label: "ホーム" },
   { href: "/sns", label: "SNS" },
+  { href: "/buzz-map", label: "バズ地図" },
   { href: "/assets", label: "画像資産" },
   { href: "/svg", label: "SVG" },
   { href: "/dashboard", label: "現況" },

@@ -92,6 +92,39 @@ export const ProbeR2 = z.object({
 
 export type ProbeR2Input = z.infer<typeof ProbeR2>;
 
+/** ideaId は英数字とハイフンのみ (catalog 実在 allowlist は server 側で追加検証)。 */
+const IdeaId = z.string().regex(/^[a-z0-9-]+$/, "ideaId は英数字とハイフンのみ");
+
+/** POST /api/buzz-map/actions/generate-spec */
+export const BuzzMapGenerateSpec = z.object({
+  ideaId: IdeaId,
+  helper: z.enum(["estat", "ksj", "gsi", "merge"]),
+  extraArgs: z.array(z.string()).optional(),
+});
+export type BuzzMapGenerateSpecInput = z.infer<typeof BuzzMapGenerateSpec>;
+
+/** POST /api/buzz-map/actions/render */
+export const BuzzMapRender = z.object({
+  ideaId: IdeaId,
+  kind: z.enum(["still", "preview", "full"]),
+});
+export type BuzzMapRenderInput = z.infer<typeof BuzzMapRender>;
+
+/** POST /api/buzz-map/actions/push-r2 (確認ダイアログは client 側必須・server は confirm:true を要求) */
+export const BuzzMapPushR2 = z.object({
+  ideaId: IdeaId,
+  confirm: z.literal(true),
+});
+export type BuzzMapPushR2Input = z.infer<typeof BuzzMapPushR2>;
+
+/** POST /api/buzz-map/actions/register-draft */
+export const BuzzMapRegisterDraft = z.object({
+  ideaId: IdeaId,
+  channel: z.enum(["x", "instagram"]),
+  confirm: z.literal(true),
+});
+export type BuzzMapRegisterDraftInput = z.infer<typeof BuzzMapRegisterDraft>;
+
 /**
  * query の limit パース (非負有限整数のみ。NaN/Infinity/負 → 不正)。
  * 返り値: 有効なら number、指定なしなら null、不正なら "invalid"。

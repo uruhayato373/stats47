@@ -141,3 +141,68 @@ export interface ScheduleIgResponse {
   file: string;
   postId: number;
 }
+
+// ─── buzz-map (§9 gallery /buzz-map) ─────────────────────
+
+export interface BuzzMapAssetStatusDTO {
+  hasLocalAssets: boolean;
+  localRels: string[];
+  hasSpec: boolean;
+}
+
+export interface BuzzMapPostStatusDTO {
+  postId: number | null;
+  status: string | null;
+  platform: string | null;
+}
+
+export interface BuzzMapEntryDTO {
+  metricKey: string;
+  source: string;
+  lane: string;
+  title: string;
+  score: number;
+  status: string;
+  themeId: string | null;
+  note: string | null;
+  ideaId?: string;
+  subtitle?: string | null;
+  category?: string;
+  priority?: string;
+  recommendedType?: string;
+  sourceKind?: string;
+  metricKeys?: string[];
+  feasibility?: string;
+  capability?: string;
+  commercialUse?: string;
+  sensitivity?: string;
+  eligible?: boolean;
+  autoPostable?: boolean;
+  gateReasons?: string[];
+  landingStrategy?: string;
+  landingReadiness?: string;
+  primaryUrl?: string | null;
+  breakdown?: Record<string, number>;
+  aliasesOf?: string[];
+  assets: BuzzMapAssetStatusDTO | null;
+  post: BuzzMapPostStatusDTO | null;
+  r2AssetBaseUrl: string | null;
+  [key: string]: unknown;
+}
+
+export interface BuzzMapCatalogResponse {
+  summary: {
+    generatedAt: string | null;
+    counts: Record<string, number>;
+    aggregate: {
+      total: number;
+      eligible: number;
+      blocked: number;
+      landingReady: number;
+      generated: number;
+      draft: number;
+      posted: number;
+    };
+  };
+  entries: BuzzMapEntryDTO[];
+}
