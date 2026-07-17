@@ -1,7 +1,0 @@
-{
-  "kind": "derived",
-  "derived": "R2 app/stats/vacant-housing-ratio/values.json (2023年住宅・土地統計調査)。",
-  "source": "r2:app/stats/vacant-housing-ratio/values.json",
-  "fetchedAt": "2026-07-16T14:09:45.021Z",
-  "generatedBy": "manual (P1-09)"
-}

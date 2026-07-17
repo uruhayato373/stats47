@@ -1,7 +1,0 @@
-{
-  "kind": "derived",
-  "derived": "R2 app/stats/real-disposable-income/values.json (勤労者世帯の実質可処分所得・2024年) と app/stats/consumer-price-difference-index-overall/values.json (消費者物価地域差指数・全国=100・2024年) を都道府県で結合。ピアソン相関 r=0.219。",
-  "source": "r2:app/stats/{real-disposable-income,consumer-price-difference-index-overall}/values.json",
-  "fetchedAt": "2026-07-16T14:17:16.904Z",
-  "generatedBy": "manual /tmp aggregation (P1-11)"
-}

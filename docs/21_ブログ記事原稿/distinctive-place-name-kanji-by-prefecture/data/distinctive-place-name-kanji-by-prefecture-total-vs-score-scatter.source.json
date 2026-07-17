@@ -1,8 +1,0 @@
-{
-  "kind": "derived",
-  "derived": "各県の居住地名総数(total)と特徴度スコア(score、上位1漢字)の関係。ピアソン相関係数は log(total) と score で算出し r=-0.691 (負の相関=地名総数が多い県ほど特徴度スコアは低くなる傾向)。 r=-0.691",
-  "source": "r2:gis/gsi-pni/points.json",
-  "license": "国土地理院 PDL1.0 (出典明示で商用可)",
-  "fetchedAt": "2026-07-16T23:38:35.803Z",
-  "generatedBy": "manual (P1-25)"
-}

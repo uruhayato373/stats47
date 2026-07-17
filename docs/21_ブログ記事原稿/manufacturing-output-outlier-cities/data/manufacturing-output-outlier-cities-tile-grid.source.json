@@ -1,7 +1,0 @@
-{
-  "kind": "derived",
-  "derived": "R2 app/stats/manufacturing-shipment-amount/cities.json (2023年・製造品出荷額等・百万円) を app/stats/total-population/cities.json (2020年人口) で割り、市区町村ごとの人口1人あたり製造品出荷額を算出。政令市行政区は除外。",
-  "source": "r2:app/stats/{manufacturing-shipment-amount,total-population}/cities.json",
-  "fetchedAt": "2026-07-16T14:21:22.593Z",
-  "generatedBy": "manual /tmp aggregation (P1-12)"
-}
