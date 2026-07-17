@@ -20,9 +20,14 @@ co_agents: [x-strategist, instagram-strategist, gis-curator]
 
 ## 工程
 
+> **★バッチ量産の既定経路 (2026-07-17〜)**: 単発の下記工程に加え、**`npx tsx .claude/scripts/sns/prepare-buzz-map-batch.ts`**
+> (dry-run 既定・`--apply` で spec→render→R2→caption→**landing contract + isPostable ゲート通過分のみ** posts.json draft)
+> が選定〜draft を一括処理する。管理画面は **gallery `/buzz-map`** (`npm run gallery` → 127.0.0.1:4747/buzz-map —
+> catalog 横断表示 + landing 再判定/レンダ/R2 push/draft 登録の分離 job)。ゲート仕様の正典 = `buzz-map-standards.md` §5。
+
 | step | 内容 | 出力 |
 |---|---|---|
-| 1. spec | **候補カタログ `build-buzz-map-catalog.ts --next N --lane muni\|pref\|ksj\|mlit-dpf\|gsi`**（単品・真実源 = `buzz-map-catalog.json`・5 レーン）または **`build-buzz-map-combo-catalog.ts --next N --feasible-only`**（掛け合わせ・型E）から選ぶ。型A(e-Stat)=`build-buzz-map-spec.ts`、型C/D(KSJ)=`build-buzz-map-spec-ksj.ts`、型C(GSI 地名)=`build-buzz-map-spec-gsi.ts`、型E 合成=`merge-buzz-map-specs.ts` で生成 | `specs/<id>.json` |
+| 1. spec | **候補カタログ `build-buzz-map-catalog.ts --next N`**（既定 = **curated レーン** score 降順。素材レーンは `--lane muni\|pref\|ksj\|mlit-dpf\|gsi`・真実源 = `buzz-map-catalog.json`・6 レーン）または **`build-buzz-map-combo-catalog.ts --next N --feasible-only`**（掛け合わせ・型E）から選ぶ。型A(e-Stat)=`build-buzz-map-spec.ts`、型C/D(KSJ)=`build-buzz-map-spec-ksj.ts`、型C(GSI 地名)=`build-buzz-map-spec-gsi.ts`（**2 パターン比較は `--pattern-a/--pattern-b`** — 谷vs沢等。凡例が問いの 2 項になることを目視必須）、型E 合成=`merge-buzz-map-specs.ts` で生成 | `specs/<id>.json` |
 | 2. still | 静止画レンダ（型Bも先に最終年静止画で構図確認） | `.local/r2/sns/buzz-map/<id>/x/stills/` |
 | 3. 目視 | 生成 PNG を Read で開きチェックリスト判定（下記） | — |
 | 4. 改善 | 崩れは spec 修正を優先して再レンダ。カードCSS/tokens の変更は standards §6 決定ログとセット | — |

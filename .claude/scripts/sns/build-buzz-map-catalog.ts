@@ -42,11 +42,41 @@ import type { MetricConfig } from "@stats47/data-configs";
 // KSJ データセットは workspace exports 制約のため相対パスで import
 import { GIS_DATASETS } from "../../../packages/gis/src/mlit-ksj/datasets";
 
-// x-catalog は .cjs (require)
+// curated ideas (人が選定した企画 SSOT) と router/inventory コア (.mjs)
+import { CURATED_BUZZ_MAP_IDEAS } from "./data/buzz-map-curated-ideas";
+import type { CuratedBuzzMapIdea } from "./data/buzz-map-curated-ideas";
+import {
+  computeCuratedScore,
+  evaluateHardGate,
+  resolveLanding,
+  findMachineDuplicate,
+  curatedToCatalogEntry,
+  resolveMergedStatus,
+} from "./lib/buzz-map-router-core.mjs";
+import { loadInventory } from "./lib/buzz-map-inventory-core.mjs";
+
+// x-catalog / sns-posts-store は .cjs (require)
 import { createRequire } from "node:module";
 const require = createRequire(import.meta.url);
 const { getAffinity } = require("../lib/x-catalog.cjs") as {
   getAffinity: () => Record<string, Record<string, string>>;
+};
+// posts.json は read-only 参照 (draft 継承)。書込は store 経由のみ・ここでは query しか使わない。
+const snsPostsStore = require("../lib/sns-posts-store.cjs") as {
+  query: (predicate: (p: Record<string, unknown>) => boolean) => Array<Record<string, unknown>>;
+};
+
+/**
+ * posts.json の buzz-map draft content_key → curated ideaId の対応 (§8.3 draft 継承)。
+ * literal 一致するもの (vacant-housing-muni / onsen-place-names) は明示不要だが、
+ * machine 由来の旧 content_key で curated ideaId と一致しないものだけここに書く。
+ * 根拠: no-station-muni は §10 P0 の「駅なし×人口」= curated stationless-large-municipalities
+ * (renderPlan「型D 駅なし×人口上位 map」で照合)。population-growth-muni は machine themeId で、
+ * curated population-growth-municipalities に aliasesOf 経由で統合される (下の resolve で解決)。
+ */
+const POSTS_CONTENT_KEY_TO_IDEA: Record<string, string> = {
+  "no-station-muni": "stationless-large-municipalities",
+  "population-growth-muni": "population-growth-municipalities",
 };
 
 const PROJECT_ROOT = join(import.meta.dirname ?? __dirname, "../../..");
@@ -56,7 +86,7 @@ const GSC_SNAPSHOTS = join(
   ".claude/skills/analytics/gsc-improvement/reference/snapshots",
 );
 
-type Lane = "muni" | "pref" | "ksj" | "mlit-dpf" | "gsi";
+type Lane = "muni" | "pref" | "ksj" | "mlit-dpf" | "gsi" | "curated";
 type Status = "candidate" | "spec" | "generated" | "posted" | "rejected";
 /** 型に落とせるか (どのヘルパー/レンダラーで作れるか) */
 type RenderClass =
@@ -73,15 +103,35 @@ type RenderClass =
 type Availability = "r2" | "registered" | "candidate" | "api";
 
 interface CatalogEntry {
-  /** 主キー。estat=metricKey / ksj="ksj:<dataId>" / dpf="dpf:<catalogId>" */
+  /** 主キー。estat=metricKey / ksj="ksj:<dataId>" / dpf="dpf:<catalogId>" / curated="curated:<ideaId>" */
   metricKey: string;
-  source: "estat" | "ksj" | "mlit-dpf" | "gsi";
+  source: "estat" | "ksj" | "mlit-dpf" | "gsi" | "curated";
   lane: Lane;
   title: string;
   score: number;
   status: Status;
   themeId: string | null;
   note: string | null;
+  // ── curated 固有 (任意) ──
+  ideaId?: string;
+  priority?: "P0" | "P1" | "P2" | "P3";
+  recommendedType?: string;
+  sourceKind?: string;
+  metricKeys?: string[];
+  feasibility?: string;
+  commercialUse?: string;
+  sensitivity?: string;
+  eligible?: boolean;
+  autoPostable?: boolean;
+  gateReasons?: string[];
+  landingStrategy?: string;
+  landingReadiness?: string;
+  primaryUrl?: string | null;
+  /** curated が machine catalog の既存 entry と重複した場合の被マッチ key 群 (§4.1 統合の記録) */
+  aliasesOf?: string[];
+  /** §11 Phase 5: GA4 attribution (buzz-map-attribution-latest.json) の measured 補正入力。
+   *  投稿 0 の現在は付かない (no-op)。実補正ロジックは 4 週後の実データで調整する (今は入口のみ)。 */
+  measuredOutcome?: { landingSessions: number; deepClickRate: number | null; outcomeScore: number };
   // ── e-Stat 固有 (任意) ──
   subtitle?: string | null;
   category?: string;
@@ -115,7 +165,7 @@ const CAPABILITY: Record<RenderClass, string> = {
 interface CatalogFile {
   generatedAt: string | null;
   weights: Record<string, number>;
-  counts: { muni: number; pref: number; ksj: number; "mlit-dpf": number; gsi: number };
+  counts: { muni: number; pref: number; ksj: number; "mlit-dpf": number; gsi: number; curated: number };
   entries: CatalogEntry[];
 }
 
@@ -202,7 +252,7 @@ function loadState(): CatalogFile {
   return {
     generatedAt: null,
     weights: {},
-    counts: { muni: 0, pref: 0, ksj: 0, "mlit-dpf": 0, gsi: 0 },
+    counts: { muni: 0, pref: 0, ksj: 0, "mlit-dpf": 0, gsi: 0, curated: 0 },
     entries: [],
   };
 }
@@ -508,7 +558,135 @@ function buildGsiEntries(prevByKey: Map<string, CatalogEntry>): CatalogEntry[] {
   }).sort((a, b) => b.score - a.score);
 }
 
-function rebuild(prefCap: number): CatalogFile {
+/**
+ * curated lane を組み立てる (§4.1 authored source)。
+ * 各 idea を score gate / hard gate / landing router に通し、machine lane との重複を
+ * dedup してから catalog entry 形へ射影する。status は前回を upsert 保持。
+ * §5.4 backfill: dedup 先の machine entry が generated/posted の場合、その状態を
+ * curated entry に引き継ぎ landing readiness を live 扱いにする。
+ */
+async function buildCuratedEntries(
+  prevByKey: Map<string, CatalogEntry>,
+  machineKeyToStatus: Map<string, Status>,
+): Promise<CatalogEntry[]> {
+  const inventory = await loadInventory({});
+  const machineKeys = new Set(machineKeyToStatus.keys());
+  // posts.json の draft を curated ideaId → status で引けるようにする (§8.3 draft 継承・read-only)
+  const draftStatusByIdea = loadDraftStatusByIdea();
+  // §11 Phase 5: GA4 attribution の measured 補正入力 (投稿 0 の現在は空 = no-op)
+  const measuredByIdea = loadMeasuredFeedback();
+  const out: CatalogEntry[] = [];
+
+  for (const idea of CURATED_BUZZ_MAP_IDEAS as CuratedBuzzMapIdea[]) {
+    const scored = computeCuratedScore(idea);
+    const gate = evaluateHardGate(idea);
+    const landing = resolveLanding(idea, inventory);
+    const dup = findMachineDuplicate(idea, machineKeys);
+
+    const entry = curatedToCatalogEntry(idea, scored, landing, gate) as CatalogEntry;
+
+    // §4.1 machine lane と統合: 被マッチ key を記録
+    if (dup.isDuplicate) entry.aliasesOf = dup.matchedKeys;
+
+    // §11 Phase 5: measured 補正入力を付与 (投稿 0 の現在は該当なし = no-op)。
+    //   実 score 補正 (outcomeScore を breakdown に加算) は 4 週後の実データ検証後に配線する。
+    const measured = measuredByIdea.get(idea.ideaId);
+    if (measured) entry.measuredOutcome = measured;
+
+    // dedup 先 machine entry の後段 status 群 (generated/posted/spec 等) を集める
+    const matchedMachineStatuses = dup.matchedKeys
+      .map((mk) => machineKeyToStatus.get(mk))
+      .filter((s): s is Status => Boolean(s));
+
+    // §5.4 backfill: dedup 先が generated/posted なら readiness を live に引き上げる
+    let backfilledLive = false;
+    for (const st of matchedMachineStatuses) {
+      if (st === "generated" || st === "posted") {
+        entry.landingReadiness = "live";
+        backfilledLive = true;
+      }
+    }
+
+    // §4.3 status: 前回 curated status を起点に、machine 後段 status と posts.json draft を
+    //   max 継承 (後段を巻き戻さない)。draft は generated より後段なので draft が勝つ。
+    const prev = prevByKey.get(entry.metricKey);
+    const draftStatus = draftStatusByIdea.get(idea.ideaId) ?? null;
+    entry.status = resolveMergedStatus(
+      prev?.status,
+      matchedMachineStatuses,
+      draftStatus,
+    ) as Status;
+
+    if (prev?.themeId) entry.themeId = prev.themeId;
+    const inheritedNotes = [
+      draftStatus ? `posts.json draft 継承 (${draftStatus})` : null,
+      backfilledLive ? `既存 generated と統合 (landing live backfill)` : null,
+      dup.isDuplicate ? `machine lane と統合: ${dup.matchedKeys.join(", ")}` : null,
+    ].filter(Boolean) as string[];
+    entry.note = prev?.note ?? (inheritedNotes.length > 0 ? inheritedNotes.join(" / ") : null);
+
+    out.push(entry);
+  }
+
+  return out.sort((a, b) => b.score - a.score);
+}
+
+/**
+ * posts.json (SSOT) の buzz-map draft を curated ideaId → status で引ける Map にする。
+ * read-only (store の query のみ・書込しない)。content_key が curated ideaId と一致しない
+ * machine 由来 key は POSTS_CONTENT_KEY_TO_IDEA で正規化する。
+ */
+function loadDraftStatusByIdea(): Map<string, string> {
+  const byIdea = new Map<string, string>();
+  let drafts: Array<Record<string, unknown>> = [];
+  try {
+    drafts = snsPostsStore.query(
+      (p) => p.domain === "buzz-map" && p.status === "draft",
+    );
+  } catch {
+    return byIdea; // posts.json 読めない環境では draft 継承なし (保守的)
+  }
+  for (const p of drafts) {
+    const contentKey = typeof p.content_key === "string" ? p.content_key : null;
+    if (!contentKey) continue;
+    const ideaId = POSTS_CONTENT_KEY_TO_IDEA[contentKey] ?? contentKey;
+    // draft より後段の status (scheduled/posted) が posts.json にあれば尊重
+    const status = typeof p.status === "string" ? p.status : "draft";
+    byIdea.set(ideaId, status);
+  }
+  return byIdea;
+}
+
+/**
+ * §11 Phase 5: GA4 attribution の measured 補正入力を読む (buzz-map-attribution-latest.json)。
+ * ファイル不在 / 投稿 0 の現在は空 Map (no-op)。buzz-map-attribution.mjs が生成する。
+ * ここでは score を直接書き換えず measuredOutcome として entry に添えるだけ (入口配線)。
+ */
+function loadMeasuredFeedback(): Map<
+  string,
+  { landingSessions: number; deepClickRate: number | null; outcomeScore: number }
+> {
+  const out = new Map<string, { landingSessions: number; deepClickRate: number | null; outcomeScore: number }>();
+  const p = join(PROJECT_ROOT, ".claude/state/sns/buzz-map-attribution-latest.json");
+  if (!existsSync(p)) return out;
+  try {
+    const json = JSON.parse(readFileSync(p, "utf8")) as {
+      feedback?: Record<string, { landingSessions?: number; deepClickRate?: number | null; outcomeScore?: number }>;
+    };
+    for (const [ideaId, f] of Object.entries(json.feedback ?? {})) {
+      out.set(ideaId, {
+        landingSessions: Number(f.landingSessions ?? 0),
+        deepClickRate: f.deepClickRate ?? null,
+        outcomeScore: Number(f.outcomeScore ?? 0),
+      });
+    }
+  } catch {
+    /* 壊れた state は無視 (no-op) */
+  }
+  return out;
+}
+
+async function rebuild(prefCap: number): Promise<CatalogFile> {
   const prev = loadState();
   // 既存 status を metricKey で引けるように (upsert 保持)
   const prevByKey = new Map(prev.entries.map((e) => [e.metricKey, e]));
@@ -581,7 +759,21 @@ function rebuild(prefCap: number): CatalogFile {
   const dpf = buildDpfEntries(prevByKey);
   const gsi = buildGsiEntries(prevByKey);
 
-  const entries = [...muni, ...pref, ...ksj, ...dpf, ...gsi];
+  // curated lane: machine lane の metricKey **と themeId** → status を渡し dedup + status 継承させる。
+  //   curated.aliases は machine の themeId (station-5k-plot 等) を参照するケースがあるため、
+  //   metricKey だけでなく themeId もキーに含める (でないと ksj/gsi 系の generated 状態が継承されない)。
+  const machineKeyToStatus = new Map<string, Status>();
+  for (const e of [...muni, ...pref, ...ksj, ...dpf, ...gsi]) {
+    machineKeyToStatus.set(e.metricKey, e.status);
+    // themeId は後段 status を持つ entry のみ登録 (candidate の themeId で dedup を汚さない)
+    if (e.themeId && e.status !== "candidate") {
+      const existing = machineKeyToStatus.get(e.themeId);
+      if (!existing) machineKeyToStatus.set(e.themeId, e.status);
+    }
+  }
+  const curated = await buildCuratedEntries(prevByKey, machineKeyToStatus);
+
+  const entries = [...muni, ...pref, ...ksj, ...dpf, ...gsi, ...curated];
   const state: CatalogFile = {
     generatedAt: new Date().toISOString(),
     weights: WEIGHTS,
@@ -591,6 +783,7 @@ function rebuild(prefCap: number): CatalogFile {
       ksj: ksj.length,
       "mlit-dpf": dpf.length,
       gsi: gsi.length,
+      curated: curated.length,
     },
     entries,
   };
@@ -601,6 +794,15 @@ function rebuild(prefCap: number): CatalogFile {
 function printTop(state: CatalogFile, lane: Lane, n = 20) {
   const rows = state.entries.filter((e) => e.lane === lane && e.status === "candidate").slice(0, n);
   console.log(`\n=== ${lane} レーン top${n} (status=candidate) ===`);
+  if (lane === "curated") {
+    console.log("score  pri  strategy         readiness      ideaId / title");
+    for (const e of rows) {
+      console.log(
+        `${e.score.toFixed(0).padStart(3)}    ${(e.priority ?? "-").padEnd(3)}  ${(e.landingStrategy ?? "-").padEnd(15)} ${(e.landingReadiness ?? "-").padEnd(13)} ${e.ideaId}  「${e.title}」`,
+      );
+    }
+    return;
+  }
   if (lane === "ksj" || lane === "mlit-dpf" || lane === "gsi") {
     console.log("score  renderClass      avail       key / title");
     for (const e of rows) {
@@ -637,7 +839,7 @@ function markStatus(key: string, status: Status, themeId: string | null, note: s
   console.log(`✓ ${key} → status=${status}${themeId ? ` themeId=${themeId}` : ""}`);
 }
 
-function main() {
+async function main() {
   const opts = parseArgs();
 
   if (opts.markCandidate) return markStatus(opts.markCandidate, "candidate", opts.themeId, opts.note);
@@ -648,20 +850,25 @@ function main() {
 
   if (opts.next != null) {
     const state = loadState();
-    const lanes: Lane[] = opts.lane ? [opts.lane] : ["muni", "pref"];
-    const out = state.entries
-      .filter((e) => lanes.includes(e.lane) && e.status === "candidate")
-      .slice(0, opts.next);
-    for (const e of out) console.log(JSON.stringify(e));
+    // 既定は curated (SNS 企画の主レーン)。--lane で machine レーンも指定可
+    const lanes: Lane[] = opts.lane ? [opts.lane] : ["curated"];
+    let rows = state.entries.filter((e) => lanes.includes(e.lane) && e.status === "candidate");
+    // curated は eligible かつ landing が blocked でないものを優先 (§4.5 gate)
+    if (lanes.includes("curated")) {
+      rows = rows.filter((e) => e.lane !== "curated" || (e.eligible && e.landingReadiness !== "blocked"));
+    }
+    for (const e of rows.slice(0, opts.next)) console.log(JSON.stringify(e));
     return;
   }
 
-  const state = rebuild(opts.prefCap);
+  const state = await rebuild(opts.prefCap);
   console.log(
     `カタログ再構築: muni ${state.counts.muni} / pref ${state.counts.pref} (上限 ${opts.prefCap}) / ` +
-      `ksj ${state.counts.ksj} / mlit-dpf ${state.counts["mlit-dpf"]} / gsi ${state.counts.gsi}`,
+      `ksj ${state.counts.ksj} / mlit-dpf ${state.counts["mlit-dpf"]} / gsi ${state.counts.gsi} / ` +
+      `curated ${state.counts.curated}`,
   );
   console.log(`SSOT: ${STATE_PATH}`);
+  printTop(state, "curated");
   printTop(state, "muni");
   printTop(state, "pref");
   printTop(state, "ksj");
@@ -669,4 +876,7 @@ function main() {
   printTop(state, "gsi");
 }
 
-main();
+main().catch((err) => {
+  console.error(err);
+  process.exit(1);
+});

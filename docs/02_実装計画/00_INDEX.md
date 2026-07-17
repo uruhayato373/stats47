@@ -40,6 +40,8 @@ tags: [実装計画]
 | `24_テーマ分類再編成方針.md`             | 22テーマを固定せず、全レビュー後にkeep/split/merge/parent-hubで再編する分類・URL移行方針         |
 | `25_アフィリエイト運用SSOT移行仕様.md`   | docs/40 の運用資料を affiliate-manager / skills / state / 型付き git TS へ移し、週次計測・改善ループを一本化する Claude Code 実装仕様 |
 | `26_統合メディアコンソールNextjs移行仕様.md` | localhost:4747 の統合メディアコンソールを、機能・安全ガード互換のまま独立 `apps/gallery` へ移す実装仕様（**実装済 2026-07-16**） |
+| `27_buzz-map集客ゲート統合仕様.md` | buzz-map全候補カタログ、SNS画像・動画、R2・draft、landingとなるranking/blog/themeの同時制作、計測を一体化するClaude Code実装仕様 |
+| `28_ホーム注目ランキングCTR改善仕様.md` | ホームの注目ランキングをAI画像なしの問い・比較・勢力図・TOP3カードへ改善し、card CTRを実験計測するClaude Code実装仕様 |
 
 ## 関連（このフォルダ外の正典）
 

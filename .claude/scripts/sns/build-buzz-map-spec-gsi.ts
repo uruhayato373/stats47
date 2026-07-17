@@ -57,9 +57,16 @@ function parseArgs() {
     }
     return v;
   };
+  const patternA = val("--pattern-a");
   return {
     input: val("--input") ?? DEFAULT_INPUT,
-    pattern: req("--pattern"), // name に対する正規表現 (「宿」等の部分一致も可)
+    // 単一 pattern モード (kind admin/nature の 2 色) と 2 パターン比較モード (patternA vs patternB) を排他で持つ。
+    // 比較モードでは --pattern は不要 (--pattern-a / --pattern-b が主)。
+    pattern: patternA ? (val("--pattern") ?? "") : req("--pattern"),
+    patternA, // 比較モード group A の正規表現 (例 "谷")
+    patternB: val("--pattern-b"), // 比較モード group B の正規表現 (例 "沢|澤")
+    labelA: val("--label-a"), // group A の凡例ラベル (例 「谷」)
+    labelB: val("--label-b"), // group B の凡例ラベル (例 「沢・澤」)
     pref: val("--pref"), // 2桁県コードで居住地名を絞る (自然地名は pref 無しのため除外)
     id: req("--id"),
     title: req("--title"),
@@ -100,38 +107,73 @@ async function main() {
   const { meta, points } = await loadPoints(opts.input);
   console.log(`地名点 ${points.length} 件を読み込み`);
 
-  const re = new RegExp(opts.pattern);
-  let admin: [number, number][] = [];
-  let nature: [number, number][] = [];
-  for (const p of points) {
-    if (!re.test(p.name)) continue;
-    if (p.kind === "admin") {
-      if (opts.pref && p.pref !== opts.pref) continue;
-      admin.push([p.lon, p.lat]);
-    } else {
-      if (opts.pref) continue; // 自然地名は県コードを持たないため pref 指定時は除外
-      nature.push([p.lon, p.lat]);
-    }
-  }
-  console.log(`フィルタ "${opts.pattern}"${opts.pref ? ` pref=${opts.pref}` : ""}: 行政地名 ${admin.length} / 自然地名 ${nature.length}`);
-  if (admin.length + nature.length === 0) {
-    console.error("✗ ヒット 0 件。--pattern を見直してください");
-    process.exit(1);
-  }
-
   const dataPoints: Record<string, [number, number][]> = {};
   const rows: Array<{ key: string; label: string; fill: string; count: number; marker: "point" }> = [];
-  if (opts.single) {
-    dataPoints.hit = [...admin, ...nature];
-    rows.push({ key: "hit", label: opts.labelAdmin, fill: "accent", count: dataPoints.hit.length, marker: "point" });
-  } else {
-    if (admin.length) {
-      dataPoints.admin = admin;
-      rows.push({ key: "admin", label: opts.labelAdmin, fill: "accent", count: admin.length, marker: "point" });
+
+  if (opts.patternA) {
+    // ── 2 パターン比較モード (谷 vs 沢・澤 等) — kind を無視し 2 グループ 2 色で対比 ──
+    if (!opts.patternB) {
+      console.error("✗ --pattern-a を使うときは --pattern-b も必須です (2 グループ比較のため)");
+      process.exit(1);
     }
-    if (nature.length) {
-      dataPoints.nature = nature;
-      rows.push({ key: "nature", label: opts.labelNature, fill: "accent2", count: nature.length, marker: "point" });
+    const reA = new RegExp(opts.patternA);
+    const reB = new RegExp(opts.patternB);
+    const groupA: [number, number][] = [];
+    const groupB: [number, number][] = [];
+    for (const p of points) {
+      if (opts.pref && p.kind === "admin" && p.pref !== opts.pref) continue;
+      if (opts.pref && p.kind !== "admin") continue;
+      // A を優先判定 (両方一致する地名は少ないが A に寄せる)
+      if (reA.test(p.name)) groupA.push([p.lon, p.lat]);
+      else if (reB.test(p.name)) groupB.push([p.lon, p.lat]);
+    }
+    const labelA = opts.labelA ?? `「${opts.patternA}」`;
+    const labelB = opts.labelB ?? `「${opts.patternB}」`;
+    console.log(`比較 A "${opts.patternA}" ${groupA.length} 件 vs B "${opts.patternB}" ${groupB.length} 件`);
+    if (groupA.length + groupB.length === 0) {
+      console.error("✗ ヒット 0 件。--pattern-a / --pattern-b を見直してください");
+      process.exit(1);
+    }
+    if (groupA.length) {
+      dataPoints.groupA = groupA;
+      rows.push({ key: "groupA", label: `${labelA}（${groupA.length}）`, fill: "accent", count: groupA.length, marker: "point" });
+    }
+    if (groupB.length) {
+      dataPoints.groupB = groupB;
+      rows.push({ key: "groupB", label: `${labelB}（${groupB.length}）`, fill: "accent2", count: groupB.length, marker: "point" });
+    }
+  } else {
+    // ── 単一 pattern モード (kind admin/nature の 2 色) ──
+    const re = new RegExp(opts.pattern);
+    const admin: [number, number][] = [];
+    const nature: [number, number][] = [];
+    for (const p of points) {
+      if (!re.test(p.name)) continue;
+      if (p.kind === "admin") {
+        if (opts.pref && p.pref !== opts.pref) continue;
+        admin.push([p.lon, p.lat]);
+      } else {
+        if (opts.pref) continue; // 自然地名は県コードを持たないため pref 指定時は除外
+        nature.push([p.lon, p.lat]);
+      }
+    }
+    console.log(`フィルタ "${opts.pattern}"${opts.pref ? ` pref=${opts.pref}` : ""}: 行政地名 ${admin.length} / 自然地名 ${nature.length}`);
+    if (admin.length + nature.length === 0) {
+      console.error("✗ ヒット 0 件。--pattern を見直してください");
+      process.exit(1);
+    }
+    if (opts.single) {
+      dataPoints.hit = [...admin, ...nature];
+      rows.push({ key: "hit", label: opts.labelAdmin, fill: "accent", count: dataPoints.hit.length, marker: "point" });
+    } else {
+      if (admin.length) {
+        dataPoints.admin = admin;
+        rows.push({ key: "admin", label: opts.labelAdmin, fill: "accent", count: admin.length, marker: "point" });
+      }
+      if (nature.length) {
+        dataPoints.nature = nature;
+        rows.push({ key: "nature", label: opts.labelNature, fill: "accent2", count: nature.length, marker: "point" });
+      }
     }
   }
 
@@ -153,7 +195,7 @@ async function main() {
     accent: opts.accent,
     ...(opts.theme ? { theme: opts.theme } : {}),
     ...(opts.pointRadius ? { pointRadius: opts.pointRadius } : {}),
-    legend: { title: "地名カテゴリ（箇所数）", rows },
+    legend: { title: opts.patternA ? "地名の比較（箇所数）" : "地名カテゴリ（箇所数）", rows },
     data: { points: dataPoints },
   };
 

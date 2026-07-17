@@ -84,7 +84,14 @@ status: `案` → `spec作成` → `生成済` → `投稿済`（投稿記録の
 
 > **候補の供給源（棚卸しの真実源）は `.claude/state/sns/buzz-map-catalog.json`**
 > （builder `.claude/scripts/sns/build-buzz-map-catalog.ts` が全供給源をスコアリング・status upsert 保持）。
-> **4 レーン**で「利用できるものすべて」を採録する:
+> **5 レーン**で「利用できるものすべて」を採録する。うち `curated` が SNS 企画の主レーン
+> （人が選定した企画 SSOT）、`muni`〜`mlit-dpf` は機械採録の素材レーン:
+> - `curated` … **人が選定した企画 SSOT `.claude/scripts/sns/data/buzz-map-curated-ideas.ts`（160件）**。
+>   各 idea を score gate（§4.4 8要素 + landing 補正）・hard gate（§4.5 license/sensitivity/hook）・
+>   landing router（§5 inventory 突合で strategy/readiness 解決）に通し、machine レーンとは
+>   `metricKeys`/`aliases` で dedup（`aliasesOf` に被マッチ key を記録）。既存 generated/posted へ dedup した
+>   idea は landing readiness を `live` に backfill（§5.4）。router/inventory/contract のコアは
+>   `.claude/scripts/sns/lib/buzz-map-{router,inventory,contract}-core.mjs`（純粋関数 + `__tests__/`）
 > - `muni` … e-Stat 市区町村指標 210 全量（型A 二値マップ）
 > - `pref` … e-Stat 都道府県指標を機械フィルタ ≤400（型A 二値マップ）
 > - `ksj` … 国土数値情報 127（登録 42 + 候補 superset）。`renderClass`（point-plot=型C /
@@ -96,7 +103,8 @@ status: `案` → `spec作成` → `生成済` → `投稿済`（投稿記録の
 > - `mlit-dpf` … 国土交通データプラットフォーム 31（`nlni_ksj`/`dpf_area_data`/`dpf_statistical_data` は
 >   KSJ/N03/e-Stat と重複するため除外）。availability=api（GraphQL 取得 → `--geojson` でヘルパーに投入）
 >
-> **「次に何を作るか」はこのキューの `candidate` から選ぶ**（`--next N --lane muni|pref|ksj|mlit-dpf`）。
+> **「次に何を作るか」はこのキューの `candidate` から選ぶ**（`--next N` は既定で `curated` レーンの
+> eligible かつ landing が blocked でないものを score 降順で払い出す。素材レーンは `--lane muni|pref|ksj|mlit-dpf`）。
 > 下の表は spec 作成以降に進んだ**固有テーマの台帳**で、全候補を列挙する場所ではない。status（spec/generated/posted）は
 > builder の `--mark-*` で更新し、台帳表にも 1 行足す。型A spec は `build-buzz-map-spec.ts`（e-Stat）、
 > 型C/点→自治体 spec は `build-buzz-map-spec-ksj.ts`（KSJ/DPF）で自動生成する。
@@ -204,6 +212,20 @@ builder が `renderClass`（KSJ/DPF）または `lane`（e-Stat）から機械�
   [--label-admin "..." --label-nature "..."] [--theme dark]` で生成（正規表現で地名フィルタ →
   居住地名＝accent・自然地名＝accent2 の 2 色型C）。候補は `--lane gsi` で払い出す。データ再取得は不要
 - **生成の入口は `/buzz-map` スキル**（`.claude/skills/sns/buzz-map/SKILL.md`）。レンダ実行は sns-renderer の担当領域
+- **バッチ量産は `prepare-buzz-map-batch.ts`**（dry-run 既定・`--apply` で実行・`--limit 12` 既定・動画 ≤3/batch・
+  idempotent）: selectBatch (score 降順 × eligible) → spec → render → R2 push (`sns/buzz-map/` prefix 限定) →
+  HEAD 200+Content-Type 検証 → caption (UTM は `sns-utm.cjs` 正典) → **isPostable (§8.3 相当: commercialUse=allowed・
+  sensitivity≠high・landingContract=pass・landing live 200・dedup) 全通過のみ** posts.json draft (store 経由・予約なし)。
+  コアは `lib/buzz-map-{batch,router,contract,inventory,utm,attribution}-core.mjs` + `node --test lib/__tests__/`
+- **landing router / contract**: 企画→着地の判定は `lib/buzz-map-router-core.mjs`（判定順: 既存ranking→既存blog→
+  theme→新規、readiness は live 実測で確定）、SNS と landing の整合検証は `lib/buzz-map-contract-core.mjs`
+  （live 200 / canonical クリーン / noindex なし / requiredTerms / metricKeys / 年次）。**contract pass 前の draft 登録は禁止**
+- **管理画面は gallery `/buzz-map`**（`npm run gallery` → http://127.0.0.1:4747/buzz-map）: catalog 横断表示
+  (filter/score/evidence/landing/素材 preview) + 操作 job (landing 再判定/spec 生成/レンダ/R2 push/draft 登録 —
+  後ろ 2 つは確認ダイアログ + isPostable ゲート)。実投稿・予約は既存 `/sns` 画面に委ねる
+- **計測**: `buzz-map-attribution.mjs` が sessionCampaign `buzz-map-*` を campaign 別集計 → `buzz-map-attribution-latest.json` → score 還流入力
+  (`buildScoreFeedback`・session 0 は加点 0)。**deep-click (cta_click の content_id/target_type) は GA4 管理画面で
+  custom dimension (イベントスコープ) の登録が必要**（affiliate と同手順・未登録の間は session KPI のみ）
 - **改善ループ**: 生成 PNG を Read で目視 → 崩れは **spec 側の修正を優先**。カード CSS/レイアウト
   （`BuzzMapCard.tsx`）や tokens.ts を触る変更は **§6 決定ログ追記とセット**（勝手に型を漂流させない）
 - **投稿は本カタログの範囲外**: X は §2-9/§2-0（`sns-content-standards.md`）の既存フロー。buzz-map を
@@ -301,3 +323,18 @@ builder が `renderClass`（KSJ/DPF）または `lane`（e-Stat）から機械�
   単一キー型C＝station-5k-plot は再レンダで非回帰確認済＝挙動不変）。
   (4) catalog に gsi レーン + 10 候補（宿/温泉/谷/沢/新田/島/台/数字/馬/谷戸）を追加（既存レーン件数不変）。
   地名辞書 OSM は不採用（GSI が権威一次ソース）。自然地名は行政コード非提供のため県別集計は空間 join が必要（将来拡張）。
+- **2026-07-17 集客ゲート統合 (doc 27 実装)**: buzz-map を「企画→landing→生成→R2→draft→計測」の一体
+  パイプラインへ拡張。(1) **curated レーン新設** — 人選 171 企画の SSOT `data/buzz-map-curated-ideas.ts`
+  (§11 全候補+P0 landing 案・license/sensitivity 手動判定) を builder が machine と統合 (938 entries・alias 統合 82・
+  §4.4 score 100点+landing 補正・§4.5 hard gate・§4.3 status upsert は posts.json draft / 後段 status を巻き戻さない)。
+  (2) **landing router / contract** (`lib/buzz-map-{router,contract,inventory}-core.mjs`) — §5 判定順で strategy/readiness
+  確定・§5.3 の機械検証 (contract pass 前の draft 禁止)。(3) **batch CLI** `prepare-buzz-map-batch.ts` (dry-run 既定・
+  limit12・動画3・idempotent・CT 検証・isPostable ゲート)。初回実行で X draft 2 件 (vacant-housing-muni /
+  migration-inflow-top-decile-muni)・R2 代表 5 型 push・実投稿 0。(4) **gallery `/buzz-map`** 管理画面 (job 分離・
+  確認ダイアログ・allowlist)。(5) **2 パターン比較モード** を spec-gsi に追加 (`--pattern-a/--pattern-b` — 谷 vs 沢・澤
+  等の対比。kind 2 色と別分岐・単一 pattern は不変)。初回レンダが admin/nature 既定色で「谷vs沢」の問いに答えて
+  いなかった目視差し戻しから生まれた教訓: **比較系ネタは凡例が問いの 2 項になっているかを目視必須**。
+  (6) **UTM 一本化** — 生成は `.claude/scripts/lib/sns-utm.cjs` が全 SNS ドメインの単一実装 (buzz-map は
+  campaign=buzz-map-<ideaId> / content=<variant>。canonical に query 混入禁止)。(7) **GA4 計測**
+  `buzz-map-attribution.mjs` + score 還流 (evidence-based: session 0 = 加点 0)。tests 108 (node --test)。
+  P1 記事 30 本は全件終端 (drafted-pass 16 / blocked-data 14・published:false)

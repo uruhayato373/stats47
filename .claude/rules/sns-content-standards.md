@@ -281,6 +281,11 @@ X 投稿に添付できる画像種を単一ソース化する。`.claude/script
 
 SNS 投稿の stats47.jp リンクには UTM を付ける。note は付けない (素の URL)。
 
+> **★生成の単一実装 = `.claude/scripts/lib/sns-utm.cjs`** (2026-07-17 一本化)。post-x-batch の
+> register-drafts / buzz-map (`lib/buzz-map-utm-core.mjs` は薄い adapter) ともこれに委譲する。
+> UTM 形式を変えるときはこのファイル 1 箇所。buzz-map は `utm_campaign=buzz-map-<ideaId>` /
+> `utm_content=<variant>`。**canonical URL (catalog/spec/sitemap) に UTM を混入させない**。
+
 ### ベース URL
 
 | ドメイン | URL |
@@ -318,7 +323,12 @@ https://stats47.jp/ranking/taxable-income-per-capita
 | **X (瞬発)** | `find-quote-rt` / `react-to-news` | (キャプション) | `publish-x` → `mark-sns-posted` | `update-sns-metrics` |
 | **IG** | `generate-instagram-schedule` (+ `post-ig-6angles`) | `render-sns-stills` | `post-instagram` (GHA cron) → `mark-sns-posted` | `update-sns-metrics` |
 | **YouTube** | `bar-chart-race` (企画・生成・render) | (同) | `post-youtube` (月 1・ガード 3 点) → `mark-sns-posted`。量産実験中の予約仕込みは `youtube-upload-queue.json` + `youtube-upload-queue.yml` (日次 cron 5本/日、§1 例外注記) | `update-sns-metrics` |
+| **buzz-map (X/IG 横断)** | curated catalog (`build-buzz-map-catalog.ts --next`・正典 `buzz-map-standards.md` §4-5) | `prepare-buzz-map-batch.ts` (dry-run 既定・landing contract+isPostable ゲート→R2→draft) / gallery `/buzz-map` | 既存 guarded flow (`publish-x` / IG cron — draft からの昇格は人間判断) | `buzz-map-attribution.mjs` (campaign 別) → score 還流 |
 
+- **buzz-map の deep-click 計測は要ユーザー操作 (GA4 custom dimension)**: `buzz-map-attribution.mjs` は
+  session KPI (landing session / engagement / SNS CTR は attribution=direct のみ) を campaign 別に取得するが、
+  **CTA 深掘り (cta_click の `content_id`/`target_type`) は GA4 管理画面でカスタムディメンション (イベントスコープ) を
+  登録するまで取れない** (affiliate §6 と同手順)。未登録の間は session KPI のみで degrade (異常終了しない)。
 - **X 量産のライフサイクル**: `/post-x-batch` が posts.json に `status=draft` (`template`/`scheduled_at` 付き) で
   N 本積む → ローカルで `publish-x --from-queue` が `check-x-post-budget.cjs` ガードを通して予約 → `status=scheduled` →
   投稿時刻経過で `mark-sns-posted` が `posted` へ昇格。**template を必ず記録** (勝ちパターン分析の前提)。

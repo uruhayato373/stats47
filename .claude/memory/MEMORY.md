@@ -1,5 +1,6 @@
 # Memory Index
 
+- [feedback_periodic_progress_reports.md](feedback_periodic_progress_reports.md) — 長時間のsubagent/workflow実行中は聞かれる前に約4-5分間隔で実測ベース(mtime/件数)の進捗報告を自発的に出す(2026-07-17指摘)。backgroundタイマーで自分を起こす
 - [feedback_exit_code_not_via_pipe.md](feedback_exit_code_not_via_pipe.md) — 検証の exit code を `| tail` 越しに測ると常に 0 で全 PASS に見える (PR #569 で 2 回実発生)。ガード検証は直接実行 or PIPESTATUS。「全 PASS」が出たら 1 件壊して検証器自体を検証する
 - [feedback_debt_baseline_shrink_only.md](feedback_debt_baseline_shrink_only.md) — maintenance-debt baseline は縮小専用の不変条項 (2026-07-14 オーナー方針)。--write-baseline に増加パス無し・CI --ratchet-check が origin/main 比増加を拒否。新規 debt は実修正 (期限/削除条件/backlog化) かルール修正 (誤検知除外) のみ。実績: theme catalogStatus 用語の除外で 271→239
 - [feedback_workflow_arg_vector_quoted.md](feedback_workflow_arg_vector_quoted.md) — CI workflow の可変引数列は bash 配列 (ARGS+=() / "${ARGS[@]}") で組む。文字列連結+"$VAR" 単一渡しは 1 トークン化 (SC2086 一括 quote で 6 workflow 実 regression 2026-07-14、CDN purge 含む)。ガード=ARG_VECTOR_QUOTED (audit-workflow-policy)。lint sweep 後は代表 dispatch smoke 必須

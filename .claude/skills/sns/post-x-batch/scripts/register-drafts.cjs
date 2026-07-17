@@ -28,6 +28,8 @@ const catalog = require(
 const store = require(
   path.join(PROJECT_ROOT, ".claude/scripts/lib/sns-posts-store.cjs"),
 );
+// UTM は正典 sns-utm.cjs に一本化 (CP5)。ranking domain の campaign=<key> / content=<template>。
+const snsUtm = require(path.join(PROJECT_ROOT, ".claude/scripts/lib/sns-utm.cjs"));
 
 function parseArgs(argv) {
   const args = argv.slice(2);
@@ -39,12 +41,14 @@ function parseArgs(argv) {
 }
 
 function buildUtmUrl(key, template) {
-  const u = new URL(`https://stats47.jp/ranking/${key}`);
-  u.searchParams.set("utm_source", "x");
-  u.searchParams.set("utm_medium", "social");
-  u.searchParams.set("utm_campaign", key);
-  u.searchParams.set("utm_content", template);
-  return u.toString();
+  // 正典 util へ委譲 (ranking domain: campaign=<key> / content=<template>)。従来と同一出力。
+  return snsUtm.buildUtmForDomain({
+    domain: "ranking",
+    domainParams: { rankingKey: key },
+    canonicalUrl: `/ranking/${key}`,
+    platform: "x",
+    variant: template,
+  });
 }
 
 function resolveMediaPath(imageKind, key) {
