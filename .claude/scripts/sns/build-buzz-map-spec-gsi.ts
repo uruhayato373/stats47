@@ -102,6 +102,10 @@ async function loadPoints(input: string): Promise<PointsFile> {
   return JSON.parse(readFileSync(input, "utf8")) as PointsFile;
 }
 
+/** 座標を 5 桁 (≈1.1m) に丸める。z15 由来の全桁を spec に埋め込むと点数の多い地名 spec が
+ *  repo hygiene の 1MB 制限を超えるため (実例: 谷vs沢 33,774 点 = 2.4MB)。描画精度には影響しない。 */
+const r5 = (n: number): number => Math.round(n * 1e5) / 1e5;
+
 async function main() {
   const opts = parseArgs();
   const { meta, points } = await loadPoints(opts.input);
@@ -124,8 +128,8 @@ async function main() {
       if (opts.pref && p.kind === "admin" && p.pref !== opts.pref) continue;
       if (opts.pref && p.kind !== "admin") continue;
       // A を優先判定 (両方一致する地名は少ないが A に寄せる)
-      if (reA.test(p.name)) groupA.push([p.lon, p.lat]);
-      else if (reB.test(p.name)) groupB.push([p.lon, p.lat]);
+      if (reA.test(p.name)) groupA.push([r5(p.lon), r5(p.lat)]);
+      else if (reB.test(p.name)) groupB.push([r5(p.lon), r5(p.lat)]);
     }
     const labelA = opts.labelA ?? `「${opts.patternA}」`;
     const labelB = opts.labelB ?? `「${opts.patternB}」`;
@@ -151,10 +155,10 @@ async function main() {
       if (!re.test(p.name)) continue;
       if (p.kind === "admin") {
         if (opts.pref && p.pref !== opts.pref) continue;
-        admin.push([p.lon, p.lat]);
+        admin.push([r5(p.lon), r5(p.lat)]);
       } else {
         if (opts.pref) continue; // 自然地名は県コードを持たないため pref 指定時は除外
-        nature.push([p.lon, p.lat]);
+        nature.push([r5(p.lon), r5(p.lat)]);
       }
     }
     console.log(`フィルタ "${opts.pattern}"${opts.pref ? ` pref=${opts.pref}` : ""}: 行政地名 ${admin.length} / 自然地名 ${nature.length}`);
@@ -201,7 +205,9 @@ async function main() {
 
   mkdirSync(SPECS_DIR, { recursive: true });
   const outPath = join(SPECS_DIR, `${opts.id}.json`);
-  writeFileSync(outPath, JSON.stringify({ spec }, null, 2) + "\n");
+  // 点数が多い spec は pretty-print だと 1MB (repo hygiene 上限) を超えるため compact で書く
+  const pretty = JSON.stringify({ spec }, null, 2) + "\n";
+  writeFileSync(outPath, pretty.length > 900_000 ? JSON.stringify({ spec }) + "\n" : pretty);
   console.log(`✓ spec 生成: ${outPath}`);
   console.log(`\nレンダ:`);
   console.log(`  cd apps/remotion && npx remotion still src/index.ts BuzzMap-Still-45 \\`);
