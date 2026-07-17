@@ -45,4 +45,4 @@ tags: []
 | 2026-07-13 | `check-weekly-cadence.mjs` (別セッション産・git 未追跡) が動作するが未配線 orphan — 週次レビュー/計画の欠落検知スクリプト (実行すると W27/W29 計画欠落を正しく検出)。どの workflow/skill/hook からも参照されず「cadence 検知器自身が cadence を持たない」状態。fetch-metrics-weekly.yml か /weekly-plan への配線 + commit、or 破棄を判断 | 自動化 | 未整理 | 整合性監査 (Stop hook) で発見。read-only で無害 |
 | | | | | |
 - maintenance-debt baseline 残 239 件の計画的 paydown (誤検知はルール精緻化・実負債は期限/削除条件付与か backlog 化で縮小。baseline は縮小専用の不変条項 2026-07-14)
-- buzz-map draft 6件 (IG 701-704 / X 705-706) の投稿判断 + P1記事16本の公開 (published:true化) + GA4 custom dimension 登録 → docs/handoffs/2026-07-17-buzz-map-gate-pending-actions.md
+- buzz-map draft 6件 (IG 701-704 / X 705-706) の投稿判断 + GA4 custom dimension 登録 (deep-click計測) → docs/handoffs/2026-07-17-buzz-map-gate-pending-actions.md

@@ -28,11 +28,10 @@ posts.json (SSOT) に status=draft で登録済み。posted 0 / scheduled 0。
 - IG: gallery `/sns` か instagram schedule JSON への予約登録 (二重書込は同一ハンドラ)
 - 全件 isPostable (landingContract=pass + live 200) 通過済み。頻度リミットは §1 (X≤3/日) に従う
 
-## 2. P1 記事 16 本の公開 (published:true 化のみ残)
+## 2. ~~P1 記事 16 本の公開~~ → 完了 (2026-07-17)
 
-`docs/21_ブログ記事原稿/` に commit 済 (published:false・critic PASS 済)。公開する場合は
-published:true 化 → develop push → blog-auto-publish.yml。残り 14 本は blocked-data で終端 (公開対象外)。
-~~ai-content バッチ② 10 件~~ → **2026-07-17 公開済** (R2 実測バイト一致)。
+16/16 本番公開済み (all.json 423 件・実ページ title 全 OK・OGP/サムネ欠落 0)。
+ai-content バッチ② 10 件も公開済 (R2 実測バイト一致)。blocked-data 14 本は終端 (公開対象外)。
 
 ## 3. ~~全変更の commit / push~~ → 完了 (2026-07-17)
 
