@@ -1,0 +1,8 @@
+{
+  "kind": "derived",
+  "derived": "本記事内の各data JSON (ranking.json / tile-grid.json / pref-detail.json / total-vs-score-scatter.json) から要点を要約。",
+  "source": "r2:gis/gsi-pni/points.json",
+  "license": "国土地理院 PDL1.0 (出典明示で商用可)",
+  "fetchedAt": "2026-07-16T23:39:08.712Z",
+  "generatedBy": "manual (P1-25)"
+}

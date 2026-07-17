@@ -1,0 +1,1558 @@
+{
+  "title": "県別・特徴度上位5漢字の内訳",
+  "derived": "R2 gis/gsi-pni/points.json (国土地理院 電子国土基本図 地名情報の居住地名、kind=admin かつ pref を持つもの344,910件) を対象に、各地名を構成する漢字1文字ずつに分解 (同一地名内の重複文字は1回のみカウント)。県ごとの各漢字の出現率を全国出現率で割った値を特徴度とする。県内出現数10件未満の漢字は除外(閾値=10)。本ファイルは各県の特徴度上位5漢字とその出現件数(cnt=県内でその漢字を含む地名の数)を記録する。",
+  "source": "国土地理院 地名情報",
+  "data": [
+    {
+      "pref": "沖縄県",
+      "areaCode": "47000",
+      "rank": 1,
+      "totalNames": 1884,
+      "top5": [
+        {
+          "char": "謝",
+          "count": 29,
+          "score": 177
+        },
+        {
+          "char": "銘",
+          "count": 10,
+          "score": 122
+        },
+        {
+          "char": "嵩",
+          "count": 10,
+          "score": 76.3
+        },
+        {
+          "char": "嘉",
+          "count": 57,
+          "score": 72
+        },
+        {
+          "char": "首",
+          "count": 56,
+          "score": 57.6
+        }
+      ]
+    },
+    {
+      "pref": "滋賀県",
+      "areaCode": "25000",
+      "rank": 2,
+      "totalNames": 2727,
+      "top5": [
+        {
+          "char": "個",
+          "count": 24,
+          "score": 126.5
+        },
+        {
+          "char": "仰",
+          "count": 24,
+          "score": 121.4
+        },
+        {
+          "char": "綣",
+          "count": 10,
+          "score": 115
+        },
+        {
+          "char": "曇",
+          "count": 27,
+          "score": 106.7
+        },
+        {
+          "char": "朽",
+          "count": 21,
+          "score": 64.8
+        }
+      ]
+    },
+    {
+      "pref": "山梨県",
+      "areaCode": "19000",
+      "rank": 3,
+      "totalNames": 2839,
+      "top5": [
+        {
+          "char": "垈",
+          "count": 10,
+          "score": 121.5
+        },
+        {
+          "char": "澤",
+          "count": 15,
+          "score": 19.8
+        },
+        {
+          "char": "條",
+          "count": 17,
+          "score": 19.5
+        },
+        {
+          "char": "暮",
+          "count": 12,
+          "score": 15.5
+        },
+        {
+          "char": "州",
+          "count": 11,
+          "score": 13
+        }
+      ]
+    },
+    {
+      "pref": "奈良県",
+      "areaCode": "29000",
+      "rank": 4,
+      "totalNames": 3152,
+      "top5": [
+        {
+          "char": "榛",
+          "count": 55,
+          "score": 87.2
+        },
+        {
+          "char": "終",
+          "count": 13,
+          "score": 79
+        },
+        {
+          "char": "菟",
+          "count": 17,
+          "score": 77.5
+        },
+        {
+          "char": "陀",
+          "count": 56,
+          "score": 50.6
+        },
+        {
+          "char": "隆",
+          "count": 15,
+          "score": 48.3
+        }
+      ]
+    },
+    {
+      "pref": "佐賀県",
+      "areaCode": "41000",
+      "rank": 5,
+      "totalNames": 3284,
+      "top5": [
+        {
+          "char": "搦",
+          "count": 22,
+          "score": 79.7
+        },
+        {
+          "char": "埼",
+          "count": 16,
+          "score": 64.6
+        },
+        {
+          "char": "鎮",
+          "count": 22,
+          "score": 64.2
+        },
+        {
+          "char": "副",
+          "count": 18,
+          "score": 61
+        },
+        {
+          "char": "厳",
+          "count": 17,
+          "score": 24.1
+        }
+      ]
+    },
+    {
+      "pref": "香川県",
+      "areaCode": "37000",
+      "rank": 6,
+      "totalNames": 3575,
+      "top5": [
+        {
+          "char": "詫",
+          "count": 13,
+          "score": 73.8
+        },
+        {
+          "char": "器",
+          "count": 19,
+          "score": 33.9
+        },
+        {
+          "char": "所",
+          "count": 78,
+          "score": 6.3
+        },
+        {
+          "char": "造",
+          "count": 10,
+          "score": 6.2
+        },
+        {
+          "char": "側",
+          "count": 10,
+          "score": 6.1
+        }
+      ]
+    },
+    {
+      "pref": "富山県",
+      "areaCode": "16000",
+      "rank": 7,
+      "totalNames": 3830,
+      "top5": [
+        {
+          "char": "婦",
+          "count": 103,
+          "score": 73.6
+        },
+        {
+          "char": "閤",
+          "count": 54,
+          "score": 72.6
+        },
+        {
+          "char": "経",
+          "count": 26,
+          "score": 23.7
+        },
+        {
+          "char": "冨",
+          "count": 13,
+          "score": 13.8
+        },
+        {
+          "char": "利",
+          "count": 34,
+          "score": 7.2
+        }
+      ]
+    },
+    {
+      "pref": "宮崎県",
+      "areaCode": "45000",
+      "rank": 8,
+      "totalNames": 5138,
+      "top5": [
+        {
+          "char": "飫",
+          "count": 10,
+          "score": 67.1
+        },
+        {
+          "char": "吐",
+          "count": 14,
+          "score": 26.9
+        },
+        {
+          "char": "恒",
+          "count": 18,
+          "score": 23.2
+        },
+        {
+          "char": "財",
+          "count": 12,
+          "score": 11.8
+        },
+        {
+          "char": "吾",
+          "count": 18,
+          "score": 9.9
+        }
+      ]
+    },
+    {
+      "pref": "長崎県",
+      "areaCode": "42000",
+      "rank": 9,
+      "totalNames": 5115,
+      "top5": [
+        {
+          "char": "触",
+          "count": 115,
+          "score": 63
+        },
+        {
+          "char": "彼",
+          "count": 28,
+          "score": 55.5
+        },
+        {
+          "char": "厳",
+          "count": 38,
+          "score": 34.6
+        },
+        {
+          "char": "対",
+          "count": 28,
+          "score": 34.3
+        },
+        {
+          "char": "免",
+          "count": 143,
+          "score": 34.1
+        }
+      ]
+    },
+    {
+      "pref": "東京都",
+      "areaCode": "13000",
+      "rank": 10,
+      "totalNames": 5967,
+      "top5": [
+        {
+          "char": "聟",
+          "count": 10,
+          "score": 57.8
+        },
+        {
+          "char": "継",
+          "count": 20,
+          "score": 34
+        },
+        {
+          "char": "糀",
+          "count": 12,
+          "score": 15.4
+        },
+        {
+          "char": "恋",
+          "count": 10,
+          "score": 10
+        },
+        {
+          "char": "摩",
+          "count": 26,
+          "score": 9.8
+        }
+      ]
+    },
+    {
+      "pref": "青森県",
+      "areaCode": "02000",
+      "rank": 11,
+      "totalNames": 5987,
+      "top5": [
+        {
+          "char": "萢",
+          "count": 20,
+          "score": 57.6
+        },
+        {
+          "char": "派",
+          "count": 11,
+          "score": 52.8
+        },
+        {
+          "char": "淋",
+          "count": 10,
+          "score": 48
+        },
+        {
+          "char": "蒼",
+          "count": 21,
+          "score": 44.8
+        },
+        {
+          "char": "厩",
+          "count": 75,
+          "score": 41.9
+        }
+      ]
+    },
+    {
+      "pref": "山形県",
+      "areaCode": "06000",
+      "rank": 12,
+      "totalNames": 5608,
+      "top5": [
+        {
+          "char": "楯",
+          "count": 65,
+          "score": 55.5
+        },
+        {
+          "char": "升",
+          "count": 15,
+          "score": 17.1
+        },
+        {
+          "char": "際",
+          "count": 10,
+          "score": 6.2
+        },
+        {
+          "char": "興",
+          "count": 31,
+          "score": 6.1
+        },
+        {
+          "char": "漆",
+          "count": 14,
+          "score": 4.8
+        }
+      ]
+    },
+    {
+      "pref": "三重県",
+      "areaCode": "24000",
+      "rank": 13,
+      "totalNames": 5254,
+      "top5": [
+        {
+          "char": "員",
+          "count": 31,
+          "score": 50.9
+        },
+        {
+          "char": "嬉",
+          "count": 41,
+          "score": 48.1
+        },
+        {
+          "char": "芸",
+          "count": 36,
+          "score": 34.8
+        },
+        {
+          "char": "算",
+          "count": 10,
+          "score": 31.3
+        },
+        {
+          "char": "度",
+          "count": 24,
+          "score": 25.8
+        }
+      ]
+    },
+    {
+      "pref": "神奈川県",
+      "areaCode": "14000",
+      "rank": 14,
+      "totalNames": 6754,
+      "top5": [
+        {
+          "char": "鵠",
+          "count": 39,
+          "score": 48.6
+        },
+        {
+          "char": "湘",
+          "count": 16,
+          "score": 45.4
+        },
+        {
+          "char": "匂",
+          "count": 17,
+          "score": 41.3
+        },
+        {
+          "char": "模",
+          "count": 32,
+          "score": 36.3
+        },
+        {
+          "char": "荏",
+          "count": 24,
+          "score": 36
+        }
+      ]
+    },
+    {
+      "pref": "石川県",
+      "areaCode": "17000",
+      "rank": 15,
+      "totalNames": 3909,
+      "top5": [
+        {
+          "char": "聖",
+          "count": 76,
+          "score": 48.2
+        },
+        {
+          "char": "涌",
+          "count": 17,
+          "score": 34.9
+        },
+        {
+          "char": "額",
+          "count": 17,
+          "score": 26.3
+        },
+        {
+          "char": "温",
+          "count": 69,
+          "score": 14.9
+        },
+        {
+          "char": "能",
+          "count": 34,
+          "score": 11.6
+        }
+      ]
+    },
+    {
+      "pref": "山口県",
+      "areaCode": "35000",
+      "rank": 16,
+      "totalNames": 7034,
+      "top5": [
+        {
+          "char": "垢",
+          "count": 16,
+          "score": 46.2
+        },
+        {
+          "char": "令",
+          "count": 11,
+          "score": 44.9
+        },
+        {
+          "char": "浴",
+          "count": 27,
+          "score": 29.4
+        },
+        {
+          "char": "彦",
+          "count": 61,
+          "score": 20.1
+        },
+        {
+          "char": "周",
+          "count": 25,
+          "score": 19.2
+        }
+      ]
+    },
+    {
+      "pref": "高知県",
+      "areaCode": "39000",
+      "rank": 17,
+      "totalNames": 5200,
+      "top5": [
+        {
+          "char": "薊",
+          "count": 11,
+          "score": 45.6
+        },
+        {
+          "char": "介",
+          "count": 11,
+          "score": 45.6
+        },
+        {
+          "char": "改",
+          "count": 14,
+          "score": 25.8
+        },
+        {
+          "char": "弘",
+          "count": 23,
+          "score": 18.4
+        },
+        {
+          "char": "物",
+          "count": 40,
+          "score": 14.1
+        }
+      ]
+    },
+    {
+      "pref": "鹿児島県",
+      "areaCode": "46000",
+      "rank": 18,
+      "totalNames": 6925,
+      "top5": [
+        {
+          "char": "甑",
+          "count": 19,
+          "score": 43
+        },
+        {
+          "char": "隼",
+          "count": 36,
+          "score": 42.7
+        },
+        {
+          "char": "集",
+          "count": 33,
+          "score": 21.9
+        },
+        {
+          "char": "検",
+          "count": 10,
+          "score": 21.7
+        },
+        {
+          "char": "麓",
+          "count": 54,
+          "score": 18.9
+        }
+      ]
+    },
+    {
+      "pref": "徳島県",
+      "areaCode": "36000",
+      "rank": 19,
+      "totalNames": 3755,
+      "top5": [
+        {
+          "char": "任",
+          "count": 18,
+          "score": 42.4
+        },
+        {
+          "char": "撫",
+          "count": 15,
+          "score": 29.3
+        },
+        {
+          "char": "祖",
+          "count": 60,
+          "score": 27.8
+        },
+        {
+          "char": "蔭",
+          "count": 21,
+          "score": 23.2
+        },
+        {
+          "char": "貞",
+          "count": 12,
+          "score": 13.4
+        }
+      ]
+    },
+    {
+      "pref": "大分県",
+      "areaCode": "44000",
+      "rank": 20,
+      "totalNames": 6781,
+      "top5": [
+        {
+          "char": "耶",
+          "count": 31,
+          "score": 41.5
+        },
+        {
+          "char": "挾",
+          "count": 26,
+          "score": 34.8
+        },
+        {
+          "char": "緒",
+          "count": 35,
+          "score": 31.2
+        },
+        {
+          "char": "溪",
+          "count": 18,
+          "score": 25.4
+        },
+        {
+          "char": "心",
+          "count": 72,
+          "score": 25.3
+        }
+      ]
+    },
+    {
+      "pref": "京都府",
+      "areaCode": "26000",
+      "rank": 21,
+      "totalNames": 8870,
+      "top5": [
+        {
+          "char": "椥",
+          "count": 11,
+          "score": 38.9
+        },
+        {
+          "char": "薪",
+          "count": 53,
+          "score": 36.8
+        },
+        {
+          "char": "勧",
+          "count": 36,
+          "score": 34.1
+        },
+        {
+          "char": "醍",
+          "count": 73,
+          "score": 33.4
+        },
+        {
+          "char": "醐",
+          "count": 73,
+          "score": 33.4
+        }
+      ]
+    },
+    {
+      "pref": "秋田県",
+      "areaCode": "05000",
+      "rank": 22,
+      "totalNames": 6473,
+      "top5": [
+        {
+          "char": "象",
+          "count": 16,
+          "score": 37.1
+        },
+        {
+          "char": "処",
+          "count": 10,
+          "score": 35.5
+        },
+        {
+          "char": "岱",
+          "count": 64,
+          "score": 28
+        },
+        {
+          "char": "館",
+          "count": 112,
+          "score": 11.3
+        },
+        {
+          "char": "軍",
+          "count": 13,
+          "score": 11
+        }
+      ]
+    },
+    {
+      "pref": "岡山県",
+      "areaCode": "33000",
+      "rank": 23,
+      "totalNames": 9216,
+      "top5": [
+        {
+          "char": "乢",
+          "count": 24,
+          "score": 35.9
+        },
+        {
+          "char": "哲",
+          "count": 16,
+          "score": 29.9
+        },
+        {
+          "char": "邑",
+          "count": 35,
+          "score": 27.9
+        },
+        {
+          "char": "蒜",
+          "count": 19,
+          "score": 23.7
+        },
+        {
+          "char": "畝",
+          "count": 64,
+          "score": 18.4
+        }
+      ]
+    },
+    {
+      "pref": "大阪府",
+      "areaCode": "27000",
+      "rank": 24,
+      "totalNames": 9414,
+      "top5": [
+        {
+          "char": "私",
+          "count": 36,
+          "score": 34.7
+        },
+        {
+          "char": "招",
+          "count": 24,
+          "score": 29.3
+        },
+        {
+          "char": "螢",
+          "count": 17,
+          "score": 28.3
+        },
+        {
+          "char": "彩",
+          "count": 27,
+          "score": 26
+        },
+        {
+          "char": "鳳",
+          "count": 35,
+          "score": 24.7
+        }
+      ]
+    },
+    {
+      "pref": "岐阜県",
+      "areaCode": "21000",
+      "rank": 25,
+      "totalNames": 9876,
+      "top5": [
+        {
+          "char": "各",
+          "count": 39,
+          "score": 34.1
+        },
+        {
+          "char": "蘇",
+          "count": 175,
+          "score": 28.7
+        },
+        {
+          "char": "騨",
+          "count": 16,
+          "score": 27.9
+        },
+        {
+          "char": "務",
+          "count": 39,
+          "score": 27.8
+        },
+        {
+          "char": "祈",
+          "count": 11,
+          "score": 27.4
+        }
+      ]
+    },
+    {
+      "pref": "鳥取県",
+      "areaCode": "31000",
+      "rank": 26,
+      "totalNames": 2765,
+      "top5": [
+        {
+          "char": "露",
+          "count": 19,
+          "score": 33.9
+        },
+        {
+          "char": "気",
+          "count": 33,
+          "score": 27.8
+        },
+        {
+          "char": "淀",
+          "count": 17,
+          "score": 22.3
+        },
+        {
+          "char": "旗",
+          "count": 11,
+          "score": 13.2
+        },
+        {
+          "char": "用",
+          "count": 20,
+          "score": 12.3
+        }
+      ]
+    },
+    {
+      "pref": "広島県",
+      "areaCode": "34000",
+      "rank": 27,
+      "totalNames": 9120,
+      "top5": [
+        {
+          "char": "涯",
+          "count": 17,
+          "score": 33.8
+        },
+        {
+          "char": "可",
+          "count": 39,
+          "score": 25
+        },
+        {
+          "char": "伴",
+          "count": 38,
+          "score": 24.4
+        },
+        {
+          "char": "因",
+          "count": 12,
+          "score": 22.7
+        },
+        {
+          "char": "固",
+          "count": 10,
+          "score": 22.2
+        }
+      ]
+    },
+    {
+      "pref": "茨城県",
+      "areaCode": "08000",
+      "rank": 28,
+      "totalNames": 9821,
+      "top5": [
+        {
+          "char": "圷",
+          "count": 29,
+          "score": 32.9
+        },
+        {
+          "char": "馴",
+          "count": 10,
+          "score": 21.9
+        },
+        {
+          "char": "塙",
+          "count": 40,
+          "score": 19.5
+        },
+        {
+          "char": "要",
+          "count": 69,
+          "score": 15.7
+        },
+        {
+          "char": "酒",
+          "count": 57,
+          "score": 10.8
+        }
+      ]
+    },
+    {
+      "pref": "福岡県",
+      "areaCode": "40000",
+      "rank": 29,
+      "totalNames": 10509,
+      "top5": [
+        {
+          "char": "潴",
+          "count": 11,
+          "score": 32.8
+        },
+        {
+          "char": "姪",
+          "count": 11,
+          "score": 30.1
+        },
+        {
+          "char": "宰",
+          "count": 10,
+          "score": 27.4
+        },
+        {
+          "char": "犀",
+          "count": 28,
+          "score": 23
+        },
+        {
+          "char": "隈",
+          "count": 98,
+          "score": 17.6
+        }
+      ]
+    },
+    {
+      "pref": "宮城県",
+      "areaCode": "04000",
+      "rank": 30,
+      "totalNames": 10545,
+      "top5": [
+        {
+          "char": "閖",
+          "count": 10,
+          "score": 32.7
+        },
+        {
+          "char": "埣",
+          "count": 25,
+          "score": 31.5
+        },
+        {
+          "char": "監",
+          "count": 18,
+          "score": 23.6
+        },
+        {
+          "char": "樟",
+          "count": 20,
+          "score": 23.4
+        },
+        {
+          "char": "害",
+          "count": 33,
+          "score": 20
+        }
+      ]
+    },
+    {
+      "pref": "兵庫県",
+      "areaCode": "28000",
+      "rank": 31,
+      "totalNames": 10657,
+      "top5": [
+        {
+          "char": "飾",
+          "count": 136,
+          "score": 32.1
+        },
+        {
+          "char": "揖",
+          "count": 62,
+          "score": 31.4
+        },
+        {
+          "char": "但",
+          "count": 43,
+          "score": 27.8
+        },
+        {
+          "char": "磨",
+          "count": 135,
+          "score": 25
+        },
+        {
+          "char": "櫨",
+          "count": 13,
+          "score": 24.7
+        }
+      ]
+    },
+    {
+      "pref": "新潟県",
+      "areaCode": "15000",
+      "rank": 32,
+      "totalNames": 9996,
+      "top5": [
+        {
+          "char": "頸",
+          "count": 80,
+          "score": 32.1
+        },
+        {
+          "char": "潟",
+          "count": 125,
+          "score": 17.6
+        },
+        {
+          "char": "校",
+          "count": 23,
+          "score": 15.3
+        },
+        {
+          "char": "泊",
+          "count": 103,
+          "score": 9.2
+        },
+        {
+          "char": "嵐",
+          "count": 22,
+          "score": 8.9
+        }
+      ]
+    },
+    {
+      "pref": "長野県",
+      "areaCode": "20000",
+      "rank": 33,
+      "totalNames": 7906,
+      "top5": [
+        {
+          "char": "鼎",
+          "count": 11,
+          "score": 32
+        },
+        {
+          "char": "蟻",
+          "count": 10,
+          "score": 20.8
+        },
+        {
+          "char": "科",
+          "count": 26,
+          "score": 18.9
+        },
+        {
+          "char": "墨",
+          "count": 10,
+          "score": 11.2
+        },
+        {
+          "char": "県",
+          "count": 12,
+          "score": 8.6
+        }
+      ]
+    },
+    {
+      "pref": "熊本県",
+      "areaCode": "43000",
+      "rank": 34,
+      "totalNames": 7751,
+      "top5": [
+        {
+          "char": "閑",
+          "count": 70,
+          "score": 30.5
+        },
+        {
+          "char": "塘",
+          "count": 12,
+          "score": 29.7
+        },
+        {
+          "char": "髪",
+          "count": 11,
+          "score": 25.8
+        },
+        {
+          "char": "陳",
+          "count": 13,
+          "score": 24.1
+        },
+        {
+          "char": "揚",
+          "count": 13,
+          "score": 9.5
+        }
+      ]
+    },
+    {
+      "pref": "千葉県",
+      "areaCode": "12000",
+      "rank": 35,
+      "totalNames": 10793,
+      "top5": [
+        {
+          "char": "習",
+          "count": 27,
+          "score": 29.8
+        },
+        {
+          "char": "稔",
+          "count": 10,
+          "score": 20
+        },
+        {
+          "char": "請",
+          "count": 25,
+          "score": 15.4
+        },
+        {
+          "char": "旧",
+          "count": 28,
+          "score": 12.8
+        },
+        {
+          "char": "巳",
+          "count": 10,
+          "score": 8.6
+        }
+      ]
+    },
+    {
+      "pref": "福井県",
+      "areaCode": "18000",
+      "rank": 36,
+      "totalNames": 3110,
+      "top5": [
+        {
+          "char": "為",
+          "count": 11,
+          "score": 29
+        },
+        {
+          "char": "爪",
+          "count": 15,
+          "score": 17.9
+        },
+        {
+          "char": "丸",
+          "count": 198,
+          "score": 11.3
+        },
+        {
+          "char": "国",
+          "count": 131,
+          "score": 10.5
+        },
+        {
+          "char": "春",
+          "count": 90,
+          "score": 8.2
+        }
+      ]
+    },
+    {
+      "pref": "和歌山県",
+      "areaCode": "30000",
+      "rank": 37,
+      "totalNames": 3694,
+      "top5": [
+        {
+          "char": "雑",
+          "count": 13,
+          "score": 28.2
+        },
+        {
+          "char": "隅",
+          "count": 13,
+          "score": 15
+        },
+        {
+          "char": "紀",
+          "count": 11,
+          "score": 13.3
+        },
+        {
+          "char": "経",
+          "count": 13,
+          "score": 12.3
+        },
+        {
+          "char": "貴",
+          "count": 18,
+          "score": 11.6
+        }
+      ]
+    },
+    {
+      "pref": "群馬県",
+      "areaCode": "10000",
+      "rank": 38,
+      "totalNames": 4740,
+      "top5": [
+        {
+          "char": "義",
+          "count": 12,
+          "score": 28.2
+        },
+        {
+          "char": "粕",
+          "count": 41,
+          "score": 24.3
+        },
+        {
+          "char": "総",
+          "count": 14,
+          "score": 10.3
+        },
+        {
+          "char": "箕",
+          "count": 26,
+          "score": 9.7
+        },
+        {
+          "char": "橘",
+          "count": 14,
+          "score": 9.5
+        }
+      ]
+    },
+    {
+      "pref": "栃木県",
+      "areaCode": "09000",
+      "rank": 39,
+      "totalNames": 6206,
+      "top5": [
+        {
+          "char": "祭",
+          "count": 17,
+          "score": 27.8
+        },
+        {
+          "char": "刑",
+          "count": 14,
+          "score": 27.8
+        },
+        {
+          "char": "塙",
+          "count": 13,
+          "score": 10
+        },
+        {
+          "char": "梁",
+          "count": 11,
+          "score": 8
+        },
+        {
+          "char": "坪",
+          "count": 117,
+          "score": 6.7
+        }
+      ]
+    },
+    {
+      "pref": "岩手県",
+      "areaCode": "03000",
+      "rank": 40,
+      "totalNames": 9819,
+      "top5": [
+        {
+          "char": "刺",
+          "count": 34,
+          "score": 27.1
+        },
+        {
+          "char": "袰",
+          "count": 11,
+          "score": 25.8
+        },
+        {
+          "char": "繋",
+          "count": 20,
+          "score": 22.7
+        },
+        {
+          "char": "鶏",
+          "count": 14,
+          "score": 20.5
+        },
+        {
+          "char": "幅",
+          "count": 16,
+          "score": 20.1
+        }
+      ]
+    },
+    {
+      "pref": "島根県",
+      "areaCode": "32000",
+      "rank": 41,
+      "totalNames": 5152,
+      "top5": [
+        {
+          "char": "浴",
+          "count": 18,
+          "score": 26.8
+        },
+        {
+          "char": "斐",
+          "count": 25,
+          "score": 24.3
+        },
+        {
+          "char": "宍",
+          "count": 10,
+          "score": 23.1
+        },
+        {
+          "char": "乃",
+          "count": 25,
+          "score": 21.2
+        },
+        {
+          "char": "刀",
+          "count": 21,
+          "score": 20.7
+        }
+      ]
+    },
+    {
+      "pref": "愛媛県",
+      "areaCode": "38000",
+      "rank": 42,
+      "totalNames": 6236,
+      "top5": [
+        {
+          "char": "瓶",
+          "count": 15,
+          "score": 26.8
+        },
+        {
+          "char": "削",
+          "count": 15,
+          "score": 15.7
+        },
+        {
+          "char": "霊",
+          "count": 13,
+          "score": 10.1
+        },
+        {
+          "char": "駄",
+          "count": 18,
+          "score": 9.9
+        },
+        {
+          "char": "丹",
+          "count": 73,
+          "score": 9.6
+        }
+      ]
+    },
+    {
+      "pref": "静岡県",
+      "areaCode": "22000",
+      "rank": 43,
+      "totalNames": 7152,
+      "top5": [
+        {
+          "char": "駿",
+          "count": 17,
+          "score": 26.4
+        },
+        {
+          "char": "薙",
+          "count": 12,
+          "score": 26.3
+        },
+        {
+          "char": "葵",
+          "count": 14,
+          "score": 17.3
+        },
+        {
+          "char": "薗",
+          "count": 12,
+          "score": 10
+        },
+        {
+          "char": "科",
+          "count": 10,
+          "score": 8
+        }
+      ]
+    },
+    {
+      "pref": "福島県",
+      "areaCode": "07000",
+      "rank": 44,
+      "totalNames": 14426,
+      "top5": [
+        {
+          "char": "坦",
+          "count": 24,
+          "score": 23.9
+        },
+        {
+          "char": "垬",
+          "count": 11,
+          "score": 23.9
+        },
+        {
+          "char": "勿",
+          "count": 14,
+          "score": 22.3
+        },
+        {
+          "char": "貢",
+          "count": 10,
+          "score": 12
+        },
+        {
+          "char": "熱",
+          "count": 24,
+          "score": 11
+        }
+      ]
+    },
+    {
+      "pref": "埼玉県",
+      "areaCode": "11000",
+      "rank": 45,
+      "totalNames": 9572,
+      "top5": [
+        {
+          "char": "狢",
+          "count": 11,
+          "score": 22
+        },
+        {
+          "char": "栢",
+          "count": 13,
+          "score": 10.9
+        },
+        {
+          "char": "慈",
+          "count": 17,
+          "score": 10.4
+        },
+        {
+          "char": "鳩",
+          "count": 21,
+          "score": 9.1
+        },
+        {
+          "char": "指",
+          "count": 33,
+          "score": 8.8
+        }
+      ]
+    },
+    {
+      "pref": "愛知県",
+      "areaCode": "23000",
+      "rank": 46,
+      "totalNames": 17023,
+      "top5": [
+        {
+          "char": "鋺",
+          "count": 17,
+          "score": 20.3
+        },
+        {
+          "char": "噴",
+          "count": 11,
+          "score": 20.3
+        },
+        {
+          "char": "杁",
+          "count": 28,
+          "score": 19.6
+        },
+        {
+          "char": "彌",
+          "count": 10,
+          "score": 18.4
+        },
+        {
+          "char": "枇",
+          "count": 82,
+          "score": 15.8
+        }
+      ]
+    },
+    {
+      "pref": "北海道",
+      "areaCode": "01000",
+      "rank": 47,
+      "totalNames": 29350,
+      "top5": [
+        {
+          "char": "莫",
+          "count": 15,
+          "score": 11.8
+        },
+        {
+          "char": "標",
+          "count": 15,
+          "score": 11.8
+        },
+        {
+          "char": "沿",
+          "count": 80,
+          "score": 11.8
+        },
+        {
+          "char": "蘂",
+          "count": 43,
+          "score": 11.8
+        },
+        {
+          "char": "奔",
+          "count": 19,
+          "score": 11.8
+        }
+      ]
+    }
+  ]
+}

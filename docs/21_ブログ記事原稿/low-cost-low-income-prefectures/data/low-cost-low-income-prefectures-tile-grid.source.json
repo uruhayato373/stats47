@@ -1,0 +1,7 @@
+{
+  "kind": "derived",
+  "derived": "R2 app/stats/consumer-price-difference-index-overall/values.json (2024年・全国=100)。",
+  "source": "r2:app/stats/consumer-price-difference-index-overall/values.json",
+  "fetchedAt": "2026-07-16T14:17:16.909Z",
+  "generatedBy": "manual (P1-11)"
+}

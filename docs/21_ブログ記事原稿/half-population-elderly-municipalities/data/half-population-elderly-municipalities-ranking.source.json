@@ -1,0 +1,7 @@
+{
+  "kind": "derived",
+  "derived": "R2 app/stats/elderly-population-ratio/cities.json (2020年・65歳以上人口割合)。市区町村(2トークン)で高齢化率50%以上を抽出し県別に集計。",
+  "source": "r2:app/stats/elderly-population-ratio/cities.json",
+  "fetchedAt": "2026-07-16T13:41:01.593Z",
+  "generatedBy": "manual /tmp aggregation (P1-03)"
+}

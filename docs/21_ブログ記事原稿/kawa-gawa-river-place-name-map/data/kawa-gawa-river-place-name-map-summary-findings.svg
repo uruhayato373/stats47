@@ -1,0 +1,39 @@
+<!-- data-source: kawa-gawa-river-place-name-map-summary-findings.json | generated: 2026-07-16T22:07:25.334Z -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 422" width="960" height="422" font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" role="img" aria-label="この記事でわかったこと">
+  <style>
+    .svg-bg{fill:#ffffff}
+    .svg-plot{fill:#f9fafb}
+    .svg-plot-border{stroke:#d1d5db}
+    .svg-title{fill:#1f2937}
+    .svg-axis{fill:#374151}
+    .svg-tick{fill:#6b7280}
+    .svg-grid{stroke:#e5e7eb}
+    @media (prefers-color-scheme:dark){
+    .svg-bg{fill:#0f172a}
+    .svg-plot{fill:#1e293b}
+    .svg-plot-border{stroke:#334155}
+    .svg-title{fill:#e2e8f0}
+    .svg-axis{fill:#cbd5e1}
+    .svg-tick{fill:#94a3b8}
+    .svg-grid{stroke:#334155}
+    }
+  </style>
+  <rect width="960" height="422" class="svg-bg"/>
+  <text x="480" y="46" text-anchor="middle" font-size="26" font-weight="bold" class="svg-title">この記事でわかったこと</text>
+  <rect x="40" y="72" width="880" height="72" class="svg-plot" rx="8"/>
+  <circle cx="58" cy="108" r="18" fill="#dc2626"/>
+  <text x="58" y="114" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">1</text>
+  <text x="90" y="103.6" font-size="18" class="svg-title"><tspan x="90" dy="0">全国の居住地名のうち「川」は13,624件、「河」は2,325件で、「川」が「河」の5.</tspan><tspan x="90" dy="22">9倍にのぼります。</tspan></text>
+  <rect x="40" y="154" width="880" height="72" class="svg-plot" rx="8"/>
+  <circle cx="58" cy="190" r="18" fill="#dc2626"/>
+  <text x="58" y="196" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">2</text>
+  <text x="90" y="185.6" font-size="18" class="svg-title"><tspan x="90" dy="0">「河」の居住地名1000件あたり件数は鳥取県が32.9件で全国1位。ただし内訳は「河原町</tspan><tspan x="90" dy="22">」由来の合併前地名が中心です。</tspan></text>
+  <rect x="40" y="236" width="880" height="72" class="svg-plot" rx="8"/>
+  <circle cx="58" cy="272" r="18" fill="#dc2626"/>
+  <text x="58" y="278" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">3</text>
+  <text x="90" y="267.6" font-size="18" class="svg-title"><tspan x="90" dy="0">「河」の比率(川+河に占める割合)がもっとも高いのは鳥取県65.9%で、2位福井県42.</tspan><tspan x="90" dy="22">3%、3位山口県38.7%と続きます。</tspan></text>
+  <rect x="40" y="318" width="880" height="72" class="svg-plot" rx="8"/>
+  <circle cx="58" cy="354" r="18" fill="#dc2626"/>
+  <text x="58" y="360" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">4</text>
+  <text x="90" y="349.6" font-size="18" class="svg-title"><tspan x="90" dy="0">「河内」を含む地名は山口県が100件で全国最多。大分県54件、広島県51件、岡山県35件</tspan><tspan x="90" dy="22">と中国・九州地方に多く分布しています。</tspan></text>
+</svg>

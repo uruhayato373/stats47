@@ -1,0 +1,7 @@
+{
+  "kind": "derived",
+  "derived": "R2 app/stats/foreign-population-per-100k/cities.json (2020年・人口10万人あたり外国人数=比率換算)。市区町村(県+市区町村の2トークン)で外国人比率5%以上(=5,000人/10万人以上)を抽出し、県別に該当数を集計。",
+  "source": "r2:app/stats/foreign-population-per-100k/cities.json",
+  "fetchedAt": "2026-07-16T13:37:09.411Z",
+  "generatedBy": "manual /tmp aggregation (P1-02)"
+}

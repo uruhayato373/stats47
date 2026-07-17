@@ -1,0 +1,7 @@
+{
+  "kind": "derived",
+  "derived": "R2 app/stats/elementary-school-count/cities.json (2024年・小学校数) を市区町村(2トークン)で集計。小学校が0の自治体を数え、県別に集計。",
+  "source": "r2:app/stats/elementary-school-count/cities.json",
+  "fetchedAt": "2026-07-16T14:41:45.095Z",
+  "generatedBy": "manual (P1-26)"
+}
