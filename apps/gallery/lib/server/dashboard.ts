@@ -244,7 +244,7 @@ export function readGscCoverage(root: string) {
   });
 }
 
-// ─── TODO (改善バックログ md — 6 列 pipe テーブル) ──
+// ─── TODO 表 (docs/todo/01_改善バックログ.md — 6 列 pipe テーブル) ──
 export function parseBacklogMd(root: string) {
   return wrap(() => {
     const md = fs.readFileSync(path.join(root, "docs/todo/01_改善バックログ.md"), "utf8");
@@ -288,7 +288,7 @@ export function parseBacklogMd(root: string) {
   });
 }
 
-// ─── TODO (機能バックログ md) ──
+// ─── TODO 表 (docs/todo/02_機能バックログ.md) ──
 interface FeatureBacklogRow {
   section: string;
   id: string;

@@ -66,6 +66,13 @@
       ]
     },
     {
+      "name": "CHECK_RUNTIME_CONFIG",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
       "name": "CHECKER_WIRING_BASELINE",
       "visibility": "server",
       "contexts": [
@@ -73,7 +80,7 @@
       ]
     },
     {
-      "name": "CHECK_RUNTIME_CONFIG",
+      "name": "CHROME",
       "visibility": "server",
       "contexts": [
         "process"
@@ -325,14 +332,14 @@
       ]
     },
     {
-      "name": "HTTPS_PROXY",
+      "name": "HTTP_PROXY",
       "visibility": "server",
       "contexts": [
         "process"
       ]
     },
     {
-      "name": "HTTP_PROXY",
+      "name": "HTTPS_PROXY",
       "visibility": "server",
       "contexts": [
         "process"
@@ -581,14 +588,14 @@
       ]
     },
     {
-      "name": "NODE_ENV",
+      "name": "NO_PROXY",
       "visibility": "server",
       "contexts": [
         "process"
       ]
     },
     {
-      "name": "NO_PROXY",
+      "name": "NODE_ENV",
       "visibility": "server",
       "contexts": [
         "process"
@@ -687,6 +694,13 @@
       ]
     },
     {
+      "name": "SCRATCHPAD",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
       "name": "SITE_ORIGIN",
       "visibility": "server",
       "contexts": [
@@ -709,6 +723,13 @@
     },
     {
       "name": "STATE_DIR",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "STATS47_PROJECT_ROOT",
       "visibility": "server",
       "contexts": [
         "process"

@@ -299,7 +299,7 @@ builder が `renderClass`（KSJ/DPF）または `lane`（e-Stat）から機械�
   オーナー指摘を受け、旧「海色不変」を撤回し **3 テーマ制** (`spec.theme`: `blue`=初期ルック既定 /
   `dark`=夜の日本・ネオン強調 / `paper`=生成り紙アトラス・朱×深緑) に変更。パレット+単色ランプは
   `tokens.ts` の `BUZZ_MAP_THEMES`/`BUZZ_MAP_RAMPS` (旧 `BUZZ_MAP_COLORS`/`BUZZ_MAP_RAMP` は blue への
-  deprecated alias)。Card/Still/Reel/lib を `buzzMapColors(spec.theme)` 経由に統一し、凡例スウォッチ枠の
+  deprecated alias・後方互換。削除条件: 参照ゼロを確認した清掃時)。Card/Still/Reel/lib を `buzzMapColors(spec.theme)` 経由に統一し、凡例スウォッチ枠の
   ハードコード rgba も legendBorder へ寄せた。spec 生成ヘルパー 3 本に `--theme` を追加 (merge は
   `--theme > base > overlay` の順で継承)。**沖縄インセットを拡大** (幅 30%→38%・高さ 15%→20%、916 は
   11%→14%・全テーマ共通)。blue の非回帰は同一 spec の再レンダで目視確認 (差分は沖縄拡大と凡例枠色

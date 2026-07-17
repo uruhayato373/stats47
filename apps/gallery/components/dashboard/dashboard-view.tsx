@@ -110,7 +110,7 @@ export function DashboardView() {
 
           <section id="todo">
             <h2 className="mb-1 border-b border-console-border pb-1.5 text-sm font-semibold text-console-fg">
-              TODO — 改善バックログ
+              TODO — 改善バックログ{/* docs/todo/01_改善バックログ.md ミラー */}
             </h2>
             <p className="mb-3 text-xs text-console-muted">
               真実源: <code className="rounded bg-console-card px-1">docs/todo/01_改善バックログ.md</code>{" "}

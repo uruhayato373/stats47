@@ -250,7 +250,7 @@ hero が数枚に増えたら: (a) gallery `/assets` に「ページ hero」タ�
 | テーマ運用 | **areas OGP = blue 固定** (`PREF_CARD_OGP_THEME`)。R2 素材 push は blue+dark (`PREF_CARD_PUSH_THEMES`)。warm 等は生成能力のみ (色=シリーズの顔、`buzz-map-standards.md` と同思想) |
 | 比率キー | `ogp` 1200×630 / `45` 1080×1350 / `11` 1080×1080 / `916` 1080×1920 / `169` 1920×1080 (buzz-map の命名に整合) |
 | 生成・push | `generate-ogp-images.ts --type areas` (OGP 47枚) / `--type pref-silhouette` (素材 470枚)。週次 self-heal (`ogp-image-audit-weekly.yml`) とギャラリー `pref-silhouette` タブに配線済 |
-| 旧 AreaOgp | `apps/web/src/features/ogp/AreaOgp.tsx` は **generator から deprecated** (generate-ogp-images.ts は参照しない)。ランタイム route `app/areas/[areaCode]/opengraph-image.tsx` にのみ import が残るが、これは §3 課題0 の dead route (areas metadata は `generate-area-metadata.ts` が静的 R2 `app/areas/<code>/ogp/ogp.png` を og:image に設定しており、この route は配信に使われない・後日清掃対象)。復活させる場合は本節の置き換え判断を先に見直すこと |
+| 旧 AreaOgp | `apps/web/src/features/ogp/AreaOgp.tsx` は **generator から deprecated** (generate-ogp-images.ts は参照しない)。ランタイム route `app/areas/[areaCode]/opengraph-image.tsx` にのみ import が残るが、これは §3 課題0 の dead route (areas metadata は `generate-area-metadata.ts` が静的 R2 `app/areas/<code>/ogp/ogp.png` を og:image に設定しており、この route は配信に使われない。削除条件: §3 課題0 の dead route 清掃時に AreaOgp ごと削除)。復活させる場合は本節の置き換え判断を先に見直すこと |
 
 ## 6. 関連
 
