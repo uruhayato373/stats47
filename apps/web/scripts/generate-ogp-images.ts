@@ -15,6 +15,12 @@
  *   npx tsx apps/web/scripts/generate-ogp-images.ts --type areas
  *   npx tsx apps/web/scripts/generate-ogp-images.ts --type ranking-cards [--limit N]
  *   npx tsx apps/web/scripts/generate-ogp-images.ts --type note-covers   [--limit N]
+ *   npx tsx apps/web/scripts/generate-ogp-images.ts --type pref-silhouette [--key 28,13]
+ *
+ * areas = 県シルエットカード (blue/ogp比率) を app/areas/<code>/ogp/ogp.png へ。
+ * pref-silhouette = SNS 素材ライブラリ (5比率 × blue/dark) を
+ *   sns/pref-silhouette/<code2>/card-<ratio>-<theme>.png へ (47県 × 10枚)。
+ * どちらも lib/pref-silhouette-render.ts (トークン SSOT: data/pref-silhouette-tokens.ts)。
  *
  *   # 既存 (R2 に有る) もスキップせず再生成
  *   npx tsx apps/web/scripts/generate-ogp-images.ts --type ranking --force
@@ -30,13 +36,19 @@ import { join } from "node:path";
 
 import { createElement as h } from "react";
 
+import {
+  PREF_CARD_OGP_THEME,
+  PREF_CARD_PUSH_THEMES,
+  PREF_CARD_RATIO_KEYS,
+} from "./data/pref-silhouette-tokens";
+
 const PUBLIC_URL = process.env.R2_PUBLIC_FETCH_URL ?? "https://storage.stats47.jp";
 const SITE = process.env.SITE_ORIGIN ?? "https://stats47.jp";
 const PROJECT_ROOT = join(import.meta.dirname ?? __dirname, "../../..");
 const STAGE_ROOT = join(PROJECT_ROOT, ".local/r2");
 const CONCURRENCY = 6;
 
-type OgpType = "ranking" | "areas" | "ranking-cards" | "note-covers";
+type OgpType = "ranking" | "areas" | "ranking-cards" | "note-covers" | "pref-silhouette";
 
 interface CliOptions {
   type: OgpType;
@@ -55,7 +67,7 @@ function parseArgs(): CliOptions {
     return i !== -1 ? (args[i + 1] ?? null) : null;
   };
   const rawType = val("--type");
-  const allowed: OgpType[] = ["ranking", "areas", "ranking-cards", "note-covers"];
+  const allowed: OgpType[] = ["ranking", "areas", "ranking-cards", "note-covers", "pref-silhouette"];
   if (!rawType || !allowed.includes(rawType as OgpType)) {
     throw new Error(`--type は ${allowed.join(" | ")} を指定してください`);
   }
@@ -234,22 +246,6 @@ async function buildRankingOgpData(key: string) {
   };
 }
 
-interface AreaProfileRaw {
-  areaName?: string;
-  strengths?: { indicator?: string; rank?: number }[];
-  weaknesses?: { indicator?: string; rank?: number }[];
-}
-async function buildAreaOgpData(code: string) {
-  const profile = await fetchJson<AreaProfileRaw>(`${PUBLIC_URL}/app/areas/${code}/profile.json`);
-  if (!profile?.areaName) return null;
-  return {
-    prefCode: parseInt(code.slice(0, 2), 10),
-    areaName: profile.areaName,
-    strengths: (profile.strengths ?? []).slice(0, 2).map((s) => ({ rank: s.rank ?? 0, indicator: s.indicator ?? "" })),
-    weaknesses: (profile.weaknesses ?? []).slice(0, 2).map((s) => ({ rank: s.rank ?? 0, indicator: s.indicator ?? "" })),
-  };
-}
-
 /** draft.md frontmatter の title を抜く。 */
 function parseTitle(md: string): string | null {
   const m = md.match(/^---\r?\n([\s\S]*?)\r?\n---/);
@@ -283,6 +279,9 @@ async function main() {
     ids = noteEntries.map((n) => n.slug);
   } else if (opts.type === "areas") {
     ids = listAreaCodes();
+  } else if (opts.type === "pref-silhouette") {
+    // 2 桁県コード "01".."47" (SNS 素材の content_key)
+    ids = listAreaCodes().map((c) => c.slice(0, 2));
   } else {
     ids = opts.keys ?? (await listRankingKeys(opts.source));
   }
@@ -295,6 +294,10 @@ async function main() {
     if (opts.type === "areas") return [`app/areas/${id}/ogp/ogp.png`];
     if (opts.type === "ranking-cards")
       return [`app/ranking/${id}/thumbnail-light.webp`, `app/ranking/${id}/thumbnail-dark.webp`];
+    if (opts.type === "pref-silhouette")
+      return PREF_CARD_PUSH_THEMES.flatMap((theme) =>
+        PREF_CARD_RATIO_KEYS.map((ratio) => `sns/pref-silhouette/${id}/card-${ratio}-${theme}.png`),
+      );
     const n = noteEntries.find((e) => e.slug === id)!;
     return [`${n.r2Path}/images/cover-1280x670.png`];
   };
@@ -329,11 +332,17 @@ async function main() {
   const { buildElement, loadFonts, renderToPng, renderToWebP } = await import("./lib/blog-thumbnail-render");
   const fonts = loadFonts(PROJECT_ROOT);
 
-  // 既存 OGP コンポーネント (satori 描画用)
-  let RankingOgp: unknown, AreaOgp: unknown;
-  if (opts.type === "ranking" || opts.type === "areas") {
+  // 既存 OGP コンポーネント (satori 描画用)。areas は 2026-07 からシルエットカード方式
+  // (lib/pref-silhouette-render.ts) に置き換え、AreaOgp は使わない。
+  let RankingOgp: unknown;
+  if (opts.type === "ranking") {
     RankingOgp = (await import("../src/features/ogp/RankingOgp")).RankingOgp;
-    AreaOgp = (await import("../src/features/ogp/AreaOgp")).AreaOgp;
+  }
+  let renderPrefCardPng:
+    | typeof import("./lib/pref-silhouette-render").renderPrefCardPng
+    | null = null;
+  if (opts.type === "areas" || opts.type === "pref-silhouette") {
+    renderPrefCardPng = (await import("./lib/pref-silhouette-render")).renderPrefCardPng;
   }
 
   let generated = 0;
@@ -361,19 +370,30 @@ async function main() {
           fallback++;
         }
       } else if (opts.type === "areas") {
-        const data = await buildAreaOgpData(id);
-        if (!data) { skipped++; return; }
-        const out = stagePath(keyFor(id)[0]);
-        try {
-          await renderToPng(h(AreaOgp as never, { data }) as never, fonts, out);
-        } catch (e) {
-          if (process.env.OGP_DEBUG) console.log(`  [area-fallback] ${id}: ${String((e as Error)?.message ?? e).slice(0, 200)}`);
-          const el = buildElement(
-            { title: data.areaName, subtitle: "統計で見る地域プロフィール", category: "AREA", domainPath: "stats47.jp/areas" },
-            false,
-          );
-          await renderToPng(el, fonts, out);
-          fallback++;
+        // 県シルエットカード (blue / ogp 比率) で置き換え (2026-07 決定)
+        await renderPrefCardPng!({
+          projectRoot: PROJECT_ROOT,
+          code2: id.slice(0, 2),
+          ratio: "ogp",
+          theme: PREF_CARD_OGP_THEME,
+          fonts,
+          outPath: stagePath(keyFor(id)[0]),
+        });
+      } else if (opts.type === "pref-silhouette") {
+        // 素材ライブラリ: 5 比率 × push テーマ (keyFor と同順)
+        const keys = keyFor(id);
+        let i = 0;
+        for (const theme of PREF_CARD_PUSH_THEMES) {
+          for (const ratio of PREF_CARD_RATIO_KEYS) {
+            await renderPrefCardPng!({
+              projectRoot: PROJECT_ROOT,
+              code2: id,
+              ratio,
+              theme,
+              fonts,
+              outPath: stagePath(keys[i++]),
+            });
+          }
         }
       } else if (opts.type === "ranking-cards") {
         const itemPayload = await fetchJson<RankingItemRaw>(`${PUBLIC_URL}/app/ranking/${id}/item.json`);
@@ -408,7 +428,14 @@ async function main() {
   await pMap(targets, (id) => processItem(id), CONCURRENCY);
 
   console.log(`\n生成: ${generated} 件 (フォールバック ${fallback} / スキップ ${skipped})`);
-  const prefix = opts.type === "note-covers" ? "note" : opts.type === "areas" ? "app/areas" : "app/ranking";
+  const prefix =
+    opts.type === "note-covers"
+      ? "note"
+      : opts.type === "areas"
+        ? "app/areas"
+        : opts.type === "pref-silhouette"
+          ? "sns/pref-silhouette"
+          : "app/ranking";
   console.log(`staging: ${STAGE_ROOT}/${prefix}`);
   console.log(`push: npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix ${prefix}`);
 }

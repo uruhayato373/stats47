@@ -1,0 +1,5 @@
+{
+  "schemaVersion": 1,
+  "_comment": "クリエイティブ A/B 実験 registry (SSOT)。書込は /manage-affiliate-experiment のみ。variant 実体は apps/web/scripts/affiliate-ads-data.ts の experimentId/variantId/weight。判定は build-affiliate-operations-state.ts が決定的に行う (invalid/collecting/ready-to-decide/inconclusive/closed)。勝者の自動反映は禁止 — effect 判定は evidence-based-judgment.md + improvement-triage を通す。",
+  "experiments": []
+}

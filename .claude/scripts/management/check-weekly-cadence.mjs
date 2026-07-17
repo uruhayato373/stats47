@@ -2,7 +2,7 @@
 // 週次レビュー / 週次計画の cadence 欠落を検知する (実行漏れガード)。
 //
 // 背景: 週次メトリクス収集 (fetch-metrics-weekly.yml) は自動で回るが、レビュー文書
-// (docs/03_週次運用/週次レビュー/YYYY-Www.md) と計画文書 (../週次計画/) は人間/agent が
+// (skill reference/reviews/YYYY-Www.md) と現在計画 (docs/todo/current-week.md) は人間/agent が
 // /weekly-review・/weekly-plan で手動生成する。cadence が途切れても誰も気づかず、
 // 2026-W26〜W28 のレビューが 3 週連続で欠落した。本スクリプトはその穴を機械検知する。
 //
@@ -14,14 +14,17 @@
 //   - レビュー: 完了済みの週まで (今日が月曜なら先週まで) を対象
 //   - 計画: 進行中の今週まで (今週分の計画は週頭に存在すべき) を対象
 
-import { readdirSync, existsSync } from "node:fs";
+import { readdirSync, existsSync, readFileSync } from "node:fs";
 import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = resolve(__dirname, "../../..");
-const REVIEW_DIR = resolve(PROJECT_ROOT, "docs/03_週次運用/週次レビュー");
-const PLAN_DIR = resolve(PROJECT_ROOT, "docs/03_週次運用/週次計画");
+const REVIEW_DIR = resolve(
+  PROJECT_ROOT,
+  ".claude/skills/management/weekly-review/reference/reviews",
+);
+const PLAN_FILE = resolve(PROJECT_ROOT, "docs/todo/current-week.md");
 const WINDOW = 10; // 遡って検査する週数 (これより古い穴は追わない)
 
 const jsonMode = process.argv.includes("--json");
@@ -78,10 +81,11 @@ const lastCompletedWeek = isoWeekLabel(lastSunday);
 
 // レビュー: 完了済み週まで / 計画: 今週まで
 const reviewCandidates = recentWeekLabels(lastSunday);
-const planCandidates = recentWeekLabels(today);
-
 const missingReviews = missingWeeks(presentWeeks(REVIEW_DIR), reviewCandidates);
-const missingPlans = missingWeeks(presentWeeks(PLAN_DIR), planCandidates);
+const planWeek = existsSync(PLAN_FILE)
+  ? readFileSync(PLAN_FILE, "utf8").match(/^week:\s*(\d{4}-W\d{2})$/m)?.[1]
+  : null;
+const missingPlans = planWeek === currentWeek ? [] : [currentWeek];
 const missingTotal = missingReviews.length + missingPlans.length;
 
 const bodyLines = [];
@@ -92,14 +96,14 @@ bodyLines.push("");
 if (missingReviews.length) {
   bodyLines.push(`### ⚠️ 未作成の週次レビュー (${missingReviews.length}週)`);
   for (const w of missingReviews) {
-    bodyLines.push(`- [ ] \`docs/03_週次運用/週次レビュー/${w}.md\` — \`/weekly-review ${w}\``);
+    bodyLines.push(`- [ ] \`.claude/skills/management/weekly-review/reference/reviews/${w}.md\` — \`/weekly-review ${w}\``);
   }
   bodyLines.push("");
 }
 if (missingPlans.length) {
   bodyLines.push(`### ⚠️ 未作成の週次計画 (${missingPlans.length}週)`);
   for (const w of missingPlans) {
-    bodyLines.push(`- [ ] \`docs/03_週次運用/週次計画/${w}.md\` — \`/weekly-plan ${w}\``);
+    bodyLines.push(`- [ ] \`docs/todo/current-week.md\` — \`/weekly-plan ${w}\``);
   }
   bodyLines.push("");
 }

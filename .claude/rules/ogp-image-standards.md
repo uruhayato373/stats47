@@ -30,7 +30,8 @@ stats47.jp の **OGP 画像 / note カバー画像 / サイト内リンクカー
 | OGP: ranking | 1200×630 | Satori(Node) → R2 | `app/ranking/<key>/ogp/ogp.png` | `generate-ogp-images.ts --type ranking` | ranking-ui-manager |
 | OGP: theme | 1200×630 | Satori SSG prerender (ビルド時、例外的に稼働) | `themes/<slug>/opengraph-image` (route) | (ビルド時 prerender) | theme-ui-manager |
 | OGP: category | 1200×630 | 静的フォールバック (`og-image.jpg`) | `stats47.jp/og-image.jpg` | (静的アセット) | ranking-ui-manager |
-| OGP: areas | 1200×630 | Satori(Node) → R2 | `app/areas/<code>/ogp/ogp.png` | `generate-ogp-images.ts --type areas` | ranking-ui-manager |
+| OGP: areas | 1200×630 | **県シルエットカード** (topojson+satori、§5.7) → R2 | `app/areas/<code>/ogp/ogp.png` | `generate-ogp-images.ts --type areas` | ranking-ui-manager |
+| 素材: 県シルエットカード (SNS) | 5比率 (1200×630 / 1080×1350 / 1080×1080 / 1080×1920 / 1920×1080) × blue/dark | 決定的生成 (topojson+satori、§5.7) → R2 | `sns/pref-silhouette/<code2>/card-<ratio>-<theme>.png` (47県×10枚) | `generate-ogp-images.ts --type pref-silhouette` | image-prompt-curator (規約/監査)・IG 消費は instagram-strategist |
 | OGP: tag / survey / cities | — | 親 `/` の静的 `og-image.jpg` に依存 (専用なし) | — | — | (要否は §3) |
 | カード: blog (light/dark) | webp (16:9 相当) | `apps/web/scripts/generate-blog-thumbnails-cloud.ts` (Satori、`lib/blog-thumbnail-render.ts`) | R2 `app/blog/<slug>/thumbnail-{light,dark}.webp` | `ThemeAwareImage` (blog-article-grid) | blog-editor |
 | カード: ranking (light/dark) | png | **供給不完全 (既知課題)** | R2 `ranking/prefecture/<key>/<year>/thumbnails/thumbnail-{light,dark}.png` | `RankingThumbnail` (baseSrc 解決、無ければ "No Image") | ranking-publisher |
@@ -235,11 +236,29 @@ hero が数枚に増えたら: (a) gallery `/assets` に「ページ hero」タ�
 
 ---
 
+## 5.7 県シルエットカード (areas OGP + SNS 素材) — 決定的生成・AI 不使用
+
+新聞系ニュースサイトの県カード風「県シルエット地図カード」。**areas OGP の正典デザイン**
+(2026-07-16 に旧 AreaOgp satori 描画から置き換え) であり、同デザインの 5 比率 × blue/dark を
+**SNS 素材ライブラリ** (`sns/pref-silhouette/`) として持つ。
+
+| 項目 | 内容 |
+|---|---|
+| デザイン | 淡青の海+ドットテクスチャ / 周辺県=ハーフトーン / 対象県=ソリッド+フチ+シャドウ / 県名ピル (**陸地と重ならない位置へ自動配置**: 候補8アンカーを陸地重なり面積でスコアリング) / 左下ブランド行 |
+| **トークン SSOT** | `apps/web/scripts/data/pref-silhouette-tokens.ts` (git TS)。テーマ blue/dark/warm × 11 トークン + 5 比率レイアウト。**色・比率の変更はこのファイルだけ** → `--force` 再生成で全量反映 |
+| レンダラー | `apps/web/scripts/lib/pref-silhouette-render.ts` — `apps/remotion/public/prefecture.topojson` (N03_007/N03_001) → d3-geo Mercator で地図 SVG (テキストなし) → sharp PNG → data URI → satori で県名ピル+ブランド行合成 (Noto Sans JP TTF がグリフをパス化 = CI に日本語フォント不要・環境非依存で決定的)。フレーミングは対象県の最大ポリゴン bbox (東京の離島・鹿児島の南西諸島を枠外に) |
+| テーマ運用 | **areas OGP = blue 固定** (`PREF_CARD_OGP_THEME`)。R2 素材 push は blue+dark (`PREF_CARD_PUSH_THEMES`)。warm 等は生成能力のみ (色=シリーズの顔、`buzz-map-standards.md` と同思想) |
+| 比率キー | `ogp` 1200×630 / `45` 1080×1350 / `11` 1080×1080 / `916` 1080×1920 / `169` 1920×1080 (buzz-map の命名に整合) |
+| 生成・push | `generate-ogp-images.ts --type areas` (OGP 47枚) / `--type pref-silhouette` (素材 470枚)。週次 self-heal (`ogp-image-audit-weekly.yml`) とギャラリー `pref-silhouette` タブに配線済 |
+| 旧 AreaOgp | `apps/web/src/features/ogp/AreaOgp.tsx` は **generator から deprecated** (generate-ogp-images.ts は参照しない)。ランタイム route `app/areas/[areaCode]/opengraph-image.tsx` にのみ import が残るが、これは §3 課題0 の dead route (areas metadata は `generate-area-metadata.ts` が静的 R2 `app/areas/<code>/ogp/ogp.png` を og:image に設定しており、この route は配信に使われない。削除条件: §3 課題0 の dead route 清掃時に AreaOgp ごと削除)。復活させる場合は本節の置き換え判断を先に見直すこと |
+
 ## 6. 関連
 
 - ギャラリー生成: `.claude/scripts/ogp/build-image-gallery.mjs`
 - 監査スキル: `.claude/skills/ui/audit-ogp-images/SKILL.md`
 - 棚卸し state: `.claude/state/ogp/inventory.json`
+- **県シルエットカード (§5.7)**: トークン SSOT `apps/web/scripts/data/pref-silhouette-tokens.ts` /
+  レンダラー `apps/web/scripts/lib/pref-silhouette-render.ts` / 生成 `generate-ogp-images.ts --type areas|pref-silhouette`
 - **ブログ OGP AI 背景 (§5)**: カタログ SSOT `apps/web/scripts/data/blog-ogp-visual-catalog.ts` / 解決・hash
   `apps/web/scripts/lib/blog-ogp-visual.ts` / Gemini クライアント `apps/web/scripts/lib/gemini-image-client.ts` /
   合成 `apps/web/scripts/lib/blog-thumbnail-render.ts` (`normalizeAiBackground`) / 生成 `apps/web/scripts/generate-blog-thumbnails-cloud.ts`

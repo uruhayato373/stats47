@@ -65,12 +65,22 @@ export function trackAffiliateClick(params: {
  *
  * アフィリエイトではない自社導線なので `affiliate_click` とは別イベントに分ける。
  * `cta_id` / `link_position` を custom dimension に登録すれば枠別 CTR を追える。
+ *
+ * buzz-map 集客ゲート (§7.3): `contentId` (=ideaId) / `targetType` / `targetKey` を追加すると
+ * SNS campaign → landing → CTA を content_id 別に紐付けられる (custom dimension 登録が前提)。
+ * いずれも optional で既存呼び出しの挙動は不変。
  */
 export function trackCtaClick(params: {
   ctaId: string;
   label: string;
   position: string;
   rankingKey?: string;
+  /** buzz-map ideaId 等・SNS campaign と landing CTA を紐付ける (§7.3 content_id) */
+  contentId?: string;
+  /** 遷移先種別 ranking | theme | area | blog (§7.3 target_type) */
+  targetType?: "ranking" | "theme" | "area" | "blog";
+  /** 遷移先の key / slug (§7.3 target_key) */
+  targetKey?: string;
 }): void {
   sendEvent("cta_click", {
     event_category: "cta",
@@ -78,6 +88,9 @@ export function trackCtaClick(params: {
     cta_id: params.ctaId,
     link_position: params.position,
     ...(params.rankingKey ? { ranking_key: params.rankingKey } : {}),
+    ...(params.contentId ? { content_id: params.contentId } : {}),
+    ...(params.targetType ? { target_type: params.targetType } : {}),
+    ...(params.targetKey ? { target_key: params.targetKey } : {}),
   });
 }
 

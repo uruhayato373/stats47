@@ -54,6 +54,7 @@ Instagram は**視覚重視**のプラットフォーム。コンテンツドメ
 | compare（2県比較） | **画像 1 枚**（1080×1350 縦長）| 瞬間的に優劣が伝わる、シェアされやすい |
 | correlation（相関散布図） | **カルーセル**（散布図 + 4 象限ごとの解説）| 分析系コンテンツは段階的に見せる |
 | bar-chart-race | **リール**（9:16、15〜30 秒）| 動きのあるコンテンツはリールでリーチ拡大 |
+| buzz-map（日本地図×統計） | 型A/C/E=**画像 1 枚**（1080×1350 縦長）/ 型D=**リール**（9:16）| まちの計量舎系の日本地図カード。1 枚で意外な分布が伝わり保存率が高い。型・仕様の SSOT は `.claude/rules/buzz-map-standards.md`、生成は sns-renderer `/buzz-map` |
 | blog（ブログ紹介） | **画像 1 枚** + 「リンクはプロフィールから」| Instagram はリンク不可、誘導は bio |
 
 ### 2. 投稿タイミング最適化
@@ -190,6 +191,7 @@ Slide 6: 出典・更新日 + 「保存してね」+ 「プロフィールから
 | トレンド→Instagram 投稿 | `blog-editor`（discover-trends）→ `instagram-strategist`（/post-instagram） |
 | ランキング追加 → Instagram | `data-ingester`（TS-config 追加 + /page-data-batch）→ `sns-renderer`（/render-sns-stills）→ `instagram-strategist`（/push-r2 + /post-instagram） |
 | bar-chart-race → リール投稿 | `youtube-strategist`/`sns-renderer`（/bar-chart-race --step render）→ `instagram-strategist`（/post-instagram --type reels） |
+| buzz-map（日本地図カード）→ Instagram | `sns-renderer`（/buzz-map IG レンダ: `BuzzMap-Still-45`/`Reel-916`）→ `diff-push-r2 --prefix sns/buzz-map` → posts.json draft 登録 → `instagram-strategist`（draft 在庫を schedule 追記 or /post-instagram で配信）。**draft 在庫は投稿タイミング未定の状態**（例: id 696-703・`template=buzzmap-*`）で、量産 schedule/配信計画の対象として消化する |
 | 週次パフォーマンス振り返り | `instagram-strategist`（/fetch-instagram-data）→ `strategy-advisor`（/weekly-review） |
 
 ## 制約事項・注意点
@@ -207,6 +209,8 @@ Content Publishing API は**公開 URL の画像 / 動画**を要求する。ロ
 1. `/render-sns-stills` 等で `.local/r2/sns/<domain>/<key>/instagram/` に画像を生成
 2. `/push-r2` で `storage.stats47.jp` にアップロード
 3. `/post-instagram` で公開 URL を参照して投稿
+
+> **リールの content-type 注意**: buzz-map リール等を `diff-push-r2` で push すると R2 の content-type が `application/octet-stream` になる場合がある。IG Reels API が `video/mp4` を要求して弾く可能性があるため、リール投稿前に公開 URL の content-type を確認する（要なら video/mp4 で再 push）。
 
 ### 予約投稿は非対応
 

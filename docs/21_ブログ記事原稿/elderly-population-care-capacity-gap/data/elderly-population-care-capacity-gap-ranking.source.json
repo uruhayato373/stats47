@@ -1,0 +1,7 @@
+{
+  "kind": "derived",
+  "derived": "R2 app/stats/nursing-home-capacity-per-1000-65plus/values.json (2023年・65歳以上人口1000人あたりの介護保険施設定員)。",
+  "source": "r2:app/stats/nursing-home-capacity-per-1000-65plus/values.json",
+  "fetchedAt": "2026-07-16T14:34:28.414Z",
+  "generatedBy": "manual (P1-28)"
+}

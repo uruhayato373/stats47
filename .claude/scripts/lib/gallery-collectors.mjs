@@ -7,7 +7,7 @@
  *
  * 消費側:
  *  - .claude/scripts/ogp/build-image-gallery.mjs  (CI 週次ゲート・静的 HTML)
- *  - .claude/scripts/gallery/server.mjs           (統合メディアコンソール・ランタイム)
+ *  - apps/gallery/lib/server/collectors.ts        (統合メディアコンソール・Next.js ランタイム)
  *
  * 純関数のみ。CLI/出力/exit code は各消費側が持つ (このファイルは列挙だけを担う)。
  * 正典: .claude/rules/ogp-image-standards.md / .claude/rules/r2-storage-design.md
@@ -18,7 +18,7 @@ import path from "node:path";
 export const DEFAULT_CONCURRENCY = 12;
 export const RANKING_SAMPLE = 30;
 
-/** OGP / カード / note カバー タブ (build-image-gallery.mjs の従来 8 タブ)。 */
+/** OGP / カード / note カバー タブ (build-image-gallery.mjs の従来 8 タブ + pref-silhouette)。 */
 export const OGP_TABS = [
   "blog-ogp",
   "ranking-ogp",
@@ -28,6 +28,27 @@ export const OGP_TABS = [
   "blog-card",
   "ranking-card",
   "note-cover",
+  "pref-silhouette",
+];
+
+/**
+ * 県シルエットカードの R2 variant (5比率 × blue/dark)。
+ * SSOT は apps/web/scripts/data/pref-silhouette-tokens.ts の
+ * PREF_CARD_RATIO_KEYS × PREF_CARD_PUSH_THEMES。本ファイルは node 実行 (.mjs) で TS を
+ * import できないため派生を手書きする (buzz-map collector 等と同じ割り切り)。比率/push テーマを
+ * 変えたら両方を更新する (変更頻度は低い)。
+ */
+export const PREF_SILHOUETTE_VARIANTS = [
+  "ogp-blue",
+  "45-blue",
+  "11-blue",
+  "916-blue",
+  "169-blue",
+  "ogp-dark",
+  "45-dark",
+  "11-dark",
+  "916-dark",
+  "169-dark",
 ];
 
 /** 17 category キー (SSOT: packages/data-configs/src/types.ts CATEGORY_KEYS)。 */
@@ -301,6 +322,25 @@ export async function buildTab(tab, opts) {
             { variant: "light", url: `${r2}/app/ranking/${k}/thumbnail-light.webp` },
             { variant: "dark", url: `${r2}/app/ranking/${k}/thumbnail-dark.webp` },
           ],
+        })),
+      };
+    }
+    case "pref-silhouette": {
+      // 県シルエットカード素材 (47県 × 5比率 × blue/dark)。areas OGP と同デザイン系。
+      let codes = Array.from({ length: 47 }, (_, i) => String(i + 1).padStart(2, "0"));
+      if (limit) codes = codes.slice(0, limit);
+      return {
+        source: "r2-static",
+        aspect: "multi (ogp/4:5/1:1/9:16/16:9)",
+        r2KeyPattern: `sns/pref-silhouette/<code2>/card-<ratio>-<theme>.png`,
+        entries: codes.map((c) => ({
+          key: c,
+          label: c,
+          pageUrl: `${site}/areas/${c}000`,
+          images: PREF_SILHOUETTE_VARIANTS.map((v) => ({
+            variant: v,
+            url: `${r2}/sns/pref-silhouette/${c}/card-${v}.png`,
+          })),
         })),
       };
     }

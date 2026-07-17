@@ -14,22 +14,24 @@ co_agents: [devops-runner]
 
 ## モード
 
-`/register-affiliate-banner [propose|register|status]` (既定 `propose`)。
+`/register-affiliate-banner [propose|register|direct|status]` (既定 `propose`)。
+`propose`/`register` = タグベース自動配置 (`AFFILIATE_ADS`)、`direct` = 直接属性方式の台帳登録。
 
 ---
 
 ## propose — 次に提携すべき案件を 1 件提案
 
 1. 在庫を棚卸し: `npx tsx .claude/scripts/ads/audit-affiliate-inventory.ts` → **vertical カバレッジ** (10 軸)
-   の在庫ゼロ/手薄軸を特定 (現状 `education` / `mobility` がゼロ)。
+   の在庫ゼロ/手薄軸を特定。**ゼロ/手薄の軸は固定文でなく audit 出力
+   (`.claude/state/ads/inventory-latest.json` の `coverage.gapVerticals` / `thinVerticals`) から読む**。
 2. トラフィックと突合: `.claude/state/ads/ga4-affiliate-*.json` (GA4) + GSC の高トラフィックページ種別を見て、
    「トラフィックはあるが在庫ゼロ/手薄」の vertical を優先度づけ。
 3. `rules §2 利用プログラム表` と照合し、その vertical の **要提携プログラムを 1 件**、根拠つきで提示:
    - Output: `Vertical | 提携先候補 | 根拠 (想定 imp 機会 / 単価帯 / 送客ページ) | ASP`。
 4. ユーザーに **ASP (A8.net 等) で提携申請** を促して終了 (承認待ちは非同期)。**1 回 1 件**。
 
-想定の高優先候補 (rules §2): 国内旅行OTA (travel・最大ファネル)・自動車保険一括見積 (mobility・在庫ゼロ)・
-引越し比較 (housing・AFF-AREAS-MOVING-01)・ふるさと納税 (furusato) / 通信教育 (education・在庫ゼロ)。
+候補プログラムの例 (国内旅行OTA / 自動車保険一括見積 / 引越し比較 / ふるさと納税 / 通信教育 等) と
+提携状況は rules §2 利用プログラム表を参照する。
 
 ---
 
@@ -93,8 +95,9 @@ node .claude/scripts/ads/inspect-banner.mjs "<imageUrl>" /tmp/banner.png
 }
 ```
 
-> **A/B テスト (AFF-05・任意)**: `experimentId`/`variantId`/`weight` を付けると同一実験の 2 件以上で
-> `VariantAdSlot` の加重ランダム出し分けになる。詳細: `docs/40_アフィリエイト管理/AFF-05-creative-ab-testing-design.md`。
+> **A/B テスト (任意)**: `experimentId`/`variantId`/`weight` を付けると同一実験の 2 件以上で
+> `VariantAdSlot` の加重ランダム出し分けになる。実験の開始・判定は `/manage-affiliate-experiment`
+> (reference: `.claude/skills/ads/manage-affiliate-experiment/reference/creative-ab-testing.md`) で行う。
 
 ### Step 5: 検証
 ```bash
@@ -113,21 +116,33 @@ outward-facing なので push はユーザーに確認。反映後、対象 vert
 ## status — 提携状況の一覧
 
 `rules §2 利用プログラム表`の提携列 (提携済 / 申請中 / 要提携) を読み、vertical 別に一覧する。
-`education` / `mobility` は在庫ゼロ (要提携)。
+在庫ゼロ/手薄の vertical は `.claude/state/ads/inventory-latest.json` の `coverage` から読む (固定文を持たない)。
 
 ---
 
-## 手動配置 (オプション)
+## direct — 直接属性方式の配置を台帳に登録
 
-特定記事に手動バナーを置く場合、article.md に `<affiliate-banner src= href= tracking= width= height= label=>` を
-まとめセクションの後・関連記事の前に挿入 (`md-content.tsx` がレンダリング)。担当は `blog-editor` / `article-writer`。
+特定記事の文脈にピンポイント配置する方式 (自動配置と別系統)。**配置と台帳登録は必ずセット**で行う
+(台帳に無い `<affiliate-banner>` は `/audit-affiliate-compliance` が「台帳未登録タグ」として弾く)。
+
+1. **台帳へ追記**: `apps/web/scripts/affiliate-direct-placements-data.ts` の `AFFILIATE_DIRECT_PLACEMENTS`
+   に 1 エントリ (id / asp / href / imageUrl / pixel / サイズ / rewardNote / conversionCondition /
+   placements[{channel, slug, position}] / addedAt / isActive)。既存配置に記事を足す場合は `placements` に追加。
+2. **記事本文へ配置**: article.md に `<affiliate-banner src= href= tracking= width= height= label=>` を
+   文脈一致の位置に挿入 (`md-content.tsx` がレンダリング)。note はカスタム要素未対応のため生 HTML。
+   担当は `blog-editor` / `article-writer`。
+3. **PR 表記 (景表法)**: blog は記事冒頭の PR 宣言 + リンク直前の `※PR：` の両方、note は `#PR`/`#広告`。
+4. **検証**: `npx tsx .claude/scripts/ads/audit-affiliate-compliance.ts --live --check` で
+   孤立 / 表記漏れ / 未登録タグがゼロであること。
 
 ## 関連ファイル
 
 | ファイル | 役割 |
 |---|---|
 | `.claude/rules/affiliate-ads-standards.md` | **★正典** (vertical ハブ・プログラム表・サイズ・GA4・登録フロー) |
-| `apps/web/scripts/affiliate-ads-data.ts` | **★広告 SSOT** (`AFFILIATE_ADS`、git TS) |
+| `apps/web/scripts/affiliate-ads-data.ts` | **★自動配置 SSOT** (`AFFILIATE_ADS`、git TS) |
+| `apps/web/scripts/affiliate-direct-placements-data.ts` | **★直接配置 SSOT** (`AFFILIATE_DIRECT_PLACEMENTS`、git TS) |
+| `.claude/scripts/ads/audit-affiliate-compliance.ts` | 直接配置の compliance 監査 (`/audit-affiliate-compliance`) |
 | `apps/web/src/features/ads/constants/affiliate-category.ts` | 意図ハブ (`AffiliateVertical` / 3 map / `adVertical`) |
 | `.claude/scripts/ads/inspect-banner.mjs` | バナー画像を fetch → サイズ実測 + canonical 判定 + 目視用保存 (VC/楽天のサイズ確定・広告主判別) |
 | `.claude/scripts/ads/audit-affiliate-inventory.ts` | 在庫棚卸し (vertical カバレッジ + `--check-size`) |

@@ -9,7 +9,7 @@
  *
  * Output:
  *   1. .claude/state/blog/auto-brushup-plan.json (routine が参照する schedule)
- *   2. docs/03_週次運用/blog-brushup-plan.md (人間レビュー用)
+ *   2. .claude/state/blog/brushup-plan.md (再生成可能な運用state)
  *
  * Score 計算:
  *   improvement_score = impressions × max(0, industry_avg_CTR(position) - current_CTR)
@@ -269,7 +269,7 @@ for (const day of plan.days) {
 
 const reportPath = path.join(
   PROJECT_ROOT,
-  "docs/03_週次運用/blog-brushup-plan.md"
+  ".claude/state/blog/brushup-plan.md"
 );
 fs.mkdirSync(path.dirname(reportPath), { recursive: true });
 fs.writeFileSync(reportPath, reportLines.join("\n"));

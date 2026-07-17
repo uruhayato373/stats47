@@ -50,7 +50,9 @@ function inspect(file) {
   const isTest = /(?:^|\/)(?:__tests__|tests?|fixtures?)(?:\/|$)|\.(?:spec|test)\.[cm]?[jt]sx?$/.test(relative);
   fs.readFileSync(file, "utf8").split(/\r?\n/).forEach((line, index) => {
     const number = index + 1;
-    const debt = line.match(/\b(TODO|FIXME|HACK)\b/i);
+    // 大文字のみ検出 (debt コメント規約は大文字)。case-insensitive だと識別子・DOM id・パス
+    // (`const todo` / `section#todo` / `../../todo/`) を誤検知する (2026-07-17 精緻化・legacy 用語除外と同方針)
+    const debt = line.match(/\b(TODO|FIXME|HACK)\b/);
     if (debt && !/(?:#\d+|https?:\/\/|\b(?:MC|AFF|EXP|TODO)-?\d+\b|docs\/todo\/|remove(?:d)?\s+(?:when|after|by)|期限|削除条件)/i.test(line))
       results.push(finding("UNTRACKED_DEBT", file, number, `${debt[1].toUpperCase()} に issue/backlog/削除条件がない`, line));
 

@@ -281,6 +281,11 @@ X 投稿に添付できる画像種を単一ソース化する。`.claude/script
 
 SNS 投稿の stats47.jp リンクには UTM を付ける。note は付けない (素の URL)。
 
+> **★生成の単一実装 = `.claude/scripts/lib/sns-utm.cjs`** (2026-07-17 一本化)。post-x-batch の
+> register-drafts / buzz-map (`lib/buzz-map-utm-core.mjs` は薄い adapter) ともこれに委譲する。
+> UTM 形式を変えるときはこのファイル 1 箇所。buzz-map は `utm_campaign=buzz-map-<ideaId>` /
+> `utm_content=<variant>`。**canonical URL (catalog/spec/sitemap) に UTM を混入させない**。
+
 ### ベース URL
 
 | ドメイン | URL |
@@ -318,12 +323,19 @@ https://stats47.jp/ranking/taxable-income-per-capita
 | **X (瞬発)** | `find-quote-rt` / `react-to-news` | (キャプション) | `publish-x` → `mark-sns-posted` | `update-sns-metrics` |
 | **IG** | `generate-instagram-schedule` (+ `post-ig-6angles`) | `render-sns-stills` | `post-instagram` (GHA cron) → `mark-sns-posted` | `update-sns-metrics` |
 | **YouTube** | `bar-chart-race` (企画・生成・render) | (同) | `post-youtube` (月 1・ガード 3 点) → `mark-sns-posted`。量産実験中の予約仕込みは `youtube-upload-queue.json` + `youtube-upload-queue.yml` (日次 cron 5本/日、§1 例外注記) | `update-sns-metrics` |
+| **buzz-map (X/IG 横断)** | curated catalog (`build-buzz-map-catalog.ts --next`・正典 `buzz-map-standards.md` §4-5) | `prepare-buzz-map-batch.ts` (dry-run 既定・landing contract+isPostable ゲート→R2→draft) / gallery `/buzz-map` | 既存 guarded flow (`publish-x` / IG cron — draft からの昇格は人間判断) | `buzz-map-attribution.mjs` (campaign 別) → score 還流 |
 
+- **buzz-map の deep-click 計測は要ユーザー操作 (GA4 custom dimension)**: `buzz-map-attribution.mjs` は
+  session KPI (landing session / engagement / SNS CTR は attribution=direct のみ) を campaign 別に取得するが、
+  **CTA 深掘り (cta_click の `content_id`/`target_type`) は GA4 管理画面でカスタムディメンション (イベントスコープ) を
+  登録するまで取れない** (affiliate §6 と同手順)。未登録の間は session KPI のみで degrade (異常終了しない)。
 - **X 量産のライフサイクル**: `/post-x-batch` が posts.json に `status=draft` (`template`/`scheduled_at` 付き) で
   N 本積む → ローカルで `publish-x --from-queue` が `check-x-post-budget.cjs` ガードを通して予約 → `status=scheduled` →
   投稿時刻経過で `mark-sns-posted` が `posted` へ昇格。**template を必ず記録** (勝ちパターン分析の前提)。
 - **Remotion レンダ入口の正典**: 静止画/動画 = `render-sns-stills`、BCR = `bar-chart-race`、
-  `preview-remotion` はプレビュー専用 (レンダしない)
+  日本地図×統計のバズカード = `buzz-map` (型A〜E: 二値/時系列/点/線ネットワーク/合成。型一覧・仕様の正典は
+  `.claude/rules/buzz-map-standards.md` §1。IG 配信は `instagram/stills/slide-1-cover-1080x1350.png`+`reel.mp4`+
+  `caption.txt` を R2 push → posts.json draft `template=buzzmap-<型>`)、`preview-remotion` はプレビュー専用 (レンダしない)
 - 週次運用は `/sns-weekly-plan` が上記を 1 コマンドで束ねる
 - 競合の定点観測は `/competitor-scan` (月次)。示唆は §2-10 の承認ゲート経由でカタログへ反映
 
@@ -333,12 +345,13 @@ https://stats47.jp/ranking/taxable-income-per-capita
 
 素材の目視確認 (動画再生)・caption 微調整・投稿/予約・メトリクス閲覧は
 **ローカル統合メディアコンソール** (`npm run gallery` → http://127.0.0.1:4747/) で行える
-(skill `.claude/skills/sns/sns-gallery/SKILL.md`、server `.claude/scripts/gallery/server.mjs`)。
-`npm run sns:gallery` は後方互換 alias。SNS 投稿は `/sns` セクション、OGP/リンクカード/note カバー・
+(skill `.claude/skills/sns/sns-gallery/SKILL.md`、実装 `apps/gallery/` — 独立 Next.js App Router アプリ、
+localhost 専用・127.0.0.1 bind 固定。2026-07-16 に旧 node:http 実装から完全移管、`sns:gallery` alias 廃止)。
+SNS 投稿は `/sns` セクション、OGP/リンクカード/note カバー・
 記事内画像/動画 master は `/assets`、ブログ SVG カタログは `/svg`、**プロジェクト現況 (メトリクス・進捗キュー・
 改善バックログ TODO・STP 戦略) は `/dashboard`** で横断閲覧する
 (画像資産の列挙 collector は CI 静的ギャラリー `build-image-gallery.mjs` と `.claude/scripts/lib/gallery-collectors.mjs` を共用。
-現況 collector は `.claude/scripts/gallery/dashboard-data.mjs`、state/md を読み取り専用ミラーでライブ読み)。
+現況 collector は `apps/gallery/lib/server/dashboard.ts`、state/md を読み取り専用ミラーでライブ読み)。
 
 - **ギャラリー経由の投稿も台帳規約は同一**: posts.json への書込は `sns-posts-store.cjs` 経由のみ
   (server も同経路)。§1 の頻度リミットは残枠バッジ + ガードで enforce される
@@ -371,6 +384,7 @@ https://stats47.jp/ranking/taxable-income-per-capita
 - **X 頻度ガード**: `.claude/scripts/sns/check-x-post-budget.cjs`
 - **X 勝ちパターン**: `.claude/scripts/sns/analyze-x-winning-patterns.mjs` → `.claude/state/sns/x-winning-patterns.json`
 - **X 画像最短経路**: `.claude/scripts/sns/quick-still.ts` / SVG→PNG `.claude/scripts/lib/svg-to-png.cjs`
+- **バズ地図カード (日本地図×統計)**: 規約 `.claude/rules/buzz-map-standards.md` / スキル `.claude/skills/sns/buzz-map/SKILL.md` / Remotion feature `apps/remotion/src/features/buzz-map/` (owner: sns-renderer、co: X配信=x-strategist / IG配信=instagram-strategist / 地理データ=gis-curator)
 - メトリクス時系列: `.claude/skills/analytics/sns-metrics-improvement/`
 - agent 責務: `.claude/agents/README.md` (Tier 4 SNS) / X オーナー `.claude/agents/x-strategist.md`
 - 収益化での SNS 位置づけ: `docs/02_実装計画/01_収益化マスタープラン.md` §6

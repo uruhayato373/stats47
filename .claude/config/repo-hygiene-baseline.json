@@ -26,7 +26,22 @@
     {
       "code": "LARGE_FILE",
       "file": ".claude/state/metrics/gsc/resubmit-history.json",
-      "message": "1885574 bytes exceeds 1048576 bytes"
+      "message": "2065645 bytes exceeds 1048576 bytes"
+    },
+    {
+      "code": "LARGE_FILE",
+      "file": "apps/remotion/public/buzz-map/fonts/noto-sans-jp-japanese-400-normal.woff2",
+      "message": "1131584 bytes exceeds 1048576 bytes"
+    },
+    {
+      "code": "LARGE_FILE",
+      "file": "apps/remotion/public/buzz-map/fonts/noto-sans-jp-japanese-700-normal.woff2",
+      "message": "1157920 bytes exceeds 1048576 bytes"
+    },
+    {
+      "code": "LARGE_FILE",
+      "file": "apps/remotion/public/buzz-map/municipalities.topojson",
+      "message": "1572705 bytes exceeds 1048576 bytes"
     },
     {
       "code": "LARGE_FILE",
@@ -181,7 +196,7 @@
     {
       "code": "LARGE_FILE",
       "file": "package-lock.json",
-      "message": "1101805 bytes exceeds 1048576 bytes"
+      "message": "1104211 bytes exceeds 1048576 bytes"
     },
     {
       "code": "LARGE_FILE",

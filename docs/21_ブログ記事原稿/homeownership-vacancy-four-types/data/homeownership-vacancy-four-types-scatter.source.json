@@ -1,0 +1,7 @@
+{
+  "kind": "derived",
+  "derived": "R2 app/stats/owner-occupied-housing-ratio/values.json (持ち家率) と app/stats/vacant-housing-ratio/values.json (空き家率) の2023年住宅・土地統計調査値を都道府県で結合。ピアソン相関 r=0.458。",
+  "source": "r2:app/stats/{owner-occupied-housing-ratio,vacant-housing-ratio}/values.json",
+  "fetchedAt": "2026-07-16T14:09:45.015Z",
+  "generatedBy": "manual /tmp aggregation (P1-09)"
+}

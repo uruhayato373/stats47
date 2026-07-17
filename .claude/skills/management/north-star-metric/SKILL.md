@@ -73,7 +73,7 @@ stats47 はコンテンツメディアとして主に **Attention ゲーム** �
 - SNS 指標（時系列）: `.claude/skills/analytics/sns-metrics-improvement/snapshots/YYYY-MM-DD/metrics.csv`（`sns-metrics-store.cjs` 経由）
 ```
 
-既存の週次計画（`ls -t docs/03_週次運用/週次計画/*.md | head -5` を Read）から追跡中の KPI を確認する。
+現在の週次計画（`docs/todo/current-week.md`）から追跡中の KPI を確認する。
 
 ### Step 3: NSM 候補の検討
 

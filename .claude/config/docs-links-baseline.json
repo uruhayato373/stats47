@@ -55,10 +55,6 @@
       "referrer": ".claude/state/blog/seo-strategy.json"
     },
     {
-      "ref": "docs/02_実装計画/15_ブログSEO拡充戦略.md",
-      "referrer": "docs/03_週次運用/月次計画/2026-07.md"
-    },
-    {
       "ref": "docs/02_実装計画/17_家計調査論点カタログ.md",
       "referrer": ".claude/skills/blog/draft-from-trend/reference/kakei-topic-catalog.md"
     },
@@ -113,14 +109,6 @@
     {
       "ref": "docs/03_レビュー/critical/north-star-metric.md",
       "referrer": ".claude/skills/management/nsm-experiment/reference/weekly-snapshots/2026-W16.json"
-    },
-    {
-      "ref": "docs/03_週次運用/blog-brushup-plan.md",
-      "referrer": ".claude/scripts/blog/generate-brushup-plan.mjs"
-    },
-    {
-      "ref": "docs/03_週次運用/TODOインボックス.md",
-      "referrer": ".claude/memory/project_docs_reorg_todo_handoffs.md"
     },
     {
       "ref": "docs/04_レビュー/2026-05-16-critical-review-ga4-bot-pollution.md",

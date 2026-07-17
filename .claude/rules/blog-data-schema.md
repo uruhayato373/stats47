@@ -223,8 +223,8 @@ YYYY-MM-DD-<method>[-<batch>]
 | Docs | 内容 | 更新トリガ |
 |---|---|---|
 | `docs/todo/01_改善バックログ.md` | wave section の真実源 (status / effect / 判定基準) | wave deploy 時 + effect 計測時 |
-| `docs/03_週次運用/週次計画/YYYY-Www.md` | 週次 TODO | 週次 (月曜) |
-| `docs/03_週次運用/週次レビュー/YYYY-Www.md` | 週次振り返り | 週次 (日曜) |
+| `docs/todo/current-week.md` | 現在の週次 TODO | 週次 (月曜・上書き) |
+| `.claude/skills/management/weekly-review/reference/reviews/YYYY-Www.md` | agent用週次振り返り | 週次 (日曜) |
 | `docs/handoffs/YYYY-MM-DD-<x>.md` | 大規模 session 完了時のハンドオフ (フラット。種別絞り込みは frontmatter `type:`) | session 完了時 |
 
 ### Memory (auto memory)

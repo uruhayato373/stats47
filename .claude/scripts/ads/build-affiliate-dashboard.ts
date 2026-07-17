@@ -6,17 +6,15 @@
  * 本番アプリには触れない。ブラウザで開けばバナー画像プレビュー付きで在庫を確認・絞り込みできる。
  *
  * 実行:
- *   npx tsx .claude/scripts/ads/build-affiliate-dashboard.ts            # → docs/40_アフィリエイト管理/affiliate-dashboard.html
+ *   npx tsx .claude/scripts/ads/build-affiliate-dashboard.ts            # → /tmp/stats47-affiliate-dashboard.html
  *   npx tsx .claude/scripts/ads/build-affiliate-dashboard.ts /tmp/x.html
+ *
+ * 生成 HTML は派生物 (git 管理しない・commit-back 廃止 2026-07-15)。都度この script で再生成する。
  */
 import { mkdirSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
-import { fileURLToPath } from "node:url";
 
 import { AFFILIATE_ADS } from "../../../apps/web/scripts/affiliate-ads-data";
-
-const __dirname = dirname(fileURLToPath(import.meta.url));
-const PROJECT_ROOT = resolve(__dirname, "../../..");
 
 // SSOT: packages/data-configs/src/types.ts の CATEGORY_KEYS (17 軸)
 const CATEGORY_KEYS = [
@@ -38,7 +36,7 @@ function main(): void {
   const outArg = process.argv[2];
   const outPath = outArg
     ? resolve(process.cwd(), outArg)
-    : resolve(PROJECT_ROOT, "docs/40_アフィリエイト管理/affiliate-dashboard.html");
+    : "/tmp/stats47-affiliate-dashboard.html";
 
   const ads = [...AFFILIATE_ADS].sort((a, b) => {
     const ca = a.categoryKey ?? "";

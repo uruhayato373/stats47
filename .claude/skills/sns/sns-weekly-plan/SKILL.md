@@ -78,7 +78,7 @@ node .claude/scripts/sns/promote-scheduled-x.cjs --apply                        
 ## 完了報告
 
 - 今週予約した投稿数 (チャネル別) / 先週比の要点 / 来週への持ち越し
-- 週次計画 `docs/03_週次運用/週次計画/YYYY-Www.md` の SNS 項に反映 (該当があれば)
+- 現在計画 `docs/todo/current-week.md` の SNS 項に反映 (該当があれば)
 
 ## やらないこと (意図的)
 

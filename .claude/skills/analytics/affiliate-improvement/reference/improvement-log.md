@@ -54,6 +54,12 @@ agent 用詳細ログ。施策一覧 (簡易表) は `docs/todo/01_改善バッ�
 - **未確定 / 仮説**:
   - **[仮説]** ranking で impression が発生し始める。ただし categoryKey と登録 banner の一致率次第 (AFF-01 でゼロ 8 軸が確認済)。
   - **[次アクション]** GA4 管理画面でカスタムディメンション `affiliate_category` / `link_position` を登録 → `affiliate-ga4-weekly.yml` dispatch → `hasCustomDimensions: true` で内訳確認。
+- **設計の要点 (旧 docs/40_アフィリエイト管理 の AFF-03 設計文書を 2026-07-15 に統合・全文は git 履歴)**:
+  - 案 A (採用): `AffiliateAdSlot` の解決優先順位を banner → text → AdSense に変更 (1 ファイルに閉じる外科的変更)。
+    案 B (枠新設で imp 両取り) は在庫が薄いうちは同一案件の重複表示になるため不採用。
+  - SSG 安全性: 既存 async RSC パターンの踏襲で `cookies()`/`headers()` を増やさない → force-dynamic 化なし。
+    **受け入れ条件 = `next build` で `/ranking/[rankingKey]` が Static 区分を維持** (`.claude/rules/nextjs-ssg-preservation.md`)。
+  - 本番検証: `curl -s -A "Googlebot" "https://stats47.jp/ranking/<banner在庫のあるkey>" | grep -c "affiliate\|a8.net"`
 
 ---
 

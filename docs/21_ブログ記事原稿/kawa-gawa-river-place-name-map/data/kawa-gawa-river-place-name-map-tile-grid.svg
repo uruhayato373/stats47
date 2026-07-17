@@ -1,0 +1,420 @@
+<!-- data-source: kawa-gawa-river-place-name-map-tile-grid.json | generated: 2026-07-16T22:07:25.335Z -->
+<svg width="600" height="700" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 700" role="img" aria-label="県別・地名の「河」比率">
+  <title>県別・地名の「河」比率</title>
+  <desc>「川」+「河」地名のうち「河」が占める割合</desc>
+  <style>
+    .svg-bg{fill:#ffffff}
+    .svg-plot{fill:#f9fafb}
+    .svg-plot-border{stroke:#d1d5db}
+    .svg-title{fill:#1f2937}
+    .svg-axis{fill:#374151}
+    .svg-tick{fill:#6b7280}
+    .svg-grid{stroke:#e5e7eb}
+    @media (prefers-color-scheme:dark){
+    .svg-bg{fill:#0f172a}
+    .svg-plot{fill:#1e293b}
+    .svg-plot-border{stroke:#334155}
+    .svg-title{fill:#e2e8f0}
+    .svg-axis{fill:#cbd5e1}
+    .svg-tick{fill:#94a3b8}
+    .svg-grid{stroke:#334155}
+    }
+  </style>
+  <rect width="600" height="700" class="svg-plot"/>
+  <text x="28" y="58" font-size="22" font-weight="bold" class="svg-title">県別・地名の「河」比率</text>
+  <text x="28" y="92" font-size="15" class="svg-tick">「川」+「河」地名のうち「河」が占める割合</text>
+  <g aria-label="群馬 10.3%">
+    <title>群馬：10.3%</title>
+    <rect x="453" y="312.5" width="36" height="36" rx="3" fill="rgb(254, 228, 202)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="471" y="330.0" font-size="9" font-weight="700">群馬</tspan>
+      <tspan x="471" y="339.0" font-size="7.5" font-weight="600">10.3%</tspan>
+    </text>
+  </g>
+  <g aria-label="埼玉 14.2%">
+    <title>埼玉：14.2%</title>
+    <rect x="491" y="350.5" width="36" height="36" rx="3" fill="rgb(254, 218, 183)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="509" y="368.0" font-size="9" font-weight="700">埼玉</tspan>
+      <tspan x="509" y="377.0" font-size="7.5" font-weight="600">14.2%</tspan>
+    </text>
+  </g>
+  <g aria-label="千葉 4.8%">
+    <title>千葉：4.8%</title>
+    <rect x="529" y="350.5" width="36" height="74" rx="3" fill="rgb(255, 240, 225)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="547" y="387.0" font-size="9" font-weight="700">千葉</tspan>
+      <tspan x="547" y="396.0" font-size="7.5" font-weight="600">4.8%</tspan>
+    </text>
+  </g>
+  <g aria-label="東京 11.8%">
+    <title>東京：11.8%</title>
+    <rect x="491" y="388.5" width="36" height="36" rx="3" fill="rgb(254, 225, 195)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="509" y="406.0" font-size="9" font-weight="700">東京</tspan>
+      <tspan x="509" y="415.0" font-size="7.5" font-weight="600">11.8%</tspan>
+    </text>
+  </g>
+  <g aria-label="神奈川 20.9%">
+    <title>神奈川：20.9%</title>
+    <rect x="491" y="427" width="36" height="36" rx="3" fill="rgb(253, 195, 142)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.3" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="509" y="444.5" font-size="7" font-weight="700">神奈川</tspan>
+      <tspan x="509" y="452.0" font-size="6.0" font-weight="600">20.9%</tspan>
+    </text>
+  </g>
+  <g aria-label="新潟 6.6%">
+    <title>新潟：6.6%</title>
+    <rect x="415" y="274" width="74" height="36" rx="3" fill="rgb(254, 236, 218)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="452" y="291.5" font-size="9" font-weight="700">新潟</tspan>
+      <tspan x="452" y="300.5" font-size="7.5" font-weight="600">6.6%</tspan>
+    </text>
+  </g>
+  <g aria-label="富山 8.2%">
+    <title>富山：8.2%</title>
+    <rect x="376" y="274" width="36" height="36" rx="3" fill="rgb(254, 233, 212)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="394" y="291.5" font-size="9" font-weight="700">富山</tspan>
+      <tspan x="394" y="300.5" font-size="7.5" font-weight="600">8.2%</tspan>
+    </text>
+  </g>
+  <g aria-label="石川 32.2%">
+    <title>石川：32.2%</title>
+    <rect x="338" y="274" width="36" height="36" rx="3" fill="rgb(252, 148, 71)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="356" y="291.5" font-size="9" font-weight="700">石川</tspan>
+      <tspan x="356" y="300.5" font-size="7.5" font-weight="600">32.2%</tspan>
+    </text>
+  </g>
+  <g aria-label="福井 42.3%">
+    <title>福井：42.3%</title>
+    <rect x="338" y="312.5" width="36" height="36" rx="3" fill="rgb(238, 104, 22)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="356" y="330.0" font-size="9" font-weight="700">福井</tspan>
+      <tspan x="356" y="339.0" font-size="7.5" font-weight="600">42.3%</tspan>
+    </text>
+  </g>
+  <g aria-label="山梨 16.4%">
+    <title>山梨：16.4%</title>
+    <rect x="453" y="350.5" width="36" height="36" rx="3" fill="rgb(253, 212, 170)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="471" y="368.0" font-size="9" font-weight="700">山梨</tspan>
+      <tspan x="471" y="377.0" font-size="7.5" font-weight="600">16.4%</tspan>
+    </text>
+  </g>
+  <g aria-label="長野 13.6%">
+    <title>長野：13.6%</title>
+    <rect x="415" y="312.5" width="36" height="74" rx="3" fill="rgb(254, 220, 186)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="433" y="349.0" font-size="9" font-weight="700">長野</tspan>
+      <tspan x="433" y="358.0" font-size="7.5" font-weight="600">13.6%</tspan>
+    </text>
+  </g>
+  <g aria-label="岐阜 20.7%">
+    <title>岐阜：20.7%</title>
+    <rect x="376" y="312.5" width="36" height="74" rx="3" fill="rgb(253, 196, 143)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="394" y="349.0" font-size="9" font-weight="700">岐阜</tspan>
+      <tspan x="394" y="358.0" font-size="7.5" font-weight="600">20.7%</tspan>
+    </text>
+  </g>
+  <g aria-label="静岡 16.2%">
+    <title>静岡：16.2%</title>
+    <rect x="415" y="388.5" width="74" height="36" rx="3" fill="rgb(253, 212, 171)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="452" y="406.0" font-size="9" font-weight="700">静岡</tspan>
+      <tspan x="452" y="415.0" font-size="7.5" font-weight="600">16.2%</tspan>
+    </text>
+  </g>
+  <g aria-label="愛知 17.1%">
+    <title>愛知：17.1%</title>
+    <rect x="376" y="388.5" width="36" height="36" rx="3" fill="rgb(253, 209, 166)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="394" y="406.0" font-size="9" font-weight="700">愛知</tspan>
+      <tspan x="394" y="415.0" font-size="7.5" font-weight="600">17.1%</tspan>
+    </text>
+  </g>
+  <g aria-label="三重 23.7%">
+    <title>三重：23.7%</title>
+    <rect x="338" y="388.5" width="36" height="74" rx="3" fill="rgb(253, 184, 123)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="356" y="425.0" font-size="9" font-weight="700">三重</tspan>
+      <tspan x="356" y="434.0" font-size="7.5" font-weight="600">23.7%</tspan>
+    </text>
+  </g>
+  <g aria-label="滋賀 9.5%">
+    <title>滋賀：9.5%</title>
+    <rect x="338" y="350.5" width="36" height="36" rx="3" fill="rgb(254, 230, 206)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="356" y="368.0" font-size="9" font-weight="700">滋賀</tspan>
+      <tspan x="356" y="377.0" font-size="7.5" font-weight="600">9.5%</tspan>
+    </text>
+  </g>
+  <g aria-label="京都 25.6%">
+    <title>京都：25.6%</title>
+    <rect x="262" y="350.5" width="74" height="36" rx="3" fill="rgb(253, 176, 111)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="299" y="368.0" font-size="9" font-weight="700">京都</tspan>
+      <tspan x="299" y="377.0" font-size="7.5" font-weight="600">25.6%</tspan>
+    </text>
+  </g>
+  <g aria-label="大阪 17.6%">
+    <title>大阪：17.6%</title>
+    <rect x="262" y="388.5" width="36" height="36" rx="3" fill="rgb(253, 208, 163)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="280" y="406.0" font-size="9" font-weight="700">大阪</tspan>
+      <tspan x="280" y="415.0" font-size="7.5" font-weight="600">17.6%</tspan>
+    </text>
+  </g>
+  <g aria-label="兵庫 22.4%">
+    <title>兵庫：22.4%</title>
+    <rect x="224" y="350.5" width="36" height="74" rx="3" fill="rgb(253, 189, 132)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="242" y="387.0" font-size="9" font-weight="700">兵庫</tspan>
+      <tspan x="242" y="396.0" font-size="7.5" font-weight="600">22.4%</tspan>
+    </text>
+  </g>
+  <g aria-label="奈良 13.9%">
+    <title>奈良：13.9%</title>
+    <rect x="300" y="388.5" width="36" height="36" rx="3" fill="rgb(254, 219, 184)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="318" y="406.0" font-size="9" font-weight="700">奈良</tspan>
+      <tspan x="318" y="415.0" font-size="7.5" font-weight="600">13.9%</tspan>
+    </text>
+  </g>
+  <g aria-label="和歌山 10.4%">
+    <title>和歌山：10.4%</title>
+    <rect x="262" y="427" width="74" height="36" rx="3" fill="rgb(254, 228, 202)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.3" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="299" y="444.5" font-size="7" font-weight="700">和歌山</tspan>
+      <tspan x="299" y="452.0" font-size="6.0" font-weight="600">10.4%</tspan>
+    </text>
+  </g>
+  <g aria-label="鳥取 65.9%">
+    <title>鳥取：65.9%</title>
+    <rect x="185" y="350.5" width="36" height="36" rx="3" fill="rgb(127, 39, 4)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="203" y="368.0" font-size="9" font-weight="700">鳥取</tspan>
+      <tspan x="203" y="377.0" font-size="7.5" font-weight="600">65.9%</tspan>
+    </text>
+  </g>
+  <g aria-label="島根 20%">
+    <title>島根：20%</title>
+    <rect x="147" y="350.5" width="36" height="36" rx="3" fill="rgb(253, 199, 148)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="165" y="368.0" font-size="9" font-weight="700">島根</tspan>
+      <tspan x="165" y="377.0" font-size="7.5" font-weight="600">20%</tspan>
+    </text>
+  </g>
+  <g aria-label="岡山 27.7%">
+    <title>岡山：27.7%</title>
+    <rect x="185" y="388.5" width="36" height="36" rx="3" fill="rgb(253, 167, 98)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="203" y="406.0" font-size="9" font-weight="700">岡山</tspan>
+      <tspan x="203" y="415.0" font-size="7.5" font-weight="600">27.7%</tspan>
+    </text>
+  </g>
+  <g aria-label="広島 24.7%">
+    <title>広島：24.7%</title>
+    <rect x="147" y="388.5" width="36" height="36" rx="3" fill="rgb(253, 180, 117)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="165" y="406.0" font-size="9" font-weight="700">広島</tspan>
+      <tspan x="165" y="415.0" font-size="7.5" font-weight="600">24.7%</tspan>
+    </text>
+  </g>
+  <g aria-label="山口 38.7%">
+    <title>山口：38.7%</title>
+    <rect x="109" y="350.5" width="36" height="74" rx="3" fill="rgb(245, 120, 37)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="127" y="387.0" font-size="9" font-weight="700">山口</tspan>
+      <tspan x="127" y="396.0" font-size="7.5" font-weight="600">38.7%</tspan>
+    </text>
+  </g>
+  <g aria-label="徳島 4.2%">
+    <title>徳島：4.2%</title>
+    <rect x="185" y="503" width="36" height="36" rx="3" fill="rgb(255, 241, 227)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="203" y="520.5" font-size="9" font-weight="700">徳島</tspan>
+      <tspan x="203" y="529.5" font-size="7.5" font-weight="600">4.2%</tspan>
+    </text>
+  </g>
+  <g aria-label="香川 4.6%">
+    <title>香川：4.6%</title>
+    <rect x="185" y="465" width="36" height="36" rx="3" fill="rgb(255, 240, 226)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="203" y="482.5" font-size="9" font-weight="700">香川</tspan>
+      <tspan x="203" y="491.5" font-size="7.5" font-weight="600">4.6%</tspan>
+    </text>
+  </g>
+  <g aria-label="愛媛 17.8%">
+    <title>愛媛：17.8%</title>
+    <rect x="147" y="465" width="36" height="36" rx="3" fill="rgb(253, 207, 162)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="165" y="482.5" font-size="9" font-weight="700">愛媛</tspan>
+      <tspan x="165" y="491.5" font-size="7.5" font-weight="600">17.8%</tspan>
+    </text>
+  </g>
+  <g aria-label="高知 4%">
+    <title>高知：4%</title>
+    <rect x="147" y="503" width="36" height="36" rx="3" fill="rgb(255, 241, 228)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="165" y="520.5" font-size="9" font-weight="700">高知</tspan>
+      <tspan x="165" y="529.5" font-size="7.5" font-weight="600">4%</tspan>
+    </text>
+  </g>
+  <g aria-label="福岡 13.3%">
+    <title>福岡：13.3%</title>
+    <rect x="71" y="427" width="36" height="36" rx="3" fill="rgb(254, 221, 188)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="89" y="444.5" font-size="9" font-weight="700">福岡</tspan>
+      <tspan x="89" y="453.5" font-size="7.5" font-weight="600">13.3%</tspan>
+    </text>
+  </g>
+  <g aria-label="佐賀 5.4%">
+    <title>佐賀：5.4%</title>
+    <rect x="33" y="427" width="36" height="36" rx="3" fill="rgb(255, 239, 223)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="51" y="444.5" font-size="9" font-weight="700">佐賀</tspan>
+      <tspan x="51" y="453.5" font-size="7.5" font-weight="600">5.4%</tspan>
+    </text>
+  </g>
+  <g aria-label="長崎 18.3%">
+    <title>長崎：18.3%</title>
+    <rect x="33" y="465" width="36" height="36" rx="3" fill="rgb(253, 205, 159)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="51" y="482.5" font-size="9" font-weight="700">長崎</tspan>
+      <tspan x="51" y="491.5" font-size="7.5" font-weight="600">18.3%</tspan>
+    </text>
+  </g>
+  <g aria-label="熊本 20.5%">
+    <title>熊本：20.5%</title>
+    <rect x="33" y="503" width="36" height="36" rx="3" fill="rgb(253, 197, 145)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="51" y="520.5" font-size="9" font-weight="700">熊本</tspan>
+      <tspan x="51" y="529.5" font-size="7.5" font-weight="600">20.5%</tspan>
+    </text>
+  </g>
+  <g aria-label="大分 27.7%">
+    <title>大分：27.7%</title>
+    <rect x="71" y="465" width="36" height="36" rx="3" fill="rgb(253, 167, 98)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="89" y="482.5" font-size="9" font-weight="700">大分</tspan>
+      <tspan x="89" y="491.5" font-size="7.5" font-weight="600">27.7%</tspan>
+    </text>
+  </g>
+  <g aria-label="宮崎 15.7%">
+    <title>宮崎：15.7%</title>
+    <rect x="71" y="503" width="36" height="36" rx="3" fill="rgb(253, 214, 174)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="89" y="520.5" font-size="9" font-weight="700">宮崎</tspan>
+      <tspan x="89" y="529.5" font-size="7.5" font-weight="600">15.7%</tspan>
+    </text>
+  </g>
+  <g aria-label="鹿児島 8.7%">
+    <title>鹿児島：8.7%</title>
+    <rect x="33" y="541.5" width="74" height="36" rx="3" fill="rgb(254, 232, 210)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.3" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="70" y="559.0" font-size="7" font-weight="700">鹿児島</tspan>
+      <tspan x="70" y="566.5" font-size="6.0" font-weight="600">8.7%</tspan>
+    </text>
+  </g>
+  <g aria-label="沖縄 3.2%">
+    <title>沖縄：3.2%</title>
+    <rect x="33" y="617.5" width="36" height="36" rx="3" fill="rgb(255, 243, 231)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="51" y="635.0" font-size="9" font-weight="700">沖縄</tspan>
+      <tspan x="51" y="644.0" font-size="7.5" font-weight="600">3.2%</tspan>
+    </text>
+  </g>
+  <g aria-label="北海道 2.1%">
+    <title>北海道：2.1%</title>
+    <rect x="491" y="45" width="74" height="74" rx="3" fill="rgb(255, 245, 235)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="2.0" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="528" y="81.5" font-size="11" font-weight="700">北海道</tspan>
+      <tspan x="528" y="92.5" font-size="9.5" font-weight="600">2.1%</tspan>
+    </text>
+  </g>
+  <g aria-label="青森 3.4%">
+    <title>青森：3.4%</title>
+    <rect x="491" y="159.5" width="74" height="36" rx="3" fill="rgb(255, 243, 230)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="528" y="177.0" font-size="9" font-weight="700">青森</tspan>
+      <tspan x="528" y="186.0" font-size="7.5" font-weight="600">3.4%</tspan>
+    </text>
+  </g>
+  <g aria-label="岩手 3%">
+    <title>岩手：3%</title>
+    <rect x="529" y="197.5" width="36" height="36" rx="3" fill="rgb(255, 243, 232)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="547" y="215.0" font-size="9" font-weight="700">岩手</tspan>
+      <tspan x="547" y="224.0" font-size="7.5" font-weight="600">3%</tspan>
+    </text>
+  </g>
+  <g aria-label="宮城 7.4%">
+    <title>宮城：7.4%</title>
+    <rect x="529" y="236" width="36" height="36" rx="3" fill="rgb(254, 235, 215)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="547" y="253.5" font-size="9" font-weight="700">宮城</tspan>
+      <tspan x="547" y="262.5" font-size="7.5" font-weight="600">7.4%</tspan>
+    </text>
+  </g>
+  <g aria-label="秋田 4.5%">
+    <title>秋田：4.5%</title>
+    <rect x="491" y="197.5" width="36" height="36" rx="3" fill="rgb(255, 240, 226)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="509" y="215.0" font-size="9" font-weight="700">秋田</tspan>
+      <tspan x="509" y="224.0" font-size="7.5" font-weight="600">4.5%</tspan>
+    </text>
+  </g>
+  <g aria-label="山形 12.3%">
+    <title>山形：12.3%</title>
+    <rect x="491" y="236" width="36" height="36" rx="3" fill="rgb(254, 223, 193)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="509" y="253.5" font-size="9" font-weight="700">山形</tspan>
+      <tspan x="509" y="262.5" font-size="7.5" font-weight="600">12.3%</tspan>
+    </text>
+  </g>
+  <g aria-label="福島 12.4%">
+    <title>福島：12.4%</title>
+    <rect x="491" y="274" width="74" height="36" rx="3" fill="rgb(254, 223, 192)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="528" y="291.5" font-size="9" font-weight="700">福島</tspan>
+      <tspan x="528" y="300.5" font-size="7.5" font-weight="600">12.4%</tspan>
+    </text>
+  </g>
+  <g aria-label="茨城 27.6%">
+    <title>茨城：27.6%</title>
+    <rect x="529" y="312.5" width="36" height="36" rx="3" fill="rgb(253, 168, 98)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="547" y="330.0" font-size="9" font-weight="700">茨城</tspan>
+      <tspan x="547" y="339.0" font-size="7.5" font-weight="600">27.6%</tspan>
+    </text>
+  </g>
+  <g aria-label="栃木 14.5%">
+    <title>栃木：14.5%</title>
+    <rect x="491" y="312.5" width="36" height="36" rx="3" fill="rgb(253, 217, 181)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#ffffff" text-anchor="middle" paint-order="stroke" stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round" filter="url(#txt-halo-dark)">
+      <tspan x="509" y="330.0" font-size="9" font-weight="700">栃木</tspan>
+      <tspan x="509" y="339.0" font-size="7.5" font-weight="600">14.5%</tspan>
+    </text>
+  </g>
+  <defs>
+    <linearGradient id="choropleth-lg" x1="0" x2="1">
+      <stop offset="0%"   stop-color="rgb(255, 245, 235)"/>
+      <stop offset="25%"   stop-color="rgb(253, 206, 160)"/>
+      <stop offset="50%"   stop-color="rgb(251, 141, 61)"/>
+      <stop offset="75%"   stop-color="rgb(213, 75, 4)"/>
+      <stop offset="100%"   stop-color="rgb(127, 39, 4)"/>
+    </linearGradient>
+    <filter id="txt-halo-dark" x="-40%" y="-40%" width="180%" height="180%">
+      <feDropShadow dx="0" dy="0" stdDeviation="1.3" flood-color="#000000" flood-opacity="0.7"/>
+    </filter>
+  </defs>
+  <text x="58" y="129" font-size="10" class="svg-tick" text-anchor="end">低い</text>
+  <rect x="64" y="120" width="150" height="10" rx="2" fill="url(#choropleth-lg)"/>
+  <text x="220" y="129" font-size="10" class="svg-tick">高い</text>
+  <text x="64" y="145" font-size="9" class="svg-tick">2.1%</text>
+  <text x="139" y="145" font-size="9" class="svg-tick" text-anchor="middle">34%</text>
+  <text x="214" y="145" font-size="9" class="svg-tick" text-anchor="end">65.9%</text>
+</svg>

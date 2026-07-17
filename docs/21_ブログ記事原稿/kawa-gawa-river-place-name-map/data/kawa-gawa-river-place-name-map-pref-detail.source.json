@@ -1,0 +1,8 @@
+{
+  "kind": "derived",
+  "derived": "R2 gis/gsi-pni/points.json (国土地理院 電子国土基本図 地名情報の居住地名) を県コードで集計。文字列マッチで『河』『河原』『河内』の包含関係を判定し、県別の絶対件数と内訳比率を算出。",
+  "source": "r2:gis/gsi-pni/points.json",
+  "license": "国土地理院 PDL1.0 (出典明示で商用可)",
+  "fetchedAt": "2026-07-16T22:06:39.711Z",
+  "generatedBy": "manual (P1-23 critic-fix)"
+}

@@ -72,8 +72,8 @@ primary_agent: strategy-advisor
 
 | スキル | 対象 | 周期 | 出力先 |
 |---|---|---|---|
-| `/weekly-review` | プロジェクト進捗 | 毎週 | `docs/03_週次運用/週次レビュー/YYYY-Www.md` |
-| `/weekly-plan` | 来週の計画 | 毎週 | `docs/03_週次運用/週次計画/YYYY-Www.md` |
+| `/weekly-review` | プロジェクト進捗 | 毎週 | `.claude/skills/management/weekly-review/reference/reviews/YYYY-Www.md` |
+| `/weekly-plan` | 来週の計画 | 毎週 | `docs/todo/current-week.md` |
 | `/pre-mortem` | プロジェクトリスク + 対策 | 四半期 | `docs/04_レビュー/YYYY-MM-DD-pre-mortem-{topic}.md` |
 | `/seo-audit` | SEO 総合監査 | 月次 | `docs/04_レビュー/YYYY-MM-DD-seo-audit.md` |
 

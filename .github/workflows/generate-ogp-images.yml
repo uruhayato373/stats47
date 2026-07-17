@@ -21,6 +21,7 @@ on:
           - areas
           - ranking-cards
           - note-covers
+          - pref-silhouette
       limit:
         description: "件数上限 (空=全件)"
         required: false
@@ -81,6 +82,7 @@ jobs:
             ranking|ranking-cards) PREFIX="app/ranking" ;;
             areas)                 PREFIX="app/areas" ;;
             note-covers)           PREFIX="note" ;;
+            pref-silhouette)       PREFIX="sns/pref-silhouette" ;;
           esac
           echo "Pushing prefix: $PREFIX"
           npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix "$PREFIX"

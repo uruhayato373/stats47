@@ -1,0 +1,41 @@
+{
+  "spec": {
+    "id": "sample-landlocked",
+    "type": "A",
+    "level": "pref",
+    "title": "海に面していない都道府県",
+    "subtitle": "「内陸県」は全国に8つ。あなたの県は海とつながっているか。",
+    "source": [
+      "出典: 国土数値情報（行政区域データ・国土交通省）を加工して作成",
+      "stats47.jp"
+    ],
+    "accent": "social",
+    "legend": {
+      "title": "区分（都道府県数）",
+      "rows": [
+        {
+          "key": "inland",
+          "label": "内陸県（海なし）",
+          "fill": "accent"
+        },
+        {
+          "key": "coastal",
+          "label": "臨海県",
+          "fill": "land"
+        }
+      ]
+    },
+    "data": {
+      "values": {
+        "10": "inland",
+        "11": "inland",
+        "19": "inland",
+        "20": "inland",
+        "21": "inland",
+        "25": "inland",
+        "29": "inland",
+        "09": "inland"
+      }
+    }
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "title": "人口の多い町・村と、少ない市",
+  "subtitle": "2020年・上位=大きな町村／下位=小さな市",
+  "unit": "人",
+  "palette": "green",
+  "rightPalette": "orange",
+  "highLabel": "人口の多い町・村",
+  "lowLabel": "人口の少ない市",
+  "derived": "R2 app/stats/total-population/cities.json (2020年国勢調査人口)。市区町村(2トークン)を市・町・村に分類し、人口の多い町村と少ない市を比較。政令市行政区は除外。",
+  "source": "e-Stat 国勢調査",
+  "data": [
+    {
+      "pref": "広島・府中町",
+      "areaName": "広島・府中町",
+      "value": 51155,
+      "rank": 1
+    },
+    {
+      "pref": "愛知・東浦町",
+      "areaName": "愛知・東浦町",
+      "value": 49596,
+      "rank": 2
+    },
+    {
+      "pref": "茨城・阿見町",
+      "areaName": "茨城・阿見町",
+      "value": 48553,
+      "rank": 3
+    },
+    {
+      "pref": "神奈川・寒川町",
+      "areaName": "神奈川・寒川町",
+      "value": 48348,
+      "rank": 4
+    },
+    {
+      "pref": "福岡・粕屋町",
+      "areaName": "福岡・粕屋町",
+      "value": 48190,
+      "rank": 5
+    },
+    {
+      "pref": "高知・室戸市",
+      "areaName": "高知・室戸市",
+      "value": 11742,
+      "rank": 6
+    },
+    {
+      "pref": "北海道・赤平市",
+      "areaName": "北海道・赤平市",
+      "value": 9698,
+      "rank": 7
+    },
+    {
+      "pref": "北海道・三笠市",
+      "areaName": "北海道・三笠市",
+      "value": 8040,
+      "rank": 8
+    },
+    {
+      "pref": "北海道・夕張市",
+      "areaName": "北海道・夕張市",
+      "value": 7334,
+      "rank": 9
+    },
+    {
+      "pref": "北海道・歌志内市",
+      "areaName": "北海道・歌志内市",
+      "value": 2989,
+      "rank": 10
+    }
+  ]
+}

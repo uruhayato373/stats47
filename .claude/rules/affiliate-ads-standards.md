@@ -54,11 +54,12 @@ apps/web/scripts/affiliate-ads-data.ts (AFFILIATE_ADS = git TS SSOT・広告は 
 | `energy` (通信・エネルギー) | ahamo / SoftBank Air ✅ | ✅ | エネルギー・通信 ranking |
 | `population` (人口・子育て) | 汎用バナー ✅ | ✅ | 人口・世帯・子育て ranking・`/themes/population-dynamics` |
 | `furusato` (ふるさと納税) | イオン九州 ✅ ・ **さとふる/楽天ふるさと納税 要提携** | 一部✅ | `/areas`・財政・地域 ranking・`/themes/local-finance` |
-| `education` (通信教育) ★在庫ゼロ | **要提携** (スタディサプリ/通信講座/AI開発研修等) | ❌ | 教育 ranking・`/themes/education-culture` |
-| `mobility` (自動車・交通) ★在庫ゼロ | **要提携** (自動車保険一括見積・車査定=高単価) | ❌ | 交通事故・交通安全 ranking・`/themes/{roads,railway,ports,safety}` |
+| `education` (通信教育・資格) | LEC東京リーガルマインド / AI Agent Camp ✅ ・ スタディサプリ等 要提携 | ✅ | 教育 ranking・`/themes/education-culture` |
+| `mobility` (自動車・交通) | 保険スクエアbang! (自動車保険一括見積) / ユーカーパック (車査定) ✅ | ✅ | 交通事故・交通安全 ranking・`/themes/{roads,railway,ports,safety}` |
 
-- **`education` / `mobility` は在庫ゼロ** = 意図一致広告が出ない機会損失。`/register-affiliate-banner propose` の最優先対象。
 - 提携状況 (提携済/申請中/要提携) の真実源は本表。`/register-affiliate-banner status` はこれを読む。
+- **在庫数・ゼロ/手薄軸は本表に書かない** (変動値)。必ず `.claude/state/ads/inventory-latest.json` の
+  `coverage.gapVerticals` / `thinVerticals` (または集約 state `affiliate-operations-latest.json`) から読む。
 
 ## 3. フォーマット & サイズ規約 (canonical 4 種・lint enforced)
 
@@ -129,7 +130,7 @@ apps/web/scripts/affiliate-ads-data.ts (AFFILIATE_ADS = git TS SSOT・広告は 
 
 ## 7. 登録フロー (`/register-affiliate-banner` — 対話式ループ)
 
-`affiliate-manager` がユーザーと 1 件ずつ対話しながら在庫を増やす。mode: `propose`(既定) / `register` / `status`。
+`affiliate-manager` がユーザーと 1 件ずつ対話しながら在庫を増やす。mode: `propose`(既定) / `register` / `direct` / `status`。
 
 - **`propose`**: audit (`audit-affiliate-inventory.ts`) の vertical カバレッジ + GA4/GSC トラフィックを突合し、
   「在庫ゼロ/手薄 × 高トラフィック」の vertical を特定 → §2 表と照合し **次に提携すべき 1 プログラム**を根拠
@@ -140,30 +141,40 @@ apps/web/scripts/affiliate-ads-data.ts (AFFILIATE_ADS = git TS SSOT・広告は 
   (canonical 以外は登録拒否・正サイズ素材の再取得を案内) → **vertical 判定** (§2 表 + ユーザー確認)
   → `AFFILIATE_ADS[]` に **1 エントリ**追記 (categoryKey 複製しない) → tsc + audit + export dry-run
   → commit 準備 (push はユーザー判断・develop push で R2 反映) → 次の `propose` へループ。
-- **`status`**: §2 表の提携状況一覧 (提携済/申請中/要提携)。
+- **`direct`**: 直接属性方式 (記事本文へのピンポイント配置) の台帳登録。**配置と台帳
+  (`apps/web/scripts/affiliate-direct-placements-data.ts`) の追記は必ずセット** — 台帳に無い本文タグは
+  `/audit-affiliate-compliance` が「台帳未登録タグ」として弾く。PR 表記 (景表法 2023-10): blog は
+  記事冒頭の PR 宣言 + リンク直前 `※PR：` の両方、note は `#PR`/`#広告` を含める。
 
 ## 8. 運用フロー (役割分担)
 
 | 工程 | 担当 |
 |---|---|
 | vertical ハブ (`affiliate-category.ts` の 3 map) の保守 | `affiliate-manager` (本ルール) |
-| バナー / テキスト登録 (propose/register) | `affiliate-manager` (skill `/register-affiliate-banner`) |
-| 在庫整理・監査・dashboard | `affiliate-manager` (skill `/affiliate-improvement`) |
-| サイズ / vertical 規約の enforcement | `affiliate-manager` (audit `--check-size` + export validation) |
+| バナー / テキスト登録 (propose/register/direct) | `affiliate-manager` (skill `/register-affiliate-banner`) |
+| 在庫整理・監査・dashboard (`/tmp` 生成・git 管理しない) | `affiliate-manager` (skill `/affiliate-improvement`) |
+| compliance 監査 (孤立配置 / PR 表記 / 台帳未登録タグ) | `affiliate-manager` (skill `/audit-affiliate-compliance`、週次 CI `affiliate-dashboard-refresh.yml`) |
+| クリエイティブ A/B 実験 (plan/start/observe/decide/close) | `affiliate-manager` (skill `/manage-affiliate-experiment`。勝者の自動反映は禁止) |
+| 集約状態 (`affiliate-operations-latest.json`) の生成・計測ゲート判定 | 決定的スクリプト `build-affiliate-operations-state.ts` (週次 CI `affiliate-ga4-weekly.yml`) |
+| サイズ / vertical 規約の enforcement | `affiliate-manager` (audit `--check-size` + export validation + pre-commit §6.7/6.8) |
 | imp / click / CTR の実測値取得 | `ga4-analyst` / `adsense-analyst` |
 | effect/* 判定・改善ログ status | `improvement-triage` |
 | R2 公開 | develop push → `publish-affiliate-ads.yml` (CI 自動) |
-| 記事内手動配置 (`<affiliate-banner>` タグ) | `blog-editor` / `article-writer` |
+| 記事内手動配置 (`<affiliate-banner>` タグ) | `blog-editor` / `article-writer` (台帳登録は affiliate-manager) |
 
 ## 9. 関連
 
-- SSOT データ: `apps/web/scripts/affiliate-ads-data.ts`
+- SSOT データ: `apps/web/scripts/affiliate-ads-data.ts` (自動配置) / `apps/web/scripts/affiliate-direct-placements-data.ts` (直接配置台帳)
 - 意図ハブ: `apps/web/src/features/ads/constants/affiliate-category.ts` (`AffiliateVertical` / 3 map / `adVertical`)
-- 型ソース: `apps/web/src/features/ads/types/index.ts` (`AffiliateAd.vertical`)
+- 型ソース: `apps/web/src/features/ads/types/index.ts` (`AffiliateAd.vertical` / `AffiliateDirectPlacement`)
 - 配信解決: `apps/web/src/features/ads/services/resolve-affiliate-ad.ts` / `repositories/affiliate-ad-snapshot.ts`
 - 生成/検証: `apps/web/scripts/export-affiliate-ads-snapshot.ts` (vertical validation) → R2 `app/affiliate-ads/all.json`
-- 監査/lint: `.claude/scripts/ads/audit-affiliate-inventory.ts` (vertical カバレッジ + `--check-size`)
+- 監査/lint: `.claude/scripts/ads/audit-affiliate-inventory.ts` (vertical カバレッジ + `--check-size`) /
+  `.claude/scripts/ads/audit-affiliate-compliance.ts` (直接配置・PR 表記)
+- 機械状態: `.claude/state/ads/{affiliate-operations-latest,inventory-latest,compliance-latest,experiments}.json`
+  (生成: `build-affiliate-operations-state.ts` + 週次 CI。**在庫数・gap は state から読む — 文書に固定しない**)
 - GA4 計測: `.claude/scripts/ads/fetch-affiliate-ga4.cjs` / `apps/web/src/lib/analytics/events.ts`
 - agent: `.claude/agents/affiliate-manager.md`
-- skill: `/register-affiliate-banner` / `/affiliate-improvement`
-- 戦略: `docs/02_実装計画/01_収益化マスタープラン.md` §5-6 / 実装: `docs/02_実装計画/14_収益化実装方針.md` §3・付録A
+- skill: `/register-affiliate-banner` / `/affiliate-improvement` / `/audit-affiliate-compliance` / `/manage-affiliate-experiment`
+- 戦略: `docs/02_実装計画/01_収益化マスタープラン.md` §5-6 / 実装: `docs/02_実装計画/14_収益化実装方針.md` §3・付録A /
+  移行仕様: `docs/02_実装計画/25_アフィリエイト運用SSOT移行仕様.md`

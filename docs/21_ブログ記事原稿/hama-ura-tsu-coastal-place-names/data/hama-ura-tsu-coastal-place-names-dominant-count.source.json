@@ -1,0 +1,8 @@
+{
+  "kind": "derived",
+  "derived": "R2 gis/gsi-pni/points.json (国土地理院 電子国土基本図 地名情報の居住地名) を県コードで集計。県ごとに『浜』『浦』『津』の居住地名1000件あたりshareを算出し、最大値を持つ文字をdominantと判定。47都道府県分を文字別に集計した件数。",
+  "source": "r2:gis/gsi-pni/points.json",
+  "license": "国土地理院 PDL1.0 (出典明示で商用可)",
+  "fetchedAt": "2026-07-16T21:54:21.000Z",
+  "generatedBy": "manual (P1-22 critic-fix)"
+}

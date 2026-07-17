@@ -56,4 +56,4 @@ docs/04_レビュー/<YYYY-Www>-<topic-slug>.md        (週次。例: 2026-W22-s
 - 記録先の判定: `.claude/rules/docs-vs-issues.md` / `.claude/rules/data-storage.md`
 - 改善施策の TODO 真実源: `docs/todo/01_改善バックログ.md`
 - セッション引き継ぎ: `docs/handoffs/`
-- 週次計画・レビュー: `docs/03_週次運用/`
+- 現在計画: `docs/todo/current-{month,week}.md` / agent用週次レビュー: `.claude/skills/management/weekly-review/reference/reviews/`

@@ -1,0 +1,388 @@
+{
+  "title": "都道府県別「川」「河」を含む地名の絶対件数",
+  "method": "国土地理院 電子国土基本図(地名情報)の居住地名(kind=admin、都道府県コードを持つもの)のうち、地名文字列に「川」または「河」を含む件数を都道府県ごとに数え、47都道府県分を合計した。",
+  "derived": "R2 gis/gsi-pni/points.json (国土地理院 電子国土基本図 地名情報の居住地名) を県コードで集計。文字列マッチ (String.includes) で『川』『河』を含む居住地名を数え、都道府県別の絶対件数と全国合計を算出。",
+  "source": "r2:gis/gsi-pni/points.json",
+  "license": "国土地理院 PDL1.0 (出典明示で商用可)",
+  "kawaNationalTotal": 13624,
+  "kaNationalTotal": 2325,
+  "ratio": 5.86,
+  "data": [
+    {
+      "pref": "群馬県",
+      "areaName": "群馬県",
+      "areaCode": "10000",
+      "kawaCount": 174,
+      "kaCount": 20,
+      "totalPlaceNames": 4740
+    },
+    {
+      "pref": "埼玉県",
+      "areaName": "埼玉県",
+      "areaCode": "11000",
+      "kawaCount": 285,
+      "kaCount": 47,
+      "totalPlaceNames": 9572
+    },
+    {
+      "pref": "千葉県",
+      "areaName": "千葉県",
+      "areaCode": "12000",
+      "kawaCount": 297,
+      "kaCount": 15,
+      "totalPlaceNames": 10793
+    },
+    {
+      "pref": "東京都",
+      "areaName": "東京都",
+      "areaCode": "13000",
+      "kawaCount": 255,
+      "kaCount": 34,
+      "totalPlaceNames": 5967
+    },
+    {
+      "pref": "神奈川県",
+      "areaName": "神奈川県",
+      "areaCode": "14000",
+      "kawaCount": 178,
+      "kaCount": 47,
+      "totalPlaceNames": 6754
+    },
+    {
+      "pref": "新潟県",
+      "areaName": "新潟県",
+      "areaCode": "15000",
+      "kawaCount": 566,
+      "kaCount": 40,
+      "totalPlaceNames": 9996
+    },
+    {
+      "pref": "富山県",
+      "areaName": "富山県",
+      "areaCode": "16000",
+      "kawaCount": 145,
+      "kaCount": 13,
+      "totalPlaceNames": 3830
+    },
+    {
+      "pref": "石川県",
+      "areaName": "石川県",
+      "areaCode": "17000",
+      "kawaCount": 101,
+      "kaCount": 48,
+      "totalPlaceNames": 3909
+    },
+    {
+      "pref": "福井県",
+      "areaName": "福井県",
+      "areaCode": "18000",
+      "kawaCount": 60,
+      "kaCount": 44,
+      "totalPlaceNames": 3110
+    },
+    {
+      "pref": "山梨県",
+      "areaName": "山梨県",
+      "areaCode": "19000",
+      "kawaCount": 112,
+      "kaCount": 22,
+      "totalPlaceNames": 2839
+    },
+    {
+      "pref": "長野県",
+      "areaName": "長野県",
+      "areaCode": "20000",
+      "kawaCount": 248,
+      "kaCount": 39,
+      "totalPlaceNames": 7906
+    },
+    {
+      "pref": "岐阜県",
+      "areaName": "岐阜県",
+      "areaCode": "21000",
+      "kawaCount": 368,
+      "kaCount": 96,
+      "totalPlaceNames": 9876
+    },
+    {
+      "pref": "静岡県",
+      "areaName": "静岡県",
+      "areaCode": "22000",
+      "kawaCount": 294,
+      "kaCount": 57,
+      "totalPlaceNames": 7152
+    },
+    {
+      "pref": "愛知県",
+      "areaName": "愛知県",
+      "areaCode": "23000",
+      "kawaCount": 520,
+      "kaCount": 107,
+      "totalPlaceNames": 17023
+    },
+    {
+      "pref": "三重県",
+      "areaName": "三重県",
+      "areaCode": "24000",
+      "kawaCount": 193,
+      "kaCount": 60,
+      "totalPlaceNames": 5254
+    },
+    {
+      "pref": "滋賀県",
+      "areaName": "滋賀県",
+      "areaCode": "25000",
+      "kawaCount": 153,
+      "kaCount": 16,
+      "totalPlaceNames": 2727
+    },
+    {
+      "pref": "京都府",
+      "areaName": "京都府",
+      "areaCode": "26000",
+      "kawaCount": 372,
+      "kaCount": 128,
+      "totalPlaceNames": 8870
+    },
+    {
+      "pref": "大阪府",
+      "areaName": "大阪府",
+      "areaCode": "27000",
+      "kawaCount": 253,
+      "kaCount": 54,
+      "totalPlaceNames": 9414
+    },
+    {
+      "pref": "兵庫県",
+      "areaName": "兵庫県",
+      "areaCode": "28000",
+      "kawaCount": 339,
+      "kaCount": 98,
+      "totalPlaceNames": 10657
+    },
+    {
+      "pref": "奈良県",
+      "areaName": "奈良県",
+      "areaCode": "29000",
+      "kawaCount": 99,
+      "kaCount": 16,
+      "totalPlaceNames": 3152
+    },
+    {
+      "pref": "和歌山県",
+      "areaName": "和歌山県",
+      "areaCode": "30000",
+      "kawaCount": 251,
+      "kaCount": 29,
+      "totalPlaceNames": 3694
+    },
+    {
+      "pref": "鳥取県",
+      "areaName": "鳥取県",
+      "areaCode": "31000",
+      "kawaCount": 47,
+      "kaCount": 91,
+      "totalPlaceNames": 2765
+    },
+    {
+      "pref": "島根県",
+      "areaName": "島根県",
+      "areaCode": "32000",
+      "kawaCount": 168,
+      "kaCount": 42,
+      "totalPlaceNames": 5152
+    },
+    {
+      "pref": "岡山県",
+      "areaName": "岡山県",
+      "areaCode": "33000",
+      "kawaCount": 219,
+      "kaCount": 84,
+      "totalPlaceNames": 9216
+    },
+    {
+      "pref": "広島県",
+      "areaName": "広島県",
+      "areaCode": "34000",
+      "kawaCount": 278,
+      "kaCount": 91,
+      "totalPlaceNames": 9120
+    },
+    {
+      "pref": "山口県",
+      "areaName": "山口県",
+      "areaCode": "35000",
+      "kawaCount": 234,
+      "kaCount": 148,
+      "totalPlaceNames": 7034
+    },
+    {
+      "pref": "徳島県",
+      "areaName": "徳島県",
+      "areaCode": "36000",
+      "kawaCount": 339,
+      "kaCount": 15,
+      "totalPlaceNames": 3755
+    },
+    {
+      "pref": "香川県",
+      "areaName": "香川県",
+      "areaCode": "37000",
+      "kawaCount": 165,
+      "kaCount": 8,
+      "totalPlaceNames": 3575
+    },
+    {
+      "pref": "愛媛県",
+      "areaName": "愛媛県",
+      "areaCode": "38000",
+      "kawaCount": 336,
+      "kaCount": 73,
+      "totalPlaceNames": 6236
+    },
+    {
+      "pref": "高知県",
+      "areaName": "高知県",
+      "areaCode": "39000",
+      "kawaCount": 480,
+      "kaCount": 20,
+      "totalPlaceNames": 5200
+    },
+    {
+      "pref": "福岡県",
+      "areaName": "福岡県",
+      "areaCode": "40000",
+      "kawaCount": 319,
+      "kaCount": 49,
+      "totalPlaceNames": 10509
+    },
+    {
+      "pref": "佐賀県",
+      "areaName": "佐賀県",
+      "areaCode": "41000",
+      "kawaCount": 194,
+      "kaCount": 11,
+      "totalPlaceNames": 3284
+    },
+    {
+      "pref": "長崎県",
+      "areaName": "長崎県",
+      "areaCode": "42000",
+      "kawaCount": 206,
+      "kaCount": 46,
+      "totalPlaceNames": 5115
+    },
+    {
+      "pref": "熊本県",
+      "areaName": "熊本県",
+      "areaCode": "43000",
+      "kawaCount": 302,
+      "kaCount": 78,
+      "totalPlaceNames": 7751
+    },
+    {
+      "pref": "大分県",
+      "areaName": "大分県",
+      "areaCode": "44000",
+      "kawaCount": 225,
+      "kaCount": 86,
+      "totalPlaceNames": 6781
+    },
+    {
+      "pref": "宮崎県",
+      "areaName": "宮崎県",
+      "areaCode": "45000",
+      "kawaCount": 188,
+      "kaCount": 35,
+      "totalPlaceNames": 5138
+    },
+    {
+      "pref": "鹿児島県",
+      "areaName": "鹿児島県",
+      "areaCode": "46000",
+      "kawaCount": 359,
+      "kaCount": 34,
+      "totalPlaceNames": 6925
+    },
+    {
+      "pref": "沖縄県",
+      "areaName": "沖縄県",
+      "areaCode": "47000",
+      "kawaCount": 120,
+      "kaCount": 4,
+      "totalPlaceNames": 1884
+    },
+    {
+      "pref": "北海道",
+      "areaName": "北海道",
+      "areaCode": "01000",
+      "kawaCount": 1028,
+      "kaCount": 22,
+      "totalPlaceNames": 29350
+    },
+    {
+      "pref": "青森県",
+      "areaName": "青森県",
+      "areaCode": "02000",
+      "kawaCount": 373,
+      "kaCount": 13,
+      "totalPlaceNames": 5987
+    },
+    {
+      "pref": "岩手県",
+      "areaName": "岩手県",
+      "areaCode": "03000",
+      "kawaCount": 547,
+      "kaCount": 17,
+      "totalPlaceNames": 9819
+    },
+    {
+      "pref": "宮城県",
+      "areaName": "宮城県",
+      "areaCode": "04000",
+      "kawaCount": 516,
+      "kaCount": 41,
+      "totalPlaceNames": 10545
+    },
+    {
+      "pref": "秋田県",
+      "areaName": "秋田県",
+      "areaCode": "05000",
+      "kawaCount": 386,
+      "kaCount": 18,
+      "totalPlaceNames": 6473
+    },
+    {
+      "pref": "山形県",
+      "areaName": "山形県",
+      "areaCode": "06000",
+      "kawaCount": 213,
+      "kaCount": 30,
+      "totalPlaceNames": 5608
+    },
+    {
+      "pref": "福島県",
+      "areaName": "福島県",
+      "areaCode": "07000",
+      "kawaCount": 589,
+      "kaCount": 83,
+      "totalPlaceNames": 14426
+    },
+    {
+      "pref": "茨城県",
+      "areaName": "茨城県",
+      "areaCode": "08000",
+      "kawaCount": 312,
+      "kaCount": 119,
+      "totalPlaceNames": 9821
+    },
+    {
+      "pref": "栃木県",
+      "areaName": "栃木県",
+      "areaCode": "09000",
+      "kawaCount": 218,
+      "kaCount": 37,
+      "totalPlaceNames": 6206
+    }
+  ]
+}

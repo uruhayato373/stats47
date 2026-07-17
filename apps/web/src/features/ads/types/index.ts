@@ -58,3 +58,33 @@ export type AffiliateLocationCode =
   | "area-sidebar"
   | "blog-bottom"
   | "footer";
+
+/**
+ * 直接属性方式 (direct-attribute) のアフィリエイト配置 SSOT の型。
+ * 記事本文に `<affiliate-banner>` (blog) / 生 HTML (note) を直書きする配置の台帳で、
+ * 自動配置 (`AFFILIATE_ADS` → R2 配信) とは別系統。アプリは読まない (監査専用メタデータ)。
+ * データ: apps/web/scripts/affiliate-direct-placements-data.ts /
+ * 監査: .claude/scripts/ads/audit-affiliate-compliance.ts (孤立・本文不一致・PR 表記漏れ)。
+ */
+export interface AffiliateDirectPlacement {
+  id: string;
+  asp: "a8" | "moshimo" | "rakuten" | "valuecommerce";
+  title: string;
+  href: string;
+  imageUrl: string;
+  trackingPixelUrl: string | null;
+  width: number;
+  height: number;
+  /** 報酬メモ (例 "¥15,000/件")。ASP 管理画面参照なら null */
+  rewardNote: string | null;
+  /** CV 条件 (例 "無料診断の予約完了")。ASP 管理画面参照なら null */
+  conversionCondition: string | null;
+  placements: Array<{
+    channel: "blog" | "note";
+    slug: string;
+    /** 配置位置の説明 (例 "転職を決めたセクション直下") */
+    position: string;
+  }>;
+  addedAt: string;
+  isActive: boolean;
+}

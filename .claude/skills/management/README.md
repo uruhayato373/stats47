@@ -135,7 +135,7 @@
 - `/weekly-review`: 4つのサブエージェントで実績データを並列収集し、計画との差分を分析
 - `/weekly-plan`: 4つのサブエージェントでコンテキスト収集 → 戦略分析 → セルフ批判レビュー → 計画出力
 
-**保存先**: `docs/03_週次運用/週次{計画,レビュー}/YYYY-Www.md` (frontmatter `type: weekly-plan` / `weekly-review`、`week: YYYY-Www`)
+**保存先**: 計画は `docs/todo/current-week.md`（毎週上書き）、レビューは `.claude/skills/management/weekly-review/reference/reviews/YYYY-Www.md`（agent用履歴）
 
 ### `/critical-review`
 
@@ -164,9 +164,9 @@ Management 系スキルの出力はすべて `docs/` 配下に統一されてい
 
 | スキル | 出力先 | frontmatter type |
 |---|---|---|
-| `/monthly-plan` | `docs/03_週次運用/月次計画/YYYY-MM.md` | `monthly-plan` |
-| `/weekly-plan` | `docs/03_週次運用/週次計画/YYYY-Www.md` | `weekly-plan` |
-| `/weekly-review` | `docs/03_週次運用/週次レビュー/YYYY-Www.md` | `weekly-review` |
+| `/monthly-plan` | `docs/todo/current-month.md` | `monthly-plan` |
+| `/weekly-plan` | `docs/todo/current-week.md` | `weekly-plan` |
+| `/weekly-review` | `.claude/skills/management/weekly-review/reference/reviews/YYYY-Www.md` | `weekly-review` |
 | `/critical-review` | `docs/04_レビュー/{YYYY-MM-DD}-{topic}.md` | `critical-review` |
 | `/north-star-metric` | `docs/04_レビュー/{YYYY-MM-DD}-nsm.md` | `critical-review` (topic: nsm) |
 | `/growth-loops` | `docs/04_レビュー/{YYYY-MM-DD}-growth-loops.md` | `critical-review` (topic: growth-loops) |

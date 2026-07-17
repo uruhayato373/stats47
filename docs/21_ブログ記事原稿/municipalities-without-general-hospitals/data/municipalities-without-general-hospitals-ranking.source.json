@@ -1,0 +1,7 @@
+{
+  "kind": "derived",
+  "derived": "R2 app/stats/general-hospital-count/cities.json (2023年・一般病院の施設数) を市区町村(2トークン)で集計。一般病院が0の自治体を数え、県別に数と県内総数に占める割合を算出。",
+  "source": "r2:app/stats/general-hospital-count/cities.json",
+  "fetchedAt": "2026-07-16T14:28:11.051Z",
+  "generatedBy": "manual /tmp aggregation (P1-27)"
+}

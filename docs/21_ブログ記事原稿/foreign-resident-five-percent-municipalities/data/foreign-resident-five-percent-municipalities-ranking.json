@@ -1,0 +1,277 @@
+{
+  "title": "外国人比率が5%を超える市区町村",
+  "subtitle": "2020年・比率上位と下位",
+  "unit": "%",
+  "palette": "purple",
+  "rightPalette": "blue",
+  "highLabel": "比率が高い市区町村",
+  "lowLabel": "5%前後の市区町村",
+  "derived": "R2 app/stats/foreign-population-per-100k/cities.json (2020年・人口10万人あたり外国人数=比率換算)。市区町村(県+市区町村の2トークン)で外国人比率5%以上(=5,000人/10万人以上)を抽出し、県別に該当数を集計。",
+  "source": "e-Stat 国勢調査",
+  "data": [
+    {
+      "pref": "長野・川上村",
+      "areaName": "長野・川上村",
+      "value": 19,
+      "rank": 1
+    },
+    {
+      "pref": "群馬・大泉町",
+      "areaName": "群馬・大泉町",
+      "value": 17.6,
+      "rank": 2
+    },
+    {
+      "pref": "長野・南牧村",
+      "areaName": "長野・南牧村",
+      "value": 13.9,
+      "rank": 3
+    },
+    {
+      "pref": "北海道・占冠村",
+      "areaName": "北海道・占冠村",
+      "value": 11.1,
+      "rank": 4
+    },
+    {
+      "pref": "埼玉・蕨市",
+      "areaName": "埼玉・蕨市",
+      "value": 8.5,
+      "rank": 5
+    },
+    {
+      "pref": "東京・豊島区",
+      "areaName": "東京・豊島区",
+      "value": 8.5,
+      "rank": 6
+    },
+    {
+      "pref": "岐阜・美濃加茂市",
+      "areaName": "岐阜・美濃加茂市",
+      "value": 8.2,
+      "rank": 7
+    },
+    {
+      "pref": "茨城・常総市",
+      "areaName": "茨城・常総市",
+      "value": 7.8,
+      "rank": 8
+    },
+    {
+      "pref": "東京・新宿区",
+      "areaName": "東京・新宿区",
+      "value": 7.8,
+      "rank": 9
+    },
+    {
+      "pref": "東京・荒川区",
+      "areaName": "東京・荒川区",
+      "value": 7.7,
+      "rank": 10
+    },
+    {
+      "pref": "岐阜・可児市",
+      "areaName": "岐阜・可児市",
+      "value": 7.3,
+      "rank": 11
+    },
+    {
+      "pref": "静岡・菊川市",
+      "areaName": "静岡・菊川市",
+      "value": 7.3,
+      "rank": 12
+    },
+    {
+      "pref": "神奈川・愛川町",
+      "areaName": "神奈川・愛川町",
+      "value": 7.1,
+      "rank": 13
+    },
+    {
+      "pref": "愛知・高浜市",
+      "areaName": "愛知・高浜市",
+      "value": 7.1,
+      "rank": 14
+    },
+    {
+      "pref": "愛知・碧南市",
+      "areaName": "愛知・碧南市",
+      "value": 7,
+      "rank": 15
+    },
+    {
+      "pref": "東京・台東区",
+      "areaName": "東京・台東区",
+      "value": 6.8,
+      "rank": 16
+    },
+    {
+      "pref": "沖縄・恩納村",
+      "areaName": "沖縄・恩納村",
+      "value": 6.8,
+      "rank": 17
+    },
+    {
+      "pref": "東京・港区",
+      "areaName": "東京・港区",
+      "value": 6.7,
+      "rank": 18
+    },
+    {
+      "pref": "愛知・知立市",
+      "areaName": "愛知・知立市",
+      "value": 6.6,
+      "rank": 19
+    },
+    {
+      "pref": "群馬・昭和村",
+      "areaName": "群馬・昭和村",
+      "value": 6.3,
+      "rank": 20
+    },
+    {
+      "pref": "北海道・猿払村",
+      "areaName": "北海道・猿払村",
+      "value": 6.2,
+      "rank": 21
+    },
+    {
+      "pref": "岐阜・坂祝町",
+      "areaName": "岐阜・坂祝町",
+      "value": 6.2,
+      "rank": 22
+    },
+    {
+      "pref": "愛知・小牧市",
+      "areaName": "愛知・小牧市",
+      "value": 6.1,
+      "rank": 23
+    },
+    {
+      "pref": "北海道・留寿都村",
+      "areaName": "北海道・留寿都村",
+      "value": 5.9,
+      "rank": 24
+    },
+    {
+      "pref": "福井・越前市",
+      "areaName": "福井・越前市",
+      "value": 5.8,
+      "rank": 25
+    },
+    {
+      "pref": "東京・北区",
+      "areaName": "東京・北区",
+      "value": 5.7,
+      "rank": 26
+    },
+    {
+      "pref": "静岡・湖西市",
+      "areaName": "静岡・湖西市",
+      "value": 5.7,
+      "rank": 27
+    },
+    {
+      "pref": "滋賀・湖南市",
+      "areaName": "滋賀・湖南市",
+      "value": 5.7,
+      "rank": 28
+    },
+    {
+      "pref": "群馬・伊勢崎市",
+      "areaName": "群馬・伊勢崎市",
+      "value": 5.6,
+      "rank": 29
+    },
+    {
+      "pref": "三重・伊賀市",
+      "areaName": "三重・伊賀市",
+      "value": 5.6,
+      "rank": 30
+    },
+    {
+      "pref": "群馬・高山村",
+      "areaName": "群馬・高山村",
+      "value": 5.5,
+      "rank": 31
+    },
+    {
+      "pref": "千葉・富里市",
+      "areaName": "千葉・富里市",
+      "value": 5.5,
+      "rank": 32
+    },
+    {
+      "pref": "東京・江東区",
+      "areaName": "東京・江東区",
+      "value": 5.5,
+      "rank": 33
+    },
+    {
+      "pref": "東京・福生市",
+      "areaName": "東京・福生市",
+      "value": 5.5,
+      "rank": 34
+    },
+    {
+      "pref": "北海道・雄武町",
+      "areaName": "北海道・雄武町",
+      "value": 5.4,
+      "rank": 35
+    },
+    {
+      "pref": "茨城・鉾田市",
+      "areaName": "茨城・鉾田市",
+      "value": 5.4,
+      "rank": 36
+    },
+    {
+      "pref": "静岡・吉田町",
+      "areaName": "静岡・吉田町",
+      "value": 5.4,
+      "rank": 37
+    },
+    {
+      "pref": "愛知・飛島村",
+      "areaName": "愛知・飛島村",
+      "value": 5.4,
+      "rank": 38
+    },
+    {
+      "pref": "埼玉・川口市",
+      "areaName": "埼玉・川口市",
+      "value": 5.3,
+      "rank": 39
+    },
+    {
+      "pref": "山梨・中央市",
+      "areaName": "山梨・中央市",
+      "value": 5.3,
+      "rank": 40
+    },
+    {
+      "pref": "愛知・西尾市",
+      "areaName": "愛知・西尾市",
+      "value": 5.3,
+      "rank": 41
+    },
+    {
+      "pref": "北海道・赤井川村",
+      "areaName": "北海道・赤井川村",
+      "value": 5.2,
+      "rank": 42
+    },
+    {
+      "pref": "茨城・八千代町",
+      "areaName": "茨城・八千代町",
+      "value": 5.1,
+      "rank": 43
+    },
+    {
+      "pref": "三重・木曽岬町",
+      "areaName": "三重・木曽岬町",
+      "value": 5,
+      "rank": 44
+    }
+  ]
+}

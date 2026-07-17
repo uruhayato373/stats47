@@ -144,7 +144,7 @@ MDX 不要。HTML カスタムタグとして `react-markdown` の `components` 
 
 利用可能カテゴリ: `labor` / `housing` / `population` / `economy` / `health` / `energy` / `tourism` / `furusato`
 
-**URL 直書き（後方互換・特殊バナー用）:**
+**URL 直書き（直接属性方式・特殊バナー用）:**
 
 ```html
 <affiliate-banner
@@ -155,6 +155,11 @@ MDX 不要。HTML カスタムタグとして `react-markdown` の `components` 
   height="250"
   label="バナー説明文">
 ```
+
+> ⚠ **直接属性方式は台帳登録とセット**: href 直書きのタグは
+> `apps/web/scripts/affiliate-direct-placements-data.ts` (直接配置 SSOT) に必ず登録する
+> (`/register-affiliate-banner direct`)。未登録タグと PR 表記 (記事冒頭の PR 宣言 + リンク直前 `※PR：`) の
+> 漏れは `/audit-affiliate-compliance` が弾く。category ベースは自動配置解決なので台帳不要。
 
 ### データ出典
 

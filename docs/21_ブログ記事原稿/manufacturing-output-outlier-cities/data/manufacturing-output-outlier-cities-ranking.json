@@ -1,0 +1,97 @@
+{
+  "title": "人口1人あたり製造品出荷額が多い市区町村",
+  "subtitle": "2023年・人口1万人以上",
+  "unit": "百万円",
+  "palette": "orange",
+  "rightPalette": "blue",
+  "highLabel": "1人あたり出荷額が多い街",
+  "lowLabel": "上位14位までの街",
+  "derived": "R2 app/stats/manufacturing-shipment-amount/cities.json (2023年・製造品出荷額等・百万円) を app/stats/total-population/cities.json (2020年人口) で割り、市区町村ごとの人口1人あたり製造品出荷額を算出。政令市行政区は除外。",
+  "source": "e-Stat 工業統計・経済センサス",
+  "data": [
+    {
+      "pref": "福岡・苅田町",
+      "areaName": "福岡・苅田町",
+      "value": 65.5,
+      "rank": 1
+    },
+    {
+      "pref": "福岡・宮若市",
+      "areaName": "福岡・宮若市",
+      "value": 57.6,
+      "rank": 2
+    },
+    {
+      "pref": "滋賀・竜王町",
+      "areaName": "滋賀・竜王町",
+      "value": 56,
+      "rank": 3
+    },
+    {
+      "pref": "愛知・豊田市",
+      "areaName": "愛知・豊田市",
+      "value": 48.6,
+      "rank": 4
+    },
+    {
+      "pref": "岩手・金ケ崎町",
+      "areaName": "岩手・金ケ崎町",
+      "value": 48.5,
+      "rank": 5
+    },
+    {
+      "pref": "愛知・田原市",
+      "areaName": "愛知・田原市",
+      "value": 43.5,
+      "rank": 6
+    },
+    {
+      "pref": "三重・いなべ市",
+      "areaName": "三重・いなべ市",
+      "value": 37.9,
+      "rank": 7
+    },
+    {
+      "pref": "静岡・牧之原市",
+      "areaName": "静岡・牧之原市",
+      "value": 32.8,
+      "rank": 8
+    },
+    {
+      "pref": "静岡・湖西市",
+      "areaName": "静岡・湖西市",
+      "value": 29.7,
+      "rank": 9
+    },
+    {
+      "pref": "群馬・千代田町",
+      "areaName": "群馬・千代田町",
+      "value": 27.4,
+      "rank": 10
+    },
+    {
+      "pref": "愛知・大口町",
+      "areaName": "愛知・大口町",
+      "value": 26.5,
+      "rank": 11
+    },
+    {
+      "pref": "愛知・幸田町",
+      "areaName": "愛知・幸田町",
+      "value": 25,
+      "rank": 12
+    },
+    {
+      "pref": "滋賀・日野町",
+      "areaName": "滋賀・日野町",
+      "value": 23.4,
+      "rank": 13
+    },
+    {
+      "pref": "宮城・大和町",
+      "areaName": "宮城・大和町",
+      "value": 23.1,
+      "rank": 14
+    }
+  ]
+}

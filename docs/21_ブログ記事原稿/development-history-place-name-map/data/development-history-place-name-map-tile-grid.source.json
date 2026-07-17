@@ -1,0 +1,8 @@
+{
+  "kind": "derived",
+  "derived": "R2 gis/gsi-pni/points.json (国土地理院 電子国土基本図 地名情報の居住地名) を県コードで集計。県内の居住地名1000件あたりに『新田』を含む地名がいくつあるかを算出 (居住地名=大字・町・丁目等、自然地名は県コードを持たないため除外)。",
+  "source": "r2:gis/gsi-pni/points.json",
+  "license": "国土地理院 PDL1.0 (出典明示で商用可)",
+  "fetchedAt": "2026-07-16T14:49:57.620Z",
+  "generatedBy": "manual (P1-24)"
+}

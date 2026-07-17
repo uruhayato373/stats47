@@ -29,14 +29,13 @@ primary_agent: strategy-advisor
 
 1. **直近 4 週の週次レビュー**（今月＋先月末をカバー）
    ```bash
-   ls -t docs/03_週次運用/週次レビュー/*.md | head -4
+   ls -t .claude/skills/management/weekly-review/reference/reviews/*.md 2>/dev/null | head -4
    ```
    → 各レビューの「成果」「未達」「来週への申し送り」「パターン分析」を抽出。**繰り返し未達のテーマ**（複数週で stall しているもの）を特定する。これが今月の重点候補の最有力。
 
-2. **直近 4 週の週次計画**（持ち越しの累積を見る）
+2. **現在の週次計画**（今週の未消化を見る）
    ```bash
-   ls -t docs/03_週次運用/週次計画/*.md | head -4
-   grep -E "^- \[ \]" docs/03_週次運用/週次計画/*.md   # 未消化タスクの累積
+   grep -E "^- \[ \]" docs/todo/current-week.md 2>/dev/null || true
    ```
 
 3. **3 つのバックログから今月着手すべき pending を抽出**（真実源・実体はここ）
@@ -62,9 +61,9 @@ primary_agent: strategy-advisor
    ls -t .claude/skills/management/nsm-experiment/reference/weekly-snapshots/*.json | head -1
    ```
 
-6. **前月の月次計画**（あれば。前月の重点が達成されたか）
+6. **現在の月次計画**（月替わり時は上書き前に達成状況を読む）
    ```bash
-   ls -t docs/03_週次運用/月次計画/*.md | head -2
+   cat docs/todo/current-month.md 2>/dev/null
    ```
 
 7. **TODO インボックスの triage**（セッション中に捕捉した未整理 TODO を振り分ける）
@@ -101,7 +100,7 @@ primary_agent: strategy-advisor
 
 ### Phase 5: 出力
 
-Write tool で `docs/03_週次運用/月次計画/YYYY-MM.md` を作成する。frontmatter 必須。作成後にパスを報告する。
+Write tool で `docs/todo/current-month.md` を上書きする。frontmatter 必須。作成後にパスを報告する。
 
 ## 出力フォーマット（ファイル本文）
 
@@ -147,10 +146,10 @@ tags: []
 - **なぜ今月これか**: <収益直結 / 複数週 stall / due 集中 のどれか>
 - **今月のゴール（月末に検証可能）**: <数値・成果物>
 - **構成タスク**:
-  - [ ] <サブタスク> [S/M/L] — 成功基準 / 使用スキル `/xxx`（→ 週: W-nn）
-  - [ ] ...
+  - <サブタスク> [S/M/L] — 成功基準 / 使用スキル `/xxx`（→ 週: W-nn）
+  - ...
 - **依存・ブロッカー**: <ユーザー操作待ち等>
-- **真実源リンク**: `../../todo/01_改善バックログ.md#<id>` 等
+- **真実源リンク**: `01_改善バックログ.md#<id>` 等
 
 ### 重点2: <テーマ名>（任意）
 （同上）
@@ -169,24 +168,24 @@ tags: []
 <!-- Phase 4 の結果 -->
 
 ## 関連ドキュメント
-- 収益化マスタープラン: `../../02_実装計画/01_収益化マスタープラン.md`
-- 改善バックログ: `../../todo/01_改善バックログ.md`
-- 機能バックログ: `../../todo/02_機能バックログ.md`
-- 指標バックログ: `../../todo/03_指標バックログ.md`
-- 実装計画 INDEX: `../../02_実装計画/00_INDEX.md`
+- 収益化マスタープラン: `../02_実装計画/01_収益化マスタープラン.md`
+- 改善バックログ: `01_改善バックログ.md`
+- 機能バックログ: `02_機能バックログ.md`
+- 指標バックログ: `03_指標バックログ.md`
+- 実装計画 INDEX: `../02_実装計画/00_INDEX.md`
 ```
 
 ## 運用ルール
 
 - **毎月初（第 1 週の月曜など）に 1 回実行**する想定。`/monthly-plan` だけで完結。
-- 月内の進捗は **週次計画 `/weekly-plan` が分割消化**する。週次は Phase 1 で今月の `月次計画/YYYY-MM.md` の `focus_themes` を読み、毎週の Must を重点テーマの構成タスクから優先的に選ぶ。
-- **タスクの実体（status / due）は各バックログが真実源。** 月次計画はその当月ビュー。状態更新はバックログ側で行い、月次計画のチェックボックスは「今月のゴールに対する進捗」の俯瞰用。
+- 月内の進捗は **週次計画 `/weekly-plan` が分割消化**する。週次は `docs/todo/current-month.md` の `focus_themes` を読む。
+- **タスクの実体（status / due）は各バックログが真実源。** 月次計画は選定理由と配分だけを持ち、進捗は週次計画とバックログで扱う。
 - 月末の振り返りは独立スキルを作らず、**翌月の `/monthly-plan` の Phase 1-2 + 「前月の振り返り」セクション**で吸収する（軽量維持のため。重い振り返りが必要なら `/weekly-review` の月末回で代替）。
-- 月次計画は蓄積する（`status: active` → 翌月実行時に前月分を `archived` へ）。
+- 月次計画は蓄積せず毎月上書きする。前月結果は週次レビューと git 履歴に残す。
 
 ## 保存先
 
-- 本スキル出力: `docs/03_週次運用/月次計画/YYYY-MM.md`（frontmatter `type: monthly-plan`, `month: YYYY-MM`, `focus_themes: [...]`）
+- 本スキル出力: `docs/todo/current-month.md`（frontmatter `type: monthly-plan`, `month: YYYY-MM`, `focus_themes: [...]`）
 - 週次が参照: `/weekly-plan` Phase 1 Agent D / Phase 2
 
 ## 参照

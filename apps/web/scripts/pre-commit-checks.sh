@@ -405,6 +405,23 @@ if [ -n "$STAGED_AFFILIATE" ]; then
   fi
 fi
 
+# 6.8 直接配置アフィリエイト台帳の構造チェック (/audit-affiliate-compliance)
+#     affiliate-direct-placements-data.ts が staged のとき、ID 重複・URL scheme・配置形式の
+#     構造 error を弾く (ネットワーク不要。本文突合は週次 CI が --live で実行)。
+STAGED_DIRECT_AFFILIATE=$(git diff --cached --name-only --diff-filter=ACM | grep -E "^apps/web/scripts/affiliate-direct-placements-data\.ts$" || true)
+
+if [ -n "$STAGED_DIRECT_AFFILIATE" ]; then
+  echo -e "${GREEN}📐 直接配置アフィリエイト 構造チェック...${NC}"
+  if (cd "$PROJECT_ROOT" && npx tsx .claude/scripts/ads/audit-affiliate-compliance.ts --check > /tmp/affiliate-direct.log 2>&1); then
+    echo -e "${GREEN}✅ 直接配置台帳の構造 OK${NC}"
+  else
+    echo -e "${RED}❌ 直接配置台帳に構造 error があります。${NC}"
+    grep -E "error|❌" /tmp/affiliate-direct.log | head -5 || true
+    echo -e "${YELLOW}💡 skill: /audit-affiliate-compliance / SSOT: apps/web/scripts/affiliate-direct-placements-data.ts${NC}"
+    ERROR_COUNT=$((ERROR_COUNT + 1))
+  fi
+fi
+
 # 7. テストカバレッジチェック（オプション - 変更されたファイルに関連するテストのみ）
 echo -e "${GREEN}🧪 テストカバレッジチェック（オプション）...${NC}"
 STAGED_TS_FILES=$(git diff --cached --name-only --diff-filter=ACM | grep -E '\.(ts|tsx)$' | grep -v '\.test\.' | grep -v '\.stories\.' || true)

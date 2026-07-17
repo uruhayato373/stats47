@@ -1,0 +1,34 @@
+{
+  "generatedAt": "2026-07-14T23:01:43.026Z",
+  "live": true,
+  "scanAllBlog": true,
+  "structureIssues": [],
+  "sizeWarnings": [
+    {
+      "id": "moshimo-ai-onikanri-93995",
+      "size": "500x500"
+    }
+  ],
+  "directPlacements": {
+    "total": 2,
+    "orphaned": [],
+    "missingDisclosure": [
+      {
+        "id": "moshimo-ai-onikanri-93995",
+        "target": "blog:koumuin-claude-code-estat-automation",
+        "missing": [
+          "head-pr-declaration"
+        ]
+      },
+      {
+        "id": "a8-strategy-career-koumuin-ai-tenshoku-260601701360",
+        "target": "blog:prefecture-salary-gap-career",
+        "missing": [
+          "head-pr-declaration",
+          "inline-pr-prefix"
+        ]
+      }
+    ]
+  },
+  "unregisteredTags": []
+}
