@@ -17,6 +17,7 @@ import {
   type HomeFeaturedSnapshotFields,
 } from "../../utils/resolve-home-featured-card";
 import { resolveRankingThumbnailVariant } from "../../utils/resolve-thumbnail-variant";
+
 import {
   FeaturedRankingExperimentGrid,
   type HomeFeaturedGridItem,

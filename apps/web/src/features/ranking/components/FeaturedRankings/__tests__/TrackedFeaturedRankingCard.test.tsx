@@ -50,7 +50,7 @@ describe("TrackedFeaturedRankingCard", () => {
   it("IntersectionObserver に threshold 0.5 を設定する", () => {
     render(
       <TrackedFeaturedRankingCard {...PARAMS}>
-        <a href="/ranking/annual-sunshine-duration">card</a>
+        <a href="#card">card</a>
       </TrackedFeaturedRankingCard>,
     );
     expect(observerOptions).toEqual({ threshold: 0.5 });
@@ -59,7 +59,7 @@ describe("TrackedFeaturedRankingCard", () => {
   it("50% 表示 1 秒で impression を 1 回だけ送る", () => {
     render(
       <TrackedFeaturedRankingCard {...PARAMS}>
-        <a href="/ranking/annual-sunshine-duration">card</a>
+        <a href="#card">card</a>
       </TrackedFeaturedRankingCard>,
     );
 
@@ -86,7 +86,7 @@ describe("TrackedFeaturedRankingCard", () => {
   it("1 秒前に離脱したら impression を送らない", () => {
     render(
       <TrackedFeaturedRankingCard {...PARAMS}>
-        <a href="/ranking/annual-sunshine-duration">card</a>
+        <a href="#card">card</a>
       </TrackedFeaturedRankingCard>,
     );
     observerCallback([{ isIntersecting: true }]);
@@ -99,7 +99,7 @@ describe("TrackedFeaturedRankingCard", () => {
   it("unmount で observer を disconnect し pending timer を破棄する", () => {
     const { unmount } = render(
       <TrackedFeaturedRankingCard {...PARAMS}>
-        <a href="/ranking/annual-sunshine-duration">card</a>
+        <a href="#card">card</a>
       </TrackedFeaturedRankingCard>,
     );
     observerCallback([{ isIntersecting: true }]);
@@ -112,7 +112,7 @@ describe("TrackedFeaturedRankingCard", () => {
   it("card リンクの click を capture して home_featured_click を送る", () => {
     const { getByRole } = render(
       <TrackedFeaturedRankingCard {...PARAMS} cardVariant="map" experimentVariant="control">
-        <a href="/ranking/annual-sunshine-duration">card</a>
+        <a href="#card">card</a>
       </TrackedFeaturedRankingCard>,
     );
     fireEvent.click(getByRole("link"));

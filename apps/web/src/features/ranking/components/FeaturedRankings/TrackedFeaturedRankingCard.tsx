@@ -39,7 +39,11 @@ export function TrackedFeaturedRankingCard({
     experimentId,
     experimentVariant,
   });
-  paramsRef.current = { rankingKey, cardVariant, slot, experimentId, experimentVariant };
+  // render 中の ref 書込は React ルール違反のため毎 render 後の effect で最新化する
+  // (impression/click は render 後にしか発火しないので stale にならない)
+  useEffect(() => {
+    paramsRef.current = { rankingKey, cardVariant, slot, experimentId, experimentVariant };
+  }, [rankingKey, cardVariant, slot, experimentId, experimentVariant]);
 
   useEffect(() => {
     const el = ref.current;

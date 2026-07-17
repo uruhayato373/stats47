@@ -2,18 +2,19 @@
 
 import { useEffect, useState } from "react";
 
-import type { RankingThumbnailVariant } from "@stats47/data-configs";
 
-import { FeaturedRankingCard } from "../FeaturedRankingCard";
 import {
   HOME_FEATURED_EXPERIMENT_ID,
   resolveHomeFeaturedAssignment,
   type HomeFeaturedExperimentVariant,
 } from "../../utils/home-featured-experiment";
+import { FeaturedRankingCard } from "../FeaturedRankingCard";
+
 import { EditorialFeaturedCard } from "./FeaturedRankingCardVisual";
 import { TrackedFeaturedRankingCard } from "./TrackedFeaturedRankingCard";
 
 import type { HomeFeaturedEditorialModel } from "../../utils/resolve-home-featured-card";
+import type { RankingThumbnailVariant } from "@stats47/data-configs";
 
 /**
  * grid セルの固定高さ (placeholder と実カードで同一クラス = variant 確定前後で grid 高さ不変)。
