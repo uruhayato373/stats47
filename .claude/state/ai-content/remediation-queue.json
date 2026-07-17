@@ -1,19 +1,19 @@
 {
-  "generatedAt": "2026-07-16T11:18:21.544Z",
+  "generatedAt": "2026-07-16T12:31:39.493Z",
   "gscSnapshot": "2026-W28",
   "scope": "GSC流入のある /ranking/ ページ (SEO優先母集団)",
   "doneCriteria": "R2 の ai-content が auditRow を通る (blocker 0)",
   "summary": {
     "total": 1124,
-    "done": 143,
-    "needsRegen": 981,
+    "done": 153,
+    "needsRegen": 971,
     "needsByReason": {
-      "incomplete": 892,
-      "missing": 63,
-      "blocker": 26
+      "incomplete": 884,
+      "blocker": 26,
+      "missing": 61
     },
-    "doneImpressions": 30656,
-    "needsImpressions": 13609,
+    "doneImpressions": 32475,
+    "needsImpressions": 11790,
     "opusReviewTier": 30
   },
   "entries": [
@@ -244,14 +244,12 @@
       "impressions": 358,
       "clicks": 17,
       "position": 5.79,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
-      ],
-      "reviewTier": "opus"
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [],
+      "lastModified": "Thu, 16 Jul 2026 12:23:51 GMT",
+      "updatedAt": "2026-07-16T11:28:28.016Z"
     },
     {
       "rankingKey": "chicken-consumption-quantity",
@@ -282,15 +280,12 @@
       "impressions": 309,
       "clicks": 0,
       "position": 7.51,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
-      ],
-      "reviewTier": "opus"
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [],
+      "lastModified": "Thu, 16 Jul 2026 12:23:50 GMT",
+      "updatedAt": "2026-07-16T11:27:56.653Z"
     },
     {
       "rankingKey": "banana-consumption-quantity",
@@ -487,15 +482,12 @@
       "impressions": 194,
       "clicks": 9,
       "position": 9.02,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
-      ],
-      "reviewTier": "opus"
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [],
+      "lastModified": "Thu, 16 Jul 2026 12:23:50 GMT",
+      "updatedAt": "2026-07-16T11:28:29.362Z"
     },
     {
       "rankingKey": "future-population-change-rate-2050",
@@ -598,10 +590,12 @@
       "impressions": 168,
       "clicks": 15,
       "position": 6.89,
-      "status": "needs-regen",
-      "reason": "missing",
+      "status": "done",
+      "reason": "ok",
       "blockers": [],
-      "reviewTier": "opus"
+      "warns": [],
+      "lastModified": "Thu, 16 Jul 2026 12:23:51 GMT",
+      "updatedAt": "2026-07-16T11:27:20.205Z"
     },
     {
       "rankingKey": "swimming-pool-public",
@@ -644,15 +638,12 @@
       "impressions": 151,
       "clicks": 3,
       "position": 7.99,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
-      ],
-      "reviewTier": "opus"
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [],
+      "lastModified": "Thu, 16 Jul 2026 12:23:50 GMT",
+      "updatedAt": "2026-07-16T11:26:42.881Z"
     },
     {
       "rankingKey": "sports-spectating-consumption-expenditure",
@@ -671,14 +662,12 @@
       "impressions": 150,
       "clicks": 3,
       "position": 6.03,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
-      ],
-      "reviewTier": "opus"
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [],
+      "lastModified": "Thu, 16 Jul 2026 12:23:50 GMT",
+      "updatedAt": "2026-07-16T11:25:48.756Z"
     },
     {
       "rankingKey": "roadside-station-count",
@@ -709,15 +698,14 @@
       "impressions": 140,
       "clicks": 3,
       "position": 7.76,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [
+        "pref-count"
       ],
-      "reviewTier": "opus"
+      "lastModified": "Thu, 16 Jul 2026 12:23:50 GMT",
+      "updatedAt": "2026-07-16T11:29:14.187Z"
     },
     {
       "rankingKey": "soy-sauce-consumption-expenditure",
@@ -772,15 +760,12 @@
       "impressions": 119,
       "clicks": 5,
       "position": 6.29,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
-      ],
-      "reviewTier": "opus"
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [],
+      "lastModified": "Thu, 16 Jul 2026 12:23:50 GMT",
+      "updatedAt": "2026-07-16T11:30:24.645Z"
     },
     {
       "rankingKey": "governor-salary-prefecture",
@@ -813,25 +798,24 @@
       "impressions": 115,
       "clicks": 8,
       "position": 6.25,
-      "status": "needs-regen",
-      "reason": "incomplete",
-      "blockers": [
-        "paren-number",
-        "paren-number",
-        "paren-number",
-        "missing-pref-commentary"
-      ],
-      "reviewTier": "opus"
+      "status": "done",
+      "reason": "ok",
+      "blockers": [],
+      "warns": [],
+      "lastModified": "Thu, 16 Jul 2026 12:23:51 GMT",
+      "updatedAt": "2026-07-16T11:30:00.372Z"
     },
     {
       "rankingKey": "fishing-port-count-by-type",
       "impressions": 115,
       "clicks": 1,
       "position": 8.58,
-      "status": "needs-regen",
-      "reason": "missing",
+      "status": "done",
+      "reason": "ok",
       "blockers": [],
-      "reviewTier": "opus"
+      "warns": [],
+      "lastModified": "Thu, 16 Jul 2026 12:23:50 GMT",
+      "updatedAt": "2026-07-16T11:30:20.613Z"
     },
     {
       "rankingKey": "squid-consumption-quantity",
@@ -1349,7 +1333,7 @@
         "paren-number",
         "missing-pref-commentary"
       ],
-      "reviewTier": "sonnet"
+      "reviewTier": "opus"
     },
     {
       "rankingKey": "deaths-lifestyle-diseases",
@@ -1361,7 +1345,7 @@
       "blockers": [
         "missing-pref-commentary"
       ],
-      "reviewTier": "sonnet"
+      "reviewTier": "opus"
     },
     {
       "rankingKey": "pickled-plum-consumption-expenditure",
@@ -1400,7 +1384,7 @@
         "paren-number",
         "missing-pref-commentary"
       ],
-      "reviewTier": "sonnet"
+      "reviewTier": "opus"
     },
     {
       "rankingKey": "bonito-consumption-quantity",
@@ -1425,7 +1409,7 @@
         "paren-number",
         "missing-pref-commentary"
       ],
-      "reviewTier": "sonnet"
+      "reviewTier": "opus"
     },
     {
       "rankingKey": "physical-disability-certificates-issued-per-1000",
@@ -1440,7 +1424,7 @@
         "paren-number",
         "missing-pref-commentary"
       ],
-      "reviewTier": "sonnet"
+      "reviewTier": "opus"
     },
     {
       "rankingKey": "sugar-consumption-quantity",
@@ -1465,7 +1449,7 @@
         "paren-number",
         "missing-pref-commentary"
       ],
-      "reviewTier": "sonnet"
+      "reviewTier": "opus"
     },
     {
       "rankingKey": "sea-bream-consumption-quantity",
@@ -1480,7 +1464,7 @@
         "paren-number",
         "missing-pref-commentary"
       ],
-      "reviewTier": "sonnet"
+      "reviewTier": "opus"
     },
     {
       "rankingKey": "restaurant-count-per-1000",
@@ -1494,7 +1478,7 @@
         "paren-number",
         "missing-pref-commentary"
       ],
-      "reviewTier": "sonnet"
+      "reviewTier": "opus"
     },
     {
       "rankingKey": "miscellaneous-school-count",
@@ -1508,7 +1492,7 @@
         "paren-number",
         "missing-pref-commentary"
       ],
-      "reviewTier": "sonnet"
+      "reviewTier": "opus"
     },
     {
       "rankingKey": "apple-consumption-quantity",
@@ -1572,7 +1556,7 @@
         "paren-number",
         "missing-pref-commentary"
       ],
-      "reviewTier": "sonnet"
+      "reviewTier": "opus"
     },
     {
       "rankingKey": "disabled-employment-rate",

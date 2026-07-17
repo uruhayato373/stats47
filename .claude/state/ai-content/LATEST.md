@@ -1,49 +1,39 @@
 # ranking ai-content 是正キュー (LATEST)
 
-- 生成: 2026-07-16T11:18:21.544Z
+- 生成: 2026-07-16T12:31:39.493Z
 - GSC snapshot: 2026-W28 / スコープ: GSC流入のある /ranking/ ページ (SEO優先母集団)
 - done 判定: R2 の ai-content が auditRow を通る (blocker 0)
 
 ## サマリ (GSC流入 /ranking/ ページ 1124 件)
 
-- ✅ done: 143 件 (impressions 計 30656)
-- ⏳ needs-regen: 981 件 (impressions 計 13609)
-  - 内訳: incomplete 892 / missing 63 / blocker 26
+- ✅ done: 153 件 (impressions 計 32475)
+- ⏳ needs-regen: 971 件 (impressions 計 11790)
+  - 内訳: incomplete 884 / blocker 26 / missing 61
 
 ## いつ修正したか (done を R2 last-modified 降順・上位15)
 
 | R2 last-modified | key | impressions |
 |---|---|---|
+| Thu, 16 Jul 2026 12:23:51 GMT | retail-store-count | 358 |
+| Thu, 16 Jul 2026 12:23:51 GMT | designated-difficult-disease | 168 |
+| Thu, 16 Jul 2026 12:23:51 GMT | retail-store-count-alt | 115 |
+| Thu, 16 Jul 2026 12:23:50 GMT | prefectural-nature-park-area | 309 |
+| Thu, 16 Jul 2026 12:23:50 GMT | dual-income-household-ratio | 194 |
+| Thu, 16 Jul 2026 12:23:50 GMT | psychiatric-bed-count | 151 |
+| Thu, 16 Jul 2026 12:23:50 GMT | public-phone-count | 150 |
+| Thu, 16 Jul 2026 12:23:50 GMT | fishery-species-catch-scallop | 140 |
+| Thu, 16 Jul 2026 12:23:50 GMT | peach-consumption-quantity | 119 |
+| Thu, 16 Jul 2026 12:23:50 GMT | fishing-port-count-by-type | 115 |
 | Fri, 03 Jul 2026 22:49:29 GMT | tuna-consumption-quantity | 588 |
 | Fri, 03 Jul 2026 22:49:29 GMT | treatment-rate-mental-disorder-inpatient | 213 |
 | Fri, 03 Jul 2026 22:49:29 GMT | yogurt-consumption-expenditure | 58 |
 | Fri, 03 Jul 2026 22:49:29 GMT | wine-consumption-quantity | 57 |
 | Fri, 03 Jul 2026 22:49:29 GMT | university-professor-annual-income | 37 |
-| Fri, 03 Jul 2026 22:49:29 GMT | vinegar-consumption-quantity | 35 |
-| Fri, 03 Jul 2026 22:49:29 GMT | treatment-rate-asthma-outpatient | 17 |
-| Fri, 03 Jul 2026 22:49:28 GMT | school-teacher-annual-income | 374 |
-| Fri, 03 Jul 2026 22:49:28 GMT | soba-udon-dining-consumption-expenditure | 248 |
-| Fri, 03 Jul 2026 22:49:28 GMT | tissue-paper-consumption-expenditure | 235 |
-| Fri, 03 Jul 2026 22:49:28 GMT | sauce-consumption-quantity | 190 |
-| Fri, 03 Jul 2026 22:49:28 GMT | swimming-pool-public | 166 |
-| Fri, 03 Jul 2026 22:49:28 GMT | shumai-consumption-expenditure | 151 |
-| Fri, 03 Jul 2026 22:49:28 GMT | sports-spectating-consumption-expenditure | 150 |
-| Fri, 03 Jul 2026 22:49:28 GMT | roadside-station-count | 142 |
 
 ## 次にやるべき上位20 (impressions 降順)
 
 | impressions | key | reason | review | blockers |
 |---|---|---|---|---|
-| 358 | retail-store-count | incomplete | 🔴opus | paren-number,paren-number,missing-pref-commentary |
-| 309 | prefectural-nature-park-area | incomplete | 🔴opus | paren-number,paren-number,paren-number,missing-pref-commentary |
-| 194 | dual-income-household-ratio | incomplete | 🔴opus | paren-number,paren-number,paren-number,missing-pref-commentary |
-| 168 | designated-difficult-disease | missing | 🔴opus | - |
-| 151 | psychiatric-bed-count | incomplete | 🔴opus | paren-number,paren-number,paren-number,missing-pref-commentary |
-| 150 | public-phone-count | incomplete | 🔴opus | paren-number,paren-number,missing-pref-commentary |
-| 140 | fishery-species-catch-scallop | incomplete | 🔴opus | paren-number,paren-number,paren-number,missing-pref-commentary |
-| 119 | peach-consumption-quantity | incomplete | 🔴opus | paren-number,paren-number,paren-number,missing-pref-commentary |
-| 115 | retail-store-count-alt | incomplete | 🔴opus | paren-number,paren-number,paren-number,missing-pref-commentary |
-| 115 | fishing-port-count-by-type | missing | 🔴opus | - |
 | 113 | main-road-paving-rate | incomplete | 🔴opus | paren-number,paren-number,paren-number,missing-pref-commentary |
 | 110 | nature-park-area | incomplete | 🔴opus | paren-number,paren-number,paren-number,missing-pref-commentary |
 | 103 | local-allocation-tax-ratio-pref-finance | blocker | 🔴opus | paren-number |
@@ -54,6 +44,16 @@
 | 91 | furikake-consumption-expenditure | incomplete | 🔴opus | paren-number,paren-number,paren-number,missing-pref-commentary |
 | 91 | airport-count | incomplete | 🔴opus | paren-number,missing-pref-commentary |
 | 88 | campsite-public | incomplete | 🔴opus | paren-number,paren-number,paren-number,missing-pref-commentary |
+| 81 | bacon-consumption-expenditure | incomplete | 🔴opus | paren-number,paren-number,paren-number,missing-pref-commentary |
+| 79 | hobby-participation-rate-reading | incomplete | 🔴opus | paren-number,paren-number,paren-number,missing-pref-commentary |
+| 73 | nurse-count | incomplete | 🔴opus | paren-number,paren-number,missing-pref-commentary |
+| 73 | leek-consumption-quantity | incomplete | 🔴opus | paren-number,paren-number,faq-speculation,paren-number,missing-pref-commentary |
+| 72 | treatment-rate-mood-disorder-outpatient | incomplete | 🔴opus | paren-number,paren-number,missing-pref-commentary |
+| 71 | flavor-seasoning-consumption-expenditure | incomplete | 🔴opus | paren-number,paren-number,paren-number,missing-pref-commentary |
+| 71 | public-phone-count-per-1000 | incomplete | 🔴opus | paren-number,paren-number,paren-number,missing-pref-commentary |
+| 68 | geothermal-power-plant-count | incomplete | 🔴opus | missing-pref-commentary |
+| 67 | white-bread-consumption-quantity | incomplete | 🔴opus | paren-number,paren-number,missing-pref-commentary |
+| 66 | local-tax-prefecture | blocker | 🔴opus | paren-number |
 
 > 生成 (author) は常に **sonnet** (frontmatter 固定・コストゲート)。critic は既定 **sonnet**、
 > `review` 列が 🔴opus の上位30件 (高GSC流入) + tier-1 が REVISE した件だけ
