@@ -15,7 +15,8 @@ options:
   --limit N        先頭 N 件だけ処理 (試走用)
   --key <key>      特定 key (recovered-*/paid-*) 1 件だけ
   --include-paid   有料記事も対象 (所有者 note ログイン cookie が必要)
-  --cookie <val>   _note_session_v5 の値 (有料取得用。省略時 Chrome から自動抽出)
+  --cookie <val>   _note_session_v5 の値 (有料取得用)
+  --cookie-file <path>  playwright が保存した cookie JSON (login-note-playwright.py の出力)
   --out <dir>      staging ルート (既定 .local/r2)
   --no-images      画像 DL をスキップ (本文 md のみ)
 
@@ -153,6 +154,7 @@ def main():
     ap.add_argument("--key")
     ap.add_argument("--include-paid", action="store_true")
     ap.add_argument("--cookie")
+    ap.add_argument("--cookie-file")
     ap.add_argument("--out", default=".local/r2")
     ap.add_argument("--no-images", action="store_true")
     args = ap.parse_args()
@@ -165,7 +167,15 @@ def main():
 
     cookies = None
     if args.include_paid or (args.key and targets and targets[0]["is_paid"]):
-        if args.cookie:
+        if args.cookie_file:
+            raw = json.loads(Path(args.cookie_file).read_text())
+            # playwright cookies() 形式 (list of {name,value,...}) or 単純 dict
+            if isinstance(raw, list):
+                cookies = {c["name"]: c["value"] for c in raw}
+            else:
+                cookies = raw
+            print(f"[auth] cookie-file: {len(cookies)} cookies from {args.cookie_file}")
+        elif args.cookie:
             cookies = {"_note_session_v5": args.cookie}
         else:
             cookies, prof = get_cookie_from_chrome()
