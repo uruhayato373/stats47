@@ -26,6 +26,12 @@ interface FeaturedRankingCardProps {
    * 正典(A/B解決規則): apps/web/src/features/ranking/utils/resolve-thumbnail-variant.ts
    */
   variant?: RankingThumbnailVariant;
+  /**
+   * ホーム実験 grid (home-featured-v1) 用の等高化 (§6.1 同一 grid 内の高さを揃える)。
+   * true: カードが親セルの固定高さいっぱいに伸び、地図型は地図を残り高さに収める (meet 縮小)。
+   * false (既定): 現行そのまま (category 等の既存利用に影響しない)。
+   */
+  fitHeight?: boolean;
 }
 
 /**
@@ -46,6 +52,7 @@ export function FeaturedRankingCard({
   normalizationBasis,
   tileMapSvg,
   variant = "map",
+  fitHeight = false,
 }: FeaturedRankingCardProps) {
   // トップページ用 B: 数値型（代表値を最大要素にし、地図は薄い装飾背景）。
   // variant=number でも 1位名/値が欠損していれば下の A（地図型）へフォールバックする。
@@ -54,7 +61,7 @@ export function FeaturedRankingCard({
       <Link
         href={`/ranking/${rankingKey}`}
         title={title}
-        className="group relative flex flex-col overflow-hidden rounded-none border border-border transition-all hover:border-primary/50 hover:shadow-md"
+        className={`group relative flex flex-col overflow-hidden rounded-none border border-border transition-all hover:border-primary/50 hover:shadow-md${fitHeight ? " h-full" : ""}`}
       >
         {tileMapSvg && (
           <div
@@ -88,11 +95,19 @@ export function FeaturedRankingCard({
       <Link
         href={`/ranking/${rankingKey}`}
         title={title}
-        className="group block rounded-none border border-border hover:border-primary/50 hover:shadow-md transition-all overflow-hidden"
+        className={
+          fitHeight
+            ? "group flex h-full flex-col rounded-none border border-border hover:border-primary/50 hover:shadow-md transition-all overflow-hidden"
+            : "group block rounded-none border border-border hover:border-primary/50 hover:shadow-md transition-all overflow-hidden"
+        }
       >
         {tileMapSvg && (
           <div
-            className="w-full bg-muted/20 border-b border-border [&>svg]:w-full [&>svg]:h-auto [&>svg]:block"
+            className={
+              fitHeight
+                ? "min-h-0 w-full flex-1 bg-muted/20 border-b border-border [&>svg]:w-full [&>svg]:h-full [&>svg]:block"
+                : "w-full bg-muted/20 border-b border-border [&>svg]:w-full [&>svg]:h-auto [&>svg]:block"
+            }
             aria-hidden="true"
             dangerouslySetInnerHTML={{ __html: tileMapSvg }}
           />

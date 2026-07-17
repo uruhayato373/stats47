@@ -3,6 +3,8 @@ import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import {
   trackCsvDownload,
   trackAffiliateClick,
+  trackHomeFeaturedImpression,
+  trackHomeFeaturedClick,
   trackRankingView,
   trackYearChange,
   trackAreaTypeChange,
@@ -112,6 +114,60 @@ describe("GA4 カスタムイベント", () => {
 
     const params = mockGtag.mock.calls[0][2] as Record<string, unknown>;
     expect(params).not.toHaveProperty("ranking_key");
+  });
+
+  // ─── ホーム注目ランキング (home-featured-v1) ───
+
+  it("trackHomeFeaturedImpression が全 parameter を送信する", () => {
+    trackHomeFeaturedImpression({
+      rankingKey: "annual-sunshine-duration",
+      cardVariant: "question",
+      slot: 1,
+      experimentId: "home-featured-v1",
+      experimentVariant: "editorial",
+    });
+
+    expect(mockGtag).toHaveBeenCalledWith("event", "home_featured_impression", {
+      ranking_key: "annual-sunshine-duration",
+      card_variant: "question",
+      slot: 1,
+      experiment_id: "home-featured-v1",
+      experiment_variant: "editorial",
+      link_position: "home_featured",
+    });
+  });
+
+  it("trackHomeFeaturedClick が control 側でも experiment parameter を送信する", () => {
+    trackHomeFeaturedClick({
+      rankingKey: "total-population",
+      cardVariant: "map",
+      slot: 2,
+      experimentId: "home-featured-v1",
+      experimentVariant: "control",
+    });
+
+    expect(mockGtag).toHaveBeenCalledWith("event", "home_featured_click", {
+      ranking_key: "total-population",
+      card_variant: "map",
+      slot: 2,
+      experiment_id: "home-featured-v1",
+      experiment_variant: "control",
+      link_position: "home_featured",
+    });
+  });
+
+  it("home featured イベントは gtag 未定義で noop", () => {
+    vi.stubGlobal("window", { gtag: undefined });
+
+    trackHomeFeaturedImpression({
+      rankingKey: "k", cardVariant: "question", slot: 1,
+      experimentId: "home-featured-v1", experimentVariant: "editorial",
+    });
+    trackHomeFeaturedClick({
+      rankingKey: "k", cardVariant: "map", slot: 1,
+      experimentId: "home-featured-v1", experimentVariant: "control",
+    });
+    expect(mockGtag).not.toHaveBeenCalled();
   });
 
   it("window.gtag が未定義の場合にイベントを送信しない", () => {

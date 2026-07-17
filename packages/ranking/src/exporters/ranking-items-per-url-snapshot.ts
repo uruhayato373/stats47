@@ -1,10 +1,16 @@
 import "server-only";
 
+import {
+  HOME_FEATURED_RANKINGS,
+  METRICS_REGISTRY,
+  validateHomeFeaturedRankings,
+} from "@stats47/data-configs";
 import { logger } from "@stats47/logger/server";
 import { saveToR2 } from "@stats47/r2-storage/server";
 import { generateMiniTileSvg } from "@stats47/visualization/server";
 
 import surveysMaster from "../data/surveys.json";
+import { bakeHomeFeaturedItem, resolveHomeFeaturedItems } from "./home-featured";
 import { listRankingItemsWithTagsFromR2 } from "../repositories/ranking-item";
 import { readRankingValuesFromR2 } from "../repositories/ranking-value";
 import type { CategoryRankingItem } from "../types/ranking-item";
@@ -105,17 +111,26 @@ export async function exportRankingItemsPerUrl(): Promise<ExportRankingItemsPerU
   const uploads: Promise<{ key: string; size: number }>[] = [];
 
   // ── home/featured.json ──────────────────────────────────────────────────────
-  const featuredItems = items
-    .filter((it) => it.isFeatured && it.isActive && it.areaType === "prefecture")
-    .sort((a, b) => (a.featuredOrder ?? 0) - (b.featuredOrder ?? 0));
+  // ホームの選定・順番・hook・variant は git TS `HOME_FEATURED_RANKINGS` が SSOT
+  // (仕様 doc 28 §4-5。旧実装の isFeatured/featuredOrder 駆動から 2026-07 に移行。
+  //  isFeatured は category/survey 等の表示で使われ続けるため item からは削除しない)。
+  const configErrors = validateHomeFeaturedRankings(HOME_FEATURED_RANKINGS, METRICS_REGISTRY);
+  if (configErrors.length > 0) {
+    throw new Error(`HOME_FEATURED_RANKINGS validation failed: ${configErrors.join(" / ")}`);
+  }
+  const { resolved: featuredResolved, missingKeys } = resolveHomeFeaturedItems(items);
+  if (missingKeys.length > 0) {
+    logger.warn({ missingKeys }, "home featured: item.json に解決できない定義を skip しました");
+  }
 
-  // 各 featured item に「1 位」表示とミニタイルマップ SVG を焼き込む。
+  // 各 item に top/bottom/top3 + ミニタイルマップ SVG + homeFeatured (hook/variant) を焼き込む。
   // トップページ (`<FeaturedRankings>`) がランタイムで values.json を都度フェッチして
-  // SVG を生成する代わりに、ここ (ビルド時・1 回) で計算して snapshot に載せる
-  // (Derived → R2 snapshot の完全DBレス方針。値なし item はフィールド未設定のまま返し、
-  //  コンポーネント側の後方互換フォールバックに委ねる)。
+  // SVG を生成する代わりに、ここ (ビルド時・1 指標 1 回の values read) で計算して snapshot に
+  // 載せる (Derived → R2 snapshot の完全DBレス方針。値なし item は派生値なしのまま返し、
+  //  コンポーネント側の control フォールバックに委ねる)。派生ロジックは pure helper
+  //  (home-featured.ts) にあり fixture で unit test される。
   const featuredBaked: FeaturedRankingItem[] = await Promise.all(
-    featuredItems.map(async (item): Promise<FeaturedRankingItem> => {
+    featuredResolved.map(async ({ item, definition }): Promise<FeaturedRankingItem> => {
       const yearCode =
         item.availableYears?.[0]?.yearCode || item.latestYear?.yearCode || "2024";
       const valuesResult = await readRankingValuesFromR2(
@@ -124,27 +139,28 @@ export async function exportRankingItemsPerUrl(): Promise<ExportRankingItemsPerU
         yearCode,
       );
       if (!valuesResult.success || valuesResult.data.length === 0) {
-        return { ...item };
+        // 値が読めない場合も homeFeatured (hook/variant) は焼く (UI は payload 不足で control へ)
+        return {
+          ...item,
+          homeFeatured: {
+            order: definition.order,
+            hook: definition.hook,
+            variant: definition.variant,
+          },
+        };
       }
-      const values = valuesResult.data;
-      const top = values.find((v) => v.rank === 1);
-      const featuredTop = top
-        ? {
-            areaName: top.areaName,
-            value: top.value !== null ? top.value.toLocaleString("ja-JP") : null,
-          }
-        : null;
-      const tileMapSvg = generateMiniTileSvg(
-        values.flatMap((v) =>
-          v.value !== null
-            ? [{ areaCode: v.areaCode, value: v.value, rank: v.rank ?? undefined }]
-            : [],
-        ),
-        item.visualization?.colorScheme,
-        item.visualization?.isReversed,
-        item.rankingKey,
-      );
-      return { ...item, featuredTop, tileMapSvg };
+      return bakeHomeFeaturedItem({
+        item,
+        definition,
+        values: valuesResult.data,
+        generateSvg: (rows) =>
+          generateMiniTileSvg(
+            rows,
+            item.visualization?.colorScheme,
+            item.visualization?.isReversed,
+            item.rankingKey,
+          ),
+      });
     }),
   );
 
@@ -311,7 +327,7 @@ export async function exportRankingItemsPerUrl(): Promise<ExportRankingItemsPerU
 
   logger.info(
     {
-      home: featuredItems.length,
+      home: featuredBaked.length,
       categories: { count: categoriesCount, files: categoriesFiles },
       items: { count: items.length, files: itemsFiles },
       surveys: { count: surveysCount, files: surveysFiles },
@@ -322,7 +338,7 @@ export async function exportRankingItemsPerUrl(): Promise<ExportRankingItemsPerU
   );
 
   return {
-    home: { count: featuredItems.length },
+    home: { count: featuredBaked.length },
     categories: { count: categoriesCount, files: categoriesFiles },
     items: { count: items.length, files: itemsFiles },
     surveys: { count: surveysCount, files: surveysFiles },

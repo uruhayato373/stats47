@@ -1,7 +1,0 @@
-{
-  "kind": "derived",
-  "derived": "R2 app/stats/total-population/cities.json (2020年国勢調査人口)。市区町村(2トークン)を市・町・村に分類し、人口の多い町村と少ない市を比較。政令市行政区は除外。",
-  "source": "r2:app/stats/total-population/cities.json",
-  "fetchedAt": "2026-07-16T13:49:56.863Z",
-  "generatedBy": "manual /tmp aggregation (P1-05)"
-}

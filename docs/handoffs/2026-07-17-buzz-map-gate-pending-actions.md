@@ -7,9 +7,9 @@ status: pending
 
 # buzz-map 集客ゲート統合 — 完了済み成果と残アクション
 
-doc 27 (`docs/02_実装計画/27_buzz-map集客ゲート統合仕様.md`) の全 Phase + §16 正典更新は
-2026-07-17 に完了 (tests 108 pass / 整合性 error 0)。ただし**指示の境界どおり commit / push /
-公開 / 実投稿は一切していない**。以下がすべて残アクション。
+doc 27 の全 Phase + §16 正典更新は 2026-07-17 に完了 (tests 108 pass / 整合性 error 0)。
+**2026-07-17 に全変更 commit + develop→main デプロイ済 (PR #589)・ai-content 10 件も R2 公開済**。
+残アクションは以下のみ。
 
 ## 1. SNS 投稿判断 (draft 6 件・投稿タイミングは人間判断)
 
@@ -28,19 +28,14 @@ posts.json (SSOT) に status=draft で登録済み。posted 0 / scheduled 0。
 - IG: gallery `/sns` か instagram schedule JSON への予約登録 (二重書込は同一ハンドラ)
 - 全件 isPostable (landingContract=pass + live 200) 通過済み。頻度リミットは §1 (X≤3/日) に従う
 
-## 2. コンテンツ公開 (develop push が必要 = 明示指示待ち)
+## 2. ~~P1 記事 16 本の公開~~ → 完了 (2026-07-17)
 
-- **P1 記事 16 本** (`docs/21_ブログ記事原稿/`・published:false・critic PASS 済):
-  published:true 化 → develop push → blog-auto-publish.yml。残り 14 本は blocked-data で終端 (公開対象外)
-- **ai-content バッチ② 10 件** (`data/ai-content-staging/`・gate 通過済):
-  commit → develop push → publish-ai-content.yml
+16/16 本番公開済み (all.json 423 件・実ページ title 全 OK・OGP/サムネ欠落 0)。
+ai-content バッチ② 10 件も公開済 (R2 実測バイト一致)。blocked-data 14 本は終端 (公開対象外)。
 
-## 3. 全変更の commit / push (最優先推奨)
+## 3. ~~全変更の commit / push~~ → 完了 (2026-07-17)
 
-buzz-map ゲート一式 (curated-ideas TS 160 件 / builder / router / contract / batch CLI /
-attribution / tests 108 / gallery `/buzz-map` / 正典 5 ファイル) + P1 記事 + ai-content staging が
-**すべて未 commit**。他 PC・他セッションから見えず消失リスクあり。commit 時は並行セッションの
-dirty (`.claude/scripts/note/catalog/*` = note 復元系) を混ぜないこと。
+PR #589 で develop→main デプロイ済。ブランチは main/develop のみのクリーン状態。
 
 ## 4. GA4 custom dimension 登録 (ユーザー操作)
 
