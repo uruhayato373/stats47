@@ -1,8 +1,0 @@
-{
-  "kind": "derived",
-  "derived": "R2 gis/gsi-pni/points.json (国土地理院 電子国土基本図 地名情報の居住地名) を県コードで集計。県内の居住地名1000件あたりに含まれる『谷戸』の件数と『谷津』の件数をそれぞれ算出し、その差(谷戸share − 谷津share)を都道府県別に示す。",
-  "source": "r2:gis/gsi-pni/points.json",
-  "license": "国土地理院 PDL1.0 (出典明示で商用可)",
-  "fetchedAt": "2026-07-17T06:30:00.000Z",
-  "generatedBy": "manual (P1-20)"
-}

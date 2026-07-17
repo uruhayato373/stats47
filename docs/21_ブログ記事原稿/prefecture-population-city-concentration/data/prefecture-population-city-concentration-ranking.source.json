@@ -1,7 +1,0 @@
-{
-  "kind": "derived",
-  "derived": "R2 app/stats/total-population の県値(values.json)と市区町村値(cities.json)の2020年国勢調査人口から、各県で最も人口の多い市の人口を県総人口で割った集中率(%)を算出。政令市行政区は除外し市単位で最大都市を判定。東京都は特別区を単一の市として数えないため最大の市は八王子市。",
-  "source": "r2:app/stats/total-population/{values,cities}.json",
-  "fetchedAt": "2026-07-16T13:55:38.530Z",
-  "generatedBy": "manual /tmp aggregation (P1-06)"
-}

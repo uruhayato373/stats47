@@ -1,7 +1,0 @@
-{
-  "kind": "derived",
-  "derived": "R2 app/stats/total-population/cities.json の2015年と2020年の国勢調査人口から、市区町村(県+市区町村の2トークン=政令市行政区を除外)ごとの5年増減率を算出。2015年と2020年の双方に人口がある1,738市区町村を対象に、県別に -10%以下の数と県内総数に占める割合を集計。",
-  "source": "r2:app/stats/total-population/cities.json",
-  "fetchedAt": "2026-07-16T13:46:02.051Z",
-  "generatedBy": "manual /tmp aggregation (P1-01, complete muni set)"
-}
