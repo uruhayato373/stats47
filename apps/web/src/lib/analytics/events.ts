@@ -94,6 +94,49 @@ export function trackCtaClick(params: {
   });
 }
 
+// ─── ホーム注目ランキング (home-featured-v1 実験) ──────────────
+
+/**
+ * ホーム「注目のランキング」カードの共通 payload。
+ * `link_position=home_featured` は両イベント固定 (GSC/GA4 で他導線と区別する)。
+ * `card_variant` は実際に描画された variant (control 側は map/number、editorial 側は
+ * question/comparison/territory/top-three。payload 不足 fallback 時は fallback 後の値)。
+ * `slot` は 1 始まりの表示位置。custom dimension 登録は人間タスク (仕様 doc 28 §9.3)。
+ */
+export interface HomeFeaturedEventParams {
+  rankingKey: string;
+  cardVariant: string;
+  slot: number;
+  experimentId: string;
+  experimentVariant: string;
+}
+
+function homeFeaturedPayload(params: HomeFeaturedEventParams): Record<string, unknown> {
+  return {
+    ranking_key: params.rankingKey,
+    card_variant: params.cardVariant,
+    slot: params.slot,
+    experiment_id: params.experimentId,
+    experiment_variant: params.experimentVariant,
+    link_position: "home_featured",
+  };
+}
+
+/**
+ * ホーム注目ランキングカードの impression (50% 以上 × 1 秒 × card mount につき 1 回)。
+ * 発火条件の機械実装は features/ranking の impression watcher が担う。
+ */
+export function trackHomeFeaturedImpression(params: HomeFeaturedEventParams): void {
+  sendEvent("home_featured_impression", homeFeaturedPayload(params));
+}
+
+/**
+ * ホーム注目ランキングカードのクリック (カード全体リンクへの遷移)。
+ */
+export function trackHomeFeaturedClick(params: HomeFeaturedEventParams): void {
+  sendEvent("home_featured_click", homeFeaturedPayload(params));
+}
+
 // ─── ランキングページ ───────────────────────────────────────
 
 /**

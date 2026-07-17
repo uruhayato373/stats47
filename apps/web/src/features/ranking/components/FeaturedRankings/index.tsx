@@ -1,7 +1,7 @@
 import Link from "next/link";
 
-import { getMetricConfig, type RankingThumbnailVariant } from "@stats47/data-configs";
-import { buildRankingDisplayInfo } from "@stats47/ranking";
+import { getMetricConfig, HOME_FEATURED_RANKINGS, type RankingThumbnailVariant } from "@stats47/data-configs";
+import { buildRankingDisplayInfo, deriveHomeFeaturedValues } from "@stats47/ranking";
 import { readRankingValuesFromR2 } from "@stats47/ranking/server";
 import { isOk } from "@stats47/types";
 import { generateMiniTileSvg } from "@stats47/visualization/server";
@@ -11,8 +11,16 @@ import { SHELL_WIDTH_CLASS } from "@/components/layout/PageShell";
 import { logger } from "@/lib/logger";
 
 import { getFeaturedRankings } from "../../server";
+import {
+  needsHomeFeaturedValuesFetch,
+  resolveHomeFeaturedEditorial,
+  type HomeFeaturedSnapshotFields,
+} from "../../utils/resolve-home-featured-card";
 import { resolveRankingThumbnailVariant } from "../../utils/resolve-thumbnail-variant";
-import { FeaturedRankingCard } from "../FeaturedRankingCard";
+import {
+  FeaturedRankingExperimentGrid,
+  type HomeFeaturedGridItem,
+} from "./FeaturedRankingExperimentGrid";
 
 /**
  * FeaturedRankingsのProps
@@ -31,32 +39,22 @@ interface FeaturedRankingsProps {
 }
 
 /**
- * おすすめランキングコンポーネント
+ * おすすめランキングコンポーネント (Server)
  *
- * おすすめランキングをカード形式で表示するサーバーコンポーネント。
- * 各ランキングの1位データとタイルマップSVGを生成してカードに表示する。
- *
- * 最適化: 全47行データは tile map と rank=1 の両方で必要なため、
- * 各ランキングで1回だけ fetch し rank=1 を自前で抽出する（旧実装は
- * readTopRankingValuesBatchFromR2 で内部的に同じ fetch を重複させていた）。
+ * home-featured-v1 実験 (仕様 doc 28):
+ * - data 取得と control/editorial payload の解決だけをここで行い、
+ *   sticky 割当・計測・描画は Client の FeaturedRankingExperimentGrid に委譲する。
+ * - 新 snapshot (派生値焼き込み済み) ではランタイムの values.json 追加 fetch は 0。
+ * - 旧 snapshot: 現行どおり control 用のランタイム生成にフォールバックし、editorial は
+ *   payload 不足 → control 表示 (§5.4)。development のみ git TS 設定 + values fetch で
+ *   in-memory 補完し editorial を QA できる (production では補完しない)。
  */
 export async function FeaturedRankings({
   limit = 6,
   showHeader = true,
   thumbnailVariantDefault = "number",
 }: FeaturedRankingsProps) {
-  let items: {
-    rankingKey: string;
-    title: string;
-    latestYear: string;
-    unit: string;
-    topAreaName?: string;
-    topValue?: string;
-    demographicAttr?: string;
-    normalizationBasis?: string;
-    tileMapSvg?: string;
-    variant?: RankingThumbnailVariant;
-  }[] = [];
+  let gridItems: HomeFeaturedGridItem[] = [];
 
   try {
     const featuredResult = await getFeaturedRankings(limit);
@@ -68,54 +66,83 @@ export async function FeaturedRankings({
         return true;
       });
 
-      // 通常は exporter が featured.json に「1位」表示とタイルマップ SVG を焼き込み済み
-      // (item.tileMapSvg あり) なので、ここでの values.json フェッチ・SVG 生成は 0 回。
-      // 旧 featured.json (未焼き込み) の item だけランタイム生成にフォールバックする。
-      const unbakedItems = uniqueItems.filter((item) => item.tileMapSvg == null);
+      const isDevelopment = process.env.NODE_ENV === "development";
+      const devConfigByKey = isDevelopment
+        ? new Map(HOME_FEATURED_RANKINGS.map((d) => [d.rankingKey, d]))
+        : null;
+
+      // snapshot 由来の editorial 判定材料。dev では homeFeatured を git TS 設定で補完し、
+      // 旧 snapshot でも editorial variant を QA できるようにする (§5.4 の localhost 補完)。
+      const effectiveFields = new Map<string, HomeFeaturedSnapshotFields>(
+        uniqueItems.map((item) => {
+          const devDef = devConfigByKey?.get(item.rankingKey);
+          return [
+            item.rankingKey,
+            {
+              homeFeatured:
+                item.homeFeatured ??
+                (devDef
+                  ? { order: devDef.order, hook: devDef.hook, variant: devDef.variant }
+                  : null),
+              featuredTop: item.featuredTop ?? null,
+              featuredBottom: item.featuredBottom ?? null,
+              featuredTopThree: item.featuredTopThree ?? null,
+              tileMapSvg: item.tileMapSvg ?? null,
+            },
+          ];
+        }),
+      );
+
+      // 通常は exporter が featured.json に派生値を焼き込み済みで、ここでの values.json
+      // フェッチは 0 回 (needsHomeFeaturedValuesFetch が新 snapshot で false を返すことを
+      // unit test で保証)。旧 snapshot の item だけランタイム生成にフォールバックする。
+      const fetchTargets = uniqueItems.filter((item) =>
+        needsHomeFeaturedValuesFetch(effectiveFields.get(item.rankingKey)!, { isDevelopment }),
+      );
       const fallbackValues = new Map<string, Awaited<ReturnType<typeof readRankingValuesFromR2>>>();
-      if (unbakedItems.length > 0) {
+      if (fetchTargets.length > 0) {
         const results = await Promise.all(
-          unbakedItems.map((item) => {
+          fetchTargets.map((item) => {
             const yearCode = item.availableYears?.[0]?.yearCode || item.latestYear?.yearCode || "2024";
             return readRankingValuesFromR2(item.rankingKey, "prefecture", yearCode);
           }),
         );
-        unbakedItems.forEach((item, idx) => fallbackValues.set(item.rankingKey, results[idx]));
+        fetchTargets.forEach((item, idx) => fallbackValues.set(item.rankingKey, results[idx]));
       }
 
-      items = uniqueItems.map((item) => {
+      gridItems = uniqueItems.map((item) => {
         const latestYear = item.availableYears?.[0]?.yearCode || item.latestYear?.yearCode || "2024";
         const displayInfo = buildRankingDisplayInfo(item);
+        const fields = effectiveFields.get(item.rankingKey)!;
 
-        let topAreaName: string | undefined;
-        let topValue: string | undefined;
-        let tileMapSvg: string | undefined;
+        let topAreaName: string | undefined = fields.featuredTop?.areaName;
+        let topValue: string | undefined = fields.featuredTop?.value ?? undefined;
+        let tileMapSvg: string | undefined = fields.tileMapSvg ?? undefined;
 
-        if (item.tileMapSvg != null) {
-          // ビルド時に焼き込み済み: ランタイムフェッチ・SVG 生成なし
-          topAreaName = item.featuredTop?.areaName;
-          topValue = item.featuredTop?.value ?? undefined;
-          tileMapSvg = item.tileMapSvg;
-        } else {
-          // 後方互換フォールバック: 旧 featured.json はランタイムで生成
-          const valuesResult = fallbackValues.get(item.rankingKey);
-          if (valuesResult && isOk(valuesResult) && valuesResult.data.length > 0) {
-            const top = valuesResult.data.find((v) => v.rank === 1);
-            if (top) {
-              topAreaName = top.areaName;
-              topValue = top.value !== null ? top.value.toLocaleString("ja-JP") : undefined;
-            }
+        const valuesResult = fallbackValues.get(item.rankingKey);
+        if (valuesResult && isOk(valuesResult) && valuesResult.data.length > 0) {
+          // in-memory 補完 (旧 snapshot の control 用 + dev の editorial 用)。R2 へ書かない。
+          const derived = deriveHomeFeaturedValues(valuesResult.data);
+          fields.featuredTop = fields.featuredTop ?? derived.featuredTop;
+          fields.featuredBottom = fields.featuredBottom ?? derived.featuredBottom;
+          if (!fields.featuredTopThree || fields.featuredTopThree.length === 0) {
+            fields.featuredTopThree = derived.featuredTopThree;
+          }
+          topAreaName = topAreaName ?? derived.featuredTop?.areaName;
+          topValue = topValue ?? derived.featuredTop?.value ?? undefined;
+          if (tileMapSvg == null) {
             tileMapSvg = generateMiniTileSvg(
               valuesResult.data.flatMap((v) => v.value !== null ? [{ areaCode: v.areaCode, value: v.value, rank: v.rank ?? undefined }] : []),
               item.visualization?.colorScheme,
               item.visualization?.isReversed,
               item.rankingKey,
             );
+            fields.tileMapSvg = tileMapSvg;
           }
         }
 
-        // A/B バリアント解決 (config > 表示場所既定 > map、データ欠損/長すぎは A へ戻す)。
-        const variant = resolveRankingThumbnailVariant({
+        // control の A/B バリアント解決 (config > 表示場所既定 > map、データ欠損/長すぎは A へ戻す)。
+        const controlVariant = resolveRankingThumbnailVariant({
           configVariant: getMetricConfig(item.rankingKey)?.thumbnailVariant,
           locationDefault: thumbnailVariantDefault,
           topAreaName,
@@ -127,12 +154,15 @@ export async function FeaturedRankings({
           title: displayInfo.title,
           latestYear,
           unit: displayInfo.unit,
-          topAreaName,
-          topValue,
-          demographicAttr: displayInfo.demographicAttr || undefined,
-          normalizationBasis: displayInfo.normalizationBasis || undefined,
-          tileMapSvg,
-          variant,
+          control: {
+            variant: controlVariant,
+            topAreaName,
+            topValue,
+            demographicAttr: displayInfo.demographicAttr || undefined,
+            normalizationBasis: displayInfo.normalizationBasis || undefined,
+            tileMapSvg,
+          },
+          editorial: resolveHomeFeaturedEditorial(fields),
         };
       });
     }
@@ -146,7 +176,7 @@ export async function FeaturedRankings({
     );
   }
 
-  if (items.length === 0) {
+  if (gridItems.length === 0) {
     return null;
   }
 
@@ -162,23 +192,7 @@ export async function FeaturedRankings({
             </Link>
           </div>
         )}
-        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-3">
-          {items.map((item, idx) => (
-            <FeaturedRankingCard
-              key={`${item.rankingKey}-${idx}`}
-              rankingKey={item.rankingKey}
-              title={item.title}
-              latestYear={item.latestYear}
-              unit={item.unit}
-              topAreaName={item.topAreaName}
-              topValue={item.topValue}
-              demographicAttr={item.demographicAttr}
-              normalizationBasis={item.normalizationBasis}
-              tileMapSvg={item.tileMapSvg}
-              variant={item.variant}
-            />
-          ))}
-        </div>
+        <FeaturedRankingExperimentGrid items={gridItems} />
       </div>
     </section>
   );

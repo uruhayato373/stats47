@@ -2,7 +2,11 @@
  * ランキング項目の型定義
  * 2026-01 設計見直しにより構造を階層化
  */
-import type { ProvenanceSurvey, SourceAttribution } from "@stats47/data-configs";
+import type {
+  HomeFeaturedCardVariant,
+  ProvenanceSurvey,
+  SourceAttribution,
+} from "@stats47/data-configs";
 import type { AreaType } from "@stats47/types";
 import type {
     ColorSchemeType,
@@ -312,11 +316,32 @@ export interface RankingItem {
  * 焼き込み前の旧 featured.json との後方互換のため両フィールドとも optional
  * (未焼き込み item はコンポーネント側がランタイム生成にフォールバックする)。
  */
+/**
+ * home/featured.json に焼き込む派生値 1 件 (仕様 doc 28 §5.2)。
+ * rank は snapshot の実 rank (同順位があっても「47位」等を固定表示しない)。
+ * 旧 snapshot の featuredTop には rank が無いため optional。
+ */
+export interface FeaturedValue {
+  rank?: number;
+  areaName: string;
+  value: string | null;
+}
+
 export interface FeaturedRankingItem extends RankingItem {
   /** ビルド時に焼き込む「1 位」表示 (都道府県名 + ロケール整形済み値文字列)。null = 値なし */
-  featuredTop?: { areaName: string; value: string | null } | null;
+  featuredTop?: FeaturedValue | null;
+  /** ビルド時に焼き込む最下位 (実 rank 付き)。comparison card 用。null = 値なし */
+  featuredBottom?: FeaturedValue | null;
+  /** ビルド時に焼き込む上位 3 件 (rank 昇順)。top-three card 用。3 件未満なら不足のまま */
+  featuredTopThree?: FeaturedValue[];
   /** ビルド時に焼き込むミニタイルマップ SVG 文字列 */
   tileMapSvg?: string | null;
+  /** ホーム専用編集設定 (git TS HOME_FEATURED_RANKINGS 由来)。欠損 = 旧 snapshot → control 表示 */
+  homeFeatured?: {
+    order: number;
+    hook: string;
+    variant: HomeFeaturedCardVariant;
+  };
 }
 
 /**
