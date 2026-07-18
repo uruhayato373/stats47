@@ -1,0 +1,82 @@
+{
+  "slug": "excel-ranking-auto",
+  "access": "paid",
+  "note": "添付は商品 manifest を参照し、ファイルを複製しない (SSOT は .local/coconala-products)。verified=false の添付は実機検証まで販売添付を保留する。",
+  "attachments": [
+    {
+      "productId": "C-02",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/C-02/v1/SOURCES.csv",
+      "filename": "SOURCES.csv",
+      "sha256": "7c28a0ab1931b8f011e07dccf2c20b6c03bdad63f01a3b34fd185b1c2be19fa4",
+      "bytes": 527,
+      "contentType": "text/csv",
+      "isPaid": true,
+      "licenseId": "single-corporate",
+      "officeCompatibility": [
+        "Excel 365 (Windows / Mac)"
+      ],
+      "verified": false
+    },
+    {
+      "productId": "C-02",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/C-02/v1/LICENSE-ja.txt",
+      "filename": "LICENSE-ja.txt",
+      "sha256": "7acd178456ed99f44e5f4b46d5b8e1ddade73749a74f84108c573a7bde762aaa",
+      "bytes": 1000,
+      "contentType": "text/plain",
+      "isPaid": true,
+      "licenseId": "single-corporate",
+      "officeCompatibility": [
+        "Excel 365 (Windows / Mac)"
+      ],
+      "verified": false
+    },
+    {
+      "productId": "C-02",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/C-02/v1/data.csv",
+      "filename": "data.csv",
+      "sha256": "8a40a8d9d36f811457527d75e22a7e68cbfa1af95d82c9318db4048493a75eba",
+      "bytes": 1711,
+      "contentType": "text/csv",
+      "isPaid": true,
+      "licenseId": "single-corporate",
+      "officeCompatibility": [
+        "Excel 365 (Windows / Mac)"
+      ],
+      "verified": false
+    },
+    {
+      "productId": "C-02",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/C-02/v1/product.xlsx",
+      "filename": "product.xlsx",
+      "sha256": "58672b8ba54007220144d650d689bafebec56dc82ba9eaed00d07da87dbac3c9",
+      "bytes": 11480,
+      "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "isPaid": true,
+      "licenseId": "single-corporate",
+      "officeCompatibility": [
+        "Excel 365 (Windows / Mac)"
+      ],
+      "verified": false
+    },
+    {
+      "productId": "C-02",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/C-02/v1/manual.pdf",
+      "filename": "manual.pdf",
+      "sha256": "7ef5dd6fd3eb23a75343f148d988380762b013d52cc8893ec1f64a60b8f82326",
+      "bytes": 37157,
+      "contentType": "application/pdf",
+      "isPaid": true,
+      "licenseId": "single-corporate",
+      "officeCompatibility": [
+        "Excel 365 (Windows / Mac)"
+      ],
+      "verified": false
+    }
+  ]
+}

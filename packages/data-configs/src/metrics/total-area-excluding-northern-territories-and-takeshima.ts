@@ -65,13 +65,6 @@ export const totalAreaExcludingNorthernTerritoriesAndTakeshima: MetricConfig = {
         "scaleFactor": 100000,
         "decimalPlaces": 1,
       },
-      {
-        "type": "per_area",
-        "label": "面積100km²あたり",
-        "unit": "ｈａ/100km²",
-        "scaleFactor": 100,
-        "decimalPlaces": 2,
-      },
     ],
   },
   "seoTitle": "総面積ランキング都道府県【2024年】｜1位北海道（7,841,921ｈａ）",

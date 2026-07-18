@@ -19,7 +19,7 @@ export interface IsBaseMetricInput {
   calculation?: Pick<CalculationConfig, "type"> | null;
 }
 
-const DENOMINATOR_KEYS = new Set([
+export const DENOMINATOR_KEYS = new Set([
   "total-population",
   "total-population-male",
   "total-population-female",

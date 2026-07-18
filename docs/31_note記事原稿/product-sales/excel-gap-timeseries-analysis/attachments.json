@@ -1,0 +1,307 @@
+{
+  "slug": "excel-gap-timeseries-analysis",
+  "access": "paid",
+  "note": "添付は商品 manifest を参照し、ファイルを複製しない (SSOT は .local/coconala-products)。verified=false の添付は実機検証まで販売添付を保留する。",
+  "attachments": [
+    {
+      "productId": "C-05",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/C-05/v1/SOURCES.csv",
+      "filename": "SOURCES.csv",
+      "sha256": "7c28a0ab1931b8f011e07dccf2c20b6c03bdad63f01a3b34fd185b1c2be19fa4",
+      "bytes": 527,
+      "contentType": "text/csv",
+      "isPaid": true,
+      "licenseId": "single-corporate",
+      "officeCompatibility": [
+        "Excel 365 (Windows / Mac)"
+      ],
+      "verified": false
+    },
+    {
+      "productId": "C-05",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/C-05/v1/LICENSE-ja.txt",
+      "filename": "LICENSE-ja.txt",
+      "sha256": "7acd178456ed99f44e5f4b46d5b8e1ddade73749a74f84108c573a7bde762aaa",
+      "bytes": 1000,
+      "contentType": "text/plain",
+      "isPaid": true,
+      "licenseId": "single-corporate",
+      "officeCompatibility": [
+        "Excel 365 (Windows / Mac)"
+      ],
+      "verified": false
+    },
+    {
+      "productId": "C-05",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/C-05/v1/data.csv",
+      "filename": "data.csv",
+      "sha256": "8a40a8d9d36f811457527d75e22a7e68cbfa1af95d82c9318db4048493a75eba",
+      "bytes": 1711,
+      "contentType": "text/csv",
+      "isPaid": true,
+      "licenseId": "single-corporate",
+      "officeCompatibility": [
+        "Excel 365 (Windows / Mac)"
+      ],
+      "verified": false
+    },
+    {
+      "productId": "C-05",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/C-05/v1/product.xlsx",
+      "filename": "product.xlsx",
+      "sha256": "af7b69c98f53e5c1a1af38079b642baf086e1ba929283dce66651d209a69acdf",
+      "bytes": 11465,
+      "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "isPaid": true,
+      "licenseId": "single-corporate",
+      "officeCompatibility": [
+        "Excel 365 (Windows / Mac)"
+      ],
+      "verified": false
+    },
+    {
+      "productId": "C-05",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/C-05/v1/manual.pdf",
+      "filename": "manual.pdf",
+      "sha256": "d4700d6d92ddd4e0d412406dfe5e753775a3a2f8472937f49894450d5a6ac86b",
+      "bytes": 37961,
+      "contentType": "application/pdf",
+      "isPaid": true,
+      "licenseId": "single-corporate",
+      "officeCompatibility": [
+        "Excel 365 (Windows / Mac)"
+      ],
+      "verified": false
+    },
+    {
+      "productId": "C-06",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/C-06/v1/SOURCES.csv",
+      "filename": "SOURCES.csv",
+      "sha256": "7c28a0ab1931b8f011e07dccf2c20b6c03bdad63f01a3b34fd185b1c2be19fa4",
+      "bytes": 527,
+      "contentType": "text/csv",
+      "isPaid": true,
+      "licenseId": "single-corporate",
+      "officeCompatibility": [
+        "Excel 365 (Windows / Mac)"
+      ],
+      "verified": false
+    },
+    {
+      "productId": "C-06",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/C-06/v1/LICENSE-ja.txt",
+      "filename": "LICENSE-ja.txt",
+      "sha256": "7acd178456ed99f44e5f4b46d5b8e1ddade73749a74f84108c573a7bde762aaa",
+      "bytes": 1000,
+      "contentType": "text/plain",
+      "isPaid": true,
+      "licenseId": "single-corporate",
+      "officeCompatibility": [
+        "Excel 365 (Windows / Mac)"
+      ],
+      "verified": false
+    },
+    {
+      "productId": "C-06",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/C-06/v1/data.csv",
+      "filename": "data.csv",
+      "sha256": "8a40a8d9d36f811457527d75e22a7e68cbfa1af95d82c9318db4048493a75eba",
+      "bytes": 1711,
+      "contentType": "text/csv",
+      "isPaid": true,
+      "licenseId": "single-corporate",
+      "officeCompatibility": [
+        "Excel 365 (Windows / Mac)"
+      ],
+      "verified": false
+    },
+    {
+      "productId": "C-06",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/C-06/v1/product.xlsx",
+      "filename": "product.xlsx",
+      "sha256": "5ceeb5dff538a9aa907296c73d25f46ad62695f9d123be8890a491319e05e39d",
+      "bytes": 11479,
+      "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "isPaid": true,
+      "licenseId": "single-corporate",
+      "officeCompatibility": [
+        "Excel 365 (Windows / Mac)"
+      ],
+      "verified": false
+    },
+    {
+      "productId": "C-06",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/C-06/v1/manual.pdf",
+      "filename": "manual.pdf",
+      "sha256": "0b6c4a9b1c26e17b2e5317bdef35aa3a7b69f419ec8cdcadee9c4a698ba4c66e",
+      "bytes": 37654,
+      "contentType": "application/pdf",
+      "isPaid": true,
+      "licenseId": "single-corporate",
+      "officeCompatibility": [
+        "Excel 365 (Windows / Mac)"
+      ],
+      "verified": false
+    },
+    {
+      "productId": "C-07",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/C-07/v1/SOURCES.csv",
+      "filename": "SOURCES.csv",
+      "sha256": "7c28a0ab1931b8f011e07dccf2c20b6c03bdad63f01a3b34fd185b1c2be19fa4",
+      "bytes": 527,
+      "contentType": "text/csv",
+      "isPaid": true,
+      "licenseId": "single-corporate",
+      "officeCompatibility": [
+        "Excel 365 (Windows / Mac)"
+      ],
+      "verified": false
+    },
+    {
+      "productId": "C-07",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/C-07/v1/LICENSE-ja.txt",
+      "filename": "LICENSE-ja.txt",
+      "sha256": "7acd178456ed99f44e5f4b46d5b8e1ddade73749a74f84108c573a7bde762aaa",
+      "bytes": 1000,
+      "contentType": "text/plain",
+      "isPaid": true,
+      "licenseId": "single-corporate",
+      "officeCompatibility": [
+        "Excel 365 (Windows / Mac)"
+      ],
+      "verified": false
+    },
+    {
+      "productId": "C-07",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/C-07/v1/data.csv",
+      "filename": "data.csv",
+      "sha256": "8a40a8d9d36f811457527d75e22a7e68cbfa1af95d82c9318db4048493a75eba",
+      "bytes": 1711,
+      "contentType": "text/csv",
+      "isPaid": true,
+      "licenseId": "single-corporate",
+      "officeCompatibility": [
+        "Excel 365 (Windows / Mac)"
+      ],
+      "verified": false
+    },
+    {
+      "productId": "C-07",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/C-07/v1/product.xlsx",
+      "filename": "product.xlsx",
+      "sha256": "1701250699d064bdcc7fb370cc0580eecdff11010e85f22612a4ae0d7781771a",
+      "bytes": 11490,
+      "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "isPaid": true,
+      "licenseId": "single-corporate",
+      "officeCompatibility": [
+        "Excel 365 (Windows / Mac)"
+      ],
+      "verified": false
+    },
+    {
+      "productId": "C-07",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/C-07/v1/manual.pdf",
+      "filename": "manual.pdf",
+      "sha256": "0353c85d35278db7c323b8a9d5aaa82287abd524373a663a9882df2192b33dc0",
+      "bytes": 38604,
+      "contentType": "application/pdf",
+      "isPaid": true,
+      "licenseId": "single-corporate",
+      "officeCompatibility": [
+        "Excel 365 (Windows / Mac)"
+      ],
+      "verified": false
+    },
+    {
+      "productId": "C-08",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/C-08/v1/SOURCES.csv",
+      "filename": "SOURCES.csv",
+      "sha256": "7c28a0ab1931b8f011e07dccf2c20b6c03bdad63f01a3b34fd185b1c2be19fa4",
+      "bytes": 527,
+      "contentType": "text/csv",
+      "isPaid": true,
+      "licenseId": "single-corporate",
+      "officeCompatibility": [
+        "Excel 365 (Windows / Mac)"
+      ],
+      "verified": false
+    },
+    {
+      "productId": "C-08",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/C-08/v1/LICENSE-ja.txt",
+      "filename": "LICENSE-ja.txt",
+      "sha256": "7acd178456ed99f44e5f4b46d5b8e1ddade73749a74f84108c573a7bde762aaa",
+      "bytes": 1000,
+      "contentType": "text/plain",
+      "isPaid": true,
+      "licenseId": "single-corporate",
+      "officeCompatibility": [
+        "Excel 365 (Windows / Mac)"
+      ],
+      "verified": false
+    },
+    {
+      "productId": "C-08",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/C-08/v1/data.csv",
+      "filename": "data.csv",
+      "sha256": "8a40a8d9d36f811457527d75e22a7e68cbfa1af95d82c9318db4048493a75eba",
+      "bytes": 1711,
+      "contentType": "text/csv",
+      "isPaid": true,
+      "licenseId": "single-corporate",
+      "officeCompatibility": [
+        "Excel 365 (Windows / Mac)"
+      ],
+      "verified": false
+    },
+    {
+      "productId": "C-08",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/C-08/v1/product.xlsx",
+      "filename": "product.xlsx",
+      "sha256": "d1af275741b3e31e6cd0e60ac5fa7a2537a990d0c4de839f6c5233302a847343",
+      "bytes": 11476,
+      "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "isPaid": true,
+      "licenseId": "single-corporate",
+      "officeCompatibility": [
+        "Excel 365 (Windows / Mac)"
+      ],
+      "verified": false
+    },
+    {
+      "productId": "C-08",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/C-08/v1/manual.pdf",
+      "filename": "manual.pdf",
+      "sha256": "39d8ab1a5851b114088d4d813bc6a0a184d1bffb8f3644ab69d2622d64d766d7",
+      "bytes": 38612,
+      "contentType": "application/pdf",
+      "isPaid": true,
+      "licenseId": "single-corporate",
+      "officeCompatibility": [
+        "Excel 365 (Windows / Mac)"
+      ],
+      "verified": false
+    }
+  ]
+}

@@ -1,0 +1,87 @@
+{
+  "slug": "excel-choropleth-map",
+  "access": "paid",
+  "note": "添付は商品 manifest を参照し、ファイルを複製しない (SSOT は .local/coconala-products)。verified=false の添付は実機検証まで販売添付を保留する。",
+  "attachments": [
+    {
+      "productId": "C-01",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/C-01/v1/SOURCES.csv",
+      "filename": "SOURCES.csv",
+      "sha256": "7c28a0ab1931b8f011e07dccf2c20b6c03bdad63f01a3b34fd185b1c2be19fa4",
+      "bytes": 527,
+      "contentType": "text/csv",
+      "isPaid": true,
+      "licenseId": "single-corporate",
+      "officeCompatibility": [
+        "Excel 365 (Windows / Mac)",
+        "地図の新規作成・データ追加にオンライン接続が必要"
+      ],
+      "verified": false
+    },
+    {
+      "productId": "C-01",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/C-01/v1/LICENSE-ja.txt",
+      "filename": "LICENSE-ja.txt",
+      "sha256": "7acd178456ed99f44e5f4b46d5b8e1ddade73749a74f84108c573a7bde762aaa",
+      "bytes": 1000,
+      "contentType": "text/plain",
+      "isPaid": true,
+      "licenseId": "single-corporate",
+      "officeCompatibility": [
+        "Excel 365 (Windows / Mac)",
+        "地図の新規作成・データ追加にオンライン接続が必要"
+      ],
+      "verified": false
+    },
+    {
+      "productId": "C-01",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/C-01/v1/data.csv",
+      "filename": "data.csv",
+      "sha256": "8a40a8d9d36f811457527d75e22a7e68cbfa1af95d82c9318db4048493a75eba",
+      "bytes": 1711,
+      "contentType": "text/csv",
+      "isPaid": true,
+      "licenseId": "single-corporate",
+      "officeCompatibility": [
+        "Excel 365 (Windows / Mac)",
+        "地図の新規作成・データ追加にオンライン接続が必要"
+      ],
+      "verified": false
+    },
+    {
+      "productId": "C-01",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/C-01/v1/product.xlsx",
+      "filename": "product.xlsx",
+      "sha256": "d2bb5c5c0a7232471eb0b0db049719ef4630c3715efccdd41f82157d68fd3daf",
+      "bytes": 11513,
+      "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "isPaid": true,
+      "licenseId": "single-corporate",
+      "officeCompatibility": [
+        "Excel 365 (Windows / Mac)",
+        "地図の新規作成・データ追加にオンライン接続が必要"
+      ],
+      "verified": false
+    },
+    {
+      "productId": "C-01",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/C-01/v1/manual.pdf",
+      "filename": "manual.pdf",
+      "sha256": "2611b2cdb2aef38bf6007b2a0bb03a76cbf7bfeb15c7ec3dac9d6c60b15f5ba2",
+      "bytes": 39213,
+      "contentType": "application/pdf",
+      "isPaid": true,
+      "licenseId": "single-corporate",
+      "officeCompatibility": [
+        "Excel 365 (Windows / Mac)",
+        "地図の新規作成・データ追加にオンライン接続が必要"
+      ],
+      "verified": false
+    }
+  ]
+}

@@ -32,7 +32,7 @@ export const EHIME_EDITORIAL: AreaEditorial = {
       name: "紅まどんな",
       municipality: "松山市・今治市",
       description:
-        "県が育成したかんきつで、皮も袋（じょうのう）もやわらかく、ゼリーのようにとろける食感が特徴。ハウス栽培でしか作れず出荷は12月限定という希少性の高さから贈答品としても人気が高い。",
+        "県が育成したかんきつで、皮も袋（じょうのう）もやわらかく、ゼリーのようにとろける食感が特徴。雨に弱く施設栽培が中心で、11〜12月に出荷される大玉・濃紅色の贈答用品種として人気が高い。",
       sourceUrl: "https://www.zennoh.or.jp/eh/food/Introduction/ssi/fruits/benimadonna.html",
       accessedAt: "2026-07-18",
     },

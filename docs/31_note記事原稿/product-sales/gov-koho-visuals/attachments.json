@@ -1,0 +1,82 @@
+{
+  "slug": "gov-koho-visuals",
+  "access": "paid",
+  "note": "添付は商品 manifest を参照し、ファイルを複製しない (SSOT は .local/coconala-products)。verified=false の添付は実機検証まで販売添付を保留する。",
+  "attachments": [
+    {
+      "productId": "F-10",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/F-10/v1/SOURCES.csv",
+      "filename": "SOURCES.csv",
+      "sha256": "7c28a0ab1931b8f011e07dccf2c20b6c03bdad63f01a3b34fd185b1c2be19fa4",
+      "bytes": 527,
+      "contentType": "text/csv",
+      "isPaid": true,
+      "licenseId": "single-corporate",
+      "officeCompatibility": [
+        "SVG / PNG 対応ビューア"
+      ],
+      "verified": false
+    },
+    {
+      "productId": "F-10",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/F-10/v1/LICENSE-ja.txt",
+      "filename": "LICENSE-ja.txt",
+      "sha256": "7acd178456ed99f44e5f4b46d5b8e1ddade73749a74f84108c573a7bde762aaa",
+      "bytes": 1000,
+      "contentType": "text/plain",
+      "isPaid": true,
+      "licenseId": "single-corporate",
+      "officeCompatibility": [
+        "SVG / PNG 対応ビューア"
+      ],
+      "verified": false
+    },
+    {
+      "productId": "F-10",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/F-10/v1/data.csv",
+      "filename": "data.csv",
+      "sha256": "8a40a8d9d36f811457527d75e22a7e68cbfa1af95d82c9318db4048493a75eba",
+      "bytes": 1711,
+      "contentType": "text/csv",
+      "isPaid": true,
+      "licenseId": "single-corporate",
+      "officeCompatibility": [
+        "SVG / PNG 対応ビューア"
+      ],
+      "verified": false
+    },
+    {
+      "productId": "F-10",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/F-10/v1/assets/choropleth-map.svg",
+      "filename": "assets/choropleth-map.svg",
+      "sha256": "325465113dcc2ab9ee85caebe265335bef9220e3882206dfd91f46b4539e8890",
+      "bytes": 1433324,
+      "contentType": "image/svg+xml",
+      "isPaid": true,
+      "licenseId": "single-corporate",
+      "officeCompatibility": [
+        "SVG / PNG 対応ビューア"
+      ],
+      "verified": false
+    },
+    {
+      "productId": "F-10",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/F-10/v1/assets/choropleth-map.png",
+      "filename": "assets/choropleth-map.png",
+      "sha256": "5ebe1860780c07452e7ad22587aa63cf192cf11645ccbef53ae09450067698ce",
+      "bytes": 31782,
+      "contentType": "image/png",
+      "isPaid": true,
+      "licenseId": "single-corporate",
+      "officeCompatibility": [
+        "SVG / PNG 対応ビューア"
+      ],
+      "verified": false
+    }
+  ]
+}

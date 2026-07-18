@@ -61,3 +61,26 @@ export {
   type PrefSpecialty,
   type PrefSymbols,
 } from "./area-databook";
+export {
+  PREFECTURE_STATISTICS_CATALOG,
+  getPrefectureStatisticsEntry,
+  type PrefectureStatisticsCatalogEntry,
+  type PrefectureStatisticsResource,
+  type PrefectureStatisticsResourceType,
+  type PrefectureStatisticsTopicKey,
+} from "./prefecture-statistics-catalog";
+export {
+  OPEN_DATA_SOURCES,
+  OPEN_DATASETS,
+  getOpenDataSource,
+  getOpenDataset,
+  getDatasetsBySource,
+  type OpenDataSource,
+  type OpenDatasetDefinition,
+  type OpenDataSourceKind,
+  type AccessMethod,
+  type DataFormat,
+  type GeographicLevel,
+  type VerificationStatus,
+  type Stats47Use,
+} from "./open-data-catalog";

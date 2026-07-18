@@ -42,6 +42,13 @@ tags: [実装計画]
 | `26_統合メディアコンソールNextjs移行仕様.md` | localhost:4747 の統合メディアコンソールを、機能・安全ガード互換のまま独立 `apps/gallery` へ移す実装仕様（**実装済 2026-07-16**） |
 | `27_buzz-map集客ゲート統合仕様.md` | buzz-map全候補カタログ、SNS画像・動画、R2・draft、landingとなるranking/blog/themeの同時制作、計測を一体化するClaude Code実装仕様 |
 | `28_ホーム注目ランキングCTR改善仕様.md` | ホームの注目ランキングをAI画像なしの問い・比較・勢力図・TOP3カードへ改善し、card CTRを実験計測するClaude Code実装仕様 |
+| `30_ココナラ商品ファクトリー実装仕様.md` | 全商品案を型付きカタログと共通生成基盤からOffice・図版・販売文へ展開する仕様とClaude Code実行プロンプト |
+| `31_note商品展開ファクトリー実装仕様.md` | 全174商品をnote向けに束ね、無料・有料原稿と添付manifestを一括生成する仕様・Fable実行プロンプト |
+| `31_競合インテリジェンス・勝ちパターンカタログ仕様.md` | YouTube・X・Instagram・競合Webを横断し、検索語SSOT、公開観測、勝ちパターン、Claude agent分業、gallery、継続計測を一体化する実装仕様 |
+| `32_マルチチャネル・コンテンツ商品ファクトリー仕様.md` | stats47のデータ・記事・図表・Office資産をnote・KDP・Brain・ココナラ・講座・B2Bへ展開し、実売で集中/停止する商品ポートフォリオ実装仕様 |
+| `33_X競合調査Playwright実装仕様.md` | X公開投稿を専用Playwright profileで読み取り専用収集し、mutation防止・selector drift・証拠・継続計測を安全に実装する仕様とClaude Code prompt |
+| `34_Instagram競合調査Playwright実装仕様.md` | Instagram公開投稿・リール・カルーセルを専用Playwright profileで少量観測し、mutation防止・権利境界・勝ちパターン化を安全に実装する仕様とClaude Code prompt |
+| `35_サイト回遊グラフ・レコメンド基盤仕様.md` | blog・ranking・theme・areaを共通content graphで接続し、理由付き決定的recommendation、重複排除、GA4計測、段階実験を実装する仕様 |
 
 ## 関連（このフォルダ外の正典）
 
