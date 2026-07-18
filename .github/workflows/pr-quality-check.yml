@@ -241,6 +241,16 @@ jobs:
           npm run generate:catalog --workspace=@stats47/data-configs -- --check
         continue-on-error: false
 
+      - name: 🗾 Area Databook Gate
+        run: |
+          # area ページ「県データブック」カタログ (SSOT) の整合と生成物の鮮度を担保。
+          # rankingKey 実在・editorial 品質 (出典/字数/件数) と、page-components/area の
+          # 手編集・生成忘れを両方向で検知する。
+          # 規約: .claude/rules/area-databook-standards.md
+          npm run validate:area-databook --workspace=@stats47/data-configs
+          npm run generate:area-databook --workspace=@stats47/data-configs -- --check
+        continue-on-error: false
+
   type-check:
     name: Type Check
     runs-on: ubuntu-latest

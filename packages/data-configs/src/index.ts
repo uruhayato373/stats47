@@ -41,3 +41,22 @@ export {
   type CatalogChart,
   type MetricSelection,
 } from "./theme-catalog";
+export {
+  AREA_DATABOOK_TEMPLATE,
+  AREA_DATABOOK_CHART_TYPES,
+  DATABOOK_SECTION_KINDS,
+  AREA_EDITORIALS,
+  listAreaEditorials,
+  listTemplateCharts,
+  type AreaDatabookTemplate,
+  type AreaDatabookChartType,
+  type DatabookSection,
+  type DatabookSectionKind,
+  type DatabookBlock,
+  type DatabookChart,
+  type DatabookMetricRef,
+  type DatabookGenderPair,
+  type AreaEditorial,
+  type PrefSpecialty,
+  type PrefSymbols,
+} from "./area-databook";
