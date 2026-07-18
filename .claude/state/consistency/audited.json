@@ -1,20 +1,5 @@
 {
-  "hash": "a0fba440642d22b45427d28b0b48014db1b5b53e49dbc20b1e11f7f827aab546",
-  "audited_at": "2026-07-18T20:13:05",
-  "files": [
-    ".claude/agents/README.md",
-    ".claude/agents/coconala-product-manager.md",
-    ".claude/agents/open-data-curator.md",
-    ".claude/agents/trend-scout.md",
-    ".claude/scripts/blog/build-topic-queue.mjs",
-    ".claude/scripts/blog/lib/__tests__/topic-queue-spurious-core.test.mjs",
-    ".claude/scripts/blog/lib/topic-queue-spurious-core.mjs",
-    ".claude/scripts/note/catalog/data/product-sales.ts",
-    ".claude/scripts/note/catalog/index.ts",
-    ".claude/scripts/note/catalog/types.ts",
-    ".claude/skills/blog/plan-article-queue/SKILL.md",
-    ".claude/skills/management/weekly-plan/SKILL.md",
-    ".claude/skills/product/build-coconala-product/SKILL.md",
-    ".claude/skills/sns/x-viral-research/SKILL.md"
-  ]
+  "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "audited_at": "2026-07-18T21:40:34",
+  "files": []
 }

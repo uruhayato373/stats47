@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "current-life-insurance-balance-ratio-multi-person-households",
+  "year": "2019",
+  "unit": "％",
+  "label": "生命保険現在高割合",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/current-life-insurance-balance-ratio-multi-person-households/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug deposit-securities-prefecture-personality --keys current-life-insurance-balance-ratio-multi-person-households --data-name insurance-ratio-ranking",
+  "fetchedAt": "2026-07-18T21:12:48.739Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

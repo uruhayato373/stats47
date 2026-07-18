@@ -5,6 +5,7 @@ import { MLIT_DPF_DATASETS } from "./datasets/mlit-dpf";
 import { GSI_HAZARD_DATASETS } from "./datasets/gsi-hazard";
 import { DIGITAL_AGENCY_ODS_DATASETS } from "./datasets/digital-agency-ods";
 import { MAFF_REGIONAL_DATASETS } from "./datasets/maff";
+import { JFLEC_DATASETS } from "./datasets/jflec";
 
 /**
  * source カタログ (初期 13 source)。
@@ -208,6 +209,23 @@ export const OPEN_DATA_SOURCES: readonly OpenDataSource[] = [
     datasetIds: [],
     notes:
       "UI は継続 (2025 年に新システム提供。METI 2025-01 / 2025-10 プレス)。旧 API は 2025-03-24 終了 — apiDocsUrl は旧 API ドキュメントの参照用で新規利用不可。直接 fetch は bot-block 403 のため利用規約ページ未確認 (termsUrl は暫定でトップ)。需要探索 (何が見られているか) の research-only",
+  },
+  {
+    id: "jflec-financial-literacy",
+    name: "金融経済教育推進機構 (J-FLEC) 調査・統計データ",
+    publisher: "金融経済教育推進機構 (旧・金融広報中央委員会「知るぽると」、2024年事業承継)",
+    kind: "government-portal",
+    homepageUrl: "https://www.j-flec.go.jp/data/",
+    catalogUrl: "https://www.j-flec.go.jp/data/literacy_chosa_2025/",
+    termsUrl: "https://www.j-flec.go.jp/guidelines/",
+    isOfficial: true,
+    status: "partially-verified",
+    lastVerifiedAt: "2026-07-19",
+    datasetIds: ids(JFLEC_DATASETS),
+    notes:
+      "金融リテラシー調査 (2016/2019/2022/2025・3年周期)。ウェブサイト運営方針で商用引用・使用は" +
+      "「調査データは除く」と明記 (=調査データは商用利用可、出所明示必須)。e-Stat 未掲載。" +
+      "xlsx を直接解析し47都道府県別シート・比較表の実在を確認済み (jflec.ts 参照)",
   },
 ];
 
