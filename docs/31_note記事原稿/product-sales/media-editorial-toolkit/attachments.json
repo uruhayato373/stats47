@@ -1,0 +1,242 @@
+{
+  "slug": "media-editorial-toolkit",
+  "access": "paid",
+  "note": "添付は商品 manifest を参照し、ファイルを複製しない (SSOT は .local/coconala-products)。verified=false の添付は実機検証まで販売添付を保留する。",
+  "attachments": [
+    {
+      "productId": "G-08",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/G-08/v1/SOURCES.csv",
+      "filename": "SOURCES.csv",
+      "sha256": "7c28a0ab1931b8f011e07dccf2c20b6c03bdad63f01a3b34fd185b1c2be19fa4",
+      "bytes": 527,
+      "contentType": "text/csv",
+      "isPaid": true,
+      "licenseId": "client-work",
+      "officeCompatibility": [
+        "Excel 365 (Windows / Mac)",
+        "PDF 閲覧環境"
+      ],
+      "verified": false
+    },
+    {
+      "productId": "G-08",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/G-08/v1/LICENSE-ja.txt",
+      "filename": "LICENSE-ja.txt",
+      "sha256": "0497fbcb2b51fbfd2a2f22802557430fa7ffdded476dbdde7804ec0e3df99130",
+      "bytes": 1075,
+      "contentType": "text/plain",
+      "isPaid": true,
+      "licenseId": "client-work",
+      "officeCompatibility": [
+        "Excel 365 (Windows / Mac)",
+        "PDF 閲覧環境"
+      ],
+      "verified": false
+    },
+    {
+      "productId": "G-08",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/G-08/v1/data.csv",
+      "filename": "data.csv",
+      "sha256": "8a40a8d9d36f811457527d75e22a7e68cbfa1af95d82c9318db4048493a75eba",
+      "bytes": 1711,
+      "contentType": "text/csv",
+      "isPaid": true,
+      "licenseId": "client-work",
+      "officeCompatibility": [
+        "Excel 365 (Windows / Mac)",
+        "PDF 閲覧環境"
+      ],
+      "verified": false
+    },
+    {
+      "productId": "G-08",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/G-08/v1/product.xlsx",
+      "filename": "product.xlsx",
+      "sha256": "3a08d13ea748888456808a4ea461d94741b2b028cb8b158f55851aaf35d888ae",
+      "bytes": 11513,
+      "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "isPaid": true,
+      "licenseId": "client-work",
+      "officeCompatibility": [
+        "Excel 365 (Windows / Mac)",
+        "PDF 閲覧環境"
+      ],
+      "verified": false
+    },
+    {
+      "productId": "G-08",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/G-08/v1/manual.pdf",
+      "filename": "manual.pdf",
+      "sha256": "5678c3ee9bdfade468d6171711a0e1c115640985f22552958fd5b0167389e9bc",
+      "bytes": 37292,
+      "contentType": "application/pdf",
+      "isPaid": true,
+      "licenseId": "client-work",
+      "officeCompatibility": [
+        "Excel 365 (Windows / Mac)",
+        "PDF 閲覧環境"
+      ],
+      "verified": false
+    },
+    {
+      "productId": "G-09",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/G-09/v1/SOURCES.csv",
+      "filename": "SOURCES.csv",
+      "sha256": "7c28a0ab1931b8f011e07dccf2c20b6c03bdad63f01a3b34fd185b1c2be19fa4",
+      "bytes": 527,
+      "contentType": "text/csv",
+      "isPaid": true,
+      "licenseId": "client-work",
+      "officeCompatibility": [
+        "Word 365 (Windows / Mac)",
+        "PowerPoint 365 (Windows / Mac)"
+      ],
+      "verified": false
+    },
+    {
+      "productId": "G-09",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/G-09/v1/LICENSE-ja.txt",
+      "filename": "LICENSE-ja.txt",
+      "sha256": "0497fbcb2b51fbfd2a2f22802557430fa7ffdded476dbdde7804ec0e3df99130",
+      "bytes": 1075,
+      "contentType": "text/plain",
+      "isPaid": true,
+      "licenseId": "client-work",
+      "officeCompatibility": [
+        "Word 365 (Windows / Mac)",
+        "PowerPoint 365 (Windows / Mac)"
+      ],
+      "verified": false
+    },
+    {
+      "productId": "G-09",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/G-09/v1/data.csv",
+      "filename": "data.csv",
+      "sha256": "8a40a8d9d36f811457527d75e22a7e68cbfa1af95d82c9318db4048493a75eba",
+      "bytes": 1711,
+      "contentType": "text/csv",
+      "isPaid": true,
+      "licenseId": "client-work",
+      "officeCompatibility": [
+        "Word 365 (Windows / Mac)",
+        "PowerPoint 365 (Windows / Mac)"
+      ],
+      "verified": false
+    },
+    {
+      "productId": "G-09",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/G-09/v1/product.pptx",
+      "filename": "product.pptx",
+      "sha256": "137ac26771fc7098fef2bb3de0096e2a279dbea16d6da42c40d4988f7afad57d",
+      "bytes": 6409027,
+      "contentType": "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+      "isPaid": true,
+      "licenseId": "client-work",
+      "officeCompatibility": [
+        "Word 365 (Windows / Mac)",
+        "PowerPoint 365 (Windows / Mac)"
+      ],
+      "verified": false
+    },
+    {
+      "productId": "G-09",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/G-09/v1/manual.pdf",
+      "filename": "manual.pdf",
+      "sha256": "3fca46b4aeaa6a051f75fb78e1791c61ad9a9376fb5a956fb262eea5cb860f26",
+      "bytes": 36599,
+      "contentType": "application/pdf",
+      "isPaid": true,
+      "licenseId": "client-work",
+      "officeCompatibility": [
+        "Word 365 (Windows / Mac)",
+        "PowerPoint 365 (Windows / Mac)"
+      ],
+      "verified": false
+    },
+    {
+      "productId": "G-10",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/G-10/v1/SOURCES.csv",
+      "filename": "SOURCES.csv",
+      "sha256": "7c28a0ab1931b8f011e07dccf2c20b6c03bdad63f01a3b34fd185b1c2be19fa4",
+      "bytes": 527,
+      "contentType": "text/csv",
+      "isPaid": true,
+      "licenseId": "client-work",
+      "officeCompatibility": [
+        "Excel 365 (Windows / Mac)"
+      ],
+      "verified": false
+    },
+    {
+      "productId": "G-10",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/G-10/v1/LICENSE-ja.txt",
+      "filename": "LICENSE-ja.txt",
+      "sha256": "0497fbcb2b51fbfd2a2f22802557430fa7ffdded476dbdde7804ec0e3df99130",
+      "bytes": 1075,
+      "contentType": "text/plain",
+      "isPaid": true,
+      "licenseId": "client-work",
+      "officeCompatibility": [
+        "Excel 365 (Windows / Mac)"
+      ],
+      "verified": false
+    },
+    {
+      "productId": "G-10",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/G-10/v1/data.csv",
+      "filename": "data.csv",
+      "sha256": "8a40a8d9d36f811457527d75e22a7e68cbfa1af95d82c9318db4048493a75eba",
+      "bytes": 1711,
+      "contentType": "text/csv",
+      "isPaid": true,
+      "licenseId": "client-work",
+      "officeCompatibility": [
+        "Excel 365 (Windows / Mac)"
+      ],
+      "verified": false
+    },
+    {
+      "productId": "G-10",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/G-10/v1/product.xlsx",
+      "filename": "product.xlsx",
+      "sha256": "94a255b64a465389ae09c53a2cf5cd67c92e6292861bde0724bd92d560473ba7",
+      "bytes": 11495,
+      "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "isPaid": true,
+      "licenseId": "client-work",
+      "officeCompatibility": [
+        "Excel 365 (Windows / Mac)"
+      ],
+      "verified": false
+    },
+    {
+      "productId": "G-10",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/G-10/v1/manual.pdf",
+      "filename": "manual.pdf",
+      "sha256": "0a93369fd7cc1d76fafb204093e7e552b459cd5e167beb0b60468a3fc16baf89",
+      "bytes": 36370,
+      "contentType": "application/pdf",
+      "isPaid": true,
+      "licenseId": "client-work",
+      "officeCompatibility": [
+        "Excel 365 (Windows / Mac)"
+      ],
+      "verified": false
+    }
+  ]
+}

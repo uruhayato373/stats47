@@ -31,6 +31,10 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import {
+  correlationTitle,
+  spuriousReasons,
+} from "./lib/topic-queue-spurious-core.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -50,7 +54,9 @@ const R2_BASE = process.env.R2_PUBLIC_FETCH_URL || "https://storage.stats47.jp";
 
 const MUST_WRITE_IMP = 300; // 週 imp がこれ以上ある未記事化テーマは must-write
 const MIN_GAP_IMP = 50; // gsc-gap 候補の下限 imp
-const CORR_MIN_R = 0.6;
+// 0.6 → 0.65 (2026-07-18 TOPIC-QUEUE-SPURIOUS-FILTER-01): |r| 0.60-0.65 帯は 47 点標本では
+// 機序の書けないノイズ相関が多く blog-critic REVISE の温床だった (例 豚肉消費量×労災給付 r=-0.62)
+const CORR_MIN_R = 0.65;
 const WEIGHTS = { queryGap: 0.35, seasonality: 0.25, surprise: 0.2, competitionGap: 0.2 };
 const COMPETITION_GAP = { F: 1.0, G: 1.0, B: 0.8, D2: 0.6, A: 0.5 };
 // pending はスコア上位のみ保持 (肥大防止。in-progress/done は無条件保持)。
@@ -154,7 +160,12 @@ function loadMetrics() {
     const category = src.match(/"category":\s*"([^"]+)"/)?.[1] || "";
     const isActive = /"isActive":\s*true/.test(src);
     const isKakei = /"kind":\s*"kakei-chousa"/.test(src);
-    metrics.set(key, { key, title, category, isActive, isKakei });
+    const unit = src.match(/"unit":\s*"([^"]*)"/)?.[1] || "";
+    // years ブロック内の最大 4 桁年 = 最新年 (from/to 形式・years 配列形式の両対応)
+    const yearsBlock = src.match(/"years":\s*\{[\s\S]*?\}/)?.[0] || "";
+    const yearMatches = yearsBlock.match(/\b(19|20)\d{2}\b/g) || [];
+    const yearTo = yearMatches.length > 0 ? Math.max(...yearMatches.map(Number)) : null;
+    metrics.set(key, { key, title, category, isActive, isKakei, unit, yearTo });
   }
   return metrics;
 }
@@ -334,6 +345,8 @@ const corrData = await fetchCorrelationPairs(topKeys);
 console.error(`[corr] per-key 相関 fetch: ${corrData.length}/${topKeys.length} 件成功`);
 
 const seenPairs = new Set();
+const spuriousTally = {};
+const spuriousExamples = [];
 for (const { key: baseKey, json } of corrData) {
   const baseMetric = metrics.get(baseKey);
   if (!baseMetric) continue;
@@ -348,8 +361,24 @@ for (const { key: baseKey, json } of corrData) {
     const pairId = [baseKey, p.rankingKey].sort().join("--");
     if (seenPairs.has(pairId)) continue;
     seenPairs.add(pairId);
-    // センシティブ指標 (中絶/自殺/死因) を B型「意外な関係」の軸にしない (ブランド毀損防止)
+    // センシティブ指標 (中絶/自殺/死因) を B型相関ネタの軸にしない (ブランド毀損防止)
     if (isSensitive(baseKey) || isSensitive(p.rankingKey)) continue;
+    // 疑似相関の決定的除外 (TOPIC-QUEUE-SPURIOUS-FILTER-01):
+    // 自己/派生・同義 family・規模ペア・同一 category・年度乖離・欠測/全国値混入
+    const spurious = spuriousReasons({
+      base: baseMetric,
+      pair: pairMetric,
+      pearsonR: r,
+      partialRPopulation: p.partialRPopulation ?? null,
+      scatterData: p.scatterData ?? null,
+    });
+    if (spurious.length > 0) {
+      for (const reason of spurious) {
+        spuriousTally[reason] = (spuriousTally[reason] || 0) + 1;
+      }
+      spuriousExamples.push(`${pairId} (r=${r.toFixed(2)}): ${spurious.join(",")}`);
+      continue;
+    }
     const baseStem = stemOf(baseMetric.title);
     const pairStem = stemOf(pairMetric.title);
     if (baseStem === pairStem) continue; // 消費量 vs 支出額 のような自明ペア
@@ -388,10 +417,15 @@ for (const { key: baseKey, json } of corrData) {
         gscImp: g.imp,
         rankingUrls: [`/ranking/${baseKey}`, `/ranking/${p.rankingKey}`],
       },
-      suggestedTitle: `${baseStem}と${pairStem}の意外な関係`,
+      suggestedTitle: correlationTitle(baseStem, pairStem, r),
     });
     pairsFromThisBase++;
   }
+}
+if (Object.keys(spuriousTally).length > 0) {
+  console.error(`[spurious] 疑似相関の除外: ${JSON.stringify(spuriousTally)}`);
+  for (const ex of spuriousExamples.slice(0, 10)) console.error(`  - ${ex}`);
+  if (spuriousExamples.length > 10) console.error(`  … 他 ${spuriousExamples.length - 10} 件`);
 }
 
 // ── (c) F 市区町村内格差 / (d) G 移動フロー: 県別。/areas imp を関心 proxy に ──

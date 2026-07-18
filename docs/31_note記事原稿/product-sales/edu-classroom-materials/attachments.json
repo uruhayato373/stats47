@@ -1,0 +1,322 @@
+{
+  "slug": "edu-classroom-materials",
+  "access": "paid",
+  "note": "添付は商品 manifest を参照し、ファイルを複製しない (SSOT は .local/coconala-products)。verified=false の添付は実機検証まで販売添付を保留する。",
+  "attachments": [
+    {
+      "productId": "H-01",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/H-01/v1/SOURCES.csv",
+      "filename": "SOURCES.csv",
+      "sha256": "7c28a0ab1931b8f011e07dccf2c20b6c03bdad63f01a3b34fd185b1c2be19fa4",
+      "bytes": 527,
+      "contentType": "text/csv",
+      "isPaid": true,
+      "licenseId": "education",
+      "officeCompatibility": [
+        "PowerPoint 365 (Windows / Mac)",
+        "PDF 閲覧環境"
+      ],
+      "verified": false
+    },
+    {
+      "productId": "H-01",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/H-01/v1/LICENSE-ja.txt",
+      "filename": "LICENSE-ja.txt",
+      "sha256": "c5c4d15facd3b567c5dc2015b7143faca77cace7e871bcb18aa2f1282722ec26",
+      "bytes": 1007,
+      "contentType": "text/plain",
+      "isPaid": true,
+      "licenseId": "education",
+      "officeCompatibility": [
+        "PowerPoint 365 (Windows / Mac)",
+        "PDF 閲覧環境"
+      ],
+      "verified": false
+    },
+    {
+      "productId": "H-01",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/H-01/v1/data.csv",
+      "filename": "data.csv",
+      "sha256": "8a40a8d9d36f811457527d75e22a7e68cbfa1af95d82c9318db4048493a75eba",
+      "bytes": 1711,
+      "contentType": "text/csv",
+      "isPaid": true,
+      "licenseId": "education",
+      "officeCompatibility": [
+        "PowerPoint 365 (Windows / Mac)",
+        "PDF 閲覧環境"
+      ],
+      "verified": false
+    },
+    {
+      "productId": "H-01",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/H-01/v1/product.pptx",
+      "filename": "product.pptx",
+      "sha256": "6dfeae513958645901dca5e58b28b23cf1326ddde2bdea5c27acb6b345bdacf6",
+      "bytes": 6409020,
+      "contentType": "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+      "isPaid": true,
+      "licenseId": "education",
+      "officeCompatibility": [
+        "PowerPoint 365 (Windows / Mac)",
+        "PDF 閲覧環境"
+      ],
+      "verified": false
+    },
+    {
+      "productId": "H-01",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/H-01/v1/manual.pdf",
+      "filename": "manual.pdf",
+      "sha256": "d5e8dab655fdaf4ab7f943a7a479c1ae40cff9edd80532400389d3b4416f1843",
+      "bytes": 38871,
+      "contentType": "application/pdf",
+      "isPaid": true,
+      "licenseId": "education",
+      "officeCompatibility": [
+        "PowerPoint 365 (Windows / Mac)",
+        "PDF 閲覧環境"
+      ],
+      "verified": false
+    },
+    {
+      "productId": "H-04",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/H-04/v1/SOURCES.csv",
+      "filename": "SOURCES.csv",
+      "sha256": "7c28a0ab1931b8f011e07dccf2c20b6c03bdad63f01a3b34fd185b1c2be19fa4",
+      "bytes": 527,
+      "contentType": "text/csv",
+      "isPaid": true,
+      "licenseId": "education",
+      "officeCompatibility": [
+        "PowerPoint 365 (Windows / Mac)"
+      ],
+      "verified": false
+    },
+    {
+      "productId": "H-04",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/H-04/v1/LICENSE-ja.txt",
+      "filename": "LICENSE-ja.txt",
+      "sha256": "c5c4d15facd3b567c5dc2015b7143faca77cace7e871bcb18aa2f1282722ec26",
+      "bytes": 1007,
+      "contentType": "text/plain",
+      "isPaid": true,
+      "licenseId": "education",
+      "officeCompatibility": [
+        "PowerPoint 365 (Windows / Mac)"
+      ],
+      "verified": false
+    },
+    {
+      "productId": "H-04",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/H-04/v1/data.csv",
+      "filename": "data.csv",
+      "sha256": "8a40a8d9d36f811457527d75e22a7e68cbfa1af95d82c9318db4048493a75eba",
+      "bytes": 1711,
+      "contentType": "text/csv",
+      "isPaid": true,
+      "licenseId": "education",
+      "officeCompatibility": [
+        "PowerPoint 365 (Windows / Mac)"
+      ],
+      "verified": false
+    },
+    {
+      "productId": "H-04",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/H-04/v1/product.pptx",
+      "filename": "product.pptx",
+      "sha256": "19362e55226ae96dc285d3fb14f0ea221ab6942e40d7de4c300db0e3e48c656f",
+      "bytes": 6409010,
+      "contentType": "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+      "isPaid": true,
+      "licenseId": "education",
+      "officeCompatibility": [
+        "PowerPoint 365 (Windows / Mac)"
+      ],
+      "verified": false
+    },
+    {
+      "productId": "H-04",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/H-04/v1/manual.pdf",
+      "filename": "manual.pdf",
+      "sha256": "36ba18730bdb516bfeb28a9ff5e2a66f08a0ecd3b86e0dfede7b9307b7225c43",
+      "bytes": 38548,
+      "contentType": "application/pdf",
+      "isPaid": true,
+      "licenseId": "education",
+      "officeCompatibility": [
+        "PowerPoint 365 (Windows / Mac)"
+      ],
+      "verified": false
+    },
+    {
+      "productId": "H-08",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/H-08/v1/SOURCES.csv",
+      "filename": "SOURCES.csv",
+      "sha256": "7c28a0ab1931b8f011e07dccf2c20b6c03bdad63f01a3b34fd185b1c2be19fa4",
+      "bytes": 527,
+      "contentType": "text/csv",
+      "isPaid": true,
+      "licenseId": "education",
+      "officeCompatibility": [
+        "PowerPoint 365 (Windows / Mac)",
+        "PDF 閲覧環境"
+      ],
+      "verified": false
+    },
+    {
+      "productId": "H-08",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/H-08/v1/LICENSE-ja.txt",
+      "filename": "LICENSE-ja.txt",
+      "sha256": "c5c4d15facd3b567c5dc2015b7143faca77cace7e871bcb18aa2f1282722ec26",
+      "bytes": 1007,
+      "contentType": "text/plain",
+      "isPaid": true,
+      "licenseId": "education",
+      "officeCompatibility": [
+        "PowerPoint 365 (Windows / Mac)",
+        "PDF 閲覧環境"
+      ],
+      "verified": false
+    },
+    {
+      "productId": "H-08",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/H-08/v1/data.csv",
+      "filename": "data.csv",
+      "sha256": "8a40a8d9d36f811457527d75e22a7e68cbfa1af95d82c9318db4048493a75eba",
+      "bytes": 1711,
+      "contentType": "text/csv",
+      "isPaid": true,
+      "licenseId": "education",
+      "officeCompatibility": [
+        "PowerPoint 365 (Windows / Mac)",
+        "PDF 閲覧環境"
+      ],
+      "verified": false
+    },
+    {
+      "productId": "H-08",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/H-08/v1/product.pptx",
+      "filename": "product.pptx",
+      "sha256": "1568492942dd0859ff140f18e9139baf8165507ee5e0ad8d9a4a015bff95ce22",
+      "bytes": 6409024,
+      "contentType": "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+      "isPaid": true,
+      "licenseId": "education",
+      "officeCompatibility": [
+        "PowerPoint 365 (Windows / Mac)",
+        "PDF 閲覧環境"
+      ],
+      "verified": false
+    },
+    {
+      "productId": "H-08",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/H-08/v1/manual.pdf",
+      "filename": "manual.pdf",
+      "sha256": "46487f1dd5e4641a267dfba17fc45610aea599fb1de273ab20b5cbc2e8086872",
+      "bytes": 38523,
+      "contentType": "application/pdf",
+      "isPaid": true,
+      "licenseId": "education",
+      "officeCompatibility": [
+        "PowerPoint 365 (Windows / Mac)",
+        "PDF 閲覧環境"
+      ],
+      "verified": false
+    },
+    {
+      "productId": "H-10",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/H-10/v1/SOURCES.csv",
+      "filename": "SOURCES.csv",
+      "sha256": "7c28a0ab1931b8f011e07dccf2c20b6c03bdad63f01a3b34fd185b1c2be19fa4",
+      "bytes": 527,
+      "contentType": "text/csv",
+      "isPaid": true,
+      "licenseId": "education",
+      "officeCompatibility": [
+        "PowerPoint 365 (Windows / Mac)",
+        "PDF 閲覧環境"
+      ],
+      "verified": false
+    },
+    {
+      "productId": "H-10",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/H-10/v1/LICENSE-ja.txt",
+      "filename": "LICENSE-ja.txt",
+      "sha256": "c5c4d15facd3b567c5dc2015b7143faca77cace7e871bcb18aa2f1282722ec26",
+      "bytes": 1007,
+      "contentType": "text/plain",
+      "isPaid": true,
+      "licenseId": "education",
+      "officeCompatibility": [
+        "PowerPoint 365 (Windows / Mac)",
+        "PDF 閲覧環境"
+      ],
+      "verified": false
+    },
+    {
+      "productId": "H-10",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/H-10/v1/data.csv",
+      "filename": "data.csv",
+      "sha256": "8a40a8d9d36f811457527d75e22a7e68cbfa1af95d82c9318db4048493a75eba",
+      "bytes": 1711,
+      "contentType": "text/csv",
+      "isPaid": true,
+      "licenseId": "education",
+      "officeCompatibility": [
+        "PowerPoint 365 (Windows / Mac)",
+        "PDF 閲覧環境"
+      ],
+      "verified": false
+    },
+    {
+      "productId": "H-10",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/H-10/v1/product.pptx",
+      "filename": "product.pptx",
+      "sha256": "3b9350d10a4051a9c29c6213d7b810cffd1696690c613bd90bd8ec62cb979f7c",
+      "bytes": 6409018,
+      "contentType": "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+      "isPaid": true,
+      "licenseId": "education",
+      "officeCompatibility": [
+        "PowerPoint 365 (Windows / Mac)",
+        "PDF 閲覧環境"
+      ],
+      "verified": false
+    },
+    {
+      "productId": "H-10",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/H-10/v1/manual.pdf",
+      "filename": "manual.pdf",
+      "sha256": "18a9cf97f860fce370a0c14d3c08f19ebe934a354c1fe32cc7bd94be4d21f376",
+      "bytes": 39281,
+      "contentType": "application/pdf",
+      "isPaid": true,
+      "licenseId": "education",
+      "officeCompatibility": [
+        "PowerPoint 365 (Windows / Mac)",
+        "PDF 閲覧環境"
+      ],
+      "verified": false
+    }
+  ]
+}

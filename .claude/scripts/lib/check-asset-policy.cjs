@@ -167,10 +167,17 @@ async function collect() {
     if (buf.length > limit) add(findings, "OVERSIZED_PUBLIC_ASSET", file, `${buf.length} bytes > ${limit} bytes`);
   }
   // SHA-256 完全同一 (2枚以上) を重複として報告。message にグループ (代表 + 他) を含める。
+  // 例外: docs/31 (note.com 原稿) の記事同梱画像は、note.com が記事ごとに画像実体の
+  // アップロードを要求し相対参照 (images/xxx.png) で 1 枚を共有できないため、同一バイトでも
+  // 各記事に実体が必要。共有可能な public / docs/21 の重複だけを debt として検出する。
+  const isNoteEmbeddedAsset = (relPath) => relPath.startsWith("docs/31_note記事原稿/");
   for (const group of hashGroups.values()) {
     if (group.length < 2) continue;
     const sorted = [...group].sort();
-    for (const dup of sorted.slice(1)) findings.push({ code: "DUPLICATE_IMAGE", file: dup, message: `same bytes as ${sorted[0]}` });
+    for (const dup of sorted.slice(1)) {
+      if (isNoteEmbeddedAsset(dup)) continue;
+      findings.push({ code: "DUPLICATE_IMAGE", file: dup, message: `same bytes as ${sorted[0]}` });
+    }
   }
 
   // ── ローカル画像参照の解決検査 (MD/HTML/CSS/TS(X)) ──

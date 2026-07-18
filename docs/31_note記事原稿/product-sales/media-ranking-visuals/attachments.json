@@ -1,0 +1,290 @@
+{
+  "slug": "media-ranking-visuals",
+  "access": "paid",
+  "note": "添付は商品 manifest を参照し、ファイルを複製しない (SSOT は .local/coconala-products)。verified=false の添付は実機検証まで販売添付を保留する。",
+  "attachments": [
+    {
+      "productId": "G-01",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/G-01/v1/SOURCES.csv",
+      "filename": "SOURCES.csv",
+      "sha256": "7c28a0ab1931b8f011e07dccf2c20b6c03bdad63f01a3b34fd185b1c2be19fa4",
+      "bytes": 527,
+      "contentType": "text/csv",
+      "isPaid": true,
+      "licenseId": "client-work",
+      "officeCompatibility": [
+        "SVG / PNG 対応ビューア",
+        "PowerPoint 365 (Windows / Mac)"
+      ],
+      "verified": false
+    },
+    {
+      "productId": "G-01",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/G-01/v1/LICENSE-ja.txt",
+      "filename": "LICENSE-ja.txt",
+      "sha256": "0497fbcb2b51fbfd2a2f22802557430fa7ffdded476dbdde7804ec0e3df99130",
+      "bytes": 1075,
+      "contentType": "text/plain",
+      "isPaid": true,
+      "licenseId": "client-work",
+      "officeCompatibility": [
+        "SVG / PNG 対応ビューア",
+        "PowerPoint 365 (Windows / Mac)"
+      ],
+      "verified": false
+    },
+    {
+      "productId": "G-01",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/G-01/v1/data.csv",
+      "filename": "data.csv",
+      "sha256": "8a40a8d9d36f811457527d75e22a7e68cbfa1af95d82c9318db4048493a75eba",
+      "bytes": 1711,
+      "contentType": "text/csv",
+      "isPaid": true,
+      "licenseId": "client-work",
+      "officeCompatibility": [
+        "SVG / PNG 対応ビューア",
+        "PowerPoint 365 (Windows / Mac)"
+      ],
+      "verified": false
+    },
+    {
+      "productId": "G-01",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/G-01/v1/assets/choropleth-map.svg",
+      "filename": "assets/choropleth-map.svg",
+      "sha256": "325465113dcc2ab9ee85caebe265335bef9220e3882206dfd91f46b4539e8890",
+      "bytes": 1433324,
+      "contentType": "image/svg+xml",
+      "isPaid": true,
+      "licenseId": "client-work",
+      "officeCompatibility": [
+        "SVG / PNG 対応ビューア",
+        "PowerPoint 365 (Windows / Mac)"
+      ],
+      "verified": false
+    },
+    {
+      "productId": "G-01",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/G-01/v1/assets/choropleth-map.png",
+      "filename": "assets/choropleth-map.png",
+      "sha256": "5ebe1860780c07452e7ad22587aa63cf192cf11645ccbef53ae09450067698ce",
+      "bytes": 31782,
+      "contentType": "image/png",
+      "isPaid": true,
+      "licenseId": "client-work",
+      "officeCompatibility": [
+        "SVG / PNG 対応ビューア",
+        "PowerPoint 365 (Windows / Mac)"
+      ],
+      "verified": false
+    },
+    {
+      "productId": "G-01",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/G-01/v1/product.pptx",
+      "filename": "product.pptx",
+      "sha256": "449e697feb83302587f9e2317c61662cbb5ee558891ff090439c10655b578001",
+      "bytes": 6409030,
+      "contentType": "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+      "isPaid": true,
+      "licenseId": "client-work",
+      "officeCompatibility": [
+        "SVG / PNG 対応ビューア",
+        "PowerPoint 365 (Windows / Mac)"
+      ],
+      "verified": false
+    },
+    {
+      "productId": "G-01",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/G-01/v1/manual.pdf",
+      "filename": "manual.pdf",
+      "sha256": "498534ccb4a7558f4e12320b039e110828a38669a9d7b9a05455090c717bd1a9",
+      "bytes": 36442,
+      "contentType": "application/pdf",
+      "isPaid": true,
+      "licenseId": "client-work",
+      "officeCompatibility": [
+        "SVG / PNG 対応ビューア",
+        "PowerPoint 365 (Windows / Mac)"
+      ],
+      "verified": false
+    },
+    {
+      "productId": "G-02",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/G-02/v1/SOURCES.csv",
+      "filename": "SOURCES.csv",
+      "sha256": "7c28a0ab1931b8f011e07dccf2c20b6c03bdad63f01a3b34fd185b1c2be19fa4",
+      "bytes": 527,
+      "contentType": "text/csv",
+      "isPaid": true,
+      "licenseId": "client-work",
+      "officeCompatibility": [
+        "SVG / PNG 対応ビューア",
+        "PowerPoint 365 (Windows / Mac)"
+      ],
+      "verified": false
+    },
+    {
+      "productId": "G-02",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/G-02/v1/LICENSE-ja.txt",
+      "filename": "LICENSE-ja.txt",
+      "sha256": "0497fbcb2b51fbfd2a2f22802557430fa7ffdded476dbdde7804ec0e3df99130",
+      "bytes": 1075,
+      "contentType": "text/plain",
+      "isPaid": true,
+      "licenseId": "client-work",
+      "officeCompatibility": [
+        "SVG / PNG 対応ビューア",
+        "PowerPoint 365 (Windows / Mac)"
+      ],
+      "verified": false
+    },
+    {
+      "productId": "G-02",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/G-02/v1/data.csv",
+      "filename": "data.csv",
+      "sha256": "8a40a8d9d36f811457527d75e22a7e68cbfa1af95d82c9318db4048493a75eba",
+      "bytes": 1711,
+      "contentType": "text/csv",
+      "isPaid": true,
+      "licenseId": "client-work",
+      "officeCompatibility": [
+        "SVG / PNG 対応ビューア",
+        "PowerPoint 365 (Windows / Mac)"
+      ],
+      "verified": false
+    },
+    {
+      "productId": "G-02",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/G-02/v1/assets/choropleth-map.svg",
+      "filename": "assets/choropleth-map.svg",
+      "sha256": "325465113dcc2ab9ee85caebe265335bef9220e3882206dfd91f46b4539e8890",
+      "bytes": 1433324,
+      "contentType": "image/svg+xml",
+      "isPaid": true,
+      "licenseId": "client-work",
+      "officeCompatibility": [
+        "SVG / PNG 対応ビューア",
+        "PowerPoint 365 (Windows / Mac)"
+      ],
+      "verified": false
+    },
+    {
+      "productId": "G-02",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/G-02/v1/product.pptx",
+      "filename": "product.pptx",
+      "sha256": "8414aaecf3390bda7126f3ddf5515c005a8f8ac05e87796f90d6bec9e8725e18",
+      "bytes": 6409021,
+      "contentType": "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+      "isPaid": true,
+      "licenseId": "client-work",
+      "officeCompatibility": [
+        "SVG / PNG 対応ビューア",
+        "PowerPoint 365 (Windows / Mac)"
+      ],
+      "verified": false
+    },
+    {
+      "productId": "G-02",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/G-02/v1/manual.pdf",
+      "filename": "manual.pdf",
+      "sha256": "0fad2178b3307a103962ecbd8342e77dea48748de0fe4743f7e7b723297df05d",
+      "bytes": 36819,
+      "contentType": "application/pdf",
+      "isPaid": true,
+      "licenseId": "client-work",
+      "officeCompatibility": [
+        "SVG / PNG 対応ビューア",
+        "PowerPoint 365 (Windows / Mac)"
+      ],
+      "verified": false
+    },
+    {
+      "productId": "G-07",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/G-07/v1/SOURCES.csv",
+      "filename": "SOURCES.csv",
+      "sha256": "7c28a0ab1931b8f011e07dccf2c20b6c03bdad63f01a3b34fd185b1c2be19fa4",
+      "bytes": 527,
+      "contentType": "text/csv",
+      "isPaid": true,
+      "licenseId": "client-work",
+      "officeCompatibility": [
+        "SVG / PNG 対応ビューア"
+      ],
+      "verified": false
+    },
+    {
+      "productId": "G-07",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/G-07/v1/LICENSE-ja.txt",
+      "filename": "LICENSE-ja.txt",
+      "sha256": "0497fbcb2b51fbfd2a2f22802557430fa7ffdded476dbdde7804ec0e3df99130",
+      "bytes": 1075,
+      "contentType": "text/plain",
+      "isPaid": true,
+      "licenseId": "client-work",
+      "officeCompatibility": [
+        "SVG / PNG 対応ビューア"
+      ],
+      "verified": false
+    },
+    {
+      "productId": "G-07",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/G-07/v1/data.csv",
+      "filename": "data.csv",
+      "sha256": "8a40a8d9d36f811457527d75e22a7e68cbfa1af95d82c9318db4048493a75eba",
+      "bytes": 1711,
+      "contentType": "text/csv",
+      "isPaid": true,
+      "licenseId": "client-work",
+      "officeCompatibility": [
+        "SVG / PNG 対応ビューア"
+      ],
+      "verified": false
+    },
+    {
+      "productId": "G-07",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/G-07/v1/assets/choropleth-map.svg",
+      "filename": "assets/choropleth-map.svg",
+      "sha256": "325465113dcc2ab9ee85caebe265335bef9220e3882206dfd91f46b4539e8890",
+      "bytes": 1433324,
+      "contentType": "image/svg+xml",
+      "isPaid": true,
+      "licenseId": "client-work",
+      "officeCompatibility": [
+        "SVG / PNG 対応ビューア"
+      ],
+      "verified": false
+    },
+    {
+      "productId": "G-07",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/G-07/v1/assets/choropleth-map.png",
+      "filename": "assets/choropleth-map.png",
+      "sha256": "5ebe1860780c07452e7ad22587aa63cf192cf11645ccbef53ae09450067698ce",
+      "bytes": 31782,
+      "contentType": "image/png",
+      "isPaid": true,
+      "licenseId": "client-work",
+      "officeCompatibility": [
+        "SVG / PNG 対応ビューア"
+      ],
+      "verified": false
+    }
+  ]
+}

@@ -67,6 +67,24 @@ jobs:
         continue-on-error: true
         run: npm run db:pull --workspace=packages/r2-storage
 
+      # 特産品イラスト (Codex 生成・CI では再生成できない実質ソース) を git tracked な
+      # source dir から .local/r2 に配置する。run.sh 末尾の diff-push-r2 が
+      # app/areas/<code>/specialty/<slug>.webp として R2 に push する。
+      # 正典: .claude/rules/area-databook-standards.md §5 / ogp-image-standards.md
+      - name: 🖼 Stage area specialty webp
+        run: |
+          shopt -s nullglob
+          count=0
+          for d in apps/web/scripts/data/area-specialty/*/; do
+            code=$(basename "$d")
+            mkdir -p ".local/r2/app/areas/$code/specialty"
+            for f in "$d"*.webp; do
+              cp "$f" ".local/r2/app/areas/$code/specialty/"
+              count=$((count + 1))
+            done
+          done
+          echo "staged $count specialty webp → .local/r2/app/areas/**/specialty/"
+
       # snapshot 再生成 → R2 push。CI では CI=true が立つため run.sh の push が実行される。
       - name: 🗂️ Regenerate snapshots + push to R2
         # ARGS は配列で組む: 文字列連結 + "$ARGS" だと全体が 1 引数になり run.sh が

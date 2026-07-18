@@ -139,8 +139,9 @@ primary_agent: strategy-advisor
   → must-write レーン上位を「**新規記事 N 本**」として Phase 3 の **Must** に転載する（型ミックスを整える:
     月次目標 B5/D2 4/A3-4/F3/G1-2、`.claude/agents/blog-seo-strategist.md` §戦略コンテキスト）。
   → 実行は `/draft-from-trend --from queue`（1 本ずつ）→ generate-article-charts → **blog-critic PASS** → publish。
-  → ⚠️ **B 型は上位に擬似相関（人口交絡・自明ペア）が混じる**ので、`evidence.populationConfounded` と
-    「意外な関係が成立するか」を人手で吟味してから採用する（キューは候補生成であり最終決定ではない）。
+  → ⚠️ **B 型は決定的フィルタ（`lib/topic-queue-spurious-core.mjs`: 自己/派生・同義・規模ペア・
+    同一 category・年度乖離・欠測）で疑似相関を除外済**だが、機序の書けないペアは残りうる。
+    「見かけの相関 vs 真因」を文章にできるか人手で吟味してから採用する（キューは候補生成であり最終決定ではない）。
   → これも毎週の**定常 Must**。是正キュー（既存改善）と新規キュー（新規拡充）の両輪で回す。
     仕組み: `.claude/skills/blog/plan-article-queue/SKILL.md`。
 

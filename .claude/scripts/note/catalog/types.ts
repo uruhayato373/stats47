@@ -19,6 +19,7 @@ export type NoteVertical =
   | "koumuin-claude-code" // 自治体職員向け Claude Code 実務ガイド
   | "koumuin-estat-claude-code" // 自治体職員向け e-Stat × Claude Code
   | "koumuin-gis" // 自治体職員向け GIS (国土数値情報) 入門
+  | "product-sales" // 都道府県データ商品 (PowerPoint/Excel/データパック) の販売記事。product-factory 由来
   | "membership"; // メンバーシップ (有料) 記事群
 
 /**

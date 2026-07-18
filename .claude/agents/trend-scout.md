@@ -21,6 +21,8 @@ model: sonnet
 | `/discover-trends` | GSC + 外部ソースからのトレンド発見（`--whitepaper` で**企画段階**に白書の切り口を統合 → 3 軸ヒット。`--deep` でデータ未整備の白書強アングル候補を e-Stat 補完ループで救済、`data-ingester` に取り込み委譲） |
 | `/notebooklm-research` | NotebookLM での社外資料リサーチ（**公開済記事**の深掘り補強。discover-trends と同じ `notebooklm-cross-query.mjs` を共用） |
 | `/trends-snapshots` | トレンドスナップショットの参照 / 更新 |
+| `/competitor-scan` | SNS 競合の月次定点観測 (アカウント単位。x-strategist と共同) |
+| `/x-viral-research` | X バズ投稿の型・画像リサーチ (投稿単位。統計/地図/GIS/可視化の軸で検索し `.claude/state/sns/x-viral-posts.json` に台帳化) |
 
 ## 担当外
 
@@ -39,6 +41,7 @@ model: sonnet
 
 - `.claude/state/blog/` — トレンド検出履歴 (CRUD)
 - `.claude/skills/blog/trends-snapshots/` — snapshot ファイル (CRUD)
+- `.claude/state/sns/x-viral-posts.json` — X バズ投稿リサーチ台帳 (CRUD、post_url キーで upsert)
 - `.claude/state/metrics/gsc/` — read only (gsc-analyst の出力を読む)
 
 ## File Boundary (並行衝突回避)

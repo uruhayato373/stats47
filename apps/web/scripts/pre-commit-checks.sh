@@ -389,6 +389,38 @@ if [ -n "$STAGED_CATALOG" ]; then
   fi
 fi
 
+# 6.6b area-databook (県データブック SSOT) の整合 + 生成物鮮度チェック
+#      (.claude/rules/area-databook-standards.md)。テンプレ/editorial または生成物が staged のとき発火。
+STAGED_DATABOOK=$(git diff --cached --name-only --diff-filter=ACM | grep -E "^packages/data-configs/src/area-databook/.+\.ts$|^apps/web/scripts/data/page-components/area/.+\.json$" || true)
+
+if [ -n "$STAGED_DATABOOK" ]; then
+  echo -e "${GREEN}🗾 area-databook 整合チェック...${NC}"
+  if (cd "$PROJECT_ROOT" && npx tsx packages/data-configs/scripts/validate-area-databook.ts > /tmp/validate-area-databook.log 2>&1); then
+    echo -e "${GREEN}✅ area-databook 整合チェック成功${NC}"
+  else
+    echo -e "${RED}❌ area-databook に整合 error があります。${NC}"
+    grep -E "^   |❌" /tmp/validate-area-databook.log | head -10 || true
+    echo -e "${YELLOW}💡 規約: .claude/rules/area-databook-standards.md / 確認: npm run validate:area-databook --workspace=@stats47/data-configs${NC}"
+    ERROR_COUNT=$((ERROR_COUNT + 1))
+  fi
+  if (cd "$PROJECT_ROOT" && npx tsx packages/data-configs/scripts/generate-area-databook.ts --check > /tmp/area-databook-check.log 2>&1); then
+    echo -e "${GREEN}✅ area-databook 生成物は最新${NC}"
+  else
+    echo -e "${RED}❌ area-databook 生成物が古い/手編集されています。${NC}"
+    grep -E "^   |❌" /tmp/area-databook-check.log | head -10 || true
+    echo -e "${YELLOW}💡 再生成: npm run generate:area-databook --workspace=@stats47/data-configs${NC}"
+    ERROR_COUNT=$((ERROR_COUNT + 1))
+  fi
+  if (cd "$PROJECT_ROOT" && npx tsx packages/data-configs/scripts/generate-editorial-index.ts --check > /tmp/editorial-index-check.log 2>&1); then
+    echo -e "${GREEN}✅ editorial/index.ts は最新${NC}"
+  else
+    echo -e "${RED}❌ editorial/index.ts が古い (県別ファイル追加後の再生成漏れ)。${NC}"
+    grep -E "^   |❌" /tmp/editorial-index-check.log | head -5 || true
+    echo -e "${YELLOW}💡 再生成: npm run generate:editorial-index --workspace=@stats47/data-configs${NC}"
+    ERROR_COUNT=$((ERROR_COUNT + 1))
+  fi
+fi
+
 # 6.7 アフィリエイト広告のサイズ規約チェック (.claude/rules/affiliate-ads-standards.md §サイズ)
 #     affiliate-ads-data.ts が staged のとき、canonical/legacy 以外のサイズ混入を弾く。
 STAGED_AFFILIATE=$(git diff --cached --name-only --diff-filter=ACM | grep -E "^apps/web/scripts/affiliate-ads-data\.ts$" || true)

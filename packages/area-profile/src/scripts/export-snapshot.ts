@@ -8,12 +8,19 @@
  */
 
 import { exportAreaProfileSnapshot } from "../exporters/area-profile-snapshot";
+import { exportAreaDatabookSnapshot } from "../exporters/area-databook-snapshot";
 
 async function main() {
   console.log("area-profile snapshot を R2 に書き出します…");
   const result = await exportAreaProfileSnapshot();
   console.log(
     `✅ area-profile: files=${result.files} rows=${result.rowCount} bytes=${result.totalSizeBytes} duration=${result.durationMs}ms`,
+  );
+
+  console.log("area-databook snapshot を R2 に書き出します…");
+  const databook = await exportAreaDatabookSnapshot();
+  console.log(
+    `✅ area-databook: files=${databook.files} metricsResolved=${databook.metricsResolved} missing=${databook.metricsMissing.length} bytes=${databook.totalSizeBytes} duration=${databook.durationMs}ms`,
   );
 }
 
