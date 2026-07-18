@@ -31,9 +31,8 @@ No prose before/after. No section headers.
 - 既存metric、ThemeCatalog、KSJ登録済みデータとの重複確認
 - URL到達性、必須項目、列挙値、重複ID、確認日のvalidator維持
 
-> 旧実装手順書 `docs/02_実装計画/37_オープンデータカタログ・専用エージェント実装手順.md` は
-> 2026-07-18 の初期実装完了で削除済 (git 履歴参照)。恒常仕様は本ファイル + 型
-> (`open-data-catalog/types.ts`) + validator に集約した。
+> 初期実装手順書 (旧 docs/02 実装計画 37 番) は 2026-07-18 の初期実装完了で削除済 (git 履歴参照)。
+> 恒常仕様は本ファイル + 型 (`open-data-catalog/types.ts`) + validator に集約した。
 
 ## 必読rules・参照
 
