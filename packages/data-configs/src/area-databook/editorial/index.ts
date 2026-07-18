@@ -8,9 +8,16 @@
  * 未登録県は UI がセクションごと非表示にフォールバックする (欠損で壊さない)。
  */
 import type { AreaEditorial } from "../types";
+import { HOKKAIDO_EDITORIAL } from "./01000";
+import { TOKYO_EDITORIAL } from "./13000";
+import { OKINAWA_EDITORIAL } from "./47000";
 
 /** 県別編集コンテンツの登録簿 (areaCode → editorial)。 */
-export const AREA_EDITORIALS: Record<string, AreaEditorial> = {};
+export const AREA_EDITORIALS: Record<string, AreaEditorial> = {
+  "01000": HOKKAIDO_EDITORIAL,
+  "13000": TOKYO_EDITORIAL,
+  "47000": OKINAWA_EDITORIAL,
+};
 
 /** 登録済み editorial 配列。 */
 export function listAreaEditorials(): AreaEditorial[] {

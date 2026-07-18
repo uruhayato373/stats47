@@ -8,5 +8,9 @@
  */
 export * from "./types";
 export { AREA_DATABOOK_TEMPLATE } from "./template";
-export { listTemplateCharts, templateToPageComponentsJson } from "./transform";
+export {
+  listTemplateCharts,
+  templateToPageComponentsJson,
+  collectTemplateMetricKeys,
+} from "./transform";
 export { AREA_EDITORIALS, listAreaEditorials } from "./editorial";

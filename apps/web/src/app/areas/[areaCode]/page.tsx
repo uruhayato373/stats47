@@ -15,10 +15,10 @@ import { PageShell } from "@/components/layout";
 import { RightRailWidgets } from "@/components/rail";
 
 import { InContentAdSlot, RailAdSlot } from "@/features/ads";
+import { AreaDatabookSection } from "@/features/area-databook";
 import {
     AreaProfilePageClient,
     AreaProfileSidebar,
-    AreaChartSection,
     AreaRelatedRankingsCard,
     AreaRelatedBlogArticles,
     CitiesNavCard,
@@ -154,8 +154,9 @@ export default async function AreaProfilePage({ params }: PageProps) {
                 <AreaProfilePageClient profile={profile} />
 
                 <main className="min-w-0 space-y-10">
-                    {/* DB管理チャート */}
-                    <AreaChartSection
+                    {/* 県データブック (値+全国順位 + 特産品 + 推移チャート)。
+                        databook 未生成の県は従来チャート表示にフォールバックする。 */}
+                    <AreaDatabookSection
                         areaCode={areaCode}
                         areaName={profile.areaName}
                     />

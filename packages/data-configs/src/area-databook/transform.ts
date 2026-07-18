@@ -7,6 +7,36 @@
  */
 import type { AreaDatabookTemplate, DatabookChart } from "./types";
 
+/**
+ * template が参照する全 rankingKey を集める (ranked-kpi の metrics + gender-paired の男女キー)。
+ * exporter が databook.json に焼き込むべき指標の一覧 = これ。順序保持・重複除去。
+ */
+export function collectTemplateMetricKeys(
+  template: AreaDatabookTemplate,
+): string[] {
+  const keys: string[] = [];
+  const seen = new Set<string>();
+  const add = (k: string) => {
+    if (!seen.has(k)) {
+      seen.add(k);
+      keys.push(k);
+    }
+  };
+  for (const section of template.sections) {
+    for (const block of section.blocks) {
+      if (block.blockType === "ranked-kpi-grid") {
+        for (const m of block.metrics) add(m.rankingKey);
+      } else if (block.blockType === "gender-paired-kpi") {
+        for (const p of block.pairs) {
+          add(p.maleKey);
+          add(p.femaleKey);
+        }
+      }
+    }
+  }
+  return keys;
+}
+
 /** template 内の chart ブロックを (親セクション title 付きで) 平坦化する。 */
 export function listTemplateCharts(
   template: AreaDatabookTemplate,

@@ -48,6 +48,7 @@ export {
   AREA_EDITORIALS,
   listAreaEditorials,
   listTemplateCharts,
+  collectTemplateMetricKeys,
   type AreaDatabookTemplate,
   type AreaDatabookChartType,
   type DatabookSection,
