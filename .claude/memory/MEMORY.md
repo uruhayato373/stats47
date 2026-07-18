@@ -1,5 +1,6 @@
 # Memory Index
 
+- [project_coconala_product_factory.md](project_coconala_product_factory.md) — ココナラ商品ファクトリー(packages/product-factory)。2026-07-18に全174商品を共通デモデータ(日本人人口2024)で一括生成→.local/coconala-products(git外584M)。SSOT=git TS(商品定義)+R2 snapshot(実データ)、生成物は.local・公開R2/D1なし。Office実機未検証(オーナーがWindows検証)・出品は人間工程。個別テーマ接続は未実施。正典=docs/02_実装計画/30+README。CLI=products:generate --all/--id・catalog --check・report
 - [feedback_periodic_progress_reports.md](feedback_periodic_progress_reports.md) — 長時間のsubagent/workflow実行中は聞かれる前に約4-5分間隔で実測ベース(mtime/件数)の進捗報告を自発的に出す(2026-07-17指摘)。backgroundタイマーで自分を起こす
 - [feedback_exit_code_not_via_pipe.md](feedback_exit_code_not_via_pipe.md) — 検証の exit code を `| tail` 越しに測ると常に 0 で全 PASS に見える (PR #569 で 2 回実発生)。ガード検証は直接実行 or PIPESTATUS。「全 PASS」が出たら 1 件壊して検証器自体を検証する
 - [feedback_debt_baseline_shrink_only.md](feedback_debt_baseline_shrink_only.md) — maintenance-debt baseline は縮小専用の不変条項 (2026-07-14 オーナー方針)。--write-baseline に増加パス無し・CI --ratchet-check が origin/main 比増加を拒否。新規 debt は実修正 (期限/削除条件/backlog化) かルール修正 (誤検知除外) のみ。実績: theme catalogStatus 用語の除外で 271→239

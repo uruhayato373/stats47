@@ -1,0 +1,31 @@
+{
+  "name": "@stats47/product-factory",
+  "version": "0.0.0",
+  "private": true,
+  "description": "ココナラ商品ファクトリー — 型付き商品カタログと生成基盤 (Phase 1: catalog + validator + CLI)",
+  "main": "./src/index.ts",
+  "dependencies": {
+    "@expo-google-fonts/noto-sans-jp": "^0.4.3",
+    "@pdf-lib/fontkit": "^1.1.1",
+    "exceljs": "^4.4.0",
+    "pdf-lib": "^1.17.1",
+    "pptxgenjs": "^4.0.1",
+    "topojson-client": "^3"
+  },
+  "scripts": {
+    "products:catalog": "tsx src/cli.ts catalog",
+    "products:generate": "tsx src/cli.ts generate",
+    "products:validate": "tsx src/cli.ts validate",
+    "products:preview": "tsx src/cli.ts preview",
+    "products:report": "tsx src/cli.ts report",
+    "test": "vitest",
+    "test:run": "vitest run",
+    "type-check": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/topojson-client": "^3",
+    "tsx": "^4.21.0",
+    "typescript": "^5.0.0",
+    "vitest": "^2.1.8"
+  }
+}
