@@ -46,3 +46,36 @@ npm run test:run          --workspace=@stats47/product-factory
 (購入者がアプリ内で県単位に再着色できる = レビュー受入条件)。単一 SVG 画像 (個別編集不可)・
 県別 SVG 埋め込み (Windows 限定の shape 変換を購入者に強いる) は却下。
 残リスク: 離島の shape 数肥大 / custGeom の穴 (飛地) 描画 / チャート追従・XLSX チャート authoring は Office 未検証。
+
+## note 商品展開ファクトリー (`src/channels/note/`)
+
+ココナラ 174 商品を note 向けに展開する channel (正典: `docs/02_実装計画/31_note商品展開ファクトリー実装仕様.md` /
+規約: `.claude/rules/coconala-product-standards.md` 系)。**N0-N3 実装済** (2026-07-18)。
+
+- SSOT: `article-plan.ts` の **55 canonical 記事**が 174 商品を漏れなく束ねる。`product-note-mapping.ts` が
+  174 mapping を (family, 記事) から**決定的に導出** (disposition: standalone-paid / bundle-member / free-lead / catalog-only)。
+- 生成物は `.local/note-products/<series>/<slug>/` に 7 ファイル (draft.md / hashtags.txt / attachments.json /
+  source-manifest.json / product-links.json / images-plan.json / REVIEW.md)。**git 管理外**・note.com へは投稿しない。
+- 添付は商品 manifest (`.local/coconala-products/`) を**参照** (複製しない)。有料記事のみ添付を持つ。
+- draft は決定的アセンブリ (LLM 原稿ではない)。有料は `<!-- paid:start -->` 境界。無料 (J/K/L) は境界なし。
+
+```bash
+npm run products:note:plan     --workspace=@stats47/product-factory -- --check    # coverage 174/174 検証
+npm run products:note:generate --workspace=@stats47/product-factory -- --all --draft-only  # 全55記事を .local へ
+npm run products:note:generate --workspace=@stats47/product-factory -- --slug ppt-data-explainer-deck
+npm run products:note:validate --workspace=@stats47/product-factory -- --all
+npm run products:note:report   --workspace=@stats47/product-factory                # .claude/state/products/note-catalog-status.json
+npm run products:note:promote  --workspace=@stats47/product-factory -- --all --apply  # 全55を docs/31 + note catalog へ draft staging
+npm run products:note:covers   --workspace=@stats47/product-factory -- --all          # 表紙1280×670 + 完成イメージを docs/31 images/ へ
+```
+
+**表紙・ハッシュタグ**: `covers --all` が決定的タイトルカード (1280×670・シリーズ別アクセント色・価格/無料バッジ) を
+sharp で生成 (`images/cover.png`)。有料記事は `completion.png` に商品プレビューを再利用。ハッシュタグは各記事の
+`hashtags.txt` + draft.md frontmatter `tags` に生成済み。
+
+**N4-N5 promote (staging・実行済)**: `promote --all --apply` が 55 記事を `docs/31_note記事原稿/product-sales/<slug>/`
+(note-draft frontmatter・`status: draft`・`published: false`) + note catalog SSOT
+(`.claude/scripts/note/catalog/data/product-sales.ts`・新 vertical `product-sales`) へ展開。**別カタログを作らない**。
+既定は dry-run、`--apply` で書き込み。docs/31・catalog data は git 未追跡 (未 commit)。
+
+**未実施 (N6-N7・人間工程)**: 読者価値の磨き込み (critic/人間)・Office 実機検証・note.com 公開 (月1〜2本・ローカル `/publish-note`)・ココナラ出品。

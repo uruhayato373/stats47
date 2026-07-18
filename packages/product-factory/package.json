@@ -18,6 +18,12 @@
     "products:validate": "tsx src/cli.ts validate",
     "products:preview": "tsx src/cli.ts preview",
     "products:report": "tsx src/cli.ts report",
+    "products:note:plan": "tsx src/channels/note/cli.ts plan",
+    "products:note:generate": "tsx src/channels/note/cli.ts generate",
+    "products:note:validate": "tsx src/channels/note/cli.ts validate",
+    "products:note:promote": "tsx src/channels/note/cli.ts promote",
+    "products:note:covers": "tsx src/channels/note/cli.ts covers",
+    "products:note:report": "tsx src/channels/note/cli.ts report",
     "test": "vitest",
     "test:run": "vitest run",
     "type-check": "tsc --noEmit"

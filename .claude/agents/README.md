@@ -2,7 +2,7 @@
 
 `.claude/agents/` に定義されたサブエージェント群。Agent tool の `subagent_type` または直接起動で利用する。
 
-**現在: Phase 1-5 完了 + 2026-07-03 整理、以降の新設含め 45 体 (実ファイル数)**。並行運用最適化のため、ドメイン × フェーズで責務を細分化し、各 agent に「担当 skills / 必読 rules / 触る state」を明示している。旧 17 体のうち `data-pipeline` `db-manager` は Phase 6.7 整理で削除済 (-2)、新 18 agent 追加。差し引き 33 体。**2026-06-21 に ranking 系 4 体 (`ranking-ui-manager` / `ranking-publisher` / `ranking-content-author` / `ranking-content-critic`) を新設 (+4)。2026-07-03 運営総点検で zombie 化した `seo-auditor` を削除し、実ファイルベースで整合。アフィリエイト一元管理の `affiliate-manager` を新設 (+1) → 41 体。その後 `ranking-expander` (2026-07-12・SSDS ランキング拡充) / `blog-seo-strategist` (2026-07-12・ブログSEO戦略ハブ) 等を追加し現在 45 体。**残る縮退 agent は新 agent に役割委譲済 (Session B で 4 件移動・24 件は責務上維持)。詳細は移行ステータス表。
+**現在: Phase 1-5 完了 + 2026-07-03 整理、以降の新設含め 50 体 (実ファイル数)**。並行運用最適化のため、ドメイン × フェーズで責務を細分化し、各 agent に「担当 skills / 必読 rules / 触る state」を明示している。旧 17 体のうち `data-pipeline` `db-manager` は Phase 6.7 整理で削除済 (-2)、新 18 agent 追加。差し引き 33 体。**2026-06-21 に ranking 系 4 体 (`ranking-ui-manager` / `ranking-publisher` / `ranking-content-author` / `ranking-content-critic`) を新設 (+4)。2026-07-03 運営総点検で zombie 化した `seo-auditor` を削除し、実ファイルベースで整合。アフィリエイト一元管理の `affiliate-manager` を新設 (+1) → 41 体。その後の各ドメインagent追加を含め、`open-data-curator` (2026-07-18・e-Stat外オープンデータカタログ管理) を加えて現在 50 体。**残る縮退 agent は新 agent に役割委譲済 (Session B で 4 件移動・24 件は責務上維持)。詳細は移行ステータス表。
 
 ## 設計思想
 
@@ -29,6 +29,7 @@
 | agent | role | 派生元 |
 |---|---|---|
 | `estat-researcher` 🆕 | e-Stat / MLIT DPF 探索・メタ確認 (DB には触らない) | data-pipeline 分割 |
+| `open-data-curator` 🆕 | e-Stat外の政府・自治体データ源をsource/dataset単位で棚卸しし、取得方式・粒度・GIS・ライセンス・更新性・stats47適合性のgit TSカタログを排他管理。実取得・投入は既存ownerへ委譲 | 2026-07-18 新設 |
 | `data-ingester` 🆕 | metrics 登録 + stats_* 投入 + 47県カバレッジ検証 (GIS は gis-* に委譲) | data-pipeline + db-manager 分割 |
 | `db-schema-manager` 🆕 | スキーマ・migration・reset 専任 | db-manager 分割 |
 | `snapshot-exporter` 🆕 | D1 → R2 snapshot / Remotion 派生 JSON 生成 | db-manager 分割 |
@@ -65,7 +66,7 @@
 | `youtube-strategist` | **月1慎重再開のガード役** (`/post-youtube` `/bar-chart-race`。budget/duplicate/shadowban ガード) | 縮退 (2026-07) |
 | `sns-renderer` | Remotion レンダリング入口 (静止画/動画=`/render-sns-stills`、BCR=`/bar-chart-race --step render`、バズ地図=`/buzz-map`、`/preview-remotion`=プレビュー専用) | 既存縮退 |
 | `sns-metrics-sync` | メトリクス同期・posted 印付け・週次レポート (caption 生成は各 strategist に返上) | sns-renderer + 各 strategist 分離 |
-| `trend-scout` | SNS 競合の定点観測 (`/competitor-scan`) も担当 | 既存拡張 |
+| `trend-scout` | SNS 競合の定点観測 (`/competitor-scan`) + X バズ投稿の型・画像リサーチ (`/x-viral-research`) も担当 | 既存拡張 |
 | `strategy-advisor` | SNS 週次運用ルーチン (`/sns-weekly-plan`) の orchestrator | 既存拡張 |
 
 ## Tier 5: SEO / Analytics / Monetization (6 体)

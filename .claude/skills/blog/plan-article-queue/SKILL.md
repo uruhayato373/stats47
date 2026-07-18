@@ -64,8 +64,10 @@ node .claude/scripts/blog/build-topic-queue.mjs --mark-done <topicKey> --slug <p
 - **コードを書かない** (orchestrator)。スコアリングは `build-topic-queue.mjs` に閉じる。
 - **既記事化テーマは候補に出ない** (script が R2 `app/blog/all.json` で dedup 済)。既存記事の改善は
   `/brushup-blog --target queue` (remediation-queue) の領分。両キューを混同しない。
-- **候補は最終決定ではない**。B 型の高相関ペアには人口交絡・自明ペアが紛れうる (script が減点済だが完全でない)。
-  記事化前に相関の意味を吟味し、「意外な関係」が成立しない候補はスキップする (`evidence.populationConfounded` を見る)。
+- **候補は最終決定ではない**。B 型は疑似相関を決定的フィルタで除外済
+  (`lib/topic-queue-spurious-core.mjs`: 自己/派生・同義 family・規模ペア・同一 category・年度乖離・欠測/全国値。
+  TOPIC-QUEUE-SPURIOUS-FILTER-01) だが、機序の書けないペアが残りうる。記事化前に「見かけの相関 vs 真因」を
+  文章にできるか吟味し、書けない候補はスキップする (`evidence.populationConfounded` / `partialRPopulation` を見る)。
 
 ## 参照
 

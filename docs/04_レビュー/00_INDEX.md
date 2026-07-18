@@ -1,6 +1,6 @@
 ---
 type: index
-updated: 2026-07-11
+updated: 2026-07-18
 ---
 
 # 04_レビュー — レビュー・監査・週報
@@ -31,6 +31,7 @@ docs/04_レビュー/<YYYY-Www>-<topic-slug>.md        (週次。例: 2026-W22-s
 | [2026-07-03-claude-code-setup-audit.md](2026-07-03-claude-code-setup-audit.md) | Claude Code 環境監査。§6 モデル配分ポリシー | `build-remediation-queue.mjs` / `build-ai-content-queue.mjs` が §6 を正典参照 |
 | [2026-06-13-monetization-career.md](2026-06-13-monetization-career.md) | 転職アフィリエイト戦略 (医療クラスタ・§A 提携リスト) | 現役 handoff `handoffs/2026-06-13-monetization-affiliate.md` が §A を参照。handoff 消化時に一緒に削除 |
 | [2026-06-08-blog-winning-patterns.md](2026-06-08-blog-winning-patterns.md) | GSC 実測 × 構造特徴の勝ち要因分析 (順位交絡統制つき) | 天井ループの一次分析。定性裏取りの参照元 |
+| [2026-07-18-coconala-content-monetization.md](2026-07-18-coconala-content-monetization.md) | stats47 コンテンツのココナラ販売可否・類似出品・価格・権利・商品設計 | 販売テスト判断と出品前監査の一次調査 |
 | [2026-07-11-theme-population-dynamics.md](2026-07-11-theme-population-dynamics.md) | 人口動態テーマの指標・チャート提案 | 承認後のClaude Code実装と鮮度解決の正典 |
 | [2026-07-11-theme-aging-society.md](2026-07-11-theme-aging-society.md) | 少子高齢化テーマの指標・チャート提案 | 承認後のClaude Code実装、75歳以上指標、将来推計設計の正典 |
 | [2026-07-11-theme-healthcare.md](2026-07-11-theme-healthcare.md) | 医療・健康テーマの指標・チャート提案 | 承認後のClaude Code実装、需要/供給構造、chart拡張の正典 |

@@ -1,0 +1,262 @@
+{
+  "slug": "data-packs-government-safety",
+  "access": "paid",
+  "note": "添付は商品 manifest を参照し、ファイルを複製しない (SSOT は .local/coconala-products)。verified=false の添付は実機検証まで販売添付を保留する。",
+  "attachments": [
+    {
+      "productId": "D-10",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/D-10/v1/SOURCES.csv",
+      "filename": "SOURCES.csv",
+      "sha256": "7c28a0ab1931b8f011e07dccf2c20b6c03bdad63f01a3b34fd185b1c2be19fa4",
+      "bytes": 527,
+      "contentType": "text/csv",
+      "isPaid": true,
+      "licenseId": "single-corporate",
+      "officeCompatibility": [
+        "Excel 365 (Windows / Mac)",
+        "UTF-8 (BOM) 対応表計算ソフト",
+        "PDF 閲覧環境"
+      ],
+      "verified": false
+    },
+    {
+      "productId": "D-10",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/D-10/v1/LICENSE-ja.txt",
+      "filename": "LICENSE-ja.txt",
+      "sha256": "7acd178456ed99f44e5f4b46d5b8e1ddade73749a74f84108c573a7bde762aaa",
+      "bytes": 1000,
+      "contentType": "text/plain",
+      "isPaid": true,
+      "licenseId": "single-corporate",
+      "officeCompatibility": [
+        "Excel 365 (Windows / Mac)",
+        "UTF-8 (BOM) 対応表計算ソフト",
+        "PDF 閲覧環境"
+      ],
+      "verified": false
+    },
+    {
+      "productId": "D-10",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/D-10/v1/data.csv",
+      "filename": "data.csv",
+      "sha256": "8a40a8d9d36f811457527d75e22a7e68cbfa1af95d82c9318db4048493a75eba",
+      "bytes": 1711,
+      "contentType": "text/csv",
+      "isPaid": true,
+      "licenseId": "single-corporate",
+      "officeCompatibility": [
+        "Excel 365 (Windows / Mac)",
+        "UTF-8 (BOM) 対応表計算ソフト",
+        "PDF 閲覧環境"
+      ],
+      "verified": false
+    },
+    {
+      "productId": "D-10",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/D-10/v1/product.xlsx",
+      "filename": "product.xlsx",
+      "sha256": "51bcd876756cdf4e4fe1076e966ca594c3c893e7c445124f2feaaba46903c175",
+      "bytes": 11458,
+      "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "isPaid": true,
+      "licenseId": "single-corporate",
+      "officeCompatibility": [
+        "Excel 365 (Windows / Mac)",
+        "UTF-8 (BOM) 対応表計算ソフト",
+        "PDF 閲覧環境"
+      ],
+      "verified": false
+    },
+    {
+      "productId": "D-10",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/D-10/v1/manual.pdf",
+      "filename": "manual.pdf",
+      "sha256": "2b2677a6b9b2fbaccd162269a4c79865fcef2b5ef449ca2f0122884359dc8c0b",
+      "bytes": 38730,
+      "contentType": "application/pdf",
+      "isPaid": true,
+      "licenseId": "single-corporate",
+      "officeCompatibility": [
+        "Excel 365 (Windows / Mac)",
+        "UTF-8 (BOM) 対応表計算ソフト",
+        "PDF 閲覧環境"
+      ],
+      "verified": false
+    },
+    {
+      "productId": "D-12",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/D-12/v1/SOURCES.csv",
+      "filename": "SOURCES.csv",
+      "sha256": "7c28a0ab1931b8f011e07dccf2c20b6c03bdad63f01a3b34fd185b1c2be19fa4",
+      "bytes": 527,
+      "contentType": "text/csv",
+      "isPaid": true,
+      "licenseId": "single-corporate",
+      "officeCompatibility": [
+        "Excel 365 (Windows / Mac)",
+        "UTF-8 (BOM) 対応表計算ソフト",
+        "PDF 閲覧環境"
+      ],
+      "verified": false
+    },
+    {
+      "productId": "D-12",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/D-12/v1/LICENSE-ja.txt",
+      "filename": "LICENSE-ja.txt",
+      "sha256": "7acd178456ed99f44e5f4b46d5b8e1ddade73749a74f84108c573a7bde762aaa",
+      "bytes": 1000,
+      "contentType": "text/plain",
+      "isPaid": true,
+      "licenseId": "single-corporate",
+      "officeCompatibility": [
+        "Excel 365 (Windows / Mac)",
+        "UTF-8 (BOM) 対応表計算ソフト",
+        "PDF 閲覧環境"
+      ],
+      "verified": false
+    },
+    {
+      "productId": "D-12",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/D-12/v1/data.csv",
+      "filename": "data.csv",
+      "sha256": "8a40a8d9d36f811457527d75e22a7e68cbfa1af95d82c9318db4048493a75eba",
+      "bytes": 1711,
+      "contentType": "text/csv",
+      "isPaid": true,
+      "licenseId": "single-corporate",
+      "officeCompatibility": [
+        "Excel 365 (Windows / Mac)",
+        "UTF-8 (BOM) 対応表計算ソフト",
+        "PDF 閲覧環境"
+      ],
+      "verified": false
+    },
+    {
+      "productId": "D-12",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/D-12/v1/product.xlsx",
+      "filename": "product.xlsx",
+      "sha256": "44ec232e2537101c0176cddd64e061b13524de0f198069a73ead4ff8208f4f40",
+      "bytes": 11474,
+      "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "isPaid": true,
+      "licenseId": "single-corporate",
+      "officeCompatibility": [
+        "Excel 365 (Windows / Mac)",
+        "UTF-8 (BOM) 対応表計算ソフト",
+        "PDF 閲覧環境"
+      ],
+      "verified": false
+    },
+    {
+      "productId": "D-12",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/D-12/v1/manual.pdf",
+      "filename": "manual.pdf",
+      "sha256": "d4f4dac8f82f1c29bf8485f6707671d65ea98b20804cbb6a2d2fcfb883e0ecc8",
+      "bytes": 38512,
+      "contentType": "application/pdf",
+      "isPaid": true,
+      "licenseId": "single-corporate",
+      "officeCompatibility": [
+        "Excel 365 (Windows / Mac)",
+        "UTF-8 (BOM) 対応表計算ソフト",
+        "PDF 閲覧環境"
+      ],
+      "verified": false
+    },
+    {
+      "productId": "D-13",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/D-13/v1/SOURCES.csv",
+      "filename": "SOURCES.csv",
+      "sha256": "7c28a0ab1931b8f011e07dccf2c20b6c03bdad63f01a3b34fd185b1c2be19fa4",
+      "bytes": 527,
+      "contentType": "text/csv",
+      "isPaid": true,
+      "licenseId": "single-corporate",
+      "officeCompatibility": [
+        "Excel 365 (Windows / Mac)",
+        "UTF-8 (BOM) 対応表計算ソフト",
+        "PDF 閲覧環境"
+      ],
+      "verified": false
+    },
+    {
+      "productId": "D-13",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/D-13/v1/LICENSE-ja.txt",
+      "filename": "LICENSE-ja.txt",
+      "sha256": "7acd178456ed99f44e5f4b46d5b8e1ddade73749a74f84108c573a7bde762aaa",
+      "bytes": 1000,
+      "contentType": "text/plain",
+      "isPaid": true,
+      "licenseId": "single-corporate",
+      "officeCompatibility": [
+        "Excel 365 (Windows / Mac)",
+        "UTF-8 (BOM) 対応表計算ソフト",
+        "PDF 閲覧環境"
+      ],
+      "verified": false
+    },
+    {
+      "productId": "D-13",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/D-13/v1/data.csv",
+      "filename": "data.csv",
+      "sha256": "8a40a8d9d36f811457527d75e22a7e68cbfa1af95d82c9318db4048493a75eba",
+      "bytes": 1711,
+      "contentType": "text/csv",
+      "isPaid": true,
+      "licenseId": "single-corporate",
+      "officeCompatibility": [
+        "Excel 365 (Windows / Mac)",
+        "UTF-8 (BOM) 対応表計算ソフト",
+        "PDF 閲覧環境"
+      ],
+      "verified": false
+    },
+    {
+      "productId": "D-13",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/D-13/v1/product.xlsx",
+      "filename": "product.xlsx",
+      "sha256": "6c62abb5354be4601879535e32007ec16a1d45ef59d10ffa2cb990ad5c0bccad",
+      "bytes": 11462,
+      "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "isPaid": true,
+      "licenseId": "single-corporate",
+      "officeCompatibility": [
+        "Excel 365 (Windows / Mac)",
+        "UTF-8 (BOM) 対応表計算ソフト",
+        "PDF 閲覧環境"
+      ],
+      "verified": false
+    },
+    {
+      "productId": "D-13",
+      "version": "v1",
+      "sourcePath": ".local/coconala-products/D-13/v1/manual.pdf",
+      "filename": "manual.pdf",
+      "sha256": "e14b4b4995348cfc40fd024f14b67495d0b85823cac4913ba6feac37883ae75f",
+      "bytes": 38469,
+      "contentType": "application/pdf",
+      "isPaid": true,
+      "licenseId": "single-corporate",
+      "officeCompatibility": [
+        "Excel 365 (Windows / Mac)",
+        "UTF-8 (BOM) 対応表計算ソフト",
+        "PDF 閲覧環境"
+      ],
+      "verified": false
+    }
+  ]
+}

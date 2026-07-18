@@ -9,12 +9,14 @@ import { stats47NoteArticles } from "./data/stats47-note";
 import { koumuinClaudeCodeArticles } from "./data/koumuin-claude-code";
 import { koumuinEstatClaudeCodeArticles } from "./data/koumuin-estat-claude-code";
 import { koumuinGisArticles } from "./data/koumuin-gis";
+import { productSalesArticles } from "./data/product-sales";
 
 export const NOTE_ARTICLES: NoteArticle[] = [
   ...stats47NoteArticles,
   ...koumuinClaudeCodeArticles,
   ...koumuinEstatClaudeCodeArticles,
   ...koumuinGisArticles,
+  ...productSalesArticles,
 ];
 
 export { NOTE_MAGAZINES, NOTE_MAGAZINE_KEYS, getMagazine } from "./magazines";

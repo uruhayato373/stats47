@@ -22,6 +22,13 @@
     "validate:config": "tsx scripts/validate-metric-config.ts",
     "generate:catalog": "tsx scripts/generate-theme-catalog.ts",
     "validate:catalog": "tsx scripts/validate-theme-catalog.ts",
+    "generate:area-databook": "tsx scripts/generate-area-databook.ts",
+    "generate:editorial-index": "tsx scripts/generate-editorial-index.ts",
+    "validate:area-databook": "tsx scripts/validate-area-databook.ts",
+    "validate:prefecture-statistics": "tsx scripts/validate-prefecture-statistics-catalog.ts",
+    "check:prefecture-statistics-links": "tsx scripts/check-prefecture-statistics-links.ts",
+    "validate:open-data-catalog": "tsx scripts/validate-open-data-catalog.ts",
+    "check:open-data-links": "tsx scripts/check-open-data-links.ts",
     "test": "vitest",
     "type-check": "tsc --noEmit"
   },
