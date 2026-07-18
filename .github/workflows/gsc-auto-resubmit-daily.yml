@@ -75,6 +75,9 @@ jobs:
             echo "No changes to commit"
           else
             git commit -m "chore(gsc): auto-resubmit history ${{ steps.date.outputs.date }} [skip ci]"
+            # 同時間帯の gsc-url-inspection-daily と main への push が競合しうるため rebase を挟む
+            # (書くファイルは互いに素なので常にクリーン)
+            git pull --rebase origin main
             git push origin main
           fi
 
