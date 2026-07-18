@@ -23,6 +23,7 @@
     "generate:catalog": "tsx scripts/generate-theme-catalog.ts",
     "validate:catalog": "tsx scripts/validate-theme-catalog.ts",
     "generate:area-databook": "tsx scripts/generate-area-databook.ts",
+    "generate:editorial-index": "tsx scripts/generate-editorial-index.ts",
     "validate:area-databook": "tsx scripts/validate-area-databook.ts",
     "test": "vitest",
     "type-check": "tsc --noEmit"

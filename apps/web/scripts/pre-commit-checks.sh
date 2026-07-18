@@ -411,6 +411,14 @@ if [ -n "$STAGED_DATABOOK" ]; then
     echo -e "${YELLOW}💡 再生成: npm run generate:area-databook --workspace=@stats47/data-configs${NC}"
     ERROR_COUNT=$((ERROR_COUNT + 1))
   fi
+  if (cd "$PROJECT_ROOT" && npx tsx packages/data-configs/scripts/generate-editorial-index.ts --check > /tmp/editorial-index-check.log 2>&1); then
+    echo -e "${GREEN}✅ editorial/index.ts は最新${NC}"
+  else
+    echo -e "${RED}❌ editorial/index.ts が古い (県別ファイル追加後の再生成漏れ)。${NC}"
+    grep -E "^   |❌" /tmp/editorial-index-check.log | head -5 || true
+    echo -e "${YELLOW}💡 再生成: npm run generate:editorial-index --workspace=@stats47/data-configs${NC}"
+    ERROR_COUNT=$((ERROR_COUNT + 1))
+  fi
 fi
 
 # 6.7 アフィリエイト広告のサイズ規約チェック (.claude/rules/affiliate-ads-standards.md §サイズ)

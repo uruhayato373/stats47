@@ -249,6 +249,7 @@ jobs:
           # 規約: .claude/rules/area-databook-standards.md
           npm run validate:area-databook --workspace=@stats47/data-configs
           npm run generate:area-databook --workspace=@stats47/data-configs -- --check
+          npm run generate:editorial-index --workspace=@stats47/data-configs -- --check
         continue-on-error: false
 
   type-check:
