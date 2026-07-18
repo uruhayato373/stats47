@@ -8,7 +8,8 @@ tags: [home, ranking, featured, ctr, svg, ga4, experiment]
 
 > **実装完了 (2026-07-17)**: Phase 1-5 実装・§13 検証・§14 受入条件を充足
 > (unit 205+120 / type-check / design-system / localhost QA)。
-> **R2 snapshot 反映・本番 deploy・GA4 custom dimension 登録は未実施** (§14 どおり別承認)。
+> **2026-07-17 本番反映済み** (PR #590 deploy + sync-snapshots master。本番で両 variant 描画 +
+> GA4 dataLayer 発火を実測)。**GA4 custom dimension 登録のみ人間タスクとして残**。
 > 実装 README: `apps/web/src/features/ranking/components/FeaturedRankings/README.md` /
 > backlog: `docs/todo/02_機能バックログ.md` [HOME-FEATURED-CTR-01]
 

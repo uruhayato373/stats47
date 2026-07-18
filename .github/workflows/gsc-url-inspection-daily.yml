@@ -63,6 +63,10 @@ jobs:
             echo "No changes to commit"
           else
             git commit -m "chore(gsc): URL Inspection daily snapshot ${{ steps.date.outputs.date }}"
+            # 本 job は ~1 時間走り、その間に gsc-auto-resubmit-daily (UTC 22:25 頃) が main を進めるため
+            # 素の push は毎日 non-fast-forward で拒否される (2026-07-11〜17 に 7 日連続 fail)。
+            # 書くファイルは互いに素なので rebase は常にクリーン。
+            git pull --rebase origin main
             git push origin main
           fi
 
