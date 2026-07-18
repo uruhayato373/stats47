@@ -75,9 +75,10 @@ jobs:
             echo "No changes to commit"
           else
             git commit -m "chore(gsc): auto-resubmit history ${{ steps.date.outputs.date }} [skip ci]"
-            # 同時間帯の gsc-url-inspection-daily と main への push が競合しうるため rebase を挟む
-            # (書くファイルは互いに素なので常にクリーン)
-            git pull --rebase origin main
+            # 同時間帯の gsc-url-inspection-daily と main への push が競合しうるため rebase を挟む。
+            # --autostash: 選択 add の後に残る未ステージ変更 (npm ci 副作用) が rebase を止める
+            # 事象 (2026-07-18) を回避する。書くファイルは互いに素なので rebase は常にクリーン。
+            git pull --rebase --autostash origin main
             git push origin main
           fi
 
