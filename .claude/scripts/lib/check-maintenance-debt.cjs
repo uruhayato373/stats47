@@ -57,12 +57,14 @@ function inspect(file) {
       results.push(finding("UNTRACKED_DEBT", file, number, `${debt[1].toUpperCase()} に issue/backlog/削除条件がない`, line));
 
     const legacy = line.match(/\b(legacy|deprecated|temporary|remove after)\b/i);
-    // 除外 2 群: (a) 期限・条件・追跡が明示されたもの (b) domain 用語 — theme の catalogStatus
+    // 除外 2 群: (a) 期限・条件・追跡が明示されたもの (b) domain 用語 — theme の catalogStatus /
+    // open-data-catalog の VerificationStatus ("deprecated" 等はデータソースの検証ステータス列挙値であり
+    // 廃止予定コードマーカーではない)。
     // enum 値「legacy」(catalog|legacy) とその日本語プローズ (legacy テーマ / カタログ駆動 20 + legacy 2 等)。
     // 負債の「legacy コード」とは別概念 (2026-07-14 ルール精緻化で誤検知 30+ 件を baseline から実削減)
     if (legacy &&
         !/(?:#\d+|https?:\/\/|\b(?:MC|AFF|EXP|TODO)-?\d+\b|remove(?:d)?\s+(?:when|after|by)|until\b|期限|削除条件|互換|compat|superseded)/i.test(line) &&
-        !/catalogStatus|LEGACY_SETS|IndicatorSet|indicator-sets|ThemeCatalog|THEME_CATALOGS|legacy ?テーマ|legacy ?\(未登録\)|未登録 ?\(legacy\)|\(legacy\) ?テーマ|カタログ駆動|legacy 2\b/.test(line))
+        !/catalogStatus|LEGACY_SETS|IndicatorSet|indicator-sets|ThemeCatalog|THEME_CATALOGS|legacy ?テーマ|legacy ?\(未登録\)|未登録 ?\(legacy\)|\(legacy\) ?テーマ|カタログ駆動|legacy 2\b|"deprecated"|deprecated source|VerificationStatus|VERIFICATION_STATUSES/.test(line))
       results.push(finding("UNBOUNDED_LEGACY", file, number, `${legacy[1]} に期限・削除条件がない`, line));
 
     if (!isTest && !relative.startsWith(".github/workflows/") && !relative.endsWith("CLAUDE.md") && !relative.endsWith("AGENTS.md") &&
