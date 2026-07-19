@@ -6,6 +6,8 @@ interface AdImpressionTrackerProps {
   category: string;
   label: string;
   position: string;
+  /** 広告 1 件単位の識別子 (AffiliateAd.id)。案件別 CTR 計測用 (GA4 custom dimension ad_id) */
+  adId?: string;
   /** A/B テスト用 (AFF-05・任意) */
   experimentId?: string;
   variantId?: string;
@@ -21,6 +23,7 @@ export function AdImpressionTracker({
   category,
   label,
   position,
+  adId,
   experimentId,
   variantId,
   creativeSize,
@@ -50,6 +53,7 @@ export function AdImpressionTracker({
                 // 広告意図軸 (10 vertical) の canonical dimension。category に vertical 値が流れる。
                 affiliate_vertical: category,
                 link_position: position,
+                ...(adId ? { ad_id: adId } : {}),
                 ...(experimentId ? { experiment_id: experimentId } : {}),
                 ...(variantId ? { variant_id: variantId } : {}),
                 ...(creativeSize ? { creative_size: creativeSize } : {}),

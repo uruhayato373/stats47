@@ -40,6 +40,8 @@ export function trackAffiliateClick(params: {
   position: string;
   /** 広告意図軸 (10 vertical)。未指定なら category を流用 (後方互換) */
   vertical?: string;
+  /** 広告 1 件単位の識別子 (AffiliateAd.id)。案件別 CTR 計測用 (GA4 custom dimension ad_id) */
+  adId?: string;
   experimentId?: string;
   variantId?: string;
   creativeSize?: string;
@@ -51,6 +53,7 @@ export function trackAffiliateClick(params: {
     affiliate_vertical: params.vertical ?? params.category,
     link_position: params.position,
     // 任意属性は値があるときだけ送る (未設定実験は従来どおりの payload)
+    ...(params.adId ? { ad_id: params.adId } : {}),
     ...(params.experimentId ? { experiment_id: params.experimentId } : {}),
     ...(params.variantId ? { variant_id: params.variantId } : {}),
     ...(params.creativeSize ? { creative_size: params.creativeSize } : {}),

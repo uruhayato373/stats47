@@ -7,6 +7,8 @@ interface TrackedAffiliateLinkProps {
   category: string;
   label: string;
   position: string;
+  /** 広告 1 件単位の識別子 (AffiliateAd.id)。案件別 CTR 計測用 */
+  adId?: string;
   /** A/B テスト用 (AFF-05・任意) */
   experimentId?: string;
   variantId?: string;
@@ -25,6 +27,7 @@ export function TrackedAffiliateLink({
   category,
   label,
   position,
+  adId,
   experimentId,
   variantId,
   creativeSize,
@@ -39,7 +42,7 @@ export function TrackedAffiliateLink({
       rel="noopener noreferrer sponsored"
       className={className}
       onClick={() =>
-        trackAffiliateClick({ category, label, position, experimentId, variantId, creativeSize })
+        trackAffiliateClick({ category, label, position, adId, experimentId, variantId, creativeSize })
       }
     >
       {children}

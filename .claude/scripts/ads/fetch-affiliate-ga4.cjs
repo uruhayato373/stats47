@@ -57,6 +57,13 @@ async function runReport(analyticsdata, dimensions) {
 // 取得を試みる dimension の tier (richest → 最小)。未登録 custom dimension があると runReport が
 // 失敗するため、上から順に試し最初に成功した tier を使う。
 const DIM_TIERS = [
+  // 最上位: 広告 1 件単位 (ad_id) × vertical × position。ad_id custom dimension 登録後に案件別 CTR が取れる。
+  [
+    "eventName",
+    "customEvent:ad_id",
+    "customEvent:affiliate_vertical",
+    "customEvent:link_position",
+  ],
   [
     "eventName",
     "customEvent:affiliate_vertical",

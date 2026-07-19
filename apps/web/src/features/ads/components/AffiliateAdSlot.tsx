@@ -81,6 +81,7 @@ export async function AffiliateAdSlot({
             category={affiliateCategory ?? "other"}
             label={banner.title}
             position="ranking-sidebar"
+            adId={banner.id}
           />
         </SurfaceCard>
       );

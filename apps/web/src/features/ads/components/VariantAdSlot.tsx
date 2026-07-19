@@ -10,6 +10,8 @@ import { TrackedAffiliateLink } from "./tracked-affiliate-link";
  * server-only モジュールを client バンドルに引き込まないため、ここでローカル定義する。
  */
 interface AdVariant {
+  /** 広告 1 件単位の識別子 (AffiliateAd.id)。案件別 CTR 計測 (GA4 ad_id) 用 */
+  id: string;
   experimentId: string;
   variantId: string;
   weight: number;
@@ -107,6 +109,7 @@ export function VariantAdSlot({ variants, category, position }: VariantAdSlotPro
           category={category}
           label={chosen.title}
           position={position}
+          adId={chosen.id}
           experimentId={chosen.experimentId}
           variantId={chosen.variantId}
           creativeSize={chosen.creativeSize}
@@ -126,6 +129,7 @@ export function VariantAdSlot({ variants, category, position }: VariantAdSlotPro
         category={category}
         label={chosen.title}
         position={position}
+        adId={chosen.id}
         experimentId={chosen.experimentId}
         variantId={chosen.variantId}
         creativeSize={chosen.creativeSize}

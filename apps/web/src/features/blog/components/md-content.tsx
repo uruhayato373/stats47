@@ -34,6 +34,7 @@ function extractTextFromChildren(children: ReactNode): string {
 }
 
 interface AffiliateBannerData {
+    id?: string;
     href: string;
     imageUrl: string;
     trackingPixelUrl?: string | null;
@@ -264,6 +265,7 @@ function makeMdComponents(slug?: string, affiliateBannersByCategory?: Record<str
                             height={b.height ?? null}
                             label={b.title ?? ""}
                             position="article-inline"
+                            adId={b.id}
                         />
                     </div>
                 );

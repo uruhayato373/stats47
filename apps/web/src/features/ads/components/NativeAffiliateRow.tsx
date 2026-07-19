@@ -66,6 +66,7 @@ export function NativeAffiliateRow({
               category={trackingCategory}
               label={b.title}
               position={position}
+              adId={b.id}
               className={getSurfaceCardClassName({
                 interactive: true,
                 className: "group flex flex-col gap-2 p-2",

@@ -162,8 +162,97 @@ apps/web/scripts/affiliate-ads-data.ts (AFFILIATE_ADS = git TS SSOT・広告は 
 | R2 公開 | develop push → `publish-affiliate-ads.yml` (CI 自動) |
 | 記事内手動配置 (`<affiliate-banner>` タグ) | `blog-editor` / `article-writer` (台帳登録は affiliate-manager) |
 
+## 10. 自動 scout パイプライン (A8 高単価案件)
+
+A8.net の高単価案件を **scout → 提携申請 → 広告コード取得 → SSOT 登録 → R2 公開** まで週次全自動で回す
+(skill `/scout-asp`・agent `asp-scout` + `affiliate-manager`)。§7 の手動貼付 (`/register-affiliate-banner`) と
+抽出仕様 (`a8-code-core.mjs`) を共有し、案件発見〜申請を自動化した上位互換。判定は全て決定的コード、agent の
+意味判断は「pending-vertical の 10 軸解決」と「A8 UI 変化の診断」の 2 点のみ。
+
+### 状態機械 (a8-catalog.json)
+
+```
+candidate → applied → approved → harvested → registered → published
+既存提携の取り込み: import-partnered が A8 の提携中プログラムを直接 approved で登録 (candidate/applied を経ない)
+分岐: rejected(審査落ち・再申請しない) / blocked(blocklist) / pending-vertical(map未解決・register不可) / error(step+screenshot)
+```
+
+- **既存提携の活用 (`import-partnered`)**: A8 で既に提携済みのプログラムは申請不要で harvest → register → 公開へ
+  直行できる。`upsertApproved` が全ページ巡回で catalog に approved 登録 (既存 registered/published は巻き戻さない)。
+- **apply は 1 クリックで送信確定** (A8 新コンソール仕様)。ボタンを押せた時点で申請済みとして扱い、週上限は
+  「送信回数」で機械強制する (成功文言の検出に依存させない = 上限すり抜けの再発防止・2026-07-20 の 16/10 超過を是正)。
+
+- 状態と遷移の検証は `a8-scout-core.mjs` (不正遷移は throw)。catalog は状態を巻き戻さない upsert。
+- **審査あり案件は applied で待ち、check-approval が毎週 applied 全件を再走査**して approved に昇格 (再入設計)。
+
+### スコアリング (curated 値・ハードコードしない)
+
+`score = 0.40·rewardNorm + 0.25·epcNorm + 0.15·confirmNorm + 0.20·gapBonus`
+(gapBonus: `inventory-latest.json` の gapVertical=1.0 / thinVertical=0.7 / 他=0.2)。係数・上限・blocklist・
+vertical 写像・`weeklyApplyMax`・`minScore` の SSOT は `.claude/scripts/ads/data/a8-curated.json`。
+
+### 規律 (機械強制)
+
+| 規律 | 手段 |
+|---|---|
+| **申請は週 `weeklyApplyMax` 件まで** (A8 スパム判定回避) | `check-a8-apply-budget.cjs` が apply 前に exit 1 で強制 |
+| **NG ジャンル (アダルト/出会い/情報商材/高リスク金融 等) は申請しない** | curated `blocklistKeywords` → status=blocked |
+| **既存在庫と重複する案件は候補にしない** | `isDuplicate` (a8mat / title 一致) |
+| **canonical 4 種以外のサイズは登録しない** | harvest 時 `parseA8Code` が non-canonical を弾く (§3 と一致) |
+| **SSOT 追記は 4 ゲート通過必須** | `append-affiliate-ads.ts` が tsc → audit `--check-size` → export `--validate-only` → compliance `--check`。1 つでも fail で `git checkout` 復元 |
+| **セッション失効で cron を壊さない** | isLoggedIn 失敗は catalog に error 記録して正常終了 (exit 0)。再ログインは人間 |
+
+### 実行形態 (★ローカル Mac 限定)
+
+- Playwright プロファイル (`.local/playwright-a8-profile`) がローカルにあるため **GitHub Actions では動かない**。
+  週次 cron は launchd (`scripts/scheduled/scout-asp-weekly.sh` + `com.stats47.scout-asp-weekly.plist`、日曜 07:00 JST)。
+- **初回のみ人間**: `login.mjs` で A8 手動ログイン (credential は env に置かない) → `scout --dry-run` で A8 の
+  DOM をダンプしてセレクタ実機調整。これが済むまで cron を load しない。
+- A8 の自動操作は会員規約上のリスクがあるため件数を保守的に開始する (`weeklyApplyMax` 初期 10)。
+
+### 既存提携の配置と priority (収益最大化)
+
+134 件の既存提携から「高 EPC×高確定率」を精選して配置する。同 vertical×枠は priority 上位 1 banner +
+text 2 しか出ないため**全登録は無意味** (`select-for-register.mjs` で vertical 別上位 N=4 を精選)。
+
+- **priority = 確定EPC バンド式** (`computePriority` / curated `priorityBands`): 確定EPC = EPC×確定率。
+  80(≥1000)/60(≥300)/40(≥100)/20(≥30)/10(欠損)。targetRankingKeys 付与で +5。register 時に catalog
+  entry の数値から決定的算出し、buildAdDraft の既定 50 を上書きする。
+- **配置は既存フレームで自動**: ページ→vertical 解決 (CATEGORY/THEME/TAG_MAP) で既存枠 (ranking sidebar /
+  blog rail・本文 / category・survey・theme の NativeAffiliateRow / area) に priority 順で出る。**新フィールドは
+  足さない** (`vertical`/`priority`/`targetRankingKeys`/`locationCode` の 4 つで表現)。theme は
+  `resolveAffiliateBannersByVertical` で既に vertical 解決広告を描画済み。
+- **サイズは固定** (300×250 canonical 優先・無ければ text)。多くの A8 案件は canonical バナー非提供で text
+  fallback が正常。harvest の `fetchAdCode` が canonical バナー優先・非 canonical スキップで選ぶ。
+
+### 計測 (ad_id 単位 CTR) と改善ループ
+
+- **ad_id 計測**: `ad_impression`/`affiliate_click` に `ad_id` (AffiliateAd.id) を送る (events.ts /
+  AdImpressionTracker / TrackedAffiliateLink / 各 BannerAd・NativeAffiliateRow 呼び出し元)。GA4 で custom
+  dimension `ad_id` (event scope) 登録が要る (**人間ステップ**)。登録前でも送信は開始してよい。
+- **(not set) の扱い**: 過去データの大半が (not set) なのは dimension 登録前データの混入。fetch 期間を登録日
+  以降に絞る (`fetch-affiliate-ga4.cjs`)。
+- **週次改善**: imp>500 かつ CTR が vertical 中央値の 1/2 未満 → priority 1 バンド降格 (次点繰り上げ)。
+  比較は experiment registry (weight 50/50) で。**週次 1 vertical 1 変更まで** (配信急変防止)。effect 判定は
+  evidence-based (improvement-triage)。
+
+### 役割分担 (2-agent)
+
+| 工程 | 担当 |
+|---|---|
+| A8 ブラウザ操作 (scout/apply/check-approval/harvest) + pending-vertical 解決 | `asp-scout` (skill `/scout-asp`) |
+| SSOT 追記 (`append-affiliate-ads.ts`) + commit/push (develop) | `affiliate-manager` (排他 writer) |
+| R2 公開 | develop push → `publish-affiliate-ads.yml` (CI 自動) |
+| 手動貼付での 1 件登録 (フォールバック) | `affiliate-manager` (`/register-affiliate-banner`) |
+
 ## 9. 関連
 
+- 自動 scout: skill `.claude/skills/ads/scout-asp/SKILL.md` / agent `.claude/agents/asp-scout.md` /
+  コア `.claude/scripts/ads/lib/{a8-scout-core,a8-code-core,a8-append-core}.mjs` (+ `__tests__/`) /
+  ブラウザ `.claude/skills/ads/scout-asp/scripts/{a8-browser.ts,login.mjs}` /
+  カタログ `.claude/state/ads/a8-catalog.json` / curated `.claude/scripts/ads/data/a8-curated.json` /
+  cron `scripts/scheduled/scout-asp-weekly.sh` + `com.stats47.scout-asp-weekly.plist` /
+  追記ゲート `.claude/scripts/ads/append-affiliate-ads.ts` / 申請上限 `.claude/scripts/ads/check-a8-apply-budget.cjs`
 - SSOT データ: `apps/web/scripts/affiliate-ads-data.ts` (自動配置) / `apps/web/scripts/affiliate-direct-placements-data.ts` (直接配置台帳)
 - 意図ハブ: `apps/web/src/features/ads/constants/affiliate-category.ts` (`AffiliateVertical` / 3 map / `adVertical`)
 - 型ソース: `apps/web/src/features/ads/types/index.ts` (`AffiliateAd.vertical` / `AffiliateDirectPlacement`)

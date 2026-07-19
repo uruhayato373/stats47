@@ -29,6 +29,7 @@ export async function AreaBannerAd() {
             category={affiliateCategory ?? "other"}
             label={banner.title}
             position="area-sidebar"
+            adId={banner.id}
           />
         );
       })}

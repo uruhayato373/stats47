@@ -8,6 +8,7 @@ interface ArticleRendererProps {
     slug: string;
     relatedArticleTitles?: Record<string, string>;
     affiliateBannersByCategory?: Record<string, {
+        id?: string;
         href: string;
         imageUrl: string;
         trackingPixelUrl?: string | null;

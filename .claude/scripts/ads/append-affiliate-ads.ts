@@ -1,0 +1,167 @@
+/**
+ * append-affiliate-ads.ts — a8-catalog の harvested エントリを affiliate-ads-data.ts (SSOT) へ
+ * 機械追記し、多段ゲートを通してから catalog を registered に昇格させる。
+ *
+ * ゲート順 (1 つでも fail → git checkout で SSOT を復元し中止):
+ *   1. tsc         : npx tsc --noEmit -p apps/web/tsconfig.json
+ *   2. audit       : audit-affiliate-inventory.ts --check-size (canonical サイズ)
+ *   3. export検証  : export-affiliate-ads-snapshot.ts --validate-only (vertical 整合)
+ *   4. compliance  : audit-affiliate-compliance.ts --check (構造)
+ *
+ * 追記の純ロジックは a8-append-core.mjs、状態遷移は a8-scout-core.mjs に委譲。
+ *
+ * 使い方:
+ *   npx tsx .claude/scripts/ads/append-affiliate-ads.ts            # dry-run (追記→ゲート→復元、確認のみ)
+ *   npx tsx .claude/scripts/ads/append-affiliate-ads.ts --apply    # 実追記 (ゲート pass で永続化 + catalog registered)
+ *
+ * ★ commit / push は行わない (affiliate-manager / cron が担当)。本スクリプトは SSOT 変更 + ゲートまで。
+ */
+import * as path from "path";
+import * as fs from "fs";
+import { execFileSync } from "child_process";
+import { createRequire } from "module";
+
+const require = createRequire(import.meta.url);
+const core = require("./lib/a8-scout-core.mjs");
+const appendCore = require("./lib/a8-append-core.mjs");
+
+const PROJECT_ROOT = path.resolve(__dirname, "../../..");
+const ADS_DATA = path.join(PROJECT_ROOT, "apps/web/scripts/affiliate-ads-data.ts");
+const CATALOG_PATH = path.join(PROJECT_ROOT, ".claude/state/ads/a8-catalog.json");
+
+const APPLY = process.argv.includes("--apply");
+
+function loadCatalog(): any {
+  return JSON.parse(fs.readFileSync(CATALOG_PATH, "utf8"));
+}
+function saveCatalog(cat: any): void {
+  cat.updatedAt = new Date().toISOString();
+  fs.writeFileSync(CATALOG_PATH, JSON.stringify(cat, null, 2) + "\n", "utf8");
+}
+
+/** ゲート 1 本を実行。exit≠0 で throw。 */
+function runGate(label: string, cmd: string, args: string[], env?: NodeJS.ProcessEnv): void {
+  console.log(`  gate: ${label} ...`);
+  execFileSync(cmd, args, { cwd: PROJECT_ROOT, stdio: "pipe", env: env ?? process.env });
+  console.log(`  gate: ${label} ✅`);
+}
+
+function runAllGates(): void {
+  runGate("tsc", "npx", ["tsc", "--noEmit", "-p", "apps/web/tsconfig.json"]);
+  runGate("audit-size", "npx", ["tsx", ".claude/scripts/ads/audit-affiliate-inventory.ts", "--check-size"]);
+  // export 検証は repository が server-only を読むため react-server condition が要る。
+  runGate(
+    "export-validate",
+    "npx",
+    ["tsx", "apps/web/scripts/export-affiliate-ads-snapshot.ts", "--validate-only"],
+    { ...process.env, NODE_OPTIONS: `${process.env.NODE_OPTIONS ?? ""} --conditions react-server`.trim() },
+  );
+  runGate("compliance", "npx", ["tsx", ".claude/scripts/ads/audit-affiliate-compliance.ts", "--check"]);
+}
+
+/** SSOT を git HEAD に復元 (追記の巻き戻し)。 */
+function restoreSsot(): void {
+  execFileSync("git", ["checkout", "--", ADS_DATA], { cwd: PROJECT_ROOT, stdio: "pipe" });
+  console.log("↩️  affiliate-ads-data.ts を git HEAD に復元しました。");
+}
+
+function nowStr(): string {
+  const jst = new Date(Date.now() + 9 * 3600 * 1000);
+  return jst.toISOString().slice(0, 19).replace("T", " ");
+}
+
+function main(): void {
+  const cat = loadCatalog();
+  const curated = core.loadCurated(); // priority 算出係数 (priorityBands)
+  // register 対象 = harvested かつ vertical 解決済 (pending-vertical は対象外)。
+  const targets = core
+    .entriesByStatus(cat, "harvested")
+    .filter((e: any) => e.adDraft && e.vertical);
+
+  if (targets.length === 0) {
+    console.log("register 対象 (harvested + vertical 解決済 + adDraft) がありません。");
+    const pending = core.entriesByStatus(cat, "pending-vertical");
+    if (pending.length) {
+      console.log(`⏸  pending-vertical ${pending.length} 件 (--set-vertical で解決してから register):`);
+      for (const p of pending) console.log(`    - ${p.programId} (${p.name})`);
+    }
+    return;
+  }
+
+  let src = fs.readFileSync(ADS_DATA, "utf8");
+  const v = appendCore.validateTail(src);
+  if (!v.ok) {
+    console.error(`🚨 SSOT の末尾構造が不正 (${v.error})。追記を中止します。`);
+    process.exit(1);
+  }
+
+  // 追記 (メモリ上)。id 衝突は逐次 uniqueId で解消。a8mat 一致は既登録として skip (二重登録防止=第5ゲート)。
+  const registered: Array<{ programId: string; id: string; name: string }> = [];
+  const skippedDup: Array<{ programId: string; name: string; a8mat: string }> = [];
+  const existingA8mats: Set<string> = appendCore.extractA8mats(src);
+  const stamp = nowStr();
+  for (const entry of targets) {
+    const a8mat = appendCore.draftA8mat(entry.adDraft);
+    if (a8mat && existingA8mats.has(a8mat)) {
+      // 同一 a8mat が既に SSOT に在る = 既登録。追記せず catalog を registered 同期する。
+      skippedDup.push({ programId: entry.programId, name: entry.name, a8mat });
+      continue;
+    }
+    const ids = appendCore.extractIds(src);
+    const id = appendCore.uniqueId(entry.adDraft.id, ids);
+    // priority は catalog entry の確定EPC (EPC×確定率) からバンド式で決定的に算出 (buildAdDraft の
+    // 既定値 50 を上書き)。targetRankingKeys があれば +bonus。高EPC案件を上位に出すための要。
+    const priority = core.computePriority(entry, curated);
+    const draft = { ...entry.adDraft, id, priority, createdAt: stamp, updatedAt: stamp };
+    const literal = appendCore.renderEntry(draft, stamp);
+    src = appendCore.insertEntry(src, literal);
+    if (a8mat) existingA8mats.add(a8mat); // 同一バッチ内の重複も弾く
+    registered.push({ programId: entry.programId, id, name: entry.name });
+  }
+
+  console.log(`追記対象 ${registered.length} 件 (a8mat 重複 skip ${skippedDup.length} 件):`);
+  for (const r of registered) console.log(`  + ${r.id} (${r.name})`);
+  for (const s of skippedDup) console.log(`  ⏭ 既登録 skip: ${s.name} (a8mat=${s.a8mat})`);
+
+  if (!APPLY) {
+    // dry-run: 一時ファイルに書いてゲートは実行しない (SSOT を触らない)。
+    const tmp = path.join(PROJECT_ROOT, ".local/a8-append-preview.ts");
+    fs.mkdirSync(path.dirname(tmp), { recursive: true });
+    fs.writeFileSync(tmp, src, "utf8");
+    console.log(`🧪 dry-run: プレビューを ${path.relative(PROJECT_ROOT, tmp)} に出力 (SSOT 未変更)。--apply で実追記。`);
+    return;
+  }
+
+  // --apply: SSOT に追記があればゲート実行。全て a8mat 重複 skip なら SSOT 無変更 → ゲート省略。
+  if (registered.length > 0) {
+    fs.writeFileSync(ADS_DATA, src, "utf8");
+    try {
+      runAllGates();
+    } catch (e) {
+      console.error("🚨 ゲート失敗:", (e as Error).message);
+      restoreSsot();
+      process.exit(1);
+    }
+  }
+
+  // catalog 同期: 追記分・a8mat 重複分いずれも registered に昇格 (重複分は既存 SSOT エントリで既に live)。
+  const cat2 = loadCatalog();
+  for (const r of registered) {
+    cat2.entries[r.programId] = core.transition(cat2.entries[r.programId], "registered", {
+      at: new Date().toISOString(),
+      adId: r.id,
+    });
+  }
+  for (const s of skippedDup) {
+    cat2.entries[s.programId] = core.transition(cat2.entries[s.programId], "registered", {
+      at: new Date().toISOString(),
+      note: `already-registered-a8mat:${s.a8mat}`,
+    });
+  }
+  saveCatalog(cat2);
+  console.log(
+    `✅ SSOT 追記 ${registered.length} 件 + 既登録同期 ${skippedDup.length} 件を catalog registered。commit/push は affiliate-manager / cron。`,
+  );
+}
+
+main();

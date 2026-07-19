@@ -12,6 +12,8 @@ interface BannerAdProps {
   category?: string;
   label?: string;
   position?: string;
+  /** 広告 1 件単位の識別子 (AffiliateAd.id)。案件別 CTR 計測用 */
+  adId?: string;
   /** A/B テスト用 (AFF-05・任意) */
   experimentId?: string;
   variantId?: string;
@@ -32,6 +34,7 @@ export function BannerAd({
   category = "other",
   label = "",
   position = "banner",
+  adId,
   experimentId,
   variantId,
   creativeSize,
@@ -42,6 +45,7 @@ export function BannerAd({
       category={category}
       label={label}
       position={position}
+      adId={adId}
       experimentId={experimentId}
       variantId={variantId}
       creativeSize={creativeSize}
@@ -52,6 +56,7 @@ export function BannerAd({
           category={category}
           label={label}
           position={position}
+          adId={adId}
           experimentId={experimentId}
           variantId={variantId}
           creativeSize={creativeSize}

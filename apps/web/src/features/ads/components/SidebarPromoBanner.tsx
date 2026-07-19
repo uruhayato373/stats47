@@ -32,6 +32,7 @@ export function SidebarPromoBanner({
         height={banner.height}
         label={banner.label}
         position={position}
+        adId={banner.id}
       />
     </SurfaceCard>
   );
