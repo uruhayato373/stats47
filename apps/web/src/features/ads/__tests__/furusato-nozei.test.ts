@@ -41,6 +41,19 @@ describe("getFurusatoNozeiLink", () => {
   });
 });
 
+describe("getFurusatoNozeiLink signatureKeyword", () => {
+  it("代表返礼品が定義された県は signatureKeyword を返す (北海道→海鮮)", () => {
+    expect(getFurusatoNozeiLink("01000")?.signatureKeyword).toBe("海鮮");
+    expect(getFurusatoNozeiLink("06000")?.signatureKeyword).toBe("さくらんぼ"); // 山形
+    // 市区町村コードも先頭2桁で県 signature を引く
+    expect(getFurusatoNozeiLink("01100")?.signatureKeyword).toBe("海鮮"); // 札幌市
+  });
+
+  it("signature 未定義の県 (東京) は undefined", () => {
+    expect(getFurusatoNozeiLink("13000")?.signatureKeyword).toBeUndefined();
+  });
+});
+
 describe("buildFurusatoNozeiUrl", () => {
   it("アフィリエイトID なしの場合、直接 URL を返す", () => {
     const url = buildFurusatoNozeiUrl("hokkaido");

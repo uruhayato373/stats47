@@ -131,12 +131,24 @@ export async function searchRakutenItems(
 }
 
 /**
- * ふるさと納税の返礼品を検索する (都道府県指定)
+ * ふるさと納税の返礼品を検索する (都道府県指定)。
+ * signatureKeyword があれば「県名 + 代表返礼品」で高意図検索し、0 件なら県名のみで再検索する
+ * (絞りすぎで動的カードを失わないためのフォールバック)。
  */
 export async function searchFurusatoItems(
   prefName: string,
   hits = 4,
+  signatureKeyword?: string,
 ): Promise<RakutenItem[]> {
+  if (signatureKeyword) {
+    const focused = await searchRakutenItems({
+      keyword: `${prefName} ${signatureKeyword}`,
+      genreId: FURUSATO_NOZEI_GENRE_ID,
+      hits,
+      sort: "-reviewCount",
+    });
+    if (focused.length > 0) return focused;
+  }
   return searchRakutenItems({
     keyword: prefName,
     genreId: FURUSATO_NOZEI_GENRE_ID,
