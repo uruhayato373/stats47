@@ -7,9 +7,9 @@
  * INDEXING-SITEMAP-02: 「コンテンツ実体のある URL」= isActive な全ランキングを sitemap に包含。
  * 2026-05-05 の単一週絞り込みによる大量インデックス削除を回避する設計 (詳細はスクリプト docstring)。
  *
- * 集計週: 2026-W16, 2026-W17, 2026-W18, 2026-W19, 2026-W20, 2026-W21, 2026-W22, 2026-W23, 2026-W24, 2026-W25, 2026-W26, 2026-W27, 2026-W28
- *   週別 impressions>=1 キー数: 2026-W16: 314 / 2026-W17: 339 / 2026-W18: 621 / 2026-W19: 681 / 2026-W20: 798 / 2026-W21: 822 / 2026-W22: 842 / 2026-W23: 835 / 2026-W24: 924 / 2026-W25: 961 / 2026-W26: 1015 / 2026-W27: 1057 / 2026-W28: 1124
- * 和集合: 2194 キー (INDEXABLE +0 / KNOWN +884 / INDEXABLE 総数 338 / KNOWN 総数 2188)
+ * 集計週: 2026-W16, 2026-W17, 2026-W18, 2026-W19, 2026-W20, 2026-W21, 2026-W22, 2026-W23, 2026-W24, 2026-W25, 2026-W26, 2026-W27, 2026-W28, 2026-W29
+ *   週別 impressions>=1 キー数: 2026-W16: 314 / 2026-W17: 339 / 2026-W18: 621 / 2026-W19: 681 / 2026-W20: 798 / 2026-W21: 822 / 2026-W22: 842 / 2026-W23: 835 / 2026-W24: 924 / 2026-W25: 961 / 2026-W26: 1015 / 2026-W27: 1057 / 2026-W28: 1124 / 2026-W29: 1136
+ * 和集合: 2205 キー (INDEXABLE +0 / KNOWN +866 / INDEXABLE 総数 338 / KNOWN 総数 2199)
  * 生成日: 2026-07-19
  *
  * 安全弁: url-policy.ts shouldIncludeInSitemap は本セットが空の場合 KNOWN 全件に
@@ -953,6 +953,16 @@ export const SITEMAP_RANKING_KEYS = new Set<string>([
   "junior-college-count",
   "junior-college-count-per-100k",
   "junior-college-new-graduates-unemployment-rate",
+  "junior-high-club-per100-badminton",
+  "junior-high-club-per100-baseball-soft",
+  "junior-high-club-per100-basketball",
+  "junior-high-club-per100-kendo",
+  "junior-high-club-per100-soccer",
+  "junior-high-club-per100-soft-tennis",
+  "junior-high-club-per100-swimming",
+  "junior-high-club-per100-table-tennis",
+  "junior-high-club-per100-track-and-field",
+  "junior-high-club-per100-volleyball",
   "junior-high-school-advancement-rate",
   "junior-high-school-classes",
   "junior-high-school-count",
@@ -1409,6 +1419,7 @@ export const SITEMAP_RANKING_KEYS = new Set<string>([
   "owner-occupied-housing-ratio",
   "oyster-consumption-expenditure",
   "oyster-consumption-quantity",
+  "pachinko-shop-density-per-10k",
   "paid-nursing-home-capacity-per-1000-65plus",
   "paid-nursing-home-count-per-100k-65plus",
   "paid-nursing-home-residents-per-1000-65plus",
