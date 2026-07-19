@@ -67710,5 +67710,1205 @@
     "url": "https://stats47.jp/areas/47000/cities/47359",
     "status": "success",
     "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:27:56.993Z",
+    "url": "https://stats47.jp/areas/30000/cities/30382",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:27:57.340Z",
+    "url": "https://stats47.jp/areas/30000/cities/30383",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:27:57.685Z",
+    "url": "https://stats47.jp/areas/30000/cities/30390",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:27:58.006Z",
+    "url": "https://stats47.jp/areas/30000/cities/30391",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:27:58.322Z",
+    "url": "https://stats47.jp/areas/30000/cities/30392",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:27:58.641Z",
+    "url": "https://stats47.jp/areas/30000/cities/30401",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:27:58.986Z",
+    "url": "https://stats47.jp/areas/30000/cities/30404",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:27:59.333Z",
+    "url": "https://stats47.jp/areas/30000/cities/30406",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:27:59.677Z",
+    "url": "https://stats47.jp/areas/30000/cities/30421",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:00.028Z",
+    "url": "https://stats47.jp/areas/30000/cities/30422",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:00.340Z",
+    "url": "https://stats47.jp/areas/30000/cities/30424",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:00.655Z",
+    "url": "https://stats47.jp/areas/30000/cities/30427",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:00.955Z",
+    "url": "https://stats47.jp/areas/30000/cities/30428",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:01.289Z",
+    "url": "https://stats47.jp/areas/31000/cities/31201",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:01.594Z",
+    "url": "https://stats47.jp/areas/31000/cities/31202",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:01.925Z",
+    "url": "https://stats47.jp/areas/31000/cities/31203",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:02.258Z",
+    "url": "https://stats47.jp/areas/31000/cities/31204",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:02.622Z",
+    "url": "https://stats47.jp/areas/31000/cities/31302",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:02.919Z",
+    "url": "https://stats47.jp/areas/31000/cities/31325",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:03.236Z",
+    "url": "https://stats47.jp/areas/31000/cities/31328",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:03.539Z",
+    "url": "https://stats47.jp/areas/31000/cities/31329",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:03.843Z",
+    "url": "https://stats47.jp/areas/31000/cities/31364",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:04.147Z",
+    "url": "https://stats47.jp/areas/31000/cities/31370",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:04.455Z",
+    "url": "https://stats47.jp/areas/31000/cities/31371",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:04.762Z",
+    "url": "https://stats47.jp/areas/31000/cities/31372",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:05.068Z",
+    "url": "https://stats47.jp/areas/31000/cities/31384",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:05.372Z",
+    "url": "https://stats47.jp/areas/31000/cities/31386",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:05.685Z",
+    "url": "https://stats47.jp/areas/31000/cities/31389",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:05.999Z",
+    "url": "https://stats47.jp/areas/31000/cities/31390",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:06.301Z",
+    "url": "https://stats47.jp/areas/31000/cities/31401",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:06.610Z",
+    "url": "https://stats47.jp/areas/31000/cities/31402",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:06.971Z",
+    "url": "https://stats47.jp/areas/31000/cities/31403",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:07.283Z",
+    "url": "https://stats47.jp/areas/32000/cities/32201",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:07.583Z",
+    "url": "https://stats47.jp/areas/32000/cities/32202",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:07.890Z",
+    "url": "https://stats47.jp/areas/32000/cities/32203",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:08.197Z",
+    "url": "https://stats47.jp/areas/32000/cities/32204",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:08.516Z",
+    "url": "https://stats47.jp/areas/32000/cities/32205",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:08.823Z",
+    "url": "https://stats47.jp/areas/32000/cities/32206",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:09.136Z",
+    "url": "https://stats47.jp/areas/32000/cities/32207",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:09.411Z",
+    "url": "https://stats47.jp/areas/32000/cities/32209",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:09.720Z",
+    "url": "https://stats47.jp/areas/32000/cities/32343",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:10.028Z",
+    "url": "https://stats47.jp/areas/32000/cities/32386",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:10.331Z",
+    "url": "https://stats47.jp/areas/32000/cities/32441",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:10.640Z",
+    "url": "https://stats47.jp/areas/32000/cities/32448",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:10.951Z",
+    "url": "https://stats47.jp/areas/32000/cities/32449",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:11.259Z",
+    "url": "https://stats47.jp/areas/32000/cities/32501",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:11.594Z",
+    "url": "https://stats47.jp/areas/32000/cities/32505",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:11.906Z",
+    "url": "https://stats47.jp/areas/32000/cities/32525",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:12.215Z",
+    "url": "https://stats47.jp/areas/32000/cities/32526",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:12.520Z",
+    "url": "https://stats47.jp/areas/32000/cities/32527",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:12.861Z",
+    "url": "https://stats47.jp/areas/32000/cities/32528",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:13.170Z",
+    "url": "https://stats47.jp/areas/33000/cities/33100",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:13.442Z",
+    "url": "https://stats47.jp/areas/33000/cities/33101",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:13.752Z",
+    "url": "https://stats47.jp/areas/33000/cities/33102",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:14.065Z",
+    "url": "https://stats47.jp/areas/33000/cities/33103",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:14.375Z",
+    "url": "https://stats47.jp/areas/33000/cities/33104",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:14.649Z",
+    "url": "https://stats47.jp/areas/33000/cities/33202",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:14.952Z",
+    "url": "https://stats47.jp/areas/33000/cities/33203",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:15.250Z",
+    "url": "https://stats47.jp/areas/33000/cities/33204",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:15.549Z",
+    "url": "https://stats47.jp/areas/33000/cities/33205",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:15.824Z",
+    "url": "https://stats47.jp/areas/33000/cities/33207",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:16.127Z",
+    "url": "https://stats47.jp/areas/33000/cities/33208",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:16.431Z",
+    "url": "https://stats47.jp/areas/33000/cities/33209",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:16.742Z",
+    "url": "https://stats47.jp/areas/33000/cities/33210",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:17.047Z",
+    "url": "https://stats47.jp/areas/33000/cities/33211",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:17.354Z",
+    "url": "https://stats47.jp/areas/33000/cities/33212",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:17.654Z",
+    "url": "https://stats47.jp/areas/33000/cities/33213",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:17.964Z",
+    "url": "https://stats47.jp/areas/33000/cities/33214",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:18.271Z",
+    "url": "https://stats47.jp/areas/33000/cities/33215",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:18.584Z",
+    "url": "https://stats47.jp/areas/33000/cities/33216",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:18.881Z",
+    "url": "https://stats47.jp/areas/33000/cities/33346",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:19.191Z",
+    "url": "https://stats47.jp/areas/33000/cities/33423",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:19.495Z",
+    "url": "https://stats47.jp/areas/33000/cities/33445",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:19.802Z",
+    "url": "https://stats47.jp/areas/33000/cities/33461",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:20.106Z",
+    "url": "https://stats47.jp/areas/33000/cities/33586",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:20.417Z",
+    "url": "https://stats47.jp/areas/33000/cities/33606",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:20.725Z",
+    "url": "https://stats47.jp/areas/33000/cities/33622",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:21.031Z",
+    "url": "https://stats47.jp/areas/33000/cities/33623",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:21.339Z",
+    "url": "https://stats47.jp/areas/33000/cities/33643",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:21.634Z",
+    "url": "https://stats47.jp/areas/33000/cities/33663",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:21.939Z",
+    "url": "https://stats47.jp/areas/33000/cities/33666",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:22.237Z",
+    "url": "https://stats47.jp/areas/33000/cities/33681",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:22.548Z",
+    "url": "https://stats47.jp/areas/34000/cities/34100",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:22.861Z",
+    "url": "https://stats47.jp/areas/34000/cities/34101",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:23.130Z",
+    "url": "https://stats47.jp/areas/34000/cities/34103",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:23.436Z",
+    "url": "https://stats47.jp/areas/34000/cities/34104",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:23.747Z",
+    "url": "https://stats47.jp/areas/34000/cities/34108",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:24.090Z",
+    "url": "https://stats47.jp/areas/34000/cities/34202",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:24.440Z",
+    "url": "https://stats47.jp/areas/34000/cities/34203",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:24.752Z",
+    "url": "https://stats47.jp/areas/34000/cities/34204",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:25.057Z",
+    "url": "https://stats47.jp/areas/34000/cities/34205",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:25.373Z",
+    "url": "https://stats47.jp/areas/34000/cities/34207",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:25.674Z",
+    "url": "https://stats47.jp/areas/34000/cities/34210",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:25.971Z",
+    "url": "https://stats47.jp/areas/34000/cities/34212",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:26.280Z",
+    "url": "https://stats47.jp/areas/34000/cities/34214",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:26.587Z",
+    "url": "https://stats47.jp/areas/34000/cities/34302",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:26.902Z",
+    "url": "https://stats47.jp/areas/34000/cities/34304",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:27.210Z",
+    "url": "https://stats47.jp/areas/34000/cities/34309",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:27.510Z",
+    "url": "https://stats47.jp/areas/34000/cities/34368",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:27.808Z",
+    "url": "https://stats47.jp/areas/34000/cities/34369",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:28.106Z",
+    "url": "https://stats47.jp/areas/34000/cities/34431",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:28.408Z",
+    "url": "https://stats47.jp/areas/34000/cities/34545",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:28.718Z",
+    "url": "https://stats47.jp/areas/35000/cities/35201",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:29.016Z",
+    "url": "https://stats47.jp/areas/35000/cities/35202",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:29.326Z",
+    "url": "https://stats47.jp/areas/35000/cities/35203",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:29.631Z",
+    "url": "https://stats47.jp/areas/35000/cities/35204",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:29.941Z",
+    "url": "https://stats47.jp/areas/35000/cities/35206",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:30.253Z",
+    "url": "https://stats47.jp/areas/35000/cities/35207",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:30.552Z",
+    "url": "https://stats47.jp/areas/35000/cities/35208",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:30.867Z",
+    "url": "https://stats47.jp/areas/35000/cities/35210",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:31.179Z",
+    "url": "https://stats47.jp/areas/35000/cities/35211",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:31.487Z",
+    "url": "https://stats47.jp/areas/35000/cities/35212",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:31.793Z",
+    "url": "https://stats47.jp/areas/35000/cities/35213",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:32.069Z",
+    "url": "https://stats47.jp/areas/35000/cities/35215",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:32.370Z",
+    "url": "https://stats47.jp/areas/35000/cities/35216",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:32.646Z",
+    "url": "https://stats47.jp/areas/35000/cities/35305",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:32.953Z",
+    "url": "https://stats47.jp/areas/35000/cities/35321",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:33.255Z",
+    "url": "https://stats47.jp/areas/35000/cities/35341",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:33.546Z",
+    "url": "https://stats47.jp/areas/35000/cities/35343",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:33.856Z",
+    "url": "https://stats47.jp/areas/35000/cities/35344",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:34.159Z",
+    "url": "https://stats47.jp/areas/35000/cities/35502",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:34.469Z",
+    "url": "https://stats47.jp/areas/36000/cities/36201",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:34.780Z",
+    "url": "https://stats47.jp/areas/36000/cities/36202",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:35.093Z",
+    "url": "https://stats47.jp/areas/36000/cities/36203",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:35.397Z",
+    "url": "https://stats47.jp/areas/36000/cities/36204",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:35.701Z",
+    "url": "https://stats47.jp/areas/36000/cities/36205",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:36.003Z",
+    "url": "https://stats47.jp/areas/36000/cities/36206",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:36.300Z",
+    "url": "https://stats47.jp/areas/36000/cities/36207",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:36.594Z",
+    "url": "https://stats47.jp/areas/36000/cities/36208",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:36.902Z",
+    "url": "https://stats47.jp/areas/36000/cities/36301",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:37.211Z",
+    "url": "https://stats47.jp/areas/36000/cities/36302",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:37.510Z",
+    "url": "https://stats47.jp/areas/36000/cities/36321",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:37.812Z",
+    "url": "https://stats47.jp/areas/36000/cities/36341",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:38.108Z",
+    "url": "https://stats47.jp/areas/36000/cities/36342",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:38.411Z",
+    "url": "https://stats47.jp/areas/36000/cities/36368",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:38.723Z",
+    "url": "https://stats47.jp/areas/36000/cities/36383",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:39.027Z",
+    "url": "https://stats47.jp/areas/36000/cities/36387",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:39.332Z",
+    "url": "https://stats47.jp/areas/36000/cities/36388",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:39.637Z",
+    "url": "https://stats47.jp/areas/36000/cities/36401",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:39.937Z",
+    "url": "https://stats47.jp/areas/36000/cities/36402",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:40.237Z",
+    "url": "https://stats47.jp/areas/36000/cities/36403",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:40.548Z",
+    "url": "https://stats47.jp/areas/36000/cities/36404",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:40.862Z",
+    "url": "https://stats47.jp/areas/36000/cities/36405",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:41.174Z",
+    "url": "https://stats47.jp/areas/36000/cities/36468",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:41.482Z",
+    "url": "https://stats47.jp/areas/36000/cities/36489",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:41.789Z",
+    "url": "https://stats47.jp/areas/37000/cities/37201",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:42.090Z",
+    "url": "https://stats47.jp/areas/37000/cities/37202",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:42.399Z",
+    "url": "https://stats47.jp/areas/37000/cities/37203",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:42.704Z",
+    "url": "https://stats47.jp/areas/37000/cities/37204",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:43.006Z",
+    "url": "https://stats47.jp/areas/37000/cities/37205",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:43.317Z",
+    "url": "https://stats47.jp/areas/37000/cities/37206",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:43.624Z",
+    "url": "https://stats47.jp/areas/37000/cities/37207",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:43.929Z",
+    "url": "https://stats47.jp/areas/37000/cities/37208",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:44.248Z",
+    "url": "https://stats47.jp/areas/37000/cities/37322",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:44.558Z",
+    "url": "https://stats47.jp/areas/37000/cities/37324",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:44.865Z",
+    "url": "https://stats47.jp/areas/37000/cities/37341",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:45.171Z",
+    "url": "https://stats47.jp/areas/37000/cities/37364",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:45.483Z",
+    "url": "https://stats47.jp/areas/37000/cities/37386",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:45.783Z",
+    "url": "https://stats47.jp/areas/37000/cities/37387",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:46.062Z",
+    "url": "https://stats47.jp/areas/37000/cities/37403",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:46.368Z",
+    "url": "https://stats47.jp/areas/37000/cities/37404",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:46.673Z",
+    "url": "https://stats47.jp/areas/37000/cities/37406",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:46.978Z",
+    "url": "https://stats47.jp/areas/38000/cities/38201",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:47.290Z",
+    "url": "https://stats47.jp/areas/38000/cities/38202",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:47.598Z",
+    "url": "https://stats47.jp/areas/38000/cities/38203",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:47.919Z",
+    "url": "https://stats47.jp/areas/38000/cities/38204",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:48.225Z",
+    "url": "https://stats47.jp/areas/38000/cities/38205",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:48.533Z",
+    "url": "https://stats47.jp/areas/38000/cities/38206",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:48.843Z",
+    "url": "https://stats47.jp/areas/38000/cities/38207",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:49.147Z",
+    "url": "https://stats47.jp/areas/38000/cities/38210",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:49.451Z",
+    "url": "https://stats47.jp/areas/38000/cities/38213",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:49.762Z",
+    "url": "https://stats47.jp/areas/38000/cities/38214",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:50.066Z",
+    "url": "https://stats47.jp/areas/38000/cities/38215",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:50.372Z",
+    "url": "https://stats47.jp/areas/38000/cities/38356",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:50.689Z",
+    "url": "https://stats47.jp/areas/38000/cities/38386",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:51.005Z",
+    "url": "https://stats47.jp/areas/38000/cities/38401",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:51.312Z",
+    "url": "https://stats47.jp/areas/38000/cities/38402",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:51.621Z",
+    "url": "https://stats47.jp/areas/38000/cities/38422",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:51.929Z",
+    "url": "https://stats47.jp/areas/38000/cities/38442",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:52.237Z",
+    "url": "https://stats47.jp/areas/38000/cities/38484",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:52.539Z",
+    "url": "https://stats47.jp/areas/38000/cities/38488",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:52.846Z",
+    "url": "https://stats47.jp/areas/38000/cities/38506",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:53.154Z",
+    "url": "https://stats47.jp/areas/39000/cities/39201",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:53.461Z",
+    "url": "https://stats47.jp/areas/39000/cities/39202",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:53.744Z",
+    "url": "https://stats47.jp/areas/39000/cities/39203",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:54.047Z",
+    "url": "https://stats47.jp/areas/39000/cities/39204",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:54.354Z",
+    "url": "https://stats47.jp/areas/39000/cities/39205",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:54.665Z",
+    "url": "https://stats47.jp/areas/39000/cities/39206",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:54.974Z",
+    "url": "https://stats47.jp/areas/39000/cities/39208",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:55.283Z",
+    "url": "https://stats47.jp/areas/39000/cities/39209",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:55.591Z",
+    "url": "https://stats47.jp/areas/39000/cities/39210",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:55.949Z",
+    "url": "https://stats47.jp/areas/39000/cities/39211",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:56.263Z",
+    "url": "https://stats47.jp/areas/39000/cities/39212",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:56.574Z",
+    "url": "https://stats47.jp/areas/39000/cities/39302",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:56.885Z",
+    "url": "https://stats47.jp/areas/39000/cities/39303",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:57.205Z",
+    "url": "https://stats47.jp/areas/39000/cities/39307",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:57.501Z",
+    "url": "https://stats47.jp/areas/39000/cities/39363",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:57.812Z",
+    "url": "https://stats47.jp/areas/39000/cities/39386",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:58.119Z",
+    "url": "https://stats47.jp/areas/39000/cities/39401",
+    "status": "success",
+    "coverageState": "cities-with-profile"
+  },
+  {
+    "timestamp": "2026-07-19T22:28:58.431Z",
+    "url": "https://stats47.jp/areas/39000/cities/39402",
+    "status": "success",
+    "coverageState": "cities-with-profile"
   }
 ]
