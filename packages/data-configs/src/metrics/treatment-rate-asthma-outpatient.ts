@@ -10,7 +10,23 @@ export const treatmentRateAsthmaOutpatient: MetricConfig = {
   "source": {
     "kind": "external",
     "fetcherKey": "estat",
-    "config": {},
+    "config": {
+      "estat": {
+        "statsDataId": "0004026105",
+      },
+      "source": {
+        "name": "患者調査",
+        "url": "https://www.mhlw.go.jp/toukei/saikin/hw/kanja/23/index.html",
+      },
+      "provenance": {
+        "table": "第37表 受療率（人口10万対），入院－外来・施設の種類×傷病分類×都道府県別（e-Stat統計表ID 0004026105）",
+        "dataYear": "2023",
+        "accessedAt": "2026-07-19",
+        "extraction": "e-Stat統計表ID 0004026105（患者調査 令和5(2023)年 都道府県編 T37）を「傷病分類」軸=喘息、「入院－外来・施設の種類」軸=外来 でフィルタして取得。cdCat 数値コードは getMetaInfo 未実施のため未確定",
+        "verification": "e-Stat dbview (https://www.e-stat.go.jp/dbview?sid=0004026105) をWebFetchで確認し、当該統計表が「傷病分類」軸に喘息を含む行を持つこと、「入院－外来・施設の種類」軸で外来を区別できることを確認済み（2026-07-19）。兄弟表T39(0004026107)/T40-2(0004026109・入院)/T40-3(0004026110・外来)は傷病大分類のみで疾病別内訳を持たないため対象外と判別済み",
+        "restore": "gh workflow run estat-fetch-meta.yml -f ids=0004026105 で getMetaInfo を取得し、cdCat01(傷病分類=喘息)/cdCat02(入院-外来・施設の種類=外来)の数値コードを確定した上で data-ingester がR2投入する",
+      },
+    },
   },
   "entities": [
     "prefecture",

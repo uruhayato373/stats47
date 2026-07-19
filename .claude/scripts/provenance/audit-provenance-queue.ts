@@ -121,7 +121,12 @@ function classify(key: string, cfg: unknown): Entry {
       ? { ...base, klass: "A'", missing: [] }
       : { ...base, klass: "D", missing: ["formula 参照が registry に不在"] };
   }
-  // mlit (TODO) 等
+  // mlit: resourceId が確定 (TODO でない) なら KSJ dataId で再取得可 → A'
+  if (kind === "mlit") {
+    const rid = (c.source as { resourceId?: string }).resourceId;
+    if (rid && !rid.startsWith("TODO-")) return { ...base, klass: "A'", missing: [] };
+    return { ...base, klass: "D", missing: ["resourceId が TODO プレースホルダ"] };
+  }
   return { ...base, klass: "D", missing: ["出典不明"] };
 }
 
