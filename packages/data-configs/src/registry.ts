@@ -922,6 +922,8 @@ import { householdsOnPublicAssistance } from "./metrics/households-on-public-ass
 import { householdsWithElderlyMembers } from "./metrics/households-with-elderly-members";
 import { households } from "./metrics/households";
 import { housekeepingServiceConsumptionExpenditure } from "./metrics/housekeeping-service-consumption-expenditure";
+import { houseworkAvgTimeFemale } from "./metrics/housework-avg-time-female";
+import { houseworkAvgTimeMale } from "./metrics/housework-avg-time-male";
 import { housingChargesConsumptionExpenditure } from "./metrics/housing-charges-consumption-expenditure";
 import { housingCostAllHouseholds } from "./metrics/housing-cost-all-households";
 import { housingExpenditureRatioMultiPersonHouseholds } from "./metrics/housing-expenditure-ratio-multi-person-households";
@@ -992,6 +994,16 @@ import { juniorCollegeCapacityIndex } from "./metrics/junior-college-capacity-in
 import { juniorCollegeCountPer100k } from "./metrics/junior-college-count-per-100k";
 import { juniorCollegeCount } from "./metrics/junior-college-count";
 import { juniorCollegeNewGraduatesUnemploymentRate } from "./metrics/junior-college-new-graduates-unemployment-rate";
+import { juniorHighClubPer100Badminton } from "./metrics/junior-high-club-per100-badminton";
+import { juniorHighClubPer100BaseballSoft } from "./metrics/junior-high-club-per100-baseball-soft";
+import { juniorHighClubPer100Basketball } from "./metrics/junior-high-club-per100-basketball";
+import { juniorHighClubPer100Kendo } from "./metrics/junior-high-club-per100-kendo";
+import { juniorHighClubPer100Soccer } from "./metrics/junior-high-club-per100-soccer";
+import { juniorHighClubPer100SoftTennis } from "./metrics/junior-high-club-per100-soft-tennis";
+import { juniorHighClubPer100Swimming } from "./metrics/junior-high-club-per100-swimming";
+import { juniorHighClubPer100TableTennis } from "./metrics/junior-high-club-per100-table-tennis";
+import { juniorHighClubPer100TrackAndField } from "./metrics/junior-high-club-per100-track-and-field";
+import { juniorHighClubPer100Volleyball } from "./metrics/junior-high-club-per100-volleyball";
 import { juniorHighSchoolAdvancementRate } from "./metrics/junior-high-school-advancement-rate";
 import { juniorHighSchoolClasses } from "./metrics/junior-high-school-classes";
 import { juniorHighSchoolCountPer100k1214 } from "./metrics/junior-high-school-count-per-100k-12-14";
@@ -1136,6 +1148,8 @@ import { maximumSnowDepth } from "./metrics/maximum-snow-depth";
 import { maximumTemperature } from "./metrics/maximum-temperature";
 import { mayonnaiseConsumptionExpenditure } from "./metrics/mayonnaise-consumption-expenditure";
 import { mayonnaiseConsumptionQuantity } from "./metrics/mayonnaise-consumption-quantity";
+import { mealAvgTimeFemale } from "./metrics/meal-avg-time-female";
+import { mealAvgTimeMale } from "./metrics/meal-avg-time-male";
 import { mealKitConsumptionExpenditure } from "./metrics/meal-kit-consumption-expenditure";
 import { mediaAvgTimeUnemployedFemale } from "./metrics/media-avg-time-unemployed-female";
 import { mediaAvgTimeUnemployedMale } from "./metrics/media-avg-time-unemployed-male";
@@ -1456,6 +1470,7 @@ import { overtimePayAdminPrefecture } from "./metrics/overtime-pay-admin-prefect
 import { ownerOccupiedHousingRatio } from "./metrics/owner-occupied-housing-ratio";
 import { oysterConsumptionExpenditure } from "./metrics/oyster-consumption-expenditure";
 import { oysterConsumptionQuantity } from "./metrics/oyster-consumption-quantity";
+import { pachinkoShopDensityPer10k } from "./metrics/pachinko-shop-density-per-10k";
 import { paidNursingHomeCapacityPer100065plus } from "./metrics/paid-nursing-home-capacity-per-1000-65plus";
 import { paidNursingHomeCountPer100k65plus } from "./metrics/paid-nursing-home-count-per-100k-65plus";
 import { paidNursingHomeResidentsPer100065plus } from "./metrics/paid-nursing-home-residents-per-1000-65plus";
@@ -1731,6 +1746,8 @@ import { regularCashSalaryFemalePre2019 } from "./metrics/regular-cash-salary-fe
 import { regularCashSalaryFemale } from "./metrics/regular-cash-salary-female";
 import { regularCashSalaryMalePre2019 } from "./metrics/regular-cash-salary-male-pre2019";
 import { regularCashSalaryMale } from "./metrics/regular-cash-salary-male";
+import { relaxationAvgTimeFemale } from "./metrics/relaxation-avg-time-female";
+import { relaxationAvgTimeMale } from "./metrics/relaxation-avg-time-male";
 import { religiousExpenseConsumptionExpenditure } from "./metrics/religious-expense-consumption-expenditure";
 import { renovationRate } from "./metrics/renovation-rate";
 import { rentalCarConsumptionExpenditure } from "./metrics/rental-car-consumption-expenditure";
@@ -1883,6 +1900,8 @@ import { skinMedicineConsumptionExpenditure } from "./metrics/skin-medicine-cons
 import { skinMilkConsumptionExpenditure } from "./metrics/skin-milk-consumption-expenditure";
 import { skirtConsumptionExpenditure } from "./metrics/skirt-consumption-expenditure";
 import { skirtConsumptionQuantity } from "./metrics/skirt-consumption-quantity";
+import { sleepAvgTimeFemale } from "./metrics/sleep-avg-time-female";
+import { sleepAvgTimeMale } from "./metrics/sleep-avg-time-male";
 import { smallScaleFarmHouseholds } from "./metrics/small-scale-farm-households";
 import { smartphoneOwnershipMultiPersonHouseholdsPer1000 } from "./metrics/smartphone-ownership-multi-person-households-per-1000";
 import { smartphoneUsageRateBySex } from "./metrics/smartphone-usage-rate-by-sex";
@@ -3202,6 +3221,8 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "households-with-elderly-members": householdsWithElderlyMembers,
   "households": households,
   "housekeeping-service-consumption-expenditure": housekeepingServiceConsumptionExpenditure,
+  "housework-avg-time-female": houseworkAvgTimeFemale,
+  "housework-avg-time-male": houseworkAvgTimeMale,
   "housing-charges-consumption-expenditure": housingChargesConsumptionExpenditure,
   "housing-cost-all-households": housingCostAllHouseholds,
   "housing-expenditure-ratio-multi-person-households": housingExpenditureRatioMultiPersonHouseholds,
@@ -3272,6 +3293,16 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "junior-college-count-per-100k": juniorCollegeCountPer100k,
   "junior-college-count": juniorCollegeCount,
   "junior-college-new-graduates-unemployment-rate": juniorCollegeNewGraduatesUnemploymentRate,
+  "junior-high-club-per100-badminton": juniorHighClubPer100Badminton,
+  "junior-high-club-per100-baseball-soft": juniorHighClubPer100BaseballSoft,
+  "junior-high-club-per100-basketball": juniorHighClubPer100Basketball,
+  "junior-high-club-per100-kendo": juniorHighClubPer100Kendo,
+  "junior-high-club-per100-soccer": juniorHighClubPer100Soccer,
+  "junior-high-club-per100-soft-tennis": juniorHighClubPer100SoftTennis,
+  "junior-high-club-per100-swimming": juniorHighClubPer100Swimming,
+  "junior-high-club-per100-table-tennis": juniorHighClubPer100TableTennis,
+  "junior-high-club-per100-track-and-field": juniorHighClubPer100TrackAndField,
+  "junior-high-club-per100-volleyball": juniorHighClubPer100Volleyball,
   "junior-high-school-advancement-rate": juniorHighSchoolAdvancementRate,
   "junior-high-school-classes": juniorHighSchoolClasses,
   "junior-high-school-count-per-100k-12-14": juniorHighSchoolCountPer100k1214,
@@ -3416,6 +3447,8 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "maximum-temperature": maximumTemperature,
   "mayonnaise-consumption-expenditure": mayonnaiseConsumptionExpenditure,
   "mayonnaise-consumption-quantity": mayonnaiseConsumptionQuantity,
+  "meal-avg-time-female": mealAvgTimeFemale,
+  "meal-avg-time-male": mealAvgTimeMale,
   "meal-kit-consumption-expenditure": mealKitConsumptionExpenditure,
   "media-avg-time-unemployed-female": mediaAvgTimeUnemployedFemale,
   "media-avg-time-unemployed-male": mediaAvgTimeUnemployedMale,
@@ -3736,6 +3769,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "owner-occupied-housing-ratio": ownerOccupiedHousingRatio,
   "oyster-consumption-expenditure": oysterConsumptionExpenditure,
   "oyster-consumption-quantity": oysterConsumptionQuantity,
+  "pachinko-shop-density-per-10k": pachinkoShopDensityPer10k,
   "paid-nursing-home-capacity-per-1000-65plus": paidNursingHomeCapacityPer100065plus,
   "paid-nursing-home-count-per-100k-65plus": paidNursingHomeCountPer100k65plus,
   "paid-nursing-home-residents-per-1000-65plus": paidNursingHomeResidentsPer100065plus,
@@ -4011,6 +4045,8 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "regular-cash-salary-female": regularCashSalaryFemale,
   "regular-cash-salary-male-pre2019": regularCashSalaryMalePre2019,
   "regular-cash-salary-male": regularCashSalaryMale,
+  "relaxation-avg-time-female": relaxationAvgTimeFemale,
+  "relaxation-avg-time-male": relaxationAvgTimeMale,
   "religious-expense-consumption-expenditure": religiousExpenseConsumptionExpenditure,
   "renovation-rate": renovationRate,
   "rental-car-consumption-expenditure": rentalCarConsumptionExpenditure,
@@ -4163,6 +4199,8 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "skin-milk-consumption-expenditure": skinMilkConsumptionExpenditure,
   "skirt-consumption-expenditure": skirtConsumptionExpenditure,
   "skirt-consumption-quantity": skirtConsumptionQuantity,
+  "sleep-avg-time-female": sleepAvgTimeFemale,
+  "sleep-avg-time-male": sleepAvgTimeMale,
   "small-scale-farm-households": smallScaleFarmHouseholds,
   "smartphone-ownership-multi-person-households-per-1000": smartphoneOwnershipMultiPersonHouseholdsPer1000,
   "smartphone-usage-rate-by-sex": smartphoneUsageRateBySex,
