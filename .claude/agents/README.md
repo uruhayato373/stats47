@@ -29,8 +29,8 @@
 | agent | role | 派生元 |
 |---|---|---|
 | `estat-researcher` 🆕 | e-Stat / MLIT DPF 探索・メタ確認 (DB には触らない) | data-pipeline 分割 |
-| `open-data-curator` 🆕 | e-Stat外の政府・自治体データ源をsource/dataset単位で棚卸しし、取得方式・粒度・GIS・ライセンス・更新性・stats47適合性のgit TSカタログを排他管理。実取得・投入は既存ownerへ委譲 | 2026-07-18 新設 |
-| `data-ingester` 🆕 | metrics 登録 + stats_* 投入 + 47県カバレッジ検証 (GIS は gis-* に委譲) | data-pipeline + db-manager 分割 |
+| `open-data-curator` 🆕 | e-Stat外の政府・自治体データ源をsource/dataset単位で棚卸しし、取得方式・粒度・GIS・ライセンス・更新性・stats47適合性のgit TSカタログを排他管理。**+ provenance 監査オーナー** (全 metric の出典・再現性を `/audit-provenance` で棚卸し、クラス B/C/D を是正。正典 data-provenance-standards.md)。実取得・投入は既存ownerへ委譲 | 2026-07-18 新設・2026-07-19 provenance 監査追加 |
+| `data-ingester` 🆕 | metrics 登録 + stats_* 投入 + 47県カバレッジ検証 (GIS は gis-* に委譲)。**非 e-Stat 投入時は provenance 9点セット必須** (data-provenance-standards.md) | data-pipeline + db-manager 分割 |
 | `db-schema-manager` 🆕 | スキーマ・migration・reset 専任 | db-manager 分割 |
 | `snapshot-exporter` 🆕 | D1 → R2 snapshot / Remotion 派生 JSON 生成 | db-manager 分割 |
 | `r2-publisher` 🆕 | R2 push / pull / du 専任 | db-manager 分割 |

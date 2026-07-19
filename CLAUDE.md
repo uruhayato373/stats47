@@ -86,6 +86,7 @@ CLAUDE.md 内に詳細を複製しない。状況に応じて参照する。
 | `gis-data.md` | 国土数値情報 (KSJ) GIS の取り込み・管理 (datasets.ts SSOT / 完全DBレス / gis-curator・gis-pipeline-runner) |
 | `estat-api.md` | e-Stat API 利用スキル |
 | `metric-config-standards.md` | metric config 作成・編集 (category 17 軸 / title・subtitle・note・description の役割 / validate:config) |
+| `data-provenance-standards.md` | データ出典・再現性 (再現性クラス A/A'/B/C/D / 手動抽出の provenance 9点セット / [provenance]・[calc-ref] lint / 定期監査 /audit-provenance / provenance-audit-weekly cron。非 e-Stat 投入・出典是正時必読) |
 | `theme-catalog-standards.md` | テーマページの指標×チャート統合カタログ (ThemeCatalog SSOT / チャート選定文法 / selection provenance / generate:catalog・validate:catalog / theme-researcher・theme-designer) |
 | `survey-linkage-standards.md` | ranking↔統計調査の紐付け (surveys.json マスタ / provenance 辞書導出 / config.surveyId オーバーライド / 監査 /audit-survey-linkage / survey-curator) |
 | `branch-workflow.md` | PR・デプロイ作業・DB データ反映 |
