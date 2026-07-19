@@ -30,6 +30,11 @@ No prose before/after. No section headers.
 - `ranking / theme / map / area / research-only` の利用可能性判定
 - 既存metric、ThemeCatalog、KSJ登録済みデータとの重複確認
 - URL到達性、必須項目、列挙値、重複ID、確認日のvalidator維持
+- **provenance 監査オーナー** (2026-07-19〜): データ出典・再現性の全量棚卸し (`/audit-provenance`) の実行と、
+  クラス B/C/D (出典薄・手動抽出・出典不明) の是正。週次 cron (`provenance-audit-weekly.yml`) が起票した Issue を消化。
+  fetcher コードから出典を復元し config に backfill、`validate:config` の `[provenance]`/`[provenance-thin]`/`[calc-ref]`
+  を error 0 に。正典 `.claude/rules/data-provenance-standards.md`。意味判断 (出典が真に正しいか) は本 agent、機械分類は
+  `.claude/scripts/provenance/audit-provenance-queue.ts`。
 
 > 初期実装手順書 (旧 docs/02 実装計画 37 番) は 2026-07-18 の初期実装完了で削除済 (git 履歴参照)。
 > 恒常仕様は本ファイル + 型 (`open-data-catalog/types.ts`) + validator に集約した。

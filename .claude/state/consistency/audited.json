@@ -1,5 +1,10 @@
 {
-  "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-  "audited_at": "2026-07-18T21:40:34",
-  "files": []
+  "hash": "97989463fd475489e8363db9eb463880e8aef0f270c3370382645e9903a3443d",
+  "audited_at": "2026-07-19T13:06:18",
+  "files": [
+    ".claude/agents/data-ingester.md",
+    ".claude/agents/open-data-curator.md",
+    ".claude/scripts/provenance/audit-provenance-queue.ts",
+    ".claude/skills/db/audit-provenance/SKILL.md"
+  ]
 }

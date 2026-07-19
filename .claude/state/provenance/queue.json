@@ -1,0 +1,372 @@
+{
+  "generatedAt": "2026-07-19T13:05:21.976Z",
+  "metricTotal": 2276,
+  "byClass": {
+    "A": 2205,
+    "A'": 17,
+    "C": 1,
+    "B": 14,
+    "D": 39
+  },
+  "needsWorkCount": 39,
+  "needsWork": [
+    {
+      "key": "disposable-income-after-rent",
+      "klass": "D",
+      "fetcherKey": "calculated",
+      "missing": [
+        "再取得キー/出典URL"
+      ],
+      "isActive": true
+    },
+    {
+      "key": "port-cargo-coastal-in",
+      "klass": "D",
+      "fetcherKey": "mlit_dpf",
+      "missing": [
+        "再取得キー/出典URL"
+      ],
+      "isActive": true
+    },
+    {
+      "key": "port-cargo-coastal-out",
+      "klass": "D",
+      "fetcherKey": "mlit_dpf",
+      "missing": [
+        "再取得キー/出典URL"
+      ],
+      "isActive": true
+    },
+    {
+      "key": "port-container-tonnage",
+      "klass": "D",
+      "fetcherKey": "mlit_dpf",
+      "missing": [
+        "再取得キー/出典URL"
+      ],
+      "isActive": true
+    },
+    {
+      "key": "port-passengers-boarding",
+      "klass": "D",
+      "fetcherKey": "mlit_dpf",
+      "missing": [
+        "再取得キー/出典URL"
+      ],
+      "isActive": true
+    },
+    {
+      "key": "port-passengers-landing",
+      "klass": "D",
+      "fetcherKey": "mlit_dpf",
+      "missing": [
+        "再取得キー/出典URL"
+      ],
+      "isActive": true
+    },
+    {
+      "key": "port-ships-total",
+      "klass": "D",
+      "fetcherKey": "mlit_dpf",
+      "missing": [
+        "再取得キー/出典URL"
+      ],
+      "isActive": true
+    },
+    {
+      "key": "port-vehicle-ferry-car",
+      "klass": "D",
+      "fetcherKey": "mlit_dpf",
+      "missing": [
+        "再取得キー/出典URL"
+      ],
+      "isActive": true
+    },
+    {
+      "key": "port-vehicle-ferry-total",
+      "klass": "D",
+      "fetcherKey": "mlit_dpf",
+      "missing": [
+        "再取得キー/出典URL"
+      ],
+      "isActive": true
+    },
+    {
+      "key": "port-vehicle-ferry-truck",
+      "klass": "D",
+      "fetcherKey": "mlit_dpf",
+      "missing": [
+        "再取得キー/出典URL"
+      ],
+      "isActive": true
+    },
+    {
+      "key": "prefectural-income-per-capita",
+      "klass": "D",
+      "fetcherKey": "unknown",
+      "missing": [
+        "再取得キー/出典URL"
+      ],
+      "isActive": false
+    },
+    {
+      "key": "real-disposable-income",
+      "klass": "D",
+      "fetcherKey": "calculated",
+      "missing": [
+        "再取得キー/出典URL"
+      ],
+      "isActive": true
+    },
+    {
+      "key": "station-passengers-annual-total",
+      "klass": "D",
+      "missing": [
+        "出典不明"
+      ],
+      "isActive": false
+    },
+    {
+      "key": "treatment-rate-arthrosis-inpatient",
+      "klass": "D",
+      "fetcherKey": "estat",
+      "missing": [
+        "再取得キー/出典URL"
+      ],
+      "isActive": true
+    },
+    {
+      "key": "treatment-rate-arthrosis-outpatient",
+      "klass": "D",
+      "fetcherKey": "estat",
+      "missing": [
+        "再取得キー/出典URL"
+      ],
+      "isActive": true
+    },
+    {
+      "key": "treatment-rate-asthma-inpatient",
+      "klass": "D",
+      "fetcherKey": "estat",
+      "missing": [
+        "再取得キー/出典URL"
+      ],
+      "isActive": true
+    },
+    {
+      "key": "treatment-rate-asthma-outpatient",
+      "klass": "D",
+      "fetcherKey": "estat",
+      "missing": [
+        "再取得キー/出典URL"
+      ],
+      "isActive": true
+    },
+    {
+      "key": "treatment-rate-cancer-inpatient",
+      "klass": "D",
+      "fetcherKey": "estat",
+      "missing": [
+        "再取得キー/出典URL"
+      ],
+      "isActive": true
+    },
+    {
+      "key": "treatment-rate-cancer-outpatient",
+      "klass": "D",
+      "fetcherKey": "estat",
+      "missing": [
+        "再取得キー/出典URL"
+      ],
+      "isActive": true
+    },
+    {
+      "key": "treatment-rate-cerebrovascular-inpatient",
+      "klass": "D",
+      "fetcherKey": "estat",
+      "missing": [
+        "再取得キー/出典URL"
+      ],
+      "isActive": true
+    },
+    {
+      "key": "treatment-rate-cerebrovascular-outpatient",
+      "klass": "D",
+      "fetcherKey": "estat",
+      "missing": [
+        "再取得キー/出典URL"
+      ],
+      "isActive": true
+    },
+    {
+      "key": "treatment-rate-circulatory-inpatient",
+      "klass": "D",
+      "fetcherKey": "estat",
+      "missing": [
+        "再取得キー/出典URL"
+      ],
+      "isActive": true
+    },
+    {
+      "key": "treatment-rate-circulatory-outpatient",
+      "klass": "D",
+      "fetcherKey": "estat",
+      "missing": [
+        "再取得キー/出典URL"
+      ],
+      "isActive": true
+    },
+    {
+      "key": "treatment-rate-diabetes-inpatient",
+      "klass": "D",
+      "fetcherKey": "estat",
+      "missing": [
+        "再取得キー/出典URL"
+      ],
+      "isActive": true
+    },
+    {
+      "key": "treatment-rate-diabetes-outpatient",
+      "klass": "D",
+      "fetcherKey": "estat",
+      "missing": [
+        "再取得キー/出典URL"
+      ],
+      "isActive": true
+    },
+    {
+      "key": "treatment-rate-hypertension-inpatient",
+      "klass": "D",
+      "fetcherKey": "estat",
+      "missing": [
+        "再取得キー/出典URL"
+      ],
+      "isActive": true
+    },
+    {
+      "key": "treatment-rate-hypertension-outpatient",
+      "klass": "D",
+      "fetcherKey": "estat",
+      "missing": [
+        "再取得キー/出典URL"
+      ],
+      "isActive": true
+    },
+    {
+      "key": "treatment-rate-mental-disorder-inpatient",
+      "klass": "D",
+      "fetcherKey": "estat",
+      "missing": [
+        "再取得キー/出典URL"
+      ],
+      "isActive": true
+    },
+    {
+      "key": "treatment-rate-mental-disorder-outpatient",
+      "klass": "D",
+      "fetcherKey": "estat",
+      "missing": [
+        "再取得キー/出典URL"
+      ],
+      "isActive": true
+    },
+    {
+      "key": "treatment-rate-mood-disorder-inpatient",
+      "klass": "D",
+      "fetcherKey": "estat",
+      "missing": [
+        "再取得キー/出典URL"
+      ],
+      "isActive": true
+    },
+    {
+      "key": "treatment-rate-mood-disorder-outpatient",
+      "klass": "D",
+      "fetcherKey": "estat",
+      "missing": [
+        "再取得キー/出典URL"
+      ],
+      "isActive": true
+    },
+    {
+      "key": "treatment-rate-musculoskeletal-inpatient",
+      "klass": "D",
+      "fetcherKey": "estat",
+      "missing": [
+        "再取得キー/出典URL"
+      ],
+      "isActive": true
+    },
+    {
+      "key": "treatment-rate-musculoskeletal-outpatient",
+      "klass": "D",
+      "fetcherKey": "estat",
+      "missing": [
+        "再取得キー/出典URL"
+      ],
+      "isActive": true
+    },
+    {
+      "key": "treatment-rate-neurosis-inpatient",
+      "klass": "D",
+      "fetcherKey": "estat",
+      "missing": [
+        "再取得キー/出典URL"
+      ],
+      "isActive": true
+    },
+    {
+      "key": "treatment-rate-neurosis-outpatient",
+      "klass": "D",
+      "fetcherKey": "estat",
+      "missing": [
+        "再取得キー/出典URL"
+      ],
+      "isActive": true
+    },
+    {
+      "key": "treatment-rate-osteoporosis-inpatient",
+      "klass": "D",
+      "fetcherKey": "estat",
+      "missing": [
+        "再取得キー/出典URL"
+      ],
+      "isActive": true
+    },
+    {
+      "key": "treatment-rate-osteoporosis-outpatient",
+      "klass": "D",
+      "fetcherKey": "estat",
+      "missing": [
+        "再取得キー/出典URL"
+      ],
+      "isActive": true
+    },
+    {
+      "key": "treatment-rate-schizophrenia-inpatient",
+      "klass": "D",
+      "fetcherKey": "estat",
+      "missing": [
+        "再取得キー/出典URL"
+      ],
+      "isActive": true
+    },
+    {
+      "key": "treatment-rate-schizophrenia-outpatient",
+      "klass": "D",
+      "fetcherKey": "estat",
+      "missing": [
+        "再取得キー/出典URL"
+      ],
+      "isActive": true
+    }
+  ],
+  "blogLineage": {
+    "total": 612,
+    "byStatus": {
+      "both": 381,
+      "jsonOnly": 22,
+      "neither": 209
+    }
+  }
+}

@@ -55,11 +55,67 @@ export interface MlitSource {
 
 export interface ExternalSource {
   kind: "external";
-  /** 一般化された外部 source (custom fetcher 必要) */
+  /**
+   * 一般化された外部 source (custom fetcher 必要)。既知の値は KNOWN_FETCHER_KEYS。
+   * "manual" (手動抽出・PDF/xlsx/HTML 由来) は config.provenance (SourceProvenance) 必須。
+   * 正典: `.claude/rules/data-provenance-standards.md`
+   */
   fetcherKey: string;
+  /**
+   * fetcher 依存の設定。手動抽出 (fetcherKey:"manual") は provenance を格納する:
+   * `{ source:{name,url,license?}, description?, provenance: SourceProvenance }`。
+   * 機械再取得系 (mlit_ksj/estat) は再取得キー (ksjDataId+ksjVersion / statsDataId) を格納する。
+   */
   config: Record<string, unknown>;
   displayName?: string;
   url?: string;
+}
+
+/**
+ * 既知の fetcherKey。"unknown" は出典欠落を意味し新規投入禁止 (既存は是正対象)。
+ * lint (validate-metric-config.ts) が provenance 必須クラスの判定に使う。
+ */
+export const KNOWN_FETCHER_KEYS = [
+  "manual",
+  "mlit_ksj",
+  "mlit_dpf",
+  "estat",
+  "ssds",
+  "local-public-employee-salary",
+  "calculated",
+  "unknown",
+] as const;
+export type KnownFetcherKey = (typeof KNOWN_FETCHER_KEYS)[number];
+
+/**
+ * 手動抽出データ (PDF/xlsx/HTML 由来) の再現性メタ (provenance)。
+ * statsDataId 等で機械再取得できない source は、これが無いと復元不能になる。
+ * 手本: `packages/data-configs/src/metrics/ambulance-hospital-arrival-time.ts`。
+ * lint は fetcherKey:"manual" に対し {url|pdfUrl, accessedAt, extraction, verification, restore} を必須化する。
+ */
+export interface SourceProvenance {
+  /** 版一覧/ランディングページ URL (年版で変わりうる) */
+  publicationIndexUrl?: string;
+  /** 実データファイルの直リンク (PDF/xlsx/CSV)。復元の起点 */
+  pdfUrl?: string;
+  /** 汎用: 実ファイル URL (pdf 以外) */
+  url?: string;
+  /** 表名・シート名 (例 "別表8の1 病院収容所要時間別搬送人員の状況") */
+  table?: string;
+  /** PDF 内ページ番号 */
+  pdfPage?: number;
+  /** どの列/セルが値か (例 "令和6年中 平均(分)") */
+  valueColumn?: string;
+  /** データの対象年 (例 "令和6年(2024)中") */
+  dataYear?: string;
+  /** アクセス日 (ISO date) */
+  accessedAt?: string;
+  /** 抽出手法 (再現手順) */
+  extraction?: string;
+  /** 検算 (公表全国値との一致等) */
+  verification?: string;
+  /** 復元コマンド (誰でも一次資料から再取得・突合できる) */
+  restore?: string;
 }
 
 export interface CalculatedSource {
