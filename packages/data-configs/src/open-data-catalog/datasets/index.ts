@@ -6,6 +6,7 @@ import { GSI_HAZARD_DATASETS } from "./gsi-hazard";
 import { DIGITAL_AGENCY_ODS_DATASETS } from "./digital-agency-ods";
 import { MAFF_REGIONAL_DATASETS } from "./maff";
 import { JFLEC_DATASETS } from "./jflec";
+import { NIER_DATASETS } from "./nier";
 
 /**
  * dataset カタログの集約。source 別ファイルは 1 ファイル 300 行超 or 同一 source 20 dataset 超で
@@ -19,6 +20,7 @@ export const OPEN_DATASETS: readonly OpenDatasetDefinition[] = [
   ...DIGITAL_AGENCY_ODS_DATASETS,
   ...MAFF_REGIONAL_DATASETS,
   ...JFLEC_DATASETS,
+  ...NIER_DATASETS,
 ];
 
 export function getOpenDataset(id: string): OpenDatasetDefinition | undefined {
