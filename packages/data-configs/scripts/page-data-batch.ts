@@ -99,6 +99,7 @@ async function fetchEstatData(
   });
   if (config.cdCat01) params.set("cdCat01", config.cdCat01);
   if (config.cdCat02) params.set("cdCat02", config.cdCat02);
+  if (config.cdCat03) params.set("cdCat03", config.cdCat03);
   const url = `https://api.e-stat.go.jp/rest/3.0/app/json/getStatsData?${params}`;
   const res = await fetch(url);
   if (!res.ok) throw new Error(`e-Stat HTTP ${res.status}`);

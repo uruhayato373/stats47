@@ -31,6 +31,8 @@ export interface EstatSource {
   cdCat01?: string;
   /** サブカテゴリ */
   cdCat02?: string;
+  /** 第3カテゴリ軸 (3軸テーブル用。例 患者調査 T37 の施設の種類=入院/外来) */
+  cdCat03?: string;
   /** 表示用 source 名 (UI ラベル) */
   displayName?: string;
   /** 出典 URL (UI リンク) */
