@@ -1,0 +1,14 @@
+{
+  "kind": "manual",
+  "label": "暖房関連支出合計（灯油+電気+都市ガス）",
+  "unit": "円",
+  "year": "2024",
+  "transform": "kerosene-consumption-expenditure + electricity-consumption-expenditure + city-gas-consumption-expenditure の都道府県ごとの年間消費支出額（円）を単純合算（いずれも家計調査・二人以上世帯・都道府県庁所在市）",
+  "source": "計算値: r2:app/ranking/kerosene-consumption-expenditure, r2:app/ranking/electricity-consumption-expenditure, r2:app/ranking/city-gas-consumption-expenditure (2024年) の合算",
+  "upstream": "metric config (packages/data-configs) → e-Stat 家計調査 → R2 app/ranking",
+  "accessedAt": "2026-07-20",
+  "extraction": "3metricのvalues.jsonをareaCodeで結合しvalueを加算、降順でrank再計算",
+  "verification": "個別3ランキングの値を合算した結果であり、各値は元ランキングのvalues.jsonと一致（重複計上なし）",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug heating-cost-vs-disposable-income --keys kerosene-consumption-expenditure,electricity-consumption-expenditure,city-gas-consumption-expenditure の3ファイルをareaCodeで合算するスクリプト（本記事生成時の合算ロジックは記事ソース参照）",
+  "generatedBy": "manual-calculation"
+}

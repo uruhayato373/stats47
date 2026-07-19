@@ -12,6 +12,7 @@
 | **前セッションからの引き継ぎ** | [`handoffs/`](handoffs/README.md) — 消化したら抽出→削除 (貯めない) |
 | 今月・今週の計画 | `todo/current-month.md` `todo/current-week.md` |
 | 収益化の正典 | `02_実装計画/01_収益化マスタープラン.md` |
+| SNS 自動化のログイン保持 (Playwright プロファイル) | [`01_技術設計/playwright-auth-profiles.md`](01_技術設計/playwright-auth-profiles.md) |
 
 ## ドキュメント分類
 
