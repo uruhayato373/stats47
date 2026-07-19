@@ -32,6 +32,31 @@ interface Entry {
   isActive: boolean;
 }
 
+const REGISTRY_KEYS = new Set(Object.keys(METRICS_REGISTRY));
+
+/** calculated metric の親参照 (numeratorKey/denominatorKey/formula) が registry に実在するか */
+function calcRefsResolvable(cfg: unknown): boolean {
+  const c = cfg as {
+    calculation?: Record<string, unknown>;
+    source?: { formula?: Record<string, unknown> };
+  };
+  const refs: Array<string | undefined> = [];
+  const calc = c.calculation;
+  if (calc) {
+    for (const f of ["numeratorKey", "denominatorKey", "numeratorRankingKey", "denominatorRankingKey"]) {
+      refs.push(calc[f] as string | undefined);
+    }
+  }
+  const formula = c.source?.formula;
+  if (formula) {
+    for (const f of ["numerator", "denominator", "left", "right"]) {
+      refs.push(formula[f] as string | undefined);
+    }
+  }
+  const present = refs.filter(Boolean) as string[];
+  return present.length > 0 && present.every((r) => REGISTRY_KEYS.has(r));
+}
+
 function classify(key: string, cfg: unknown): Entry {
   const c = cfg as {
     isActive?: boolean;
@@ -78,6 +103,10 @@ function classify(key: string, cfg: unknown): Entry {
         conf.statsDataId,
     );
     if (hasMachineId) return { ...base, klass: "A'", missing: [] };
+    // A' (derived): calculated で親参照が resolvable なら再計算可能
+    if (src.fetcherKey === "calculated" && calcRefsResolvable(cfg)) {
+      return { ...base, klass: "A'", missing: [] };
+    }
     // D: unknown / 出典URL も無い
     const hasUrl = Boolean(src.url || (conf.source as Record<string, unknown> | undefined)?.url);
     if (src.fetcherKey === "unknown" || !hasUrl) {
@@ -86,7 +115,12 @@ function classify(key: string, cfg: unknown): Entry {
     // B: url はあるが機械 ID なし (fetcher 依存)
     return { ...base, klass: "B", missing: ["再取得キー (provenance backfill 推奨)"] };
   }
-  if (kind === "calculated") return { ...base, klass: "B", missing: ["formula 参照の可視化"] };
+  // kind:"calculated" (source union) — 親参照が resolvable なら再計算可能
+  if (kind === "calculated") {
+    return calcRefsResolvable(cfg)
+      ? { ...base, klass: "A'", missing: [] }
+      : { ...base, klass: "D", missing: ["formula 参照が registry に不在"] };
+  }
   // mlit (TODO) 等
   return { ...base, klass: "D", missing: ["出典不明"] };
 }

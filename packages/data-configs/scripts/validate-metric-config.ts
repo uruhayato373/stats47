@@ -229,6 +229,14 @@ function main() {
         }
       } else {
         // [provenance-thin] 機械再取得キーも provenance も無い external を可視化 (warn)
+        // calculated (親から再計算可能・calc-ref が resolvable) は除外
+        const calcObj = cfg.calculation as Record<string, unknown> | undefined;
+        const calcResolvable =
+          fk === "calculated" &&
+          [calcObj?.numeratorKey, calcObj?.denominatorKey]
+            .filter(Boolean)
+            .every((r) => registryKeys.has(r as string)) &&
+          Boolean(calcObj?.numeratorKey);
         const hasMachineId = Boolean(
           conf.ksjDataId ||
             (conf.estat as Record<string, unknown> | undefined)?.statsDataId ||
@@ -236,7 +244,7 @@ function main() {
             src.url ||
             (conf.source as Record<string, unknown> | undefined)?.url,
         );
-        if (fk === "unknown" || !hasMachineId) {
+        if (!calcResolvable && (fk === "unknown" || !hasMachineId)) {
           warns.push(
             `[provenance-thin] ${key}: external(fetcherKey:${fk ?? "?"}) に再取得キー/出典URL が無い (要 provenance backfill)`,
           );

@@ -1,24 +1,15 @@
 {
-  "generatedAt": "2026-07-19T13:05:21.976Z",
+  "generatedAt": "2026-07-19T13:15:30.437Z",
   "metricTotal": 2276,
   "byClass": {
     "A": 2205,
-    "A'": 17,
+    "A'": 20,
     "C": 1,
-    "B": 14,
-    "D": 39
+    "B": 13,
+    "D": 37
   },
-  "needsWorkCount": 39,
+  "needsWorkCount": 37,
   "needsWork": [
-    {
-      "key": "disposable-income-after-rent",
-      "klass": "D",
-      "fetcherKey": "calculated",
-      "missing": [
-        "再取得キー/出典URL"
-      ],
-      "isActive": true
-    },
     {
       "key": "port-cargo-coastal-in",
       "klass": "D",
@@ -108,15 +99,6 @@
         "再取得キー/出典URL"
       ],
       "isActive": false
-    },
-    {
-      "key": "real-disposable-income",
-      "klass": "D",
-      "fetcherKey": "calculated",
-      "missing": [
-        "再取得キー/出典URL"
-      ],
-      "isActive": true
     },
     {
       "key": "station-passengers-annual-total",
