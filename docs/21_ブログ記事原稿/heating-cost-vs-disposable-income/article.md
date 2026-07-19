@@ -14,7 +14,7 @@ tags:
   - 寒冷地
 publishedAt: "2026-07-20"
 updatedAt: "2026-07-20"
-published: false
+published: true
 ogImage: /blog/heating-cost-vs-disposable-income/og.png
 ---
 

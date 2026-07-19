@@ -14,7 +14,7 @@ tags:
   - 相関分析
 publishedAt: "2026-07-20"
 updatedAt: "2026-07-20"
-published: false
+published: true
 ogImage: /blog/tutoring-cost-university-advancement-gap/og.png
 ---
 
