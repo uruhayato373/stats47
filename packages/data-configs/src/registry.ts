@@ -44,6 +44,7 @@ import { airFareConsumptionExpenditure } from "./metrics/air-fare-consumption-ex
 import { airFreshenerConsumptionExpenditure } from "./metrics/air-freshener-consumption-expenditure";
 import { airPassengerTransport } from "./metrics/air-passenger-transport";
 import { airportCount } from "./metrics/airport-count";
+import { ambulanceHospitalArrivalTime } from "./metrics/ambulance-hospital-arrival-time";
 import { amusementParkConsumptionExpenditure } from "./metrics/amusement-park-consumption-expenditure";
 import { anmaMassageCount } from "./metrics/anma-massage-count";
 import { annualClearDays } from "./metrics/annual-clear-days";
@@ -2323,6 +2324,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "air-freshener-consumption-expenditure": airFreshenerConsumptionExpenditure,
   "air-passenger-transport": airPassengerTransport,
   "airport-count": airportCount,
+  "ambulance-hospital-arrival-time": ambulanceHospitalArrivalTime,
   "amusement-park-consumption-expenditure": amusementParkConsumptionExpenditure,
   "anma-massage-count": anmaMassageCount,
   "annual-clear-days": annualClearDays,
