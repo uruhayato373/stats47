@@ -16,6 +16,8 @@ import {
 import { readCityProfile } from "@/features/area-profile/server";
 import { listCategories } from "@/features/category/server";
 
+import { ogpImageKeys, ogpImageUrl } from "@/lib/metadata/ogp-image";
+
 import type { Metadata } from "next";
 
 interface PageProps {
@@ -50,7 +52,14 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     description,
     robots: "index, follow",
     alternates: { canonical: `/areas/${areaCode}/cities/${cityCode}` },
-    openGraph: { title, description, type: "website" },
+    // 親県の静的 R2 OGP を明示。未指定だと最寄りの areas/[areaCode]/opengraph-image (ランタイム) に
+    // 落ち Cloudflare Worker で 500 になる (正典: .claude/rules/ogp-image-standards.md §3 課題0)。
+    openGraph: {
+      title,
+      description,
+      type: "website",
+      images: [{ url: ogpImageUrl(ogpImageKeys.area(areaCode)), width: 1200, height: 630, alt: title }],
+    },
     twitter: { card: "summary", title, description },
   };
 }

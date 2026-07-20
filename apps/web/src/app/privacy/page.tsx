@@ -87,6 +87,15 @@ export const metadata = {
   alternates: {
     canonical: "/privacy",
   },
+  // 静的 /og-image.jpg を明示。未指定だと root の opengraph-image (ランタイム) に落ち Worker で 500。
+  openGraph: {
+    title: "プライバシーポリシー",
+    description:
+      "統計で見る都道府県（stats47）のプライバシーポリシー。個人情報の取り扱い、Cookie使用、広告配信に関する方針を説明します。",
+    type: "website",
+    url: "https://stats47.jp/privacy",
+    images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: "プライバシーポリシー" }],
+  },
 };
 
 /**

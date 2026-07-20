@@ -12,6 +12,7 @@ import {
 import { AreaDashboardSection } from "@/features/area-profile/server";
 import { listCategories } from "@/features/category/server";
 
+import { ogpImageKeys, ogpImageUrl } from "@/lib/metadata/ogp-image";
 import { UrlPolicy } from "@/lib/url-policy";
 
 import type { Metadata } from "next";
@@ -46,7 +47,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     description,
     alternates: { canonical: `/areas/${areaCode}/cities/${cityCode}/${categoryKey}` },
     robots,
-    openGraph: { title, description, type: "website" },
+    // 親県の静的 R2 OGP を明示 (ランタイム opengraph-image への fallback = Worker 500 回避)。
+    openGraph: {
+      title,
+      description,
+      type: "website",
+      images: [{ url: ogpImageUrl(ogpImageKeys.area(areaCode)), width: 1200, height: 630, alt: title }],
+    },
     twitter: { card: "summary", title, description },
   };
 }
