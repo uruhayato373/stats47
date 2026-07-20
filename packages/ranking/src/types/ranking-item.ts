@@ -301,6 +301,14 @@ export interface RankingItem {
    */
   tags?: RankingTag[] | null;
 
+  /**
+   * 最新年の「1 位」表示 (都道府県名 + rank + ロケール整形済み値)。
+   * generate-ranking-items が values.json の最新年から deriveHomeFeaturedValues で焼き込む。
+   * 関連ランキングレール等の mini 表示用。値が取れない (calculated/外部) 場合は null。
+   * 旧 item.json 後方互換のため optional (欠損時は UI が text-first に縮退)。
+   */
+  latestTop?: FeaturedValue | null;
+
   /** 作成日時 */
   createdAt: string;
   /** 更新日時 */
@@ -360,6 +368,11 @@ export interface CategoryRankingItem {
   normalizationBasis: string | null;
   groupKey: string | null;
   isFeatured: boolean;
+  /**
+   * 最新年の「1 位」表示 (RankingItem.latestTop からの転記)。関連ランキングレールの
+   * mini 表示用。旧 items.json 後方互換のため optional (欠損時は UI が text-first に縮退)。
+   */
+  top1?: FeaturedValue | null;
 }
 
 /**
