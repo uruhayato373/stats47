@@ -10,10 +10,15 @@
 #   - generateStaticParams を持つ R2 依存ページは CI build (R2 不可) で notFound prerender 化し、
 #     ISR 再生成が効かず固着する (.claude/rules/nextjs-ssg-preservation.md)。
 #     これを deploy 後にこのスクリプトで検知する (deploy-workers.yml の gate)。
+#   - og:image 切れ (2026-07-20 障害): openGraph.images 未指定のページは Next が
+#     ランタイム opengraph-image route を自動注入し Cloudflare Worker で 500 になる
+#     (next/og の例外 / font-loader の Google Fonts ランタイム fetch 失敗)。SNS/検索カードが
+#     無画像になる。ページ HTTP は 200 なので title 検査ではすり抜ける。
+#     → 各 route の og:image meta URL を実際に叩いて 200 か検査する (.claude/rules/ogp-image-standards.md)。
 #
 # Usage: bash .github/scripts/smoke-test-routes.sh [BASE_URL]
 #   BASE_URL 省略時は https://stats47.jp。preview URL を渡せばデプロイ前検証も可能。
-# Exit: 1 件でも notFound / 非200 があれば exit 1。
+# Exit: 1 件でも notFound / og:image 非200 / 非200 があれば exit 1。
 
 set -uo pipefail
 BASE_URL="${1:-https://stats47.jp}"
@@ -85,15 +90,30 @@ for url in "${URLS[@]}"; do
     echo "  ❌ [200 notFound] ${url}"
     echo "        title: ${title}"
     fail=$((fail + 1))
-  else
-    echo "  ✅ ${title:0:60}"
+    continue
   fi
+
+  # og:image が実際に 200 を返すか (ランタイム opengraph-image route の Worker 500 等を捕捉)。
+  # ページは 200・title も正常なのに og:image だけ壊れているケースを検知する。
+  ogimg="$(echo "$body" | grep -o '<meta[^>]*property="og:image"[^>]*content="[^"]*"' | head -1 | sed -E 's/.*content="([^"]*)".*/\1/')"
+  if [ -n "$ogimg" ]; then
+    ogcode="$(curl -s -o /dev/null -A "$UA" --max-time 20 -w '%{http_code}' "$ogimg" 2>/dev/null)"
+    if [ "$ogcode" != "200" ]; then
+      echo "  ❌ [og:image ${ogcode}] ${url}"
+      echo "        og:image: ${ogimg}"
+      fail=$((fail + 1))
+      continue
+    fi
+  fi
+
+  echo "  ✅ ${title:0:60}"
 done
 
 echo ""
 if [ "$fail" -gt 0 ]; then
-  echo "❌ Smoke test FAILED: ${fail}/${checked} route(s) returning notFound or error."
-  echo "   → generateStaticParams を R2 依存 route に付けていないか確認 (.claude/rules/nextjs-ssg-preservation.md)"
+  echo "❌ Smoke test FAILED: ${fail}/${checked} route(s) returning notFound / og:image error / HTTP error."
+  echo "   → notFound: generateStaticParams を R2 依存 route に付けていないか (.claude/rules/nextjs-ssg-preservation.md)"
+  echo "   → og:image 非200: openGraph.images 未指定でランタイム opengraph-image に落ちていないか (.claude/rules/ogp-image-standards.md)"
   exit 1
 fi
 echo "✅ Smoke test passed: ${checked}/${checked} representative routes OK."
