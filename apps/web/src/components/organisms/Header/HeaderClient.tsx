@@ -43,7 +43,11 @@ type NavItem = {
   match: (pathname: string) => boolean;
 };
 
-const NAV_ITEMS: NavItem[] = [
+// nav 並び順は情報設計 (docs/01_技術設計/07) + ベンチマーク §3.1 に沿う:
+// ランキング → 都道府県 → (テーマ dropdown) → 統計ブログ。
+// 「都道府県」は stats47 固有価値なので primary nav の上位に置く。
+// テーマ dropdown は下の render で 都道府県 と 統計ブログ の間に挿入する。
+const NAV_ITEMS_BEFORE_THEME: NavItem[] = [
   {
     href: "/ranking",
     label: "ランキング",
@@ -51,16 +55,19 @@ const NAV_ITEMS: NavItem[] = [
     match: (p) => p.startsWith("/ranking") || p.startsWith("/category"),
   },
   {
-    href: "/blog",
-    label: "統計ブログ",
-    icon: NotebookPen,
-    match: (p) => p.startsWith("/blog"),
-  },
-  {
     href: "/areas",
     label: "都道府県",
     icon: MapPin,
     match: (p) => p.startsWith("/areas"),
+  },
+];
+
+const NAV_ITEMS_AFTER_THEME: NavItem[] = [
+  {
+    href: "/blog",
+    label: "統計ブログ",
+    icon: NotebookPen,
+    match: (p) => p.startsWith("/blog"),
   },
 ];
 
@@ -100,6 +107,26 @@ export function HeaderClient({ themes }: HeaderClientProps) {
   );
 
   const themesActive = pathname.startsWith("/themes");
+
+  const renderNavLink = ({ href, label, icon: Icon, match }: NavItem) => {
+    const isActive = match(pathname);
+    return (
+      <Link
+        key={href}
+        href={href}
+        onClick={() => trackNavClick({ label, href, surface: "desktop-header" })}
+        className={cn(
+          "relative flex h-full items-center gap-1.5 border-b-2 px-3 text-sm font-medium transition-colors",
+          isActive
+            ? "border-primary text-foreground"
+            : "border-transparent text-muted-foreground hover:text-foreground",
+        )}
+      >
+        <Icon className="h-4 w-4" />
+        {label}
+      </Link>
+    );
+  };
 
   return (
     <header
@@ -142,31 +169,11 @@ export function HeaderClient({ themes }: HeaderClientProps) {
           </Link>
         </div>
 
-        {/* 中央: デスクトップナビ */}
+        {/* 中央: デスクトップナビ (ランキング → 都道府県 → テーマ → 統計ブログ) */}
         <nav className="hidden h-full items-center gap-1 lg:flex">
-          {NAV_ITEMS.map(({ href, label, icon: Icon, match }) => {
-            const isActive = match(pathname);
-            return (
-              <Link
-                key={href}
-                href={href}
-                onClick={() =>
-                  trackNavClick({ label, href, surface: "desktop-header" })
-                }
-                className={cn(
-                  "relative flex h-full items-center gap-1.5 border-b-2 px-3 text-sm font-medium transition-colors",
-                  isActive
-                    ? "border-primary text-foreground"
-                    : "border-transparent text-muted-foreground hover:text-foreground",
-                )}
-              >
-                <Icon className="h-4 w-4" />
-                {label}
-              </Link>
-            );
-          })}
+          {NAV_ITEMS_BEFORE_THEME.map(renderNavLink)}
 
-          {/* テーマ メガメニュー (curated ダッシュボード。category は内部利用に降格) */}
+          {/* テーマ メガメニュー (都道府県 と 統計ブログ の間。category は内部利用に降格) */}
           {themes.length > 0 && (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
@@ -185,19 +192,25 @@ export function HeaderClient({ themes }: HeaderClientProps) {
                 </button>
               </DropdownMenuTrigger>
               <DropdownMenuContent
-                align="end"
+                align="start"
                 sideOffset={8}
                 className="w-[min(92vw,560px)] p-3"
               >
                 <div className="grid grid-cols-2 gap-1">
                   {themes.map((theme) => {
-                    const isActive = pathname.startsWith(
-                      `/themes/${theme.themeKey}`,
-                    );
+                    const href = `/themes/${theme.themeKey}`;
+                    const isActive = pathname.startsWith(href);
                     return (
                       <Link
                         key={theme.themeKey}
-                        href={`/themes/${theme.themeKey}`}
+                        href={href}
+                        onClick={() =>
+                          trackNavClick({
+                            label: theme.title,
+                            href,
+                            surface: "desktop-header",
+                          })
+                        }
                         className={cn(
                           "rounded-md px-2.5 py-2 text-sm transition-colors",
                           isActive
@@ -212,6 +225,13 @@ export function HeaderClient({ themes }: HeaderClientProps) {
                 </div>
                 <Link
                   href="/themes"
+                  onClick={() =>
+                    trackNavClick({
+                      label: "すべてのテーマ",
+                      href: "/themes",
+                      surface: "desktop-header",
+                    })
+                  }
                   className="mt-2 block rounded-md px-2.5 py-2 text-sm font-medium text-primary hover:bg-accent/60"
                 >
                   すべてのテーマを見る →
@@ -219,6 +239,8 @@ export function HeaderClient({ themes }: HeaderClientProps) {
               </DropdownMenuContent>
             </DropdownMenu>
           )}
+
+          {NAV_ITEMS_AFTER_THEME.map(renderNavLink)}
         </nav>
 
         {/* 右: 検索 + テーマ切替 */}

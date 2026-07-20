@@ -11,8 +11,9 @@ status: deployed-awaiting-measurement
 
 UI/UX Phase 0 の P0 群は全決着し、**P0-2 (ランキングレール並べ替え) と nav_click/rail_click 計装は
 2026-07-20 に本番デプロイ済 (PR #606 → main `eac7182c`・Cloudflare deploy success)**。本番 hydrated DOM で
-P0-2 の視覚順 (関連 top=202px → AdSense 914px → survey 1542px) を実測確認。**残る人間タスクは GA4 カスタム
-ディメンション登録と 1-2週後の効果判定のみ。**
+P0-2 の視覚順 (関連 top=202px → AdSense 914px → survey 1542px) を実測確認。**GA4 カスタムディメンション登録は
+2026-07-20 完了 (計装台帳 SSOT = `.claude/rules/analytics-event-standards.md`)。残るは 1-2週後の効果判定のみ。**
+併せて site-content-layout Phase 0 監査を実施し Phase 1 の R3a/R4 を実装 (parking・下記)。
 
 ## ✅ 完了 (2026-07-20 deploy)
 
@@ -30,13 +31,28 @@ P0-2 の視覚順 (関連 top=202px → AdSense 914px → survey 1542px) を実�
   (widget/slot) に配線。localhost で nav_click(都道府県/areas/desktop-header)・rail_click
   (related-rankings/slot1/ranking_key) 発火を実測。本番でも同コードが送信 (dev のみ gtag 未ロードで no-op)。
 
-## 残る人間タスク (★これだけ)
+## GA4 登録 ✅ 完了 (2026-07-20) + 計装台帳 SSOT 化
 
-1. **GA4 カスタムディメンション登録** (未実施): GA4 管理 → カスタム定義 → 「スコープ=イベント」で
-   `nav_label` / `nav_surface` / `rail_widget` / `rail_slot` を登録。未登録の間は eventName 総数に落ちる
-   (affiliate_vertical / home_featured と同手順)。反映 24-48h。**登録するまで内訳が取れない。**
+1. **GA4 カスタムディメンション登録**: ✅ **2026-07-20 完了**。`nav_label` / `nav_surface` /
+   `rail_widget` / `rail_slot` を「スコープ=イベント」で登録済（GA4 カスタム定義一覧で実登録を確認）。
+   登録状況の SSOT は新設 **`.claude/rules/analytics-event-standards.md` §2 台帳**（所有: `ga4-analyst`）。
 2. **1-2 週後に効果判定** (evidence-based): 都道府県 nav の利用 (`nav_click`) / 関連レール `rail_click` /
    **AdSense sidebar RPM 大幅減なし** を実測 → P0-1/P0-2 を判定。悪化時は P0-2 を revert (1ファイルの sibling 入れ替え)。
+   判定前に「探索で内訳が `(not set)` に潰れず取れるか」を確認する。
+
+## Phase 1 追加分 (2026-07-20・parking 中・未デプロイ) ★
+
+site-content-layout Phase 0 監査 (`docs/04_レビュー/2026-07-18-sitewide-content-layout-benchmark.md`) を実施し、
+その P0 のうち**計測非依存の 2 件**を実装済。**ブランチ `feature/ui-phase1-blog-card-ogp` (origin push 済) に parking、
+未デプロイ**（下記 R1/R2 と束ねて 1 回デプロイする方針）:
+
+- **R3a** (`391859a5`): ブログ一覧カード (`blog-article-grid.tsx`) にタイトル+更新日を DOM テキストで追加
+  (サムネ焼き込み文字依存を解消)。型/design-system/localhost 検証済。
+- **R4** (`4a8b2a81`): dead な runtime `opengraph-image.tsx` を 5 件削除 (root/areas/blog/ranking/category)。
+  og:image meta は静的 R2/jpg で不変・themes は active のため保持。`ogp-image-standards.md §3 課題0` の清掃を実行。
+  1点 edge: `/areas/*/opengraph-image` は `[themeSlug]` に拾われ robots-blocked な 200 soft-404 (従来 500 より無害)。
+- **R1/R2 は保留**: R1 (ヘッダー nav 順) / R2 (関連ランキング card の mini visual) は nav_click/rail_click 依存。
+  GA4 登録済みなので、**1-2 週で baseline が溜まったら計測付き実験として実装** → R3a+R4 と束ねてデプロイ。
 
 ## 残 follow-up (詳細は backlog へ移送済)
 

@@ -25,6 +25,10 @@ interface SidebarRankingItem {
     demographicAttr?: string | null;
     normalizationBasis?: string | null;
     groupKey?: string | null;
+    /** 最新年の「1 位」(items.json の top1)。mini 表示用。欠損時は text-first に縮退 */
+    top1?: { rank?: number; areaName: string; value: string | null } | null;
+    /** 値の単位 (top1 の値に付す)。 */
+    unit?: string;
 }
 
 /** 文字列の簡易ハッシュ（安定ソート用） */
@@ -179,18 +183,28 @@ export function RankingSidebarClient({
                                 })
                             }
                         >
-                            <span className="line-clamp-1 leading-snug">
-                                {item.title}
-                                {(() => {
-                                    const detail = item.subtitle
-                                        || [item.demographicAttr, item.normalizationBasis].filter(Boolean).join("・")
-                                        || null;
-                                    return detail ? (
-                                        <span className="text-muted-foreground">
-                                            {" "}({detail})
-                                        </span>
-                                    ) : null;
-                                })()}
+                            <span className="flex min-w-0 flex-col">
+                                <span className="line-clamp-1 leading-snug">
+                                    {item.title}
+                                    {(() => {
+                                        const detail = item.subtitle
+                                            || [item.demographicAttr, item.normalizationBasis].filter(Boolean).join("・")
+                                            || null;
+                                        return detail ? (
+                                            <span className="text-muted-foreground">
+                                                {" "}({detail})
+                                            </span>
+                                        ) : null;
+                                    })()}
+                                </span>
+                                {item.top1 ? (
+                                    <span className="line-clamp-1 text-[11px] leading-snug text-muted-foreground">
+                                        {item.top1.rank ?? 1}位 {item.top1.areaName}
+                                        {item.top1.value
+                                            ? ` ${item.top1.value}${item.unit ?? ""}`
+                                            : ""}
+                                    </span>
+                                ) : null}
                             </span>
                         </RailLinkItem>
                     ))}
