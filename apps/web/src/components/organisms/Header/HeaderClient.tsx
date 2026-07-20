@@ -29,6 +29,8 @@ import {
 
 import { SHELL_WIDTH_CLASS } from "@/components/layout/PageShell";
 
+import { trackNavClick } from "@/lib/analytics/events";
+
 import { useTheme } from "@/hooks/useTheme";
 
 import { useSidebarStore } from "@/store/sidebar-store";
@@ -148,6 +150,9 @@ export function HeaderClient({ themes }: HeaderClientProps) {
               <Link
                 key={href}
                 href={href}
+                onClick={() =>
+                  trackNavClick({ label, href, surface: "desktop-header" })
+                }
                 className={cn(
                   "relative flex h-full items-center gap-1.5 border-b-2 px-3 text-sm font-medium transition-colors",
                   isActive

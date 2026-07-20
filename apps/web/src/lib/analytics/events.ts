@@ -140,6 +140,52 @@ export function trackHomeFeaturedClick(params: HomeFeaturedEventParams): void {
   sendEvent("home_featured_click", homeFeaturedPayload(params));
 }
 
+// ─── ナビゲーション (ヘッダー IA・P0-1 効果判定) ──────────────
+
+/**
+ * グローバルヘッダー / モバイルドロワーのナビ項目クリック。
+ * P0-1 (ヘッダーに「都道府県」追加) が使われているかを判定するために計装する。
+ * `nav_label` (項目名) / `nav_href` (遷移先) / `nav_surface` (desktop-header | mobile-drawer)
+ * を custom dimension に登録すれば項目別の利用度を追える。
+ */
+export function trackNavClick(params: {
+  label: string;
+  href: string;
+  surface: "desktop-header" | "mobile-drawer";
+}): void {
+  sendEvent("nav_click", {
+    event_category: "navigation",
+    event_label: params.label,
+    nav_label: params.label,
+    nav_href: params.href,
+    nav_surface: params.surface,
+  });
+}
+
+// ─── 右レール (回遊・P0-2 効果判定) ───────────────────────────
+
+/**
+ * ランキング詳細などの右レール内リンククリック。
+ * P0-2 (レール先頭を関連ランキングに繰り上げ) の回遊ベネフィットを判定するために計装する。
+ * `rail_widget` でウィジェット種別 (related-rankings | related-articles | survey | promo) を、
+ * `rail_slot` で先頭からの表示順 (1 始まり) を送り、「先頭=関連」がクリックを得ているか追う。
+ */
+export function trackRailClick(params: {
+  widget: "related-rankings" | "related-articles" | "survey" | "promo";
+  href: string;
+  slot: number;
+  rankingKey?: string;
+}): void {
+  sendEvent("rail_click", {
+    event_category: "rail",
+    event_label: params.widget,
+    rail_widget: params.widget,
+    rail_href: params.href,
+    rail_slot: params.slot,
+    ...(params.rankingKey ? { ranking_key: params.rankingKey } : {}),
+  });
+}
+
 // ─── ランキングページ ───────────────────────────────────────
 
 /**
