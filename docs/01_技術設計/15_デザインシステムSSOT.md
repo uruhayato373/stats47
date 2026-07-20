@@ -66,6 +66,16 @@ stats47 の UI は、統計データを長時間読むための道具である�
 
 例外が必要な場合は、該当コードの近くではなく、この文書か `13_統一レイアウト設計.md` に理由を追記する。
 
+### 例外: home の暗色ヒーロー（サイト唯一の公認 bespoke hero）
+
+トップページ `/`（`apps/web/src/app/page.tsx` の `① hero` セクション）だけは、上記「暗色グラデ hero を増やさない」禁止の**唯一の公認例外**とする。理由と範囲を明記して管理外ドリフトにしない:
+
+- **役割**: サイトの入口＝マーケティング landing。`PageHeader`（白基調ミニマル見出し）でも `HeroBanner`（theme/category の画像＋テキスト横並び、SSOT=`page-heroes.ts`）でもない、全幅の暗色バンド（`bg-slate-900` + 可読性グラデ）+ 大見出し「あなたの県は何位？」+ 3 CTA（ランキング / キーワード検索 / 都道府県から探す）。
+- **なぜ共有 hero に寄せないか**: (1) home hero は full-bleed マーケ hero で HeroBanner の用途（記事的ページの image+text）と設計が異なる、(2) home は `force-dynamic` の最高トラフィック面で LCP guardrail（mobile LCP ≤ 3,301ms・PSI 2026-07-19 実測）に敏感なため、共有コンポーネントへの refactor は視覚・LCP 回帰リスクが割に合わない。h1 サイズ拡大の例外も既に `ui-components.md`（home のみ `text-3xl sm:text-4xl lg:text-5xl`）で承認済み。
+- **アセット**: 背景 `apps/web/public/images/hero-home.jpg`（文字なし・AI 生成、未配置時は `bg-slate-900` フォールバック。家ルール=画像に日本語を焼き込まない）。見出し・CTA は実 DOM テキスト。
+- **不変条件**: この暗色 hero を **home 以外へ横展開しない**（他ページは `PageHeader` / `HeroBanner`）。home hero の変更はこの節を更新してから行う。
+- **hero 実験の成功条件（A/B を回す場合）**: 見出し / CTA 文言 / 背景画像の variant を試すときは、GA4 の `nav_click`（hero の各 CTA・要計装、Phase 0 で未計装と判明）または注目ランキングへのスクロール到達・直帰率で評価する。判定は 2 週間 or sample gate、`evidence-based-judgment.md` 準拠。**ガードレール: mobile LCP ≤ 3,301ms・CLS 0 を超えない**。効果未確定のまま横展開しない。
+
 ## タイポグラフィ
 
 ### 採用
@@ -98,6 +108,14 @@ stats47 の UI は、統計データを長時間読むための道具である�
 
 アプリ UI は semantic token を優先する。地の背景 `--background` は純白（`0 0% 100%`）で、
 カードとの境界は色差ではなく `border`（罫線）が担う（エディトリアル / データ誌風）。
+
+### カラーモード（light / dark）
+
+**dark は OS 設定（`prefers-color-scheme`）に追従しない。ユーザーがヘッダーのトグルで明示的に選ぶ opt-in。既定は light。** これは意図的な仕様（白基調エディトリアルを既定の顔とし、OS 由来の不意の反転を避ける）。
+
+- 実装: `next-themes`（`apps/web/src/providers/theme-provider.tsx`）。`attribute="class"`（`<html>` に `.dark` クラスを付与＝Tailwind の `dark:` variant が効く）/ `defaultTheme="light"` / **`enableSystem={false}`**（OS 追従オフ）/ 永続化は localStorage キー `theme`（next-themes 既定）。切替は `useTheme().toggleTheme`（`apps/web/src/hooks/useTheme.ts`）→ ヘッダーの太陽/月アイコン。
+- 帰結: `@media (prefers-color-scheme: dark)` だけを与えてもページは light のまま。dark を確認・自動化するには `.dark` クラス付与（トグル）または localStorage `theme=dark` を仕込む（例: Playwright での dark スクショ）。
+- 不変条件: 全 UI は light / dark の両方で semantic token が読めること（下記「完了前チェック」）。`enableSystem` を true に戻す／OS 追従へ変える場合はこの節を先に更新する（挙動が変わるため）。
 
 ### 優先トークン
 

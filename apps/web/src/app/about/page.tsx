@@ -74,6 +74,8 @@ export const metadata: Metadata = {
       "元県庁職員が AI を独学し、転職・独立して運営する統計可視化サイト。公的統計を正確・中立に届ける編集方針。",
     type: "website",
     url: "https://stats47.jp/about",
+    // og:image を静的 /og-image.jpg で明示 (未指定だと og:image 欠落 = SNS カード無画像)。
+    images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: "このサイトについて" }],
   },
 };
 

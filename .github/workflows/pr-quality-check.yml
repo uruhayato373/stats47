@@ -180,6 +180,13 @@ jobs:
           node .claude/scripts/lib/check-maintenance-debt.cjs --ratchet-check
         continue-on-error: false
 
+      - name: 🔗 github-script await Guard
+        # actions/github-script の inline JS で GitHub API 呼び出し (github.rest.*/graphql) の
+        # await 忘れを弾く。未await だと 503 等の reject が unhandled rejection になり、テスト
+        # 全 pass でも job が落ちる (2026-07-20 実発生)。actionlint は inline JS を見ないため本 guard が補う。
+        run: node .claude/scripts/lib/check-github-script-await.cjs
+        continue-on-error: false
+
       - name: ⏱️ Static Checker Runtime Budget
         # 決定的checkerの実測時間をStep Summaryへ記録し、個別/合計予算の悪化を止める。
         run: node .claude/scripts/lib/check-runtime-budget.cjs

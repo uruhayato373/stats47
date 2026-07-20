@@ -142,7 +142,10 @@ export default async function HomePage() {
   return (
     <div className="w-full" suppressHydrationWarning>
       {/* ① hero (doboku-note スタイル: 全幅の画像バンド + 1280px コンテンツ)
-          背景画像: public/images/hero-home.jpg (AI 生成・未配置の間は bg-slate-900 フォールバック) */}
+          背景画像: public/images/hero-home.jpg (AI 生成・未配置の間は bg-slate-900 フォールバック)
+          ★ この暗色 hero は design SSOT の「暗色グラデ hero を増やさない」禁止に対する home のみの
+             公認例外。範囲・不変条件・hero 実験の成功条件は docs/01_技術設計/15_デザインシステムSSOT.md
+             §「例外: home の暗色ヒーロー」を参照 (home 以外へ横展開しない・変更時は同節を先に更新)。*/}
       <section className="relative w-full overflow-hidden bg-slate-900">
         <img
           src="/images/hero-home.jpg"

@@ -8,6 +8,7 @@ import { BlogArticleGrid } from "@/features/blog";
 import { listLatestArticles, readBlogSnapshotMetaFromR2 } from "@/features/blog/server";
 
 import { HUB_INCONTENT } from "@/lib/google-adsense";
+import { generateOGMetadata } from "@/lib/metadata/og-generator";
 
 import type { Metadata } from "next";
 
@@ -15,12 +16,25 @@ export const revalidate = 86400;
 
 const PAGE_SIZE = 24;
 
+const BLOG_INDEX_TITLE = "ブログ | stats47";
+const BLOG_INDEX_DESCRIPTION =
+    "都道府県の統計データを分析した記事一覧。人口、経済、教育、福祉などのランキングや時系列分析を掲載。";
+
 export const metadata: Metadata = {
-    title: "ブログ | stats47",
-    description: "都道府県の統計データを分析した記事一覧。人口、経済、教育、福祉などのランキングや時系列分析を掲載。",
+    title: BLOG_INDEX_TITLE,
+    description: BLOG_INDEX_DESCRIPTION,
     alternates: {
         canonical: "/blog",
     },
+    // per-page R2 OGP を持たない一覧ページは静的 /og-image.jpg を明示する。
+    // 未指定だと Next が root の opengraph-image.tsx (ランタイム next/og) を自動注入し、
+    // Cloudflare Worker で 500 になる (正典: .claude/rules/ogp-image-standards.md §3 課題0)。
+    ...generateOGMetadata({
+        title: BLOG_INDEX_TITLE,
+        description: BLOG_INDEX_DESCRIPTION,
+        imageUrl: "/og-image.jpg",
+        url: "https://stats47.jp/blog",
+    }),
 };
 
 interface PageProps {
