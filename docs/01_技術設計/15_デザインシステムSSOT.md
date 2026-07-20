@@ -109,6 +109,14 @@ stats47 の UI は、統計データを長時間読むための道具である�
 アプリ UI は semantic token を優先する。地の背景 `--background` は純白（`0 0% 100%`）で、
 カードとの境界は色差ではなく `border`（罫線）が担う（エディトリアル / データ誌風）。
 
+### カラーモード（light / dark）
+
+**dark は OS 設定（`prefers-color-scheme`）に追従しない。ユーザーがヘッダーのトグルで明示的に選ぶ opt-in。既定は light。** これは意図的な仕様（白基調エディトリアルを既定の顔とし、OS 由来の不意の反転を避ける）。
+
+- 実装: `next-themes`（`apps/web/src/providers/theme-provider.tsx`）。`attribute="class"`（`<html>` に `.dark` クラスを付与＝Tailwind の `dark:` variant が効く）/ `defaultTheme="light"` / **`enableSystem={false}`**（OS 追従オフ）/ 永続化は localStorage キー `theme`（next-themes 既定）。切替は `useTheme().toggleTheme`（`apps/web/src/hooks/useTheme.ts`）→ ヘッダーの太陽/月アイコン。
+- 帰結: `@media (prefers-color-scheme: dark)` だけを与えてもページは light のまま。dark を確認・自動化するには `.dark` クラス付与（トグル）または localStorage `theme=dark` を仕込む（例: Playwright での dark スクショ）。
+- 不変条件: 全 UI は light / dark の両方で semantic token が読めること（下記「完了前チェック」）。`enableSystem` を true に戻す／OS 追従へ変える場合はこの節を先に更新する（挙動が変わるため）。
+
 ### 優先トークン
 
 - `text-foreground`
