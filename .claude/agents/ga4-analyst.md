@@ -12,6 +12,7 @@ Google Analytics 4 の専任 agent。 fetch (週次 snapshot)、 改善施策計
 
 - GA4 週次 snapshot 取得 (`/fetch-ga4-data`)
 - GA4 改善施策計画 + agent 用詳細記録 (`/ga4-improvement`)
+- **GA4 計装イベント台帳の維持** (`.claude/rules/analytics-event-standards.md` §2)。`apps/web/src/lib/analytics/events.ts` に追加されたイベント/パラメータの登録要否・登録状況を追跡し、GA4 で実登録を確認したら `✅登録済 (日付)` に更新する。effect/* 判定の前に「内訳が (not set) に潰れず取れるか」を確認する（推測で登録済みにしない = `evidence-based-judgment.md`）
 - ~~featured ranking 更新 (`/update-featured-rankings`)~~ → **dead**（完全DBレス移行で D1 `is_featured` 機構が消滅）。featured は現在 git TS `isFeatured`/`featuredOrder` の手動キュレーション。GA4→featured 自動化は要 DBレス再実装 (backlog `[DEAD-SKILL-DBLESS-TRIAGE]`)
 
 ## 担当スキル
