@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  A8 scout 週次パイプライン (日曜 07:00 JST)。ローカル Mac 限定。
+  インストール (人間の明示操作。初回 A8 ログイン + セレクタ調整を済ませてから):
+    cp scripts/scheduled/com.stats47.scout-asp-weekly.plist ~/Library/LaunchAgents/
+    launchctl load ~/Library/LaunchAgents/com.stats47.scout-asp-weekly.plist
+  アンインストール:
+    launchctl unload ~/Library/LaunchAgents/com.stats47.scout-asp-weekly.plist
+-->
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.stats47.scout-asp-weekly</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>/bin/bash</string>
+        <string>/Users/minamidaisuke/stats47/scripts/scheduled/scout-asp-weekly.sh</string>
+    </array>
+    <key>StartCalendarInterval</key>
+    <dict>
+        <key>Weekday</key>
+        <integer>0</integer>
+        <key>Hour</key>
+        <integer>7</integer>
+        <key>Minute</key>
+        <integer>0</integer>
+    </dict>
+    <key>WorkingDirectory</key>
+    <string>/Users/minamidaisuke/stats47</string>
+    <key>StandardOutPath</key>
+    <string>/Users/minamidaisuke/Library/Logs/stats47/scout-asp-weekly.launchd.out</string>
+    <key>StandardErrorPath</key>
+    <string>/Users/minamidaisuke/Library/Logs/stats47/scout-asp-weekly.launchd.err</string>
+    <key>RunAtLoad</key>
+    <false/>
+    <key>ProcessType</key>
+    <string>Background</string>
+</dict>
+</plist>
