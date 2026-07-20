@@ -38,11 +38,15 @@ interface MobileNavDrawerClientProps {
   themes: ThemeNavItem[];
 }
 
+// 並び順・ラベルは desktop ヘッダー (HeaderClient) に揃える:
+// ホーム → ランキング → 都道府県 → 統計ブログ → 地域間比較 → 検索。
+// ラベルは surface 間で nav_label が割れないよう desktop と一致させる
+// (「地域の特徴」→「都道府県」/「ブログ」→「統計ブログ」)。
 const NAV_LINKS = [
   { href: "/", label: "ホーム", icon: Home, color: "bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-400" },
   { href: "/ranking", label: "ランキング", icon: TrendingUp, color: "bg-teal-100 text-teal-600 dark:bg-teal-950 dark:text-teal-400" },
-  { href: "/blog", label: "ブログ", icon: BookOpen, color: "bg-pink-100 text-pink-600 dark:bg-pink-950 dark:text-pink-400" },
-  { href: "/areas", label: "地域の特徴", icon: MapPin, color: "bg-emerald-100 text-emerald-600 dark:bg-emerald-950 dark:text-emerald-400" },
+  { href: "/areas", label: "都道府県", icon: MapPin, color: "bg-emerald-100 text-emerald-600 dark:bg-emerald-950 dark:text-emerald-400" },
+  { href: "/blog", label: "統計ブログ", icon: BookOpen, color: "bg-pink-100 text-pink-600 dark:bg-pink-950 dark:text-pink-400" },
   { href: "/category/population/compare", label: "地域間比較", icon: ArrowLeftRight, color: "bg-blue-100 text-blue-600 dark:bg-blue-950 dark:text-blue-400" },
   { href: "/search", label: "検索", icon: Search, color: "bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-400" },
 ] as const;
@@ -136,6 +140,13 @@ export function MobileNavDrawerClient({ themes }: MobileNavDrawerClientProps) {
                     key={theme.themeKey}
                     href={href}
                     prefetch={false}
+                    onClick={() =>
+                      trackNavClick({
+                        label: theme.title,
+                        href,
+                        surface: "mobile-drawer",
+                      })
+                    }
                     className={cn(
                       "rounded-lg px-3 py-2 text-sm font-medium text-foreground/80 transition-colors hover:bg-accent/60",
                       isActive && "bg-accent text-accent-foreground",
@@ -148,6 +159,13 @@ export function MobileNavDrawerClient({ themes }: MobileNavDrawerClientProps) {
               <Link
                 href="/themes"
                 prefetch={false}
+                onClick={() =>
+                  trackNavClick({
+                    label: "すべてのテーマ",
+                    href: "/themes",
+                    surface: "mobile-drawer",
+                  })
+                }
                 className="mt-1 rounded-lg px-3 py-2 text-sm font-medium text-primary hover:bg-accent/60"
               >
                 すべてのテーマを見る →

@@ -7,6 +7,16 @@ import type { Article } from "../types";
 const R2_PUBLIC_URL =
     process.env.NEXT_PUBLIC_R2_PUBLIC_URL || "https://storage.stats47.jp";
 
+/** ISO 文字列を YYYY.MM.DD へ整形。無効値は null。 */
+function formatCardDate(iso: string | null): string | null {
+    if (!iso) return null;
+    const d = new Date(iso);
+    if (Number.isNaN(d.getTime())) return null;
+    const mm = String(d.getMonth() + 1).padStart(2, "0");
+    const dd = String(d.getDate()).padStart(2, "0");
+    return `${d.getFullYear()}.${mm}.${dd}`;
+}
+
 interface BlogArticleGridProps {
     articles: Article[];
     /** ページ1のとき true → 先頭画像に priority を付与して LCP 最適化 */
@@ -35,11 +45,15 @@ export function BlogArticleGrid({ articles, firstPagePriority = false }: BlogArt
                 // lazy にせず eager で読む (lazy above-fold アンチパターンの解消)。
                 const isLcp = firstPagePriority && index === 0;
                 const isAboveFold = firstPagePriority && index < 4;
+                // 一覧カードはサムネ画像のみだと本文(タイトル/日付)が視認できず、
+                // サムネ内の焼き込み文字だけに依存していた。DOM テキストで
+                // タイトル+更新日を出し、アクセシビリティ/回遊/SEO を担保する。
+                const cardDate = formatCardDate(article.updatedAt ?? article.publishedAt);
                 return (
                     <Link
                         key={article.slug}
                         href={`/blog/${article.slug}`}
-                        className="group block overflow-hidden rounded-none border transition-shadow duration-200 hover:shadow-md"
+                        className="group flex flex-col overflow-hidden rounded-none border transition-shadow duration-200 hover:shadow-md"
                     >
                         <div className="relative aspect-[1200/630] w-full bg-muted overflow-hidden">
                             <ThemeAwareImage
@@ -52,6 +66,19 @@ export function BlogArticleGrid({ articles, firstPagePriority = false }: BlogArt
                                 priority={isLcp}
                                 loading={isLcp ? undefined : isAboveFold ? "eager" : "lazy"}
                             />
+                        </div>
+                        <div className="flex flex-1 flex-col gap-1 p-3">
+                            <p className="line-clamp-2 text-sm font-semibold leading-snug text-foreground">
+                                {article.title}
+                            </p>
+                            {cardDate && (
+                                <time
+                                    dateTime={article.updatedAt ?? article.publishedAt ?? undefined}
+                                    className="mt-auto text-xs text-muted-foreground"
+                                >
+                                    {cardDate}
+                                </time>
+                            )}
                         </div>
                     </Link>
                 );

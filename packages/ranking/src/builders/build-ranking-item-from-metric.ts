@@ -31,6 +31,7 @@ import type {
 
 import type {
   CalculationConfig,
+  FeaturedValue,
   NormalizationOption,
   RankingItem,
   SourceProvenance,
@@ -42,6 +43,8 @@ import type {
 export interface ValuesContext {
   /** 観測がある年コード (4桁) の降順ユニーク配列 */
   yearCodes: string[];
+  /** 最新年の「1 位」(deriveHomeFeaturedValues の featuredTop)。取れなければ null */
+  latestTop?: FeaturedValue | null;
 }
 
 export interface BuildContext {
@@ -190,6 +193,7 @@ export function buildRankingItemFromMetric(
     ...(config.description ? { description: config.description } : {}),
     latestYear,
     availableYears,
+    latestTop: ctx.values?.latestTop ?? null,
     isActive: config.isActive ?? false,
     valueDisplay: buildValueDisplay(config),
     visualization: buildVisualization(config),

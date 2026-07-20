@@ -27,7 +27,11 @@ import {
 import { assertR2WriteAllowed, saveToR2 } from "@stats47/r2-storage/server";
 import { readStatsValues } from "@stats47/stats-r2/readers";
 
-import { buildRankingItemFromMetric } from "../builders/build-ranking-item-from-metric";
+import {
+  buildRankingItemFromMetric,
+  type ValuesContext,
+} from "../builders/build-ranking-item-from-metric";
+import { deriveHomeFeaturedValues } from "../exporters/home-featured";
 import { RANKING_ITEMS_SNAPSHOT_KEY, rankingItemKeyPath } from "../types/snapshot";
 
 import type { RankingItem } from "../types/ranking-item";
@@ -59,9 +63,12 @@ function yearInSpec(yearCode: string, spec: YearSpec): boolean {
   return false;
 }
 
-/** app/stats/<key>/values.json から config.years でフィルタした yearCodes (降順) を得る */
-async function loadYearCodes(config: MetricConfig): Promise<string[] | null> {
-  // 観測値を持たない種別 (計算・外部) は values 無しで latestYear=null にする
+/**
+ * app/stats/<key>/values.json から config.years でフィルタした yearCodes (降順) と、
+ * 最新年の「1 位」(latestTop) を 1 回の read で導出する。追加の R2 fetch は無い。
+ */
+async function loadValuesContext(config: MetricConfig): Promise<ValuesContext | null> {
+  // 観測値を持たない種別 (計算・外部) は values 無しで latestYear/latestTop=null にする
   if (config.source.kind === "calculated") return null;
   try {
     const payload = await readStatsValues(config.key, "prefecture");
@@ -69,7 +76,21 @@ async function loadYearCodes(config: MetricConfig): Promise<string[] | null> {
     const years = [...new Set(payload.rows.map((r) => r.yearCode))]
       .filter((yc) => yearInSpec(yc, config.years))
       .sort((a, b) => parseInt(b, 10) - parseInt(a, 10));
-    return years.length > 0 ? years : null;
+    if (years.length === 0) return null;
+
+    // 最新年の行から「1 位」を導出 (home featured と同一の純関数を再利用)。
+    const latestYear = years[0];
+    const latestRows = payload.rows
+      .filter((r) => r.yearCode === latestYear)
+      .map((r) => ({
+        areaCode: r.areaCode,
+        areaName: r.areaName,
+        value: r.value,
+        rank: r.rank ?? null,
+      }));
+    const latestTop = deriveHomeFeaturedValues(latestRows).featuredTop;
+
+    return { yearCodes: years, latestTop };
   } catch {
     return null;
   }
@@ -110,9 +131,9 @@ async function main() {
 
   // 全件 build (all.json 用に全 RankingItem が要る)
   const items: RankingItem[] = await mapWithConcurrency(metrics, CONCURRENCY, async (config) => {
-    const yearCodes = await loadYearCodes(config);
+    const values = await loadValuesContext(config);
     return buildRankingItemFromMetric(config, {
-      values: yearCodes ? { yearCodes } : null,
+      values,
       now,
       registry,
     });

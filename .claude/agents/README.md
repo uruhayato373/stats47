@@ -2,7 +2,7 @@
 
 `.claude/agents/` に定義されたサブエージェント群。Agent tool の `subagent_type` または直接起動で利用する。
 
-**現在: Phase 1-5 完了 + 2026-07-03 整理、以降の新設含め 50 体 (実ファイル数)**。並行運用最適化のため、ドメイン × フェーズで責務を細分化し、各 agent に「担当 skills / 必読 rules / 触る state」を明示している。旧 17 体のうち `data-pipeline` `db-manager` は Phase 6.7 整理で削除済 (-2)、新 18 agent 追加。差し引き 33 体。**2026-06-21 に ranking 系 4 体 (`ranking-ui-manager` / `ranking-publisher` / `ranking-content-author` / `ranking-content-critic`) を新設 (+4)。2026-07-03 運営総点検で zombie 化した `seo-auditor` を削除し、実ファイルベースで整合。アフィリエイト一元管理の `affiliate-manager` を新設 (+1) → 41 体。その後の各ドメインagent追加を含め、`open-data-curator` (2026-07-18・e-Stat外オープンデータカタログ管理) を加えて現在 50 体。**残る縮退 agent は新 agent に役割委譲済 (Session B で 4 件移動・24 件は責務上維持)。詳細は移行ステータス表。
+**現在: Phase 1-5 完了 + 2026-07-03 整理、以降の新設含め 50 体 (実ファイル数)**。並行運用最適化のため、ドメイン × フェーズで責務を細分化し、各 agent に「担当 skills / 必読 rules / 触る state」を明示している。旧 17 体のうち `data-pipeline` `db-manager` は Phase 6.7 整理で削除済 (-2)、新 18 agent 追加。差し引き 33 体。**2026-06-21 に ranking 系 4 体 (`ranking-ui-manager` / `ranking-publisher` / `ranking-content-author` / `ranking-content-critic`) を新設 (+4)。2026-07-03 運営総点検で zombie 化した `seo-auditor` を削除し、実ファイルベースで整合。アフィリエイト一元管理の `affiliate-manager` を新設 (+1) → 41 体。その後の各ドメインagent追加を含め、`open-data-curator` (2026-07-18・e-Stat外オープンデータカタログ管理)、`site-ux-manager` (2026-07-20・サイト横断UI/IA所有) を加えて現在 51 体。**残る縮退 agent は新 agent に役割委譲済 (Session B で 4 件移動・24 件は責務上維持)。詳細は移行ステータス表。
 
 ## 設計思想
 
@@ -81,7 +81,7 @@
 | `asp-scout` 🆕 | A8.net ブラウザ操作専任 (Playwright: scout/apply/check-approval/harvest)。高単価案件を scoreAndRank→自動申請 (週次上限機械強制)→承認再走査→広告コード取得→parse。判定は決定的コード、意味判断は pending-vertical 解決と UI 変化診断のみ。SSOT 追記・commit/push は affiliate-manager に委譲。skill `/scout-asp`・cron `scout-asp-weekly` (ローカル Mac 限定)。必読 `.claude/rules/affiliate-ads-standards.md` §10 | 2026-07-19 新設 |
 | `coconala-product-manager` 🆕 | ココナラ商品ファクトリー (`packages/product-factory`) 単一所有。型付きカタログ (A-01〜L-07・174件) / ジェネレータ (pptx custGeom地図・xlsx RANK数式・pdf/csv/svg/png) / 生成 (`products:generate --all/--id`) / 検証 (`catalog --check`) / 台帳 (`.claude/state/products/catalog-status.json`) / 出品前チェック (READINESS)。SSOT=git TS 定義 + R2→スナップショット実データ、生成物=`.local` (git管理外)。実データ投入=data-ingester、e-Stat 実在=estat-researcher、実機検証・出品=人間に委譲。必読 `.claude/rules/coconala-product-standards.md` | 2026-07-18 新設 |
 
-## Tier 6: Theme / UI (7 体)
+## Tier 6: Theme / UI (8 体)
 
 | agent | role | 派生元 |
 |---|---|---|
@@ -90,6 +90,7 @@
 | `theme-component-builder` | page_components 監査・編集 (旧 theme-enhancer)。カタログ駆動テーマは catalog TS の charts[] を編集 | リネーム |
 | `theme-ui-manager` 🆕 | テーマページ UI 層の統一・監査・是正 (レイアウト/見出し/セレクタ/カード構成/コピー)。重複セレクタ・古い「地図」コピー等のドリフトを管理 | 2026-06-20 新設 |
 | `ranking-ui-manager` 🆕 | ランキングページ (/ranking/*) UI 層の統一・監査・是正 (レイアウト/見出し/パンくず/サイドバー/SEO構造化データ/コピー)。theme-ui-manager の ranking 版。データ=data-ingester、公開=ranking-publisher に委譲 | 2026-06-21 新設 |
+| `site-ux-manager` 🆕 | サイト横断 UI/IA の統一・監査・是正 (ヘッダー/ナビ IA・モバイルドロワー・ホーム・ブログ/タグ一覧カード・共通 shell・リンクカード taxonomy・右レール構成・UX 計装配線)。ページ内部は各 page manager、GA4 台帳は ga4-analyst に委譲。site-content-layout ベンチマーク駆動 | 2026-07-20 新設 |
 | `chart-component-builder` | shadcn UI + D3.js チャートコンポーネント実装・カタログ管理 (chart-component-standards.md が SSoT)。静的 SVG の chart-author とは別物 (React/D3 実装専任) | 既存 (2026-07-03 Tier 表へ追記・棚卸し漏れ是正) |
 | `ui-reviewer` | melta-ui 準拠 + UI panel review | 既存 |
 | `image-prompt-curator` 🆕 | OGP / note 表紙 / SNS 静止素材プロンプト生成 + 画像資産の棚卸し・ギャラリー監査 (`/audit-ogp-images`) | sns-renderer + note-manager 分離 |
