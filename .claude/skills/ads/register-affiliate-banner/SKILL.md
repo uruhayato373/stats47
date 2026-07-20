@@ -41,6 +41,10 @@ co_agents: [devops-runner]
 
 ### Step 1: コード解析 (ASP 別)
 
+> A8 コードの抽出は `.claude/scripts/ads/lib/a8-code-core.mjs` の `parseA8Code(html)` に関数化済み
+> (自動 scout `/scout-asp` と抽出仕様を共有)。手動でも同関数で {htmlContent, imageUrl, trackingPixelUrl,
+> width, height, adType} を得られる。下表は ASP 別の抽出ルール (A8 は関数化・VC/楽天は手動)。
+
 | ASP | href (クリック) | imageUrl | 計測ピクセル | サイズ |
 |---|---|---|---|---|
 | **A8.net** | `<a href>` (`px.a8.net/...`) | 1つ目 `<img src>` (`www*.a8.net/svt/bgt`) | 2つ目 1×1 `<img src>` (`www*.a8.net/0.gif`) | `<img width/height>` に明記 |

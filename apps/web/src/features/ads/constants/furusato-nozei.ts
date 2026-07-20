@@ -2,6 +2,8 @@ interface FurusatoNozeiLink {
   prefCode: string;          // "01000" 形式
   prefName: string;          // "北海道"
   rakutenAreaSlug: string;   // 楽天エリアページのパス名
+  /** その県の代表的な人気返礼品カテゴリ (楽天検索の絞り込み用)。未設定なら prefName のみで検索。 */
+  signatureKeyword?: string;
 }
 
 /** 47都道府県の楽天ふるさと納税エリアページマッピング */
@@ -56,6 +58,50 @@ const FURUSATO_NOZEI_LINKS: FurusatoNozeiLink[] = [
 ];
 
 /**
+ * 都道府県 → その県で人気の代表的な返礼品カテゴリ (楽天検索を絞り込むキーワード)。
+ * 「その県で最も選ばれる返礼品」を高意図で見せて CTR を上げる。教育的な特産品ではなく
+ * ふるさと納税で実際に売れる signature を採る。検索が 0 件なら prefName のみに自動フォールバック
+ * するため、絞りすぎても既存挙動を壊さない (searchFurusatoItems 参照)。
+ * 大都市など signature が定まらない県は未設定 (prefName のみ)。
+ */
+const FURUSATO_SIGNATURE: Record<string, string> = {
+  "01000": "海鮮", // 北海道: カニ/いくら/ホタテ
+  "02000": "りんご", // 青森
+  "03000": "牛肉", // 岩手: 前沢牛
+  "04000": "牛タン", // 宮城
+  "05000": "米", // 秋田: あきたこまち
+  "06000": "さくらんぼ", // 山形
+  "07000": "桃", // 福島
+  "08000": "メロン", // 茨城
+  "09000": "いちご", // 栃木: とちおとめ
+  "12000": "海鮮", // 千葉
+  "15000": "米", // 新潟: コシヒカリ
+  "18000": "カニ", // 福井: 越前がに
+  "19000": "ぶどう", // 山梨
+  "20000": "りんご", // 長野
+  "21000": "飛騨牛", // 岐阜
+  "22000": "うなぎ", // 静岡
+  "23000": "うなぎ", // 愛知
+  "24000": "松阪牛", // 三重
+  "25000": "近江牛", // 滋賀
+  "28000": "神戸牛", // 兵庫
+  "30000": "みかん", // 和歌山
+  "31000": "カニ", // 鳥取: 松葉がに
+  "33000": "マスカット", // 岡山
+  "34000": "牡蠣", // 広島
+  "35000": "ふぐ", // 山口
+  "37000": "うどん", // 香川
+  "38000": "みかん", // 愛媛
+  "39000": "かつお", // 高知
+  "40000": "明太子", // 福岡
+  "41000": "佐賀牛", // 佐賀
+  "43000": "馬刺し", // 熊本
+  "45000": "宮崎牛", // 宮崎
+  "46000": "うなぎ", // 鹿児島
+  "47000": "マンゴー", // 沖縄
+};
+
+/**
  * areaCode（先頭2桁を都道府県コードとして使用）から
  * 楽天ふるさと納税リンク情報を返す。
  * 全国コード（"00000"）や市区町村コードも先頭2桁で都道府県を特定する。
@@ -64,7 +110,9 @@ const FURUSATO_NOZEI_LINKS: FurusatoNozeiLink[] = [
 export function getFurusatoNozeiLink(areaCode: string): FurusatoNozeiLink | null {
   if (areaCode === "00000") return null;
   const prefCode = `${areaCode.substring(0, 2)}000`;
-  return FURUSATO_NOZEI_LINKS.find((l) => l.prefCode === prefCode) ?? null;
+  const link = FURUSATO_NOZEI_LINKS.find((l) => l.prefCode === prefCode);
+  if (!link) return null;
+  return { ...link, signatureKeyword: FURUSATO_SIGNATURE[prefCode] };
 }
 
 /**

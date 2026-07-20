@@ -89,6 +89,13 @@ async function main() {
   validateExperiments();
   validateVerticals();
 
+  // --validate-only: R2 書き込みをせず検証のみ (append-affiliate-ads.ts の register ゲート用)。
+  // 実行には NODE_OPTIONS='--conditions react-server' が要る (repository が server-only を読むため)。
+  if (process.argv.includes("--validate-only")) {
+    console.log(`✅ affiliate-ads validate-only: ads=${AFFILIATE_ADS.length} (R2 書き込みなし)`);
+    return;
+  }
+
   const snapshot: AffiliateAdsSnapshot = {
     generatedAt: new Date().toISOString(),
     ads: AFFILIATE_ADS,

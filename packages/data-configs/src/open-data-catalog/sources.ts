@@ -6,6 +6,7 @@ import { GSI_HAZARD_DATASETS } from "./datasets/gsi-hazard";
 import { DIGITAL_AGENCY_ODS_DATASETS } from "./datasets/digital-agency-ods";
 import { MAFF_REGIONAL_DATASETS } from "./datasets/maff";
 import { JFLEC_DATASETS } from "./datasets/jflec";
+import { NIER_DATASETS } from "./datasets/nier";
 
 /**
  * source カタログ (初期 13 source)。
@@ -226,6 +227,26 @@ export const OPEN_DATA_SOURCES: readonly OpenDataSource[] = [
       "金融リテラシー調査 (2016/2019/2022/2025・3年周期)。ウェブサイト運営方針で商用引用・使用は" +
       "「調査データは除く」と明記 (=調査データは商用利用可、出所明示必須)。e-Stat 未掲載。" +
       "xlsx を直接解析し47都道府県別シート・比較表の実在を確認済み (jflec.ts 参照)",
+  },
+  {
+    id: "nier-gakuryoku-chousa",
+    name: "全国学力・学習状況調査",
+    publisher: "文部科学省 / 国立教育政策研究所 (NIER)",
+    kind: "government-portal",
+    homepageUrl: "https://www.nier.go.jp/kaihatsu/zenkokugakuryoku.html",
+    catalogUrl: "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/prefecture_city.html",
+    termsUrl: "https://www.mext.go.jp/b_menu/1351168.htm",
+    isOfficial: true,
+    status: "partially-verified",
+    lastVerifiedAt: "2026-07-20",
+    datasetIds: ids(NIER_DATASETS),
+    notes:
+      "教科正答率 (国語/算数・数学) + 児童生徒質問紙 (朝食・読書・宿題・地域行事参加・ネット利用・通塾・" +
+      "学校外学習・通学時間等の生活習慣) を47都道府県・指定都市別に xlsx 分散配布 (県コード+ローマ字の" +
+      "URL パターン)。2007年度〜毎年実施 (令和2年度=2020年は新型コロナで中止・欠測)。都道府県別全量は" +
+      "令和7年度(2025)が最新 (令和8年度=2026は全国平均のみ2026-07-16公表、県別factsheet未公開)。" +
+      "NIER著作権ページがMEXTウェブサイト利用規約(政府標準利用規約2.0・CC BY 4.0互換)に従う旨明記→" +
+      "商用利用可・出典表示必須・加工時表示必須。e-Stat 未掲載",
   },
 ];
 

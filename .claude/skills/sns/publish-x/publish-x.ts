@@ -35,7 +35,10 @@ import budget from "../../../scripts/sns/check-x-post-budget.cjs";
 
 // ─── 設定 ──────────────────────────────────────────
 const PROJECT_ROOT = path.resolve(__dirname, "../../../..");
-const PROFILE_DIR = path.join(PROJECT_ROOT, ".local/playwright-x-profile");
+// ログインプロファイルはメインチェックアウト固定で共有する（worktree から実行しても再ログイン
+// 不要にするため。debug/drafts は worktree ローカルのまま）。docs/01_技術設計/playwright-auth-profiles.md
+const PROFILE_ROOT = "/Users/minamidaisuke/stats47";
+const PROFILE_DIR = path.join(PROFILE_ROOT, ".local/playwright-x-profile");
 const DEBUG_DIR = path.join(PROJECT_ROOT, ".local/playwright-x-debug");
 
 let IS_DRY_RUN = false;

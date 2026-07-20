@@ -15,7 +15,10 @@ import { chromium, type Page } from "playwright";
 import store from "../lib/sns-posts-store.cjs";
 
 const PROJECT_ROOT = path.resolve(__dirname, "../../..");
-const PROFILE_DIR = path.join(PROJECT_ROOT, ".local/playwright-ig-profile");
+// ログインプロファイルはメインチェックアウト固定で共有する（worktree 実行時の再ログイン防止）。
+// docs/01_技術設計/playwright-auth-profiles.md
+const PROFILE_ROOT = "/Users/minamidaisuke/stats47";
+const PROFILE_DIR = path.join(PROFILE_ROOT, ".local/playwright-ig-profile");
 
 const args = process.argv.slice(2);
 const DRY = args.includes("--dry-run");

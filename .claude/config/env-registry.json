@@ -602,6 +602,13 @@
       ]
     },
     {
+      "name": "NODE_OPTIONS",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
       "name": "OGP_DEBUG",
       "visibility": "server",
       "contexts": [

@@ -24,8 +24,10 @@ export async function FurusatoNozeiCard({ areaCode }: FurusatoNozeiCardProps) {
   const affiliateId = process.env.NEXT_PUBLIC_RAKUTEN_AFFILIATE_ID;
   const areaPageUrl = buildFurusatoNozeiUrl(link.rakutenAreaSlug, affiliateId);
 
-  // API で返礼品を取得（APIキー未設定時は空配列）
-  const items = await searchFurusatoItems(link.prefName, 4);
+  // API で返礼品を取得（APIキー未設定時は空配列）。県の代表返礼品で高意図検索 (0件なら県名のみに fallback)。
+  const items = await searchFurusatoItems(link.prefName, 4, link.signatureKeyword);
+  // 県別 CTR 計測用 ad_id (ad_id custom dimension 経由で県別のふるさと納税成果を追える)。
+  const furusatoAdId = `furusato-${link.rakutenAreaSlug}`;
 
   // API 結果がある場合: 動的カード
   if (items.length > 0) {
@@ -36,6 +38,7 @@ export async function FurusatoNozeiCard({ areaCode }: FurusatoNozeiCardProps) {
           <TrackedAffiliateLink
             href={areaPageUrl}
             category="furusato"
+            adId={furusatoAdId}
             label={`${link.prefName}のふるさと納税一覧`}
             position="sidebar"
             className="text-[10px] text-red-500 hover:underline flex items-center gap-0.5"
@@ -61,6 +64,7 @@ export async function FurusatoNozeiCard({ areaCode }: FurusatoNozeiCardProps) {
                 key={item.itemUrl}
                 href={linkUrl}
                 category="furusato"
+                adId={furusatoAdId}
                 label={item.itemName}
                 position="sidebar-item"
                 className={getSurfaceCardClassName({
@@ -109,6 +113,7 @@ export async function FurusatoNozeiCard({ areaCode }: FurusatoNozeiCardProps) {
       <TrackedAffiliateLink
         href={areaPageUrl}
         category="furusato"
+        adId={furusatoAdId}
         label={`${link.prefName}のふるさと納税`}
         position="sidebar"
         className={getSurfaceCardClassName({

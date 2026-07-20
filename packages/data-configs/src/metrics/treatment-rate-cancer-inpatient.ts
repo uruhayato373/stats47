@@ -8,9 +8,12 @@ export const treatmentRateCancerInpatient: MetricConfig = {
   "unit": "人（人口10万対）",
   "category": "socialsecurity",
   "source": {
-    "kind": "external",
-    "fetcherKey": "estat",
-    "config": {},
+    "kind": "estat",
+    "statsDataId": "0004026105",
+    "cdCat01": "8",
+    "cdCat03": "1",
+    "displayName": "患者調査 第37表 傷病分類別受療率（がん（悪性新生物）・入院）",
+    "url": "https://www.e-stat.go.jp/dbview?sid=0004026105",
   },
   "entities": [
     "prefecture",

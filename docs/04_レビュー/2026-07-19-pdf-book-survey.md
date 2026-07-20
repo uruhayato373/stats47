@@ -133,8 +133,40 @@ e-Stat 非搭載が CI で確定した 4 系統 + 既評価 2 源について、
 ## 次アクション
 
 - **Phase 1 (完了)**: 本レポート + `docs/todo/03_指標バックログ.md` への metric 候補追記
-- **Phase 2**: カタログ A の 4 系統を estat-researcher 検証 → 需要のあるものから data-ingester 投入 → ranking-publisher 公開
-- **Phase 3**: カタログ B を open-data-curator でカタログ化
-- **Phase 4**: カタログ C を既存ブログフロー (article-writer → quality-gate → blog-critic) で記事化。metric 不要トピックは Phase 2 を待たず着手可
+- **Phase 2 (完了・一部 CI 待ち)**: 下記実装ログ参照
+- **Phase 3 (完了)**: NIER をカタログ化 (J-FLEC は既登録)
+- **Phase 4 (第1波 完了)**: ブログ5本 (全て critic PASS)。残りトピックは第2波
 
 計画全文: `~/.claude/plans/pdf-ui-stats47-tidy-teacup.md`
+
+---
+
+## 実装ログ (2026-07-20)
+
+### metric 投入 (commit `dd7e867f`・19指標)
+| 系統 | 件数 | 出典 | 検算 | R2 | 公開 |
+|---|---|---|---|---|---|
+| 生活時間 (睡眠/家事/食事/休養×男女) | 8 | 社会生活基本調査 SSDS `0000010113` (cdCat01=CIキャッシュ実測 verified) | — | **CI 待ち** (APP_ID は CI 専任) | 未 |
+| 遊技店密度 (ぱちんこ店舗数/万人) | 1 | 全日遊連 HTML (原典=警察庁) | ✅ 全国計 6,464軒 一致 (1位鹿児島) | ✅ 投入済 | 未 |
+| 中学部活 100人あたり部員数 | 10競技 | 中体連 PDF 令和7年度 | ✅ 全19競技 全国計一致 (意外な1位=サッカー部茨城6.94・書籍と一致) | ✅ 投入済 | 未 |
+
+- 遊技/中体連は `fetcherKey:"manual"` + provenance 9点セット完備 (`validate:config` error 0)。ライセンス明文未確定は provenance/source に正直記録 (オーナー判断「数値=事実として取り込む」・出典明記・問題時取り下げ)。
+- **公開 (KNOWN_RANKING_KEYS/SITEMAP 再生成 + deploy) は未実施**。生活時間は先に CI で R2 投入 (`gh workflow run data-refresh.yml` 系 or `estat-meta-run` ブランチ経由) が必要。
+
+### カタログ B 登録 (commit `b6a088b9`)
+- NIER 全国学力・学習状況調査を open-data-catalog に登録 (教科正答率 + 質問紙生活習慣の2データセット・政府標準利用規約2.0=商用可)。取り込み (47分散xlsx パース) は別工程。
+
+### ブログ第2波 (commit `0446e9d3`・5本・全て blog-critic PASS・published:false)
+| slug | 型 | 使用 metric | critic |
+|---|---|---|---|
+| real-disposable-income-reversal | D | 県民所得/物価地域差/家賃/可処分所得 | PASS |
+| heating-cost-vs-disposable-income | D | 灯油/電気/都市ガス/実質可処分所得 | PASS (再critic後・真因を都市ガス代に訂正) |
+| black-tea-income-gap | D2 | 紅茶支出/購入量/年収 (+緑茶/コーヒー) | PASS (D2補強済) |
+| tutoring-cost-university-advancement-gap | B | 補習教育費/進学率/学習行動者率 | PASS |
+| unhealthy-period-gender-prefecture-gap | C | 健康寿命/平均寿命/0歳平均余命 | PASS (再critic後・既存記事と差別化+算術訂正) |
+
+- **公開 (published:true + blog-auto-publish.yml) は未実施** (デプロイ確認待ち)。
+
+### 残り (第2波以降)
+- ブログ: ぎょうざ/納豆バトル (gyoza=冷凍支出のみ・要データ補完)、経済×健康の外れ値 (受療率不在・代替可)、乳がん複合要因 (専用 metric 不在)、遊技/中体連 metric を使った記事 (metric 公開後)。
+- NIER 学力テスト/生活習慣の取り込み (47分散 xlsx パイプライン新設)。

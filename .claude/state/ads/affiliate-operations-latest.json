@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-07-14T22:36:00.712Z",
+  "generatedAt": "2026-07-19T14:23:44.721Z",
   "inventorySnapshot": ".claude/state/ads/inventory-latest.json",
-  "ga4Snapshot": ".claude/state/ads/ga4-affiliate-2026-07-12.json",
+  "ga4Snapshot": ".claude/state/ads/ga4-affiliate-2026-07-19.json",
   "freshness": {
     "inventoryDays": 0,
-    "ga4Days": 2
+    "ga4Days": 0
   },
   "measurementGate": {
     "status": "ready",
@@ -57,8 +57,8 @@
     }
   ],
   "ga4Totals": {
-    "impressions": 10122,
-    "clicks": 10,
-    "ctr": 0.0009879470460383323
+    "impressions": 11348,
+    "clicks": 9,
+    "ctr": 0.0007930912936200212
   }
 }

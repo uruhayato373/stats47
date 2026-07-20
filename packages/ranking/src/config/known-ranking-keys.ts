@@ -15,7 +15,7 @@
  *                 必ず git commit してからデプロイ。
  *
  * 最終生成日: 2026-07-19
- * 件数: 2188
+ * 件数: 2199
  */
 export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "abandoned-cultivated-land-area",
@@ -953,6 +953,16 @@ export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "junior-college-count",
   "junior-college-count-per-100k",
   "junior-college-new-graduates-unemployment-rate",
+  "junior-high-club-per100-badminton",
+  "junior-high-club-per100-baseball-soft",
+  "junior-high-club-per100-basketball",
+  "junior-high-club-per100-kendo",
+  "junior-high-club-per100-soccer",
+  "junior-high-club-per100-soft-tennis",
+  "junior-high-club-per100-swimming",
+  "junior-high-club-per100-table-tennis",
+  "junior-high-club-per100-track-and-field",
+  "junior-high-club-per100-volleyball",
   "junior-high-school-advancement-rate",
   "junior-high-school-classes",
   "junior-high-school-count",
@@ -1409,6 +1419,7 @@ export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "owner-occupied-housing-ratio",
   "oyster-consumption-expenditure",
   "oyster-consumption-quantity",
+  "pachinko-shop-density-per-10k",
   "paid-nursing-home-capacity-per-1000-65plus",
   "paid-nursing-home-count-per-100k-65plus",
   "paid-nursing-home-residents-per-1000-65plus",

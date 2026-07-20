@@ -39,6 +39,7 @@ export function AffiliateTextAdList({
           category={affiliateCategory ?? "other"}
           label={ad.title}
           position={position}
+          adId={ad.id}
         >
           <div
             className={`relative rounded-none border ${theme?.border ?? "border-border"} ${theme?.bg ?? "bg-muted/50"} p-4`}
@@ -51,6 +52,7 @@ export function AffiliateTextAdList({
               category={affiliateCategory ?? "other"}
               label={ad.title}
               position={position}
+              adId={ad.id}
               className={getSurfaceCardClassName({
                 interactive: true,
                 className: "flex items-center justify-between gap-3 px-4 py-3",

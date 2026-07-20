@@ -1,0 +1,104 @@
+name: 🔎 Provenance Audit (weekly)
+
+# データ出典・再現性 (provenance) を週次で全量機械監査する。
+# pre-commit/CI は staged 差分だけを見るため、全 metric/blog/theme の定期全量チェックは本 workflow が担う。
+# 検知は決定的スクリプト (registry 分類 + validator、LLM 不使用)。自動修復はしない
+# (provenance backfill は fetcher コードからの出典復元=agent 判断が要るため、残存は Issue で人/agent へ)。
+# 正典: .claude/rules/data-provenance-standards.md / skill: /audit-provenance
+
+on:
+  schedule:
+    - cron: "0 19 * * 6" # 土 19:00 UTC = 日 04:00 JST (他 cron と非重複)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: provenance-audit
+  cancel-in-progress: false
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: 🧰 Checkout develop
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        with:
+          ref: develop
+          fetch-depth: 0
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 📋 Rebuild provenance queue (全 metric 分類)
+        run: npx tsx .claude/scripts/provenance/audit-provenance-queue.ts
+
+      - name: 🔍 Full validators (全量・pre-commit は差分のみ)
+        id: check
+        run: |
+          set +e
+          RC=0
+          echo "=== validate:config (provenance/calc-ref 含む) ==="
+          npm run validate:config --workspace=@stats47/data-configs 2>&1 | tee /tmp/prov-config.log
+          CONFIG_RC="${PIPESTATUS[0]}"
+          if [ "$CONFIG_RC" -ne 0 ]; then RC=1; fi
+          echo "=== validate:catalog (theme selection) ==="
+          npm run validate:catalog --workspace=@stats47/data-configs 2>&1 | tee /tmp/prov-catalog.log || true
+          echo "=== validate:area-databook ==="
+          npm run validate:area-databook --workspace=@stats47/data-configs 2>&1 | tee /tmp/prov-area.log || true
+          echo "=== validate:open-data-catalog ==="
+          npm run validate:open-data-catalog --workspace=@stats47/data-configs 2>&1 | tee /tmp/prov-opendata.log || true
+          # D クラス件数を state から拾う
+          DCLASS=$(node -e "const d=require('./.claude/state/provenance/queue.json'); console.log((d.byClass&&d.byClass.D)||0)")
+          echo "dclass=$DCLASS" >> "$GITHUB_OUTPUT"
+          echo "config_rc=$RC" >> "$GITHUB_OUTPUT"
+
+      - name: 📤 Commit provenance state to develop
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .claude/state/provenance/queue.json .claude/state/provenance/LATEST.md
+          if git diff --cached --quiet; then
+            echo "No provenance state changes"
+            exit 0
+          fi
+          git commit -m "chore(provenance): weekly audit state $(date -u +%Y-%m-%d) [skip ci]"
+          git pull --rebase --autostash origin develop || true
+          git push origin develop
+
+      - name: 🚨 Open issue on validator error
+        if: steps.check.outputs.config_rc != '0'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          DATE=$(date -u +%Y-%m-%d)
+          TITLE="[Provenance Alert] 出典・再現性 lint の error"
+          {
+            echo "## Provenance 週次監査 ($DATE)"
+            echo ""
+            echo "validate:config が provenance/calc-ref 系 error を検出しました。"
+            echo "手動抽出 metric の provenance 欠落、または計算系の参照先 metric 不在の可能性があります。"
+            echo ""
+            echo '```'
+            grep -E "\[provenance\]|\[calc-ref\]|内訳|error" /tmp/prov-config.log | head -40
+            echo '```'
+            echo ""
+            echo "是正: /audit-provenance skill / 正典 .claude/rules/data-provenance-standards.md"
+            echo "現況: .claude/state/provenance/LATEST.md (D クラス ${{ steps.check.outputs.dclass }} 件)"
+          } > /tmp/prov-issue.md
+          gh label create provenance-alert --description "出典・再現性 lint の error (週次監査)" --color "d93f0b" --force 2>/dev/null || true
+          EXISTING=$(gh issue list --state open --label provenance-alert --search "\"[Provenance Alert]\" in:title" --json number --jq '.[0].number // empty')
+          if [ -n "$EXISTING" ]; then
+            gh issue comment "$EXISTING" --body-file /tmp/prov-issue.md
+          else
+            gh issue create --title "$TITLE" --label "provenance-alert,auto-generated" --body-file /tmp/prov-issue.md
+          fi

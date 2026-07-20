@@ -13,12 +13,16 @@ import {
 import type { AffiliateLocationCode } from "../types";
 
 export interface ResolvedAffiliateAd {
+  /** 広告 1 件単位の識別子 (AffiliateAd.id)。案件別 CTR 計測 (GA4 ad_id) 用 */
+  id: string;
   title: string;
   href: string;
   trackingPixelUrl?: string | null;
 }
 
 export interface ResolvedAffiliateBanner {
+  /** 広告 1 件単位の識別子 (AffiliateAd.id)。案件別 CTR 計測 (GA4 ad_id) 用 */
+  id: string;
   title: string;
   href: string;
   imageUrl: string;
@@ -33,6 +37,8 @@ export interface ResolvedAffiliateBanner {
  * banner は imageUrl あり、text は imageUrl=null。
  */
 interface ResolvedAffiliateVariant {
+  /** 広告 1 件単位の識別子 (AffiliateAd.id)。案件別 CTR 計測 (GA4 ad_id) 用 */
+  id: string;
   experimentId: string;
   variantId: string;
   weight: number;
@@ -63,6 +69,7 @@ function verticalsFromTagKeys(tagKeys: string[]): AffiliateVertical[] {
 }
 
 function toBanner(b: {
+  id: string;
   title: string;
   htmlContent: string;
   imageUrl: string | null;
@@ -73,6 +80,7 @@ function toBanner(b: {
   // imageUrl は必須。trackingPixelUrl は任意 (ValueCommerce 等は別ピクセルを持たない)。
   if (!b.imageUrl) return null;
   return {
+    id: b.id,
     title: b.title,
     href: b.htmlContent,
     imageUrl: b.imageUrl,
@@ -93,7 +101,12 @@ export async function resolveAffiliateAd(
   if (!vertical) return null;
   const dbAd = await findActiveTextAdByVertical(vertical, locationCode);
   if (!dbAd) return null;
-  return { title: dbAd.title, href: dbAd.htmlContent, trackingPixelUrl: dbAd.trackingPixelUrl };
+  return {
+    id: dbAd.id,
+    title: dbAd.title,
+    href: dbAd.htmlContent,
+    trackingPixelUrl: dbAd.trackingPixelUrl,
+  };
 }
 
 /**
@@ -109,6 +122,7 @@ export async function resolveAffiliateTextAds(
   if (!vertical) return [];
   const ads = await findActiveTextAdsByVerticals([vertical], locationCode, limit, rankingKey);
   return ads.map((ad) => ({
+    id: ad.id,
     title: ad.title,
     href: ad.htmlContent,
     trackingPixelUrl: ad.trackingPixelUrl,
@@ -136,7 +150,12 @@ export async function resolveAffiliateTextAdsByTagKeys(
   for (const ad of ads) {
     if (seen.has(ad.title)) continue;
     seen.add(ad.title);
-    unique.push({ title: ad.title, href: ad.htmlContent, trackingPixelUrl: ad.trackingPixelUrl });
+    unique.push({
+      id: ad.id,
+      title: ad.title,
+      href: ad.htmlContent,
+      trackingPixelUrl: ad.trackingPixelUrl,
+    });
     if (unique.length >= limit) break;
   }
   return unique;
@@ -207,6 +226,7 @@ export async function resolveExperimentVariantsByCategoryKey(
       const creativeSize =
         adType === "banner" && r.width && r.height ? `${r.width}x${r.height}` : "text";
       return {
+        id: r.id,
         experimentId: r.experimentId as string,
         variantId: r.variantId as string,
         weight: r.weight ?? 1,

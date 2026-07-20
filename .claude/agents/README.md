@@ -29,8 +29,8 @@
 | agent | role | 派生元 |
 |---|---|---|
 | `estat-researcher` 🆕 | e-Stat / MLIT DPF 探索・メタ確認 (DB には触らない) | data-pipeline 分割 |
-| `open-data-curator` 🆕 | e-Stat外の政府・自治体データ源をsource/dataset単位で棚卸しし、取得方式・粒度・GIS・ライセンス・更新性・stats47適合性のgit TSカタログを排他管理。実取得・投入は既存ownerへ委譲 | 2026-07-18 新設 |
-| `data-ingester` 🆕 | metrics 登録 + stats_* 投入 + 47県カバレッジ検証 (GIS は gis-* に委譲) | data-pipeline + db-manager 分割 |
+| `open-data-curator` 🆕 | e-Stat外の政府・自治体データ源をsource/dataset単位で棚卸しし、取得方式・粒度・GIS・ライセンス・更新性・stats47適合性のgit TSカタログを排他管理。**+ provenance 監査オーナー** (全 metric の出典・再現性を `/audit-provenance` で棚卸し、クラス B/C/D を是正。正典 data-provenance-standards.md)。実取得・投入は既存ownerへ委譲 | 2026-07-18 新設・2026-07-19 provenance 監査追加 |
+| `data-ingester` 🆕 | metrics 登録 + stats_* 投入 + 47県カバレッジ検証 (GIS は gis-* に委譲)。**非 e-Stat 投入時は provenance 9点セット必須** (data-provenance-standards.md) | data-pipeline + db-manager 分割 |
 | `db-schema-manager` 🆕 | スキーマ・migration・reset 専任 | db-manager 分割 |
 | `snapshot-exporter` 🆕 | D1 → R2 snapshot / Remotion 派生 JSON 生成 | db-manager 分割 |
 | `r2-publisher` 🆕 | R2 push / pull / du 専任 | db-manager 分割 |
@@ -77,7 +77,8 @@
 | `ga4-analyst` 🆕 | GA4 専任 | seo-auditor 分割 |
 | `performance-auditor` 🆕 | PSI / Lighthouse / Cloudflare cost | seo-auditor 分割 |
 | `adsense-analyst` 🆕 | AdSense 収益計測 + アフィ収益の計測協働 (在庫管理は affiliate-manager に移管) | seo-auditor 分割 + new |
-| `affiliate-manager` 🆕 | アフィリエイト一元管理 (SSOT=`affiliate-{ads,direct-placements}-data.ts` 在庫 CRUD / サイズ・プログラム規約 / priority 整合 / compliance 監査 `/audit-affiliate-compliance` / 実験 `/manage-affiliate-experiment` / 集約 state `affiliate-operations-latest.json` / publish 段取り)。計測は adsense/ga4、effect は improvement-triage に委譲。必読 `.claude/rules/affiliate-ads-standards.md` | 2026-06-30 新設 (adsense-analyst 分離)・2026-07-15 運用 SSOT 移行で拡張 |
+| `affiliate-manager` 🆕 | アフィリエイト一元管理 (SSOT=`affiliate-{ads,direct-placements}-data.ts` 在庫 CRUD / サイズ・プログラム規約 / priority 整合 / compliance 監査 `/audit-affiliate-compliance` / 実験 `/manage-affiliate-experiment` / 集約 state `affiliate-operations-latest.json` / publish 段取り / A8 自動 scout の register 段=SSOT 排他 writer)。計測は adsense/ga4、effect は improvement-triage、A8 ブラウザ操作は asp-scout に委譲。必読 `.claude/rules/affiliate-ads-standards.md` | 2026-06-30 新設 (adsense-analyst 分離)・2026-07-15 運用 SSOT 移行で拡張 |
+| `asp-scout` 🆕 | A8.net ブラウザ操作専任 (Playwright: scout/apply/check-approval/harvest)。高単価案件を scoreAndRank→自動申請 (週次上限機械強制)→承認再走査→広告コード取得→parse。判定は決定的コード、意味判断は pending-vertical 解決と UI 変化診断のみ。SSOT 追記・commit/push は affiliate-manager に委譲。skill `/scout-asp`・cron `scout-asp-weekly` (ローカル Mac 限定)。必読 `.claude/rules/affiliate-ads-standards.md` §10 | 2026-07-19 新設 |
 | `coconala-product-manager` 🆕 | ココナラ商品ファクトリー (`packages/product-factory`) 単一所有。型付きカタログ (A-01〜L-07・174件) / ジェネレータ (pptx custGeom地図・xlsx RANK数式・pdf/csv/svg/png) / 生成 (`products:generate --all/--id`) / 検証 (`catalog --check`) / 台帳 (`.claude/state/products/catalog-status.json`) / 出品前チェック (READINESS)。SSOT=git TS 定義 + R2→スナップショット実データ、生成物=`.local` (git管理外)。実データ投入=data-ingester、e-Stat 実在=estat-researcher、実機検証・出品=人間に委譲。必読 `.claude/rules/coconala-product-standards.md` | 2026-07-18 新設 |
 
 ## Tier 6: Theme / UI (7 体)

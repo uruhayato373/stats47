@@ -37,6 +37,8 @@ function argVal(flag) {
   const i = args.indexOf(flag);
   return i !== -1 ? args[i + 1] : null;
 }
+/** --full: 各次元の全項目を sampleValues に格納 (cdCat コード確定用。既定は先頭12件) */
+const FULL = args.includes("--full");
 
 let statsDataIds = [];
 const listPath = argVal("--list");
@@ -87,9 +89,8 @@ async function fetchMeta(statsDataId) {
       id: co["@id"], // cat01 / area / time / cat02 ...
       name: co["@name"],
       valueCount: values.length,
-      // 値のサンプル (先頭8 + 「総数」を含むもの)。キュレーション判断用
-      sampleValues: values
-        .slice(0, 12)
+      // 値のサンプル (先頭12)。--full 指定時は全項目 (cdCat コード確定用)。
+      sampleValues: (FULL ? values : values.slice(0, 12))
         .map((v) => ({ code: v["@code"], name: v["@name"], unit: v["@unit"] ?? null })),
       hasTotal: values.some((v) => /総数|全体|計$/.test(v["@name"] ?? "")),
     };

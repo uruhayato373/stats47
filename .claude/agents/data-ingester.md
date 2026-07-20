@@ -41,6 +41,7 @@ Phase 6 (2026-05-27) の D1 → R2 移行後、本 agent は D1 stats_* テー�
 - `.claude/rules/data-sqlite-ssot.md` — TS-config = SSOT / R2 = 値の SSOT / D1 = cache
 - `.claude/rules/estat-api.md` — 全年度取得 + メモリフィルタ、5 桁地域コード
 - `.claude/rules/metric-config-standards.md` — MetricConfig フィールド役割 / category 17 軸 / 量産後 validate:config
+- `.claude/rules/data-provenance-standards.md` — **非 e-Stat (手動/PDF/xlsx/HTML) 投入時は provenance 9点セット必須**。`fetcherKey:"manual"` は config.source.config.provenance に {pdfUrl/url, accessedAt, extraction, verification, restore} を記録 (欠落は `validate:config` の `[provenance]` error)。手本 `ambulance-hospital-arrival-time.ts`。出典なし (config 空) 投入は禁止
 - `.claude/rules/r2-storage-design.md` — `app/stats/` namespace 設計
 - `.claude/rules/branch-workflow.md` — DB 変更後フロー (R2 経由本番反映)
 - `.claude/rules/local-environment.md` — ローカル D1 パス固定値

@@ -26,6 +26,7 @@ A8.net 等アフィリエイト広告の **意図軸 (vertical)・在庫・配�
 - **実験管理** (`/manage-affiliate-experiment`) — クリエイティブ A/B の plan/start/observe/decide/close。registry (`.claude/state/ads/experiments.json`) に停止条件を事前固定し、判定 (collecting / ready-to-decide / inconclusive / invalid) はスクリプトに委ねる。**勝者の自動反映は禁止** (decide は人間へ提示まで)。
 - **SSOT vertical 移行** — Step A (infra: 解決を vertical 化・完了) → **Step B (本番確認後: 全広告に真の vertical を付与し複製を削除、74→約40件)** を段取る。
 - **publish 段取り** — develop push で `publish-affiliate-ads.yml` を発火させる手順管理 (実行可否はユーザー確認)。
+- **A8 自動 scout の SSOT 追記 (排他 writer)** — `asp-scout` が harvest した案件を SSOT に登録する終端を単一所有する。`append-affiliate-ads.ts --apply` (tsc/audit/export/compliance の 4 ゲート) で `affiliate-ads-data.ts` に追記 → `a8-catalog.json` の該当 entry を registered に昇格 → 両ファイルを同一 commit で develop に push (outward-facing・実行前に確認)。ブラウザ操作 (scout/apply/harvest) には踏み込まない (`asp-scout` の領域)。正典: `.claude/rules/affiliate-ads-standards.md` §10。
 
 ## 担当スキル
 
@@ -35,9 +36,11 @@ A8.net 等アフィリエイト広告の **意図軸 (vertical)・在庫・配�
 | `/affiliate-improvement` | 在庫管理・dashboard・imp/click/CTR 改善ループ |
 | `/audit-affiliate-compliance` | PR 表記・孤立配置・リンク整合・canonical サイズの決定的監査 |
 | `/manage-affiliate-experiment` | クリエイティブ A/B 実験の plan/start/observe/decide/close |
+| `/scout-asp` (co) | A8 自動 scout の register 段 + commit/push を担当 (ブラウザ操作は `asp-scout`) |
 
 ## 担当外 (委譲)
 
+- A8 ブラウザ操作 (scout/apply/harvest・提携申請) → `asp-scout` (`/scout-asp`)
 - AdSense 計測・改善 → `adsense-analyst`
 - imp/click/CTR の実測値取得 → `ga4-analyst` / `adsense-analyst`
 - effect/* 判定・改善ログ status 更新 → `improvement-triage`

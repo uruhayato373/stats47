@@ -8,9 +8,12 @@ export const treatmentRateArthrosisOutpatient: MetricConfig = {
   "unit": "人（人口10万対）",
   "category": "socialsecurity",
   "source": {
-    "kind": "external",
-    "fetcherKey": "estat",
-    "config": {},
+    "kind": "estat",
+    "statsDataId": "0004026105",
+    "cdCat01": "44",
+    "cdCat03": "4",
+    "displayName": "患者調査 第37表 傷病分類別受療率（関節症・外来）",
+    "url": "https://www.e-stat.go.jp/dbview?sid=0004026105",
   },
   "entities": [
     "prefecture",

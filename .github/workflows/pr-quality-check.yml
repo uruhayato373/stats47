@@ -391,7 +391,10 @@ jobs:
                 3. Extract and open \`coverage/index.html\` in your browser
                 </details>`;
 
-                github.rest.issues.createComment({
+                // await 必須: 未await だと 503 等の reject が try/catch を素通りして
+                // unhandled rejection になり、cosmetic なコメント投稿の失敗で job 全体が落ちる
+                // (2026-07-20 GitHub API 503 障害で Unit Tests が誤って fail した事例)。
+                await github.rest.issues.createComment({
                   issue_number: context.issue.number,
                   owner: context.repo.owner,
                   repo: context.repo.repo,

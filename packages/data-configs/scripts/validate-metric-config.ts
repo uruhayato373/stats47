@@ -24,6 +24,7 @@ import { dirname, resolve, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { CATEGORY_KEYS } from "../src/types";
+import { METRICS_REGISTRY } from "../src/registry";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const METRICS_DIR = resolve(__dirname, "../src/metrics");
@@ -187,6 +188,87 @@ function main() {
         errors.push(`${msg} のまま isActive:true (本番配信対象)`);
       } else {
         warns.push(`${msg} (isActive:false のため warn)`);
+      }
+    }
+  }
+
+  // ── provenance (出典・再現性) 検査 ──
+  // 正規表現でなく registry の型付きオブジェクトで nested config を堅牢に読む。
+  // 正典: .claude/rules/data-provenance-standards.md
+  const registryKeys = new Set(Object.keys(METRICS_REGISTRY));
+  for (const [key, cfg] of Object.entries(METRICS_REGISTRY)) {
+    const src = cfg.source as
+      | {
+          kind?: string;
+          fetcherKey?: string;
+          config?: Record<string, unknown>;
+          url?: string;
+        }
+      | undefined;
+    const isActive = cfg.isActive === true;
+
+    if (src?.kind === "external") {
+      const fk = src.fetcherKey;
+      const conf = (src.config ?? {}) as Record<string, unknown>;
+      const prov = conf.provenance as Record<string, unknown> | undefined;
+
+      // [provenance] 手動抽出 (manual) は復元に足る provenance が必須
+      if (fk === "manual") {
+        const hasLocator = Boolean(prov?.pdfUrl || prov?.url);
+        const missing = [
+          !hasLocator && "url/pdfUrl",
+          !prov?.accessedAt && "accessedAt",
+          !prov?.extraction && "extraction",
+          !prov?.verification && "verification",
+          !prov?.restore && "restore",
+        ].filter(Boolean);
+        if (missing.length > 0) {
+          const msg = `[provenance] ${key}: 手動抽出(manual)だが provenance 不足 (欠落: ${missing.join(", ")})`;
+          if (isActive) errors.push(`${msg} ・isActive:true`);
+          else warns.push(`${msg} (isActive:false のため warn)`);
+        }
+      } else {
+        // [provenance-thin] 機械再取得キーも provenance も無い external を可視化 (warn)
+        // calculated (親から再計算可能・calc-ref が resolvable) は除外
+        const calcObj = cfg.calculation as Record<string, unknown> | undefined;
+        const calcResolvable =
+          fk === "calculated" &&
+          [calcObj?.numeratorKey, calcObj?.denominatorKey]
+            .filter(Boolean)
+            .every((r) => registryKeys.has(r as string)) &&
+          Boolean(calcObj?.numeratorKey);
+        const hasMachineId = Boolean(
+          conf.ksjDataId ||
+            (conf.estat as Record<string, unknown> | undefined)?.statsDataId ||
+            conf.statsDataId ||
+            src.url ||
+            (conf.source as Record<string, unknown> | undefined)?.url,
+        );
+        if (!calcResolvable && (fk === "unknown" || !hasMachineId)) {
+          warns.push(
+            `[provenance-thin] ${key}: external(fetcherKey:${fk ?? "?"}) に再取得キー/出典URL が無い (要 provenance backfill)`,
+          );
+        }
+      }
+    }
+
+    // [calc-ref] 計算系 metric の参照先 key が registry に実在するか
+    const refs: Array<string | undefined> = [];
+    const calc = cfg.calculation as Record<string, unknown> | undefined;
+    if (calc) {
+      for (const f of ["numeratorKey", "denominatorKey", "numeratorRankingKey", "denominatorRankingKey"]) {
+        refs.push(calc[f] as string | undefined);
+      }
+    }
+    if (src?.kind === "calculated") {
+      const formula = (cfg.source as { formula?: Record<string, unknown> }).formula ?? {};
+      for (const f of ["numerator", "denominator", "left", "right"]) {
+        refs.push(formula[f] as string | undefined);
+      }
+    }
+    for (const ref of refs) {
+      if (ref && !registryKeys.has(ref)) {
+        errors.push(`[calc-ref] ${key}: 参照先 metric "${ref}" が registry に実在しない`);
       }
     }
   }
