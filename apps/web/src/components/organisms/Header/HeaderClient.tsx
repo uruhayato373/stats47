@@ -17,6 +17,7 @@ import {
   BarChart3,
   ChevronDown,
   LayoutDashboard,
+  MapPin,
   Menu,
   Moon,
   NotebookPen,
@@ -52,6 +53,12 @@ const NAV_ITEMS: NavItem[] = [
     label: "統計ブログ",
     icon: NotebookPen,
     match: (p) => p.startsWith("/blog"),
+  },
+  {
+    href: "/areas",
+    label: "都道府県",
+    icon: MapPin,
+    match: (p) => p.startsWith("/areas"),
   },
 ];
 
