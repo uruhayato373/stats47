@@ -53,7 +53,15 @@ function inspect(file) {
     // 大文字のみ検出 (debt コメント規約は大文字)。case-insensitive だと識別子・DOM id・パス
     // (`const todo` / `section#todo` / `../../todo/`) を誤検知する (2026-07-17 精緻化・legacy 用語除外と同方針)
     const debt = line.match(/\b(TODO|FIXME|HACK)\b/);
-    if (debt && !/(?:#\d+|https?:\/\/|\b(?:MC|AFF|EXP|TODO)-?\d+\b|docs\/todo\/|remove(?:d)?\s+(?:when|after|by)|期限|削除条件)/i.test(line))
+    // 除外に「TODO- プレースホルダ規約への言及」を追加 (2026-07-20)。provenance では resourceId が未確定なとき
+    // "TODO-" プレフィックスの sentinel 値を使い、コード/文書がその規約に言及する (startsWith("TODO-") /
+    // TODO でない / TODO プレースホルダ / TODO resourceId)。これらは実タスクの debt マーカーではなくデータ値の
+    // 言及なので誤検知。catalogStatus / VerificationStatus 等の domain 用語除外 (下の legacy 側) と同方針。
+    if (
+      debt &&
+      !/(?:#\d+|https?:\/\/|\b(?:MC|AFF|EXP|TODO)-?\d+\b|docs\/todo\/|remove(?:d)?\s+(?:when|after|by)|期限|削除条件)/i.test(line) &&
+      !/(?:["']TODO-|TODO-["']|startsWith\(["']TODO|TODO ?プレースホルダ|TODO ?placeholder|TODO ?でない|TODO resourceId|resourceId.*TODO)/.test(line)
+    )
       results.push(finding("UNTRACKED_DEBT", file, number, `${debt[1].toUpperCase()} に issue/backlog/削除条件がない`, line));
 
     const legacy = line.match(/\b(legacy|deprecated|temporary|remove after)\b/i);

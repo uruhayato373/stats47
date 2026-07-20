@@ -577,7 +577,7 @@ async function fetchAdCode(page: Page, entry: any): Promise<string | null> {
   await tryClick(page, A8.showAdLinkButton);
   await page.waitForTimeout(2000);
   // 表示された全 textarea の A8 コードを収集し、canonical バナー優先・無ければ text を選ぶ。
-  // 多くの A8 案件は canonical 300×250 を提供せず legacy サイズ + text のみ (実測 2026-07-20)。
+  // 多くの A8 案件は canonical 300×250 を提供せず旧規格サイズ + text のみ (実測 2026-07-20)。
   // 非 canonical バナーで harvest を失敗させないため、parseA8Code が ok になるコードだけ採る。
   const codes: string[] = await page.$$eval("textarea", (tas) =>
     tas.map((t) => (t as HTMLTextAreaElement).value).filter((v) => /px\.a8\.net\/svt\/ejp/.test(v)),
