@@ -80,7 +80,7 @@ GA4 → 管理（歯車）→ プロパティ列「データの表示」→「�
 
 | 工程 | 担当 |
 |---|---|
-| イベント定義 (events.ts) の実装・パラメータ設計 | 各 UI/機能オーナー agent（`ranking-ui-manager` / `theme-ui-manager` / `affiliate-manager` ほか） |
+| イベント定義 (events.ts) の実装・パラメータ設計 | 各 UI/機能オーナー agent（横断 UX 計装配線 = `site-ux-manager`、ページ内 = `ranking-ui-manager` / `theme-ui-manager`、広告 = `affiliate-manager` ほか） |
 | **本台帳 §2 の維持・登録状況の追跡・実登録の確認** | `ga4-analyst`（GA4 計測の所有者） |
 | カスタムディメンション登録（GA4 管理画面操作） | 人間（オーナー） |
 | effect/* 判定 | `improvement-triage`（登録・反映確認を前提に） |
