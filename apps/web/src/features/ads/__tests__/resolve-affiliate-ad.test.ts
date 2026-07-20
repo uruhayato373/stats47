@@ -47,6 +47,7 @@ describe("resolveAffiliateAd", () => {
 
     const result = await resolveAffiliateAd("laborwage");
     expect(result).toEqual({
+      id: "test-ad",
       title: "テスト広告",
       href: "https://example.com/ad",
       trackingPixelUrl: null,
@@ -93,6 +94,7 @@ describe("resolveAffiliateBanners", () => {
     expect(mockFindBanners).toHaveBeenCalledWith(["labor"], 2, undefined);
     expect(result).toHaveLength(1);
     expect(result[0]).toEqual({
+      id: "banner-1",
       title: "バナー1",
       href: "https://example.com/banner",
       imageUrl: "https://example.com/img.png",
