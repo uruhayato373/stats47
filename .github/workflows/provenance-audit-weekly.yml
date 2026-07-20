@@ -49,7 +49,8 @@ jobs:
           RC=0
           echo "=== validate:config (provenance/calc-ref 含む) ==="
           npm run validate:config --workspace=@stats47/data-configs 2>&1 | tee /tmp/prov-config.log
-          [ "${PIPESTATUS[0]}" -ne 0 ] && RC=1
+          CONFIG_RC="${PIPESTATUS[0]}"
+          if [ "$CONFIG_RC" -ne 0 ]; then RC=1; fi
           echo "=== validate:catalog (theme selection) ==="
           npm run validate:catalog --workspace=@stats47/data-configs 2>&1 | tee /tmp/prov-catalog.log || true
           echo "=== validate:area-databook ==="
