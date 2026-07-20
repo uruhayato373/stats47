@@ -43,17 +43,20 @@ export function RankingPageSidebarSection({
 }: RankingPageSidebarSectionProps) {
   return (
     <Suspense fallback={<RankingPageSidebarSkeleton />}>
+      {/* P0-2 (2026-07-20): レール先頭は「関連ランキング」(回遊優先)。
+          AdSense はスロット2 (依然 above-the-fold) に留め RPM リスクを最小化する。
+          full 版 (両広告を最下部) は RPM 実測が無いため不採用。 */}
+      <RankingItemsSidebar
+        rankingKey={rankingKey}
+        areaType={areaType}
+        categoryKey={rankingItem.categoryKey}
+      />
       <SurfaceCard className="p-3">
         <AdSenseAd
           format={RANKING_SIDEBAR_TOP.format}
           slotId={RANKING_SIDEBAR_TOP.slotId}
         />
       </SurfaceCard>
-      <RankingItemsSidebar
-        rankingKey={rankingKey}
-        areaType={areaType}
-        categoryKey={rankingItem.categoryKey}
-      />
       <SidebarPromoBanner index={selectPromoBannerIndexForRanking(rankingKey)} />
       <RelatedArticlesCard rankingKey={rankingKey} areaType={areaType} />
       <AffiliateAdSlot

@@ -22,6 +22,8 @@ import {
   TrendingUp,
 } from "lucide-react";
 
+import { trackNavClick } from "@/lib/analytics/events";
+
 import { useBreakpoint } from "@/hooks/useBreakpoint";
 
 import { useSidebarStore } from "@/store/sidebar-store";
@@ -102,6 +104,9 @@ export function MobileNavDrawerClient({ themes }: MobileNavDrawerClientProps) {
                     key={href}
                     href={href}
                     prefetch={false}
+                    onClick={() =>
+                      trackNavClick({ label, href, surface: "mobile-drawer" })
+                    }
                     className={cn(
                       "flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-foreground/80 transition-colors hover:bg-accent/60",
                       isActive && "bg-accent text-accent-foreground",

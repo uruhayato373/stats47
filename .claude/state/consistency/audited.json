@@ -1,8 +1,7 @@
 {
-  "hash": "f767da14f85aa7e75a6eb5092da4033a6e88dd873330d6583bdb2932dceb4cc9",
-  "audited_at": "2026-07-19T23:28:34",
+  "hash": "60cf60ac7b4ebfc47e94db6718fc4a5227f26556ece9f39ea10851ce6aa79316",
+  "audited_at": "2026-07-19T23:31:51",
   "files": [
-    ".claude/scripts/ads/data/a8-curated.json",
     ".claude/scripts/sns/delete-instagram-posts.ts",
     ".claude/skills/sns/publish-x/publish-x.ts"
   ]

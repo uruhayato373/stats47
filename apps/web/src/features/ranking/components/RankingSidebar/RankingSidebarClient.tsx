@@ -7,6 +7,8 @@ import { RailCard, RailLinkItem, RailLinkList } from "@/components/surface";
 import type { AreaType } from "@/features/area";
 import { CategoryIcon } from "@/features/category";
 
+import { trackRailClick } from "@/lib/analytics/events";
+
 import { useBreakpoint } from "@/hooks/useBreakpoint";
 
 
@@ -163,11 +165,19 @@ export function RankingSidebarClient({
         >
                 {/* 関連ランキング: コンパクトリスト */}
                 <RailLinkList>
-                    {displayOthers.map((item) => (
+                    {displayOthers.map((item, index) => (
                         <RailLinkItem
                             key={`${item.rankingKey}-${item.areaType}`}
                             href={`${linkPrefix}/${item.rankingKey}`}
                             title={item.title}
+                            onClick={() =>
+                                trackRailClick({
+                                    widget: "related-rankings",
+                                    href: `${linkPrefix}/${item.rankingKey}`,
+                                    slot: index + 1,
+                                    rankingKey,
+                                })
+                            }
                         >
                             <span className="line-clamp-1 leading-snug">
                                 {item.title}
