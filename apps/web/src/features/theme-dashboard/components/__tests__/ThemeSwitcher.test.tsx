@@ -31,7 +31,12 @@ describe("buildThemeSwitcherOptions", () => {
     const opts = buildThemeSwitcherOptions();
     expect(opts.length).toBe(ALL_THEMES.length);
     for (const o of opts) {
-      expect(o.href).toBe(`/themes/${o.themeKey}`);
+      // local-finance-city は正典 (市区町村財政ページ)。他は /themes/{key}。
+      if (o.themeKey === "local-finance-city") {
+        expect(o.href).toBe("/themes/local-finance/cities");
+      } else {
+        expect(o.href).toBe(`/themes/${o.themeKey}`);
+      }
     }
     // 市区町村財政テーマ (local-finance-city) も全国では選択肢に含まれる
     expect(opts.map((o) => o.themeKey)).toContain("local-finance-city");

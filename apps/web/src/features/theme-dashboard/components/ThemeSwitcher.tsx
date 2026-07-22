@@ -12,6 +12,7 @@ import {
 
 import { ALL_THEMES } from "../config/all-themes";
 import { isAreaTheme } from "../config/area-theme-slugs";
+import { themeHref } from "../config/theme-urls";
 
 export interface ThemeSwitcherOption {
   themeKey: string;
@@ -38,7 +39,7 @@ export function buildThemeSwitcherOptions(areaContext?: {
     title: t.title,
     href: areaContext
       ? `/areas/${areaContext.areaCode}/${t.themeKey}`
-      : `/themes/${t.themeKey}`,
+      : themeHref(t.themeKey),
   }));
 }
 

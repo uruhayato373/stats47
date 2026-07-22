@@ -8,13 +8,14 @@
  *
  * 設計仕様: docs/01_技術設計/13_統一レイアウト設計.md
  */
-import { ALL_THEMES } from "@/features/theme-dashboard/server";
+import { NAV_THEMES } from "@/features/theme-dashboard/config/theme-urls";
 
 import { HeaderClient } from "./HeaderClient";
 
 export default function Header() {
-  // ALL_THEMES は静的 (curated 22 テーマ・表示順)。nav に必要な最小フィールドのみ渡す。
-  const themes = ALL_THEMES.map((t) => ({ themeKey: t.themeKey, title: t.title }));
+  // NAV_THEMES は静的 (curated・表示順)。local-finance-city は local-finance の
+  // 市区町村ビューのためグローバルナビから除外済 (config/theme-urls.ts)。
+  const themes = NAV_THEMES.map((t) => ({ themeKey: t.themeKey, title: t.title }));
 
   return <HeaderClient themes={themes} />;
 }

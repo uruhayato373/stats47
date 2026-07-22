@@ -204,6 +204,17 @@ function checkContentTypePolicy(pathname: string, baseUrl: string): Response | n
     return gone();
   }
 
+  // /themes/local-finance-city → /themes/local-finance/cities (301 統合)
+  // 動的ルート [themeSlug] が解決してしまう重複 URL を正典 (市区町村財政ページ) へ集約。
+  // themeKey は KNOWN のため下の unknown→410 には落ちない。canonical/ナビ/sitemap は
+  // 既に正典を指す (config/theme-urls.ts)。
+  if (pathname === "/themes/local-finance-city") {
+    return NextResponse.redirect(
+      new URL("/themes/local-finance/cities", baseUrl),
+      { status: 301 },
+    );
+  }
+
   // /themes/{unknown-slug} → 410
   if (pathname.startsWith("/themes/")) {
     const slug = pathname.slice("/themes/".length).split("/")[0];
