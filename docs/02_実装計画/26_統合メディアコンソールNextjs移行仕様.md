@@ -24,7 +24,7 @@ tags: [gallery, nextjs, local-tooling, media-console]
 
 後続の §7 API 表は「現行機能を理解するための調査資料」、§9 / §11 / §13 の
 互換 cutover 記述は superseded とし、最新の Claude Code 実装指示は
-`docs/handoffs/2026-07-16-gallery-nextjs-implementation-prompt.md` を正とする。
+本書を移行仕様の正典とする。
 
 ## 1. 結論
 

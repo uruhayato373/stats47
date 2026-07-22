@@ -22,6 +22,7 @@ import {
   listAllTagsWithCount,
 } from "@/features/blog/server";
 import { ALL_THEMES } from "@/features/theme-dashboard/config/all-themes";
+import { themeHref } from "@/features/theme-dashboard/config/theme-urls";
 
 import { UrlPolicy } from "@/lib/url-policy";
 
@@ -87,7 +88,9 @@ const STATIC_PAGES: MetadataRoute.Sitemap = [
 ];
 
 const THEME_PAGES: MetadataRoute.Sitemap = ALL_THEMES.map((theme) => ({
-  url: `${BASE_URL}/themes/${theme.themeKey}`,
+  // local-finance-city は正典 /themes/local-finance/cities (themeHref)。
+  // 動的ルート由来の重複 URL /themes/local-finance-city を sitemap に出さない。
+  url: `${BASE_URL}${themeHref(theme.themeKey)}`,
   changeFrequency: "weekly",
   priority: 0.8,
 }));

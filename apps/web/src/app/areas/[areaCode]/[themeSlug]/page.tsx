@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 
 import { fetchPrefectures } from "@stats47/area";
 
-import { ALL_THEMES } from "@/features/theme-dashboard/config/all-themes";
+import { AREA_THEMES } from "@/features/theme-dashboard/config/area-theme-slugs";
 import {
   ThemePageLayout,
   loadThemeData,
@@ -12,11 +12,12 @@ import { generateOGMetadata } from "@/lib/metadata/og-generator";
 
 import type { Metadata } from "next";
 
-/** インフラ・ネットワーク系テーマ (Type B) は都道府県ページに出さない */
-const TYPE_B_THEMES = new Set(["ports", "railway", "roads", "local-finance-city"]);
-
-/** Type A テーマ（都道府県単位で集計できるもの）*/
-const TYPE_A_THEMES = ALL_THEMES.filter((t) => !TYPE_B_THEMES.has(t.themeKey));
+/**
+ * Type A テーマ（都道府県単位で集計できるもの）。インフラ・ネットワーク系 (Type B:
+ * ports/railway/roads/local-finance-city) は都道府県ページに出さない。
+ * SSOT は theme-dashboard/config/area-theme-slugs.ts（ThemeSwitcher と共有）。
+ */
+const TYPE_A_THEMES = AREA_THEMES;
 
 interface PageProps {
   params: Promise<{ areaCode: string; themeSlug: string }>;

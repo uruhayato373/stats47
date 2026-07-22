@@ -6,7 +6,6 @@ import { PageShell } from "@/components/layout";
 import { ALL_THEMES } from "@/features/theme-dashboard/config/all-themes";
 import {
   ThemePageLayout,
-  ThemeSidebar,
   loadThemeData,
 } from "@/features/theme-dashboard/server";
 
@@ -50,7 +49,7 @@ export default async function LocalFinanceCityThemePage() {
   }
 
   return (
-    <PageShell leftRail={<ThemeSidebar theme={theme} />}>
+    <PageShell>
       {/* 都道府県版へのナビゲーション */}
       <nav
         aria-label="表示単位切替"

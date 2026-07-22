@@ -43,7 +43,7 @@ description: ココナラ商品ファクトリー (packages/product-factory) の
 ## File Boundary
 
 - 触ってよい: `packages/product-factory/`、`.claude/state/products/`、`.local/coconala-products/`（生成先）、
-  `docs/02_実装計画/30`（Phase 記録）、`docs/todo/`（バックログ）、`docs/handoffs/`。
+  `docs/02_実装計画/30`（Phase 記録）、`docs/todo/`（バックログ）。
 - 触らない: 公開 R2、永続 D1、本番 web、他ドメインの SSOT。commit/push/deploy は明示指示があるときだけ。
 
 ## 関連

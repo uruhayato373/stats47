@@ -225,7 +225,7 @@ YYYY-MM-DD-<method>[-<batch>]
 | `docs/todo/01_改善バックログ.md` | wave section の真実源 (status / effect / 判定基準) | wave deploy 時 + effect 計測時 |
 | `docs/todo/current-week.md` | 現在の週次 TODO | 週次 (月曜・上書き) |
 | `.claude/skills/management/weekly-review/reference/reviews/YYYY-Www.md` | agent用週次振り返り | 週次 (日曜) |
-| `docs/handoffs/YYYY-MM-DD-<x>.md` | 大規模 session 完了時のハンドオフ (フラット。種別絞り込みは frontmatter `type:`) | session 完了時 |
+| `docs/todo/02_機能バックログ.md` | 大規模 session の未完了機能・自動化を直接追記 | session 終了時 |
 
 ### Memory (auto memory)
 

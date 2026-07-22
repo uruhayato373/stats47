@@ -41,7 +41,7 @@ GSC・GA4 2026-W28 snapshot 行数)。最新状態の SSOT は portfolio.json �
 ## docs 移行の完了記録
 
 - docs/04_レビュー の survey 監査 3 本 → `reference/{reviews,audits}/` へ移設済 (PR-0)。
-- handoff `docs/handoffs/2026-07-11-survey-content-cluster.md` → **消化して削除** (終了条件
+- 旧 survey content cluster handoff → **消化して削除済み** (終了条件
   「本番反映 + 初回 baseline 記録」を充足: 本番反映 2026-07-12 実測・baseline は SURVEY-EXP-001 に記録。
   効果測定の追跡は experiments.json が担い、effect 確定時に improvement-triage へ引き渡す)。
 

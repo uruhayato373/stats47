@@ -61,7 +61,7 @@
 | 週次計画進捗 | `docs/todo/current-week.md` の TODO チェックボックスを Edit |
 | 週次振り返り | `.claude/skills/management/weekly-review/reference/reviews/YYYY-Www.md` |
 | 批判的レビュー / 事前検死 | `docs/04_レビュー/YYYY-MM-DD-<topic-slug>.md` (フラット。slug に種別を含める例 `-monetization` / `-pre-mortem-<x>`、種別は frontmatter `type:` で絞り込み) |
-| **セッション引き継ぎ (ハンドオフ)** | `docs/handoffs/YYYY-MM-DD-<topic>.md` (次セッションが消化したら抽出→削除・貯めない → `docs/handoffs/README.md`) |
+| **セッション残タスク** | 未完了は `docs/todo/{01_改善,02_機能,03_指標バックログ}.md` へ直接反映。未分類のみ `docs/todo/inbox.md`（一時ハンドオフ文書は作らない） |
 | 未分類の思いつき TODO | `docs/todo/inbox.md` に 1 行 append (triage で各バックログへ → `docs/todo/README.md`) |
 | YouTube 実験ログ | `docs/15_実験ログ/youtube/EXP-NNN.md` |
 | コンテンツ backlog | `docs/30_note記事企画/backlog/` |

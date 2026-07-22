@@ -65,5 +65,5 @@ SSDS (社会・人口統計体系) 由来の未使用指標を**継続的にラ�
 - スクリプト: `.claude/scripts/estat/{build-expansion-queue,gen-ssds-configs,measure-expansion-impact,enumerate-ssds-indicators}.mjs`
 - スキル: `.claude/skills/management/expand-rankings/SKILL.md`
 - 知見: memory `project_estat_expansion_pipeline_2026_07` / `project_competitor_indicator_benchmark`
-- 引き継ぎ: `docs/handoffs/2026-07-12-ssds-ranking-expansion.md`
+- 状態SSOT: `.claude/state/estat/expansion-queue.json`
 - 正典: `.claude/rules/metric-config-standards.md` (isActive≠公開) / `.claude/rules/estat-api.md`

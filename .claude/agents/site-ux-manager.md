@@ -84,7 +84,7 @@ model: sonnet
 1. site-content-layout ベンチマークの P0/P1 を小変更に分割（header IA / card fallback / mobile rail / metadata）。
 2. **計測依存の変更（nav/rail 順・配置）は GA4 baseline を取ってから**、計測付き実験として実施。
 3. localhost で mobile/desktop/light/dark を確認。デプロイは溜めて 1 回・承認後（`devops-runner`）。
-4. 進捗は handoff（`docs/handoffs/`）+ backlog `[UI-CONSOLIDATION-RESIDUAL]` に記録。
+4. 未完了事項は backlog `[UI-CONSOLIDATION-RESIDUAL]` に直接記録する。
 
 ## 必読 rules
 

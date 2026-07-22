@@ -11,7 +11,7 @@ import {
 import { ALL_THEMES } from "@/features/theme-dashboard/config/all-themes";
 import {
   ThemeIndicatorCatalogSection,
-  ThemeSidebar,
+  ThemeSwitcher,
 } from "@/features/theme-dashboard/server";
 
 import { generateOGMetadata } from "@/lib/metadata/og-generator";
@@ -63,7 +63,9 @@ export default async function LocalFinanceThemePage() {
   const initialFinanceFlow = await loadInitialFinanceFlow();
 
   return (
-    <PageShell leftRail={<ThemeSidebar theme={theme} />}>
+    <PageShell>
+      {/* テーマ切替（bespoke ページのため ThemePageLayout を使わず個別配置。表示単位切替より前） */}
+      <ThemeSwitcher currentThemeKey="local-finance" />
       {/* 都道府県 / 市区町村 切替 */}
       <nav
         aria-label="表示単位切替"

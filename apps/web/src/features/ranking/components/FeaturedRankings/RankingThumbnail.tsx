@@ -3,6 +3,7 @@
 import { useState } from "react";
 
 import { cn } from "@stats47/components";
+import { BarChart3 } from "lucide-react";
 
 import { ThemeAwareImage } from "@/components/atoms/ThemeAwareImage";
 
@@ -33,9 +34,19 @@ export function RankingThumbnail({ baseSrc, lightSrc, darkSrc, src, alt, classNa
     const resolvedDark = darkSrc || (baseSrc ? `${baseSrc}-dark.webp` : undefined);
 
     if (error || (!resolvedLight && !resolvedDark)) {
+        // 画像欠落/ロード失敗時: 内部状態「No Image」を読者に露出せず、
+        // 決定的な generic data placeholder へ縮退する (枠は維持し CLS を出さない)。
+        // 出典: docs/04_レビュー/2026-07-18-sitewide-image-ux-audit.md §P0。
         return (
-            <div className={cn("bg-muted w-full h-full flex items-center justify-center text-muted-foreground/50 text-[10px]", className)}>
-                No Image
+            <div
+                role="img"
+                aria-label={alt}
+                className={cn(
+                    "bg-muted w-full h-full flex items-center justify-center text-muted-foreground/40",
+                    className,
+                )}
+            >
+                <BarChart3 className="w-2/5 h-2/5" aria-hidden />
             </div>
         );
     }
