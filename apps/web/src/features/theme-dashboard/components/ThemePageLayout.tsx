@@ -35,6 +35,7 @@ import { ThemeHero } from "./ThemeHero";
 import { ThemeIndicatorCatalogSection } from "./ThemeIndicatorCatalogSection";
 import { ThemePrefectureProvider } from "./ThemePrefectureContext";
 import { ThemeRelatedArticles } from "./ThemeRelatedArticles";
+import { ThemeSwitcher } from "./ThemeSwitcher";
 
 import type { ThemePageData } from "../lib/load-theme-data";
 import type { ThemeConfig } from "../types";
@@ -118,6 +119,13 @@ export async function ThemePageLayout({ theme, data, areaContext }: Props) {
           )}
         </BreadcrumbList>
       </Breadcrumb>
+
+      {/* テーマ切替（旧常設左レール ThemeSidebar の代替。パンくず直後・H1/hero の前）。
+          areaContext がある場合は都道府県文脈を維持したまま切り替える。 */}
+      <ThemeSwitcher
+        currentThemeKey={theme.themeKey}
+        areaContext={areaContext ? { areaCode: areaContext.areaCode } : undefined}
+      />
 
       {/* エリアページ経由時の視点バナー */}
       {areaContext && (
