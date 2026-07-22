@@ -42,5 +42,6 @@ tags: []
 | 2026-06-19 | `/themes/local-finance` の stat-card 内チャートが D3.js でインタラクティブ表示されない | バグ | 未整理 | テーマダッシュボード。D3 hydration / クライアント描画の不具合の可能性 |
 | 2026-06-19 | トップページ (https://stats47.jp/) のランキングカードのデザインをもっと練る | 改善 | 未整理 | UI/デザイン。home の featured ランキングカード |
 | 2026-07-13 | `check-weekly-cadence.mjs` (別セッション産・git 未追跡) が動作するが未配線 orphan — 週次レビュー/計画の欠落検知スクリプト (実行すると W27/W29 計画欠落を正しく検出)。どの workflow/skill/hook からも参照されず「cadence 検知器自身が cadence を持たない」状態。fetch-metrics-weekly.yml か /weekly-plan への配線 + commit、or 破棄を判断 | 自動化 | 未整理 | 整合性監査 (Stop hook) で発見。read-only で無害 |
+| 2026-07-23 | テーマ幅統一 (ThemeSwitcher 化・commit `43ced9f7`) のデプロイ前残検証: フル build (`npm run build --workspace apps/web`) + ブラウザ実機で 390/1024/1280px の視覚崩れ・console/hydration を目視 | 検証 | 未整理 | 実装・型・ESLint・テスト(11+回帰30)・dev SSR 実測(280px消失/1280全幅/200・410)は完了済。フル build とブラウザ視覚確認のみ未実施 (環境に headless ブラウザ無し)。develop→main デプロイ時に実施 |
 | | | | | |
 - maintenance-debt baseline 残 239 件の計画的 paydown (誤検知はルール精緻化・実負債は期限/削除条件付与か backlog 化で縮小。baseline は縮小専用の不変条項 2026-07-14)
