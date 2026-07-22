@@ -9,8 +9,8 @@ updated: 2026-07-18
 人間が振り返り・思考整理に使う文書。**サブディレクトリは廃止し、フラット構成** (2026-06-13)。
 
 > **保持ポリシー (2026-07-11)**: レビューは書きっぱなしで溜めない。未対応の提言・TODO は `docs/todo/` に抽出し、
-> 抽出済みで被参照のないレビューは git rm する (復元は git 履歴)。残すのは (a) コード/バックログ/現役 handoff が
-> 参照する正典、(b) 一次分析として振り返り価値が高いもの。セッション引き継ぎは `docs/handoffs/` へ (ここには置かない)。
+> 抽出済みで被参照のないレビューは git rm する (復元は git 履歴)。残すのは (a) コード/バックログが
+> 参照する正典、(b) 一次分析として振り返り価値が高いもの。未完了事項は `docs/todo/` へ直接記録する。
 
 ## 命名規則 (フラット)
 
@@ -29,7 +29,7 @@ docs/04_レビュー/<YYYY-Www>-<topic-slug>.md        (週次。例: 2026-W22-s
 |---|---|---|
 | [2026-07-07-stp-analysis.md](2026-07-07-stp-analysis.md) | STP ゼロベース分析 (S1 雑学 / S2 生活意思決定) | gallery `/dashboard` (dashboard-data.mjs) が STP 戦略として読む正典 |
 | [2026-07-03-claude-code-setup-audit.md](2026-07-03-claude-code-setup-audit.md) | Claude Code 環境監査。§6 モデル配分ポリシー | `build-remediation-queue.mjs` / `build-ai-content-queue.mjs` が §6 を正典参照 |
-| [2026-06-13-monetization-career.md](2026-06-13-monetization-career.md) | 転職アフィリエイト戦略 (医療クラスタ・§A 提携リスト) | 現役 handoff `handoffs/2026-06-13-monetization-affiliate.md` が §A を参照。handoff 消化時に一緒に削除 |
+| [2026-06-13-monetization-career.md](2026-06-13-monetization-career.md) | 転職アフィリエイト戦略 (医療クラスタ・§A 提携リスト) | 収益化判断の一次レビューとして保持 |
 | [2026-06-08-blog-winning-patterns.md](2026-06-08-blog-winning-patterns.md) | GSC 実測 × 構造特徴の勝ち要因分析 (順位交絡統制つき) | 天井ループの一次分析。定性裏取りの参照元 |
 | [2026-07-18-coconala-content-monetization.md](2026-07-18-coconala-content-monetization.md) | stats47 コンテンツのココナラ販売可否・類似出品・価格・権利・商品設計 | 販売テスト判断と出品前監査の一次調査 |
 | [2026-07-11-theme-population-dynamics.md](2026-07-11-theme-population-dynamics.md) | 人口動態テーマの指標・チャート提案 | 承認後のClaude Code実装と鮮度解決の正典 |
@@ -56,5 +56,5 @@ docs/04_レビュー/<YYYY-Www>-<topic-slug>.md        (週次。例: 2026-W22-s
 
 - 記録先の判定: `.claude/rules/docs-vs-issues.md` / `.claude/rules/data-storage.md`
 - 改善施策の TODO 真実源: `docs/todo/01_改善バックログ.md`
-- セッション引き継ぎ: `docs/handoffs/`
+- セッション残タスク: `docs/todo/` の該当バックログ
 - 現在計画: `docs/todo/current-{month,week}.md` / agent用週次レビュー: `.claude/skills/management/weekly-review/reference/reviews/`

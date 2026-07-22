@@ -1155,7 +1155,7 @@ P1は次の契約でClaude Codeへ指示する。
 9. `published: false`を維持し、commit/push/PR/deploy/R2 publish/SNS投稿を行わない
 10. session limit等で継続不能になった場合は、処理済みIDと次のIDをhandoffへ残し、未処理を完了扱いしない
 
-Claude Codeへ渡すpromptは`docs/handoffs/2026-07-16-buzz-map-p1-article-batch-prompt.md`に置く。
+P1記事バッチは完了済み。実行promptの履歴はgit履歴を参照する。
 
 ## 11. 全候補カタログ
 

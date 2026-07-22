@@ -22,7 +22,7 @@ Obsidian で振り返り・思考整理する習慣を支えるため、ファ�
 | 批判的レビュー・事前検死・SEO 監査・SNS 週報・パフォーマンスレポート・コスト月報 | `docs/04_レビュー/{YYYY-MM-DD,YYYY-Www,YYYY-MM}-<topic-slug>.md`（フラット。日付先頭・slug に種別を含める例 `-monetization` / `-pre-mortem-<x>` / `-sns-weekly` / `-performance-report` / `-cloudflare-cost`。種別絞り込みは frontmatter `type:`） |
 | 改善施策の一覧・TODO (gsc / ga4 / adsense / psi / affiliate / cloudflare-cost 等) | `docs/todo/01_改善バックログ.md` |
 | 未分類の思いつき TODO (受信箱) | `docs/todo/inbox.md` (triage で各バックログへ → `docs/todo/README.md`) |
-| セッション引き継ぎ (ハンドオフ) | `docs/handoffs/YYYY-MM-DD-<topic>.md` (消化したら抽出→削除 → `docs/handoffs/README.md`) |
+| セッション残タスク | `docs/todo/{01_改善,02_機能,03_指標バックログ}.md` へ直接反映。未分類のみ `docs/todo/inbox.md`（2026-07-22 に一時ハンドオフ文書を廃止） |
 | YouTube 実験・回復 | `docs/15_実験ログ/youtube/EXP-NNN.md` / `recovery-YYYY-MM-DD.md` |
 | **テーマ関連のレビュー・監査・運用設計 (例外)** | `.claude/skills/theme/manage-theme-portfolio/reference/{reviews,audits}/` + `テーマポートフォリオ運用.md` — テーマ群は agent (theme-portfolio-manager) 主導で継続改善するため docs に置かない (2026-07-13 オーナー判断。旧 docs/04_レビュー/\*-theme-\*.md / docs/02_実装計画/25 から移設) |
 | **survey 関連のレビュー・監査・運用設計 (例外)** | `.claude/skills/survey/manage-survey-portfolio/reference/{reviews,audits}/` + `surveyポートフォリオ運用.md` — survey 群は agent (survey-curator) 主導で継続改善するため docs に置かない (2026-07-13 オーナー判断。旧 docs/04_レビュー/\*-survey-\*.md から移設。最新状態は `.claude/state/surveys/portfolio.json`) |

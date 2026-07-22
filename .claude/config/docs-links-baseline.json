@@ -223,14 +223,6 @@
       "referrer": ".claude/memory/affiliate-strategy.md"
     },
     {
-      "ref": "docs/handoffs/2026-07-10-note-cover-redesign.md",
-      "referrer": "docs/todo/01_改善バックログ.md"
-    },
-    {
-      "ref": "docs/handoffs/2026-07-11-survey-content-cluster.md",
-      "referrer": ".claude/skills/survey/manage-survey-portfolio/reference/audits/2026-07-13-survey-portfolio-audit.md"
-    },
-    {
       "ref": "docs/rules/CLAUDE.md",
       "referrer": "docs/01_技術設計/12_完全DBレス設計.md"
     }

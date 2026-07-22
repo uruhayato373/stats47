@@ -2,14 +2,14 @@
 
 > **方針**: 人間が判断する現在計画・レビュー・バックログは `docs/`、agent用履歴は skill reference、機械観測値は `.claude/state/` に置く。GitHub Issues は (a) PR で close される `enhancement`/`bug`、(b) 日次アラート (`cloudflare-alert`/`psi-alert` 等) のみ残す。詳細: [`../.claude/rules/docs-vs-issues.md`](../.claude/rules/docs-vs-issues.md)
 >
-> **2026-07-11 再編**: TODO は `todo/`、セッション引き継ぎは `handoffs/` に切り出した (doboku-note 式)。完了・消化済みドキュメントはアーカイブせず削除し、記録は git 履歴に委ねる。
+> **2026-07-22 更新**: TODO とセッション残タスクは `todo/` に集約。一時ハンドオフ文書は廃止した。完了・消化済みドキュメントはアーカイブせず削除し、記録は git 履歴に委ねる。
 
 ## まずここから
 
 | 知りたいこと | 場所 |
 |---|---|
 | **次に何をやるか (TODO)** | [`todo/`](todo/README.md) — inbox + 改善/機能/指標バックログの 4 ファイル固定 |
-| **前セッションからの引き継ぎ** | [`handoffs/`](handoffs/README.md) — 消化したら抽出→削除 (貯めない) |
+| **前セッションからの残タスク** | [`todo/`](todo/README.md) — 該当バックログを参照 |
 | 今月・今週の計画 | `todo/current-month.md` `todo/current-week.md` |
 | 収益化の正典 | `02_実装計画/01_収益化マスタープラン.md` |
 | SNS 自動化のログイン保持 (Playwright プロファイル) | [`01_技術設計/playwright-auth-profiles.md`](01_技術設計/playwright-auth-profiles.md) |
@@ -19,7 +19,6 @@
 | ディレクトリ | 役割 | 運用 |
 |---|---|---|
 | `todo/` | **TODO と現在計画の単一入口** | inbox / 改善 / 機能 / 指標 + `current-{month,week}.md`。完了は削除、計画は上書き → `todo/README.md` |
-| `handoffs/` | セッション引き継ぎ | `YYYY-MM-DD-<topic>.md`。抽出→削除の一方向 → `handoffs/README.md` |
 | `00_プロジェクト管理/` | プロジェクトの基盤文書（定義・収益化・マーケ・ペルソナ） | 固定 4 ファイル。内容更新のみ・新規ファイル追加禁止 |
 | `01_技術設計/` | システム構成・DDD 分類・ドメイン設計・フロントエンド設計 | 内容更新が中心。構成変更時のみファイル追加可 |
 | `02_実装計画/` | 戦略・領域別実行計画 | 連番ファイルのみのフラット構成。完了・superseded は git 履歴へ |
@@ -46,7 +45,7 @@
 | 対象 | 置き場所 | 例 |
 |---|---|---|
 | やること (未着手タスク・受信箱) | `docs/todo/` | 改善施策、機能、指標拡充、思いつき |
-| セッション引き継ぎ | `docs/handoffs/` | 作業途中の文脈・残タスク・注意点 |
+| セッション残タスク | `docs/todo/` | 未完了事項を該当バックログへ直接反映 |
 | 人間が意思決定・振り返りに使う文書 | `docs/` 各分類 | プロジェクト定義、現在計画、批判的レビュー |
 | 人間が編集する原稿・企画 | `docs/` | note 原稿・note 企画・ブログ下書き |
 | エージェントが深掘りする詳細ログ・スナップショット | `.claude/skills/<skill>/reference/` | GSC/GA4 週次 snapshot CSV、improvement-log.md (agent 用) |
@@ -61,7 +60,7 @@
 ### 新規記録の追加先
 
 1. **やることを思いついた** → `todo/inbox.md` に 1 行 append (triage で各バックログへ)
-2. **セッションを引き継ぐ** → `handoffs/YYYY-MM-DD-<topic>.md` を新規作成
+2. **セッションの残タスクを記録する** → `todo/` の該当バックログへ直接反映
 3. **戦略・要件の変更** → `00_プロジェクト管理/` 該当ファイルを Edit (新規ファイル追加禁止)
 4. **月次計画** → `/monthly-plan` スキルが `todo/current-month.md` を上書き（月初）
 5. **週次計画・レビュー** → `/weekly-plan` は `todo/current-week.md` を上書き、`/weekly-review` は skill reference に保存
@@ -96,7 +95,7 @@ Issues: PR で close
 
 - `00_プロジェクト管理/` に戦略文書を追加する (固定 4 ファイルへの Edit で対応)
 - `todo/` に 4 ファイル以外の TODO ファイルを追加する (`todo/README.md`)
-- 日付サフィックス付きファイル (`*-YYYY-MM-DD.md`) を `00_/` `01_/` `02_/` の上書き型ディレクトリに置く (週次・レビュー・handoff 系の日付ファイルは OK)
+- 日付サフィックス付きファイル (`*-YYYY-MM-DD.md`) を `00_/` `01_/` `02_/` の上書き型ディレクトリに置く (週次・レビュー系の日付ファイルは OK)
 - `archive/` ディレクトリを作る (削除して git 履歴に委ねる)
 - weekly / review / improvement 系スキルから `gh issue create` する (`docs/` 配下に Write すること)
 
@@ -107,7 +106,7 @@ Issues: PR で close
 ```yaml
 ---
 type: monthly-plan | weekly-plan | weekly-review | critical-review | pre-mortem | improvement-log |
-      session-handoff | todo-inbox | youtube-experiment | note-plan | ...
+      todo-inbox | youtube-experiment | note-plan | ...
 month: 2026-MM       # 月次計画のみ
 week: 2026-Www       # 週次系のみ
 date: 2026-MM-DD

@@ -38,11 +38,9 @@ tags: []
 | 2026-06-19 | データの型定義を統一し、各ページ/各コンポーネントでのデータ保有方法を整理 | 改善 | 未整理 | アーキテクチャ/型。`packages/types` を軸に共通型を統一。ページ vs コンポーネントのデータ保有責務（fetch境界・props設計）を整理。リファクタ寄り |
 | 2026-06-19 | ブログ一覧ページ (https://stats47.jp/blog) のデザイン改善 | 改善 | 未整理 | UI/デザイン。一覧ページのレイアウト改善（OGP 画像は 2026-07-07 の静的 R2 化 + ブランド背景合成で解決済み） |
 | 2026-06-19 | サイトデザインの改善 | 改善 | 未整理 | UI/デザイン全般。統一レイアウト (`13_統一レイアウト設計.md`) / melta-ui 準拠を軸に。範囲が広いので triage で具体化要 |
-| 2026-06-19 | SVG 品質の統一（命名 canonical 化・ダークモード対応・viewBox 標準幅への収斂） | 改善 | 未整理 | `blog-svg-chart-standards.md §10` ロードマップ。サイズ統一は完了 (2026-06-21)、データ系譜復元 (ssot-restore-new 169 / manual 76) が残 |
 | 2026-06-19 | `/themes/local-finance-city` をヘッダーの選択肢から選べないようにし、財政状況 (`local-finance`) に統合する | 改善 | 未整理 | ナビ/IA。ヘッダーのテーマ選択から除外 + コンテンツ統合（301検討） |
 | 2026-06-19 | `/themes/local-finance` の stat-card 内チャートが D3.js でインタラクティブ表示されない | バグ | 未整理 | テーマダッシュボード。D3 hydration / クライアント描画の不具合の可能性 |
 | 2026-06-19 | トップページ (https://stats47.jp/) のランキングカードのデザインをもっと練る | 改善 | 未整理 | UI/デザイン。home の featured ランキングカード |
 | 2026-07-13 | `check-weekly-cadence.mjs` (別セッション産・git 未追跡) が動作するが未配線 orphan — 週次レビュー/計画の欠落検知スクリプト (実行すると W27/W29 計画欠落を正しく検出)。どの workflow/skill/hook からも参照されず「cadence 検知器自身が cadence を持たない」状態。fetch-metrics-weekly.yml か /weekly-plan への配線 + commit、or 破棄を判断 | 自動化 | 未整理 | 整合性監査 (Stop hook) で発見。read-only で無害 |
 | | | | | |
 - maintenance-debt baseline 残 239 件の計画的 paydown (誤検知はルール精緻化・実負債は期限/削除条件付与か backlog 化で縮小。baseline は縮小専用の不変条項 2026-07-14)
-- buzz-map draft 6件 (IG 701-704 / X 705-706) の投稿判断 + GA4 custom dimension 登録 (deep-click計測) → docs/handoffs/2026-07-17-buzz-map-gate-pending-actions.md
