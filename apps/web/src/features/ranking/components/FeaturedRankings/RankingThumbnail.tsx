@@ -1,9 +1,9 @@
 "use client";
 
-import { BarChart3 } from "lucide-react";
 import { useState } from "react";
 
 import { cn } from "@stats47/components";
+import { BarChart3 } from "lucide-react";
 
 import { ThemeAwareImage } from "@/components/atoms/ThemeAwareImage";
 

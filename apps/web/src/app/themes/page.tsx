@@ -4,8 +4,8 @@ import { RightRailWidgets } from "@/components/rail";
 import { SurfaceLinkCard } from "@/components/surface";
 
 import { InContentAdSlot, FooterAdSlot } from "@/features/ads";
-import { ALL_THEMES } from "@/features/theme-dashboard/server";
 import { themeHref } from "@/features/theme-dashboard/config/theme-urls";
+import { ALL_THEMES } from "@/features/theme-dashboard/server";
 
 import { HUB_INCONTENT } from "@/lib/google-adsense";
 import { generateOGMetadata } from "@/lib/metadata/og-generator";
