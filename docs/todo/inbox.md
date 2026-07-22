@@ -37,10 +37,8 @@ tags: []
 | 2026-07-11 | git 履歴の API キー purge (filter-repo) を実施するかの判断 | ? | 未整理 | 出典 = `docs/04_レビュー/2026-07-03-claude-code-setup-audit.md` Phase 5。履歴書き換え = 破壊的操作のためオーナー判断待ち |
 | 2026-06-19 | データの型定義を統一し、各ページ/各コンポーネントでのデータ保有方法を整理 | 改善 | 未整理 | アーキテクチャ/型。`packages/types` を軸に共通型を統一。ページ vs コンポーネントのデータ保有責務（fetch境界・props設計）を整理。リファクタ寄り |
 | 2026-06-19 | ブログ一覧ページ (https://stats47.jp/blog) のデザイン改善 | 改善 | 未整理 | UI/デザイン。一覧ページのレイアウト改善（OGP 画像は 2026-07-07 の静的 R2 化 + ブランド背景合成で解決済み） |
-| 2026-06-19 | サイトデザインの改善 | 改善 | 未整理 | UI/デザイン全般。統一レイアウト (`13_統一レイアウト設計.md`) / melta-ui 準拠を軸に。範囲が広いので triage で具体化要 |
 | 2026-06-19 | `/themes/local-finance-city` をヘッダーの選択肢から選べないようにし、財政状況 (`local-finance`) に統合する | 改善 | 未整理 | ナビ/IA。ヘッダーのテーマ選択から除外 + コンテンツ統合（301検討） |
 | 2026-06-19 | `/themes/local-finance` の stat-card 内チャートが D3.js でインタラクティブ表示されない | バグ | 未整理 | テーマダッシュボード。D3 hydration / クライアント描画の不具合の可能性 |
-| 2026-06-19 | トップページ (https://stats47.jp/) のランキングカードのデザインをもっと練る | 改善 | 未整理 | UI/デザイン。home の featured ランキングカード |
 | 2026-07-13 | `check-weekly-cadence.mjs` (別セッション産・git 未追跡) が動作するが未配線 orphan — 週次レビュー/計画の欠落検知スクリプト (実行すると W27/W29 計画欠落を正しく検出)。どの workflow/skill/hook からも参照されず「cadence 検知器自身が cadence を持たない」状態。fetch-metrics-weekly.yml か /weekly-plan への配線 + commit、or 破棄を判断 | 自動化 | 未整理 | 整合性監査 (Stop hook) で発見。read-only で無害 |
 | 2026-07-23 | テーマ幅統一 (ThemeSwitcher 化・commit `43ced9f7`) のデプロイ前残検証: フル build (`npm run build --workspace apps/web`) + ブラウザ実機で 390/1024/1280px の視覚崩れ・console/hydration を目視 | 検証 | 未整理 | 実装・型・ESLint・テスト(11+回帰30)・dev SSR 実測(280px消失/1280全幅/200・410)は完了済。フル build とブラウザ視覚確認のみ未実施 (環境に headless ブラウザ無し)。develop→main デプロイ時に実施 |
 | | | | | |
