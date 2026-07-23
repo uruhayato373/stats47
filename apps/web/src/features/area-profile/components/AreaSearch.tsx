@@ -148,10 +148,20 @@ export function AreaSearch({ prefectures, className }: AreaSearchProps) {
               id={optionId(i)}
               role="option"
               aria-selected={i === activeIndex}
+              // activedescendant パターンのため tab 順には入れない (-1)。
+              // キーボード操作は input の onKeyDown が担うが、option 自身にも
+              // Enter/Space のフォールバックを持たせる (a11y 静的ガード準拠 + 防御的)。
+              tabIndex={-1}
               data-option-index={i}
               onMouseDown={(e) => e.preventDefault()}
               onMouseEnter={() => setActiveIndex(i)}
               onClick={() => navigateTo(pref)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  navigateTo(pref);
+                }
+              }}
               className={cn(
                 "flex min-h-11 cursor-pointer items-center px-3 text-sm text-foreground",
                 i === activeIndex && "bg-muted",
