@@ -143,15 +143,27 @@ export function trackHomeFeaturedClick(params: HomeFeaturedEventParams): void {
 // ─── ナビゲーション (ヘッダー IA・P0-1 効果判定) ──────────────
 
 /**
- * グローバルヘッダー / モバイルドロワーのナビ項目クリック。
- * P0-1 (ヘッダーに「都道府県」追加) が使われているかを判定するために計装する。
- * `nav_label` (項目名) / `nav_href` (遷移先) / `nav_surface` (desktop-header | mobile-drawer)
- * を custom dimension に登録すれば項目別の利用度を追える。
+ * ナビ項目クリック（グローバルヘッダー / モバイルドロワー / 都道府県一覧の選択導線）。
+ * P0-1 (ヘッダーに「都道府県」追加) や `/areas` の検索・一覧・地図が使われているかを判定する。
+ * `nav_label` (項目名) / `nav_href` (遷移先) / `nav_surface` を custom dimension に登録すれば
+ * 項目別・導線別の利用度を追える。
+ *
+ * `nav_surface` の値:
+ * - `desktop-header` / `mobile-drawer`: グローバルナビ
+ * - `areas_search` / `areas_list` / `areas_map`: /areas の県選択導線（検索 / 一覧 / 地図）
+ *
+ * いずれも既存 GA4 custom dimension `nav_surface` の値追加であり、新しい dimension は増やさない
+ * (`.claude/rules/analytics-event-standards.md` §2)。
  */
 export function trackNavClick(params: {
   label: string;
   href: string;
-  surface: "desktop-header" | "mobile-drawer";
+  surface:
+    | "desktop-header"
+    | "mobile-drawer"
+    | "areas_search"
+    | "areas_list"
+    | "areas_map";
 }): void {
   sendEvent("nav_click", {
     event_category: "navigation",

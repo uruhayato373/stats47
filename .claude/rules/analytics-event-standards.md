@@ -61,6 +61,13 @@ GA4 → 管理（歯車）→ プロパティ列「データの表示」→「�
 > desktop に統一した (「地域の特徴」→「都道府県」/「ブログ」→「統計ブログ」)。`nav_label` は
 > 表示ラベルをそのまま送るため、この日以降 surface 間で値が揃う。効果判定で 2026-07-20 前後の
 > `nav_label` 値の連続性が切れる点に注意 (旧値は drawer のみに存在)。
+>
+> **nav_surface の値追加 (2026-07-23・AREAS-DIRECTORY-UX-01)**: `/areas` の県選択導線に
+> `areas_search` / `areas_list` / `areas_map` を追加した。既存 GA4 custom dimension `nav_surface`
+> の**値追加**であり新しい dimension は増やしていない (登録済 dimension のまま内訳が増える)。
+> `/areas` の選択率を導線別 (検索/一覧/地図) に判定する際はこの 3 値を使う。県名は `nav_label`、
+> 遷移先は `nav_href` (`/areas/<5桁code>`)。`trackNavClick` の呼び出し元は `AreaSearch` /
+> `AreaSelectionPanels` (`apps/web/src/features/area-profile/`)。
 
 ---
 

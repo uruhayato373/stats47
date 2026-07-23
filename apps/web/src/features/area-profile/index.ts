@@ -30,5 +30,5 @@ export {
 } from "./utils/generate-area-metadata";
 export { getCityRouteContext } from "./utils/city-route-context";
 
-// Map component
-export { AreaSelectorMap } from "./components/AreaSelectorMap";
+// 都道府県一覧（/areas）の県選択ハブ（検索 / 一覧 / 軽量タイル地図）
+export { AreaDirectory } from "./components/AreaDirectory";

@@ -1,19 +1,17 @@
-import Link from "next/link";
+import { fetchPrefectures } from "@stats47/area";
 
-import { fetchPrefectures, REGIONS } from "@stats47/area";
+import { PageShell, PageHeader, Breadcrumbs } from "@/components/layout";
 
-import { PageShell } from "@/components/layout";
-
-import { AreaSelectorMap } from "@/features/area-profile";
+import { AreaDirectory } from "@/features/area-profile";
 
 import { AdSenseAd, RANKING_PAGE_FOOTER } from "@/lib/google-adsense";
 import { generateOGMetadata } from "@/lib/metadata/og-generator";
 
 import type { Metadata } from "next";
 
-const title = "都道府県一覧 | Stats47";
+const title = "都道府県から統計を見る | Stats47";
 const description =
-    "47都道府県の統計プロファイル。各都道府県の強み・弱みを統計データから分析し、全国ランキングに基づく地域特性を表示します。";
+    "47都道府県の全国順位、地域の強み・弱み、人口・産業・暮らしの統計を確認できます。都道府県名の検索・地方別の一覧・タイル地図から、目的の県のプロフィールへ移動できます。";
 
 export const metadata: Metadata = {
     title,
@@ -26,7 +24,6 @@ export const metadata: Metadata = {
 
 export default function AreasPage() {
     const prefectures = fetchPrefectures();
-    const prefMap = new Map(prefectures.map((p) => [p.prefCode, p]));
 
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://stats47.jp";
     const structuredData = {
@@ -48,58 +45,22 @@ export default function AreasPage() {
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
             />
-            <h1 className="text-lg font-bold mb-1">都道府県一覧</h1>
-            <p className="text-sm text-muted-foreground mb-4">
-                地図をクリックして都道府県の特徴を見る
-            </p>
+            <Breadcrumbs
+                items={[{ label: "ホーム", href: "/" }, { label: "都道府県" }]}
+            />
+            <PageHeader
+                eyebrow="エリア"
+                title="都道府県から統計を見る"
+                description="47都道府県の全国順位、地域の強み・弱み、人口・産業・暮らしの統計を確認できます。"
+            />
 
-            <div className="grid gap-8 lg:grid-cols-[minmax(0,480px)_1fr] lg:items-start">
-              {/* 左: タイルグリッドマップ */}
-              <div>
-                <AreaSelectorMap />
-              </div>
-
-              {/* 右: 地方ブロック別リンク (残り幅を 2 カラムで活用) */}
-              <div className="mt-6 grid gap-x-6 gap-y-5 sm:grid-cols-2 lg:mt-0">
-                {REGIONS.map((region) => {
-                    const regionPrefs = region.prefectures
-                        .map((code) => prefMap.get(code))
-                        .filter((p): p is NonNullable<typeof p> => p != null);
-                    const headingId = `region-${region.regionCode}`;
-
-                    return (
-                        <section
-                            key={region.regionCode}
-                            aria-labelledby={headingId}
-                        >
-                            <h2
-                                id={headingId}
-                                className="text-sm font-semibold text-muted-foreground mb-1"
-                            >
-                                {region.regionName}
-                            </h2>
-                            <div className="flex flex-wrap gap-x-3 gap-y-1">
-                                {regionPrefs.map((pref) => (
-                                    <Link
-                                        key={pref.prefCode}
-                                        href={`/areas/${pref.prefCode}`}
-                                        className="text-sm text-foreground hover:text-primary transition-colors"
-                                    >
-                                        {pref.prefName}
-                                    </Link>
-                                ))}
-                            </div>
-                        </section>
-                    );
-                })}
-              </div>
-            </div>
+            <AreaDirectory prefectures={prefectures} />
 
             <div className="flex justify-center mt-8">
-              <AdSenseAd
-                format={RANKING_PAGE_FOOTER.format}
-                slotId={RANKING_PAGE_FOOTER.slotId}
-              />
+                <AdSenseAd
+                    format={RANKING_PAGE_FOOTER.format}
+                    slotId={RANKING_PAGE_FOOTER.slotId}
+                />
             </div>
         </PageShell>
     );
