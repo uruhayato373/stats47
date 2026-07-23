@@ -2,7 +2,7 @@ import { describe, it, expect } from "vitest";
 import { mkdtempSync, existsSync, readFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
-import { buildB01 } from "../src/build/build-b01";
+import { buildProduct } from "../src/build/build-product";
 import { buildInputHash } from "../src/generators/manifest";
 import { SAMPLE_DATASET } from "../src/fixtures/sample-dataset";
 import { JAPANESE_POPULATION_2024 } from "../src/data/datasets/japanese-population";
@@ -12,23 +12,33 @@ import { ALL_PRODUCTS } from "../src/catalog/products";
 import { serializeDatasetCsv } from "../src/generators/csv";
 import { renderListing } from "../src/generators/listing";
 
+// P-02 (build-product 経路・formats = pptx/xlsx/csv/pdf/png・共通デモデータ) の成果物一覧。
 const REL = [
   "product.pptx",
+  "product.xlsx",
   "manual.pdf",
   "data.csv",
   "SOURCES.csv",
   "LICENSE-ja.txt",
   "preview/thumbnail-620x620.png",
+  "assets/choropleth-map.png",
   "listing/listing.md",
   "manifest.json",
 ];
 
-describe("B-01 build pipeline (integration)", () => {
+const PACK_ID = "P-02";
+
+describe("pack build pipeline (integration)", () => {
   it(
     "generates all artifacts with valid pptx/pdf and a deterministic inputHash",
     async () => {
-      const outRoot = mkdtempSync(join(tmpdir(), "pf-b01-"));
-      const res = await buildB01({ outRoot, generatedAt: "2026-07-18T00:00:00.000Z" });
+      const outRoot = mkdtempSync(join(tmpdir(), "pf-pack-"));
+      const product = ALL_PRODUCTS.find((p) => p.id === PACK_ID);
+      if (!product) throw new Error(`${PACK_ID} not found`);
+      const res = await buildProduct(product, JAPANESE_POPULATION_2024, {
+        outRoot,
+        generatedAt: "2026-07-18T00:00:00.000Z",
+      });
 
       for (const f of REL) {
         expect(existsSync(join(res.outDir, f)), `missing ${f}`).toBe(true);
@@ -39,10 +49,11 @@ describe("B-01 build pipeline (integration)", () => {
       // preview png signature
       expect(readFileSync(join(res.outDir, "preview/thumbnail-620x620.png")).subarray(1, 4).toString("latin1")).toBe("PNG");
 
-      expect(res.manifest.files.length).toBe(7);
-      expect(res.manifest.productId).toBe("B-01");
+      // manifest.files = 同梱物 9 点 (manifest.json / READINESS.md は含めない)
+      expect(res.manifest.files.length).toBe(REL.length - 1);
+      expect(res.manifest.productId).toBe(PACK_ID);
 
-      // 実データ商品なので manifest / listing に「架空」を出さない
+      // 共通デモは実データ (japanese-population) なので manifest / listing に「架空」を出さない
       expect(res.manifest.notice).not.toContain("架空");
       const listing = readFileSync(join(res.outDir, "listing/listing.md"), "utf8");
       expect(listing).not.toContain("架空");
@@ -51,10 +62,8 @@ describe("B-01 build pipeline (integration)", () => {
 
       // inputHash は入力 snapshot から決定的に再現できる (実データセット)
       const ds = JAPANESE_POPULATION_2024;
-      const product = ALL_PRODUCTS.find((p) => p.id === "B-01");
-      if (!product) throw new Error("B-01 not found");
       const expected = buildInputHash({
-        productId: "B-01",
+        productId: PACK_ID,
         licenseId: product.licenseId,
         price: product.price,
         formats: product.formats,
@@ -89,10 +98,10 @@ describe("B-01 build pipeline (integration)", () => {
   });
 
   it("emits listing markdown with resale prohibition", () => {
-    const product = ALL_PRODUCTS.find((p) => p.id === "B-01");
-    if (!product) throw new Error("B-01 not found");
-    const md = renderListing(product, SAMPLE_DATASET);
-    expect(md).toContain("# 都道府県データ説明スライド20枚セット");
+    const product = ALL_PRODUCTS.find((p) => p.id === PACK_ID);
+    if (!product) throw new Error(`${PACK_ID} not found`);
+    const md = renderListing(product, [SAMPLE_DATASET]);
+    expect(md).toContain(`# ${product.name}`);
     expect(md).toContain("再販売 / 再配布は禁止");
   });
 });

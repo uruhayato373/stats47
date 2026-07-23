@@ -1,11 +1,18 @@
 {
-  "hash": "5058f1e2096b9f47d1c17e5ab95b5af805fcbd2337d807ec13594d8ee7713441",
-  "audited_at": "2026-07-22T09:26:37",
+  "hash": "a8ac514c5335789f52000d6ed14495be4ed5e7701cadc27125938ab8ad9aa0d6",
+  "audited_at": "2026-07-23T00:47:47",
   "files": [
+    ".claude/agents/README.md",
+    ".claude/agents/coconala-operator.md",
     ".claude/agents/coconala-product-manager.md",
-    ".claude/agents/ranking-expander.md",
-    ".claude/agents/site-ux-manager.md",
-    ".claude/skills/management/expand-rankings/SKILL.md",
-    ".claude/skills/survey/manage-survey-portfolio/reference/audits/2026-07-13-survey-portfolio-audit.md"
+    ".claude/scripts/coconala/capture-account.mjs",
+    ".claude/scripts/coconala/coconala-delete-draft.mjs",
+    ".claude/scripts/coconala/coconala-edit.mjs",
+    ".claude/scripts/coconala/coconala-publish.mjs",
+    ".claude/scripts/coconala/discover-categories.mjs",
+    ".claude/scripts/coconala/lib/coconala-form.mjs",
+    ".claude/scripts/coconala/lib/coconala-session.mjs",
+    ".claude/scripts/coconala/login.mjs",
+    ".claude/skills/product/coconala-publish/SKILL.md"
   ]
 }

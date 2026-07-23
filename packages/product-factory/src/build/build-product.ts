@@ -46,20 +46,6 @@ export interface ProductBuildResult {
   readonly manifest: ProductManifest;
 }
 
-function serviceTemplateNote(product: ProductDefinition): string {
-  return [
-    `# 成果物雛形 — ${product.id} ${product.name}`,
-    "",
-    "本商品は役務（サービス）です。同梱の成果物（PowerPoint / Excel / CSV / 地図）は、",
-    "依頼者データを反映して制作する納品物の雛形・見本です。サービス自体は自動実行しません。",
-    "",
-    `- 想定納品: ${product.formats.join(" / ") || "個別"}`,
-    "- 依頼時に対象テーマ・地域・指標・納期・修正回数を確認します。",
-    "- 推測値と実証済みの事実を分けて記載し、出典・基準年を明示します。",
-    "",
-  ].join("\n");
-}
-
 export async function buildProduct(
   product: ProductDefinition,
   ds: Dataset,
@@ -83,7 +69,7 @@ export async function buildProduct(
   files.push("SOURCES.csv");
   writeFileSync(join(outDir, "LICENSE-ja.txt"), renderLicenseText(product.licenseId));
   files.push("LICENSE-ja.txt");
-  writeFileSync(join(outDir, "listing", "listing.md"), renderListing(product, ds));
+  writeFileSync(join(outDir, "listing", "listing.md"), renderListing(product, [ds]));
   files.push("listing/listing.md");
   writeFileSync(join(outDir, "data.csv"), serializeDatasetCsv(ds));
   files.push("data.csv");
@@ -127,11 +113,6 @@ export async function buildProduct(
   }
   for (const f of product.formats) if (!SUPPORTED.has(f)) skipped.push(f); // docx / web
 
-  if (product.family === "service") {
-    writeFileSync(join(outDir, "DELIVERABLE-TEMPLATE.md"), serviceTemplateNote(product));
-    files.push("DELIVERABLE-TEMPLATE.md");
-  }
-
   // manifest (files = 同梱物、readiness/manifest は含めない)
   const inputHash = buildInputHash({
     productId: product.id,
@@ -148,7 +129,7 @@ export async function buildProduct(
   });
   const manifest: ProductManifest = {
     productId: product.id,
-    family: product.family,
+    family: product.theme,
     version,
     generatedAt,
     inputHash,
@@ -167,7 +148,7 @@ export async function buildProduct(
 
   return {
     productId: product.id,
-    family: product.family,
+    family: product.theme,
     outDir,
     formatsBuilt: built,
     skippedFormats: skipped,

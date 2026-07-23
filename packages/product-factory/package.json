@@ -5,6 +5,7 @@
   "description": "ココナラ商品ファクトリー — 型付き商品カタログと生成基盤 (Phase 1: catalog + validator + CLI)",
   "main": "./src/index.ts",
   "dependencies": {
+    "@stats47/data-configs": "*",
     "@expo-google-fonts/noto-sans-jp": "^0.4.3",
     "@pdf-lib/fontkit": "^1.1.1",
     "exceljs": "^4.4.0",
@@ -18,6 +19,8 @@
     "products:validate": "tsx src/cli.ts validate",
     "products:preview": "tsx src/cli.ts preview",
     "products:report": "tsx src/cli.ts report",
+    "products:pack-snapshot": "tsx src/data/pack-snapshot.ts",
+    "products:pack-rankingkeys": "tsx src/catalog/build-pack-rankingkeys.ts",
     "products:note:plan": "tsx src/channels/note/cli.ts plan",
     "products:note:generate": "tsx src/channels/note/cli.ts generate",
     "products:note:validate": "tsx src/channels/note/cli.ts validate",

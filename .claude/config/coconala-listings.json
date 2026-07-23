@@ -1,0 +1,87 @@
+{
+  "_note": "ココナラ出品の SoT (stats47)。coconala-publish.mjs / coconala-edit.mjs が product id で引いてフォームへ流し込む。商品設計 (name/audience/価格帯) は packages/product-factory が上流 SSOT で、ここへは『出品する 1 商品ずつ』内容を書き起こす (.claude/rules/coconala-product-standards.md §6『1商品ずつ検証』に従う)。product-factory は serviceUrl/出品状態を持たないため、公開状態 (status/serviceUrl/listedAt) はこのファイルが真実源。カテゴリ (master/sub/type)・genreFacets の value はココナラ実機で確定する (doboku の coconala-discover 相当。フォームがドリフトしたら実機で option を取り直す)。",
+  "_schema": {
+    "<PRODUCT_ID>": {
+      "title": "サービスタイトル (★表示25字以内。末尾『ます』はフォーム側で自動付与=その2字も25字に含む。超過は記入エラーで保存拒否)",
+      "priceYen": "価格 (円・¥10,000以下=500円刻み / 超=1,000円刻み。★カテゴリごとに最低額が別途あり=例 資料作成は最低4,000円。低すぎると選択肢に無く警告になる)",
+      "status": "draft | listed",
+      "serviceUrl": "公開後に自動書き戻し",
+      "listedAt": "公開日 (自動)",
+      "catchphrase": "キャッチコピー (15〜30字)",
+      "category": {
+        "master": "大カテゴリ value",
+        "sub": "サブカテゴリ value",
+        "type": "カテゴリタイプ value (任意)"
+      },
+      "genreFacets": [
+        "ジャンル facet value を1つ以上 (必須)"
+      ],
+      "provisionFormat": "1=テキスト完結 / 2=制作物(+打ち合わせ・提案数/修正回数が必須) / 3=PDF・定型ファイル納品。★ready-made のデータファイル商品は 3 が正 (2 は保存時に既定へ戻りやすく、提案数等の余計な必須が増える)",
+      "body": "サービス内容 本文 (<=1000字)",
+      "purchaseNote": "購入にあたってのお願い (<=500字)",
+      "deliveryDays": "お届け日数 (数値)",
+      "fixLimit": "無料修正回数 ★2026-10/11刷新で公開時に必須。-1=無料修正なし / 1=1回 …。省略時は publish/edit が既定 -1。ready-made ファイルは -1",
+      "faq": [
+        {
+          "q": "",
+          "a": ""
+        }
+      ],
+      "options": [
+        {
+          "title": "",
+          "priceYen": 0,
+          "deliveryDays": 0
+        }
+      ]
+    }
+  },
+  "listings": {
+    "P-01": {
+      "title": "47都道府県の統計データをExcelでお渡しします",
+      "priceYen": 4000,
+      "status": "listed",
+      "serviceUrl": "https://coconala.com/services/4323722",
+      "listedAt": "2026-07-22",
+      "catchphrase": "47都道府県の統計4指標を編集可能なExcel・PDFで",
+      "category": {
+        "master": "13",
+        "sub": "427",
+        "type": "482"
+      },
+      "genreFacets": [
+        "292",
+        "366",
+        "446"
+      ],
+      "provisionFormat": "3",
+      "body": "47都道府県の基礎統計4指標（総人口・総面積・一般世帯数・1人当たり県民所得）を、47都道府県ぶんそろえた編集可能なデータ集です。企画書・営業資料・自治体向け提案・記事づくりで「まず全国を俯瞰する」ときにそのまま使えます。\n\n【収録データ（実データ・基準年固定）】\n・総人口（2024）\n・総面積（2023／北方地域及び竹島を含む）\n・一般世帯数（2020）\n・1人当たり県民所得（2020／H27年基準）\n※出典は政府統計の総合窓口（e-Stat）。指標ごとに最新の基準年で固定しているため、年は指標により異なります。同梱のSOURCES.csvに調査名・statsDataID・年次・加工方法を明記しています。\n\n【納品ファイル】\n・Excelブック（.xlsx）…指標別シート＋順位（RANK数式）。値を書き換えると順位が再計算されます\n・CSV（UTF-8 BOM）…取り込み・差し替え用\n・PDFデータブック…指標別の47都道府県ランキング表\n・SOURCES.csv（出典台帳）／利用許諾（LICENSE）\n\n【対応環境】Excel 365（Windows/Mac）、UTF-8（BOM）対応表計算ソフト、PDF閲覧環境\n\n【利用範囲】購入した1法人内での業務利用可。テンプレート・元データ単体の再販売／再配布は不可。\n\n【ご注意】基準年固定の買い切りで、自動更新はありません。e-Statや官公庁の公認・推奨を示すものではありません。",
+      "purchaseNote": "・ご購入前に、対象の指標・基準年・形式（Excel／CSV／PDF）がご希望に合うかご確認ください。\n・本商品は基準年固定の買い切りです（自動更新はありません）。最新値が必要な場合は事前にご相談ください。\n・収録値は政府統計の総合窓口（e-Stat）を基にstats47が集計・可視化したものです。国・府省・自治体やe-Statの公認・推奨ではありません。\n・テンプレート・元データ単体の再販売／再配布はご遠慮ください（1法人内の業務利用は可）。\n・軽微な体裁の修正はご相談に応じます。",
+      "deliveryDays": 2,
+      "fixLimit": "-1",
+      "faq": [],
+      "options": [],
+      "_thumbnail": ".local/coconala-products/P-01/v1/preview/thumbnail-ai.png",
+      "_thumbnailNote": "Codex生成のAI画像 (live 4323722 にアップロード済=顧客表示中)。壊れた自動生成 thumbnail-620x620.png ではなくこちらを使う。生成器バグ修正までは product:generate で 620 版が上書き生成されるので --image はこの ai 版を明示指定",
+      "_pendingCategory": "master/sub/type/genreFacets を discover-categories.mjs の結果で確定する"
+    },
+    "P-02": {
+      "title": "47都道府県の所得・賃金データ集をお渡しします",
+      "priceYen": 5000,
+      "status": "draft",
+      "serviceUrl": "",
+      "listedAt": "",
+      "catchphrase": "47都道府県の所得・賃金・雇用を編集可能なExcelで",
+      "category": { "master": "13", "sub": "427", "type": "482" },
+      "genreFacets": ["292", "366", "446"],
+      "provisionFormat": "3",
+      "body": "47都道府県の所得・賃金・雇用に関する6指標を、47都道府県ぶんそろえた編集可能なデータ集です。年収・給与水準・求人動向の地域差を、企画書・営業資料・採用や移住の検討資料にそのまま使えます。\n\n【収録データ（実データ・基準年固定）】\n・1人当たり県民所得（2020／H27年基準）\n・地方公務員の全職種平均給与月額（2024）\n・有効求人倍率（2022）\n・1世帯当たり年間収入（2019）\n・可処分所得〔二人以上の勤労者世帯〕（2024）\n・共働き世帯割合（2020）\n※出典は政府統計の総合窓口（e-Stat）。指標ごとに最新の基準年で固定しているため、年は指標により異なります。同梱のSOURCES.csvに調査名・statsDataID・年次・加工方法を明記しています。\n\n【納品ファイル】\n・Excelブック（.xlsx）…指標別シート＋順位（RANK数式）\n・PowerPoint（.pptx）…指標ごとの地図・ランキング\n・CSV（UTF-8 BOM）／PDFデータブック\n・SOURCES.csv（出典台帳）／利用許諾（LICENSE）\n\n【対応環境】Excel 365／PowerPoint 365（Windows/Mac）、UTF-8（BOM）対応表計算ソフト、PDF閲覧環境\n\n【利用範囲】購入した1法人内での業務利用可。テンプレート・元データ単体の再販売／再配布は不可。\n\n【ご注意】基準年固定の買い切りで、自動更新はありません。e-Statや官公庁の公認・推奨を示すものではありません。",
+      "purchaseNote": "・ご購入前に、対象の指標・基準年・形式（Excel／PowerPoint／CSV／PDF）がご希望に合うかご確認ください。\n・本商品は基準年固定の買い切りです（自動更新はありません）。最新値が必要な場合は事前にご相談ください。\n・収録値は政府統計の総合窓口（e-Stat）を基にstats47が集計・可視化したものです。国・府省・自治体やe-Statの公認・推奨ではありません。\n・テンプレート・元データ単体の再販売／再配布はご遠慮ください（1法人内の業務利用は可）。\n・軽微な体裁の修正はご相談に応じます。",
+      "deliveryDays": 2,
+      "fixLimit": "-1",
+      "faq": [],
+      "options": [],
+      "_thumbnail": ".local/coconala-products/P-02/v1/preview/thumbnail-ai.png"
+    }
+  }
+}

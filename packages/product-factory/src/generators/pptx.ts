@@ -278,3 +278,83 @@ export async function buildProductPptx(
 
   await pptx.writeFile({ fileName: outPath });
 }
+
+/**
+ * データブック PowerPoint (.pptx) を outPath に書き出す。
+ * buildProductPptx が単一データセット向けなのに対し、こちらは複数の実データセット (指標) を
+ * 束ね、指標ごとに「地図 + ランキング + 一覧」のセクションを並べる。
+ */
+export async function buildDatabookPptx(
+  datasets: readonly Dataset[],
+  geo: PrefectureGeometry,
+  outPath: string,
+  coverTitle = "47都道府県 データブック",
+): Promise<void> {
+  if (datasets.length === 0) throw new Error("buildDatabookPptx: datasets が空です");
+  const pptx = new PptxGenJS();
+  pptx.layout = "LAYOUT_WIDE";
+  pptx.author = "stats47";
+  pptx.company = "stats47";
+  pptx.title = coverTitle;
+
+  const mapPoints = buildMapPoints(geo);
+  const indicatorSummary = datasets.map((d) => `${d.indicator}（${d.year}）`).join(" / ");
+
+  // 1. 表紙
+  const cover = pptx.addSlide();
+  cover.background = { color: "0b1f3a" };
+  cover.addText(coverTitle, { x: 0.8, y: 2.4, w: 11.7, h: 1.4, fontSize: 30, bold: true, color: "ffffff", fontFace: JP_FONT });
+  cover.addText(`${datasets.length} 指標 × 47 都道府県（地図・ランキング・一覧）`, { x: 0.8, y: 3.5, w: 11.7, h: 0.6, fontSize: 16, color: "cbd5e1", fontFace: JP_FONT });
+  cover.addText(`stats47.jp ／ 収録指標：${indicatorSummary}`, { x: 0.8, y: 6.6, w: 11.7, h: 0.4, fontSize: 12, color: "94a3b8", fontFace: JP_FONT });
+
+  // 2. 概要
+  addTextSlide(pptx, "このデータブックについて", [
+    "47 都道府県を同じ定義で比較できる複数指標のデータブックです。",
+    `収録指標：${indicatorSummary}。`,
+    "地図は都道府県ごとに色を変更できる編集可能な図形（Office 図形）です。",
+    "グラフの数値は埋め込み Excel を編集すると更新されます。",
+    "各指標の基準年・出典・加工方法は同梱の SOURCES.csv を参照してください。",
+  ]);
+
+  // 3+. 指標ごとのセクション (地図 + ランキング + 一覧)
+  for (const ds of datasets) {
+    addMapSlide(pptx, ds, mapPoints, choroplethColorMap(ds, 5, "blues-sequential"), `地図：${ds.indicator}（${ds.year}）`, "分位で 5 クラスに区分（都道府県ごとに色を変更可）");
+    const ranked = rankItems(ds, "desc");
+    addBarChartSlide(pptx, ds, `ランキング：${ds.indicator}（上位 10）`, `単位：${ds.unit}／値の大きい順`, ranked.slice(0, 10));
+    addTableSlide(pptx, ds, `一覧：${ds.indicator}（47 都道府県）`);
+  }
+
+  // 使い方
+  addTextSlide(pptx, "使い方①：地図の色を変える", [
+    "地図の各都道府県は独立した図形です。クリックして選択できます。",
+    "図形を選び「図形の塗りつぶし」から任意の色に変更できます。",
+    "複数県を選んで一括で色を変えることもできます。",
+    "凡例の色は本文の配色に合わせて調整してください。",
+  ]);
+  addTextSlide(pptx, "使い方②：グラフのデータを差し替える", [
+    "グラフを選び「グラフのデザイン → データの編集」で埋め込み Excel を開きます。",
+    "数値を書き換えるとグラフが自動で更新されます。",
+    "同梱の data.csv を貼り付けると 47 県分を一括で差し替えられます。",
+    "基準年・出典は SOURCES.csv を参照してください。",
+  ]);
+
+  // 出典
+  addTextSlide(
+    pptx,
+    "出典・注記",
+    [
+      ...datasets.map((d) => `${d.indicator}（${d.year}）：${d.source.surveyName}（statsDataId ${d.source.statsDataId}）`),
+      "詳細は同梱の SOURCES.csv。国・府省・自治体や e-Stat の公認・推奨を示すものではありません。",
+    ],
+  );
+
+  // 利用許諾
+  addTextSlide(pptx, "利用許諾（要約）", [
+    "業務資料・提案書・記事・動画への組み込みは可能です（ライセンス条件による）。",
+    "テンプレート・図形・元データ単体の再販売 / 再配布は禁止です。",
+    "国・府省・自治体や e-Stat の公認・推奨と誤認させる表示はできません。",
+    "詳細は同梱の LICENSE-ja.txt を参照してください。",
+  ]);
+
+  await pptx.writeFile({ fileName: outPath });
+}
