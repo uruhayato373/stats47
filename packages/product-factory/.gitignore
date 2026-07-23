@@ -1,0 +1,4 @@
+# 生成物 (build-databook / pack-snapshot.ts が R2 + metric config から焼き込む派生 JSON)。
+# 基準年固定のスナップショットで最大 4.5MB になり repo hygiene の 1MB gate に抵触するため
+# git 追跡しない。必要時に生成コマンドで再生成する (SSOT は catalog/datasets の git TS + R2)。
+src/data/pack-snapshots/
