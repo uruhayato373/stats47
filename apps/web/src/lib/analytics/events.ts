@@ -151,6 +151,8 @@ export function trackHomeFeaturedClick(params: HomeFeaturedEventParams): void {
  * `nav_surface` の値:
  * - `desktop-header` / `mobile-drawer`: グローバルナビ
  * - `areas_search` / `areas_list` / `areas_map`: /areas の県選択導線（検索 / 一覧 / 地図）
+ * - `home_category` / `home_use_case` / `home_area` / `home_buzz_map` / `home_blog`:
+ *   home ポータルの発見セクション（カテゴリ / 知りたいこと / 都道府県 / バズマップ / ブログ）
  *
  * いずれも既存 GA4 custom dimension `nav_surface` の値追加であり、新しい dimension は増やさない
  * (`.claude/rules/analytics-event-standards.md` §2)。
@@ -163,7 +165,12 @@ export function trackNavClick(params: {
     | "mobile-drawer"
     | "areas_search"
     | "areas_list"
-    | "areas_map";
+    | "areas_map"
+    | "home_category"
+    | "home_use_case"
+    | "home_area"
+    | "home_buzz_map"
+    | "home_blog";
 }): void {
   sendEvent("nav_click", {
     event_category: "navigation",

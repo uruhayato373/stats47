@@ -1,6 +1,15 @@
-# FeaturedRankings — ホーム「注目のランキング」(home-featured-v1 実験)
+# FeaturedRankings — ホーム「注目のランキング」
 
 仕様の正典: `docs/02_実装計画/28_ホーム注目ランキングCTR改善仕様.md`
+
+> **home-featured-v1 実験は終了 (2026-07-23)**: 50/50 A/B (control=map/number vs editorial=
+> question/comparison/territory/top-three) は判定前だったが、ポータル型 home 再設計
+> (`docs/02_実装計画/38_ポータル型ホーム・ヘッダー再設計仕様.md`) で home 構造が変わり exposure/CTR
+> 条件が変化するため、**オーナー判断で終了し editorial を採用**した (標本不足で `inconclusive`)。
+> sticky assignment 機構 (`resolveHomeFeaturedAssignment` / localStorage `stats47_exp_home_featured_v1`
+> / 乱数 50/50) は撤去し、`FeaturedRankingExperimentGrid` は editorial variant を全ユーザーに固定描画
+> (item 単位で editorial payload 不足時のみ control card にフォールバック)。impression/click 計測は
+> `experiment_variant="editorial"` 固定で継続 (doc 28 §9.5)。
 
 ## SSOT
 
