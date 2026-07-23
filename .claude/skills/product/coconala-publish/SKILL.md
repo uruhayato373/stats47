@@ -55,6 +55,7 @@ node .claude/scripts/coconala/coconala-delete-draft.mjs --id <n>               #
 | **提供形式** | 保存時に既定2(制作物)へ戻りやすい。制作物2は提案数/修正回数が必須で増える | ready-mファイルは **3(PDF・定型ファイル)**。fill が確認モーダル処理+保持検証 |
 | **無料修正回数(fixLimit)** | 公開時のみ必須（下書き保存では任意） | listings に `fixLimit`（省略時 publish/edit が既定 -1=無料修正なし） |
 | **カテゴリ** | master/sub/type/facet の value は実機依存 | `discover-categories.mjs --master N` で取得して確定 |
+| **公開済みの画像差し替え** | 公開中listingを `--image` で更新すると提供形式が既定へ戻り更新失敗しうる | `coconala-edit --service <id> --service-id <n> --image <path> --replace-image --commit`（★既定の `--image` は全フィールド再適用+画像差し替え。旧画像を消してメイン化）。`--image-only` 明示時のみ画像だけ触る |
 
 ## ガードレール
 
