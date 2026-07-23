@@ -293,10 +293,15 @@ if (checks.charts >= 1) {
 }
 
 // source-link 配置チェック (2026-05-28 追加、article-structure-lint.mjs に切り出し)
-// /ranking/ リンクの末尾集約を検出。WARN 扱い (回遊性の問題だが描画は壊れない)。
+// 2026-07-24: 重複カード / 連続配置 / 図の無い節への配置 / 末尾集約 を blocker 化。
+// カードの羅列は「どのリンクがどの図に対応するか」を失わせ、読者には無関係なリンクに見える。
 const sourceLinkLint = lintSourceLinkPlacement(content);
 checks.rankingSourceLinks = sourceLinkLint.stats.rankingSourceLinks;
 checks.tailRankingLinks = sourceLinkLint.stats.tailRankingLinks;
+checks.dupRankingLinks = sourceLinkLint.stats.dupRankingLinks;
+checks.adjacentClusters = sourceLinkLint.stats.adjacentClusters;
+checks.noFigureSectionLinks = sourceLinkLint.stats.noFigureSectionLinks;
+blockers.push(...sourceLinkLint.blockers);
 warnings.push(...sourceLinkLint.warnings);
 
 // markdown 表の全面禁止 (2026-06-04): データは SVG 図、列挙/手順は箇条書きで表現する。

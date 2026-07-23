@@ -18,6 +18,8 @@
  */
 import fs from "node:fs";
 
+import { lintSourceLinkPlacement } from "../lib/article-structure-lint.mjs";
+
 const BASE_URL = process.env.R2_PUBLIC_FETCH_URL || "https://storage.stats47.jp";
 const CONCURRENCY = 8;
 
@@ -204,13 +206,11 @@ function auditArticle(meta, body) {
     flags.push(["blocker", "記事内関連セクション — ページ側コンポーネントが正典 (記事から削除)"]);
   }
 
-  // /ranking source-link の末尾集約 (2 個以上が末尾 1/4 に固まる)
-  const slMatches = [...body.matchAll(/<source-link\s+href="(\/ranking\/[^"]+)"/gi)];
-  if (slMatches.length >= 2) {
-    const tailZone = body.length * 0.75;
-    const tailCount = slMatches.filter((m) => m.index >= tailZone).length;
-    if (tailCount >= 2) flags.push(["warning", `source-link 末尾集約 ${tailCount}個 — 各図直下へ分散`]);
-  }
+  // /ranking source-link の配置 (重複 / 連続 / 図なし節 / 末尾集約)。
+  // 判定は共有 lib に一本化する (2026-07-24: ここに独自コピーを持たない)。
+  const slLint = lintSourceLinkPlacement(body);
+  for (const b of slLint.blockers) flags.push(["blocker", b]);
+  for (const w of slLint.warnings) flags.push(["warning", w]);
 
   for (const [s] of flags) sev[s]++;
   return {
