@@ -132,6 +132,30 @@ export const revalidate = 86400;   // ƒ (オンデマンド) になり、ラン
 > 全件 (例: ranking 2575 件) を build で読むと generateStaticParams が肥大化し build が重くなる (不採用)。
 > R2 依存ページは原則 `ƒ` オンデマンド ISR を採用する。
 
+## prerender 済みページの内容更新には再デプロイが要る (2026-07-24 実測)
+
+`blog/[slug]` のように **build 時に prerender される (`● SSG`) ページ**は、元データ (R2 の
+`article.md` 等) を更新しても**本番に反映されない**。ビルド時に焼かれた HTML が配信され続ける。
+
+**実測 (2026-07-24、ブログ 162 記事の source-link 一括是正時)**:
+
+| 試したこと | 結果 |
+|---|---|
+| R2 `app/blog/<slug>/article.md` を新内容で上書き (S3 API・GET で内容一致を確認) | live は旧内容のまま |
+| `?cb=<random>` で CDN キャッシュを迂回して Worker に直接当てる | 旧内容 (`x-nextjs-prerender: 1` / `x-nextjs-stale-time: 4294967294`) |
+| OpenNext の incremental cache エントリを削除 (`incremental-cache/<buildId>/<sha256(route)>.cache`) | 旧内容のまま。**エントリは再生成すらされない** = Worker は当該 route で incremental cache を参照していない |
+
+`x-nextjs-stale-time: 4294967294` (= 実質無限) が付くページは revalidate を持たない完全な静的
+ページで、OpenNext はキャッシュを見ずにビルド成果物を返す。したがって**反映手段は再デプロイのみ**。
+
+- **記事・コンテンツの編集 (brushup / 一括是正) は、R2 push だけでは本番に出ない**。まとまった単位で
+  デプロイする (デプロイ規律は `branch-workflow.md`: 溜めて 1 回・明示指示か確認の上)。
+- 逆に**新規公開**の記事は build 時の `generateStaticParams` に含まれないため on-demand で描画され、
+  R2 push + CDN パージだけで出る (`blog-auto-publish.yml` が成立しているのはこのため)。
+- ISR エントリだけを消したい場合の道具は `packages/r2-storage/src/scripts/purge-isr-routes.ts`
+  (route → sha256 → `incremental-cache/<buildId>/` を削除。現行 buildId は自動判定)。
+  ただし上表のとおり **prerender 済みページには効かない**。効くのは `ƒ` オンデマンド ISR ページ。
+
 ## 検証コマンド
 
 ```bash

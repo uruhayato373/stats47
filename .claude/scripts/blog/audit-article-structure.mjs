@@ -55,8 +55,8 @@ function auditArticle(slug) {
   const articleMd = path.join(BASE, slug, "article.md");
   if (!fs.existsSync(articleMd)) return null;
   const md = fs.readFileSync(articleMd, "utf8");
-  const { warnings, stats } = lintSourceLinkPlacement(md);
-  return { slug, warnings: warnings.length, ...stats };
+  const { blockers, warnings, stats } = lintSourceLinkPlacement(md);
+  return { slug, blockers: blockers.length, warnings: warnings.length, ...stats };
 }
 
 const slugs = fs
@@ -68,10 +68,10 @@ const slugs = fs
 const results = slugs.map(auditArticle).filter(Boolean);
 // source-link を持つ記事のみ対象 (チャート系記事)
 const withLinks = results.filter((r) => r.rankingSourceLinks > 0);
-// 違反 = 末尾集約 2 個以上
+// 違反 = source-link 配置の blocker (重複 / 連続配置 / 図なし節 / 末尾集約) が 1 件以上
 const violations = withLinks
-  .filter((r) => r.tailRankingLinks >= 2)
-  .sort((a, b) => b.tailRankingLinks - a.tailRankingLinks);
+  .filter((r) => r.blockers > 0)
+  .sort((a, b) => b.blockers - a.blockers || b.tailRankingLinks - a.tailRankingLinks);
 
 const summary = {
   generatedAt: new Date().toISOString(),
@@ -81,6 +81,10 @@ const summary = {
   articlesViolating: violations.length,
   articles: violations.map((r) => ({
     slug: r.slug,
+    blockers: r.blockers,
+    dupRankingLinks: r.dupRankingLinks,
+    adjacentClusters: r.adjacentClusters,
+    noFigureSectionLinks: r.noFigureSectionLinks,
     tailRankingLinks: r.tailRankingLinks,
     inlineRankingLinks: r.inlineRankingLinks,
     figures: r.figures,
@@ -97,23 +101,24 @@ if (JSON_OUT) {
 
 log(`\n=== 記事構造監査: source-link 配置 (${summary.base}) ===`);
 log(`走査記事: ${summary.articlesScanned} / ランキングリンク保有: ${summary.articlesWithRankingLinks}`);
-log(`末尾集約の違反: ${summary.articlesViolating} 記事`);
+log(`配置違反: ${summary.articlesViolating} 記事`);
 log(`保存先: ${path.relative(PROJECT_ROOT, OUT_PATH)}\n`);
 
 if (violations.length === 0) {
-  log("✓ source-link 末尾集約の違反はありません");
+  log("✓ source-link 配置の違反はありません");
 } else {
-  log("優先度順 (末尾集約数):");
-  log("末尾  inline  図   slug");
+  log("優先度順 (blocker 数):");
+  log("blk  重複  連続  図なし  末尾  slug");
   for (const r of violations.slice(0, 40)) {
     log(
-      `${String(r.tailRankingLinks).padStart(4)}  ${String(r.inlineRankingLinks).padStart(6)}  ` +
-        `${String(r.figures).padStart(3)}  ${r.slug}`,
+      `${String(r.blockers).padStart(3)}  ${String(r.dupRankingLinks).padStart(4)}  ` +
+        `${String(r.adjacentClusters).padStart(4)}  ${String(r.noFigureSectionLinks).padStart(6)}  ` +
+        `${String(r.tailRankingLinks).padStart(4)}  ${r.slug}`,
     );
   }
   log(
-    `\n再配置は brushup サイクルで agent が意味判断 (どの図にどのリンク) で実施。` +
-      ` select-brushup-candidates.mjs が本監査の structureIssues を加味する。`,
+    `\n一括是正: node .claude/scripts/blog/fix-source-link-placement.mjs (決定的変換)。` +
+      ` 個別の意味判断が要る分は brushup サイクルで agent が対応する。`,
   );
 }
 

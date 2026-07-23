@@ -193,19 +193,31 @@ date: YYYY-MM-DD
 - `/blog/{related-slug}` (関連記事)
 - `/category/{key}` (カテゴリ一覧)
 
-### source-link の配置 (★必須・末尾集約禁止)
+### source-link の配置 (★必須・カードは「1 図 1 枚」)
 
-`<source-link href="/ranking/...">` (関連ランキングへの誘導) は **記事末尾にまとめない**。
-**対応する図・データを扱う H2 セクション内 (SVG 図の直下等) にインライン配置**する。
+`<source-link href="/ranking/...">` は**その節の主題データへ深掘りするカード 1 枚**であって、
+リンク集ではない。**対応する図を扱う H2 セクション内 (SVG 図の直下等) にインライン配置**し、
+記事末尾にも節内にも**束ねない**。
 
-理由: 末尾集約は (1) 読者がその図を見た瞬間の「もっと詳しく」という意図を取りこぼし回遊性を下げる、(2) どのリンクがどのデータに対応するか文脈が失われる。
+理由: 束ねると (1) 読者がその図を見た瞬間の「もっと詳しく」という意図を取りこぼし回遊性を下げる、
+(2) どのカードがどのデータに対応するか文脈が失われ、**読者には無関係なリンクの羅列に見える**
+(2026-07-24 に `/blog/black-tea-income-gap` で実際に報告された。紅茶マップの直下に紅茶・緑茶・
+コーヒーのカードが 3 連続していた)。
 
 | 配置 | リンク種別 | 可否 |
 |---|---|---|
-| 対応セクション内 (図の直下) | `/ranking/{key}` | ✅ 必須 |
+| 対応セクション内 (図の直下) に 1 枚 | `/ranking/{key}` | ✅ 必須 |
+| 同一 `/ranking/{key}` へのカードを記事内に 2 枚以上 | `/ranking/{key}` | ❌ 禁止 |
+| カードを 2 枚以上連続で並べる (節の途中でも) | `/ranking/{key}` | ❌ 禁止 |
+| 図が 1 枚も無い H2 セクションにカードを置く | `/ranking/{key}` | ❌ 禁止 |
 | 記事末尾にまとめて 2 個以上 | `/ranking/{key}` | ❌ 禁止 (アンチパターン) |
+| 束ねたい / 図の無い節から誘導したい場合のインラインテキストリンク | `あわせて見る: [ラベル](/ranking/key)` | ✅ 可 (1 行に集約) |
 | 末尾の関連セクション | `/category/{key}` `/themes/{key}` (ナビ目的) | ✅ 可 |
 | 末尾の `### 関連記事` | `/blog/{slug}` | ✅ 可 |
+
+複数のランキングへ誘導したい節では、**カードは図に対応する 1 枚だけ**にし、残りは
+`あわせて見る: [A ランキング](/ranking/a) / [B ランキング](/ranking/b)` の 1 行にまとめる
+(テキストリンクも `quality-gate.mjs` の internalLinks に数えられるので回遊導線は失われない)。
 
 **良い例**:
 ```markdown
@@ -218,16 +230,34 @@ date: YYYY-MM-DD
 <source-link href="/ranking/manufacturing-shipment-amount">製造品出荷額ランキングをもっと見る</source-link>
 ```
 
-**悪い例** (末尾集約):
+**悪い例** (カードの羅列):
 ```markdown
-## まとめ
-...
-<source-link href="/ranking/a">A ランキング</source-link>
-<source-link href="/ranking/b">B ランキング</source-link>
-<source-link href="/ranking/c">C ランキング</source-link>   ← 全部末尾。各図の直下に分散すべき
-```
+## 地理でみる紅茶消費
 
-検査 (決定的 lint): `node .claude/scripts/blog/audit-article-structure.mjs` で `/ranking/` source-link の末尾集約 (2 個以上) を検出。`quality-gate.mjs` にも統合済 (WARN)。どの図に再配置するかは brushup 時に agent が意味判断。
+![紅茶消費支出額 都道府県マップ](data/black-tea-expenditure-map.svg)
+
+...（解説）
+
+<source-link href="/ranking/black-tea-consumption-expenditure">紅茶消費支出額ランキング</source-link>
+<source-link href="/ranking/green-tea-consumption-expenditure">緑茶消費支出額ランキング</source-link>
+<source-link href="/ranking/coffee-consumption-expenditure">コーヒー消費支出額ランキング</source-link>
+```
+↑ 紅茶のカードは前の節と重複、緑茶・コーヒーは直上の図と無関係。読者には「関係ないリンク」に見える。
+図に対応する 1 枚だけカードで残し、他は `あわせて見る: [緑茶消費支出額ランキング](/ranking/green-tea-consumption-expenditure) / [コーヒー消費支出額ランキング](/ranking/coffee-consumption-expenditure)` にする。
+
+検査 (決定的 lint・**blocker**): `.claude/scripts/lib/article-structure-lint.mjs` が
+`dup-ranking-link` / `adjacent-cluster` / `no-figure-section` / `tail-cluster` を検出する
+(`offtopic-link` = 指標名が節の本文に出てこない、は warning)。配線先は `quality-gate.mjs`
+(pre-commit + publish-blog.yml で公開前ブロック) / `audit-article-structure.mjs` (バッチ) /
+`audit-published-blog.mjs` (公開済み棚卸し)。
+
+既存記事の一括是正は決定的変換スクリプトで行う (散文は変更しない):
+```bash
+node .claude/scripts/blog/fix-source-link-placement.mjs            # dry-run
+node .claude/scripts/blog/fix-source-link-placement.mjs --apply    # .local/blog-srclink-fix/out へ
+npx tsx .claude/scripts/blog/push-article-md-r2.ts --apply         # R2 の article.md を上書き
+```
+どの図にどのカードを残すかの意味判断が要る分だけ brushup サイクルで agent が対応する。
 
 ### 可視化は SVG 図に統一・表は原則禁止 (★2026-06-04 確定: markdown 表 全面禁止)
 
