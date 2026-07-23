@@ -11,6 +11,11 @@
     "cloudflare-graphql": {
       "type": "sse",
       "url": "https://graphql.mcp.cloudflare.com/sse"
+    },
+    "seo-observability": {
+      "type": "stdio",
+      "command": "node",
+      "args": [".claude/scripts/search-growth/mcp/server.mjs"]
     }
   }
 }

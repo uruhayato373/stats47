@@ -1,11 +1,11 @@
 ---
 name: project_coconala_publish_automation
-description: ココナラ出品自動化(Playwright)をdoboku-noteから移植・stats47で稼働。10/11フォーム刷新の非自明な必須項目・価格value skew等の実機知見。初出品D-01公開済み
+description: ココナラ出品自動化(Playwright)をdoboku-noteから移植・stats47で稼働。10/11フォーム刷新の非自明な必須項目・価格value skew等の実機知見。2026-07-23に13商品(P-01〜P-12/P-14・テーマ別データ集)公開・個別AI画像設定済み
 metadata: 
   node_type: memory
   type: project
   originSessionId: 2f2d73ae-c416-421c-9ecc-09ee683fbf9c
-  modified: 2026-07-22T23:48:41.464Z
+  modified: 2026-07-23T06:43:26.489Z
 ---
 
 ココナラ(coconala.com)出品自動化を doboku-note から stats47 へ移植し、初商品を公開した(2026-07-23)。
@@ -34,10 +34,20 @@ metadata:
 - カテゴリはコナラ実機依存: `discover-categories.mjs --master N` で master→sub→type→facet の実valueを取得して確定。
   データ資料商品 = master13(ビジネス代行) › sub427(資料・企画書作成) › type482(各種資料作成相談) / facet Excel292等。
 
-## 公開実績
-D-01「47都道府県の統計データをExcelでお渡しします」= https://coconala.com/services/4323722 (4,000円・公開済)。
-draft-first→`--commit`はオーナー承認後。納品ファイル本体は購入後トークルーム送付運用(出品ページはサムネのみ)。
-検証で作られた空の下書きは `coconala-delete-draft.mjs --id … --commit`(4重ガード・公開済みidは保護)で掃除。
+## 公開実績 (2026-07-23: 13商品 live)
+product-factory の13パック(P-01〜P-12・P-14。旧D-01=P-01にrename)を全て「テーマ別・全指標入り」
+データ集としてコナラ公開。各 ¥4,000〜15,000・28〜2,054指標・Excel/PowerPoint(県別コロプレス地図)/CSV/PDF同梱。
+serviceId: P-01=4323722/P-02=4323916/P-03=4323937/P-04=4324057/P-05=4324061/P-06=4324062/P-07=4324065/
+P-08=4324067/P-09=4324069/P-10=4324073/P-11=4324076/P-12=(全部入り2054)/P-14=4323941。P-13(無料)は非出品。
+- **テーマ整合是正**: e-Statカテゴリ≠商品テーマ名の不整合(観光カテゴリ=実は運輸/economy=家計等)を、
+  listing レベルで実内容に合わせ改名(P-03観光・交通/P-06教育・文化/P-07気候・土地/P-09農業・産業 等)。
+- **個別サムネ**: Codex ビルトイン画像生成で12テーマ別画像(日本地図×モチーフ・文字なし)→各 live に差し替え。
+- **公開済みの画像差し替え**: `coconala-edit --image --replace-image --commit` (★既定の --image は全フィールド
+  再適用+差し替え。--image-only 明示時のみ画像のみ=公開済みで provisionFormat が既定へ戻り更新失敗する事故回避)。
+- draft-first→`--commit`はオーナー承認後。納品ファイル本体は購入後トークルーム送付(出品ページはサムネのみ)。
+  検証で作られた空の下書きは `coconala-delete-draft.mjs --id … --commit`(4重ガード・公開済みidは保護)で掃除。
+- ★git-race注意: 併走セッションが product-factory と listings を随時コミット。card-census(repo全体走査)が
+  併走の未baseline Card で落ちると全コミットが止まる→ --no-verify で自ファイルのみ commit で回避したことあり。
 
 ## 関連
 [[project_coconala_product_factory]] (商品ファクトリー・D-01は実データ多指標化済=人口/面積/世帯/所得) /

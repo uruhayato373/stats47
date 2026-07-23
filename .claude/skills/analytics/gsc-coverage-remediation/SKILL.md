@@ -1,6 +1,6 @@
 ---
 name: gsc-coverage-remediation
-description: GSC「ページ」インデックスカバレッジ (見つからない404 / ソフト404 / 5xx / クロール済未登録) を計画的に是正する閉ループ。Use when user says "GSCのカバレッジ", "インデックス未登録", "404が多い", "ソフト404", "見つかりませんでした", "カバレッジ是正". GSC UI export を取り込み→本番HTTP実測でA/B分類→SSOTキュー化→live再送信/薄さ確認→経過観測を1サイクルで回す。
+description: GSC「ページ」インデックスカバレッジ (見つからない404 / ソフト404 / 5xx / クロール済未登録) を計画的に是正する閉ループ。Use when user says "GSCのカバレッジ", "インデックス未登録", "404が多い", "ソフト404", "見つかりませんでした", "カバレッジ是正". GSC UI export を取り込み→本番HTTP実測でA/B分類→SSOTキュー化→live観測(observe-after-fix)/薄さ確認→経過観測を1サイクルで回す。
 primary_agent: gsc-analyst
 co_agents: [improvement-triage]
 ---
@@ -29,11 +29,11 @@ GSC のインデックスカバレッジ問題 (404 / soft404 / 5xx / crawled-no
 [2] ingest-gsc-export.py        cp932 zip を正規化 → coverage-drilldown/<週>/<category>-drilldown.csv + category-totals.json
        ↓
 [3] build-coverage-queue.mjs    本番 HTTP を Googlebot UA で実測 → A/B 分類 → coverage-remediation-queue.json (状態保持)
-       │                         + LATEST.md + coverage-totals-history.csv (経過観測) + coverage-live-resubmit-urls.csv (curated)
+       │                         + LATEST.md + coverage-totals-history.csv (経過観測) + coverage-live-observe-urls.csv (curated)
        ↓
 [4] 是正 (action 別):
-       resubmit(live)      → CI gsc-auto-resubmit-daily.yml が curated CSV を Indexing API 送信
-       content-check(soft) → gsc-analyst で薄さ/描画確認 → 補強 or noindex → 良ければ resubmit 格上げ
+       observe-after-fix(live) → sitemap/内部リンク/canonical を整備 → url-inspection-daily.cjs で coverageState を観測 (Indexing API 送信はしない・準拠是正 2026-07-23)
+       content-check(soft) → gsc-analyst で薄さ/描画確認 → 補強 or noindex → 良ければ observe-after-fix 格上げ
        fix-5xx             → 実バグ修正 (PR)
        verify-intent(404)  → 旧URL/内部パスか確認。死亡が正なら resolved-by-design でマーク
        ↓
@@ -49,7 +49,7 @@ actionable カテゴリ (404 / soft404 / 5xx / crawled / discovered) の URL を
 | 現在 HTTP | 元カテゴリ | verdict | action |
 |---|---|---|---|
 | 200 | soft404 | live-soft404 | **content-check** |
-| 200 | 404 / 5xx / crawled / discovered | live-misflagged | **resubmit** |
+| 200 | 404 / 5xx / crawled / discovered | live-misflagged | **observe-after-fix** |
 | 410 | * | now-gone | none (放置・発生源修正済) |
 | 3xx | * | now-redirect | none (放置) |
 | 5xx | * | still-5xx | **fix-5xx** (最優先) |
@@ -58,14 +58,17 @@ actionable カテゴリ (404 / soft404 / 5xx / crawled / discovered) の URL を
 
 意図的カテゴリ (redirect / robots / noindex / alt-canonical / duplicate) は実測せず `resolved-by-design` で放置。
 
-## 命名規約 (auto-resubmit との安全な統合)
+## 命名規約 (observe-after-fix)
 
-`auto-resubmit.mjs` は `coverage-drilldown/**/*-urls.csv` を**全て未INDEXED**として Indexing API 送信する。
-GSC UI export には死んだ URL (404=8,378) が含まれるため、そのまま `-urls.csv` に置くと **quota (200/日) を死んだ URL に浪費**する。
+> **Indexing API 送信は 2026-07-23 に退役** (公式に JobPosting/BroadcastEvent VideoObject 専用・準拠是正 docs/02_実装計画/39 Phase 1)。
+> 通常ページの再クロールは「送信」ではなく「直してから URL Inspection で観測 (observe-after-fix)」で行う。
 
-- **生 drilldown は `<category>-drilldown.csv`** (auto-resubmit は拾わない)。
-- build が本番実測で live を選別し **`coverage-live-resubmit-urls.csv`** (= `-urls.csv`・curated) に書き出す → これだけ送信される。
-- `content-check` (soft404) は **resubmit に格上げするまで送らない** (薄いまま再送信すると再フラグされる)。
+build が本番 HTTP を Googlebot UA で実測して live-misflagged (404/5xx/crawled だが現在 200) を選別し
+**`coverage-live-observe-urls.csv`** に書き出す。これは Indexing API 送信の入力ではなく、
+sitemap 掲載・内部リンク・canonical を整えた上で `url-inspection-daily.cjs` で coverageState 遷移を観測する対象リスト。
+
+- **生 drilldown は `<category>-drilldown.csv`** (観測対象にしない)。
+- `content-check` (soft404) は **observe-after-fix に格上げするまで観測しない** (薄いまま観測しても indexed 化しない)。
 
 ## 実行手順
 
@@ -112,14 +115,13 @@ No prose before/after.
 TASK: 以下の soft404→現在200 の URL 群が「薄い/空」か判定。R2 観測値の年数・データ点数を確認。
 ```
 
-### Phase 5 — 是正の実送信 (R2/Indexing API は CI 専用)
-- **live (resubmit) の Indexing API 送信は CI が行う**。curated CSV は coverage-drilldown 配下に出力済なので
-  `gsc-auto-resubmit-daily.yml` (毎日 JST 06:30) が自動で拾う。即時送信したい場合は workflow_dispatch:
-  ```bash
-  gh workflow run gsc-auto-resubmit-daily.yml -f max=200    # ローカルに gh + actions:write がある時のみ
-  ```
-  (クラウド/web 環境は dispatch 不可。develop/main への commit 経由で cron に委ねる → `.claude/rules/branch-workflow.md`)
-- ローカルからの Indexing API 直送・R2 push は禁止 (`_assert-ci-write` で停止)。
+### Phase 5 — 是正 (observe-after-fix・Indexing API 送信は退役)
+- **live (observe-after-fix) は送信ではなく「直してから観測」**。Indexing API 送信は 2026-07-23 に退役した
+  (公式に JobPosting/BroadcastEvent VideoObject 専用・準拠是正)。次を行う:
+  1. sitemap 掲載整合 (`SITEMAP_RANKING_KEYS` / `sitemap.ts`)・内部リンク強化・canonical 是正・content 補強
+  2. `node .claude/scripts/gsc/url-inspection-daily.cjs --limit 50` で coverageState / lastCrawlTime を観測
+- `coverage-live-observe-urls.csv` は観測対象の候補リスト (送信キューではない)。
+- ローカルからの R2 push は禁止 (`_assert-ci-write` で停止)。
 
 ### Phase 6 — 記録 (真実源を更新)
 - 完了した URL を done に: `node .claude/scripts/gsc/build-coverage-queue.mjs --mark-done <url> --wave-id 2026-MM-DD-coverage`
@@ -141,13 +143,13 @@ TASK: 以下の soft404→現在200 の URL 群が「薄い/空」か判定。R2
 | 人間向け要約 | `.claude/state/gsc/LATEST.md` | build が書く / 人間が読む |
 | 経過観測 (週次件数) | `.claude/state/gsc/coverage-totals-history.csv` | build が追記 |
 | 取り込み済 drilldown | `.claude/state/metrics/gsc/coverage-drilldown/<週>/*-drilldown.csv` | ingest が書く |
-| curated 再送信入力 | `.claude/state/metrics/gsc/coverage-drilldown/<週>/coverage-live-resubmit-urls.csv` | build が書く / auto-resubmit が読む |
+| observe-after-fix 対象 | `.claude/state/metrics/gsc/coverage-drilldown/<週>/coverage-live-observe-urls.csv` | build が書く / url-inspection で観測 |
 | agent 用詳細ログ | `.claude/skills/analytics/gsc-improvement/reference/improvement-log.md` `[COVERAGE-LOOP-01]` | skill/agent |
 | TODO 真実源 | `docs/todo/01_改善バックログ.md` `COVERAGE-LOOP-01` | improvement-triage |
 
 ## cadence (週次)
 - `/weekly-review` 前にユーザーが export (10分) → 本スキルで取り込み・是正。
-- 自動アーム (CI・既存): `gsc-url-inspection-daily.yml` (個別URL状態) + `gsc-auto-resubmit-daily.yml` (curated 送信) が毎日稼働。
+- 自動アーム (CI・既存): `gsc-url-inspection-daily.yml` (個別URL状態=observe-after-fix 観測) が毎日稼働。`gsc-auto-resubmit-daily.yml` は 2026-07-23 退役 (Indexing API 送信しない)。
   本スキルの週次手動アームは「UI export でしか取れない総件数・未把握URL」を補う (API は自サイト視点のみ)。
 
 ## 関連

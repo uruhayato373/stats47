@@ -1,108 +1,53 @@
-name: 🔁 GSC Auto-resubmit (daily)
+name: 🔁 GSC Auto-resubmit (RETIRED — Indexing API compliance)
 
-# 未 INDEXED URL を Indexing API に自動再送信する。
-# - URL Inspection daily (JST 06:00) の後に走らせる (JST 06:30)
-# - 1 日 200 URL を上限 (公式 quota 200/日を完全活用)
-# - 7 日以内重複送信は scripts 内 history で自動 dedup
-# - 履歴は .claude/state/metrics/gsc/resubmit-history.json に commit
+# ⚠️ RETIRED 2026-07-23 — Google Indexing API 準拠是正 (docs/02_実装計画/39 Phase 1)。
 #
-# 関連:
-# - docs/todo/01_改善バックログ.md [INDEXING-AUTO-01, P0-RANKING-INDEX]
-# - .claude/scripts/gsc/auto-resubmit.mjs
+# Google Indexing API の公式対象は JobPosting または BroadcastEvent を含む VideoObject
+# ページのみ (https://developers.google.com/search/apis/indexing-api/v3/quickstart,
+# アクセス日 2026-07-23)。stats47 の ranking / area / theme / blog / 410 URL は対象外。
+# 通常ページへの URL_UPDATED 自動送信は公式仕様に反するため、この scheduled workflow を
+# 無効化した:
+#   - schedule トリガーを削除 (自動送信を停止)
+#   - 送信スクリプト (auto-resubmit.mjs) は publish path を撤去した retired stub に変更済
+#   - 過去の送信履歴 (.claude/state/metrics/gsc/resubmit-history.json) は証拠として保持
+#
+# 通常ページの再クロールは、Indexing API 送信ではなく次の compliant な手段で行う:
+#   sitemap 掲載整合 / 内部リンク強化 / HTTP status(200/301/410) 修正 / canonical 是正 /
+#   content 補強 → その後 URL Inspection API で coverageState 遷移を「観測」する
+#   (= observe-after-fix)。観測は gsc-url-inspection-daily.yml + url-inspection-daily.cjs が担う。
+#
+# この file は git 履歴保持のために残す。GitHub 上での直接 disable は行わない (repository
+# file 変更のみ)。手動 dispatch しても送信は起きない (下記 stub が退役通知を出して終わる)。
+#
+# 関連: docs/todo/01_改善バックログ.md [INDEXING-AUTO-01]
+#       .claude/skills/analytics/gsc-coverage-remediation/SKILL.md
+#       docs/01_技術設計/06_自動化インベントリ.md
 
 on:
-  schedule:
-    - cron: "30 21 * * *" # JST 06:30 = UTC 21:30 (前日)
-  workflow_dispatch:
-    inputs:
-      max:
-        description: "Max URLs to send (default 200, max 200)"
-        required: false
-        default: "200"
-      dry_run:
-        description: "Dry-run mode (true / false)"
-        required: false
-        default: "false"
+  workflow_dispatch: {}
 
 permissions:
-  contents: write
+  contents: read
 
 concurrency:
   group: gsc-auto-resubmit-daily
   cancel-in-progress: false
 
 jobs:
-  resubmit:
+  retired:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 5
     steps:
-      - name: 🧰 Checkout main
-        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
-        with:
-          ref: main
-          fetch-depth: 1
-
-      - name: 🟢 Setup Node.js
-        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
-        with:
-          node-version: "20"
-          cache: "npm"
-
-      - name: 📦 Install dependencies
-        run: npm ci
-
-      - name: 🔁 Run auto-resubmit
-        env:
-          GOOGLE_SERVICE_ACCOUNT_KEY_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY_JSON }}
+      - name: ⚠️ Retirement notice (no Indexing API send)
         run: |
-          MAX_OPT="${{ inputs.max || '200' }}"
-          if [ "${{ inputs.dry_run }}" = "true" ]; then
-            node .claude/scripts/gsc/auto-resubmit.mjs --max "$MAX_OPT"
-          else
-            node .claude/scripts/gsc/auto-resubmit.mjs --execute --max "$MAX_OPT"
-          fi
+          cat <<'EOF' >> "$GITHUB_STEP_SUMMARY"
+          ## GSC Auto-resubmit — RETIRED
 
-      - name: 📅 Resolve date
-        id: date
-        run: echo "date=$(date -u +%Y-%m-%d)" >> "$GITHUB_OUTPUT"
+          この workflow は 2026-07-23 に **Google Indexing API 準拠是正** のため退役しました。
+          通常ページ (ranking/area/theme/blog/410) への Indexing API 送信は公式仕様に反するため停止しています。
 
-      - name: 💾 Commit history
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add .claude/state/metrics/gsc/resubmit-history.json
-          if git diff --staged --quiet; then
-            echo "No changes to commit"
-          else
-            git commit -m "chore(gsc): auto-resubmit history ${{ steps.date.outputs.date }} [skip ci]"
-            # 同時間帯の gsc-url-inspection-daily と main への push が競合しうるため rebase を挟む。
-            # --autostash: 選択 add の後に残る未ステージ変更 (npm ci 副作用) が rebase を止める
-            # 事象 (2026-07-18) を回避する。書くファイルは互いに素なので rebase は常にクリーン。
-            git pull --rebase --autostash origin main
-            git push origin main
-          fi
-
-      - name: 📄 Step summary
-        if: always()
-        run: |
-          if [ -f .claude/state/metrics/gsc/resubmit-history.json ]; then
-            cat <<EOF >> "$GITHUB_STEP_SUMMARY"
-          ## GSC Auto-resubmit ${{ steps.date.outputs.date }}
-
-          $(node -e "
-            // resubmit-history.json は entries 直下の配列形式 ([{ timestamp, url, status, ... }, ...])
-            const h = require('./.claude/state/metrics/gsc/resubmit-history.json');
-            const entries = Array.isArray(h) ? h : (h.entries ?? []);
-            const todayJst = new Date(Date.now() + 9*3600*1000).toISOString().slice(0,10);
-            const todayCount = entries.filter(e => {
-              const ts = e.timestamp ?? e.date ?? '';
-              if (!ts) return false;
-              const jstDate = new Date(new Date(ts).getTime() + 9*3600*1000).toISOString().slice(0,10);
-              return jstDate === todayJst;
-            }).length;
-            const total = entries.length;
-            console.log(\`- Today sent: \${todayCount}\`);
-            console.log(\`- Total history: \${total}\`);
-          ")
+          再クロールは sitemap / 内部リンク / HTTP / canonical / content 修正 + URL Inspection 観測 (observe-after-fix) で行ってください。
+          正典: `docs/02_実装計画/39_検索成長統合MCP・API基盤実装仕様.md` Phase 1。
           EOF
-          fi
+          echo "[retired] gsc-auto-resubmit-daily は退役済み。Indexing API 送信は行いません。"
+          echo "[retired] observe-after-fix: url-inspection-daily.cjs で coverageState を観測してください。"

@@ -1,0 +1,98 @@
+{
+  "generatedAt": "2026-07-23T11:12:23.554Z",
+  "week": "2026-W30",
+  "live": true,
+  "sources": [
+    {
+      "source": "gsc",
+      "status": "success",
+      "mode": "snapshot",
+      "observedAt": "2026-07-19T00:00:00Z",
+      "count": 10264,
+      "snapshotFile": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W29/pages.csv",
+      "secretName": "GOOGLE_SERVICE_ACCOUNT_KEY_JSON",
+      "secretPresent": false
+    },
+    {
+      "source": "ga4",
+      "status": "success",
+      "mode": "snapshot",
+      "observedAt": "2026-07-19T00:00:00Z",
+      "count": 7564,
+      "snapshotFile": ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W29/pages.csv",
+      "secretName": "GA4_PROPERTY_ID",
+      "secretPresent": false
+    },
+    {
+      "source": "psi",
+      "status": "success",
+      "mode": "snapshot",
+      "observedAt": "2026-07-22T18:26:41.581Z",
+      "count": 204,
+      "snapshotFile": ".claude/state/metrics/psi/psi-batch-2026-07-22T18-26-41.json",
+      "secretName": "PSI_API_KEY",
+      "secretPresent": false
+    },
+    {
+      "source": "coverage",
+      "status": "partial",
+      "mode": "snapshot",
+      "observedAt": "2026-06-16",
+      "count": 5166,
+      "snapshotFile": ".claude/state/gsc/coverage-remediation-queue.json",
+      "secretPresent": false
+    },
+    {
+      "source": "inspection",
+      "status": "success",
+      "mode": "snapshot",
+      "observedAt": "2026-07-22T00:00:00Z",
+      "count": 2718,
+      "snapshotFile": ".claude/state/metrics/gsc/url-inspection/2026-07-22.csv",
+      "secretName": "GOOGLE_SERVICE_ACCOUNT_KEY_JSON",
+      "secretPresent": false
+    },
+    {
+      "source": "cloudflare",
+      "status": "success",
+      "mode": "snapshot",
+      "observedAt": "2026-07-22T18:41:45.393Z",
+      "count": 2,
+      "snapshotFile": ".claude/state/metrics/cloudflare/snapshots/2026-07-21.json",
+      "secretName": "CLOUDFLARE_API_TOKEN",
+      "secretPresent": false
+    },
+    {
+      "source": "sitemap",
+      "status": "success",
+      "mode": "live",
+      "count": 3123,
+      "note": ".claude/state/search-growth/live/sitemap.json",
+      "secretName": "GOOGLE_SERVICE_ACCOUNT_KEY_JSON",
+      "secretPresent": false
+    },
+    {
+      "source": "crux",
+      "status": "skipped",
+      "mode": "live-only",
+      "note": "live 未検証: creds 無し (CRUX_API_KEY)",
+      "secretName": "CRUX_API_KEY",
+      "secretPresent": false
+    },
+    {
+      "source": "http",
+      "status": "success",
+      "mode": "live",
+      "count": 24,
+      "note": ".claude/state/search-growth/live/http.json",
+      "secretPresent": false
+    },
+    {
+      "source": "lighthouse",
+      "status": "skipped",
+      "mode": "live-only",
+      "note": "live 未検証: creds 無し (N/A)",
+      "secretPresent": false
+    }
+  ]
+}

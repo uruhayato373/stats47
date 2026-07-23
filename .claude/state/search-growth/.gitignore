@@ -1,0 +1,8 @@
+# live snapshot (collect --live の本番 read-only 実測) は大きく ephemeral なので commit しない。
+# 再生成: node .claude/scripts/search-growth/collect.mjs --live
+live/
+
+# latest.json は全 observation (~15MB) の正規化中間物で再生成可能。git に載せない。
+# 再生成: node .claude/scripts/search-growth/normalize.mjs
+# (candidates.json = 決定的な actionable 出力は commit する)
+latest.json

@@ -52,6 +52,7 @@ tags: [実装計画]
 | `36_都道府県公式統計カタログ仕様.md` | 都道府県公式サイトの統計資料を再現性・権利境界付きで収集し、県データブックへ接続する仕様 |
 | `37_都道府県一覧UIUX改善実装仕様.md` | `/areas` を検索・SSR軽量地図・地方別一覧によるアクセシブルな地域選択ハブへ改善するClaude Code実装仕様 |
 | `38_ポータル型ホーム・ヘッダー再設計仕様.md` | home heroを撤去し、検索・カテゴリ・地域・テーマ・buzz-map系ランキングカードで統計ポータル化するClaude Code実装仕様 |
+| `39_検索成長統合MCP・API基盤実装仕様.md` | GSC・URL Inspection・Sitemaps・GA4・CrUX・PSI・Cloudflareをread-only MCP/CLIで統合し、検索改善候補と効果測定を閉ループ化するClaude Code実装仕様 |
 
 ## 関連（このフォルダ外の正典）
 
