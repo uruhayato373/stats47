@@ -120,9 +120,9 @@
     "P-04": {
       "title": "47都道府県の自治体財政データ集をお渡しします",
       "priceYen": 6000,
-      "status": "draft",
-      "serviceUrl": "",
-      "listedAt": "",
+      "status": "listed",
+      "serviceUrl": "https://coconala.com/services/4324057",
+      "listedAt": "2026-07-23",
       "catchphrase": "47都道府県の自治体財政110指標を収録したデータ集",
       "category": {
         "master": "13",
@@ -146,9 +146,9 @@
     "P-05": {
       "title": "47都道府県の医療・介護データ集をお渡しします",
       "priceYen": 7000,
-      "status": "draft",
-      "serviceUrl": "",
-      "listedAt": "",
+      "status": "listed",
+      "serviceUrl": "https://coconala.com/services/4324061",
+      "listedAt": "2026-07-23",
       "catchphrase": "47都道府県の医療・介護240指標を収録したデータ集",
       "category": {
         "master": "13",
@@ -172,9 +172,9 @@
     "P-06": {
       "title": "47都道府県の教育・文化データ集をお渡しします",
       "priceYen": 6500,
-      "status": "draft",
-      "serviceUrl": "",
-      "listedAt": "",
+      "status": "listed",
+      "serviceUrl": "https://coconala.com/services/4324062",
+      "listedAt": "2026-07-23",
       "catchphrase": "47都道府県の教育・文化241指標を収録したデータ集",
       "category": {
         "master": "13",
@@ -198,9 +198,9 @@
     "P-07": {
       "title": "47都道府県の気候・土地データ集をお渡しします",
       "priceYen": 4500,
-      "status": "draft",
-      "serviceUrl": "",
-      "listedAt": "",
+      "status": "listed",
+      "serviceUrl": "https://coconala.com/services/4324065",
+      "listedAt": "2026-07-23",
       "catchphrase": "47都道府県の気候・土地77指標を収録したデータ集",
       "category": {
         "master": "13",
@@ -224,9 +224,9 @@
     "P-08": {
       "title": "47都道府県の商業・小売データ集をお渡しします",
       "priceYen": 5000,
-      "status": "draft",
-      "serviceUrl": "",
-      "listedAt": "",
+      "status": "listed",
+      "serviceUrl": "https://coconala.com/services/4324067",
+      "listedAt": "2026-07-23",
       "catchphrase": "47都道府県の商業・小売71指標を収録したデータ集",
       "category": {
         "master": "13",
@@ -250,9 +250,9 @@
     "P-09": {
       "title": "47都道府県の農業・産業データ集をお渡しします",
       "priceYen": 6000,
-      "status": "draft",
-      "serviceUrl": "",
-      "listedAt": "",
+      "status": "listed",
+      "serviceUrl": "https://coconala.com/services/4324069",
+      "listedAt": "2026-07-23",
       "catchphrase": "47都道府県の農業・産業127指標を収録したデータ集",
       "category": {
         "master": "13",
@@ -276,9 +276,9 @@
     "P-10": {
       "title": "47都道府県の防災・インフラデータ集をお渡しします",
       "priceYen": 6500,
-      "status": "draft",
-      "serviceUrl": "",
-      "listedAt": "",
+      "status": "listed",
+      "serviceUrl": "https://coconala.com/services/4324073",
+      "listedAt": "2026-07-23",
       "catchphrase": "47都道府県の防災・インフラ251指標を収録したデータ集",
       "category": {
         "master": "13",
@@ -302,9 +302,9 @@
     "P-11": {
       "title": "47都道府県 汎用統計データ集をお渡しします",
       "priceYen": 4000,
-      "status": "draft",
-      "serviceUrl": "",
-      "listedAt": "",
+      "status": "listed",
+      "serviceUrl": "https://coconala.com/services/4324076",
+      "listedAt": "2026-07-23",
       "catchphrase": "47都道府県の基本統計28指標を収録した汎用素材集",
       "category": {
         "master": "13",
