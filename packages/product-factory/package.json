@@ -8,9 +8,13 @@
     "@stats47/data-configs": "*",
     "@expo-google-fonts/noto-sans-jp": "^0.4.3",
     "@pdf-lib/fontkit": "^1.1.1",
+    "@stats47/svg-builder": "*",
     "exceljs": "^4.4.0",
+    "jszip": "^3.10.1",
     "pdf-lib": "^1.17.1",
     "pptxgenjs": "^4.0.1",
+    "satori": "^0.26.0",
+    "sharp": "^0.33.5",
     "topojson-client": "^3"
   },
   "scripts": {
@@ -27,6 +31,11 @@
     "products:note:promote": "tsx src/channels/note/cli.ts promote",
     "products:note:covers": "tsx src/channels/note/cli.ts covers",
     "products:note:report": "tsx src/channels/note/cli.ts report",
+    "products:kindle:plan": "tsx src/channels/kindle/cli.ts plan",
+    "products:kindle:validate": "tsx src/channels/kindle/cli.ts validate",
+    "products:kindle:generate": "tsx src/channels/kindle/cli.ts generate",
+    "products:kindle:report": "tsx src/channels/kindle/cli.ts report",
+    "products:kindle:kdp-listings": "tsx src/channels/kindle/export-kdp-listings.ts",
     "test": "vitest",
     "test:run": "vitest run",
     "type-check": "tsc --noEmit"

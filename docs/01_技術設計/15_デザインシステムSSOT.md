@@ -66,15 +66,18 @@ stats47 の UI は、統計データを長時間読むための道具である�
 
 例外が必要な場合は、該当コードの近くではなく、この文書か `13_統一レイアウト設計.md` に理由を追記する。
 
-### 例外: home の暗色ヒーロー（サイト唯一の公認 bespoke hero）
+### home の暗色ヒーロー例外は廃止（2026-07-23 ポータル型再設計）
 
-トップページ `/`（`apps/web/src/app/page.tsx` の `① hero` セクション）だけは、上記「暗色グラデ hero を増やさない」禁止の**唯一の公認例外**とする。理由と範囲を明記して管理外ドリフトにしない:
+トップページ `/` は暗色 hero を**完全撤去**し、白基調のポータルへ再設計した（正典:
+`docs/02_実装計画/38_ポータル型ホーム・ヘッダー再設計仕様.md`）。以前存在した「home の暗色ヒーロー例外」は
+無効化する。
 
-- **役割**: サイトの入口＝マーケティング landing。`PageHeader`（白基調ミニマル見出し）でも `HeroBanner`（theme/category の画像＋テキスト横並び、SSOT=`page-heroes.ts`）でもない、全幅の暗色バンド（`bg-slate-900` + 可読性グラデ）+ 大見出し「あなたの県は何位？」+ 3 CTA（ランキング / キーワード検索 / 都道府県から探す）。
-- **なぜ共有 hero に寄せないか**: (1) home hero は full-bleed マーケ hero で HeroBanner の用途（記事的ページの image+text）と設計が異なる、(2) home は `force-dynamic` の最高トラフィック面で LCP guardrail（mobile LCP ≤ 3,301ms・PSI 2026-07-19 実測）に敏感なため、共有コンポーネントへの refactor は視覚・LCP 回帰リスクが割に合わない。h1 サイズ拡大の例外も既に `ui-components.md`（home のみ `text-3xl sm:text-4xl lg:text-5xl`）で承認済み。
-- **アセット**: 背景 `apps/web/public/images/hero-home.jpg`（文字なし・AI 生成、未配置時は `bg-slate-900` フォールバック。家ルール=画像に日本語を焼き込まない）。見出し・CTA は実 DOM テキスト。
-- **不変条件**: この暗色 hero を **home 以外へ横展開しない**（他ページは `PageHeader` / `HeroBanner`）。home hero の変更はこの節を更新してから行う。
-- **hero 実験の成功条件（A/B を回す場合）**: 見出し / CTA 文言 / 背景画像の variant を試すときは、GA4 の `nav_click`（hero の各 CTA・要計装、Phase 0 で未計装と判明）または注目ランキングへのスクロール到達・直帰率で評価する。判定は 2 週間 or sample gate、`evidence-based-judgment.md` 準拠。**ガードレール: mobile LCP ≤ 3,301ms・CLS 0 を超えない**。効果未確定のまま横展開しない。
+- **現在の home 構成**: `PageHeader`（`text-2xl font-bold` の h1「日本の地域データを探す」+ 短い説明）→
+  大きな統計検索（`HomeSearch`）→ カテゴリ / 注目ランキング / 知りたいこと / 都道府県 / 統計ブログの
+  発見セクション。全幅暗色バンド・oversized display 見出し・背景画像 `hero-home.jpg`・hero 専用 CTA は使わない
+  （`hero-home.jpg` はアセットごと削除済み）。
+- **不変条件**: サイト全体で暗色グラデ hero を持たない（記事的ページは `PageHeader` / `HeroBanner`）。
+  この禁止に home の例外はもう無い。home の見出しは他の本文ページと同じ `PageHeader`（`text-2xl`）に従う。
 
 ## タイポグラフィ
 
@@ -85,7 +88,7 @@ stats47 の UI は、統計データを長時間読むための道具である�
 
 | Tier | ユーティリティ | 用途 |
 |---|---|---|
-| display | `text-2xl sm:text-3xl font-bold` | blog 記事タイトル（記事レンダラ）・home/hero の大見出しのみ |
+| display | `text-2xl sm:text-3xl font-bold` | blog 記事タイトル（記事レンダラ）・`HeroBanner` の hero 見出し（category / themes / survey / tag）のみ。home は使わない（`PageHeader` h1） |
 | h1 | `text-2xl font-bold leading-tight` | `PageHeader` 内の h1（ページ唯一の h1） |
 | h2 | `text-lg font-bold` | セクション見出し。**`SectionHeader`（`@/components/section`）経由のみ** |
 | h3 | `text-sm`〜`text-base font-semibold` | カード / 項目タイトル |

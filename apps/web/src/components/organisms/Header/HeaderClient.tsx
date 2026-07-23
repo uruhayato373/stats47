@@ -29,7 +29,7 @@ import {
 
 import { SHELL_WIDTH_CLASS } from "@/components/layout/PageShell";
 
-import { trackNavClick } from "@/lib/analytics/events";
+import { trackNavClick, trackSearch } from "@/lib/analytics/events";
 
 import { useTheme } from "@/hooks/useTheme";
 
@@ -99,9 +99,14 @@ export function HeaderClient({ themes }: HeaderClientProps) {
   const handleSearch = useCallback(
     (e: React.FormEvent) => {
       e.preventDefault();
-      if (searchQuery.trim()) {
-        router.push(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
+      const q = searchQuery.trim();
+      if (!q) return;
+      try {
+        trackSearch({ searchTerm: q });
+      } catch {
+        // analytics 失敗で遷移を止めない
       }
+      router.push(`/search?q=${encodeURIComponent(q)}`);
     },
     [searchQuery, router],
   );

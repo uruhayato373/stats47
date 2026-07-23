@@ -1,0 +1,74 @@
+name: 🔎 Search Growth (weekly candidate rebuild)
+
+# 検索成長統合基盤の週次 candidate 更新。
+# 正典: docs/02_実装計画/39_検索成長統合MCP・API基盤実装仕様.md §6 / §8。
+#
+# 責務分離 (§8):
+# - daily (blocker 観測): 既存 psi-audit-daily / cloudflare-usage-daily / gsc-url-inspection-daily が
+#   snapshot を更新する。本 workflow はそれらを巨大化せず、shared script (search-growth pipeline) で
+#   committed snapshot を normalize/analyze する。
+# - weekly (本 workflow): fetch-metrics-weekly (GSC/GA4 snapshot) の後に candidate を再構築する。
+# - monthly (効果判定): weekly-review / improvement-triage が 28/56 日で effect を判定する (人間承認)。
+#
+# 本 workflow は committed snapshot を読むだけで live API を呼ばない (secret 不要)。
+# live collector (sitemap/crux/http/lighthouse) は creds が要るため別途 (--live) で配線する。
+
+on:
+  workflow_run:
+    workflows: ["📈 Fetch weekly metrics (GSC + GA4 + AdSense)"]
+    types: [completed]
+  workflow_dispatch: {}
+  schedule:
+    - cron: "30 12 * * 0" # 日 21:30 JST = 12:30 UTC (weekly fetch 20:00 JST の後)
+
+permissions:
+  contents: write
+
+concurrency:
+  group: search-growth-weekly
+  cancel-in-progress: false
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: 🧰 Checkout develop
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        with:
+          ref: develop
+          fetch-depth: 1
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: "20"
+
+      # source 別に失敗を隔離する (1 source の失敗が全体を止めない)。
+      - name: 🧪 Compliance + unit tests
+        run: node --test .claude/scripts/search-growth/__tests__/*.test.mjs
+
+      - name: 📥 Collect (committed snapshot reuse)
+        run: node .claude/scripts/search-growth/collect.mjs || true
+
+      - name: 🧭 Normalize
+        run: node .claude/scripts/search-growth/normalize.mjs
+
+      - name: 🎯 Analyze (deterministic candidates)
+        run: node .claude/scripts/search-growth/analyze.mjs
+
+      - name: 📄 Report → step summary
+        run: node .claude/scripts/search-growth/report.mjs --limit 15 >> "$GITHUB_STEP_SUMMARY"
+
+      - name: 💾 Commit derived state
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add .claude/state/search-growth/
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "chore(search-growth): weekly candidate rebuild [skip ci]"
+            git pull --rebase --autostash origin develop
+            git push origin develop
+          fi

@@ -68,6 +68,14 @@ GA4 → 管理（歯車）→ プロパティ列「データの表示」→「�
 > `/areas` の選択率を導線別 (検索/一覧/地図) に判定する際はこの 3 値を使う。県名は `nav_label`、
 > 遷移先は `nav_href` (`/areas/<5桁code>`)。`trackNavClick` の呼び出し元は `AreaSearch` /
 > `AreaSelectionPanels` (`apps/web/src/features/area-profile/`)。
+>
+> **nav_surface の値追加 (2026-07-23・HOME-PORTAL-REDESIGN-01)**: ポータル型 home の発見セクションに
+> `home_category` / `home_use_case` / `home_area` / `home_buzz_map` / `home_blog` を追加した
+> (既存 `nav_surface` dimension の**値追加**・新 dimension なし)。home → カテゴリ/テーマ/都道府県/
+> バズマップ/ブログの click 内訳を導線別に判定するのに使う。呼び出し元は `PortalNavCard`
+> (`apps/web/src/features/home-portal/`)。home 検索は `trackSearch` (GA4 標準 `search`) を使う
+> (`HomeSearch` / Header `HeaderClient` の submit)。現状 `home_buzz_map` (バズ section 未実装) と
+> `home_blog` (blog カード未計装) は値予約のみで未送出。
 
 ---
 

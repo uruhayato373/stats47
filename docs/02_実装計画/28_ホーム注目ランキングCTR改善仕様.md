@@ -501,6 +501,12 @@ GA4管理画面で`card_variant / slot / experiment_id / experiment_variant`をe
 
 標本不足または流入構成が大きく変わった場合は`inconclusive`とし、勝ち扱いしない。
 
+### 9.5 実験終了 (2026-07-23・editorial 採用)
+
+home-featured-v1 は判定基準 (最低14日・impression 500 以上) に到達する前 (開始 2026-07-17・約6日経過) に、ポータル型 home 再設計 (`docs/02_実装計画/38_ポータル型ホーム・ヘッダー再設計仕様.md`) で home 構造が変わり exposure/CTR 条件が変化するため、**オーナー判断 (2026-07-23) で終了**した。標本不足のため判定は `inconclusive` (勝ち確定ではない)。採用は、ポータルの「画像付きカード」方針と整合する **editorial** とした。
+
+実装: `FeaturedRankingExperimentGrid` の 50/50 sticky assignment (`resolveHomeFeaturedAssignment` / localStorage `stats47_exp_home_featured_v1` / 乱数割当) と mount 前 placeholder を撤去し、editorial variant (question/comparison/territory/top-three) を全ユーザーに固定描画 (editorial payload 不足 item のみ control card にフォールバック・§5.4)。`home-featured-experiment.ts` は `HOME_FEATURED_EXPERIMENT_ID` + `HOME_FEATURED_ADOPTED_VARIANT="editorial"` の記録のみへ縮退。impression/click 計測は `experiment_id="home-featured-v1"` / `experiment_variant="editorial"` 固定で継続 (GA4 連続性)。
+
 ## 10. Experiment V2: 掲載テーマ
 
 V1で表示variantを確定した後、同じvisualを使い掲載テーマだけを比較する。

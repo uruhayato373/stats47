@@ -21,7 +21,7 @@ GSC（Google Search Console）の継続的追跡と改善施策の記録。
 - **BLOG-WAVE-2026-05-29-auto → effect/none 確定**: 実測 W21→W26 clicks 7→5 (-2) / imp 1,258→881 (-377)。position 4 記事全て悪化 (+0.5〜+1.7)。サイト全体 +75% 成長下で横ばい以下
 - **SEO-TITLE-FIX-01 → effect/partial 確定**: 対象 /areas/ 群 GSC clicks 4→50 / imp 671→5,249 (W21→W26, `snapshots/{2026-W21,2026-W26}/pages.csv` を `awk '$1 ~ /\/areas\//'` で集計、取得日 2026-07-03)。ただし area-category +705 URL index化 (W23)・AREA-PROFILE-FIX-01 解消と交絡し単独寄与は分離不能
 - **BLOG-CTR-05 → effect/none 確定**: 3 記事 (child-height/manufacturing-aichi/temperature-extremes) W22→W26 clicks 59→11 / imp 5,882→2,337。temperature-extremes は position 9.14→9.03 でほぼ不変なのに CTR 1.31%→0.38% と急落。/category は imp 89→281 (W23→W26) と増加だが clicks 5→6。**[仮説]** title 変更による CTR 悪化 (query mix 変化の交絡あり)。**検証期日**: 2026-07-12
-- **INDEXING-AUTO-01 → effect/pending 継続 (期日 2026-07-14 に再設定)**: cron 稼働は実測 (`resubmit-history.json` 累計 7,635 success・最終 2026-07-02) だが、判定基準の coverageState 遷移を測る URL Inspection が未実行 (`url-inspection/history.csv` 最終 2026-06-06)。**検証コマンド**: `node .claude/scripts/gsc/url-inspection-daily.cjs --limit 50`
+- **INDEXING-AUTO-01 → RETIRED 2026-07-23 (準拠是正)**: Google Indexing API は公式に JobPosting/BroadcastEvent VideoObject 専用 (quickstart, アクセス日 2026-07-23) で通常ページは対象外。cron `gsc-auto-resubmit-daily.yml` を schedule 削除・retired stub 化、`auto-resubmit.mjs`/`submit-cities-indexing.mjs` の publish path 撤去、coverage queue の `resubmit` action を `observe-after-fix` へ改名。過去送信履歴 (`resubmit-history.json` 累計 7,635 success) は証拠保持。effect は公式仕様外のため未実証で終了 (URL Inspection 観測は `gsc-url-inspection-daily.yml` で継続)。詳細は下記 §[INDEXING-AUTO-01]。正典: docs/02_実装計画/39 Phase 1
 - **COVERAGE-LOOP-01 → effect/pending (期日 2026-07-14 に再設定)**: 件数減判定に必要な次週 GSC UI export が未取込 (`.claude/state/gsc/coverage-totals-history.csv` は 2026-W25 の 1 行のみ)。次: 人間 export → `ingest-gsc-export.py` + `build-coverage-queue.mjs`
 - **COVERAGE-DEACT-01 → effect/partial 確定**: 意図した空200→410 は本番実測で達成 — `curl -s -o /dev/null -w "%{http_code}" -A Googlebot https://stats47.jp/ranking/{marine-aquaculture-output,university-advancement}` → 410 (2026-07-03)。**副作用**: 同時の一括棚卸し (gone-ranking-keys.ts +398 キー, commit a179526) が実データ保有 56 キーを誤GONE化し本番 410 誤配信 → 2026-07-03 全復帰 (births/marriages/ratio-65-plus = 200 実測、同 curl)。再発防止は ranking-key-consistency.test.ts (GONE∩KNOWN=∅ / GONE∩isActive=∅ を CI 検証)。GSC soft404/404 減 + imp 回復は RANKING-GONE-RESTORE-01 (期日 2026-07-31) で追跡
 
@@ -570,10 +570,22 @@ GSC（Google Search Console）の継続的追跡と改善施策の記録。
     - 5/9 効果判定後に再選定するか継続するかは経営判断 (PHASE-11-3)
   - **5/9 まで sitemap には触らない方針** — PHASE-9 単一変数効果計測の独立性確保のため
 
-### [INDEXING-AUTO-01] Indexing API による問題 URL 自動再送信 (毎日 JST 06:30)
+### [INDEXING-AUTO-01] Indexing API による問題 URL 自動再送信 — RETIRED 2026-07-23
+
+> **⚠️ RETIRED 2026-07-23 (準拠是正・正典 docs/02_実装計画/39 Phase 1)**: Google Indexing API の公式対象は
+> JobPosting または BroadcastEvent を含む VideoObject ページのみ
+> (https://developers.google.com/search/apis/indexing-api/v3/quickstart、アクセス日 2026-07-23。
+> "can only be used to crawl pages with either job posting or broadcast event markup")。
+> 下記 2026-06-06 時点の「汎用ページも URL_UPDATED で再クロール促進は可能」は **公式仕様の誤読** であり訂正する。
+> 通常ページ (ranking/area/theme/blog/410) への送信を停止し、sitemap/内部リンク/canonical/content 修正 +
+> URL Inspection 観測 (observe-after-fix) へ移行した。cron `gsc-auto-resubmit-daily.yml` は schedule 削除・
+> retired stub 化、`auto-resubmit.mjs`/`submit-cities-indexing.mjs` は publish path 撤去済。
+> **過去の送信ログ (下記実績・`resubmit-history.json`) は監査証拠として保持する (削除しない)。**
+
+以下は退役前の履歴 (証拠として保持):
 
 - **デプロイ日**: 2026-05-23 (初回送信), 2026-06-06 (全 CSV 集約修正)
-- **想定効果**: 「クロール済み - インデックス未登録」の URL が Indexing API `URL_UPDATED` で再クロール → インデックス率向上。200 URL/day 上限で段階的に改善。根拠: Indexing API 公式 (https://developers.google.com/search/apis/indexing-api, アクセス日 2026-06-06) は JobPosting/BroadcastEvent 推奨だが、汎用ページも `URL_UPDATED` で再クロール促進は可能。効果は補助的。
+- **想定効果 (当時・仕様誤読を含む)**: 「クロール済み - インデックス未登録」の URL が Indexing API `URL_UPDATED` で再クロール → インデックス率向上。200 URL/day 上限で段階的に改善。~~汎用ページも `URL_UPDATED` で再クロール促進は可能~~ ← **誤り (上記 RETIRED 注記で訂正)**。効果は補助的。
 - **自動化**: `.github/workflows/gsc-auto-resubmit-daily.yml` (毎日 JST 06:30 = UTC 21:30)
 - **スクリプト**: `.claude/scripts/gsc/auto-resubmit.mjs --execute --max 200`
 - **入力**: `.claude/state/metrics/gsc/coverage-drilldown/` 以下の全 CSV (indexed-submitted 除外)、7 日以内 dedup

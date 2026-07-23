@@ -11,6 +11,9 @@
 | `x-banner` | 1500×500 | 3:1 | モバイル時に上下クロップ | `.local/r2/sns/brand/x-banner.png` |
 | `sns-supporting` | 1080×1080 or 1080×1350 | 1:1 or 4:5 | プラットフォーム依存 | `.local/r2/sns/ranking/<ranking_key>/supporting.png` |
 | `brand-asset` | 任意（1920×1080 推奨） | 16:9 | なし | `.local/r2/brand/` |
+| `portal-ranking-thumbnail` | 1280×720 | 16:9 | 中央/下部セーフエリア | `.local/portal-thumbnails/<ranking_key>/background.<ext>`（生成のみ・R2/commit しない） |
+
+`portal-ranking-thumbnail` は home 注目ランキングカードの **AI 背景**専用（文字・数値・県名・年度・出典・正確な日本地図・ロゴ・UI は描かせず、決定的 renderer が合成する）。プロンプト SSOT = `apps/web/scripts/data/portal-thumbnail-catalog.ts`（`buildPortalThumbnailPrompt`）、生成 = `apps/web/scripts/generate-portal-thumbnails.ts`。正典 = `docs/02_実装計画/38_ポータル型ホーム・ヘッダー再設計仕様.md` §12.7-12.11。生成 = `GEMINI_API_KEY`（CI Secret 専任）で CI `gemini-image-run.yml` 経由。**home-featured-v1 実験は 2026-07-23 に終了・editorial 採用済み**（doc 28 §9.5）なので §11.2 の「判定前は wire しない」制約は解消。composite（AI 背景 + 決定的 data overlay。title/値は DOM text 保持）は生成 asset が R2 に揃った後に注目ランキングカードへ wire する。
 
 ## テキスト配置の制約
 

@@ -1,0 +1,50 @@
+---
+name: project_kindle_publishing_factory
+description: Kindle出版ファクトリー(product-factory kindleチャネル)。EPUB3生成・32冊カタログ・パイロットK-S1-01生成済み。既存ブログ98記事を再構成、KDPアップロードは人間工程
+metadata: 
+  node_type: memory
+  type: project
+  originSessionId: 2f2d73ae-c416-421c-9ecc-09ee683fbf9c
+  modified: 2026-07-23T12:06:26.990Z
+---
+
+product-factory に **kindle チャネル**を新設し、Amazon KDP 向け電子書籍 (EPUB3) を既存ブログ資産から量産する基盤を作った (2026-07-23)。オーナー要望「参考PDFから論点抽出すれば著作権問題なく出版アイデアが作れる」への回答。
+
+## 構成 (packages/product-factory/src/channels/kindle/)
+- **SSOT = `book-catalog.ts`** (`KINDLE_BOOKS`・32冊)。4シリーズ: S1論点読み物12 / S2テーマ別データブック11 / S3地域別8 / S4ランキング大全1。本文素材SSOTは **R2 `app/blog/<slug>/article.md` + `data/*.svg`**。
+- types.ts / validator.ts (決定的・id `^K-S[1-4]-\d{2}$`・manuscript以降はfresh章1つ+chapters必須) / fetch-content.ts (R2記事取得+frontmatter除去+SVG→PNG) / md-to-xhtml.ts (callout/画像/CTA除去) / cover.ts (satori→sharp 1600×2560) / build-book.ts (orchestrator) / cli.ts。
+- **EPUB生成器 = `src/generators/epub.ts`** (jszip・EPUB3リフロー型・mimetype先頭STORE)。図表は章内ブロック画像PNG同梱。**PDFは使わない** (KDP電子はPDF実質不可・databook-pdf.tsは目次/画像非対応)。
+- CLI: `products:kindle:{plan,validate,generate,report}`。台帳 `.claude/state/products/kindle-status.json`。生成物 `.local/kindle-books/<id>/v1/book.epub` (git管理外)。
+- deps追加: jszip/sharp/satori (package-lock反映済・既存hoisted版)。
+
+## ★全32冊 生成完了 (2026-07-23・status全generated)
+S1論点読み物12 + S2テーマ別データブック11 + S3地域別8 + S4ランキング大全1 = 32冊すべてEPUB生成済み・書き下ろし比率30%以上・全EPUB構造妥当(mimetype先頭STORE/XHTML整形式malformed0/画像manifest整合)。tsc+vitest31 green。全て.local/kindle-books/<id>/v1/book.epub (git管理外)。
+- **S1 (12冊)**: 各冊=既存ブログ5章 + 書き下ろし(はじめに/データの読み方/終章、各~10-13k実字数)。article-writer並列執筆→blog-critic(K-S1-01のみPASS実施、他は決定的常体チェック0件+検証済み数値)。★1冊5ブログ章で30%安定達成と判明。
+- **S2 (11冊)**: コナラP-01〜14の書籍版データブック。intro書き下ろし + ranking章(R2観測値→上位5下位5チャートPNG24枚+算術考察)。ranking-databook.ts生成器。
+- **S3 (8地方ブロック)**: 全国ランキング + 地域内最上位県のhighlight考察 (highlightCodes)。地域intro拡張で30%達成。
+- **S4 (1冊)**: P-12全指標横断の大全。
+- **build-book自動章**: 「図表の見方」「出典と再現」をfresh扱いで自動付与(K-S1-01除く)。30%ゲートは実測(未達赤字警告)。
+- ★教訓: article-writer 11並列はインフラ全滅(API切れ/600秒stall)→**3冊ずつの小バッチ**で安定。書いた文字数の自己申告はbyte換算で~2.6x過大、buildのcountChars(JS.length)が正。
+
+## パイロット K-S1-01『実質手取りの地図』(critic PASS)
+家計・所得系ブログ9本 + 書き下ろし(はじめに/第0章/終章/出典) → 15章37図版。blog-critic PASS(原典curl裏取りで順位主張検証・常体修正)。review.md記録。
+
+## 著作権・KDP規律 (data-provenance/pdf-book-survey と同一)
+参照書籍(docs/books 8冊+survey 7冊)からは論点・型のみ。文言/図案/編集構成は複製しない。数値はe-Stat/R2自社データ。自ブログ再利用は自己著作物。**KDPの「Web無料入手可能コンテンツ」規定に備え再構成+30%書き下ろし必須** (validator が newContentNote非空+fresh章を強制)。KU登録は当面見送り(販売のみ¥500-1000)。
+
+## ★KDP出品自動化 (2026-07-23・coconala-operatorから移植)
+旧「KDPは自動化しない」を撤回し、コナラと同じPlaywright自動化を移植。agent `kdp-operator` / skill `/kdp-publish` /
+`.claude/scripts/kdp/`(`{login,capture-account,kdp-publish}.mjs`+`lib/kdp-{session,form}.mjs`)。出品内容SoT=
+`.claude/config/kdp-listings.json`(`products:kindle:kdp-listings --apply`でKINDLE_BOOKSから生成・32冊)、
+アカウント=`.claude/config/kdp-account.json`(accountEmail要記入)、プロファイル=`.local/playwright-kdp-profile`。
+- **安全境界(人間工程・維持)**: ログイン/2FA・税務(Tax interview)・銀行口座は代行しない。account assert(別アカウント防止)。
+  draft-first + `--commit`(実公開)はオーナー承認。偽成功を報告しない。KU既定未登録。
+- **★KDPはReact SPAでDOM可変** → 初回`kdp-publish --id <id> --probe`で`.local/kdp-debug/probe-*.json`に構造dumpし
+  `kdp-form.mjs`のlabelセレクタを実機調整(coconalaのdiscover相当)。kdp-formはtry/catchで未充填をwarningsに積み公開を止める。
+- 書籍生成・カタログ=kindle-publisher、KDP出品操作=kdp-operatorに分離(coconala-product-manager/operatorと同型)。
+- 各書籍READINESS.mdにKindle Previewer確認〜アップロード手順を同梱。
+- 書き下ろし章の最終仕上げは article-writer→blog-critic の既存品質ゲート。
+- 需要ファースト: 1冊ずつmanuscript昇格→生成→人間がKDP公開→4週実測(KENP/販売)→良ければ横展開。S4ランキング大全は競合(とどラン書籍版)先行で最後発。
+
+## 正典
+`.claude/rules/coconala-product-standards.md §8` (product-factory同居) / 市場評価 `docs/04_レビュー/2026-07-14-kindle-monetization.md` / 論点カタログ `docs/04_レビュー/2026-07-19-pdf-book-survey.md`。関連: [[project_coconala_product_factory]] [[project_blog_remediation_loop]]

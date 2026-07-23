@@ -79,7 +79,7 @@ const INTENTIONAL = new Set([
 const ACTION_PRIORITY = {
   "fix-5xx": 1,
   "restore-gone-key": 1, // 410 なのに KNOWN∩isActive = 誤GONE (2026-07-03 の56件障害クラス)
-  resubmit: 2,
+  "observe-after-fix": 2, // 旧 "resubmit"。Indexing API 送信はせず修正後に URL Inspection で観測 (準拠是正 2026-07-23)
   deactivate: 3, // データ無しで200を返す空ページ → isActive:false/GONE
   noindex: 4, // 空テンプレ/検索/重複 → robots noindex
   "content-check": 5, // 未判定の soft404→200
@@ -91,7 +91,9 @@ const ACTION_PRIORITY = {
 // content-check の人/agent 判定 (content_verdict) → action マッピング。
 // 一度付けたら build の HTTP 再分類で上書きされず保持される。
 const CONTENT_VERDICT_ACTION = {
-  resubmit: "resubmit",
+  // 後方互換: 旧 content_verdict "resubmit" は observe-after-fix にマップする (準拠是正 2026-07-23)
+  resubmit: "observe-after-fix",
+  "observe-after-fix": "observe-after-fix",
   enrich: "enrich",
   noindex: "noindex",
   deactivate: "deactivate",
@@ -271,7 +273,7 @@ function classify(category, http) {
   if (http === 200) {
     if (category === "soft-404")
       return { verdict: "live-soft404", action: "content-check", design: false };
-    return { verdict: "live-misflagged", action: "resubmit", design: false };
+    return { verdict: "live-misflagged", action: "observe-after-fix", design: false };
   }
   if (http === 410) return { verdict: "now-gone", action: "none", design: true };
   if (http >= 300 && http < 400)
@@ -429,16 +431,18 @@ async function build() {
   };
   saveQueue(out);
 
-  // curated resubmit CSV (auto-resubmit.mjs が拾う `-urls.csv`)。live-misflagged のみ。
-  const resubmit = queue.filter(
-    (e) => e.action === "resubmit" && (e.status === "pending" || e.status === "in-progress")
+  // observe-after-fix CSV: live-misflagged (404/5xx/crawled だが現在 200) の観測対象 URL。
+  // Indexing API 送信はしない (準拠是正 2026-07-23)。sitemap/内部リンク/canonical を整えた上で
+  // URL Inspection (url-inspection-daily.cjs) で coverageState 遷移を観測する。
+  const observe = queue.filter(
+    (e) => e.action === "observe-after-fix" && (e.status === "pending" || e.status === "in-progress")
   );
-  const resubmitCsv = path.join(weekDir, "coverage-live-resubmit-urls.csv");
+  const observeCsv = path.join(weekDir, "coverage-live-observe-urls.csv");
   fs.writeFileSync(
-    resubmitCsv,
+    observeCsv,
     "URL,前回のクロール\n" +
-      resubmit.map((e) => `${e.url},${e.gsc_last_crawl}`).join("\n") +
-      (resubmit.length ? "\n" : "")
+      observe.map((e) => `${e.url},${e.gsc_last_crawl}`).join("\n") +
+      (observe.length ? "\n" : "")
   );
 
   // 経過観測: カテゴリ別総件数の履歴に追記
@@ -474,13 +478,13 @@ async function build() {
   }
 
   // LATEST.md
-  writeLatest(out, resubmit.length);
+  writeLatest(out, observe.length);
 
   // コンソール要約
   console.log(`\nカバレッジ是正キュー更新: ${path.relative(PROJECT_ROOT, QUEUE_PATH)} (week ${week})`);
   console.log(`  tracked=${queue.length}  pending(actionable)=${pendingActionable}`);
   console.log(`  by_action: ${JSON.stringify(byAction)}`);
-  console.log(`  curated resubmit CSV: ${path.relative(PROJECT_ROOT, resubmitCsv)} (${resubmit.length} URL)`);
+  console.log(`  observe-after-fix CSV: ${path.relative(PROJECT_ROOT, observeCsv)} (${observe.length} URL)`);
   console.log(`\n次にやる (--next で JSONL):`);
   const order = queue
     .filter((e) => e.status === "pending" && e.action !== "none")
@@ -490,7 +494,7 @@ async function build() {
   }
 }
 
-function writeLatest(out, resubmitCount) {
+function writeLatest(out, observeCount) {
   const s = out.summary;
   const t = out.gsc_category_totals;
   const L = [];
@@ -505,7 +509,7 @@ function writeLatest(out, resubmitCount) {
     L.push("|---|---:|---|");
     const label = {
       "not-found-404": ["見つからない(404)", "大半=意図的削除/旧URL。放置"],
-      "crawled-not-indexed": ["クロール済-未登録", "Google判断。live は resubmit"],
+      "crawled-not-indexed": ["クロール済-未登録", "Google判断。live は observe-after-fix"],
       "robots-blocked": ["robots ブロック", "意図的(OGP/CSV)。放置"],
       "noindex-excluded": ["noindex 除外", "意図的。放置"],
       "redirect": ["リダイレクト", "意図的301。放置"],
@@ -529,7 +533,7 @@ function writeLatest(out, resubmitCount) {
   L.push("|---|---:|---|");
   const am = {
     "fix-5xx": "現在も5xx=実バグ(最優先)",
-    resubmit: "404/5xx→現在200=生きてる→Indexing API再送信",
+    "observe-after-fix": "404/5xx→現在200=生きてる→sitemap/内部リンク整備後 URL Inspection で観測",
     deactivate: "config/データ無しの空200 ranking→KNOWN除去で404/410化",
     noindex: "空テンプレ/検索/未公開blog→noindex or 410",
     enrich: "全国テンプレ重複(area×cat)/未公開md→県別補強・公開",
@@ -544,12 +548,12 @@ function writeLatest(out, resubmitCount) {
     L.push(`| ${k} | ${v} | ${am[k] ?? ""} |`);
   }
   L.push("");
-  L.push(`- curated 再送信 CSV: \`<週>/coverage-live-resubmit-urls.csv\` (**${resubmitCount} URL**) → auto-resubmit.mjs が拾う`);
+  L.push(`- observe-after-fix CSV: \`<週>/coverage-live-observe-urls.csv\` (**${observeCount} URL**) → 修正後に url-inspection-daily.cjs で観測`);
   L.push("");
   L.push("## 次サイクル");
   L.push("");
-  L.push("1. live (`resubmit`) → CI `gsc-auto-resubmit-daily.yml` が curated CSV を Indexing API 送信");
-  L.push("2. `content-check` (soft404) → gsc-analyst で薄さ/描画確認 → 補強 or noindex → 良ければ resubmit に格上げ");
+  L.push("1. live (`observe-after-fix`) → sitemap/内部リンク/canonical を整備 → `url-inspection-daily.cjs` で coverageState を観測 (Indexing API 送信はしない・準拠是正 2026-07-23)");
+  L.push("2. `content-check` (soft404) → gsc-analyst で薄さ/描画確認 → 補強 or noindex → 良ければ observe-after-fix に格上げ");
   L.push("3. `fix-5xx` → 実バグ修正");
   L.push("4. 次週 GSC 再 export → `ingest` + `build` で件数の減少と done の indexed 化を経過観測");
   fs.mkdirSync(STATE_DIR, { recursive: true });

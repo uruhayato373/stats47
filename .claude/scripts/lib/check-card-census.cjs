@@ -49,6 +49,10 @@ const BASELINE = new Set([
   // OperatorPromoCard からプロフィール部だけ切り出した静的カード (SurfaceCard ベース)。
   // ブログ詳細/一覧の PC 右レール最上部で運営者プロフィールを表示 (アフィリエイト非同梱)。
   "OperatorProfileCard",
+  // home ポータル (doc 38) の発見カード。SurfaceCard/SurfaceLinkCard ベースだが trackNavClick 計装 +
+  // icon/label/description の portal 固有レイアウトを持つ home-portal feature 専用。
+  "PortalBlogCard",
+  "PortalNavCard",
   "PortStatisticsMapCard",
   "RailCard",
   "RankingDefinitionCard",

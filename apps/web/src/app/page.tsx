@@ -1,17 +1,20 @@
 import Link from "next/link";
 
-import { Button } from "@stats47/components/atoms/ui/button";
-import { BarChart3, MapPin, Search, TrendingUp } from "lucide-react";
+import { HOME_PORTAL_TERMS } from "@stats47/data-configs";
 import { Metadata } from "next";
 
-import { ThemeAwareImage } from "@/components/atoms/ThemeAwareImage";
-import { PageShell } from "@/components/layout";
-import { SHELL_WIDTH_CLASS } from "@/components/layout/PageShell";
+import { PageShell, PageHeader } from "@/components/layout";
 import { SectionHeader } from "@/components/section";
-import { SurfaceLinkCard } from "@/components/surface";
 
 import { InContentAdSlot, FooterAdSlot } from "@/features/ads";
 import { listLatestArticles } from "@/features/blog/server";
+import {
+  HomeSearch,
+  PortalAreaEntry,
+  PortalBlogCard,
+  PortalCategoryGrid,
+  PortalUseCaseGrid,
+} from "@/features/home-portal";
 import { FeaturedRankings } from "@/features/ranking/server";
 
 import { HUB_INCONTENT } from "@/lib/google-adsense";
@@ -20,37 +23,21 @@ import { HUB_INCONTENT } from "@/lib/google-adsense";
  * 動的レンダリング（ランタイム SSR）を強制する。
  *
  * このページは `<FeaturedRankings>`（注目のランキング）と `listLatestArticles`（最新記事）を
- * R2 snapshot から読む。**ビルド環境では R2 が読めない**（detectEnvironment が要求する
- * `R2_ACCESS_KEY_ID/SECRET/ENDPOINT` と deploy が渡す `CLOUDFLARE_R2_*` の名前不一致 +
- * `R2_PUBLIC_FETCH_URL` 未設定で `fetchFromR2` が throw、build log: `home/featured.json が R2 に
- * 存在しません` / `hasS3Credentials:false`）。
- *
- * トップは純 SSG（`○ /`）で **ビルド時に空の FeaturedRankings を焼き込み**、本 OpenNext 構成では
- * prerendered ページは再デプロイまで配信され続ける（`revalidate` を付けても時間ベース ISR 再生成が
- * 効かず `x-nextjs-stale-time` が無限のまま＝検証で空のまま byte 一致を確認）ため、トップから
- * /ranking 詳細への導線が恒久的に消える回帰が起きていた。
- *
- * `force-dynamic` でビルド時 prerender を止め、**毎リクエスト Cloudflare Workers ランタイムで描画**
- * させると、R2 バインディング（ランタイムで稼働。/ranking/[key] が同経路で実データ描画されるのと同じ）で
- * featured.json / values / 記事を取得でき、tile map・1 位データ付きで正しく出る。
- *
- * 不採用: build env に `R2_PUBLIC_FETCH_URL` を足してビルド時に読む案は、/ranking/[key] の
- * generateStaticParams が ~1,800 件返してビルドが激重化するため見送り。
+ * R2 snapshot から読む。**ビルド環境では R2 が読めない**ため、純 SSG だと空を焼き込み再デプロイまで
+ * 配信され続ける回帰が起きる。`force-dynamic` で毎リクエスト Cloudflare Workers ランタイムに描画させ、
+ * R2 バインディングで featured.json / 記事を取得する（詳細な経緯は git 履歴参照）。
  */
 export const dynamic = "force-dynamic";
 
 /**
- * ホームページ (ミニマル版・2026-06-15 リデザイン)
+ * ホームページ（ポータル型・2026-07-23 再設計）
  *
- * 設計思想:
- * - 暗色ヒーローを廃し、最小 PageHeader（h1 + 1 行説明 + 細い統計テキスト + 主要 CTA）に
- * - 主役は「注目のランキング」。その下に主要動線 3 枚と最新ブログだけを置く
- * - ふるさと納税ネイティブ枠 / データパック CTA / 主要ページグリッドは過剰だったため撤去
- *   （回遊はヘッダーナビと discovery カードに集約）
+ * 設計思想（正典: docs/02_実装計画/38_ポータル型ホーム・ヘッダー再設計仕様.md）:
+ * - 暗色ヒーローを完全撤去し、白基調の「h1 + 短い説明 + 大きな統計検索」から開始する。
+ * - 検索・カテゴリ・注目ランキング・知りたいこと・都道府県・統計ブログの順に「発見」を並べる。
+ * - 各セクションは代表項目 + 「もっと見る」に抑え、home へ全件を詰めない。
  */
 export async function generateMetadata(): Promise<Metadata> {
-  // robots.ts / sitemap.ts と同じ本番ドメインをフォールバックにする
-  // (旧 "stats47.example.com" は誤った canonical/OG 絶対 URL を出していた)。
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://stats47.jp";
 
   const title = { absolute: "統計で見る都道府県 | 47都道府県ランキング・データ比較" };
@@ -112,138 +99,72 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-/** トップの主要動線 3 枚（リンク先は重複させない）。 */
-const DISCOVERY_CARDS = [
-  {
-    href: "/ranking",
-    icon: TrendingUp,
-    title: "ランキングから探す",
-    description:
-      "年収・人口・消費量から教育・医療・環境まで、全 17 カテゴリの統計ランキング。",
-  },
-  {
-    href: "/areas",
-    icon: MapPin,
-    title: "都道府県から探す",
-    description: "あなたの都道府県の全国での立ち位置を、チャートでひと目で把握。",
-  },
-  {
-    href: "/themes",
-    icon: BarChart3,
-    title: "テーマで分析",
-    description:
-      "少子高齢化・労働・医療・観光・物価など、社会課題を 17 テーマで横断分析。",
-  },
-];
-
 export default async function HomePage() {
   const latestArticles = await listLatestArticles(4).catch(() => []);
+  const popularTerms = HOME_PORTAL_TERMS.map((t) => t.term);
+  const r2PublicUrl =
+    process.env.NEXT_PUBLIC_R2_PUBLIC_URL || "https://storage.stats47.jp";
 
   return (
-    <div className="w-full" suppressHydrationWarning>
-      {/* ① hero (doboku-note スタイル: 全幅の画像バンド + 1280px コンテンツ)
-          背景画像: public/images/hero-home.jpg (AI 生成・未配置の間は bg-slate-900 フォールバック)
-          ★ この暗色 hero は design SSOT の「暗色グラデ hero を増やさない」禁止に対する home のみの
-             公認例外。範囲・不変条件・hero 実験の成功条件は docs/01_技術設計/15_デザインシステムSSOT.md
-             §「例外: home の暗色ヒーロー」を参照 (home 以外へ横展開しない・変更時は同節を先に更新)。*/}
-      <section className="relative w-full overflow-hidden bg-slate-900">
-        <img
-          src="/images/hero-home.jpg"
-          alt=""
-          aria-hidden="true"
-          className="absolute inset-0 h-full w-full object-cover object-right"
+    <div className="w-full">
+      {/* ① 検索入口（白基調・hero なし）+ カテゴリから探す */}
+      <PageShell>
+        <PageHeader
+          title="日本の地域データを探す"
+          description="47都道府県のランキング、人口・年収・暮らしの統計を検索できます。"
         />
-        {/* 可読性オーバーレイ: テキストの乗る左側を濃く */}
-        <div
-          className="absolute inset-0 bg-gradient-to-r from-slate-950/85 via-slate-950/60 to-slate-950/20"
-          aria-hidden="true"
-        />
-        <div className={`relative ${SHELL_WIDTH_CLASS} py-14 sm:py-20`}>
-          <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-300">
-            stats47 ─ 47都道府県データ
-          </p>
-          <h1 className="mt-2 text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-5xl">
-            あなたの県は何位？
-          </h1>
-          <p className="mt-4 max-w-2xl text-sm leading-relaxed text-slate-200 sm:text-base">
-            年収・人口・消費量から教育・医療まで、1,800 以上の統計で 47
-            都道府県をランキング。地図・グラフ・CSV で自由に使えます。
-          </p>
-          <p className="mt-3 text-xs text-slate-300 sm:text-sm">
-            1,800+ ランキング ・ 47 都道府県 ・ 250 万件超のデータ ・ 30 年分の時系列
-          </p>
-          <div className="mt-6 flex flex-wrap gap-2">
-            <Button asChild>
-              <Link href="/ranking">
-                <BarChart3 className="mr-1.5 h-4 w-4" />
-                ランキングを見る
-              </Link>
-            </Button>
-            <Button
-              asChild
-              variant="outline"
-              className="border-white/40 bg-transparent text-white hover:bg-white/10 hover:text-white"
-            >
-              <Link href="/search">
-                <Search className="mr-1.5 h-4 w-4" />
-                キーワード検索
-              </Link>
-            </Button>
-            <Button
-              asChild
-              variant="outline"
-              className="border-white/40 bg-transparent text-white hover:bg-white/10 hover:text-white"
-            >
-              <Link href="/areas">
-                <MapPin className="mr-1.5 h-4 w-4" />
-                都道府県から探す
-              </Link>
-            </Button>
-          </div>
-        </div>
-      </section>
+        <HomeSearch terms={popularTerms} />
 
-      {/* ② 注目のランキング（主役・全幅バンド。PageShell 外の唯一の全幅例外） */}
+        <section className="mt-10">
+          <SectionHeader
+            title="カテゴリから探す"
+            action={
+              <Link
+                href="/ranking"
+                className="font-semibold text-primary hover:underline"
+              >
+                すべてのカテゴリ →
+              </Link>
+            }
+          />
+          <PortalCategoryGrid />
+        </section>
+      </PageShell>
+
+      {/* ② 注目のランキング（主役・全幅バンド。自前の見出し + 実験 wrapper を保持） */}
       <FeaturedRankings limit={8} />
 
       <PageShell>
         {/* 記事内広告（注目ランキング後・ページ 1 枠まで。slotId 未発行の間は非表示） */}
         <InContentAdSlot slot={HUB_INCONTENT} className="mt-0 mb-12" />
 
-        {/* ③ データを探す（主要動線 3 枚） */}
+        {/* ③ 知りたいことから探す（テーマを利用意図へ翻訳） */}
         <section>
-          <SectionHeader title="データを探す" />
-          <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
-            {DISCOVERY_CARDS.map((card) => {
-              const Icon = card.icon;
-              return (
-                <SurfaceLinkCard
-                  key={card.title}
-                  href={card.href}
-                  className="group flex items-start gap-3"
-                >
-                  <div className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
-                    <Icon className="h-5 w-5" />
-                  </div>
-                  <div className="min-w-0">
-                    <p className="font-semibold text-foreground group-hover:text-primary">
-                      {card.title}
-                    </p>
-                    <p className="mt-0.5 text-xs leading-relaxed text-muted-foreground">
-                      {card.description}
-                    </p>
-                  </div>
-                </SurfaceLinkCard>
-              );
-            })}
-          </div>
+          <SectionHeader
+            title="知りたいことから探す"
+            action={
+              <Link
+                href="/themes"
+                className="font-semibold text-primary hover:underline"
+              >
+                すべてのテーマ →
+              </Link>
+            }
+          />
+          <PortalUseCaseGrid />
         </section>
 
-        {/* ④ 統計ブログ */}
+        {/* ④ 都道府県から探す（/areas への軽量入口） */}
+        <section className="mt-12">
+          <SectionHeader title="都道府県から探す" />
+          <PortalAreaEntry />
+        </section>
+
+        {/* ⑤ 統計を読み解く（統計ブログ） */}
         {latestArticles.length > 0 && (
           <section className="mt-12">
             <SectionHeader
-              title="統計ブログ"
+              title="統計を読み解く"
               action={
                 <Link
                   href="/blog"
@@ -253,41 +174,20 @@ export default async function HomePage() {
                 </Link>
               }
             />
-            <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
-              {latestArticles.map((article) => {
-                const r2 =
-                  process.env.NEXT_PUBLIC_R2_PUBLIC_URL ||
-                  "https://storage.stats47.jp";
-                return (
-                  <SurfaceLinkCard
-                    key={article.slug}
-                    href={`/blog/${article.slug}`}
-                    className="group block overflow-hidden p-0"
-                  >
-                    <div className="relative aspect-[1200/630] w-full overflow-hidden bg-muted">
-                      <ThemeAwareImage
-                        lightSrc={`${r2}/app/blog/${article.slug}/thumbnail-light.webp`}
-                        darkSrc={`${r2}/app/blog/${article.slug}/thumbnail-dark.webp`}
-                        alt={article.title}
-                        fill
-                        sizes="(max-width: 768px) 50vw, 25vw"
-                        className="object-cover transition-transform duration-300 group-hover:scale-105"
-                        loading="lazy"
-                      />
-                    </div>
-                    <div className="p-3">
-                      <p className="line-clamp-2 text-sm font-semibold leading-snug">
-                        {article.title}
-                      </p>
-                    </div>
-                  </SurfaceLinkCard>
-                );
-              })}
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+              {latestArticles.map((article) => (
+                <PortalBlogCard
+                  key={article.slug}
+                  slug={article.slug}
+                  title={article.title}
+                  r2Url={r2PublicUrl}
+                />
+              ))}
             </div>
           </section>
         )}
 
-        {/* ⑤ コンテンツ末尾の全幅フッター広告 */}
+        {/* ⑥ コンテンツ末尾の全幅フッター広告 */}
         <FooterAdSlot />
       </PageShell>
     </div>
