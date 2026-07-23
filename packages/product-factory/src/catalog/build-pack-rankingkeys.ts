@@ -31,10 +31,15 @@ function build(): void {
   let assigned = 0;
   let skippedNoCat = 0;
   for (const [key, cfg] of Object.entries(METRICS_REGISTRY)) {
-    const c = cfg as { category?: string; isActive?: boolean; entities?: string[] };
+    const c = cfg as {
+      category?: string;
+      isActive?: boolean;
+      entities?: string[];
+      source?: { kind?: string };
+    };
     if (c.isActive !== true) continue;
     if (!Array.isArray(c.entities) || !c.entities.includes("prefecture")) continue;
-    const theme = assignPackTheme(key, c.category ?? "");
+    const theme = assignPackTheme(key, c.category ?? "", c.source?.kind);
     if (!theme) {
       skippedNoCat += 1;
       continue;
@@ -47,9 +52,10 @@ function build(): void {
   // 2. P-11: 横断代表 (存在するもののみ)
   perPack["P-11"] = MAP_CHART_ASSET_KEYS.filter((k) => registryKeys.has(k));
 
-  // 3. P-12: P-01〜P-10 の和集合
+  // 3. P-12: テーマ配分パック (P-01〜P-10 + P-14) の和集合。
+  //    P-14 (家計・消費) は旧 P-09 から分離したため、和集合に含めないと P-12 が縮む (件数を維持する)。
   const union = new Set<string>();
-  for (const id of ["P-01", "P-02", "P-03", "P-04", "P-05", "P-06", "P-07", "P-08", "P-09", "P-10"]) {
+  for (const id of ["P-01", "P-02", "P-03", "P-04", "P-05", "P-06", "P-07", "P-08", "P-09", "P-10", "P-14"]) {
     for (const k of perPack[id]) union.add(k);
   }
   perPack["P-12"] = [...union];

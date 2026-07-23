@@ -4,7 +4,7 @@
  * 正典: docs/02_実装計画/30_ココナラ商品ファクトリー実装仕様.md
  * 商品案の出所: docs/04_レビュー/2026-07-18-coconala-content-monetization.md (旧 A-01〜L-07)
  *
- * 2026-07-23: 旧 174 件カタログ (A-01〜L-07・family 別) を、テーマ別 13 パック (P-01〜P-13)
+ * 2026-07-23: 旧 174 件カタログ (A-01〜L-07・family 別) を、テーマ別 14 パック (P-01〜P-14)
  * へ破壊的に縮約した。同一テーマが family 横断で重複していた (観光 = B-06/C-14/D-08/E-06 等) ため、
  * 出品・実データ接続・管理の単位をテーマパックへ集約する。sourceIds に旧 ID をトレースする。
  *
@@ -12,7 +12,7 @@
  * 観測値は既存 R2 が SSOT。Office 等のバイナリは派生物 (手編集を正典にしない・公開R2へ置かない)。
  */
 
-/** パックのテーマ (slug)。P-01〜P-13 と 1:1 対応する。 */
+/** パックのテーマ (slug)。P-01〜P-14 と 1:1 対応する。 */
 export type PackTheme =
   | "population-household" // P-01: 人口・世帯 (旧 D-01 継承・実データ接続済)
   | "income-wage-hiring" // P-02: 所得・賃金・採用
@@ -26,7 +26,8 @@ export type PackTheme =
   | "disaster-infrastructure" // P-10: 防災・インフラ
   | "map-chart-assets" // P-11: 汎用地図・チャート素材集
   | "all-in-one" // P-12: 全部入りバンドル
-  | "free-trial"; // P-13: 無料お試し (note/リード用・コナラ非出品)
+  | "free-trial" // P-13: 無料お試し (note/リード用・コナラ非出品)
+  | "household-consumption"; // P-14: 家計・消費 (家計調査の消費品目・旧 P-09 から分離)
 
 /** 納品ファイル形式。ココナラ対応形式のうち本ファクトリーが扱う範囲。 */
 export type ProductFormat =
@@ -85,7 +86,7 @@ export interface ProductVariantOption {
   readonly addYen: number;
 }
 
-/** 1 パックの型付き定義。P-01〜P-13 を全登録する。 */
+/** 1 パックの型付き定義。P-01〜P-14 を全登録する。 */
 export interface ProductDefinition {
   /** 一意 ID。`^P-\d{2}$`。 */
   readonly id: string;

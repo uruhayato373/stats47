@@ -6,8 +6,8 @@ import { LICENSE_IDS } from "../src/catalog/licenses";
 import { DATASET_KEYS } from "../src/data/datasets";
 
 describe("pack catalog", () => {
-  it("registers exactly 13 packs (P-01..P-13)", () => {
-    expect(EXPECTED_TOTAL).toBe(13);
+  it("registers exactly 14 packs (P-01..P-14)", () => {
+    expect(EXPECTED_TOTAL).toBe(14);
     expect(ALL_PRODUCTS.length).toBe(EXPECTED_TOTAL);
   });
 

@@ -1,5 +1,5 @@
 /**
- * 指標 (metric config) → テーマパック (P-01〜P-12) の機械配分マップ (SSOT)。
+ * 指標 (metric config) → テーマパック (P-01〜P-14) の機械配分マップ (SSOT)。
  *
  * 各 metric config の e-Stat カテゴリ 17 分類 (`category`) を主キーに、1 指標 = 1 テーマ (primary)
  * で配分する。曖昧なカテゴリはキーワードで微調整する。P-11 (地図・チャート素材集) は横断代表を
@@ -87,8 +87,22 @@ export const MAP_CHART_ASSET_KEYS: readonly string[] = [
 /**
  * 1 指標を主テーマパックへ配分する。配分できないものは null (P-13 対象・未知カテゴリ)。
  * P-11 (素材集) と P-12 (全部入り) はここでは扱わない (別ロジックで束ねる)。
+ *
+ * 配分優先順位:
+ *   1. economy かつ移住・生活コスト相当 (物価/地価/家賃) → P-07 を維持する。
+ *      P-07 の既存構成 (物価/地価 + 住居費) を壊さないため、家計調査由来の住居費 (家賃消費支出等) も
+ *      この範囲に含まれるものは P-07 のまま据え置く (kakei ルールより先に判定)。
+ *   2. 家計調査の消費品目 (source.kind === "kakei-chousa") → P-14 (家計・消費)。
+ *      これらは category=economy だが「○○消費支出額」等の家計消費であり、産業・経済 (P-09) に不適合。
+ *      category 判定より優先して P-14 へ寄せる。
+ *   3. e-Stat カテゴリ 17 分類の写像 (CATEGORY_PACK)。
  */
-export function assignPackTheme(key: string, category: string): PackTheme | null {
+export function assignPackTheme(
+  key: string,
+  category: string,
+  sourceKind?: string,
+): PackTheme | null {
   if (category === "economy" && P07_ECONOMY_KEY.test(key)) return "migration-living";
+  if (sourceKind === "kakei-chousa") return "household-consumption";
   return CATEGORY_PACK[category] ?? null;
 }

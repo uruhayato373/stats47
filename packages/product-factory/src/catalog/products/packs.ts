@@ -1,5 +1,5 @@
 /**
- * テーマパック・カタログ (SSOT) — P-01〜P-13。
+ * テーマパック・カタログ (SSOT) — P-01〜P-14。
  *
  * 2026-07-23: 旧 174 件 (A-01〜L-07・family 別 12 ファイル) を破壊的に縮約した。同一テーマが
  * family 横断で重複していた (観光 = B-06/C-14/D-08/E-06 等) ため、出品・実データ接続・管理の単位を
@@ -406,6 +406,29 @@ const RAW_PACKS: readonly Omit<ProductDefinition, "rankingKeys">[] = [
     risk: "normal",
     status: "cataloged",
     sourceIds: ["L-01"],
+  },
+  {
+    id: "P-14",
+    theme: "household-consumption",
+    name: "家計・消費データパック（47都道府県）",
+    audience: ["企画・営業", "編集者・ライター", "研究者"],
+    jobToBeDone: "家計調査の消費支出・消費数量を品目横断でまとめて把握・比較する",
+    formats: [...DATA_FORMATS],
+    price: { minYen: 5000, maxYen: 12000, initialYen: 5000 },
+    dataMode: "sample",
+    metrics: [],
+    // 実データは pack snapshot (家計調査品目・基準年固定) が供給する。approved 化には
+    // 代表指標の git TS スナップショットを DATASET_REGISTRY に追加する (後段)。
+    datasets: [],
+    templateIds: [],
+    licenseId: "single-corporate",
+    supportLevel: "manual",
+    compatibility: OFFICE_COMPAT,
+    risk: "normal",
+    // 家計消費品目 (source.kind=kakei-chousa) を P-09 から分離。実データ接続済 (snapshot) だが
+    // 出品可能化 (approved) は代表 dataset 追加 + Office 実機検証後 (人間工程)。
+    status: "cataloged",
+    sourceIds: ["P-09"],
   },
 ];
 

@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-07-23T02:04:56.978Z",
-  "total": 13,
+  "generatedAt": "2026-07-23T02:20:56.495Z",
+  "total": 14,
   "built": [
     "P-01",
     "P-02",
@@ -14,7 +14,8 @@
     "P-10",
     "P-11",
     "P-12",
-    "P-13"
+    "P-13",
+    "P-14"
   ],
   "note": "catalog-status。生成物は .local/coconala-products (git 管理外)。実機検証・出品は人間工程。",
   "products": [
@@ -106,6 +107,13 @@
       "id": "P-13",
       "theme": "free-trial",
       "name": "都道府県データ 無料お試しサンプル",
+      "catalogStatus": "cataloged",
+      "liveStatus": "generated"
+    },
+    {
+      "id": "P-14",
+      "theme": "household-consumption",
+      "name": "家計・消費データパック（47都道府県）",
       "catalogStatus": "cataloged",
       "liveStatus": "generated"
     }

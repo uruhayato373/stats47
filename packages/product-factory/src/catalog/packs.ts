@@ -1,6 +1,6 @@
 /**
  * パック ↔ テーマの対応と、機械検証用の期待値 (SSOT)。
- * 2026-07-23: 旧 families.ts (A〜L・174 件) を、テーマ別 13 パック (P-01〜P-13) へ縮約。
+ * 2026-07-23: 旧 families.ts (A〜L・174 件) を、テーマ別 14 パック (P-01〜P-14) へ縮約。
  */
 import type { PackTheme } from "./types";
 
@@ -19,6 +19,7 @@ export const EXPECTED_PACK_IDS: readonly string[] = [
   "P-11",
   "P-12",
   "P-13",
+  "P-14",
 ] as const;
 
 /** パック総数。 */
@@ -39,6 +40,7 @@ export const THEME_BY_ID: Readonly<Record<string, PackTheme>> = {
   "P-11": "map-chart-assets",
   "P-12": "all-in-one",
   "P-13": "free-trial",
+  "P-14": "household-consumption",
 } as const;
 
 /** テーマの表示メタ。 */
@@ -58,6 +60,7 @@ export const PACK_META: Readonly<
   "map-chart-assets": { id: "P-11", label: "汎用地図・チャート素材集" },
   "all-in-one": { id: "P-12", label: "全部入りバンドル" },
   "free-trial": { id: "P-13", label: "無料お試し" },
+  "household-consumption": { id: "P-14", label: "家計・消費" },
 } as const;
 
 /** 全テーマ slug 集合 (validator の enum 二重チェック用)。 */
