@@ -75,7 +75,7 @@ async function detectCurrentBuildId(client: S3Client, probeRoutes: string[]): Pr
     .filter((b): b is string => Boolean(b));
   if (buildIds.length === 0) throw new Error("incremental-cache 配下に buildId が見つかりません");
 
-  let best: { buildId: string; mtime: number } | null = null;
+  const found: { buildId: string; mtime: number }[] = [];
   await Promise.all(
     buildIds.map(async (buildId) => {
       for (const route of probeRoutes) {
@@ -83,15 +83,17 @@ async function detectCurrentBuildId(client: S3Client, probeRoutes: string[]): Pr
           const head = await client.send(
             new HeadObjectCommand({ Bucket: BUCKET, Key: cacheKey(buildId, route) }),
           );
-          const t = head.LastModified?.getTime() ?? 0;
-          if (!best || t > best.mtime) best = { buildId, mtime: t };
+          found.push({ buildId, mtime: head.LastModified?.getTime() ?? 0 });
         } catch {
           /* この buildId には無い */
         }
       }
     }),
   );
-  if (!best) throw new Error(`プローブルート (${probeRoutes.join(", ")}) のエントリがどの buildId にもありません`);
+  if (found.length === 0) {
+    throw new Error(`プローブルート (${probeRoutes.join(", ")}) のエントリがどの buildId にもありません`);
+  }
+  const best = found.reduce((a, b) => (b.mtime > a.mtime ? b : a));
   console.log(
     `現行 buildId: ${best.buildId} (最終更新 ${new Date(best.mtime).toISOString()}, 候補 ${buildIds.length} 件)`,
   );

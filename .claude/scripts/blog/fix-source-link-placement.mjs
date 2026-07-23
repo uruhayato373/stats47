@@ -344,7 +344,8 @@ async function fetchText(url) {
 async function loadSlugs() {
   const all = JSON.parse(await fetchText(`${R2_BASE}/app/blog/all.json`));
   const arr = Array.isArray(all) ? all : all.articles || all.items || [];
-  // published:false の legacy mdx エントリは R2 に article.md が無い (取得すると 404)
+  // published:false のエントリは R2 に article.md が無いことがある (旧 mdx 形式・取得すると 404)。
+  // all.json 側の整理は docs/todo/02_機能バックログ.md「非公開記事が blog all.json に混在」で追跡。
   return arr.filter((a) => a.published !== false).map((a) => a.slug).filter(Boolean);
 }
 
