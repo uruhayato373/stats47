@@ -39,7 +39,10 @@ const REPLACE_IMAGE = argv.includes('--replace-image'); // 既存画像を全削
 const imgResolved = resolveImagePath(IMAGE);
 if (!imgResolved.ok) { console.error(`ABORT: ${imgResolved.reason}（--image は bare 名なら .claude/config/coconala/assets/ に解決）`); process.exit(1); }
 const IMAGE_ABS = imgResolved.abs;
-const IMAGE_ONLY = !!IMAGE && ONLY.length === 0; // --image かつ --fields 指定なし → 画像のみ更新
+// --image-only 明示時のみ本文フィールドを触らず画像だけ更新。★既定 (--image のみ) は
+// 全フィールド再適用 + 画像差し替え = 公開済み listing で provisionFormat が既定 (制作物) へ
+// 戻って更新失敗する事故を防ぐ (2026-07-23 実測: --fields/画像のみ更新は fix_limit 必須で失敗)。
+const IMAGE_ONLY = argv.includes('--image-only');
 if (!SERVICE) { console.error('--service <id> required（listings/カタログの id）'); process.exit(1); }
 
 const catalog = readCatalog();
