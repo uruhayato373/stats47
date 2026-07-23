@@ -17,7 +17,7 @@
 
 | データ | SSOT | 形 | 備考 |
 |---|---|---|---|
-| 商品定義（A-01〜L-07・174 件） | `packages/product-factory/src/catalog/` | git TS | family 別 12 ファイル。`ProductDefinition` 型。**ここだけ編集** |
+| 商品定義（P-01〜P-13・テーマ別 13 パック） | `packages/product-factory/src/catalog/` | git TS | `src/catalog/products/packs.ts` 1 ファイル。`ProductDefinition`（`theme`/`datasets`/`sourceIds`）型。**ここだけ編集**。旧 174 件（A-01〜L-07・family 別）は 2026-07-23 にテーマパックへ破壊的縮約（`sourceIds` にトレース） |
 | ライセンス / テンプレ / family メタ | `src/catalog/{licenses,templates,families}.ts` | git TS | 再販売禁止は `resale: false` で型固定 |
 | 実データ（観測値） | R2 `app/ranking/<key>/values.json` | 既存 R2 | 取得は `src/data/load-ranking-values.ts` |
 | 商品に焼く実データ | `src/data/datasets/<key>.ts` | git TS スナップショット | **基準年固定**。R2 から取得して手記の SOURCES を添える |
@@ -68,8 +68,9 @@ npm run test:run   --workspace=@stats47/product-factory
 | 生成バイナリを git / 公開 R2 に置く | `.local/`（git 管理外）に生成し、配信しない |
 | 生成物 (pptx/xlsx/json) を手編集して真実源化 | git TS を編集 → `generate` で再生成 |
 | 実在しない商品 ID / licenseId / metric を書く | validator（`catalog --check`）が弾く |
+| **実データ未接続パックを status=approved/listed にする** | 実データ接続（`datasets` の全キーが `src/data/datasets/` に実在）まで `cataloged` 固定。validator の `datasets-missing` 検査が誇大表示を弾く。当面 P-01 のみ出品可（旧 D-01 の 4 データセット継承） |
 | 架空データを実データと偽る | `Dataset.isSample` で分離・販売文に明記 |
-| **オーナー承認なしにココナラへ出品/アップロード** | 出品は人間工程（下記 §6） |
+| **オーナー承認なしにココナラへ実公開（`--commit`）** | 下書き作成は自動化可・実公開は `--commit` + オーナー承認（§6） |
 | 全商品を一括出品して WIP を増やす | 戦略（`docs/02_実装計画/01`）どおり 1 商品ずつ需要実測 |
 | Office 実機未確認で「互換性検証済み」と書く | 構造(OOXML)検証と実機検証を区別して報告 |
 
@@ -83,11 +84,19 @@ npm run test:run   --workspace=@stats47/product-factory
 
 ---
 
-## 6. 出品規律（人間工程・自動化しない）
+## 6. 出品規律（出品フォームは自動化・実公開とログインは人間工程）
 
-- ココナラへのログイン・出品・アップロードは**自動化しない**（禁止事項・アカウント操作）。
-- **1 商品ずつ検証**。閲覧・お気に入り・問い合わせ・購入・サポート工数・手取りを記録する。
+> **★2026-07-23 方針変更（オーナー判断）**: 旧「ログイン・出品・アップロードを一切自動化しない」を撤回し、
+> doboku-note の実証済みパイプライン（`coconala-operator` / `/coconala-publish`）を stats47 へ移植した。
+> **出品フォームの入力は Playwright で自動化する**が、下記のガードを**人間工程として維持**する。
+
+- **ログイン認証はエージェントが行わない**。初回のみ人間が headed ブラウザで **stats47 のココナラアカウント**へ手動ログインし、永続プロファイル `.local/playwright-coconala-profile` に保持する（★doboku-note の `dobokunote` とは別アカウント・別プロファイル）。
+- **account assert 必須**: `coconala-account.json` の `sellerName`（stats47 の出品者名）がマイページ本文に含まれることを確認してから操作する。別アカウント（dobokunote 等との取り違え）は即中断。**sellerName が空の間は「ログイン済み」しか確認できない**ので、出品者名が確定したら必ず設定する。
+- **draft-first + `--commit` gate + オーナー承認**: 既定は「下書きで保存」。**実公開（`--commit`）は outward-facing・不可逆寄りのため、オーナーが明示承認したときだけ**実行する。バリデーションエラー（記入エラー）時は「公開した」と報告しない。
+- **1 商品ずつ検証**。一括出品しない。閲覧・お気に入り・問い合わせ・購入・サポート工数・手取りを記録する。
 - 反応が無ければ同系統を増やさず、対象・用途・価格・サンプルを見直す（レビュー §実行規律）。
+- **規約リスク**: ココナラ利用規約に「出品者が自分の出品をブラウザ自動化することを禁じる明示条項」は doboku 調査（2026-07-18）では未確認だが、bot 検知の運用リスクは残るため自動操作は低頻度（出品時・価格改定時）に限る。
+- 実装: agent `coconala-operator` / skill `/coconala-publish` / `.claude/scripts/coconala/`（session/form lib + publish/edit/delete-draft）。出品内容 SoT = `.claude/config/coconala-listings.json`（product-factory から 1 商品ずつ書き起こす）。
 
 ---
 
@@ -96,9 +105,10 @@ npm run test:run   --workspace=@stats47/product-factory
 | 工程 | 担当 |
 |---|---|
 | カタログ / ジェネレータ / SSOT の管理・生成・検証・出品準備 | `coconala-product-manager`（skill `/build-coconala-product`） |
+| **出品フォーム操作（新規出品・修正・下書き掃除）・出品内容 SoT** | `coconala-operator`（skill `/coconala-publish`・`.claude/scripts/coconala/`） |
 | 実データ（新 metric）の R2 投入 | `data-ingester` |
 | e-Stat 実在検証 | `estat-researcher` |
-| 実機検証・出品 | 人間（オーナー・Windows 実機） |
+| Office 実機検証・実公開（`--commit`）の承認 | 人間（オーナー・Windows 実機） |
 
 ## 関連
 
@@ -107,4 +117,9 @@ npm run test:run   --workspace=@stats47/product-factory
 - モジュール: `packages/product-factory/`（README + `src/`）
 - 完全DBレス: `docs/01_技術設計/12_完全DBレス設計.md` / データ保存先: `.claude/rules/data-storage.md`
 - 実証判定: `.claude/rules/evidence-based-judgment.md` / 収益化戦略: `docs/02_実装計画/01_収益化マスタープラン.md`
-- agent: `.claude/agents/coconala-product-manager.md` / skill: `.claude/skills/product/build-coconala-product/SKILL.md`
+- agent: `.claude/agents/coconala-product-manager.md`（商品生成）/ `.claude/agents/coconala-operator.md`（出品自動化）
+- skill: `.claude/skills/product/build-coconala-product/SKILL.md` / `.claude/skills/product/coconala-publish/SKILL.md`
+- 出品スクリプト: `.claude/scripts/coconala/`（`coconala-{publish,edit,delete-draft}.mjs` + `lib/coconala-{session,form}.mjs`）
+- 出品 SoT: `.claude/config/coconala-listings.json` / アカウント: `.claude/config/coconala-account.json`（★stats47 専用・sellerName 要記入）
+- 認証プロファイル: `docs/01_技術設計/playwright-auth-profiles.md`（`playwright-coconala-profile`）
+- 移植元: doboku-note `.claude/agents/coconala-operator.md` / `.claude/skills/management/coconala-publish/`

@@ -12,6 +12,7 @@ import {
   trackShare,
   trackNotFound,
   trackCtaClick,
+  trackNavClick,
 } from "../events";
 
 describe("GA4 カスタムイベント", () => {
@@ -114,6 +115,33 @@ describe("GA4 カスタムイベント", () => {
 
     const params = mockGtag.mock.calls[0][2] as Record<string, unknown>;
     expect(params).not.toHaveProperty("ranking_key");
+  });
+
+  it("trackNavClick が /areas の areas_search surface を送信する", () => {
+    trackNavClick({
+      label: "東京都",
+      href: "/areas/13000",
+      surface: "areas_search",
+    });
+
+    expect(mockGtag).toHaveBeenCalledWith("event", "nav_click", expect.objectContaining({
+      event_category: "navigation",
+      nav_label: "東京都",
+      nav_href: "/areas/13000",
+      nav_surface: "areas_search",
+    }));
+  });
+
+  it("trackNavClick が areas_map / areas_list surface を受け付ける", () => {
+    trackNavClick({ label: "大阪府", href: "/areas/27000", surface: "areas_map" });
+    trackNavClick({ label: "京都府", href: "/areas/26000", surface: "areas_list" });
+
+    expect(mockGtag).toHaveBeenNthCalledWith(1, "event", "nav_click", expect.objectContaining({
+      nav_surface: "areas_map",
+    }));
+    expect(mockGtag).toHaveBeenNthCalledWith(2, "event", "nav_click", expect.objectContaining({
+      nav_surface: "areas_list",
+    }));
   });
 
   // ─── ホーム注目ランキング (home-featured-v1) ───

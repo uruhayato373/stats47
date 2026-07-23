@@ -20,6 +20,8 @@ export interface Dataset {
   readonly unit: string;
   /** 基準年 (4 桁)。 */
   readonly year: string;
+  /** e-Stat カテゴリ (17 分類・任意)。xlsx のカテゴリ別グループシートで使う。 */
+  readonly category?: string;
   readonly source: SourceRow;
   /** 架空サンプルなら true (実データ商品は false)。生成物の注記に反映する。 */
   readonly isSample: boolean;

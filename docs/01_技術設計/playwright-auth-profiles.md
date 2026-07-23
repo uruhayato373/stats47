@@ -15,6 +15,7 @@ Cookie・localStorage をディレクトリごと保持する。**一度ログ�
 | `playwright-ig-profile` | Instagram | `.claude/scripts/sns/delete-instagram-posts.ts` | ⚠️ **空（未ログイン）** |
 | `playwright-meta-profile` | Meta / FB Business Suite | `.claude/skills/archive/sns/schedule-instagram-mbs/…`（archive） | ⚠️ **空（未ログイン）** |
 | `playwright-a8-profile` | A8.net (アフィリエイト) | `.claude/skills/ads/scout-asp/scripts/{a8-browser.ts,login.mjs}` | ⚠️ **空（未ログイン）**。`login.mjs` で初回ログイン後に自動 scout (`/scout-asp`) が利用 |
+| `playwright-coconala-profile` | ココナラ (coconala.com) — ★**stats47 専用アカウント**（doboku-note の `dobokunote` とは別） | `.claude/scripts/coconala/{coconala-publish,coconala-edit,coconala-delete-draft}.mjs` | ⚠️ **空（未ログイン）**。初回に headed で stats47 のココナラアカウントへ手動ログイン。account assert の SSOT は `.claude/config/coconala-account.json` の `sellerName`（現在空＝要記入） |
 
 - `PROFILE_DIR` は各スクリプトで `path.join(PROJECT_ROOT, ".local/playwright-*-profile")` として定義。
 - X アカウントは `publish-x.ts --expect-account @<handle>` で照合可能（ログイン中の @handle が一致するまで投稿しない安全ガード）。実運用ハンドル：**（要記入）** / ひも付け Gmail：**（要記入）**。

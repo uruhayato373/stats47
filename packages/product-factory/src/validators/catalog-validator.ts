@@ -1,42 +1,23 @@
 /**
  * カタログ決定的 validator。
- * 正典受入条件: 全商品 ID が一意で、レビュー文書の商品候補との対応を機械検証できる。
- * fs には依存しない純関数 (レビュー Markdown との突合は golden test 側が担う)。
+ * 受入条件: 全パック ID が一意で、期待パック集合 (EXPECTED_PACK_IDS) と一致し、
+ * 出品可能 (approved/listed) なパックは実データセットが実在する (誇大表示防止)。
+ * 純関数 (availableDatasetKeys を注入することで fs に依存しない)。
  */
 import type {
   ProductDefinition,
-  ProductFamily,
+  PackTheme,
   ProductFormat,
   DataMode,
   SupportLevel,
   ProductRisk,
   ProductStatus,
 } from "../catalog/types";
-import {
-  FAMILY_BY_LETTER,
-  EXPECTED_FAMILY_COUNTS,
-  EXPECTED_TOTAL,
-  ZERO_PRICE_FAMILIES,
-  expectedIds,
-} from "../catalog/families";
+import { EXPECTED_PACK_IDS, EXPECTED_TOTAL, PACK_THEMES, ZERO_PRICE_THEMES } from "../catalog/packs";
 import { LICENSE_IDS } from "../catalog/licenses";
 import { TEMPLATE_IDS } from "../catalog/templates";
+import { DATASET_KEYS } from "../data/datasets";
 
-/** 実行時 enum 集合 (TS の静的検査に加えた二重チェック用)。 */
-const FAMILIES: ReadonlySet<ProductFamily> = new Set<ProductFamily>([
-  "asset",
-  "powerpoint",
-  "excel",
-  "data",
-  "industry",
-  "government",
-  "media",
-  "education",
-  "consumer",
-  "service",
-  "license",
-  "entry",
-]);
 const FORMATS: ReadonlySet<ProductFormat> = new Set<ProductFormat>([
   "pptx",
   "xlsx",
@@ -72,7 +53,16 @@ const STATUSES: ReadonlySet<ProductStatus> = new Set<ProductStatus>([
   "paused",
 ]);
 
-const ID_PATTERN = /^[A-L]-\d{2}$/;
+/** 出品可能な状態 (実データ接続が必須)。 */
+const LISTABLE_STATUSES: ReadonlySet<ProductStatus> = new Set<ProductStatus>(["approved", "listed"]);
+
+const ID_PATTERN = /^P-\d{2}$/;
+
+/** 価格が刻み規則に合うか (¥10,000 以下=500円刻み / 超=1,000円刻み)。 */
+function isPriceStepValid(yen: number): boolean {
+  if (yen <= 0) return true;
+  return yen <= 10000 ? yen % 500 === 0 : yen % 1000 === 0;
+}
 
 export interface ValidationIssue {
   readonly code: string;
@@ -83,16 +73,25 @@ export interface ValidationIssue {
 export interface ValidationResult {
   readonly ok: boolean;
   readonly total: number;
-  readonly perFamily: Readonly<Record<string, number>>;
+  /** テーマ slug 別の件数。 */
+  readonly perTheme: Readonly<Record<string, number>>;
   readonly errors: readonly ValidationIssue[];
   readonly warnings: readonly ValidationIssue[];
 }
 
+export interface ValidateCatalogOptions {
+  /** 実在する実データセット key の集合 (省略時は登録レジストリ)。 */
+  readonly availableDatasetKeys?: ReadonlySet<string>;
+}
+
 /**
- * カタログを決定的に検証する。
- * error があれば ok=false。warning は ok に影響しない。
+ * カタログを決定的に検証する。error があれば ok=false。warning は ok に影響しない。
  */
-export function validateCatalog(products: readonly ProductDefinition[]): ValidationResult {
+export function validateCatalog(
+  products: readonly ProductDefinition[],
+  options: ValidateCatalogOptions = {},
+): ValidationResult {
+  const datasetKeys = options.availableDatasetKeys ?? DATASET_KEYS;
   const errors: ValidationIssue[] = [];
   const warnings: ValidationIssue[] = [];
 
@@ -100,7 +99,7 @@ export function validateCatalog(products: readonly ProductDefinition[]): Validat
   const seen = new Set<string>();
   for (const p of products) {
     if (!ID_PATTERN.test(p.id)) {
-      errors.push({ code: "id-format", id: p.id, message: `ID が ^[A-L]-\\d{2}$ に一致しない: ${p.id}` });
+      errors.push({ code: "id-format", id: p.id, message: `ID が ^P-\\d{2}$ に一致しない: ${p.id}` });
       continue;
     }
     if (seen.has(p.id)) {
@@ -109,16 +108,16 @@ export function validateCatalog(products: readonly ProductDefinition[]): Validat
     seen.add(p.id);
   }
 
-  // 2. レビュー候補との対応 (集合一致)。欠落・余剰を機械検出。
-  const expected = new Set(expectedIds());
+  // 2. 期待パック集合との一致 (欠落・余剰を機械検出)
+  const expected = new Set(EXPECTED_PACK_IDS);
   for (const want of expected) {
     if (!seen.has(want)) {
-      errors.push({ code: "id-missing", id: want, message: `レビュー候補 ${want} がカタログに存在しない` });
+      errors.push({ code: "id-missing", id: want, message: `期待パック ${want} がカタログに存在しない` });
     }
   }
   for (const have of seen) {
     if (!expected.has(have)) {
-      errors.push({ code: "id-extra", id: have, message: `レビューに無い ID がカタログに存在: ${have}` });
+      errors.push({ code: "id-extra", id: have, message: `期待集合に無い ID がカタログに存在: ${have}` });
     }
   }
 
@@ -126,27 +125,18 @@ export function validateCatalog(products: readonly ProductDefinition[]): Validat
   if (products.length !== EXPECTED_TOTAL) {
     errors.push({
       code: "count-total",
-      message: `商品総数が期待値と不一致: ${products.length} (期待 ${EXPECTED_TOTAL})`,
+      message: `パック総数が期待値と不一致: ${products.length} (期待 ${EXPECTED_TOTAL})`,
     });
   }
 
-  // 4. 各商品のフィールド検証
-  const perFamily: Record<string, number> = {};
+  // 4. 各パックのフィールド検証
+  const perTheme: Record<string, number> = {};
   for (const p of products) {
-    const letter = p.id.slice(0, 1);
-    perFamily[letter] = (perFamily[letter] ?? 0) + 1;
+    perTheme[p.theme] = (perTheme[p.theme] ?? 0) + 1;
 
-    // family ↔ ID 先頭文字の整合
-    const expectedFamily = FAMILY_BY_LETTER[letter];
-    if (expectedFamily && p.family !== expectedFamily) {
-      errors.push({
-        code: "family-mismatch",
-        id: p.id,
-        message: `family=${p.family} は ID 先頭 ${letter} (=${expectedFamily}) と不一致`,
-      });
-    }
-    if (!FAMILIES.has(p.family)) {
-      errors.push({ code: "family-enum", id: p.id, message: `未知の family: ${p.family}` });
+    // theme enum
+    if (!PACK_THEMES.has(p.theme)) {
+      errors.push({ code: "theme-enum", id: p.id, message: `未知の theme: ${p.theme}` });
     }
 
     // enum 群
@@ -177,9 +167,9 @@ export function validateCatalog(products: readonly ProductDefinition[]): Validat
       errors.push({ code: "compatibility-empty", id: p.id, message: "compatibility が空" });
     }
 
-    // formats: license 以外は非空。全要素が有効な形式。
-    if (p.family !== "license" && p.formats.length === 0) {
-      errors.push({ code: "formats-empty", id: p.id, message: "formats が空 (license 以外は 1 件以上必須)" });
+    // formats: 非空・全要素が有効な形式
+    if (p.formats.length === 0) {
+      errors.push({ code: "formats-empty", id: p.id, message: "formats が空 (1 件以上必須)" });
     }
     for (const f of p.formats) {
       if (!FORMATS.has(f)) {
@@ -187,7 +177,7 @@ export function validateCatalog(products: readonly ProductDefinition[]): Validat
       }
     }
 
-    // price: 0 <= min <= initial <= max。priced family は min > 0。
+    // price: 0 <= min <= initial <= max。free-trial 以外は min > 0。価格刻み。
     const { minYen, maxYen, initialYen } = p.price;
     if (!Number.isFinite(minYen) || !Number.isFinite(maxYen) || !Number.isFinite(initialYen)) {
       errors.push({ code: "price-nan", id: p.id, message: "price に数値でない値" });
@@ -205,8 +195,17 @@ export function validateCatalog(products: readonly ProductDefinition[]): Validat
           message: `initialYen(${initialYen}) が [${minYen}, ${maxYen}] の外`,
         });
       }
-      if (!ZERO_PRICE_FAMILIES.has(p.family) && minYen <= 0) {
-        errors.push({ code: "price-zero", id: p.id, message: "有償 family だが minYen<=0" });
+      if (!ZERO_PRICE_THEMES.has(p.theme) && minYen <= 0) {
+        errors.push({ code: "price-zero", id: p.id, message: "有償テーマだが minYen<=0" });
+      }
+      for (const [label, yen] of [["minYen", minYen], ["initialYen", initialYen], ["maxYen", maxYen]] as const) {
+        if (!isPriceStepValid(yen)) {
+          errors.push({
+            code: "price-step",
+            id: p.id,
+            message: `${label}(${yen}) が価格刻み (¥10,000以下=500円 / 超=1,000円) に合わない`,
+          });
+        }
       }
     }
 
@@ -215,29 +214,38 @@ export function validateCatalog(products: readonly ProductDefinition[]): Validat
       errors.push({ code: "license-ref", id: p.id, message: `未知の licenseId: ${p.licenseId}` });
     }
 
-    // templateIds 参照 (Phase 1 は空レジストリ → 実質すべて [])
+    // templateIds 参照
     for (const t of p.templateIds) {
       if (!TEMPLATE_IDS.includes(t)) {
         errors.push({ code: "template-ref", id: p.id, message: `未知の templateId: ${t}` });
       }
     }
-  }
 
-  // 5. family 別件数
-  for (const [letter, want] of Object.entries(EXPECTED_FAMILY_COUNTS)) {
-    const got = perFamily[letter] ?? 0;
-    if (got !== want) {
-      errors.push({
-        code: "count-family",
-        message: `family ${letter} の件数が不一致: ${got} (期待 ${want})`,
-      });
+    // datasets: 出品可能 (approved/listed) なら全キーが実在する (誇大表示防止)
+    if (LISTABLE_STATUSES.has(p.status)) {
+      if (p.datasets.length === 0) {
+        errors.push({
+          code: "datasets-empty-listable",
+          id: p.id,
+          message: `status=${p.status} だが datasets が空 (実データ未接続では出品不可)`,
+        });
+      }
+      for (const key of p.datasets) {
+        if (!datasetKeys.has(key)) {
+          errors.push({
+            code: "datasets-missing",
+            id: p.id,
+            message: `status=${p.status} のパックが実在しない dataset を参照: ${key}`,
+          });
+        }
+      }
     }
   }
 
   return {
     ok: errors.length === 0,
     total: products.length,
-    perFamily,
+    perTheme,
     errors,
     warnings,
   };

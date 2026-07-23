@@ -18,6 +18,11 @@
       "import": "./src/d3/index.ts",
       "require": "./src/d3/index.ts"
     },
+    "./d3/constants/tile-grid-layout": {
+      "types": "./src/d3/constants/tile-grid-layout.ts",
+      "import": "./src/d3/constants/tile-grid-layout.ts",
+      "require": "./src/d3/constants/tile-grid-layout.ts"
+    },
     "./d3/BarChart": "./src/d3/components/BarChart/index.ts",
     "./d3/BarChartRace": "./src/d3/components/BarChartRace/index.ts",
     "./d3/BoxplotChart": "./src/d3/components/BoxplotChart/index.ts",

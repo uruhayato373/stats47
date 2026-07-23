@@ -3,16 +3,14 @@
  *
  * 使い方 (workspace 経由):
  *   npm run products:catalog  --workspace=@stats47/product-factory -- --check
- *   npm run products:validate --workspace=@stats47/product-factory -- --id B-01
+ *   npm run products:validate --workspace=@stats47/product-factory -- --id P-01
+ *   npm run products:generate --workspace=@stats47/product-factory -- --id P-01
  *   npm run products:report   --workspace=@stats47/product-factory
- *
- * Phase 1 で実装するのは catalog / validate (検証系) のみ。
- * generate / preview / report は Phase 2 以降の生成系で、ここでは未実装であることを明示して終了する。
  */
 import { ALL_PRODUCTS } from "./catalog/products";
-import { FAMILY_META } from "./catalog/families";
+import { PACK_META } from "./catalog/packs";
 import { validateCatalog } from "./validators/catalog-validator";
-import type { ProductFamily } from "./catalog/types";
+import type { PackTheme } from "./catalog/types";
 
 const argv = process.argv.slice(2);
 const subcommand = argv[0] ?? "";
@@ -22,12 +20,12 @@ const idArg = idFlagIndex >= 0 ? argv[idFlagIndex + 1] : undefined;
 
 function printCatalogSummary(): void {
   const result = validateCatalog(ALL_PRODUCTS);
-  console.log(`商品総数: ${result.total}`);
-  const families = Object.keys(FAMILY_META) as ProductFamily[];
-  for (const family of families) {
-    const letter = FAMILY_META[family].letter;
-    const count = result.perFamily[letter] ?? 0;
-    console.log(`  ${letter} ${family.padEnd(11)} ${String(count).padStart(3)}  ${FAMILY_META[family].label}`);
+  console.log(`パック総数: ${result.total}`);
+  const themes = Object.keys(PACK_META) as PackTheme[];
+  for (const theme of themes) {
+    const meta = PACK_META[theme];
+    const count = result.perTheme[theme] ?? 0;
+    console.log(`  ${meta.id} ${theme.padEnd(24)} ${String(count).padStart(2)}  ${meta.label}`);
   }
 }
 
@@ -54,7 +52,7 @@ function runValidate(): number {
       console.error(`❌ 商品が見つからない: ${idArg}`);
       return 1;
     }
-    console.log(`商品 ${idArg} (${product.family}): ${product.name}`);
+    console.log(`商品 ${idArg} (${product.theme}): ${product.name}`);
   }
   if (scoped.length === 0) {
     console.log(`✅ validate: エラーなし${idArg ? ` (${idArg})` : ""}`);
@@ -69,7 +67,7 @@ function runValidate(): number {
 
 function notImplemented(name: string): number {
   console.log(`ℹ️  \`${name}\` は後続 Phase で実装します。現状は未実装です。`);
-  console.log("   対応コマンド: `catalog --check` / `validate --id <ID>` / `generate --id B-01`");
+  console.log("   対応コマンド: `catalog --check` / `validate --id <ID>` / `generate --id P-01` / `generate --all`");
   return 0;
 }
 
@@ -96,12 +94,16 @@ async function runGenerate(): Promise<number> {
   const { buildProduct } = await import("./build/build-product");
   const { ALL_PRODUCTS } = await import("./catalog/products");
   const { JAPANESE_POPULATION_2024 } = await import("./data/datasets/japanese-population");
+  const { resolveDatabook, buildDatabook } = await import("./build/build-databook");
   const product = ALL_PRODUCTS.find((p) => p.id === idArg);
   if (!product) {
     console.error(`❌ 商品が見つからない: ${idArg}`);
     return 1;
   }
-  const res = await buildProduct(product, JAPANESE_POPULATION_2024);
+  const databook = resolveDatabook(product);
+  const res = databook
+    ? await buildDatabook(product, databook)
+    : await buildProduct(product, JAPANESE_POPULATION_2024);
   console.log(`✅ 生成: ${res.productId} → ${res.outDir}`);
   for (const f of res.manifest.files) console.log(`   ${f.path} (${f.bytes} bytes)`);
   return 0;
@@ -127,8 +129,8 @@ async function main(): Promise<number> {
     case "preview":
       return notImplemented(subcommand);
     default:
-      console.log("usage: cli.ts <catalog|validate|generate|preview|report> [--check] [--id <ID>]");
-      console.log("実装済: catalog --check / validate --id <ID> / generate --id B-01");
+      console.log("usage: cli.ts <catalog|validate|generate|preview|report> [--check] [--id <ID>] [--all]");
+      console.log("実装済: catalog --check / validate --id <ID> / generate --id P-01 / generate --all");
       return subcommand === "" ? 0 : 1;
   }
 }

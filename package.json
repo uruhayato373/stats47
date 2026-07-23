@@ -3,6 +3,9 @@
   "private": true,
   "scripts": {
     "build": "turbo run build",
+    "coconala-publish": "node .claude/scripts/coconala/coconala-publish.mjs",
+    "coconala-edit": "node .claude/scripts/coconala/coconala-edit.mjs",
+    "coconala-delete-draft": "node .claude/scripts/coconala/coconala-delete-draft.mjs",
     "dev": "turbo run dev",
     "dev:web": "turbo run dev --filter=web",
     "lint": "turbo run lint",

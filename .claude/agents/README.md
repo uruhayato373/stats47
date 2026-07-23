@@ -69,7 +69,7 @@
 | `trend-scout` | SNS 競合の定点観測 (`/competitor-scan`) + X バズ投稿の型・画像リサーチ (`/x-viral-research`) も担当 | 既存拡張 |
 | `strategy-advisor` | SNS 週次運用ルーチン (`/sns-weekly-plan`) の orchestrator | 既存拡張 |
 
-## Tier 5: SEO / Analytics / Monetization (6 体)
+## Tier 5: SEO / Analytics / Monetization (7 体)
 
 | agent | role | 派生元 |
 |---|---|---|
@@ -79,7 +79,8 @@
 | `adsense-analyst` 🆕 | AdSense 収益計測 + アフィ収益の計測協働 (在庫管理は affiliate-manager に移管) | seo-auditor 分割 + new |
 | `affiliate-manager` 🆕 | アフィリエイト一元管理 (SSOT=`affiliate-{ads,direct-placements}-data.ts` 在庫 CRUD / サイズ・プログラム規約 / priority 整合 / compliance 監査 `/audit-affiliate-compliance` / 実験 `/manage-affiliate-experiment` / 集約 state `affiliate-operations-latest.json` / publish 段取り / A8 自動 scout の register 段=SSOT 排他 writer)。計測は adsense/ga4、effect は improvement-triage、A8 ブラウザ操作は asp-scout に委譲。必読 `.claude/rules/affiliate-ads-standards.md` | 2026-06-30 新設 (adsense-analyst 分離)・2026-07-15 運用 SSOT 移行で拡張 |
 | `asp-scout` 🆕 | A8.net ブラウザ操作専任 (Playwright: scout/apply/check-approval/harvest)。高単価案件を scoreAndRank→自動申請 (週次上限機械強制)→承認再走査→広告コード取得→parse。判定は決定的コード、意味判断は pending-vertical 解決と UI 変化診断のみ。SSOT 追記・commit/push は affiliate-manager に委譲。skill `/scout-asp`・cron `scout-asp-weekly` (ローカル Mac 限定)。必読 `.claude/rules/affiliate-ads-standards.md` §10 | 2026-07-19 新設 |
-| `coconala-product-manager` 🆕 | ココナラ商品ファクトリー (`packages/product-factory`) 単一所有。型付きカタログ (A-01〜L-07・174件) / ジェネレータ (pptx custGeom地図・xlsx RANK数式・pdf/csv/svg/png) / 生成 (`products:generate --all/--id`) / 検証 (`catalog --check`) / 台帳 (`.claude/state/products/catalog-status.json`) / 出品前チェック (READINESS)。SSOT=git TS 定義 + R2→スナップショット実データ、生成物=`.local` (git管理外)。実データ投入=data-ingester、e-Stat 実在=estat-researcher、実機検証・出品=人間に委譲。必読 `.claude/rules/coconala-product-standards.md` | 2026-07-18 新設 |
+| `coconala-product-manager` 🆕 | ココナラ商品ファクトリー (`packages/product-factory`) 単一所有。型付きカタログ (テーマ別 13 パック P-01〜P-13・旧 A-01〜L-07 174件を 2026-07-23 に縮約) / ジェネレータ (pptx custGeom地図・xlsx RANK数式・pdf/csv/svg/png) / 生成 (`products:generate --all/--id`) / 検証 (`catalog --check`) / 台帳 (`.claude/state/products/catalog-status.json`) / 出品前チェック (READINESS)。SSOT=git TS 定義 + R2→スナップショット実データ、生成物=`.local` (git管理外)。実データ接続済みパックのみ出品可 (validator が誇大表示を弾く・当面 P-01)。実データ投入=data-ingester、e-Stat 実在=estat-researcher、実機検証=人間、ココナラ出品操作=coconala-operator に委譲。必読 `.claude/rules/coconala-product-standards.md` | 2026-07-18 新設 |
+| `coconala-operator` 🆕 | ココナラ出品の**フォーム操作自動化** (Playwright: 新規出品/内容修正/価格反映/下書き掃除)。出品内容 SoT=`.claude/config/coconala-listings.json` を product-factory 商品から 1 商品ずつ書き起こし出品。安全弁=account assert (★dobokunote と別アカウント・別プロファイル `.local/playwright-coconala-profile`) / draft-first + `--commit` gate + オーナー承認。商品生成=coconala-product-manager に委譲。skill `/coconala-publish`・`.claude/scripts/coconala/`。必読 `.claude/rules/coconala-product-standards.md` §6。doboku-note から移植 | 2026-07-23 新設 |
 
 ## Tier 6: Theme / UI (8 体)
 

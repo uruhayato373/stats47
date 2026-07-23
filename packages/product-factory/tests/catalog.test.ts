@@ -1,29 +1,13 @@
 import { describe, it, expect } from "vitest";
-import { readFileSync } from "node:fs";
-import { fileURLToPath } from "node:url";
-import { dirname, resolve } from "node:path";
 import { ALL_PRODUCTS } from "../src/catalog/products";
 import { validateCatalog } from "../src/validators/catalog-validator";
-import { EXPECTED_TOTAL, EXPECTED_FAMILY_COUNTS, expectedIds } from "../src/catalog/families";
+import { EXPECTED_TOTAL, EXPECTED_PACK_IDS } from "../src/catalog/packs";
 import { LICENSE_IDS } from "../src/catalog/licenses";
+import { DATASET_KEYS } from "../src/data/datasets";
 
-const here = dirname(fileURLToPath(import.meta.url)); // packages/product-factory/tests
-const REVIEW_DOC = resolve(here, "../../..", "docs/04_レビュー/2026-07-18-coconala-content-monetization.md");
-
-/** レビュー文書の A〜L カタログ表の先頭セル ID (`| A-01 |`) だけを抽出する。 */
-function reviewIds(): string[] {
-  const text = readFileSync(REVIEW_DOC, "utf8");
-  const ids = new Set<string>();
-  for (const line of text.split("\n")) {
-    const m = line.match(/^\|\s*([A-L]-\d{2})\s*\|/);
-    if (m) ids.add(m[1]);
-  }
-  return [...ids].sort();
-}
-
-describe("product catalog", () => {
-  it("registers exactly 174 products (A-01..L-07)", () => {
-    expect(EXPECTED_TOTAL).toBe(174);
+describe("pack catalog", () => {
+  it("registers exactly 14 packs (P-01..P-14)", () => {
+    expect(EXPECTED_TOTAL).toBe(14);
     expect(ALL_PRODUCTS.length).toBe(EXPECTED_TOTAL);
   });
 
@@ -33,29 +17,17 @@ describe("product catalog", () => {
     expect(result.ok).toBe(true);
   });
 
-  it("has unique IDs equal to the generated expected set", () => {
+  it("has unique IDs equal to the expected pack set", () => {
     const ids = ALL_PRODUCTS.map((p) => p.id).sort();
     expect(new Set(ids).size).toBe(ids.length);
-    expect(ids).toEqual([...expectedIds()].sort());
+    expect(ids).toEqual([...EXPECTED_PACK_IDS].sort());
   });
 
-  it("machine-verifies correspondence to the review document", () => {
-    const catalogIds = ALL_PRODUCTS.map((p) => p.id).sort();
-    expect(catalogIds).toEqual(reviewIds());
-  });
-
-  it("matches the expected per-family counts", () => {
-    const result = validateCatalog(ALL_PRODUCTS);
-    for (const [letter, want] of Object.entries(EXPECTED_FAMILY_COUNTS)) {
-      expect(result.perFamily[letter]).toBe(want);
-    }
-  });
-
-  it("references only registered licenses and (Phase 1) no templates", () => {
+  it("references only registered licenses and (until connected) no templates/metrics", () => {
     for (const p of ALL_PRODUCTS) {
       expect(LICENSE_IDS).toContain(p.licenseId);
-      expect(p.templateIds).toEqual([]); // Phase 1: テンプレ未実装
-      expect(p.metrics).toEqual([]); // Phase 1: R2 metric 未接続
+      expect(p.templateIds).toEqual([]);
+      expect(p.metrics).toEqual([]);
     }
   });
 
@@ -67,8 +39,44 @@ describe("product catalog", () => {
     }
   });
 
-  it("detects a corrupted catalog (validator negative control)", () => {
-    const broken = ALL_PRODUCTS.slice(1); // drop A-01 → id-missing + count errors
+  it("only lists (approved/listed) packs whose datasets all exist — anti-overclaim", () => {
+    for (const p of ALL_PRODUCTS) {
+      if (p.status === "approved" || p.status === "listed") {
+        expect(p.datasets.length, `${p.id} listable must declare datasets`).toBeGreaterThan(0);
+        for (const key of p.datasets) {
+          expect(DATASET_KEYS.has(key), `${p.id} dataset ${key} must exist`).toBe(true);
+        }
+      }
+    }
+  });
+
+  it("P-01 inherits the real 4 datasets of former D-01 and is listable", () => {
+    const p01 = ALL_PRODUCTS.find((p) => p.id === "P-01");
+    expect(p01).toBeDefined();
+    expect(p01!.status).toBe("listed");
+    expect([...p01!.datasets].sort()).toEqual(
+      [
+        "general-households",
+        "per-capita-prefectural-income-h27",
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population",
+      ].sort(),
+    );
+    for (const key of p01!.datasets) expect(DATASET_KEYS.has(key)).toBe(true);
+  });
+
+  it("detects an overclaiming catalog (validator negative control)", () => {
+    // approved/listed だが実在しない dataset を宣言 → datasets-missing で ok=false
+    const broken = ALL_PRODUCTS.map((p) =>
+      p.id === "P-02" ? { ...p, status: "listed" as const, datasets: ["does-not-exist"] } : p,
+    );
+    const result = validateCatalog(broken);
+    expect(result.ok).toBe(false);
+    expect(result.errors.some((e) => e.code === "datasets-missing")).toBe(true);
+  });
+
+  it("detects a corrupted catalog (drops P-01 → id-missing + count)", () => {
+    const broken = ALL_PRODUCTS.filter((p) => p.id !== "P-01");
     const result = validateCatalog(broken);
     expect(result.ok).toBe(false);
     expect(result.errors.some((e) => e.code === "id-missing")).toBe(true);

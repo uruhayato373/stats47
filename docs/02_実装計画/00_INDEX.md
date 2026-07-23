@@ -49,6 +49,9 @@ tags: [実装計画]
 | `33_X競合調査Playwright実装仕様.md` | X公開投稿を専用Playwright profileで読み取り専用収集し、mutation防止・selector drift・証拠・継続計測を安全に実装する仕様とClaude Code prompt |
 | `34_Instagram競合調査Playwright実装仕様.md` | Instagram公開投稿・リール・カルーセルを専用Playwright profileで少量観測し、mutation防止・権利境界・勝ちパターン化を安全に実装する仕様とClaude Code prompt |
 | `35_サイト回遊グラフ・レコメンド基盤仕様.md` | blog・ranking・theme・areaを共通content graphで接続し、理由付き決定的recommendation、重複排除、GA4計測、段階実験を実装する仕様 |
+| `36_都道府県公式統計カタログ仕様.md` | 都道府県公式サイトの統計資料を再現性・権利境界付きで収集し、県データブックへ接続する仕様 |
+| `37_都道府県一覧UIUX改善実装仕様.md` | `/areas` を検索・SSR軽量地図・地方別一覧によるアクセシブルな地域選択ハブへ改善するClaude Code実装仕様 |
+| `38_ポータル型ホーム・ヘッダー再設計仕様.md` | home heroを撤去し、検索・カテゴリ・地域・テーマ・buzz-map系ランキングカードで統計ポータル化するClaude Code実装仕様 |
 
 ## 関連（このフォルダ外の正典）
 

@@ -33,7 +33,7 @@ export function writeReport(generatedAt = new Date().toISOString()): string {
   const built = builtProductIds();
   const products = ALL_PRODUCTS.map((p) => ({
     id: p.id,
-    family: p.family,
+    theme: p.theme,
     name: p.name,
     catalogStatus: p.status,
     liveStatus: built.has(p.id) ? "generated" : "cataloged",
