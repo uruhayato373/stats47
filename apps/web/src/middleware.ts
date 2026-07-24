@@ -158,14 +158,19 @@ function checkContentTypePolicy(pathname: string, baseUrl: string): Response | n
     const directTagMatch = pathname.match(/^\/tag\/([^/]+)\/?$/);
     if (directTagMatch) {
       const tagKey = decodeURIComponent(directTagMatch[1]);
-      // 旧英語スラグを日本語キーへリダイレクト
+      // 旧英語スラグを日本語キーへリダイレクト。
+      // ★リダイレクト先が生きている場合のみ 301。死んでいるなら 301→410 のチェーンを作らず
+      //   直接 410 を返す (本ファイル冒頭 UrlPolicy の規約「リダイレクト先が unknown なら直接 410」)。
+      //   2026-07-24 実測: 8 件が 301 → 410 の 2 ホップになっていた
+      //   (agricultural-processing→農産加工 等。記事が 0 本になったタグ)。
       const jaKey = REDIRECT_TAG_KEYS.get(tagKey);
-      if (jaKey) {
+      if (jaKey && UrlPolicy.tag.isKnown(jaKey) && !UrlPolicy.tag.isGone(jaKey)) {
         return NextResponse.redirect(
           new URL(`/tag/${encodeURIComponent(jaKey)}`, baseUrl),
           { status: 301 },
         );
       }
+      if (jaKey) return gone();
       if (UrlPolicy.tag.isGone(tagKey) || !UrlPolicy.tag.isKnown(tagKey)) return gone();
     }
   }
@@ -187,6 +192,10 @@ function checkContentTypePolicy(pathname: string, baseUrl: string): Response | n
         );
       }
       if (UrlPolicy.blog.isGone(slug)) return gone();
+      // 未公開記事: ページは notFound() を呼ぶが OpenNext がそれを prerender として
+      // 焼き付けるため HTTP 200 +「記事が見つかりません」で固着する (2026-07-24 実測、11 件)。
+      // middleware で前段短絡して確実に潰す。再公開時は生成物から自動で外れる。
+      if (UrlPolicy.blog.isUnpublished(slug)) return gone();
       // 旧カテゴリ名が blog slug として解釈されるパターン
       if (OLD_CATEGORY_KEYS.has(slug)) return gone();
     }

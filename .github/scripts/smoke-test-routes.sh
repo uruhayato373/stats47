@@ -16,6 +16,11 @@
 #     無画像になる。ページ HTTP は 200 なので title 検査ではすり抜ける。
 #     → 各 route の og:image meta URL を実際に叩いて 200 か検査する (.claude/rules/ogp-image-standards.md)。
 #
+#   - 410 skip の逃げ道 (2026-07-24 追加の STRICT_URLS):
+#     通常の URLS は 301/410 を「意図的な gone」として skip するため、**200 を返すべき route が
+#     丸ごと 410 になった障害を検知できない**。実際 /tag/* は約 3 ヶ月 410 のままで、公開記事の
+#     タグリンク 1,988 本が死んでいた。STRICT_URLS に入れた route は 410 も失敗として扱う。
+#
 # Usage: bash .github/scripts/smoke-test-routes.sh [BASE_URL]
 #   BASE_URL 省略時は https://stats47.jp。preview URL を渡せばデプロイ前検証も可能。
 # Exit: 1 件でも notFound / og:image 非200 / 非200 があれば exit 1。
@@ -50,6 +55,17 @@ URLS+=( "$(pick '/areas/[0-9]+/cities/' || echo "${BASE_URL}/areas/14000/cities/
 URLS+=( "$(pick '/blog/[a-z]' || echo "${BASE_URL}/blog/banana-consumption-quantity")" )
 URLS+=( "$(pick '/themes/[a-z]' || echo "${BASE_URL}/themes/aging-society")" )
 
+# STRICT: 200 以外 (301/410 含む) を即 fail とする route。
+#   通常の URLS は 301/410 を「意図的な gone/redirect」として skip するが、その逃げ道のせいで
+#   「200 を返すべき route が丸ごと 410 になった」障害が素通りする。実際 /tag/* は
+#   2026-04-26〜07-24 の約 3 ヶ月間ずっと 410 で、記事のタグリンク 1,988 本が死んでいたが
+#   誰も気づかなかった (経緯: docs/04_レビュー/2026-07-24-site-link-audit.md)。
+#   sitemap に載らない route (tag / survey 詳細) は pick できないので既知の安定キーを直接指定する。
+STRICT_URLS=(
+  "${BASE_URL}/tag/%E5%AE%B6%E8%A8%88%E8%AA%BF%E6%9F%BB"  # /tag/家計調査 (記事 150+ 本の最大タグ)
+  "${BASE_URL}/survey/census"                              # 国勢調査 (最も参照される調査ハブ)
+)
+
 # G6 (2026-07-11): 直近 push (≒ merge された PR) で追加された ranking キーを smoke 対象に追加。
 # 新規公開キーは代表 1 件方式では検査されないため、deploy-workers.yml が DIFF_BASE
 # (= github.event.before) を渡したときだけ known-ranking-keys.ts の追加行から抽出する。
@@ -68,20 +84,24 @@ fi
 
 echo "🔎 Route smoke test against ${BASE_URL}"
 echo ""
-for url in "${URLS[@]}"; do
+for url in "${URLS[@]}" "${STRICT_URLS[@]}"; do
   [ -z "$url" ] && continue
+  # STRICT_URLS に含まれる URL は 301/410 の skip を許さない
+  strict=0
+  for s in "${STRICT_URLS[@]}"; do [ "$url" = "$s" ] && strict=1; done
   checked=$((checked + 1))
   body="$(curl -s -A "$UA" --max-time 30 -w '\n__HTTP__%{http_code}' "$url" 2>/dev/null)"
   code="$(echo "$body" | sed -n 's/.*__HTTP__//p' | tail -1)"
   title="$(echo "$body" | grep -o '<title>[^<]*</title>' | head -1 | sed 's/<[^>]*>//g')"
 
   if [ "$code" != "200" ]; then
-    # /themes/<gone> 等の意図的 301/410 は対象外 (200 でないが title も空)
-    if [ "$code" = "301" ] || [ "$code" = "308" ] || [ "$code" = "410" ]; then
+    # /themes/<gone> 等の意図的 301/410 は対象外 (200 でないが title も空)。
+    # ただし STRICT_URLS は「200 を返すべき route」なので 410 も失敗として扱う。
+    if [ "$strict" = "0" ] && { [ "$code" = "301" ] || [ "$code" = "308" ] || [ "$code" = "410" ]; }; then
       echo "  ➖ [${code}] ${url} (redirect/gone — skip)"
       continue
     fi
-    echo "  ❌ [${code}] ${url}"
+    echo "  ❌ [${code}] ${url}$([ "$strict" = "1" ] && echo " (STRICT: 200 必須)")"
     fail=$((fail + 1))
     continue
   fi

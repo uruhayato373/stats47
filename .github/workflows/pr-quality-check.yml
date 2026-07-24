@@ -267,6 +267,10 @@ jobs:
           # デプロイ前に PR で弾く。修正は生成スクリプトを流して commit するだけ。
           # 経緯: docs/04_レビュー/2026-07-24-site-link-audit.md
           (cd apps/web && npx tsx scripts/generate-known-tag-keys.ts --check)
+          # 未公開記事の /blog/<slug> は notFound が prerender として焼き付き
+          # HTTP 200 +「記事が見つかりません」で固着する。middleware で 410 に短絡するため
+          # 未公開集合が R2 の実態とズレていないかを検査する (再公開の取り残しも拾う)。
+          (cd apps/web && npx tsx scripts/generate-unpublished-blog-slugs.ts --check)
         continue-on-error: false
 
   type-check:

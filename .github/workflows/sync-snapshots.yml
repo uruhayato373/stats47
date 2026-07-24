@@ -150,6 +150,7 @@ jobs:
           (cd apps/web && npx tsx scripts/generate-known-ranking-keys.ts)
           node .claude/scripts/gsc/build-sitemap-ranking-keys.cjs
           (cd apps/web && npx tsx scripts/generate-known-tag-keys.ts)
+          (cd apps/web && npx tsx scripts/generate-unpublished-blog-slugs.ts)
 
       # 新規 ranking の OGP/カード を即生成 (KNOWN 確定直後・source=known で新キーも拾う)。
       # 未生成だと og:image が 404 になるため公開時に先回りする。欠落分のみ生成 (self-heal)。
@@ -181,6 +182,7 @@ jobs:
             packages/ranking/src/config/known-ranking-keys.ts
             apps/web/src/config/sitemap-ranking-keys.ts
             apps/web/src/config/known-tag-keys.ts
+            apps/web/src/config/unpublished-blog-slugs.ts
           )
           if git diff --quiet -- "${KEY_FILES[@]}"; then
             echo "ranking / tag keys 差分なし — PR 不要"

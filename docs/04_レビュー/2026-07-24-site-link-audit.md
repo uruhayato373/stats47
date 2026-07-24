@@ -135,22 +135,79 @@ error になり、戻すと 0 になる)。`validate-theme-catalog.ts` の新検
 - 監査スクリプト実測 — 59 ページ走査 / 2,391 リンク先 / 壊れ 22 件を検出 (上記 3 系統に一致)
 - **LLM 不使用 = API 課金ゼロ**
 
+### デプロイ後の本番実測 (2026-07-24)
+
+デプロイ (PR #623) は全ステップ success。**pre-deploy gate の prerender notFound スキャンも通過**
+= タグページが notFound で prerender されていないことを機械的に確認。
+
+| 項目 | 実測 |
+|---|---|
+| ① タグページ | `/tag/家計調査` `/tag/食文化` `/tag/都道府県ランキング` が **200 + 記事 51 本**、`/tag/紅茶` が 200 + 4 本 |
+| ① 退行 | 未知タグは **410 のまま** / 英語 slug は **301 のまま** |
+| ② 県ページ | 標本 6 県すべてで死んだリンク **0**、差し替え先が描画されている |
+| ③ 出典リンク | 合成 id リンク **0**、調査名はテキストで残存 |
+| ④ テーマ | 死んだ `rankingLink` **0** |
+| 全体 | サイト横断監査: 91 ページ走査 / **2,859 リンク先 / 壊れ 0** (200×2,849 + 301×10) |
+
+監査前の同条件実測は「59 ページ / 2,391 リンク先 / 壊れ 22 件」だったので、**壊れ 22 → 0**。
+
 ## 残件
 
-**本番反映は未実施** (2026-07-24 時点。オーナー確認待ち)。必要な操作は 2 つ:
+**本番反映を実施した** (2026-07-24)。必要だった操作は 2 つ:
 
 1. **再デプロイ** — ①タグ (`known-tag-keys.ts` は middleware がビルド時に取り込む静的ファイル +
    `page.tsx` のコード修正)、②県ページ (テンプレは git TS を直接 import)、③出典リンク
    (`SourceAttribution` のコード修正) はいずれもデプロイで反映される。
-2. **page-components の R2 push** — テーマの `rankingLink` だけは R2
-   `app/page-components/theme/living-housing.json` を読むため、デプロイとは別に push が要る
-   (`sync-snapshots` の `only=page-components`)。ローカル生成物は是正済み・R2 は旧値のままを実測確認。
+2. **page-components の R2 push** — テーマの `rankingLink` と県ページのチャート由来リンクは R2
+   `app/page-components/` を読むため、デプロイとは別に push が要る (`sync-snapshots` の `only=page-components`)。
+
+> **★実行順序の落とし穴 (2 回無駄にした)**: `sync-snapshots.yml` は checkout が `ref: main` 固定で、
+> `gh workflow run --ref develop` と指定しても**読むのは main のファイル**。マージ前に 2 回実行したが、
+> どちらも `success` / 「453 ファイル push」/ CI 内 verify も「✅ 117/117 一致」と報告しながら
+> **R2 は旧内容のまま**だった (main の旧ファイルを push し、旧 vs 旧を比較していただけ)。
+> **git TS → R2 の反映は develop→main マージ後に実行する。** 反映確認は workflow の conclusion ではなく
+> ローカルから `npx tsx apps/web/scripts/verify-page-components-snapshot.ts` を回して判定する。
+> マージ後の 3 回目で反映を実測確認 (theme = `housing-floor-area` / area 13000 = `per-capita-prefectural-income-h27`)。
+
+## 追補: デプロイ後に見つけた残りを全部潰した (2026-07-24)
+
+「やり残しはないか」の点検で、**監査ではリンク元が無いため 0 件と出るが実在する壊れ**を 3 つ塞いだ。
+
+### ⑤ smoke test の 410 skip の逃げ道 (デプロイ後ゲートの穴)
+
+`smoke-test-routes.sh` は route ごと代表 1 件を叩くが、`/tag/*` と `/survey/<key>` が対象外で、
+さらに **301/410 を「意図的な gone」として無条件 skip** していた。つまり ①のような
+「200 を返すべき route が丸ごと 410」は、仮に対象に入れても素通りしていた。
+`STRICT_URLS` を追加し、そこに入れた route は 410 も失敗として扱う (代表 = `/tag/家計調査` /
+`/survey/census`)。本番 14/14 pass、変異テストで `[410] (STRICT: 200 必須)` として落ちることを確認。
+
+### ⑥ 未公開記事 10 件が HTTP 200 の soft 404 で固着
+
+`all.json` の `published:false` な `/blog/<slug>` が **200 +「記事が見つかりません」**を返していた
+(`x-nextjs-prerender: 1` / `x-nextjs-stale-time: 4294967294`)。ページは `notFound()` を呼ぶが
+OpenNext がそれを prerender として焼き付けるため (`nextjs-ssg-preservation.md` の固着パターン)。
+どこからもリンクされていないので今回のリンク監査では 0 件と出るが、Google がクロール済みなら
+「クロール済み - インデックス未登録」の発生源になる。
+
+**是正**: R2 から `UNPUBLISHED_BLOG_SLUGS` を生成し middleware で 410 に前段短絡。
+`generate-unpublished-blog-slugs.ts` (+`--check`) を PR CI ゲートと sync-snapshots に配線。
+**再公開すれば次回生成で自動的に外れる**ので手動メンテは不要。恒久削除の決定は従来どおり
+手編集の `gone-blog-slugs.ts` が持ち、生成側は GONE を除外して役割を分離した
+(この重複はテストが実データで検出した = `job-salary-39-comparison`)。
+
+### ⑦ タグの 301 → 410 チェーン 8 件
+
+`REDIRECT_TAG_KEYS` の 8 件は飛び先の日本語タグが記事 0 本で 410 になっていた
+(`agricultural-processing→農産加工` 等)。`url-policy.ts` 冒頭に
+**「リダイレクト先が unknown なら直接 410 (301→410 チェーン回避)」**という規約が既にあるのに、
+tag の middleware だけが従っていなかった。飛び先が生きている場合のみ 301 し、
+死んでいれば直接 410 を返すよう是正 (319 件は 301 のまま・8 件が 1 ホップ化)。
+
+ローカル dev 実測: 未公開 blog 410 / 死んだ redirect 410 / 生きた redirect 301 /
+公開記事・生きたタグは 200 (退行なし)。
 
 その他:
 
-- `REDIRECT_TAG_KEYS` の 8 件は 301 先の日本語タグが記事 0 本になっており `301 → 410` の連鎖を作る
-  (`agricultural-processing→農産加工` 等)。最終応答が 410 なので Google への signal としては正しく、
-  今回は手を付けていない。
 - タグページは `generateStaticParams` を持つため、デプロイ後は 868 タグが prerender される見込み。
   復号バグを直す前にデプロイしていたら**全タグが notFound で prerender され固着**していた
   (`.claude/rules/nextjs-ssg-preservation.md`)。デプロイ後に `/tag/家計調査` の live 実測が要る。
