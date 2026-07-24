@@ -259,6 +259,16 @@ jobs:
           npm run generate:editorial-index --workspace=@stats47/data-configs -- --check
         continue-on-error: false
 
+      - name: 🏷 Known Tag Keys Gate
+        run: |
+          # middleware は KNOWN_TAG_KEYS に無い /tag/<key> を 410 Gone にする。
+          # このファイルが R2 blog snapshot から乖離すると、記事のタグリンクが黙って死ぬ。
+          # (2026-04-26〜07-24 は生成元だった D1 の廃止で凍結し 1,988 本が 410 だった)
+          # デプロイ前に PR で弾く。修正は生成スクリプトを流して commit するだけ。
+          # 経緯: docs/04_レビュー/2026-07-24-site-link-audit.md
+          (cd apps/web && npx tsx scripts/generate-known-tag-keys.ts --check)
+        continue-on-error: false
+
   type-check:
     name: Type Check
     runs-on: ubuntu-latest

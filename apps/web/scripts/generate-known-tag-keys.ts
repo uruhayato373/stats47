@@ -14,6 +14,8 @@
  *   公開記事のタグリンク 1,988 本が死んでいた (docs/04_レビュー/2026-07-24-site-link-audit.md)。
  *
  * 使い方: `cd apps/web && npx tsx scripts/generate-known-tag-keys.ts`
+ *         `--check` を付けるとファイルを書かず、コミット済みの内容と R2 の実態が一致するかだけ検証する
+ *         (PR CI の鮮度ゲート。theme-catalog / area-databook の「生成物は最新」検査と同じ流儀)。
  * 更新タイミング: ブログ記事を公開して R2 blog snapshot を更新した後。
  *                 必ず git commit してからデプロイ (デプロイしないと middleware に反映されない)。
  */
@@ -23,6 +25,7 @@ import path from "node:path";
 
 const R2_PUBLIC = process.env.R2_PUBLIC_FETCH_URL ?? "https://storage.stats47.jp";
 const OUT_PATH = path.resolve(__dirname, "../src/config/known-tag-keys.ts");
+const CHECK_ONLY = process.argv.includes("--check");
 
 interface TagMeta {
   tagKey: string;
@@ -67,6 +70,35 @@ export const KNOWN_TAG_KEYS: ReadonlySet<string> = new Set([
 `;
   const body = keys.map((k) => `  ${JSON.stringify(k)},`).join("\n");
   const footer = `\n]);\n`;
+
+  if (CHECK_ONLY) {
+    // 「最終生成日」行は毎回変わるのでキー集合だけを比較する。
+    const committed = new Set(
+      [...fs.readFileSync(OUT_PATH, "utf-8").matchAll(/^ {2}"((?:[^"\\]|\\.)*)",$/gm)].map((m) =>
+        JSON.parse(`"${m[1]}"`),
+      ),
+    );
+    const missing = keys.filter((k) => !committed.has(k));
+    const extra = [...committed].filter((k) => !keys.includes(k));
+    if (missing.length === 0 && extra.length === 0) {
+      console.log(`✅ known-tag-keys は最新 (${keys.length} 件)`);
+      return;
+    }
+    console.error(
+      `❌ known-tag-keys がコミット済みの内容と一致しません (R2 ${keys.length} 件 / コミット ${committed.size} 件)`,
+    );
+    if (missing.length) {
+      console.error(`   R2 にあるが KNOWN に無い (= /tag/<key> が 410 になる): ${missing.length} 件`);
+      console.error(`     ${missing.slice(0, 10).join(", ")}${missing.length > 10 ? " …" : ""}`);
+    }
+    if (extra.length) {
+      console.error(`   KNOWN にあるが R2 に無い (記事が消えたタグ): ${extra.length} 件`);
+      console.error(`     ${extra.slice(0, 10).join(", ")}${extra.length > 10 ? " …" : ""}`);
+    }
+    console.error("   修正: cd apps/web && npx tsx scripts/generate-known-tag-keys.ts");
+    console.error("   経緯: docs/04_レビュー/2026-07-24-site-link-audit.md");
+    process.exit(1);
+  }
 
   fs.writeFileSync(OUT_PATH, header + body + footer, "utf-8");
   console.log(`[generate-known-tag-keys] wrote ${keys.length} keys to ${OUT_PATH}`);

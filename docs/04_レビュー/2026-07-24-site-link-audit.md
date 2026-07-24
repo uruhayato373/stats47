@@ -107,12 +107,20 @@ if git diff --quiet -- "$KEY_FILES"; then exit 0; fi   # ← 常に「差分な�
 
 ## 再発防止
 
-| 層 | 何を弾くか | 実装 |
-|---|---|---|
-| オフライン validator (pre-commit + CI) | 県データブックの `isActive:false` 参照 | `validate-area-databook.ts` `[metric-inactive]` |
-| 同上 | テーマカタログの `isActive:false` 参照・`rankingLink` の死んだキー | `validate-theme-catalog.ts` `[metric-inactive]` / `[ranking-link]` |
-| 単体テスト | 合成 survey id のリンク化 | `source-attribution.test.ts` (surveys.json 全 id との突合を含む) |
-| 週次 live 実測 | 上記で確定できない壊れ全般 | `internal-link-audit-weekly.yml` の (B) |
+| 層 | タイミング | 何を弾くか | 実装 |
+|---|---|---|---|
+| オフライン validator | pre-commit + PR CI | 県データブックの `isActive:false` 参照 | `validate-area-databook.ts` `[metric-inactive]` |
+| 同上 | 同上 | テーマカタログの `isActive:false` 参照・`rankingLink` の死んだキー | `validate-theme-catalog.ts` `[metric-inactive]` / `[ranking-link]` |
+| 単体テスト | PR CI | 合成 survey id のリンク化 | `source-attribution.test.ts` (surveys.json 全 id との突合を含む) |
+| **鮮度ゲート** | **PR CI (デプロイ前)** | **KNOWN_TAG_KEYS が R2 blog snapshot から乖離** (= タグリンクが黙って 410 になる) | `generate-known-tag-keys.ts --check` |
+| 自動追従 | 週次 sync-snapshots | 新タグの KNOWN 反映 (乖離したら PR を出す) | `sync-snapshots.yml` |
+| 週次 live 実測 | post-deploy | 上記で確定できない壊れ全般 | `internal-link-audit-weekly.yml` の (B) |
+
+**なぜ E2E (Playwright) を足さないか**: 今回の壊れはいずれも「データ/設定に書かれたキーが到達可能か」
+という**集合の突合**で決まり、ブラウザ操作も client-side JS も関与しない。リンクはサーバ HTML に
+出るので `fetch` で足り、実際 ①②③ はすべて上表のオフライン検査か HTTP クロールで捕捉できる。
+2,300 URL をブラウザで回すのは桁違いに遅く、dev サーバのコンパイル待ちで CI が不安定になる。
+既存の Playwright は a11y 代表ルート検証という別目的で PR CI に載っており、そこへ混ぜない。
 
 新しい validator 検査は**いずれも変異テストで発火を確認**した (壊れたキーを一時的に戻すと
 error になり、戻すと 0 になる)。`validate-theme-catalog.ts` の新検査は導入直後に実在のバグ
