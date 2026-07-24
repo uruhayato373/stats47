@@ -151,6 +151,12 @@ node .claude/scripts/lib/article-factual-check.mjs \
 > する (全記事共通の「年次が異なる」定型は不可)。`<source-link href="/ranking/<key>">` は**対応する図・H2 の直下に
 > インライン配置** (末尾集約は禁止)。**各図の直後に「なぜ上位/下位か」の解釈段落を置く** (図あたり ~600字、`<350字/図`
 > は `quality-gate.mjs` の blocker)。**核心の insight は冒頭〜前半に先出しする。**
+>
+> ★**内部リンクは実在するキーだけを書く** (`quality-gate.mjs` が blocker)。存在しない ranking キーは
+> 404 ではなく **HTTP 200 + 「ランキングが見つかりません」の soft 404** を返すため、目視や
+> ステータス確認では気づけない。`/ranking/<key>` は `METRICS_REGISTRY` 実在キーのみ、`/themes/<slug>`・
+> `/category/<key>` は正典の集合内から選ぶ。**それらしい名前を推測で書かない**。
+> 正典: `.claude/rules/blog-quality-standards.md` §内部リンクの実在
 
 以下は **既定の A (単一指標 深掘り) の 6 セクション**。B/C/D/D2/E/F/G を選んだ場合は正典の各型テンプレに差し替える。
 
@@ -251,7 +257,9 @@ data ファイルを使った場合は `docs/21_ブログ記事原稿/<slug>/dat
 - [ ] seo_title に「1位X・最下位Y・N倍差」が含まれる
 - [ ] (表を置く場合のみ) 全件表である / 図と重複する truncated 表 (… 省略) でない。数値は values.json と一致
 - [ ] 公開前に blog-critic の意味レビュー (`review.md` verdict: PASS) を通す予定 (自分が書いた記事を自分で採点して公開しない)
-- [ ] 関連ランキングの URL が `https://stats47.jp/ranking/<実在 key>` 形式
+- [ ] 全ての内部リンク (`/ranking/` `/themes/` `/category/` `/areas/` `/blog/`) が**実在**する
+      (推測でキー名を書かない。存在しないと 404 ではなく soft 404 で 200 が返り目視で気づけない。
+      `quality-gate.mjs` が blocker で検出する)
 - [ ] 仮説には `[仮説]` 表記 + 検証必要の明記
 - [ ] 既存記事と slug が重複していない (`/usr/bin/curl -s https://storage.stats47.jp/app/blog/all.json` で確認)
 - [ ] ドラフトを `docs/21_ブログ記事原稿/<slug>/article.md` に書き出した (`.local/r2` ではない)

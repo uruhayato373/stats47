@@ -131,6 +131,7 @@ ThemeCatalog (SSOT, git TS)
 | カタログ外の componentType 文字列を使う | `CATALOG_COMPONENT_TYPES` の 18 種から選ぶ |
 | 出典なしで selection.proposedBy に「白書」と書く | sourceUrl + surveyedAt を併記 (evidence-based) |
 | 実在しない rankingKey を metrics に入れる | METRICS_REGISTRY 実在キーのみ (validator が弾く) |
+| `isActive:false` のキーを metrics / `rankingLink` に置く | isActive:true のキーのみ。inactive は `/ranking/<key>` が 410 か空ページになる (validator `[metric-inactive]` / `[ranking-link]` が error。2026-07-24 に `dwelling-per-floor-area` が `/themes/living-housing` で 410 を返していた) |
 | legacy テーマの JSON をカタログ化せず generator 対象に混ぜる | `THEME_CATALOGS` 登録 = カタログ化と一体で行う |
 
 ---

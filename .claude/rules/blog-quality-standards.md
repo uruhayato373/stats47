@@ -275,12 +275,20 @@ HTTP 200 を返し、タイトルだけ「ランキングが見つかりませ�
 | `/themes/` | 11 | 2 | 実在しない slug (`landform-climate` 等) |
 | `/areas/` | 47 | 0 | — |
 
-**二層で検査する**:
+**三層で検査する**（①②が記事本文、③がページ側コンポーネント生成リンク）:
 
 | 層 | 実装 | 発火箇所 | 判定できるもの |
 |---|---|---|---|
 | ① オフライン (ネットワーク不要) | `.claude/scripts/lib/internal-link-lint.mjs` | `quality-gate.mjs` (pre-commit + 公開 CI) / `audit-article-structure.mjs` / `audit-published-blog.mjs` | ranking (GONE / KNOWN∪config 外) / category / areas / themes / blog (GONE・呼び元が公開 slug 集合を渡した場合) → **blocker** |
 | ② live 実測 (週次) | `.claude/scripts/blog/audit-internal-links.mjs` (`internal-link-audit-weekly.yml`) | 日曜 04:00 JST。壊れがあれば `link-alert` Issue | 全種別。**KNOWN に載っているが R2 データが無いキー**など①が確定できない壊れ方 |
+| ③ サイト横断 live 実測 (週次) | `.claude/scripts/site/audit-site-links.mjs` (同 workflow) | 同上 | **ページ側コンポーネントが生成するリンク** (タグ・パンくず・サイドバー・県データブックの KPI グリッド等)。記事本文に現れないため①②では原理的に検知できない |
+
+**③ が要る理由 (2026-07-24 実測)**: リンクの大半は article.md ではなくコンポーネントが生成する。
+③ でしか見つからない壊れが 3 系統あった — 公開記事のタグリンク **1,988 本が 410**
+(`known-tag-keys.ts` が D1 廃止で 2026-04-26 に凍結)、全 47 県の県ページが `isActive:false` の
+ランキングへリンク、約 231 ランキングページが合成 survey id (`ssds-src:*`) へ 404 リンク。
+生成元ごとのオフライン検査 (`validate:area-databook` / `validate:catalog` の
+`[metric-inactive]` / `[ranking-link]`) が①に相当する再発防止で、③はその網羅漏れを拾う。
 
 ①は live 実測 49 件に対し**誤検知 0・見逃し 0**で一致することを確認済み。ただし①の集合判定だけでは
 `fiscal-strength-index` のような「config も KNOWN もあるが R2 データが無い」キーは検出できないため、②が要る。

@@ -26,17 +26,35 @@ export async function generateStaticParams() {
     return tagKeys.map((tagKey) => ({ tagKey }));
 }
 
+/**
+ * URL セグメントの tagKey を、記事データ側のキー (日本語生文字列) に揃える。
+ *
+ * ★ここを間違えると全タグページが 404 になる。params は非 ASCII タグでは
+ * percent-encoded (`%E5%AE%B6...`) で渡るため、そのまま
+ * `listArticleSummariesByTagKey` に投げると `t.tagKey === "家計調査"` に一致せず
+ * 記事 0 本 → notFound() に落ちる (2026-07-24 実測)。
+ * 既にデコード済みの文字列を渡された場合 (% を含まない) は no-op、
+ * 不正な % シーケンスでも例外を投げず原文を返す。
+ */
+function decodeTagKey(raw: string): string {
+    try {
+        return decodeURIComponent(raw);
+    } catch {
+        return raw;
+    }
+}
+
 interface PageProps {
     params: Promise<{ tagKey: string }>;
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
     const { tagKey } = await params;
-    const tag = decodeURIComponent(tagKey);
+    const tag = decodeTagKey(tagKey);
 
     // 記事が 2 本未満のタグは thin content と判定されやすいため noindex。
     // 0 本の場合はページ本体で notFound() が呼ばれる。
-    const articles = await listArticleSummariesByTagKey(tagKey, 2);
+    const articles = await listArticleSummariesByTagKey(tag, 2);
     const indexable = articles.length >= 2;
 
     const title = `「${tag}」タグの記事一覧`;
@@ -64,10 +82,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function TagArticlesPage({ params }: PageProps) {
     const { tagKey } = await params;
-    const tag = decodeURIComponent(tagKey);
+    const tag = decodeTagKey(tagKey);
     const [articles, nativeBanners] = await Promise.all([
-        listArticleSummariesByTagKey(tagKey, 50),
-        resolveAffiliateBanners([tagKey], 4).catch(() => []),
+        listArticleSummariesByTagKey(tag, 50),
+        resolveAffiliateBanners([tag], 4).catch(() => []),
     ]);
 
     if (articles.length === 0) {

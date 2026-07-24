@@ -288,7 +288,7 @@ export const LIVING_HOUSING_CATALOG: ThemeCatalog = {
       },
       "sourceName": "住宅・土地統計調査",
       "sourceLink": "https://www.stat.go.jp/data/ssds/index.htm",
-      "rankingLink": "/ranking/dwelling-per-floor-area",
+      "rankingLink": "/ranking/housing-floor-area",
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
       "gridColumnSpanSm": null,

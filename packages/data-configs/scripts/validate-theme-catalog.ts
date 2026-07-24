@@ -49,10 +49,15 @@ function main() {
   for (const c of catalogs) {
     const metricKeys = new Set(c.metrics.map((m) => m.rankingKey));
 
-    // metrics.rankingKey 実在
+    // metrics.rankingKey 実在 + 到達可能 (isActive)
     for (const m of c.metrics) {
       if (!metricExists(m.rankingKey)) {
         errors.push(`[metric-missing] ${c.key}: rankingKey "${m.rankingKey}" が METRICS_REGISTRY に不在`);
+      } else if (METRICS_REGISTRY[m.rankingKey]?.isActive !== true) {
+        errors.push(
+          `[metric-inactive] ${c.key}: rankingKey "${m.rankingKey}" は isActive:false — ` +
+            `/ranking/${m.rankingKey} は 410 か空ページになる`,
+        );
       }
       if ((m.role === "primary" || m.role === "secondary") && !m.selection) {
         warns.push(`[no-selection] ${c.key}: ${m.role} 指標 "${m.rankingKey}" に selection (選定根拠) 未記入`);
@@ -91,6 +96,18 @@ function main() {
           errors.push(`[related-key] ${c.key}/${ch.componentKey}: relatedRankingKey "${k}" が metrics に不在`);
         }
         keysInCharts.add(k);
+      }
+      // rankingLink は本番に出るリンクなので、実在 + isActive を検査する
+      // (2026-07-24 実測: dwelling-per-floor-area が /themes/living-housing で 410 を返していた)
+      const linkKey = /^\/ranking\/([a-z0-9-]+)\/?$/.exec(ch.rankingLink ?? "")?.[1];
+      if (linkKey) {
+        if (!metricExists(linkKey)) {
+          errors.push(`[ranking-link] ${c.key}/${ch.componentKey}: rankingLink "${ch.rankingLink}" が METRICS_REGISTRY に不在`);
+        } else if (METRICS_REGISTRY[linkKey]?.isActive !== true) {
+          errors.push(
+            `[ranking-link] ${c.key}/${ch.componentKey}: rankingLink "${ch.rankingLink}" は isActive:false — 410 か空ページになる`,
+          );
+        }
       }
     }
 

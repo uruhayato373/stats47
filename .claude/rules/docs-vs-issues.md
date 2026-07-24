@@ -39,6 +39,7 @@ Obsidian で振り返り・思考整理する習慣を支えるため、ファ�
 | Cloudflare 日次 usage 閾値違反 | `cloudflare-alert,auto-generated` | `.github/workflows/cloudflare-usage-daily.yml` |
 | PSI 日次計測の閾値違反 | `psi-alert,auto-generated` | `.github/workflows/psi-audit-daily.yml` |
 | OGP/カード/note 画像の生成漏れ (自動修復後も残存) | `ogp-alert,auto-generated` | `.github/workflows/ogp-image-audit-weekly.yml` |
+| サイト内リンクのリンク切れ (soft 404 / 410 含む。ブログ本文 + ページ側コンポーネント生成リンク) | `link-alert,auto-generated` | `.github/workflows/internal-link-audit-weekly.yml` |
 | YouTube シャドウバン pause 期限リマインダー | (個別) | `.claude/scripts/youtube/check-pause-events.mjs` |
 
 ### 判定フロー

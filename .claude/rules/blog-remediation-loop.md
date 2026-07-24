@@ -60,6 +60,7 @@ node .claude/scripts/blog/build-remediation-queue.mjs
 | brushup 履歴 (wave_id) | `.claude/state/blog/auto-brushup-history.json` | done シード + dedup |
 | wave 人間向け (effect) | `docs/todo/01_改善バックログ.md` の `## [BLOG-WAVE-<wave_id>]` | brushup deploy 時に追記 / weekly-review が判定 |
 | 品質基準 (正典) | `.claude/rules/blog-quality-standards.md` | article-writer・blog-critic・quality-gate |
+| 内部リンク実在の live 監査 | `.claude/state/blog/internal-link-audit.json` (`internal-link-audit-weekly.yml`) | 日曜 04:00 JST。壊れは `link-alert` Issue + オフライン分は audit-published-blog 経由でキューにも流れる |
 
 ## キューのスコアリング (統合スコア + must-fix レーン)
 

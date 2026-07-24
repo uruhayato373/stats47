@@ -154,6 +154,7 @@ area-databook-snapshot.ts ── R2 values.json (rank 済) ──▶ R2 app/area
 | R2 `databook.json` を手編集 | exporter で再生成 |
 | 47 県横並び可視化を area に置く | theme へ。area は自県値+順位+回遊リンク |
 | 書籍の解説文・図案・写真を複製 | 品名・産地は事実抽出、解説は独自文+出典 |
+| `isActive:false` の rankingKey を参照する | 実在 (METRICS_REGISTRY) だけでなく **isActive:true** を満たすキーだけ。47 県共通テンプレなので 1 件の見落としが全 47 ページのリンク切れになる (validator `[metric-inactive]` が error) |
 | 未検証の statsDataId で metric 投入 | estat-researcher の実在検証を経て data-ingester |
 | 民間データ (JPX/TSR/TDB) の集計値を転載 | e-Stat 経済センサス等の公的統計で代替 |
 | `AREA_DATABOOK_CHART_TYPES` 外の componentType | 8 種から選ぶ / chart-component-builder で追加 |
