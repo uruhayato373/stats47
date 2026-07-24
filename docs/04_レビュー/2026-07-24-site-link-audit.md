@@ -135,16 +135,39 @@ error になり、戻すと 0 になる)。`validate-theme-catalog.ts` の新検
 - 監査スクリプト実測 — 59 ページ走査 / 2,391 リンク先 / 壊れ 22 件を検出 (上記 3 系統に一致)
 - **LLM 不使用 = API 課金ゼロ**
 
+### デプロイ後の本番実測 (2026-07-24)
+
+デプロイ (PR #623) は全ステップ success。**pre-deploy gate の prerender notFound スキャンも通過**
+= タグページが notFound で prerender されていないことを機械的に確認。
+
+| 項目 | 実測 |
+|---|---|
+| ① タグページ | `/tag/家計調査` `/tag/食文化` `/tag/都道府県ランキング` が **200 + 記事 51 本**、`/tag/紅茶` が 200 + 4 本 |
+| ① 退行 | 未知タグは **410 のまま** / 英語 slug は **301 のまま** |
+| ② 県ページ | 標本 6 県すべてで死んだリンク **0**、差し替え先が描画されている |
+| ③ 出典リンク | 合成 id リンク **0**、調査名はテキストで残存 |
+| ④ テーマ | 死んだ `rankingLink` **0** |
+| 全体 | サイト横断監査: 91 ページ走査 / **2,859 リンク先 / 壊れ 0** (200×2,849 + 301×10) |
+
+監査前の同条件実測は「59 ページ / 2,391 リンク先 / 壊れ 22 件」だったので、**壊れ 22 → 0**。
+
 ## 残件
 
-**本番反映は未実施** (2026-07-24 時点。オーナー確認待ち)。必要な操作は 2 つ:
+**本番反映を実施した** (2026-07-24)。必要だった操作は 2 つ:
 
 1. **再デプロイ** — ①タグ (`known-tag-keys.ts` は middleware がビルド時に取り込む静的ファイル +
    `page.tsx` のコード修正)、②県ページ (テンプレは git TS を直接 import)、③出典リンク
    (`SourceAttribution` のコード修正) はいずれもデプロイで反映される。
-2. **page-components の R2 push** — テーマの `rankingLink` だけは R2
-   `app/page-components/theme/living-housing.json` を読むため、デプロイとは別に push が要る
-   (`sync-snapshots` の `only=page-components`)。ローカル生成物は是正済み・R2 は旧値のままを実測確認。
+2. **page-components の R2 push** — テーマの `rankingLink` と県ページのチャート由来リンクは R2
+   `app/page-components/` を読むため、デプロイとは別に push が要る (`sync-snapshots` の `only=page-components`)。
+
+> **★実行順序の落とし穴 (2 回無駄にした)**: `sync-snapshots.yml` は checkout が `ref: main` 固定で、
+> `gh workflow run --ref develop` と指定しても**読むのは main のファイル**。マージ前に 2 回実行したが、
+> どちらも `success` / 「453 ファイル push」/ CI 内 verify も「✅ 117/117 一致」と報告しながら
+> **R2 は旧内容のまま**だった (main の旧ファイルを push し、旧 vs 旧を比較していただけ)。
+> **git TS → R2 の反映は develop→main マージ後に実行する。** 反映確認は workflow の conclusion ではなく
+> ローカルから `npx tsx apps/web/scripts/verify-page-components-snapshot.ts` を回して判定する。
+> マージ後の 3 回目で反映を実測確認 (theme = `housing-floor-area` / area 13000 = `per-capita-prefectural-income-h27`)。
 
 その他:
 
