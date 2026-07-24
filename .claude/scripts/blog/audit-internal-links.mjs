@@ -25,7 +25,7 @@ import path from "node:path";
 import { extractInternalLinks } from "../lib/internal-link-lint.mjs";
 
 const R2_BASE = process.env.R2_PUBLIC_FETCH_URL || "https://storage.stats47.jp";
-const SITE_BASE = process.env.SITE_BASE_URL || "https://stats47.jp";
+const SITE_BASE = process.env.SITE_ORIGIN || "https://stats47.jp";
 const UA = "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)";
 const ARTICLE_CONCURRENCY = 8;
 const LINK_CONCURRENCY = 6;
