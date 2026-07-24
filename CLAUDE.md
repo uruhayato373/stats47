@@ -144,6 +144,7 @@ Issues は「PR で close される機能改修・バグ」と「日次アラー
 - `cloudflare-alert` — Cloudflare 日次 usage 閾値違反 (`cloudflare-usage-daily.yml`)
 - `psi-alert` — PSI 日次計測の閾値違反 (`psi-audit-daily.yml`)
 - `ogp-alert` — OGP/カード/note 画像の生成漏れが自動修復後も残存 (`ogp-image-audit-weekly.yml`)
+- `link-alert` — ブログ内部リンクのリンク切れ (`internal-link-audit-weekly.yml`)
 
 過去の移行履歴:
 - `docs/90_課題管理/` (2026-04 廃止) → GitHub Issues 経由 → `docs/50_Issues/` (2026-05) → `docs/02_実装計画/{feature-backlog,indicator-backlog}.md` (2026-06-07 統合)

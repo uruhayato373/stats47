@@ -22,8 +22,32 @@
  */
 import fs from "node:fs";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 
-const ROOT = path.resolve(new URL(".", import.meta.url).pathname, "../../..");
+/**
+ * リポジトリルートを上方向に探索して決める。
+ * 相対段数 ("../../..") 固定や cwd 依存にすると、vitest / pre-commit / CI で
+ * 解決に失敗しても **例外にならず空集合になり、lint が黙って全通しする** (fail-open)。
+ * それが一番危険なので、マーカーで確実に特定し、見つからなければ即座に落とす。
+ */
+function findRepoRoot() {
+  let dir = path.dirname(fileURLToPath(import.meta.url));
+  for (let i = 0; i < 10; i++) {
+    if (
+      fs.existsSync(path.join(dir, "package.json")) &&
+      fs.existsSync(path.join(dir, ".claude")) &&
+      fs.existsSync(path.join(dir, "packages"))
+    ) {
+      return dir;
+    }
+    const parent = path.dirname(dir);
+    if (parent === dir) break;
+    dir = parent;
+  }
+  throw new Error("internal-link-lint: リポジトリルートを特定できませんでした");
+}
+
+const ROOT = findRepoRoot();
 
 const SOURCES = {
   knownRankingKeys: "packages/ranking/src/config/known-ranking-keys.ts",
@@ -35,12 +59,26 @@ const SOURCES = {
   themeSets: "apps/web/src/features/theme-dashboard/config/all-themes.ts",
 };
 
-/** 二重引用符で囲まれた kebab-case 文字列を集合として取り出す */
+/**
+ * 二重引用符で囲まれた kebab-case 文字列を集合として取り出す。
+ * ファイルが無いときは黙って空集合を返さず落とす (空集合 = lint が全リンクを正常と誤認する)。
+ */
 function readQuotedSet(relPath) {
   const abs = path.join(ROOT, relPath);
-  if (!fs.existsSync(abs)) return new Set();
+  if (!fs.existsSync(abs)) {
+    throw new Error(`internal-link-lint: 参照元が見つかりません: ${relPath}`);
+  }
   const src = fs.readFileSync(abs, "utf8");
   return new Set([...src.matchAll(/"([a-z0-9][a-z0-9-]*)"/g)].map((m) => m[1]));
+}
+
+/** 必須ファイルを読む (無ければ落とす) */
+function readRequired(relPath) {
+  const abs = path.join(ROOT, relPath);
+  if (!fs.existsSync(abs)) {
+    throw new Error(`internal-link-lint: 参照元が見つかりません: ${relPath}`);
+  }
+  return fs.readFileSync(abs, "utf8");
 }
 
 let cache = null;
@@ -56,29 +94,25 @@ function loadKeySets() {
     }
   }
 
-  const categorySrc = fs.existsSync(path.join(ROOT, SOURCES.categoryKeys))
-    ? fs.readFileSync(path.join(ROOT, SOURCES.categoryKeys), "utf8")
-    : "";
-  const catBlock = categorySrc.match(/export const CATEGORY_KEYS = \[([\s\S]*?)\]/);
-  const categories = new Set(
-    catBlock ? [...catBlock[1].matchAll(/"([a-z]+)"/g)].map((m) => m[1]) : [],
+  const catBlock = readRequired(SOURCES.categoryKeys).match(
+    /export const CATEGORY_KEYS = \[([\s\S]*?)\]/,
   );
+  if (!catBlock) throw new Error("internal-link-lint: CATEGORY_KEYS を抽出できません");
+  const categories = new Set([...catBlock[1].matchAll(/"([a-z]+)"/g)].map((m) => m[1]));
 
   const areaCodes = new Set(
     Array.from({ length: 47 }, (_, i) => `${String(i + 1).padStart(2, "0")}000`),
   );
 
-  // THEME_SETS の定数名 (POPULATION_DYNAMICS_SET) が slug (population-dynamics) に対応する
-  const themeSrc = fs.existsSync(path.join(ROOT, SOURCES.themeSets))
-    ? fs.readFileSync(path.join(ROOT, SOURCES.themeSets), "utf8")
-    : "";
-  const themeBlock = themeSrc.match(/const THEME_SETS = \[([\s\S]*?)\]/);
+  // THEME_SETS の定数名 (POPULATION_DYNAMICS_SET) が slug (population-dynamics) に対応する。
+  // この対応は宣言されていない「たまたまの一致」なので、正典 (KNOWN_THEME_SLUGS) との突合を
+  // apps/web/src/config/__tests__/internal-link-lint-keysets.test.ts が CI で行う。
+  const themeBlock = readRequired(SOURCES.themeSets).match(/const THEME_SETS = \[([\s\S]*?)\]/);
+  if (!themeBlock) throw new Error("internal-link-lint: THEME_SETS を抽出できません");
   const themes = new Set(
-    themeBlock
-      ? [...themeBlock[1].matchAll(/([A-Z0-9_]+)_SET/g)].map((m) =>
-          m[1].toLowerCase().replace(/_/g, "-"),
-        )
-      : [],
+    [...themeBlock[1].matchAll(/([A-Z0-9_]+)_SET/g)].map((m) =>
+      m[1].toLowerCase().replace(/_/g, "-"),
+    ),
   );
 
   cache = {
@@ -97,6 +131,16 @@ function loadKeySets() {
 /** テスト・再読込用 */
 export function resetKeySetCache() {
   cache = null;
+}
+
+/**
+ * 導出した key 集合を返す (drift 検出テスト専用)。
+ * TS を実行せず正規表現で読んでいるため、正典のリネームで黙って別物を見る危険がある。
+ * `apps/web/src/config/__tests__/internal-link-lint-keysets.test.ts` が正典と突合する。
+ */
+export function __loadKeySetsForTest() {
+  resetKeySetCache();
+  return loadKeySets();
 }
 
 const LINK_TYPES = ["ranking", "blog", "areas", "category", "themes", "survey", "tag"];
