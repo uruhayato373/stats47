@@ -77,6 +77,7 @@
 - [project_note_internal_link_breaks_on_publish.md](project_note_internal_link_breaks_on_publish.md) — note記事の../slug/draft.md内部リンクは公開後切れる。note URL化必要、対応表=.claude/state/note-published-urls.json
 - [feedback_ga4_history_unreliable_wow.md](feedback_ga4_history_unreliable_wow.md) — GA4 history.csvのpageviewsはlast28d/bot混入。WoWはGSC clicksを使う
 - [project_r2_s3_token_expired_2026_05_29.md](project_r2_s3_token_expired_2026_05_29.md) — R2 S3トークン(.env.local)401失効。※ローカル再発行は原則不要(R2書込CI専用化)
+- [feedback_sync_snapshots_checks_out_main.md](feedback_sync_snapshots_checks_out_main.md) — sync-snapshots は --ref を渡しても常に main を checkout。develop の git TS 変更はマージ後に実行しないと R2 に反映されない (しかも success + verify 一致と報告するので失敗に見えない)
 - [project_r2_writes_ci_only.md](project_r2_writes_ci_only.md) — 2026-06-20: ローカル/CI両方からremote R2読み書き可。remoteが唯一の真実源。ローカルミラー廃止。ローカル書込はR2 S3 creds要
 - [project_ranking_download_onthefly.md](project_ranking_download_onthefly.md) — ranking downloadはオンザフライ生成(route)。事前bakeは23K files/timeoutで不採用。iconv-lite SJISはWorkers動作確認済
 - [feedback_check_why_removed_before_reviving.md](feedback_check_why_removed_before_reviving.md) — 削除済みコード復活前に削除理由をgit log/docs確認。スケール処理は単一サンプル成功でOKとしない
