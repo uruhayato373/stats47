@@ -138,13 +138,18 @@ jobs:
       # generate-known-ranking-keys: R2 item.json が 200 の isActive metric を KNOWN に登録。
       # build-sitemap-ranking-keys: KNOWN 全キー + GSC 実績キーの和集合を SITEMAP に出力
       # (新キーは KNOWN 経由で自動的に sitemap 掲載される。--include-new-keys は既定挙動なので不要)。
-      - name: 🔑 Regenerate known + sitemap ranking keys
+      # generate-known-tag-keys: R2 blog snapshot の tagMeta を KNOWN_TAG_KEYS に反映。
+      #   これを止めると middleware が新しいタグを全て 410 にする。2026-04-26〜07-24 は
+      #   生成元 (廃止済リモート D1) が消えたまま凍結し、タグリンク 1,988 本が死んでいた。
+      #   正典: docs/04_レビュー/2026-07-24-site-link-audit.md
+      - name: 🔑 Regenerate known + sitemap ranking keys / known tag keys
         env:
           R2_PUBLIC_FETCH_URL: https://storage.stats47.jp
           NODE_OPTIONS: "--conditions react-server"
         run: |
           (cd apps/web && npx tsx scripts/generate-known-ranking-keys.ts)
           node .claude/scripts/gsc/build-sitemap-ranking-keys.cjs
+          (cd apps/web && npx tsx scripts/generate-known-tag-keys.ts)
 
       # 新規 ranking の OGP/カード を即生成 (KNOWN 確定直後・source=known で新キーも拾う)。
       # 未生成だと og:image が 404 になるため公開時に先回りする。欠落分のみ生成 (self-heal)。
@@ -169,17 +174,24 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          KEY_FILES="packages/ranking/src/config/known-ranking-keys.ts apps/web/src/config/sitemap-ranking-keys.ts"
-          if git diff --quiet -- "$KEY_FILES"; then
-            echo "ranking keys 差分なし — PR 不要"
+          # ★複数パスは bash 配列で渡す。"$KEY_FILES" と引用すると 3 パスが 1 トークンに潰れ、
+          #   git diff は「一致なし = 差分なし」で常に early exit し PR が永久に作られない。
+          #   (同型の退行が 2026-07-14 に 6 workflow で発生。ガード: ARG_VECTOR_QUOTED)
+          KEY_FILES=(
+            packages/ranking/src/config/known-ranking-keys.ts
+            apps/web/src/config/sitemap-ranking-keys.ts
+            apps/web/src/config/known-tag-keys.ts
+          )
+          if git diff --quiet -- "${KEY_FILES[@]}"; then
+            echo "ranking / tag keys 差分なし — PR 不要"
             exit 0
           fi
           BRANCH="chore/ranking-keys-sync"
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git switch -C "$BRANCH"
-          git add "$KEY_FILES"
-          git commit -m "chore(ranking): sync known + sitemap ranking keys from R2 [skip ci]"
+          git add "${KEY_FILES[@]}"
+          git commit -m "chore(keys): sync known ranking / sitemap / tag keys from R2 [skip ci]"
           git push -f origin "$BRANCH"
           # 既存 PR があれば再利用、無ければ作成 (develop→main = 本番デプロイの最終ゲート)。
           # ★自動マージしない: 人間がまとめてデプロイ承認する (デプロイ規律)。

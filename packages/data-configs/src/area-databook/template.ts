@@ -272,7 +272,7 @@ export const AREA_DATABOOK_TEMPLATE: AreaDatabookTemplate = {
           columns: 3,
           metrics: [
             {
-              rankingKey: "prefectural-income-per-capita",
+              rankingKey: "per-capita-prefectural-income-h27",
               shortLabel: "1人当たり県民所得",
               compareNationalAvg: true,
               selection: {
@@ -299,9 +299,9 @@ export const AREA_DATABOOK_TEMPLATE: AreaDatabookTemplate = {
               estatParams: [{ statsDataId: "0000010203", cdCat01: "#C01321" }],
               labels: ["1人当たり県民所得"],
             },
-            relatedRankingKeys: ["prefectural-income-per-capita"],
+            relatedRankingKeys: ["per-capita-prefectural-income-h27"],
             sourceName: "社会・人口統計体系",
-            rankingLink: "/ranking/prefectural-income-per-capita",
+            rankingLink: "/ranking/per-capita-prefectural-income-h27",
             gridColumnSpan: 6,
             sortOrder: 40,
           },
@@ -369,10 +369,6 @@ export const AREA_DATABOOK_TEMPLATE: AreaDatabookTemplate = {
             {
               rankingKey: "elderly-couple-only-household-ratio",
               shortLabel: "高齢夫婦のみ世帯率",
-            },
-            {
-              rankingKey: "general-household-members",
-              shortLabel: "平均世帯人員",
             },
             {
               rankingKey: "households-on-public-assistance-per-1000",

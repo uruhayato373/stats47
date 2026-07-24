@@ -104,6 +104,7 @@ npx tsx packages/ranking/src/scripts/export-master-snapshots.ts       # CI: sync
 | R2 の item.json / items.json / all.json を手編集 | builder/exporter で再生成 |
 | 実在しない surveyId を config に書く | `validate:config` が error で弾く (survey-id lint) |
 | 合成 id (`ssds-src:*`/`src:*`) を surveys.json に登録 | 実調査として正式登録 (id/name/organization) |
+| 合成 id を `/survey/<id>` リンクとして描画する | `SourceAttribution` の `isLinkableSurveyId` (kebab-case ASCII のみ通す) で最終防波堤。合成 id は**調査名をテキスト表示**しリンクにしない。★`attribution.originalSurveys` は surveys.json 照合を経ずに item.json へ焼き込まれるため、`resolveSurveyLinkage` の除外だけでは漏れる (2026-07-24 に約 231 ランキングページが `/survey/ssds-src:世界農林業センサス` へ 404 リンクしていた) |
 | 未分類の受け皿となる擬似調査 (旧 `ssds`) を作る | 未分類は非表示のまま辞書追記で回収 |
 | bucketing/builder を経由しない独自の紐付けロジック追加 | `resolveSurveyLinkage` に一本化 |
 | /survey 系に generateStaticParams を付ける | ƒ (revalidate) / force-dynamic (`check-r2-route-ssg.cjs` が守る) |

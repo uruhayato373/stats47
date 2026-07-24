@@ -1,6 +1,8 @@
 name: 🔗 Internal Link Audit (weekly)
 
-# 公開ブログ全記事の内部リンクを live 実測し、リンク切れを週次で検知する。
+# サイト内リンク切れを live 実測で週次検知する。2 本立て:
+#   (A) ブログ記事本文のリンク  — audit-internal-links.mjs (article.md 由来)
+#   (B) サイト横断のリンク      — audit-site-links.mjs (レンダリング済み HTML 由来)
 # 検知は決定的スクリプトのみ (Node fetch + タイトル判定、LLM 不使用 = API 課金ゼロ)。
 #
 # ★ HTTP ステータスだけでは判定できない
@@ -8,9 +10,16 @@ name: 🔗 Internal Link Audit (weekly)
 #   (soft 404)。2026-07-24 の初回実測では壊れ 49 件中 36 件がこの形で、ステータス監視では
 #   全て素通りしていた。判定は必ずタイトルの内容で行う (nextjs-ssg-preservation.md と同じ流儀)。
 #
-# オフライン版 (`.claude/scripts/lib/internal-link-lint.mjs`) は pre-commit / 公開 CI で
-# 個別記事を弾く役。本 workflow は「KNOWN には載っているが R2 データが無いキー」など
-# オフラインでは確定できない壊れ方を拾うセーフティネット。
+# ★ なぜ (B) が要るか
+#   リンクの大半は記事本文ではなく**ページ側コンポーネント**が生成する (タグ・パンくず・
+#   サイドバー・県データブックの KPI グリッド等)。これらは article.md にもリポジトリの
+#   1 箇所にも現れないため、(A) では原理的に検知できない。2026-07-24 の初回実測では
+#   (B) でしか見つからない壊れが 3 系統出た: タグリンク 1,988 本の 410 /
+#   全 47 県の県ページが isActive:false ランキングへリンク / 合成 survey id の 404。
+#
+# オフライン版 (`.claude/scripts/lib/internal-link-lint.mjs` / validate-{area-databook,theme-catalog})
+# は pre-commit / 公開 CI で個別に弾く役。本 workflow は「KNOWN には載っているが R2 データが
+# 無いキー」など、オフラインでは確定できない壊れ方を拾うセーフティネット。
 #
 # 正典: .claude/rules/blog-quality-standards.md §内部リンクの実在
 
@@ -43,7 +52,7 @@ jobs:
         with:
           node-version: "20"
 
-      - name: 🔎 Audit internal links
+      - name: 🔎 Audit blog article links
         id: check
         run: |
           set +e
@@ -52,44 +61,71 @@ jobs:
             --json .claude/state/blog/internal-link-audit.json 2>&1 | tee /tmp/link-audit.log
           echo "exit_code=${PIPESTATUS[0]}" >> "$GITHUB_OUTPUT"
 
+      # ページ側コンポーネントが生成するリンク (タグ・サイドバー・KPI グリッド等) を拾う。
+      # route テンプレートごとに層化抽出するため全ページ走査は不要 (リンク先集合は速く収束する)。
+      - name: 🔎 Audit site-wide links
+        id: check_site
+        run: |
+          set +e
+          mkdir -p .claude/state/site
+          node .claude/scripts/site/audit-site-links.mjs --per-route 10 \
+            --json .claude/state/site/link-audit.json 2>&1 | tee /tmp/site-link-audit.log
+          echo "exit_code=${PIPESTATUS[0]}" >> "$GITHUB_OUTPUT"
+
       - name: 📤 Commit audit result to develop
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add .claude/state/blog/internal-link-audit.json
+          git add .claude/state/blog/internal-link-audit.json .claude/state/site/link-audit.json
           if git diff --cached --quiet; then
             echo "No audit changes"
             exit 0
           fi
-          git commit -m "chore(blog): weekly internal link audit $(date -u +%Y-%m-%d) [skip ci]"
+          git commit -m "chore(site): weekly link audit $(date -u +%Y-%m-%d) [skip ci]"
           git push origin develop
 
       - name: 🚨 Open issue on broken links
-        if: steps.check.outputs.exit_code != '0'
+        if: steps.check.outputs.exit_code != '0' || steps.check_site.outputs.exit_code != '0'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           DATE=$(date -u +%Y-%m-%d)
-          TITLE="[Link Alert] ブログ内部リンクのリンク切れ"
+          TITLE="[Link Alert] サイト内リンクのリンク切れ"
           {
-            echo "## 内部リンク 週次監査 ($DATE)"
+            echo "## リンク 週次監査 ($DATE)"
             echo ""
-            echo "公開ブログ記事から到達できない内部リンクを検出しました。"
+            echo "到達できない内部リンクを検出しました。"
             echo "**soft 404 (HTTP 200 だが「見つかりません」ページ)** を含むため、ステータス監視では見えません。"
-            echo ""
-            echo '```'
-            sed -n '/壊れリンク/,$p' /tmp/link-audit.log | head -60
-            echo '```'
-            echo ""
-            echo "是正手順:"
-            echo "1. \`.claude/scripts/blog/data/broken-link-remap.json\` に置換先 (無ければ \`to: null\`) を追記"
-            echo "2. \`node .claude/scripts/blog/fix-broken-internal-links.mjs --apply\` (置換先の live 検証つき)"
-            echo "3. \`npx tsx .claude/scripts/blog/push-article-md-r2.ts --apply\` → 既存記事の改稿は**再デプロイで反映**"
+            if [ "${{ steps.check.outputs.exit_code }}" != "0" ]; then
+              echo ""
+              echo "### A. ブログ記事本文のリンク"
+              echo '```'
+              sed -n '/壊れリンク/,$p' /tmp/link-audit.log | head -50
+              echo '```'
+              echo ""
+              echo "是正手順:"
+              echo "1. \`.claude/scripts/blog/data/broken-link-remap.json\` に置換先 (無ければ \`to: null\`) を追記"
+              echo "2. \`node .claude/scripts/blog/fix-broken-internal-links.mjs --apply\` (置換先の live 検証つき)"
+              echo "3. \`npx tsx .claude/scripts/blog/push-article-md-r2.ts --apply\` → 既存記事の改稿は**再デプロイで反映**"
+            fi
+            if [ "${{ steps.check_site.outputs.exit_code }}" != "0" ]; then
+              echo ""
+              echo "### B. サイト横断 (ページ側コンポーネント生成) のリンク"
+              echo '```'
+              sed -n '/壊れリンク/,$p' /tmp/site-link-audit.log | head -50
+              echo '```'
+              echo ""
+              echo "是正手順: 参照元 route から**生成元**を特定して直す (記事本文ではない)。"
+              echo "- \`/tag/*\` → \`cd apps/web && npx tsx scripts/generate-known-tag-keys.ts\` (R2 から再生成) + デプロイ"
+              echo "- \`/ranking/*\` が県ページ由来 → \`packages/data-configs/src/area-databook/template.ts\` (\`validate:area-databook\`)"
+              echo "- \`/ranking/*\` がテーマ由来 → \`packages/data-configs/src/theme-catalog/*.ts\` (\`validate:catalog\`)"
+              echo "- \`/survey/*\` → 合成 id (\`ssds-src:*\`) は \`SourceAttribution\` がリンク化しない規約"
+            fi
             echo ""
             echo "正典: .claude/rules/blog-quality-standards.md §内部リンクの実在"
           } > /tmp/link-issue.md
 
-          gh label create link-alert --description "ブログ内部リンクのリンク切れ" --color "b60205" --force 2>/dev/null || true
+          gh label create link-alert --description "サイト内リンクのリンク切れ" --color "b60205" --force 2>/dev/null || true
 
           EXISTING=$(gh issue list --state open --label link-alert --search "\"[Link Alert]\" in:title" --json number --jq '.[0].number // empty')
           if [ -n "$EXISTING" ]; then

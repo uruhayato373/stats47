@@ -5,6 +5,7 @@
  *
  * error (exit 1 / CI・pre-commit をブロック):
  *   - ranked-kpi-grid / gender-paired-kpi / relatedRankingKeys の rankingKey が METRICS_REGISTRY に不在
+ *     または isActive:false ([metric-inactive]。47 県共通テンプレなので 1 件で全県リンク切れ)
  *   - chart.componentType が union 外 (runtime backstop)
  *   - componentKey / blockKey / sectionKey の重複、sectionKey が kebab-case でない
  *   - chart.sortOrder 重複
@@ -32,6 +33,29 @@ const AREA_CODE = /^(0[1-9]|[1-3][0-9]|4[0-7])000$/;
 
 function metricExists(key: string): boolean {
   return Object.prototype.hasOwnProperty.call(METRICS_REGISTRY, key);
+}
+
+/**
+ * rankingKey が「実在」かつ「到達可能」かを検査して errors に積む。
+ *
+ * 実在 (METRICS_REGISTRY) だけでは不十分。isActive:false のキーは
+ * KNOWN_RANKING_KEYS の生成対象外になり、/ranking/<key> は 410 Gone か、
+ * R2 values.json を欠いた空ページ (soft 404) になる。47 県共通テンプレなので
+ * 1 件の見落としが全 47 ページのリンク切れになる。
+ * (2026-07-24 実測: general-household-members が全県で 410、
+ *  prefectural-income-per-capita が全県で空ページだった)
+ */
+function checkRankingKey(key: string, where: string, errors: string[]): void {
+  if (!metricExists(key)) {
+    errors.push(`[metric-missing] ${where}: rankingKey "${key}" が METRICS_REGISTRY に不在`);
+    return;
+  }
+  if (METRICS_REGISTRY[key]?.isActive !== true) {
+    errors.push(
+      `[metric-inactive] ${where}: rankingKey "${key}" は isActive:false — ` +
+        `/ranking/${key} は 410 か空ページになる。生きているキーに差し替えるか参照を外すこと`,
+    );
+  }
 }
 
 function main() {
@@ -72,11 +96,7 @@ function main() {
         }
         seenSortOrders.add(ch.sortOrder);
         for (const k of ch.relatedRankingKeys ?? []) {
-          if (!metricExists(k)) {
-            errors.push(
-              `[metric-missing] chart ${ch.componentKey}: relatedRankingKey "${k}" が METRICS_REGISTRY に不在`,
-            );
-          }
+          checkRankingKey(k, `chart ${ch.componentKey} の relatedRankingKey`, errors);
         }
         continue;
       }
@@ -89,11 +109,11 @@ function main() {
 
       if (block.blockType === "ranked-kpi-grid") {
         for (const m of block.metrics) {
-          if (!metricExists(m.rankingKey)) {
-            errors.push(
-              `[metric-missing] ${section.sectionKey}/${block.blockKey}: rankingKey "${m.rankingKey}" が METRICS_REGISTRY に不在`,
-            );
-          }
+          checkRankingKey(
+            m.rankingKey,
+            `${section.sectionKey}/${block.blockKey}`,
+            errors,
+          );
           if (!m.selection) {
             warns.push(
               `[no-selection] ${section.sectionKey}/${block.blockKey}: "${m.rankingKey}" に selection 未記入`,
@@ -104,11 +124,11 @@ function main() {
       if (block.blockType === "gender-paired-kpi") {
         for (const p of block.pairs) {
           for (const k of [p.maleKey, p.femaleKey]) {
-            if (!metricExists(k)) {
-              errors.push(
-                `[metric-missing] ${section.sectionKey}/${block.blockKey}: "${p.label}" の rankingKey "${k}" が METRICS_REGISTRY に不在`,
-              );
-            }
+            checkRankingKey(
+              k,
+              `${section.sectionKey}/${block.blockKey} の "${p.label}"`,
+              errors,
+            );
           }
         }
       }
