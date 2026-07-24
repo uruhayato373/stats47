@@ -24,6 +24,7 @@ import { KNOWN_RANKING_KEYS } from "@/config/known-ranking-keys";
 import { KNOWN_TAG_KEYS } from "@/config/known-tag-keys";
 import { KNOWN_THEME_SLUGS } from "@/config/known-theme-slugs";
 import { SITEMAP_RANKING_KEYS } from "@/config/sitemap-ranking-keys";
+import { UNPUBLISHED_BLOG_SLUGS } from "@/config/unpublished-blog-slugs";
 
 /**
  * インデックス対象のエリア×カテゴリ（都道府県レベル）。
@@ -128,5 +129,12 @@ export const UrlPolicy = {
   },
   blog: {
     isGone: (slug: string): boolean => GONE_BLOG_SLUGS.has(slug),
+    /**
+     * 未公開 (published:false) の記事。恒久削除 (isGone) とは別概念で、
+     * R2 blog snapshot から自動生成される (再公開すれば自動的に外れる)。
+     * middleware で前段短絡しないと OpenNext が焼き付けた notFound prerender が
+     * HTTP 200 +「記事が見つかりません」として永久配信される (2026-07-24 実測)。
+     */
+    isUnpublished: (slug: string): boolean => UNPUBLISHED_BLOG_SLUGS.has(slug),
   },
 } as const;
