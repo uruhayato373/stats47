@@ -127,9 +127,18 @@ metric config 2,295 件のうち `tags` を持つものが **0 件**のため、
 `incremental-cache/<buildId>/` が 59 プレフィックス積み上がっている (デプロイのたびに増える)。
 R2 課金 (現在 20GB 超で課金中) の観点で棚卸し候補。
 
-## 残タスク
+## 本番反映 (2026-07-24 完了)
 
-- 本番反映のための再デプロイ (オーナー判断)
+PR [#621](https://github.com/uruhayato373/stats47/pull/621) を develop→main でマージ → Cloudflare Workers
+デプロイ成功。Googlebot UA で実測し、報告箇所 (`/blog/black-tea-income-gap` の「地理でみる紅茶消費」節)
+がカード 3 連続から **カード 0 + `あわせて見る: 緑茶消費支出額ランキング / コーヒー消費支出額ランキング`
+の 1 行**に変わっていることを確認した。サンプル 4 記事で R2 と live の内容一致も確認済み。
+
+> CI は初回 fail した (2 件とも本件の新規コードが原因): `purge-isr-routes.ts` の型エラー
+> (`let` + closure 代入で TS が `never` に絞り込む) と、maintenance-debt guard の `UNBOUNDED_LEGACY`
+> (コメント中の「legacy」に期限・削除条件が無い)。どちらも修正して green 化した。
+
+## 残タスク
 - `offtopic-link` warning が残る **110 記事**: 指標名がその節の本文に出てこないカードで、本文で
   触れていないランキングへ誘導している疑い (是正前は 172 記事)。表記ゆれによる誤検知を含むため
   機械では確定できず、brushup サイクルで意味判断する。

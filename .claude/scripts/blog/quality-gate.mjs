@@ -32,6 +32,7 @@ import { fileURLToPath } from "node:url";
 
 import { checkArticleFactual } from "../lib/article-factual-check.mjs";
 import { lintSourceLinkPlacement } from "../lib/article-structure-lint.mjs";
+import { lintInternalLinks } from "../lib/internal-link-lint.mjs";
 import { lintSvgSize, lintChoroplethLegend, lintFindingsParity } from "../lib/svg-lint.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -303,6 +304,15 @@ checks.adjacentClusters = sourceLinkLint.stats.adjacentClusters;
 checks.noFigureSectionLinks = sourceLinkLint.stats.noFigureSectionLinks;
 blockers.push(...sourceLinkLint.blockers);
 warnings.push(...sourceLinkLint.warnings);
+
+// 内部リンクの実在チェック (2026-07-24 追加、internal-link-lint.mjs)
+// 実在しない ranking key は HTTP 200 + 「ランキングが見つかりません」の soft 404 を返すため、
+// ステータス監視では捕まらない。repo 内の key 集合と突合して公開前に弾く。
+const linkLint = lintInternalLinks(content);
+checks.internalLinksUnique = linkLint.stats.internalLinksUnique;
+checks.internalLinksBroken = linkLint.stats.internalLinksBroken;
+blockers.push(...linkLint.blockers);
+warnings.push(...linkLint.warnings);
 
 // markdown 表の全面禁止 (2026-06-04): データは SVG 図、列挙/手順は箇条書きで表現する。
 // 旧「チャート0 / 上下非対称 / truncated 表」の個別判定は「表禁止」に包含されるため廃止。

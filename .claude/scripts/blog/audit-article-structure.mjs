@@ -26,6 +26,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { lintSourceLinkPlacement } from "../lib/article-structure-lint.mjs";
+import { lintInternalLinks } from "../lib/internal-link-lint.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -56,7 +57,14 @@ function auditArticle(slug) {
   if (!fs.existsSync(articleMd)) return null;
   const md = fs.readFileSync(articleMd, "utf8");
   const { blockers, warnings, stats } = lintSourceLinkPlacement(md);
-  return { slug, blockers: blockers.length, warnings: warnings.length, ...stats };
+  const link = lintInternalLinks(md);
+  return {
+    slug,
+    blockers: blockers.length + link.blockers.length,
+    warnings: warnings.length + link.warnings.length,
+    ...stats,
+    ...link.stats,
+  };
 }
 
 const slugs = fs
@@ -66,8 +74,8 @@ const slugs = fs
   .sort();
 
 const results = slugs.map(auditArticle).filter(Boolean);
-// source-link を持つ記事のみ対象 (チャート系記事)
-const withLinks = results.filter((r) => r.rankingSourceLinks > 0);
+// source-link カードを持つ記事 + 内部リンク切れを持つ記事 (カード無しでもリンク切れは拾う)
+const withLinks = results.filter((r) => r.rankingSourceLinks > 0 || r.internalLinksBroken > 0);
 // 違反 = source-link 配置の blocker (重複 / 連続配置 / 図なし節 / 末尾集約) が 1 件以上
 const violations = withLinks
   .filter((r) => r.blockers > 0)

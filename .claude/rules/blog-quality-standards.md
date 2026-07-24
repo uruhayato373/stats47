@@ -259,6 +259,48 @@ npx tsx .claude/scripts/blog/push-article-md-r2.ts --apply         # R2 の arti
 ```
 どの図にどのカードを残すかの意味判断が要る分だけ brushup サイクルで agent が対応する。
 
+### 内部リンクの実在 (★必須・soft 404 に注意)
+
+記事から張る内部リンクは**リンク先が実在すること**。`/ranking/<key>` は **存在しないキーでも
+HTTP 200 を返し、タイトルだけ「ランキングが見つかりません」になる (soft 404)**。ステータス監視や
+`curl -o /dev/null -w %{http_code}` では**素通りする**ので、判定は必ず**実在集合かタイトルの内容**で行う。
+
+2026-07-24 の初回実測 (公開 419 記事・内部リンク 延べ 2,573 本 / ユニーク 820 件):
+
+| 種別 | ユニーク | 壊れ | 壊れ方 |
+|---|---:|---:|---|
+| `/ranking/` | 561 | 36 | soft 404 (200) 29 + 410 Gone 7 |
+| `/blog/` | 181 | 8 | 未公開 (published:false) / 実在しない slug |
+| `/category/` | 20 | 3 | 17 軸に無いキー (`transport` 等) |
+| `/themes/` | 11 | 2 | 実在しない slug (`landform-climate` 等) |
+| `/areas/` | 47 | 0 | — |
+
+**二層で検査する**:
+
+| 層 | 実装 | 発火箇所 | 判定できるもの |
+|---|---|---|---|
+| ① オフライン (ネットワーク不要) | `.claude/scripts/lib/internal-link-lint.mjs` | `quality-gate.mjs` (pre-commit + 公開 CI) / `audit-article-structure.mjs` / `audit-published-blog.mjs` | ranking (GONE / KNOWN∪config 外) / category / areas / themes / blog (GONE・呼び元が公開 slug 集合を渡した場合) → **blocker** |
+| ② live 実測 (週次) | `.claude/scripts/blog/audit-internal-links.mjs` (`internal-link-audit-weekly.yml`) | 日曜 04:00 JST。壊れがあれば `link-alert` Issue | 全種別。**KNOWN に載っているが R2 データが無いキー**など①が確定できない壊れ方 |
+
+①は live 実測 49 件に対し**誤検知 0・見逃し 0**で一致することを確認済み。ただし①の集合判定だけでは
+`fiscal-strength-index` のような「config も KNOWN もあるが R2 データが無い」キーは検出できないため、②が要る。
+
+是正は決定的スクリプトで行う (散文は変更しない):
+
+```bash
+node .claude/scripts/blog/audit-internal-links.mjs                  # 壊れリンクの洗い出し
+# .claude/scripts/blog/data/broken-link-remap.json に置換先を追記 (無ければ to: null = リンク解除)
+node .claude/scripts/blog/fix-broken-internal-links.mjs --apply     # 置換先の live 検証つき
+npx tsx .claude/scripts/blog/push-article-md-r2.ts --apply --src .local/blog-linkfix/out
+```
+
+置換表の規律: **アンカーテキストの指す指標が実在 metric の title と一致するときだけ `to` を書く**。
+近そうなだけのページへ飛ばさない (誤った行き先より無リンクを選ぶ)。理由は `reason` に必ず残す。
+`--apply` は置換先を live で実測し、1 つでも到達不能なら中断する (新たなリンク切れを作れない)。
+
+> 既存記事の改稿は R2 push だけでは本番に出ない (`● SSG` prerender)。**再デプロイが要る**
+> → `.claude/rules/nextjs-ssg-preservation.md`。
+
 ### 可視化は SVG 図に統一・表は原則禁止 (★2026-06-04 確定: markdown 表 全面禁止)
 
 ブログ記事は **数値・データを表 (markdown table) で羅列せず、必ず SVG 図で視覚化する**。これがサイト全体の原則。

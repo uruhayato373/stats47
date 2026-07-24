@@ -1,0 +1,185 @@
+{
+  "_comment": [
+    "壊れている内部リンクの置換表 (2026-07-24 の live 実測 49 件に対して作成)。",
+    "to が null のものは『意味の合う実在ページが無い』ため remap せず unlink する",
+    "(アンカーテキストは残し、リンクだけ外す)。誤った行き先へ飛ばすより無リンクを選ぶ。",
+    "to を書くのは『アンカーテキストの指す指標が実在 metric の title と一致する』場合だけ。",
+    "根拠は reason に記す。新しい壊れリンクを直すときも同じ規律で追記する。"
+  ],
+  "remap": {
+    "/ranking/per-capita-kenmin-shotoku-h27": {
+      "to": "/ranking/per-capita-prefectural-income-h27",
+      "reason": "title「1人当たり県民所得」が一致。h27 の現行キー"
+    },
+    "/ranking/population-density": {
+      "to": "/ranking/population-density-per-km2-total-area",
+      "reason": "アンカー「人口密度」= 総面積1km2当たり人口密度 (標準的な人口密度)"
+    },
+    "/ranking/population": {
+      "to": "/ranking/total-population",
+      "reason": "アンカー「人口推計」→ title「総人口」"
+    },
+    "/ranking/overseas-travel-activity-rate-15plus": {
+      "to": "/ranking/overseas-travel-annual-participation-rate-15plus",
+      "reason": "title「海外旅行の年間行動者率」+ 15歳以上が一致"
+    },
+    "/ranking/domestic-travel-activity-rate-15plus": {
+      "to": "/ranking/travel-participation-rate-domestic",
+      "reason": "title「国内旅行の行動者率」が一致"
+    },
+    "/ranking/agricultural-production-value": {
+      "to": "/ranking/agricultural-output",
+      "reason": "アンカー「農業生産額」→ title「農業産出額」"
+    },
+    "/ranking/avg-height-middle-school-2nd-male": {
+      "to": "/ranking/average-height-middle-school-second-grade-male",
+      "reason": "中学2年男子の平均身長。キーのリネーム後の現行キー"
+    },
+    "/ranking/child-height-regional-gap": {
+      "to": "/ranking/average-height-middle-school-second-grade-male",
+      "reason": "アンカー「中学生の平均身長ランキング」が指す実在指標"
+    },
+    "/ranking/consumer-price-regional-difference-index": {
+      "to": "/ranking/consumer-price-difference-index-overall",
+      "reason": "title「消費者物価地域差指数」/ subtitle「総合」"
+    },
+    "/ranking/education-cost-per-student-elementary": {
+      "to": "/ranking/elementary-school-education-cost-per-student",
+      "reason": "title「小学校教育費」(児童1人当たり) が一致"
+    },
+    "/ranking/financial-assets-balance-current-savings-multi-person-households": {
+      "to": "/ranking/current-savings-balance-multi-person-households",
+      "reason": "アンカー「貯蓄現在高」→ 同 title の現行キー"
+    },
+    "/ranking/household-savings-amount": {
+      "to": "/ranking/current-savings-balance-multi-person-households",
+      "reason": "アンカー「1世帯あたり貯蓄額」→ title「貯蓄現在高」"
+    },
+    "/ranking/fiscal-self-reliance-ratio": {
+      "to": "/ranking/fiscal-strength-index-prefecture",
+      "reason": "アンカー「地方財政ランキング」→ title「財政力指数」。同名の fiscal-strength-index は KNOWN 掲載だが R2 データが無く soft 404 のため不可 (live 実測 2026-07-24)"
+    },
+    "/ranking/food-consumption-expenditure": {
+      "to": "/ranking/food-expenditure-total",
+      "reason": "アンカー「食料費支出」→ title「食料費」"
+    },
+    "/ranking/fresh-udon-soba-expenditure": {
+      "to": "/ranking/fresh-udon-soba-consumption-expenditure",
+      "reason": "title「生うどん・そば消費支出額」が一致"
+    },
+    "/ranking/health-life-expectancy-male": {
+      "to": "/ranking/healthy-life-expectancy-male",
+      "reason": "title「健康寿命（男性）」が一致 (綴り違いの旧キー)"
+    },
+    "/ranking/housing-starts-total": {
+      "to": "/ranking/new-housing-starts",
+      "reason": "アンカー「住宅着工戸数」→ title「着工新設住宅戸数」"
+    },
+    "/ranking/instant-noodles-expenditure": {
+      "to": "/ranking/cup-noodles-consumption-expenditure",
+      "reason": "アンカーが「カップ麺消費額」と明記 → title「カップ麺消費支出額」"
+    },
+    "/ranking/library-books-lent": {
+      "to": "/ranking/library-lending-books",
+      "reason": "title「図書館館外貸出冊数」が一致"
+    },
+    "/ranking/library-count": {
+      "to": "/ranking/library-count-per-million",
+      "reason": "title「図書館数」が一致 (現行の図書館数指標)"
+    },
+    "/ranking/museum-count": {
+      "to": "/ranking/museum-count-per-million",
+      "reason": "title「博物館数」が一致"
+    },
+    "/ranking/theater-hall-count": {
+      "to": "/ranking/theater-music-hall",
+      "reason": "title「劇場・音楽堂等数」が一致"
+    },
+    "/ranking/marriage-rate": {
+      "to": "/ranking/marriages-per-total-population",
+      "reason": "title「婚姻率」が一致 (marriages は件数なので不可)"
+    },
+    "/ranking/miso-consumption-quantity-prefecture-gap": {
+      "to": "/ranking/miso-consumption-quantity",
+      "reason": "title「みそ消費量」が一致"
+    },
+    "/ranking/rice-expenditure": {
+      "to": "/ranking/rice-consumption-expenditure",
+      "reason": "title「米消費支出額」が一致"
+    },
+    "/ranking/sugar-consumption-prefecture-gap": {
+      "to": "/ranking/sugar-consumption-quantity",
+      "reason": "アンカー「砂糖消費格差」の実体 → title「砂糖消費量」"
+    },
+    "/ranking/wheat-flour-consumption-prefecture": {
+      "to": "/ranking/wheat-flour-consumption-quantity",
+      "reason": "title「小麦粉消費量」が一致"
+    },
+    "/themes/landform-climate": {
+      "to": "/themes/climate",
+      "reason": "実在テーマ slug は climate (landform-climate は 410)"
+    },
+    "/themes/miningindustry": {
+      "to": "/category/miningindustry",
+      "reason": "鉱工業はテーマではなくカテゴリ 17 軸の 1 つ"
+    },
+    "/category/lifefoodclothing": {
+      "to": "/category/economy",
+      "reason": "食料・衣料の家計消費指標は category economy に属する"
+    },
+    "/category/living": {
+      "to": "/category/infrastructure",
+      "reason": "上下水道の記事からの導線。生活基盤は infrastructure"
+    },
+    "/category/transport": {
+      "to": "/category/infrastructure",
+      "reason": "交通は 17 軸では infrastructure"
+    },
+
+    "/ranking/alcohol-consumption-per-adult": {
+      "to": null,
+      "reason": "酒類は品目別 (清酒・発泡酒等) のみで、アルコール総消費量の指標が存在しない"
+    },
+    "/ranking/gross-prefectural-product-information-communication-h27": {
+      "to": null,
+      "reason": "gpp-* に情報通信業がない (農林・製造・教育・公務のみ)"
+    },
+    "/ranking/hobby-entertainment-activity-rate-10plus": {
+      "to": null,
+      "reason": "趣味・娯楽は個別種目の行動者率のみ。総合の行動者率指標がない"
+    },
+    "/ranking/household-expenditure": {
+      "to": null,
+      "reason": "消費支出は品目別のみで、家計消費総額の指標が存在しない"
+    },
+    "/ranking/volunteer-activity-international-cooperation-15plus": {
+      "to": null,
+      "reason": "ボランティア行動者率は総合のみ。国際協力に限定した指標がない"
+    },
+    "/ranking/waiting-children": {
+      "to": null,
+      "reason": "待機児童の指標が存在しない"
+    },
+    "/ranking/shipment-value-manufacturing-14": {
+      "to": null,
+      "reason": "はん用機械器具に限定した出荷額指標がない (総額の製造品出荷額等に飛ばすとアンカーと不一致)"
+    },
+    "/ranking/shipment-value-manufacturing-15": {
+      "to": null,
+      "reason": "生産用機械器具に限定した出荷額指標がない"
+    },
+    "/ranking/shipment-value-manufacturing-20": {
+      "to": null,
+      "reason": "輸送用機械器具に限定した出荷額指標がない"
+    },
+
+    "/blog/medical-access-regional-gap": { "to": null, "reason": "published:false (未公開)" },
+    "/blog/food-culture-prefecture-map": { "to": null, "reason": "published:false (未公開)" },
+    "/blog/gender-wage-gap-ranking": { "to": null, "reason": "published:false かつ R2 に本文なし" },
+    "/blog/tokyo-real-income-after-rent": { "to": null, "reason": "published:false かつ R2 に本文なし" },
+    "/blog/population-decline-regional-gap": { "to": null, "reason": "published:false (未公開)" },
+    "/blog/cc-estat-12-industry-treemap": { "to": null, "reason": "all.json に存在しない記事" },
+    "/blog/cc-estat-13-popchange-choropleth": { "to": null, "reason": "all.json に存在しない記事" },
+    "/blog/job-salary-39-comparison": { "to": null, "reason": "GONE_BLOG_SLUGS (410 Gone)" }
+  }
+}
