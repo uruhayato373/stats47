@@ -1,0 +1,31 @@
+{
+  "generatedAt": "2026-07-24T00:33:26.572Z",
+  "site": "https://stats47.jp",
+  "articles": 419,
+  "totalLinks": 2552,
+  "absoluteLinks": 129,
+  "uniqueLinks": 777,
+  "byType": {
+    "areas": {
+      "total": 47,
+      "broken": 0
+    },
+    "blog": {
+      "total": 173,
+      "broken": 0
+    },
+    "category": {
+      "total": 17,
+      "broken": 0
+    },
+    "ranking": {
+      "total": 530,
+      "broken": 0
+    },
+    "themes": {
+      "total": 10,
+      "broken": 0
+    }
+  },
+  "broken": []
+}
