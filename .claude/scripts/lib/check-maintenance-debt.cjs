@@ -64,7 +64,13 @@ function inspect(file) {
     )
       results.push(finding("UNTRACKED_DEBT", file, number, `${debt[1].toUpperCase()} に issue/backlog/削除条件がない`, line));
 
-    const legacy = line.match(/\b(legacy|deprecated|temporary|remove after)\b/i);
+    // ファイル名/パスの一部としての "legacy" (例: legacy-category-keys.test.ts への参照) は
+    // 負債ではなく単なる参照先なので語として数えない (2026-07-24 精緻化)。
+    const lineForLegacy = line.replace(
+      /[\w./-]*\blegacy[\w.-]*\.(?:ts|tsx|mjs|cjs|js|json|md|ya?ml)\b/gi,
+      "",
+    );
+    const legacy = lineForLegacy.match(/\b(legacy|deprecated|temporary|remove after)\b/i);
     // 除外 2 群: (a) 期限・条件・追跡が明示されたもの (b) domain 用語 — theme の catalogStatus /
     // open-data-catalog の VerificationStatus ("deprecated" 等はデータソースの検証ステータス列挙値であり
     // 廃止予定コードマーカーではない)。
