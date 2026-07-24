@@ -206,6 +206,17 @@ tag の middleware だけが従っていなかった。飛び先が生きてい�
 ローカル dev 実測: 未公開 blog 410 / 死んだ redirect 410 / 生きた redirect 301 /
 公開記事・生きたタグは 200 (退行なし)。
 
+**本番実測 (PR #624 デプロイ後)**: 全ステップ success。⑤で入れた STRICT smoke test が
+`/tag/家計調査` と `/survey/census` の 200 を**デプロイ自身のゲートとして検証**した。
+
+| 項目 | 実測 |
+|---|---|
+| ⑥ 未公開記事 | `climate-lifestyle-connection` / `estimated-hourly-wage-ranking` / `food-culture-prefecture-map` が **410** (200 soft 404 から是正) |
+| ⑦ 死んだ redirect | `agricultural-processing` / `marriage` / `budget-sim` が **410 の 1 ホップ** |
+| ⑦ 退行 | `agriculture` / `2024-problem` は **301 のまま** |
+| 退行 | 公開記事・生きたタグは **200 のまま** |
+| 全体 | サイト横断監査: 2,859 リンク先 / **壊れ 0** (200×2,849 + 301×10) |
+
 その他:
 
 - タグページは `generateStaticParams` を持つため、デプロイ後は 868 タグが prerender される見込み。
