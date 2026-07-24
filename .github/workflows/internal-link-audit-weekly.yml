@@ -1,0 +1,100 @@
+name: 🔗 Internal Link Audit (weekly)
+
+# 公開ブログ全記事の内部リンクを live 実測し、リンク切れを週次で検知する。
+# 検知は決定的スクリプトのみ (Node fetch + タイトル判定、LLM 不使用 = API 課金ゼロ)。
+#
+# ★ HTTP ステータスだけでは判定できない
+#   `/ranking/<存在しないkey>` は HTTP 200 + タイトル「ランキングが見つかりません」を返す
+#   (soft 404)。2026-07-24 の初回実測では壊れ 49 件中 36 件がこの形で、ステータス監視では
+#   全て素通りしていた。判定は必ずタイトルの内容で行う (nextjs-ssg-preservation.md と同じ流儀)。
+#
+# オフライン版 (`.claude/scripts/lib/internal-link-lint.mjs`) は pre-commit / 公開 CI で
+# 個別記事を弾く役。本 workflow は「KNOWN には載っているが R2 データが無いキー」など
+# オフラインでは確定できない壊れ方を拾うセーフティネット。
+#
+# 正典: .claude/rules/blog-quality-standards.md §内部リンクの実在
+
+on:
+  schedule:
+    - cron: "0 19 * * 6" # 土 19:00 UTC = 日 04:00 JST (OGP 監査 03:00 の後)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: internal-link-audit
+  cancel-in-progress: false
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: 🧰 Checkout develop
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        with:
+          ref: develop
+          fetch-depth: 1
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: "20"
+
+      - name: 🔎 Audit internal links
+        id: check
+        run: |
+          set +e
+          mkdir -p .claude/state/blog
+          node .claude/scripts/blog/audit-internal-links.mjs \
+            --json .claude/state/blog/internal-link-audit.json 2>&1 | tee /tmp/link-audit.log
+          echo "exit_code=${PIPESTATUS[0]}" >> "$GITHUB_OUTPUT"
+
+      - name: 📤 Commit audit result to develop
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .claude/state/blog/internal-link-audit.json
+          if git diff --cached --quiet; then
+            echo "No audit changes"
+            exit 0
+          fi
+          git commit -m "chore(blog): weekly internal link audit $(date -u +%Y-%m-%d) [skip ci]"
+          git push origin develop
+
+      - name: 🚨 Open issue on broken links
+        if: steps.check.outputs.exit_code != '0'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          DATE=$(date -u +%Y-%m-%d)
+          TITLE="[Link Alert] ブログ内部リンクのリンク切れ"
+          {
+            echo "## 内部リンク 週次監査 ($DATE)"
+            echo ""
+            echo "公開ブログ記事から到達できない内部リンクを検出しました。"
+            echo "**soft 404 (HTTP 200 だが「見つかりません」ページ)** を含むため、ステータス監視では見えません。"
+            echo ""
+            echo '```'
+            sed -n '/壊れリンク/,$p' /tmp/link-audit.log | head -60
+            echo '```'
+            echo ""
+            echo "是正手順:"
+            echo "1. \`.claude/scripts/blog/data/broken-link-remap.json\` に置換先 (無ければ \`to: null\`) を追記"
+            echo "2. \`node .claude/scripts/blog/fix-broken-internal-links.mjs --apply\` (置換先の live 検証つき)"
+            echo "3. \`npx tsx .claude/scripts/blog/push-article-md-r2.ts --apply\` → 既存記事の改稿は**再デプロイで反映**"
+            echo ""
+            echo "正典: .claude/rules/blog-quality-standards.md §内部リンクの実在"
+          } > /tmp/link-issue.md
+
+          gh label create link-alert --description "ブログ内部リンクのリンク切れ" --color "b60205" --force 2>/dev/null || true
+
+          EXISTING=$(gh issue list --state open --label link-alert --search "\"[Link Alert]\" in:title" --json number --jq '.[0].number // empty')
+          if [ -n "$EXISTING" ]; then
+            echo "Existing open issue #$EXISTING — appending comment"
+            gh issue comment "$EXISTING" --body-file /tmp/link-issue.md
+          else
+            gh issue create --title "$TITLE" --label "link-alert,auto-generated" --body-file /tmp/link-issue.md
+          fi

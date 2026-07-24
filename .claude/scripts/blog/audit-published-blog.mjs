@@ -19,6 +19,7 @@
 import fs from "node:fs";
 
 import { lintSourceLinkPlacement } from "../lib/article-structure-lint.mjs";
+import { lintInternalLinks } from "../lib/internal-link-lint.mjs";
 
 const BASE_URL = process.env.R2_PUBLIC_FETCH_URL || "https://storage.stats47.jp";
 const CONCURRENCY = 8;
@@ -140,6 +141,9 @@ function rankingTables(t) {
     });
 }
 
+/** all.json の公開 slug 集合 (main で設定。`/blog/<slug>` リンクの実在判定に使う) */
+let PUBLISHED_SLUGS = null;
+
 function auditArticle(meta, body) {
   const flags = [];
   const sev = { blocker: 0, warning: 0 };
@@ -212,6 +216,11 @@ function auditArticle(meta, body) {
   for (const b of slLint.blockers) flags.push(["blocker", b]);
   for (const w of slLint.warnings) flags.push(["warning", w]);
 
+  // 内部リンクの実在 (ranking/category/areas/themes は repo の key 集合、blog は all.json の公開 slug)
+  const linkLint = lintInternalLinks(body, { blogSlugs: PUBLISHED_SLUGS });
+  for (const b of linkLint.blockers) flags.push(["blocker", b]);
+  for (const w of linkLint.warnings) flags.push(["warning", w]);
+
   for (const [s] of flags) sev[s]++;
   return {
     slug: meta.slug,
@@ -250,6 +259,8 @@ async function main() {
   const all = JSON.parse(await fetchText(`${BASE_URL}/app/blog/all.json`));
   const arr = Array.isArray(all) ? all : all.articles || all.items || [];
   let published = arr.filter((a) => a.published === true || a.published === "true");
+  // 内部リンクの `/blog/<slug>` 実在判定に使う公開 slug 集合 (LIMIT の影響を受けない全量)
+  PUBLISHED_SLUGS = new Set(published.map((a) => a.slug));
   if (LIMIT) published = published.slice(0, LIMIT);
   process.stderr.write(`Auditing ${published.length} published articles (concurrency ${CONCURRENCY}) ...\n`);
 

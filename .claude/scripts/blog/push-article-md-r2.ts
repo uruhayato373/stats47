@@ -14,6 +14,10 @@
  *   npx tsx .claude/scripts/blog/push-article-md-r2.ts                  # dry-run (既定)
  *   npx tsx .claude/scripts/blog/push-article-md-r2.ts --apply
  *   npx tsx .claude/scripts/blog/push-article-md-r2.ts --apply --slug a,b
+ *   npx tsx .claude/scripts/blog/push-article-md-r2.ts --apply --src .local/blog-linkfix/out
+ *
+ * --src で変換出力ディレクトリを切り替える (既定は source-link 配置是正の出力)。
+ * どちらも `<dir>/<slug>/article.md` の構造であることが前提。
  */
 
 import { GetObjectCommand, PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
@@ -27,7 +31,11 @@ const PROJECT_ROOT = path.resolve(__dirname, "..", "..", "..");
 config({ path: path.join(PROJECT_ROOT, ".env.local") });
 
 const BUCKET = process.env.CLOUDFLARE_R2_BUCKET_NAME || "stats47";
-const OUT_DIR = path.join(PROJECT_ROOT, ".local/blog-srclink-fix/out");
+const srcArgIdx = process.argv.indexOf("--src");
+const OUT_DIR =
+  srcArgIdx >= 0 && process.argv[srcArgIdx + 1]
+    ? path.resolve(PROJECT_ROOT, process.argv[srcArgIdx + 1])
+    : path.join(PROJECT_ROOT, ".local/blog-srclink-fix/out");
 // live と同じ content-type を維持する (既存 app/blog/<slug>/article.md は octet-stream)
 const CONTENT_TYPE = "application/octet-stream";
 const CONCURRENCY = 8;
