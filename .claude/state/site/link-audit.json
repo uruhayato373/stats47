@@ -1,0 +1,17 @@
+{
+  "generatedAt": "2026-07-25T20:18:12.866Z",
+  "origin": "https://stats47.jp",
+  "mode": "per-route:10",
+  "pagesCrawled": 91,
+  "pagesKnown": 4505,
+  "uniqueTargets": 2859,
+  "statusCount": {
+    "200": 2849,
+    "301": 10
+  },
+  "brokenCount": 0,
+  "brokenByRoute": {},
+  "broken": [],
+  "redirectToBroken": [],
+  "unreachablePages": []
+}
