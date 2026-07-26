@@ -1,5 +1,9 @@
+import { createHash } from 'node:crypto';
+import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
 import { describe, expect, it, vi } from 'vitest';
 
+import bundledPrefectureTopology from '../prefecture-topology.generated.json';
 import { generatePrefectureOverviewSvg } from '../generate-mini-prefecture-svg';
 import {
   generateRankingThumbnailMapSvg,
@@ -12,6 +16,19 @@ const rows = Array.from({ length: 47 }, (_, index) => ({
 }));
 
 describe('generateRankingThumbnailMapSvg', () => {
+  it('同梱TopoJSONはGIS SSOTと一致する', () => {
+    const sourceText = readFileSync(
+      resolve(process.cwd(), '../gis/data/geoshape/prefecture.topojson'),
+      'utf8'
+    );
+    const sourceHash = createHash('sha256').update(sourceText).digest('hex');
+
+    expect(bundledPrefectureTopology.metadata).toMatchObject({
+      'stats47:sourceSha256': sourceHash,
+      'stats47:quantization': 500_000,
+    });
+  });
+
   it('home overview は本土を回転せず、沖縄を含む47都道府県を描画する', () => {
     const svg = generatePrefectureOverviewSvg();
     const prefectureCodes = Array.from(
@@ -28,17 +45,18 @@ describe('generateRankingThumbnailMapSvg', () => {
     expect(svg.length).toBeLessThan(100_000);
   });
 
-  it('TopoJSONを読めないruntimeでも47都道府県のfallbackを返す', async () => {
+  it('作業ディレクトリに依存せず同じ地理地図を返す', async () => {
     const originalWorkingDirectory = process.cwd();
 
     try {
       process.chdir('/tmp');
       vi.resetModules();
-      const { generatePrefectureOverviewSvg: generateWithoutFilesystemAsset } =
+      const { generatePrefectureOverviewSvg: generateFromBundledTopology } =
         await import('../generate-mini-prefecture-svg');
-      const svg = generateWithoutFilesystemAsset();
+      const svg = generateFromBundledTopology();
 
-      expect(svg).toContain('data-map-layout="prefecture-overview-fallback"');
+      expect(svg).toContain('data-map-layout="prefecture-overview"');
+      expect(svg).not.toContain('data-map-layout="prefecture-overview-fallback"');
       expect(svg.match(/data-pref-code=/g)).toHaveLength(47);
     } finally {
       process.chdir(originalWorkingDirectory);
