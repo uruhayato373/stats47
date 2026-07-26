@@ -1,6 +1,4 @@
 import { geoCentroid, geoMercator, geoPath, type GeoProjection } from 'd3-geo';
-import { existsSync, readFileSync } from 'node:fs';
-import { dirname, resolve } from 'node:path';
 import {
   interpolateBlues,
   interpolateGreens,
@@ -21,7 +19,7 @@ import type {
 } from 'geojson';
 import type { GeometryCollection, Topology } from 'topojson-specification';
 
-import { TILE_GRID_LAYOUT } from '../d3/constants/tile-grid-layout';
+import prefectureTopology from './prefecture-topology.generated.json';
 
 const INTERPOLATORS: Record<string, (t: number) => string> = {
   interpolateBlues,
@@ -62,25 +60,6 @@ type ScreenPoint = readonly [number, number];
 
 let prefectureFeaturesCache: Feature[] | null = null;
 
-function readPrefectureTopology(): Topology {
-  let currentDir = process.cwd();
-  for (let depth = 0; depth < 6; depth += 1) {
-    const topologyPath = resolve(
-      currentDir,
-      'packages/gis/data/geoshape/prefecture.topojson'
-    );
-    if (existsSync(topologyPath)) {
-      return JSON.parse(readFileSync(topologyPath, 'utf8')) as Topology;
-    }
-    const parentDir = dirname(currentDir);
-    if (parentDir === currentDir) break;
-    currentDir = parentDir;
-  }
-  throw new Error(
-    `prefecture.topojson not found from working directory: ${process.cwd()}`
-  );
-}
-
 function normalizePrefCode(value: unknown): number | null {
   const code = String(value ?? '').match(/\d{2}/)?.[0];
   return code ? Number(code) : null;
@@ -89,7 +68,9 @@ function normalizePrefCode(value: unknown): number | null {
 function readPrefectureFeatures(): Feature[] {
   if (prefectureFeaturesCache) return prefectureFeaturesCache;
 
-  const topology = readPrefectureTopology();
+  // Cloudflare Workers を含む全ランタイムで同じ地図を使うため、GIS SSOTを
+  // ビルド時に静的モジュールとして同梱する。実行時の node:fs には依存しない。
+  const topology = prefectureTopology as unknown as Topology;
   const objectName = Object.keys(topology.objects)[0];
   const geojson = feature(
     topology,
@@ -269,23 +250,6 @@ function compactProjectedPath(
     .join('');
 }
 
-function generatePrefectureOverviewFallbackSvg(): string {
-  const cellSize = 10;
-  const originX = 88;
-  const originY = 8;
-  const cells = TILE_GRID_LAYOUT.map((cell) => {
-    const width = (cell.w ?? 1) * cellSize - 1;
-    const height = (cell.h ?? 1) * cellSize - 1;
-    return `<rect data-pref-code="${String(cell.id).padStart(2, '0')}" x="${originX + cell.x * cellSize}" y="${originY + cell.y * cellSize}" width="${width}" height="${height}" rx="1.5" fill="${overviewFill(cell.id)}" stroke="hsl(var(--background))" stroke-width="0.8"/>`;
-  });
-
-  return [
-    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${WIDTH} ${HEIGHT}" preserveAspectRatio="xMidYMid meet" data-map-layout="prefecture-overview-fallback" data-map-rotation="none" data-okinawa="tile">`,
-    cells.join(''),
-    '</svg>',
-  ].join('');
-}
-
 /**
  * home の都道府県入口用に、TopoJSON SSOTから全国概観SVGを生成する。
  *
@@ -293,14 +257,7 @@ function generatePrefectureOverviewFallbackSvg(): string {
  * 沖縄は省略せず左下インセットへ収め、凡例や順位表現は持ち込まない。
  */
 export function generatePrefectureOverviewSvg(): string {
-  let prefectureFeatures: Feature[];
-  try {
-    prefectureFeatures = readPrefectureFeatures();
-  } catch {
-    // Cloudflare Workersなどnode:fsで同梱データを読めない環境でも入口を欠損させない。
-    return generatePrefectureOverviewFallbackSvg();
-  }
-
+  const prefectureFeatures = readPrefectureFeatures();
   const mainlandFeatures = prefectureFeatures
     .filter(
       (prefecture) => normalizePrefCode(prefecture.properties?.N03_007) !== 47
