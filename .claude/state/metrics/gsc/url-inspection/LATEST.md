@@ -1,4 +1,4 @@
-# GSC URL Inspection — 2026-07-25
+# GSC URL Inspection — 2026-07-26
 
 **対象 URL 数**: 500
 
@@ -6,17 +6,17 @@
 
 | Verdict | 件数 | 前日比 |
 |---|---|---|
-| ERROR | 5 | +1 |
-| NEUTRAL | 94 | ±0 |
-| PASS | 401 | -1 |
+| ERROR | 0 | -5 |
+| NEUTRAL | 95 | +1 |
+| PASS | 405 | +4 |
 
 ## CoverageState 内訳
 
 | CoverageState | 件数 | 前日比 |
 |---|---|---|
-| Internal error encountered. | 5 | +2 |
-| The service is currently unavailable. | 0 | -1 |
+| Internal error encountered. | 0 | -5 |
 | URL が Google に認識されていません | 94 | ±0 |
-| 送信して登録されました | 401 | -1 |
+| ソフト 404 | 1 | +1 |
+| 送信して登録されました | 405 | +4 |
 
-_詳細 CSV: `.claude/state/metrics/gsc/url-inspection/2026-07-25.csv`_
+_詳細 CSV: `.claude/state/metrics/gsc/url-inspection/2026-07-26.csv`_
