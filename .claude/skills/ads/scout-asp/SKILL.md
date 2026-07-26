@@ -37,10 +37,18 @@ A8.net の高単価案件を **scout → 申請 → コード取得 → SSOT 登
 | `apply` | candidate 上位を週次上限内で自動申請 → applied (`check-a8-apply-budget` が上限強制) |
 | `harvest` | approved の広告コード取得 → parse → harvested / pending-vertical |
 | `register` | harvested を SSOT 追記 + 4 ゲート → registered (`append-affiliate-ads.ts --apply`)。commit/push は下記 |
-| `full` | scout → apply → check-approval → harvest → register を順に (週次 cron の実体) |
+| `full` | scout → apply → check-approval → harvest → register を順に (**手動フル実行専用**) |
 | `status` | catalog の状態機械サマリ + pending-vertical 滞留を表示 |
 
-## full の流れ (週次 cron が呼ぶ)
+## 週次 cron は full を呼ばない (2026-07-27 改訂)
+
+`scripts/scheduled/scout-asp-weekly.sh` は **claude-code (LLM) を起動せず決定的スクリプトだけ**を回す
+(`check-approval` → `select-for-register --apply` → `harvest --limit 12` → `append` **dry-run** → catalog サマリ)。
+トークン消費ゼロ。**`scout` / `apply` は既定無効** (`APPLY_NEW=0`) で、SSOT 追記と develop push もしない。
+理由と再開条件は `.claude/rules/affiliate-ads-standards.md` §10「週次 cron の中身」を正典とする
+(要約: affiliate の CTR が計測不能なため在庫を増やす根拠が無い)。
+
+## full の流れ (手動フル実行時)
 
 ```
 (1) scout        a8-browser.ts scout            → candidate

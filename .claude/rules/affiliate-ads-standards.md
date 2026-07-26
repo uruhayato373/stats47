@@ -210,6 +210,19 @@ vertical 写像・`weeklyApplyMax`・`minScore` の SSOT は `.claude/scripts/ad
   DOM をダンプしてセレクタ実機調整。これが済むまで cron を load しない。
 - A8 の自動操作は会員規約上のリスクがあるため件数を保守的に開始する (`weeklyApplyMax` 初期 10)。
 
+**★週次 cron の中身 (2026-07-27 実測に基づく改訂)**: シェルは `/scout-asp full` を LLM 経由で呼ぶのを止め、
+**決定的スクリプトだけ**を順に回す (`check-approval` → `select-for-register --apply` → `harvest --limit 12`
+→ `append-affiliate-ads` **dry-run** → catalog サマリ)。トークン消費ゼロで、意味判断が要る pending-vertical は
+報告に留めて人間/agent に渡す。
+
+- **`scout` / `apply` (新規申請) は既定で無効** (`APPLY_NEW=0`)。理由は在庫が制約でないことが実測で確定した
+  ため: 提携済みで軸解決済みの 49 件のうち**配信中トップを確定EPC で上回るものは 0 件**、かつ GA4 は 28 日で
+  clicks 9 件・CTR 0.079%。在庫を週 10 件増やしても収益は動かず A8 への申請リスクだけが増える。
+  **再開条件** = GA4 の `affiliate_vertical` dimension が登録され軸別 CTR が読めること (§6)。再開は `APPLY_NEW=1`。
+- **cron は SSOT (`affiliate-ads-data.ts`) を書き換えない / develop に push しない**。アプリコードの無人書き換えは
+  並行セッションとの git 競合を招き、push は R2 公開 = outward-facing になる。cron は catalog (機械 state) を
+  進めるところまでで、実追記と push は `affiliate-manager` + 人間承認。
+
 ### 既存提携の配置と priority (収益最大化)
 
 134 件の既存提携から「高 EPC×高確定率」を精選して配置する。同 vertical×枠は priority 上位 1 banner +
@@ -232,6 +245,24 @@ text 2 しか出ないため**全登録は無意味** (`select-for-register.mjs`
   dimension `ad_id` (event scope) 登録が要る (**人間ステップ**)。登録前でも送信は開始してよい。
 - **(not set) の扱い**: 過去データの大半が (not set) なのは dimension 登録前データの混入。fetch 期間を登録日
   以降に絞る (`fetch-affiliate-ga4.cjs`)。
+- **🚨 現状 affiliate の CTR は計測不能 — イベント名衝突 (2026-07-27 実測)**: 自前の impression 計測が使う
+  `ad_impression` は **GA4 の AdSense 連携が自動生成するイベント名と同じ**。直近 7 日の `ad_impression`
+  3,346 件は `adSourceName` が全件 "Google AdSense account (pub-7995274743017484)" で、**総数と完全一致 =
+  自前イベントは 1 件も記録されていない**。よって **CTR の分母が存在しない**。
+  - 過去に報告された「CTR 0.079%」等は **affiliate の click を AdSense の impression で割った無意味な値**。
+    採用してはならない (`evidence-based-judgment.md`)。
+  - 下の「週次改善」(imp>500 で降格) は分母が偽なので**発火させてはならない**。当面 priority は確定EPC 主導。
+  - **原因① (0 件の主因)**: `AdImpressionTracker` が `firedRef.current = true` を `if (window.gtag)` ガードより
+    **前**に実行しており、gtag (afterInteractive 遅延読み込み) が未準備のタイミングだと送信されないまま
+    「発火済み」になり永久に失われる。初期表示から画面内にあるサイドバー広告が該当する。
+  - **原因②**: `ad_impression` は GA4 予約名 ([公式](https://support.google.com/analytics/answer/13316687)・
+    アクセス 2026-07-27)。ただし同じ予約名の `file_download` は自前パラメータごと正常に届いているため
+    「予約名だから破棄」とは断定できない。改名が必要な理由は**AdSense が同名イベントを大量生成し自前分と
+    区別できないこと**。
+  - **対処 (未実施)**: ①ガード順の修正 (gtag 未準備ならリトライ。単純撤去は例外になるので不可)
+    ②`affiliate_impression` への改名 + `fetch-affiliate-ga4.cjs` の `EVENTS` 追従。
+    正典: `analytics-event-standards.md`。
+  - dimension 側は `affiliate_vertical` 等 6 個が **2026-07-06 登録済**。**未登録は `ad_id` のみ**。
 - **週次改善**: imp>500 かつ CTR が vertical 中央値の 1/2 未満 → priority 1 バンド降格 (次点繰り上げ)。
   比較は experiment registry (weight 50/50) で。**週次 1 vertical 1 変更まで** (配信急変防止)。effect 判定は
   evidence-based (improvement-triage)。

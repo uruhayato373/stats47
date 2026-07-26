@@ -11,12 +11,13 @@
  *   集計 : 使い捨て :memory: better-sqlite3 (旧 correlations schema 同等の temp table)
  *   出力 : R2 `app/correlation/top-pairs.json` / `stats.json` / `by-ranking-key/<key>.json`
  *
- * 計算量: ~2,000 active 指標² ≈ 2M ペアだが各 pearson は ≤47 点で安価。全ペアを
- * :memory: に materialize すると重すぎるため、JS 側で
+ * 計算量: ~2,000 active 指標² ≈ 2M ペア。全ペアでscatter object/配列を作ると
+ * allocationとGCでheapを圧迫するため、valueMapからPearson集計値だけを直接計算し、JS側で
  *   - per-key top-20 (ABS pearsonR 降順)
  *   - global top-200 候補 (effectiveR 降順)
  *   - 走行中の total / strong(|r|>=0.7) カウント
- * だけを保持し、最終的に「候補行のみ」を :memory: correlations に INSERT して
+ * だけを保持する。scatterは候補集合が確定してから候補分だけ作り、
+ * 最終的に「候補行のみ」を :memory: correlations に INSERT して
  * 旧 exporter SQL (effectiveR / ORDER BY / strong 集計) を厳密に再現する。
  *
  * R2 書き込みは assertR2WriteAllowed で CI / クラウド専用 (ローカルは .local/r2 へ生成のみ)。
@@ -28,22 +29,33 @@
  *   ... --dry-run            # R2 / .local/r2 に書かず件数のみ
  *   ... --limit-metrics 200  # 先頭 N 指標のみ (デバッグ用)
  */
-import "server-only";
+import 'server-only';
 
-import DatabaseConstructor from "better-sqlite3";
+import DatabaseConstructor from 'better-sqlite3';
 
-import { listAllMetrics, getMetricConfig, getMetricMeta } from "@stats47/data-configs";
-import type { MetricConfig } from "@stats47/data-configs";
-import { assertR2WriteAllowed, fetchFromR2AsJson, saveToR2 } from "@stats47/r2-storage/server";
-import { readStatsValues } from "@stats47/stats-r2/readers";
+import {
+  listAllMetrics,
+  getMetricConfig,
+  getMetricMeta,
+} from '@stats47/data-configs';
+import type { MetricConfig } from '@stats47/data-configs';
+import {
+  assertR2WriteAllowed,
+  fetchFromR2AsJson,
+  saveToR2,
+} from '@stats47/r2-storage/server';
+import { readStatsValues } from '@stats47/stats-r2/readers';
 
-import { isExcludedCorrelationKey, isExcludedCorrelationPair } from "../trivial-pairs";
+import {
+  isExcludedCorrelationKey,
+  isExcludedCorrelationPair,
+} from '../trivial-pairs';
 import {
   buildScatterData,
+  calculateMatchedPearsonR,
   calculatePartialR,
-  calculatePearsonR,
   type RankValueWithArea,
-} from "../utils/calculate-pearson";
+} from '../utils/calculate-pearson';
 import {
   CORRELATION_BY_KEY_LIMIT,
   CORRELATION_STATS_KEY,
@@ -55,7 +67,7 @@ import {
   type CorrelationStatsSnapshot,
   type CorrelationTopPairsSnapshot,
   type TopCorrelation,
-} from "../types/snapshot";
+} from '../types/snapshot';
 
 // ─── 旧 run-batch-correlation.ts の定数 (git show 70758ac0^ で確認) ───────────
 
@@ -67,10 +79,13 @@ const FETCH_CONCURRENCY = 16;
 
 /** 偏相関の制御変数 (key → 出力カラム)。旧 CONTROL_VARIABLES と同一。 */
 const CONTROL_VARIABLES = [
-  { key: "total-population", column: "partialRPopulation" },
-  { key: "total-area-excluding-northern-territories-and-takeshima", column: "partialRArea" },
-  { key: "ratio-65-plus", column: "partialRAging" },
-  { key: "population-density-per-km2-total-area", column: "partialRDensity" },
+  { key: 'total-population', column: 'partialRPopulation' },
+  {
+    key: 'total-area-excluding-northern-territories-and-takeshima',
+    column: 'partialRArea',
+  },
+  { key: 'ratio-65-plus', column: 'partialRAging' },
+  { key: 'population-density-per-km2-total-area', column: 'partialRDensity' },
 ] as const;
 
 /**
@@ -78,20 +93,93 @@ const CONTROL_VARIABLES = [
  * 旧 run-batch-correlation.ts (29-139 行) の COMPLEMENTARY_GROUPS を移植。
  */
 const COMPLEMENTARY_GROUPS: string[][] = [
-  ["employed-people-ratio-primary", "employed-people-ratio-secondary", "employed-people-ratio-tertiary", "secondary-employed-people-ratio-tertiary"],
-  ["secondary-industry-establishment-ratio", "tertiary-industry-establishment-ratio", "secondary-industry-establishment-ratio-census", "tertiary-industry-establishment-ratio-census"],
-  ["owner-occupied-housing-ratio", "rented-housing-ratio", "private-rented-housing-ratio"],
-  ["detached-house-ratio", "apartment-ratio", "row-house-ratio"],
-  ["in-prefecture-employed-people-ratio", "outflow-population-ratio", "inflow-population-ratio"],
-  ["personnel-expenditure-ratio-pref-finance", "assistance-expenditure-ratio-pref-finance", "investment-expenditure-ratio-pref-finance", "ordinary-construction-expenditure-ratio-pref-finance"],
-  ["establishment-ratio-1-4-employees-private", "establishment-ratio-5-9-employees-private", "establishment-ratio-10-29-employees-private", "establishment-ratio-300plus-employees-private"],
-  ["young-population-ratio", "production-age-population-ratio", "ratio-65-plus"],
-  ["employee-ratio-1-4-employee-establishments-private", "employee-ratio-5-9-employee-establishments-private", "employee-ratio-10-29-employee-establishments-private", "employee-ratio-100-299-employee-establishments-private", "employee-ratio-300plus-employee-establishments-private"],
-  ["national-university-student-ratio", "public-university-student-ratio", "private-university-student-ratio"],
-  ["final-education-elementary-junior-high-ratio", "final-education-highschool-old-junior-high-ratio", "final-education-junior-college-technical-college-ratio", "final-education-university-graduate-school-ratio"],
-  ["total-assessed-land-area-ratio", "total-assessed-land-area-ratio-residential", "total-assessed-land-area-ratio-paddy", "total-assessed-land-area-ratio-field"],
-  ["welfare-expenditure-ratio-pref-finance", "education-expenditure-ratio-pref-finance", "public-works-expenditure-ratio-pref-finance", "police-expenditure-ratio-pref-finance", "sanitation-expenditure-ratio-pref-finance", "agriculture-forestry-fisheries-expenditure-ratio-pref-finance", "commerce-industry-expenditure-ratio-pref-finance", "labor-expenditure-ratio-pref-finance", "disaster-recovery-expenditure-ratio-pref-finance"],
-  ["food-expenditure-ratio-multi-person-households", "housing-expenditure-ratio-multi-person-households", "utilities-expenditure-ratio-multi-person-households", "furniture-household-goods-expenditure-ratio-multi-person-households", "clothing-footwear-expenditure-ratio-multi-person-households", "healthcare-expenditure-ratio-multi-person-households", "transport-communication-expenditure-ratio-multi-person-households", "education-expenditure-ratio-multi-person-households", "culture-recreation-expenditure-ratio-multi-person-households", "other-consumption-expenditure-ratio-multi-person-households"],
+  [
+    'employed-people-ratio-primary',
+    'employed-people-ratio-secondary',
+    'employed-people-ratio-tertiary',
+    'secondary-employed-people-ratio-tertiary',
+  ],
+  [
+    'secondary-industry-establishment-ratio',
+    'tertiary-industry-establishment-ratio',
+    'secondary-industry-establishment-ratio-census',
+    'tertiary-industry-establishment-ratio-census',
+  ],
+  [
+    'owner-occupied-housing-ratio',
+    'rented-housing-ratio',
+    'private-rented-housing-ratio',
+  ],
+  ['detached-house-ratio', 'apartment-ratio', 'row-house-ratio'],
+  [
+    'in-prefecture-employed-people-ratio',
+    'outflow-population-ratio',
+    'inflow-population-ratio',
+  ],
+  [
+    'personnel-expenditure-ratio-pref-finance',
+    'assistance-expenditure-ratio-pref-finance',
+    'investment-expenditure-ratio-pref-finance',
+    'ordinary-construction-expenditure-ratio-pref-finance',
+  ],
+  [
+    'establishment-ratio-1-4-employees-private',
+    'establishment-ratio-5-9-employees-private',
+    'establishment-ratio-10-29-employees-private',
+    'establishment-ratio-300plus-employees-private',
+  ],
+  [
+    'young-population-ratio',
+    'production-age-population-ratio',
+    'ratio-65-plus',
+  ],
+  [
+    'employee-ratio-1-4-employee-establishments-private',
+    'employee-ratio-5-9-employee-establishments-private',
+    'employee-ratio-10-29-employee-establishments-private',
+    'employee-ratio-100-299-employee-establishments-private',
+    'employee-ratio-300plus-employee-establishments-private',
+  ],
+  [
+    'national-university-student-ratio',
+    'public-university-student-ratio',
+    'private-university-student-ratio',
+  ],
+  [
+    'final-education-elementary-junior-high-ratio',
+    'final-education-highschool-old-junior-high-ratio',
+    'final-education-junior-college-technical-college-ratio',
+    'final-education-university-graduate-school-ratio',
+  ],
+  [
+    'total-assessed-land-area-ratio',
+    'total-assessed-land-area-ratio-residential',
+    'total-assessed-land-area-ratio-paddy',
+    'total-assessed-land-area-ratio-field',
+  ],
+  [
+    'welfare-expenditure-ratio-pref-finance',
+    'education-expenditure-ratio-pref-finance',
+    'public-works-expenditure-ratio-pref-finance',
+    'police-expenditure-ratio-pref-finance',
+    'sanitation-expenditure-ratio-pref-finance',
+    'agriculture-forestry-fisheries-expenditure-ratio-pref-finance',
+    'commerce-industry-expenditure-ratio-pref-finance',
+    'labor-expenditure-ratio-pref-finance',
+    'disaster-recovery-expenditure-ratio-pref-finance',
+  ],
+  [
+    'food-expenditure-ratio-multi-person-households',
+    'housing-expenditure-ratio-multi-person-households',
+    'utilities-expenditure-ratio-multi-person-households',
+    'furniture-household-goods-expenditure-ratio-multi-person-households',
+    'clothing-footwear-expenditure-ratio-multi-person-households',
+    'healthcare-expenditure-ratio-multi-person-households',
+    'transport-communication-expenditure-ratio-multi-person-households',
+    'education-expenditure-ratio-multi-person-households',
+    'culture-recreation-expenditure-ratio-multi-person-households',
+    'other-consumption-expenditure-ratio-multi-person-households',
+  ],
 ];
 
 /** 補数関係グループの高速ルックアップ: rankingKey → グループID */
@@ -128,13 +216,15 @@ interface RankingItemsAllSnapshot {
  */
 async function loadDisplayMeta(): Promise<Map<string, MetricDisplayMeta>> {
   const map = new Map<string, MetricDisplayMeta>();
-  const snapshot = await fetchFromR2AsJson<RankingItemsAllSnapshot>("app/ranking-items/all.json");
+  const snapshot = await fetchFromR2AsJson<RankingItemsAllSnapshot>(
+    'app/ranking-items/all.json'
+  );
   if (snapshot?.items) {
     for (const it of snapshot.items) {
       map.set(it.rankingKey, {
         title: it.title ?? null,
         subtitle: it.subtitle ?? null,
-        unit: it.unit ?? "",
+        unit: it.unit ?? '',
         normalizationBasis: it.normalizationBasis ?? null,
       });
     }
@@ -144,7 +234,7 @@ async function loadDisplayMeta(): Promise<Map<string, MetricDisplayMeta>> {
 
 function displayMetaFor(
   key: string,
-  metaMap: Map<string, MetricDisplayMeta>,
+  metaMap: Map<string, MetricDisplayMeta>
 ): MetricDisplayMeta {
   const fromSnapshot = metaMap.get(key);
   if (fromSnapshot) return fromSnapshot;
@@ -152,7 +242,7 @@ function displayMetaFor(
   return {
     title: config?.title ?? null,
     subtitle: config?.subtitle ?? null,
-    unit: config?.unit ?? "",
+    unit: config?.unit ?? '',
     normalizationBasis: null, // builder は normalizationBasis を焼かないため snapshot 由来のみ
   };
 }
@@ -174,7 +264,7 @@ async function loadMetric(config: MetricConfig): Promise<LoadedMetric | null> {
   const latestYear = getMetricMeta(config.key)?.latestYear?.yearCode;
   if (!latestYear) return null;
 
-  const payload = await readStatsValues(config.key, "prefecture");
+  const payload = await readStatsValues(config.key, 'prefecture');
   if (!payload || payload.rows.length === 0) return null;
 
   const rows: RankValueWithArea[] = [];
@@ -192,7 +282,7 @@ async function loadMetric(config: MetricConfig): Promise<LoadedMetric | null> {
 /** 並列度を制限して loadMetric を流す簡易ワーカープール。 */
 async function loadMetricsBounded(
   configs: MetricConfig[],
-  concurrency: number,
+  concurrency: number
 ): Promise<Map<string, LoadedMetric>> {
   const out = new Map<string, LoadedMetric>();
   let cursor = 0;
@@ -213,7 +303,7 @@ function isTrivialPair(
   keyA: string,
   keyB: string,
   titleA: string | null,
-  titleB: string | null,
+  titleB: string | null
 ): boolean {
   if (titleA !== null && titleA === titleB) return true; // 同タイトル
   const ga = complementaryGroupMap.get(keyA);
@@ -227,7 +317,7 @@ function isTrivialPair(
 
 /** rankingKey × cvKey → r。getCvCorrelation で memoize。 */
 function makeCvCorrelationGetter(
-  metrics: Map<string, LoadedMetric>,
+  metrics: Map<string, LoadedMetric>
 ): (key: string, cvKey: string) => number | null {
   const cache = new Map<string, number | null>();
   return (key: string, cvKey: string): number | null => {
@@ -241,28 +331,19 @@ function makeCvCorrelationGetter(
       cache.set(cacheKey, null);
       return null;
     }
-    const x: number[] = [];
-    const y: number[] = [];
-    for (const [areaCode, xVal] of metric.valueMap) {
-      const yVal = cv.valueMap.get(areaCode);
-      if (yVal !== undefined) {
-        x.push(xVal);
-        y.push(yVal);
-      }
-    }
-    if (x.length < MIN_DATA_POINTS) {
+    const matched = calculateMatchedPearsonR(metric.rows, cv.valueMap);
+    if (matched.count < MIN_DATA_POINTS) {
       cache.set(cacheKey, null);
       return null;
     }
-    const { r } = calculatePearsonR(x, y);
-    cache.set(cacheKey, r);
-    return r;
+    cache.set(cacheKey, matched.r);
+    return matched.r;
   };
 }
 
 // ─── 候補ペア (bounded) ───────────────────────────────────────────────────────
 
-interface CandidatePair {
+interface CandidateScore {
   keyX: string;
   keyY: string;
   pearsonR: number;
@@ -270,7 +351,6 @@ interface CandidatePair {
   partialRArea: number | null;
   partialRAging: number | null;
   partialRDensity: number | null;
-  scatter: Array<{ areaCode: string; areaName: string; x: number; y: number }>;
   /** effectiveR = sign(pearsonR) × min(|partial*| or |pearsonR|) — 旧 exporter SQL 準拠 */
   effectiveAbsR: number;
 }
@@ -288,29 +368,29 @@ function effectiveAbsROf(p: {
     p.partialRPopulation === null ? absR : Math.abs(p.partialRPopulation),
     p.partialRArea === null ? absR : Math.abs(p.partialRArea),
     p.partialRAging === null ? absR : Math.abs(p.partialRAging),
-    p.partialRDensity === null ? absR : Math.abs(p.partialRDensity),
+    p.partialRDensity === null ? absR : Math.abs(p.partialRDensity)
   );
 }
 
 /** 候補集合を作るために per-key top-N (ABS pearsonR 降順) を保持する小ヒープ代替。 */
 class TopByAbsPearson {
-  private items: CandidatePair[] = [];
+  private items: CandidateScore[] = [];
   constructor(private readonly limit: number) {}
-  add(p: CandidatePair) {
+  add(p: CandidateScore) {
     this.items.push(p);
     this.items.sort((a, b) => Math.abs(b.pearsonR) - Math.abs(a.pearsonR));
     if (this.items.length > this.limit) this.items.length = this.limit;
   }
-  values(): CandidatePair[] {
+  values(): CandidateScore[] {
     return this.items;
   }
 }
 
 /** global top-N (effectiveAbsR 降順) を保持。candidates 絞り込みにのみ使う。 */
 class GlobalTopByEffective {
-  private items: CandidatePair[] = [];
+  private items: CandidateScore[] = [];
   constructor(private readonly limit: number) {}
-  add(p: CandidatePair) {
+  add(p: CandidateScore) {
     // 旧 SQL は ABS(pearson_r) < 0.99 を top-pairs で除くため、ここでも候補から外す。
     if (Math.abs(p.pearsonR) >= 0.99) return;
     if (isExcludedCorrelationPair(p.keyX, p.keyY)) return;
@@ -320,7 +400,7 @@ class GlobalTopByEffective {
       this.items.length = this.limit;
     }
   }
-  values(): CandidatePair[] {
+  values(): CandidateScore[] {
     this.items.sort((a, b) => b.effectiveAbsR - a.effectiveAbsR);
     return this.items.slice(0, this.limit);
   }
@@ -339,12 +419,13 @@ class GlobalTopByEffective {
  * (+ join 用に metrics(key, title, normalization_basis) も temp 化)
  */
 function buildMemoryDb(
-  candidates: CandidatePair[],
+  candidates: Iterable<CandidateScore>,
+  loaded: ReadonlyMap<string, LoadedMetric>,
   metaMap: Map<string, MetricDisplayMeta>,
-  allKeys: Set<string>,
+  allKeys: Set<string>
 ): DatabaseConstructor.Database {
-  const db = new DatabaseConstructor(":memory:");
-  db.pragma("journal_mode = MEMORY");
+  const db = new DatabaseConstructor(':memory:');
+  db.pragma('journal_mode = MEMORY');
 
   db.exec(`
     CREATE TABLE correlations (
@@ -367,7 +448,7 @@ function buildMemoryDb(
   `);
 
   const insMetric = db.prepare(
-    "INSERT OR IGNORE INTO metrics (key, title, normalization_basis) VALUES (?, ?, ?)",
+    'INSERT OR IGNORE INTO metrics (key, title, normalization_basis) VALUES (?, ?, ?)'
   );
   const insMetricsTx = db.transaction(() => {
     for (const key of allKeys) {
@@ -386,6 +467,13 @@ function buildMemoryDb(
   `);
   const insCorrTx = db.transaction(() => {
     for (const c of candidates) {
+      const x = loaded.get(c.keyX);
+      const y = loaded.get(c.keyY);
+      if (!x || !y) {
+        throw new Error(
+          `correlation candidate の観測値がありません: ${c.keyX}/${c.keyY}`
+        );
+      }
       insCorr.run({
         keyX: c.keyX,
         keyY: c.keyY,
@@ -394,7 +482,8 @@ function buildMemoryDb(
         prArea: c.partialRArea,
         prAging: c.partialRAging,
         prDensity: c.partialRDensity,
-        scatter: JSON.stringify(c.scatter),
+        // 候補ごとに生成・直ちに INSERT し、JS 配列と SQLite の二重保持を避ける。
+        scatter: JSON.stringify(buildScatterData(x.rows, y.rows)),
       });
     }
   });
@@ -419,7 +508,10 @@ interface TopPairRow {
 }
 
 /** 旧 list-top-correlations.ts の SQL を SQLite 生クエリで厳密再現。 */
-function queryTopPairs(db: DatabaseConstructor.Database, limit: number): TopCorrelation[] {
+function queryTopPairs(
+  db: DatabaseConstructor.Database,
+  limit: number
+): TopCorrelation[] {
   const effectiveAbsR = `MIN(
     COALESCE(ABS(c.partial_r_population), ABS(c.pearson_r)),
     COALESCE(ABS(c.partial_r_area), ABS(c.pearson_r)),
@@ -448,7 +540,7 @@ function queryTopPairs(db: DatabaseConstructor.Database, limit: number): TopCorr
       WHERE ABS(c.pearson_r) < 0.99
       ORDER BY ${effectiveAbsR} DESC
       LIMIT ?
-    `,
+    `
     )
     .all(limit * 10) as TopPairRow[];
 
@@ -458,7 +550,7 @@ function queryTopPairs(db: DatabaseConstructor.Database, limit: number): TopCorr
       (r) =>
         !isExcludedCorrelationKey(r.rankingKeyX) &&
         !isExcludedCorrelationKey(r.rankingKeyY) &&
-        !isExcludedCorrelationPair(r.rankingKeyX, r.rankingKeyY),
+        !isExcludedCorrelationPair(r.rankingKeyX, r.rankingKeyY)
     )
     .slice(0, limit)
     .map((r) => ({
@@ -497,7 +589,7 @@ function queryByKey(
   db: DatabaseConstructor.Database,
   rankingKey: string,
   limit: number,
-  metaMap: Map<string, MetricDisplayMeta>,
+  metaMap: Map<string, MetricDisplayMeta>
 ): CorrelatedItem[] {
   const FETCH_MULTIPLIER = 3;
   const rawRows = db
@@ -516,14 +608,15 @@ function queryByKey(
       WHERE metric_key_x = ? OR metric_key_y = ?
       ORDER BY ABS(pearson_r) DESC
       LIMIT ?
-    `,
+    `
     )
     .all(rankingKey, rankingKey, limit * FETCH_MULTIPLIER) as ByKeyRawRow[];
 
   const seen = new Set<string>();
   const rows = rawRows
     .filter((row) => {
-      const counterpart = row.rankingKeyX === rankingKey ? row.rankingKeyY : row.rankingKeyX;
+      const counterpart =
+        row.rankingKeyX === rankingKey ? row.rankingKeyY : row.rankingKeyX;
       if (seen.has(counterpart)) return false;
       seen.add(counterpart);
       return true;
@@ -532,17 +625,25 @@ function queryByKey(
 
   const results: CorrelatedItem[] = [];
   for (const row of rows) {
-    const counterpartKey = row.rankingKeyX === rankingKey ? row.rankingKeyY : row.rankingKeyX;
+    const counterpartKey =
+      row.rankingKeyX === rankingKey ? row.rankingKeyY : row.rankingKeyX;
     const meta = displayMetaFor(counterpartKey, metaMap);
     if (meta.title === null) continue;
 
-    let scatter: CorrelatedItem["scatterData"];
+    let scatter: CorrelatedItem['scatterData'];
     try {
-      const parsed = JSON.parse(row.scatterData) as CorrelatedItem["scatterData"];
+      const parsed = JSON.parse(
+        row.scatterData
+      ) as CorrelatedItem['scatterData'];
       scatter =
         row.rankingKeyX === rankingKey
           ? parsed
-          : parsed.map((p) => ({ areaCode: p.areaCode, areaName: p.areaName, x: p.y, y: p.x }));
+          : parsed.map((p) => ({
+              areaCode: p.areaCode,
+              areaName: p.areaName,
+              x: p.y,
+              y: p.x,
+            }));
     } catch {
       scatter = [];
     }
@@ -571,13 +672,16 @@ interface Args {
 }
 
 function parseArgs(argv: string[]): Args {
-  const dryRun = argv.includes("--dry-run");
-  const idx = argv.indexOf("--limit-metrics");
-  const limitMetrics = idx >= 0 && argv[idx + 1] ? Number(argv[idx + 1]) || 0 : 0;
+  const dryRun = argv.includes('--dry-run');
+  const idx = argv.indexOf('--limit-metrics');
+  const limitMetrics =
+    idx >= 0 && argv[idx + 1] ? Number(argv[idx + 1]) || 0 : 0;
   return { dryRun, limitMetrics };
 }
 
-export async function buildCorrelationSnapshot(opts: { dryRun?: boolean; limitMetrics?: number } = {}): Promise<{
+export async function buildCorrelationSnapshot(
+  opts: { dryRun?: boolean; limitMetrics?: number } = {}
+): Promise<{
   topPairs: number;
   total: number;
   strong: number;
@@ -586,13 +690,16 @@ export async function buildCorrelationSnapshot(opts: { dryRun?: boolean; limitMe
   durationMs: number;
 }> {
   const startedAt = Date.now();
-  assertR2WriteAllowed({ op: "correlation snapshot push", dryRun: opts.dryRun });
+  assertR2WriteAllowed({
+    op: 'correlation snapshot push',
+    dryRun: opts.dryRun,
+  });
 
   // 1. 対象 metric: isActive !== false かつ prefecture entity かつ latestYear あり、
   //    かつ相関ランキング除外キーでない (旧 run-batch と同じ絞り込み)。
   let configs = listAllMetrics().filter((m) => {
     if (m.isActive === false) return false;
-    if (!m.entities.includes("prefecture")) return false;
+    if (!m.entities.includes('prefecture')) return false;
     if (!getMetricMeta(m.key)?.latestYear?.yearCode) return false;
     if (isExcludedCorrelationKey(m.key)) return false;
     return true;
@@ -602,15 +709,19 @@ export async function buildCorrelationSnapshot(opts: { dryRun?: boolean; limitMe
   }
 
   // 制御変数は除外キーに含まれるものもあるため、別途ロード対象に加える。
-  const cvConfigs = CONTROL_VARIABLES.map((cv) => getMetricConfig(cv.key)).filter(
-    (c): c is MetricConfig => Boolean(c),
-  );
+  const cvConfigs = CONTROL_VARIABLES.map((cv) =>
+    getMetricConfig(cv.key)
+  ).filter((c): c is MetricConfig => Boolean(c));
   const loadTargets = new Map<string, MetricConfig>();
   for (const c of configs) loadTargets.set(c.key, c);
-  for (const c of cvConfigs) if (!loadTargets.has(c.key)) loadTargets.set(c.key, c);
+  for (const c of cvConfigs)
+    if (!loadTargets.has(c.key)) loadTargets.set(c.key, c);
 
   // 2. R2 から観測値ロード (並列度制限)。
-  const loaded = await loadMetricsBounded([...loadTargets.values()], FETCH_CONCURRENCY);
+  const loaded = await loadMetricsBounded(
+    [...loadTargets.values()],
+    FETCH_CONCURRENCY
+  );
   const metaMap = await loadDisplayMeta();
 
   // 相関ペアを張る対象 (除外キー除く・観測値ありの) キー一覧。
@@ -618,15 +729,18 @@ export async function buildCorrelationSnapshot(opts: { dryRun?: boolean; limitMe
   console.log(
     `[correlation] 対象 metric=${configs.length} / 観測値あり=${pairKeys.length} / 制御変数=${
       cvConfigs.filter((c) => loaded.has(c.key)).length
-    }/${CONTROL_VARIABLES.length}`,
+    }/${CONTROL_VARIABLES.length}`
   );
 
   const getCv = makeCvCorrelationGetter(loaded);
 
   // 3. ペア走査 (i<j)。per-key top-20 と global top-200 候補のみ JS で保持し bound。
   const perKeyTop = new Map<string, TopByAbsPearson>();
-  for (const k of pairKeys) perKeyTop.set(k, new TopByAbsPearson(CORRELATION_BY_KEY_LIMIT));
-  const globalTop = new GlobalTopByEffective(CORRELATION_TOP_PAIRS_SNAPSHOT_LIMIT);
+  for (const k of pairKeys)
+    perKeyTop.set(k, new TopByAbsPearson(CORRELATION_BY_KEY_LIMIT));
+  const globalTop = new GlobalTopByEffective(
+    CORRELATION_TOP_PAIRS_SNAPSHOT_LIMIT
+  );
 
   let total = 0;
   let strong = 0;
@@ -644,13 +758,9 @@ export async function buildCorrelationSnapshot(opts: { dryRun?: boolean; limitMe
         continue;
       }
       const my = loaded.get(keyY)!;
-      const scatter = buildScatterData(mx.rows, my.rows);
-      if (scatter.length < MIN_DATA_POINTS) continue;
-
-      const { r } = calculatePearsonR(
-        scatter.map((p) => p.x),
-        scatter.map((p) => p.y),
-      );
+      const matched = calculateMatchedPearsonR(mx.rows, my.valueMap);
+      if (matched.count < MIN_DATA_POINTS) continue;
+      const r = matched.r;
 
       // 偏相関 4 種。
       let prPop: number | null = null;
@@ -663,17 +773,25 @@ export async function buildCorrelationSnapshot(opts: { dryRun?: boolean; limitMe
         if (rXZ === null || rYZ === null) continue;
         const pr = calculatePartialR(r, rXZ, rYZ);
         switch (cv.column) {
-          case "partialRPopulation": prPop = pr; break;
-          case "partialRArea": prArea = pr; break;
-          case "partialRAging": prAging = pr; break;
-          case "partialRDensity": prDensity = pr; break;
+          case 'partialRPopulation':
+            prPop = pr;
+            break;
+          case 'partialRArea':
+            prArea = pr;
+            break;
+          case 'partialRAging':
+            prAging = pr;
+            break;
+          case 'partialRDensity':
+            prDensity = pr;
+            break;
         }
       }
 
       total++;
       if (Math.abs(r) >= 0.7) strong++; // 旧 stats SQL: SUM(CASE WHEN ABS(pearsonR) >= 0.7 ...)
 
-      const cand: CandidatePair = {
+      const cand: CandidateScore = {
         keyX,
         keyY,
         pearsonR: r,
@@ -681,7 +799,6 @@ export async function buildCorrelationSnapshot(opts: { dryRun?: boolean; limitMe
         partialRArea: prArea,
         partialRAging: prAging,
         partialRDensity: prDensity,
-        scatter,
         effectiveAbsR: 0,
       };
       cand.effectiveAbsR = effectiveAbsROf(cand);
@@ -693,21 +810,20 @@ export async function buildCorrelationSnapshot(opts: { dryRun?: boolean; limitMe
   }
 
   console.log(
-    `[correlation] ペア total=${total} strong(|r|>=0.7)=${strong} 自明除外=${trivialSkipped}`,
+    `[correlation] ペア total=${total} strong(|r|>=0.7)=${strong} 自明除外=${trivialSkipped}`
   );
 
   // 4. 候補集合 (per-key top union ∪ global top) のみ :memory: に INSERT。
-  const candidateSet = new Map<string, CandidatePair>();
-  const addCandidate = (c: CandidatePair) => {
+  const candidateSet = new Map<string, CandidateScore>();
+  const addCandidate = (c: CandidateScore) => {
     const k = c.keyX < c.keyY ? `${c.keyX}\0${c.keyY}` : `${c.keyY}\0${c.keyX}`;
     if (!candidateSet.has(k)) candidateSet.set(k, c);
   };
-  for (const top of perKeyTop.values()) for (const c of top.values()) addCandidate(c);
+  for (const top of perKeyTop.values())
+    for (const c of top.values()) addCandidate(c);
   for (const c of globalTop.values()) addCandidate(c);
-  const candidates = [...candidateSet.values()];
-
   const allKeys = new Set<string>(pairKeys);
-  const db = buildMemoryDb(candidates, metaMap, allKeys);
+  const db = buildMemoryDb(candidateSet.values(), loaded, metaMap, allKeys);
 
   // 5. 旧 exporter SQL で top-pairs / per-key を生成。stats は走行中カウントを使う
   //    (候補集合は top-N のみで total/strong を正しく反映できないため JS 集計が正)。
@@ -717,16 +833,24 @@ export async function buildCorrelationSnapshot(opts: { dryRun?: boolean; limitMe
     generatedAt,
     pairs: queryTopPairs(db, CORRELATION_TOP_PAIRS_SNAPSHOT_LIMIT),
   };
-  const statsSnapshot: CorrelationStatsSnapshot = { generatedAt, total, strong };
+  const statsSnapshot: CorrelationStatsSnapshot = {
+    generatedAt,
+    total,
+    strong,
+  };
 
   // 6. R2 書き込み (.local/r2)。
   let perKeyFiles = 0;
   if (!opts.dryRun) {
-    await saveToR2(CORRELATION_TOP_PAIRS_KEY, JSON.stringify(topPairsSnapshot), {
-      contentType: "application/json; charset=utf-8",
-    });
+    await saveToR2(
+      CORRELATION_TOP_PAIRS_KEY,
+      JSON.stringify(topPairsSnapshot),
+      {
+        contentType: 'application/json; charset=utf-8',
+      }
+    );
     await saveToR2(CORRELATION_STATS_KEY, JSON.stringify(statsSnapshot), {
-      contentType: "application/json; charset=utf-8",
+      contentType: 'application/json; charset=utf-8',
     });
 
     for (const key of pairKeys) {
@@ -736,7 +860,7 @@ export async function buildCorrelationSnapshot(opts: { dryRun?: boolean; limitMe
         pairs: queryByKey(db, key, CORRELATION_BY_KEY_LIMIT, metaMap),
       };
       await saveToR2(correlationByKeyPath(key), JSON.stringify(snapshot), {
-        contentType: "application/json; charset=utf-8",
+        contentType: 'application/json; charset=utf-8',
       });
       perKeyFiles++;
     }
@@ -759,21 +883,21 @@ export async function buildCorrelationSnapshot(opts: { dryRun?: boolean; limitMe
 async function main() {
   const args = parseArgs(process.argv.slice(2));
   console.log(
-    `correlation snapshot を生成します${args.dryRun ? " (dry-run)" : ""}${
-      args.limitMetrics ? ` (limit-metrics=${args.limitMetrics})` : ""
-    }…`,
+    `correlation snapshot を生成します${args.dryRun ? ' (dry-run)' : ''}${
+      args.limitMetrics ? ` (limit-metrics=${args.limitMetrics})` : ''
+    }…`
   );
   const result = await buildCorrelationSnapshot(args);
   console.log(
     `✅ correlation: top-pairs=${result.topPairs} total=${result.total} strong=${result.strong} ` +
-      `per-key=${result.perKeyFiles} metrics=${result.consideredMetrics} ${result.durationMs}ms`,
+      `per-key=${result.perKeyFiles} metrics=${result.consideredMetrics} ${result.durationMs}ms`
   );
 }
 
 // 直接実行時のみ main を走らせる (import 時は副作用なし)。
-if (process.argv[1] && process.argv[1].includes("build-correlation-snapshot")) {
+if (process.argv[1] && process.argv[1].includes('build-correlation-snapshot')) {
   main().catch((err) => {
-    console.error("Fatal:", err);
+    console.error('Fatal:', err);
     process.exit(1);
   });
 }

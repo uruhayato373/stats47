@@ -41,8 +41,8 @@ jobs:
       - name: 🟢 Setup Node.js
         uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
-          node-version: "20"
-          cache: "npm"
+          node-version: '20'
+          cache: 'npm'
 
       - name: 📦 Install dependencies
         run: npm ci
@@ -70,6 +70,14 @@ jobs:
         # permissions / timeout / schedule concurrency / action SHA pin を必須化。
         # actionは `@40桁commit SHA # vN`で固定し、サプライチェーン回帰を止める。
         run: node .claude/scripts/lib/audit-workflow-policy.cjs --strict
+        continue-on-error: false
+
+      - name: 🖼️ Image Generation Pipeline Contract Gate
+        # planner/manifest/exact publisher/renderer hash と workflow policy の契約を
+        # ネットワークや本番R2に依存せず検証する。公開R2の鮮度監査は週次・post-deploy が担当する。
+        run: |
+          npm run type-check:image-pipeline
+          npm run test:image-pipeline
         continue-on-error: false
 
       - name: 📝 ESLint Check
@@ -287,8 +295,8 @@ jobs:
       - name: 🟢 Setup Node.js
         uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
-          node-version: "20"
-          cache: "npm"
+          node-version: '20'
+          cache: 'npm'
 
       - name: 📦 Install dependencies
         run: npm ci
@@ -296,7 +304,7 @@ jobs:
       - name: 📐 Type Check
         run: npm run type-check
         env:
-          NODE_OPTIONS: "--max-old-space-size=4096"
+          NODE_OPTIONS: '--max-old-space-size=4096'
         continue-on-error: false # 型エラーで失敗させる
 
   test:
@@ -313,8 +321,8 @@ jobs:
       - name: 🟢 Setup Node.js
         uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
-          node-version: "20"
-          cache: "npm"
+          node-version: '20'
+          cache: 'npm'
 
       - name: 📦 Install dependencies
         run: npm ci
@@ -444,8 +452,8 @@ jobs:
       - name: 🟢 Setup Node.js
         uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
-          node-version: "20"
-          cache: "npm"
+          node-version: '20'
+          cache: 'npm'
 
       - name: 📦 Install dependencies
         run: npm ci
@@ -457,12 +465,12 @@ jobs:
           NEXT_PUBLIC_ENV: production
           NEXT_PUBLIC_BASE_URL: https://stats47.jp
           NEXT_PUBLIC_ESTAT_APP_ID: ${{ secrets.NEXT_PUBLIC_ESTAT_APP_ID }}
-          NODE_OPTIONS: "--max-old-space-size=4096"
+          NODE_OPTIONS: '--max-old-space-size=4096'
           # Phase 4(a): この build job だけ next build 内の型検査をスキップ (Phase 4 / next.config.ts の
           # ignoreBuildErrors env ゲート)。並列で走る必須 type-check job (npm run type-check = 全 workspace)
           # がカバーし、集約 job quality-check が type-check を needs するため型検査の必須性は維持される。
           # localhost / deploy(workers:build) は env 未設定で従来どおり型検査する。
-          NEXT_SKIP_BUILD_TYPECHECK: "true"
+          NEXT_SKIP_BUILD_TYPECHECK: 'true'
         continue-on-error: false # ビルドエラーで失敗させる
 
   remote-asset-audit:
@@ -479,24 +487,18 @@ jobs:
       - name: 🟢 Setup Node.js
         uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
-          node-version: "20"
-          cache: "npm"
+          node-version: '20'
+          cache: 'npm'
 
       - name: 📦 Install dependencies
         run: npm ci
 
-      - name: 🖼️ Blog Thumbnail Gate
+      - name: 🖼️ Blog Image Renderer Contract Gate
         run: |
-          # 公開R2 (storage.stats47.jp) で全ブログ記事の thumbnail-light.webp が
-          # 200 画像配信されているか監査。欠落があれば fail し、デプロイ前に検出する。
-          # 背景: ogp.json 未作成の記事は thumbnail が生成されず R2 404 になり、
-          #   Post-Deploy Smoke Test (デプロイ後) が落ちる。それを前倒しで検出する。
-          # 修正はコード変更不要 — 以下を実行して thumbnail を生成+cloud push してから再実行:
-          #   npx tsx apps/web/scripts/generate-blog-thumbnails-cloud.ts --apply
-          if ! npx tsx apps/web/scripts/generate-blog-thumbnails-cloud.ts --audit; then
-            echo "::error::ブログ thumbnail が欠落しています。generate-blog-thumbnails-cloud.ts --apply で生成+push してから再実行してください。"
-            exit 1
-          fi
+          # PRのコードだけでは本番R2と必ず差分が生じるため、ここで公開R2 freshnessを
+          # 判定しない。レンダラー入力・AI prompt・asset contract は決定的テストで保証する。
+          # 本番画像の欠落/鮮度監査は ogp-image-audit-weekly と post-deploy smoke test が担当する。
+          npx vitest run apps/web/scripts/lib/__tests__/blog-ogp-visual.test.ts
         continue-on-error: false
 
   e2e:
@@ -511,8 +513,8 @@ jobs:
       - name: 🟢 Setup Node.js
         uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
-          node-version: "20"
-          cache: "npm"
+          node-version: '20'
+          cache: 'npm'
 
       - name: 📦 Install dependencies
         run: npm ci
@@ -530,7 +532,7 @@ jobs:
           NEXT_PUBLIC_R2_PUBLIC_URL: https://storage.stats47.jp
           R2_PUBLIC_FETCH_URL: https://storage.stats47.jp
           NEXT_PUBLIC_ESTAT_APP_ID: ${{ secrets.NEXT_PUBLIC_ESTAT_APP_ID }}
-          NODE_OPTIONS: "--max-old-space-size=4096"
+          NODE_OPTIONS: '--max-old-space-size=4096'
         run: npx playwright test --project=e2e-chromium
         working-directory: apps/web
 

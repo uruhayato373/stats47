@@ -3,5 +3,16 @@
   "compilerOptions": {
     "jsx": "react-jsx",
     "jsxImportSource": "react"
-  }
+  },
+  "include": [
+    "generate-ogp-images.ts",
+    "generate-blog-thumbnails.ts",
+    "generate-blog-thumbnails-cloud.ts",
+    "data/image-generator-registry.ts",
+    "data/blog-ogp-visual-catalog.ts",
+    "data/pref-silhouette-tokens.ts",
+    "lib/**/*.ts",
+    "lib/**/*.tsx"
+  ],
+  "exclude": ["node_modules", "../.next", "../.local"]
 }

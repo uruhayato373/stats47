@@ -7,9 +7,9 @@
  * 正典: .claude/rules/ogp-image-standards.md §5 (画像生成 AI: ブログ OGP の記事別背景)
  */
 
-import { createHash } from "node:crypto";
+import { createHash } from 'node:crypto';
 
-import type { OgpVisualType } from "@stats47/types";
+import type { OgpVisualType } from '@stats47/types';
 
 import {
   ARCHETYPE_TO_VISUAL,
@@ -23,8 +23,9 @@ import {
   OGP_MODEL,
   OGP_PROMPT_VERSION,
   OGP_STYLE_PREFIX,
+  OGP_VISUAL_CATALOG,
   TAG_TO_VISUAL,
-} from "../data/blog-ogp-visual-catalog";
+} from '../data/blog-ogp-visual-catalog';
 
 /** 解決の入力 (article.md frontmatter から抜いた最小限)。 */
 export interface OgpVisualInput {
@@ -41,12 +42,15 @@ export interface OgpVisualInput {
  */
 export function parseOgpVisualFrontmatter(markdown: string): OgpVisualInput {
   const m = markdown.match(/^---\r?\n([\s\S]*?)\r?\n---/);
-  const block = m ? m[1] : "";
+  const block = m ? m[1] : '';
   const scalar = (key: string): string | null => {
-    const line = block.match(new RegExp(`^${key}:[ \\t]*(.+)$`, "m"));
+    const line = block.match(new RegExp(`^${key}:[ \\t]*(.+)$`, 'm'));
     if (!line) return null;
     let v = line[1].trim();
-    if ((v.startsWith('"') && v.endsWith('"')) || (v.startsWith("'") && v.endsWith("'"))) {
+    if (
+      (v.startsWith('"') && v.endsWith('"')) ||
+      (v.startsWith("'") && v.endsWith("'"))
+    ) {
       v = v.slice(1, -1);
     }
     return v || null;
@@ -56,34 +60,41 @@ export function parseOgpVisualFrontmatter(markdown: string): OgpVisualInput {
   const inline = block.match(/^tags:[ \t]*\[(.*)\]/m);
   if (inline) {
     tags = inline[1]
-      .split(",")
-      .map((s) => s.trim().replace(/^["']|["']$/g, ""))
+      .split(',')
+      .map((s) => s.trim().replace(/^["']|["']$/g, ''))
       .filter(Boolean);
   } else {
     // tags:\n  - a\n  - b ブロック
-    const blockList = block.match(/^tags:[ \t]*\r?\n((?:[ \t]*-[ \t]*.+\r?\n?)+)/m);
+    const blockList = block.match(
+      /^tags:[ \t]*\r?\n((?:[ \t]*-[ \t]*.+\r?\n?)+)/m
+    );
     if (blockList) {
       tags = blockList[1]
         .split(/\r?\n/)
-        .map((l) => l.replace(/^[ \t]*-[ \t]*/, "").trim().replace(/^["']|["']$/g, ""))
+        .map((l) =>
+          l
+            .replace(/^[ \t]*-[ \t]*/, '')
+            .trim()
+            .replace(/^["']|["']$/g, '')
+        )
         .filter(Boolean);
     }
   }
   return {
-    ogpVisualType: scalar("ogpVisualType"),
-    ogpMotif: scalar("ogpMotif"),
-    category: scalar("category"),
-    archetype: scalar("archetype"),
+    ogpVisualType: scalar('ogpVisualType'),
+    ogpMotif: scalar('ogpMotif'),
+    category: scalar('category'),
+    archetype: scalar('archetype'),
     tags,
   };
 }
 
 export type OgpVisualSource =
-  | "explicit"
-  | "category"
-  | "archetype"
-  | "tags"
-  | "default";
+  | 'explicit'
+  | 'category'
+  | 'archetype'
+  | 'tags'
+  | 'default';
 
 export interface OgpVisualResolution {
   visualType: OgpVisualType;
@@ -105,28 +116,28 @@ export function resolveOgpVisual(input: OgpVisualInput): OgpVisualResolution {
 
   if (input.ogpVisualType && isValidVisualType(input.ogpVisualType)) {
     visualType = input.ogpVisualType;
-    source = "explicit";
+    source = 'explicit';
   } else if (input.category && CATEGORY_TO_VISUAL[input.category]) {
     visualType = CATEGORY_TO_VISUAL[input.category];
-    source = "category";
+    source = 'category';
   } else if (input.archetype && ARCHETYPE_TO_VISUAL[input.archetype]) {
     visualType = ARCHETYPE_TO_VISUAL[input.archetype];
-    source = "archetype";
+    source = 'archetype';
   } else {
     const tag = (input.tags ?? []).find((t) => t && TAG_TO_VISUAL[t]);
     if (tag) {
       visualType = TAG_TO_VISUAL[tag];
-      source = "tags";
+      source = 'tags';
     } else {
       visualType = DEFAULT_VISUAL_TYPE;
-      source = "default";
+      source = 'default';
     }
   }
 
   const motif =
     input.ogpMotif && isValidMotif(visualType, input.ogpMotif)
       ? input.ogpMotif
-      : source === "default"
+      : source === 'default'
         ? DEFAULT_MOTIF
         : defaultMotifFor(visualType);
 
@@ -145,15 +156,15 @@ export function buildOgpPrompt(args: {
   return (
     OGP_STYLE_PREFIX +
     motifFragment(args.visualType, args.motif) +
-    ". Article theme (do not render any text or letters): " +
+    '. Article theme (do not render any text or letters): ' +
     args.title +
-    "."
+    '.'
   );
 }
 
 /**
- * promptHash。model / promptVersion / visualType / motif / title のいずれか変化で変わる (§12)。
- * プロンプト全文ではなく決定的な構成要素から算出 (SSOT 二重化を避ける)。
+ * promptHash。実際にAPIへ渡すプロンプト全文をhashするため、STYLE_PREFIXや
+ * motif fragmentの変更も版上げ忘れに依存せず必ず検出する。
  */
 export function computePromptHash(args: {
   visualType: OgpVisualType;
@@ -162,12 +173,51 @@ export function computePromptHash(args: {
   model?: string;
   promptVersion?: string;
 }): string {
+  const input = JSON.stringify({
+    model: args.model ?? OGP_MODEL,
+    promptVersion: args.promptVersion ?? OGP_PROMPT_VERSION,
+    prompt: buildOgpPrompt(args),
+  });
+  return 'sha256-' + createHash('sha256').update(input).digest('hex');
+}
+
+/**
+ * 旧16桁hashの一度限りのmanifest移行判定用。旧hashと一致した背景はAPI再生成せず
+ * 新しい全文hashへ昇格できる。新規manifestにはこの値を書かない。
+ */
+const LEGACY_PROMPT_V1_CATALOG_SHA256 =
+  '947598ab4f653e528f7e9e5e5a4cb5f91e9e201fb4d5d9743101dfb3d2bc4340';
+
+export function computeLegacyPromptHashV1(args: {
+  visualType: OgpVisualType;
+  motif: string;
+  title: string;
+  model?: string;
+  promptVersion?: string;
+}): string | null {
+  const promptVersion = args.promptVersion ?? OGP_PROMPT_VERSION;
+  const catalogHash = createHash('sha256')
+    .update(
+      JSON.stringify({
+        style: OGP_STYLE_PREFIX,
+        catalog: OGP_VISUAL_CATALOG,
+      })
+    )
+    .digest('hex');
+  if (
+    promptVersion !== 'blog-ogp-v1' ||
+    catalogHash !== LEGACY_PROMPT_V1_CATALOG_SHA256
+  ) {
+    return null;
+  }
   const input = [
-    args.promptVersion ?? OGP_PROMPT_VERSION,
+    promptVersion,
     args.model ?? OGP_MODEL,
     args.visualType,
     args.motif,
     args.title,
-  ].join("|");
-  return "sha256-" + createHash("sha256").update(input).digest("hex").slice(0, 16);
+  ].join('|');
+  return (
+    'sha256-' + createHash('sha256').update(input).digest('hex').slice(0, 16)
+  );
 }

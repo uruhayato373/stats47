@@ -1,438 +1,664 @@
 #!/usr/bin/env tsx
 /**
- * ブログ記事サムネイル・OGP の監査 + 生成 + cloud R2 push (完全DBレス)
+ * R2 上の公開記事を入力に、変更された blog image bundle だけを生成する。
  *
- * 読み=公開 R2 URL (storage.stats47.jp)、
- * 書き=wrangler CLI (`wrangler r2 object put --remote`、S3 鍵不要)。
- * 生成物は /tmp に出して push するだけなのでローカルに残らない。
+ * - semantic input + renderer + output contract の fingerprint が一致した bundle は skip
+ * - AI背景は promptHash + 背景SHA を別管理し、renderer変更時は既存背景を再利用
+ * - 404 だけを欠落と扱い、timeout / 5xx / invalid JSON は fail-closed
+ * - R2へ直接書かず exact publish plan を出力
  *
- * Usage:
- *   # 監査のみ (cloud で thumbnail が 404/非画像の記事を一覧、read-only)
- *   npx tsx apps/web/scripts/generate-blog-thumbnails-cloud.ts --audit
- *
- *   # 欠落分を生成 (dry-run、/tmp に出すだけで push しない)
- *   npx tsx apps/web/scripts/generate-blog-thumbnails-cloud.ts
- *
- *   # 欠落分を生成して cloud R2 へ push
- *   npx tsx apps/web/scripts/generate-blog-thumbnails-cloud.ts --apply
- *
- *   # 特定 slug を対象 (カンマ区切り or --slug 複数)
- *   npx tsx apps/web/scripts/generate-blog-thumbnails-cloud.ts --slug a,b,c --apply
- *
- *   # cloud に既にあっても強制再生成
- *   npx tsx apps/web/scripts/generate-blog-thumbnails-cloud.ts --slug a --force --apply
- *
- *   # AI 背景パイロット (docs/23)。ローカル固定出力・R2 非書込。gallery /assets の
- *   # 「ブログ OGP パイロット (local)」タブで目視できる (--out-dir .local/ogp-pilot)
- *   npx tsx apps/web/scripts/generate-blog-thumbnails-cloud.ts \
- *     --ai-background --slug a,b,c --out-dir .local/ogp-pilot --budget-usd 2
- *
- * push 後に公開 URL が 404 をキャッシュしている場合は CDN purge が要る
- * (storage.stats47.jp/app/blog/<slug>/* を purge)。
+ * R2反映:
+ *   npx tsx packages/r2-storage/src/scripts/push-generated-image-set.ts \
+ *     --plan .local/image-generation-publish-plan-blog.json
  */
 
-import { execFileSync } from "node:child_process";
-import { mkdirSync, mkdtempSync, writeFileSync } from "node:fs";
-import { tmpdir } from "node:os";
-import { join, resolve } from "node:path";
+import { mkdirSync, rmSync, writeFileSync } from 'node:fs';
+import { join, resolve } from 'node:path';
 
-import dotenv from "dotenv";
+import dotenv from 'dotenv';
 
-// GEMINI_API_KEY 等をローカル実行時に .env.local から自己ロード (no-override)。
-// CI では .env.local 不在で no-op。値はログに出さない。
-dotenv.config({ path: ".env.local" });
+import {
+  createS3ImageObjectStoreFromEnv,
+  type ImageObjectStore,
+} from '@stats47/r2-storage/image-pipeline';
 
-// render lib (satori / sharp / react) は生成時のみ動的 import する。
-// --audit モード (CI ゲート) は fetch だけで完結させ native binding に依存させない。
+import {
+  BLOG_AI_BACKGROUND_NORMALIZER_SOURCES,
+  BLOG_IMAGE_GENERATOR_SPEC,
+  blogRendererSources,
+} from './data/image-generator-registry';
+import {
+  BLOG_IMAGE_PUBLISH_PLAN,
+  BLOG_IMAGE_STAGE_ROOT,
+  blogImageKeys,
+  createBlogImagePlan,
+  publishedBlogSlugsFromIndex,
+  stageBlogImagePath,
+  writeBlogImageManifest,
+  type BlogBackgroundMetadata,
+  type BlogImageData,
+  type BlogImageMetadata,
+} from './lib/blog-image-generation';
+import {
+  computeAiBackgroundCacheFingerprint,
+  createAiBackgroundCache,
+  readPublishedBackgroundState,
+  resolveCachedAiBackground,
+  type AiBackgroundCache,
+} from './lib/blog-ai-background-cache';
+import { normalizeAiBackgroundBuffer } from './lib/blog-ai-background-normalizer';
+import {
+  calculateRendererHash,
+  createImageGenerationPublishPlan,
+  selectChangedImageBatch,
+  type ImageGenerationPlan,
+  type ImageGenerationStatus,
+} from './lib/image-generation-manifest';
+import { createImageGenerationInspector } from './lib/image-generation-r2-inspector';
 
-const PUBLIC_URL = process.env.R2_PUBLIC_FETCH_URL ?? "https://storage.stats47.jp";
-const BUCKET = process.env.CLOUDFLARE_R2_BUCKET_NAME ?? "stats47";
-const PROJECT_ROOT = join(import.meta.dirname ?? __dirname, "../../..");
+dotenv.config({ path: '.env.local' });
+
+const PUBLIC_URL =
+  process.env.R2_PUBLIC_FETCH_URL ?? 'https://storage.stats47.jp';
+const PROJECT_ROOT = join(import.meta.dirname ?? __dirname, '../../..');
+const CONCURRENCY = 8;
 
 interface CliOptions {
   audit: boolean;
-  apply: boolean;
   force: boolean;
   slugs: string[] | null;
-  // --- AI 背景 (blog OGP AI パイプライン。docs/02_実装計画/23) ---
   aiBackground: boolean;
+  visualTypeOverride: string | null;
   limit: number | null;
+  maxGenerate: number | null;
   maxAttempts: number;
   budgetUsd: number;
-  forceBackground: boolean;
-  visualTypeOverride: string | null;
-  /** ローカル生成物の固定出力先 (未指定は mkdtemp)。パイロット目視・再生成に使う。 */
   outDir: string | null;
 }
 
-function numArg(args: string[], flag: string, def: number): number {
-  const i = args.indexOf(flag);
-  if (i === -1) return def;
-  const v = Number(args[i + 1]);
-  return Number.isFinite(v) ? v : def;
+interface AiDescriptor {
+  prompt: string;
+  promptHash: string;
+  legacyPromptHash: string | null;
+  model: string;
+  promptVersion: string;
+  visualType: import('@stats47/types').OgpVisualType;
+  motif: string;
 }
 
-function strArg(args: string[], flag: string): string | null {
-  const i = args.indexOf(flag);
-  return i !== -1 && args[i + 1] ? args[i + 1] : null;
+interface ResolvedAiBackground {
+  location: 'published' | 'cache';
+  cacheFingerprint: string;
+  metadata: BlogBackgroundMetadata & { source: 'ai' };
+}
+
+interface PreparedBlogImage {
+  slug: string;
+  data: BlogImageData;
+  ai: AiDescriptor;
+  plan: ImageGenerationPlan | null;
+  status: ImageGenerationStatus | null;
+  background: ResolvedAiBackground | null;
+  needsAiGeneration: boolean;
+}
+
+function stringArg(args: string[], flag: string): string | null {
+  const index = args.indexOf(flag);
+  return index >= 0 ? (args[index + 1] ?? null) : null;
+}
+
+function positiveNumberArg(
+  args: string[],
+  flag: string,
+  fallback: number
+): number {
+  const raw = stringArg(args, flag);
+  if (raw === null) return fallback;
+  const value = Number(raw);
+  if (!Number.isFinite(value) || value <= 0) {
+    throw new Error(`${flag} は0より大きい数値で指定してください`);
+  }
+  return value;
+}
+
+function positiveIntegerArg(args: string[], flag: string): number | null {
+  const raw = stringArg(args, flag);
+  if (raw === null) return null;
+  const value = Number(raw);
+  if (!Number.isSafeInteger(value) || value < 1) {
+    throw new Error(`${flag} は1以上の整数で指定してください`);
+  }
+  return value;
 }
 
 function parseArgs(): CliOptions {
   const args = process.argv.slice(2);
-  const rawSlug = strArg(args, "--slug");
-  const rawLimit = strArg(args, "--limit");
+  if (args.includes('--apply')) {
+    throw new Error(
+      '--apply は廃止しました。生成後に exact plan publisher を実行してください'
+    );
+  }
+  const rawSlugs = stringArg(args, '--slug');
+  const slugs = rawSlugs
+    ? rawSlugs
+        .split(',')
+        .map((slug) => slug.trim())
+        .filter(Boolean)
+    : null;
+  if (slugs?.some((slug) => !/^[a-z0-9][a-z0-9-]*$/.test(slug))) {
+    throw new Error('--slug に不正な値が含まれています');
+  }
+  const force = args.includes('--force');
+  if (force && !slugs) {
+    throw new Error('--force は必ず --slug と組み合わせてください');
+  }
+  if (args.includes('--force-background')) {
+    throw new Error(
+      '--force-background は廃止しました。AI背景を更新する場合は' +
+        'prompt/catalog/normalizerのSSOTを変更してください'
+    );
+  }
+  const outDir = stringArg(args, '--out-dir');
+  if (
+    outDir &&
+    (!outDir.startsWith('.local/') || outDir.split('/').includes('..'))
+  ) {
+    throw new Error('--out-dir は .local/ 配下を指定してください');
+  }
   return {
-    audit: args.includes("--audit"),
-    apply: args.includes("--apply"),
-    force: args.includes("--force"),
-    slugs: rawSlug ? rawSlug.split(",").map((s) => s.trim()).filter(Boolean) : null,
-    aiBackground: args.includes("--ai-background"),
-    limit: rawLimit ? Math.max(0, Math.floor(Number(rawLimit)) || 0) : null,
-    maxAttempts: Math.min(Math.max(numArg(args, "--max-attempts", 2), 1), 3),
-    budgetUsd: numArg(args, "--budget-usd", 2),
-    forceBackground: args.includes("--force-background"),
-    visualTypeOverride: strArg(args, "--visual-type"),
-    outDir: strArg(args, "--out-dir"),
+    audit: args.includes('--audit'),
+    force,
+    slugs,
+    aiBackground: args.includes('--ai-background'),
+    visualTypeOverride: stringArg(args, '--visual-type'),
+    limit: positiveIntegerArg(args, '--limit'),
+    maxGenerate: positiveIntegerArg(args, '--max-generate'),
+    maxAttempts: Math.min(positiveIntegerArg(args, '--max-attempts') ?? 2, 3),
+    budgetUsd: positiveNumberArg(args, '--budget-usd', 2),
+    outDir,
   };
 }
 
-/** cloud の blog all.json から全 slug を列挙。 */
+async function pMap<T, R>(
+  items: readonly T[],
+  worker: (item: T) => Promise<R>,
+  concurrency = CONCURRENCY
+): Promise<R[]> {
+  const output: R[] = [];
+  let cursor = 0;
+  async function run() {
+    while (cursor < items.length) {
+      const index = cursor++;
+      output[index] = await worker(items[index]);
+    }
+  }
+  await Promise.all(
+    Array.from({ length: Math.min(concurrency, items.length) }, run)
+  );
+  return output;
+}
+
+async function fetchRequired(url: string): Promise<Response> {
+  let response: Response;
+  try {
+    response = await fetch(url, {
+      cache: 'no-store',
+      signal: AbortSignal.timeout(20_000),
+    });
+  } catch (error) {
+    throw new Error(`R2 fetch failed: ${url}: ${String(error)}`);
+  }
+  if (!response.ok) {
+    throw new Error(`R2 fetch failed: ${url}: HTTP ${response.status}`);
+  }
+  return response;
+}
+
 async function listAllSlugs(): Promise<string[]> {
-  const res = await fetch(`${PUBLIC_URL}/app/blog/all.json`);
-  if (!res.ok) throw new Error(`all.json fetch failed: ${res.status}`);
-  const json = (await res.json()) as unknown;
-  const arr = Array.isArray(json)
-    ? json
-    : Array.isArray((json as { articles?: unknown }).articles)
-      ? (json as { articles: unknown[] }).articles
-      : [];
-  const slugs = arr
-    .map((a) => (a && typeof a === "object" ? (a as { slug?: string }).slug : null))
-    .filter((s): s is string => typeof s === "string" && s.length > 0);
-  return [...new Set(slugs)];
+  const response = await fetchRequired(`${PUBLIC_URL}/app/blog/all.json`);
+  const json = (await response.json()) as unknown;
+  return publishedBlogSlugsFromIndex(json);
 }
 
-/** cloud で thumbnail-light が 200 かつ画像か。 */
-async function cloudThumbnailOk(slug: string): Promise<boolean> {
-  try {
-    const res = await fetch(`${PUBLIC_URL}/app/blog/${slug}/thumbnail-light.webp`, {
-      method: "HEAD",
-    });
-    return res.ok && (res.headers.get("content-type") ?? "").includes("image");
-  } catch {
-    return false;
+function makeAiMetadata(
+  descriptor: AiDescriptor,
+  backgroundSha: string
+): BlogBackgroundMetadata & { source: 'ai' } {
+  return {
+    source: 'ai',
+    promptHash: descriptor.promptHash,
+    sha256: backgroundSha,
+    model: descriptor.model,
+    promptVersion: descriptor.promptVersion,
+    visualType: descriptor.visualType,
+    motif: descriptor.motif,
+  };
+}
+
+async function loadAiBackground(options: {
+  item: PreparedBlogImage;
+  store: ImageObjectStore;
+  cache: AiBackgroundCache;
+}): Promise<Buffer> {
+  const background = options.item.background;
+  if (!background) {
+    throw new Error(`${options.item.slug}: AI背景referenceがありません`);
   }
-}
-
-/** article.md を公開 URL から取得 (frontmatter パースは呼び出し側で行う)。 */
-async function fetchArticleMarkdown(slug: string): Promise<string | null> {
-  const res = await fetch(`${PUBLIC_URL}/app/blog/${slug}/article.md`);
-  if (!res.ok) return null;
-  return res.text();
-}
-
-/** 同期スリープ (execFileSync ベースの逐次処理内で使う)。 */
-function sleepSync(ms: number): void {
-  Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, ms);
-}
-
-/**
- * R2 へ put。wrangler の一時的な `fetch failed` 等で 1 回落ちても
- * バッチ全体を止めないよう、指数バックオフで最大 MAX_ATTEMPTS 回リトライする。
- * 全リトライ失敗時のみ throw (呼び出し側で slug 単位に握って継続)。
- */
-function putToR2(key: string, filePath: string, contentType: string): void {
-  const MAX_ATTEMPTS = 4;
-  for (let attempt = 1; attempt <= MAX_ATTEMPTS; attempt++) {
-    try {
-      execFileSync(
-        "npx",
-        [
-          "wrangler",
-          "r2",
-          "object",
-          "put",
-          `${BUCKET}/${key}`,
-          `--file=${filePath}`,
-          `--content-type=${contentType}`,
-          "--remote",
-        ],
-        { stdio: attempt === 1 ? "inherit" : "ignore", cwd: PROJECT_ROOT },
+  if (background.location === 'cache') {
+    const cached = await options.cache.read(background.cacheFingerprint);
+    if (!cached || cached.sha256 !== background.metadata.sha256) {
+      throw new Error(
+        `${options.item.slug}: AI背景cacheがplan確定後に不整合になりました`
       );
-      return;
-    } catch (e) {
-      if (attempt === MAX_ATTEMPTS) throw e;
-      const waitMs = 2000 * attempt; // 2s, 4s, 6s
-      console.log(`\n  [retry ${attempt}/${MAX_ATTEMPTS - 1}] ${key} (${waitMs}ms 後)`);
-      sleepSync(waitMs);
     }
+    return cached.buffer;
   }
+  const published = await readPublishedBackgroundState({
+    store: options.store,
+    slug: options.item.slug,
+    descriptor: options.item.ai,
+  });
+  if (
+    published.source !== 'ai' ||
+    !published.reusable ||
+    published.reusable.sha256 !== background.metadata.sha256
+  ) {
+    throw new Error(
+      `${options.item.slug}: 公開AI背景がplan確定後に変更されました`
+    );
+  }
+  return published.reusable.buffer;
 }
 
-/**
- * 既存 AI 背景がキャッシュ命中か。ogp.json の background.promptHash が一致し、
- * background.webp が 200 なら再利用可能 (API を呼ばない)。エラーは false 扱い。
- */
-async function bgCacheHit(slug: string, promptHash: string): Promise<boolean> {
-  try {
-    const res = await fetch(`${PUBLIC_URL}/app/blog/${slug}/ogp/ogp.json`);
-    if (!res.ok) return false;
-    const json = (await res.json()) as { background?: { promptHash?: string } };
-    if (json.background?.promptHash !== promptHash) return false;
-    const bg = await fetch(`${PUBLIC_URL}/app/blog/${slug}/ogp/background.jpg`, {
-      method: "HEAD",
-    });
-    return bg.ok && (bg.headers.get("content-type") ?? "").includes("image");
-  } catch {
-    return false;
+function assetFiles(
+  plan: ImageGenerationPlan,
+  root: string | null,
+  slug: string
+): Map<string, string> {
+  if (!root) {
+    return new Map(
+      plan.assets.map((asset) => [
+        asset.key,
+        stageBlogImagePath(PROJECT_ROOT, plan, asset.key),
+      ])
+    );
   }
+  const keys = blogImageKeys(slug);
+  const localByKey = new Map<string, string>([
+    [keys.light, join(root, slug, 'thumbnail-light.webp')],
+    [keys.dark, join(root, slug, 'thumbnail-dark.webp')],
+    [keys.ogp, join(root, slug, 'ogp/ogp.png')],
+    [keys.background, join(root, slug, 'ogp/background.jpg')],
+  ]);
+  const files = new Map<string, string>();
+  for (const asset of plan.assets) {
+    const path = localByKey.get(asset.key);
+    if (!path)
+      throw new Error(`pilot output mapping がありません: ${asset.key}`);
+    mkdirSync(join(path, '..'), { recursive: true });
+    files.set(asset.key, path);
+  }
+  return files;
 }
 
-async function main() {
-  const opts = parseArgs();
-
-  console.log(`公開URL: ${PUBLIC_URL} / bucket: ${BUCKET}`);
-  console.log("対象 slug を解決中...");
-
-  let allSlugs = opts.slugs ?? (await listAllSlugs());
-  // AI 背景は既存サムネの背景を差し替える用途なので全記事が対象。--limit を候補に先に適用して
-  // 無駄な thumbnail HEAD チェックを避ける (欠落監査の従来モードとは対象選定が異なる)。
-  if (opts.aiBackground && opts.limit != null && opts.limit < allSlugs.length) {
-    allSlugs = allSlugs.slice(0, opts.limit);
-  }
-  console.log(`候補 slug: ${allSlugs.length} 件`);
-
-  // 監査: cloud で thumbnail が欠落している slug を抽出 (--force / --ai-background 時は全件対象)
-  const missing: string[] = [];
-  const targets: string[] = [];
-  for (const slug of allSlugs) {
-    const ok = await cloudThumbnailOk(slug);
-    if (!ok) {
-      missing.push(slug);
-      console.log(`  [欠落] ${slug}`);
-    }
-    if (!ok || opts.force || opts.aiBackground) targets.push(slug);
-  }
-  console.log(`\n欠落 (cloud thumbnail 非200/非画像): ${missing.length} 件 / 生成対象: ${targets.length} 件`);
-
-  if (opts.limit != null && opts.limit < targets.length) {
-    targets.length = opts.limit;
-    console.log(`--limit ${opts.limit} 適用 → 生成対象: ${targets.length} 件`);
-  }
-
-  if (opts.audit) {
-    console.log("\n--audit のため生成しません。生成は --audit を外して実行 (push は --apply)。");
-    process.exit(missing.length > 0 ? 1 : 0);
-  }
-
-  if (targets.length === 0) {
-    console.log("生成対象なし。完了。");
-    return;
-  }
-
-  // AI 背景の純粋監査 (bulk = --slug なし): API を呼ばず生成予定・最大費用のみ出す (§7)。
-  if (opts.aiBackground && !opts.slugs) {
-    const { deriveOgpFromFrontmatter, parseFrontmatter } = await import(
-      "./lib/blog-thumbnail-render"
+async function main(): Promise<void> {
+  const options = parseArgs();
+  const store = createS3ImageObjectStoreFromEnv();
+  if (!store) {
+    throw new Error(
+      'blog画像の既存背景検証にはR2 S3資格情報が必要です。' +
+        '公開custom domainのHEAD metadataへはfallbackしません'
     );
-    const { resolveOgpVisual, parseOgpVisualFrontmatter, computePromptHash } = await import(
-      "./lib/blog-ogp-visual"
-    );
-    const { OGP_MODEL, OGP_PRICE_PER_IMAGE_USD, OGP_PROMPT_VERSION } = await import(
-      "./data/blog-ogp-visual-catalog"
-    );
-    let cacheHit = 0;
-    let newGen = 0;
-    const byType: Record<string, number> = {};
-    for (const slug of targets) {
-      const md = await fetchArticleMarkdown(slug);
-      if (!md) continue;
-      const visual = resolveOgpVisual(parseOgpVisualFrontmatter(md));
-      byType[visual.visualType] = (byType[visual.visualType] ?? 0) + 1;
-      const derived = deriveOgpFromFrontmatter(parseFrontmatter(md));
-      const title = derived?.title ?? slug;
-      const hash = computePromptHash({ ...visual, title });
-      if (!opts.forceBackground && (await bgCacheHit(slug, hash))) cacheHit++;
-      else newGen++;
-    }
-    const cappedNewGen = Math.min(newGen, Math.floor(opts.budgetUsd / OGP_PRICE_PER_IMAGE_USD));
-    const maxCost = cappedNewGen * OGP_PRICE_PER_IMAGE_USD;
-    console.log("\n=== AI 背景 dry-run (純粋監査・API 呼び出しなし) ===");
-    console.log(`model: ${OGP_MODEL} / promptVersion: ${OGP_PROMPT_VERSION} / 単価: $${OGP_PRICE_PER_IMAGE_USD}/枚`);
-    console.log(`対象: ${targets.length} 件 / キャッシュ命中: ${cacheHit} / 新規生成予定: ${newGen}`);
-    console.log(
-      `visualType 内訳: ${Object.entries(byType).map(([k, v]) => `${k}=${v}`).join(" / ") || "(なし)"}`,
-    );
-    console.log(
-      `budget 上限: $${opts.budgetUsd} → 予算内で生成可能: ${cappedNewGen} 件 / 最大推定費用: $${maxCost.toFixed(3)} (約 ${Math.round(maxCost * 150)}円, 為替・税別)`,
-    );
-    if (newGen > cappedNewGen) {
-      console.log(`⚠ budget $${opts.budgetUsd} では ${newGen - cappedNewGen} 件が生成対象外。--budget-usd を上げるか --limit を下げてください。`);
-    }
-    console.log("R2 へは書き込みません (--apply なし・純粋監査)。1 記事生成は --slug <slug> で。");
-    return;
   }
+  const planPath = join(PROJECT_ROOT, BLOG_IMAGE_PUBLISH_PLAN);
+  const stageRoot = join(PROJECT_ROOT, BLOG_IMAGE_STAGE_ROOT);
+  rmSync(planPath, { force: true });
+  rmSync(stageRoot, { recursive: true, force: true });
 
-  // 生成パスに入ってから render lib (satori/sharp) を読み込む
+  const { deriveOgpFromFrontmatter, parseFrontmatter } =
+    await import('./lib/blog-thumbnail-render');
   const {
-    buildElement,
-    deriveOgpFromFrontmatter,
-    loadFonts,
-    normalizeAiBackground,
-    parseFrontmatter,
-    renderToPng,
-    renderToWebP,
-  } = await import("./lib/blog-thumbnail-render");
-
-  // AI 背景の依存 (aiBackground 時のみ)
-  const ai = opts.aiBackground
-    ? {
-        ...(await import("./lib/blog-ogp-visual")),
-        ...(await import("./lib/gemini-image-client")),
-        ...(await import("./data/blog-ogp-visual-catalog")),
-        apiKey: process.env.GEMINI_API_KEY ?? process.env.GOOGLE_API_KEY ?? null,
-      }
-    : null;
-  let spentUsd = 0;
-  if (ai && !ai.apiKey) {
-    console.log("⚠ GEMINI_API_KEY 未設定。AI 背景は全件ブランド背景へフォールバックします。");
+    buildOgpPrompt,
+    computeLegacyPromptHashV1,
+    computePromptHash,
+    parseOgpVisualFrontmatter,
+    resolveOgpVisual,
+  } = await import('./lib/blog-ogp-visual');
+  const {
+    isValidVisualType,
+    OGP_MODEL,
+    OGP_PRICE_PER_IMAGE_USD,
+    OGP_PROMPT_VERSION,
+  } = await import('./data/blog-ogp-visual-catalog');
+  if (
+    options.visualTypeOverride &&
+    !isValidVisualType(options.visualTypeOverride)
+  ) {
+    throw new Error(`--visual-type が不正です: ${options.visualTypeOverride}`);
   }
 
-  console.log("\nフォント読み込み中...");
-  const fonts = loadFonts(PROJECT_ROOT);
+  const slugs = options.slugs ?? (await listAllSlugs());
+  const baseRendererHash = calculateRendererHash(
+    PROJECT_ROOT,
+    blogRendererSources('ai')
+  );
+  const brandRendererHash = calculateRendererHash(
+    PROJECT_ROOT,
+    blogRendererSources('brand')
+  );
+  const normalizerHash = calculateRendererHash(
+    PROJECT_ROOT,
+    BLOG_AI_BACKGROUND_NORMALIZER_SOURCES
+  );
+  const backgroundCache = createAiBackgroundCache({
+    projectRoot: PROJECT_ROOT,
+    store,
+  });
+  const inspector = createImageGenerationInspector(PUBLIC_URL);
+  console.log(
+    `blog画像候補=${slugs.length} renderer=${baseRendererHash.slice(0, 12)} ` +
+      `inspector=${inspector.mode}`
+  );
 
-  // --out-dir 指定時は固定ディレクトリに出す (パイロット目視・再実行で同じ場所を上書き)。
-  let stage: string;
-  if (opts.outDir) {
-    stage = resolve(PROJECT_ROOT, opts.outDir);
-    mkdirSync(stage, { recursive: true });
-  } else {
-    stage = mkdtempSync(join(tmpdir(), "blog-thumbs-"));
-  }
-  let generated = 0;
-  let pushed = 0;
-  const failed: string[] = [];
-
-  for (const slug of targets) {
-    // 1 記事の失敗 (fetch failed 等) でバッチ全体を止めない。失敗は failed に積んで継続。
-    try {
-      const md = await fetchArticleMarkdown(slug);
-      const ogp = md ? deriveOgpFromFrontmatter(parseFrontmatter(md)) : null;
-      if (!ogp) {
-        console.log(`  [skip] ${slug}: article.md / frontmatter title 取得不可`);
-        continue;
-      }
-      const data = { title: ogp.title, subtitle: ogp.subtitle ?? null, date: "", category: "BLOG" };
-      const dir = join(stage, slug);
-      mkdirSync(join(dir, "ogp"), { recursive: true });
-      const lightOut = join(dir, "thumbnail-light.webp");
-      const darkOut = join(dir, "thumbnail-dark.webp");
-      const pngOut = join(dir, "ogp", "ogp.png");
-      const bgOut = join(dir, "ogp", "background.jpg");
-      const ogpJsonOut = join(dir, "ogp", "ogp.json");
-
-      // --- AI 背景解決 (aiBackground 時のみ。失敗・予算切れ・key 無しはブランド背景へ) ---
-      let bgLight: string | undefined;
-      let bgDark: string | undefined;
-      let bgBuffer: Buffer | undefined;
-      let bgMeta: Record<string, unknown> | undefined;
-      if (ai) {
-        const visual = ai.resolveOgpVisual({
-          ...ai.parseOgpVisualFrontmatter(md ?? ""),
-          ...(opts.visualTypeOverride ? { ogpVisualType: opts.visualTypeOverride } : {}),
-        });
-        const hash = ai.computePromptHash({ ...visual, title: ogp.title });
-        if (!opts.forceBackground && (await bgCacheHit(slug, hash))) {
-          console.log(`  [cache] ${slug} (背景 hash 一致・再生成不要)`);
-          continue;
-        }
-        const meta = {
-          provider: "google",
-          model: ai.OGP_MODEL,
-          visualType: visual.visualType,
-          motif: visual.motif,
-          promptVersion: ai.OGP_PROMPT_VERSION,
-          promptHash: hash,
-        };
-        if (ai.apiKey && spentUsd + ai.OGP_PRICE_PER_IMAGE_USD <= opts.budgetUsd) {
-          try {
-            const img = await ai.generateBackgroundImage({
-              prompt: ai.buildOgpPrompt({ ...visual, title: ogp.title }),
-              apiKey: ai.apiKey,
-              maxAttempts: opts.maxAttempts,
-              onAttempt: (i) => process.stdout.write(` [ai a${i.attempt}:${i.classification}]`),
-            });
-            spentUsd += ai.OGP_PRICE_PER_IMAGE_USD;
-            bgBuffer = img.buffer;
-            bgLight = await normalizeAiBackground(img.buffer, false);
-            bgDark = await normalizeAiBackground(img.buffer, true);
-            bgMeta = { ...meta, generatedAt: new Date().toISOString(), source: "ai" };
-          } catch (e) {
-            const cls = e instanceof ai.GeminiImageError ? e.classification : "error";
-            console.log(`\n  [ai-fallback] ${slug}: ${cls} → ブランド背景`);
-            bgMeta = { visualType: visual.visualType, motif: visual.motif, source: "brand-fallback" };
-          }
-        } else {
-          const reason = !ai.apiKey ? "GEMINI_API_KEY 無し" : `budget $${opts.budgetUsd} 到達`;
-          console.log(`  [ai-skip] ${slug}: ${reason} → ブランド背景`);
-          bgMeta = { visualType: visual.visualType, motif: visual.motif, source: "brand-fallback" };
-        }
-      }
-
-      process.stdout.write(`  ${slug} ... 生成`);
-      await renderToWebP(buildElement(data, false, { background: true, backgroundImage: bgLight }), fonts, lightOut);
-      await renderToWebP(buildElement(data, true, { background: true, backgroundImage: bgDark }), fonts, darkOut);
-      await renderToPng(buildElement(data, false, { background: true, backgroundImage: bgLight }), fonts, pngOut);
-      if (bgBuffer && bgLight) {
-        // AI 背景 (light 正規化版) を派生成果物として保存 (satori 互換の JPEG)
-        writeFileSync(bgOut, Buffer.from(bgLight.replace(/^data:image\/jpeg;base64,/, ""), "base64"));
-      }
-      writeFileSync(
-        ogpJsonOut,
-        JSON.stringify(
-          { title: ogp.title, subtitle: ogp.subtitle ?? null, ...(bgMeta ? { background: bgMeta } : {}) },
-          null,
-          2,
-        ) + "\n",
-        "utf-8",
+  const prepared = await pMap(
+    slugs,
+    async (slug): Promise<PreparedBlogImage> => {
+      const response = await fetchRequired(
+        `${PUBLIC_URL}/app/blog/${slug}/article.md`
       );
-      generated++;
+      const markdown = await response.text();
+      const derived = deriveOgpFromFrontmatter(parseFrontmatter(markdown));
+      if (!derived)
+        throw new Error(`${slug}: article frontmatter title がありません`);
+      const data: BlogImageData = {
+        title: derived.title,
+        subtitle: derived.subtitle ?? null,
+      };
+      const visual = resolveOgpVisual({
+        ...parseOgpVisualFrontmatter(markdown),
+        ...(options.visualTypeOverride
+          ? { ogpVisualType: options.visualTypeOverride }
+          : {}),
+      });
+      const prompt = buildOgpPrompt({ ...visual, title: data.title });
+      const ai: AiDescriptor = {
+        prompt,
+        promptHash: computePromptHash({ ...visual, title: data.title }),
+        legacyPromptHash: computeLegacyPromptHashV1({
+          ...visual,
+          title: data.title,
+        }),
+        model: OGP_MODEL,
+        promptVersion: OGP_PROMPT_VERSION,
+        visualType: visual.visualType,
+        motif: visual.motif,
+      };
+      const cacheFingerprint = computeAiBackgroundCacheFingerprint({
+        prompt,
+        promptHash: ai.promptHash,
+        model: ai.model,
+        promptVersion: ai.promptVersion,
+        normalizerHash,
+      });
+      const published = await readPublishedBackgroundState({
+        store,
+        slug,
+        descriptor: ai,
+      });
+      const remoteWasAi = published.source === 'ai';
+      const publishedReusable = published.reusable;
+      const cached =
+        !publishedReusable && (options.aiBackground || remoteWasAi)
+          ? await backgroundCache.read(cacheFingerprint)
+          : null;
+      const reusableSha = publishedReusable?.sha256 ?? cached?.sha256 ?? null;
+      const reusableLocation = publishedReusable
+        ? 'published'
+        : cached
+          ? 'cache'
+          : null;
 
-      if (opts.apply) {
-        process.stdout.write(" → push");
-        putToR2(`app/blog/${slug}/thumbnail-light.webp`, lightOut, "image/webp");
-        putToR2(`app/blog/${slug}/thumbnail-dark.webp`, darkOut, "image/webp");
-        putToR2(`app/blog/${slug}/ogp/ogp.png`, pngOut, "image/png");
-        putToR2(`app/blog/${slug}/ogp/ogp.json`, ogpJsonOut, "application/json");
-        if (bgBuffer) putToR2(`app/blog/${slug}/ogp/background.jpg`, bgOut, "image/jpeg");
-        pushed++;
-        console.log(" ✓");
-      } else {
-        console.log(` (dry-run, /tmp 出力のみ: ${dir})`);
+      if (!options.aiBackground && remoteWasAi && !reusableSha) {
+        throw new Error(
+          `${slug}: AI背景のpromptまたは画像が陳腐化しています。` +
+            '--ai-background --slug で明示再生成してください'
+        );
       }
-    } catch (err) {
-      failed.push(slug);
-      console.log(`\n  [fail] ${slug}: ${String((err as Error)?.message ?? err).slice(0, 120)}`);
+      const needsAiGeneration = options.aiBackground && !reusableSha;
+      const background: ResolvedAiBackground | null =
+        reusableSha && reusableLocation
+          ? {
+              location: reusableLocation,
+              cacheFingerprint,
+              metadata: makeAiMetadata(ai, reusableSha),
+            }
+          : null;
+      const plan = needsAiGeneration
+        ? null
+        : createBlogImagePlan({
+            slug,
+            data,
+            background: background
+              ? {
+                  source: 'ai',
+                  promptHash: background.metadata.promptHash,
+                  sha256: background.metadata.sha256,
+                }
+              : { source: 'brand' },
+            rendererHash: background ? baseRendererHash : brandRendererHash,
+          });
+      const status = plan ? await inspector.inspect(plan) : null;
+      if (status?.reason === 'probe-error') {
+        throw new Error(`${slug}: R2 freshness probe に失敗しました`);
+      }
+      return {
+        slug,
+        data,
+        ai,
+        plan,
+        status,
+        background,
+        needsAiGeneration,
+      };
+    }
+  );
+
+  const changed = prepared.filter(
+    (item) => item.needsAiGeneration || options.force || !item.status?.isCurrent
+  );
+  if (options.audit || (options.aiBackground && !options.slugs)) {
+    console.log(
+      `blog画像監査: 全${prepared.length}件 / 更新必要${changed.length}件 / ` +
+        `AI背景生成必要${changed.filter((item) => item.needsAiGeneration).length}件`
+    );
+    for (const item of changed.slice(0, 30)) {
+      console.log(
+        `  [${item.needsAiGeneration ? 'ai-background-required' : (item.status?.reason ?? 'changed')}] ${item.slug}`
+      );
+    }
+    if (options.audit && changed.length > 0) process.exitCode = 1;
+    return;
+  }
+
+  const { targets, remaining } = selectChangedImageBatch(changed, options);
+  if (targets.length === 0) {
+    const emptyPlan = createImageGenerationPublishPlan({
+      generator: BLOG_IMAGE_GENERATOR_SPEC.generator,
+      stageRoot: BLOG_IMAGE_STAGE_ROOT,
+      items: [],
+    });
+    writeFileSync(planPath, `${JSON.stringify(emptyPlan, null, 2)}\n`);
+    console.log(
+      `blog画像: fingerprint変更なし / plan=${BLOG_IMAGE_PUBLISH_PLAN}`
+    );
+    return;
+  }
+  if (remaining > 0) {
+    console.log(`blog画像: 今回${targets.length}件 / 次回以降${remaining}件`);
+  }
+
+  const aiTargets = targets.filter((item) => item.needsAiGeneration);
+  const estimatedCost = aiTargets.length * OGP_PRICE_PER_IMAGE_USD;
+  if (estimatedCost > options.budgetUsd) {
+    throw new Error(
+      `AI背景${aiTargets.length}件の推定費用$${estimatedCost.toFixed(3)}が` +
+        `予算$${options.budgetUsd.toFixed(3)}を超えています。部分生成せず中止します`
+    );
+  }
+  const aiApiKey =
+    process.env.GEMINI_API_KEY ?? process.env.GOOGLE_API_KEY ?? null;
+  if (aiTargets.length > 0 && !aiApiKey) {
+    throw new Error('AI背景生成には GEMINI_API_KEY が必要です');
+  }
+
+  if (aiTargets.length > 0) {
+    const { generateBackgroundImage } =
+      await import('./lib/gemini-image-client');
+    for (const item of aiTargets) {
+      const cacheFingerprint = computeAiBackgroundCacheFingerprint({
+        prompt: item.ai.prompt,
+        promptHash: item.ai.promptHash,
+        model: item.ai.model,
+        promptVersion: item.ai.promptVersion,
+        normalizerHash,
+      });
+      const cached = await resolveCachedAiBackground({
+        cache: backgroundCache,
+        fingerprint: cacheFingerprint,
+        generate: async () =>
+          (
+            await generateBackgroundImage({
+              prompt: item.ai.prompt,
+              apiKey: aiApiKey!,
+              maxAttempts: options.maxAttempts,
+            })
+          ).buffer,
+        normalize: (input) => normalizeAiBackgroundBuffer(input, false),
+      });
+      item.background = {
+        location: 'cache',
+        cacheFingerprint,
+        metadata: makeAiMetadata(item.ai, cached.sha256),
+      };
+      item.plan = createBlogImagePlan({
+        slug: item.slug,
+        data: item.data,
+        background: {
+          source: 'ai',
+          promptHash: item.ai.promptHash,
+          sha256: cached.sha256,
+        },
+        rendererHash: baseRendererHash,
+      });
+      item.status = await inspector.inspect(item.plan);
+      if (item.status.reason === 'probe-error') {
+        throw new Error(`${item.slug}: AI生成後のR2 probeに失敗しました`);
+      }
     }
   }
 
-  console.log(`\n生成: ${generated} 件 / push: ${pushed} 件 / 失敗: ${failed.length} 件 (stage: ${stage})`);
-  if (failed.length > 0) {
-    console.log(`失敗 slug (再実行対象): ${failed.join(",")}`);
+  const pilotRoot = options.outDir
+    ? resolve(PROJECT_ROOT, options.outDir)
+    : null;
+  if (pilotRoot) rmSync(pilotRoot, { recursive: true, force: true });
+  const { loadFonts } = await import('./lib/blog-thumbnail-render');
+  const { renderBlogImageBundle } = await import('./lib/blog-image-render');
+  const fonts = loadFonts(PROJECT_ROOT);
+  const failures: Array<{ slug: string; error: unknown }> = [];
+  const generatedManifests = new Map<
+    string,
+    ReturnType<typeof writeBlogImageManifest>
+  >();
+
+  await pMap(targets, async (item) => {
+    try {
+      if (!item.plan || !item.status) {
+        throw new Error('generation plan が確定していません');
+      }
+      const files = assetFiles(item.plan, pilotRoot, item.slug);
+      const keys = blogImageKeys(item.slug);
+      const metadata: BlogImageMetadata = {
+        title: item.data.title,
+        subtitle: item.data.subtitle,
+        background: item.background?.metadata ?? { source: 'brand' },
+      };
+      const aiBackground = item.background
+        ? await loadAiBackground({
+            item,
+            store,
+            cache: backgroundCache,
+          })
+        : null;
+      await renderBlogImageBundle({
+        data: item.data,
+        fonts,
+        outputs: {
+          light: files.get(keys.light)!,
+          dark: files.get(keys.dark)!,
+          ogp: files.get(keys.ogp)!,
+          ...(item.background
+            ? { background: files.get(keys.background)! }
+            : {}),
+        },
+        ...(aiBackground
+          ? {
+              aiBackground: {
+                buffer: aiBackground,
+                sha256: item.background!.metadata.sha256,
+              },
+            }
+          : {}),
+      });
+      if (pilotRoot) {
+        const metadataPath = join(pilotRoot, item.slug, 'ogp/ogp.json');
+        mkdirSync(join(metadataPath, '..'), { recursive: true });
+        writeFileSync(metadataPath, `${JSON.stringify(metadata, null, 2)}\n`);
+      } else {
+        const manifest = writeBlogImageManifest({
+          projectRoot: PROJECT_ROOT,
+          plan: item.plan,
+          assetFiles: files,
+          metadata,
+        });
+        generatedManifests.set(item.slug, manifest);
+      }
+      console.log(`  [generated] ${item.slug}`);
+    } catch (error) {
+      failures.push({ slug: item.slug, error });
+    }
+  });
+  if (failures.length > 0) {
+    throw new Error(
+      `blog画像生成失敗: ${failures
+        .map(({ slug, error }) => `${slug}=${String(error)}`)
+        .join(' / ')}`
+    );
   }
 
-  if (opts.apply && pushed > 0) {
-    console.log("\ncloud 反映確認 (公開URL、CDN キャッシュで遅延の可能性あり)...");
-    for (const slug of targets) {
-      const ok = await cloudThumbnailOk(slug);
-      console.log(`  ${ok ? "200 ✓" : "まだ404 (要 CDN purge)"}  ${slug}`);
-    }
-  } else if (!opts.apply) {
-    console.log("\n--apply を付けると cloud R2 へ push します。");
+  if (pilotRoot) {
+    console.log(`blog画像パイロット: ${targets.length}件 / ${options.outDir}`);
+    return;
   }
+  const publishPlan = createImageGenerationPublishPlan({
+    generator: BLOG_IMAGE_GENERATOR_SPEC.generator,
+    stageRoot: BLOG_IMAGE_STAGE_ROOT,
+    items: targets.map((item) => ({
+      plan: item.plan!,
+      manifest: generatedManifests.get(item.slug)!,
+      expectedRemoteFingerprint: item.status!.remoteFingerprint,
+      expectedRemoteManifestSha256: item.status!.remoteManifestSha256,
+    })),
+  });
+  writeFileSync(planPath, `${JSON.stringify(publishPlan, null, 2)}\n`);
+  console.log(
+    `blog画像生成: ${targets.length}件 / AI費用見込=$${estimatedCost.toFixed(3)} / ` +
+      `plan=${BLOG_IMAGE_PUBLISH_PLAN}`
+  );
 }
 
-main().catch((err) => {
-  console.error("Fatal:", err);
+main().catch((error) => {
+  console.error(
+    `Fatal: ${error instanceof Error ? error.message : String(error)}`
+  );
   process.exit(1);
 });

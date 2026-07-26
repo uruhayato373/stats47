@@ -49,6 +49,30 @@ test("resolveVertical: ジャンル/名前 → 10軸", () => {
   assert.equal(resolveVertical({ name: "謎のサービス", genre: "その他" }, curated), null);
 });
 
+// 2026-07-27 実測: 「置くだけ簡単Wi-Fi【SoftBank Air】」が keyword "wifi" に一致せず
+// pending-vertical のまま確定EPC 評価から漏れていた。大文字小文字・全角・ハイフン差を吸収する。
+test("resolveVertical: 表記ゆれ (大文字小文字/全角/ハイフン) を吸収する", () => {
+  for (const name of ["置くだけ簡単Wi-Fi", "WIFI ルーター", "Ｗｉ－Ｆｉ 契約"]) {
+    assert.equal(resolveVertical({ name, genre: name }, curated), "energy", name);
+  }
+});
+
+// 空白と「・」は除去してはならない。除去すると「郷土 地域」が housing の "土地" に誤マッチする。
+test("resolveVertical: 空白をまたぐ誤マッチを作らない", () => {
+  assert.equal(resolveVertical({ name: "郷土 地域の統計", genre: "その他" }, curated), null);
+});
+
+// カタカナ長音「ー」(U+30FC) をハイフンとして削らないこと (「スカパー」等の語形を壊さない)。
+test("resolveVertical: 長音符を削らない", () => {
+  assert.equal(resolveVertical({ name: "モバイル回線", genre: "モバイル" }, curated), "energy");
+});
+
+test("isBlocked: 表記ゆれを吸収して blocklist に当てる", () => {
+  assert.equal(isBlocked({ name: "【A8.net】成果反映用プログラム", genre: "テスト" }, curated), true);
+  assert.equal(isBlocked({ name: "MLM 勧誘", genre: "mlm" }, curated), true);
+  assert.equal(isBlocked({ name: "都道府県統計データ", genre: "統計" }, curated), false);
+});
+
 test("isDuplicate: a8mat / title 一致で重複", () => {
   const existing = [
     { title: "イオン九州オンライン", htmlContent: "https://px.a8.net/svt/ejp?a8mat=4AZA46+97MGQA+5I2U+60H7L" },
