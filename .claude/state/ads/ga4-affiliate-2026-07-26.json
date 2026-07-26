@@ -1,0 +1,45 @@
+{
+  "generatedAt": "2026-07-26T21:34:14.189Z",
+  "date": "2026-07-26",
+  "days": 7,
+  "dimensions": [
+    "affiliate_vertical",
+    "affiliate_category",
+    "link_position",
+    "experiment_id",
+    "variant_id",
+    "creative_size"
+  ],
+  "hasVerticalBreakdown": true,
+  "hasCategoryBreakdown": true,
+  "hasVariantBreakdown": true,
+  "totals": {
+    "impressions": 3346,
+    "clicks": 0,
+    "ctr": 0
+  },
+  "rows": [
+    {
+      "affiliate_vertical": "(not set)",
+      "affiliate_category": "(not set)",
+      "link_position": "(not set)",
+      "experiment_id": "(not set)",
+      "variant_id": "(not set)",
+      "creative_size": "(not set)",
+      "impressions": 3012,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "affiliate_vertical": "(unset)",
+      "affiliate_category": "(unset)",
+      "link_position": "(unset)",
+      "experiment_id": "(unset)",
+      "variant_id": "(unset)",
+      "creative_size": "(unset)",
+      "impressions": 334,
+      "clicks": 0,
+      "ctr": 0
+    }
+  ]
+}
