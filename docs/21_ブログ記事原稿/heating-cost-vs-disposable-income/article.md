@@ -41,8 +41,7 @@ ogImage: /blog/heating-cost-vs-disposable-income/og.png
 
 ![暖房関連支出合計 上位5・下位5](data/heating-cost-combined-ranking.svg)
 
-<source-link href="/ranking/electricity-consumption-expenditure">電気代消費支出額ランキングをもっと見る</source-link>
-<source-link href="/ranking/city-gas-consumption-expenditure">都市ガス消費支出額ランキングをもっと見る</source-link>
+あわせて見る: [電気代消費支出額ランキング](/ranking/electricity-consumption-expenditure)・[都市ガス消費支出額ランキング](/ranking/city-gas-consumption-expenditure)
 
 灯油・電気代・都市ガス代の年間消費支出額を単純に合算すると、1位は秋田県の260,915円、2位は青森県の256,433円、3位は富山県の251,607円でした。最下位は宮崎県の135,000円で、4位鹿児島県、5位熊本県と九州勢が下位に並びます。
 

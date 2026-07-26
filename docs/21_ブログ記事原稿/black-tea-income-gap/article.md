@@ -50,9 +50,7 @@ ogImage: /blog/black-tea-income-gap/og.png
 > [!WARNING]
 > 近畿の県が紅茶・コーヒーともに上位に入りやすいことはデータから確認できますが、その理由を喫茶文化や洋菓子文化と断定するのは早計です。[仮説] 近畿の都市部は喫茶店・カフェの店舗密度が高く、それが家庭での紅茶購入にもつながっている可能性がありますが、検証には都道府県別の喫茶店数データとの突き合わせが必要です。
 
-<source-link href="/ranking/black-tea-consumption-expenditure">紅茶消費支出額ランキングをもっと見る</source-link>
-<source-link href="/ranking/green-tea-consumption-expenditure">緑茶消費支出額ランキングをもっと見る</source-link>
-<source-link href="/ranking/coffee-consumption-expenditure">コーヒー消費支出額ランキングをもっと見る</source-link>
+あわせて見る: [緑茶消費支出額ランキング](/ranking/green-tea-consumption-expenditure)・[コーヒー消費支出額ランキング](/ranking/coffee-consumption-expenditure)
 
 ## 消費量ランキングとの違い — 大量消費の宮城、少量高単価の和歌山
 
