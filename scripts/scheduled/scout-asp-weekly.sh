@@ -58,18 +58,19 @@ run_pipeline() {
     || echo "!! append dry-run 失敗 (継続)"
 
   echo "--- catalog サマリ ---"
+  # パスは argv で渡す (process.env を使うと env registry guard の
+  # ENV_UNREGISTERED に引っかかる。使い捨てのパス受け渡しに env は要らない)
   node -e '
-    const c = require(process.env.PROJECT_DIR + "/.claude/state/ads/a8-catalog.json");
+    const c = require(process.argv[1] + "/.claude/state/ads/a8-catalog.json");
     const by = {};
     for (const e of Object.values(c.entries)) by[e.status] = (by[e.status] || 0) + 1;
     console.log("catalog:", JSON.stringify(by));
     const pv = Object.values(c.entries).filter((e) => e.status === "pending-vertical");
     if (pv.length) console.log("pending-vertical (agent の意味判断待ち):", pv.length, "件");
-  ' || echo "!! catalog サマリ失敗"
+  ' "$PROJECT_DIR" || echo "!! catalog サマリ失敗"
 
   echo "次アクション: register 可能分があれば affiliate-manager が append --apply → develop push"
   echo "  (develop push = R2 公開 = outward-facing なので人間の承認が要る)"
 }
 
-export PROJECT_DIR
 log_run scout-asp-weekly run_pipeline
