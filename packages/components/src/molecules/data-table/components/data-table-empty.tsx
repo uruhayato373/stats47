@@ -1,5 +1,7 @@
 "use client";
 
+import { TableCell, TableRow } from "../../../atoms/ui/table";
+
 interface DataTableEmptyProps {
     message: string;
     colSpan?: number;
@@ -11,18 +13,20 @@ interface DataTableEmptyProps {
 export function DataTableEmpty({ message, colSpan }: DataTableEmptyProps) {
     if (colSpan !== undefined) {
         return (
-            <tr className="border-b border-border transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
-                <td
+            <TableRow>
+                <TableCell
                     colSpan={colSpan}
-                    className="h-10 px-4 py-3 text-sm align-middle [&:has([role=checkbox])]:pr-0 text-center"
+                    className="text-center text-muted-foreground"
                 >
                     {message}
-                </td>
-            </tr>
+                </TableCell>
+            </TableRow>
         );
     }
 
     return (
-        <div className="text-center py-8 text-muted-foreground">{message}</div>
+        <div className="py-8 text-center text-[13px] text-muted-foreground">
+            {message}
+        </div>
     );
 }

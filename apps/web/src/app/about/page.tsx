@@ -24,12 +24,15 @@ import { ExternalLink, Instagram, MapPin, Youtube, Briefcase, Target } from "luc
 import { PageShell, PageHeader } from "@/components/layout";
 import { SurfaceCard } from "@/components/surface";
 
+
 import { getRequiredBaseUrl } from "@/lib/env";
 import {
   buildOperatorPersonSchema,
   getOperatorPersonId,
 } from "@/lib/structured-data/person";
 import { buildOrganizationSchema } from "@/lib/structured-data/scripts";
+
+import { OPERATOR_PROFILE } from "@/config/operator-profile";
 
 import type { Metadata } from "next";
 
@@ -52,10 +55,6 @@ function AboutSection({ title, children }: AboutSectionProps) {
 const EXTERNAL_LINKS = {
   eStat: "https://www.e-stat.go.jp/",
   contactForm: "https://forms.gle/ZYi7Rmk4Kt9qZCXB8",
-  noteProfile: "https://note.com/stats47",
-  instagram: "https://www.instagram.com/stats47jp/",
-  youtube: "https://www.youtube.com/@stats47jp",
-  x: "https://x.com/stats47jp",
 } as const;
 
 const TEXT_STYLE = "text-xs leading-relaxed md:text-sm";
@@ -92,8 +91,8 @@ export default function AboutPage() {
     mainEntity: {
       "@type": "Person",
       "@id": getOperatorPersonId(baseUrl),
-      name: "KAZU",
-      url: `${baseUrl}/about`,
+      name: OPERATOR_PROFILE.name,
+      url: `${baseUrl}${OPERATOR_PROFILE.links.about}`,
     },
     about: {
       "@type": "Organization",
@@ -129,14 +128,16 @@ export default function AboutPage() {
         <AboutSection title="運営者プロフィール">
           <div className="flex items-center gap-4 mb-4">
             <img
-              src="/images/stats47-author-avatar-256.webp"
-              alt=""
+              src={OPERATOR_PROFILE.avatarSrc}
+              alt={OPERATOR_PROFILE.avatarAlt}
               width={56}
               height={56}
               className="w-14 h-14 rounded-full object-cover flex-shrink-0"
             />
             <div>
-              <p className="font-semibold text-base">KAZU</p>
+              <p className="font-semibold text-base">
+                {OPERATOR_PROFILE.name}
+              </p>
               <p className="text-xs text-muted-foreground">
                 元県庁職員（約 20 年）→ AI 独学・転職 → 独立 / データ可視化
               </p>
@@ -172,28 +173,28 @@ export default function AboutPage() {
           {/* SNS / 外部プロフィール */}
           <Separator className="my-4" />
           <div className="flex flex-col gap-2">
-            <a href={EXTERNAL_LINKS.noteProfile} target="_blank" rel="noopener noreferrer">
+            <a href={OPERATOR_PROFILE.links.note} target="_blank" rel="noopener noreferrer">
               <Button variant="outline" size="sm" className="w-full gap-2">
                 <span className="font-bold text-[#147d6f] dark:text-[#65d7c5]">note</span>
                 <span className="text-xs">統計の読み方を解説</span>
                 <ExternalLink className="h-3 w-3 ml-auto" />
               </Button>
             </a>
-            <a href={EXTERNAL_LINKS.x} target="_blank" rel="noopener noreferrer">
+            <a href={OPERATOR_PROFILE.links.x} target="_blank" rel="noopener noreferrer">
               <Button variant="outline" size="sm" className="w-full gap-2">
                 <span className="font-bold">X</span>
                 <span className="text-xs">最新ランキングを投稿</span>
                 <ExternalLink className="h-3 w-3 ml-auto" />
               </Button>
             </a>
-            <a href={EXTERNAL_LINKS.instagram} target="_blank" rel="noopener noreferrer">
+            <a href={OPERATOR_PROFILE.links.instagram} target="_blank" rel="noopener noreferrer">
               <Button variant="outline" size="sm" className="w-full gap-2">
                 <Instagram className="h-3 w-3" />
                 <span className="text-xs">インフォグラフィック</span>
                 <ExternalLink className="h-3 w-3 ml-auto" />
               </Button>
             </a>
-            <a href={EXTERNAL_LINKS.youtube} target="_blank" rel="noopener noreferrer">
+            <a href={OPERATOR_PROFILE.links.youtube} target="_blank" rel="noopener noreferrer">
               <Button variant="outline" size="sm" className="w-full gap-2">
                 <Youtube className="h-3 w-3" />
                 <span className="text-xs">ランキング動画</span>
@@ -299,7 +300,7 @@ export default function AboutPage() {
           </div>
           <Separator className="my-4" />
           <p className="text-xs text-muted-foreground">
-            サービス開始: 2024 年 10 月 / 運営: KAZU（個人） / 所在: 東京都
+            サービス開始: 2024 年 10 月 / 運営: {OPERATOR_PROFILE.name}（個人） / 所在: 東京都
           </p>
         </AboutSection>
       </div>

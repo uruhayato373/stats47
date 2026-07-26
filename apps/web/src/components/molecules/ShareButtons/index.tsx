@@ -47,10 +47,7 @@ function ShareButtonIcon({ name, isProminent }: ShareButtonIconProps) {
         return <span className={`font-bold ${textSize} leading-none`}>LINE</span>;
       case "はてなブックマーク":
         return (
-          <span
-            className={`font-bold ${textSize} leading-none`}
-            style={{ fontFamily: "Verdana, sans-serif" }}
-          >
+          <span className={`font-bold ${textSize} leading-none`}>
             B!
           </span>
         );

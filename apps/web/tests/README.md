@@ -26,7 +26,7 @@ npm run test:coverage # カバレッジ付き実行
 
 ## 2. E2E テスト（Playwright）
 
-Next.js 開発サーバーを起動し、実際のブラウザでページ遷移・操作・表示を検証します。
+Next.js の本番ビルドを起動し、実際のブラウザでページ遷移・操作・表示を検証します。
 **ローカル実行専用**（CI では実行しない）。ブラウザは Chromium のみ。
 
 ```bash
@@ -36,7 +36,8 @@ npm run test:e2e:headed # ブラウザ表示あり
 ```
 
 - 設定: `playwright.config.ts`
-- 実行前に `npm run dev` で開発サーバーが起動している必要あり（自動起動もされる）
+- サーバー未起動時は `npm run build` と `next start` を自動実行
+- R2 snapshot を読む重いページの安定性を優先し、1 worker で直列実行
 
 ```
 tests/e2e/

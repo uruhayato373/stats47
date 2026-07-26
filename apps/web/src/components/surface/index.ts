@@ -6,5 +6,7 @@ export {
   SurfaceCard,
   SurfaceLinkCard,
   SurfaceSection,
+  PORTAL_CARD_ASPECT_CLASS,
   getSurfaceCardClassName,
-} from "./SurfaceCard";
+} from './SurfaceCard';
+export { HorizontalCardCarousel } from './HorizontalCardCarousel';

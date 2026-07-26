@@ -3,6 +3,7 @@
 import { flexRender, Header } from "@tanstack/react-table";
 import { ArrowDown, ArrowUp, ArrowUpDown } from "lucide-react";
 import { Button } from "../../../atoms/ui/button";
+import { TableHead } from "../../../atoms/ui/table";
 
 interface DataTableHeaderCellProps<TData, TValue> {
     header: Header<TData, TValue>;
@@ -24,36 +25,33 @@ export function DataTableHeaderCell<TData, TValue>({
 
     if (header.isPlaceholder) {
         return (
-            <th
+            <TableHead
                 scope="col"
                 style={{ width, minWidth }}
-                className="h-10 px-4 py-2 text-sm text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0"
             />
         );
     }
 
     if (!canSort) {
         return (
-            <th
+            <TableHead
                 scope="col"
                 style={{ width, minWidth }}
-                className="h-10 px-4 py-2 text-sm text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0"
             >
                 {flexRender(header.column.columnDef.header, header.getContext())}
-            </th>
+            </TableHead>
         );
     }
 
     return (
-        <th
+        <TableHead
             scope="col"
             style={{ width, minWidth }}
-            className="h-10 px-3 py-2 text-sm text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0"
         >
             <Button
                 variant="ghost"
                 size="sm"
-                className="-ml-3 h-8 text-xs data-[state=open]:bg-accent"
+                className="-ml-2 h-6 px-2 text-xs data-[state=open]:bg-accent"
                 onClick={() => {
                     const currentSort = header.column.getIsSorted();
                     if (currentSort === false) {
@@ -67,13 +65,13 @@ export function DataTableHeaderCell<TData, TValue>({
             >
                 {flexRender(header.column.columnDef.header, header.getContext())}
                 {sortDirection === "asc" ? (
-                    <ArrowUp className="ml-2 h-3 w-3" />
+                    <ArrowUp className="ml-1.5 size-3" />
                 ) : sortDirection === "desc" ? (
-                    <ArrowDown className="ml-2 h-3 w-3" />
+                    <ArrowDown className="ml-1.5 size-3" />
                 ) : (
-                    <ArrowUpDown className="ml-2 h-3 w-3" />
+                    <ArrowUpDown className="ml-1.5 size-3" />
                 )}
             </Button>
-        </th>
+        </TableHead>
     );
 }

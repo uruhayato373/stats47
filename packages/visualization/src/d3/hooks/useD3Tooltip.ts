@@ -98,7 +98,7 @@ export function createTooltipContent(params: {
       ${year ? `<div style="font-size: 0.6875rem; color: hsl(var(--muted-foreground));">${year}</div>` : ""}
       ${metricTitle ? `<div style="font-size: 0.6875rem; font-weight: 500;">${metricTitle}</div>` : ""}
       <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 0.5rem; margin-top: 0.125rem;">
-        <span style="font-family: ui-monospace, monospace; font-weight: 600; font-variant-numeric: tabular-nums; font-size: 0.8125rem;">
+        <span style="font-family: 'Hiragino Kaku Gothic ProN', 'Hiragino Kaku Gothic Pro', Meiryo, 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 600; font-variant-numeric: tabular-nums; font-size: 0.8125rem;">
           ${formattedValue}
         </span>
         <span style="font-size: 0.6875rem; color: hsl(var(--muted-foreground));">
@@ -134,7 +134,7 @@ export function createStackedTooltipContent(params: {
       <div style="display: flex; align-items: center; gap: 0.375rem; padding: 0.0625rem 0;">
         <span style="display: inline-block; width: 7px; height: 7px; border-radius: 50%; background-color: ${item.color}; flex-shrink: 0;"></span>
         <span style="flex: 1; font-size: 0.6875rem;">${item.name}</span>
-        <span style="font-family: ui-monospace, monospace; font-weight: 600; font-variant-numeric: tabular-nums; font-size: 0.75rem;">
+        <span style="font-family: 'Hiragino Kaku Gothic ProN', 'Hiragino Kaku Gothic Pro', Meiryo, 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 600; font-variant-numeric: tabular-nums; font-size: 0.75rem;">
           ${formatter(item.value!)}
         </span>
         <span style="font-size: 0.625rem; color: hsl(var(--muted-foreground));">${item.unit ?? unit}</span>

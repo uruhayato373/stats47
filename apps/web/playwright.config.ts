@@ -7,7 +7,11 @@ import { defineConfig, devices } from "@playwright/test";
  */
 export default defineConfig({
   testDir: "./tests/e2e",
-  fullyParallel: true,
+  // Next.js の開発サーバーは R2 snapshot を読む重いページを同時コンパイルすると
+  // Web Streams の内部エラーで応答を中断するため、ローカル E2E は直列で実行する。
+  fullyParallel: false,
+  workers: 1,
+  timeout: 90_000,
   retries: 0,
 
   reporter: [
@@ -16,7 +20,7 @@ export default defineConfig({
   ],
 
   use: {
-    baseURL: process.env.PLAYWRIGHT_TEST_BASE_URL || "http://localhost:3000",
+    baseURL: process.env.PLAYWRIGHT_TEST_BASE_URL || "http://localhost:3100",
     trace: "on-first-retry",
     screenshot: "only-on-failure",
   },
@@ -30,9 +34,9 @@ export default defineConfig({
   ],
 
   webServer: {
-    command: "npm run dev",
-    url: "http://localhost:3000",
+    command: "npm run workers:clean && npm run build && npx next start --port 3100",
+    url: "http://localhost:3100",
     reuseExistingServer: true,
-    timeout: 120_000,
+    timeout: 900_000,
   },
 });

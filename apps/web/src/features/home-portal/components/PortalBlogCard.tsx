@@ -1,23 +1,26 @@
 "use client";
 
-import { ThemeAwareImage } from "@/components/atoms/ThemeAwareImage";
-import { SurfaceLinkCard } from "@/components/surface";
+import { ArrowRight } from "lucide-react";
+
+import {
+  PORTAL_CARD_ASPECT_CLASS,
+  SurfaceLinkCard,
+} from "@/components/surface";
 
 import { trackNavClick } from "@/lib/analytics/events";
 
 interface PortalBlogCardProps {
   slug: string;
   title: string;
-  /** R2 公開 URL のベース (thumbnail 解決用)。 */
-  r2Url: string;
+  description?: string | null;
 }
 
 /**
- * 「統計を読み解く」の blog カード。画像 + タイトル (DOM text) の full-card link。
+ * 「統計を読み解く」の高密度 blog カード。タイトルと要約の full-card link。
  * クリックで nav_click (surface=home_blog) を送る (analytics 失敗で遷移を止めない)。
- * ランキングカードと同じ 1200:630 の画像比率・metadata hierarchy に揃える。
+ * OGP画像は外部共有用に維持し、home一覧は画像へ依存しない。
  */
-export function PortalBlogCard({ slug, title, r2Url }: PortalBlogCardProps) {
+export function PortalBlogCard({ slug, title, description }: PortalBlogCardProps) {
   const href = `/blog/${slug}`;
   return (
     <SurfaceLinkCard
@@ -29,21 +32,18 @@ export function PortalBlogCard({ slug, title, r2Url }: PortalBlogCardProps) {
           // analytics 失敗で遷移を止めない
         }
       }}
-      className="group block overflow-hidden p-0"
+      className={`${PORTAL_CARD_ASPECT_CLASS} group flex flex-col overflow-hidden p-3`}
     >
-      <div className="relative aspect-[1200/630] w-full overflow-hidden bg-muted">
-        <ThemeAwareImage
-          lightSrc={`${r2Url}/app/blog/${slug}/thumbnail-light.webp`}
-          darkSrc={`${r2Url}/app/blog/${slug}/thumbnail-dark.webp`}
-          alt={title}
-          fill
-          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-          className="object-cover transition-transform duration-300 group-hover:scale-105"
-          loading="lazy"
-        />
-      </div>
-      <div className="p-3">
-        <p className="line-clamp-2 text-sm font-semibold leading-snug">{title}</p>
+      <p className="line-clamp-2 text-sm font-semibold leading-snug group-hover:text-primary">
+        {title}
+      </p>
+      {description && (
+        <p className="mt-1.5 line-clamp-2 text-xs leading-relaxed text-muted-foreground">
+          {description}
+        </p>
+      )}
+      <div className="mt-auto flex justify-end pt-2">
+        <ArrowRight className="size-3.5 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:text-primary" />
       </div>
     </SurfaceLinkCard>
   );

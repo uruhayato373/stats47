@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "city-gas-consumption-expenditure",
+  "year": "2024",
+  "unit": "円",
+  "label": "都市ガス消費支出額",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/city-gas-consumption-expenditure/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug heating-cost-vs-disposable-income --keys city-gas-consumption-expenditure --data-name city-gas-consumption-expenditure-prefecture-rankings",
+  "fetchedAt": "2026-07-19T23:11:02.085Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

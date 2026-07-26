@@ -1,0 +1,10 @@
+{
+  "kind": "ranking",
+  "rankingKey": "black-tea-consumption-expenditure",
+  "year": "2024",
+  "unit": "円",
+  "label": "紅茶消費支出額",
+  "transform": "all47 (tile-grid choropleth)",
+  "source": "r2:app/ranking/black-tea-consumption-expenditure/values.json",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug black-tea-income-gap --keys black-tea-consumption-expenditure --data-name black-tea-expenditure-map"
+}

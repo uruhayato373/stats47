@@ -13,7 +13,6 @@ import {
   readSurveyByIdFromR2,
 } from '@stats47/ranking/server';
 import { isOk } from '@stats47/types';
-import { generateMiniTileSvg } from '@stats47/visualization/server';
 
 import { ArticleShell, PageHeader, Breadcrumbs } from '@/components/layout';
 import { SectionHeader } from '@/components/section';
@@ -31,6 +30,7 @@ import {
   isCaveatNote,
   type CategoryRankingListItem,
 } from '@/features/ranking';
+import { buildFeaturedRankingCardModel } from '@/features/ranking/server';
 import { getSurveyEditorialContent } from '@/features/survey';
 
 import { HUB_INCONTENT } from '@/lib/google-adsense';
@@ -142,9 +142,8 @@ export default async function SurveyPage({ params }: PageProps) {
     seenKeys.add(item.rankingKey);
     return true;
   });
-  // A型カード用に 47 県データを一括取得し rank1 抽出 + ミニタイルマップ生成 (category と同方式)。
-  // survey は A 型既定 (variant 未指定) で home/category と表示を統一する
-  // (旧: baseThumbnailUrl の画像サムネイル → No Image 混在を廃止)。
+  // home/category と同じカードモデルを、1 回の全47件 read から導出する。
+  // (旧: 独自の縦型カード + baseThumbnailUrl の画像サムネイル)。
   const featuredValues = await Promise.all(
     featuredRaw.map((item) =>
       readRankingValuesFromR2(
@@ -154,44 +153,29 @@ export default async function SurveyPage({ params }: PageProps) {
       ),
     ),
   );
-  const featuredItems = featuredRaw.map((item, idx) => {
+  const featuredItems = featuredRaw.flatMap((item, idx) => {
     const latestYear = parseLatestYear(item.latestYear);
     const valuesResult = featuredValues[idx];
-    let topAreaName: string | undefined;
-    let topValue: string | undefined;
-    let tileMapSvg: string | undefined;
-    if (isOk(valuesResult) && valuesResult.data.length > 0) {
-      const top = valuesResult.data.find((v) => v.rank === 1);
-      if (top) {
-        topAreaName = top.areaName;
-        topValue =
-          top.value !== null ? top.value.toLocaleString('ja-JP') : undefined;
-      }
-      tileMapSvg = generateMiniTileSvg(
-        valuesResult.data.flatMap((v) =>
-          v.value !== null
-            ? [{ areaCode: v.areaCode, value: v.value, rank: v.rank ?? undefined }]
-            : [],
-        ),
-        undefined,
-        undefined,
-        item.rankingKey,
-      );
-    }
-    return {
+    if (!isOk(valuesResult) || valuesResult.data.length === 0) return [];
+
+    const title =
+      item.subtitle && !isCaveatNote(item.subtitle)
+        ? `${item.title}（${item.subtitle}）`
+        : item.title;
+    const model = buildFeaturedRankingCardModel({
       rankingKey: item.rankingKey,
-      title:
-        item.subtitle && !isCaveatNote(item.subtitle)
-          ? `${item.title}（${item.subtitle}）`
-          : item.title,
+      title,
+      values: valuesResult.data,
+    });
+    if (!model) return [];
+
+    return [{
+      rankingKey: item.rankingKey,
+      title,
       latestYear,
       unit: item.unit,
-      demographicAttr: item.demographicAttr,
-      normalizationBasis: item.normalizationBasis,
-      topAreaName,
-      topValue,
-      tileMapSvg,
-    };
+      model,
+    }];
   });
 
   if (rankingItems.length === 0) {
@@ -308,14 +292,9 @@ export default async function SurveyPage({ params }: PageProps) {
               <FeaturedRankingCard
                 key={item.rankingKey}
                 rankingKey={item.rankingKey}
-                title={item.title}
-                topAreaName={item.topAreaName}
-                topValue={item.topValue}
-                tileMapSvg={item.tileMapSvg}
-                latestYear={item.latestYear}
+                year={item.latestYear}
                 unit={item.unit}
-                demographicAttr={item.demographicAttr}
-                normalizationBasis={item.normalizationBasis}
+                model={item.model}
               />
             ))}
           </div>

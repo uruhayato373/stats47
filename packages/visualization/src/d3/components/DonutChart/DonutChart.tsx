@@ -90,7 +90,10 @@ export function DonutChart({
         const baseFontSize = computeFontSize(width, height, 0.025); // 12 / 600 = 0.02
 
         g.append("g")
-            .attr("font-family", "sans-serif")
+            .attr(
+                "font-family",
+                "'Hiragino Kaku Gothic ProN', 'Hiragino Kaku Gothic Pro', Meiryo, 'Helvetica Neue', Helvetica, Arial, sans-serif",
+            )
             .attr("font-size", baseFontSize)
             .attr("text-anchor", "middle")
             .selectAll("text")

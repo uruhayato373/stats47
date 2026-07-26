@@ -2,7 +2,9 @@
 
 import { cn } from "../../lib/cn";
 
-import { Table } from "@tanstack/react-table";
+import { Table as TablePrimitive } from "../../atoms/ui/table";
+
+import { type Table as TanStackTable } from "@tanstack/react-table";
 import { DataTableBody } from "./components/data-table-body";
 import { DataTableEmpty } from "./components/data-table-empty";
 import { DataTableHeader } from "./components/data-table-header";
@@ -73,33 +75,40 @@ export function DataTable<TData>({
     }
 
     return (
-        <div className={cn("space-y-4 w-full", className)}>
+        <div className={cn("w-full space-y-2", className)}>
             {enableFiltering && <DataTableToolbar table={table} />}
             <div
                 className={cn(
-                    "rounded-md flex-1 flex flex-col min-h-0",
+                    "flex min-h-0 flex-1 flex-col rounded-none",
                     showBorder && "border"
                 )}
             >
                 {shouldVirtualize ? (
                     <DataTableVirtualizedBody
                         ref={parentRef}
-                        table={table as Table<unknown>}
+                        table={table as TanStackTable<unknown>}
                         virtualizer={virtualizer}
                     />
                 ) : (
-                    <div className="flex-1 overflow-auto relative min-h-0">
-                        <table
-                            className="w-full min-w-max caption-bottom text-sm table-fixed"
-                            {...(ariaLabel ? { "aria-label": ariaLabel } : {})}
-                        >
-                            {caption && (
-                                <caption className="sr-only">{caption}</caption>
-                            )}
-                            <DataTableHeader table={table} enableSorting={enableSorting} />
-                            <DataTableBody table={table} emptyMessage={emptyMessage} onRowClick={onRowClick} rowClassName={rowClassName} />
-                        </table>
-                    </div>
+                    <TablePrimitive
+                        containerClassName="min-h-0 flex-1"
+                        className="min-w-max table-fixed"
+                        {...(ariaLabel ? { "aria-label": ariaLabel } : {})}
+                    >
+                        {caption && (
+                            <caption className="sr-only">{caption}</caption>
+                        )}
+                        <DataTableHeader
+                            table={table}
+                            enableSorting={enableSorting}
+                        />
+                        <DataTableBody
+                            table={table}
+                            emptyMessage={emptyMessage}
+                            onRowClick={onRowClick}
+                            rowClassName={rowClassName}
+                        />
+                    </TablePrimitive>
                 )}
             </div>
             {!shouldVirtualize && <DataTablePagination table={table} showRowCount={showRowCount} />}

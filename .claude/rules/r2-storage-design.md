@@ -29,6 +29,7 @@
 | `/ranking/[rankingKey]` | `app/ranking/[key]/values.json` | ランキング値 |
 | `/ranking/[rankingKey]` | `app/ranking/[key]/ai-content.json` | AI コンテンツ |
 | `/ranking/[rankingKey]` | `app/ranking/[key]/page-cards.json` | ページカード |
+| `/ranking/[rankingKey]` | `app/ranking/[key]/thumbnail-{light,dark}.webp` + `thumbnail.json` | 再利用可能なランキングサムネイル + 生成manifest |
 | `/category/[categoryKey]` | `app/category/[key]/items.json` | カテゴリ内 RankingItem 一覧 |
 | `/compare/[categoryKey]` | `app/category/[key]/items.json` | 同上（compare と共用） |
 | `/areas/[areaCode]` | `app/areas/[code]/profile.json` | 都道府県プロフィール |

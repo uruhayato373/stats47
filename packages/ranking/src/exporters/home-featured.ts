@@ -20,26 +20,20 @@ export interface HomeFeaturedValueRow {
   rank: number | null;
 }
 
-export interface HomeFeaturedDerivedValues {
-  featuredTop: FeaturedValue | null;
-  featuredBottom: FeaturedValue | null;
-  featuredTopThree: FeaturedValue[];
-}
-
 /** 既存 display 規則 (現行 exporter と同じ ja-JP ロケール整形) */
 function formatValue(value: number | null): string | null {
   return value !== null ? value.toLocaleString("ja-JP") : null;
 }
 
 /**
- * 1 回の values read から top / bottom / top3 を導出する。
+ * 1 回の values read から1位を導出する。
  * - value が null の行は除外する
- * - rank 昇順で top / topThree、末尾 (最大 rank) を bottom とする
- * - 同順位 (tie) があっても snapshot の実 rank を保持する (「47位」固定表示をしない)
+ * - rank 昇順の先頭を使う
+ * - snapshot の実 rank を保持する
  */
-export function deriveHomeFeaturedValues(
+export function deriveFeaturedTop(
   values: readonly HomeFeaturedValueRow[],
-): HomeFeaturedDerivedValues {
+): FeaturedValue | null {
   const usable = values
     .filter((v) => v.value !== null && v.rank !== null)
     .slice()
@@ -51,15 +45,7 @@ export function deriveHomeFeaturedValues(
     value: formatValue(row.value),
   });
 
-  if (usable.length === 0) {
-    return { featuredTop: null, featuredBottom: null, featuredTopThree: [] };
-  }
-
-  return {
-    featuredTop: toFeatured(usable[0]),
-    featuredBottom: toFeatured(usable[usable.length - 1]),
-    featuredTopThree: usable.slice(0, 3).map(toFeatured),
-  };
+  return usable.length > 0 ? toFeatured(usable[0]) : null;
 }
 
 export interface ResolvedHomeFeatured {
@@ -97,8 +83,8 @@ export function resolveHomeFeaturedItems(
 
 /**
  * 1 item 分の焼き込み (仕様 §5.3 手順 3-8)。
- * generateSvg は注入 (server-only の generateMiniTileSvg を exporter が渡す)。
- * SVG 生成が throw しても他の派生値 (top/bottom/top3/homeFeatured) は保持する。
+ * generateSvg は注入する。
+ * SVG 生成が throw しても1位とhomeFeaturedは保持する。
  */
 export function bakeHomeFeaturedItem(input: {
   item: RankingItem;
@@ -107,7 +93,7 @@ export function bakeHomeFeaturedItem(input: {
   generateSvg: (rows: { areaCode: string; value: number; rank?: number }[]) => string;
 }): FeaturedRankingItem {
   const { item, definition, values } = input;
-  const derived = deriveHomeFeaturedValues(values);
+  const featuredTop = deriveFeaturedTop(values);
 
   let tileMapSvg: string | null = null;
   try {
@@ -124,12 +110,11 @@ export function bakeHomeFeaturedItem(input: {
 
   return {
     ...item,
-    ...derived,
+    featuredTop,
     tileMapSvg,
     homeFeatured: {
       order: definition.order,
       hook: definition.hook,
-      variant: definition.variant,
     },
   };
 }

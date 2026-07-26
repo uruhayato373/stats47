@@ -2,7 +2,10 @@
 
 import type { ReactNode } from "react";
 
-import { SurfaceLinkCard } from "@/components/surface";
+import {
+  PORTAL_CARD_ASPECT_CLASS,
+  SurfaceLinkCard,
+} from "@/components/surface";
 
 import { trackNavClick } from "@/lib/analytics/events";
 
@@ -47,7 +50,7 @@ export function PortalNavCard({
           // analytics 失敗で遷移を止めない
         }
       }}
-      className="group flex min-h-11 items-start gap-3"
+      className={`${PORTAL_CARD_ASPECT_CLASS} group flex items-start gap-3 overflow-hidden`}
     >
       {icon && (
         <span

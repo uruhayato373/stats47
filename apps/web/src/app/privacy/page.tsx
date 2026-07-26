@@ -30,6 +30,8 @@ import { ExternalLink, Instagram, MapPin, Youtube } from "lucide-react";
 import { ArticleShell, PageHeader } from "@/components/layout";
 import { SurfaceCard } from "@/components/surface";
 
+import { OPERATOR_PROFILE } from "@/config/operator-profile";
+
 interface LegalSectionProps {
   /** セクション番号（例: "1", "第1条"） */
   number?: string;
@@ -68,9 +70,6 @@ const EXTERNAL_LINKS = {
   googlePrivacyPolicy: "https://policies.google.com/privacy",
   googleAdSettings: "https://www.google.com/settings/ads",
   contactForm: "https://forms.gle/ZYi7Rmk4Kt9qZCXB8",
-  noteProfile: "https://note.com/stats47",
-  instagram: "https://www.instagram.com/stats47jp/",
-  youtube: "https://www.youtube.com/@stats47jp",
 } as const;
 
 // 共通テキストスタイルクラス
@@ -119,14 +118,16 @@ export default function PrivacyPage() {
           {/* プロフィール */}
           <div className="flex items-center gap-4 mb-4">
             <img
-              src="/images/stats47-author-avatar-256.webp"
-              alt=""
+              src={OPERATOR_PROFILE.avatarSrc}
+              alt={OPERATOR_PROFILE.avatarAlt}
               width={48}
               height={48}
               className="w-12 h-12 rounded-full object-cover flex-shrink-0"
             />
             <div>
-              <p className="font-semibold text-sm md:text-base">KAZU</p>
+              <p className="font-semibold text-sm md:text-base">
+                {OPERATOR_PROFILE.name}
+              </p>
               <div className="flex items-center gap-1 mt-1">
                 <MapPin className="h-3 w-3 text-muted-foreground" />
                 <span className="text-xs text-muted-foreground">東京都</span>
@@ -155,7 +156,7 @@ export default function PrivacyPage() {
           {/* SNSリンク */}
           <div className="flex flex-col gap-2">
             <a
-              href={EXTERNAL_LINKS.noteProfile}
+              href={OPERATOR_PROFILE.links.note}
               target="_blank"
               rel="noopener noreferrer"
               className="block"
@@ -167,7 +168,7 @@ export default function PrivacyPage() {
               </Button>
             </a>
             <a
-              href={EXTERNAL_LINKS.instagram}
+              href={OPERATOR_PROFILE.links.instagram}
               target="_blank"
               rel="noopener noreferrer"
               className="block"
@@ -179,7 +180,7 @@ export default function PrivacyPage() {
               </Button>
             </a>
             <a
-              href={EXTERNAL_LINKS.youtube}
+              href={OPERATOR_PROFILE.links.youtube}
               target="_blank"
               rel="noopener noreferrer"
               className="block"

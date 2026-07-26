@@ -27,7 +27,6 @@ function defs(overrides: Partial<HomeFeaturedRankingDefinition>[]): HomeFeatured
     rankingKey: `valid-key-${i + 1}`,
     order: i + 1,
     hook: "有効なフックのコピーです？",
-    variant: "question",
     ...o,
   }));
 }
@@ -126,11 +125,8 @@ describe("HOME_FEATURED_RANKINGS (実 config × 実 registry)", () => {
     expect(validateHomeFeaturedRankings(HOME_FEATURED_RANKINGS, METRICS_REGISTRY)).toEqual([]);
   });
 
-  it("order 順に 8 件を返し variant が allowlist 内である", () => {
+  it("order順に8件を返す", () => {
     const orders = HOME_FEATURED_RANKINGS.map((d) => d.order);
     expect(orders).toEqual([1, 2, 3, 4, 5, 6, 7, 8]);
-    for (const def of HOME_FEATURED_RANKINGS) {
-      expect(["question", "comparison", "territory", "top-three"]).toContain(def.variant);
-    }
   });
 });

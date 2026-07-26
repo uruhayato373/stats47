@@ -3,8 +3,8 @@ import Link from "next/link";
 import { PageShell, PageHeader, Breadcrumbs } from "@/components/layout";
 import { RightRailWidgets } from "@/components/rail";
 
-import { InContentAdSlot, FooterAdSlot, OperatorProfileCard } from "@/features/ads";
-import { BlogArticleGrid } from "@/features/blog";
+import { InContentAdSlot, FooterAdSlot } from "@/features/ads";
+import { BlogArticleGrid, BlogAuthorProfileCard } from "@/features/blog";
 import { listLatestArticles, readBlogSnapshotMetaFromR2 } from "@/features/blog/server";
 
 import { HUB_INCONTENT } from "@/lib/google-adsense";
@@ -61,7 +61,7 @@ export default async function BlogIndexPage({ searchParams }: PageProps) {
 
     return (
         // doboku-note スタイル: 左=記事カード一覧 / 右=共通サイドバー (運営者プロフィール + promo/広告)。
-        // 運営者は上部の OperatorProfileCard が担うため、RightRailWidgets 内蔵の promo 版は無効化する
+        // 運営者は上部の BlogAuthorProfileCard が担うため、RightRailWidgets 内蔵の promo 版は無効化する
         <PageShell
             rightRailBreakpoint="lg"
             rightRail={
@@ -69,7 +69,7 @@ export default async function BlogIndexPage({ searchParams }: PageProps) {
                     // 運営者プロフィール (E-E-A-T) は右レールに PC のみ表示
                     topWidgets={
                         <div className="hidden lg:block">
-                            <OperatorProfileCard />
+                            <BlogAuthorProfileCard />
                         </div>
                     }
                 />
@@ -100,7 +100,7 @@ export default async function BlogIndexPage({ searchParams }: PageProps) {
             <p className="mb-4 text-sm text-muted-foreground">
                 {currentPage > 1 ? `${currentPage} ページ目` : `全 ${meta ? "記事一覧" : "記事一覧"}`}
             </p>
-            <BlogArticleGrid articles={articles} firstPagePriority={currentPage === 1} />
+            <BlogArticleGrid articles={articles} />
 
             {/* 記事内広告（一覧グリッド後。slotId 未発行の間は非表示） */}
             <InContentAdSlot slot={HUB_INCONTENT} />
