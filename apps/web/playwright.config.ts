@@ -34,7 +34,10 @@ export default defineConfig({
   ],
 
   webServer: {
-    command: "npm run workers:clean && npm run build && npx next start --port 3100",
+    // build 時は remote snapshot の大量取得を避け、起動後だけ親プロセスの R2 URL を使う。
+    // これにより CI は本番データで導線を検証しつつ、同じ snapshot の二重取得を行わない。
+    command:
+      "npm run workers:clean && R2_PUBLIC_FETCH_URL= NEXT_PUBLIC_R2_PUBLIC_URL= npm run build && npx next start --port 3100",
     url: "http://localhost:3100",
     reuseExistingServer: true,
     timeout: 900_000,
