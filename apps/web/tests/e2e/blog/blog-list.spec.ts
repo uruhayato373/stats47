@@ -92,14 +92,14 @@ test.describe("ブログ一覧ページ", () => {
     }
   });
 
-  test("サムネイル画像が正しく読み込まれる", async ({ page }) => {
-    await page.waitForLoadState("networkidle");
-    const img = page.locator("img[src*='blog']").first();
-    await expect(img).toBeVisible({ timeout: 10_000 });
-    // naturalWidth === 0 は画像読み込み失敗（404 / パス誤り）を示す
-    const naturalWidth = await img.evaluate(
-      (el: HTMLImageElement) => el.naturalWidth
-    );
-    expect(naturalWidth).toBeGreaterThan(0);
+  test("記事カードは重複サムネイルに依存せず内容を読める", async ({ page }) => {
+    const articleCard = page
+      .locator("a[href^='/blog/']")
+      .filter({ has: page.locator("h2") })
+      .first();
+
+    await expect(articleCard).toBeVisible({ timeout: 10_000 });
+    await expect(articleCard.locator("h2")).not.toBeEmpty();
+    await expect(articleCard.locator("img")).toHaveCount(0);
   });
 });
