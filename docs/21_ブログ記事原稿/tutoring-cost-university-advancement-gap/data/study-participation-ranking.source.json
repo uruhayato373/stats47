@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "study-participation-rate-academic",
+  "year": "2021",
+  "unit": "％",
+  "label": "人文・社会・自然科学の行動者率",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/study-participation-rate-academic/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug tutoring-cost-university-advancement-gap --keys study-participation-rate-academic --data-name study-participation-ranking",
+  "fetchedAt": "2026-07-19T23:14:37.534Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

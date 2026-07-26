@@ -1,0 +1,15 @@
+{
+  "kind": "derived",
+  "base": "high-school-tutoring-consumption-expenditure",
+  "pair": "high-school-advancement-rate",
+  "pearsonR": 0.489,
+  "unit": "円 x ％",
+  "label": "高校補習教育・予備校消費支出額と高等学校卒業者の進学率の関係",
+  "transform": "areaCode de join (47ken), x=高校補習教育・予備校消費支出額(2024) / y=高等学校卒業者の進学率(2023). Pearson r calculated",
+  "source": [
+    "r2:app/ranking/high-school-tutoring-consumption-expenditure/values.json",
+    "r2:app/ranking/high-school-advancement-rate/values.json"
+  ],
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug tutoring-cost-university-advancement-gap --keys high-school-tutoring-consumption-expenditure --data-name hs-tutoring-ranking ; node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug tutoring-cost-university-advancement-gap --keys high-school-advancement-rate --data-name advancement-rate-ranking ; then areaCode-join and recompute Pearson r",
+  "fetchedAt": "2026-07-19T23:16:20.901Z"
+}

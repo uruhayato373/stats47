@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "consumer-price-difference-index-housing",
+  "year": "2024",
+  "unit": "（全国=100）",
+  "label": "消費者物価地域差指数",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/consumer-price-difference-index-housing/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug real-disposable-income-reversal --keys consumer-price-difference-index-housing --data-name consumer-price-difference-index-housing-prefecture-rankings",
+  "fetchedAt": "2026-07-19T23:13:36.867Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

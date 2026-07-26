@@ -1,0 +1,14 @@
+{
+  "kind": "manual",
+  "label": "実質可処分所得に対する暖房費負担率",
+  "unit": "%",
+  "year": "2024",
+  "transform": "暖房関連支出合計（年額・heating-cost-combined-ranking.jsonのvalue）÷ 実質可処分所得（月額×12で年額換算、real-disposable-incomeのvalue）×100",
+  "source": "計算値: heating-cost-combined-ranking.json と r2:app/ranking/real-disposable-income/values.json (2024年、月額) から算出",
+  "upstream": "metric config (packages/data-configs) → e-Stat/家計調査 → R2 app/ranking",
+  "accessedAt": "2026-07-20",
+  "extraction": "実質可処分所得（月額）を12倍して年額換算し、暖房費合計（年額）との比率を算出",
+  "verification": "実質可処分所得は家計調査の勤労者世帯月額値であることをmetric configのnumeratorKey (disposable-income-worker-households, SSDS L3130) から確認し年換算した",
+  "restore": "上記2ファイルのvalueから heat/incomeAnnual*100 を都道府県ごとに再計算",
+  "generatedBy": "manual-calculation"
+}
