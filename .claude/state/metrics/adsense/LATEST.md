@@ -1,21 +1,21 @@
-# AdSense Latest — 2026-W29
+# AdSense Latest — 2026-W30
 
 | Metric | 今週 | 前週比 |
 |---|---|---|
-| Earnings | 162.00 ▼ |  (-4.1%) |
-| Page Views | 3879 ▲ |  (+5.4%) |
-| RPM | 42.000 ▼ | |
-| Impressions | 4785 ▲ |  (+2.8%) |
-| Clicks | 33 ▲ |  (+13.8%) |
-| CTR | 0.69% · | |
-| Viewability | 57.5% ▲ | |
+| Earnings | 129.00 ▼ |  (-20.4%) |
+| Page Views | 3819 ▼ |  (-1.5%) |
+| RPM | 34.000 ▼ | |
+| Impressions | 4070 ▼ |  (-14.9%) |
+| Clicks | 29 ▼ |  (-12.1%) |
+| CTR | 0.71% · | |
+| Viewability | 56.9% · | |
 
 ## デバイス別（今週 / 前週比）
 
 | Platform | RPM | Viewability | CPC | imp/PV | Earnings |
 |---|---|---|---|---|---|
-| Desktop | ¥48.00 ▼ | 58.3% ▲ | ¥25.60 | 1.543 | ¥128.00 (-5.9%) |
-| Mobile | ¥28.00 ▲ | 51.2% ▲ +14.2pp | ¥1.18 | 0.500 | ¥33.00 (+13.8%) |
-| Tablet | ¥42.00 ▼ | 64.9% ▲ +6.0pp | ¥0.00 | 1.510 | ¥2.00 (-50.0%) |
+| Desktop | ¥35.00 ▼ | 57.8% · | ¥22.00 | 1.347 | ¥88.00 (-31.3%) |
+| Mobile | ¥29.00 ▲ | 51.2% · | ¥1.52 | 0.518 | ¥38.00 (+15.2%) |
+| Tablet | ¥72.00 ▲ | 62.7% ▼ | ¥0.00 | 1.308 | ¥3.00 (+50.0%) |
 
 履歴: [`history.csv`](./history.csv) / デバイス別: [`history-devices.csv`](./history-devices.csv)
