@@ -4,16 +4,16 @@ name: 🖼 OGP Image Audit (weekly self-heal)
 # 検知も生成もすべて決定的スクリプト (Node fetch + Satori、LLM 不使用)。費用は Actions
 # 分数 + R2 HEAD のみ (LLM API 課金ゼロ)。正典: .claude/rules/ogp-image-standards.md。
 #
-# 流れ: 各種別の欠落分だけ生成 (--max-generate で blast radius 制限) → R2 push →
-#       最終監査 (build-image-gallery --audit --all) → inventory を develop に commit-back →
-#       それでも欠落が残る/失敗したときだけ Issue 起票 (ogp-alert)。
+# 流れ: fingerprint 差分だけ生成 (--max-generate で blast radius 制限) → exact plan push →
+#       freshness + inventory 最終監査 → inventory を develop に commit-back →
+#       それでも陳腐化/欠落が残るときは Issue 起票して workflow も失敗させる。
 #
 # 新規 ranking 公開時は sync-snapshots.yml のフックが即生成するため、本 workflow は
 # セーフティネット (漏れ・note 新規・再生成漏れの回収)。
 
 on:
   schedule:
-    - cron: "0 18 * * 6" # 土 18:00 UTC = 日 03:00 JST (既存 cron と非重複)
+    - cron: '0 18 * * 6' # 土 18:00 UTC = 日 03:00 JST (既存 cron と非重複)
   workflow_dispatch:
 
 permissions:
@@ -21,20 +21,17 @@ permissions:
   issues: write
 
 concurrency:
-  group: ogp-image-audit
+  group: r2-write
   cancel-in-progress: false
 
 env:
   R2_PUBLIC_FETCH_URL: https://storage.stats47.jp
   SITE_ORIGIN: https://stats47.jp
   CLOUDFLARE_R2_BUCKET_NAME: stats47
-  # S3 API 経由 R2 書き込み (diff-push-r2.ts)
+  # S3 API 経由 R2 書き込み (exact image publisher)
   R2_S3_ENDPOINT: https://${{ secrets.CLOUDFLARE_ACCOUNT_ID }}.r2.cloudflarestorage.com
   R2_ACCESS_KEY_ID: ${{ secrets.CLOUDFLARE_R2_ACCESS_KEY_ID }}
   R2_SECRET_ACCESS_KEY: ${{ secrets.CLOUDFLARE_R2_SECRET_ACCESS_KEY }}
-  # blog サムネ self-heal は wrangler put を使う
-  CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-  CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
 
 jobs:
   audit:
@@ -42,7 +39,7 @@ jobs:
     timeout-minutes: 90
     steps:
       - name: 🧰 Checkout develop
-        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           ref: develop
           fetch-depth: 0
@@ -50,39 +47,61 @@ jobs:
       - name: 🟢 Setup Node.js
         uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
-          node-version: "20"
-          cache: "npm"
+          node-version: '20'
+          cache: 'npm'
 
       - name: 📦 Install dependencies
         run: npm ci
 
-      - name: ♻️ Self-heal missing images (欠落分のみ生成→R2)
-        continue-on-error: true # 修復失敗しても最終監査→Issue で拾う
+      - name: ♻️ Self-heal changed images (fingerprint差分のみ生成→R2)
+        id: image_repair
         run: |
           TSC="apps/web/scripts/tsconfig.ogp.json"
           SC="apps/web/scripts/generate-ogp-images.ts"
           for TYPE in ranking ranking-cards areas note-covers pref-silhouette; do
             echo "=== self-heal $TYPE ==="
-            npx tsx --tsconfig $TSC $SC --type $TYPE --max-generate 500 || true
+            npx tsx --tsconfig "$TSC" "$SC" --type "$TYPE" --limit 500 --max-generate 500
+            PLAN=".local/image-generation-publish-plan-${TYPE}.json"
+            test -f "$PLAN" || { echo "exact publish plan が生成されませんでした: $TYPE"; exit 1; }
+            npx tsx packages/r2-storage/src/scripts/push-generated-image-set.ts --plan "$PLAN"
           done
-          echo "=== push ==="
-          npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix app/ranking || true
-          npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix app/areas || true
-          npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix note || true
-          npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix sns/pref-silhouette || true
 
-      - name: 🖼 Self-heal blog thumbnails/OGP (既存スクリプト)
-        continue-on-error: true
-        run: npx tsx apps/web/scripts/generate-blog-thumbnails-cloud.ts --apply || true
+      - name: 🖼 Self-heal changed blog thumbnails/OGP
+        id: blog_repair
+        run: |
+          npx tsx apps/web/scripts/generate-blog-thumbnails-cloud.ts \
+            --limit 500 --max-generate 500
+          PLAN=".local/image-generation-publish-plan-blog.json"
+          test -f "$PLAN" || { echo "exact publish plan が生成されませんでした: blog"; exit 1; }
+          npx tsx packages/r2-storage/src/scripts/push-generated-image-set.ts --plan "$PLAN"
 
-      - name: 🔍 Final audit (欠落判定)
+      - name: 🔍 Final audit (fingerprint鮮度 + 欠落)
+        if: always()
         id: check
         run: |
           set +e
+          STATUS=0
+          TSC="apps/web/scripts/tsconfig.ogp.json"
+          SC="apps/web/scripts/generate-ogp-images.ts"
+          for TYPE in ranking ranking-cards areas note-covers pref-silhouette; do
+            npx tsx --tsconfig "$TSC" "$SC" --type "$TYPE" --audit \
+              2>&1 | tee -a /tmp/ogp-freshness-audit.log
+            [ "${PIPESTATUS[0]}" -eq 0 ] || STATUS=1
+          done
+          npx tsx apps/web/scripts/generate-blog-thumbnails-cloud.ts --audit \
+            2>&1 | tee -a /tmp/ogp-freshness-audit.log
+          [ "${PIPESTATUS[0]}" -eq 0 ] || STATUS=1
           node .claude/scripts/ogp/build-image-gallery.mjs --audit --all 2>&1 | tee /tmp/ogp-audit.log
-          echo "exit_code=${PIPESTATUS[0]}" >> "$GITHUB_OUTPUT"
+          [ "${PIPESTATUS[0]}" -eq 0 ] || STATUS=1
+          if [ "${{ steps.image_repair.outcome }}" != "success" ] || \
+             [ "${{ steps.blog_repair.outcome }}" != "success" ]; then
+            STATUS=1
+          fi
+          echo "exit_code=$STATUS" >> "$GITHUB_OUTPUT"
+          exit 0
 
       - name: 📤 Commit inventory to develop
+        if: always()
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -95,7 +114,7 @@ jobs:
           git push origin develop
 
       - name: 🚨 Open issue on unresolved missing
-        if: steps.check.outputs.exit_code != '0'
+        if: always() && steps.check.outputs.exit_code != '0'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -108,7 +127,10 @@ jobs:
             echo "生成スクリプトが特定キーで失敗している可能性があります (データ取得不可・satori 例外等)。"
             echo ""
             echo '```'
-            grep -E "^\[missing\]|欠落|❌|missing" /tmp/ogp-audit.log | head -40
+            {
+              grep -E "^\[missing\]|欠落|❌|missing" /tmp/ogp-audit.log
+              grep -E "更新必要|fingerprint|required|陳腐化" /tmp/ogp-freshness-audit.log
+            } | head -60
             echo '```'
             echo ""
             echo "手動調査: \`OGP_DEBUG=1 npx tsx --tsconfig apps/web/scripts/tsconfig.ogp.json apps/web/scripts/generate-ogp-images.ts --type <type> --key <欠落key> --force\`"
@@ -125,3 +147,9 @@ jobs:
           else
             gh issue create --title "$TITLE" --label "ogp-alert,auto-generated" --body-file /tmp/ogp-issue.md
           fi
+
+      - name: ❌ Fail on unresolved image drift
+        if: always() && steps.check.outputs.exit_code != '0'
+        run: |
+          echo "画像の陳腐化・欠落・repair失敗が残っています"
+          exit 1

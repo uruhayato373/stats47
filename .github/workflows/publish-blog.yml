@@ -12,28 +12,28 @@ name: 📝 Publish Blog Article (docs/21 draft → R2)
 # 安全性:
 #   - factual gate (ci-factual-gate.mjs) を通過しないと publish しない (AI記事の数値捏造防止)
 #   - export-blog-snapshot は union 方式 (配信中 all.json ∪ ローカル) で既存記事を消さない
-#   - diff-push-r2 --prefix app/blog は staged ファイルのみ push (削除ロジック無し)
+#   - 記事は prefix push、画像は isolated staging + exact plan publisher で分離
 
 on:
   workflow_dispatch:
     inputs:
       slug:
-        description: "docs/21_ブログ記事原稿/<slug> の slug"
+        description: 'docs/21_ブログ記事原稿/<slug> の slug'
         required: true
       published_at:
-        description: "publishedAt (YYYY-MM-DD、空なら本日 UTC)"
+        description: 'publishedAt (YYYY-MM-DD、空なら本日 UTC)'
         required: false
-        default: ""
+        default: ''
       dry_run:
-        description: "true: push せず検証のみ / false: 本番公開"
+        description: 'true: push せず検証のみ / false: 本番公開'
         required: false
-        default: "true"
+        default: 'true'
 
 permissions:
   contents: write # 本番公開後に docs/21 ドラフトを自動削除 (ephemeral outbox) して commit-back するため
 
 concurrency:
-  group: publish-blog
+  group: r2-write
   cancel-in-progress: false
 
 env:
@@ -50,7 +50,7 @@ jobs:
     timeout-minutes: 30
     steps:
       - name: 🧰 Checkout develop
-        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           ref: develop
           fetch-depth: 1
@@ -58,8 +58,8 @@ jobs:
       - name: 🟢 Setup Node.js
         uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
-          node-version: "20"
-          cache: "npm"
+          node-version: '20'
+          cache: 'npm'
 
       - name: 📦 Install dependencies
         run: npm ci
@@ -100,12 +100,10 @@ jobs:
       - name: 🧱 Quality gate (構造・薄さ — 公開ブロック)
         run: node .claude/scripts/blog/quality-gate.mjs "${{ github.event.inputs.slug }}"
 
-      - name: 🖼️ Generate blog thumbnails (staged → 記事と一緒に push)
+      - name: 🖼️ Generate changed blog thumbnails (isolated staging)
         run: |
-          # ogp.json が無くても article.md frontmatter から title/subtitle を導出して
-          # thumbnail-{light,dark}.webp + ogp/ogp.png + ogp.json を .local/r2/app/blog/<slug>/ に生成。
-          # 後続の diff-push-r2 --prefix app/blog/<slug> が記事と一緒に cloud へ push する。
-          # これにより公開記事が必ず thumbnail を持ち、PR の Blog Thumbnail Gate が落ちなくなる。
+          # article.md から semantic fingerprint を作り、変更時だけ
+          # .local/image-staging/blog に bundle + exact plan を生成する。
           npx tsx apps/web/scripts/generate-blog-thumbnails.ts --slug "${{ github.event.inputs.slug }}"
 
       # CI の export-blog-snapshot は cloud(S3) を list するため、新記事を index(all.json) に
@@ -119,6 +117,16 @@ jobs:
           else
             echo "dry-run: 記事 push スキップ (差分のみ)"
             npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix "app/blog/$SLUG" --dry-run
+          fi
+
+      - name: 🖼️ Publish exact blog image set
+        run: |
+          PLAN=".local/image-generation-publish-plan-blog.json"
+          test -f "$PLAN" || { echo "exact publish plan が生成されませんでした"; exit 1; }
+          if [ "${{ github.event.inputs.dry_run }}" = "false" ]; then
+            npx tsx packages/r2-storage/src/scripts/push-generated-image-set.ts --plan "$PLAN"
+          else
+            npx tsx packages/r2-storage/src/scripts/push-generated-image-set.ts --plan "$PLAN" --dry-run
           fi
 
       - name: 🧮 Regenerate blog snapshot (cloud 記事集合 + 新記事 → all.json, union 方式)

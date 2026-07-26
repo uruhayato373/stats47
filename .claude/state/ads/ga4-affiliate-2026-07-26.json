@@ -1,0 +1,89 @@
+{
+  "generatedAt": "2026-07-26T14:29:07.876Z",
+  "date": "2026-07-26",
+  "days": 28,
+  "dimensions": [
+    "affiliate_vertical",
+    "affiliate_category",
+    "link_position",
+    "experiment_id",
+    "variant_id",
+    "creative_size"
+  ],
+  "hasVerticalBreakdown": true,
+  "hasCategoryBreakdown": true,
+  "hasVariantBreakdown": true,
+  "totals": {
+    "impressions": 13115,
+    "clicks": 9,
+    "ctr": 0.0006862371330537552
+  },
+  "rows": [
+    {
+      "affiliate_vertical": "(not set)",
+      "affiliate_category": "(not set)",
+      "link_position": "(not set)",
+      "experiment_id": "(not set)",
+      "variant_id": "(not set)",
+      "creative_size": "(not set)",
+      "impressions": 12858,
+      "clicks": 4,
+      "ctr": 0.00031109037175299425
+    },
+    {
+      "affiliate_vertical": "(unset)",
+      "affiliate_category": "(unset)",
+      "link_position": "(unset)",
+      "experiment_id": "(unset)",
+      "variant_id": "(unset)",
+      "creative_size": "(unset)",
+      "impressions": 257,
+      "clicks": 0,
+      "ctr": 0
+    },
+    {
+      "affiliate_vertical": "other",
+      "affiliate_category": "other",
+      "link_position": "sidebar-left",
+      "experiment_id": "(not set)",
+      "variant_id": "(not set)",
+      "creative_size": "(not set)",
+      "impressions": 0,
+      "clicks": 2,
+      "ctr": null
+    },
+    {
+      "affiliate_vertical": "economy",
+      "affiliate_category": "economy",
+      "link_position": "ranking-sidebar",
+      "experiment_id": "(not set)",
+      "variant_id": "(not set)",
+      "creative_size": "(not set)",
+      "impressions": 0,
+      "clicks": 1,
+      "ctr": null
+    },
+    {
+      "affiliate_vertical": "other",
+      "affiliate_category": "other",
+      "link_position": "sidebar",
+      "experiment_id": "(not set)",
+      "variant_id": "(not set)",
+      "creative_size": "(not set)",
+      "impressions": 0,
+      "clicks": 1,
+      "ctr": null
+    },
+    {
+      "affiliate_vertical": "other",
+      "affiliate_category": "other",
+      "link_position": "sidebar-right",
+      "experiment_id": "(not set)",
+      "variant_id": "(not set)",
+      "creative_size": "(not set)",
+      "impressions": 0,
+      "clicks": 1,
+      "ctr": null
+    }
+  ]
+}

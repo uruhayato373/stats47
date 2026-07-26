@@ -4,18 +4,29 @@
  * アプリケーション間で共有される型定義を提供します。
  */
 
-export type { AreaType } from "./area";
-export type { StatsSchema } from "./stats-schema";
-export { type YearFormat, formatYearName } from "./year-format";
-
+export type { AreaType } from './area';
+export type { StatsSchema } from './stats-schema';
+export { type YearFormat, formatYearName } from './year-format';
 
 export type {
-    TopoJSONGeometry, TopoJSONGeometryCollection, TopoJSONTopology
-} from "./topojson";
+  TopoJSONGeometry,
+  TopoJSONGeometryCollection,
+  TopoJSONTopology,
+} from './topojson';
 
-export type { AdminPageInfo } from "./admin";
+export type { AdminPageInfo } from './admin';
 
-export * from "./article";
+export * from './article';
+export {
+  IMAGE_GENERATION_MANIFEST_KIND,
+  IMAGE_GENERATION_MANIFEST_SCHEMA_VERSION,
+  IMAGE_GENERATION_PUBLISH_PLAN_KIND,
+  IMAGE_GENERATION_PUBLISH_PLAN_SCHEMA_VERSION,
+  type ImageGenerationAsset,
+  type ImageGenerationManifest,
+  type ImageGenerationPublishPlan,
+  type ImageGenerationPublishPlanItem,
+} from './image-generation-manifest';
 
 // ============================================================================
 // e-Stat 関連の共通型
@@ -35,17 +46,17 @@ export type {
   RankingDisplayEntry,
   RankingDisplayMeta,
   RankingDisplayInput,
-} from "./ranking-display";
+} from './ranking-display';
 
 // Result型
-export { type Result, ok, err, isOk, isErr, unwrap } from "./result";
+export { type Result, ok, err, isOk, isErr, unwrap } from './result';
 
 // ブログチャートデータ
 export type {
   BlogChartDataFile,
   BlogChartDataSource,
   BlogChartMeta,
-} from "./blog-chart-data";
+} from './blog-chart-data';
 
 // IndicatorSet（KPI・チャート定義の一元管理）
 export type {
@@ -58,7 +69,7 @@ export type {
   MixedChartDef,
   DonutChartDef,
   ChartSeriesDef,
-} from "./indicator-set";
+} from './indicator-set';
 
 export {
   // レジストリ
@@ -99,4 +110,4 @@ export {
   RAILWAY_SET,
   ROADS_SET,
   CLIMATE_SET,
-} from "./indicator-sets/registry";
+} from './indicator-sets/registry';

@@ -30,23 +30,23 @@ GSC（Google Search Console）の継続的追跡と改善施策の記録。
 - **status**: effect/pending (人間が 2-4 週連続観測で確定 / evidence-based-judgment.md)
 - **wave_id**: 2026-06-10-manual / **記事数**: 6
 - **remediated_at**: 2026-06-10 (週 2026-W24)
-- **before**: 2026-W23 → **after**: 2026-W29 (経過 5 週)
-- **計測日**: 2026-07-19 (自動: measure-gsc-impact.mjs)
+- **before**: 2026-W23 → **after**: 2026-W30 (経過 6 週)
+- **計測日**: 2026-07-26 (自動: measure-gsc-impact.mjs)
 
 | slug | imp (before→after) | clicks | CTR | position |
 |---|---|---|---|---|
-| `frozen-gyoza-spending-prefecture-gap` | 0→52 (+52) | 0→1 (+1) | 0.0%→1.9% (+1.92pp) | 0.0→10.3 (+10.3) |
-| `library-books-prefecture-gap` | 37→329 (+292) | 0→5 (+5) | 0.0%→1.5% (+1.52pp) | 8.9→9.2 (+0.2) |
-| `pachinko-participation-prefecture-gap` | 0→15 (+15) | 0→1 (+1) | 0.0%→6.7% (+6.67pp) | 0.0→7.7 (+7.7) |
-| `pharmacist-income-prefecture-gap` | 0→4 (+4) | 0→1 (+1) | 0.0%→25.0% (+25.00pp) | 0.0→19.5 (+19.5) |
-| `tofu-consumption-prefecture-gap` | 0→49 (+49) | 0→1 (+1) | 0.0%→2.0% (+2.04pp) | 0.0→8.4 (+8.4) |
-| `yogurt-spending-prefecture-gap` | 0→17 (+17) | 0→0 (+0) | 0.0%→0.0% (+0.00pp) | 0.0→8.8 (+8.8) |
+| `frozen-gyoza-spending-prefecture-gap` | 0→57 (+57) | 0→2 (+2) | 0.0%→3.5% (+3.51pp) | 0.0→12.1 (+12.1) |
+| `library-books-prefecture-gap` | 37→295 (+258) | 0→3 (+3) | 0.0%→1.0% (+1.02pp) | 8.9→8.9 (-0.1) |
+| `pachinko-participation-prefecture-gap` | 0→14 (+14) | 0→1 (+1) | 0.0%→7.1% (+7.14pp) | 0.0→6.9 (+6.9) |
+| `pharmacist-income-prefecture-gap` | 0→4 (+4) | 0→0 (+0) | 0.0%→0.0% (+0.00pp) | 0.0→9.3 (+9.3) |
+| `tofu-consumption-prefecture-gap` | 0→65 (+65) | 0→1 (+1) | 0.0%→1.5% (+1.54pp) | 0.0→8.3 (+8.3) |
+| `yogurt-spending-prefecture-gap` | 0→21 (+21) | 0→1 (+1) | 0.0%→4.8% (+4.76pp) | 0.0→8.8 (+8.8) |
 
-**wave 合計**: imp 37→466 (+429) / clicks 0→9 (+9) / CTR 0.00%→1.93% (+1.93pp)
+**wave 合計**: imp 37→456 (+419) / clicks 0→8 (+8) / CTR 0.00%→1.75% (+1.75pp)
 
 ### 判定
 
-- **[実測]** clicks +9 / imp +429 (2026-W23→2026-W29, 6 記事)
+- **[実測]** clicks +8 / imp +419 (2026-W23→2026-W30, 6 記事)
 - **[判定] effect/pending** — 自動計測は delta 提示まで。最低 2-4 週連続で正方向なら weekly-review が effect/full|partial を確定する (evidence-based-judgment.md)
 - **検証コマンド**: `node .claude/scripts/blog/measure-gsc-impact.mjs --wave 2026-06-10-manual`
 
@@ -55,20 +55,20 @@ GSC（Google Search Console）の継続的追跡と改善施策の記録。
 - **status**: effect/pending (人間が 2-4 週連続観測で確定 / evidence-based-judgment.md)
 - **wave_id**: 2026-06-07-manual-3 / **記事数**: 3
 - **remediated_at**: 2026-06-07 (週 2026-W23)
-- **before**: 2026-W22 → **after**: 2026-W29 (経過 6 週)
-- **計測日**: 2026-07-19 (自動: measure-gsc-impact.mjs)
+- **before**: 2026-W22 → **after**: 2026-W30 (経過 7 週)
+- **計測日**: 2026-07-26 (自動: measure-gsc-impact.mjs)
 
 | slug | imp (before→after) | clicks | CTR | position |
 |---|---|---|---|---|
-| `automotive-industry-transformation-map` | 220→2145 (+1925) | 10→56 (+46) | 4.5%→2.6% (-1.93pp) | 6.4→6.2 (-0.1) |
-| `marriage-unmarried-crisis` | 277→199 (-78) | 4→4 (+0) | 1.4%→2.0% (+0.57pp) | 9.3→9.1 (-0.2) |
-| `sports-urban-paradox` | 392→934 (+542) | 12→33 (+21) | 3.1%→3.5% (+0.47pp) | 7.3→6.8 (-0.5) |
+| `automotive-industry-transformation-map` | 220→2404 (+2184) | 10→54 (+44) | 4.5%→2.2% (-2.30pp) | 6.4→6.1 (-0.3) |
+| `marriage-unmarried-crisis` | 277→246 (-31) | 4→5 (+1) | 1.4%→2.0% (+0.59pp) | 9.3→9.0 (-0.3) |
+| `sports-urban-paradox` | 392→960 (+568) | 12→34 (+22) | 3.1%→3.5% (+0.48pp) | 7.3→6.8 (-0.5) |
 
-**wave 合計**: imp 889→3278 (+2389) / clicks 26→93 (+67) / CTR 2.92%→2.84% (-0.09pp)
+**wave 合計**: imp 889→3610 (+2721) / clicks 26→93 (+67) / CTR 2.92%→2.58% (-0.35pp)
 
 ### 判定
 
-- **[実測]** clicks +67 / imp +2389 (2026-W22→2026-W29, 3 記事)
+- **[実測]** clicks +67 / imp +2721 (2026-W22→2026-W30, 3 記事)
 - **[判定] effect/pending** — 自動計測は delta 提示まで。最低 2-4 週連続で正方向なら weekly-review が effect/full|partial を確定する (evidence-based-judgment.md)
 - **検証コマンド**: `node .claude/scripts/blog/measure-gsc-impact.mjs --wave 2026-06-07-manual-3`
 
@@ -77,20 +77,20 @@ GSC（Google Search Console）の継続的追跡と改善施策の記録。
 - **status**: effect/pending (人間が 2-4 週連続観測で確定 / evidence-based-judgment.md)
 - **wave_id**: 2026-06-07-manual-2 / **記事数**: 3
 - **remediated_at**: 2026-06-07 (週 2026-W23)
-- **before**: 2026-W22 → **after**: 2026-W29 (経過 6 週)
-- **計測日**: 2026-07-19 (自動: measure-gsc-impact.mjs)
+- **before**: 2026-W22 → **after**: 2026-W30 (経過 7 週)
+- **計測日**: 2026-07-26 (自動: measure-gsc-impact.mjs)
 
 | slug | imp (before→after) | clicks | CTR | position |
 |---|---|---|---|---|
-| `household-spending-prefecture-gap` | 586→2216 (+1630) | 23→60 (+37) | 3.9%→2.7% (-1.22pp) | 7.7→6.2 (-1.5) |
-| `local-government-debt-burden` | 662→3713 (+3051) | 19→115 (+96) | 2.9%→3.1% (+0.23pp) | 7.0→6.4 (-0.6) |
-| `price-index-high-low-prefecture` | 1366→346 (-1020) | 27→2 (-25) | 2.0%→0.6% (-1.40pp) | 9.0→10.4 (+1.3) |
+| `household-spending-prefecture-gap` | 586→2316 (+1730) | 23→69 (+46) | 3.9%→3.0% (-0.95pp) | 7.7→5.8 (-2.0) |
+| `local-government-debt-burden` | 662→4802 (+4140) | 19→143 (+124) | 2.9%→3.0% (+0.11pp) | 7.0→6.5 (-0.4) |
+| `price-index-high-low-prefecture` | 1366→335 (-1031) | 27→2 (-25) | 2.0%→0.6% (-1.38pp) | 9.0→10.1 (+1.1) |
 
-**wave 合計**: imp 2614→6275 (+3661) / clicks 69→177 (+108) / CTR 2.64%→2.82% (+0.18pp)
+**wave 合計**: imp 2614→7453 (+4839) / clicks 69→214 (+145) / CTR 2.64%→2.87% (+0.23pp)
 
 ### 判定
 
-- **[実測]** clicks +108 / imp +3661 (2026-W22→2026-W29, 3 記事)
+- **[実測]** clicks +145 / imp +4839 (2026-W22→2026-W30, 3 記事)
 - **[判定] effect/pending** — 自動計測は delta 提示まで。最低 2-4 週連続で正方向なら weekly-review が effect/full|partial を確定する (evidence-based-judgment.md)
 - **検証コマンド**: `node .claude/scripts/blog/measure-gsc-impact.mjs --wave 2026-06-07-manual-2`
 
@@ -99,20 +99,20 @@ GSC（Google Search Console）の継続的追跡と改善施策の記録。
 - **status**: effect/pending (人間が 2-4 週連続観測で確定 / evidence-based-judgment.md)
 - **wave_id**: 2026-06-07-manual / **記事数**: 3
 - **remediated_at**: 2026-06-07 (週 2026-W23)
-- **before**: 2026-W22 → **after**: 2026-W29 (経過 6 週)
-- **計測日**: 2026-07-19 (自動: measure-gsc-impact.mjs)
+- **before**: 2026-W22 → **after**: 2026-W30 (経過 7 週)
+- **計測日**: 2026-07-26 (自動: measure-gsc-impact.mjs)
 
 | slug | imp (before→after) | clicks | CTR | position |
 |---|---|---|---|---|
-| `consumer-price-regional-gap` | 207→7 (-200) | 0→0 (+0) | 0.0%→0.0% (+0.00pp) | 9.5→9.4 (-0.1) |
-| `curry-roux-consumption-gap` | 0→61 (+61) | 0→2 (+2) | 0.0%→3.3% (+3.28pp) | 0.0→7.6 (+7.6) |
-| `doctor-income-prefecture-gap` | 0→1 (+1) | 0→0 (+0) | 0.0%→0.0% (+0.00pp) | 0.0→13.0 (+13.0) |
+| `consumer-price-regional-gap` | 207→5 (-202) | 0→0 (+0) | 0.0%→0.0% (+0.00pp) | 9.5→7.2 (-2.3) |
+| `curry-roux-consumption-gap` | 0→78 (+78) | 0→2 (+2) | 0.0%→2.6% (+2.56pp) | 0.0→7.4 (+7.4) |
+| `doctor-income-prefecture-gap` | 0→3 (+3) | 0→0 (+0) | 0.0%→0.0% (+0.00pp) | 0.0→12.0 (+12.0) |
 
-**wave 合計**: imp 207→69 (-138) / clicks 0→2 (+2) / CTR 0.00%→2.90% (+2.90pp)
+**wave 合計**: imp 207→86 (-121) / clicks 0→2 (+2) / CTR 0.00%→2.33% (+2.33pp)
 
 ### 判定
 
-- **[実測]** clicks +2 / imp -138 (2026-W22→2026-W29, 3 記事)
+- **[実測]** clicks +2 / imp -121 (2026-W22→2026-W30, 3 記事)
 - **[判定] effect/pending** — 自動計測は delta 提示まで。最低 2-4 週連続で正方向なら weekly-review が effect/full|partial を確定する (evidence-based-judgment.md)
 - **検証コマンド**: `node .claude/scripts/blog/measure-gsc-impact.mjs --wave 2026-06-07-manual`
 
@@ -121,21 +121,21 @@ GSC（Google Search Console）の継続的追跡と改善施策の記録。
 - **status**: effect/pending (人間が 2-4 週連続観測で確定 / evidence-based-judgment.md)
 - **wave_id**: 2026-05-29-auto / **記事数**: 4
 - **remediated_at**: 2026-05-29 (週 2026-W22)
-- **before**: 2026-W21 → **after**: 2026-W29 (経過 7 週)
-- **計測日**: 2026-07-19 (自動: measure-gsc-impact.mjs)
+- **before**: 2026-W21 → **after**: 2026-W30 (経過 8 週)
+- **計測日**: 2026-07-26 (自動: measure-gsc-impact.mjs)
 
 | slug | imp (before→after) | clicks | CTR | position |
 |---|---|---|---|---|
-| `agriculture-hokkaido-dominance` | 103→186 (+83) | 0→4 (+4) | 0.0%→2.2% (+2.15pp) | 9.3→8.6 (-0.8) |
-| `manufacturing-aichi-dominance` | 858→3020 (+2162) | 5→6 (+1) | 0.6%→0.2% (-0.38pp) | 8.7→7.1 (-1.6) |
-| `manufacturing-shipment-prefecture-ranking` | 159→57 (-102) | 0→0 (+0) | 0.0%→0.0% (+0.00pp) | 8.1→7.6 (-0.4) |
+| `agriculture-hokkaido-dominance` | 103→167 (+64) | 0→3 (+3) | 0.0%→1.8% (+1.80pp) | 9.3→8.8 (-0.6) |
+| `manufacturing-aichi-dominance` | 858→3281 (+2423) | 5→10 (+5) | 0.6%→0.3% (-0.28pp) | 8.7→7.0 (-1.6) |
+| `manufacturing-shipment-prefecture-ranking` | 159→60 (-99) | 0→0 (+0) | 0.0%→0.0% (+0.00pp) | 8.1→7.4 (-0.6) |
 | `sewerage-water-supply-gap` | 138→0 (-138) | 2→0 (-2) | 1.4%→0.0% (-1.45pp) | 9.9→0.0 (-9.9) |
 
-**wave 合計**: imp 1258→3263 (+2005) / clicks 7→10 (+3) / CTR 0.56%→0.31% (-0.25pp)
+**wave 合計**: imp 1258→3508 (+2250) / clicks 7→13 (+6) / CTR 0.56%→0.37% (-0.19pp)
 
 ### 判定
 
-- **[実測]** clicks +3 / imp +2005 (2026-W21→2026-W29, 4 記事)
+- **[実測]** clicks +6 / imp +2250 (2026-W21→2026-W30, 4 記事)
 - **[判定] effect/pending** — 自動計測は delta 提示まで。最低 2-4 週連続で正方向なら weekly-review が effect/full|partial を確定する (evidence-based-judgment.md)
 - **検証コマンド**: `node .claude/scripts/blog/measure-gsc-impact.mjs --wave 2026-05-29-auto`
 
@@ -144,70 +144,70 @@ GSC（Google Search Console）の継続的追跡と改善施策の記録。
 - **status**: effect/pending (人間が 2-4 週連続観測で確定 / evidence-based-judgment.md)
 - **wave_id**: 2026-05-25-auto / **記事数**: 53
 - **remediated_at**: 2026-05-25 (週 2026-W22)
-- **before**: 2026-W21 → **after**: 2026-W29 (経過 7 週)
-- **計測日**: 2026-07-19 (自動: measure-gsc-impact.mjs)
+- **before**: 2026-W21 → **after**: 2026-W30 (経過 8 週)
+- **計測日**: 2026-07-26 (自動: measure-gsc-impact.mjs)
 
 | slug | imp (before→after) | clicks | CTR | position |
 |---|---|---|---|---|
-| `aging-rate-akita-vs-okinawa` | 39→30 (-9) | 0→0 (+0) | 0.0%→0.0% (+0.00pp) | 11.2→9.5 (-1.7) |
-| `alcohol-prefecture-map` | 66→26 (-40) | 0→2 (+2) | 0.0%→7.7% (+7.69pp) | 7.0→9.9 (+2.9) |
-| `barber-beauty-salon-regional-gap` | 34→13 (-21) | 0→0 (+0) | 0.0%→0.0% (+0.00pp) | 7.9→9.2 (+1.3) |
-| `birth-death-gap-decline` | 51→13 (-38) | 0→1 (+1) | 0.0%→7.7% (+7.69pp) | 12.4→10.5 (-1.9) |
-| `bonito-catch-prefecture` | 231→5602 (+5371) | 4→43 (+39) | 1.7%→0.8% (-0.96pp) | 8.5→7.3 (-1.2) |
+| `aging-rate-akita-vs-okinawa` | 39→15 (-24) | 0→0 (+0) | 0.0%→0.0% (+0.00pp) | 11.2→9.2 (-2.0) |
+| `alcohol-prefecture-map` | 66→122 (+56) | 0→2 (+2) | 0.0%→1.6% (+1.64pp) | 7.0→10.4 (+3.4) |
+| `barber-beauty-salon-regional-gap` | 34→5 (-29) | 0→0 (+0) | 0.0%→0.0% (+0.00pp) | 7.9→10.0 (+2.1) |
+| `birth-death-gap-decline` | 51→9 (-42) | 0→1 (+1) | 0.0%→11.1% (+11.11pp) | 12.4→11.0 (-1.4) |
+| `bonito-catch-prefecture` | 231→5785 (+5554) | 4→42 (+38) | 1.7%→0.7% (-1.01pp) | 8.5→7.0 (-1.5) |
 | `brazilian-resident-population-prefecture-gap` | 18→0 (-18) | 0→0 (+0) | 0.0%→0.0% (+0.00pp) | 6.7→0.0 (-6.7) |
-| `child-height-regional-gap` | 2005→763 (-1242) | 14→4 (-10) | 0.7%→0.5% (-0.17pp) | 10.2→9.7 (-0.5) |
-| `commercial-land-price-trend` | 27→3 (-24) | 0→0 (+0) | 0.0%→0.0% (+0.00pp) | 6.8→3.3 (-3.5) |
+| `child-height-regional-gap` | 2005→748 (-1257) | 14→3 (-11) | 0.7%→0.4% (-0.30pp) | 10.2→9.6 (-0.6) |
+| `commercial-land-price-trend` | 27→1 (-26) | 0→0 (+0) | 0.0%→0.0% (+0.00pp) | 6.8→7.0 (+0.2) |
 | `commercial-sales-productivity-gap` | 153→10 (-143) | 2→0 (-2) | 1.3%→0.0% (-1.31pp) | 7.7→5.5 (-2.2) |
-| `communication-cost-burden` | 37→8 (-29) | 1→1 (+0) | 2.7%→12.5% (+9.80pp) | 8.3→8.4 (+0.1) |
-| `consumer-price-regional-gap` | 216→7 (-209) | 0→0 (+0) | 0.0%→0.0% (+0.00pp) | 9.2→9.4 (+0.3) |
-| `cpi-change-regional-pattern` | 56→5 (-51) | 1→0 (-1) | 1.8%→0.0% (-1.79pp) | 7.7→8.4 (+0.7) |
+| `communication-cost-burden` | 37→4 (-33) | 1→1 (+0) | 2.7%→25.0% (+22.30pp) | 8.3→7.5 (-0.8) |
+| `consumer-price-regional-gap` | 216→5 (-211) | 0→0 (+0) | 0.0%→0.0% (+0.00pp) | 9.2→7.2 (-2.0) |
+| `cpi-change-regional-pattern` | 56→3 (-53) | 1→0 (-1) | 1.8%→0.0% (-1.79pp) | 7.7→8.0 (+0.3) |
 | `expenditure-structure-comparison` | 16→0 (-16) | 0→0 (+0) | 0.0%→0.0% (+0.00pp) | 9.4→0.0 (-9.4) |
-| `fertility-fiscal-nexus` | 25→4 (-21) | 0→0 (+0) | 0.0%→0.0% (+0.00pp) | 11.0→3.0 (-8.0) |
-| `fertility-rate-prefecture-gap` | 148→83 (-65) | 0→1 (+1) | 0.0%→1.2% (+1.20pp) | 11.5→8.6 (-2.9) |
-| `fiscal-health-50years-trend` | 25→38 (+13) | 0→4 (+4) | 0.0%→10.5% (+10.53pp) | 8.2→9.6 (+1.4) |
-| `fishery-catch-aquaculture-shift` | 133→100 (-33) | 0→1 (+1) | 0.0%→1.0% (+1.00pp) | 10.8→9.3 (-1.5) |
-| `fishery-species-prefecture-specialty` | 273→1 (-272) | 3→0 (-3) | 1.1%→0.0% (-1.10pp) | 8.1→6.0 (-2.1) |
-| `food-trio-prefecture-map` | 340→226 (-114) | 6→2 (-4) | 1.8%→0.9% (-0.88pp) | 7.6→8.7 (+1.1) |
-| `foreign-overnight-guests-prefecture-gap` | 34→104 (+70) | 0→0 (+0) | 0.0%→0.0% (+0.00pp) | 8.4→8.6 (+0.2) |
-| `habitable-area-land-use` | 754→1889 (+1135) | 5→11 (+6) | 0.7%→0.6% (-0.08pp) | 8.1→8.0 (-0.1) |
-| `highschool-starting-salary-gap` | 390→127 (-263) | 7→1 (-6) | 1.8%→0.8% (-1.01pp) | 9.1→9.1 (-0.0) |
-| `household-income-tokyo-okinawa` | 25→6 (-19) | 0→0 (+0) | 0.0%→0.0% (+0.00pp) | 10.4→5.8 (-4.6) |
-| `household-spending-before-after-inflation` | 37→7 (-30) | 0→1 (+1) | 0.0%→14.3% (+14.29pp) | 6.2→12.1 (+6.0) |
-| `housing-cost-livability-trend` | 71→82 (+11) | 1→7 (+6) | 1.4%→8.5% (+7.13pp) | 7.7→6.0 (-1.8) |
-| `ict-digital-divide-composite-analysis` | 12→0 (-12) | 0→0 (+0) | 0.0%→0.0% (+0.00pp) | 8.5→0.0 (-8.5) |
-| `inflation-rate-prefecture-gap` | 82→7 (-75) | 1→1 (+0) | 1.2%→14.3% (+13.07pp) | 6.6→7.0 (+0.4) |
-| `konbu-consumption-prefecture-gap` | 34→32 (-2) | 0→2 (+2) | 0.0%→6.3% (+6.25pp) | 6.5→6.4 (-0.1) |
-| `local-tax-regional-gap` | 109→270 (+161) | 2→2 (+0) | 1.8%→0.7% (-1.09pp) | 7.1→8.4 (+1.3) |
-| `marriage-divorce-okinawa` | 50→28 (-22) | 0→0 (+0) | 0.0%→0.0% (+0.00pp) | 7.1→13.9 (+6.8) |
-| `marriage-unmarried-crisis` | 275→199 (-76) | 4→4 (+0) | 1.5%→2.0% (+0.56pp) | 9.2→9.1 (-0.1) |
+| `fertility-fiscal-nexus` | 25→3 (-22) | 0→0 (+0) | 0.0%→0.0% (+0.00pp) | 11.0→3.7 (-7.4) |
+| `fertility-rate-prefecture-gap` | 148→100 (-48) | 0→1 (+1) | 0.0%→1.0% (+1.00pp) | 11.5→8.8 (-2.7) |
+| `fiscal-health-50years-trend` | 25→30 (+5) | 0→2 (+2) | 0.0%→6.7% (+6.67pp) | 8.2→8.2 (+0.0) |
+| `fishery-catch-aquaculture-shift` | 133→90 (-43) | 0→1 (+1) | 0.0%→1.1% (+1.11pp) | 10.8→9.0 (-1.8) |
+| `fishery-species-prefecture-specialty` | 273→1 (-272) | 3→0 (-3) | 1.1%→0.0% (-1.10pp) | 8.1→4.0 (-4.1) |
+| `food-trio-prefecture-map` | 340→191 (-149) | 6→0 (-6) | 1.8%→0.0% (-1.76pp) | 7.6→8.6 (+1.0) |
+| `foreign-overnight-guests-prefecture-gap` | 34→100 (+66) | 0→0 (+0) | 0.0%→0.0% (+0.00pp) | 8.4→8.7 (+0.2) |
+| `habitable-area-land-use` | 754→1726 (+972) | 5→12 (+7) | 0.7%→0.7% (+0.03pp) | 8.1→7.7 (-0.4) |
+| `highschool-starting-salary-gap` | 390→140 (-250) | 7→2 (-5) | 1.8%→1.4% (-0.37pp) | 9.1→9.0 (-0.1) |
+| `household-income-tokyo-okinawa` | 25→5 (-20) | 0→0 (+0) | 0.0%→0.0% (+0.00pp) | 10.4→5.6 (-4.8) |
+| `household-spending-before-after-inflation` | 37→6 (-31) | 0→1 (+1) | 0.0%→16.7% (+16.67pp) | 6.2→13.2 (+7.0) |
+| `housing-cost-livability-trend` | 71→62 (-9) | 1→7 (+6) | 1.4%→11.3% (+9.88pp) | 7.7→6.8 (-1.0) |
+| `ict-digital-divide-composite-analysis` | 12→1 (-11) | 0→0 (+0) | 0.0%→0.0% (+0.00pp) | 8.5→6.0 (-2.5) |
+| `inflation-rate-prefecture-gap` | 82→11 (-71) | 1→1 (+0) | 1.2%→9.1% (+7.87pp) | 6.6→7.2 (+0.6) |
+| `konbu-consumption-prefecture-gap` | 34→165 (+131) | 0→12 (+12) | 0.0%→7.3% (+7.27pp) | 6.5→6.1 (-0.4) |
+| `local-tax-regional-gap` | 109→272 (+163) | 2→2 (+0) | 1.8%→0.7% (-1.10pp) | 7.1→8.1 (+1.1) |
+| `marriage-divorce-okinawa` | 50→67 (+17) | 0→0 (+0) | 0.0%→0.0% (+0.00pp) | 7.1→13.9 (+6.8) |
+| `marriage-unmarried-crisis` | 275→246 (-29) | 4→5 (+1) | 1.5%→2.0% (+0.58pp) | 9.2→9.0 (-0.2) |
 | `minimum-wage-1000yen-breakthrough` | 118→2 (-116) | 0→0 (+0) | 0.0%→0.0% (+0.00pp) | 12.1→5.5 (-6.6) |
 | `minimum-wage-gap-regional-economy` | 20→0 (-20) | 0→0 (+0) | 0.0%→0.0% (+0.00pp) | 7.8→0.0 (-7.8) |
-| `park-green-space-gap` | 334→696 (+362) | 4→5 (+1) | 1.2%→0.7% (-0.48pp) | 7.2→6.4 (-0.8) |
-| `pharmacy-count-prefecture-ranking` | 15→16 (+1) | 0→0 (+0) | 0.0%→0.0% (+0.00pp) | 8.7→8.9 (+0.2) |
+| `park-green-space-gap` | 334→776 (+442) | 4→4 (+0) | 1.2%→0.5% (-0.68pp) | 7.2→6.6 (-0.6) |
+| `pharmacy-count-prefecture-ranking` | 15→19 (+4) | 0→0 (+0) | 0.0%→0.0% (+0.00pp) | 8.7→8.4 (-0.3) |
 | `pollution-complaints-regional-map` | 62→0 (-62) | 1→0 (-1) | 1.6%→0.0% (-1.61pp) | 8.0→0.0 (-8.0) |
-| `population-density-urbanization` | 285→631 (+346) | 4→10 (+6) | 1.4%→1.6% (+0.18pp) | 8.7→8.2 (-0.5) |
+| `population-density-urbanization` | 285→938 (+653) | 4→10 (+6) | 1.4%→1.1% (-0.34pp) | 8.7→8.3 (-0.4) |
 | `population-migration-tokyo-concentration` | 28→0 (-28) | 0→0 (+0) | 0.0%→0.0% (+0.00pp) | 9.2→0.0 (-9.2) |
-| `post-office-last-window` | 78→21 (-57) | 1→0 (-1) | 1.3%→0.0% (-1.28pp) | 6.5→5.0 (-1.5) |
-| `precipitation-snow-regional-gap` | 155→1103 (+948) | 1→11 (+10) | 0.6%→1.0% (+0.35pp) | 12.5→9.6 (-2.9) |
-| `prefectural-height-male-female-gap` | 10→401 (+391) | 0→1 (+1) | 0.0%→0.2% (+0.25pp) | 8.5→10.9 (+2.4) |
-| `price-index-high-low-prefecture` | 1527→346 (-1181) | 27→2 (-25) | 1.8%→0.6% (-1.19pp) | 8.8→10.4 (+1.6) |
-| `recycling-rate-gap` | 60→79 (+19) | 1→0 (-1) | 1.7%→0.0% (-1.67pp) | 7.8→7.9 (+0.1) |
-| `savings-rate-gap` | 20→9 (-11) | 0→0 (+0) | 0.0%→0.0% (+0.00pp) | 7.2→6.6 (-0.6) |
-| `school-nonattendance-pattern` | 32→30 (-2) | 0→0 (+0) | 0.0%→0.0% (+0.00pp) | 11.0→9.6 (-1.5) |
-| `sugar-consumption-prefecture-gap` | 19→126 (+107) | 0→0 (+0) | 0.0%→0.0% (+0.00pp) | 7.7→8.5 (+0.8) |
-| `sunshine-pacific-vs-nihonkai` | 146→747 (+601) | 0→8 (+8) | 0.0%→1.1% (+1.07pp) | 7.8→8.9 (+1.0) |
-| `temperature-extremes-map` | 2415→1752 (-663) | 36→18 (-18) | 1.5%→1.0% (-0.46pp) | 8.9→8.2 (-0.7) |
-| `truck-driver-2024-crisis` | 67→3 (-64) | 0→0 (+0) | 0.0%→0.0% (+0.00pp) | 5.8→7.3 (+1.5) |
-| `unemployment-structure` | 66→225 (+159) | 1→2 (+1) | 1.5%→0.9% (-0.63pp) | 6.9→9.1 (+2.2) |
+| `post-office-last-window` | 78→20 (-58) | 1→1 (+0) | 1.3%→5.0% (+3.72pp) | 6.5→5.8 (-0.7) |
+| `precipitation-snow-regional-gap` | 155→1113 (+958) | 1→9 (+8) | 0.6%→0.8% (+0.16pp) | 12.5→9.3 (-3.2) |
+| `prefectural-height-male-female-gap` | 10→324 (+314) | 0→0 (+0) | 0.0%→0.0% (+0.00pp) | 8.5→10.8 (+2.3) |
+| `price-index-high-low-prefecture` | 1527→335 (-1192) | 27→2 (-25) | 1.8%→0.6% (-1.17pp) | 8.8→10.1 (+1.3) |
+| `recycling-rate-gap` | 60→31 (-29) | 1→0 (-1) | 1.7%→0.0% (-1.67pp) | 7.8→7.5 (-0.2) |
+| `savings-rate-gap` | 20→8 (-12) | 0→0 (+0) | 0.0%→0.0% (+0.00pp) | 7.2→6.3 (-0.9) |
+| `school-nonattendance-pattern` | 32→36 (+4) | 0→0 (+0) | 0.0%→0.0% (+0.00pp) | 11.0→9.8 (-1.2) |
+| `sugar-consumption-prefecture-gap` | 19→40 (+21) | 0→0 (+0) | 0.0%→0.0% (+0.00pp) | 7.7→8.4 (+0.6) |
+| `sunshine-pacific-vs-nihonkai` | 146→750 (+604) | 0→7 (+7) | 0.0%→0.9% (+0.93pp) | 7.8→8.2 (+0.4) |
+| `temperature-extremes-map` | 2415→2621 (+206) | 36→31 (-5) | 1.5%→1.2% (-0.31pp) | 8.9→8.2 (-0.7) |
+| `truck-driver-2024-crisis` | 67→4 (-63) | 0→0 (+0) | 0.0%→0.0% (+0.00pp) | 5.8→7.5 (+1.7) |
+| `unemployment-structure` | 66→280 (+214) | 1→2 (+1) | 1.5%→0.7% (-0.80pp) | 6.9→9.2 (+2.3) |
 | `unemployment-tertiary-industry-link` | 13→3 (-10) | 0→0 (+0) | 0.0%→0.0% (+0.00pp) | 6.5→9.0 (+2.5) |
-| `wage-vs-living-cost` | 25→9 (-16) | 0→1 (+1) | 0.0%→11.1% (+11.11pp) | 6.9→8.1 (+1.2) |
-| `water-sewage-crisis` | 39→32 (-7) | 0→0 (+0) | 0.0%→0.0% (+0.00pp) | 10.8→11.0 (+0.2) |
+| `wage-vs-living-cost` | 25→16 (-9) | 0→2 (+2) | 0.0%→12.5% (+12.50pp) | 6.9→8.8 (+1.9) |
+| `water-sewage-crisis` | 39→24 (-15) | 0→0 (+0) | 0.0%→0.0% (+0.00pp) | 10.8→11.3 (+0.5) |
 
-**wave 合計**: imp 11300→15914 (+4614) / clicks 127→146 (+19) / CTR 1.12%→0.92% (-0.21pp)
+**wave 合計**: imp 11300→17263 (+5963) / clicks 127→163 (+36) / CTR 1.12%→0.94% (-0.18pp)
 
 ### 判定
 
-- **[実測]** clicks +19 / imp +4614 (2026-W21→2026-W29, 53 記事)
+- **[実測]** clicks +36 / imp +5963 (2026-W21→2026-W30, 53 記事)
 - **[判定] effect/pending** — 自動計測は delta 提示まで。最低 2-4 週連続で正方向なら weekly-review が effect/full|partial を確定する (evidence-based-judgment.md)
 - **検証コマンド**: `node .claude/scripts/blog/measure-gsc-impact.mjs --wave 2026-05-25-auto`
 
@@ -216,27 +216,27 @@ GSC（Google Search Console）の継続的追跡と改善施策の記録。
 - **status**: effect/pending (人間が 2-4 週連続観測で確定 / evidence-based-judgment.md)
 - **wave_id**: 2026-05-23-manual / **記事数**: 10
 - **remediated_at**: 2026-05-23 (週 2026-W21)
-- **before**: 2026-W20 → **after**: 2026-W29 (経過 8 週)
-- **計測日**: 2026-07-19 (自動: measure-gsc-impact.mjs)
+- **before**: 2026-W20 → **after**: 2026-W30 (経過 9 週)
+- **計測日**: 2026-07-26 (自動: measure-gsc-impact.mjs)
 
 | slug | imp (before→after) | clicks | CTR | position |
 |---|---|---|---|---|
-| `child-height-regional-gap` | 1719→763 (-956) | 13→4 (-9) | 0.8%→0.5% (-0.23pp) | 10.6→9.7 (-0.9) |
-| `consumer-price-regional-gap` | 250→7 (-243) | 1→0 (-1) | 0.4%→0.0% (-0.40pp) | 7.3→9.4 (+2.1) |
-| `fiscal-self-reliance-gap` | 583→1875 (+1292) | 16→17 (+1) | 2.7%→0.9% (-1.84pp) | 8.8→8.6 (-0.2) |
-| `fishery-species-prefecture-specialty` | 273→1 (-272) | 3→0 (-3) | 1.1%→0.0% (-1.10pp) | 8.1→6.0 (-2.1) |
-| `habitable-area-land-use` | 658→1889 (+1231) | 2→11 (+9) | 0.3%→0.6% (+0.28pp) | 8.1→8.0 (-0.2) |
-| `overnight-guests-inbound-recovery` | 383→130 (-253) | 1→0 (-1) | 0.3%→0.0% (-0.26pp) | 8.3→16.8 (+8.4) |
-| `park-green-space-gap` | 225→696 (+471) | 2→5 (+3) | 0.9%→0.7% (-0.17pp) | 7.5→6.4 (-1.1) |
-| `population-density-urbanization` | 259→631 (+372) | 4→10 (+6) | 1.5%→1.6% (+0.04pp) | 11.1→8.2 (-2.9) |
-| `price-index-high-low-prefecture` | 1403→346 (-1057) | 26→2 (-24) | 1.9%→0.6% (-1.28pp) | 8.5→10.4 (+1.9) |
-| `temperature-extremes-map` | 1388→1752 (+364) | 21→18 (-3) | 1.5%→1.0% (-0.49pp) | 9.1→8.2 (-0.9) |
+| `child-height-regional-gap` | 1719→748 (-971) | 13→3 (-10) | 0.8%→0.4% (-0.36pp) | 10.6→9.6 (-0.9) |
+| `consumer-price-regional-gap` | 250→5 (-245) | 1→0 (-1) | 0.4%→0.0% (-0.40pp) | 7.3→7.2 (-0.1) |
+| `fiscal-self-reliance-gap` | 583→2115 (+1532) | 16→20 (+4) | 2.7%→0.9% (-1.80pp) | 8.8→8.9 (+0.0) |
+| `fishery-species-prefecture-specialty` | 273→1 (-272) | 3→0 (-3) | 1.1%→0.0% (-1.10pp) | 8.1→4.0 (-4.1) |
+| `habitable-area-land-use` | 658→1726 (+1068) | 2→12 (+10) | 0.3%→0.7% (+0.39pp) | 8.1→7.7 (-0.4) |
+| `overnight-guests-inbound-recovery` | 383→123 (-260) | 1→0 (-1) | 0.3%→0.0% (-0.26pp) | 8.3→17.5 (+9.2) |
+| `park-green-space-gap` | 225→776 (+551) | 2→4 (+2) | 0.9%→0.5% (-0.37pp) | 7.5→6.6 (-0.9) |
+| `population-density-urbanization` | 259→938 (+679) | 4→10 (+6) | 1.5%→1.1% (-0.48pp) | 11.1→8.3 (-2.8) |
+| `price-index-high-low-prefecture` | 1403→335 (-1068) | 26→2 (-24) | 1.9%→0.6% (-1.26pp) | 8.5→10.1 (+1.6) |
+| `temperature-extremes-map` | 1388→2621 (+1233) | 21→31 (+10) | 1.5%→1.2% (-0.33pp) | 9.1→8.2 (-0.9) |
 
-**wave 合計**: imp 7141→8090 (+949) / clicks 89→67 (-22) / CTR 1.25%→0.83% (-0.42pp)
+**wave 合計**: imp 7141→9388 (+2247) / clicks 89→82 (-7) / CTR 1.25%→0.87% (-0.37pp)
 
 ### 判定
 
-- **[実測]** clicks -22 / imp +949 (2026-W20→2026-W29, 10 記事)
+- **[実測]** clicks -7 / imp +2247 (2026-W20→2026-W30, 10 記事)
 - **[判定] effect/pending** — 自動計測は delta 提示まで。最低 2-4 週連続で正方向なら weekly-review が effect/full|partial を確定する (evidence-based-judgment.md)
 - **検証コマンド**: `node .claude/scripts/blog/measure-gsc-impact.mjs --wave 2026-05-23-manual`
 

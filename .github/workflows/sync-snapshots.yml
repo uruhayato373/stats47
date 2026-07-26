@@ -14,13 +14,13 @@ on:
   workflow_dispatch:
     inputs:
       only:
-        description: "対象 task (空=全 task)。正典は run.sh の TASKS 配列 (.claude/skills/db/sync-snapshots/run.sh)。例: ranking-items / master / page-components / blog / area-profile"
+        description: '対象 task (空=全 task)。正典は run.sh の TASKS 配列 (.claude/skills/db/sync-snapshots/run.sh)。例: ranking-items / master / page-components / blog / area-profile'
         required: false
-        default: ""
+        default: ''
       dry_run:
-        description: "true: 生成のみ (R2 push しない)"
+        description: 'true: 生成のみ (R2 push しない)'
         required: false
-        default: "false"
+        default: 'false'
 
 permissions:
   contents: write
@@ -47,7 +47,7 @@ jobs:
     timeout-minutes: 45
     steps:
       - name: 🧰 Checkout main
-        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           ref: main
           fetch-depth: 1
@@ -55,8 +55,8 @@ jobs:
       - name: 🟢 Setup Node.js
         uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
-          node-version: "20"
-          cache: "npm"
+          node-version: '20'
+          cache: 'npm'
 
       - name: 📦 Install dependencies
         run: npm ci
@@ -68,7 +68,7 @@ jobs:
         run: npm run db:pull --workspace=packages/r2-storage
 
       # 特産品イラスト (Codex 生成・CI では再生成できない実質ソース) を git tracked な
-      # source dir から .local/r2 に配置する。run.sh 末尾の diff-push-r2 が
+      # source dir から .local/r2 に配置する。run.sh 末尾の snapshot push が
       # app/areas/<code>/specialty/<slug>.webp として R2 に push する。
       # 正典: .claude/rules/area-databook-standards.md §5 / ogp-image-standards.md
       - name: 🖼 Stage area specialty webp
@@ -121,7 +121,7 @@ jobs:
     timeout-minutes: 20
     steps:
       - name: 🧰 Checkout develop
-        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           ref: develop
           fetch-depth: 0
@@ -129,8 +129,8 @@ jobs:
       - name: 🟢 Setup Node.js
         uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
-          node-version: "20"
-          cache: "npm"
+          node-version: '20'
+          cache: 'npm'
 
       - name: 📦 Install dependencies
         run: npm ci
@@ -145,7 +145,7 @@ jobs:
       - name: 🔑 Regenerate known + sitemap ranking keys / known tag keys
         env:
           R2_PUBLIC_FETCH_URL: https://storage.stats47.jp
-          NODE_OPTIONS: "--conditions react-server"
+          NODE_OPTIONS: '--conditions react-server'
         run: |
           (cd apps/web && npx tsx scripts/generate-known-ranking-keys.ts)
           node .claude/scripts/gsc/build-sitemap-ranking-keys.cjs
@@ -154,9 +154,10 @@ jobs:
 
       # 新規 ranking の OGP/カード を即生成 (KNOWN 確定直後・source=known で新キーも拾う)。
       # 未生成だと og:image が 404 になるため公開時に先回りする。欠落分のみ生成 (self-heal)。
-      # 正典: .claude/rules/ogp-image-standards.md。失敗しても keys PR は止めない。
-      - name: 🖼 Generate missing ranking OGP/cards (self-heal)
-        continue-on-error: true
+      # 通常の新規key数に合わせて1回50件に制限する。初回manifest移行は
+      # timeoutの長いgenerate-ogp-images.ymlを反復し、この短いPR jobへ持ち込まない。
+      # 生成・publish失敗はkeys PRも止め、画像なしrankingの公開を防ぐ。
+      - name: 🖼 Generate changed ranking OGP/cards
         env:
           R2_PUBLIC_FETCH_URL: https://storage.stats47.jp
           SITE_ORIGIN: https://stats47.jp
@@ -167,9 +168,12 @@ jobs:
         run: |
           TSC="apps/web/scripts/tsconfig.ogp.json"
           SC="apps/web/scripts/generate-ogp-images.ts"
-          npx tsx --tsconfig $TSC $SC --type ranking --source known --max-generate 500 || true
-          npx tsx --tsconfig $TSC $SC --type ranking-cards --source known --max-generate 500 || true
-          npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix app/ranking || true
+          for TYPE in ranking ranking-cards; do
+            npx tsx --tsconfig "$TSC" "$SC" --type "$TYPE" --source known --limit 50 --max-generate 50
+            PLAN=".local/image-generation-publish-plan-${TYPE}.json"
+            test -f "$PLAN" || { echo "exact publish plan が生成されませんでした: $TYPE"; exit 1; }
+            npx tsx packages/r2-storage/src/scripts/push-generated-image-set.ts --plan "$PLAN"
+          done
 
       - name: 🔀 Open PR if keys changed
         env:

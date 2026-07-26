@@ -19,6 +19,11 @@
       "types": "./src/server.ts",
       "import": "./src/server.ts",
       "require": "./src/server.ts"
+    },
+    "./image-pipeline": {
+      "types": "./src/image-pipeline.ts",
+      "import": "./src/image-pipeline.ts",
+      "require": "./src/image-pipeline.ts"
     }
   },
   "scripts": {
@@ -30,7 +35,9 @@
   },
   "dependencies": {
     "@stats47/logger": "*",
-    "server-only": "^0.0.1"
+    "@stats47/types": "*",
+    "server-only": "^0.0.1",
+    "sharp": "^0.33.5"
   },
   "peerDependencies": {
     "@cloudflare/workers-types": "^4.20250830.0",

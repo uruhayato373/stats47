@@ -1,4 +1,4 @@
-import { defineWorkspace } from "vitest/config";
+import { defineWorkspace } from 'vitest/config';
 
 /**
  * vitest workspace 設定
@@ -9,17 +9,18 @@ import { defineWorkspace } from "vitest/config";
  */
 export default defineWorkspace([
   // --- packages ---
-  "packages/area/vitest.config.ts",
-  "packages/correlation/vitest.config.ts",
-  "packages/ranking/vitest.config.ts",
-  "packages/category/vitest.config.ts",
-  "packages/database/vitest.config.ts",
-  "packages/estat-api/vitest.config.ts",
-  "packages/gis/vitest.config.ts",
-  "packages/svg-builder/vitest.config.ts",
-  "packages/utils/vitest.config.ts",
-  "packages/visualization/vitest.config.ts",
+  'packages/area/vitest.config.ts',
+  'packages/correlation/vitest.config.ts',
+  'packages/ranking/vitest.config.ts',
+  'packages/r2-storage/vitest.config.ts',
+  'packages/category/vitest.config.ts',
+  'packages/database/vitest.config.ts',
+  'packages/estat-api/vitest.config.ts',
+  'packages/gis/vitest.config.ts',
+  'packages/svg-builder/vitest.config.ts',
+  'packages/utils/vitest.config.ts',
+  'packages/visualization/vitest.config.ts',
 
   // --- apps ---
-  "apps/web/vitest.config.ts",
+  'apps/web/vitest.config.ts',
 ]);

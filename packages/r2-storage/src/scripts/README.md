@@ -6,14 +6,14 @@
 
 `.env.local`（リポジトリルート）に設定してください。
 
-| 変数 | 用途 |
-|---|---|
-| `R2_S3_ENDPOINT` | R2 S3 互換エンドポイント（例: `https://<accountId>.r2.cloudflarestorage.com`） |
-| `R2_ACCESS_KEY_ID` | R2 API トークンの Access Key ID |
-| `R2_SECRET_ACCESS_KEY` | R2 API トークンの Secret Access Key |
-| `CLOUDFLARE_R2_BUCKET_NAME` | バケット名（省略時: `stats47`） |
-| `CLOUDFLARE_API_TOKEN` | CDN キャッシュパージ専用（`purge-cache.ts` のみ） |
-| `CLOUDFLARE_ZONE_ID` | CDN キャッシュパージ専用（`purge-cache.ts` のみ） |
+| 変数                        | 用途                                                                           |
+| --------------------------- | ------------------------------------------------------------------------------ |
+| `R2_S3_ENDPOINT`            | R2 S3 互換エンドポイント（例: `https://<accountId>.r2.cloudflarestorage.com`） |
+| `R2_ACCESS_KEY_ID`          | R2 API トークンの Access Key ID                                                |
+| `R2_SECRET_ACCESS_KEY`      | R2 API トークンの Secret Access Key                                            |
+| `CLOUDFLARE_R2_BUCKET_NAME` | バケット名（省略時: `stats47`）                                                |
+| `CLOUDFLARE_API_TOKEN`      | CDN キャッシュパージ専用（`purge-cache.ts` のみ）                              |
+| `CLOUDFLARE_ZONE_ID`        | CDN キャッシュパージ専用（`purge-cache.ts` のみ）                              |
 
 ## スクリプト一覧
 
@@ -29,6 +29,46 @@ npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix app/ranking
 # 差分のみ確認（実際にはアップロードしない）
 npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --dry-run
 ```
+
+`diff-push-r2.ts`はJSON snapshot・記事等の通常staging用。生成画像には使わない。
+
+### 生成画像（exact plan → R2）
+
+```bash
+# generatorが変更bundleだけをisolated stagingへ生成
+npx tsx --tsconfig apps/web/scripts/tsconfig.ogp.json \
+  apps/web/scripts/generate-ogp-images.ts --type ranking-cards
+
+# planに列挙された画像だけをasset→manifestの順で反映
+npx tsx packages/r2-storage/src/scripts/push-generated-image-set.ts \
+  --plan .local/image-generation-publish-plan-ranking-cards.json
+
+# 書込なしでlocal bundle + remote CAS前提だけを検証
+npx tsx packages/r2-storage/src/scripts/push-generated-image-set.ts \
+  --plan .local/image-generation-publish-plan-ranking-cards.json --dry-run
+```
+
+画像publisherは`.local/image-staging/<type>`以外を拒否し、plan外ファイルを走査しない。
+2時間以内のplanに固定されたasset/manifest SHAと観測時remote manifest SHAを検証する。
+各assetのSHA-256・MIME・寸法をdecode検証し、bytesが同じassetはPUTせず、変更時だけHEAD再検証する。
+R2 distributed lock下で全asset成功後にentity manifestを`If-Match` / `If-None-Match`で更新し、
+失敗時は旧bundleへrollbackする。
+共通契約は`.claude/rules/ogp-image-standards.md` §5.0。
+
+### manifestを持たない生成asset（exact bytes → R2）
+
+```bash
+# 明示したkeyだけをSHA-256/size/MIMEで比較し、変化したobjectだけPUT
+npx tsx packages/r2-storage/src/scripts/push-exact-r2-assets.ts \
+  --key app/blog/example/chart.svg
+
+# idea等の十分狭いprefixでは拡張子も必須
+npx tsx packages/r2-storage/src/scripts/push-exact-r2-assets.ts \
+  --prefix sns/buzz-map/example --extension png,mp4
+```
+
+対象は`.local/r2`配下だけ。空・広域prefix・候補0件・staging外参照を拒否し、
+mtimeやローカルcacheを使わずR2 HEAD metadataとlocal bytesを比較する。PUT後もHEADを再検証する。
 
 ### ダウンロード（R2 → .local/r2）
 

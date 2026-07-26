@@ -24,12 +24,38 @@ export function loadCurated() {
   return require(path.resolve(__dirname, "../data/a8-curated.json"));
 }
 
+// ---------- 表記ゆれ正規化 ----------
+
+/**
+ * キーワード照合用に表記ゆれを畳んだ文字列。
+ *
+ * NFKC で全角英数・半角カナを正規化し、小文字化し、**ハイフン類だけ**を除去する。
+ * これが無いと「置くだけ簡単Wi-Fi」が keyword "wifi" に一致せず vertical 未解決になる
+ * (2026-07-27 実測: A8 提携済み 33 件が pending-vertical で確定EPC 評価から漏れていた)。
+ *
+ * 空白と「・」は**あえて残す**。除去すると「郷土 地域」が housing の "土地" に誤マッチする。
+ * カタカナ長音「ー」(U+30FC) はハイフン類に含めない (「スカパー」を壊さない)。
+ */
+function normalizeForMatch(value) {
+  return String(value ?? "")
+    .normalize("NFKC")
+    .toLowerCase()
+    .replace(/[-‐-―]/g, "");
+}
+
+/** program の照合対象テキスト (名前 + ジャンル + サブジャンル) を正規化して返す。 */
+function haystackOf(program) {
+  return normalizeForMatch(
+    `${program.name ?? ""} ${program.genre ?? ""} ${program.subGenre ?? ""}`,
+  );
+}
+
 // ---------- blocklist ----------
 
 /** program の名前/ジャンルに blocklist キーワードが含まれるか。 */
 export function isBlocked(program, curated) {
-  const hay = `${program.name ?? ""} ${program.genre ?? ""} ${program.subGenre ?? ""}`;
-  return curated.blocklistKeywords.some((kw) => hay.includes(kw));
+  const hay = haystackOf(program);
+  return curated.blocklistKeywords.some((kw) => hay.includes(normalizeForMatch(kw)));
 }
 
 // ---------- vertical 解決 ----------
@@ -38,17 +64,19 @@ export function isBlocked(program, curated) {
  * A8 ジャンル/プログラム名 → AffiliateVertical。
  * ヒットしたキーワードのうち**最長 (最も具体的) の一致**を採る。
  * これで「自動車保険」(mobility) が「保険」(economy) を先取りされない (iteration order 非依存)。
+ * 照合は normalizeForMatch 経由なので大文字小文字・全角半角・ハイフン差を吸収する。
  * ヒットなしは null (=pending-vertical)。
  */
 export function resolveVertical(program, curated) {
-  const hay = `${program.name ?? ""} ${program.genre ?? ""} ${program.subGenre ?? ""}`;
+  const hay = haystackOf(program);
   let best = null;
   let bestLen = 0;
   for (const [vertical, keywords] of Object.entries(curated.verticalKeywords)) {
     for (const kw of keywords) {
-      if (kw.length > bestLen && hay.includes(kw)) {
+      const needle = normalizeForMatch(kw);
+      if (needle.length > bestLen && hay.includes(needle)) {
         best = vertical;
-        bestLen = kw.length;
+        bestLen = needle.length;
       }
     }
   }

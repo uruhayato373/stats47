@@ -1,24 +1,24 @@
 {
-  "generatedAt": "2026-07-23T11:12:50.823Z",
+  "generatedAt": "2026-07-26T14:08:33.008Z",
   "week": "2026-W30",
   "sources": {
     "gsc": {
       "status": "success",
       "freshness": "fresh",
-      "observedAt": "2026-07-19T00:00:00Z",
-      "count": 10264
+      "observedAt": "2026-07-26T00:00:00Z",
+      "count": 10916
     },
     "ga4": {
       "status": "success",
       "freshness": "fresh",
-      "observedAt": "2026-07-19T00:00:00Z",
-      "count": 7564
+      "observedAt": "2026-07-26T00:00:00Z",
+      "count": 8356
     },
     "psi": {
-      "status": "success",
-      "freshness": "fresh",
-      "observedAt": "2026-07-22T18:26:41.581Z",
-      "count": 204
+      "status": "partial",
+      "freshness": "stale",
+      "observedAt": "2026-07-19T18:13:21.484Z",
+      "count": 228
     },
     "coverage": {
       "status": "partial",
@@ -27,22 +27,22 @@
       "count": 5166
     },
     "inspection": {
-      "status": "success",
-      "freshness": "fresh",
-      "observedAt": "2026-07-22T00:00:00Z",
-      "count": 2718
+      "status": "partial",
+      "freshness": "stale",
+      "observedAt": "2026-07-23T00:00:00Z",
+      "count": 2711
     },
     "cloudflare": {
-      "status": "success",
-      "freshness": "fresh",
-      "observedAt": "2026-07-22T18:41:45.393Z",
+      "status": "partial",
+      "freshness": "stale",
+      "observedAt": "2026-07-11T18:25:54.066Z",
       "count": 2
     },
     "sitemap": {
-      "status": "success",
-      "freshness": "fresh",
-      "observedAt": "2026-07-23T11:12:23.554Z",
-      "count": 24
+      "status": "missing",
+      "freshness": "missing",
+      "observedAt": null,
+      "count": 0
     },
     "crux": {
       "status": "missing",
@@ -51,10 +51,10 @@
       "count": 0
     },
     "http": {
-      "status": "success",
-      "freshness": "fresh",
-      "observedAt": "2026-07-23T11:12:23.554Z",
-      "count": 96
+      "status": "missing",
+      "freshness": "missing",
+      "observedAt": null,
+      "count": 0
     },
     "lighthouse": {
       "status": "missing",
@@ -63,5 +63,5 @@
       "count": 0
     }
   },
-  "totalObservations": 26038
+  "totalObservations": 27379
 }

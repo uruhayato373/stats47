@@ -1,9 +1,9 @@
-name: 🖼 Generate OGP Images (ranking / areas / cards / note)
+name: 🖼 Generate OGP Images (blog / ranking / areas / cards / note)
 
-# ランキング・地域の OGP、ランキングのリンクカード、note カバーを Satori (Node) で事前生成し
+# ブログ・ランキング・地域の OGP、ランキングのリンクカード、note カバーを Satori (Node) で事前生成し
 # R2 へ push する。ランタイム next/og は Cloudflare Worker で 500 (1101) になるため、OGP は
 # ビルド外の Node で生成し R2 静的配信する (正典: .claude/rules/ogp-image-standards.md)。
-# blog OGP は publish-blog.yml / generate-blog-thumbnails-cloud.ts が別途担当。
+# blog OGP も同じ manifest/publisher 契約だが、記事入力の都合で専用 generator が担当。
 #
 # 主経路は R2 creds を持つセッション/ローカルからの直接実行 (クラウド連携トークンは
 # actions:write 無しで dispatch 不可)。本 CI はその fallback。手動 dispatch のみ。
@@ -12,9 +12,9 @@ on:
   workflow_dispatch:
     inputs:
       type:
-        description: "対象種別"
+        description: '対象種別'
         required: true
-        default: "ranking"
+        default: 'ranking'
         type: choice
         options:
           - ranking
@@ -22,12 +22,13 @@ on:
           - ranking-cards
           - note-covers
           - pref-silhouette
+          - blog
       limit:
-        description: "件数上限 (空=全件)"
+        description: '1回の件数上限 (安全上限500、残りは再実行)'
         required: false
-        default: ""
+        default: '500'
       apply:
-        description: "R2 へ push する (false=生成のみ)"
+        description: 'R2 へ push する (false=生成のみ)'
         required: false
         default: false
         type: boolean
@@ -36,14 +37,15 @@ permissions:
   contents: read
 
 concurrency:
-  group: generate-ogp-images-${{ github.event.inputs.type }}
+  # 全 R2 writer と共通ロック。snapshot / blog / 画像の同時上書きを防ぐ。
+  group: r2-write
   cancel-in-progress: false
 
 env:
   R2_PUBLIC_FETCH_URL: https://storage.stats47.jp
   SITE_ORIGIN: https://stats47.jp
   CLOUDFLARE_R2_BUCKET_NAME: stats47
-  # S3 API 経由 R2 書き込み (diff-push-r2.ts)
+  # S3 API 経由 R2 書き込み (exact image publisher)
   R2_S3_ENDPOINT: https://${{ secrets.CLOUDFLARE_ACCOUNT_ID }}.r2.cloudflarestorage.com
   R2_ACCESS_KEY_ID: ${{ secrets.CLOUDFLARE_R2_ACCESS_KEY_ID }}
   R2_SECRET_ACCESS_KEY: ${{ secrets.CLOUDFLARE_R2_SECRET_ACCESS_KEY }}
@@ -54,15 +56,15 @@ jobs:
     timeout-minutes: 120
     steps:
       - name: 🧰 Checkout
-        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 1
 
       - name: 🟢 Setup Node.js
         uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
-          node-version: "20"
-          cache: "npm"
+          node-version: '20'
+          cache: 'npm'
 
       - name: 📦 Install dependencies
         run: npm ci
@@ -70,19 +72,38 @@ jobs:
       - name: 🖼 Generate images
         run: |
           # FLAGS は配列で組む ("$FLAGS" 単一引数渡しは 1 トークン化する — ARG_VECTOR_QUOTED)
-          FLAGS=(--type "${{ github.event.inputs.type }}" --force)
+          TYPE="${{ github.event.inputs.type }}"
+          FLAGS=(--max-generate 500)
           if [ -n "${{ github.event.inputs.limit }}" ]; then FLAGS+=(--limit "${{ github.event.inputs.limit }}"); fi
-          echo "Running: generate-ogp-images.ts ${FLAGS[*]}"
-          npx tsx --tsconfig apps/web/scripts/tsconfig.ogp.json apps/web/scripts/generate-ogp-images.ts "${FLAGS[@]}"
+          if [ "$TYPE" = "blog" ]; then
+            echo "Running: generate-blog-thumbnails-cloud.ts ${FLAGS[*]}"
+            npx tsx apps/web/scripts/generate-blog-thumbnails-cloud.ts "${FLAGS[@]}"
+          else
+            FLAGS=(--type "$TYPE" "${FLAGS[@]}")
+            echo "Running: generate-ogp-images.ts ${FLAGS[*]}"
+            npx tsx --tsconfig apps/web/scripts/tsconfig.ogp.json apps/web/scripts/generate-ogp-images.ts "${FLAGS[@]}"
+          fi
 
-      - name: ☁️ Push to R2 (S3 diff)
+      - name: 📋 Summarize exact publish plan
+        run: |
+          PLAN=".local/image-generation-publish-plan-${{ github.event.inputs.type }}.json"
+          test -f "$PLAN" || { echo "exact publish plan が生成されませんでした"; exit 1; }
+          # shellcheck disable=SC2016
+          node -e '
+            const fs = require("node:fs");
+            const plan = JSON.parse(fs.readFileSync(process.argv[1], "utf8"));
+            const lines = [
+              "### Image publish plan",
+              `- generator: ${plan.generator}`,
+              `- changed bundles: ${plan.items.length}`,
+              `- plan: ${process.argv[1]}`,
+            ];
+            fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, lines.join("\\n") + "\\n");
+          ' "$PLAN"
+
+      - name: ☁️ Publish exact image set to R2
         if: github.event.inputs.apply == 'true'
         run: |
-          case "${{ github.event.inputs.type }}" in
-            ranking|ranking-cards) PREFIX="app/ranking" ;;
-            areas)                 PREFIX="app/areas" ;;
-            note-covers)           PREFIX="note" ;;
-            pref-silhouette)       PREFIX="sns/pref-silhouette" ;;
-          esac
-          echo "Pushing prefix: $PREFIX"
-          npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix "$PREFIX"
+          PLAN=".local/image-generation-publish-plan-${{ github.event.inputs.type }}.json"
+          test -f "$PLAN" || { echo "exact publish plan が生成されませんでした"; exit 1; }
+          npx tsx packages/r2-storage/src/scripts/push-generated-image-set.ts --plan "$PLAN"

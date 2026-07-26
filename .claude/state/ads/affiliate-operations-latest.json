@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-07-19T14:23:44.721Z",
+  "generatedAt": "2026-07-26T14:29:08.642Z",
   "inventorySnapshot": ".claude/state/ads/inventory-latest.json",
-  "ga4Snapshot": ".claude/state/ads/ga4-affiliate-2026-07-19.json",
+  "ga4Snapshot": ".claude/state/ads/ga4-affiliate-2026-07-26.json",
   "freshness": {
     "inventoryDays": 0,
     "ga4Days": 0
@@ -14,11 +14,7 @@
   "coverage": {
     "gapVerticals": [],
     "thinVerticals": [
-      "population",
-      "energy",
-      "furusato",
-      "education",
-      "mobility"
+      "furusato"
     ]
   },
   "directPlacements": {
@@ -57,8 +53,8 @@
     }
   ],
   "ga4Totals": {
-    "impressions": 11348,
+    "impressions": 13115,
     "clicks": 9,
-    "ctr": 0.0007930912936200212
+    "ctr": 0.0006862371330537552
   }
 }

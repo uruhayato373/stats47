@@ -19,27 +19,27 @@ name: 🎨 Gemini Image Run (request-file)
 on:
   push:
     branches: [develop]
-    paths: ["data/gemini-image-requests.json"]
+    paths: ['data/gemini-image-requests.json']
   workflow_dispatch:
     inputs:
       slugs:
-        description: "対象 slug (カンマ区切り)"
+        description: '対象 slug (カンマ区切り)'
         required: true
       budget_usd:
-        description: "費用上限 USD (<=2)"
+        description: '費用上限 USD (<=2)'
         required: false
-        default: "0.5"
+        default: '0.5'
       apply:
-        description: "true: R2 へ push / false: artifact のみ"
+        description: 'true: R2 へ push / false: artifact のみ'
         required: false
-        default: "false"
+        default: 'false'
 
 permissions:
   contents: write
 
 concurrency:
-  # Gemini 課金と R2 書き込みの二重実行防止 (直列化)
-  group: gemini-image-run
+  # Gemini 課金の二重実行と、全 R2 image writer の競合を同時に防ぐ。
+  group: r2-write
   cancel-in-progress: false
 
 env:
@@ -47,7 +47,7 @@ env:
   R2_S3_ENDPOINT: https://${{ secrets.CLOUDFLARE_ACCOUNT_ID }}.r2.cloudflarestorage.com
   R2_ACCESS_KEY_ID: ${{ secrets.CLOUDFLARE_R2_ACCESS_KEY_ID }}
   R2_SECRET_ACCESS_KEY: ${{ secrets.CLOUDFLARE_R2_SECRET_ACCESS_KEY }}
-  # generator の R2 push は wrangler put 経由 (ogp-image-audit-weekly と同じ)
+  # 画像は generator が isolated staging + exact plan を作り、後続publisherがS3 APIで反映する。
   CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
   CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
   GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
@@ -59,7 +59,7 @@ jobs:
 
     steps:
       - name: 🧰 Checkout develop
-        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           ref: develop
           fetch-depth: 1
@@ -67,8 +67,8 @@ jobs:
       - name: 🟢 Setup Node.js
         uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
-          node-version: "20"
-          cache: "npm"
+          node-version: '20'
+          cache: 'npm'
 
       - name: 📦 Install dependencies
         run: npm ci
@@ -109,19 +109,19 @@ jobs:
         run: |
           # ARGS は配列で組む (ARG_VECTOR_QUOTED)。--slug の値は CSV 1 引数が正 (フラグ値)
           ARGS=(--ai-background --slug "$SLUGS" --budget-usd "$BUDGET")
-          if [ "$APPLY" = "true" ]; then
-            ARGS+=(--apply)
-          else
+          if [ "$APPLY" != "true" ]; then
             ARGS+=(--out-dir .local/gemini-verify)
           fi
           echo "generate-blog-thumbnails-cloud.ts ${ARGS[*]}"
           set -o pipefail
           npx tsx apps/web/scripts/generate-blog-thumbnails-cloud.ts "${ARGS[@]}" 2>&1 | tee /tmp/gemini-run.log
-          # generator は per-slug 失敗を exit 0 で報告する (記事単位 try/catch) — silent green を防ぐ
-          if grep -qE "失敗: [1-9]" /tmp/gemini-run.log; then
-            echo "::error::generator が失敗 slug を報告 (上記ログの [fail] を参照)"
-            exit 1
-          fi
+
+      - name: ☁️ Publish exact blog image set (apply=true のみ)
+        if: steps.req.outputs.apply == 'true'
+        run: |
+          PLAN=".local/image-generation-publish-plan-blog.json"
+          test -f "$PLAN" || { echo "exact publish plan が生成されませんでした"; exit 1; }
+          npx tsx packages/r2-storage/src/scripts/push-generated-image-set.ts --plan "$PLAN"
 
       - name: 📤 Upload verify artifact (apply=false のみ)
         if: steps.req.outputs.apply != 'true'

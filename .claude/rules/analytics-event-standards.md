@@ -43,7 +43,9 @@ GA4 → 管理（歯車）→ プロパティ列「データの表示」→「�
 |---|---|---|---|---|
 | `nav_click` | `trackNavClick` | `nav_label` / `nav_surface`（`nav_href` は任意） | ✅登録済 (2026-07-20) | UI (P0-1) |
 | `rail_click` | `trackRailClick` | `rail_widget` / `rail_slot`（`rail_href` は任意） | ✅登録済 (2026-07-20) | UI (P0-2) |
-| `affiliate_click` | `trackAffiliateClick` | `affiliate_vertical` / `affiliate_category` / `link_position` / `ad_id` / `experiment_id` / `variant_id` / `creative_size` | ❓要確認 | `affiliate-ads-standards.md §6` |
+| `affiliate_click` | `trackAffiliateClick` | `affiliate_vertical` / `affiliate_category` / `link_position` / `experiment_id` / `variant_id` / `creative_size` | **✅登録済 (2026-07-06)** | `affiliate-ads-standards.md §6` |
+| `affiliate_click` (ad_id のみ) | `trackAffiliateClick` | `ad_id` | **⏳要登録** (2026-07-27 実測: GA4 API が `customEvent:ad_id` を invalid dimension として拒否) | `affiliate-ads-standards.md §6` |
+| `ad_impression` ⚠️**イベント名衝突** | `AdImpressionTracker` | (同上) — ただし**計測不能** | 🚨 **要改名** (下記) | `affiliate-ads-standards.md §6` |
 | `cta_click` | `trackCtaClick` | `cta_id` / `link_position` / `content_id` / `target_type` / `target_key` | ❓要確認 | buzz-map §7.3 / ファネル |
 | `home_featured_impression` / `home_featured_click` | `trackHomeFeatured*` | `card_variant` / `slot` / `experiment_id` / `experiment_variant` | ❓要確認 | `docs/02_実装計画/28 §9.3` |
 | `ranking_view` | `trackRankingView` | `ranking_key` / `category_key` / `area_type` / `year_code` | ❓要確認 | ranking |
@@ -56,6 +58,48 @@ GA4 → 管理（歯車）→ プロパティ列「データの表示」→「�
 > `❓要確認` は「code コメントで登録前提と書かれているが、GA4 管理画面での実登録を確認していない」状態。
 > `.claude/rules/evidence-based-judgment.md` に従い、GA4 で実登録を確認したら `✅登録済 (日付)` に更新する。
 > 推測で `✅` にしない。
+>
+> ## 🚨 `ad_impression` は GA4/AdSense の予約イベント名と衝突している (2026-07-27 実測)
+>
+> **自前のアフィリエイト impression 計測 (`AdImpressionTracker`) が使う `ad_impression` は、
+> GA4 の AdSense 連携が自動生成するイベント名と同じ**。実測で衝突が確定した:
+>
+> ```
+> ad_impression × adSourceName (直近7日) → "Google AdSense account (pub-7995274743017484)" = 3,346 件 (総数と完全一致)
+> ad_impression × adUnitName             → サイドバー右上 1,148 / stats47-ranking 738 / 広告 351 …
+> ad_impression × adFormat               → ON_PAGE 2,362 / INTERSTITIAL 807 / SHOPPING_LINK 53 …
+> ```
+>
+> - **自前イベントは 1 件も記録されていない** (AdSense 分の 3,346 が総数と一致するため残余ゼロ)。
+>
+> **原因は 2 つある (2026-07-27 に切り分け済)。**
+>
+> **原因① `AdImpressionTracker` の発火順バグ (これが 0 件の主因)** —
+> `apps/web/src/features/ads/components/AdImpressionTracker.tsx` の timer で
+> **`firedRef.current = true` を `if (window.gtag)` ガードより前に実行**している。gtag は
+> `GoogleAnalytics.tsx` で `strategy="afterInteractive"` 遅延読み込みなので、初期表示から画面内にある
+> 広告 (サイドバー等) は交差後 1 秒で発火し、その時点で gtag 未定義だと**送信されないまま「発火済み」に
+> なり永久に失われる** (再試行なし)。`nav_click` が正常なのはユーザー操作 = gtag 読込後だから。
+> **修正方針**: ガードを先に評価し、gtag 未準備なら `firedRef` を立てず短間隔リトライするか
+> `window.dataLayer.push` に直接積む。**ガードの単純撤去は不可** (gtag 未定義で例外になる)。
+>
+> **原因② イベント名が GA4 予約名** — `ad_impression` は公式の reserved event names に含まれる
+> ([Reserved event names](https://support.google.com/analytics/answer/13316687)、アクセス 2026-07-27)。
+> ただし**予約名でも送信が通る場合はある**: 同じ予約名の `file_download` は自前パラメータ `ranking_key`
+> ごと正常に届いている (28日で 273 件・内訳取得可)。よって「予約名だから破棄」とは**断定できない**。
+> それでも改名は必要で、理由は破棄ではなく**AdSense 連携が同名イベントを大量生成するため自前分と
+> 区別できず分析不能**になること (`adSourceName` で分離しようとしても残余ゼロで検証不能)。
+> `affiliate_click` は予約名でなく正常に動いているので `affiliate_impression` への改名が安全。
+> - したがって **affiliate の CTR は分母が存在せず計測不能**。過去に「CTR 0.079%」等と報告された値は
+>   **アフィリエイトの click を AdSense の impression で割った無意味な数字**なので採用してはならない。
+> - **対処 (未実施)**: 自前イベントを `affiliate_impression` 等へ改名して名前空間を分離し、
+>   `fetch-affiliate-ga4.cjs` の `EVENTS` も合わせる。改名は GA4 の履歴が分断されるため、
+>   affiliate-manager + ga4-analyst の合意と改名日の記録が要る。
+> - `affiliate_vertical` / `affiliate_category` / `link_position` / `creative_size` / `experiment_id` /
+>   `variant_id` は **2026-07-06 に登録済** (GA4 管理画面で確認)。**未登録は `ad_id` のみ** — GA4 API が
+>   `customEvent:ad_id` を invalid dimension として拒否するため、案件別 CTR は登録するまで取れない。
+> - 取得コマンド: `node .claude/scripts/ads/fetch-affiliate-ga4.cjs [days]`。
+>   **窓が登録日より前に伸びると (not set) が混ざる**ので、登録日以降に絞って読むこと。
 >
 > **nav_label の値変更 (2026-07-20)**: R1 (ヘッダー IA 再編) で mobile drawer のラベルを
 > desktop に統一した (「地域の特徴」→「都道府県」/「ブログ」→「統計ブログ」)。`nav_label` は

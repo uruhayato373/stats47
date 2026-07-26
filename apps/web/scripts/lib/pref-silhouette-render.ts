@@ -38,7 +38,7 @@ import {
   type PrefCardThemeKey,
 } from "../data/pref-silhouette-tokens";
 
-import type { SatoriFont } from "./blog-thumbnail-render";
+import type { SatoriFont } from "./satori-image-render";
 
 // ─── topojson ロード (module cache) ───
 

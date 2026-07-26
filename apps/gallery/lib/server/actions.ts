@@ -1,11 +1,11 @@
-import "server-only";
+import 'server-only';
 
-import fs from "node:fs";
-import path from "node:path";
+import fs from 'node:fs';
+import path from 'node:path';
 
-import { projectRoot, R2_BASE } from "./project-root";
-import { startJob } from "./jobs";
-import { loadGalleryState } from "./gallery-state";
+import { projectRoot, R2_BASE } from './project-root';
+import { startJob } from './jobs';
+import { loadGalleryState } from './gallery-state';
 
 /**
  * spawn を伴うアクション (publish-x / publish-yt / regenerate) と R2 探索。
@@ -15,10 +15,10 @@ import { loadGalleryState } from "./gallery-state";
 export type ActionResult<T = unknown> = { status: number; body: T };
 
 function publishXScript(): string {
-  return path.join(projectRoot(), ".claude/skills/sns/publish-x/publish-x.ts");
+  return path.join(projectRoot(), '.claude/skills/sns/publish-x/publish-x.ts');
 }
 function ytUploadScript(): string {
-  return path.join(projectRoot(), ".claude/scripts/youtube/upload.js");
+  return path.join(projectRoot(), '.claude/scripts/youtube/upload.js');
 }
 
 // ─── publish-x ─────────────────────────────────────
@@ -32,30 +32,42 @@ export interface PublishXInput {
 }
 
 export function publishX(body: PublishXInput): ActionResult {
-  const { content_key, datetime, domain = "ranking", dry_run = false, immediate = false } = body;
-  if (!content_key) return { status: 400, body: { error: "content_key は必須" } };
+  const {
+    content_key,
+    datetime,
+    domain = 'ranking',
+    dry_run = false,
+    immediate = false,
+  } = body;
+  if (!content_key)
+    return { status: 400, body: { error: 'content_key は必須' } };
   if (!dry_run && !immediate && !datetime) {
-    return { status: 400, body: { error: "予約には datetime (YYYY-MM-DDTHH:MM) が必要" } };
+    return {
+      status: 400,
+      body: { error: '予約には datetime (YYYY-MM-DDTHH:MM) が必要' },
+    };
   }
   // 誤即時投稿ガード: 最終成功から 7 日超なら dry-run を先に強制
   const st = loadGalleryState();
-  const last = st.lastPublishXSuccess ? Date.now() - Date.parse(st.lastPublishXSuccess) : Infinity;
+  const last = st.lastPublishXSuccess
+    ? Date.now() - Date.parse(st.lastPublishXSuccess)
+    : Infinity;
   if (!dry_run && last > 7 * 24 * 3600 * 1000 && !body.force) {
     return {
       status: 428,
       body: {
         error:
-          "publish-x の成功実績が 7 日以上ない。まず dry-run で UI 変化を確認してください (force:true で強行可)",
+          'publish-x の成功実績が 7 日以上ない。まず dry-run で UI 変化を確認してください (force:true で強行可)',
       },
     };
   }
-  const args = ["tsx", publishXScript(), content_key];
+  const args = ['tsx', publishXScript(), content_key];
   if (datetime && !immediate) args.push(datetime);
-  args.push("--domain", domain);
-  if (immediate) args.push("--immediate");
-  if (dry_run) args.push("--dry-run");
-  const r = startJob("publish-x", "npx", args);
-  return "error" in r ? { status: 409, body: r } : { status: 202, body: r };
+  args.push('--domain', domain);
+  if (immediate) args.push('--immediate');
+  if (dry_run) args.push('--dry-run');
+  const r = startJob('publish-x', 'npx', args);
+  return 'error' in r ? { status: 409, body: r } : { status: 202, body: r };
 }
 
 // ─── publish-yt ────────────────────────────────────
@@ -70,46 +82,56 @@ export interface PublishYtInput {
 
 export function publishYt(body: PublishYtInput): ActionResult {
   if (body.confirm !== true) {
-    return { status: 400, body: { error: "confirm:true が必須 (月1運用の明示確認)" } };
+    return {
+      status: 400,
+      body: { error: 'confirm:true が必須 (月1運用の明示確認)' },
+    };
   }
   const { video_file, title, content_key, thumbnail, description } = body;
-  if (!video_file || !title) return { status: 400, body: { error: "video_file / title は必須" } };
+  if (!video_file || !title)
+    return { status: 400, body: { error: 'video_file / title は必須' } };
   if (!fs.existsSync(video_file)) {
-    return { status: 400, body: { error: `video_file が存在しない: ${video_file}` } };
+    return {
+      status: 400,
+      body: { error: `video_file が存在しない: ${video_file}` },
+    };
   }
-  const args = [ytUploadScript(), video_file, "--title", title];
-  if (description) args.push("--description", description);
-  if (thumbnail) args.push("--thumbnail", thumbnail);
-  if (content_key) args.push("--content-key", content_key);
+  const args = [ytUploadScript(), video_file, '--title', title];
+  if (description) args.push('--description', description);
+  if (thumbnail) args.push('--thumbnail', thumbnail);
+  if (content_key) args.push('--content-key', content_key);
   // 月1 + 重複ガードは upload.js が内蔵 (check-youtube-post-budget / check-youtube-duplicate)
-  const r = startJob("publish-yt", "node", args);
-  return "error" in r ? { status: 409, body: r } : { status: 202, body: r };
+  const r = startJob('publish-yt', 'node', args);
+  return 'error' in r ? { status: 409, body: r } : { status: 202, body: r };
 }
 
 // ─── regenerate (kind ホワイトリストのみ・任意コマンド実行を防ぐ) ─────
-function ogpRegen(type: string, keys: string | null): { cmd: string; args: string[] } {
-  const prefix = type === "note-covers" ? "note" : type === "areas" ? "app/areas" : "app/ranking";
-  const keyArg = keys ? ` --key ${keys}` : "";
-  const gen = `npx tsx --tsconfig apps/web/scripts/tsconfig.ogp.json apps/web/scripts/generate-ogp-images.ts --type ${type}${keyArg}`;
-  const push = `npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix ${prefix}`;
-  // 生成 (→ .local/r2 staging) してから R2 push。push には S3 creds が要る (無ければ job ログで fail)
-  return { cmd: "sh", args: ["-c", `${gen} && ${push}`] };
+function ogpRegen(
+  type: string,
+  keys: string | null
+): { cmd: string; args: string[] } {
+  const keyArg = keys ? ` --key ${keys}` : '';
+  const gen = `npx tsx --tsconfig apps/web/scripts/tsconfig.ogp.json apps/web/scripts/generate-ogp-images.ts --type ${type} --max-generate 500${keyArg}`;
+  const plan = `.local/image-generation-publish-plan-${type}.json`;
+  const push = `test -f ${plan} && npx tsx packages/r2-storage/src/scripts/push-generated-image-set.ts --plan ${plan}`;
+  return { cmd: 'sh', args: ['-c', `${gen} && ${push}`] };
 }
 
-const REGEN: Record<string, (keys: string | null) => { cmd: string; args: string[] }> = {
-  "blog-thumbnails": (keys) => ({
-    cmd: "npx",
-    args: [
-      "tsx",
-      "apps/web/scripts/generate-blog-thumbnails-cloud.ts",
-      "--apply",
-      ...(keys ? ["--slug", keys] : []),
-    ],
-  }),
-  "ogp-ranking": (keys) => ogpRegen("ranking", keys),
-  "ogp-ranking-cards": (keys) => ogpRegen("ranking-cards", keys),
-  "ogp-areas": (keys) => ogpRegen("areas", keys),
-  "ogp-note-covers": (keys) => ogpRegen("note-covers", keys),
+const REGEN: Record<
+  string,
+  (keys: string | null) => { cmd: string; args: string[] }
+> = {
+  'blog-thumbnails': (keys) => {
+    const keyArg = keys ? ` --slug ${keys}` : '';
+    const gen = `npx tsx apps/web/scripts/generate-blog-thumbnails-cloud.ts --max-generate 500${keyArg}`;
+    const plan = '.local/image-generation-publish-plan-blog.json';
+    const push = `test -f ${plan} && npx tsx packages/r2-storage/src/scripts/push-generated-image-set.ts --plan ${plan}`;
+    return { cmd: 'sh', args: ['-c', `${gen} && ${push}`] };
+  },
+  'ogp-ranking': (keys) => ogpRegen('ranking', keys),
+  'ogp-ranking-cards': (keys) => ogpRegen('ranking-cards', keys),
+  'ogp-areas': (keys) => ogpRegen('areas', keys),
+  'ogp-note-covers': (keys) => ogpRegen('note-covers', keys),
 };
 
 export interface RegenerateInput {
@@ -121,20 +143,26 @@ export function regenerate(body: RegenerateInput): ActionResult {
   const kind = body.kind;
   const keys = body.keys ? String(body.keys).trim() : null;
   if (!kind || !REGEN[kind]) {
-    return { status: 400, body: { error: `kind は ${Object.keys(REGEN).join(" | ")} のいずれか` } };
+    return {
+      status: 400,
+      body: { error: `kind は ${Object.keys(REGEN).join(' | ')} のいずれか` },
+    };
   }
   if (keys && !/^[a-z0-9,_-]+$/.test(keys)) {
-    return { status: 400, body: { error: "keys は英数字・カンマ・ハイフンのみ (安全のため)" } };
+    return {
+      status: 400,
+      body: { error: 'keys は英数字・カンマ・ハイフンのみ (安全のため)' },
+    };
   }
   const { cmd, args } = REGEN[kind](keys);
   const r = startJob(`regenerate:${kind}`, cmd, args);
-  return "error" in r ? { status: 409, body: r } : { status: 202, body: r };
+  return 'error' in r ? { status: 409, body: r } : { status: 202, body: r };
 }
 
 // ─── R2 探索 (HEAD probe — list 不可の代替) ─────────────
 export async function probeR2(
   domain: string,
-  contentKey: string,
+  contentKey: string
 ): Promise<Array<{ rel: string; size: number }>> {
   const rels = [
     `instagram/caption.txt`,
@@ -148,12 +176,18 @@ export async function probeR2(
   await Promise.all(
     rels.map(async (rel) => {
       try {
-        const r = await fetch(`${R2_BASE}/sns/${domain}/${contentKey}/${rel}`, { method: "HEAD" });
-        if (r.ok) found.push({ rel, size: Number(r.headers.get("content-length") || 0) });
+        const r = await fetch(`${R2_BASE}/sns/${domain}/${contentKey}/${rel}`, {
+          method: 'HEAD',
+        });
+        if (r.ok)
+          found.push({
+            rel,
+            size: Number(r.headers.get('content-length') || 0),
+          });
       } catch {
         // 探索なので失敗は無視
       }
-    }),
+    })
   );
   return found;
 }

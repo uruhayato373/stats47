@@ -66,10 +66,19 @@ function inspect(file) {
 
     // ファイル名/パスの一部としての "legacy" (例: legacy-category-keys.test.ts への参照) は
     // 負債ではなく単なる参照先なので語として数えない (2026-07-24 精緻化)。
-    const lineForLegacy = line.replace(
+    let lineForLegacy = line.replace(
       /[\w./-]*\blegacy[\w.-]*\.(?:ts|tsx|mjs|cjs|js|json|md|ya?ml)\b/gi,
       "",
     );
+    // コード中の識別子・リテラル型・テスト名 (`const legacy = …` / `'common' | 'legacy'` /
+    // `it('legacy hash migration …')`) は負債マーカーではない。debt マーカーは必ずコメントに
+    // 書かれるので、コード拡張子ではコメント部分だけを検査する。
+    // (TODO 側を「大文字のみ検出」にして識別子誤検知を消したのと同方針。2026-07-27 精緻化:
+    //  image pipeline の manifest 形式名 legacy が 16 件誤検知したため)
+    if (/\.[cm]?[jt]sx?$/.test(relative)) {
+      const comment = lineForLegacy.match(/(?:\/\/|\/\*|^\s*\*)(.*)$/);
+      lineForLegacy = comment ? comment[1] : "";
+    }
     const legacy = lineForLegacy.match(/\b(legacy|deprecated|temporary|remove after)\b/i);
     // 除外 2 群: (a) 期限・条件・追跡が明示されたもの (b) domain 用語 — theme の catalogStatus /
     // open-data-catalog の VerificationStatus ("deprecated" 等はデータソースの検証ステータス列挙値であり
@@ -78,7 +87,10 @@ function inspect(file) {
     // 負債の「legacy コード」とは別概念 (2026-07-14 ルール精緻化で誤検知 30+ 件を baseline から実削減)
     if (legacy &&
         !/(?:#\d+|https?:\/\/|\b(?:MC|AFF|EXP|TODO)-?\d+\b|remove(?:d)?\s+(?:when|after|by)|until\b|期限|削除条件|互換|compat|superseded)/i.test(line) &&
-        !/catalogStatus|LEGACY_SETS|IndicatorSet|indicator-sets|ThemeCatalog|THEME_CATALOGS|legacy ?テーマ|legacy ?\(未登録\)|未登録 ?\(legacy\)|\(legacy\) ?テーマ|カタログ駆動|legacy 2\b|"deprecated"|deprecated source|VerificationStatus|VERIFICATION_STATUSES/.test(line))
+        // `'legacy'` / `"legacy"` は状態名リテラル (`"deprecated"` を除外しているのと同じ enum 値扱い)。
+        // `legacy` と `current`/`manifest` が近接する行は image pipeline の manifest 形式名としての用法
+        // (例: 「初回manifest移行だけは legacyを安全にcurrent扱いできない」) で廃止予定コードではない。
+        !/catalogStatus|LEGACY_SETS|IndicatorSet|indicator-sets|ThemeCatalog|THEME_CATALOGS|legacy ?テーマ|legacy ?\(未登録\)|未登録 ?\(legacy\)|\(legacy\) ?テーマ|カタログ駆動|legacy 2\b|"deprecated"|deprecated source|VerificationStatus|VERIFICATION_STATUSES|['"]legacy['"]|legacy[^\n]{0,20}(?:current|manifest)|(?:current|manifest)[^\n]{0,20}legacy/i.test(line))
       results.push(finding("UNBOUNDED_LEGACY", file, number, `${legacy[1]} に期限・削除条件がない`, line));
 
     if (!isTest && !relative.startsWith(".github/workflows/") && !relative.endsWith("CLAUDE.md") && !relative.endsWith("AGENTS.md") &&
