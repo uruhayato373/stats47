@@ -2,6 +2,8 @@
 
 import { Table } from "@tanstack/react-table";
 
+import { TableHeader, TableRow } from "../../../atoms/ui/table";
+
 import { DataTableHeaderCell } from "./data-table-header-cell";
 
 interface DataTableHeaderProps<TData> {
@@ -17,12 +19,9 @@ export function DataTableHeader<TData>({
     enableSorting = true,
 }: DataTableHeaderProps<TData>) {
     return (
-        <thead className="[&_tr]:border-b [&_tr]:border-border sticky top-0 bg-background z-10 shadow-sm">
+        <TableHeader className="sticky top-0 z-10 bg-background shadow-sm">
             {table.getHeaderGroups().map((headerGroup) => (
-                <tr
-                    key={headerGroup.id}
-                    className="border-b border-border transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted"
-                >
+                <TableRow key={headerGroup.id}>
                     {headerGroup.headers.map((header) => (
                         <DataTableHeaderCell
                             key={header.id}
@@ -30,8 +29,8 @@ export function DataTableHeader<TData>({
                             enableSorting={enableSorting}
                         />
                     ))}
-                </tr>
+                </TableRow>
             ))}
-        </thead>
+        </TableHeader>
     );
 }

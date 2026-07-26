@@ -3,7 +3,6 @@
  * 2026-01 設計見直しにより構造を階層化
  */
 import type {
-  HomeFeaturedCardVariant,
   ProvenanceSurvey,
   SourceAttribution,
 } from "@stats47/data-configs";
@@ -303,7 +302,7 @@ export interface RankingItem {
 
   /**
    * 最新年の「1 位」表示 (都道府県名 + rank + ロケール整形済み値)。
-   * generate-ranking-items が values.json の最新年から deriveHomeFeaturedValues で焼き込む。
+   * generate-ranking-itemsがvalues.jsonの最新年からderiveFeaturedTopで焼き込む。
    * 関連ランキングレール等の mini 表示用。値が取れない (calculated/外部) 場合は null。
    * 旧 item.json 後方互換のため optional (欠損時は UI が text-first に縮退)。
    */
@@ -318,7 +317,7 @@ export interface RankingItem {
 /**
  * home/featured.json 用に、ビルド時 (exporter) で「1 位」表示とミニタイルマップ SVG を
  * 焼き込んだ RankingItem。トップページ (`<FeaturedRankings>`) はこれを読むだけでよく、
- * ランタイムで各カードごとに values.json をフェッチして generateMiniTileSvg する必要がない
+ * ランタイムで各カードごとにvalues.jsonをフェッチして地理地図SVGを生成する必要がない
  * (force-dynamic のままフェッチ ~11 回 + SVG 生成 8 枚を 1 フェッチに削減 = TTFB 改善)。
  * Derived (計算で作れる派生値) を R2 snapshot に焼く完全DBレス方針に沿う。
  * 焼き込み前の旧 featured.json との後方互換のため両フィールドとも optional
@@ -338,17 +337,12 @@ export interface FeaturedValue {
 export interface FeaturedRankingItem extends RankingItem {
   /** ビルド時に焼き込む「1 位」表示 (都道府県名 + ロケール整形済み値文字列)。null = 値なし */
   featuredTop?: FeaturedValue | null;
-  /** ビルド時に焼き込む最下位 (実 rank 付き)。comparison card 用。null = 値なし */
-  featuredBottom?: FeaturedValue | null;
-  /** ビルド時に焼き込む上位 3 件 (rank 昇順)。top-three card 用。3 件未満なら不足のまま */
-  featuredTopThree?: FeaturedValue[];
-  /** ビルド時に焼き込むミニタイルマップ SVG 文字列 */
+  /** ビルド時に焼き込む都道府県地図 SVG 文字列 */
   tileMapSvg?: string | null;
-  /** ホーム専用編集設定 (git TS HOME_FEATURED_RANKINGS 由来)。欠損 = 旧 snapshot → control 表示 */
+  /** ホーム専用編集設定 (git TS HOME_FEATURED_RANKINGS 由来) */
   homeFeatured?: {
     order: number;
     hook: string;
-    variant: HomeFeaturedCardVariant;
   };
 }
 
@@ -398,5 +392,3 @@ export type RankingItemForDisplay = Pick<
   RankingItem,
   "title" | "subtitle" | "unit" | "visualization" | "demographicAttr" | "normalizationBasis"
 >;
-
-

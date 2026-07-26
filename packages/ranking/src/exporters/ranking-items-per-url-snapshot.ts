@@ -7,7 +7,9 @@ import {
 } from "@stats47/data-configs";
 import { logger } from "@stats47/logger/server";
 import { saveToR2 } from "@stats47/r2-storage/server";
-import { generateMiniTileSvg } from "@stats47/visualization/server";
+import {
+  generateRankingThumbnailMapSvg,
+} from "@stats47/visualization/server";
 
 import surveysMaster from "../data/surveys.json";
 import { bakeHomeFeaturedItem, resolveHomeFeaturedItems } from "./home-featured";
@@ -111,7 +113,7 @@ export async function exportRankingItemsPerUrl(): Promise<ExportRankingItemsPerU
   const uploads: Promise<{ key: string; size: number }>[] = [];
 
   // ── home/featured.json ──────────────────────────────────────────────────────
-  // ホームの選定・順番・hook・variant は git TS `HOME_FEATURED_RANKINGS` が SSOT
+  // ホームの選定・順番・hookはgit TS `HOME_FEATURED_RANKINGS` がSSOT
   // (仕様 doc 28 §4-5。旧実装の isFeatured/featuredOrder 駆動から 2026-07 に移行。
   //  isFeatured は category/survey 等の表示で使われ続けるため item からは削除しない)。
   const configErrors = validateHomeFeaturedRankings(HOME_FEATURED_RANKINGS, METRICS_REGISTRY);
@@ -123,11 +125,11 @@ export async function exportRankingItemsPerUrl(): Promise<ExportRankingItemsPerU
     logger.warn({ missingKeys }, "home featured: item.json に解決できない定義を skip しました");
   }
 
-  // 各 item に top/bottom/top3 + ミニタイルマップ SVG + homeFeatured (hook/variant) を焼き込む。
+  // 各itemに1位 + 共通都道府県地図SVG + homeFeatured (hook) を焼き込む。
   // トップページ (`<FeaturedRankings>`) がランタイムで values.json を都度フェッチして
   // SVG を生成する代わりに、ここ (ビルド時・1 指標 1 回の values read) で計算して snapshot に
   // 載せる (Derived → R2 snapshot の完全DBレス方針。値なし item は派生値なしのまま返し、
-  //  コンポーネント側の control フォールバックに委ねる)。派生ロジックは pure helper
+  //  コンポーネント側でカードを非表示にする)。派生ロジックはpure helper
   //  (home-featured.ts) にあり fixture で unit test される。
   const featuredBaked: FeaturedRankingItem[] = await Promise.all(
     featuredResolved.map(async ({ item, definition }): Promise<FeaturedRankingItem> => {
@@ -139,13 +141,12 @@ export async function exportRankingItemsPerUrl(): Promise<ExportRankingItemsPerU
         yearCode,
       );
       if (!valuesResult.success || valuesResult.data.length === 0) {
-        // 値が読めない場合も homeFeatured (hook/variant) は焼く (UI は payload 不足で control へ)
+        // 値が読めない場合もhomeFeatured (hook) は焼く
         return {
           ...item,
           homeFeatured: {
             order: definition.order,
             hook: definition.hook,
-            variant: definition.variant,
           },
         };
       }
@@ -154,12 +155,11 @@ export async function exportRankingItemsPerUrl(): Promise<ExportRankingItemsPerU
         definition,
         values: valuesResult.data,
         generateSvg: (rows) =>
-          generateMiniTileSvg(
-            rows,
-            item.visualization?.colorScheme,
-            item.visualization?.isReversed,
-            item.rankingKey,
-          ),
+          generateRankingThumbnailMapSvg(rows, {
+            colorScheme: item.visualization?.colorScheme,
+            isReversed: item.visualization?.isReversed,
+            idSuffix: item.rankingKey,
+          }),
       });
     }),
   );

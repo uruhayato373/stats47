@@ -6,22 +6,10 @@ import { expect, test } from "@playwright/test";
  * /ranking/[rankingKey] ページの表示と主要コンポーネントをテストします。
  */
 test.describe("ランキング詳細ページ", () => {
-  // テスト用のランキングキー（実際のデータに合わせて調整）
-  const testRankingKey = "population"; // 例：人口ランキング
-
   test.beforeEach(async ({ page }) => {
-    // まず一覧から遷移してキーを取得する方法
-    await page.goto("/ranking", { waitUntil: "domcontentloaded" });
-
-    // 最初のランキングリンクを取得
-    const firstLink = page.locator("a[href^='/ranking/']").first();
-    await expect(firstLink).toBeVisible({ timeout: 10000 });
-
-    // リンク先のURLを取得して遷移
-    const href = await firstLink.getAttribute("href");
-    if (href) {
-      await page.goto(href);
-    }
+    await page.goto("/ranking/healthy-life-expectancy-male", {
+      waitUntil: "domcontentloaded",
+    });
   });
 
   test("ページが正常に表示される", async ({ page }) => {
@@ -33,19 +21,14 @@ test.describe("ランキング詳細ページ", () => {
   });
 
   test("地図チャートが表示される", async ({ page }) => {
-    // 地図コンポーネントが表示される
-    // ※ セレクタは実装に合わせて調整
-    const mapChart = page.locator(
-      "[data-testid='prefecture-map'], svg, [class*='map'], [class*='Map']"
-    ).first();
-
+    const mapChart = page.getByRole("img", { name: /都道府県別カラーマップ/ });
+    await mapChart.scrollIntoViewIfNeeded();
     await expect(mapChart).toBeVisible({ timeout: 15000 });
   });
 
   test("データテーブルが表示される", async ({ page }) => {
-    // テーブルが表示される
-    const table = page.locator("table").first();
-
+    const table = page.getByRole("table", { name: /都道府県別データ表/ });
+    await table.scrollIntoViewIfNeeded();
     await expect(table).toBeVisible({ timeout: 10000 });
 
     // テーブルに行データがある

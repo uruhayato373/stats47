@@ -2,6 +2,8 @@
 
 import { Table } from "@tanstack/react-table";
 
+import { TableBody } from "../../../atoms/ui/table";
+
 import { DataTableEmpty } from "./data-table-empty";
 import { DataTableRow } from "./data-table-row";
 
@@ -24,7 +26,7 @@ export function DataTableBody<TData>({
     const rows = table.getRowModel().rows;
 
     return (
-        <tbody className="[&_tr:last-child]:border-0">
+        <TableBody>
             {rows?.length ? (
                 rows.map((row) => (
                     <DataTableRow
@@ -40,6 +42,6 @@ export function DataTableBody<TData>({
                     colSpan={table.getAllColumns().length}
                 />
             )}
-        </tbody>
+        </TableBody>
     );
 }

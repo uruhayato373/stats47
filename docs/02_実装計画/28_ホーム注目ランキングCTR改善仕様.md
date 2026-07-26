@@ -6,6 +6,12 @@ completed: 2026-07-17
 tags: [home, ranking, featured, ctr, svg, ga4, experiment]
 ---
 
+> **2026-07-26 superseded**: 本書のA/B、`card variant`、top3/bottom、
+> タイル地図fallbackは実験履歴としてのみ残す。現行実装は地理地図＋1位情報の
+> `FeaturedRankingCard` 1形式で、正典は
+> `docs/01_技術設計/15_デザインシステムSSOT.md`「カード」と
+> `apps/web/src/features/ranking/components/FeaturedRankings/README.md`。
+
 > **実装完了 (2026-07-17)**: Phase 1-5 実装・§13 検証・§14 受入条件を充足
 > (unit 205+120 / type-check / design-system / localhost QA)。
 > **2026-07-17 本番反映済み** (PR #590 deploy + sync-snapshots master。本番で両 variant 描画 +

@@ -25,7 +25,7 @@ export const DataTableVirtualizedBody = React.forwardRef<
                     position: "relative",
                 }}
             >
-                <Table>
+                <Table containerClassName="overflow-visible">
                     <TableBody>
                         {virtualizer.getVirtualItems().map(
                             (virtualRow: { index: number; size: number; start: number }) => {
@@ -49,7 +49,6 @@ export const DataTableVirtualizedBody = React.forwardRef<
                                                 <TableCell
                                                     key={cell.id}
                                                     style={{ width }}
-                                                    className="text-sm"
                                                 >
                                                     {flexRender(
                                                         cell.column.columnDef.cell,

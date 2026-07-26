@@ -8,14 +8,15 @@
  */
 
 // 型定義
-export type { Article } from "./types/article.types";
+export type { Article } from './types/article.types';
 
 // クライアントセーフなコンポーネント
-export { TagBadge } from "./components/tag-badge";
-export { BlogArticleGrid } from "./components/blog-article-grid";
-export { TagCloud } from "./components/tag-cloud";
-export { ArticleRenderer } from "./components/article-renderer";
-export { ArticleTableOfContents } from "./components/ArticleTableOfContents";
+export { TagBadge } from './components/tag-badge';
+export { BlogArticleGrid } from './components/blog-article-grid';
+export { TagCloud } from './components/tag-cloud';
+export { ArticleRenderer } from './components/article-renderer';
+export { ArticleTableOfContents } from './components/ArticleTableOfContents';
+export { BlogAuthorProfileCard } from './components/BlogAuthorProfileCard';
 
 // ユーティリティ
-export { generateBlogMetadata } from "./utils/generate-blog-metadata";
+export { generateBlogMetadata } from './utils/generate-blog-metadata';

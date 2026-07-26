@@ -2,6 +2,7 @@
 
 import { flexRender, Row } from "@tanstack/react-table";
 
+import { TableCell, TableRow } from "../../../atoms/ui/table";
 import { cn } from "../../../lib/cn";
 
 interface DataTableRowProps<TData> {
@@ -15,13 +16,9 @@ interface DataTableRowProps<TData> {
  */
 export function DataTableRow<TData>({ row, onClick, className }: DataTableRowProps<TData>) {
     return (
-        <tr
+        <TableRow
             key={row.id}
-            className={cn(
-                "border-b border-border transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted",
-                onClick && "cursor-pointer",
-                className,
-            )}
+            className={cn(onClick && "cursor-pointer", className)}
             data-state={row.getIsSelected() && "selected"}
             onClick={onClick}
         >
@@ -29,15 +26,11 @@ export function DataTableRow<TData>({ row, onClick, className }: DataTableRowPro
                 const width = cell.column.columnDef.meta?.width;
                 const minWidth = cell.column.columnDef.meta?.minWidth;
                 return (
-                    <td
-                        key={cell.id}
-                        style={{ width, minWidth }}
-                        className="px-4 py-3 text-sm align-middle [&:has([role=checkbox])]:pr-0"
-                    >
+                    <TableCell key={cell.id} style={{ width, minWidth }}>
                         {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                    </td>
+                    </TableCell>
                 );
             })}
-        </tr>
+        </TableRow>
     );
 }

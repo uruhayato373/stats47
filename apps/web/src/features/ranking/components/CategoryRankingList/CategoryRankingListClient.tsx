@@ -2,10 +2,7 @@
 
 import Link from "next/link";
 
-
 import { DataTable } from "@stats47/components";
-
-import { ChartPanel } from "@/components/charts/ChartPanel";
 
 import type { ColumnDef } from "@tanstack/react-table";
 
@@ -36,8 +33,6 @@ const columns: ColumnDef<CategoryRankingListItem>[] = [
     ),
     meta: {
       minWidth: "200px",
-      filterable: true,
-      filterPlaceholder: "キーワードで絞り込み（例: コンビニ）",
     },
   },
   {
@@ -60,27 +55,16 @@ interface CategoryRankingTableProps {
 
 export function CategoryRankingTable({ items }: CategoryRankingTableProps) {
   return (
-    <ChartPanel
-      title={
-        <>
-          すべてのランキング
-          <span className="ml-2 text-sm font-normal text-muted-foreground">
-            {items.length}件
-          </span>
-        </>
-      }
-    >
-      <DataTable
-        columns={columns}
-        data={items}
-        emptyMessage="該当するランキングがありません"
-        maxRows={20}
-        enableFiltering={true}
-        enableSorting={true}
-        showIndex={false}
-        showBorder={false}
-        getRowId={(row) => `${row.rankingKey}-${row.areaType}`}
-      />
-    </ChartPanel>
+    <DataTable
+      columns={columns}
+      data={items}
+      emptyMessage="該当するランキングがありません"
+      maxRows={20}
+      enableFiltering={false}
+      showIndex={false}
+      getRowId={(row) => `${row.rankingKey}-${row.areaType}`}
+      ariaLabel="すべてのランキング"
+      caption="ランキングのタイトル・年・単位の一覧"
+    />
   );
 }

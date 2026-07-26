@@ -147,8 +147,16 @@ node .claude/scripts/ogp/build-image-gallery.mjs --audit
   - CI fallback = `generate-ogp-images.yml` (手動 dispatch。ただしクラウド連携トークンは actions:write 無しのため、
     R2 creds のあるセッション/ローカルからの直接実行が主経路)。
 - **新規 ranking/area/blog/note を公開したら OGP/カバーも生成する**。未生成だと og:image が 404 になる。
-- **ranking リンクカード**は `app/ranking/<key>/thumbnail-{light,dark}.webp` (★新 canonical。旧
-  `ranking/prefecture/<key>/<year>/thumbnails/` は年入り・非 `app/` 名前空間で廃止)。`RankingThumbnail` / survey ページが参照。
+- **ranking リンクカード**は `app/ranking/<key>/thumbnail-{light,dark}.webp` (★canonical。旧
+  `ranking/prefecture/<key>/<year>/thumbnails/` は年入り・非 `app/` 名前空間で廃止)。
+  WebPは外部リンクカード用で、サイト内のhome/category/surveyは共通inline SVG componentを使う。
+  生成契約は`packages/ranking/src/types/ranking-thumbnail.ts`。全指標で
+  `packages/gis/data/geoshape/prefecture.topojson`と観測値から同じ地理地図を決定的に生成し、
+  metricごとの地図方式optionやタイル地図fallbackは設けない。横長カードでは本土を
+  時計回り32°へ平面回転して再fitし、沖縄インセットと凡例を省略して本土を大きく見せる
+  （描画SSOT: `MINI_PREFECTURE_THUMBNAIL_LAYOUT`）。1位情報を持つ640×360カードにする。各生成時に同ディレクトリの `thumbnail.json` へ
+  version / rankingKey / geographicLayout / year / generatedAt / 入力R2キー / config / topology / assetキーを記録する。
+  WebPやmanifestを手編集せず、`generate-ogp-images.ts --type ranking-cards` で再生成する。
 - **note カバー**: `note/<vertical>/<slug>/images/cover-1280x670.png` に事前生成 archive (Satori 統一デザイン)。
   既存 SVG 系統 (`generate-note-covers.mjs` + `svg-to-png.js`) と Remotion `NoteCover` は **deprecate (削除しない)**。
   ※ note.com 公開済みカバーの差し替えではなく R2 archive + 今後の正系統。

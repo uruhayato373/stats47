@@ -1,23 +1,28 @@
 # FeaturedRankings — ホーム「注目のランキング」
 
-仕様の正典: `docs/02_実装計画/28_ホーム注目ランキングCTR改善仕様.md`
+現行仕様の正典: `docs/01_技術設計/15_デザインシステムSSOT.md`「カード」
+（`docs/02_実装計画/28_ホーム注目ランキングCTR改善仕様.md`は終了済みA/Bの履歴）
 
 > **home-featured-v1 実験は終了 (2026-07-23)**: 50/50 A/B (control=map/number vs editorial=
 > question/comparison/territory/top-three) は判定前だったが、ポータル型 home 再設計
 > (`docs/02_実装計画/38_ポータル型ホーム・ヘッダー再設計仕様.md`) で home 構造が変わり exposure/CTR
 > 条件が変化するため、**オーナー判断で終了し editorial を採用**した (標本不足で `inconclusive`)。
 > sticky assignment 機構 (`resolveHomeFeaturedAssignment` / localStorage `stats47_exp_home_featured_v1`
-> / 乱数 50/50) は撤去し、`FeaturedRankingExperimentGrid` は editorial variant を全ユーザーに固定描画
-> (item 単位で editorial payload 不足時のみ control card にフォールバック)。impression/click 計測は
+> / 乱数 50/50) は撤去した。2026-07-26に残存していた4表示variantも廃止し、
+> 地理地図＋1位情報の共通カード1形式へ統一した。
+> impression/click 計測は
 > `experiment_variant="editorial"` 固定で継続 (doc 28 §9.5)。
 
 ## SSOT
 
 | データ | SSOT |
 |---|---|
-| 掲載指標・順番・hook・card variant | `packages/data-configs/src/home-featured-rankings.ts` (`HOME_FEATURED_RANKINGS`) |
-| 派生値 (top/bottom/top3/map/homeFeatured) | R2 `app/home/featured.json` (exporter が焼き込み) |
+| 掲載指標・順番・hook | `packages/data-configs/src/home-featured-rankings.ts` (`HOME_FEATURED_RANKINGS`) |
+| 派生値 (top/map/homeFeatured) | R2 `app/home/featured.json` (exporter が焼き込み) |
 | 派生ロジック | `packages/ranking/src/exporters/home-featured.ts` (pure・fixture test 済) |
+| card model 解決 | `utils/resolve-featured-ranking-card.ts` |
+| category / survey の values→model 変換 | `lib/build-featured-ranking-card-model.ts` |
+| home / category / survey の描画・比率 | `components/FeaturedRankingCard/index.tsx` |
 
 metric config の `isFeatured`/`featuredOrder` はホームでは**使わない** (category/survey 用に残置)。
 hook はホーム専用 copy で、ranking の title/seoTitle を上書きしない。
@@ -25,32 +30,33 @@ hook はホーム専用 copy で、ranking の title/seoTitle を上書きしな
 ## 構成 (仕様 §7)
 
 ```
-FeaturedRankings (Server)            … R2 featured snapshot 読込 + payload 解決のみ
-  └─ FeaturedRankingExperimentGrid (Client) … sticky 割当 + 固定高 placeholder
-       └─ TrackedFeaturedRankingCard (Client) … impression (50%×1秒×1回) + click 計測
-            ├─ EditorialFeaturedCard … question / comparison / territory / top-three
-            └─ FeaturedRankingCard   … control (現行 map / number・fitHeight で等高化)
+home
+  └─ FeaturedRankings (Server) … R2 featured snapshot 読込 + model 解決
+       └─ FeaturedRankingGrid
+            └─ TrackedFeaturedRankingCard … impression + click 計測
+                 └─ FeaturedRankingCard
+category / survey
+  └─ buildFeaturedRankingCardModel … values→同じ model
+       └─ FeaturedRankingCard
 ```
 
-## 実験 (仕様 §8)
+`FeaturedRankingCard`が`PORTAL_CARD_ASPECT_CLASS`、文字階層、1位情報、地理地図配置を所有する。
+呼び出し側のpropsは`rankingKey / year / unit / model`だけで、表示variantを選べない。
 
-- experiment_id: `home-featured-v1` / localStorage key: `stats47_exp_home_featured_v1`
-- 初回 50/50 → 同一 browser に sticky。localStorage 不可時は session 内固定
-  (`utils/home-featured-experiment.ts`)
-- SSR/mount 前は card と同一の固定高さ placeholder (CLS 回避・§8.3)
+## 終了済み実験の計測互換 (仕様 §8)
 
-## fallback (仕様 §5.4)
+- experiment_id は `home-featured-v1`、experiment_variant は採用値 `editorial` 固定
+- sticky assignment / placeholder は撤去済み。SSR HTML に共通カードを直接描画する
 
-- `homeFeatured` 欠損 (旧 snapshot) → control
-- question=featuredTop / territory=+tileMapSvg / comparison=+featuredBottom / top-three=3 件、
-  不足時はその card だけ control 表示 (判定: `utils/resolve-home-featured-card.ts`)
-- 新 snapshot ではホーム表示時の values.json 追加 fetch 0
-  (`needsHomeFeaturedValuesFetch` が unit test で保証)。development のみ旧 snapshot を
-  in-memory 補完して editorial を QA できる
+## データ不足時 (仕様 §5.4)
+
+- 旧タイル地図・1位欠損snapshotだけvalues.jsonを1回読み、地理地図modelへin-memory移行する
+- 地理地図または1位を生成できなければ別デザインへfallbackせず、そのカードを表示しない
+- 未登録ランキングは正式titleをhookに使う
 
 ## GA4 event (仕様 §9)
 
 - `home_featured_impression` / `home_featured_click`
 - params: `ranking_key / card_variant / slot / experiment_id / experiment_variant / link_position=home_featured`
-- `card_variant` は実際に描画された variant (fallback 後)
+- `card_variant` は計測互換のため`geographic`固定
 - custom dimension (`card_variant/slot/experiment_id/experiment_variant`) の GA4 管理画面登録は人間タスク

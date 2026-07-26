@@ -28,6 +28,7 @@ export { RankingPageHeadAssets } from "./components/RankingKeyPage/RankingPageHe
 
 // Cached category items reader (R2) — server-only を server entry に閉じ込め、app/ から index 経由でなく server から参照させる
 export { readRankingItemsByCategory } from "./lib/cached-category-items";
+export { buildFeaturedRankingCardModel } from "./lib/build-featured-ranking-card-model";
 
 export { loadRankingPageModel } from "./services/load-ranking-page-model";
 export { getRankingPageMetadata } from "./services/ranking-page-route";

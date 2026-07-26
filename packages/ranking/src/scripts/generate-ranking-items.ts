@@ -31,7 +31,7 @@ import {
   buildRankingItemFromMetric,
   type ValuesContext,
 } from "../builders/build-ranking-item-from-metric";
-import { deriveHomeFeaturedValues } from "../exporters/home-featured";
+import { deriveFeaturedTop } from "../exporters/home-featured";
 import { RANKING_ITEMS_SNAPSHOT_KEY, rankingItemKeyPath } from "../types/snapshot";
 
 import type { RankingItem } from "../types/ranking-item";
@@ -88,7 +88,7 @@ async function loadValuesContext(config: MetricConfig): Promise<ValuesContext | 
         value: r.value,
         rank: r.rank ?? null,
       }));
-    const latestTop = deriveHomeFeaturedValues(latestRows).featuredTop;
+    const latestTop = deriveFeaturedTop(latestRows);
 
     return { yearCodes: years, latestTop };
   } catch {

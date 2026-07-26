@@ -23,11 +23,11 @@ import { expect, test } from "@playwright/test";
  *   /themes/population-dynamics, /areas/13000/population, /ranking/<known-key>
  *
  * 使用方法:
- *   cd apps/web && npm run dev &     # dev server を起動（http://localhost:3000）
+ *   cd apps/web && npm run test:e2e  # test server は http://localhost:3100 に自動起動
  *   npx playwright test tests/e2e/middleware/middleware-routing.spec.ts
  */
 
-const BASE = process.env.PLAYWRIGHT_TEST_BASE_URL || "http://localhost:3000";
+const BASE = process.env.PLAYWRIGHT_TEST_BASE_URL || "http://localhost:3100";
 
 test.describe("Middleware ルーティング", () => {
   test.describe("Fix 7: /themes/* 未知 slug", () => {
@@ -41,22 +41,24 @@ test.describe("Middleware ルーティング", () => {
     test("/themes/unknown-theme-xxx は 410", async ({ request }) => {
       const res = await request.get(`${BASE}/themes/unknown-theme-xxx`, { maxRedirects: 0 });
       expect(res.status()).toBe(410);
-      expect(res.headers()["cache-control"]).toContain("no-store");
+      expect(res.headers()["cache-control"]).toContain("s-maxage");
     });
   });
 
   test.describe("Fix 8: /areas/{pref}/{non-indexable-sub}", () => {
-    test("/areas/13000/population は 200（indexable）", async ({ request }) => {
+    test("/areas/13000/population はテーマページへ 301", async ({ request }) => {
       // dev server 初回レンダリングが重いため長めに取る
       test.setTimeout(90_000);
       const res = await request.get(`${BASE}/areas/13000/population`, { maxRedirects: 0, timeout: 60_000 });
-      expect(res.status()).toBe(200);
+      expect(res.status()).toBe(301);
+      expect(res.headers()["location"]).toContain("/areas/13000/population-dynamics");
     });
 
-    test("/areas/13000/economy は 200（indexable）", async ({ request }) => {
+    test("/areas/13000/economy はテーマページへ 301", async ({ request }) => {
       test.setTimeout(90_000);
       const res = await request.get(`${BASE}/areas/13000/economy`, { maxRedirects: 0, timeout: 60_000 });
-      expect(res.status()).toBe(200);
+      expect(res.status()).toBe(301);
+      expect(res.headers()["location"]).toContain("/areas/13000/local-economy");
     });
 
     test("/areas/13000/labor は 410（non-indexable）", async ({ request }) => {
@@ -83,9 +85,9 @@ test.describe("Middleware ルーティング", () => {
   });
 
   test.describe("Fix 4.5: /areas/{pref}/cities/*", () => {
-    test("/areas/13000/cities/13101 は 410", async ({ request }) => {
+    test("/areas/13000/cities/13101 は 200", async ({ request }) => {
       const res = await request.get(`${BASE}/areas/13000/cities/13101`, { maxRedirects: 0 });
-      expect(res.status()).toBe(410);
+      expect(res.status()).toBe(200);
     });
   });
 
@@ -101,9 +103,10 @@ test.describe("Middleware ルーティング", () => {
       }
     });
 
-    test("/ranking/nonexistent-ranking-xxx は 410", async ({ request }) => {
+    test("/ranking/nonexistent-ranking-xxx は notFound ページに委譲される", async ({ request }) => {
       const res = await request.get(`${BASE}/ranking/nonexistent-ranking-xxx`, { maxRedirects: 0 });
-      expect(res.status()).toBe(410);
+      expect(res.status()).toBe(200);
+      expect(await res.text()).toContain("見つかりません");
     });
   });
 

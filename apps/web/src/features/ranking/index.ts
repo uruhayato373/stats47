@@ -23,6 +23,11 @@ export { RankingYearSelector } from "./components/RankingPageHeader/RankingYearS
 export { RankingDefinitionCard } from "./components/RankingDefinitionCard";
 export { RankingSourceCard } from "./components/RankingSourceCard";
 export { FeaturedRankingCard } from "./components/FeaturedRankingCard";
+export {
+  getFeaturedRankingCardDefinition,
+  resolveFeaturedRankingCardModel,
+} from "./utils/resolve-featured-ranking-card";
+export type { FeaturedRankingCardModel } from "./utils/resolve-featured-ranking-card";
 export { CategoryRankingTable } from "./components/CategoryRankingList";
 export type { CategoryRankingListItem } from "./components/CategoryRankingList";
 export { RankingHeroCard } from "./components/RankingHeroCard";

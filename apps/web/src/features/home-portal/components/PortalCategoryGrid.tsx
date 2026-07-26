@@ -1,51 +1,81 @@
-import type { ComponentType } from "react";
+import Link from "next/link";
 
-import { HOME_PORTAL_CATEGORIES } from "@stats47/data-configs";
-import {
-  GraduationCap,
-  HeartPulse,
-  Home,
-  PieChart,
-  Plane,
-  ShieldCheck,
-  TrendingUp,
-  Users,
-} from "lucide-react";
+import { cn } from "@stats47/components";
+import { listAllMetrics, listCategories } from "@stats47/data-configs";
+import { ChevronRight } from "lucide-react";
 
-import { PortalNavCard } from "./PortalNavCard";
-
-/** curated 8 カテゴリ用の lucide アイコン (categoryKey → icon)。 */
-const CATEGORY_ICONS: Record<string, ComponentType<{ className?: string }>> = {
-  population: Users,
-  laborwage: TrendingUp,
-  economy: PieChart,
-  construction: Home,
-  socialsecurity: HeartPulse,
-  educationsports: GraduationCap,
-  tourism: Plane,
-  safetyenvironment: ShieldCheck,
-};
+import { TrackedPortalCategoryLink } from "./TrackedPortalCategoryLink";
 
 /**
- * 「カテゴリから探す」= 代表 8 カテゴリの比較しやすい grid (mobile 2列 / md+ 4列)。
- * 全体比較する項目なので横 scroll にせず grid にする (仕様 §8.3)。
+ * 17カテゴリを一画面で見渡す高密度リスト。
+ * `sidebar` はホームの左ペイン用、`grid` は通常の2列一覧用。
  */
-export function PortalCategoryGrid() {
-  const items = [...HOME_PORTAL_CATEGORIES].sort((a, b) => a.order - b.order);
+export function PortalCategoryGrid({
+  variant = "grid",
+}: {
+  variant?: "grid" | "sidebar";
+}) {
+  const counts = new Map<string, number>();
+  for (const metric of listAllMetrics()) {
+    if (!metric.isActive) continue;
+    counts.set(metric.category, (counts.get(metric.category) ?? 0) + 1);
+  }
+
   return (
-    <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
-      {items.map((c) => {
-        const Icon = CATEGORY_ICONS[c.categoryKey];
-        return (
-          <PortalNavCard
-            key={c.categoryKey}
-            href={`/category/${c.categoryKey}`}
-            label={c.label}
-            icon={Icon ? <Icon className="h-5 w-5" /> : undefined}
-            surface="home_category"
+    <div
+      className={cn(
+        "grid grid-cols-1 border-t border-border",
+        variant === "grid" && "md:grid-cols-2 md:[&>*:nth-child(odd)]:border-r",
+      )}
+    >
+      {listCategories().map((category) => (
+        <TrackedPortalCategoryLink
+          key={category.categoryKey}
+          href={`/category/${category.categoryKey}`}
+          label={category.categoryName}
+          className={cn(
+            "group flex items-center border-b border-border transition-colors hover:bg-accent/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50",
+            variant === "sidebar"
+              ? "min-h-9 gap-2 px-2 py-1.5"
+              : "min-h-12 gap-3 px-1 py-2.5",
+          )}
+        >
+          <span
+            className={cn(
+              "min-w-0 flex-1 font-medium text-foreground group-hover:text-primary",
+              variant === "sidebar" ? "text-[13px]" : "text-[15px]",
+            )}
+          >
+            {category.categoryName}
+          </span>
+          <span
+            className={cn(
+              "tabular-nums text-muted-foreground",
+              variant === "sidebar" ? "text-[11px]" : "text-xs",
+            )}
+          >
+            {(counts.get(category.categoryKey) ?? 0).toLocaleString()}件
+          </span>
+          <ChevronRight
+            className={cn(
+              "shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:text-primary",
+              variant === "sidebar" ? "size-3.5" : "size-4",
+            )}
           />
-        );
-      })}
+        </TrackedPortalCategoryLink>
+      ))}
+      <Link
+        href="/ranking"
+        className={cn(
+          "flex items-center justify-between border-b border-border font-semibold text-primary hover:bg-accent/50",
+          variant === "sidebar"
+            ? "min-h-9 px-2 py-1.5 text-[13px]"
+            : "min-h-12 px-1 py-2.5 text-[15px] md:col-span-2",
+        )}
+      >
+        すべてのランキングを見る
+        <ChevronRight className={variant === "sidebar" ? "size-3.5" : "size-4"} />
+      </Link>
     </div>
   );
 }

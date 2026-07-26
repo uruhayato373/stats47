@@ -24,10 +24,8 @@ export {
   type SourceAttribution,
 } from "./provenance/resolve-metric-provenance";
 export {
-  HOME_FEATURED_CARD_VARIANTS,
   HOME_FEATURED_RANKINGS,
   validateHomeFeaturedRankings,
-  type HomeFeaturedCardVariant,
   type HomeFeaturedRankingDefinition,
   type HomeFeaturedRegistryEntry,
 } from "./home-featured-rankings";

@@ -16,11 +16,10 @@ import { ShareButtons } from "@/components/molecules/ShareButtons";
 import { ArticleCard, RailCard, RailLinkItem, RailLinkList, SurfaceLinkCard } from "@/components/surface";
 
 import {
-    OperatorProfileCard,
     SidebarPromoBanner,
 } from "@/features/ads";
 import { BlogSidebarTextAds, resolveAffiliateBannersByCategory } from "@/features/ads/server";
-import { TagBadge, ArticleRenderer, ArticleTableOfContents, generateBlogMetadata, type Article } from "@/features/blog";
+import { BlogAuthorProfileCard, TagBadge, ArticleRenderer, ArticleTableOfContents, generateBlogMetadata, type Article } from "@/features/blog";
 import {
     RelatedRankingsSection,
     listLatestArticles,
@@ -168,7 +167,7 @@ export default async function BlogPostPage({ params }: PageProps) {
         <>
             {/* 運営者プロフィール (PC のみ。モバイルは従来どおりフッター上のグローバルカードが担う) */}
             <div className="hidden lg:block">
-                <OperatorProfileCard />
+                <BlogAuthorProfileCard />
             </div>
 
             <RelatedRankingsSection tagKeys={tagKeys} compact />

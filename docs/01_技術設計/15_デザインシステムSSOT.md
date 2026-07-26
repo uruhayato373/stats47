@@ -13,15 +13,15 @@ stats47 の UI 実装判断を一本化する正典。Claude Code / Codex / 人�
 
 ## SSOT の階層
 
-| 領域 | 正典 | 役割 |
-|---|---|---|
-| UI 判断ルール | `docs/01_技術設計/15_デザインシステムSSOT.md` | 本文書。エージェントと人間が共有する判断基準 |
-| レイアウト詳細 | `docs/01_技術設計/13_統一レイアウト設計.md` | 横幅、レール、PageShell、PageHeader、ナビ |
-| テーマトークン | `apps/web/src/app/globals.css` | CSS variables、light/dark、フォント、radius |
-| Tailwind 設定 | `apps/web/tailwind.config.ts` | semantic color、container、container query |
-| UI primitive | `packages/components/src` | shadcn/Radix ベースの共通部品 |
-| app 共通レイアウト | `apps/web/src/components/layout` | `PageShell` / `PageHeader` / `ArticleShell`（記事系 reading zone） |
-| chart/page component | `docs/01_技術設計/07_情報設計.md` + page-components 定義 | ページ責務と動的ダッシュボード配置 |
+| 領域                 | 正典                                                     | 役割                                                               |
+| -------------------- | -------------------------------------------------------- | ------------------------------------------------------------------ |
+| UI 判断ルール        | `docs/01_技術設計/15_デザインシステムSSOT.md`            | 本文書。エージェントと人間が共有する判断基準                       |
+| レイアウト詳細       | `docs/01_技術設計/13_統一レイアウト設計.md`              | 横幅、レール、PageShell、PageHeader、ナビ                          |
+| テーマトークン       | `apps/web/src/app/globals.css`                           | CSS variables、light/dark、フォント、radius                        |
+| Tailwind 設定        | `apps/web/tailwind.config.ts`                            | semantic color、container、container query                         |
+| UI primitive         | `packages/components/src`                                | shadcn/Radix ベースの共通部品                                      |
+| app 共通レイアウト   | `apps/web/src/components/layout`                         | `PageShell` / `PageHeader` / `ArticleShell`（記事系 reading zone） |
+| chart/page component | `docs/01_技術設計/07_情報設計.md` + page-components 定義 | ページ責務と動的ダッシュボード配置                                 |
 
 `.claude/design-system/` は Claude 専用の正典ではない。古い入口・レビュー補助として残し、内容が食い違う場合は常に `docs/01_技術設計/15_デザインシステムSSOT.md` を優先する。
 
@@ -73,9 +73,11 @@ stats47 の UI は、統計データを長時間読むための道具である�
 無効化する。
 
 - **現在の home 構成**: `PageHeader`（`text-2xl font-bold` の h1「日本の地域データを探す」+ 短い説明）→
-  大きな統計検索（`HomeSearch`）→ カテゴリ / 注目ランキング / 知りたいこと / 都道府県 / 統計ブログの
-  発見セクション。全幅暗色バンド・oversized display 見出し・背景画像 `hero-home.jpg`・hero 専用 CTA は使わない
-  （`hero-home.jpg` はアセットごと削除済み）。
+  desktop 2ペイン（左: 17カテゴリ + 同幅rail広告、右: 注目ランキング / 新着ブログ /
+  知りたいこと / 都道府県地図 + 運営者プロフィール）。全幅暗色バンド・本文内重複検索・
+  oversized display 見出し・背景画像 `hero-home.jpg`・hero 専用 CTA・全幅広告は使わない
+  （`hero-home.jpg` はアセットごと削除済み）。左ペインは独立スクロールやstickyを持たず、
+  ページ全体の通常フローで表示する。
 - **不変条件**: サイト全体で暗色グラデ hero を持たない（記事的ページは `PageHeader` / `HeroBanner`）。
   この禁止に home の例外はもう無い。home の見出しは他の本文ページと同じ `PageHeader`（`text-2xl`）に従う。
 
@@ -84,20 +86,27 @@ stats47 の UI は、統計データを長時間読むための道具である�
 ### 採用
 
 エディトリアル / データ誌風（白基調・罫線主導・sans の weight で階層を作る。serif は導入しない）。
+基準フォントは `html: 16px`。探索ポータル/一覧は14〜16px中心で情報密度を確保し、
+記事本文はreading zoneの16px・行間1.8を維持する。`html: 17px`でTailwindの文字・余白を
+一括拡大する方式は、ポータルの可視情報量を下げるため廃止した（2026-07-26）。
 見出しは 6 段スケールに固定する:
 
-| Tier | ユーティリティ | 用途 |
-|---|---|---|
-| display | `text-2xl sm:text-3xl font-bold` | blog 記事タイトル（記事レンダラ）・`HeroBanner` の hero 見出し（category / themes / survey / tag）のみ。home は使わない（`PageHeader` h1） |
-| h1 | `text-2xl font-bold leading-tight` | `PageHeader` 内の h1（ページ唯一の h1） |
-| h2 | `text-lg font-bold` | セクション見出し。**`SectionHeader`（`@/components/section`）経由のみ** |
-| h3 | `text-sm`〜`text-base font-semibold` | カード / 項目タイトル |
-| eyebrow | `text-[11px] font-semibold uppercase text-muted-foreground` | ラベル（PageHeader / SectionHeader の eyebrow） |
-| caption | `text-xs text-muted-foreground` | meta・出典・注記 |
+| Tier    | ユーティリティ                                              | 用途                                                                                                                                       |
+| ------- | ----------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| display | `text-2xl sm:text-3xl font-bold`                            | blog 記事タイトル（記事レンダラ）・`HeroBanner` の hero 見出し（category / themes / survey / tag）のみ。home は使わない（`PageHeader` h1） |
+| h1      | `text-2xl font-bold leading-tight`                          | `PageHeader` 内の h1（ページ唯一の h1）                                                                                                    |
+| h2      | `text-lg font-bold`                                         | セクション見出し。**`SectionHeader`（`@/components/section`）経由のみ**                                                                    |
+| h3      | `text-sm`〜`text-base font-semibold`                        | カード / 項目タイトル                                                                                                                      |
+| eyebrow | `text-[11px] font-semibold uppercase text-muted-foreground` | ラベル（PageHeader / SectionHeader の eyebrow）                                                                                            |
+| caption | `text-xs text-muted-foreground`                             | meta・出典・注記                                                                                                                           |
 
 - ページ内のセクション見出し（h2）は `SectionHeader` を使う（eyebrow → h2 → description を `border-b` 罫線で締める）。生の `<h2>` を page.tsx に直書きしない。
 - 統計数値（順位・値・年度）は `tabular-nums`（ランキング系は `font-mono tabular-nums`）で桁を揃える。
-- 本文: system font stack。Web フォント追加はしない（日本語 serif も LCP 悪化のため不採用）。
+- 全UI本文: Coconala と同じ Hiragino-first stack
+  (`Hiragino Kaku Gothic ProN` → `Hiragino Kaku Gothic Pro` → `Meiryo` →
+  `Helvetica Neue` → `Helvetica` → `Arial` → `sans-serif`)。`body` と Tailwind
+  `font-sans` / `font-mono`、記事本文、チャート内テキストもこの順序へ統一する。
+  Web フォント追加はしない（日本語 serif も LCP 悪化のため不採用）。
 - 補助文: `text-muted-foreground`。日本語本文で字間を詰めない。
 
 ### 禁止
@@ -156,6 +165,29 @@ stats47 の UI は、統計データを長時間読むための道具である�
 - 基本カード: `SurfaceCard`
 - ページ内の大きな情報枠: `SurfaceSection`
 - クリック可能な一覧カード: `SurfaceLinkCard`
+- homeの比較対象カード（注目ランキング / 新着ブログ / 知りたいこと）は
+  `PORTAL_CARD_ASPECT_CLASS`（`1.47:1`）を共用する。参照UIのカード外枠実測に合わせた比率であり、
+  featureごとに別の`aspect-*`や固定heightを定義しない。列数・カード幅は別のレスポンシブ責務として扱う。
+- 注目ランキングは home / category / survey のすべてで
+  `features/ranking/components/FeaturedRankingCard` を唯一の描画componentとする。
+  このcomponent自身が`PORTAL_CARD_ASPECT_CLASS`、余白、文字階層、1位情報、
+  時計回り32°の地理地図配置を所有する。表示variantは設けず、呼び出し側で
+  aspect wrapper、`fitHeight`、`title`、`topAreaName`、`tileMapSvg`を個別指定してはならない。
+- 生の47件データを扱う category / survey は
+  `buildFeaturedRankingCardModel`で`hook / top / mapSvg`だけの共通modelへ変換する。
+  hookは`getFeaturedRankingCardDefinition`、必須値検証は
+  `resolveFeaturedRankingCardModel`をSSOTとし、表示面別のfallbackデザインを作らない。
+- homeの都道府県地図と `OperatorProfileCard` も横並び時は同じ `PORTAL_CARD_ASPECT_CLASS` を使う。
+  地図はTopoJSONからserver生成し、client bundleへD3を追加しない。
+- 運営者プロフィールは、homeの省スペース表示を `features/ads/components/OperatorProfileCard`、
+  blog一覧・詳細の右レール表示を `features/blog/components/BlogAuthorProfileCard` とする。
+  後者は円形アバター、紹介、経歴・専門領域、note CTA、アイコンのみのSNSリンクを持つ。
+  どちらも表示内容・画像・外部URLを `config/operator-profile.ts` から取得し、各ページや
+  JSON-LDにプロフィールURLを重複定義しない。
+- 上記3セクションの横移動は `HorizontalCardCarousel`（`@/components/surface`）を共用する。
+  1行、mobile 1枚 + peek / `sm` 2枚 / `lg` 3枚 / `xl` 4枚、左右端の矢印、
+  scroll snap、keyboard左右キー、境界での矢印非表示をfeature側で再実装しない。矢印の視覚サイズは
+  mobile 36px / `sm`以上32px、icon 16pxとし、透明な拡張領域で44px以上の操作範囲を確保する。
 - `TrackedAffiliateLink` など Next `Link` 以外のクリック可能カード: `getSurfaceCardClassName({ interactive: true })`
 - rail / sidebar 内の見出し付きカード: `RailCard`
 - rail / sidebar 内の縦リンクリスト: `RailLinkList` / `RailLinkItem`
@@ -163,6 +195,8 @@ stats47 の UI は、統計データを長時間読むための道具である�
 - パンくず（視覚 UI + BreadcrumbList JSON-LD 一体）: `Breadcrumbs` (`@/components/layout`)。top 以外の content / hub / list ページで PageShell 直下の先頭に置く
 - 全ページ共通の右レール: `RightRailWidgets` (`@/components/rail`)。関連 widget は `topWidgets`、広告・promo は本コンポーネントが供給する
 - 標準広告スロット: 本文中 `InContentAdSlot` / コンテンツ末尾 `FooterAdSlot`（Multiplex 全幅）/ 右レール `RailAdSlot` (`@/features/ads`)。slotId 未発行（空文字）の間は描画しない（graceful degradation）
+- homeは例外として全幅 `InContentAdSlot` / `FooterAdSlot` を使わず、左カテゴリ直下の
+  `RailAdSlot`（`RAIL_RECT`）1枠だけを使う。
 - チャート・地図など可視化の外枠: `ChartPanel`
 - チャートの loading / empty / error 表示: `ChartLoading` / `ChartEmptyState` / `ChartErrorState` / `ChartLoadingCard` (`apps/web/src/components/charts/ChartState.tsx`)
 - チャートの出典・注記・関連リンク: `ChartFooter` (`apps/web/src/components/charts/ChartFooter.tsx`)
@@ -214,6 +248,29 @@ OGP は SNS / search preview 向けの固定画像であり、通常 UI の ligh
 - OGP component 内で `#fff` / `#2563EB` / `rgba(...)` などを直接書かない。
 - OGP の色定義を通常 UI に持ち込まない。通常 UI は `ChartPalette` / `map-palette.ts` / theme token を使う。
 - `design-system:check` は `features/ogp/brand.ts` 以外の OGP raw color を検出する。
+
+## Table / DataTable
+
+表のタイポグラフィ・行高・セル余白・罫線・横スクロールは
+`packages/components/src/atoms/ui/table.tsx` を唯一の実装SSOTとする。
+home 左ペインのカテゴリ一覧と同じ情報密度を基準に、本文セルは
+`13px`・標準行高 `36px`・上下 `6px`・左右 `8px`、ヘッダーは `12px` とする。
+
+- 単純な表は `Table` / `TableHeader` / `TableBody` / `TableRow` /
+  `TableHead` / `TableCell` を使う。
+- ソート・絞り込み・ページネーションが必要な表は `DataTable` を使う。
+  `DataTable` 自身も上記プリミティブを合成し、生の `<table>` / `<th>` /
+  `<td>` を再実装しない。
+- Markdown / MDX の小文字要素も同じプリミティブへマッピングする。
+  記事CSSで別の表サイズを定義しない。
+- React component を渡せない Leaflet popup だけは例外として
+  `buildKsjPropertyPopupHtml` を使う。この関数が同じ密度とHTMLエスケープを
+  一括管理し、各Layer内で表文字列を組み立てない。
+- 利用側が指定してよいのは列幅、配置、数値の右寄せ、semantic color、
+  強調だけ。`h-*` / `px-*` / `py-*` / 本文の `text-*` で密度を上書きしない。
+- セクション見出しが既に件数と表の役割を示す場合、表を別の
+  `ChartPanel` 見出しで二重に囲まない。
+- `design-system:check` の `no-raw-table` で app 層の生テーブル再実装を禁止する。
 
 ## Radius / Shadow
 

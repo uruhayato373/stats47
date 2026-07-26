@@ -39,7 +39,6 @@ import { CookieConsentBanner } from "@/lib/analytics/components/CookieConsentBan
 import { PageViewTracker } from "@/lib/analytics/components/PageViewTracker";
 import { GoogleAnalytics } from "@/lib/analytics/GoogleAnalytics";
 import { getRequiredBaseUrl } from "@/lib/env";
-import { geistMono } from "@/lib/fonts";
 import { AdSenseScript } from "@/lib/google-adsense";
 import { generateRootMetadata } from "@/lib/metadata/root-metadata";
 import { TopLoaderWrapper } from "@/lib/next-top-loader/TopLoaderWrapper";
@@ -85,11 +84,7 @@ export default function RootLayout({
   const baseUrl = getRequiredBaseUrl();
 
   return (
-    <html
-      lang="ja"
-      className={geistMono.variable}
-      suppressHydrationWarning
-    >
+    <html lang="ja" suppressHydrationWarning>
       <head>
         {/*
          * 地図タイル CDN への preconnect / dns-prefetch

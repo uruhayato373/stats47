@@ -144,6 +144,14 @@ const rules = [
     pattern: /@\/features\/redesign/,
   },
   {
+    // 表の密度・罫線・アクセシビリティは @stats47/components の Table が SSOT。
+    // DataTable / Markdown renderer を含め、生の table 要素による再実装を禁止する。
+    id: "no-raw-table",
+    message:
+      "Use Table primitives from @stats47/components instead of raw <table>. Shared primitives own table typography, spacing, borders, and scrolling.",
+    pattern: /<table[\s>]/,
+  },
+  {
     // page.tsx のセクション見出し（h2）は SectionHeader（@/components/section）経由にする。
     // 生の <h2> はセクション見出しのドリフト（compare 型の独自ヘッダ・text-lg/base 混在）の温床。
     // カード/項目タイトルは h3 以下にする。prose/法務ページと未移行の content ページは grandfather。
@@ -291,7 +299,7 @@ const surfaceText = readFileSync(path.join(cwd, surfacePath), "utf8");
 const articleCardBody = surfaceText.match(
   /export function ArticleCard[\s\S]*?(?=\nexport function RailCard)/,
 )?.[0];
-if (!articleCardBody?.includes('"rounded-none border bg-card shadow-sm"')) {
+if (!articleCardBody?.includes("rounded-none border bg-card shadow-sm")) {
   violations.push({
     ruleId: "article-card-must-be-square",
     message:

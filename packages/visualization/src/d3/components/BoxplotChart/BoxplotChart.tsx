@@ -94,7 +94,7 @@ export function BoxplotChart({
     select(svgEl).selectAll("*").remove();
 
     const svg = select(svgEl)
-      .style("font-family", "'Noto Sans JP', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Meiryo', sans-serif");
+      .style("font-family", "'Hiragino Kaku Gothic ProN', 'Hiragino Kaku Gothic Pro', Meiryo, 'Helvetica Neue', Helvetica, Arial, sans-serif");
 
     const g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
 
