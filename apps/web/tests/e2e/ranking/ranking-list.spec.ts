@@ -34,18 +34,11 @@ test.describe("ランキング一覧ページ", () => {
     }
   });
 
-  test("ランキング項目をクリックして詳細ページに遷移できる", async ({ page }) => {
-    // ランキングへのリンクを探す
-    const rankingLinks = page.locator("a[href^='/ranking/']");
-
-    // 最初のリンクが表示されるまで待機
-    await expect(rankingLinks.first()).toBeVisible({ timeout: 10000 });
-
-    // クリック
-    await rankingLinks.first().click();
-
-    // 詳細ページに遷移したことを確認
-    await expect(page).toHaveURL(/\/ranking\/.+/);
+  test("カテゴリをクリックしてランキングを探せる", async ({ page }) => {
+    const categoryLinks = page.locator("main a[href^='/category/']");
+    await expect(categoryLinks.first()).toBeVisible({ timeout: 10000 });
+    await categoryLinks.first().click();
+    await expect(page).toHaveURL(/\/category\/.+/);
   });
 
   test("検索/フィルター機能が存在する場合、動作する", async ({ page }) => {

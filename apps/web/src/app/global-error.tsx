@@ -29,7 +29,7 @@ export default function GlobalError({
             justifyContent: "center",
             padding: "2rem",
             fontFamily:
-              "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+              "'Hiragino Kaku Gothic ProN', 'Hiragino Kaku Gothic Pro', Meiryo, 'Helvetica Neue', Helvetica, Arial, sans-serif",
             color: "#0f172a",
             background: "#f8fafc",
           }}

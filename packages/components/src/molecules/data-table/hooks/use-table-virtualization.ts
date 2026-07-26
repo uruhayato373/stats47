@@ -33,7 +33,7 @@ export function useTableVirtualization<TData>({
   const virtualizer = useVirtualizer({
     count: shouldVirtualize ? table.getRowModel().rows.length : 0,
     getScrollElement: () => parentRef.current,
-    estimateSize: () => 50, // 行の高さ（px）
+    estimateSize: () => 36, // 共通 Table の標準行高（px）
     overscan: 5, // 前後5行をプリレンダリング
   });
 

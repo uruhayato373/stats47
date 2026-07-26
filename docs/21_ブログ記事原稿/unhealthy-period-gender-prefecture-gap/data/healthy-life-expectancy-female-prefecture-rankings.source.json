@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "healthy-life-expectancy-female",
+  "year": "2019",
+  "unit": "年",
+  "label": "健康寿命（女性）",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/healthy-life-expectancy-female/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug unhealthy-period-gender-prefecture-gap --keys healthy-life-expectancy-female --data-name healthy-life-expectancy-female-prefecture-rankings",
+  "fetchedAt": "2026-07-19T23:12:20.045Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

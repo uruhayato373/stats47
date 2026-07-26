@@ -2,14 +2,19 @@ import * as React from "react"
 
 import { cn } from "../../lib/cn"
 
+interface TableProps extends React.HTMLAttributes<HTMLTableElement> {
+  /** 横スクロールを担う外側コンテナへの追加クラス */
+  containerClassName?: string
+}
+
 const Table = React.forwardRef<
   HTMLTableElement,
-  React.HTMLAttributes<HTMLTableElement>
->(({ className, ...props }, ref) => (
-  <div className="relative w-full overflow-auto">
+  TableProps
+>(({ className, containerClassName, ...props }, ref) => (
+  <div className={cn("relative w-full overflow-auto", containerClassName)}>
     <table
       ref={ref}
-      className={cn("w-full caption-bottom text-sm", className)}
+      className={cn("w-full caption-bottom text-[13px]", className)}
       {...props}
     />
   </div>
@@ -73,7 +78,7 @@ const TableHead = React.forwardRef<
   <th
     ref={ref}
     className={cn(
-      "h-10 px-3 py-2 text-sm text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0",
+      "h-9 px-2 py-1.5 text-left text-xs font-medium leading-4 text-muted-foreground align-middle [&:has([role=checkbox])]:pr-0",
       className
     )}
     {...props}
@@ -87,7 +92,10 @@ const TableCell = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <td
     ref={ref}
-    className={cn("h-10 px-3 py-2 text-sm align-middle [&:has([role=checkbox])]:pr-0", className)}
+    className={cn(
+      "h-9 px-2 py-1.5 text-[13px] leading-5 align-middle [&:has([role=checkbox])]:pr-0",
+      className
+    )}
     {...props}
   />
 ))
@@ -99,7 +107,7 @@ const TableCaption = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <caption
     ref={ref}
-    className={cn("mt-4 text-sm text-muted-foreground", className)}
+    className={cn("mt-3 text-xs text-muted-foreground", className)}
     {...props}
   />
 ))
@@ -109,4 +117,3 @@ export {
     Table, TableBody, TableCaption, TableCell, TableFooter,
     TableHead, TableHeader, TableRow
 }
-

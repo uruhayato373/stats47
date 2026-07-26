@@ -12,7 +12,7 @@ test.describe("地域間比較ページ", () => {
 
     // h1 見出しが表示される
     await expect(page.getByRole("heading", { level: 1 })).toBeVisible({ timeout: 10000 });
-    await expect(page.getByRole("heading", { level: 1 })).toContainText("地域間比較");
+    await expect(page.getByRole("heading", { level: 1 })).toHaveText("東京都 vs 大阪府");
 
     // デフォルトで東京都と大阪府（13000, 27000）が選択されている
     // RegionSelector はセレクト要素を持つ
@@ -38,7 +38,7 @@ test.describe("地域間比較ページ", () => {
     await page.goto("/category/population/compare?areas=13000,27000", { waitUntil: "domcontentloaded" });
 
     // 「VS」テキストが表示される
-    const vsBadge = page.getByText(/VS/i);
+    const vsBadge = page.getByText("VS", { exact: true });
     await expect(vsBadge).toBeVisible({ timeout: 10000 });
   });
 

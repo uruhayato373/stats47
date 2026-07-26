@@ -12,35 +12,26 @@ test.describe("ヘッダーナビゲーション", () => {
     await page.goto("/");
   });
 
-  test("ランキングリンクをクリックして遷移する（/ranking 廃止後は /themes へ）", async ({ page }) => {
+  test("ランキングリンクをクリックして遷移する", async ({ page }) => {
     // ランキングリンクを取得
-    const rankingLink = page.getByRole("link", { name: /ランキング/i });
+    const rankingLink = page.getByRole("link", { name: "ランキング", exact: true });
 
-    // /ranking 一覧ページは 2026-05-28 に廃止。Header の「ランキング」ナビは /themes を指す。
-    await expect(rankingLink).toHaveAttribute("href", "/themes");
+    await expect(rankingLink).toHaveAttribute("href", "/ranking");
 
     // リンクをクリック
     await rankingLink.click();
 
-    // URL が /themes に遷移したことを確認
-    await expect(page).toHaveURL(/\/themes/);
+    await expect(page).toHaveURL(/\/ranking/);
 
     // ページの主要要素が表示されていることを確認
     await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
   });
 
-  test("ダッシュボードリンクをクリックして遷移する", async ({ page }) => {
-    // ダッシュボードリンクを取得
-    const dashboardLink = page.getByRole("link", { name: /ダッシュボード/i });
-    
-    // href属性が正しいことを確認
-    await expect(dashboardLink).toHaveAttribute("href", "/dashboard");
-    
-    // リンクをクリック
-    await dashboardLink.click();
-    
-    // URLが/dashboardに遷移したことを確認
-    await expect(page).toHaveURL(/\/dashboard/);
+  test("都道府県リンクをクリックして遷移する", async ({ page }) => {
+    const areasLink = page.getByRole("link", { name: "都道府県", exact: true });
+    await expect(areasLink).toHaveAttribute("href", "/areas");
+    await areasLink.click();
+    await expect(page).toHaveURL(/\/areas/);
   });
 
   test("統計ブログリンクをクリックして遷移する", async ({ page }) => {
@@ -58,11 +49,10 @@ test.describe("ヘッダーナビゲーション", () => {
   });
 
   test("ロゴリンクをクリックしてホームに戻る", async ({ page }) => {
-    // まずテーマページに移動 (旧 /ranking 一覧は 2026-05-28 に廃止)
-    await page.goto("/themes");
+    await page.goto("/ranking");
 
     // ロゴリンクを取得（「統計で見る都道府県」テキストを含むリンク）
-    const logoLink = page.getByRole("link", { name: /統計で見る都道府県/i });
+    const logoLink = page.getByRole("link", { name: "stats47 ホーム" });
     
     // href属性が正しいことを確認
     await expect(logoLink).toHaveAttribute("href", "/");
@@ -72,5 +62,25 @@ test.describe("ヘッダーナビゲーション", () => {
     
     // URLが/に遷移したことを確認
     await expect(page).toHaveURL("/");
+  });
+
+  test("各URLで現在地の青線は1項目だけに表示する", async ({ page }) => {
+    const cases = [
+      ["/ranking", "ランキング"],
+      ["/category/laborwage", "カテゴリ"],
+      ["/areas", "都道府県"],
+      ["/themes", "テーマ"],
+      ["/blog", "統計ブログ"],
+    ] as const;
+
+    for (const [path, label] of cases) {
+      await page.goto(path);
+      const activeItems = page
+        .getByRole("banner")
+        .locator('[data-active="true"]');
+
+      await expect(activeItems).toHaveCount(1);
+      await expect(activeItems).toContainText(label);
+    }
   });
 });

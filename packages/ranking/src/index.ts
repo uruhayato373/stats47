@@ -7,9 +7,8 @@ export * from "./utils";
 // home/featured.json 派生の pure helper (R2 非依存)。exporter と apps/web の dev 補完が共用する
 export {
   bakeHomeFeaturedItem,
-  deriveHomeFeaturedValues,
+  deriveFeaturedTop,
   resolveHomeFeaturedItems,
-  type HomeFeaturedDerivedValues,
   type HomeFeaturedValueRow,
 } from "./exporters/home-featured";
 export {
@@ -18,5 +17,4 @@ export {
   type BuildContext,
   type ValuesContext,
 } from "./builders/build-ranking-item-from-metric";
-
 

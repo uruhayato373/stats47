@@ -1,11 +1,6 @@
-import { Instagram, Twitter, Youtube, PenLine } from "lucide-react";
+import { Instagram, Twitter, Youtube, PenLine } from 'lucide-react';
 
-const EXTERNAL_LINKS = {
-  x: "https://x.com/stats47jp373",
-  instagram: "https://www.instagram.com/stats47jp/",
-  youtube: "https://www.youtube.com/@stats47jp",
-  note: "https://note.com/stats47",
-} as const;
+import { OPERATOR_PROFILE } from '@/config/operator-profile';
 
 /**
  * フッター SNS アイコンリンク。
@@ -15,7 +10,7 @@ export function FooterSocialLinks() {
   return (
     <div className="flex items-center gap-3">
       <a
-        href={EXTERNAL_LINKS.x}
+        href={OPERATOR_PROFILE.links.x}
         target="_blank"
         rel="noopener noreferrer"
         className="text-muted-foreground transition-colors hover:text-foreground"
@@ -24,7 +19,7 @@ export function FooterSocialLinks() {
         <Twitter className="h-4 w-4" />
       </a>
       <a
-        href={EXTERNAL_LINKS.instagram}
+        href={OPERATOR_PROFILE.links.instagram}
         target="_blank"
         rel="noopener noreferrer"
         className="text-muted-foreground transition-colors hover:text-[#E1306C]"
@@ -33,7 +28,7 @@ export function FooterSocialLinks() {
         <Instagram className="h-4 w-4" />
       </a>
       <a
-        href={EXTERNAL_LINKS.youtube}
+        href={OPERATOR_PROFILE.links.youtube}
         target="_blank"
         rel="noopener noreferrer"
         className="text-muted-foreground transition-colors hover:text-[#FF0000]"
@@ -42,7 +37,7 @@ export function FooterSocialLinks() {
         <Youtube className="h-5 w-5" />
       </a>
       <a
-        href={EXTERNAL_LINKS.note}
+        href={OPERATOR_PROFILE.links.note}
         target="_blank"
         rel="noopener noreferrer"
         className="text-muted-foreground transition-colors hover:text-[#41C9B4]"

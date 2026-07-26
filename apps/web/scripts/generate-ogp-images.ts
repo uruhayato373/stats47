@@ -31,10 +31,22 @@
  *   npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix note
  */
 
-import { mkdirSync } from "node:fs";
+import { mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 
 import { createElement as h } from "react";
+
+import { getMetricConfig } from "@stats47/data-configs";
+import {
+  RANKING_THUMBNAIL_SIZE,
+  RANKING_THUMBNAIL_VERSION,
+  rankingThumbnailKeys,
+  type RankingThumbnailManifest,
+} from "@stats47/ranking";
+import {
+  generateRankingThumbnailMapSvg,
+  MINI_PREFECTURE_THUMBNAIL_LAYOUT,
+} from "@stats47/visualization/server";
 
 import {
   PREF_CARD_OGP_THEME,
@@ -213,7 +225,15 @@ interface RankingItemRaw {
   };
 }
 interface ValuesRaw {
-  partitions?: { yearCode?: string; values?: { areaName?: string; value?: number | null; rank?: number }[] }[];
+  partitions?: {
+    yearCode?: string;
+    values?: {
+      areaCode?: string;
+      areaName?: string;
+      value?: number | null;
+      rank?: number;
+    }[];
+  }[];
 }
 
 async function buildRankingOgpData(key: string) {
@@ -243,6 +263,8 @@ async function buildRankingOgpData(key: string) {
       last: last ? { rank: last.rank as number, name: last.areaName ?? "", value: last.value as number } : null,
     },
     latestYearName: it.availableYears?.[it.availableYears.length - 1]?.yearName ?? it.latestYear?.yearName ?? "",
+    latestYear,
+    rows,
   };
 }
 
@@ -293,7 +315,7 @@ async function main() {
     if (opts.type === "ranking") return [`app/ranking/${id}/ogp/ogp.png`];
     if (opts.type === "areas") return [`app/areas/${id}/ogp/ogp.png`];
     if (opts.type === "ranking-cards")
-      return [`app/ranking/${id}/thumbnail-light.webp`, `app/ranking/${id}/thumbnail-dark.webp`];
+      return Object.values(rankingThumbnailKeys(id));
     if (opts.type === "pref-silhouette")
       return PREF_CARD_PUSH_THEMES.flatMap((theme) =>
         PREF_CARD_RATIO_KEYS.map((ratio) => `sns/pref-silhouette/${id}/card-${ratio}-${theme}.png`),
@@ -396,14 +418,58 @@ async function main() {
           }
         }
       } else if (opts.type === "ranking-cards") {
-        const itemPayload = await fetchJson<RankingItemRaw>(`${PUBLIC_URL}/app/ranking/${id}/item.json`);
-        const it = itemPayload?.item;
-        if (!it?.title && !it?.rankingName) { skipped++; return; }
-        const year = it.availableYears?.[it.availableYears.length - 1]?.yearName ?? "";
-        const data = { title: it.title ?? it.rankingName ?? "", subtitle: null, category: "RANKING", date: year, domainPath: "stats47.jp/ranking" };
-        const [lightKey, darkKey] = keyFor(id);
-        await renderToWebP(buildElement(data, false), fonts, stagePath(lightKey));
-        await renderToWebP(buildElement(data, true), fonts, stagePath(darkKey));
+        const built = await buildRankingOgpData(id);
+        if (!built) { skipped++; return; }
+        const config = getMetricConfig(id);
+        const [lightKey, darkKey, manifestKey] = keyFor(id);
+        const rows = built.rows.flatMap((row) =>
+          row.areaCode && row.value !== null && row.value !== undefined
+            ? [{
+                areaCode: row.areaCode,
+                value: row.value,
+                rank: row.rank,
+              }]
+            : [],
+        );
+        if (rows.length === 0 || !built.ogp.top3[0]) { skipped++; return; }
+        const mapSvg = generateRankingThumbnailMapSvg(rows, {
+          colorScheme: config?.visualization?.colorScheme,
+          isReversed: config?.visualization?.isReversed,
+          idSuffix: id,
+        });
+        const { buildRankingThumbnailElement } = await import("./lib/ranking-thumbnail-render");
+        const renderData = {
+          title: built.ogp.title,
+          year: built.latestYear,
+          unit: built.ogp.unit,
+          topAreaName: built.ogp.top3[0].name,
+          topValue: built.ogp.top3[0].value.toLocaleString("ja-JP"),
+          mapSvg,
+        };
+        await renderToWebP(buildRankingThumbnailElement(renderData, false), fonts, stagePath(lightKey));
+        await renderToWebP(buildRankingThumbnailElement(renderData, true), fonts, stagePath(darkKey));
+        const keys = rankingThumbnailKeys(id);
+        const manifest: RankingThumbnailManifest = {
+          version: RANKING_THUMBNAIL_VERSION,
+          rankingKey: id,
+          geographicLayout: MINI_PREFECTURE_THUMBNAIL_LAYOUT,
+          year: built.latestYear,
+          generatedAt: new Date().toISOString(),
+          source: {
+            item: `app/ranking/${id}/item.json`,
+            values: `app/ranking/${id}/values.json`,
+            config: `packages/data-configs/src/metrics/${id}.ts`,
+            topology: "packages/gis/data/geoshape/prefecture.topojson",
+          },
+          assets: {
+            light: keys.light,
+            dark: keys.dark,
+            width: RANKING_THUMBNAIL_SIZE.width,
+            height: RANKING_THUMBNAIL_SIZE.height,
+            format: "webp",
+          },
+        };
+        writeFileSync(stagePath(manifestKey), `${JSON.stringify(manifest, null, 2)}\n`);
       } else {
         // note-covers
         const n = noteEntries.find((e) => e.slug === id)!;

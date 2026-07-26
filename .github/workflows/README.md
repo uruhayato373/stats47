@@ -6,7 +6,7 @@
 
 | ワークフロー | トリガー | 実行内容 |
 |------------|---------|---------|
-| PR Quality Check | PR作成・更新 (main) | Lint、Type Check、Test、Coverage |
+| PR Quality Check | PR作成・更新 (main) | Lint、Type Check、Unit Test、Coverage、Build、Playwright E2E |
 | Deploy to Cloudflare Workers | Push (main) | Build、認証確認、デプロイ、ヘルスチェック |
 | Security Scan | PR/Push、毎週日曜0時、手動 | npm audit、CodeQL分析 |
 
@@ -65,6 +65,10 @@ feature/* → PR作成 → 品質チェック
 
 4. ✅ **Verify Build**: `npm run build`
    - ビルドエラーで失敗
+
+5. ✅ **Full E2E**: Playwright + Chromium
+   - 本番ビルドを起動して全E2Eを1 workerで実行
+   - 失敗時を含め、HTMLレポートとtest-resultsを30日間保存
 
 **並列実行制御**:
 - 同じPRの古い実行は自動的にキャンセルされ、最新のコミットのみが実行されます

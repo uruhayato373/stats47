@@ -499,10 +499,10 @@ jobs:
           fi
         continue-on-error: false
 
-  accessibility-e2e:
-    name: Accessibility E2E
+  e2e:
+    name: Full E2E
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 25
 
     steps:
       - name: 🧰 Checkout repository
@@ -520,14 +520,30 @@ jobs:
       - name: 🌐 Install Playwright Chromium
         run: npx playwright install --with-deps chromium
 
-      - name: ♿ Run representative axe checks
-        # webServer (next dev) が validate-env.ts の必須 env を要求するため build job と同じ値を渡す
-        # (Phase 2 並列分割で env が build job のみになり dev server が起動不能だった是正)。
+      - name: 🎭 Run full Playwright E2E suite
+        # playwright.config.ts が本番ビルド + next start を起動し、全導線・SEO・
+        # middleware・アクセシビリティを Chromium 1 worker で安定して検証する。
         env:
+          NODE_ENV: production
+          NEXT_PUBLIC_ENV: production
           NEXT_PUBLIC_BASE_URL: https://stats47.jp
+          NEXT_PUBLIC_R2_PUBLIC_URL: https://storage.stats47.jp
+          R2_PUBLIC_FETCH_URL: https://storage.stats47.jp
           NEXT_PUBLIC_ESTAT_APP_ID: ${{ secrets.NEXT_PUBLIC_ESTAT_APP_ID }}
-        run: npx playwright test tests/e2e/accessibility/representative-routes.spec.ts --project=e2e-chromium
+          NODE_OPTIONS: "--max-old-space-size=4096"
+        run: npx playwright test --project=e2e-chromium
         working-directory: apps/web
+
+      - name: 📊 Upload Playwright report
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: playwright-e2e-report
+          path: |
+            apps/web/playwright-report/
+            apps/web/test-results/
+          if-no-files-found: ignore
+          retention-days: 30
 
   # 集約 job: 上記 job を全て needs し、単一の required status check
   # (branch protection が要求する "Code Quality Check") を維持する。
@@ -535,7 +551,7 @@ jobs:
   # (needs のいずれかが失敗すると本 job は skip されうるため、結果を明示チェックする)。
   quality-check:
     name: Code Quality Check
-    needs: [static-gates, type-check, test, build, remote-asset-audit, accessibility-e2e]
+    needs: [static-gates, type-check, test, build, remote-asset-audit, e2e]
     if: always()
     runs-on: ubuntu-latest
     timeout-minutes: 5
@@ -545,7 +561,7 @@ jobs:
         if: ${{ contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled') || contains(needs.*.result, 'skipped') }}
         run: |
           echo "::error::One or more required checks did not pass."
-          echo "static-gates=${{ needs.static-gates.result }} type-check=${{ needs.type-check.result }} test=${{ needs.test.result }} build=${{ needs.build.result }} remote-asset-audit=${{ needs.remote-asset-audit.result }} accessibility-e2e=${{ needs.accessibility-e2e.result }}"
+          echo "static-gates=${{ needs.static-gates.result }} type-check=${{ needs.type-check.result }} test=${{ needs.test.result }} build=${{ needs.build.result }} remote-asset-audit=${{ needs.remote-asset-audit.result }} e2e=${{ needs.e2e.result }}"
           exit 1
 
       - name: ✅ All Checks Passed

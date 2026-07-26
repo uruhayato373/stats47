@@ -6,6 +6,8 @@ import L from "leaflet";
 import type { Feature, FeatureCollection, Geometry } from "geojson";
 import type { Layer, PathOptions } from "leaflet";
 
+import { buildKsjPropertyPopupHtml } from "../utils/build-ksj-property-popup-html";
+
 export type KsjGeometryType = "point" | "line" | "polygon" | "mesh" | "mixed";
 
 const BASE_STYLES: Record<KsjGeometryType, PathOptions> = {
@@ -17,15 +19,6 @@ const BASE_STYLES: Record<KsjGeometryType, PathOptions> = {
 };
 
 const HOVER_STYLE: PathOptions = { weight: 2.5, fillOpacity: 0.85 };
-
-function buildPopupHtml(props: Record<string, unknown> | null): string {
-  if (!props) return "<em>プロパティなし</em>";
-  const rows = Object.entries(props)
-    .filter(([, v]) => v !== null && v !== undefined && v !== "")
-    .map(([k, v]) => `<tr><td style="padding:1px 6px;color:#64748b;white-space:nowrap">${k}</td><td style="padding:1px 6px">${String(v)}</td></tr>`)
-    .join("");
-  return `<div style="max-height:260px;overflow-y:auto;font-size:12px"><table>${rows}</table></div>`;
-}
 
 interface KsjGeoJsonLayerProps {
   geojson: FeatureCollection<Geometry>;
@@ -69,7 +62,7 @@ export function KsjGeoJsonLayer({
 
   const onEachFeature = useCallback(
     (feature: Feature<Geometry>, layer: Layer) => {
-      const popupHtml = buildPopupHtml(feature.properties);
+      const popupHtml = buildKsjPropertyPopupHtml(feature.properties);
       layer.bindPopup(popupHtml, { maxWidth: 320, maxHeight: 300 });
 
       if (geometryType !== "point") {

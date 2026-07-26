@@ -99,13 +99,13 @@ const GroupCard: React.FC<{ group: DefinitionGroup }> = ({ group }) => {
 
       {/* アイテムテーブル */}
       <div className="px-4 py-2">
-        <Table className="w-full text-sm">
+        <Table>
           <TableBody>
             {group.items.map((item) => (
               <TableRow key={item.name} className="border-b border-border/40 last:border-0 hover:bg-transparent">
-                <TableCell className="py-1.5 pr-2 text-foreground">{item.name}</TableCell>
+                <TableCell className="pr-2 text-foreground">{item.name}</TableCell>
                 {item.cat01 && (
-                  <TableCell className="py-1.5 text-right text-xs font-mono text-muted-foreground">
+                  <TableCell className="text-right font-mono text-muted-foreground">
                     {item.cat01}
                   </TableCell>
                 )}

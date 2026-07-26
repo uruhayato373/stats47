@@ -12,6 +12,12 @@ const surfaceCardClass =
 const interactiveSurfaceClass =
   "hover:border-primary/40 hover:bg-accent/40 hover:shadow-md";
 
+/**
+ * home の比較対象カードとcategory注目ランキングの共通比率。
+ * 参照UIの実測約1.47:1に合わせ、各featureで比率を重複定義しない。
+ */
+export const PORTAL_CARD_ASPECT_CLASS = "aspect-[1.47/1]";
+
 interface SurfaceClassNameOptions {
   interactive?: boolean;
   className?: string;

@@ -7,17 +7,7 @@ import "leaflet.markercluster";
 import "leaflet.markercluster/dist/MarkerCluster.css";
 import type { FeatureCollection, Geometry, Point } from "geojson";
 
-function buildPopupHtml(props: Record<string, unknown> | null): string {
-  if (!props) return "<em>プロパティなし</em>";
-  const rows = Object.entries(props)
-    .filter(([, v]) => v !== null && v !== undefined && v !== "")
-    .map(
-      ([k, v]) =>
-        `<tr><td style="padding:1px 6px;color:#64748b;white-space:nowrap">${k}</td><td style="padding:1px 6px">${String(v)}</td></tr>`
-    )
-    .join("");
-  return `<div style="max-height:260px;overflow-y:auto;font-size:12px"><table>${rows}</table></div>`;
-}
+import { buildKsjPropertyPopupHtml } from "../utils/build-ksj-property-popup-html";
 
 function makeClusterIcon(color: string, count: number): L.DivIcon {
   const size = count >= 1000 ? 42 : count >= 100 ? 36 : 30;
@@ -65,7 +55,9 @@ export function KsjClusterLayer({
         weight: 1,
       });
       marker.bindPopup(
-        buildPopupHtml(feature.properties as Record<string, unknown>),
+        buildKsjPropertyPopupHtml(
+          feature.properties as Record<string, unknown>,
+        ),
         { maxWidth: 320, maxHeight: 300 }
       );
       cluster.addLayer(marker);

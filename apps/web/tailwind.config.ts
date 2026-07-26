@@ -1,5 +1,15 @@
 import type { Config } from "tailwindcss";
 
+const coconalaFontFamily = [
+  "Hiragino Kaku Gothic ProN",
+  "Hiragino Kaku Gothic Pro",
+  "Meiryo",
+  "Helvetica Neue",
+  "Helvetica",
+  "Arial",
+  "sans-serif",
+];
+
 const config: Config = {
   darkMode: ["class"],
   content: [
@@ -40,6 +50,10 @@ const config: Config = {
       },
     },
     extend: {
+      fontFamily: {
+        sans: coconalaFontFamily,
+        mono: coconalaFontFamily,
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

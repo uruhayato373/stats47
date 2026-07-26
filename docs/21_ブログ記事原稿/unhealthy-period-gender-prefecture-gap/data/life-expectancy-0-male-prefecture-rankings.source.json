@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "life-expectancy-0-male",
+  "year": "2020",
+  "unit": "年",
+  "label": "平均余命",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/life-expectancy-0-male/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug unhealthy-period-gender-prefecture-gap --keys life-expectancy-0-male --data-name life-expectancy-0-male-prefecture-rankings",
+  "fetchedAt": "2026-07-19T23:12:20.203Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

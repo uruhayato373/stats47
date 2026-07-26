@@ -37,11 +37,11 @@ export const AttributeMatrixClient: React.FC<AttributeMatrixClientProps> = ({
     <Table>
       <TableHeader>
         <TableRow>
-          <TableHead className="text-left p-2" />
+          <TableHead className="text-left" />
           {columns.map((col) => (
             <TableHead
               key={col}
-              className="text-center p-2 whitespace-nowrap"
+              className="text-center whitespace-nowrap"
             >
               {col}
             </TableHead>
@@ -51,12 +51,12 @@ export const AttributeMatrixClient: React.FC<AttributeMatrixClientProps> = ({
       <TableBody>
         {rows.map((row) => (
           <TableRow key={row.label}>
-            <TableCell className="p-2 font-medium whitespace-nowrap">{row.label}</TableCell>
+            <TableCell className="font-medium whitespace-nowrap">{row.label}</TableCell>
             {row.values.map((value, i) => (
               <TableCell
                 key={columns[i]}
                 className={cn(
-                  "text-center p-2 tabular-nums transition-colors",
+                  "text-center tabular-nums transition-colors",
                   value !== null && "font-medium"
                 )}
                 style={value !== null ? { backgroundColor: getCellBg(value) } : undefined}

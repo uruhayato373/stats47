@@ -26,10 +26,7 @@ class MockIntersectionObserver {
 
 const PARAMS = {
   rankingKey: "annual-sunshine-duration",
-  cardVariant: "question",
   slot: 1,
-  experimentId: "home-featured-v1",
-  experimentVariant: "editorial",
 } as const;
 
 describe("TrackedFeaturedRankingCard", () => {
@@ -69,7 +66,7 @@ describe("TrackedFeaturedRankingCard", () => {
     expect(mockGtag).toHaveBeenCalledTimes(1);
     expect(mockGtag).toHaveBeenCalledWith("event", "home_featured_impression", {
       ranking_key: "annual-sunshine-duration",
-      card_variant: "question",
+      card_variant: "geographic",
       slot: 1,
       experiment_id: "home-featured-v1",
       experiment_variant: "editorial",
@@ -111,7 +108,7 @@ describe("TrackedFeaturedRankingCard", () => {
 
   it("card リンクの click を capture して home_featured_click を送る", () => {
     const { getByRole } = render(
-      <TrackedFeaturedRankingCard {...PARAMS} cardVariant="map" experimentVariant="control">
+      <TrackedFeaturedRankingCard {...PARAMS}>
         <a href="#card">card</a>
       </TrackedFeaturedRankingCard>,
     );
@@ -119,10 +116,10 @@ describe("TrackedFeaturedRankingCard", () => {
 
     expect(mockGtag).toHaveBeenCalledWith("event", "home_featured_click", {
       ranking_key: "annual-sunshine-duration",
-      card_variant: "map",
+      card_variant: "geographic",
       slot: 1,
       experiment_id: "home-featured-v1",
-      experiment_variant: "control",
+      experiment_variant: "editorial",
       link_position: "home_featured",
     });
   });

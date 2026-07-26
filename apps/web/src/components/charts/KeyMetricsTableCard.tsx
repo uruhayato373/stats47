@@ -47,11 +47,11 @@ export function KeyMetricsTableCard({
             {rows.map((row, index) => {
               const content = (
                 <>
-                  <TableCell className="h-auto px-0 py-1.5 text-xs text-muted-foreground">
+                  <TableCell className="text-muted-foreground">
                     <div className="line-clamp-2">{row.label}</div>
                     {row.meta && <div className="mt-0.5 text-[10px]">{row.meta}</div>}
                   </TableCell>
-                  <TableCell className="h-auto px-0 py-1.5 text-right text-sm font-bold tabular-nums text-foreground">
+                  <TableCell className="text-right font-bold tabular-nums text-foreground">
                     {row.value}
                   </TableCell>
                 </>
@@ -64,16 +64,16 @@ export function KeyMetricsTableCard({
                 >
                   {row.href ? (
                     <>
-                      <TableCell className="h-auto px-0 py-0" colSpan={2}>
+                      <TableCell colSpan={2}>
                         <Link
                           href={row.href}
-                          className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-2 py-1.5 hover:text-primary"
+                          className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-2 hover:text-primary"
                         >
-                          <span className="text-xs text-muted-foreground">
+                          <span className="text-muted-foreground">
                             <span className="line-clamp-2">{row.label}</span>
                             {row.meta && <span className="mt-0.5 block text-[10px]">{row.meta}</span>}
                           </span>
-                          <span className="text-right text-sm font-bold tabular-nums text-foreground">
+                          <span className="text-right font-bold tabular-nums text-foreground">
                             {row.value}
                           </span>
                         </Link>

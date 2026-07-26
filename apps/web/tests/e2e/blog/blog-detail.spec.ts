@@ -10,12 +10,14 @@ test.describe("ブログ記事詳細ページ", () => {
     // 一覧ページから最初の記事へ遷移
     await page.goto("/blog", { waitUntil: "domcontentloaded" });
 
-    const firstArticle = page.locator("a[href^='/blog/']").first();
+    const firstArticle = page.locator(
+      "main a[href^='/blog/']:not([href='/blog/tags'])"
+    ).first();
     await expect(firstArticle).toBeVisible({ timeout: 10000 });
 
     const href = await firstArticle.getAttribute("href");
     if (href) {
-      await page.goto(href);
+      await page.goto(href, { waitUntil: "domcontentloaded" });
     }
   });
 

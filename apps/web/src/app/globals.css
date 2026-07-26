@@ -43,8 +43,8 @@
     
     --radius: 0px; /* フラットデザイン: 角丸なし (rounded-sm/md/lg はすべて 0) */
 
-    /* Header height */
-    --header-height: 64px;
+    /* Header height: mobile compact / desktop portal navigation */
+    --header-height: 56px;
 
     /* Footer height */
     --footer-height: 80px;
@@ -72,6 +72,19 @@
     --chart-4: 38 88% 53%;   /* Amber */
     --chart-5: 9 68% 53%;    /* Coral */
   }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --header-height: 52px;
+  }
+}
+
+/* Coconala の Playwright 実測 font stack と同じ順序を使用する。 */
+.portal-header {
+  font-family: "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro",
+    Meiryo, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
 
 /*
@@ -153,17 +166,16 @@
     @apply border-border;
   }
 
-  /* サイト全体の基準フォントサイズ (= 106.25%)。Tailwind の text-* と spacing は rem 基準のため、
-     html を上げると文字・余白が比例して拡大する。Zenn 体感に寄せた全体拡大。 */
+  /* 探索UIの情報密度を確保する標準基準。記事本文は reading zone 側で
+     16px・広い行間を明示し、ポータルと読み物の密度を分離する。 */
   html {
-    font-size: 17px;
+    font-size: 16px;
   }
 
   body {
-    /* Zenn / 記事準拠の system フォントスタック (游ゴシック / Hiragino 軸、Web フォント非依存) */
-    font-family: -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
-      "Hiragino Sans", "Yu Gothic UI", "Yu Gothic", YuGothic, Meiryo, "Segoe UI",
-      "Helvetica Neue", Arial, sans-serif;
+    /* Coconala と同じ Hiragino-first。Web フォントは追加せず端末フォントへフォールバックする。 */
+    font-family: "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro",
+      Meiryo, "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 1rem;
     line-height: 1.7;
     background-color: hsl(var(--background));
@@ -189,9 +201,8 @@
 @layer components {
   .font-news-article,
   .blog-news-article {
-    font-family: -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
-      "Hiragino Sans", "Yu Gothic UI", "Yu Gothic", YuGothic, Meiryo, "Segoe UI",
-      "Helvetica Neue", Arial, sans-serif;
+    font-family: "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro",
+      Meiryo, "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
 
   .blog-news-article {
@@ -309,37 +320,6 @@
     text-decoration-color: hsl(var(--article-accent, var(--primary)));
   }
 
-  /* 表: soft border + 淡色 thead (ranking AI コンテンツ等で使用。blog 本文は表禁止) */
-  .blog-news-article table {
-    margin: 1.5rem 0;
-    width: 100%;
-    overflow: hidden;
-    border: 1px solid hsl(var(--border));
-    border-radius: 0;
-    font-size: 0.875rem;
-  }
-
-  .blog-news-article thead {
-    background: hsl(var(--article-accent-fill, var(--muted)));
-  }
-
-  .blog-news-article thead th {
-    padding: 0.75rem 1rem;
-    border-bottom: 1px solid hsl(var(--border));
-    color: hsl(var(--article-accent, var(--primary)));
-    font-weight: 600;
-    text-align: left;
-  }
-
-  .blog-news-article tbody td {
-    padding: 0.625rem 1rem;
-    border-bottom: 1px solid hsl(var(--border));
-  }
-
-  .blog-news-article tbody tr:last-child td {
-    border-bottom: none;
-  }
-
   .blog-news-article .not-prose {
     font-size: 1rem;
     line-height: 1.7;
@@ -403,18 +383,6 @@
 
   .blog-article hr {
     @apply my-8 border-border;
-  }
-
-  .blog-article table {
-    @apply w-full my-4 text-sm;
-  }
-
-  .blog-article thead th {
-    @apply border-b border-border px-3 py-2 text-left font-semibold;
-  }
-
-  .blog-article tbody td {
-    @apply border-b border-border/50 px-3 py-2;
   }
 
   .blog-article code {

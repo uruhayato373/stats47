@@ -34,20 +34,20 @@ const BASELINE = new Set([
   // 記事系ページ (reading zone) の本文カード。角丸なし + shadow-sm +
   // モバイルフルブリード。ArticleShell と対で使う (2026-07-11 Soft Editorial 移植)。
   "ArticleCard",
+  // blog 一覧/詳細の右レール専用プロフィール。SurfaceCard を外枠に使い、
+  // 経歴・note CTA・アイコンSNSを一体で提供する feature composite。
+  "BlogAuthorProfileCard",
   "ChartCard",
   "ChartLoadingCard",
   "CitiesNavCard",
   "DataUsageCard",
   "DefinitionsCard",
-  // home-featured-v1 editorial card (doc 28)。新規カード枠ではなく共有 SurfaceLinkCard を
-  // 外枠に variant (question/comparison/territory/top-three) を dispatch する合成コンポーネント。
-  "EditorialFeaturedCard",
   "FeaturedRankingCard",
   "KeyMetricsTableCard",
   "KpiCard",
   "MultiStatCard",
-  // OperatorPromoCard からプロフィール部だけ切り出した静的カード (SurfaceCard ベース)。
-  // ブログ詳細/一覧の PC 右レール最上部で運営者プロフィールを表示 (アフィリエイト非同梱)。
+  // OperatorPromoCard からプロフィール部だけ切り出した home 用省スペースカード
+  // (SurfaceCard ベース、アフィリエイト非同梱)。
   "OperatorProfileCard",
   // home ポータル (doc 38) の発見カード。SurfaceCard/SurfaceLinkCard ベースだが trackNavClick 計装 +
   // icon/label/description の portal 固有レイアウトを持つ home-portal feature 専用。

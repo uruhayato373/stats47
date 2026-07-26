@@ -43,7 +43,7 @@ import type {
 export interface ValuesContext {
   /** 観測がある年コード (4桁) の降順ユニーク配列 */
   yearCodes: string[];
-  /** 最新年の「1 位」(deriveHomeFeaturedValues の featuredTop)。取れなければ null */
+  /** 最新年の「1位」(deriveFeaturedTop)。取れなければnull */
   latestTop?: FeaturedValue | null;
 }
 

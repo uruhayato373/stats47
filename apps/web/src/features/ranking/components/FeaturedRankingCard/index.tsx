@@ -1,178 +1,59 @@
-// Server Component — 静的コンテンツのみ（Link / SVG 描画）。Client hydration 不要でバンドル削減。
-import Link from "next/link";
+import {
+  PORTAL_CARD_ASPECT_CLASS,
+  SurfaceLinkCard,
+} from "@/components/surface";
 
-import { RankingThumbnail } from "../FeaturedRankings/RankingThumbnail";
+import type { FeaturedRankingCardModel } from "../../utils/resolve-featured-ranking-card";
 
-import type { RankingThumbnailVariant } from "@stats47/data-configs";
-
-interface FeaturedRankingCardProps {
+export interface FeaturedRankingCardProps {
   rankingKey: string;
-  title: string;
-  latestYear?: string;
+  year: string;
   unit: string;
-  /** サムネイルURL（カテゴリページ等で使用） */
-  baseThumbnailUrl?: string;
-  /** 1位の都道府県名（トップページで使用） */
-  topAreaName?: string;
-  /** 1位の値（トップページで使用） */
-  topValue?: string;
-  demographicAttr?: string | null;
-  normalizationBasis?: string | null;
-  /** サーバー生成のミニタイルマップSVG */
-  tileMapSvg?: string;
-  /**
-   * サムネイル表示バリアント。"map"=地図型(既定・後方互換) / "number"=数値型(代表値強調)。
-   * 解決は resolveRankingThumbnailVariant に一本化し、ここでは解決済み値を受け取る。
-   * 正典(A/B解決規則): apps/web/src/features/ranking/utils/resolve-thumbnail-variant.ts
-   */
-  variant?: RankingThumbnailVariant;
-  /**
-   * ホーム実験 grid (home-featured-v1) 用の等高化 (§6.1 同一 grid 内の高さを揃える)。
-   * true: カードが親セルの固定高さいっぱいに伸び、地図型は地図を残り高さに収める (meet 縮小)。
-   * false (既定): 現行そのまま (category 等の既存利用に影響しない)。
-   */
-  fitHeight?: boolean;
+  model: FeaturedRankingCardModel;
 }
 
 /**
- * おすすめランキングカード
- *
- * topAreaName が渡された場合は1位データを表示、
- * baseThumbnailUrl が渡された場合はサムネイル付きレイアウトで表示する。
+ * home / category / survey共通の注目ランキングカード。
+ * 比率・余白・文字階層・地理地図配置をこの1形式だけで管理する。
  */
 export function FeaturedRankingCard({
   rankingKey,
-  title,
-  latestYear,
+  year,
   unit,
-  baseThumbnailUrl,
-  topAreaName,
-  topValue,
-  demographicAttr,
-  normalizationBasis,
-  tileMapSvg,
-  variant = "map",
-  fitHeight = false,
+  model,
 }: FeaturedRankingCardProps) {
-  // トップページ用 B: 数値型（代表値を最大要素にし、地図は薄い装飾背景）。
-  // variant=number でも 1位名/値が欠損していれば下の A（地図型）へフォールバックする。
-  if (topAreaName && topValue && variant === "number") {
-    return (
-      <Link
-        href={`/ranking/${rankingKey}`}
-        title={title}
-        className={`group relative flex flex-col overflow-hidden rounded-none border border-border transition-all hover:border-primary/50 hover:shadow-md${fitHeight ? " h-full" : ""}`}
-      >
-        {tileMapSvg && (
-          <div
-            className="pointer-events-none absolute inset-0 opacity-[0.15] [&>svg]:h-full [&>svg]:w-full"
-            aria-hidden="true"
-            dangerouslySetInnerHTML={{ __html: tileMapSvg }}
-          />
-        )}
-        <div className="relative flex flex-1 flex-col gap-2 p-3">
-          <span className="text-sm font-medium leading-tight line-clamp-2 transition-colors group-hover:text-primary">
-            {title}
-          </span>
-          <div className="mt-auto flex items-baseline gap-1">
-            <span className="font-mono text-3xl font-bold leading-none tabular-nums text-primary">
-              {topValue}
-            </span>
-            <span className="text-sm font-medium text-muted-foreground">{unit}</span>
-          </div>
-          <div className="flex items-baseline gap-1.5">
-            <span className="text-xs text-muted-foreground">1位</span>
-            <span className="text-sm font-semibold text-foreground">{topAreaName}</span>
-          </div>
-        </div>
-      </Link>
-    );
-  }
-
-  // トップページ用 A: 1位データ表示モード（地図型・後方互換の標準）
-  if (topAreaName) {
-    return (
-      <Link
-        href={`/ranking/${rankingKey}`}
-        title={title}
-        className={
-          fitHeight
-            ? "group flex h-full flex-col rounded-none border border-border hover:border-primary/50 hover:shadow-md transition-all overflow-hidden"
-            : "group block rounded-none border border-border hover:border-primary/50 hover:shadow-md transition-all overflow-hidden"
-        }
-      >
-        {tileMapSvg && (
-          <div
-            className={
-              fitHeight
-                ? "min-h-0 w-full flex-1 bg-muted/20 border-b border-border [&>svg]:w-full [&>svg]:h-full [&>svg]:block"
-                : "w-full bg-muted/20 border-b border-border [&>svg]:w-full [&>svg]:h-auto [&>svg]:block"
-            }
-            aria-hidden="true"
-            dangerouslySetInnerHTML={{ __html: tileMapSvg }}
-          />
-        )}
-        <div className="p-3 flex flex-col gap-1.5">
-          <span className="text-sm font-medium leading-tight line-clamp-2 group-hover:text-primary transition-colors">
-            {title}
-          </span>
-          <div className="flex items-baseline gap-1.5">
-            <span className="text-xs text-muted-foreground">1位</span>
-            <span className="text-sm font-semibold text-primary">{topAreaName}</span>
-            {topValue && (
-              <span className="text-xs text-muted-foreground">
-                {topValue}{unit}
-              </span>
-            )}
-          </div>
-        </div>
-      </Link>
-    );
-  }
-
-  // カテゴリ・ランキング一覧用: サムネイル付きモード
   return (
-    <Link
+    <SurfaceLinkCard
       href={`/ranking/${rankingKey}`}
-      title={title}
-      className="group block rounded-none border border-border hover:border-primary/50 hover:bg-accent/50 transition-colors overflow-hidden"
+      className={`${PORTAL_CARD_ASPECT_CLASS} group flex flex-col overflow-hidden p-3`}
     >
-      <div className="flex gap-3 p-2.5">
-        {baseThumbnailUrl && (
-          <div className="flex-shrink-0 w-20 rounded-none overflow-hidden bg-muted aspect-square">
-            <RankingThumbnail
-              baseSrc={baseThumbnailUrl}
-              alt={title}
-              className="w-full h-full object-cover"
-            />
-          </div>
-        )}
-        <div className="flex-1 min-w-0 flex flex-col justify-center gap-1">
-          <span className="text-sm font-medium leading-tight line-clamp-2 group-hover:text-primary transition-colors">
-            {title}
-          </span>
-          <div className="flex flex-wrap gap-1">
-            {latestYear && (
-              <span className="text-[10px] text-muted-foreground bg-muted/50 px-1.5 py-0.5 rounded">
-                {latestYear}年
-              </span>
-            )}
-            <span className="text-[10px] text-muted-foreground bg-muted/50 px-1.5 py-0.5 rounded">
+      <span className="line-clamp-2 text-sm font-semibold leading-snug transition-colors group-hover:text-primary">
+        {model.hook}
+      </span>
+      <div className="relative mt-1 min-h-0 flex-1">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 translate-x-[8%] translate-y-[10%] [&>svg]:h-full [&>svg]:w-full"
+          dangerouslySetInnerHTML={{ __html: model.mapSvg }}
+        />
+        <div className="absolute left-0 top-1 z-10 bg-background/90 pr-2">
+          <p className="text-[10px] leading-none text-muted-foreground">
+            {model.top.rank ?? 1}位
+          </p>
+          <p className="mt-1 text-sm font-semibold leading-none text-foreground">
+            {model.top.areaName}
+          </p>
+          <p className="mt-1 font-mono text-base font-bold leading-none tabular-nums text-primary">
+            {model.top.value}
+            <span className="ml-0.5 font-sans text-[10px] font-medium text-muted-foreground">
               {unit}
             </span>
-            {demographicAttr && (
-              <span className="text-[10px] text-muted-foreground bg-muted/50 px-1.5 py-0.5 rounded">
-                {demographicAttr}
-              </span>
-            )}
-            {normalizationBasis && (
-              <span className="text-[10px] text-muted-foreground bg-muted/50 px-1.5 py-0.5 rounded">
-                {normalizationBasis}
-              </span>
-            )}
-          </div>
+          </p>
         </div>
+        <span className="absolute bottom-0 left-0 z-10 bg-background/90 pr-2 text-[10px] leading-none text-muted-foreground">
+          {year}年
+        </span>
       </div>
-    </Link>
+    </SurfaceLinkCard>
   );
 }

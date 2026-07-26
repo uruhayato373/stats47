@@ -1,17 +1,19 @@
-import { HOME_PORTAL_USE_CASES } from "@stats47/data-configs";
+import { HOME_PORTAL_USE_CASES } from '@stats47/data-configs';
 
-import { PortalNavCard } from "./PortalNavCard";
+import { HorizontalCardCarousel } from '@/components/surface';
+
+import { PortalNavCard } from './PortalNavCard';
 
 /**
  * 「知りたいことから探す」= theme を利用意図へ翻訳した curated use case。
- * 文章中心なので mobile 1列 / sm 2列 / lg 3列 (仕様 §9・§6.5)。
+ * 共通carouselで mobile 1枚+peek / sm 2枚 / lg 3枚 / xl 4枚 (仕様 §9・§6.5)。
  */
 export function PortalUseCaseGrid() {
   const items = HOME_PORTAL_USE_CASES.filter((u) => u.isActive).sort(
-    (a, b) => a.order - b.order,
+    (a, b) => a.order - b.order
   );
   return (
-    <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+    <HorizontalCardCarousel ariaLabel="知りたいことから探す">
       {items.map((u) => (
         <PortalNavCard
           key={u.id}
@@ -21,6 +23,6 @@ export function PortalUseCaseGrid() {
           surface="home_use_case"
         />
       ))}
-    </div>
+    </HorizontalCardCarousel>
   );
 }

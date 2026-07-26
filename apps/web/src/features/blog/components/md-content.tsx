@@ -5,10 +5,19 @@ import { type ReactNode, useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
+import {
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableHeader,
+    TableRow,
+} from "@stats47/components";
 import { ArrowRight, ExternalLink } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import rehypeRaw from "rehype-raw";
 import remarkGfm from "remark-gfm";
+
 
 import { SurfaceLinkCard, SurfaceSection } from "@/components/surface";
 
@@ -120,26 +129,36 @@ function makeMdComponents(slug?: string, affiliateBannersByCategory?: Record<str
         },
 
         table: ({ children, ...props }: ComponentProps) => (
-            <div className="my-6 overflow-x-auto">
-                <table className="min-w-full border-collapse text-sm" {...props}>
+            <div className="my-6">
+                <Table {...props}>
                     {children}
-                </table>
+                </Table>
             </div>
         ),
         thead: ({ children, ...props }: ComponentProps) => (
-            <thead className="border-b bg-muted/50" {...props}>
+            <TableHeader {...props}>
                 {children}
-            </thead>
+            </TableHeader>
+        ),
+        tbody: ({ children, ...props }: ComponentProps) => (
+            <TableBody {...props}>
+                {children}
+            </TableBody>
+        ),
+        tr: ({ children, ...props }: ComponentProps) => (
+            <TableRow {...props}>
+                {children}
+            </TableRow>
         ),
         th: ({ children, ...props }: ComponentProps) => (
-            <th className="px-4 py-2 text-left font-semibold" {...props}>
+            <TableHead {...props}>
                 {children}
-            </th>
+            </TableHead>
         ),
         td: ({ children, ...props }: ComponentProps) => (
-            <td className="border-b px-4 py-2" {...props}>
+            <TableCell {...props}>
                 {children}
-            </td>
+            </TableCell>
         ),
 
         blockquote: ({ children }: ComponentProps) => (
