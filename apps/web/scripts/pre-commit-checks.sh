@@ -54,6 +54,26 @@ if ! node "$GUARD_ROOT/.claude/scripts/lib/check-r2-route-ssg.cjs"; then
   ERROR_COUNT=$((ERROR_COUNT + 1))
 fi
 
+# 2.1.1 画像生成差分/publish policy ガード
+# workflow / planner / manifest / publisher の変更時だけ、CI と同じ fail-closed policy を先行実行する。
+STAGED_IMAGE_PIPELINE=$(git diff --cached --name-only --diff-filter=ACM | grep -E \
+  '^(\.github/workflows/.*\.ya?ml|\.claude/scripts/(lib/(audit-workflow-policy\.cjs|__tests__/audit-workflow-policy\.test\.cjs)|sns/(prepare-buzz-map-batch\.ts|lib/buzz-map-batch-core\.mjs))|apps/gallery/lib/server/(actions|buzz-map-actions)\.ts|apps/web/scripts/(generate-(ogp-images|blog-thumbnails(-cloud)?|category-images|portal-thumbnails)\.ts|data/(image-generator-registry|blog-ogp-visual-catalog|portal-thumbnail-catalog)\.ts|lib/(image-generation-manifest|image-generation-r2-inspector|blog-image-generation|blog-image-render|blog-ogp-visual|blog-thumbnail-render|ranking-(ogp-fallback|thumbnail)-render|satori-image-render|gemini-image-client)\.ts|lib/__tests__/(image-generation-manifest|image-pipeline-source-policy|blog-ogp-visual|gemini-image-client)\.test\.ts|lib/assets/ogp-bg-brand-(dark|light)\.jpg)|packages/(r2-storage/src/(image-pipeline\.ts|scripts/(push-(generated-image-set|exact-r2-assets(-core)?)\.ts|__tests__/push-(generated-image-set|exact-r2-assets)\.test\.ts))|types/src/(image-generation-manifest\.ts|index\.ts))|package\.json)$' || true)
+if [ -n "$STAGED_IMAGE_PIPELINE" ]; then
+  echo -e "${GREEN}🖼️  画像生成 pipeline policy チェック...${NC}"
+  if ! node "$GUARD_ROOT/.claude/scripts/lib/audit-workflow-policy.cjs" --strict; then
+    echo -e "${RED}❌ 画像の全件強制生成・prefix push・best-effort write が検出されました。${NC}"
+    ERROR_COUNT=$((ERROR_COUNT + 1))
+  fi
+  if ! (cd "$GUARD_ROOT" && npm run test:image-pipeline); then
+    echo -e "${RED}❌ 画像fingerprint / exact publisherの契約テストが失敗しました。${NC}"
+    ERROR_COUNT=$((ERROR_COUNT + 1))
+  fi
+  if ! (cd "$GUARD_ROOT" && npm run type-check:image-pipeline); then
+    echo -e "${RED}❌ 画像generator / publisherの型チェックが失敗しました。${NC}"
+    ERROR_COUNT=$((ERROR_COUNT + 1))
+  fi
+fi
+
 # 2.2 カード系コンポーネントの増殖ガード (Phase 0-5 / スパゲッティ化の止血)
 # *Card のベースライン超過を弾く。新規カードは既存共有カードで表現できないか先に検討する。
 echo -e "${GREEN}🃏 カード census ガード...${NC}"

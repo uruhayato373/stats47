@@ -23,7 +23,7 @@ on:
   workflow_dispatch:
     inputs:
       slugs:
-        description: "公開する slug (空白/カンマ区切り)。空なら develop 最新コミットの差分から検出"
+        description: '公開する slug (空白/カンマ区切り)。空なら develop 最新コミットの差分から検出'
         required: false
         type: string
   # Phase 2 (2026-06-02): develop に article.md が push されたら自動公開。
@@ -33,15 +33,15 @@ on:
   push:
     branches: [develop]
     paths:
-      - "docs/21_ブログ記事原稿/**/article.md"
+      - 'docs/21_ブログ記事原稿/**/article.md'
       # この workflow 自身の変更でも発火させ、未公開記事の backfill (reconcile) を回せるようにする。
-      - ".github/workflows/blog-auto-publish.yml"
+      - '.github/workflows/blog-auto-publish.yml'
 
 permissions:
   contents: write # 公開後に docs/21 ドラフトを自動削除 (ephemeral outbox) して commit-back するため
 
 concurrency:
-  group: publish-blog # publish-blog.yml と同一 group で R2 書き込みを直列化
+  group: r2-write # 全 R2 image writer + publish-blog.yml と共通
   cancel-in-progress: false
 
 env:
@@ -50,7 +50,7 @@ env:
   R2_SECRET_ACCESS_KEY: ${{ secrets.CLOUDFLARE_R2_SECRET_ACCESS_KEY }}
   CLOUDFLARE_R2_BUCKET_NAME: stats47
   R2_PUBLIC_FETCH_URL: https://storage.stats47.jp
-  MAX_PUBLISH: "10"
+  MAX_PUBLISH: '10'
   # 公開後の CDN ピンポイントパージ用 (purge-cache.ts --urls)
   CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
   CLOUDFLARE_ZONE_ID: ${{ secrets.CLOUDFLARE_ZONE_ID }}
@@ -69,8 +69,8 @@ jobs:
       - name: 🟢 Setup Node.js
         uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
-          node-version: "20"
-          cache: "npm"
+          node-version: '20'
+          cache: 'npm'
 
       - name: 📦 Install dependencies
         run: npm ci
@@ -153,10 +153,14 @@ jobs:
             if grep -qE '^publishedAt:\s*\(未定\)' "$A" || ! grep -qE '^publishedAt:\s*[0-9]' "$A"; then
               perl -i -pe "s/^publishedAt:.*/publishedAt: $(date -u +%Y-%m-%d)/" "$A"
             fi
-            # --- thumbnail 生成 ---
-            npx tsx apps/web/scripts/generate-blog-thumbnails.ts --slug "$SLUG" || true
+            # --- thumbnail 差分生成 (isolated staging + exact plan) ---
+            npx tsx apps/web/scripts/generate-blog-thumbnails.ts --slug "$SLUG"
             # --- 記事本体を R2 へ push ---
             npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix "app/blog/$SLUG"
+            # --- 生成した画像だけを asset → manifest の順で反映 ---
+            PLAN=".local/image-generation-publish-plan-blog.json"
+            test -f "$PLAN" || { echo "exact publish plan が生成されませんでした: $SLUG"; exit 1; }
+            npx tsx packages/r2-storage/src/scripts/push-generated-image-set.ts --plan "$PLAN"
             PUBLISHED="$PUBLISHED $SLUG"
             echo "✅ $SLUG published"
             echo "::endgroup::"

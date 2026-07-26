@@ -6,6 +6,16 @@ export interface PearsonResult {
   r: number;
 }
 
+export interface MatchedPearsonResult extends PearsonResult {
+  count: number;
+}
+
+export interface RankValueWithArea {
+  areaCode: string;
+  areaName: string;
+  value: number;
+}
+
 /**
  * ピアソン相関係数を計算する
  * r = (nΣxy - ΣxΣy) / √((nΣx² - (Σx)²)(nΣy² - (Σy)²))
@@ -47,10 +57,52 @@ export function calculatePearsonR(
 }
 
 /**
+ * X行とYのvalue mapをareaCodeで照合し、配列やscatter objectを作らずPearson rを計算する。
+ * X側に同一areaCodeの複数行がある場合もbuildScatterDataと同じ順序・件数で集計するため、
+ * 既存snapshotの計算意味を変えずに大量metric pairの一時allocationを抑えられる。
+ */
+export function calculateMatchedPearsonR(
+  xRows: Iterable<Pick<RankValueWithArea, 'areaCode' | 'value'>>,
+  yByKey: ReadonlyMap<string, number>
+): MatchedPearsonResult {
+  let count = 0;
+  let sumX = 0;
+  let sumY = 0;
+  let sumXY = 0;
+  let sumX2 = 0;
+  let sumY2 = 0;
+  for (const xRow of xRows) {
+    const x = xRow.value;
+    const y = yByKey.get(xRow.areaCode);
+    if (y === undefined) continue;
+    count++;
+    sumX += x;
+    sumY += y;
+    sumXY += x * y;
+    sumX2 += x * x;
+    sumY2 += y * y;
+  }
+  if (count < 2) return { r: 0, count };
+  const numerator = count * sumXY - sumX * sumY;
+  const denomX = count * sumX2 - sumX * sumX;
+  const denomY = count * sumY2 - sumY * sumY;
+  const denominator = Math.sqrt(denomX * denomY);
+  if (denominator === 0) return { r: 0, count };
+  return {
+    r: Math.max(-1, Math.min(1, numerator / denominator)),
+    count,
+  };
+}
+
+/**
  * 偏相関係数を計算する
  * r(AB|Z) = (r(AB) - r(AZ)*r(BZ)) / sqrt((1-r(AZ)²)(1-r(BZ)²))
  */
-export function calculatePartialR(rAB: number, rAZ: number, rBZ: number): number | null {
+export function calculatePartialR(
+  rAB: number,
+  rAZ: number,
+  rBZ: number
+): number | null {
   const denominator = Math.sqrt((1 - rAZ * rAZ) * (1 - rBZ * rBZ));
   if (denominator === 0) return null;
   return Math.max(-1, Math.min(1, (rAB - rAZ * rBZ) / denominator));
@@ -61,12 +113,6 @@ export interface ScatterDataPoint {
   areaName: string;
   x: number;
   y: number;
-}
-
-export interface RankValueWithArea {
-  areaCode: string;
-  areaName: string;
-  value: number;
 }
 
 /**

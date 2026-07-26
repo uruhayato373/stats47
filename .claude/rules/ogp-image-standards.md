@@ -23,22 +23,23 @@ stats47.jp の **OGP 画像 / note カバー画像 / サイト内リンクカー
 > (`apps/web/src/lib/metadata/ogp-image.ts` の `ogpImageUrl` / `ogpImageKeys`)。ランタイム
 > `opengraph-image.tsx` route は使わない (Worker 500)。theme のみビルド時 SSG prerender で例外的に稼働可。
 
-| 種別 (tab) | サイズ・比率 | 生成方式 (正典 = 事前生成 → R2) | 配信 URL / R2 キー | 生成スクリプト | 担当 agent |
-|---|---|---|---|---|---|
-| OGP: `/` (サイト共通) | 1200×630 (1.91:1) | 静的 (既存 `public/og-image.jpg`) | `stats47.jp/og-image.jpg` | (静的アセット) | image-prompt-curator |
-| OGP: blog | 1200×630 | Satori(Node) → R2 | `app/blog/<slug>/ogp/ogp.png` | `generate-blog-thumbnails-cloud.ts` | blog-editor |
-| OGP: ranking | 1200×630 | Satori(Node) → R2 | `app/ranking/<key>/ogp/ogp.png` | `generate-ogp-images.ts --type ranking` | ranking-ui-manager |
-| OGP: theme | 1200×630 | Satori SSG prerender (ビルド時、例外的に稼働) | `themes/<slug>/opengraph-image` (route) | (ビルド時 prerender) | theme-ui-manager |
-| OGP: category | 1200×630 | 静的フォールバック (`og-image.jpg`) | `stats47.jp/og-image.jpg` | (静的アセット) | ranking-ui-manager |
-| OGP: areas | 1200×630 | **県シルエットカード** (topojson+satori、§5.7) → R2 | `app/areas/<code>/ogp/ogp.png` | `generate-ogp-images.ts --type areas` | ranking-ui-manager |
-| 素材: 県シルエットカード (SNS) | 5比率 (1200×630 / 1080×1350 / 1080×1080 / 1080×1920 / 1920×1080) × blue/dark | 決定的生成 (topojson+satori、§5.7) → R2 | `sns/pref-silhouette/<code2>/card-<ratio>-<theme>.png` (47県×10枚) | `generate-ogp-images.ts --type pref-silhouette` | image-prompt-curator (規約/監査)・IG 消費は instagram-strategist |
-| OGP: tag / survey / cities | — | 親 `/` の静的 `og-image.jpg` に依存 (専用なし) | — | — | (要否は §3) |
-| カード: blog (light/dark) | webp (16:9 相当) | `apps/web/scripts/generate-blog-thumbnails-cloud.ts` (Satori、`lib/blog-thumbnail-render.ts`) | R2 `app/blog/<slug>/thumbnail-{light,dark}.webp` | `ThemeAwareImage` (blog-article-grid) | blog-editor |
-| カード: ranking (light/dark) | png | **供給不完全 (既知課題)** | R2 `ranking/prefecture/<key>/<year>/thumbnails/thumbnail-{light,dark}.png` | `RankingThumbnail` (baseSrc 解決、無ければ "No Image") | ranking-publisher |
-| カード: theme / category | — | **なし (要否は §3 で判断)** | — | (共有 SVG タイルマップ or blog サムネ流用) | — |
-| note カバー | 1280×670 (≒1.91:1) | **系統併存 (既知課題)**: (A) Remotion `apps/remotion/src/features/ranking-note/NoteCover.tsx` → R2 `sns/` / (B) `.claude/scripts/note/generate-note-covers.mjs` (SVG→PNG、stats47-note 汎用) / **(C) `.claude/scripts/note/generate-koumuin-covers.cjs`** (koumuin-* 専用の正典。共通背景 `assets/koumuin-cover-bg.png` + カテゴリトーン + 中央ボックス、frontmatter 駆動、sharp で背景 bitmap に前景 SVG を合成し PNG 直出力。無ければダーク背景フォールバック) | docs/31 `images/cover-1280x670.png` → note.com アップロード | note-manager |
+| 種別 (tab)                     | サイズ・比率                                                                 | 生成方式 (正典 = 事前生成 → R2)                                                                                                                                                                                                                                                                                                                                                                                                                                   | 配信 URL / R2 キー                                                 | 生成スクリプト                                  | 担当 agent                                                       |
+| ------------------------------ | ---------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------ | ----------------------------------------------- | ---------------------------------------------------------------- |
+| OGP: `/` (サイト共通)          | 1200×630 (1.91:1)                                                            | 静的 (既存 `public/og-image.jpg`)                                                                                                                                                                                                                                                                                                                                                                                                                                 | `stats47.jp/og-image.jpg`                                          | (静的アセット)                                  | image-prompt-curator                                             |
+| OGP: blog                      | 1200×630                                                                     | Satori(Node) → R2                                                                                                                                                                                                                                                                                                                                                                                                                                                 | `app/blog/<slug>/ogp/ogp.png`                                      | `generate-blog-thumbnails-cloud.ts`             | blog-editor                                                      |
+| OGP: ranking                   | 1200×630                                                                     | Satori(Node) → R2                                                                                                                                                                                                                                                                                                                                                                                                                                                 | `app/ranking/<key>/ogp/ogp.png`                                    | `generate-ogp-images.ts --type ranking`         | ranking-ui-manager                                               |
+| OGP: theme                     | 1200×630                                                                     | Satori SSG prerender (ビルド時、例外的に稼働)                                                                                                                                                                                                                                                                                                                                                                                                                     | `themes/<slug>/opengraph-image` (route)                            | (ビルド時 prerender)                            | theme-ui-manager                                                 |
+| OGP: category                  | 1200×630                                                                     | 静的フォールバック (`og-image.jpg`)                                                                                                                                                                                                                                                                                                                                                                                                                               | `stats47.jp/og-image.jpg`                                          | (静的アセット)                                  | ranking-ui-manager                                               |
+| OGP: areas                     | 1200×630                                                                     | **県シルエットカード** (topojson+satori、§5.7) → R2                                                                                                                                                                                                                                                                                                                                                                                                               | `app/areas/<code>/ogp/ogp.png`                                     | `generate-ogp-images.ts --type areas`           | ranking-ui-manager                                               |
+| 素材: 県シルエットカード (SNS) | 5比率 (1200×630 / 1080×1350 / 1080×1080 / 1080×1920 / 1920×1080) × blue/dark | 決定的生成 (topojson+satori、§5.7) → R2                                                                                                                                                                                                                                                                                                                                                                                                                           | `sns/pref-silhouette/<code2>/card-<ratio>-<theme>.png` (47県×10枚) | `generate-ogp-images.ts --type pref-silhouette` | image-prompt-curator (規約/監査)・IG 消費は instagram-strategist |
+| OGP: tag / survey / cities     | —                                                                            | 親 `/` の静的 `og-image.jpg` に依存 (専用なし)                                                                                                                                                                                                                                                                                                                                                                                                                    | —                                                                  | —                                               | (要否は §3)                                                      |
+| カード: blog (light/dark)      | webp (16:9 相当)                                                             | `apps/web/scripts/generate-blog-thumbnails-cloud.ts` (Satori、`lib/blog-thumbnail-render.ts`)                                                                                                                                                                                                                                                                                                                                                                     | R2 `app/blog/<slug>/thumbnail-{light,dark}.webp`                   | `ThemeAwareImage` (blog-article-grid)           | blog-editor                                                      |
+| カード: ranking (light/dark)   | 640×360 WebP                                                                 | 共通地理地図 renderer → R2                                                                                                                                                                                                                                                                                                                                                                                                                                        | `app/ranking/<key>/thumbnail-{light,dark}.webp`                    | `generate-ogp-images.ts --type ranking-cards`   | ranking-publisher                                                |
+| カード: theme / category       | —                                                                            | **なし (要否は §3 で判断)**                                                                                                                                                                                                                                                                                                                                                                                                                                       | —                                                                  | (共有 SVG タイルマップ or blog サムネ流用)      | —                                                                |
+| note カバー                    | 1280×670 (≒1.91:1)                                                           | **系統併存 (既知課題)**: (A) Remotion `apps/remotion/src/features/ranking-note/NoteCover.tsx` → R2 `sns/` / (B) `.claude/scripts/note/generate-note-covers.mjs` (SVG→PNG、stats47-note 汎用) / **(C) `.claude/scripts/note/generate-koumuin-covers.cjs`** (koumuin-\* 専用の正典。共通背景 `assets/koumuin-cover-bg.png` + カテゴリトーン + 中央ボックス、frontmatter 駆動、sharp で背景 bitmap に前景 SVG を合成し PNG 直出力。無ければダーク背景フォールバック) | docs/31 `images/cover-1280x670.png` → note.com アップロード        | note-manager                                    |
 
 ### OGP コンポーネントの実体
+
 `apps/web/src/features/ogp/`: `DefaultOgp` / `BlogOgp` / `RankingOgp` / `CategoryOgp` / `AreaOgp` /
 `JapanMapSvg` + デザイントークン `brand.ts` + フォント `font-loader.ts` (Noto Sans JP 400/700/900)。
 theme のみ専用コンポーネント無し (route 内インライン JSX)。twitter-image は無く、OGP を Twitter が流用。
@@ -63,9 +64,11 @@ node .claude/scripts/ogp/build-image-gallery.mjs --audit
 ```
 
 ### 自動化 (トークン消費ゼロ・決定的)
-- **週次自動監査+自動修復**: `.github/workflows/ogp-image-audit-weekly.yml` (日曜 03:00 JST)。全種別の欠落分だけ
-  Satori 生成→R2 push (self-heal) → 最終監査 → inventory を develop commit → 修復後も残れば `[OGP Alert]` Issue
-  (`ogp-alert,auto-generated`)。検知も生成も Node fetch + Satori のみ (LLM 不使用)。
+
+- **週次自動監査+自動修復**: `.github/workflows/ogp-image-audit-weekly.yml` (日曜 03:00 JST)。全種別を
+  fingerprint + 全asset契約 + R2 SHA metadataで監査し、変更bundleだけ Satori 生成→exact plan push
+  (self-heal) → 最終監査 → inventory を develop commit。修復後も陳腐化/欠落が残れば
+  `[OGP Alert]` Issueを起票しworkflowも失敗する (`ogp-alert,auto-generated`)。
 - **新規 ranking 公開時フック**: `sync-snapshots.yml` の `sync-ranking-keys` job が KNOWN keys 再生成直後に
   `generate-ogp-images.ts --type ranking|ranking-cards --source known --max-generate 500` で新キー分を即生成→R2。
   未生成による og:image 404 を公開時に先回りする。
@@ -95,7 +98,9 @@ node .claude/scripts/ogp/build-image-gallery.mjs --audit
    - **実行順**: (1) `generate-ogp-images.yml` (ranking/areas を `apply=true`) で R2 に ogp.png 生成 →
      (2) develop→main デプロイ → (3) 本番 og:image を実測 (`curl -s <URL> | grep 'og:image'` が R2 URL・200)。
      blog は (1) 不要。ランタイム `opengraph-image.tsx` route は参照されなくなる (dead、削除は後日清掃)。
-1. **ranking リンクカード供給不完全**: `RankingThumbnail` は `ranking/prefecture/<key>/<year>/thumbnails/thumbnail-{light,dark}.png` を期待するが大半 404 で「No Image」表示。→ `generate-blog-thumbnails-cloud.ts` パターンの Satori 一括生成で R2 供給し解消 (担当: ranking-publisher + snapshot-exporter)。
+1. **ranking リンクカード供給**: 旧 `ranking/prefecture/<key>/<year>/...png` は廃止。
+   `app/ranking/<key>/thumbnail-{light,dark}.webp` + 共通manifestへ移行済み。初回manifest移行だけは
+   legacyを安全にcurrent扱いできないため、件数制限付きbatchで再生成する。
 2. **note カバー 2 系統併存**: Remotion `NoteCover.tsx` (→ `sns/`) と `generate-note-covers.mjs` (→ `note/`) がドリフト。→ ギャラリーで目視比較し正系統を本 rules に確定、他方は deprecate 記載 (削除しない)。
 3. **OGP 専用なし route**: `/tag/<key>` `/survey/<key>` `/areas/<code>/cities/<city>` は親 `/` の `DefaultOgp` を流用 (現状その `DefaultOgp` 自体が 500)。→ 課題 0 の解消後、流入が増えたら専用 opengraph-image を検討 (判定は improvement-triage 経由)。
 4. **theme / category カード画像なし**: 一覧での視認性のため要否判断。既定は「作らない」(共有タイルマップ SVG or blog サムネ流用で代替)。
@@ -104,16 +109,16 @@ node .claude/scripts/ogp/build-image-gallery.mjs --audit
 
 ## 4. 役割分担
 
-| 工程 | 担当 |
-|---|---|
+| 工程                                                          | 担当                                               |
+| ------------------------------------------------------------- | -------------------------------------------------- |
 | 画像資産の棚卸し・ギャラリー監査 (read-only)・本 rules の維持 | `image-prompt-curator` (skill `/audit-ogp-images`) |
-| デザイン妥当性の目視評価 | `ui-reviewer` |
-| 外部 AI / 背景素材用の画像プロンプト生成 | `image-prompt-curator` (skill `/image-prompt`) |
-| ranking リンクカード供給 (R2 生成) | `ranking-publisher` + `snapshot-exporter` |
-| blog OGP / サムネ | `blog-editor` |
-| note カバー | `note-manager` |
-| R2 push | CI / `r2-publisher` |
-| 改善施策の status 管理 | `improvement-triage` (バックログ書き込みは排他) |
+| デザイン妥当性の目視評価                                      | `ui-reviewer`                                      |
+| 外部 AI / 背景素材用の画像プロンプト生成                      | `image-prompt-curator` (skill `/image-prompt`)     |
+| ranking リンクカード供給 (R2 生成)                            | `ranking-publisher` + `snapshot-exporter`          |
+| blog OGP / サムネ                                             | `blog-editor`                                      |
+| note カバー                                                   | `note-manager`                                     |
+| R2 push                                                       | CI / `r2-publisher`                                |
+| 改善施策の status 管理                                        | `improvement-triage` (バックログ書き込みは排他)    |
 
 ---
 
@@ -121,6 +126,48 @@ node .claude/scripts/ogp/build-image-gallery.mjs --audit
 
 **OGP は事前生成した静的画像を R2 に保存し、配信時は静的 URL を参照する。** サイト全体で統一
 (note カバーも同思想)。ランタイム next/og ImageResponse は Cloudflare Worker で例外 (1101) を投げるため使わない。
+
+### 5.0 差分生成・manifest・反映の共通契約
+
+R2配信画像の再生成判定は、ファイルの存在・mtime・git diffではなく、entityごとの決定的な
+`fingerprint`だけを使う。共通型SSOTは
+`packages/types/src/image-generation-manifest.ts`、generator依存SSOTは
+`apps/web/scripts/data/image-generator-registry.ts`。
+
+```text
+inputHash    = SHA-256(canonical semantic render input)
+rendererHash = SHA-256(renderer source + font + topology + background + dependency versions)
+fingerprint  = SHA-256(inputHash + rendererHash + generator/entity + output contract)
+```
+
+- `generatedAt`はfingerprintに含めない。`undefined`、非有限数、循環参照、plain object以外は
+  canonical化時に拒否する。
+- entity manifestは`inputHash` / `rendererHash` / `fingerprint`と、全assetの
+  key・variant・MIME・width・height・bytes・SHA-256を持つ。ranking cardの
+  `thumbnail.json`も別形式を持たず共通manifestを使う。
+- current判定はmanifestと全asset契約が完全一致した場合だけ。R2 S3資格情報がある実行は
+  authenticated HEADのSHA metadataまで検証し、資格情報のないPR監査だけ公開URLへ
+  fail-closed fallbackする。404だけをmissingとし、timeout/429/5xxは全件生成へ進まず失敗する。
+- stagingは`.local/image-staging/<generator>/`に隔離する。通常snapshot/article用
+  `.local/r2`と混在させない。
+- generatorは変更bundleだけを生成し、`.local/image-generation-publish-plan-*.json`へ
+  最終asset契約/SHA、staged manifest SHA、plan時remote fingerprint/manifest SHAを書く。
+  変更0件でも空planを必ず出し、plan欠落を「変更なし」として成功させない。画像automationでprefix走査、
+  generatorの直接apply、無条件`--force`は禁止。`--force`は明示key/slug付きだけ。
+- publisherはplan外ファイルを読まず、ローカルSHA・画像形式・寸法をdecode検証する。
+  planは2時間で失効し、R2上のdistributed lock取得後にremote manifest bytesを再検証する。
+  assetはSHA/MIME/size/manifest ownerが同じならrenderer fingerprintだけのために再PUTしない。
+  変更assetをPUT+HEAD検証し、最後にmanifestをETag CAS (`If-Match` / `If-None-Match`)で更新する。
+  commit失敗時は同lock内で旧asset/manifestへrollbackし、古いplanの再実行もremote SHA差で拒否する。
+  stable URLはmutableなので`Cache-Control: max-age=0, must-revalidate`とする。
+- batch上限超過は暗黙clampせず失敗する。明示`--limit`はchanged集合へ適用するため、反映済みが
+  次回currentになれば後続batchへ進む。旧manifest/manifest無しの初回移行は安全なhashがないため
+  stale扱いし、件数制限付きで一度だけ移行する。
+- SHAを持たない旧AI背景は、凍結済みv1 prompt hashとR2 ETag(MD5)が実bytesに一致する場合だけ
+  一度限りでSHA付き共通manifestへ移行する。共通manifest移行後はmetadata/asset/HEAD/GETのSHA一致が必須。
+- 機械ゲートは`npm run type-check:image-pipeline`、`npm run test:image-pipeline`、
+  `npm run check:image-pipeline-policy`。workflowのforce/prefix/direct apply/best-effort/shared lock欠落、
+  generatorと同jobの後続publisher欠落、plan任意化をPR・pre-commitで拒否する。
 
 - **レンダリングは Node/CI (またはクラウドセッション) で** Satori。ローカル npm フォント
   `@expo-google-fonts/noto-sans-jp` を使うため Worker と違い健全。tsx は `--tsconfig apps/web/scripts/tsconfig.ogp.json`
@@ -136,14 +183,14 @@ node .claude/scripts/ogp/build-image-gallery.mjs --audit
     `apps/web/scripts/lib/assets/ogp-bg-brand-{light,dark}.jpg` (元 PNG = `scripts/lib/assets/source/stats-background-{light,dark}.png`)。
     **背景合成は blog 限定** — ranking/areas/note の OGP・ranking カードは `background` オプション未指定でデフォルト背景
     (グラデ+ストライプ) のまま (意図的な非対称。横展開は Phase 2)。blog カードの**表示比率も全画面 1200×630 に統一**
-    (旧 PC 正方形 `md:aspect-square` を撤去。1 枚の背景をクロップ無しで OGP/カード兼用)。push が途中失敗で全ロスト
-    しないよう generate-blog-thumbnails-cloud.ts は put リトライ+記事単位 try/catch 済。
+    (旧 PC 正方形 `md:aspect-square` を撤去。1 枚の背景をクロップ無しで OGP/カード兼用)。
 - **配信 URL 解決は `apps/web/src/lib/metadata/ogp-image.ts`** の `ogpImageUrl(ogpImageKeys.<type>(id))`。
   各ページの `generateMetadata` が `openGraph.images` / `twitter.images` にこの静的 R2 URL を設定する。
 - **生成スクリプト (クラウド/ローカルから直接実行)**:
-  - blog OGP = `generate-blog-thumbnails-cloud.ts` (既存、`app/blog/<slug>/ogp/ogp.png`)
+  - blog OGP = `generate-blog-thumbnails-cloud.ts` (公開記事) /
+    `generate-blog-thumbnails.ts` (公開前staged記事)
   - ranking OGP / areas OGP / ranking カード / note カバー = `generate-ogp-images.ts --type <ranking|areas|ranking-cards|note-covers>`
-    → `.local/r2/<key>` staging に書き出し → `diff-push-r2.ts --prefix <app/ranking|app/areas|note>` で S3 push。
+  - いずれも`.local/image-staging/<type>`へ生成し、`push-generated-image-set.ts --plan <exact-plan>`で反映する。
   - CI fallback = `generate-ogp-images.yml` (手動 dispatch。ただしクラウド連携トークンは actions:write 無しのため、
     R2 creds のあるセッション/ローカルからの直接実行が主経路)。
 - **新規 ranking/area/blog/note を公開したら OGP/カバーも生成する**。未生成だと og:image が 404 になる。
@@ -155,7 +202,8 @@ node .claude/scripts/ogp/build-image-gallery.mjs --audit
   metricごとの地図方式optionやタイル地図fallbackは設けない。横長カードでは本土を
   時計回り32°へ平面回転して再fitし、沖縄インセットと凡例を省略して本土を大きく見せる
   （描画SSOT: `MINI_PREFECTURE_THUMBNAIL_LAYOUT`）。1位情報を持つ640×360カードにする。各生成時に同ディレクトリの `thumbnail.json` へ
-  version / rankingKey / geographicLayout / year / generatedAt / 入力R2キー / config / topology / assetキーを記録する。
+  共通fingerprint/asset契約と、metadataとしてversion / rankingKey / geographicLayout / year /
+  入力R2キー / config / topologyを記録する。
   WebPやmanifestを手編集せず、`generate-ogp-images.ts --type ranking-cards` で再生成する。
 - **note カバー**: `note/<vertical>/<slug>/images/cover-1280x670.png` に事前生成 archive (Satori 統一デザイン)。
   既存 SVG 系統 (`generate-note-covers.mjs` + `svg-to-png.js`) と Remotion `NoteCover` は **deprecate (削除しない)**。
@@ -174,7 +222,7 @@ node .claude/scripts/ogp/build-image-gallery.mjs --audit
 ### 画像生成 AI: ブログ OGP の記事別背景 (実装済・正典)
 
 **blog OGP は記事ごとに Gemini で「文字なしの背景だけ」を生成し、タイトル・ブランドは既存 Satori/Sharp が
-合成する** (2026-07-12 実装、高流入 top100 記事は本番 live)。旧 doc `23_ブログOGP生成AIパイプライン仕様.md` (docs/02_実装計画・削除)
+合成する** (2026-07-12 実装、高流入 top100 記事は本番 live)。旧 doc `23_ブログOGP生成AIパイプライン仕様.md` (docs/02\_実装計画・削除)
 の恒久運用スペックを本節に統合 (doc は削除・git 履歴に残る)。
 
 - **コード SSOT (機械的)**: `apps/web/scripts/data/blog-ogp-visual-catalog.ts`
@@ -186,13 +234,33 @@ node .claude/scripts/ogp/build-image-gallery.mjs --audit
   `apps/web/scripts/lib/blog-ogp-visual.ts` (`resolveOgpVisual` / `computePromptHash` / frontmatter parser)。
 - **パイプライン**: Gemini (`gemini-2.5-flash-image`) が背景 1 枚 → `normalizeAiBackground` (`blog-thumbnail-render.ts`)
   で 1200×630 cover + dark 処理 + 左タイトルスクリム (**satori 互換の JPEG**。webp は satori が解析不能で不可) →
-  `buildElement(backgroundImage)` で合成 → R2。最終 4 キー (`thumbnail-{light,dark}.webp` / `ogp/ogp.png` /
-  `ogp/ogp.json`) は不変、`ogp/background.jpg` (AI 背景) と `ogp.json.background` メタを追加。
-  **別ジェネレーターは作らず `generate-blog-thumbnails-cloud.ts` を拡張**する。
+  `buildElement(backgroundImage)` で合成 → R2。最終画像は
+  `thumbnail-{light,dark}.webp` / `ogp/ogp.png`、AI source artifactは
+  `ogp/background.jpg`。生成metadataは`ogp/generation.json`の共通manifestへ統合する。
 - **改善は共通カタログ/スタイルのみ (個別プロンプト禁止)**: 品質不足は `OGP_STYLE_PREFIX` か
   `OGP_VISUAL_CATALOG` を直して同じ `--out-dir` へ再生成する。記事ごとの自由入力プロンプトは持たせない。
-- **費用・安全弁**: ~$0.039/枚。`--budget-usd` 上限、`promptHash` 一致で再生成スキップ (キャッシュ)、
-  生成失敗 / 予算切れ / キー無しは**ブランド背景へ fallback** (`ogp.json.background.source = "brand-fallback"`)。
+- **費用・安全弁**: ~$0.039/枚。背景fingerprintはpromptHash + 正規化済み背景SHA、
+  最終合成fingerprintは背景SHA + overlay入力 + rendererHash。rendererだけ変わった場合は既存背景を
+  再利用しGeminiを呼ばない。必要件数の推定費用が`--budget-usd`を超える場合やキー無しは、
+  一部生成/ブランド背景fallbackをせず開始前に失敗する。
+- **AI成果cache（再課金防止）**: APIへ渡すprompt全文 / promptHash / model / promptVersion /
+  正規化renderer hash / 1200×630 JPEG出力契約をSHA-256 fingerprint化し、
+  `staging/image-cache/blog-ai-background/v1/<fingerprint>.jpg`へ`If-None-Match: *`でimmutable保存する。
+  metadataは`stats47-cache-kind=blog-ai-background` / `stats47-cache-fingerprint` /
+  `stats47-sha256`を必須とし、再利用時はS3 GETのSHA / MIME / byte sizeを全て照合した上で、
+  Sharpで実decodeしてJPEG 1200×630であることも確認する。
+  各AI成功は正規化直後・最終カード描画前に保存するため、後続記事や描画が失敗しても再実行では
+  cache hitとなりAPIを再度呼ばない。これは再生成可能なstaging派生物で、公開stable key /
+  `ogp/generation.json`のcommitには使わず、公開bundleは従来どおりexact plan publisherだけが更新する。
+  ローカルmirrorは`.local/image-cache/blog-ai-background/v1/`へatomic作成する。
+  保持は当面無期限（prompt/normalizer変更で別keyとなり誤再利用しない）。削除時は参照中実行がないことを
+  確認した明示prefixの保守ジョブだけを使い、generator実行中の自動削除はしない。
+  同じfingerprintを上書きする`--force-background`は設けない。再生成はprompt / catalog /
+  normalizerのSSOT変更で新fingerprintを作る。
+- **既存AI背景の再利用確認**: committed共通manifest / `ogp/background.jpg`は公開custom domainの
+  HEAD headerを参照せず、R2 S3 `ImageObjectStore.get`が返すbody / metadata / ETagで検証する。
+  共通manifestはmanifest SHA、背景はmanifest asset SHA + object SHA + MIME + byte size +
+  manifest ownerが一致した場合だけ再利用する。S3資格情報がない実行は公開URLへfallbackせずfail-closedする。
 - **クライアント**: `apps/web/scripts/lib/gemini-image-client.ts` — `x-goog-api-key`・30s timeout・
   429/5xx/timeout/network のみ指数バックオフ再試行・4xx 非再試行・**API キー/レスポンス本文をログ/エラーに出さない**。
   `GEMINI_API_KEY` は `.env.local` から自己ロード (値非表示、CI では no-op)。
@@ -203,17 +271,19 @@ node .claude/scripts/ogp/build-image-gallery.mjs --audit
   # ローカル目視 (R2 非書込・gallery /assets「ブログ OGP パイロット (local)」タブで確認)
   npx tsx apps/web/scripts/generate-blog-thumbnails-cloud.ts --ai-background --slug a,b --out-dir .local/ogp-pilot
   # 本番反映 (R2 push)
-  npx tsx apps/web/scripts/generate-blog-thumbnails-cloud.ts --ai-background --slug <slugs> --apply
+  npx tsx apps/web/scripts/generate-blog-thumbnails-cloud.ts --ai-background --slug <slugs>
+  npx tsx packages/r2-storage/src/scripts/push-generated-image-set.ts \
+    --plan .local/image-generation-publish-plan-blog.json
   ```
 - **★cloud Claude Code / ローカル env なしの CI 経路 (2026-07-14〜)**: `GEMINI_API_KEY` は
   **GitHub Secrets 専任** (ローカル .env.local 管理は不要)。cloud セッションは
   `data/gemini-image-requests.json` に `{ "task": "blog-ogp", "slugs": [...], "budgetUsd": 0.5,
-  "apply": true|false }` を書いて develop へ push すると `gemini-image-run.yml` が生成する
+"apply": true|false }` を書いて develop へ push すると `gemini-image-run.yml` が生成する
   (apply=false は artifact で目視検証・true は R2 反映。request は CI が commit-back で消費)。
   cloud は workflow_dispatch 不可 (actions:write 無し) のため push トリガー方式。
   ローカルからは dispatch でも可。
 - **役割分担**: カタログ/スタイル SSOT の維持・品質監査 = `image-prompt-curator`、生成実行・記事公開連動 = `blog-editor`、
-  effect 判定 = `improvement-triage`。R2 push は `--apply` (wrangler)。
+  effect 判定 = `improvement-triage`。R2 push は共通exact plan publisher。
 - **展開状況**: 高流入 top100 = 本番 live (2026-07-12・GSC imp 上位)。残り記事は従来のブランド背景
   (`ogp-bg-brand-{light,dark}.jpg`) のまま。効果 (SNS カード・回遊) 観測後に段階展開。
   **ranking / areas / note の AI 背景は未実装 (Phase 2)**。外部 AI (Midjourney 等) 用プロンプトは
@@ -227,15 +297,15 @@ OGP・カード・note カバーとは別の種別で、**ページ本文の先�
 テーマページ (`/themes/*`) とカテゴリページ (`/category/*`) のうち、hero を用意したページだけが
 `HeroBanner` (画像 + 実 DOM テキストの見出し・タグライン) を描画する (全ページ既定は `PageHeader`)。
 
-| 項目 | 内容 |
-|---|---|
-| **SSOT (設定 + プロベナンス)** | `apps/web/src/components/layout/page-heroes.ts` (`THEME_HEROES` / `CATEGORY_HEROES` = git TS)。型は `PageHeroDef` / 画像は `HeroImageAsset` (1 枚を複数ページで参照共有可) |
-| 配信画像 | `apps/web/public/images/<name>.webp` (静的アセット。R2 ではない) |
-| 元画像 | `docs/assets/<name>.png` (外部 AI 生成の PNG。再生成の入力) |
-| サイズ・比率 | 生成 **3:2 (1536×1024)** → `HeroBanner` が左=テキスト / 右=画像の side-by-side で表示 (画像は object-cover) |
-| 生成方式 | 外部 AI 画像生成 (Codex / Imagen 等) で **文字なし背景**を生成 → Sharp で webp 化。見出し・タグラインは**実 DOM テキスト**で重ねる (OGP と同じ家ルール: AI 画像に日本語・数字を焼き込まない) |
-| プロベナンス | 各 `HeroImageAsset` に `prompt` / `aspectRatio` / `regenerate` (webp 再生成コマンド) / `sourceImage` を記録。タグラインの数値は `taglineFacts` に出典 (R2 + 年度) を明記 (`evidence-based-judgment.md`) |
-| 改善 | プロンプトは `page-heroes.ts` の `HeroImageAsset.prompt` を直す (記事ごとの自由入力プロンプトは持たせない = OGP と同じ方針) |
+| 項目                           | 内容                                                                                                                                                                                                    |
+| ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **SSOT (設定 + プロベナンス)** | `apps/web/src/components/layout/page-heroes.ts` (`THEME_HEROES` / `CATEGORY_HEROES` = git TS)。型は `PageHeroDef` / 画像は `HeroImageAsset` (1 枚を複数ページで参照共有可)                              |
+| 配信画像                       | `apps/web/public/images/<name>.webp` (静的アセット。R2 ではない)                                                                                                                                        |
+| 元画像                         | `docs/assets/<name>.png` (外部 AI 生成の PNG。再生成の入力)                                                                                                                                             |
+| サイズ・比率                   | 生成 **3:2 (1536×1024)** → `HeroBanner` が左=テキスト / 右=画像の side-by-side で表示 (画像は object-cover)                                                                                             |
+| 生成方式                       | 外部 AI 画像生成 (Codex / Imagen 等) で **文字なし背景**を生成 → Sharp で webp 化。見出し・タグラインは**実 DOM テキスト**で重ねる (OGP と同じ家ルール: AI 画像に日本語・数字を焼き込まない)            |
+| プロベナンス                   | 各 `HeroImageAsset` に `prompt` / `aspectRatio` / `regenerate` (webp 再生成コマンド) / `sourceImage` を記録。タグラインの数値は `taglineFacts` に出典 (R2 + 年度) を明記 (`evidence-based-judgment.md`) |
+| 改善                           | プロンプトは `page-heroes.ts` の `HeroImageAsset.prompt` を直す (記事ごとの自由入力プロンプトは持たせない = OGP と同じ方針)                                                                             |
 
 **監査・ギャラリー・agent 所有は現時点で意図的に未整備** (hero は実質 1 枚のため過剰投資を避ける、`最小SSOT整備` 判断)。
 hero が数枚に増えたら: (a) gallery `/assets` に「ページ hero」タブ追加 (`ASSET_TABS` + collector)、
@@ -250,15 +320,15 @@ hero が数枚に増えたら: (a) gallery `/assets` に「ページ hero」タ�
 (2026-07-16 に旧 AreaOgp satori 描画から置き換え) であり、同デザインの 5 比率 × blue/dark を
 **SNS 素材ライブラリ** (`sns/pref-silhouette/`) として持つ。
 
-| 項目 | 内容 |
-|---|---|
-| デザイン | 淡青の海+ドットテクスチャ / 周辺県=ハーフトーン / 対象県=ソリッド+フチ+シャドウ / 県名ピル (**陸地と重ならない位置へ自動配置**: 候補8アンカーを陸地重なり面積でスコアリング) / 左下ブランド行 |
-| **トークン SSOT** | `apps/web/scripts/data/pref-silhouette-tokens.ts` (git TS)。テーマ blue/dark/warm × 11 トークン + 5 比率レイアウト。**色・比率の変更はこのファイルだけ** → `--force` 再生成で全量反映 |
-| レンダラー | `apps/web/scripts/lib/pref-silhouette-render.ts` — `apps/remotion/public/prefecture.topojson` (N03_007/N03_001) → d3-geo Mercator で地図 SVG (テキストなし) → sharp PNG → data URI → satori で県名ピル+ブランド行合成 (Noto Sans JP TTF がグリフをパス化 = CI に日本語フォント不要・環境非依存で決定的)。フレーミングは対象県の最大ポリゴン bbox (東京の離島・鹿児島の南西諸島を枠外に) |
-| テーマ運用 | **areas OGP = blue 固定** (`PREF_CARD_OGP_THEME`)。R2 素材 push は blue+dark (`PREF_CARD_PUSH_THEMES`)。warm 等は生成能力のみ (色=シリーズの顔、`buzz-map-standards.md` と同思想) |
-| 比率キー | `ogp` 1200×630 / `45` 1080×1350 / `11` 1080×1080 / `916` 1080×1920 / `169` 1920×1080 (buzz-map の命名に整合) |
-| 生成・push | `generate-ogp-images.ts --type areas` (OGP 47枚) / `--type pref-silhouette` (素材 470枚)。週次 self-heal (`ogp-image-audit-weekly.yml`) とギャラリー `pref-silhouette` タブに配線済 |
-| 旧 AreaOgp | `apps/web/src/features/ogp/AreaOgp.tsx` は **generator から deprecated** (generate-ogp-images.ts は参照しない)。route `app/areas/[areaCode]/opengraph-image.tsx` は **ランタイムで 500 する** — `loadOgpFonts()` が `fetch('https://fonts.googleapis.com/...')` でランタイム日本語フォントを取得し、Worker (外部 fetch 不可) でも Node dev でも render が落ちる (themes/[themeSlug]/opengraph-image は `fontFamily:"sans-serif"` で fetch せず 200)。**ただし配信への実害はほぼ無い**: area 詳細も city (`/areas/*/cities/*`) も og:image は **`generate-area-metadata.ts` / city metadata の静的 R2** (`storage.stats47.jp/app/areas/<code>/ogp/ogp.png`) を使い **200** (2026-07-20 横断実測で city 14000/01000/27000/東京13201 等が R2・200 を確認)。この 500 route を og:image に出すのは **修正デプロイ前の stale ISR キャッシュを持つ一部 city のみ** (revalidate 86400 で ≤24h 自然回復 or purge)。**★`generateStaticParams` を単純追加して prerender 化してはならない** — ビルド時に Google Fonts fetch が失敗すると prerender エラーで**ビルド全体が落ち全デプロイがブロックされる** (2026-07-20 に試行し revert 済)。将来 §3 課題0 の本筋清掃でこの route を静的化/削除する場合は、先に `font-loader.ts` を `@expo-google-fonts/noto-sans-jp` のローカル同梱フォントに変え (generate-ogp-images.ts §5 と同方式) ランタイム fetch を排すこと |
+| 項目              | 内容                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| ----------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| デザイン          | 淡青の海+ドットテクスチャ / 周辺県=ハーフトーン / 対象県=ソリッド+フチ+シャドウ / 県名ピル (**陸地と重ならない位置へ自動配置**: 候補8アンカーを陸地重なり面積でスコアリング) / 左下ブランド行                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| **トークン SSOT** | `apps/web/scripts/data/pref-silhouette-tokens.ts` (git TS)。テーマ blue/dark/warm × 11 トークン + 5 比率レイアウト。**色・比率の変更はこのファイルだけ** → fingerprint 差分として対象 bundle のみ再生成                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| レンダラー        | `apps/web/scripts/lib/pref-silhouette-render.ts` — `apps/remotion/public/prefecture.topojson` (N03_007/N03_001) → d3-geo Mercator で地図 SVG (テキストなし) → sharp PNG → data URI → satori で県名ピル+ブランド行合成 (Noto Sans JP TTF がグリフをパス化 = CI に日本語フォント不要・環境非依存で決定的)。フレーミングは対象県の最大ポリゴン bbox (東京の離島・鹿児島の南西諸島を枠外に)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| テーマ運用        | **areas OGP = blue 固定** (`PREF_CARD_OGP_THEME`)。R2 素材 push は blue+dark (`PREF_CARD_PUSH_THEMES`)。warm 等は生成能力のみ (色=シリーズの顔、`buzz-map-standards.md` と同思想)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| 比率キー          | `ogp` 1200×630 / `45` 1080×1350 / `11` 1080×1080 / `916` 1080×1920 / `169` 1920×1080 (buzz-map の命名に整合)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| 生成・push        | `generate-ogp-images.ts --type areas` (OGP 47枚) / `--type pref-silhouette` (素材 470枚)。週次 self-heal (`ogp-image-audit-weekly.yml`) とギャラリー `pref-silhouette` タブに配線済                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| 旧 AreaOgp        | `apps/web/src/features/ogp/AreaOgp.tsx` は **generator から deprecated** (generate-ogp-images.ts は参照しない)。route `app/areas/[areaCode]/opengraph-image.tsx` は **ランタイムで 500 する** — `loadOgpFonts()` が `fetch('https://fonts.googleapis.com/...')` でランタイム日本語フォントを取得し、Worker (外部 fetch 不可) でも Node dev でも render が落ちる (themes/[themeSlug]/opengraph-image は `fontFamily:"sans-serif"` で fetch せず 200)。**ただし配信への実害はほぼ無い**: area 詳細も city (`/areas/*/cities/*`) も og:image は **`generate-area-metadata.ts` / city metadata の静的 R2** (`storage.stats47.jp/app/areas/<code>/ogp/ogp.png`) を使い **200** (2026-07-20 横断実測で city 14000/01000/27000/東京13201 等が R2・200 を確認)。この 500 route を og:image に出すのは **修正デプロイ前の stale ISR キャッシュを持つ一部 city のみ** (revalidate 86400 で ≤24h 自然回復 or purge)。**★`generateStaticParams` を単純追加して prerender 化してはならない** — ビルド時に Google Fonts fetch が失敗すると prerender エラーで**ビルド全体が落ち全デプロイがブロックされる** (2026-07-20 に試行し revert 済)。将来 §3 課題0 の本筋清掃でこの route を静的化/削除する場合は、先に `font-loader.ts` を `@expo-google-fonts/noto-sans-jp` のローカル同梱フォントに変え (generate-ogp-images.ts §5 と同方式) ランタイム fetch を排すこと |
 
 ## 6. 関連
 

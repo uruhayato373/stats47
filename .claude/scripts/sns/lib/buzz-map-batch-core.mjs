@@ -205,7 +205,7 @@ export function buildCandidatePlan(entry, opts = {}) {
   if (assetPlan.xVideo) steps.push(`X 動画レンダ (${compositions.xVideo}) → ${r2Keys.xReel}`);
   if (assetPlan.igReel) steps.push(`IG リールレンダ (${compositions.igReel}) → ${r2Keys.igReel}`);
   steps.push("決定的レンダ検査 (寸法/非空)");
-  steps.push("R2 push (diff-push-r2 --prefix sns/buzz-map)");
+  steps.push("R2 push (push-exact-r2-assets --key <generated asset>)");
   steps.push("R2 HEAD 検証 (HTTP 200 + Content-Type)");
   steps.push("caption 生成 (UTM §7.1 + 出典/年度/対象単位)");
   steps.push("landing contract 検証 (verifyLandingContract → pass)");
