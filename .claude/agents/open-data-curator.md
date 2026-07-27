@@ -136,3 +136,8 @@ npx tsx packages/gis/src/mlit-ksj/scripts/seed-from-registry.ts --dry-run   # KS
 - 構造validator、リンクchecker、data-configs型チェックが成功する
 - GIS/metric/ThemeCatalogの既存SSOTと二重管理していない
 - 実データ未取得を「利用可能確認済み」と誤報告しない
+
+## Output Contract
+
+chat は `Source | Dataset | Reproducibility class | Evidence | Next owner` の1表のみ。候補と取得可能性を
+区別し、一次資料で解決できない値は `unknown` とする。

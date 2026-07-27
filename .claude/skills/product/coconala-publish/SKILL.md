@@ -9,6 +9,7 @@ description: >
   書き戻す。商品設計 (name/価格帯) の上流 SSOT は packages/product-factory。
   Use when user asks to [ココナラに出品, ココナラ出品を修正, ココナラの価格を反映, サービスを公開, /coconala-publish].
 user-invocable: true
+primary_agent: coconala-operator
 ---
 
 ## 用途

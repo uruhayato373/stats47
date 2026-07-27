@@ -1,6 +1,7 @@
 ---
 name: ui-reviewer
 description: melta-uiデザインシステム準拠チェック（カラー・シャドウ・フォント・レイアウト・ボーダーの禁止パターン7カテゴリ走査）とUI/UXの専門家パネル評価を担当する。デザインレビューやUI/UX品質評価が必要なときに使う。
+model: opus
 ---
 
 # UI Reviewer Agent
@@ -43,7 +44,7 @@ melta-ui デザインシステム準拠と UI/UX 品質評価を担当するエ�
 
 ## Output Contract
 
-呼び出し時の標準出力形式。詳細は `CLAUDE.md` の「Agent 起動時の出力契約」を参照。
+詳細は `.claude/rules/agent-output-contract.md` を参照。
 
 通常: **Template A** (table-only)
 - 列: `Component/File | Violation | Severity (P0-P3) | Fix`

@@ -1,6 +1,7 @@
 ---
 name: ui-consistency-reviewer
 description: ページ横断 UI 一貫性 review 専任 + デザイン SSOT (15) の drift ゲート。 code-reviewer --scope ui-consistency 分離。 read-only。
+model: opus
 ---
 
 # UI Consistency Reviewer Agent
@@ -65,8 +66,7 @@ stats47 内のページ横断 UI 一貫性をレビューする agent。 code-re
 ## File Boundary (並行衝突回避)
 
 - 全 path read-only (write なし)
-- 並行起動可能 agent: code-reviewer (別 scope)、 tdd-guide、 全 agent
-- 同 PR への ui-consistency-reviewer 複数並列起動 OK (複数視点で review)
+- 同PRへ本agentを重複起動しない。UI scopeがある時だけcode-reviewerに追加する
 
 ## Output Contract
 

@@ -1,6 +1,6 @@
 ---
 name: coconala-operator
-description: ココナラ (coconala.com) の出品・内容修正・価格反映を Playwright で自動化する運用オーケストレーター (stats47)。出品内容の SoT (.claude/config/coconala-listings.json) と product-factory のテーマパック (P-01〜P-13) を突き合わせて 1 商品ずつ出品する。安全弁 = account assert (★dobokunote と取り違えない・sellerName で厳格化) / 既定は下書き保存で実公開は --commit + オーナー承認 / バリデーションエラー時は「公開した」と言わない。商品の生成 (pptx/xlsx/pdf 等) とカタログ管理は coconala-product-manager、実データ投入は data-ingester に委譲。doboku-note の coconala-operator から移植。Use when user asks to [ココナラに出品, ココナラ出品を修正, ココナラ価格反映, サービスを公開, /coconala-publish].
+description: ココナラの出品・内容修正・価格反映をPlaywrightで行う。listings SSOTと商品を突合し、account assertとdraft-firstを守る。実公開は--commitとオーナー承認が必要。Use for ココナラ出品・修正・価格反映・/coconala-publish.
 model: sonnet
 ---
 
@@ -69,7 +69,7 @@ model: sonnet
 5. **価格刻み** — ¥10,000 以下=500 円刻み / 超=1,000 円刻み。外れたら publish が ABORT する。
 6. **規約リスク** — bot 検知リスクがあるため自動操作は低頻度（出品時・価格改定時）に限る。ログイン認証情報はエージェントが入力しない（初回は人間が headed で手動ログイン）。
 
-## 出力形式
+## Output Contract
 
 ```json
 {

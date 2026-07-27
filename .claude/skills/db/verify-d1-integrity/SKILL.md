@@ -1,7 +1,7 @@
 ---
 name: verify-d1-integrity
 description: ローカル D1 メタ (`metrics`/`sources`/`prefectures`/`cities`/`estat_metainfo`) の整合性と、R2 (`app/stats/<metric>/*.json`) 観測値との照合を検証。/sync-snapshots と /export-d1-to-remotion-static の precondition。Use when user says "D1 整合性確認", "verify d1", "データ整合性".
-argument-hint: [--metric <key>] [--strict]
+argument-hint: "[--metric <key>] [--strict]"
 disable-model-invocation: true
 primary_agent: data-ingester
 ---

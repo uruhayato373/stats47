@@ -15,7 +15,7 @@
 - [project_sns_gallery_and_ig_cron_fix.md](project_sns_gallery_and_ig_cron_fix.md) — 統合メディアコンソール(`npm run gallery`→localhost:4747、実装=apps/gallery Next.js)。/sns・/assets・/svg・/dashboard。★IG自動投稿の約1ヶ月空振りcronバグ修正(週ファイル自動選択)。R2動画は投稿後30日削除。正典sns-content-standards.md §5.5
 - [project_survey_linkage_ssot.md](project_survey_linkage_ssot.md) — ranking↔調査紐付けSSOT再設計(2026-07-06,PR#535)。/survey空prerenderをforce-dynamicで解消。item.jsonにsurveyIds焼き込み。orphan調査8件削除(83→75)。管理=survey-curator+/audit-survey-linkage
 - [project_blog_topic_queue_seo_expansion.md](project_blog_topic_queue_seo_expansion.md) — 新規ブログSEO拡充(2026-07-05)。「次に何を書くか」=topic-queue.json(build-topic-queue.mjs)。型8種に拡張(D2食品/F市区町村/G移動)。タイトル~17字・gap1要素。/plan-article-queue。戦略正典=docs/02_実装計画/15
-- [feedback_theme_indicator_research_pattern.md](feedback_theme_indicator_research_pattern.md) — テーマ指標調査はmainが候補集約→estat-researcher並列で実API検証→受け入れ検証(tool_uses>0)→backlog(2026-07-04)。theme-researcher親の直接調査は0-tool捏造リスク。★実証ゲート
+- [feedback_theme_indicator_research_pattern.md](feedback_theme_indicator_research_pattern.md) — テーマ指標調査は同一セッションで一次資料/e-Stat IDを解決。未解決候補は保存せず、tool回数を証拠にしない
 - [project_sns_reorg_2026_07.md](project_sns_reorg_2026_07.md) — SNS/Remotion整理+SSOT化(2026-07-04)。正典=sns-content-standards.md、投稿台帳SSOT=.claude/state/sns/posts.json。IG主力/X自動化/YouTube月1/TikTok撤退。6週投稿ゼロ対策=/sns-weekly-plan
 - [project_react_to_news_pipeline.md](project_react_to_news_pipeline.md) — じじネタ→即SNS瞬発パイプライン(2026-07-02)。find-metrics(発見索引・同義語レイヤー必須)+quick-still(指標key→SVG+PNG+caption)+/react-to-news。未決=tags恒久バックフィル/quick-still→publish-x連結
 - [feedback_generatestaticparams_r2_notfound_stuck.md](feedback_generatestaticparams_r2_notfound_stuck.md) — R2依存動的routeにgenerateStaticParams付けると●SSG化→build時R2不可でnotFound永久固着(2026-06-22 ranking/areas/cities)。修正=撤去しrevalidateのみ→ƒ。正典nextjs-ssg-preservation.md
@@ -29,7 +29,7 @@
 - [feedback_home_pure_ssg_r2_empty.md](feedback_home_pure_ssg_r2_empty.md) — トップ/は純SSGでビルド時R2読めず空焼き込み→修正はforce-dynamic(#478)。revalidateは本OpenNext構成で無効。build envにR2 URL足すとgenerateStaticParams爆発で不採用
 - [project_blog_remediation_loop.md](project_blog_remediation_loop.md) — ブログ品質を順次是正。次に直す記事=remediation-queue.json(統合スコア/must-fix)。週次Mustで消化、critic PASS必須。記事アーキタイプA-E+図あたり字数gate
 - [project_gsc_coverage_remediation_loop.md](project_gsc_coverage_remediation_loop.md) — GSCカバレッジ是正ループ(2026-06-16)。404大半は意図的、actionableは190件のみ。SSOT=coverage-remediation-queue.json→/gsc-coverage-remediation
-- [project_consistency_audit_mechanism.md](project_consistency_audit_mechanism.md) — 会話完了時にagent/skill/scriptドリフトをチェックするStop hookゲート(2026-06-16)。check-agent-skill-consistency.cjs+/audit-consistency。解除は--mark-auditedかcommit
+- [project_consistency_audit_mechanism.md](project_consistency_audit_mechanism.md) — agent/skill/scriptドリフトとOpus 5 prompt契約(model/Output/owner/委譲上限)をStop/PR/週次で検査。解除は--mark-auditedかcommit
 - [project_blog_brushup_dbless_scaffold.md](project_blog_brushup_dbless_scaffold.md) — brushupのDBレス落とし穴。R2 values直fetch、rank=0で再計算、NG_PATTERNが旧title遡及blocker、publish-blogは直列dispatch、未参照費目json残す
 - [project_blog_mass_rewrite_lessons.md](project_blog_mass_rewrite_lessons.md) — ブログ大量リライト教訓。である調はcopula置換禁止→article-writer必須。一括はsession limit→1バッチ15-20本。進捗SSOT=remediation-queue、sync-rewrite-progress.mjs。--nextはpendingのみ
 - [project_ranking_publish_pipeline_gap.md](project_ranking_publish_pipeline_gap.md) — ranking公開はisActive:trueだけ不足。KNOWN/SITEMAP/INDEXABLE/all.json再生成要。★**values.json writer も必須**(2026-07-27にPhase6以来2ヶ月の欠落が判明・stale配信+67キー空ページ)。手動投入metricは正典がrank未保持
@@ -68,7 +68,7 @@
 - [project_competitor_indicator_benchmark.md](project_competitor_indicator_benchmark.md) — Web競合指標数(2026-07-11): stats47 2,141本でtodo-ran/uub超え「数の劣後」解消。ボトルネックは需要+CTR(41%が12週ゼロ表示)。e-Stat全展開は低ROI。需要ファースト
 - [feedback_sns_competitor_search.md](feedback_sns_competitor_search.md) — SNS競合検索は統計/ランキングだけでなくテーマ別名乗り(リスク/格差/ご当地)も併走
 - [feedback_sns_growth_emotion_themes.md](feedback_sns_growth_emotion_themes.md) — SNS伸長は感情喚起が主因。stats47は信頼性×網羅性×Web送客で差別化(煽り合戦に入らない)
-- [feedback_agent_output_contract.md](feedback_agent_output_contract.md) — Agent起動はprompt冒頭でOUTPUT FORMAT(Template A/B/C)指定。末尾のword limitは無視される
+- [feedback_agent_output_contract.md](feedback_agent_output_contract.md) — Agent起動はprompt冒頭でTask Capsule+OUTPUT FORMAT。モデル/委譲SSOT=model-prompting.md
 - [feedback_nextjs_ssg_cookies.md](feedback_nextjs_ssg_cookies.md) — layout配下Server Componentでcookies()/headers()呼ぶとSSG崩れ500(EXP-004/005で2度)。正典nextjs-ssg-preservation.md
 - [feedback_skill_schema_drift.md](feedback_skill_schema_drift.md) — SKILL.mdが現行schemaに未追従あり。indicators→metrics, observations→stats_prefecture, push-rはdiff-push-r2.tsのみ
 - [feedback_backlog_ranking_key_audit.md](feedback_backlog_ranking_key_audit.md) — backlogのranking_keyはAI生成名で実在metricと乖離。実行前にmetrics.key実在チェック

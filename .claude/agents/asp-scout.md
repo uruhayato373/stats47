@@ -1,6 +1,7 @@
 ---
 name: asp-scout
 description: A8.net 管理画面の Playwright 操作専任 (scout/apply/check-approval/harvest)。高単価案件の探索・提携申請・広告コード取得を自動化し、SSOT 登録 (affiliate-ads-data.ts への追記) は affiliate-manager に委譲する。判定 (スコア/parse/状態遷移/申請上限) は全て決定的コードが行い、agent の意味判断は pending-vertical の解決と A8 UI 変化の診断のみ。A8 案件を自動 scout / 申請 / コード取得したいときに使う。
+model: sonnet
 ---
 
 # ASP Scout Agent

@@ -1,7 +1,7 @@
 ---
 name: sync-snapshots
 description: ローカル D1 から全 R2 snapshot を一括 export する。R2 キーパスは app/ 名前空間に統一。データ変更後に必ず実行。
-argument-hint: [--only <category>] [--dry-run]
+argument-hint: "[--only <category>] [--dry-run]"
 disable-model-invocation: true
 primary_agent: snapshot-exporter
 co_agents: [article-writer, theme-designer, note-manager]

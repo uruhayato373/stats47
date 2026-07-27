@@ -188,7 +188,7 @@ Cloudflare 手動パージが必要です。
    ↓
 2. /draft-from-trend を複数 metric で実行 (GSC ギャップから metric 選定)
    ↓
-3. Agent(article-writer) × N 並列
+3. Agent(article-writer) は独立した slug/file boundary ごとに最大 3 並列
       → .local/r2/app/blog/<slug>/article.md × N
       → .local/r2/app/blog/<slug>/ogp/ogp.json × N  ★Phase 5.5 で必ず作成
    ↓
@@ -205,7 +205,9 @@ Cloudflare 手動パージが必要です。
 
 ## 関連
 
-- `Agent(article-writer)` — 本スキルの入力 (article.md) を生成する subagent
+- `Agent(article-writer)` — 本スキルの入力 (article.md) を生成する。起動時は
+  `.claude/rules/model-prompting.md` と `.claude/rules/agent-output-contract.md` に従い、
+  同一slugを複数agentへ割り当てず、同時起動は最大3
 - `/sync-snapshots --only blog` — Phase 3 で内部呼び出し
 - `/draft-from-trend` — 量産フローの上流 (1 metric = 1 記事)
 - `.claude/rules/branch-workflow.md` — sync 後にデプロイが必要な場合 (今回は不要、R2 反映のみで本番に出る)

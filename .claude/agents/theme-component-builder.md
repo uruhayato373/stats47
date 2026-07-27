@@ -104,7 +104,7 @@ sortOrder 順**で並べる。配置は「どのチャートを載せるか + so
 
 ## Output Contract
 
-呼び出し時の標準出力形式。詳細は `CLAUDE.md` の「Agent 起動時の出力契約」を参照。
+詳細は `.claude/rules/agent-output-contract.md` を参照。
 
 通常: **Template A** (table-only)
 - 列: `Theme | Issue | Severity | Recommendation`

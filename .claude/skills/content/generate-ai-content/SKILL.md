@@ -14,6 +14,8 @@ primary_agent: ranking-content-author
 > **2026-06-21 DBレス再構築済**。旧版は D1 (`ai_content` テーブル + 生成 CLI + D1→R2 exporter) に依存し
 > commit `7569bd5c` "dbless Part D" で削除されていたが、**D1 非依存で再構築**した。D1 は一切使わない。
 > 担当 agent: `ranking-content-author`。品質ゲート: `.claude/scripts/ai-content/audit-ai-content.mjs`。
+> モデル選択とagent起動promptは `.claude/rules/model-prompting.md` /
+> `.claude/rules/agent-output-contract.md` を正典とする。
 
 ## モデル運用ポリシー（★コストゲート・2026-07-03 確定）
 

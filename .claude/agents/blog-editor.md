@@ -48,12 +48,12 @@ model: sonnet
 | `/panel-review` | 10人パネリストによる評価 |
 | `/blog-review --mode proofread` | 公開前チェック |
 | `/publish-article` | 下書き → 公開フォルダへコピー (1 本ずつ) |
-| `/publish-bulk-articles` | **複数記事を一括公開 (D1 INSERT + R2 sync + HTTP 検証 + ISR 404 リトライ)** |
+| `/publish-bulk-articles` | **複数記事を一括公開 (R2 snapshot + HTTP 検証)** |
 
 ### サブエージェント連携
 | エージェント | 用途 |
 |---|---|
-| `article-writer` | **metric 1 つ → 記事 1 本を完結。並列起動で量産可能** |
+| `article-writer` | **metric 1つ→記事1本。既定1体、別worktreeでも最大3体** |
 
 ## 担当外
 
@@ -94,7 +94,7 @@ NG パターン: 記事ごとの**自由入力プロンプト**で OGP を量産
 
 ## Output Contract
 
-呼び出し時の標準出力形式。詳細は `CLAUDE.md` の「Agent 起動時の出力契約」を参照。
+詳細は `.claude/rules/agent-output-contract.md` を参照。
 
 通常: **Template A** (table-only)
 - 列: `Trend/Topic | Source | Volume | Recommendation`

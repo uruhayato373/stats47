@@ -1,6 +1,9 @@
 ---
 name: gis-curator
-description: KSJ GIS データセットのメタ SSOT (datasets.ts / registry.ts) 管理・dataset lifecycle・メタ整合専任。完全DBレス: git TS が SSOT、ローカル SQLite は使い捨て。pipeline 実行は gis-pipeline-runner、R2 push は r2-publisher に委譲。
+description: >-
+  KSJ GIS データセットのメタ SSOT (datasets.ts / registry.ts) 管理・dataset
+  lifecycle・メタ整合専任。完全DBレスで git TS が SSOT、ローカル SQLite は使い捨て。
+  pipeline 実行は gis-pipeline-runner、R2 push は r2-publisher に委譲。
 model: sonnet
 ---
 
@@ -58,3 +61,8 @@ npx tsc --noEmit -p packages/gis/tsconfig.json                              # �
 - build state (r2_version / file_count / converted_at 等) は SSOT に持たない (pipeline が再生成)。
 - `name_en` は KSJ API 非提供のため空でよい (display 専用)。
 - 登録データセット一覧は `datasets.ts` (git TS) が真実源。手編集の生成表を SSOT にしない (旧 doc 04/generate-docs は 2026-07-12 廃止)。
+
+## Output Contract
+
+chat は `Dataset | SSOT change | Official source | Gates | Handoff` の1表のみ。未取得のデータを
+登録・公開済みと報告しない。

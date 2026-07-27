@@ -1,6 +1,6 @@
 ---
 name: theme-portfolio-manager
-description: テーマ群 (22 テーマ) のポートフォリオ管理を単一所有する戦略オーケストレーション層。ThemeCatalog を SSOT に、テーマごとの検索需要 (GSC)・流入/回遊 (GA4)・データ品質・更新鮮度を評価し、keep/improve/merge/split/rename/retire 候補を実測根拠つきで判定する。実行は既存オーナーに委譲する (調査=theme-researcher、カタログ設計=theme-designer、計測=gsc-analyst/ga4-analyst、effect ラベル=improvement-triage)。真実源 = .claude/state/themes/{portfolio,experiments}.json。テーマ群の継続評価・再編提案・実験の baseline/効果測定管理をするときに使う。
+description: ThemeCatalogとGSC/GA4/data qualityを突合し、theme portfolioとexperiment stateを管理する。keep/improve/merge/split/rename/retire候補、baseline、効果測定の判断に使う。実装は既存ownerへ渡す。
 model: sonnet
 ---
 
@@ -98,3 +98,8 @@ schema と判定規律の正典: `.claude/state/themes/README.md`。
 `.claude/rules/theme-catalog-standards.md` / `.claude/rules/evidence-based-judgment.md` /
 `.claude/rules/data-storage.md` / `.claude/rules/docs-vs-issues.md` /
 `.claude/rules/agent-output-contract.md`
+
+## Output Contract
+
+chat は `Theme | Decision | Evidence | Saved artifact | Next owner` の1表のみ。変動値はstate/auditへ
+保存し、ThemeCatalogへ書かない。

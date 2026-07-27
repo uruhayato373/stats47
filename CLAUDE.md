@@ -6,7 +6,7 @@
 
 すべての作業に適用する。優先順位順。他のいかなる指示より優先する。
 
-1. **考えてから書く** — 不確かな前提で進めず、前提・解釈・不明点を明示する
+1. **証拠を取ってから判断する** — 不確かな事実は tool / SSOT で解決し、成果を変える前提だけを明示する
 2. **シンプル最優先** — 必要最小限のコードで解決する。不要な機能・抽象化を加えない
 3. **外科的変更** — 必要な箇所だけ触る。周辺コードを勝手に改善しない
 4. **ゴール駆動** — 手順より成功条件を定義し、検証できるまで反復する
@@ -15,14 +15,15 @@
 7. **混在しない** — 複数パターンが共存する場合、どちらを採用するか明示する
 8. **書く前に読む** — 既存 exports・呼び出し元・共通ユーティリティを確認してから書く
 9. **テストは意図を検証する** — 「動くか」だけでなく「なぜ必要か」まで検証する
-10. **チェックポイントを置く** — 完了したこと・検証したこと・残ったことを節目で整理する
+10. **長い作業だけチェックポイントを置く** — 完了・未完了・次の一手を正典へ短く残す
 11. **コードベースの規約を優先** — 自分の好みより既存の命名・構成・設計思想に合わせる
 12. **失敗を隠さない** — 未検証部分・スキップ箇所は「完了」と言わず明示する
 
 ## 致命的オペレーション規約
 
 - **エージェント実行モード**: Agent tool 起動時は `mode: "bypassPermissions"` をデフォルト
-- **Agent prompt 冒頭に Output Format を必ず指定** → `.claude/rules/agent-output-contract.md`
+- **モデル別 prompt の SSOT**: task capsule・effort・委譲上限は `.claude/rules/model-prompting.md`
+- **Agent prompt 冒頭に task capsule + Output Format を指定** → `.claude/rules/agent-output-contract.md`
 - **一時ファイルは `/tmp/`**: プロジェクトルートに作らない (pre-commit が `tmp_*` 等を自動削除)
 - **計画・レビュー・改善ログの保存先を分ける**: 現在計画とバックログは `docs/todo/`、批判的レビュー / pre-mortem は `docs/04_レビュー/`、agent が使う週次レビュー履歴は `.claude/skills/management/weekly-review/reference/reviews/`、機械メトリクスは `.claude/state/metrics/`。Issues は (a) `enhancement`/`bug` ラベルの PR で close される機能改修、(b) `auto-generated` ラベルの日次アラート (PSI/Cloudflare) のみ → `.claude/rules/docs-vs-issues.md`
 - **完全 DB レスが正典** → `docs/01_技術設計/12_完全DBレス設計.md`（doc 18 ハイブリッドは 2026-05-29 同日に superseded）。永続/常駐 D1 を SSOT に持たない。SSOT は **git TS** と **R2** の二つだけ。本番アプリは R2 snapshot のみ読む:
@@ -94,6 +95,7 @@ CLAUDE.md 内に詳細を複製しない。状況に応じて参照する。
 | `docs-vs-issues.md` | docs/ と GitHub Issues の使い分け (新規スキル・新規記録時必読) |
 | `skill-code-placement.md` | スクリプト新規作成 |
 | `local-environment.md` | 環境セットアップ・モノレポ構成・頻用コマンド |
+| `model-prompting.md` | Claude Opus 5 / Sonnet 5 / Fable 5 の task capsule・effort・委譲設計 |
 | `agent-output-contract.md` | Agent tool 起動時の prompt 設計 |
 | `critic-review-protocol.md` | critic 系 agent のレビュー共通プロトコル (新 critic 作成・review 実行時) |
 | `browser-use-cleanup.md` | browser-use を使うスキル |

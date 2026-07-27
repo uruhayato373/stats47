@@ -1,7 +1,7 @@
 ---
 name: archive-remotion-output
 description: apps/remotion/out/ の master 動画・メタを manifest に従って .local/r2/{video,sns}/ に move する。R2 push 前の集約ステップ。Use when user says "archive remotion", "remotion 動画を保存", "out を整理".
-argument-hint: [--only <slug>] [--apply] [--copy]
+argument-hint: "[--only <slug>] [--apply] [--copy]"
 disable-model-invocation: true
 primary_agent: sns-renderer
 ---

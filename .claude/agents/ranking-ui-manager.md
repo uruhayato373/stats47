@@ -145,3 +145,8 @@ grep -rn "container mx-auto\|max-w-\[" apps/web/src/app/ranking apps/web/src/fea
 - reader 層: `apps/web/src/features/ranking/server.ts` / `@stats47/ranking/server`
 - 姉妹 agent: `.claude/agents/theme-ui-manager.md`（テーマ版）/ `.claude/agents/ranking-publisher.md`（公開）
 - 正典: `docs/01_技術設計/12_完全DBレス設計.md` / `docs/01_技術設計/13_統一レイアウト設計.md`
+
+## Output Contract
+
+chat は `Result | Changed files | UI evidence | Gates | Unverified` の1表のみ。公開状態やデータ生成を
+UI変更の完了に含めない。

@@ -3,7 +3,7 @@ name: optimize-themes
 description: テーマダッシュボードを継続最適化する（GSC/GA4 + 競合調査 + ギャップ分析 → 優先度付きアクション）。Use when user says "テーマ最適化", "ダッシュボード改善". 4軸分析で改善アクション出力.
 disable-model-invocation: true
 argument-hint: "[theme-key] | --all"
-allowed-tools: Read, Grep, Glob, Bash, WebSearch, WebFetch, Agent
+allowed-tools: Read, Grep, Glob, Bash, WebSearch, WebFetch
 primary_agent: theme-component-builder
 ---
 

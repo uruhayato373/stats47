@@ -8,6 +8,9 @@ primary_agent: devops-runner
 
 Claude Code スキルの設計・実装ガイド。公式ドキュメント（code.claude.com/docs/en/skills）とこのプロジェクトの規約を統合。
 
+モデル選択、Task Capsule、委譲上限は `.claude/rules/model-prompting.md`、fork / Agent 起動時の
+出力形式は `.claude/rules/agent-output-contract.md` を正典とする。個別SKILLへ長い共通promptを複製しない。
+
 ## スキルのディレクトリ構造
 
 ```
@@ -41,6 +44,9 @@ model: sonnet                  # モデル指定（省略時は親のモデル�
 argument-hint: "[slug]"        # /name の補完時に表示するヒント
 ---
 ```
+
+`context: fork` は独立した大きなwork packageだけに使い、通常は付けない。使用時は1skill=1 forkとし、
+Task CapsuleとOutput Formatを冒頭で固定する。
 
 ### frontmatter の使い分け
 

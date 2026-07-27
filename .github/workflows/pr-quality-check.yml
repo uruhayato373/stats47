@@ -109,6 +109,14 @@ jobs:
         run: node .claude/scripts/lib/check-docs-links.cjs --baseline
         continue-on-error: false
 
+      - name: 🤖 Agent / Skill Prompt Contract Guard
+        # 全custom agentのmodel/Output Contract、全active skillのowner、
+        # frontmatter構文、Opus 5過剰検証文言、subagent上限と共通契約参照を決定的に検査する。
+        run: |
+          node --test .claude/scripts/lib/__tests__/check-agent-skill-consistency.test.cjs
+          node .claude/scripts/lib/check-agent-skill-consistency.cjs --no-orphan
+        continue-on-error: false
+
       - name: 📱 Static Asset Contract Guard
         # manifest / metadata の icon 参照、PNG実寸、SVG安全性、ICO/PWA必須setを検査。
         # TypeScriptでは検出できない「存在しない public asset 参照」をPRで止める。

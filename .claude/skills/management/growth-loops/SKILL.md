@@ -32,16 +32,17 @@ stats47 は都道府県統計データの可視化サイト。以下の特性を
 
 ### Step 1: 現状の成長チャネル調査
 
-以下を並列サブエージェントで収集する:
+以下を同一セッションの並列 tool call で収集する。数回の read / shell call で終わるため
+subagent は起動しない:
 
-#### Agent A: トラフィックデータ
+#### Track A: トラフィックデータ
 ```
 - DB (sns_metrics) から直近のSNSパフォーマンス
 - 公開記事数（articles テーブル）
 - .local/r2/blog/ の記事数
 ```
 
-#### Agent B: コンテンツ資産
+#### Track B: コンテンツ資産
 ```
 - 投稿台帳 `.claude/state/sns/posts.json` から投稿状況を集計（完全DBレス。旧 D1 sns_posts は廃止）:
   `node -e 'const s=require("./.claude/scripts/lib/sns-posts-store.cjs");const by={};for(const p of s.loadAll()){const k=(p.domain||"?")+"/"+(p.platform||"?")+"/"+(p.status||"?");by[k]=(by[k]||0)+1}console.log(JSON.stringify(by,null,2))'`

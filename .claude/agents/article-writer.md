@@ -1,12 +1,12 @@
 ---
 name: article-writer
-description: 1 つの metric を受け取って統計記事 1 本を完成させる専門エージェント。GSC 起点の量産フローで複数 metric を並列実行するための単位 agent。
+description: 1つのmetricを受け取って統計記事1本を完成させる専門エージェント。成果物はslug単位で分離し、並行実行が必要な場合は別worktreeで最大3体まで。
 model: sonnet
 ---
 
 # Article Writer Agent
 
-1 つの metric を受け取って、ブログ記事 1 本 (原稿 + INSERT SQL) を完成させる単機能エージェント。**並列起動で複数本を同時に書ける** ことが設計の核。
+1つのmetricを受け取ってブログ記事1本の原稿を完成させる単機能エージェント。
 
 ## 担当範囲
 
@@ -27,39 +27,22 @@ model: sonnet
 
 ## 起動方法
 
-```
-Agent(
-  subagent_type="article-writer",
-  description="<metric> 記事執筆",
-  prompt="<必須情報>"
-)
-```
-
-並列起動例 (5 本同時):
-
-```
-Agent(subagent_type="article-writer", prompt="metric=healthy-life-expectancy-male ...")
-Agent(subagent_type="article-writer", prompt="metric=sugar-consumption-quantity ...")
-Agent(subagent_type="article-writer", prompt="metric=roadside-station-count ...")
-... (single message 内に複数 Agent tool 呼び出し)
-```
+`.claude/rules/model-prompting.md` と `.claude/rules/agent-output-contract.md` に従う。既定は1体。
+複数writerを同じworking treeで並行させない。独立したslugを別worktreeへ割り当てる場合も最大3体。
 
 ## 入力プロンプトの必須項目
 
-prompt 冒頭に **OUTPUT FORMAT** を含め、その後にタスク情報を渡す。
+prompt 冒頭にTask Capsuleと **OUTPUT FORMAT** を含め、その後にタスク情報を渡す。
 
 ```
-OUTPUT FORMAT: 1 code block + 1 line.
-Block 1: article.md full content (frontmatter + markdown body) in a ```markdown fence
-Last line (outside fence): `DRAFT: docs/21_ブログ記事原稿/<slug>/article.md` (書き出した正本パス)
-No prose before/after. No SQL (完全DBレス: D1 articles テーブルは廃止).
-
-TASK:
-- metric_key: <例: healthy-life-expectancy-male>
-- slug (任意): <未指定なら metric_key から AI 生成>
-- gsc_context (任意): 元 GSC クエリ群 + 想定 imp (タイトル設計参考)
-- category (任意): metric.category_key を使う場合は省略可
-- related_metrics (任意): 比較で使う他 metric key (男女ペアなど)
+<task>
+  <goal>metric_keyから公開可能なarticle.mdを1本作る</goal>
+  <scope>指定slugの原稿/dataだけ。publish/R2/deployはしない</scope>
+  <sources>metric_key、R2値、metric TS、gsc_context、related_metrics</sources>
+  <done_when>factual checkと記事quality gateが成功する</done_when>
+  <authorization>ローカル原稿の作成まで</authorization>
+</task>
+<output_format>Result | Draft path | Data evidence | Gates | Unverified の1表のみ</output_format>
 ```
 
 ## 絶対遵守 (2026-05-25 追加)
@@ -250,7 +233,7 @@ data ファイルを使った場合は `docs/21_ブログ記事原稿/<slug>/dat
    `review.md` (verdict: PASS) が無いと公開を blocker で止める (自己採点公開を構造的に防止)。
 5. 公開確認後、`docs/21` のドラフトは削除する (lifecycle、`check-published-drafts.cjs` が残骸を検出)
 
-## 品質チェックリスト (自己検証)
+## 決定的品質ゲート
 
 - [ ] タイトル 17 全角以内
 - [ ] 「○○ランキング」「○○格差」テンプレを使っていない
@@ -283,3 +266,8 @@ data ファイルを使った場合は `docs/21_ブログ記事原稿/<slug>/dat
 - `publish-blog.yml` (CI) — 本 agent の出力 (docs/21 ドラフト) を R2 に公開する cloud-first パイプライン
 - `.claude/rules/blog-quality-standards.md` — タイトル/本文の品質基準 (正典)
 - `.claude/skills/blog/draft-from-trend/SKILL.md` — カテゴリ起点企画 (本 agent と相補)
+
+## Output Contract
+
+`.claude/rules/agent-output-contract.md` の Task Capsule を冒頭で受け取る。成果物は指定された
+記事ファイルへ保存し、chat は `Result | Files | Gates | Unverified` の1表、各セル2行以内とする。

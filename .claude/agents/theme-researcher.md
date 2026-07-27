@@ -54,7 +54,7 @@ skill `/research-theme-catalog <theme>` が下記を駆動する。詳細手順�
 `.claude/skills/theme/research-theme-catalog/SKILL.md`。
 
 ```
-Stage 1: 素材収集 (安価・並列 fan-out・各 subagent に Template A 出力契約を強制)
+Stage 1: 素材収集 (同一セッションの並列tool call)
   a. NotebookLM 白書クエリ — 白書 PDF はコンテキストに載せず、引用付き回答だけ受領
      (対象テーマの白書が未登録なら notebook を増設し台帳更新)
   b. 競合ダッシュボード調査 — todo-ran / RESAS / e-Stat ダッシュボード / uub の同テーマページ
@@ -62,8 +62,7 @@ Stage 1: 素材収集 (安価・並列 fan-out・各 subagent に Template A 出
 Stage 2: 実在確認 — **自分で inline に調べる** (estat-researcher サブ agent を spawn しない)。
      過去に estat-researcher を background 起動して待ち、自分の turn が synthesize せず終わる事故が続いた
      (2026-07-04)。よって: (a) 登録済みは `grep registry.ts`、(b) 未登録候補は自分で e-Stat を
-     WebFetch/検索して **statsDataId+cdCat01 を突き止める**。突き止めた statsDataId は提案に必ず明記し、
-     自信が持てないものは `要呼び元検証(statsDataId=X)` とマーク → **呼び元 (メインセッション) が最終確定**する。
+     WebFetch/検索して **statsDataId+cdCat01 を突き止める**。解決できない候補は提案へ混ぜず`unknown`として不採用記録へ送る。
      (AI 生成 key は実在 metric と乖離しがち。memory: feedback_backlog_ranking_key_audit)
 Stage 3: 統合 — 指標×チャート提案 (selection 付き) を 03_指標バックログ.md へ append
 ```
@@ -85,12 +84,11 @@ Stage 3: 統合 — 指標×チャート提案 (selection 付き) を 03_指標�
 **不採用候補**: <rankingKey or 概念> — <理由: e-Stat 不在 / 既存重複 等> (rejectedCandidates 行き)
 **次アクション**: 採用分を theme-designer が catalog TS 化 → data-ingester が未登録指標を投入
 
-<!-- self-audit: Read×N Grep×N WebFetch×N estat-researcher×N / GSC snapshot=<週> / 未検証候補=0 -->
+<!-- evidence: GSC snapshot=<週> / 一次資料URL / e-Stat statsDataId+cdCat01 -->
 ```
 
-**e-Stat実在 列の値は次の 4 つのみ**: `✅登録済` (METRICS_REGISTRY に既存) / `✅e-Stat実在(自分で確認)` /
-`要呼び元検証(statsDataId=X)` (statsDataId は明記済・呼び元が最終確定) / `❌不在→不採用`。
-**statsDataId を伴わない「⚠️未確認」は禁止** (statsDataId すら不明なら不採用に落とす)。
+**e-Stat実在 列の値は次の3つのみ**: `✅登録済` / `✅e-Stat実在` / `❌不在→不採用`。
+statsDataId+cdCat01を一次情報で解決できない候補は`unknown`として不採用に落とす。
 
 ## Output Contract (呼び出し元への chat 返答)
 
@@ -99,9 +97,7 @@ Stage 3: 統合 — 指標×チャート提案 (selection 付き) を 03_指標�
 - **Template A** (table-only): `候補 | 推奨チャート | statsDataId | 出典 | e-Stat実在 | verdict`
 - verdict は「採用推奨 / 要判断 / 不採用」。Reason 列は 8 words 以内
 - prose / section header / 前置き文は禁止。詳細は 03_指標バックログ.md に書き chat には出さない
-- **返答末尾に self-audit 行を必ず付ける** (呼び元が tool_uses メタと突合して捏造検知):
-  `self-audit: Read×N Grep×N WebFetch×N estat-researcher×N / GSC=<週 or 無> / 未検証候補=0`
-  — ここで `未検証候補` が 0 でない、または全 tool が 0 の提案は**呼び元が破棄する**
+- 各採用候補は一次資料URLとstatsDataId+cdCat01へ結び付ける。tool回数は証拠として扱わない。
 
 ## 連携パターン
 
@@ -114,7 +110,7 @@ Stage 3: 統合 — 指標×チャート提案 (selection 付き) を 03_指標�
 ## トークン節約の要点
 
 - 白書は NotebookLM に置き**引用付き回答だけ**受け取る (PDF 全文をコンテキストに載せない)
-- Stage 1 の収集 subagent は全て Template A で圧縮出力させる
+- Stage 1 は同一セッションの並列tool callで収集し、収集専用subagentは起動しない
 - GSC は既存 snapshot CSV (`.claude/skills/analytics/gsc-improvement/reference/snapshots/`) を grep — API 呼ばない
 - deep-research (system skill) は白書カバレッジが無いテーマのみ・質問を絞って使う
 - 提案採否・カタログ設計の最終判断は呼び出し元 (メインセッション / 上位モデル) に委ねる
