@@ -53,6 +53,8 @@ tags: [実装計画]
 | `37_都道府県一覧UIUX改善実装仕様.md` | `/areas` を検索・SSR軽量地図・地方別一覧によるアクセシブルな地域選択ハブへ改善するClaude Code実装仕様 |
 | `38_ポータル型ホーム・ヘッダー再設計仕様.md` | home heroを撤去し、検索・カテゴリ・地域・テーマ・buzz-map系ランキングカードで統計ポータル化するClaude Code実装仕様 |
 | `39_検索成長統合MCP・API基盤実装仕様.md` | GSC・URL Inspection・Sitemaps・GA4・CrUX・PSI・Cloudflareをread-only MCP/CLIで統合し、検索改善候補と効果測定を閉ループ化するClaude Code実装仕様 |
+| `40_アフィリエイト計測是正実装仕様.md` | GA4予約名との衝突、意図軸欠損、native impression欠落を是正し、アフィリエイトCTRを測定可能にする実装仕様 |
+| `41_AdSense継続改善・GA4_GSC設定自動化仕様.md` | 公式CPC・imp RPM・形式別収益を整備し、GA4/GSCのallowlist設定をPlaywrightで反映して週次改善を閉ループ化する仕様 |
 
 ## 関連（このフォルダ外の正典）
 

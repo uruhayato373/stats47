@@ -29,14 +29,21 @@ node .claude/scripts/snapshot-weekly-metrics.mjs [YYYY-Www]
 |---|---|
 | 開発 | `git log --since`、`git status --short` |
 | コンテンツ | R2 blog/ranking snapshot、topic/remediation queue |
-| 性能・流入 | GSC / GA4 / AdSense / SNSの最新snapshot |
+| 性能・流入 | GSC / GA4の確定7日summary、AdSense / SNSの最新snapshot |
+| 検索成長 | `npm run search-growth:status`、`npm run search-growth:next -- --limit 10` |
 | NSM実験 | `.claude/skills/management/nsm-experiment/reference/` |
 | 計画差分 | `docs/todo/current-week.md` |
 
 各snapshotの期間、取得日、freshnessを保持する。行が無い場合を推測の0へ変換せず、
 `not-measured` / `not-instrumented` / `insufficient-data`を区別する。
 
-詳細なcommand、field、Issue対応は`reference/runbook.md`のPhase 0〜2だけを参照する。
+GSC/GA4は次の用途を混在させない。
+
+- `finalized7d` と直前の重複しない `previous7d`: KPI、WoW、フェーズゲート。
+- `rolling28d`: page/query/deviceの機会発見。前回snapshotとの差をWoWと呼ばない。
+- GA4のKPI: Japan-only clean slice。rawは汚染監視だけに使う。
+
+詳細なcommand、field、backlog/alert対応は`reference/runbook.md`のPhase 0〜2だけを参照する。
 
 ## Phase 2: 差分分析
 
@@ -45,6 +52,9 @@ node .claude/scripts/snapshot-weekly-metrics.mjs [YYYY-Www]
 3. KPI変化は同じ定義・同じ期間のsnapshotだけで比較する。
 4. effect判定が必要な施策は`.claude/rules/evidence-based-judgment.md`に従う。
 5. 未完了は削除せず、次週へ渡す理由とownerを記録する。
+6. search-growth候補は最大3件（technical/blocker、acquisition/content、measurementを原則各1件）だけ審査する。
+7. CTR候補はpage×query、現行title/content、past effectを確認する。大量title書換えを提案しない。
+8. 候補は人間承認前に改善バックログへ追加しない。active施策のWIPは5以下を守る。
 
 ## Phase 3: 記録
 
@@ -54,9 +64,10 @@ node .claude/scripts/snapshot-weekly-metrics.mjs [YYYY-Www]
 - 成果ハイライト
 - 開発・コンテンツ実績
 - NSM / GA4 / GSC / AdSense / SNS
+- search-growth候補（期間・証拠・制約・承認待ちを明記）
 - 課題、繰り返しパターン、学び
 - 来週への申し送り
-- 参照したsnapshot / Issue / file
+- 参照したsnapshot / backlog ID / file
 
 恒久的な失敗知見だけを`/knowledge`へ渡す。改善施策statusの更新は`improvement-triage`へ渡す。
 `docs/todo/current-week.md`はレビュー中に書き換えない。
@@ -69,7 +80,9 @@ node .claude/scripts/snapshot-weekly-metrics.mjs [YYYY-Www]
 ## Gate
 
 - review fileのweek、snapshot期間、参照pathが一致する。
+- KPIはfinalized7d、候補はrolling28dという用途が明記されている。
 - 実測の無い数値・効果・完了を記録していない。
+- search-growth候補は最大3件で、未承認候補を`docs/todo/01_改善バックログ.md`へ自動追加していない。
 - current-weekの未完了項目を申し送りへ反映している。
 - 保存先が`reference/reviews/YYYY-Www.md`である。
 

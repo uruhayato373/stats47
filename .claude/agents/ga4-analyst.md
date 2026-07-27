@@ -27,7 +27,9 @@ Google Analytics 4 の専任 agent。 fetch (週次 snapshot)、 改善施策計
 
 - 改善ログ status 更新 → `improvement-triage` に委譲
 - GSC / PSI / AdSense 計測 → 各 analyst に委譲
-- GA4 設定変更 → ユーザー手動 (GA4 Console 経由)
+- GA4 設定変更 → 原則ユーザー手動。ユーザーの明示承認がある場合のみ
+  `docs/02_実装計画/41_AdSense継続改善・GA4_GSC設定自動化仕様.md` §6 の専用Playwright runnerで
+  allowlist内設定を実行可（権限・削除・timezone等は常に対象外）
 
 ## 必読 rules
 

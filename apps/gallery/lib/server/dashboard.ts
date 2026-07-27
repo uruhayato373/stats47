@@ -198,8 +198,31 @@ export function readExperiments(root: string) {
 // ─── メトリクス ──────────────────────────────────────
 export function readMetricsHistory(root: string) {
   return wrap(() => {
-    const gsc = readCsv(path.join(root, ".claude/state/metrics/gsc/history.csv"));
-    const ga4 = readCsv(path.join(root, ".claude/state/metrics/ga4/history.csv"));
+    // KPI/WoW 表示は確定7日 (非重複) 系列 (§18.2)。旧 history.csv はローリング28日/基盤混在のため
+    // カードの週次 WoW には使わない。列名は UI 互換の clicks/impressions 等へ写像する。
+    const gscFin = readCsvOrNull(
+      path.join(root, ".claude/state/metrics/gsc/history-finalized7d.csv"),
+    );
+    const gsc = gscFin
+      ? gscFin.map((r) => ({
+          week: r.week,
+          clicks: r.clicks_finalized7d,
+          impressions: r.impressions_finalized7d,
+          ctr: r.ctr_finalized7d,
+          position: r.position_finalized7d,
+        }))
+      : null;
+    const ga4Fin = readCsvOrNull(
+      path.join(root, ".claude/state/metrics/ga4/history-finalized7d.csv"),
+    );
+    const ga4 = ga4Fin
+      ? ga4Fin.map((r) => ({
+          week: r.week,
+          active_users: r.active_users_jp7d,
+          sessions: r.sessions_jp7d,
+          pageviews: r.pageviews_jp7d,
+        }))
+      : readCsvOrNull(path.join(root, ".claude/state/metrics/ga4/history.csv"));
     let adsense: Array<Record<string, string | number>> | null = null;
     try {
       adsense = readCsv(path.join(root, ".claude/state/metrics/adsense/history.csv"));
@@ -208,6 +231,15 @@ export function readMetricsHistory(root: string) {
     }
     return { gsc, ga4, adsense };
   });
+}
+
+function readCsvOrNull(p: string) {
+  try {
+    const rows = readCsv(p);
+    return rows && rows.length > 0 ? rows : null;
+  } catch {
+    return null;
+  }
 }
 
 export function parsePsiLatest(root: string) {

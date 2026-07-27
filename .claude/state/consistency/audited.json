@@ -1,5 +1,8 @@
 {
-  "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-  "audited_at": "2026-07-27T08:24:24",
-  "files": []
+  "hash": "50ab973f8c734f3daf87cb4013eab1ca1a734f65023a2ba23390fb8b960d5d9a",
+  "audited_at": "2026-07-27T22:11:16",
+  "files": [
+    ".claude/agents/ga4-analyst.md",
+    ".claude/rules/analytics-event-standards.md"
+  ]
 }

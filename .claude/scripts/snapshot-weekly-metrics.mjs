@@ -31,23 +31,13 @@ import {
   fetchWeeklyNsmMetrics,
   formatNsmSection,
 } from "./lib/metrics-reader.mjs";
+import { jstDateOf, isoWeekOf } from "./metrics/lib/periods.mjs";
 
 const OUT_DIR =
   ".claude/skills/management/nsm-experiment/reference/weekly-snapshots";
 const INDEX_PATH = join(OUT_DIR, "index.json");
 
-// ── ISO 8601 週番号計算 ────────────────────────────────────────
-
-function getIsoWeek(date = new Date()) {
-  const d = new Date(
-    Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()),
-  );
-  const dayNum = d.getUTCDay() || 7;
-  d.setUTCDate(d.getUTCDate() + 4 - dayNum);
-  const yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
-  const weekNum = Math.ceil(((d - yearStart) / 86400000 + 1) / 7);
-  return { year: d.getUTCFullYear(), week: weekNum };
-}
+// ── ISO 8601 週番号 ────────────────────────────────────────────
 
 function formatWeekId({ year, week }) {
   return `${year}-W${String(week).padStart(2, "0")}`;
@@ -101,7 +91,8 @@ function updateIndex(weekId, snapshotPath) {
 
 async function main() {
   const args = parseArgs();
-  const isoWeek = args.weekId ? parseWeekId(args.weekId) : getIsoWeek();
+  // 引数なしの既定週は JST 基準 (期間契約 §18.2 と同じ日付境界)
+  const isoWeek = args.weekId ? parseWeekId(args.weekId) : parseWeekId(isoWeekOf(jstDateOf()));
   const weekId = formatWeekId(isoWeek);
   const outPath = join(OUT_DIR, `${weekId}.json`);
 
@@ -114,7 +105,10 @@ async function main() {
     return;
   }
 
-  const metrics = await fetchWeeklyNsmMetrics();
+  // 期間契約 (§18.2): weekId は保存 key であり期間の代用にしない。
+  // - 明示 week: その週の日曜を anchor に決定的に再現 (未来週 = 未確定は throw し誤ラベル防止)
+  // - 引数なし: 実行日 (JST) を as-of とする従来挙動 (週中の手動実行を許容)
+  const metrics = await fetchWeeklyNsmMetrics(args.weekId ? { week: weekId } : {});
 
   if (args.dryRun) {
     console.log("[DRY-RUN] 取得結果:");
