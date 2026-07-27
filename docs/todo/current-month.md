@@ -2,6 +2,7 @@
 type: monthly-plan
 month: 2026-07
 date: 2026-07-12
+updated: 2026-07-28
 status: active
 focus_themes: ["ブログSEO拡充 (新規記事 月15-20本・topic-queue駆動)", "ai-content 生成完走 + CTR改修の効果実測"]
 tags: []
@@ -29,10 +30,13 @@ tags: []
 | BLOG-WAVE effect 計測 | 4-5 週先送りだった | **判定完了 effect/none (2026-07-03)**。title reframe が既得 query 整合を崩した教訓を BLOG-SEO-TYPES-01 に反映済 |
 
 ## 現状サマリー（W27 メトリクス実測 2026-07-06）
+
+> GSC欄は当時のローリング28日snapshot。機会規模の文脈として保持し、重複する前snapshotとの差をWoWやフェーズゲートに使わない。週次KPIは`finalized7d`を使う。
+
 | 指標 | 現在値 | 備考 |
 |---|---|---|
-| GSC clicks（28日 rolling）| 2,244 / +15.3% | 上昇基調継続（W23:1,349→W27:2,244）|
-| GSC impressions | 80,868 / +9.8% | 平均順位 8.96 |
+| GSC clicks（28日 rolling）| 2,244 | W23:1,349→W27:2,244（重複期間を含むtrend context）|
+| GSC impressions（28日 rolling） | 80,868 | 平均順位 8.96 |
 | GA4 Active Users | 1,700 / +11.1% | Sessions 2,022 / +11.3% |
 | AdSense earnings | 128 / -7.9% | RPM 45.00 / -。PV は +9.4% |
 | ブログ remediation-queue | done 39 / pending 99 (must-fix 36) | 是正エンジン稼働 |
@@ -43,7 +47,7 @@ tags: []
 ## 今月の重点テーマ（2 個）
 
 ### 重点1: ブログSEO拡充（新規記事 月 15-20 本・topic-queue 駆動）
-- **なぜ今月これか**: GSC 12週実測で「供給は制約でない、需要とCTRがボトルネック」と判明（competitor benchmark memory）。是正（床上げ）は W25 で一段落し、7 月は **需要ギャップを新規記事で埋める天井上げ**フェーズ。GSC clicks は上昇基調（+15.3%/W27）でブログが主エンジン。真実源 = BLOG-SEO-PACE-01（Tier1・due 2026-08-31）。
+- **なぜ今月これか**: GSC 12週実測で「供給は制約でない、需要とCTRがボトルネック」と判明（competitor benchmark memory）。是正（床上げ）は W25 で一段落し、7 月は **需要ギャップを新規記事で埋める天井上げ**フェーズ。W27時点のローリング28日は拡大していたが、週次の成長判定には使わない。真実源 = BLOG-SEO-PACE-01（Tier1・due 2026-08-31）。
 - **今月のゴール（月末に検証可能）**: ① topic-queue から **月 15-20 本**を公開（型配分 B 5 / D2 4 / A 3-4 / F 3 / G 1-2）、② remediation must-fix pending を **週 3 本ペース**で消化し月内 +12 本 done、③ BLOG-SEO-TYPES-01 の新型記事 4 週後 clicks を既存 A 型と比較（due 2026-08-02）。
 - **構成タスク**:
   - 新規記事 週 4-5 本 ×4-5 週 [M×週] — `/plan-article-queue` で払い出し → article-writer → factual/quality-gate → blog-critic PASS → publish

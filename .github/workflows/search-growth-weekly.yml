@@ -44,9 +44,16 @@ jobs:
         with:
           node-version: "20"
 
+      # stale artifact guard (§18.3): fetch-metrics-weekly が失敗/未実行のまま
+      # workflow_run・cron で発火した場合、古い snapshot から candidate を黙って再構築しない。
+      - name: 🧪 Snapshot freshness guard (stale artifact)
+        run: npm run metrics:check-period-contract -- --max-age-weeks 1
+
       # source 別に失敗を隔離する (1 source の失敗が全体を止めない)。
-      - name: 🧪 Compliance + unit tests
-        run: node --test .claude/scripts/search-growth/__tests__/*.test.mjs
+      - name: 🧪 Compliance + unit tests (search-growth + metrics period contract)
+        run: |
+          node --test .claude/scripts/search-growth/__tests__/*.test.mjs
+          node --test .claude/scripts/metrics/__tests__/*.test.mjs
 
       - name: 📥 Collect (committed snapshot reuse)
         run: node .claude/scripts/search-growth/collect.mjs || true

@@ -56,7 +56,7 @@ export function MetricsSection({ metrics, psi, coverage }: MetricsData) {
         <StatCard
           key="gsc-clicks"
           value={num(Number(last.clicks))}
-          label={`GSC clicks/週 (${last.week})`}
+          label={`GSC clicks/確定7日 (${last.week})`}
           sub={<WowBadge result={wow(g, "clicks")} />}
           sparkValues={g.map((r) => Number(r.clicks))}
         />,
@@ -65,7 +65,7 @@ export function MetricsSection({ metrics, psi, coverage }: MetricsData) {
         <StatCard
           key="gsc-impressions"
           value={num(Number(last.impressions))}
-          label="GSC impressions/週"
+          label="GSC impressions/確定7日"
           sub={<WowBadge result={wow(g, "impressions")} />}
           sparkValues={g.map((r) => Number(r.impressions))}
         />,
@@ -98,7 +98,7 @@ export function MetricsSection({ metrics, psi, coverage }: MetricsData) {
         <StatCard
           key="ga4-users"
           value={num(Number(last.active_users))}
-          label={`GA4 users/週 (${last.week})`}
+          label={`GA4 users/週 JP (${last.week})`}
           sub={<WowBadge result={wow(a, "active_users")} />}
           sparkValues={a.map((r) => Number(r.active_users))}
         />,

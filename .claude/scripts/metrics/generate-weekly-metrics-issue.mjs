@@ -130,33 +130,57 @@ function ghIssueList(args) {
 }
 
 function gsSection(week) {
-  const hist = readCsv(".claude/state/metrics/gsc/history.csv");
-  if (!hist) return "_GSC: history.csv が存在しません（CI 未実行？）_\n";
-  const target = hist.rows.find((r) => r.week === week);
-  const idx = target ? hist.rows.indexOf(target) : -1;
-  const prev = idx > 0 ? hist.rows[idx - 1] : null;
-  if (!target) return `_GSC: ${week} の行が見つかりません_\n`;
+  // KPI/WoW は確定7日 (非重複) 系列だけを使う (§18.2)。rolling28d は文脈の単一値のみ。
+  const fin = readCsv(".claude/state/metrics/gsc/history-finalized7d.csv");
+  const rolling = readCsv(".claude/state/metrics/gsc/history.csv");
   const lines = [];
-  lines.push(`- Clicks: **${num(target.clicks)}**${arrow(num(target.clicks), num(prev?.clicks), false)}${pctDelta(num(target.clicks), num(prev?.clicks))}`);
-  lines.push(`- Impressions: **${num(target.impressions)}**${arrow(num(target.impressions), num(prev?.impressions), false)}${pctDelta(num(target.impressions), num(prev?.impressions))}`);
-  lines.push(`- CTR: **${(num(target.ctr) * 100).toFixed(2)}%**${arrow(num(target.ctr), num(prev?.ctr), false)}`);
-  lines.push(`- Avg Position: **${num(target.position).toFixed(2)}**${arrow(num(target.position), num(prev?.position), true)}`);
+  const target = fin?.rows.find((r) => r.week === week);
+  if (target) {
+    const idx = fin.rows.indexOf(target);
+    const prev = idx > 0 ? fin.rows[idx - 1] : null;
+    lines.push(`確定7日 (${target.period_start} 〜 ${target.period_end}):`);
+    lines.push(`- Clicks: **${num(target.clicks_finalized7d)}**${arrow(num(target.clicks_finalized7d), num(prev?.clicks_finalized7d), false)}${pctDelta(num(target.clicks_finalized7d), num(prev?.clicks_finalized7d))}`);
+    lines.push(`- Impressions: **${num(target.impressions_finalized7d)}**${arrow(num(target.impressions_finalized7d), num(prev?.impressions_finalized7d), false)}${pctDelta(num(target.impressions_finalized7d), num(prev?.impressions_finalized7d))}`);
+    lines.push(`- CTR: **${(num(target.ctr_finalized7d) * 100).toFixed(2)}%**${arrow(num(target.ctr_finalized7d), num(prev?.ctr_finalized7d), false)}`);
+    lines.push(`- Avg Position: **${num(target.position_finalized7d).toFixed(2)}**${arrow(num(target.position_finalized7d), num(prev?.position_finalized7d), true)}`);
+  } else {
+    lines.push(`_GSC 確定7日: ${week} の行なし (insufficient-data — 欠損日か summary 未生成。WoW 判定は停止)_`);
+  }
+  const roll = rolling?.rows.find((r) => r.week === week);
+  if (roll) {
+    lines.push(`- ローリング28日 (機会発見用・WoW 非適用): clicks ${num(roll.clicks_rolling28d)} / imp ${num(roll.impressions_rolling28d)}`);
+  }
   return lines.join("\n") + "\n";
 }
 
 function ga4Section(week) {
+  // KPI/WoW は Japan-only 確定7日 (非重複) を優先する (§18.2)。
+  const fin = readCsv(".claude/state/metrics/ga4/history-finalized7d.csv");
+  const target = fin?.rows.find((r) => r.week === week);
+  if (target) {
+    const idx = fin.rows.indexOf(target);
+    const prev = idx > 0 ? fin.rows[idx - 1] : null;
+    const lines = [];
+    lines.push(`確定7日 Japan-only (${target.period_start} 〜 ${target.period_end}):`);
+    lines.push(`- Active Users: **${num(target.active_users_jp7d)}**${arrow(num(target.active_users_jp7d), num(prev?.active_users_jp7d), false)}${pctDelta(num(target.active_users_jp7d), num(prev?.active_users_jp7d))}`);
+    lines.push(`- Sessions: **${num(target.sessions_jp7d)}**${arrow(num(target.sessions_jp7d), num(prev?.sessions_jp7d), false)}${pctDelta(num(target.sessions_jp7d), num(prev?.sessions_jp7d))}`);
+    lines.push(`- Engaged Sessions: **${num(target.engaged_sessions_jp7d)}**${arrow(num(target.engaged_sessions_jp7d), num(prev?.engaged_sessions_jp7d), false)}${pctDelta(num(target.engaged_sessions_jp7d), num(prev?.engaged_sessions_jp7d))}`);
+    lines.push(`- Pageviews: **${num(target.pageviews_jp7d)}**${arrow(num(target.pageviews_jp7d), num(prev?.pageviews_jp7d), false)}${pctDelta(num(target.pageviews_jp7d), num(prev?.pageviews_jp7d))}`);
+    return lines.join("\n") + "\n";
+  }
+  // fallback: 後方互換の legacy 系列 (基盤混在)。同一 basis の直前行とだけ比較する。
   const hist = readCsv(".claude/state/metrics/ga4/history.csv");
-  if (!hist) return "_GA4: history.csv が存在しません_\n";
-  const target = hist.rows.find((r) => r.week === week);
-  const idx = target ? hist.rows.indexOf(target) : -1;
-  const prev = idx > 0 ? hist.rows[idx - 1] : null;
-  if (!target) return `_GA4: ${week} の行が見つかりません_\n`;
+  if (!hist) return "_GA4: history が存在しません_\n";
+  const t = hist.rows.find((r) => r.week === week);
+  if (!t) return `_GA4: ${week} の行が見つかりません_\n`;
+  const sameBasis = hist.rows.filter((r) => (r.basis ?? "") === (t.basis ?? ""));
+  const idx = sameBasis.indexOf(t);
+  const prev = idx > 0 ? sameBasis[idx - 1] : null;
   const lines = [];
-  lines.push(`- Active Users: **${num(target.active_users)}**${arrow(num(target.active_users), num(prev?.active_users), false)}${pctDelta(num(target.active_users), num(prev?.active_users))}`);
-  lines.push(`- Sessions: **${num(target.sessions)}**${arrow(num(target.sessions), num(prev?.sessions), false)}${pctDelta(num(target.sessions), num(prev?.sessions))}`);
-  lines.push(`- Pageviews: **${num(target.pageviews)}**${arrow(num(target.pageviews), num(prev?.pageviews), false)}${pctDelta(num(target.pageviews), num(prev?.pageviews))}`);
-  lines.push(`- Avg Session Duration: **${num(target.avg_session_duration_sec).toFixed(1)}s**${arrow(num(target.avg_session_duration_sec), num(prev?.avg_session_duration_sec), false)}`);
-  lines.push(`- Bounce Rate: **${(num(target.bounce_rate) * 100).toFixed(2)}%**${arrow(num(target.bounce_rate), num(prev?.bounce_rate), true)}`);
+  lines.push(`_確定7日 summary 未生成 — legacy 系列 (basis=${t.basis ?? "unknown"}) で代替。ゲート判定には使わない_`);
+  lines.push(`- Active Users: **${num(t.active_users)}**${arrow(num(t.active_users), num(prev?.active_users), false)}${pctDelta(num(t.active_users), num(prev?.active_users))}`);
+  lines.push(`- Sessions: **${num(t.sessions)}**${arrow(num(t.sessions), num(prev?.sessions), false)}${pctDelta(num(t.sessions), num(prev?.sessions))}`);
+  lines.push(`- Pageviews: **${num(t.pageviews)}**${arrow(num(t.pageviews), num(prev?.pageviews), false)}${pctDelta(num(t.pageviews), num(prev?.pageviews))}`);
   return lines.join("\n") + "\n";
 }
 

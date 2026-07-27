@@ -74,9 +74,12 @@ primary_agent: strategy-advisor
     ```
   - **時系列履歴**: `.claude/skills/analytics/sns-metrics-improvement/snapshots/YYYY-MM-DD/metrics.csv`（`sns-metrics-store.cjs` の `readByRange` で集約）
 
-- GA4/GSC メトリクス（`.claude/skills/analytics/{ga4,gsc}-improvement/reference/snapshots/YYYY-Www/` から最新 snapshot を読み込み）
-  → `/weekly-review` の Phase 1 Track C で `/fetch-{ga4,gsc}-data ... snapshot` が自動実行され CSV が保存される
-  → 直近の snapshot ディレクトリ（overview.csv / pages.csv / queries.csv 等）から PV・流入経路・検索クエリを参照
+- GA4/GSC メトリクス
+  → KPI・WoW・フェーズゲートは`.claude/skills/management/nsm-experiment/reference/weekly-snapshots/YYYY-Www.json`の
+    `finalized7d`と、その直前で重複しない`previous7d`を参照する
+  → `.claude/skills/analytics/{ga4,gsc}-improvement/reference/snapshots/YYYY-Www/`の28日
+    overview/pages/queries/devicesは機会発見にだけ使い、前回snapshotとの差をWoWと呼ばない
+  → GA4 KPIはJapan-only clean slice。rawはpollution監視に限定する
   → snapshot が存在しない場合は「計測データなし」と報告
 
 - NSM 実験進捗（`.claude/state/experiments.json` から active 実験を取得）
@@ -91,7 +94,9 @@ primary_agent: strategy-advisor
   → weekly-review の Phase 0 で生成されたサマリ。engagedSessions / clicks / position 等の前週比
 
 - SEO カバレッジ指標（完全DBレス。旧 D1 `seo_tracking` / `seo_actions` テーブルは廃止）
-  → GSC カバレッジ推移: `.claude/state/gsc/LATEST.md`（`.claude/state/metrics/gsc/history.csv` で時系列）
+  → GSCカバレッジ推移: `.claude/state/gsc/LATEST.md`
+  → `.claude/state/metrics/gsc/history.csv`はローリング28日系列（列名`*_rolling28d`・機会発見用）。
+    週次ゲートは`history-finalized7d.csv`と`LATEST.md`上段の確定7日KPIを使う（§18実装済 2026-07-28）
   → 未完了 SEO 施策: `docs/todo/01_改善バックログ.md`（status != done の行）
   → トレンド（改善中 / 悪化中 / 横ばい）を判定し計画に反映
 
@@ -120,6 +125,20 @@ primary_agent: strategy-advisor
   → Tier 1 は Must 優先、Tier 2 は Should 候補として計画に組み込む
   → due が今週以内のエントリを最優先
 
+- 検索成長candidate（候補生成は決定的、採用は人間判断）
+  ```bash
+  npm run search-growth:status
+  npm run search-growth:triage      # レビュー対象の最大3件 (technical/content/measurement 各1)
+  # 人間承認済み (status=approved) の一覧 — weekly-plan が採用してよいのはここだけ
+  jq '[.candidates[] | select(.status=="approved")]' .claude/state/search-growth/candidates.json
+  ```
+  → weekly-reviewで証拠確認・人間承認（`npm run search-growth:approve -- --candidate <ID>`で機械記録。
+    週2件・全active WIP≤5をCLIが機械強制）された`status=approved`の候補だけを対象にする。
+    未承認候補を`docs/todo/01_改善バックログ.md`へ自動追加しない。
+  → 採用は最大1〜2件（technical/blockerとacquisition/contentを原則各1件）。全active施策のWIPは5以下。
+  → CTR候補はpage×query・現行title/content・past effectを確認し、一括title書換えを計画しない。
+  → 効果判定日は`npm run search-growth:measure -- --candidate <ID>`（14/28/56日）。
+
 - ブログ品質是正キュー（**既存記事を計画的に順次品質向上**・真実源: `.claude/state/blog/remediation-queue.json`）
   ```bash
   # 最新化 (audit fresh + GSC マージ、状態保持の upsert) → 次の 3 件を取り出す
@@ -139,9 +158,11 @@ primary_agent: strategy-advisor
   → must-write レーン上位を「**新規記事 N 本**」として Phase 3 の **Must** に転載する（型ミックスを整える:
     月次目標 B5/D2 4/A3-4/F3/G1-2、`.claude/agents/blog-seo-strategist.md` §戦略コンテキスト）。
   → 実行は `/draft-from-trend --from queue`（1 本ずつ）→ generate-article-charts → **blog-critic PASS** → publish。
+  → A/D2型は実query需要があるdirect-intentを優先する。元ranking URLのimpressionsを新記事需要へ流用しない。
   → ⚠️ **B 型は決定的フィルタ（`lib/topic-queue-spurious-core.mjs`: 自己/派生・同義・規模ペア・
     同一 category・年度乖離・欠測）で疑似相関を除外済**だが、機序の書けないペアは残りうる。
-    「見かけの相関 vs 真因」を文章にできるか人手で吟味してから採用する（キューは候補生成であり最終決定ではない）。
+    相関テーマ自体のpage×query需要と「見かけの相関 vs 真因」を説明できる機序があるか人手で吟味してから採用する
+    （キューは候補生成であり最終決定ではない）。
   → これも毎週の**定常 Must**。是正キュー（既存改善）と新規キュー（新規拡充）の両輪で回す。
     仕組み: `.claude/skills/blog/plan-article-queue/SKILL.md`。
 
@@ -341,12 +362,12 @@ tags: []
 <!-- Phase 4 の結果を引用形式で記載 -->
 <!-- 関連する critical-review ドキュメントがあれば `../../04_レビュー/<file>.md` で参照 -->
 
-## 関連ドキュメント・Issue
+## 関連ドキュメント・施策
 
-<!-- 施策 Issue（enhancement ラベル）、Pre-Mortem、NSM 実験、snapshot Issue 等を列挙 -->
+<!-- 改善/機能backlog ID、Pre-Mortem、NSM実験、snapshot期間を列挙 -->
 - 前週レビュー: `.claude/skills/management/weekly-review/reference/reviews/YYYY-W(n-1).md`
 - 前月 Pre-Mortem: `../../04_レビュー/YYYY-MM-DD-pre-mortem-{topic}.md`（該当あれば）
-- 関連施策 Issue: #NNN（enhancement / auto-generated ラベル）
+- 関連改善施策: `SEARCH-GROWTH-CYCLE-01`（該当ID）
 
 ## 次週への申し送り候補
 

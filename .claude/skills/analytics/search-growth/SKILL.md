@@ -25,10 +25,18 @@ npm run search-growth:analyze       # Observation → 決定的 candidate (candi
 npm run search-growth:report -- --limit 15   # 週次 digest (blocker→verified→opp→mobile→CWV→coverage→freshness→判定対象)
 npm run search-growth:status        # source freshness + candidate 件数
 npm run search-growth:next -- --limit 20      # 次にやる候補 (score 降順・決定的)
+npm run search-growth:triage        # 週次レビュー用の最大3件 (technical/content/measurement 各1・§18.4)
+npm run search-growth:approve -- --candidate <id>   # 人間承認 (pending→approved。週2件・WIP≤5 を機械強制)
+npm run search-growth:dismiss -- --candidate <id> --reason "..."   # 却下 (理由を記録)
 npm run search-growth:measure -- --candidate <id>   # 候補の evidence + 14/28/56 日判定スケジュール
 npm run search-growth:all           # collect→normalize→analyze→report を順に
-npm run search-growth:test          # 全テスト (compliance / foundation / candidate / pipeline / mcp)
+npm run search-growth:test          # 全テスト (compliance / foundation / candidate / pipeline / mcp / triage)
 ```
+
+週次サイクル (§18.3): fetch-metrics-weekly → search-growth-weekly (candidate 再構築・承認 lifecycle は
+carry over) → weekly-review が `triage` の最大3件を審査 → 人間が `approve` → weekly-plan が
+`status=approved` を最大1〜2件だけ採用 → `measure` の 14/28/56 日で効果判定。
+未承認候補を改善バックログへ自動追加しない。承認は repo state (candidates.json) のみ書く。
 
 `--json` で機械可読出力。`collect` は committed snapshot を再利用 (secret 不要)。`collect --live` は:
 - **http (production HTTP probe・Googlebot UA) と sitemap (sitemap.xml 内容)** は credential 不要の

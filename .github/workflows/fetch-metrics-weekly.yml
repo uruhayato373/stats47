@@ -52,12 +52,17 @@ jobs:
           fi
           echo "Week: $(cat "$GITHUB_OUTPUT")"
 
+      # source 単位の failure isolation (§18.3): 1 source の失敗が他 source・digest・commit を
+      # 止めない。missing/partial は最終 step の Period contract gate が exit 1 で赤くする
+      # (green success として隠さない)。
       - name: 🔍 Fetch GSC snapshot
+        continue-on-error: true
         env:
           GOOGLE_SERVICE_ACCOUNT_KEY_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY_JSON }}
         run: npm run fetch-gsc-snapshot -- ${{ steps.week.outputs.week }}
 
       - name: 📊 Fetch GA4 snapshot
+        continue-on-error: true
         env:
           GOOGLE_SERVICE_ACCOUNT_KEY_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY_JSON }}
           GA4_PROPERTY_ID: ${{ secrets.GA4_PROPERTY_ID }}
@@ -185,3 +190,9 @@ jobs:
 
           git commit -m "chore(metrics): weekly snapshot ${{ steps.week.outputs.week }} + remediation queue/effect [skip ci]"
           git push origin develop
+
+      # 期間契約 gate (§18.2/§18.3): commit の後に走らせ、GSC/GA4 summary の missing/partial・
+      # NSM finalized7d の欠落を exit 1 で赤くする。データは commit 済みなので failure isolation は
+      # 保たれ、partial を green success として隠さない。
+      - name: 🧪 Period contract gate (finalized7d/coverage)
+        run: npm run metrics:check-period-contract -- ${{ steps.week.outputs.week }} --strict

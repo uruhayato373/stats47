@@ -1,6 +1,7 @@
 ---
 type: implementation-spec
 date: 2026-07-23
+updated: 2026-07-28
 status: active
 tags: [gsc, seo, mcp, api, ga4, crux, pagespeed, cloudflare, automation]
 ---
@@ -621,45 +622,131 @@ Indexing API通常ページ送信の停止は安全・準拠是正だが、GitHu
 - [ ] temporary handoffがない。
 - [ ] deploy・外部mutationを行っていない。
 
-## 17. Claude Code用プロンプト
+## 18. 週次計測・改善サイクル（SEARCH-GROWTH-WEEKLY-01）
+
+### 18.1 目的と発見済みの不整合
+
+検索成長基盤の候補生成を週次レビューと週次計画へ接続し、毎週「計測 → 診断 → 人間承認 → 小さく実行 → 14/28/56日判定」を回す。
+
+2026-W30 の監査で、`.claude/state/metrics/gsc/LATEST.md` と `history.csv` の「今週」「前週比」が、実際には互いに重なるローリング28日合計だったと判明した。W30 の 3,224 clicks は28日合計であり、フェーズゲートに使う確定7日値は 892 clicks（2026-07-17〜23）である。ローリング28日を前週snapshotと比較して WoW と呼ぶと21日分が重複し、変化を過大・過小評価するため禁止する。
+
+### 18.2 計測契約
+
+| 用途 | 正式名 | 期間 | 比較 | 主な利用先 |
+|---|---|---|---|---|
+| KPI・フェーズゲート | `finalized7d` | 取得遅延を考慮した連続7日 | 直前の重複しない7日 `previous7d` | weekly-review、weekly-plan、4,000 clicks/週ゲート |
+| 機会発見 | `rolling28d` | 最新の連続28日 | 前期間差をWoWとは呼ばない | page/query/device候補、long-tail探索 |
+| GA4週次KPI | `jpFinalized7d` | Japan-onlyの連続7日 | 直前の重複しない7日 | users/sessions/PV/engaged sessions |
+| 施策効果 | `effectWindow` | 14/28/56日 | 施策ごとのbaseline・対照・交絡を明記 | `search-growth:measure`、改善バックログ |
+
+すべてのsummary/snapshotには最低限、次を保存する。
+
+```json
+{
+  "periodStart": "YYYY-MM-DD",
+  "periodEnd": "YYYY-MM-DD",
+  "windowDays": 7,
+  "isFinalized": true,
+  "generatedAt": "ISO-8601",
+  "source": "gsc|ga4",
+  "limitations": []
+}
+```
+
+追加規約:
+
+- GSCは原則3日、GA4は原則1日の取得遅延を考慮する。遅延日数はコード上の定数または設定をSSOTとし、各snapshotに残す。
+- `weekId`は実行・保存のcadence keyであり、期間の代用ではない。明示した週・as-ofでbackfillする場合、その日付から期間を決定的に再現する。
+- 任意の過去 `weekId` に実行時点の最新データを保存してはならない。期間を再現できない場合は失敗させる。
+- 日別行が欠けた場合、0で補完しない。`partial` / `missing` と欠損日を記録し、KPI比較とゲート判定を止める。
+- GA4週次KPIはJapan-only clean sliceを用いる。rawのoverseas / `(not set)` は汚染監視に残すが、clean WoWへ混ぜない。
+- `LATEST.md` と `history.csv` の列名・見出しには `確定7日` または `ローリング28日` を明記する。曖昧な「今週」は使わない。
+
+### 18.3 日曜から月曜までの標準フロー
 
 ```text
-OUTPUT FORMAT:
-- 最初に「完成させる結果 / Phase / dirty tree境界 / API・MCP安全境界 / Indexing API是正」を最大10項目で報告する。
-- 各Phase終了時に「変更ファイル / 検証 / live未検証source / 残り」を報告する。
-- 最終報告は「実装結果 / データ源 / CLI・MCP / 候補engine / Indexing API是正 / CI / 検証 / 未実行 / 変更ファイル」の9節。
-- mockだけのsourceをlive検証済みとしない。partial/stale/missingを成功や0件としない。
-
-BEHAVIOR CONTRACT:
-- 計画だけで止まらず、仕様書Phase 0〜8と完了条件をすべて実装・検証する。
-- 他セッションのdirty fileを編集・削除・stash・整形しない。
-- 既存fetcher、snapshot、skills、workflow、auth helperを再利用し、同義基盤を複製しない。
-- deterministic処理をLLMへ委ねない。
-- secretを表示・保存しない。
-- commit / push / PR / deploy / R2 write / GSC・GA4・Cloudflare mutationは禁止。
-
-TASK:
-`CLAUDE.md`と`docs/02_実装計画/39_検索成長統合MCP・API基盤実装仕様.md`を全文読み、本書を正典として検索成長統合基盤を実装してください。
-
-最初にGSC、URL Inspection、Sitemaps、GA4、CrUX、PSI、Cloudflare、HTTP/static audit、既存skills/workflows/state/consumerを棚卸しし、重複と依存関係を明らかにしてください。
-
-Google Indexing APIはJobPosting/BroadcastEvent以外に使用しない公式制約があります。stats47のranking/area/theme/blog/410 URLへ送信する既存pathを全て監査し、scheduled送信をrepository上で停止し、通常ページpublish codeを削除または実行不能にしてください。coverage remediationはsitemap、internal link、HTTP、canonical、content修正とURL Inspection観測へ移行してください。過去ログは証拠として保持し、推奨文言と現行backlogを訂正してください。
-
-CLIを正典として`.claude/scripts/search-growth/`にcollect/normalize/analyze/report/status/next/measureを実装し、既存fetcherをlibraryまたはadapterとして再利用してください。Observation schema、freshness、provenance、redaction、URL normalization、source manifestを実装してください。
-
-GSC Search Analytics、URL Inspection、Sitemaps API、GSC UI export、GA4 Data API、CrUX/History、PSI、local Lighthouse、Cloudflare、production HTTP、route/sitemap/canonical static auditを統合してください。credentialがないsourceはmock testを行い、live未検証と明示してください。
-
-candidate engineはpure deterministic ruleで実装してください。CTR opportunity、striking distance、query gap、intent mismatch、mobile gap、indexability conflict、crawled-not-indexed、soft404 risk、canonical drift、CWV、lab regression、server risk、measurement gapを扱い、minimum sample、missing/stale、past effect/none・adverse、dedupeを考慮してください。
-
-CLI完成後、現行`.mcp.json`とClaude Code/Codexのproject-scoped MCP方式を確認し、同じserviceを呼ぶread-only MCP adapterを最小実装してください。status/candidates/GSC/Inspection/Sitemaps/GA4/CrUX/PSI/Cloudflare/route contract/measureをfilter・limit・cursor付きで公開してください。deploy、sitemap submit/delete、Admin変更、Cloudflare変更、production writeはMCP toolにしないでください。MCPが使えなくてもCLIで全機能が成立するようにしてください。
-
-dailyはblocker観測、weeklyは全snapshotとcandidate更新、monthlyは28/56日効果判定へ整理してください。既存workflowを一度に巨大化せず、shared scriptsとfailure isolationを使ってください。自動化を変更したら`docs/01_技術設計/06_自動化インベントリ.md`を更新してください。
-
-最低限、pagination、quota、API error、missing/zero/stale、URL normalization、redaction、candidate scoring/dedupe、MCP schema/domain/limit/read-only、CLI-MCP fixture一致、Indexing API publish不在、workflow停止をtestしてください。
-
-live APIはread-onlyだけsmoke可能です。外部mutation、secret変更、本番deployは行わないでください。
-
-検証後、`docs/todo/02_機能バックログ.md#SEARCH-GROWTH-PLATFORM-01`を実装結果に更新し、影響する`docs/todo/01_改善バックログ.md`、GSC/coverage skills、improvement-log、automation inventoryを現在仕様へ更新してください。一時handoffは作らず、残作業は正しいbacklogへ直接記録してください。
-
-全完了条件を満たすまで実装と検証を継続してください。
+fetch-metrics-weekly
+  1. GSC / GA4 raw snapshot取得
+  2. finalized7d + previous7d summary生成
+  3. rolling28d discovery slice生成
+  4. period metadata / freshness / missing判定
+        ↓
+search-growth-weekly
+  5. normalize → analyze → report
+        ↓
+weekly-review
+  6. finalized7dでKPI・ゲート・前週差を判定
+  7. rolling28dでpage/query/device候補を読む
+  8. due施策を14/28/56日でmeasure
+        ↓
+human triage
+  9. 候補を最大3件まで証拠付きで審査
+        ↓
+weekly-plan
+ 10. 承認済みを最大1〜2件だけMust/Shouldへ昇格
 ```
+
+workflowは候補生成までを自動化し、改善バックログへの追加やサイト変更は自動化しない。weekly-review単独依頼時にweekly-planを勝手に実行しない。
+
+### 18.4 候補の選別規則
+
+- 週次トリアージは最大3件（原則: blocker/technical 1件、acquisition/content 1件、measurement 1件）。全active施策のWIPは5以下を維持する。
+- 候補はURL/query、期間、sample size、期待するレバー、guardrail、過去effect、missing/staleを持つ。証拠不足は `insufficient-data` とし昇格しない。
+- CTR候補はpage×query、現在表示されるtitle/content、過去の `effect/none` / `effect/adverse` を確認する。サイト横断・大量のtitle書換えは禁止する。
+- 新規記事は実query需要があるA/D2型を優先する。B型相関記事は、元ranking URLのimpressionsを記事需要として流用せず、相関テーマ自体のquery需要と説明可能な機序がある場合だけ採用する。
+- 高confidence blockerは即時に提示できるが、通常候補を `docs/todo/01_改善バックログ.md` へ追加する前に人間承認を得る。
+- 承認済み改善は `docs/todo/01_改善バックログ.md`、実装基盤は `docs/todo/02_機能バックログ.md` に記録する。一般的な週次候補やsnapshotをGitHub Issue化しない。
+
+### 18.5 実装対象
+
+- `.claude/scripts/metrics/fetch-gsc-snapshot.mjs`
+- `.claude/scripts/metrics/fetch-ga4-snapshot.mjs`
+- `.claude/scripts/metrics/update-history-csv.mjs`
+- `.claude/scripts/lib/metrics-reader.mjs`
+- `.claude/scripts/snapshot-weekly-metrics.mjs`
+- `.claude/scripts/search-growth/`（既存serviceの最小変更のみ）
+- `.github/workflows/fetch-metrics-weekly.yml`
+- `.github/workflows/search-growth-weekly.yml`
+- `.claude/skills/management/weekly-review/`
+- `.claude/skills/management/weekly-plan/SKILL.md`
+- `docs/01_技術設計/06_自動化インベントリ.md`
+
+### 18.6 完了条件
+
+- [x] GSC/GA4の確定7日・直前7日・ローリング28日が名前と期間metadata付きで生成される。
+- [x] 確定7日の2期間は重複せず、取得遅延・JST境界・月跨ぎ・年跨ぎをtestできる。
+- [x] 欠損日を0補完せず、partial時はWoW・ゲート判定を止める。
+- [x] 過去week/as-ofのbackfillが決定的で、現在データの誤ラベルを防ぐ。
+- [x] 既存のローリング28日履歴を破壊せず、見出し・schema version・migration noteで意味を訂正する。
+- [x] weekly-reviewが確定7日でKPIを、ローリング28日で候補を扱う。
+- [x] weekly-planが人間承認済み候補だけを最大1〜2件採用し、WIP 5以下を守る。
+- [x] candidate生成、CLI、MCPのread-only性と既存57 testが退行しない。
+- [x] workflow変更を自動化台帳へ反映する。
+- [x] commit/push/PR/deploy、secret変更、外部mutationを行っていない。
+
+### 18.7 実装記録（2026-07-28）
+
+- **期間契約 SSOT**: `.claude/scripts/metrics/lib/periods.mjs`（遅延 GSC=3日/GA4=1日・JST 日付境界・
+  明示 week は「その週の日曜」を anchor に決定的導出・未来週は throw = 誤ラベル防止・
+  `assessDailyCoverage` が欠損日を 0 補完せず列挙）。集計/描画/履歴移行は
+  `lib/weekly-summary.mjs`（`buildGscSummary`/`buildGa4Summary`/`renderGscLatest` 等）。
+- **snapshot 出力**: fetcher が `summary.json`（finalized7d/previous7d/rolling28d + metadata）と
+  GA4 `daily-clean.csv`（Japan-only 14日・coverage 判定用）を追加出力。GA4 KPI totals は
+  country=Japan filter、raw は pollution 監視専用に分離。
+- **履歴移行（値は不変・実データ適用済）**: GSC `history.csv` 15 週を `*_rolling28d` 列名へ改名、
+  GA4 `history.csv` 15 週へ `basis` 列（raw-rolling28d / jp-calendar-week）付与。確定7日の
+  非重複系列は新設 `history-finalized7d.csv`（GSC は committed daily.csv から W18〜W30 の
+  12 週を決定的 backfill。W16/W17/W23 は日別行欠損のため honest skip）。
+- **W30 検証**: finalized7d 892 clicks / 23,239 imp / CTR 3.84%（WoW +8.4%・非重複）を再現。
+  旧 LATEST の「今週 3,224 (+11.5%)」は 21 日重複の rolling 差だったことを LATEST の
+  migration note に明記（position のみ日別 imp 加重で ±0.01 差）。
+- **candidate 承認**: `search-growth/lib/triage.mjs` + CLI `triage/approve/dismiss`
+  （区分各 1・最大 3 件、週 2 件・WIP≤5 を機械強制、insufficient=freshness missing は昇格不可、
+  analyze 再構築で lifecycle を `carryOverStatuses` が引き継ぐ）。MCP は read-only のまま。
+- **workflow gate**: `metrics:check-period-contract`（fetch 側 `--strict` = commit 後に partial を
+  赤くする / search-growth 側 `--max-age-weeks 1` = stale artifact からの再構築を止める）。
+- **tests**: metrics 25 + search-growth 71（triage 10 追加）。
+- **live 未検証**: 新 fetcher の CI 実走（summary.json/daily-clean.csv の実生成、GA4 jp7d 履歴の
+  初回行、Period contract gate の実発火）は次回 `fetch-metrics-weekly` 実行（日曜 20:00 JST）で
+  確認する。旧世代 snapshot（summary.json 無し）の gate は missing 扱い＝GSC は digest が
+  daily.csv から決定的に再構築する。

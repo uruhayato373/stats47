@@ -1,8 +1,10 @@
 /**
  * NSM メトリクスリーダー（週次レビュー用）
  *
- * GA4 + GSC + PageSpeed Insights から今週・前週のデータを取得し、週次レビューに
- * 組み込むためのサマリ + 差分を計算する。`/weekly-review` スキル Phase 1 から呼ばれる。
+ * GA4 + GSC + PageSpeed Insights から確定7日 (finalized7d) と直前の重複しない 7 日
+ * (previous7d) を取得し、週次レビュー用のサマリ + 差分を計算する。`/weekly-review` Phase 0 から呼ばれる。
+ * 期間契約: docs/02_実装計画/39 §18.2 (期間導出は ../metrics/lib/periods.mjs が SSOT)。
+ * GA4 KPI は country=Japan clean slice。GSC は日別欠損を検出し insufficient-data で WoW を止める。
  *
  * stats47 の NSM は「週間エンゲージドセッション数」(GA4 engagedSessions)。
  * 定義は `docs/04_レビュー/*-nsm.md` を参照（最新版は `ls -t docs/04_レビュー/*-nsm.md | head -1`）。
@@ -18,6 +20,8 @@
 import { google } from "googleapis";
 import { readFileSync, existsSync } from "node:fs";
 import path from "node:path";
+import { resolvePeriods, DATA_DELAY_DAYS } from "../metrics/lib/periods.mjs";
+import { assessDailyCoverage } from "../metrics/lib/periods.mjs";
 
 const REPO_ROOT = process.cwd();
 const KEY_CANDIDATES = [
@@ -26,43 +30,41 @@ const KEY_CANDIDATES = [
 ];
 const GA4_PROPERTY_ID = "463218070";
 const GSC_SITE_URL = "sc-domain:stats47.jp";
-const GSC_DELAY_DAYS = 3;
 const PSI_TARGET_URL = "https://stats47.jp/";
+
+const GA4_JAPAN_FILTER = {
+  filter: {
+    fieldName: "country",
+    stringFilter: { matchType: "EXACT", value: "Japan" },
+  },
+};
 
 // ── Date helpers ─────────────────────────────────────────────────
 
-function formatDate(d) {
-  return d.toISOString().split("T")[0];
-}
-
-export function computeWeekRanges() {
-  const today = new Date();
-  const ga4End = new Date(today);
-  ga4End.setDate(ga4End.getDate() - 1);
-  const ga4Start = new Date(ga4End);
-  ga4Start.setDate(ga4Start.getDate() - 6);
-  const ga4PrevEnd = new Date(ga4Start);
-  ga4PrevEnd.setDate(ga4PrevEnd.getDate() - 1);
-  const ga4PrevStart = new Date(ga4PrevEnd);
-  ga4PrevStart.setDate(ga4PrevStart.getDate() - 6);
-
-  const gscEnd = new Date(today);
-  gscEnd.setDate(gscEnd.getDate() - GSC_DELAY_DAYS);
-  const gscStart = new Date(gscEnd);
-  gscStart.setDate(gscStart.getDate() - 6);
-  const gscPrevEnd = new Date(gscStart);
-  gscPrevEnd.setDate(gscPrevEnd.getDate() - 1);
-  const gscPrevStart = new Date(gscPrevEnd);
-  gscPrevStart.setDate(gscPrevStart.getDate() - 6);
-
+/**
+ * 期間契約 (§18.2)。期間の導出は periods.mjs (SSOT) に集約する。
+ * - week 指定時: その ISO 週の日曜を anchor に決定的に再現 (backfill が実行日に依存しない)
+ * - 未来週は periods.mjs が throw する (現在データの過去/未来 week 誤ラベル防止)
+ * @param {{week?:string|null, asOf?:string|null, now?:any}} [opts]
+ */
+export function computeWeekRanges({ week = null, asOf = null, now = Date.now() } = {}) {
+  const ga4 = resolvePeriods({ source: "ga4", week, asOf, now });
+  const gsc = resolvePeriods({ source: "gsc", week, asOf, now });
   return {
+    weekId: gsc.weekId,
+    anchor: gsc.anchor,
+    delayDays: { ...DATA_DELAY_DAYS },
     ga4: {
-      this: { start: formatDate(ga4Start), end: formatDate(ga4End) },
-      prev: { start: formatDate(ga4PrevStart), end: formatDate(ga4PrevEnd) },
+      this: { start: ga4.finalized7d.periodStart, end: ga4.finalized7d.periodEnd },
+      prev: { start: ga4.previous7d.periodStart, end: ga4.previous7d.periodEnd },
+      finalized7d: ga4.finalized7d,
+      previous7d: ga4.previous7d,
     },
     gsc: {
-      this: { start: formatDate(gscStart), end: formatDate(gscEnd) },
-      prev: { start: formatDate(gscPrevStart), end: formatDate(gscPrevEnd) },
+      this: { start: gsc.finalized7d.periodStart, end: gsc.finalized7d.periodEnd },
+      prev: { start: gsc.previous7d.periodStart, end: gsc.previous7d.periodEnd },
+      finalized7d: gsc.finalized7d,
+      previous7d: gsc.previous7d,
     },
   };
 }
@@ -99,8 +101,8 @@ async function fetchGa4Weekly(ranges) {
     "https://www.googleapis.com/auth/analytics.readonly",
   ]);
 
-  // 同一期間内で 2 期間比較するため、2 回 API を叩いて合算する
-  const [thisRes, prevRes] = await Promise.all([
+  // KPI は Japan-only clean slice (§18.2)。raw (無フィルタ) は pollution 監視専用に別取得する。
+  const [thisRes, prevRes, rawThisRes] = await Promise.all([
     runGa4Report(auth, {
       dateRanges: [{ startDate: ranges.this.start, endDate: ranges.this.end }],
       dimensions: [{ name: "sessionDefaultChannelGroup" }],
@@ -110,6 +112,7 @@ async function fetchGa4Weekly(ranges) {
         { name: "engagedSessions" },
         { name: "engagementRate" },
       ],
+      dimensionFilter: GA4_JAPAN_FILTER,
       limit: 20,
     }),
     runGa4Report(auth, {
@@ -121,7 +124,12 @@ async function fetchGa4Weekly(ranges) {
         { name: "engagedSessions" },
         { name: "engagementRate" },
       ],
+      dimensionFilter: GA4_JAPAN_FILTER,
       limit: 20,
+    }),
+    runGa4Report(auth, {
+      dateRanges: [{ startDate: ranges.this.start, endDate: ranges.this.end }],
+      metrics: [{ name: "sessions" }, { name: "engagedSessions" }],
     }),
   ]);
 
@@ -205,7 +213,24 @@ async function fetchGa4Weekly(ranges) {
 
   const organic = channels.find((c) => c.channel === "Organic Search") || null;
 
-  return { channels, total, organic };
+  // pollution 監視: raw (無フィルタ) − Japan-only の残余 = overseas/(not set) 汚染量の推定。
+  // raw を KPI/WoW へ混ぜない (§18.2)。
+  const rawRow = rawThisRes.rows?.[0];
+  const rawSessions = rawRow ? parseFloat(rawRow.metricValues?.[0]?.value || "0") : null;
+  const pollution =
+    rawSessions !== null
+      ? {
+          rawSessions,
+          jpSessions: total.thisSessions,
+          pollutedSessions: rawSessions - total.thisSessions,
+          pollutedPct:
+            rawSessions > 0
+              ? Number((((rawSessions - total.thisSessions) / rawSessions) * 100).toFixed(1))
+              : null,
+        }
+      : null;
+
+  return { channels, total, organic, pollution, slice: "country=Japan (clean)" };
 }
 
 // ── GSC ───────────────────────────────────────────────────────────
@@ -229,14 +254,33 @@ async function fetchGscWeekly(ranges) {
     "https://www.googleapis.com/auth/webmasters.readonly",
   ]);
 
-  const [thisTotal, prevTotal, topQueries] = await Promise.all([
+  const [thisTotal, prevTotal, topQueries, dailyRows] = await Promise.all([
     fetchGscQuery(auth, ranges.this.start, ranges.this.end),
     fetchGscQuery(auth, ranges.prev.start, ranges.prev.end),
     fetchGscQuery(auth, ranges.this.start, ranges.this.end, {
       dimensions: ["query"],
       rowLimit: 10,
     }),
+    // 日別行 (previous7d〜finalized7d の 14 日) — 欠損日の検出用。0 補完しない (§18.2)
+    fetchGscQuery(auth, ranges.prev.start, ranges.this.end, {
+      dimensions: ["date"],
+      rowLimit: 31,
+    }),
   ]);
+
+  const presentDates = dailyRows.map((r) => r.keys[0]);
+  const coverage = {
+    finalized7d: assessDailyCoverage(
+      { periodStart: ranges.this.start, periodEnd: ranges.this.end },
+      presentDates,
+    ),
+    previous7d: assessDailyCoverage(
+      { periodStart: ranges.prev.start, periodEnd: ranges.prev.end },
+      presentDates,
+    ),
+  };
+  const kpiComplete =
+    coverage.finalized7d.status === "complete" && coverage.previous7d.status === "complete";
 
   const normalize = (row) =>
     row
@@ -252,6 +296,11 @@ async function fetchGscWeekly(ranges) {
   const prevData = normalize(prevTotal[0]);
 
   return {
+    coverage,
+    kpiComplete,
+    insufficientReason: kpiComplete
+      ? null
+      : `insufficient-data: finalized7d=${coverage.finalized7d.status} (missing ${coverage.finalized7d.missingDates.join(",") || "-"}) / previous7d=${coverage.previous7d.status} (missing ${coverage.previous7d.missingDates.join(",") || "-"})`,
     total: {
       thisClicks: thisData.clicks,
       prevClicks: prevData.clicks,
@@ -326,8 +375,10 @@ async function fetchPsiSummary(targetUrl = PSI_TARGET_URL) {
 
 // ── Main entry ────────────────────────────────────────────────────
 
-export async function fetchWeeklyNsmMetrics() {
-  const ranges = computeWeekRanges();
+export async function fetchWeeklyNsmMetrics({ week = null, asOf = null } = {}) {
+  // 期間は periods.mjs (SSOT) が week/asOf から決定的に導出する。未来週はここで throw。
+  const ranges = computeWeekRanges({ week, asOf });
+  const generatedAt = new Date().toISOString();
 
   const [ga4, gsc, psi] = await Promise.all([
     fetchGa4Weekly(ranges.ga4).catch((e) => ({
@@ -339,15 +390,95 @@ export async function fetchWeeklyNsmMetrics() {
     fetchPsiSummary().catch((e) => ({ error: `PSI 取得失敗: ${e.message}` })),
   ]);
 
+  // §18.2 契約ブロック: 期間 metadata 付きの確定7日 KPI。weekly-plan/runbook はここを読む。
+  const meta = (source, period, limitations) => ({
+    periodStart: period.periodStart,
+    periodEnd: period.periodEnd,
+    windowDays: period.windowDays,
+    isFinalized: true,
+    generatedAt,
+    source,
+    limitations,
+  });
+  const gscLimitations = [
+    `取得遅延 ${ranges.delayDays.gsc} 日 (anchor=${ranges.anchor})`,
+  ];
+  const ga4Limitations = [
+    `取得遅延 ${ranges.delayDays.ga4} 日 (anchor=${ranges.anchor})`,
+    "KPI は country=Japan clean slice。raw は pollution 監視専用 (§18.2)",
+  ];
+  const finalized7d = {
+    gsc: gsc.error
+      ? { error: gsc.error }
+      : {
+          ...meta("gsc", ranges.gsc.finalized7d, gscLimitations),
+          kpis: gsc.kpiComplete
+            ? {
+                clicks: gsc.total.thisClicks,
+                impressions: gsc.total.thisImpressions,
+                ctr: gsc.total.thisCtr,
+                position: gsc.total.thisPosition,
+              }
+            : null,
+          coverage: gsc.coverage.finalized7d,
+          status: gsc.kpiComplete ? "complete" : "insufficient-data",
+          insufficientReason: gsc.insufficientReason,
+        },
+    ga4: ga4.error
+      ? { error: ga4.error }
+      : {
+          ...meta("ga4", ranges.ga4.finalized7d, ga4Limitations),
+          kpis: {
+            activeUsers: ga4.total.thisUsers,
+            sessions: ga4.total.thisSessions,
+            engagedSessions: ga4.total.thisEngagedSessions,
+          },
+          pollution: ga4.pollution,
+        },
+  };
+  const previous7d = {
+    gsc: gsc.error
+      ? { error: gsc.error }
+      : {
+          ...meta("gsc", ranges.gsc.previous7d, gscLimitations),
+          kpis: gsc.kpiComplete
+            ? {
+                clicks: gsc.total.prevClicks,
+                impressions: gsc.total.prevImpressions,
+                ctr: gsc.total.prevCtr,
+                position: gsc.total.prevPosition,
+              }
+            : null,
+          coverage: gsc.coverage.previous7d,
+          status: gsc.kpiComplete ? "complete" : "insufficient-data",
+        },
+    ga4: ga4.error
+      ? { error: ga4.error }
+      : {
+          ...meta("ga4", ranges.ga4.previous7d, ga4Limitations),
+          kpis: {
+            activeUsers: ga4.total.prevUsers,
+            sessions: ga4.total.prevSessions,
+            engagedSessions: ga4.total.prevEngagedSessions,
+          },
+        },
+  };
+
   return {
-    generated_at: new Date().toISOString(),
+    generated_at: generatedAt,
+    schemaVersion: 2,
+    weekId: ranges.weekId,
+    anchor: ranges.anchor,
     ranges,
+    finalized7d,
+    previous7d,
     ga4,
     gsc,
     psi,
     notes: [
-      `GSC データは 3 日遅延のため、直近期間は ${ranges.gsc.this.start} 〜 ${ranges.gsc.this.end} を採用`,
-      "NSM = 週間エンゲージドセッション数 (GA4 engagedSessions 全チャネル合計)",
+      `期間契約 §18.2: KPI/WoW は finalized7d (GSC ${ranges.gsc.this.start}〜${ranges.gsc.this.end} / GA4 ${ranges.ga4.this.start}〜${ranges.ga4.this.end}) と直前の重複しない previous7d のみ`,
+      "GA4 は country=Japan clean slice (raw は pollution 監視専用)",
+      "NSM = 週間エンゲージドセッション数 (GA4 engagedSessions 全チャネル合計・Japan-only)",
       "NSM 定義: docs/04_レビュー/*-nsm.md",
     ],
   };
@@ -373,10 +504,17 @@ export function formatNsmSection(metrics) {
   } else {
     const r = metrics.ranges.ga4;
     lines.push(
-      `### GA4 (${r.this.start} 〜 ${r.this.end} vs ${r.prev.start} 〜 ${r.prev.end})`,
+      `### GA4 jpFinalized7d (${r.this.start} 〜 ${r.this.end} vs 直前7日 ${r.prev.start} 〜 ${r.prev.end}・重複なし・Japan-only)`,
     );
     lines.push("");
-    lines.push("| 指標 | 今週 | 前週 | 増減 |");
+    if (metrics.ga4.pollution) {
+      const p = metrics.ga4.pollution;
+      lines.push(
+        `> pollution 監視: raw sessions ${p.rawSessions} − JP ${p.jpSessions} = ${p.pollutedSessions} (${p.pollutedPct ?? "-"}%)。raw は KPI へ混ぜない。`,
+      );
+      lines.push("");
+    }
+    lines.push("| 指標 | 確定7日 | 直前7日 | 増減 |");
     lines.push("|---|---:|---:|---:|");
     const t = metrics.ga4.total;
     lines.push(
@@ -406,13 +544,22 @@ export function formatNsmSection(metrics) {
   if (metrics.gsc.error) {
     lines.push(`⚠️ GSC: ${metrics.gsc.error}`);
     lines.push("");
+  } else if (metrics.gsc.kpiComplete === false) {
+    const r = metrics.ranges.gsc;
+    lines.push(
+      `### GSC finalized7d (${r.this.start} 〜 ${r.this.end}) — ⚠️ insufficient-data`,
+    );
+    lines.push("");
+    lines.push(`${metrics.gsc.insufficientReason}`);
+    lines.push("欠損日は 0 補完しない。WoW・フェーズゲート判定は停止する (§18.2)。");
+    lines.push("");
   } else {
     const r = metrics.ranges.gsc;
     lines.push(
-      `### GSC (${r.this.start} 〜 ${r.this.end} vs ${r.prev.start} 〜 ${r.prev.end})`,
+      `### GSC finalized7d (${r.this.start} 〜 ${r.this.end} vs 直前7日 ${r.prev.start} 〜 ${r.prev.end}・重複なし)`,
     );
     lines.push("");
-    lines.push("| 指標 | 今週 | 前週 | 増減 |");
+    lines.push("| 指標 | 確定7日 | 直前7日 | 増減 |");
     lines.push("|---|---:|---:|---:|");
     const t = metrics.gsc.total;
     lines.push(
@@ -434,7 +581,7 @@ export function formatNsmSection(metrics) {
     lines.push("");
 
     if (metrics.gsc.topQueries.length > 0) {
-      lines.push("#### トップクエリ（今週）");
+      lines.push("#### トップクエリ（確定7日）");
       lines.push("| # | query | clicks | impr | CTR | pos |");
       lines.push("|---:|---|---:|---:|---:|---:|");
       metrics.gsc.topQueries.forEach((q, i) => {
@@ -504,7 +651,8 @@ export function formatNsmSection(metrics) {
 // CLI 直接実行時
 if (import.meta.url === `file://${process.argv[1]}`) {
   const mode = process.argv.includes("--json") ? "json" : "markdown";
-  const metrics = await fetchWeeklyNsmMetrics();
+  const week = process.argv.find((a) => /^\d{4}-W\d{2}$/.test(a)) ?? null;
+  const metrics = await fetchWeeklyNsmMetrics({ week });
   if (mode === "json") {
     console.log(JSON.stringify(metrics, null, 2));
   } else {
