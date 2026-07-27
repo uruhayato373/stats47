@@ -91,6 +91,13 @@ Phase 6 (2026-05-27) の D1 → R2 移行後、本 agent は D1 stats_* テー�
   (middleware は `isGone || !isKnown` で 410)。公開は config 起点の多段再生成 (generate-ranking-items 配線 +
   known 再生成 + sitemap/indexable + 再デプロイ + purge + 本番実測) が必要。手順: memory
   `project_ranking_publish_pipeline_gap` / `docs/todo/02_機能バックログ.md`。activate 量産時はここまでをセットで計画すること
+- **観測値投入だけでは配信されない (2026-07-27)**: `app/stats/<metric>/values.json` に観測値を投入しても、
+  配信用の `app/ranking/<key>/values.json` (実描画値・OGP・blog が読む) が別途 `generate-ranking-values.ts`
+  (sync-snapshots の `ranking-values` task、`ranking-items` の後) で生成されないと空ページ配信になる。
+  Phase 6 (2026-05-27) でこの writer が 2 ヶ月間不在化し、新規投入した metric が sitemap 掲載済みのまま
+  「データがありません」を返し続けていた事故が発生 (`docs/04_レビュー/2026-07-27-ranking-values-incident.md`)。
+  新規 metric 投入後は `values.json` 生成まで完了しているかを確認すること (`.claude/rules/metric-config-standards.md`
+  「isActive:true ≠ 本番公開」参照)
 
 ## Output Contract
 

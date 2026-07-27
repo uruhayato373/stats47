@@ -81,15 +81,20 @@ ranking は異なる）。いずれにせよ **200 にはならない**ので、
 公開には config(isActive) を起点に以下を整合再生成する（依存順・詳細手順は memory
 `project_ranking_publish_pipeline_gap` / `docs/todo/02_機能バックログ.md`「122 metric の本番公開」）:
 
-1. R2 `app/ranking-items/all.json` + `app/ranking/<key>/item.json` 再生成（`packages/ranking/src/scripts/generate-ranking-items.ts`。※ 2026-06 時点で sync-snapshots 未配線）
-2. `KNOWN_RANKING_KEYS` 再生成（`apps/web/scripts/generate-known-ranking-keys.ts`）
-3. `SITEMAP_RANKING_KEYS` / `INDEXABLE_RANKING_KEYS` 再生成
-4. 再デプロイ → CDN purge（GONE の 410 は 7 日エッジキャッシュ。未登録キーの 404 は ISR）
-5. **本番 URL を Googlebot UA で実測**し 200 を確認（`/deploy` Step 7.5）
+1. R2 `app/ranking-items/all.json` + `app/ranking/<key>/item.json` 再生成（`packages/ranking/src/scripts/generate-ranking-items.ts`。CI: `sync-snapshots.yml` の `ranking-items` task で配線済み）
+2. R2 `app/ranking/<key>/values.json` 再生成（`packages/ranking/src/scripts/generate-ranking-values.ts`。正典 `app/stats/<metric>/values.json` から配信用に決定的変換。CI: `sync-snapshots.yml` の `ranking-values` task、**必ず ranking-items の後**に実行する。実描画値・OGP・blog がこれを読むため、未生成だと stale 配信 or 空ページになる。★2026-07-27 に Phase 6 (2026-05-27) 以降 2 ヶ月間 writer が不在化していたことが判明し復旧済み — `docs/04_レビュー/2026-07-27-ranking-values-incident.md`）
+3. `KNOWN_RANKING_KEYS` 再生成（`apps/web/scripts/generate-known-ranking-keys.ts`）
+4. `SITEMAP_RANKING_KEYS` / `INDEXABLE_RANKING_KEYS` 再生成
+5. 再デプロイ → CDN purge（GONE の 410 は 7 日エッジキャッシュ。未登録キーの 404 は ISR）
+6. **本番 URL を Googlebot UA で実測**し 200 を確認（`/deploy` Step 7.5）
 
-> 2026-06-03 事故: 122 metric を `isActive:true` 化 + `GONE_RANKING_KEYS` 除去だけ行い、上記 2-5 未反映で
+> 2026-06-03 事故: 122 metric を `isActive:true` 化 + `GONE_RANKING_KEYS` 除去だけ行い、上記 3-6 未反映で
 > 全件未達だった（当時の middleware は ranking 未登録キーを 410 にしていた。2026-06-06 `5d9afb24` 以降は
 > 404 に変更。いずれも 200 ではない）。「isActive を変えた=公開した」と思い込まないこと。
+>
+> 2026-07-27 事故: 上記ステップ 2 (`app/ranking/<key>/values.json` 生成) が Phase 6 (2026-05-27) の
+> D1→R2 移行時に writer 不在のまま 2 ヶ月間欠落し、既存ランキングは stale 配信・新規 67 metric は
+> 空ページのまま sitemap 掲載されていた。「isActive:true + item.json だけで公開完了」とも思い込まないこと。
 
 ## 関連
 

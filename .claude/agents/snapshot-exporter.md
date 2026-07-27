@@ -14,6 +14,10 @@ db-manager から snapshot 系を切り出した。 永続 DB への write は�
 ## 担当範囲
 
 - git TS / R2 観測値 → R2 snapshot 派生 (`/sync-snapshots`)
+  - うち `app/ranking/<key>/values.json` (配信用ランキング値) は `generate-ranking-values.ts` が正典
+    `app/stats/<metric>/values.json` から決定的変換する。**`ranking-items` task の後に実行必須**
+    (2026-07-27 に Phase 6 以降 2 ヶ月間 writer 不在化していた事故の恒久対策。
+    `.claude/rules/metric-config-standards.md`「isActive:true ≠ 本番公開」参照)
 - → `apps/remotion/public/<feature>/*.json` (動画用 static JSON、 `/export-d1-to-remotion-static`)
 - 相関分析 (`/recompute-correlations`: R2 観測値からエフェメラル計算 → R2)
 - ブログ記事 article.md → R2 同期 (`/sync-articles` の派生フェーズ、 push は委譲)
