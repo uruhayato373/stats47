@@ -1,0 +1,109 @@
+name: 📊 Ranking Data Integrity Audit (weekly)
+
+# ランキング配信 (R2) の実データ整合性を live 実測で週次検知する。read-only (R2 write なし)。
+#
+# 背景 (2026-07-27 実測): active な 2,179 ランキングのうち 67 件で
+# `app/ranking/<key>/values.json` が 404 (公開以来ずっとチャートが空ページ)。残り約 2,112 件の
+# values.json は 2026-05-27 (Phase 6) 以降 writer 不在で凍結された stale データ。item.json は
+# fresh 生成されるため item.latestYear と values の最新年がズレうる。また `app/home/featured.json`
+# が count:0 に汚染され category/survey の一部も同時に汚染された障害も過去にあった。
+# いずれも 2 ヶ月間検知されなかった。本 workflow はこれを機械的に週次検知する。
+#
+# 別途 Phase C で values.json writer を復活させる予定だが、本監査はそれと独立に
+# 「今の R2 の実態」を検査するもの (writer が直っても有効であり続ける)。
+#
+# 検査項目: item.json 実在 / values.json 実在 / item↔values 年整合 /
+# home featured 件数 / survey・category snapshot の件数下限 (絶対フロア + 前回実行比ドリフト)。
+#
+# 正典: packages/ranking/src/scripts/audit-ranking-data-integrity.ts (実装コメント参照)
+
+on:
+  schedule:
+    - cron: "30 19 * * 6" # 土 19:30 UTC = 日 04:30 JST (internal-link-audit 04:00 の後、他 cron と非重複)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: ranking-integrity-audit
+  cancel-in-progress: false
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: 🧰 Checkout develop
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: develop
+          fetch-depth: 1
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 🔎 Audit ranking data integrity
+        id: check
+        run: |
+          set +e
+          mkdir -p .claude/state/ranking
+          npx tsx packages/ranking/src/scripts/audit-ranking-data-integrity.ts \
+            --json .claude/state/ranking/integrity-audit.json \
+            2>&1 | tee /tmp/ranking-integrity-audit.log
+          echo "exit_code=${PIPESTATUS[0]}" >> "$GITHUB_OUTPUT"
+
+      - name: 📤 Commit audit result to develop
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .claude/state/ranking/integrity-audit.json
+          if git diff --cached --quiet; then
+            echo "No audit changes"
+            exit 0
+          fi
+          git commit -m "chore(ranking): weekly data integrity audit $(date -u +%Y-%m-%d) [skip ci]"
+          git push origin develop
+
+      - name: 🚨 Open issue on integrity violations
+        if: steps.check.outputs.exit_code != '0'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          DATE=$(date -u +%Y-%m-%d)
+          TITLE="[Ranking Alert] ランキングデータ整合性の異常"
+          {
+            echo "## ランキングデータ整合性 週次監査 ($DATE)"
+            echo ""
+            echo "R2 配信データの実態に異常を検出しました (read-only 監査。curl 相当の HEAD/GET のみ)。"
+            echo ""
+            echo '```'
+            sed -n '/^## /,$p' /tmp/ranking-integrity-audit.log | head -80
+            echo '```'
+            echo ""
+            echo "是正手順:"
+            echo "- values.json 欠落 → Phase C の values writer 復活を待つか、個別に \`generate-ranking-values.ts\` で再生成"
+            echo "- item↔values 年整合ズレ → item.json (fresh 生成) と values.json (stale) のどちらが正か確認して再生成"
+            echo "- home/survey/category 件数の急減 → \`export-master-snapshots.ts\` の再生成漏れ・部分集合汚染を疑う"
+            echo ""
+            echo "詳細 (全件 JSON): \`.claude/state/ranking/integrity-audit.json\` (このコミットで develop に反映済み)"
+            echo ""
+            echo "正典: packages/ranking/src/scripts/audit-ranking-data-integrity.ts"
+          } > /tmp/ranking-integrity-issue.md
+
+          gh label create ranking-alert --description "ランキングデータ整合性の異常" --color "b60205" --force 2>/dev/null || true
+
+          EXISTING=$(gh issue list --state open --label ranking-alert --search "\"[Ranking Alert]\" in:title" --json number --jq '.[0].number // empty')
+          if [ -n "$EXISTING" ]; then
+            echo "Existing open issue #$EXISTING — appending comment"
+            gh issue comment "$EXISTING" --body-file /tmp/ranking-integrity-issue.md
+          else
+            gh issue create --title "$TITLE" --label "ranking-alert,auto-generated" --body-file /tmp/ranking-integrity-issue.md
+          fi

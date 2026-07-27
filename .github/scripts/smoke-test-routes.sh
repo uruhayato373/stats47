@@ -129,11 +129,32 @@ for url in "${URLS[@]}" "${STRICT_URLS[@]}"; do
   echo "  ✅ ${title:0:60}"
 done
 
+# home/featured.json の件数検査 (2026-07-27 障害の再発防止):
+#   master export (exportRankingItemsPerUrl) が R2 item.json を部分列挙して「全件」と
+#   誤認し、トップページの注目ランキングが count:0 で消えた。title/HTTPステータスは
+#   home '/' で正常 (200・notFoundでもない) なため上の route smoke ではすり抜ける。
+#   HOME_FEATURED_RANKINGS の定義数 (8件、packages/data-configs/src/home-featured-rankings.ts)
+#   を下回ったら fail する。
+echo ""
+echo "🏠 home/featured.json count check"
+FEATURED_URL="https://storage.stats47.jp/app/home/featured.json"
+FEATURED_JSON="$(curl -s --max-time 20 "$FEATURED_URL" 2>/dev/null)"
+FEATURED_COUNT="$(echo "$FEATURED_JSON" | grep -o '"count"[[:space:]]*:[[:space:]]*[0-9]*' | head -1 | grep -o '[0-9]*$')"
+FEATURED_MIN=8
+checked=$((checked + 1))
+if [ -z "$FEATURED_COUNT" ] || [ "$FEATURED_COUNT" -lt "$FEATURED_MIN" ]; then
+  echo "  ❌ [featured count] ${FEATURED_URL} → count=${FEATURED_COUNT:-<unreadable>} (expected >= ${FEATURED_MIN})"
+  fail=$((fail + 1))
+else
+  echo "  ✅ home/featured.json count=${FEATURED_COUNT}"
+fi
+
 echo ""
 if [ "$fail" -gt 0 ]; then
   echo "❌ Smoke test FAILED: ${fail}/${checked} route(s) returning notFound / og:image error / HTTP error."
   echo "   → notFound: generateStaticParams を R2 依存 route に付けていないか (.claude/rules/nextjs-ssg-preservation.md)"
   echo "   → og:image 非200: openGraph.images 未指定でランタイム opengraph-image に落ちていないか (.claude/rules/ogp-image-standards.md)"
+  echo "   → featured count 不足: master export (sync-snapshots) が R2 item.json を部分列挙していないか (NODE_ENV=production を確認)"
   exit 1
 fi
 echo "✅ Smoke test passed: ${checked}/${checked} representative routes OK."

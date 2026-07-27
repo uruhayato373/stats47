@@ -103,6 +103,17 @@ jobs:
       # 再生成 → R2 push (run.sh は CI=true で push する)。
       # ※ correlation snapshot の生成 task は run.sh から廃止済 (producer 未実装)。観測値更新後も
       #   app/correlation/* は再生成されない (別途エフェメラル計算の実装が必要 / 機能バックログ)。
+      #
+      # ★NODE_ENV=production 必須 (2026-07-27 障害の再発防止): run.sh の TSX ラッパ
+      #   (packages/ranking/src/scripts/setup-cli.js) は NODE_ENV 未設定なら "development" を
+      #   立てる。development だと packages/r2-storage の listFromR2 が S3 ではなく
+      #   .local/r2 ローカル FS を列挙するため、item-metadata-refresh --apply が一部の
+      #   item.json だけ (差分パッチ分) を staging に書いた直後に master export を走らせると
+      #   「一部を全件」と誤認して home/featured.json 等が count:0 で R2 に上書きされる
+      #   (この job は R2_ACCESS_KEY_ID 等 S3 認証を持つため、production にすれば S3 API 経由の
+      #   一覧に切り替わる。既知の罠: memory project_kakei_expansion_pipeline_gotchas)。
       - name: 🗂️ Regenerate derived snapshots + push to R2
         if: inputs.dry_run != 'true'
+        env:
+          NODE_ENV: production
         run: bash .claude/skills/db/sync-snapshots/run.sh

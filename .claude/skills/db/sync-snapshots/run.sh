@@ -25,9 +25,14 @@ TSX="npx tsx -r ./packages/ranking/src/scripts/setup-cli.js"
 # (label, script_path) のペアで定義
 # remotion-static は Remotion 用 public/<feature>/*.json を D1 から再生成 (R2 push 対象外、ローカル file のみ更新)
 #
-# Phase 6 (2026-05-27): stats_* テーブル DROP に伴い、ranking-values / ranking-normalized-values /
+# Phase 6 (2026-05-27): stats_* テーブル DROP に伴い、ranking-normalized-values /
 # ranking-download の各 D1 export task は廃止。観測値は app/stats/<metric>/*.json として
 # /page-data-batch (Phase 6.4) で R2 に直接書込まれる。
+#
+# ★ranking-values は 2026-07-27 に復活 (D1 版とは別実装)。Phase 6 で D1 export を廃止した際に
+# 代替 writer が作られず、配信用 app/ranking/<key>/values.json が 2 ヶ月間凍結していた
+# (runtime の全描画値・OGP・blog がこれを読むため stale 配信 + 新規 metric は空ページ化)。
+# 新 writer は app/stats (正典) を入力に決定的変換する。ranking-items の後に置くこと。
 # correlation は 2026-06-14 に復活: D1 ではなく R2 観測値を入力に使い捨て :memory: SQLite で
 # 集計するエフェメラル producer (build-correlation-snapshot.ts) として再実装 (DBレス Derived)。
 declare -a TASKS=(
@@ -35,6 +40,7 @@ declare -a TASKS=(
   "item-metadata-refresh|packages/ranking/src/scripts/refresh-item-metadata.ts --apply"
   "master|packages/ranking/src/scripts/export-master-snapshots.ts"
   "ranking-items|packages/ranking/src/scripts/generate-ranking-items.ts"
+  "ranking-values|packages/ranking/src/scripts/generate-ranking-values.ts"
   "item-seo-refresh|packages/ranking/src/scripts/refresh-item-seo.ts --apply"
   "area-profile|packages/area-profile/src/scripts/export-snapshot.ts"
   "city-profile|packages/area-profile/src/scripts/export-city-snapshot.ts"
