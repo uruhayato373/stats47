@@ -71,6 +71,12 @@ const RETENTION_TARGETS: RetentionTarget[] = [
     reason: "app/blog/<slug>/* へ移行済み",
   },
   {
+    id: "migrated-area-profile",
+    prefix: "app/area-profile/",
+    reason:
+      "app/areas/<code>/profile.json へ移行済み。現行 reader/exporter は app/areas/ のみ構築する",
+  },
+  {
     id: "retired-fishing-ports",
     prefix: "app/fishing-ports/",
     reason:
