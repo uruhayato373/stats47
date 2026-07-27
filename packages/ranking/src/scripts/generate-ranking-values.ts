@@ -153,9 +153,32 @@ interface Outcome {
   error?: string;
 }
 
+/**
+ * 一時的なネットワークエラー (undici の "terminated" 等) を再試行する。
+ *
+ * 2,255 キーを一括処理するため、1 件の瞬断でバッチ全体が落ちるのは割に合わない
+ * (2026-07-27 初回実行で written=2244 / failed=1 "terminated" が実発生し、
+ *  run.sh が push 前に exit したため 2,244 件の生成が無駄になった)。
+ * 読み取りは冪等なので安全に再試行できる。
+ */
+async function withRetry<T>(fn: () => Promise<T>, attempts = 3): Promise<T> {
+  let lastError: unknown;
+  for (let i = 0; i < attempts; i++) {
+    try {
+      return await fn();
+    } catch (error) {
+      lastError = error;
+      if (i < attempts - 1) {
+        await new Promise((resolve) => setTimeout(resolve, 500 * 2 ** i));
+      }
+    }
+  }
+  throw lastError;
+}
+
 async function generateOne(config: MetricConfig, dryRun: boolean): Promise<Outcome> {
   try {
-    const payload = await readStatsValues(config.key, AREA_TYPE);
+    const payload = await withRetry(() => readStatsValues(config.key, AREA_TYPE));
     if (!payload || payload.rows.length === 0) {
       return { key: config.key, status: "skipped-no-values" };
     }
