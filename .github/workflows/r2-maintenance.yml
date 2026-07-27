@@ -1,0 +1,105 @@
+name: 🗄️ R2 maintenance (du / retention)
+
+# R2 の容量計測と保持ポリシー実行 (legacy prefix 削除・ISR 世代 GC) の唯一の実行窓口。
+# 正典: .claude/rules/r2-storage-design.md「R2 保持・削除ポリシー」
+#
+# 安全設計:
+# - 削除できる prefix は r2-retention.ts の RETENTION_TARGETS (コード内 allowlist) だけ。
+#   任意 prefix を受け取る入力は持たない (誤入力で配信データを消せない)。
+# - PROTECTED_PREFIXES と重なる target があればスクリプトが起動時に throw する。
+# - dry_run 既定 true。実削除は dry_run=false を明示したときだけ。
+# - concurrency group r2-write で他の R2 writer と直列化する。
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "実行内容"
+        required: true
+        type: choice
+        default: du
+        options:
+          - du
+          - retention-legacy
+          - isr-generations
+      dry_run:
+        description: "true: 削除せず対象一覧のみ (retention-legacy / isr-generations)"
+        required: false
+        default: "true"
+      depth:
+        description: "du の集計レベル (既定 1)"
+        required: false
+        default: "1"
+      target:
+        description: "retention-legacy で 1 target だけ実行する場合の id (空なら全 target)"
+        required: false
+        default: ""
+      keep:
+        description: "isr-generations で残す世代数 (既定 3)"
+        required: false
+        default: "3"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: r2-write
+  cancel-in-progress: false
+
+env:
+  R2_S3_ENDPOINT: https://${{ secrets.CLOUDFLARE_ACCOUNT_ID }}.r2.cloudflarestorage.com
+  R2_ACCESS_KEY_ID: ${{ secrets.CLOUDFLARE_R2_ACCESS_KEY_ID }}
+  R2_SECRET_ACCESS_KEY: ${{ secrets.CLOUDFLARE_R2_SECRET_ACCESS_KEY }}
+  CLOUDFLARE_R2_BUCKET_NAME: stats47
+
+jobs:
+  maintenance:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: 🧰 Checkout develop
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: develop
+          fetch-depth: 1
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 📏 R2 du (容量計測)
+        if: inputs.mode == 'du'
+        run: |
+          npx tsx packages/r2-storage/src/scripts/r2-du.ts --depth "${{ inputs.depth || '1' }}" 2>&1 \
+            | tee -a "$GITHUB_STEP_SUMMARY"
+
+      - name: 🧹 Retention (legacy prefix)
+        if: inputs.mode == 'retention-legacy'
+        run: |
+          # ARGS は配列で組む ("$ARGS" 単一引数渡しは 1 トークン化する — ARG_VECTOR_QUOTED)
+          ARGS=()
+          if [ -n "${{ inputs.target }}" ]; then
+            ARGS+=(--target "${{ inputs.target }}")
+          fi
+          if [ "${{ inputs.dry_run }}" = "false" ]; then
+            ARGS+=(--apply)
+          fi
+          echo "r2-retention.ts ${ARGS[*]}"
+          npx tsx packages/r2-storage/src/scripts/r2-retention.ts "${ARGS[@]}" 2>&1 \
+            | tee -a "$GITHUB_STEP_SUMMARY"
+
+      - name: 🧹 ISR incremental-cache 世代 GC
+        if: inputs.mode == 'isr-generations'
+        run: |
+          ARGS=(--keep "${{ inputs.keep || '3' }}")
+          if [ "${{ inputs.dry_run }}" = "false" ]; then
+            ARGS+=(--apply)
+          fi
+          echo "audit-incremental-cache.ts ${ARGS[*]}"
+          npx tsx packages/r2-storage/src/scripts/audit-incremental-cache.ts "${ARGS[@]}" 2>&1 \
+            | tee -a "$GITHUB_STEP_SUMMARY"
