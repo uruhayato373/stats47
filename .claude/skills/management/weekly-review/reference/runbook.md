@@ -116,7 +116,7 @@ node .claude/scripts/snapshot-weekly-metrics.mjs [YYYY-Www]
    - raw: overview.csv / pages.csv(全件) / channels.csv / devices.csv / daily.csv
    - clean: overview-clean.csv / channels-clean.csv (country=Japan only, engagedSessions/engagementRate 含む)
    - pollution-summary.csv (overseas_sessions / notSet_sessions の bot 推定 1 行)
-   レビュー本文には **raw と clean の両方を併記**し、bot 影響を視覚化する（詳細: `docs/04_レビュー/2026-05-16-ga4-bot-pollution.md`）。
+   レビュー本文には **raw と clean の両方を併記**し、bot 影響を視覚化する（背景: `.claude/skills/analytics/fetch-ga4-data/SKILL.md` の「クリーン値併記」+ memory `feedback_ga4_history_unreliable_wow`。W20 の bot 混入監査文書は廃止済み）。
    取得完了後、`/ga4-improvement observe` を実行する。observe は以下を行う:
    - 新しい `[GA4 Snapshot] YYYY-Www` Issue を `ga4-snapshot` ラベルで作成
    - budgets.json で閾値判定
@@ -260,7 +260,7 @@ node .claude/scripts/snapshot-weekly-metrics.mjs [YYYY-Www]
 
 ### Phase 2.5: 実測値の反映先確認
 
-旧 `docs/02_実装計画/02_実装ロードマップ.md` は廃止済み。実測値は `docs/02_実装計画/01_収益化マスタープラン.md` の Phase / KPI と、`docs/todo/01_改善バックログ.md` の effect 判定に反映する。
+旧「実装ロードマップ」文書は廃止済み。実測値は `docs/02_実装計画/01_収益化マスタープラン.md` の Phase / KPI と、`docs/todo/01_改善バックログ.md` の effect 判定に反映する。
 
 #### 取得するデータ
 
