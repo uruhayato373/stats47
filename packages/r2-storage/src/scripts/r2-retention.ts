@@ -1,5 +1,5 @@
 /**
- * R2 保持ポリシーの実行 (legacy prefix の棚卸しと削除)。
+ * R2 保持ポリシーの実行 (移行済み旧 prefix の棚卸しと削除)。
  *
  * 正典: `.claude/rules/r2-storage-design.md`「R2 保持・削除ポリシー」
  *
@@ -11,7 +11,7 @@
  *
  * 使い方:
  *   npx tsx packages/r2-storage/src/scripts/r2-retention.ts
- *   npx tsx packages/r2-storage/src/scripts/r2-retention.ts --target legacy-bare-ranking
+ *   npx tsx packages/r2-storage/src/scripts/r2-retention.ts --target migrated-bare-ranking
  *   npx tsx packages/r2-storage/src/scripts/r2-retention.ts --apply
  */
 import { config } from "dotenv";
@@ -40,33 +40,33 @@ interface RetentionTarget {
  */
 const RETENTION_TARGETS: RetentionTarget[] = [
   {
-    id: "legacy-bare-ranking-items",
+    id: "migrated-bare-ranking-items",
     prefix: "ranking-items/",
     reason: "app/ranking-items/all.json へ移行済み (reader は app/ 版のみ参照)",
   },
   {
-    id: "legacy-bare-surveys",
+    id: "migrated-bare-surveys",
     prefix: "surveys/",
     reason: "app/survey/all.json へ移行済み",
   },
   {
-    id: "legacy-bare-area-profile",
+    id: "migrated-bare-area-profile",
     prefix: "area-profile/",
     reason: "app/areas/<code>/profile.json へ移行済み",
   },
   {
-    id: "legacy-bare-ranking",
+    id: "migrated-bare-ranking",
     prefix: "ranking/",
     reason:
       "app/ranking/<key>/* へ移行済み。廃止済み旧サムネイル ranking/prefecture/<key>/<year>/ を含む",
   },
   {
-    id: "legacy-bare-correlation",
+    id: "migrated-bare-correlation",
     prefix: "correlation/",
     reason: "app/correlation/by-ranking-key/<key>.json へ移行済み",
   },
   {
-    id: "legacy-bare-blog",
+    id: "migrated-bare-blog",
     prefix: "blog/",
     reason: "app/blog/<slug>/* へ移行済み",
   },
@@ -184,7 +184,7 @@ async function main(): Promise<void> {
   const { apply, targetId } = parseArgs();
 
   if (apply) {
-    assertR2WriteAllowed({ op: "r2-retention --apply (R2 legacy prefix deletion)" });
+    assertR2WriteAllowed({ op: "r2-retention --apply (R2 retired prefix deletion)" });
   }
 
   const targets = targetId

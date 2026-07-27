@@ -1,6 +1,6 @@
 name: 🗄️ R2 maintenance (du / retention)
 
-# R2 の容量計測と保持ポリシー実行 (legacy prefix 削除・ISR 世代 GC) の唯一の実行窓口。
+# R2 の容量計測と保持ポリシー実行 (移行済み旧 prefix の削除・ISR 世代 GC) の唯一の実行窓口。
 # 正典: .claude/rules/r2-storage-design.md「R2 保持・削除ポリシー」
 #
 # 安全設計:
@@ -20,10 +20,10 @@ on:
         default: du
         options:
           - du
-          - retention-legacy
+          - retention-prefixes
           - isr-generations
       dry_run:
-        description: "true: 削除せず対象一覧のみ (retention-legacy / isr-generations)"
+        description: "true: 削除せず対象一覧のみ (retention-prefixes / isr-generations)"
         required: false
         default: "true"
       depth:
@@ -31,7 +31,7 @@ on:
         required: false
         default: "1"
       target:
-        description: "retention-legacy で 1 target だけ実行する場合の id (空なら全 target)"
+        description: "retention-prefixes で 1 target だけ実行する場合の id (空なら全 target)"
         required: false
         default: ""
       keep:
@@ -78,8 +78,8 @@ jobs:
           npx tsx packages/r2-storage/src/scripts/r2-du.ts --depth "${{ inputs.depth || '1' }}" 2>&1 \
             | tee -a "$GITHUB_STEP_SUMMARY"
 
-      - name: 🧹 Retention (legacy prefix)
-        if: inputs.mode == 'retention-legacy'
+      - name: 🧹 Retention (移行済み旧 prefix)
+        if: inputs.mode == 'retention-prefixes'
         run: |
           # ARGS は配列で組む ("$ARGS" 単一引数渡しは 1 トークン化する — ARG_VECTOR_QUOTED)
           ARGS=()
