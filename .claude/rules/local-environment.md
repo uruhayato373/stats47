@@ -5,7 +5,7 @@
 ```
 apps/
   web/       Next.js (Cloudflare Pages) — 公開サイト
-  remotion/  Remotion — 動画・SNS 投稿画像生成（YouTube/Instagram/X/note）
+  remotion/  Remotion — 動画・SNS 投稿画像生成（Instagram/X/note）
   ges/       Google Earth Studio — 47都道府県旋回動画の生成・自動化
 packages/
   database/        Drizzle schema (型ソース) + テスト基盤 + 使い捨てビルドキャッシュ操作 (永続 D1 なし)

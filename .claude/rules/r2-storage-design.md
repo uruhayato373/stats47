@@ -56,7 +56,7 @@
 | `gis/`       | 生 GIS ファイル・タイルセット（mlit-ksj 等） | web app の snapshot fetch 経路とは別 |
 | `ges/`       | Google Earth Studio 動画出力                 | URL なし、非 Web アプリデータ        |
 | `sns/`       | SNS サムネイル / 投稿用素材                  | Web アプリの fetch 対象外            |
-| `video/`     | YouTube/web 埋め込み用 master 動画 + メタ    | `/archive-remotion-output` で集約    |
+| `video/`     | web 埋め込み用 master 動画 + メタ    | `/archive-remotion-output` で集約    |
 
 ## 生成画像の差分反映契約
 
@@ -140,7 +140,7 @@ Remotion build 時に必要な統計データ JSON は **`apps/remotion/public/<
 
 動画 master / SNS 用 47 分割は R2 に保存:
 
-- `video/<slug>/master.mp4` — YouTube アップロード後の master + メタ (description / thumbnail)
+- `video/<slug>/master.mp4` — master 動画 + メタ (description / thumbnail)
 - `sns/<slug>/<region>.mp4` — 47 県分割 reel など、再投稿候補
 
 ## 既存キーの移行状態

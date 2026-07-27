@@ -15,7 +15,6 @@ user-invocable: false
 | SNS を今週まわしたい | `/sns-weekly-plan` | 「今週のSNS」「SNS運用まわして」 |
 | SNS 投稿を作りたい (X) | `/post-x` → `/publish-x` | 「ランキングのX投稿作って」 |
 | SNS 投稿を作りたい (IG) | `/generate-instagram-schedule` / `/post-ig-6angles` | 「Instagram作って」 |
-| YouTube 動画を作りたい・投稿したい | `/bar-chart-race` → `/post-youtube` (月1・ガード3点) | 「YouTube動画作って」 |
 | ブログ記事のネタ探し | `/discover-trends --source all` | 「トレンド調べて」 |
 | ブログ記事を書きたい | `/draft-from-trend` | 「記事の企画立てて」 |
 | 記事を公開したい | `/publish-article` | 「この記事公開して」 |
@@ -58,7 +57,7 @@ user-invocable: false
 |---|---|---|
 | GSC/GA4 データ | `/fetch-gsc-data` / `/fetch-ga4-data` | 「検索データ見せて」 |
 | SEO 監査 | `/seo-audit` | 「SEO状況教えて」 |
-| YouTube/Instagram 指標 | `/fetch-youtube-data` / `/fetch-instagram-data` | 「YouTube再生数教えて」 |
+| Instagram 指標 | `/fetch-instagram-data` | 「Instagramのインプレッション教えて」 |
 | パフォーマンス | `/lighthouse-audit` / `/performance-report` | 「サイト速度計測して」 |
 
 ### テーマダッシュボード系 → theme-designer / theme-component-builder
@@ -77,8 +76,7 @@ user-invocable: false
 2. snapshot-exporter + r2-publisher: `/sync-snapshots`
 3. SNS: X は `/post-x` → `/publish-x`、IG は `/generate-instagram-schedule`、動画は `/bar-chart-race` (週次は `/sns-weekly-plan`)
 4. sns-renderer: `/render-sns-stills`
-5. sns-producer: `/publish-youtube-normal`
-6. browser-publisher: `/publish-x`, `/publish-tiktok`
+5. browser-publisher: `/publish-x`, `/publish-tiktok`
 
 ## 判断に迷った場合
 
@@ -86,7 +84,7 @@ user-invocable: false
 
 ```
 何をしたいか確認させてください:
-1. コンテンツ制作（ブログ・SNS・YouTube・note）
+1. コンテンツ制作（ブログ・SNS・note）
 2. データ操作（ランキング登録・DB同期・e-Stat取得）
 3. レビュー（コード・記事・UI・戦略）
 4. 分析（SEO・アクセス・SNS指標）

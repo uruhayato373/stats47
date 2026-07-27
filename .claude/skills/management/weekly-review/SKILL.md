@@ -166,13 +166,7 @@ node .claude/scripts/snapshot-weekly-metrics.mjs [YYYY-Www]
    増勢が続く場合は `docs/todo/01_改善バックログ.md` の `[R2-STORAGE-01]` を更新する
    (保持・削除ポリシーの正典: `.claude/rules/r2-storage-design.md`「R2 保持・削除ポリシー」)。
 
-5. YouTube データ取得（API 呼び出し）
-   `/fetch-youtube-data` スキルの手順に従い、以下を取得:
-   - overview: 登録者数・総再生回数・動画数
-   - top 10: 再生数上位 10 本（再生・いいね・コメント）
-   → 前週データがある場合は増減を算出
-
-6. SNS パフォーマンス指標
+5. SNS パフォーマンス指標
    - **最新値（プラットフォーム別集計）** は投稿台帳 posts.json のキャッシュカラム（`impressions / likes / reposts / replies / bookmarks / metrics_updated_at`）から取得（旧 D1 sns_posts は廃止）:
      ```bash
      node -e 'const s=require("./.claude/scripts/lib/sns-posts-store.cjs");
@@ -190,12 +184,12 @@ node .claude/scripts/snapshot-weekly-metrics.mjs [YYYY-Www]
      node -e "const s=require('./.claude/scripts/lib/sns-metrics-store.cjs'); const d=new Date(); const end=d.toISOString().slice(0,10); d.setDate(d.getDate()-14); const start=d.toISOString().slice(0,10); console.log(JSON.stringify(s.readByRange(start,end).length+' rows'))"
      ```
 
-7. SNS メトリクスと YouTube のレビュー本文への埋め込み
-   SNS / YouTube の週次ハイライトは本レビュードキュメントの本文に直接記載する。
+6. SNS メトリクスのレビュー本文への埋め込み
+   SNS の週次ハイライトは本レビュードキュメントの本文に直接記載する。
    GA4/GSC の詳細データは snapshot CSV (`.claude/skills/analytics/{gsc,ga4}-improvement/reference/snapshots/`) と改善ログ (`docs/todo/01_改善バックログ.md`) に分離済みなので、レビュー本文では「主要指標の前週差 + 改善ログ section 参照」のみに圧縮する。
 
 出力形式:
-- 「パフォーマンス概況」（overview.csv / GSC サマリー + AdSense + YouTube + SNS の主要指標を 1 行で明記）
+- 「パフォーマンス概況」（overview.csv / GSC サマリー + AdSense + SNS の主要指標を 1 行で明記）
 - 「注目すべきトレンド」（流入経路の変化、上昇/下降クエリ、再生数の伸び、RPM 変化）
 - 「改善候補」（CTR が低い高表示クエリ、順位 11-20 位のクエリ — queries.csv から抽出）
 - 「snapshot 参照」（`.claude/skills/analytics/{gsc,ga4,adsense}-improvement/reference/snapshots/YYYY-Www/` と snapshot Issue 番号）
@@ -500,17 +494,6 @@ node .claude/scripts/blog/analyze-winning-patterns.mjs   # CTR×構造特徴→f
 - 収益 Top 3 ページ（pages.csv から抽出）
 - 広告ユニット別 RPM の変化
 
-### YouTube
-
-| 項目 | 値 | 前週比 |
-|---|---|---|
-| 登録者 | N | +N |
-| 総再生回数 | N | +N |
-| 動画数 | N | +N |
-
-再生数 Top 5:
-- ...
-
 ### SNS パフォーマンス
 
 ※ 最新値は投稿台帳 `posts.json` のキャッシュカラムから（`sns-posts-store.cjs` 経由。完全DBレス。旧 D1 sns_posts は廃止）、時系列履歴は `.claude/skills/analytics/sns-metrics-improvement/snapshots/YYYY-MM-DD/metrics.csv` から取得する（詳細は Phase 1 Agent C 参照）。
@@ -519,7 +502,6 @@ node .claude/scripts/blog/analyze-winning-patterns.mjs   # CTR×構造特徴→f
 |---|---|---|---|
 | X | N | N imp | N |
 | TikTok | N | N views | N |
-| YouTube | N | N views | N |
 | Instagram | N | N reach | N |
 
 最終取得日: YYYY-MM-DD（未取得の場合は「`/update-sns-metrics` 未実行」と記載）

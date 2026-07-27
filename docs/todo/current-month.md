@@ -64,7 +64,7 @@ tags: []
 
 ## 今月やらないこと（予算のため意図的に見送る）
 - **NSM 実験の本格起票・運用** — 4 週以上 propose すら空だが、SEO 拡充の効果が指標に出るまで experiments.json は空で許容。running 化は 8 月候補（Could で propose のみ可）。
-- **SNS cadence の本格復帰（X/IG）** — sns-content-standards の量産実験（IG 1日3本・YouTube 1日1本）は別オーナー（各 strategist）に委任。本計画では追わない。
+- **SNS cadence の本格復帰（X/IG）** — sns-content-standards の量産実験（IG 1日3本）は別オーナー（各 strategist）に委任。本計画では追わない。
 - **e-Stat 全展開（指標量産）** — 17万 metric 換算で thin-content リスク。SSDS 未使用 cdCat01 の列挙は素材整備のみ、量産は見送り（03_指標バックログ 2026-07-11 結論）。
 - **GIS / テーマダッシュボード強化** — 重点 2 テーマ完遂が優先。
 

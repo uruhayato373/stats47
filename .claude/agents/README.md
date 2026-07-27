@@ -54,16 +54,15 @@
 | `ranking-content-author` 🆕 | ranking ページの ai-content (考察/地域傾向/FAQ/県別解説) 生成・是正 + 決定的ゲート (audit-ai-content.mjs)。生成は image-prompt-curator/data-ingester から移管 | 2026-06-21 新設 |
 | `ranking-content-critic` 🆕 | ranking ai-content の意味レビュー (重複/読者価値/トーン)。read-only、修正は author に委譲。blog-critic の ranking 版 | 2026-06-21 新設 |
 
-## Tier 4: SNS (primary 5 体 + trend-scout / strategy-advisor が SNS 責務を兼務)
+## Tier 4: SNS (primary 4 体 + trend-scout / strategy-advisor が SNS 責務を兼務)
 
 > SNS 実行規約の正典は `.claude/rules/sns-content-standards.md` (チャネル戦略・頻度・雛形・投稿台帳)。
-> 現行チャネル: **IG (主力・10K)** / **X (自動化 1-2K)** / **YouTube (月1慎重再開)** / **note (衛星)**。TikTok は撤退恒久。
+> 現行チャネル: **IG (主力・10K)** / **X (自動化 1-2K)** / **note (衛星)**。TikTok・YouTube は撤退恒久。
 
 | agent | role | 派生元 |
 |---|---|---|
 | `x-strategist` | X 投稿・キャプション・引用RT・分析 (`/post-x` `/publish-x` `/find-quote-rt` `/react-to-news`) | 既存 |
 | `instagram-strategist` | IG 投稿・カルーセル・リール (主力。`/generate-instagram-schedule` `/post-ig-6angles` `/post-instagram`) | 既存 |
-| `youtube-strategist` | **月1慎重再開のガード役** (`/post-youtube` `/bar-chart-race`。budget/duplicate/shadowban ガード) | 縮退 (2026-07) |
 | `sns-renderer` | Remotion レンダリング入口 (静止画/動画=`/render-sns-stills`、BCR=`/bar-chart-race --step render`、バズ地図=`/buzz-map`、`/preview-remotion`=プレビュー専用) | 既存縮退 |
 | `sns-metrics-sync` | メトリクス同期・posted 印付け・週次レポート (caption 生成は各 strategist に返上) | sns-renderer + 各 strategist 分離 |
 | `trend-scout` | SNS 競合の定点観測 (`/competitor-scan`) + X バズ投稿の型・画像リサーチ (`/x-viral-research`) も担当 | 既存拡張 |
@@ -114,7 +113,7 @@
 | `trend-scout` + `gsc-analyst` + `ga4-analyst` | `state/blog/` vs `state/metrics/gsc/` vs `state/metrics/ga4/` |
 | `article-writer × 5` + `chart-author` | `.local/r2/app/blog/<slug>/` を slug 単位排他、chart-author は `docs/21_ブログ記事原稿/<slug>/` を読むのみ |
 | `data-ingester` → `snapshot-exporter` → `r2-publisher` | D1 write → `.local/r2/app/` write → R2 push の一方向。同 ranking_key は逐次、別 key は並列可 |
-| `x-strategist` + `instagram-strategist` + `youtube-strategist` | API / state / metrics サブディレクトリが完全分離 |
+| `x-strategist` + `instagram-strategist` | API / state / metrics サブディレクトリが完全分離 |
 | `gsc-analyst` + `improvement-triage` | gsc-analyst → `.claude/state/metrics/gsc/` write、triage → `docs/todo/01_改善バックログ.md` 排他 append |
 | `code-reviewer` + `ui-consistency-reviewer` + `tdd-guide` | 全員 read-only、git diff のみ |
 | `ranking-ui-manager` + `ranking-publisher` | `features/ranking/**` (UI) vs `config/*-ranking-keys.ts` + 公開 scripts (publish) で非重複 |
@@ -128,7 +127,7 @@
 
 | シナリオ | エージェント連携 |
 |---|---|
-| ランキング追加 → SNS 一式 | estat-researcher → data-ingester → snapshot-exporter → r2-publisher → ranking-publisher (公開確定) → x/IG/YT-strategist (3 並列) |
+| ランキング追加 → SNS 一式 | estat-researcher → data-ingester → snapshot-exporter → r2-publisher → ranking-publisher (公開確定) → x/IG-strategist (2 並列) |
 | ランキング本番公開 (isActive→200) | ranking-publisher (orchestrator) → data-ingester (観測値確認) → devops-runner (deploy) → /purge-cdn → 本番実測 |
 | ランキング UI ドリフト是正 | ranking-ui-manager (監査 → 外科的是正 → localhost 確認、デプロイは ranking-publisher) |
 | ranking ai-content 生成 → 公開 | ranking-content-author (生成 → audit-ai-content.mjs) → ranking-content-critic (意味レビュー) → r2-publisher (R2 反映) |
@@ -138,7 +137,6 @@
 | SNS 週次運用 | strategy-advisor (/sns-weekly-plan) → sns-metrics-sync (先週計測) → trend-scout (題材) → x/instagram-strategist (生成・予約) |
 | トレンド → IG リール | trend-scout → sns-renderer (/bar-chart-race --step render) → instagram-strategist |
 | バズ地図 → SNS | gis-curator (KSJ geometryType) / data-ingester (e-Stat 観測値) → sns-renderer (/buzz-map 型A〜E 生成+R2) → x/instagram-strategist (配信。draft 止まりが既定) |
-| YouTube 月1動画 | youtube-strategist (/bar-chart-race 企画) → sns-renderer (render) → youtube-strategist (/post-youtube ガード3点) → sns-metrics-sync (公開後) |
 | SNS 競合調査 | trend-scout (/competitor-scan) → docs/04_レビュー |
 | コード変更 → デプロイ | code-reviewer + ui-consistency-reviewer + tdd-guide (3 並列) → devops-runner |
 | テーマダッシュボード設計 | theme-designer → data-ingester → theme-component-builder → ui-reviewer |
@@ -176,6 +174,6 @@
 ## 旧 README 互換 (Tier 1-3 表記)
 
 過去のドキュメント / commit メッセージ参照のため、旧 Tier 表記との対応:
-- 旧 Tier 1 (主力 4 体): x/youtube/instagram-strategist + seo-auditor → 新 Tier 4-5 に分散
+- 旧 Tier 1 (主力 4 体): x/youtube/instagram-strategist + seo-auditor → 新 Tier 4-5 に分散 (youtube-strategist は 2026-07-27 の YouTube 撤退で廃止)
 - 旧 Tier 2 (Specialist 12 体): theme / data / db / blog / sns / note / code / ui / devops / tdd / strategy → 新 Tier 1-7 に分散
 - 旧 Tier 3 (Worker 1 体): article-writer → 新 Tier 3 維持

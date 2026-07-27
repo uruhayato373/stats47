@@ -117,7 +117,7 @@ use-case に応じて以下の推奨パスを出力する:
 
 ## 運用ルール
 
-- **エージェント連携**: `blog-editor`, `note-manager`, `x-strategist`, `youtube-strategist` から呼ばれることを想定。各エージェントは catalog から自分の用途に合う ID を選んで呼び出す
+- **エージェント連携**: `blog-editor`, `note-manager`, `x-strategist` から呼ばれることを想定。各エージェントは catalog から自分の用途に合う ID を選んで呼び出す
 - **イテレーション前提**: ユーザーは複数 ID を試して感触を掴む。`--list` で一覧、`--id` で試作、という流れを推奨
 - **OGP には使わない**: 記事別 OGP に静的画像を使うと 119 記事分の再生成コストが破綻する。OGP が必要なら Satori / Remotion の担当範囲であることを明確にユーザーに伝える
 

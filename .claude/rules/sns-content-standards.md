@@ -1,6 +1,6 @@
 # SNS コンテンツ標準 (チャネル戦略 + 投稿雛形 + 頻度リミットの正典)
 
-stats47 の SNS 運用 (X / Instagram / YouTube / note) における**実行規約の単一ソース (SSOT)**。
+stats47 の SNS 運用 (X / Instagram / note) における**実行規約の単一ソース (SSOT)**。
 SNS 投稿を企画・生成・投稿・計測する agent / skill / 人間はこれに従う。
 
 > **方式**: `chart-component-standards.md` / `blog-quality-standards.md` と同じ「rules に規約カタログ 1 ファイル、
@@ -15,7 +15,6 @@ SNS 投稿を企画・生成・投稿・計測する agent / skill / 人間は�
 |---|---|---|---|---|---|
 | **Instagram** | **主力** | フォロワー 10K (2027-02)・保存率 | カルーセル 2 + リール 1 / 週 | 6 枚カルーセル / Reels | `instagram-strategist` |
 | **X** | 自動化・トレンド瞬発 | 1-2K 維持・サイト送客 | 予約 2-3 / 週 + 引用RT 随時 (1 日 ≤ 3) | ランキング投稿 / 引用RT | `x-strategist` |
-| **YouTube** | 凍結 → **月 1 本の慎重再開** | シャドウバン非再発・SUGGESTED_VIDEO 回復観測 | **月 1 本のみ** | BCR 長尺 / 47 県まとめ | `youtube-strategist` |
 | **note** | 外部衛星 | stats47 への送客 | 月 1-2 本 | 広い検索意図の記事 | `note-manager` |
 | **TikTok** | **撤退 (恒久)** | — | **0 (投稿しない)** | — | — |
 
@@ -33,8 +32,6 @@ SNS 投稿を企画・生成・投稿・計測する agent / skill / 人間は�
 | ルール | 値 | 根拠 |
 |---|---|---|
 | **TikTok に投稿しない** | 0 | 撤退恒久 |
-| **YouTube は月 1 本を超えない** | ≤ 1 / 月 | シャドウバン真因 = 68 本/月 の量産 + 同タイトル再投稿 28 本 (2026-04) |
-| **YouTube タイトル重複・再投稿の全面禁止** | — | 同上。`check-youtube-duplicate.cjs` (5 層) を必ず通す |
 | **X は 1 日 3 本まで** (`X_DAILY_MAX=3`) | ≤ 3 / 日 | スパム判定回避。予約 + 引用RT + ニュース連動の合算 |
 | **X 定型ストックは週 14-21 本** (`X_WEEKLY_TARGET_MIN=14` / `X_WEEKLY_TARGET_MAX=21`) | 14-21 / 週 | 2026-07 積極運用へ転換。ランキング定型を量産し流入を作る |
 | **X 引用RT は 1 日 3 本まで** | ≤ 3 / 日 | 上記 1 日上限の内数。スパム判定回避 |
@@ -42,17 +39,8 @@ SNS 投稿を企画・生成・投稿・計測する agent / skill / 人間は�
 | **同一内容の連投禁止 (全チャネル)** | — | インプレッション食い合い。X は `lint-x-captions.cjs` の類似度チェックで機械担保 |
 | **X 引用RT は 72h 以内のツイートのみ・炎上/政治回避** | — | ブランド毀損防止 |
 
-これらは skill 実行時にガードスクリプトが検証する (YouTube = `check-youtube-post-budget.cjs` / X = `check-x-post-budget.cjs`)。
+これらは skill 実行時にガードスクリプトが検証する (X = `check-x-post-budget.cjs`)。
 新規投稿スキルを作る場合は本表を必ず参照し、上限を超える経路を作らない。
-
-> **例外: YouTube 量産実験モード (2026-07-11〜)**。BAN リスクの無い family アカウントでは、上表の
-> 「月 1 本上限」を `.claude/state/youtube-experiment.json` (`monthlyLimit` / `dailyLimit` を上書き) で
-> 緩和できる。**現行の実験ペースは「1日1本」** (`dailyLimit: 1` / `monthlyLimit: 31` を
-> `check-youtube-post-budget.cjs` が JST 日/月枠で機械強制。`--schedule` 予約は公開予定日の枠で判定)。
-> これは「量産して露出が押し切れるか」を実地検証する実験。**凍結の不可逆リスクが無い family アカウント
-> 限定**であり、本命チャンネルの既定は月 1 本のまま (ファイル削除で既定に戻る)。**タイトル重複・再投稿の
-> 全面禁止 (`check-youtube-duplicate.cjs`) と pause ガードは実験中も維持**する。実験の初速は
-> `youtube-shadowban-diagnose.yml` (CI) で測る。実装手順書: `docs/10_SNS戦略/07_YouTube量産実験.md`。
 
 > **例外: Instagram 量産実験 (2026-07-12〜2026-08-10)**。オーナー判断 (2026-07-11) で §0 の
 > 「カルーセル 2 + リール 1 / 週」を期間限定で停止し、**1 日 3 本** (既存予約リール 16 本 + ランキング
@@ -182,15 +170,6 @@ X 投稿の「型」は下表を単一ソースとする。各投稿は `templat
 | 数字 | 「{倍率}倍差。1 位 {値} vs 47 位 {値}」 |
 | ハウツー | 「{テーマ} で {県} を選ぶなら知っておくこと」 |
 
-### 2-6. YouTube 月 1 本
-
-- タイトル 50 字以内・SEO キーワード先頭・**過去タイトルと重複させない**
-- 投稿前チェックリスト (全通過が必須):
-  - [ ] `check-youtube-post-budget.cjs` で当月未投稿を確認 (月 1 上限)
-  - [ ] `check-youtube-duplicate.cjs` (5 層) で重複ゼロ
-  - [ ] 投稿翌日に `diagnose-shadowban.js` で診断
-- フォーマットは BCR 長尺 or 47 県まとめの**高品質 1 本**。Shorts 量産はしない
-
 ### 2-7. note 衛星記事
 
 - 広い検索意図 (移住 / 年収 / 子育て 等) を外部で獲得し stats47 へ送客
@@ -298,10 +277,10 @@ SNS 投稿の stats47.jp リンクには UTM を付ける。note は付けない
 
 | パラメータ | 値 |
 |---|---|
-| `utm_source` | `x` / `instagram` / `youtube` |
+| `utm_source` | `x` / `instagram` |
 | `utm_medium` | `social` |
 | `utm_campaign` | ranking: `<rankingKey>` / compare: `compare-<areaA>-vs-<areaB>` / correlation: `correlation-<keyX>--<keyY>` |
-| `utm_content` | `<template>` (例: `shock`, `paradox`)。YouTube pinned_comment では `<template>-pinned` |
+| `utm_content` | `<template>` (例: `shock`, `paradox`) |
 
 例:
 ```
@@ -322,7 +301,6 @@ https://stats47.jp/ranking/taxable-income-per-capita
 | **X (量産)** | `post-x-batch` (候補選定→画像→執筆→lint→draft 登録) | quick-still (ranking-card) | `publish-x --from-queue` (ローカル) → `mark-sns-posted` | `update-sns-metrics` → `analyze-x-winning-patterns` |
 | **X (瞬発)** | `find-quote-rt` / `react-to-news` | (キャプション) | `publish-x` → `mark-sns-posted` | `update-sns-metrics` |
 | **IG** | `generate-instagram-schedule` (+ `post-ig-6angles`) | `render-sns-stills` | `post-instagram` (GHA cron) → `mark-sns-posted` | `update-sns-metrics` |
-| **YouTube** | `bar-chart-race` (企画・生成・render) | (同) | `post-youtube` (月 1・ガード 3 点) → `mark-sns-posted`。量産実験中の予約仕込みは `youtube-upload-queue.json` + `youtube-upload-queue.yml` (日次 cron 5本/日、§1 例外注記) | `update-sns-metrics` |
 | **buzz-map (X/IG 横断)** | curated catalog (`build-buzz-map-catalog.ts --next`・正典 `buzz-map-standards.md` §4-5) | `prepare-buzz-map-batch.ts` (dry-run 既定・landing contract+isPostable ゲート→R2→draft) / gallery `/buzz-map` | 既存 guarded flow (`publish-x` / IG cron — draft からの昇格は人間判断) | `buzz-map-attribution.mjs` (campaign 別) → score 還流 |
 
 - **buzz-map の deep-click 計測は要ユーザー操作 (GA4 custom dimension)**: `buzz-map-attribution.mjs` は

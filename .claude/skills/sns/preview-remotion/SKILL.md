@@ -27,7 +27,7 @@ $ARGUMENTS — [--type <name>] [type 固有の引数...]
 
 | --type 値 | 参照ファイル | 上書きする preview-data ファイル | 対象コンポジション例 |
 |---|---|---|---|
-| `ranking` | `types/ranking.md` | `apps/remotion/src/utils/preview-data.ts` | RankingX-Post / RankingInstagram-Carousel / RankingYouTube-Short |
+| `ranking` | `types/ranking.md` | `apps/remotion/src/utils/preview-data.ts` | RankingX-Post / RankingInstagram-Carousel |
 | `area-profile` | `types/area-profile.md` | `apps/remotion/src/utils/preview-data-area-profile.ts` | AreaProfileInstagram-Carousel / AreaProfileOgp |
 | `bar-chart-race` | `types/bar-chart-race.md` | `apps/remotion/src/utils/preview-data-bar-chart-race.ts` | BarChartRace 系 |
 | `comparison` | `types/comparison.md` | `apps/remotion/src/utils/preview-data-comparison.ts` | CompareX-Post / CompareInstagram-Carousel / ComparisonOgp |

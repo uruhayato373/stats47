@@ -56,7 +56,7 @@ Bar Chart Race 動画の全 SNS キャプションを一括生成し posts.json 
 
 | パラメータ | 値 |
 |---|---|
-| `utm_source` | `x` / `youtube` |
+| `utm_source` | `x` |
 | `utm_medium` | `social` |
 | `utm_campaign` | `bcr-<key>` |
 | `utm_content` | `bar-chart-race` |
@@ -65,7 +65,7 @@ Bar Chart Race 動画の全 SNS キャプションを一括生成し posts.json 
 
 例:
 ```
-https://stats47.jp/ranking/moving-in-excess-rate-japanese?utm_source=youtube&utm_medium=social&utm_campaign=bcr-moving-in-excess-rate-japanese&utm_content=bar-chart-race
+https://stats47.jp/ranking/moving-in-excess-rate-japanese?utm_source=x&utm_medium=social&utm_campaign=bcr-moving-in-excess-rate-japanese&utm_content=bar-chart-race
 ```
 
 ## ペルソナ
@@ -74,35 +74,7 @@ https://stats47.jp/ranking/moving-in-excess-rate-japanese?utm_source=youtube&utm
 
 ## 各プラットフォームのキャプション生成
 
-### 1. YouTube
-
-Bar Chart Race は YouTube Shorts の主力コンテンツ。説明欄で時代背景を補足する。
-
-**ルール:**
-- タイトル 50文字以内、検索キーワードを先頭に
-- 説明欄 250字以上、冒頭125文字にキーワード集中
-- 説明欄に「見どころ」を含める（時代の転換点、意外な逆転劇など）
-- 全47都道府県の最終年ランキングを説明欄に含める
-- CTA: チャンネル登録誘導
-- #Shorts 必須、ハッシュタグ計3〜5個。**各ハッシュタグの間には必ずスペースを入れること**（`#Shorts #ランキング` ○ / `#Shorts#ランキング` ×）
-- **投稿頻度: 1日最大2本まで**（3本以上/日の連日投稿はスパム判定リスク）
-
-**JSON:**
-```json
-{
-  "title": "50字以内SEOタイトル",
-  "description": "250字以上の説明欄",
-  "pinnedComment": "ピン留めコメント",
-  "hashtags": ["#Shorts", ...]
-}
-```
-
-**出力:**
-- `youtube/shorts.json`
-- `youtube/shorts.txt` — title + description + 全47都道府県最終年データ + URL + ハッシュタグ
-- `youtube/pinned_comment.txt`
-
-### 2. X
+### X
 
 短文でデータの意外性を伝える。
 
@@ -128,7 +100,6 @@ Bar Chart Race は YouTube Shorts の主力コンテンツ。説明欄で時代�
 
 ```
 .local/r2/sns/bar-chart-race/<key>/
-  youtube/shorts.json + shorts.txt + pinned_comment.txt
   x/caption.json + caption.txt
 ```
 
@@ -141,7 +112,7 @@ config.json + data.json を読み込み、上記の算出値をすべて計算�
 ### Step 2: 各プラットフォームのキャプションを生成・保存
 
 上記ペルソナとルールに基づき、Claude が直接 JSON を生成する。
-2プラットフォーム分を生成し、即座にファイルに保存する（ユーザー確認は不要）。
+即座にファイルに保存する（ユーザー確認は不要）。
 
 ### Step 4: 完了報告
 
@@ -149,8 +120,6 @@ config.json + data.json を読み込み、上記の算出値をすべて計算�
 
 ## 品質チェックリスト
 
-- [ ] YouTube タイトルが50文字以内
-- [ ] YouTube 説明が250文字以上
 - [ ] X テキストが200文字以内
 - [ ] 全プラットフォームの URL に UTM パラメータが付与されている
 - [ ] キャプションにデータの時系列変化（最初→最後）が含まれている
@@ -162,4 +131,4 @@ config.json + data.json を読み込み、上記の算出値をすべて計算�
 - データ生成: `/generate-bar-chart-race`
 - 動画レンダリング: `/render-bar-chart-race`
 - プレビュー: `/preview-remotion --type bar-chart-race`
-- UTM ルール: `/generate-utm-url`
+- UTM ルール: `.claude/rules/sns-content-standards.md` §4

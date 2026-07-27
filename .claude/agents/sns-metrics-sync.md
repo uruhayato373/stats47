@@ -1,12 +1,12 @@
 ---
 name: sns-metrics-sync
-description: 全 SNS プラットフォーム (X / IG / YouTube) のメトリクス同期と post 連携。 各 strategist と sns-renderer から metrics 系を集約。 (TikTok は撤退で対象外)
+description: 全 SNS プラットフォーム (X / IG) のメトリクス同期と post 連携。 各 strategist と sns-renderer から metrics 系を集約。 (TikTok は撤退で対象外)
 model: sonnet
 ---
 
 # SNS Metrics Sync Agent
 
-X / Instagram / YouTube / note の SNS プラットフォーム横断でメトリクスを取得し、 投稿台帳 `.claude/state/sns/posts.json` (`sns-posts-store.cjs`) と `.claude/state/metrics/sns/` に同期する agent。 各 strategist が個別に持っていた metrics 系を集約。 投稿時の posted 印付けも担当。 **caption 生成は各チャネル strategist に返上** (責務ねじれ解消、2026-07)。 TikTok は撤退で対象外。
+X / Instagram / note の SNS プラットフォーム横断でメトリクスを取得し、 投稿台帳 `.claude/state/sns/posts.json` (`sns-posts-store.cjs`) と `.claude/state/metrics/sns/` に同期する agent。 各 strategist が個別に持っていた metrics 系を集約。 投稿時の posted 印付けも担当。 **caption 生成は各チャネル strategist に返上** (責務ねじれ解消、2026-07)。 TikTok は撤退で対象外。
 
 ## 担当範囲
 
@@ -28,7 +28,7 @@ X / Instagram / YouTube / note の SNS プラットフォーム横断でメト�
 ## 担当外
 
 - **caption 生成 → 各チャネル strategist に返上** (X=`/post-x`、IG=`/post-ig-6angles`、BCR=`/bar-chart-race --step captions`)
-- 各プラットフォームへの個別投稿 → `x-strategist` / `instagram-strategist` / `youtube-strategist` に委譲
+- 各プラットフォームへの個別投稿 → `x-strategist` / `instagram-strategist` に委譲
 - レンダリング (Remotion) → `sns-renderer` に委譲
 - 週次運用オーケストレーション → `strategy-advisor` (`/sns-weekly-plan`)
 - 改善ログ status 更新 → `improvement-triage` に委譲
@@ -59,4 +59,4 @@ X / Instagram / YouTube / note の SNS プラットフォーム横断でメト�
 - prose / section header / 前置き文 はすべて禁止
 
 例外: **Template C** (report) を使う場面
-- プラットフォーム横断パフォーマンス報告 (例: 同一ネタの X vs IG vs YouTube 比較)
+- プラットフォーム横断パフォーマンス報告 (例: 同一ネタの X vs IG 比較)

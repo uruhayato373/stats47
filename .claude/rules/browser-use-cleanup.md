@@ -33,6 +33,6 @@ Node.js orchestrator では `process.on('exit')` 等で同等処理を spawn す
 
 ## 対象スキル
 
-`publish-note` / `fetch-note-metrics` / `post-instagram` / `post-x` / `post-tiktok` / `post-youtube` 等 browser-use 系全般。
+`publish-note` / `fetch-note-metrics` / `post-instagram` / `post-x` / `post-tiktok` 等 browser-use 系全般。
 
 AppleScript の URL 条件は対象サイトに合わせて調整（note 系: `editor.note.com` `note.com/sitesettings` `note.com/login`）。

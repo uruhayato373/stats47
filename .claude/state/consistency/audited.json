@@ -1,5 +1,17 @@
 {
-  "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-  "audited_at": "2026-07-23T23:12:57",
-  "files": []
+  "hash": "6f90f4d699ba790b3fdbe33619aad14c2894bf900fe49d00badab5a2d6682aa2",
+  "audited_at": "2026-07-27T03:02:52",
+  "files": [
+    ".claude/agents/youtube-strategist.md",
+    ".claude/scripts/lib/check-youtube-duplicate.cjs",
+    ".claude/scripts/lib/check-youtube-post-budget.cjs",
+    ".claude/scripts/youtube/diagnose-shadowban.js",
+    ".claude/scripts/youtube/oauth-setup.js",
+    ".claude/scripts/youtube/upload.js",
+    ".claude/skills/sns/bar-chart-race/SKILL.md",
+    ".claude/skills/sns/post-youtube/SKILL.md",
+    ".claude/skills/sns/sns-gallery/SKILL.md",
+    ".claude/skills/sns/update-sns-metrics/SKILL.md",
+    ".claude/skills/sns/update-sns-metrics/references/platform-youtube.md"
+  ]
 }

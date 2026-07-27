@@ -92,6 +92,17 @@ const RETENTION_TARGETS: RetentionTarget[] = [
     prefix: "app/port-statistics/",
     reason: "同上",
   },
+  {
+    id: "retired-youtube-master-station-passengers",
+    prefix: "video/station-passengers-47/",
+    reason:
+      "YouTube 撤退 (2026-07-27) により用途消滅。22 分の長尺で Shorts/Reel 規格に転用不可。posts.json id=484 は platform=youtube のみ",
+  },
+  {
+    id: "retired-youtube-master-migration-flow",
+    prefix: "video/migration-flow-47/",
+    reason: "同上 (47 県まとめ長尺・YouTube 専用)",
+  },
 ];
 
 /**
@@ -115,9 +126,13 @@ const PROTECTED_PREFIXES = [
   "incremental-cache/",
   "sns/",
   "note/",
-  "video/",
   "ges/",
   "gis/",
+  // video/ は一括保護しない (YouTube 撤退で一部が不要になったため)。
+  // 代わりに「他チャネルで生きている master」を個別に保護する。
+  "video/highway-history/", // Instagram 投稿の master (posts.json id=510)
+  "video/yoy-47/", // YouTube と X の両方に投稿実績あり
+  "video/site-intro/", // 用途未確定の dormant。判断がつくまで消さない
 ];
 
 function assertTargetsAreSafe(): void {

@@ -52,8 +52,6 @@ contentType に応じたディレクトリを確認する:
 |---|---|
 | `x/` | `x` |
 | `instagram/` | `instagram` |
-| `youtube/` | `youtube` |
-| `youtube-short/` | `youtube` |
 | `tiktok/` | `tiktok` |
 | `note/` | `note` |
 
@@ -68,7 +66,7 @@ const now = new Date().toISOString();
 
 // 既存レコードがなければ新規 INSERT
 store.insert({
-  platform: '<platform>',       // 'x' | 'instagram' | 'youtube' | 'tiktok' | 'note'
+  platform: '<platform>',       // 'x' | 'instagram' | 'tiktok' | 'note'
   domain: '<contentType>',      // 'ranking' | 'compare' | 'correlation'
   content_key: '<contentKey>',
   caption: '<caption.txt の内容>',  // あれば
@@ -81,7 +79,6 @@ store.insert({
 caption は各プラットフォームの `caption.txt` から読み込む:
 ```
 .local/r2/sns/<contentType>/<contentKey>/<platform>/caption.txt
-.local/r2/sns/<contentType>/<contentKey>/youtube-short/shorts.txt  # YouTube Short
 ```
 
 ### 4. リモート R2 からメディアファイルのみ削除

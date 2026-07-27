@@ -56,7 +56,6 @@ export function mediaCandidates(p: Partial<Post>): MediaCandidate[] {
       `${d}/${k}/x/stills/choropleth-map-1200x630.png`,
       `${d}/${k}/x/reel.mp4`,
     ],
-    youtube: [`${d}/${k}/youtube/reel.mp4`, `${d}/${k}/youtube/stills/thumbnail-1280x720.png`],
   };
   for (const rel of (plat && CANDIDATES[plat]) || []) push(rel);
   // 重複除去
@@ -88,7 +87,7 @@ export function scanLocalMaterials(): Array<{
       const kDir = path.join(dDir, key);
       if (!fs.statSync(kDir).isDirectory()) continue;
       for (const plat of fs.readdirSync(kDir)) {
-        if (!["x", "instagram", "youtube"].includes(plat)) continue;
+        if (!["x", "instagram"].includes(plat)) continue;
         out.push({ domain, content_key: key, platform: plat });
       }
     }

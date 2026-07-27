@@ -16,6 +16,8 @@ import type {
 import { PostCard } from "./post-card";
 import { ToastPortal, useToast } from "./toast";
 
+// YouTube は撤退済 (新規投稿・作成不可)。過去実績 (posts.json の platform=youtube) を
+// 一覧・フィルタで閲覧できるよう、表示専用のフィルタ選択肢としてのみ残す。
 const PLATFORMS: Array<[string, string]> = [
   ["", "All"],
   ["x", "X"],
