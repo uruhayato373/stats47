@@ -1,28 +1,8 @@
 {
-  "hash": "ed84238d1a05b402fd57a4f656d92b9eb7724f5ae73f4ffa57a12a873de39604",
-  "audited_at": "2026-07-27T22:05:32",
+  "hash": "50ab973f8c734f3daf87cb4013eab1ca1a734f65023a2ba23390fb8b960d5d9a",
+  "audited_at": "2026-07-27T22:11:16",
   "files": [
     ".claude/agents/ga4-analyst.md",
-    ".claude/rules/analytics-event-standards.md",
-    ".claude/scripts/lib/metrics-reader.mjs",
-    ".claude/scripts/metrics/__tests__/periods.test.mjs",
-    ".claude/scripts/metrics/__tests__/weekly-summary.test.mjs",
-    ".claude/scripts/metrics/check-period-contract.mjs",
-    ".claude/scripts/metrics/fetch-ga4-snapshot.mjs",
-    ".claude/scripts/metrics/fetch-gsc-snapshot.mjs",
-    ".claude/scripts/metrics/generate-weekly-metrics-issue.mjs",
-    ".claude/scripts/metrics/lib/periods.mjs",
-    ".claude/scripts/metrics/lib/weekly-summary.mjs",
-    ".claude/scripts/metrics/update-history-csv.mjs",
-    ".claude/scripts/search-growth/__tests__/triage.test.mjs",
-    ".claude/scripts/search-growth/analyze.mjs",
-    ".claude/scripts/search-growth/cli.mjs",
-    ".claude/scripts/search-growth/lib/triage.mjs",
-    ".claude/scripts/snapshot-weekly-metrics.mjs",
-    ".claude/skills/analytics/search-growth/SKILL.md",
-    ".claude/skills/management/weekly-plan/SKILL.md",
-    ".claude/skills/management/weekly-review/SKILL.md",
-    ".claude/skills/management/weekly-review/reference/reviews/2026-W30.md",
-    ".claude/skills/management/weekly-review/reference/runbook.md"
+    ".claude/rules/analytics-event-standards.md"
   ]
 }
