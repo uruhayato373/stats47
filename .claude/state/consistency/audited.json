@@ -1,5 +1,7 @@
 {
-  "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-  "audited_at": "2026-07-23T23:12:57",
-  "files": []
+  "hash": "327c68a0284f2de003cdeffd87c318c226f3040945c3ac22e5afb790b12443ad",
+  "audited_at": "2026-07-27T03:11:30",
+  "files": [
+    ".claude/skills/sns/sns-weekly-plan/SKILL.md"
+  ]
 }

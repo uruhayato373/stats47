@@ -3,7 +3,6 @@
  * AdSense Management API 用 OAuth 2.0 セットアップスクリプト
  *
  * `.env.local` の GOOGLE_ADSENSE_REFRESH_TOKEN を更新する。
- * `.claude/scripts/youtube/oauth-setup.js` の AdSense 版。
  *
  * 事前準備:
  *   1. Google Cloud Console → 認証情報 → OAuth 2.0 クライアント ID（デスクトップアプリ、AdSense 用）

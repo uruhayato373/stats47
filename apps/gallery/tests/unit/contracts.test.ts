@@ -5,7 +5,6 @@ import {
   PatchPost,
   ProbeR2,
   PublishX,
-  PublishYt,
   Regenerate,
   ScheduleIg,
   WritePlatform,
@@ -71,14 +70,14 @@ describe("CreatePost (Zod)", () => {
 });
 
 describe("WritePlatform enum (書込側は厳密)", () => {
-  it("x / instagram / youtube のみ許容", () => {
+  it("x / instagram のみ許容", () => {
     expect(WritePlatform.safeParse("x").success).toBe(true);
     expect(WritePlatform.safeParse("instagram").success).toBe(true);
-    expect(WritePlatform.safeParse("youtube").success).toBe(true);
   });
-  it("note / tiktok は拒否 (書込側 enum)", () => {
+  it("note / tiktok / youtube は拒否 (YouTube は撤退済で新規作成不可)", () => {
     expect(WritePlatform.safeParse("note").success).toBe(false);
     expect(WritePlatform.safeParse("tiktok").success).toBe(false);
+    expect(WritePlatform.safeParse("youtube").success).toBe(false);
   });
 });
 
@@ -122,9 +121,6 @@ describe("action schemas", () => {
   it("PublishX は content_key 必須", () => {
     expect(PublishX.safeParse({}).success).toBe(false);
     expect(PublishX.safeParse({ content_key: "k" }).success).toBe(true);
-  });
-  it("PublishYt は全任意 (confirm チェックは server 側)", () => {
-    expect(PublishYt.safeParse({}).success).toBe(true);
   });
   it("ScheduleIg は date/type/domain/content_key 必須", () => {
     expect(ScheduleIg.safeParse({ date: "2026-07-20" }).success).toBe(false);

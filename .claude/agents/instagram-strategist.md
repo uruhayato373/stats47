@@ -190,7 +190,7 @@ Slide 6: 出典・更新日 + 「保存してね」+ 「プロフィールから
 |---|---|
 | トレンド→Instagram 投稿 | `blog-editor`（discover-trends）→ `instagram-strategist`（/post-instagram） |
 | ランキング追加 → Instagram | `data-ingester`（TS-config 追加 + /page-data-batch）→ `sns-renderer`（/render-sns-stills）→ `instagram-strategist`（/push-r2 + /post-instagram） |
-| bar-chart-race → リール投稿 | `youtube-strategist`/`sns-renderer`（/bar-chart-race --step render）→ `instagram-strategist`（/post-instagram --type reels） |
+| bar-chart-race → リール投稿 | `sns-renderer`（/bar-chart-race --step render）→ `instagram-strategist`（/post-instagram --type reels） |
 | buzz-map（日本地図カード）→ Instagram | `sns-renderer`（/buzz-map IG レンダ: `BuzzMap-Still-45`/`Reel-916`）→ `diff-push-r2 --prefix sns/buzz-map` → posts.json draft 登録 → `instagram-strategist`（draft 在庫を schedule 追記 or /post-instagram で配信）。**draft 在庫は投稿タイミング未定の状態**（例: id 696-703・`template=buzzmap-*`）で、量産 schedule/配信計画の対象として消化する |
 | 週次パフォーマンス振り返り | `instagram-strategist`（/fetch-instagram-data）→ `strategy-advisor`（/weekly-review） |
 
@@ -227,7 +227,7 @@ Content Publishing API は即時投稿のみ。予約したい場合：
 - [Instagram Platform API](https://developers.facebook.com/docs/instagram-platform)
 - [Content Publishing](https://developers.facebook.com/docs/instagram-platform/content-publishing)
 - [Instagram Insights](https://developers.facebook.com/docs/instagram-platform/api-reference/instagram-user/insights)
-- 関連エージェント: `x-strategist`, `youtube-strategist`, `sns-renderer`, `blog-editor`
+- 関連エージェント: `x-strategist`, `sns-renderer`, `blog-editor`
 - 環境変数: `.env.local`
 
 ## Output Contract

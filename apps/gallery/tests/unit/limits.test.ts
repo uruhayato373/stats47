@@ -38,7 +38,7 @@ describe("computeLimits", () => {
       { id: 2, platform: "x", status: "posted", posted_at: "2026-07-13 10:00:00", content_key: "b" },
       // 先週の X posted (枠外)
       { id: 3, platform: "x", status: "posted", posted_at: "2026-07-06 10:00:00", content_key: "c" },
-      // 今月の YouTube posted 1 件
+      // 過去実績の YouTube posted (撤退済・limits 集計の対象外)
       { id: 4, platform: "youtube", status: "posted", posted_at: "2026-07-02 10:00:00", content_key: "yt" },
       // draft は数えない
       { id: 5, platform: "x", status: "draft", content_key: "d" },
@@ -47,8 +47,7 @@ describe("computeLimits", () => {
     const r = computeLimits();
     expect(r.x.used).toBe(2); // 今週の posted 2 件のみ
     expect(r.x.max).toBe(3);
-    expect(r.youtube.used).toBe(1);
-    expect(r.youtube.max).toBe(1);
+    expect((r as Record<string, unknown>).youtube).toBeUndefined();
   });
 
   it("IG schedule の未来 entry を scheduledInJson に加算する", async () => {
@@ -77,6 +76,5 @@ describe("computeLimits", () => {
     const r = computeLimits();
     expect(r.x.used).toBe(0);
     expect(r.instagram.used).toBe(0);
-    expect(r.youtube.used).toBe(0);
   });
 });

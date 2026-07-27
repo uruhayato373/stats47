@@ -22,7 +22,7 @@ PORT=5000 npm run gallery    # ポート上書き
 | パス | 内容 |
 |---|---|
 | `/` | 導線 + 件数サマリ |
-| `/sns` | 投稿台帳 (X/IG/YT)・素材再生・caption 編集・投稿/予約・残枠・IG 整合性警告 |
+| `/sns` | 投稿台帳 (X/IG。YouTube は撤退済で過去実績のみ閲覧)・素材再生・caption 編集・投稿/予約・残枠・IG 整合性警告 |
 | `/assets` | 画像/動画資産 11 タブ・欠落チェック (HEAD probe)・再生成 (whitelist 5 タブのみ) |
 | `/svg` | ブログ SVG 分類カタログ (手動ロード・10 分キャッシュ) |
 | `/dashboard` | メトリクス/進捗キュー/バックログ/STP の読み取り専用ミラー (60 秒キャッシュ) |
@@ -58,7 +58,6 @@ tests/          unit + integration (Vitest) / e2e (Playwright)
 ## 安全ガード
 
 - **X**: 最終成功から 7 日超は `force:true` なしで **428** (dry-run を先に強制)。job 成功時に成功時刻を更新
-- **YouTube**: `confirm:true` + `video_file` 実在 + `title` 必須 (upload.js 側に月次/重複ガード内蔵)
 - **regenerate**: kind whitelist 5 種のみ・keys は `^[a-z0-9,_-]+$`
 - **job**: 同時実行 1 (実行中は 409)・log 末尾 500 行・globalThis singleton (HMR 二重化防止)
 - **ファイル配信**: decode → resolve → relative 検査 → **realpath 後再検査** (symlink 脱出拒否) → regular file のみ。Range 200/206/416

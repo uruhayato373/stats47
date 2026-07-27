@@ -66,10 +66,10 @@
       "rule_id": "r2-storage-growth",
       "metric_key": "r2_storage_gb",
       "operator": ">",
-      "threshold": 50,
+      "threshold": 18,
       "severity": "warning",
-      "title": "R2 storage > 50GB",
-      "note": "無料枠 10GB/月。50GB 到達時点で月額 $0.6/GB-month 課金開始 → 要確認"
+      "title": "R2 storage > 18GB",
+      "note": "無料枠 10GB/月・月額 $0.6/GB-month 課金中。2026-07-27 に incremental-cache 未GC (8.85GB) を削除しアカウント合計 15.2GB 実測 (stats47 11.2GB + doboku-note 系 4.01GB)。閾値は削減後実測 + 余裕 2.8GB で再設定 (旧 50GB は緩すぎて9GBのゴミが検知されなかった、詳細 docs/todo/01_改善バックログ.md [R2-STORAGE-01] / .claude/rules/r2-storage-design.md)"
     },
     {
       "rule_id": "r2-egress-spike",

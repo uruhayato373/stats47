@@ -4,7 +4,7 @@ const SECTIONS = [
   {
     href: "/sns",
     title: "SNS",
-    desc: "投稿・予約・caption・メトリクス (X / IG / YouTube / note)",
+    desc: "投稿・予約・caption・メトリクス (X / IG / note)",
   },
   {
     href: "/assets",

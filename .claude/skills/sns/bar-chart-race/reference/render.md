@@ -14,14 +14,15 @@
 | パラメータ | 必須 | デフォルト | 説明 |
 |---|---|---|---|
 | **key** | - | 全件 | 特定のランキングキーのみ処理 |
-| **platform** | - | 全プラットフォーム | `youtube` / `x` |
+| **platform** | - | 全プラットフォーム | `instagram` / `tiktok` / `x` |
 | **dry-run** | - | false | レンダリングせずジョブ一覧を表示 |
 
 ## 出力先
 
 ```
 .local/r2/sns/bar-chart-race/<rankingKey>/
-  youtube/shorts.mp4
+  instagram/reel.mp4
+  tiktok/reel.mp4
   x/video.mp4
 ```
 
@@ -54,11 +55,11 @@ npx tsx scripts/pipeline/render-bar-chart-race.ts
 # 特定キーのみ
 npx tsx scripts/pipeline/render-bar-chart-race.ts --key total-population
 
-# YouTube のみ
-npx tsx scripts/pipeline/render-bar-chart-race.ts --platform youtube
+# X のみ
+npx tsx scripts/pipeline/render-bar-chart-race.ts --platform x
 
 # 特定キー × 特定プラットフォーム
-npx tsx scripts/pipeline/render-bar-chart-race.ts --key total-population --platform youtube
+npx tsx scripts/pipeline/render-bar-chart-race.ts --key total-population --platform x
 ```
 
 ### Step 4: 結果報告
@@ -71,15 +72,14 @@ npx tsx scripts/pipeline/render-bar-chart-race.ts --key total-population --platf
 ## 所要時間の目安
 
 - 1動画: 50年 × 36fps = ~2,000フレーム → 約10〜20分
-- 26ランキング × 2プラットフォーム = 52動画 → 約9〜17時間
-- YouTube のみ（26動画）→ 約4〜9時間
+- 26ランキング × 3プラットフォーム = 78動画 → 約13〜26時間
 
 ## npm script
 
 ```bash
 npm run pipeline:bar-chart-race --workspace remotion
 npm run pipeline:bar-chart-race --workspace remotion -- --key total-population
-npm run pipeline:bar-chart-race --workspace remotion -- --platform youtube --dry-run
+npm run pipeline:bar-chart-race --workspace remotion -- --platform x --dry-run
 ```
 
 ## 参照

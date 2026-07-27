@@ -21,7 +21,6 @@ W19-W25 で 6 週連続投稿ゼロになった (計画外タスク優先で SNS
 |---|---|
 | **Instagram (主力)** | カルーセル 2 + リール 1 を生成・予約 |
 | **X** | 予約 2-3 本 + トレンドがあれば引用RT |
-| **YouTube** | **月初のみ** 月 1 本の企画判断 (それ以外の週は何もしない) |
 | **note** | 月 1-2 本ペースで企画 (該当週のみ) |
 
 ## 手順
@@ -65,9 +64,8 @@ node .claude/scripts/sns/promote-scheduled-x.cjs --apply                        
 - 頻度上限は rules §1 quota (`X_DAILY_MAX=3` / 週 14-21) が SSOT。ガードは `check-x-post-budget.cjs`。
 - 単発だけ作るなら `/post-x --key <rankingKey>` (post-x-batch の N=1 版)。
 
-### Step 5: 月初のみ — YouTube 月 1 本 + note
+### Step 5: 月初のみ — note
 
-- **月初の週だけ**: `/bar-chart-race <key>` で BCR を企画・生成 → 翌週以降 `/post-youtube` (ガード 3 点)
 - note 該当週: 衛星記事 1 本を企画 (note-manager)
 
 ### Step 6: 消化チェック
@@ -83,12 +81,12 @@ node .claude/scripts/sns/promote-scheduled-x.cjs --apply                        
 ## やらないこと (意図的)
 
 - **投稿の全自動化はしない** — X 予約は dry-run 確認を残す。IG は GHA cron に委ねるが schedule 生成は人手起点
-- **量産しない** — 頻度上限は rules §1 を厳守 (YT 月1・X 週2-3・IG 週3枠)
+- **量産しない** — 頻度上限は rules §1 を厳守 (X 週2-3・IG 週3枠)
 - **TikTok は扱わない** — 撤退恒久
 
 ## 関連
 
 - 正典: `.claude/rules/sns-content-standards.md` (頻度 §1 / 雛形 §2 / パイプライン §5)
 - 計測: `/sns-weekly-report` `/update-sns-metrics`
-- 生成・投稿: `/post-x-batch` (X 量産) `/post-x` (X 単発) `/publish-x` `/find-quote-rt` `/generate-instagram-schedule` `/post-ig-6angles` `/render-sns-stills` `/bar-chart-race` `/post-youtube`
+- 生成・投稿: `/post-x-batch` (X 量産) `/post-x` (X 単発) `/publish-x` `/find-quote-rt` `/generate-instagram-schedule` `/post-ig-6angles` `/render-sns-stills` `/bar-chart-race`
 - 競合: `/competitor-scan`

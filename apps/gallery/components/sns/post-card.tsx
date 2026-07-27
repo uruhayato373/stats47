@@ -261,30 +261,6 @@ function EditableBody({
     }
   };
 
-  const runPublishYt = async () => {
-    const video = window.prompt("動画ファイルの絶対パス:", post.media_path || "");
-    if (!video) return;
-    const title = window.prompt("動画タイトル (50字以内・重複不可):");
-    if (!title) return;
-    if (!window.confirm(`YouTube へアップロードします (月1運用)。よろしいですか?\n${title}`)) {
-      return;
-    }
-    setBusy(true);
-    setError(null);
-    try {
-      const r = await apiSend<{ id: string | number }>(
-        "/api/actions/publish-yt",
-        "POST",
-        { confirm: true, video_file: video, title, content_key: post.content_key },
-      );
-      onJobStarted(String(r.id), `YT upload: ${title}`);
-    } catch (e) {
-      setError(e instanceof ApiError ? e.message : String(e));
-    } finally {
-      setBusy(false);
-    }
-  };
-
   return (
     <div className="flex flex-col gap-2">
       <Textarea
@@ -358,19 +334,6 @@ function EditableBody({
             onClick={() => void runScheduleIg()}
           >
             IG 予約登録 (cron が投稿)
-          </Button>
-        </div>
-      ) : post.platform === "youtube" ? (
-        <div className="flex flex-wrap gap-1.5">
-          <Button
-            type="button"
-            size="sm"
-            variant="destructive"
-            className="h-7 px-2 text-xs"
-            disabled={busy}
-            onClick={() => void runPublishYt()}
-          >
-            YT 投稿 (月1ガード)
           </Button>
         </div>
       ) : null}

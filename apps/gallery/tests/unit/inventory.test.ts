@@ -92,6 +92,7 @@ describe("inventory", () => {
         localSnsFiles: [
           "ranking/key-a/x/stills/a.png",
           "ranking/key-a/instagram/reel.mp4",
+          // YouTube は撤退済でホワイトリスト外 (新規素材ディレクトリは走査しない)
           "compare/key-b/youtube/reel.mp4",
           // platform 以外のディレクトリ (無視される)
           "ranking/key-a/misc/note.txt",
@@ -100,8 +101,8 @@ describe("inventory", () => {
       const mats = scanLocalMaterials();
       expect(mats).toContainEqual({ domain: "ranking", content_key: "key-a", platform: "x" });
       expect(mats).toContainEqual({ domain: "ranking", content_key: "key-a", platform: "instagram" });
-      expect(mats).toContainEqual({ domain: "compare", content_key: "key-b", platform: "youtube" });
-      // "misc" は platform ホワイトリスト外なので列挙されない。
+      // "youtube" と "misc" は platform ホワイトリスト外なので列挙されない。
+      expect(mats.some((m) => m.platform === "youtube")).toBe(false);
       expect(mats.some((m) => m.platform === "misc")).toBe(false);
     });
 

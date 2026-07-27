@@ -71,7 +71,6 @@ git TS 化し永続 D1 を全廃した。アプリが読む各データの真実
 | 改善施策の一覧・TODO | `docs/todo/01_改善バックログ.md` |
 | 未分類の思いつき TODO (受信箱) | `docs/todo/inbox.md` |
 | セッション残タスク | `docs/todo/` の適切なバックログへ直接反映（一時ハンドオフ文書は作らない） |
-| YouTube 実験 (1 実験 1 ファイル) | `docs/15_実験ログ/youtube/EXP-NNN.md` |
 | コンテンツ backlog | `docs/30_note記事企画/backlog/` |
 | 未着手の機能・自動化 backlog | `docs/todo/02_機能バックログ.md`（指標拡充候補は `docs/todo/03_指標バックログ.md`） |
 

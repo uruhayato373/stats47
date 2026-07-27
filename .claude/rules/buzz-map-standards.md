@@ -48,7 +48,7 @@
 | `45` | 1080×1350 | **静止画の既定**（X・IG フィード） |
 | `11` | 1080×1080 | X 動画・IG 正方形 |
 | `916` | 1080×1920 | IG リール・TikTok（※TikTok は投稿禁止=素材のみ）・リール表紙 |
-| `169` | 1920×1080 | YouTube・OGP。**本土左寄せトリム・沖縄インセット非表示** |
+| `169` | 1920×1080 | OGP。**本土左寄せトリム・沖縄インセット非表示** |
 
 ### 型B の演出規約
 
@@ -230,7 +230,7 @@ builder が `renderClass`（KSJ/DPF）または `lane`（e-Stat）から機械�
   （`BuzzMapCard.tsx`）や tokens.ts を触る変更は **§6 決定ログ追記とセット**（勝手に型を漂流させない）
 - **投稿は本カタログの範囲外**: X は §2-9/§2-0（`sns-content-standards.md`）の既存フロー。buzz-map を
   X 画像カタログ（§2-9 image_kind）へ登録する改訂は **§2-10 の人間承認ゲート経由**で行う（未実施）
-- 出力先: `.local/r2/sns/buzz-map/<theme_id>/{x,instagram,youtube}/...`（gitignored・R2 push は `/push-r2`）
+- 出力先: `.local/r2/sns/buzz-map/<theme_id>/{x,instagram}/...`（gitignored・R2 push は `/push-r2`）
 - 頻度リミット・キャプション雛形は `sns-content-standards.md` §1-2 に従う（本ファイルで重複定義しない）
 
 ## 6. 決定ログ

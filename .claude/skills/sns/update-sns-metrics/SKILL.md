@@ -1,13 +1,13 @@
 ---
 name: update-sns-metrics
-description: 各 SNS プラットフォームからメトリクスを一括取得し `.claude/skills/analytics/sns-metrics-improvement/snapshots/YYYY-MM-DD/metrics.csv` に記録する。Use when user says "メトリクス更新", "SNS数値取得". Instagram/YouTube は公式 API、X は browser-use CLI.
+description: 各 SNS プラットフォームからメトリクスを一括取得し `.claude/skills/analytics/sns-metrics-improvement/snapshots/YYYY-MM-DD/metrics.csv` に記録する。Use when user says "メトリクス更新", "SNS数値取得". Instagram は公式 API、X は browser-use CLI。(YouTube は撤退済で対象外)
 disable-model-invocation: true
-argument-hint: [--platform x|instagram|youtube|all]
+argument-hint: [--platform x|instagram|all]
 primary_agent: sns-metrics-sync
-co_agents: [x-strategist, youtube-strategist]
+co_agents: [x-strategist, instagram-strategist]
 ---
 
-各 SNS プラットフォームからメトリクスを取得し、時系列履歴は `.claude/skills/analytics/sns-metrics-improvement/snapshots/YYYY-MM-DD/metrics.csv` に、最新値キャッシュは投稿台帳 `.claude/state/sns/posts.json` の各レコード（impressions / likes / reposts / replies / bookmarks / metrics_updated_at カラム）に `sns-posts-store.cjs` の `updateById` で記録する。Instagram は Graph API v21、YouTube は Data API v3、X は browser-use CLI を使用する。
+各 SNS プラットフォームからメトリクスを取得し、時系列履歴は `.claude/skills/analytics/sns-metrics-improvement/snapshots/YYYY-MM-DD/metrics.csv` に、最新値キャッシュは投稿台帳 `.claude/state/sns/posts.json` の各レコード（impressions / likes / reposts / replies / bookmarks / metrics_updated_at カラム）に `sns-posts-store.cjs` の `updateById` で記録する。Instagram は Graph API v21、X は browser-use CLI を使用する。（YouTube は撤退済のため対象外。過去実績は posts.json に platform=youtube のまま残る）
 
 **記録先の統一原則（.claude/rules/data-storage.md）**:
 - 時系列履歴 → `.claude/skills/analytics/sns-metrics-improvement/snapshots/YYYY-MM-DD/metrics.csv`（ヘルパ: `.claude/scripts/lib/sns-metrics-store.cjs`）
@@ -26,7 +26,7 @@ co_agents: [x-strategist, youtube-strategist]
 ## 引数
 
 ```
-/update-sns-metrics [--platform x|instagram|youtube|all] [--skip-backfill]
+/update-sns-metrics [--platform x|instagram|all] [--skip-backfill]
 ```
 
 - `--platform`（任意）: 取得対象（デフォルト: `all`）
@@ -47,7 +47,7 @@ bash .claude/scripts/cleanup-browser.sh --force 2>/dev/null
 - `browser-use` コマンドは毎回フルで記述する（`$BU` 変数展開しない。zsh が解釈に失敗する）
 - JS はファイルに書き出してから `eval "$(cat /tmp/xxx.js)"` で渡す。インラインの複雑な JS はクォート問題で壊れる
 - Node.js スクリプトも `/tmp/*.js` にファイル書き出してから `node /tmp/xxx.js` で実行する
-- **投稿台帳ストア（`sns-posts-store.cjs`）は `PROJECT_ROOT` からの相対 `require("./.claude/scripts/lib/sns-posts-store.cjs")` で読む**（リポジトリルートで実行）。`/tmp/*.js` の heredoc で絶対パスを使う場合は `require("${PROJECT_ROOT}/.claude/scripts/lib/sns-posts-store.cjs")`。`googleapis`（YouTube）も同様に絶対パス `require("${PROJECT_ROOT}/node_modules/googleapis")` を使う
+- **投稿台帳ストア（`sns-posts-store.cjs`）は `PROJECT_ROOT` からの相対 `require("./.claude/scripts/lib/sns-posts-store.cjs")` で読む**（リポジトリルートで実行）。`/tmp/*.js` の heredoc で絶対パスを使う場合は `require("${PROJECT_ROOT}/.claude/scripts/lib/sns-posts-store.cjs")`
 
 ## マッチング優先順位（全プラットフォーム共通）
 
@@ -84,13 +84,6 @@ bash .claude/scripts/cleanup-browser.sh --force 2>/dev/null
 ### Instagram
 
 `references/platform-instagram.md` の手順に従って実行する。
-
----
-
-### YouTube
-
-`references/platform-youtube.md` の手順に従って実行する。
-
 
 ---
 
@@ -144,10 +137,8 @@ bash .claude/scripts/cleanup-browser.sh 2>/dev/null
 - `references/phase0-caption-backfill.md` — Phase 0 Caption Backfill スクリプト
 - `references/platform-x.md` — X (Twitter) メトリクス取得手順（X-1〜X-5）
 - `references/platform-instagram.md` — Instagram メトリクス取得手順（IG-1〜IG-5）
-- `references/platform-youtube.md` — YouTube メトリクス取得手順（YT-1）
 - `.claude/scripts/lib/sns-metrics-store.cjs` — 時系列履歴書き込みヘルパ（CSV upsert）
 - `.claude/skills/analytics/sns-metrics-improvement/` — スナップショット蓄積先 + improvement-log
 - `.claude/state/sns/posts.json`（`.claude/scripts/lib/sns-posts-store.cjs`）— 投稿台帳 SSOT。最新値キャッシュの書込先（完全DBレス。旧 D1 sns_posts は廃止）
 - `packages/database/src/schema/sns_posts.ts` — レコードの型ソース（カラム名の参照用。配信 R2・投稿台帳には影響しない残置）
-- `.claude/skills/analytics/fetch-youtube-data/SKILL.md` — YouTube API パターンの原典
 - `.claude/skills/sns/find-quote-rt/SKILL.md` — X タイムライン DOM 抽出パターンの原典

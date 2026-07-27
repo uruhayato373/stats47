@@ -1,6 +1,5 @@
 import 'server-only';
 
-import fs from 'node:fs';
 import path from 'node:path';
 
 import { projectRoot, R2_BASE } from './project-root';
@@ -8,7 +7,7 @@ import { startJob } from './jobs';
 import { loadGalleryState } from './gallery-state';
 
 /**
- * spawn を伴うアクション (publish-x / publish-yt / regenerate) と R2 探索。
+ * spawn を伴うアクション (publish-x / regenerate) と R2 探索。
  * 旧 server.mjs の該当ハンドラを忠実移植 (引数構成・ガード・ホワイトリストを変えない)。
  * 各関数は { status, body } を返し、route が HTTP に写す。
  */
@@ -16,9 +15,6 @@ export type ActionResult<T = unknown> = { status: number; body: T };
 
 function publishXScript(): string {
   return path.join(projectRoot(), '.claude/skills/sns/publish-x/publish-x.ts');
-}
-function ytUploadScript(): string {
-  return path.join(projectRoot(), '.claude/scripts/youtube/upload.js');
 }
 
 // ─── publish-x ─────────────────────────────────────
@@ -67,41 +63,6 @@ export function publishX(body: PublishXInput): ActionResult {
   if (immediate) args.push('--immediate');
   if (dry_run) args.push('--dry-run');
   const r = startJob('publish-x', 'npx', args);
-  return 'error' in r ? { status: 409, body: r } : { status: 202, body: r };
-}
-
-// ─── publish-yt ────────────────────────────────────
-export interface PublishYtInput {
-  confirm?: boolean;
-  video_file?: string;
-  title?: string;
-  content_key?: string;
-  thumbnail?: string;
-  description?: string;
-}
-
-export function publishYt(body: PublishYtInput): ActionResult {
-  if (body.confirm !== true) {
-    return {
-      status: 400,
-      body: { error: 'confirm:true が必須 (月1運用の明示確認)' },
-    };
-  }
-  const { video_file, title, content_key, thumbnail, description } = body;
-  if (!video_file || !title)
-    return { status: 400, body: { error: 'video_file / title は必須' } };
-  if (!fs.existsSync(video_file)) {
-    return {
-      status: 400,
-      body: { error: `video_file が存在しない: ${video_file}` },
-    };
-  }
-  const args = [ytUploadScript(), video_file, '--title', title];
-  if (description) args.push('--description', description);
-  if (thumbnail) args.push('--thumbnail', thumbnail);
-  if (content_key) args.push('--content-key', content_key);
-  // 月1 + 重複ガードは upload.js が内蔵 (check-youtube-post-budget / check-youtube-duplicate)
-  const r = startJob('publish-yt', 'node', args);
   return 'error' in r ? { status: 409, body: r } : { status: 202, body: r };
 }
 
@@ -170,7 +131,6 @@ export async function probeR2(
     `instagram/stills/slide-1-cover-1080x1350.png`,
     `x/caption.txt`,
     `x/stills/chart-x-1200x630.png`,
-    `youtube/reel.mp4`,
   ];
   const found: Array<{ rel: string; size: number }> = [];
   await Promise.all(

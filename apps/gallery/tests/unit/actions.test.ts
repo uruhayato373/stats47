@@ -1,7 +1,4 @@
 import { EventEmitter } from "node:events";
-import fs from "node:fs";
-import os from "node:os";
-import path from "node:path";
 
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
@@ -9,8 +6,9 @@ import { cleanupFixtureRoot, makeFixtureRoot } from "../helpers/fixture-root";
 
 /**
  * actions.ts のガードを検証する: REGEN whitelist 外 kind 拒否 / keys 正規表現違反 /
- * X 7 日ガード (lastPublishXSuccess) / publish-yt confirm・video_file 存在。
+ * X 7 日ガード (lastPublishXSuccess)。
  * spawn は mock して実プロセスを起動しない。
+ * (YouTube は撤退済のため publishYt 系テストは削除)
  */
 class FakeChild extends EventEmitter {
   stdout = new EventEmitter();
@@ -129,38 +127,6 @@ describe("actions guards", () => {
     it("予約なのに datetime/immediate/dry_run いずれも無い → 400", async () => {
       const { publishX } = await setup({ lastPublishXSuccess: daysAgoIso(1) });
       expect(publishX({ content_key: "k" }).status).toBe(400);
-    });
-  });
-
-  describe("publishYt", () => {
-    it("confirm !== true を 400", async () => {
-      const { publishYt } = await setup();
-      expect(publishYt({ video_file: "/x.mp4", title: "t" }).status).toBe(400);
-    });
-
-    it("video_file / title 欠落を 400", async () => {
-      const { publishYt } = await setup();
-      expect(publishYt({ confirm: true, title: "t" }).status).toBe(400);
-      expect(publishYt({ confirm: true, video_file: "/x.mp4" }).status).toBe(400);
-    });
-
-    it("video_file が存在しなければ 400", async () => {
-      const { publishYt } = await setup();
-      const r = publishYt({ confirm: true, video_file: "/no/such/file.mp4", title: "t" });
-      expect(r.status).toBe(400);
-    });
-
-    it("全条件満たせば 202 で spawn する", async () => {
-      const { publishYt } = await setup();
-      const tmp = path.join(os.tmpdir(), `yt-vid-${Date.now()}.mp4`);
-      fs.writeFileSync(tmp, "video");
-      try {
-        const r = publishYt({ confirm: true, video_file: tmp, title: "t" });
-        expect(r.status).toBe(202);
-        expect(spawnMock).toHaveBeenCalledTimes(1);
-      } finally {
-        fs.rmSync(tmp, { force: true });
-      }
     });
   });
 });

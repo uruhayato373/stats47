@@ -1,7 +1,7 @@
 /**
  * check-x-post-budget.cjs — X 投稿頻度ガード (SSOT: sns-content-standards.md §1 quota)
  *
- * YouTube の check-youtube-post-budget.cjs に相当する X 版。上限は x-catalog 経由で
+ * X 投稿の頻度ガード。上限は x-catalog 経由で
  * §1 の `X_DAILY_MAX` / `X_WEEKLY_TARGET_MIN` / `X_WEEKLY_TARGET_MAX` を読む
  * (ハードコードしない)。posts.json の X 投稿 (status=scheduled|posted) を JST 日付で数える。
  *

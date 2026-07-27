@@ -1,0 +1,77 @@
+name: 🧽 R2 ISR cache GC (post-deploy)
+
+# OpenNext の ISR キャッシュ incremental-cache/<buildId>/ は、デプロイのたびに新しい世代を作る。
+# 旧世代は二度と読まれないが自動では消えないため、デプロイ完了のたびにここで回収する。
+#
+# 背景 (2026-07-27): audit-incremental-cache.ts はどの workflow にも配線されておらず、
+# 2026-06-20 から 5 週間で 67 世代 / 9.01 GB (バケットの 45%) が死蔵していた。
+# 正典: .claude/rules/r2-storage-design.md「R2 保持・削除ポリシー」
+#
+# 安全設計:
+# - 最新 3 世代は必ず残す (直前のデプロイへ戻す余地を確保。キャッシュ自体は再生成可能)
+# - --assert-max 4 で、処理後に世代が増え続けていないかを機械的に検査し、
+#   効かなくなったら workflow を fail させる (黙って再発しない)
+# - concurrency r2-write で他の R2 writer と直列化する
+
+on:
+  workflow_run:
+    workflows: ["Deploy to Cloudflare Workers"]
+    types: [completed]
+  schedule:
+    - cron: "30 18 * * 6" # JST 日曜 03:30 (デプロイ時 GC の取りこぼし回収)
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "true: 削除せず対象一覧のみ"
+        required: false
+        default: "true"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: r2-write
+  cancel-in-progress: false
+
+env:
+  R2_S3_ENDPOINT: https://${{ secrets.CLOUDFLARE_ACCOUNT_ID }}.r2.cloudflarestorage.com
+  R2_ACCESS_KEY_ID: ${{ secrets.CLOUDFLARE_R2_ACCESS_KEY_ID }}
+  R2_SECRET_ACCESS_KEY: ${{ secrets.CLOUDFLARE_R2_SECRET_ACCESS_KEY }}
+  CLOUDFLARE_R2_BUCKET_NAME: stats47
+
+jobs:
+  gc:
+    # デプロイが失敗した run では新世代が増えないので回収も不要
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: 🧰 Checkout develop
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: develop
+          fetch-depth: 1
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 🧽 旧世代を回収し、世代数の上限を検査
+        run: |
+          # ★pipefail 必須: `script | grep | tee` は既定でパイプ末尾 (tee) の exit code を返すため、
+          #   これが無いと --assert-max の exit 1 が握り潰され「番人が黙る」(2026-07-27 実測で確認)
+          set -o pipefail
+          # ARGS は配列で組む ("$ARGS" 単一引数渡しは 1 トークン化する — ARG_VECTOR_QUOTED)
+          ARGS=(--keep 3 --assert-max 4)
+          # dispatch で dry_run=true のときだけ削除しない。workflow_run / schedule は実削除
+          if [ "${{ github.event_name }}" != 'workflow_dispatch' ] || [ "${{ inputs.dry_run }}" = "false" ]; then
+            ARGS+=(--apply)
+          fi
+          echo "audit-incremental-cache.ts ${ARGS[*]}"
+          npx tsx packages/r2-storage/src/scripts/audit-incremental-cache.ts "${ARGS[@]}" 2>&1 \
+            | grep -vE '^\{"level"' | tee -a "$GITHUB_STEP_SUMMARY"

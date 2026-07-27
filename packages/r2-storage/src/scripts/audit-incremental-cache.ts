@@ -7,6 +7,11 @@
  *   npx tsx packages/r2-storage/src/scripts/audit-incremental-cache.ts
  *   npx tsx packages/r2-storage/src/scripts/audit-incremental-cache.ts --keep 5
  *   npx tsx packages/r2-storage/src/scripts/audit-incremental-cache.ts --keep 5 --apply
+ *   npx tsx packages/r2-storage/src/scripts/audit-incremental-cache.ts --keep 3 --apply --assert-max 4
+ *
+ * --assert-max <n>: 処理後に残った世代数が n を超えていたら exit 1。
+ *   GC が黙って効かなくなった状態 (2026-06〜07 に 67 世代 9GB まで放置された事故) を
+ *   機械的に検知するための番人。--apply と併用すると削除後の実測で判定する。
  */
 import { config } from "dotenv";
 import path from "path";
@@ -26,7 +31,7 @@ interface CacheGeneration {
   keys: string[];
 }
 
-function parseArgs(): { keep: number; apply: boolean } {
+function parseArgs(): { keep: number; apply: boolean; assertMax?: number } {
   const args = process.argv.slice(2);
   const keepIdx = args.indexOf("--keep");
   const keep = keepIdx >= 0 ? Number(args[keepIdx + 1]) : 3;
@@ -35,9 +40,17 @@ function parseArgs(): { keep: number; apply: boolean } {
     throw new Error("--keep must be a positive integer");
   }
 
+  const assertIdx = args.indexOf("--assert-max");
+  const assertMax = assertIdx >= 0 ? Number(args[assertIdx + 1]) : undefined;
+
+  if (assertMax !== undefined && (!Number.isInteger(assertMax) || assertMax < 1)) {
+    throw new Error("--assert-max must be a positive integer");
+  }
+
   return {
     keep,
     apply: args.includes("--apply"),
+    assertMax,
   };
 }
 
@@ -109,8 +122,29 @@ async function deleteKeys(keys: string[]): Promise<void> {
   }
 }
 
+/**
+ * 処理後に残った世代数を再計測し、assertMax を超えていたら exit 1 にする。
+ * 「GC を配線したつもりで実は効いていない」を黙って見逃さないための番人。
+ */
+async function assertGenerationCeiling(assertMax: number): Promise<void> {
+  const remaining = groupGenerations(await listFromR2WithSize("incremental-cache/"));
+  console.log("");
+  console.log(`assert-max: ${remaining.length} generations remain (ceiling ${assertMax})`);
+
+  if (remaining.length > assertMax) {
+    console.error(
+      `✗ incremental-cache の世代が ${remaining.length} 個あり上限 ${assertMax} を超えている。` +
+        " GC が効いていない可能性がある (正典 .claude/rules/r2-storage-design.md)",
+    );
+    process.exitCode = 1;
+    return;
+  }
+
+  console.log("✓ 世代数は上限内");
+}
+
 async function main(): Promise<void> {
-  const { keep, apply } = parseArgs();
+  const { keep, apply, assertMax } = parseArgs();
   if (apply) {
     assertR2WriteAllowed({
       op: "audit-incremental-cache --apply (R2 incremental-cache deletion)",
@@ -151,17 +185,21 @@ async function main(): Promise<void> {
   if (!apply) {
     console.log("");
     console.log("dry-run only. Add --apply to delete generations marked as 'would'.");
+    if (assertMax !== undefined) await assertGenerationCeiling(assertMax);
     return;
   }
 
   if (removable.length === 0) {
     console.log("No removable generations.");
+    if (assertMax !== undefined) await assertGenerationCeiling(assertMax);
     return;
   }
 
   console.log("");
   console.log("Deleting removable incremental-cache generations...");
   await deleteKeys(removable.flatMap((generation) => generation.keys));
+
+  if (assertMax !== undefined) await assertGenerationCeiling(assertMax);
 }
 
 main().catch((error) => {

@@ -6,7 +6,7 @@
 
 | 対象 | 置き場所 |
 |---|---|
-| 複数スキルから共有されるユーティリティ（YouTube / GA4 / GSC 等ドメイン単位） | `.claude/scripts/<domain>/` 例: `.claude/scripts/youtube/`, `.claude/scripts/lib/` |
+| 複数スキルから共有されるユーティリティ（SNS / GA4 / GSC 等ドメイン単位） | `.claude/scripts/<domain>/` 例: `.claude/scripts/sns/`, `.claude/scripts/lib/` |
 | 特定スキル専用の長大スクリプト | `.claude/skills/<skill>/scripts/` |
 | スキルが参照するデータ・テンプレ（非実行） | `.claude/skills/<skill>/reference/` |
 | launchd 等の OS 統合用シェルラッパー | `scripts/scheduled/`（唯一の例外、`.claude/` 外でよい） |

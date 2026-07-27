@@ -3,7 +3,8 @@
  * Bar Chart Race 動画 一括生成
  *
  * .local/r2/sns/bar-chart-race/ 配下の全ディレクトリを走査し、
- * YouTube Shorts / Instagram Reel / TikTok の動画を生成する。
+ * Instagram Reel / TikTok / X 用の動画を生成する。
+ * (YouTube は撤退済のため youtube / youtube-normal 系統は生成しない)
  *
  * 前提:
  *   - config.json, data.json が各ディレクトリに存在すること
@@ -14,7 +15,7 @@
  *
  * オプション:
  *   --key <key>         特定のランキングキーのみ処理
- *   --platform <p>      特定プラットフォームのみ (youtube / instagram / tiktok)
+ *   --platform <p>      特定プラットフォームのみ (instagram / tiktok / x)
  *   --dry-run           レンダリングせずジョブ一覧を表示
  */
 
@@ -144,12 +145,6 @@ const PLATFORM_CONFIG: Array<{
   outputFile: string;
 }> = [
   {
-    platform: "youtube",
-    variant: "youtube",
-    compositionId: "BarChartRace-YouTubeShort",
-    outputFile: "youtube/shorts.mp4",
-  },
-  {
     platform: "instagram",
     variant: "instagram",
     compositionId: "BarChartRace-InstagramReel",
@@ -166,12 +161,6 @@ const PLATFORM_CONFIG: Array<{
     variant: "youtube",
     compositionId: "BarChartRace-YouTubeShort",
     outputFile: "x/video.mp4",
-  },
-  {
-    platform: "youtube-normal",
-    variant: "youtube",
-    compositionId: "BarChartRace-Normal",
-    outputFile: "youtube-normal/video.mp4",
   },
 ];
 
@@ -248,7 +237,7 @@ async function main() {
     allJobs.push(...jobs);
   }
 
-  const platforms = targetPlatform || "youtube/instagram/tiktok";
+  const platforms = targetPlatform || "instagram/tiktok/x";
   console.log(`📂 対象: ${dirs.length - skipped.length} ランキング (${platforms})`);
   console.log(`🎬 ジョブ数: ${allJobs.length}`);
   if (skipped.length > 0) {

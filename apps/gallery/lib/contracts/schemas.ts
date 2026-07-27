@@ -6,8 +6,8 @@ import { z } from "zod";
  * scheduled_at:null 許容・日本語 caption 許容・comma 区切り keys 許容。
  */
 
-/** 書込対象の platform enum (X / IG / YouTube のみ)。 */
-export const WritePlatform = z.enum(["x", "instagram", "youtube"]);
+/** 書込対象の platform enum (X / IG のみ。YouTube は撤退済で新規作成不可)。 */
+export const WritePlatform = z.enum(["x", "instagram"]);
 
 /** PATCH /api/posts/:id — caption / scheduled_at のみ。厳密検証は server 側 updatePost が担う。 */
 export const PatchPost = z
@@ -54,18 +54,6 @@ export const PublishX = z.object({
 });
 
 export type PublishXInputZ = z.infer<typeof PublishX>;
-
-/** POST /api/actions/publish-yt */
-export const PublishYt = z.object({
-  confirm: z.boolean().optional(),
-  video_file: z.string().optional(),
-  title: z.string().optional(),
-  content_key: z.string().optional(),
-  thumbnail: z.string().optional(),
-  description: z.string().optional(),
-});
-
-export type PublishYtInputZ = z.infer<typeof PublishYt>;
 
 /** POST /api/actions/regenerate */
 export const Regenerate = z.object({

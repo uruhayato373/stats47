@@ -49,7 +49,7 @@ export interface LimitInfoDTO {
 }
 
 export interface LimitsResponse {
-  limits: { x: LimitInfoDTO; instagram: LimitInfoDTO; youtube: LimitInfoDTO };
+  limits: { x: LimitInfoDTO; instagram: LimitInfoDTO };
   galleryState: Record<string, unknown>;
 }
 

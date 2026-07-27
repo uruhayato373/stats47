@@ -1,15 +1,13 @@
 import { EventEmitter } from "node:events";
-import fs from "node:fs";
-import os from "node:os";
-import path from "node:path";
 
 import { afterEach, describe, expect, it, vi } from "vitest";
 
 import { cleanupFixtureRoot, makeFixtureRoot } from "../helpers/fixture-root";
 
 /**
- * action 系 Route Handler (publish-x / publish-yt / regenerate) の integration。
- * spawn を mock し実プロセスを起動しない。7日ガード・confirm・whitelist・job 実行中 409 を検証。
+ * action 系 Route Handler (publish-x / regenerate) の integration。
+ * spawn を mock し実プロセスを起動しない。7日ガード・whitelist・job 実行中 409 を検証。
+ * (YouTube は撤退済のため publish-yt 系テストは削除)
  */
 class FakeChild extends EventEmitter {
   stdout = new EventEmitter();
@@ -83,37 +81,6 @@ describe("action routes", () => {
       // 2 個目: 同時実行 1 で 409。
       const second = await POST(req("http://x", { content_key: "k2", dry_run: true }));
       expect(second.status).toBe(409);
-    });
-  });
-
-  describe("POST /api/actions/publish-yt", () => {
-    it("confirm 欠落 → 400", async () => {
-      setup();
-      const { POST } = await import("@/app/api/actions/publish-yt/route");
-      const res = await POST(req("http://x", { video_file: "/x.mp4", title: "t" }));
-      expect(res.status).toBe(400);
-    });
-
-    it("video_file 不在 → 400", async () => {
-      setup();
-      const { POST } = await import("@/app/api/actions/publish-yt/route");
-      const res = await POST(
-        req("http://x", { confirm: true, video_file: "/no/such.mp4", title: "t" }),
-      );
-      expect(res.status).toBe(400);
-    });
-
-    it("正常 → 202", async () => {
-      setup();
-      const tmp = path.join(os.tmpdir(), `yt-route-${Date.now()}.mp4`);
-      fs.writeFileSync(tmp, "video");
-      try {
-        const { POST } = await import("@/app/api/actions/publish-yt/route");
-        const res = await POST(req("http://x", { confirm: true, video_file: tmp, title: "t" }));
-        expect(res.status).toBe(202);
-      } finally {
-        fs.rmSync(tmp, { force: true });
-      }
     });
   });
 
