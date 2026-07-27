@@ -13,7 +13,7 @@ model: sonnet
 - 画像プロンプト生成 (`generate-ai-content` の画像系派生)
 - 画像プロンプト catalog の維持 (`.claude/skills/image-prompt/reference/catalog.md`、 43 種)
 - OGP / note 表紙 / SNS 静止素材の用途別プロンプト選定
-- **画像資産の棚卸し・ギャラリー監査 (read-only)** (`/audit-ogp-images`、`.claude/rules/ogp-image-standards.md` の SSOT 維持)。デザイン妥当性の目視評価は `ui-reviewer`、供給是正の実行は種別ごとの既存 agent (blog=blog-editor / ranking=ranking-publisher / note=note-manager / areas OGP・県シルエットカード=ranking-ui-manager、生成は generate-ogp-images.ts / CI) に委譲し、curator は監査と提案に留める
+- **画像資産の棚卸し・ギャラリー監査 (read-only)** (`/audit-ogp-images`、`.claude/rules/ogp-image-standards.md` の SSOT 維持)。デザイン妥当性の目視評価は `ui-reviewer`、供給是正の実行は種別ごとの既存 agent (blog=blog-editor / ranking=ranking-publisher / note=note-manager / areas OGP・県シルエットカード=ranking-ui-manager) に委譲し、curator は監査と提案に留める。反映経路は各 generator (`generate-ogp-images.ts` 等) が変更 bundle のみを `.local/image-staging/<type>/` に生成 → exact plan → `push-generated-image-set.ts --plan` (r2-publisher) で反映。監査は手動 `/audit-ogp-images` に加え、週次 self-heal (`ogp-image-audit-weekly.yml`) が陳腐化/欠落を自動修復し、修復後も残存すれば Issue 起票する (`.claude/rules/ogp-image-standards.md` §5.0)
 
 ## 担当スキル
 
@@ -41,8 +41,8 @@ model: sonnet
 - `.claude/skills/image-prompt/reference/catalog.md` — プロンプト catalog (CRUD)
 - `.claude/state/ogp/inventory.json` — 画像資産の棚卸し結果 (write。`/audit-ogp-images --audit` が生成)
 - `docs/31_note記事原稿/<slug>/header.png` — note 表紙 (write。ephemeral outbox: 存在しない場合は先に `bash .claude/scripts/note/restore-from-r2.sh <slug>` で復元)
-- `.local/r2/app/blog/<slug>/og-*.png` — ブログ OGP (write)
-- `.local/r2/sns/` — SNS 静止素材 (write)
+- `.local/image-staging/<type>/` — 生成画像 bundle の staging (write。exact plan 経由で反映。旧 `.local/r2/app/blog/<slug>/og-*.png` 直接 write 経路は廃止)
+- `.local/r2/sns/` — manifest を持たない SNS 静止素材 (write。`push-exact-r2-assets.ts` 経由)
 
 ## File Boundary (並行衝突回避)
 

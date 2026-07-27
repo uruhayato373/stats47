@@ -8,6 +8,15 @@ co_agents: [instagram-strategist]
 
 R2 への push (書き込み) を実行する。**R2 書き込みは CI / クラウド専用** で、ローカルからは原則行わない。
 
+## ★ 生成画像 bundle (OGP 等) は対象外
+
+**生成画像 bundle (OGP / リンクカード / note カバー / pref-silhouette) は本 skill の `.local/r2` →
+`diff-push-r2` 経路を使わない。** generator が変更分だけを `.local/image-staging/<type>/` に生成して出す
+exact plan (`.local/image-generation-publish-plan-<type>.json`) を、
+`packages/r2-storage/src/scripts/push-generated-image-set.ts --plan <path>` で反映する
+(正典: `.claude/rules/ogp-image-standards.md` §5.0)。manifest を持たない資産 (blog SVG / buzz-map 等) は
+`push-exact-r2-assets.ts` (明示 key のみ)。
+
 ## ★ R2 書き込みは CI / クラウド専用
 
 完全DBレス運用では SSOT は git TS と R2。R2 反映 (push) は **レビュー済みの git 状態から CI が行う**。

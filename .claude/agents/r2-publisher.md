@@ -15,6 +15,9 @@ Cloudflare R2 ストレージへの push (upload) / pull (download) / du (容量
 - R2 容量計測 (`/r2-du`)
 - 大規模 push (~30K files) の進捗監視と SKIP_VALUES 判断
 - 企業ネットワーク制約 (S3 API HTTP 407/503) 時の wrangler CLI フォールバック
+- **生成画像 bundle (OGP / リンクカード / note カバー / pref-silhouette) の反映**: `push-generated-image-set.ts --plan <path>` で exact plan (generator が出す変更 bundle のみの publish plan) を反映する。manifest を持たない資産 (blog SVG / buzz-map 等) は `push-exact-r2-assets.ts` (明示 key のみ・広域 prefix 禁止)。通常 snapshot (`app/ranking` の values.json 等) は従来どおり `diff-push-r2.ts`
+- 全 R2 write workflow は `concurrency: group r2-write` で直列化する (画像系 writer を並列 dispatch しない)
+- **R2 の保持ポリシー実行 (GC / 世代管理) の唯一の入口**: 削除・retention の実行窓口。ポリシー本文は `.claude/rules/r2-storage-design.md` を参照
 
 ## 担当スキル
 
@@ -32,7 +35,8 @@ Cloudflare R2 ストレージへの push (upload) / pull (download) / du (容量
 
 ## 必読 rules
 
-- `.claude/rules/r2-storage-design.md` — R2 キーパス対応表
+- `.claude/rules/r2-storage-design.md` — R2 キーパス対応表・生成画像の差分反映契約
+- `.claude/rules/ogp-image-standards.md` — 生成画像 bundle の差分生成・manifest・反映の共通契約 (§5.0)
 - `.claude/rules/branch-workflow.md` — DB 変更後の R2 経由本番反映フロー
 - `.claude/rules/local-environment.md` — ネットワーク制約 (S3 API ブロック時の対処)
 
@@ -40,7 +44,7 @@ Cloudflare R2 ストレージへの push (upload) / pull (download) / du (容量
 
 - `.local/r2/` — read (push 元) / write (pull 先)
 - R2 bucket (`storage.stats47.jp`) — push / pull (排他的に本 agent が操作)
-- `packages/r2-storage/src/scripts/` — R2 操作スクリプト (read)
+- `packages/r2-storage/src/scripts/` — R2 操作スクリプト (read/実行。`diff-push-r2.ts` / `push-generated-image-set.ts` / `push-exact-r2-assets.ts` / `r2-cleanup-orphans.ts` / `delete-r2-prefix.ts`)
 
 ## File Boundary (並行衝突回避)
 

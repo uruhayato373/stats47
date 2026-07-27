@@ -36,12 +36,14 @@ db-manager から snapshot 系を切り出した。 永続 DB への write は�
 - R2 push (upload) → `r2-publisher` に委譲
 - e-Stat 探索 → `estat-researcher` に委譲
 - ブログ記事の本文編集 → `blog-editor` / `article-writer` に委譲
+- **生成画像 bundle (OGP / リンクカード / note カバー / pref-silhouette) の R2 反映** → 対象外。各画像 generator (blog-editor / ranking-publisher / image-prompt-curator 等) が変更分だけを `.local/image-staging/<type>/` に生成し exact plan (publish-plan JSON) を出す。本 agent の `.local/r2/app/` snapshot 経路や `diff-push-r2` は使わず、push は `r2-publisher` が `push-generated-image-set.ts --plan` で行う (`.claude/rules/ogp-image-standards.md` §5.0)
 
 ## 必読 rules
 
-- `.claude/rules/r2-storage-design.md` — R2 キーパス対応表 (URL → app/...)
+- `.claude/rules/r2-storage-design.md` — R2 キーパス対応表 (URL → app/...)。生成画像 bundle は別契約 (§生成画像の差分反映契約)
 - `.claude/rules/data-sqlite-ssot.md` — git TS + R2 が SSOT (完全DBレス・doc12)。ビルドキャッシュは使い捨て
 - `.claude/rules/nextjs-ssg-preservation.md` — SSG 維持のため snapshot 構造変更時の影響範囲
+- `.claude/rules/ogp-image-standards.md` — 生成画像 bundle の exact plan 反映契約 (本 agent の対象外を確認する用)
 
 ## 触る state / files
 
