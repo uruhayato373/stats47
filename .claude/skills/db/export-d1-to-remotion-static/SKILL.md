@@ -1,7 +1,7 @@
 ---
 name: export-d1-to-remotion-static
 description: ローカル D1 → apps/remotion/public/<feature>/*.json を生成。Remotion build 時に staticFile() で読まれる派生 JSON を D1 から再生成。Use when user says "remotion 動画データを D1 から生成", "export-d1-to-remotion-static", "動画用 JSON 再生成".
-argument-hint: [--feature <name>|all] [--year YYYY] [--dry-run]
+argument-hint: "[--feature <name>|all] [--year YYYY] [--dry-run]"
 disable-model-invocation: true
 primary_agent: snapshot-exporter
 ---

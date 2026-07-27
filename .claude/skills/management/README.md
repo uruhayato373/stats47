@@ -132,8 +132,8 @@
 
 週次の PDCA サイクル。詳細は各 SKILL.md を参照。
 
-- `/weekly-review`: 4つのサブエージェントで実績データを並列収集し、計画との差分を分析
-- `/weekly-plan`: 4つのサブエージェントでコンテキスト収集 → 戦略分析 → セルフ批判レビュー → 計画出力
+- `/weekly-review`: 5観点のsnapshot / scriptを同一セッションで並列収集し、計画との差分を分析
+- `/weekly-plan`: 5観点の決定的データ収集 → 戦略分析 → 批判的レビュー → 計画出力
 
 **保存先**: 計画は `docs/todo/current-week.md`（毎週上書き）、レビューは `.claude/skills/management/weekly-review/reference/reviews/YYYY-Www.md`（agent用履歴）
 

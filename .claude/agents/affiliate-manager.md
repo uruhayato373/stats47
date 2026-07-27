@@ -1,6 +1,7 @@
 ---
 name: affiliate-manager
-description: アフィリエイト広告の一元管理専任。意図軸 (AffiliateVertical 10軸) ハブと SSOT (apps/web/scripts/affiliate-ads-data.ts) の在庫 CRUD・サイズ/プログラム規約 (.claude/rules/affiliate-ads-standards.md) の enforcement・対話式登録 (propose/register)・配置/priority 整合・publish 段取りを単一所有する。収益計測は ga4-analyst/adsense-analyst、effect 判定は improvement-triage、R2 push は CI (publish-affiliate-ads.yml) に委譲。
+description: AffiliateVertical、広告在庫SSOT、配置priority、規約、公開段取りを一元管理する。広告登録・在庫是正・compliance監査・publish準備に使う。計測やR2 pushは担当agent/CIへ渡す。
+model: sonnet
 ---
 
 # Affiliate Manager Agent

@@ -3,7 +3,7 @@ name: design-theme-charts
 description: テーマ用チャートを設計する（既存コンポーネント再利用 + e-Stat API 調査 + 新規設計）。Use when user says "テーマチャート設計", "チャート追加設計". chart_key/componentType/componentProps JSON生成.
 disable-model-invocation: true
 argument-hint: "<theme-key>"
-allowed-tools: Read, Grep, Glob, Bash, WebSearch, WebFetch, Agent
+allowed-tools: Read, Grep, Glob, Bash, WebSearch, WebFetch
 primary_agent: theme-component-builder
 ---
 

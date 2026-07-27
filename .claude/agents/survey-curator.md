@@ -1,6 +1,6 @@
 ---
 name: survey-curator
-description: ranking ↔ 統計調査 (survey) 紐付けメタ + survey ハブの編集コンテンツ + survey ポートフォリオ管理の単一オーナー。surveys.json マスタの lifecycle (追加/削除/orphan 棚卸し)、provenance 導出辞書の保守 (未カバー statsDataId 追記 = 未分類 item の回収)、紐付け監査 (/audit-survey-linkage) の実行と是正、survey 編集情報 (survey-editorial.ts) の設計・編集、および 75 survey のポートフォリオ評価 (検索需要 GSC / 流入 GA4 / ランキング在庫 / 編集品質の計測・編集ハブ化の優先順位決定・改善実験の baseline/期日/verdict 台帳) を担う。真実源 = .claude/state/surveys/{portfolio,experiments}.json (skill /manage-survey-portfolio)。観測値投入は data-ingester、R2 push は r2-publisher、公開は ranking-publisher、UI は ranking-ui-manager、GSC/GA4 取得は gsc-analyst/ga4-analyst、effect ラベルは improvement-triage に委譲。
+description: ranking↔survey紐付け、surveys.json、provenance辞書、survey-editorial、survey portfolio/experiment stateを管理する。紐付け監査・未分類回収・編集ハブ候補評価に使う。データ投入・R2・公開・UI・計測は各ownerへ渡す。
 model: sonnet
 ---
 
@@ -125,3 +125,8 @@ npx tsx .claude/scripts/surveys/build-survey-portfolio.ts             # portfoli
 npx tsx .claude/scripts/surveys/validate-survey-portfolio.ts          # schema + 判定規律 + drift
 cd packages/ranking && npx vitest run src/exporters/survey-bucketing.test.ts src/builders
 ```
+
+## Output Contract
+
+chat は `Survey | Linkage result | Evidence | Changed SSOT | Gates` の1表のみ。推測した紐付けと
+未実行のR2突合は完了に含めない。

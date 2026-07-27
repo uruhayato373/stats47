@@ -67,3 +67,8 @@ SSDS (社会・人口統計体系) 由来の未使用指標を**継続的にラ�
 - 知見: memory `project_estat_expansion_pipeline_2026_07` / `project_competitor_indicator_benchmark`
 - 状態SSOT: `.claude/state/estat/expansion-queue.json`
 - 正典: `.claude/rules/metric-config-standards.md` (isActive≠公開) / `.claude/rules/estat-api.md`
+
+## Output Contract
+
+chat は `Candidate | Evidence | Generated config | Gates | Publication state` の1表のみ。`isActive`、
+生成、R2反映、indexableを別々の状態として報告する。

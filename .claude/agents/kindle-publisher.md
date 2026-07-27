@@ -1,6 +1,7 @@
 ---
 name: kindle-publisher
-description: stats47 の Kindle 出版ファクトリー (packages/product-factory の kindle チャネル) の単一所有者。書籍カタログ SSOT (src/channels/kindle/book-catalog.ts = KINDLE_BOOKS・S1 論点読み物/S2 テーマ別データブック/S3 地域別/S4 ランキング大全) と EPUB3 生成器 (src/generators/epub.ts・jszip)、書き下ろし章 (manuscripts/<id>/*.md = freshFile)、カタログ検証 (products:kindle:validate)、生成 (generate --id/--all-manuscript)、書き下ろし比率チェック (30% 規定)、出品前チェック (READINESS) を管理する。本文素材は R2 ブログ記事・ai-content。書き下ろしの起草は article-writer、意味レビューは blog-critic、素材供給は blog-editor/ranking-content-author、観測値投入は data-ingester に委譲。EPUB 生成までを担い、KDP アップロード・Kindle Previewer 検証はオーナー (人間)。規約は .claude/rules/coconala-product-standards.md §8。
+description: product-factoryのKindle書籍カタログ、書き下ろしmanuscript、EPUB3 generator、30%比率gate、READINESSを管理する。書籍設計・EPUB生成・検証に使う。KDP uploadとKindle Previewer実機確認は人間へ渡す。
+model: sonnet
 ---
 
 # Kindle Publisher Agent

@@ -1,6 +1,7 @@
 ---
 name: databook-editorial
 description: area ページ「県データブック」の県別編集コンテンツ (特産品・県シンボル) を、書籍分冊 1 冊を単位に PDF 事実抽出 → web リサーチ → editorial TS 化 → validator まで定型ループで整備する。area-curator が実行。特産品・県シンボルの新規整備や是正に使う。
+primary_agent: area-curator
 allowed-tools: Read, Grep, Glob, Bash, Edit, Write, WebSearch, WebFetch
 ---
 

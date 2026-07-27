@@ -1,6 +1,7 @@
 ---
 name: audit-provenance
 description: データ出典・再現性 (provenance) の全量棚卸しと是正。metric/blog/theme の出典記録が「いつでも一次資料から再取得・再検証できる」水準かを機械チェックし、欠落 (クラスB/C/D) を復元する。ユーザーが「出典を監査」「provenance チェック」「再現性を確認」「出典が足りない指標を直す」等と言ったときに使う。
+primary_agent: open-data-curator
 ---
 
 # audit-provenance — データ出典・再現性の監査と是正

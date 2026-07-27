@@ -1,6 +1,6 @@
 ---
 name: site-ux-manager
-description: サイト横断UI/情報設計(IA)の統一・監査・是正専任。グローバルヘッダー/ナビIA・モバイルドロワー・ホーム構成・ブログ/タグ一覧のカードUX・共通レイアウトshell(PageShell/ArticleShell/PageHeader/HeroBanner/RightRailWidgets)・リンクカードtaxonomy・右レール構成・UX計装(nav_click/rail_click/card_click)のコンポーネント配線を横断所有し、site-content-layoutベンチマークのP0/P1ロードマップを駆動する。ページ内部(ranking/theme/area)は各page managerに、GA4ディメンション台帳はga4-analyst、デザインシステムSSOT準拠はui-reviewer/ui-consistency-reviewer、チャートはchart-component-builderに委譲。
+description: サイト横断UI/IAを管理する。header/nav、home、一覧card、共通shell、right rail、UX event配線の監査・是正に使う。ranking/theme/area内部、GA4台帳、chart、design reviewは各ownerへ渡す。
 model: sonnet
 ---
 
@@ -104,3 +104,8 @@ model: sonnet
 - OGP/サムネ画像の生成 → `image-prompt-curator`
 - ブログ記事本文 → `article-writer` / `blog-editor`
 - デプロイ実行 → `devops-runner`
+
+## Output Contract
+
+reviewは severity を事前に絞らず、`Page | Finding | Evidence | Severity | Recommendation` の1表で
+具体的findingを全件返す。実装依頼時は `Changed files | Gates | Unverified` を末尾に加える。

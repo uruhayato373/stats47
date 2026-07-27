@@ -2,7 +2,6 @@
 name: seo-audit
 description: SEO 総合監査を実行する（GSC/GA4 実データ + サイト構造 + DB 分析）。Use when user says "SEO監査", "SEOチェック", "検索順位改善". 技術SEO・コンテンツ・キーワード・プログラマティック4領域対応.
 primary_agent: performance-auditor
-co_agents: [gsc-analyst]
 ---
 
 stats47.jp の SEO を総合的に監査する。データ取得 → 分析 → 改善提案を一気通貫で行い、優先度付きのアクションリストを生成する。
@@ -22,11 +21,12 @@ stats47.jp の SEO を総合的に監査する。データ取得 → 分析 → 
 
 ## 手順
 
-### Phase 1: データ収集（並列サブエージェント）
+### Phase 1: データ収集（同一セッションの並列 tool call）
 
-4つのサブエージェントを**同時に起動**する。
+4つの観点を同一セッションで収集する。各 snapshot skill / script を直接実行し、収集だけの
+subagent は起動しない。
 
-#### Agent A: GSC パフォーマンスデータ
+#### Track A: GSC パフォーマンスデータ
 
 GSC API からデータを取得する。認証情報は `stats47-*.json`（サービスアカウント）。
 
@@ -61,7 +61,7 @@ SA_KEY=$(ls stats47-*.json 2>/dev/null | head -1)
   ※ /compare は 2026-05-28 に /category/[key]/compare へ統合 (301 redirect)、/ranking 一覧は / へ統合
 - 上位クエリ 50 件（clicks 順）
 
-#### Agent B: GA4 トラフィックデータ
+#### Track B: GA4 トラフィックデータ
 
 GA4 API からデータを取得する（Property ID: `463218070`）。
 
@@ -84,7 +84,7 @@ GA4 API からデータを取得する（Property ID: `463218070`）。
 - ページ種別ごとの PV 集計
 - チャネル別セッション比率
 
-#### Agent C: サイト構造・技術監査
+#### Track C: サイト構造・技術監査
 
 コードベースから技術的な SEO 状態を調査する。
 
@@ -116,7 +116,7 @@ grep -r "<img\|<Image" apps/web/src --include="*.tsx" -l | head -10
 - robots.txt のルール
 - 画像 alt テキストの有無（サンプル）
 
-#### Agent D: DB からコンテンツ規模の把握
+#### Track D: R2 / git TS からコンテンツ規模の把握
 
 ```bash
 # 完全DBレス: R2 snapshot / git TS から集計。旧 D1/miniflare は廃止

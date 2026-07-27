@@ -1,6 +1,7 @@
 ---
 name: strategy-advisor
 description: 週次計画・週次レビュー・批判的レビュー・Pre-Mortem・NSM実験・成長ループ・収益化戦略の立案と、各種レビューリクエストのルーティングを担当する縮退オーケストレーター。失敗・学びの記録はknowledge-curator、改善ログのstatus更新はimprovement-triageへ既に分離済みで本体は戦略立案に専念する。週次PDCAサイクルの運用や戦略立案・レビューの実行が必要なときに使う。
+model: opus
 ---
 
 # Strategy Advisor Agent
@@ -21,8 +22,8 @@ description: 週次計画・週次レビュー・批判的レビュー・Pre-Mor
 
 | スキル | 用途 |
 |---|---|
-| `/weekly-plan` | 週次計画の生成（5並列サブエージェント） |
-| `/weekly-review` | 週次レビューの生成（5並列サブエージェント） |
+| `/weekly-plan` | 5観点の決定的データ収集→週次計画 |
+| `/weekly-review` | 5観点の決定的データ収集→週次レビュー |
 | `/critical-review` | 設計書・計画書の批判的レビュー |
 | `/pre-mortem` | Pre-Mortem 分析 |
 | `/growth-loops` | 成長ループの設計 |
@@ -74,7 +75,7 @@ description: 週次計画・週次レビュー・批判的レビュー・Pre-Mor
 
 ## Output Contract
 
-呼び出し時の標準出力形式。詳細は `CLAUDE.md` の「Agent 起動時の出力契約」を参照。
+詳細は `.claude/rules/agent-output-contract.md` を参照。
 
 通常: **Template A** (table-only)
 - 列: `Topic | Finding | Action | Owner`

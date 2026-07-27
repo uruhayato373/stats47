@@ -1,7 +1,7 @@
 ---
 name: manage-survey-portfolio
 description: 75 survey のポートフォリオを評価・更新する。surveys.json × 紐付け監査 × R2 all.json × survey-editorial.ts × GSC/GA4 snapshot を突合して .claude/state/surveys/portfolio.json を再構築し、編集ハブ化候補の選別・lifecycle 判定・実験の baseline/効果測定を管理する。survey-curator が実行。Use when user says "surveyポートフォリオ", "survey棚卸し", "survey評価", "manage-survey-portfolio".
-allowed-tools: Read, Grep, Glob, Bash, Agent
+allowed-tools: Read, Grep, Glob, Bash
 primary_agent: survey-curator
 ---
 

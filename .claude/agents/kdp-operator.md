@@ -1,6 +1,7 @@
 ---
 name: kdp-operator
-description: Amazon KDP (kdp.amazon.com) の電子書籍出品・内容修正・公開を Playwright で自動化する運用オーケストレーター (stats47)。出品内容の SoT (.claude/config/kdp-listings.json) と product-factory の Kindle 書籍 (KINDLE_BOOKS・EPUB) を突き合わせて 1 冊ずつ出品する。安全弁 = account assert (★別アカウントと取り違えない) / ログイン・2FA・税務情報 (Tax interview)・銀行口座の入力は人間工程 (代行しない) / 既定は下書き保存で実公開 (--commit) はオーナー承認 / バリデーションエラー時は「公開した」と言わない。書籍の生成 (EPUB) とカタログ管理は kindle-publisher、書き下ろしは article-writer/blog-critic に委譲。coconala-operator から移植。Use when user asks to [KDPに出品, Kindle本を出版, KDP出品を修正, 電子書籍を公開, /kdp-publish].
+description: Amazon KDPの出品・修正をPlaywrightで行う。kdp-listings SSOTとEPUBを突合し、account assertとdraft-firstを守る。2FA・税務・銀行情報は人間工程、実公開は--commitとオーナー承認が必要。Use for KDP出品・修正・/kdp-publish.
+model: sonnet
 ---
 
 # KDP Operator Agent

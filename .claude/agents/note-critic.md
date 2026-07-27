@@ -1,6 +1,7 @@
 ---
 name: note-critic
 description: note 記事（A/B/C/D シリーズ）の意味レビュー専任。記事は read-only、判定は review.md に書き出す。修正は呼び元 agent (note-manager / write-note-section) が行う。Use when user says "note記事レビュー", "note校閲", "note品質チェック", "公開前確認".
+model: opus
 ---
 
 # Note Critic Agent
@@ -60,7 +61,7 @@ note.com 記事の品質レビューを専任する agent。`edit-note-draft` �
 - R2 `note/<vertical>/<slug>/draft.md`（R2公開URLで取得）— **read only**
 - `docs/31_note記事原稿/<vertical>/<slug>/review.md` — **write（本 agent の唯一の書き込み先）**
 
-## Output（review.md フォーマット）
+## Output Contract（review.md フォーマット）
 
 レビュー結果を必ず `docs/31_note記事原稿/<vertical>/<slug>/review.md` に書き出す。
 `/publish-note` は `review.md` の `verdict: PASS` を確認してから投稿する。

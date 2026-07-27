@@ -11,6 +11,12 @@
  *   [E1] SKILL.md の primary_agent / co_agents が指す agent ファイルが存在するか
  *   [E2] SKILL.md 本文が参照する .claude/scripts|hooks のスクリプトが存在するか
  *   [E3] settings.json の hook command が指すファイルが存在するか
+ *   [E4] 全 custom agent の frontmatter (name/description/model) が完全か
+ *   [E5] 全 custom agent に Output Contract があるか
+ *   [E6] 全 active skill の frontmatter (name/description/primary_agent) が完全か
+ *   [E7] agent/skill に過剰検証を誘発する禁止 prompt が無いか
+ *   [E8] subagent 委譲 skill が共通契約を参照し、同時起動上限 3 以下か
+ *   [E9] agent/skill frontmatter に YAML として危険な plain scalar が無いか
  *   [W1] .claude/scripts/** のスクリプトがどこからも参照されていない (orphan)
  *   [W2] 非 dead の SKILL.md が参照する packages/**|apps/** の scripts が存在しない (dead-skill 検知)
  *
@@ -73,21 +79,239 @@ function readSafe(p) {
   }
 }
 
+function extractFrontmatter(text) {
+  if (!text.startsWith("---\n")) return "";
+  const end = text.indexOf("\n---", 4);
+  return end === -1 ? "" : text.slice(4, end);
+}
+
+function frontmatterValue(frontmatter, field) {
+  const lines = frontmatter.split("\n");
+  const start = lines.findIndex((line) => line.startsWith(`${field}:`));
+  if (start === -1) return "";
+  const inline = lines[start].slice(field.length + 1).trim();
+  if (!/^[>|][+-]?$/.test(inline)) return inline;
+
+  const continuation = [];
+  for (let i = start + 1; i < lines.length && /^\s+/.test(lines[i]); i += 1) {
+    continuation.push(lines[i].trim());
+  }
+  return continuation.join(" ");
+}
+
+// Full YAML parserをCI依存に加えず、frontmatterで実際に事故になった構文を決定的に止める。
+// 引用済み scalar と folded/literal block は対象外。複雑な値は frontmatter に置かない。
+function checkFrontmatterSyntax(findings, file, text) {
+  const frontmatter = extractFrontmatter(text);
+  if (!frontmatter) {
+    findings.push({
+      level: "error",
+      code: "E9",
+      file: rel(file),
+      msg: "先頭の YAML frontmatter が無い、または閉じていない",
+    });
+    return;
+  }
+
+  for (const line of frontmatter.split("\n")) {
+    if (!line || /^\s/.test(line) || line.startsWith("#")) continue;
+    const match = line.match(/^[A-Za-z_][A-Za-z0-9_-]*:\s*(.*)$/);
+    if (!match) {
+      findings.push({
+        level: "error",
+        code: "E9",
+        file: rel(file),
+        msg: `frontmatter の top-level 行が key: value 形式ではない: ${line}`,
+      });
+      continue;
+    }
+
+    const value = match[1];
+    if (!value || /^[>|][+-]?$/.test(value) || /^["']/.test(value)) continue;
+    if (
+      value.startsWith("`") ||
+      (/^\[/.test(value) && (!value.endsWith("]") || /\]\s+\[/.test(value))) ||
+      /:\s/.test(value)
+    ) {
+      findings.push({
+        level: "error",
+        code: "E9",
+        file: rel(file),
+        msg: "frontmatter の plain scalar が YAML として曖昧。引用符または folded block を使う",
+      });
+    }
+  }
+}
+
 // SKILL が「dead (削除済み機能の歴史的記述)」と明示マークされているか。
 // frontmatter に status: dead または deprecated: true があれば link/script 参照検査から除外する。
 function isDeadSkill(text) {
-  const fm = text.split("---")[1] || "";
+  const fm = extractFrontmatter(text);
   return /^\s*status:\s*dead\b/m.test(fm) || /^\s*deprecated:\s*true\b/m.test(fm);
 }
 
 // ── 検査 ────────────────────────────────────────────────────────
+function checkAgentPromptContracts(findings, scope) {
+  let agentFiles = walk(path.join(ROOT, ".claude/agents"), [".md"]).filter(
+    (f) => path.basename(f) !== "README.md"
+  );
+  if (scope) agentFiles = agentFiles.filter((f) => scope.has(rel(f)));
+  const allowedModels = new Set(["haiku", "sonnet", "opus", "inherit"]);
+
+  for (const af of agentFiles) {
+    const text = readSafe(af);
+    const fm = extractFrontmatter(text);
+    checkFrontmatterSyntax(findings, af, text);
+    for (const field of ["name", "description", "model"]) {
+      if (!frontmatterValue(fm, field)) {
+        findings.push({
+          level: "error",
+          code: "E4",
+          file: rel(af),
+          msg: `frontmatter の ${field} が無い`,
+        });
+      }
+    }
+    const model = fm.match(/^model:\s*(\S+)/m)?.[1];
+    if (model && !allowedModels.has(model)) {
+      findings.push({
+        level: "error",
+        code: "E4",
+        file: rel(af),
+        msg: `model '${model}' は haiku/sonnet/opus/inherit のいずれでもない`,
+      });
+    }
+    const description = frontmatterValue(fm, "description");
+    if (description.length > 300) {
+      findings.push({
+        level: "error",
+        code: "E4",
+        file: rel(af),
+        msg: "description が300文字を超えている。routingに必要な責務とtriggerへ絞る",
+      });
+    }
+    if (!/^## Output Contract\b/m.test(text)) {
+      findings.push({
+        level: "error",
+        code: "E5",
+        file: rel(af),
+        msg: "Output Contract が無い",
+      });
+    }
+  }
+}
+
+function checkSkillPromptContracts(findings, scope) {
+  let skillFiles = walk(path.join(ROOT, ".claude/skills"), ["SKILL.md"]);
+  if (scope) skillFiles = skillFiles.filter((f) => scope.has(rel(f)));
+
+  for (const sf of skillFiles) {
+    const text = readSafe(sf);
+    if (isDeadSkill(text)) continue;
+    const fm = extractFrontmatter(text);
+    checkFrontmatterSyntax(findings, sf, text);
+    for (const field of ["name", "description"]) {
+      if (!frontmatterValue(fm, field)) {
+        findings.push({
+          level: "error",
+          code: "E6",
+          file: rel(sf),
+          msg: `frontmatter の ${field} が無い`,
+        });
+      }
+    }
+    if (text.split("\n").length > 500) {
+      findings.push({
+        level: "error",
+        code: "E6",
+        file: rel(sf),
+        msg: "SKILL.md が500行を超えている。詳細をreferenceへ分離する",
+      });
+    }
+    if (
+      rel(sf) !== ".claude/skills/management/task-router/SKILL.md" &&
+      !/^primary_agent:\s*\S+/m.test(fm)
+    ) {
+      findings.push({
+        level: "error",
+        code: "E6",
+        file: rel(sf),
+        msg: "primary_agent が無い",
+      });
+    }
+
+    const delegates =
+      /^context:\s*fork\b/m.test(fm) ||
+      /\bAgent\([a-z][A-Za-z0-9_-]*\)/.test(text) ||
+      /Agent tool[^\n]{0,100}(?:委譲|起動|呼ぶ)/i.test(text) ||
+      /(?:subagent|サブエージェント)(?:\s*最大\s*[1-9][0-9]*体)?(?:へ|に)\s*(?:委譲|起動)/i.test(text);
+    if (!delegates) continue;
+
+    for (const required of [
+      ".claude/rules/model-prompting.md",
+      ".claude/rules/agent-output-contract.md",
+    ]) {
+      if (!text.includes(required)) {
+        findings.push({
+          level: "error",
+          code: "E8",
+          file: rel(sf),
+          msg: `委譲する skill が ${required} を参照していない`,
+        });
+      }
+    }
+    const cap = /^context:\s*fork\b/m.test(fm)
+      ? 1
+      : Number(text.match(/最大\s*([0-9]+)/)?.[1] || NaN);
+    if (!Number.isFinite(cap) || cap < 1 || cap > 3) {
+      findings.push({
+        level: "error",
+        code: "E8",
+        file: rel(sf),
+        msg: "subagent 同時起動上限を 1〜3 の数値で明示していない",
+      });
+    }
+  }
+}
+
+function checkBannedPromptPatterns(findings, scope) {
+  let files = [
+    ...walk(path.join(ROOT, ".claude/agents"), [".md"]).filter(
+      (f) => path.basename(f) !== "README.md"
+    ),
+    ...walk(path.join(ROOT, ".claude/skills"), ["SKILL.md"]),
+  ];
+  if (scope) files = files.filter((f) => scope.has(rel(f)));
+  const patterns = [
+    ["自己検証", /自己検証/],
+    ["ダブルチェック", /ダブルチェック/],
+    ["double-check", /double-check/i],
+    ["re-verify", /re-verify/i],
+    ["答える前に再確認", /答える前に再確認/],
+  ];
+  for (const file of files) {
+    const text = readSafe(file);
+    if (file.endsWith("SKILL.md") && isDeadSkill(text)) continue;
+    for (const [label, pattern] of patterns) {
+      if (pattern.test(text)) {
+        findings.push({
+          level: "error",
+          code: "E7",
+          file: rel(file),
+          msg: `過剰検証を誘発する prompt '${label}' が残っている`,
+        });
+      }
+    }
+  }
+}
+
 function checkSkillAgentLinks(findings, scope) {
   let skillFiles = walk(path.join(ROOT, ".claude/skills"), ["SKILL.md"]);
   if (scope) skillFiles = skillFiles.filter((f) => scope.has(rel(f)));
   for (const sf of skillFiles) {
     const text = readSafe(sf);
     if (isDeadSkill(text)) continue;
-    const fm = text.split("---")[1] || "";
+    const fm = extractFrontmatter(text);
     const agents = new Set();
     const pa = fm.match(/^primary_agent:\s*(.+)$/m);
     if (pa) pa[1].split(/[,\s]+/).forEach((a) => a && agents.add(a.trim()));
@@ -255,8 +479,10 @@ function relevantChangedFiles() {
     const real = p.includes(" -> ") ? p.split(" -> ")[1] : p;
     if (
       /^\.claude\/(agents|skills|scripts|hooks)\//.test(real) ||
+      /^\.claude\/(rules|output-styles)\//.test(real) ||
       /SKILL\.md$/.test(real) ||
-      real === ".claude/settings.json"
+      real === ".claude/settings.json" ||
+      real === "CLAUDE.md"
     ) {
       files.push(real);
     }
@@ -288,7 +514,10 @@ function readMarker() {
 // ── モード分岐 ──────────────────────────────────────────────────
 function runChecks({ orphan, scope }) {
   const findings = [];
-  // scope (Set<relpath>) 指定時は SKILL 系をその集合に絞る (gate=今回の変更だけ点検)。
+  // scope (Set<relpath>) 指定時は agent/SKILL 系をその集合に絞る (gate=今回の変更だけ点検)。
+  checkAgentPromptContracts(findings, scope);
+  checkSkillPromptContracts(findings, scope);
+  checkBannedPromptPatterns(findings, scope);
   checkSkillAgentLinks(findings, scope);
   checkSkillScriptRefs(findings, scope);
   checkSkillExternalScriptRefs(findings, scope);

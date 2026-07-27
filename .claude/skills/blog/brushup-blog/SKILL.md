@@ -85,6 +85,9 @@ node .claude/scripts/blog/build-remediation-queue.mjs --next 5   # pending 上�
 
 critic 往復のコストを下げる 2 つの機構 (正典 `docs/02_実装計画/01_収益化マスタープラン.md` §7「Opus=blog 意味レビュー」):
 
+agent起動promptとモデル別の共通規律は `.claude/rules/model-prompting.md` /
+`.claude/rules/agent-output-contract.md` を正典とする。
+
 1. **model 傾斜**: `build-remediation-queue.mjs` が各 entry に `reviewTier` を付与する (GSC impressions 上位 30 = `opus` / 他 = `sonnet`。ai-content の `build-ai-content-queue.mjs` と同規則)。`blog-mass-rewrite.js` は tier2 (`reviewTier==='opus'`) の初回 critic を opus で起動し、他は既定 (sonnet)。author (rewrite) は常に sonnet 固定。総コストを floor に保ったまま流入上位の審査品質だけ引き上げる。
 2. **delta 再審査**: REVISE 後の再レビュー (`blog-revise-fix.js`) は blog-critic を **mode: delta** で起動する — 前回 review.md の指摘 + 変更 hunk のみを見て、正典 465行と記事全文を再読しない (機械的な床は `quality-gate.mjs` が公開前に毎回フル実行するため落ちない)。delta は読む量が少ないため opus で起動しても安価。
 
