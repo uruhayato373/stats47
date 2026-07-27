@@ -51,7 +51,7 @@ primary_agent: devops-runner
 
 | タスク種別 | コンパクション推奨タイミング |
 |---|---|
-| 週次計画（`/weekly-plan`） | 5 並列サブエージェント完了後、計画出力前 |
+| 週次計画（`/weekly-plan`） | 5観点の決定的データ収集後、計画出力前 |
 | テーマ設計（`/design-theme-charts`） | 監査完了後、チャート設計開始前 |
 | ブログ記事執筆 | トレンド調査完了後、記事構成開始前 |
 | ランキング登録（TS-config + `/sync-metrics-cache` + `/page-data-batch`） | e-Stat メタデータ調査完了後 |

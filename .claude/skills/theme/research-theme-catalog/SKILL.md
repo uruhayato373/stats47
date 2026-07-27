@@ -1,7 +1,8 @@
 ---
 name: research-theme-catalog
 description: テーマページ (/themes/*) の指標×チャート候補を白書 (NotebookLM)・Web 競合・GSC 検索需要から調査し、provenance 付きの提案を指標バックログに書き出す。theme-researcher が実行。新規テーマの立ち上げ調査や既存テーマの指標拡充検討に使う。
-allowed-tools: Read, Grep, Glob, Bash, WebSearch, WebFetch, Agent
+primary_agent: theme-researcher
+allowed-tools: Read, Grep, Glob, Bash, WebSearch, WebFetch
 ---
 
 # research-theme-catalog
@@ -9,7 +10,9 @@ allowed-tools: Read, Grep, Glob, Bash, WebSearch, WebFetch, Agent
 テーマの「何を、どのチャートで、なぜ載せるか」の**素材を実際に調査して検証済み提案を出す**スキル。
 採否判断・カタログ実装は行わない (theme-designer / theme-component-builder の責務)。
 
-> 正典規約: `.claude/rules/theme-catalog-standards.md` / 実行 agent: `.claude/agents/theme-researcher.md`
+> 正典規約: `.claude/rules/theme-catalog-standards.md` / 実行 agent: `.claude/agents/theme-researcher.md` /
+> 呼び元がAgent toolを使う場合: `.claude/rules/model-prompting.md` /
+> `.claude/rules/agent-output-contract.md` (最大1体)
 
 ## ★ 実証原則 (これを破った提案は呼び元が破棄する)
 
@@ -33,10 +36,9 @@ cat packages/data-configs/src/theme-catalog/<theme>.ts 2>/dev/null \
 cat apps/web/scripts/data/page-components/theme/<theme>.json
 ```
 
-## Stage 1: 素材収集 (並列 fan-out・各 subagent に Template A 出力契約を強制)
+## Stage 1: 素材収集 (同一セッションの並列 tool call)
 
-3 つを**並列**で回す。各 subagent の prompt 冒頭に OUTPUT FORMAT (Template A) を必ず置く
-(`.claude/rules/agent-output-contract.md`)。
+3 つを同一セッションで並列に収集する。数回の query / read で終わるため subagent は起動しない。
 
 ### 1a. NotebookLM 白書クエリ (文書読解を Google 側にオフロード)
 
@@ -93,8 +95,9 @@ grep -iE "<theme 関連語>" docs/todo/03_指標バックログ.md
 
 ## ★ 呼び元の受け入れ検証 (捏造を機械的に弾く・書き込み前に必須)
 
-theme-researcher を Agent tool で呼ぶ場合、**呼び元 (メインセッション) は返答を無条件で信じず**、
-backlog へ書く前に下記を確認する。1 つでも失格なら**破棄して再実行** (提案は保存しない)。
+theme-researcher を Agent tool で呼ぶ場合、呼び元は報告が指す一次資料と決定的gateを使う。
+1つでも失格なら提案を保存せず、失格IDと不足証拠を記録して停止する。同じtaskの再実行を
+検証手段にしない。
 
 1. **tool_uses メタ**: 完了通知の `tool_uses` が **0 なら即破棄** (何も調査していない = 捏造)。
 2. **self-audit 行**: `未検証候補=0` か。0 でなければ破棄。
@@ -117,7 +120,7 @@ backlog へ書く前に下記を確認する。1 つでも失格なら**破棄�
 
 | 役割 | モデル |
 |---|---|
-| Stage 1 収集 subagent (NotebookLM/競合/GSC) | sonnet (Template A で圧縮) |
+| Stage 1 収集 (NotebookLM/競合/GSC) | theme-researcher が tool を直接実行 |
 | Stage 2 実在検証 (estat-researcher) | sonnet (既存) |
 | 統合・提案文書化 (theme-researcher 本体) | sonnet |
 | 提案採否・カタログ設計 | メインセッション (上位モデル) |

@@ -87,7 +87,7 @@ curl -sf "https://storage.stats47.jp/app/ranking/<key>/ai-content.json" | jq -r 
 - コンテンツ・スキーマ・プロンプトは**書き換えない**（read-only）。
 
 ## File Boundary（並行衝突回避）
-- read-only。全 agent と並列起動可。同一 key への複数視点レビューも可。
+- read-only。同一keyへ本agentを重複起動しない。最初のpassでseverityを絞らず全findingを出す。
 - 別セッション作業中の `.claude/scripts/blog/` には触れない。Agent 実行は `mode: "bypassPermissions"`。
 
 ## Output Contract

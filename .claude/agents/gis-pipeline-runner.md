@@ -1,6 +1,9 @@
 ---
 name: gis-pipeline-runner
-description: KSJ GIS パイプライン実行専任 (seed → download → TopoJSON 変換 → R2 保存 → build state 更新)。SSOT 編集は gis-curator、R2 push は r2-publisher に委譲。完全DBレス: ローカル SQLite は git TS から再生成する使い捨てキャッシュ。
+description: >-
+  KSJ GIS パイプライン実行専任 (seed → download → TopoJSON 変換 → R2 保存 → build state
+  更新)。SSOT 編集は gis-curator、R2 push は r2-publisher に委譲。完全DBレスで、ローカル
+  SQLite は git TS から再生成する使い捨てキャッシュ。
 model: sonnet
 ---
 
@@ -60,3 +63,8 @@ npx tsx packages/gis/src/mlit-ksj/scripts/seed-from-registry.ts --dry-run
 - SQLite が不在/壊れたら **git TS から再 seed して再生成**する (手で作らない)。
 - メタが不足/誤りなら自分で SQLite を直さず `gis-curator` に datasets.ts 修正を依頼する。
 - pipeline は重い (download/変換)。本番 R2 反映はまとめて `r2-publisher` 経由 (毎回 push しない)。
+
+## Output Contract
+
+chat は `Dataset | Stage | Artifact | Gate output | Unverified` の1表のみ。実行していないstageと
+本番R2未反映を明示する。

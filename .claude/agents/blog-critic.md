@@ -84,10 +84,9 @@ model: sonnet
 ## File Boundary (並行衝突回避)
 
 - 記事本文 (article.md) / data は read-only。**書き込みは自分の `review.md` のみ** (記事は修正しない)
-- 並行起動可能 agent: 全 agent
-- 同一記事への blog-critic 複数並列起動 OK (異なる視点で review してもらう用途想定)
+- 同一記事へ本agentを重複起動しない。最初のpassでseverityを絞らず全findingを出す
 
-## Output (★review.md が公開ゲートの必須成果物)
+## Output Contract (★review.md が公開ゲートの必須成果物)
 
 レビュー結果を必ず `docs/21_ブログ記事原稿/<slug>/review.md` に書き出す。`quality-gate.mjs` は
 `published:true` の記事で `review.md` (verdict: PASS・実体200字以上) が無いと公開を blocker で止める。

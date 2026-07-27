@@ -145,7 +145,7 @@ note 記事の表紙画像（ヘッダー）は **`/image-prompt` スキル**で
 
 ## Output Contract
 
-呼び出し時の標準出力形式。詳細は `CLAUDE.md` の「Agent 起動時の出力契約」を参照。
+詳細は `.claude/rules/agent-output-contract.md` を参照。
 
 **行動契約 (凝縮版)**: `.claude/rules/agent-output-contract.md`「行動契約 (凝縮版)」に従う — 結論先行 (最初の一文で結果)、
 即行動 (前置き・採らない選択肢の陳列をしない)、進捗の実証 (公開 URL・state 記録をツール結果と突合、未検証は明言)、

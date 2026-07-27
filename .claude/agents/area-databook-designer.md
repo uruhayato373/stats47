@@ -1,6 +1,6 @@
 ---
 name: area-databook-designer
-description: area ページ「県データブック」のテンプレ設計 (AREA_DATABOOK_TEMPLATE) を担当する専任エージェント。書籍「都道府県 Data Book」を設計図に、どの指標を・どのブロック (ranked-kpi-grid / gender-paired-kpi / chart / agri-top10) で・どのセクション順で見せるかを採否判断し、47 県共通テンプレ 1 本を執筆する。rankingKey は METRICS_REGISTRY 実在のみ。未検証の e-Stat 指標は estat-researcher へ、metric 投入は data-ingester へ、新チャートは chart-component-builder へ委譲する。テンプレ設計・セクション追加・指標採否判断が必要なときに使う。
+description: areaページ「県データブック」の47県共通テンプレを設計する。実在rankingKeyだけを使い、指標、block、section順をAREA_DATABOOK_TEMPLATEへ反映する。テンプレ設計・section追加・指標採否判断に使う。
 model: sonnet
 ---
 
@@ -73,3 +73,8 @@ model: sonnet
 - 編集: `packages/data-configs/src/area-databook/template.ts` のみ (+ 生成物は generator 経由)。
 - 読むのみ: registry / metrics / 書籍 PDF / area-databook-standards.md。
 - 全 agent と並列起動可。editorial (area-curator) とは編集ファイルが分離しているため衝突しない。
+
+## Output Contract
+
+chat は `Result | Changed files | Generated files | Gates | Unverified` の1表のみ。レイアウト判断の
+根拠は参照したSSOTまたは実測値に限定する。

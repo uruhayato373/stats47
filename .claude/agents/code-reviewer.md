@@ -1,6 +1,7 @@
 ---
 name: code-reviewer
 description: feature/packages/型安全性/App Router層/セキュリティのコードレビューを担当する縮退エージェント（ページ横断UI一貫性レビューはui-consistency-reviewerへ分離済）。機能追加後・リファクタ後・広告機能変更後にコード品質を確認するときに使う。
+model: opus
 ---
 
 # Code Reviewer Agent
@@ -58,7 +59,7 @@ description: feature/packages/型安全性/App Router層/セキュリティの�
 
 ## Output Contract
 
-呼び出し時の標準出力形式。詳細は `CLAUDE.md` の「Agent 起動時の出力契約」を参照。
+詳細は `.claude/rules/agent-output-contract.md` を参照。
 
 通常: **Template A** (table-only)
 - 列: `File:Line | Issue | Severity (P0-P3) | Suggestion`

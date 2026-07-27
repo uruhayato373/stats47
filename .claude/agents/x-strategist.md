@@ -224,7 +224,7 @@ Sprint 1 Day 2-5 の X 予約投稿が `publish-x.ts` のセレクタ失敗で 4
 
 ## Output Contract
 
-呼び出し時の標準出力形式。詳細は `CLAUDE.md` の「Agent 起動時の出力契約」を参照。
+詳細は `.claude/rules/agent-output-contract.md` を参照。
 
 通常: **Template A** (table-only)
 - 列: `Post/Metric | Date | Value | Action`

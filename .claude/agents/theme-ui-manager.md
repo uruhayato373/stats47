@@ -125,3 +125,8 @@ grep -rn "地図タブ\|KPI は e-Stat API ベース\|ranking_data ベースの 
 - bespoke: `apps/web/src/features/local-finance-dashboard/`
 - 統一レイアウト規約: `.claude/rules/ui-components.md` / `docs/01_技術設計/13_統一レイアウト設計.md`
 - デプロイ規律: `.claude/rules/branch-workflow.md`
+
+## Output Contract
+
+chat は `Result | Changed files | UI evidence | Gates | Unverified` の1表のみ。テーマ選定、データ生成、
+deployをUI変更の完了に含めない。

@@ -1,6 +1,10 @@
 ---
 name: recompute-correlations
-description: R2 観測値 (app/stats/<metric>/values.json) を入力に、使い捨て :memory: SQLite で指標間の相関 (Pearson r / 偏相関 / effectiveR) を再計算し、R2 snapshot (app/correlation/*) に書き出す。完全DBレスの Derived 計算。Use when user says "相関再計算", "recompute-correlations".
+description: >-
+  R2 観測値 (app/stats/<metric>/values.json) を入力に、使い捨て memory SQLite で指標間の
+  相関 (Pearson r / 偏相関 / effectiveR) を再計算し、R2 snapshot
+  (app/correlation/*) に書き出す。完全DBレスの Derived 計算。Use when user says
+  "相関再計算", "recompute-correlations".
 disable-model-invocation: true
 primary_agent: snapshot-exporter
 ---

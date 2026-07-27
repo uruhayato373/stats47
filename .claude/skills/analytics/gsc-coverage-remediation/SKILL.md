@@ -106,8 +106,9 @@ node .claude/scripts/gsc/build-coverage-queue.mjs       # actionable URL を実�
 | `fix-5xx` | 実バグ。再現確認 → 修正 PR | gsc-analyst → 実装 |
 | `verify-intent` | 旧URL/内部パス (`/tmp/*` `/.local/*` 等) か確認。死亡が正なら放置確定 | gsc-analyst |
 
-`content-check` のバッチ判定は subagent に委譲する (Agent tool, `mode: bypassPermissions`)。
-**OUTPUT FORMAT を prompt 冒頭に固定**すること (`.claude/rules/agent-output-contract.md`):
+`content-check` の大きな独立バッチだけを subagent 最大1体に委譲する (Agent tool,
+`mode: bypassPermissions`)。`.claude/rules/model-prompting.md` と
+`.claude/rules/agent-output-contract.md` に従い、Task Capsule と **OUTPUT FORMAT を prompt 冒頭に固定**する:
 ```
 OUTPUT FORMAT: 1 markdown table only.
 Columns: URL | thin? | 推奨 (resubmit/noindex/enrich) | 理由(≤10語)

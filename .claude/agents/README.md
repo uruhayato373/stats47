@@ -2,13 +2,17 @@
 
 `.claude/agents/` に定義されたサブエージェント群。Agent tool の `subagent_type` または直接起動で利用する。
 
-**現在: Phase 1-5 完了 + 2026-07-03 整理、以降の新設含め 50 体 (実ファイル数)**。並行運用最適化のため、ドメイン × フェーズで責務を細分化し、各 agent に「担当 skills / 必読 rules / 触る state」を明示している。旧 17 体のうち `data-pipeline` `db-manager` は Phase 6.7 整理で削除済 (-2)、新 18 agent 追加。差し引き 33 体。**2026-06-21 に ranking 系 4 体 (`ranking-ui-manager` / `ranking-publisher` / `ranking-content-author` / `ranking-content-critic`) を新設 (+4)。2026-07-03 運営総点検で zombie 化した `seo-auditor` を削除し、実ファイルベースで整合。アフィリエイト一元管理の `affiliate-manager` を新設 (+1) → 41 体。その後の各ドメインagent追加を含め、`open-data-curator` (2026-07-18・e-Stat外オープンデータカタログ管理)、`site-ux-manager` (2026-07-20・サイト横断UI/IA所有) を加えて現在 51 体。**残る縮退 agent は新 agent に役割委譲済 (Session B で 4 件移動・24 件は責務上維持)。詳細は移行ステータス表。
+**現在54体（READMEを除く実ファイル数）**。ドメイン × フェーズで責務を分け、各agentに
+`name` / `description` / `model` / `Output Contract`を必須化している。件数とprompt契約は
+`check-agent-skill-consistency.cjs`が機械検査する。
 
 ## 設計思想
 
-- **細分化 + 並行性最大化**: 同時に 3-5 agent が衝突しないファイル境界を引く。1 メトリクスソース = 1 agent、1 slug = 1 agent の原則
+- **逐次が既定**: 子agentは既定0、必要なら1、独立したfile boundaryがある広い作業でも最大3
 - **3 軸の明示**: 各 agent.md は (a) 担当 skills (b) 必読 rules (c) 触る state/snapshots を冒頭に記述
-- **既存 agent は併存維持**: 旧 17 体は削除しない。Phase 3 で役割縮退記述に Edit し、移行先 agent を明示する
+- **モデル振り分け**: Opusは判断密度の高いreview/strategy、Sonnetは明確な実装・運用、Haikuは決定的I/O
+- **共通契約を複製しない**: `.claude/rules/model-prompting.md` と
+  `.claude/rules/agent-output-contract.md` をSSOTとする
 
 ## Tier 0: Dispatcher (1 skill)
 
@@ -24,7 +28,7 @@
 | `blog-seo-strategist` 🆕 | ブログSEO拡充戦略の戦略ハブ (施策 done/todo 台帳 + 型配分 + 四半期再学習)。真実源 `.claude/state/blog/seo-strategy.json`。実行は trend-scout(記事)/ranking-expander(ランキング)/gsc-analyst(KPI)/improvement-triage(effect) に委譲。戦略全文は本 agent §戦略コンテキスト (旧 docs/02 doc 15 を統合し SSOT を .claude に一本化) | 2026-07-12 新設 |
 | `theme-portfolio-manager` 🆕 | テーマ群 (22) のポートフォリオ管理ハブ (blog-seo-strategist のテーマ版)。テーマ別 GSC/GA4/データ品質を評価し keep/improve/merge/split/rename/retire を実測根拠つきで判定、実験 baseline/効果測定を台帳管理。真実源 `.claude/state/themes/{portfolio,experiments}.json` (validator: `.claude/scripts/themes/validate-theme-state.mjs`)。実行は theme-researcher(調査)/theme-designer(カタログ設計)/improvement-triage(effect ラベル・排他 writer) に委譲。判定基準の正典 = `docs/02_実装計画/24_テーマ分類再編成方針.md`、運用設計 = `.claude/skills/theme/manage-theme-portfolio/reference/テーマポートフォリオ運用.md` | 2026-07-13 新設 |
 
-## Tier 2: Data / Infra (9 体)
+## Tier 2: Data / Infra
 
 | agent | role | 派生元 |
 |---|---|---|
@@ -32,7 +36,7 @@
 | `open-data-curator` 🆕 | e-Stat外の政府・自治体データ源をsource/dataset単位で棚卸しし、取得方式・粒度・GIS・ライセンス・更新性・stats47適合性のgit TSカタログを排他管理。**+ provenance 監査オーナー** (全 metric の出典・再現性を `/audit-provenance` で棚卸し、クラス B/C/D を是正。正典 data-provenance-standards.md)。実取得・投入は既存ownerへ委譲 | 2026-07-18 新設・2026-07-19 provenance 監査追加 |
 | `data-ingester` 🆕 | metrics 登録 + stats_* 投入 + 47県カバレッジ検証 (GIS は gis-* に委譲)。**非 e-Stat 投入時は provenance 9点セット必須** (data-provenance-standards.md) | data-pipeline + db-manager 分割 |
 | `db-schema-manager` 🆕 | スキーマ・migration・reset 専任 | db-manager 分割 |
-| `snapshot-exporter` 🆕 | D1 → R2 snapshot / Remotion 派生 JSON 生成 | db-manager 分割 |
+| `snapshot-exporter` 🆕 | git TS / R2 source → snapshot / Remotion 派生 JSON 生成 | db-manager 分割 |
 | `r2-publisher` 🆕 | R2 push / pull / du 専任 | db-manager 分割 |
 | `ranking-publisher` 🆕 | ranking 公開多段 (generate-ranking-items / KNOWN・SITEMAP・INDEXABLE 再生成 / deploy / purge / 本番実測) のオーケストレーション。観測値=data-ingester、push=r2-publisher、deploy=devops-runner に委譲 | 2026-06-21 新設 |
 | `ranking-expander` 🆕 | SSDS ランキング拡充ループ (計測ゲート付き需要ファースト): 候補キュレーション + config 生成 (gen-ssds-configs) + キュー状態管理 (build-expansion-queue)。投入=data-ingester、公開=ranking-publisher、計測=gsc-analyst に委譲。skill `/expand-rankings`。旧 expand-indicators 再構築 | 2026-07-12 新設 |
@@ -68,7 +72,7 @@
 | `trend-scout` | SNS 競合の定点観測 (`/competitor-scan`) + X バズ投稿の型・画像リサーチ (`/x-viral-research`) も担当 | 既存拡張 |
 | `strategy-advisor` | SNS 週次運用ルーチン (`/sns-weekly-plan`) の orchestrator | 既存拡張 |
 
-## Tier 5: SEO / Analytics / Monetization (7 体)
+## Tier 5: SEO / Analytics / Monetization
 
 | agent | role | 派生元 |
 |---|---|---|
@@ -83,7 +87,7 @@
 | `kindle-publisher` 🆕 | Kindle 出版ファクトリー (`packages/product-factory` の kindle チャネル) 単一所有。書籍カタログ SSOT=`src/channels/kindle/book-catalog.ts` (S1 論点/S2 テーマ/S3 地域/S4 大全・32 冊) / EPUB3 生成器 `src/generators/epub.ts` (jszip・図表は SVG→PNG 同梱・カバー satori) / 書き下ろし章 `manuscripts/<id>/*.md` (freshFile) / 検証 (`products:kindle:validate`) / 生成 (`--id/--all-manuscript`) / 書き下ろし比率 30% ゲート / 台帳 `.claude/state/products/kindle-status.json`。本文素材=R2 ブログ・ai-content。**PDF は使わず EPUB**。書き下ろし起草=article-writer、意味レビュー=blog-critic、素材=blog-editor、KDP 出品操作=kdp-operator に委譲。必読 `.claude/rules/coconala-product-standards.md` §8 | 2026-07-23 新設 |
 | `kdp-operator` 🆕 | Amazon KDP (kdp.amazon.com) 出品の**フォーム操作自動化** (Playwright: 下書き作成/内容修正/公開)。出品内容 SoT=`.claude/config/kdp-listings.json` を KINDLE_BOOKS/EPUB から生成し 1 冊ずつ出品。安全弁=account assert (★別アカウント取り違え防止) / ログイン・2FA・税務情報 (Tax interview)・銀行口座は人間工程 (代行しない) / draft-first + `--commit` gate + オーナー承認 / KDP は React SPA で `--probe` 構造 dump→セレクタ調整。書籍生成・カタログ=kindle-publisher に委譲。skill `/kdp-publish`・`.claude/scripts/kdp/`。coconala-operator から移植。必読 `.claude/rules/coconala-product-standards.md` §8 | 2026-07-23 新設 |
 
-## Tier 6: Theme / UI (8 体)
+## Tier 6: Theme / UI
 
 | agent | role | 派生元 |
 |---|---|---|
@@ -111,16 +115,16 @@
 | 同時起動シナリオ | 各 agent の file boundary |
 |---|---|
 | `trend-scout` + `gsc-analyst` + `ga4-analyst` | `state/blog/` vs `state/metrics/gsc/` vs `state/metrics/ga4/` |
-| `article-writer × 5` + `chart-author` | `.local/r2/app/blog/<slug>/` を slug 単位排他、chart-author は `docs/21_ブログ記事原稿/<slug>/` を読むのみ |
-| `data-ingester` → `snapshot-exporter` → `r2-publisher` | D1 write → `.local/r2/app/` write → R2 push の一方向。同 ranking_key は逐次、別 key は並列可 |
+| `article-writer × 最大3` + `chart-author` | `.local/r2/app/blog/<slug>/` を slug 単位排他、chart-author は `docs/21_ブログ記事原稿/<slug>/` を読むのみ |
+| `data-ingester` → `snapshot-exporter` → `r2-publisher` | git TS / API → `.local/r2/app/` → R2 push の一方向。同ranking_keyは逐次 |
 | `x-strategist` + `instagram-strategist` | API / state / metrics サブディレクトリが完全分離 |
 | `gsc-analyst` + `improvement-triage` | gsc-analyst → `.claude/state/metrics/gsc/` write、triage → `docs/todo/01_改善バックログ.md` 排他 append |
-| `code-reviewer` + `ui-consistency-reviewer` + `tdd-guide` | 全員 read-only、git diff のみ |
+| `code-reviewer` + 必要な専門reviewer 1体 | 同じdiffの重複reviewはせず、UIまたはtest設計がscopeにある時だけ追加 |
 | `ranking-ui-manager` + `ranking-publisher` | `features/ranking/**` (UI) vs `config/*-ranking-keys.ts` + 公開 scripts (publish) で非重複 |
 | `ranking-content-author` + `ranking-content-critic` | author=`app/ranking/<key>/ai-content.json` write (key単位) vs critic=read-only。非衝突 |
 
 **禁則**:
-- D1 への並列 write 禁止 (better-sqlite3 単一プロセス前提)。同 D1 への `data-ingester` / `db-schema-manager` 起動は逐次
+- 同じworking treeで複数writerを並行起動しない。並行writerが必要ならfile boundaryに加えてworktreeを分ける
 - `docs/todo/01_改善バックログ.md` への書き込みは `improvement-triage` のみ。analyst 系は `.claude/state/` にしか書かない
 
 ## チーム連携パターン (新体制版)
@@ -131,14 +135,14 @@
 | ランキング本番公開 (isActive→200) | ranking-publisher (orchestrator) → data-ingester (観測値確認) → devops-runner (deploy) → /purge-cdn → 本番実測 |
 | ランキング UI ドリフト是正 | ranking-ui-manager (監査 → 外科的是正 → localhost 確認、デプロイは ranking-publisher) |
 | ranking ai-content 生成 → 公開 | ranking-content-author (生成 → audit-ai-content.mjs) → ranking-content-critic (意味レビュー) → r2-publisher (R2 反映) |
-| GSC 中位クエリ → 量産 | gsc-analyst → trend-scout → article-writer × N (並列, metric→R2直執筆) → chart-author → blog-editor (publish) |
-| 週次 PDCA | strategy-advisor (orchestrator) → gsc/ga4/adsense-analyst (3 並列) → improvement-triage |
+| GSC 中位クエリ → 量産 | gsc-analyst → trend-scout → article-writer (slug分離・最大3) → chart-author → blog-editor (publish) |
+| 週次 PDCA | strategy-advisorがsnapshot/scriptを同一セッションで並列収集 → improvement-triage |
 | トレンド → ブログ記事 | trend-scout → article-writer (metric→R2直執筆) → chart-author → blog-critic → blog-editor (publish) |
 | SNS 週次運用 | strategy-advisor (/sns-weekly-plan) → sns-metrics-sync (先週計測) → trend-scout (題材) → x/instagram-strategist (生成・予約) |
 | トレンド → IG リール | trend-scout → sns-renderer (/bar-chart-race --step render) → instagram-strategist |
 | バズ地図 → SNS | gis-curator (KSJ geometryType) / data-ingester (e-Stat 観測値) → sns-renderer (/buzz-map 型A〜E 生成+R2) → x/instagram-strategist (配信。draft 止まりが既定) |
 | SNS 競合調査 | trend-scout (/competitor-scan) → docs/04_レビュー |
-| コード変更 → デプロイ | code-reviewer + ui-consistency-reviewer + tdd-guide (3 並列) → devops-runner |
+| コード変更 → デプロイ | code-reviewer → scopeにUI/testを含む時だけ対応reviewerを1体追加 → devops-runner |
 | テーマダッシュボード設計 | theme-designer → data-ingester → theme-component-builder → ui-reviewer |
 
 ## 移行ステータス

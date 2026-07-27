@@ -1,6 +1,7 @@
 ---
 name: tdd-guide
 description: テスト駆動開発（Red-Green-Refactor）のガイド、テストカバレッジ向上、ユニット/E2Eの使い分け設計、D1・e-Stat API・R2のモック戦略立案、テストアンチパターン検出を担当する。TDDで実装を進めたい、またはテスト設計の相談をしたいときに使う。
+model: opus
 ---
 
 # TDD Guide Agent
@@ -101,7 +102,7 @@ npx vitest run --reporter=verbose 2>&1 | tail -5
 
 ## Output Contract
 
-呼び出し時の標準出力形式。詳細は `CLAUDE.md` の「Agent 起動時の出力契約」を参照。
+詳細は `.claude/rules/agent-output-contract.md` を参照。
 
 通常: **Template A** (table-only)
 - 列: `Test | Phase (Red/Green/Refactor) | Status | Next Step`

@@ -108,3 +108,8 @@ curl -s -o /dev/null -w "%{http_code}\n" \
 - 公開スクリプト: `packages/ranking/src/scripts/generate-ranking-items.ts` / `apps/web/scripts/generate-known-ranking-keys.ts`
 - middleware: `apps/web/src/middleware.ts`（ranking は isGone のみ 410、未登録は notFound 委譲）
 - 姉妹 agent: `.claude/agents/ranking-ui-manager.md`（UI）/ `.claude/agents/data-ingester.md`（観測値）/ `.claude/agents/r2-publisher.md`（push）
+
+## Output Contract
+
+chat は `Ranking key | Local state | R2 state | Index state | Gates` の1表のみ。生成、upload、deployを
+混同せず、未実行の外部変更を明示する。

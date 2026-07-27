@@ -1,6 +1,6 @@
 ---
 name: weekly-plan
-description: 週次計画を生成する（並列サブエージェントで収集→戦略分析→批判的レビュー→計画出力）。Use when user says "週次計画", "今週の計画", "来週の予定". 5並列収集でKPIベース優先順位決定.
+description: 週次計画を生成する（決定的な並列収集→戦略分析→批判的レビュー→計画出力）。Use when user says "週次計画", "今週の計画", "来週の予定". KPIベースで優先順位を決定する。
 primary_agent: strategy-advisor
 ---
 
@@ -16,15 +16,15 @@ primary_agent: strategy-advisor
 
 ## 概要
 
-5つのサブエージェントで並列にコンテキストを収集し（開発状況・コンテンツ・パフォーマンス・計画課題・トレンド）、KPI に照らして優先順位を決定し、実行可能な週次計画を出力する。
+5つの観点から tool / snapshot を並列に読み（開発状況・コンテンツ・パフォーマンス・計画課題・トレンド）、KPI に照らして優先順位を決定し、実行可能な週次計画を出力する。
 
 ## 手順
 
-### Phase 1: コンテキスト収集（並列サブエージェント）
+### Phase 1: コンテキスト収集（同一セッションの並列 tool call）
 
-5つのサブエージェントを**同時に起動**し、それぞれの結果を収集する。
+5つの観点を同一セッションで収集する。数回の read / shell call で終わるため subagent は起動しない。
 
-#### Agent A: 開発状況
+#### Track A: 開発状況
 
 ```
 調査項目:
@@ -36,7 +36,7 @@ primary_agent: strategy-advisor
 出力形式: 箇条書きで「今週何が開発されたか」「未完了の作業」「技術的負債」をまとめる
 ```
 
-#### Agent B: コンテンツパイプライン
+#### Track B: コンテンツパイプライン
 
 ```
 調査項目:
@@ -50,7 +50,7 @@ primary_agent: strategy-advisor
 出力形式: 「投稿可能なコンテンツ数」「記事パイプラインの状態」「ボトルネック」
 ```
 
-#### Agent C: アクセス・パフォーマンス
+#### Track C: アクセス・パフォーマンス
 
 ```
 調査項目:
@@ -75,7 +75,7 @@ primary_agent: strategy-advisor
   - **時系列履歴**: `.claude/skills/analytics/sns-metrics-improvement/snapshots/YYYY-MM-DD/metrics.csv`（`sns-metrics-store.cjs` の `readByRange` で集約）
 
 - GA4/GSC メトリクス（`.claude/skills/analytics/{ga4,gsc}-improvement/reference/snapshots/YYYY-Www/` から最新 snapshot を読み込み）
-  → `/weekly-review` の Phase 1 Agent C で `/fetch-{ga4,gsc}-data ... snapshot` が自動実行され CSV が保存される
+  → `/weekly-review` の Phase 1 Track C で `/fetch-{ga4,gsc}-data ... snapshot` が自動実行され CSV が保存される
   → 直近の snapshot ディレクトリ（overview.csv / pages.csv / queries.csv 等）から PV・流入経路・検索クエリを参照
   → snapshot が存在しない場合は「計測データなし」と報告
 
@@ -99,7 +99,7 @@ primary_agent: strategy-advisor
 注: API 呼び出しは行わない（`/weekly-review` が取得済みのデータを参照する）。
 ```
 
-#### Agent D: 計画・課題
+#### Track D: 計画・課題
 
 ```
 調査項目:
@@ -164,7 +164,7 @@ primary_agent: strategy-advisor
 出力形式: 「ロードマップ上の現在地」「未解決の課題」「前週の振り返り」「繰り返しパターン」「改善ログ pending 一覧」「前週からの持ち越し」
 ```
 
-#### Agent E: トレンド・検索需要
+#### Track E: トレンド・検索需要
 
 軽量なトレンドチェックを行い、今週のコンテンツ優先度に影響するシグナルを収集する。
 
@@ -196,7 +196,7 @@ primary_agent: strategy-advisor
 
 1. **KPI との距離**: ロードマップの目標（PV、記事数、収益）に対する現在地
 2. **ギャップ**: 計画と実行の乖離。特に繰り返し未達のタスク
-3. **機会**: Agent E のトレンド機会を評価。stats47 データとマッチするトレンドがあれば記事化・SNS投稿の優先度を上げる
+3. **機会**: Track E のトレンド機会を評価。stats47 データとマッチするトレンドがあれば記事化・SNS投稿の優先度を上げる
 4. **リスク**: 放置すると悪化すること（技術的負債、トークン失効、コンテンツ枯渇）
 5. **タイミング**: 今週でなければ意味がないこと（季節性、ニュース連動）
 
@@ -313,7 +313,7 @@ tags: []
 
 ## 前週からの持ち越し
 
-<!-- Agent D が抽出した前週計画の未チェック `- [ ]` を転載。元 task の優先度に応じて
+<!-- Track D が抽出した前週計画の未チェック `- [ ]` を転載。元 task の優先度に応じて
      今週 Must/Should/Could に再分類する場合は、ここに残しつつ下記タスク欄にも追加して二重リンク。 -->
 - [ ] **持ち越しタスク名** — 元: 前週レビュー [元 Must/Should/Could]
 
@@ -377,4 +377,4 @@ tags: []
 - `docs/todo/current-week.md` / `.claude/skills/management/weekly-review/reference/reviews/` — 現在計画と過去レビュー
 - 投稿台帳 `.claude/state/sns/posts.json`（`sns-posts-store.cjs` 経由）+ `.claude/skills/analytics/sns-metrics-improvement/snapshots/` — SNS コンテンツ状況・メトリクス
 - `.claude/skills/management/critical-review/SKILL.md` — 批判的レビューの精神
-- `.claude/skills/blog/discover-trends/SKILL.md` — フルトレンドスキャン（Agent E で不足時に提案、`--source all` で全 6 ソース統合）
+- `.claude/skills/blog/discover-trends/SKILL.md` — フルトレンドスキャン（Track E で不足時に提案、`--source all` で全 6 ソース統合）

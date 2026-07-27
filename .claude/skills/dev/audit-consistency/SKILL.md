@@ -9,7 +9,7 @@ agent/skill/script/hook を変更した会話の節目で、**整合性ドリフ
 doc/memory に偽の主張を書いた」ドリフトが起きた教訓に基づく恒久ガード。
 
 > **二層で確認する** (片方では不十分):
-> - **床 (機械・決定的)**: `check-agent-skill-consistency.cjs` がリンク切れ・参照先不在・orphan を検出。
+> - **床 (機械・決定的)**: `check-agent-skill-consistency.cjs` がリンク切れ・prompt契約・委譲上限・orphanを検出。
 > - **天井 (意味・モデル判断)**: 機械では捕まらない統合バグ (今回の #1) を、消費側の前提を読んで確認する。
 >
 > このスキルは Stop hook (`.claude/hooks/check-consistency-on-stop.js`) からの差し戻しで起動することを想定する。
@@ -25,6 +25,12 @@ node .claude/scripts/lib/check-agent-skill-consistency.cjs
 - **[E1]** SKILL.md の `primary_agent`/`co_agents` が指す `.claude/agents/<name>.md` が無い
 - **[E2]** SKILL.md が参照する `.claude/scripts|hooks/...` が存在しない
 - **[E3]** `settings.json` の hook command が指すファイルが存在しない
+- **[E4]** custom agent の `name` / `description` / `model` が無い、modelが未許可、またはdescriptionが300文字超
+- **[E5]** custom agent に `## Output Contract` が無い
+- **[E6]** active skill の `name` / `description` / `primary_agent` が無い、またはSKILL.mdが500行超（task-routerのみowner不要）
+- **[E7]** Opus 5の過剰検証を誘発する禁止promptが残っている
+- **[E8]** 委譲skillが共通契約を参照しない、またはsubagent上限が3を超える
+- **[E9]** agent/skill frontmatterにYAMLとして曖昧なplain scalarがある
 - **[W1]** どこからも参照されない orphan スクリプト
 
 error はすべて潰す。warn (orphan) は意図的なら無視可 (新規追加直後で参照元未作成など)。
@@ -41,7 +47,8 @@ error はすべて潰す。warn (orphan) は意図的なら無視可 (新規追�
    - cadence (`/weekly-review` `/weekly-plan` が拾うか)
    - index (`docs/*/00_INDEX.md`)、記録先ルール (`.claude/rules/data-storage.md`)
    - 真実源 (改善バックログ `docs/todo/01_改善バックログ.md`)
-5. **規約準拠**: agent prompt の OUTPUT FORMAT 冒頭固定 (`agent-output-contract.md`)、SSG 保全 (`nextjs-ssg-preservation.md`)、R2 書き込み CI 限定 (`r2-storage-design.md`) 等に触れていないか。
+5. **規約準拠**: Task Capsule / OUTPUT FORMAT (`model-prompting.md` / `agent-output-contract.md`)、
+   SSG 保全 (`nextjs-ssg-preservation.md`)、R2 書き込み CI 限定 (`r2-storage-design.md`) 等に触れていないか。
 
 検出した修正漏れはこの会話で是正する。是正が大きければ backlog に起票して status を残す。
 
@@ -76,6 +83,7 @@ node .claude/scripts/lib/check-agent-skill-consistency.cjs --mark-audited
 
 ## 関連
 - 機械チェッカー: `.claude/scripts/lib/check-agent-skill-consistency.cjs`
+- prompt設計SSOT: `.claude/rules/model-prompting.md`
 - Stop hook: `.claude/hooks/check-consistency-on-stop.js` / 登録: `.claude/settings.json`
 - 既存ガード群: memory `project_recurrence_guard_scripts` (`.claude/scripts/lib/check-*.cjs`)
 - 親方針: CLAUDE.md 行動原則8「書く前に読む」/ 12「失敗を隠さない」

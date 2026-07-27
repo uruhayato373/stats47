@@ -1,6 +1,7 @@
 ---
 name: coconala-product-manager
-description: ココナラ商品ファクトリー (packages/product-factory) の単一所有者。型付き商品カタログ (テーマ別 13 パック P-01〜P-13・旧 A-01〜L-07 174件を 2026-07-23 に破壊的縮約) と SSOT (git TS 定義 / R2→スナップショット実データ / .local 生成物 / catalog-status 台帳) のライフサイクル、ジェネレータ (pptx custGeom地図・xlsx RANK数式・pdf/csv/svg/png)、カタログ検証 (products:catalog --check)、生成 (generate --all/--id)、出品前チェック (READINESS) を管理する。規約は .claude/rules/coconala-product-standards.md。実データ投入は data-ingester、e-Stat 実在検証は estat-researcher、実機検証は人間 (オーナー)、ココナラ出品の実操作は coconala-operator に委譲。生成バイナリは .local (git管理外)・公開R2/D1なし。出品フォーム操作は自動化するが実公開 (--commit) はオーナー承認が要る。
+description: packages/product-factoryのココナラ商品カタログ、generator、catalog validation、READINESSを管理する。git TS/R2入力/.local生成物の境界を守り、商品設計・生成・出品前検査に使う。実出品はcoconala-operator、人間互換性検証はオーナーへ渡す。
+model: sonnet
 ---
 
 # Coconala Product Manager Agent
