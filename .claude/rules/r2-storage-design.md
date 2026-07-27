@@ -38,9 +38,9 @@
 | `/survey`                                 | `app/survey/all.json`                                                           | 調査一覧                                                                                                                                                                                                        |
 | `/survey/[surveyKey]`                     | `app/survey/[key]/items.json`                                                   | 調査別 RankingItem 一覧                                                                                                                                                                                         |
 | `/blog/[slug]`                            | `app/blog/[slug]/thumbnail-{light,dark}.webp` + `ogp/{ogp.png,generation.json}` | ブログ画像bundle + 共通生成manifest                                                                                                                                                                             |
-| `/fishing-ports` (廃止)                   | `app/fishing-ports/all.json`                                                    | 漁港データ。**2026-05-28 にルート廃止 → `/themes/fishery-marine` へ 301 統合**（middleware）。R2 key は export 継続中で `/themes` が参照しうる。旧 feature UI (`apps/web/src/features/fishing-ports`) は orphan |
-| `/ports` (廃止)                           | `app/ports/all.json`                                                            | 港湾メタデータ。**2026-05-28 にルート廃止 → `/themes/ports` へ 301 統合**（middleware）。R2 key は export 継続中。旧 feature UI (`apps/web/src/features/port-statistics`) は orphan                             |
-| `/ports/[portCode]` (廃止)                | `app/port-statistics/by-port/[code].json`                                       | 港湾別統計。`/ports` 廃止に伴い同様に旧ルート。port 統計は `/themes/ports` 側で扱う                                                                                                                             |
+| `/fishing-ports` (廃止)                   | `app/fishing-ports/all.json`                                                    | 漁港データ。**2026-05-28 にルート廃止 → `/themes/fishery-marine` へ 301 統合**（middleware）。**reader/exporter とも commit 22092e9 (2026-06-13) で削除済み・`/themes` は参照しない**。R2 key は削除対象 (`r2-retention.ts` `retired-fishing-ports`) |
+| `/ports` (廃止)                           | `app/ports/all.json`                                                            | 港湾メタデータ。**2026-05-28 にルート廃止 → `/themes/ports` へ 301 統合**（middleware）。**reader/exporter とも削除済み・`/themes/ports` は `app/ranking/<key>` のみ読む**。R2 key は削除対象 (`retired-ports`)          |
+| `/ports/[portCode]` (廃止)                | `app/port-statistics/by-port/[code].json`                                       | 港湾別統計。`/ports` 廃止に伴い同様に旧ルート・削除対象 (`retired-port-statistics`)。port 統計は `/themes/ports` 側で扱う                                                                                        |
 | `/gis-cross/depopulation-medical`         | `app/gis-cross/depopulation-medical/{summary.json,pref/[NN].json}`              | 過疎×医療 掛け合わせ (サマリ + 県別詳細)                                                                                                                                                                        |
 | `/gis-cross/sunshine-map`                 | `app/gis-cross/sunshine-map/{raster.png,meta.json}`                             | 日照地図ラスター + メタ                                                                                                                                                                                         |
 | 内部計算データ（URL なし）                | `app/correlation/by-ranking-key/[key].json`                                     | 相関データ（例外）                                                                                                                                                                                              |
@@ -89,6 +89,51 @@ objectはPUTしない。mtime・ローカルcache・`app/blog`等の広域prefix
 - asset失敗を`continue-on-error` / `|| true`で隠す
 - 画像R2 writerで共通`concurrency: r2-write`を使わない
 
+## R2 保持・削除ポリシー (★2026-07-27 新設)
+
+無料枠は 10 GB (アカウント合算)。R2 は「配信データを増やし続けるが自動で減らない」ため、
+放置すると必ず無料枠を超過する。削除可否と削除の唯一の入口を以下に固定する。
+
+### 保持するもの (削除しない)
+
+| prefix | 理由 |
+|---|---|
+| `app/**` | 本番配信データ (SSOT / snapshot)。§「URL → R2 キーパス対応表」参照 |
+| `gis/` / `ges/` / `video/` / `note/` | 正規保持 (§「ルート直下に置くもの」) |
+| `staging/image-cache/` | AI 背景の再課金防止 cache (`ogp-image-standards.md` §5)。無期限 |
+| `sns/` (投稿済み動画を除く) | 投稿予定・draft の素材 |
+
+### 削除ポリシー (削除してよいもの)
+
+| 対象 | 保持ルール | 実行手段 |
+|---|---|---|
+| `incremental-cache/<buildId>/` (ISR キャッシュ) | **最新 3 世代のみ保持**。旧世代は二度と読まれない | デプロイ完了後に自動 GC (`.github/workflows/r2-isr-gc.yml`、`workflow_run` トリガー + 日曜 03:30 JST の取りこぼし回収) + 手動 `r2-maintenance.yml` (`mode: isr-generations`) |
+| `sns/**/*.mp4` (投稿済み) | 投稿後 30 日で削除 | `.github/workflows/cleanup-r2-sns-videos.yml` (週次。正典 `sns-content-standards.md` §5.5) |
+| 移行済み旧 prefix (下記「既存キーの移行状態」) | `packages/r2-storage/src/scripts/r2-retention.ts` の `RETENTION_TARGETS` (コード内 allowlist) のみ | 手動 `r2-maintenance.yml` (`mode: retention-prefixes`) |
+
+**削除の唯一の入口は `.github/workflows/r2-maintenance.yml`** (`mode: du` / `retention-prefixes` /
+`isr-generations`、既定 `dry_run: true`)。任意 prefix を削除できる `delete-r2-prefix.ts` は緊急時のみで、
+通常運用では使わない。実行主体は `r2-publisher` agent。両ワークフローとも
+`RETENTION_TARGETS` / `PROTECTED_PREFIXES` (コード側 allowlist) 外の prefix は削除できない設計
+(誤入力で配信データを消せない)。
+
+### 2026-07-27 の実績 (根本原因と是正)
+
+**根本原因**: OpenNext は ISR キャッシュを `incremental-cache/<buildId>/` に書き、デプロイのたびに
+buildId が変わって新世代ができる。旧世代は二度と読まれないが、`audit-incremental-cache.ts` はどの
+workflow にも配線されておらず、R2 ライフサイクルルールも無く、日次アラート閾値 (50 GB) も緩すぎたため
+検知されなかった。
+
+| 項目 | 値 |
+|---|---|
+| 削減前 (2026-07-27 01:47 実測) | 20.04 GB / 72,663 オブジェクト |
+| 削除内容 | `incremental-cache/` 67 世代中 64 世代 (最新 3 世代を保持) = 30,153 オブジェクト / 8.85 GB。蓄積期間 2026-06-20〜2026-07-27 (約 5 週間) |
+| 削減後 (2026-07-27 01:56 実測) | 11.2 GB / 42,664 オブジェクト |
+| 検証 | 削除後に本番 5 ページ (`/`, `/ranking/annual-sunshine-duration`, `/areas/13000`, `/blog/real-disposable-income-reversal`, `/category/landweather`) を Googlebot UA で 200 実測確認 |
+
+削減後もアカウント合計は無料枠 10 GB を超過している (残課題は `docs/todo/01_改善バックログ.md`
+`[R2-STORAGE-01]` を参照)。今後の再発防止は `r2-isr-gc.yml` の自動 GC (デプロイ連動) が担う。
+
 ## 動画関連の特殊ルール
 
 Remotion build 時に必要な統計データ JSON は **`apps/remotion/public/<feature>/`** に置く (R2 ではなく git tracked)。理由: Remotion の Webpack bundle が `staticFile()` で読み込むため。これらは **git TS / R2 を入力に再生成される派生物**（完全DBレス: 永続 D1 は SSOT ではない）。
@@ -110,6 +155,10 @@ Remotion build 時に必要な統計データ JSON は **`apps/remotion/public/<
 | `ranking/[key]/page-cards.json`         | `app/ranking/[key]/page-cards.json`                                                                                               | ✅ 完了  |
 | `blog/[slug]/...`                       | `app/blog/[slug]/...`                                                                                                             | ✅ 完了  |
 | `correlation/by-ranking-key/[key].json` | `app/correlation/by-ranking-key/[key].json`                                                                                       | ✅ 完了  |
+| `app/area-profile/[code].json`          | `app/areas/[code]/profile.json`                                                                                                   | 🗑️ 削除対象 (`migrated-area-profile`) |
+| `app/fishing-ports/all.json`            | (後継なし・ルート廃止)                                                                                                            | 🗑️ 削除対象 (`r2-retention.ts` `retired-fishing-ports`) |
+| `app/ports/all.json`                    | (後継なし・ルート廃止)                                                                                                            | 🗑️ 削除対象 (`retired-ports`) |
+| `app/port-statistics/by-port/[code].json` | (後継なし・ルート廃止)                                                                                                          | 🗑️ 削除対象 (`retired-port-statistics`) |
 
 ## JSON ファイル命名規則
 
@@ -178,3 +227,5 @@ const flow    = await readMigrationFlow("population-migration-inter-prefecture",
 - `.claude/agents/data-ingester.md` — TS-config / e-Stat → R2 投入
 - `.claude/agents/snapshot-exporter.md` — git TS / R2 観測値 → R2 snapshot 生成 (エフェメラル計算)
 - `.claude/agents/r2-publisher.md` — R2 push / pull / du 専任
+- `packages/r2-storage/src/scripts/{r2-du,r2-retention,audit-incremental-cache}.ts` — 容量計測 / 移行済み旧 prefix 削除 / ISR 世代 GC
+- `.github/workflows/{r2-maintenance,r2-isr-gc}.yml` — 削除の唯一の実行窓口 (前者は手動 dispatch、後者はデプロイ連動 + 週次)

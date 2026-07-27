@@ -161,6 +161,11 @@ node .claude/scripts/snapshot-weekly-metrics.mjs [YYYY-Www]
    取得完了後、`/adsense-improvement observe` を実行して `[AdSense Snapshot] YYYY-Www` Issue を作成し、進行中施策の効果判定を行う。
    **クレデンシャル未設定時はこのステップをスキップし、レビュー本文に「AdSense OAuth 未設定」と 1 行記載する**。
 
+4.6. R2 ストレージ定点観測 (Cloudflare cost)
+   `.claude/state/metrics/cloudflare/LATEST.md` の `r2_storage_gb` を読み、前週比を確認する。
+   増勢が続く場合は `docs/todo/01_改善バックログ.md` の `[R2-STORAGE-01]` を更新する
+   (保持・削除ポリシーの正典: `.claude/rules/r2-storage-design.md`「R2 保持・削除ポリシー」)。
+
 5. YouTube データ取得（API 呼び出し）
    `/fetch-youtube-data` スキルの手順に従い、以下を取得:
    - overview: 登録者数・総再生回数・動画数

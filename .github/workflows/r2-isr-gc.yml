@@ -63,6 +63,9 @@ jobs:
 
       - name: 🧽 旧世代を回収し、世代数の上限を検査
         run: |
+          # ★pipefail 必須: `script | grep | tee` は既定でパイプ末尾 (tee) の exit code を返すため、
+          #   これが無いと --assert-max の exit 1 が握り潰され「番人が黙る」(2026-07-27 実測で確認)
+          set -o pipefail
           # ARGS は配列で組む ("$ARGS" 単一引数渡しは 1 トークン化する — ARG_VECTOR_QUOTED)
           ARGS=(--keep 3 --assert-max 4)
           # dispatch で dry_run=true のときだけ削除しない。workflow_run / schedule は実削除
