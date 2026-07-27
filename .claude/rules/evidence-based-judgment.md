@@ -208,5 +208,5 @@ grep -rn "$NG" \
 ## 関連
 
 - 過去施策の判定が「実証ベースで再評価」されたログ: 各 improvement-log の冒頭に rewrite サインがあるもの
-- 親方針: `CLAUDE.md` の「行動原則 2: 検証してから完了」
+- 親方針: `CLAUDE.md` の行動原則 12「失敗を隠さない — 未検証部分・スキップ箇所は『完了』と言わず明示する」
 - 既存実装: `.claude/scripts/gsc/url-inspection-daily.cjs`（URL Inspection API の参照実装）

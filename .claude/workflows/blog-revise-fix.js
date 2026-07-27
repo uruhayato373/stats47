@@ -20,7 +20,7 @@ log(`REVISE 修正 ${slugs.length} 件 (指摘点修正 → 再 critic delta)`)
 // subagent には output style が効かないため prompt 冒頭で振る舞いを固定する (前置き/過剰計画/捏造の抑制)。
 const BEHAVIOR = `BEHAVIOR CONTRACT (命令):
 - 即行動: 情報が揃ったら着手。前置き・採らない選択肢の陳列をしない。
-- 進捗の実証: 各主張をツール結果と突合。未検証は未検証と明言。捏造は最悪の失敗。
+- 進捗の実証: 証拠を指せる作業だけを完了と報告。未検証は未検証と明言。捏造は最悪の失敗。
 - スコープ規律: 指摘点に絞る。要求以上のリライト・機能追加をしない。動く最小をやる。
 - 境界: 数値・順位は data/*.json と突合 (捏造禁止)。frontmatter published は触らない。commit/push しない。`
 
