@@ -12,6 +12,7 @@ import {
 } from "@stats47/visualization/server";
 
 import surveysMaster from "../data/surveys.json";
+import { KNOWN_RANKING_KEYS } from "../config/known-ranking-keys";
 import { bakeHomeFeaturedItem, resolveHomeFeaturedItems } from "./home-featured";
 import { listRankingItemsWithTagsFromR2 } from "../repositories/ranking-item";
 import { readRankingValuesFromR2 } from "../repositories/ranking-value";
@@ -52,6 +53,39 @@ export interface ExportRankingItemsPerUrlResult {
   surveyItemCounts: Record<string, number>;
   totalSizeBytes: number;
   durationMs: number;
+}
+
+/**
+ * exportRankingItemsPerUrl の fail-closed 事前検査 (pure・unit test 対象)。
+ *
+ * 2026-07-27 障害の再発防止: `enumerateRankingItemKeys` (read-ranking-items-snapshot.ts) の
+ * R2 list が部分的な staging (item-metadata-refresh --apply が差分パッチした一部だけ) を
+ * 「listing が 0 件超だから全件」と誤認し、home/featured.json 等が count:0 で R2 に
+ * 上書きされた。ここで items 件数・home featured 解決の 2 点を検査し、異常なら
+ * errors を返す (呼び出し元は `validateHomeFeaturedRankings` と同じ書き方で throw する)。
+ */
+export function checkRankingItemsCompleteness(input: {
+  /** listRankingItemsWithTagsFromR2 が読めた item 数 */
+  itemCount: number;
+  /** 期待する最低件数 (通常 KNOWN_RANKING_KEYS.size の 90%) */
+  expectedMinCount: number;
+  /** resolveHomeFeaturedItems が解決できなかった rankingKey (本来 0 件のはず) */
+  missingFeaturedKeys: readonly string[];
+}): string[] {
+  const errors: string[] = [];
+  if (input.missingFeaturedKeys.length > 0) {
+    errors.push(
+      `home featured: item.json に解決できない定義があります (${input.missingFeaturedKeys.join(", ")})`,
+    );
+  }
+  if (input.itemCount < input.expectedMinCount) {
+    errors.push(
+      `item.json 読み込み件数が異常に少ない (items=${input.itemCount}, expected>=${input.expectedMinCount})。` +
+        `R2 の部分列挙 (item-metadata-refresh staging 等) を全件と誤認している可能性があります ` +
+        `(NODE_ENV=production で S3 API 経由の一覧を使っているか確認してください)`,
+    );
+  }
+  return errors;
 }
 
 /**
@@ -121,8 +155,15 @@ export async function exportRankingItemsPerUrl(): Promise<ExportRankingItemsPerU
     throw new Error(`HOME_FEATURED_RANKINGS validation failed: ${configErrors.join(" / ")}`);
   }
   const { resolved: featuredResolved, missingKeys } = resolveHomeFeaturedItems(items);
-  if (missingKeys.length > 0) {
-    logger.warn({ missingKeys }, "home featured: item.json に解決できない定義を skip しました");
+  const completenessErrors = checkRankingItemsCompleteness({
+    itemCount: items.length,
+    expectedMinCount: Math.floor(KNOWN_RANKING_KEYS.size * 0.9),
+    missingFeaturedKeys: missingKeys,
+  });
+  if (completenessErrors.length > 0) {
+    throw new Error(
+      `exportRankingItemsPerUrl completeness check failed: ${completenessErrors.join(" / ")}`,
+    );
   }
 
   // 各itemに1位 + 共通都道府県地図SVG + homeFeatured (hook) を焼き込む。

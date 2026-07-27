@@ -1,7 +1,7 @@
 {
-  "hash": "327c68a0284f2de003cdeffd87c318c226f3040945c3ac22e5afb790b12443ad",
-  "audited_at": "2026-07-27T03:11:30",
+  "hash": "0730f184854fb866279a62f7f3e038ce5afdfc4fb1113beb8d79672ed7ed379d",
+  "audited_at": "2026-07-27T07:00:56",
   "files": [
-    ".claude/skills/sns/sns-weekly-plan/SKILL.md"
+    ".claude/skills/db/sync-snapshots/run.sh"
   ]
 }

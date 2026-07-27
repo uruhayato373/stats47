@@ -424,6 +424,7 @@ async function main() {
   console.log(`[batch] registry size: ${all.length}`);
 
   let targets = all;
+  const isExplicitMetric = Boolean(args.metric);
   if (args.metric) {
     // --metric はカンマ区切りで複数指定できる (欠落キーの一括復旧用。単一指定は従来どおり)
     const wanted = new Set(
@@ -457,6 +458,7 @@ async function main() {
   let ok = 0;
   let fail = 0;
   let skip = 0;
+  const failedKeys: string[] = [];
 
   // concurrency-limited execution
   const queue = [...targets];
@@ -472,6 +474,7 @@ async function main() {
         skip++;
       } else {
         fail++;
+        failedKeys.push(result.key);
         console.error(`  [fail] ${result.key}: ${result.message}`);
       }
     }
@@ -479,9 +482,34 @@ async function main() {
   await Promise.all(workers);
 
   console.log(`\n[done] ok=${ok}, fail=${fail}, skip=${skip}`);
+  if (failedKeys.length > 0) {
+    console.log(`[done] failed keys (${failedKeys.length}): ${failedKeys.join(", ")}`);
+  }
   console.log(
     `Next: npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix app/stats`,
   );
+
+  // silent partial failure の再発防止 (2026-07-27 障害): 従来は fail>0 でも exit 0 を返し、
+  // CI (data-refresh.yml) が成功と誤認していた (55 metric 中 25 件失敗しても workflow green)。
+  // --metric 明示指定 (特定キーの復旧目的の実行) は 1 件でも fail したら exit 1。
+  // 全量実行 (metric 未指定 = 月次 cron) は fail 比率が 10% を超えたら exit 1
+  // (少数の恒常的失敗だけで毎月 cron を赤くしないための閾値)。
+  if (isExplicitMetric && fail > 0) {
+    console.error(
+      `[fatal] --metric 指定実行で ${fail} 件失敗しました (復旧対象キーが未完了です)`,
+    );
+    process.exit(1);
+  }
+  if (!isExplicitMetric) {
+    const total = ok + fail + skip;
+    const failRatio = total > 0 ? fail / total : 0;
+    if (failRatio > 0.1) {
+      console.error(
+        `[fatal] 全量実行で fail 比率が閾値超過: fail=${fail}/${total} (${(failRatio * 100).toFixed(1)}%) > 10%`,
+      );
+      process.exit(1);
+    }
+  }
 }
 
 main().catch((e) => {

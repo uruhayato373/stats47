@@ -86,7 +86,16 @@ jobs:
           echo "staged $count specialty webp → .local/r2/app/areas/**/specialty/"
 
       # snapshot 再生成 → R2 push。CI では CI=true が立つため run.sh の push が実行される。
+      #
+      # ★NODE_ENV=production 必須 (2026-07-27 障害の再発防止・data-refresh.yml と同じ理由):
+      #   run.sh の TSX ラッパ (packages/ranking/src/scripts/setup-cli.js) は NODE_ENV 未設定なら
+      #   "development" を立てる。development だと listFromR2 が S3 ではなく .local/r2 を列挙し、
+      #   item-metadata-refresh --apply が一部キーだけ staging した状態で master が走ると
+      #   「部分集合を全件と誤認」して featured/category/survey snapshot を空・欠損で上書きする。
+      #   saveToR2 は常にローカル FS 書き込みなので、production にしても staging→push フローは不変。
       - name: 🗂️ Regenerate snapshots + push to R2
+        env:
+          NODE_ENV: production
         # ARGS は配列で組む: 文字列連結 + "$ARGS" だと全体が 1 引数になり run.sh が
         # "Unknown arg" で落ちる (2026-07-14 実発生。SC2086 対応 quote で word splitting が消えた regression)
         run: |
