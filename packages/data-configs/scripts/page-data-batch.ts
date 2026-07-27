@@ -424,7 +424,20 @@ async function main() {
   console.log(`[batch] registry size: ${all.length}`);
 
   let targets = all;
-  if (args.metric) targets = targets.filter((c) => c.key === args.metric);
+  if (args.metric) {
+    // --metric はカンマ区切りで複数指定できる (欠落キーの一括復旧用。単一指定は従来どおり)
+    const wanted = new Set(
+      args.metric
+        .split(",")
+        .map((k) => k.trim())
+        .filter(Boolean),
+    );
+    const unknown = [...wanted].filter((k) => !all.some((c) => c.key === k));
+    if (unknown.length > 0) {
+      throw new Error(`--metric に registry 未登録のキーがあります: ${unknown.join(", ")}`);
+    }
+    targets = targets.filter((c) => wanted.has(c.key));
+  }
   if (args.kind) targets = targets.filter((c) => c.entities.includes(args.kind as MetricConfig["entities"][number]));
   if (args.since) {
     const sinceMs = new Date(args.since).getTime();
