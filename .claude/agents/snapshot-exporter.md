@@ -56,7 +56,7 @@ db-manager から snapshot 系を切り出した。 永続 DB への write は�
 
 - D1 への write 一切なし (read のみ)
 - `.local/r2/app/` への write は本 agent と `chart-author` のみ。 同 path への 2 体同時 write NG
-- 並行起動可能 agent: estat-researcher, gsc/ga4-analyst, x/IG/YT-strategist, r2-publisher (本 agent の出力を消費)
+- 並行起動可能 agent: estat-researcher, gsc/ga4-analyst, x/IG-strategist, r2-publisher (本 agent の出力を消費)
 - 並行起動 NG: data-ingester (D1 schema が動的に変わると export 不整合)
 
 ## Output Contract

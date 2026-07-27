@@ -21,7 +21,7 @@ Remotion を使った SNS 用動画・静止画のレンダリングとプレビ
 | スキル | 用途 |
 |---|---|
 | `/render-sns-stills` | SNS 用静止画・動画を Remotion で生成（静止画/動画一般の正典入口） |
-| `/bar-chart-race --step render` | BCR 動画を一括レンダリング（YouTube/Instagram）。BCR の正典入口 |
+| `/bar-chart-race --step render` | BCR 動画を一括レンダリング（Instagram/TikTok/X）。BCR の正典入口 |
 | `/buzz-map` | 日本地図×統計のバズカードを spec 駆動で生成→目視→改善。buzz-map ドメインの正典入口。**型 (A〜E) の一覧・仕様は再列挙せず `.claude/rules/buzz-map-standards.md` §1 を SSOT とする**（型A二値/型B時系列/型C点/型D線ネットワーク/型E合成）。データ源=5 レーン（e-Stat muni/pref、KSJ、DPF、**GSI 地名情報**）。spec ヘルパー: e-Stat=`build-buzz-map-spec.ts` / KSJ・DPF=`build-buzz-map-spec-ksj.ts` / **GSI 地名=`build-buzz-map-spec-gsi.ts`（全国地名点は `fetch-gsi-place-names.ts` で R2 `gis/gsi-pni/` に取得済・以後は再取得不要）** / 型E 合成=`merge-buzz-map-specs.ts`。co-agent: X 配信=x-strategist、IG 配信=instagram-strategist、ジオデータ (KSJ 点/線)=gis-curator |
 | `/preview-remotion` | プレビューデータを Remotion Studio に設定。`--type` で対象を選択（ranking / bar-chart-race / comparison / correlation / area-profile / blog）。**プレビュー専用（レンダしない）** |
 
@@ -40,7 +40,7 @@ Remotion を使った SNS 用動画・静止画のレンダリングとプレビ
 
 ## 出力先
 
-- `.local/r2/sns/ranking/<rankingKey>/{youtube-short/,tiktok/,instagram/,x/}` — レンダリング済みメディア
+- `.local/r2/sns/ranking/<rankingKey>/{tiktok/,instagram/,x/}` — レンダリング済みメディア
 - buzz-map: `.local/r2/sns/buzz-map/<id>/instagram/{stills/slide-1-cover-1080x1350.png,reel.mp4,caption.txt}`（IG は R2 公開 URL 前提。`BuzzMap-Still-45`=4:5 静止画 / `BuzzMap-Reel-916`=9:16 リール）→ `diff-push-r2 --prefix sns/buzz-map` → posts.json draft 登録。X は従来どおり `x/stills/`
 
 ## OGP・画像生成の役割分担
@@ -48,7 +48,7 @@ Remotion を使った SNS 用動画・静止画のレンダリングとプレビ
 Remotion は以下 2 領域の担当。他方式と役割を混同しないこと:
 
 - **固定 OGP（複雑なビジュアル）** → `apps/remotion/src/features/ogp/DefaultOgp*.tsx`, `BlogOgp*.tsx` 等。`remotion still` で書き出し
-- **SNS 動画・静止画（動的データ入り）** → `RankingYouTube*`, `BarChartRace*` 等。本エージェントの主戦場
+- **SNS 動画・静止画（動的データ入り）** → `RankingInstagram*`, `RankingTikTok*`, `RankingX*`, `BarChartRace*` 等。本エージェントの主戦場
 
 **Remotion が担当しないもの**:
 - 記事別 OGP の動的テキスト生成 → Satori（`apps/web/src/app/**/opengraph-image.tsx`）

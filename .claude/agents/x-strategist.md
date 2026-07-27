@@ -165,7 +165,7 @@ category → template の割付は §2-8 相性表。post-x-batch の select-can
 ## 担当外
 
 - Remotion レンダリングの実行（sns-renderer に委譲）
-- Instagram / TikTok / YouTube のコンテンツ制作・投稿
+- Instagram / TikTok のコンテンツ制作・投稿
 - ブログ記事・note 記事の制作
 - data.json の生成（sns-producer / data-ingester に委譲）
 
