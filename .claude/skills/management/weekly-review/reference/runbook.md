@@ -153,7 +153,7 @@ node .claude/scripts/snapshot-weekly-metrics.mjs [YYYY-Www]
    - レビューに埋め込む: **`.claude/state/gsc/LATEST.md`**（要対応 action 別件数・カテゴリ総件数）と
      `.claude/state/gsc/coverage-totals-history.csv`（404/soft404 件数の前週比トレンド）
    - effect 判定は再送信 URL の coverageState 遷移を実測してから（`evidence-based-judgment.md`）。
-     真実源は `.claude/state/gsc/coverage-remediation-queue.json`、TODO は backlog `COVERAGE-LOOP-01`/`COVERAGE-DEACT-01`。
+     真実源は `.claude/state/gsc/coverage-remediation-queue.json`、TODO は `docs/todo/01_改善バックログ.md` の `COVERAGE-LOOP-01`/`COVERAGE-DEACT-01`。
 
 4.5. AdSense snapshot 取得 → snapshot Issue 作成
    `.env.local` に AdSense OAuth クレデンシャル（CLIENT_ID / SECRET / REFRESH_TOKEN / ACCOUNT_ID）が揃っている場合のみ実行:
