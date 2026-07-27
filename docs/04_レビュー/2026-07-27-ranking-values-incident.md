@@ -34,6 +34,22 @@ values.json writer が作られないままだった。runtime の全描画値�
 `app/ranking/<key>/values.json` を読むため、既存 2,112 件は stale 配信、Phase 6 以降に追加された
 67 件は values.json が存在せず「データがありません」の空ページのまま sitemap に掲載され続けていた。
 
+### 原因③ 手動投入 metric は正典が rank を持たない (writer 復活後に判明)
+
+writer を復活させて全 2,179 キーを生成した後も、`ambulance-hospital-arrival-time` と
+`pachinko-shop-density-per-10k` の 2 件だけ values.json が生成されず、OGP パイプラインが
+同じ箇所で fail-closed し続けた。
+
+原因は「観測値が無いから」ではなく **`app/stats` の行が rank を持たない**ことだった
+(実測: ambulance は 47 行すべてで rank が null)。rank を計算するのは `page-data-batch` だが、
+手動投入 metric (`fetcherKey:"manual"`) はこの経路を通らない。writer は rank 欠落行を
+捨てる実装だったため partition が空になっていた。
+
+対策: rank は正典の値を優先して引き継ぎ、**正典が rank を持たない年だけ** 正典と同一規則
+(値の降順・同値は同順位、`page-data-batch.ts:245-260`) で導出する。既存キー
+total-population の 2,350 行を比較して相違 0 行であることを実測し、正典 rank を
+1 行も書き換えないことを確認済み。
+
 ## 対策 (実装済み)
 
 | 対策 | 内容 |

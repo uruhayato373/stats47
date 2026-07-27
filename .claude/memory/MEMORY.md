@@ -32,7 +32,7 @@
 - [project_consistency_audit_mechanism.md](project_consistency_audit_mechanism.md) — 会話完了時にagent/skill/scriptドリフトをチェックするStop hookゲート(2026-06-16)。check-agent-skill-consistency.cjs+/audit-consistency。解除は--mark-auditedかcommit
 - [project_blog_brushup_dbless_scaffold.md](project_blog_brushup_dbless_scaffold.md) — brushupのDBレス落とし穴。R2 values直fetch、rank=0で再計算、NG_PATTERNが旧title遡及blocker、publish-blogは直列dispatch、未参照費目json残す
 - [project_blog_mass_rewrite_lessons.md](project_blog_mass_rewrite_lessons.md) — ブログ大量リライト教訓。である調はcopula置換禁止→article-writer必須。一括はsession limit→1バッチ15-20本。進捗SSOT=remediation-queue、sync-rewrite-progress.mjs。--nextはpendingのみ
-- [project_ranking_publish_pipeline_gap.md](project_ranking_publish_pipeline_gap.md) — ranking公開はisActive:trueだけ不足。middlewareがisGone||!isKnownで410。KNOWN/SITEMAP/INDEXABLE/all.json再生成要。122metricが中途半端410(2026-06-03)
+- [project_ranking_publish_pipeline_gap.md](project_ranking_publish_pipeline_gap.md) — ranking公開はisActive:trueだけ不足。KNOWN/SITEMAP/INDEXABLE/all.json再生成要。★**values.json writer も必須**(2026-07-27にPhase6以来2ヶ月の欠落が判明・stale配信+67キー空ページ)。手動投入metricは正典がrank未保持
 - [project_estat_backfill_lessons.md](project_estat_backfill_lessons.md) — e-Stat backfillはUPSERT必須。DELETE+INSERTは他ソース年度喪失(2026-05-27事故)。year_code正規化+全年度取得
 - [project_blog_brushup_risk_2026_05_25.md](project_blog_brushup_risk_2026_05_25.md) — AI auto-brushupは13%FAIL+27%WARN。quality-gate.mjsは形式のみでfactual不足。data/*.jsonと本文数値の突合step必須
 - [project_blog_publish_cloud_first.md](project_blog_publish_cloud_first.md) — ブログ公開はpublish-blog.yml(docs/21→CI→R2)。新規workflowは--ref develop、直列ディスパッチ必須

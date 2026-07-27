@@ -95,6 +95,12 @@ ranking は異なる）。いずれにせよ **200 にはならない**ので、
 > 2026-07-27 事故: 上記ステップ 2 (`app/ranking/<key>/values.json` 生成) が Phase 6 (2026-05-27) の
 > D1→R2 移行時に writer 不在のまま 2 ヶ月間欠落し、既存ランキングは stale 配信・新規 67 metric は
 > 空ページのまま sitemap 掲載されていた。「isActive:true + item.json だけで公開完了」とも思い込まないこと。
+>
+> **手動投入 metric (`fetcherKey:"manual"`) の追加落とし穴**: rank を計算するのは `page-data-batch` だが、
+> 手動投入はこの経路を通らないため **`app/stats` の行が rank を持たない**。values writer 側で正典と
+> 同一規則 (値の降順・同値は同順位) で導出しているので投入自体は成立するが、**手動で `app/stats` に
+> 値を置くときは rank を自分で埋める必要はない**一方、`app/stats` を直接読む他の consumer が
+> rank を前提にしている場合は破綻しうる。手動投入後は `/audit-ranking-data-integrity` で確認すること。
 
 ## 関連
 
