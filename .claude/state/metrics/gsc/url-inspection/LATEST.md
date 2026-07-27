@@ -1,4 +1,4 @@
-# GSC URL Inspection — 2026-07-26
+# GSC URL Inspection — 2026-07-27
 
 **対象 URL 数**: 500
 
@@ -6,17 +6,15 @@
 
 | Verdict | 件数 | 前日比 |
 |---|---|---|
-| ERROR | 0 | -5 |
-| NEUTRAL | 95 | +1 |
-| PASS | 405 | +4 |
+| NEUTRAL | 115 | +20 |
+| PASS | 385 | -20 |
 
 ## CoverageState 内訳
 
 | CoverageState | 件数 | 前日比 |
 |---|---|---|
-| Internal error encountered. | 0 | -5 |
-| URL が Google に認識されていません | 94 | ±0 |
-| ソフト 404 | 1 | +1 |
-| 送信して登録されました | 405 | +4 |
+| URL が Google に認識されていません | 115 | +21 |
+| ソフト 404 | 0 | -1 |
+| 送信して登録されました | 385 | -20 |
 
-_詳細 CSV: `.claude/state/metrics/gsc/url-inspection/2026-07-26.csv`_
+_詳細 CSV: `.claude/state/metrics/gsc/url-inspection/2026-07-27.csv`_
