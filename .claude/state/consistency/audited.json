@@ -1,7 +1,5 @@
 {
-  "hash": "0730f184854fb866279a62f7f3e038ce5afdfc4fb1113beb8d79672ed7ed379d",
-  "audited_at": "2026-07-27T07:00:56",
-  "files": [
-    ".claude/skills/db/sync-snapshots/run.sh"
-  ]
+  "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "audited_at": "2026-07-27T08:24:24",
+  "files": []
 }

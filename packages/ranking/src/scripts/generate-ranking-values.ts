@@ -78,10 +78,41 @@ function yearInSpec(yearCode: string, spec: YearSpec): boolean {
 }
 
 /**
+ * 正典 (page-data-batch) と同一規則で rank を導出する。
+ *
+ * 規則: 値の降順・同値は同順位 (競技順位)。方向による分岐は無い
+ * (`packages/data-configs/scripts/page-data-batch.ts` の rank 計算と一致させること。
+ *  `isReversed` はカラースケール用の設定で順位方向ではない)。
+ *
+ * 手動投入 metric (fetcherKey:"manual") は page-data-batch を通らないため app/stats の行が
+ * rank を持たない。2026-07-27 に ambulance-hospital-arrival-time /
+ * pachinko-shop-density-per-10k がこれに該当し、rank 欠落行を捨てる実装だったため
+ * values.json が生成されず OGP パイプラインを止めていた。
+ */
+export function deriveRanks<T extends { value: number | null; rank: number | null }>(
+  entries: T[],
+): void {
+  const ranked = entries
+    .filter((e) => e.value != null)
+    .sort((a, b) => (b.value as number) - (a.value as number));
+  let prevValue: number | null = null;
+  let prevRank = 0;
+  ranked.forEach((e, i) => {
+    if (prevValue !== null && e.value === prevValue) {
+      e.rank = prevRank;
+    } else {
+      e.rank = i + 1;
+      prevRank = i + 1;
+      prevValue = e.value;
+    }
+  });
+}
+
+/**
  * app/stats の行を配信用 partition 群に変換する。
  *
- * rank は app/stats が既に持つ値をそのまま使う (再導出しない)。正典と配信で順位が
- * 食い違わないことを保証するため。rank 欠落行は配信に出さない (zod が rank 必須)。
+ * rank は app/stats が持つ値を優先して引き継ぐ (正典と配信で順位が食い違わないため)。
+ * 正典が rank を持たない場合 (手動投入 metric) のみ、正典と同一規則で導出する。
  */
 export function buildPartitions(
   metricKey: string,
@@ -96,27 +127,46 @@ export function buildPartitions(
   }[],
   years: YearSpec,
 ): RankingValuesKeySnapshot["partitions"] {
-  const byYear = new Map<string, RankingValue[]>();
-
+  // 年 partition に振り分け。rank は正典の値をそのまま持ち込む (無ければ null)
+  interface Entry {
+    row: (typeof rows)[number];
+    value: number | null;
+    rank: number | null;
+  }
+  const rawByYear = new Map<string, Entry[]>();
   for (const row of rows) {
     if (!yearInSpec(row.yearCode, years)) continue;
-    if (row.rank == null || !Number.isFinite(row.rank)) continue;
-
-    const value: RankingValue = {
-      metricKey,
-      areaType: AREA_TYPE,
-      areaCode: row.areaCode,
-      areaName: row.areaName,
-      yearCode: row.yearCode,
-      yearName: row.yearName ?? row.yearCode,
+    const entry: Entry = {
+      row,
       value: row.value,
-      unit: row.unit ?? "",
-      rank: row.rank,
-    } as RankingValue;
+      rank: row.rank != null && Number.isFinite(row.rank) ? row.rank : null,
+    };
+    const arr = rawByYear.get(row.yearCode);
+    if (arr) arr.push(entry);
+    else rawByYear.set(row.yearCode, [entry]);
+  }
 
-    const arr = byYear.get(row.yearCode);
-    if (arr) arr.push(value);
-    else byYear.set(row.yearCode, [value]);
+  const byYear = new Map<string, RankingValue[]>();
+  for (const [yearCode, entries] of rawByYear) {
+    // 正典が rank を持たない年だけ導出する (持っている年は 1 行も書き換えない)
+    if (entries.every((e) => e.rank == null)) deriveRanks(entries);
+
+    const values: RankingValue[] = [];
+    for (const { row, rank } of entries) {
+      if (rank == null) continue; // 値が null の行は順位を持てない
+      values.push({
+        metricKey,
+        areaType: AREA_TYPE,
+        areaCode: row.areaCode,
+        areaName: row.areaName,
+        yearCode: row.yearCode,
+        yearName: row.yearName ?? row.yearCode,
+        value: row.value,
+        unit: row.unit ?? "",
+        rank,
+      } as RankingValue);
+    }
+    if (values.length > 0) byYear.set(yearCode, values);
   }
 
   // 年は新しい順 / partition 内は順位昇順 (旧 snapshot と同じ並び)
