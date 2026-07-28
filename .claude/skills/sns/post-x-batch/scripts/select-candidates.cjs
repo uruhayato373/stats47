@@ -122,7 +122,7 @@ function loadIndex(rebuild) {
   if (rebuild || !fs.existsSync(INDEX_PATH)) {
     console.error("[select-candidates] discovery index を生成中...");
     execFileSync(
-      "npx",
+      (process.platform === "win32" ? "npx.cmd" : "npx"),
       ["tsx", path.join(PROJECT_ROOT, ".claude/scripts/sns/build-discovery-index.ts")],
       { stdio: "inherit" },
     );

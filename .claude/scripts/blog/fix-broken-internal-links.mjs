@@ -18,8 +18,9 @@
  */
 import fs from "node:fs";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 
-const ROOT = path.resolve(new URL(".", import.meta.url).pathname, "../../..");
+const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../..");
 const R2_BASE = process.env.R2_PUBLIC_FETCH_URL || "https://storage.stats47.jp";
 const REMAP_FILE = path.join(ROOT, ".claude/scripts/blog/data/broken-link-remap.json");
 const SRC_CACHE = path.join(ROOT, ".local/blog-linkfix/_src");

@@ -39,6 +39,14 @@ function saveCatalog(cat: any): void {
   fs.writeFileSync(CATALOG_PATH, JSON.stringify(cat, null, 2) + "\n", "utf8");
 }
 
+// ★ npx を経由しない (2026-07-28 修正)。Windows では `npx` = `npx.cmd` で
+//   execFileSync が ENOENT、`.cmd` を明示しても Node 22 は shell 無しの `.cmd` 起動を
+//   拒否して EINVAL になる (CVE-2024-27980 の緩和策)。`shell: true` は引数のクォート事故を
+//   招くので使わず、**ローカルバイナリを node で直接起動**する。npx の解決を挟まない分速い。
+const NODE = process.execPath;
+const TSC = path.join(PROJECT_ROOT, "node_modules/typescript/bin/tsc");
+const TSX = path.join(PROJECT_ROOT, "node_modules/tsx/dist/cli.mjs");
+
 /** ゲート 1 本を実行。exit≠0 で throw。 */
 function runGate(label: string, cmd: string, args: string[], env?: NodeJS.ProcessEnv): void {
   console.log(`  gate: ${label} ...`);
@@ -47,16 +55,16 @@ function runGate(label: string, cmd: string, args: string[], env?: NodeJS.Proces
 }
 
 function runAllGates(): void {
-  runGate("tsc", "npx", ["tsc", "--noEmit", "-p", "apps/web/tsconfig.json"]);
-  runGate("audit-size", "npx", ["tsx", ".claude/scripts/ads/audit-affiliate-inventory.ts", "--check-size"]);
+  runGate("tsc", NODE, [TSC, "--noEmit", "-p", "apps/web/tsconfig.json"]);
+  runGate("audit-size", NODE, [TSX, ".claude/scripts/ads/audit-affiliate-inventory.ts", "--check-size"]);
   // export 検証は repository が server-only を読むため react-server condition が要る。
   runGate(
     "export-validate",
-    "npx",
-    ["tsx", "apps/web/scripts/export-affiliate-ads-snapshot.ts", "--validate-only"],
+    NODE,
+    [TSX, "apps/web/scripts/export-affiliate-ads-snapshot.ts", "--validate-only"],
     { ...process.env, NODE_OPTIONS: `${process.env.NODE_OPTIONS ?? ""} --conditions react-server`.trim() },
   );
-  runGate("compliance", "npx", ["tsx", ".claude/scripts/ads/audit-affiliate-compliance.ts", "--check"]);
+  runGate("compliance", NODE, [TSX, ".claude/scripts/ads/audit-affiliate-compliance.ts", "--check"]);
 }
 
 /** SSOT を git HEAD に復元 (追記の巻き戻し)。 */

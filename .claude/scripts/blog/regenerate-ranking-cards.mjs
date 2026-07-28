@@ -106,7 +106,7 @@ function regenerate(slug, rankingBase, key) {
     "--slug", slug, "--base", STAGING_REL, "--keys", key, "--data-name", rankingBase,
   ], { cwd: PROJECT_ROOT, stdio: "pipe" });
   // 2) columns + portrait 生成
-  execFileSync("npx", [
+  execFileSync((process.platform === "win32" ? "npx.cmd" : "npx"), [
     "tsx", ".claude/scripts/blog/generate-article-charts.ts",
     "--slug", slug, "--base", STAGING_REL,
   ], { cwd: PROJECT_ROOT, stdio: "pipe", env: { ...process.env, NODE_OPTIONS: "--conditions react-server" } });

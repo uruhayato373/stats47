@@ -118,7 +118,7 @@ function findReviewDoc(surveyId: string): { ref: string; date: string | null } |
 function runAudit(auditFile?: string): AuditJson {
   if (auditFile) return JSON.parse(fs.readFileSync(auditFile, "utf8")) as AuditJson;
   console.log("audit-survey-linkage.ts --json 実行中 (数十秒かかる)...");
-  const out = execFileSync("npx", ["tsx", AUDIT_SCRIPT, "--json"], {
+  const out = execFileSync((process.platform === "win32" ? "npx.cmd" : "npx"), ["tsx", AUDIT_SCRIPT, "--json"], {
     cwd: PROJECT_ROOT,
     encoding: "utf8",
     maxBuffer: 64 * 1024 * 1024,
