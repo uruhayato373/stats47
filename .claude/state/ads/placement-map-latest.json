@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-28T08:36:36.736Z",
+  "generatedAt": "2026-07-28T22:33:11.404Z",
   "gscWeek": "2026-W30",
   "inputs": {
     "pages": 2729,
@@ -378,40 +378,40 @@
   },
   "supply": {
     "total": {
-      "furusato": 6,
-      "energy": 27,
-      "travel": 36,
-      "health": 12,
-      "economy": 20,
-      "housing": 24,
-      "education": 24,
-      "labor": 35,
+      "furusato": 7,
+      "energy": 29,
+      "travel": 51,
+      "health": 14,
+      "economy": 27,
+      "housing": 26,
+      "education": 25,
+      "labor": 50,
       "mobility": 13,
       "population": 18
     },
     "banner": {
       "furusato": 4,
-      "energy": 13,
-      "travel": 22,
-      "health": 8,
-      "economy": 13,
-      "housing": 12,
+      "energy": 14,
+      "travel": 29,
+      "health": 9,
+      "economy": 16,
+      "housing": 13,
       "education": 12,
-      "labor": 18,
+      "labor": 25,
       "mobility": 6,
       "population": 10
     },
     "text": {
-      "labor": 17,
-      "energy": 14,
-      "economy": 7,
-      "housing": 12,
+      "labor": 25,
+      "energy": 15,
+      "economy": 11,
+      "housing": 13,
       "population": 8,
-      "education": 12,
+      "education": 13,
       "mobility": 7,
-      "health": 4,
-      "travel": 14,
-      "furusato": 2
+      "health": 5,
+      "travel": 22,
+      "furusato": 3
     }
   },
   "gaps": [
@@ -419,27 +419,27 @@
       "vertical": "economy",
       "imp": 80971,
       "clicks": 2149,
-      "inventory": 20,
-      "banner": 13,
-      "text": 7,
+      "inventory": 27,
+      "banner": 16,
+      "text": 11,
       "kinds": []
     },
     {
       "vertical": "furusato",
       "imp": 12810,
       "clicks": 195,
-      "inventory": 6,
+      "inventory": 7,
       "banner": 4,
-      "text": 2,
+      "text": 3,
       "kinds": []
     },
     {
       "vertical": "health",
       "imp": 9121,
       "clicks": 241,
-      "inventory": 12,
-      "banner": 8,
-      "text": 4,
+      "inventory": 14,
+      "banner": 9,
+      "text": 5,
       "kinds": []
     },
     {
@@ -455,9 +455,9 @@
       "vertical": "education",
       "imp": 7739,
       "clicks": 260,
-      "inventory": 24,
+      "inventory": 25,
       "banner": 12,
-      "text": 12,
+      "text": 13,
       "kinds": []
     },
     {
@@ -473,36 +473,36 @@
       "vertical": "labor",
       "imp": 3223,
       "clicks": 76,
-      "inventory": 35,
-      "banner": 18,
-      "text": 17,
+      "inventory": 50,
+      "banner": 25,
+      "text": 25,
       "kinds": []
     },
     {
       "vertical": "energy",
       "imp": 1973,
       "clicks": 30,
-      "inventory": 27,
-      "banner": 13,
-      "text": 14,
+      "inventory": 29,
+      "banner": 14,
+      "text": 15,
       "kinds": []
     },
     {
       "vertical": "housing",
       "imp": 1844,
       "clicks": 46,
-      "inventory": 24,
-      "banner": 12,
-      "text": 12,
+      "inventory": 26,
+      "banner": 13,
+      "text": 13,
       "kinds": []
     },
     {
       "vertical": "travel",
       "imp": 774,
       "clicks": 11,
-      "inventory": 36,
-      "banner": 22,
-      "text": 14,
+      "inventory": 51,
+      "banner": 29,
+      "text": 22,
       "kinds": []
     }
   ],
@@ -712,7 +712,7 @@
       "programId": "s00000024144001",
       "name": "訳アリ不動産買取専門店【ラクウル】",
       "vertical": "housing",
-      "status": "candidate",
+      "status": "applied",
       "confirmedEpc": 2455.5,
       "rewardYen": 10000,
       "shared": false,
@@ -734,7 +734,7 @@
       "programId": "s00000026779001",
       "name": "訳あり物件専門買取【成仏不動産の正しい買取】",
       "vertical": "housing",
-      "status": "candidate",
+      "status": "applied",
       "confirmedEpc": 749,
       "rewardYen": 20000,
       "shared": false,
@@ -865,7 +865,7 @@
       "programId": "s00000026609001",
       "name": "不動産担保ローンの審査は無料で最短即日！丸の内AMS（エーエムエス）",
       "vertical": "housing",
-      "status": "candidate",
+      "status": "applied",
       "confirmedEpc": 254.9,
       "rewardYen": 3000,
       "shared": false,
@@ -981,7 +981,7 @@
       "programId": "s00000024144002",
       "name": "相続した不動産の売却なら【ラクウル】",
       "vertical": "housing",
-      "status": "candidate",
+      "status": "applied",
       "confirmedEpc": 152.1,
       "rewardYen": 10000,
       "shared": false,
@@ -1062,36 +1062,10 @@
       "suggestedRankingKeys": []
     },
     {
-      "programId": "s00000008903004",
-      "name": "【DMM．com証券】DMM CFD 新規ユーザー獲得プロモーション",
-      "vertical": "economy",
-      "status": "registered",
-      "confirmedEpc": 114.2,
-      "rewardYen": 14200,
-      "shared": false,
-      "registered": true,
-      "suggestedRankingKeys": [
-        {
-          "key": "foundation-consumption-expenditure",
-          "title": "ファンデーション消費支出額",
-          "matched": [
-            "ーション"
-          ]
-        },
-        {
-          "key": "womens-foundation-garment-consumption-expenditure",
-          "title": "婦人用ファンデーション消費支出額",
-          "matched": [
-            "ーション"
-          ]
-        }
-      ]
-    },
-    {
       "programId": "s00000027056001",
       "name": "全国約580拠点【三井不動産のワークスタイリング】",
       "vertical": "housing",
-      "status": "candidate",
+      "status": "applied",
       "confirmedEpc": 114.2,
       "rewardYen": 10000,
       "shared": false,
@@ -1127,6 +1101,17 @@
       "status": "registered",
       "confirmedEpc": 114,
       "rewardYen": 15000,
+      "shared": false,
+      "registered": true,
+      "suggestedRankingKeys": []
+    },
+    {
+      "programId": "s00000022488001",
+      "name": "ahamo",
+      "vertical": "energy",
+      "status": "registered",
+      "confirmedEpc": 112.9,
+      "rewardYen": 3000,
       "shared": false,
       "registered": true,
       "suggestedRankingKeys": []
