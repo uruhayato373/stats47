@@ -10,7 +10,7 @@
     "unknown": "未確認 (調べていない。none と区別する)"
   },
   "_seedNote": "初期状態は空。実機を見ずに案件を書くと捏造になるため、`affiliate-status.mjs` の実測か `afb-scan.mjs` の走査結果をもとに 1 件ずつ追加する。vertical は apps/web/src/features/ads/constants/affiliate-category.ts の 10 軸から選ぶ。",
-  "updatedAt": "2026-07-28T12:19:26.132Z",
+  "updatedAt": "2026-07-28T21:43:12.665Z",
   "verifiedAt": "2026-07-28",
   "programs": {
     "moshimo-7059": {
@@ -2259,6 +2259,1558 @@
               "at": "2026-07-28T12:19:25.729Z",
               "status": "approved",
               "note": "即時承認 (提携中一覧で確認)"
+            }
+          ]
+        }
+      }
+    },
+    "afb-13615": {
+      "name": "弁護士・法務人材専門の転職エージェント【NO-LIMIT（ノーリミット）】",
+      "asps": {
+        "afb": {
+          "promotionId": "13615",
+          "status": "applying",
+          "appliedAt": "2026-07-28T20:22:26.470Z",
+          "history": [
+            {
+              "at": "2026-07-28T20:22:26.470Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "afb-12567": {
+      "name": "ICL（眼内コラマーレンズ）・レーシック・白内障治療は【先進会眼科】",
+      "asps": {
+        "afb": {
+          "promotionId": "12567",
+          "status": "applying",
+          "appliedAt": "2026-07-28T20:23:58.421Z",
+          "history": [
+            {
+              "at": "2026-07-28T20:23:58.421Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "afb-14108": {
+      "name": "未経験者向けITエンジニアスクール＆就職サポート【キャリスタカレッジ】",
+      "asps": {
+        "afb": {
+          "promotionId": "14108",
+          "status": "applying",
+          "appliedAt": "2026-07-28T20:24:47.998Z",
+          "history": [
+            {
+              "at": "2026-07-28T20:24:47.998Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "afb-12310": {
+      "name": "既卒・第二新卒・フリーターの就職を徹底サポート【ネットビジョンアカデミー】",
+      "asps": {
+        "afb": {
+          "promotionId": "12310",
+          "status": "applying",
+          "appliedAt": "2026-07-28T20:25:37.415Z",
+          "history": [
+            {
+              "at": "2026-07-28T20:25:37.415Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "afb-10717": {
+      "name": "プロパンガス料金案内なら【ガス屋の窓口】",
+      "asps": {
+        "afb": {
+          "promotionId": "10717",
+          "status": "applying",
+          "appliedAt": "2026-07-28T20:26:27.285Z",
+          "history": [
+            {
+              "at": "2026-07-28T20:26:27.285Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "afb-14386": {
+      "name": "＜ゲーム業界専門＞転職エージェント【Hiraku agent】",
+      "asps": {
+        "afb": {
+          "promotionId": "14386",
+          "status": "applying",
+          "appliedAt": "2026-07-28T20:27:16.688Z",
+          "history": [
+            {
+              "at": "2026-07-28T20:27:16.688Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "afb-16654": {
+      "name": "新規オープン【MBDクリニック 恵比寿院】来院プロモーション",
+      "asps": {
+        "afb": {
+          "promotionId": "16654",
+          "status": "applying",
+          "appliedAt": "2026-07-28T20:28:06.510Z",
+          "history": [
+            {
+              "at": "2026-07-28T20:28:06.510Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "afb-6628": {
+      "name": "【税理士探しの強い味方　税理士紹介エージェント】お問い合わせプロモーション",
+      "asps": {
+        "afb": {
+          "promotionId": "6628",
+          "status": "applying",
+          "appliedAt": "2026-07-28T20:28:52.033Z",
+          "history": [
+            {
+              "at": "2026-07-28T20:28:52.033Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "afb-15202": {
+      "name": "コンサル特化の転職エージェント【MyVision（マイビジョン）】",
+      "asps": {
+        "afb": {
+          "promotionId": "15202",
+          "status": "applying",
+          "appliedAt": "2026-07-28T20:29:40.360Z",
+          "history": [
+            {
+              "at": "2026-07-28T20:29:40.360Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "afb-16263": {
+      "name": "複数の運用方法を比較して無料で学べる！選べる！【ウェルスコーチ（資産運用）】",
+      "asps": {
+        "afb": {
+          "promotionId": "16263",
+          "status": "applying",
+          "appliedAt": "2026-07-28T20:30:29.647Z",
+          "history": [
+            {
+              "at": "2026-07-28T20:30:29.647Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "afb-15879": {
+      "name": "IT専門職向け転職サービス【レバテックダイレクト】",
+      "asps": {
+        "afb": {
+          "promotionId": "15879",
+          "status": "applying",
+          "appliedAt": "2026-07-28T20:31:18.794Z",
+          "history": [
+            {
+              "at": "2026-07-28T20:31:18.794Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "afb-16264": {
+      "name": "＜キャリアアップ転職用＞ITエンジニア専門の転職エージェント【ユニゾンキャリア転職】",
+      "asps": {
+        "afb": {
+          "promotionId": "16264",
+          "status": "applying",
+          "appliedAt": "2026-07-28T20:32:08.642Z",
+          "history": [
+            {
+              "at": "2026-07-28T20:32:08.642Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "afb-14863": {
+      "name": "転職成功率・面談満足度の高いおすすめエージェントをご紹介【Z転職】",
+      "asps": {
+        "afb": {
+          "promotionId": "14863",
+          "status": "applying",
+          "appliedAt": "2026-07-28T20:32:58.199Z",
+          "history": [
+            {
+              "at": "2026-07-28T20:32:58.199Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "afb-13143": {
+      "name": "Webエンジニア就職に強いプログラミングスクール【RUNTEQ（ランテック）】",
+      "asps": {
+        "afb": {
+          "promotionId": "13143",
+          "status": "applying",
+          "appliedAt": "2026-07-28T20:34:06.124Z",
+          "history": [
+            {
+              "at": "2026-07-28T20:34:06.124Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "afb-15548": {
+      "name": "apollostation THE GOLD 発券",
+      "asps": {
+        "afb": {
+          "promotionId": "15548",
+          "status": "applying",
+          "appliedAt": "2026-07-28T20:34:55.688Z",
+          "history": [
+            {
+              "at": "2026-07-28T20:34:55.688Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "afb-15892": {
+      "name": "時短正社員のワーママ向け転職支援サービス【リアルミーキャリア】",
+      "asps": {
+        "afb": {
+          "promotionId": "15892",
+          "status": "applying",
+          "appliedAt": "2026-07-28T20:35:45.101Z",
+          "history": [
+            {
+              "at": "2026-07-28T20:35:45.101Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "afb-16418": {
+      "name": "保険の見直し・無料相談なら【ほけんの110番】",
+      "asps": {
+        "afb": {
+          "promotionId": "16418",
+          "status": "applying",
+          "appliedAt": "2026-07-28T20:36:34.910Z",
+          "history": [
+            {
+              "at": "2026-07-28T20:36:34.910Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "afb-14272": {
+      "name": "【年金・貯蓄の無料相談サイト　ガーデン】",
+      "asps": {
+        "afb": {
+          "promotionId": "14272",
+          "status": "applying",
+          "appliedAt": "2026-07-28T20:37:24.604Z",
+          "history": [
+            {
+              "at": "2026-07-28T20:37:24.604Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "afb-13735": {
+      "name": "保険の無料相談サイト「ガーデン」",
+      "asps": {
+        "afb": {
+          "promotionId": "13735",
+          "status": "applying",
+          "appliedAt": "2026-07-28T20:38:14.548Z",
+          "history": [
+            {
+              "at": "2026-07-28T20:38:14.548Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "afb-13223": {
+      "name": "学資保険の無料相談サイト「ガーデン」",
+      "asps": {
+        "afb": {
+          "promotionId": "13223",
+          "status": "applying",
+          "appliedAt": "2026-07-28T20:39:04.054Z",
+          "history": [
+            {
+              "at": "2026-07-28T20:39:04.054Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "afb-11045": {
+      "name": "国内最大級の外壁塗装の一括見積もりサイト【リショップナビ外壁塗装】",
+      "asps": {
+        "afb": {
+          "promotionId": "11045",
+          "status": "applying",
+          "appliedAt": "2026-07-28T20:39:54.249Z",
+          "history": [
+            {
+              "at": "2026-07-28T20:39:54.249Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "afb-16168": {
+      "name": "家計の悩みから資産運用までマルっとFPに相談【マネーサファリ】",
+      "asps": {
+        "afb": {
+          "promotionId": "16168",
+          "status": "applying",
+          "appliedAt": "2026-07-28T20:40:44.258Z",
+          "history": [
+            {
+              "at": "2026-07-28T20:40:44.258Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "afb-13959": {
+      "name": "コンパクト電動バイク【Aioon(アイオーン)】",
+      "asps": {
+        "afb": {
+          "promotionId": "13959",
+          "status": "applying",
+          "appliedAt": "2026-07-28T20:41:34.196Z",
+          "history": [
+            {
+              "at": "2026-07-28T20:41:34.196Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "afb-16698": {
+      "name": "中古車の自社ローン専門店【カーリバ】",
+      "asps": {
+        "afb": {
+          "promotionId": "16698",
+          "status": "applying",
+          "appliedAt": "2026-07-28T20:42:23.506Z",
+          "history": [
+            {
+              "at": "2026-07-28T20:42:23.506Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "afb-14642": {
+      "name": "ITエンジニア特化最強の転職エージェント【KIKKAKE AGENT（キッカケエージェント）】",
+      "asps": {
+        "afb": {
+          "promotionId": "14642",
+          "status": "applying",
+          "appliedAt": "2026-07-28T20:43:13.320Z",
+          "history": [
+            {
+              "at": "2026-07-28T20:43:13.320Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "afb-14385": {
+      "name": "ゲーム業界の転職・求人情報【G-JOBエージェント】",
+      "asps": {
+        "afb": {
+          "promotionId": "14385",
+          "status": "applying",
+          "appliedAt": "2026-07-28T20:44:03.807Z",
+          "history": [
+            {
+              "at": "2026-07-28T20:44:03.807Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "afb-13856": {
+      "name": "公認会計士特化型転職エージェント【ハイスタ会計士】",
+      "asps": {
+        "afb": {
+          "promotionId": "13856",
+          "status": "applying",
+          "appliedAt": "2026-07-28T20:44:53.813Z",
+          "history": [
+            {
+              "at": "2026-07-28T20:44:53.813Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "afb-8745": {
+      "name": "家計の不安をスッキリ解決！【保険見直しラボ】 保険相談",
+      "asps": {
+        "afb": {
+          "promotionId": "8745",
+          "status": "applying",
+          "appliedAt": "2026-07-28T20:45:43.383Z",
+          "history": [
+            {
+              "at": "2026-07-28T20:45:43.383Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "afb-15066": {
+      "name": "妊娠・出産・育児の保険ならベビープラネット保険相談",
+      "asps": {
+        "afb": {
+          "promotionId": "15066",
+          "status": "applying",
+          "appliedAt": "2026-07-28T20:46:33.501Z",
+          "history": [
+            {
+              "at": "2026-07-28T20:46:33.501Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "afb-10829": {
+      "name": "月給20万円からステップアップ！若者に特化した転職支援サービス《キャリアスタート》",
+      "asps": {
+        "afb": {
+          "promotionId": "10829",
+          "status": "applying",
+          "appliedAt": "2026-07-28T20:47:23.510Z",
+          "history": [
+            {
+              "at": "2026-07-28T20:47:23.510Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "afb-15277": {
+      "name": "未来の選択肢を広げる転職エージェント【9Eキャリア】",
+      "asps": {
+        "afb": {
+          "promotionId": "15277",
+          "status": "applying",
+          "appliedAt": "2026-07-28T20:48:13.566Z",
+          "history": [
+            {
+              "at": "2026-07-28T20:48:13.566Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "afb-16736": {
+      "name": "【アラプラス ロンジェビティ】",
+      "asps": {
+        "afb": {
+          "promotionId": "16736",
+          "status": "applying",
+          "appliedAt": "2026-07-28T20:49:03.852Z",
+          "history": [
+            {
+              "at": "2026-07-28T20:49:03.852Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "afb-15199": {
+      "name": "ゲーム業界の求人・転職・中途採用情報なら【ファミキャリ！】",
+      "asps": {
+        "afb": {
+          "promotionId": "15199",
+          "status": "applying",
+          "appliedAt": "2026-07-28T20:49:53.343Z",
+          "history": [
+            {
+              "at": "2026-07-28T20:49:53.343Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "afb-13095": {
+      "name": "中古マンション経営なら【ジェイトレック】",
+      "asps": {
+        "afb": {
+          "promotionId": "13095",
+          "status": "applying",
+          "appliedAt": "2026-07-28T20:50:42.734Z",
+          "history": [
+            {
+              "at": "2026-07-28T20:50:42.734Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "afb-13669": {
+      "name": "妊婦さんのための医療保険相談「ガーデン」",
+      "asps": {
+        "afb": {
+          "promotionId": "13669",
+          "status": "applying",
+          "appliedAt": "2026-07-28T20:51:32.244Z",
+          "history": [
+            {
+              "at": "2026-07-28T20:51:32.244Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "afb-10585": {
+      "name": "20代の第二新卒・既卒・フリーター・ニート向け就職・転職エージェント【UZUZ】新規無料会員登録完了",
+      "asps": {
+        "afb": {
+          "promotionId": "10585",
+          "status": "applying",
+          "appliedAt": "2026-07-28T20:52:21.952Z",
+          "history": [
+            {
+              "at": "2026-07-28T20:52:21.952Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "afb-6349": {
+      "name": "国内最大級のリフォームの一括見積もりサイト【リショップナビ】",
+      "asps": {
+        "afb": {
+          "promotionId": "6349",
+          "status": "applying",
+          "appliedAt": "2026-07-28T20:53:11.562Z",
+          "history": [
+            {
+              "at": "2026-07-28T20:53:11.562Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "afb-16732": {
+      "name": "Dr.ピラティス 来店完了",
+      "asps": {
+        "afb": {
+          "promotionId": "16732",
+          "status": "applying",
+          "appliedAt": "2026-07-28T20:54:01.488Z",
+          "history": [
+            {
+              "at": "2026-07-28T20:54:01.488Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "afb-16731": {
+      "name": "Dr.トレーニング 来店完了",
+      "asps": {
+        "afb": {
+          "promotionId": "16731",
+          "status": "applying",
+          "appliedAt": "2026-07-28T20:54:51.078Z",
+          "history": [
+            {
+              "at": "2026-07-28T20:54:51.078Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "afb-14567": {
+      "name": "ハイクラス・金融・コンサルティング転職なら【KOTORA（コトラ）】",
+      "asps": {
+        "afb": {
+          "promotionId": "14567",
+          "status": "applying",
+          "appliedAt": "2026-07-28T20:55:40.498Z",
+          "history": [
+            {
+              "at": "2026-07-28T20:55:40.498Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "afb-13857": {
+      "name": "税理士・科目合格者特化の転職エージェント【ハイスタ税理士】",
+      "asps": {
+        "afb": {
+          "promotionId": "13857",
+          "status": "applying",
+          "appliedAt": "2026-07-28T20:56:30.292Z",
+          "history": [
+            {
+              "at": "2026-07-28T20:56:30.292Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "afb-16674": {
+      "name": "基本料金と電力量料金が「シンプルな」実質再エネ電力プラン【キューエネスでんき】",
+      "asps": {
+        "afb": {
+          "promotionId": "16674",
+          "status": "applying",
+          "appliedAt": "2026-07-28T20:57:19.828Z",
+          "history": [
+            {
+              "at": "2026-07-28T20:57:19.828Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "afb-15551": {
+      "name": "【リボンエナジー】基本料金/燃料費調整額0円。だから家庭の電気代がおトク",
+      "asps": {
+        "afb": {
+          "promotionId": "15551",
+          "status": "applying",
+          "appliedAt": "2026-07-28T20:58:09.012Z",
+          "history": [
+            {
+              "at": "2026-07-28T20:58:09.012Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "afb-12640": {
+      "name": "【法人・事業者様向け】採用・人事担当の方の強い味方！【ドラEVER】",
+      "asps": {
+        "afb": {
+          "promotionId": "12640",
+          "status": "applying",
+          "appliedAt": "2026-07-28T20:58:58.539Z",
+          "history": [
+            {
+              "at": "2026-07-28T20:58:58.539Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "afb-15423": {
+      "name": "シミュレーションで未来を見える化！【お金のみらいマップ】",
+      "asps": {
+        "afb": {
+          "promotionId": "15423",
+          "status": "applying",
+          "appliedAt": "2026-07-28T20:59:47.835Z",
+          "history": [
+            {
+              "at": "2026-07-28T20:59:47.835Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "afb-15422": {
+      "name": "投資のことならプロにお任せ！【投資のコンシェルジュ】",
+      "asps": {
+        "afb": {
+          "promotionId": "15422",
+          "status": "applying",
+          "appliedAt": "2026-07-28T21:00:37.045Z",
+          "history": [
+            {
+              "at": "2026-07-28T21:00:37.045Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "afb-16236": {
+      "name": "20代のキャリア悩みに特化した無料カウンセリングサービス【キャリコン】",
+      "asps": {
+        "afb": {
+          "promotionId": "16236",
+          "status": "applying",
+          "appliedAt": "2026-07-28T21:01:26.481Z",
+          "history": [
+            {
+              "at": "2026-07-28T21:01:26.481Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "afb-15698": {
+      "name": "IT・WEBエンジニア専門の転職支援サービス【ユニゾンキャリア転職】",
+      "asps": {
+        "afb": {
+          "promotionId": "15698",
+          "status": "applying",
+          "appliedAt": "2026-07-28T21:02:16.367Z",
+          "history": [
+            {
+              "at": "2026-07-28T21:02:16.367Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "afb-16728": {
+      "name": "東京ガスのウォーターサーバー",
+      "asps": {
+        "afb": {
+          "promotionId": "16728",
+          "status": "applying",
+          "appliedAt": "2026-07-28T21:03:05.834Z",
+          "history": [
+            {
+              "at": "2026-07-28T21:03:05.834Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "afb-13085": {
+      "name": "外資系・グローバル企業への転職なら【en world(エンワールド)】",
+      "asps": {
+        "afb": {
+          "promotionId": "13085",
+          "status": "applying",
+          "appliedAt": "2026-07-28T21:03:55.041Z",
+          "history": [
+            {
+              "at": "2026-07-28T21:03:55.041Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "afb-16507": {
+      "name": "リゾートバイト 日本の旅館でおもてなし【OMOTENA（オモテナ）】",
+      "asps": {
+        "afb": {
+          "promotionId": "16507",
+          "status": "applying",
+          "appliedAt": "2026-07-28T21:04:44.686Z",
+          "history": [
+            {
+              "at": "2026-07-28T21:04:44.686Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "afb-16428": {
+      "name": "オンラインWebスクール【WEBCOACH（ウェブコーチ）】",
+      "asps": {
+        "afb": {
+          "promotionId": "16428",
+          "status": "applying",
+          "appliedAt": "2026-07-28T21:05:34.684Z",
+          "history": [
+            {
+              "at": "2026-07-28T21:05:34.684Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "afb-16588": {
+      "name": "オンライン心療内科【mentoa（メントア）】",
+      "asps": {
+        "afb": {
+          "promotionId": "16588",
+          "status": "applying",
+          "appliedAt": "2026-07-28T21:06:24.335Z",
+          "history": [
+            {
+              "at": "2026-07-28T21:06:24.335Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "afb-15217": {
+      "name": "豪華客船クルーズ旅行・予約なら【ベルーナツーリズム(ゆめやど)】",
+      "asps": {
+        "afb": {
+          "promotionId": "15217",
+          "status": "applying",
+          "appliedAt": "2026-07-28T21:07:13.715Z",
+          "history": [
+            {
+              "at": "2026-07-28T21:07:13.715Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "afb-16330": {
+      "name": "月額2,200円～ポケット型Wi-Fi【にゃんこWi-Fi】",
+      "asps": {
+        "afb": {
+          "promotionId": "16330",
+          "status": "applying",
+          "appliedAt": "2026-07-28T21:08:03.180Z",
+          "history": [
+            {
+              "at": "2026-07-28T21:08:03.180Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "afb-16738": {
+      "name": "【アラプラス ゴールドEX】",
+      "asps": {
+        "afb": {
+          "promotionId": "16738",
+          "status": "applying",
+          "appliedAt": "2026-07-28T21:08:52.754Z",
+          "history": [
+            {
+              "at": "2026-07-28T21:08:52.754Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "afb-14999": {
+      "name": "経理・財務の経験者に選ばれる特化型エージェント【BEET-AGENT（ビートエージェント）】",
+      "asps": {
+        "afb": {
+          "promotionId": "14999",
+          "status": "applying",
+          "appliedAt": "2026-07-28T21:09:42.388Z",
+          "history": [
+            {
+              "at": "2026-07-28T21:09:42.388Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "afb-10325": {
+      "name": "介護業界に特化した転職支援サービス 【レバウェル介護】",
+      "asps": {
+        "afb": {
+          "promotionId": "10325",
+          "status": "applying",
+          "appliedAt": "2026-07-28T21:10:32.199Z",
+          "history": [
+            {
+              "at": "2026-07-28T21:10:32.199Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "afb-16737": {
+      "name": "＜機能性表示食品＞ 【アラプラス 糖脂ダウン】",
+      "asps": {
+        "afb": {
+          "promotionId": "16737",
+          "status": "applying",
+          "appliedAt": "2026-07-28T21:11:38.851Z",
+          "history": [
+            {
+              "at": "2026-07-28T21:11:38.851Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "afb-14348": {
+      "name": "日本最大規模の美容師・理容師求人サイト【BeautyMirai（ビューティーミライ）】",
+      "asps": {
+        "afb": {
+          "promotionId": "14348",
+          "status": "applying",
+          "appliedAt": "2026-07-28T21:12:28.472Z",
+          "history": [
+            {
+              "at": "2026-07-28T21:12:28.472Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "afb-15699": {
+      "name": "IT・WEBエンジニア専門の就活支援サービス【ユニゾンキャリア就活】",
+      "asps": {
+        "afb": {
+          "promotionId": "15699",
+          "status": "applying",
+          "appliedAt": "2026-07-28T21:13:17.873Z",
+          "history": [
+            {
+              "at": "2026-07-28T21:13:17.873Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "afb-15177": {
+      "name": "【英語コーチングスクール PRESENCE】",
+      "asps": {
+        "afb": {
+          "promotionId": "15177",
+          "status": "applying",
+          "appliedAt": "2026-07-28T21:14:07.448Z",
+          "history": [
+            {
+              "at": "2026-07-28T21:14:07.448Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "afb-16683": {
+      "name": "「節約＆安心」プロパンガスの見直しと親御さんの見守りサービス【おやここ】",
+      "asps": {
+        "afb": {
+          "promotionId": "16683",
+          "status": "applying",
+          "appliedAt": "2026-07-28T21:14:57.159Z",
+          "history": [
+            {
+              "at": "2026-07-28T21:14:57.159Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "afb-12963": {
+      "name": "各職種に精通したコンサルタントがサポート【LHH転職エージェント】",
+      "asps": {
+        "afb": {
+          "promotionId": "12963",
+          "status": "applying",
+          "appliedAt": "2026-07-28T21:15:46.884Z",
+          "history": [
+            {
+              "at": "2026-07-28T21:15:46.884Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "afb-16179": {
+      "name": "格安航空券・飛行機・LCCの予約なら【travelist（トラベリスト）】＜国内航空券＞",
+      "asps": {
+        "afb": {
+          "promotionId": "16179",
+          "status": "applying",
+          "appliedAt": "2026-07-28T21:16:36.334Z",
+          "history": [
+            {
+              "at": "2026-07-28T21:16:36.334Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "afb-16575": {
+      "name": "【タダ電】WEB申込完了",
+      "asps": {
+        "afb": {
+          "promotionId": "16575",
+          "status": "applying",
+          "appliedAt": "2026-07-28T21:17:22.260Z",
+          "history": [
+            {
+              "at": "2026-07-28T21:17:22.260Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "afb-16185": {
+      "name": "国内最大級のキャンピングカーレンタル【JAPAN ROAD TRIP（ジャパンロードトリップ）】",
+      "asps": {
+        "afb": {
+          "promotionId": "16185",
+          "status": "applying",
+          "appliedAt": "2026-07-28T21:18:11.691Z",
+          "history": [
+            {
+              "at": "2026-07-28T21:18:11.691Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "afb-16511": {
+      "name": "水回りトラブル業界最安値に挑戦中！【水まわりドクター24】",
+      "asps": {
+        "afb": {
+          "promotionId": "16511",
+          "status": "applying",
+          "appliedAt": "2026-07-28T21:19:00.918Z",
+          "history": [
+            {
+              "at": "2026-07-28T21:19:00.918Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "afb-10634": {
+      "name": "蓄電池の一括見積比較サイト【タイナビ蓄電池】",
+      "asps": {
+        "afb": {
+          "promotionId": "10634",
+          "status": "applying",
+          "appliedAt": "2026-07-28T21:19:50.256Z",
+          "history": [
+            {
+              "at": "2026-07-28T21:19:50.256Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "afb-14581": {
+      "name": "今話題の60分500円の英会話スクール【One Coin English/ワンコイングリッシュ】",
+      "asps": {
+        "afb": {
+          "promotionId": "14581",
+          "status": "applying",
+          "appliedAt": "2026-07-28T21:20:39.630Z",
+          "history": [
+            {
+              "at": "2026-07-28T21:20:39.630Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "afb-13790": {
+      "name": "住宅ローンを無料で一括比較【モゲチェック】（これから家を買う方向け：借り入れ）",
+      "asps": {
+        "afb": {
+          "promotionId": "13790",
+          "status": "applying",
+          "appliedAt": "2026-07-28T21:21:47.304Z",
+          "history": [
+            {
+              "at": "2026-07-28T21:21:47.304Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "afb-11028": {
+      "name": "住宅ローンを無料で一括比較【モゲチェック】（今のローンを見直したい方向け：借り換え）",
+      "asps": {
+        "afb": {
+          "promotionId": "11028",
+          "status": "applying",
+          "appliedAt": "2026-07-28T21:22:36.785Z",
+          "history": [
+            {
+              "at": "2026-07-28T21:22:36.785Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "afb-9679": {
+      "name": "外資系・日系グローバル企業の転職・求人なら【ロバート・ウォルターズ】",
+      "asps": {
+        "afb": {
+          "promotionId": "9679",
+          "status": "applying",
+          "appliedAt": "2026-07-28T21:23:26.220Z",
+          "history": [
+            {
+              "at": "2026-07-28T21:23:26.220Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "afb-11624": {
+      "name": "知育玩具・おもちゃのサブスク定額レンタル【キッズラボラトリー】",
+      "asps": {
+        "afb": {
+          "promotionId": "11624",
+          "status": "applying",
+          "appliedAt": "2026-07-28T21:24:15.692Z",
+          "history": [
+            {
+              "at": "2026-07-28T21:24:15.692Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "afb-15743": {
+      "name": "合格への近道 受験対策講習会【能セン】",
+      "asps": {
+        "afb": {
+          "promotionId": "15743",
+          "status": "applying",
+          "appliedAt": "2026-07-28T21:25:06.713Z",
+          "history": [
+            {
+              "at": "2026-07-28T21:25:06.713Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "afb-14947": {
+      "name": "＜花粉症治療＞24時間予約受付可【東京オンラインクリニック】",
+      "asps": {
+        "afb": {
+          "promotionId": "14947",
+          "status": "applying",
+          "appliedAt": "2026-07-28T21:25:55.973Z",
+          "history": [
+            {
+              "at": "2026-07-28T21:25:55.973Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "afb-15118": {
+      "name": "相性でマッチングする20代向け転職支援サービス【相性転職パーソナルファイル】",
+      "asps": {
+        "afb": {
+          "promotionId": "15118",
+          "status": "applying",
+          "appliedAt": "2026-07-28T21:26:45.888Z",
+          "history": [
+            {
+              "at": "2026-07-28T21:26:45.888Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "afb-16742": {
+      "name": "口と腸から考えるトータル免疫ケアサプリ【THE MENEKI】",
+      "asps": {
+        "afb": {
+          "promotionId": "16742",
+          "status": "applying",
+          "appliedAt": "2026-07-28T21:27:35.295Z",
+          "history": [
+            {
+              "at": "2026-07-28T21:27:35.295Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "afb-15831": {
+      "name": "格安スマホ・SIM【y.u mobile（ワイユーモバイル）】",
+      "asps": {
+        "afb": {
+          "promotionId": "15831",
+          "status": "applying",
+          "appliedAt": "2026-07-28T21:28:24.647Z",
+          "history": [
+            {
+              "at": "2026-07-28T21:28:24.647Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "afb-14040": {
+      "name": "[スマートフォン専用]若手ハイエンド向け転職サイト『ASSIGN』",
+      "asps": {
+        "afb": {
+          "promotionId": "14040",
+          "status": "applying",
+          "appliedAt": "2026-07-28T21:29:14.100Z",
+          "history": [
+            {
+              "at": "2026-07-28T21:29:14.100Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "afb-16724": {
+      "name": "引っ越し一括見積もりなら【YUIE（ユイエ）】",
+      "asps": {
+        "afb": {
+          "promotionId": "16724",
+          "status": "applying",
+          "appliedAt": "2026-07-28T21:30:03.292Z",
+          "history": [
+            {
+              "at": "2026-07-28T21:30:03.292Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "afb-16178": {
+      "name": "格安航空券・飛行機・LCC＋ホテルのセット予約なら【travelist（トラベリスト）】＜宿泊＋航空チケット予約＞",
+      "asps": {
+        "afb": {
+          "promotionId": "16178",
+          "status": "applying",
+          "appliedAt": "2026-07-28T21:30:52.734Z",
+          "history": [
+            {
+              "at": "2026-07-28T21:30:52.734Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "afb-16177": {
+      "name": "ホテル旅館予約なら【travelist（トラベリスト）】＜宿泊予約＞",
+      "asps": {
+        "afb": {
+          "promotionId": "16177",
+          "status": "applying",
+          "appliedAt": "2026-07-28T21:31:42.182Z",
+          "history": [
+            {
+              "at": "2026-07-28T21:31:42.182Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "afb-14192": {
+      "name": "SDGsの新築・リフォームの住環境情報サイト【ハウジングバザール】",
+      "asps": {
+        "afb": {
+          "promotionId": "14192",
+          "status": "applying",
+          "appliedAt": "2026-07-28T21:32:31.457Z",
+          "history": [
+            {
+              "at": "2026-07-28T21:32:31.457Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "afb-14268": {
+      "name": "ハウスクリーニング・不用品回収・引越しなど400以上のサービス予約｜くらしのマーケット",
+      "asps": {
+        "afb": {
+          "promotionId": "14268",
+          "status": "applying",
+          "appliedAt": "2026-07-28T21:33:21.160Z",
+          "history": [
+            {
+              "at": "2026-07-28T21:33:21.160Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "afb-16748": {
+      "name": "【それがだいじWi-Fi 5G】",
+      "asps": {
+        "afb": {
+          "promotionId": "16748",
+          "status": "applying",
+          "appliedAt": "2026-07-28T21:34:10.877Z",
+          "history": [
+            {
+              "at": "2026-07-28T21:34:10.877Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "afb-15977": {
+      "name": "＜多汗症＞24時間予約受付可【東京オンラインクリニック】",
+      "asps": {
+        "afb": {
+          "promotionId": "15977",
+          "status": "applying",
+          "appliedAt": "2026-07-28T21:35:00.129Z",
+          "history": [
+            {
+              "at": "2026-07-28T21:35:00.129Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "afb-16019": {
+      "name": "「安い」「早い」「簡単」日本国内のWiFiレンタルなら【NETAGE（ネットエイジ）】",
+      "asps": {
+        "afb": {
+          "promotionId": "16019",
+          "status": "applying",
+          "appliedAt": "2026-07-28T21:35:49.803Z",
+          "history": [
+            {
+              "at": "2026-07-28T21:35:49.803Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "afb-16472": {
+      "name": "即戦力のエンジニアを目指すエンジニア育成スクール【techmeets（テックミーツ）】",
+      "asps": {
+        "afb": {
+          "promotionId": "16472",
+          "status": "applying",
+          "appliedAt": "2026-07-28T21:36:39.432Z",
+          "history": [
+            {
+              "at": "2026-07-28T21:36:39.432Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "afb-13830": {
+      "name": "資格試験・取得とスキルアップに強い資格の学校【資格スクール 大栄（DAIEI）】",
+      "asps": {
+        "afb": {
+          "promotionId": "13830",
+          "status": "applying",
+          "appliedAt": "2026-07-28T21:37:25.246Z",
+          "history": [
+            {
+              "at": "2026-07-28T21:37:25.246Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "afb-16062": {
+      "name": "世界対応 高速Wi-Fi【HIS Wi-Fi】",
+      "asps": {
+        "afb": {
+          "promotionId": "16062",
+          "status": "applying",
+          "appliedAt": "2026-07-28T21:38:14.706Z",
+          "history": [
+            {
+              "at": "2026-07-28T21:38:14.706Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "afb-14829": {
+      "name": "無制限プランが最安値級！海外行くならグロモバWiFiレンタル！【Global Mobile(グローバルモバイル)】",
+      "asps": {
+        "afb": {
+          "promotionId": "14829",
+          "status": "applying",
+          "appliedAt": "2026-07-28T21:39:04.080Z",
+          "history": [
+            {
+              "at": "2026-07-28T21:39:04.080Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "afb-10884": {
+      "name": "ドローンのレンタルなら【DroSatsu!!ドロサツ】",
+      "asps": {
+        "afb": {
+          "promotionId": "10884",
+          "status": "applying",
+          "appliedAt": "2026-07-28T21:39:53.980Z",
+          "history": [
+            {
+              "at": "2026-07-28T21:39:53.980Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "afb-13496": {
+      "name": "【nearMe.Airport】自宅/ホテルと空港を結ぶ次世代空港送迎サービス",
+      "asps": {
+        "afb": {
+          "promotionId": "13496",
+          "status": "applying",
+          "appliedAt": "2026-07-28T21:40:43.994Z",
+          "history": [
+            {
+              "at": "2026-07-28T21:40:43.994Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "afb-14263": {
+      "name": "【格安航空券センター】国内往復飛行機チケット比較LCC予約サイト",
+      "asps": {
+        "afb": {
+          "promotionId": "14263",
+          "status": "applying",
+          "appliedAt": "2026-07-28T21:41:33.698Z",
+          "history": [
+            {
+              "at": "2026-07-28T21:41:33.698Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "afb-14262": {
+      "name": "【格安航空券モール】国内線LCC含む全13社の飛行機予約・最安値比較サイト",
+      "asps": {
+        "afb": {
+          "promotionId": "14262",
+          "status": "applying",
+          "appliedAt": "2026-07-28T21:42:23.257Z",
+          "history": [
+            {
+              "at": "2026-07-28T21:42:23.257Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "afb-15713": {
+      "name": "学資保険一括資料請求比較【トモママ】",
+      "asps": {
+        "afb": {
+          "promotionId": "15713",
+          "status": "applying",
+          "appliedAt": "2026-07-28T21:43:12.665Z",
+          "history": [
+            {
+              "at": "2026-07-28T21:43:12.665Z",
+              "status": "applying"
             }
           ]
         }
