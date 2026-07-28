@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "_comment": "3 ASP (A8 / もしも / afb) 横断の提携カタログ。**自社が配置する / 配置を検討する案件だけ**を持つ。同一案件が複数 ASP に存在するため、ASP 間の単価・確定率・EPC を比較できることがこのファイルの存在理由。`.claude/scripts/ads/affiliate-status.mjs` が実機と突合してドリフトを報告する (--write で実機値を反映)。手編集は可 (実機値は status が上書きする)。運用 SSOT → .claude/rules/affiliate-ads-standards.md",
+  "_notMergedWith": "`.claude/state/ads/a8-catalog.json` は A8 scout の状態機械で役割が違うためマージしない。あちらは「A8 で何を見つけ何を申請したか」、こちらは「自社がどの案件をどの ASP で運用するか」。広告そのものの SSOT は `apps/web/scripts/affiliate-ads-data.ts` (git TS) で、このファイルは配信データではない。",
+  "_statusVocab": {
+    "approved": "提携済み (広告リンクを発行できる)",
+    "applying": "申請中 (審査待ち)",
+    "none": "その ASP では未提携",
+    "unavailable": "その ASP に案件自体が無い",
+    "unknown": "未確認 (調べていない。none と区別する)"
+  },
+  "_seedNote": "初期状態は空。実機を見ずに案件を書くと捏造になるため、`affiliate-status.mjs` の実測か `afb-scan.mjs` の走査結果をもとに 1 件ずつ追加する。vertical は apps/web/src/features/ads/constants/affiliate-category.ts の 10 軸から選ぶ。",
+  "updatedAt": null,
+  "verifiedAt": null,
+  "programs": {}
+}

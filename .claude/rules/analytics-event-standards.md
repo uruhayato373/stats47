@@ -50,7 +50,7 @@ GA4 → 管理（歯車）→ プロパティ列「データの表示」→「�
 | `rail_click` | `trackRailClick` | `rail_widget` / `rail_slot`（`rail_href` は任意） | ✅登録済 (2026-07-20) | UI (P0-2) |
 | `affiliate_click` | `trackAffiliateClick` | `affiliate_vertical` / `affiliate_category` / `link_position` / `experiment_id` / `variant_id` / `creative_size` | **✅登録済 (2026-07-06)** | `affiliate-ads-standards.md §6` |
 | `affiliate_click` (ad_id のみ) | `trackAffiliateClick` | `ad_id` | **⏳要登録** (2026-07-27 実測: GA4 API が `customEvent:ad_id` を invalid dimension として拒否) | `affiliate-ads-standards.md §6` |
-| `ad_impression` ⚠️**イベント名衝突** | `AdImpressionTracker` | (同上) — ただし**計測不能** | 🚨 **要改名** (下記) | `affiliate-ads-standards.md §6` |
+| `affiliate_impression` | `AdImpressionTracker` | `affiliate_vertical` / `affiliate_category` / `link_position` / `experiment_id` / `variant_id` / `creative_size` | **✅登録済 (2026-07-06)** — dimension はパラメータ名に紐づくため、2026-07-28 の**イベント名改名では再登録不要**の想定 (初回計測で要確認) | `affiliate-ads-standards.md §6` |
 | `cta_click` | `trackCtaClick` | `cta_id` / `link_position` / `content_id` / `target_type` / `target_key` | ❓要確認 | buzz-map §7.3 / ファネル |
 | `home_featured_impression` / `home_featured_click` | `trackHomeFeatured*` | `card_variant` / `slot` / `experiment_id` / `experiment_variant` | ❓要確認 | `docs/02_実装計画/28 §9.3` |
 | `ranking_view` | `trackRankingView` | `ranking_key` / `category_key` / `area_type` / `year_code` | ❓要確認 | ranking |
@@ -64,10 +64,17 @@ GA4 → 管理（歯車）→ プロパティ列「データの表示」→「�
 > `.claude/rules/evidence-based-judgment.md` に従い、GA4 で実登録を確認したら `✅登録済 (日付)` に更新する。
 > 推測で `✅` にしない。
 >
-> ## 🚨 `ad_impression` は GA4/AdSense の予約イベント名と衝突している (2026-07-27 実測)
+> ## ✅ 解消: `ad_impression` の衝突 → `affiliate_impression` へ改名 (2026-07-28)
 >
-> **自前のアフィリエイト impression 計測 (`AdImpressionTracker`) が使う `ad_impression` は、
-> GA4 の AdSense 連携が自動生成するイベント名と同じ**。実測で衝突が確定した:
+> **改名日: 2026-07-28。** 以下は改名前の実測記録 (経緯として保持する)。改名後は
+> `affiliate_impression` が自前 impression の唯一のイベント名で、AdSense が生成する
+> `ad_impression` とは名前空間が分かれている。**改名日より前の窓では `affiliate_impression` は
+> 0 件になるのが正しい**ので、`fetch-affiliate-ga4.cjs` は 2026-07-28 以降に絞って読むこと。
+>
+> ---
+>
+> **(改名前の記録) 自前のアフィリエイト impression 計測 (`AdImpressionTracker`) が使っていた
+> `ad_impression` は、GA4 の AdSense 連携が自動生成するイベント名と同じ**だった。実測で衝突が確定した:
 >
 > ```
 > ad_impression × adSourceName (直近7日) → "Google AdSense account (pub-7995274743017484)" = 3,346 件 (総数と完全一致)
@@ -79,14 +86,14 @@ GA4 → 管理（歯車）→ プロパティ列「データの表示」→「�
 >
 > **原因は 2 つある (2026-07-27 に切り分け済)。**
 >
-> **原因① `AdImpressionTracker` の発火順バグ (これが 0 件の主因)** —
+> **原因① `AdImpressionTracker` の発火順バグ (これが 0 件の主因) — ✅ 2026-07-28 修正済** —
 > `apps/web/src/features/ads/components/AdImpressionTracker.tsx` の timer で
 > **`firedRef.current = true` を `if (window.gtag)` ガードより前に実行**している。gtag は
 > `GoogleAnalytics.tsx` で `strategy="afterInteractive"` 遅延読み込みなので、初期表示から画面内にある
 > 広告 (サイドバー等) は交差後 1 秒で発火し、その時点で gtag 未定義だと**送信されないまま「発火済み」に
 > なり永久に失われる** (再試行なし)。`nav_click` が正常なのはユーザー操作 = gtag 読込後だから。
-> **修正方針**: ガードを先に評価し、gtag 未準備なら `firedRef` を立てず短間隔リトライするか
-> `window.dataLayer.push` に直接積む。**ガードの単純撤去は不可** (gtag 未定義で例外になる)。
+> **修正 (実施済)**: `send()` が gtag 送信に成功したときだけ `firedRef` を立て、未準備なら
+> 500ms 間隔で最大 10 回リトライする (合計 ~5 秒)。**ガードの単純撤去は不可** (gtag 未定義で例外になる)。
 >
 > **原因② イベント名が GA4 予約名** — `ad_impression` は公式の reserved event names に含まれる
 > ([Reserved event names](https://support.google.com/analytics/answer/13316687)、アクセス 2026-07-27)。
@@ -95,16 +102,21 @@ GA4 → 管理（歯車）→ プロパティ列「データの表示」→「�
 > それでも改名は必要で、理由は破棄ではなく**AdSense 連携が同名イベントを大量生成するため自前分と
 > 区別できず分析不能**になること (`adSourceName` で分離しようとしても残余ゼロで検証不能)。
 > `affiliate_click` は予約名でなく正常に動いているので `affiliate_impression` への改名が安全。
-> - したがって **affiliate の CTR は分母が存在せず計測不能**。過去に「CTR 0.079%」等と報告された値は
+> - 改名前は **affiliate の CTR は分母が存在せず計測不能**だった。当時「CTR 0.079%」等と報告された値は
 >   **アフィリエイトの click を AdSense の impression で割った無意味な数字**なので採用してはならない。
-> - **対処 (未実施)**: 自前イベントを `affiliate_impression` 等へ改名して名前空間を分離し、
->   `fetch-affiliate-ga4.cjs` の `EVENTS` も合わせる。改名は GA4 の履歴が分断されるため、
->   affiliate-manager + ga4-analyst の合意と改名日の記録が要る。
+> - **対処 (✅ 2026-07-28 実施)**: 自前イベントを `affiliate_impression` へ改名して名前空間を分離し、
+>   `fetch-affiliate-ga4.cjs` の `EVENTS` も追従した。**履歴の分断は実質ゼロ** — 自前 `ad_impression` は
+>   0 件だったため失う時系列が無い。**デプロイ 24-48h 後に `fetch-affiliate-ga4.cjs 7` で
+>   `affiliate_impression` が 0 件でなく `affiliate_vertical` 別に内訳が割れることを確認する**
+>   (割れなければ dimension 再登録が必要 = 下記の想定が誤り)。
 > - `affiliate_vertical` / `affiliate_category` / `link_position` / `creative_size` / `experiment_id` /
 >   `variant_id` は **2026-07-06 に登録済** (GA4 管理画面で確認)。**未登録は `ad_id` のみ** — GA4 API が
 >   `customEvent:ad_id` を invalid dimension として拒否するため、案件別 CTR は登録するまで取れない。
+>   カスタムディメンションは**イベント名ではなくパラメータ名**に紐づくため、イベント改名では
+>   再登録不要と考えている (未検証・上記の確認で判定する)。
 > - 取得コマンド: `node .claude/scripts/ads/fetch-affiliate-ga4.cjs [days]`。
->   **窓が登録日より前に伸びると (not set) が混ざる**ので、登録日以降に絞って読むこと。
+>   **窓が登録日 (2026-07-06) または改名日 (2026-07-28) より前に伸びると (not set) / 0 件が混ざる**ので、
+>   それ以降に絞って読むこと。
 >
 > **nav_label の値変更 (2026-07-20)**: R1 (ヘッダー IA 再編) で mobile drawer のラベルを
 > desktop に統一した (「地域の特徴」→「都道府県」/「ブログ」→「統計ブログ」)。`nav_label` は

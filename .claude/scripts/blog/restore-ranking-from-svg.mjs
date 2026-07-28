@@ -211,7 +211,7 @@ function regenerate(slug, base, key, year) {
     ".claude/scripts/blog/fetch-ranking-data-r2.mjs",
     "--slug", slug, "--base", STAGE_REL, "--keys", key, "--data-name", base, ...yearArgs,
   ], { cwd: PROJECT_ROOT, stdio: "pipe" });
-  execFileSync("npx", [
+  execFileSync((process.platform === "win32" ? "npx.cmd" : "npx"), [
     "tsx", ".claude/scripts/blog/generate-article-charts.ts", "--slug", slug, "--base", STAGE_REL,
   ], { cwd: PROJECT_ROOT, stdio: "pipe", env: { ...process.env, NODE_OPTIONS: "--conditions react-server" } });
   return {

@@ -33,7 +33,7 @@ const TAG_OUT = path.resolve(__dirname, "../src/config/known-tag-keys.ts");
 
 function queryRemote<T>(sql: string): T[] {
   const out = execFileSync(
-    "npx",
+    (process.platform === "win32" ? "npx.cmd" : "npx"),
     [
       "wrangler",
       "d1",

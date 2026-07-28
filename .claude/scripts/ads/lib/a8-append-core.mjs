@@ -51,6 +51,49 @@ export function draftA8mat(draft) {
  * baseId が既存と衝突しないよう連番 (_001, _002...) を振り直す。
  * baseId は "af_<slug>_a8_001" 形式想定。末尾 3 桁を増やす。
  */
+/**
+ * catalog entry + parseA8Code の fields から AffiliateAd の下書きを作る (純関数)。
+ *
+ * ★ locationCode は adType で分ける。banner 解決は locationCode を見ない
+ *   (vertical + adType のみ / `affiliate-ad-snapshot.ts` の readActiveBannersByVerticalsFromR2) が、
+ *   **text 解決は見る** (`sidebar-bottom` / `footer`)。全部 blog-bottom にすると harvest した text は
+ *   banner 経路 (adType で弾かれる) にも text 経路 (locationCode 不一致) にも乗らず
+ *   **永久に表示されない死に在庫**になる (2026-07-28 に 2 件が実際にそうなっていた)。
+ *   A8 は canonical バナー非提供の案件が多く text fallback が常態なので影響が大きい。
+ *
+ * priority の 50 は仮置きで、`append-affiliate-ads.ts` が確定EPC のバンド式で上書きする。
+ */
+export function buildAdDraft(entry, fields) {
+  // 名前を ascii スラグ化。日本語のみ等でスラグが空になる場合は A8 programId を使う (一意・追跡可能)。
+  const nameSlug = String(entry.name || "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .slice(0, 40);
+  const slug = nameSlug || String(entry.programId || "prog").replace(/[^a-z0-9]/gi, "");
+  return {
+    id: `af_${slug}_a8_001`,
+    title: entry.name,
+    htmlContent: fields.htmlContent,
+    areaCode: null,
+    vertical: entry.vertical ?? null,
+    categoryKey: null,
+    locationCode: fields.adType === "text" ? "sidebar-bottom" : "blog-bottom",
+    isActive: true,
+    priority: 50,
+    startDate: null,
+    endDate: null,
+    targetCategories: null,
+    adType: fields.adType,
+    imageUrl: fields.imageUrl,
+    trackingPixelUrl: fields.trackingPixelUrl,
+    width: fields.width,
+    height: fields.height,
+    createdAt: null,
+    updatedAt: null,
+  };
+}
+
 export function uniqueId(baseId, existingIds) {
   const set = new Set(existingIds);
   if (!set.has(baseId)) return baseId;

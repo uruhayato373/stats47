@@ -7,7 +7,7 @@
       "genre": "energy 大阪ガスのインターネット「さすガねっと」",
       "a8mat": null,
       "vertical": "energy",
-      "score": 0.835585,
+      "score": 0.735585,
       "status": "applied",
       "history": [
         {
@@ -31,7 +31,11 @@
           "at": "2026-07-20T00:00:00Z",
           "note": "budget-stamp"
         }
-      ]
+      ],
+      "rewardYen": 30076,
+      "epcYen": 890,
+      "confirmRatePct": 30.39,
+      "rewardType": "fixed"
     },
     "s00000014289002": {
       "programId": "s00000014289002",
@@ -63,7 +67,11 @@
           "at": "2026-07-20T00:00:00Z",
           "note": "budget-stamp"
         }
-      ]
+      ],
+      "rewardYen": 12000,
+      "epcYen": 707,
+      "confirmRatePct": 95.79,
+      "rewardType": "fixed"
     },
     "s00000024182002": {
       "programId": "s00000024182002",
@@ -95,7 +103,11 @@
           "at": "2026-07-20T00:00:00Z",
           "note": "budget-stamp"
         }
-      ]
+      ],
+      "rewardYen": 10000,
+      "epcYen": 892,
+      "confirmRatePct": 32.45,
+      "rewardType": "fixed"
     },
     "s00000020560002": {
       "programId": "s00000020560002",
@@ -127,7 +139,11 @@
           "at": "2026-07-20T00:00:00Z",
           "note": "budget-stamp"
         }
-      ]
+      ],
+      "rewardYen": 7029,
+      "epcYen": 1583,
+      "confirmRatePct": 100,
+      "rewardType": "fixed"
     },
     "s00000009778002": {
       "programId": "s00000009778002",
@@ -135,7 +151,7 @@
       "genre": "health たかの友梨 ブライダルホワイトコース お試しキャンペーン",
       "a8mat": null,
       "vertical": "population",
-      "score": 0.642495,
+      "score": 0.560995,
       "status": "applied",
       "history": [
         {
@@ -159,7 +175,11 @@
           "at": "2026-07-20T00:00:00Z",
           "note": "budget-stamp"
         }
-      ]
+      ],
+      "rewardYen": 9775,
+      "epcYen": 160,
+      "confirmRatePct": 33.33,
+      "rewardType": "fixed"
     },
     "s00000000018037": {
       "programId": "s00000000018037",
@@ -437,7 +457,11 @@
           "at": "2026-07-20T00:00:00Z",
           "note": "budget-stamp"
         }
-      ]
+      ],
+      "rewardYen": 10000,
+      "epcYen": 92,
+      "confirmRatePct": 90.08,
+      "rewardType": "fixed"
     },
     "s00000015770001": {
       "programId": "s00000015770001",
@@ -517,7 +541,7 @@
       "genre": "education 女性限定・初心者専門の英会話スクール【b わたしの英会話】",
       "a8mat": null,
       "vertical": "education",
-      "score": 0.615,
+      "score": 0.515,
       "status": "applied",
       "history": [
         {
@@ -541,7 +565,10 @@
           "at": "2026-07-20T00:00:00Z",
           "note": "budget-stamp"
         }
-      ]
+      ],
+      "rewardYen": 10000,
+      "confirmRatePct": 50,
+      "rewardType": "fixed"
     },
     "s00000016275010": {
       "programId": "s00000016275010",
@@ -550,7 +577,7 @@
       "a8mat": null,
       "vertical": "energy",
       "score": 0.6125,
-      "status": "approved",
+      "status": "registered",
       "history": [
         {
           "from": null,
@@ -572,6 +599,17 @@
           "to": "applied",
           "at": "2026-07-20T00:00:00Z",
           "note": "budget-stamp"
+        },
+        {
+          "from": "approved",
+          "to": "harvested",
+          "at": "2026-07-28T04:08:00.760Z"
+        },
+        {
+          "from": "harvested",
+          "to": "registered",
+          "at": "2026-07-28T04:15:00.968Z",
+          "adId": "af_no1_a8_001"
         }
       ],
       "epcYen": 25,
@@ -579,7 +617,30 @@
       "rewardYen": 11000,
       "rewardType": "fixed",
       "_priority": 10,
-      "_ce": 10
+      "_ce": 10,
+      "selectedForRegister": true,
+      "priority": 10,
+      "adDraft": {
+        "id": "af_no1_a8_001",
+        "title": "高速回線選ぶならコミュファ光！速度もキャッシュバックも満足度No1！【コミュファ光】",
+        "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B84WZ+9YEYYA+3HKU+1NL9XT",
+        "areaCode": null,
+        "vertical": "energy",
+        "categoryKey": null,
+        "locationCode": "blog-bottom",
+        "isActive": true,
+        "priority": 50,
+        "startDate": null,
+        "endDate": null,
+        "targetCategories": null,
+        "adType": "banner",
+        "imageUrl": "https://www28.a8.net/svt/bgt?aid=260720099602&wid=001&eno=01&mid=s00000016275010009000&mc=1",
+        "trackingPixelUrl": "https://www18.a8.net/0.gif?a8mat=4B84WZ+9YEYYA+3HKU+1NL9XT",
+        "width": 300,
+        "height": 250,
+        "createdAt": null,
+        "updatedAt": null
+      }
     },
     "s00000023920003": {
       "programId": "s00000023920003",
@@ -587,7 +648,7 @@
       "genre": "education 日本語教師を目指すなら、東京・大阪・京都・兵庫のKEC日本語学院",
       "a8mat": null,
       "vertical": null,
-      "score": 0.6107400000000001,
+      "score": 0.59574,
       "status": "candidate",
       "history": [
         {
@@ -606,7 +667,11 @@
           "to": "candidate",
           "note": "reconcile-detail-2026-07-20"
         }
-      ]
+      ],
+      "rewardYen": 10000,
+      "epcYen": 224,
+      "confirmRatePct": 29.16,
+      "rewardType": "fixed"
     },
     "s00000025720001": {
       "programId": "s00000025720001",
@@ -614,7 +679,7 @@
       "genre": "education 立川のボイトレスクール【DECO MUSIC SCHOOL】",
       "a8mat": null,
       "vertical": "education",
-      "score": 0.6100000000000001,
+      "score": 0.5100000000000001,
       "status": "applied",
       "history": [
         {
@@ -638,7 +703,10 @@
           "at": "2026-07-20T00:00:00Z",
           "note": "budget-stamp"
         }
-      ]
+      ],
+      "rewardYen": 8000,
+      "confirmRatePct": 100,
+      "rewardType": "fixed"
     },
     "s00000021488002": {
       "programId": "s00000021488002",
@@ -684,7 +752,7 @@
       "genre": "health 脱毛は男のたしなみ【RBL_ローランドビューティーラウンジ】",
       "a8mat": null,
       "vertical": "health",
-      "score": 0.5913450000000001,
+      "score": 0.5958450000000001,
       "status": "applied",
       "history": [
         {
@@ -701,7 +769,11 @@
           "at": "2026-07-20T00:00:00Z",
           "note": "budget-stamp"
         }
-      ]
+      ],
+      "rewardYen": 10000,
+      "epcYen": 47,
+      "confirmRatePct": 88.23,
+      "rewardType": "fixed"
     },
     "s00000019026001": {
       "programId": "s00000019026001",
@@ -709,7 +781,7 @@
       "genre": "labor 【求人】☆体験OK！日払いOK！店舗数70店舗☆【ブライトグループ】",
       "a8mat": null,
       "vertical": "labor",
-      "score": 0.588995,
+      "score": 0.6004950000000001,
       "status": "candidate",
       "history": [
         {
@@ -721,7 +793,11 @@
           "to": "candidate",
           "note": "reconcile-detail-2026-07-20"
         }
-      ]
+      ],
+      "rewardYen": 12500,
+      "epcYen": 161,
+      "confirmRatePct": 53.33,
+      "rewardType": "fixed"
     },
     "s00000000018021": {
       "programId": "s00000000018021",
@@ -729,8 +805,8 @@
       "genre": "energy GMOインターネット株式会社【GMOとくとくBB】申込募集",
       "a8mat": null,
       "vertical": "energy",
-      "score": 0.551875,
-      "status": "candidate",
+      "score": 0.45787500000000003,
+      "status": "registered",
       "history": [
         {
           "from": null,
@@ -740,8 +816,58 @@
         {
           "to": "candidate",
           "note": "reconcile-detail-2026-07-20"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-07-28T02:44:28.340Z"
+        },
+        {
+          "from": "applied",
+          "to": "approved",
+          "at": "2026-07-28T02:46:01.987Z"
+        },
+        {
+          "from": "approved",
+          "to": "harvested",
+          "at": "2026-07-28T04:08:07.650Z"
+        },
+        {
+          "from": "harvested",
+          "to": "registered",
+          "at": "2026-07-28T04:15:00.969Z",
+          "adId": "af_gmo-gmo-bb_a8_001"
         }
-      ]
+      ],
+      "rewardYen": 5100,
+      "epcYen": 148,
+      "confirmRatePct": 93.25,
+      "rewardType": "fixed",
+      "_priority": 40,
+      "_ce": 138.01,
+      "selectedForRegister": true,
+      "priority": 40,
+      "adDraft": {
+        "id": "af_gmo-gmo-bb_a8_001",
+        "title": "GMOインターネット株式会社【GMOとくとくBB】申込募集",
+        "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B8B4S+92UZW2+50+3IT44X",
+        "areaCode": null,
+        "vertical": "energy",
+        "categoryKey": null,
+        "locationCode": "blog-bottom",
+        "isActive": true,
+        "priority": 50,
+        "startDate": null,
+        "endDate": null,
+        "targetCategories": null,
+        "adType": "banner",
+        "imageUrl": "https://www25.a8.net/svt/bgt?aid=260728156549&wid=001&eno=01&mid=s00000000018021299000&mc=1",
+        "trackingPixelUrl": "https://www15.a8.net/0.gif?a8mat=4B8B4S+92UZW2+50+3IT44X",
+        "width": 300,
+        "height": 250,
+        "createdAt": null,
+        "updatedAt": null
+      }
     },
     "s00000017938001": {
       "programId": "s00000017938001",
@@ -749,7 +875,7 @@
       "genre": "labor フリーランスエンジニアの無料カウンセリング実施で20,000円！【ポテパンフリーランス】",
       "a8mat": null,
       "vertical": "labor",
-      "score": 0.534,
+      "score": 0.523,
       "status": "applied",
       "history": [
         {
@@ -766,7 +892,11 @@
           "at": "2026-07-20T00:00:00Z",
           "note": "budget-stamp"
         }
-      ]
+      ],
+      "rewardYen": 20000,
+      "epcYen": 16,
+      "confirmRatePct": 50,
+      "rewardType": "fixed"
     },
     "s00000026477001": {
       "programId": "s00000026477001",
@@ -774,7 +904,7 @@
       "genre": "labor フリーコンサルタントのための案件紹介サービス【フリーコンサルタント.jp】",
       "a8mat": null,
       "vertical": null,
-      "score": 0.515,
+      "score": 0.5875,
       "status": "candidate",
       "history": [
         {
@@ -786,7 +916,11 @@
           "to": "candidate",
           "note": "reconcile-detail-2026-07-20"
         }
-      ]
+      ],
+      "rewardYen": 26000,
+      "epcYen": 145,
+      "confirmRatePct": 50,
+      "rewardType": "fixed"
     },
     "s00000010261001": {
       "programId": "s00000010261001",
@@ -969,7 +1103,7 @@
       "company": "株式会社東京リーガルマインド",
       "vertical": "education",
       "score": null,
-      "status": "approved",
+      "status": "registered",
       "source": "existing-partnership",
       "history": [
         {
@@ -977,6 +1111,17 @@
           "to": "approved",
           "at": "2026-07-19T22:34:21.032Z",
           "note": "existing-partnership"
+        },
+        {
+          "from": "approved",
+          "to": "harvested",
+          "at": "2026-07-28T04:08:19.519Z"
+        },
+        {
+          "from": "harvested",
+          "to": "registered",
+          "at": "2026-07-28T04:15:00.969Z",
+          "note": "already-registered-a8mat:4B7USX+9FYJ76+1G62+7MK9D"
         }
       ],
       "epcYen": 2,
@@ -984,7 +1129,30 @@
       "rewardRatePct": 1,
       "rewardType": "rate",
       "_priority": 10,
-      "_ce": 1.9376
+      "_ce": 1.9376,
+      "selectedForRegister": true,
+      "priority": 10,
+      "adDraft": {
+        "id": "af_lec_a8_001",
+        "title": "LECオンライン（東京リーガルマインド）講座・書籍",
+        "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B7USX+9FYJ76+1G62+7MK9D",
+        "areaCode": null,
+        "vertical": "education",
+        "categoryKey": null,
+        "locationCode": "blog-bottom",
+        "isActive": true,
+        "priority": 50,
+        "startDate": null,
+        "endDate": null,
+        "targetCategories": null,
+        "adType": "banner",
+        "imageUrl": "https://www20.a8.net/svt/bgt?aid=260706993571&wid=001&eno=01&mid=s00000006761001281000&mc=1",
+        "trackingPixelUrl": "https://www13.a8.net/0.gif?a8mat=4B7USX+9FYJ76+1G62+7MK9D",
+        "width": 300,
+        "height": 250,
+        "createdAt": null,
+        "updatedAt": null
+      }
     },
     "s00000017136001": {
       "programId": "s00000017136001",
@@ -1121,7 +1289,7 @@
       "company": "ＡｎｙＫａｎ株式会社",
       "vertical": "labor",
       "score": null,
-      "status": "approved",
+      "status": "registered",
       "source": "existing-partnership",
       "history": [
         {
@@ -1129,6 +1297,17 @@
           "to": "approved",
           "at": "2026-07-19T22:34:21.032Z",
           "note": "existing-partnership"
+        },
+        {
+          "from": "approved",
+          "to": "harvested",
+          "at": "2026-07-28T04:08:25.420Z"
+        },
+        {
+          "from": "harvested",
+          "to": "registered",
+          "at": "2026-07-28T04:15:00.969Z",
+          "adId": "af_anykan_a8_001"
         }
       ],
       "epcYen": 79,
@@ -1136,7 +1315,30 @@
       "rewardYen": 10000,
       "rewardType": "fixed",
       "_priority": 20,
-      "_ce": 59.25
+      "_ce": 59.25,
+      "selectedForRegister": true,
+      "priority": 20,
+      "adDraft": {
+        "id": "af_anykan_a8_001",
+        "title": "ゲーム・エンタメ業界の転職ならエニカン【AnyKan】",
+        "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B684G+FZQ6R6+5NMK+609HT",
+        "areaCode": null,
+        "vertical": "labor",
+        "categoryKey": null,
+        "locationCode": "blog-bottom",
+        "isActive": true,
+        "priority": 50,
+        "startDate": null,
+        "endDate": null,
+        "targetCategories": null,
+        "adType": "banner",
+        "imageUrl": "https://www29.a8.net/svt/bgt?aid=260630944967&wid=001&eno=01&mid=s00000026390001009000&mc=1",
+        "trackingPixelUrl": "https://www11.a8.net/0.gif?a8mat=4B684G+FZQ6R6+5NMK+609HT",
+        "width": 300,
+        "height": 250,
+        "createdAt": null,
+        "updatedAt": null
+      }
     },
     "s00000024757002": {
       "programId": "s00000024757002",
@@ -1213,7 +1415,7 @@
       "company": "株式会社ＩＤＭ",
       "vertical": "population",
       "score": null,
-      "status": "approved",
+      "status": "registered",
       "source": "existing-partnership",
       "history": [
         {
@@ -1221,6 +1423,17 @@
           "to": "approved",
           "at": "2026-07-19T22:34:21.032Z",
           "note": "existing-partnership"
+        },
+        {
+          "from": "approved",
+          "to": "harvested",
+          "at": "2026-07-28T04:08:31.258Z"
+        },
+        {
+          "from": "harvested",
+          "to": "registered",
+          "at": "2026-07-28T04:15:00.969Z",
+          "adId": "af_ibj_a8_001"
         }
       ],
       "epcYen": 0,
@@ -1228,7 +1441,30 @@
       "rewardYen": 18500,
       "rewardType": "fixed",
       "_priority": 10,
-      "_ce": 0
+      "_ce": 0,
+      "selectedForRegister": true,
+      "priority": 10,
+      "adDraft": {
+        "id": "af_ibj_a8_001",
+        "title": "【IBJ加盟】オンライン結婚相談所（サブスク）【ベルロード縁結びサポート】",
+        "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B684G+G3ASDU+4MPE+61C2P",
+        "areaCode": null,
+        "vertical": "population",
+        "categoryKey": null,
+        "locationCode": "blog-bottom",
+        "isActive": true,
+        "priority": 50,
+        "startDate": null,
+        "endDate": null,
+        "targetCategories": null,
+        "adType": "banner",
+        "imageUrl": "https://www28.a8.net/svt/bgt?aid=260630944973&wid=001&eno=01&mid=s00000021605001014000&mc=1",
+        "trackingPixelUrl": "https://www19.a8.net/0.gif?a8mat=4B684G+G3ASDU+4MPE+61C2P",
+        "width": 300,
+        "height": 250,
+        "createdAt": null,
+        "updatedAt": null
+      }
     },
     "s00000024586001": {
       "programId": "s00000024586001",
@@ -1261,7 +1497,7 @@
       "company": "株式会社日本マンパワー",
       "vertical": "labor",
       "score": null,
-      "status": "approved",
+      "status": "registered",
       "source": "existing-partnership",
       "history": [
         {
@@ -1269,6 +1505,17 @@
           "to": "approved",
           "at": "2026-07-19T22:34:21.032Z",
           "note": "existing-partnership"
+        },
+        {
+          "from": "approved",
+          "to": "harvested",
+          "at": "2026-07-28T04:08:37.073Z"
+        },
+        {
+          "from": "harvested",
+          "to": "registered",
+          "at": "2026-07-28T04:15:00.969Z",
+          "adId": "af_5_a8_001"
         }
       ],
       "epcYen": 163,
@@ -1276,7 +1523,30 @@
       "rewardYen": 1000,
       "rewardType": "fixed",
       "_priority": 20,
-      "_ce": 99.9353
+      "_ce": 99.9353,
+      "selectedForRegister": true,
+      "priority": 20,
+      "adDraft": {
+        "id": "af_5_a8_001",
+        "title": "国家資格キャリアコンサルタント受講者数累計5万人を突破！【日本マンパワー】",
+        "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B684G+DODI2A+5MF8+5YZ75",
+        "areaCode": null,
+        "vertical": "labor",
+        "categoryKey": null,
+        "locationCode": "blog-bottom",
+        "isActive": true,
+        "priority": 50,
+        "startDate": null,
+        "endDate": null,
+        "targetCategories": null,
+        "adType": "banner",
+        "imageUrl": "https://www21.a8.net/svt/bgt?aid=260630944827&wid=001&eno=01&mid=s00000026234001003000&mc=1",
+        "trackingPixelUrl": "https://www16.a8.net/0.gif?a8mat=4B684G+DODI2A+5MF8+5YZ75",
+        "width": 300,
+        "height": 250,
+        "createdAt": null,
+        "updatedAt": null
+      }
     },
     "s00000021505001": {
       "programId": "s00000021505001",
@@ -1493,7 +1763,7 @@
       "company": "ＬＩＶＥ株式会社",
       "vertical": "education",
       "score": null,
-      "status": "approved",
+      "status": "registered",
       "source": "existing-partnership",
       "history": [
         {
@@ -1501,6 +1771,17 @@
           "to": "approved",
           "at": "2026-07-19T22:34:21.032Z",
           "note": "existing-partnership"
+        },
+        {
+          "from": "approved",
+          "to": "harvested",
+          "at": "2026-07-28T04:08:42.898Z"
+        },
+        {
+          "from": "harvested",
+          "to": "registered",
+          "at": "2026-07-28T04:15:00.969Z",
+          "adId": "af_s00000020839002_a8_001"
         }
       ],
       "epcYen": 0,
@@ -1508,7 +1789,30 @@
       "rewardYen": 5000,
       "rewardType": "fixed",
       "_priority": 10,
-      "_ce": 0
+      "_ce": 0,
+      "selectedForRegister": true,
+      "priority": 10,
+      "adDraft": {
+        "id": "af_s00000020839002_a8_001",
+        "title": "きっかけを作る！【ティントル 不登校専門オンライン個別指導】",
+        "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B614L+UYK8I+4GSM+C0QPD",
+        "areaCode": null,
+        "vertical": "education",
+        "categoryKey": null,
+        "locationCode": "blog-bottom",
+        "isActive": true,
+        "priority": 50,
+        "startDate": null,
+        "endDate": null,
+        "targetCategories": null,
+        "adType": "banner",
+        "imageUrl": "https://www23.a8.net/svt/bgt?aid=260621877052&wid=001&eno=01&mid=s00000020839002019000&mc=1",
+        "trackingPixelUrl": "https://www17.a8.net/0.gif?a8mat=4B614L+UYK8I+4GSM+C0QPD",
+        "width": 300,
+        "height": 250,
+        "createdAt": null,
+        "updatedAt": null
+      }
     },
     "s00000015388005": {
       "programId": "s00000015388005",
@@ -2045,7 +2349,7 @@
       "company": "アイムファクトリー株式会社",
       "vertical": "labor",
       "score": null,
-      "status": "approved",
+      "status": "registered",
       "source": "existing-partnership",
       "history": [
         {
@@ -2053,6 +2357,17 @@
           "to": "approved",
           "at": "2026-07-19T22:34:21.032Z",
           "note": "existing-partnership"
+        },
+        {
+          "from": "approved",
+          "to": "harvested",
+          "at": "2026-07-28T04:08:48.753Z"
+        },
+        {
+          "from": "harvested",
+          "to": "registered",
+          "at": "2026-07-28T04:15:00.969Z",
+          "adId": "af_se-it-web-se_a8_001"
         }
       ],
       "epcYen": 185,
@@ -2060,7 +2375,30 @@
       "rewardYen": 18000,
       "rewardType": "fixed",
       "_priority": 20,
-      "_ce": 93.51749999999998
+      "_ce": 93.51749999999998,
+      "selectedForRegister": true,
+      "priority": 20,
+      "adDraft": {
+        "id": "af_se-it-web-se_a8_001",
+        "title": "社内SEを目指す方必見！IT・Webエンジニアの転職なら【社内SE転職ナビ】",
+        "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B5LK5+6QBFZM+3IZO+I1NCH",
+        "areaCode": null,
+        "vertical": "labor",
+        "categoryKey": null,
+        "locationCode": "blog-bottom",
+        "isActive": true,
+        "priority": 50,
+        "startDate": null,
+        "endDate": null,
+        "targetCategories": null,
+        "adType": "banner",
+        "imageUrl": "https://www26.a8.net/svt/bgt?aid=260601701407&wid=001&eno=01&mid=s00000016458003031000&mc=1",
+        "trackingPixelUrl": "https://www11.a8.net/0.gif?a8mat=4B5LK5+6QBFZM+3IZO+I1NCH",
+        "width": 300,
+        "height": 250,
+        "createdAt": null,
+        "updatedAt": null
+      }
     },
     "s00000019630003": {
       "programId": "s00000019630003",
@@ -2127,7 +2465,7 @@
       "company": "合宿免許受付センター",
       "vertical": "education",
       "score": null,
-      "status": "approved",
+      "status": "registered",
       "source": "existing-partnership",
       "history": [
         {
@@ -2135,6 +2473,17 @@
           "to": "approved",
           "at": "2026-07-19T22:34:21.032Z",
           "note": "existing-partnership"
+        },
+        {
+          "from": "approved",
+          "to": "harvested",
+          "at": "2026-07-28T04:08:54.739Z"
+        },
+        {
+          "from": "harvested",
+          "to": "registered",
+          "at": "2026-07-28T04:15:00.969Z",
+          "adId": "af_s00000010921001_a8_001"
         }
       ],
       "epcYen": 15,
@@ -2142,7 +2491,30 @@
       "rewardYen": 12000,
       "rewardType": "fixed",
       "_priority": 10,
-      "_ce": 2.3070000000000004
+      "_ce": 2.3070000000000004,
+      "selectedForRegister": true,
+      "priority": 10,
+      "adDraft": {
+        "id": "af_s00000010921001_a8_001",
+        "title": "合宿免許受付センター",
+        "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B5LK5+6OJ56A+2C9M+69P01",
+        "areaCode": null,
+        "vertical": "education",
+        "categoryKey": null,
+        "locationCode": "blog-bottom",
+        "isActive": true,
+        "priority": 50,
+        "startDate": null,
+        "endDate": null,
+        "targetCategories": null,
+        "adType": "banner",
+        "imageUrl": "https://www28.a8.net/svt/bgt?aid=260601701404&wid=001&eno=01&mid=s00000010921001053000&mc=1",
+        "trackingPixelUrl": "https://www18.a8.net/0.gif?a8mat=4B5LK5+6OJ56A+2C9M+69P01",
+        "width": 300,
+        "height": 250,
+        "createdAt": null,
+        "updatedAt": null
+      }
     },
     "s00000008903007": {
       "programId": "s00000008903007",
@@ -2426,7 +2798,9 @@
       "epcYen": 0,
       "confirmRatePct": 100,
       "rewardYen": 5000,
-      "rewardType": "fixed"
+      "rewardType": "fixed",
+      "_priority": 10,
+      "_ce": 0
     },
     "s00000027324001": {
       "programId": "s00000027324001",
@@ -2540,7 +2914,9 @@
       "epcYen": 3,
       "confirmRatePct": 96.56,
       "rewardYen": 100,
-      "rewardType": "fixed"
+      "rewardType": "fixed",
+      "_priority": 10,
+      "_ce": 2.8968
     },
     "s00000007238009": {
       "programId": "s00000007238009",
@@ -2562,7 +2938,9 @@
       "epcYen": 0,
       "confirmRatePct": 0,
       "rewardRatePct": 40,
-      "rewardType": "rate"
+      "rewardType": "rate",
+      "_priority": 10,
+      "_ce": 0
     },
     "s00000025896001": {
       "programId": "s00000025896001",
@@ -2775,7 +3153,7 @@
       "company": "アソビュー株式会社",
       "vertical": "travel",
       "score": null,
-      "status": "approved",
+      "status": "registered",
       "source": "existing-partnership",
       "history": [
         {
@@ -2783,6 +3161,17 @@
           "to": "approved",
           "at": "2026-07-19T22:34:21.032Z",
           "note": "existing-partnership"
+        },
+        {
+          "from": "approved",
+          "to": "harvested",
+          "at": "2026-07-28T04:09:00.599Z"
+        },
+        {
+          "from": "harvested",
+          "to": "registered",
+          "at": "2026-07-28T04:15:00.969Z",
+          "adId": "af_s00000019330001_a8_001"
         }
       ],
       "epcYen": 4,
@@ -2790,7 +3179,30 @@
       "rewardRatePct": 3,
       "rewardType": "rate",
       "_priority": 10,
-      "_ce": 3.5492000000000004
+      "_ce": 3.5492000000000004,
+      "selectedForRegister": true,
+      "priority": 10,
+      "adDraft": {
+        "id": "af_s00000019330001_a8_001",
+        "title": "レジャー・遊び体験予約サイト『アソビュー』",
+        "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4AZD81+AG9Z3M+455G+644DT",
+        "areaCode": null,
+        "vertical": "travel",
+        "categoryKey": null,
+        "locationCode": "blog-bottom",
+        "isActive": true,
+        "priority": 50,
+        "startDate": null,
+        "endDate": null,
+        "targetCategories": null,
+        "adType": "banner",
+        "imageUrl": "https://www26.a8.net/svt/bgt?aid=260310961632&wid=001&eno=01&mid=s00000019330001027000&mc=1",
+        "trackingPixelUrl": "https://www13.a8.net/0.gif?a8mat=4AZD81+AG9Z3M+455G+644DT",
+        "width": 300,
+        "height": 250,
+        "createdAt": null,
+        "updatedAt": null
+      }
     },
     "s00000024258001": {
       "programId": "s00000024258001",
@@ -3273,7 +3685,7 @@
       "company": "株式会社キーパートナーズ",
       "vertical": "economy",
       "score": null,
-      "status": "approved",
+      "status": "registered",
       "source": "existing-partnership",
       "history": [
         {
@@ -3281,6 +3693,17 @@
           "to": "approved",
           "at": "2026-07-19T22:34:21.032Z",
           "note": "existing-partnership"
+        },
+        {
+          "from": "approved",
+          "to": "harvested",
+          "at": "2026-07-28T04:09:06.478Z"
+        },
+        {
+          "from": "harvested",
+          "to": "registered",
+          "at": "2026-07-28T04:15:00.969Z",
+          "adId": "af_s00000027243001_a8_001"
         }
       ],
       "epcYen": 0,
@@ -3288,7 +3711,30 @@
       "rewardYen": 1000,
       "rewardType": "fixed",
       "_priority": 10,
-      "_ce": 0
+      "_ce": 0,
+      "selectedForRegister": true,
+      "priority": 10,
+      "adDraft": {
+        "id": "af_s00000027243001_a8_001",
+        "title": "合法節税オンラインセミナー参加",
+        "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4AZA46+8IM9BM+5U7I+5Z6WX",
+        "areaCode": null,
+        "vertical": "economy",
+        "categoryKey": null,
+        "locationCode": "blog-bottom",
+        "isActive": true,
+        "priority": 50,
+        "startDate": null,
+        "endDate": null,
+        "targetCategories": null,
+        "adType": "banner",
+        "imageUrl": "https://www28.a8.net/svt/bgt?aid=260306934515&wid=001&eno=01&mid=s00000027243001004000&mc=1",
+        "trackingPixelUrl": "https://www15.a8.net/0.gif?a8mat=4AZA46+8IM9BM+5U7I+5Z6WX",
+        "width": 300,
+        "height": 250,
+        "createdAt": null,
+        "updatedAt": null
+      }
     },
     "s00000016807002": {
       "programId": "s00000016807002",
@@ -3695,9 +4141,9 @@
       "name": "ahamo",
       "genre": "ahamo",
       "company": "株式会社ＮＴＴドコモ",
-      "vertical": null,
+      "vertical": "energy",
       "score": null,
-      "status": "approved",
+      "status": "registered",
       "source": "existing-partnership",
       "history": [
         {
@@ -3705,19 +4151,60 @@
           "to": "approved",
           "at": "2026-07-19T22:34:21.032Z",
           "note": "existing-partnership"
+        },
+        {
+          "to": "approved",
+          "at": "2026-07-28T04:07:35.612Z",
+          "note": "vertical-resolved-from-curated:energy"
+        },
+        {
+          "from": "approved",
+          "to": "harvested",
+          "at": "2026-07-28T04:09:36.750Z"
+        },
+        {
+          "from": "harvested",
+          "to": "registered",
+          "at": "2026-07-28T04:15:00.969Z",
+          "note": "already-registered-a8mat:4AZD81+AL1FXU+4TIO+61Z81"
         }
       ],
       "epcYen": 157,
       "confirmRatePct": 71.94,
       "rewardYen": 3000,
-      "rewardType": "fixed"
+      "rewardType": "fixed",
+      "_priority": 40,
+      "_ce": 112.94579999999999,
+      "selectedForRegister": true,
+      "priority": 40,
+      "adDraft": {
+        "id": "af_ahamo_a8_001",
+        "title": "ahamo",
+        "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4AZD81+AL1FXU+4TIO+61Z81",
+        "areaCode": null,
+        "vertical": "energy",
+        "categoryKey": null,
+        "locationCode": "blog-bottom",
+        "isActive": true,
+        "priority": 50,
+        "startDate": null,
+        "endDate": null,
+        "targetCategories": null,
+        "adType": "banner",
+        "imageUrl": "https://www26.a8.net/svt/bgt?aid=260310961640&wid=001&eno=01&mid=s00000022488001017000&mc=1",
+        "trackingPixelUrl": "https://www16.a8.net/0.gif?a8mat=4AZD81+AL1FXU+4TIO+61Z81",
+        "width": 300,
+        "height": 250,
+        "createdAt": null,
+        "updatedAt": null
+      }
     },
     "s00000014546016": {
       "programId": "s00000014546016",
       "name": "置くだけ簡単Wi-Fi！30,000円現金キャッシュバック！【SoftBank Airキャンペーン】",
       "genre": "置くだけ簡単Wi-Fi！30,000円現金キャッシュバック！【SoftBank Airキャンペーン】",
       "company": "株式会社ＮＥＸＴ【優良代理店表彰実績多数】",
-      "vertical": null,
+      "vertical": "energy",
       "score": null,
       "status": "approved",
       "source": "existing-partnership",
@@ -3727,12 +4214,19 @@
           "to": "approved",
           "at": "2026-07-19T22:34:21.032Z",
           "note": "existing-partnership"
+        },
+        {
+          "to": "approved",
+          "at": "2026-07-28T04:07:35.617Z",
+          "note": "vertical-resolved-from-curated:energy"
         }
       ],
       "epcYen": 15,
       "confirmRatePct": 35,
       "rewardYen": 10000,
-      "rewardType": "fixed"
+      "rewardType": "fixed",
+      "_priority": 10,
+      "_ce": 5.25
     },
     "s00000001004003": {
       "programId": "s00000001004003",
@@ -3797,9 +4291,9 @@
       "name": "スカパー!新規加入",
       "genre": "スカパー!新規加入",
       "company": "スカパーＪＳＡＴ株式会社",
-      "vertical": null,
+      "vertical": "energy",
       "score": null,
-      "status": "approved",
+      "status": "registered",
       "source": "existing-partnership",
       "history": [
         {
@@ -3807,12 +4301,53 @@
           "to": "approved",
           "at": "2026-07-19T22:34:21.032Z",
           "note": "existing-partnership"
+        },
+        {
+          "to": "approved",
+          "at": "2026-07-28T04:07:35.617Z",
+          "note": "vertical-resolved-from-curated:energy"
+        },
+        {
+          "from": "approved",
+          "to": "harvested",
+          "at": "2026-07-28T04:09:42.790Z"
+        },
+        {
+          "from": "harvested",
+          "to": "registered",
+          "at": "2026-07-28T04:15:00.969Z",
+          "adId": "af_s00000019447001_a8_001"
         }
       ],
       "epcYen": 22,
       "confirmRatePct": 76.34,
       "rewardYen": 3620,
-      "rewardType": "fixed"
+      "rewardType": "fixed",
+      "_priority": 10,
+      "_ce": 16.794800000000002,
+      "selectedForRegister": true,
+      "priority": 10,
+      "adDraft": {
+        "id": "af_s00000019447001_a8_001",
+        "title": "スカパー!新規加入",
+        "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4AZD81+ASS2SY+461Y+6H729",
+        "areaCode": null,
+        "vertical": "energy",
+        "categoryKey": null,
+        "locationCode": "blog-bottom",
+        "isActive": true,
+        "priority": 50,
+        "startDate": null,
+        "endDate": null,
+        "targetCategories": null,
+        "adType": "banner",
+        "imageUrl": "https://www24.a8.net/svt/bgt?aid=260310961653&wid=001&eno=01&mid=s00000019447001088000&mc=1",
+        "trackingPixelUrl": "https://www14.a8.net/0.gif?a8mat=4AZD81+ASS2SY+461Y+6H729",
+        "width": 300,
+        "height": 250,
+        "createdAt": null,
+        "updatedAt": null
+      }
     },
     "s00000014699001": {
       "programId": "s00000014699001",
@@ -3892,7 +4427,9 @@
       "epcYen": 0,
       "confirmRatePct": 100,
       "rewardRatePct": 8,
-      "rewardType": "rate"
+      "rewardType": "rate",
+      "_priority": 10,
+      "_ce": 0
     },
     "s00000025401001": {
       "programId": "s00000025401001",
@@ -3969,7 +4506,7 @@
       "company": "株式会社グッドフェローズ",
       "vertical": "housing",
       "score": null,
-      "status": "approved",
+      "status": "registered",
       "source": "existing-partnership",
       "history": [
         {
@@ -3977,6 +4514,17 @@
           "to": "approved",
           "at": "2026-07-19T22:34:21.032Z",
           "note": "existing-partnership"
+        },
+        {
+          "from": "approved",
+          "to": "harvested",
+          "at": "2026-07-28T04:09:48.739Z"
+        },
+        {
+          "from": "harvested",
+          "to": "registered",
+          "at": "2026-07-28T04:15:00.969Z",
+          "adId": "af_s00000010685001_a8_001"
         }
       ],
       "epcYen": 15,
@@ -3984,7 +4532,30 @@
       "rewardYen": 3000,
       "rewardType": "fixed",
       "_priority": 10,
-      "_ce": 9.998999999999999
+      "_ce": 9.998999999999999,
+      "selectedForRegister": true,
+      "priority": 10,
+      "adDraft": {
+        "id": "af_s00000010685001_a8_001",
+        "title": "太陽光発電の一括無料見積り【タイナビ】",
+        "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4AZD81+A9Q7G2+2AG2+674EP",
+        "areaCode": null,
+        "vertical": "housing",
+        "categoryKey": null,
+        "locationCode": "blog-bottom",
+        "isActive": true,
+        "priority": 50,
+        "startDate": null,
+        "endDate": null,
+        "targetCategories": null,
+        "adType": "banner",
+        "imageUrl": "https://www23.a8.net/svt/bgt?aid=260310961621&wid=001&eno=01&mid=s00000010685001041000&mc=1",
+        "trackingPixelUrl": "https://www16.a8.net/0.gif?a8mat=4AZD81+A9Q7G2+2AG2+674EP",
+        "width": 300,
+        "height": 250,
+        "createdAt": null,
+        "updatedAt": null
+      }
     },
     "s00000018828001": {
       "programId": "s00000018828001",
@@ -4086,7 +4657,9 @@
       "epcYen": 0,
       "confirmRatePct": 0,
       "rewardYen": 2500,
-      "rewardType": "fixed"
+      "rewardType": "fixed",
+      "_priority": 10,
+      "_ce": 0
     },
     "s00000023067003": {
       "programId": "s00000023067003",
@@ -4419,7 +4992,7 @@
       "company": "株式会社ＮｅａｒＭｅ",
       "vertical": "travel",
       "score": null,
-      "status": "approved",
+      "status": "registered",
       "source": "existing-partnership",
       "history": [
         {
@@ -4427,6 +5000,17 @@
           "to": "approved",
           "at": "2026-07-19T22:34:21.032Z",
           "note": "existing-partnership"
+        },
+        {
+          "from": "approved",
+          "to": "harvested",
+          "at": "2026-07-28T04:10:39.107Z"
+        },
+        {
+          "from": "harvested",
+          "to": "registered",
+          "at": "2026-07-28T04:15:00.969Z",
+          "adId": "af_s00000022054001_a8_001"
         }
       ],
       "epcYen": 12,
@@ -4434,7 +5018,30 @@
       "rewardYen": 1000,
       "rewardType": "fixed",
       "_priority": 10,
-      "_ce": 4.4388000000000005
+      "_ce": 4.4388000000000005,
+      "selectedForRegister": true,
+      "priority": 10,
+      "adDraft": {
+        "id": "af_s00000022054001_a8_001",
+        "title": "【空港送迎】自宅と空港をつなぐエアポートシャトルで、次の旅がシェアでおトク になる",
+        "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4AZCG5+DJ0LMA+4Q64+644DT",
+        "areaCode": null,
+        "vertical": "travel",
+        "categoryKey": null,
+        "locationCode": "blog-bottom",
+        "isActive": true,
+        "priority": 50,
+        "startDate": null,
+        "endDate": null,
+        "targetCategories": null,
+        "adType": "banner",
+        "imageUrl": "https://www27.a8.net/svt/bgt?aid=260309957818&wid=001&eno=01&mid=s00000022054001027000&mc=1",
+        "trackingPixelUrl": "https://www18.a8.net/0.gif?a8mat=4AZCG5+DJ0LMA+4Q64+644DT",
+        "width": 250,
+        "height": 250,
+        "createdAt": null,
+        "updatedAt": null
+      }
     },
     "s00000013277005": {
       "programId": "s00000013277005",
@@ -4535,7 +5142,7 @@
       "company": "ＤＥＣＯＨＵＢ合同会社",
       "vertical": "travel",
       "score": null,
-      "status": "approved",
+      "status": "registered",
       "source": "existing-partnership",
       "history": [
         {
@@ -4543,6 +5150,17 @@
           "to": "approved",
           "at": "2026-07-19T22:34:21.032Z",
           "note": "existing-partnership"
+        },
+        {
+          "from": "approved",
+          "to": "harvested",
+          "at": "2026-07-28T04:10:44.960Z"
+        },
+        {
+          "from": "harvested",
+          "to": "registered",
+          "at": "2026-07-28T04:15:00.969Z",
+          "adId": "af_lduvin_a8_001"
         }
       ],
       "epcYen": 6,
@@ -4550,7 +5168,30 @@
       "rewardRatePct": 5,
       "rewardType": "rate",
       "_priority": 10,
-      "_ce": 1.9998
+      "_ce": 1.9998,
+      "selectedForRegister": true,
+      "priority": 10,
+      "adDraft": {
+        "id": "af_lduvin_a8_001",
+        "title": "デザイン・品質にこだわったイタリア製スーツケース通販サイト【LDUVIN】",
+        "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4AZCG5+DEUKDU+55BE+C7DWH",
+        "areaCode": null,
+        "vertical": "travel",
+        "categoryKey": null,
+        "locationCode": "blog-bottom",
+        "isActive": true,
+        "priority": 50,
+        "startDate": null,
+        "endDate": null,
+        "targetCategories": null,
+        "adType": "banner",
+        "imageUrl": "https://www23.a8.net/svt/bgt?aid=260309957811&wid=001&eno=01&mid=s00000024017002050000&mc=1",
+        "trackingPixelUrl": "https://www12.a8.net/0.gif?a8mat=4AZCG5+DEUKDU+55BE+C7DWH",
+        "width": 300,
+        "height": 250,
+        "createdAt": null,
+        "updatedAt": null
+      }
     },
     "s00000016470001": {
       "programId": "s00000016470001",
@@ -4617,7 +5258,7 @@
       "company": "株式会社ＫＵＲＵＫＵＲＵ",
       "vertical": "travel",
       "score": null,
-      "status": "approved",
+      "status": "registered",
       "source": "existing-partnership",
       "history": [
         {
@@ -4625,6 +5266,17 @@
           "to": "approved",
           "at": "2026-07-19T22:34:21.032Z",
           "note": "existing-partnership"
+        },
+        {
+          "from": "approved",
+          "to": "harvested",
+          "at": "2026-07-28T04:10:50.828Z"
+        },
+        {
+          "from": "harvested",
+          "to": "registered",
+          "at": "2026-07-28T04:15:00.969Z",
+          "adId": "af_maimo-amazon-1-maimo_a8_001"
         }
       ],
       "epcYen": 9,
@@ -4632,7 +5284,30 @@
       "rewardRatePct": 10,
       "rewardType": "rate",
       "_priority": 10,
-      "_ce": 9
+      "_ce": 9,
+      "selectedForRegister": true,
+      "priority": 10,
+      "adDraft": {
+        "id": "af_maimo-amazon-1-maimo_a8_001",
+        "title": "MAIMO-amazonスーツケースランキング1位獲得！MAIMOで旅を豊かに。",
+        "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4AZCG5+D15LGY+539S+C2VV5",
+        "areaCode": null,
+        "vertical": "travel",
+        "categoryKey": null,
+        "locationCode": "blog-bottom",
+        "isActive": true,
+        "priority": 50,
+        "startDate": null,
+        "endDate": null,
+        "targetCategories": null,
+        "adType": "banner",
+        "imageUrl": "https://www28.a8.net/svt/bgt?aid=260309957788&wid=001&eno=01&mid=s00000023752002029000&mc=1",
+        "trackingPixelUrl": "https://www19.a8.net/0.gif?a8mat=4AZCG5+D15LGY+539S+C2VV5",
+        "width": 300,
+        "height": 250,
+        "createdAt": null,
+        "updatedAt": null
+      }
     },
     "s00000018767001": {
       "programId": "s00000018767001",
@@ -4665,7 +5340,7 @@
       "company": "株式会社エンデバース",
       "vertical": "labor",
       "score": null,
-      "status": "approved",
+      "status": "registered",
       "source": "existing-partnership",
       "history": [
         {
@@ -4673,6 +5348,17 @@
           "to": "approved",
           "at": "2026-07-19T22:34:21.032Z",
           "note": "existing-partnership"
+        },
+        {
+          "from": "approved",
+          "to": "harvested",
+          "at": "2026-07-28T04:10:56.740Z"
+        },
+        {
+          "from": "harvested",
+          "to": "registered",
+          "at": "2026-07-28T04:15:00.969Z",
+          "note": "already-registered-a8mat:4AZCG4+9Z0EK2+5UK0+5YZ75"
         }
       ],
       "epcYen": 124,
@@ -4680,16 +5366,39 @@
       "rewardYen": 10000,
       "rewardType": "fixed",
       "_priority": 20,
-      "_ce": 64.1328
+      "_ce": 64.1328,
+      "selectedForRegister": true,
+      "priority": 20,
+      "adDraft": {
+        "id": "af_0ok-it_a8_001",
+        "title": "スキル0OK！未経験に寄り添うITエンジニア特化の転職エージェント【キャリアカンパニー】",
+        "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4AZCG4+9Z0EK2+5UK0+5YZ75",
+        "areaCode": null,
+        "vertical": "labor",
+        "categoryKey": null,
+        "locationCode": "blog-bottom",
+        "isActive": true,
+        "priority": 50,
+        "startDate": null,
+        "endDate": null,
+        "targetCategories": null,
+        "adType": "banner",
+        "imageUrl": "https://www20.a8.net/svt/bgt?aid=260309956603&wid=001&eno=01&mid=s00000027288001003000&mc=1",
+        "trackingPixelUrl": "https://www18.a8.net/0.gif?a8mat=4AZCG4+9Z0EK2+5UK0+5YZ75",
+        "width": 300,
+        "height": 250,
+        "createdAt": null,
+        "updatedAt": null
+      }
     },
     "s00000012391003": {
       "programId": "s00000012391003",
       "name": "自然でオシャレ、データ納品の出張撮影マッチングサービス【fotowa (フォトワ) 】",
       "genre": "自然でオシャレ、データ納品の出張撮影マッチングサービス【fotowa (フォトワ) 】",
       "company": "ピクスタ株式会社",
-      "vertical": null,
+      "vertical": "population",
       "score": null,
-      "status": "approved",
+      "status": "registered",
       "source": "existing-partnership",
       "history": [
         {
@@ -4697,12 +5406,53 @@
           "to": "approved",
           "at": "2026-07-19T22:34:21.032Z",
           "note": "existing-partnership"
+        },
+        {
+          "to": "approved",
+          "at": "2026-07-28T04:07:35.617Z",
+          "note": "vertical-resolved-from-curated:population"
+        },
+        {
+          "from": "approved",
+          "to": "harvested",
+          "at": "2026-07-28T04:11:02.705Z"
+        },
+        {
+          "from": "harvested",
+          "to": "registered",
+          "at": "2026-07-28T04:15:00.969Z",
+          "adId": "af_fotowa_a8_001"
         }
       ],
       "epcYen": 14,
       "confirmRatePct": 76.59,
       "rewardYen": 3000,
-      "rewardType": "fixed"
+      "rewardType": "fixed",
+      "_priority": 10,
+      "_ce": 10.7226,
+      "selectedForRegister": true,
+      "priority": 10,
+      "adDraft": {
+        "id": "af_fotowa_a8_001",
+        "title": "自然でオシャレ、データ納品の出張撮影マッチングサービス【fotowa (フォトワ) 】",
+        "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4AZCG2+AGVEPE+2NLY+HWAG1",
+        "areaCode": null,
+        "vertical": "population",
+        "categoryKey": null,
+        "locationCode": "blog-bottom",
+        "isActive": true,
+        "priority": 50,
+        "startDate": null,
+        "endDate": null,
+        "targetCategories": null,
+        "adType": "banner",
+        "imageUrl": "https://www25.a8.net/svt/bgt?aid=260309954633&wid=001&eno=01&mid=s00000012391003006000&mc=1",
+        "trackingPixelUrl": "https://www15.a8.net/0.gif?a8mat=4AZCG2+AGVEPE+2NLY+HWAG1",
+        "width": 300,
+        "height": 250,
+        "createdAt": null,
+        "updatedAt": null
+      }
     },
     "s00000023341001": {
       "programId": "s00000023341001",
@@ -4792,7 +5542,9 @@
       "epcYen": 223,
       "confirmRatePct": 36.84,
       "rewardYen": 15000,
-      "rewardType": "fixed"
+      "rewardType": "fixed",
+      "_priority": 20,
+      "_ce": 82.15320000000001
     },
     "s00000017807001": {
       "programId": "s00000017807001",
@@ -4857,9 +5609,9 @@
       "name": "不用品のことなら【ECOクリーン】",
       "genre": "不用品のことなら【ECOクリーン】",
       "company": "株式会社アシスト",
-      "vertical": null,
+      "vertical": "housing",
       "score": null,
-      "status": "approved",
+      "status": "registered",
       "source": "existing-partnership",
       "history": [
         {
@@ -4867,12 +5619,53 @@
           "to": "approved",
           "at": "2026-07-19T22:34:21.032Z",
           "note": "existing-partnership"
+        },
+        {
+          "to": "approved",
+          "at": "2026-07-28T04:07:35.617Z",
+          "note": "vertical-resolved-from-curated:housing"
+        },
+        {
+          "from": "approved",
+          "to": "harvested",
+          "at": "2026-07-28T04:11:08.689Z"
+        },
+        {
+          "from": "harvested",
+          "to": "registered",
+          "at": "2026-07-28T04:15:00.969Z",
+          "note": "already-registered-a8mat:4AZCG4+AABN1U+36X8+15P77L"
         }
       ],
       "epcYen": 19,
       "confirmRatePct": 75.55,
       "rewardYen": 1000,
-      "rewardType": "fixed"
+      "rewardType": "fixed",
+      "_priority": 10,
+      "_ce": 14.3545,
+      "selectedForRegister": true,
+      "priority": 10,
+      "adDraft": {
+        "id": "af_eco_a8_001",
+        "title": "不用品のことなら【ECOクリーン】",
+        "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4AZCG4+AABN1U+36X8+15P77L",
+        "areaCode": null,
+        "vertical": "housing",
+        "categoryKey": null,
+        "locationCode": "blog-bottom",
+        "isActive": true,
+        "priority": 50,
+        "startDate": null,
+        "endDate": null,
+        "targetCategories": null,
+        "adType": "banner",
+        "imageUrl": "https://www25.a8.net/svt/bgt?aid=260309956622&wid=001&eno=01&mid=s00000014894007004000&mc=1",
+        "trackingPixelUrl": "https://www11.a8.net/0.gif?a8mat=4AZCG4+AABN1U+36X8+15P77L",
+        "width": 300,
+        "height": 250,
+        "createdAt": null,
+        "updatedAt": null
+      }
     },
     "s00000020949005": {
       "programId": "s00000020949005",
@@ -4949,7 +5742,7 @@
       "company": "株式会社エイチームライフデザイン",
       "vertical": "housing",
       "score": null,
-      "status": "approved",
+      "status": "registered",
       "source": "existing-partnership",
       "history": [
         {
@@ -4957,6 +5750,17 @@
           "to": "approved",
           "at": "2026-07-19T22:34:21.032Z",
           "note": "existing-partnership"
+        },
+        {
+          "from": "approved",
+          "to": "harvested",
+          "at": "2026-07-28T04:11:14.524Z"
+        },
+        {
+          "from": "harvested",
+          "to": "registered",
+          "at": "2026-07-28T04:15:00.969Z",
+          "note": "already-registered-a8mat:4AZCG4+A6R1F6+ZXM+I7NE9"
         }
       ],
       "epcYen": 11,
@@ -4964,7 +5768,30 @@
       "rewardYen": 667,
       "rewardType": "fixed",
       "_priority": 10,
-      "_ce": 11
+      "_ce": 11,
+      "selectedForRegister": true,
+      "priority": 10,
+      "adDraft": {
+        "id": "af_s00000004657003_a8_001",
+        "title": "引越し一括見積サービス【引越し侍】",
+        "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4AZCG4+A6R1F6+ZXM+I7NE9",
+        "areaCode": null,
+        "vertical": "housing",
+        "categoryKey": null,
+        "locationCode": "blog-bottom",
+        "isActive": true,
+        "priority": 50,
+        "startDate": null,
+        "endDate": null,
+        "targetCategories": null,
+        "adType": "banner",
+        "imageUrl": "https://www29.a8.net/svt/bgt?aid=260309956616&wid=001&eno=01&mid=s00000004657003059000&mc=1",
+        "trackingPixelUrl": "https://www18.a8.net/0.gif?a8mat=4AZCG4+A6R1F6+ZXM+I7NE9",
+        "width": 300,
+        "height": 250,
+        "createdAt": null,
+        "updatedAt": null
+      }
     },
     "s00000007133001": {
       "programId": "s00000007133001",
@@ -5074,7 +5901,9 @@
       "epcYen": 1,
       "confirmRatePct": 100,
       "rewardYen": 10900,
-      "rewardType": "fixed"
+      "rewardType": "fixed",
+      "_priority": 10,
+      "_ce": 1
     },
     "s00000026135001": {
       "programId": "s00000026135001",
@@ -5096,7 +5925,9 @@
       "epcYen": 1,
       "confirmRatePct": 100,
       "rewardRatePct": 2,
-      "rewardType": "rate"
+      "rewardType": "rate",
+      "_priority": 10,
+      "_ce": 1
     },
     "s00000025671001": {
       "programId": "s00000025671001",
@@ -5118,7 +5949,9 @@
       "epcYen": 2,
       "confirmRatePct": 100,
       "rewardRatePct": 5,
-      "rewardType": "rate"
+      "rewardType": "rate",
+      "_priority": 10,
+      "_ce": 2
     },
     "s00000027148002": {
       "programId": "s00000027148002",
@@ -5195,7 +6028,7 @@
       "company": "株式会社未来保険",
       "vertical": "mobility",
       "score": null,
-      "status": "approved",
+      "status": "registered",
       "source": "existing-partnership",
       "history": [
         {
@@ -5203,6 +6036,17 @@
           "to": "approved",
           "at": "2026-07-19T22:34:21.032Z",
           "note": "existing-partnership"
+        },
+        {
+          "from": "approved",
+          "to": "harvested",
+          "at": "2026-07-28T04:11:20.371Z"
+        },
+        {
+          "from": "harvested",
+          "to": "registered",
+          "at": "2026-07-28T04:15:00.969Z",
+          "note": "already-registered-a8mat:4AZ703+GGZRAQ+5TH4+609HT"
         }
       ],
       "epcYen": 0,
@@ -5210,7 +6054,30 @@
       "rewardYen": 10000,
       "rewardType": "fixed",
       "_priority": 10,
-      "_ce": 0
+      "_ce": 0,
+      "selectedForRegister": true,
+      "priority": 10,
+      "adDraft": {
+        "id": "af_10_a8_001",
+        "title": "10台以上の自動車保険（フリート契約）",
+        "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4AZ703+GGZRAQ+5TH4+609HT",
+        "areaCode": null,
+        "vertical": "mobility",
+        "categoryKey": null,
+        "locationCode": "blog-bottom",
+        "isActive": true,
+        "priority": 50,
+        "startDate": null,
+        "endDate": null,
+        "targetCategories": null,
+        "adType": "banner",
+        "imageUrl": "https://www25.a8.net/svt/bgt?aid=260302899996&wid=001&eno=01&mid=s00000027148001009000&mc=1",
+        "trackingPixelUrl": "https://www10.a8.net/0.gif?a8mat=4AZ703+GGZRAQ+5TH4+609HT",
+        "width": 300,
+        "height": 250,
+        "createdAt": null,
+        "updatedAt": null
+      }
     },
     "s00000022169001": {
       "programId": "s00000022169001",
@@ -5300,7 +6167,9 @@
       "epcYen": 5,
       "confirmRatePct": 84.5,
       "rewardYen": 500,
-      "rewardType": "fixed"
+      "rewardType": "fixed",
+      "_priority": 10,
+      "_ce": 4.225
     },
     "s00000020001003": {
       "programId": "s00000020001003",
@@ -5322,7 +6191,9 @@
       "epcYen": 0,
       "confirmRatePct": 100,
       "rewardRatePct": 5.4,
-      "rewardType": "rate"
+      "rewardType": "rate",
+      "_priority": 10,
+      "_ce": 0
     },
     "s00000018486001": {
       "programId": "s00000018486001",
@@ -5344,7 +6215,9 @@
       "epcYen": 0,
       "confirmRatePct": 25,
       "rewardRatePct": 5,
-      "rewardType": "rate"
+      "rewardType": "rate",
+      "_priority": 10,
+      "_ce": 0
     },
     "s00000020001001": {
       "programId": "s00000020001001",
@@ -5366,7 +6239,9 @@
       "epcYen": 3,
       "confirmRatePct": 87.38,
       "rewardRatePct": 6.5,
-      "rewardType": "rate"
+      "rewardType": "rate",
+      "_priority": 10,
+      "_ce": 2.6213999999999995
     },
     "s00000023754006": {
       "programId": "s00000023754006",
@@ -5388,7 +6263,9 @@
       "epcYen": 0,
       "confirmRatePct": 16.66,
       "rewardYen": 500,
-      "rewardType": "fixed"
+      "rewardType": "fixed",
+      "_priority": 10,
+      "_ce": 0
     },
     "s00000024293001": {
       "programId": "s00000024293001",
@@ -5465,7 +6342,7 @@
       "company": "株式会社ｒｅｍｅｎｔａｌ",
       "vertical": "education",
       "score": null,
-      "status": "approved",
+      "status": "registered",
       "source": "existing-partnership",
       "history": [
         {
@@ -5473,6 +6350,17 @@
           "to": "approved",
           "at": "2026-07-19T22:34:21.032Z",
           "note": "existing-partnership"
+        },
+        {
+          "from": "approved",
+          "to": "harvested",
+          "at": "2026-07-28T04:11:26.277Z"
+        },
+        {
+          "from": "harvested",
+          "to": "registered",
+          "at": "2026-07-28T04:15:00.969Z",
+          "adId": "af_kimochi_a8_001"
         }
       ],
       "epcYen": 1,
@@ -5480,7 +6368,30 @@
       "rewardYen": 5500,
       "rewardType": "fixed",
       "_priority": 10,
-      "_ce": 0.6363
+      "_ce": 0.6363,
+      "selectedForRegister": true,
+      "priority": 10,
+      "adDraft": {
+        "id": "af_kimochi_a8_001",
+        "title": "公認心理師（国家資格）のみが登録！オンライン心理カウンセリング【Kimochi】",
+        "htmlContent": "https://px.a8.net/svt/ejp?a8mat=459VF2+1SW9PU+5OI8+5ZEMP",
+        "areaCode": null,
+        "vertical": "education",
+        "categoryKey": null,
+        "locationCode": "blog-bottom",
+        "isActive": true,
+        "priority": 50,
+        "startDate": null,
+        "endDate": null,
+        "targetCategories": null,
+        "adType": "banner",
+        "imageUrl": "https://www24.a8.net/svt/bgt?aid=250723406109&wid=001&eno=01&mid=s00000026504001005000&mc=1",
+        "trackingPixelUrl": "https://www11.a8.net/0.gif?a8mat=459VF2+1SW9PU+5OI8+5ZEMP",
+        "width": 300,
+        "height": 250,
+        "createdAt": null,
+        "updatedAt": null
+      }
     },
     "s00000026954002": {
       "programId": "s00000026954002",
@@ -5550,7 +6461,9 @@
       "epcYen": 1,
       "confirmRatePct": 100,
       "rewardRatePct": 10,
-      "rewardType": "rate"
+      "rewardType": "rate",
+      "_priority": 10,
+      "_ce": 1
     },
     "s00000013307001": {
       "programId": "s00000013307001",
@@ -5757,7 +6670,614 @@
         "error": "session-expired",
         "at": "2026-07-19T23:03:53.206Z"
       }
+    },
+    "s00000019877001": {
+      "programId": "s00000019877001",
+      "name": "手作り結婚指輪・婚約指輪の来店予約【鎌倉彫金工房】",
+      "genre": "population 手作り結婚指輪・婚約指輪の来店予約【鎌倉彫金工房】",
+      "a8mat": null,
+      "vertical": null,
+      "score": 0.49099000000000015,
+      "status": "applied",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-07-28T02:35:26.694Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-07-28T02:44:44.295Z"
+        }
+      ],
+      "rewardYen": 8000,
+      "epcYen": 62,
+      "confirmRatePct": 66.66,
+      "rewardType": "fixed"
+    },
+    "s00000024191001": {
+      "programId": "s00000024191001",
+      "name": "体験希望者が1万人を突破！月々2,760円〜で始めるリモート歯科矯正【DPEARL】",
+      "genre": "health 体験希望者が1万人を突破！月々2,760円〜で始めるリモート歯科矯正【DPEARL】",
+      "a8mat": null,
+      "vertical": null,
+      "score": 0.48956500000000003,
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-07-28T02:35:26.694Z"
+        }
+      ],
+      "rewardYen": 7500,
+      "epcYen": 42,
+      "confirmRatePct": 85.71,
+      "rewardType": "fixed"
+    },
+    "s00000013334001": {
+      "programId": "s00000013334001",
+      "name": "日本全国に展開している音楽教室【シアーミュージック】無料体験レッスン申込募集",
+      "genre": "education 日本全国に展開している音楽教室【シアーミュージック】無料体験レッスン申込募集",
+      "a8mat": null,
+      "vertical": null,
+      "score": 0.472685,
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-07-28T02:35:26.694Z"
+        }
+      ],
+      "rewardYen": 7407,
+      "epcYen": 167,
+      "confirmRatePct": 35.27,
+      "rewardType": "fixed"
+    },
+    "s00000027372001": {
+      "programId": "s00000027372001",
+      "name": "骨盤をケアし、アクティブな毎日へ締めつけない体幹サポート【DERIT TECH(デリットテック)】",
+      "genre": "health 骨盤をケアし、アクティブな毎日へ締めつけない体幹サポート【DERIT TECH(デリットテック)】",
+      "a8mat": null,
+      "vertical": null,
+      "score": 0.44600000000000006,
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-07-28T02:35:26.694Z"
+        }
+      ],
+      "rewardYen": 6400,
+      "confirmRatePct": 100,
+      "rewardType": "fixed"
+    },
+    "s00000017718022": {
+      "programId": "s00000017718022",
+      "name": "スマホのパケット量が使い放題で工事が不要！【SoftbankAir】",
+      "genre": "energy スマホのパケット量が使い放題で工事が不要！【SoftbankAir】",
+      "a8mat": null,
+      "vertical": null,
+      "score": 0.44000000000000006,
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-07-28T02:35:26.694Z"
+        }
+      ],
+      "rewardYen": 15000,
+      "rewardType": "fixed"
+    },
+    "s00000025687001": {
+      "programId": "s00000025687001",
+      "name": "浮気・不倫調査の探偵なら信頼と実績の【ピ・アイ・オ】",
+      "genre": "population 浮気・不倫調査の探偵なら信頼と実績の【ピ・アイ・オ】",
+      "a8mat": null,
+      "vertical": null,
+      "score": 0.44000000000000006,
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-07-28T02:35:26.694Z"
+        }
+      ],
+      "rewardYen": 10000,
+      "rewardType": "fixed"
+    },
+    "s00000010841004": {
+      "programId": "s00000010841004",
+      "name": "当社グループ独占の人気商品！【家庭用ルームランナー販売店】",
+      "genre": "health 当社グループ独占の人気商品！【家庭用ルームランナー販売店】",
+      "a8mat": null,
+      "vertical": null,
+      "score": 0.44000000000000006,
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-07-28T02:35:26.694Z"
+        }
+      ],
+      "rewardYen": 11278,
+      "rewardType": "fixed"
+    },
+    "s00000002404014": {
+      "programId": "s00000002404014",
+      "name": "中高男子の包茎諸君120万人にターゲットを絞った包茎グッズ【キトー君】",
+      "genre": "health 中高男子の包茎諸君120万人にターゲットを絞った包茎グッズ【キトー君】",
+      "a8mat": null,
+      "vertical": "health",
+      "score": 0.44000000000000006,
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-07-28T02:35:26.694Z"
+        }
+      ],
+      "rewardYen": 10000,
+      "rewardType": "fixed"
+    },
+    "s00000026977002": {
+      "programId": "s00000026977002",
+      "name": "世界60カ国以上で支持されるCFD取引プラットフォーム【Plus500証券】",
+      "genre": "economy 世界60カ国以上で支持されるCFD取引プラットフォーム【Plus500証券】",
+      "a8mat": null,
+      "vertical": "economy",
+      "score": 0.44000000000000006,
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-07-28T02:35:26.694Z"
+        }
+      ],
+      "rewardYen": 30000,
+      "rewardType": "fixed"
+    },
+    "s00000026977003": {
+      "programId": "s00000026977003",
+      "name": "世界60カ国以上で支持されるKO（ノックアウト）オプション取引プラットフォーム【Plus500証券】",
+      "genre": "economy 世界60カ国以上で支持されるKO（ノックアウト）オプション取引プラットフォーム【Plus500証券】",
+      "a8mat": null,
+      "vertical": "economy",
+      "score": 0.44000000000000006,
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-07-28T02:35:26.694Z"
+        }
+      ],
+      "rewardYen": 30000,
+      "rewardType": "fixed"
+    },
+    "s00000026977001": {
+      "programId": "s00000026977001",
+      "name": "世界60カ国以上で支持されるFX取引プラットフォーム【Plus500証券】",
+      "genre": "economy 世界60カ国以上で支持されるFX取引プラットフォーム【Plus500証券】",
+      "a8mat": null,
+      "vertical": "economy",
+      "score": 0.44000000000000006,
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-07-28T02:35:26.694Z"
+        }
+      ],
+      "rewardYen": 16500,
+      "rewardType": "fixed"
+    },
+    "s00000023903002": {
+      "programId": "s00000023903002",
+      "name": "(税込19,900円)から自由にはじめる完全個室レンタルオフィス「スペラボ」",
+      "genre": "housing (税込19,900円)から自由にはじめる完全個室レンタルオフィス「スペラボ」",
+      "a8mat": null,
+      "vertical": "housing",
+      "score": 0.44000000000000006,
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-07-28T02:35:26.694Z"
+        }
+      ],
+      "rewardYen": 20000,
+      "rewardType": "fixed"
+    },
+    "s00000000040014": {
+      "programId": "s00000000040014",
+      "name": "【公式】BIGLOBE WiMAX +5G",
+      "genre": "energy 【公式】BIGLOBE WiMAX +5G",
+      "a8mat": null,
+      "vertical": null,
+      "score": 0.435655,
+      "status": "applied",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-07-28T02:35:26.694Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "note": "already-on-a8-no-send"
+        }
+      ],
+      "rewardYen": 5000,
+      "epcYen": 206,
+      "confirmRatePct": 61.77,
+      "rewardType": "fixed"
+    },
+    "s00000024161001": {
+      "programId": "s00000024161001",
+      "name": "令和の虎で「魔法のブラシ」と紹介。MAQUIAベスコス受賞のヘアケアブランド【HAIRSTAR】",
+      "genre": "health 令和の虎で「魔法のブラシ」と紹介。MAQUIAベスコス受賞のヘアケアブランド【HAIRSTAR】",
+      "a8mat": null,
+      "vertical": null,
+      "score": 0.4335,
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-07-28T02:35:26.694Z"
+        }
+      ],
+      "rewardRatePct": 30,
+      "epcYen": 7,
+      "confirmRatePct": 100,
+      "rewardType": "rate"
+    },
+    "s00000002404001": {
+      "programId": "s00000002404001",
+      "name": "世界で唯一の真性包茎矯正グッズ【キトー君】",
+      "genre": "health 世界で唯一の真性包茎矯正グッズ【キトー君】",
+      "a8mat": null,
+      "vertical": "health",
+      "score": 0.43300000000000005,
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-07-28T02:35:26.694Z"
+        }
+      ],
+      "rewardYen": 6000,
+      "epcYen": 6,
+      "confirmRatePct": 100,
+      "rewardType": "fixed"
+    },
+    "s00000021923002": {
+      "programId": "s00000021923002",
+      "name": "花嫁の不安をトキハナツ式場紹介サービス「トキハナ」",
+      "genre": "population 花嫁の不安をトキハナツ式場紹介サービス「トキハナ」",
+      "a8mat": null,
+      "vertical": null,
+      "score": 0.430095,
+      "status": "applied",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-07-28T02:35:26.694Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-07-28T02:44:53.832Z"
+        }
+      ],
+      "rewardYen": 7974,
+      "epcYen": 28,
+      "confirmRatePct": 38.09,
+      "rewardType": "fixed"
+    },
+    "s00000022413001": {
+      "programId": "s00000022413001",
+      "name": "フリーランスのコンサルタント向け案件紹介サービス【Strategy Consultant Bank】",
+      "genre": "labor フリーランスのコンサルタント向け案件紹介サービス【Strategy Consultant Bank】",
+      "a8mat": null,
+      "vertical": "labor",
+      "score": 0.42336000000000007,
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-07-28T02:35:26.694Z"
+        }
+      ],
+      "rewardYen": 8000,
+      "epcYen": 54,
+      "confirmRatePct": 24.24,
+      "rewardType": "fixed"
+    },
+    "s00000011875008": {
+      "programId": "s00000011875008",
+      "name": "【VisionWiMAX】選べるプラン内容",
+      "genre": "energy 【VisionWiMAX】選べるプラン内容",
+      "a8mat": null,
+      "vertical": null,
+      "score": 0.41999,
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-07-28T02:35:26.694Z"
+        }
+      ],
+      "rewardYen": 7000,
+      "confirmRatePct": 66.66,
+      "rewardType": "fixed"
+    },
+    "s00000007033001": {
+      "programId": "s00000007033001",
+      "name": "トランクルームなら掲載物件数No.1の【ハローストレージ】！",
+      "genre": "housing トランクルームなら掲載物件数No.1の【ハローストレージ】！",
+      "a8mat": null,
+      "vertical": "housing",
+      "score": 0.418755,
+      "status": "registered",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-07-28T02:35:26.694Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-07-28T02:45:12.894Z"
+        },
+        {
+          "from": "applied",
+          "to": "approved",
+          "at": "2026-07-28T02:46:02.004Z"
+        },
+        {
+          "to": "approved",
+          "at": "2026-07-28T04:07:35.617Z",
+          "note": "vertical-resolved-from-curated:housing"
+        },
+        {
+          "from": "approved",
+          "to": "harvested",
+          "at": "2026-07-28T04:08:13.507Z"
+        },
+        {
+          "from": "harvested",
+          "to": "registered",
+          "at": "2026-07-28T04:15:00.969Z",
+          "adId": "af_no-1_a8_003"
+        }
+      ],
+      "rewardYen": 6000,
+      "epcYen": 13,
+      "confirmRatePct": 88.17,
+      "rewardType": "fixed",
+      "_priority": 10,
+      "_ce": 11.462100000000001,
+      "selectedForRegister": true,
+      "priority": 10,
+      "adDraft": {
+        "id": "af_no-1_a8_001",
+        "title": "トランクルームなら掲載物件数No.1の【ハローストレージ】！",
+        "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B8B4S+987WC2+1I9M+5ZU2A",
+        "areaCode": null,
+        "vertical": "housing",
+        "categoryKey": null,
+        "locationCode": "sidebar-bottom",
+        "isActive": true,
+        "priority": 50,
+        "startDate": null,
+        "endDate": null,
+        "targetCategories": null,
+        "adType": "text",
+        "imageUrl": null,
+        "trackingPixelUrl": "https://www19.a8.net/0.gif?a8mat=4B8B4S+987WC2+1I9M+5ZU2A",
+        "width": null,
+        "height": null,
+        "createdAt": null,
+        "updatedAt": null
+      }
+    },
+    "s00000019044004": {
+      "programId": "s00000019044004",
+      "name": "【BBIQ(ビビック)】当サイト特典！最大30,000円キャッシュバック！",
+      "genre": "energy 【BBIQ(ビビック)】当サイト特典！最大30,000円キャッシュバック！",
+      "a8mat": null,
+      "vertical": null,
+      "score": 0.4185000000000001,
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-07-28T02:35:26.694Z"
+        }
+      ],
+      "rewardYen": 9000,
+      "epcYen": 37,
+      "rewardType": "fixed"
+    },
+    "s00000020563001": {
+      "programId": "s00000020563001",
+      "name": "画期的な割引の仕組みでお得な結婚式を！式場下見予約サイト【結婚スタイルマガジン】",
+      "genre": "population 画期的な割引の仕組みでお得な結婚式を！式場下見予約サイト【結婚スタイルマガジン】",
+      "a8mat": null,
+      "vertical": "population",
+      "score": 0.40052,
+      "status": "applied",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-07-28T02:35:26.694Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-07-28T02:45:03.319Z"
+        }
+      ],
+      "rewardYen": 5263,
+      "confirmRatePct": 100,
+      "rewardType": "fixed"
+    },
+    "s00000010235003": {
+      "programId": "s00000010235003",
+      "name": "【MEN’S TBC】エステティック体験コース申込",
+      "genre": "health 【MEN’S TBC】エステティック体験コース申込",
+      "a8mat": null,
+      "vertical": "health",
+      "score": 0.3731,
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-07-28T02:35:26.694Z"
+        }
+      ],
+      "rewardYen": 4490,
+      "epcYen": 7,
+      "confirmRatePct": 100,
+      "rewardType": "fixed"
+    },
+    "s00000000204051": {
+      "programId": "s00000000204051",
+      "name": "膝に直接貼るジェルシート型ヒアルロン酸『ヒアロエイド』",
+      "genre": "health 膝に直接貼るジェルシート型ヒアルロン酸『ヒアロエイド』",
+      "a8mat": null,
+      "vertical": null,
+      "score": 0.37188,
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-07-28T02:35:26.694Z"
+        }
+      ],
+      "rewardYen": 4422,
+      "epcYen": 10,
+      "confirmRatePct": 100,
+      "rewardType": "fixed"
+    },
+    "s00000024229002": {
+      "programId": "s00000024229002",
+      "name": "湘南美容クリニック【オトコの根こそぎレーザー脱毛】",
+      "genre": "health 湘南美容クリニック【オトコの根こそぎレーザー脱毛】",
+      "a8mat": null,
+      "vertical": "health",
+      "score": 0.36377500000000007,
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-07-28T02:35:26.694Z"
+        }
+      ],
+      "rewardYen": 5000,
+      "epcYen": 119,
+      "confirmRatePct": 42.85,
+      "rewardType": "fixed"
+    },
+    "s00000022413003": {
+      "programId": "s00000022413003",
+      "name": "フリーのIT・SAPコンサルタントが活躍する案件紹介プラットフォーム【IT Consultant Bank】",
+      "genre": "labor フリーのIT・SAPコンサルタントが活躍する案件紹介プラットフォーム【IT Consultant Bank】",
+      "a8mat": null,
+      "vertical": null,
+      "score": 0.3600000000000001,
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-07-28T02:35:26.694Z"
+        }
+      ],
+      "rewardYen": 8000,
+      "rewardType": "fixed"
+    },
+    "s00000008714006": {
+      "programId": "s00000008714006",
+      "name": "レディースアートネイチャー",
+      "genre": "health レディースアートネイチャー",
+      "a8mat": null,
+      "vertical": null,
+      "score": 0.35884000000000005,
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-07-28T02:35:26.694Z"
+        }
+      ],
+      "rewardYen": 7971,
+      "rewardType": "fixed"
+    },
+    "s00000019140007": {
+      "programId": "s00000019140007",
+      "name": "【産後・子育てママ専用骨盤ガードル】マジカルシェリー",
+      "genre": "health 【産後・子育てママ専用骨盤ガードル】マジカルシェリー",
+      "a8mat": null,
+      "vertical": "population",
+      "score": 0.3530000000000001,
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-07-28T02:35:26.694Z"
+        }
+      ],
+      "rewardYen": 4000,
+      "epcYen": 6,
+      "confirmRatePct": 100,
+      "rewardType": "fixed"
+    },
+    "s00000024621001": {
+      "programId": "s00000024621001",
+      "name": "姿勢の専門家が開発！はくだけ整体【整体ショーツNEO+】",
+      "genre": "health 姿勢の専門家が開発！はくだけ整体【整体ショーツNEO+】",
+      "a8mat": null,
+      "vertical": "health",
+      "score": 0.3520000000000001,
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-07-28T02:35:26.694Z"
+        }
+      ],
+      "rewardRatePct": 20,
+      "epcYen": 4,
+      "confirmRatePct": 100,
+      "rewardType": "rate"
     }
   },
-  "updatedAt": "2026-07-19T23:31:11.137Z"
+  "updatedAt": "2026-07-28T04:15:00.969Z"
 }

@@ -29,9 +29,10 @@
 
 import fs from "node:fs";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 
 const METRICS_DIR = path.resolve(
-  new URL(".", import.meta.url).pathname,
+  path.dirname(fileURLToPath(import.meta.url)),
   "../../../packages/data-configs/src/metrics",
 );
 

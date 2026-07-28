@@ -29,8 +29,9 @@
 
 import fs from "node:fs";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 
-const PROJECT_ROOT = path.resolve(new URL(".", import.meta.url).pathname, "../../..");
+const PROJECT_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../..");
 const METRICS_DIR = path.join(PROJECT_ROOT, "packages/data-configs/src/metrics");
 const R2_BASE = process.env.R2_PUBLIC_FETCH_URL || "https://storage.stats47.jp";
 const DEFAULT_SRC = path.join(PROJECT_ROOT, ".local/blog-srclink-fix/_src");

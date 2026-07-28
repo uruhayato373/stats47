@@ -87,3 +87,5 @@
 - [feedback_sticky_aside_max_h.md](feedback_sticky_aside_max_h.md) — CSS Grid(items-start)内sticky asideにmax-h-[calc(100vh-5.5rem)]+overflow必須。削除でフッター非表示(2度踏んだ)
 - [feedback_workers_self_fetch_unbundle.md](feedback_workers_self_fetch_unbundle.md) — OpenNext Workersで静的アセット外す時、自ドメインfetchはdegrade(self-fetch)。ASSETS binding使う。デプロイ+スモークで検証
 - [project_note_update_mode_learnings.md](project_note_update_mode_learnings.md) — note --update実機(2026-07-10・36本)。do_updateはShadow-DOM eval-click必須/paid_setlineはDOM境界必須。browser-useはtemp profileコピー。カバーSSOT=frontmatter+背景+generator
+- [project_asp_site_attribution.md](project_asp_site_attribution.md) — A8/もしも/afb は stats47 と doboku-note が同一口座に同居。サイト帰属assertを通さないと他サイトの数値を誤認(afbで実害)。A8成果でstats47単独と言えるのはsite-rowsのみ
+- [feedback_playwright_profile_dual_os.md](feedback_playwright_profile_dual_os.md) — Playwrightプロファイルのrootは「Mac本体が実在すればそこ、無ければファイル位置由来のrepo root」。Mac直書きはWindowsで静かに再ログイン、cwdは分裂

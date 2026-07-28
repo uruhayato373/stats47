@@ -26,6 +26,7 @@
 
 import fs from "node:fs";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 import os from "node:os";
 import { execFileSync } from "node:child_process";
 
@@ -40,7 +41,7 @@ const DENOM_URL = "https://storage.stats47.jp/app/stats/junior-high-school-stude
 const DENOM_YEAR = "2024"; // 学校基本調査(令和6年度)。中体連調査(令和7年6月時点)と最大1年ズレるが
 // 都道府県別中学生数の直近R2値としてこれを使う (provenance に明記)。
 
-const PROJECT_ROOT = path.resolve(new URL(".", import.meta.url).pathname, "../../..");
+const PROJECT_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../..");
 
 // JIS順 都道府県 (中体連PDFの表番号順と一致)
 const PREF_ORDER = [

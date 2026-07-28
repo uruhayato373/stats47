@@ -9,6 +9,7 @@ import {
   uniqueId,
   renderEntry,
   insertEntry,
+  buildAdDraft,
 } from "../lib/a8-append-core.mjs";
 
 const SRC = `import type { AffiliateAd } from "../src/features/ads/types";
@@ -125,4 +126,56 @@ test("insertEntry: 空配列にも挿入できる", () => {
 
 test("insertEntry: 壊れた tail は throw", () => {
   assert.throws(() => insertEntry("const x = 1;", "  {},"), /invalid tail/);
+});
+
+// ── buildAdDraft の locationCode 振り分け (2026-07-28 追加) ─────────────────
+// banner 解決は locationCode を見ないが text 解決は見る (sidebar-bottom / footer)。
+// text を blog-bottom に置くと banner 経路にも text 経路にも乗らず永久に表示されない。
+
+const BANNER_FIELDS = {
+  htmlContent: "https://px.a8.net/svt/ejp?a8mat=BANNER",
+  imageUrl: "https://www23.a8.net/svt/bgt?aid=1&mid=s00000000000001001000",
+  trackingPixelUrl: "https://www15.a8.net/0.gif?a8mat=BANNER",
+  width: 300,
+  height: 250,
+  adType: "banner",
+};
+const TEXT_FIELDS = {
+  htmlContent: "https://px.a8.net/svt/ejp?a8mat=TEXT",
+  imageUrl: null,
+  trackingPixelUrl: null,
+  width: null,
+  height: null,
+  adType: "text",
+};
+
+test("buildAdDraft: text は sidebar-bottom に置く (blog-bottom だと表示されない)", () => {
+  const d = buildAdDraft({ name: "Sample Program", programId: "s00000000000001", vertical: "energy" }, TEXT_FIELDS);
+  assert.equal(d.locationCode, "sidebar-bottom");
+  assert.equal(d.adType, "text");
+  assert.equal(d.width, null);
+});
+
+test("buildAdDraft: banner は blog-bottom (banner 解決は locationCode を見ないため既定のまま)", () => {
+  const d = buildAdDraft({ name: "Sample Program", programId: "s00000000000001", vertical: "energy" }, BANNER_FIELDS);
+  assert.equal(d.locationCode, "blog-bottom");
+  assert.equal(d.adType, "banner");
+  assert.equal(d.width, 300);
+});
+
+test("buildAdDraft: 日本語のみの名前でも programId から一意な id を作る", () => {
+  const d = buildAdDraft({ name: "【公式】通信サービス", programId: "s00000012345001", vertical: "energy" }, BANNER_FIELDS);
+  assert.equal(d.id, "af_s00000012345001_a8_001");
+});
+
+test("buildAdDraft: 混在名は ascii 部分だけを繋いで slug 化する", () => {
+  // 非 ascii 連続は 1 個の "-" に畳まれる ("gmo とくとく bb" → "gmo-bb")。
+  // 実在の af_gmo-bb-au_a8_001 と同じ作られ方。
+  const d = buildAdDraft({ name: "GMO とくとく BB", programId: "s1", vertical: "energy" }, BANNER_FIELDS);
+  assert.equal(d.id, "af_gmo-bb_a8_001");
+});
+
+test("buildAdDraft: vertical 未解決なら null を保つ (append 側で弾かせる)", () => {
+  const d = buildAdDraft({ name: "X", programId: "s1" }, BANNER_FIELDS);
+  assert.equal(d.vertical, null);
 });

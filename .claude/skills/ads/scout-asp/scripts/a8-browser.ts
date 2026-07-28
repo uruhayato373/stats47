@@ -31,15 +31,39 @@ const require = createRequire(import.meta.url);
 const core = require("../../../../scripts/ads/lib/a8-scout-core.mjs");
 const codeCore = require("../../../../scripts/ads/lib/a8-code-core.mjs");
 const applyBudget = require("../../../../scripts/ads/check-a8-apply-budget.cjs");
+const appendCore = require("../../../../scripts/ads/lib/a8-append-core.mjs");
+const { buildAdDraft } = appendCore;
 
 // ─── 設定 ──────────────────────────────────────────
 const PROJECT_ROOT = path.resolve(__dirname, "../../../../..");
 // ログインプロファイルはメインチェックアウト固定 (docs/01_技術設計/playwright-auth-profiles.md)。
-const PROFILE_ROOT = "/Users/minamidaisuke/stats47";
+// ★ Mac パスを直書きすると Windows では別ドライブ配下に空プロファイルを掘ってしまい、
+//   「ログイン済みなのに未ログイン扱い」になる。process.platform で分岐せず、
+//   **実在するほうを採る**フォールバック 1 本で両対応する
+//   (.claude/scripts/ads/lib/asp-browser-base.mjs と同じ規約)。
+const MAIN_CHECKOUT = "/Users/minamidaisuke/stats47";
+const PROFILE_ROOT = fs.existsSync(MAIN_CHECKOUT) ? MAIN_CHECKOUT : PROJECT_ROOT;
 const PROFILE_DIR = path.join(PROFILE_ROOT, ".local/playwright-a8-profile");
 // ★A8 の認証はセッション Cookie で永続プロファイルに残らない。login.mjs が storageState に
 //   捕獲した Cookie を起動時に addCookies で再注入する (認証再利用の実体)。
 const STATE_PATH = path.join(PROFILE_ROOT, ".local/playwright-a8-state.json");
+// ★申請サイト assert: この A8 口座は複数サイト登録 (統計で見る都道府県=stats47 / doboku-note)。
+//   申請 (apply) は detail の <select name="webSiteId">、広告コード取得 (harvest) は
+//   <select name="websiteId"> (小文字 w・別名) を stats47 側に選んでから進む。
+//   選べない場合は誤サイト提携・誤サイトコードを防ぐため中止する
+//   (publish-x / coconala の account assert と同じ思想)。
+//   ラベルは登録時の表記に依存するため候補を複数持ち、部分一致で吸収する。
+//   どれにも当たらなければ実際の option 一覧を出して停止する (推測で押さない)。
+const TARGET_SITE_LABELS = ["統計で見る都道府県", "stats47"];
+const TARGET_SITE = TARGET_SITE_LABELS[0];
+/** option ラベル群から stats47 のサイトを選ぶ。見つからなければ null (呼び出し側が中止)。 */
+function pickTargetSiteOption(options: string[]): string | null {
+  for (const label of TARGET_SITE_LABELS) {
+    const hit = options.find((o) => o.includes(label));
+    if (hit) return hit;
+  }
+  return null;
+}
 const DEBUG_DIR = path.join(PROJECT_ROOT, ".local/playwright-a8-debug");
 const CATALOG_PATH = path.join(PROJECT_ROOT, ".claude/state/ads/a8-catalog.json");
 const INVENTORY_PATH = path.join(PROJECT_ROOT, ".claude/state/ads/inventory-latest.json");
@@ -368,12 +392,28 @@ async function cmdImportPartnered(page: Page): Promise<void> {
 }
 
 // ─── サブコマンド: apply ───────────────────────────
-async function cmdApply(page: Page, max: number): Promise<void> {
+async function cmdApply(page: Page, max: number, ids: string[] | null = null): Promise<void> {
   let cat = loadCatalog();
-  const candidates = core.entriesByStatus(cat, "candidate");
+  let candidates = core.entriesByStatus(cat, "candidate");
   if (candidates.length === 0) {
     console.log("candidate なし。先に scout を実行してください。");
     return;
+  }
+  // ★ --id 指定時は**その programId だけ**に申請する。
+  //   指定した ID が candidate に無ければ**中止する** (黙って別案件に申請しない)。
+  //   申請は不可逆なので「意図した対象か」を送信前に確定させる。
+  if (ids) {
+    const byId = new Map(candidates.map((e: any) => [e.programId, e]));
+    const missing = ids.filter((id) => !byId.has(id));
+    if (missing.length > 0) {
+      console.error(`❌ candidate に無い programId: ${missing.join(", ")}`);
+      console.error("   (既に applied/approved か、scout 未実施の可能性。中止します)");
+      process.exitCode = 2;
+      return;
+    }
+    candidates = ids.map((id) => byId.get(id));
+    console.log(`🎯 --id 指定: ${candidates.length} 件に限定`);
+    for (const e of candidates) console.log(`   - ${e.programId} ${String(e.name || "").slice(0, 46)}`);
   }
   // 週次申請上限を機械強制。
   const today = new Date(Date.now() + 9 * 3600 * 1000).toISOString().slice(0, 10);
@@ -444,13 +484,38 @@ async function applyToProgram(page: Page, entry: any): Promise<"applied" | "skip
     recordSessionExpired("apply");
     return "error";
   }
+  // ★ 申請サイト assert (誤サイト提携の防止)。detail に <select name="webSiteId"> が在れば
+  //   stats47 側を選んでから申請する。選べないなら申請しない (error)。
+  const siteSel = page.locator("select[name=webSiteId]");
+  if ((await siteSel.count()) > 0) {
+    const opts = (await siteSel.locator("option").allTextContents()).map((o) => o.trim());
+    const target = pickTargetSiteOption(opts);
+    if (!target) {
+      console.error(
+        `❌ webSiteId に "${TARGET_SITE}" が無い (${JSON.stringify(opts)})。誤サイト防止で申請中止: ${entry.name}`,
+      );
+      await saveScreenshot(page, `apply-site-missing-${entry.programId}`);
+      return "error";
+    }
+    await siteSel.selectOption({ label: target });
+    await page.waitForTimeout(500);
+    const selected = await siteSel
+      .evaluate((el: HTMLSelectElement) => el.options[el.selectedIndex]?.textContent?.trim() || "")
+      .catch(() => "");
+    if (selected !== target) {
+      console.error(`❌ 申請サイトを "${target}" に確定できない (現: "${selected}")。申請中止: ${entry.name}`);
+      await saveScreenshot(page, `apply-site-unset-${entry.programId}`);
+      return "error";
+    }
+    console.log(`  🎯 申請サイト = ${selected}`);
+  }
   const applyBtn = await tryFind(page, A8.applyButton);
   if (!applyBtn) {
     // 申請ボタンが無い = 既に申込中/提携中 or 対象外。**送信していない**ので skip (error にしない)。
     await saveScreenshot(page, `apply-btn-missing-${entry.programId}`);
     return "skip";
   }
-  // ★このクリックで申請が送信される。以降は「送信済み」として扱う。
+  // ★このクリックで申請が送信される (webSiteId=stats47 選択済み)。以降は「送信済み」として扱う。
   await applyBtn.evaluate((el: HTMLElement) => el.click());
   await page.waitForTimeout(2500);
   const done = await page
@@ -573,6 +638,23 @@ async function fetchAdCode(page: Page, entry: any): Promise<string | null> {
     recordSessionExpired("harvest");
     return null;
   }
+  // ★ create-link のサイトも stats47 に選ぶ (select name=websiteId・小文字 w = apply の webSiteId とは別名)。
+  //   ラベルは「統計で見る都道府県【アピールサイト】」等の表記ゆれがあるため部分一致で吸収する。
+  //   選べなければ誤サイトの広告コードを取り込まないよう harvest を中止する。
+  const clSite = page.locator("select[name=websiteId]");
+  if ((await clSite.count()) > 0) {
+    const opts = (await clSite.locator("option").allTextContents()).map((o) => o.trim());
+    const target = pickTargetSiteOption(opts);
+    if (!target) {
+      console.error(
+        `❌ create-link に "${TARGET_SITE}" が無い (${JSON.stringify(opts)})。誤サイトコード防止で harvest 中止: ${entry.name}`,
+      );
+      await saveScreenshot(page, `harvest-site-missing-${entry.programId}`);
+      return null;
+    }
+    await clSite.selectOption({ label: target });
+    await page.waitForTimeout(800);
+  }
   // 広告コードは「広告リンクを表示」クリックで textarea に出現する。
   await tryClick(page, A8.showAdLinkButton);
   await page.waitForTimeout(2000);
@@ -598,36 +680,9 @@ async function fetchAdCode(page: Page, entry: any): Promise<string | null> {
 }
 
 /** parsed fields → AffiliateAd draft (id 採番は register 段で衝突チェックするので仮 id)。 */
-function buildAdDraft(entry: any, fields: any): any {
-  // 名前を ascii スラグ化。日本語のみ等でスラグが空になる場合は A8 programId を使う (一意・追跡可能)。
-  const nameSlug = String(entry.name || "")
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-+|-+$/g, "")
-    .slice(0, 40);
-  const slug = nameSlug || String(entry.programId || "prog").replace(/[^a-z0-9]/gi, "");
-  return {
-    id: `af_${slug}_a8_001`,
-    title: entry.name,
-    htmlContent: fields.htmlContent,
-    areaCode: null,
-    vertical: entry.vertical ?? null,
-    categoryKey: null,
-    locationCode: "blog-bottom",
-    isActive: true,
-    priority: 50,
-    startDate: null,
-    endDate: null,
-    targetCategories: null,
-    adType: fields.adType,
-    imageUrl: fields.imageUrl,
-    trackingPixelUrl: fields.trackingPixelUrl,
-    width: fields.width,
-    height: fields.height,
-    createdAt: null,
-    updatedAt: null,
-  };
-}
+// buildAdDraft は判定 (locationCode の振り分け・slug 生成) を含む純関数なので
+// コア (a8-append-core.mjs) に置き、ここからは呼ぶだけにする
+// (本ファイル冒頭の方針「判定はコアに委譲・ブラウザ層は操作と生データ抽出のみ」に従う)。
 
 // ─── メイン ────────────────────────────────────────
 async function main() {
@@ -640,10 +695,16 @@ async function main() {
   };
   const limit = numAfter("--limit", Infinity);
   const max = numAfter("--max", Infinity);
+  // ★ apply の対象を programId で明示指定する。
+  //   これが無いと candidate を出現順に申請するため「どれに申請したか」を選べず、
+  //   ブランド不適な案件 (スコアは高い) に送信してしまう。申請は不可逆なので指定を既定にする。
+  const idArg = args.indexOf("--id");
+  const ids: string[] | null =
+    idArg >= 0 ? String(args[idArg + 1] ?? "").split(",").map((s) => s.trim()).filter(Boolean) : null;
 
   if (!["scout", "apply", "check-approval", "harvest", "import-partnered"].includes(cmd)) {
     console.error(
-      "使い方: npx tsx a8-browser.ts <scout|apply|check-approval|harvest|import-partnered> [--dry-run] [--limit N] [--max N]",
+      "使い方: npx tsx a8-browser.ts <scout|apply|check-approval|harvest|import-partnered> [--dry-run] [--limit N] [--max N] [--id id1,id2]",
     );
     process.exit(1);
   }
@@ -662,7 +723,7 @@ async function main() {
 
   try {
     if (cmd === "scout") await cmdScout(page, limit);
-    else if (cmd === "apply") await cmdApply(page, max);
+    else if (cmd === "apply") await cmdApply(page, max, ids);
     else if (cmd === "check-approval") await cmdCheckApproval(page);
     else if (cmd === "harvest") await cmdHarvest(page, limit);
     else if (cmd === "import-partnered") await cmdImportPartnered(page);

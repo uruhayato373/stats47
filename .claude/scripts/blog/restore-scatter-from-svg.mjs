@@ -446,7 +446,7 @@ async function buildScatterJson(slug, base, xRes, yRes, meta) {
     catch { fs.writeFileSync(path.join(dir, "article.md"), "", "utf8"); }
   }
   // SVG 生成
-  execFileSync("npx", ["tsx", ".claude/scripts/blog/generate-article-charts.ts", "--slug", slug, "--base", STAGE_REL], {
+  execFileSync((process.platform === "win32" ? "npx.cmd" : "npx"), ["tsx", ".claude/scripts/blog/generate-article-charts.ts", "--slug", slug, "--base", STAGE_REL], {
     cwd: PROJECT_ROOT, stdio: "pipe", env: { ...process.env, NODE_OPTIONS: "--conditions react-server" },
   });
   return { jsonPath, sourcePath, svg: path.join(dir, "data", `${base}.svg`), nPoints: points.length };

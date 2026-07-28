@@ -70,7 +70,10 @@ function walk(dir, exts, out = []) {
   }
   return out;
 }
-const rel = (p) => path.relative(ROOT, p);
+// パス区切りは常に "/" に正規化する。Windows では path.relative が "\" を返し、
+// 除外リスト (例: task-router の primary_agent 免除) や git status 由来の
+// scope 突合が一致せず、Windows でだけ誤検知する (2026-07-28 実測)。
+const rel = (p) => path.relative(ROOT, p).split(path.sep).join("/");
 function readSafe(p) {
   try {
     return fs.readFileSync(p, "utf8");

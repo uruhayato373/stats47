@@ -20,12 +20,13 @@
 
 import fs from "node:fs";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 
 const REPORT_URL = "https://www.zennichiyuren.or.jp/material/report/8.html";
 const POP_URL = "https://storage.stats47.jp/app/stats/japanese-population/values.json";
 const POP_YEAR = "2024";
 const METRIC_KEY = "pachinko-shop-density-per-10k";
-const PROJECT_ROOT = path.resolve(new URL(".", import.meta.url).pathname, "../../..");
+const PROJECT_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../..");
 const OUT_PATH = path.join(
   PROJECT_ROOT,
   ".local/r2/app/stats",

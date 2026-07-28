@@ -862,7 +862,7 @@ async function ensureQueueMedia(post: PostConfig): Promise<void> {
   console.log(`🖼  media 不在 → quick-still 再生成: ${post.regenKey}`);
   try {
     execFileSync(
-      "npx",
+      (process.platform === "win32" ? "npx.cmd" : "npx"),
       [
         "tsx",
         path.join(PROJECT_ROOT, ".claude/scripts/sns/quick-still.ts"),

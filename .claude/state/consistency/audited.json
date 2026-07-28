@@ -1,8 +1,27 @@
 {
-  "hash": "50ab973f8c734f3daf87cb4013eab1ca1a734f65023a2ba23390fb8b960d5d9a",
-  "audited_at": "2026-07-27T22:11:16",
+  "hash": "dc6c4af95321bee5892ed6caa68b8c4dffc3018840214fcba516d22b54e39f3d",
+  "audited_at": "2026-07-28T02:27:09",
   "files": [
-    ".claude/agents/ga4-analyst.md",
-    ".claude/rules/analytics-event-standards.md"
+    ".claude/agents/README.md",
+    ".claude/agents/a8-csv-auditor.md",
+    ".claude/agents/a8-report-collector.md",
+    ".claude/agents/affiliate-operator.md",
+    ".claude/rules/affiliate-ads-standards.md",
+    ".claude/scripts/ads/__tests__/asp-site-guard.test.mjs",
+    ".claude/scripts/ads/afb-scan.mjs",
+    ".claude/scripts/ads/affiliate-apply.mjs",
+    ".claude/scripts/ads/affiliate-status.mjs",
+    ".claude/scripts/ads/check-a8-report-due.mjs",
+    ".claude/scripts/ads/fetch-a8-ui-csv.mjs",
+    ".claude/scripts/ads/lib/a8-report-browser.mjs",
+    ".claude/scripts/ads/lib/a8-report-csv.mjs",
+    ".claude/scripts/ads/lib/asp-browser-base.mjs",
+    ".claude/scripts/ads/lib/asp-browser.mjs",
+    ".claude/scripts/ads/lib/asp-site-guard.mjs",
+    ".claude/scripts/ads/normalize-a8-csv.mjs",
+    ".claude/skills/ads/a8-report/SKILL.md",
+    ".claude/skills/ads/affiliate-operate/SKILL.md",
+    ".claude/skills/ads/scout-asp/scripts/a8-browser.ts",
+    ".claude/skills/ads/scout-asp/scripts/login.mjs"
   ]
 }

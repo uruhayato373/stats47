@@ -22,7 +22,13 @@ const { google } = require("googleapis");
 const PROJECT_ROOT = path.resolve(__dirname, "../../..");
 const PROPERTY_ID = process.env.GA4_PROPERTY_ID || "463218070";
 const KEY_CANDIDATES = ["stats47-f6b5dae19196.json", "stats47-31b18ee67144.json"];
-const EVENTS = ["ad_impression", "affiliate_click"];
+// ★ 2026-07-28 に impression イベントを `ad_impression` → `affiliate_impression` へ改名した。
+//   旧名は GA4 の AdSense 連携が自動生成する名前と同じで、取得しても AdSense 分しか返らず
+//   CTR の分母にならなかった (直近 7 日 3,346 件が全件 AdSense 由来・残余ゼロ)。
+//   改名日より前の窓を指定しても affiliate_impression は 0 件になる (それが正しい挙動)。
+const IMPRESSION_EVENT = "affiliate_impression";
+const CLICK_EVENT = "affiliate_click";
+const EVENTS = [IMPRESSION_EVENT, CLICK_EVENT];
 
 function resolveKey() {
   for (const name of KEY_CANDIDATES) {
@@ -103,8 +109,8 @@ function pivot(rows, dimNames) {
       : "(all)";
     const count = Number((r.metricValues || [])[0]?.value || 0);
     const cur = map.get(key) || { ...fields, impressions: 0, clicks: 0 };
-    if (event === "ad_impression") cur.impressions += count;
-    else if (event === "affiliate_click") cur.clicks += count;
+    if (event === IMPRESSION_EVENT) cur.impressions += count;
+    else if (event === CLICK_EVENT) cur.clicks += count;
     map.set(key, cur);
   }
   return [...map.values()].map((v) => ({
