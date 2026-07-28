@@ -23,7 +23,11 @@ import {
   FooterAdSlot,
   NativeAffiliateRow,
 } from '@/features/ads';
-import { resolveAffiliateBanners } from '@/features/ads/server';
+import {
+  CATEGORY_AFFILIATE_MAP,
+  type AffiliateVertical,
+} from '@/features/ads/constants/affiliate-category';
+import { resolveAffiliateBannersByVertical } from '@/features/ads/server';
 import {
   FeaturedRankingCard,
   CategoryRankingTable,
@@ -36,6 +40,7 @@ import { getSurveyEditorialContent } from '@/features/survey';
 import { HUB_INCONTENT } from '@/lib/google-adsense';
 import { generateOGMetadata } from '@/lib/metadata/og-generator';
 
+import type { CategoryRankingItem } from '@stats47/ranking/types';
 import type { Metadata } from 'next';
 
 /** 24時間 ISR */
@@ -43,6 +48,31 @@ export const revalidate = 86400;
 
 interface PageProps {
   params: Promise<{ surveyKey: string }>;
+}
+
+/**
+ * 調査に属するランキングの categoryKey 最頻値から広告の意図軸 (vertical) を導出する。
+ * 写像を持つランキングが 1 件も無い調査 (統計表しか無い等) は economy にフォールバックする。
+ */
+function dominantVertical(
+  items: readonly CategoryRankingItem[]
+): AffiliateVertical {
+  const counts = new Map<AffiliateVertical, number>();
+  for (const item of items) {
+    const vertical = item.categoryKey
+      ? CATEGORY_AFFILIATE_MAP[item.categoryKey]
+      : undefined;
+    if (vertical) counts.set(vertical, (counts.get(vertical) ?? 0) + 1);
+  }
+  let best: AffiliateVertical = 'economy';
+  let bestCount = 0;
+  for (const [vertical, count] of counts) {
+    if (count > bestCount) {
+      best = vertical;
+      bestCount = count;
+    }
+  }
+  return best;
 }
 
 function parseLatestYear(latestYear: unknown): string {
@@ -98,14 +128,15 @@ export default async function SurveyPage({ params }: PageProps) {
     notFound();
   }
 
-  const [rankingResult, nativeBanners] = await Promise.all([
-    readRankingItemsBySurveyFromR2(surveyKey),
-    // 調査メタから推定可能な tag を渡す (fallback: economy / population)
-    resolveAffiliateBanners(['economy', 'population', 'labor'], 4).catch(
-      () => []
-    ),
-  ]);
+  const rankingResult = await readRankingItemsBySurveyFromR2(surveyKey);
   const rankingItems = isOk(rankingResult) ? rankingResult.data : [];
+  // ★ 2026-07-28: 旧実装は tag を ['economy','population','labor'] に固定しており、
+  //   調査の主題 (農林業センサス / 学校基本調査 等) と広告が一切連動していなかった。
+  //   この調査に属するランキングの categoryKey 最頻値から vertical を導出する。
+  const nativeBanners = await resolveAffiliateBannersByVertical(
+    dominantVertical(rankingItems),
+    4
+  ).catch(() => []);
   const editorial = getSurveyEditorialContent(surveyKey);
 
   // Hero KPI: 最新年, 注目件数, etc.

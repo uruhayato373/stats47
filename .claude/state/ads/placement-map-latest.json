@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-28T06:47:33.114Z",
+  "generatedAt": "2026-07-28T06:53:28.617Z",
   "gscWeek": "2026-W30",
   "inputs": {
     "pages": 2729,
@@ -57,9 +57,9 @@
     },
     "byVertical": {
       "economy": {
-        "imp": 77483,
-        "clicks": 2046,
-        "pages": 1055
+        "imp": 80971,
+        "clicks": 2149,
+        "pages": 1094
       },
       "population": {
         "imp": 8155,
@@ -72,9 +72,9 @@
         "pages": 163
       },
       "mobility": {
-        "imp": 3095,
-        "clicks": 62,
-        "pages": 43
+        "imp": 4480,
+        "clicks": 117,
+        "pages": 80
       },
       "health": {
         "imp": 9121,
@@ -82,14 +82,14 @@
         "pages": 148
       },
       "furusato": {
-        "imp": 10951,
-        "clicks": 168,
-        "pages": 927
+        "imp": 12810,
+        "clicks": 195,
+        "pages": 961
       },
       "energy": {
-        "imp": 1654,
-        "clicks": 25,
-        "pages": 18
+        "imp": 1973,
+        "clicks": 30,
+        "pages": 26
       },
       "labor": {
         "imp": 3223,
@@ -102,9 +102,9 @@
         "pages": 64
       },
       "travel": {
-        "imp": 742,
-        "clicks": 9,
-        "pages": 32
+        "imp": 774,
+        "clicks": 11,
+        "pages": 36
       }
     },
     "byTypeVertical": [
@@ -118,9 +118,9 @@
       {
         "type": "ranking",
         "vertical": "economy",
-        "imp": 16713,
-        "clicks": 903,
-        "pages": 542
+        "imp": 19664,
+        "clicks": 1003,
+        "pages": 580
       },
       {
         "type": "areas",
@@ -159,6 +159,13 @@
       },
       {
         "type": "ranking",
+        "vertical": "furusato",
+        "imp": 2820,
+        "clicks": 67,
+        "pages": 87
+      },
+      {
+        "type": "ranking",
         "vertical": "health",
         "imp": 2616,
         "clicks": 122,
@@ -177,6 +184,13 @@
         "imp": 2022,
         "clicks": 114,
         "pages": 14
+      },
+      {
+        "type": "ranking",
+        "vertical": "mobility",
+        "imp": 1951,
+        "clicks": 59,
+        "pages": 62
       },
       {
         "type": "ranking",
@@ -229,13 +243,6 @@
       },
       {
         "type": "ranking",
-        "vertical": "furusato",
-        "imp": 974,
-        "clicks": 40,
-        "pages": 54
-      },
-      {
-        "type": "ranking",
         "vertical": "labor",
         "imp": 734,
         "clicks": 37,
@@ -243,24 +250,24 @@
       },
       {
         "type": "ranking",
-        "vertical": "mobility",
-        "imp": 567,
-        "clicks": 4,
-        "pages": 26
+        "vertical": "energy",
+        "imp": 601,
+        "clicks": 13,
+        "pages": 16
+      },
+      {
+        "type": "category",
+        "vertical": "economy",
+        "imp": 538,
+        "clicks": 3,
+        "pages": 2
       },
       {
         "type": "ranking",
         "vertical": "travel",
-        "imp": 434,
-        "clicks": 9,
-        "pages": 25
-      },
-      {
-        "type": "ranking",
-        "vertical": "energy",
-        "imp": 306,
-        "clicks": 9,
-        "pages": 9
+        "imp": 466,
+        "clicks": 11,
+        "pages": 29
       },
       {
         "type": "blog",
@@ -291,6 +298,13 @@
         "pages": 2
       },
       {
+        "type": "category",
+        "vertical": "energy",
+        "imp": 70,
+        "clicks": 1,
+        "pages": 2
+      },
+      {
         "type": "themes",
         "vertical": "health",
         "imp": 61,
@@ -303,13 +317,6 @@
         "imp": 55,
         "clicks": 1,
         "pages": 5
-      },
-      {
-        "type": "category",
-        "vertical": "energy",
-        "imp": 46,
-        "clicks": 0,
-        "pages": 1
       },
       {
         "type": "themes",
@@ -340,16 +347,16 @@
         "pages": 3
       },
       {
+        "type": "category",
+        "vertical": "furusato",
+        "imp": 15,
+        "clicks": 0,
+        "pages": 2
+      },
+      {
         "type": "themes",
         "vertical": "housing",
         "imp": 3,
-        "clicks": 0,
-        "pages": 1
-      },
-      {
-        "type": "category",
-        "vertical": "furusato",
-        "imp": 2,
         "clicks": 0,
         "pages": 1
       },
@@ -362,7 +369,7 @@
       },
       {
         "type": "category",
-        "vertical": "economy",
+        "vertical": "mobility",
         "imp": 1,
         "clicks": 0,
         "pages": 1
@@ -409,8 +416,8 @@
   "gaps": [
     {
       "vertical": "economy",
-      "imp": 77483,
-      "clicks": 2046,
+      "imp": 80971,
+      "clicks": 2149,
       "inventory": 20,
       "banner": 13,
       "text": 7,
@@ -418,8 +425,8 @@
     },
     {
       "vertical": "furusato",
-      "imp": 10951,
-      "clicks": 168,
+      "imp": 12810,
+      "clicks": 195,
       "inventory": 2,
       "banner": 2,
       "text": 0,
@@ -455,6 +462,15 @@
       "kinds": []
     },
     {
+      "vertical": "mobility",
+      "imp": 4480,
+      "clicks": 117,
+      "inventory": 13,
+      "banner": 6,
+      "text": 7,
+      "kinds": []
+    },
+    {
       "vertical": "labor",
       "imp": 3223,
       "clicks": 76,
@@ -464,12 +480,12 @@
       "kinds": []
     },
     {
-      "vertical": "mobility",
-      "imp": 3095,
-      "clicks": 62,
-      "inventory": 13,
-      "banner": 6,
-      "text": 7,
+      "vertical": "energy",
+      "imp": 1973,
+      "clicks": 30,
+      "inventory": 20,
+      "banner": 10,
+      "text": 10,
       "kinds": []
     },
     {
@@ -482,18 +498,9 @@
       "kinds": []
     },
     {
-      "vertical": "energy",
-      "imp": 1654,
-      "clicks": 25,
-      "inventory": 20,
-      "banner": 10,
-      "text": 10,
-      "kinds": []
-    },
-    {
       "vertical": "travel",
-      "imp": 742,
-      "clicks": 9,
+      "imp": 774,
+      "clicks": 11,
       "inventory": 28,
       "banner": 18,
       "text": 10,
@@ -501,64 +508,14 @@
     }
   ],
   "unmapped": {
-    "totalImp": 7866,
+    "totalImp": 783,
     "byReason": [
-      {
-        "reason": "category-unmapped:commercial",
-        "imp": 3385,
-        "pages": 35,
-        "examples": [
-          "convenience-store-count-commercial",
-          "commercial",
-          "retail-store-count"
-        ]
-      },
-      {
-        "reason": "category-unmapped:agriculture",
-        "imp": 1859,
-        "pages": 34,
-        "examples": [
-          "fishery-species-catch-sardine",
-          "fishery-species-catch-mackerel",
-          "fishery-species-catch-tuna"
-        ]
-      },
-      {
-        "reason": "category-unmapped:infrastructure",
-        "imp": 1385,
-        "pages": 37,
-        "examples": [
-          "main-road-paving-rate",
-          "dam-count",
-          "water-supply-population"
-        ]
-      },
       {
         "reason": "no-slot:home",
         "imp": 544,
         "pages": 1,
         "examples": [
           "https://stats47.jp/"
-        ]
-      },
-      {
-        "reason": "category-unmapped:ict",
-        "imp": 319,
-        "pages": 8,
-        "examples": [
-          "public-phone-count",
-          "public-phone-count-per-1000",
-          "ict"
-        ]
-      },
-      {
-        "reason": "category-unmapped:miningindustry",
-        "imp": 103,
-        "pages": 4,
-        "examples": [
-          "manufacturing-industry-added-value",
-          "manufacturing-shipment-amount-per-establishment",
-          "manufacturing-net-value-added-private"
         ]
       },
       {
@@ -585,16 +542,6 @@
         "pages": 1,
         "examples": [
           "https://stats47.jp/blog"
-        ]
-      },
-      {
-        "reason": "category-unmapped:international",
-        "imp": 32,
-        "pages": 4,
-        "examples": [
-          "resident-foreigner-population",
-          "resident-foreigner-korea",
-          "foreign-population-per-100k"
         ]
       },
       {
@@ -648,204 +595,12 @@
     ],
     "top": [
       {
-        "url": "https://stats47.jp/ranking/convenience-store-count-commercial",
-        "type": "ranking",
-        "key": "convenience-store-count-commercial",
-        "imp": 1146,
-        "clicks": 39,
-        "reason": "category-unmapped:commercial"
-      },
-      {
         "url": "https://stats47.jp/",
         "type": "home",
         "key": null,
         "imp": 544,
         "clicks": 36,
         "reason": "no-slot:home"
-      },
-      {
-        "url": "https://stats47.jp/category/commercial",
-        "type": "category",
-        "key": "commercial",
-        "imp": 537,
-        "clicks": 3,
-        "reason": "category-unmapped:commercial"
-      },
-      {
-        "url": "https://stats47.jp/ranking/fishery-species-catch-sardine",
-        "type": "ranking",
-        "key": "fishery-species-catch-sardine",
-        "imp": 420,
-        "clicks": 2,
-        "reason": "category-unmapped:agriculture"
-      },
-      {
-        "url": "https://stats47.jp/ranking/retail-store-count",
-        "type": "ranking",
-        "key": "retail-store-count",
-        "imp": 411,
-        "clicks": 18,
-        "reason": "category-unmapped:commercial"
-      },
-      {
-        "url": "https://stats47.jp/ranking/retail-sales-amount-by-prefecture",
-        "type": "ranking",
-        "key": "retail-sales-amount-by-prefecture",
-        "imp": 411,
-        "clicks": 8,
-        "reason": "category-unmapped:commercial"
-      },
-      {
-        "url": "https://stats47.jp/ranking/convenience-store-sales-monthly",
-        "type": "ranking",
-        "key": "convenience-store-sales-monthly",
-        "imp": 282,
-        "clicks": 21,
-        "reason": "category-unmapped:commercial"
-      },
-      {
-        "url": "https://stats47.jp/ranking/fishery-species-catch-mackerel",
-        "type": "ranking",
-        "key": "fishery-species-catch-mackerel",
-        "imp": 261,
-        "clicks": 0,
-        "reason": "category-unmapped:agriculture"
-      },
-      {
-        "url": "https://stats47.jp/ranking/main-road-paving-rate",
-        "type": "ranking",
-        "key": "main-road-paving-rate",
-        "imp": 219,
-        "clicks": 9,
-        "reason": "category-unmapped:infrastructure"
-      },
-      {
-        "url": "https://stats47.jp/ranking/fishery-species-catch-tuna",
-        "type": "ranking",
-        "key": "fishery-species-catch-tuna",
-        "imp": 186,
-        "clicks": 2,
-        "reason": "category-unmapped:agriculture"
-      },
-      {
-        "url": "https://stats47.jp/ranking/dam-count",
-        "type": "ranking",
-        "key": "dam-count",
-        "imp": 180,
-        "clicks": 4,
-        "reason": "category-unmapped:infrastructure"
-      },
-      {
-        "url": "https://stats47.jp/ranking/fishery-species-catch-pacific-saury",
-        "type": "ranking",
-        "key": "fishery-species-catch-pacific-saury",
-        "imp": 166,
-        "clicks": 0,
-        "reason": "category-unmapped:agriculture"
-      },
-      {
-        "url": "https://stats47.jp/ranking/public-phone-count",
-        "type": "ranking",
-        "key": "public-phone-count",
-        "imp": 159,
-        "clicks": 2,
-        "reason": "category-unmapped:ict"
-      },
-      {
-        "url": "https://stats47.jp/ranking/water-supply-population",
-        "type": "ranking",
-        "key": "water-supply-population",
-        "imp": 136,
-        "clicks": 9,
-        "reason": "category-unmapped:infrastructure"
-      },
-      {
-        "url": "https://stats47.jp/ranking/fishery-species-catch-scallop",
-        "type": "ranking",
-        "key": "fishery-species-catch-scallop",
-        "imp": 121,
-        "clicks": 3,
-        "reason": "category-unmapped:agriculture"
-      },
-      {
-        "url": "https://stats47.jp/ranking/public-phone-count-per-1000",
-        "type": "ranking",
-        "key": "public-phone-count-per-1000",
-        "imp": 118,
-        "clicks": 1,
-        "reason": "category-unmapped:ict"
-      },
-      {
-        "url": "https://stats47.jp/ranking/fishery-species-catch-pollock",
-        "type": "ranking",
-        "key": "fishery-species-catch-pollock",
-        "imp": 116,
-        "clicks": 3,
-        "reason": "category-unmapped:agriculture"
-      },
-      {
-        "url": "https://stats47.jp/ranking/retail-establishments-by-prefecture",
-        "type": "ranking",
-        "key": "retail-establishments-by-prefecture",
-        "imp": 99,
-        "clicks": 1,
-        "reason": "category-unmapped:commercial"
-      },
-      {
-        "url": "https://stats47.jp/ranking/sewage-treatment-coverage-rate",
-        "type": "ranking",
-        "key": "sewage-treatment-coverage-rate",
-        "imp": 98,
-        "clicks": 2,
-        "reason": "category-unmapped:infrastructure"
-      },
-      {
-        "url": "https://stats47.jp/ranking/paved-road-total-length",
-        "type": "ranking",
-        "key": "paved-road-total-length",
-        "imp": 96,
-        "clicks": 2,
-        "reason": "category-unmapped:infrastructure"
-      },
-      {
-        "url": "https://stats47.jp/ranking/retail-store-count-alt",
-        "type": "ranking",
-        "key": "retail-store-count-alt",
-        "imp": 93,
-        "clicks": 3,
-        "reason": "category-unmapped:commercial"
-      },
-      {
-        "url": "https://stats47.jp/ranking/fishing-port-count-by-type",
-        "type": "ranking",
-        "key": "fishing-port-count-by-type",
-        "imp": 81,
-        "clicks": 1,
-        "reason": "category-unmapped:agriculture"
-      },
-      {
-        "url": "https://stats47.jp/ranking/dairy-cattle-count",
-        "type": "ranking",
-        "key": "dairy-cattle-count",
-        "imp": 78,
-        "clicks": 1,
-        "reason": "category-unmapped:agriculture"
-      },
-      {
-        "url": "https://stats47.jp/ranking/port-count",
-        "type": "ranking",
-        "key": "port-count",
-        "imp": 71,
-        "clicks": 2,
-        "reason": "category-unmapped:infrastructure"
-      },
-      {
-        "url": "https://stats47.jp/ranking/manufacturing-industry-added-value",
-        "type": "ranking",
-        "key": "manufacturing-industry-added-value",
-        "imp": 70,
-        "clicks": 3,
-        "reason": "category-unmapped:miningindustry"
       },
       {
         "url": "https://stats47.jp/ranking",
@@ -856,22 +611,6 @@
         "reason": "ranking-key-unknown"
       },
       {
-        "url": "https://stats47.jp/ranking/road-expressway-length",
-        "type": "ranking",
-        "key": "road-expressway-length",
-        "imp": 64,
-        "clicks": 2,
-        "reason": "category-unmapped:infrastructure"
-      },
-      {
-        "url": "https://stats47.jp/ranking/airport-count",
-        "type": "ranking",
-        "key": "airport-count",
-        "imp": 58,
-        "clicks": 1,
-        "reason": "category-unmapped:infrastructure"
-      },
-      {
         "url": "https://stats47.jp/about",
         "type": "other",
         "key": null,
@@ -880,12 +619,92 @@
         "reason": "no-slot:other"
       },
       {
-        "url": "https://stats47.jp/ranking/fishery-species-catch-yellowtail",
-        "type": "ranking",
-        "key": "fishery-species-catch-yellowtail",
-        "imp": 55,
-        "clicks": 1,
-        "reason": "category-unmapped:agriculture"
+        "url": "https://stats47.jp/blog",
+        "type": "blog",
+        "key": null,
+        "imp": 45,
+        "clicks": 0,
+        "reason": "article-unknown"
+      },
+      {
+        "url": "https://stats47.jp/terms",
+        "type": "other",
+        "key": null,
+        "imp": 32,
+        "clicks": 0,
+        "reason": "no-slot:other"
+      },
+      {
+        "url": "https://stats47.jp/themes",
+        "type": "themes",
+        "key": null,
+        "imp": 16,
+        "clicks": 0,
+        "reason": "theme-unmapped:null"
+      },
+      {
+        "url": "https://stats47.jp/privacy",
+        "type": "other",
+        "key": null,
+        "imp": 9,
+        "clicks": 0,
+        "reason": "no-slot:other"
+      },
+      {
+        "url": "https://stats47.jp/themes/climate",
+        "type": "themes",
+        "key": "climate",
+        "imp": 7,
+        "clicks": 0,
+        "reason": "theme-unmapped:climate"
+      },
+      {
+        "url": "https://stats47.jp/gis-cross/migration-flow?pref=24&utm_source=x&utm_medium=social&utm_campaign=mf47&utm_content=mie",
+        "type": "other",
+        "key": null,
+        "imp": 2,
+        "clicks": 0,
+        "reason": "no-slot:other"
+      },
+      {
+        "url": "https://stats47.jp/ports",
+        "type": "other",
+        "key": null,
+        "imp": 2,
+        "clicks": 0,
+        "reason": "no-slot:other"
+      },
+      {
+        "url": "https://stats47.jp/tag/local-allocation-tax",
+        "type": "tag",
+        "key": "local-allocation-tax",
+        "imp": 2,
+        "clicks": 0,
+        "reason": "tag-unmapped:local-allocation-tax"
+      },
+      {
+        "url": "https://stats47.jp/tag/commerce",
+        "type": "tag",
+        "key": "commerce",
+        "imp": 1,
+        "clicks": 0,
+        "reason": "tag-unmapped:commerce"
+      },
+      {
+        "url": "https://stats47.jp/tag/dual-income-households",
+        "type": "tag",
+        "key": "dual-income-households",
+        "imp": 1,
+        "clicks": 0,
+        "reason": "tag-unmapped:dual-income-households"
+      },
+      {
+        "url": "https://stats47.jp/tag/waste-disposal-sites",
+        "type": "tag",
+        "key": "waste-disposal-sites",
+        "imp": 1,
+        "clicks": 0,
+        "reason": "tag-unmapped:waste-disposal-sites"
       }
     ]
   },

@@ -336,6 +336,8 @@ export async function exportRankingItemsPerUrl(): Promise<ExportRankingItemsPerU
       groupKey: r.groupKey ?? null,
       isFeatured: r.isFeatured ?? false,
       top1: r.latestTop ?? null,
+      // survey ページの広告 vertical 導出に使う (調査主題と広告を連動させる)。
+      categoryKey: r.categoryKey ?? null,
       // 出典 (原典調査)。UI が「出典: ◯◯調査」表示に使う。SSDS は複数原典あり。
       // builder 焼き込み済み surveyIds を優先し、stale item は従来解決 (SSDS のみ) にフォールバック。
       originalSurveys:
