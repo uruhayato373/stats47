@@ -10,7 +10,76 @@
     "unknown": "未確認 (調べていない。none と区別する)"
   },
   "_seedNote": "初期状態は空。実機を見ずに案件を書くと捏造になるため、`affiliate-status.mjs` の実測か `afb-scan.mjs` の走査結果をもとに 1 件ずつ追加する。vertical は apps/web/src/features/ads/constants/affiliate-category.ts の 10 軸から選ぶ。",
-  "updatedAt": "2026-07-28T08:24:52.629Z",
+  "updatedAt": "2026-07-28T08:10:00.000Z",
   "verifiedAt": null,
-  "programs": {}
+  "programs": {
+    "moshimo-7059": {
+      "name": "みんなの生命保険アドバイザーの無料保険相談",
+      "vertical": "economy",
+      "asps": {
+        "moshimo": {
+          "promotionId": "7059",
+          "status": "applying",
+          "appliedAt": "2026-07-28T08:10:00.000Z",
+          "history": [
+            {
+              "at": "2026-07-28T08:10:00.000Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-7333": {
+      "name": "マネカフェ｜カフェタイムで気軽にFP診断",
+      "vertical": "economy",
+      "asps": {
+        "moshimo": {
+          "promotionId": "7333",
+          "status": "applying",
+          "appliedAt": "2026-07-28T08:10:00.000Z",
+          "history": [
+            {
+              "at": "2026-07-28T08:10:00.000Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-1223": {
+      "name": "【スタディング STUDYing】オンライン資格講座",
+      "vertical": "education",
+      "asps": {
+        "moshimo": {
+          "promotionId": "1223",
+          "status": "applying",
+          "appliedAt": "2026-07-28T08:10:00.000Z",
+          "history": [
+            {
+              "at": "2026-07-28T08:10:00.000Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-2626": {
+      "name": "LEAN BODY（リーンボディ）2週間無料会員登録",
+      "vertical": "health",
+      "asps": {
+        "moshimo": {
+          "promotionId": "2626",
+          "status": "applying",
+          "appliedAt": "2026-07-28T08:10:00.000Z",
+          "history": [
+            {
+              "at": "2026-07-28T08:10:00.000Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    }
+  }
 }

@@ -23,6 +23,8 @@
  *   node .claude/scripts/ads/affiliate-apply.mjs --asp moshimo --id 6154            # dry-run
  *   node .claude/scripts/ads/affiliate-apply.mjs --asp moshimo --id 6154 --commit   # 実申請
  */
+import { createRequire } from "node:module";
+
 import { readFileSync, writeFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
 
@@ -38,6 +40,9 @@ import {
 } from "./lib/asp-browser.mjs";
 
 const CATALOG = join(repoRoot(), ".claude/state/ads/affiliate-catalog.json");
+
+// 頻度ガードは CommonJS (A8 側の check-a8-apply-budget.cjs と同じ形) なので require で読む。
+const { applyBudget, toJstDate } = createRequire(import.meta.url)("./check-asp-apply-budget.cjs");
 
 function parseArgs() {
   const a = process.argv.slice(2);
@@ -55,6 +60,33 @@ function parseArgs() {
 }
 
 /** カタログから該当エントリを引く (Red Line 判定と記録更新のため)。 */
+/**
+ * 申請結果を台帳に刻む。**エントリが無ければ作る。**
+ *
+ * ★ 旧実装は既存エントリを探して status を書き換えるだけだった。台帳は空 (`programs: {}`) が
+ *   初期状態なので、申請しても**どこにも記録が残らない** (2026-07-28 に 4 件が記録ゼロ)。
+ *   何をいつ申請したかが残らないと、翌週の運用者は重複申請も承認待ちの追跡もできない。
+ *   申請の事実は実機で確認したものだけを書く (verifyApplied を通ったもののみ呼ぶ)。
+ */
+function recordApplied(catalog, aspName, id, name, at) {
+  catalog.programs ??= {};
+  const hit = findInCatalog(catalog, aspName, id);
+  const key = hit?.key ?? `${aspName}-${id}`;
+  const program = (catalog.programs[key] ??= { name: name ?? key, asps: {} });
+  if (name && !hit) program.name = name;
+  program.asps ??= {};
+  const entry = (program.asps[aspName] ??= {});
+  entry.promotionId = String(id);
+  entry.status = "applying";
+  entry.appliedAt = at;
+  // 申請履歴 (頻度ガードの入力)。同日の重複は積まない。
+  entry.history ??= [];
+  if (!entry.history.some((h) => h.at === at && h.status === "applying")) {
+    entry.history.push({ at, status: "applying" });
+  }
+  return key;
+}
+
 function findInCatalog(catalog, aspName, id) {
   for (const [key, p] of Object.entries(catalog.programs ?? {})) {
     const e = p.asps?.[aspName];
@@ -205,6 +237,21 @@ async function main() {
     `提携申請 [${asp.label}] ${opts.ids.length} 件  対象サイト=${siteLabel}  モード=${opts.commit ? "★実申請" : "dry-run"}`,
   );
 
+  // ★ 週の申請上限。A8 だけにあって もしも/afb は無制限だった (2026-07-28 に是正)。
+  //   同じ口座に doboku-note が同居しているため、短時間の大量申請は口座全体のリスクになる。
+  if (opts.commit) {
+    const budget = applyBudget(catalog, opts.asp, toJstDate(new Date().toISOString()));
+    console.log(`申請枠: 今週 ${budget.weekCount}/${budget.max} (残 ${budget.remaining})`);
+    if (!budget.ok) {
+      console.error(`✗ ${opts.asp} の週上限 ${budget.max} 件に到達。今週はこれ以上申請しない`);
+      process.exit(1);
+    }
+    if (opts.ids.length > budget.remaining) {
+      console.error(`✗ 指定 ${opts.ids.length} 件が残枠 ${budget.remaining} を超える。件数を減らして再実行する`);
+      process.exit(1);
+    }
+  }
+
   // Red Line は --commit でも通さない (gate の前に落とす)
   const blocked = [];
   for (const id of opts.ids) {
@@ -293,9 +340,8 @@ async function main() {
       const ok = verified.ok;
       results.push({ id, title, action: ok ? "applied" : "unverified", reason: ok ? "" : verified.reason });
 
-      // カタログへ反映 (実機の真実は affiliate-status が上書きする。ここは暫定記録)
-      const hit = findInCatalog(catalog, opts.asp, id);
-      if (ok && hit) hit.entry.status = "applying";
+      // 台帳へ記録。エントリが無ければ作る (空台帳だと何も残らず、翌週の運用が追えない)。
+      if (ok) recordApplied(catalog, opts.asp, id, promoName ?? title, new Date().toISOString());
     }
   } finally {
     await ctx.close().catch(() => {});

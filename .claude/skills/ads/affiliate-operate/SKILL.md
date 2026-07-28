@@ -22,7 +22,9 @@ Mac / Windows 双方で動く。
 | `status --write` | 同上 `--write` | カタログ JSON を実機値で更新 |
 | `apply` (dry-run) | `node .claude/scripts/ads/affiliate-apply.mjs --asp <moshimo\|afb> --id <id>` | なし |
 | `apply --commit` | 同上 `--commit` | **提携申請を送信 (不可逆・要オーナー承認)** |
-| `scan` | `node .claude/scripts/ads/afb-scan.mjs [--vertical <軸>] [--mode search\|crawl]` | なし (走査 JSON を .local に出力) |
+| `scan` (afb) | `node .claude/scripts/ads/afb-scan.mjs [--vertical <軸>] [--mode search\|crawl]` | なし (走査 JSON を .local に出力) |
+| `scan` (もしも) | `node .claude/scripts/ads/moshimo-scan.mjs [--query <語>] [--vertical <軸>]` | なし (同上) |
+| `budget` | `node .claude/scripts/ads/check-asp-apply-budget.cjs --asp <moshimo\|afb>` | なし (週の残枠を表示) |
 
 ## 手順
 
@@ -67,16 +69,44 @@ node .claude/scripts/ads/affiliate-apply.mjs --asp moshimo --id 6154 --commit
 ```
 
 - **`--commit` は外部への不可逆送信 (規約同意を伴う)。オーナーの明示承認なしに実行しない。**
+- **週上限がある** (config `asps.<name>.weeklyApplyMax`、既定 10)。残枠を超える件数を指定すると
+  実行前に落ちる。**これは ASP の公表値ではなく自分たちで置いた歯止め**なので、緩めるなら実績を見てから。
 - Red Line 案件 (`redLine: true`) は `--commit` でも申請前に落ちる。
 - 「一括提携申請へ」は候補から機械除外される (押すと画面上の全案件を一度に申請してしまうため)。
+  もしもは加えて**フォームの申請対象数が 1 件でなければ押さない** (申請ページの見出しが
+  「プロモーション 一括提携申請」で、ラベルだけでは単一/一括を判別できないため)。
 - もしもの申請フォームのサイト select は read-back 確認を通らなければ押さない。
-- A8 の申請は本 skill の対象外 → `/scout-asp` (週次上限ガード付き)。
+- **もしもの申請は 2 段階**。申請ページ →`/apply/confirm` で「このメディアで提携する」を押して確定する。
+  1 段目で止めると成立しない。
+- **完了判定は文言ではなく実測**。申請中一覧に当該案件が現れて初めて `applied` と記録する。
+  現れなければ `unverified` として dump を残す (2026-07-28 に文言判定で 4 件を誤報した)。
+- 申請が確認できた案件は台帳 `affiliate-catalog.json` に **エントリが無ければ作って**記録する
+  (`status: applying` + `history`)。台帳は空が初期状態なので、既存エントリの更新だけだと何も残らない。
+- A8 の申請は本 skill の対象外 → `/scout-asp` (別の週次上限ガード付き)。
 
 ### 4. ASP 間比較 → 運用先を 1 つに寄せる
 
 カタログの `programs[].asps` に単価・確定率・EPC が揃ったら比較表を出す。
 同一案件を複数 ASP で並行運用すると成果の帰属が割れて EPC 集計が二重管理になるため、
 **判断材料の多い ASP に寄せる** (もしもは承認率・EPC を非公開)。決定は `decision` に理由付きで残す。
+
+## ★未実装 (継続運用の断絶。申請しても収益に到達しない)
+
+A8 は `scout → apply → check-approval → harvest → register → 公開` が閉じているが、
+**もしも / afb は apply までしか無い** (2026-07-28 時点)。申請が承認されても放置される。
+
+| 工程 | A8 | もしも / afb |
+|---|---|---|
+| 案件探索 | `scout` | ✅ `moshimo-scan` / `afb-scan` |
+| 申請 | `apply --id` | ✅ `affiliate-apply --commit` |
+| **承認の追跡** | `check-approval` (週次で applied→approved) | ❌ **無い**。申請中のまま誰も見ない |
+| **広告コード取得** | `harvest` | ❌ **無い**。SSOT に登録できない |
+| SSOT 追記 | `append-affiliate-ads` | ❌ 上記が無いので到達しない |
+| 定期実行 | 週次 cron | ❌ 手動のみ |
+
+当面は `status` を定期的に回して申請中→提携中の変化を人が見つけ、広告コードは
+`/register-affiliate-banner` の `register` モード (HTML 貼付) で登録する。
+自動化するなら A8 の `check-approval` / `harvest` と同じ形をもしも用に作る。
 
 ## サイト帰属エラーが出たとき
 
