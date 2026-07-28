@@ -16,7 +16,9 @@ SSOT への登録・公開は affiliate-manager に渡す 2-agent 分業。
   申請上限 (`check-a8-apply-budget.cjs`) は全て決定的スクリプトが行う。モデルは routing/期限計算をしない。
 - **意味判断は 2 点だけ**: (a) pending-vertical の 10 軸解決、(b) セレクタ破損時にスクショから UI 変化を診断。
 - **SSOT (affiliate-ads-data.ts) は触らない** — register (`append-affiliate-ads.ts`) と commit/push は affiliate-manager の排他領域。
-- **outward-facing 操作 (提携申請) は全件自動申請** (ユーザー決定)。ただし週次上限で件数を機械制限。
+- **outward-facing 操作 (提携申請) はオーナーの明示承認がある実行回だけ**。申請対象は `--id` で明示指定し、
+  週次上限 (`check-a8-apply-budget`) で件数を機械制限する。週次 cron は新規申請しない (`APPLY_NEW=0`・
+  再開条件は measurement gate v2 の ready 回復。正典 rules §10)。
 
 ## 担当範囲
 
@@ -39,7 +41,7 @@ SSOT への登録・公開は affiliate-manager に渡す 2-agent 分業。
 
 | skill | 用途 |
 |---|---|
-| `/scout-asp` | scout/apply/harvest/register/full/status。full は週次 cron の実体 |
+| `/scout-asp` | scout/apply/harvest/register/full/status。full は**手動フル実行専用** (週次 cron は決定的スクリプトのみで full を呼ばない — 2026-07-27 改訂) |
 
 ## Output Contract
 

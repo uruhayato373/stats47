@@ -15,7 +15,7 @@
  *   - CI では使わない (ローカル限定。認証情報は env に置かない)
  */
 import { chromium } from "playwright";
-import { mkdirSync, writeFileSync, readFileSync, existsSync } from "node:fs";
+import { mkdirSync, writeFileSync, readFileSync, existsSync, readdirSync, statSync, rmSync } from "node:fs";
 import { join, dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { createHash } from "node:crypto";
@@ -57,12 +57,58 @@ export function makeRunId() {
   return new Date().toISOString().replace(/[:.]/g, "-").slice(0, 19) + "Z";
 }
 
-/** email / Bearer トークンを伏せる。debug 保存前に必ず通す。 */
+/**
+ * 秘密情報を伏せる。debug 保存前に必ず通す。
+ * ASP 管理画面は規約上「提供される情報を秘密情報」として扱うため、email/token に加えて
+ * cookie / CSRF / session / 口座 ID / 氏名表示も対象 (doc 42 §12・2026-07-29 拡張)。
+ */
 export function maskSecrets(text) {
   return String(text ?? "")
     .replace(/[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/g, "[email-redacted]")
-    .replace(/(Bearer|Authorization:?)\s+[A-Za-z0-9._~+/=-]+/gi, "$1 [redacted]")
-    .replace(/"access_token"\s*:\s*"[^"]+"/gi, '"access_token":"[redacted]"');
+    .replace(/(Authorization:?\s+Bearer|Authorization:?|Bearer)\s+[A-Za-z0-9._~+/=-]+/gi, "$1 [redacted]")
+    .replace(/"access_token"\s*:\s*"[^"]+"/gi, '"access_token":"[redacted]"')
+    // Cookie ヘッダ / document.cookie 形式 (name=value; ...)
+    .replace(/((?:set-)?cookie)\s*[:=]\s*[^\n]+/gi, "$1: [cookie-redacted]")
+    // CSRF / session / auth 系 token (属性値・JSON とも)
+    .replace(/((?:csrf|xsrf)[_-]?token|_token|session[_-]?id|PHPSESSID|JSESSIONID)(["']?\s*[:=]\s*["']?)[A-Za-z0-9+/=_-]{8,}/gi, "$1$2[redacted]")
+    // JWT らしき 3 セグメント
+    .replace(/\beyJ[A-Za-z0-9_-]{10,}\.[A-Za-z0-9_-]{10,}\.[A-Za-z0-9_-]{5,}\b/g, "[jwt-redacted]")
+    // 口座/会員 ID 表示 (afb「（ID：460158）」・A8 メディア ID 等)
+    .replace(/[（(]\s*ID\s*[:：]\s*\d+\s*[）)]/g, "（ID：[redacted]）")
+    .replace(/メディアID\s*[:：]?\s*a?\d{6,}/g, "メディアID [redacted]")
+    // アカウントヘッダの氏名表示 (「◯◯さん」)
+    .replace(/[一-鿿぀-ヿ]{1,8}\s*さん(?=[\s（(])/g, "[name-redacted]さん");
+}
+
+/** debug artifact の保持日数 (doc 42 §12)。超過した runId ディレクトリだけを削除する。 */
+export const DEBUG_RETENTION_DAYS = 7;
+
+/**
+ * debug root 直下の**ディレクトリのみ**を対象に、mtime が retention を超えたものを削除する。
+ * profile / state file / workspace root は対象外 (明示 target 以外を消さない)。
+ * scan JSON 等の直下ファイルは消さない (再実行で作れるが削除は別途明示的に行う)。
+ */
+export function cleanupOldDebugDirs(rootDir, { retentionDays = DEBUG_RETENTION_DAYS, nowMs = Date.now() } = {}) {
+  const removed = [];
+  let entries;
+  try {
+    entries = readdirSync(rootDir, { withFileTypes: true });
+  } catch {
+    return removed; // debug root 自体が無ければ何もしない
+  }
+  const limit = retentionDays * 24 * 60 * 60 * 1000;
+  for (const ent of entries) {
+    if (!ent.isDirectory()) continue;
+    const p = join(rootDir, ent.name);
+    try {
+      const age = nowMs - statSync(p).mtimeMs;
+      if (age > limit) {
+        rmSync(p, { recursive: true, force: true });
+        removed.push(ent.name);
+      }
+    } catch {}
+  }
+  return removed;
 }
 
 export function sha256File(path) {
@@ -140,18 +186,20 @@ export async function downloadTo(page, triggerFn, destPath, { timeout } = {}) {
 
 /**
  * UI 変更・想定外時の debug artifact を保存して停止判断を助ける。
- * screenshot.png / page.html / url.txt / visible-text.txt / failure.json。
- * HTML と visible-text は maskSecrets を通す (email/token を保存しない)。
+ * screenshot.png / url.txt / visible-text.txt / failure.json (すべて mask 済み)。
+ *
+ * ★ raw HTML (page.html) は保存しない (doc 42 §12・2026-07-29 廃止)。ASP 管理画面の
+ *   DOM には hidden input の token・口座情報が含まれ、mask 正規表現では取り切れない。
+ *   selector 診断が要るときは人間が headed で再現するか、匿名化した最小 fixture を手書きする。
+ * ディレクトリは 0700 / ファイルは 0600 (Windows では no-op)。保存のついでに
+ * retention 超過の旧 runId ディレクトリを掃除する (明示 target のみ・profile は触らない)。
  */
 export async function dumpFailure(page, cfg, runId, failure = {}) {
-  const dir = join(debugRoot(cfg), runId);
-  mkdirSync(dir, { recursive: true });
+  const root = debugRoot(cfg);
+  const dir = join(root, runId);
+  mkdirSync(dir, { recursive: true, mode: 0o700 });
   const url = page.url();
-  let html = "";
   let visible = "";
-  try {
-    html = await page.content();
-  } catch {}
   try {
     visible = await page.locator("body").innerText();
   } catch {}
@@ -159,9 +207,9 @@ export async function dumpFailure(page, cfg, runId, failure = {}) {
   try {
     await page.screenshot({ path: shotPath, fullPage: true });
   } catch {}
-  writeFileSync(join(dir, "page.html"), maskSecrets(html), "utf-8");
-  writeFileSync(join(dir, "url.txt"), url + "\n", "utf-8");
-  writeFileSync(join(dir, "visible-text.txt"), maskSecrets(visible), "utf-8");
+  const writeOpts = { encoding: "utf-8", mode: 0o600 };
+  writeFileSync(join(dir, "url.txt"), url + "\n", writeOpts);
+  writeFileSync(join(dir, "visible-text.txt"), maskSecrets(visible), writeOpts);
   writeFileSync(
     join(dir, "failure.json"),
     JSON.stringify(
@@ -174,13 +222,14 @@ export async function dumpFailure(page, cfg, runId, failure = {}) {
         timestamp: new Date().toISOString(),
         candidateCount: failure.candidateCount ?? null,
         screenshotPath: shotPath,
-        htmlPath: join(dir, "page.html"),
       },
       null,
       2,
     ),
-    "utf-8",
+    writeOpts,
   );
+  const removed = cleanupOldDebugDirs(root);
+  if (removed.length > 0) console.error(`[debug] retention 超過 artifact を削除: ${removed.length} 件`);
   console.error(`[debug] artifact 保存: ${dir}`);
   return dir;
 }

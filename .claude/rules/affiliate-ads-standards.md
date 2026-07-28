@@ -175,7 +175,9 @@ apps/web/scripts/affiliate-ads-data.ts (AFFILIATE_ADS = git TS SSOT・広告は 
 
 ## 10. 自動 scout パイプライン (A8 高単価案件)
 
-A8.net の高単価案件を **scout → 提携申請 → 広告コード取得 → SSOT 登録 → R2 公開** まで週次全自動で回す
+A8.net の高単価案件を **scout → 提携申請 → 広告コード取得 → SSOT 登録 → R2 公開** の閉ループで回す
+(★現行 safe mode: 週次 cron は観測・承認照合・dry-run まで。scout/apply は `APPLY_NEW=0` で無効、
+SSOT 実追記・push はオーナー承認の実行回のみ — 本節末「週次 cron の中身」参照)
 (skill `/scout-asp`・agent `asp-scout` + `affiliate-manager`)。§7 の手動貼付 (`/register-affiliate-banner`) と
 抽出仕様 (`a8-code-core.mjs`) を共有し、案件発見〜申請を自動化した上位互換。判定は全て決定的コード、agent の
 意味判断は「pending-vertical の 10 軸解決」と「A8 UI 変化の診断」の 2 点のみ。

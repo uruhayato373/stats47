@@ -70,7 +70,7 @@ A8.net の高単価案件を **scout → 申請 → コード取得 → SSOT 登
 (6) commit/push  affiliate-manager が develop へ push → publish-affiliate-ads.yml 発火 → R2 公開
 ```
 
-- **(5) の 4 ゲートが 1 つでも fail すると SSOT は git checkout で自動復元**され register は止まる (SSOT 破壊防止)。
+- **(5) の 4 ゲートが 1 つでも fail すると SSOT は実行前の byte 列で自動復元**され register は止まる (SSOT 破壊防止。2026-07-29 に git checkout 復元を廃止 — 未コミット変更を消さないため。doc 42 §9.2)。
 - **(6) の commit/push は affiliate-manager (SSOT 排他 writer) の役割**。register で SSOT + catalog が
   更新された後、`apps/web/scripts/affiliate-ads-data.ts` と `.claude/state/ads/a8-catalog.json` を
   同一 commit で develop に push する (outward-facing なので実行前に確認)。公開後、次回 run 冒頭で
