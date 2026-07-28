@@ -725,7 +725,7 @@
       "a8mat": null,
       "vertical": "energy",
       "score": 0.5945,
-      "status": "approved",
+      "status": "registered",
       "history": [
         {
           "from": null,
@@ -747,6 +747,17 @@
           "to": "applied",
           "at": "2026-07-20T00:00:00Z",
           "note": "budget-stamp"
+        },
+        {
+          "from": "approved",
+          "to": "harvested",
+          "at": "2026-07-28T07:36:55.119Z"
+        },
+        {
+          "from": "harvested",
+          "to": "registered",
+          "at": "2026-07-28T07:39:34.125Z",
+          "adId": "af_surfshark-antivirus_a8_001"
         }
       ],
       "epcYen": 9,
@@ -754,7 +765,30 @@
       "rewardRatePct": 60,
       "rewardType": "rate",
       "_priority": 10,
-      "_ce": 9
+      "_ce": 9,
+      "selectedForRegister": true,
+      "priority": 10,
+      "adDraft": {
+        "id": "af_surfshark-antivirus_a8_001",
+        "title": "マルウェア等の脅威からデバイスを保護【Surfshark Antivirus】",
+        "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B84WZ+9GJYSY+4LSW+BXIYP",
+        "areaCode": null,
+        "vertical": "energy",
+        "categoryKey": null,
+        "locationCode": "blog-bottom",
+        "isActive": true,
+        "priority": 50,
+        "startDate": null,
+        "endDate": null,
+        "targetCategories": null,
+        "adType": "banner",
+        "imageUrl": "https://www22.a8.net/svt/bgt?aid=260720099572&wid=001&eno=01&mid=s00000021488002004000&mc=1",
+        "trackingPixelUrl": "https://www18.a8.net/0.gif?a8mat=4B84WZ+9GJYSY+4LSW+BXIYP",
+        "width": 300,
+        "height": 250,
+        "createdAt": null,
+        "updatedAt": null
+      }
     },
     "s00000021329001": {
       "programId": "s00000021329001",
@@ -1001,7 +1035,7 @@
       "company": "株式会社ワールドインテック",
       "vertical": "labor",
       "score": null,
-      "status": "approved",
+      "status": "registered",
       "source": "existing-partnership",
       "history": [
         {
@@ -1009,6 +1043,17 @@
           "to": "approved",
           "at": "2026-07-19T22:34:21.032Z",
           "note": "existing-partnership"
+        },
+        {
+          "from": "approved",
+          "to": "harvested",
+          "at": "2026-07-28T07:37:12.939Z"
+        },
+        {
+          "from": "harvested",
+          "to": "registered",
+          "at": "2026-07-28T07:39:34.125Z",
+          "adId": "af_s00000026992001_a8_001"
         }
       ],
       "epcYen": 47,
@@ -1016,7 +1061,30 @@
       "rewardYen": 15000,
       "rewardType": "fixed",
       "_priority": 10,
-      "_ce": 27.1143
+      "_ce": 27.1143,
+      "selectedForRegister": true,
+      "priority": 10,
+      "adDraft": {
+        "id": "af_s00000026992001_a8_001",
+        "title": "工場・製造業の求人ならワールドインテック「工場求人ワールド」",
+        "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B684G+G82982+5S9S+5YZ75",
+        "areaCode": null,
+        "vertical": "labor",
+        "categoryKey": null,
+        "locationCode": "blog-bottom",
+        "isActive": true,
+        "priority": 50,
+        "startDate": null,
+        "endDate": null,
+        "targetCategories": null,
+        "adType": "banner",
+        "imageUrl": "https://www21.a8.net/svt/bgt?aid=260630944981&wid=001&eno=01&mid=s00000026992001003000&mc=1",
+        "trackingPixelUrl": "https://www17.a8.net/0.gif?a8mat=4B684G+G82982+5S9S+5YZ75",
+        "width": 300,
+        "height": 250,
+        "createdAt": null,
+        "updatedAt": null
+      }
     },
     "s00000023621003": {
       "programId": "s00000023621003",
@@ -1239,7 +1307,7 @@
       "company": "ミライアス株式会社",
       "vertical": "housing",
       "score": null,
-      "status": "approved",
+      "status": "registered",
       "source": "existing-partnership",
       "history": [
         {
@@ -1247,6 +1315,17 @@
           "to": "approved",
           "at": "2026-07-19T22:34:21.032Z",
           "note": "existing-partnership"
+        },
+        {
+          "from": "approved",
+          "to": "harvested",
+          "at": "2026-07-28T07:37:18.808Z"
+        },
+        {
+          "from": "harvested",
+          "to": "registered",
+          "at": "2026-07-28T07:39:34.125Z",
+          "adId": "af_s00000021019001_a8_001"
         }
       ],
       "epcYen": 0,
@@ -1254,7 +1333,30 @@
       "rewardYen": 15000,
       "rewardType": "fixed",
       "_priority": 10,
-      "_ce": 0
+      "_ce": 0,
+      "selectedForRegister": true,
+      "priority": 10,
+      "adDraft": {
+        "id": "af_s00000021019001_a8_001",
+        "title": "不動産（マンション・戸建・土地）査定・売却なら【ミライアスのスマート仲介】",
+        "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B684G+F9J44Y+4I6M+65ME9",
+        "areaCode": null,
+        "vertical": "housing",
+        "categoryKey": null,
+        "locationCode": "blog-bottom",
+        "isActive": true,
+        "priority": 50,
+        "startDate": null,
+        "endDate": null,
+        "targetCategories": null,
+        "adType": "banner",
+        "imageUrl": "https://www21.a8.net/svt/bgt?aid=260630944923&wid=001&eno=01&mid=s00000021019001034000&mc=1",
+        "trackingPixelUrl": "https://www16.a8.net/0.gif?a8mat=4B684G+F9J44Y+4I6M+65ME9",
+        "width": 300,
+        "height": 250,
+        "createdAt": null,
+        "updatedAt": null
+      }
     },
     "s00000011537005": {
       "programId": "s00000011537005",
@@ -1499,7 +1601,7 @@
       "company": "一般社団法人地域連携プラットフォーム",
       "vertical": "labor",
       "score": null,
-      "status": "approved",
+      "status": "registered",
       "source": "existing-partnership",
       "history": [
         {
@@ -1507,6 +1609,17 @@
           "to": "approved",
           "at": "2026-07-19T22:34:21.032Z",
           "note": "existing-partnership"
+        },
+        {
+          "from": "approved",
+          "to": "harvested",
+          "at": "2026-07-28T07:37:24.631Z"
+        },
+        {
+          "from": "harvested",
+          "to": "registered",
+          "at": "2026-07-28T07:39:34.125Z",
+          "adId": "af_s00000024586001_a8_001"
         }
       ],
       "epcYen": 86,
@@ -1514,7 +1627,30 @@
       "rewardYen": 5500,
       "rewardType": "fixed",
       "_priority": 20,
-      "_ce": 54.06819999999999
+      "_ce": 54.06819999999999,
+      "selectedForRegister": true,
+      "priority": 20,
+      "adDraft": {
+        "id": "af_s00000024586001_a8_001",
+        "title": "最短最安で国家資格者になれる！オンライン【キャリアコンサルタント養成講習】",
+        "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B684G+DML78Y+59PG+5YZ75",
+        "areaCode": null,
+        "vertical": "labor",
+        "categoryKey": null,
+        "locationCode": "blog-bottom",
+        "isActive": true,
+        "priority": 50,
+        "startDate": null,
+        "endDate": null,
+        "targetCategories": null,
+        "adType": "banner",
+        "imageUrl": "https://www27.a8.net/svt/bgt?aid=260630944824&wid=001&eno=01&mid=s00000024586001003000&mc=1",
+        "trackingPixelUrl": "https://www19.a8.net/0.gif?a8mat=4B684G+DML78Y+59PG+5YZ75",
+        "width": 300,
+        "height": 250,
+        "createdAt": null,
+        "updatedAt": null
+      }
     },
     "s00000026234001": {
       "programId": "s00000026234001",
@@ -1701,7 +1837,7 @@
       "company": "株式会社リクルート",
       "vertical": "travel",
       "score": null,
-      "status": "approved",
+      "status": "registered",
       "source": "existing-partnership",
       "history": [
         {
@@ -1709,6 +1845,17 @@
           "to": "approved",
           "at": "2026-07-19T22:34:21.032Z",
           "note": "existing-partnership"
+        },
+        {
+          "from": "approved",
+          "to": "harvested",
+          "at": "2026-07-28T07:37:30.485Z"
+        },
+        {
+          "from": "harvested",
+          "to": "registered",
+          "at": "2026-07-28T07:39:34.125Z",
+          "adId": "af_s00000005230001_a8_001"
         }
       ],
       "epcYen": 0,
@@ -1716,7 +1863,30 @@
       "rewardRatePct": 1,
       "rewardType": "rate",
       "_priority": 10,
-      "_ce": 0
+      "_ce": 0,
+      "selectedForRegister": true,
+      "priority": 10,
+      "adDraft": {
+        "id": "af_s00000005230001_a8_001",
+        "title": "【じゃらんｎｅｔ】宿泊予約",
+        "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B684D+B6H1PU+14CS+6GZCH",
+        "areaCode": null,
+        "vertical": "travel",
+        "categoryKey": null,
+        "locationCode": "blog-bottom",
+        "isActive": true,
+        "priority": 50,
+        "startDate": null,
+        "endDate": null,
+        "targetCategories": null,
+        "adType": "banner",
+        "imageUrl": "https://www20.a8.net/svt/bgt?aid=260630941676&wid=001&eno=01&mid=s00000005230001087000&mc=1",
+        "trackingPixelUrl": "https://www16.a8.net/0.gif?a8mat=4B684D+B6H1PU+14CS+6GZCH",
+        "width": 300,
+        "height": 250,
+        "createdAt": null,
+        "updatedAt": null
+      }
     },
     "s00000023057002": {
       "programId": "s00000023057002",
@@ -2219,7 +2389,7 @@
       "company": "株式会社Ｇｒｏｏｖｅｍｅｎｔ",
       "vertical": "labor",
       "score": null,
-      "status": "approved",
+      "status": "registered",
       "source": "existing-partnership",
       "history": [
         {
@@ -2227,6 +2397,17 @@
           "to": "approved",
           "at": "2026-07-19T22:34:21.032Z",
           "note": "existing-partnership"
+        },
+        {
+          "from": "approved",
+          "to": "harvested",
+          "at": "2026-07-28T07:37:36.291Z"
+        },
+        {
+          "from": "harvested",
+          "to": "registered",
+          "at": "2026-07-28T07:39:34.125Z",
+          "adId": "af_dx-cxo-groovement-agent_a8_001"
         }
       ],
       "epcYen": 139,
@@ -2234,7 +2415,30 @@
       "rewardYen": 18000,
       "rewardType": "fixed",
       "_priority": 20,
-      "_ce": 30.2047
+      "_ce": 30.2047,
+      "selectedForRegister": true,
+      "priority": 20,
+      "adDraft": {
+        "id": "af_dx-cxo-groovement-agent_a8_001",
+        "title": "コンサル・DX・スタートアップへ。CxO直結の非公開求人で年収を最大化【Groovement Agent】",
+        "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B5OO5+NTCZ6+4SXU+NUES1",
+        "areaCode": null,
+        "vertical": "labor",
+        "categoryKey": null,
+        "locationCode": "blog-bottom",
+        "isActive": true,
+        "priority": 50,
+        "startDate": null,
+        "endDate": null,
+        "targetCategories": null,
+        "adType": "banner",
+        "imageUrl": "https://www28.a8.net/svt/bgt?aid=260605733040&wid=001&eno=01&mid=s00000022413004005000&mc=1",
+        "trackingPixelUrl": "https://www16.a8.net/0.gif?a8mat=4B5OO5+NTCZ6+4SXU+NUES1",
+        "width": 300,
+        "height": 250,
+        "createdAt": null,
+        "updatedAt": null
+      }
     },
     "s00000026481001": {
       "programId": "s00000026481001",
@@ -2243,7 +2447,7 @@
       "company": "株式会社ｇｉｆｔｓ",
       "vertical": "education",
       "score": null,
-      "status": "approved",
+      "status": "registered",
       "source": "existing-partnership",
       "history": [
         {
@@ -2251,6 +2455,17 @@
           "to": "approved",
           "at": "2026-07-19T22:34:21.032Z",
           "note": "existing-partnership"
+        },
+        {
+          "from": "approved",
+          "to": "harvested",
+          "at": "2026-07-28T07:37:42.111Z"
+        },
+        {
+          "from": "harvested",
+          "to": "registered",
+          "at": "2026-07-28T07:39:34.125Z",
+          "adId": "af_sns_a8_001"
         }
       ],
       "epcYen": 0,
@@ -2258,7 +2473,30 @@
       "rewardYen": 8500,
       "rewardType": "fixed",
       "_priority": 10,
-      "_ce": 0
+      "_ce": 0,
+      "selectedForRegister": true,
+      "priority": 10,
+      "adDraft": {
+        "id": "af_sns_a8_001",
+        "title": "働き方に自由を/SNSマーケティングスクール【エストレ】",
+        "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B5OO5+H9LBM+5OBU+5YZ75",
+        "areaCode": null,
+        "vertical": "education",
+        "categoryKey": null,
+        "locationCode": "blog-bottom",
+        "isActive": true,
+        "priority": 50,
+        "startDate": null,
+        "endDate": null,
+        "targetCategories": null,
+        "adType": "banner",
+        "imageUrl": "https://www29.a8.net/svt/bgt?aid=260605733029&wid=001&eno=01&mid=s00000026481001003000&mc=1",
+        "trackingPixelUrl": "https://www13.a8.net/0.gif?a8mat=4B5OO5+H9LBM+5OBU+5YZ75",
+        "width": 300,
+        "height": 250,
+        "createdAt": null,
+        "updatedAt": null
+      }
     },
     "s00000018427002": {
       "programId": "s00000018427002",
@@ -3377,7 +3615,7 @@
       "company": "株式会社リベロ",
       "vertical": "housing",
       "score": null,
-      "status": "approved",
+      "status": "registered",
       "source": "existing-partnership",
       "history": [
         {
@@ -3385,6 +3623,17 @@
           "to": "approved",
           "at": "2026-07-19T22:34:21.032Z",
           "note": "existing-partnership"
+        },
+        {
+          "from": "approved",
+          "to": "harvested",
+          "at": "2026-07-28T07:37:47.952Z"
+        },
+        {
+          "from": "harvested",
+          "to": "registered",
+          "at": "2026-07-28T07:39:34.126Z",
+          "adId": "af_navi_a8_001"
         }
       ],
       "epcYen": 2,
@@ -3392,7 +3641,30 @@
       "rewardYen": 1000,
       "rewardType": "fixed",
       "_priority": 10,
-      "_ce": 0.8845999999999999
+      "_ce": 0.8845999999999999,
+      "selectedForRegister": true,
+      "priority": 10,
+      "adDraft": {
+        "id": "af_navi_a8_001",
+        "title": "引越し一括見積もりから完了まで、ワンストップでサポート【引越しラクっとNAVI 】",
+        "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4AZCG4+A7CH0Y+3CP0+639IP",
+        "areaCode": null,
+        "vertical": "housing",
+        "categoryKey": null,
+        "locationCode": "blog-bottom",
+        "isActive": true,
+        "priority": 50,
+        "startDate": null,
+        "endDate": null,
+        "targetCategories": null,
+        "adType": "banner",
+        "imageUrl": "https://www22.a8.net/svt/bgt?aid=260309956617&wid=001&eno=01&mid=s00000015642001023000&mc=1",
+        "trackingPixelUrl": "https://www12.a8.net/0.gif?a8mat=4AZCG4+A7CH0Y+3CP0+639IP",
+        "width": 300,
+        "height": 250,
+        "createdAt": null,
+        "updatedAt": null
+      }
     },
     "s00000022743001": {
       "programId": "s00000022743001",
@@ -3625,7 +3897,7 @@
       "company": "株式会社トレジャー・ファクトリー",
       "vertical": "housing",
       "score": null,
-      "status": "approved",
+      "status": "registered",
       "source": "existing-partnership",
       "history": [
         {
@@ -3633,6 +3905,17 @@
           "to": "approved",
           "at": "2026-07-19T22:34:21.032Z",
           "note": "existing-partnership"
+        },
+        {
+          "from": "approved",
+          "to": "harvested",
+          "at": "2026-07-28T07:37:53.792Z"
+        },
+        {
+          "from": "harvested",
+          "to": "registered",
+          "at": "2026-07-28T07:39:34.126Z",
+          "adId": "af_s00000007992006_a8_001"
         }
       ],
       "epcYen": 6,
@@ -3640,7 +3923,30 @@
       "rewardYen": 1500,
       "rewardType": "fixed",
       "_priority": 10,
-      "_ce": 1.9998
+      "_ce": 1.9998,
+      "selectedForRegister": true,
+      "priority": 10,
+      "adDraft": {
+        "id": "af_s00000007992006_a8_001",
+        "title": "引越しと買取を一括で見積り【トレファク引越】",
+        "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4AZCG4+A8JC8I+1PO0+ZUXRL",
+        "areaCode": null,
+        "vertical": "housing",
+        "categoryKey": null,
+        "locationCode": "blog-bottom",
+        "isActive": true,
+        "priority": 50,
+        "startDate": null,
+        "endDate": null,
+        "targetCategories": null,
+        "adType": "banner",
+        "imageUrl": "https://www25.a8.net/svt/bgt?aid=260309956619&wid=001&eno=01&mid=s00000007992006023000&mc=1",
+        "trackingPixelUrl": "https://www13.a8.net/0.gif?a8mat=4AZCG4+A8JC8I+1PO0+ZUXRL",
+        "width": 300,
+        "height": 250,
+        "createdAt": null,
+        "updatedAt": null
+      }
     },
     "s00000027024001": {
       "programId": "s00000027024001",
@@ -3743,7 +4049,7 @@
       "company": "株式会社ネオキャリア",
       "vertical": "labor",
       "score": null,
-      "status": "approved",
+      "status": "registered",
       "source": "existing-partnership",
       "history": [
         {
@@ -3751,6 +4057,17 @@
           "to": "approved",
           "at": "2026-07-19T22:34:21.032Z",
           "note": "existing-partnership"
+        },
+        {
+          "from": "approved",
+          "to": "harvested",
+          "at": "2026-07-28T07:37:59.608Z"
+        },
+        {
+          "from": "harvested",
+          "to": "registered",
+          "at": "2026-07-28T07:39:34.126Z",
+          "adId": "af_neo_a8_002"
         }
       ],
       "epcYen": 76,
@@ -3758,7 +4075,30 @@
       "rewardYen": 15000,
       "rewardType": "fixed",
       "_priority": 20,
-      "_ce": 38.74479999999999
+      "_ce": 38.74479999999999,
+      "selectedForRegister": true,
+      "priority": 20,
+      "adDraft": {
+        "id": "af_neo_a8_001",
+        "title": "第二/既卒/フリーター/中退/高卒の就職・転職支援【第二新卒エージェントneo】",
+        "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4AZCG4+8FN3AQ+3Y6M+661TT",
+        "areaCode": null,
+        "vertical": "labor",
+        "categoryKey": null,
+        "locationCode": "blog-bottom",
+        "isActive": true,
+        "priority": 50,
+        "startDate": null,
+        "endDate": null,
+        "targetCategories": null,
+        "adType": "banner",
+        "imageUrl": "https://www23.a8.net/svt/bgt?aid=260309956510&wid=001&eno=01&mid=s00000018427001036000&mc=1",
+        "trackingPixelUrl": "https://www15.a8.net/0.gif?a8mat=4AZCG4+8FN3AQ+3Y6M+661TT",
+        "width": 250,
+        "height": 250,
+        "createdAt": null,
+        "updatedAt": null
+      }
     },
     "s00000027243001": {
       "programId": "s00000027243001",
@@ -3947,7 +4287,7 @@
       "company": "株式会社セレス",
       "vertical": "housing",
       "score": null,
-      "status": "approved",
+      "status": "registered",
       "source": "existing-partnership",
       "history": [
         {
@@ -3955,6 +4295,17 @@
           "to": "approved",
           "at": "2026-07-19T22:34:21.032Z",
           "note": "existing-partnership"
+        },
+        {
+          "from": "approved",
+          "to": "harvested",
+          "at": "2026-07-28T07:38:05.447Z"
+        },
+        {
+          "from": "harvested",
+          "to": "registered",
+          "at": "2026-07-28T07:39:34.126Z",
+          "adId": "af_s00000023754008_a8_001"
         }
       ],
       "epcYen": 0,
@@ -3962,7 +4313,30 @@
       "rewardYen": 13000,
       "rewardType": "fixed",
       "_priority": 10,
-      "_ce": 0
+      "_ce": 0,
+      "selectedForRegister": true,
+      "priority": 10,
+      "adDraft": {
+        "id": "af_s00000023754008_a8_001",
+        "title": "不動産の訪問査定完了【持ち家売却】",
+        "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4AZCG5+DQ5SVM+53AC+1BNQZ5",
+        "areaCode": null,
+        "vertical": "housing",
+        "categoryKey": null,
+        "locationCode": "blog-bottom",
+        "isActive": true,
+        "priority": 50,
+        "startDate": null,
+        "endDate": null,
+        "targetCategories": null,
+        "adType": "banner",
+        "imageUrl": "https://www25.a8.net/svt/bgt?aid=260309957830&wid=001&eno=01&mid=s00000023754008005000&mc=1",
+        "trackingPixelUrl": "https://www11.a8.net/0.gif?a8mat=4AZCG5+DQ5SVM+53AC+1BNQZ5",
+        "width": 300,
+        "height": 250,
+        "createdAt": null,
+        "updatedAt": null
+      }
     },
     "s00000008444013": {
       "programId": "s00000008444013",
@@ -4302,7 +4676,7 @@
       "company": "株式会社ＮＥＸＴ【優良代理店表彰実績多数】",
       "vertical": "energy",
       "score": null,
-      "status": "approved",
+      "status": "registered",
       "source": "existing-partnership",
       "history": [
         {
@@ -4315,6 +4689,17 @@
           "to": "approved",
           "at": "2026-07-28T04:07:35.617Z",
           "note": "vertical-resolved-from-curated:energy"
+        },
+        {
+          "from": "approved",
+          "to": "harvested",
+          "at": "2026-07-28T07:38:11.212Z"
+        },
+        {
+          "from": "harvested",
+          "to": "registered",
+          "at": "2026-07-28T07:39:34.126Z",
+          "adId": "af_wi-fi-30-000-softbank-air_a8_text_001"
         }
       ],
       "epcYen": 15,
@@ -4322,7 +4707,30 @@
       "rewardYen": 10000,
       "rewardType": "fixed",
       "_priority": 10,
-      "_ce": 5.25
+      "_ce": 5.25,
+      "selectedForRegister": true,
+      "priority": 10,
+      "adDraft": {
+        "id": "af_wi-fi-30-000-softbank-air_a8_001",
+        "title": "置くだけ簡単Wi-Fi！30,000円現金キャッシュバック！【SoftBank Airキャンペーン】",
+        "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4AZD81+AM8B5E+348K+2NAN35",
+        "areaCode": null,
+        "vertical": "energy",
+        "categoryKey": null,
+        "locationCode": "blog-bottom",
+        "isActive": true,
+        "priority": 50,
+        "startDate": null,
+        "endDate": null,
+        "targetCategories": null,
+        "adType": "banner",
+        "imageUrl": "https://www26.a8.net/svt/bgt?aid=260310961642&wid=001&eno=01&mid=s00000014546016006000&mc=1",
+        "trackingPixelUrl": "https://www11.a8.net/0.gif?a8mat=4AZD81+AM8B5E+348K+2NAN35",
+        "width": 300,
+        "height": 250,
+        "createdAt": null,
+        "updatedAt": null
+      }
     },
     "s00000001004003": {
       "programId": "s00000001004003",
@@ -4918,7 +5326,7 @@
       "company": "Ｖｏｙｅ＿Ｇｌｏｂａｌ＿Ｃｏｎｎｅｃｔｉｖｉｔｙ＿Ｌｔｄ",
       "vertical": "energy",
       "score": null,
-      "status": "approved",
+      "status": "registered",
       "source": "existing-partnership",
       "history": [
         {
@@ -4926,6 +5334,17 @@
           "to": "approved",
           "at": "2026-07-19T22:34:21.032Z",
           "note": "existing-partnership"
+        },
+        {
+          "from": "approved",
+          "to": "harvested",
+          "at": "2026-07-28T07:38:17.013Z"
+        },
+        {
+          "from": "harvested",
+          "to": "registered",
+          "at": "2026-07-28T07:39:34.126Z",
+          "adId": "af_esim-voye-global_a8_001"
         }
       ],
       "epcYen": 0,
@@ -4933,7 +5352,30 @@
       "rewardRatePct": 15.3,
       "rewardType": "rate",
       "_priority": 10,
-      "_ce": 0
+      "_ce": 0,
+      "selectedForRegister": true,
+      "priority": 10,
+      "adDraft": {
+        "id": "af_esim-voye-global_a8_001",
+        "title": "【通信の安定性抜群】格安海外eSIM｜ボイエグローバル（Voye Global）",
+        "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4AZCG5+DLEC1E+5TBA+5YZ75",
+        "areaCode": null,
+        "vertical": "energy",
+        "categoryKey": null,
+        "locationCode": "blog-bottom",
+        "isActive": true,
+        "priority": 50,
+        "startDate": null,
+        "endDate": null,
+        "targetCategories": null,
+        "adType": "banner",
+        "imageUrl": "https://www29.a8.net/svt/bgt?aid=260309957822&wid=001&eno=01&mid=s00000027127001003000&mc=1",
+        "trackingPixelUrl": "https://www19.a8.net/0.gif?a8mat=4AZCG5+DLEC1E+5TBA+5YZ75",
+        "width": 300,
+        "height": 250,
+        "createdAt": null,
+        "updatedAt": null
+      }
     },
     "s00000027203001": {
       "programId": "s00000027203001",
@@ -4942,7 +5384,7 @@
       "company": "株式会社ＬＩＮＫＨＯＯ",
       "vertical": "travel",
       "score": null,
-      "status": "approved",
+      "status": "registered",
       "source": "existing-partnership",
       "history": [
         {
@@ -4950,6 +5392,17 @@
           "to": "approved",
           "at": "2026-07-19T22:34:21.032Z",
           "note": "existing-partnership"
+        },
+        {
+          "from": "approved",
+          "to": "harvested",
+          "at": "2026-07-28T07:38:22.791Z"
+        },
+        {
+          "from": "harvested",
+          "to": "registered",
+          "at": "2026-07-28T07:39:34.126Z",
+          "adId": "af_osumac_a8_001"
         }
       ],
       "epcYen": 0,
@@ -4957,7 +5410,30 @@
       "rewardRatePct": 10,
       "rewardType": "rate",
       "_priority": 10,
-      "_ce": 0
+      "_ce": 0,
+      "selectedForRegister": true,
+      "priority": 10,
+      "adDraft": {
+        "id": "af_osumac_a8_001",
+        "title": "人気バッグブランド正規取扱｜スーツケース＆バッグ専門OSUMAC公式ストア",
+        "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4AZCG5+DE94S2+5TWE+5YZ75",
+        "areaCode": null,
+        "vertical": "travel",
+        "categoryKey": null,
+        "locationCode": "blog-bottom",
+        "isActive": true,
+        "priority": 50,
+        "startDate": null,
+        "endDate": null,
+        "targetCategories": null,
+        "adType": "banner",
+        "imageUrl": "https://www28.a8.net/svt/bgt?aid=260309957810&wid=001&eno=01&mid=s00000027203001003000&mc=1",
+        "trackingPixelUrl": "https://www12.a8.net/0.gif?a8mat=4AZCG5+DE94S2+5TWE+5YZ75",
+        "width": 300,
+        "height": 250,
+        "createdAt": null,
+        "updatedAt": null
+      }
     },
     "s00000026491001": {
       "programId": "s00000026491001",
@@ -5166,7 +5642,7 @@
       "company": "ＢＲＵＮＯ株式会社",
       "vertical": "travel",
       "score": null,
-      "status": "approved",
+      "status": "registered",
       "source": "existing-partnership",
       "history": [
         {
@@ -5174,6 +5650,17 @@
           "to": "approved",
           "at": "2026-07-19T22:34:21.032Z",
           "note": "existing-partnership"
+        },
+        {
+          "from": "approved",
+          "to": "harvested",
+          "at": "2026-07-28T07:38:28.606Z"
+        },
+        {
+          "from": "harvested",
+          "to": "registered",
+          "at": "2026-07-28T07:39:34.126Z",
+          "adId": "af_milesto_a8_001"
         }
       ],
       "epcYen": 0,
@@ -5181,7 +5668,30 @@
       "rewardRatePct": 5,
       "rewardType": "rate",
       "_priority": 10,
-      "_ce": 0
+      "_ce": 0,
+      "selectedForRegister": true,
+      "priority": 10,
+      "adDraft": {
+        "id": "af_milesto_a8_001",
+        "title": "”毎日を旅するように暮らす”大人へ向けたトラベルブランド【MILESTO（ミレスト）】",
+        "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4AZCG5+DK7GTU+2UG2+TUVZL",
+        "areaCode": null,
+        "vertical": "travel",
+        "categoryKey": null,
+        "locationCode": "blog-bottom",
+        "isActive": true,
+        "priority": 50,
+        "startDate": null,
+        "endDate": null,
+        "targetCategories": null,
+        "adType": "banner",
+        "imageUrl": "https://www22.a8.net/svt/bgt?aid=260309957820&wid=001&eno=01&mid=s00000013277005015000&mc=1",
+        "trackingPixelUrl": "https://www16.a8.net/0.gif?a8mat=4AZCG5+DK7GTU+2UG2+TUVZL",
+        "width": 300,
+        "height": 250,
+        "createdAt": null,
+        "updatedAt": null
+      }
     },
     "s00000026367001": {
       "programId": "s00000026367001",
@@ -5440,7 +5950,7 @@
       "company": "株式会社ジェイトリップ",
       "vertical": "travel",
       "score": null,
-      "status": "approved",
+      "status": "registered",
       "source": "existing-partnership",
       "history": [
         {
@@ -5448,6 +5958,17 @@
           "to": "approved",
           "at": "2026-07-19T22:34:21.032Z",
           "note": "existing-partnership"
+        },
+        {
+          "from": "approved",
+          "to": "harvested",
+          "at": "2026-07-28T07:38:34.424Z"
+        },
+        {
+          "from": "harvested",
+          "to": "registered",
+          "at": "2026-07-28T07:39:34.126Z",
+          "adId": "af_jal-j-trip_a8_001"
         }
       ],
       "epcYen": 0,
@@ -5455,7 +5976,30 @@
       "rewardYen": 1000,
       "rewardType": "fixed",
       "_priority": 10,
-      "_ce": 0
+      "_ce": 0,
+      "selectedForRegister": true,
+      "priority": 10,
+      "adDraft": {
+        "id": "af_jal-j-trip_a8_001",
+        "title": "JALで行く！格安国内旅行のジェイトリップ（J-TRIP）",
+        "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4AZCG5+D1R12Q+40T2+67C4H",
+        "areaCode": null,
+        "vertical": "travel",
+        "categoryKey": null,
+        "locationCode": "blog-bottom",
+        "isActive": true,
+        "priority": 50,
+        "startDate": null,
+        "endDate": null,
+        "targetCategories": null,
+        "adType": "banner",
+        "imageUrl": "https://www29.a8.net/svt/bgt?aid=260309957789&wid=001&eno=01&mid=s00000018767001042000&mc=1",
+        "trackingPixelUrl": "https://www15.a8.net/0.gif?a8mat=4AZCG5+D1R12Q+40T2+67C4H",
+        "width": 300,
+        "height": 250,
+        "createdAt": null,
+        "updatedAt": null
+      }
     },
     "s00000027288001": {
       "programId": "s00000027288001",
@@ -6754,7 +7298,7 @@
       "company": "ＧＭＯインターネット株式会社",
       "vertical": "energy",
       "score": null,
-      "status": "approved",
+      "status": "registered",
       "source": "existing-partnership",
       "history": [
         {
@@ -6762,6 +7306,17 @@
           "to": "approved",
           "at": "2026-07-19T22:34:21.032Z",
           "note": "existing-partnership"
+        },
+        {
+          "from": "approved",
+          "to": "harvested",
+          "at": "2026-07-28T07:38:40.399Z"
+        },
+        {
+          "from": "harvested",
+          "to": "registered",
+          "at": "2026-07-28T07:39:34.126Z",
+          "adId": "af_com-net-no-1-com_a8_001"
         }
       ],
       "epcYen": 0,
@@ -6769,7 +7324,30 @@
       "rewardRatePct": 11,
       "rewardType": "rate",
       "_priority": 10,
-      "_ce": 0
+      "_ce": 0,
+      "selectedForRegister": true,
+      "priority": 10,
+      "adDraft": {
+        "id": "af_com-net-no-1-com_a8_001",
+        "title": "【.com/.net ０円〜】独自ドメインの取得は国内シェアNo.1の＜お名前.com＞",
+        "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4555ZY+AXJJN6+50+2HOYA9",
+        "areaCode": null,
+        "vertical": "energy",
+        "categoryKey": null,
+        "locationCode": "blog-bottom",
+        "isActive": true,
+        "priority": 50,
+        "startDate": null,
+        "endDate": null,
+        "targetCategories": null,
+        "adType": "banner",
+        "imageUrl": "https://www25.a8.net/svt/bgt?aid=250503838661&wid=001&eno=01&mid=s00000000018015065000&mc=1",
+        "trackingPixelUrl": "https://www19.a8.net/0.gif?a8mat=4555ZY+AXJJN6+50+2HOYA9",
+        "width": 300,
+        "height": 250,
+        "createdAt": null,
+        "updatedAt": null
+      }
     },
     "s00000005186002": {
       "programId": "s00000005186002",
@@ -7897,7 +8475,209 @@
           "at": "2026-07-28T06:20:18.373Z"
         }
       ]
+    },
+    "s00000027240002": {
+      "programId": "s00000027240002",
+      "name": "投資家・富裕層×ウイスキー好きと相性◎【ウイスキーふるさと納税】",
+      "genre": "furusato 投資家・富裕層×ウイスキー好きと相性◎【ウイスキーふるさと納税】",
+      "company": "株式会社あるやうむ",
+      "a8mat": null,
+      "vertical": "furusato",
+      "score": 0.43199999999999994,
+      "rewardYen": 7300,
+      "rewardType": "fixed",
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-07-28T07:31:10.577Z"
+        }
+      ]
+    },
+    "s00000014771001": {
+      "programId": "s00000014771001",
+      "name": "ふるさと納税サイト【さとふる】",
+      "genre": "furusato ふるさと納税サイト【さとふる】",
+      "company": "株式会社さとふる",
+      "a8mat": null,
+      "vertical": "furusato",
+      "score": 0.2865,
+      "rewardYen": 100,
+      "confirmRatePct": 95,
+      "rewardType": "fixed",
+      "status": "applied",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-07-28T07:34:48.453Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-07-28T07:35:12.883Z"
+        }
+      ]
+    },
+    "s00000019332001": {
+      "programId": "s00000019332001",
+      "name": "ふるさと納税サイト「ふるさとチョイス」",
+      "genre": "furusato ふるさと納税サイト「ふるさとチョイス」",
+      "company": "株式会社トラストバンク",
+      "a8mat": null,
+      "vertical": "furusato",
+      "score": 0.23507499999999998,
+      "rewardRatePct": 2.3,
+      "epcYen": 53,
+      "confirmRatePct": 33.45,
+      "rewardType": "rate",
+      "status": "applied",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-07-28T07:34:48.453Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "note": "already-on-a8-no-send"
+        }
+      ]
+    },
+    "s00000025743001": {
+      "programId": "s00000025743001",
+      "name": "全国の美味しい特産品に特化したふるさと納税サイト【ふるさと本舗】",
+      "genre": "furusato 全国の美味しい特産品に特化したふるさと納税サイト【ふるさと本舗】",
+      "company": "株式会社ふるさと本舗",
+      "a8mat": null,
+      "vertical": "furusato",
+      "score": 0.298,
+      "rewardRatePct": 1,
+      "confirmRatePct": 100,
+      "rewardType": "rate",
+      "status": "registered",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-07-28T07:34:48.453Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-07-28T07:35:28.556Z"
+        },
+        {
+          "from": "applied",
+          "to": "approved",
+          "at": "2026-07-28T07:36:06.963Z"
+        },
+        {
+          "from": "approved",
+          "to": "harvested",
+          "at": "2026-07-28T07:37:01.089Z"
+        },
+        {
+          "from": "harvested",
+          "to": "registered",
+          "at": "2026-07-28T07:39:34.125Z",
+          "adId": "af_s00000025743001_a8_001"
+        }
+      ],
+      "_priority": 10,
+      "_ce": 0,
+      "selectedForRegister": true,
+      "priority": 10,
+      "adDraft": {
+        "id": "af_s00000025743001_a8_001",
+        "title": "全国の美味しい特産品に特化したふるさと納税サイト【ふるさと本舗】",
+        "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B8B4U+8KZZQQ+5IMU+60WN5",
+        "areaCode": null,
+        "vertical": "furusato",
+        "categoryKey": null,
+        "locationCode": "blog-bottom",
+        "isActive": true,
+        "priority": 50,
+        "startDate": null,
+        "endDate": null,
+        "targetCategories": null,
+        "adType": "banner",
+        "imageUrl": "https://www29.a8.net/svt/bgt?aid=260728158519&wid=001&eno=01&mid=s00000025743001012000&mc=1",
+        "trackingPixelUrl": "https://www10.a8.net/0.gif?a8mat=4B8B4U+8KZZQQ+5IMU+60WN5",
+        "width": 300,
+        "height": 250,
+        "createdAt": null,
+        "updatedAt": null
+      }
+    },
+    "s00000023934001": {
+      "programId": "s00000023934001",
+      "name": "ふるさと納税を始めるなら【au PAY ふるさと納税】",
+      "genre": "furusato ふるさと納税を始めるなら【au PAY ふるさと納税】",
+      "company": "ａｕコマース＆ライフ株式会社",
+      "a8mat": null,
+      "vertical": "furusato",
+      "score": 0.287995,
+      "rewardRatePct": 1,
+      "confirmRatePct": 93.33,
+      "rewardType": "rate",
+      "status": "registered",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-07-28T07:34:48.453Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-07-28T07:35:38.320Z"
+        },
+        {
+          "from": "applied",
+          "to": "approved",
+          "at": "2026-07-28T07:36:06.977Z"
+        },
+        {
+          "from": "approved",
+          "to": "harvested",
+          "at": "2026-07-28T07:37:07.111Z"
+        },
+        {
+          "from": "harvested",
+          "to": "registered",
+          "at": "2026-07-28T07:39:34.125Z",
+          "adId": "af_au-pay_a8_001"
+        }
+      ],
+      "_priority": 10,
+      "_ce": 0,
+      "selectedForRegister": true,
+      "priority": 10,
+      "adDraft": {
+        "id": "af_au-pay_a8_001",
+        "title": "ふるさと納税を始めるなら【au PAY ふるさと納税】",
+        "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B8B4U+8EG836+54OC+5ZMCH",
+        "areaCode": null,
+        "vertical": "furusato",
+        "categoryKey": null,
+        "locationCode": "blog-bottom",
+        "isActive": true,
+        "priority": 50,
+        "startDate": null,
+        "endDate": null,
+        "targetCategories": null,
+        "adType": "banner",
+        "imageUrl": "https://www24.a8.net/svt/bgt?aid=260728158508&wid=001&eno=01&mid=s00000023934001006000&mc=1",
+        "trackingPixelUrl": "https://www14.a8.net/0.gif?a8mat=4B8B4U+8EG836+54OC+5ZMCH",
+        "width": 300,
+        "height": 250,
+        "createdAt": null,
+        "updatedAt": null
+      }
     }
   },
-  "updatedAt": "2026-07-28T06:20:18.378Z"
+  "updatedAt": "2026-07-28T07:39:34.126Z"
 }

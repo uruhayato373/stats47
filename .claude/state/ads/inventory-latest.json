@@ -1,13 +1,13 @@
 {
-  "generatedAt": "2026-07-28T06:30:59.257Z",
+  "generatedAt": "2026-07-28T07:40:54.060Z",
   "date": "2026-07-28",
   "totals": {
-    "entries": 178,
-    "active": 178,
-    "uniqueAdvertisers": 116
+    "entries": 215,
+    "active": 215,
+    "uniqueAdvertisers": 135
   },
   "byCategory": {
-    "(null)": 150,
+    "(null)": 187,
     "energy": 2,
     "tourism": 5,
     "socialsecurity": 4,
@@ -17,27 +17,27 @@
     "population": 2
   },
   "byVertical": {
-    "furusato": 2,
-    "energy": 20,
-    "travel": 28,
+    "furusato": 6,
+    "energy": 27,
+    "travel": 36,
     "health": 12,
     "economy": 20,
-    "housing": 16,
-    "education": 22,
-    "labor": 27,
+    "housing": 24,
+    "education": 24,
+    "labor": 35,
     "mobility": 13,
     "population": 18
   },
   "byLocation": {
-    "blog-bottom": 96,
+    "blog-bottom": 114,
     "area-sidebar": 1,
     "sidebar-sticky": 2,
     "sidebar-inline": 1,
-    "sidebar-bottom": 78
+    "sidebar-bottom": 97
   },
   "byAdType": {
-    "banner": 100,
-    "text": 78
+    "banner": 118,
+    "text": 97
   },
   "coverage": {
     "categoriesCovered": 7,
@@ -61,35 +61,32 @@
     "verticalsCovered": 10,
     "verticalsTotal": 10,
     "gapVerticals": [],
-    "thinVerticals": [
-      "furusato"
-    ],
+    "thinVerticals": [],
     "byVerticalText": {
-      "labor": 13,
-      "energy": 10,
+      "labor": 17,
+      "energy": 14,
       "economy": 7,
-      "housing": 8,
+      "housing": 12,
       "population": 8,
-      "education": 11,
+      "education": 12,
       "mobility": 7,
       "health": 4,
-      "travel": 10
+      "travel": 14,
+      "furusato": 2
     },
     "byVerticalBanner": {
-      "furusato": 2,
-      "energy": 10,
-      "travel": 18,
+      "furusato": 4,
+      "energy": 13,
+      "travel": 22,
       "health": 8,
       "economy": 13,
-      "housing": 8,
-      "education": 11,
-      "labor": 14,
+      "housing": 12,
+      "education": 12,
+      "labor": 18,
       "mobility": 6,
       "population": 10
     },
-    "textGapVerticals": [
-      "furusato"
-    ],
+    "textGapVerticals": [],
     "bannerGapVerticals": []
   },
   "sizeViolations": [

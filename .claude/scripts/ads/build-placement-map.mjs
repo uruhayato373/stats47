@@ -130,6 +130,16 @@ async function loadArticleTags(path) {
   if (path) return { map: parse(readFileSync(path, "utf8")), source: path };
   const base = process.env.R2_PUBLIC_FETCH_URL ?? "https://storage.stats47.jp";
   try {
+    // 会社ネットワーク (透過型 TLS 傍受) では素の fetch が届かず、
+    // 明示 CONNECT プロキシだけが唯一の外向き経路になる。
+    // 設定が無い環境では何もしない (undici が無い場合も落とさない)。
+    const proxy = process.env.HTTPS_PROXY ?? process.env.https_proxy;
+    if (proxy) {
+      try {
+        const { ProxyAgent, setGlobalDispatcher } = await import("undici");
+        setGlobalDispatcher(new ProxyAgent(proxy));
+      } catch { /* undici 不在なら素の fetch のまま試す */ }
+    }
     const res = await fetch(`${base}/app/blog/all.json`, { signal: AbortSignal.timeout(15000) });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     return { map: parse(await res.text()), source: "r2" };

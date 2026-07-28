@@ -347,7 +347,7 @@ function normalizeProgram(raw: any, verticalHint?: string): any {
 async function cmdScout(
   page: Page,
   limit: number,
-  opts: { queries?: string[]; vertical?: string } = {},
+  opts: { queries?: string[]; vertical?: string; promote?: string[] } = {},
 ): Promise<void> {
   const curated = core.loadCurated();
   const codeMap: Record<string, string> = curated.categoryCodeToVertical || {};
@@ -392,8 +392,34 @@ async function cmdScout(
 
   const coverage = loadCoverage();
   const existingAds = loadExistingAds();
-  const { candidates, blocked, duplicates } = core.scoreAndRank(raw, { coverage, existingAds, curated });
+  const { candidates, blocked, duplicates, belowThreshold } = core.scoreAndRank(raw, { coverage, existingAds, curated });
+  // 閾値未満で落ちた案件を必ず表示する。score は単価と EPC で並べるだけなので、
+  // 単価は低いが需要が大きい軸の案件がここに沈む。落ちたことが見えないと
+  // 「在庫ゼロなのに候補も無い」状態の原因が追えない。
+  if (belowThreshold?.length) {
+    console.log(`  ⤵ minScore(${curated.minScore}) 未満で除外 ${belowThreshold.length} 件:`);
+    for (const p of belowThreshold) {
+      console.log(`     ${p.score.toFixed(2)} ${p.programId} ${p.vertical ?? "-"} ${p.name}`);
+    }
+  }
   const top = candidates.slice(0, Number.isFinite(limit) ? limit : candidates.length);
+  // --promote: 閾値未満の特定案件を candidate に昇格する。
+  // 在庫ゼロの軸を埋めるとき、score (単価×EPC) は低いが需要が大きい案件を通すための経路。
+  // **この run で実際に A8 から収集できた案件しか昇格できない** (存在しない ID は中止)。
+  if (opts.promote?.length) {
+    const pool = new Map((belowThreshold ?? []).map((p: any) => [p.programId, p]));
+    const missing = opts.promote.filter((id) => !pool.has(id));
+    if (missing.length) {
+      console.error(`❌ --promote の ID が今回の収集結果 (閾値未満) に無い: ${missing.join(", ")}`);
+      console.error("   スペル違い / 既に candidate 以上 / 検索語が違う のいずれか。中止する。");
+      return;
+    }
+    for (const id of opts.promote) {
+      const p = pool.get(id)!;
+      console.log(`  ⤴ 昇格 ${p.score.toFixed(2)} ${id} ${p.name}`);
+      top.push({ ...p, promotedBy: "gap-fill" });
+    }
+  }
   let cat = loadCatalog();
   cat = core.upsertCandidates(cat, top, { at: nowIso() });
   saveCatalog(cat);
@@ -832,9 +858,11 @@ async function main() {
     if (cmd === "scout") {
       const qi = args.indexOf("--query");
       const vi = args.indexOf("--vertical");
+      const pi = args.indexOf("--promote");
       await cmdScout(page, limit, {
         queries: qi >= 0 ? String(args[qi + 1] ?? "").split(",").map((s) => s.trim()).filter(Boolean) : undefined,
         vertical: vi >= 0 ? args[vi + 1] : undefined,
+        promote: pi >= 0 ? String(args[pi + 1] ?? "").split(",").map((s) => s.trim()).filter(Boolean) : undefined,
       });
     }
     else if (cmd === "apply") await cmdApply(page, max, ids);

@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-07-28T06:53:28.617Z",
+  "generatedAt": "2026-07-28T07:41:51.438Z",
   "gscWeek": "2026-W30",
   "inputs": {
     "pages": 2729,
     "rankingKeys": 2208,
     "articleTags": 430,
-    "articleTagsSource": "C:/Users/m004195/AppData/Local/Temp/claude/C--Users-m004195-stats47/2eacfa26-f96e-412f-97a5-994fa1709e5e/scratchpad/blog.json"
+    "articleTagsSource": "r2"
   },
   "demand": {
     "byType": {
@@ -378,39 +378,40 @@
   },
   "supply": {
     "total": {
-      "furusato": 2,
-      "energy": 20,
-      "travel": 28,
+      "furusato": 6,
+      "energy": 27,
+      "travel": 36,
       "health": 12,
       "economy": 20,
-      "housing": 16,
-      "education": 22,
-      "labor": 27,
+      "housing": 24,
+      "education": 24,
+      "labor": 35,
       "mobility": 13,
       "population": 18
     },
     "banner": {
-      "furusato": 2,
-      "energy": 10,
-      "travel": 18,
+      "furusato": 4,
+      "energy": 13,
+      "travel": 22,
       "health": 8,
       "economy": 13,
-      "housing": 8,
-      "education": 11,
-      "labor": 14,
+      "housing": 12,
+      "education": 12,
+      "labor": 18,
       "mobility": 6,
       "population": 10
     },
     "text": {
-      "labor": 13,
-      "energy": 10,
+      "labor": 17,
+      "energy": 14,
       "economy": 7,
-      "housing": 8,
+      "housing": 12,
       "population": 8,
-      "education": 11,
+      "education": 12,
       "mobility": 7,
       "health": 4,
-      "travel": 10
+      "travel": 14,
+      "furusato": 2
     }
   },
   "gaps": [
@@ -427,12 +428,10 @@
       "vertical": "furusato",
       "imp": 12810,
       "clicks": 195,
-      "inventory": 2,
-      "banner": 2,
-      "text": 0,
-      "kinds": [
-        "text-zero"
-      ]
+      "inventory": 6,
+      "banner": 4,
+      "text": 2,
+      "kinds": []
     },
     {
       "vertical": "health",
@@ -456,9 +455,9 @@
       "vertical": "education",
       "imp": 7739,
       "clicks": 260,
-      "inventory": 22,
-      "banner": 11,
-      "text": 11,
+      "inventory": 24,
+      "banner": 12,
+      "text": 12,
       "kinds": []
     },
     {
@@ -474,36 +473,36 @@
       "vertical": "labor",
       "imp": 3223,
       "clicks": 76,
-      "inventory": 27,
-      "banner": 14,
-      "text": 13,
+      "inventory": 35,
+      "banner": 18,
+      "text": 17,
       "kinds": []
     },
     {
       "vertical": "energy",
       "imp": 1973,
       "clicks": 30,
-      "inventory": 20,
-      "banner": 10,
-      "text": 10,
+      "inventory": 27,
+      "banner": 13,
+      "text": 14,
       "kinds": []
     },
     {
       "vertical": "housing",
       "imp": 1844,
       "clicks": 46,
-      "inventory": 16,
-      "banner": 8,
-      "text": 8,
+      "inventory": 24,
+      "banner": 12,
+      "text": 12,
       "kinds": []
     },
     {
       "vertical": "travel",
       "imp": 774,
       "clicks": 11,
-      "inventory": 28,
-      "banner": 18,
-      "text": 10,
+      "inventory": 36,
+      "banner": 22,
+      "text": 14,
       "kinds": []
     }
   ],
