@@ -186,11 +186,28 @@ function main() {
   const period = unitPeriod("program-detail") || unitPeriod("site-summary") || (manifest.units || []).map((u) => u.period).find(Boolean) || null;
   log.period = period;
 
-  // ★ 検算: 口座横断から抽出した対象サイト分と、サイト別（真実源）の対象サイト行を突合
-  const siteRow = (log.siteSummary || []).find((r) => String(r.site || "").includes(cfg.a8.targetSite));
-  const allProgramRows = log.programPeriod || [];
-  const allowlisted = allProgramRows.filter((r) => r.program);
-  log.crossCheck = crossCheckAgainstSite(siteRow, allowlisted);
+  // ★ 期間で絞る。log.* は upsert で **過去 run の行を蓄積する**ため、絞らずに突合すると
+  //   別期間の値が混ざって「混入の疑い」を誤報し、さらに累計行が当月の実績として
+  //   a8-results.json へ書き込まれる（doboku-note 側で 2026-07-28 の単月取得の初回実走・
+  //   および 2026-01/02 のバックフィルで実測。移植時にその修正前の版を取り込んでいたため後追いで反映）。
+  // 行側は `row.period = unit.period?.raw`（上の正規化ループ）なので raw で揃える
+  const currentPeriod = period?.raw ?? null;
+  const inCurrentPeriod = (r) => r.period === currentPeriod;
+
+  // ★ 検算: 口座横断から抽出した対象サイト分と、サイト別（真実源）の対象サイト行を突合。
+  //   期間を特定できない run（DL 失敗・対象データ 0 件で CSV ボタンが出ない等）では**比較しない**。
+  //   ここで全期間を合算すると別期間の値が混ざって誤報になる。
+  const allProgramRows = (log.programPeriod || []).filter(inCurrentPeriod);
+  if (currentPeriod == null) {
+    log.crossCheck = { comparable: false, reason: "この run では期間を特定できない（有効な CSV が無い）" };
+  } else {
+    const siteRow = (log.siteSummary || [])
+      .filter(inCurrentPeriod)
+      .find((r) => String(r.site || "").includes(cfg.a8.targetSite));
+    const allowlisted = allProgramRows.filter((r) => r.program);
+    log.crossCheck = crossCheckAgainstSite(siteRow, allowlisted);
+    if (log.crossCheck) log.crossCheck.period = currentPeriod;
+  }
 
   // ★ 3 プログラム (buildjob / kensetsu-jobs / gks) は **両サイトが同じ A8 案件を配信している**ため、
   //   programId の allowlist では stats47 分を分離できない。account-wide レポートのこれらの行は
