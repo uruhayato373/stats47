@@ -1719,7 +1719,7 @@
       "company": "株式会社アクロビジョン",
       "vertical": "labor",
       "score": null,
-      "status": "approved",
+      "status": "registered",
       "source": "existing-partnership",
       "history": [
         {
@@ -1727,6 +1727,17 @@
           "to": "approved",
           "at": "2026-07-19T22:34:21.032Z",
           "note": "existing-partnership"
+        },
+        {
+          "from": "approved",
+          "to": "harvested",
+          "at": "2026-07-28T11:18:08.992Z"
+        },
+        {
+          "from": "harvested",
+          "to": "registered",
+          "at": "2026-07-28T11:19:48.882Z",
+          "adId": "af_it_a8_text_001"
         }
       ],
       "epcYen": 43,
@@ -1734,7 +1745,30 @@
       "rewardYen": 20000,
       "rewardType": "fixed",
       "_priority": 10,
-      "_ce": 17.2
+      "_ce": 17.2,
+      "selectedForRegister": true,
+      "priority": 10,
+      "adDraft": {
+        "id": "af_it_a8_001",
+        "title": "フリーランスエンジニア向け案件紹介サービス【IT求人ナビ フリーランス】",
+        "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B684G+G2PCS2+4LXM+5ZMCH",
+        "areaCode": null,
+        "vertical": "labor",
+        "categoryKey": null,
+        "locationCode": "blog-bottom",
+        "isActive": true,
+        "priority": 50,
+        "startDate": null,
+        "endDate": null,
+        "targetCategories": null,
+        "adType": "banner",
+        "imageUrl": "https://www24.a8.net/svt/bgt?aid=260630944972&wid=001&eno=01&mid=s00000021505001006000&mc=1",
+        "trackingPixelUrl": "https://www11.a8.net/0.gif?a8mat=4B684G+G2PCS2+4LXM+5ZMCH",
+        "width": 300,
+        "height": 250,
+        "createdAt": null,
+        "updatedAt": null
+      }
     },
     "s00000015695001": {
       "programId": "s00000015695001",
@@ -1813,7 +1847,7 @@
       "company": "株式会社ワンキャリア",
       "vertical": "labor",
       "score": null,
-      "status": "approved",
+      "status": "registered",
       "source": "existing-partnership",
       "history": [
         {
@@ -1821,6 +1855,17 @@
           "to": "approved",
           "at": "2026-07-19T22:34:21.032Z",
           "note": "existing-partnership"
+        },
+        {
+          "from": "approved",
+          "to": "harvested",
+          "at": "2026-07-28T11:18:14.720Z"
+        },
+        {
+          "from": "harvested",
+          "to": "registered",
+          "at": "2026-07-28T11:19:48.882Z",
+          "adId": "af_s00000026465002_a8_001"
         }
       ],
       "epcYen": 15,
@@ -1828,7 +1873,30 @@
       "rewardYen": 3000,
       "rewardType": "fixed",
       "_priority": 10,
-      "_ce": 13.844999999999999
+      "_ce": 13.844999999999999,
+      "selectedForRegister": true,
+      "priority": 10,
+      "adDraft": {
+        "id": "af_s00000026465002_a8_001",
+        "title": "ワンキャリア転職｜中の人の声を聞いて受かる転職サービス",
+        "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B614K+GC8AGI+5O7E+BXB8X",
+        "areaCode": null,
+        "vertical": "labor",
+        "categoryKey": null,
+        "locationCode": "blog-bottom",
+        "isActive": true,
+        "priority": 50,
+        "startDate": null,
+        "endDate": null,
+        "targetCategories": null,
+        "adType": "banner",
+        "imageUrl": "https://www26.a8.net/svt/bgt?aid=260621876988&wid=001&eno=01&mid=s00000026465002003000&mc=1",
+        "trackingPixelUrl": "https://www18.a8.net/0.gif?a8mat=4B614K+GC8AGI+5O7E+BXB8X",
+        "width": 300,
+        "height": 250,
+        "createdAt": null,
+        "updatedAt": null
+      }
     },
     "s00000005230001": {
       "programId": "s00000005230001",
@@ -2365,7 +2433,7 @@
       "company": "ｃｉｒｃｕｓ株式会社",
       "vertical": "labor",
       "score": null,
-      "status": "approved",
+      "status": "registered",
       "source": "existing-partnership",
       "history": [
         {
@@ -2373,6 +2441,17 @@
           "to": "approved",
           "at": "2026-07-19T22:34:21.032Z",
           "note": "existing-partnership"
+        },
+        {
+          "from": "approved",
+          "to": "harvested",
+          "at": "2026-07-28T11:18:20.539Z"
+        },
+        {
+          "from": "harvested",
+          "to": "registered",
+          "at": "2026-07-28T11:19:48.882Z",
+          "adId": "af_agent-navi_a8_001"
         }
       ],
       "epcYen": 71,
@@ -2380,7 +2459,30 @@
       "rewardYen": 8000,
       "rewardType": "fixed",
       "_priority": 10,
-      "_ce": 26.0783
+      "_ce": 26.0783,
+      "selectedForRegister": true,
+      "priority": 10,
+      "adDraft": {
+        "id": "af_agent-navi_a8_001",
+        "title": "完全無料で転職のプロをパーソナルマッチング【転職AGENT Navi】",
+        "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B5N41+6TW1MA+5BJK+60H7L",
+        "areaCode": null,
+        "vertical": "labor",
+        "categoryKey": null,
+        "locationCode": "blog-bottom",
+        "isActive": true,
+        "priority": 50,
+        "startDate": null,
+        "endDate": null,
+        "targetCategories": null,
+        "adType": "banner",
+        "imageUrl": "https://www26.a8.net/svt/bgt?aid=260603713413&wid=001&eno=01&mid=s00000024824001010000&mc=1",
+        "trackingPixelUrl": "https://www16.a8.net/0.gif?a8mat=4B5N41+6TW1MA+5BJK+60H7L",
+        "width": 250,
+        "height": 250,
+        "createdAt": null,
+        "updatedAt": null
+      }
     },
     "s00000022413004": {
       "programId": "s00000022413004",
@@ -3109,7 +3211,7 @@
       "company": "株式会社ＤＯＲＡＶＥＲＳＥ＿ＪＡＰＡＮ",
       "vertical": "housing",
       "score": null,
-      "status": "approved",
+      "status": "registered",
       "source": "existing-partnership",
       "history": [
         {
@@ -3117,6 +3219,17 @@
           "to": "approved",
           "at": "2026-07-19T22:34:21.032Z",
           "note": "existing-partnership"
+        },
+        {
+          "from": "approved",
+          "to": "harvested",
+          "at": "2026-07-28T11:18:26.345Z"
+        },
+        {
+          "from": "harvested",
+          "to": "registered",
+          "at": "2026-07-28T11:19:48.882Z",
+          "adId": "af_doraverse-btob-saas-ai_a8_001"
         }
       ],
       "epcYen": 0,
@@ -3124,7 +3237,30 @@
       "rewardYen": 62,
       "rewardType": "fixed",
       "_priority": 10,
-      "_ce": 0
+      "_ce": 0,
+      "selectedForRegister": true,
+      "priority": 10,
+      "adDraft": {
+        "id": "af_doraverse-btob-saas-ai_a8_001",
+        "title": "Doraverse｜【BtoB向けSaaS】オフィス業務を劇的に効率化させるAIツール",
+        "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4B3RUY+AGVEPE+5UU0+5Z6WX",
+        "areaCode": null,
+        "vertical": "housing",
+        "categoryKey": null,
+        "locationCode": "blog-bottom",
+        "isActive": true,
+        "priority": 50,
+        "startDate": null,
+        "endDate": null,
+        "targetCategories": null,
+        "adType": "banner",
+        "imageUrl": "https://www26.a8.net/svt/bgt?aid=260516554633&wid=001&eno=01&mid=s00000027324001004000&mc=1",
+        "trackingPixelUrl": "https://www12.a8.net/0.gif?a8mat=4B3RUY+AGVEPE+5UU0+5Z6WX",
+        "width": 300,
+        "height": 250,
+        "createdAt": null,
+        "updatedAt": null
+      }
     },
     "s00000027186001": {
       "programId": "s00000027186001",
@@ -3201,7 +3337,7 @@
       "name": "TVCM放映で知名度UP★ココナラ｜Webサイト・デザイン・動画・イラストなど発注者 募集",
       "genre": "TVCM放映で知名度UP★ココナラ｜Webサイト・デザイン・動画・イラストなど発注者 募集",
       "company": "株式会社ココナラ",
-      "vertical": null,
+      "vertical": "labor",
       "score": null,
       "status": "approved",
       "source": "existing-partnership",
@@ -3211,6 +3347,11 @@
           "to": "approved",
           "at": "2026-07-19T22:34:21.032Z",
           "note": "existing-partnership"
+        },
+        {
+          "at": "2026-07-28",
+          "action": "resolve-vertical",
+          "by": "affiliate-manager 判断 (高確定EPC pending-vertical の解決)"
         }
       ],
       "epcYen": 3,
@@ -3521,7 +3662,7 @@
       "company": "株式会社Ｒ４ＣＡＲＥＥＲ",
       "vertical": "labor",
       "score": null,
-      "status": "approved",
+      "status": "registered",
       "source": "existing-partnership",
       "history": [
         {
@@ -3529,6 +3670,17 @@
           "to": "approved",
           "at": "2026-07-19T22:34:21.032Z",
           "note": "existing-partnership"
+        },
+        {
+          "from": "approved",
+          "to": "harvested",
+          "at": "2026-07-28T11:18:32.179Z"
+        },
+        {
+          "from": "harvested",
+          "to": "registered",
+          "at": "2026-07-28T11:19:48.882Z",
+          "adId": "af_3-r4career_a8_001"
         }
       ],
       "epcYen": 25,
@@ -3536,7 +3688,30 @@
       "rewardYen": 8000,
       "rewardType": "fixed",
       "_priority": 10,
-      "_ce": 10
+      "_ce": 10,
+      "selectedForRegister": true,
+      "priority": 10,
+      "adDraft": {
+        "id": "af_3-r4career_a8_001",
+        "title": "東海3県に特化した「ぴったり転職」を実現する名古屋の転職エージェント【R4CAREER】",
+        "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4AZCG4+9U8XPU+576C+5ZEMP",
+        "areaCode": null,
+        "vertical": "labor",
+        "categoryKey": null,
+        "locationCode": "blog-bottom",
+        "isActive": true,
+        "priority": 50,
+        "startDate": null,
+        "endDate": null,
+        "targetCategories": null,
+        "adType": "banner",
+        "imageUrl": "https://www29.a8.net/svt/bgt?aid=260309956595&wid=001&eno=01&mid=s00000024258001005000&mc=1",
+        "trackingPixelUrl": "https://www17.a8.net/0.gif?a8mat=4AZCG4+9U8XPU+576C+5ZEMP",
+        "width": 300,
+        "height": 250,
+        "createdAt": null,
+        "updatedAt": null
+      }
     },
     "s00000000489002": {
       "programId": "s00000000489002",
@@ -4025,7 +4200,7 @@
       "company": "株式会社ＧＲＡＣＥ",
       "vertical": "energy",
       "score": null,
-      "status": "approved",
+      "status": "registered",
       "source": "existing-partnership",
       "history": [
         {
@@ -4033,6 +4208,17 @@
           "to": "approved",
           "at": "2026-07-19T22:34:21.032Z",
           "note": "existing-partnership"
+        },
+        {
+          "from": "approved",
+          "to": "harvested",
+          "at": "2026-07-28T11:18:37.952Z"
+        },
+        {
+          "from": "harvested",
+          "to": "registered",
+          "at": "2026-07-28T11:19:48.882Z",
+          "adId": "af_v2h_a8_001"
         }
       ],
       "epcYen": 0,
@@ -4040,7 +4226,30 @@
       "rewardYen": 5000,
       "rewardType": "fixed",
       "_priority": 10,
-      "_ce": 0
+      "_ce": 0,
+      "selectedForRegister": true,
+      "priority": 10,
+      "adDraft": {
+        "id": "af_v2h_a8_001",
+        "title": "【V2H】で電気自動車・自宅の電気・太陽光の電力をつなげて活用！",
+        "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4AZD81+9YEYYA+3EMG+3SZMKX",
+        "areaCode": null,
+        "vertical": "energy",
+        "categoryKey": null,
+        "locationCode": "blog-bottom",
+        "isActive": true,
+        "priority": 50,
+        "startDate": null,
+        "endDate": null,
+        "targetCategories": null,
+        "adType": "banner",
+        "imageUrl": "https://www27.a8.net/svt/bgt?aid=260310961602&wid=001&eno=01&mid=s00000015892023009000&mc=1",
+        "trackingPixelUrl": "https://www19.a8.net/0.gif?a8mat=4AZD81+9YEYYA+3EMG+3SZMKX",
+        "width": 300,
+        "height": 250,
+        "createdAt": null,
+        "updatedAt": null
+      }
     },
     "s00000018427001": {
       "programId": "s00000018427001",
@@ -5184,7 +5393,7 @@
       "company": "株式会社アップルワールド",
       "vertical": "travel",
       "score": null,
-      "status": "approved",
+      "status": "registered",
       "source": "existing-partnership",
       "history": [
         {
@@ -5192,6 +5401,17 @@
           "to": "approved",
           "at": "2026-07-19T22:34:21.032Z",
           "note": "existing-partnership"
+        },
+        {
+          "from": "approved",
+          "to": "harvested",
+          "at": "2026-07-28T11:18:43.771Z"
+        },
+        {
+          "from": "harvested",
+          "to": "registered",
+          "at": "2026-07-28T11:19:48.882Z",
+          "adId": "af_travelist_a8_001"
         }
       ],
       "epcYen": 0,
@@ -5199,7 +5419,30 @@
       "rewardYen": 2000,
       "rewardType": "fixed",
       "_priority": 10,
-      "_ce": 0
+      "_ce": 0,
+      "selectedForRegister": true,
+      "priority": 10,
+      "adDraft": {
+        "id": "af_travelist_a8_001",
+        "title": "【Travelist（海外格安航空券）】",
+        "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4AZCG5+DNS2GI+4XZI+HVNAP",
+        "areaCode": null,
+        "vertical": "travel",
+        "categoryKey": null,
+        "locationCode": "blog-bottom",
+        "isActive": true,
+        "priority": 50,
+        "startDate": null,
+        "endDate": null,
+        "targetCategories": null,
+        "adType": "banner",
+        "imageUrl": "https://www22.a8.net/svt/bgt?aid=260309957826&wid=001&eno=01&mid=s00000023067003003000&mc=1",
+        "trackingPixelUrl": "https://www11.a8.net/0.gif?a8mat=4AZCG5+DNS2GI+4XZI+HVNAP",
+        "width": 300,
+        "height": 250,
+        "createdAt": null,
+        "updatedAt": null
+      }
     },
     "s00000022171004": {
       "programId": "s00000022171004",
@@ -5208,7 +5451,7 @@
       "company": "株式会社トラベルウエスト",
       "vertical": "travel",
       "score": null,
-      "status": "approved",
+      "status": "registered",
       "source": "existing-partnership",
       "history": [
         {
@@ -5216,6 +5459,17 @@
           "to": "approved",
           "at": "2026-07-19T22:34:21.032Z",
           "note": "existing-partnership"
+        },
+        {
+          "from": "approved",
+          "to": "harvested",
+          "at": "2026-07-28T11:18:49.534Z"
+        },
+        {
+          "from": "harvested",
+          "to": "registered",
+          "at": "2026-07-28T11:19:48.882Z",
+          "adId": "af_s00000022171004_a8_text_001"
         }
       ],
       "epcYen": 0,
@@ -5223,7 +5477,30 @@
       "rewardYen": 600,
       "rewardType": "fixed",
       "_priority": 10,
-      "_ce": 0
+      "_ce": 0,
+      "selectedForRegister": true,
+      "priority": 10,
+      "adDraft": {
+        "id": "af_s00000022171004_a8_001",
+        "title": "海外航空券を最安値をカンタン検索・比較・予約【トラベルウエスト】",
+        "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4AZCG5+DN6MUQ+4R2M+NUMHT",
+        "areaCode": null,
+        "vertical": "travel",
+        "categoryKey": null,
+        "locationCode": "blog-bottom",
+        "isActive": true,
+        "priority": 50,
+        "startDate": null,
+        "endDate": null,
+        "targetCategories": null,
+        "adType": "banner",
+        "imageUrl": "https://www27.a8.net/svt/bgt?aid=260309957825&wid=001&eno=01&mid=s00000022171004006000&mc=1",
+        "trackingPixelUrl": "https://www12.a8.net/0.gif?a8mat=4AZCG5+DN6MUQ+4R2M+NUMHT",
+        "width": 300,
+        "height": 250,
+        "createdAt": null,
+        "updatedAt": null
+      }
     },
     "s00000013995001": {
       "programId": "s00000013995001",
@@ -5232,7 +5509,7 @@
       "company": "ＴＴＣ株式会社",
       "vertical": "travel",
       "score": null,
-      "status": "approved",
+      "status": "registered",
       "source": "existing-partnership",
       "history": [
         {
@@ -5240,6 +5517,17 @@
           "to": "approved",
           "at": "2026-07-19T22:34:21.032Z",
           "note": "existing-partnership"
+        },
+        {
+          "from": "approved",
+          "to": "harvested",
+          "at": "2026-07-28T11:18:55.393Z"
+        },
+        {
+          "from": "harvested",
+          "to": "registered",
+          "at": "2026-07-28T11:19:48.882Z",
+          "adId": "af_s00000013995001_a8_001"
         }
       ],
       "epcYen": 0,
@@ -5247,7 +5535,30 @@
       "rewardRatePct": 5,
       "rewardType": "rate",
       "_priority": 10,
-      "_ce": 0
+      "_ce": 0,
+      "selectedForRegister": true,
+      "priority": 10,
+      "adDraft": {
+        "id": "af_s00000013995001_a8_001",
+        "title": "【スーツケース/旅行用品/バッグの専門店トコー】オンラインショップ",
+        "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4AZCG5+DGMV76+2ZZI+63OY9",
+        "areaCode": null,
+        "vertical": "travel",
+        "categoryKey": null,
+        "locationCode": "blog-bottom",
+        "isActive": true,
+        "priority": 50,
+        "startDate": null,
+        "endDate": null,
+        "targetCategories": null,
+        "adType": "banner",
+        "imageUrl": "https://www25.a8.net/svt/bgt?aid=260309957814&wid=001&eno=01&mid=s00000013995001025000&mc=1",
+        "trackingPixelUrl": "https://www12.a8.net/0.gif?a8mat=4AZCG5+DGMV76+2ZZI+63OY9",
+        "width": 300,
+        "height": 250,
+        "createdAt": null,
+        "updatedAt": null
+      }
     },
     "s00000017980001": {
       "programId": "s00000017980001",
@@ -6201,9 +6512,9 @@
       "name": "【TOSSY】あらゆる取引がアプリひとつで完結！お得な特典が盛りだくさん！",
       "genre": "【TOSSY】あらゆる取引がアプリひとつで完結！お得な特典が盛りだくさん！",
       "company": "株式会社ＤＭＭ．ｃｏｍ証券",
-      "vertical": null,
+      "vertical": "economy",
       "score": null,
-      "status": "approved",
+      "status": "registered",
       "source": "existing-partnership",
       "history": [
         {
@@ -6211,6 +6522,22 @@
           "to": "approved",
           "at": "2026-07-19T22:34:21.032Z",
           "note": "existing-partnership"
+        },
+        {
+          "at": "2026-07-28",
+          "action": "resolve-vertical",
+          "by": "affiliate-manager 判断 (高確定EPC pending-vertical の解決)"
+        },
+        {
+          "from": "approved",
+          "to": "harvested",
+          "at": "2026-07-28T11:19:01.150Z"
+        },
+        {
+          "from": "harvested",
+          "to": "registered",
+          "at": "2026-07-28T11:19:48.882Z",
+          "adId": "af_tossy_a8_001"
         }
       ],
       "epcYen": 223,
@@ -6218,7 +6545,30 @@
       "rewardYen": 15000,
       "rewardType": "fixed",
       "_priority": 20,
-      "_ce": 82.15320000000001
+      "_ce": 82.15320000000001,
+      "selectedForRegister": true,
+      "priority": 20,
+      "adDraft": {
+        "id": "af_tossy_a8_001",
+        "title": "【TOSSY】あらゆる取引がアプリひとつで完結！お得な特典が盛りだくさん！",
+        "htmlContent": "https://px.a8.net/svt/ejp?a8mat=4AZCG4+8PRGKY+1WP2+1HOVC1",
+        "areaCode": null,
+        "vertical": "economy",
+        "categoryKey": null,
+        "locationCode": "blog-bottom",
+        "isActive": true,
+        "priority": 50,
+        "startDate": null,
+        "endDate": null,
+        "targetCategories": null,
+        "adType": "banner",
+        "imageUrl": "https://www27.a8.net/svt/bgt?aid=260309956527&wid=001&eno=01&mid=s00000008903009018000&mc=1",
+        "trackingPixelUrl": "https://www13.a8.net/0.gif?a8mat=4AZCG4+8PRGKY+1WP2+1HOVC1",
+        "width": 250,
+        "height": 250,
+        "createdAt": null,
+        "updatedAt": null
+      }
     },
     "s00000017807001": {
       "programId": "s00000017807001",
@@ -6840,9 +7190,9 @@
       "name": "ブラウザだけでできる本格的なAI画像生成【ConoHa AI Canvas】",
       "genre": "ブラウザだけでできる本格的なAI画像生成【ConoHa AI Canvas】",
       "company": "ＧＭＯインターネット株式会社",
-      "vertical": null,
+      "vertical": "economy",
       "score": null,
-      "status": "approved",
+      "status": "registered",
       "source": "existing-partnership",
       "history": [
         {
@@ -6850,6 +7200,22 @@
           "to": "approved",
           "at": "2026-07-19T22:34:21.032Z",
           "note": "existing-partnership"
+        },
+        {
+          "at": "2026-07-28",
+          "action": "resolve-vertical",
+          "by": "affiliate-manager 判断 (高確定EPC pending-vertical の解決)"
+        },
+        {
+          "from": "approved",
+          "to": "harvested",
+          "at": "2026-07-28T11:19:07.041Z"
+        },
+        {
+          "from": "harvested",
+          "to": "registered",
+          "at": "2026-07-28T11:19:48.882Z",
+          "adId": "af_ai-conoha-ai-canvas_a8_001"
         }
       ],
       "epcYen": 5,
@@ -6857,7 +7223,30 @@
       "rewardYen": 500,
       "rewardType": "fixed",
       "_priority": 10,
-      "_ce": 4.225
+      "_ce": 4.225,
+      "selectedForRegister": true,
+      "priority": 10,
+      "adDraft": {
+        "id": "af_ai-conoha-ai-canvas_a8_001",
+        "title": "ブラウザだけでできる本格的なAI画像生成【ConoHa AI Canvas】",
+        "htmlContent": "https://px.a8.net/svt/ejp?a8mat=45BQMW+CFPZOY+50+7S2AYP",
+        "areaCode": null,
+        "vertical": "economy",
+        "categoryKey": null,
+        "locationCode": "blog-bottom",
+        "isActive": true,
+        "priority": 50,
+        "startDate": null,
+        "endDate": null,
+        "targetCategories": null,
+        "adType": "banner",
+        "imageUrl": "https://www27.a8.net/svt/bgt?aid=250810520752&wid=001&eno=01&mid=s00000000018047040000&mc=1",
+        "trackingPixelUrl": "https://www17.a8.net/0.gif?a8mat=45BQMW+CFPZOY+50+7S2AYP",
+        "width": 300,
+        "height": 250,
+        "createdAt": null,
+        "updatedAt": null
+      }
     },
     "s00000020001003": {
       "programId": "s00000020001003",
@@ -7116,7 +7505,7 @@
       "company": "イオンコンパス株式会社",
       "vertical": "travel",
       "score": null,
-      "status": "approved",
+      "status": "registered",
       "source": "existing-partnership",
       "history": [
         {
@@ -7124,6 +7513,17 @@
           "to": "approved",
           "at": "2026-07-19T22:34:21.032Z",
           "note": "existing-partnership"
+        },
+        {
+          "from": "approved",
+          "to": "harvested",
+          "at": "2026-07-28T11:19:12.868Z"
+        },
+        {
+          "from": "harvested",
+          "to": "registered",
+          "at": "2026-07-28T11:19:48.882Z",
+          "adId": "af_s00000026954001_a8_001"
         }
       ],
       "epcYen": 0,
@@ -7131,7 +7531,30 @@
       "rewardRatePct": 2,
       "rewardType": "rate",
       "_priority": 10,
-      "_ce": 0
+      "_ce": 0,
+      "selectedForRegister": true,
+      "priority": 10,
+      "adDraft": {
+        "id": "af_s00000026954001_a8_001",
+        "title": "国内宿泊（宿・ホテル）【イオンコンパストラベルモール】",
+        "htmlContent": "https://px.a8.net/svt/ejp?a8mat=459WZ2+CNGMK2+5RZ8+5YZ75",
+        "areaCode": null,
+        "vertical": "travel",
+        "categoryKey": null,
+        "locationCode": "blog-bottom",
+        "isActive": true,
+        "priority": 50,
+        "startDate": null,
+        "endDate": null,
+        "targetCategories": null,
+        "adType": "banner",
+        "imageUrl": "https://www27.a8.net/svt/bgt?aid=250725422765&wid=001&eno=01&mid=s00000026954001003000&mc=1",
+        "trackingPixelUrl": "https://www14.a8.net/0.gif?a8mat=459WZ2+CNGMK2+5RZ8+5YZ75",
+        "width": 300,
+        "height": 250,
+        "createdAt": null,
+        "updatedAt": null
+      }
     },
     "s00000025400001": {
       "programId": "s00000025400001",
@@ -8679,5 +9102,5 @@
       }
     }
   },
-  "updatedAt": "2026-07-28T07:39:34.126Z"
+  "updatedAt": "2026-07-28T11:19:48.883Z"
 }

@@ -90,14 +90,39 @@ async function checkAsp(name, root, log) {
         })
         .catch(() => {});
       const t = await visibleText(page, 200000);
-      out[key] = { ids: collectIds(t, asp), text: t };
-      // ★ 一覧の実件数も出す。ID を出さない ASP (もしも) では ids.size が常に 0 になり、
+      const ids = collectIds(t, asp);
+      // ★もしも: promotion_id は画面テキストに出ず a[href] にのみ現れる (2026-07-28 実測 —
+      //   text.includes 照合が常に "none" になり、applying 4 件を誤ドリフト報告した)。
+      //   config の hrefIdPattern がある ASP は href からも ID を収集する。
+      if (asp.hrefIdPattern) {
+        // 一覧行スコープを優先する (ページ全体だと推薦リンク等の ID が混ざり超集合になり、
+        // 「却下済みなのに ID が残って drift を見逃す」余地が生まれる)。行スコープで 1 件も
+        // 取れないときだけページ全体へ fallback し、その旨をログへ出す。
+        const scopes = asp.rowSelector ? [`tr:has(${asp.rowSelector}) a[href]`, "a[href]"] : ["a[href]"];
+        const re = new RegExp(asp.hrefIdPattern, "g");
+        for (const scope of scopes) {
+          const hrefs = await page
+            .$$eval(scope, (as) => as.map((a) => a.getAttribute("href") ?? ""))
+            .catch(() => []);
+          const before = ids.size;
+          for (const h of hrefs) {
+            for (const m of h.matchAll(re)) if (m[1]) ids.add(m[1]);
+          }
+          if (ids.size > before) {
+            if (scope === "a[href]" && scopes.length > 1) log(`  (${name}/${key}: 行スコープで ID 0 件 → ページ全体から抽出 = 超集合の可能性)`);
+            break;
+          }
+        }
+      }
+      out[key] = { ids, text: t };
+      // ★ 一覧の実件数も出す。ID を出さない ASP では ids.size が常に 0 になり、
       //   「0 件の ID を検出」だけだと**提携が 0 件だと誤読される** (2026-07-28 に実際に誤読した)。
-      //   ID の有無と一覧の中身の有無は別の話なので両方報告する。
+      //   selector は ASP ごとに違う (旧実装はもしも用 td.promotion-name を全 ASP に流用し
+      //   afb で「一覧 0 件」を誤表示した) — config の rowSelector を使い、無ければ数えない。
       // `$$eval` は Playwright の DOM 取得 API であって JavaScript の `eval()` ではない。
-      const rowCount = await page
-        .$$eval("td.promotion-name", (tds) => tds.length)
-        .catch(() => null);
+      const rowCount = asp.rowSelector
+        ? await page.$$eval(asp.rowSelector, (tds) => tds.length).catch(() => null)
+        : null;
       const rows = rowCount === null ? "一覧の件数を取得できず" : `一覧 ${rowCount} 件`;
       log(`  ${name}/${key}: ${rows} / ID 抽出 ${out[key].ids.size} 件 (SID ${site.actualSiteId ?? "-"})`);
     }

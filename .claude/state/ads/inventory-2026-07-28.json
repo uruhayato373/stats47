@@ -1,13 +1,13 @@
 {
-  "generatedAt": "2026-07-28T08:36:23.236Z",
+  "generatedAt": "2026-07-28T11:19:48.111Z",
   "date": "2026-07-28",
   "totals": {
-    "entries": 215,
-    "active": 215,
-    "uniqueAdvertisers": 135
+    "entries": 237,
+    "active": 237,
+    "uniqueAdvertisers": 147
   },
   "byCategory": {
-    "(null)": 187,
+    "(null)": 209,
     "energy": 2,
     "tourism": 5,
     "socialsecurity": 4,
@@ -18,26 +18,26 @@
   },
   "byVertical": {
     "furusato": 6,
-    "energy": 27,
-    "travel": 36,
+    "energy": 29,
+    "travel": 43,
     "health": 12,
-    "economy": 20,
-    "housing": 24,
+    "economy": 24,
+    "housing": 26,
     "education": 24,
-    "labor": 35,
+    "labor": 42,
     "mobility": 13,
     "population": 18
   },
   "byLocation": {
-    "blog-bottom": 114,
+    "blog-bottom": 124,
     "area-sidebar": 1,
     "sidebar-sticky": 2,
     "sidebar-inline": 1,
-    "sidebar-bottom": 97
+    "sidebar-bottom": 109
   },
   "byAdType": {
-    "banner": 118,
-    "text": 97
+    "banner": 128,
+    "text": 109
   },
   "coverage": {
     "categoriesCovered": 7,
@@ -63,26 +63,26 @@
     "gapVerticals": [],
     "thinVerticals": [],
     "byVerticalText": {
-      "labor": 17,
-      "energy": 14,
-      "economy": 7,
-      "housing": 12,
+      "labor": 21,
+      "energy": 15,
+      "economy": 9,
+      "housing": 13,
       "population": 8,
       "education": 12,
       "mobility": 7,
       "health": 4,
-      "travel": 14,
+      "travel": 18,
       "furusato": 2
     },
     "byVerticalBanner": {
       "furusato": 4,
-      "energy": 13,
-      "travel": 22,
+      "energy": 14,
+      "travel": 25,
       "health": 8,
-      "economy": 13,
-      "housing": 12,
+      "economy": 15,
+      "housing": 13,
       "education": 12,
-      "labor": 18,
+      "labor": 21,
       "mobility": 6,
       "population": 10
     },
