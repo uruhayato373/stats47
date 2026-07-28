@@ -8,18 +8,28 @@
  *
  * ★ A8 は 2024 以降メディア管理画面を media-console.a8.net に刷新済み (旧 pub.a8.net/a8v2 は廃止)。
  *
- * 使い方 (本体リポジトリ ~/stats47 で実行。worktree 不可):
+ * 使い方 (本体リポジトリで実行。worktree 不可):
  *   node .claude/skills/ads/scout-asp/scripts/login.mjs
  *
  * 参照: docs/01_技術設計/playwright-auth-profiles.md
  */
 import { chromium } from "playwright";
+import { existsSync } from "node:fs";
+import { dirname, resolve, join } from "node:path";
+import { fileURLToPath } from "node:url";
 
-const PROFILE_ROOT = "/Users/minamidaisuke/stats47";
-const PROFILE_DIR = `${PROFILE_ROOT}/.local/playwright-a8-profile`;
+// ★ Mac パスを直書きすると Windows では別ドライブ配下に空プロファイルを掘ってしまい、
+//   「ログイン済みなのに未ログイン扱い」になる。process.platform で分岐せず、
+//   **実在するほうを採る**フォールバック 1 本で両対応する
+//   (.claude/scripts/ads/lib/asp-browser-base.mjs と同じ規約)。
+const MAIN_CHECKOUT = "/Users/minamidaisuke/stats47";
+// .claude/skills/ads/scout-asp/scripts/ → 5 階層上がリポジトリ root
+const REPO_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../../../..");
+const PROFILE_ROOT = existsSync(MAIN_CHECKOUT) ? MAIN_CHECKOUT : REPO_ROOT;
+const PROFILE_DIR = join(PROFILE_ROOT, ".local/playwright-a8-profile");
 // ★A8 の認証はセッション Cookie (揮発性) で、永続プロファイルには保存されない。
 //   storageState (セッション Cookie を含む JSON) に捕獲し、a8-browser が起動時に再注入する。
-const STATE_PATH = `${PROFILE_ROOT}/.local/playwright-a8-state.json`;
+const STATE_PATH = join(PROFILE_ROOT, ".local/playwright-a8-state.json");
 // 会員ページ。未ログインなら A8 が /common/re-authentication (ログインフォーム) にリダイレクトする。
 const HOME_URL = "https://media-console.a8.net/home";
 const TIMEOUT_MS = 12 * 60 * 1000;

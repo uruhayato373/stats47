@@ -202,10 +202,21 @@ vertical 写像・`weeklyApplyMax`・`minScore` の SSOT は `.claude/scripts/ad
 | **SSOT 追記は 4 ゲート通過必須** | `append-affiliate-ads.ts` が tsc → audit `--check-size` → export `--validate-only` → compliance `--check`。1 つでも fail で `git checkout` 復元 |
 | **セッション失効で cron を壊さない** | isLoggedIn 失敗は catalog に error 記録して正常終了 (exit 0)。再ログインは人間 |
 
-### 実行形態 (★ローカル Mac 限定)
+### 実行形態 (★ローカル限定・Mac / Windows 両対応)
 
 - Playwright プロファイル (`.local/playwright-a8-profile`) がローカルにあるため **GitHub Actions では動かない**。
-  週次 cron は launchd (`scripts/scheduled/scout-asp-weekly.sh` + `com.stats47.scout-asp-weekly.plist`、日曜 07:00 JST)。
+  週次 cron は launchd (`scripts/scheduled/scout-asp-weekly.sh` + `com.stats47.scout-asp-weekly.plist`、日曜 07:00 JST。
+  launchd は Mac のみ。Windows では手動または skill 経由で実行する)。
+- **プロファイルのパス解決は Mac / Windows 両対応** (2026-07-28)。`process.platform` で分岐せず
+  「Mac 本体チェックアウトが実在すればそこ、無ければ**このファイルから解決したリポジトリ root**」の
+  フォールバック 1 本で決める (`a8-browser.ts` / `login.mjs` / `asp-browser-base.mjs` で同一規約)。
+  Mac パスを直書きすると Windows で別ドライブ配下に空プロファイルを掘り、
+  **「ログイン済みなのに未ログイン」**になる (doboku-note で実際に発生)。`process.cwd()` も使わない
+  (実行ディレクトリ次第でプロファイルが分裂するため)。
+- **申請サイト assert** (誤サイト提携の防止): この A8 口座は stats47 と doboku-note を登録している。
+  apply は detail の `<select name="webSiteId">`、harvest は `<select name="websiteId">` (小文字 w・別名) を
+  stats47 側に選んでから進み、**選べなければ中止する** (`pickTargetSiteOption`)。ラベル表記ゆれは
+  候補配列 + 部分一致で吸収する。
 - **初回のみ人間**: `login.mjs` で A8 手動ログイン (credential は env に置かない) → `scout --dry-run` で A8 の
   DOM をダンプしてセレクタ実機調整。これが済むまで cron を load しない。
 - A8 の自動操作は会員規約上のリスクがあるため件数を保守的に開始する (`weeklyApplyMax` 初期 10)。
@@ -276,6 +287,69 @@ text 2 しか出ないため**全登録は無意味** (`select-for-register.mjs`
 | R2 公開 | develop push → `publish-affiliate-ads.yml` (CI 自動) |
 | 手動貼付での 1 件登録 (フォールバック) | `affiliate-manager` (`/register-affiliate-banner`) |
 
+## 11. 3 ASP 提携運用とサイト帰属ガード (A8 / もしも / afb)
+
+§10 の A8 scout が「A8 で何を見つけ何を申請したか」を扱うのに対し、本節は **3 ASP 横断で
+「自社がどの案件をどの ASP で運用するか」** を扱う。doboku-note で 2026-07-27 に実機確定した実装を
+2026-07-28 に移植し、対象サイトを stats47 側へ反転させた。
+
+### ★不変条件: 3 ASP すべてで stats47 と doboku-note が同一口座に同居する
+
+切り替えずに読むと**他サイトのデータを自分のものと誤認する**。doboku-note では afb の走査で SID 不一致を
+「警告して続行」した結果、別サイトの一覧を読んで「該当 0 件」と誤報告した事故が起きた。
+判定は `.claude/scripts/ads/lib/asp-site-guard.mjs` に集約し、**不一致は例外で停止する**
+(`--force` 相当の迂回手段を作らない。作れば必ず使われる)。
+
+| ASP | 分離方式 | 対象 ID (stats47) | 切替の実装 |
+|---|---|---|---|
+| A8.net | `none` (切替 UI 無し) | 口座 mediaId `a25050375786` | 切替せず口座を assert。サイト分離は apply/harvest の `webSiteId`/`websiteId` select (§10) とレポート単位 |
+| もしも | `url-param` | `638943` (doboku=672381) | URL の `shop_site_id`。申請フォームの select も選ぶ |
+| afb | `chosen-widget` | `959426` (doboku=984453) | Chosen.js の**実クリックのみ有効**。URL も JS の change も効かない。`【SID】` を read-back |
+
+- 判定順は **ID read-back が最優先**。ID が取れているとき禁止文字列 (他サイト名) は見ない
+  — サイト切替 UI 自体が全サイト名を列挙するため必ず誤検知する。禁止文字列は ID を確認できない
+  弱い判定のときだけ効かせる。
+- `targetSiteName` は config `sites` マップの**キー** (`stats47`)、`targetSiteLabel` は ASP の画面に出る
+  **表示名** (「統計で見る都道府県」)。select の option をキー名で探すと見つからず切替が黙って失敗する。
+
+### 構成
+
+| 役割 | 場所 |
+|---|---|
+| 接続設定 (URL / セレクタ / サイト ID / timeout) | `.claude/config/affiliate-asp.json` |
+| サイト帰属の判定 (純関数・例外) | `.claude/scripts/ads/lib/asp-site-guard.mjs` (+ `__tests__/`) |
+| ブラウザ共通基盤 (永続 context / dump / mask) | `.claude/scripts/ads/lib/asp-browser-base.mjs` |
+| ASP 共通操作 (openAsp / ensureTargetSite) | `.claude/scripts/ads/lib/asp-browser.mjs` |
+| 提携状態の実機照合 (read-only / `--write`) | `.claude/scripts/ads/affiliate-status.mjs` |
+| 提携申請 (dry-run 既定 / `--commit`) | `.claude/scripts/ads/affiliate-apply.mjs` |
+| afb 未提携案件の走査 | `.claude/scripts/ads/afb-scan.mjs` |
+| 3 ASP 横断の提携台帳 | `.claude/state/ads/affiliate-catalog.json` |
+
+**`a8-catalog.json` とはマージしない。** あちらは A8 scout の状態機械、こちらは ASP 横断の運用判断。
+広告そのものの SSOT は `apps/web/scripts/affiliate-ads-data.ts` (git TS) で、いずれも配信データではない。
+
+### 規律
+
+| 規律 | 手段 |
+|---|---|
+| サイト帰属を確定できなければ 1 バイトも読まない | `assertSiteOrThrow` が例外。回避引数を作らない |
+| 提携申請は既定 dry-run・実申請はオーナー承認 | `--commit` gate。Red Line 案件は `--commit` でも落とす |
+| 「一括提携申請へ」を絶対に押さない | ラベル完全一致 + 「一括」を含む候補を機械除外 |
+| もしもの申請はサイト select を read-back 確認してから押す | `selectSiteInForm` が不一致で abort |
+| 取得できなかった ASP を「提携なし」と混同しない | `affiliate-status` が判定不能として区別 |
+| 認証情報を env / config に置かない | 人間が手動ログイン → 永続プロファイル |
+
+### 役割分担
+
+| 工程 | 担当 |
+|---|---|
+| 状態照合 / 申請 / afb 走査 / ASP 間比較 / 台帳保守 | `affiliate-operator` (skill `/affiliate-operate`) |
+| A8 の案件開拓・自動申請・広告コード取得 | `asp-scout` (skill `/scout-asp`) |
+| 広告 SSOT 追記 + commit/push | `affiliate-manager` (排他 writer) |
+| A8 成果レポート CSV の収集 | `a8-report-collector` (skill `/a8-report`) |
+| 収集 CSV のデータ品質検査 | `a8-csv-auditor` |
+| 初回ログイン・`--commit` の承認 | 人間 (オーナー) |
+
 ## 9. 関連
 
 - 自動 scout: skill `.claude/skills/ads/scout-asp/SKILL.md` / agent `.claude/agents/asp-scout.md` /
@@ -284,6 +358,11 @@ text 2 しか出ないため**全登録は無意味** (`select-for-register.mjs`
   カタログ `.claude/state/ads/a8-catalog.json` / curated `.claude/scripts/ads/data/a8-curated.json` /
   cron `scripts/scheduled/scout-asp-weekly.sh` + `com.stats47.scout-asp-weekly.plist` /
   追記ゲート `.claude/scripts/ads/append-affiliate-ads.ts` / 申請上限 `.claude/scripts/ads/check-a8-apply-budget.cjs`
+- 3 ASP 提携運用 (§11): skill `.claude/skills/ads/affiliate-operate/SKILL.md` / agent `.claude/agents/affiliate-operator.md` /
+  設定 `.claude/config/affiliate-asp.json` / 台帳 `.claude/state/ads/affiliate-catalog.json` /
+  コア `.claude/scripts/ads/lib/{asp-browser-base,asp-browser,asp-site-guard}.mjs` (+ `__tests__/`) /
+  実行 `.claude/scripts/ads/{affiliate-status,affiliate-apply,afb-scan}.mjs` /
+  移植元 doboku-note `scripts/{lib/asp-*.mjs,affiliate-status.mjs,affiliate-apply.mjs,afb-scan.mjs}` (2026-07-28 移植)
 - SSOT データ: `apps/web/scripts/affiliate-ads-data.ts` (自動配置) / `apps/web/scripts/affiliate-direct-placements-data.ts` (直接配置台帳)
 - 意図ハブ: `apps/web/src/features/ads/constants/affiliate-category.ts` (`AffiliateVertical` / 3 map / `adVertical`)
 - 型ソース: `apps/web/src/features/ads/types/index.ts` (`AffiliateAd.vertical` / `AffiliateDirectPlacement`)
@@ -294,7 +373,7 @@ text 2 しか出ないため**全登録は無意味** (`select-for-register.mjs`
 - 機械状態: `.claude/state/ads/{affiliate-operations-latest,inventory-latest,compliance-latest,experiments}.json`
   (生成: `build-affiliate-operations-state.ts` + 週次 CI。**在庫数・gap は state から読む — 文書に固定しない**)
 - GA4 計測: `.claude/scripts/ads/fetch-affiliate-ga4.cjs` / `apps/web/src/lib/analytics/events.ts`
-- agent: `.claude/agents/affiliate-manager.md`
-- skill: `/register-affiliate-banner` / `/affiliate-improvement` / `/audit-affiliate-compliance` / `/manage-affiliate-experiment`
+- agent: `.claude/agents/affiliate-manager.md` / `.claude/agents/affiliate-operator.md` (§11)
+- skill: `/register-affiliate-banner` / `/affiliate-improvement` / `/audit-affiliate-compliance` / `/manage-affiliate-experiment` / `/affiliate-operate` (§11)
 - 戦略: `docs/02_実装計画/01_収益化マスタープラン.md` §5-6 / 実装: `docs/02_実装計画/14_収益化実装方針.md` §3・付録A /
   移行仕様: `docs/02_実装計画/25_アフィリエイト運用SSOT移行仕様.md`

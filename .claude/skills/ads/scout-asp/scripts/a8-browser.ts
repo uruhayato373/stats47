@@ -35,11 +35,33 @@ const applyBudget = require("../../../../scripts/ads/check-a8-apply-budget.cjs")
 // ─── 設定 ──────────────────────────────────────────
 const PROJECT_ROOT = path.resolve(__dirname, "../../../../..");
 // ログインプロファイルはメインチェックアウト固定 (docs/01_技術設計/playwright-auth-profiles.md)。
-const PROFILE_ROOT = "/Users/minamidaisuke/stats47";
+// ★ Mac パスを直書きすると Windows では別ドライブ配下に空プロファイルを掘ってしまい、
+//   「ログイン済みなのに未ログイン扱い」になる。process.platform で分岐せず、
+//   **実在するほうを採る**フォールバック 1 本で両対応する
+//   (.claude/scripts/ads/lib/asp-browser-base.mjs と同じ規約)。
+const MAIN_CHECKOUT = "/Users/minamidaisuke/stats47";
+const PROFILE_ROOT = fs.existsSync(MAIN_CHECKOUT) ? MAIN_CHECKOUT : PROJECT_ROOT;
 const PROFILE_DIR = path.join(PROFILE_ROOT, ".local/playwright-a8-profile");
 // ★A8 の認証はセッション Cookie で永続プロファイルに残らない。login.mjs が storageState に
 //   捕獲した Cookie を起動時に addCookies で再注入する (認証再利用の実体)。
 const STATE_PATH = path.join(PROFILE_ROOT, ".local/playwright-a8-state.json");
+// ★申請サイト assert: この A8 口座は複数サイト登録 (統計で見る都道府県=stats47 / doboku-note)。
+//   申請 (apply) は detail の <select name="webSiteId">、広告コード取得 (harvest) は
+//   <select name="websiteId"> (小文字 w・別名) を stats47 側に選んでから進む。
+//   選べない場合は誤サイト提携・誤サイトコードを防ぐため中止する
+//   (publish-x / coconala の account assert と同じ思想)。
+//   ラベルは登録時の表記に依存するため候補を複数持ち、部分一致で吸収する。
+//   どれにも当たらなければ実際の option 一覧を出して停止する (推測で押さない)。
+const TARGET_SITE_LABELS = ["統計で見る都道府県", "stats47"];
+const TARGET_SITE = TARGET_SITE_LABELS[0];
+/** option ラベル群から stats47 のサイトを選ぶ。見つからなければ null (呼び出し側が中止)。 */
+function pickTargetSiteOption(options: string[]): string | null {
+  for (const label of TARGET_SITE_LABELS) {
+    const hit = options.find((o) => o.includes(label));
+    if (hit) return hit;
+  }
+  return null;
+}
 const DEBUG_DIR = path.join(PROJECT_ROOT, ".local/playwright-a8-debug");
 const CATALOG_PATH = path.join(PROJECT_ROOT, ".claude/state/ads/a8-catalog.json");
 const INVENTORY_PATH = path.join(PROJECT_ROOT, ".claude/state/ads/inventory-latest.json");
@@ -444,13 +466,38 @@ async function applyToProgram(page: Page, entry: any): Promise<"applied" | "skip
     recordSessionExpired("apply");
     return "error";
   }
+  // ★ 申請サイト assert (誤サイト提携の防止)。detail に <select name="webSiteId"> が在れば
+  //   stats47 側を選んでから申請する。選べないなら申請しない (error)。
+  const siteSel = page.locator("select[name=webSiteId]");
+  if ((await siteSel.count()) > 0) {
+    const opts = (await siteSel.locator("option").allTextContents()).map((o) => o.trim());
+    const target = pickTargetSiteOption(opts);
+    if (!target) {
+      console.error(
+        `❌ webSiteId に "${TARGET_SITE}" が無い (${JSON.stringify(opts)})。誤サイト防止で申請中止: ${entry.name}`,
+      );
+      await saveScreenshot(page, `apply-site-missing-${entry.programId}`);
+      return "error";
+    }
+    await siteSel.selectOption({ label: target });
+    await page.waitForTimeout(500);
+    const selected = await siteSel
+      .evaluate((el: HTMLSelectElement) => el.options[el.selectedIndex]?.textContent?.trim() || "")
+      .catch(() => "");
+    if (selected !== target) {
+      console.error(`❌ 申請サイトを "${target}" に確定できない (現: "${selected}")。申請中止: ${entry.name}`);
+      await saveScreenshot(page, `apply-site-unset-${entry.programId}`);
+      return "error";
+    }
+    console.log(`  🎯 申請サイト = ${selected}`);
+  }
   const applyBtn = await tryFind(page, A8.applyButton);
   if (!applyBtn) {
     // 申請ボタンが無い = 既に申込中/提携中 or 対象外。**送信していない**ので skip (error にしない)。
     await saveScreenshot(page, `apply-btn-missing-${entry.programId}`);
     return "skip";
   }
-  // ★このクリックで申請が送信される。以降は「送信済み」として扱う。
+  // ★このクリックで申請が送信される (webSiteId=stats47 選択済み)。以降は「送信済み」として扱う。
   await applyBtn.evaluate((el: HTMLElement) => el.click());
   await page.waitForTimeout(2500);
   const done = await page
@@ -572,6 +619,23 @@ async function fetchAdCode(page: Page, entry: any): Promise<string | null> {
   if (!(await isLoggedIn(page))) {
     recordSessionExpired("harvest");
     return null;
+  }
+  // ★ create-link のサイトも stats47 に選ぶ (select name=websiteId・小文字 w = apply の webSiteId とは別名)。
+  //   ラベルは「統計で見る都道府県【アピールサイト】」等の表記ゆれがあるため部分一致で吸収する。
+  //   選べなければ誤サイトの広告コードを取り込まないよう harvest を中止する。
+  const clSite = page.locator("select[name=websiteId]");
+  if ((await clSite.count()) > 0) {
+    const opts = (await clSite.locator("option").allTextContents()).map((o) => o.trim());
+    const target = pickTargetSiteOption(opts);
+    if (!target) {
+      console.error(
+        `❌ create-link に "${TARGET_SITE}" が無い (${JSON.stringify(opts)})。誤サイトコード防止で harvest 中止: ${entry.name}`,
+      );
+      await saveScreenshot(page, `harvest-site-missing-${entry.programId}`);
+      return null;
+    }
+    await clSite.selectOption({ label: target });
+    await page.waitForTimeout(800);
   }
   // 広告コードは「広告リンクを表示」クリックで textarea に出現する。
   await tryClick(page, A8.showAdLinkButton);

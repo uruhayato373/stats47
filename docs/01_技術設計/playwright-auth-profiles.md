@@ -14,7 +14,9 @@ Cookie・localStorage をディレクトリごと保持する。**一度ログ�
 | `playwright-x-profile` | X (Twitter) | `.claude/skills/sns/publish-x/publish-x.ts`, `check-x-scheduled.ts`, `update-x-profile/update-x-profile.cjs` | ✅ ログイン済み・稼働中 |
 | `playwright-ig-profile` | Instagram | `.claude/scripts/sns/delete-instagram-posts.ts` | ⚠️ **空（未ログイン）** |
 | `playwright-meta-profile` | Meta / FB Business Suite | `.claude/skills/archive/sns/schedule-instagram-mbs/…`（archive） | ⚠️ **空（未ログイン）** |
-| `playwright-a8-profile` | A8.net (アフィリエイト) | `.claude/skills/ads/scout-asp/scripts/{a8-browser.ts,login.mjs}` | ⚠️ **空（未ログイン）**。`login.mjs` で初回ログイン後に自動 scout (`/scout-asp`) が利用 |
+| `playwright-a8-profile` | A8.net (アフィリエイト) | `.claude/skills/ads/scout-asp/scripts/{a8-browser.ts,login.mjs}`, `.claude/scripts/ads/affiliate-status.mjs` | ⚠️ **空（未ログイン）**。`login.mjs` で初回ログイン後に自動 scout (`/scout-asp`) と提携運用 (`/affiliate-operate`) が利用。**A8 は認証がセッション Cookie のため永続プロファイルに残らず、`.local/playwright-a8-state.json` (storageState) の再注入が認証再利用の実体** |
+| `playwright-moshimo-profile` | もしもアフィリエイト (af.moshimo.com) — ★口座は **stats47 と doboku-note が同居**（対象は stats47 = `shop_site_id 638943`） | `.claude/scripts/ads/{affiliate-status,affiliate-apply}.mjs` | ⚠️ **空（未ログイン）**。初回に headed で手動ログイン。サイト帰属 assert の SSOT は `.claude/config/affiliate-asp.json` |
+| `playwright-afb-profile` | afb / アフィリエイトB (afi-b.com) — ★口座は **stats47 と doboku-note が同居**（対象は stats47 = SID `959426`） | `.claude/scripts/ads/{affiliate-status,affiliate-apply,afb-scan}.mjs` | ⚠️ **空（未ログイン）**。**storageState を別プロセスで復元できず headless も拒否される**ため、ログインから作業完了までを 1 プロセス・headed で完結させる（毎回ログインが要るのは仕様） |
 | `playwright-coconala-profile` | ココナラ (coconala.com) — ★**stats47 専用アカウント**（doboku-note の `dobokunote` とは別） | `.claude/scripts/coconala/{coconala-publish,coconala-edit,coconala-delete-draft}.mjs` | ⚠️ **空（未ログイン）**。初回に headed で stats47 のココナラアカウントへ手動ログイン。account assert の SSOT は `.claude/config/coconala-account.json` の `sellerName`（現在空＝要記入） |
 | `playwright-kdp-profile` | Amazon KDP (kdp.amazon.com) — ★**stats47 の Amazon/KDP アカウント** | `.claude/scripts/kdp/{login,capture-account,kdp-publish}.mjs` | ⚠️ **空（未ログイン）**。初回に headed で手動ログイン（2FA 含む）。account assert の SSOT は `.claude/config/kdp-account.json` の `accountEmail`/`accountName`（現在空＝要記入）。税務情報・銀行口座の設定は人間工程 |
 
@@ -38,6 +40,18 @@ SNS スクリプトの `PROJECT_ROOT = path.resolve(__dirname, "../../../..")` �
   ```
   `PROJECT_ROOT`（debug/drafts 用）は worktree 相対のまま。**プロファイルのみ本体を共有**する。
   本体から実行した場合は従来と同一パスに解決されるため挙動不変。worktree から実行しても同一ログインを共有する。
+- **A'（Mac / Windows 両対応・2026-07-28）**: Mac パスの直書きは Windows で**別ドライブ配下に空プロファイルを掘り、
+  「ログイン済みなのに未ログイン」**になる（doboku-note で実際に発生）。`process.platform` で分岐せず、
+  **実在するほうを採るフォールバック 1 本**にする。`process.cwd()` は実行ディレクトリ次第でプロファイルが
+  分裂するため使わず、**そのファイル自身の位置から解決したリポジトリ root** を second choice にする：
+  ```ts
+  const MAIN_CHECKOUT = "/Users/minamidaisuke/stats47";              // Mac 本体（worktree 共有用）
+  const REPO_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../../..");
+  const PROFILE_ROOT = existsSync(MAIN_CHECKOUT) ? MAIN_CHECKOUT : REPO_ROOT;
+  ```
+  適用済み: `.claude/scripts/ads/lib/asp-browser-base.mjs`（3 ASP 共通基盤）/
+  `.claude/skills/ads/scout-asp/scripts/{a8-browser.ts,login.mjs}`。
+  **SNS 系（publish-x 等）は未適用**＝Windows では再ログインになる（必要になった時点で同じ形に揃える）。
 - **B（運用の補助）**: それでも投稿系は本体リポジトリ `~/stats47` から実行するのが無難（絶対パス固定と両立）。
 
 ## 再ログイン手順（プロファイルが空／期限切れのとき）
