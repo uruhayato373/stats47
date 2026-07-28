@@ -10,7 +10,7 @@
     "unknown": "未確認 (調べていない。none と区別する)"
   },
   "_seedNote": "初期状態は空。実機を見ずに案件を書くと捏造になるため、`affiliate-status.mjs` の実測か `afb-scan.mjs` の走査結果をもとに 1 件ずつ追加する。vertical は apps/web/src/features/ads/constants/affiliate-category.ts の 10 軸から選ぶ。",
-  "updatedAt": null,
+  "updatedAt": "2026-07-28T08:15:49.044Z",
   "verifiedAt": null,
   "programs": {}
 }

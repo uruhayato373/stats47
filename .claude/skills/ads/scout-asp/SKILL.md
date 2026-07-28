@@ -43,6 +43,7 @@ A8.net の高単価案件を **scout → 申請 → コード取得 → SSOT 登
 |---|---|---|
 | `--query 賃貸,移住` | scout | **キーワード検索モード**。カテゴリ巡回 (1 カテゴリ 20 件) をやめて指定語で検索する。意図が確定しているときに使う。URL は実機ダンプで確定した `/program/search/keyword?keywords=` |
 | `--vertical housing` | scout | 検索モードでの vertical ヒント。あくまでヒントで、最終判定は `resolveVertical` (キーワード写像) が行う |
+| `--promote s000...,s000...` | scout | **minScore 未満の案件を candidate に昇格**する。score は単価と EPC が支配的なので、1 件あたりの報酬が低い軸 (ふるさと納税等) は需要が大きくても候補に上がらない (2026-07-28 実測: さとふる 0.29 / ふるさとチョイス 0.24 が黙って落ちていた)。**その run で実際に収集できた案件しか昇格できない** (存在しない ID は中止)。スコア式は変えない — 他軸への影響が読めないため、在庫ゼロ軸だけを人/agent の判断で通す |
 | `--id s000...,s000...` | apply | **申請対象を programId で明示指定**。指定 ID が candidate に無ければ中止する。**スコア式は単価と EPC で並べるだけでブランド適合を見ない**ため、指定なしで回すと不適な案件へ送信してしまう |
 | `--include-registered` | harvest | 既 registered からも **text コードだけ**を取る (text 在庫の後追い取得)。registered は状態機械上 harvested へ戻せないので status を変えず `pendingDrafts` に積み、`append-affiliate-ads.ts` が status 非依存で拾う。二重登録は a8mat 突合が防ぐ |
 | `--text-only` | harvest | banner を取らず text だけ採る |

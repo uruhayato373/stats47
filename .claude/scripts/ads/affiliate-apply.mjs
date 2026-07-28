@@ -66,9 +66,20 @@ function findInCatalog(catalog, aspName, id) {
   return null;
 }
 
-/** 詳細ページ URL を組み立てる。 */
-function detailUrl(aspName, id) {
-  if (aspName === "moshimo") return `/af/shop/promotion/${id}`;
+/**
+ * 申請ページ URL を組み立てる。
+ *
+ * ★ もしもは `/af/shop/promotion/<id>` ではない (404)。移植元から引き継いだこの形は
+ *   doboku-note でも実際には使われておらず、stats47 で初めて実行して誤りが判明した
+ *   (2026-07-28)。正しい形は検索結果 HTML の実リンクから確認した:
+ *   `/af/shop/promotion/affiliate/comprehension/apply?promotion_id=<id>`
+ *   URL は推測で組まず、必ず実ページのリンクを根拠にする。
+ */
+function detailUrl(aspName, id, asp) {
+  if (aspName === "moshimo") {
+    const prefix = asp?.applyPathPrefix ?? "/af/shop/promotion/affiliate/comprehension/apply?promotion_id=";
+    return `${prefix}${id}`;
+  }
   if (aspName === "afb") return `/pa/promo_detail/?pid=${id}`;
   throw new Error(`${aspName}: 申請の自動化は未対応 (A8 の申請は /scout-asp が担当)`);
 }
@@ -78,6 +89,13 @@ function detailUrl(aspName, id) {
  * exact 一致で探し、複数ヒットしたら押さずに落とす (どれを押したか曖昧なまま進めない)。
  */
 async function findApplyButton(page, label) {
+  // ★ ページ自体が出ていない (404 / エラー) のを「提携済みかも」と報告しない。
+  //   実際にこれで誤診した (2026-07-28): URL が誤りで全件 404 だったのに
+  //   「既に提携済み/申請中の可能性」と出て、走査結果の「未申請」と矛盾していた。
+  const body = (await page.innerText("body").catch(() => "")) || "";
+  if (/404|not found|ページが見つかりません|エラーが発生/i.test(body.slice(0, 400))) {
+    return { ok: false, reason: "ページが表示されない (URL か画面構造の誤り。提携状態とは無関係)" };
+  }
   const all = page.getByRole("button", { name: label, exact: true });
   const links = page.getByRole("link", { name: label, exact: true });
   const pool = [];
@@ -94,6 +112,31 @@ async function findApplyButton(page, label) {
   if (pool.length > 1)
     return { ok: false, reason: `「${label}」が ${pool.length} 個ある。どれを押すか確定できないので中止` };
   return { ok: true, el: pool[0] };
+}
+
+/**
+ * 押す前に「このフォームの申請対象がちょうど 1 件で、しかも指定した案件か」を確かめる。
+ *
+ * ★ もしもの申請ページは見出しが「プロモーション 一括提携申請」で、フォームは複数申請にも
+ *   使える作りに見える。実機では promotion_id を渡すと hidden input が 1 個だけの単一申請に
+ *   なることを確認したが (2026-07-28)、**画面仕様が変われば黙って複数申請になりうる**。
+ *   規約上「一括提携申請」は絶対に避けたいので、ボタンのラベルだけに頼らず対象数を数える。
+ */
+async function assertSingleTarget(page, id) {
+  const found = await page.evaluate(() => ({
+    promo: [...document.querySelectorAll('input[name="promotion_id"], input[name="promotion_id[]"]')].map((e) => e.value),
+    lump: [...document.querySelectorAll('input[name="lump[]"]')].map((e) => e.value),
+  }));
+  if (found.lump.length > 0) {
+    return { ok: false, reason: `一括申請用の入力が ${found.lump.length} 個ある。単一申請と確定できないので押さない` };
+  }
+  if (found.promo.length !== 1) {
+    return { ok: false, reason: `申請対象が ${found.promo.length} 件 (期待 1 件)。押さない` };
+  }
+  if (String(found.promo[0]) !== String(id)) {
+    return { ok: false, reason: `申請対象が ${found.promo[0]} で指定 ${id} と違う。押さない` };
+  }
+  return { ok: true, reason: `申請対象 1 件 (promotion_id=${found.promo[0]})` };
 }
 
 /**
@@ -152,7 +195,7 @@ async function main() {
   const results = [];
   try {
     for (const id of opts.ids) {
-      const path = detailUrl(opts.asp, id);
+      const path = detailUrl(opts.asp, id, asp);
       // サイト帰属の確定 (不一致は例外で全体が止まる。握り潰さない)
       const site = await ensureTargetSite(page, asp, root, { navigateTo: path });
       console.log(`\n[${id}] ${site.reason}`);
@@ -165,6 +208,17 @@ async function main() {
         console.log(`  skip: ${btn.reason}`);
         results.push({ id, title, action: "skip", reason: btn.reason });
         continue;
+      }
+
+      // ★ 一括申請の事故防止。ラベルではなくフォームの対象数で判定する。
+      if (opts.asp === "moshimo") {
+        const single = await assertSingleTarget(page, id);
+        if (!single.ok) {
+          console.log(`  ✗ ${single.reason}`);
+          results.push({ id, title, action: "abort", reason: single.reason });
+          continue;
+        }
+        console.log(`  ${single.reason}`);
       }
 
       const siteSel = await selectSiteInForm(page, asp, siteLabel, siteId);

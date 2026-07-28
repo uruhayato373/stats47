@@ -337,6 +337,8 @@ text 2 しか出ないため**全登録は無意味** (`select-for-register.mjs`
 | 提携状態の実機照合 (read-only / `--write`) | `.claude/scripts/ads/affiliate-status.mjs` |
 | 提携申請 (dry-run 既定 / `--commit`) | `.claude/scripts/ads/affiliate-apply.mjs` |
 | afb 未提携案件の走査 | `.claude/scripts/ads/afb-scan.mjs` |
+| もしも未提携案件の走査 | `.claude/scripts/ads/moshimo-scan.mjs` (stats47 で新規作成・移植元に無い) |
+| 走査の vertical 抽出語 (afb / もしも共通) | `.claude/scripts/ads/lib/asp-vertical-keywords.mjs` |
 | 3 ASP 横断の提携台帳 | `.claude/state/ads/affiliate-catalog.json` |
 
 **`a8-catalog.json` とはマージしない。** あちらは A8 scout の状態機械、こちらは ASP 横断の運用判断。
