@@ -18,8 +18,8 @@ import { ArticleCard, RailCard, RailLinkItem, RailLinkList, SurfaceLinkCard } fr
 import {
     SidebarPromoBanner,
 } from "@/features/ads";
-import { BlogSidebarTextAds, resolveAffiliateBannersByCategory, resolveAffiliateTextAdsByTagKeys } from "@/features/ads/server";
 import { TAG_AFFILIATE_MAP } from "@/features/ads/constants/affiliate-category";
+import { BlogSidebarTextAds, resolveAffiliateBannersByCategory, resolveAffiliateTextAdsByTagKeys } from "@/features/ads/server";
 import { BlogAuthorProfileCard, TagBadge, ArticleRenderer, ArticleTableOfContents, generateBlogMetadata, type Article } from "@/features/blog";
 import {
     RelatedRankingsSection,
