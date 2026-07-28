@@ -370,17 +370,25 @@ text 2 しか出ないため**全登録は無意味** (`select-for-register.mjs`
 
 ### 枠の現状
 
-| ページ種別 | アフィリ枠 | 解決キー | ギャップ |
-|---|---|---|---|
-| blog | 本文 banner / 本文 text (自動挿入 最大4) / サイドバー text / 楽天ふるさと納税 / ハウス枠×2 | tagKeys → vertical、タイトル → 県 | — |
-| ranking | ハウス枠 / `AffiliateAdSlot` (banner1→text2→AdSense) / native ≤4 | categoryKey → vertical + tagKeys | 写像なし category は AdSense 落ち |
-| category / tag | native ≤4 / ハウス枠 | `CATEGORY_FALLBACK_TAGS` / tagKey | — |
-| survey | native ≤4 | **`['economy','population','labor']` ハードコード** | 調査主題と非連動 |
-| themes | ハウス枠 / native ≤4 | relatedArticleTagKeys → 無ければ `THEME_AFFILIATE_MAP` | text 枠なし (許容) |
-| areas 県 | 楽天ふるさと納税 / ハウス枠 | areaCode | **`AreaBannerAd` が県ページで呼ばれない** (枠名 `area-sidebar` と描画位置の不一致) |
-| areas 市区町村 | `AreaBannerAd` / 楽天ふるさと納税 | `area-sidebar` / 親県コード | — |
-| home | **アフィリなし** (AdSense 1 枠のみ) | — | 最大の空白 |
-| compare | **アフィリなし** | — | 母数小 |
+| ページ種別 | アフィリ枠 | 解決キー |
+|---|---|---|
+| blog | 本文 banner / 本文 text (自動挿入 最大4) / サイドバー text / 楽天ふるさと納税 / 楽天商品 / ハウス枠×2 | tagKeys → vertical、タイトル → 県・品目 |
+| ranking | ハウス枠 / `AffiliateAdSlot` (banner1→text2→AdSense) / native ≤4 / 楽天ふるさと納税 (1位県) / 楽天商品 | categoryKey → vertical + tagKeys、1位県、ランキング名 → 品目 |
+| category / tag | native ≤4 / ハウス枠 | `CATEGORY_FALLBACK_TAGS` / tagKey |
+| survey | native ≤4 | 所属ランキングの categoryKey 最頻値 → vertical |
+| themes | ハウス枠 / native ≤4 | relatedArticleTagKeys → 無ければ `THEME_AFFILIATE_MAP` |
+| areas 県 | 楽天ふるさと納税 / ハウス枠 / `AreaBannerAd` | areaCode / `area-sidebar` |
+| areas 市区町村 | `AreaBannerAd` / 楽天ふるさと納税 | `area-sidebar` / 親県コード |
+| home | ハウス枠 / native ≤4 (economy 固定) | 無し (vertical 解決の手掛かりが無いページ) |
+| compare | native ≤4 | categoryKey → vertical |
+
+> **2026-07-28 に埋めたギャップ** (すべて既存コンポーネントの再利用): 写像なし 6 category の追加
+> (unmapped 7,866 → 783 imp) / survey の tag ハードコード撤廃 / areas 県ページの `AreaBannerAd`
+> (枠名と描画位置の不一致を解消) / home・compare のアフィリゼロ / 楽天商品カードの新設。
+>
+> **home に vertical 解決を持ち込まない**。訪問者の意図が確定しないページで軸を推測すると、
+> 意図不一致の広告を最上位に置くこと (§5 の禁止事項) と実質同じになる。ハウス枠と
+> economy 固定 native に留める (economy は GSC 実測で検索意図の最多クラスタ)。
 
 ### 5 チャネルの役割分担 (混ぜない)
 
@@ -391,6 +399,14 @@ text 2 しか出ないため**全登録は無意味** (`select-for-register.mjs`
 | `SIDEBAR_PROMO_BANNERS` | 全ページ共通の固定ハウス枠 | vertical 非依存で出したい主力案件 | `constants/sidebar-banners.ts` |
 | 直接配置台帳 | 記事本文の href 直書き | 記事と案件の 1:1 編集判断 | `affiliate-direct-placements-data.ts` |
 | 楽天動的 (API) | 文脈商品・返礼品 | 審査不要・在庫無限。食品/地域文脈 | `rakuten-api.ts` (env の App ID) |
+
+**楽天動的カードの品目辞書はハードコードしない。** `constants/product-keywords.ts` が
+metric config (git TS SSOT) の title から機械導出する — 家計調査系 metric は
+「{品目}消費支出額」「{品目}消費量」という決まった形なので接尾辞を剥がせば品目が取れる。
+手で品目リストを持つと metric 追加のたびにドリフトする。「◯◯代/料/費/賃/税」は費目であって
+商品ではないので除外し、通販で買えないもの (都市ガス・ガソリン) も落とす。
+**品目を検出できないページ・API が 0 件のページでは何も描画しない** — 無差別に出すと
+記事と無関係な商品が並び読者価値を損なう (`blog-quality-standards.md` のリンク配置規律と同じ)。
 
 ### 需要 × 供給の突合は機械が行う
 
@@ -428,6 +444,8 @@ text 2 しか出ないため**全登録は無意味** (`select-for-register.mjs`
   `.claude/scripts/ads/audit-affiliate-compliance.ts` (直接配置・PR 表記)
 - 配置マップ (§12): `.claude/scripts/ads/build-placement-map.mjs` + `lib/placement-map-core.mjs` (+ `__tests__/`)
   → `.claude/state/ads/placement-map-latest.json` (週次 `affiliate-dashboard-refresh.yml`)
+- 楽天動的 (§12): `apps/web/src/features/ads/lib/rakuten-api.ts` /
+  `constants/{furusato-nozei,product-keywords}.ts` / `components/{FurusatoNozeiCard,RakutenItemsCard}.tsx`
 - 機械状態: `.claude/state/ads/{affiliate-operations-latest,inventory-latest,compliance-latest,experiments}.json`
   (生成: `build-affiliate-operations-state.ts` + 週次 CI。**在庫数・gap は state から読む — 文書に固定しない**)
 - GA4 計測: `.claude/scripts/ads/fetch-affiliate-ga4.cjs` / `apps/web/src/lib/analytics/events.ts`
