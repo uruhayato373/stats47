@@ -7,7 +7,7 @@
       "genre": "energy 大阪ガスのインターネット「さすガねっと」",
       "a8mat": null,
       "vertical": "energy",
-      "score": 0.835585,
+      "score": 0.735585,
       "status": "applied",
       "history": [
         {
@@ -31,7 +31,11 @@
           "at": "2026-07-20T00:00:00Z",
           "note": "budget-stamp"
         }
-      ]
+      ],
+      "rewardYen": 30076,
+      "epcYen": 890,
+      "confirmRatePct": 30.39,
+      "rewardType": "fixed"
     },
     "s00000014289002": {
       "programId": "s00000014289002",
@@ -63,7 +67,11 @@
           "at": "2026-07-20T00:00:00Z",
           "note": "budget-stamp"
         }
-      ]
+      ],
+      "rewardYen": 12000,
+      "epcYen": 707,
+      "confirmRatePct": 95.79,
+      "rewardType": "fixed"
     },
     "s00000024182002": {
       "programId": "s00000024182002",
@@ -95,7 +103,11 @@
           "at": "2026-07-20T00:00:00Z",
           "note": "budget-stamp"
         }
-      ]
+      ],
+      "rewardYen": 10000,
+      "epcYen": 892,
+      "confirmRatePct": 32.45,
+      "rewardType": "fixed"
     },
     "s00000020560002": {
       "programId": "s00000020560002",
@@ -127,7 +139,11 @@
           "at": "2026-07-20T00:00:00Z",
           "note": "budget-stamp"
         }
-      ]
+      ],
+      "rewardYen": 7029,
+      "epcYen": 1583,
+      "confirmRatePct": 100,
+      "rewardType": "fixed"
     },
     "s00000009778002": {
       "programId": "s00000009778002",
@@ -135,7 +151,7 @@
       "genre": "health たかの友梨 ブライダルホワイトコース お試しキャンペーン",
       "a8mat": null,
       "vertical": "population",
-      "score": 0.642495,
+      "score": 0.560995,
       "status": "applied",
       "history": [
         {
@@ -159,7 +175,11 @@
           "at": "2026-07-20T00:00:00Z",
           "note": "budget-stamp"
         }
-      ]
+      ],
+      "rewardYen": 9775,
+      "epcYen": 160,
+      "confirmRatePct": 33.33,
+      "rewardType": "fixed"
     },
     "s00000000018037": {
       "programId": "s00000000018037",
@@ -437,7 +457,11 @@
           "at": "2026-07-20T00:00:00Z",
           "note": "budget-stamp"
         }
-      ]
+      ],
+      "rewardYen": 10000,
+      "epcYen": 92,
+      "confirmRatePct": 90.08,
+      "rewardType": "fixed"
     },
     "s00000015770001": {
       "programId": "s00000015770001",
@@ -517,7 +541,7 @@
       "genre": "education 女性限定・初心者専門の英会話スクール【b わたしの英会話】",
       "a8mat": null,
       "vertical": "education",
-      "score": 0.615,
+      "score": 0.515,
       "status": "applied",
       "history": [
         {
@@ -541,7 +565,10 @@
           "at": "2026-07-20T00:00:00Z",
           "note": "budget-stamp"
         }
-      ]
+      ],
+      "rewardYen": 10000,
+      "confirmRatePct": 50,
+      "rewardType": "fixed"
     },
     "s00000016275010": {
       "programId": "s00000016275010",
@@ -587,7 +614,7 @@
       "genre": "education 日本語教師を目指すなら、東京・大阪・京都・兵庫のKEC日本語学院",
       "a8mat": null,
       "vertical": null,
-      "score": 0.6107400000000001,
+      "score": 0.59574,
       "status": "candidate",
       "history": [
         {
@@ -606,7 +633,11 @@
           "to": "candidate",
           "note": "reconcile-detail-2026-07-20"
         }
-      ]
+      ],
+      "rewardYen": 10000,
+      "epcYen": 224,
+      "confirmRatePct": 29.16,
+      "rewardType": "fixed"
     },
     "s00000025720001": {
       "programId": "s00000025720001",
@@ -614,7 +645,7 @@
       "genre": "education 立川のボイトレスクール【DECO MUSIC SCHOOL】",
       "a8mat": null,
       "vertical": "education",
-      "score": 0.6100000000000001,
+      "score": 0.5100000000000001,
       "status": "applied",
       "history": [
         {
@@ -638,7 +669,10 @@
           "at": "2026-07-20T00:00:00Z",
           "note": "budget-stamp"
         }
-      ]
+      ],
+      "rewardYen": 8000,
+      "confirmRatePct": 100,
+      "rewardType": "fixed"
     },
     "s00000021488002": {
       "programId": "s00000021488002",
@@ -684,7 +718,7 @@
       "genre": "health 脱毛は男のたしなみ【RBL_ローランドビューティーラウンジ】",
       "a8mat": null,
       "vertical": "health",
-      "score": 0.5913450000000001,
+      "score": 0.5958450000000001,
       "status": "applied",
       "history": [
         {
@@ -701,7 +735,11 @@
           "at": "2026-07-20T00:00:00Z",
           "note": "budget-stamp"
         }
-      ]
+      ],
+      "rewardYen": 10000,
+      "epcYen": 47,
+      "confirmRatePct": 88.23,
+      "rewardType": "fixed"
     },
     "s00000019026001": {
       "programId": "s00000019026001",
@@ -709,7 +747,7 @@
       "genre": "labor 【求人】☆体験OK！日払いOK！店舗数70店舗☆【ブライトグループ】",
       "a8mat": null,
       "vertical": "labor",
-      "score": 0.588995,
+      "score": 0.6004950000000001,
       "status": "candidate",
       "history": [
         {
@@ -721,7 +759,11 @@
           "to": "candidate",
           "note": "reconcile-detail-2026-07-20"
         }
-      ]
+      ],
+      "rewardYen": 12500,
+      "epcYen": 161,
+      "confirmRatePct": 53.33,
+      "rewardType": "fixed"
     },
     "s00000000018021": {
       "programId": "s00000000018021",
@@ -729,8 +771,8 @@
       "genre": "energy GMOインターネット株式会社【GMOとくとくBB】申込募集",
       "a8mat": null,
       "vertical": "energy",
-      "score": 0.551875,
-      "status": "candidate",
+      "score": 0.45787500000000003,
+      "status": "approved",
       "history": [
         {
           "from": null,
@@ -740,8 +782,22 @@
         {
           "to": "candidate",
           "note": "reconcile-detail-2026-07-20"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-07-28T02:44:28.340Z"
+        },
+        {
+          "from": "applied",
+          "to": "approved",
+          "at": "2026-07-28T02:46:01.987Z"
         }
-      ]
+      ],
+      "rewardYen": 5100,
+      "epcYen": 148,
+      "confirmRatePct": 93.25,
+      "rewardType": "fixed"
     },
     "s00000017938001": {
       "programId": "s00000017938001",
@@ -749,7 +805,7 @@
       "genre": "labor フリーランスエンジニアの無料カウンセリング実施で20,000円！【ポテパンフリーランス】",
       "a8mat": null,
       "vertical": "labor",
-      "score": 0.534,
+      "score": 0.523,
       "status": "applied",
       "history": [
         {
@@ -766,7 +822,11 @@
           "at": "2026-07-20T00:00:00Z",
           "note": "budget-stamp"
         }
-      ]
+      ],
+      "rewardYen": 20000,
+      "epcYen": 16,
+      "confirmRatePct": 50,
+      "rewardType": "fixed"
     },
     "s00000026477001": {
       "programId": "s00000026477001",
@@ -774,7 +834,7 @@
       "genre": "labor フリーコンサルタントのための案件紹介サービス【フリーコンサルタント.jp】",
       "a8mat": null,
       "vertical": null,
-      "score": 0.515,
+      "score": 0.5875,
       "status": "candidate",
       "history": [
         {
@@ -786,7 +846,11 @@
           "to": "candidate",
           "note": "reconcile-detail-2026-07-20"
         }
-      ]
+      ],
+      "rewardYen": 26000,
+      "epcYen": 145,
+      "confirmRatePct": 50,
+      "rewardType": "fixed"
     },
     "s00000010261001": {
       "programId": "s00000010261001",
@@ -5757,7 +5821,573 @@
         "error": "session-expired",
         "at": "2026-07-19T23:03:53.206Z"
       }
+    },
+    "s00000019877001": {
+      "programId": "s00000019877001",
+      "name": "手作り結婚指輪・婚約指輪の来店予約【鎌倉彫金工房】",
+      "genre": "population 手作り結婚指輪・婚約指輪の来店予約【鎌倉彫金工房】",
+      "a8mat": null,
+      "vertical": null,
+      "score": 0.49099000000000015,
+      "status": "applied",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-07-28T02:35:26.694Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-07-28T02:44:44.295Z"
+        }
+      ],
+      "rewardYen": 8000,
+      "epcYen": 62,
+      "confirmRatePct": 66.66,
+      "rewardType": "fixed"
+    },
+    "s00000024191001": {
+      "programId": "s00000024191001",
+      "name": "体験希望者が1万人を突破！月々2,760円〜で始めるリモート歯科矯正【DPEARL】",
+      "genre": "health 体験希望者が1万人を突破！月々2,760円〜で始めるリモート歯科矯正【DPEARL】",
+      "a8mat": null,
+      "vertical": null,
+      "score": 0.48956500000000003,
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-07-28T02:35:26.694Z"
+        }
+      ],
+      "rewardYen": 7500,
+      "epcYen": 42,
+      "confirmRatePct": 85.71,
+      "rewardType": "fixed"
+    },
+    "s00000013334001": {
+      "programId": "s00000013334001",
+      "name": "日本全国に展開している音楽教室【シアーミュージック】無料体験レッスン申込募集",
+      "genre": "education 日本全国に展開している音楽教室【シアーミュージック】無料体験レッスン申込募集",
+      "a8mat": null,
+      "vertical": null,
+      "score": 0.472685,
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-07-28T02:35:26.694Z"
+        }
+      ],
+      "rewardYen": 7407,
+      "epcYen": 167,
+      "confirmRatePct": 35.27,
+      "rewardType": "fixed"
+    },
+    "s00000027372001": {
+      "programId": "s00000027372001",
+      "name": "骨盤をケアし、アクティブな毎日へ締めつけない体幹サポート【DERIT TECH(デリットテック)】",
+      "genre": "health 骨盤をケアし、アクティブな毎日へ締めつけない体幹サポート【DERIT TECH(デリットテック)】",
+      "a8mat": null,
+      "vertical": null,
+      "score": 0.44600000000000006,
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-07-28T02:35:26.694Z"
+        }
+      ],
+      "rewardYen": 6400,
+      "confirmRatePct": 100,
+      "rewardType": "fixed"
+    },
+    "s00000017718022": {
+      "programId": "s00000017718022",
+      "name": "スマホのパケット量が使い放題で工事が不要！【SoftbankAir】",
+      "genre": "energy スマホのパケット量が使い放題で工事が不要！【SoftbankAir】",
+      "a8mat": null,
+      "vertical": null,
+      "score": 0.44000000000000006,
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-07-28T02:35:26.694Z"
+        }
+      ],
+      "rewardYen": 15000,
+      "rewardType": "fixed"
+    },
+    "s00000025687001": {
+      "programId": "s00000025687001",
+      "name": "浮気・不倫調査の探偵なら信頼と実績の【ピ・アイ・オ】",
+      "genre": "population 浮気・不倫調査の探偵なら信頼と実績の【ピ・アイ・オ】",
+      "a8mat": null,
+      "vertical": null,
+      "score": 0.44000000000000006,
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-07-28T02:35:26.694Z"
+        }
+      ],
+      "rewardYen": 10000,
+      "rewardType": "fixed"
+    },
+    "s00000010841004": {
+      "programId": "s00000010841004",
+      "name": "当社グループ独占の人気商品！【家庭用ルームランナー販売店】",
+      "genre": "health 当社グループ独占の人気商品！【家庭用ルームランナー販売店】",
+      "a8mat": null,
+      "vertical": null,
+      "score": 0.44000000000000006,
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-07-28T02:35:26.694Z"
+        }
+      ],
+      "rewardYen": 11278,
+      "rewardType": "fixed"
+    },
+    "s00000002404014": {
+      "programId": "s00000002404014",
+      "name": "中高男子の包茎諸君120万人にターゲットを絞った包茎グッズ【キトー君】",
+      "genre": "health 中高男子の包茎諸君120万人にターゲットを絞った包茎グッズ【キトー君】",
+      "a8mat": null,
+      "vertical": "health",
+      "score": 0.44000000000000006,
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-07-28T02:35:26.694Z"
+        }
+      ],
+      "rewardYen": 10000,
+      "rewardType": "fixed"
+    },
+    "s00000026977002": {
+      "programId": "s00000026977002",
+      "name": "世界60カ国以上で支持されるCFD取引プラットフォーム【Plus500証券】",
+      "genre": "economy 世界60カ国以上で支持されるCFD取引プラットフォーム【Plus500証券】",
+      "a8mat": null,
+      "vertical": "economy",
+      "score": 0.44000000000000006,
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-07-28T02:35:26.694Z"
+        }
+      ],
+      "rewardYen": 30000,
+      "rewardType": "fixed"
+    },
+    "s00000026977003": {
+      "programId": "s00000026977003",
+      "name": "世界60カ国以上で支持されるKO（ノックアウト）オプション取引プラットフォーム【Plus500証券】",
+      "genre": "economy 世界60カ国以上で支持されるKO（ノックアウト）オプション取引プラットフォーム【Plus500証券】",
+      "a8mat": null,
+      "vertical": "economy",
+      "score": 0.44000000000000006,
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-07-28T02:35:26.694Z"
+        }
+      ],
+      "rewardYen": 30000,
+      "rewardType": "fixed"
+    },
+    "s00000026977001": {
+      "programId": "s00000026977001",
+      "name": "世界60カ国以上で支持されるFX取引プラットフォーム【Plus500証券】",
+      "genre": "economy 世界60カ国以上で支持されるFX取引プラットフォーム【Plus500証券】",
+      "a8mat": null,
+      "vertical": "economy",
+      "score": 0.44000000000000006,
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-07-28T02:35:26.694Z"
+        }
+      ],
+      "rewardYen": 16500,
+      "rewardType": "fixed"
+    },
+    "s00000023903002": {
+      "programId": "s00000023903002",
+      "name": "(税込19,900円)から自由にはじめる完全個室レンタルオフィス「スペラボ」",
+      "genre": "housing (税込19,900円)から自由にはじめる完全個室レンタルオフィス「スペラボ」",
+      "a8mat": null,
+      "vertical": "housing",
+      "score": 0.44000000000000006,
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-07-28T02:35:26.694Z"
+        }
+      ],
+      "rewardYen": 20000,
+      "rewardType": "fixed"
+    },
+    "s00000000040014": {
+      "programId": "s00000000040014",
+      "name": "【公式】BIGLOBE WiMAX +5G",
+      "genre": "energy 【公式】BIGLOBE WiMAX +5G",
+      "a8mat": null,
+      "vertical": null,
+      "score": 0.435655,
+      "status": "applied",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-07-28T02:35:26.694Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "note": "already-on-a8-no-send"
+        }
+      ],
+      "rewardYen": 5000,
+      "epcYen": 206,
+      "confirmRatePct": 61.77,
+      "rewardType": "fixed"
+    },
+    "s00000024161001": {
+      "programId": "s00000024161001",
+      "name": "令和の虎で「魔法のブラシ」と紹介。MAQUIAベスコス受賞のヘアケアブランド【HAIRSTAR】",
+      "genre": "health 令和の虎で「魔法のブラシ」と紹介。MAQUIAベスコス受賞のヘアケアブランド【HAIRSTAR】",
+      "a8mat": null,
+      "vertical": null,
+      "score": 0.4335,
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-07-28T02:35:26.694Z"
+        }
+      ],
+      "rewardRatePct": 30,
+      "epcYen": 7,
+      "confirmRatePct": 100,
+      "rewardType": "rate"
+    },
+    "s00000002404001": {
+      "programId": "s00000002404001",
+      "name": "世界で唯一の真性包茎矯正グッズ【キトー君】",
+      "genre": "health 世界で唯一の真性包茎矯正グッズ【キトー君】",
+      "a8mat": null,
+      "vertical": "health",
+      "score": 0.43300000000000005,
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-07-28T02:35:26.694Z"
+        }
+      ],
+      "rewardYen": 6000,
+      "epcYen": 6,
+      "confirmRatePct": 100,
+      "rewardType": "fixed"
+    },
+    "s00000021923002": {
+      "programId": "s00000021923002",
+      "name": "花嫁の不安をトキハナツ式場紹介サービス「トキハナ」",
+      "genre": "population 花嫁の不安をトキハナツ式場紹介サービス「トキハナ」",
+      "a8mat": null,
+      "vertical": null,
+      "score": 0.430095,
+      "status": "applied",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-07-28T02:35:26.694Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-07-28T02:44:53.832Z"
+        }
+      ],
+      "rewardYen": 7974,
+      "epcYen": 28,
+      "confirmRatePct": 38.09,
+      "rewardType": "fixed"
+    },
+    "s00000022413001": {
+      "programId": "s00000022413001",
+      "name": "フリーランスのコンサルタント向け案件紹介サービス【Strategy Consultant Bank】",
+      "genre": "labor フリーランスのコンサルタント向け案件紹介サービス【Strategy Consultant Bank】",
+      "a8mat": null,
+      "vertical": "labor",
+      "score": 0.42336000000000007,
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-07-28T02:35:26.694Z"
+        }
+      ],
+      "rewardYen": 8000,
+      "epcYen": 54,
+      "confirmRatePct": 24.24,
+      "rewardType": "fixed"
+    },
+    "s00000011875008": {
+      "programId": "s00000011875008",
+      "name": "【VisionWiMAX】選べるプラン内容",
+      "genre": "energy 【VisionWiMAX】選べるプラン内容",
+      "a8mat": null,
+      "vertical": null,
+      "score": 0.41999,
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-07-28T02:35:26.694Z"
+        }
+      ],
+      "rewardYen": 7000,
+      "confirmRatePct": 66.66,
+      "rewardType": "fixed"
+    },
+    "s00000007033001": {
+      "programId": "s00000007033001",
+      "name": "トランクルームなら掲載物件数No.1の【ハローストレージ】！",
+      "genre": "housing トランクルームなら掲載物件数No.1の【ハローストレージ】！",
+      "a8mat": null,
+      "vertical": null,
+      "score": 0.418755,
+      "status": "approved",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-07-28T02:35:26.694Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-07-28T02:45:12.894Z"
+        },
+        {
+          "from": "applied",
+          "to": "approved",
+          "at": "2026-07-28T02:46:02.004Z"
+        }
+      ],
+      "rewardYen": 6000,
+      "epcYen": 13,
+      "confirmRatePct": 88.17,
+      "rewardType": "fixed"
+    },
+    "s00000019044004": {
+      "programId": "s00000019044004",
+      "name": "【BBIQ(ビビック)】当サイト特典！最大30,000円キャッシュバック！",
+      "genre": "energy 【BBIQ(ビビック)】当サイト特典！最大30,000円キャッシュバック！",
+      "a8mat": null,
+      "vertical": null,
+      "score": 0.4185000000000001,
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-07-28T02:35:26.694Z"
+        }
+      ],
+      "rewardYen": 9000,
+      "epcYen": 37,
+      "rewardType": "fixed"
+    },
+    "s00000020563001": {
+      "programId": "s00000020563001",
+      "name": "画期的な割引の仕組みでお得な結婚式を！式場下見予約サイト【結婚スタイルマガジン】",
+      "genre": "population 画期的な割引の仕組みでお得な結婚式を！式場下見予約サイト【結婚スタイルマガジン】",
+      "a8mat": null,
+      "vertical": "population",
+      "score": 0.40052,
+      "status": "applied",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-07-28T02:35:26.694Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-07-28T02:45:03.319Z"
+        }
+      ],
+      "rewardYen": 5263,
+      "confirmRatePct": 100,
+      "rewardType": "fixed"
+    },
+    "s00000010235003": {
+      "programId": "s00000010235003",
+      "name": "【MEN’S TBC】エステティック体験コース申込",
+      "genre": "health 【MEN’S TBC】エステティック体験コース申込",
+      "a8mat": null,
+      "vertical": "health",
+      "score": 0.3731,
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-07-28T02:35:26.694Z"
+        }
+      ],
+      "rewardYen": 4490,
+      "epcYen": 7,
+      "confirmRatePct": 100,
+      "rewardType": "fixed"
+    },
+    "s00000000204051": {
+      "programId": "s00000000204051",
+      "name": "膝に直接貼るジェルシート型ヒアルロン酸『ヒアロエイド』",
+      "genre": "health 膝に直接貼るジェルシート型ヒアルロン酸『ヒアロエイド』",
+      "a8mat": null,
+      "vertical": null,
+      "score": 0.37188,
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-07-28T02:35:26.694Z"
+        }
+      ],
+      "rewardYen": 4422,
+      "epcYen": 10,
+      "confirmRatePct": 100,
+      "rewardType": "fixed"
+    },
+    "s00000024229002": {
+      "programId": "s00000024229002",
+      "name": "湘南美容クリニック【オトコの根こそぎレーザー脱毛】",
+      "genre": "health 湘南美容クリニック【オトコの根こそぎレーザー脱毛】",
+      "a8mat": null,
+      "vertical": "health",
+      "score": 0.36377500000000007,
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-07-28T02:35:26.694Z"
+        }
+      ],
+      "rewardYen": 5000,
+      "epcYen": 119,
+      "confirmRatePct": 42.85,
+      "rewardType": "fixed"
+    },
+    "s00000022413003": {
+      "programId": "s00000022413003",
+      "name": "フリーのIT・SAPコンサルタントが活躍する案件紹介プラットフォーム【IT Consultant Bank】",
+      "genre": "labor フリーのIT・SAPコンサルタントが活躍する案件紹介プラットフォーム【IT Consultant Bank】",
+      "a8mat": null,
+      "vertical": null,
+      "score": 0.3600000000000001,
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-07-28T02:35:26.694Z"
+        }
+      ],
+      "rewardYen": 8000,
+      "rewardType": "fixed"
+    },
+    "s00000008714006": {
+      "programId": "s00000008714006",
+      "name": "レディースアートネイチャー",
+      "genre": "health レディースアートネイチャー",
+      "a8mat": null,
+      "vertical": null,
+      "score": 0.35884000000000005,
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-07-28T02:35:26.694Z"
+        }
+      ],
+      "rewardYen": 7971,
+      "rewardType": "fixed"
+    },
+    "s00000019140007": {
+      "programId": "s00000019140007",
+      "name": "【産後・子育てママ専用骨盤ガードル】マジカルシェリー",
+      "genre": "health 【産後・子育てママ専用骨盤ガードル】マジカルシェリー",
+      "a8mat": null,
+      "vertical": "population",
+      "score": 0.3530000000000001,
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-07-28T02:35:26.694Z"
+        }
+      ],
+      "rewardYen": 4000,
+      "epcYen": 6,
+      "confirmRatePct": 100,
+      "rewardType": "fixed"
+    },
+    "s00000024621001": {
+      "programId": "s00000024621001",
+      "name": "姿勢の専門家が開発！はくだけ整体【整体ショーツNEO+】",
+      "genre": "health 姿勢の専門家が開発！はくだけ整体【整体ショーツNEO+】",
+      "a8mat": null,
+      "vertical": "health",
+      "score": 0.3520000000000001,
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-07-28T02:35:26.694Z"
+        }
+      ],
+      "rewardRatePct": 20,
+      "epcYen": 4,
+      "confirmRatePct": 100,
+      "rewardType": "rate"
     }
   },
-  "updatedAt": "2026-07-19T23:31:11.137Z"
+  "updatedAt": "2026-07-28T02:46:02.005Z"
 }

@@ -196,6 +196,8 @@ vertical 写像・`weeklyApplyMax`・`minScore` の SSOT は `.claude/scripts/ad
 | 規律 | 手段 |
 |---|---|
 | **申請は週 `weeklyApplyMax` 件まで** (A8 スパム判定回避) | `check-a8-apply-budget.cjs` が apply 前に exit 1 で強制 |
+| **申請対象は programId で明示指定する** (2026-07-28) | `apply --id <id1,id2>`。指定 ID が candidate に無ければ**中止**。指定しないと candidate を出現順に申請するため、スコアは高いがブランド不適な案件 (美容医療・探偵・高リスク金融等) に送信してしまう。**スコア式は単価と EPC で並べるだけでブランド適合を見ない**ので、対象選定は人/agent の意味判断 |
+| **単価・EPC・確定率を catalog に保存する** (2026-07-28) | `upsertCandidates` の `pickEconomics`。欠損 (A8 が `-` 表示) で既存の実測を潰さない。これが無いと「高単価/高確定率で選ぶ」ができず `confirmedEpc`/`computePriority` が常に 0 を見る。**A8 は未提携でも EPC・確定率を開示する** (実測: カード 22 件中 16 件に実値) |
 | **NG ジャンル (アダルト/出会い/情報商材/高リスク金融 等) は申請しない** | curated `blocklistKeywords` → status=blocked |
 | **既存在庫と重複する案件は候補にしない** | `isDuplicate` (a8mat / title 一致) |
 | **canonical 4 種以外のサイズは登録しない** | harvest 時 `parseA8Code` が non-canonical を弾く (§3 と一致) |

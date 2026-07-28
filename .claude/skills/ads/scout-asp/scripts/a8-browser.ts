@@ -390,12 +390,28 @@ async function cmdImportPartnered(page: Page): Promise<void> {
 }
 
 // ─── サブコマンド: apply ───────────────────────────
-async function cmdApply(page: Page, max: number): Promise<void> {
+async function cmdApply(page: Page, max: number, ids: string[] | null = null): Promise<void> {
   let cat = loadCatalog();
-  const candidates = core.entriesByStatus(cat, "candidate");
+  let candidates = core.entriesByStatus(cat, "candidate");
   if (candidates.length === 0) {
     console.log("candidate なし。先に scout を実行してください。");
     return;
+  }
+  // ★ --id 指定時は**その programId だけ**に申請する。
+  //   指定した ID が candidate に無ければ**中止する** (黙って別案件に申請しない)。
+  //   申請は不可逆なので「意図した対象か」を送信前に確定させる。
+  if (ids) {
+    const byId = new Map(candidates.map((e: any) => [e.programId, e]));
+    const missing = ids.filter((id) => !byId.has(id));
+    if (missing.length > 0) {
+      console.error(`❌ candidate に無い programId: ${missing.join(", ")}`);
+      console.error("   (既に applied/approved か、scout 未実施の可能性。中止します)");
+      process.exitCode = 2;
+      return;
+    }
+    candidates = ids.map((id) => byId.get(id));
+    console.log(`🎯 --id 指定: ${candidates.length} 件に限定`);
+    for (const e of candidates) console.log(`   - ${e.programId} ${String(e.name || "").slice(0, 46)}`);
   }
   // 週次申請上限を機械強制。
   const today = new Date(Date.now() + 9 * 3600 * 1000).toISOString().slice(0, 10);
@@ -704,10 +720,16 @@ async function main() {
   };
   const limit = numAfter("--limit", Infinity);
   const max = numAfter("--max", Infinity);
+  // ★ apply の対象を programId で明示指定する。
+  //   これが無いと candidate を出現順に申請するため「どれに申請したか」を選べず、
+  //   ブランド不適な案件 (スコアは高い) に送信してしまう。申請は不可逆なので指定を既定にする。
+  const idArg = args.indexOf("--id");
+  const ids: string[] | null =
+    idArg >= 0 ? String(args[idArg + 1] ?? "").split(",").map((s) => s.trim()).filter(Boolean) : null;
 
   if (!["scout", "apply", "check-approval", "harvest", "import-partnered"].includes(cmd)) {
     console.error(
-      "使い方: npx tsx a8-browser.ts <scout|apply|check-approval|harvest|import-partnered> [--dry-run] [--limit N] [--max N]",
+      "使い方: npx tsx a8-browser.ts <scout|apply|check-approval|harvest|import-partnered> [--dry-run] [--limit N] [--max N] [--id id1,id2]",
     );
     process.exit(1);
   }
@@ -726,7 +748,7 @@ async function main() {
 
   try {
     if (cmd === "scout") await cmdScout(page, limit);
-    else if (cmd === "apply") await cmdApply(page, max);
+    else if (cmd === "apply") await cmdApply(page, max, ids);
     else if (cmd === "check-approval") await cmdCheckApproval(page);
     else if (cmd === "harvest") await cmdHarvest(page, limit);
     else if (cmd === "import-partnered") await cmdImportPartnered(page);

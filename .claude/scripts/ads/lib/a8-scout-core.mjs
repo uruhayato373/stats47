@@ -257,22 +257,53 @@ export function upsertCandidates(catalog, candidates, meta = {}) {
     if (!id) continue;
     const existing = entries[id];
     if (existing) {
-      // score/vertical は最新に更新 (status は保持 = 後段を巻き戻さない)
-      entries[id] = { ...existing, score: c.score, vertical: c.vertical ?? existing.vertical };
+      // score/vertical/経済指標は最新に更新 (status は保持 = 後段を巻き戻さない)
+      entries[id] = {
+        ...existing,
+        score: c.score,
+        vertical: c.vertical ?? existing.vertical,
+        ...pickEconomics(c, existing),
+      };
     } else {
       entries[id] = {
         programId: id,
         name: c.name ?? null,
         genre: c.genre ?? null,
+        company: c.company ?? null,
         a8mat: c.a8mat ?? null,
         vertical: c.vertical ?? null,
         score: c.score,
+        ...pickEconomics(c, null),
         status: "candidate",
         history: [{ from: null, to: "candidate", ...meta }],
       };
     }
   }
   return { ...(catalog ?? {}), entries };
+}
+
+/**
+ * 案件の**経済指標**を entry に載せる形で取り出す。
+ *
+ * ★ これが無いと単価・EPC・確定率が catalog に一切残らず、「高単価/高確定率で選ぶ」が
+ *   できないだけでなく `confirmedEpc` / `computePriority` が常に 0 を見る (2026-07-28 に発覚)。
+ *   A8 は未提携プログラムでも EPC・確定率を開示する (実測: カード 22 件中 16 件に実値。
+ *   残りは A8 側が `-` 表示＝データ無し)。
+ *
+ * 既存値の扱い: 取得できた値だけを上書きし、**欠損 (null/0/未定義) で既存値を潰さない**。
+ * A8 のカードは日によって `-` になることがあり、上書きすると以前取れていた実測が消える。
+ */
+function pickEconomics(c, existing) {
+  const out = {};
+  const num = (v) => (Number.isFinite(Number(v)) && Number(v) > 0 ? Number(v) : null);
+  const fields = { rewardYen: num(c.rewardYen), rewardRatePct: num(c.rewardRatePct), epcYen: num(c.epcYen), confirmRatePct: num(c.confirmRatePct) };
+  for (const [k, v] of Object.entries(fields)) {
+    if (v != null) out[k] = v;
+    else if (existing && existing[k] != null) out[k] = existing[k];
+  }
+  if (c.rewardType) out.rewardType = c.rewardType;
+  else if (existing?.rewardType) out.rewardType = existing.rewardType;
+  return out;
 }
 
 /** 確定 EPC = EPC × 確定率。欠損は 0。 */

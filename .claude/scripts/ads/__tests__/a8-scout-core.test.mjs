@@ -229,3 +229,41 @@ test("summarize / entriesByStatus", () => {
   assert.equal(cands.length, 2);
   assert.equal(cands[0].score, 0.9); // 降順
 });
+
+// ── upsertCandidates が経済指標を保存する (2026-07-28 追加) ──────────────────
+// これが無いと catalog に単価・EPC・確定率が一切残らず「高単価で選ぶ」ができないうえ、
+// confirmedEpc / computePriority が常に 0 を見る。
+
+test("upsertCandidates は単価・EPC・確定率を保存する", () => {
+  const out = upsertCandidates({ entries: {} }, [
+    { programId: "s1", name: "A", score: 0.9, rewardYen: 50000, epcYen: 942, confirmRatePct: 48.97, rewardType: "fixed" },
+  ]);
+  const e = out.entries.s1;
+  assert.equal(e.rewardYen, 50000);
+  assert.equal(e.epcYen, 942);
+  assert.equal(e.confirmRatePct, 48.97);
+  assert.equal(e.rewardType, "fixed");
+  assert.equal(confirmedEpc(e).toFixed(1), "461.3");
+});
+
+test("再 scout で A8 が '-' を返しても既存の実測値を潰さない", () => {
+  const first = upsertCandidates({ entries: {} }, [
+    { programId: "s1", name: "A", score: 0.9, rewardYen: 50000, epcYen: 942, confirmRatePct: 48.97 },
+  ]);
+  // A8 のカードは日によって EPC/確定率が "-" になる → 0 で来る
+  const second = upsertCandidates(first, [
+    { programId: "s1", name: "A", score: 0.8, epcYen: 0, confirmRatePct: 0, rewardYen: 0 },
+  ]);
+  const e = second.entries.s1;
+  assert.equal(e.rewardYen, 50000, "欠損で単価を潰さない");
+  assert.equal(e.epcYen, 942, "欠損で EPC を潰さない");
+  assert.equal(e.confirmRatePct, 48.97, "欠損で確定率を潰さない");
+  assert.equal(e.score, 0.8, "score は最新に更新する");
+});
+
+test("既存 status を巻き戻さずに経済指標だけ更新する", () => {
+  const base = { entries: { s1: { programId: "s1", status: "approved", score: 0.5, history: [] } } };
+  const out = upsertCandidates(base, [{ programId: "s1", score: 0.7, epcYen: 100, confirmRatePct: 60 }]);
+  assert.equal(out.entries.s1.status, "approved");
+  assert.equal(out.entries.s1.epcYen, 100);
+});
