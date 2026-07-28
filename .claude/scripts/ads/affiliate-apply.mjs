@@ -68,7 +68,7 @@ function parseArgs() {
  *   何をいつ申請したかが残らないと、翌週の運用者は重複申請も承認待ちの追跡もできない。
  *   申請の事実は実機で確認したものだけを書く (verifyApplied を通ったもののみ呼ぶ)。
  */
-function recordApplied(catalog, aspName, id, name, at) {
+function recordApplied(catalog, aspName, id, name, at, status = "applying") {
   catalog.programs ??= {};
   const hit = findInCatalog(catalog, aspName, id);
   const key = hit?.key ?? `${aspName}-${id}`;
@@ -77,12 +77,14 @@ function recordApplied(catalog, aspName, id, name, at) {
   program.asps ??= {};
   const entry = (program.asps[aspName] ??= {});
   entry.promotionId = String(id);
-  entry.status = "applying";
+  // 即時承認 (申請中を経ず提携中へ直行) は approved で記録する — 2026-07-28 実測
+  entry.status = status;
   entry.appliedAt = at;
-  // 申請履歴 (頻度ガードの入力)。同日の重複は積まない。
+  // 申請履歴 (頻度ガードの入力)。即時承認でも「申請 1 件」として数える。同日の重複は積まない。
   entry.history ??= [];
   if (!entry.history.some((h) => h.at === at && h.status === "applying")) {
     entry.history.push({ at, status: "applying" });
+    if (status === "approved") entry.history.push({ at, status: "approved", note: "即時承認 (提携中一覧で確認)" });
   }
   return key;
 }
@@ -112,7 +114,8 @@ function detailUrl(aspName, id, asp) {
     const prefix = asp?.applyPathPrefix ?? "/af/shop/promotion/affiliate/comprehension/apply?promotion_id=";
     return `${prefix}${id}`;
   }
-  if (aspName === "afb") return `/pa/promo_detail/?pid=${id}`;
+  // afb は detail URL が存在しない (旧 `/pa/promo_detail/?pid=` はトップへフォールバック・2026-07-28 実測)。
+  // applyAfbOne の検索フローを使うため、ここへは来ない。
   throw new Error(`${aspName}: 申請の自動化は未対応 (A8 の申請は /scout-asp が担当)`);
 }
 
@@ -183,23 +186,43 @@ async function readPromotionName(page) {
  *
  * ★ 旧実装はクリック後の本文に「申請」が含まれるかで判定していた。確認ページの見出しにも
  *   「申請」が出るため、確定していなくても成功と報告していた (2026-07-28 に 4 件を誤報)。
- *   文言ではなく「申請中一覧に当該案件が現れたか」を唯一の根拠にする。
+ *   文言ではなく「一覧に当該案件が現れたか」を唯一の根拠にする。
+ * ★★ 即時承認プログラムは申請中を**経由せず提携中へ直行**する (2026-07-28 の一括申請で 4 件実測
+ *   — 申請中のみを見て「現れない」と誤報した)。申請中→提携中の順で両一覧を確認し、
+ *   どちらに現れたか (applying / approved) も返す。
  */
-async function verifyApplied(page, asp, siteId, promoName) {
+async function verifyApplied(page, asp, siteId, promoName, promoId = null) {
   if (!promoName) return { ok: false, reason: "案件名を取れず完了を確認できない" };
-  if (!asp.applyingPath) return { ok: false, reason: "申請中一覧のパスが未設定で確認できない" };
-  const u = new URL(asp.baseUrl + asp.applyingPath);
-  if (asp.siteParam && siteId) u.searchParams.set(asp.siteParam, siteId);
-  u.searchParams.set("limit", "100");
-  await page.goto(u.toString(), { waitUntil: "domcontentloaded" }).catch(() => {});
-  // `$$eval` は Playwright の DOM 取得 API (セレクタ一致要素へコールバックを適用) であって
-  // JavaScript の `eval()` ではない。ページ由来の文字列をコードとして実行してはいない。
-  const names = await page
-    .$$eval("td.promotion-name", (tds) => tds.map((td) => td.textContent.trim()))
-    .catch(() => []);
-  if (names.length === 0) return { ok: false, reason: "申請中一覧を読めず完了を確認できない" };
-  const hit = names.some((n) => n.includes(promoName) || promoName.includes(n));
-  return hit ? { ok: true, reason: "" } : { ok: false, reason: "申請中一覧に現れない (未完了の可能性)" };
+  const lists = [
+    ["applying", asp.applyingPath],
+    ["approved", asp.partneredPath],
+  ].filter(([, p]) => p);
+  if (lists.length === 0) return { ok: false, reason: "確認用一覧のパスが未設定で確認できない" };
+  let readable = false;
+  for (const [state, path] of lists) {
+    const u = new URL(asp.baseUrl + path);
+    if (asp.siteParam && siteId) u.searchParams.set(asp.siteParam, siteId);
+    u.searchParams.set("limit", "100");
+    await page.goto(u.toString(), { waitUntil: "domcontentloaded" }).catch(() => {});
+    // `$$eval` は Playwright の DOM 取得 API (セレクタ一致要素へコールバックを適用) であって
+    // JavaScript の `eval()` ではない。ページ由来の文字列をコードとして実行してはいない。
+    const names = await page
+      .$$eval("td.promotion-name", (tds) => tds.map((td) => td.textContent.trim()))
+      .catch(() => []);
+    if (names.length > 0) readable = true;
+    if (names.some((n) => n.includes(promoName) || promoName.includes(n))) {
+      return { ok: true, state, reason: "" };
+    }
+    // 名前照合の補助: promotion_id が href に出る (もしも実測)
+    if (promoId) {
+      const hrefs = await page.$$eval("a[href]", (as) => as.map((a) => a.getAttribute("href") ?? "")).catch(() => []);
+      if (hrefs.some((h) => new RegExp(`promotion_id=${promoId}(?![0-9])`).test(h))) {
+        return { ok: true, state, reason: "" };
+      }
+    }
+  }
+  if (!readable) return { ok: false, reason: "一覧を読めず完了を確認できない" };
+  return { ok: false, reason: "申請中/提携中いずれの一覧にも現れない (未完了の可能性)" };
 }
 
 /**
@@ -219,6 +242,117 @@ async function selectSiteInForm(page, asp, siteLabel, siteId) {
     return { ok: false, reason: `サイト select を ${siteLabel} にできなかった (現在: ${chosen || "不明"})` };
   }
   return { ok: true, reason: `サイト select = ${chosen}` };
+}
+
+/**
+ * afb の申請フロー (2026-07-28 実機確認)。moshimo と URL 構造が全く違うため専用実装。
+ *
+ *   1. 未提携一覧 (rel=non) でサイト帰属を assert (SID バナーはこのページにしか出ない)
+ *   2. ヘッダー検索 input[name=pm_search] に PID → 結果の行 【PID:N】 に到達
+ *      (※`/pa/promo_detail/?pid=` は存在せず**トップへフォールバック**する。実在する
+ *       `/pa/promodetail/?adv_id=` は「広告原稿取得」ページで申請ボタンが無い — どちらも申請不可)
+ *   3. 行 badge (未提携/申請中/提携中…) を読む — 申請済みならスキップ
+ *   4. 行内 a>img[alt="提携申請はこちら"] クリック → 確認ブロック表示 (この時点では未申請)
+ *   5. 確認ブロックの赤字「【サイト】統計で見る都道府県 と下記プロモーションと提携します」を assert。
+ *      ★「同時申請はこちら」(テキストリンク) は**未提携の他サイト = doboku-note も同時申請**する。
+ *        img ボタンだけを押し、テキストリンクは候補にしない。
+ *   6. a>img[alt="提携申請はこちら"] がちょうど 1 個であることを確認して押す
+ *   7. 検証は文言でなく実測: PID を再検索し行 badge が 申請中/提携中 に変わったこと
+ */
+async function applyAfbOne(page, asp, root, siteLabel, id, commit) {
+  await ensureTargetSite(page, asp, root, { navigateTo: "/pa/promolist/?rel=non" });
+
+  // ★ 検索結果ページには status badge テキストが出ない (rel=non 一覧と別レイアウト・2026-07-28 実測)。
+  //   状態は文言でなく **申請ボタンの有無 (DOM 状態)** で判定する:
+  //   ボタンあり = 未提携 (申請可) / 行はあるがボタン無し = 申請済みか提携済み。
+  const searchPid = async () => {
+    const input = page.locator('input[name="pm_search"]').first();
+    if (!(await input.count().catch(() => 0))) throw new Error("検索欄 pm_search が見つからない (UI 変更?)");
+    await input.fill(String(id));
+    await input.press("Enter");
+    await page.waitForTimeout(7000);
+    const text = await visibleText(page);
+    const found = new RegExp(`【PID[:：]\\s*${id}】`).test(text);
+    // 「同時申請」はテキストリンクなので、img[alt] 限定でボタンだけを数える
+    const applyHrefs = await page
+      .locator('a:has(img[alt="提携申請はこちら"])')
+      .evaluateAll((as) => [...new Set(as.map((a) => a.getAttribute("href")))])
+      .catch(() => []);
+    return { text, found, applyHrefs };
+  };
+
+  const first = await searchPid();
+  if (!first.found) return { id, title: "", action: "skip", reason: "検索で行に到達できず (PID 不明/取扱終了?)" };
+
+  // 案件名: PID 行の 2 行後 (広告主の次) がプロモーション名 (afb-scan と同じブロック構造)
+  const lines = first.text.split("\n").map((l) => l.trim());
+  const pidIdx = lines.findIndex((l) => new RegExp(`【PID[:：]\\s*${id}】`).test(l));
+  const title = (lines[pidIdx + 2] || lines[pidIdx + 1] || "").slice(0, 60);
+
+  if (first.applyHrefs.length === 0) {
+    // 既申請/既提携は「今週の申請」ではないので budget に数えない (取り込みは affiliate-status --write の担当)
+    return { id, title, action: "skip", reason: "申請ボタン無し = 申請済みか提携済み (status --write で確定)" };
+  }
+  if (first.applyHrefs.length > 1) {
+    // 小ボタン (btn_app) と大ボタン (btn_application) が同一 href で並ぶのは正常。
+    // 行き先が複数種あるときだけ「どれを押したか曖昧」なので中止する。
+    await dumpFailure(page, { browser: asp.browser }, `apply-afb-ambiguous-row-${id}`).catch(() => {});
+    return { id, title, action: "abort", reason: `申請ボタンの行き先が ${first.applyHrefs.length} 種 (単一のときだけ押す)` };
+  }
+
+  await page.locator('a:has(img[alt="提携申請はこちら"])').first().click();
+  await page.waitForTimeout(6000);
+
+  // 確認ブロックの site assert (赤字の対象サイト表記)
+  const confirmText = await visibleText(page);
+  const siteM = confirmText.match(/【サイト】\s*(.+?)\s*と/);
+  if (!/下記プロモーションと提携します/.test(confirmText) || !siteM) {
+    await dumpFailure(page, { browser: asp.browser }, `apply-afb-noconfirm-${id}`).catch(() => {});
+    return { id, title, action: "unverified", reason: "確認ブロックが出ない (UI 変更?)" };
+  }
+  if (!siteM[1].includes(siteLabel)) {
+    // サイト不一致は口座同居事故 (doboku-note へ申請) に直結するため即中止
+    throw new Error(`[site-guard] afb 確認ブロックの対象サイトが「${siteM[1]}」(期待: ${siteLabel})`);
+  }
+
+  // 確定ボタンは <input type=image name=app_reg alt=提携申請はこちら> が上下 2 箇所 (同一 submit)。
+  const finalBtns = page.locator('input[type="image"][name="app_reg"][alt="提携申請はこちら"]');
+  if ((await finalBtns.count().catch(() => 0)) === 0) {
+    await dumpFailure(page, { browser: asp.browser }, `apply-afb-nofinal-${id}`).catch(() => {});
+    return { id, title, action: "abort", reason: "確定ボタン (app_reg) が見つからない (UI 変更?)" };
+  }
+
+  // ★ 同時申請 checkbox (same_site_app[] = 他サイトの SID。984453 = doboku-note) が 1 つでも
+  //   チェックされたまま submit すると**他サイトも同時申請**になる。全て外し、外せなければ中止。
+  const sameApp = page.locator('input[name="same_site_app[]"]');
+  const sameCount = await sameApp.count().catch(() => 0);
+  for (let i = 0; i < sameCount; i++) {
+    const cb = sameApp.nth(i);
+    if (await cb.isChecked().catch(() => false)) await cb.uncheck().catch(() => {});
+  }
+  const stillChecked = await sameApp.evaluateAll((els) => els.filter((e) => e.checked).map((e) => e.value)).catch(() => []);
+  if (stillChecked.length > 0) {
+    await dumpFailure(page, { browser: asp.browser }, `apply-afb-sameapp-${id}`).catch(() => {});
+    return { id, title, action: "abort", reason: `同時申請チェックを外せない (SID: ${stillChecked.join(",")})` };
+  }
+
+  if (!commit) return { id, title, action: "dry-run", reason: `確認ブロック到達 (site=${siteM[1]}・押していない)` };
+
+  page.once("dialog", (d) => d.accept().catch(() => {}));
+  await finalBtns.first().click();
+  await page.waitForTimeout(7000);
+
+  // 実測検証: 再検索して行の申請ボタンが消えたこと (= 申請済み状態) を確認する。
+  // 検索結果は badge を出さないため、申請中/提携中の別は週次の affiliate-status --write が確定する。
+  const after = await searchPid();
+  if (after.found && after.applyHrefs.length === 0) return { id, title, action: "applied", reason: "" };
+  await dumpFailure(page, { browser: asp.browser }, `apply-afb-${id}`).catch(() => {});
+  return {
+    id,
+    title,
+    action: "unverified",
+    reason: after.found ? "申請後も申請ボタンが残っている" : "申請後の再検索で行が見つからない",
+  };
 }
 
 async function main() {
@@ -273,6 +407,20 @@ async function main() {
   const results = [];
   try {
     for (const id of opts.ids) {
+      // afb は URL 構造が違うため専用フロー (検索 → 行ボタン → 確認ブロック → badge 実測)
+      if (opts.asp === "afb") {
+        const r = await applyAfbOne(page, asp, root, siteLabel, id, opts.commit);
+        const mark = r.action === "applied" ? "✓ 申請を確認" : r.action === "approved" ? "✓ 申請を確認 (即時承認→提携中)" : `△ ${r.action}`;
+        console.log(`\n[${id}] ${r.title}\n  ${mark}${r.reason ? ` — ${r.reason}` : ""}`);
+        results.push(r);
+        if ((r.action === "applied" || r.action === "approved") && opts.commit) {
+          recordApplied(catalog, "afb", id, r.title, new Date().toISOString(), r.action === "approved" ? "approved" : "applying");
+          catalog.updatedAt = new Date().toISOString();
+          writeFileSync(CATALOG, JSON.stringify(catalog, null, 2) + "\n", "utf-8");
+        }
+        continue;
+      }
+
       const path = detailUrl(opts.asp, id, asp);
       // サイト帰属の確定 (不一致は例外で全体が止まる。握り潰さない)
       const site = await ensureTargetSite(page, asp, root, { navigateTo: path });
@@ -333,24 +481,24 @@ async function main() {
         await page.waitForTimeout(4000);
       }
 
-      // ★ 完了判定は文言ではなく実測。申請中一覧に当該案件が出て初めて「申請した」と言う。
-      const verified = await verifyApplied(page, asp, siteId, promoName);
-      console.log(`  ${verified.ok ? "✓ 申請を確認" : `△ ${verified.reason}`}`);
+      // ★ 完了判定は文言ではなく実測。申請中 or 提携中 (即時承認) の一覧に出て初めて「申請した」と言う。
+      const verified = await verifyApplied(page, asp, siteId, promoName, id);
+      console.log(`  ${verified.ok ? (verified.state === "approved" ? "✓ 申請を確認 (即時承認→提携中)" : "✓ 申請を確認") : `△ ${verified.reason}`}`);
       if (!verified.ok) await dumpFailure(page, { browser: asp.browser }, `apply-${opts.asp}-${id}`).catch(() => {});
       const ok = verified.ok;
-      results.push({ id, title, action: ok ? "applied" : "unverified", reason: ok ? "" : verified.reason });
+      results.push({ id, title, action: ok ? (verified.state === "approved" ? "approved" : "applied") : "unverified", reason: ok ? "" : verified.reason });
 
-      // 台帳へ記録。エントリが無ければ作る (空台帳だと何も残らず、翌週の運用が追えない)。
-      if (ok) recordApplied(catalog, opts.asp, id, promoName ?? title, new Date().toISOString());
+      // 台帳へ記録し **1 件ごとに即保存**する。バッチ末尾のみの保存だと途中 kill で実申請済み分が
+      // 全て未記録になり週上限カウントも狂う (2026-07-28 に 25 件分が実際にロスト)。また旧条件
+      // `results.some(action==="applied")` は全件即時承認 (approved のみ) だと保存されなかった。
+      if (ok && opts.commit) {
+        recordApplied(catalog, opts.asp, id, promoName ?? title, new Date().toISOString(), verified.state === "approved" ? "approved" : "applying");
+        catalog.updatedAt = new Date().toISOString();
+        writeFileSync(CATALOG, JSON.stringify(catalog, null, 2) + "\n", "utf-8");
+      }
     }
   } finally {
     await ctx.close().catch(() => {});
-  }
-
-  if (opts.commit && results.some((r) => r.action === "applied")) {
-    catalog.updatedAt = new Date().toISOString();
-    writeFileSync(CATALOG, JSON.stringify(catalog, null, 2) + "\n", "utf-8");
-    console.log(`\nカタログを更新 (applying へ)。実状態は affiliate-status.mjs で確認する`);
   }
 
   console.log(`\n=== まとめ ===`);

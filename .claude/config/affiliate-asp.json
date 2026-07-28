@@ -45,8 +45,8 @@
         "doboku-note": "672381"
       },
       "reportPath": "/af/shop/report/kpi/site",
-      "partneredPath": "/af/shop/promotion/search?apply_status=2",
-      "applyingPath": "/af/shop/promotion/search?apply_status=1",
+      "partneredPath": "/af/shop/promotion/search?apply_status=2&limit=100",
+      "applyingPath": "/af/shop/promotion/search?apply_status=1&limit=100",
       "searchPath": "/af/shop/promotion/search",
       "searchParam": "words",
       "_searchParamNote": "**`keyword=` は無視され全件が返る**。正しくは `words=`。",
@@ -74,7 +74,8 @@
       "_weeklyApplyMaxNote": "2026-07-28 オーナー判断で 10→100 (ガード機構は維持)",
       "_hrefIdPatternNote": "promotion_id は画面テキストに出ず a[href] にのみ現れる (2026-07-28 実測: text.includes 照合が常に none になり誤ドリフト 4 件)。href から抽出する",
       "hrefIdPattern": "promotion_id=(\\d+)",
-      "rowSelector": "td.promotion-name"
+      "rowSelector": "td.promotion-name",
+      "_listLimitNote": "既定ページサイズ10では一覧を読み切れない (2026-07-28 実測: applying 34件)。limit=100 を明示"
     },
     "afb": {
       "label": "afb (アフィリエイトB)",

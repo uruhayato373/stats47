@@ -10,7 +10,7 @@
     "unknown": "未確認 (調べていない。none と区別する)"
   },
   "_seedNote": "初期状態は空。実機を見ずに案件を書くと捏造になるため、`affiliate-status.mjs` の実測か `afb-scan.mjs` の走査結果をもとに 1 件ずつ追加する。vertical は apps/web/src/features/ads/constants/affiliate-category.ts の 10 軸から選ぶ。",
-  "updatedAt": "2026-07-28T11:29:06.305Z",
+  "updatedAt": "2026-07-28T12:19:26.132Z",
   "verifiedAt": "2026-07-28",
   "programs": {
     "moshimo-7059": {
@@ -739,6 +739,1526 @@
             {
               "at": "2026-07-28",
               "note": "nameGuess が doboku-note のサイトラベル行を部分一致で誤取得したため名称を破棄。PID 44 の実在は register 時に afb 画面で確認する"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-6421": {
+      "name": null,
+      "vertical": null,
+      "asps": {
+        "moshimo": {
+          "promotionId": "6421",
+          "status": "approved",
+          "history": [
+            {
+              "at": "2026-07-28T12:05:42.091Z",
+              "status": "approved",
+              "note": "affiliate-status --write が実機一覧から取り込み"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-6422": {
+      "name": null,
+      "vertical": null,
+      "asps": {
+        "moshimo": {
+          "promotionId": "6422",
+          "status": "approved",
+          "history": [
+            {
+              "at": "2026-07-28T12:05:42.091Z",
+              "status": "approved",
+              "note": "affiliate-status --write が実機一覧から取り込み"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-6140": {
+      "name": null,
+      "vertical": null,
+      "asps": {
+        "moshimo": {
+          "promotionId": "6140",
+          "status": "approved",
+          "history": [
+            {
+              "at": "2026-07-28T12:05:42.091Z",
+              "status": "approved",
+              "note": "affiliate-status --write が実機一覧から取り込み"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-4890": {
+      "name": null,
+      "vertical": null,
+      "asps": {
+        "moshimo": {
+          "promotionId": "4890",
+          "status": "approved",
+          "history": [
+            {
+              "at": "2026-07-28T12:05:42.091Z",
+              "status": "approved",
+              "note": "affiliate-status --write が実機一覧から取り込み"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-7487": {
+      "name": null,
+      "vertical": null,
+      "asps": {
+        "moshimo": {
+          "promotionId": "7487",
+          "status": "applying",
+          "history": [
+            {
+              "at": "2026-07-28T12:05:42.091Z",
+              "status": "applying",
+              "note": "affiliate-status --write が実機一覧から取り込み"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-7430": {
+      "name": null,
+      "vertical": null,
+      "asps": {
+        "moshimo": {
+          "promotionId": "7430",
+          "status": "applying",
+          "history": [
+            {
+              "at": "2026-07-28T12:05:42.091Z",
+              "status": "applying",
+              "note": "affiliate-status --write が実機一覧から取り込み"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-7422": {
+      "name": null,
+      "vertical": null,
+      "asps": {
+        "moshimo": {
+          "promotionId": "7422",
+          "status": "applying",
+          "history": [
+            {
+              "at": "2026-07-28T12:05:42.091Z",
+              "status": "applying",
+              "note": "affiliate-status --write が実機一覧から取り込み"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-7283": {
+      "name": null,
+      "vertical": null,
+      "asps": {
+        "moshimo": {
+          "promotionId": "7283",
+          "status": "applying",
+          "history": [
+            {
+              "at": "2026-07-28T12:05:42.091Z",
+              "status": "applying",
+              "note": "affiliate-status --write が実機一覧から取り込み"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-7259": {
+      "name": null,
+      "vertical": null,
+      "asps": {
+        "moshimo": {
+          "promotionId": "7259",
+          "status": "applying",
+          "history": [
+            {
+              "at": "2026-07-28T12:05:42.091Z",
+              "status": "applying",
+              "note": "affiliate-status --write が実機一覧から取り込み"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-7260": {
+      "name": null,
+      "vertical": null,
+      "asps": {
+        "moshimo": {
+          "promotionId": "7260",
+          "status": "applying",
+          "history": [
+            {
+              "at": "2026-07-28T12:05:42.091Z",
+              "status": "applying",
+              "note": "affiliate-status --write が実機一覧から取り込み"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-7113": {
+      "name": null,
+      "vertical": null,
+      "asps": {
+        "moshimo": {
+          "promotionId": "7113",
+          "status": "applying",
+          "history": [
+            {
+              "at": "2026-07-28T12:05:42.091Z",
+              "status": "applying",
+              "note": "affiliate-status --write が実機一覧から取り込み"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-7048": {
+      "name": null,
+      "vertical": null,
+      "asps": {
+        "moshimo": {
+          "promotionId": "7048",
+          "status": "applying",
+          "history": [
+            {
+              "at": "2026-07-28T12:05:42.091Z",
+              "status": "applying",
+              "note": "affiliate-status --write が実機一覧から取り込み"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-7042": {
+      "name": null,
+      "vertical": null,
+      "asps": {
+        "moshimo": {
+          "promotionId": "7042",
+          "status": "applying",
+          "history": [
+            {
+              "at": "2026-07-28T12:05:42.091Z",
+              "status": "applying",
+              "note": "affiliate-status --write が実機一覧から取り込み"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-6910": {
+      "name": null,
+      "vertical": null,
+      "asps": {
+        "moshimo": {
+          "promotionId": "6910",
+          "status": "applying",
+          "history": [
+            {
+              "at": "2026-07-28T12:05:42.091Z",
+              "status": "applying",
+              "note": "affiliate-status --write が実機一覧から取り込み"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-6662": {
+      "name": null,
+      "vertical": null,
+      "asps": {
+        "moshimo": {
+          "promotionId": "6662",
+          "status": "applying",
+          "history": [
+            {
+              "at": "2026-07-28T12:05:42.091Z",
+              "status": "applying",
+              "note": "affiliate-status --write が実機一覧から取り込み"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-6673": {
+      "name": null,
+      "vertical": null,
+      "asps": {
+        "moshimo": {
+          "promotionId": "6673",
+          "status": "applying",
+          "history": [
+            {
+              "at": "2026-07-28T12:05:42.091Z",
+              "status": "applying",
+              "note": "affiliate-status --write が実機一覧から取り込み"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-6722": {
+      "name": null,
+      "vertical": null,
+      "asps": {
+        "moshimo": {
+          "promotionId": "6722",
+          "status": "applying",
+          "history": [
+            {
+              "at": "2026-07-28T12:05:42.091Z",
+              "status": "applying",
+              "note": "affiliate-status --write が実機一覧から取り込み"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-6682": {
+      "name": null,
+      "vertical": null,
+      "asps": {
+        "moshimo": {
+          "promotionId": "6682",
+          "status": "applying",
+          "history": [
+            {
+              "at": "2026-07-28T12:05:42.091Z",
+              "status": "applying",
+              "note": "affiliate-status --write が実機一覧から取り込み"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-6650": {
+      "name": null,
+      "vertical": null,
+      "asps": {
+        "moshimo": {
+          "promotionId": "6650",
+          "status": "applying",
+          "history": [
+            {
+              "at": "2026-07-28T12:05:42.091Z",
+              "status": "applying",
+              "note": "affiliate-status --write が実機一覧から取り込み"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-6548": {
+      "name": null,
+      "vertical": null,
+      "asps": {
+        "moshimo": {
+          "promotionId": "6548",
+          "status": "applying",
+          "history": [
+            {
+              "at": "2026-07-28T12:05:42.091Z",
+              "status": "applying",
+              "note": "affiliate-status --write が実機一覧から取り込み"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-6424": {
+      "name": null,
+      "vertical": null,
+      "asps": {
+        "moshimo": {
+          "promotionId": "6424",
+          "status": "applying",
+          "history": [
+            {
+              "at": "2026-07-28T12:05:42.091Z",
+              "status": "applying",
+              "note": "affiliate-status --write が実機一覧から取り込み"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-6282": {
+      "name": null,
+      "vertical": null,
+      "asps": {
+        "moshimo": {
+          "promotionId": "6282",
+          "status": "applying",
+          "history": [
+            {
+              "at": "2026-07-28T12:05:42.091Z",
+              "status": "applying",
+              "note": "affiliate-status --write が実機一覧から取り込み"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-6128": {
+      "name": null,
+      "vertical": null,
+      "asps": {
+        "moshimo": {
+          "promotionId": "6128",
+          "status": "applying",
+          "history": [
+            {
+              "at": "2026-07-28T12:05:42.091Z",
+              "status": "applying",
+              "note": "affiliate-status --write が実機一覧から取り込み"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-3639": {
+      "name": null,
+      "vertical": null,
+      "asps": {
+        "moshimo": {
+          "promotionId": "3639",
+          "status": "applying",
+          "history": [
+            {
+              "at": "2026-07-28T12:05:42.091Z",
+              "status": "applying",
+              "note": "affiliate-status --write が実機一覧から取り込み"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-1044": {
+      "name": null,
+      "vertical": null,
+      "asps": {
+        "moshimo": {
+          "promotionId": "1044",
+          "status": "applying",
+          "history": [
+            {
+              "at": "2026-07-28T12:05:42.091Z",
+              "status": "applying",
+              "note": "affiliate-status --write が実機一覧から取り込み"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-6928": {
+      "name": "マーズキャリア｜若手ハイクラス向け転職エージェントへの転職相談申し込み",
+      "asps": {
+        "moshimo": {
+          "promotionId": "6928",
+          "status": "applying",
+          "appliedAt": "2026-07-28T12:06:14.655Z",
+          "history": [
+            {
+              "at": "2026-07-28T12:06:14.655Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-3209": {
+      "name": "CLOUD GYM｜パーソナルジムの入会完了",
+      "asps": {
+        "moshimo": {
+          "promotionId": "3209",
+          "status": "applying",
+          "appliedAt": "2026-07-28T12:06:27.344Z",
+          "history": [
+            {
+              "at": "2026-07-28T12:06:27.344Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-6955": {
+      "name": "PRESENCE（プレゼンス）｜英語コーチングスクールの無料カウンセリング申し込み",
+      "asps": {
+        "moshimo": {
+          "promotionId": "6955",
+          "status": "applying",
+          "appliedAt": "2026-07-28T12:06:39.549Z",
+          "history": [
+            {
+              "at": "2026-07-28T12:06:39.549Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-6139": {
+      "name": "データラーニングスクール｜データサイエンス講座の無料個別相談への参加",
+      "asps": {
+        "moshimo": {
+          "promotionId": "6139",
+          "status": "applying",
+          "appliedAt": "2026-07-28T12:06:51.864Z",
+          "history": [
+            {
+              "at": "2026-07-28T12:06:51.864Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-6577": {
+      "name": "損害保険診断士協会｜火災保険申請サポートの申込",
+      "asps": {
+        "moshimo": {
+          "promotionId": "6577",
+          "status": "applying",
+          "appliedAt": "2026-07-28T12:07:04.089Z",
+          "history": [
+            {
+              "at": "2026-07-28T12:07:04.089Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-7562": {
+      "name": "ウズカレエージェント｜未経験からの戦略的ITエンジニア転職の新規無料面談参加",
+      "asps": {
+        "moshimo": {
+          "promotionId": "7562",
+          "status": "applying",
+          "appliedAt": "2026-07-28T12:07:16.500Z",
+          "history": [
+            {
+              "at": "2026-07-28T12:07:16.500Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-7102": {
+      "name": "インターノウス｜未経験からITエンジニア転職の無料面談予約",
+      "asps": {
+        "moshimo": {
+          "promotionId": "7102",
+          "status": "applying",
+          "appliedAt": "2026-07-28T12:07:28.666Z",
+          "history": [
+            {
+              "at": "2026-07-28T12:07:28.666Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-1831": {
+      "name": "【保険のトータルプロフェッショナル】専門家FPの無料保険相談申込プロモーション",
+      "asps": {
+        "moshimo": {
+          "promotionId": "1831",
+          "status": "approved",
+          "appliedAt": "2026-07-28T12:07:41.203Z",
+          "history": [
+            {
+              "at": "2026-07-28T12:07:41.203Z",
+              "status": "applying"
+            },
+            {
+              "at": "2026-07-28T12:07:41.203Z",
+              "status": "approved",
+              "note": "即時承認 (提携中一覧で確認)"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-7627": {
+      "name": "デジタルハリウッド｜3DCG制作スキル講座の無料カウンセリング参加",
+      "asps": {
+        "moshimo": {
+          "promotionId": "7627",
+          "status": "applying",
+          "appliedAt": "2026-07-28T12:07:53.343Z",
+          "history": [
+            {
+              "at": "2026-07-28T12:07:53.343Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-6663": {
+      "name": "ユニゾンキャリア｜IT・Web業界専門の転職エージェントの新規無料相談実施",
+      "asps": {
+        "moshimo": {
+          "promotionId": "6663",
+          "status": "applying",
+          "appliedAt": "2026-07-28T12:08:05.493Z",
+          "history": [
+            {
+              "at": "2026-07-28T12:08:05.493Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-5065": {
+      "name": "トーシンパートナーズ｜不動産投資のマンション経営の資料請求",
+      "asps": {
+        "moshimo": {
+          "promotionId": "5065",
+          "status": "applying",
+          "appliedAt": "2026-07-28T12:08:17.616Z",
+          "history": [
+            {
+              "at": "2026-07-28T12:08:17.616Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-7593": {
+      "name": "猫の手AGENT｜20代特化の転職エージェントの無料相談申し込み",
+      "asps": {
+        "moshimo": {
+          "promotionId": "7593",
+          "status": "applying",
+          "appliedAt": "2026-07-28T12:08:29.769Z",
+          "history": [
+            {
+              "at": "2026-07-28T12:08:29.769Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-3833": {
+      "name": "ウズウズIT【UZUZ IT】｜未経験からITエンジニアを目指したい方の特化型就職サポートの無料会員登録",
+      "asps": {
+        "moshimo": {
+          "promotionId": "3833",
+          "status": "applying",
+          "appliedAt": "2026-07-28T12:08:41.938Z",
+          "history": [
+            {
+              "at": "2026-07-28T12:08:41.938Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-2932": {
+      "name": "火災保険申請ドットコム｜火災保険＆地震保険で自宅を無料リフォームできるかも。保険の調査依頼申込",
+      "asps": {
+        "moshimo": {
+          "promotionId": "2932",
+          "status": "approved",
+          "appliedAt": "2026-07-28T12:08:54.549Z",
+          "history": [
+            {
+              "at": "2026-07-28T12:08:54.549Z",
+              "status": "applying"
+            },
+            {
+              "at": "2026-07-28T12:08:54.549Z",
+              "status": "approved",
+              "note": "即時承認 (提携中一覧で確認)"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-6129": {
+      "name": "ガーデン｜生命保険FPへの相談",
+      "asps": {
+        "moshimo": {
+          "promotionId": "6129",
+          "status": "applying",
+          "appliedAt": "2026-07-28T12:09:06.853Z",
+          "history": [
+            {
+              "at": "2026-07-28T12:09:06.853Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-7541": {
+      "name": "女性特化「type女性の転職エージェント」の面談実施",
+      "asps": {
+        "moshimo": {
+          "promotionId": "7541",
+          "status": "approved",
+          "appliedAt": "2026-07-28T12:09:19.449Z",
+          "history": [
+            {
+              "at": "2026-07-28T12:09:19.449Z",
+              "status": "applying"
+            },
+            {
+              "at": "2026-07-28T12:09:19.449Z",
+              "status": "approved",
+              "note": "即時承認 (提携中一覧で確認)"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-7540": {
+      "name": "type転職エージェントの面談実施",
+      "asps": {
+        "moshimo": {
+          "promotionId": "7540",
+          "status": "applying",
+          "appliedAt": "2026-07-28T12:09:31.621Z",
+          "history": [
+            {
+              "at": "2026-07-28T12:09:31.621Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-6813": {
+      "name": "ウズウズカレッジ＜有料コース＞｜未経験からITエンジニアへ！就職支援型ITスクールの無料カウンセリング参加",
+      "asps": {
+        "moshimo": {
+          "promotionId": "6813",
+          "status": "applying",
+          "appliedAt": "2026-07-28T12:09:43.996Z",
+          "history": [
+            {
+              "at": "2026-07-28T12:09:43.996Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-6599": {
+      "name": "ウズカレIT｜わずか1ヶ月のオンライン研修で未経験からITエンジニア就職◆無料カウンセリング実施◆",
+      "asps": {
+        "moshimo": {
+          "promotionId": "6599",
+          "status": "applying",
+          "appliedAt": "2026-07-28T12:09:56.240Z",
+          "history": [
+            {
+              "at": "2026-07-28T12:09:56.240Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-6398": {
+      "name": "WEBCOACH｜インフルエンサー向け！オンラインWebデザインスクールの無料カウンセリング参加",
+      "asps": {
+        "moshimo": {
+          "promotionId": "6398",
+          "status": "applying",
+          "appliedAt": "2026-07-28T12:10:08.493Z",
+          "history": [
+            {
+              "at": "2026-07-28T12:10:08.493Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-5906": {
+      "name": "ウェブスキ｜WEBデザイン×SNS広告運用のオンラインスクールの無料レクチャー・講座申込",
+      "asps": {
+        "moshimo": {
+          "promotionId": "5906",
+          "status": "applying",
+          "appliedAt": "2026-07-28T12:10:20.744Z",
+          "history": [
+            {
+              "at": "2026-07-28T12:10:20.744Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-6623": {
+      "name": "キャリフト｜40代・50代向けキャリアコーチングの無料相談の面談実施",
+      "asps": {
+        "moshimo": {
+          "promotionId": "6623",
+          "status": "applying",
+          "appliedAt": "2026-07-28T12:10:33.039Z",
+          "history": [
+            {
+              "at": "2026-07-28T12:10:33.039Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-6697": {
+      "name": "DXアップ｜AIxWebマーケティングスクールの新規講座申込",
+      "asps": {
+        "moshimo": {
+          "promotionId": "6697",
+          "status": "applying",
+          "appliedAt": "2026-07-28T12:10:45.338Z",
+          "history": [
+            {
+              "at": "2026-07-28T12:10:45.338Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-6614": {
+      "name": "エコ発電本舗｜住宅用太陽光発電、蓄電池、V2Hの見積り依頼",
+      "asps": {
+        "moshimo": {
+          "promotionId": "6614",
+          "status": "applying",
+          "appliedAt": "2026-07-28T12:10:57.660Z",
+          "history": [
+            {
+              "at": "2026-07-28T12:10:57.660Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-7590": {
+      "name": "飲食店ドットコムエージェント｜飲食業界特化の転職エージェントのお申し込み",
+      "asps": {
+        "moshimo": {
+          "promotionId": "7590",
+          "status": "applying",
+          "appliedAt": "2026-07-28T12:11:09.896Z",
+          "history": [
+            {
+              "at": "2026-07-28T12:11:09.896Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-7392": {
+      "name": "キャリビー｜キャリアコーチング型転職支援サービスの無料カウンセリング参加",
+      "asps": {
+        "moshimo": {
+          "promotionId": "7392",
+          "status": "applying",
+          "appliedAt": "2026-07-28T12:11:22.144Z",
+          "history": [
+            {
+              "at": "2026-07-28T12:11:22.144Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-7309": {
+      "name": "ビーシャイン｜20代に特化した就職・転職支援サービスの面談完了",
+      "asps": {
+        "moshimo": {
+          "promotionId": "7309",
+          "status": "applying",
+          "appliedAt": "2026-07-28T12:11:34.395Z",
+          "history": [
+            {
+              "at": "2026-07-28T12:11:34.395Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-7289": {
+      "name": "メンラボジョブ｜福祉医療介護業界特化の転職プラットフォーム無料会員登録",
+      "asps": {
+        "moshimo": {
+          "promotionId": "7289",
+          "status": "applying",
+          "appliedAt": "2026-07-28T12:11:46.610Z",
+          "history": [
+            {
+              "at": "2026-07-28T12:11:46.610Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-7083": {
+      "name": "キャリアセッション｜伴走型キャリア支援サービスの体験面談申込",
+      "asps": {
+        "moshimo": {
+          "promotionId": "7083",
+          "status": "applying",
+          "appliedAt": "2026-07-28T12:11:58.866Z",
+          "history": [
+            {
+              "at": "2026-07-28T12:11:58.866Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-6775": {
+      "name": "保育のせかい｜保育士・幼稚園教諭のための就職・転職エージェントの新規会員登録",
+      "asps": {
+        "moshimo": {
+          "promotionId": "6775",
+          "status": "applying",
+          "appliedAt": "2026-07-28T12:12:11.146Z",
+          "history": [
+            {
+              "at": "2026-07-28T12:12:11.146Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-5905": {
+      "name": "CORPO（コーポ）｜人事・HR業界特化の転職エージェントの新規転職相談の申込",
+      "asps": {
+        "moshimo": {
+          "promotionId": "5905",
+          "status": "applying",
+          "appliedAt": "2026-07-28T12:12:23.336Z",
+          "history": [
+            {
+              "at": "2026-07-28T12:12:23.336Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-5870": {
+      "name": "Remoful（リモフル）｜リモートワーク求人に特化した転職支援サービスの新規面談申込",
+      "asps": {
+        "moshimo": {
+          "promotionId": "5870",
+          "status": "approved",
+          "appliedAt": "2026-07-28T12:12:36.160Z",
+          "history": [
+            {
+              "at": "2026-07-28T12:12:36.160Z",
+              "status": "applying"
+            },
+            {
+              "at": "2026-07-28T12:12:36.160Z",
+              "status": "approved",
+              "note": "即時承認 (提携中一覧で確認)"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-2228": {
+      "name": "グローバル・外資系・ハイクラスの転職支援サービス【Samurai Job】無料会員登録",
+      "asps": {
+        "moshimo": {
+          "promotionId": "2228",
+          "status": "applying",
+          "appliedAt": "2026-07-28T12:12:48.537Z",
+          "history": [
+            {
+              "at": "2026-07-28T12:12:48.537Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-6214": {
+      "name": "住空間本舗｜キッチンリフォームの無料現地調査申込み",
+      "asps": {
+        "moshimo": {
+          "promotionId": "6214",
+          "status": "applying",
+          "appliedAt": "2026-07-28T12:13:00.968Z",
+          "history": [
+            {
+              "at": "2026-07-28T12:13:00.968Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-6171": {
+      "name": "One Month Program｜ビジネスパーソン向けの1ヶ月短期集中英語パーソナルトレーニングプログラムの無料カウンセリング申込",
+      "asps": {
+        "moshimo": {
+          "promotionId": "6171",
+          "status": "applying",
+          "appliedAt": "2026-07-28T12:13:13.178Z",
+          "history": [
+            {
+              "at": "2026-07-28T12:13:13.178Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-7628": {
+      "name": "ジョブトレアカデミー｜オンラインマーケティング スクールの個別面談完了",
+      "asps": {
+        "moshimo": {
+          "promotionId": "7628",
+          "status": "applying",
+          "appliedAt": "2026-07-28T12:13:25.592Z",
+          "history": [
+            {
+              "at": "2026-07-28T12:13:25.592Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-7180": {
+      "name": "techmeets｜プログラミングスクールの無料カウンセリング着座",
+      "asps": {
+        "moshimo": {
+          "promotionId": "7180",
+          "status": "applying",
+          "appliedAt": "2026-07-28T12:13:37.860Z",
+          "history": [
+            {
+              "at": "2026-07-28T12:13:37.860Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-2341": {
+      "name": "cash-engine｜起業スクールの新規会員申込",
+      "asps": {
+        "moshimo": {
+          "promotionId": "2341",
+          "status": "applying",
+          "appliedAt": "2026-07-28T12:13:50.052Z",
+          "history": [
+            {
+              "at": "2026-07-28T12:13:50.052Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-5685": {
+      "name": "保険相談アイパートナーズ｜FPへの無料相談",
+      "asps": {
+        "moshimo": {
+          "promotionId": "5685",
+          "status": "applying",
+          "appliedAt": "2026-07-28T12:14:02.378Z",
+          "history": [
+            {
+              "at": "2026-07-28T12:14:02.378Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-5389": {
+      "name": "UZUZ（ウズウズ）｜転職相談のためのキャリア面談への参加",
+      "asps": {
+        "moshimo": {
+          "promotionId": "5389",
+          "status": "applying",
+          "appliedAt": "2026-07-28T12:14:14.585Z",
+          "history": [
+            {
+              "at": "2026-07-28T12:14:14.585Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-1271": {
+      "name": "グリエネ【住宅用太陽光発電の無料一括見積もりプロモーション】",
+      "asps": {
+        "moshimo": {
+          "promotionId": "1271",
+          "status": "approved",
+          "appliedAt": "2026-07-28T12:14:27.103Z",
+          "history": [
+            {
+              "at": "2026-07-28T12:14:27.103Z",
+              "status": "applying"
+            },
+            {
+              "at": "2026-07-28T12:14:27.103Z",
+              "status": "approved",
+              "note": "即時承認 (提携中一覧で確認)"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-6970": {
+      "name": "女性のためのキャリアコーチング｜ステージアップアップProgram【無料体験セミナー】への参加",
+      "asps": {
+        "moshimo": {
+          "promotionId": "6970",
+          "status": "applying",
+          "appliedAt": "2026-07-28T12:14:39.377Z",
+          "history": [
+            {
+              "at": "2026-07-28T12:14:39.377Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-5679": {
+      "name": "転職×退職サポート窓口｜退職給付金申請サポートの説明会実施",
+      "asps": {
+        "moshimo": {
+          "promotionId": "5679",
+          "status": "applying",
+          "appliedAt": "2026-07-28T12:14:51.560Z",
+          "history": [
+            {
+              "at": "2026-07-28T12:14:51.560Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-7517": {
+      "name": "Michinori for career｜キャリアコーチング型転職エージェントの無料相談申込完了",
+      "asps": {
+        "moshimo": {
+          "promotionId": "7517",
+          "status": "applying",
+          "appliedAt": "2026-07-28T12:15:03.866Z",
+          "history": [
+            {
+              "at": "2026-07-28T12:15:03.866Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-7173": {
+      "name": "向き合い転職｜オンライン転職サービスの初回面談実施",
+      "asps": {
+        "moshimo": {
+          "promotionId": "7173",
+          "status": "applying",
+          "appliedAt": "2026-07-28T12:15:16.219Z",
+          "history": [
+            {
+              "at": "2026-07-28T12:15:16.219Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-7045": {
+      "name": "転職ボックス｜転職エージェントサイト求人掲載希望の企業用（IT/ゲーム職種のみ）",
+      "asps": {
+        "moshimo": {
+          "promotionId": "7045",
+          "status": "applying",
+          "appliedAt": "2026-07-28T12:15:28.708Z",
+          "history": [
+            {
+              "at": "2026-07-28T12:15:28.708Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-7315": {
+      "name": "保育士プロデュース｜保育士の求職者登録",
+      "asps": {
+        "moshimo": {
+          "promotionId": "7315",
+          "status": "applying",
+          "appliedAt": "2026-07-28T12:15:41.147Z",
+          "history": [
+            {
+              "at": "2026-07-28T12:15:41.147Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-5471": {
+      "name": "ターキッシュエア&トラベル｜海外旅行『トルコ5つの世界遺産周遊ツアー』の予約",
+      "asps": {
+        "moshimo": {
+          "promotionId": "5471",
+          "status": "applying",
+          "appliedAt": "2026-07-28T12:15:53.475Z",
+          "history": [
+            {
+              "at": "2026-07-28T12:15:53.475Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-7559": {
+      "name": "石垣島ツアーガイド｜石垣島の旅行者向け、オススメのアクティビティの参加",
+      "asps": {
+        "moshimo": {
+          "promotionId": "7559",
+          "status": "applying",
+          "appliedAt": "2026-07-28T12:16:05.719Z",
+          "history": [
+            {
+              "at": "2026-07-28T12:16:05.719Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-4588": {
+      "name": "ホテル・マンスリーのサブスクの無料オンライン申込（goodroomサブスくらし）",
+      "asps": {
+        "moshimo": {
+          "promotionId": "4588",
+          "status": "approved",
+          "appliedAt": "2026-07-28T12:16:18.354Z",
+          "history": [
+            {
+              "at": "2026-07-28T12:16:18.354Z",
+              "status": "applying"
+            },
+            {
+              "at": "2026-07-28T12:16:18.354Z",
+              "status": "approved",
+              "note": "即時承認 (提携中一覧で確認)"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-7348": {
+      "name": "北海道ノマドレンタカー｜キャンピングカーのレンタル申込み",
+      "asps": {
+        "moshimo": {
+          "promotionId": "7348",
+          "status": "applying",
+          "appliedAt": "2026-07-28T12:16:30.737Z",
+          "history": [
+            {
+              "at": "2026-07-28T12:16:30.737Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-1373": {
+      "name": "ワールドエアシステム｜航空券購入利用",
+      "asps": {
+        "moshimo": {
+          "promotionId": "1373",
+          "status": "approved",
+          "appliedAt": "2026-07-28T12:16:43.318Z",
+          "history": [
+            {
+              "at": "2026-07-28T12:16:43.318Z",
+              "status": "applying"
+            },
+            {
+              "at": "2026-07-28T12:16:43.318Z",
+              "status": "approved",
+              "note": "即時承認 (提携中一覧で確認)"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-2318": {
+      "name": "24時間パッと簡単、スグ買える 海外・国内格安航空券予約 ena(イーナ)│航空券購入利用",
+      "asps": {
+        "moshimo": {
+          "promotionId": "2318",
+          "status": "approved",
+          "appliedAt": "2026-07-28T12:16:55.993Z",
+          "history": [
+            {
+              "at": "2026-07-28T12:16:55.993Z",
+              "status": "applying"
+            },
+            {
+              "at": "2026-07-28T12:16:55.993Z",
+              "status": "approved",
+              "note": "即時承認 (提携中一覧で確認)"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-3172": {
+      "name": "ふるさと納税ニッポン｜クチコミ・評価で探せるふるさと納税サイトの商品購入",
+      "asps": {
+        "moshimo": {
+          "promotionId": "3172",
+          "status": "approved",
+          "appliedAt": "2026-07-28T12:17:08.680Z",
+          "history": [
+            {
+              "at": "2026-07-28T12:17:08.680Z",
+              "status": "applying"
+            },
+            {
+              "at": "2026-07-28T12:17:08.680Z",
+              "status": "approved",
+              "note": "即時承認 (提携中一覧で確認)"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-5701": {
+      "name": "たびらいレンタカー｜レンタカー比較・予約サイトの申込み",
+      "asps": {
+        "moshimo": {
+          "promotionId": "5701",
+          "status": "approved",
+          "appliedAt": "2026-07-28T12:17:21.298Z",
+          "history": [
+            {
+              "at": "2026-07-28T12:17:21.298Z",
+              "status": "applying"
+            },
+            {
+              "at": "2026-07-28T12:17:21.298Z",
+              "status": "approved",
+              "note": "即時承認 (提携中一覧で確認)"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-6337": {
+      "name": "トクたび｜お得な旅行キャンペーン＆宿泊割引クーポンまとめサイトの口コミ投稿",
+      "asps": {
+        "moshimo": {
+          "promotionId": "6337",
+          "status": "applying",
+          "appliedAt": "2026-07-28T12:17:33.755Z",
+          "history": [
+            {
+              "at": "2026-07-28T12:17:33.755Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-3830": {
+      "name": "ポケマルふるさと納税｜産直サイト「ポケットマルシェ (ポケマル)」が運営するふるさと納税サイトからのふるさと納税申込み",
+      "asps": {
+        "moshimo": {
+          "promotionId": "3830",
+          "status": "applying",
+          "appliedAt": "2026-07-28T12:17:46.133Z",
+          "history": [
+            {
+              "at": "2026-07-28T12:17:46.133Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-7198": {
+      "name": "ハワイツアーズ｜ハワイツアー・アクティビティの参加",
+      "asps": {
+        "moshimo": {
+          "promotionId": "7198",
+          "status": "applying",
+          "appliedAt": "2026-07-28T12:17:58.407Z",
+          "history": [
+            {
+              "at": "2026-07-28T12:17:58.407Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-7099": {
+      "name": "小浜島ツアーズ｜小浜島ツアー・アクティビティの参加",
+      "asps": {
+        "moshimo": {
+          "promotionId": "7099",
+          "status": "applying",
+          "appliedAt": "2026-07-28T12:18:10.726Z",
+          "history": [
+            {
+              "at": "2026-07-28T12:18:10.726Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-7097": {
+      "name": "西表島ツアーズ｜西表島ツアー・アクティビティの参加",
+      "asps": {
+        "moshimo": {
+          "promotionId": "7097",
+          "status": "applying",
+          "appliedAt": "2026-07-28T12:18:22.994Z",
+          "history": [
+            {
+              "at": "2026-07-28T12:18:22.994Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-7096": {
+      "name": "沖縄ツアーズ｜沖縄ツアー・アクティビティの参加",
+      "asps": {
+        "moshimo": {
+          "promotionId": "7096",
+          "status": "applying",
+          "appliedAt": "2026-07-28T12:18:35.178Z",
+          "history": [
+            {
+              "at": "2026-07-28T12:18:35.178Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-6964": {
+      "name": "宮古島ツアーズ｜宮古島ツアー・アクティビティの参加",
+      "asps": {
+        "moshimo": {
+          "promotionId": "6964",
+          "status": "applying",
+          "appliedAt": "2026-07-28T12:18:48.172Z",
+          "history": [
+            {
+              "at": "2026-07-28T12:18:48.172Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-6960": {
+      "name": "石垣島ツアーズ｜石垣島ツアー・アクティビティの参加",
+      "asps": {
+        "moshimo": {
+          "promotionId": "6960",
+          "status": "applying",
+          "appliedAt": "2026-07-28T12:19:00.531Z",
+          "history": [
+            {
+              "at": "2026-07-28T12:19:00.531Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-4722": {
+      "name": "HIS地球旅市場｜HISの海外・国内旅行お土産、旅行用品 通販サイトの新規商品購入",
+      "asps": {
+        "moshimo": {
+          "promotionId": "4722",
+          "status": "applying",
+          "appliedAt": "2026-07-28T12:19:12.961Z",
+          "history": [
+            {
+              "at": "2026-07-28T12:19:12.961Z",
+              "status": "applying"
+            }
+          ]
+        }
+      }
+    },
+    "moshimo-4509": {
+      "name": "StayGift｜宿泊ギフトサービスの購入",
+      "asps": {
+        "moshimo": {
+          "promotionId": "4509",
+          "status": "approved",
+          "appliedAt": "2026-07-28T12:19:25.729Z",
+          "history": [
+            {
+              "at": "2026-07-28T12:19:25.729Z",
+              "status": "applying"
+            },
+            {
+              "at": "2026-07-28T12:19:25.729Z",
+              "status": "approved",
+              "note": "即時承認 (提携中一覧で確認)"
             }
           ]
         }
