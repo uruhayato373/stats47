@@ -58,6 +58,36 @@ packages/database/.data/stats47.sqlite
 
 - **プロキシ制約**: 企業ネットワークで S3 API が HTTP 407/503 でブロックされる場合あり。`/push-r2` スキルが wrangler CLI フォールバックを案内する
 
+### ★会社 Windows PC では dev サーバーを起動しない (機械ゲートあり・2026-07-28)
+
+会社ネットワーク (兵庫県庁) は **i-FILTER (Digital Arts) が透過型 TLS 傍受**をしている。実測で確定した挙動:
+
+| 経路 | 結果 |
+|---|---|
+| curl (Windows 証明書ストアを信頼) | 200 |
+| Node の素の fetch | `SELF_SIGNED_CERT_IN_CHAIN` (Node は Windows ストアを見ない) |
+| Node + 社内 CA を `NODE_EXTRA_CA_CERTS` に設定 | **HTTP 503 のブロックページ** (CA 信頼だけでは通らない = 直接の外向き通信自体がポリシーで遮断) |
+| Node + `HTTPS_PROXY` の明示 CONNECT (undici ProxyAgent) | 200 (これが唯一の正規の出口) |
+
+`storage.stats47.jp` の証明書は `CN=CARGO-CA, DC=hyogo, DC=local` に差し替えられている (Cloudflare 本来の証明書ではない)。
+
+**dev サーバーを使わない理由**: stats47 はほぼ全ページが R2 依存で、R2 が読めない dev は確認手段にならない
+(home featured が空・ranking がチャート無しになる)。Next.js dev の RSC は global fetch を独自ラッパに
+差し替えており undici の per-call `dispatcher` が落ちるため、回避には配信コード (`packages/r2-storage`) への
+環境依存コード混入か preload での `setGlobalDispatcher` が要る。**どちらも負債になるため採らない。**
+
+**検証は CI (workflow dispatch) と本番 URL の実測で行う** — 実際、2026-07-27〜28 の大規模作業
+(values writer 復活・整合性監査新設・YouTube 撤退・R2 9.44GB 削減・featured 障害復旧) は
+すべて dev サーバー無しで完結した。
+
+**機械ゲート**: `.claude/hooks/pre-bash-safety.js` の `WINDOWS_BLOCKED_PATTERNS` が
+`process.platform === "win32"` のときだけ `npm/pnpm/yarn/bun run dev*` `next dev` `turbo run dev` を deny する
+(Mac/Linux では素通し)。`npm run build` `npm run gallery` 等は誤検知しないことをテスト済み。
+
+**例外**: 素の tsx スクリプトは `HTTPS_PROXY` を継承していれば ProxyAgent 経由で R2 に到達できる
+(`packages/estat-api/src/core/client/http-client.ts` / `packages/ranking/src/scripts/audit-ranking-data-integrity.ts` の実装)。
+`R2_PUBLIC_FETCH_URL` を使う読み取りスクリプトはこの経路で動く。
+
 ## dev サーバー起動 ★ルート `npm run dev` を使わない
 
 **Web サイトの動作確認は必ず web 単体で起動する。ルート `npm run dev`（= `turbo run dev`）を使わない。**
