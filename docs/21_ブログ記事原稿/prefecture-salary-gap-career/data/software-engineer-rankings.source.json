@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "software-engineer-annual-income",
+  "year": "2023",
+  "unit": "万円",
+  "label": "ソフトウェア作成者の平均年収",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/software-engineer-annual-income/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat (賃金構造基本統計調査) → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug prefecture-salary-gap-career --keys software-engineer-annual-income --data-name software-engineer-rankings",
+  "verifiedMatchRate": 100,
+  "generatedBy": "article-writer (REVISE fix: SSOT照合で京都608.4・沖縄402.6 等 10県すべて一致)"
+}

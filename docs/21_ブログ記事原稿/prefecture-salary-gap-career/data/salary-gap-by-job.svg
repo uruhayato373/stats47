@@ -1,0 +1,26 @@
+<!-- data-source: salary-gap-by-job.json | generated: 2026-06-15T10:00:49.805Z -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 290" width="680" height="290" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" role="img" aria-label="職種別 都道府県間の年収格差倍率（2023年）">
+  <style>
+    .svg-bg{fill:#fafafa}.svg-title{fill:#222}.svg-subtitle{fill:#666}.svg-label{fill:#333}.svg-legend{fill:#888}
+    @media (prefers-color-scheme:dark){.svg-bg{fill:#1f2937}.svg-title{fill:#f9fafb}.svg-subtitle{fill:#9ca3af}.svg-label{fill:#e5e7eb}.svg-legend{fill:#9ca3af}}
+  </style>
+  <rect width="680" height="290" class="svg-bg" rx="8"/>
+  <text x="340" y="26" text-anchor="middle" font-size="16" font-weight="bold" class="svg-title">同じ職種でも県でこれだけ違う：年収の最大／最小倍率（2023年）</text>
+  <text x="340" y="46" text-anchor="middle" font-size="11" class="svg-subtitle">1位県の平均年収 ÷ 最下位県の平均年収</text>
+      <text x="190" y="92" text-anchor="end" font-size="12" class="svg-label">システムコンサルタント</text>
+      <rect x="198" y="70" width="300.00" height="26" fill="#b71c1c" rx="2"/>
+      <text x="504.00" y="92" font-size="12" font-weight="bold" class="svg-label">2.65倍</text>
+      <text x="190" y="132" text-anchor="end" font-size="12" class="svg-label">タクシー運転手</text>
+      <rect x="198" y="110" width="287.55" height="26" fill="#e53935" rx="2"/>
+      <text x="491.55" y="132" font-size="12" font-weight="bold" class="svg-label">2.54倍</text>
+      <text x="190" y="172" text-anchor="end" font-size="12" class="svg-label">薬剤師</text>
+      <rect x="198" y="150" width="172.08" height="26" fill="#fb8c00" rx="2"/>
+      <text x="376.08" y="172" font-size="12" font-weight="bold" class="svg-label">1.52倍</text>
+      <text x="190" y="212" text-anchor="end" font-size="12" class="svg-label">ソフトウェア作成者</text>
+      <rect x="198" y="190" width="170.94" height="26" fill="#fdd835" rx="2"/>
+      <text x="374.94" y="212" font-size="12" font-weight="bold" class="svg-label">1.51倍</text>
+      <text x="190" y="252" text-anchor="end" font-size="12" class="svg-label">介護職員</text>
+      <rect x="198" y="230" width="150.57" height="26" fill="#66bb6a" rx="2"/>
+      <text x="354.57" y="252" font-size="12" font-weight="bold" class="svg-label">1.33倍</text>
+  <text x="340" y="278" text-anchor="middle" font-size="10" class="svg-legend">出典：賃金構造基本統計調査（2023年）。職種により母数が異なる</text>
+</svg>
