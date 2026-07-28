@@ -16,9 +16,11 @@ import { ShareButtons } from "@/components/molecules/ShareButtons";
 import { ArticleCard, RailCard, RailLinkItem, RailLinkList, SurfaceLinkCard } from "@/components/surface";
 
 import {
+    FurusatoNozeiCard,
     SidebarPromoBanner,
 } from "@/features/ads";
 import { TAG_AFFILIATE_MAP } from "@/features/ads/constants/affiliate-category";
+import { detectPrefCodeFromText } from "@/features/ads/constants/furusato-nozei";
 import { BlogSidebarTextAds, resolveAffiliateBannersByCategory, resolveAffiliateTextAdsByTagKeys } from "@/features/ads/server";
 import { BlogAuthorProfileCard, TagBadge, ArticleRenderer, ArticleTableOfContents, generateBlogMetadata, type Article } from "@/features/blog";
 import {
@@ -133,6 +135,10 @@ export default async function BlogPostPage({ params }: PageProps) {
     const affiliateTextPool = await resolveAffiliateTextAdsByTagKeys(tagKeys, "sidebar-bottom", 6);
     const affiliateTextAds = affiliateTextPool.slice(2);
     const affiliateVertical = tagKeys.map((t) => TAG_AFFILIATE_MAP[t]).find(Boolean) ?? null;
+    // 記事タイトルから都道府県を検出し、その県の楽天ふるさと納税を出す (公開 430 記事の 60% が該当)。
+    // GSC 実測で最大流入は食品消費量クエリ 46% で、返礼品 (食品中心) と文脈が近い。
+    // 県名が無い全国系の記事では null → カードを描画しない。
+    const furusatoPrefCode = detectPrefCodeFromText(article.title);
     // relatedArticles は tagKeys 依存、articleTagsMap は relatedArticles 依存 (チェーン)
     const relatedArticles = await getRelatedArticles(tagKeys, slug);
     const articleTagsMap = await getTagsForArticles(relatedArticles.map((a) => a.slug));
@@ -191,6 +197,9 @@ export default async function BlogPostPage({ params }: PageProps) {
                     <AdSenseAd format={RANKING_PAGE_SIDEBAR.format} slotId={RANKING_PAGE_SIDEBAR.slotId} showLabel={false} />
                 </div>
             </RailCard>
+
+            {/* 記事の対象県のふるさと納税 (タイトルから県を検出できた記事のみ) */}
+            {furusatoPrefCode && <FurusatoNozeiCard areaCode={furusatoPrefCode} />}
 
             {/* テキストリンク広告 (strategy career / 就職エージェントneo) */}
             <BlogSidebarTextAds tagKeys={tagKeys} />
