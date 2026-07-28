@@ -84,15 +84,26 @@ export function sha256Buf(buf) {
 export async function launchContext(cfg, { headless } = {}) {
   const dir = profileDir(cfg);
   mkdirSync(dir, { recursive: true });
-  const ctx = await chromium.launchPersistentContext(dir, {
-    channel: cfg.browser.channel || "chrome",
+  const opts = {
     headless: headless ?? cfg.browser.headless ?? false,
     acceptDownloads: true,
     viewport: null,
     locale: "ja-JP",
     ignoreDefaultArgs: ["--enable-automation"],
     args: ["--disable-blink-features=AutomationControlled", "--no-first-run", "--no-default-browser-check"],
-  });
+  };
+  const channel = cfg.browser.channel || "chrome";
+  let ctx;
+  try {
+    ctx = await chromium.launchPersistentContext(dir, { ...opts, channel });
+  } catch (e) {
+    // 会社支給 Windows では、インストール済み Chrome を独自 user-data-dir で起動すると
+    // 即座にプロセスが落ちる (2026-07-28 実測: channel=chrome は NG / 同梱 chromium は OK)。
+    // A8 スクリプトが動いていたのは channel 指定なし = 同梱 chromium だったため。
+    // プロファイルは channel をまたいでも同じディレクトリを使うのでログインは維持される。
+    console.log(`⚠️  channel=${channel} で起動できず同梱 chromium にフォールバック (${String(e.message).split("\n")[0]})`);
+    ctx = await chromium.launchPersistentContext(dir, opts);
+  }
   await ctx.addInitScript(() => {
     try {
       Object.defineProperty(navigator, "webdriver", { get: () => undefined });

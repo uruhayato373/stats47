@@ -39,24 +39,8 @@ import {
   makeRunId,
   SiteAttributionError,
 } from "./lib/asp-browser.mjs";
-
-/**
- * stats47 の広告意図軸 (AffiliateVertical 10 軸) ごとの抽出語。
- * 正典は apps/web/src/features/ads/constants/affiliate-category.ts。ここは**走査時の当たりを付ける**
- * ための広めの語彙で、最終的な vertical 判定は登録時に人/agent が行う (推測で確定しない)。
- */
-const VERTICAL_KEYWORDS = {
-  labor: "転職|求人|キャリア|年収|就職|副業|派遣|エージェント",
-  housing: "住宅|不動産|引越|賃貸|マンション|注文住宅|リフォーム|住まい",
-  population: "子育て|保育|結婚|婚活|出産|ベビー",
-  economy: "投資|証券|保険|ＦＰ|FP|家計|クレジット|ローン|NISA|資産運用",
-  health: "健康|ダイエット|フィットネス|医療|サプリ|ジム|パーソナル",
-  energy: "電気|ガス|電力|通信|光回線|格安SIM|Wi-Fi|モバイル",
-  travel: "旅行|宿泊|ホテル|旅館|ツアー|航空券|レンタカー|観光",
-  furusato: "ふるさと納税|返礼品",
-  education: "通信教育|資格|スクール|学習|塾|英会話|プログラミング|講座",
-  mobility: "自動車|カーリース|車査定|自動車保険|バイク|中古車",
-};
+// vertical 別の抽出語は moshimo-scan と共有する (ASP ごとに書くとドリフトするため 1 箇所)。
+import { VERTICAL_KEYWORDS, buildVerticalFilter } from "./lib/asp-vertical-keywords.mjs";
 
 /**
  * 既定の検索語。全件を踏むより**検索で絞る方が圧倒的に速い**。
@@ -94,11 +78,7 @@ function parseArgs() {
   return o;
 }
 
-/** 抽出フィルタ。--vertical 指定があればその軸だけ、無ければ 10 軸の和。 */
-function buildFilter(verticals) {
-  const keys = verticals ?? Object.keys(VERTICAL_KEYWORDS);
-  return new RegExp(keys.map((k) => VERTICAL_KEYWORDS[k]).join("|"), "i");
-}
+// 抽出フィルタは buildVerticalFilter (共有) を使う。
 
 /** 【PID:N】ブロック単位で解析する (行 grep だと 4 行構造を取りこぼす)。 */
 function parseBlocks(body, pattern) {
@@ -122,7 +102,7 @@ function parseBlocks(body, pattern) {
 
 async function main() {
   const opts = parseArgs();
-  const filter = buildFilter(opts.verticals);
+  const filter = buildVerticalFilter(opts.verticals);
   const root = loadAspConfig();
   const asp = getAsp(root, "afb");
   const runId = makeRunId();
