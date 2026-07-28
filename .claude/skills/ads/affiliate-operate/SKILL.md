@@ -90,6 +90,24 @@ node .claude/scripts/ads/affiliate-apply.mjs --asp moshimo --id 6154 --commit
 同一案件を複数 ASP で並行運用すると成果の帰属が割れて EPC 集計が二重管理になるため、
 **判断材料の多い ASP に寄せる** (もしもは承認率・EPC を非公開)。決定は `decision` に理由付きで残す。
 
+## 別 PC で続けるとき (何が引き継がれ、何が引き継がれないか)
+
+git で運ばれるもの / 運ばれないものを取り違えると、重複申請やログイン迷子になる。
+
+| 引き継がれる (git) | 引き継がれない (マシン固有) |
+|---|---|
+| 提携台帳 `.claude/state/ads/affiliate-catalog.json` (申請履歴・週上限の入力) | **Playwright 永続プロファイル `.local/playwright-*-profile`** (gitignore) |
+| A8 カタログ `.claude/state/ads/a8-catalog.json` (状態機械・承認待ち) | セッション state `.local/playwright-*-state.json` |
+| 接続設定 `.claude/config/affiliate-asp.json` (URL / ラベル / 週上限) | 走査結果 `.local/playwright-*-debug/` (再実行すれば作れる) |
+| 広告 SSOT `apps/web/scripts/affiliate-ads-data.ts` | — |
+
+- **初回は各 ASP へ人間が手動ログインする**。認証情報は config にも env にも置かない規約なので、
+  新しい PC では必ずログインし直しになる (`status` 実行でブラウザが開き、その場で人がログインする)。
+- **週の申請上限は台帳の history から数える**ので、PC をまたいでも正しく効く
+  (`check-asp-apply-budget.cjs --asp moshimo`)。移動直後にまず残枠を確認する。
+- **Windows では実 Chrome の起動が落ちる**ことがある (企業端末で実測)。同梱 chromium へ
+  自動フォールバックするので操作は不要だが、ログは残る。
+
 ## ★未実装 (継続運用の断絶。申請しても収益に到達しない)
 
 A8 は `scout → apply → check-approval → harvest → register → 公開` が閉じているが、
