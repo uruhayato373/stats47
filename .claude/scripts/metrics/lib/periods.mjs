@@ -19,8 +19,11 @@
  * .claude/scripts/metrics/__tests__/periods.test.mjs
  */
 
-/** 取得遅延日数の SSOT (§18.2)。GSC は原則 3 日、GA4 は原則 1 日。 */
-export const DATA_DELAY_DAYS = Object.freeze({ gsc: 3, ga4: 1 });
+/**
+ * 取得遅延日数の SSOT (§18.2 / doc41 §4.2)。GSC は原則 3 日、GA4 は原則 1 日。
+ * AdSense は 1 日 (推定収益は月次確定まで変動しうる — summary の limitations に明記する)。
+ */
+export const DATA_DELAY_DAYS = Object.freeze({ gsc: 3, ga4: 1, adsense: 1 });
 
 /** 施策効果判定の窓 (日数)。 */
 export const EFFECT_WINDOW_DAYS = Object.freeze([14, 28, 56]);
@@ -110,7 +113,7 @@ export function isoWeekRange(week) {
 export function resolvePeriods({ source, week = null, asOf = null, now = Date.now() }) {
   const delayDays = DATA_DELAY_DAYS[source];
   if (delayDays === undefined) {
-    throw new Error(`unknown source: ${String(source)} (expected gsc|ga4)`);
+    throw new Error(`unknown source: ${String(source)} (expected gsc|ga4|adsense)`);
   }
   const today = jstDateOf(now);
 

@@ -1,6 +1,7 @@
 // Components (Client-safe)
 export { BannerAd } from "./components/BannerAd";
 export { FurusatoNozeiCard } from "./components/FurusatoNozeiCard";
+export { RakutenItemsCard } from "./components/RakutenItemsCard";
 export { OperatorProfileCard } from "./components/OperatorProfileCard";
 export { SidebarPromoBanner } from "./components/SidebarPromoBanner";
 export { TechSchoolPromoCard } from "./components/TechSchoolPromoCard";

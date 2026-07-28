@@ -53,6 +53,16 @@ export const CATEGORY_AFFILIATE_MAP: Record<string, AffiliateVertical> = {
   "administrativefinancial": "furusato",
   "educationsports":         "education",
   "safetyenvironment":       "mobility",
+  // ★ 2026-07-28 追加。写像が無い間これらのランキングは vertical を解決できず、
+  //   AffiliateAdSlot が実験→banner→text の全経路で空振りして **常に AdSense に落ちていた**
+  //   (GSC 2026-W30 実測で計 7,866 imp。placement-map の unmapped.byReason で確認)。
+  //   各カテゴリの metric 構成を実際に読んで寄せ先を決めた (推測で写像しない)。
+  "commercial":              "economy",   // 商業販売額・小売店数・理容美容所数 → 消費・商業
+  "agriculture":             "furusato",  // 農業産出額・養殖収獲量・耕地 → 返礼品 (食品) と直結
+  "infrastructure":          "mobility",  // 空港・給油所・林道・立体横断施設 → 交通インフラが主
+  "ict":                     "energy",    // 携帯契約数・公衆電話・郵便局 → 通信 (energy は通信を含む軸)
+  "miningindustry":          "economy",   // 鉱工業出荷額 → 経済
+  "international":           "travel",    // 国際・外国人 → 旅行
 };
 
 /**

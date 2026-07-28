@@ -1,15 +1,14 @@
 {
   "schemaVersion": 1,
   "_note": "3 ASP (A8 / もしも / afb) の**提携運用**レイヤの接続設定。値は doboku-note 側で 2026-07-27 に実機確定したものを移植し、stats47 を対象サイトへ反転させたもの。A8 の**成果取込**は別ファイル `.claude/config/a8-report-automation.json` が担当し、こちらとは役割が違う。運用 SSOT → .claude/rules/affiliate-ads-standards.md",
-
   "_siteAttributionNote": "**3 ASP すべてで stats47 (統計で見る都道府県) と doboku-note が同一口座に同居している**。切り替えずに読むと他サイトのデータを自分のものと誤認する。doboku-note 側では afb の走査で SID 不一致を警告して続行し、別サイトの一覧を「建設系 0 件」と誤報告した事故が起きた。判定は .claude/scripts/ads/lib/asp-site-guard.mjs に集約し、不一致は例外で落とす (警告して続行できないようにする)。",
-
   "targetSiteName": "stats47",
   "targetSiteLabel": "統計で見る都道府県",
   "_targetSiteLabelNote": "`targetSiteName` は `sites` マップの**キー**、`targetSiteLabel` は ASP の UI に**表示される文字列** (もしもの申請フォーム select / afb の Chosen 項目の照合に使う)。両者を混同すると『キー名で option を探して見つからず切替失敗』になる。ASP ごとに表示名が違う場合は asps.<name>.siteLabel で上書きする。",
-  "forbiddenSiteText": ["doboku-note"],
+  "forbiddenSiteText": [
+    "doboku-note"
+  ],
   "_forbiddenNote": "ID を read-back できない弱い判定のときだけ効く安全網。stats47 の広告一覧には建設系案件名が普通に出るため『土木』のような一般語を入れると誤検知する。他サイトを一意に識別できる文字列だけを置く。",
-
   "asps": {
     "a8": {
       "label": "A8.net",
@@ -31,9 +30,9 @@
         "sessionPersistsAcrossProcesses": true,
         "timeoutMs": 30000,
         "loginMaxWaitMs": 900000
-      }
+      },
+      "rowSelector": null
     },
-
     "moshimo": {
       "label": "もしもアフィリエイト",
       "baseUrl": "https://af.moshimo.com",
@@ -41,14 +40,22 @@
       "reAuthPattern": "/login|signin",
       "siteSeparation": "url-param",
       "siteParam": "shop_site_id",
-      "sites": { "stats47": "638943", "doboku-note": "672381" },
+      "sites": {
+        "stats47": "638943",
+        "doboku-note": "672381"
+      },
       "reportPath": "/af/shop/report/kpi/site",
-      "partneredPath": "/af/shop/promotion/search?apply_status=2",
-      "applyingPath": "/af/shop/promotion/search?apply_status=1",
+      "partneredPath": "/af/shop/promotion/search?apply_status=2&limit=100",
+      "applyingPath": "/af/shop/promotion/search?apply_status=1&limit=100",
       "searchPath": "/af/shop/promotion/search",
       "searchParam": "words",
       "_searchParamNote": "**`keyword=` は無視され全件が返る**。正しくは `words=`。",
-      "applyButtonLabel": "提携申請する",
+      "applyButtonLabel": "このメディアで提携申請する",
+      "_applyButtonLabelNote": "★実機で確定 (2026-07-28)。申請ページの可視ボタンは「このメディアで提携申請する」。単なる「提携申請する」も DOM に在るが**非表示** (モーダル用) なので exact 一致でも掴めず、常に「ボタンが無い」と報告されていた。",
+      "applyPathPrefix": "/af/shop/promotion/affiliate/comprehension/apply?promotion_id=",
+      "_applyPathNote": "★実機で確定 (2026-07-28)。`/af/shop/promotion/<id>` は 404 (移植元から引き継いだ誤りで、doboku-note でも実行されていなかった)。検索結果 HTML の実リンクから確認した。ページ見出しは「プロモーション 一括提携申請」だが、promotion_id を渡すと hidden input が 1 個だけの**単一申請フォーム**になる (lump[] は無い / action は .../apply/confirm)。見出しに引きずられて一括と誤認しないこと。",
+      "confirmButtonLabel": "このメディアで提携する",
+      "_confirmNote": "★実機で確定 (2026-07-28)。申請は **2 段階**。申請ページで「このメディアで提携申請する」を押すと `/apply/confirm` へ遷移し、そこで「このメディアで提携する」(申請ではなく**提携**) を押して初めて確定する。1 段目だけで止めると申請は成立しないが、確認ページにも「申請」の語が出るため文言判定では成功と誤認する。完了判定は文言ではなく**申請中一覧に当該案件が現れたか**で行う。",
       "bulkApplyLabel": "一括提携申請へ",
       "_applyNote": "申請ページに**サイト select** (「メディアを選択 / 統計で見る都道府県 / doboku-note」) があり、選択せずに押すと既定サイト側で提携する。さらに同一ページに「一括提携申請へ」があり、ボタン候補を部分一致で拾うと**複数案件を一度に申請**してしまう。exact 一致＋「一括」除外が必須。",
       "statusScopeAnchor": "プロモーション詳細",
@@ -62,16 +69,24 @@
         "sessionPersistsAcrossProcesses": true,
         "timeoutMs": 30000,
         "loginMaxWaitMs": 900000
-      }
+      },
+      "weeklyApplyMax": 100,
+      "_weeklyApplyMaxNote": "2026-07-28 オーナー判断で 10→100 (ガード機構は維持)",
+      "_hrefIdPatternNote": "promotion_id は画面テキストに出ず a[href] にのみ現れる (2026-07-28 実測: text.includes 照合が常に none になり誤ドリフト 4 件)。href から抽出する",
+      "hrefIdPattern": "promotion_id=(\\d+)",
+      "rowSelector": "td.promotion-name",
+      "_listLimitNote": "既定ページサイズ10では一覧を読み切れない (2026-07-28 実測: applying 34件)。limit=100 を明示"
     },
-
     "afb": {
       "label": "afb (アフィリエイトB)",
       "baseUrl": "https://www.afi-b.com",
       "homePath": "/pa/",
       "reAuthPattern": "requiredlogin|/login",
       "siteSeparation": "chosen-widget",
-      "sites": { "stats47": "959426", "doboku-note": "984453" },
+      "sites": {
+        "stats47": "959426",
+        "doboku-note": "984453"
+      },
       "siteIdPattern": "【SID】\\s*(\\d+)",
       "siteSelectName": "partner_site_id",
       "chosenContainer": "#top_site_select_chzn, .chzn-container",
@@ -104,7 +119,14 @@
         "siteSwitchWaitMs": 90000,
         "_timeoutNote": "1 ページの読み込みに 1〜1.5 分かかる回線があり、既定 30 秒だとサイト切替もページ送りも取りこぼす。切替はページ再読込を伴うため siteSwitchWaitMs も同等に取る。",
         "loginMaxWaitMs": 600000
-      }
+      },
+      "weeklyApplyMax": 100,
+      "_rowSelectorNote": "afb の一覧件数 selector は未特定 (null = 件数取得できず と表示)。ID は listItemPattern で取れているため実害なし",
+      "rowSelector": null,
+      "_weeklyApplyMaxNote": "2026-07-28 オーナー判断で 10→100 (ガード機構は維持)",
+      "listPageParam": "p",
+      "maxListPages": 10,
+      "_listPageNote": "一覧は 50 件/頁。applying 97 件が複数頁にまたがるため p=N で追加 ID が出なくなるまで辿る (2026-07-29)"
     }
   }
 }

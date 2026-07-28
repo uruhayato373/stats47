@@ -2,7 +2,7 @@
  * append-affiliate-ads.ts — a8-catalog の harvested エントリを affiliate-ads-data.ts (SSOT) へ
  * 機械追記し、多段ゲートを通してから catalog を registered に昇格させる。
  *
- * ゲート順 (1 つでも fail → git checkout で SSOT を復元し中止):
+ * ゲート順 (1 つでも fail → 実行前に保持した byte 列で SSOT を復元し中止。git checkout は使わない):
  *   1. tsc         : npx tsc --noEmit -p apps/web/tsconfig.json
  *   2. audit       : audit-affiliate-inventory.ts --check-size (canonical サイズ)
  *   3. export検証  : export-affiliate-ads-snapshot.ts --validate-only (vertical 整合)
@@ -67,10 +67,30 @@ function runAllGates(): void {
   runGate("compliance", NODE, [TSX, ".claude/scripts/ads/audit-affiliate-compliance.ts", "--check"]);
 }
 
-/** SSOT を git HEAD に復元 (追記の巻き戻し)。 */
-function restoreSsot(): void {
-  execFileSync("git", ["checkout", "--", ADS_DATA], { cwd: PROJECT_ROOT, stdio: "pipe" });
-  console.log("↩️  affiliate-ads-data.ts を git HEAD に復元しました。");
+/**
+ * SSOT が実行前から dirty (git HEAD と差分あり) かを read-only で判定する。
+ * dirty のまま --apply すると、ゲート失敗時の巻き戻しで**ユーザーの未コミット変更ごと**
+ * 消すか、逆に残すかの区別がつかない。preflight で拒否する (doc 42 §9.2)。
+ */
+function isSsotDirty(): boolean {
+  try {
+    execFileSync("git", ["diff", "--quiet", "--", ADS_DATA], { cwd: PROJECT_ROOT, stdio: "pipe" });
+    return false;
+  } catch {
+    return true;
+  }
+}
+
+/**
+ * ゲート失敗時の巻き戻し: **実行前に保持した byte 列**を atomic (tmp + rename) に書き戻す。
+ * `git checkout --` は使わない — HEAD へ戻すため、実行前に存在した未コミット変更まで消す
+ * (doc 42 §9.2 / §19。2026-07-28 の Phase 0 監査で指摘)。
+ */
+function restoreSsot(originalBytes: Buffer): void {
+  const tmp = `${ADS_DATA}.rollback-tmp`;
+  fs.writeFileSync(tmp, originalBytes);
+  fs.renameSync(tmp, ADS_DATA);
+  console.log("↩️  affiliate-ads-data.ts を実行前の内容 (byte 列) に復元しました。");
 }
 
 function nowStr(): string {
@@ -105,10 +125,19 @@ function main(): void {
     return;
   }
 
-  let src = fs.readFileSync(ADS_DATA, "utf8");
+  // ★ 実行前 byte 列を保持 (ゲート失敗時の巻き戻しはこれを書き戻す。git checkout は使わない)
+  const originalBytes = fs.readFileSync(ADS_DATA);
+  let src = originalBytes.toString("utf8");
   const v = appendCore.validateTail(src);
   if (!v.ok) {
     console.error(`🚨 SSOT の末尾構造が不正 (${v.error})。追記を中止します。`);
+    process.exit(1);
+  }
+  if (APPLY && isSsotDirty()) {
+    console.error(
+      "🚨 affiliate-ads-data.ts に未コミットの差分があります。--apply は clean な状態でだけ実行できます\n" +
+        "   (ゲート失敗時の巻き戻しで未コミット変更の帰属が曖昧になるため。先に commit してから再実行)。",
+    );
     process.exit(1);
   }
 
@@ -156,7 +185,7 @@ function main(): void {
       runAllGates();
     } catch (e) {
       console.error("🚨 ゲート失敗:", (e as Error).message);
-      restoreSsot();
+      restoreSsot(originalBytes);
       process.exit(1);
     }
   }

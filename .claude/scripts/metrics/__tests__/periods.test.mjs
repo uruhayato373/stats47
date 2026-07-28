@@ -107,8 +107,9 @@ test("asOf backfill: 明示 as-of から決定的・week との不一致は失�
   );
 });
 
-test("unknown source は失敗する", () => {
-  assert.throws(() => resolvePeriods({ source: "adsense", week: "2026-W30", now: NOW_W30_SUNDAY }), /unknown source/);
+test("unknown source は失敗する (adsense は 2026-07-28 に正式追加済)", () => {
+  assert.throws(() => resolvePeriods({ source: "psi", week: "2026-W30", now: NOW_W30_SUNDAY }), /unknown source/);
+  assert.equal(DATA_DELAY_DAYS.adsense, 1);
 });
 
 test("effectWindows: baseline から 14/28/56 日", () => {

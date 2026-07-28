@@ -9,16 +9,20 @@ SNS 自動化（X / Instagram）の Playwright ログインを「毎回入れ直
 Cookie・localStorage をディレクトリごと保持する。**一度ログインすれば以降は再ログイン不要**。
 プロファイルはサービス単位で分離し、アカウント取り違え事故を防ぐ。
 
-| プロファイル (`.local/` 配下) | サービス | 使用スクリプト | 状態 |
+> **実ログイン状態はこの文書に書かない** (端末・時点で変わる変動状態を git 文書へ固定しない —
+> doc 42 §12・2026-07-29 改訂)。空/期限切れかは実行時にスクリプトが検知して人間ログインを促す。
+> ここには**固定仕様** (プロファイルの分離・サービス固有の認証特性・再ログイン手順) だけを置く。
+
+| プロファイル (`.local/` 配下) | サービス | 使用スクリプト | 固定仕様 (認証特性) |
 |---|---|---|---|
-| `playwright-x-profile` | X (Twitter) | `.claude/skills/sns/publish-x/publish-x.ts`, `check-x-scheduled.ts`, `update-x-profile/update-x-profile.cjs` | ✅ ログイン済み・稼働中 |
-| `playwright-ig-profile` | Instagram | `.claude/scripts/sns/delete-instagram-posts.ts` | ⚠️ **空（未ログイン）** |
-| `playwright-meta-profile` | Meta / FB Business Suite | `.claude/skills/archive/sns/schedule-instagram-mbs/…`（archive） | ⚠️ **空（未ログイン）** |
-| `playwright-a8-profile` | A8.net (アフィリエイト) | `.claude/skills/ads/scout-asp/scripts/{a8-browser.ts,login.mjs}`, `.claude/scripts/ads/affiliate-status.mjs` | ⚠️ **空（未ログイン）**。`login.mjs` で初回ログイン後に自動 scout (`/scout-asp`) と提携運用 (`/affiliate-operate`) が利用。**A8 は認証がセッション Cookie のため永続プロファイルに残らず、`.local/playwright-a8-state.json` (storageState) の再注入が認証再利用の実体** |
-| `playwright-moshimo-profile` | もしもアフィリエイト (af.moshimo.com) — ★口座は **stats47 と doboku-note が同居**（対象は stats47 = `shop_site_id 638943`） | `.claude/scripts/ads/{affiliate-status,affiliate-apply}.mjs` | ⚠️ **空（未ログイン）**。初回に headed で手動ログイン。サイト帰属 assert の SSOT は `.claude/config/affiliate-asp.json` |
-| `playwright-afb-profile` | afb / アフィリエイトB (afi-b.com) — ★口座は **stats47 と doboku-note が同居**（対象は stats47 = SID `959426`） | `.claude/scripts/ads/{affiliate-status,affiliate-apply,afb-scan}.mjs` | ⚠️ **空（未ログイン）**。**storageState を別プロセスで復元できず headless も拒否される**ため、ログインから作業完了までを 1 プロセス・headed で完結させる（毎回ログインが要るのは仕様） |
-| `playwright-coconala-profile` | ココナラ (coconala.com) — ★**stats47 専用アカウント**（doboku-note の `dobokunote` とは別） | `.claude/scripts/coconala/{coconala-publish,coconala-edit,coconala-delete-draft}.mjs` | ⚠️ **空（未ログイン）**。初回に headed で stats47 のココナラアカウントへ手動ログイン。account assert の SSOT は `.claude/config/coconala-account.json` の `sellerName`（現在空＝要記入） |
-| `playwright-kdp-profile` | Amazon KDP (kdp.amazon.com) — ★**stats47 の Amazon/KDP アカウント** | `.claude/scripts/kdp/{login,capture-account,kdp-publish}.mjs` | ⚠️ **空（未ログイン）**。初回に headed で手動ログイン（2FA 含む）。account assert の SSOT は `.claude/config/kdp-account.json` の `accountEmail`/`accountName`（現在空＝要記入）。税務情報・銀行口座の設定は人間工程 |
+| `playwright-x-profile` | X (Twitter) | `.claude/skills/sns/publish-x/publish-x.ts`, `check-x-scheduled.ts`, `update-x-profile/update-x-profile.cjs` | `--expect-account @<handle>` で口座照合 |
+| `playwright-ig-profile` | Instagram | `.claude/scripts/sns/delete-instagram-posts.ts` | — |
+| `playwright-meta-profile` | Meta / FB Business Suite | `.claude/skills/archive/sns/schedule-instagram-mbs/…`（archive） | archive スキルのみ使用 |
+| `playwright-a8-profile` | A8.net (アフィリエイト) | `.claude/skills/ads/scout-asp/scripts/{a8-browser.ts,login.mjs}`, `.claude/scripts/ads/affiliate-status.mjs` | 初回は `login.mjs` で手動ログイン。**A8 は認証がセッション Cookie のため永続プロファイルに残らず、`.local/playwright-a8-state.json` (storageState) の再注入が認証再利用の実体** |
+| `playwright-moshimo-profile` | もしもアフィリエイト (af.moshimo.com) — ★口座は **stats47 と doboku-note が同居**（対象は stats47 = `shop_site_id 638943`） | `.claude/scripts/ads/{affiliate-status,affiliate-apply}.mjs` | 初回に headed で手動ログイン。サイト帰属 assert の SSOT は `.claude/config/affiliate-asp.json` |
+| `playwright-afb-profile` | afb / アフィリエイトB (afi-b.com) — ★口座は **stats47 と doboku-note が同居**（対象は stats47 = SID `959426`） | `.claude/scripts/ads/{affiliate-status,affiliate-apply,afb-scan}.mjs` | **storageState を別プロセスで復元できず headless も拒否される**ため、ログインから作業完了までを 1 プロセス・headed で完結させる（毎回ログインが要るのは仕様） |
+| `playwright-coconala-profile` | ココナラ (coconala.com) — ★**stats47 専用アカウント**（doboku-note の `dobokunote` とは別） | `.claude/scripts/coconala/{coconala-publish,coconala-edit,coconala-delete-draft}.mjs` | 初回に headed で stats47 のココナラアカウントへ手動ログイン。account assert の SSOT は `.claude/config/coconala-account.json` の `sellerName` |
+| `playwright-kdp-profile` | Amazon KDP (kdp.amazon.com) — ★**stats47 の Amazon/KDP アカウント** | `.claude/scripts/kdp/{login,capture-account,kdp-publish}.mjs` | 初回に headed で手動ログイン（2FA 含む）。account assert の SSOT は `.claude/config/kdp-account.json` の `accountEmail`/`accountName`。税務情報・銀行口座の設定は人間工程 |
 
 - `PROFILE_DIR` は各スクリプトで `path.join(PROJECT_ROOT, ".local/playwright-*-profile")` として定義。
 - X アカウントは `publish-x.ts --expect-account @<handle>` で照合可能（ログイン中の @handle が一致するまで投稿しない安全ガード）。実運用ハンドル：**（要記入）** / ひも付け Gmail：**（要記入）**。
@@ -80,8 +84,6 @@ node login.mjs .local/playwright-ig-profile  https://www.instagram.com/accounts/
 
 ## TODO（このプロジェクト固有）
 
-- [ ] `playwright-ig-profile` にログインして永続化する（`delete-instagram-posts.ts` 利用前に必須。上の再ログイン手順を参照）。
-- [ ] `playwright-meta-profile` は archive スキルでのみ使用。再開しないなら放置可、再開時はログインが必要。
 - [ ] 上表の「実運用ハンドル / ひも付け Gmail」を記入する。
 - [x] 対策 A（プロファイルの本体絶対パス固定）を各スクリプトに適用済み（2026-07-19）。
 

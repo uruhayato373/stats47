@@ -123,6 +123,8 @@ function main(): void {
   lines.push("");
   lines.push(`- measurementGate: **${state.measurementGate.status}**` +
     (state.measurementGate.reasons.length ? ` (${state.measurementGate.reasons.join(", ")})` : ""));
+  lines.push(`- publishGate: **${state.publishGate.status}**` +
+    (state.publishGate.reasons.length ? ` (${state.publishGate.reasons.join(", ")})` : ""));
   lines.push(`- freshness: inventory ${state.freshness.inventoryDays ?? "?"}d / ga4 ${state.freshness.ga4Days ?? "?"}d`);
   lines.push(`- coverage: gap=[${state.coverage.gapVerticals.join(", ")}] thin=[${state.coverage.thinVerticals.join(", ")}]`);
   lines.push(`- directPlacements: total ${state.directPlacements.total} / orphaned ${state.directPlacements.orphaned.length} / missingDisclosure ${state.directPlacements.missingDisclosure.length}`);

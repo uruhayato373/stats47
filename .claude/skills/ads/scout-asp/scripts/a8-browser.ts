@@ -84,6 +84,9 @@ const A8 = {
   // ログイン再認証にリダイレクトされていない = ログイン済み。
   reAuthPattern: /re-authentication|\/login/i,
   categorySearchUrl: (code: string) => `${BASE}/program/search/category?primaryCategoryCode=${code}`,
+  // キーワード検索。実機ダンプの <form action="/program/search/keyword"> + <input name="keywords"> から確定
+  // (2026-07-28)。カテゴリ巡回は 1 ページ 20 件しか採れないため、意図を絞りたいときはこちらを使う。
+  keywordSearchUrl: (kw: string) => `${BASE}/program/search/keyword?keywords=${encodeURIComponent(kw)}`,
   autoContractUrl: `${BASE}/program/search/auto-contract`, // 即時提携 (審査なし)
   partneredListUrl: `${BASE}/program/list/partnered`, // 参加中 (承認済み)
   applyingListUrl: `${BASE}/program/list/applying`, // 申込中 (審査待ち)
@@ -335,7 +338,17 @@ function normalizeProgram(raw: any, verticalHint?: string): any {
   };
 }
 
-async function cmdScout(page: Page, limit: number): Promise<void> {
+/**
+ * @param opts.queries キーワード検索する語。指定時は**カテゴリ巡回をせず**この語だけを検索する。
+ *   カテゴリ巡回は 1 ページ 20 件しか採れず意図の粒度も粗いので、「賃貸」「移住」のように
+ *   検索意図が確定しているときはこちらを使う。
+ * @param opts.vertical 検索モードで vertical のヒントを固定する (キーワードから軸が自明なとき)。
+ */
+async function cmdScout(
+  page: Page,
+  limit: number,
+  opts: { queries?: string[]; vertical?: string; promote?: string[] } = {},
+): Promise<void> {
   const curated = core.loadCurated();
   const codeMap: Record<string, string> = curated.categoryCodeToVertical || {};
   const codes = Object.keys(codeMap);
@@ -352,19 +365,23 @@ async function cmdScout(page: Page, limit: number): Promise<void> {
     return;
   }
 
-  // 各 vertical カテゴリを巡回してカードを収集 (partnered は除外 = 既提携)。
+  // カードを収集 (partnered は除外 = 既提携)。
+  // キーワード指定があれば検索モード、無ければ従来どおり全 vertical カテゴリを巡回。
   const raw: any[] = [];
-  for (const code of codes) {
-    await page.goto(A8.categorySearchUrl(code), { waitUntil: "networkidle", timeout: 40000 });
+  const units = opts.queries?.length
+    ? opts.queries.map((q) => ({ label: `検索「${q}」`, url: A8.keywordSearchUrl(q), hint: opts.vertical }))
+    : codes.map((code) => ({ label: `カテゴリ ${code} (${codeMap[code]})`, url: A8.categorySearchUrl(code), hint: codeMap[code] }));
+  for (const u of units) {
+    await page.goto(u.url, { waitUntil: "networkidle", timeout: 40000 });
     await page.waitForTimeout(3500);
     if (!(await isLoggedIn(page))) return recordSessionExpired("scout");
     const cards = await scrapeCurrentPage(page);
     for (const c of cards) {
       if (c.partnered || !c.programId) continue; // 既提携・ID 不明はスキップ
-      raw.push(normalizeProgram(c, codeMap[code]));
+      raw.push(normalizeProgram(c, u.hint));
     }
-    console.log(`  カテゴリ ${code} (${codeMap[code]}): ${cards.length} カード`);
-    await page.waitForTimeout(1500 + (code.charCodeAt(1) % 5) * 300); // randomized wait
+    console.log(`  ${u.label}: ${cards.length} カード`);
+    await page.waitForTimeout(1500 + (u.url.length % 5) * 300); // randomized wait
   }
   console.log(`🔍 A8 から ${raw.length} 未提携プログラムを収集`);
   if (raw.length === 0) {
@@ -375,8 +392,34 @@ async function cmdScout(page: Page, limit: number): Promise<void> {
 
   const coverage = loadCoverage();
   const existingAds = loadExistingAds();
-  const { candidates, blocked, duplicates } = core.scoreAndRank(raw, { coverage, existingAds, curated });
+  const { candidates, blocked, duplicates, belowThreshold } = core.scoreAndRank(raw, { coverage, existingAds, curated });
+  // 閾値未満で落ちた案件を必ず表示する。score は単価と EPC で並べるだけなので、
+  // 単価は低いが需要が大きい軸の案件がここに沈む。落ちたことが見えないと
+  // 「在庫ゼロなのに候補も無い」状態の原因が追えない。
+  if (belowThreshold?.length) {
+    console.log(`  ⤵ minScore(${curated.minScore}) 未満で除外 ${belowThreshold.length} 件:`);
+    for (const p of belowThreshold) {
+      console.log(`     ${p.score.toFixed(2)} ${p.programId} ${p.vertical ?? "-"} ${p.name}`);
+    }
+  }
   const top = candidates.slice(0, Number.isFinite(limit) ? limit : candidates.length);
+  // --promote: 閾値未満の特定案件を candidate に昇格する。
+  // 在庫ゼロの軸を埋めるとき、score (単価×EPC) は低いが需要が大きい案件を通すための経路。
+  // **この run で実際に A8 から収集できた案件しか昇格できない** (存在しない ID は中止)。
+  if (opts.promote?.length) {
+    const pool = new Map((belowThreshold ?? []).map((p: any) => [p.programId, p]));
+    const missing = opts.promote.filter((id) => !pool.has(id));
+    if (missing.length) {
+      console.error(`❌ --promote の ID が今回の収集結果 (閾値未満) に無い: ${missing.join(", ")}`);
+      console.error("   スペル違い / 既に candidate 以上 / 検索語が違う のいずれか。中止する。");
+      return;
+    }
+    for (const id of opts.promote) {
+      const p = pool.get(id)!;
+      console.log(`  ⤴ 昇格 ${p.score.toFixed(2)} ${id} ${p.name}`);
+      top.push({ ...p, promotedBy: "gap-fill" });
+    }
+  }
   let cat = loadCatalog();
   cat = core.upsertCandidates(cat, top, { at: nowIso() });
   saveCatalog(cat);
@@ -812,7 +855,16 @@ async function main() {
   await restoreSession(context);
 
   try {
-    if (cmd === "scout") await cmdScout(page, limit);
+    if (cmd === "scout") {
+      const qi = args.indexOf("--query");
+      const vi = args.indexOf("--vertical");
+      const pi = args.indexOf("--promote");
+      await cmdScout(page, limit, {
+        queries: qi >= 0 ? String(args[qi + 1] ?? "").split(",").map((s) => s.trim()).filter(Boolean) : undefined,
+        vertical: vi >= 0 ? args[vi + 1] : undefined,
+        promote: pi >= 0 ? String(args[pi + 1] ?? "").split(",").map((s) => s.trim()).filter(Boolean) : undefined,
+      });
+    }
     else if (cmd === "apply") await cmdApply(page, max, ids);
     else if (cmd === "check-approval") await cmdCheckApproval(page);
     else if (cmd === "harvest")

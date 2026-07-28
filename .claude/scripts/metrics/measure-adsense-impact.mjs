@@ -186,7 +186,10 @@ function deviceLine(kind, bw, aw) {
   return (
     `  ${label}: RPM ¥${num(b.rpm).toFixed(0)}→¥${num(a.rpm).toFixed(0)}${pctStr(a.rpm, b.rpm)}` +
     ` | viewability ${(num(b.viewability) * 100).toFixed(1)}%→${(num(a.viewability) * 100).toFixed(1)}% (${ppStr(a.viewability, b.viewability)})` +
-    ` | CPC ¥${num(b.cpc).toFixed(2)}→¥${num(a.cpc).toFixed(2)}`
+    // schema v2: 旧 cpc (earnings/clicks) は公式 CPC ではないため後方互換の legacy 列を参照する (doc41 §2.1)。
+    // v2 移行前の行は旧 cpc 列に値が残る可能性があるため fallback する。
+    ` | 収益/click(legacy) ¥${num(b.earnings_per_click_legacy ?? b.cpc).toFixed(2)}→¥${num(a.earnings_per_click_legacy ?? a.cpc).toFixed(2)}` +
+    (a.cost_per_click ? ` | 公式CPC ¥${num(a.cost_per_click).toFixed(2)}` : "")
   );
 }
 

@@ -135,6 +135,23 @@ test("scoreAndRank: blocked/duplicate を分離し score 降順", () => {
   assert.equal(p1.vertical, "labor");
 });
 
+test("scoreAndRank: 閾値未満は belowThreshold に理由付きで残す (捨てたことを見えるようにする)", () => {
+  // 単価が極端に低い案件は minScore を下回る。ここに沈んだことが見えないと
+  // 「需要はあるのに候補ゼロ」の原因が追えない (ふるさと納税で実際に起きた)。
+  const programs = [
+    { programId: "hi", name: "看護師転職", genre: "転職", rewardType: "fixed", rewardYen: 20000, epcYen: 800, confirmRatePct: 90 },
+    { programId: "lo", name: "ふるさと納税サイト", genre: "その他", rewardType: "fixed", rewardYen: 100, epcYen: 1, confirmRatePct: 1 },
+  ];
+  const r = scoreAndRank(programs, { coverage, existingAds: [], curated });
+  assert.ok(Array.isArray(r.belowThreshold));
+  const lo = r.belowThreshold.find((p) => p.programId === "lo");
+  assert.ok(lo, "低単価案件が belowThreshold に入る");
+  assert.equal(lo.reason, "below-min-score");
+  assert.ok(typeof lo.score === "number", "score を保持し何点で落ちたか分かる");
+  assert.ok(!r.candidates.some((c) => c.programId === "lo"), "candidates には入らない");
+  assert.ok(r.candidates.some((c) => c.programId === "hi"));
+});
+
 test("canTransition: 正当な遷移のみ true", () => {
   assert.equal(canTransition(null, "candidate"), true);
   assert.equal(canTransition("candidate", "applied"), true);

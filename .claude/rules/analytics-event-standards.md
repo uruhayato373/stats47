@@ -49,7 +49,7 @@ GA4 → 管理（歯車）→ プロパティ列「データの表示」→「�
 | `nav_click` | `trackNavClick` | `nav_label` / `nav_surface`（`nav_href` は任意） | ✅登録済 (2026-07-20) | UI (P0-1) |
 | `rail_click` | `trackRailClick` | `rail_widget` / `rail_slot`（`rail_href` は任意） | ✅登録済 (2026-07-20) | UI (P0-2) |
 | `affiliate_click` | `trackAffiliateClick` | `affiliate_vertical` / `affiliate_category` / `link_position` / `experiment_id` / `variant_id` / `creative_size` | **✅登録済 (2026-07-06)** | `affiliate-ads-standards.md §6` |
-| `affiliate_click` (ad_id のみ) | `trackAffiliateClick` | `ad_id` | **⏳要登録** (2026-07-27 実測: GA4 API が `customEvent:ad_id` を invalid dimension として拒否) | `affiliate-ads-standards.md §6` |
+| `affiliate_click` (ad_id のみ) | `trackAffiliateClick` | `ad_id` | **✅登録済 (2026-07-28)** — google-admin Playwright runner で `Affiliate ad ID` (scope=Event, param=`ad_id`) を実登録・reload 後に画面 verify (最終変更日 2026年7月28日)。集計反映は 24-48h・非遡及のため、API で `customEvent:ad_id` が引けるのは反映後 | `affiliate-ads-standards.md §6` |
 | `affiliate_impression` | `AdImpressionTracker` | `affiliate_vertical` / `affiliate_category` / `link_position` / `experiment_id` / `variant_id` / `creative_size` | **✅登録済 (2026-07-06)** — dimension はパラメータ名に紐づくため、2026-07-28 の**イベント名改名では再登録不要**の想定 (初回計測で要確認) | `affiliate-ads-standards.md §6` |
 | `cta_click` | `trackCtaClick` | `cta_id` / `link_position` / `content_id` / `target_type` / `target_key` | ❓要確認 | buzz-map §7.3 / ファネル |
 | `home_featured_impression` / `home_featured_click` | `trackHomeFeatured*` | `card_variant` / `slot` / `experiment_id` / `experiment_variant` | ❓要確認 | `docs/02_実装計画/28 §9.3` |

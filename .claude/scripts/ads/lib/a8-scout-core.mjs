@@ -165,6 +165,7 @@ export function scoreAndRank(programs, { coverage, existingAds, curated }) {
   const candidates = [];
   const blocked = [];
   const duplicates = [];
+  const belowThreshold = [];
   for (const p of programs) {
     if (isBlocked(p, curated)) {
       blocked.push({ ...p, reason: "blocklist" });
@@ -176,11 +177,18 @@ export function scoreAndRank(programs, { coverage, existingAds, curated }) {
     }
     const vertical = resolveVertical(p, curated);
     const score = scoreProgram(p, vertical, coverage, curated);
-    if (score < curated.minScore) continue; // 閾値未満は候補にしない
+    if (score < curated.minScore) {
+      // 閾値未満は候補にしないが、**捨てたことを見えるようにする**。
+      // score は単価と EPC で並べるだけなので、単価は低いが需要が大きい軸
+      // (ふるさと納税等) の案件がここに沈み、在庫ゼロの原因が不可視になる。
+      belowThreshold.push({ ...p, vertical, score, reason: "below-min-score" });
+      continue;
+    }
     candidates.push({ ...p, vertical, score });
   }
   candidates.sort((a, b) => b.score - a.score);
-  return { candidates, blocked, duplicates };
+  belowThreshold.sort((a, b) => b.score - a.score);
+  return { candidates, blocked, duplicates, belowThreshold };
 }
 
 // ---------- 状態機械 ----------

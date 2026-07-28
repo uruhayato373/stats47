@@ -367,6 +367,11 @@ export interface CategoryRankingItem {
    * mini 表示用。旧 items.json 後方互換のため optional (欠損時は UI が text-first に縮退)。
    */
   top1?: FeaturedValue | null;
+  /**
+   * e-Stat 17 軸の categoryKey。survey ページが「調査の主題 → 広告の意図軸 (vertical)」を
+   * 導出するのに使う。旧 items.json 後方互換のため optional (欠損時は economy へ縮退)。
+   */
+  categoryKey?: string | null;
 }
 
 /**

@@ -1,0 +1,42 @@
+/**
+ * redact — google-admin runner の出力 sanitize (pure)。
+ *
+ * 正典: docs/02_実装計画/41_AdSense継続改善・GA4_GSC設定自動化仕様.md §3.2/§6.2。
+ * cookie / token / localStorage / Authorization / account email / URL query を
+ * console・audit JSON・state へ出さない。search-growth の redaction を再利用して拡張する。
+ */
+import { redactString as baseRedactString } from "../search-growth/lib/redaction.mjs";
+
+/** email をマスクする (account email を保存しない・§3.2)。 */
+export function redactEmail(s) {
+  if (typeof s !== "string") return s;
+  return s.replace(/[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/g, "[REDACTED_EMAIL]");
+}
+
+/** URL の query / fragment を落とす (query に個人情報・token が乗りうる)。 */
+export function redactUrl(s) {
+  if (typeof s !== "string") return s;
+  return s.replace(/(https?:\/\/[^\s"'?#]+)[?#][^\s"']*/g, "$1[REDACTED_QUERY]");
+}
+
+/** 文字列を全段 sanitize。 */
+export function sanitize(s) {
+  return redactUrl(redactEmail(baseRedactString(s)));
+}
+
+/** object を再帰 sanitize (機密キーは値ごとマスクする)。 */
+const SENSITIVE_KEY_RE = /(cookie|token|secret|password|authorization|credential|localstorage|session)/i;
+
+export function sanitizeObject(obj) {
+  if (obj == null) return obj;
+  if (typeof obj === "string") return sanitize(obj);
+  if (Array.isArray(obj)) return obj.map(sanitizeObject);
+  if (typeof obj === "object") {
+    const out = {};
+    for (const [k, v] of Object.entries(obj)) {
+      out[k] = SENSITIVE_KEY_RE.test(k) ? "[REDACTED]" : sanitizeObject(v);
+    }
+    return out;
+  }
+  return obj;
+}

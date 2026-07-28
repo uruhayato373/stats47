@@ -142,7 +142,8 @@ apps/web/scripts/affiliate-ads-data.ts (AFFILIATE_ADS = git TS SSOT・広告は 
 
 `affiliate-manager` がユーザーと 1 件ずつ対話しながら在庫を増やす。mode: `propose`(既定) / `register` / `direct` / `status`。
 
-- **`propose`**: audit (`audit-affiliate-inventory.ts`) の vertical カバレッジ + GA4/GSC トラフィックを突合し、
+- **`propose`**: **`.claude/state/ads/placement-map-latest.json` を読む** (§12)。目視で JOIN しない。
+  `unmapped.byReason` (広告が出ていない imp) → `gaps[].kinds` (在庫欠落) → `reverseCandidates` の順に見て、
   「在庫ゼロ/手薄 × 高トラフィック」の vertical を特定 → §2 表と照合し **次に提携すべき 1 プログラム**を根拠
   (想定 imp 機会・単価帯・送客ページ) つきで提示 → ユーザーが ASP (A8 等) で提携申請。**1 回 1 件**。
 - **`register`**: ユーザーが承認済みプログラムの HTML コードを貼付 → ASP 別に href/imageUrl/pixel/size 抽出
@@ -174,7 +175,9 @@ apps/web/scripts/affiliate-ads-data.ts (AFFILIATE_ADS = git TS SSOT・広告は 
 
 ## 10. 自動 scout パイプライン (A8 高単価案件)
 
-A8.net の高単価案件を **scout → 提携申請 → 広告コード取得 → SSOT 登録 → R2 公開** まで週次全自動で回す
+A8.net の高単価案件を **scout → 提携申請 → 広告コード取得 → SSOT 登録 → R2 公開** の閉ループで回す
+(★現行 safe mode: 週次 cron は観測・承認照合・dry-run まで。scout/apply は `APPLY_NEW=0` で無効、
+SSOT 実追記・push はオーナー承認の実行回のみ — 本節末「週次 cron の中身」参照)
 (skill `/scout-asp`・agent `asp-scout` + `affiliate-manager`)。§7 の手動貼付 (`/register-affiliate-banner`) と
 抽出仕様 (`a8-code-core.mjs`) を共有し、案件発見〜申請を自動化した上位互換。判定は全て決定的コード、agent の
 意味判断は「pending-vertical の 10 軸解決」と「A8 UI 変化の診断」の 2 点のみ。
@@ -336,6 +339,8 @@ text 2 しか出ないため**全登録は無意味** (`select-for-register.mjs`
 | 提携状態の実機照合 (read-only / `--write`) | `.claude/scripts/ads/affiliate-status.mjs` |
 | 提携申請 (dry-run 既定 / `--commit`) | `.claude/scripts/ads/affiliate-apply.mjs` |
 | afb 未提携案件の走査 | `.claude/scripts/ads/afb-scan.mjs` |
+| もしも未提携案件の走査 | `.claude/scripts/ads/moshimo-scan.mjs` (stats47 で新規作成・移植元に無い) |
+| 走査の vertical 抽出語 (afb / もしも共通) | `.claude/scripts/ads/lib/asp-vertical-keywords.mjs` |
 | 3 ASP 横断の提携台帳 | `.claude/state/ads/affiliate-catalog.json` |
 
 **`a8-catalog.json` とはマージしない。** あちらは A8 scout の状態機械、こちらは ASP 横断の運用判断。
@@ -349,7 +354,8 @@ text 2 しか出ないため**全登録は無意味** (`select-for-register.mjs`
 | 提携申請は既定 dry-run・実申請はオーナー承認 | `--commit` gate。Red Line 案件は `--commit` でも落とす |
 | 「一括提携申請へ」を絶対に押さない | ラベル完全一致 + 「一括」を含む候補を機械除外 |
 | もしもの申請はサイト select を read-back 確認してから押す | `selectSiteInForm` が不一致で abort |
-| 取得できなかった ASP を「提携なし」と混同しない | `affiliate-status` が判定不能として区別 |
+| 取得できなかった ASP を「提携なし」と混同しない | `affiliate-status` が判定不能として区別。**もしもは一覧に案件 ID が出ない**ので ID 抽出数は常に 0 になる。一覧の実件数を併記し「ID 0 件 = 提携ゼロ」と誤読させない (2026-07-28 に実際に誤読し、提携中 7 件・申請中 6 件を「0 件」と報告した) |
+| 申請の完了を文言で判定しない | もしもの申請は **2 段階** (申請ページ →`/apply/confirm` で確定)。確認ページにも「申請」の語が出るため文言判定では未完了を成功と誤報する。完了は**申請中または提携中一覧に当該案件が現れたか**だけを根拠にする (2026-07-28 に 4 件を誤報)。★もしもは**即時承認**があり申請中を経ず提携中へ直行する (同日 4 件実測) — 申請中一覧だけ見ると成功を unverified と誤報する |
 | 認証情報を env / config に置かない | 人間が手動ログイン → 永続プロファイル |
 
 ### 役割分担
@@ -362,6 +368,64 @@ text 2 しか出ないため**全登録は無意味** (`select-for-register.mjs`
 | A8 成果レポート CSV の収集 | `a8-report-collector` (skill `/a8-report`) |
 | 収集 CSV のデータ品質検査 | `a8-csv-auditor` |
 | 初回ログイン・`--commit` の承認 | 人間 (オーナー) |
+
+## 12. 配置マップ (ページ種別 × 枠) と 5 チャネルの役割分担
+
+「どのページにどう出すか」の正典。2026-07-28 の全ページ棚卸しで確定した現状を固定する。
+
+### 枠の現状
+
+| ページ種別 | アフィリ枠 | 解決キー |
+|---|---|---|
+| blog | 本文 banner / 本文 text (自動挿入 最大4) / サイドバー text / 楽天ふるさと納税 / 楽天商品 / ハウス枠×2 | tagKeys → vertical、タイトル → 県・品目 |
+| ranking | ハウス枠 / `AffiliateAdSlot` (banner1→text2→AdSense) / native ≤4 / 楽天ふるさと納税 (1位県) / 楽天商品 | categoryKey → vertical + tagKeys、1位県、ランキング名 → 品目 |
+| category / tag | native ≤4 / ハウス枠 | `CATEGORY_FALLBACK_TAGS` / tagKey |
+| survey | native ≤4 | 所属ランキングの categoryKey 最頻値 → vertical |
+| themes | ハウス枠 / native ≤4 | relatedArticleTagKeys → 無ければ `THEME_AFFILIATE_MAP` |
+| areas 県 | 楽天ふるさと納税 / ハウス枠 / `AreaBannerAd` | areaCode / `area-sidebar` |
+| areas 市区町村 | `AreaBannerAd` / 楽天ふるさと納税 | `area-sidebar` / 親県コード |
+| home | ハウス枠 / native ≤4 (economy 固定) | 無し (vertical 解決の手掛かりが無いページ) |
+| compare | native ≤4 | categoryKey → vertical |
+
+> **2026-07-28 に埋めたギャップ** (すべて既存コンポーネントの再利用): 写像なし 6 category の追加
+> (unmapped 7,866 → 783 imp) / survey の tag ハードコード撤廃 / areas 県ページの `AreaBannerAd`
+> (枠名と描画位置の不一致を解消) / home・compare のアフィリゼロ / 楽天商品カードの新設。
+>
+> **home に vertical 解決を持ち込まない**。訪問者の意図が確定しないページで軸を推測すると、
+> 意図不一致の広告を最上位に置くこと (§5 の禁止事項) と実質同じになる。ハウス枠と
+> economy 固定 native に留める (economy は GSC 実測で検索意図の最多クラスタ)。
+
+### 5 チャネルの役割分担 (混ぜない)
+
+| チャネル | 役割 | 使いどころ | SSOT |
+|---|---|---|---|
+| `AFFILIATE_ADS` (vertical 解決) | 汎用の自動配置。**基本はこれ** | ページ意図に自動追従させたいとき | `affiliate-ads-data.ts` |
+| `targetRankingKeys` | **ページ限定配置** | 高EPC 案件を特定ランキングだけに当てる | 同上 (フィールド) |
+| `SIDEBAR_PROMO_BANNERS` | 全ページ共通の固定ハウス枠 | vertical 非依存で出したい主力案件 | `constants/sidebar-banners.ts` |
+| 直接配置台帳 | 記事本文の href 直書き | 記事と案件の 1:1 編集判断 | `affiliate-direct-placements-data.ts` |
+| 楽天動的 (API) | 文脈商品・返礼品 | 審査不要・在庫無限。食品/地域文脈 | `rakuten-api.ts` (env の App ID) |
+
+**楽天動的カードの品目辞書はハードコードしない。** `constants/product-keywords.ts` が
+metric config (git TS SSOT) の title から機械導出する — 家計調査系 metric は
+「{品目}消費支出額」「{品目}消費量」という決まった形なので接尾辞を剥がせば品目が取れる。
+手で品目リストを持つと metric 追加のたびにドリフトする。「◯◯代/料/費/賃/税」は費目であって
+商品ではないので除外し、通販で買えないもの (都市ガス・ガソリン) も落とす。
+**品目を検出できないページ・API が 0 件のページでは何も描画しない** — 無差別に出すと
+記事と無関係な商品が並び読者価値を損なう (`blog-quality-standards.md` のリンク配置規律と同じ)。
+
+### 需要 × 供給の突合は機械が行う
+
+`.claude/scripts/ads/build-placement-map.mjs` が GSC ページ別実測 × 在庫 × 確定EPC を突合し
+`.claude/state/ads/placement-map-latest.json` を生成する (週次 cron `affiliate-dashboard-refresh.yml`)。
+**目視 JOIN で propose しない** — 再現性が無く見落とすため。判定は `lib/placement-map-core.mjs` (テスト付き)。
+
+出力の読み方:
+- `gaps[].kinds` — `banner-zero` / `text-zero` (在庫欠落) / `oversupply` (在庫過多・仕入れ優先度↓)
+- `unmapped.byReason` — **広告が出ていない imp** を理由別に集計。`category-unmapped:<key>` は写像追加で即解消できる
+- `reverseCandidates` — 確定EPC 上位の未接続案件 + 当て先 ranking キーの suggest。
+  **`shared: true` は doboku-note と同一 A8 口座で共用している案件**で、EPC は口座横断の実績。
+  stats47 単独の実力として扱わない。`suggestedRankingKeys` は候補であって適用ではない
+  (ブランド適合の意味判断は agent/人)
 
 ## 9. 関連
 
@@ -383,6 +447,10 @@ text 2 しか出ないため**全登録は無意味** (`select-for-register.mjs`
 - 生成/検証: `apps/web/scripts/export-affiliate-ads-snapshot.ts` (vertical validation) → R2 `app/affiliate-ads/all.json`
 - 監査/lint: `.claude/scripts/ads/audit-affiliate-inventory.ts` (vertical カバレッジ + `--check-size`) /
   `.claude/scripts/ads/audit-affiliate-compliance.ts` (直接配置・PR 表記)
+- 配置マップ (§12): `.claude/scripts/ads/build-placement-map.mjs` + `lib/placement-map-core.mjs` (+ `__tests__/`)
+  → `.claude/state/ads/placement-map-latest.json` (週次 `affiliate-dashboard-refresh.yml`)
+- 楽天動的 (§12): `apps/web/src/features/ads/lib/rakuten-api.ts` /
+  `constants/{furusato-nozei,product-keywords}.ts` / `components/{FurusatoNozeiCard,RakutenItemsCard}.tsx`
 - 機械状態: `.claude/state/ads/{affiliate-operations-latest,inventory-latest,compliance-latest,experiments}.json`
   (生成: `build-affiliate-operations-state.ts` + 週次 CI。**在庫数・gap は state から読む — 文書に固定しない**)
 - GA4 計測: `.claude/scripts/ads/fetch-affiliate-ga4.cjs` / `apps/web/src/lib/analytics/events.ts`

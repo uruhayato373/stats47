@@ -42,3 +42,5 @@ tags: []
 | 2026-07-23 | テーマ幅統一 (ThemeSwitcher 化・commit `43ced9f7`) のデプロイ前残検証: フル build (`npm run build --workspace apps/web`) + ブラウザ実機で 390/1024/1280px の視覚崩れ・console/hydration を目視 | 検証 | 未整理 | 実装・型・ESLint・テスト(11+回帰30)・dev SSR 実測(280px消失/1280全幅/200・410)は完了済。フル build とブラウザ視覚確認のみ未実施 (環境に headless ブラウザ無し)。develop→main デプロイ時に実施 |
 | | | | | |
 - maintenance-debt baseline 残 239 件の計画的 paydown (誤検知はルール精緻化・実負債は期限/削除条件付与か backlog 化で縮小。baseline は縮小専用の不変条項 2026-07-14)
+- [ads] 未デプロイ (2026-07-28 起票): PR #646 (ふるさと納税ブログ) + develop の 8 コミット (配置ギャップ / 楽天商品カード / A8 申請 / もしも一式) が本番未反映。まとめて 1 回でデプロイする
+- [ads] ASP 申請の来週分 (2026-07-28 起票): 週枠 (各100/週) 超過分の申請残 = もしも 41 件 + afb 29 件。id リストは走査 JSON から再抽出可能 (`.local/playwright-{moshimo,afb}-debug/scan-*.json` → 名寄せ・blocklist 済みの手順は 2026-07-28 セッション参照)。来週月曜以降に `affiliate-apply.mjs --asp <asp> --id <ids> --commit` で消化。承認追跡/harvest の自動化は doc 42 (ASP-CONTINUITY-01) 実装後は週次に乗る

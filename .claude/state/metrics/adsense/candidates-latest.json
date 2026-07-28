@@ -1,0 +1,101 @@
+{
+  "schemaVersion": 1,
+  "week": "2026-W30",
+  "generatedAt": "2026-07-28T10:06:57.053Z",
+  "period": {
+    "periodStart": "2026-07-19",
+    "periodEnd": "2026-07-25",
+    "windowDays": 7
+  },
+  "previousWeek": "2026-W29",
+  "limits": {
+    "maxCandidates": 3,
+    "activeWipLimit": 2,
+    "weeklyAdoptionLimit": 1
+  },
+  "note": "候補提示まで (自動でバックログ追加・配置変更・deploy しない・doc41 §3.3)。採用は人間承認で最大1件/週",
+  "candidates": [
+    {
+      "id": "measurement-gap::bid-types-platforms,formats-platforms,placements-platforms",
+      "rule": "measurement-gap",
+      "key": "bid-types-platforms,formats-platforms,placements-platforms",
+      "score": 103,
+      "evidence": [
+        {
+          "metric": "job:formats-platforms",
+          "status": "missing"
+        },
+        {
+          "metric": "job:placements-platforms",
+          "status": "missing"
+        },
+        {
+          "metric": "job:bid-types-platforms",
+          "status": "missing"
+        }
+      ],
+      "sample": {
+        "jobs": 3
+      },
+      "confidence": 0.95,
+      "expectedLever": "report job の取得是正 (creds / API 互換 / retry)",
+      "guardrail": "—",
+      "rollback": "—",
+      "earliestDecisionDate": "2026-08-08",
+      "judgment": {
+        "day14": "2026-08-08",
+        "day28": "2026-08-22",
+        "day56": "2026-09-19"
+      },
+      "pastEffect": null,
+      "confounders": [],
+      "notes": [
+        "privacy-threshold は gap に数えない (仕様上の制約)"
+      ],
+      "externalActionFlag": false
+    },
+    {
+      "id": "device-regression::Desktop",
+      "rule": "device-regression",
+      "key": "Desktop",
+      "score": 1.3714,
+      "evidence": [
+        {
+          "metric": "page_rpm",
+          "previous": 48,
+          "current": 35
+        },
+        {
+          "metric": "earnings",
+          "previous": 128,
+          "current": 88
+        },
+        {
+          "metric": "impressions",
+          "previous": 4137,
+          "current": 3349
+        }
+      ],
+      "sample": {
+        "impressions": 3349
+      },
+      "confidence": 0.7,
+      "expectedLever": "Desktop の広告密度/読み込み距離の見直し (1 レバーのみ)",
+      "guardrail": "他 device の収益・viewability を悪化させない",
+      "rollback": "変更 commit の revert",
+      "earliestDecisionDate": "2026-08-08",
+      "judgment": {
+        "day14": "2026-08-08",
+        "day28": "2026-08-22",
+        "day56": "2026-09-19"
+      },
+      "pastEffect": null,
+      "confounders": [
+        "traffic mix の変化 (query/ページ種別)",
+        "季節性"
+      ],
+      "notes": [],
+      "externalActionFlag": false
+    }
+  ]
+}

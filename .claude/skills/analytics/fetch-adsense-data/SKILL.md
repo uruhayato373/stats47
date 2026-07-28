@@ -222,109 +222,21 @@ main().catch(e => { console.error(e); process.exit(1); });
 
 ### 実行スクリプト
 
-プロジェクトルートで以下を `node -e` で実行する:
+正典実装 `.claude/scripts/metrics/fetch-adsense-snapshot.mjs` を実行する
+(旧: SKILL 内に同義スクリプトを複製していたが、公式 CPC 契約 (doc41 §4.2) 導入時の
+drift 防止のため 2026-07-28 に正典参照へ一本化した):
 
-```javascript
-const { google } = require('googleapis');
-const path = require('path');
-const fs = require('fs');
-require('dotenv').config({ path: '.env.local' });
-
-const oauth2Client = new google.auth.OAuth2(
-  process.env.GOOGLE_ADSENSE_CLIENT_ID,
-  process.env.GOOGLE_ADSENSE_CLIENT_SECRET
-);
-oauth2Client.setCredentials({ refresh_token: process.env.GOOGLE_ADSENSE_REFRESH_TOKEN });
-
-const adsense = google.adsense({ version: 'v2', auth: oauth2Client });
-const ACCOUNT = `accounts/${process.env.GOOGLE_ADSENSE_ACCOUNT_ID}`;
-
-// 期間 (last7d): AdSense は 1 日遅延
-const today = new Date();
-const endDate = new Date(today); endDate.setDate(today.getDate() - 1);
-const startDate = new Date(endDate); startDate.setDate(endDate.getDate() - 6);
-
-// 保存先
-const WEEK = '<YYYY-Www>'; // 引数から受け取る
-const OUT_DIR = path.resolve(`.claude/skills/analytics/adsense-improvement/reference/snapshots/${WEEK}`);
-fs.mkdirSync(OUT_DIR, { recursive: true });
-
-const esc = (v) => {
-  if (v === null || v === undefined) return '';
-  const s = String(v);
-  return /[",\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
-};
-const toCSV = (rows, headers) =>
-  [headers.join(','), ...rows.map(r => headers.map(h => esc(r[h])).join(','))].join('\n') + '\n';
-
-async function fetchReport(dimensions, metrics, limit = 1000) {
-  const res = await adsense.accounts.reports.generate({
-    account: ACCOUNT,
-    dateRange: 'CUSTOM',
-    'startDate.year': startDate.getFullYear(),
-    'startDate.month': startDate.getMonth() + 1,
-    'startDate.day': startDate.getDate(),
-    'endDate.year': endDate.getFullYear(),
-    'endDate.month': endDate.getMonth() + 1,
-    'endDate.day': endDate.getDate(),
-    dimensions,
-    metrics,
-    limit,
-  });
-  return res.data;
-}
-
-function flatten(report) {
-  const headers = report.headers?.map(h => h.name) || [];
-  return (report.rows || []).map(row => {
-    const out = {};
-    row.cells.forEach((cell, i) => { out[headers[i]] = cell.value; });
-    return out;
-  });
-}
-
-async function main() {
-  const METRICS = [
-    'ESTIMATED_EARNINGS',
-    'PAGE_VIEWS',
-    'PAGE_VIEWS_RPM',
-    'IMPRESSIONS',
-    'CLICKS',
-    'IMPRESSIONS_CTR',
-    'ACTIVE_VIEW_VIEWABILITY',
-  ];
-
-  const jobs = [
-    { name: 'overview', dims: [], file: 'overview.csv' },
-    { name: 'pages', dims: ['PAGE_URL'], file: 'pages.csv' },
-    { name: 'units', dims: ['AD_UNIT_NAME'], file: 'units.csv' },
-    { name: 'devices', dims: ['PLATFORM_TYPE_NAME'], file: 'devices.csv' },
-    { name: 'daily', dims: ['DATE'], file: 'daily.csv' },
-  ];
-
-  const summary = [];
-  for (const job of jobs) {
-    const report = await fetchReport(job.dims, METRICS);
-    const rows = flatten(report);
-    const headers = [...job.dims, ...METRICS];
-    const csv = toCSV(rows, headers);
-    fs.writeFileSync(path.join(OUT_DIR, job.file), csv);
-    summary.push(`${job.file}: ${rows.length} rows`);
-  }
-
-  // 通貨確認
-  const overview = flatten(await fetchReport([], METRICS))[0] || {};
-  summary.push(`period: ${startDate.toISOString().slice(0,10)} ~ ${endDate.toISOString().slice(0,10)}`);
-  summary.push(`total_earnings: ${overview.ESTIMATED_EARNINGS || 'N/A'}`);
-
-  console.log(`[adsense-snapshot] ${WEEK} saved to ${OUT_DIR}`);
-  console.log(summary.join('\n'));
-}
-
-main().catch(e => { console.error(e.message || e); process.exit(1); });
+```bash
+npm run fetch-adsense-snapshot -- <YYYY-Www>     # 例: 2026-W30。未来週は失敗する
+npm run fetch-adsense-snapshot -- <YYYY-Www> --dry-run   # API を呼ばず期間・job 契約を確認
 ```
 
-実行前に `<YYYY-Www>` を引数で受け取った値に置換すること。
+- 期間は week から決定的に導出 (`lib/periods.mjs`・遅延 1 日・finalized7d)。
+- 出力: overview / daily / devices / units / formats-platforms / placements-platforms /
+  bid-types-platforms / traffic-sources / countries / pages.csv + `manifest.json`
+  (期間 metadata・status。PAGE_URL 0 行は privacy-threshold であり欠損ではない)。
+- metric は公式 `COST_PER_CLICK` / `IMPRESSIONS_RPM` / `AD_REQUESTS` / `AD_REQUESTS_COVERAGE` を含む。
+  unit/format/placement 系 job は PAGE_VIEWS 系を要求しない (分母 0・doc41 §2.2)。
 
 ### 保存後の挙動
 

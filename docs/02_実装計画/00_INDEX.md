@@ -55,6 +55,7 @@ tags: [実装計画]
 | `39_検索成長統合MCP・API基盤実装仕様.md` | GSC・URL Inspection・Sitemaps・GA4・CrUX・PSI・Cloudflareをread-only MCP/CLIで統合し、検索改善候補と効果測定を閉ループ化するClaude Code実装仕様 |
 | `40_アフィリエイト計測是正実装仕様.md` | GA4予約名との衝突、意図軸欠損、native impression欠落を是正し、アフィリエイトCTRを測定可能にする実装仕様 |
 | `41_AdSense継続改善・GA4_GSC設定自動化仕様.md` | 公式CPC・imp RPM・形式別収益を整備し、GA4/GSCのallowlist設定をPlaywrightで反映して週次改善を閉ループ化する仕様 |
+| `42_アフィリエイトPlaywright継続運用・安全化実装仕様.md` | ASP申請・承認追跡・広告コード取得・配線を、冪等性・適格性・計測・cron監視・収益照合まで閉じる段階実装仕様とClaude Code prompt |
 
 ## 関連（このフォルダ外の正典）
 

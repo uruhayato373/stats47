@@ -15,6 +15,7 @@ import { PageShell } from "@/components/layout";
 import { RightRailWidgets } from "@/components/rail";
 
 import { InContentAdSlot, RailAdSlot } from "@/features/ads";
+import { AreaBannerAd } from "@/features/ads/server";
 import { AreaDatabookSection } from "@/features/area-databook";
 import {
     AreaProfilePageClient,
@@ -126,6 +127,10 @@ export default async function AreaProfilePage({ params }: PageProps) {
                                 weaknesses={profile.weaknesses}
                             />
                         }
+                        // ★ 2026-07-28: locationCode "area-sidebar" の在庫は市区町村ページの
+                        //   フッターにしか描画されておらず、枠名と実際の描画位置が食い違っていた。
+                        //   県ページ (6,723 imp) のレール下部にも出す。
+                        bottomWidgets={<AreaBannerAd />}
                     />
                 }
             >

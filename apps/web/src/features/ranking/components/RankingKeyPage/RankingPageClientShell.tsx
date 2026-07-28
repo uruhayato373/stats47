@@ -50,6 +50,8 @@ export function RankingPageClientShell({
             rankingItem={model.rankingItem}
             surveys={model.originalSurveys}
             surveyRelatedItems={model.surveyRelatedItems}
+            furusatoAreaCode={model.rankingValues.find((v) => v.rank === 1)?.areaCode}
+            rankingName={model.rankingName}
           />
         ),
         correlation: <RankingPageCorrelationSection rankingKey={rankingKey} />,

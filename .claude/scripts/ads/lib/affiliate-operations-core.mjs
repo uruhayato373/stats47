@@ -9,7 +9,31 @@
  * routing・freshness・期限・sample 到達の判定はすべてここで決定的に行い、モデルに判断させない。
  */
 
-export const OPERATIONS_SCHEMA_VERSION = 1;
+export const OPERATIONS_SCHEMA_VERSION = 2;
+
+/**
+ * GA4 snapshot の要求 schema (doc 42 §10.1)。v2 未満 (= 旧 `ad_impression` 汚染データ) は
+ * 値が新鮮でも `ga4-schema-unsupported` で blocked にする。
+ * 実測根拠 (2026-07-26 snapshot): 旧 schema の imp 13,115 は全件 AdSense 由来で分母にならない。
+ */
+export const GA4_SNAPSHOT_SCHEMA_VERSION = 2;
+export const MEASUREMENT_EPOCH = "affiliate-impression-v1";
+export const IMPRESSION_EVENT_NAME = "affiliate_impression";
+/** `(not set)`/`(unset)` vertical の許容比率 (doc 42 §10.2 の named constant)。 */
+export const MAX_UNSET_VERTICAL_RATIO = 0.1;
+/** 認識する 10 vertical (AffiliateVertical union。affiliate-category.ts と一致させる)。 */
+export const KNOWN_AFFILIATE_VERTICALS = [
+  "labor",
+  "housing",
+  "population",
+  "economy",
+  "health",
+  "energy",
+  "travel",
+  "furusato",
+  "education",
+  "mobility",
+];
 
 /**
  * freshness 閾値 (日)。週次 cadence (日曜 cron) + 3 日 grace。
@@ -48,6 +72,25 @@ export function evaluateMeasurementGate({ ga4, inventory, nowIso, hasActiveExper
 
   if (!ga4) reasons.push("ga4-snapshot-missing");
   else {
+    // ── schema v2 ゲート (doc 42 §10.2)。旧 schema は鮮度に関係なく blocked ──
+    if (ga4.schemaVersion !== GA4_SNAPSHOT_SCHEMA_VERSION) {
+      reasons.push(`ga4-schema-unsupported(v${ga4.schemaVersion ?? 1})`);
+    } else {
+      if (ga4.measurementEpoch !== MEASUREMENT_EPOCH) {
+        reasons.push(`ga4-epoch-mismatch(${ga4.measurementEpoch ?? "none"})`);
+      }
+      if (ga4.eventNames?.impression !== IMPRESSION_EVENT_NAME) {
+        reasons.push(`ga4-impression-event-mismatch(${ga4.eventNames?.impression ?? "none"})`);
+      }
+      if (!((ga4.totals?.impressions ?? 0) > 0)) reasons.push("ga4-impressions-zero");
+      if (!((ga4.quality?.recognizedVerticalImpressions ?? 0) > 0)) {
+        reasons.push("ga4-recognized-vertical-zero");
+      }
+      const unsetRatio = ga4.quality?.unsetVerticalRatio;
+      if (unsetRatio != null && unsetRatio > MAX_UNSET_VERTICAL_RATIO) {
+        reasons.push(`ga4-unset-vertical-ratio-high(${unsetRatio.toFixed(3)}>${MAX_UNSET_VERTICAL_RATIO})`);
+      }
+    }
     if (ga4Days == null || ga4Days > STALE_THRESHOLD_DAYS.ga4) {
       reasons.push(`ga4-snapshot-stale(${ga4Days ?? "?"}d>${STALE_THRESHOLD_DAYS.ga4}d)`);
     }
@@ -190,6 +233,23 @@ export function evaluateExperiments({ registry, ads, variantMetrics, nowIso }) {
 }
 
 /**
+ * 広告配信 snapshot の publish gate (doc 42 §10.3)。
+ * compliance の missingDisclosure / orphaned が 1 件以上なら blocked。
+ * 消費側: append-affiliate-ads の gate、affiliate-manager の publish 段取り判断。
+ */
+export function evaluatePublishGate({ compliance }) {
+  const reasons = [];
+  if (!compliance) reasons.push("compliance-snapshot-missing");
+  else {
+    const missing = compliance.directPlacements?.missingDisclosure ?? [];
+    const orphaned = compliance.directPlacements?.orphaned ?? [];
+    for (const m of missing) reasons.push(`missing-disclosure:${m.id}`);
+    for (const o of orphaned) reasons.push(`orphaned-placement:${o.id ?? o}`);
+  }
+  return { status: reasons.length === 0 ? "ready" : "blocked", reasons };
+}
+
+/**
  * recommendedActions を決定的な条件から生成する (優先度順)。モデルに routing させない。
  */
 export function buildRecommendedActions({ measurementGate, coverage, directPlacements, experiments }) {
@@ -244,6 +304,7 @@ export function buildOperationsState({
   compliance,
   experiments,
   measurementGate,
+  publishGate = null,
 }) {
   const coverage = {
     gapVerticals: inventory?.coverage?.gapVerticals ?? [],
@@ -261,6 +322,7 @@ export function buildOperationsState({
     inconclusive: experiments?.inconclusive ?? [],
     closed: experiments?.closed ?? [],
   };
+  const resolvedPublishGate = publishGate ?? evaluatePublishGate({ compliance });
   return {
     schemaVersion: OPERATIONS_SCHEMA_VERSION,
     generatedAt: nowIso,
@@ -271,6 +333,7 @@ export function buildOperationsState({
       ga4Days: measurementGate.freshness.ga4Days,
     },
     measurementGate: { status: measurementGate.status, reasons: measurementGate.reasons },
+    publishGate: resolvedPublishGate,
     coverage,
     directPlacements,
     experiments: experimentsOut,
@@ -301,6 +364,12 @@ export function validateOperationsState(state) {
   if (!Array.isArray(state.measurementGate?.reasons)) push("measurementGate.reasons が配列でない");
   if (state.measurementGate?.status === "blocked" && state.measurementGate.reasons.length === 0) {
     push("blocked なのに reasons が空 (失敗を隠さない)");
+  }
+  if (!state.publishGate || !["ready", "blocked"].includes(state.publishGate.status)) {
+    push("publishGate.status が ready|blocked でない");
+  }
+  if (state.publishGate?.status === "blocked" && (state.publishGate.reasons ?? []).length === 0) {
+    push("publishGate blocked なのに reasons が空");
   }
   if (!state.freshness || !("inventoryDays" in state.freshness) || !("ga4Days" in state.freshness)) {
     push("freshness.{inventoryDays,ga4Days} が無い");

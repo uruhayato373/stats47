@@ -1,6 +1,6 @@
 {
   "_doc": "A8 scout パイプラインの curated SSOT。正典 = .claude/rules/affiliate-ads-standards.md §10。a8-scout-core.mjs が読む。値を変えるときはここだけ編集 (係数・上限・blocklist をハードコードしない)。",
-  "weeklyApplyMax": 10,
+  "weeklyApplyMax": 100,
   "minScore": 0.35,
   "scoreWeights": {
     "reward": 0.4,
@@ -62,7 +62,10 @@
     "楽天アフィリエイト",
     "アフィリエイト初心者",
     "メディア会員募",
-    "恋活"
+    "恋活",
+    "CFD",
+    "ノックアウト",
+    "FX取引"
   ],
   "_vertical_map_doc": "A8 ジャンル名 or プログラム名キーワード → AffiliateVertical (10軸)。scout 時に決定的解決。ヒットなしは pending-vertical (register 前に人間/agent が --set-vertical)。affiliate-category.ts の 10軸に一致すること。",
   "verticalKeywords": {
@@ -78,7 +81,8 @@
       "薬剤師転職",
       "IT求人",
       "フリーランス",
-      "副業紹介なし転職"
+      "副業紹介なし転職",
+      "ココナラ"
     ],
     "housing": [
       "不動産",
@@ -138,7 +142,9 @@
       "ファイナンシャルプランナー",
       "ファクタリング",
       "資産形成",
-      "節税"
+      "節税",
+      "TOSSY",
+      "ConoHa"
     ],
     "health": [
       "フィットネス",
@@ -165,7 +171,8 @@
       "AGA",
       "植毛",
       "増大",
-      "包茎"
+      "包茎",
+      "スポーツ用品"
     ],
     "energy": [
       "電力",
@@ -211,13 +218,16 @@
       "レジャー",
       "体験予約",
       "レンタカー",
-      "トラベル"
+      "トラベル",
+      "キャンプ",
+      "アウトドア"
     ],
     "furusato": [
       "ふるさと納税",
       "返礼品",
       "地方特産",
-      "自治体"
+      "自治体",
+      "イオン九州"
     ],
     "education": [
       "通信教育",
@@ -239,7 +249,8 @@
       "教習",
       "合宿免許",
       "就労移行",
-      "不登校"
+      "不登校",
+      "AI Agent Camp"
     ],
     "mobility": [
       "自動車保険",
@@ -307,5 +318,6 @@
       "width": 320,
       "height": 100
     }
-  ]
+  ],
+  "_weeklyApplyMaxNote": "2026-07-28 オーナー判断で 10→100 へ引き上げ (機械ガード自体は bot 検知リスクのため維持)"
 }

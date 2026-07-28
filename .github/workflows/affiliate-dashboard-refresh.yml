@@ -19,6 +19,8 @@ on:
       - "apps/web/scripts/affiliate-direct-placements-data.ts"
       - ".claude/scripts/ads/build-affiliate-dashboard.ts"
       - ".claude/scripts/ads/audit-affiliate-inventory.ts"
+      - ".claude/scripts/ads/build-placement-map.mjs"
+      - ".claude/scripts/ads/lib/placement-map-core.mjs"
       - ".claude/scripts/ads/audit-affiliate-compliance.ts"
       - ".github/workflows/affiliate-dashboard-refresh.yml"
   schedule:
@@ -58,6 +60,13 @@ jobs:
         # 孤立・PR 表記漏れ・台帳未登録タグを state に記録する。異常があっても workflow は
         # 落とさない (findings は state → operations state の recommendedActions が案内)。
         run: npx -y tsx .claude/scripts/ads/audit-affiliate-compliance.ts --live --scan-all-blog | tee /tmp/affiliate-compliance.md
+
+      - name: 🗺️ Build placement map (需要 GSC × 供給 在庫/EPC)
+        # 「どのページ種別×vertical に imp があり、そこに在庫があるか / 広告が出ていないか」を
+        # 決定的に突合して state に残す。propose (次に何を仕入れ・どこへ当てるか) の入力。
+        # GSC snapshot が未取得の週は exit 2 で落ちるので、その場合も workflow は止めない。
+        continue-on-error: true
+        run: node .claude/scripts/ads/build-placement-map.mjs
 
       - name: 🖥️ Build dashboard (/tmp, artifact only)
         run: npx -y tsx .claude/scripts/ads/build-affiliate-dashboard.ts /tmp/stats47-affiliate-dashboard.html > /dev/null

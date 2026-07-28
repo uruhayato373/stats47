@@ -27,7 +27,11 @@ model: sonnet
   `--write` で実機値をカタログへ反映。取得できなかった ASP は「提携なし」ではなく**判定不能**として区別する。
 - **apply** — `affiliate-apply.mjs`。もしも / afb の提携申請。既定 dry-run、`--commit` で送信。
   「一括提携申請へ」は候補から機械除外され、サイト select は read-back 確認を通らないと押さない。
-- **scan** — `afb-scan.mjs`。afb の未提携プロモーションを走査し、stats47 の 10 vertical に当たる案件を抽出。
+  もしもは加えて**フォームの申請対象数を数えて 1 件でなければ押さない** (申請ページの見出しが
+  「プロモーション 一括提携申請」で、ラベルだけでは単一/一括を判別できないため)。
+- **scan** — `afb-scan.mjs` (afb) / `moshimo-scan.mjs` (もしも)。未提携プロモーションを走査し、
+  stats47 の 10 vertical に当たる案件を抽出する。抽出語は `lib/asp-vertical-keywords.mjs` を共有。
+  もしもは検索語が `words` (`keyword` は無視され全件が返る)、案件 ID はチェックボックスの value。
 - **ASP 間比較** — カタログ `programs[].asps[a8|moshimo|afb]` の単価・確定率・EPC を並べ、運用先の判断材料を出す。
   同一案件を複数 ASP で並行運用すると成果の帰属が割れるため、**1 案件 1 ASP に寄せる**根拠を示す。
 - **カタログ保守** — `.claude/state/ads/affiliate-catalog.json` (3 ASP 横断の提携台帳)。

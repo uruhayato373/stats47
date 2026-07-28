@@ -152,7 +152,24 @@ async function main() {
   const totalClick = pivoted.reduce((s, v) => s + v.clicks, 0);
   const date = new Date().toISOString().slice(0, 10);
 
+  // ── schema v2 (doc 42 §10.1): 認識済み 10 vertical と (unset) の impression 内訳 ──
+  // 定数 SSOT は affiliate-operations-core.mjs (ESM)。cjs だが main は async なので dynamic import で読む。
+  const { KNOWN_AFFILIATE_VERTICALS, MEASUREMENT_EPOCH, GA4_SNAPSHOT_SCHEMA_VERSION } = await import(
+    "./lib/affiliate-operations-core.mjs"
+  );
+  const knownVerticals = new Set(KNOWN_AFFILIATE_VERTICALS);
+  let recognizedVerticalImpressions = 0;
+  let unsetVerticalImpressions = 0;
+  for (const row of pivoted) {
+    const v = row.affiliate_vertical;
+    if (knownVerticals.has(v)) recognizedVerticalImpressions += row.impressions;
+    else if (v == null || v === "(unset)" || v === "(not set)") unsetVerticalImpressions += row.impressions;
+  }
+
   const snapshot = {
+    schemaVersion: GA4_SNAPSHOT_SCHEMA_VERSION,
+    measurementEpoch: MEASUREMENT_EPOCH,
+    eventNames: { impression: IMPRESSION_EVENT, click: CLICK_EVENT },
     generatedAt: new Date().toISOString(),
     date,
     days: Number(process.argv[2] || 28),
@@ -164,6 +181,11 @@ async function main() {
       impressions: totalImp,
       clicks: totalClick,
       ctr: totalImp > 0 ? totalClick / totalImp : null,
+    },
+    quality: {
+      recognizedVerticalImpressions,
+      unsetVerticalImpressions,
+      unsetVerticalRatio: totalImp > 0 ? unsetVerticalImpressions / totalImp : null,
     },
     rows: pivoted,
   };
