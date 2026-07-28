@@ -659,7 +659,7 @@
       "a8mat": null,
       "vertical": null,
       "score": 0.59574,
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
@@ -676,6 +676,11 @@
         {
           "to": "candidate",
           "note": "reconcile-detail-2026-07-20"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-07-28T11:36:37.010Z"
         }
       ],
       "rewardYen": 10000,
@@ -826,7 +831,7 @@
       "a8mat": null,
       "vertical": "labor",
       "score": 0.6004950000000001,
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
@@ -836,6 +841,11 @@
         {
           "to": "candidate",
           "note": "reconcile-detail-2026-07-20"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-07-28T11:36:18.219Z"
         }
       ],
       "rewardYen": 12500,
@@ -951,7 +961,7 @@
       "a8mat": null,
       "vertical": null,
       "score": 0.5875,
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
@@ -961,6 +971,11 @@
         {
           "to": "candidate",
           "note": "reconcile-detail-2026-07-20"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-07-28T11:36:46.352Z"
         }
       ],
       "rewardYen": 26000,
@@ -8447,8 +8462,14 @@
     },
     "__session": {
       "programId": "__session",
-      "status": "candidate",
-      "history": [],
+      "status": "applied",
+      "history": [
+        {
+          "from": "candidate",
+          "to": "applied",
+          "note": "already-on-a8-no-send"
+        }
+      ],
       "lastError": {
         "step": "harvest",
         "error": "session-expired",
@@ -8487,12 +8508,17 @@
       "a8mat": null,
       "vertical": null,
       "score": 0.48956500000000003,
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-07-28T02:35:26.694Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-07-28T11:37:29.817Z"
         }
       ],
       "rewardYen": 7500,
@@ -8507,12 +8533,17 @@
       "a8mat": null,
       "vertical": null,
       "score": 0.472685,
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-07-28T02:35:26.694Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-07-28T11:37:49.003Z"
         }
       ],
       "rewardYen": 7407,
@@ -8527,12 +8558,17 @@
       "a8mat": null,
       "vertical": null,
       "score": 0.44600000000000006,
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-07-28T02:35:26.694Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-07-28T11:37:58.473Z"
         }
       ],
       "rewardYen": 6400,
@@ -8546,12 +8582,17 @@
       "a8mat": null,
       "vertical": null,
       "score": 0.44000000000000006,
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-07-28T02:35:26.694Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-07-28T11:38:07.926Z"
         }
       ],
       "rewardYen": 15000,
@@ -8564,12 +8605,17 @@
       "a8mat": null,
       "vertical": null,
       "score": 0.44000000000000006,
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-07-28T02:35:26.694Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-07-28T11:38:17.230Z"
         }
       ],
       "rewardYen": 10000,
@@ -8582,12 +8628,17 @@
       "a8mat": null,
       "vertical": null,
       "score": 0.44000000000000006,
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-07-28T02:35:26.694Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-07-28T11:38:26.453Z"
         }
       ],
       "rewardYen": 11278,
@@ -8600,12 +8651,17 @@
       "a8mat": null,
       "vertical": "health",
       "score": 0.44000000000000006,
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-07-28T02:35:26.694Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-07-28T11:38:35.725Z"
         }
       ],
       "rewardYen": 10000,
@@ -8618,12 +8674,17 @@
       "a8mat": null,
       "vertical": "economy",
       "score": 0.44000000000000006,
-      "status": "candidate",
+      "status": "blocked",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-07-28T02:35:26.694Z"
+        },
+        {
+          "at": "2026-07-28",
+          "action": "block",
+          "reason": "CFD/FX/KOオプション = 高リスク金融 (NGジャンル)。blocklistKeywords にも CFD/ノックアウト/FX取引 を追加済"
         }
       ],
       "rewardYen": 30000,
@@ -8636,12 +8697,17 @@
       "a8mat": null,
       "vertical": "economy",
       "score": 0.44000000000000006,
-      "status": "candidate",
+      "status": "blocked",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-07-28T02:35:26.694Z"
+        },
+        {
+          "at": "2026-07-28",
+          "action": "block",
+          "reason": "CFD/FX/KOオプション = 高リスク金融 (NGジャンル)。blocklistKeywords にも CFD/ノックアウト/FX取引 を追加済"
         }
       ],
       "rewardYen": 30000,
@@ -8654,12 +8720,17 @@
       "a8mat": null,
       "vertical": "economy",
       "score": 0.44000000000000006,
-      "status": "candidate",
+      "status": "blocked",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-07-28T02:35:26.694Z"
+        },
+        {
+          "at": "2026-07-28",
+          "action": "block",
+          "reason": "CFD/FX/KOオプション = 高リスク金融 (NGジャンル)。blocklistKeywords にも CFD/ノックアウト/FX取引 を追加済"
         }
       ],
       "rewardYen": 16500,
@@ -8672,12 +8743,17 @@
       "a8mat": null,
       "vertical": "housing",
       "score": 0.44000000000000006,
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-07-28T02:35:26.694Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-07-28T11:38:45.096Z"
         }
       ],
       "rewardYen": 20000,
@@ -8715,12 +8791,17 @@
       "a8mat": null,
       "vertical": null,
       "score": 0.4335,
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-07-28T02:35:26.694Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-07-28T11:39:41.260Z"
         }
       ],
       "rewardRatePct": 30,
@@ -8735,12 +8816,17 @@
       "a8mat": null,
       "vertical": "health",
       "score": 0.43300000000000005,
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-07-28T02:35:26.694Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-07-28T11:39:50.488Z"
         }
       ],
       "rewardYen": 6000,
@@ -8780,12 +8866,17 @@
       "a8mat": null,
       "vertical": "labor",
       "score": 0.42336000000000007,
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-07-28T02:35:26.694Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-07-28T11:40:18.282Z"
         }
       ],
       "rewardYen": 8000,
@@ -8800,12 +8891,17 @@
       "a8mat": null,
       "vertical": null,
       "score": 0.41999,
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-07-28T02:35:26.694Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-07-28T11:40:27.684Z"
         }
       ],
       "rewardYen": 7000,
@@ -8892,12 +8988,17 @@
       "a8mat": null,
       "vertical": null,
       "score": 0.4185000000000001,
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-07-28T02:35:26.694Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-07-28T11:40:37.004Z"
         }
       ],
       "rewardYen": 9000,
@@ -8935,12 +9036,17 @@
       "a8mat": null,
       "vertical": "health",
       "score": 0.3731,
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-07-28T02:35:26.694Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-07-28T11:41:23.831Z"
         }
       ],
       "rewardYen": 4490,
@@ -8955,12 +9061,17 @@
       "a8mat": null,
       "vertical": null,
       "score": 0.37188,
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-07-28T02:35:26.694Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-07-28T11:41:33.225Z"
         }
       ],
       "rewardYen": 4422,
@@ -8975,12 +9086,17 @@
       "a8mat": null,
       "vertical": "health",
       "score": 0.36377500000000007,
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-07-28T02:35:26.694Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-07-28T11:41:51.840Z"
         }
       ],
       "rewardYen": 5000,
@@ -8995,12 +9111,17 @@
       "a8mat": null,
       "vertical": null,
       "score": 0.3600000000000001,
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-07-28T02:35:26.694Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-07-28T11:42:01.131Z"
         }
       ],
       "rewardYen": 8000,
@@ -9013,12 +9134,17 @@
       "a8mat": null,
       "vertical": null,
       "score": 0.35884000000000005,
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-07-28T02:35:26.694Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-07-28T11:42:10.381Z"
         }
       ],
       "rewardYen": 7971,
@@ -9031,12 +9157,17 @@
       "a8mat": null,
       "vertical": "population",
       "score": 0.3530000000000001,
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-07-28T02:35:26.694Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-07-28T11:42:19.612Z"
         }
       ],
       "rewardYen": 4000,
@@ -9051,12 +9182,17 @@
       "a8mat": null,
       "vertical": "health",
       "score": 0.3520000000000001,
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-07-28T02:35:26.694Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-07-28T11:42:28.825Z"
         }
       ],
       "rewardRatePct": 20,
@@ -9076,12 +9212,17 @@
       "epcYen": 2784,
       "confirmRatePct": 88.2,
       "rewardType": "fixed",
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-07-28T06:20:18.373Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-07-28T11:35:22.062Z"
         }
       ]
     },
@@ -9097,12 +9238,17 @@
       "epcYen": 1498,
       "confirmRatePct": 50,
       "rewardType": "fixed",
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-07-28T06:20:18.373Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-07-28T11:35:31.443Z"
         }
       ]
     },
@@ -9118,12 +9264,17 @@
       "epcYen": 169,
       "confirmRatePct": 90,
       "rewardType": "fixed",
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-07-28T06:20:18.373Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-07-28T11:35:40.821Z"
         }
       ]
     },
@@ -9139,12 +9290,17 @@
       "epcYen": 137,
       "confirmRatePct": 83.33,
       "rewardType": "fixed",
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-07-28T06:20:18.373Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-07-28T11:35:50.179Z"
         }
       ]
     },
@@ -9160,12 +9316,17 @@
       "epcYen": 55,
       "confirmRatePct": 100,
       "rewardType": "fixed",
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-07-28T06:20:18.373Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-07-28T11:35:59.564Z"
         }
       ]
     },
@@ -9181,12 +9342,17 @@
       "epcYen": 40,
       "confirmRatePct": 100,
       "rewardType": "fixed",
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-07-28T06:20:18.373Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-07-28T11:36:08.842Z"
         }
       ]
     },
@@ -9202,12 +9368,17 @@
       "epcYen": 17,
       "confirmRatePct": 100,
       "rewardType": "fixed",
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-07-28T06:20:18.373Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-07-28T11:36:27.566Z"
         }
       ]
     },
@@ -9223,12 +9394,17 @@
       "epcYen": 218,
       "confirmRatePct": 13.33,
       "rewardType": "fixed",
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-07-28T06:20:18.373Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-07-28T11:36:55.632Z"
         }
       ]
     },
@@ -9243,12 +9419,17 @@
       "rewardYen": 20000,
       "epcYen": 229,
       "rewardType": "fixed",
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-07-28T06:20:18.373Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-07-28T11:37:04.960Z"
         }
       ]
     },
@@ -9263,12 +9444,17 @@
       "rewardYen": 15000,
       "confirmRatePct": 66.66,
       "rewardType": "fixed",
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-07-28T06:20:18.373Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "note": "already-on-a8-no-send"
         }
       ]
     },
@@ -9283,12 +9469,17 @@
       "rewardYen": 15000,
       "epcYen": 102,
       "rewardType": "fixed",
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-07-28T06:20:18.373Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-07-28T11:37:20.521Z"
         }
       ]
     },
@@ -9304,12 +9495,17 @@
       "epcYen": 529,
       "confirmRatePct": 48.18,
       "rewardType": "fixed",
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-07-28T06:20:18.373Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-07-28T11:37:39.642Z"
         }
       ]
     },
@@ -9323,12 +9519,17 @@
       "score": 0.44000000000000006,
       "rewardYen": 35000,
       "rewardType": "fixed",
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-07-28T06:20:18.373Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-07-28T11:38:54.380Z"
         }
       ]
     },
@@ -9342,12 +9543,17 @@
       "score": 0.44000000000000006,
       "rewardYen": 10000,
       "rewardType": "fixed",
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-07-28T06:20:18.373Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-07-28T11:39:04.269Z"
         }
       ]
     },
@@ -9361,12 +9567,17 @@
       "score": 0.44000000000000006,
       "rewardYen": 17000,
       "rewardType": "fixed",
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-07-28T06:20:18.373Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-07-28T11:39:13.536Z"
         }
       ]
     },
@@ -9380,12 +9591,17 @@
       "score": 0.44000000000000006,
       "rewardYen": 15000,
       "rewardType": "fixed",
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-07-28T06:20:18.373Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-07-28T11:39:22.832Z"
         }
       ]
     },
@@ -9399,12 +9615,17 @@
       "score": 0.44000000000000006,
       "rewardYen": 16500,
       "rewardType": "fixed",
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-07-28T06:20:18.373Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-07-28T11:39:32.036Z"
         }
       ]
     },
@@ -9420,12 +9641,17 @@
       "epcYen": 91,
       "confirmRatePct": 59.16,
       "rewardType": "fixed",
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-07-28T06:20:18.373Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-07-28T11:40:09.042Z"
         }
       ]
     },
@@ -9441,12 +9667,17 @@
       "epcYen": 104,
       "confirmRatePct": 84.28,
       "rewardType": "fixed",
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-07-28T06:20:18.373Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-07-28T11:40:46.370Z"
         }
       ]
     },
@@ -9460,12 +9691,17 @@
       "score": 0.3992,
       "rewardYen": 8980,
       "rewardType": "fixed",
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-07-28T06:20:18.373Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-07-28T11:40:55.719Z"
         }
       ]
     },
@@ -9481,12 +9717,17 @@
       "epcYen": 17,
       "confirmRatePct": 96.15,
       "rewardType": "fixed",
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-07-28T06:20:18.373Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-07-28T11:41:05.073Z"
         }
       ]
     },
@@ -9502,12 +9743,17 @@
       "epcYen": 19,
       "confirmRatePct": 67.24,
       "rewardType": "fixed",
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-07-28T06:20:18.373Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-07-28T11:41:14.377Z"
         }
       ]
     },
@@ -9523,12 +9769,17 @@
       "epcYen": 43,
       "confirmRatePct": 60,
       "rewardType": "fixed",
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-07-28T06:20:18.373Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-07-28T11:41:42.566Z"
         }
       ]
     },
@@ -9542,12 +9793,17 @@
       "score": 0.43199999999999994,
       "rewardYen": 7300,
       "rewardType": "fixed",
-      "status": "candidate",
+      "status": "applied",
       "history": [
         {
           "from": null,
           "to": "candidate",
           "at": "2026-07-28T07:31:10.577Z"
+        },
+        {
+          "from": "candidate",
+          "to": "applied",
+          "at": "2026-07-28T11:39:59.758Z"
         }
       ]
     },
@@ -9735,5 +9991,5 @@
       }
     }
   },
-  "updatedAt": "2026-07-28T11:27:17.263Z"
+  "updatedAt": "2026-07-28T11:42:35.022Z"
 }

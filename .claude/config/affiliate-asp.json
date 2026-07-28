@@ -70,8 +70,8 @@
         "timeoutMs": 30000,
         "loginMaxWaitMs": 900000
       },
-      "weeklyApplyMax": 10,
-      "_weeklyApplyMaxNote": "★各 ASP が公表している上限ではなく、自動操作のリスクを見て自分たちで置いた値 (A8 の weeklyApplyMax 10 と同じ思想)。同じ口座に doboku-note が同居しているため短時間の大量申請は口座全体のリスクになる。緩めるなら数週間の実績を見てから。機械強制は check-asp-apply-budget.cjs。",
+      "weeklyApplyMax": 100,
+      "_weeklyApplyMaxNote": "2026-07-28 オーナー判断で 10→100 (ガード機構は維持)",
       "_hrefIdPatternNote": "promotion_id は画面テキストに出ず a[href] にのみ現れる (2026-07-28 実測: text.includes 照合が常に none になり誤ドリフト 4 件)。href から抽出する",
       "hrefIdPattern": "promotion_id=(\\d+)",
       "rowSelector": "td.promotion-name"
@@ -119,9 +119,10 @@
         "_timeoutNote": "1 ページの読み込みに 1〜1.5 分かかる回線があり、既定 30 秒だとサイト切替もページ送りも取りこぼす。切替はページ再読込を伴うため siteSwitchWaitMs も同等に取る。",
         "loginMaxWaitMs": 600000
       },
-      "weeklyApplyMax": 10,
+      "weeklyApplyMax": 100,
       "_rowSelectorNote": "afb の一覧件数 selector は未特定 (null = 件数取得できず と表示)。ID は listItemPattern で取れているため実害なし",
-      "rowSelector": null
+      "rowSelector": null,
+      "_weeklyApplyMaxNote": "2026-07-28 オーナー判断で 10→100 (ガード機構は維持)"
     }
   }
 }
