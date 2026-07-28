@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-07-28T22:10:33.316Z",
+  "generatedAt": "2026-07-28T22:39:16.728Z",
   "inventorySnapshot": ".claude/state/ads/inventory-latest.json",
   "ga4Snapshot": ".claude/state/ads/ga4-affiliate-2026-07-26.json",
   "freshness": {
@@ -14,11 +14,8 @@
     ]
   },
   "publishGate": {
-    "status": "blocked",
-    "reasons": [
-      "missing-disclosure:moshimo-ai-onikanri-93995",
-      "missing-disclosure:a8-strategy-career-koumuin-ai-tenshoku-260601701360"
-    ]
+    "status": "ready",
+    "reasons": []
   },
   "coverage": {
     "gapVerticals": [],
@@ -27,23 +24,7 @@
   "directPlacements": {
     "total": 2,
     "orphaned": [],
-    "missingDisclosure": [
-      {
-        "id": "moshimo-ai-onikanri-93995",
-        "target": "blog:koumuin-claude-code-estat-automation",
-        "missing": [
-          "head-pr-declaration"
-        ]
-      },
-      {
-        "id": "a8-strategy-career-koumuin-ai-tenshoku-260601701360",
-        "target": "blog:prefecture-salary-gap-career",
-        "missing": [
-          "head-pr-declaration",
-          "inline-pr-prefix"
-        ]
-      }
-    ]
+    "missingDisclosure": []
   },
   "experiments": {
     "active": [],
@@ -57,11 +38,6 @@
       "id": "fix-measurement-gate",
       "reason": "ga4-schema-unsupported(v1)",
       "command": "gh workflow run affiliate-ga4-weekly.yml / GA4 custom dimension 登録 (rules §6)"
-    },
-    {
-      "id": "fix-direct-placements",
-      "reason": "orphaned=0 missingDisclosure=2",
-      "command": "/audit-affiliate-compliance"
     }
   ],
   "ga4Totals": {
