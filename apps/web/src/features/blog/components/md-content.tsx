@@ -22,6 +22,8 @@ import remarkGfm from "remark-gfm";
 import { SurfaceLinkCard, SurfaceSection } from "@/components/surface";
 
 import { BannerAd } from "@/features/ads";
+import { AffiliateTextAdList } from "@/features/ads/components/AffiliateTextAdList";
+import type { AffiliateCategory } from "@/features/ads/constants/affiliate-category";
 
 import { AdSenseAd, BLOG_ARTICLE_INLINE } from "@/lib/google-adsense";
 
@@ -52,11 +54,23 @@ interface AffiliateBannerData {
     title?: string;
 }
 
+/** 本文インラインのテキストリンク広告 1 件 (サーバー側で vertical 解決済み)。 */
+interface AffiliateTextAdData {
+    id: string;
+    title: string;
+    href: string;
+    trackingPixelUrl?: string | null;
+}
+
 interface MDContentProps {
     source: string;
     slug?: string;
     relatedArticleTitles?: Record<string, string>;
     affiliateBannersByCategory?: Record<string, AffiliateBannerData>;
+    /** 本文中に差し込むテキストリンク。記事の tagKeys から解決済みで、順に 1 件ずつ消費する。 */
+    affiliateTextAds?: AffiliateTextAdData[];
+    /** テキストリンクのテーマ色に使う vertical。 */
+    affiliateVertical?: AffiliateCategory | null;
 }
 
 interface ComponentProps {
@@ -64,7 +78,12 @@ interface ComponentProps {
     [key: string]: unknown;
 }
 
-function makeMdComponents(slug?: string, affiliateBannersByCategory?: Record<string, AffiliateBannerData>): Record<string, React.ComponentType<ComponentProps>> {
+function makeMdComponents(
+    slug?: string,
+    affiliateBannersByCategory?: Record<string, AffiliateBannerData>,
+    affiliateTextAds?: AffiliateTextAdData[],
+    affiliateVertical?: AffiliateCategory | null,
+): Record<string, React.ComponentType<ComponentProps>> {
     return {
         // 見出し・リンクの見た目は globals.css の .blog-news-article が持つ (Soft Editorial)。
         // コンポーネント側は id / scroll 位置などの構造のみ担当する。
@@ -210,7 +229,7 @@ function makeMdComponents(slug?: string, affiliateBannersByCategory?: Record<str
             const nodeChildren = node?.children ?? [];
             const hasBlockElement =
                 nodeChildren.length > 0 &&
-                nodeChildren.every((c) => c.type === "element" && (c.tagName === "img" || c.tagName === "ad-slot" || c.tagName === "data-source" || c.tagName === "source-link" || c.tagName === "affiliate-banner" || c.tagName === "ranking-table" || c.tagName === "site-link"));
+                nodeChildren.every((c) => c.type === "element" && (c.tagName === "img" || c.tagName === "ad-slot" || c.tagName === "data-source" || c.tagName === "source-link" || c.tagName === "affiliate-banner" || c.tagName === "affiliate-text" || c.tagName === "ranking-table" || c.tagName === "site-link"));
             if (hasBlockElement) return <>{children}</>;
             return (
                 // Zenn 準拠: 行間 1.9 / 連続段落間 24px (p+p{margin-top:1.5em} の移植)
@@ -270,6 +289,24 @@ function makeMdComponents(slug?: string, affiliateBannersByCategory?: Record<str
                 </SurfaceLinkCard>
             </span>
         ),
+
+        // 本文インラインのテキストリンク広告。index 属性 (0 始まり) で解決済み配列から 1 件消費する。
+        // 描画は既存 AffiliateTextAdList を再利用 (PR ラベル / rel="sponsored" / GA4 計装が入っている)。
+        // 在庫が index に足りなければ何も出さない (空枠を残さない)。
+        "affiliate-text": ({ index }: ComponentProps & { index?: string }) => {
+            const i = Number(index);
+            const ad = affiliateTextAds?.[Number.isFinite(i) ? i : 0];
+            if (!ad) return null;
+            return (
+                <div className="my-8 not-prose">
+                    <AffiliateTextAdList
+                        ads={[ad]}
+                        affiliateCategory={affiliateVertical ?? null}
+                        position="article-inline"
+                    />
+                </div>
+            );
+        },
 
         "affiliate-banner": ({ src, href, tracking, width, height, label, category }: ComponentProps & { src?: string; href?: string; tracking?: string; width?: string; height?: string; label?: string; category?: string }) => {
             if (category && affiliateBannersByCategory?.[category]) {
@@ -386,11 +423,77 @@ function injectAdSlots(md: string): string {
     return result.join("\n");
 }
 
-export function MDContent({ source, slug, relatedArticleTitles, affiliateBannersByCategory }: MDContentProps) {
-    const mdComponents = useMemo(() => makeMdComponents(slug, affiliateBannersByCategory), [slug, affiliateBannersByCategory]);
+/**
+ * 本文中にテキストリンク広告 `<affiliate-text index="N">` を自動挿入する。
+ *
+ * 読了文脈に乗るのは本文中なので、画像バナー (`<affiliate-banner>`) だけでなく
+ * テキストリンクも本文へ出す。手動で `<affiliate-text` を置いた記事は一切触らない。
+ *
+ * 配置: h2 見出しの 2・4・6 番目の直前に最大 3 本 + 記事末尾に 1 本 = **最大 4 本**。
+ * `injectAdSlots` が使う h2 (2 番目・中盤) と重ならないよう、衝突する位置は 1 つ後ろの h2 へずらす。
+ * 在庫 (availableCount) を超えては挿入しない — 空枠を作らないため。
+ */
+function injectAffiliateTextLinks(md: string, availableCount: number): string {
+    if (availableCount <= 0) return md;
+    if (md.includes("<affiliate-text")) return md; // 手動配置済みの記事は触らない
+
+    const lines = md.split("\n");
+    const h2Indices: number[] = [];
+    let inFence = false;
+    lines.forEach((line, i) => {
+        if (line.trimStart().startsWith("```")) {
+            inFence = !inFence;
+        } else if (!inFence && /^##\s/.test(line)) {
+            h2Indices.push(i);
+        }
+    });
+
+    // injectAdSlots が既に <ad-slot> を差し込んだ行を避ける (広告が連続して並ぶのを防ぐ)
+    const adSlotLines = new Set<number>();
+    lines.forEach((line, i) => {
+        if (line.includes("<ad-slot")) adSlotLines.add(i);
+    });
+    const collidesWithAdSlot = (h2Index: number) =>
+        adSlotLines.has(h2Index - 1) || adSlotLines.has(h2Index - 2);
+
+    const bodySlots = Math.min(availableCount, 3);
+    const targets: number[] = [];
+    for (let n = 1; targets.length < bodySlots && n < h2Indices.length; n += 2) {
+        // 2・4・6 番目の h2 (0 始まりで 1,3,5)
+        let idx = h2Indices[n];
+        if (collidesWithAdSlot(idx) && h2Indices[n + 1] != null) idx = h2Indices[n + 1];
+        if (!targets.includes(idx)) targets.push(idx);
+    }
+
+    const result = [...lines];
+    // 行番号のズレを防ぐため後ろから挿入する
+    let slot = targets.length - 1;
+    for (const idx of [...targets].sort((a, b) => b - a)) {
+        result.splice(idx, 0, "", `<affiliate-text index="${slot}"></affiliate-text>`, "");
+        slot--;
+    }
+    // 末尾 1 本 (在庫が本文分より多いときだけ)
+    if (availableCount > targets.length) {
+        result.push("", `<affiliate-text index="${targets.length}"></affiliate-text>`, "");
+    }
+    return result.join("\n");
+}
+
+export function MDContent({
+    source,
+    slug,
+    relatedArticleTitles,
+    affiliateBannersByCategory,
+    affiliateTextAds,
+    affiliateVertical,
+}: MDContentProps) {
+    const mdComponents = useMemo(
+        () => makeMdComponents(slug, affiliateBannersByCategory, affiliateTextAds, affiliateVertical),
+        [slug, affiliateBannersByCategory, affiliateTextAds, affiliateVertical],
+    );
     const processed = useMemo(
-        () => injectAdSlots(preprocessCallouts(source, relatedArticleTitles)),
-        [source, relatedArticleTitles],
+        () => injectAffiliateTextLinks(injectAdSlots(preprocessCallouts(source, relatedArticleTitles)), affiliateTextAds?.length ?? 0),
+        [source, relatedArticleTitles, affiliateTextAds],
     );
     return (
         <article

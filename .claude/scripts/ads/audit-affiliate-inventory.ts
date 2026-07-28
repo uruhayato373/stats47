@@ -164,6 +164,24 @@ function main(): void {
     (v) => (byVertical[v] ?? 0) > 0 && (byVertical[v] ?? 0) <= 2,
   );
 
+  // ★ adType 別カバレッジ (2026-07-28 追加)。vertical 総数だけを見ると
+  //   「banner はあるが text がゼロ」を検出できない。banner 解決は locationCode を無視するのに対し
+  //   text 解決は locationCode で絞るため、text がゼロの vertical はブログ本文・サイドバーの
+  //   テキスト枠が埋まらない (economy へフォールバックして文脈が外れる)。
+  const countBy = (adType: string) => {
+    const m: Record<string, number> = {};
+    for (const a of active) {
+      if (a.adType !== adType) continue;
+      const v = adVertical(a);
+      if (v) m[v] = (m[v] ?? 0) + 1;
+    }
+    return m;
+  };
+  const byVerticalText = countBy("text");
+  const byVerticalBanner = countBy("banner");
+  const textGapVerticals = AFFILIATE_VERTICALS.filter((v) => !(byVerticalText[v] ?? 0));
+  const bannerGapVerticals = AFFILIATE_VERTICALS.filter((v) => !(byVerticalBanner[v] ?? 0));
+
   const sizeViolations = lintSizes();
   const sizeErrors = sizeViolations.filter((v) => v.tier === "error");
 
@@ -188,6 +206,11 @@ function main(): void {
       verticalsTotal: AFFILIATE_VERTICALS.length,
       gapVerticals,
       thinVerticals,
+      // adType 別。text がゼロの vertical はテキスト枠が埋まらず economy へフォールバックする。
+      byVerticalText,
+      byVerticalBanner,
+      textGapVerticals,
+      bannerGapVerticals,
     },
     sizeViolations,
   };

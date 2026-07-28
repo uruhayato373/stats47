@@ -82,12 +82,21 @@ function main(): void {
   const cat = loadCatalog();
   const curated = core.loadCurated(); // priority 算出係数 (priorityBands)
   // register 対象 = harvested かつ vertical 解決済 (pending-vertical は対象外)。
-  const targets = core
-    .entriesByStatus(cat, "harvested")
-    .filter((e: any) => e.adDraft && e.vertical);
+  // 1 エントリから複数 draft (banner + text) を出せるので {entry, draft} に展開する。
+  const targets: Array<{ entry: any; draft: any; fromPending?: boolean }> = [];
+  for (const e of core.entriesByStatus(cat, "harvested")) {
+    if (e.adDraft && e.vertical) targets.push({ entry: e, draft: e.adDraft });
+  }
+  // ★ pendingDrafts は **status を問わず**拾う。registered は状態機械上 harvested へ戻せない
+  //   (registered → published|error のみ) ため、text 在庫の後追い登録はこの経路で行う。
+  //   二重登録は a8mat 突合が防ぐ。
+  for (const e of Object.values(cat.entries ?? {}) as any[]) {
+    if (!Array.isArray(e.pendingDrafts) || !e.vertical) continue;
+    for (const d of e.pendingDrafts) targets.push({ entry: e, draft: d, fromPending: true });
+  }
 
   if (targets.length === 0) {
-    console.log("register 対象 (harvested + vertical 解決済 + adDraft) がありません。");
+    console.log("register 対象 (harvested + vertical 解決済 + adDraft / pendingDrafts) がありません。");
     const pending = core.entriesByStatus(cat, "pending-vertical");
     if (pending.length) {
       console.log(`⏸  pending-vertical ${pending.length} 件 (--set-vertical で解決してから register):`);
@@ -108,23 +117,23 @@ function main(): void {
   const skippedDup: Array<{ programId: string; name: string; a8mat: string }> = [];
   const existingA8mats: Set<string> = appendCore.extractA8mats(src);
   const stamp = nowStr();
-  for (const entry of targets) {
-    const a8mat = appendCore.draftA8mat(entry.adDraft);
+  for (const { entry, draft: baseDraft } of targets) {
+    const a8mat = appendCore.draftA8mat(baseDraft);
     if (a8mat && existingA8mats.has(a8mat)) {
       // 同一 a8mat が既に SSOT に在る = 既登録。追記せず catalog を registered 同期する。
       skippedDup.push({ programId: entry.programId, name: entry.name, a8mat });
       continue;
     }
     const ids = appendCore.extractIds(src);
-    const id = appendCore.uniqueId(entry.adDraft.id, ids);
+    const id = appendCore.uniqueId(baseDraft.id, ids);
     // priority は catalog entry の確定EPC (EPC×確定率) からバンド式で決定的に算出 (buildAdDraft の
     // 既定値 50 を上書き)。targetRankingKeys があれば +bonus。高EPC案件を上位に出すための要。
     const priority = core.computePriority(entry, curated);
-    const draft = { ...entry.adDraft, id, priority, createdAt: stamp, updatedAt: stamp };
+    const draft = { ...baseDraft, id, priority, createdAt: stamp, updatedAt: stamp };
     const literal = appendCore.renderEntry(draft, stamp);
     src = appendCore.insertEntry(src, literal);
     if (a8mat) existingA8mats.add(a8mat); // 同一バッチ内の重複も弾く
-    registered.push({ programId: entry.programId, id, name: entry.name });
+    registered.push({ programId: entry.programId, id, name: `${entry.name} [${baseDraft.adType}]` });
   }
 
   console.log(`追記対象 ${registered.length} 件 (a8mat 重複 skip ${skippedDup.length} 件):`);
@@ -153,20 +162,26 @@ function main(): void {
   }
 
   // catalog 同期: 追記分・a8mat 重複分いずれも registered に昇格 (重複分は既存 SSOT エントリで既に live)。
+  // ★ 既に registered のエントリ (pendingDrafts 経由の text 追加) は遷移させない。
+  //   registered → registered は状態機械が invalid transition として throw する。
   const cat2 = loadCatalog();
-  for (const r of registered) {
-    cat2.entries[r.programId] = core.transition(cat2.entries[r.programId], "registered", {
-      at: new Date().toISOString(),
-      adId: r.id,
-    });
-  }
-  for (const s of skippedDup) {
-    cat2.entries[s.programId] = core.transition(cat2.entries[s.programId], "registered", {
-      at: new Date().toISOString(),
-      note: `already-registered-a8mat:${s.a8mat}`,
-    });
+  const promote = (programId: string, meta: Record<string, unknown>) => {
+    const e = cat2.entries[programId];
+    if (!e || e.status === "registered" || e.status === "published") return;
+    cat2.entries[programId] = core.transition(e, "registered", { at: new Date().toISOString(), ...meta });
+  };
+  for (const r of registered) promote(r.programId, { adId: r.id });
+  for (const s of skippedDup) promote(s.programId, { note: `already-registered-a8mat:${s.a8mat}` });
+  // 追記済みの pendingDrafts を消す (再実行で二重に積まないため。a8mat 突合でも防げるが状態を残さない)。
+  let clearedPending = 0;
+  for (const e of Object.values(cat2.entries ?? {}) as any[]) {
+    if (Array.isArray(e.pendingDrafts) && e.pendingDrafts.length > 0) {
+      clearedPending += e.pendingDrafts.length;
+      delete e.pendingDrafts;
+    }
   }
   saveCatalog(cat2);
+  if (clearedPending > 0) console.log(`  pendingDrafts ${clearedPending} 件を消化`);
   console.log(
     `✅ SSOT 追記 ${registered.length} 件 + 既登録同期 ${skippedDup.length} 件を catalog registered。commit/push は affiliate-manager / cron。`,
   );

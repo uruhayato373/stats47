@@ -20,7 +20,9 @@
  *   npx tsx a8-browser.ts scout [--dry-run] [--limit N]
  *   npx tsx a8-browser.ts apply [--dry-run] [--max N]
  *   npx tsx a8-browser.ts check-approval [--dry-run]
- *   npx tsx a8-browser.ts harvest [--dry-run]
+ *   npx tsx a8-browser.ts harvest [--dry-run] [--limit N] [--include-registered] [--text-only]
+ *     --include-registered: 既 registered からも text を取る (text 在庫の後追い取得)。
+ *       registered は状態機械上 harvested へ戻せないため status は変えず pendingDrafts に積む。
  */
 import { chromium, type BrowserContext, type Page } from "playwright";
 import * as path from "path";
@@ -197,10 +199,38 @@ function loadCatalog(): Catalog {
   }
 }
 
+/**
+ * catalog を保存する。**原子的書き込み + リトライ**。
+ *
+ * ★ Windows では他プロセス (Defender のスキャン等) が一時的にファイルを掴み、
+ *   writeFileSync が `UNKNOWN (errno -4094)` で落ちることがある (2026-07-28 に harvest 中 2 回発生)。
+ *   harvest は 1 件ごとに保存するため、ここで落ちると長い走行が途中で死ぬ。
+ *   temp へ書いて rename する (同一ボリュームなら原子的 = 破損した JSON を残さない) + 数回リトライ。
+ */
 function saveCatalog(cat: Catalog): void {
   cat.updatedAt = new Date().toISOString();
   fs.mkdirSync(path.dirname(CATALOG_PATH), { recursive: true });
-  fs.writeFileSync(CATALOG_PATH, JSON.stringify(cat, null, 2) + "\n", "utf8");
+  const body = JSON.stringify(cat, null, 2) + "\n";
+  const tmp = `${CATALOG_PATH}.tmp-${process.pid}`;
+  let lastErr: unknown = null;
+  for (let attempt = 0; attempt < 5; attempt++) {
+    try {
+      fs.writeFileSync(tmp, body, "utf8");
+      fs.renameSync(tmp, CATALOG_PATH);
+      return;
+    } catch (e) {
+      lastErr = e;
+      try {
+        if (fs.existsSync(tmp)) fs.unlinkSync(tmp);
+      } catch {}
+      // 同期的に短く待つ (このスクリプトは逐次実行なのでビジーウェイトで問題ない)
+      const until = Date.now() + 150 * (attempt + 1);
+      while (Date.now() < until) {
+        /* backoff */
+      }
+    }
+  }
+  throw lastErr;
 }
 
 function nowIso(): string {
@@ -573,30 +603,58 @@ async function cmdCheckApproval(page: Page): Promise<void> {
 }
 
 // ─── サブコマンド: harvest ─────────────────────────
-async function cmdHarvest(page: Page, limit: number): Promise<void> {
+/**
+ * @param opts.includeRegistered 既 registered からも取る (text 在庫の後追い取得用)。
+ *   registered は状態機械上 harvested へ戻せない (registered → published|error のみ) ので
+ *   **status は変えず** `pendingDrafts` に積む。append 側が status を問わず拾って追記する。
+ * @param opts.textOnly text コードだけを採る (banner は既登録なので取り直さない)。
+ */
+async function cmdHarvest(
+  page: Page,
+  limit: number,
+  opts: { includeRegistered?: boolean; textOnly?: boolean } = {},
+): Promise<void> {
   let cat = loadCatalog();
   // selectedForRegister フラグ付き approved のみ harvest する (select-for-register.mjs で精選済み)。
-  // 全 approved を無差別に harvest しない (134 件全部は無意味・A8 負荷)。既 harvested/registered は除外。
-  const approved = core
-    .entriesByStatus(cat, "approved")
-    .filter((e: any) => e.selectedForRegister)
-    .slice(0, Number.isFinite(limit) ? limit : undefined);
-  if (approved.length === 0) {
-    console.log("harvest 対象 (selectedForRegister 付き approved) なし。先に select-for-register.mjs を実行。");
+  // 全 approved を無差別に harvest しない (A8 負荷)。既 harvested は除外。
+  const approved = core.entriesByStatus(cat, "approved").filter((e: any) => e.selectedForRegister);
+  // registered は banner 登録済み。text 在庫を作るために text だけ取り直す。
+  const registered = opts.includeRegistered
+    ? core.entriesByStatus(cat, "registered").filter((e: any) => !e.textHarvestedAt)
+    : [];
+  const targets = [...approved, ...registered].slice(0, Number.isFinite(limit) ? limit : undefined);
+  if (targets.length === 0) {
+    console.log(
+      opts.includeRegistered
+        ? "harvest 対象なし (approved の selectedForRegister も、text 未取得の registered も 0 件)。"
+        : "harvest 対象 (selectedForRegister 付き approved) なし。先に select-for-register.mjs を実行。",
+    );
     return;
   }
+  console.log(`harvest 対象: ${targets.length} 件 (approved ${approved.length} / registered ${registered.length})`);
   // ログイン確認は fetchAdCode が createLink (media-console) 上で毎回行う (www.a8.net は非 media-console で誤判定するため事前チェックしない)。
 
   let harvested = 0;
-  for (const entry of approved) {
+  let textAdded = 0;
+  for (const entry of targets) {
+    const isRegistered = entry.status === "registered";
     if (IS_DRY_RUN) {
-      console.log(`🧪 dry-run harvest: ${entry.name}`);
+      console.log(`🧪 dry-run harvest: ${entry.name}${isRegistered ? " (registered → text のみ)" : ""}`);
       continue;
     }
-    const code = await fetchAdCode(page, entry);
+    const codes = await fetchAdCode(page, entry);
     cat = loadCatalog();
-    if (!code) {
-      cat.entries[entry.programId] = core.transition(cat.entries[entry.programId], "error", {
+    const cur = cat.entries[entry.programId];
+    if (!codes || (!codes.banner && !codes.text)) {
+      // registered は既に配信中なので error に落とさない (banner は生きている)。次回対象から外すだけ。
+      if (isRegistered) {
+        cur.textHarvestedAt = nowIso();
+        cur.textHarvestResult = "no-code";
+        saveCatalog(cat);
+        console.log(`  ─ text 無し: ${entry.name}`);
+        continue;
+      }
+      cat.entries[entry.programId] = core.transition(cur, "error", {
         at: nowIso(),
         step: "harvest",
         error: "no-ad-code",
@@ -604,33 +662,62 @@ async function cmdHarvest(page: Page, limit: number): Promise<void> {
       saveCatalog(cat);
       continue;
     }
-    const parsed = codeCore.parseA8Code(code);
-    if (!parsed.ok) {
-      // non-canonical サイズ等は harvest 失敗として error 記録 (text 素材を別途探すのは将来拡張)。
-      cat.entries[entry.programId] = core.transition(cat.entries[entry.programId], "error", {
-        at: nowIso(),
-        step: "harvest",
-        error: parsed.error,
-      });
+
+    /** コード → draft。parse 失敗なら null。 */
+    const toDraft = (code: string | null) => {
+      if (!code) return null;
+      const p = codeCore.parseA8Code(code);
+      return p.ok ? buildAdDraft(entry, p.fields) : null;
+    };
+
+    // registered からは text だけを採る (banner は既登録・取り直す意味がない)。
+    if (isRegistered || opts.textOnly) {
+      const textDraft = toDraft(codes.text);
+      cur.textHarvestedAt = nowIso();
+      cur.textHarvestResult = textDraft ? "ok" : "no-text";
+      if (textDraft && entry.vertical) {
+        // status は変えない (registered → harvested は不正遷移)。append が status 非依存で拾う。
+        cur.pendingDrafts = [...(cur.pendingDrafts ?? []), textDraft];
+        textAdded++;
+        console.log(`📝 text 追加: ${entry.name}`);
+      } else {
+        console.log(`  ─ ${textDraft ? "vertical 未解決" : "text 無し"}: ${entry.name}`);
+      }
       saveCatalog(cat);
-      console.log(`⚠️  parse 失敗 (${parsed.error}): ${entry.name}`);
       continue;
     }
-    // AffiliateAd draft を entry に添付。vertical 未解決なら pending-vertical、解決済みは harvested。
-    const draft = buildAdDraft(entry, parsed.fields);
-    cat.entries[entry.programId].adDraft = draft;
+
+    // approved: 従来どおり banner 優先で adDraft を作り、text も取れていれば pendingDrafts に積む。
+    const bannerDraft = toDraft(codes.banner);
+    const textDraft = toDraft(codes.text);
+    const primary = bannerDraft ?? textDraft;
+    if (!primary) {
+      cat.entries[entry.programId] = core.transition(cur, "error", {
+        at: nowIso(),
+        step: "harvest",
+        error: "parse-failed",
+      });
+      saveCatalog(cat);
+      console.log(`⚠️  parse 失敗: ${entry.name}`);
+      continue;
+    }
+    cur.adDraft = primary;
+    if (bannerDraft && textDraft) {
+      cur.pendingDrafts = [...(cur.pendingDrafts ?? []), textDraft];
+      textAdded++;
+    }
     const nextStatus = entry.vertical ? "harvested" : "pending-vertical";
-    cat.entries[entry.programId] = core.transition(cat.entries[entry.programId], nextStatus, {
-      at: nowIso(),
-    });
+    cat.entries[entry.programId] = core.transition(cur, nextStatus, { at: nowIso() });
     saveCatalog(cat);
     harvested++;
-    console.log(`📥 harvest: ${entry.name} → ${nextStatus}`);
+    console.log(`📥 harvest: ${entry.name} → ${nextStatus}${bannerDraft && textDraft ? " (+text)" : ""}`);
   }
-  console.log(`✅ ${harvested} 件 harvest`);
+  console.log(`✅ ${harvested} 件 harvest / text 追加 ${textAdded} 件`);
 }
 
-async function fetchAdCode(page: Page, entry: any): Promise<string | null> {
+type AdCodes = { banner: string | null; text: string | null };
+
+async function fetchAdCode(page: Page, entry: any): Promise<AdCodes | null> {
   // 広告リンク作成ページ → 「広告リンクを表示」→ 広告コード textarea を取得。
   await page.goto(A8.createLinkUrl(entry.programId), { waitUntil: "domcontentloaded" });
   await page.waitForTimeout(2500);
@@ -676,7 +763,10 @@ async function fetchAdCode(page: Page, entry: any): Promise<string | null> {
     if (p.fields.adType === "banner" && !banner) banner = c;
     else if (p.fields.adType === "text" && !text) text = c;
   }
-  return banner ?? text ?? null; // canonical バナー優先、無ければ text
+  // ★ 両方返す (2026-07-28 変更)。以前は `banner ?? text` で **text を捨てていた**ため、
+  //   banner が取れる案件からは text 在庫が一切作れなかった。どちらを採るかは呼び出し側が決める。
+  //   同一プログラムでも banner と text は a8mat が別なので、両方 SSOT に登録できる。
+  return { banner, text };
 }
 
 /** parsed fields → AffiliateAd draft (id 採番は register 段で衝突チェックするので仮 id)。 */
@@ -725,7 +815,11 @@ async function main() {
     if (cmd === "scout") await cmdScout(page, limit);
     else if (cmd === "apply") await cmdApply(page, max, ids);
     else if (cmd === "check-approval") await cmdCheckApproval(page);
-    else if (cmd === "harvest") await cmdHarvest(page, limit);
+    else if (cmd === "harvest")
+      await cmdHarvest(page, limit, {
+        includeRegistered: args.includes("--include-registered"),
+        textOnly: args.includes("--text-only"),
+      });
     else if (cmd === "import-partnered") await cmdImportPartnered(page);
   } catch (e) {
     console.error("エラー:", e);

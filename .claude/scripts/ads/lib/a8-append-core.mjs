@@ -71,8 +71,12 @@ export function buildAdDraft(entry, fields) {
     .replace(/^-+|-+$/g, "")
     .slice(0, 40);
   const slug = nameSlug || String(entry.programId || "prog").replace(/[^a-z0-9]/gi, "");
+  // ★ 同一プログラムから banner と text の両方を登録できるので、id で種別が読めるようにする。
+  //   banner は従来どおり `af_<slug>_a8_001` (既存 SSOT の命名を変えない)。text だけ `_text_` を挟む。
+  //   これが無いと uniqueId の連番 `_002` になり、名前から banner/text を区別できない。
+  const kind = fields.adType === "text" ? "_text" : "";
   return {
-    id: `af_${slug}_a8_001`,
+    id: `af_${slug}_a8${kind}_001`,
     title: entry.name,
     htmlContent: fields.htmlContent,
     areaCode: null,

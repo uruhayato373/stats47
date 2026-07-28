@@ -161,6 +161,27 @@ MDX 不要。HTML カスタムタグとして `react-markdown` の `components` 
 > (`/register-affiliate-banner direct`)。未登録タグと PR 表記 (記事冒頭の PR 宣言 + リンク直前 `※PR：`) の
 > 漏れは `/audit-affiliate-compliance` が弾く。category ベースは自動配置解決なので台帳不要。
 
+### アフィリエイトテキストリンク（記事内・★自動挿入）
+
+`<affiliate-text index="N">` は**記事の tagKeys から解決済みのテキストリンク**を 1 件描画する。
+バナーと違い読了文脈に乗るため、転換はこちらの方が期待できる。
+
+**通常は手動で書かない。** 本文に `<affiliate-text` が 1 つも無い記事には
+`injectAffiliateTextLinks` (`apps/web/src/features/blog/components/md-content.tsx`) が
+**h2 の 2・4・6 番目の直前に最大 3 本 + 記事末尾に 1 本 = 最大 4 本**を自動挿入する。
+`<ad-slot>` と同じ h2 に重なる位置は 1 つ後ろの h2 へずらす。
+
+```html
+<!-- 手動で位置を決めたいときだけ書く。1 つでも書くと自動挿入は無効になる -->
+<affiliate-text index="0"></affiliate-text>
+```
+
+- `index` は解決済み配列の 0 始まり添字。在庫が足りなければ**何も描画されない**（空枠を残さない）
+- 描画は `AffiliateTextAdList` で、PR ラベル・`rel="noopener noreferrer sponsored"`・
+  GA4 計装 (`affiliate_impression` / `affiliate_click`・`link_position="article-inline"`) が自動で付く
+- **href 直書きの属性は用意していない**（自動解決のみ）。よって**台帳登録は不要**。
+  もし将来 href 直書きを足す場合は `/audit-affiliate-compliance` の対象なので台帳登録と PR 表記が要る
+
 ### データ出典
 
 チャート画像の直下に配置し、データの出典を右寄せで表示する。

@@ -70,7 +70,15 @@ apps/web/scripts/affiliate-ads-data.ts (AFFILIATE_ADS = git TS SSOT・広告は 
 | レクタングル (主) | **300×250** | 既定。blog 本文下 / ranking / sidebar | `blog-bottom` / `sidebar-sticky` |
 | スクエア | **250×250** | 正方形クリエイティブ (じゃらん等) | `blog-bottom` |
 | モバイル横長 | **320×100** | モバイル枠 | `blog-bottom` |
-| テキスト | (サイズなし) | sidebar テキストリンク | `sidebar-bottom` |
+| テキスト | (サイズなし) | sidebar テキストリンク + **ブログ本文インライン** | `sidebar-bottom` |
+
+> **★banner と text の解決は非対称** (再発防止のため明記): banner 解決 (`readActiveBannersByVerticalsFromR2`) は
+> **locationCode を見ない** — vertical + adType + targetRankingKeys だけで絞り priority 降順。
+> 一方 **text 解決は locationCode で絞る** (`sidebar-bottom` / `footer`)。
+> したがって **text を `blog-bottom` に置くと banner 経路にも text 経路にも乗らず永久に表示されない**
+> (2026-07-28 に 2 件が実際にそうなっていた)。`buildAdDraft` が adType で振り分ける。
+> 本文インラインも locationCode は `sidebar-bottom` を再利用する — 新しい値を作ると在庫が
+> 本文用とサイドバー用に分断され、どちらも埋まらなくなるため。区別は GA4 の `link_position` で行う。
 
 **legacy 一点物** (grandfathering・新規禁止・段階移行): `160×600` / `120×600` / `165×120` / `320×250` / `336×280` / `300×300`
 → 再取得時に 300×250 か text へ寄せる。`KNOWN_LEGACY_SIZES` (audit script) で許容中。**新規はこれらも不可** (canonical のみ)。
@@ -86,7 +94,7 @@ apps/web/scripts/affiliate-ads-data.ts (AFFILIATE_ADS = git TS SSOT・広告は 
 | ページ種別 | 解決キー |
 |---|---|
 | ranking / category | `categoryKey` → vertical の banner (priority 上位) → text → AdSense fallback |
-| blog | 記事 `tags` → vertical の banner/text |
+| blog | 記事 `tags` → vertical の banner/text。**本文にはテキストリンクを自動挿入** (`<affiliate-text>`・h2 の 2/4/6 番目直前 + 末尾 = 最大 4 本)。サイドバーと重複しないよう 6 件解決して先頭 2 件をサイドバー、3 件目以降を本文に回す |
 | theme | `relatedArticleTagKeys` → vertical、空なら `THEME_AFFILIATE_MAP[themeKey]` → vertical (フォールバック) |
 | area | `locationCode="area-sidebar"` の banner |
 

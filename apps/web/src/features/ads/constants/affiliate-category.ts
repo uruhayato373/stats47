@@ -131,6 +131,22 @@ export const TAG_AFFILIATE_MAP: Record<string, AffiliateVertical> = {
   "所得": "economy", "経済": "economy", "収入": "economy", "家計": "economy",
   "旅行": "travel", "観光": "travel", "宿泊": "travel",
   "自動車": "mobility", "交通": "mobility", "車": "mobility",
+  // ★ 2026-07-28 追加: 公開 430 記事の実タグを集計し、頻出かつ意味が明確なものを写像した。
+  //   これで tag→vertical の解決率が 19% (83 記事) → 70% (301 記事) に上がる。
+  //   「都道府県ランキング」「地域差」「地域格差」「都道府県別」等の**汎用タグは意図的に入れない** —
+  //   誤った軸へ流すくらいなら economy フォールバックの方が無害なため。
+  "家計調査": "economy", "消費支出": "economy", "食費": "economy", "物価": "economy",
+  "貯蓄": "economy", "可処分所得": "economy", "食文化": "economy", "消費量": "economy",
+  "外食": "economy",
+  "人口": "population", "高齢化": "population", "人口減少": "population",
+  "少子化": "population", "出生率": "population", "世帯": "population",
+  "結婚": "population", "子育て": "population",
+  "医療": "health", "健康": "health", "介護": "health", "病院": "health",
+  "地方財政": "furusato", "財政": "furusato", "税": "furusato",
+  "住宅": "housing", "不動産": "housing", "土地": "housing", "空き家": "housing",
+  "学校": "education", "進学": "education",
+  "エネルギー": "energy", "電力": "energy", "通信": "energy",
+  "交通事故": "mobility", "道路": "mobility", "鉄道": "mobility",
 };
 
 /**
