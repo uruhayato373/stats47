@@ -21,6 +21,11 @@ A8.net 等アフィリエイト広告の **意図軸 (vertical)・在庫・配�
 - **対話式登録** (`/register-affiliate-banner`) — `propose` (在庫ギャップ×トラフィックで次の提携先を 1 件提案) → ユーザーが ASP 提携 → `register` (ASP 別コード解析 [A8/ValueCommerce/楽天]・`inspect-banner.mjs` で画像 fetch → サイズ実測+広告主目視判別・canonical 検証・vertical 判定・1 エントリ追記)。`direct` = 直接属性方式の台帳登録。
 - **直接配置の inventory ownership** — 直接属性方式 (`<affiliate-banner>` / note 生 HTML) の台帳 SSOT `apps/web/scripts/affiliate-direct-placements-data.ts` を単一所有。配置と台帳登録をセットで守らせる。
 - **compliance 監査** (`/audit-affiliate-compliance`) — 孤立配置・本文タグ不一致・PR 表記 (景表法) 漏れ・台帳未登録タグ・canonical サイズを決定的スクリプトで監査。記事本文の是正は blog-editor / article-writer に委譲。
+- **配置マップの所有** (rules §12) — 「どのページ種別にどの枠で何を出すか」の正典と、需要×供給の突合 state
+  `.claude/state/ads/placement-map-latest.json` (`build-placement-map.mjs` が週次 cron で生成) を維持する。
+  propose は**この state を読む** (GSC×在庫×EPC の目視 JOIN は禁止 — 再現性が無く見落とすため)。
+  `reverseCandidates` の `shared: true` は doboku-note と同一 A8 口座の共用案件で、EPC は口座横断の実績。
+  stats47 単独の実力として扱わない。`suggestedRankingKeys` は候補であって適用ではない (ブランド適合は意味判断)。
 - **在庫整理・監査・dashboard** (`/affiliate-improvement`) — vertical カバレッジ / 在庫ゼロ軸 / サイズ逸脱 / 意図ミスマッチの検出と是正。ゼロ/手薄軸は `.claude/state/ads/inventory-latest.json` の `coverage` から読む (固定値を持たない)。
 - **規約 enforcement** — サイズ (`audit --check-size` + pre-commit) / vertical∈10軸 (export validation) / priority (意図適合) の遵守。legacy 一点物サイズの段階移行。
 - **計測ゲート・運用状態** — 集約 state `.claude/state/ads/affiliate-operations-latest.json` (`build-affiliate-operations-state.ts` が生成、週次 CI 自動更新) をアフィリエイト運用の現在地の入口にする。`measurementGate` (GA4 snapshot 鮮度 / custom dimension 有無) が blocked なら rules §6 の登録手順をユーザーに案内。freshness・coverage・推奨アクションはすべて決定的スクリプトが判定する (モデルは routing・期限計算をしない)。

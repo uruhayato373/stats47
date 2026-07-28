@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-28T05:18:22.661Z",
+  "generatedAt": "2026-07-28T06:30:59.257Z",
   "date": "2026-07-28",
   "totals": {
     "entries": 178,
@@ -22,9 +22,9 @@
     "travel": 28,
     "health": 12,
     "economy": 20,
-    "housing": 21,
-    "education": 20,
-    "labor": 24,
+    "housing": 16,
+    "education": 22,
+    "labor": 27,
     "mobility": 13,
     "population": 18
   },
@@ -65,12 +65,12 @@
       "furusato"
     ],
     "byVerticalText": {
-      "labor": 12,
+      "labor": 13,
       "energy": 10,
       "economy": 7,
-      "housing": 10,
+      "housing": 8,
       "population": 8,
-      "education": 10,
+      "education": 11,
       "mobility": 7,
       "health": 4,
       "travel": 10
@@ -81,9 +81,9 @@
       "travel": 18,
       "health": 8,
       "economy": 13,
-      "housing": 11,
-      "education": 10,
-      "labor": 12,
+      "housing": 8,
+      "education": 11,
+      "labor": 14,
       "mobility": 6,
       "population": 10
     },

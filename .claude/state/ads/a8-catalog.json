@@ -7429,7 +7429,475 @@
       "epcYen": 4,
       "confirmRatePct": 100,
       "rewardType": "rate"
+    },
+    "s00000024144001": {
+      "programId": "s00000024144001",
+      "name": "訳アリ不動産買取専門店【ラクウル】",
+      "genre": "housing 訳アリ不動産買取専門店【ラクウル】",
+      "company": "株式会社ネクサスプロパティマネジメント",
+      "a8mat": null,
+      "vertical": "housing",
+      "score": 0.8223,
+      "rewardYen": 10000,
+      "epcYen": 2784,
+      "confirmRatePct": 88.2,
+      "rewardType": "fixed",
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-07-28T06:20:18.373Z"
+        }
+      ]
+    },
+    "s00000026779001": {
+      "programId": "s00000026779001",
+      "name": "訳あり物件専門買取【成仏不動産の正しい買取】",
+      "genre": "housing 訳あり物件専門買取【成仏不動産の正しい買取】",
+      "company": "マークスライフ株式会社",
+      "a8mat": null,
+      "vertical": "housing",
+      "score": 0.765,
+      "rewardYen": 20000,
+      "epcYen": 1498,
+      "confirmRatePct": 50,
+      "rewardType": "fixed",
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-07-28T06:20:18.373Z"
+        }
+      ]
+    },
+    "s00000024144002": {
+      "programId": "s00000024144002",
+      "name": "相続した不動産の売却なら【ラクウル】",
+      "genre": "housing 相続した不動産の売却なら【ラクウル】",
+      "company": "株式会社ネクサスプロパティマネジメント",
+      "a8mat": null,
+      "vertical": "housing",
+      "score": 0.6595000000000001,
+      "rewardYen": 10000,
+      "epcYen": 169,
+      "confirmRatePct": 90,
+      "rewardType": "fixed",
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-07-28T06:20:18.373Z"
+        }
+      ]
+    },
+    "s00000027056001": {
+      "programId": "s00000027056001",
+      "name": "全国約580拠点【三井不動産のワークスタイリング】",
+      "genre": "housing 全国約580拠点【三井不動産のワークスタイリング】",
+      "company": "三井不動産株式会社",
+      "a8mat": null,
+      "vertical": "housing",
+      "score": 0.633495,
+      "rewardYen": 10000,
+      "epcYen": 137,
+      "confirmRatePct": 83.33,
+      "rewardType": "fixed",
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-07-28T06:20:18.373Z"
+        }
+      ]
+    },
+    "s00000026729001": {
+      "programId": "s00000026729001",
+      "name": "不動産売却・査定のご相談なら【不動産SHOPナカジツ】",
+      "genre": "housing 不動産売却・査定のご相談なら【不動産SHOPナカジツ】",
+      "company": "株式会社不動産ＳＨＯＰナカジツ",
+      "a8mat": null,
+      "vertical": "housing",
+      "score": 0.6175,
+      "rewardYen": 20000,
+      "epcYen": 55,
+      "confirmRatePct": 100,
+      "rewardType": "fixed",
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-07-28T06:20:18.373Z"
+        }
+      ]
+    },
+    "s00000026422001": {
+      "programId": "s00000026422001",
+      "name": "くふうイエタテカウンター｜家づくりの無料相談サービス",
+      "genre": "housing くふうイエタテカウンター｜家づくりの無料相談サービス",
+      "company": "株式会社くふう住まい",
+      "a8mat": null,
+      "vertical": null,
+      "score": 0.6100000000000001,
+      "rewardYen": 20000,
+      "epcYen": 40,
+      "confirmRatePct": 100,
+      "rewardType": "fixed",
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-07-28T06:20:18.373Z"
+        }
+      ]
+    },
+    "s00000022438001": {
+      "programId": "s00000022438001",
+      "name": "お家づくりなら、LIFULL HOME'S【住まいの窓口】へご相談ください",
+      "genre": "housing お家づくりなら、LIFULL HOME'S【住まいの窓口】へご相談ください",
+      "company": "ＬＩＦＵＬＬ",
+      "a8mat": null,
+      "vertical": null,
+      "score": 0.5985,
+      "rewardYen": 12500,
+      "epcYen": 17,
+      "confirmRatePct": 100,
+      "rewardType": "fixed",
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-07-28T06:20:18.373Z"
+        }
+      ]
+    },
+    "s00000025809001": {
+      "programId": "s00000025809001",
+      "name": "訳あり不動産専門買取の「ワケガイ」",
+      "genre": "housing 訳あり不動産専門買取の「ワケガイ」",
+      "company": "株式会社ネクスウィル",
+      "a8mat": null,
+      "vertical": "housing",
+      "score": 0.568995,
+      "rewardYen": 30000,
+      "epcYen": 218,
+      "confirmRatePct": 13.33,
+      "rewardType": "fixed",
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-07-28T06:20:18.373Z"
+        }
+      ]
+    },
+    "s00000019724003": {
+      "programId": "s00000019724003",
+      "name": "仲介手数料0円！専任コンサルが最適オフィスを無料提案【officee】",
+      "genre": "housing 仲介手数料0円！専任コンサルが最適オフィスを無料提案【officee】",
+      "company": "４７インキュベーション株式会社",
+      "a8mat": null,
+      "vertical": "housing",
+      "score": 0.5545000000000001,
+      "rewardYen": 20000,
+      "epcYen": 229,
+      "rewardType": "fixed",
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-07-28T06:20:18.373Z"
+        }
+      ]
+    },
+    "s00000026822001": {
+      "programId": "s00000026822001",
+      "name": "無料WEB面談参加でPayPayポイント5万円分プレゼント！AI不動産投資リノシー",
+      "genre": "housing 無料WEB面談参加でPayPayポイント5万円分プレゼント！AI不動産投資リノシー",
+      "company": "株式会社ＧＡ＿ｔｅｃｈｎｏｌｏｇｉｅｓ",
+      "a8mat": null,
+      "vertical": "housing",
+      "score": 0.5399900000000001,
+      "rewardYen": 15000,
+      "confirmRatePct": 66.66,
+      "rewardType": "fixed",
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-07-28T06:20:18.373Z"
+        }
+      ]
+    },
+    "s00000020603002": {
+      "programId": "s00000020603002",
+      "name": "都内3.8万円〜家具家電付き【クロスワンルーム】",
+      "genre": "housing 都内3.8万円〜家具家電付き【クロスワンルーム】",
+      "company": "株式会社クロスハウス",
+      "a8mat": null,
+      "vertical": null,
+      "score": 0.491,
+      "rewardYen": 15000,
+      "epcYen": 102,
+      "rewardType": "fixed",
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-07-28T06:20:18.373Z"
+        }
+      ]
+    },
+    "s00000026609001": {
+      "programId": "s00000026609001",
+      "name": "不動産担保ローンの審査は無料で最短即日！丸の内AMS（エーエムエス）",
+      "genre": "housing 不動産担保ローンの審査は無料で最短即日！丸の内AMS（エーエムエス）",
+      "company": "丸の内ＡＭＳ株式会社",
+      "a8mat": null,
+      "vertical": "housing",
+      "score": 0.48227,
+      "rewardYen": 3000,
+      "epcYen": 529,
+      "confirmRatePct": 48.18,
+      "rewardType": "fixed",
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-07-28T06:20:18.373Z"
+        }
+      ]
+    },
+    "s00000020603004": {
+      "programId": "s00000020603004",
+      "name": "空室対策・収益最大化なら、借上げ実績１万室のクロスハウス",
+      "genre": "housing 空室対策・収益最大化なら、借上げ実績１万室のクロスハウス",
+      "company": "株式会社クロスハウス",
+      "a8mat": null,
+      "vertical": null,
+      "score": 0.44000000000000006,
+      "rewardYen": 35000,
+      "rewardType": "fixed",
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-07-28T06:20:18.373Z"
+        }
+      ]
+    },
+    "s00000024144004": {
+      "programId": "s00000024144004",
+      "name": "住宅ローン返済にお困りなら【リトライ】",
+      "genre": "housing 住宅ローン返済にお困りなら【リトライ】",
+      "company": "株式会社ネクサスプロパティマネジメント",
+      "a8mat": null,
+      "vertical": "housing",
+      "score": 0.44000000000000006,
+      "rewardYen": 10000,
+      "rewardType": "fixed",
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-07-28T06:20:18.373Z"
+        }
+      ]
+    },
+    "s00000027432001": {
+      "programId": "s00000027432001",
+      "name": "仲介手数料無料で不動産を売却するなら【ゼロチュー売却】",
+      "genre": "housing 仲介手数料無料で不動産を売却するなら【ゼロチュー売却】",
+      "company": "グローバルトラスト不動産株式会社",
+      "a8mat": null,
+      "vertical": "housing",
+      "score": 0.44000000000000006,
+      "rewardYen": 17000,
+      "rewardType": "fixed",
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-07-28T06:20:18.373Z"
+        }
+      ]
+    },
+    "s00000027383001": {
+      "programId": "s00000027383001",
+      "name": "【一般社団法人が提供する公平な不動産査定】トラブル解決協会",
+      "genre": "housing 【一般社団法人が提供する公平な不動産査定】トラブル解決協会",
+      "company": "一般社団法人不動産トラブル解決協会",
+      "a8mat": null,
+      "vertical": "housing",
+      "score": 0.44000000000000006,
+      "rewardYen": 15000,
+      "rewardType": "fixed",
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-07-28T06:20:18.373Z"
+        }
+      ]
+    },
+    "s00000026543001": {
+      "programId": "s00000026543001",
+      "name": "不動産投資クラウドファンディング【CAMEL】",
+      "genre": "housing 不動産投資クラウドファンディング【CAMEL】",
+      "company": "株式会社グローバルクラウドエステート",
+      "a8mat": null,
+      "vertical": "housing",
+      "score": 0.44000000000000006,
+      "rewardYen": 16500,
+      "rewardType": "fixed",
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-07-28T06:20:18.373Z"
+        }
+      ]
+    },
+    "s00000023231001": {
+      "programId": "s00000023231001",
+      "name": "【求人数No.1】リゾートバイト、探すならダイブ",
+      "genre": "housing 【求人数No.1】リゾートバイト、探すならダイブ",
+      "company": "株式会社ダイブ",
+      "a8mat": null,
+      "vertical": "labor",
+      "score": 0.42623999999999995,
+      "rewardYen": 6300,
+      "epcYen": 91,
+      "confirmRatePct": 59.16,
+      "rewardType": "fixed",
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-07-28T06:20:18.373Z"
+        }
+      ]
+    },
+    "s00000022375001": {
+      "programId": "s00000022375001",
+      "name": "1万円からはじめる不動産投資 不動産クラウドファンディング【FUNDROP】",
+      "genre": "housing 1万円からはじめる不動産投資 不動産クラウドファンディング【FUNDROP】",
+      "company": "ＯＮＥ＿ＤＲＯＰ＿ＩＮＶＥＳＴＭＥＮＴ株式会社",
+      "a8mat": null,
+      "vertical": "housing",
+      "score": 0.41842,
+      "rewardYen": 5000,
+      "epcYen": 104,
+      "confirmRatePct": 84.28,
+      "rewardType": "fixed",
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-07-28T06:20:18.373Z"
+        }
+      ]
+    },
+    "s00000025188001": {
+      "programId": "s00000025188001",
+      "name": "不動産投資【ベルテックスセミナー】",
+      "genre": "housing 不動産投資【ベルテックスセミナー】",
+      "company": "株式会社ベルテックス",
+      "a8mat": null,
+      "vertical": "housing",
+      "score": 0.3992,
+      "rewardYen": 8980,
+      "rewardType": "fixed",
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-07-28T06:20:18.373Z"
+        }
+      ]
+    },
+    "s00000025945001": {
+      "programId": "s00000025945001",
+      "name": "会員数国内No.1！上場企業グループ運営の不動産クラファン【利回りくん】",
+      "genre": "housing 会員数国内No.1！上場企業グループ運営の不動産クラファン【利回りくん】",
+      "company": "株式会社シーラ",
+      "a8mat": null,
+      "vertical": "housing",
+      "score": 0.392725,
+      "rewardYen": 5000,
+      "epcYen": 17,
+      "confirmRatePct": 96.15,
+      "rewardType": "fixed",
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-07-28T06:20:18.373Z"
+        }
+      ]
+    },
+    "s00000007099012": {
+      "programId": "s00000007099012",
+      "name": "【不動産投資スクール】会員募集",
+      "genre": "housing 【不動産投資スクール】会員募集",
+      "company": "株式会社ＦｉｎａｎｃｉａｌＡｃａｄｅｍｙ",
+      "a8mat": null,
+      "vertical": "education",
+      "score": 0.37576,
+      "rewardYen": 5635,
+      "epcYen": 19,
+      "confirmRatePct": 67.24,
+      "rewardType": "fixed",
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-07-28T06:20:18.373Z"
+        }
+      ]
+    },
+    "s00000014546010": {
+      "programId": "s00000014546010",
+      "name": "移転工事費何度でも無料！工事費実質無料！【ビッグローブ光】",
+      "genre": "housing 移転工事費何度でも無料！工事費実質無料！【ビッグローブ光】",
+      "company": "株式会社ＮＥＸＴ【優良代理店表彰実績多数】",
+      "a8mat": null,
+      "vertical": null,
+      "score": 0.37150000000000005,
+      "rewardYen": 5500,
+      "epcYen": 43,
+      "confirmRatePct": 60,
+      "rewardType": "fixed",
+      "status": "candidate",
+      "history": [
+        {
+          "from": null,
+          "to": "candidate",
+          "at": "2026-07-28T06:20:18.373Z"
+        }
+      ]
     }
   },
-  "updatedAt": "2026-07-28T05:07:54.640Z"
+  "updatedAt": "2026-07-28T06:20:18.378Z"
 }

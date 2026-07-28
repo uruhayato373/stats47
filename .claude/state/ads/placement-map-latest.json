@@ -1,0 +1,1317 @@
+{
+  "generatedAt": "2026-07-28T06:47:33.114Z",
+  "gscWeek": "2026-W30",
+  "inputs": {
+    "pages": 2729,
+    "rankingKeys": 2208,
+    "articleTags": 430,
+    "articleTagsSource": "C:/Users/m004195/AppData/Local/Temp/claude/C--Users-m004195-stats47/2eacfa26-f96e-412f-97a5-994fa1709e5e/scratchpad/blog.json"
+  },
+  "demand": {
+    "byType": {
+      "blog": {
+        "imp": 78318,
+        "clicks": 1568,
+        "pages": 631
+      },
+      "ranking": {
+        "imp": 37381,
+        "clicks": 1553,
+        "pages": 1173
+      },
+      "home": {
+        "imp": 544,
+        "clicks": 36,
+        "pages": 1
+      },
+      "other": {
+        "imp": 102,
+        "clicks": 4,
+        "pages": 5
+      },
+      "areas": {
+        "imp": 6846,
+        "clicks": 86,
+        "pages": 837
+      },
+      "category": {
+        "imp": 713,
+        "clicks": 4,
+        "pages": 10
+      },
+      "themes": {
+        "imp": 497,
+        "clicks": 9,
+        "pages": 21
+      },
+      "survey": {
+        "imp": 1134,
+        "clicks": 7,
+        "pages": 47
+      },
+      "tag": {
+        "imp": 5,
+        "clicks": 0,
+        "pages": 4
+      }
+    },
+    "byVertical": {
+      "economy": {
+        "imp": 77483,
+        "clicks": 2046,
+        "pages": 1055
+      },
+      "population": {
+        "imp": 8155,
+        "clicks": 282,
+        "pages": 142
+      },
+      "education": {
+        "imp": 7739,
+        "clicks": 260,
+        "pages": 163
+      },
+      "mobility": {
+        "imp": 3095,
+        "clicks": 62,
+        "pages": 43
+      },
+      "health": {
+        "imp": 9121,
+        "clicks": 241,
+        "pages": 148
+      },
+      "furusato": {
+        "imp": 10951,
+        "clicks": 168,
+        "pages": 927
+      },
+      "energy": {
+        "imp": 1654,
+        "clicks": 25,
+        "pages": 18
+      },
+      "labor": {
+        "imp": 3223,
+        "clicks": 76,
+        "pages": 141
+      },
+      "housing": {
+        "imp": 1844,
+        "clicks": 46,
+        "pages": 64
+      },
+      "travel": {
+        "imp": 742,
+        "clicks": 9,
+        "pages": 32
+      }
+    },
+    "byTypeVertical": [
+      {
+        "type": "blog",
+        "vertical": "economy",
+        "imp": 59580,
+        "clicks": 1135,
+        "pages": 460
+      },
+      {
+        "type": "ranking",
+        "vertical": "economy",
+        "imp": 16713,
+        "clicks": 903,
+        "pages": 542
+      },
+      {
+        "type": "areas",
+        "vertical": "furusato",
+        "imp": 6846,
+        "clicks": 86,
+        "pages": 837
+      },
+      {
+        "type": "blog",
+        "vertical": "health",
+        "imp": 6444,
+        "clicks": 119,
+        "pages": 35
+      },
+      {
+        "type": "ranking",
+        "vertical": "education",
+        "imp": 5717,
+        "clicks": 146,
+        "pages": 149
+      },
+      {
+        "type": "blog",
+        "vertical": "population",
+        "imp": 5546,
+        "clicks": 219,
+        "pages": 53
+      },
+      {
+        "type": "blog",
+        "vertical": "furusato",
+        "imp": 3097,
+        "clicks": 42,
+        "pages": 33
+      },
+      {
+        "type": "ranking",
+        "vertical": "health",
+        "imp": 2616,
+        "clicks": 122,
+        "pages": 111
+      },
+      {
+        "type": "blog",
+        "vertical": "mobility",
+        "imp": 2486,
+        "clicks": 54,
+        "pages": 13
+      },
+      {
+        "type": "blog",
+        "vertical": "education",
+        "imp": 2022,
+        "clicks": 114,
+        "pages": 14
+      },
+      {
+        "type": "ranking",
+        "vertical": "housing",
+        "imp": 1519,
+        "clicks": 39,
+        "pages": 52
+      },
+      {
+        "type": "blog",
+        "vertical": "labor",
+        "imp": 1338,
+        "clicks": 31,
+        "pages": 45
+      },
+      {
+        "type": "blog",
+        "vertical": "energy",
+        "imp": 1302,
+        "clicks": 16,
+        "pages": 8
+      },
+      {
+        "type": "ranking",
+        "vertical": "population",
+        "imp": 1229,
+        "clicks": 53,
+        "pages": 41
+      },
+      {
+        "type": "survey",
+        "vertical": "economy",
+        "imp": 1134,
+        "clicks": 7,
+        "pages": 47
+      },
+      {
+        "type": "survey",
+        "vertical": "population",
+        "imp": 1134,
+        "clicks": 7,
+        "pages": 47
+      },
+      {
+        "type": "survey",
+        "vertical": "labor",
+        "imp": 1134,
+        "clicks": 7,
+        "pages": 47
+      },
+      {
+        "type": "ranking",
+        "vertical": "furusato",
+        "imp": 974,
+        "clicks": 40,
+        "pages": 54
+      },
+      {
+        "type": "ranking",
+        "vertical": "labor",
+        "imp": 734,
+        "clicks": 37,
+        "pages": 45
+      },
+      {
+        "type": "ranking",
+        "vertical": "mobility",
+        "imp": 567,
+        "clicks": 4,
+        "pages": 26
+      },
+      {
+        "type": "ranking",
+        "vertical": "travel",
+        "imp": 434,
+        "clicks": 9,
+        "pages": 25
+      },
+      {
+        "type": "ranking",
+        "vertical": "energy",
+        "imp": 306,
+        "clicks": 9,
+        "pages": 9
+      },
+      {
+        "type": "blog",
+        "vertical": "travel",
+        "imp": 288,
+        "clicks": 0,
+        "pages": 6
+      },
+      {
+        "type": "themes",
+        "vertical": "population",
+        "imp": 246,
+        "clicks": 3,
+        "pages": 1
+      },
+      {
+        "type": "blog",
+        "vertical": "housing",
+        "imp": 235,
+        "clicks": 7,
+        "pages": 9
+      },
+      {
+        "type": "category",
+        "vertical": "housing",
+        "imp": 87,
+        "clicks": 0,
+        "pages": 2
+      },
+      {
+        "type": "themes",
+        "vertical": "health",
+        "imp": 61,
+        "clicks": 0,
+        "pages": 2
+      },
+      {
+        "type": "themes",
+        "vertical": "economy",
+        "imp": 55,
+        "clicks": 1,
+        "pages": 5
+      },
+      {
+        "type": "category",
+        "vertical": "energy",
+        "imp": 46,
+        "clicks": 0,
+        "pages": 1
+      },
+      {
+        "type": "themes",
+        "vertical": "mobility",
+        "imp": 42,
+        "clicks": 4,
+        "pages": 4
+      },
+      {
+        "type": "themes",
+        "vertical": "furusato",
+        "imp": 32,
+        "clicks": 0,
+        "pages": 2
+      },
+      {
+        "type": "themes",
+        "vertical": "travel",
+        "imp": 20,
+        "clicks": 0,
+        "pages": 1
+      },
+      {
+        "type": "themes",
+        "vertical": "labor",
+        "imp": 15,
+        "clicks": 1,
+        "pages": 3
+      },
+      {
+        "type": "themes",
+        "vertical": "housing",
+        "imp": 3,
+        "clicks": 0,
+        "pages": 1
+      },
+      {
+        "type": "category",
+        "vertical": "furusato",
+        "imp": 2,
+        "clicks": 0,
+        "pages": 1
+      },
+      {
+        "type": "category",
+        "vertical": "labor",
+        "imp": 2,
+        "clicks": 0,
+        "pages": 1
+      },
+      {
+        "type": "category",
+        "vertical": "economy",
+        "imp": 1,
+        "clicks": 0,
+        "pages": 1
+      }
+    ]
+  },
+  "supply": {
+    "total": {
+      "furusato": 2,
+      "energy": 20,
+      "travel": 28,
+      "health": 12,
+      "economy": 20,
+      "housing": 16,
+      "education": 22,
+      "labor": 27,
+      "mobility": 13,
+      "population": 18
+    },
+    "banner": {
+      "furusato": 2,
+      "energy": 10,
+      "travel": 18,
+      "health": 8,
+      "economy": 13,
+      "housing": 8,
+      "education": 11,
+      "labor": 14,
+      "mobility": 6,
+      "population": 10
+    },
+    "text": {
+      "labor": 13,
+      "energy": 10,
+      "economy": 7,
+      "housing": 8,
+      "population": 8,
+      "education": 11,
+      "mobility": 7,
+      "health": 4,
+      "travel": 10
+    }
+  },
+  "gaps": [
+    {
+      "vertical": "economy",
+      "imp": 77483,
+      "clicks": 2046,
+      "inventory": 20,
+      "banner": 13,
+      "text": 7,
+      "kinds": []
+    },
+    {
+      "vertical": "furusato",
+      "imp": 10951,
+      "clicks": 168,
+      "inventory": 2,
+      "banner": 2,
+      "text": 0,
+      "kinds": [
+        "text-zero"
+      ]
+    },
+    {
+      "vertical": "health",
+      "imp": 9121,
+      "clicks": 241,
+      "inventory": 12,
+      "banner": 8,
+      "text": 4,
+      "kinds": []
+    },
+    {
+      "vertical": "population",
+      "imp": 8155,
+      "clicks": 282,
+      "inventory": 18,
+      "banner": 10,
+      "text": 8,
+      "kinds": []
+    },
+    {
+      "vertical": "education",
+      "imp": 7739,
+      "clicks": 260,
+      "inventory": 22,
+      "banner": 11,
+      "text": 11,
+      "kinds": []
+    },
+    {
+      "vertical": "labor",
+      "imp": 3223,
+      "clicks": 76,
+      "inventory": 27,
+      "banner": 14,
+      "text": 13,
+      "kinds": []
+    },
+    {
+      "vertical": "mobility",
+      "imp": 3095,
+      "clicks": 62,
+      "inventory": 13,
+      "banner": 6,
+      "text": 7,
+      "kinds": []
+    },
+    {
+      "vertical": "housing",
+      "imp": 1844,
+      "clicks": 46,
+      "inventory": 16,
+      "banner": 8,
+      "text": 8,
+      "kinds": []
+    },
+    {
+      "vertical": "energy",
+      "imp": 1654,
+      "clicks": 25,
+      "inventory": 20,
+      "banner": 10,
+      "text": 10,
+      "kinds": []
+    },
+    {
+      "vertical": "travel",
+      "imp": 742,
+      "clicks": 9,
+      "inventory": 28,
+      "banner": 18,
+      "text": 10,
+      "kinds": []
+    }
+  ],
+  "unmapped": {
+    "totalImp": 7866,
+    "byReason": [
+      {
+        "reason": "category-unmapped:commercial",
+        "imp": 3385,
+        "pages": 35,
+        "examples": [
+          "convenience-store-count-commercial",
+          "commercial",
+          "retail-store-count"
+        ]
+      },
+      {
+        "reason": "category-unmapped:agriculture",
+        "imp": 1859,
+        "pages": 34,
+        "examples": [
+          "fishery-species-catch-sardine",
+          "fishery-species-catch-mackerel",
+          "fishery-species-catch-tuna"
+        ]
+      },
+      {
+        "reason": "category-unmapped:infrastructure",
+        "imp": 1385,
+        "pages": 37,
+        "examples": [
+          "main-road-paving-rate",
+          "dam-count",
+          "water-supply-population"
+        ]
+      },
+      {
+        "reason": "no-slot:home",
+        "imp": 544,
+        "pages": 1,
+        "examples": [
+          "https://stats47.jp/"
+        ]
+      },
+      {
+        "reason": "category-unmapped:ict",
+        "imp": 319,
+        "pages": 8,
+        "examples": [
+          "public-phone-count",
+          "public-phone-count-per-1000",
+          "ict"
+        ]
+      },
+      {
+        "reason": "category-unmapped:miningindustry",
+        "imp": 103,
+        "pages": 4,
+        "examples": [
+          "manufacturing-industry-added-value",
+          "manufacturing-shipment-amount-per-establishment",
+          "manufacturing-net-value-added-private"
+        ]
+      },
+      {
+        "reason": "no-slot:other",
+        "imp": 102,
+        "pages": 5,
+        "examples": [
+          "https://stats47.jp/about",
+          "https://stats47.jp/terms",
+          "https://stats47.jp/privacy"
+        ]
+      },
+      {
+        "reason": "ranking-key-unknown",
+        "imp": 64,
+        "pages": 1,
+        "examples": [
+          "https://stats47.jp/ranking"
+        ]
+      },
+      {
+        "reason": "article-unknown",
+        "imp": 45,
+        "pages": 1,
+        "examples": [
+          "https://stats47.jp/blog"
+        ]
+      },
+      {
+        "reason": "category-unmapped:international",
+        "imp": 32,
+        "pages": 4,
+        "examples": [
+          "resident-foreigner-population",
+          "resident-foreigner-korea",
+          "foreign-population-per-100k"
+        ]
+      },
+      {
+        "reason": "theme-unmapped:null",
+        "imp": 16,
+        "pages": 1,
+        "examples": [
+          "https://stats47.jp/themes"
+        ]
+      },
+      {
+        "reason": "theme-unmapped:climate",
+        "imp": 7,
+        "pages": 1,
+        "examples": [
+          "climate"
+        ]
+      },
+      {
+        "reason": "tag-unmapped:local-allocation-tax",
+        "imp": 2,
+        "pages": 1,
+        "examples": [
+          "local-allocation-tax"
+        ]
+      },
+      {
+        "reason": "tag-unmapped:commerce",
+        "imp": 1,
+        "pages": 1,
+        "examples": [
+          "commerce"
+        ]
+      },
+      {
+        "reason": "tag-unmapped:dual-income-households",
+        "imp": 1,
+        "pages": 1,
+        "examples": [
+          "dual-income-households"
+        ]
+      },
+      {
+        "reason": "tag-unmapped:waste-disposal-sites",
+        "imp": 1,
+        "pages": 1,
+        "examples": [
+          "waste-disposal-sites"
+        ]
+      }
+    ],
+    "top": [
+      {
+        "url": "https://stats47.jp/ranking/convenience-store-count-commercial",
+        "type": "ranking",
+        "key": "convenience-store-count-commercial",
+        "imp": 1146,
+        "clicks": 39,
+        "reason": "category-unmapped:commercial"
+      },
+      {
+        "url": "https://stats47.jp/",
+        "type": "home",
+        "key": null,
+        "imp": 544,
+        "clicks": 36,
+        "reason": "no-slot:home"
+      },
+      {
+        "url": "https://stats47.jp/category/commercial",
+        "type": "category",
+        "key": "commercial",
+        "imp": 537,
+        "clicks": 3,
+        "reason": "category-unmapped:commercial"
+      },
+      {
+        "url": "https://stats47.jp/ranking/fishery-species-catch-sardine",
+        "type": "ranking",
+        "key": "fishery-species-catch-sardine",
+        "imp": 420,
+        "clicks": 2,
+        "reason": "category-unmapped:agriculture"
+      },
+      {
+        "url": "https://stats47.jp/ranking/retail-store-count",
+        "type": "ranking",
+        "key": "retail-store-count",
+        "imp": 411,
+        "clicks": 18,
+        "reason": "category-unmapped:commercial"
+      },
+      {
+        "url": "https://stats47.jp/ranking/retail-sales-amount-by-prefecture",
+        "type": "ranking",
+        "key": "retail-sales-amount-by-prefecture",
+        "imp": 411,
+        "clicks": 8,
+        "reason": "category-unmapped:commercial"
+      },
+      {
+        "url": "https://stats47.jp/ranking/convenience-store-sales-monthly",
+        "type": "ranking",
+        "key": "convenience-store-sales-monthly",
+        "imp": 282,
+        "clicks": 21,
+        "reason": "category-unmapped:commercial"
+      },
+      {
+        "url": "https://stats47.jp/ranking/fishery-species-catch-mackerel",
+        "type": "ranking",
+        "key": "fishery-species-catch-mackerel",
+        "imp": 261,
+        "clicks": 0,
+        "reason": "category-unmapped:agriculture"
+      },
+      {
+        "url": "https://stats47.jp/ranking/main-road-paving-rate",
+        "type": "ranking",
+        "key": "main-road-paving-rate",
+        "imp": 219,
+        "clicks": 9,
+        "reason": "category-unmapped:infrastructure"
+      },
+      {
+        "url": "https://stats47.jp/ranking/fishery-species-catch-tuna",
+        "type": "ranking",
+        "key": "fishery-species-catch-tuna",
+        "imp": 186,
+        "clicks": 2,
+        "reason": "category-unmapped:agriculture"
+      },
+      {
+        "url": "https://stats47.jp/ranking/dam-count",
+        "type": "ranking",
+        "key": "dam-count",
+        "imp": 180,
+        "clicks": 4,
+        "reason": "category-unmapped:infrastructure"
+      },
+      {
+        "url": "https://stats47.jp/ranking/fishery-species-catch-pacific-saury",
+        "type": "ranking",
+        "key": "fishery-species-catch-pacific-saury",
+        "imp": 166,
+        "clicks": 0,
+        "reason": "category-unmapped:agriculture"
+      },
+      {
+        "url": "https://stats47.jp/ranking/public-phone-count",
+        "type": "ranking",
+        "key": "public-phone-count",
+        "imp": 159,
+        "clicks": 2,
+        "reason": "category-unmapped:ict"
+      },
+      {
+        "url": "https://stats47.jp/ranking/water-supply-population",
+        "type": "ranking",
+        "key": "water-supply-population",
+        "imp": 136,
+        "clicks": 9,
+        "reason": "category-unmapped:infrastructure"
+      },
+      {
+        "url": "https://stats47.jp/ranking/fishery-species-catch-scallop",
+        "type": "ranking",
+        "key": "fishery-species-catch-scallop",
+        "imp": 121,
+        "clicks": 3,
+        "reason": "category-unmapped:agriculture"
+      },
+      {
+        "url": "https://stats47.jp/ranking/public-phone-count-per-1000",
+        "type": "ranking",
+        "key": "public-phone-count-per-1000",
+        "imp": 118,
+        "clicks": 1,
+        "reason": "category-unmapped:ict"
+      },
+      {
+        "url": "https://stats47.jp/ranking/fishery-species-catch-pollock",
+        "type": "ranking",
+        "key": "fishery-species-catch-pollock",
+        "imp": 116,
+        "clicks": 3,
+        "reason": "category-unmapped:agriculture"
+      },
+      {
+        "url": "https://stats47.jp/ranking/retail-establishments-by-prefecture",
+        "type": "ranking",
+        "key": "retail-establishments-by-prefecture",
+        "imp": 99,
+        "clicks": 1,
+        "reason": "category-unmapped:commercial"
+      },
+      {
+        "url": "https://stats47.jp/ranking/sewage-treatment-coverage-rate",
+        "type": "ranking",
+        "key": "sewage-treatment-coverage-rate",
+        "imp": 98,
+        "clicks": 2,
+        "reason": "category-unmapped:infrastructure"
+      },
+      {
+        "url": "https://stats47.jp/ranking/paved-road-total-length",
+        "type": "ranking",
+        "key": "paved-road-total-length",
+        "imp": 96,
+        "clicks": 2,
+        "reason": "category-unmapped:infrastructure"
+      },
+      {
+        "url": "https://stats47.jp/ranking/retail-store-count-alt",
+        "type": "ranking",
+        "key": "retail-store-count-alt",
+        "imp": 93,
+        "clicks": 3,
+        "reason": "category-unmapped:commercial"
+      },
+      {
+        "url": "https://stats47.jp/ranking/fishing-port-count-by-type",
+        "type": "ranking",
+        "key": "fishing-port-count-by-type",
+        "imp": 81,
+        "clicks": 1,
+        "reason": "category-unmapped:agriculture"
+      },
+      {
+        "url": "https://stats47.jp/ranking/dairy-cattle-count",
+        "type": "ranking",
+        "key": "dairy-cattle-count",
+        "imp": 78,
+        "clicks": 1,
+        "reason": "category-unmapped:agriculture"
+      },
+      {
+        "url": "https://stats47.jp/ranking/port-count",
+        "type": "ranking",
+        "key": "port-count",
+        "imp": 71,
+        "clicks": 2,
+        "reason": "category-unmapped:infrastructure"
+      },
+      {
+        "url": "https://stats47.jp/ranking/manufacturing-industry-added-value",
+        "type": "ranking",
+        "key": "manufacturing-industry-added-value",
+        "imp": 70,
+        "clicks": 3,
+        "reason": "category-unmapped:miningindustry"
+      },
+      {
+        "url": "https://stats47.jp/ranking",
+        "type": "ranking",
+        "key": null,
+        "imp": 64,
+        "clicks": 3,
+        "reason": "ranking-key-unknown"
+      },
+      {
+        "url": "https://stats47.jp/ranking/road-expressway-length",
+        "type": "ranking",
+        "key": "road-expressway-length",
+        "imp": 64,
+        "clicks": 2,
+        "reason": "category-unmapped:infrastructure"
+      },
+      {
+        "url": "https://stats47.jp/ranking/airport-count",
+        "type": "ranking",
+        "key": "airport-count",
+        "imp": 58,
+        "clicks": 1,
+        "reason": "category-unmapped:infrastructure"
+      },
+      {
+        "url": "https://stats47.jp/about",
+        "type": "other",
+        "key": null,
+        "imp": 57,
+        "clicks": 4,
+        "reason": "no-slot:other"
+      },
+      {
+        "url": "https://stats47.jp/ranking/fishery-species-catch-yellowtail",
+        "type": "ranking",
+        "key": "fishery-species-catch-yellowtail",
+        "imp": 55,
+        "clicks": 1,
+        "reason": "category-unmapped:agriculture"
+      }
+    ]
+  },
+  "reverseCandidates": [
+    {
+      "programId": "s00000024144001",
+      "name": "訳アリ不動産買取専門店【ラクウル】",
+      "vertical": "housing",
+      "status": "candidate",
+      "confirmedEpc": 2455.5,
+      "rewardYen": 10000,
+      "shared": false,
+      "registered": false,
+      "suggestedRankingKeys": []
+    },
+    {
+      "programId": "s00000020560002",
+      "name": "【増大・長茎】施術限定 ーメンズライフクリニックー",
+      "vertical": "health",
+      "status": "applied",
+      "confirmedEpc": 1583,
+      "rewardYen": 7029,
+      "shared": false,
+      "registered": false,
+      "suggestedRankingKeys": []
+    },
+    {
+      "programId": "s00000026779001",
+      "name": "訳あり物件専門買取【成仏不動産の正しい買取】",
+      "vertical": "housing",
+      "status": "candidate",
+      "confirmedEpc": 749,
+      "rewardYen": 20000,
+      "shared": false,
+      "registered": false,
+      "suggestedRankingKeys": []
+    },
+    {
+      "programId": "s00000014289002",
+      "name": "ヒゲや全身のムダ毛のお悩みに！男性脱毛の【メンズリゼ】",
+      "vertical": "health",
+      "status": "applied",
+      "confirmedEpc": 677.2,
+      "rewardYen": 12000,
+      "shared": false,
+      "registered": false,
+      "suggestedRankingKeys": []
+    },
+    {
+      "programId": "s00000023057002",
+      "name": "日本最大級 施工管理・建設業界の転職サイト「建設JOBs」",
+      "vertical": "housing",
+      "status": "registered",
+      "confirmedEpc": 645.5,
+      "rewardYen": 4500,
+      "shared": true,
+      "registered": true,
+      "suggestedRankingKeys": [
+        {
+          "key": "construction-industry-count",
+          "title": "建設業者数",
+          "matched": [
+            "建設業"
+          ]
+        }
+      ]
+    },
+    {
+      "programId": "s00000024757004",
+      "name": "ビルドジョブ｜建設業界特化の転職エージェントの無料キャリア面談",
+      "vertical": "labor",
+      "status": "registered",
+      "confirmedEpc": 461.3,
+      "rewardYen": 50000,
+      "shared": true,
+      "registered": true,
+      "suggestedRankingKeys": [
+        {
+          "key": "construction-industry-count",
+          "title": "建設業者数",
+          "matched": [
+            "建設業"
+          ]
+        }
+      ]
+    },
+    {
+      "programId": "s00000024182002",
+      "name": "副業・フリーランスエンジニアプラットフォーム【エンジニアデータバンク】",
+      "vertical": "labor",
+      "status": "applied",
+      "confirmedEpc": 289.5,
+      "rewardYen": 10000,
+      "shared": false,
+      "registered": false,
+      "suggestedRankingKeys": [
+        {
+          "key": "freelance-count",
+          "title": "フリーランス人口",
+          "matched": [
+            "フリーラ",
+            "リーラン",
+            "ーランス"
+          ]
+        },
+        {
+          "key": "renovation-rate",
+          "title": "リフォーム工事実施率",
+          "matched": [
+            "フォーム"
+          ]
+        },
+        {
+          "key": "barrier-free-housing-rate",
+          "title": "バリアフリー化住宅率",
+          "matched": [
+            "フリー"
+          ]
+        }
+      ]
+    },
+    {
+      "programId": "s00000023687001",
+      "name": "大阪ガスのインターネット「さすガねっと」",
+      "vertical": "energy",
+      "status": "applied",
+      "confirmedEpc": 270.5,
+      "rewardYen": 30076,
+      "shared": false,
+      "registered": false,
+      "suggestedRankingKeys": [
+        {
+          "key": "internet-fee-consumption-expenditure",
+          "title": "インターネット接続料消費支出額",
+          "matched": [
+            "インター",
+            "ンターネ",
+            "ターネッ",
+            "ーネット"
+          ]
+        },
+        {
+          "key": "senior-welfare-center-count-per-100k-65plus",
+          "title": "老人福祉センター数",
+          "matched": [
+            "ンター"
+          ]
+        },
+        {
+          "key": "senior-welfare-center-staff-per-100k-65plus",
+          "title": "老人福祉センター従事者数",
+          "matched": [
+            "ンター"
+          ]
+        }
+      ]
+    },
+    {
+      "programId": "s00000026609001",
+      "name": "不動産担保ローンの審査は無料で最短即日！丸の内AMS（エーエムエス）",
+      "vertical": "housing",
+      "status": "candidate",
+      "confirmedEpc": 254.9,
+      "rewardYen": 3000,
+      "shared": false,
+      "registered": false,
+      "suggestedRankingKeys": []
+    },
+    {
+      "programId": "s00000026573001",
+      "name": "明光キャリアパートナーズエンジニア転職",
+      "vertical": "labor",
+      "status": "registered",
+      "confirmedEpc": 229.8,
+      "rewardYen": 78000,
+      "shared": false,
+      "registered": true,
+      "suggestedRankingKeys": [
+        {
+          "key": "female-part-time-hourly-wage",
+          "title": "女性パートタイムの給与",
+          "matched": [
+            "パート"
+          ]
+        },
+        {
+          "key": "female-part-time-hourly-wage-pre2019",
+          "title": "女性パートタイムの給与",
+          "matched": [
+            "パート"
+          ]
+        },
+        {
+          "key": "female-parttime-workers",
+          "title": "女性パートタイム労働者数",
+          "matched": [
+            "パート"
+          ]
+        }
+      ]
+    },
+    {
+      "programId": "s00000022176005",
+      "name": "建設業界特化！未経験から施工管理職へ。手厚いサポートで資格取得も支援【GKSキャリア】",
+      "vertical": "labor",
+      "status": "registered",
+      "confirmedEpc": 216.4,
+      "rewardYen": 25000,
+      "shared": true,
+      "registered": true,
+      "suggestedRankingKeys": [
+        {
+          "key": "construction-industry-count",
+          "title": "建設業者数",
+          "matched": [
+            "建設業"
+          ]
+        }
+      ]
+    },
+    {
+      "programId": "s00000024757002",
+      "name": "ツインプロ｜会計士・税理士特化の転職エージェントの無料キャリア面談",
+      "vertical": "labor",
+      "status": "registered",
+      "confirmedEpc": 177.1,
+      "rewardYen": 52500,
+      "shared": false,
+      "registered": true,
+      "suggestedRankingKeys": [
+        {
+          "key": "accountant-annual-income",
+          "title": "公認会計士・税理士の平均年収",
+          "matched": [
+            "会計士",
+            "税理士"
+          ]
+        }
+      ]
+    },
+    {
+      "programId": "s00000020552004",
+      "name": "【建設業者様特化のファクタリング】株式会社No.1",
+      "vertical": "economy",
+      "status": "registered",
+      "confirmedEpc": 177,
+      "rewardYen": 20000,
+      "shared": false,
+      "registered": true,
+      "suggestedRankingKeys": [
+        {
+          "key": "construction-industry-count",
+          "title": "建設業者数",
+          "matched": [
+            "建設業者"
+          ]
+        },
+        {
+          "key": "bowling-alley-public",
+          "title": "ボウリング場数（公共）",
+          "matched": [
+            "リング"
+          ]
+        },
+        {
+          "key": "hair-coloring-consumption-expenditure",
+          "title": "ヘアカラーリング剤消費支出額",
+          "matched": [
+            "リング"
+          ]
+        }
+      ]
+    },
+    {
+      "programId": "s00000024144002",
+      "name": "相続した不動産の売却なら【ラクウル】",
+      "vertical": "housing",
+      "status": "candidate",
+      "confirmedEpc": 152.1,
+      "rewardYen": 10000,
+      "shared": false,
+      "registered": false,
+      "suggestedRankingKeys": []
+    },
+    {
+      "programId": "s00000010261001",
+      "name": "薬剤師の求人・派遣・転職サイト「ファルマスタッフ」 New",
+      "vertical": "labor",
+      "status": "registered",
+      "confirmedEpc": 139.5,
+      "rewardYen": 65000,
+      "shared": false,
+      "registered": true,
+      "suggestedRankingKeys": [
+        {
+          "key": "pharmacist-annual-income",
+          "title": "薬剤師の平均年収",
+          "matched": [
+            "薬剤師"
+          ]
+        },
+        {
+          "key": "pharmacist-count",
+          "title": "薬剤師数",
+          "matched": [
+            "薬剤師"
+          ]
+        }
+      ]
+    },
+    {
+      "programId": "s00000000018021",
+      "name": "GMOインターネット株式会社【GMOとくとくBB】申込募集",
+      "vertical": "energy",
+      "status": "registered",
+      "confirmedEpc": 138,
+      "rewardYen": 5100,
+      "shared": false,
+      "registered": true,
+      "suggestedRankingKeys": [
+        {
+          "key": "internet-fee-consumption-expenditure",
+          "title": "インターネット接続料消費支出額",
+          "matched": [
+            "インター",
+            "ンターネ",
+            "ターネッ",
+            "ーネット"
+          ]
+        },
+        {
+          "key": "senior-welfare-center-count-per-100k-65plus",
+          "title": "老人福祉センター数",
+          "matched": [
+            "ンター"
+          ]
+        },
+        {
+          "key": "senior-welfare-center-staff-per-100k-65plus",
+          "title": "老人福祉センター従事者数",
+          "matched": [
+            "ンター"
+          ]
+        }
+      ]
+    },
+    {
+      "programId": "s00000000040014",
+      "name": "【公式】BIGLOBE WiMAX +5G",
+      "vertical": null,
+      "status": "applied",
+      "confirmedEpc": 127.2,
+      "rewardYen": 5000,
+      "shared": false,
+      "registered": false,
+      "suggestedRankingKeys": []
+    },
+    {
+      "programId": "s00000008903004",
+      "name": "【DMM．com証券】DMM CFD 新規ユーザー獲得プロモーション",
+      "vertical": "economy",
+      "status": "registered",
+      "confirmedEpc": 114.2,
+      "rewardYen": 14200,
+      "shared": false,
+      "registered": true,
+      "suggestedRankingKeys": [
+        {
+          "key": "foundation-consumption-expenditure",
+          "title": "ファンデーション消費支出額",
+          "matched": [
+            "ーション"
+          ]
+        },
+        {
+          "key": "womens-foundation-garment-consumption-expenditure",
+          "title": "婦人用ファンデーション消費支出額",
+          "matched": [
+            "ーション"
+          ]
+        }
+      ]
+    },
+    {
+      "programId": "s00000027056001",
+      "name": "全国約580拠点【三井不動産のワークスタイリング】",
+      "vertical": "housing",
+      "status": "candidate",
+      "confirmedEpc": 114.2,
+      "rewardYen": 10000,
+      "shared": false,
+      "registered": false,
+      "suggestedRankingKeys": [
+        {
+          "key": "bowling-alley-public",
+          "title": "ボウリング場数（公共）",
+          "matched": [
+            "リング"
+          ]
+        },
+        {
+          "key": "hair-coloring-consumption-expenditure",
+          "title": "ヘアカラーリング剤消費支出額",
+          "matched": [
+            "リング"
+          ]
+        },
+        {
+          "key": "rental-car-consumption-expenditure",
+          "title": "レンタカー・カーシェアリング料金消費支出額",
+          "matched": [
+            "リング"
+          ]
+        }
+      ]
+    },
+    {
+      "programId": "s00000018427002",
+      "name": "プロと始める「逆転就活」【新卒就職エージェントneo】",
+      "vertical": "labor",
+      "status": "registered",
+      "confirmedEpc": 114,
+      "rewardYen": 15000,
+      "shared": false,
+      "registered": true,
+      "suggestedRankingKeys": []
+    }
+  ]
+}

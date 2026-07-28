@@ -1,5 +1,13 @@
 {
-  "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-  "audited_at": "2026-07-28T05:46:04",
-  "files": []
+  "hash": "ad87a2337d5e11b108ceed8f3b735a2ba42d27bfa04be6d30cb6bcbda8e767ee",
+  "audited_at": "2026-07-28T06:49:39",
+  "files": [
+    ".claude/agents/affiliate-manager.md",
+    ".claude/rules/affiliate-ads-standards.md",
+    ".claude/scripts/ads/__tests__/placement-map-core.test.mjs",
+    ".claude/scripts/ads/build-placement-map.mjs",
+    ".claude/scripts/ads/lib/placement-map-core.mjs",
+    ".claude/skills/ads/scout-asp/SKILL.md",
+    ".claude/skills/ads/scout-asp/scripts/a8-browser.ts"
+  ]
 }

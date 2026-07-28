@@ -36,6 +36,16 @@ A8.net の高単価案件を **scout → 申請 → コード取得 → SSOT 登
 | `scout` | A8 検索 → scoreAndRank → catalog に candidate upsert (`a8-browser.ts scout`) |
 | `apply` | candidate 上位を週次上限内で自動申請 → applied (`check-a8-apply-budget` が上限強制) |
 | `harvest` | approved の広告コード取得 → parse → harvested / pending-vertical |
+
+### サブコマンドのフラグ (2026-07-28 追加)
+
+| フラグ | モード | 意味 |
+|---|---|---|
+| `--query 賃貸,移住` | scout | **キーワード検索モード**。カテゴリ巡回 (1 カテゴリ 20 件) をやめて指定語で検索する。意図が確定しているときに使う。URL は実機ダンプで確定した `/program/search/keyword?keywords=` |
+| `--vertical housing` | scout | 検索モードでの vertical ヒント。あくまでヒントで、最終判定は `resolveVertical` (キーワード写像) が行う |
+| `--id s000...,s000...` | apply | **申請対象を programId で明示指定**。指定 ID が candidate に無ければ中止する。**スコア式は単価と EPC で並べるだけでブランド適合を見ない**ため、指定なしで回すと不適な案件へ送信してしまう |
+| `--include-registered` | harvest | 既 registered からも **text コードだけ**を取る (text 在庫の後追い取得)。registered は状態機械上 harvested へ戻せないので status を変えず `pendingDrafts` に積み、`append-affiliate-ads.ts` が status 非依存で拾う。二重登録は a8mat 突合が防ぐ |
+| `--text-only` | harvest | banner を取らず text だけ採る |
 | `register` | harvested を SSOT 追記 + 4 ゲート → registered (`append-affiliate-ads.ts --apply`)。commit/push は下記 |
 | `full` | scout → apply → check-approval → harvest → register を順に (**手動フル実行専用**) |
 | `status` | catalog の状態機械サマリ + pending-vertical 滞留を表示 |
