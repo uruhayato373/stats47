@@ -10,7 +10,7 @@
     "unknown": "未確認 (調べていない。none と区別する)"
   },
   "_seedNote": "初期状態は空。実機を見ずに案件を書くと捏造になるため、`affiliate-status.mjs` の実測か `afb-scan.mjs` の走査結果をもとに 1 件ずつ追加する。vertical は apps/web/src/features/ads/constants/affiliate-category.ts の 10 軸から選ぶ。",
-  "updatedAt": "2026-07-28T21:43:12.665Z",
+  "updatedAt": "2026-07-28T22:29:11.782Z",
   "verifiedAt": "2026-07-28",
   "programs": {
     "moshimo-7059": {
@@ -1522,12 +1522,17 @@
       "asps": {
         "moshimo": {
           "promotionId": "7540",
-          "status": "applying",
+          "status": "approved",
           "appliedAt": "2026-07-28T12:09:31.621Z",
           "history": [
             {
               "at": "2026-07-28T12:09:31.621Z",
               "status": "applying"
+            },
+            {
+              "at": "2026-07-28T22:29:11.779Z",
+              "status": "approved",
+              "note": "affiliate-status 実機一覧の正一致"
             }
           ],
           "rewardYen": 11000
@@ -4077,6 +4082,23 @@
             }
           ],
           "rewardYen": 1100
+        }
+      }
+    },
+    "moshimo-7558": {
+      "name": null,
+      "vertical": null,
+      "asps": {
+        "moshimo": {
+          "promotionId": "7558",
+          "status": "approved",
+          "history": [
+            {
+              "at": "2026-07-28T22:29:11.782Z",
+              "status": "approved",
+              "note": "affiliate-status --write が実機一覧から取り込み"
+            }
+          ]
         }
       }
     }

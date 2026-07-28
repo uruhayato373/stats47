@@ -80,51 +80,64 @@ async function checkAsp(name, root, log) {
       ["applying", asp.applyingPath],
     ]) {
       if (!path) continue;
-      const site = await ensureTargetSite(page, asp, root, { navigateTo: path });
-      out.siteId = site.actualSiteId;
-      // 一覧が描画されるまで待つ (固定 sleep だと遅い回線で空を読む)
-      await page
-        .waitForFunction(() => document.body && document.body.innerText.length > 500, null, {
-          timeout: asp.browser.timeoutMs ?? 30000,
-          polling: 1000,
-        })
-        .catch(() => {});
-      const t = await visibleText(page, 200000);
-      const ids = collectIds(t, asp);
-      // ★もしも: promotion_id は画面テキストに出ず a[href] にのみ現れる (2026-07-28 実測 —
-      //   text.includes 照合が常に "none" になり、applying 4 件を誤ドリフト報告した)。
-      //   config の hrefIdPattern がある ASP は href からも ID を収集する。
-      if (asp.hrefIdPattern) {
-        // 一覧行スコープを優先する (ページ全体だと推薦リンク等の ID が混ざり超集合になり、
-        // 「却下済みなのに ID が残って drift を見逃す」余地が生まれる)。行スコープで 1 件も
-        // 取れないときだけページ全体へ fallback し、その旨をログへ出す。
-        const scopes = asp.rowSelector ? [`tr:has(${asp.rowSelector}) a[href]`, "a[href]"] : ["a[href]"];
-        const re = new RegExp(asp.hrefIdPattern, "g");
-        for (const scope of scopes) {
-          const hrefs = await page
-            .$$eval(scope, (as) => as.map((a) => a.getAttribute("href") ?? ""))
-            .catch(() => []);
-          const before = ids.size;
-          for (const h of hrefs) {
-            for (const m of h.matchAll(re)) if (m[1]) ids.add(m[1]);
-          }
-          if (ids.size > before) {
-            if (scope === "a[href]" && scopes.length > 1) log(`  (${name}/${key}: 行スコープで ID 0 件 → ページ全体から抽出 = 超集合の可能性)`);
-            break;
+      const ids = new Set();
+      let text = "";
+      // ★ ページ送り (doc 42 §8.2/8.3)。afb は 1 ページ 50 件で applying 97 件が 2 ページに
+      //   またがる — 1 ページだけ読むと「一覧に無い」誤判定の温床になる。config の
+      //   `listPageParam` (afb: "p") があるときだけ、追加 ID が出なくなるまで辿る (cap 10)。
+      const maxPages = asp.listPageParam ? (asp.maxListPages ?? 10) : 1;
+      for (let pageNo = 1; pageNo <= maxPages; pageNo++) {
+        const url = pageNo === 1 ? path : `${path}&${asp.listPageParam}=${pageNo}`;
+        // サイト帰属はページごとに assert する (§3.2)
+        const site = await ensureTargetSite(page, asp, root, { navigateTo: url });
+        out.siteId = site.actualSiteId;
+        // 一覧が描画されるまで待つ (固定 sleep だと遅い回線で空を読む)
+        await page
+          .waitForFunction(() => document.body && document.body.innerText.length > 500, null, {
+            timeout: asp.browser.timeoutMs ?? 30000,
+            polling: 1000,
+          })
+          .catch(() => {});
+        const t = await visibleText(page, 200000);
+        text += (text ? "\n" : "") + t;
+        const before = ids.size;
+        for (const id of collectIds(t, asp)) ids.add(id);
+        // ★もしも: promotion_id は画面テキストに出ず a[href] にのみ現れる (2026-07-28 実測 —
+        //   text.includes 照合が常に "none" になり、applying 4 件を誤ドリフト報告した)。
+        //   config の hrefIdPattern がある ASP は href からも ID を収集する。
+        if (asp.hrefIdPattern) {
+          // 一覧行スコープを優先する (ページ全体だと推薦リンク等の ID が混ざり超集合になり、
+          // 「却下済みなのに ID が残って drift を見逃す」余地が生まれる)。行スコープで 1 件も
+          // 取れないときだけページ全体へ fallback し、その旨をログへ出す。
+          const scopes = asp.rowSelector ? [`tr:has(${asp.rowSelector}) a[href]`, "a[href]"] : ["a[href]"];
+          const re = new RegExp(asp.hrefIdPattern, "g");
+          for (const scope of scopes) {
+            const hrefs = await page
+              .$$eval(scope, (as) => as.map((a) => a.getAttribute("href") ?? ""))
+              .catch(() => []);
+            const b = ids.size;
+            for (const h of hrefs) {
+              for (const m of h.matchAll(re)) if (m[1]) ids.add(m[1]);
+            }
+            if (ids.size > b) {
+              if (scope === "a[href]" && scopes.length > 1) log(`  (${name}/${key}: 行スコープで ID 0 件 → ページ全体から抽出 = 超集合の可能性)`);
+              break;
+            }
           }
         }
+        // ★ 一覧の実件数も出す。ID を出さない ASP では ids.size が常に 0 になり、
+        //   「0 件の ID を検出」だけだと**提携が 0 件だと誤読される** (2026-07-28 に実際に誤読した)。
+        // `$$eval` は Playwright の DOM 取得 API であって JavaScript の `eval()` ではない。
+        const rowCount = asp.rowSelector
+          ? await page.$$eval(asp.rowSelector, (tds) => tds.length).catch(() => null)
+          : null;
+        const rows = rowCount === null ? "一覧の件数を取得できず" : `一覧 ${rowCount} 件`;
+        log(`  ${name}/${key} p${pageNo}: ${rows} / ID 累計 ${ids.size} 件 (SID ${site.actualSiteId ?? "-"})`);
+        // 追加 ID が出なかった (= 最終ページ超過 or 同一内容) なら打ち切る
+        if (pageNo > 1 && ids.size === before) break;
+        if (rowCount !== null && rowCount === 0) break;
       }
-      out[key] = { ids, text: t };
-      // ★ 一覧の実件数も出す。ID を出さない ASP では ids.size が常に 0 になり、
-      //   「0 件の ID を検出」だけだと**提携が 0 件だと誤読される** (2026-07-28 に実際に誤読した)。
-      //   selector は ASP ごとに違う (旧実装はもしも用 td.promotion-name を全 ASP に流用し
-      //   afb で「一覧 0 件」を誤表示した) — config の rowSelector を使い、無ければ数えない。
-      // `$$eval` は Playwright の DOM 取得 API であって JavaScript の `eval()` ではない。
-      const rowCount = asp.rowSelector
-        ? await page.$$eval(asp.rowSelector, (tds) => tds.length).catch(() => null)
-        : null;
-      const rows = rowCount === null ? "一覧の件数を取得できず" : `一覧 ${rowCount} 件`;
-      log(`  ${name}/${key}: ${rows} / ID 抽出 ${out[key].ids.size} 件 (SID ${site.actualSiteId ?? "-"})`);
+      out[key] = { ids, text };
     }
     return out;
   } finally {
@@ -168,8 +181,12 @@ async function main() {
     }
   }
 
-  // ── カタログと突合
-  const drift = [];
+  // ── カタログと突合 (doc 42 §8.4: **positive-only transition**)
+  // 「一覧に無い = none」は廃止した (2026-07-29)。一覧に無いのは走査未完了 / ページ漏れ /
+  // selector drift / 提携終了 / 却下のいずれでもあり得るため、**正の一致だけ**を書き込み、
+  // 不在は review-needed / suspension-proposed として報告に留める (自動降格しない)。
+  const drift = []; // 書き込む正遷移
+  const review = []; // 報告のみ (書き込まない)
   for (const [key, p] of Object.entries(catalog.programs ?? {})) {
     for (const [aspName, entry] of Object.entries(p.asps ?? {})) {
       if (!live[aspName]) continue; // 取得できなかった ASP は判定しない
@@ -177,9 +194,21 @@ async function main() {
       if (!id) continue;
       const inPartnered = live[aspName].partnered.ids.has(id) || live[aspName].partnered.text.includes(id);
       const inApplying = live[aspName].applying.ids.has(id) || live[aspName].applying.text.includes(id);
-      const actual = inPartnered ? "approved" : inApplying ? "applying" : "none";
-      if (actual !== entry.status) {
-        drift.push({ program: key, asp: aspName, catalog: entry.status, actual, id });
+      if (inPartnered) {
+        // 正の一致: applying (等) → approved。既に approved 以降なら no-op (registered/published を巻き戻さない)
+        if (!["approved", "registered", "published"].includes(entry.status)) {
+          drift.push({ program: key, asp: aspName, catalog: entry.status, actual: "approved", id });
+        }
+      } else if (inApplying) {
+        if (entry.status !== "applying" && !["registered", "published"].includes(entry.status)) {
+          drift.push({ program: key, asp: aspName, catalog: entry.status, actual: "applying", id });
+        }
+      } else {
+        // 不在 = 負の証拠としては扱わない。状態別に報告だけする。
+        const kind = ["approved", "registered", "published"].includes(entry.status)
+          ? "suspension-proposed (提携終了の可能性 — 人が確認)"
+          : "review-needed (却下 or 走査漏れ — 人が確認)";
+        review.push({ program: key, asp: aspName, catalog: entry.status, id, kind });
       }
     }
   }
@@ -190,21 +219,30 @@ async function main() {
     for (const [k, v] of Object.entries(failed)) console.log(`  - ${k}: ${v}`);
   }
   if (drift.length === 0) {
-    console.log(`ドリフトなし (照合できた ASP: ${Object.keys(live).join(", ") || "なし"})`);
+    console.log(`正遷移なし (照合できた ASP: ${Object.keys(live).join(", ") || "なし"})`);
   } else {
-    console.log(`ドリフト ${drift.length} 件:`);
+    console.log(`正遷移 ${drift.length} 件:`);
     for (const d of drift) {
-      console.log(`  - ${d.program} / ${d.asp}: カタログ "${d.catalog}" ↔ 実機 "${d.actual}" (id=${d.id})`);
+      console.log(`  - ${d.program} / ${d.asp}: "${d.catalog}" → "${d.actual}" (id=${d.id})`);
     }
     if (opts.write) {
-      for (const d of drift) catalog.programs[d.program].asps[d.asp].status = d.actual;
-      catalog.updatedAt = new Date().toISOString();
-      catalog.verifiedAt = new Date().toISOString().slice(0, 10);
+      const at = new Date().toISOString();
+      for (const d of drift) {
+        const entry = catalog.programs[d.program].asps[d.asp];
+        entry.status = d.actual;
+        (entry.history ??= []).push({ at, status: d.actual, note: "affiliate-status 実機一覧の正一致" });
+      }
+      catalog.updatedAt = at;
+      catalog.verifiedAt = at.slice(0, 10);
       writeFileSync(CATALOG, JSON.stringify(catalog, null, 2) + "\n", "utf-8");
-      console.log(`\n→ --write によりカタログを実機の値へ更新しました`);
+      console.log(`\n→ --write により正遷移をカタログへ反映しました (不在による降格はしない)`);
     } else {
       console.log(`\n→ 反映するなら --write を付けて再実行 (既定は read-only)`);
     }
+  }
+  if (review.length > 0) {
+    console.log(`\n報告のみ (書き込まない) ${review.length} 件:`);
+    for (const r of review) console.log(`  - ${r.program} / ${r.asp} (${r.catalog}, id=${r.id}): ${r.kind}`);
   }
 
   // ── 実機にあるが台帳に無い提携/申請を取り込む (--write 時のみ書く)

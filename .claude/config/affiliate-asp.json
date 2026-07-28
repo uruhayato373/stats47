@@ -123,7 +123,10 @@
       "weeklyApplyMax": 100,
       "_rowSelectorNote": "afb の一覧件数 selector は未特定 (null = 件数取得できず と表示)。ID は listItemPattern で取れているため実害なし",
       "rowSelector": null,
-      "_weeklyApplyMaxNote": "2026-07-28 オーナー判断で 10→100 (ガード機構は維持)"
+      "_weeklyApplyMaxNote": "2026-07-28 オーナー判断で 10→100 (ガード機構は維持)",
+      "listPageParam": "p",
+      "maxListPages": 10,
+      "_listPageNote": "一覧は 50 件/頁。applying 97 件が複数頁にまたがるため p=N で追加 ID が出なくなるまで辿る (2026-07-29)"
     }
   }
 }
