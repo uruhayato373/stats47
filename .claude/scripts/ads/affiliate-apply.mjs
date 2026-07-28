@@ -139,6 +139,37 @@ async function assertSingleTarget(page, id) {
   return { ok: true, reason: `申請対象 1 件 (promotion_id=${found.promo[0]})` };
 }
 
+/** 申請ページから案件名を取る (完了判定の照合キー。ページ見出しは全案件共通で使えない)。 */
+async function readPromotionName(page) {
+  const body = (await page.innerText("body").catch(() => "")) || "";
+  const m = body.match(/基本情報\s*\n\s*(.+)/);
+  return m ? m[1].trim() : null;
+}
+
+/**
+ * 申請が本当に成立したかを**実測**する。
+ *
+ * ★ 旧実装はクリック後の本文に「申請」が含まれるかで判定していた。確認ページの見出しにも
+ *   「申請」が出るため、確定していなくても成功と報告していた (2026-07-28 に 4 件を誤報)。
+ *   文言ではなく「申請中一覧に当該案件が現れたか」を唯一の根拠にする。
+ */
+async function verifyApplied(page, asp, siteId, promoName) {
+  if (!promoName) return { ok: false, reason: "案件名を取れず完了を確認できない" };
+  if (!asp.applyingPath) return { ok: false, reason: "申請中一覧のパスが未設定で確認できない" };
+  const u = new URL(asp.baseUrl + asp.applyingPath);
+  if (asp.siteParam && siteId) u.searchParams.set(asp.siteParam, siteId);
+  u.searchParams.set("limit", "100");
+  await page.goto(u.toString(), { waitUntil: "domcontentloaded" }).catch(() => {});
+  // `$$eval` は Playwright の DOM 取得 API (セレクタ一致要素へコールバックを適用) であって
+  // JavaScript の `eval()` ではない。ページ由来の文字列をコードとして実行してはいない。
+  const names = await page
+    .$$eval("td.promotion-name", (tds) => tds.map((td) => td.textContent.trim()))
+    .catch(() => []);
+  if (names.length === 0) return { ok: false, reason: "申請中一覧を読めず完了を確認できない" };
+  const hit = names.some((n) => n.includes(promoName) || promoName.includes(n));
+  return hit ? { ok: true, reason: "" } : { ok: false, reason: "申請中一覧に現れない (未完了の可能性)" };
+}
+
 /**
  * もしもの申請フォームにあるサイト select を対象サイトにして read-back 確認する。
  * option の表示文字列は config の targetSiteLabel (例「統計で見る都道府県」)。
@@ -201,7 +232,10 @@ async function main() {
       console.log(`\n[${id}] ${site.reason}`);
 
       const text = await visibleText(page, 4000);
-      const title = (text.split("\n").find((l) => l.trim().length > 4) || "").trim().slice(0, 60);
+      // 案件名は「基本情報」直後の行から取る。先頭行はサイト共通の見出し (「もしもキャッシュバック」)
+      // で全案件同じになり、どれを申請したのか報告から判別できなかった。
+      const promoName = await readPromotionName(page);
+      const title = (promoName || text.split("\n").find((l) => l.trim().length > 4) || "").trim().slice(0, 60);
 
       const btn = await findApplyButton(page, asp.applyButtonLabel ?? "提携申請する");
       if (!btn.ok) {
@@ -237,11 +271,27 @@ async function main() {
 
       await btn.el.click();
       await page.waitForTimeout(4000);
-      const after = await visibleText(page, 4000);
-      const ok = /申請|受付|提携中|完了/.test(after);
-      console.log(`  ${ok ? "✓ 申請した" : "△ 結果を確認できない"}`);
-      if (!ok) await dumpFailure(page, { browser: asp.browser }, `apply-${opts.asp}-${id}`).catch(() => {});
-      results.push({ id, title, action: ok ? "applied" : "unverified", reason: ok ? "" : "申請後の文言を確認できず" });
+
+      // ★ もしもは 2 段階。1 段目は確認ページへ行くだけで申請は成立しない。
+      //   ここを踏まずに文言判定していたため「申請した」と誤報していた (2026-07-28)。
+      if (asp.confirmButtonLabel && /\/confirm/.test(page.url())) {
+        const confirm = await findApplyButton(page, asp.confirmButtonLabel);
+        if (!confirm.ok) {
+          console.log(`  ✗ 確認ページの「${asp.confirmButtonLabel}」を押せない: ${confirm.reason}`);
+          await dumpFailure(page, { browser: asp.browser }, `apply-confirm-${opts.asp}-${id}`).catch(() => {});
+          results.push({ id, title, action: "unverified", reason: "確認ページで確定できず" });
+          continue;
+        }
+        await confirm.el.click();
+        await page.waitForTimeout(4000);
+      }
+
+      // ★ 完了判定は文言ではなく実測。申請中一覧に当該案件が出て初めて「申請した」と言う。
+      const verified = await verifyApplied(page, asp, siteId, promoName);
+      console.log(`  ${verified.ok ? "✓ 申請を確認" : `△ ${verified.reason}`}`);
+      if (!verified.ok) await dumpFailure(page, { browser: asp.browser }, `apply-${opts.asp}-${id}`).catch(() => {});
+      const ok = verified.ok;
+      results.push({ id, title, action: ok ? "applied" : "unverified", reason: ok ? "" : verified.reason });
 
       // カタログへ反映 (実機の真実は affiliate-status が上書きする。ここは暫定記録)
       const hit = findInCatalog(catalog, opts.asp, id);

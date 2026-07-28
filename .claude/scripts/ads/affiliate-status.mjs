@@ -91,7 +91,15 @@ async function checkAsp(name, root, log) {
         .catch(() => {});
       const t = await visibleText(page, 200000);
       out[key] = { ids: collectIds(t, asp), text: t };
-      log(`  ${name}/${key}: ${out[key].ids.size} 件の ID を検出 (SID ${site.actualSiteId ?? "-"})`);
+      // ★ 一覧の実件数も出す。ID を出さない ASP (もしも) では ids.size が常に 0 になり、
+      //   「0 件の ID を検出」だけだと**提携が 0 件だと誤読される** (2026-07-28 に実際に誤読した)。
+      //   ID の有無と一覧の中身の有無は別の話なので両方報告する。
+      // `$$eval` は Playwright の DOM 取得 API であって JavaScript の `eval()` ではない。
+      const rowCount = await page
+        .$$eval("td.promotion-name", (tds) => tds.length)
+        .catch(() => null);
+      const rows = rowCount === null ? "一覧の件数を取得できず" : `一覧 ${rowCount} 件`;
+      log(`  ${name}/${key}: ${rows} / ID 抽出 ${out[key].ids.size} 件 (SID ${site.actualSiteId ?? "-"})`);
     }
     return out;
   } finally {
